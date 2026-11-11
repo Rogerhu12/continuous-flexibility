@@ -39,6 +39,7 @@ theorem n05_canonical_closed_periodicity
       (g := fun q => K.chart z m q + (0, Real.pi)) _ _ _ p hp
     · intro q hq
       exact (hclosed z hz hs m (q + (0, Real.pi)) (hshift q hq)).1.continuousAt.comp
+        (f := fun r : PolarPoint => r + (0, Real.pi))
         (continuousAt_id.add continuousAt_const)
     · intro q hq
       exact (hclosed z hz hs m q hq).1.continuousAt.add continuousAt_const
@@ -49,6 +50,7 @@ theorem n05_canonical_closed_periodicity
       (g := K.height z m) _ _ _ p hp
     · intro q hq
       exact (hclosed z hz hs m (q + (0, Real.pi)) (hshift q hq)).2.1.continuousAt.comp
+        (f := fun r : PolarPoint => r + (0, Real.pi))
         (continuousAt_id.add continuousAt_const)
     · intro q hq
       exact (hclosed z hz hs m q hq).2.1.continuousAt
@@ -72,6 +74,7 @@ theorem n05_canonical_closed_reflection
       (g := fun q => ((K.chart z m q).1, -(K.chart z m q).2)) _ _ _ p hp
     · intro q hq
       exact (hclosed z hz hs m (q.1, -q.2) hq).1.continuousAt.comp
+        (f := fun r : PolarPoint => (r.1, -r.2))
         (continuousAt_fst.prodMk continuousAt_snd.neg)
     · intro q hq
       have hqChart := (hclosed z hz hs m q hq).1.continuousAt
@@ -83,6 +86,7 @@ theorem n05_canonical_closed_reflection
       (g := K.height z m) _ _ _ p hp
     · intro q hq
       exact (hclosed z hz hs m (q.1, -q.2) hq).2.1.continuousAt.comp
+        (f := fun r : PolarPoint => (r.1, -r.2))
         (continuousAt_fst.prodMk continuousAt_snd.neg)
     · intro q hq
       exact (hclosed z hz hs m q hq).2.1.continuousAt

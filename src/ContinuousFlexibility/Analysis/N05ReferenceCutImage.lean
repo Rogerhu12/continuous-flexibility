@@ -43,7 +43,8 @@ theorem n05_chart_physical_boundary_image
   have hΨ : ContinuousAt (K.chart z m) x :=
     (hclosed z hz hs m x hxClosed).1.continuousAt
   have hslice : ContinuousAt (fun r : ℝ => K.chart z m (r, x.2)) x.1 :=
-    hΨ.comp (continuousAt_id.prodMk continuousAt_const)
+    hΨ.comp (f := fun r : ℝ => (r, x.2))
+      (continuousAt_id.prodMk continuousAt_const)
   have himage : (K.chart z m x).1 ∈ Icc (K.left m) (K.right m) := by
     have hmem := hslice.fst.continuousWithinAt.mem_closure hxClosure
       (show MapsTo (fun r : ℝ => (K.chart z m (r, x.2)).1)
@@ -66,7 +67,8 @@ theorem n05_chart_physical_boundary_image
     filter_upwards [self_mem_nhdsWithin] with r hr
     exact hleft (r, x.2) ⟨hr, mem_univ _⟩
   have heq : K.inverseChart z m (K.chart z m x) = x :=
-    tendsto_nhds_unique_of_eventuallyEq (hi.comp hslice).continuousWithinAt
+    tendsto_nhds_unique_of_eventuallyEq
+      (hi.comp (f := fun r : ℝ => K.chart z m (r, x.2)) hslice).continuousWithinAt
       (continuousAt_id.prodMk continuousAt_const).continuousWithinAt hevent
   have hinside := (himap hy).1
   rw [heq] at hinside

@@ -50,8 +50,10 @@ theorem n05_materialH_log_shift {x A : ℝ} (hx : 0 ≤ x) (hA : 0 ≤ A)
     _ ≤ |x ^ 3 - (n : ℝ) ^ 3| := by
       nlinarith only [abs_nonneg (x ^ 3 - (n : ℝ) ^ 3)]
     _ ≤ (6 * A * (A ^ 2 + 1)) * ((n : ℝ) ^ 2 + 1) := hc
-    _ ≤ _ := mul_le_mul_of_nonneg_left
-      (add_le_add_right (n05_radialIndexSquare_le_Q n) 1) (by positivity)
+    _ ≤ _ := by
+      have hq : (n : ℝ) ^ 2 + 1 ≤ radialQ n + 1 := by
+        linarith only [n05_radialIndexSquare_le_Q n]
+      exact mul_le_mul_of_nonneg_left hq (by positivity)
 
 /-- The error between the actual material logarithm and the reference
 cubic exponent is bounded uniformly by a fixed coefficient exponent. -/

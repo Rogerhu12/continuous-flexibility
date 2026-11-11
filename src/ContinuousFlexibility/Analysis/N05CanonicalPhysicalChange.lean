@@ -185,7 +185,7 @@ theorem n05_reference_planeJacobian_radial
   simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
     ContinuousLinearMap.toSpanSingleton_apply, smul_eq_mul,
-    one_mul, zero_mul, mul_one, mul_zero, sub_zero]
+    one_mul, zero_mul, mul_one, mul_zero, sub_zero, ξ]
 
 end ContinuousFlexibility.Statements
 
