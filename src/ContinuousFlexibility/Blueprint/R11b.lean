@@ -17,7 +17,7 @@ namespace ContinuousFlexibility.Blueprint
 open ContinuousFlexibility.Statements ContinuousFlexibility.Radial
 
 theorem R11b (hR11a : R11aStatement) : R11Statement := by
-  obtain ⟨D, hD, hborder, ε, M₀, M₁, hε, hεquarter, G, hmatchedModes, hG⟩ := hR11a
+  obtain ⟨D, hD, hborder, hgeo, ε, M₀, M₁, hε, hεquarter, G, hmatchedModes, hG⟩ := hR11a
   have hmodes : ∀ j : ℕ, 2 ≤ j → Even j →
       ∃ H : RadialModePair D →L[ℝ] RadialModePair D, ModeInverseProperties D j H := by
     intro j hj he
@@ -26,7 +26,7 @@ theorem R11b (hR11a : R11aStatement) : R11Statement := by
   obtain ⟨H₂, _, M₂, _, hMatch₂⟩ := hmatchedModes 2 le_rfl (by decide)
   obtain ⟨L, hL, hnormal⟩ :=
     r11b_firstNormalInverseEstimate hD hborder M₀ M₁ hmodes ⟨H₂, M₂, hMatch₂⟩
-  refine ⟨D, hD, hborder, ε, M₀, M₁ + L, hε, hεquarter, G, hmatchedModes, ?_⟩
+  refine ⟨D, hD, hborder, hgeo, ε, M₀, M₁ + L, hε, hεquarter, G, hmatchedModes, ?_⟩
   intro γ hγ
   have hγpos : 0 < γ := by
     rcases hγ with rfl | rfl | rfl <;> unfold referenceBeta <;> linarith
