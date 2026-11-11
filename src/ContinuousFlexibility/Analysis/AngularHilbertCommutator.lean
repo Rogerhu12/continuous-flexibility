@@ -173,13 +173,17 @@ theorem angular_inverse_commutator_real (A : AngularResolventData ℝ H)
 end Real
 
 /--
-info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_complex' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 -/
 #guard_msgs in
 #print axioms angular_inverse_commutator_complex
 
 /--
-info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_real' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 -/
 #guard_msgs in
 #print axioms angular_inverse_commutator_real

@@ -166,13 +166,17 @@ theorem angular_inverse_commutator_raw_real (L : H →ₗ.[ℝ] H) (hL : IsSelfA
 end Real
 
 /--
-info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_raw_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_raw_complex' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 -/
 #guard_msgs in
 #print axioms angular_inverse_commutator_raw_complex
 
 /--
-info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_raw_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: 'ContinuousFlexibility.Analysis.angular_inverse_commutator_raw_real' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 -/
 #guard_msgs in
 #print axioms angular_inverse_commutator_raw_real

@@ -78,7 +78,9 @@ private theorem comp_left_identity (Q : AngularRawResolventData A (-1))
       congr 1
       module
     _ = T.operator x - Q.operator x := by
-      rw [map_sub, Q.right_shifted]
+      rw [map_sub]
+      exact congrArg (fun y : H => y - Q.operator x)
+        (Q.right_shifted ⟨T.operator x, T.mapsDomain x⟩)
 
 private theorem comp_right_identity (Q : AngularRawResolventData A (-1))
     {t : ℝ} (T : AngularRawResolventData A t) (x : H) :
@@ -130,14 +132,14 @@ theorem isUnit_scalar_sub_of_raw_resolvent (Q : AngularRawResolventData A (-1))
     simp only [mul_apply_eq_comp, one_apply_eq_self, sub_apply,
       ContinuousLinearMap.algebraMap_apply, S, add_apply, smul_apply,
       ContinuousLinearMap.id_apply, map_add, ContinuousLinearMap.map_smul_of_tower,
-      hQT, smul_add, smul_sub, smul_smul, hrinv, hrr, hrr', one_smul]
+      hQT, smul_add, smul_sub, smul_smul, hrinv, hinvr, hrr, hrr', one_smul]
     module
   · apply ContinuousLinearMap.ext
     intro x
     simp only [mul_apply_eq_comp, one_apply_eq_self, sub_apply,
       ContinuousLinearMap.algebraMap_apply, S, add_apply, smul_apply,
       ContinuousLinearMap.id_apply, map_sub, ContinuousLinearMap.map_smul_of_tower,
-      hTQ, smul_add, smul_sub, smul_smul, hinvr, hrr, hrr', one_smul]
+      hTQ, smul_add, smul_sub, smul_smul, hrinv, hinvr, hrr, hrr', one_smul]
     module
 
 /-- The integer spectrum of the original unbounded operator implies
