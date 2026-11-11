@@ -25,6 +25,7 @@ theorem matchedInner_border_test_pairing {D : ReferenceData}
   rw [real_inner_comm, ← matchingColumn_integral_eq_inner hD hB]
   apply matchingInterval_congr_ae hD
   filter_upwards [matchingTestInput_coe hD ψ hψ 0] with r hr
+  change matchingSmoothVector D hD ψ hψ r = ψ r at hr
   rw [hr]
 
 /-- The actual finite weak graph implies the frozen local modal equation
@@ -66,16 +67,18 @@ theorem matchedInnerChainWeakGraph_equation {D : ReferenceData}
           innerChainBoundaryRestriction n p ξ 0 * (D.w (G.left p) * deriv ψ (G.left p)) := by
     have h := matchedInnerSmoothTest_green hD hw (G.left_lt_right p) (G.left_pos p)
       (G.in_core p) (G.weight_pos p) j ψ hψ (hξ p).1 (hgraph.2.1 p)
-    rw [(hξ p).2] at h
-    exact h
+    refine h.trans ?_
+    exact congrArg (fun t : Fin 2 → ℝ =>
+      t 1 * (D.w (G.right p) * deriv ψ (G.right p)) -
+        t 0 * (D.w (G.left p) * deriv ψ (G.left p))) (hξ p).2
   have hgreenSum : (∑ p, E p) + ⟪∑ p, (q p).1, J⟫_ℝ = 0 := by
     rw [sum_inner, ← Finset.sum_add_distrib]
     calc
       _ = ∑ p : Fin (n + 1),
-          innerChainBoundaryRestriction n p ξ 1 *
+          (innerChainBoundaryRestriction n p ξ 1 *
               (D.w (G.right p) * deriv ψ (G.right p)) -
             innerChainBoundaryRestriction n p ξ 0 *
-              (D.w (G.left p) * deriv ψ (G.left p)) :=
+              (D.w (G.left p) * deriv ψ (G.left p))) :=
         Finset.sum_congr rfl (fun p _ => hgreen p)
       _ = 0 := matchedInnerChain_boundary_cancel G ξ (fun r => D.w r * deriv ψ r)
   have hsource (p : Fin (n + 1)) : ⟪f p, (T p).1⟫_ℝ = ⟪f p, P⟫_ℝ := by
@@ -83,9 +86,11 @@ theorem matchedInnerChainWeakGraph_equation {D : ReferenceData}
       (G.left_pos p) (G.in_core p) (G.weight_pos p) ψ hψ).1⟫_ℝ = _
     rw [matchedInnerSmoothTest_value_projection hD hw.continuous
       (G.left_pos p) (G.in_core p) (G.weight_pos p)]
-    rw [real_inner_comm (f p), innerL2PieceProjection_inner_fixed
-      (radialHilbertMeasure D) (Ioo (G.left p) (G.right p)) P (f p) (hf p)]
-    exact real_inner_comm _ _
+    have hproj : ⟪innerL2PieceProjection (radialHilbertMeasure D)
+        (Ioo (G.left p) (G.right p)) P, f p⟫_ℝ = ⟪P, f p⟫_ℝ :=
+      innerL2PieceProjection_inner_fixed (radialHilbertMeasure D)
+        (Ioo (G.left p) (G.right p)) P (f p) (hf p)
+    exact (real_inner_comm _ _).trans (hproj.trans (real_inner_comm _ _))
   have hsourceSum : (∑ p, ⟪f p, (T p).1⟫_ℝ) = ⟪∑ p, f p, P⟫_ℝ := by
     rw [sum_inner]
     exact Finset.sum_congr rfl (fun p _ => hsource p)
@@ -95,9 +100,15 @@ theorem matchedInnerChainWeakGraph_equation {D : ReferenceData}
       (G.left_pos central) (G.in_core central) (G.weight_pos central) ψ hψ).1⟫_ℝ = _
     rw [matchedInnerSmoothTest_value_projection hD hw.continuous
       (G.left_pos central) (G.in_core central) (G.weight_pos central)]
-    rw [real_inner_comm column, innerL2PieceProjection_inner_fixed
-      (radialHilbertMeasure D) (Ioo (G.left central) (G.right central)) P column hcolfix]
-    rw [real_inner_comm, hcolumn]
+    have hproj : ⟪innerL2PieceProjection (radialHilbertMeasure D)
+        (Ioo (G.left central) (G.right central)) P, column⟫_ℝ = ⟪P, column⟫_ℝ :=
+      innerL2PieceProjection_inner_fixed (radialHilbertMeasure D)
+        (Ioo (G.left central) (G.right central)) P column hcolfix
+    have hswap : ⟪column, innerL2PieceProjection (radialHilbertMeasure D)
+        (Ioo (G.left central) (G.right central)) P⟫_ℝ = ⟪column, P⟫_ℝ :=
+      (real_inner_comm _ _).trans (hproj.trans (real_inner_comm _ _))
+    refine hswap.trans ?_
+    rw [hcolumn]
     exact matchedInner_border_test_pairing hD hB ψ hψ
   have hcolumnSum :
       (∑ p : Fin (n + 1), ⟪if p = central then column else 0, (T p).1⟫_ℝ) =
@@ -109,8 +120,8 @@ theorem matchedInnerChainWeakGraph_equation {D : ReferenceData}
     · intro hc
       exact (hc (Finset.mem_univ central)).elim
   have hweak := hgraph.2.2.2 T hT
-  change (∑ p, (E p + scalar *
-      ⟪if p = central then column else 0, (T p).1⟫_ℝ) - ⟪f p, (T p).1⟫_ℝ) = 0 at hweak
+  change (∑ p, ((E p + scalar *
+      ⟪if p = central then column else 0, (T p).1⟫_ℝ) - ⟪f p, (T p).1⟫_ℝ)) = 0 at hweak
   rw [Finset.sum_sub_distrib, Finset.sum_add_distrib, ← Finset.mul_sum,
     hcolumnSum, hcolumnTest, hsourceSum] at hweak
   change ⟪∑ p, (q p).1, J⟫_ℝ -
