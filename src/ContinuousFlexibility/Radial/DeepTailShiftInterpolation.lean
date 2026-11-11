@@ -33,7 +33,7 @@ theorem deepTail_memLp_shift_of_edge_square_bound {T : DeepTailData}
   · intro n
     simpa only [deepTailShift, Nat.add_assoc] using huEdge (k + n)
   · intro n
-    simpa only [deepTailShift, tailMass_deepTailShift, Nat.add_assoc] using hbound (k + n)
+    simpa only [tailMass, deepTailShift, Nat.add_assoc] using hbound (k + n)
   · simpa only [tailMass_deepTailShift, Nat.add_comm k] using
       (summable_nat_add_iff k).mpr hsum
 

@@ -164,7 +164,7 @@ theorem leftDiagonal_le_inv_sub_half_mass {c : ℝ} (hc : c ∈ Icc a b)
   have hfac := hf.mono (Icc_subset_Icc le_rfl hc.2)
   have hfcb := hf.mono (Icc_subset_Icc hc.1 le_rfl)
   have hhalf : (∫ x in a..c, p x) / 2 ≤ ∫ x in a..c, f x := by
-    rw [← intervalIntegral.integral_div_const]
+    rw [← intervalIntegral.integral_div]
     apply intervalIntegral.integral_mono_on hc.1
       ((hpac.div_const 2).intervalIntegrable_of_Icc hc.1)
       (hfac.intervalIntegrable_of_Icc hc.1)
