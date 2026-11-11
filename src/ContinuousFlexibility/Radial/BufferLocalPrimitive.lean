@@ -73,7 +73,8 @@ theorem bufferCompactPrimitive_in_interval {g : ℝ → ℝ} {a b : ℝ}
       exact image_eq_zero_of_notMem_tsupport (fun hx => hne ⟨x, hx⟩)
     refine ⟨fun _ => 0, contDiff_const, ?_, ?_, ?_⟩
     · simp
-    · simp
+    · change closure (Function.support (0 : ℝ → ℝ)) ⊆ Ioo a b
+      simp only [Function.support_zero, closure_empty, empty_subset]
     · rw [hgzero]
       funext x
       exact deriv_const x 0
@@ -153,7 +154,7 @@ theorem buffer_ae_constant_of_local_weak_deriv_zero {F : ℝ → ℝ} {a b : ℝ
     have hFφ : Integrable (fun x => F x * φ x) volume := by
       simpa only [smul_eq_mul] using
         hF.integrable_smul_right_of_hasCompactSupport hφ.continuous hcφ
-    have hφI := hφ.continuous.integrable_of_hasCompactSupport hcφ
+    have hφI : Integrable φ volume := hφ.continuous.integrable_of_hasCompactSupport hcφ
     calc
       (∫ x : ℝ, φ x • (F x - c)) =
           (∫ x : ℝ, F x * φ x) - (∫ x : ℝ, φ x) * c := by

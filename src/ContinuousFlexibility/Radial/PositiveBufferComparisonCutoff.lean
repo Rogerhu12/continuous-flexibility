@@ -112,7 +112,8 @@ theorem positiveBufferCutoff_deriv (σ x : ℝ) :
     positiveBufferCutoffProfile_contDiff.differentiable (by simp)
   have h := (hd (x - (σ + 2))).hasDerivAt.comp x
     ((hasDerivAt_id x).sub_const (σ + 2))
-  simpa only [positiveBufferCutoff, Function.comp_def, id_eq, mul_one] using h.deriv
+  change deriv (fun y => positiveBufferCutoffProfile (y - (σ + 2))) x = _
+  simpa only [Function.comp_def, id_eq, mul_one] using h.deriv
 
 theorem positiveBufferCutoff_deriv_deriv (σ x : ℝ) :
     deriv (deriv (positiveBufferCutoff σ)) x =
@@ -173,9 +174,9 @@ theorem positiveBufferCutoff_commutator {J : Set ℝ} (hJ : IsOpen J)
   have hfirst : deriv (fun y => positiveBufferCutoff σ y * u y) =ᶠ[𝓝 x]
       fun y => deriv (positiveBufferCutoff σ) y * u y + positiveBufferCutoff σ y * du y := by
     filter_upwards [hJ.mem_nhds hx] with y hy
-    exact ((hχ y).hasDerivAt.mul (hu y hy)).deriv
-  have hsecond := ((hdχ' x).hasDerivAt.mul (hu x hx)).add
-    ((hχ x).hasDerivAt.mul (hdu x hx))
+    exact ((hχ y).hasDerivAt.fun_mul (hu y hy)).deriv
+  have hsecond := ((hdχ' x).hasDerivAt.fun_mul (hu x hx)).fun_add
+    ((hχ x).hasDerivAt.fun_mul (hdu x hx))
   rw [hfirst.deriv_eq, hsecond.deriv]
   unfold positiveBufferCutoffError
   ring
@@ -202,9 +203,10 @@ theorem positiveBufferCutoffError_bound {σ C : ℝ} {u du q : ℝ → ℝ}
       |positiveBufferCutoffError σ u du x| ≤
           |deriv (deriv (positiveBufferCutoff σ)) x| * |u x| +
             2 * (|deriv (positiveBufferCutoff σ) x| * |du x|) := by
-        simpa only [positiveBufferCutoffError, abs_mul, abs_neg, abs_ofNat, mul_assoc] using
-          abs_sub_le (-deriv (deriv (positiveBufferCutoff σ)) x * u x)
-            (2 * deriv (positiveBufferCutoff σ) x * du x)
+        simpa only [positiveBufferCutoffError, sub_eq_add_neg, abs_mul, abs_neg,
+          abs_of_nonneg (show (0 : ℝ) ≤ 2 by norm_num), mul_assoc] using
+          abs_add (-deriv (deriv (positiveBufferCutoff σ)) x * u x)
+            (-(2 * deriv (positiveBufferCutoff σ) x * du x))
       _ ≤ 3 * C * exp (-σ) := by nlinarith
   · have hd := positiveBufferCutoff_derivatives_zero hx
     simp only [positiveBufferCutoffError, hd.1, hd.2, neg_zero, zero_mul, mul_zero, sub_self,

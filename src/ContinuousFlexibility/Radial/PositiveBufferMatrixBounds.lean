@@ -39,7 +39,11 @@ theorem positiveBufferMatrix_mul_entry_bound {n : Type*} [Fintype n]
 theorem positiveBuffer_two_weights (w : Fin 2 → ℝ) (i : Fin 2) :
     w i * (∑ j, w j) ≤ 2 * ∑ j, w j ^ 2 := by
   simp only [Fin.sum_univ_two]
-  fin_cases i <;> nlinarith [sq_nonneg (w 0 - w 1)]
+  fin_cases i
+  · change w 0 * (w 0 + w 1) ≤ 2 * (w 0 ^ 2 + w 1 ^ 2)
+    nlinarith [sq_nonneg (w 0 - w 1), sq_nonneg (w 0), sq_nonneg (w 1)]
+  · change w 1 * (w 0 + w 1) ≤ 2 * (w 0 ^ 2 + w 1 ^ 2)
+    nlinarith [sq_nonneg (w 0 - w 1), sq_nonneg (w 0), sq_nonneg (w 1)]
 
 theorem positiveBuffer_two_weights_sq (w : Fin 2 → ℝ) :
     (∑ j, w j) ^ 2 ≤ 2 * ∑ j, w j ^ 2 := by
@@ -58,7 +62,9 @@ theorem positiveBufferMatrix_weighted_operator_bound (E : Matrix (Fin 2) (Fin 2)
   intro i
   rw [Real.norm_eq_abs]
   calc
-    |(E *ᵥ x) i| ≤ ∑ j, |E i j * x j| := Finset.abs_sum_le_sum_abs _ _
+    |(E *ᵥ x) i| ≤ ∑ j, |E i j * x j| := by
+      change |∑ j, E i j * x j| ≤ ∑ j, |E i j * x j|
+      exact Finset.abs_sum_le_sum_abs _ _
     _ ≤ ∑ j, (η * w i * w j) * ‖x‖ := by
       apply Finset.sum_le_sum
       intro j _
@@ -70,8 +76,8 @@ theorem positiveBufferMatrix_weighted_operator_bound (E : Matrix (Fin 2) (Fin 2)
       simp only [Fin.sum_univ_two]
       ring
     _ ≤ η * (2 * ∑ j, w j ^ 2) * ‖x‖ := by
-      gcongr
-      exact positiveBuffer_two_weights w i
+      exact mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left (positiveBuffer_two_weights w i) hη) (norm_nonneg x)
     _ ≤ (1 / 2 : ℝ) * ‖x‖ := by
       apply mul_le_mul_of_nonneg_right _ (norm_nonneg x)
       nlinarith
@@ -106,20 +112,20 @@ theorem positiveBufferMatrix_inverse_weighted_error (E : Matrix (Fin 2) (Fin 2) 
       (fun _ => 2) (fun _ => 1) (fun i => mul_nonneg hη (hw i)) hw
       (fun _ => by norm_num) (fun _ => by norm_num) hE
       (fun i j => by simpa only [mul_one] using hJ i j) i j
-    simpa only [Finset.sum_mul, mul_one, mul_assoc, mul_comm, mul_left_comm] using h
+    convert h using 1 <;> simp only [Fin.sum_univ_two] <;> ring
   have hdouble (i j : Fin 2) :
       |(E * J * E) i j| ≤ 4 * η ^ 2 * w i * w j * (∑ k, w k ^ 2) := by
     have h := positiveBufferMatrix_mul_entry_bound (E * J) E
       (fun i => 2 * η * w i * ∑ k, w k) (fun _ => 1) (fun k => η * w k) w
-      (fun i => by positivity) (fun _ => by norm_num)
+      (fun i => by have hi := hw i; positivity) (fun _ => by norm_num)
       (fun k => mul_nonneg hη (hw k)) hw hleft hE i j
     have h' : |(E * J * E) i j| ≤ 2 * η ^ 2 * w i * w j * (∑ k, w k) ^ 2 := by
-      convert h using 1 <;> simp only [one_mul, Finset.mul_sum] <;> ring
+      convert h using 1 <;> simp only [Fin.sum_univ_two] <;> ring
     calc
       _ ≤ 2 * η ^ 2 * w i * w j * (∑ k, w k) ^ 2 := h'
       _ ≤ 2 * η ^ 2 * w i * w j * (2 * ∑ k, w k ^ 2) := by
         apply mul_le_mul_of_nonneg_left (positiveBuffer_two_weights_sq w)
-        positivity
+        exact mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) (sq_nonneg η)) (hw i)) (hw j)
       _ = _ := by ring
   refine ⟨hinv, ?_⟩
   intro i j
@@ -131,7 +137,8 @@ theorem positiveBufferMatrix_inverse_weighted_error (E : Matrix (Fin 2) (Fin 2) 
       add_le_add (hE i j) (hdouble i j)
     _ ≤ 2 * η * w i * w j := by
       have h := mul_le_mul_of_nonneg_left hsmall
-        (show 0 ≤ 4 * η * w i * w j by positivity)
+        (show 0 ≤ 4 * η * w i * w j from
+          mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) hη) (hw i)) (hw j))
       nlinarith
 
 end ContinuousFlexibility.Radial

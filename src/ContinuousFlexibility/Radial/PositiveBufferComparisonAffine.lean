@@ -1,4 +1,8 @@
 import Mathlib.Analysis.Calculus.ContDiff.Deriv
+import Mathlib.Analysis.Calculus.ContDiff.Operations
+import Mathlib.Analysis.Calculus.Deriv.Comp
+import Mathlib.Analysis.Calculus.Deriv.Mul
+import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
 import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
 import Mathlib.MeasureTheory.Group.Integral
@@ -96,8 +100,10 @@ theorem positiveBuffer_affine_setIntegral (f : ℝ → ℝ) {s : Set ℝ}
       (fun x => f (a + b * x)) = fun x => (s.indicator f) (a + b * x) := by
     funext x
     by_cases hx : a + b * x ∈ s
-    · rw [indicator_of_mem hx, indicator_of_mem hx]
-    · rw [indicator_of_notMem hx, indicator_of_notMem hx]
+    · have hx' : x ∈ (fun t : ℝ => a + b * t) ⁻¹' s := hx
+      rw [indicator_of_mem hx', indicator_of_mem hx]
+    · have hx' : x ∉ (fun t : ℝ => a + b * t) ⁻¹' s := hx
+      rw [indicator_of_notMem hx', indicator_of_notMem hx]
   rw [heq, Measure.integral_comp_mul_left (fun y => (s.indicator f) (a + y)) b,
     integral_add_left_eq_self, smul_eq_mul, abs_inv]
 
@@ -137,6 +143,8 @@ theorem positiveBuffer_reflection_deriv_energy {u V : ℝ → ℝ} (c : ℝ)
     _ = ∫ x in Ioi (-c), (-deriv u (-x)) ^ 2 + V (-x) * u (-x) ^ 2 := by
       apply setIntegral_congr_fun measurableSet_Ioi
       intro x hx
+      change deriv (fun t : ℝ => u (-t)) x ^ 2 + V (-x) * u (-x) ^ 2 =
+        (-deriv u (-x)) ^ 2 + V (-x) * u (-x) ^ 2
       rw [positiveBuffer_reflection_deriv (hu (-x) (by linarith))]
     _ = _ := positiveBuffer_reflection_energy u (deriv u) V c
 

@@ -179,4 +179,36 @@ theorem positiveBufferBorderedForm_of_fullGraph {V : ℝ → ℝ}
       positiveBufferBorderedState_apply, h, hU.2]
     ring
 
+/-- The physical form is bilinear on the constrained energy domain. -/
+def positiveBufferBorderedFormLinear (V : ℝ → ℝ) (hV : Continuous V) (g : RadialL2)
+    (bordered : Bool) : PositiveBufferBorderedEnergy V bordered →ₗ[ℝ]
+      PositiveBufferBorderedEnergy V bordered →ₗ[ℝ] ℝ :=
+  LinearMap.mk₂ ℝ (positiveBufferBorderedForm V hV g bordered)
+    (by
+      intro U W Z
+      simp only [positiveBufferBorderedForm, Submodule.coe_add, Prod.fst_add, Prod.snd_add,
+        map_add, ContinuousLinearMap.add_apply, inner_add_right]
+      ring)
+    (by
+      intro a U W
+      simp only [positiveBufferBorderedForm, Submodule.coe_smul, Prod.fst_smul, Prod.snd_smul,
+        map_smul, ContinuousLinearMap.smul_apply, inner_smul_right, smul_eq_mul]
+      ring)
+    (by
+      intro U W Z
+      simp only [positiveBufferBorderedForm, Submodule.coe_add, Prod.fst_add, Prod.snd_add,
+        map_add, ContinuousLinearMap.add_apply, inner_add_right]
+      ring)
+    (by
+      intro a U W
+      simp only [positiveBufferBorderedForm, Submodule.coe_smul, Prod.fst_smul, Prod.snd_smul,
+        map_smul, ContinuousLinearMap.smul_apply, inner_smul_right, smul_eq_mul]
+      ring)
+
+@[simp] theorem positiveBufferBorderedFormLinear_apply (V : ℝ → ℝ) (hV : Continuous V)
+    (g : RadialL2) (bordered : Bool) (U W : PositiveBufferBorderedEnergy V bordered) :
+    positiveBufferBorderedFormLinear V hV g bordered U W =
+      positiveBufferBorderedForm V hV g bordered U W :=
+  LinearMap.mk₂_apply _ U W
+
 end ContinuousFlexibility.Radial

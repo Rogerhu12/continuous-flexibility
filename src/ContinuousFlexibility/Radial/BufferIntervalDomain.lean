@@ -144,7 +144,8 @@ theorem bufferIntervalCore_orthogonal_weak_derivative {V : ℝ → ℝ} (hV : Co
     ring
   rw [h0, h1, h2] at he
   have hA : Integrable (fun x : ℝ => z 0 x * φ x) volume :=
-    (Lp.memLp (z 0)).integrable_mul (hφ.continuous.memLp_of_hasCompactSupport hc)
+    (Lp.memLp (z 0)).integrable_mul
+      (show MemLp φ 2 volume from hφ.continuous.memLp_of_hasCompactSupport hc)
   have hC : Integrable (fun x : ℝ => (sqrt (1 + |V x|) * z 2 x) * φ x) volume := by
     have hI := (Lp.memLp (z 2)).integrable_mul (positiveBufferCompact_weight_memLp hV hφ hc)
     convert hI using 1
@@ -195,17 +196,16 @@ theorem buffer_supported_interval_zero_traces {u : RadialL2} {U : ℝ → ℝ} {
     hzh (show h ∈ closure (Ioi h) by
       simpa only [closure_Ioi, mem_Ici] using (le_refl h))⟩
 
-/-- Every supported weak-energy field annihilates the orthogonal complement
-of the genuine compact smooth graph core. This is the one-dimensional
-Dirichlet density argument: the dual weak derivative has an absolutely
-continuous primitive, and its boundary pairing with the field vanishes. -/
-theorem buffer_supported_energy_annihilator {V : ℝ → ℝ} (hV : Continuous V)
+/-- Zero true endpoint traces make the finite-interval pairing with every
+annihilator of the smooth Dirichlet core vanish. The original field need
+not be supported in the interval. -/
+theorem buffer_energy_interval_annihilator {V : ℝ → ℝ} (hV : Continuous V)
     {l h : ℝ} (hlh : l < h) {u d q : RadialL2}
     (he : (u, d, q) ∈ SchrodingerEnergyLift V)
-    (hs : (u : ℝ → ℝ) =ᵐ[volume.restrict (Ioo l h)ᶜ] (fun _ => 0))
+    {U : ℝ → ℝ} (hU : Continuous U) (huU : (u : ℝ → ℝ) =ᵐ[volume] U)
+    (hUl : U l = 0) (hUh : U h = 0)
     {z : PositiveBufferEnergyTriple} (hz : z ∈ (bufferHilbertIntervalCore V l h)ᗮ) :
-    inner (𝕜 := ℝ) (z 0) u + inner (𝕜 := ℝ) (z 1) d +
-      inner (𝕜 := ℝ) (z 2) q = 0 := by
+    (∫ x in l..h, z 0 x * u x + z 1 x * d x + z 2 x * q x) = 0 := by
   let r (x : ℝ) := z 0 x + sqrt (1 + |V x|) * z 2 x
   have h0 : LocallyIntegrable (z 0 : ℝ → ℝ) volume :=
     (Lp.memLp (z 0)).locallyIntegrable (by norm_num)
@@ -219,15 +219,41 @@ theorem buffer_supported_energy_annihilator {V : ℝ → ℝ} (hV : Continuous V
   obtain ⟨B, hB, hzB, hBprim, hBderiv⟩ :=
     buffer_localWeakDerivative_continuousRepresentative hlh h1 hr
       (bufferIntervalCore_orthogonal_weak_derivative hV hz)
-  obtain ⟨U, hU, huU, hUprim, hUderiv⟩ :=
+  obtain ⟨W, hW, huW, hUprim, hUderiv⟩ :=
     buffer_weakDerivative_continuousRepresentative he.1
-  obtain ⟨hUl, hUh⟩ := buffer_supported_interval_zero_traces hU huU hs
+  have hWU : W = U := buffer_continuousRepresentative_unique hW hU huW huU
+  subst W
   have hd : LocallyIntegrable (d : ℝ → ℝ) volume :=
     (Lp.memLp d).locallyIntegrable (by norm_num)
   have hUac := bufferPrimitiveRepresentative_absolutelyContinuous hd hUprim l h
   have hBac := bufferPrimitiveRepresentative_absolutelyContinuous hr hBprim l h
   have hibp := hUac.integral_deriv_mul_eq_sub hBac
   rw [hUl, hUh, zero_mul, zero_mul, sub_self] at hibp
+  have hzB' := (ae_restrict_iff' measurableSet_Ioo).mp hzB
+  have hpoint : (∫ x in l..h, z 0 x * u x + z 1 x * d x + z 2 x * q x) =
+      ∫ x in l..h, deriv U x * B x + U x * deriv B x := by
+    apply intervalIntegral.integral_congr_ae
+    filter_upwards [huU, he.2, hUderiv, hBderiv, hzB', volume.ae_ne h]
+      with x hu hq hdu hdb hzb hxh hxin
+    rw [uIoc_of_le hlh.le] at hxin
+    have hxoo : x ∈ Ioo l h := ⟨hxin.1, lt_of_le_of_ne hxin.2 hxh⟩
+    rw [hdu.deriv, hdb.deriv, ← hu, ← hzb hxoo, hq]
+    dsimp [r]
+    ring
+  exact hpoint.trans hibp
+
+/-- Every supported weak-energy field annihilates the orthogonal complement
+of the genuine compact smooth graph core. -/
+theorem buffer_supported_energy_annihilator {V : ℝ → ℝ} (hV : Continuous V)
+    {l h : ℝ} (hlh : l < h) {u d q : RadialL2}
+    (he : (u, d, q) ∈ SchrodingerEnergyLift V)
+    (hs : (u : ℝ → ℝ) =ᵐ[volume.restrict (Ioo l h)ᶜ] (fun _ => 0))
+    {z : PositiveBufferEnergyTriple} (hz : z ∈ (bufferHilbertIntervalCore V l h)ᗮ) :
+    inner (𝕜 := ℝ) (z 0) u + inner (𝕜 := ℝ) (z 1) d +
+      inner (𝕜 := ℝ) (z 2) q = 0 := by
+  obtain ⟨U, hU, huU, -⟩ := buffer_weakDerivative_continuousRepresentative he.1
+  obtain ⟨hUl, hUh⟩ := buffer_supported_interval_zero_traces hU huU hs
+  have hinterval := buffer_energy_interval_annihilator hV hlh he hU huU hUl hUh hz
   have hus := (ae_restrict_iff' measurableSet_Ioo.compl).mp hs
   have hds := (ae_restrict_iff' measurableSet_Ioo.compl).mp
     (buffer_supported_interval_derivative he.1 hs)
@@ -240,18 +266,6 @@ theorem buffer_supported_energy_annihilator {V : ℝ → ℝ} (hV : Continuous V
   have hwhole : (∫ x : ℝ, F x) = ∫ x in l..h, F x := by
     rw [intervalIntegral.integral_of_le hlh.le, MeasureTheory.integral_Ioc_eq_integral_Ioo]
     exact (setIntegral_eq_integral_of_ae_compl_eq_zero hFzero).symm
-  have hzB' := (ae_restrict_iff' measurableSet_Ioo).mp hzB
-  have hpoint : (∫ x in l..h, F x) =
-      ∫ x in l..h, deriv U x * B x + U x * deriv B x := by
-    apply intervalIntegral.integral_congr_ae
-    filter_upwards [huU, he.2, hUderiv, hBderiv, hzB', volume.ae_ne h]
-      with x hu hq hdu hdb hzb hxh hxin
-    rw [uIoc_of_le hlh.le] at hxin
-    have hxoo : x ∈ Ioo l h := ⟨hxin.1, lt_of_le_of_ne hxin.2 hxh⟩
-    dsimp [F]
-    rw [hdu.deriv, hdb.deriv, ← hu, ← hzb hxoo, hq]
-    dsimp [r]
-    ring
   have hI0 : Integrable (fun x : ℝ => z 0 x * u x) volume :=
     (Lp.memLp (z 0)).integrable_mul (Lp.memLp u)
   have hI1 : Integrable (fun x : ℝ => z 1 x * d x) volume :=
@@ -263,7 +277,7 @@ theorem buffer_supported_energy_annihilator {V : ℝ → ℝ} (hV : Continuous V
       simp only [positiveBufferL2_inner_integral]
       exact ((integral_add (hI0.add hI1) hI2).trans
         (congrArg (fun a : ℝ => a + ∫ x : ℝ, z 2 x * q x) (integral_add hI0 hI1))).symm
-    _ = 0 := hwhole.trans (hpoint.trans hibp)
+    _ = 0 := hwhole.trans hinterval
 
 /-- The closure of the actual supported smooth core contains every genuine
 global weak-energy field supported in the interval. No abstract replacement

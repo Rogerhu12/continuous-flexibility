@@ -214,7 +214,8 @@ theorem bufferCutGlue_delta_energy {V : ℝ → ℝ} (hV : Continuous V)
     simpa only [smul_eq_mul] using hVu.integrable_smul_right_of_hasCompactSupport
       hφ.continuous hcφ
   have hfφ : Integrable (fun x => f x * φ x) volume :=
-    (Lp.memLp f).integrable_mul (hφ.continuous.memLp_of_hasCompactSupport hcφ)
+    (Lp.memLp f).integrable_mul
+      (show MemLp φ 2 volume from hφ.continuous.memLp_of_hasCompactSupport hcφ)
   have hreq : (∫ x : ℝ, bufferCutGlue c rL rR x * φ x) =
       (∫ x : ℝ, V x * u x * φ x) - ∫ x : ℝ, f x * φ x := by
     rw [← integral_sub hVuφ hfφ]
@@ -246,7 +247,8 @@ theorem bufferCutGlue_delta_schrodinger {V : ℝ → ℝ} (hV : Continuous V)
   have hφ'' := (contDiff_infty_iff_deriv.mp hφ').2
   have hweak := hud (deriv φ) hφ' hcφ.deriv
   have hI : Integrable (fun x : ℝ => u x * deriv (deriv φ) x) volume :=
-    (Lp.memLp u).integrable_mul (hφ''.continuous.memLp_of_hasCompactSupport hcφ.deriv.deriv)
+    (Lp.memLp u).integrable_mul (show MemLp (deriv (deriv φ)) 2 volume from
+      hφ''.continuous.memLp_of_hasCompactSupport hcφ.deriv.deriv)
   have hVu : LocallyIntegrable (fun x => V x * u x) volume :=
     MeasureTheory.LocallyIntegrable.continuous_mul hV
       ((Lp.memLp u).locallyIntegrable (by norm_num))

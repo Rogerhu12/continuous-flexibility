@@ -83,7 +83,7 @@ def positiveBufferTraceAt (V : ℝ → ℝ) (c : ℝ) : PositiveBufferEnergy V �
         exact congrFun (positiveBufferEnergyRepresentative_add V u v) c
       map_smul' := by
         intro a u
-        simpa only [smul_eq_mul] using
+        simpa only [smul_eq_mul, RingHom.id_apply] using
           congrFun (positiveBufferEnergyRepresentative_smul V a u) c }
   exact L.mkContinuous 2 (fun u => by
     change ‖positiveBufferEnergyRepresentative V u c‖ ≤ 2 * ‖u‖

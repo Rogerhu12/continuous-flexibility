@@ -44,6 +44,23 @@ theorem positiveBufferPoint_slope_ne_zero {B : BufferData}
 def positiveBufferCoordinate (B : BufferData) (i : Fin 2) (x : ℝ) : ℝ :=
   -bufferSign i * B.mass i * (x - bufferCut B i)
 
+theorem positiveBufferCoordinate_affine (B : BufferData) (i : Fin 2) (x : ℝ) :
+    positiveBufferCoordinate B i x =
+      bufferSign i * B.mass i * bufferCut B i + (-bufferSign i * B.mass i) * x := by
+  unfold positiveBufferCoordinate
+  ring
+
+theorem positiveBufferCoordinate_abs_slope {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) :
+    |-bufferSign i * B.mass i| = B.mass i := by
+  rw [abs_mul, abs_neg, abs_bufferSign, one_mul, abs_of_pos (buffer_mass_pos hB i)]
+
+theorem positiveBufferCoordinate_slope_ne_zero {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) : -bufferSign i * B.mass i ≠ 0 := by
+  apply abs_ne_zero.mp
+  rw [positiveBufferCoordinate_abs_slope hB i]
+  exact (buffer_mass_pos hB i).ne'
+
 @[simp] theorem positiveBufferCoordinate_cut (B : BufferData) (i : Fin 2) :
     positiveBufferCoordinate B i (bufferCut B i) = 0 := by
   simp only [positiveBufferCoordinate, sub_self, mul_zero]
@@ -55,7 +72,7 @@ def positiveBufferCoordinate (B : BufferData) (i : Fin 2) (x : ℝ) : ℝ :=
   calc
     _ = bufferSign i ^ 2 * t := by
       unfold positiveBufferCoordinate positiveBufferPoint
-      field_simp
+      field_simp [hm]
       <;> ring
     _ = t := by rw [bufferSign_sq, one_mul]
 
@@ -66,7 +83,7 @@ def positiveBufferCoordinate (B : BufferData) (i : Fin 2) (x : ℝ) : ℝ :=
   calc
     _ = bufferCut B i + bufferSign i ^ 2 * (x - bufferCut B i) := by
       unfold positiveBufferCoordinate positiveBufferPoint
-      field_simp
+      field_simp [hm]
       <;> ring
     _ = x := by rw [bufferSign_sq]; ring
 
@@ -94,6 +111,34 @@ theorem positiveBufferPoint_homogeneous {B : BufferData} {i : Fin 2}
     (by simpa only [← positiveBufferPoint_affine] using ht)
   simpa only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq,
     one_div, div_eq_mul_inv, mul_comm (B.potential (positiveBufferPoint B i t))] using h
+
+theorem positiveBufferPoint_mem_openSpan {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) {t : ℝ}
+    (ht : t ∈ Ioo 0 (B.action i + 6)) :
+    positiveBufferPoint B i t ∈ radialOpenSpan (bufferCut B i) (bufferInnerWall B i) := by
+  let b : ℝ := -bufferSign i / B.mass i
+  have hpoint : positiveBufferPoint B i t = bufferCut B i + b * t :=
+    positiveBufferPoint_affine B i t
+  have hwall : bufferInnerWall B i = bufferCut B i + b * (B.action i + 6) := by
+    rw [← positiveBufferPoint_innerWall, positiveBufferPoint_affine]
+  have hb : b ≠ 0 := positiveBufferPoint_slope_ne_zero hB i
+  change min (bufferCut B i) (bufferInnerWall B i) < positiveBufferPoint B i t ∧
+    positiveBufferPoint B i t < max (bufferCut B i) (bufferInnerWall B i)
+  rcases lt_or_gt_of_ne hb with hbneg | hbpos
+  · have hlt : positiveBufferPoint B i t < bufferCut B i := by
+      rw [hpoint]
+      nlinarith [mul_neg_of_neg_of_pos hbneg ht.1]
+    have hgt : bufferInnerWall B i < positiveBufferPoint B i t := by
+      rw [hpoint, hwall]
+      exact add_lt_add_left (mul_lt_mul_of_neg_left ht.2 hbneg) _
+    exact ⟨(min_le_right _ _).trans_lt hgt, hlt.trans_le (le_max_left _ _)⟩
+  · have hgt : bufferCut B i < positiveBufferPoint B i t := by
+      rw [hpoint]
+      exact lt_add_of_pos_right _ (mul_pos hbpos ht.1)
+    have hlt : positiveBufferPoint B i t < bufferInnerWall B i := by
+      rw [hpoint, hwall]
+      exact add_lt_add_left (mul_lt_mul_of_pos_left ht.2 hbpos) _
+    exact ⟨(min_le_left _ _).trans_lt hgt, hlt.trans_le (le_max_right _ _)⟩
 
 theorem positiveBufferPoint_normalized_potential_lower {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) {t : ℝ}

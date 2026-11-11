@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.PositiveBufferEnergyForm
+import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Compact smooth lifts and the actual variational equation
@@ -40,12 +41,12 @@ def positiveBufferCompactEnergyLift (V : ℝ → ℝ) (hV : Continuous V)
 theorem positiveBufferCompactEnergyLift_base_ae (V : ℝ → ℝ) (hV : Continuous V)
     (φ : ℝ → ℝ) (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ) :
     (positiveBufferEnergyCoordinate V 0 (positiveBufferCompactEnergyLift V hV φ hφ hc) : ℝ → ℝ)
-      =ᵐ[volume] φ := MemLp.coeFn_toLp _
+      =ᵐ[volume] φ := MemLp.coeFn_toLp (compactSmooth_morseEnergyDomain hφ hc).2.1
 
 theorem positiveBufferCompactEnergyLift_derivative_ae (V : ℝ → ℝ) (hV : Continuous V)
     (φ : ℝ → ℝ) (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ) :
     (positiveBufferEnergyCoordinate V 1 (positiveBufferCompactEnergyLift V hV φ hφ hc) : ℝ → ℝ)
-      =ᵐ[volume] deriv φ := MemLp.coeFn_toLp _
+      =ᵐ[volume] deriv φ := MemLp.coeFn_toLp (compactSmooth_morseEnergyDomain hφ hc).2.2.1
 
 theorem positiveBufferCompactEnergyLift_mem_supported (V : ℝ → ℝ) (hV : Continuous V)
     (φ : ℝ → ℝ) (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ)
@@ -95,7 +96,7 @@ def positiveBufferTraceLift (c m x : ℝ) : ℝ := oscillatorCutoff (m * (x - c)
 
 theorem contDiff_positiveBufferTraceLift (c m : ℝ) :
     ContDiff ℝ ∞ (positiveBufferTraceLift c m) :=
-  contDiff_oscillatorCutoff.comp ((contDiff_id.sub_const c).const_mul m)
+  contDiff_oscillatorCutoff.comp (contDiff_const.mul (contDiff_id.sub contDiff_const))
 
 theorem positiveBufferTraceLift_at_cut (c m : ℝ) : positiveBufferTraceLift c m c = 1 := by
   apply oscillatorCutoff_eq_one
@@ -126,7 +127,10 @@ theorem deriv_positiveBufferTraceLift (c m x : ℝ) :
     deriv (positiveBufferTraceLift c m) x = m * deriv oscillatorCutoff (m * (x - c)) := by
   have h := (contDiff_oscillatorCutoff.differentiable (by simp) _).hasDerivAt.comp x
     (((hasDerivAt_id x).sub_const c).const_mul m)
-  convert h.deriv using 1 <;> ring
+  have he : deriv (positiveBufferTraceLift c m) x =
+      deriv oscillatorCutoff (m * (x - c)) * m := by
+    simpa only [positiveBufferTraceLift, Function.comp_def, id_eq, mul_one] using h.deriv
+  exact he.trans (mul_comm _ _)
 
 theorem positiveBufferTraceLift_deriv_abs_le (c : ℝ) {m : ℝ} (hm : 0 ≤ m) (x : ℝ) :
     |deriv (positiveBufferTraceLift c m) x| ≤ m * morseCutoffDerivativeConstant := by
@@ -186,7 +190,8 @@ theorem positiveBufferTraceLift_energy_bound {V : ℝ → ℝ} (hV : Continuous 
     linarith
   have h := setIntegral_mono_on hE.integrableOn
     (integrableOn_const (μ := volume) (s := I)
-      (C := (morseCutoffDerivativeConstant ^ 2 + C₀) * m ^ 2))
+      (C := (morseCutoffDerivativeConstant ^ 2 + C₀) * m ^ 2)
+      (isCompact_Icc : IsCompact (Icc (c - 2 / m) (c + 2 / m))).measure_ne_top)
     measurableSet_Icc hbound
   rw [setIntegral_eq_integral_of_forall_compl_eq_zero hzero, setIntegral_const,
     Real.volume_real_Icc_of_le hI, smul_eq_mul] at h
