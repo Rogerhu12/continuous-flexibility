@@ -23,6 +23,6 @@ theorem N01cCoefficients (hN01b : N01bStatement) : N01CoefficientStatement := by
     n01_coefficientFamilyTameBounds_of_localization
       hS hT hA hε hB hE hG.1 hG.2.1
   exact ⟨A, T, S, C, base', loss, min ε (1 / 2), hT, hS, hA,
-    lt_min hε (by norm_num), n01PartB_mono hB hbase (min_le_left ε (1 / 2)), hcoef, hG⟩
+    lt_min hε (by norm_num), n01PartB_mono hB hbase (min_le_left ε (1 / 2)), hcoef, hG, hE⟩
 
 end ContinuousFlexibility.Blueprint

@@ -33,8 +33,9 @@ def smoothDirections_finiteProduct {m : ℕ} {U : Set X} {f : Fin m → X → �
     SmoothDirections U (fun x => ∏ i, f i x) := by
   have hP : ContDiff ℝ ∞ (fun y : Fin m → ℝ => ∏ i, y i) :=
     contDiff_prod (fun i _ => contDiff_apply ℝ ℝ i)
-  exact smoothDirections_contDiff_comp (smoothDirections_scalarTuple hU J)
-    isOpen_univ hP.contDiffOn (fun _ _ => mem_univ _)
+  exact smoothDirections_contDiff_comp
+    (u := fun x i => f i x) (g := fun y : Fin m → ℝ => ∏ i, y i)
+    (smoothDirections_scalarTuple hU J) isOpen_univ hP.contDiffOn (fun _ _ => mem_univ _)
 
 /-- A genuine positive-order parameter jet of a finite product retains one
 small weight. Every individual factor bound occurs only once. -/
@@ -208,7 +209,7 @@ theorem smoothDirections_D_eq_linearCombination
     J.hasProjectiveJetsOn Jsum.hasProjectiveJetsOn k x hx
   calc
     J.D k x v = Jsum.D k x v := congrArg (fun A : X [×k]→L[ℝ] ℝ => A v) heq
-    _ = ∑ i, (Ks i).D k x v := smoothDirections_finiteSum_D_apply _ Ks k x v
+    _ = ∑ i, (Ks i).D k x v := smoothDirections_finiteSum_D_apply J.open_domain Ks k x v
     _ = ∑ i, c i * (K i).D k x v := by
       apply Finset.sum_congr rfl
       intro i _

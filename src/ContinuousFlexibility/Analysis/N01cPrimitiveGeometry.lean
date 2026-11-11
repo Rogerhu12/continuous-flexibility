@@ -36,7 +36,8 @@ theorem exists_negativePower_comparison_constant
         (Real.rpow_nonneg hEpos.le A) hB.le
   have hinv := one_div_le_one_div_of_le
     (mul_pos hK (Real.rpow_pos_of_pos hR K)) hbound
-  simpa only [one_div, mul_inv_rev, Real.rpow_neg, mul_comm] using hinv
+  rw [Real.rpow_neg hEpos.le B, Real.rpow_neg hR.le K]
+  simpa only [one_div, mul_inv_rev, mul_comm] using hinv
 
 end ContinuousFlexibility.Analysis
 

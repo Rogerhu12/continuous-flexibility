@@ -26,7 +26,8 @@ def N01CoefficientStatement : Prop :=
       IsMaterialData A.val T ∧ IsPhysicalSpaces A.val T S ∧
         N01PartA A.val T S C ∧ 0 < ε ∧ N01PartB A.val S C base ε ∧
           CoefficientFamilyTameBounds A.val T S C base loss ε ∧
-            N01PrimitiveGeometry A.val T S C
+            N01PrimitiveGeometry A.val T S C ∧
+              ∀ r ∈ Ioo A.val.a A.val.b, 1 ≤ T.E0 r
 
 /-- The speed difference is evaluated in the physical radial and angular
 coordinates, exactly as in the ordinary ODE in `ordinaryFlowConditions`. -/
@@ -68,6 +69,7 @@ def N01SpeedStatement : Prop :=
         N01PartA A.val T S C ∧ 0 < ε ∧ N01PartB A.val S C base ε ∧
           CoefficientFamilyTameBounds A.val T S C base loss ε ∧
             CharacteristicSpeedTameBounds A.val T S C base loss ε ∧
-              N01PrimitiveGeometry A.val T S C
+              N01PrimitiveGeometry A.val T S C ∧
+                ∀ r ∈ Ioo A.val.a A.val.b, 1 ≤ T.E0 r
 
 end ContinuousFlexibility.Blueprint
