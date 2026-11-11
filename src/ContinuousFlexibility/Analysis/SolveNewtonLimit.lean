@@ -110,7 +110,8 @@ theorem solve_exists_fixed_branch
     have hsum (s : ℕ) : Summable (fun n => p s ((z (n + 1)).1 - (z n).1)) :=
       Summable.of_nonneg_of_le (fun _ => apply_nonneg _ _)
         (fun n => hinc s n τ hτ) (hD s)
-    obtain ⟨x, hx⟩ := solve_tendsto_of_summable_seminorm_increments p hwp hsum
+    obtain ⟨x, hx⟩ := solve_tendsto_of_summable_seminorm_increments p hwp
+      (u := fun n => (z n).1) hsum
     have hz : Tendsto z atTop (𝓝 (x, τ)) := by
       have hpair := hx.prodMk_nhds (tendsto_const_nhds (x := τ))
       exact hpair.congr' (Eventually.of_forall fun n =>

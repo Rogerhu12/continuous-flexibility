@@ -95,8 +95,10 @@ theorem hasSmoothing_submodule_of_tame_projection
       _ ≤ CP * (C * Real.exp ((((n + r : ℕ) : ℝ) - m + loss) * N) * p m w) := by
         exact mul_le_mul_of_nonneg_left (hSC N w) CP.2
       _ = CP * C * Real.exp (((n : ℝ) - m + (loss + r : ℕ)) * N) * p m w := by
-        push_cast
-        congr 2 <;> ring
+        have he : (((n + r : ℕ) : ℝ) - m + loss) * N =
+            ((n : ℝ) - m + (loss + r : ℕ)) * N := by push_cast; ring
+        rw [he]
+        ring
   · intro m n hm hmn
     obtain ⟨CP, hCP⟩ := hPt m (le_of_max_le_right hm)
     by_cases hwide : m + r ≤ n
@@ -110,8 +112,10 @@ theorem hasSmoothing_submodule_of_tame_projection
         _ ≤ CP * (C * Real.exp (-((n : ℝ) - (m + r : ℕ) - loss) * N) * p n w) :=
           mul_le_mul_of_nonneg_left (hSC N w) CP.2
         _ = CP * C * Real.exp (-((n : ℝ) - m - (loss + r : ℕ)) * N) * p n w := by
-          push_cast
-          congr 2 <;> ring
+          have he : -((n : ℝ) - (m + r : ℕ) - loss) * N =
+              -((n : ℝ) - m - (loss + r : ℕ)) * N := by push_cast; ring
+          rw [he]
+          ring
     · have hn : n ≤ m + r := by omega
       obtain ⟨C, hC, hSC⟩ := ha n (m + r) (by omega) hn
       refine ⟨1 + CP * C, add_nonneg zero_le_one (mul_nonneg CP.2 hC), fun N w => ?_⟩
