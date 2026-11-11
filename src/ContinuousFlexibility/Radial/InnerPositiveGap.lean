@@ -46,7 +46,7 @@ private theorem innerGap_coefficient_bound {s r : ℝ} {w : ℝ → ℝ}
   calc
     _ = (s * w r) / r ^ 2 := by ring
     _ ≤ (r * deriv w r) / r ^ 2 := div_le_div_of_nonneg_right h (sq_nonneg _)
-    _ = _ := by field_simp [hr.ne']; ring
+    _ = _ := by field_simp [hr.ne']
 
 /-- Frequency coercivity in the physical radial measure. In particular,
 the join slope bound `2` gives the manuscript constant `1 / 6`. -/
@@ -74,6 +74,7 @@ theorem innerRadialGap_coercive {a b s : ℝ} (hab : a ≤ b) (ha : 0 < a)
     ((continuousOn_const.mul hcM).intervalIntegrable_of_Icc hab)
     (hcE.intervalIntegrable_of_Icc hab)
   intro r h
+  simp only [Pi.mul_apply]
   have hcoef := innerGap_coefficient_bound (hr r h) (hpos r h) (hslope r h)
   have hmul := mul_le_mul_of_nonneg_right hcoef
     (mul_nonneg (sq_nonneg j) (sq_nonneg (u r)))

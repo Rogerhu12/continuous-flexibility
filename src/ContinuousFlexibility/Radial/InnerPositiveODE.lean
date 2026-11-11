@@ -89,8 +89,12 @@ theorem innerSecondOrder_combination {a b : ℝ} {V u v : ℝ → ℝ}
     exact (((hu.differentiable (by simp) y).hasDerivAt.const_mul c).add
       ((hv.differentiable (by simp) y).hasDerivAt.const_mul d)).deriv
   intro x hx
-  rw [he, (((hdu.differentiable (by simp) x).hasDerivAt.const_mul c).add
-    ((hdv.differentiable (by simp) x).hasDerivAt.const_mul d)).deriv, huEq x hx, hvEq x hx]
+  have hsecond : HasDerivAt (fun y => c * deriv u y + d * deriv v y)
+      (c * deriv (deriv u) x + d * deriv (deriv v) x) x := by
+    simpa only [Pi.add_apply] using
+      (((hdu.differentiable (by simp) x).hasDerivAt.const_mul c).add
+        ((hdv.differentiable (by simp) x).hasDerivAt.const_mul d))
+  rw [he, hsecond.deriv, huEq x hx, hvEq x hx]
   ring
 
 /-- Actual smooth initial values for the positive-sign equation. -/
@@ -130,9 +134,10 @@ theorem exists_innerPositiveODE_boundary {a b : ℝ} (hab : a < b)
   have hgb := innerPositiveODE_dirichlet_determinant_ne_zero hab hV.continuous hg
     hVpos hgEq hga hdga
   let c : ℝ := (β - f b) / g b
-  refine ⟨fun x => 1 * f x + c * g x, (hf.const_mul 1).add (hg.const_mul c), ?_, ?_,
+  refine ⟨fun x => 1 * f x + c * g x, (contDiff_const.mul hf).add (contDiff_const.mul hg), ?_, ?_,
     innerSecondOrder_combination hf hg hfEq hgEq 1 c⟩
-  · rw [hfa, hga, mul_zero, add_zero, one_mul]
+  · change 1 * f a + c * g a = α
+    rw [hfa, hga, mul_zero, add_zero, one_mul]
   · dsimp only [c]
     rw [div_mul_cancel₀ _ hgb, one_mul]
     ring
@@ -145,7 +150,7 @@ theorem innerPositiveODE_boundary_unique {a b : ℝ} (hab : a < b)
     (hvEq : ∀ x ∈ Icc a b, deriv (deriv v) x = V x * v x)
     (ha : u a = v a) (hb : u b = v b) : EqOn u v (Icc a b) := by
   have hz := innerPositiveODE_zero hab hV
-    ((hu.const_mul 1).add (hv.const_mul (-1))) hVpos
+    ((contDiff_const.mul hu).add (contDiff_const.mul hv)) hVpos
     (innerSecondOrder_combination hu hv huEq hvEq 1 (-1))
     (by rw [ha]; ring) (by rw [hb]; ring)
   intro x hx

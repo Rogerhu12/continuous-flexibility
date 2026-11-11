@@ -19,7 +19,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Radial
 
-open scoped BigOperators MatrixOrder Matrix.Norms.L2Operator InnerProductSpace
+open scoped BigOperators Matrix MatrixOrder Matrix.Norms.L2Operator InnerProductSpace
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 

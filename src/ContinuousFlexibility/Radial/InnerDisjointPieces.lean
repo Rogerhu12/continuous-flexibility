@@ -28,6 +28,7 @@ theorem innerL2_disjoint_inner_zero {s t : Set α} (hst : Disjoint s t)
   rw [L2.inner_def]
   apply integral_eq_zero_of_ae
   filter_upwards [hf, hg] with x hfx hgx
+  simp only [Pi.zero_apply]
   by_cases hx : x ∈ s
   · have hxt : x ∉ t := fun h => (Set.disjoint_left.mp hst) hx h
     rw [hgx hxt, inner_zero_right]
@@ -51,7 +52,7 @@ theorem inner_orthogonal_sum_norm_sq
     exact (hi (Finset.mem_univ i)).elim
 
 theorem innerL2_disjoint_sum_norm_sq (s : ι → Set α)
-    (hdis : Pairwise (Disjoint on s)) (f : ι → Lp ℝ 2 μ)
+    (hdis : Pairwise (fun i j => Disjoint (s i) (s j))) (f : ι → Lp ℝ 2 μ)
     (hsupport : ∀ i, ∀ᵐ x ∂μ, x ∉ s i → f i x = 0) :
     ‖∑ i, f i‖ ^ 2 = ∑ i, ‖f i‖ ^ 2 :=
   inner_orthogonal_sum_norm_sq f (fun i j hij =>
@@ -64,7 +65,7 @@ theorem innerBorderL2_inner (f g : Lp ℝ 2 μ) (c d : ℝ) :
     ⟪(WithLp.toLp 2 (f, c) : InnerBorderL2 μ), WithLp.toLp 2 (g, d)⟫_ℝ =
       ⟪f, g⟫_ℝ + c * d := by
   rw [WithLp.prod_inner_apply]
-  simp only [WithLp.ofLp_toLp, real_inner_eq_mul]
+  simp only [WithLp.ofLp_toLp, RCLike.inner_apply, conj_trivial]
   ring
 
 theorem innerBorderL2_norm_sq (f : Lp ℝ 2 μ) (c : ℝ) :
@@ -78,7 +79,7 @@ def innerBorderPiece [DecidableEq ι] (center : ι) (f : ι → Lp ℝ 2 μ)
   WithLp.toLp 2 (f i, if i = center then c else 0)
 
 theorem innerBorderPiece_inner_zero [DecidableEq ι] (center : ι)
-    (s : ι → Set α) (hdis : Pairwise (Disjoint on s))
+    (s : ι → Set α) (hdis : Pairwise (fun i j => Disjoint (s i) (s j)))
     (f : ι → Lp ℝ 2 μ) (hsupport : ∀ i, ∀ᵐ x ∂μ, x ∉ s i → f i x = 0)
     (c : ℝ) {i j : ι} (hij : i ≠ j) :
     ⟪innerBorderPiece center f c i, innerBorderPiece center f c j⟫_ℝ = 0 := by
@@ -92,7 +93,7 @@ theorem innerBorderPiece_inner_zero [DecidableEq ι] (center : ι)
 /-- The assembled scalar is counted once, while all local function
 energies add orthogonally. This includes the unbordered case `c = 0`. -/
 theorem innerBorderPiece_sum_norm_sq [DecidableEq ι] (center : ι)
-    (s : ι → Set α) (hdis : Pairwise (Disjoint on s))
+    (s : ι → Set α) (hdis : Pairwise (fun i j => Disjoint (s i) (s j)))
     (f : ι → Lp ℝ 2 μ) (hsupport : ∀ i, ∀ᵐ x ∂μ, x ∉ s i → f i x = 0) (c : ℝ) :
     ‖∑ i, innerBorderPiece center f c i‖ ^ 2 = (∑ i, ‖f i‖ ^ 2) + c ^ 2 := by
   rw [inner_orthogonal_sum_norm_sq _ (fun i j hij =>

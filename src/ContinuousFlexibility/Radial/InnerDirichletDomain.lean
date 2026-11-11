@@ -138,14 +138,15 @@ private theorem innerDirichletApprox_deriv_formula {a b k x : ℝ} {u : ℝ → 
     (smoothTransition.contDiff : ContDiff ℝ ∞ smoothTransition).differentiable (by simp)
   have hL : HasDerivAt (fun y => smoothTransition (k * (y - a) - 1))
       (deriv smoothTransition (k * (x - a) - 1) * k) x := by
-    convert (hs (k * (x - a) - 1)).hasDerivAt.comp x
-      ((((hasDerivAt_id x).sub_const a).const_mul k).sub_const 1) using 1 <;> ring
+    simpa only [Function.comp_def, Pi.sub_apply, Pi.mul_apply, id_eq, mul_one] using
+      (hs (k * (x - a) - 1)).hasDerivAt.comp x
+        ((((hasDerivAt_id x).sub_const a).const_mul k).sub_const 1)
   have hR : HasDerivAt (fun y => smoothTransition (k * (b - y) - 1))
       (deriv smoothTransition (k * (b - x) - 1) * (-k)) x := by
-    convert (hs (k * (b - x) - 1)).hasDerivAt.comp x
-      ((((hasDerivAt_const x b).sub (hasDerivAt_id x)).const_mul k).sub_const 1)
-      using 1 <;> ring
-  have h := ((hL.mul hR).mul hu.hasDerivAt).deriv
+    simpa only [Function.comp_def, Pi.sub_apply, Pi.mul_apply, id_eq, zero_sub, mul_neg,
+      mul_one] using (hs (k * (b - x) - 1)).hasDerivAt.comp x
+        ((((hasDerivAt_const x b).sub (hasDerivAt_id x)).const_mul k).sub_const 1)
+  have h := ((hL.fun_mul hR).fun_mul hu.hasDerivAt).deriv
   dsimp only [innerDirichletCutoff] at h ⊢
   convert h using 1 <;> ring
 
@@ -180,7 +181,7 @@ theorem innerDirichletApprox_deriv_bound {a b C M : ℝ} {u : ℝ → ℝ}
       (abs_nonneg _) zero_le_one).trans_eq (one_mul _)
   rw [show innerDirichletApprox a b u n = fun y => innerDirichletCutoff a b k y * u y from rfl,
     innerDirichletApprox_deriv_formula (hu x hx)]
-  exact (abs_add _ _).trans ((add_le_add_right (abs_sub _ _) _).trans (by
+  exact (abs_add_le _ _).trans ((add_le_add_right (abs_sub _ _) _).trans (by
     have hLL := hprod (y := k * (b - x) - 1) hL
     have hRR := hprod (y := k * (x - a) - 1) hR
     linarith))
@@ -285,7 +286,8 @@ theorem intervalEnergyClosure_of_smooth_zero_endpoints {a b : ℝ} {V φ : ℝ �
   intro n
   refine ⟨⟨innerDirichletApprox a b φ n, innerDirichletApprox_contDiff hφ n,
     innerDirichletApprox_hasCompactSupport a b φ n,
-    MemLp.coeFn_toLp _, MemLp.coeFn_toLp _, ?_⟩, ?_⟩
+    MemLp.coeFn_toLp (innerDirichletApprox_memLp hφc n),
+    MemLp.coeFn_toLp (innerDirichletApprox_deriv_memLp hφ n), ?_⟩, ?_⟩
   · filter_upwards [MemLp.coeFn_toLp (innerDirichletApprox_memLp hw n)] with x hx
     rw [hx]
     dsimp only [innerDirichletApprox, w]
@@ -333,16 +335,22 @@ private theorem innerDirichlet_classical_pairing {a b : ℝ} {V φ ψ : ℝ → 
     have h := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hab.le (hd.mul hψc)
       (fun x hx => ((hφd x (Ioo_subset_Icc_self hx)).differentiableAt (by simp)).hasDerivAt.mul
         ((hψ.differentiable (by simp) x).hasDerivAt)) (hI₁.add hI₂)
-    simpa only [haψ, hbψ, mul_zero, sub_self] using h
+    simpa only [Pi.mul_apply, haψ, hbψ, mul_zero, sub_self] using h
   rw [intervalIntegral.integral_add hI₁ hI₂] at hparts
   calc
     (∫ x in a..b, (-deriv (deriv φ) x + V x * φ x) * ψ x) =
         -(∫ x in a..b, deriv (deriv φ) x * ψ x) +
           ∫ x in a..b, V x * φ x * ψ x := by
-      rw [← intervalIntegral.integral_neg, ← intervalIntegral.integral_add hI₁.neg hIV]
-      apply intervalIntegral.integral_congr
-      intro x hx
-      ring
+      calc
+        (∫ x in a..b, (-deriv (deriv φ) x + V x * φ x) * ψ x) =
+            ∫ x in a..b, -(deriv (deriv φ) x * ψ x) + V x * φ x * ψ x := by
+          apply intervalIntegral.integral_congr
+          intro x hx
+          ring
+        _ = -(∫ x in a..b, deriv (deriv φ) x * ψ x) +
+            ∫ x in a..b, V x * φ x * ψ x := by
+          simpa only [Pi.add_apply, Pi.neg_apply, intervalIntegral.integral_neg] using
+            intervalIntegral.integral_add hI₁.neg hIV
     _ = (∫ x in a..b, deriv φ x * deriv ψ x) +
         ∫ x in a..b, V x * φ x * ψ x := by linarith
 
@@ -398,11 +406,14 @@ theorem intervalFormGraph_of_smooth_zero_endpoints {a b : ℝ} {V φ : ℝ → �
         ⟪f, p.1⟫_ℝ = ⟪d, p.2.1⟫_ℝ + ⟪v, p.1⟫_ℝ} := by
     intro p hp
     obtain ⟨ψ, hψ, hcψ, hpψ, hpd, hpq⟩ := hp.1
+    have hpψout : (p.1 : ℝ → ℝ) =ᵐ[volume.restrict ((Ioo a b)ᶜ)] ψ :=
+      ae_restrict_of_ae hpψ
+    have hψout : ψ =ᵐ[volume.restrict ((Ioo a b)ᶜ)] (fun _ => 0) :=
+      Filter.EventuallyEq.trans (Filter.EventuallyEq.symm hpψout) hp.2
     have hzero : EqOn ψ (fun _ => 0) ((Ioo a b)ᶜ) :=
-      innerDirichlet_representative_zero_outside hab hψ.continuous
-        ((ae_restrict_of_ae hpψ).symm.trans hp.2)
-    have hψa : ψ a = 0 := hzero a (by simp)
-    have hψb : ψ b = 0 := hzero b (by simp)
+      innerDirichlet_representative_zero_outside hab hψ.continuous hψout
+    have hψa : ψ a = 0 := hzero (by simp : a ∈ (Ioo a b)ᶜ)
+    have hψb : ψ b = 0 := hzero (by simp : b ∈ (Ioo a b)ᶜ)
     change ⟪f, p.1⟫_ℝ = ⟪d, p.2.1⟫_ℝ + ⟪v, p.1⟫_ℝ
     rw [innerDirichlet_pairing_indicator hab.le hf hpψ,
       innerDirichlet_pairing_indicator hab.le hd hpd,
