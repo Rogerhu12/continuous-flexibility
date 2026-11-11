@@ -61,7 +61,11 @@ theorem circle_derivative_product_oneHigh (k s : ℕ)
   have hr := ENNReal.toReal_mono (ENNReal.sum_ne_top.mpr (fun j _ => hterm j)) h
   rw [ENNReal.toReal_sum (fun j _ => hterm j)] at hr
   simp only [ENNReal.toReal_mul, ENNReal.toReal_prod] at hr
-  rw [circle_fourier_l2_toReal] at hr
-  simpa only [frequencySobolevNorm, frequencyL1Norm] using hr
+  have hprod : (∏ i : Fin (k + 1), (f i (a i) : AddCircle P → ℂ)) =
+      ((∏ i : Fin (k + 1), f i (a i) : C(AddCircle P, ℂ)) : AddCircle P → ℂ) := by
+    funext θ
+    simp only [Finset.prod_apply, ContinuousMap.prod_apply]
+  rw [hprod, circle_fourier_l2_toReal] at hr
+  simpa only [frequencySobolevNorm, frequencyL1Norm, hprod] using hr
 
 end ContinuousFlexibility.Analysis

@@ -26,9 +26,6 @@ local instance : IsAddLeftInvariant cylinderFrequencyMeasure :=
 local instance : IsAddRightInvariant cylinderFrequencyMeasure :=
   inferInstanceAs (IsAddRightInvariant ((volume : Measure ℝ).prod (Measure.count : Measure ℤ)))
 
-local instance : IsNegInvariant cylinderFrequencyMeasure :=
-  inferInstanceAs (IsNegInvariant ((volume : Measure ℝ).prod (Measure.count : Measure ℤ)))
-
 variable {P : ℝ} [Fact (0 < P)]
 
 theorem cylinderFourier_congr (f g : ℝ × AddCircle P → ℂ)

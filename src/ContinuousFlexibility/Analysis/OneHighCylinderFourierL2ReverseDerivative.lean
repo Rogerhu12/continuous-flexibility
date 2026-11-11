@@ -62,7 +62,12 @@ theorem real_memLp_derivative_of_frequency (u v : ℝ → ℂ)
     have hac : HasCompactSupport (Complex.ofRealCLM ∘ a) := hcompact.comp_left rfl
     have has : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ a) := Complex.ofRealCLM.contDiff.comp ha
     let φ : 𝓢(ℝ, ℂ) := hac.toSchwartzMap has
-    have hφ : HasCompactSupport (φ : ℝ → ℂ) := by simpa [φ] using hac
+    have hφcoe : (φ : ℝ → ℂ) = Complex.ofRealCLM ∘ a := by
+      funext x
+      rfl
+    have hφ : HasCompactSupport (φ : ℝ → ℂ) := by
+      rw [hφcoe]
+      exact hac
     let η : 𝓢(ℝ, ℂ) :=
       c • SchwartzMap.smulLeftCLM ℂ (fun ξ : ℝ => ξ) (𝓕⁻ φ)
     have hgrowth : (fun ξ : ℝ => ξ).HasTemperateGrowth := by fun_prop
@@ -79,7 +84,6 @@ theorem real_memLp_derivative_of_frequency (u v : ℝ → ℂ)
         _ = ∫ ξ : ℝ, η ξ * F ξ := by
           apply integral_congr_ae
           filter_upwards [hM.coeFn_toLp] with ξ hξ
-          dsimp only
           rw [hξ, hη]
           dsimp only [M]
           ring

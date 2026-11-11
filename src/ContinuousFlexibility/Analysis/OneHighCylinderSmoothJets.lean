@@ -39,13 +39,15 @@ theorem CylinderSmoothJet.hasFDerivAt_lift (u : CylinderSmoothJet P E)
       ((ContinuousLinearMap.fst ℝ ℝ ℝ).smulRight (u.lift (i + 1) j p) +
         (ContinuousLinearMap.snd ℝ ℝ ℝ).smulRight (u.lift i (j + 1) p)) p := by
   let fr : ℝ → ℝ → ℝ →L[ℝ] E := fun r θ =>
-    (1 : ℝ →L[ℝ] ℝ).smulRight (u.jet (i + 1) j (r, (θ : AddCircle P)))
+    ContinuousLinearMap.toSpanSingleton ℝ (u.jet (i + 1) j (r, (θ : AddCircle P)))
   let ft : ℝ → ℝ → ℝ →L[ℝ] E := fun r θ =>
-    (1 : ℝ →L[ℝ] ℝ).smulRight (u.jet i (j + 1) (r, (θ : AddCircle P)))
+    ContinuousLinearMap.toSpanSingleton ℝ (u.jet i (j + 1) (r, (θ : AddCircle P)))
   have hcr : Continuous (fun q : ℝ × ℝ => fr q.1 q.2) :=
-    continuous_const.smulRight (u.continuous_lift (i + 1) j)
+    (ContinuousLinearMap.toSpanSingletonCLE (𝕜 := ℝ) (E := E)).continuous.comp
+      (u.continuous_lift (i + 1) j)
   have hct : Continuous (fun q : ℝ × ℝ => ft q.1 q.2) :=
-    continuous_const.smulRight (u.continuous_lift i (j + 1))
+    (ContinuousLinearMap.toSpanSingletonCLE (𝕜 := ℝ) (E := E)).continuous.comp
+      (u.continuous_lift i (j + 1))
   have h := hasStrictFDerivAt_uncurry_coprod (𝕜 := ℝ) (u := p)
     (f := fun r θ => u.jet i j (r, (θ : AddCircle P))) (f₁ := fr) (f₂ := ft)
     (Eventually.of_forall fun q => (u.radial i j q.1 (q.2 : AddCircle P)).hasFDerivAt)
@@ -54,9 +56,13 @@ theorem CylinderSmoothJet.hasFDerivAt_lift (u : CylinderSmoothJet P E)
   have he : (fr p.1 p.2).coprod (ft p.1 p.2) =
       (ContinuousLinearMap.fst ℝ ℝ ℝ).smulRight (u.lift (i + 1) j p) +
         (ContinuousLinearMap.snd ℝ ℝ ℝ).smulRight (u.lift i (j + 1) p) := by
-    ext z
+    apply ContinuousLinearMap.ext
+    intro z
     simp [fr, ft, CylinderSmoothJet.lift, ContinuousLinearMap.coprod_apply]
-  simpa only [he] using h.hasFDerivAt
+  have h' : HasFDerivAt (u.lift i j) ((fr p.1 p.2).coprod (ft p.1 p.2)) p :=
+    h.hasFDerivAt
+  rw [he] at h'
+  exact h'
 
 private theorem cylinderSmoothJet_contDiff_lift_nat (u : CylinderSmoothJet P E)
     (n : ℕ) : ∀ i j, ContDiff ℝ n (u.lift i j) := by
@@ -93,7 +99,7 @@ theorem CylinderSmoothJet.iteratedDeriv_radial (u : CylinderSmoothJet P E)
 theorem CylinderSmoothJet.iteratedDeriv_angular (u : CylinderSmoothJet P E)
     (i j n : ℕ) (r : ℝ) :
     iteratedDeriv n (fun θ : ℝ => u.jet i j (r, (θ : AddCircle P))) =
-      fun θ => u.jet i (j + n) (r, (θ : AddCircle P)) := by
+      fun θ : ℝ => u.jet i (j + n) (r, (θ : AddCircle P)) := by
   induction n with
   | zero => simp only [iteratedDeriv_zero, Nat.add_zero]
   | succ n ih =>

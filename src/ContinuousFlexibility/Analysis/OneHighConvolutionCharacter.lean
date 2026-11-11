@@ -41,6 +41,7 @@ theorem integral_character_complexConvolution {χ : G → ℂ}
     _ = ∫ x, ∫ y, χ x * (f y * g (x - y)) ∂μ ∂μ := by
       apply integral_congr_ae
       exact Eventually.of_forall fun x => by
+        dsimp only
         rw [complexConvolution_apply, integral_const_mul]
     _ = ∫ y, ∫ x, χ x * (f y * g (x - y)) ∂μ ∂μ := integral_integral_swap hχB
     _ = ∫ y, ∫ x, χ (x + y) * (f y * g x) ∂μ ∂μ := by
@@ -60,6 +61,15 @@ theorem integral_character_complexConvolution {χ : G → ℂ}
 
 end Group
 
+/-- Product negation preserves the actual mixed frequency measure. -/
+instance cylinderFrequencyMeasure_isNegInvariant : IsNegInvariant cylinderFrequencyMeasure where
+  neg_eq_self := by
+    change Measure.map (Prod.map (fun x : ℝ => -x) (fun n : ℤ => -n))
+      ((volume : Measure ℝ).prod (Measure.count : Measure ℤ)) =
+      (volume : Measure ℝ).prod (Measure.count : Measure ℤ)
+    exact ((Measure.measurePreserving_neg (volume : Measure ℝ)).prod
+      (Measure.measurePreserving_neg (Measure.count : Measure ℤ))).map_eq
+
 variable {P : ℝ} [Fact (0 < P)]
 
 /-- The mixed inverse of the actual complex convolution is the pointwise
@@ -75,8 +85,6 @@ theorem cylinderFourierInverse_complexConvolution {F G : ℝ × ℤ → ℂ}
     inferInstanceAs (IsAddLeftInvariant ((volume : Measure ℝ).prod (Measure.count : Measure ℤ)))
   letI : IsAddRightInvariant cylinderFrequencyMeasure :=
     inferInstanceAs (IsAddRightInvariant ((volume : Measure ℝ).prod (Measure.count : Measure ℤ)))
-  letI : IsNegInvariant cylinderFrequencyMeasure :=
-    inferInstanceAs (IsNegInvariant ((volume : Measure ℝ).prod (Measure.count : Measure ℤ)))
   funext p
   exact integral_character_complexConvolution (μ := cylinderFrequencyMeasure)
     (measurable_cylinderInverseCharacter p) (norm_cylinderInverseCharacter p)

@@ -36,6 +36,12 @@ theorem cylinderDerivativeMultiplier_angular_succ (P : ℝ) (i j : ℕ) (ζ : �
   simp only [cylinderDerivativeMultiplier, pow_succ]
   ring
 
+theorem cylinderDerivativeMultiplier_mul (P : ℝ) (i j k l : ℕ) (ζ : ℝ × ℤ) :
+    cylinderDerivativeMultiplier P i j ζ * cylinderDerivativeMultiplier P k l ζ =
+      cylinderDerivativeMultiplier P (i + k) (j + l) ζ := by
+  simp only [cylinderDerivativeMultiplier, pow_add]
+  ring
+
 theorem continuous_cylinderDerivativeMultiplier (P : ℝ) (i j : ℕ) :
     Continuous (cylinderDerivativeMultiplier P i j) := by
   unfold cylinderDerivativeMultiplier
@@ -48,7 +54,7 @@ theorem measurable_cylinderDerivativeMultiplier (P : ℝ) (i j : ℕ) :
 theorem norm_cylinderDerivativeMultiplier (P : ℝ) (i j : ℕ) (ζ : ℝ × ℤ) :
     ‖cylinderDerivativeMultiplier P i j ζ‖ =
       |2 * Real.pi * ζ.1| ^ i * |(2 * Real.pi / P) * (ζ.2 : ℝ)| ^ j := by
-  simp only [cylinderDerivativeMultiplier, norm_mul, norm_pow, norm_I,
+  simp only [cylinderDerivativeMultiplier, norm_mul, norm_pow, Complex.norm_I,
     Complex.norm_real, Real.norm_eq_abs, one_mul]
 
 theorem norm_cylinderDerivativeMultiplier_le_weight (P : ℝ) (i j s : ℕ)
@@ -66,6 +72,7 @@ theorem cylinderDerivativeMultiplier_mul_memLp {P : ℝ} {F : ℝ × ℤ → ℂ
     MemLp (fun ζ => cylinderDerivativeMultiplier P i j ζ * F ζ) 2 cylinderFrequencyMeasure := by
   apply hFs.of_le ((measurable_cylinderDerivativeMultiplier P i j).mul hF).aestronglyMeasurable
   exact Eventually.of_forall fun ζ => by
+    simp only [Pi.mul_apply]
     rw [norm_mul, cylinder_norm_frequencyWeighted_nat]
     exact mul_le_mul_of_nonneg_right
       (norm_cylinderDerivativeMultiplier_le_weight P i j s hij ζ) (norm_nonneg _)
