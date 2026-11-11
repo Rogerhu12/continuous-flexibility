@@ -75,9 +75,9 @@ private theorem coefficientPolarInput_norm_weight_order
   rw [Real.norm_eq_abs]
   exact h.trans_eq (by ring)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- All quantitative selection and interpolation takes place before the
 abstract state is specialized to the physical projective-limit model. -/
-set_option backward.isDefEq.respectTransparency false in
 private theorem coefficientPolarInput_powerBounds_of_raw
     {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
     [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y]
