@@ -51,7 +51,7 @@ theorem n05CanonicalJetSource_smooth_core_weak (s : ℕ) (j : Fin (s + 1))
       have hz : n05_weakReferenceAngularJet D (fun _ => 0) (fun _ => 0) j.val := by
         intro φ hφ
         simp only [zero_mul, radialAngularMean, intervalIntegral.integral_zero, mul_zero]
-      exact n05_sourceWeakJet_congr_ae hab memLp_zero memLp_zero
+      exact n05_sourceWeakJet_congr_ae hab MemLp.zero' MemLp.zero'
         (hzero 0).symm (hzero j).symm hz
   | add x y hx hy hfx hfy =>
       have hadd (k : Fin (s + 1)) :
@@ -59,7 +59,7 @@ theorem n05CanonicalJetSource_smooth_core_weak (s : ℕ) (j : Fin (s + 1))
             =ᵐ[radialPhysicalMeasure D]
               (n05CanonicalJetSource T S C K γ t s k x.val +
                 n05CanonicalJetSource T S C K γ t s k y.val) := by
-        simpa only [one_smul, one_mul] using
+        simpa only [one_smul, one_mul, Pi.add_def] using
           n05CanonicalJetSource_linear_combination_ae h hcoordinates γ t s k x.val y.val 1 1
       exact n05_sourceWeakJet_congr_ae hab
         ((hLp 0 x.val).add (hLp 0 y.val)) ((hLp j x.val).add (hLp j y.val))

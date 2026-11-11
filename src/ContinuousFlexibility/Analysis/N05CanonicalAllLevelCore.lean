@@ -24,13 +24,28 @@ def n05CanonicalAllLevelCore (T : MaterialData) (S : PhysicalSpacesData)
     ((n05CanonicalVolumeModel T S K).forget γ' t' s').range.comap
       ((n05CanonicalVolumeModel T S K).forget γ t s)
 
+set_option backward.isDefEq.respectTransparency false in
 theorem n05CanonicalAllLevelCore_mem_iff (T : MaterialData) (S : PhysicalSpacesData)
     (K : CanonicalData S) (γ t : ℝ) (s : ℕ) (v : n05CanonicalClosedSubmodule S K s) :
     v ∈ n05CanonicalAllLevelCore T S K γ t s ↔
       ∀ (γ' t' : ℝ) (s' : ℕ), VolumeMember S K (n05CanonicalVolumeModel T S K) γ' t' s'
         ((n05CanonicalVolumeModel T S K).forget γ t s v) := by
-  simp only [n05CanonicalAllLevelCore, Submodule.mem_iInf, Submodule.mem_comap,
-    LinearMap.mem_range, VolumeMember]
+  simp only [n05CanonicalAllLevelCore, Submodule.mem_iInf]
+  constructor
+  · intro hv γ' t' s'
+    have hmem : (n05CanonicalVolumeModel T S K).forget γ t s v ∈
+        ((n05CanonicalVolumeModel T S K).forget γ' t' s').range :=
+      (Submodule.mem_comap
+        (f := (n05CanonicalVolumeModel T S K).forget γ t s)
+        (p := ((n05CanonicalVolumeModel T S K).forget γ' t' s').range)).mp (hv γ' t' s')
+    exact (LinearMap.mem_range
+      (f := (n05CanonicalVolumeModel T S K).forget γ' t' s')).mp hmem
+  · intro hv γ' t' s'
+    exact (Submodule.mem_comap
+      (f := (n05CanonicalVolumeModel T S K).forget γ t s)
+      (p := ((n05CanonicalVolumeModel T S K).forget γ' t' s').range)).mpr
+        ((LinearMap.mem_range
+          (f := (n05CanonicalVolumeModel T S K).forget γ' t' s')).mpr (hv γ' t' s'))
 
 theorem n05CanonicalSmoothSingle_forget (T : MaterialData) (S : PhysicalSpacesData)
     (K : CanonicalData S) (γ t : ℝ) (m s : ℕ)
@@ -65,18 +80,42 @@ theorem n05CanonicalSmoothSingle_allLevelMember {D : ReferenceData} {T : Materia
     VolumeMember S K (n05CanonicalVolumeModel T S K) γ' t' r
       ((n05CanonicalVolumeModel T S K).forget γ t s
         (n05CanonicalSmoothSingle S K m s hφ.1 hφ.2.1 he)) := by
+  have hf : ContDiff ℝ ∞ φ := hφ.1
+  have hp : Function.Periodic φ (0, Real.pi) := hφ.2.1
+  change ∃ v : n05CanonicalClosedSubmodule S K r,
+    (n05CanonicalVolumeModel T S K).forget γ' t' r v =
+      (n05CanonicalVolumeModel T S K).forget γ t s
+        (n05CanonicalSmoothSingle S K m s hf hp he)
   let c : ℝ := n05CanonicalSampleWeight T S K γ t m /
     n05CanonicalSampleWeight T S K γ' t' m
-  refine ⟨c • n05CanonicalSmoothSingle S K m r hφ.1 hφ.2.1 he, ?_⟩
-  rw [map_smul]
+  refine ⟨c • n05CanonicalSmoothSingle S K m r hf hp he, ?_⟩
+  refine (map_smul ((n05CanonicalVolumeModel T S K).forget γ' t' r) c
+    (n05CanonicalSmoothSingle S K m r hf hp he)).trans ?_
   funext l
+  change c • ((n05CanonicalVolumeModel T S K).forget γ' t' r
+    (n05CanonicalSmoothSingle S K m r hf hp he) l) =
+      (n05CanonicalVolumeModel T S K).forget γ t s
+        (n05CanonicalSmoothSingle S K m s hf hp he) l
   by_cases hl : l = m
   · subst l
-    simp only [Pi.smul_apply, n05CanonicalSmoothSingle_forget, smul_smul]
+    have hleft : (n05CanonicalVolumeModel T S K).forget γ' t' r
+        (n05CanonicalSmoothSingle S K m r hf hp he) m =
+          n05CanonicalSampleWeight T S K γ' t' m • n05CanonicalTestL2 hφ :=
+      n05CanonicalSmoothSingle_forget T S K γ' t' m r hφ he
+    have hright : (n05CanonicalVolumeModel T S K).forget γ t s
+        (n05CanonicalSmoothSingle S K m s hf hp he) m =
+          n05CanonicalSampleWeight T S K γ t m • n05CanonicalTestL2 hφ :=
+      n05CanonicalSmoothSingle_forget T S K γ t m s hφ he
+    rw [hleft, hright, smul_smul]
     apply congrArg (fun z : ℝ => z • n05CanonicalTestL2 hφ)
     exact div_mul_cancel₀ _ (n05CanonicalSampleWeight_pos hT hPart S K γ' t' m).ne'
-  · simp only [Pi.smul_apply, n05CanonicalSmoothSingle_forget_ne T S K γ' t' m r hφ he hl,
-      n05CanonicalSmoothSingle_forget_ne T S K γ t m s hφ he hl, smul_zero]
+  · have hleft : (n05CanonicalVolumeModel T S K).forget γ' t' r
+        (n05CanonicalSmoothSingle S K m r hf hp he) l = 0 :=
+      n05CanonicalSmoothSingle_forget_ne T S K γ' t' m r hφ he hl
+    have hright : (n05CanonicalVolumeModel T S K).forget γ t s
+        (n05CanonicalSmoothSingle S K m s hf hp he) l = 0 :=
+      n05CanonicalSmoothSingle_forget_ne T S K γ t m s hφ he hl
+    rw [hleft, hright, smul_zero]
 
 theorem n05CanonicalSmoothSingle_mem_allLevelCore {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (hPart : RadialPartition D) (S : PhysicalSpacesData)
