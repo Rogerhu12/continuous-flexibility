@@ -84,7 +84,7 @@ theorem smoothDirections_stateFlowGraph_D_one
     (p : X × ℝ) (v : Fin 1 → X × ℝ) :
     (smoothDirections_stateFlowGraph J).D 1 p v = ((v 0).1, J.D 1 p v) := by
   simp only [smoothDirections_stateFlowGraph_D_apply, continuousLinearJets,
-    ContinuousMultilinearMap.ofSubsingleton_apply_apply, ContinuousLinearMap.fst_apply]
+    ContinuousMultilinearMap.ofSubsingleton_apply_apply, ContinuousLinearMap.coe_fst']
 
 theorem smoothDirections_stateFlowGraph_D_succ_succ
     (J : SmoothDirections (U ×ˢ (univ : Set ℝ)) Θ)

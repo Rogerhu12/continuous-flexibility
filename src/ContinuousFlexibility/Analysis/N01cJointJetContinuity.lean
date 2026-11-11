@@ -64,7 +64,8 @@ theorem continuous_multilinearSeminormDifferenceMajorant {n : ℕ}
   apply hp.comp
   by_cases hji : j = i
   · subst j
-    simpa only [Function.update_same] using (continuous_apply i).sub continuous_const
+    simpa using ((continuous_apply i).sub continuous_const :
+      Continuous (fun v : Fin n → E => v i - v₀ i))
   · simp only [Function.update_of_ne hji, multilinearReplaceBefore]
     by_cases hlt : j.val < i.val
     · simpa only [if_pos hlt] using continuous_apply j
@@ -78,7 +79,7 @@ theorem multilinearSeminormDifferenceMajorant_self {n : ℕ}
   intro i _
   have hp : (∏ j : Fin n,
       p ((Function.update (multilinearReplaceBefore v₀ v₀ i.val) i (v₀ i - v₀ i)) j)) = 0 :=
-    Finset.prod_eq_zero (Finset.mem_univ i) (by simp only [Function.update_same, sub_self, map_zero])
+    Finset.prod_eq_zero (Finset.mem_univ i) (by simp)
   rw [hp, mul_zero]
 
 theorem abs_multilinear_sub_le_seminormDifferenceMajorant {n : ℕ}
@@ -101,14 +102,21 @@ theorem continuousAt_multilinearEvaluation_of_uniform_seminormBound
     ContinuousAt (fun z : T × (Fin n → E) => A z.1 z.2) (t₀, v₀) := by
   let M : (Fin n → E) → ℝ := multilinearSeminormDifferenceMajorant p C v₀
   let g : T × (Fin n → E) → ℝ := fun z => M z.2 + |A z.1 v₀ - A t₀ v₀|
+  have hfixed' : ContinuousAt
+      (fun z : T × (Fin n → E) => A z.1 v₀) (t₀, v₀) :=
+    hfixed.comp' (f := fun z : T × (Fin n → E) => z.1)
+      (x := (t₀, v₀)) continuousAt_fst
+  have hdiff : ContinuousAt
+      (fun z : T × (Fin n → E) => |A z.1 v₀ - A t₀ v₀|) (t₀, v₀) :=
+    (hfixed'.sub continuousAt_const).abs
   have hg : ContinuousAt g (t₀, v₀) :=
     ((continuous_multilinearSeminormDifferenceMajorant p hp C v₀).comp
-      continuous_snd).continuousAt.add
-        ((hfixed.comp continuousAt_fst).sub_const (A t₀ v₀)).abs
+      continuous_snd).continuousAt.add hdiff
   have hg0 : g (t₀, v₀) = 0 := by
     simp only [g, M, multilinearSeminormDifferenceMajorant_self, sub_self, abs_zero, add_zero]
   apply continuousAt_of_eventually_abs_sub_le hg hg0
-  have hnear := continuousAt_fst.eventually hbound
+  have hnear := (continuousAt_fst : ContinuousAt
+    (fun z : T × (Fin n → E) => z.1) (t₀, v₀)).eventually hbound
   filter_upwards [hnear] with z hz
   calc
     |A z.1 z.2 - A t₀ v₀| =
@@ -135,10 +143,14 @@ theorem continuousAt_of_uniform_seminorm_variation
     ContinuousAt f (x₀, t₀) := by
   let g : E × T → ℝ := fun z =>
     p (z.1 - x₀) * B z.2 + |f (x₀, z.2) - f (x₀, t₀)|
+  have hp' : ContinuousAt (fun z : E × T => p (z.1 - x₀)) (x₀, t₀) :=
+    (hp.comp (continuous_fst.sub continuous_const)).continuousAt
+  have hB' : ContinuousAt (fun z : E × T => B z.2) (x₀, t₀) :=
+    hB.comp' (f := fun z : E × T => z.2) (x := (x₀, t₀)) continuousAt_snd
+  have hfixed' : ContinuousAt (fun z : E × T => f (x₀, z.2)) (x₀, t₀) :=
+    hfixed.comp' (f := fun z : E × T => z.2) (x := (x₀, t₀)) continuousAt_snd
   have hg : ContinuousAt g (x₀, t₀) :=
-    ((hp.continuousAt.comp (continuousAt_fst.sub_const x₀)).mul
-      (hB.comp continuousAt_snd)).add
-        ((hfixed.comp continuousAt_snd).sub_const (f (x₀, t₀))).abs
+    (hp'.mul hB').add ((hfixed'.sub continuousAt_const).abs)
   have hg0 : g (x₀, t₀) = 0 := by
     simp only [g, sub_self, map_zero, zero_mul, abs_zero, add_zero]
   apply continuousAt_of_eventually_abs_sub_le hg hg0
@@ -219,8 +231,11 @@ theorem continuousAt_stateJetEvaluation_of_nextJet_bound
               (Fin.cons (z.1 - x₀) z.2.2))
     have he : x₀ + (z.1 - x₀) = z.1 := by abel
     simpa only [he] using hb
-  exact hjoint.comp ((continuous_fst.fst).prodMk
-    ((continuous_fst.snd).prodMk continuous_snd)).continuousAt
+  have hassoc : Continuous (fun z : (E × T) × (Fin n → E) =>
+      (z.1.1, (z.1.2, z.2))) :=
+    (continuous_fst.fst).prodMk ((continuous_fst.snd).prodMk continuous_snd)
+  exact hjoint.comp' (f := fun z : (E × T) × (Fin n → E) =>
+    (z.1.1, (z.1.2, z.2))) (x := ((x₀, t₀), v₀)) hassoc.continuousAt
 
 end ParameterVariation
 

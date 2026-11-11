@@ -66,7 +66,8 @@ def smoothDirections_fixedDirection {U : Set E} {f : E → F}
     rfl
   continuous := by
     intro n
-    have hsnoc : Continuous (fun p : E × (Fin n → E) => Fin.snoc p.2 w) := by
+    have hsnoc : Continuous (fun p : E × (Fin n → E) =>
+        (Fin.snoc p.2 w : Fin (n + 1) → E)) := by
       apply continuous_pi
       intro i
       refine Fin.lastCases ?_ (fun j => ?_) i
@@ -173,7 +174,8 @@ def smoothDirections_stateSlice {U : Set E} {f : E × ℝ → ℝ}
   derivative := by
     intro n x hx v w
     have he : (fun i : Fin (n + 1) => ((Fin.cons w v) i, (0 : ℝ))) =
-        Fin.cons (w, (0 : ℝ)) (fun i => (v i, (0 : ℝ))) := by
+        (Fin.cons (w, (0 : ℝ)) (fun i : Fin n => (v i, (0 : ℝ))) :
+          Fin (n + 1) → E × ℝ) := by
       funext i
       refine Fin.cases ?_ (fun j => ?_) i <;> rfl
     simpa only [HasProjectiveLineDerivAt,

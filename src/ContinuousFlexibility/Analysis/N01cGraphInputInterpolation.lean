@@ -28,8 +28,11 @@ theorem oneHighVariationWeight_le_uniformHigh
     (hhi : ∀ i, p high (v i) ≤ M) :
     oneHighVariationWeight p base high x v ≤ ((k : ℝ) + 2) * M := by
   classical
-  have hprod (t : Finset (Fin k)) : (∏ i ∈ t, p base (v i)) ≤ 1 :=
-    Finset.prod_le_one (fun i _ => apply_nonneg _ _) (fun i _ => hlo i)
+  have hprod (t : Finset (Fin k)) : (∏ i ∈ t, p base (v i)) ≤ 1 := by
+    calc
+      _ ≤ ∏ _i ∈ t, (1 : ℝ) :=
+        Finset.prod_le_prod₀ (fun i _ => apply_nonneg _ _) (fun i _ => hlo i)
+      _ = 1 := by simp
   have hfirst : (1 + p high x) * ∏ i, p base (v i) ≤ 1 + M := by
     calc
       _ ≤ (1 + p high x) * 1 :=

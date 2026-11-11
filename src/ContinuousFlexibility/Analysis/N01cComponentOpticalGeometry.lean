@@ -46,7 +46,8 @@ theorem componentOpticalSquare_contDiffOn
     {C : NonlinearGeometryData S} (hA : N01PartA D T S C)
     (m : ℕ) (z : AnnularState S × ℝ) :
     ContDiffOn ℝ ∞ (componentOpticalSquare D S C m z) (Ioo D.a D.b) :=
-  (fun r hr => (referenceOpticalSquare_contDiffAt hA.1.1.choose_spec.1 hr).contDiffWithinAt).sub
+  (show ContDiffOn ℝ ∞ (referenceOpticalSquare D) (Ioo D.a D.b) from
+    fun r hr => (referenceOpticalSquare_contDiffAt hA.1.1.choose_spec.1 hr).contDiffWithinAt).sub
     (contDiffOn_const.mul (controlOpticalFactor_contDiffOn_core
       hA.1.1.choose_spec.1 hA.2.2.1 m))
 
@@ -89,7 +90,7 @@ theorem contDiffOn_componentOpticalSquare_finiteAffine
     contDiffOn_finiteAffine_linearField (fun z _ => stateKappa S z.1 m)
       (fun _ _ => K)
       (fun r hr z => by
-        simp only [K, ContinuousLinearMap.comp_apply, ContinuousLinearMap.fst_apply,
+        simp only [K, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
           stateKappaCLM_apply])
       (fun _ => contDiffOn_const) x L
   have href : ContDiffOn ℝ ∞ (referenceOpticalSquare D) (Ioo D.a D.b) :=

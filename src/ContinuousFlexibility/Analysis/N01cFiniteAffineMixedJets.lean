@@ -19,6 +19,16 @@ open scoped Topology ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem finiteAffine_smoothDirections_zero
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U : Set E} {f : E → ℝ} (J : SmoothDirections U f)
+    {x : E} (hx : x ∈ U) (v : Fin 0 → E) : J.D 0 x v = f x := by
+  have hv : v = (Fin.elim0 : Fin 0 → E) := by
+    funext i
+    exact i.elim0
+  rw [hv]
+  exact J.zero x hx
+
 section NormedSlices
 
 variable {X P : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X]
@@ -36,7 +46,7 @@ theorem contDiffOn_stateJetEvaluation
   | zero =>
       apply hf.congr
       intro z hz
-      exact smoothDirections_D_zero_apply (J z.2) hz.1 v
+      exact finiteAffine_smoothDirections_zero (J z.2) hz.1 v
   | succ n ih =>
       let H : X × P → ℝ := fun z => (J z.2).D n z.1 (Fin.tail v)
       have hH : ContDiffOn ℝ ∞ H (U ×ˢ V) := ih (Fin.tail v)
@@ -45,9 +55,11 @@ theorem contDiffOn_stateJetEvaluation
         (hH.fderiv_of_isOpen (hU.prod hV) (by simp)).clm_apply contDiffOn_const
       apply hD.congr
       intro z hz
-      have hfull := (hH.contDiffAt ((hU.prod hV).mem_nhds hz)).differentiableAt
-        (by simp : (1 : WithTop ℕ∞) ≤ ∞)
-      have hleft := hfull.hasFDerivAt.comp z.1 (hasFDerivAt_prodMk_left z.1 z.2)
+      have hfull : DifferentiableAt ℝ H z :=
+        (hH.contDiffAt ((hU.prod hV).mem_nhds hz)).differentiableAt (by simp)
+      have hleft : HasFDerivAt (fun y : X => H (y, z.2))
+          ((fderiv ℝ H z).comp (ContinuousLinearMap.inl ℝ X P)) z.1 :=
+        hfull.hasFDerivAt.comp z.1 (hasFDerivAt_prodMk_left z.1 z.2)
       have hstate := (J z.2).hasProjectiveJetsOn.hasFDerivAt_eval_finiteDimensional
         hU n (Fin.tail v) hz.1
       have he := congrArg (fun L : X →L[ℝ] ℝ => L (v 0)) (hleft.unique hstate)
@@ -105,6 +117,15 @@ section FiniteCoordinates
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+
+private theorem finiteAffine_stateJet_line_deriv
+    {U : Set E} {f : E → ℝ} (J : SmoothDirections U f)
+    (k : ℕ) {x : E} (hx : x ∈ U) (v : Fin k → E) (w : E) :
+    HasDerivAt (fun s : ℝ => J.D k (x + s • w) v)
+      (J.D (k + 1) x (Fin.cons w v)) (0 : ℝ) := by
+  apply hasDerivAt_iff_tendsto_slope_zero.mpr
+  simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,
+    zero_add, zero_smul, add_zero, smul_eq_mul] using J.derivative k x hx v w
 
 /-- The actual finite linear combination of the prescribed state
 directions, continuously mapped into the original state topology. -/
@@ -198,8 +219,10 @@ theorem contDiffOn_stateJet_line_external
     simp only [L, finiteDirectionMap_single, one_smul, Fin.cons_succ]
   have h := contDiffOn_stateJet_finiteAffine hU hf J (k + 1) x₀ L k
     (fun i => Pi.single i.succ (1 : ℝ))
-  have hd := h.comp ((e.contDiff.contDiffOn.comp contDiffOn_fst
-    (fun _ _ => mem_univ _)).prodMk contDiffOn_snd)
+  have hmap : ContDiffOn ℝ ∞ (fun z : ℝ × (ℝ × ℝ) => (e z.1, z.2))
+      (((fun t : ℝ => x₀ + t • w) ⁻¹' U) ×ˢ (univ : Set (ℝ × ℝ))) :=
+    (e.contDiff.comp contDiff_fst).contDiffOn.prodMk contDiffOn_snd
+  have hd := h.comp hmap
     (fun z hz => ⟨by simpa only [mem_preimage, he] using hz.1, mem_univ _⟩)
   simpa only [he, hv] using hd
 
@@ -220,9 +243,9 @@ theorem deriv_stateJet_angle
       have he : (fun η => (J b (t, η)).D 0 x v) =
           iteratedDeriv b (fun η => f (x, (t, η))) := by
         funext η
-        exact smoothDirections_D_zero_apply (J b (t, η)) hx v
+        exact finiteAffine_smoothDirections_zero (J b (t, η)) hx v
       rw [he, ← iteratedDeriv_succ]
-      exact (smoothDirections_D_zero_apply (J (b + 1) (t, θ)) hx v).symm
+      exact (finiteAffine_smoothDirections_zero (J (b + 1) (t, θ)) hx v).symm
   | succ k ih =>
       intro b x hx t θ v
       let V : Set ℝ := (fun s : ℝ => x + s • v 0) ⁻¹' U
@@ -238,10 +261,9 @@ theorem deriv_stateJet_angle
       have hhead : (fun η => (J b (t, η)).D (k + 1) x v) =
           fun η => deriv (fun s => H (s, η)) 0 := by
         funext η
-        have hd : HasDerivAt (fun s => (J b (t, η)).D k (x + s • v 0) (Fin.tail v))
-            ((J b (t, η)).D (k + 1) x (Fin.cons (v 0) (Fin.tail v))) 0 :=
-          hasDerivAt_iff_tendsto_slope_zero.mpr
-            ((J b (t, η)).derivative k x hx (Fin.tail v) (v 0))
+        have hd : HasDerivAt (fun s : ℝ => (J b (t, η)).D k (x + s • v 0) (Fin.tail v))
+            ((J b (t, η)).D (k + 1) x (Fin.cons (v 0) (Fin.tail v))) (0 : ℝ) :=
+          finiteAffine_stateJet_line_deriv (J b (t, η)) k hx (Fin.tail v) (v 0)
         simpa only [H, Fin.cons_self_tail] using hd.deriv.symm
       have hswap := iteratedDeriv_swap_of_contDiffOn (hV.prod isOpen_univ) hH
         1 1 (show (0, θ) ∈ V ×ˢ (univ : Set ℝ) from ⟨h0, mem_univ _⟩)
@@ -250,10 +272,9 @@ theorem deriv_stateJet_angle
         filter_upwards [hV.mem_nhds h0] with s hs
         exact ih b (x + s • v 0) hs t θ (Fin.tail v)
       have hd : HasDerivAt
-          (fun s => (J (b + 1) (t, θ)).D k (x + s • v 0) (Fin.tail v))
-          ((J (b + 1) (t, θ)).D (k + 1) x (Fin.cons (v 0) (Fin.tail v))) 0 :=
-        hasDerivAt_iff_tendsto_slope_zero.mpr
-          ((J (b + 1) (t, θ)).derivative k x hx (Fin.tail v) (v 0))
+          (fun s : ℝ => (J (b + 1) (t, θ)).D k (x + s • v 0) (Fin.tail v))
+          ((J (b + 1) (t, θ)).D (k + 1) x (Fin.cons (v 0) (Fin.tail v))) (0 : ℝ) :=
+        finiteAffine_stateJet_line_deriv (J (b + 1) (t, θ)) k hx (Fin.tail v) (v 0)
       calc
         _ = deriv (fun η => deriv (fun s => H (s, η)) 0) θ := by rw [hhead]
         _ = deriv (fun s => deriv (fun η => H (s, η)) θ) 0 := by
@@ -284,12 +305,21 @@ private theorem hasDerivAt_diagonal_of_partials
     {A B : ℝ} (hA : HasDerivAt (fun s => H (s, 0)) A 0)
     (hB : HasDerivAt (fun s => H (0, s)) B 0) :
     HasDerivAt (fun s => H (s, s)) (A + B) 0 := by
-  have hleft := hH.hasFDerivAt.comp_hasDerivAt 0
-    ((hasDerivAt_id (0 : ℝ)).prodMk (hasDerivAt_const (0 : ℝ) (0 : ℝ)))
-  have hright := hH.hasFDerivAt.comp_hasDerivAt 0
-    ((hasDerivAt_const (0 : ℝ) (0 : ℝ)).prodMk (hasDerivAt_id (0 : ℝ)))
-  have hdiag := hH.hasFDerivAt.comp_hasDerivAt 0
-    ((hasDerivAt_id (0 : ℝ)).prodMk (hasDerivAt_id (0 : ℝ)))
+  have hleft : HasDerivAt (fun s : ℝ => H (s, 0))
+      (fderiv ℝ H (0, 0) ((1 : ℝ), 0)) (0 : ℝ) := by
+    simpa only [Function.comp_def, id_eq] using
+      (hH.hasFDerivAt.comp_hasDerivAt (f := fun s : ℝ => (s, (0 : ℝ))) (0 : ℝ)
+        ((hasDerivAt_id (0 : ℝ)).prodMk (hasDerivAt_const (0 : ℝ) (0 : ℝ))))
+  have hright : HasDerivAt (fun s : ℝ => H (0, s))
+      (fderiv ℝ H (0, 0) ((0 : ℝ), 1)) (0 : ℝ) := by
+    simpa only [Function.comp_def, id_eq] using
+      (hH.hasFDerivAt.comp_hasDerivAt (f := fun s : ℝ => ((0 : ℝ), s)) (0 : ℝ)
+        ((hasDerivAt_const (0 : ℝ) (0 : ℝ)).prodMk (hasDerivAt_id (0 : ℝ))))
+  have hdiag : HasDerivAt (fun s : ℝ => H (s, s))
+      (fderiv ℝ H (0, 0) ((1 : ℝ), 1)) (0 : ℝ) := by
+    simpa only [Function.comp_def, id_eq] using
+      (hH.hasFDerivAt.comp_hasDerivAt (f := fun s : ℝ => (s, s)) (0 : ℝ)
+        ((hasDerivAt_id (0 : ℝ)).prodMk (hasDerivAt_id (0 : ℝ))))
   have hvalue : fderiv ℝ H (0, 0) ((1 : ℝ), 1) = A + B := by
     have hsum : ((1 : ℝ), 0) + ((0 : ℝ), 1) = ((1 : ℝ), 1) := by
       ext <;> simp
@@ -339,24 +369,28 @@ theorem hasProjectiveLineDerivAt_stateAngleEvaluation
         (contDiffAt_const.add (contDiffAt_snd.mul contDiffAt_const))))
   have hstate : HasDerivAt (fun s => H (s, 0))
       ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v)) 0 := by
-    have hd : HasDerivAt (fun s => (J b (t, θ)).D k (x + s • w.1) v)
-        ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v)) 0 :=
-      hasDerivAt_iff_tendsto_slope_zero.mpr ((J b (t, θ)).derivative k x hx v w.1)
+    have hd : HasDerivAt (fun s : ℝ => (J b (t, θ)).D k (x + s • w.1) v)
+        ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v)) (0 : ℝ) :=
+      finiteAffine_stateJet_line_deriv (J b (t, θ)) k hx v w.1
     simpa only [H, zero_mul, add_zero] using hd
   have hangle : HasDerivAt (fun s => H (0, s))
       (w.2 * (J (b + 1) (t, θ)).D k x v) 0 := by
     have hinner : HasDerivAt (fun s : ℝ => θ + s * w.2) w.2 0 := by
-      simpa only [zero_add, one_mul] using
+      simpa only [Pi.add_def, id_eq, zero_add, one_mul] using
         (hasDerivAt_const (0 : ℝ) θ).add ((hasDerivAt_id (0 : ℝ)).mul_const w.2)
     have houter : HasDerivAt (fun η => (J b (t, η)).D k x v)
         ((J (b + 1) (t, θ)).D k x v) (θ + (0 : ℝ) * w.2) := by
       simpa only [zero_mul, add_zero] using hasDerivAt_stateJet_angle hU hf J b k hx t θ v
     have hd := houter.comp 0 hinner
-    simpa only [H, zero_smul, add_zero, mul_comm] using hd
-  apply hasDerivAt_iff_tendsto_slope_zero.mp
-  change HasDerivAt
-    (fun s : ℝ => (J b (t, θ + s * w.2)).D k (x + s • w.1) v) _ 0
-  exact hasDerivAt_diagonal_of_partials (hH.differentiableAt (by simp)) hstate hangle
+    simpa only [Function.comp_def, H, zero_smul, add_zero, mul_comm] using hd
+  have hd : HasDerivAt
+      (fun s : ℝ => (J b (t, θ + s * w.2)).D k (x + s • w.1) v)
+      ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v) +
+        w.2 * (J (b + 1) (t, θ)).D k x v) (0 : ℝ) :=
+    hasDerivAt_diagonal_of_partials (hH.differentiableAt (by simp)) hstate hangle
+  simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,
+    Prod.smul_mk, Prod.mk_add_mk, zero_add, zero_smul, zero_mul, add_zero,
+    smul_eq_mul] using hasDerivAt_iff_tendsto_slope_zero.mp hd
 
 end JointLines
 

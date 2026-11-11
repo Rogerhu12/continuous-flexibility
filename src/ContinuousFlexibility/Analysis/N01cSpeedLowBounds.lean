@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction
+import ContinuousFlexibility.Analysis.N01cStateInterpolation
 import ContinuousFlexibility.Analysis.N01cMaterialAbsorption
 import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
 import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra

@@ -39,8 +39,9 @@ theorem constantDirectionalPartial_commute {f : X → Y}
   funext x
   have hd : DifferentiableAt ℝ (fderiv ℝ f) x :=
     ((hf.fderiv_right (by simp) : ContDiff ℝ ∞ (fderiv ℝ f)).differentiable (by simp)) x
-  simp only [constantDirectionalPartial, fderiv_clm_apply hd differentiableAt_const,
-    fderiv_const, ContinuousLinearMap.comp_zero, zero_add, ContinuousLinearMap.flip_apply]
+  simp only [constantDirectionalPartial, fderiv_clm_apply hd (differentiableAt_const e),
+    fderiv_clm_apply hd (differentiableAt_const d), fderiv_const,
+    ContinuousLinearMap.comp_zero, zero_add, ContinuousLinearMap.flip_apply]
   exact (hf.contDiffAt.isSymmSndFDerivAt (by simp)).eq d e
 
 /-- An actual word of constant-direction differential operators. -/
@@ -51,7 +52,7 @@ def directionalWord : {n : ℕ} → (Fin n → X) → (X → Y) → X → Y
 theorem contDiff_directionalWord {f : X → Y} (hf : ContDiff ℝ ∞ f)
     {n : ℕ} (v : Fin n → X) :
     ContDiff ℝ ∞ (directionalWord v f) := by
-  induction n generalizing v with
+  induction n with
   | zero => exact hf
   | succ n ih => exact contDiff_constantDirectionalPartial (ih (Fin.tail v)) (v 0)
 
@@ -59,7 +60,7 @@ theorem constantDirectionalPartial_directionalWord {f : X → Y}
     (hf : ContDiff ℝ ∞ f) (d : X) {n : ℕ} (v : Fin n → X) :
     constantDirectionalPartial d (directionalWord v f) =
       directionalWord v (constantDirectionalPartial d f) := by
-  induction n generalizing v with
+  induction n with
   | zero => rfl
   | succ n ih =>
     change constantDirectionalPartial d
@@ -71,7 +72,7 @@ theorem constantDirectionalPartial_directionalWord {f : X → Y}
 theorem directionalWord_eq_iteratedFDeriv {f : X → Y}
     (hf : ContDiff ℝ ∞ f) {n : ℕ} (v : Fin n → X) (x : X) :
     directionalWord v f x = iteratedFDeriv ℝ n f x v := by
-  induction n generalizing v x with
+  induction n generalizing x with
   | zero => exact (iteratedFDeriv_zero_apply _).symm
   | succ n ih =>
     have he : directionalWord (Fin.tail v) f =
@@ -100,7 +101,7 @@ theorem iteratedFDeriv_parameter_slice {F : E × ℝ → ℝ}
     smoothDirectionsOfJets isOpen_univ (fun k => iteratedFDeriv ℝ k F)
       (hasProjectiveJetsOn_of_contDiffOn isOpen_univ hF.contDiffOn)
   have h := smoothDirections_iteratedFDeriv_finiteAffine J (0, t)
-    (ContinuousLinearMap.inl ℝ E ℝ) n (mem_univ _) v
+    (ContinuousLinearMap.inl ℝ E ℝ) n (y := q) (mem_univ _) v
   simpa only [ContinuousLinearMap.inl_apply, Prod.mk_add_mk, zero_add, add_zero] using h
 
 /-- Move the true time derivative through any number of actual
@@ -130,6 +131,13 @@ theorem hasDerivAt_iteratedFDeriv_parameter_time {F : E × ℝ → ℝ}
   exact (hH.differentiable (by simp) (q, t)).hasFDerivAt.comp_hasDerivAt t
     ((hasDerivAt_const t q).prodMk (hasDerivAt_id' t))
 
+end ParameterTime
+
+section GlobalParameterTime
+
+variable {E : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
+  [FiniteDimensional ℝ E]
+
 /-- Every actual finite-parameter jet satisfies the differentiated
 classical time equation. All parameter regularity is proved from the
 given speed and the classical trajectories. -/
@@ -142,7 +150,8 @@ theorem globalCircleVectorTrajectory_hasDerivAt_parameterJet_time
     (n : ℕ) (q : E) (t : ℝ) (v : Fin n → E) :
     HasDerivAt (fun r => iteratedFDeriv ℝ n (fun x => Θ (x, r)) q v)
       (iteratedFDeriv ℝ n (fun x => G (x, (t, Θ (x, t)))) q v) t := by
-  have hs := contDiff_globalCircleVectorTrajectory hG hΘ hinit hflow
+  have hs : ContDiff ℝ ∞ Θ :=
+    contDiff_globalCircleVectorTrajectory (E := E) hG hΘ hinit hflow
   have he : (fun x => fderiv ℝ Θ (x, t) (0, 1)) =
       fun x => G (x, (t, Θ (x, t))) := by
     funext x
@@ -160,6 +169,6 @@ theorem globalCircleVectorTrajectory_parameterJet_initial
   rw [he, iteratedFDeriv_succ_const]
   rfl
 
-end ParameterTime
+end GlobalParameterTime
 
 end ContinuousFlexibility.Analysis

@@ -66,8 +66,8 @@ theorem exists_oneHighAggregateProductBounds
         simpa only [Nat.add_zero] using
           hcb ⟨a j, Nat.lt_succ_of_le (hai j)⟩ (x i) (hx i)
       have harg : 1 + p (s + loss) (x i) ≤ R :=
-        add_le_add_left
-          (Finset.single_le_sum (fun l _ => apply_nonneg _ _) (Finset.mem_univ i)) 1
+        add_le_add (le_rfl : (1 : ℝ) ≤ 1)
+          (Finset.single_le_sum (fun l _ => apply_nonneg _ _) (Finset.mem_univ i))
       have hpow := Real.rpow_le_rpow (by positivity : 0 ≤ 1 + p (s + loss) (x i)) harg hθ
       exact hb.trans (mul_le_mul (hcM _) hpow
         (Real.rpow_nonneg (by positivity) _) hM)
@@ -135,17 +135,20 @@ theorem exists_flowVariationPolynomialNormalization
     have horders : ∑ j, orders j ≤ S := by
       simp only [orders, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
         Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul,
-        S, Nat.add_mul, Nat.one_mul]
+        S, Nat.add_mul, Nat.one_mul, Nat.cast_id]
       omega
-    have hxw : ∀ i : Fin (k + 1), p base ((Fin.cons x w) i) ≤ 1 :=
-      Fin.cases ((hp hbase x).trans hx)
-        (fun i => (hp hbase (w i)).trans (hw i).le)
-    have hpoly := hb orders horders (Fin.cons x w) hxw
+    let xw : Fin (k + 1) → E := Fin.cons x w
+    have hxw : ∀ i : Fin (k + 1), p base (xw i) ≤ 1 := by
+      intro i
+      refine Fin.cases ?_ (fun j => ?_) i
+      · simpa only [xw, Fin.cons_zero] using (hp hbase x).trans hx
+      · simpa only [xw, Fin.cons_succ] using (hp hbase (w j)).trans (hw j).le
+    have hpoly := hb orders horders xw hxw
     have hpoly' :
         (((1 + p (s + offset) x) + ∑ i, p (s + offset) (w i)) *
           (((1 + p offset x) + ∑ i, p offset (w i)) ^ degree)) ≤
         C * ((1 + p (S + loss) x) + ∑ i, p (S + loss) (w i)) := by
-      simpa only [orders, Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ,
+      simpa only [orders, xw, Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ,
         Fin.sum_univ_succ, Finset.prod_const, Finset.card_univ, Fintype.card_fin,
         ← add_assoc] using hpoly
     calc

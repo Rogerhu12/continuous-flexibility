@@ -91,7 +91,7 @@ theorem circleProductJet_l2_le {k : ℕ} (f : Fin (k + 1) → ℝ → ℝ)
       (fun i => periodicCircleJet_hasDerivAt (f i) (hp i) (hf i))
       (radialLeibnizOrders k n d)
       ((radialLeibnizOrders_sum k n d).le.trans hns)
-  rw [circleProductJet_leibniz f hp hf n]
+  rw [circleProductJet_leibniz f hp hf n, ContinuousMap.coe_sum]
   apply (circle_l2_sum_le (fun d : RadialLeibnizIndex k n =>
     (radialLeibnizCoefficient k n d : ℝ) •
       ∏ i, periodicCircleJet (f i) (hp i) (hf i)
@@ -102,7 +102,10 @@ theorem circleProductJet_l2_le {k : ℕ} (f : Fin (k + 1) → ℝ → ℝ)
           (radialLeibnizOrders k n d i)) 2 AddCircle.haarAddCircle).toReal := by
       apply Finset.sum_congr rfl
       intro d _
-      exact circle_l2_const_smul _ (Nat.cast_nonneg _)
+      simpa only [ContinuousMap.coe_smul, ContinuousMap.coe_prod] using
+        circle_l2_const_smul
+          (∏ i, periodicCircleJet (f i) (hp i) (hf i) (radialLeibnizOrders k n d i))
+          (Nat.cast_nonneg (radialLeibnizCoefficient k n d))
     _ ≤ ∑ d : RadialLeibnizIndex k n, (radialLeibnizCoefficient k n d : ℝ) * W :=
       Finset.sum_le_sum (fun d _ => mul_le_mul_of_nonneg_left (hterm d) (Nat.cast_nonneg _))
     _ = _ := by rw [← Finset.sum_mul]; rfl

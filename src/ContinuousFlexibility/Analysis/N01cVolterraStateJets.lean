@@ -84,14 +84,16 @@ def flowGraphVariationSlot (n : ℕ) (B : E [×n]→L[ℝ] ℝ) :
 
 theorem flowGraphVariationSlot_one_zero (v : Fin 1 → E) :
     flowGraphVariationSlot 1 (0 : E [×1]→L[ℝ] ℝ) v = (v 0, 0) := by
-  change (v 0, 0) + 0 = _
-  exact add_zero _
+  simp only [flowGraphVariationSlot_apply, flowParameterIdentityJet,
+    ContinuousMultilinearMap.ofSubsingleton_apply_apply, ContinuousLinearMap.inl_apply,
+    ContinuousMultilinearMap.zero_apply, Prod.mk_add_mk, add_zero, zero_add]
 
 theorem flowGraphVariationSlot_succ_succ_zero (n : ℕ) :
     flowGraphVariationSlot (n + 2) (0 : E [×(n + 2)]→L[ℝ] ℝ) = 0 := by
-  ext v
-  change (0 : E × ℝ) + 0 = 0
-  exact add_zero _
+  apply ContinuousMultilinearMap.ext
+  intro v
+  simp only [flowGraphVariationSlot_apply, flowParameterIdentityJet,
+    ContinuousMultilinearMap.zero_apply, Prod.mk_add_mk, add_zero, zero_add]
 
 theorem ContinuousStateVariation.continuous_graphSlot {U : Set E} {n : ℕ}
     (B : ContinuousStateVariation U n) :
@@ -173,8 +175,11 @@ theorem continuousOn_truncatedFlowForcing {U : Set E}
   simp only [truncatedFlowForcing_apply]
   apply continuousOn_finsetSum Finset.univ
   intro c _
-  have hbase := (continuousOn_flowTrajectoryGraph hΘ).comp
-    continuous_fst.continuousOn (fun p hp => hp.1)
+  have hbase : ContinuousOn
+      (fun p : (E × ℝ) × (Fin N → E) => flowTrajectoryGraph Θ p.1)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) :=
+    (continuousOn_flowTrajectoryGraph hΘ).comp
+      continuous_fst.continuousOn (fun p hp => hp.1)
   have hslots : ContinuousOn
       (fun p : (E × ℝ) × (Fin N → E) =>
         fun i => flowGraphVariationSlot (c.partSize i)
