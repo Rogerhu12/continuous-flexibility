@@ -145,13 +145,17 @@ theorem MatchedPieces.exists_matchingMatrixInverse
     have hleft : I * K = (1 : Matrix (Fin 2) (Fin 2) ℝ) :=
       Matrix.nonsing_inv_mul K hdet
     have hij := congrFun (congrFun hleft i) j
-    simpa only [radialMatrixProduct, hK, radialMatrixIdentity,
-      Matrix.mul_apply, Matrix.one_apply] using hij
+    change (∑ k, I i k * (radialMatrixProduct M.A M.Db k j - M.B k j)) =
+      (if i = j then 1 else 0)
+    simp_rw [hK]
+    simpa only [Matrix.mul_apply, Matrix.one_apply] using hij
   · funext i j
     have hright : K * I = (1 : Matrix (Fin 2) (Fin 2) ℝ) :=
       Matrix.mul_nonsing_inv K hdet
     have hij := congrFun (congrFun hright i) j
-    simpa only [radialMatrixProduct, hK, radialMatrixIdentity,
-      Matrix.mul_apply, Matrix.one_apply] using hij
+    change (∑ k, (radialMatrixProduct M.A M.Db i k - M.B i k) * I k j) =
+      (if i = j then 1 else 0)
+    simp_rw [hK]
+    simpa only [Matrix.mul_apply, Matrix.one_apply] using hij
 
 end ContinuousFlexibility.Blueprint

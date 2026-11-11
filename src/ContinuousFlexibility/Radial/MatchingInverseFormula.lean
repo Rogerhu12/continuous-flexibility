@@ -33,9 +33,9 @@ private def modeSourceRestrictionLinear (D : ReferenceData) (s : Set ℝ)
         Lp.coeFn_add F.1 H.1, Lp.coeFn_add (T F).1 (T H).1]
         with r hsum hF hH hFH hTH
       change (T (F + H)).1 r = ((T F).1 + (T H).1) r
-      rw [hTH, hsum, hF, hH]
+      rw [hTH, Pi.add_apply, hsum, hF, hH]
       by_cases hr : r ∈ s
-      · simpa only [Set.indicator_of_mem hr] using hFH
+      · simpa only [Set.indicator_of_mem hr, Pi.add_apply] using hFH
       · simp only [Set.indicator_of_notMem hr, add_zero]
     · change (T (F + H)).2 = (T F).2 + (T H).2
       simp only [hscalar]
@@ -48,9 +48,9 @@ private def modeSourceRestrictionLinear (D : ReferenceData) (s : Set ℝ)
         Lp.coeFn_smul c F.1, Lp.coeFn_smul c (T F).1]
         with r hprod hF hcF hcT
       change (T (c • F)).1 r = (c • (T F).1) r
-      rw [hcT, hprod, hF]
+      rw [hcT, Pi.smul_apply, hprod, hF]
       by_cases hr : r ∈ s
-      · simpa only [Set.indicator_of_mem hr] using hcF
+      · simpa only [Set.indicator_of_mem hr, Pi.smul_apply] using hcF
       · simp only [Set.indicator_of_notMem hr, smul_zero]
     · change (T (c • F)).2 = c • (T F).2
       simp only [hscalar]
@@ -68,7 +68,7 @@ private theorem modeSourceRestriction_norm (D : ReferenceData) (s : Set ℝ)
     filter_upwards [hfield F] with r hr
     rw [hr]
     by_cases hs : r ∈ s
-    · simp only [Set.indicator_of_mem hs]
+    · simp only [Set.indicator_of_mem hs, le_refl]
     · simpa only [Set.indicator_of_notMem hs, norm_zero] using norm_nonneg (F.1 r)
   have hsecond : ‖(T F).2‖ ≤ ‖F.2‖ := by
     rw [hscalar]
@@ -101,7 +101,8 @@ def matchingSourceInnerCLM (D : ReferenceData) (M : RadialMatchingData D)
   refine modeSourceRestrictionCLM D (Ioo M.innerLeft M.innerRight) true
     M.sourceInner ?_ ?_
   · intro F
-    simpa only [Set.indicator] using (hM.2.2.2.1 F).2.2.1
+    filter_upwards [(hM.2.2.2.1 F).2.2.1] with r hr
+    simpa only [Set.indicator_apply] using hr
   · intro F
     simpa using (hM.2.2.2.1 F).1
 
@@ -113,8 +114,8 @@ def matchingSourceOuterCLM (D : ReferenceData) (M : RadialMatchingData D)
   refine modeSourceRestrictionCLM D (Ioo M.innerLeft M.innerRight)ᶜ false
     M.sourceOuter ?_ ?_
   · intro F
-    simpa only [Set.indicator, Set.mem_compl_iff, ite_not] using
-      (hM.2.2.2.1 F).2.2.2
+    filter_upwards [(hM.2.2.2.1 F).2.2.2] with r hr
+    simpa only [Set.indicator_apply, Set.mem_compl_iff, ite_not] using hr
   · intro F
     simpa using (hM.2.2.2.1 F).2.1
 
