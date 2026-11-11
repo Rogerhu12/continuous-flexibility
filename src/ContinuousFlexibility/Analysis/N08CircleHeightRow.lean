@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N08CircleDerivative
+import ContinuousFlexibility.Analysis.N08StateLinearOperations
 import ContinuousFlexibility.Analysis.N08RadialFlow
 
 /-!
@@ -55,21 +56,22 @@ theorem n08CircleResidual_height_zero_hasLineDerivAt
     HasProjectiveLineDerivAt (fun y => (n08CircleResidual hS hR (y, 0)).val)
       0 x (η, (0, (0, 0))) := by
   have hc : Continuous (fun t : ℝ =>
-      (n08_stateProjection hS (x + t • (η, (0, (0, 0)))), (0 : ℝ))) :=
+      (n08_stateProjection hS (x + n08StateSMul S t (η, (0, (0, 0)))), (0 : ℝ))) :=
     ((n08_stateProjection hS).continuous.comp
       (continuous_const.add (continuous_id.smul continuous_const))).prodMk continuous_const
   have ht : Tendsto (fun t : ℝ =>
-      (n08_stateProjection hS (x + t • (η, (0, (0, 0)))), (0 : ℝ)))
+      (n08_stateProjection hS (x + n08StateSMul S t (η, (0, (0, 0)))), (0 : ℝ)))
       (𝓝[≠] (0 : ℝ)) (𝓝 (n08_stateProjection hS x, (0 : ℝ))) := by
-    simpa only [zero_smul, add_zero] using (hc.tendsto 0).mono_left nhdsWithin_le_nhds
+    simpa only [n08StateSMul, n08RealSMul, zero_smul, add_zero] using (hc.tendsto 0).mono_left nhdsWithin_le_nhds
   have hev := ht.eventually ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hx)
   unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
   simp only [zero_add, zero_smul, add_zero]
   apply (tendsto_const_nhds (x := (0 : CircleSpace S)) :
     Tendsto (fun _ : ℝ => (0 : CircleSpace S)) (𝓝[≠] (0 : ℝ)) (𝓝 0)).congr'
   filter_upwards [hev] with t ht
-  have htail : (n08_stateProjection hS (x + t • (η, (0, (0, 0))))).2 =
+  have htail : (n08_stateProjection hS (x + n08StateSMul S t (η, (0, (0, 0))))).2 =
       (n08_stateProjection hS x).2 := by
+    simp only [n08StateSMul, n08RealSMul]
     rw [map_add, map_smul, n08_stateProjection_heightDirection]
     simp only [Prod.snd_add, Prod.snd_smul, smul_zero, add_zero]
   rw [n08CircleResidual_projected_coe hS hR ht,

@@ -53,42 +53,47 @@ private theorem n08CircleResidual_mean_zero_hasLineDerivAt
     rw [n08ControlMeanCoordinate_apply, n08ControlRestriction_apply hS] at hu
     exact (mul_eq_zero.mp hu).resolve_left
       (Real.rpow_pos_of_pos (n08_materialSample_H_pos hT hN.1.1 m) _).ne'
-  have hc : Continuous (fun t : ℝ => (n08_stateProjection hS (z.1 + t • v), z.2)) :=
+  have hc : Continuous (fun t : ℝ => (n08_stateProjection hS (z.1 + n08StateSMul S t v), z.2)) :=
     ((n08_stateProjection hS).continuous.comp
       (continuous_const.add (continuous_id.smul continuous_const))).prodMk continuous_const
-  have ht : Tendsto (fun t : ℝ => (n08_stateProjection hS (z.1 + t • v), z.2))
+  have ht : Tendsto (fun t : ℝ => (n08_stateProjection hS (z.1 + n08StateSMul S t v), z.2))
       (𝓝[≠] (0 : ℝ)) (𝓝 (n08_stateProjection hS z.1, z.2)) := by
-    simpa only [zero_smul, add_zero] using (hc.tendsto 0).mono_left nhdsWithin_le_nhds
+    simpa only [n08StateSMul, n08RealSMul, zero_smul, add_zero] using
+      (hc.tendsto 0).mono_left nhdsWithin_le_nhds
   have hev := ht.eventually ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hz)
   unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
   simp only [zero_add, zero_smul, add_zero]
   apply (tendsto_const_nhds (x := (0 : ℝ)) :
     Tendsto (fun _ : ℝ => (0 : ℝ)) (𝓝[≠] (0 : ℝ)) (𝓝 0)).congr'
   filter_upwards [hev] with t ht
-  have hheight : (n08_stateProjection hS (z.1 + t • v)).1 =
+  have hheight : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).1 =
       (n08_stateProjection hS z.1).1 := by
+    simp only [n08StateSMul, n08RealSMul]
     rw [map_add, map_smul]
     simp only [v, n08_stateProjection_kappaDirection, Prod.fst_add, Prod.fst_smul,
       smul_zero, add_zero]
-  have hν : (n08_stateProjection hS (z.1 + t • v)).2.1 =
+  have hν : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).2.1 =
       (n08_stateProjection hS z.1).2.1 := by
+    simp only [n08StateSMul, n08RealSMul]
     rw [map_add, map_smul]
     simp only [v, n08_stateProjection_kappaDirection, Prod.snd_add, Prod.snd_smul,
       Prod.fst_add, Prod.fst_smul, smul_zero, add_zero]
-  have hκ : stateKappa S (n08_stateProjection hS (z.1 + t • v)) m =
+  have hκ : stateKappa S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
       stateKappa S (n08_stateProjection hS z.1) m := by
     rw [n08_stateKappa_projection, n08_stateKappa_projection, n08_stateKappa_add hS,
       n08_stateKappa_smul hS, hmean, mul_zero, add_zero]
-  have hchartValue : (n08_stateProjection hS (z.1 + t • v)).2.2.2 =
+  have hchartValue : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).2.2.2 =
       (n08_stateProjection hS z.1).2.2.2 := by
+    simp only [n08StateSMul, n08RealSMul]
     rw [map_add, map_smul]
     simp only [v, n08_stateProjection_kappaDirection, Prod.snd_add, Prod.snd_smul,
       smul_zero, add_zero]
-  have hchart : stateLeftChart S (n08_stateProjection hS (z.1 + t • v)) m =
+  have hchart : stateLeftChart S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
       stateLeftChart S (n08_stateProjection hS z.1) m := by
     funext θ
     simp only [stateLeftChart, hchartValue]
-  have heq : n08ControlMeanCoordinate S m (n08CircleResidual hS hR (z.1 + t • v, z.2)).val =
+  have heq : n08ControlMeanCoordinate S m
+      (n08CircleResidual hS hR (z.1 + n08StateSMul S t v, z.2)).val =
       n08ControlMeanCoordinate S m (n08CircleResidual hS hR z).val := by
     rw [n08ControlMeanCoordinate_apply, n08ControlMeanCoordinate_apply,
       n08ControlRestriction_apply hS, n08ControlRestriction_apply hS,

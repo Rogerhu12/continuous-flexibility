@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.SolveNewtonBridge
+import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Pulling genuine tame towers back to an affine sector chart

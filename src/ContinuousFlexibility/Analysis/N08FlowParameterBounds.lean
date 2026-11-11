@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory ContinuousFlexibility.Analysis
-open scoped Topology Interval BigOperators
+open scoped NNReal Topology Interval BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 

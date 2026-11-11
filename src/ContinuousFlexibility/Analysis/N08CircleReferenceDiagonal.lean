@@ -52,7 +52,8 @@ theorem n08ControlBasis_direction_sector (hS : IsPhysicalSpaces D T S) (m : ℕ)
 theorem n08_controlBasis_reference_profile
     (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
     (hC : controlGeometryConditions D S C) (m : ℕ) (t : ℝ) :
-    stateProfile D S C (C.referenceState + t • (0, 0, n08ControlBasis hS m, 0)) =
+    stateProfile D S C
+        (C.referenceState + n08StateSMul S t (0, 0, n08ControlBasis hS m, 0)) =
       opticalLogPerturbation D.w (C.control m) (t * T.H (T.sample m) ^ (3 / 4 : ℝ)) := by
   funext r
   rw [n08_stateProfile_affine hS hC, n08_stateProfile_reference href,
@@ -65,7 +66,7 @@ theorem n08CircleDiagonal_reference
     (hR : N02Properties D T S C R base ε) (m : ℕ) :
     n08CircleDiagonal hS hR (C.referenceState, 0) m = 1 := by
   let v : AnnularState S := (0, 0, n08ControlBasis hS m, 0)
-  let x : ℝ → AnnularState S := fun t => C.referenceState + t • v
+  let x : ℝ → AnnularState S := fun t => C.referenceState + n08StateSMul S t v
   let A : ℝ := T.H (T.sample m) ^ (3 / 4 : ℝ)
   let B : ℝ := T.H (T.sample m) ^ (-(3 / 4 : ℝ))
   let τ : ℝ → ℝ := fun t =>
@@ -89,7 +90,7 @@ theorem n08CircleDiagonal_reference
   have hc : Continuous (fun t : ℝ => (x t, (0 : ℝ))) :=
     (continuous_const.add (continuous_id.smul continuous_const)).prodMk continuous_const
   have ht : Tendsto (fun t : ℝ => (x t, (0 : ℝ))) (𝓝 0) (𝓝 (C.referenceState, 0)) := by
-    simpa only [x, zero_smul, add_zero] using hc.tendsto 0
+    simpa only [x, n08StateSMul, n08RealSMul, zero_smul, add_zero] using hc.tendsto 0
   have hev := ht.eventually ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hzero)
   have heq : f =ᶠ[𝓝 0] fun t => B * (τ (t * A) - C.travel m) := by
     filter_upwards [hev] with t ht

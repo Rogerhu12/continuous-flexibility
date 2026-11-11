@@ -1,0 +1,117 @@
+import ContinuousFlexibility.Analysis.N08JointResidual
+import ContinuousFlexibility.Analysis.N08ColumnData
+import ContinuousFlexibility.Analysis.N08ControlInverseResponse
+
+/-!
+# Combining the actual residual and control estimates on one neighborhood
+
+The scalar residual, both genuine columns, and their inverse-response
+estimates have already been constructed. This assembly lemma combines them
+with the numerical uniform bound for the same actual circle diagonal. It
+keeps the physical spaces, scalar inverse, and all derivative identities.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Statements
+
+open Set ContinuousFlexibility.Analysis
+
+set_option backward.isDefEq.respectTransparency false
+
+variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+  {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+  {L : ReturnCorrectionData S} {G : ScalarInverseData S}
+  {base loss : ℕ} {ε : ℝ}
+
+theorem n08Properties_of_uniform_diagonal
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε)
+    (hG : ScalarInverseProperties D S C L G base ε)
+    {diagonalBase : ℕ} {diagonalRadius : ℝ}
+    (hdiagonalRadius : 0 < diagonalRadius)
+    (hdiagonal : ∀ z ∈ stateNeighborhood S C diagonalBase diagonalRadius,
+      stateSector S z.1 → ∀ m,
+        (1 / 2 : ℝ) ≤ |n08CircleDiagonal hS hR z m| ∧
+          |n08CircleDiagonal hS hR z m| ≤ 2) :
+    ∃ newBase newLoss : ℕ, ∃ η : ℝ,
+      base ≤ newBase ∧ loss ≤ newLoss ∧ 0 < η ∧ η ≤ ε ∧
+      ∃ P : ResidualData S, ∃ B : ControlColumnData S,
+        N08Properties D T S C R G P B newBase newLoss η := by
+  obtain ⟨scalarBase, scalarRadius, hscalarBase, hscalarRadius, hscalarOld, ν,
+    hnuDecode, hnuDeriv, hjoint⟩ := n08ResidualData_nu_and_smooth hT hS hN hR
+  obtain ⟨responseBase, responseLoss, responseRadius, hresponseBase, hresponseLoss,
+    hresponseRadius, hresponseOld, H, _, hcontrolDeriv, hresponse, hcontrolSmooth⟩ :=
+      n08ControlInverseResponse_exists hT hS hN hG
+  let newBase := max scalarBase (max responseBase diagonalBase)
+  let η := min scalarRadius (min responseRadius diagonalRadius)
+  let P := n08ResidualData hT hS hN hR
+  let B := n08ColumnData hS hR H ν
+  have hbScalar : scalarBase ≤ newBase := le_max_left _ _
+  have hbResponse : responseBase ≤ newBase :=
+    (le_max_left _ _).trans (le_max_right _ _)
+  have hbDiagonal : diagonalBase ≤ newBase :=
+    (le_max_right _ _).trans (le_max_right _ _)
+  have hb : base ≤ newBase := hscalarBase.trans hbScalar
+  have hη : 0 < η := lt_min hscalarRadius (lt_min hresponseRadius hdiagonalRadius)
+  have hηScalar : η ≤ scalarRadius := min_le_left _ _
+  have hηResponse : η ≤ responseRadius :=
+    (min_le_right _ _).trans (min_le_left _ _)
+  have hηDiagonal : η ≤ diagonalRadius :=
+    (min_le_right _ _).trans (min_le_right _ _)
+  have hηε : η ≤ ε := hηScalar.trans hscalarOld
+  have hsub : stateNeighborhood S C newBase η ⊆ stateNeighborhood S C base ε :=
+    n08_stateNeighborhood_mono hb hηε
+  have hsubScalar : stateNeighborhood S C newBase η ⊆
+      stateNeighborhood S C scalarBase scalarRadius :=
+    n08_stateNeighborhood_mono hbScalar hηScalar
+  have hsubResponse : stateNeighborhood S C newBase η ⊆
+      stateNeighborhood S C responseBase responseRadius :=
+    n08_stateNeighborhood_mono hbResponse hηResponse
+  have hsubDiagonal : stateNeighborhood S C newBase η ⊆
+      stateNeighborhood S C diagonalBase diagonalRadius :=
+    n08_stateNeighborhood_mono hbDiagonal hηDiagonal
+  refine ⟨newBase, responseLoss, η, hb, hresponseLoss, hη, hηε, P, B, ?_⟩
+  refine ⟨n08_isClosed_stateSector hS, n08_isOpen_sectorNeighborhood S newBase η η,
+    ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro z hz hs p hp
+    exact n08ResidualData_scalar_decode hT hS hN hR (hsub hz) hs p hp
+  · intro z hz hs
+    exact n08ResidualData_circle_coe hT hS hN hR (hsub hz) hs
+  · exact n08ResidualData_reference hT hS hN hR
+  · exact n08ControlRestriction_apply hS
+  · intro z hz hs p hp
+    exact hnuDecode z (hsubScalar hz) hs p hp
+  · intro z hz
+    exact hnuDeriv z (hsubScalar hz)
+  · intro z hz hs u
+    exact hcontrolDeriv z (hsubResponse hz) hs u
+  · intro z hz hs u
+    exact n08HeightRow_hasLineDerivAt hS hT hN hR (hsub hz) hs u
+  · intro z hz hs u
+    exact n08CircleColumn_hasLineDerivAt hS hN.2.2.1 hR (hsub hz) hs u
+  · intro z hz hs u
+    change n08ControlRestriction S (n08CircleColumn hS hR z u) =
+      n08BoundedControlDiagonal (n08CircleDiagonal hS hR) z (n08ControlRestriction S u)
+    rw [n08BoundedControlDiagonal_eq _ z (hdiagonal z (hsubDiagonal hz) hs)]
+    exact n08CircleColumn_restriction_eq hT hS hN hR (hsub hz) hs
+      (fun m => (hdiagonal z (hsubDiagonal hz) hs m).2) u
+  · intro z hz hs u m
+    exact n08BoundedControlDiagonal_apply _ z (hdiagonal z (hsubDiagonal hz) hs) u m
+  · intro m
+    exact n08CircleDiagonal_reference hT hS hN hR m
+  · intro z hz hs u
+    exact n08BoundedControlDiagonal_inverse _ z (hdiagonal z (hsubDiagonal hz) hs) u
+  · intro z hz hs m
+    exact hdiagonal z (hsubDiagonal hz) hs m
+  · intro s
+    obtain ⟨K, hK, hKb⟩ := hresponse s
+    exact ⟨K, hK, fun z hz u => hKb z (hsubResponse hz) u⟩
+  · exact smoothTameOn_mono hjoint (n08_isOpen_sectorNeighborhood S newBase η η)
+      (n08_sectorNeighborhood_mono hbScalar hηScalar hηScalar)
+  · exact smoothTameOn_mono hcontrolSmooth
+      ((n08_isOpen_sectorNeighborhood S newBase η η).prod isOpen_univ)
+      (Set.prod_mono (n08_sectorNeighborhood_mono hbResponse hηResponse hηResponse)
+        (subset_refl _))
+
+end ContinuousFlexibility.Statements

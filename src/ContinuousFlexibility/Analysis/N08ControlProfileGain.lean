@@ -28,7 +28,7 @@ theorem n08_weightedControlProfile_sq_bound
   obtain ⟨B, hB, hBb⟩ := n08_weightedControlProfile_label_jet_bound_global hT hN s
   have hdata := hT
   obtain ⟨_, hpos, _, _, _, _, _, _, _, _, _, _, henv, _⟩ := hdata
-  obtain ⟨L, hL, hLb, _, _⟩ := henv (base + (s + loss)) (3 / 16) (by norm_num)
+  obtain ⟨L, hL, hLb, _, _⟩ := henv ((base + (s + loss) : ℕ) : ℝ) (3 / 16) (by norm_num)
   refine ⟨A * B * L, mul_nonneg (mul_nonneg hA hB.le) hL.le, fun i r hr => ?_⟩
   have hi := n08_material_sample_bounds hN.1.1 hT i
   have hH : 0 < T.H r := (hpos r hr).2.1

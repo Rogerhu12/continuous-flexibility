@@ -48,6 +48,44 @@ private theorem eventually_mem_affine_line {E : Type*}
     simpa only [zero_smul, add_zero] using hc.tendsto 0
   exact ht.eventually (hU.mem_nhds hx)
 
+/-- Abstract coordinate-line calculus keeps the projective carrier out of
+all limit simplification and derivative-shift steps. -/
+private theorem middle_coordinate_derivative
+    {E F G : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+    {U : Set ((E × (ℝ × F)) × ℝ)} (hU : IsOpen U)
+    (L : G →L[ℝ] ℝ) (f : (E × (ℝ × F)) × ℝ → G)
+    (R : (E × (ℝ × F)) × ℝ → ℝ)
+    {z : (E × (ℝ × F)) × ℝ} (hz : z ∈ U) {v : G}
+    (hd : HasProjectiveLineDerivAt (fun x => f (x, z.2)) v z.1
+      ((0 : E), ((1 : ℝ), (0 : F))))
+    (hdecode : ∀ a : ℝ, ((z.1.1, (a, z.1.2.2)), z.2) ∈ U →
+      L (f ((z.1.1, (a, z.1.2.2)), z.2)) = R ((z.1.1, (a, z.1.2.2)), z.2)) :
+    L v = deriv (fun a : ℝ => R ((z.1.1, (a, z.1.2.2)), z.2)) z.1.2.1 := by
+  have hraw : HasDerivAt
+      (fun t : ℝ => L (f (z.1 + t • ((0 : E), ((1 : ℝ), (0 : F))), z.2))) (L v) 0 :=
+    hasDerivAt_iff_tendsto_slope_zero.mpr (hd.clm_comp L)
+  have hdpoint : HasDerivAt
+      (fun t : ℝ => L (f ((z.1.1, (z.1.2.1 + t, z.1.2.2)), z.2))) (L v) 0 := by
+    simpa only [add_smul_middle_coordinate] using hraw
+  have hnear : ∀ᶠ t : ℝ in 𝓝 0,
+      ((z.1.1, (z.1.2.1 + t, z.1.2.2)), z.2) ∈ U := by
+    simpa only [add_smul_fixed_parameter, add_smul_middle_coordinate] using
+      eventually_mem_affine_line hU hz (((0 : E), ((1 : ℝ), (0 : F))), (0 : ℝ))
+  have heq : (fun t : ℝ => R ((z.1.1, (z.1.2.1 + t, z.1.2.2)), z.2)) =ᶠ[𝓝 0]
+      (fun t : ℝ => L (f ((z.1.1, (z.1.2.1 + t, z.1.2.2)), z.2))) := by
+    filter_upwards [hnear] with t ht
+    exact (hdecode (z.1.2.1 + t) ht).symm
+  have hreal := (hdpoint.congr_of_eventuallyEq heq).deriv
+  have hshift := deriv_comp_const_add
+    (fun a : ℝ => R ((z.1.1, (a, z.1.2.2)), z.2)) z.1.2.1 (0 : ℝ)
+  rw [add_zero] at hshift
+  exact hreal.symm.trans hshift
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S}
 
@@ -56,7 +94,7 @@ def n08NuDirection (S : PhysicalSpacesData) : AnnularState S :=
 
 theorem n08_add_smul_nuDirection (x : AnnularState S) (t : ℝ) :
     x + (n08StateSMul S t (n08NuDirection S)) = (x.1, (x.2.1 + t, x.2.2)) := by
-  simpa only [n08StateSMul, n08RealSMul] using add_smul_middle_coordinate x t
+  simpa only [n08StateSMul, n08RealSMul, n08NuDirection] using add_smul_middle_coordinate x t
 
 theorem n08_stateSector_add_nuDirection {x : AnnularState S}
     (hx : stateSector S x) (t : ℝ) :
@@ -79,30 +117,18 @@ theorem n08_decode_nuDerivative
     (hd : HasProjectiveLineDerivAt (fun x => f (x, z.2)) v z.1 (n08NuDirection S))
     (p : PolarPoint) (hp : p ∈ annularOpen D) :
     (S.height (3 / 4 : ℝ)).decode v.val p = nuColumnField D S C z p := by
-  have hdpoint : HasDerivAt
-      (fun t : ℝ => (S.height (3 / 4 : ℝ)).decode
-        (f (z.1 + (n08StateSMul S t (n08NuDirection S)), z.2)).val p)
-      ((S.height (3 / 4 : ℝ)).decode v.val p) 0 := by
-    simpa only [Submodule.subtypeL_apply, n08StateSMul, n08RealSMul] using
-      sobolev_decode_hasDerivAt_of_projectiveLineDerivAt
-        (A := S.height (3 / 4 : ℝ))
-        ((hS.1 (3 / 4 : ℝ)).2.2.1) (hd.clm_comp S.Q.toLinearMap.ker.subtypeL) p
-  have hnear := eventually_mem_affine_line hU hz (n08NuDirection S, (0 : ℝ))
-  have heq : (fun t : ℝ => scalarResidualField D S C
-      (z.1 + (n08StateSMul S t (n08NuDirection S)), z.2) p) =ᶠ[𝓝 0]
-      (fun t : ℝ => (S.height (3 / 4 : ℝ)).decode
-        (f (z.1 + (n08StateSMul S t (n08NuDirection S)), z.2)).val p) := by
-    filter_upwards [hnear] with t ht
-    have ht' : (z.1 + (n08StateSMul S t (n08NuDirection S)), z.2) ∈ U := by
-      simpa only [add_smul_fixed_parameter, n08StateSMul, n08RealSMul] using ht
-    exact (hdecode _ ht' (n08_stateSector_add_nuDirection hs t) p hp).symm
-  have hreal := (hdpoint.congr_of_eventuallyEq heq).deriv
-  simp only [n08_add_smul_nuDirection] at hreal
-  have hshift := deriv_comp_const_add
-    (fun a : ℝ => scalarResidualField D S C ((z.1.1, (a, z.1.2.2)), z.2) p)
-    z.1.2.1 (0 : ℝ)
-  rw [add_zero] at hshift
-  exact hreal.symm.trans hshift
+  let L : S.Source →L[ℝ] ℝ :=
+    ((S.height (3 / 4 : ℝ)).evaluationCLM ((hS.1 (3 / 4 : ℝ)).2.2.1) p).comp
+      S.Q.toLinearMap.ker.subtypeL
+  have hL (u : S.Source) : L u = (S.height (3 / 4 : ℝ)).decode u.val p := by
+    simp only [L, ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply,
+      SobolevModelData.evaluationCLM_apply]
+  rw [← hL v]
+  apply middle_coordinate_derivative hU L f (fun y => scalarResidualField D S C y p) hz
+  · simpa only [n08NuDirection] using hd
+  · intro a ha
+    rw [hL]
+    exact hdecode ((z.1.1, (a, z.1.2.2)), z.2) ha hs p hp
 
 /-- The nu column is the genuine first jet in the fixed scalar direction. -/
 def n08NuColumn (J : SmoothDirections U f) (z : AnnularState S × ℝ) : S.Source :=

@@ -141,7 +141,8 @@ theorem n08CircleStateDerivative_hasLineDerivAt
     (n08CircleSectorPoint_mem hS href hz) (n08_sectorProjection hS v, 0)
   have hpoint (t : ℝ) :
       n08CircleSectorPoint hS C (z.1 + n08StateSMul S t v, z.2) =
-        n08CircleSectorPoint hS C z + t • (n08_sectorProjection hS v, 0) :=
+        n08CircleSectorPoint hS C z +
+          n08RealSMul (E := StateDirections S × ℝ) t (n08_sectorProjection hS v, (0 : ℝ)) :=
     n08_centered_pair_line (n08_sectorProjection hS) C.referenceState z.1 v z.2 t
   have hline : HasProjectiveLineDerivAt
       (fun x => R.residual (liftSectorParameter S C (n08CircleSectorPoint hS C (x, z.2))))

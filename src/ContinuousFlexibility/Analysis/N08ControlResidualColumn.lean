@@ -30,7 +30,7 @@ private theorem n08_lineDerivative_of_equal_rays
 theorem n08_sourceGrading_monotone (S : PhysicalSpacesData) :
     Monotone S.sourceGrading := by
   intro i j hij f
-  exact gradedSeminorm_monotone (S.height (3 / 4 : ℝ)).level
+  exact gradedSeminorm_monotone (fun n => (S.height (3 / 4 : ℝ)).level n)
     (S.height (3 / 4 : ℝ)).bond hij f.val
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

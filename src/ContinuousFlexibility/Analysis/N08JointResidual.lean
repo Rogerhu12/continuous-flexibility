@@ -1,0 +1,116 @@
+import ContinuousFlexibility.Analysis.N08ActualScalarResidual
+import ContinuousFlexibility.Analysis.N08SectorParameterChart
+import ContinuousFlexibility.Analysis.N08CircleResidual
+import ContinuousFlexibility.Analysis.N08ReferenceFlow
+import ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra
+
+/-!
+# The genuine joint residual and its scalar column
+
+The scalar and circle fields use the same physical data. A single smaller
+state neighborhood carries the actual nu derivative on the full ambient
+space and the joint smooth-tame tower on the closed sector chart.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Statements
+
+open Set ContinuousFlexibility.Analysis
+
+set_option backward.isDefEq.respectTransparency false
+
+variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+  {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+  {base loss : ℕ} {ε : ℝ}
+
+def n08ResidualData
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε) :
+    ResidualData S where
+  scalar := n08ActualScalarResidual hT hS hN
+  circle := n08CircleResidual hS hR
+
+theorem n08ResidualData_scalar_decode
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (p : PolarPoint) (hp : p ∈ annularOpen D) :
+    (S.height (3 / 4 : ℝ)).decode ((n08ResidualData hT hS hN hR).scalar z).val p =
+      scalarResidualField D S C z p :=
+  n08ActualScalarResidual_decode hT hS hN hz hs p hp
+
+theorem n08ResidualData_circle_coe
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) :
+    ((n08ResidualData hT hS hN hR).circle z).val = R.residual z :=
+  n08CircleResidual_coe hS hR hz hs
+
+theorem n08ResidualData_reference
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε) :
+    jointResidual S (n08ResidualData hT hS hN hR) (C.referenceState, 0) = 0 :=
+  n08_jointResidual_reference_zero hS hN hR
+    (fun _ hz hs => n08ResidualData_scalar_decode hT hS hN hR hz hs)
+    (fun _ hz hs => n08ResidualData_circle_coe hT hS hN hR hz hs)
+
+/-- The same actual residual and nu column work on one open neighborhood;
+the nu derivative is not restricted to sector directions or base points. -/
+theorem n08ResidualData_nu_and_smooth
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε) :
+    ∃ b : ℕ, ∃ δ : ℝ, base ≤ b ∧ 0 < δ ∧ δ ≤ ε ∧
+      ∃ ν : AnnularState S × ℝ → S.Source,
+        (∀ z ∈ stateNeighborhood S C b δ, stateSector S z.1 →
+          ∀ p ∈ annularOpen D,
+            (S.height (3 / 4 : ℝ)).decode (ν z).val p = nuColumnField D S C z p) ∧
+        (∀ z ∈ stateNeighborhood S C b δ,
+          HasProjectiveLineDerivAt
+            (fun x => (n08ResidualData hT hS hN hR).scalar (x, z.2))
+            (ν z) z.1 (n08NuDirection S)) ∧
+        SmoothTameOn (pairGrading (sectorGrading S) realGrading) (residualGrading S)
+          (sectorNeighborhood S b δ δ)
+          (sectorJointResidual S C (n08ResidualData hT hS hN hR)) := by
+  obtain ⟨germBase, germLoss, radius, hradius, hfixed⟩ :=
+    n08ActualScalarResidual_uniformTameGerm hT hS hN
+  let b := max base germBase
+  let δ := min ε (radius / 2)
+  have hb : base ≤ b := le_max_left _ _
+  have hδ : 0 < δ := lt_min hN.2.1 (half_pos hradius)
+  have hδε : δ ≤ ε := min_le_left _ _
+  have hsubN : stateNeighborhood S C b δ ⊆ stateNeighborhood S C base ε :=
+    n08_stateNeighborhood_mono hb hδε
+  have hsub : stateNeighborhood S C b δ ⊆
+      {z | pairGrading (stateGrading S) realGrading germBase
+        (z - (C.referenceState, 0)) < radius} := by
+    intro z hz
+    change stateGrading S germBase (z.1 - C.referenceState) + |z.2 - 0| < radius
+    rw [sub_zero]
+    have hx := (solve_stateGrading_monotone S (le_max_right base germBase)
+      (z.1 - C.referenceState)).trans_lt hz.1
+    have hq := hz.2
+    have hd : δ ≤ radius / 2 := min_le_right _ _
+    linarith
+  obtain ⟨J, _⟩ := hfixed.2
+  let J' := smoothDirectionsRestrict J (n08_isOpen_stateNeighborhood S C b δ) hsub
+  refine ⟨b, δ, hb, hδ, hδε, n08NuColumn J', ?_, ?_, ?_⟩
+  · intro z hz hs p hp
+    exact n08NuColumn_decode hS J'
+      (fun _ hy hsector => n08ActualScalarResidual_decode hT hS hN (hsubN hy) hsector)
+      hz hs p hp
+  · intro z hz
+    exact n08NuColumn_hasLineDerivAt J' hz
+  · have hscalar := smoothTameOn_mono hfixed.1
+      (n08_isOpen_stateNeighborhood S C b δ) hsub
+    have hsector := n08_smoothTameOn_sector_pullback hscalar
+      (fun z hz => (n08_liftSectorParameter_mem S C b δ z).mpr hz)
+    have hcircle := smoothTameOn_mono (n08CircleResidual_smoothTame hS hN.2.2.1 hR)
+      (n08_isOpen_sectorNeighborhood S b δ δ) (n08_sectorNeighborhood_mono hb hδε hδε)
+    exact smoothTameOn_prodMk_generic
+      (tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone)
+      (withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S)
+        weighted_realGrading_withSeminorms) hsector hcircle
+
+end ContinuousFlexibility.Statements

@@ -18,7 +18,7 @@ namespace ContinuousFlexibility.Analysis
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Statements
-open scoped Topology Interval
+open scoped Topology Interval NNReal
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -49,11 +49,11 @@ theorem n08_hasDerivAt_comp_of_zeroSlice_const
   let L : (ℝ × ℝ) →L[ℝ] ℝ := fderiv ℝ F (0, c 0)
   have hL : HasFDerivAt F L (0, c 0) := hF.hasFDerivAt
   have hq : HasDerivAt (fun q : ℝ => F (q, c 0)) (L (1, 0)) 0 := by
-    simpa only [Function.comp_def] using
+    simpa only [Function.comp_def, id_eq] using
       hL.comp_hasDerivAt 0 ((hasDerivAt_id 0).prodMk (hasDerivAt_const 0 (c 0)))
   have hθ : HasDerivAt (fun t : ℝ => F (0, c 0 + t * dc)) (L (0, dc)) 0 := by
-    have hi : HasDerivAt (fun t : ℝ => (0, c 0 + t * dc)) (0, dc) 0 := by
-      simpa only [mul_one, one_mul] using
+    have hi : HasDerivAt (fun t : ℝ => ((0 : ℝ), c 0 + t * dc)) ((0 : ℝ), dc) 0 := by
+      simpa only [mul_one, one_mul, id_eq] using
         (hasDerivAt_const 0 (0 : ℝ)).prodMk
           (((hasDerivAt_id 0).mul_const dc).const_add (c 0))
     simpa only [Function.comp_def, zero_mul, add_zero] using hL.comp_hasDerivAt_of_eq 0 hi (by simp only [zero_mul, add_zero])
@@ -67,7 +67,7 @@ theorem n08_hasDerivAt_comp_of_zeroSlice_const
       _ = L (1, 0) + L (0, dc) := map_add L _ _
       _ = A := by rw [hq.unique hparameter, hθ.unique hθzero, add_zero]
   have hactual := hL.comp_hasDerivAt 0 ((hasDerivAt_id 0).prodMk hc)
-  simpa only [Function.comp_def, hvalue] using hactual
+  simpa only [Function.comp_def, id_eq, hvalue] using hactual
 
 /-- Differentiate the integral identity of the given trajectories. The
 hypotheses concern the original time equation and the actual parameter
@@ -94,13 +94,13 @@ theorem n08_hasDerivAt_integralTrajectory
   have hder := intervalIntegral.hasDerivAt_integral_of_dominated_loc_of_lip
     (F := V) (F' := W) (μ := volume) (a := a) (b := b)
     (bound := fun _ => (K : ℝ)) hO
-    (hO.mono fun q hq => (hVint q hq).def'.aestronglyMeasurable)
+    (Filter.Eventually.mono hO fun q hq => (hVint q hq).def'.aestronglyMeasurable)
     (hVint 0 hzero) hWint.def'.aestronglyMeasurable
     (Eventually.of_forall fun r hr => by
       simpa only [Real.nnabs_coe] using hlip r (by simpa only [uIoc_of_le hab] using hr))
     intervalIntegrable_const
     (Eventually.of_forall fun r hr =>
       hparameter r (by simpa only [uIoc_of_le hab] using hr))
-  exact (hder.2.const_add θ).congr_of_eventuallyEq (hO.mono hintegral)
+  exact (hder.2.const_add θ).congr_of_eventuallyEq (Filter.Eventually.mono hO hintegral)
 
 end ContinuousFlexibility.Analysis

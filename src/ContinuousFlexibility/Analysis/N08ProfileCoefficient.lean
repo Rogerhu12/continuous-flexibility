@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N08ScalarFormula
 import ContinuousFlexibility.Analysis.N08ReferenceFlow
 import ContinuousFlexibility.Analysis.N08Neighborhoods
 import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+import ContinuousFlexibility.Analysis.N08RealJetBounds
 
 /-!
 # Extracting the actual logarithmic profile from the N01 coefficient tower
@@ -52,18 +53,23 @@ theorem n08_coefficientA_state_hasDerivAt (hT : IsMaterialData D T)
   simpa only [n08_coefficientFamily_zero_zeroParameter hT hS hN] using
     (n08_stateProfile_hasDerivAt hS hN.2.2.2.1 x v p.1).sub_const (D.w p.1)
 
-private theorem n08_reference_mem (hε : 0 < ε) :
+theorem n08_reference_mem_stateNeighborhood (hε : 0 < ε) :
     (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
   constructor
-  · simpa only [sub_self, map_zero] using hε
+  · change stateGrading S base (C.referenceState - C.referenceState) < ε
+    rw [sub_self]
+    exact (map_zero (stateGrading S base)).trans_lt hε
   · simpa only [abs_zero] using hε
 
-private theorem n08_oneHigh_first_at_zero
-    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-    (p : ℕ → Seminorm ℝ E) (base high : ℕ) (v : E) :
-    oneHighVariationWeight (pairGrading p realGrading) base high
-      (0 : E × ℝ) (Fin.cons (v, 0) Fin.elim0) = p base v + p high v := by
-  simp [oneHighVariationWeight, pairGrading, realGrading]
+theorem n08_coefficientA_reference_hasDerivAt (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
+    (v : AnnularState S) (p : PolarPoint) :
+    HasDerivAt
+      (fun t : ℝ => coefficientFamily D S C 0 0 0 p
+        (C.referenceState + n08StateSMul S t v, 0))
+      (D.w p.1 * n08_stateLogProfile D S C v p.1) 0 := by
+  simpa only [n08_stateProfile_reference hN.2.2.1] using
+    n08_coefficientA_state_hasDerivAt hT hS hN C.referenceState v p
 
 /-- An actual position-dependent bound for every logarithmic state direction.
 The only cell appearing on the right is the cell containing the evaluation
@@ -80,23 +86,11 @@ theorem n08_logProfile_reference_coefficient_bound (hT : IsMaterialData D T)
   refine ⟨B, hB, ?_⟩
   intro m r hr v
   obtain ⟨J, hJ⟩ := hBj m 0 0 0 (r, 0) (by omega) hr
-  have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := n08_reference_mem hε
-  have hline := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain hz (v, 0)
-  have hd : HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0)
-        ((C.referenceState, 0) + n08StateParameterSMul S t (v, 0)))
-      (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 :=
-    hasDerivAt_iff_tendsto_slope_zero.mpr hline
-  have ha := n08_coefficientA_state_hasDerivAt hT hS hN C.referenceState v (r, 0)
-  have hd' : HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0) (C.referenceState + n08StateSMul S t v, 0))
-      (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 := by
-    simpa only [n08StateParameterSMul, n08StateSMul, n08RealSMul,
-      Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero] using hd
-  have hvalue : J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0) =
-      D.w r * n08_stateLogProfile D S C v r := by
-    simpa only [n08_stateProfile_reference hN.2.2.1] using hd'.unique ha
-  have hbound := hJ (C.referenceState, 0) hz (Fin.cons (v, 0) Fin.elim0)
-  simpa only [hvalue, sub_self, Nat.zero_add, n08_oneHigh_first_at_zero] using hbound
+  exact n08_realFirstJet_reference_bound J (stateGrading S) base loss C.referenceState
+    (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+    (fun w => D.w r * n08_stateLogProfile D S C w r)
+    (n08_reference_mem_stateNeighborhood hε)
+    (fun w => n08_coefficientA_reference_hasDerivAt hT hS hN w (r, 0))
+    (by simpa only [Nat.zero_add] using hJ) v
 
 end ContinuousFlexibility.Statements
