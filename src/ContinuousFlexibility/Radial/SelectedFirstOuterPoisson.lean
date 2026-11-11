@@ -166,7 +166,7 @@ theorem selected_first_outerPoisson_data {S : SelectedTailData}
     · rw [hd]
       exact hhalf
     · rw [hd]
-      simpa only [one_div, div_eq_mul_inv] using hmargin
+      simpa only [D, one_div, div_eq_mul_inv, one_mul] using hmargin
   · intro M hfreq hcutL hcutR hscale
     have ha : D.a < M.innerLeft := by rw [hcutL]; exact (hdata false).1.1
     have hm : M.innerLeft < M.innerRight := by rw [hcutL, hcutR]; exact hLR

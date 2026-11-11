@@ -67,7 +67,7 @@ theorem tailNaturalLine_normalized_spans {T : Statements.DeepTailData}
 
 /-- Two natural solutions with entrance value one have the same natural
 line and the same ordinary entrance derivative. -/
-theorem tailNaturalLine_normalized_unique {T : Statements.DeepTailData}
+theorem tailNaturalLine_normalized_eqOn_deriv {T : Statements.DeepTailData}
     (hgap : T.entrance < T.endpoint) (hline : Statements.TailNaturalLineAndKernel T)
     {u v : ℝ → ℝ} (hu : Statements.TailNaturalEquation T u) (hu₀ : u T.entrance = 1)
     (hv : Statements.TailNaturalEquation T v) (hv₀ : v T.entrance = 1) :
