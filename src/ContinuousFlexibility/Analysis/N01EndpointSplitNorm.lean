@@ -28,6 +28,56 @@ def circleWeightedJetNorm (T : MaterialData) (γ : ℝ) (b c : ℕ)
     ((T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) ^ 2) *
       eLpNorm (iteratedDeriv b (v m)) 2 angleMeasure ^ 2).toReal
 
+private theorem weightedJetNorm_le_scaled_two_envelopes
+    {T : MaterialData} {γ : ℝ} {v : ℕ → ℝ → ℝ}
+    {E F : ℕ → ℝ≥0∞} {K K₀ K₁ A u₀ u₁ : ℝ}
+    (hK : 0 ≤ K) (hK₀ : 0 ≤ K₀) (hK₁ : 0 ≤ K₁)
+    (hA : 0 ≤ A) (hu₀ : 0 ≤ u₀) (hu₁ : 0 ≤ u₁)
+    (hE : (∑' m, E m) ≤ ENNReal.ofReal (K₀ * u₀ ^ 2))
+    (hF : (∑' m, F m) ≤ ENNReal.ofReal (K₁ * u₁ ^ 2))
+    (hv : ∀ m, ContDiff ℝ ∞ (v m))
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (b c : ℕ)
+    (hpoint : ∀ m θ,
+      (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+        |iteratedDeriv b (v m) θ| ≤
+      K * (A * Real.sqrt (E m).toReal + Real.sqrt (F m).toReal)) :
+    circleWeightedJetNorm T γ b c v ≤
+      Real.sqrt (2 * Real.pi) * K * (Real.sqrt K₀ + Real.sqrt K₁) *
+        (A * u₀ + u₁) := by
+  have hEsq : (∑' m, E m) ≤ ENNReal.ofReal ((Real.sqrt K₀ * u₀) ^ 2) :=
+    hE.trans_eq (congrArg ENNReal.ofReal (by rw [mul_pow, Real.sq_sqrt hK₀]))
+  have hFsq : (∑' m, F m) ≤ ENNReal.ofReal ((Real.sqrt K₁ * u₁) ^ 2) :=
+    hF.trans_eq (congrArg ENNReal.ofReal (by rw [mul_pow, Real.sq_sqrt hK₁]))
+  have hpoint' (m : ℕ) (θ : ℝ) :
+      (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+        |iteratedDeriv b (v m) θ| ≤
+      (K * A) * Real.sqrt (E m).toReal + K * Real.sqrt (F m).toReal :=
+    (hpoint m θ).trans_eq (by ring)
+  have hn := circleWeightedJetNorm_le_two_envelopes
+    (mul_nonneg hK hA) hK
+    (mul_nonneg (Real.sqrt_nonneg _) hu₀) (mul_nonneg (Real.sqrt_nonneg _) hu₁)
+    hEsq hFsq hv hM hH b c hpoint'
+  have h₀ : Real.sqrt K₀ ≤ Real.sqrt K₀ + Real.sqrt K₁ :=
+    le_add_of_nonneg_right (Real.sqrt_nonneg _)
+  have h₁ : Real.sqrt K₁ ≤ Real.sqrt K₀ + Real.sqrt K₁ :=
+    le_add_of_nonneg_left (Real.sqrt_nonneg _)
+  calc
+    circleWeightedJetNorm T γ b c v ≤
+        Real.sqrt (2 * Real.pi) *
+          (K * A * (Real.sqrt K₀ * u₀) + K * (Real.sqrt K₁ * u₁)) := hn
+    _ = Real.sqrt (2 * Real.pi) * K *
+        (A * (Real.sqrt K₀ * u₀) + Real.sqrt K₁ * u₁) := by ring
+    _ ≤ Real.sqrt (2 * Real.pi) * K *
+        (A * ((Real.sqrt K₀ + Real.sqrt K₁) * u₀) +
+          (Real.sqrt K₀ + Real.sqrt K₁) * u₁) :=
+      mul_le_mul_of_nonneg_left
+        (add_le_add
+          (mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right h₀ hu₀) hA)
+          (mul_le_mul_of_nonneg_right h₁ hu₁))
+        (mul_nonneg (Real.sqrt_nonneg _) hK)
+    _ = _ := by ring
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -64,48 +114,23 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform
   let A : ℝ := 1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)
   have hA : 0 ≤ A := add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _))
     (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))
-  let U : ℝ := Real.sqrt K₀ * p (base + c + 6) v
-  let V : ℝ := Real.sqrt K₁ * p (b + loss + c + 6) v
-  have hU : 0 ≤ U := mul_nonneg (Real.sqrt_nonneg _) (apply_nonneg _ _)
-  have hV : 0 ≤ V := mul_nonneg (Real.sqrt_nonneg _) (apply_nonneg _ _)
   have hE : (∑' m, stateLocalizationEnergy D T C base (c + 1) v m) ≤
-      ENNReal.ofReal (U ^ 2) := by
-    dsimp only [U]
-    rw [mul_pow, Real.sq_sqrt hK₀]
+      ENNReal.ofReal (K₀ * (p (base + c + 6) v) ^ 2) := by
     have hi : base + (c + 1) + 5 = base + c + 6 := by omega
-    simpa only [hi] using lowData.choose_spec.2 v
+    exact (lowData.choose_spec.2 v).trans_eq
+      (congrArg (fun i : ℕ => ENNReal.ofReal (K₀ * (p i v) ^ 2)) hi)
   have hF : (∑' m, stateLocalizationEnergy D T C (b + loss) (c + 1) v m) ≤
-      ENNReal.ofReal (V ^ 2) := by
-    dsimp only [V]
-    rw [mul_pow, Real.sq_sqrt hK₁]
+      ENNReal.ofReal (K₁ * (p (b + loss + c + 6) v) ^ 2) := by
     have hi : b + loss + (c + 1) + 5 = b + loss + c + 6 := by omega
-    simpa only [hi] using highData.choose_spec.2 v
+    exact (highData.choose_spec.2 v).trans_eq
+      (congrArg (fun i : ℕ => ENNReal.ofReal (K₁ * (p i v) ^ 2)) hi)
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
-  have hn := circleWeightedJetNorm_le_two_envelopes
-    (mul_nonneg hK.le hA) hK.le hU hV hE hF
+  exact weightedJetNorm_le_scaled_two_envelopes
+    hK.le hK₀ hK₁ hA (apply_nonneg _ _) (apply_nonneg _ _) hE hF
     (fun m => (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz (Fin.snoc vs v) m).1)
-    hM hH b c (fun m θ => (pointData.choose_spec.2 rsel hrsel z hz vs hvs v hvq m θ).trans_eq (by
-      dsimp only [A, p]
-      ring))
-  have h₀ : Real.sqrt K₀ ≤ L := le_add_of_nonneg_right (Real.sqrt_nonneg _)
-  have h₁ : Real.sqrt K₁ ≤ L := le_add_of_nonneg_left (Real.sqrt_nonneg _)
-  calc
-    circleWeightedJetNorm T (3 / 4 : ℝ) b c
-        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
-        Real.sqrt (2 * Real.pi) * (K * A * U + K * V) := hn
-    _ = Real.sqrt (2 * Real.pi) * K *
-        (A * (Real.sqrt K₀ * p (base + c + 6) v) +
-          Real.sqrt K₁ * p (b + loss + c + 6) v) := by dsimp only [U, V]; ring
-    _ ≤ Real.sqrt (2 * Real.pi) * K *
-        (A * (L * p (base + c + 6) v) + L * p (b + loss + c + 6) v) :=
-      mul_le_mul_of_nonneg_left
-        (add_le_add
-          (mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right h₀ (apply_nonneg _ _)) hA)
-          (mul_le_mul_of_nonneg_right h₁ (apply_nonneg _ _)))
-        (mul_nonneg (Real.sqrt_nonneg _) hK.le)
-    _ = _ := by dsimp only [A, p]; ring
+    hM hH b c (fun m θ => pointData.choose_spec.2 rsel hrsel z hz vs hvs v hvq m θ)
 
 theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound
     (hN : N01Properties D T S C base loss ε)

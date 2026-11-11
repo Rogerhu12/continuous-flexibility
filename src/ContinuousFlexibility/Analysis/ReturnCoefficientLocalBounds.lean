@@ -54,8 +54,13 @@ theorem CoefficientMaterialOneHighBound.mono
   obtain ⟨C, hC, hbound⟩ := h k
   refine ⟨C, hC, fun x hx v a b hab q => ?_⟩
   have hw := oneHighVariationWeight_mono hp hb (Nat.add_le_add_left hl k) x v
-  have hw0 : 0 ≤ oneHighVariationWeight p base (k + loss) x v :=
-    multilinearTameSize_nonneg _ _ _ (add_nonneg zero_le_one (apply_nonneg _ _)) v
+  have hw0 : 0 ≤ oneHighVariationWeight p base (k + loss) x v := by
+    unfold oneHighVariationWeight
+    exact add_nonneg
+      (mul_nonneg (add_nonneg zero_le_one (apply_nonneg _ _))
+        (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)))
+      (Finset.sum_nonneg (fun _ _ => mul_nonneg (apply_nonneg _ _)
+        (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))))
   have hM : 1 ≤ T.M (T.radius q.1) :=
     (hT.2.1 _ (hT.2.2.2.2.2.2.2.1 q.1).1).2.2.2
   have hpow := pow_le_pow_right₀ hM hd
@@ -109,9 +114,11 @@ theorem LocalCoefficientMaterialTameBounds.lineBounds
   obtain ⟨base, loss, d, δ, hδ, hb⟩ := h n x hx
   have hlineCont : Continuous (fun t : ℝ => x + t • w) :=
     continuous_const.add (continuous_id.smul continuous_const)
-  have hmem : ∀ᶠ t : ℝ in 𝓝 0, x + t • w ∈ U := by
-    simpa only [zero_smul, add_zero] using
-      hlineCont.continuousAt.eventually (hU.mem_nhds hx)
+  have hstart : x + (0 : ℝ) • w ∈ U := by
+    simpa only [zero_smul, add_zero] using hx
+  have hmem : ∀ᶠ t : ℝ in 𝓝 0, x + t • w ∈ U :=
+    (hlineCont.continuousAt : ContinuousAt (fun t : ℝ => x + t • w) (0 : ℝ)).eventually
+      (hU.mem_nhds hstart)
   have hnear : ∀ᶠ t : ℝ in 𝓝 0, p base (x + t • w - x) < δ := by
     have hc : Continuous (fun t : ℝ => p base (x + t • w - x)) :=
       (hp base).comp (hlineCont.sub continuous_const)

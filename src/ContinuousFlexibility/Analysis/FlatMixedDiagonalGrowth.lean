@@ -110,6 +110,26 @@ private theorem mixedLeibnizMass_nonneg (n a b : ℕ) : 0 ≤ mixedLeibnizMass n
   unfold mixedLeibnizMass
   positivity
 
+private theorem flatMixed_triple_sum_bound
+    {ι₁ ι₂ ι₃ : Type*} [Fintype ι₁] [Fintype ι₂] [Fintype ι₃]
+    (f : ι₁ → ι₂ → ι₃ → ℝ) (hf : ∀ i j k, 0 ≤ f i j k)
+    (i : ι₁) (j : ι₂) (k : ι₃) :
+    f i j k ≤ ∑ i', ∑ j', ∑ k', f i' j' k' := by
+  classical
+  have h₁ : f i j k ≤ ∑ k', f i j k' :=
+    Finset.single_le_sum (f := fun k' => f i j k')
+      (fun k' _ => hf i j k') (Finset.mem_univ k)
+  have h₂ : (∑ k', f i j k') ≤ ∑ j', ∑ k', f i j' k' :=
+    Finset.single_le_sum (f := fun j' => ∑ k', f i j' k')
+      (fun j' _ => Finset.sum_nonneg (fun k' _ => hf i j' k'))
+      (Finset.mem_univ j)
+  have h₃ : (∑ j', ∑ k', f i j' k') ≤ ∑ i', ∑ j', ∑ k', f i' j' k' :=
+    Finset.single_le_sum (f := fun i' => ∑ j', ∑ k', f i' j' k')
+      (fun i' _ => Finset.sum_nonneg (fun j' _ =>
+        Finset.sum_nonneg (fun k' _ => hf i' j' k')))
+      (Finset.mem_univ i)
+  exact (h₁.trans h₂).trans h₃
+
 private theorem jointMixedDiagonal_mul_le
     {f g h : E × PolarPoint → ℝ} {V₀ : Set PolarPoint}
     (J : SmoothDirections (U ×ˢ V₀) f) (K : SmoothDirections (U ×ˢ V₀) g)
@@ -223,17 +243,11 @@ theorem FlatMixedDiagonalGrowth.mul
   let kn : Fin (n + 1) := ⟨k, by omega⟩
   let an : Fin (s + 1) := ⟨a, by omega⟩
   let bn : Fin (s + 1) := ⟨b, by omega⟩
-  have hmass : mixedLeibnizMass k a b ≤ N := by
-    apply (Finset.single_le_sum (f := fun b : Fin (s + 1) =>
-      mixedLeibnizMass kn.val an.val b.val)
-      (fun b _ => mixedLeibnizMass_nonneg _ _ _) (Finset.mem_univ bn)).trans
-    apply (Finset.single_le_sum (f := fun a : Fin (s + 1) =>
-      ∑ b : Fin (s + 1), mixedLeibnizMass kn.val a.val b.val)
-      (fun a _ => Finset.sum_nonneg (fun b _ => mixedLeibnizMass_nonneg _ _ _))
-      (Finset.mem_univ an)).trans
-    exact Finset.single_le_sum
-      (fun k _ => Finset.sum_nonneg (fun a _ => Finset.sum_nonneg
-        (fun b _ => mixedLeibnizMass_nonneg _ _ _))) (Finset.mem_univ kn)
+  have hmass : mixedLeibnizMass k a b ≤ N :=
+    flatMixed_triple_sum_bound
+      (fun (k' : Fin (n + 1)) (a' b' : Fin (s + 1)) =>
+        mixedLeibnizMass k'.val a'.val b'.val)
+      (fun k' a' b' => mixedLeibnizMass_nonneg k'.val a'.val b'.val) kn an bn
   exact hpoint.trans ((mul_le_mul_of_nonneg_right hmass hZ).trans_eq
     (by dsimp only [Z, H]; ring))
 

@@ -27,6 +27,65 @@ theorem seminorm_line_le_of_abs_le_one
     _ = p x + |t| * p w := by rw [map_smul_eq_mul, Real.norm_eq_abs]
     _ ≤ p x + p w := add_le_add (le_refl _) (mul_le_of_le_one_left (apply_nonneg _ _) ht)
 
+private theorem cyclic_energy_envelope
+    {V X : Type*} (n s : ℕ) (U : Set X) (p : X → ℝ)
+    (A : (Fin (n + 1) → V) → X → ℕ → ℕ → ℕ → ℝ → ℝ) (Q : V → Prop)
+    (hrotate : ∀ v z, z ∈ U → ∀ m b c, b + c ≤ s → ∀ θ,
+      A v z m b c θ = A (Fin.snoc (Fin.tail v) (v 0)) z m b c θ)
+    (hlast : ∀ (vs : Fin n → V) (u : V), Q u →
+      ∃ energy : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, energy m) < ⊤ ∧ 0 ≤ K ∧
+        ∀ z ∈ U, ∀ m b c, b + c ≤ s → ∀ θ,
+          A (Fin.snoc vs u) z m b c θ ≤ K * (1 + p z) * Real.sqrt (energy m).toReal)
+    (v : Fin (n + 1) → V) (i : Fin (n + 1)) (hi : Q (v i)) :
+    ∃ energy : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, energy m) < ⊤ ∧ 0 ≤ K ∧
+      ∀ z ∈ U, ∀ m b c, b + c ≤ s → ∀ θ,
+        A v z m b c θ ≤ K * (1 + p z) * Real.sqrt (energy m).toReal := by
+  have haux : ∀ k : ℕ, ∀ (w : Fin (n + 1) → V) (a : Fin (n + 1)),
+      a.val = k → Q (w a) →
+      ∃ energy : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, energy m) < ⊤ ∧ 0 ≤ K ∧
+        ∀ z ∈ U, ∀ m b c, b + c ≤ s → ∀ θ,
+          A w z m b c θ ≤ K * (1 + p z) * Real.sqrt (energy m).toReal := by
+    intro k
+    induction k with
+    | zero =>
+      intro w a ha hw
+      have ha0 : a = 0 := Fin.ext ha
+      have hw0 : Q (w 0) := Eq.mp (congrArg (fun j : Fin (n + 1) => Q (w j)) ha0) hw
+      obtain ⟨energy, K, henergy, hK, hb⟩ := hlast (Fin.tail w) (w 0) hw0
+      refine ⟨energy, K, henergy, hK, ?_⟩
+      intro z hz m b c hbc θ
+      exact (hrotate w z hz m b c hbc θ).trans_le (hb z hz m b c hbc θ)
+    | succ k ih =>
+      intro w a ha hw
+      have hk : k < n := by have halt := a.isLt; omega
+      let a' : Fin n := ⟨k, hk⟩
+      let w' : Fin (n + 1) → V :=
+        Fin.snoc (α := fun _ : Fin (n + 1) => V) (Fin.tail w) (w 0)
+      have haa : a'.succ = a := Fin.ext ha.symm
+      have hentry : w' a'.castSucc = w a :=
+        (show w' a'.castSucc = w a'.succ from
+          Fin.snoc_castSucc (α := fun _ : Fin (n + 1) => V) (w 0) (Fin.tail w) a').trans
+            (congrArg w haa)
+      have hw' : Q (w' a'.castSucc) := Eq.mpr (congrArg Q hentry) hw
+      obtain ⟨energy, K, henergy, hK, hb⟩ := ih w' a'.castSucc rfl hw'
+      refine ⟨energy, K, henergy, hK, ?_⟩
+      intro z hz m b c hbc θ
+      exact (hrotate w z hz m b c hbc θ).trans_le (hb z hz m b c hbc θ)
+  exact haux i.val v i rfl hi
+
+private theorem energy_envelope_factor_reorder (K q P e : ℝ) :
+    K * (1 + q) * P * e = (K * P) * (1 + q) * e := by ring
+
+private theorem seminorm_energy_bound_on_unit_line
+    {X : Type*} [AddCommGroup X] [Module ℝ X]
+    (p : Seminorm ℝ X) (x w : X) {t K e y : ℝ}
+    (ht : |t| ≤ 1) (hK : 0 ≤ K) (he : 0 ≤ e)
+    (hy : y ≤ K * (1 + p (x + t • w)) * e) :
+    y ≤ (K * (1 + (p x + p w))) * e :=
+  hy.trans (mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_left
+      (add_le_add (le_refl 1) (seminorm_line_le_of_abs_le_one p x w ht)) hK) he)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -41,53 +100,30 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v m) θ| ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss)) z) *
           Real.sqrt (E m).toReal := by
-  let p := pairGrading (sectorGrading S) realGrading
+  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) := pairGrading (sectorGrading S) realGrading
   let j : ℕ := max base (s + loss)
-  have haux : ∀ k : ℕ, ∀ (w : Fin (n + 1) → (StateDirections S × ℝ))
-      (a : Fin (n + 1)), a.val = k → (w a).2 = 0 →
-      ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
-        ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m b c, b + c ≤ s → ∀ θ,
-        (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-          |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z w m) θ| ≤
-          K * (1 + p j z) * Real.sqrt (E m).toReal := by
-    intro k
-    induction k with
-    | zero =>
-      intro w a ha hw
-      have ha0 : a = 0 := Fin.ext ha
-      rw [ha0] at hw
-      obtain ⟨K, hK, hb⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
-      refine ⟨stateLocalizationEnergy D T C j (s + 1) (w 0),
-        K * ∏ a : Fin n, p j (Fin.tail w a),
-        hN.stateLocalizationEnergy_tsum_lt_top hS hT j (s + 1) (w 0),
-        mul_nonneg hK.le (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)), ?_⟩
-      intro z hz m b c hbc θ
-      have hrot := congrArg (fun f : ℕ → ℝ → ℝ => iteratedDeriv b (f m) θ)
-        (hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w)
-      rw [hrot]
-      exact (hb z hz (Fin.tail w) (w 0) hw m b c hbc θ).trans_eq (by
-        dsimp only [j, p]
-        ring)
-    | succ k ih =>
-      intro w a ha hw
-      have hk : k < n := by have halt := a.isLt; omega
-      let a' : Fin n := ⟨k, hk⟩
-      let w' : Fin (n + 1) → (StateDirections S × ℝ) := Fin.snoc (Fin.tail w) (w 0)
-      have haa : a'.succ = a := Fin.ext (by simpa only [a', Fin.val_succ] using ha.symm)
-      have hw' : (w' a'.castSucc).2 = 0 := by
-        dsimp only [w']
-        rw [Fin.snoc_castSucc]
-        change (w a'.succ).2 = 0
-        rw [haa]
-        exact hw
-      obtain ⟨E, K, hE, hK, hb⟩ := ih w' a'.castSucc rfl hw'
-      refine ⟨E, K, hE, hK, ?_⟩
-      intro z hz m b c hbc θ
-      have hrot := congrArg (fun f : ℕ → ℝ → ℝ => iteratedDeriv b (f m) θ)
-        (hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w)
-      rw [hrot]
-      exact hb z hz m b c hbc θ
-  exact haux i.val v i rfl hi
+  let pointData := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
+  let K : ℝ := pointData.choose
+  have hK : 0 < K := pointData.choose_spec.1
+  refine cyclic_energy_envelope n s (sectorNeighborhood S base ε ε) (p j)
+    (fun w z m b c θ =>
+      (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z w m) θ|)
+    (fun u : StateDirections S × ℝ => u.2 = 0) ?_ ?_ v i hi
+  · intro w z hz m b c hbc θ
+    exact congrArg (fun f : ℕ → ℝ → ℝ =>
+      (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+        |iteratedDeriv b (f m) θ|)
+      (hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w)
+  · intro vs u hu
+    refine ⟨stateLocalizationEnergy D T C j (s + 1) u,
+      K * ∏ a : Fin n, p j (vs a),
+      hN.stateLocalizationEnergy_tsum_lt_top hS hT j (s + 1) u,
+      mul_nonneg hK.le (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)), ?_⟩
+    intro z hz m b c hbc θ
+    exact (pointData.choose_spec.2 z hz vs u hu m b c hbc θ).trans_eq
+      (energy_envelope_factor_reorder K (p j z) (∏ a : Fin n, p j (vs a))
+        (Real.sqrt (stateLocalizationEnergy D T C j (s + 1) u m).toReal))
 
 theorem N01Properties.endpointFlowScalarJets_state_slot_line_energy_envelope
     (hN : N01Properties D T S C base loss ε)
@@ -101,17 +137,18 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_line_energy_envelope
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w) v m) θ| ≤
         K * Real.sqrt (E m).toReal := by
-  obtain ⟨E, K, hE, hK, hb⟩ :=
-    hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT rsel hrsel n s v i hi
-  let p := pairGrading (sectorGrading S) realGrading
+  let data := hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT rsel hrsel n s v i hi
+  let energy : ℕ → ℝ≥0∞ := data.choose
+  let constantData := data.choose_spec
+  let K : ℝ := constantData.choose
+  have henergy : (∑' m, energy m) < ⊤ := constantData.choose_spec.1
+  have hK : 0 ≤ K := constantData.choose_spec.2.1
+  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) := pairGrading (sectorGrading S) realGrading
   let j : ℕ := max base (s + loss)
-  refine ⟨E, K * (1 + (p j x + p j w)), hE,
+  refine ⟨energy, K * (1 + (p j x + p j w)), henergy,
     mul_nonneg hK (add_nonneg zero_le_one (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))), ?_⟩
   intro t ht hz m b c hbc θ
-  exact (hb _ hz m b c hbc θ).trans
-    (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_left
-        (add_le_add (le_refl 1) (seminorm_line_le_of_abs_le_one (p j) x w ht)) hK)
-      (Real.sqrt_nonneg _))
+  exact seminorm_energy_bound_on_unit_line (p j) x w ht hK (Real.sqrt_nonneg _)
+    (constantData.choose_spec.2.2 _ hz m b c hbc θ)
 
 end ContinuousFlexibility.Statements

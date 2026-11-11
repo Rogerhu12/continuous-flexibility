@@ -3,11 +3,11 @@ import ContinuousFlexibility.Analysis.CircleCompositionLocalTame
 /-!
 # Joint smooth tame chart composition in the actual circle space
 
-The genuine projective directional tower is already constructed.
-Every one of its actual finite-product expressions is locally tame as
-a joint function of the base point and all increments. Homogeneous
-multilinear normalization gives precisely the frozen SmoothTameOn
-definition with a loss fixed before the output order.
+The genuine projective directional tower and its uniform one-high bounds
+are already constructed. On a unit low-seminorm ball about a fixed point,
+the low seminorm is bounded by one plus its value at the center. Applying
+this elementary conversion on abstract spaces preserves the fixed loss
+without unfolding the concrete projective circle model.
 -/
 
 noncomputable section
@@ -22,6 +22,33 @@ local instance circleCompositionSmoothTamePairSMul (S : CircleModelData) :
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem smoothTameOn_of_uniform_oneHigh_exists
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) {f : E → F}
+    (P : SmoothDirections univ f → Prop)
+    (h : ∃ J : SmoothDirections univ f, P J ∧
+      ∀ n, ∃ base loss : ℕ, ∀ K : ℝ, 0 ≤ K → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+        ∀ x, p base x ≤ K → ∀ v : Fin n → E,
+          q s (J.D n x v) ≤ C * tameJetSize p n s loss base x v) :
+    SmoothTameOn p q univ f := by
+  obtain ⟨J, _, hbound⟩ := h
+  refine ⟨J, ?_⟩
+  intro n x₀ hx₀
+  obtain ⟨base, loss, hb⟩ := hbound n
+  refine ⟨loss, base, 1, zero_lt_one, ?_⟩
+  intro s hs
+  obtain ⟨C, hC, hCs⟩ := hb (1 + p base x₀)
+    (add_nonneg zero_le_one (apply_nonneg (p base) x₀)) s
+  refine ⟨C, hC, ?_⟩
+  intro x hx hnear v
+  have hbase : p base x ≤ 1 + p base x₀ := by
+    calc
+      p base x = p base ((x - x₀) + x₀) := by rw [sub_add_cancel]
+      _ ≤ p base (x - x₀) + p base x₀ := map_add_le_add (p base) _ _
+      _ ≤ 1 + p base x₀ := add_le_add hnear.le le_rfl
+  exact hCs x hbase v
+
 theorem smoothTameOn_circleChartComposition
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
@@ -29,63 +56,15 @@ theorem smoothTameOn_circleChartComposition
     SmoothTameOn (pairGrading S.grading S.grading) S.grading univ
       (fun x : S.Space × S.Space =>
         circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) := by
-  classical
-  let p := pairGrading S.grading S.grading
-  have hmono := gradedSeminorm_monotone (fun j => S.level j) S.bond
-  have hp : Monotone p := tamePairGrading_monotone hmono hmono
-  have ht : WithSeminorms p := withSeminorms_pairGrading
-    (withSeminorms_graded (fun j => S.level j) S.bond)
-    (withSeminorms_graded (fun j => S.level j) S.bond)
-  obtain ⟨J, hdecode⟩ := exists_circleChartComposition_smoothDirections
-    hS hT hD hγ hinterp travel
-  apply smoothTameOn_of_locallyTameOn_jets hp ht J
-  intro n
-  have hpj : Monotone (jetGrading p n) := jetGrading_monotone hp n
-  have hbase := locallyTameOn_jet_base p n
-  have hdir (i : Fin n) := locallyTameOn_jet_direction p n i
-  have hbaseChart := (locallyTameOn_pair_fst S.grading S.grading).comp hbase
-    (fun z hz => mem_univ _)
-  have hchart (i : Fin n) := (locallyTameOn_pair_fst S.grading S.grading).comp (hdir i)
-    (fun z hz => mem_univ _)
-  have hfield (i : Fin n) := (locallyTameOn_pair_snd S.grading S.grading).comp (hdir i)
-    (fun z hz => mem_univ _)
-  have hmain :
-      LocallyTameOn (jetGrading p n) S.grading univ
-        (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-          circleFiniteProductWith hS hT hD hγ
-            (circleOuterJetComposeContinuousLinear hS hT hD hγ travel n z.1.1 z.1.2)
-            (fun i => (z.2 i).1) Finset.univ) := by
-    apply locallyTameOn_circleFiniteProductWith hpj hS hT hD hγ hinterp Finset.univ
-    · exact (locallyTameOn_circleOuterJetCompose hS hT hD hγ hinterp travel n).comp hbase
-        (fun z hz => mem_univ _)
-    · intro i hi
-      exact hchart i
-  have hterm (i : Fin n) :
-      LocallyTameOn (jetGrading p n) S.grading univ
-        (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-          circleFiniteProductWith hS hT hD hγ
-            (circleOuterJetComposeContinuousLinear hS hT hD hγ travel (n - 1) z.1.1 (z.2 i).2)
-            (fun j => (z.2 j).1) (Finset.univ.erase i)) := by
-    apply locallyTameOn_circleFiniteProductWith hpj hS hT hD hγ hinterp (Finset.univ.erase i)
-    · exact (locallyTameOn_circleOuterJetCompose hS hT hD hγ hinterp travel (n - 1)).comp
-        (hbaseChart.prodMk hpj (hfield i)) (fun z hz => mem_univ _)
-    · intro j hj
-      exact hchart j
-  have hsum := LocallyTameOn.finset_sum hpj Finset.univ (fun i hi => hterm i)
-  have hvalue := hmain.add hpj hsum
-  change LocallyTameOn (jetGrading p n) S.grading univ
-    (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-      circleChartCompositionJetValue hS hT hD hγ travel n z.1 z.2) at hvalue
-  have hactual :
-      LocallyTameOn (jetGrading p n) S.grading univ
-        (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-          J.D n z.1 z.2) := by
-    apply hvalue.congr
-    intro z hz
-    apply hS.2.2.2.2.2.1
-    exact (hdecode n z.1 z.2).trans
-      (circleChartCompositionJetValue_decode hS hT hD hγ travel n z.1 z.2).symm
-  simpa only [Set.univ_prod_univ] using hactual
+  exact smoothTameOn_of_uniform_oneHigh_exists
+    (E := S.Space × S.Space) (F := S.Space)
+    (pairGrading S.grading S.grading) S.grading
+    (f := fun x : S.Space × S.Space =>
+      circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2)
+    (fun J => ∀ n x (v : Fin n → S.Space × S.Space),
+      S.decode (J.D n x v) = circleChartCompositionJets hS travel n x v)
+    (exists_circleChartComposition_uniform_oneHigh
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp travel)
 
 theorem smoothTameOn_circleShiftedChartComposeLinear
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)

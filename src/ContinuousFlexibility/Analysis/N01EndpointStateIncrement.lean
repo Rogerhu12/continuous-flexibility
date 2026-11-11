@@ -36,6 +36,28 @@ private theorem endpoint_origin_mem
     (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε :=
   pair_seminorm_origin_mem (sectorGrading S base) hN.2.1
 
+private theorem scaled_seminorm_zero_slot_bound
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (u : E) {t K X e : ℝ}
+    (ht : t ∈ Icc (0 : ℝ) 1) (hK : 0 ≤ K) (he : 0 ≤ e)
+    (hb : X ≤ K * (1 + p (t • u)) *
+      (∏ i : Fin 0, p ((Fin.elim0 : Fin 0 → E) i)) * e) :
+    X ≤ K * (1 + p u) * e := by
+  have hgrade : p (t • u) ≤ p u := by
+    rw [map_smul_eq_mul, Real.norm_eq_abs, abs_of_nonneg ht.1]
+    exact mul_le_of_le_one_left (apply_nonneg _ _) ht.2
+  have hb' : X ≤ K * (1 + p (t • u)) * e := by
+    simpa only [Fin.prod_univ_zero, mul_one] using hb
+  exact hb'.trans (mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_left (add_le_add (le_refl 1) hgrade) hK) he)
+
+private theorem scaled_curve_endpoint_sub_eq
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (f : E → ℕ → ℝ → ℝ) (u : E) (hf : f 0 = 0) :
+    (fun m θ => f ((1 : ℝ) • u) m θ - f ((0 : ℝ) • u) m θ) = f u := by
+  funext m θ
+  simp only [one_smul, zero_smul, hf, Pi.zero_apply, sub_zero]
+
 theorem N01Properties.endpointFlowScalarJets_zero_at_origin
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -77,7 +99,7 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
       (Fin.snoc (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) u :
         Fin 1 → (StateDirections S × ℝ)) := by
     funext i
-    have hi : i = 0 := Subsingleton.elim _ _
+    have hi : i = 0 := Fin.ext (by have hiLt := i.isLt; omega)
     subst i
     simp only [Fin.cons_zero, Fin.snoc_zero]
   have hderiv (m b : ℕ) (θ t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
@@ -104,20 +126,14 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
       hN.stateLocalizationEnergy_tsum_lt_top hS hT j (s + 1) u,
       mul_nonneg hK.le (add_nonneg zero_le_one (apply_nonneg _ _)), ?_⟩
     intro m b c hbc θ t ht
-    have hgrade : p j (t • u) ≤ p j u := by
-      rw [map_smul_eq_mul, Real.norm_eq_abs, abs_of_nonneg ht.1]
-      exact mul_le_of_le_one_left (apply_nonneg _ _) ht.2
-    have hb := energyData.choose_spec.2 (t • u) (hpath t ht) Fin.elim0 u rfl m b c hbc θ
-    simp only [Fin.prod_univ_zero, mul_one] at hb
-    exact hb.trans (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_left (add_le_add (le_refl 1) hgrade) hK.le)
-      (Real.sqrt_nonneg _))
+    exact scaled_seminorm_zero_slot_bound (p j) u ht hK.le (Real.sqrt_nonneg _)
+      (energyData.choose_spec.2 (t • u) (hpath t ht) Fin.elim0 u rfl m b c hbc θ)
   have heq : (fun m θ => F 1 m θ - F 0 m θ) =
-      hN.endpointFlowScalarJets hS hT rsel hrsel 0 u Fin.elim0 := by
-    funext m θ
-    simp only [F, one_smul, zero_smul, hN.endpointFlowScalarJets_zero_at_origin hS hT rsel hrsel,
-      Pi.zero_apply, sub_zero]
-  rw [heq] at hmem
-  exact hmem
+      hN.endpointFlowScalarJets hS hT rsel hrsel 0 u Fin.elim0 :=
+    scaled_curve_endpoint_sub_eq
+      (fun x : StateDirections S × ℝ =>
+        hN.endpointFlowScalarJets hS hT rsel hrsel 0 x Fin.elim0) u
+      (hN.endpointFlowScalarJets_zero_at_origin hS hT rsel hrsel)
+  exact (congrArg (CircleMember T (3 / 4 : ℝ)) heq).mp hmem
 
 end ContinuousFlexibility.Statements
