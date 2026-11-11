@@ -18,6 +18,18 @@ open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n08_zero_control_sum
+    {B F : Type*} [TopologicalSpace B] [AddCommGroup B] [Module ℝ B]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (L : B →L[ℝ] F) (y : F) : y + L 0 = y := by
+  rw [map_zero, add_zero]
+
+private theorem n08_sourceResidual_congr {P M X Y Z : Type*}
+    (source : Y → Z) (residual : M → X → Y) (expProfile : P → M)
+    {p q : P} {x y : X} (hp : p = q) (hx : x = y) :
+    source (residual (expProfile p) x) = source (residual (expProfile q) y) :=
+  congrArg source (congrArg₂ residual (congrArg expProfile hp) hx)
+
 def n08ExtendedHeightParameterCLM (S : PhysicalSpacesData) :
     (AnnularState S × ℝ) × ControlBanach →L[ℝ] ScalarWeightedState S :=
   (n08ScalarHeightParameter S).comp
@@ -66,9 +78,15 @@ theorem n08ExtendedControlResidual_zero
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (z : AnnularState S × ℝ) :
     n08ExtendedControlResidual hT hS hN (z, 0) = n08ActualScalarResidual hT hS hN z := by
+  have hlog : n08ExtendedLogProfileLift hT hS hN (z, 0) =
+      n08LogProfileLift hT hS hN z.1 :=
+    (n08ExtendedLogProfileLift_apply hT hS hN (z, 0)).trans
+      (n08_zero_control_sum (n08WeakControlLift hT hS hN) (n08LogProfileLift hT hS hN z.1))
   unfold n08ExtendedControlResidual n08ActualScalarResidual n08ScalarSourceResidual
     n08ProfilePerturbation
-  rw [n08ExtendedLogProfileLift_apply, map_zero, add_zero]
+  exact n08_sourceResidual_congr (n08SourceProjection hS)
+    (n08ProfileResidual hN.1.1 hT hS n08WeakControlWeight_pos.le)
+    (n08ExpProfile hT hS) hlog rfl
 
 theorem n08ExtendedControlResidual_reference
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -87,7 +105,9 @@ theorem n08ExtendedControlResidual_controlLine
         (z.1 + n08StateSMul S t (0, (0, (u, 0))), z.2) := by
   unfold n08ExtendedControlResidual n08ActualScalarResidual n08ScalarSourceResidual
     n08ProfilePerturbation
-  rw [n08ExtendedLogProfileLift_controlLine hT hS hN,
-    n08ScalarHeightParameter_controlLine]
+  exact n08_sourceResidual_congr (n08SourceProjection hS)
+    (n08ProfileResidual hN.1.1 hT hS n08WeakControlWeight_pos.le)
+    (n08ExpProfile hT hS) (n08ExtendedLogProfileLift_controlLine hT hS hN z u t)
+    (n08ScalarHeightParameter_controlLine S z u t).symm
 
 end ContinuousFlexibility.Statements

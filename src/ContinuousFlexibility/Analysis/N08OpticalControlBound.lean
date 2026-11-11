@@ -26,6 +26,26 @@ theorem n08_sqrtAffine_response_sq_bound {A B R W L : ℝ}
   rw [div_pow, Real.sq_sqrt hA.le]
   exact (div_le_div_iff₀ hA (mul_pos hR hW)).mpr hprod
 
+private theorem n08_sqrtAffine_weighted_response_sq_bound
+    {A d r ε p H β : ℝ} (hA : 0 < A) (hε : 0 < ε)
+    (hp : 0 ≤ p) (hH : 0 < H)
+    (hrelative : (ε / (1 + p)) * |H ^ β * (-d / r)| ≤ A) :
+    (d / r / Real.sqrt A) ^ 2 ≤
+      |d / r| * ((1 + p) / ε) * H ^ (-β) := by
+  have hp' : 0 < 1 + p := by linarith
+  have hW : 0 < H ^ β := Real.rpow_pos_of_pos hH β
+  have hrad : 0 < ε / (1 + p) := div_pos hε hp'
+  have hrelative' : (ε / (1 + p)) * H ^ β * |-d / r| ≤ A := by
+    simpa only [abs_mul, abs_of_pos hW, mul_assoc] using hrelative
+  have hbound := n08_sqrtAffine_response_sq_bound hA hrad hW hrelative' le_rfl
+  have heq : |-d / r| / ((ε / (1 + p)) * H ^ β) =
+      |d / r| * ((1 + p) / ε) * H ^ (-β) := by
+    rw [neg_div, abs_neg, Real.rpow_neg hH.le]
+    field_simp [hε.ne', hp'.ne', hW.ne']
+    <;> ring
+  rw [heq] at hbound
+  simpa only [neg_div, neg_sq] using hbound
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -36,6 +56,17 @@ open ContinuousFlexibility.Analysis
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem n08_control_reference_radicand_pos
+    (hN : N01Properties D T S C base loss ε)
+    (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (C.left m) (C.right m)) :
+    0 < -deriv D.w r / (r * D.w r) := by
+  have hg : RadialProfileGeometry D := hN.1.1.choose_spec.1
+  have hC := hN.2.2.2.1
+  have hcore : r ∈ radialCore D :=
+    ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
+  exact div_pos (neg_pos.mpr (hC.2.2.2.1 m r hr))
+    (mul_pos (hg.1.trans hcore.1) (hg.2.2.2.2.1 r hcore))
+
 theorem n08_control_optical_response_sq_bound
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (hN : N01Properties D T S C base loss ε)
@@ -43,40 +74,15 @@ theorem n08_control_optical_response_sq_bound
     (deriv (C.control m) r / r / opticalSpeed D.w r) ^ 2 ≤
       |deriv (C.control m) r / r| *
         ((1 + stateGrading S base (0, 0, n08ControlBasis hS m, 0)) / ε) *
-        T.H (T.sample m) ^ (-(3 / 4 : ℝ)) := by
-  let p : ℝ := stateGrading S base (0, 0, n08ControlBasis hS m, 0)
-  let W : ℝ := T.H (T.sample m) ^ (3 / 4 : ℝ)
-  let radius : ℝ := ε / (1 + p)
-  let A : ℝ := -deriv D.w r / (r * D.w r)
-  have hg : RadialProfileGeometry D := hN.1.1.choose_spec.1
-  have hC := hN.2.2.2.1
-  have hcore : r ∈ radialCore D :=
-    ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
-  have hrpos : 0 < r := hg.1.trans hcore.1
-  have hwpos := hg.2.2.2.2.1 r hcore
-  have hA : 0 < A :=
-    div_pos (neg_pos.mpr (hC.2.2.2.1 m r hr)) (mul_pos hrpos hwpos)
-  have hH := n08_materialSample_H_pos hT hN.1.1 m
-  have hW : 0 < W := Real.rpow_pos_of_pos hH _
-  have hp : 0 < 1 + p := by
-    have := apply_nonneg (stateGrading S base) (0, 0, n08ControlBasis hS m, 0)
-    linarith
-  have hrad : 0 < radius := div_pos hN.2.1 hp
-  have hrelative : radius * W * |-deriv (C.control m) r / r| ≤ A := by
-    have h := n08_controlBasis_radical_relative_bound hS hT hN m r hr
-    rw [abs_mul, abs_of_pos hW, ← mul_assoc] at h
-    exact h
-  have hbound := n08_sqrtAffine_response_sq_bound hA hrad hW hrelative le_rfl
-  have heq : |-deriv (C.control m) r / r| / (radius * W) =
-      |deriv (C.control m) r / r| * ((1 + p) / ε) *
-        T.H (T.sample m) ^ (-(3 / 4 : ℝ)) := by
-    rw [neg_div, abs_neg, Real.rpow_neg hH.le]
-    change |deriv (C.control m) r / r| / ((ε / (1 + p)) * W) =
-      |deriv (C.control m) r / r| * ((1 + p) / ε) * W⁻¹
-    field_simp [hN.2.1.ne', hp.ne', hW.ne']
-    <;> ring
-  rw [heq] at hbound
-  simpa only [neg_div, neg_sq, opticalSpeed, A] using hbound
+        T.H (T.sample m) ^ (-(3 / 4 : ℝ)) :=
+  n08_sqrtAffine_weighted_response_sq_bound
+    (A := -deriv D.w r / (r * D.w r)) (d := deriv (C.control m) r) (r := r)
+    (ε := ε) (p := stateGrading S base (0, 0, n08ControlBasis hS m, 0))
+    (H := T.H (T.sample m)) (β := (3 / 4 : ℝ))
+    (n08_control_reference_radicand_pos hN m r hr) hN.2.1
+    (apply_nonneg (stateGrading S base) (0, 0, n08ControlBasis hS m, 0))
+    (n08_materialSample_H_pos hT hN.1.1 m)
+    (n08_controlBasis_radical_relative_bound hS hT hN m r hr)
 
 /-- The only label losses are powers of the actual material weights.
 The square of the response loses one `H^β`, hence the response itself

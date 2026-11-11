@@ -20,6 +20,48 @@ open Set ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+private def n08_tameDirections
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    {U : Set E} {f : E → F} (hf : SmoothTameOn p q U f) :
+    SmoothDirections U f := Classical.choose hf
+
+/-- Select the same rectangular neighborhood for every order of the
+actual scalar tower, before specializing its projective carriers. -/
+private theorem n08_uniformTameGerm_with_rectangle
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    (hp : Monotone p) (ht : WithSeminorms p) (x0 : E)
+    (base : ℕ) {ε : ℝ} (hε : 0 < ε) {f : E × ℝ → F}
+    (hf : UniformTameGerm (pairGrading p realGrading) q (x0, 0) f)
+    {P : Prop}
+    (hP : ∀ b : ℕ, ∀ δ : ℝ, base ≤ b → 0 < δ → δ ≤ ε →
+      SmoothTameOn (pairGrading p realGrading) q
+        {z : E × ℝ | p b (z.1 - x0) < δ ∧ |z.2| < δ} f → P) : P := by
+  letI : IsTopologicalAddGroup E := ht.isTopologicalAddGroup
+  obtain ⟨germBase, germLoss, radius, hradius, hfixed⟩ := hf
+  let b := max base germBase
+  let δ := min ε (radius / 2)
+  have hsub : {z : E × ℝ | p b (z.1 - x0) < δ ∧ |z.2| < δ} ⊆
+      {z | pairGrading p realGrading germBase (z - (x0, 0)) < radius} := by
+    intro z hz
+    change p germBase (z.1 - x0) + |z.2 - 0| < radius
+    rw [sub_zero]
+    have hx := (hp (le_max_right base germBase) (z.1 - x0)).trans_lt hz.1
+    have hq := hz.2
+    have hd : δ ≤ radius / 2 := min_le_right _ _
+    linarith
+  have hopen : IsOpen {z : E × ℝ | p b (z.1 - x0) < δ ∧ |z.2| < δ} :=
+    (isOpen_lt ((ht.continuous_seminorm b).comp
+      (continuous_fst.sub continuous_const)) continuous_const).inter
+        (isOpen_lt continuous_snd.abs continuous_const)
+  exact hP b δ (le_max_left _ _) (lt_min hε (half_pos hradius))
+    (min_le_left _ _) (smoothTameOn_mono hfixed.1 hopen hsub)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -56,6 +98,24 @@ theorem n08ResidualData_reference
     (fun _ hz hs => n08ResidualData_scalar_decode hT hS hN hR hz hs)
     (fun _ hz hs => n08ResidualData_circle_coe hT hS hN hR hz hs)
 
+private theorem n08ResidualData_smooth_of_scalar
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε)
+    {b : ℕ} {δ : ℝ} (hb : base ≤ b) (hδε : δ ≤ ε)
+    (hscalar : SmoothTameOn (pairGrading (stateGrading S) realGrading) S.sourceGrading
+      (stateNeighborhood S C b δ) (n08ActualScalarResidual hT hS hN)) :
+    SmoothTameOn (pairGrading (sectorGrading S) realGrading) (residualGrading S)
+      (sectorNeighborhood S b δ δ)
+      (sectorJointResidual S C (n08ResidualData hT hS hN hR)) := by
+  have hsector := n08_smoothTameOn_sector_pullback (C := C) hscalar
+    (fun z hz => (n08_liftSectorParameter_mem S C b δ z).mpr hz)
+  have hcircle := smoothTameOn_mono (n08CircleResidual_smoothTame hS hN.2.2.1 hR)
+    (n08_isOpen_sectorNeighborhood S b δ δ) (n08_sectorNeighborhood_mono hb hδε hδε)
+  exact smoothTameOn_prodMk_generic
+    (tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone)
+    (withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S)
+      weighted_realGrading_withSeminorms) hsector hcircle
+
 /-- The same actual residual and nu column work on one open neighborhood;
 the nu derivative is not restricted to sector directions or base points. -/
 theorem n08ResidualData_nu_and_smooth
@@ -73,44 +133,21 @@ theorem n08ResidualData_nu_and_smooth
         SmoothTameOn (pairGrading (sectorGrading S) realGrading) (residualGrading S)
           (sectorNeighborhood S b δ δ)
           (sectorJointResidual S C (n08ResidualData hT hS hN hR)) := by
-  obtain ⟨germBase, germLoss, radius, hradius, hfixed⟩ :=
-    n08ActualScalarResidual_uniformTameGerm hT hS hN
-  let b := max base germBase
-  let δ := min ε (radius / 2)
-  have hb : base ≤ b := le_max_left _ _
-  have hδ : 0 < δ := lt_min hN.2.1 (half_pos hradius)
-  have hδε : δ ≤ ε := min_le_left _ _
+  refine n08_uniformTameGerm_with_rectangle (solve_stateGrading_monotone S)
+    (solve_stateGrading_withSeminorms S) C.referenceState base hN.2.1
+    (n08ActualScalarResidual_uniformTameGerm hT hS hN) ?_
+  intro b δ hb hδ hδε hscalar
   have hsubN : stateNeighborhood S C b δ ⊆ stateNeighborhood S C base ε :=
     n08_stateNeighborhood_mono hb hδε
-  have hsub : stateNeighborhood S C b δ ⊆
-      {z | pairGrading (stateGrading S) realGrading germBase
-        (z - (C.referenceState, 0)) < radius} := by
-    intro z hz
-    change stateGrading S germBase (z.1 - C.referenceState) + |z.2 - 0| < radius
-    rw [sub_zero]
-    have hx := (solve_stateGrading_monotone S (le_max_right base germBase)
-      (z.1 - C.referenceState)).trans_lt hz.1
-    have hq := hz.2
-    have hd : δ ≤ radius / 2 := min_le_right _ _
-    linarith
-  obtain ⟨J, _⟩ := hfixed.2
-  let J' := smoothDirectionsRestrict J (n08_isOpen_stateNeighborhood S C b δ) hsub
-  refine ⟨b, δ, hb, hδ, hδε, n08NuColumn J', ?_, ?_, ?_⟩
+  let J : SmoothDirections (stateNeighborhood S C b δ) (n08ActualScalarResidual hT hS hN) :=
+    n08_tameDirections hscalar
+  refine ⟨b, δ, hb, hδ, hδε, n08NuColumn J, ?_, ?_, ?_⟩
   · intro z hz hs p hp
-    exact n08NuColumn_decode hS J'
+    exact n08NuColumn_decode hS J
       (fun _ hy hsector => n08ActualScalarResidual_decode hT hS hN (hsubN hy) hsector)
       hz hs p hp
   · intro z hz
-    exact n08NuColumn_hasLineDerivAt J' hz
-  · have hscalar := smoothTameOn_mono hfixed.1
-      (n08_isOpen_stateNeighborhood S C b δ) hsub
-    have hsector := n08_smoothTameOn_sector_pullback hscalar
-      (fun z hz => (n08_liftSectorParameter_mem S C b δ z).mpr hz)
-    have hcircle := smoothTameOn_mono (n08CircleResidual_smoothTame hS hN.2.2.1 hR)
-      (n08_isOpen_sectorNeighborhood S b δ δ) (n08_sectorNeighborhood_mono hb hδε hδε)
-    exact smoothTameOn_prodMk_generic
-      (tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone)
-      (withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S)
-        weighted_realGrading_withSeminorms) hsector hcircle
+    exact n08NuColumn_hasLineDerivAt J hz
+  · exact n08ResidualData_smooth_of_scalar hT hS hN hR hb hδε hscalar
 
 end ContinuousFlexibility.Statements
