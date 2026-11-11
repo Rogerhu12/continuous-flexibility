@@ -34,7 +34,7 @@ theorem AccumulatingProfileBounds.mono {D : ReferenceData} {C C' : ℕ → ℝ}
   · intro m r hr s
     have hp := mul_le_mul_of_nonneg_right (hCC s) (sq_nonneg (D.cellIndex m : ℝ))
     exact (hjet m r hr s).trans (mul_le_mul (hCC s)
-      (exp_le_exp.mpr (add_le_add_left hp _)) (exp_pos _).le (hC' s).le)
+      (exp_le_exp.mpr (by linarith only [hp])) (exp_pos _).le (hC' s).le)
   · intro m r hr s
     have hE : 1 ≤ radialE (D.cellIndex m) :=
       one_le_exp_iff.mpr ((sq_nonneg (D.cellIndex m : ℝ)).trans
