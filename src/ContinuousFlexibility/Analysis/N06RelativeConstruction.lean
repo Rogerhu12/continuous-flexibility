@@ -47,7 +47,7 @@ def n06RelativeOperator
     (P : AnnularState S × ℝ → B.Space →L[ℝ] V.level (3 / 4 : ℝ) 0 b)
     (z : AnnularState S × ℝ) :
     V.level (3 / 4 : ℝ) 0 b →L[ℝ] V.level (3 / 4 : ℝ) 0 b :=
-  (P z).comp B.inverse - ContinuousLinearMap.id ℝ _
+  (P z).comp B.inverse - ContinuousLinearMap.id ℝ (V.level (3 / 4 : ℝ) 0 b)
 
 /-- The relative inverse data, defined at every parameter, on the original source and graph. -/
 def n06RelativeData [CompleteSpace (V.level (3 / 4 : ℝ) 0 b)]
@@ -77,9 +77,9 @@ theorem n06Properties_of_smallRelativeOperator
     simp only [n06RelativeData, n06RelativeOperator, ContinuousLinearMap.sub_apply,
       ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply]
   · intro u
-    change P z u = u.val.2 + ((P z).comp B.inverse - ContinuousLinearMap.id ℝ _) u.val.2
-    rw [ContinuousLinearMap.sub_apply, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.id_apply, hleft]
+    change P z u = u.val.2 + n06RelativeOperator P z u.val.2
+    simp only [n06RelativeOperator, ContinuousLinearMap.sub_apply,
+      ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply, hleft]
     abel
   · exact (n06TotalNeumannInverse_spec (n06RelativeOperator P z) hR).1
   · exact (n06TotalNeumannInverse_spec (n06RelativeOperator P z) hR).2

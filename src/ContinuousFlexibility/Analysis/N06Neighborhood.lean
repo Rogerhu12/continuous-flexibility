@@ -58,6 +58,108 @@ theorem n06_oneHighVariationWeight_mono {E : Type*} [AddCommGroup E] [Module ℝ
   simpa only [tameJetSize, oneHighVariationWeight, Nat.zero_add] using
     (tameJetSize_mono hp hh hb k 0 x v)
 
+private theorem n06_forall_mem_mono {α : Type*} {U V : Set α}
+    (hVU : V ⊆ U) {P : α → Prop} (h : ∀ x ∈ U, P x) : ∀ x ∈ V, P x :=
+  fun x hx => h x (hVU hx)
+
+private theorem n06_uniform_bound_mono {α ι : Type*} {U V : Set α}
+    (hVU : V ⊆ U) {P : ι → ℝ → α → Prop}
+    (h : ∀ i, ∃ B : ℝ, 0 < B ∧ ∀ x ∈ U, P i B x) :
+    ∀ i, ∃ B : ℝ, 0 < B ∧ ∀ x ∈ V, P i B x := by
+  intro i
+  obtain ⟨B, hB, hbound⟩ := h i
+  exact ⟨B, hB, n06_forall_mem_mono hVU hbound⟩
+
+private theorem n06_directional_bound_mono
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U V : Set E} {f : E → ℝ} {p : ℕ → Seminorm ℝ E}
+    {k base base' high : ℕ} {K w : ℝ} {x₀ : E}
+    (hp : Monotone p) (hb : base ≤ base') (hK : 0 ≤ K)
+    (hV : IsOpen V) (hVU : V ⊆ U)
+    (h : ∃ J : SmoothDirections U f, ∀ x ∈ U, ∀ v : Fin k → E,
+      w * |J.D k x v| ≤ K * oneHighVariationWeight p base high (x - x₀) v) :
+    ∃ J : SmoothDirections V f, ∀ x ∈ V, ∀ v : Fin k → E,
+      w * |J.D k x v| ≤ K * oneHighVariationWeight p base' high (x - x₀) v := by
+  obtain ⟨J, hJ⟩ := h
+  refine ⟨smoothDirectionsRestrict J hV hVU, ?_⟩
+  intro x hx v
+  change w * |J.D k x v| ≤ _
+  exact (hJ x (hVU hx) v).trans (mul_le_mul_of_nonneg_left
+    (n06_oneHighVariationWeight_mono hp hb le_rfl (x - x₀) v) hK)
+
+private theorem n06_coefficientJet_bounds_mono
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base base' loss : ℕ} {ε ε' : ℝ}
+    (hH : ∀ m, 0 < T.H (T.sample m)) (hE : ∀ m, 0 < T.E0 (T.sample m))
+    (hb : base ≤ base') (hε : ε' ≤ ε)
+    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b p,
+      a + b ≤ s → p.1 ∈ D.cells m →
+      ∃ J : SmoothDirections (stateNeighborhood S C base ε) (coefficientFamily D S C i a b p),
+        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+          |J.D k z v| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample m) ^ B *
+            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+              base (s + loss) (z - (C.referenceState, 0)) v) :
+    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b p,
+      a + b ≤ s → p.1 ∈ D.cells m →
+      ∃ J : SmoothDirections (stateNeighborhood S C base' ε') (coefficientFamily D S C i a b p),
+        ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
+          |J.D k z v| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample m) ^ B *
+            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+              base' (s + loss) (z - (C.referenceState, 0)) v := by
+  intro k s
+  obtain ⟨B, hB, hJ⟩ := h k s
+  refine ⟨B, hB, ?_⟩
+  intro m i a b p hab hp
+  have hK : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B :=
+    mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
+      (Real.rpow_pos_of_pos (hE m) _).le
+  have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
+    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
+  have hj := hJ m i a b p hab hp
+  have hresult := n06_directional_bound_mono (w := 1) hpair hb hK
+    (n06_isOpen_stateNeighborhood S C base' ε')
+    (n06_stateNeighborhood_mono (C := C) hb hε) (by simpa only [one_mul] using hj)
+  simpa only [one_mul] using hresult
+
+private theorem n06_flowJet_bounds_mono
+    {T : MaterialData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {base base' loss : ℕ} {ε ε' : ℝ}
+    (hH : ∀ m, 0 < T.H (T.sample m)) (hE : ∀ m, 0 < T.E0 (T.sample m))
+    (hb : base ≤ base') (hε : ε' ≤ ε)
+    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
+      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+      ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
+        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
+            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample (C.cell m)) ^ B *
+            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+              base (s + loss) (z - (C.referenceState, 0)) v) :
+    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
+      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+      ∃ J : SmoothDirections (stateNeighborhood S C base' ε') (ordinaryFlowFamily S C m a b p),
+        ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
+          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
+            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample (C.cell m)) ^ B *
+            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+              base' (s + loss) (z - (C.referenceState, 0)) v := by
+  intro k s
+  obtain ⟨B, hB, hJ⟩ := h k s
+  refine ⟨B, hB, ?_⟩
+  intro m a b p hab hp
+  have hK : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B :=
+    mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH (C.cell m)) _).le)
+      (Real.rpow_pos_of_pos (hE (C.cell m)) _).le
+  have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
+    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
+  exact n06_directional_bound_mono hpair hb hK
+    (n06_isOpen_stateNeighborhood S C base' ε')
+    (n06_stateNeighborhood_mono (C := C) hb hε) (hJ m a b p hab hp)
+
 theorem n06_N01Properties_mono {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {base base' loss : ℕ} {ε ε' : ℝ}
@@ -67,42 +169,17 @@ theorem n06_N01Properties_mono {D : ReferenceData} {T : MaterialData}
   rcases h with ⟨hRef, _, hstate, hcontrol, hshift, hcontrolBounds, hflow,
     hleft, hreturn, hgeometry, hfixed, hcoefficient, hflowJet⟩
   have hU := n06_stateNeighborhood_mono (C := C) hb hε
-  have hopen := n06_isOpen_stateNeighborhood S C base' ε'
-  have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
-    tamePairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
   obtain ⟨_, hprofile⟩ := hRef.1
   have hsample (m : ℕ) : T.sample m ∈ Ioo D.a D.b :=
     materialSample_mem_radialCore hT hprofile.2.1 m
   have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsample m)).2.1
   have hE (m : ℕ) : 0 < T.E0 (T.sample m) := (hT.2.1 _ (hsample m)).2.2.1
-  refine ⟨hRef, hε', hstate, hcontrol, hshift, hcontrolBounds,
-    (fun z hz => hflow z (hU hz)), (fun z hz => hleft z (hU hz)),
-    (fun z hz => hreturn z (hU hz)), (fun z hz => hgeometry z (hU hz)),
-    (fun z hz => hfixed z (hU hz)), ?_, ?_⟩
-  · intro k s
-    obtain ⟨B, hB, hJ⟩ := hcoefficient k s
-    refine ⟨B, hB, ?_⟩
-    intro m i a b p hab hp
-    obtain ⟨J, hbound⟩ := hJ m i a b p hab hp
-    refine ⟨smoothDirectionsRestrict J hopen hU, ?_⟩
-    intro z hz v
-    change |J.D k z v| ≤ _
-    exact (hbound z (hU hz) v).trans (mul_le_mul_of_nonneg_left
-      (n06_oneHighVariationWeight_mono hpair hb le_rfl _ v)
-      (mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
-        (Real.rpow_pos_of_pos (hE m) _).le))
-  · intro k s
-    obtain ⟨B, hB, hJ⟩ := hflowJet k s
-    refine ⟨B, hB, ?_⟩
-    intro m a b p hab hp
-    obtain ⟨J, hbound⟩ := hJ m a b p hab hp
-    refine ⟨smoothDirectionsRestrict J hopen hU, ?_⟩
-    intro z hz v
-    change min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤ _
-    exact (hbound z (hU hz) v).trans (mul_le_mul_of_nonneg_left
-      (n06_oneHighVariationWeight_mono hpair hb le_rfl _ v)
-      (mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH (C.cell m)) _).le)
-        (Real.rpow_pos_of_pos (hE (C.cell m)) _).le))
+  have hcoefficient' := n06_coefficientJet_bounds_mono hH hE hb hε hcoefficient
+  have hflowJet' := n06_flowJet_bounds_mono hH hE hb hε hflowJet
+  exact ⟨hRef, hε', hstate, hcontrol, hshift, hcontrolBounds,
+    n06_forall_mem_mono hU hflow, n06_forall_mem_mono hU hleft,
+    n06_forall_mem_mono hU hreturn, n06_forall_mem_mono hU hgeometry,
+    n06_forall_mem_mono hU hfixed, hcoefficient', hflowJet'⟩
 
 theorem n06_N02Properties_mono {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
@@ -149,17 +226,14 @@ theorem n06_N04Properties_mono {D : ReferenceData} {T : MaterialData}
     hcover, hcharts, hboundary, hparity, hinverseParity, hcuts, htransmission,
     hoperator, hnegativeCoefficients, hpositiveDifference, hbounds, hpairing⟩
   have hU := n06_stateNeighborhood_mono (C := C) hb hε
-  refine ⟨hopen, hsupport, (fun z hz => hnormalization z (hU hz)),
-    hpieces, hpositive, hnegative, hcover, (fun z hz => hcharts z (hU hz)),
-    (fun z hz => hboundary z (hU hz)), (fun z hz => hparity z (hU hz)),
-    (fun z hz => hinverseParity z (hU hz)), hcuts,
-    (fun z hz => htransmission z (hU hz)), (fun z hz => hoperator z (hU hz)),
-    (fun z hz => hnegativeCoefficients z (hU hz)),
-    (fun z hz => hpositiveDifference z (hU hz)), ?_,
-    (fun z hz => hpairing z (hU hz))⟩
-  intro s
-  obtain ⟨B, hB, hbound⟩ := hbounds s
-  exact ⟨B, hB, fun z hz => hbound z (hU hz)⟩
+  exact ⟨hopen, hsupport, n06_forall_mem_mono hU hnormalization,
+    hpieces, hpositive, hnegative, hcover, n06_forall_mem_mono hU hcharts,
+    n06_forall_mem_mono hU hboundary, n06_forall_mem_mono hU hparity,
+    n06_forall_mem_mono hU hinverseParity, hcuts,
+    n06_forall_mem_mono hU htransmission, n06_forall_mem_mono hU hoperator,
+    n06_forall_mem_mono hU hnegativeCoefficients,
+    n06_forall_mem_mono hU hpositiveDifference, n06_uniform_bound_mono hU hbounds,
+    n06_forall_mem_mono hU hpairing⟩
 
 /-- Raising the low order and reducing the radius retains the complete
 construction through N05, on the very same source space and reference graph. -/
