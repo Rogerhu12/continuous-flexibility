@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology
+open scoped Topology InnerProductSpace
 open ContinuousFlexibility.Statements
 
 /-- The energy closure, viewed as a closed subspace of the Hilbert product. -/

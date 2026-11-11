@@ -17,7 +17,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Filter
-open scoped Topology
+open scoped Topology InnerProductSpace
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H] [CompleteSpace H]
 
@@ -106,7 +106,7 @@ theorem closedGradientResolvent_norm_le (K : ClosedSubmodule ℝ (GradientHilber
   rw [one_mul, closedGradientResolvent_apply]
   calc
     ‖(closedGradientResolventPair K f).fst‖ ≤ ‖closedGradientResolventPair K f‖ :=
-      WithLp.norm_fst_le _
+      WithLp.norm_fst_le (α := H) (β := H) (p := 2) (closedGradientResolventPair K f)
     _ ≤ ‖gradientInjection f‖ := by
       rw [closedGradientResolventPair_apply]
       simpa only [one_mul] using K.toSubmodule.starProjection.le_of_opNorm_le_of_le
@@ -150,7 +150,16 @@ theorem closedGradientResolvent_tendsto
       (𝓝 (closedGradientResolvent K f)) := by
   have ht := Submodule.starProjection_tendsto_closure_iSup
     (fun n => (Kₙ n).toSubmodule) hmono (gradientInjection f)
-  rw [← hclosure] at ht
+  have hproj : (⨆ n : ℕ, (Kₙ n).toSubmodule).topologicalClosure.starProjection
+      (gradientInjection f) = K.toSubmodule.starProjection (gradientInjection f) := by
+    apply Submodule.eq_starProjection_of_mem_of_inner_eq_zero
+    · exact (congrArg (fun M : Submodule ℝ (GradientHilbert H) =>
+        K.toSubmodule.starProjection (gradientInjection f) ∈ M) hclosure).mp
+          (K.toSubmodule.starProjection_apply_mem _)
+    · intro w hw
+      exact K.toSubmodule.starProjection_inner_eq_zero (gradientInjection f) w
+        ((congrArg (fun M : Submodule ℝ (GradientHilbert H) => w ∈ M) hclosure).mpr hw)
+  rw [hproj] at ht
   have hf := (WithLp.continuous_fst.tendsto _).comp ht
   simpa only [closedGradientResolvent_apply, closedGradientResolventPair_apply] using hf
 

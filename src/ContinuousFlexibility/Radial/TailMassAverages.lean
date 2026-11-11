@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open MeasureTheory Set
-open scoped lp
+open scoped lp ENNReal InnerProductSpace RealInnerProductSpace
 
 variable {α ι : Type*} [MeasurableSpace α] [DecidableEq ι]
   {μ : Measure α}

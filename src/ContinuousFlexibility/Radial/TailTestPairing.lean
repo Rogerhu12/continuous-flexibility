@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Statements.Radial
+import ContinuousFlexibility.Statements.DeepTailOperator
 import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 import Mathlib.Analysis.Calculus.Deriv.Support
 import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
@@ -17,7 +17,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory Real
-open scoped Topology ContDiff
+open scoped Topology ContDiff InnerProductSpace
 open ContinuousFlexibility.Statements
 
 theorem tail_contDiff_mul_test {T : DeepTailData} {φ : ℝ → ℝ}
@@ -131,7 +131,7 @@ theorem tail_integral_div_test {T : DeepTailData} {φ : ℝ → ℝ}
         ∫ x in Ioo T.entrance T.endpoint, f x * φ x := by
       apply integral_congr_ae
       filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
-      field_simp [(hpos x hx).ne']
+      field_simp [(hpos x hx).ne'] <;> ring
     _ = ∫ x, f x * φ x :=
       setIntegral_eq_integral_of_forall_compl_eq_zero (fun x hx => by
         have hzero : φ x = 0 := Function.notMem_support.mp (fun h => hx (hs h))
@@ -165,7 +165,7 @@ theorem tail_integrable_mul_test {T : DeepTailData} {φ : ℝ → ℝ}
     apply hw.congr_fun _ measurableSet_Ioo
     intro x hx
     change T.p x * (u x * (φ x / T.p x)) = u x * φ x
-    field_simp [(hpos x hx).ne']
+    field_simp [(hpos x hx).ne'] <;> ring
   apply (integrableOn_iff_integrable_of_support_subset ?_).mp he
   intro x hx
   exact hs (subset_tsupport φ (by

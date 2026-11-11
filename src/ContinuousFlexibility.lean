@@ -336,3 +336,11 @@ import ContinuousFlexibility.Radial.TailSmoothResistanceStep
 import ContinuousFlexibility.Radial.TailLowHats
 import ContinuousFlexibility.Radial.TailFiniteCoefficientBounds
 import ContinuousFlexibility.Radial.TailFiniteLowHats
+import ContinuousFlexibility.Radial.TailClosedHighBound
+import ContinuousFlexibility.Radial.TailCoreAverages
+import ContinuousFlexibility.Radial.TailLowSynthesisForm
+import ContinuousFlexibility.Radial.TailActualLowProjection
+import ContinuousFlexibility.Radial.TailInverseTruncation
+import ContinuousFlexibility.Radial.TailDeepInverse
+import ContinuousFlexibility.Blueprint.R06a
+import ContinuousFlexibility.Statements.DeepTailOperator

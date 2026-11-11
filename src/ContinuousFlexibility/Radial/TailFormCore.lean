@@ -1,4 +1,5 @@
-import ContinuousFlexibility.Statements.Radial
+import ContinuousFlexibility.Statements.DeepTailOperator
+import Mathlib.Analysis.Calculus.Deriv.Support
 import Mathlib.MeasureTheory.Function.LpSpace.Indicator
 import Mathlib.Topology.Algebra.Module.Basic
 import Mathlib.Topology.Order.MonotoneConvergence
@@ -42,10 +43,10 @@ theorem deepTail_entrance_lt_succ_node {T : DeepTailData} (hT : DeepTailHypothes
 
 theorem tailEnergyCore_zero (T : DeepTailData) (endCut : ℝ) :
     (0 : DeepTailL2 T × DeepTailL2 T) ∈ TailEnergyCore T endCut := by
-  refine ⟨0, contDiff_const, hasCompactSupport_zero, ?_, ?_, ?_⟩
+  refine ⟨0, contDiff_const, HasCompactSupport.zero, ?_, ?_, ?_⟩
   · simp only [tsupport_zero, empty_subset]
-  · exact Lp.coeFn_zero _ _ _
-  · simpa only [deriv_const'] using (Lp.coeFn_zero ℝ 2 (deepTailMeasure T))
+  · simpa only [Prod.fst_zero] using (Lp.coeFn_zero ℝ 2 (deepTailMeasure T))
+  · simpa only [Prod.snd_zero, deriv_zero] using (Lp.coeFn_zero ℝ 2 (deepTailMeasure T))
 
 theorem tailEnergyCore_add {T : DeepTailData} {endCut : ℝ}
     {p q : DeepTailL2 T × DeepTailL2 T}
@@ -56,9 +57,10 @@ theorem tailEnergyCore_add {T : DeepTailData} {endCut : ℝ}
   refine ⟨φ + ψ, hφ.add hψ, hcφ.add hcψ, (tsupport_add φ ψ).trans
     (union_subset hsφ hsψ), ?_, ?_⟩
   · filter_upwards [Lp.coeFn_add p.1 q.1, hφ₀, hψ₀] with x hx hφx hψx
+    simp only [Prod.fst_add, Pi.add_apply] at hx ⊢
     exact hx.trans (congrArg₂ (· + ·) hφx hψx)
   · filter_upwards [Lp.coeFn_add p.2 q.2, hφ₁, hψ₁] with x hx hφx hψx
-    rw [hx, hφx, hψx]
+    rw [Prod.snd_add, hx, Pi.add_apply, hφx, hψx]
     exact (deriv_add (hφ.differentiable (by simp)).differentiableAt
       (hψ.differentiable (by simp)).differentiableAt).symm
 
@@ -66,12 +68,12 @@ theorem tailEnergyCore_smul {T : DeepTailData} {endCut : ℝ}
     {p : DeepTailL2 T × DeepTailL2 T} (hp : p ∈ TailEnergyCore T endCut) (a : ℝ) :
     a • p ∈ TailEnergyCore T endCut := by
   rcases hp with ⟨φ, hφ, hcφ, hsφ, hφ₀, hφ₁⟩
-  refine ⟨fun x => a * φ x, hφ.const_mul a, hcφ.mul_left, ?_, ?_, ?_⟩
+  refine ⟨fun x => a * φ x, contDiff_const.mul hφ, hcφ.mul_left, ?_, ?_, ?_⟩
   · exact tsupport_mul_subset_right.trans hsφ
   · filter_upwards [Lp.coeFn_smul a p.1, hφ₀] with x hx hφx
-    simpa only [Pi.smul_apply, smul_eq_mul, hφx] using hx
+    simpa only [Prod.smul_fst, Pi.smul_apply, smul_eq_mul, hφx] using hx
   · filter_upwards [Lp.coeFn_smul a p.2, hφ₁] with x hx hφx
-    simpa only [Pi.smul_apply, smul_eq_mul, hφx, deriv_const_mul_field] using hx
+    simpa only [Prod.smul_snd, Pi.smul_apply, smul_eq_mul, hφx, deriv_const_mul_field] using hx
 
 /-- The algebraic core as a submodule, before taking the energy closure. -/
 def tailEnergyCoreSubmodule (T : DeepTailData) (endCut : ℝ) :
@@ -180,7 +182,7 @@ private theorem tailIndicatorValue_add (T : DeepTailData) (s : Set ℝ)
     tailIndicatorValue_coeFn T s hs f, tailIndicatorValue_coeFn T s hs g,
     Lp.coeFn_add f g, Lp.coeFn_add (tailIndicatorValue T s hs f)
       (tailIndicatorValue T s hs g)] with x hfg hf hg ha hb
-  rw [hfg, hb, hf, hg]
+  rw [hfg, hb, Pi.add_apply, hf, hg]
   by_cases hx : x ∈ s
   · simpa only [indicator_of_mem hx, Pi.add_apply] using ha
   · simp only [indicator_of_notMem hx, add_zero]
@@ -208,27 +210,41 @@ private theorem tailIndicatorValue_norm_le (T : DeepTailData) (s : Set ℝ)
   · rw [indicator_of_notMem hxs, norm_zero]
     exact norm_nonneg _
 
+private def tailIndicatorLinear (T : DeepTailData) (s : Set ℝ) (hs : MeasurableSet s) :
+    DeepTailL2 T →ₗ[ℝ] DeepTailL2 T where
+  toFun := tailIndicatorValue T s hs
+  map_add' := tailIndicatorValue_add T s hs
+  map_smul' := tailIndicatorValue_smul T s hs
+
+private theorem tailIndicatorLinear_apply (T : DeepTailData) (s : Set ℝ)
+    (hs : MeasurableSet s) (f : DeepTailL2 T) :
+    tailIndicatorLinear T s hs f = tailIndicatorValue T s hs f := rfl
+
 /-- Multiplication by a measurable indicator is a contraction on the actual
 weighted L² space. In particular no finite-total-mass hypothesis is used. -/
 def tailIndicator (T : DeepTailData) (s : Set ℝ) (hs : MeasurableSet s) :
     DeepTailL2 T →L[ℝ] DeepTailL2 T :=
-  LinearMap.mkContinuous
-    { toFun := tailIndicatorValue T s hs
-      map_add' := tailIndicatorValue_add T s hs
-      map_smul' := tailIndicatorValue_smul T s hs }
-    1 (fun f => by simpa only [one_mul] using tailIndicatorValue_norm_le T s hs f)
+  (tailIndicatorLinear T s hs).mkContinuous 1
+    (fun f => by simpa only [tailIndicatorLinear_apply, one_mul] using
+      tailIndicatorValue_norm_le T s hs f)
+
+private theorem tailIndicator_apply (T : DeepTailData) (s : Set ℝ)
+    (hs : MeasurableSet s) (f : DeepTailL2 T) :
+    tailIndicator T s hs f = tailIndicatorValue T s hs f := by
+  rw [tailIndicator, LinearMap.mkContinuous_apply, tailIndicatorLinear_apply]
 
 theorem tailIndicator_coeFn (T : DeepTailData) (s : Set ℝ) (hs : MeasurableSet s)
     (f : DeepTailL2 T) :
     (tailIndicator T s hs f : ℝ → ℝ) =ᵐ[deepTailMeasure T]
-      s.indicator (f : ℝ → ℝ) :=
-  tailIndicatorValue_coeFn T s hs f
+      s.indicator (f : ℝ → ℝ) := by
+  rw [tailIndicator_apply]
+  exact tailIndicatorValue_coeFn T s hs f
 
 theorem tailIndicator_norm_le (T : DeepTailData) (s : Set ℝ) (hs : MeasurableSet s) :
     ‖tailIndicator T s hs‖ ≤ 1 := by
   apply ContinuousLinearMap.opNorm_le_bound _ zero_le_one
   intro f
-  simpa only [one_mul] using tailIndicatorValue_norm_le T s hs f
+  simpa only [tailIndicator_apply, one_mul] using tailIndicatorValue_norm_le T s hs f
 
 theorem tailIndicator_eq_zero_iff (T : DeepTailData) (s : Set ℝ)
     (hs : MeasurableSet s) (f : DeepTailL2 T) :
@@ -238,6 +254,7 @@ theorem tailIndicator_eq_zero_iff (T : DeepTailData) (s : Set ℝ)
     have he := tailIndicator_coeFn T s hs f
     rw [h] at he
     filter_upwards [he, Lp.coeFn_zero ℝ 2 (deepTailMeasure T)] with x hx hz
+    simp only [Pi.zero_apply] at hz
     intro hxs
     rw [indicator_of_mem hxs] at hx
     exact hx.symm.trans hz
@@ -245,6 +262,7 @@ theorem tailIndicator_eq_zero_iff (T : DeepTailData) (s : Set ℝ)
     apply Lp.ext
     filter_upwards [tailIndicator_coeFn T s hs f, h,
       Lp.coeFn_zero ℝ 2 (deepTailMeasure T)] with x hx hf hz
+    simp only [Pi.zero_apply] at hz
     rw [hx, hz]
     by_cases hxs : x ∈ s
     · rw [indicator_of_mem hxs, hf hxs]

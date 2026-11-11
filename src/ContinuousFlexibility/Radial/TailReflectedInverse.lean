@@ -14,6 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open ContinuousFlexibility.Statements
+open scoped InnerProductSpace
 
 /-- The function coordinate on the actual energy space. -/
 def tailFormBase (T : DeepTailData) (endCut : ℝ) :

@@ -83,16 +83,6 @@ theorem tail_finite_gap_mass_bound {T : DeepTailData} (hT : DeepTailHypotheses T
         (mul_nonneg (by norm_num) hT.2.2.2.2.1.le)
     _ = _ := by ring
 
-theorem tail_finite_inverse_resistance_right {T : DeepTailData}
-    (hT : DeepTailHypotheses T) (n : ℕ) :
-    (tailResistance T n)⁻¹ ≤ T.Λ * tailMass T (n + 1) / T.K := by
-  have hlarge := (hT.2.2.2.2.2.2.2.2.2.2 n).2.2.2.2.1
-  have hK : 0 < T.K := lt_trans zero_lt_one hT.2.2.2.2.2.2.1
-  apply (le_div_iff₀ hK).mpr
-  have hdiv : T.K / tailResistance T n ≤ T.Λ * tailMass T (n + 1) :=
-    (div_le_iff₀ (tailResistance_pos hT n)).mpr hlarge
-  simpa only [div_eq_mul_inv, mul_comm] using hdiv
-
 theorem tail_finite_gap_energy_bound {T : DeepTailData} (hT : DeepTailHypotheses T)
     {C : ℝ} (hC : 0 ≤ C) (a : ℕ →₀ ℝ) (s : Finset ℕ) :
     (∑ n ∈ s, 2 * (C / tailResistance T n) * (a n ^ 2 + a (n + 1) ^ 2)) ≤
@@ -104,7 +94,7 @@ theorem tail_finite_gap_energy_bound {T : DeepTailData} (hT : DeepTailHypotheses
     intro n
     have hl := mul_le_mul_of_nonneg_left (deepTail_inverse_resistance_left hT n)
       (mul_nonneg hC (sq_nonneg (a n)))
-    have hr := mul_le_mul_of_nonneg_left (tail_finite_inverse_resistance_right hT n)
+    have hr := mul_le_mul_of_nonneg_left (deepTail_inverse_resistance_right hT n)
       (mul_nonneg hC (sq_nonneg (a (n + 1))))
     simp only [div_eq_mul_inv] at *
     nlinarith

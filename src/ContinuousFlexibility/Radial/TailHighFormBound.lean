@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology ContDiff
+open scoped Topology ContDiff InnerProductSpace
 open ContinuousFlexibility.Statements
 
 theorem tail_integral_eq_interval_of_support {T : DeepTailData}

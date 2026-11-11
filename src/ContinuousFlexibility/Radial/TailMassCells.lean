@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory
-open scoped ContDiff lp
+open scoped ContDiff lp ENNReal InnerProductSpace RealInnerProductSpace
 open ContinuousFlexibility.Statements
 
 def tailMassCell (T : DeepTailData) (n : ℕ) : Set ℝ :=
@@ -81,7 +81,7 @@ theorem tailMassCell_measure_ne_top {T : DeepTailData} (hT : DeepTailHypotheses 
 
 theorem tailMassCell_real {T : DeepTailData} (hT : DeepTailHypotheses T) (n : ℕ) :
     (deepTailMeasure T).real (tailMassCell T n) = tailMass T n := by
-  rw [Measure.real, tailMassCell_measure hT n,
+  rw [measureReal_def, tailMassCell_measure hT n,
     ENNReal.toReal_ofReal (tailMass_pos hT n).le]
 
 theorem tailMassCell_real_pos {T : DeepTailData} (hT : DeepTailHypotheses T) (n : ℕ) :

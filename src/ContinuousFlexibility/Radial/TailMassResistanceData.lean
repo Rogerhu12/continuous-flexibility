@@ -125,13 +125,22 @@ theorem deepTail_gap_mass_le_right {T : DeepTailData} (hT : DeepTailHypotheses T
   ((hT.2.2.2.2.2.2.2.2.2.2 n).2.2.2.2.2).trans
     (mul_le_mul_of_nonneg_left (min_le_right _ _) hT.2.2.2.2.1.le)
 
-theorem deepTail_inverse_resistance_left {T : DeepTailData} (hT : DeepTailHypotheses T)
-    (n : ℕ) : (tailResistance T n)⁻¹ ≤ T.Λ * tailMass T n / T.K := by
-  have hlarge := (hT.2.2.2.2.2.2.2.2.2.2 n).2.2.2.1
-  have hK : 0 < T.K := lt_trans zero_lt_one hT.2.2.2.2.2.2.1
+/-- One resistance bound applies to either neighboring mass. -/
+theorem tail_inverse_resistance_bound {K Λ μ R : ℝ}
+    (hK : 0 < K) (hR : 0 < R) (hlarge : K ≤ Λ * μ * R) :
+    R⁻¹ ≤ Λ * μ / K := by
   apply (le_div_iff₀ hK).mpr
-  apply (mul_le_mul_iff_right₀ (tailResistance_pos hT n)).mp
-  simpa only [mul_assoc, inv_mul_cancel₀ (tailResistance_pos hT n).ne', mul_one,
-    mul_left_comm (tailResistance T n) T.K] using hlarge
+  have hdiv := (div_le_iff₀ hR).mpr hlarge
+  simpa only [div_eq_mul_inv, mul_comm] using hdiv
+
+theorem deepTail_inverse_resistance_left {T : DeepTailData} (hT : DeepTailHypotheses T)
+    (n : ℕ) : (tailResistance T n)⁻¹ ≤ T.Λ * tailMass T n / T.K :=
+  tail_inverse_resistance_bound (lt_trans zero_lt_one hT.2.2.2.2.2.2.1)
+    (tailResistance_pos hT n) (hT.2.2.2.2.2.2.2.2.2.2 n).2.2.2.1
+
+theorem deepTail_inverse_resistance_right {T : DeepTailData} (hT : DeepTailHypotheses T)
+    (n : ℕ) : (tailResistance T n)⁻¹ ≤ T.Λ * tailMass T (n + 1) / T.K :=
+  tail_inverse_resistance_bound (lt_trans zero_lt_one hT.2.2.2.2.2.2.1)
+    (tailResistance_pos hT n) (hT.2.2.2.2.2.2.2.2.2.2 n).2.2.2.2.1
 
 end ContinuousFlexibility.Radial

@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology ContDiff
+open scoped Topology ContDiff ENNReal InnerProductSpace RealInnerProductSpace
 open ContinuousFlexibility.Statements
 
 def tailFiniteLowHat (T : DeepTailData) (hT : DeepTailHypotheses T)
@@ -292,10 +292,7 @@ theorem tailFiniteLowHat_initial_energy (T : DeepTailData) (hT : DeepTailHypothe
   · have hR : 0 < tailInitialResistance T :=
       deepTail_interval_resistance_pos hT le_rfl he (deepTail_node_lt_endpoint hT 0)
     have hinv : (tailInitialResistance T)⁻¹ ≤ T.Λ * tailMass T 0 / T.K := by
-      apply (le_div_iff₀ hK).mpr
-      have hdiv : T.K / tailInitialResistance T ≤ T.Λ * tailMass T 0 :=
-        (div_le_iff₀ hR).mpr hlarge
-      simpa only [div_eq_mul_inv, mul_comm] using hdiv
+      exact tail_inverse_resistance_bound hK hR hlarge
     have heq : tailInitialEnergy T (tailFiniteLowHat T hT a) =
         a 0 ^ 2 * ∫ x in T.entrance..T.node 0, T.p x * deriv (tailEntryStep T hT) x ^ 2 := by
       unfold tailInitialEnergy

@@ -20,6 +20,8 @@ noncomputable section
 
 namespace ContinuousFlexibility.Radial
 
+open scoped InnerProductSpace
+
 variable {V H : Type*}
   [NormedAddCommGroup V] [InnerProductSpace ℝ V] [CompleteSpace V]
   [NormedAddCommGroup H] [InnerProductSpace ℝ H] [CompleteSpace H]

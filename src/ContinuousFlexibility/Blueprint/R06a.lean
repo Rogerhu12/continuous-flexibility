@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Radial.TailDeepInverse
 
 /-!
 # Blueprint node R06a
@@ -15,6 +16,9 @@ namespace ContinuousFlexibility.Blueprint
 open ContinuousFlexibility.Statements
 
 theorem R06a : R06aStatement := by
-  sorry
+  refine ⟨4, 1 / 10, 10 * ContinuousFlexibility.Radial.tailSmoothStepConstant + 2,
+    by norm_num, by norm_num, by norm_num, ?_, ContinuousFlexibility.Radial.deepTail_operator⟩
+  have h := ContinuousFlexibility.Radial.tailSmoothStepConstant_pos
+  linarith
 
 end ContinuousFlexibility.Blueprint

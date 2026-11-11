@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory Real
-open scoped Topology ContDiff
+open scoped Topology ContDiff InnerProductSpace
 open ContinuousFlexibility.Statements
 
 theorem tailFormLift_weakDerivative {T : DeepTailData} {endCut : ℝ}

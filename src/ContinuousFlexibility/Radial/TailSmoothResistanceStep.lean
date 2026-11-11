@@ -78,8 +78,7 @@ theorem tailSmoothResistanceStep_spec {p : ℝ → ℝ} {a b M : ℝ}
   have hAa : A a = -(1 / 2 : ℝ) := by simp only [A, hsa, mul_zero, zero_sub]
   have hAb : A b = (3 / 2 : ℝ) := by
     change (2 / R) * R - 1 / 2 = 3 / 2
-    field_simp [hR.ne']
-    ring
+    field_simp [hR.ne'] <;> ring
   have hleft (x : ℝ) (hx : A x < 0) : θ =ᶠ[𝓝 x] (fun _ => (0 : ℝ)) := by
     filter_upwards [hAC.continuousAt.eventually (Iio_mem_nhds hx)] with y hy
     exact smoothTransition.zero_of_nonpos hy.le
@@ -102,7 +101,7 @@ theorem tailSmoothResistanceStep_spec {p : ℝ → ℝ} {a b M : ℝ}
         (isOpen_Ioo.mem_nhds hx)
       exact smoothTransition.contDiff.contDiffAt.comp x
         ((contDiffAt_const.mul hsc).sub contDiffAt_const)
-    · rcases le_or_lt x a with hxa | hax
+    · rcases le_or_gt x a with hxa | hax
       · exact contDiffAt_const.congr_of_eventuallyEq (hleft x (hAleft x hxa))
       · have hbx : b ≤ x := le_of_not_gt (fun hxb => hx ⟨hax, hxb⟩)
         exact contDiffAt_const.congr_of_eventuallyEq (hright x (hAright x hbx))
@@ -126,7 +125,8 @@ theorem tailSmoothResistanceStep_spec {p : ℝ → ℝ} {a b M : ℝ}
     · by_contra hn
       exact (not_lt_of_ge hx.2) (hAright x (le_of_not_gt hn))
   have hderiv (x : ℝ) : deriv θ x = deriv smoothTransition (A x) * ((2 / R) * (p x)⁻¹) := by
-    exact ((smoothTransition.contDiff.differentiable (by simp) (A x)).hasDerivAt.comp x
+    exact (((smoothTransition.contDiff : ContDiff ℝ ∞ smoothTransition).differentiable
+      (by simp) (A x)).hasDerivAt.comp x
       (((hasDerivAt_tailResistanceChart hp hpos a x).const_mul (2 / R)).sub_const (1 / 2))).deriv
   have henergy (x : ℝ) :
       p x * deriv θ x ^ 2 ≤ (4 * (M + 1) ^ 2 / R ^ 2) * (p x)⁻¹ := by
@@ -140,8 +140,7 @@ theorem tailSmoothResistanceStep_spec {p : ℝ → ℝ} {a b M : ℝ}
     rw [hderiv]
     have hid : p x * (deriv smoothTransition (A x) * ((2 / R) * (p x)⁻¹)) ^ 2 =
         (4 / R ^ 2) * (p x)⁻¹ * (deriv smoothTransition (A x)) ^ 2 := by
-      field_simp [(hpos x).ne', hR.ne']
-      ring
+      field_simp [(hpos x).ne', hR.ne'] <;> ring
     rw [hid]
     calc
       _ ≤ (4 / R ^ 2) * (p x)⁻¹ * (M + 1) ^ 2 :=
@@ -184,11 +183,14 @@ theorem exists_tailSmoothResistanceStep :
   refine ⟨4 * (M + 1) ^ 2, by positivity, ?_⟩
   intro p a b hab hp hpos
   let q : ℝ → ℝ := tailClampedDensity p a b hab.le
-  have hq : Continuous q := (continuousOn_iff_continuous_restrict.mp hp.continuousOn).Icc_extend'
+  have hq : Continuous q := (continuousOn_iff_continuous_domRestrict.mp hp.continuousOn).Icc_extend'
   have hqp : ∀ x, 0 < q x := by
     intro x
-    rw [q, tailClampedDensity, IccExtend_apply]
+    dsimp only [q]
+    rw [tailClampedDensity, IccExtend_apply]
     exact hpos _ ⟨le_max_left _ _, max_le hab.le (min_le_left _ _)⟩
+  have hqeq (x : ℝ) (hx : x ∈ Icc a b) : q x = p x :=
+    tailClampedDensity_eq hab.le hx
   have hqs : ContDiffOn ℝ ∞ q (Ioo a b) := by
     apply (hp.mono Ioo_subset_Icc_self).congr
     intro x hx
@@ -199,14 +201,12 @@ theorem exists_tailSmoothResistanceStep :
   have hμ : (∫ x in a..b, (q x)⁻¹) = ∫ x in a..b, (p x)⁻¹ := by
     apply intervalIntegral.integral_congr
     intro x hx
-    rw [q, tailClampedDensity_eq hab.le]
-    simpa only [uIcc_of_le hab.le] using hx
+    rw [hqeq x (by simpa only [uIcc_of_le hab.le] using hx)]
   have he : (∫ x in a..b, p x * deriv (tailSmoothResistanceStep q a b) x ^ 2) =
       ∫ x in a..b, q x * deriv (tailSmoothResistanceStep q a b) x ^ 2 := by
     apply intervalIntegral.integral_congr
     intro x hx
-    rw [q, tailClampedDensity_eq hab.le]
-    simpa only [uIcc_of_le hab.le] using hx
+    rw [hqeq x (by simpa only [uIcc_of_le hab.le] using hx)]
   rw [he, ← hμ]
   exact hE
 

@@ -20,7 +20,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Filter
-open scoped Topology
+open scoped Topology ENNReal InnerProductSpace RealInnerProductSpace
 
 section Normed
 
@@ -38,15 +38,16 @@ theorem tail_bounded_apply_tendsto_zero (A : ℕ → E →L[ℝ] F) {M : ℝ}
   simpa only [norm_zero, mul_zero] using hu.norm.const_mul M
 
 /-- Strong convergence and a uniform operator bound allow the input to vary. -/
-theorem tail_strong_apply_tendsto (A : ℕ → E →L[ℝ] F) (A∞ : E →L[ℝ] F)
+theorem tail_strong_apply_tendsto (A : ℕ → E →L[ℝ] F) (Ainf : E →L[ℝ] F)
     {M : ℝ} (hbound : ∀ n, ‖A n‖ ≤ M)
-    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (A∞ x)))
-    {u : ℕ → E} {u∞ : E} (hu : Tendsto u atTop (𝓝 u∞)) :
-    Tendsto (fun n => A n (u n)) atTop (𝓝 (A∞ u∞)) := by
-  have hz : Tendsto (fun n => A n (u n - u∞)) atTop (𝓝 0) :=
+    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (Ainf x)))
+    {u : ℕ → E} {uinf : E} (hu : Tendsto u atTop (𝓝 uinf)) :
+    Tendsto (fun n => A n (u n)) atTop (𝓝 (Ainf uinf)) := by
+  have hz : Tendsto (fun n => A n (u n - uinf)) atTop (𝓝 0) :=
     tail_bounded_apply_tendsto_zero A hbound
-      (by simpa only [sub_self] using hu.sub tendsto_const_nhds)
-  have h := hz.add (hstrong u∞)
+      (by simpa only [sub_self] using hu.sub
+        (tendsto_const_nhds : Tendsto (fun _ : ℕ => uinf) atTop (𝓝 uinf)))
+  have h := hz.add (hstrong uinf)
   simpa only [map_sub, sub_add_cancel, zero_add] using h
 
 end Normed
@@ -58,18 +59,20 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 /-- The inverse identity gives convergence once a right inverse of the limit is
 known. Only the left-inverse identity for the approximating operators is needed. -/
 theorem tail_inverse_tendsto_apply (A G : ℕ → E →L[ℝ] E)
-    (A∞ G∞ : E →L[ℝ] E) {M : ℝ}
+    (Ainf Ginf : E →L[ℝ] E) {M : ℝ}
     (hleft : ∀ n x, G n (A n x) = x)
-    (hright : ∀ x, A∞ (G∞ x) = x)
+    (hright : ∀ x, Ainf (Ginf x) = x)
     (hbound : ∀ n, ‖G n‖ ≤ M)
-    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (A∞ x)))
-    (x : E) : Tendsto (fun n => G n x) atTop (𝓝 (G∞ x)) := by
-  have herror : Tendsto (fun n => A∞ (G∞ x) - A n (G∞ x)) atTop (𝓝 0) := by
-    simpa only [sub_self] using tendsto_const_nhds.sub (hstrong (G∞ x))
+    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (Ainf x)))
+    (x : E) : Tendsto (fun n => G n x) atTop (𝓝 (Ginf x)) := by
+  have herror : Tendsto (fun n => Ainf (Ginf x) - A n (Ginf x)) atTop (𝓝 0) := by
+    simpa only [sub_self] using
+      (tendsto_const_nhds : Tendsto (fun _ : ℕ => Ainf (Ginf x)) atTop
+        (𝓝 (Ainf (Ginf x)))).sub (hstrong (Ginf x))
   have h := tail_bounded_apply_tendsto_zero G hbound herror
-  have heq (n : ℕ) : G n (A∞ (G∞ x) - A n (G∞ x)) = G n x - G∞ x := by
+  have heq (n : ℕ) : G n (Ainf (Ginf x) - A n (Ginf x)) = G n x - Ginf x := by
     rw [map_sub, hright, hleft]
-  have hz : Tendsto (fun n => G n x - G∞ x) atTop (𝓝 0) := by
+  have hz : Tendsto (fun n => G n x - Ginf x) atTop (𝓝 0) := by
     simpa only [heq] using h
   exact (tendsto_sub_nhds_zero_iff).mp hz
 
@@ -94,7 +97,8 @@ theorem tailCompression_tendsto_apply (P : ℕ → E →L[ℝ] E)
   have houter : Tendsto (fun n => P n (A (P n x))) atTop (𝓝 (A x)) :=
     tail_strong_apply_tendsto P (1 : E →L[ℝ] E) hbound hstrong hinner
   have hzero : Tendsto (fun n => x - P n x) atTop (𝓝 0) := by
-    simpa only [sub_self] using tendsto_const_nhds.sub (hstrong x)
+    simpa only [sub_self] using
+      (tendsto_const_nhds : Tendsto (fun _ : ℕ => x) atTop (𝓝 x)).sub (hstrong x)
   simpa only [tailCompression_apply, add_zero] using houter.add hzero
 
 end Inverses
@@ -114,13 +118,14 @@ theorem tailCompression_symmetric (P A : E →L[ℝ] E)
     inner_sub_left, inner_sub_right, hP.apply_clm, hA.apply_clm]
 
 /-- A strong limit of symmetric bounded operators remains symmetric. -/
-theorem tail_strong_limit_symmetric (A : ℕ → E →L[ℝ] E) (A∞ : E →L[ℝ] E)
+theorem tail_strong_limit_symmetric (A : ℕ → E →L[ℝ] E) (Ainf : E →L[ℝ] E)
     (hsym : ∀ n, (A n).toLinearMap.IsSymmetric)
-    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (A∞ x))) :
-    A∞.toLinearMap.IsSymmetric := by
+    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (Ainf x))) :
+    Ainf.toLinearMap.IsSymmetric := by
   intro x y
-  apply tendsto_nhds_unique ((hstrong x).inner tendsto_const_nhds)
-  exact (tendsto_const_nhds.inner (hstrong y)).congr'
+  apply tendsto_nhds_unique ((hstrong x).inner
+    (tendsto_const_nhds : Tendsto (fun _ : ℕ => y) atTop (𝓝 y)))
+  exact ((tendsto_const_nhds : Tendsto (fun _ : ℕ => x) atTop (𝓝 x)).inner (hstrong y)).congr'
     (Eventually.of_forall (fun n => (hsym n x y).symm))
 
 /-- A symmetric strong limit with uniformly bounded left inverses has a bounded
@@ -128,41 +133,41 @@ two-sided inverse, with the same bound, and the given inverses converge strongly
 This also applies when the approximating maps are already known to have
 two-sided inverses; no compactness of the Hilbert space is required. -/
 theorem tail_exists_inverse_of_strong_limit (A G : ℕ → E →L[ℝ] E)
-    (A∞ : E →L[ℝ] E) {M : ℝ}
+    (Ainf : E →L[ℝ] E) {M : ℝ}
     (hsym : ∀ n, (A n).toLinearMap.IsSymmetric)
     (hleft : ∀ n x, G n (A n x) = x)
     (hbound : ∀ n, ‖G n‖ ≤ M)
-    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (A∞ x))) :
-    ∃ G∞ : E →L[ℝ] E,
-      (∀ x, G∞ (A∞ x) = x) ∧ (∀ x, A∞ (G∞ x) = x) ∧
-      ‖G∞‖ ≤ M ∧ ∀ x, Tendsto (fun n => G n x) atTop (𝓝 (G∞ x)) := by
+    (hstrong : ∀ x, Tendsto (fun n => A n x) atTop (𝓝 (Ainf x))) :
+    ∃ Ginf : E →L[ℝ] E,
+      (∀ x, Ginf (Ainf x) = x) ∧ (∀ x, Ainf (Ginf x) = x) ∧
+      ‖Ginf‖ ≤ M ∧ ∀ x, Tendsto (fun n => G n x) atTop (𝓝 (Ginf x)) := by
   have hM : 0 ≤ M := (norm_nonneg (G 0)).trans (hbound 0)
-  have hlower (x : E) : ‖x‖ ≤ M * ‖A∞ x‖ := by
+  have hlower (x : E) : ‖x‖ ≤ M * ‖Ainf x‖ := by
     apply ge_of_tendsto' ((hstrong x).norm.const_mul M)
     intro n
     calc
       ‖x‖ = ‖G n (A n x)‖ := congrArg norm (hleft n x).symm
       _ ≤ ‖G n‖ * ‖A n x‖ := (G n).le_opNorm (A n x)
       _ ≤ M * ‖A n x‖ := mul_le_mul_of_nonneg_right (hbound n) (norm_nonneg _)
-  have hanti : AntilipschitzWith (⟨M, hM⟩ : ℝ≥0) A∞ :=
-    A∞.antilipschitz_of_bound hlower
-  have hker : A∞.ker = ⊥ := LinearMap.ker_eq_bot.mpr hanti.injective
-  have hclosed : A∞.range.topologicalClosure = A∞.range :=
+  have hanti : AntilipschitzWith (⟨M, hM⟩ : ℝ≥0) Ainf :=
+    Ainf.antilipschitz_of_bound hlower
+  have hker : Ainf.ker = ⊥ := LinearMap.ker_eq_bot.mpr hanti.injective
+  have hclosed : Ainf.range.topologicalClosure = Ainf.range :=
     ContinuousLinearMap.closed_range_of_antilipschitz hanti
-  have hs : A∞.toLinearMap.IsSymmetric := tail_strong_limit_symmetric A A∞ hsym hstrong
-  have hdense : A∞.range.topologicalClosure = ⊤ :=
+  have hs : Ainf.toLinearMap.IsSymmetric := tail_strong_limit_symmetric A Ainf hsym hstrong
+  have hdense : Ainf.range.topologicalClosure = ⊤ :=
     (Submodule.topologicalClosure_eq_top_iff _).mpr (hs.orthogonal_range.trans hker)
-  have hrange : A∞.range = ⊤ := hclosed.symm.trans hdense
-  let G∞ : E →L[ℝ] E := (ContinuousLinearEquiv.ofBijective A∞ hker hrange).symm
-  have hGleft (x : E) : G∞ (A∞ x) = x :=
-    ContinuousLinearEquiv.ofBijective_symm_apply_apply A∞ hker hrange x
-  have hGright (x : E) : A∞ (G∞ x) = x :=
-    ContinuousLinearEquiv.ofBijective_apply_symm_apply A∞ hker hrange x
-  refine ⟨G∞, hGleft, hGright, ?_, ?_⟩
+  have hrange : Ainf.range = ⊤ := hclosed.symm.trans hdense
+  let Ginf : E →L[ℝ] E := (ContinuousLinearEquiv.ofBijective Ainf hker hrange).symm
+  have hGleft (x : E) : Ginf (Ainf x) = x :=
+    ContinuousLinearEquiv.ofBijective_symm_apply_apply Ainf hker hrange x
+  have hGright (x : E) : Ainf (Ginf x) = x :=
+    ContinuousLinearEquiv.ofBijective_apply_symm_apply Ainf hker hrange x
+  refine ⟨Ginf, hGleft, hGright, ?_, ?_⟩
   · apply ContinuousLinearMap.opNorm_le_bound _ hM
     intro x
-    simpa only [hGright] using hlower (G∞ x)
-  · exact tail_inverse_tendsto_apply A G A∞ G∞ hleft hGright hbound hstrong
+    simpa only [hGright] using hlower (Ginf x)
+  · exact tail_inverse_tendsto_apply A G Ainf Ginf hleft hGright hbound hstrong
 
 /-- Finite compressions with uniformly bounded inverses converge to the inverse
 of the full symmetric operator. The maps `P n` may be arbitrary uniformly
@@ -175,9 +180,9 @@ theorem tail_exists_inverse_of_compressions (P G : ℕ → E →L[ℝ] E)
     (hPstrong : ∀ x, Tendsto (fun n => P n x) atTop (𝓝 x))
     (hleft : ∀ n x, G n (tailCompression (P n) A x) = x)
     (hbound : ∀ n, ‖G n‖ ≤ M) :
-    ∃ G∞ : E →L[ℝ] E,
-      (∀ x, G∞ (A x) = x) ∧ (∀ x, A (G∞ x) = x) ∧
-      ‖G∞‖ ≤ M ∧ ∀ x, Tendsto (fun n => G n x) atTop (𝓝 (G∞ x)) := by
+    ∃ Ginf : E →L[ℝ] E,
+      (∀ x, Ginf (A x) = x) ∧ (∀ x, A (Ginf x) = x) ∧
+      ‖Ginf‖ ≤ M ∧ ∀ x, Tendsto (fun n => G n x) atTop (𝓝 (Ginf x)) := by
   exact tail_exists_inverse_of_strong_limit (fun n => tailCompression (P n) A) G A
     (fun n => tailCompression_symmetric (P n) A (hP n) hA) hleft hbound
     (tailCompression_tendsto_apply P A hPbound hPstrong)

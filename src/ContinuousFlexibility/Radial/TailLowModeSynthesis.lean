@@ -22,7 +22,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Filter
-open scoped Topology lp
+open scoped Topology lp ENNReal InnerProductSpace RealInnerProductSpace
 
 variable {ι : Type*} [DecidableEq ι]
 
@@ -37,8 +37,19 @@ theorem tailFiniteEmbedding_single (i : ι) (c : ℝ) :
 
 theorem tailFiniteEmbedding_eq_sum (a : ι →₀ ℝ) :
     tailFiniteEmbedding a = ∑ i ∈ a.support, lp.single 2 i (a i) := by
-  simp only [tailFiniteEmbedding, Finsupp.linearCombination_apply, Finsupp.sum,
-    ← lp.single_smul, smul_eq_mul, mul_one]
+  rw [tailFiniteEmbedding,
+    Finsupp.linearCombination_apply_of_mem_supported ℝ (Finsupp.mem_supported_support ℝ a)]
+  simp only [← lp.single_smul, smul_eq_mul, mul_one]
+
+theorem tailFiniteEmbedding_apply (a : ι →₀ ℝ) (i : ι) :
+    tailFiniteEmbedding a i = a i := by
+  rw [tailFiniteEmbedding_eq_sum]
+  simp only [lp.coeFn_sum, Finset.sum_apply, lp.single_apply]
+  calc
+    _ = Pi.single i (a i) i :=
+      Finset.sum_eq_single i (fun j _ hji => Pi.single_eq_of_ne hji.symm _)
+        (fun hi => by rw [Pi.single_eq_same, Finsupp.notMem_support_iff.mp hi])
+    _ = a i := Pi.single_eq_same _ _
 
 theorem tailFiniteEmbedding_norm_sq (a : ι →₀ ℝ) :
     ‖tailFiniteEmbedding a‖ ^ 2 = ∑ i ∈ a.support, ‖a i‖ ^ 2 := by
@@ -109,12 +120,13 @@ theorem tailSynthesis_coordinate_bound {v : ι → E} {C ε : ℝ}
     (hfinite : ∀ a : ι →₀ ℝ,
       ‖D (Finsupp.linearCombination ℝ v a)‖ ^ 2 ≤ ε * ‖tailFiniteEmbedding a‖ ^ 2)
     (x : ℓ²(ι, ℝ)) : ‖D (tailSynthesis v x)‖ ^ 2 ≤ ε * ‖x‖ ^ 2 := by
-  apply tailFiniteEmbedding_denseRange.induction_on x
-    (isClosed_le ((D.continuous.comp (tailSynthesis v).continuous).norm.pow 2)
-      (continuous_const.mul (continuous_norm.pow 2)))
-  intro a
-  rw [tailSynthesis_on_finite hbound]
-  exact hfinite a
+  refine tailFiniteEmbedding_denseRange.induction_on
+    (p := fun y => ‖D (tailSynthesis v y)‖ ^ 2 ≤ ε * ‖y‖ ^ 2) x ?_ ?_
+  · exact isClosed_le ((D.continuous.comp (tailSynthesis v).continuous).norm.pow 2)
+      (continuous_const.mul (continuous_norm.pow 2))
+  · intro a
+    rw [tailSynthesis_on_finite hbound]
+    exact hfinite a
 
 /-- A continuous analysis map is a left inverse of synthesis when it has the
 Kronecker values on the individual hats. -/
@@ -238,6 +250,8 @@ variable {v : ι → E} {C : ℝ}
     ‖Finsupp.linearCombination ℝ v a‖ ≤ C * ‖tailFiniteEmbedding a‖)
   (I : E →L[ℝ] H) (A : H →L[ℝ] ℓ²(ι, ℝ))
   (hhat : ∀ i, A (I (v i)) = lp.single 2 i (1 : ℝ))
+
+include hbound hhat
 
 theorem tailLowProjection_preserves_analysis (u : E) :
     A (I (tailLowProjection I A v u)) = A (I u) := by

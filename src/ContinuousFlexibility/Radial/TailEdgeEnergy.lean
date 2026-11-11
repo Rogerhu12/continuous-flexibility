@@ -1,4 +1,7 @@
-import ContinuousFlexibility.Statements.Radial
+import Mathlib.Analysis.Calculus.ContDiff.Deriv
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Ring
 
 /-!
 # Dirichlet energy on a resistance edge

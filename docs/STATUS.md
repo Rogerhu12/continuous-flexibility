@@ -118,8 +118,14 @@ an actual failure of the frozen equality, not just a missing integrability lemma
 The local tests and the Friedrichs core now require
 `tsupport ψ ⊆ Ioo T.entrance endCut`. The same corrected definitions feed
 `R06Operator`, `R06Full`, `R06Statement`, and `R06_of_nodes`; no inverse or
-convergence conclusion has been removed. R06a remains open pending the proof
-of the corrected statement.
+convergence conclusion has been removed. The complete candidate proof is now
+assembled in `Radial.TailDeepInverse` and `Blueprint.R06a`, using actual weighted
+mass averages, smooth resistance hats, a reflected coercive form, and the
+positive-resolvent identity for truncations. Its constants are `C = 4`,
+`η₀ = 1/10`, and `K₀ = 10 * tailSmoothStepConstant + 2`. The independent scalar
+operator definitions have moved unchanged to `Statements.DeepTailOperator` to
+keep this proof layer independent of the oscillator and physical reference data.
+R06a remains open until type checking, the axiom audit, and CI all pass.
 
 Not yet checked against the readable manuscript: the kernel clause of the radial reference
 (`R12`). The 62-page version left "endpoint-flat kernel" undefined; the readable version defines it

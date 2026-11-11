@@ -58,7 +58,9 @@ theorem tail_weighted_integral_cauchy {a b : ℝ} {p g : ℝ → ℝ}
           intervalIntegral.integral_sub hEint hMint,
           intervalIntegral.integral_const_mul, intervalIntegral.integral_const_mul]
   rw [he] at hn
-  have hME : c * M ≤ E := by nlinarith only [hn, hc]
+  have hc₂ : c ^ 2 * R = c * M := by rw [← hc]; ring
+  rw [hc₂] at hn
+  have hME : c * M ≤ E := by linarith only [hn]
   change M ^ 2 ≤ R * E
   calc
     M ^ 2 = R * (c * M) := by rw [← hc]; ring
@@ -79,7 +81,7 @@ theorem tail_exists_zero_of_weighted_mean_zero {a b : ℝ} {p u : ℝ → ℝ}
         (hpositive x ⟨hx.1.le, hx.2⟩)).le)
       ⟨a, ⟨le_rfl, hab.le⟩,
         mul_pos (hpos a ⟨le_rfl, hab.le⟩) (hpositive a ⟨le_rfl, hab.le⟩)⟩
-    rw [hmean] at hgt
+    simp only [Pi.mul_apply, hmean] at hgt
     exact lt_irrefl 0 hgt
   have hhi : ∃ x ∈ Icc a b, 0 ≤ u x := by
     by_contra h
@@ -91,7 +93,8 @@ theorem tail_exists_zero_of_weighted_mean_zero {a b : ℝ} {p u : ℝ → ℝ}
       ⟨a, ⟨le_rfl, hab.le⟩,
         mul_pos (hpos a ⟨le_rfl, hab.le⟩)
           (neg_pos.mpr (hnegative a ⟨le_rfl, hab.le⟩))⟩
-    simp only [mul_neg, intervalIntegral.integral_neg, hmean, neg_zero] at hgt
+    simp only [Pi.mul_apply, Pi.neg_apply, mul_neg, intervalIntegral.integral_neg,
+      hmean, neg_zero] at hgt
     exact lt_irrefl 0 hgt
   obtain ⟨x, hx, hux⟩ := hlo
   obtain ⟨y, hy, huy⟩ := hhi
@@ -140,7 +143,7 @@ theorem tail_value_difference_sq_le {a b x y : ℝ} {p u : ℝ → ℝ}
       (∫ t in a..b, (p t)⁻¹) * ∫ t in a..b, p t * deriv u t ^ 2 := by
   rcases le_total x y with hxy | hyx
   · exact tail_value_difference_sq_le_ordered hab hp hpos hu hx hy hxy
-  · simpa only [sq_sub_comm] using
+  · simpa only [sub_sq_comm] using
       tail_value_difference_sq_le_ordered hab hp hpos hu hy hx hyx
 
 /-- A single zero gives the Poincaré and trace estimates with the same
