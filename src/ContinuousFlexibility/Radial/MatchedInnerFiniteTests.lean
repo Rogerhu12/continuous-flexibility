@@ -156,7 +156,7 @@ theorem matchedInnerChainSmoothTest_mem (D : ReferenceData) (hw : Continuous D.w
     (G.left_pos p) (G.in_core p) (G.weight_pos p) ψ hψ
   refine ⟨hp.1, ?_⟩
   dsimp only [matchedInnerChainSmoothTest]
-  rw [hp.2]
+  refine hp.2.trans ?_
   funext i
   fin_cases i
   · simp only [innerChainBoundaryRestriction_apply, if_pos rfl]

@@ -133,31 +133,31 @@ theorem matchedMode_jacobi_pairing_tendsto {D : ReferenceData}
   rw [he, matchedMode_jacobi_pairing_expansion hD u hψ j]
   exact (h₂.add h₁).sub h₀
 
-/-- Compactly contained tests suffice for the exact frozen modal graph.
-The proof uses the actual model L² vectors, not an assumed graph closure. -/
-theorem modeLocalEquation_of_compactCore {D : ReferenceData}
+/-- Compactly contained interval tests suffice for the exact frozen modal graph.
+The integral remains over the original physical core; only the test support is compressed. -/
+theorem modeLocalEquation_of_compactInterval {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (hB : RadialTrueBorder D)
-    {j : ℕ} {U F : RadialModePair D}
+    {j : ℕ} {U F : RadialModePair D} {a b : ℝ} (hab : a < b)
     (hEq : ∀ ψ : ℝ → ℝ, ContDiff ℝ ∞ ψ → HasCompactSupport ψ →
-      tsupport ψ ⊆ radialCore D →
+      tsupport ψ ⊆ Ioo a b →
       (∫ r in D.a..D.b, U.1 r * radialJacobi ((j : ℝ) ^ 2) D.w ψ r) -
         U.2 * (∫ r in D.a..D.b, referenceColumn D r * ψ r) =
         -(∫ r in D.a..D.b, matchingDensity D r * F.1 r * ψ r)) :
-    ModeLocalEquation D j (radialCore D) U F := by
+    ModeLocalEquation D j (Ioo a b) U F := by
   intro ψ hψ hcψ hψs
   change (∫ r in D.a..D.b, U.1 r * radialJacobi ((j : ℝ) ^ 2) D.w ψ r) -
     U.2 * (∫ r in D.a..D.b, referenceColumn D r * ψ r) =
       -(∫ r in D.a..D.b, matchingDensity D r * F.1 r * ψ r)
   have hg := matchingProfileGeometry hD
-  let c : ℝ := (D.a + D.b) / 2
+  let c : ℝ := (a + b) / 2
   let ψn : ℕ → ℝ → ℝ := fun n => matchedTestDilate c (matchedTestScale n) ψ
   have hn (n : ℕ) :
       (∫ r in D.a..D.b, U.1 r * radialJacobi ((j : ℝ) ^ 2) D.w (ψn n) r) -
         U.2 * (∫ r in D.a..D.b, referenceColumn D r * ψn n r) =
         -(∫ r in D.a..D.b, matchingDensity D r * F.1 r * ψn n r) :=
     hEq (ψn n) (matchedTestDilate_contDiff c (matchedTestScale n) hψ)
-      (matchedTestDilate_hasCompactSupport hg.2.1 (matchedTestScale_one_lt n) hψs)
-      (matchedTestDilate_tsupport hg.2.1 (matchedTestScale_one_lt n) hψs)
+      (matchedTestDilate_hasCompactSupport hab (matchedTestScale_one_lt n) hψs)
+      (matchedTestDilate_tsupport hab (matchedTestScale_one_lt n) hψs)
   have hJ := matchedMode_jacobi_pairing_tendsto hD U.1 hψ hcψ j c
   have hcol : IntervalIntegrable (referenceColumn D) volume D.a D.b :=
     (matchingColumn_continuousOn hD hB).intervalIntegrable_of_Icc hg.2.1.le
@@ -178,5 +178,17 @@ theorem modeLocalEquation_of_compactCore {D : ReferenceData}
     exact hn n
   rw [heq] at hleft
   exact tendsto_nhds_unique hleft hright
+
+/-- The original whole-core interface is the special case of interval closure. -/
+theorem modeLocalEquation_of_compactCore {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) (hB : RadialTrueBorder D)
+    {j : ℕ} {U F : RadialModePair D}
+    (hEq : ∀ ψ : ℝ → ℝ, ContDiff ℝ ∞ ψ → HasCompactSupport ψ →
+      tsupport ψ ⊆ radialCore D →
+      (∫ r in D.a..D.b, U.1 r * radialJacobi ((j : ℝ) ^ 2) D.w ψ r) -
+        U.2 * (∫ r in D.a..D.b, referenceColumn D r * ψ r) =
+        -(∫ r in D.a..D.b, matchingDensity D r * F.1 r * ψ r)) :
+    ModeLocalEquation D j (radialCore D) U F :=
+  modeLocalEquation_of_compactInterval hD hB (matchingProfileGeometry hD).2.1 hEq
 
 end ContinuousFlexibility.Radial
