@@ -25,7 +25,7 @@ def multilinearDifferenceTuple {n : ℕ} (v w : Fin n → E) (i j : Fin n) : E :
 
 theorem multilinear_sub_eq_sum {n : ℕ} (A : E [×n]→L[ℝ] ℝ) (v w : Fin n → E) :
     A w - A v = ∑ i : Fin n, A (multilinearDifferenceTuple v w i) := by
-  simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies,
+  simpa only [ContinuousMultilinearMap.coe_coe, Finset.piecewise_univ, Finset.mem_univ, true_implies,
     multilinearDifferenceTuple] using
     A.toMultilinearMap.map_sub_map_piecewise w v Finset.univ
 
@@ -73,7 +73,7 @@ theorem seminorm_affine_segment_le (p : Seminorm ℝ E) (x y : E)
     _ = p x + |t| * p (y - x) := by rw [map_smul_eq_mul, Real.norm_eq_abs]
     _ ≤ p x + p (y - x) := by
       rw [abs_of_nonneg ht.1]
-      exact add_le_add_left (mul_le_of_le_one_left (apply_nonneg _ _) ht.2) _
+      exact add_le_add_left (mul_le_of_le_one_left (apply_nonneg p (y - x)) ht.2) _
 
 theorem SmoothDirections.base_variation_le
     {U : Set E} {f : E → ℝ} (J : SmoothDirections U f) (hU : Convex ℝ U)

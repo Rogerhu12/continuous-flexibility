@@ -96,22 +96,46 @@ theorem N01Properties.minusFlow_state_q_mixed_derivative_bound
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           (2 * stateGrading S base η + stateGrading S loss η) := by
-  have hdata := hN
-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩
-  obtain ⟨B, hB, hb⟩ := hflow 2 0
-  refine ⟨B, hB, fun η m r θ hr => ?_⟩
-  obtain ⟨J, hJ⟩ := hb m 0 0 (r, θ) (by norm_num) hr
-  have hz : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
-    constructor
-    · simpa only [sub_self, map_zero] using hN.2.1
-    · simpa only [abs_zero] using hN.2.1
-  have hd := (ordinaryFlow_state_q_mixed_hasDerivAt_of_tower
-    J C.referenceState η hz).deriv
-  have hbound := hJ (C.referenceState, 0) hz
-    (Fin.cons (η, (0 : ℝ))
-      (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))))
-  rw [← hd] at hbound
-  simpa only [pow_zero, one_mul, sub_self, zero_add,
-    oneHighVariationWeight_state_external_zero] using hbound
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 2 0
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  have hpoint : ∀ (η : AnnularState S) (m : ℕ) (r θ : ℝ),
+      r ∈ Ioo (C.left m) (C.right m) →
+      |deriv (fun t : ℝ => deriv (fun q : ℝ =>
+        C.minusFlow (C.referenceState + t • η, q) m r θ) 0) 0| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ B *
+          (2 * stateGrading S base η + stateGrading S loss η) := by
+    intro η m r θ hr
+    let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
+    let J := htower.choose
+    have hz : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
+      constructor
+      · have hz0 : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
+          (congrArg (fun v : AnnularState S => stateGrading S base v)
+            (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
+        exact hz0.trans_lt hN.2.1
+      · simpa only [abs_zero] using hN.2.1
+    have hd := (ordinaryFlow_state_q_mixed_hasDerivAt_of_tower
+      J C.referenceState η hz).deriv
+    have hbound := htower.choose_spec (C.referenceState, 0) hz
+      (Fin.cons (η, (0 : ℝ))
+        (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))))
+    have hb' : |J.D 2 (C.referenceState, 0)
+        (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))))| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+            base loss ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
+              (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) := by
+      simpa only [pow_zero, one_mul, zero_add] using hbound
+    have hw : oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+        base loss ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
+          (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) =
+        2 * stateGrading S base η + stateGrading S loss η := by
+      simpa only [sub_self] using oneHighVariationWeight_state_external_zero S base loss η
+    exact (congrArg abs hd).trans_le (hb'.trans_eq (congrArg
+      (fun t : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (C.cell m)) ^ B * t) hw))
+  exact Exists.intro B (And.intro hB hpoint)
 
 end ContinuousFlexibility.Statements

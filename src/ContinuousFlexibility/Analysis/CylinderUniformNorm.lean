@@ -20,6 +20,7 @@ set_option backward.isDefEq.respectTransparency false
 theorem materialCylinderMeasure_radial_strip {R : ℝ} (hR : 0 ≤ R) :
     materialCylinderMeasure (Icc (-R) R ×ˢ (univ : Set ℝ)) =
       ENNReal.ofReal (2 * R * Real.pi) := by
+  let : SFinite angleMeasure := by unfold angleMeasure; infer_instance
   rw [materialCylinderMeasure_eq_prod, Measure.prod_prod]
   simp only [angleMeasure, Measure.restrict_apply_univ, Real.volume_Icc, Real.volume_Ioc,
     sub_zero, sub_neg_eq_add]
@@ -47,7 +48,7 @@ theorem cylinder_eLpNorm_le_of_radial_support {f : PolarPoint → ℝ} {R K : �
     hf.restrict (Eventually.of_forall (fun p => by simpa only [Real.norm_eq_abs] using hbound p))
   rw [Measure.restrict_apply_univ, hμ] at hb
   have hexp : (2 : ℝ≥0∞).toReal⁻¹ = (1 / 2 : ℝ) := by norm_num
-  rw [hexp, ← ENNReal.ofReal_rpow_of_nonneg hV (by norm_num : (0 : ℝ) ≤ 1 / 2),
+  rw [hexp, ENNReal.ofReal_rpow_of_nonneg hV (by norm_num : (0 : ℝ) ≤ 1 / 2),
     ← Real.sqrt_eq_rpow, ← ENNReal.ofReal_mul (Real.sqrt_nonneg _)] at hb
   rw [eLpNorm_restrict_eq_of_support_subset hf hsupp] at hb
   exact hb
@@ -76,7 +77,7 @@ theorem physicalNorm_le_of_common_jet_bound {T : MaterialData} {γ : ℝ}
       _ ≤ ∑ _j : JetIndex s, (ENNReal.ofReal L) ^ 2 := by
         apply Finset.sum_le_sum
         intro j _
-        exact pow_le_pow_left₀ (zero_le _) (hb j) 2
+        exact pow_le_pow_left₀ (by positivity) (hb j) 2
       _ = (Fintype.card (JetIndex s) : ℝ≥0∞) * ENNReal.ofReal (L ^ 2) := by
         rw [← ENNReal.ofReal_pow hL]
         simp only [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]

@@ -69,9 +69,11 @@ theorem materialCell_plateau_inverse_width_bound {D : ReferenceData}
   have hexp : Real.exp (((n : ℝ) + 1) ^ 2) ≤ Real.exp 2 * radialE n ^ 2 := by
     calc
       _ ≤ Real.exp (2 + 2 * radialQ n) := Real.exp_le_exp.mpr hquad
-      _ = _ := by rw [Real.exp_add, Real.exp_nat_mul]; rfl
+      _ = _ := by
+        rw [Real.exp_add, radialE, ← Real.exp_nat_mul]
+        norm_num
   have hE : 1 ≤ radialE n :=
-    (by positivity : (1 : ℝ) ≤ (n : ℝ) + 1).trans (natCast_add_one_le_radialE n)
+    (le_add_of_nonneg_left (Nat.cast_nonneg n)).trans (natCast_add_one_le_radialE n)
   have hE2 : 1 ≤ radialE n ^ 2 := one_le_pow₀ hE
   calc
     _ ≤ 1 + 2 * C * Real.exp (((n : ℝ) + 1) ^ 2) := by simpa only [hcinv] using hinv
@@ -119,12 +121,12 @@ theorem materialCell_plateau_rho_bound {D : ReferenceData} {T : MaterialData}
   let X : ℝ := endpointX d₀ (endpointDistance D t)
   have hX : 0 ≤ X := Real.sqrt_nonneg _
   have hE : 1 ≤ radialE n :=
-    (by positivity : (1 : ℝ) ≤ (n : ℝ) + 1).trans (natCast_add_one_le_radialE n)
+    (le_add_of_nonneg_left (Nat.cast_nonneg n)).trans (natCast_add_one_le_radialE n)
   have hE0 : 0 ≤ radialE n := zero_le_one.trans hE
   have hXE : X ≤ (B + 1) * radialE n := by
     calc
       X ≤ (n : ℝ) + B := hband j l r hl hlr hr hcell t ht
-      _ ≤ (B + 1) * ((n : ℝ) + 1) := by nlinarith [Nat.cast_nonneg (R := ℝ) n]
+      _ ≤ (B + 1) * ((n : ℝ) + 1) := by nlinarith [Nat.cast_nonneg (α := ℝ) n]
       _ ≤ _ := mul_le_mul_of_nonneg_left (natCast_add_one_le_radialE n) (by positivity)
   have hX2 : X ^ 2 ≤ (B + 1) ^ 2 * radialE n ^ 4 := by
     calc

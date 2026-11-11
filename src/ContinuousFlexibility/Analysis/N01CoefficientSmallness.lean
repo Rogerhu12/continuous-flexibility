@@ -46,9 +46,9 @@ theorem oneHighVariationWeight_one_smul_le
   rw [oneHighVariationWeight_one, map_smul_eq_mul, Real.norm_eq_abs,
     abs_of_nonneg ht.1]
   have ht' : t * p high v ≤ p high v := by
-    simpa only [one_mul] using mul_le_mul_of_nonneg_right ht.2 (apply_nonneg _ _)
+    simpa only [one_mul] using mul_le_mul_of_nonneg_right ht.2 (apply_nonneg (p high) v)
   exact add_le_add_right
-    (mul_le_mul_of_nonneg_right (add_le_add_left ht' 1) (apply_nonneg _ _)) _
+    (mul_le_mul_of_nonneg_right (add_le_add_left ht' 1) (apply_nonneg (p base) v)) _
 
 theorem SmoothDirections.sub_le_of_first_variation
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -65,9 +65,7 @@ theorem SmoothDirections.sub_le_of_first_variation
   let v := y - x
   have hcons : Fin.cons v (Fin.elim0 : Fin 0 → E) = (fun _ : Fin 1 => v) := by
     funext i
-    have hi : i = 0 := Subsingleton.elim _ _
-    subst i
-    rfl
+    exact Fin.cases rfl (fun j => Fin.elim0 j) i
   have hd (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       HasDerivWithinAt (fun s : ℝ => J.D 0 (x + s • v) Fin.elim0)
         (J.D 1 (x + t • v) (fun _ => v)) (Icc (0 : ℝ) 1) t := by
@@ -88,46 +86,93 @@ theorem SmoothDirections.sub_le_of_first_variation
     dsimp only [v]
     rw [one_smul]
     abel
-  have hzero : x ∈ U := by simpa only [hpoint₀] using hsegment 0 (by simp)
-  have hone : y ∈ U := by simpa only [hpoint₁] using hsegment 1 (by simp)
+  have hzero : x ∈ U := by
+    have hx := hsegment 0 (by simp)
+    change x + (0 : ℝ) • v ∈ U at hx
+    rw [hpoint₀] at hx
+    exact hx
+  have hone : y ∈ U := by
+    have hy := hsegment 1 (by simp)
+    change x + (1 : ℝ) • v ∈ U at hy
+    rw [hpoint₁] at hy
+    exact hy
   simpa only [hpoint₀, hpoint₁,
     J.zero x hzero, J.zero y hone, sub_zero, norm_one, mul_one, Real.norm_eq_abs] using h
+
+theorem SmoothDirections.abs_le_of_first_variation_small
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : E → ℝ}
+    (J : SmoothDirections U f) (p : ℕ → Seminorm ℝ E) (base high : ℕ)
+    (x y : E) (hsegment : ∀ t ∈ Icc (0 : ℝ) 1, x + t • (y - x) ∈ U)
+    (hzero : f x = 0) {A η : ℝ} (hA : 0 ≤ A) (hη : η ≤ 1 / 2)
+    (hlow : p base (y - x) ≤ 2 * η) (hhigh : p high (y - x) ≤ 2 * η)
+    (hbound : ∀ t ∈ Icc (0 : ℝ) 1,
+      |J.D 1 (x + t • (y - x)) (fun _ => y - x)| ≤
+        A * oneHighVariationWeight p base high
+          ((x + t • (y - x)) - x) (fun _ : Fin 1 => y - x)) :
+    |f y| ≤ 6 * A * η := by
+  have h := J.sub_le_of_first_variation p base high x y hsegment hA hbound
+  rw [hzero, sub_zero] at h
+  have hhigh_one : p high (y - x) ≤ 1 := hhigh.trans (by linarith only [hη])
+  have hweight : (1 + p high (y - x)) * p base (y - x) + p high (y - x) ≤ 6 * η := by
+    calc
+      _ ≤ (1 + 1) * (2 * η) + 2 * η :=
+        add_le_add (mul_le_mul (add_le_add_left hhigh_one 1) hlow
+          (apply_nonneg (p base) (y - x)) (by norm_num)) hhigh
+      _ = _ := by ring
+  exact h.trans ((mul_le_mul_of_nonneg_left hweight hA).trans_eq (by ring))
+
+theorem seminorm_scalar_ball_segment
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (x : E) {z : E × ℝ} {ε t : ℝ}
+    (hz : p (z.1 - x) < ε ∧ |z.2| < ε) (ht : t ∈ Icc (0 : ℝ) 1) :
+    p (((x, (0 : ℝ)) + t • (z - (x, 0))).1 - x) < ε ∧
+      |((x, (0 : ℝ)) + t • (z - (x, 0))).2| < ε := by
+  constructor
+  · change p ((x + t • (z.1 - x)) - x) < ε
+    rw [add_sub_cancel_left, map_smul_eq_mul, Real.norm_eq_abs, abs_of_nonneg ht.1]
+    exact (show t * p (z.1 - x) ≤ p (z.1 - x) by
+      simpa only [one_mul] using
+        mul_le_mul_of_nonneg_right ht.2 (apply_nonneg p (z.1 - x))).trans_lt hz.1
+  · change |(0 : ℝ) + t • (z.2 - 0)| < ε
+    simp only [zero_add, sub_zero, smul_eq_mul, abs_mul, abs_of_nonneg ht.1]
+    exact (show t * |z.2| ≤ |z.2| by
+      simpa only [one_mul] using mul_le_mul_of_nonneg_right ht.2 (abs_nonneg z.2)).trans_lt hz.2
+
+theorem pairGrading_sub_reference_lt
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (x : E)
+    {base n : ℕ} {η : ℝ} (hn : n ≤ base) {z : E × ℝ}
+    (hz : p base (z.1 - x) < η ∧ |z.2| < η) :
+    pairGrading p realGrading n (z - (x, 0)) < 2 * η := by
+  change p n (z.1 - x) + ‖z.2 - 0‖ < 2 * η
+  rw [sub_zero, Real.norm_eq_abs]
+  have hs := (hp hn (z.1 - x)).trans_lt hz.1
+  linarith only [hs, hz.2]
 
 theorem stateNeighborhood_segment (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) {base : ℕ} {ε : ℝ}
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     {t : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) :
     (C.referenceState, (0 : ℝ)) + t • (z - (C.referenceState, 0)) ∈
-      stateNeighborhood S C base ε := by
-  constructor
-  · change stateGrading S base
-      ((C.referenceState + t • (z.1 - C.referenceState)) - C.referenceState) < ε
-    rw [add_sub_cancel_left, map_smul_eq_mul, Real.norm_eq_abs, abs_of_nonneg ht.1]
-    exact (show t * stateGrading S base (z.1 - C.referenceState) ≤
-      stateGrading S base (z.1 - C.referenceState) by
-      simpa only [one_mul] using
-        mul_le_mul_of_nonneg_right ht.2 (apply_nonneg _ _)).trans_lt hz.1
-  · change |(0 : ℝ) + t • (z.2 - 0)| < ε
-    simp only [zero_add, sub_zero, smul_eq_mul, abs_mul, abs_of_nonneg ht.1]
-    exact (show t * |z.2| ≤ |z.2| by
-      simpa only [one_mul] using mul_le_mul_of_nonneg_right ht.2 (abs_nonneg _)).trans_lt hz.2
+      stateNeighborhood S C base ε :=
+  seminorm_scalar_ball_segment (stateGrading S base) C.referenceState hz ht
 
 theorem stateNeighborhood_pairGrading_lt
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     {base n : ℕ} {η : ℝ} (hn : n ≤ base)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base η) :
-    pairGrading (stateGrading S) realGrading n (z - (C.referenceState, 0)) < 2 * η := by
-  change stateGrading S n (z.1 - C.referenceState) + ‖z.2 - 0‖ < 2 * η
-  rw [sub_zero, Real.norm_eq_abs]
-  have hs := (solve_stateGrading_monotone S hn (z.1 - C.referenceState)).trans_lt hz.1
-  linarith only [hs, hz.2]
+    pairGrading (stateGrading S) realGrading n (z - (C.referenceState, 0)) < 2 * η :=
+  pairGrading_sub_reference_lt (stateGrading S) (solve_stateGrading_monotone S)
+    C.referenceState hn hz
 
 theorem coefficientFamily_reference_zero
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (i : Fin 3) (a b : ℕ) (p : PolarPoint) :
     coefficientFamily D S C i a b p (C.referenceState, 0) = 0 := by
   simp only [coefficientFamily, sub_self, mixedDerivative,
-    iteratedDeriv_const_zero, Pi.zero_apply]
+    iteratedDeriv_const, ite_self]
 
 /-- The small radius occurs linearly, and the constant is common to all
 three coefficients and all spatial jets up to the prescribed order. -/
@@ -142,42 +187,38 @@ theorem N01Properties.coefficientFamily_small_of_neighborhood
         |coefficientFamily D S C i a b p z| ≤
           6 * B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample m) ^ B * η := by
-  have hdata := hN
-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, hcoeff, _⟩
-  obtain ⟨B, hB, hcoeff⟩ := hcoeff 1 s
-  refine ⟨B, hB, fun base' hb hh η hηε hη₁ z hz m i a b p hab hp => ?_⟩
-  have hzold := stateNeighborhood_mono S C hb hηε hz
-  obtain ⟨J, hJ⟩ := hcoeff m i a b p hab hp
-  obtain ⟨_, hRef⟩ := hN.1.1
-  have hsample := materialSample_mem_radialCore hT hRef.2.1 m
-  have hH : 0 < T.H (T.sample m) := (hT.2.1 _ hsample).2.1
-  have hE : 0 < T.E0 (T.sample m) := (hT.2.1 _ hsample).2.2.1
-  let A := B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B
-  have hA : 0 ≤ A := mul_nonneg
-    (mul_nonneg hB.le (Real.rpow_nonneg hH.le _)) (Real.rpow_nonneg hE.le _)
-  have hline (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-      (C.referenceState, (0 : ℝ)) + t • (z - (C.referenceState, 0)) ∈
-        stateNeighborhood S C base ε := stateNeighborhood_segment S C hzold ht
-  have h := J.sub_le_of_first_variation (pairGrading (stateGrading S) realGrading)
-    base (s + loss) (C.referenceState, 0) z hline hA
-    (fun t ht => hJ _ (hline t ht) (fun _ => z - (C.referenceState, 0)))
-  rw [coefficientFamily_reference_zero, sub_zero] at h
-  have hl := (stateNeighborhood_pairGrading_lt S C hb hz).le
-  have hh' := (stateNeighborhood_pairGrading_lt S C hh hz).le
-  have hh₁ : pairGrading (stateGrading S) realGrading (s + loss)
-      (z - (C.referenceState, 0)) ≤ 1 := hh'.trans (by linarith only [hη₁])
-  have hweight :
-      (1 + pairGrading (stateGrading S) realGrading (s + loss)
-        (z - (C.referenceState, 0))) *
-        pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0)) +
-        pairGrading (stateGrading S) realGrading (s + loss)
-          (z - (C.referenceState, 0)) ≤ 6 * η := by
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.1 1 s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  have hpoint : ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
+      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
+      ∀ z ∈ stateNeighborhood S C base' η, ∀ m i a b p,
+        a + b ≤ s → p.1 ∈ D.cells m →
+        |coefficientFamily D S C i a b p z| ≤
+          6 * B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample m) ^ B * η := by
+    intro base' hb hh η hηε hη₁ z hz m i a b p hab hp
+    have hzold := stateNeighborhood_mono S C hb hηε hz
+    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m i a b p hab hp
+    have hsample := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
+    have hH : 0 < T.H (T.sample m) := (hT.2.1 _ hsample).2.1
+    have hE : 0 < T.E0 (T.sample m) := (hT.2.1 _ hsample).2.2.1
+    let A : ℝ := B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B
+    have hA : 0 ≤ A := mul_nonneg
+      (mul_nonneg hB.le (Real.rpow_nonneg hH.le _)) (Real.rpow_nonneg hE.le _)
+    have hline (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
+        (C.referenceState, (0 : ℝ)) + t • (z - (C.referenceState, 0)) ∈
+          stateNeighborhood S C base ε := stateNeighborhood_segment S C hzold ht
+    have hsmall := J.abs_le_of_first_variation_small
+      (pairGrading (stateGrading S) realGrading) base (s + loss)
+      (C.referenceState, 0) z hline (coefficientFamily_reference_zero D S C i a b p)
+      hA hη₁ (stateNeighborhood_pairGrading_lt S C hb hz).le
+      (stateNeighborhood_pairGrading_lt S C hh hz).le
+      (fun t ht => hJ _ (hline t ht) (fun _ => z - (C.referenceState, 0)))
     calc
-      _ ≤ (1 + 1) * (2 * η) + 2 * η :=
-        add_le_add (mul_le_mul (add_le_add_left hh₁ 1) hl
-          (apply_nonneg _ _) (by norm_num)) hh'
-      _ = _ := by ring
-  exact h.trans ((mul_le_mul_of_nonneg_left hweight hA).trans_eq (by dsimp only [A]; ring))
+      _ ≤ 6 * A * η := hsmall
+      _ = _ := by dsimp only [A]; ring
+  exact Exists.intro B (And.intro hB hpoint)
 
 theorem materialSample_H_E0_radialE_envelope
     {D : ReferenceData} {T : MaterialData}

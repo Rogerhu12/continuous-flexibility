@@ -208,7 +208,9 @@ theorem N01Properties.control_product_jets_cell_bound
         (stateGrading S base v + stateGrading S (1 + loss) v)
       |D.w r * C.control m r| ≤ A ∧
         |deriv D.w r * C.control m r + D.w r * deriv (C.control m) r| ≤ A := by
-  obtain ⟨B, hB, hbound⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.1 1 1
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.1 1 1
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m j : ℕ) (r : ℝ), r ∈ D.cells j →
       let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
       let A := B * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
@@ -228,16 +230,18 @@ theorem N01Properties.control_product_jets_cell_bound
             (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
         exact hz.trans_lt hN.2.1
       · simpa only [abs_zero] using hN.2.1
-    obtain ⟨J0, hJ0⟩ := hbound j 0 0 0 (r, 0) (by norm_num) hr
-    obtain ⟨J1, hJ1⟩ := hbound j 0 1 0 (r, 0) (by norm_num) hr
+    let htower0 := hdata.choose_spec.2 j 0 0 0 (r, 0) (by norm_num) hr
+    let htower1 := hdata.choose_spec.2 j 0 1 0 (r, 0) (by norm_num) hr
+    let J0 := htower0.choose
+    let J1 := htower1.choose
     have hd0 : J0.D 1 (C.referenceState, 0) (fun _ => (v, (0 : ℝ))) =
         D.w r * C.control m r :=
       hN.coefficientTower_singleton_zero hS hT m (r, 0) J0 hz0
     have hd1 : J1.D 1 (C.referenceState, 0) (fun _ => (v, (0 : ℝ))) =
         deriv D.w r * C.control m r + D.w r * deriv (C.control m) r :=
       hN.coefficientTower_singleton_radial hS hT m (r, 0) J1 hz0
-    have hb0 := hJ0 (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
-    have hb1 := hJ1 (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
+    have hb0 := htower0.choose_spec (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
+    have hb1 := htower1.choose_spec (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
     have hw :
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
           base (1 + loss) ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))

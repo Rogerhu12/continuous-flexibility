@@ -68,7 +68,7 @@ theorem referencePlateau_common_weightedJet_bound
     (Finset.single_le_sum (fun i _ => hKa i) (Finset.mem_univ a)).trans
       (le_add_of_nonneg_left zero_le_one)
   obtain ⟨Kw, A, hKw, hA, hweight⟩ := materialPlateau_sample_weight_bound hT hD
-    hβ (Nat.cast_nonneg (R := ℝ) n) (by norm_num : (0 : ℝ) < 1)
+    hβ (Nat.cast_nonneg (α := ℝ) n) (by norm_num : (0 : ℝ) < 1)
   have hpos := hT.2.1
   have hinside := hT.2.2.2.2.2.2.2.1
   have hsamp : ∀ j, T.sample j ∈ Ioo D.a D.b := by
@@ -107,7 +107,8 @@ theorem referencePlateau_common_weightedJet_bound
     have hw : T.H (T.radius p.1) ^ (-β) * T.M (T.radius p.1) ^ n ≤
         Kw * T.H (T.sample j) ^ (-β) * T.E0 (T.sample j) ^ A *
           T.M (T.sample j) ^ (n + 1) := by
-      simpa only [Real.rpow_natCast, Nat.cast_add, Nat.cast_one] using
+      have hcast : (n : ℝ) + 1 = ((n + 1 : ℕ) : ℝ) := by norm_num
+      simpa only [hcast, Real.rpow_natCast] using
         hweight j l r hl hlr hr hcell (T.radius p.1) hp
     calc
       _ ≤ K₀ * (endpointPlateauWidth D l r)⁻¹ ^ n *

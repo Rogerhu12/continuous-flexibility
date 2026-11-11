@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.ReturnCorrectionResidualBilinear
+import ContinuousFlexibility.Analysis.ReturnOpticalCorrectionSource
 
 /-!
 # The actual operator difference at the actual residual
@@ -30,52 +30,57 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1)
-  (hdisc : ∀ m p, p.1 ∈ Icc ((2 * C.left m + C.right m) / 3)
-      ((C.left m + 2 * C.right m) / 3) →
+  (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
+  (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
+  (hsupp : ∀ m, Function.support (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m))
+  (hend : ∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧
+    χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1))
+  (hdisc : ∀ m p, p.1 ∈ tsupport (deriv (χ m)) →
     0 < (originalCoefficients D S C z).b p ^ 2 -
       (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p)
 
 include hN01 hN02 hS hz hsector hdisc
 
-theorem N01Properties.returnCorrectionCoefficientError_at_actual_of_collar
+theorem N01Properties.returnCorrectionCoefficientError_at_actual_of_cutoffs
     (p : PolarPoint) (hp : p ∈ annularOpen D) :
-    returnCorrectionCoefficientError D S C R (returnCorrectionCutoffs C) z p (R.residual z) =
+    returnCorrectionCoefficientError D S C R χ z p (R.residual z) =
       ((originalCoefficients D S C z).b p -
-        (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z).b p,
+        (returnCorrectedCoefficients D S C χ z).b p,
        (originalCoefficients D S C z).c p -
-        (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z).c p) := by
+        (returnCorrectedCoefficients D S C χ z).c p) := by
   apply returnCorrectionCoefficientError_at_actual hN01 hN02 hS
-    (returnCorrectionCutoffs C) hz hsector p hp
+    χ hz hsector p hp
   intro m _ hm
-  exact (hdisc m p
-    (returnCorrectionCutoff_deriv_support_subset (hN01.2.2.2.1.1 m).2.1 hm)).le
+  exact (hdisc m p (subset_tsupport _ hm)).le
 
-include hT
+include hT hχ hχrange hsupp hend
 
 theorem N01Properties.returnCorrectedCoefficients_contDiffAt_one
     (p : PolarPoint) (hp : p ∈ annularOpen D) :
-    ContDiffAt ℝ 1 (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z).a p ∧
-    ContDiffAt ℝ 1 (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z).b p ∧
-    ContDiffAt ℝ 1 (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z).c p := by
+    ContDiffAt ℝ 1 (returnCorrectedCoefficients D S C χ z).a p ∧
+    ContDiffAt ℝ 1 (returnCorrectedCoefficients D S C χ z).b p ∧
+    ContDiffAt ℝ 1 (returnCorrectedCoefficients D S C χ z).c p := by
   have hreg := hN01.originalCoefficients_contDiffAt hS hT hz hsector hp
-  have herr := hN01.returnCorrectionCoefficientError_contDiffAt_one hS hT R hz hsector
-    hdisc (R.residual z) p hp
-  have hb : (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z).b =ᶠ[𝓝 p]
+  have herr : ContDiffAt ℝ 1
+      (fun q => returnCorrectionCoefficientError D S C R χ z q (R.residual z)) p :=
+    (hN01.returnCorrectionCoefficientError_contDiffAt_of_cutoffs hS hT R hz hsector
+      χ hχ hχrange hsupp hend hdisc (R.residual z) p hp).of_le (by simp)
+  have hb : (returnCorrectedCoefficients D S C χ z).b =ᶠ[𝓝 p]
       fun q => (originalCoefficients D S C z).b q -
-        (returnCorrectionCoefficientError D S C R (returnCorrectionCutoffs C) z q
+        (returnCorrectionCoefficientError D S C R χ z q
           (R.residual z)).1 := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
     have h := congrArg Prod.fst
-      (hN01.returnCorrectionCoefficientError_at_actual_of_collar hN02 hS hz hsector hdisc q hq)
+      (hN01.returnCorrectionCoefficientError_at_actual_of_cutoffs hN02 hS hz hsector χ hdisc q hq)
     dsimp only [Prod.fst] at h
     linarith
-  have hc : (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z).c =ᶠ[𝓝 p]
+  have hc : (returnCorrectedCoefficients D S C χ z).c =ᶠ[𝓝 p]
       fun q => (originalCoefficients D S C z).c q -
-        (returnCorrectionCoefficientError D S C R (returnCorrectionCutoffs C) z q
+        (returnCorrectionCoefficientError D S C R χ z q
           (R.residual z)).2 := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
     have h := congrArg Prod.snd
-      (hN01.returnCorrectionCoefficientError_at_actual_of_collar hN02 hS hz hsector hdisc q hq)
+      (hN01.returnCorrectionCoefficientError_at_actual_of_cutoffs hN02 hS hz hsector χ hdisc q hq)
     dsimp only [Prod.snd] at h
     linarith
   refine ⟨?_, ?_, ?_⟩
@@ -87,15 +92,16 @@ theorem N01Properties.returnCorrectedCoefficients_contDiffAt_one
 theorem N01Properties.divergenceOperator_returnCorrectedCoefficients
     (η : HeightPair S) (p : PolarPoint) (hp : p ∈ annularOpen D) :
     divergenceOperator (originalCoefficients D S C z) (heightPairField S η) p -
-      divergenceOperator (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z)
+      divergenceOperator (returnCorrectedCoefficients D S C χ z)
         (heightPairField S η) p =
-      returnCorrectionResidualErrorField D S C R (returnCorrectionCutoffs C) z
+      returnCorrectionResidualErrorField D S C R χ z
         (R.residual z) η p := by
   let L := originalCoefficients D S C z
-  let K := returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z
+  let K := returnCorrectedCoefficients D S C χ z
   let u := heightPairField S η
   have hL := hN01.originalCoefficients_contDiffAt hS hT hz hsector hp
-  have hK := hN01.returnCorrectedCoefficients_contDiffAt_one hN02 hS hT hz hsector hdisc p hp
+  have hK := hN01.returnCorrectedCoefficients_contDiffAt_one hN02 hS hT hz hsector
+    χ hχ hχrange hsupp hend hdisc p hp
   have hu : ContDiff ℝ ∞ u :=
     physical_height_with_cutoff_contDiff hT hS (by norm_num : (0 : ℝ) < 3 / 4) η.1 η.2
   have hur : ContDiffAt ℝ 1 (radialPartial u) p :=
@@ -107,34 +113,34 @@ theorem N01Properties.divergenceOperator_returnCorrectedCoefficients
   have hKt : DifferentiableAt ℝ (symmetricAngularFlux K.b K.c u) p :=
     ((hK.2.1.mul hur).add (hK.2.2.mul hut)).differentiableAt one_ne_zero
   have hcmp := divergenceOperator_difference_same_radial L K
-    (returnCorrectedCoefficients_a D S C (returnCorrectionCutoffs C) z).symm u p
+    (returnCorrectedCoefficients_a D S C χ z).symm u p
     ((contDiffAt_symmetricNormalFlux hL.1 hL.2.1 hu.contDiffAt).differentiableAt (by simp))
     hKr
     ((contDiffAt_symmetricAngularFlux hL.2.1 hL.2.2 hu.contDiffAt).differentiableAt (by simp))
     hKt
   have heq : ∀ᶠ q in 𝓝 p,
-      returnCorrectionCoefficientError D S C R (returnCorrectionCutoffs C) z q (R.residual z) =
+      returnCorrectionCoefficientError D S C R χ z q (R.residual z) =
         (L.b q - K.b q, L.c q - K.c q) := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
-    exact hN01.returnCorrectionCoefficientError_at_actual_of_collar hN02 hS hz hsector hdisc q hq
+    exact hN01.returnCorrectionCoefficientError_at_actual_of_cutoffs hN02 hS hz hsector χ hdisc q hq
   have hF : (fun q => (L.b q - K.b q) * angularPartial u q) =ᶠ[𝓝 p]
-      returnCorrectionRadialErrorFlux D S C R (returnCorrectionCutoffs C) z (R.residual z) η := by
+      returnCorrectionRadialErrorFlux D S C R χ z (R.residual z) η := by
     filter_upwards [heq] with q hq
     simp only [returnCorrectionRadialErrorFlux, hq]
   have hG : (fun q => (L.b q - K.b q) * radialPartial u q +
       (L.c q - K.c q) * angularPartial u q) =ᶠ[𝓝 p]
-      returnCorrectionAngularErrorFlux D S C R (returnCorrectionCutoffs C) z (R.residual z) η := by
+      returnCorrectionAngularErrorFlux D S C R χ z (R.residual z) η := by
     filter_upwards [heq] with q hq
     simp only [returnCorrectionAngularErrorFlux, hq]
   have hFr : radialPartial (fun q => (L.b q - K.b q) * angularPartial u q) p =
       radialPartial (returnCorrectionRadialErrorFlux D S C R
-        (returnCorrectionCutoffs C) z (R.residual z) η) p := by
+        χ z (R.residual z) η) p := by
     unfold radialPartial
     rw [hF.fderiv_eq]
   have hGt : angularPartial (fun q => (L.b q - K.b q) * radialPartial u q +
       (L.c q - K.c q) * angularPartial u q) p =
       angularPartial (returnCorrectionAngularErrorFlux D S C R
-        (returnCorrectionCutoffs C) z (R.residual z) η) p := by
+        χ z (R.residual z) η) p := by
     unfold angularPartial
     rw [hG.fderiv_eq]
   rw [hFr, hGt] at hcmp
@@ -146,11 +152,13 @@ theorem N01Properties.divergenceOperator_returnCorrectedCoefficients
 theorem N01Properties.divergenceOperator_returnCorrectionResidualErrorBilinear
     (η : HeightPair S) (p : PolarPoint) (hp : p ∈ annularOpen D) :
     divergenceOperator (originalCoefficients D S C z) (heightPairField S η) p -
-      divergenceOperator (returnCorrectedCoefficients D S C (returnCorrectionCutoffs C) z)
+      divergenceOperator (returnCorrectedCoefficients D S C χ z)
         (heightPairField S η) p =
-      returnCorrectionResidualErrorBilinear hN01 hS hT R hz hsector hdisc (R.residual z) η p := by
-  rw [returnCorrectionResidualErrorBilinear_apply]
-  exact hN01.divergenceOperator_returnCorrectedCoefficients hN02 hS hT hz hsector hdisc η p hp
+      returnCorrectionResidualErrorBilinearOfCutoffs hN01 hS hT R hz hsector
+        χ hχ hχrange hsupp hend hdisc (R.residual z) η p := by
+  rw [returnCorrectionResidualErrorBilinearOfCutoffs_apply]
+  exact hN01.divergenceOperator_returnCorrectedCoefficients hN02 hS hT hz hsector
+    χ hχ hχrange hsupp hend hdisc η p hp
 
 end ActualOperator
 

@@ -153,7 +153,9 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
-  obtain ⟨B, hB, hb⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 0
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 0
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (x : AnnularState S) (q : ℝ),
       (x, q) ∈ stateNeighborhood S C base ε → ∀ (m : ℕ) (r θ : ℝ),
       r ∈ Ioo (C.left m) (C.right m) →
@@ -162,10 +164,11 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
           T.E0 (T.sample (C.cell m)) ^ B *
           (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
     intro x q hxq m r θ hr
-    obtain ⟨J, hJ⟩ := hb m 0 0 (r, θ) (by norm_num) hr
+    let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
+    let J := htower.choose
     apply ordinaryFlow_q_derivative_bound_of_tower (high := loss) J hxq
     simpa only [pow_zero, one_mul] using
-      hJ (x, q) hxq (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
+      htower.choose_spec (x, q) hxq (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
   exact Exists.intro B (And.intro hB hpoint)
 
 /-- For a fixed state and component, the derivative bound is uniform in

@@ -50,7 +50,8 @@ theorem materialRho_endpoint_formulas {D : ReferenceData} {T : MaterialData}
         ((hasDerivAt_const r D.b).sub (hasDerivAt_id r))).neg
     have h' : HasDerivAt (fun t => -endpointRhoOfDistance d₀ (D.b - t))
         (-((1 / endpointEll d₀ (D.b - r)) * (0 - 1))) r := by
-      simpa only [Function.comp_def, Pi.neg_apply] using h
+      apply h.congr_of_eventuallyEq
+      exact Filter.Eventually.of_forall (fun t => rfl)
     exact h'.congr_deriv (by simp only [zero_sub, mul_neg_one, neg_neg, (hright r hr).1, endpointEll])
   obtain ⟨cL, hcL⟩ := isOpen_Ioo.exists_eq_add_of_deriv_eq
     (f := T.rho) (g := fun t => endpointRhoOfDistance d₀ (t - D.a))

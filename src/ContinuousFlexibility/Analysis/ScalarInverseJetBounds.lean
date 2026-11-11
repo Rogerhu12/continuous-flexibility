@@ -115,8 +115,9 @@ theorem inverse_iteratedDeriv_uniform_bound
     have hcompact := hc.mono (show Icc a A ⊆ Ioi (0 : ℝ) from fun x hx => ha.trans_le hx.1)
     obtain ⟨B, hb⟩ := isCompact_Icc.exists_bound_of_continuousOn hcompact
     refine ⟨max B 0, le_max_right _ _, fun i x => ?_⟩
-    exact (by simpa only [Real.norm_eq_abs] using hb (q i x) (hqrange i x)).trans
-      (le_max_left _ _)
+    have hnorm : |iteratedDeriv k (fun t : ℝ => t⁻¹) (q i x)| ≤ B := by
+      simpa only [Real.norm_eq_abs] using hb (q i x) (hqrange i x)
+    exact hnorm.trans (le_max_left _ _)
   have hall (n : ℕ) : ∃ K : ℝ, 0 ≤ K ∧
       ∀ i x, |iteratedDeriv (n + 1) (g i) x| ≤ K := by
     induction n using Nat.strong_induction_on with

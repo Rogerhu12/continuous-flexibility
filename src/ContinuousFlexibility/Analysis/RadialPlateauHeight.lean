@@ -40,11 +40,11 @@ theorem radialPlateauHeight_member {D : ReferenceData} {T : MaterialData}
     (hcore : Icc (l - δ) (r + δ) ⊆ Ioo D.a D.b) :
     HeightMember D T γ (radialPlateauHeight h l r δ) := by
   have hsupp := radialPlateauHeight_compactRadialSupport h hδ hcore
-  have hF : ContDiff ℝ ∞ (radialPlateauHeight h l r δ) := by
-    simpa only [radialPlateauHeight, Function.comp_def] using
-      (radialPlateauProduct_contDiff hh l r δ).comp contDiff_fst
+  have hF : ContDiffOn ℝ ∞ (radialPlateauHeight h l r δ) (annularOpen D) :=
+    ((radialPlateauProduct_contDiff hh l r δ).comp contDiff_fst).contDiffOn.congr
+      (fun _ _ => rfl)
   apply heightMember_of_compactRadialSupport (f := radialPlateauHeight h l r δ) hT
-    hF.contDiffOn
+    hF
     (fun _ _ => rfl)
   · intro p
     simp only [radialPlateauHeight, Prod.fst_add, add_zero]

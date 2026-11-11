@@ -56,7 +56,8 @@ theorem circleAffineLift_uniform_jets
   have hjet : iteratedDeriv i (circleAffineLift travel e a m) θ =
       iteratedDeriv i (fun x : ℝ => x) θ + a * iteratedDeriv i (e m) θ := by
     rw [hshift, iteratedDeriv_const_add (by omega : 0 < i) (travel m),
-      iteratedDeriv_fun_add (contDiffAt_id.of_le (by simp))
+      iteratedDeriv_fun_add (f := fun x : ℝ => x)
+        (g := fun x : ℝ => a * e m x) (n := i) (x := θ) contDiffAt_id
         (hsmooth.contDiffAt.of_le (by simp)), iteratedDeriv_const_mul_field]
   have hid : |iteratedDeriv i (fun x : ℝ => x) θ| ≤ 1 := by
     rw [iteratedDeriv_fun_id, if_neg (by omega : i ≠ 0)]
@@ -95,6 +96,8 @@ theorem circleMember_averageCompose
         (contDiff_fst.mul ((he m).1.comp contDiff_snd))
     exact angularRegular_of_contDiff ((hu.1 m).1.comp hg) n
   · intro a ha m θ
+    change u m (circleAffineLift travel e a m (θ + Real.pi)) =
+      u m (circleAffineLift travel e a m θ)
     rw [circleAffineLift_periodic (fun j => (he j).2)]
     exact (hu.1 m).2 _
   · exact fun m => (hM m).le
@@ -165,6 +168,7 @@ theorem circleAverageComposeLinear_decode (u : S.Space) (m : ℕ) (θ : ℝ) :
       (circleModel_uniform_jets_of_material hS hT hD hγ e) travel) u
   exact congrFun (congrFun h m) θ
 
+include hS hT hD hγ in
 theorem circleShiftedChart_uniform_jets (s : ℕ) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ m i θ, 1 ≤ i → i ≤ s →
       |iteratedDeriv i (circleAffineLift travel (S.decode e) 1 m) θ| ≤ B ^ i := by

@@ -80,6 +80,20 @@ theorem returnLift_invFun_add_period {f : ℝ → ℝ} {P : ℝ}
   returnChart_inverse_add_period f (Function.invFun f) P hlift
     (Function.leftInverse_invFun hinj) (Function.rightInverse_invFun hsurj) x
 
+theorem returnDisplacementFactor_periodic
+    (f h G e u : ℝ → ℝ) (P : ℝ)
+    (hf : ∀ x, f (x + P) = f x + P)
+    (hh : ∀ x, h (x + P) = h x + P)
+    (hG : ∀ x, G (x + P) = G x + P)
+    (he : Function.Periodic e P) (hu : Function.Periodic u P) :
+    Function.Periodic (fun θ =>
+      dslope G (h (f θ)) (h (f θ) + e (h (f θ))) * u (h (f θ))) P := by
+  intro θ
+  dsimp only
+  rw [hf, hh, he, hu,
+    show h (f θ) + P + e (h (f θ)) = (h (f θ) + e (h (f θ))) + P by ring,
+    returnLift_dslope_add_period hG]
+
 /-- The velocity factor is a scalar periodic expression. Keeping this
 calculation outside the physical-model types avoids unfolding their
 linear maps during the periodicity proof. -/
@@ -194,18 +208,13 @@ theorem N01Properties.returnCorrectionDisplacementLinear_periodic
     dsimp only [G]
     rw [hN01.rightChartInverse_add_period hz hsector m,
       hN01.minusReturnInverse_add_period hz hsector m]
+  have hscalar := returnDisplacementFactor_periodic
+    (C.minusFlow z m (C.right m)) (rightChartCandidate S C z m) G
+    (returnResidualField S C z m) ((S.circle (3 / 4 : ℝ)).decode ρ m) Real.pi
+    hf hh hG he hρ
   intro θ
-  change returnCorrectionDisplacementLinear S C z m (θ + Real.pi) ρ =
-    returnCorrectionDisplacementLinear S C z m θ ρ
-  rw [returnCorrectionDisplacementLinear_apply, returnCorrectionDisplacementLinear_apply,
-    hf, hh, he, hρ]
-  rw [show rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ) + Real.pi +
-      returnResidualField S C z m
-        (rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ)) =
-      (rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ) +
-        returnResidualField S C z m
-          (rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ))) + Real.pi by ring]
-  rw [returnLift_dslope_add_period hG]
+  exact (returnCorrectionDisplacementLinear_apply S C z m (θ + Real.pi) ρ).trans
+    ((hscalar θ).trans (returnCorrectionDisplacementLinear_apply S C z m θ ρ).symm)
 
 theorem N01Properties.returnCorrectionVelocityLinear_periodic
     (hS : IsPhysicalSpaces D T S) (χ : ℕ → ℝ → ℝ) (m : ℕ) {r : ℝ}

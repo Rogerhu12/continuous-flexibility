@@ -119,5 +119,22 @@ theorem iteratedDeriv_oddPart_abs_le
   apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).mpr
   nlinarith only [hA x, hneg]
 
+theorem iteratedDeriv_evenPart_abs_le
+    {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) (n : ℕ) {A : ℝ}
+    (hA : ∀ x, |iteratedDeriv n f x| ≤ A) (x : ℝ) :
+    |iteratedDeriv n (ContinuousFlexibility.Statements.evenPart f) x| ≤ A := by
+  have heq : ContinuousFlexibility.Statements.evenPart f =
+      fun y => (f y + f (-y)) / 2 := rfl
+  rw [heq, iteratedDeriv_div_const,
+    iteratedDeriv_fun_add (hf.contDiffAt.of_le (by simp))
+      ((hf.comp contDiff_neg).contDiffAt.of_le (by simp)),
+    iteratedDeriv_comp_neg]
+  simp only [smul_eq_mul, abs_div, abs_ofNat]
+  apply (div_le_div_of_nonneg_right (abs_add_le _ _) (by norm_num : (0 : ℝ) ≤ 2)).trans
+  have hneg : |(-1 : ℝ) ^ n * iteratedDeriv n f (-x)| ≤ A := by
+    simpa only [abs_mul, abs_pow, abs_neg, abs_one, one_pow, one_mul] using hA (-x)
+  apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).mpr
+  nlinarith only [hA x, hneg]
+
 end ContinuousFlexibility.Analysis
 
