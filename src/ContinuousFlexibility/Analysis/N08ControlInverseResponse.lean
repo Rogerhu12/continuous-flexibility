@@ -19,6 +19,27 @@ open Set ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n08_linear_response_zero
+    {X Y : Type*} [AddCommGroup X] [Module ℝ X]
+    [AddCommGroup Y] [Module ℝ Y]
+    (p : Seminorm ℝ X) (q : Seminorm ℝ Y) (L : X →ₗ[ℝ] (Y × ℝ))
+    {f : X} (hf : f = 0) :
+    p f + q (L f).1 + |(L f).2| = 0 := by
+  simp only [hf, map_zero, Prod.fst_zero, Prod.snd_zero, abs_zero, add_zero]
+
+private theorem n08_with_positive_column_witness
+    {W : Type*} {Condition : ℕ → ℕ → ℝ → W → Prop} {P : Prop}
+    (h : ∃ b l : ℕ, ∃ δ : ℝ, 0 < δ ∧ ∃ w : W, Condition b l δ w)
+    (hP : ∀ b l : ℕ, ∀ δ : ℝ, 0 < δ → ∀ w : W, Condition b l δ w → P) : P := by
+  obtain ⟨b, l, δ, hδ, w, hw⟩ := h
+  exact hP b l δ hδ w hw
+
+private theorem n08_with_response_orders
+    {Condition : ℕ → ℕ → Prop} {P : Prop}
+    (h : ∃ b l : ℕ, Condition b l) (hP : ∀ b l : ℕ, Condition b l → P) : P := by
+  obtain ⟨b, l, hbl⟩ := h
+  exact hP b l hbl
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {G : ScalarInverseData S}
   {base loss : ℕ} {ε : ℝ}
@@ -50,8 +71,13 @@ theorem n08ControlInverseResponse_exists
           (fun z : (StateDirections S × ℝ) × ControlBanach =>
             H (liftSectorParameter S C z.1) z.2) := by
   classical
-  obtain ⟨columnBase, columnLoss, δ, hδ, Hraw, hderiv, hsmooth, hcolumn⟩ :=
-    n08ActualControlColumn_exists hT hS hN
+  refine n08_with_positive_column_witness
+    (W := AnnularState S × ℝ → ControlBanach →L[ℝ] S.Source)
+    (n08ActualControlColumn_exists hT hS hN) ?_
+  intro columnBase columnLoss δ hδ Hraw hcolumnData
+  have hderiv := hcolumnData.1
+  have hsmooth := hcolumnData.2.1
+  have hcolumn := hcolumnData.2.2
   let H := n08SectorControlColumn S Hraw
   let commonBase := max base columnBase
   let ρ : ℝ := min ε (δ / 2)
@@ -87,8 +113,8 @@ theorem n08ControlInverseResponse_exists
     tamePairGrading_monotone
       (tamePairGrading_monotone (gradedSeminorm_monotone _ _) weighted_realGrading_monotone)
       weighted_realGrading_monotone
-  obtain ⟨responseBase, responseLoss, hresponse⟩ :=
-    n08_controlResponse_bound hmono houtput hGv hHv
+  refine n08_with_response_orders (n08_controlResponse_bound hmono houtput hGv hHv) ?_
+  intro responseBase responseLoss hresponse
   let newBase := max commonBase responseBase
   let newLoss := max loss responseLoss
   let η : ℝ := min ρ (1 / 2)
@@ -141,9 +167,12 @@ theorem n08ControlInverseResponse_exists
         at hfinal
       simpa only [sub_zero, add_assoc] using hfinal
     · have heq : H z = 0 := n08SectorControlColumn_of_not_sector Hraw hs
-      simp only [heq, zero_apply, map_zero, Prod.fst_zero, Prod.snd_zero, abs_zero, add_zero]
-      exact mul_nonneg (mul_nonneg hK.le
-        (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))) (norm_nonneg _)
+      have hinput : H z b = 0 :=
+        congrArg (fun F : ControlBanach →L[ℝ] S.Source => F b) heq
+      have hzero := n08_linear_response_zero (X := S.Source) (Y := HeightPair S)
+        (S.sourceGrading s) (heightPairGrading S s) (G.G z).toLinearMap hinput
+      exact hzero.le.trans (mul_nonneg (mul_nonneg hK.le
+        (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))) (norm_nonneg _))
   · exact n08SectorControlColumn_smoothTame hN.2.2.1 hsmooth hnewMap
 
 end ContinuousFlexibility.Statements
