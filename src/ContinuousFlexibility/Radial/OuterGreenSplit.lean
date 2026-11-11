@@ -21,10 +21,12 @@ theorem outerGreenKernel_source_split (lam x y : ℝ) (U V f : ℝ → ℝ) :
       (Iic x).indicator (fun t => (V x / lam) * (U t * f t)) y +
         (Iic x)ᶜ.indicator (fun t => (U x / lam) * (V t * f t)) y := by
   by_cases hy : y ≤ x
-  · rw [indicator_of_mem hy, indicator_of_notMem (not_not.mpr hy), add_zero,
+  · have hys : y ∈ Iic x := hy
+    rw [indicator_of_mem hys, indicator_of_notMem (notMem_compl_iff.mpr hys), add_zero,
       outerGreenKernel_symm, outerGreenKernel_of_le hy]
     ring
-  · rw [indicator_of_notMem hy, indicator_of_mem hy, zero_add,
+  · have hys : y ∉ Iic x := hy
+    rw [indicator_of_notMem hys, indicator_of_mem (mem_compl hys), zero_add,
       outerGreenKernel_of_le (not_le.mp hy).le]
     ring
 
@@ -32,9 +34,10 @@ theorem outerGreen_integrable_mul {μ : Measure ℝ} {lam x : ℝ} {U V f : ℝ 
     (hU : IntegrableOn (fun y => U y * f y) (Iic x) μ)
     (hV : Integrable (fun y => V y * f y) μ) :
     Integrable (fun y => outerGreenKernel lam U V x y * f y) μ := by
-  have hA := (hU.const_mul (V x / lam)).integrable_indicator measurableSet_Iic
-  have hB := ((hV.integrableOn (s := (Iic x)ᶜ)).const_mul
-    (U x / lam)).integrable_indicator measurableSet_Iic.compl
+  have hA := IntegrableOn.integrable_indicator (s := Iic x)
+    (hU.const_mul (V x / lam)) measurableSet_Iic
+  have hB := IntegrableOn.integrable_indicator (s := (Iic x)ᶜ)
+    ((hV.integrableOn (s := (Iic x)ᶜ)).const_mul (U x / lam)) measurableSet_Iic.compl
   apply (hA.add hB).congr
   exact Eventually.of_forall fun y => (outerGreenKernel_source_split lam x y U V f).symm
 
@@ -44,9 +47,10 @@ theorem outerGreen_integral_split {μ : Measure ℝ} {lam x : ℝ} {U V f : ℝ 
     (∫ y, outerGreenKernel lam U V x y * f y ∂μ) =
       (V x / lam) * (∫ y in Iic x, U y * f y ∂μ) +
         (U x / lam) * ((∫ y, V y * f y ∂μ) - ∫ y in Iic x, V y * f y ∂μ) := by
-  have hA := (hU.const_mul (V x / lam)).integrable_indicator measurableSet_Iic
-  have hB := ((hV.integrableOn (s := (Iic x)ᶜ)).const_mul
-    (U x / lam)).integrable_indicator measurableSet_Iic.compl
+  have hA := IntegrableOn.integrable_indicator (s := Iic x)
+    (hU.const_mul (V x / lam)) measurableSet_Iic
+  have hB := IntegrableOn.integrable_indicator (s := (Iic x)ᶜ)
+    ((hV.integrableOn (s := (Iic x)ᶜ)).const_mul (U x / lam)) measurableSet_Iic.compl
   calc
     _ = ∫ y, (Iic x).indicator (fun t => (V x / lam) * (U t * f t)) y +
         (Iic x)ᶜ.indicator (fun t => (U x / lam) * (V t * f t)) y ∂μ :=
@@ -81,7 +85,7 @@ theorem outerWholeGreen_integral_eq_solution {D : ReferenceData}
     · have h := (outerWholeSource_initial_integrable hD hentry f hU x ⟨hlt, hx.2⟩).neg
       apply h.congr
       intro y _
-      dsimp only
+      simp only [Pi.neg_apply]
       ring
   have hVi : Integrable (fun y => V y * f y) (outerWholeMeasure D right entry) :=
     hV.integrable_mul (Lp.memLp f)

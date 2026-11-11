@@ -111,13 +111,17 @@ theorem outerWholeLocalizedDensity_transport
     calc
       _ = (bk x * a x * D.localizer k (outerOutwardRadius right x)) * K x y *
           D.localizer m (outerOutwardRadius right y) := by ring
-      _ = _ := by rw [outerReciprocalLocalizerDensity_cancel hD k (outerOutwardRadius right x)]
+      _ = _ := by
+        rw [outerReciprocalLocalizerDensity_cancel hD k (outerOutwardRadius right x)]
+        rfl
   · intro x y
     change a y * bm y * (D.localizer k (outerOutwardRadius right x) * K x y *
       D.localizer m (outerOutwardRadius right y)) = _
     calc
       _ = D.localizer k (outerOutwardRadius right x) * K x y *
           (bm y * a y * D.localizer m (outerOutwardRadius right y)) := by ring
-      _ = _ := by rw [outerReciprocalLocalizerDensity_cancel hD m (outerOutwardRadius right y)]
+      _ = _ := by
+        rw [outerReciprocalLocalizerDensity_cancel hD m (outerOutwardRadius right y)]
+        rfl
 
 end ContinuousFlexibility.Radial

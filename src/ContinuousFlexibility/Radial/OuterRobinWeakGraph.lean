@@ -114,7 +114,7 @@ theorem OuterRobinWeakGraph.homogeneous_difference
       dsimp only [z]
       field_simp [hlam, hw x hxi] <;> ring
     · apply ((hdq x hx).div_const lam).congr_deriv
-      simp only [div_eq_mul_inv, mul_inv_rev]
+      simp only [Pi.mul_apply, div_eq_mul_inv, mul_inv_rev]
       ring
   · change v.1 * (u₀ a - u₁ a) + v.2 * ((q₀ a - q₁ a) / lam) = 0
     change v.1 * u₀ a + v.2 * (q₀ a / lam) = 0 at hr₀

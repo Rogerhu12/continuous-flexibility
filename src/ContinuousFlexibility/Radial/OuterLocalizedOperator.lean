@@ -125,7 +125,8 @@ theorem outerWholeLocalizedOperator_norm_le {D : ReferenceData}
       outer_partition_localizer_abs_le_one hpart m (outerOutwardRadius right x)))
     R K hR hrow hB hbound
   have hmass : (measureUnivNNReal μ : ℝ) = μ.real univ := by
-    simpa only [ENNReal.coe_toReal] using congrArg ENNReal.toReal (coe_measureUnivNNReal μ)
+    simpa only [ENNReal.coe_toReal, measureReal_def] using
+      congrArg ENNReal.toReal (coe_measureUnivNNReal μ)
   rw [hmass] at h
   exact h
 

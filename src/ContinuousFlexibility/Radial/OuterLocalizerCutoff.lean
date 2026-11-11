@@ -40,9 +40,11 @@ theorem morseRealized_localizer_index_of_distance {M : MorseChainData} {σ : ℕ
     cases right with
     | false =>
         change -morseChainSeam M false p ≤ -r at hafter
+        change min (r - D.a) (D.b - r) ≤ morseChainSeam M false p - D.a
         exact (min_le_left _ _).trans (by linarith only [hafter])
     | true =>
         change morseChainSeam M true p ≤ r at hafter
+        change min (r - D.a) (D.b - r) ≤ D.b - morseChainSeam M true p
         exact (min_le_right _ _).trans (by linarith only [hafter])
   by_contra hnot
   have hi : D.cellIndex m ≤ M.index := le_of_not_gt hnot
@@ -132,8 +134,8 @@ theorem morseOuter_localizer_labels_of_low {M : MorseChainData} {σ : ℕ → �
     · have ho := morsePhysicalDeepTail_node_order h right j (N + 1)
         (hNi.trans (Nat.le_succ N)) (morseOuterDeepEntrance M right N) η K 0
       have hxedge : x ∈ Icc
-          (morsePhysicalDeepTail M D right j (N + 1) (morseOuterDeepEntrance M right N) η K).node 0
-          (morsePhysicalDeepTail M D right j (N + 1) (morseOuterDeepEntrance M right N) η K).node (0 + 1) :=
+          ((morsePhysicalDeepTail M D right j (N + 1) (morseOuterDeepEntrance M right N) η K).node 0)
+          ((morsePhysicalDeepTail M D right j (N + 1) (morseOuterDeepEntrance M right N) η K).node (0 + 1)) :=
         ⟨heq.ge, heq.le.trans (ho.1.trans ho.2).le⟩
       rcases morsePhysicalDeepTail_edge_blocks h right j N hNi η K 0 x hxedge with hr | hr
       · have hb := hblock right (N + 1 + 0) m (by omega) hr hθ

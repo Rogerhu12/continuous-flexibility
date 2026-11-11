@@ -44,14 +44,16 @@ theorem OuterFundamentalStatePair.kernel_point_envelope
   have hey : 0 ≤ ey := mul_nonneg (he q) (exp_pos _).le
   have hd : 0 ≤ d := mul_nonneg (mul_nonneg (he p) (he q)) (exp_pos _).le
   have hx' : (x ∈ Icc a c ∧ 1 ≤ ex) ∨ (x ∈ Ico c b ∧ |P x| ≤ ex) := by
-    rcases hx with ⟨rfl, hx⟩ | hx
-    · refine Or.inl ⟨hx, ?_⟩
+    rcases hx with ⟨hpp, hx⟩ | hx
+    · subst p
+      refine Or.inl ⟨hx, ?_⟩
       simpa only [ex, sub_self, abs_zero, neg_zero, exp_zero, mul_one] using
         outer_envelope_one_le N hL
     · exact Or.inr hx
   have hy' : (y ∈ Icc a c ∧ 1 ≤ ey) ∨ (y ∈ Ico c b ∧ |P y| ≤ ey) := by
-    rcases hy with ⟨rfl, hy⟩ | hy
-    · refine Or.inl ⟨hy, ?_⟩
+    rcases hy with ⟨hqq, hy⟩ | hy
+    · subst q
+      refine Or.inl ⟨hy, ?_⟩
       simpa only [ey, sub_self, abs_zero, neg_zero, exp_zero, mul_one] using
         outer_envelope_one_le N hL
     · exact Or.inr hy

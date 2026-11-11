@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.OuterUniformCoreState
+import ContinuousFlexibility.Radial.OuterActualCoreInputs
 import ContinuousFlexibility.Radial.OuterActualCoreMeasure
 import ContinuousFlexibility.Radial.OuterPhysicalRobinInverse
 import ContinuousFlexibility.Radial.OuterGlobalEnvelope
@@ -23,6 +24,7 @@ open ContinuousFlexibility.Statements
 /-- Transparent data for one actual outer interval and one physical frequency. -/
 structure MorseOuterGreenData (M : MorseChainData) (D : ReferenceData)
     (right : Bool) (n j : ℕ) (entry η K lam Cbound Co : ℝ) where
+  profile : IsAccumulatingProfile D
   deep_hypotheses : DeepTailHypotheses
     (morsePhysicalDeepTail M D right j (n + 1) (morseOuterDeepEntrance M right n) η K)
   physical_relation : TailPhysicalRelation D
@@ -33,6 +35,7 @@ structure MorseOuterGreenData (M : MorseChainData) (D : ReferenceData)
     (morsePhysicalDeepTail M D right j (n + 1)
       (morseOuterDeepEntrance M right n) η K).entrance ≤ (2 * (j : ℝ) ^ 2)⁻¹
   basis : MorsePhysicalTailBasis M D right j (n + 1) (morseOuterDeepEntrance M right n) η K
+  inputs : MorseOuterCoreInputs entry lam Cbound Co profile physical_relation basis
   pair : OuterFundamentalStatePair
     (fun x => lam / outerTailOutwardWeight D right x)
     (fun x => (j : ℝ) ^ 2 * deriv (outerTailOutwardWeight D right) x / (lam * x))
@@ -157,6 +160,13 @@ theorem exists_morseOuterGreenData_of_deep
   obtain ⟨G⟩ := F.exists_wholeRobinInverse H hD hentry hdeep hi.1
     hlam hT hphysical hj hη hK hKinv
   have hPA' : ‖G.poisson_memLp.toLp F.P‖ ≤ sqrt lam * A := hPA
+  have hquadratic : A ≤ exp ((12 + 4 * Q) * (n : ℝ) ^ 2) :=
+    exp_le_exp.mpr (mul_le_mul_of_nonneg_right (by linarith only [hQ]) (sq_nonneg _))
+  obtain ⟨I⟩ := exists_morseOuterCoreInputs_of_quantitative_data h hσ hcell hlam hL
+    he right hn hj hupper hhi hlo hD hT hphysical hη hKinv F hP
+    (show Qe + 2 ≤ 12 + 4 * Q by linarith only [hQeQ, hQ])
+    (hmass.trans (mul_le_mul_of_nonneg_left hquadratic hlam.le))
+    (hPA.trans (mul_le_mul_of_nonneg_left hquadratic (sqrt_nonneg _)))
   have hVnorm := G.natural_bound A (A * Kn) (zero_le_one.trans hA)
     (mul_nonneg (zero_le_one.trans hA) (zero_le_one.trans hKn))
     (fun x hx => (hcore x hx).2.2.1) hmassA hPA'
@@ -169,10 +179,12 @@ theorem exists_morseOuterGreenData_of_deep
   have hAKE : A * Kn ≤ radialE n ^ (12 + 4 * Q) * Kn :=
     outer_global_core_envelope hn1 hQ (zero_le_one.trans hKn)
   refine ⟨{
+    profile := hD
     deep_hypotheses := hT
     physical_relation := hphysical
     close := hclose
     basis := F
+    inputs := I
     pair := H
     inverse := G
     core_bound := ?_
