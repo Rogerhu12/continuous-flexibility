@@ -75,7 +75,7 @@ theorem n05_canonicalGraph_unique_of_endpoint_memLp
     (hζLp : MemLp (fun p : PolarPoint =>
       Real.sqrt ((D.w p.1)⁻¹) * (ζ p - V.2.1 * S.chiLeft p.1))
         2 (radialPhysicalMeasure D)) : U = V := by
-  obtain ⟨_, hλ, hμ, hheight⟩ := n05_canonicalGraph_physical_representatives_unique
+  obtain ⟨_, haux, hμ, hheight⟩ := n05_canonicalGraph_physical_representatives_unique
     hD hS h04 hcoordinates hγ hG hU hV hη hζ
   have ha := n05_physicalCutoff_leftConstant_unique hD hS.2.2.1 hheight hηLp hζLp
   have hrem : (fun p : PolarPoint => η p - U.2.1 * S.chiLeft p.1)
@@ -89,6 +89,6 @@ theorem n05_canonicalGraph_unique_of_endpoint_memLp
     exact (hU.1 m).trans
       ((n05_referenceCanonical_representatives_congr_ae h04 hcoordinates hrem m).1.trans
         (hV.1 m).symm)
-  · exact Prod.ext ha (Prod.ext hμ hλ)
+  · exact Prod.ext ha (Prod.ext hμ haux)
 
 end ContinuousFlexibility.Statements

@@ -17,4 +17,8 @@ theorem N05VolumeModel {D : ReferenceData} {T : MaterialData}
     ∃ V : VolumeModelData S K, IsVolumeModel T S K V :=
   exists_n05CanonicalVolumeModel hD hT S K
 
+/-- info: 'ContinuousFlexibility.Blueprint.N05VolumeModel' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms N05VolumeModel
+
 end ContinuousFlexibility.Blueprint

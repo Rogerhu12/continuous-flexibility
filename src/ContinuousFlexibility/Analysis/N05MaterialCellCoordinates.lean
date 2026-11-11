@@ -76,11 +76,13 @@ theorem n05_cube_shift_bound {x n A : ℝ} (hx : 0 ≤ x) (hn : 0 ≤ n)
     have hnn : n ^ 2 ≤ (n + A) ^ 2 := (sq_le_sq₀ hn (by positivity)).mpr hnA
     have hxn : x * n ≤ (n + A) * (n + A) := mul_le_mul hxA hnA hn (by positivity)
     nlinarith only [hxx, hnn, hxn]
+  have hquad : 0 ≤ x ^ 2 + x * n + n ^ 2 :=
+    add_nonneg (add_nonneg (sq_nonneg x) (mul_nonneg hx hn)) (sq_nonneg n)
   calc
     |x ^ 3 - n ^ 3| = |x - n| * (x ^ 2 + x * n + n ^ 2) := by
       rw [show x ^ 3 - n ^ 3 = (x - n) * (x ^ 2 + x * n + n ^ 2) by ring,
-        abs_mul, abs_of_nonneg (by positivity)]
-    _ ≤ A * (3 * (n + A) ^ 2) := mul_le_mul hshift hsum (by positivity) hA
+        abs_mul, abs_of_nonneg hquad]
+    _ ≤ A * (3 * (n + A) ^ 2) := mul_le_mul hshift hsum hquad hA
     _ ≤ 6 * A * (n ^ 2 + A ^ 2) := by
       have hsq : (n + A) ^ 2 ≤ 2 * (n ^ 2 + A ^ 2) := by nlinarith [sq_nonneg (n - A)]
       nlinarith only [mul_le_mul_of_nonneg_left hsq (by positivity : 0 ≤ 3 * A)]

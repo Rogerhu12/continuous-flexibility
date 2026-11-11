@@ -58,4 +58,8 @@ theorem N05GraphIdentification {D : ReferenceData} {T : MaterialData}
   · rintro rfl
     exact hbase F
 
+/-- info: 'ContinuousFlexibility.Blueprint.N05GraphIdentification' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms N05GraphIdentification
+
 end ContinuousFlexibility.Blueprint

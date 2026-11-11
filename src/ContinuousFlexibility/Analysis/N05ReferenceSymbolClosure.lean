@@ -82,7 +82,7 @@ theorem n05_eqOn_closed_strip_of_nonreflection
     fun r hr => hinterior r hr p.2
   have hclosure : Icc a b ⊆ closure (Ioo a b) := by
     simpa only [closure_Ioo hab.ne] using (Subset.rfl : Icc a b ⊆ Icc a b)
-  exact hR.of_subset_closure hfR hgR Ioo_subset_Icc_self hclosure p.1 hp
+  exact hR.of_subset_closure hfR hgR Ioo_subset_Icc_self hclosure hp
 
 /-- The reference coefficient formulas are smooth wherever the actual radius
 is nonzero, including the endpoints of every physical piece. -/

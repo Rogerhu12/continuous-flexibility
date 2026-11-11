@@ -165,9 +165,14 @@ theorem n05_reference_planeJacobian_radial
   let ξ : ℝ → ℝ := fun r => (K.chart (C.referenceState, 0) m (r, 0)).1
   have hline : ContDiff ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) :=
     contDiff_id.prodMk contDiff_const
+  have hp0 : (p.1, (0 : ℝ)) ∈ physicalPieceOpen S K m :=
+    ⟨hp.1, mem_univ (0 : ℝ)⟩
+  have hc0 : ContDiffAt ℝ ∞ (K.chart (C.referenceState, 0) m) (p.1, 0) :=
+    hc.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp0)
+  have hlineAt : ContDiffAt ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) p.1 :=
+    hline.contDiffAt
   have hξ : DifferentiableAt ℝ ξ p.1 :=
-    ((hc.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds
-      ⟨hp.1, mem_univ (0 : ℝ)⟩)).comp p.1 hline.contDiffAt).fst.differentiableAt (by simp)
+    (hc0.comp p.1 hlineAt).fst.differentiableAt (by simp)
   have hFD : HasFDerivAt (fun q : PolarPoint => (ξ q.1, q.2))
       (((ContinuousLinearMap.toSpanSingleton ℝ (deriv ξ p.1)).comp
         (ContinuousLinearMap.fst ℝ ℝ ℝ)).prod (ContinuousLinearMap.snd ℝ ℝ ℝ)) p :=
