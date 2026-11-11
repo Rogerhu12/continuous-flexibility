@@ -13,7 +13,7 @@ are separated after scaling by the actual interval width; no positive
 lower bound for that width is assumed.
 
 Degree four gives the coordinate correction in the positive-component
-construction, and degree three gives its height correction. Subtracting
+construction, and degree three gives the correction to its logarithmic height. Subtracting
 the extension of an actual smooth field kills its radial boundary jets
 through the selected degree. This module asserts exact interpolation and
 smoothness, not a width-independent bound for derivatives of the cutoff.
