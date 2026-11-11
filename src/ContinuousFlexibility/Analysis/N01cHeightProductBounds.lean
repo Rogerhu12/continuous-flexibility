@@ -67,7 +67,7 @@ theorem qLinear_oneHigh_bound
   have hzstate : p high z.1 ≤ H + p high x0 := by
     have ht : p high z.1 ≤ p high (z.1 - x0) + p high x0 := by
       simpa only [sub_add_cancel] using map_add_le_add (p high) (z.1 - x0) x0
-    exact ht.trans (add_le_add_right hdelta _)
+    exact ht.trans (add_le_add hdelta le_rfl)
   have hamp : p high z.1 ≤ M * (1 + H) := by
     dsimp only [M]
     nlinarith [mul_nonneg hH (apply_nonneg (p high) x0)]

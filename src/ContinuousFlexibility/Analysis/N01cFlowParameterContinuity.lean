@@ -285,8 +285,8 @@ theorem circleParameterTrajectory_continuousOn
     dist (Θ q) (Θ p) ≤ dist (Θ q) (Θ (p.1, q.2)) +
         dist (Θ (p.1, q.2)) (Θ p) := dist_triangle _ _ _
     _ ≤ K * |q.1 - p.1| + dist (Θ (p.1, q.2)) (Θ p) := by
-      apply add_le_add_right
-      simpa only [Real.dist_eq] using hbound q.1 hqparameter q.2 hq.2
+      exact add_le_add
+        (by simpa only [Real.dist_eq] using hbound q.1 hqparameter q.2 hq.2) le_rfl
     _ < ε := by linarith
 
 /-- The genuine first parameter variation of a classical periodic

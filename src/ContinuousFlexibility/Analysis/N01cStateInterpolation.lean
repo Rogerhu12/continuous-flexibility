@@ -58,12 +58,12 @@ theorem jointStateGrading_hasInterpolation {D : ReferenceData} {T : MaterialData
     (jointStateGrading_hasSmoothing hS)
 
 private theorem pairGrading_displacement_apply {E : Type*}
-    [AddCommGroup E] [Module ℝ E] (p : ℕ → Seminorm ℝ E)
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E] (p : ℕ → Seminorm ℝ E)
     (base : ℕ) (z : E × ℝ) (reference : E) :
     pairGrading p realGrading base (z - (reference, (0 : ℝ))) =
       p base (z.1 - reference) + |z.2| := by
   rw [pairGrading_apply]
-  simp only [Prod.fst_sub, Prod.snd_sub, Prod.fst_mk, Prod.snd_mk,
+  simp only [Prod.fst_sub, Prod.snd_sub,
     sub_zero, realGrading, coe_normSeminorm, Real.norm_eq_abs]
 
 /-- The displacement grading is exactly the sum of the two quantities
@@ -85,6 +85,51 @@ theorem jointStateGrading_displacement_lt_one {S : PhysicalSpacesData}
       stateGrading S base (z.1 - C.referenceState) + |z.2| < ε + ε :=
     add_lt_add hz.1 hz.2
   linarith
+
+private theorem exists_neighborhood_oneHighProductBounds
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hinterp : HasInterpolation p)
+    (center : E) (U : ℕ → ℝ → Set E)
+    (hsubset : ∀ b b' ε ε', b ≤ b' → ε' ≤ ε → U b' ε' ⊆ U b ε)
+    (hunit : ∀ b ε z, ε ≤ 1 / 2 → z ∈ U b ε → p b (z - center) < 1)
+    (originalBase offset : ℕ) {ε : ℝ} (hε : 0 < ε) :
+    ∃ base loss : ℕ,
+      originalBase ≤ base ∧ 0 < min ε (1 / 2) ∧
+      U base (min ε (1 / 2)) ⊆ U originalBase ε ∧
+      ∀ k factors s : ℕ, ∃ B : ℝ, 0 ≤ B ∧
+        ∀ a : Fin factors → ℕ, (∑ i, a i ≤ s) →
+        ∀ select : Fin factors → Fin (k + 1),
+        ∀ z ∈ U base (min ε (1 / 2)),
+        ∀ A : E [×k]→L[ℝ] ℝ, ∀ K : ℝ, 0 ≤ K →
+          (∀ v : Fin k → E, |A v| ≤ K * ∏ i, p (a i + offset)
+            ((Fin.cons (z - center) v : Fin (k + 1) → E) (select i))) →
+          ∀ v : Fin k → E, |A v| ≤ K * B *
+            oneHighVariationWeight p base (s + loss) (z - center) v := by
+  obtain ⟨b, loss, hbounds⟩ := exists_oneHighMultilinearProductBounds (F := ℝ)
+    p hp hinterp offset
+  refine ⟨max originalBase b, loss, le_max_left _ _,
+    lt_min hε (by norm_num), ?_, ?_⟩
+  · exact hsubset originalBase (max originalBase b) ε (min ε (1 / 2))
+      (le_max_left _ _) (min_le_left _ _)
+  · intro k factors s
+    obtain ⟨B, hB, hBb⟩ := hbounds k factors s
+    refine ⟨B, hB, ?_⟩
+    intro a ha select z hz A K hK hraw v
+    have hsmall : p b (z - center) ≤ 1 :=
+      ((hp (le_max_right originalBase b) _).trans_lt
+        (hunit (max originalBase b) (min ε (1 / 2)) z (min_le_right _ _) hz)).le
+    have hraw' : ∀ w : Fin k → E, realGrading 0 (A w) ≤ K * ∏ i, p (a i + offset)
+        ((Fin.cons (z - center) w : Fin (k + 1) → E) (select i)) := by
+      intro w
+      simpa only [realGrading, coe_normSeminorm, Real.norm_eq_abs] using hraw w
+    have h := hBb a ha select (z - center) hsmall A (realGrading 0) K hK hraw' v
+    have hbound : |A v| ≤ K * B *
+        oneHighVariationWeight p b (s + loss) (z - center) v := by
+      simpa only [realGrading, coe_normSeminorm, Real.norm_eq_abs,
+        multilinearTameSize, oneHighVariationWeight] using h
+    exact hbound.trans (mul_le_mul_of_nonneg_left
+      (oneHighVariationWeight_mono hp (le_max_right originalBase b) le_rfl (z - center) v)
+      (mul_nonneg hK hB))
 
 /-- The original product estimates for actual state multilinear maps
 give the prescribed one-high-variation expression on a common smaller
@@ -109,37 +154,13 @@ theorem exists_stateNeighborhood_oneHighProductBounds
                 Fin (k + 1) → AnnularState S × ℝ) (select i))) →
           ∀ v : Fin k → AnnularState S × ℝ, |A v| ≤ K * B *
             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, (0 : ℝ))) v := by
-  obtain ⟨b, loss, hbounds⟩ := exists_oneHighMultilinearProductBounds (F := ℝ)
+              base (s + loss) (z - (C.referenceState, (0 : ℝ))) v :=
+  exists_neighborhood_oneHighProductBounds
     (pairGrading (stateGrading S) realGrading) (jointStateGrading_monotone S)
-    (jointStateGrading_hasInterpolation hS) offset
-  refine ⟨max originalBase b, loss, le_max_left _ _,
-    lt_min hε (by norm_num), ?_, ?_⟩
-  · exact stateNeighborhood_subset (le_max_left _ _) (min_le_left _ _)
-  · intro k factors s
-    obtain ⟨B, hB, hBb⟩ := hbounds k factors s
-    refine ⟨B, hB, ?_⟩
-    intro a ha select z hz A K hK hraw v
-    have hsmall : pairGrading (stateGrading S) realGrading b
-        (z - (C.referenceState, (0 : ℝ))) ≤ 1 :=
-      ((jointStateGrading_monotone S (le_max_right originalBase b) _).trans_lt
-        (jointStateGrading_displacement_lt_one (min_le_right ε (1 / 2)) hz)).le
-    have hraw' : ∀ w : Fin k → AnnularState S × ℝ, realGrading 0 (A w) ≤
-        K * ∏ i, pairGrading (stateGrading S) realGrading (a i + offset)
-          ((Fin.cons (z - (C.referenceState, (0 : ℝ))) w :
-            Fin (k + 1) → AnnularState S × ℝ) (select i)) := by
-      intro w
-      simpa only [realGrading, coe_normSeminorm, Real.norm_eq_abs] using hraw w
-    have h := hBb a ha select (z - (C.referenceState, (0 : ℝ))) hsmall A
-      (realGrading 0) K hK hraw' v
-    have hbound : |A v| ≤ K * B *
-        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          b (s + loss) (z - (C.referenceState, (0 : ℝ))) v := by
-      simpa only [realGrading, coe_normSeminorm, Real.norm_eq_abs,
-        multilinearTameSize, oneHighVariationWeight] using h
-    exact hbound.trans (mul_le_mul_of_nonneg_left
-      (oneHighVariationWeight_mono (jointStateGrading_monotone S)
-        (le_max_right originalBase b) le_rfl (z - (C.referenceState, (0 : ℝ))) v)
-      (mul_nonneg hK hB))
+    (jointStateGrading_hasInterpolation hS) (C.referenceState, (0 : ℝ))
+    (stateNeighborhood S C)
+    (fun _ _ _ _ hb hrad => stateNeighborhood_subset hb hrad)
+    (fun _ _ _ hrad hz => jointStateGrading_displacement_lt_one hrad hz)
+    originalBase offset hε
 
 end ContinuousFlexibility.Statements
