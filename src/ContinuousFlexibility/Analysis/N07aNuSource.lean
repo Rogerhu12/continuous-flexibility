@@ -50,8 +50,21 @@ def n07aNuSectorProjectionCLM (S : PhysicalSpacesData) :
 theorem n07aNuSectorProjectionCLM_apply (S : PhysicalSpacesData)
     (z : StateDirections S × ℝ) :
     n07aNuSectorProjectionCLM S z = ((z.1.val.1, z.1.val.2.1), z.2) := by
-  rw [n07aNuSectorProjectionCLM, ContinuousLinearMap.comp_apply,
-    n07aSectorParameterInclusion_apply, n07aNuRawProjectionCLM_apply]
+  have hc : n07aNuSectorProjectionCLM S z =
+      n07aNuRawProjectionCLM S (n07aSectorParameterInclusion S z) :=
+    ContinuousLinearMap.comp_apply (n07aNuRawProjectionCLM S)
+      (n07aSectorParameterInclusion S) z
+  have hi : n07aNuRawProjectionCLM S (n07aSectorParameterInclusion S z) =
+      n07aNuRawProjectionCLM S (z.1.val, z.2) :=
+    congrArg (fun x : AnnularState S × ℝ => n07aNuRawProjectionCLM S x)
+      (n07aSectorParameterInclusion_apply S z)
+  exact hc.trans (hi.trans (n07aNuRawProjectionCLM_apply S (z.1.val, z.2)))
+
+private theorem n07aNuSectorProjectionCLM_zero (S : PhysicalSpacesData) :
+    n07aNuSectorProjectionCLM S (0 : StateDirections S × ℝ) =
+      (0 : N07aNuParameter S) := by
+  simp only [n07aNuSectorProjectionCLM_apply, Prod.fst_zero, Prod.snd_zero,
+    Submodule.coe_zero, Prod.mk_zero_zero]
 
 theorem n07aNuSectorProjectionCLM_grading_le (S : PhysicalSpacesData) (n : ℕ)
     (z : StateDirections S × ℝ) :
@@ -60,7 +73,8 @@ theorem n07aNuSectorProjectionCLM_grading_le (S : PhysicalSpacesData) (n : ℕ)
   simp only [n07aNuSectorProjectionCLM_apply, n07aNuParameterGrading,
     n07aParameterGrading, scalarCommonHeightGrading, scalarHeightGrading,
     sectorGrading, stateGrading, heightPairGrading, pairGrading_apply,
-    Seminorm.comp_apply, Submodule.subtype_apply, realGrading, coe_normSeminorm]
+    Seminorm.comp_apply, Submodule.subtype_apply, realGrading, coe_normSeminorm,
+    scalarBeta]
   have hκ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2.1
   have hα := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2.2
   linarith only [hκ, hα]
@@ -70,12 +84,92 @@ theorem n07aNuSectorProjectionCLM_center
     (href : referenceStateConditions D S C) (z : StateDirections S × ℝ) :
     n07aNuParameterCenter S C.referenceState.1.1 + n07aNuSectorProjectionCLM S z =
       n07aNuRawProjectionCLM S (liftSectorParameter S C z) := by
+  have hheight : (C.referenceState.1.1, (0 : ℝ)) = C.referenceState.1 :=
+    Prod.ext rfl href.2.1.symm
   simp only [n07aNuParameterCenter, n07aNuSectorProjectionCLM_apply,
     n07aNuRawProjectionCLM_apply, liftSectorParameter, Prod.fst_add, Prod.snd_add,
-    Prod.mk_add_mk, href.2.1, href.2.2.1, zero_add]
+    Prod.mk_add_mk, href.2.2.1, zero_add]
+  exact congrArg
+    (fun v : HeightPair S => ((v + z.1.val.1, z.1.val.2.1), z.2)) hheight
+
+private def n07aNuSectorAffine (S : PhysicalSpacesData) (v₀ : ScalarHeightSpace S)
+    (z : StateDirections S × ℝ) : N07aNuParameter S :=
+  n07aNuParameterCenter S v₀ + n07aNuSectorProjectionCLM S z
+
+private theorem n07aNuSectorAffine_continuous
+    (S : PhysicalSpacesData) (v₀ : ScalarHeightSpace S) :
+    Continuous (n07aNuSectorAffine S v₀) := by
+  let : IsTopologicalAddGroup (N07aNuParameter S) :=
+    (n07aNuParameterGrading_withSeminorms S).isTopologicalAddGroup
+  exact continuous_const.add (n07aNuSectorProjectionCLM S).continuous
+
+private theorem n07aNuSectorAffine_zero
+    (S : PhysicalSpacesData) (v₀ : ScalarHeightSpace S) :
+    n07aNuSectorAffine S v₀ (0 : StateDirections S × ℝ) =
+      n07aNuParameterCenter S v₀ :=
+  (congrArg (fun x : N07aNuParameter S => n07aNuParameterCenter S v₀ + x)
+    (n07aNuSectorProjectionCLM_zero S)).trans (add_zero _)
+
+private theorem n07aNuSectorAffine_smallNeighborhood
+    (S : PhysicalSpacesData) (v₀ : ScalarHeightSpace S) (base : ℕ)
+    {ε : ℝ} (hε : 0 < ε) {U : Set (N07aNuParameter S)} (hU : IsOpen U)
+    (hcenter : n07aNuParameterCenter S v₀ ∈ U) :
+    ∃ base' : ℕ, base ≤ base' ∧ ∃ ε' : ℝ, 0 < ε' ∧ ε' ≤ ε ∧
+      sectorNeighborhood S base' ε' ε' ⊆ n07aNuSectorAffine S v₀ ⁻¹' U := by
+  have hzero : n07aNuSectorAffine S v₀ (0 : StateDirections S × ℝ) ∈ U :=
+    Eq.mpr (congrArg (fun x : N07aNuParameter S => x ∈ U)
+      (n07aNuSectorAffine_zero S v₀)) hcenter
+  have hAU : n07aNuSectorAffine S v₀ ⁻¹' U ∈ 𝓝 (0 : StateDirections S × ℝ) :=
+    (hU.preimage (n07aNuSectorAffine_continuous S v₀)).mem_nhds hzero
+  let ball := exists_small_uniformTameBall
+    (n07aParameterGrading_monotone S) (n07aParameterGrading_withSeminorms S) hAU base
+  let base' : ℕ := ball.choose
+  let η : ℝ := ball.choose_spec.choose
+  have hbase : base ≤ base' := ball.choose_spec.choose_spec.1
+  have hη : 0 < η := ball.choose_spec.choose_spec.2.1
+  have hsub : {z : StateDirections S × ℝ |
+      n07aParameterGrading S base' (z - 0) < η} ⊆
+        n07aNuSectorAffine S v₀ ⁻¹' U := ball.choose_spec.choose_spec.2.2.2
+  let ε' : ℝ := min ε (η / 2)
+  refine ⟨base', hbase, ε', lt_min hε (half_pos hη), min_le_left _ _, ?_⟩
+  intro z hz
+  apply hsub
+  have he : ε' ≤ η / 2 := min_le_right _ _
+  have hsize : n07aParameterGrading S base' z =
+      sectorGrading S base' z.1 + |z.2| :=
+    pairGrading_apply (sectorGrading S) realGrading base' z
+  have hbound : sectorGrading S base' z.1 + |z.2| < η := by
+    linarith only [hz.1, hz.2, he]
+  exact ((congrArg (fun x : StateDirections S × ℝ =>
+    n07aParameterGrading S base' x) (sub_zero z)).trans hsize).trans_lt hbound
+
+private theorem n07aNuSectorAffine_smoothTame
+    (S : PhysicalSpacesData) (v₀ : ScalarHeightSpace S)
+    {U : Set (N07aNuParameter S)} {N : N07aNuParameter S → S.Source}
+    (hN : SmoothTameOn (n07aNuParameterGrading S) S.sourceGrading U N) :
+    SmoothTameOn (n07aParameterGrading S) S.sourceGrading
+      (n07aNuSectorAffine S v₀ ⁻¹' U) (N ∘ n07aNuSectorAffine S v₀) := by
+  let : IsTopologicalAddGroup (N07aNuParameter S) :=
+    (n07aNuParameterGrading_withSeminorms S).isTopologicalAddGroup
+  exact n07a_smoothTameOn_affine_nonexpansive hN
+    (n07aNuParameterCenter S v₀) (n07aNuSectorProjectionCLM S)
+    (n07aNuSectorProjectionCLM_grading_le S)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+
+private theorem n07aNuSource_reducedDerivative_eq
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (h01 : N01Properties D T S C base loss ε)
+    (x : N07aNuParameter S) (z : AnnularState S × ℝ)
+    (hx : x = n07aNuRawProjectionCLM S z) (p : PolarPoint) :
+    deriv (fun ν => scalarStateResidual D S
+      (n07aNuParameterState hT hS h01.1.2.2.2.1 ((x.1.1, ν), x.2)) p) x.1.2 =
+        nuColumnField D S C z p := by
+  let R : N07aNuParameter S → ℝ := fun y => deriv (fun ν => scalarStateResidual D S
+    (n07aNuParameterState hT hS h01.1.2.2.2.1 ((y.1.1, ν), y.2)) p) y.1.2
+  have he : R x = R (n07aNuRawProjectionCLM S z) := congrArg R hx
+  exact he.trans (n07a_nuColumnField_eq_pureResidual_deriv hS hT h01 z p).symm
 
 theorem n07a_exists_nuSource
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -87,8 +181,6 @@ theorem n07a_exists_nuSource
         (∀ z ∈ sectorNeighborhood S base' ε' ε', ∀ p,
           (S.height (3 / 4 : ℝ)).decode (N z).val p =
             nuColumnField D S C (liftSectorParameter S C z) p) := by
-  letI : IsTopologicalAddGroup (N07aNuParameter S) :=
-    (n07aNuParameterGrading_withSeminorms S).isTopologicalAddGroup
   let data := n07a_exists_nuReducedSource h01.1.1 hT hS h01.1.2.2.2.1
     C.referenceState.1.1
   let U : Set (N07aNuParameter S) := data.choose
@@ -97,35 +189,29 @@ theorem n07a_exists_nuSource
   let N : N07aNuParameter S → S.Source := data.choose_spec.2.2.choose
   have hN : SmoothTameOn (n07aNuParameterGrading S) S.sourceGrading U N :=
     data.choose_spec.2.2.choose_spec.1
-  have hdecode := data.choose_spec.2.2.choose_spec.2
-  let c := n07aNuParameterCenter S C.referenceState.1.1
-  let L := n07aNuSectorProjectionCLM S
-  let A : (StateDirections S × ℝ) → N07aNuParameter S := fun z => c + L z
-  have hA : Continuous A := continuous_const.add L.continuous
-  have hA0 : A 0 ∈ U := by simpa only [A, map_zero, add_zero] using hcenter
-  have hAU : A ⁻¹' U ∈ 𝓝 (0 : StateDirections S × ℝ) :=
-    (hU.preimage hA).mem_nhds hA0
-  obtain ⟨base', η, hbase, hη, _, hsub⟩ := exists_small_uniformTameBall
-    (n07aParameterGrading_monotone S) (n07aParameterGrading_withSeminorms S) hAU base
-  let ε' : ℝ := min ε (η / 2)
-  have he : 0 < ε' := lt_min h01.2.1 (half_pos hη)
-  have hmaps : sectorNeighborhood S base' ε' ε' ⊆ A ⁻¹' U := by
-    intro z hz
-    apply hsub
-    change n07aParameterGrading S base' (z - 0) < η
-    simp only [sub_zero, n07aParameterGrading, pairGrading_apply,
-      realGrading, coe_normSeminorm, Real.norm_eq_abs]
-    have hη' : ε' ≤ η / 2 := min_le_right _ _
-    linarith only [hz.1, hz.2, hη']
-  have hpull := n07a_smoothTameOn_affine_nonexpansive hN c L
-    (n07aNuSectorProjectionCLM_grading_le S)
-  refine ⟨base', hbase, ε', he, min_le_left _ _, N ∘ A,
+  let A : (StateDirections S × ℝ) → N07aNuParameter S :=
+    n07aNuSectorAffine S C.referenceState.1.1
+  let neighborhood := n07aNuSectorAffine_smallNeighborhood S C.referenceState.1.1
+    base h01.2.1 hU hcenter
+  let base' : ℕ := neighborhood.choose
+  have hbase : base ≤ base' := neighborhood.choose_spec.1
+  let ε' : ℝ := neighborhood.choose_spec.2.choose
+  have he : 0 < ε' := neighborhood.choose_spec.2.choose_spec.1
+  have hle : ε' ≤ ε := neighborhood.choose_spec.2.choose_spec.2.1
+  have hmaps : sectorNeighborhood S base' ε' ε' ⊆ A ⁻¹' U :=
+    neighborhood.choose_spec.2.choose_spec.2.2
+  have hpull : SmoothTameOn (n07aParameterGrading S) S.sourceGrading (A ⁻¹' U) (N ∘ A) :=
+    n07aNuSectorAffine_smoothTame S C.referenceState.1.1 hN
+  refine ⟨base', hbase, ε', he, hle, N ∘ A,
     smoothTameOn_mono hpull (n07a_sectorNeighborhood_isOpen S base' ε' ε') hmaps, ?_⟩
   intro z hz p
   have hcoord : A z = n07aNuRawProjectionCLM S (liftSectorParameter S C z) :=
     n07aNuSectorProjectionCLM_center h01.2.2.1 z
-  rw [Function.comp_apply, hdecode (A z) (hmaps hz) p,
-    n07a_nuColumnField_eq_pureResidual_deriv hS hT h01, hcoord,
-    n07aNuRawProjectionCLM_apply] <;> rfl
+  have hdecode : (S.height (3 / 4 : ℝ)).decode (N (A z)).val p =
+      deriv (fun ν => scalarStateResidual D S
+        (n07aNuParameterState hT hS h01.1.2.2.2.1 (((A z).1.1, ν), (A z).2)) p)
+          (A z).1.2 := data.choose_spec.2.2.choose_spec.2 (A z) (hmaps hz) p
+  exact hdecode.trans (n07aNuSource_reducedDerivative_eq hS hT h01
+    (A z) (liftSectorParameter S C z) hcoord p)
 
 end ContinuousFlexibility.Analysis

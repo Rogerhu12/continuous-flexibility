@@ -67,13 +67,16 @@ theorem n07a_actualScalarColumns_volume
         ‖W‖ ≤ A * (1 + parameterGrading S (s + d) z) := by
   classical
   let hI : ∀ m, K.left m < K.right m := fun m => (h04.2.2.2.1 m).2.1
-  obtain ⟨I, hsupport⟩ := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href
+  let support := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href
+  let I : Finset ℕ := support.choose
+  have hsupport := support.choose_spec
   let estimates := n07a_canonicalAtomFields_sampleJetBounds hD hT href hcur hI
   let d : ℕ := estimates.choose
   have hb := estimates.choose_spec
   have hp : Monotone (parameterGrading S) := n07aParameterGrading_monotone S
   let χ (i : Fin 3) (z : Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
-      (m : ℕ) := n07aCurrentScalarOpenCoefficient href hcur z hz m (hI m) i
+      (m : ℕ) : N07aCanonicalOpenCoefficient S K m :=
+    n07aCurrentScalarOpenCoefficient href hcur z hz m (hI m) i
   have hχ (i : Fin 3) (z : Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε) (m : ℕ) :
       (χ i z hz m).value = n07aCanonicalAtomField D T S C L K (n07aScalarColumnAtom i) z m :=
     n07aScalarColumn_eq_atomField z m (hI m) i
@@ -81,24 +84,32 @@ theorem n07a_actualScalarColumns_volume
       (m : ℕ) (y : PolarPoint) (hy : y ∈ canonicalOpen S K m) :
       n07aCanonicalAtomField D T S C L K (n07aScalarColumnAtom i) z m (y.1, -y.2) =
         n07aCanonicalAtomField D T S C L K (n07aScalarColumnAtom i) z m y := by
-    rw [← n07aScalarColumn_eq_atomField z m (hI m) i]
-    exact n07a_canonicalScalarColumn_even hS h03 h04 _
-      (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
-      (h01.2.2.1.liftSectorParameter_sector z) m i y hy
+    have heq := n07aScalarColumn_eq_atomField (D := D) (T := T)
+      (S := S) (C := C) (L := L) (K := K) z m (hI m) i
+    exact (congrFun heq (y.1, -y.2)).symm.trans
+      ((n07a_canonicalScalarColumn_even hS h03 h04 _
+        (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
+        (h01.2.2.1.liftSectorParameter_sector z) m i y hy).trans (congrFun heq y))
   have hzero (i : Fin 3) (z : Parameter S) (hz : z ∈ sectorNeighborhood S base ε ε)
       (m : ℕ) (hm : m ∉ I) :
       EqOn (n07aCanonicalAtomField D T S C L K (n07aScalarColumnAtom i) z m)
         (fun _ => (0 : ℝ)) (canonicalOpen S K m) := by
-    rw [← n07aScalarColumn_eq_atomField z m (hI m) i]
-    exact hsupport _ (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
-      (h01.2.2.1.liftSectorParameter_sector z) m hm i
+    intro y hy
+    have heq := n07aScalarColumn_eq_atomField (D := D) (T := T)
+      (S := S) (C := C) (L := L) (K := K) z m (hI m) i
+    exact (congrFun heq y).symm.trans
+      (hsupport _ (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
+        (h01.2.2.1.liftSectorParameter_sector z) m hm i y hy)
   refine ⟨d, fun γ t s => ?_⟩
   let all (i : Fin 3) := exists_n07aFiniteCoefficientVolume_tame hD hT hV hI hp
     (hb (n07aScalarColumnAtom i)) (χ i) (hχ i) (heven i) I (hzero i) γ t s
   let A : Fin 3 → ℝ := fun i => (all i).choose
   have hA (i : Fin 3) : 0 < A i := (all i).choose_spec.1
   refine ⟨∑ i, A i, Finset.sum_pos (fun i _ => hA i) (by simp), fun z hz i => ?_⟩
-  obtain ⟨W, hW, hnorm⟩ := (all i).choose_spec.2 z hz
+  let result := (all i).choose_spec.2 z hz
+  let W : V.level γ t s := result.choose
+  have hW := result.choose_spec.1
+  have hnorm := result.choose_spec.2
   refine ⟨W, hW, hnorm.trans ?_⟩
   exact mul_le_mul_of_nonneg_right
     (Finset.single_le_sum (fun j _ => (hA j).le) (Finset.mem_univ i))
@@ -116,10 +127,13 @@ theorem n07a_referenceScalarColumns_volume
         (n07aReferenceScalarOpenCoefficient href m (h04.2.2.2.1 m).2.1 i).toLp) := by
   classical
   let hI : ∀ m, K.left m < K.right m := fun m => (h04.2.2.2.1 m).2.1
-  obtain ⟨I, hsupport⟩ := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href
+  let support := n07a_canonicalScalarColumns_finite_support hD hS hT h01 h04 href
+  let I : Finset ℕ := support.choose
+  have hsupport := support.choose_spec
   have hz := n07a_reference_mem_stateNeighborhood h01
   have hs := h01.2.2.1.stateSector
-  let χ (i : Fin 3) (m : ℕ) := n07aReferenceScalarOpenCoefficient href m (hI m) i
+  let χ (i : Fin 3) (m : ℕ) : N07aCanonicalOpenCoefficient S K m :=
+    n07aReferenceScalarOpenCoefficient href m (hI m) i
   have heven (i : Fin 3) (m : ℕ) (p : PolarPoint) (hp : p ∈ canonicalOpen S K m) :
       (χ i m).value (p.1, -p.2) = (χ i m).value p :=
     n07a_canonicalScalarColumn_even hS h03 h04 _ hz hs m i p hp
@@ -145,14 +159,23 @@ theorem n07a_relativeScalarColumns_volume
             (n07aReferenceScalarOpenCoefficient href m (h04.2.2.2.1 m).2.1 i)).toLp) ∧
         ‖W‖ ≤ A * (1 + parameterGrading S (s + d) z) := by
   classical
-  obtain ⟨d, hb⟩ := n07a_actualScalarColumns_volume hD hS hT h01 h03 h04 href hcur hV
+  let bounds := n07a_actualScalarColumns_volume hD hS hT h01 h03 h04 href hcur hV
+  let d : ℕ := bounds.choose
+  have hb := bounds.choose_spec
   refine ⟨d, fun γ t s => ?_⟩
-  obtain ⟨A, hA, hcurrent⟩ := hb γ t s
-  obtain ⟨Z, hZ⟩ := n07a_referenceScalarColumns_volume hD hS hT h01 h03 h04 href hV γ t s
+  let A : ℝ := (hb γ t s).choose
+  have hA : 0 < A := (hb γ t s).choose_spec.1
+  have hcurrent := (hb γ t s).choose_spec.2
+  let reference := n07a_referenceScalarColumns_volume hD hS hT h01 h03 h04 href hV γ t s
+  let Z : Fin 3 → V.level γ t s := reference.choose
+  have hZ := reference.choose_spec
   let B : ℝ := ∑ i : Fin 3, ‖Z i‖
   have hB : 0 ≤ B := Finset.sum_nonneg (fun _ _ => norm_nonneg _)
   refine ⟨A + B, add_pos_of_pos_of_nonneg hA hB, fun z hz i => ?_⟩
-  obtain ⟨W, hW, hnorm⟩ := hcurrent z hz i
+  let result := hcurrent z hz i
+  let W : V.level γ t s := result.choose
+  have hW := result.choose_spec.1
+  have hnorm := result.choose_spec.2
   refine ⟨W - Z i, ?_, ?_⟩
   · rw [map_sub, hW, hZ i]
     funext m

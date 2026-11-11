@@ -75,6 +75,27 @@ private theorem n07a_scaledMode_bound {m : ℕ} (hm : K.left m < K.right m)
         ‖n07aCanonicalUnitMode hm u j‖) := by ring
     _ = _ := by rw [← hn]
 
+private theorem n07a_principalMode_rearrange
+    (a B E H p t Q N U : ℝ) :
+    N * ((a * (B * E * H * p) * t) * (Q * U)) =
+      H * t * ((a * B * E * Q * N) * p) * U := by
+  ring
+
+private theorem n07a_scaledMode_sum_bound {m : ℕ} (hm : K.left m < K.right m)
+    (v w : CanonicalL2 S K m) (l : ℕ) (κ N H t a b U : ℝ) (hN : 0 ≤ N)
+    (hv : N * ‖κ • n07aCanonicalUnitMode hm v l‖ ≤ H * t * a * U)
+    (hw : N * ‖κ • n07aCanonicalUnitMode hm w l‖ ≤ H * t * b * U) :
+    N * ‖κ • n07aCanonicalUnitMode hm (v + w) l‖ ≤ H * t * (a + b) * U := by
+  rw [n07aCanonicalUnitMode_add, smul_add]
+  calc
+    _ ≤ N * (‖κ • n07aCanonicalUnitMode hm v l‖ +
+        ‖κ • n07aCanonicalUnitMode hm w l‖) :=
+      mul_le_mul_of_nonneg_left (norm_add_le _ _) hN
+    _ = N * ‖κ • n07aCanonicalUnitMode hm v l‖ +
+        N * ‖κ • n07aCanonicalUnitMode hm w l‖ := mul_add _ _ _
+    _ ≤ H * t * a * U + H * t * b * U := add_le_add hv hw
+    _ = _ := by ring
+
 theorem n07a_actualRelativeMain_mode_bound
     (hD : IsAccumulatingProfile D) (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (h01 : N01Properties D T S C base loss ε)
@@ -109,8 +130,11 @@ theorem n07a_actualRelativeMain_mode_bound
   have hH (m : ℕ) : 0 < T.H (T.sample (K.cell m)) :=
     (hT.2.1 _ (materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m))).2.1
   have hab : D.a ≤ D.b := hD.choose_spec.1.2.1.le
-  obtain ⟨A, A₁, A₂, _, _, _, henergy⟩ :=
-    n07a_reference_actualMode_root_bound href hprincipal hE hI
+  let energy := n07a_reference_actualMode_root_bound href hprincipal hE hI
+  let A : ℝ := energy.choose
+  let A₁ : ℝ := energy.choose_spec.choose
+  let A₂ : ℝ := energy.choose_spec.choose_spec.choose
+  have henergy := energy.choose_spec.choose_spec.choose_spec.2.2.2
   let principal := n07a_actualPrincipal_block_bound h01 h04 href hcur
   let potential := n07a_actualPotential_block_bound href hcur
   let d₁ : ℕ := principal.choose
@@ -175,12 +199,35 @@ theorem n07a_actualRelativeMain_mode_bound
         (mul_nonneg (he₁₀ m) (apply_nonneg _ _))) (mul_nonneg hH₀ ht))
       (add_nonneg (norm_nonneg u) (norm_nonneg G))
   | true =>
-    obtain ⟨ur, uθ, urθ, uθθ, hr, hθ, hrθ, hθθ⟩ := n07a_referenceInverse_finiteJets h05 F m
-    have heq := n07a_referenceDomain_distribution hab hS hT h01 h02 h03 h04 href
+    let jets := n07a_referenceInverse_finiteJets h05 F m
+    let ur : CanonicalL2 S K m := jets.choose
+    let uθ : CanonicalL2 S K m := jets.choose_spec.choose
+    let urθ : CanonicalL2 S K m := jets.choose_spec.choose_spec.choose
+    let uθθ : CanonicalL2 S K m := jets.choose_spec.choose_spec.choose_spec.choose
+    have hr : N07aWeakCanonicalMixedDerivative S K m u ur 1 0 :=
+      jets.choose_spec.choose_spec.choose_spec.choose_spec.1
+    have hθ : N07aWeakCanonicalMixedDerivative S K m u uθ 0 1 :=
+      jets.choose_spec.choose_spec.choose_spec.choose_spec.2.1
+    have hrθ : N07aWeakCanonicalMixedDerivative S K m ur urθ 0 1 :=
+      jets.choose_spec.choose_spec.choose_spec.choose_spec.2.2.1
+    have hθθ : N07aWeakCanonicalMixedDerivative S K m uθ uθθ 0 1 :=
+      jets.choose_spec.choose_spec.choose_spec.choose_spec.2.2.2
+    have heqRaw := n07a_referenceDomain_distribution hab hS hT h01 h02 h03 h04 href
       h05 h06 (B.inverse F) m (hI m)
-    rw [h05.2.2.2.2.2.2.2.1 F] at heq
-    obtain ⟨urr, hrr, _⟩ :=
+    have hsource : n07aReferenceCanonicalRhs href m (hI m) (B.inverse F).val.1
+        (V.forget (3 / 4 : ℝ) 0 b (B.inverse F).val.2) = G :=
+      congrArg (fun F' : V.level (3 / 4 : ℝ) 0 b =>
+        n07aReferenceCanonicalRhs href m (hI m) (B.inverse F).val.1
+          (V.forget (3 / 4 : ℝ) 0 b F')) (h05.2.2.2.2.2.2.2.1 F)
+    have heq : N07aCanonicalDistributionEquation S K m
+        (K.coefficients (C.referenceState, 0) m) u G :=
+      Eq.mp (congrArg (fun G' : CanonicalL2 S K m =>
+        N07aCanonicalDistributionEquation S K m
+          (K.coefficients (C.referenceState, 0) m) u G') hsource) heqRaw
+    let second :=
       n07a_reference_secondNormal_of_fourJets href hprincipal (hI m) hr hθ hrθ hθθ heq
+    let urr : CanonicalL2 S K m := second.choose
+    have hrr : N07aWeakCanonicalMixedDerivative S K m ur urr 1 0 := second.choose_spec.1
     have he := henergy m hm u ur urr G hr hrr heq j
     have hb := hp z hz m hm (hI m) u ur uθ urr urθ uθθ hu j l hband hr hθ hrr hrθ hθθ commute
     have hc : 0 ≤ 112 * (1 + (K.right m - K.left m)) ^ 6 *
@@ -193,14 +240,21 @@ theorem n07a_actualRelativeMain_mode_bound
     have hpr : N * ‖κ • n07aCanonicalUnitMode (hI m)
         (n07aRelativePrincipalJet href hcur z hz m (hI m) ur uθ urr urθ uθθ) l‖ ≤
         H * tail * (e₁ m * parameterGrading S (s + 4 + d₁) z) * (‖u‖ + ‖G‖) := by
-      apply (mul_le_mul_of_nonneg_left (hb.trans (mul_le_mul_of_nonneg_left he hc)) hN).trans_eq
-      dsimp only [N, H, e₁, n07aDifferenceBlockBudget]
-      ring
-    rw [n07a_relativeMain_expanded hab hS hT h01 h02 h03 h04 href hcur h05 h06
-      z hz F m (hI m) ur uθ urr urθ uθθ hr hθ hrr hrθ hθθ,
-      n07aCanonicalUnitMode_add, smul_add]
-    apply (mul_le_mul_of_nonneg_left (norm_add_le _ _) hN).trans
-    rw [mul_add]
-    exact (add_le_add hpr hpot).trans_eq (by ring)
+      exact (mul_le_mul_of_nonneg_left
+        (hb.trans (mul_le_mul_of_nonneg_left he hc)) hN).trans_eq
+        (n07a_principalMode_rearrange (112 * (1 + (K.right m - K.left m)) ^ 6)
+          B₁ (T.E0 (T.sample (K.cell m)) ^ B₁) H
+          (parameterGrading S (s + 4 + d₁) z) tail
+          (Real.sqrt (n07aReferenceModeBudget A A₁ A₂ (K.right m - K.left m)
+            (T.E0 (T.sample (K.cell m))))) N (‖u‖ + ‖G‖))
+    have hsource := n07a_relativeMain_expanded hab hS hT h01 h02 h03 h04 href hcur h05 h06
+      z hz F m (hI m) ur uθ urr urθ uθθ hr hθ hrr hrθ hθθ
+    have hmode := congrArg (fun v : CanonicalL2 S K m =>
+      N * ‖κ • n07aCanonicalUnitMode (hI m) v l‖) hsource
+    exact hmode.le.trans (n07a_scaledMode_sum_bound (hI m)
+      (n07aRelativePrincipalJet href hcur z hz m (hI m) ur uθ urr urθ uθθ)
+      ((n07aRelativePotentialCoefficient href hcur z hz m (hI m)).mul u)
+      l κ N H tail (e₁ m * parameterGrading S (s + 4 + d₁) z)
+      (e₂ m * parameterGrading S (s + 4 + d₂) z) (‖u‖ + ‖G‖) hN hpr hpot)
 
 end ContinuousFlexibility.Analysis

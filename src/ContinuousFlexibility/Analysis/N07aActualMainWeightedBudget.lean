@@ -50,6 +50,40 @@ local instance n07aMainWeightedBudgetGraphGroup : NormedAddCommGroup B.Space :=
 local instance n07aMainWeightedBudgetGraphSpace : NormedSpace ℝ B.Space :=
   Submodule.normedSpace _
 
+private theorem n07a_mainWeightedBand_unitMode {m : ℕ} (hm : K.left m < K.right m)
+    (f : CanonicalL2 S K m) (hf : n07aAngularReflection m f = f)
+    (l : ℕ) (a κ : ℝ) (ha : 0 ≤ a) :
+    a * ‖n07aAngularBand m hm l (κ • f)‖ =
+      Real.sqrt (Real.pi * (K.right m - K.left m)) *
+        ‖(a * κ) • n07aCanonicalUnitMode hm f l‖ := by
+  rw [map_smul, norm_smul, n07aAngularBand_norm_unitMode hm f hf l,
+    norm_smul, Real.norm_eq_abs, Real.norm_eq_abs, abs_mul, abs_of_nonneg ha]
+  ring
+
+private theorem n07a_mainWeightedMajorant_factor (A n A₀ x : ℝ) :
+    (A * n) * (A₀ * x) = (A * A₀) * n * x := by
+  ring
+
+private theorem n07a_mainWeightedGap_le
+    (J v H τ e n E e₀ w a₀ A g x : ℝ)
+    (hJ : 0 ≤ J) (hv : 0 ≤ v) (hH : 0 ≤ H) (hτ : 0 ≤ τ)
+    (he : 0 ≤ e) (hn : 0 ≤ n) (ha₀ : 0 ≤ a₀)
+    (hb : g * x ≤ H * τ * (e * n) * E)
+    (hp : J * E ≤ e₀ * w * a₀)
+    (hew : v * H * w * (e * e₀) ≤ A) :
+    J * (v * g * x) ≤ τ * (A * n * a₀) := by
+  calc
+    _ ≤ J * (v * (H * τ * (e * n) * E)) := by
+      simpa only [mul_assoc] using
+        mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hb hv) hJ
+    _ = (v * H * τ * e * n) * (J * E) := by ring
+    _ ≤ (v * H * τ * e * n) * (e₀ * w * a₀) :=
+      mul_le_mul_of_nonneg_left hp (by positivity)
+    _ = (v * H * w * (e * e₀)) * (τ * n * a₀) := by ring
+    _ ≤ A * (τ * n * a₀) :=
+      mul_le_mul_of_nonneg_right hew (mul_nonneg (mul_nonneg hτ hn) ha₀)
+    _ = _ := by ring
+
 theorem n07a_actualRelativeMain_weighted_gap_budget
     (hD : IsAccumulatingProfile D) (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (h01 : N01Properties D T S C base loss ε)
@@ -76,33 +110,59 @@ theorem n07a_actualRelativeMain_weighted_gap_budget
                   n07aRelativeMainSource (P := P) href hcur z hz F m (hI m))‖) ≤
             n07aAngularTail ((j : ℤ) - l) * a m := by
   have hmono : Monotone (parameterGrading S) := n07aParameterGrading_monotone S
-  obtain ⟨Col, hCol⟩ := n07a_referenceScalarColumns_volume hD hS hT h01 h03 h04
+  let columns := n07a_referenceScalarColumns_volume hD hS hT h01 h03 h04
     href h05.2.1 (3 / 4 : ℝ) (0 - B.lossMaterial) 0
-  obtain ⟨A₀, hA₀, e₀, he₀, he₀1, henergy⟩ :=
-    n07a_referenceEnergy_outer_budget hD hT href h05 hI Col hCol
-  obtain ⟨d₁, d₂, hmode⟩ := n07a_actualRelativeMain_mode_bound hD hS hT h01 h02 h03 h04
+  let Col : Fin 3 → V.level (3 / 4 : ℝ) (0 - B.lossMaterial) 0 := columns.choose
+  have hCol := columns.choose_spec
+  let energy := n07a_referenceEnergy_outer_budget hD hT href h05 hI Col hCol
+  let A₀ : ℝ := energy.choose
+  have hA₀ : 0 < A₀ := energy.choose_spec.1
+  let e₀ : ℕ → ℝ := energy.choose_spec.2.choose
+  have he₀ : N07aSampleSubpower T K e₀ := energy.choose_spec.2.choose_spec.1
+  have he₀1 : ∀ m, 1 ≤ e₀ m := energy.choose_spec.2.choose_spec.2.1
+  have henergy := energy.choose_spec.2.choose_spec.2.2
+  let modes := n07a_actualRelativeMain_mode_bound hD hS hT h01 h02 h03 h04
     href hcur hprincipal h05 h06 hI
+  let d₁ : ℕ := modes.choose
+  let d₂ : ℕ := modes.choose_spec.choose
+  have hmode := modes.choose_spec.choose_spec
   let d : ℕ := 4 + max d₁ d₂
   refine ⟨d, fun t s => ?_⟩
-  obtain ⟨e₁, e₂, he₁, he₂, he₁0, he₂0, hmodes⟩ := hmode s
+  let modeBounds := hmode s
+  let e₁ : ℕ → ℝ := modeBounds.choose
+  let e₂ : ℕ → ℝ := modeBounds.choose_spec.choose
+  have he₁ : N07aSampleSubpower T K e₁ := modeBounds.choose_spec.choose_spec.1
+  have he₂ : N07aSampleSubpower T K e₂ := modeBounds.choose_spec.choose_spec.2.1
+  have he₁0 : ∀ m, 0 ≤ e₁ m := modeBounds.choose_spec.choose_spec.2.2.1
+  have he₂0 : ∀ m, 0 ≤ e₂ m := modeBounds.choose_spec.choose_spec.2.2.2.1
+  have hmodes := modeBounds.choose_spec.choose_spec.2.2.2.2
   let e : ℕ → ℝ := fun m => e₁ m + e₂ m
   have he : N07aSampleSubpower T K e := he₁.add he₂
   have he0 (m : ℕ) : 0 ≤ e m := add_nonneg (he₁0 m) (he₂0 m)
   have he₀0 (m : ℕ) : 0 ≤ e₀ m := zero_le_one.trans (he₀1 m)
   have hprod : N07aSampleSubpower T K (fun m => e m * e₀ m) :=
     N07aSampleSubpower.mul hD hT he he₀
-  obtain ⟨A, hA, hweight⟩ := hprod.volume_gain_absorption hD hT
+  let absorption := hprod.volume_gain_absorption hD hT
     (by norm_num : (0 : ℝ) < 3 / 4) t (0 - B.lossMaterial)
+  let A : ℝ := absorption.choose
+  have hA : 0 < A := absorption.choose_spec.1
+  have hweight := absorption.choose_spec.2
   refine ⟨A * A₀, mul_pos hA hA₀, fun z hz j F hF hU => ?_⟩
-  obtain ⟨a₀, ha₀, hnorm, hpieces⟩ := henergy j F hF hU
+  let majorant := henergy j F hF hU
+  let a₀ : lp (fun _ : ℕ => ℝ) 2 := majorant.choose
+  have ha₀ : ∀ m, 0 ≤ a₀ m := majorant.choose_spec.1
+  have hnorm : ‖a₀‖ ≤ A₀ * ‖F‖ := majorant.choose_spec.2.1
+  have hpieces := majorant.choose_spec.2.2
   let n : ℝ := parameterGrading S (s + d) z
   have hn : 0 ≤ n := apply_nonneg _ _
   let a : lp (fun _ : ℕ => ℝ) 2 := (A * n) • a₀
   have ha (m : ℕ) : a m = A * n * a₀ m := by
     simp only [a, lp.coeFn_smul, Pi.smul_apply, smul_eq_mul]
   refine ⟨a, fun m => by rw [ha]; exact mul_nonneg (mul_nonneg hA.le hn) (ha₀ m), ?_, ?_⟩
-  · rw [a, norm_smul, Real.norm_eq_abs, abs_of_nonneg (mul_nonneg hA.le hn)]
-    exact (mul_le_mul_of_nonneg_left hnorm (mul_nonneg hA.le hn)).trans_eq (by ring)
+  · dsimp only [a]
+    rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg (mul_nonneg hA.le hn)]
+    exact (mul_le_mul_of_nonneg_left hnorm (mul_nonneg hA.le hn)).trans_eq
+      (n07a_mainWeightedMajorant_factor A n A₀ ‖F‖)
   · intro l commute m
     let f := n07aRelativeMainSource (P := P) href hcur z hz F m (hI m)
     let κ : ℝ := if commute then ((l : ℝ) - j) else 1
@@ -123,7 +183,7 @@ theorem n07a_actualRelativeMain_weighted_gap_budget
     have hE : 0 ≤ E := add_nonneg (norm_nonneg _) (norm_nonneg _)
     have hband : n07aAngularBand m (hI m) j (n07aReferenceInverseField (B := B) F m) =
         n07aReferenceInverseField (B := B) F m := by
-      simpa only [n07aAngularUnknownBand_field] using
+      simpa only [n07aAngularUnknownBand_field, n07aReferenceInverseField] using
         congrArg (fun u : CanonicalUnknown S K => u.1 m) hU
     have hf : n07aAngularReflection m f = f :=
       n07aRelativeMainSource_reflection hS h01 h03 h04 href hcur h05.2.1 z hz F m (hI m)
@@ -134,41 +194,32 @@ theorem n07a_actualRelativeMain_weighted_gap_budget
     have hc : e₁ m * parameterGrading S (s + 4 + d₁) z +
         e₂ m * parameterGrading S (s + 4 + d₂) z ≤ e m * n :=
       (add_le_add (mul_le_mul_of_nonneg_left hn₁ (he₁0 m))
-        (mul_le_mul_of_nonneg_left hn₂ (he₂0 m))).trans_eq (by dsimp only [e]; ring)
+        (mul_le_mul_of_nonneg_left hn₂ (he₂0 m))).trans_eq
+          (add_mul (e₁ m) (e₂ m) n).symm
     have hraw := (hmodes z hz F m j l hband commute).trans
       (mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left hc (mul_nonneg hH hτ)) hE)
     have hmodeeq : n07aAngularGap j l ^ s * ‖n07aAngularBand m (hI m) l (κ • f)‖ =
         Real.sqrt (Real.pi * (K.right m - K.left m)) *
           ‖(n07aAngularGap j l ^ s * κ) • n07aCanonicalUnitMode (hI m) f l‖ := by
-      have hg : 0 ≤ n07aAngularGap j l ^ s :=
-        pow_nonneg (zero_le_one.trans (n07aAngularGap_one_le j l)) s
-      rw [map_smul, norm_smul, n07aAngularBand_norm_unitMode (hI m) f hf l,
-        norm_smul, Real.norm_eq_abs, Real.norm_eq_abs, abs_mul, abs_of_nonneg hg]
-      ring
+      exact n07a_mainWeightedBand_unitMode (hI m) f hf l (n07aAngularGap j l ^ s) κ
+        (pow_nonneg (zero_le_one.trans (n07aAngularGap_one_le j l)) s)
     have hb : n07aAngularGap j l ^ s * ‖n07aAngularBand m (hI m) l (κ • f)‖ ≤
         H * τ * (e m * n) * E := by
-      rw [hmodeeq, n07aAngularGap_eq_int]
-      exact hraw
+      have hgap := congrArg (fun q : ℝ =>
+        Real.sqrt (Real.pi * (K.right m - K.left m)) *
+          ‖(q ^ s * κ) • n07aCanonicalUnitMode (hI m) f l‖)
+        (n07aAngularGap_eq_int j l)
+      exact (hmodeeq.trans hgap).le.trans hraw
     have hew : v * H * w * (e m * e₀ m) ≤ A := by
       have h := hweight m
       rw [abs_of_nonneg (mul_nonneg (he0 m) (he₀0 m))] at h
       exact h
     have hp := hpieces m
     change J * E ≤ e₀ m * w * a₀ m at hp
-    rw [ha]
-    change J * (v * n07aAngularGap j l ^ s *
-      ‖n07aAngularBand m (hI m) l (κ • f)‖) ≤ τ * (A * n * a₀ m)
-    calc
-      _ ≤ J * (v * (H * τ * (e m * n) * E)) := by
-        simpa only [mul_assoc] using
-          mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hb hv) hJ
-      _ = (v * H * τ * e m * n) * (J * E) := by ring
-      _ ≤ (v * H * τ * e m * n) * (e₀ m * w * a₀ m) :=
-        mul_le_mul_of_nonneg_left hp (by positivity)
-      _ = (v * H * w * (e m * e₀ m)) * (τ * n * a₀ m) := by ring
-      _ ≤ A * (τ * n * a₀ m) :=
-        mul_le_mul_of_nonneg_right hew (mul_nonneg (mul_nonneg hτ hn) (ha₀ m))
-      _ = _ := by ring
+    have hfinal := n07a_mainWeightedGap_le J v H τ (e m) n E (e₀ m) w (a₀ m) A
+      (n07aAngularGap j l ^ s) ‖n07aAngularBand m (hI m) l (κ • f)‖
+      hJ hv hH hτ hem hn (ha₀ m) hb hp hew
+    exact hfinal.trans_eq (congrArg (τ * ·) (ha m).symm)
 
 end ContinuousFlexibility.Analysis

@@ -62,7 +62,15 @@ theorem n07aRelativeMainSource_reflection
     (F : V.level (3 / 4 : ℝ) 0 b) (m : ℕ) (hm : K.left m < K.right m) :
     n07aAngularReflection m (n07aRelativeMainSource (P := P) href hcur z hz F m hm) =
       n07aRelativeMainSource (P := P) href hcur z hz F m hm := by
-  rw [n07aRelativeMainSource, map_sub, n07a_volume_forget_reflection hV,
-    n07aRelativeScalarPart_reflection hS h01 h03 h04]
+  let f : CanonicalL2 S K m :=
+    V.forget (3 / 4 : ℝ) 0 b (P.relative (liftSectorParameter S C z) F) m
+  let g : CanonicalL2 S K m :=
+    n07aRelativeScalarPart href hcur z hz m hm (B.inverse F).val.1
+  have hf : n07aAngularReflection m f = f :=
+    n07a_volume_forget_reflection hV (P.relative (liftSectorParameter S C z) F) m
+  have hg : n07aAngularReflection m g = g :=
+    n07aRelativeScalarPart_reflection hS h01 h03 h04 href hcur z hz m hm (B.inverse F).val.1
+  exact (map_sub (n07aAngularReflection m) f g).trans
+    (congrArg₂ (fun u v : CanonicalL2 S K m => u - v) hf hg)
 
 end ContinuousFlexibility.Analysis
