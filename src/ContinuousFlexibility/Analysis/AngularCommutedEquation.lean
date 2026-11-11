@@ -94,13 +94,17 @@ theorem angularSobolevNorm_derivativePower_le (p q : ℕ) {v : lp E 2}
   rw [angularWeightedVector_apply, angularDerivativePower_apply q v hq,
     angularWeightedVector_apply]
   simp only [norm_smul, RCLike.norm_ofReal,
-    abs_of_nonneg (pow_nonneg (Nat.cast_nonneg (α := ℝ) n) _),
-    abs_of_nonneg (pow_nonneg (angularWeight_nonneg n) _), pow_add]
+    abs_of_nonneg (pow_nonneg (Nat.cast_nonneg (α := ℝ) n) q),
+    abs_of_nonneg (pow_nonneg (angularWeight_nonneg n) p),
+    abs_of_nonneg (pow_nonneg (angularWeight_nonneg n) (p + q))]
+  rw [pow_add]
   calc
     angularWeight n ^ p * ((n : ℝ) ^ q * ‖v n‖) ≤
-        angularWeight n ^ p * (angularWeight n ^ q * ‖v n‖) := by
-      gcongr
-      exact natCast_le_angularWeight n
+        angularWeight n ^ p * (angularWeight n ^ q * ‖v n‖) :=
+      mul_le_mul_of_nonneg_left
+        (mul_le_mul_of_nonneg_right
+          (pow_le_pow_left₀ (Nat.cast_nonneg _) (natCast_le_angularWeight n) q) (norm_nonneg _))
+        (pow_nonneg (angularWeight_nonneg n) p)
     _ = angularWeight n ^ p * angularWeight n ^ q * ‖v n‖ := by ring
 
 /-- The full order-`p` commutator formula, including arbitrary spectral

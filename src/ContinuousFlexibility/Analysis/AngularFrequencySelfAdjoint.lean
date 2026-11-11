@@ -100,18 +100,19 @@ theorem angularFrequency_adjoint_domain_le :
 unbounded `LinearPMap`, on its maximal weighted Hilbert-space domain. -/
 theorem angularFrequency_isSelfAdjoint :
     IsSelfAdjoint (angularFrequency (𝕜 := 𝕜) (E := E)) := by
-  apply LinearPMap.isSelfAdjoint_def.mpr
+  apply (LinearPMap.isSelfAdjoint_def
+    (A := angularFrequency (𝕜 := 𝕜) (E := E))).mpr
   apply LinearPMap.ext
   · apply Submodule.ext
     intro x
     constructor
-    · exact angularFrequency_adjoint_domain_le
+    · exact angularFrequency_adjoint_domain_le (𝕜 := 𝕜) (E := E)
     · intro hx
       apply LinearPMap.mem_adjoint_domain_of_exists
         (T := angularFrequency (𝕜 := 𝕜) (E := E))
       refine ⟨angularFrequency (𝕜 := 𝕜) ⟨x, hx⟩, ?_⟩
       intro y
-      exact angularFrequency_isFormalAdjoint ⟨x, hx⟩ y
+      exact angularFrequency_isFormalAdjoint (𝕜 := 𝕜) (E := E) ⟨x, hx⟩ y
   · intro x hxadj hx
     ext n
     rw [angularFrequency_adjoint_apply, angularFrequency_apply]

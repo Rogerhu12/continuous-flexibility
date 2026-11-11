@@ -66,7 +66,8 @@ theorem angularRealResolvent_range_le {B : H →L[ℝ] H} (hB : IsSelfAdjoint B)
   rintro _ ⟨x, rfl⟩
   have hlimC : Tendsto (fun N => angularResolventPartial (extend B) N (ofReal x))
       atTop (𝓝 (extend B (ofReal x))) :=
-    (angularResolventPartial_tendsto hBC hSpectrumC).clm_apply tendsto_const_nhds
+    ((continuous_eval_const (ofReal x)).tendsto (extend B)).comp
+      (angularResolventPartial_tendsto hBC hSpectrumC)
   have hlim : Tendsto (fun N => (angularResolventPartial (extend B) N (ofReal x)).re)
       atTop (𝓝 (B x)) := by
     simpa only [reCLM_apply, re_extend, re_ofReal] using
@@ -92,7 +93,8 @@ theorem angularRealResolvent_isHilbertSum {B : H →L[ℝ] H} (hB : IsSelfAdjoin
     (hSpectrum : spectrum ℝ B ⊆ angularReciprocalSpectrum) :
     IsHilbertSum ℝ (fun n => angularResolventEigenspace B n)
       (fun n => (angularResolventEigenspace B n).subtypeₗᵢ) :=
-  IsHilbertSum.mkInternal (angularResolventEigenspaces_orthogonal hB)
+  IsHilbertSum.mkInternal (fun n => angularResolventEigenspace B n)
+    (angularResolventEigenspaces_orthogonal hB)
     (angularRealResolventEigenspaces_total hB hInjective hSpectrum)
 
 end ContinuousFlexibility.Analysis

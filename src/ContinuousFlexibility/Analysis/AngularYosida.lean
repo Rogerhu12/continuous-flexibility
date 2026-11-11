@@ -57,13 +57,16 @@ theorem MemAngularSobolev.derivative {p : ℕ} {v : lp E 2}
   intro n
   rw [angularDerivative_apply hd]
   simp only [norm_smul, RCLike.norm_ofReal,
-    abs_of_nonneg (pow_nonneg (angularWeight_nonneg n) _),
-    abs_of_nonneg (Nat.cast_nonneg (α := ℝ) n), pow_succ]
+    abs_of_nonneg (pow_nonneg (angularWeight_nonneg n) p),
+    abs_of_nonneg (pow_nonneg (angularWeight_nonneg n) (p + 1)),
+    abs_of_nonneg (Nat.cast_nonneg (α := ℝ) n)]
+  rw [pow_succ]
   calc
     angularWeight n ^ p * ((n : ℝ) * ‖v n‖) ≤
-        angularWeight n ^ p * (angularWeight n * ‖v n‖) := by
-      gcongr
-      exact natCast_le_angularWeight n
+        angularWeight n ^ p * (angularWeight n * ‖v n‖) :=
+      mul_le_mul_of_nonneg_left
+        (mul_le_mul_of_nonneg_right (natCast_le_angularWeight n) (norm_nonneg _))
+        (pow_nonneg (angularWeight_nonneg n) p)
     _ = angularWeight n ^ p * angularWeight n * ‖v n‖ := by ring
 
 theorem memAngularSobolev_succ_of_derivative {p : ℕ} {v : lp E 2}
@@ -80,9 +83,9 @@ theorem memAngularSobolev_succ_of_derivative {p : ℕ} {v : lp E 2}
   rw [abs_of_nonneg (pow_nonneg (angularWeight_nonneg n) _), pow_succ]
   calc
     angularWeight n ^ p * angularWeight n ≤
-        angularWeight n ^ p * (1 + (n : ℝ)) := by
-      gcongr
-      exact angularWeight_le_one_add n
+        angularWeight n ^ p * (1 + (n : ℝ)) :=
+      mul_le_mul_of_nonneg_left (angularWeight_le_one_add n)
+        (pow_nonneg (angularWeight_nonneg n) p)
     _ = angularWeight n ^ p + angularWeight n ^ p * (n : ℝ) := by ring
 
 theorem norm_angularDerivative_le {v : lp E 2}
@@ -214,7 +217,8 @@ theorem angularYosidaDerivative_commutator (R K : lp E 2 →L[𝕜] lp E 2)
     angularDerivative_yosida, map_add] at hJ
   have hRJ := congrArg (fun x => angularYosida (𝕜 := 𝕜) N (R x))
     (angularYosida_resolvent (𝕜 := 𝕜) N v)
-  simp only [map_add, map_smul] at hRJ
+  simp only [R.map_add, R.map_smul,
+    (angularYosida (𝕜 := 𝕜) N).map_add, (angularYosida (𝕜 := 𝕜) N).map_smul] at hRJ
   have hres := angularYosida_resolvent (𝕜 := 𝕜) N (R (angularYosida (𝕜 := 𝕜) N v))
   rw [hJ, ← add_assoc, hRJ] at hres
   change t • angularYosida (𝕜 := 𝕜) N (R v) + angularYosida (𝕜 := 𝕜) N (K (angularYosida (𝕜 := 𝕜) N v)) =

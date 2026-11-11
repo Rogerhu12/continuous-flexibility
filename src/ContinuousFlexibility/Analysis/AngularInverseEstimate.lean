@@ -141,7 +141,7 @@ theorem angular_commutator_term_bound (K : lp E 2 →L[ℂ] lp E 2)
         a * angularSobolevNorm (𝕜 := ℂ) m v + c * ‖v‖)
     (u : lp E 2) (hu : MemAngularSobolev (𝕜 := ℂ) m u) :
     ‖angularDerivativePower (𝕜 := ℂ) k
-        (K (angularDerivativePower (m - k) u))‖ ≤
+        (K (angularDerivativePower (𝕜 := ℂ) (m - k) u))‖ ≤
       (1 + a + czero) * (2 * angularSobolevNorm (𝕜 := ℂ) m u + (1 + c) * ‖u‖) := by
   have hC : 0 ≤ 1 + a + czero := by positivity
   have hA : 0 ≤ 1 + c := by positivity
@@ -162,7 +162,7 @@ theorem angular_commutator_term_bound (K : lp E 2 →L[ℂ] lp E 2)
     have hv : MemAngularSobolev (𝕜 := ℂ) k (angularDerivativePower (𝕜 := ℂ) (m - k) u) :=
       hu'.derivative_power
     obtain ⟨hKv, hbound⟩ := angular_sobolev_interpolation K hm' ha hc hczero hzero hone hk _ hv
-    have hprincipal : angularSobolevNorm (𝕜 := ℂ) k (angularDerivativePower (m - k) u) ≤
+    have hprincipal : angularSobolevNorm (𝕜 := ℂ) k (angularDerivativePower (𝕜 := ℂ) (m - k) u) ≤
         angularSobolevNorm (𝕜 := ℂ) m u := by
       simpa only [hsum] using angularSobolevNorm_derivativePower_le k (m - k) hu'
     have hnorm : ‖angularDerivativePower (𝕜 := ℂ) (m - k) u‖ ≤
@@ -174,11 +174,11 @@ theorem angular_commutator_term_bound (K : lp E 2 →L[ℂ] lp E 2)
       (mul_le_mul_of_nonneg_left hnorm (Real.rpow_nonneg hA _)).trans
         (angularWeightNorm_mixed hu hm' hk hA)
     calc
-      _ ≤ angularSobolevNorm (𝕜 := ℂ) k (K (angularDerivativePower (m - k) u)) :=
+      _ ≤ angularSobolevNorm (𝕜 := ℂ) k (K (angularDerivativePower (𝕜 := ℂ) (m - k) u)) :=
         norm_angularDerivativePower_le k hKv
       _ ≤ (1 + a + czero) *
-          (angularSobolevNorm (𝕜 := ℂ) k (angularDerivativePower (m - k) u) +
-            (1 + c) ^ ((k : ℝ) / m) * ‖angularDerivativePower (m - k) u‖) := hbound
+          (angularSobolevNorm (𝕜 := ℂ) k (angularDerivativePower (𝕜 := ℂ) (m - k) u) +
+            (1 + c) ^ ((k : ℝ) / m) * ‖angularDerivativePower (𝕜 := ℂ) (m - k) u‖) := hbound
       _ ≤ (1 + a + czero) *
           (angularSobolevNorm (𝕜 := ℂ) m u +
             (angularSobolevNorm (𝕜 := ℂ) m u + (1 + c) * ‖u‖)) :=
@@ -198,7 +198,7 @@ theorem angular_inverse_tame_complex (R K B : lp E 2 →L[ℂ] lp E 2)
       angularSobolevNorm (𝕜 := ℂ) p (K v) ≤
         (a p : ℝ) * angularSobolevNorm (𝕜 := ℂ) p v + (c p : ℝ) * ‖v‖)
     (hcomm : ∀ v, v ∈ angularFrequencyDomain (𝕜 := ℂ) →
-      angularDerivative (𝕜 := ℂ) (R v) = R (angularDerivative v) + K v)
+      angularDerivative (𝕜 := ℂ) (R v) = R (angularDerivative (𝕜 := ℂ) v) + K v)
     (hleft : ∀ v, B (v + R v) = v)
     (hright : ∀ f, B f + R (B f) = f) :
     (∀ p f, MemAngularSobolev (𝕜 := ℂ) p f →
@@ -237,9 +237,9 @@ theorem angular_inverse_tame_complex (R K B : lp E 2 →L[ℂ] lp E 2)
   have hzero : ‖K‖ ≤ (a m : ℝ) + (c 0 : ℝ) :=
     hKzero.trans (add_le_add_right ha0 _)
   let T : lp E 2 := ∑ k ∈ Finset.range p,
-    angularDerivativePower (𝕜 := ℂ) k (K (angularDerivativePower (m - k) u))
+    angularDerivativePower (𝕜 := ℂ) k (K (angularDerivativePower (𝕜 := ℂ) (m - k) u))
   have hterm (k : ℕ) (hk : k ∈ Finset.range p) :
-      ‖angularDerivativePower (𝕜 := ℂ) k (K (angularDerivativePower (m - k) u))‖ ≤
+      ‖angularDerivativePower (𝕜 := ℂ) k (K (angularDerivativePower (𝕜 := ℂ) (m - k) u))‖ ≤
         C * (2 * Y + A * U) := by
     have hkm : k ≤ m := by have := Finset.mem_range.mp hk; dsimp only [m]; omega
     exact angular_commutator_term_bound K hkm (a m).coe_nonneg (c m).coe_nonneg
@@ -247,17 +247,17 @@ theorem angular_inverse_tame_complex (R K B : lp E 2 →L[ℂ] lp E 2)
   have hsum : ‖T‖ ≤ (p : ℝ) * C * (2 * Y + A * U) := by
     calc
       ‖T‖ ≤ ∑ k ∈ Finset.range p,
-          ‖angularDerivativePower (𝕜 := ℂ) k (K (angularDerivativePower (m - k) u))‖ :=
+          ‖angularDerivativePower (𝕜 := ℂ) k (K (angularDerivativePower (𝕜 := ℂ) (m - k) u))‖ :=
         norm_sum_le _ _
       _ ≤ ∑ _k ∈ Finset.range p, C * (2 * Y + A * U) := Finset.sum_le_sum hterm
       _ = (p : ℝ) * C * (2 * Y + A * U) := by
         simp only [Finset.sum_const, Finset.card_range, nsmul_eq_mul]
         ring
   have heq : angularDerivativePower (𝕜 := ℂ) p u =
-      B (angularDerivativePower p f - T) := by
+      B (angularDerivativePower (𝕜 := ℂ) p f - T) := by
     calc
-      _ = B (angularDerivativePower p u + R (angularDerivativePower p u)) := (hleft _).symm
-      _ = B (angularDerivativePower p f - T) := congrArg B
+      _ = B (angularDerivativePower (𝕜 := ℂ) p u + R (angularDerivativePower (𝕜 := ℂ) p u)) := (hleft _).symm
+      _ = B (angularDerivativePower (𝕜 := ℂ) p f - T) := congrArg B
         (angularInverse_commuted_equation R K B hR hK hcomm hleft hright p f hf)
   have hpower : ‖angularDerivativePower (𝕜 := ℂ) p u‖ ≤
       ‖B‖ * (F + (p : ℝ) * C * (2 * Y + A * U)) := by

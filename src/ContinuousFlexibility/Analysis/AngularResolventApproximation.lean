@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.AngularResolventSpectrum
+import Mathlib.Analysis.Normed.Operator.Bilinear
 import Mathlib.Analysis.SpecificLimits.Basic
 
 /-!
@@ -104,5 +105,12 @@ theorem angularResolventPartial_tendsto {B : H →L[ℂ] H} (hB : IsSelfAdjoint 
     (fun N => ?_) angularResolventEigenvalue_tendsto
   rw [norm_sub_rev]
   exact angularResolventPartial_error hB hSpectrum N
+
+theorem angularResolventPartial_apply_tendsto {B : H →L[ℂ] H} (hB : IsSelfAdjoint B)
+    (hSpectrum : spectrum ℝ B ⊆ angularReciprocalSpectrum) (x : H) :
+    Tendsto (fun N => angularResolventPartial B N x) atTop (𝓝 (B x)) := by
+  simpa only [ContinuousLinearMap.apply_apply] using
+    ((ContinuousLinearMap.apply ℂ H x).continuous.tendsto B).comp
+      (angularResolventPartial_tendsto hB hSpectrum)
 
 end ContinuousFlexibility.Analysis

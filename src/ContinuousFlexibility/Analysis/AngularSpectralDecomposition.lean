@@ -30,7 +30,7 @@ def angularResolventEigenspace (B : H →L[𝕜] H) (n : ℕ) : Submodule 𝕜 H
 theorem mem_angularResolventEigenspace (B : H →L[𝕜] H) (n : ℕ) (x : H) :
     x ∈ angularResolventEigenspace B n ↔
       B x = (angularResolventEigenvalue n : 𝕜) • x := by
-  simp only [angularResolventEigenspace, ContinuousLinearMap.mem_ker,
+  simp only [angularResolventEigenspace, LinearMap.mem_ker, ContinuousLinearMap.coe_coe,
     sub_apply, smul_apply, ContinuousLinearMap.id_apply, sub_eq_zero]
 
 instance angularResolventEigenspace_completeSpace (B : H →L[𝕜] H) (n : ℕ) :
@@ -50,8 +50,11 @@ theorem angularResolventEigenspaces_orthogonal {B : H →L[𝕜] H} (hB : IsSelf
       (fun n => (angularResolventEigenspace B n).subtypeₗᵢ) := by
   have hinj : Function.Injective (fun n => (angularResolventEigenvalue n : 𝕜)) :=
     RCLike.ofReal_injective.comp angularResolventEigenvalue_strictAnti.injective
-  simpa only [angularResolventEigenspace_eq] using
-    hB.isSymmetric.orthogonalFamily_eigenspaces.comp hinj
+  have hF : angularResolventEigenspace B = fun n =>
+      Module.End.eigenspace B.toLinearMap (angularResolventEigenvalue n : 𝕜) :=
+    funext (angularResolventEigenspace_eq B)
+  rw [hF]
+  exact hB.isSymmetric.orthogonalFamily_eigenspaces.comp hinj
 
 /-- The common density step, for real and complex Hilbert spaces. -/
 theorem angularResolventEigenspaces_total_of_range {B : H →L[𝕜] H}
@@ -64,7 +67,7 @@ theorem angularResolventEigenspaces_total_of_range {B : H →L[𝕜] H}
       B.range.topologicalClosure = B.adjoint.range.topologicalClosure := by
         rw [hB.adjoint_eq]
       _ = B.kerᗮ := B.orthogonal_ker.symm
-      _ = ⊤ := by rw [hker, Submodule.bot_orthogonal]
+      _ = ⊤ := by rw [hker, Submodule.bot_orthogonal_eq_top]
   rw [← hdense]
   exact B.range.topologicalClosure_minimal hRange
     (Submodule.isClosed_topologicalClosure _)
@@ -79,7 +82,7 @@ theorem angularResolventProjection_mem {B : H →L[ℂ] H} (hB : IsSelfAdjoint B
   rw [mem_angularResolventEigenspace]
   have h := congrArg (fun T : H →L[ℂ] H => T x)
     (angularResolventProjection_eigen hB hSpectrum n)
-  simpa only [ContinuousLinearMap.mul_apply_eq_comp, smul_apply,
+  simpa only [mul_apply_eq_comp, smul_apply,
     RCLike.real_smul_eq_coe_smul (K := ℂ)] using h
 
 theorem angularResolventPartial_mem_iSup {B : H →L[ℂ] H} (hB : IsSelfAdjoint B)
@@ -103,7 +106,7 @@ theorem angularResolventEigenspaces_total {B : H →L[ℂ] H} (hB : IsSelfAdjoin
   have hRange : B.range ≤ S.topologicalClosure := by
     rintro _ ⟨x, rfl⟩
     have hlim : Tendsto (fun N => angularResolventPartial B N x) atTop (𝓝 (B x)) :=
-      (angularResolventPartial_tendsto hB hSpectrum).clm_apply tendsto_const_nhds
+      angularResolventPartial_apply_tendsto hB hSpectrum x
     apply S.isClosed_topologicalClosure.mem_of_tendsto hlim
     exact Eventually.of_forall (fun N => S.le_topologicalClosure
       (angularResolventPartial_mem_iSup hB hSpectrum N x))
@@ -116,7 +119,8 @@ theorem angularResolvent_isHilbertSum {B : H →L[ℂ] H} (hB : IsSelfAdjoint B)
     (hSpectrum : spectrum ℝ B ⊆ angularReciprocalSpectrum) :
     IsHilbertSum ℂ (fun n => angularResolventEigenspace B n)
       (fun n => (angularResolventEigenspace B n).subtypeₗᵢ) :=
-  IsHilbertSum.mkInternal (angularResolventEigenspaces_orthogonal hB)
+  IsHilbertSum.mkInternal (fun n => angularResolventEigenspace B n)
+    (angularResolventEigenspaces_orthogonal hB)
     (angularResolventEigenspaces_total hB hInjective hSpectrum)
 
 end ContinuousFlexibility.Analysis
