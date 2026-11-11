@@ -145,7 +145,7 @@ theorem hasDerivAt_standInConeSolution (ε j c : ℝ) {r : ℝ} (hr : 0 < r) :
     HasDerivAt (standInConeSolution ε j c) (ε * j * standInConeSolution ε j c r / r) r := by
   have hlog := (hasDerivAt_log hr.ne').sub_const (log c)
   have he := (hlog.const_mul (ε * j)).exp
-  convert he using 1 <;> simp only [standInConeSolution, div_eq_mul_inv] <;> ring
+  simpa only [standInConeSolution, div_eq_mul_inv, mul_assoc, mul_left_comm, mul_comm] using he
 
 /-- The first-band artificial impedance has `d = 1/j` at every positive
 radius of the cone, independently of the cone's length. -/

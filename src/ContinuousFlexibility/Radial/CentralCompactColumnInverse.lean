@@ -85,9 +85,10 @@ theorem centralCompactColumn_kernel_pairing {scale : ℝ} (hscale : 0 < scale)
         centralRadialHilbertEquiv hscale (centralCompactColumn hscale hg hc hp)⟫_ℝ =
       (∫ r : ℝ, g r * centralKernelHeight r) / sqrt scale := by
   have hh := centralCompactColumn_auxiliaryKernel_pairing hscale hg hc hp
-  rw [centralAuxiliaryKernelVector, real_inner_smul_right,
-    real_inner_comm _ centralRadialKernelVector] at hh
-  exact hh
+  rw [centralAuxiliaryKernelVector, real_inner_smul_right] at hh
+  simpa only [real_inner_comm
+    (centralRadialHilbertEquiv hscale (centralCompactColumn hscale hg hc hp))
+    centralRadialKernelVector] using hh
 
 theorem centralCompactColumn_kernel_pairing_ne_zero {scale : ℝ} (hscale : 0 < scale)
     {g : ℝ → ℝ} (hg : ContDiff ℝ ∞ g) (hc : HasCompactSupport g)
