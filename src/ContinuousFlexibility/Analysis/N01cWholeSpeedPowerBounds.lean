@@ -60,7 +60,7 @@ def endpointPowerControl_neg_add_mul
     (fun _ _ _ _ => mem_univ _)
   let R (m : I) : MixedJetRegularity U (Ω m) (f m) :=
     (Rneg m).congr (hΩ m)
-      (fun x hx => ((Rneg m).spatial x hx).congr (fun q hq => (heq m x hx q hq).symm))
+      (fun x hx => ((Rneg m).spatial x hx).congr (fun q hq => (heq m x hx hq).symm))
       (heq m)
   have hbprod := F₁.bounds.mul G.bounds F₁.regular G.regular hΩ hδ hE hH
   have hbsum := F₀.bounds.add hbprod F₀.regular Rprod hΩ hδ
@@ -129,7 +129,7 @@ def wholeCharacteristicSpeed_powerControl
   have hRHb := (Classical.choose_spec hm).2
   have hHs (m : ℕ) (q : PolarPoint) (_ : q ∈ Ω m) : 0 ≤ H m q ∧ H m q ≤ RH := by
     refine ⟨Real.rpow_nonneg (hT.2.1 _ (hs m)).2.1.le _, ?_⟩
-    simpa only [H, Real.rpow_zero, mul_one] using hRHb _ (hs m)
+    simpa only [H, RH, Real.rpow_zero, mul_one] using hRHb _ (hs m)
   let F (i : Fin 2) := normalizedSpeedFactor_controlled
     hS hT hA hε hε1 hB hE hloc hχloc hI i
   have hF (i : Fin 2) : (F i).value = normalizedSpeedFactor D S C i :=

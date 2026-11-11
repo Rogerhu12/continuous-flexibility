@@ -45,8 +45,10 @@ theorem HasPositiveEnvelope.add {X : Type*} {E F G : X → ℝ}
   obtain ⟨C, A, hC, hA, hf⟩ := hF
   obtain ⟨B, K, hB, hK, hg⟩ := hG
   refine ⟨C + B, A + K, add_pos hC hB, add_pos hA hK, fun x => ?_⟩
-  have ha := Real.rpow_le_rpow_of_exponent_le (hE x) (le_add_of_nonneg_right hK.le)
-  have hk := Real.rpow_le_rpow_of_exponent_le (hE x) (le_add_of_nonneg_left hA.le)
+  have ha : E x ^ A ≤ E x ^ (A + K) :=
+    Real.rpow_le_rpow_of_exponent_le (hE x) (le_add_of_nonneg_right hK.le)
+  have hk : E x ^ K ≤ E x ^ (A + K) :=
+    Real.rpow_le_rpow_of_exponent_le (hE x) (le_add_of_nonneg_left hA.le)
   calc
     _ ≤ C * E x ^ A + B * E x ^ K := add_le_add (hf x) (hg x)
     _ ≤ C * E x ^ (A + K) + B * E x ^ (A + K) :=
