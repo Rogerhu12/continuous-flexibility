@@ -30,7 +30,7 @@ private theorem n07a_twoJetProduct_bound {k A B C u v P Q R : ℝ}
       mul_le_mul_of_nonneg_left hpq (mul_nonneg (mul_nonneg hk hA) hB)
     _ = _ := by ring
 
-private theorem n07a_mixedDerivative_mul_fin {W : Set PolarPoint} (hW : IsOpen W)
+theorem n07a_mixedDerivative_mul_fin {W : Set PolarPoint} (hW : IsOpen W)
     {f g : PolarPoint → ℝ} (hf : ContDiffOn ℝ ∞ f W) (hg : ContDiffOn ℝ ∞ g W)
     (i j : ℕ) {x : PolarPoint} (hx : x ∈ W) :
     mixedDerivative i j (fun y => f y * g y) x =
