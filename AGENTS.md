@@ -1,34 +1,47 @@
-# ContinuousFlexibility collaboration
+# ContinuousFlexibility
 
-The target is the complete theorem in `paper/flexible-surface-rewrite/01-introduction.tex`,
-not a conditional local theorem. Read `blueprint/README.md`, the relevant nodes in
-`blueprint/manifest.json`, and `coordination/assignments.json` before choosing work.
+Lean 4 formalization of `thm:main` of the 62-page manuscript in
+`paper/flexible-surface-rewrite/` (statement: `01-introduction.tex`, lines 18–31).
+The endpoint is the unconditional theorem, with zero `sorry` and only the axioms
+`propext`, `Classical.choice`, `Quot.sound`.
 
-Use Lean `leanprover/lean4:v4.35.0-rc3` with the locked mathlib revision. Do not
-change the toolchain, dependency locks, or manuscript. The integration chat owns
-public contracts, root imports, `AxiomAudit.lean`, blueprint generation, and final
-completion claims. Other workers edit only their assigned files. Reconcile
-`coordination/active-workers.json` before binding another chat to the same scope.
+## Where things are
 
-Existing compiled declarations are shared interfaces. Coordinate a proposed
-change with integration before editing another worker's file. Shared-filesystem
-workers deliver stable files; remote workers deliver complete files or patches.
-Include exact theorem statements, manuscript correspondence, actual build output,
-new imports, and remaining obligations in every handoff.
+- `src/ContinuousFlexibility/` — Lean sources. `src/ContinuousFlexibility.lean` imports every finished module.
+- `src/ContinuousFlexibility/Blueprint/` — the blueprint: one intermediate statement per file and the assembly theorem.
+- `docs/STATUS.md` — the only progress ledger. `docs/tasks/` — one task file per open statement.
+- `docs/archive/` — records of the earlier workflow; read-only history.
+- `paper/` — manuscript. `vendor/` — third-party code, if any.
 
-All mathematical proofs, including private helpers, must pass Lean without
-`sorry`, `admit`, project axioms, `native_decide`, or `unsafe`. Use `ContDiff ℝ ∞`
-for smoothness; the top order in `ℕ∞ω` means analytic. `PolarPoint = ℝ × ℝ` has
-the max norm, so Euclidean metric identities use explicit coordinate pairings.
-Do not assume a global real primitive of the polar connection on an annulus.
+## How work is divided
 
-Run `lake build <module>` for owned modules. Integration adds every project module
-to `ContinuousFlexibility.lean`, runs `lake build` with the owner-based axiom audit,
-and updates/validates blueprint evidence. A passing blueprint or helper module
-does not prove the final theorem or the existence of an input structure.
+- One blueprint statement is one line of work with its own files. Nobody needs approval to edit their own files.
+- A task file states the problem, the completion standard and the source. Nothing else.
+- A statement is finished when its `sorry` is replaced by a proof of the same statement, the module is in the root import, and CI is green. A weaker, relative or conditional version does not finish it.
+- If a frozen statement turns out false or unusable, say so in `docs/STATUS.md` and fix the statement together with the assembly theorem.
 
-Use `LEAN_NUM_THREADS=4` for build processes in this shared Windows workspace.
-Coordinate missing-dependency builds so that one worker owns each closure.
-Track each running command by its owner's tool session through its terminal
-exit status. Process inventories and unknown session IDs from another worker's
-sandbox do not establish whether that owner's build has finished.
+## Rules
+
+- `sorry` is allowed only in `src/ContinuousFlexibility/Blueprint/` statement files. The assembly theorem and every other module have none.
+- No project axioms, `native_decide` or `unsafe`.
+- Toolchain `leanprover/lean4:v4.35.0-rc3` and the mathlib revision in `lake-manifest.json` are fixed.
+- Do not raise heartbeat limits. Find the slow declaration and fix it.
+- Symmetric cases (left/right, the two endpoints) are one general lemma, not two copies. One object has one representation.
+- A task expected to exceed 10,000 lines gets its own sub-blueprint first.
+
+## Reporting
+
+- Report "modules compiled / total" and "statements open". Never report `sorry` counts or "only N blockers left".
+- Check an estimate against data before stating it. A task at twice its estimated size is reported at once.
+
+## Lean conventions
+
+- Smoothness is `ContDiff ℝ ∞`; the top order in `ℕ∞ω` means analytic.
+- `PolarPoint = ℝ × ℝ` has the max norm; Euclidean identities use explicit coordinate pairings.
+- Do not assume a global real primitive of the polar connection on an annulus.
+- Write explicit types on definitions. In module files use `_apply` lemmas for mathlib definitions, not `rfl`, `simp` or `change` through them.
+
+## Building locally
+
+- One importing module can take 3–4 GB. Check for running `lean` processes first and build single targets: `LEAN_NUM_THREADS=4 lake build <module>`.
+- To check one file without writing artifacts: `lake env lean <file>`.
