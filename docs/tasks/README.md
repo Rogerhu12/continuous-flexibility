@@ -96,8 +96,9 @@ Do not spend time fighting the sandbox. If a compile runs out of memory, is kill
 than a few minutes for one file, stop compiling locally: write the code, push, and read the result
 of CI. That loop always works.
 
-- CI builds everything on every push to a `line/**` branch and on every pull request, prints the
-  blueprint status, and takes about 5 minutes with the cache. A newer push cancels the older run.
+- CI builds everything once per push to a `line/**` branch (your pull request shows the checks of
+  its head commit) and prints the blueprint status. Each branch keeps its own build cache, so a run
+  takes about 2 minutes plus the time to compile what you changed. A newer push cancels the older run.
 - See the CI result of your pull request (this uses GraphQL, which does not spend the REST quota
   below):
 
