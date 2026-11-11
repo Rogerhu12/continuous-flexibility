@@ -2,6 +2,57 @@
 
 Last updated: 2026-11-11.
 
+## Active line: N04Coordinates
+
+The branch `line/N04Coordinates` and [PR #18](https://github.com/Rogerhu12/continuous-flexibility/pull/18)
+retain the exact frozen theorem `N04bStatement → N04cStatement`. This statement is still open.
+
+The source-pairing conjunct is proved by `Analysis.canonicalSource_pairing_of_partA`.
+Reflection, angular equivariance, and the inverse identities identify the fundamental
+open strip; a genuine Jacobian change of variables and null boundary lines then give
+the required half-open-period integral. Its local axiom audit reports exactly
+`propext`, `Classical.choice`, and `Quot.sound`.
+
+The analytic division lemmas use the actual Taylor remainder, rather than an
+assumed quotient estimate. `CanonicalCubicPointwise` proves the formula for every
+derivative and the bound `M / 6` on any closed nonnegative interval, with a fixed
+loss of three derivatives. `CanonicalCubicMixed` differentiates the scaled
+integral in both cylinder variables; `CanonicalCubicJets` applies that formula
+to the radial quotient. All three vanishing boundary jets are explicit
+hypotheses. The operator identity also determines the potential by testing the
+constant function, and the positive-piece factorization uniquely determines
+the divided coefficients in the open piece.
+
+The additional proof modules isolate the remaining uniform jet estimate without
+adding it to `N04bStatement`. `N04PartA` and `N04PartB` were moved verbatim to
+`Blueprint/CanonicalParts.lean` and reexported by `Blueprint/Statements.lean`;
+their content and the assembly theorem are unchanged. Normalization sets only
+unused negative-piece divided coefficients and off-sector fields to zero.
+
+The still-unproved clause is the bound on all mixed derivatives of the potential
+and the three divided coefficients, on one neighborhood and with one fixed loss:
+
+```lean
+∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ z ∈ U, ∀ m p,
+  p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →
+    |mixedDerivative a b (K.potential z m) p| +
+    |mixedDerivative a b (K.dividedDifference z m).a p| +
+    |mixedDerivative a b (K.dividedDifference z m).b p| +
+    |mixedDerivative a b (K.dividedDifference z m).c p| ≤
+      B * T.E0 (T.sample (K.cell m)) ^ B *
+        (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)
+```
+
+This cannot simply be extracted for an arbitrary qualitative witness. On a
+negative piece the divided coefficient may be replaced by the unbounded angular
+coordinate while preserving both qualitative parts. More substantially, the
+positive-piece relation `F = d^3 * e` is asserted only where `d > 0`; any numerator
+has that factorization there, so the relation does not assert the three vanishing
+endpoint jets needed by cubic division. The paper obtains them from its actual
+boundary-polynomial construction. A proof of the existential node must construct
+quantitatively controlled coordinates and establish those endpoint identities.
+The arbitrary-witness counterexample does **not** refute that existential node.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.

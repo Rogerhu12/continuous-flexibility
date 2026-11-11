@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Analysis
 open Set
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 
+set_option backward.isDefEq.respectTransparency false
+
 private def angularCanonicalCoefficients : SymmetricCoefficients where
   a := fun p => p.2
   b := fun _ => 0

@@ -136,8 +136,8 @@ theorem n04PartA_normalizedCanonicalData {D : ReferenceData} {S : PhysicalSpaces
     (h : N04PartA D S C K base ε) :
     N04PartA D S C (normalizedCanonicalData S K) base ε := h
 
-/-- The canonical identities use exactly the coefficients retained by normalization. -/
 set_option backward.isDefEq.respectTransparency false in
+/-- The canonical identities use exactly the coefficients retained by normalization. -/
 theorem n04PartB_normalizedCanonicalData {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
     {base : ℕ} {ε : ℝ} (h : N04PartB S C L K base ε) :
@@ -158,9 +158,9 @@ private theorem mixedDerivative_zero (a b : ℕ) (p : PolarPoint) :
     mixedDerivative a b (fun _ => 0) p = 0 := by
   simp only [mixedDerivative, iteratedDeriv_fun_const_zero]
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The sector estimate gives the exact frozen estimate after normalization.
 There is no change in the constants or in the derivative loss. -/
-set_option backward.isDefEq.respectTransparency false in
 theorem canonicalJetBounds_normalized_of_sector {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
     (hE : ∀ m, 0 ≤ T.E0 (T.sample (K.cell m)))
