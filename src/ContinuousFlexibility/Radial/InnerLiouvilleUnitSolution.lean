@@ -106,7 +106,7 @@ theorem innerLiouvilleLocalizedUnit_representative (i : Fin 2) :
     rw [(hformula (bufferCut B k) hk).eq_of_nhds, (M.column i).trace k]
     by_cases hik : i = k
     · subst k
-      simp only [innerEndpointValues, if_pos rfl, mul_one]
+      simp only [innerEndpointValues, ite_true, mul_one]
       exact div_self (hp (bufferCut B i) hk).2.2.ne'
     · simp only [innerEndpointValues, if_neg hik, mul_zero, zero_div]
 
@@ -151,8 +151,8 @@ theorem innerLiouvilleLocalizedUnit_gradient_solution (i : Fin 2) :
       (left_mem_Icc.mpr hB.1.le) (right_mem_Icc.mpr hB.1.le) hB.1
   have hends := innerRadialH1Pair_unit_domain_trace D hDw.continuous hrange
     (hp B.l (left_mem_Icc.mpr hB.1.le)).1 hcore hpos hreg i
-      (by simpa only [bufferCut, if_pos rfl] using htrace 0)
-      (by simpa only [bufferCut, show (1 : Fin 2) ≠ 0 by decide, if_false] using htrace 1)
+      (by simpa only [bufferCut, ite_true] using htrace 0)
+      (by simpa only [bufferCut, show (1 : Fin 2) ≠ 0 by decide, ite_false] using htrace 1)
       (Q := (c • f, c • d)) hvalue hgrad
   dsimp only
   rw [innerLiouvilleUnitPoissonPair_apply]
@@ -162,14 +162,13 @@ theorem innerLiouvilleLocalizedUnit_gradient_solution (i : Fin 2) :
       rcases hB with ⟨_, _, _, _, _, _, _, _, _, _, _, hb, _⟩
       exact hb
     have hrow := (M.column i).scalar_row
-    cases hb : B.bordered with
-    | false =>
-      simp only [hb, Bool.false_eq_true, ite_false] at hrow ⊢
-      rw [hrow, mul_zero]
-    | true =>
+    by_cases hb : B.bordered = true
+    ·
       simp only [hb, ite_true] at hrow ⊢
       rw [real_inner_smul_right, innerLiouvilleColumnLift_field_pairing D hB.1.le
         hlam hR hs hp hcore hw U hU hv B.border (M.column i).field hborder, hrow, mul_zero]
+    · simp only [hb, ite_false] at hrow ⊢
+      rw [hrow, mul_zero]
   · intro T hT
     have hV : Continuous B.potential := by
       rcases hB with ⟨_, _, _, _, hV, _⟩

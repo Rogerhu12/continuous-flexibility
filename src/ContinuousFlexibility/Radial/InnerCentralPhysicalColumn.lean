@@ -32,6 +32,7 @@ theorem continuous_centralAuxiliaryColumnFunction {height : ℝ} (hh : 0 < heigh
       fun h => hr (centralAuxiliaryFunction_tsupport_positive h)
     have hz : centralAuxiliaryColumnFunction height =ᶠ[𝓝 r] (fun _ => 0) := by
       filter_upwards [notMem_tsupport_iff_eventuallyEq.mp hout] with y hy
+      simp only [Pi.zero_apply] at hy
       simp only [centralAuxiliaryColumnFunction, hy, mul_zero, zero_div]
     exact continuousAt_const.congr_of_eventuallyEq hz
 
@@ -114,8 +115,8 @@ theorem innerCentralPhysicalTemporaryColumn_ae :
 include hh hX hcore hw in
 theorem innerCentralAuxiliaryColumnFunction_memLp_actual :
     MemLp (centralAuxiliaryColumnFunction height) 2 (radialHilbertMeasure D) :=
-  (Lp.memLp (innerCentralPhysicalTemporaryColumn D hh hX hcore hw)).congr
-    (innerCentralPhysicalTemporaryColumn_ae D hh hX hcore hw)
+  (memLp_congr_ae (innerCentralPhysicalTemporaryColumn_ae D hh hX hcore hw)).mp
+    (Lp.memLp (innerCentralPhysicalTemporaryColumn D hh hX hcore hw))
 
 end ActualMeasure
 

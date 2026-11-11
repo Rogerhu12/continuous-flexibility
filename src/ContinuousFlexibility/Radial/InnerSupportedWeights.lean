@@ -61,8 +61,9 @@ def innerSupportedWeightMultiplier (W : α → ℝ) (hW : Measurable W)
     (W : α → ℝ) (hW : Measurable W) (C : ℝ) (hWC : ∀ x, |W x| ≤ C) (F : H) :
     (innerSupportedWeightMultiplier μ s hs bordered W hW C hWC F).val =
       innerBorderFieldMap μ (innerWeightMultiplier μ W hW C hWC) F.val := by
-  simp only [innerSupportedWeightMultiplier, ContinuousLinearMap.coe_codRestrict_apply,
-    ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply]
+  unfold innerSupportedWeightMultiplier
+  exact (ContinuousLinearMap.coe_codRestrict_apply _ _ _ F).trans
+    (by rw [ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply])
 
 theorem innerSupportedWeightMultiplier_field_ae
     (W : α → ℝ) (hW : Measurable W) (C : ℝ) (hWC : ∀ x, |W x| ≤ C) (F : H) :
@@ -103,7 +104,8 @@ theorem norm_innerSupportedCoefficientLoss_le_one
 theorem innerSupportedWeightMultiplier_selfAdjoint
     (W : α → ℝ) (hW : Measurable W) (C : ℝ) (hWC : ∀ x, |W x| ≤ C) :
     IsSelfAdjoint (innerSupportedWeightMultiplier μ s hs bordered W hW C hWC) := by
-  apply innerIsometricRestriction_selfAdjoint (S).toSubmodule.subtypeₗᵢ
+  apply innerIsometricRestriction_selfAdjoint (H := H) (E := InnerBorderL2 μ)
+    (S).toSubmodule.subtypeₗᵢ
     (innerSupportedWeightMultiplier μ s hs bordered W hW C hWC)
     (innerBorderFieldMap μ (innerWeightMultiplier μ W hW C hWC))
   · intro F

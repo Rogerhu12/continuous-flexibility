@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.InnerRadialActualAssembly
+import ContinuousFlexibility.Radial.InnerRadialGapDirichletBound
 import ContinuousFlexibility.Radial.InnerSupportedWeights
 import ContinuousFlexibility.Radial.InnerCoefficientCosts
 
@@ -18,39 +19,6 @@ namespace ContinuousFlexibility.Radial
 
 open Real Set MeasureTheory ContinuousFlexibility.Statements
 open scoped ContDiff InnerProductSpace
-
-theorem innerBorderL2_zero_scalar_norm {α : Type*} [MeasurableSpace α]
-    (μ : Measure α) (f : Lp ℝ 2 μ) :
-    ‖(WithLp.toLp 2 (f, (0 : ℝ)) : InnerBorderL2 μ)‖ = ‖f‖ := by
-  have hs : ‖(WithLp.toLp 2 (f, (0 : ℝ)) : InnerBorderL2 μ)‖ ^ 2 = ‖f‖ ^ 2 := by
-    rw [innerBorderL2_norm_sq, zero_pow (by decide), add_zero]
-  nlinarith only [hs, norm_nonneg (WithLp.toLp 2 (f, (0 : ℝ)) : InnerBorderL2 μ),
-    norm_nonneg f]
-
-namespace InnerRadialGapChart
-
-variable {D : ReferenceData} {n : ℕ} {G : InnerRadialChainGeometry D n}
-  {j : ℝ} {central piece : Fin (n + 1)} (A : InnerRadialGapChart D G j central piece)
-
-/-- Zero scalar inclusion has no norm cost: the actual positive-gap
-inverse retains its coercive bound in the full physical Hilbert space. -/
-theorem dirichlet_norm_le (hw : ContDiff ℝ ∞ D.w) :
-    ‖A.dirichlet hw‖ ≤ 12 / (A.slope * j ^ 2) := by
-  have hK : 0 ≤ 12 / (A.slope * j ^ 2) :=
-    div_nonneg (by norm_num) (mul_nonneg A.slope_pos.le (sq_nonneg j))
-  have hfield : ‖A.fieldDirichlet hw‖ ≤ 12 / (A.slope * j ^ 2) :=
-    innerGapDirichletInverse_norm_le D hw (G.left_lt_right piece).le (G.left_pos piece)
-      A.frequency_pos A.slope_pos (G.in_core piece) (G.weight_pos piece) A.slope_lower
-  apply ContinuousLinearMap.opNorm_le_bound _ hK
-  intro F
-  rw [A.dirichlet_apply, innerBorderL2_zero_scalar_norm]
-  calc
-    ‖A.fieldDirichlet hw F.fst‖ ≤ ‖A.fieldDirichlet hw‖ * ‖F.fst‖ :=
-      (A.fieldDirichlet hw).le_opNorm _
-    _ ≤ (12 / (A.slope * j ^ 2)) * ‖F‖ :=
-      mul_le_mul hfield (WithLp.norm_fst_le (RadialModeL2 D) F) (norm_nonneg _) hK
-
-end InnerRadialGapChart
 
 def innerRadialSupportedMultiplier (D : ReferenceData) {n : ℕ}
     (G : InnerRadialChainGeometry D n) (bordered : Bool)

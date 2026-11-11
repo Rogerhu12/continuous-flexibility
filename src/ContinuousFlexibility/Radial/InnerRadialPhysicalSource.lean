@@ -107,7 +107,7 @@ local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
 local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
 local notation "W" =>
-  ↥(innerRadialBrokenSpace D hw G forcing rowSource bordered j central column)
+  InnerRadialDomain D hw G forcing rowSource bordered j central column
 
 /-- Sum the actual value fields and retain the single central scalar. -/
 def innerRadialBrokenPhysicalCoordinates :

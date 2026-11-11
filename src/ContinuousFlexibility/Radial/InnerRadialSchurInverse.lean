@@ -31,7 +31,7 @@ variable (D : ReferenceData) (hw : Continuous D.w) {n : ℕ}
 
 local notation "B" => EuclideanSpace ℝ (Fin n)
 local notation "W" =>
-  ↥(innerRadialBrokenSpace D hw G forcing rowSource bordered j central column)
+  InnerRadialDomain D hw G forcing rowSource bordered j central column
 local notation "Src" =>
   innerRadialDomainSource D hw G forcing rowSource bordered j central column
 local notation "Tr" =>

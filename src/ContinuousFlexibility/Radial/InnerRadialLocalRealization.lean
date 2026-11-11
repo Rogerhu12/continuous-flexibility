@@ -31,9 +31,13 @@ variable (D : ReferenceData) (hw : Continuous D.w) {n : ℕ}
   (rowSource : H →ₗ[ℝ] ℝ) (bordered : Bool) (j : ℝ)
   (central : Fin (n + 1)) (column : RadialModeL2 D)
 
+/-- The actual broken weak domain, with its inherited linear structure. -/
+abbrev InnerRadialDomain :=
+  ↥(innerRadialBrokenSpace D hw G forcing rowSource bordered j central column)
+
 local notation "B" => EuclideanSpace ℝ (Fin n)
 local notation "W" =>
-  ↥(innerRadialBrokenSpace D hw G forcing rowSource bordered j central column)
+  InnerRadialDomain D hw G forcing rowSource bordered j central column
 
 /-- A true local solution on one actual piece. These are the clauses
 proved by the local retained-cell and positive-gap realizations. -/

@@ -46,7 +46,7 @@ theorem innerFlattenModelCuts_strictMono {m : ℕ} {M : Fin m → Fin 2 → ℝ}
   by_cases heq : a.val / 2 = b.val / 2
   · have ha : a.val % 2 = 0 := by omega
     have hb : b.val % 2 = 1 := by omega
-    simpa only [innerFlattenModelCuts, heq, ha, hb] using
+    simpa only [innerFlattenModelCuts, heq, ha, hb] using!
       hmodel ⟨b.val / 2, by omega⟩
   · have hlt : a.val / 2 < b.val / 2 := lt_of_le_of_ne hle heq
     exact (innerModelCut_le_right hmodel _ _).trans_lt

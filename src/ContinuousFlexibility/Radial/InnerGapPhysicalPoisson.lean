@@ -116,8 +116,7 @@ theorem innerGapPoissonH1_weakResidual (D : ReferenceData)
   have hzero : ⟪r.2, P.2⟫_ℝ + ⟪M r.1, M P.1⟫_ℝ = 0 := by
     simpa only [innerGapPotentialLift_apply, WithLp.toLp_snd, WithLp.prod_inner_apply,
       WithLp.ofLp_fst, WithLp.ofLp_snd, WithLp.toLp_fst] using he
-  dsimp only [innerRadialWeakResidual]
-  rw [innerGapPotentialMultiplier_square_inner]
+  rw [innerRadialWeakResidual_apply, innerGapPotentialMultiplier_square_inner]
   simp only [zero_mul, add_zero, inner_zero_left, sub_zero]
   exact (congrArg₂ (· + ·) (real_inner_comm P.2 r.2)
     (real_inner_comm (M P.1) (M r.1))).trans hzero
@@ -137,7 +136,7 @@ theorem innerGapWeakResidual_poissonUnit (D : ReferenceData)
       (innerGapPoissonH1Unit D hw.continuous ha hcore hpos p hp i) =
         innerGapWeakFlux D hw ha hcore hpos j p hp q F i := by
   rw [innerGapWeakFlux_apply, innerGapPoissonH1Unit_energy]
-  simp only [innerRadialWeakResidual, zero_mul, add_zero, WithLp.prod_inner_apply,
+  simp only [innerRadialWeakResidual_apply, zero_mul, add_zero, WithLp.prod_inner_apply,
     WithLp.ofLp_fst, WithLp.ofLp_snd, WithLp.toLp_fst, WithLp.toLp_snd,
     hpotential, innerGapPotentialMultiplier_square_inner, innerGapPoissonH1Unit]
 

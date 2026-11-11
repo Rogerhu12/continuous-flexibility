@@ -174,7 +174,7 @@ theorem innerMorseChain_cap_logSlope {T : MorseChainData} {σ : ℕ → ℝ}
     (hlt.trans hgt) (h.radius_smooth side m hm) h.geometry.2.2.1.1
     hlam hRp.ne' hvp.ne' (h.profile_eq side m hm) (h.equation side m hm x hxwhole) hxwhole
   unfold innerMorseTailSlope
-  apply (mul_le_mul_right (sq_pos_of_pos (div_pos hvp hRp))).mp
+  apply (mul_le_mul_iff_of_pos_right (sq_pos_of_pos (div_pos hvp hRp))).mp
   rw [hid]
   nlinarith only [hquad]
 
