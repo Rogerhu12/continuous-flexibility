@@ -12,6 +12,8 @@ germ comparison.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set Filter
@@ -82,8 +84,12 @@ theorem n04b_through03_determinant_eq_zero
   have hprofile := hN.2.2.2.2.2.2.2.2.2.2.1 z hz p.1 hp.1 hroot
   have hd : deriv (stateProfile D S C z.1) p.1 = 0 := by
     rw [hprofile.deriv_eq, hroot]
-  rw [(n04b_through03_determinant_germ h03 hz hs hp hroot).self_of_nhds,
-    n04b_original_determinant_eq hT hS hN hz hs hp, hd]
+  have heq : (L.coefficients z).a p * (L.coefficients z).c p -
+      (L.coefficients z).b p ^ 2 =
+        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p -
+          (originalCoefficients D S C z).b p ^ 2 :=
+    (n04b_through03_determinant_germ h03 hz hs hp hroot).self_of_nhds
+  rw [heq, n04b_original_determinant_eq hT hS hN hz hs hp, hd]
   simp only [mul_zero, zero_div]
 
 /-- The two actual characteristic speeds have the same drift value at

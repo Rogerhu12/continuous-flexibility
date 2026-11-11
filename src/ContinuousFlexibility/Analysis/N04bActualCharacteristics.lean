@@ -13,6 +13,8 @@ consequence, rather than an independent assumption.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set
@@ -78,11 +80,16 @@ theorem n04b_characteristic_periodic
       Function.Periodic (fun θ => n04bCharacteristicHalfGap A (r, θ)) P := by
   constructor
   · intro θ
+    have ha' : A.a (r, θ + P) = A.a (r, θ) := ha θ
+    have hb' : A.b (r, θ + P) = A.b (r, θ) := hb θ
     dsimp only [n04bCharacteristicDrift]
-    rw [ha θ, hb θ]
+    rw [ha', hb']
   · intro θ
+    have ha' : A.a (r, θ + P) = A.a (r, θ) := ha θ
+    have hb' : A.b (r, θ + P) = A.b (r, θ) := hb θ
+    have hc' : A.c (r, θ + P) = A.c (r, θ) := hc θ
     dsimp only [n04bCharacteristicHalfGap]
-    rw [ha θ, hb θ, hc θ]
+    rw [ha', hb', hc']
 
 theorem n04b_characteristic_reflection
     (A : SymmetricCoefficients) (r θ : ℝ)

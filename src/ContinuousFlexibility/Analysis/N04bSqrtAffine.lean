@@ -11,6 +11,8 @@ one-sided derivative is one. An invertible affine change of parameter
 gives the same obstruction at every nonconstant affine zero.
 -/
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set
@@ -18,12 +20,18 @@ open Set
 theorem n04b_sqrt_not_differentiableAt_zero :
     ¬ DifferentiableAt ℝ Real.sqrt (0 : ℝ) := by
   intro h
+  have hsqrt : HasDerivAt Real.sqrt (deriv Real.sqrt (0 : ℝ)) (0 : ℝ) :=
+    h.hasDerivAt
+  have hproduct : HasDerivAt (fun t : ℝ => Real.sqrt t * Real.sqrt t)
+      (deriv Real.sqrt (0 : ℝ) * Real.sqrt 0 +
+        Real.sqrt 0 * deriv Real.sqrt (0 : ℝ)) (0 : ℝ) := by
+    simpa only [Pi.mul_apply] using (HasDerivAt.mul hsqrt hsqrt)
   have hsquare : HasDerivAt (fun t : ℝ => Real.sqrt t * Real.sqrt t) 0 0 := by
-    simpa only [Real.sqrt_zero, mul_zero, zero_mul, add_zero] using
-      h.hasDerivAt.mul h.hasDerivAt
+    simpa only [Real.sqrt_zero, mul_zero, zero_mul, add_zero] using hproduct
   have hid : HasDerivWithinAt (fun t : ℝ => t) 0 (Ici (0 : ℝ)) 0 :=
     hsquare.hasDerivWithinAt.congr_of_mem
-      (fun t ht => by rw [← pow_two, Real.sq_sqrt ht]) le_rfl
+      (fun t ht => by rw [← pow_two, Real.sq_sqrt ht])
+      (show (0 : ℝ) ∈ Ici (0 : ℝ) from le_rfl)
   have hzero : derivWithin (fun t : ℝ => t) (Ici (0 : ℝ)) 0 = 0 :=
     hid.derivWithin (uniqueDiffWithinAt_Ici (0 : ℝ))
   have hone : derivWithin (fun t : ℝ => t) (Ici (0 : ℝ)) 0 = 1 :=
@@ -35,9 +43,14 @@ theorem n04b_sqrt_affine_not_differentiableAt_zero
     {a b t₀ : ℝ} (hzero : a + b * t₀ = 0) (hb : b ≠ 0) :
     ¬ DifferentiableAt ℝ (fun t : ℝ => Real.sqrt (a + b * t)) t₀ := by
   intro h
+  have hconst : HasDerivAt (fun _ : ℝ => t₀) (0 : ℝ) (0 : ℝ) :=
+    hasDerivAt_const (0 : ℝ) t₀
+  have hlinear : HasDerivAt (fun u : ℝ => b⁻¹ * u) b⁻¹ (0 : ℝ) :=
+    hasDerivAt_const_mul b⁻¹
+  have hparameterDeriv : HasDerivAt (fun u : ℝ => t₀ + b⁻¹ * u) b⁻¹ (0 : ℝ) := by
+    simpa only [Pi.add_apply, zero_add] using (HasDerivAt.add hconst hlinear)
   have hparameter : DifferentiableAt ℝ (fun u : ℝ => t₀ + b⁻¹ * u) (0 : ℝ) :=
-    ((hasDerivAt_const (0 : ℝ) t₀).add
-      ((hasDerivAt_id (0 : ℝ)).const_mul b⁻¹)).differentiableAt
+    hparameterDeriv.differentiableAt
   have houter : DifferentiableAt ℝ (fun t : ℝ => Real.sqrt (a + b * t))
       (t₀ + b⁻¹ * 0) := by
     simpa only [mul_zero, add_zero] using h
