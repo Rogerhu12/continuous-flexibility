@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.TameInverseBounds
 import ContinuousFlexibility.Analysis.TameJetLocalBounds
+import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Hamilton's smooth tame inverse-family theorem

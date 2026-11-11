@@ -116,7 +116,8 @@ theorem hasProjectiveLineDerivAt_inverseForwardJet
     (Fin.snoc (fun i => (v i, 0)) (0, y)) (h, 0)
   have hi : Fin.cons (h, (0 : Y)) (Fin.snoc (fun i => (v i, 0)) (0, y)) =
       Fin.snoc (α := fun _ : Fin (n + 2) => X × Y)
-        (fun i => (Fin.cons h v i, (0 : Y))) ((0 : X), y) := by
+        (fun i => (Fin.cons (α := fun _ : Fin (n + 1) => X) h v i, (0 : Y)))
+        ((0 : X), y) := by
     rw [Fin.cons_snoc_eq_snoc_cons]
     congr 1
     funext i
@@ -139,7 +140,7 @@ theorem continuousOn_inverseForwardJet
     intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
     · simpa only [Fin.snoc_last] using continuous_const.prodMk continuous_snd.snd
-    · simpa only [Fin.snoc_castSucc] using
+    · simpa only [Fin.snoc_castSucc, Function.comp_def] using
         (((continuous_apply j).comp continuous_snd.fst).prodMk continuous_const)
   exact (J.continuous (n + 1)).comp
     (((continuous_fst.prodMk continuous_const).prodMk hinput).continuousOn)
@@ -263,12 +264,12 @@ theorem TameInverseExpression.eval_diff
     (z : X × Z) (a : A') :
     (e.diff g h).eval J V z a = e.differential J V z (g a) (h a) := by
   induction e with
-  | zero => simp only [diff, eval, differential, ContinuousLinearMap.zero_apply]
+  | zero => simp only [diff, eval, differential, zero_apply]
   | source => simp only [diff, eval, differential, ContinuousLinearMap.comp_apply,
       ContinuousLinearMap.coe_snd', ContinuousLinearMap.inr_apply]
-  | linearSource c => simp only [diff, eval, differential, ContinuousLinearMap.zero_apply]
-  | add e f he hf => simp only [diff, eval, differential, ContinuousLinearMap.add_apply, he, hf]
-  | neg e he => simp only [diff, eval, differential, ContinuousLinearMap.neg_apply, he]
+  | linearSource c => simp only [diff, eval, differential, zero_apply]
+  | add e f he hf => simp only [diff, eval, differential, add_apply, he, hf]
+  | neg e he => simp only [diff, eval, differential, neg_apply, he]
   | inverse e he =>
       have hdir : (fun _ : Fin 1 => (h a).1) = Fin.cons (h a).1 Fin.elim0 := by
         funext i
@@ -277,14 +278,16 @@ theorem TameInverseExpression.eval_diff
       simp only [diff, eval, differential, eval_reparam, he,
         ContinuousLinearMap.comp_apply, ContinuousLinearMap.inl_apply,
         ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
-        ContinuousLinearMap.sub_apply, inverseForwardJetHead_apply, map_sub,
+        sub_apply, inverseForwardJetHead_apply, map_sub,
         ← sub_eq_add_neg, Prod.mk_sub_mk, sub_self, hdir]
   | forward n v e he =>
       have hdirs :
           (fun i : Fin (n + 1) =>
-            Fin.cons ((ContinuousLinearMap.fst ℝ X Z).comp h)
+            Fin.cons (α := fun _ : Fin (n + 1) => A' →L[ℝ] X)
+              ((ContinuousLinearMap.fst ℝ X Z).comp h)
               (fun j => (v j).comp g) i a) =
-            Fin.cons (h a).1 (fun j => v j (g a)) := by
+            Fin.cons (α := fun _ : Fin (n + 1) => X)
+              (h a).1 (fun j => v j (g a)) := by
         funext i
         refine Fin.cases ?_ (fun j => ?_) i <;>
           simp only [Fin.cons_zero, Fin.cons_succ, ContinuousLinearMap.comp_apply,
@@ -292,7 +295,7 @@ theorem TameInverseExpression.eval_diff
       simp only [diff, eval, differential, eval_reparam, he,
         ContinuousLinearMap.comp_apply, ContinuousLinearMap.inr_apply,
         ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
-        ContinuousLinearMap.add_apply, inverseForwardJetHead_apply,
+        add_apply, inverseForwardJetHead_apply,
         inverseForwardJetLinear_apply, Prod.mk_add_mk, zero_add, hdirs]
 
 /-- Continuity of every expression is joint in the base and all old
@@ -431,7 +434,7 @@ theorem TameInverseExpression.hasLineDerivAt_eval
   | linearSource c => exact hasProjectiveLineDerivAt_const (c a) z h
   | add e f he hf => exact he.add hf
   | neg e he =>
-      simpa only [neg_one_smul, eval, differential, ContinuousLinearMap.neg_apply] using
+      simpa only [neg_one_smul, eval, differential, neg_apply] using
         he.const_smul (-1)
   | inverse e he =>
       let y : ℝ → Z := fun t => (e.eval J V (z + t • h) a).2
@@ -462,7 +465,7 @@ theorem TameInverseExpression.hasLineDerivAt_eval
       simpa only [HasProjectiveLineDerivAt, eval, differential,
         ContinuousLinearMap.comp_apply, ContinuousLinearMap.inl_apply,
         ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
-        ContinuousLinearMap.sub_apply, ContinuousLinearMap.coe_coe,
+        sub_apply, ContinuousLinearMap.coe_coe,
         inverseForwardJetHead_apply, zero_smul, add_zero,
         Prod.smul_mk, Prod.smul_fst, Prod.smul_snd,
         Prod.fst_add, Prod.snd_add, y, u] using hprod
@@ -476,7 +479,7 @@ theorem TameInverseExpression.hasLineDerivAt_eval
       simpa only [HasProjectiveLineDerivAt, eval, differential,
         ContinuousLinearMap.comp_apply, ContinuousLinearMap.inr_apply,
         ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
-        ContinuousLinearMap.add_apply, inverseForwardJetHead_apply,
+        add_apply, inverseForwardJetHead_apply,
         inverseForwardJetLinear_apply, zero_smul, add_zero,
         Prod.smul_mk, Prod.smul_fst, Prod.smul_snd,
         Prod.fst_add, Prod.snd_add] using hprod

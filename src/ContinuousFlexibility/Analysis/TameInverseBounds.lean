@@ -221,7 +221,8 @@ theorem TameInverseExpression.locallyTameOn_eval
         (locallyTameOn_of_isTameLinear (v i) (he.1 i) univ).comp haux
           (fun _ _ => mem_univ _)
       have hinput (i : Fin (n + 1)) : LocallyTameOn d (pairGrading p q) S
-          (fun z => Fin.snoc (fun j => (v j z.2, (0 : Y)))
+          (fun z => Fin.snoc (α := fun _ : Fin (n + 1) => X × Y)
+            (fun j => (v j z.2, (0 : Y)))
             ((0 : X), (e.eval J V z.1 z.2).1) i) := by
         refine Fin.lastCases ?_ (fun j => ?_) i
         · simpa only [Fin.snoc_last] using
