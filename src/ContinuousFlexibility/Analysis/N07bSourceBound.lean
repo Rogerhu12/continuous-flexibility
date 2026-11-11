@@ -20,7 +20,7 @@ open Set Filter MeasureTheory
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff BigOperators ENNReal
 
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 /-- The exact geometric condition used by the analytic source estimate.
 The constants are chosen before the state, piece, path, and source. This
@@ -81,6 +81,29 @@ private theorem norm_le_sqrt_mul_of_square_bound
     _ = (Real.sqrt A * Q * q) ^ 2 := by
       rw [mul_pow, mul_pow, Real.sq_sqrt hA]
 
+/-- All polynomial arithmetic for the coefficient comparison is performed on
+real numbers before substituting the state-dependent expressions. -/
+private theorem source_coefficient_real_bound
+    (B CA E M Q v : ℝ) (hB : 0 ≤ B) (hCA : 0 ≤ CA)
+    (hM : 1 ≤ M) (hE : E ≤ CA * M) (hv : v ≤ B * E * Q ^ 2) :
+    v ≤ ((B * CA) * Q ^ 2) * M ^ 2 := by
+  have hMM : M ≤ M ^ 2 := by
+    calc
+      M = M * 1 := (mul_one M).symm
+      _ ≤ M * M := mul_le_mul_of_nonneg_left hM (zero_le_one.trans hM)
+      _ = M ^ 2 := (pow_two M).symm
+  have hEM : E ≤ CA * M ^ 2 :=
+    hE.trans (mul_le_mul_of_nonneg_left hMM hCA)
+  calc
+    v ≤ B * E * Q ^ 2 := hv
+    _ ≤ B * (CA * M ^ 2) * Q ^ 2 :=
+      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hEM hB) (sq_nonneg Q)
+    _ = ((B * CA) * Q ^ 2) * M ^ 2 := by ring
+
+private theorem source_square_factors_reorder (A Q P R : ℝ) :
+    (A * Q ^ 2) * P * R ^ 2 = (A * P) * Q ^ 2 * R ^ 2 := by
+  ring
+
 private theorem sourceCoefficient_uniform_M_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {K : CanonicalData S}
@@ -101,17 +124,9 @@ private theorem sourceCoefficient_uniform_M_bound
   intro z hz hs m x hx j i
   have hxcore : x.1 ∈ Ioo D.a D.b := (hK.2.2.2.1 m).2.2 hx.1
   have hM : 1 ≤ T.M x.1 := (hT.2.1 x.1 hxcore).2.2.2
-  have hMM : T.M x.1 ≤ T.M x.1 ^ 2 := by nlinarith
-  have hEM : T.E0 x.1 ^ A ≤ CA * T.M x.1 ^ 2 :=
-    (hEA x.1 hxcore).trans (mul_le_mul_of_nonneg_left hMM hCA.le)
-  calc
-    _ ≤ B * T.E0 x.1 ^ A *
-        (1 + stateGrading S (b + loss) (z.1 - C.referenceState) + |z.2|) ^ 2 :=
-      hcoeff z hz hs m x hx j i
-    _ ≤ B * (CA * T.M x.1 ^ 2) *
-        (1 + stateGrading S (b + loss) (z.1 - C.referenceState) + |z.2|) ^ 2 :=
-      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hEM hB) (sq_nonneg _)
-    _ = _ := by ring
+  exact source_coefficient_real_bound B CA (T.E0 x.1 ^ A) (T.M x.1)
+    (1 + stateGrading S (b + loss) (z.1 - C.referenceState) + |z.2|) _
+    hB hCA.le hM (hEA x.1 hxcore) (hcoeff z hz hs m x hx j i)
 
 set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
@@ -143,11 +158,8 @@ private theorem sourceLift_uniform_square_bound
     (base := base) (ε := ε) (z := z) (A := A * Q ^ 2)
     hD hT hS hV hK hz hs f b hAQ (hcoeff z hz hs)
   refine ⟨F, hF.trans_eq ?_, hforget⟩
-  change (A * Q ^ 2) * n07bSourcePathConstant b *
-      physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val) ^ 2 =
-    (A * n07bSourcePathConstant b) * Q ^ 2 *
-      physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val) ^ 2
-  ring
+  exact source_square_factors_reorder A Q (n07bSourcePathConstant b)
+    (physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val))
 
 private theorem source_physicalNorm_le_grading
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

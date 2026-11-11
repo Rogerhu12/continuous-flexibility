@@ -145,7 +145,8 @@ theorem n07b_referenceGraph_of_material_decay {D : ReferenceData} {T : MaterialD
       radialPDE D.w (fun r θ => u (r, θ)) p.1 p.2 +
         μ * referenceColumn D p.1 * cosineMode 2 p.2) := by
     have hQ := (n07b_referenceGraph_column_continuous hgeom hborder).const_mul μ
-    simpa only [mul_assoc] using (n07b_c2_continuous_referencePDE hgeom hu).add hQ
+    simpa only [Pi.add_apply, mul_assoc] using
+      (n07b_c2_continuous_referencePDE hgeom hu).add hQ
   have hfcont : ContinuousOn f (annularOpen D) := by
     intro p hp
     have heq : f =ᶠ[𝓝 p] (fun q =>
