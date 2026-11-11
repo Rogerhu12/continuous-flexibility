@@ -40,6 +40,14 @@ private theorem n08_with_response_orders
   obtain ⟨b, l, hbl⟩ := h
   exact hP b l hbl
 
+private theorem n08_transport_response_bound
+    {X : Type*} (response : X → ℝ) {x y : X} {g h : ℝ}
+    (hxy : x = y) (hgh : g = h) (K n : ℝ)
+    (hb : response x ≤ K * (1 + g) * n) :
+    response y ≤ K * (1 + h) * n :=
+  (congrArg response hxy).symm.trans_le
+    (hb.trans_eq (congrArg (fun a : ℝ => K * (1 + a) * n) hgh))
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {G : ScalarInverseData S}
   {base loss : ℕ} {ε : ℝ}
@@ -104,9 +112,11 @@ theorem n08ControlInverseResponse_exists
     obtain ⟨K, hK, hKb⟩ := hcolumn s
     refine ⟨K, hK, fun z hz b => ?_⟩
     have h := hKb (liftSectorParameter S C z) (hmap hz) b
-    change S.sourceGrading s (n08SectorControlColumn S Hraw (liftSectorParameter S C z) b) ≤ _
-    rw [n08SectorControlColumn_lift hN.2.2.1]
-    simpa only [n08StateParameterGrading, n08_liftSectorParameter_difference] using h
+    have heval : Hraw (liftSectorParameter S C z) b = H (liftSectorParameter S C z) b :=
+      (congrArg (fun F : ControlBanach →L[ℝ] S.Source => F b)
+        (n08SectorControlColumn_lift hN.2.2.1 Hraw z)).symm
+    exact n08_transport_response_bound (S.sourceGrading s) heval
+      (n08_liftSectorParameter_difference S C (s + columnLoss) z) K ‖b‖ h
   have hmono := tamePairGrading_monotone (solve_sectorGrading_monotone S)
     weighted_realGrading_monotone
   have houtput : Monotone (pairGrading (heightPairGrading S) realGrading) :=
@@ -156,7 +166,11 @@ theorem n08ControlInverseResponse_exists
           pairGrading (heightPairGrading S) realGrading s (G.G z (H z b)) ≤
           K * (1 + n08StateParameterGrading S (s + responseLoss)
             (z - (C.referenceState, 0))) * ‖b‖ := by
-        simpa only [y, n08SectorParameterCenter_lift, n08SectorParameterCenter_grading] using hb
+        exact n08_transport_response_bound
+          (fun w : AnnularState S × ℝ => S.sourceGrading s (H w b) +
+            pairGrading (heightPairGrading S) realGrading s (G.G w (H w b)))
+          (n08SectorParameterCenter_lift hN.2.2.1 z hs)
+          (n08SectorParameterCenter_grading hN.2.2.1 (s + responseLoss) z hs) K ‖b‖ hb
       have hhigh := n08StateParameterGrading_monotone S
         (Nat.add_le_add_left (le_max_right loss responseLoss) s) (z - (C.referenceState, 0))
       have hfinal := hb'.trans (mul_le_mul_of_nonneg_right

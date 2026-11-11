@@ -51,8 +51,10 @@ theorem n08CircleDiagonal_zero_uniform
   have hysmall : (y, 0) ∈ stateNeighborhood S C b δ := by
     constructor
     · change stateGrading S b (n08CircleSingleState hS C m x - C.referenceState) < δ
-      rw [n08CircleSingleState_sub]
-      exact (n08CircleSingleStateDirection_grading_le hS m b _).trans_lt hxsmall.1
+      exact (congrArg (stateGrading S b)
+        (n08CircleSingleState_sub hS C m x)).trans_lt
+        ((n08CircleSingleStateDirection_grading_le hS m b
+          (x - C.referenceState)).trans_lt hxsmall.1)
     · exact (abs_zero : |(0 : ℝ)| = 0).trans_lt hδ
   have hrefsmall : (C.referenceState, 0) ∈ stateNeighborhood S C b δ := by
     constructor
@@ -72,8 +74,10 @@ theorem n08CircleDiagonal_zero_uniform
     (n08_material_sample_bounds hN.1.1 hT m).2
   have hdecay : stateGrading S b (y - C.referenceState) ≤
       (T.M (T.sample m) ^ b)⁻¹ * stateGrading S (b + b) (x - C.referenceState) := by
-    rw [show y = n08CircleSingleState hS C m x from rfl, n08CircleSingleState_sub]
-    exact n08CircleSingleStateDirection_grading_decay hS m b b _ hM
+    exact (congrArg (stateGrading S b)
+      (n08CircleSingleState_sub hS C m x)).trans_le
+      (n08CircleSingleStateDirection_grading_decay hS m b b
+        (x - C.referenceState) hM)
   rw [heq]
   calc
     _ ≤ K * T.M (T.sample m) ^ b * stateGrading S b (y - C.referenceState) := hdiff

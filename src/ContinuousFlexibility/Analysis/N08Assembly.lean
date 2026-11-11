@@ -19,6 +19,27 @@ open Set ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n08_with_joint_residual_witness
+    {I J W : Type*} {A B C : I → J → Prop}
+    {D E F : I → J → W → Prop} {P : Prop}
+    (h : ∃ i : I, ∃ j : J, A i j ∧ B i j ∧ C i j ∧
+      ∃ w : W, D i j w ∧ E i j w ∧ F i j w)
+    (hP : ∀ i j, A i j → B i j → C i j →
+      ∀ w, D i j w → E i j w → F i j w → P) : P := by
+  obtain ⟨i, j, ha, hb, hc, w, hd, he, hf⟩ := h
+  exact hP i j ha hb hc w hd he hf
+
+private theorem n08_with_control_response_witness
+    {I J K W : Type*} {A B C D : I → J → K → Prop}
+    {E F G H : I → J → K → W → Prop} {P : Prop}
+    (h : ∃ i : I, ∃ j : J, ∃ k : K,
+      A i j k ∧ B i j k ∧ C i j k ∧ D i j k ∧
+      ∃ w : W, E i j k w ∧ F i j k w ∧ G i j k w ∧ H i j k w)
+    (hP : ∀ i j k, A i j k → B i j k → C i j k → D i j k →
+      ∀ w, E i j k w → F i j k w → G i j k w → H i j k w → P) : P := by
+  obtain ⟨i, j, k, ha, hb, hc, hd, w, he, hf, hg, hh⟩ := h
+  exact hP i j k ha hb hc hd w he hf hg hh
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {L : ReturnCorrectionData S} {G : ScalarInverseData S}
@@ -38,11 +59,16 @@ theorem n08Properties_of_uniform_diagonal
       base ≤ newBase ∧ loss ≤ newLoss ∧ 0 < η ∧ η ≤ ε ∧
       ∃ P : ResidualData S, ∃ B : ControlColumnData S,
         N08Properties D T S C R G P B newBase newLoss η := by
-  obtain ⟨scalarBase, scalarRadius, hscalarBase, hscalarRadius, hscalarOld, ν,
-    hnuDecode, hnuDeriv, hjoint⟩ := n08ResidualData_nu_and_smooth hT hS hN hR
-  obtain ⟨responseBase, responseLoss, responseRadius, hresponseBase, hresponseLoss,
-    hresponseRadius, hresponseOld, H, _, hcontrolDeriv, hresponse, hcontrolSmooth⟩ :=
-      n08ControlInverseResponse_exists hT hS hN hG
+  refine n08_with_joint_residual_witness
+    (W := AnnularState S × ℝ → S.Source)
+    (n08ResidualData_nu_and_smooth hT hS hN hR) ?_
+  intro scalarBase scalarRadius hscalarBase hscalarRadius hscalarOld ν
+    hnuDecode hnuDeriv hjoint
+  refine n08_with_control_response_witness
+    (W := AnnularState S × ℝ → ControlBanach →L[ℝ] S.Source)
+    (n08ControlInverseResponse_exists hT hS hN hG) ?_
+  intro responseBase responseLoss responseRadius hresponseBase hresponseLoss
+    hresponseRadius hresponseOld H _ hcontrolDeriv hresponse hcontrolSmooth
   let newBase := max scalarBase (max responseBase diagonalBase)
   let η := min scalarRadius (min responseRadius diagonalRadius)
   let P := n08ResidualData hT hS hN hR

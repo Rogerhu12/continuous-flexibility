@@ -30,13 +30,19 @@ theorem n08_decayingHeight_grading_le_state (S : PhysicalSpacesData) (s : ℕ)
     apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1,
     apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.2]
 
+private theorem n08_seminorm_total_le_centered
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (a x : E) :
+    p x ≤ p (x - a) + p a := by
+  simpa only [sub_add_cancel] using (map_add_le_add p (x - a) a)
+
 theorem n08_totalHeight_grading_bound (S : PhysicalSpacesData) (s : ℕ)
     (a x : AnnularState S) :
     (S.height (3 / 4 : ℝ)).grading s x.1.1 ≤ stateGrading S s (x - a) +
       (S.height (3 / 4 : ℝ)).grading s a.1.1 := by
-  have h := ((S.height (3 / 4 : ℝ)).grading s).add_le (x.1.1 - a.1.1) a.1.1
-  rw [sub_add_cancel] at h
-  exact h.trans (add_le_add (n08_decayingHeight_grading_le_state S s (x - a)) le_rfl)
+  exact (n08_seminorm_total_le_centered
+    ((S.height (3 / 4 : ℝ)).grading s) a.1.1 x.1.1).trans
+    (add_le_add (n08_decayingHeight_grading_le_state S s (x - a)) le_rfl)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}

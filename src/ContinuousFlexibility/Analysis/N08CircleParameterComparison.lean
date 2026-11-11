@@ -85,10 +85,11 @@ theorem n08CircleDiagonal_parameter_difference_bound
     (hmono hxzero) (hmono (hY 0 (by norm_num))) hs hdecode hχ
   have hdiff := hcompare (Y 0) (Y t) qstar (hY 0 (by norm_num)) (hY t ht) (hsY 0) (hsY t) m
   have hd : stateGrading S b (Y t - Y 0) ≤ (S.height (3 / 4 : ℝ)).grading b h := by
-    rw [n08LocalHeightState_difference_grading]
     have he : (t - 1) - ((0 : ℝ) - 1) = t := by ring
-    rw [he]
-    exact (mul_le_mul_of_nonneg_right ht (apply_nonneg _ _)).trans_eq (one_mul _)
+    exact ((n08LocalHeightState_difference_grading S x h b
+      (t - 1) ((0 : ℝ) - 1)).trans
+      (congrArg (fun a : ℝ => |a| * (S.height (3 / 4 : ℝ)).grading b h) he)).trans_le
+      ((mul_le_mul_of_nonneg_right ht (apply_nonneg _ _)).trans_eq (one_mul _))
   rw [heq, heqzero]
   exact hdiff.trans (mul_le_mul_of_nonneg_left hd
     (mul_nonneg hK (pow_nonneg
