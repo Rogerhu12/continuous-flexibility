@@ -290,6 +290,7 @@ private theorem morseSelected_collar_logFloor {T : Statements.MorseChainData}
         by_contra hbad
         have hlt := hmono (Ioo_subset_Icc_self hx.1) (Ioo_subset_Icc_self ht)
           (lt_of_not_ge hbad)
+        change M.scale * M.radius morseCellLeftCut < M.scale * M.radius t at hlt
         rw [htEq] at hlt
         exact (not_lt_of_ge hleft) hlt
       obtain ⟨hrlo, hrhi, hvlo, hvhi, hκlo, hκhi⟩ :=
@@ -300,6 +301,7 @@ private theorem morseSelected_collar_logFloor {T : Statements.MorseChainData}
         by_contra hbad
         have hlt := hmono (Ioo_subset_Icc_self ht) (Ioo_subset_Icc_self hx.2)
           (lt_of_not_ge hbad)
+        change M.scale * M.radius t < M.scale * M.radius (morseSelectedXEnd T k) at hlt
         rw [htEq] at hlt
         exact (not_lt_of_ge hright) hlt
       obtain ⟨hrlo, hrhi, hvlo, hvhi, hκlo, hκhi⟩ :=
@@ -705,8 +707,8 @@ theorem exists_morseChainGluedProfile_middle_jetBounds {T : Statements.MorseChai
   obtain ⟨hlo, hhi⟩ := morseChainAmplitude_bounds T σ hσ T.index
   have hhi' : lam ≤ U := hhi
   have hlo' : L ≤ lam := hlo
-  have hλ : lam ≤ A := hhi'.trans (by dsimp only [A]; linarith only [hLi])
-  have hλi : lam⁻¹ ≤ A := ((inv_le_inv₀ hlam hL).mpr hlo').trans
+  have hLamBound : lam ≤ A := hhi'.trans (by dsimp only [A]; linarith only [hLi])
+  have hLamInvBound : lam⁻¹ ≤ A := ((inv_le_inv₀ hlam hL).mpr hlo').trans
     (by dsimp only [A]; linarith only [hU])
   have hwpos : 0 < w x := mul_pos hlam (hu.2 x)
   have hMulInv : w⁻¹ = fun y => lam⁻¹ * (u⁻¹) y := by
@@ -716,7 +718,7 @@ theorem exists_morseChainGluedProfile_middle_jetBounds {T : Statements.MorseChai
   have hW₀ : w x ≤ K := by
     have h := (hM₀ x hx).trans hM₀'
     rw [iteratedDeriv_zero, abs_of_pos (hu.2 x)] at h
-    exact mul_le_mul hλ h (hu.2 x).le hA.le
+    exact mul_le_mul hLamBound h (hu.2 x).le hA.le
   have hI₀raw : (w x)⁻¹ ≤ K := by
     have h := (hI₀ x hx).trans hI₀'
     rw [iteratedDeriv_zero] at h
@@ -724,14 +726,14 @@ theorem exists_morseChainGluedProfile_middle_jetBounds {T : Statements.MorseChai
     rw [abs_of_pos (inv_pos.mpr (hu.2 x))] at h
     change w⁻¹ x ≤ K
     rw [hMulInv]
-    exact mul_le_mul hλi h (inv_nonneg.mpr (hu.2 x).le) hA.le
+    exact mul_le_mul hLamInvBound h (inv_nonneg.mpr (hu.2 x).le) hA.le
   have hW₁ : |iteratedDeriv s w x| ≤ K := by
     dsimp only [w]
     rw [iteratedDeriv_const_mul_field, abs_mul, abs_of_pos hlam]
-    exact mul_le_mul hλ ((hM₁ x hx).trans hM₁') (abs_nonneg _) hA.le
+    exact mul_le_mul hLamBound ((hM₁ x hx).trans hM₁') (abs_nonneg _) hA.le
   have hI₁raw : |iteratedDeriv s (w⁻¹) x| ≤ K := by
     rw [hMulInv, iteratedDeriv_const_mul_field, abs_mul, abs_of_pos (inv_pos.mpr hlam)]
-    exact mul_le_mul hλi ((hI₁ x hx).trans hI₁') (abs_nonneg _) hA.le
+    exact mul_le_mul hLamInvBound ((hI₁ x hx).trans hI₁') (abs_nonneg _) hA.le
   have hplus : 1 ≤ exp (p + C * t) := one_le_exp_iff.mpr (add_nonneg hp hCt₀)
   have hlow : exp (-p - C * t) ≤ w x := by
     apply (inv_le_inv₀ hwpos (exp_pos _)).mp
