@@ -55,6 +55,7 @@ theorem interpolate_equation (A Z : ℝ) {x : ℝ} (hx : x ∈ Ioo a b) :
     ((B.equation true x hx).const_mul Z) using 1
   · funext y
     rw [B.interpolate_deriv]
+    simp only [Pi.add_apply]
     ring
   · dsimp only [interpolate]
     ring

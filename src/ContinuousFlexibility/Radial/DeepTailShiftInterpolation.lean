@@ -24,9 +24,9 @@ theorem deepTail_memLp_shift_of_edge_square_bound {T : DeepTailData}
       C * (tailMass T n * a n ^ 2 + tailMass T (n + 1) * a (n + 1) ^ 2))
     (hsum : Summable (fun n => tailMass T n * a n ^ 2)) :
     MemLp u 2 (deepTailMeasure (deepTailShift T k)) := by
-  apply deepTail_memLp_of_edge_square_bound (deepTailHypotheses_shift hT k)
+  refine deepTail_memLp_of_edge_square_bound (deepTailHypotheses_shift hT k)
     (by simp only [deepTailShift, Nat.add_zero])
-    (a := fun n => a (k + n)) (C := C) _ _ hC
+    (a := fun n => a (k + n)) (C := C) ?_ ?_ hC ?_ ?_
   · apply hu.mono
     intro x hx
     exact ⟨((deepTail_node_strictMono hT).monotone (Nat.zero_le k)).trans_lt hx.1, hx.2⟩

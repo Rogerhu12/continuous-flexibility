@@ -264,7 +264,9 @@ theorem tailNaturalLift_jet_log_limit {D : ReferenceData} {T : DeepTailData}
       cases right
       · simp [tailPhysicalEndpoint, min_eq_left hab]
       · simp [tailPhysicalEndpoint, min_eq_right hab]
-    simpa only [hBe] using hB.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
+    have ht : Tendsto B (𝓝[<] T.endpoint) (𝓝 (B T.endpoint)) :=
+      (hB.continuousAt (x := T.endpoint)).tendsto.mono_left nhdsWithin_le_nhds
+    simpa only [hBe] using ht
 
 /-- The preceding limit is a limit in the original physical radius,
 with the orientation selecting the correct one-sided neighborhood. -/
@@ -285,8 +287,9 @@ theorem tailNaturalLift_jet_limit {D : ReferenceData} {T : DeepTailData}
     have ha : 0 < D.a := hR
     have hc : Tendsto (tailPhysicalLog false) (𝓝[>] D.a) (𝓝[<] T.endpoint) := by
       apply tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within
-      · simpa only [tailPhysicalLog, Bool.false_eq_true, ↓reduceIte, ← he] using
-          ((continuousAt_log ha.ne').neg.tendsto.mono_left nhdsWithin_le_nhds)
+      · change Tendsto (-log) (𝓝[>] D.a) (𝓝 T.endpoint)
+        rw [he]
+        exact (continuousAt_log ha.ne').neg.tendsto.mono_left nhdsWithin_le_nhds
       · filter_upwards [self_mem_nhdsWithin] with r hr
         change -log r < T.endpoint
         rw [he]
@@ -300,8 +303,9 @@ theorem tailNaturalLift_jet_limit {D : ReferenceData} {T : DeepTailData}
       nhdsWithin_le_nhds (eventually_gt_nhds hb)
     have hc : Tendsto (tailPhysicalLog true) (𝓝[<] D.b) (𝓝[<] T.endpoint) := by
       apply tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within
-      · simpa only [tailPhysicalLog, ↓reduceIte, ← he] using
-          ((continuousAt_log hb.ne').tendsto.mono_left nhdsWithin_le_nhds)
+      · change Tendsto log (𝓝[<] D.b) (𝓝 T.endpoint)
+        rw [he]
+        exact (continuousAt_log hb.ne').tendsto.mono_left nhdsWithin_le_nhds
       · filter_upwards [hpos, self_mem_nhdsWithin] with r hr hrb
         change log r < T.endpoint
         rw [he]
@@ -420,7 +424,9 @@ theorem tailPhysicalFlatConclusion_of_cell_bounds {D : ReferenceData} {T : DeepT
     rw [hflux.deriv_eq, (hgerm x hx).eq_of_nhds]
     exact tailNaturalLift_radialJacobi hD hT hphysical hu hx
   · intro k
-    simpa only [radialJet_eq_iteratedDeriv] using hvflat k
+    rw [radialJet_eq_iteratedDeriv]
+    change iteratedDeriv k v (tailPhysicalEndpoint D right) = 0
+    exact hvflat k
   · intro k
     obtain ⟨C, hC, hb⟩ := hjets k
     refine ⟨C, hC, fun n x hx => ?_⟩

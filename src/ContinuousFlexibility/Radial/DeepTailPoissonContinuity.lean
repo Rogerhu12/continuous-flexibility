@@ -70,10 +70,7 @@ theorem right_flux_false (B : TailPhysicalPoissonData p a b Λ η hab)
   have hWD (x : ℝ) (hx : x ∈ Ioo a b) : HasDerivAt W 0 x := by
     have hh := ((B.equation false x hx).mul ((B.differentiable true x).hasDerivAt)).sub
       ((B.equation true x hx).mul ((B.differentiable false x).hasDerivAt))
-    convert hh using 1
-    · funext y
-      simp only [W, Pi.sub_apply]
-    · ring
+    convert hh using 1 <;> ring
   obtain ⟨x, hx, hquot⟩ := exists_deriv_eq_slope W hlt hW
     (fun x hx => (hWD x hx).differentiableAt.differentiableWithinAt)
   rw [(hWD x hx).deriv] at hquot
@@ -151,9 +148,10 @@ theorem continuous_tailPhysicalPoissonOn (K : ℝ≥0) (hK : K < 1)
     apply intervalIntegral.integral_congr
     rw [uIcc_of_le hab.le]
     intro t ht
+    change κ σ x t * (B σ).u right t =
+      κ σ x t * IccExtend hab.le ((B σ).onEdge right) t
     rw [IccExtend_of_mem hab.le ((B σ).onEdge right) ht,
       TailPhysicalPoissonData.onEdge_apply]
-    rfl
 
 /-- Original-coordinate mass pairings for the Poisson functions are
 continuous once the physical-edge restrictions are continuous. -/
@@ -169,6 +167,10 @@ theorem continuous_tailPhysicalPoissonPairing
   apply intervalIntegral.integral_congr
   rw [uIcc_of_le hab.le]
   intro t ht
+  change tailClampedDensity (p σ) a b hab.le t *
+      IccExtend hab.le (tailPhysicalHeightFamily p hab hp hpos left σ) t *
+      IccExtend hab.le ((B σ).onEdge right) t =
+    p σ t * tailPhysicalHeight (p σ) a b hab.le left t * (B σ).u right t
   rw [tailClampedDensity_eq_of_mem hab.le ht,
     IccExtend_of_mem hab.le (tailPhysicalHeightFamily p hab hp hpos left σ) ht,
     IccExtend_of_mem hab.le ((B σ).onEdge right) ht,

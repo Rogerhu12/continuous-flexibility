@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Blueprint.Statements
 import ContinuousFlexibility.Radial.DeepTailShift
-import ContinuousFlexibility.Radial.DeepTailEdgeComparison
+import ContinuousFlexibility.Radial.DeepTailEdgeUniqueness
 import ContinuousFlexibility.Radial.DeepTailParameterContinuity
 
 /-!
