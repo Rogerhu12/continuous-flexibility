@@ -38,7 +38,8 @@ theorem memAngularWeight_const (c : ℝ) (v : lp E 2) :
 theorem angularWeightNorm_const (c : ℝ) (v : lp E 2) :
     angularWeightNorm (𝕜 := 𝕜) (fun _ => c) v = |c| * ‖v‖ := by
   rw [← norm_angularMultiplierVector _ v (memAngularWeight_const c v)]
-  have heq : angularMultiplierVector (fun _ => c) v (memAngularWeight_const c v) =
+  have heq : angularMultiplierVector (𝕜 := 𝕜) (fun _ => c) v
+      (memAngularWeight_const (𝕜 := 𝕜) c v) =
       (c : 𝕜) • v := by
     ext n
     simp only [angularMultiplierVector_apply, lp.coeFn_smul, Pi.smul_apply]

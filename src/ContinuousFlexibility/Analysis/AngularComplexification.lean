@@ -167,6 +167,7 @@ def ofReal : H →ₗᵢ[ℝ] AngularComplexification H where
   map_smul' r x := by
     ext <;> simp only [re_mk, im_mk, re_real_smul, im_real_smul, smul_zero, RingHom.id_apply]
   norm_map' x := by
+    change ‖mk x 0‖ = ‖x‖
     apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
     rw [norm_sq, re_mk, im_mk, norm_zero, zero_pow (by decide : 2 ≠ 0), add_zero]
 
@@ -178,14 +179,14 @@ def ofReal : H →ₗᵢ[ℝ] AngularComplexification H where
 
 /-- Replacing the two components by their norms preserves the product norm. -/
 theorem norm_mk_norm (x y : H) :
-    ‖mk ‖x‖ ‖y‖ : AngularComplexification ℝ‖ = ‖mk x y‖ := by
+    ‖(mk ‖x‖ ‖y‖ : AngularComplexification ℝ)‖ = ‖mk x y‖ := by
   apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
   simp only [norm_sq, re_mk, im_mk, Real.norm_of_nonneg (norm_nonneg _)]
 
 /-- Coordinatewise norm bounds imply the corresponding Hilbert product bound. -/
 theorem norm_mk_le_of_bounds {x y : H} {X Y : ℝ}
     (hX : 0 ≤ X) (hY : 0 ≤ Y) (hx : ‖x‖ ≤ X) (hy : ‖y‖ ≤ Y) :
-    ‖mk x y‖ ≤ ‖mk X Y : AngularComplexification ℝ‖ := by
+    ‖mk x y‖ ≤ ‖(mk X Y : AngularComplexification ℝ)‖ := by
   apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
   simpa only [norm_sq, re_mk, im_mk, Real.norm_of_nonneg hX,
     Real.norm_of_nonneg hY] using
@@ -228,7 +229,7 @@ def extend (T : H →L[ℝ] F) :
 @[simp] theorem extend_apply (T : H →L[ℝ] F) (u : AngularComplexification H) :
     extend T u = mk (T u.re) (T u.im) := by
   unfold extend
-  rw [LinearMap.mkContinuous_apply, extendLinear_apply]
+  simp only [LinearMap.mkContinuous_apply, extendLinear_apply, ContinuousLinearMap.coe_coe]
 
 @[simp] theorem re_extend (T : H →L[ℝ] F) (u : AngularComplexification H) :
     (extend T u).re = T u.re := by rw [extend_apply, re_mk]
@@ -245,7 +246,7 @@ def extend (T : H →L[ℝ] F) :
   apply le_antisymm
   · apply (extend T).opNorm_le_bound (norm_nonneg T)
     intro u
-    simpa only [extend_apply, extendLinear_apply] using
+    simpa only [extend_apply, extendLinear_apply, ContinuousLinearMap.coe_coe] using
       norm_extendLinear_le T.toLinearMap (norm_nonneg T) T.le_opNorm u
   · apply T.opNorm_le_bound (norm_nonneg (extend T))
     intro x
@@ -291,8 +292,8 @@ theorem norm_mk_le_two_term {x y : H} {x₁ y₁ : F} {x₂ y₂ : G} {a c : ℝ
     ext <;> simp only [re_mk, im_mk, re_add, im_add,
       re_real_smul, im_real_smul, smul_eq_mul]
   calc
-    ‖mk x y‖ ≤ ‖mk (a * ‖x₁‖ + c * ‖x₂‖) (a * ‖y₁‖ + c * ‖y₂‖) :
-        AngularComplexification ℝ‖ :=
+    ‖mk x y‖ ≤ ‖(mk (a * ‖x₁‖ + c * ‖x₂‖) (a * ‖y₁‖ + c * ‖y₂‖) :
+        AngularComplexification ℝ)‖ :=
       norm_mk_le_of_bounds
         (add_nonneg (mul_nonneg ha (norm_nonneg _)) (mul_nonneg hc (norm_nonneg _)))
         (add_nonneg (mul_nonneg ha (norm_nonneg _)) (mul_nonneg hc (norm_nonneg _))) hx hy

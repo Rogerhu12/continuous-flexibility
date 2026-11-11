@@ -158,9 +158,9 @@ theorem angularResolventProjection_eigen {B : H →L[ℂ] H} (hB : IsSelfAdjoint
       angularResolventEigenvalue n • angularResolventProjection B n := by
   calc
     _ = cfc (fun x : ℝ => x * angularReciprocalBump n x) B := by
-      rw [cfc_mul _ _ _ continuous_id.continuousOn
-        (continuous_angularReciprocalBump n).continuousOn, cfc_id' ℝ B hB]
-      rfl
+      have h := cfc_mul (fun x : ℝ => x) (angularReciprocalBump n) B
+        continuous_id.continuousOn (continuous_angularReciprocalBump n).continuousOn
+      simpa only [cfc_id' ℝ B hB, angularResolventProjection] using h.symm
     _ = cfc (fun x : ℝ => angularResolventEigenvalue n * angularReciprocalBump n x) B :=
       cfc_congr (fun x hx => angularReciprocalBump_mul n (hSpectrum hx))
     _ = _ := cfc_const_mul _ _ _ (continuous_angularReciprocalBump n).continuousOn

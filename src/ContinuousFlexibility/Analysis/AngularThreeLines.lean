@@ -40,7 +40,7 @@ theorem finiteDiagonal_comp (s : Finset ℕ) (c d : ℕ → ℂ) (v : lp E 2) :
     finiteDiagonal s c (finiteDiagonal s d v) =
       finiteDiagonal s (fun n => c n * d n) v := by
   ext n
-  by_cases hn : n ∈ s <;> simp only [finiteDiagonal_apply, if_pos hn, if_neg hn,
+  by_cases hn : n ∈ s <;> simp only [finiteDiagonal_apply, hn, if_true, if_false,
     smul_smul, smul_zero]
 
 @[simp] theorem finiteDiagonal_project (s : Finset ℕ) (c : ℕ → ℂ) (v : lp E 2) :
@@ -52,7 +52,7 @@ theorem finiteDiagonal_const (s : Finset ℕ) (c : ℂ) (v : lp E 2) :
     finiteDiagonal s (fun _ => c) v = c • finiteDiagonal s (fun _ => 1) v := by
   ext n
   by_cases hn : n ∈ s <;> simp only [finiteDiagonal_apply, lp.coeFn_smul,
-    Pi.smul_apply, if_pos hn, if_neg hn, one_smul, smul_zero]
+    Pi.smul_apply, hn, if_true, if_false, one_smul, smul_zero]
 
 theorem finiteDiagonal_norm_mono (s : Finset ℕ) (c d : ℕ → ℂ) (v : lp E 2)
     (hcd : ∀ n ∈ s, ‖c n‖ ≤ ‖d n‖) :
@@ -155,13 +155,15 @@ theorem bounded_angularInterpolationFamily (K : lp E 2 →L[ℂ] lp E 2)
     intro n hn
     rw [Complex.norm_cpow_eq_rpow_re_of_pos (ha n)]
     exact (angular_rpow_strip_bound (ha n) hz0 hz1).trans
-      (Finset.single_le_sum (fun _ _ => zero_le_one.trans (le_max_left _ _)) hn)
+      (Finset.single_le_sum (f := fun n => max 1 (a n))
+        (fun _ _ => zero_le_one.trans (le_max_left _ _)) hn)
   have hin : ∀ n ∈ t, ‖(b n : ℂ) ^ (-z)‖ ≤ B := by
     intro n hn
     rw [Complex.norm_cpow_eq_rpow_re_of_pos (hb n), Complex.neg_re,
       Real.rpow_neg_eq_inv_rpow]
     exact (angular_rpow_strip_bound (inv_pos.mpr (hb n)) hz0 hz1).trans
-      (Finset.single_le_sum (fun _ _ => zero_le_one.trans (le_max_left _ _)) hn)
+      (Finset.single_le_sum (f := fun n => max 1 ((b n)⁻¹))
+        (fun _ _ => zero_le_one.trans (le_max_left _ _)) hn)
   change ‖angularInterpolationFamily K a b s t v z‖ ≤ A * (‖K‖ * (B * ‖v‖))
   unfold angularInterpolationFamily
   calc
