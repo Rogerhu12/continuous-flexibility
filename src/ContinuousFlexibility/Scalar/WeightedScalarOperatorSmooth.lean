@@ -108,14 +108,14 @@ theorem scalarTypeMultiplierCLM_smoothTameOn
   exact smoothTameOn_congr hmain
     (fun x _ => (scalarTypeMultiplierCLM_apply hD hT hS (t x) (R x)).symm)
 
-theorem scalarTypeErrorLinear_smoothTameOn
+theorem scalarTypeErrorCLM_smoothTameOn
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hp : Monotone p) (ht : WithSeminorms p)
     (htype : SmoothTameOn p (scalarHeightGrading S) U t)
     (hR : SmoothTameOn p (scalarHeightGrading S) U R)
     (hu : SmoothTameOn p (scalarCommonHeightGrading S) U u) :
     SmoothTameOn p (scalarHeightGrading S) U
-      (fun x => scalarTypeErrorLinear hD hT hS (t x) (R x) (u x)) := by
+      (fun x => scalarTypeErrorCLM hD hT hS (t x) (R x) (u x)) := by
   have hm := scalarTypeMultiplierCLM_smoothTameOn hD hT hS hp ht htype hR
   have hup := smoothTameOn_scalarHeight_postcompose hS hp ht
     (weighted_scalarCommonHeightGrading_withSeminorms S) hu
@@ -125,8 +125,21 @@ theorem scalarTypeErrorLinear_smoothTameOn
     (weighted_scalarHeightGrading_withSeminorms S) ho
     (SobolevModelData.angularSecondCLM hT (hS.1 scalarBeta))
     (SobolevModelData.angularSecondCLM_isTame hT (hS.1 scalarBeta))
-  apply smoothTameOn_congr hmain
-  intro x _
-  rw [scalarTypeErrorLinear_apply, scalarTypeErrorCLM_apply] <;> rfl
+  exact smoothTameOn_congr hmain
+    (fun x _ => (scalarTypeErrorCLM_apply hD hT hS (t x) (R x) (u x)).symm)
+
+theorem scalarTypeErrorLinear_smoothTameOn
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hp : Monotone p) (ht : WithSeminorms p)
+    (htype : SmoothTameOn p (scalarHeightGrading S) U t)
+    (hR : SmoothTameOn p (scalarHeightGrading S) U R)
+    (hu : SmoothTameOn p (scalarCommonHeightGrading S) U u) :
+    SmoothTameOn p (scalarHeightGrading S) U
+      (fun x => scalarTypeErrorLinear hD hT hS (t x) (R x) (u x)) := by
+  exact smoothTameOn_congr
+    (f := fun x => scalarTypeErrorCLM hD hT hS (t x) (R x) (u x))
+    (g := fun x => scalarTypeErrorLinear hD hT hS (t x) (R x) (u x))
+    (scalarTypeErrorCLM_smoothTameOn hD hT hS hp ht htype hR hu)
+    (fun x _ => (scalarTypeErrorLinear_apply hD hT hS (t x) (R x) (u x)).symm)
 
 end ContinuousFlexibility.Statements

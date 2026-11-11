@@ -93,6 +93,24 @@ theorem scalarTypeMultiplierCLM_uniformTameGerm
     hD hT hS hp ht
   exact hmain.congr (fun x => (scalarTypeMultiplierCLM_apply hD hT hS (t x) (R x)).symm)
 
+/-- The actual error CLM is composed before exposing the curried linear family. -/
+theorem scalarTypeErrorCLM_uniformTameGerm
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hp : Monotone p) (ht : WithSeminorms p)
+    (htype : UniformTameGerm p (scalarHeightGrading S) x0 t)
+    (hR : UniformTameGerm p (scalarHeightGrading S) x0 R)
+    (hu : UniformTameGerm p (scalarCommonHeightGrading S) x0 u) :
+    UniformTameGerm p (scalarHeightGrading S) x0
+      (fun x => scalarTypeErrorCLM hD hT hS (t x) (R x) (u x)) := by
+  have hm := scalarTypeMultiplierCLM_uniformTameGerm hD hT hS hp ht htype hR
+  have hup := hu.postcompose hp ht (scalarCommonProjectionCLM S)
+    (scalarCommonProjectionCLM_isTame S)
+  have hmain := (hm.scalarHeightOddMul hup hT hS hp ht).postcompose hp ht
+    (SobolevModelData.angularSecondCLM hT (hS.1 scalarBeta))
+    (SobolevModelData.angularSecondCLM_isTame hT (hS.1 scalarBeta))
+  exact hmain.congr
+    (fun x => (scalarTypeErrorCLM_apply hD hT hS (t x) (R x) (u x)).symm)
+
 /-- The correction error has a genuine joint uniform tower in the state,
 source height and common height arguments. -/
 theorem scalarTypeErrorLinear_uniformTameGerm
@@ -103,14 +121,10 @@ theorem scalarTypeErrorLinear_uniformTameGerm
     (hu : UniformTameGerm p (scalarCommonHeightGrading S) x0 u) :
     UniformTameGerm p (scalarHeightGrading S) x0
       (fun x => scalarTypeErrorLinear hD hT hS (t x) (R x) (u x)) := by
-  have hm := scalarTypeMultiplierCLM_uniformTameGerm hD hT hS hp ht htype hR
-  have hup := hu.postcompose hp ht (scalarCommonProjectionCLM S)
-    (scalarCommonProjectionCLM_isTame S)
-  have hmain := (hm.scalarHeightOddMul hup hT hS hp ht).postcompose hp ht
-    (SobolevModelData.angularSecondCLM hT (hS.1 scalarBeta))
-    (SobolevModelData.angularSecondCLM_isTame hT (hS.1 scalarBeta))
-  apply hmain.congr
-  intro x
-  rw [scalarTypeErrorLinear_apply, scalarTypeErrorCLM_apply] <;> rfl
+  exact UniformTameGerm.congr
+    (f := fun x => scalarTypeErrorCLM hD hT hS (t x) (R x) (u x))
+    (g := fun x => scalarTypeErrorLinear hD hT hS (t x) (R x) (u x))
+    (scalarTypeErrorCLM_uniformTameGerm hD hT hS hp ht htype hR hu)
+    (fun x => (scalarTypeErrorLinear_apply hD hT hS (t x) (R x) (u x)).symm)
 
 end ContinuousFlexibility.Statements

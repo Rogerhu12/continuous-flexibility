@@ -35,58 +35,68 @@ theorem decode_scalarJetCoframeRadialHeight_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarJetCoframeRadialHeight hD hT hS x) p =
       scalarJetFiniteFormula D S x 2 p := by
+  have hindex : ((2 : Fin 7) : ℕ) = 2 := rfl
+  simp only [scalarJetFiniteFormula, hindex]
   simp only [scalarJetCoframeRadialHeight, decode_scalarHeightUnitalMul,
     decode_scalarStateDPower_half hD hT hS x hb,
-    decode_scalarStateAngularPower_neg_half hD hT hS x hb,
-    scalarJetFiniteFormula, div_eq_mul_inv]
+    decode_scalarStateAngularPower_neg_half hD hT hS x hb]
+  simp only [div_eq_mul_inv]
   ring
 
 theorem angularPartial_decode_scalarJetCoframeMixedPrimitive_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarJetCoframeMixedPrimitive hD hT hS x)) p =
       scalarJetFiniteFormula D S x 3 p := by
+  have hindex : ((3 : Fin 7) : ℕ) = 3 := rfl
+  simp only [scalarJetFiniteFormula, hindex]
   simp only [scalarJetCoframeMixedPrimitive, angularPartial_decode_height_neg hT hS,
     angularPartial_decode_scalarHeightOddUnitalAct,
     decode_scalarStateAngularPower_neg_half hD hT hS x hb,
     angularPartial_decode_scalarStateSlopeOddAct,
-    angularPartial_decode_scalarStateAngularPrimitive,
-    scalarJetFiniteFormula, scalarStateProfile_eq_mean, div_eq_mul_inv]
+    angularPartial_decode_scalarStateAngularPrimitive, scalarStateProfile_eq_mean]
+  simp only [div_eq_mul_inv]
   ring
 
 theorem decode_scalarJetCoframeAngularHeight_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarJetCoframeAngularHeight hD hT hS x) p =
       scalarJetFiniteFormula D S x 4 p := by
+  have hindex : ((4 : Fin 7) : ℕ) = 4 := rfl
+  simp only [scalarJetFiniteFormula, hindex]
   simp only [scalarJetCoframeAngularHeight, decode_scalarReferenceRadiusCLM,
-    decode_scalarStateAngularPower_half hD hT hS x hb, scalarJetFiniteFormula]
+    decode_scalarStateAngularPower_half hD hT hS x hb]
 
 theorem angularPartial_decode_scalarJetConnectionRadialPrimitive_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarJetConnectionRadialPrimitive hD hT hS x)) p =
       scalarJetFiniteFormula D S x 5 p := by
+  have hindex : ((5 : Fin 7) : ℕ) = 5 := rfl
+  simp only [scalarJetFiniteFormula, hindex]
   simp only [scalarJetConnectionRadialPrimitive, angularPartial_decode_scalarHeightOddUnitalAct,
     decode_scalarStateConnectionFactor hD hT hS x hb,
     angularPartial_decode_scalarStateSlopeOddAct,
-    angularPartial_decode_scalarStateMixedPrimitive,
-    scalarJetFiniteFormula, scalarStateProfile_eq_mean, div_eq_mul_inv, mul_inv_rev]
+    angularPartial_decode_scalarStateMixedPrimitive, scalarStateProfile_eq_mean]
+  simp only [div_eq_mul_inv, mul_inv_rev, one_mul]
   ring
 
 theorem decode_scalarJetConnectionAngularHeight_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarJetConnectionAngularHeight hD hT hS x) p =
       scalarJetFiniteFormula D S x 6 p := by
+  have hindex : ((6 : Fin 7) : ℕ) = 6 := rfl
+  simp only [scalarJetFiniteFormula, hindex]
   simp only [scalarJetConnectionAngularHeight, map_add, Pi.add_apply,
     decode_scalarStateDPower_neg_half hD hT hS x hb,
     decode_scalarHeightUnitalAct, decode_scalarStateConnectionFactor hD hT hS x hb,
-    decode_scalarStateSlopeAct, decode_scalarStateAngularHeight,
-    scalarJetFiniteFormula, scalarStateProfile_eq_mean, div_eq_mul_inv, mul_inv_rev, one_mul]
+    decode_scalarStateSlopeAct, decode_scalarStateAngularHeight, scalarStateProfile_eq_mean]
+  simp only [div_eq_mul_inv, mul_inv_rev, one_mul]
   ring
 
 theorem decode_scalarCandidateJets_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (i : Fin 7) (p : PolarPoint) :
     scalarFieldDecode S (scalarCandidateJets hD hT hS x i) p =
       scalarJetFiniteFormula D S x i p := by
-  fin_cases i <;> simp only [scalarCandidateJets, Matrix.cons_val_zero, Matrix.cons_val_succ,
+  fin_cases i <;> simp only [scalarCandidateJets, Matrix.cons_val_zero', Matrix.cons_val_succ',
     scalarFieldDecode_even, scalarFieldDecode_odd]
   · simpa only [scalarJetFiniteFormula] using decode_scalarStateRadialHeight hD hT hS x p
   · simpa only [scalarJetFiniteFormula] using
@@ -108,7 +118,7 @@ theorem decode_scalarCandidateCoefficients_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (i : Fin 3) (p : PolarPoint) :
     scalarFieldDecode S (scalarCandidateCoefficients hD hT hS x i) p =
       scalarCoefficientFiniteFormula D S x i p := by
-  fin_cases i <;> simp only [scalarCandidateCoefficients, Matrix.cons_val_zero, Matrix.cons_val_succ,
+  fin_cases i <;> simp only [scalarCandidateCoefficients, Matrix.cons_val_zero', Matrix.cons_val_succ',
     scalarFieldDecode_even, scalarFieldDecode_odd]
   · exact decode_scalarCoefficientAHeight_finite hD hT hS x hb p
   · exact angularPartial_decode_scalarCoefficientBPrimitive_finite hD hT hS x hb p
@@ -129,24 +139,28 @@ theorem decode_scalarCoefficientAHeight
     (hb : ScalarCandidatePowerBounds hD hT hS x) (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientAHeight hD hT hS x) p =
       scalarStateA D S x p - D.w p.1 := by
+  have hindex : ((0 : Fin 3) : ℕ) = 0 := rfl
   simpa only [scalarCandidateCoefficients, Matrix.cons_val_zero, scalarFieldDecode_even,
-    scalarCoefficientComponent] using decode_scalarCandidateCoefficients hD hT hS x hb hg 0 p
+    scalarCoefficientComponent, hindex] using decode_scalarCandidateCoefficients hD hT hS x hb hg 0 p
 
 theorem angularPartial_decode_scalarCoefficientBPrimitive
     (hb : ScalarCandidatePowerBounds hD hT hS x)
     (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarCoefficientBPrimitive hD hT hS x)) p =
       scalarStateB D S x p := by
-  simpa only [scalarCandidateCoefficients, Matrix.cons_val_zero, Matrix.cons_val_succ,
-    scalarFieldDecode_odd, scalarCoefficientComponent] using
+  have hindex : ((1 : Fin 3) : ℕ) = 1 := rfl
+  simpa only [scalarCandidateCoefficients, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.head_cons, scalarFieldDecode_odd, scalarCoefficientComponent, hindex] using
     decode_scalarCandidateCoefficients hD hT hS x hb hg 1 p
 
 theorem decode_scalarCoefficientCHeight
     (hb : ScalarCandidatePowerBounds hD hT hS x) (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientCHeight hD hT hS x) p =
       scalarStateCorrectedC D S x p - deriv D.w p.1 / p.1 := by
-  simpa only [scalarCandidateCoefficients, Matrix.cons_val_zero, Matrix.cons_val_succ,
-    scalarFieldDecode_even, scalarCoefficientComponent] using
+  have hindex : ((2 : Fin 3) : ℕ) = 2 := rfl
+  simpa only [scalarCandidateCoefficients, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.cons_val_two, Matrix.tail_cons, Matrix.head_cons,
+    scalarFieldDecode_even, scalarCoefficientComponent, hindex] using
     decode_scalarCandidateCoefficients hD hT hS x hb hg 2 p
 
 theorem decode_scalarCandidateResidual
