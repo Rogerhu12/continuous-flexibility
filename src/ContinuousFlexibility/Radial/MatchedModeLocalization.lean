@@ -182,7 +182,7 @@ theorem matchedDensity_inv_coefficient_bound {D : ReferenceData}
   change |(D.w r)⁻¹| ≤ C 0 * radialE (D.cellIndex m) ^ (C 0) at hwbound
   rw [abs_of_pos (inv_pos.mpr hw)] at hwbound
   have hE : 1 ≤ radialE (D.cellIndex m) :=
-    one_le_exp_iff.mpr ((sq_nonneg _).trans (radial_nat_sq_le_Q _))
+    Real.one_le_exp_iff.mpr ((sq_nonneg _).trans (radial_nat_sq_le_Q _))
   have hcost : (matchingDensity D r)⁻¹ ≤ A * radialE (D.cellIndex m) ^ (C 0) := by
     calc
       (matchingDensity D r)⁻¹ = r ^ 2 / 12 * (D.w r)⁻¹ := by
