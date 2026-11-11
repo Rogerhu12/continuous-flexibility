@@ -23,7 +23,6 @@ open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
 
-set_option diagnostics true in
 theorem solve_coupled_exists_normalized_zero
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}

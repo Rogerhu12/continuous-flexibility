@@ -95,7 +95,6 @@ theorem solve_state_hasSmoothing {D : ReferenceData} {T : MaterialData}
       (hasSmoothing_pairGrading ((hS.2.2.2.2.1 (3 / 4 : ℝ)).2.1)
         ((hS.2.2.2.2.1 (3 / 4 : ℝ)).2.1)))
 
-set_option diagnostics true in
 /-- The physical sector is a tame direct summand, with the prescribed
 constant control mode and odd chart mode. -/
 theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}

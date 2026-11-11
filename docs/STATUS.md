@@ -2,6 +2,26 @@
 
 Last updated: 2026-11-11.
 
+## Completed line: Solve
+
+`line/Solve` proves the unchanged theorem
+`Solve (hN10 : N10Statement) (hTame : H01Statement ∧ H02Statement) : PointBranchStatement`.
+The same cumulative N10 data supply the actual residual, inverse and quadratic
+error. The iteration takes place in the closed kernel of the continuous
+normalization row inside the physical sector. Its limit gives a nonzero
+parameter, the exact normalization row equal to one, the scalar equation and
+both actual characteristic return equations.
+
+The 12 new proof modules and `Blueprint.Solve` are in the root import. At proof
+commit `24da8c312d27a3b81c2100b8959932b57b5f82a5`, the full default build passed
+all 3,847 jobs. The project axiom audit passed for 11,531 declarations, including
+8,742 theorems. The guarded `#print axioms ContinuousFlexibility.Blueprint.Solve`
+check reports only `propext`, `Classical.choice`, and `Quot.sound`.
+[Verified build](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42992303883).
+No change to a frozen statement or to `Blueprint/Assembly.lean` was needed.
+The proof adds no hypothesis or project axiom. The unconditional Challenge
+still depends on the other open nodes.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
@@ -39,21 +59,21 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 382 / 390 |
-| Modules in the root import | 340 |
-| Lines of Lean under `src/` | 93,574 |
-| Axiom audit (`lake build`, 3834 jobs) | passed: 11,293 declarations, 8,540 theorems |
-| Blueprint statements proved / total | 13 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus) |
+| Lean modules compiled / total | 413 / 418 |
+| Modules in the root import | 376 |
+| Lines of Lean under `src/` | 98,522 |
+| Axiom audit (`lake build`, 3847 jobs) | passed: 11,531 declarations, 8,742 theorems |
+| Blueprint statements proved / total | 14 / 42 (S01, S02, R01, R02, R03, R04, W01, ScalarCalculus, Tame, R05a, N04Cubic, N04Transmission, Solve, N12) |
+| Blueprint statements open | 28 |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 394 |
+| Modules on the module system | 1 (the Challenge) of 422 |
 
-These counts include main's completed N12 proof. The compiled count is the
-source import closure of the four successful default targets; it excludes
-stale artifacts restored from other branches. The 8 modules outside that
+These counts include the completed main lines and Solve. The compiled count is
+the source import closure of the four successful default targets; it excludes
+stale artifacts restored from other branches. The 5 modules outside that
 default build are unfinished files of the earlier workflow:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
-`Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
-`Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
+`Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`.
 
 ## What is proved
 
@@ -68,6 +88,14 @@ default build are unfinished files of the earlier workflow:
   `Analysis/PointSolutionCore.lean` constructs the core from the same normalized nonzero
   solution point. No control-interval placement hypothesis is added. All proof dependencies
   are in the root import; N12 depends only on `propext`, `Classical.choice`, `Quot.sound`.
+- **Normalized nonzero solution (Solve).** The unchanged theorem
+  `N10Statement → (H01Statement ∧ H02Statement) → PointBranchStatement` is proved.
+  `Analysis/SolveKernelApplication.lean` applies the fixed-parameter iteration
+  on the actual normalization kernel; `Analysis/SolveCoupledSystem.lean` supplies
+  the physical data and recovers the normalized state. The N08/N02 realization
+  identities recover the actual scalar and characteristic return equations.
+  All dependencies are in the root import and the guarded axiom check contains
+  only `propext`, `Classical.choice`, and `Quot.sound`.
 - **Abstract Nash–Moser, fixed parameter.** `exists_projectiveNewton_fixed_branch`
   (`Analysis/ProjectiveNewtonFixedBranch.lean`).
 - **Tame calculus and inverse families.** `Blueprint.Tame : H01Statement ∧ H02Statement`,
@@ -77,9 +105,12 @@ default build are unfinished files of the earlier workflow:
 
 ## What is not proved
 
-`Nonempty FlatAnnularCore`, i.e. paper §3–§10: the accumulating radial reference (§4–§6),
-the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9). The passage from a point solution to the endpoint-regular
-annular core (§10) is now proved conditionally in N12; existence of that point solution remains open.
+`Nonempty FlatAnnularCore` remains open. The remaining inputs include the radial
+reference constructions (§4–§6), the weighted spaces and fixed-type inverse
+(§7–§8), and the nonlinear data leading to N10 (§9). Solve now constructs the
+normalized nonzero solution from its original N10 and Tame hypotheses, and N12
+passes from that point solution to the endpoint-regular annular core (§10).
+The unconditional main theorem still requires the other open blueprint nodes.
 
 ## Blueprint v4
 
@@ -101,9 +132,9 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (33): ScalarCalculus, ScalarWeighted, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
-R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
-N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
+Open nodes (28): ScalarWeighted, Spaces, R05b, R06a, R06b, R06c, R07, R08,
+R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04a,
+N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
 Lean statements follow the manuscript and are not frozen: Tool-OneHighFactor (Lemmas 7.2, 7.3),
@@ -112,8 +143,8 @@ Tool-R10a-Inner (Lemma 6.3), Tool-R10a-Outer (Lemmas 6.4, 6.5).
 
 One task file each in `docs/tasks/` (40 in total).
 
-Whether each node can be derived from its hypotheses is tested by its line. `N12` has
-passed this test with its original statement; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
+Whether each node can be derived from its hypotheses is tested by its line. `N12` and `Solve` have
+passed this test with their original statements. `R10a` has one frozen statement for the inner and the outer
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
@@ -125,7 +156,7 @@ as the kernel on the weighted graph domain.
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook
 ratios rescaled to it (about 100–190 lines of Lean per line of readable TeX): about 900,000 lines in
-total, range 600,000–1,300,000. Current size is about 10% of the central estimate.
+total, range 600,000–1,300,000. Current size is about 11% of the central estimate.
 
 ## Node sizes
 
@@ -144,8 +175,8 @@ already exists in the tree.
 
 ## Pick next
 
-Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
-R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
+Task ownership is recorded by the remote branch `line/<Task>`. The current state
+is always `git ls-remote --heads origin "line/*"`.
 
 A line that has finished takes the first task below whose branch does not exist:
 
@@ -159,6 +190,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 28 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.

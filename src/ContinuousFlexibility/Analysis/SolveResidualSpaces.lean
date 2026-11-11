@@ -61,7 +61,6 @@ private def solveSubspaceProductEquiv : (W × V) ≃L[ℝ]
     (prodEquiv (fun n => subLevel W n) (subBond W)
       (fun n => subLevel V n) (subBond V))
 
-set_option diagnostics true in
 private theorem solveSubspaceProductEquiv_apply (z : W × V) :
     solveSubspaceProductEquiv (E := E) (F := F) (e := e) (f := f) W V hW hV z =
       prodEquiv (fun n => subLevel W n) (subBond W)
@@ -82,7 +81,6 @@ private theorem solveSubspaceProductEquiv_apply (z : W × V) :
         (subspaceEquiv (E := E) (e := e) W hW)
         (subspaceEquiv (E := F) (e := f) V hV) z))
 
-set_option diagnostics true in
 private theorem solveSubspaceProductEquiv_grading (n : ℕ) (z : W × V) :
     gradedSeminorm (SolveSubspaceProductLevel W V) (solveSubspaceProductBond W V) n
         (solveSubspaceProductEquiv (E := E) (F := F) (e := e) (f := f) W V hW hV z) =
@@ -162,7 +160,6 @@ def solveResidualEquiv (hS : IsPhysicalSpaces D T S) :
     S.Q.toLinearMap.ker (evenCircleSubmodule S) S.Q.isClosed_ker
     (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS)
 
-set_option diagnostics true in
 theorem solveResidualEquiv_grading (hS : IsPhysicalSpaces D T S)
     (n : ℕ) (y : ResidualSpace S) :
     gradedSeminorm (SolveResidualLevel S) (solveResidualBond S) n
@@ -233,7 +230,6 @@ theorem solve_source_hasSmoothing (hS : IsPhysicalSpaces D T S) :
     (fun x => hPker x) (fun w hw => hPid w hw) hPt
     ((hS.2.2.2.1 (3 / 4 : ℝ)).2.1)
 
-set_option diagnostics true in
 /-- The even residual circle sector uses its actual supplied parity
 projection, retaining its fixed derivative loss. -/
 theorem solve_even_hasSmoothing (hS : IsPhysicalSpaces D T S) :
