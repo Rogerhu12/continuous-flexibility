@@ -34,9 +34,12 @@ theorem contDiff_boundaryTaylorBasis (j : ℕ) :
 
 theorem hasCompactSupport_boundaryTaylorBasis (j : ℕ) :
     HasCompactSupport (boundaryTaylorBasis j) := by
-  simpa only [boundaryTaylorBasis, Pi.mul_apply] using
-    (boundaryTaylorCutoff.hasCompactSupport.mul_right
-      (f' := fun x : ℝ => x ^ j / (j.factorial : ℝ)))
+  have heq : boundaryTaylorBasis j =
+      (boundaryTaylorCutoff : ℝ → ℝ) * (fun x : ℝ => x ^ j / (j.factorial : ℝ)) := by
+    funext x
+    simp only [boundaryTaylorBasis, Pi.mul_apply]
+  rw [heq]
+  exact boundaryTaylorCutoff.hasCompactSupport.mul_right
 
 /-- One constant bounds a fixed radial derivative of all the finitely many
 normalized basis functions, globally on the real line. -/
@@ -260,7 +263,7 @@ theorem exists_boundaryTaylorExtension_mixed_bound (n a : ℕ) :
         |∑ j ∈ Finset.range (n + 1),
           w ^ j * (w⁻¹) ^ a *
             iteratedDeriv a (boundaryTaylorBasis j) ((p.1 - d) / w) *
-            iteratedDeriv b (B j) p.2| := abs_add _ _
+            iteratedDeriv b (B j) p.2| := abs_add_le _ _
     _ ≤ C * (w⁻¹) ^ a *
           (∑ j ∈ Finset.range (n + 1), w ^ j * |iteratedDeriv b (A j) p.2|) +
         C * (w⁻¹) ^ a *

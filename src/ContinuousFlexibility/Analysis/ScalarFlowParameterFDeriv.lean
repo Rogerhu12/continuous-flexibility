@@ -31,7 +31,7 @@ theorem scalar_sub_eq_integral_fderiv
     f q - f p = (∫ s in (0 : ℝ)..1, D (s • (q - p) + p)) (q - p) := by
   have hpath (s : ℝ) :
       HasDerivAt (fun r : ℝ => r • (q - p) + p) (q - p) s := by
-    simpa only [one_smul] using ((hasDerivAt_id s).smul_const (q - p)).add_const p
+    simpa only [id_eq, one_smul] using ((hasDerivAt_id s).smul_const (q - p)).add_const p
   have hd (s : ℝ) :
       HasDerivAt (fun r : ℝ => f (r • (q - p) + p))
         (D (s • (q - p) + p) (q - p)) s :=
@@ -55,14 +55,15 @@ theorem hasFDerivAt_of_continuous_secantCLM
     HasFDerivAt f (E p) p := by
   apply hasFDerivAt_iff_tendsto.mpr
   have hlim : Tendsto (fun q => ‖E q - E p‖) (𝓝 p) (𝓝 (0 : ℝ)) := by
-    simpa only [sub_self, norm_zero] using (hE.sub continuousAt_const).norm.tendsto
+    simpa only [Pi.sub_apply, sub_self, norm_zero] using
+      (hE.sub (continuousAt_const (c := E p))).norm.tendsto
   apply squeeze_zero (fun q => mul_nonneg (inv_nonneg.mpr (norm_nonneg _)) (norm_nonneg _))
     (fun q => ?_) hlim
   change ‖q - p‖⁻¹ * ‖f q - f p - E p (q - p)‖ ≤ ‖E q - E p‖
   rw [hfactor q]
   by_cases hq : q = p
   · subst q
-    simp only [sub_self, map_zero, sub_zero, norm_zero,
+    simp only [sub_self, map_zero, norm_zero,
       inv_zero, zero_mul, le_refl]
   · have hn : 0 < ‖q - p‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hq)
     rw [← ContinuousLinearMap.sub_apply]
@@ -79,7 +80,7 @@ end NormedParameter
 
 section FiniteDimensionalParameter
 
-variable {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P]
+variable {P : Type} [NormedAddCommGroup P] [NormedSpace ℝ P]
   [FiniteDimensional ℝ P]
 
 /-- The external-parameter derivative of the actual chosen scalar flow.

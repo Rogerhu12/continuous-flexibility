@@ -60,9 +60,8 @@ theorem contDiffOn_boundaryHeightLogRatio
     (hRef : ContDiffOn ℝ ∞ href U) (hField : ContDiffOn ℝ ∞ h U)
     (hRefPos : ∀ p ∈ U, 0 < href p) (hPos : ∀ p ∈ U, 0 < h p) :
     ContDiffOn ℝ ∞ (boundaryHeightLogRatio href h) U := by
-  have hquot : ContDiffOn ℝ ∞ (fun p => h p / href p) U := by
-    simpa only [Pi.div_apply] using
-      hField.div hRef (fun p hp => (hRefPos p hp).ne')
+  have hquot : ContDiffOn ℝ ∞ (fun p => h p / href p) U :=
+    hField.fun_div hRef (fun p hp => (hRefPos p hp).ne')
   exact hquot.log (fun p hp => (div_pos (hPos p hp) (hRefPos p hp)).ne')
 
 /-- The finite logarithmic correction is globally smooth, although the
@@ -129,7 +128,8 @@ theorem iteratedDeriv_boundaryTaylorHeight_eq
   have hline : ContDiffAt ℝ ∞ (fun r : ℝ => (r, θ)) x :=
     contDiffAt_id.prodMk contDiffAt_const
   have hFslice : ContDiffAt ℝ ∞ (fun r => F (r, θ)) x :=
-    ((hlog (x, θ) hx).contDiffAt (hU.mem_nhds hx)).comp x hline
+    ContDiffAt.comp (f := fun r : ℝ => (r, θ)) (g := F) x
+      ((hlog (x, θ) hx).contDiffAt (hU.mem_nhds hx)) hline
   have hEslice : ContDiffAt ℝ ∞ (fun r => E (r, θ)) x :=
     hE.contDiffAt.comp x hline
   have hRefslice : ContDiffAt ℝ ∞ (fun r => href (r, θ)) x :=
