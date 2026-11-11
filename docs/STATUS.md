@@ -2,6 +2,19 @@
 
 Last updated: 2026-11-11.
 
+## Active line: Tame
+
+`line/Tame` is implementing the two frozen targets `H01Statement` and
+`H02Statement`. The work uses the existing genuine projective derivative
+calculus: ordered-partition composition of jets, local tame value estimates
+and multilinear normalization, and the resolvent identity followed by a
+recursive inverse-family derivative tower. New proof modules are being
+checked individually and through the root import in branch CI. Neither blueprint
+statement is recorded as proved until compilation and the axiom audit pass.
+
+After this task, fetch `origin` and follow the current task-claiming and
+completion rules on `main`, taking the first unclaimed task in `Pick next`.
+
 ## Target
 
 `thm:main` of the manuscript. The statement was first taken from the 62-page version
