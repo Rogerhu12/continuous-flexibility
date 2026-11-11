@@ -23,9 +23,9 @@ namespace InnerSelectedPhysicalGeometry
 variable {S : SelectedTailData} {D : ReferenceData} {X₀ : ℝ}
   (P : InnerSelectedPhysicalGeometry S D X₀)
 
+include P in
 /-- The full physical central interval is inside the original radial
 core, as follows from its two actual endpoints. -/
-include P in
 theorem central_interval_core :
     Ioo (centralRadius (-X₀)) (centralRadius X₀) ⊆ radialCore D := by
   have horder : -X₀ ≤ X₀ := by linarith only [P.cut_pos]
@@ -68,7 +68,8 @@ theorem centralModel_kappa :
         (fun i => centralDensityRoot (bufferCut (innerCentralBufferData q X₀) i))
         (innerCentralModelCutEnergy (innerSelectedCentralModel hfamily q hq)) := by
   funext i
-  simpa only [centralModel] using
+  simpa only [centralModel, centralColumn, innerCentralPhysicalModelChart,
+    InnerRadialModelChart.kappa] using
     innerCentralPhysicalModelChart_kappa D G central q hX hsupport
       P.centralHeight_pos P.central_interval_core P.central_profile hleft hright
       (innerSelectedCentralModel_hypotheses hfamily q hq)
@@ -114,7 +115,8 @@ fixed central cost, independent of every later number of cells. -/
 theorem centralModel_dirichlet_norm_le (hC : 0 ≤ C) :
     ‖(P.centralModel hfamily hX hsupport G central q hq hleft hright).dirichlet‖ ≤
       innerCentralDirichletConstant X₀ C := by
-  simpa only [centralModel] using
+  simpa only [centralModel, centralColumn, innerCentralPhysicalModelChart,
+    InnerRadialModelChart.dirichlet] using
     innerCentralPhysicalModelChart_dirichlet_cost D G central q hX hsupport
       P.centralHeight_pos P.central_interval_core P.central_profile hleft hright
       (innerSelectedCentralModel_hypotheses hfamily q hq)
@@ -128,7 +130,8 @@ theorem centralModel_column (i : Fin 2) :
         (innerSelectedCentralModel_hypotheses hfamily q hq)
         (innerSelectedCentralModel hfamily q hq) P.centralHeight_pos
         P.central_interval_core P.central_profile i := by
-  simpa only [centralModel] using
+  simpa only [centralModel, centralColumn, innerCentralPhysicalModelChart,
+    InnerRadialModelChart.column] using
     innerCentralPhysicalModelChart_column D G central q hX hsupport
       P.centralHeight_pos P.central_interval_core P.central_profile hleft hright
       (innerSelectedCentralModel_hypotheses hfamily q hq)

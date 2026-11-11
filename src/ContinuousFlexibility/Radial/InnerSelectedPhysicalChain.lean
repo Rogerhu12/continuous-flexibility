@@ -230,6 +230,7 @@ theorem outer_left (K : ℕ) :
   change innerModelChainCuts (P.modelCuts K) (P.outerPoint K false) (P.outerPoint K true)
     (0 : Fin (2 * (2 * K + 1) + 1)).castSucc = _
   rw [Fin.castSucc_zero, innerModelChainCuts_first]
+  rfl
 
 theorem outer_right (K : ℕ) :
     (P.chain K).right (Fin.last (2 * (2 * K + 1))) =
@@ -237,6 +238,7 @@ theorem outer_right (K : ℕ) :
   change innerModelChainCuts (P.modelCuts K) (P.outerPoint K false) (P.outerPoint K true)
     (Fin.last (2 * (2 * K + 1))).succ = _
   rw [Fin.succ_last, innerModelChainCuts_last]
+  rfl
 
 theorem gap_left (K : ℕ) (g : Fin (2 * K + 2)) :
     (P.chain K).left (innerModelChainGap g) =

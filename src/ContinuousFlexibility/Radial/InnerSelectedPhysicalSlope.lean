@@ -83,6 +83,7 @@ theorem scaled_interval_slope (side : Bool) {a b c : ℝ}
   rw [he]
   exact hslope _ hx
 
+include P in
 theorem cut_in_tail (side : Bool) {m : ℕ} (hm : S.chain.index ≤ m) (i : Fin 2) :
     innerMorseChainCut S.chain side m i ∈
       radialTailInterval (S.family S.sigma) side (S.joinInner side S.chain.index) := by
