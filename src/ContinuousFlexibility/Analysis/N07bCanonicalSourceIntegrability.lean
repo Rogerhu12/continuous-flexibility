@@ -24,6 +24,8 @@ open Set Filter MeasureTheory
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
   {K : CanonicalData S} {base : ℕ} {ε : ℝ}
   (hK : N04PartA D S C K base ε)
