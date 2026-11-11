@@ -64,6 +64,7 @@ theorem not_canonicalJetBounds_unboundedNegativeDividedCanonicalData
     (m : ℕ) (hm : K.positive m = false) (hinterval : K.left m < K.right m) :
     ¬CanonicalJetBounds T S C (unboundedNegativeDividedCanonicalData S K) base loss ε := by
   intro hbound
+  unfold CanonicalJetBounds at hbound
   obtain ⟨B, _, hB⟩ := hbound 0
   obtain ⟨r, hlr, hrr⟩ := exists_between hinterval
   let Q : ℝ := B * T.E0 (T.sample (K.cell m)) ^ B

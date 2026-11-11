@@ -22,13 +22,18 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter MeasureTheory
 open scoped ContDiff Topology Interval
 
-/-- A fixed continuous weight can be integrated against a smoothly scaled
-function without losing smoothness in the scaling parameter. -/
-theorem contDiff_scaled_intervalIntegral {w g : ℝ → ℝ}
-    (hw : Continuous w) (hg : ContDiff ℝ ∞ g) :
-    ContDiff ℝ ∞ (fun y : ℝ => ∫ t in (0 : ℝ)..1, w t * g (t * y)) := by
-  let J : ℕ → ℝ → ℝ := fun n y =>
-    ∫ t in (0 : ℝ)..1, w t * t ^ n * iteratedDeriv n g (t * y)
+/-- The actual derivative integrals, with one factor of the integration
+variable for each derivative of the scaling parameter. -/
+def scaledIntervalIntegralJet (w g : ℝ → ℝ) (n : ℕ) (y : ℝ) : ℝ :=
+  ∫ t in (0 : ℝ)..1, w t * t ^ n * iteratedDeriv n g (t * y)
+
+/-- Differentiation under the fixed integral inserts one factor of `t`.
+The dominating bound is obtained locally from a compact rectangle. -/
+theorem hasDerivAt_scaledIntervalIntegralJet {w g : ℝ → ℝ}
+    (hw : Continuous w) (hg : ContDiff ℝ ∞ g) (n : ℕ) (y : ℝ) :
+    HasDerivAt (scaledIntervalIntegralJet w g n)
+      (scaledIntervalIntegralJet w g (n + 1) y) y := by
+  let J : ℕ → ℝ → ℝ := scaledIntervalIntegralJet w g
   have hjet_cont (n : ℕ) : Continuous (iteratedDeriv n g) :=
     hg.continuous_iteratedDeriv n (by simp)
   have hjet_deriv (n : ℕ) (x : ℝ) :
@@ -75,17 +80,48 @@ theorem contDiff_scaled_intervalIntegral {w g : ℝ → ℝ}
         rw [hcoef]
         exact hprod))
     exact h.2
-  have hiter (n : ℕ) : iteratedDeriv n (J 0) = J n := by
-    induction n with
-    | zero => exact iteratedDeriv_zero
-    | succ n ih =>
-        rw [iteratedDeriv_succ, ih]
-        exact funext (fun y => (hJ n y).deriv)
-  have hsmooth : ContDiff ℝ ∞ (J 0) := by
+  exact hJ n y
+
+/-- The integral jets are the genuine iterated derivatives. -/
+theorem iteratedDeriv_scaledIntervalIntegralJet {w g : ℝ → ℝ}
+    (hw : Continuous w) (hg : ContDiff ℝ ∞ g) (n : ℕ) :
+    iteratedDeriv n (scaledIntervalIntegralJet w g 0) =
+      scaledIntervalIntegralJet w g n := by
+  induction n with
+  | zero => exact iteratedDeriv_zero
+  | succ n ih =>
+      rw [iteratedDeriv_succ, ih]
+      exact funext (fun y => (hasDerivAt_scaledIntervalIntegralJet hw hg n y).deriv)
+
+/-- Explicit differentiation formula for a smoothly scaled interval integral.
+In particular, this keeps the number of derivatives of `g` equal to the output
+order, as needed in the pointwise division estimates. -/
+theorem iteratedDeriv_scaled_intervalIntegral {w g : ℝ → ℝ}
+    (hw : Continuous w) (hg : ContDiff ℝ ∞ g) (n : ℕ) :
+    iteratedDeriv n (fun y : ℝ => ∫ t in (0 : ℝ)..1, w t * g (t * y)) =
+      fun y => ∫ t in (0 : ℝ)..1, w t * t ^ n * iteratedDeriv n g (t * y) := by
+  have hzero : (fun y : ℝ => ∫ t in (0 : ℝ)..1, w t * g (t * y)) =
+      scaledIntervalIntegralJet w g 0 := by
+    funext y
+    simp only [scaledIntervalIntegralJet, pow_zero, mul_one, iteratedDeriv_zero]
+  rw [hzero, iteratedDeriv_scaledIntervalIntegralJet hw hg]
+  rfl
+
+/-- A fixed continuous weight can be integrated against a smoothly scaled
+function without losing smoothness in the scaling parameter. -/
+theorem contDiff_scaled_intervalIntegral {w g : ℝ → ℝ}
+    (hw : Continuous w) (hg : ContDiff ℝ ∞ g) :
+    ContDiff ℝ ∞ (fun y : ℝ => ∫ t in (0 : ℝ)..1, w t * g (t * y)) := by
+  have hsmooth : ContDiff ℝ ∞ (scaledIntervalIntegralJet w g 0) := by
     apply contDiff_of_differentiable_iteratedDeriv (n := ⊤)
     intro n _
-    rw [hiter n]
-    exact fun y => (hJ n y).differentiableAt
-  simpa only [J, pow_zero, mul_one, iteratedDeriv_zero] using hsmooth
+    rw [iteratedDeriv_scaledIntervalIntegralJet hw hg n]
+    exact fun y => (hasDerivAt_scaledIntervalIntegralJet hw hg n y).differentiableAt
+  have hzero : scaledIntervalIntegralJet w g 0 =
+      (fun y : ℝ => ∫ t in (0 : ℝ)..1, w t * g (t * y)) := by
+    funext y
+    simp only [scaledIntervalIntegralJet, pow_zero, mul_one, iteratedDeriv_zero]
+  rw [hzero] at hsmooth
+  exact hsmooth
 
 end ContinuousFlexibility.Analysis
