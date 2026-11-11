@@ -69,9 +69,8 @@ theorem n05_referenceLowAngularJet_periodic
     intro θ
     simpa only [Prod.mk_add_mk, add_zero] using
       referenceBasisProjection_periodic {0, 1} f (p.1, θ)
-  change iteratedDeriv b (fun θ => referenceBasisProjection {0, 1} f (p.1, θ))
-      (p.2 + Real.pi) =
-    iteratedDeriv b (fun θ => referenceBasisProjection {0, 1} f (p.1, θ)) p.2
-  exact n05_periodic_iteratedDeriv hp b p.2
+  simpa only [n05_referenceLowAngularJet, mixedDerivative, iteratedDeriv_zero,
+    Prod.fst_add, Prod.snd_add, add_zero] using
+    n05_periodic_iteratedDeriv hp b p.2
 
 end ContinuousFlexibility.Radial

@@ -52,7 +52,9 @@ theorem n05_referenceLowAngularJet_weak (D : ReferenceData)
   · intro r θ
     change (∑ n ∈ ({0, 1} : Finset ℕ),
       referenceAngularCoefficient (fun φ => u (r, φ)) n *
-        referenceAngularBasis n (θ + 2 * Real.pi)) = _
+        referenceAngularBasis n (θ + 2 * Real.pi)) =
+      ∑ n ∈ ({0, 1} : Finset ℕ),
+        referenceAngularCoefficient (fun φ => u (r, φ)) n * referenceAngularBasis n θ
     apply Finset.sum_congr rfl
     intro n _
     rw [referenceAngularBasis_periodic_two_pi n θ]
@@ -69,7 +71,11 @@ theorem n05_referenceMeanPairing_add {D : ReferenceData} (hab : D.a ≤ D.b)
     r11b_integral_angularMean_mul_eq hab hf hk,
     r11b_integral_angularMean_mul_eq hab hg hk]
   simp only [Pi.add_apply, add_mul]
-  rw [integral_add (hf.integrable_mul hk) (hg.integrable_mul hk), mul_add]
+  have hfk : Integrable (fun x : PolarPoint => f x * k x) (radialPhysicalMeasure D) :=
+    hf.integrable_mul hk
+  have hgk : Integrable (fun x : PolarPoint => g x * k x) (radialPhysicalMeasure D) :=
+    hg.integrable_mul hk
+  rw [integral_add hfk hgk, mul_add]
 
 theorem n05_weakReferenceAngularJet_add {D : ReferenceData} (hab : D.a ≤ D.b)
     {u v d e : PolarPoint → ℝ} {b : ℕ}

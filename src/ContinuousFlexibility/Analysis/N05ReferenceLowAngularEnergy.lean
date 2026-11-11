@@ -128,7 +128,11 @@ theorem n05_referenceLowAngularJet_output_bound {D : ReferenceData}
           2 * γ * radialS (D.cellIndex m)) *
           ∫ r, (D.localizer m r * referenceRadialCoefficient U.1 1 r) ^ 2
             ∂volume.restrict (radialCore D) := by
-    simp only [outputNormSquare, outputRemainder, zero_mul, sub_zero,
+    have hzero : outputRemainder D 0 (n05_referenceLowAngularJet b U.1, 0) =
+        n05_referenceLowAngularJet b U.1 := by
+      funext p
+      simp only [outputRemainder, zero_mul, sub_zero]
+    simp only [outputNormSquare, hzero,
       zero_pow (by decide : (2 : ℕ) ≠ 0), zero_add, outputCellSquare]
     rw [← tsum_mul_left]
     apply tsum_congr

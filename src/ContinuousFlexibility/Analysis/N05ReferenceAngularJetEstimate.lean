@@ -54,6 +54,9 @@ theorem n05_referenceHighAngularJet_output_norm {D : ReferenceData}
   have hpart : RadialPartition D := hD.choose_spec.2.1
   have hcell := r11b_cellIntegrable_of_global_memLp hpart
     (r11b_output_memLp hD hborder hγ ⟨a, hU⟩)
+  have hzero (f : PolarPoint → ℝ) : outputRemainder D 0 (f, 0) = f := by
+    funext p
+    simp only [outputRemainder, zero_mul, sub_zero]
   have hs (n : ℕ) (_hn : n ∈ J) :
       Summable (outputCellSquare D γ M (referenceBasisProjection {n + 2} U.1)) := by
     have hI : ∀ k ∈ ({n + 2} : Finset ℕ), 2 ≤ k := by
@@ -61,13 +64,13 @@ theorem n05_referenceHighAngularJet_output_norm {D : ReferenceData}
       simp only [Finset.mem_singleton] at hk
       omega
     have hp := n05_referenceHighProjection_outputRealization hab hpart hU hI
-    simpa only [outputRemainder, zero_mul, sub_zero] using hp.2.1
+    simpa only [hzero] using hp.2.1
   obtain ⟨hc, hsum, heq⟩ := n05_referenceHighAngularJet_weighted_sum hab hcell J b
     (fun m => Real.exp (-2 * M * radialQ (D.cellIndex m) +
       2 * γ * radialS (D.cellIndex m))) hs
   refine ⟨hc, hsum, ?_⟩
-  simpa only [outputNormSquare, outputCellSquare, outputRemainder,
-    n05_referenceHighOutputSquare, zero_mul, sub_zero,
+  simpa only [outputNormSquare, outputCellSquare, hzero,
+    n05_referenceHighOutputSquare,
     zero_pow (by decide : (2 : ℕ) ≠ 0), zero_add] using heq
 
 /-- The constant and the material exponents are fixed before the angular

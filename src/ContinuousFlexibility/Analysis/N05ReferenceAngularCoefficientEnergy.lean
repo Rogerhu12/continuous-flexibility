@@ -57,7 +57,10 @@ theorem n05_referenceWeighted_singleCoefficient {D : ReferenceData}
 theorem n05_zeroOutputNormSquare_eq_sourceNormSquare_neg (D : ReferenceData)
     (γ M : ℝ) (f : PolarPoint → ℝ) :
     outputNormSquare D γ M 0 (f, 0) = sourceNormSquare D γ (-M) (f, 0) := by
-  simp only [outputNormSquare, sourceNormSquare, outputRemainder, zero_mul, sub_zero,
+  have hzero : outputRemainder D 0 (f, 0) = f := by
+    funext p
+    simp only [outputRemainder, zero_mul, sub_zero]
+  simp only [outputNormSquare, sourceNormSquare, hzero,
     zero_pow (by decide : (2 : ℕ) ≠ 0), zero_add, sourceCellSquare_neg_fun]
 
 end ContinuousFlexibility.Radial
