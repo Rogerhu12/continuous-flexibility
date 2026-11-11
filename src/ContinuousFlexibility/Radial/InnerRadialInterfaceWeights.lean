@@ -32,7 +32,8 @@ theorem innerChainBlockSum_commute_of_constant_weights (n : ℕ) (w : Fin n → 
       (p.val < n → innerChainScalarRestriction n p w 1 1 = c)) :
     Commute (innerBoundaryDiagonal w)
       (innerInterfaceBlockSum (innerChainBoundaryCLM n) K) := by
-  apply commute_iff_eq.mpr
+  apply (commute_iff_eq (innerBoundaryDiagonal w)
+    (innerInterfaceBlockSum (innerChainBoundaryCLM n) K)).mpr
   apply ContinuousLinearMap.ext
   intro ξ
   apply ext_inner_right ℝ
@@ -157,7 +158,7 @@ theorem normalized_error_both (hw : ContDiff ℝ ∞ D.w)
   cases hp : C.piece p with
   | inl M =>
     rcases hmodels p M hp with ⟨hleft, hright, hlocalκ⟩
-    rw [hp, InnerRadialActualPiece.errorMatrix,
+    rw [InnerRadialActualPiece.errorMatrix,
       C.model_kappa_restriction hsep p M hp hleft hright hlocalκ]
     exact herror p M hp sign
   | inr Q =>

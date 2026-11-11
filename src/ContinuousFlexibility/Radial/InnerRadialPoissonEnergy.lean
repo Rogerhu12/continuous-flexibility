@@ -137,9 +137,12 @@ theorem poisson_norm_sq_le (hw : ContDiff ℝ ∞ D.w) {s : ℝ} (hs : 0 < s)
     div_nonneg (Real.sqrt_nonneg _) A.frequency_pos.le
   have hsq := (sq_le_sq₀ (norm_nonneg _) (mul_nonneg hK
     (Real.sqrt_nonneg _))).mpr hn
+  change ‖A.fieldPoisson hw.continuous ξ‖ ^ 2 ≤
+    ((Real.sqrt (12 / s) / j) * Real.sqrt
+      ⟪ξ, Matrix.toEuclideanCLM (n := Fin 2) (𝕜 := ℝ) A.fluxMatrix ξ⟫_ℝ) ^ 2 at hsq
+  rw [mul_pow, Real.sq_sqrt hnonneg] at hsq
   rw [A.poisson_apply, WithLp.norm_toLp_fst]
-  simpa only [fieldPoisson, fluxMatrix, innerGapFluxOperator,
-    mul_pow, Real.sq_sqrt hnonneg] using hsq
+  exact hsq
 
 end InnerRadialGapChart
 
