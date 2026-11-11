@@ -125,9 +125,13 @@ theorem boundaryTaylorPrincipalRemainder_smooth_zeroJets
   have hline : ContDiffAt ℝ ∞ (fun r : ℝ => (r, θ)) x :=
     contDiffAt_id.prodMk contDiffAt_const
   have hψ : ContDiffAt ℝ ∞ (fun r => (Fnew (r, θ)).1) x :=
-    (hFn.fst.contDiffAt (hU.mem_nhds (hx θ))).comp x hline
+    ContDiffAt.comp (f := fun r : ℝ => (r, θ))
+      (g := fun p : PolarPoint => (Fnew p).1) x
+      (hFn.fst.contDiffAt (hU.mem_nhds (hx θ))) hline
   have hψ₀ : ContDiffAt ℝ ∞ (fun r => (F (r, θ)).1) x :=
-    (hF.fst.contDiffAt (hU.mem_nhds (hx θ))).comp x hline
+    ContDiffAt.comp (f := fun r : ℝ => (r, θ))
+      (g := fun p : PolarPoint => (F p).1) x
+      (hF.fst.contDiffAt (hU.mem_nhds (hx θ))) hline
   have hcomp : radialBoundaryJet (fun p => N ((Fnew p).1)) x k θ =
       radialBoundaryJet (fun p => N ((F p).1)) x k θ := by
     simpa only [radialBoundaryJet, Function.comp_def] using
@@ -142,7 +146,9 @@ theorem boundaryTaylorPrincipalRemainder_smooth_zeroJets
   have hsρ : ContDiffAt ℝ ∞ (fun r => ρ (r, θ)) x :=
     (hρ.contDiffAt (hU.mem_nhds (hx θ))).comp x hline
   have hsN : ContDiffAt ℝ ∞ (fun r => N ((Fnew (r, θ)).1)) x :=
-    (hNFn.contDiffAt (hU.mem_nhds (hx θ))).comp x hline
+    ContDiffAt.comp (f := fun r : ℝ => (r, θ))
+      (g := fun p : PolarPoint => N ((Fnew p).1)) x
+      (hNFn.contDiffAt (hU.mem_nhds (hx θ))) hline
   change iteratedDeriv k (fun r => ρ (r, θ) - N ((Fnew (r, θ)).1)) x = 0
   rw [iteratedDeriv_fun_sub
     (hsρ.of_le (show (k : ℕ∞ω) ≤ ∞ by simp))

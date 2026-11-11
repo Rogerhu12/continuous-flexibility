@@ -41,11 +41,14 @@ theorem seeleyPeriodicExtension_eq_zero_of_halfPlane
   by_cases hp : 0 ≤ p.1
   · rw [seeleyPeriodicExtension_of_nonneg f hp, hf p.1 hp p.2]
   · rw [seeleyPeriodicExtension_of_neg f (lt_of_not_ge hp)]
-    apply tsum_eq_zero
-    intro i
-    rw [hf (-seeleyData.b i * p.1)
-      (mul_nonneg_of_nonpos_of_nonpos (neg_nonpos.mpr (seeleyData.b_nonneg i))
-        (lt_of_not_ge hp).le) p.2, mul_zero, smul_zero]
+    calc
+      _ = ∑' _i : ℕ, (0 : ℝ) := by
+        apply tsum_congr
+        intro i
+        rw [hf (-seeleyData.b i * p.1)
+          (mul_nonneg_of_nonpos_of_nonpos (neg_nonpos.mpr (seeleyData.b_nonneg i))
+            (lt_of_not_ge hp).le) p.2, mul_zero, smul_zero]
+      _ = 0 := tsum_zero
 
 theorem extendedRootEven_eq_angle_of_halfPlane
     {G : ℝ × ℝ × ℝ → ℝ}

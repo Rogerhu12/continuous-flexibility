@@ -88,6 +88,7 @@ theorem nonlinearInverse_positiveJets_le_material
     calc
       ‖iteratedFDeriv ℝ k g x‖ ≤ flowJetPolynomialEval (P (k - 1)) M := hjets
       _ ≤ C (k - 1) * W ^ (C (k - 1)) * (1 + p (k + loss) z) := hpack
-      _ = B k * W ^ (B k) * (1 + p (k + loss) z) := by rw [B, if_neg hk0]
+      _ = B k * W ^ (B k) * (1 + p (k + loss) z) := by
+        simp only [B, if_neg hk0]
 
 end ContinuousFlexibility.Analysis

@@ -207,8 +207,10 @@ theorem factoredCharacteristicSpeed_reference_bounds
   have he : factoredCharacteristicSpeed wref g w z r σ p =
       referenceRootSpeedFactor wref g r σ p.1 *
         (wref (rootProfileShift r σ p).1 * Real.sqrt D / Q) := by
-    unfold factoredCharacteristicSpeed referenceRootSpeedFactor
-    dsimp only [Q, D]
+    change Real.sqrt (rootProfileRadicand wref g r σ p.1) * Real.sqrt D / Q =
+      (Real.sqrt (rootProfileRadicand wref g r σ p.1) /
+        wref (rootProfileShift r σ p).1) *
+          (wref (rootProfileShift r σ p).1 * Real.sqrt D / Q)
     field_simp [hw.ne', hQpos.ne']
     <;> ring
   rw [he]

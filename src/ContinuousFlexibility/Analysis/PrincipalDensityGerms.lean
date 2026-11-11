@@ -66,7 +66,6 @@ theorem coordinatePrincipalRemainder_eventuallyEq
       N ((G q).1)) := by
   filter_upwards [coordinatePrincipalDensity_component_eventuallyEq hF hh i, hF]
     with q hρ hchart
-  dsimp only
   rw [hρ, hchart]
 
 /-- An actual one-sided normal form and genuine matching germs force
@@ -101,7 +100,9 @@ theorem radialBoundaryJet_principalRemainder_eq_zero_of_germs
   have hline : ContDiffAt ℝ ∞ (fun r : ℝ => (r, θ)) c :=
     contDiffAt_id.prodMk contDiffAt_const
   have hsρ : ContDiffAt ℝ ∞ (fun r => ρ (r, θ)) c := hρ.comp c hline
-  have hsN : ContDiffAt ℝ ∞ (fun r => N ((G (r, θ)).1)) c := hNG.comp c hline
+  have hsN : ContDiffAt ℝ ∞ (fun r => N ((G (r, θ)).1)) c :=
+    ContDiffAt.comp (f := fun r : ℝ => (r, θ))
+      (g := fun p : PolarPoint => N ((G p).1)) c hNG hline
   have hz : iteratedDeriv k (fun r => ρ (r, θ) - N ((G (r, θ)).1)) c = 0 := by
     rw [iteratedDeriv_fun_sub
       (hsρ.of_le (show (k : ℕ∞ω) ≤ ∞ by simp))

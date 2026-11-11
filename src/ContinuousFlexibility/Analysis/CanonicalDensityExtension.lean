@@ -99,7 +99,7 @@ theorem exists_canonicalDensity_extension_of_physical_zeroJets
       rw [← heF]
       exact e.right_inv (htarget hq'.1)
     dsimp only [E, R]
-    rw [hrightE, heq q hq']
+    rw [hrightE, heq hq']
   · intro k hk
     have hinv' : ContDiffAt ℝ ∞ e.symm (e (c, θ)) := by
       rw [heF]
