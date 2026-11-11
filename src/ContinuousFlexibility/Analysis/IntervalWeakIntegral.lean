@@ -19,18 +19,8 @@ namespace ContinuousFlexibility.Analysis
 noncomputable section
 
 /-- The ordinary signed integral, based at an interior point. -/
-def intervalLocalPrimitive (f : ℝ → ℝ) (x₀ x : ℝ) : ℝ :=
-  ∫ y in x₀..x, f y
-
-theorem intervalIntegrable_of_locallyIntegrableOn_Ioo {a b : ℝ} {f : ℝ → ℝ}
-    (hf : LocallyIntegrableOn f (Ioo a b) volume) {x y : ℝ}
-    (hx : x ∈ Ioo a b) (hy : y ∈ Ioo a b) :
-    IntervalIntegrable f volume x y := by
-  have hsub : uIcc x y ⊆ Ioo a b := by
-    intro z hz
-    exact ⟨(lt_min hx.1 hy.1).trans_le hz.1,
-      hz.2.trans_lt (max_lt hx.2 hy.2)⟩
-  exact (hf.integrableOn_compact_subset hsub isCompact_uIcc).intervalIntegrable
+abbrev intervalLocalPrimitive (f : ℝ → ℝ) (x₀ x : ℝ) : ℝ :=
+  intervalWeakPrimitive x₀ f x
 
 theorem continuousOn_intervalLocalPrimitive {a b : ℝ} (hab : a < b)
     {f : ℝ → ℝ} (hf : LocallyIntegrableOn f (Ioo a b) volume)

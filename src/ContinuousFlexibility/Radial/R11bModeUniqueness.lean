@@ -47,11 +47,12 @@ theorem r11b_homogeneous_mode_eq_zero_of_strict {D : ReferenceData}
             ∫ _r in D.a..D.b, (0 : ℝ) := by
     intro φ hφ hφc hφs
     simpa only [radialJacobi, intervalIntegral.integral_zero] using heq φ hφ hφc hφs
-  have h := extend_weak_potential_tests_interval hgeom.2.1 hu
-    (memLp_zero : MemLp (fun _ : ℝ => (0 : ℝ)) 2
-      (volume.restrict (radialCore D)))
+  have hzero : MemLp (fun _ : ℝ => (0 : ℝ)) 2
+      (volume.restrict (radialCore D)) :=
+    MemLp.ae_eq (Lp.coeFn_zero ℝ 2 (volume.restrict (radialCore D))) (Lp.memLp 0)
+  have h := extend_weak_potential_tests_interval hgeom.2.1 hu hzero
     hgeom.2.2.1.1 hV (r11b_continuous_referenceColumn hgeom hborder) κ
-    (by simpa only [zero_mul] using hstrict) hψ hψc hψs
+    (by simpa only [zero_mul, radialCore] using hstrict) hψ hψc hψs
   simpa only [radialJacobi, zero_mul, intervalIntegral.integral_zero] using h
 
 theorem r11b_graph_mode_unique {D : ReferenceData}

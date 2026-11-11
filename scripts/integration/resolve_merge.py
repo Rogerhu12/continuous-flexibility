@@ -21,6 +21,18 @@ for f in files:
         # The root import is regenerated below; the ledger keeps our side and is
         # rewritten by the lead after the merge.
         subprocess.run(['git', 'checkout', '--ours', '--', f], check=True)
+    elif f == 'scripts/BlueprintStatus.lean':
+        # Lines only append `#print axioms` lines: keep both sides.
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            parts = []
+            for stage, name in ((2, 'ours'), (1, 'base'), (3, 'theirs')):
+                q = pathlib.Path(d) / name
+                q.write_text(show(stage, f), encoding='utf-8', newline='\n')
+                parts.append(str(q))
+            merged = subprocess.run(['git', 'merge-file', '-p', '--union', *parts],
+                                    capture_output=True, text=True, encoding='utf-8').stdout
+        p.write_text(merged, encoding='utf-8', newline='\n')
     else:
         raise SystemExit('unexpected conflict in ' + f)
     subprocess.run(['git', 'add', f], check=True)

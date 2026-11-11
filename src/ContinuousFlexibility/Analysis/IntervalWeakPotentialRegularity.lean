@@ -38,7 +38,7 @@ theorem intervalIntegral_mul_eq_integral_of_tsupport {a b : ℝ}
     (u p : ℝ → ℝ) (hp : tsupport p ⊆ Ioo a b) :
     (∫ x in a..b, u x * p x) = ∫ x, u x * p x := by
   apply intervalIntegral.integral_eq_integral_of_support_subset
-  exact Function.support_mul_subset_right.trans
+  exact (Function.support_mul_subset_right u p).trans
     ((subset_tsupport p).trans (hp.trans Ioo_subset_Ioc_self))
 
 theorem exists_contDiffOn_one_rep_of_weak_potential_Ioo {a b : ℝ}

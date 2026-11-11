@@ -39,7 +39,7 @@ theorem r11b_ae_of_radial_angularMean {D : ReferenceData} {β : Type*}
     (hfg : f =ᵐ[(volume.restrict (radialCore D)).prod angularMeanMeasure] g) :
     f =ᵐ[radialPhysicalMeasure D] g := by
   rw [r11b_physicalMeasure_eq_smul_radial_angularMean]
-  exact ae_smul_measure hfg _
+  exact Measure.ae_smul_measure hfg _
 
 theorem r11b_integral_sq_physical_eq (D : ReferenceData) (f : PolarPoint → ℝ) :
     (∫ z, f z ^ 2 ∂radialPhysicalMeasure D) =

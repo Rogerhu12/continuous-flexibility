@@ -92,8 +92,12 @@ theorem r11b_weakNormalDerivative_tensor {D : ReferenceData} (hab : D.a < D.b)
     r11b_continuous_memLp hψ.1.continuous
   have hψrLp : MemLp (radialPartial ψ) 2 (radialPhysicalMeasure D) :=
     r11b_continuous_memLp (r11b_radialTest_radialPartial hψ).1.continuous
-  have hleft := hU.integrable_mul hψrLp
-  have hright := hV.integrable_mul hψLp
+  have hleft : Integrable (fun x : PolarPoint =>
+      (c x.1 * e x.2) * radialPartial ψ x) (radialPhysicalMeasure D) :=
+    hU.integrable_mul hψrLp
+  have hright : Integrable (fun x : PolarPoint =>
+      (d x.1 * e x.2) * ψ x) (radialPhysicalMeasure D) :=
+    hV.integrable_mul hψLp
   rw [r11b_integral_angularMean_mul_eq hab.le hU hψrLp,
     r11b_integral_angularMean_mul_eq hab.le hV hψLp]
   have heq : (∫ x, (c x.1 * e x.2) * radialPartial ψ x ∂radialPhysicalMeasure D) =

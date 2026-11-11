@@ -89,7 +89,7 @@ theorem anglePairEvaluation_of_weakDerivative {f d : AngleL2} {g : ℝ → ℝ}
     have hm := integral_angleIntegralPrimitive_mul_deriv d (φ := fun t => t) contDiff_id
     simpa only [deriv_id'', mul_one, integral_angleL2_eq_zero_of_hasWeakAngularDerivative h,
       mul_zero, zero_sub] using hm
-  letI := angleMeasure_finite_for_evaluation
+  let := angleMeasure_finite_for_evaluation
   have hiP : Integrable (angleIntegralPrimitive d) angleMeasure :=
     (memLp_angleMeasure_of_continuous (continuous_angleIntegralPrimitive d)).integrable (by norm_num)
   have hmeanf : (∫ t, f t ∂angleMeasure) =
@@ -273,7 +273,8 @@ theorem circleJetDecodeCLM_apply (γ : ℝ) (u : CircleJetProjectiveLimit T hM) 
 theorem continuous_circleJetDecoded (γ : ℝ) :
     Continuous (fun u : CircleJetProjectiveLimit T hM => circleJetDecoded u γ) := by
   have h : (fun u : CircleJetProjectiveLimit T hM => circleJetDecoded u γ) =
-      circleJetDecodeCLM T hM γ := funext fun u => (circleJetDecodeCLM_apply T hM γ u).symm
+      (fun u => circleJetDecodeCLM T hM γ u) :=
+    funext fun u => (circleJetDecodeCLM_apply T hM γ u).symm
   rw [h]
   exact (circleJetDecodeCLM T hM γ).continuous
 

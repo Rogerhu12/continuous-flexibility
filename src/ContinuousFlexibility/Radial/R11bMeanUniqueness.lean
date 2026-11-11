@@ -93,7 +93,8 @@ theorem r11b_graph_mean_unique {D : ReferenceData}
     have hVi := intervalIntegrable_mul_continuous hgeom.2.1.le hv hflux
     have hsupport : Function.support
         (fun r => u r * deriv (fun t => D.w t * deriv φ t) r) ⊆ Ioc D.a D.b := by
-      apply (Function.support_mul_subset_right).trans
+      apply (Function.support_mul_subset_right u
+        (deriv (fun t => D.w t * deriv φ t))).trans
       have hts : tsupport (deriv (fun t => D.w t * deriv φ t)) ⊆ radialCore D :=
         tsupport_deriv_subset.trans
           (tsupport_mul_subset_right.trans (tsupport_deriv_subset.trans hφs))

@@ -105,9 +105,9 @@ theorem r11b_graph_mode_scaling {D : ReferenceData}
     rw [hsourcePair] at hVeq
     by_cases hj2 : j = 2
     · subst j
-      simp only [if_pos rfl] at hUeq hVeq
+      simp only [if_pos rfl, ite_true] at hUeq hVeq
       dsimp only [ell]
-      simp only [if_pos rfl]
+      simp only [if_pos rfl, ite_true]
       have hscaled := congrArg (fun t : ℝ => s * t) hUeq
       nlinarith only [hVeq, hscaled]
     · simp only [if_neg hj2, zero_mul, add_zero] at hUeq hVeq
