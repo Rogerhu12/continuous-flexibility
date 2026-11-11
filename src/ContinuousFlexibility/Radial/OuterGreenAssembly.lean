@@ -151,6 +151,7 @@ theorem OuterFundamentalStatePair.integrable_kernel_deep
     ring
   · refine (hD.add (hPf.const_mul (outerGreenKernel lam F.U F.V c c * P x))).congr ?_
     filter_upwards [outer_ae_deep_interval μ hμ] with y hy
+    simp only [Pi.add_apply]
     rw [F.green_tail_decomposition_unit_flux hlam hac hcb hPc hQc hflux hx hy]
     ring
 

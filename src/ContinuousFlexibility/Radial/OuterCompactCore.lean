@@ -22,7 +22,7 @@ theorem outer_signed_state_energy_transfer {u z α β : ℝ → ℝ} {l r s t : 
       HasDerivAt u (α x * z x) x ∧ HasDerivAt z (β x * u x) x)
     (hs : s ∈ Icc l r) (ht : t ∈ Icc l r) :
     u t ^ 2 + z t ^ 2 ≤ (u s ^ 2 + z s ^ 2) *
-      exp |∫ x in s..t, |α x| + |β x|| := by
+      exp (abs (∫ x in s..t, |α x| + |β x|)) := by
   have hderiv (x : ℝ) (hx : x ∈ Icc l r) :
       HasDerivAt (fun y => u y ^ 2 + z y ^ 2)
         (2 * (α x + β x) * (u x * z x)) x :=
@@ -98,7 +98,7 @@ theorem outer_compact_state_energy {D : ReferenceData} {l r a b j scale J S R s 
         intro x hx
         rw [uIcc_of_le hlr] at hx
         dsimp only [α, β]
-        simp only [abs_div, abs_mul, abs_of_pos hscale, abs_of_pos (hwp x hx),
+        simp only [abs_div, abs_mul, abs_inv, abs_of_pos hscale, abs_of_pos (hwp x hx),
           abs_of_pos (hxp x hx), abs_of_nonneg (sq_nonneg j), div_eq_mul_inv, mul_inv_rev]
         ring
       _ = _ := by

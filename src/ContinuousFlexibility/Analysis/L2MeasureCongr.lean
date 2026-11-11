@@ -85,10 +85,10 @@ def l2EquivCompose {μ ν κ : Measure ℝ}
     Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 κ where
   toFun := fun f => F (E f)
   invFun := fun f => E.symm (F.symm f)
-  left_inv := by intro f; rw [F.symm_apply_apply, E.symm_apply_apply]
-  right_inv := by intro f; rw [E.apply_symm_apply, F.apply_symm_apply]
+  left_inv := fun f => (congrArg E.symm (F.symm_apply_apply (E f))).trans (E.symm_apply_apply f)
+  right_inv := fun f => (congrArg F (E.apply_symm_apply (F.symm f))).trans (F.apply_symm_apply f)
   map_add' := by intro f g; rw [map_add, map_add]
-  map_smul' := by intro c f; rw [map_smul, map_smul]
+  map_smul' := by intro c f; rw [map_smul, map_smul, RingHom.id_apply]
   norm_map' := fun f => (F.norm_map (E f)).trans (E.norm_map f)
 
 theorem l2EquivCompose_apply {μ ν κ : Measure ℝ}
