@@ -270,9 +270,16 @@ theorem controlOpticalFactor_iteratedDeriv_sample_bound
     (fun x => deriv (C.control x.1.1)) (fun (_ : X) (r : ℝ) => r⁻¹)
     (fun x => (contDiff_infty_iff_deriv.mp (hC.2.2.2.2.2.1 x.1.1).1).2.contDiffAt)
     (fun x => contDiffAt_id.inv (hD.1.trans (hcore x).1).ne') hF hR n
-  exact ⟨B, A, hB, hA₀, fun m r hr => by
-    simpa only [controlOpticalFactor, div_eq_mul_inv, mul_one] using
-      hb (⟨(m, r), hr⟩ : X)⟩
+  refine ⟨B, A, hB, hA₀, fun m r hr => ?_⟩
+  have he : controlOpticalFactor C m =
+      (fun s : ℝ => deriv (C.control m) s * s⁻¹) := by
+    funext s
+    exact div_eq_mul_inv (deriv (C.control m) s) s
+  have hbound := hb (⟨(m, r), hr⟩ : X)
+  change |iteratedDeriv n (fun s : ℝ => deriv (C.control m) s * s⁻¹) r| ≤
+    B * 1 * T.E0 (T.sample (C.cell m)) ^ A at hbound
+  rw [he]
+  simpa only [mul_one] using hbound
 
 /-- All control-factor jets retain a full endpoint factor after the
 radial derivative weight is inserted. The zero-order case uses the actual

@@ -85,7 +85,7 @@ theorem coefficientFamily_point_bound (k s : ℕ) (i : Fin 3) :
     (fun j hj hjpos y hy w =>
       hb j hj hjpos a b hab q hq J0 y hy
         (jointStateGrading_displacement_lt_one hε2 hy).le w) JD v
-  simpa only [Real.norm_eq_abs, M, mul_assoc] using hh
+  simpa only [JD, SmoothDirections.congr, Real.norm_eq_abs, M, mul_assoc] using hh
 
 /-- The physical point estimate transfers to the prescribed cell sample,
 with one common positive multiplier and exponent. -/

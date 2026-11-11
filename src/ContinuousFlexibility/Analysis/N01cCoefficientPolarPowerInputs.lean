@@ -152,6 +152,7 @@ theorem coefficientPolarInput_powerBounds
     · exact hMle
     · exact hoh
   have hh := hraw.trans hmid
-  simpa only [Real.norm_eq_abs, B, P, mul_assoc, mul_left_comm, mul_comm] using hh
+  simpa only [Jq, SmoothDirections.congr, Real.norm_eq_abs, B, P,
+    mul_assoc, mul_left_comm, mul_comm] using hh
 
 end ContinuousFlexibility.Statements

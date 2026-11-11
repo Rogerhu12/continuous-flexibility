@@ -45,7 +45,8 @@ theorem radialLowJets_powerBounds
   let C : ℝ := 1 + ∑ i : Fin (s + 1) × Fin (K + 1), c i
   let B : ℝ := ∑ i : Fin (s + 1) × Fin (K + 1), A i
   have hC : 1 ≤ C := by
-    have hh := Finset.sum_nonneg (fun i _ => (hc i).le)
+    have hh : 0 ≤ ∑ i : Fin (s + 1) × Fin (K + 1), c i :=
+      Finset.sum_nonneg (fun i _ => (hc i).le)
     dsimp only [C]
     linarith
   have hB : 0 ≤ B := Finset.sum_nonneg (fun i _ => hA i)
@@ -65,8 +66,9 @@ theorem radialLowJets_powerBounds
     let i : Fin (s + 1) × Fin (K + 1) :=
       (⟨a, by omega⟩, ⟨k, Nat.lt_succ_of_le hk⟩)
     let Jcan := (Jr a q.1 hq.1).restrict J.open_domain (subset_univ _)
-    let Jrad := J.congr (fun y _ => by
-      simp only [mixedDerivative_radialFunction, ite_true])
+    let Jrad : SmoothDirections U (fun y => iteratedDeriv a (f y) q.1) :=
+      J.congr (fun y _ => by
+        simp only [mixedDerivative_radialFunction, ite_true])
     have heq := HasProjectiveJetsOn.unique J.open_domain
       Jrad.hasProjectiveJetsOn Jcan.hasProjectiveJetsOn k x hx
     have hd : J.D k x v = (Jr a q.1 hq.1).D k x v :=
@@ -82,8 +84,9 @@ theorem radialLowJets_powerBounds
       (le_mul_of_one_le_right
         (mul_nonneg (mul_nonneg (zero_le_one.trans hC)
           (Real.rpow_nonneg (zero_le_one.trans (hE q.1 hq.1)) _)) hW) hRpow)
-  · let Jzero := J.congr (fun y _ => by
-      simp only [mixedDerivative_radialFunction, if_neg hb0])
+  · let Jzero : SmoothDirections U (fun _ : X => (0 : ℝ)) :=
+      J.congr (fun y _ => by
+        simp only [mixedDerivative_radialFunction, if_neg hb0])
     have hz : J.D k x v = 0 := by
       by_cases hk0 : k = 0
       · subst k

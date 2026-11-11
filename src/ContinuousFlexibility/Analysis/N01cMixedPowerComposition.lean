@@ -206,8 +206,9 @@ theorem MixedPowerBounds.scalarComp
   intro k hk a b hab q hq J x hx hlow v hv R hR hhigh hvhigh
   have hEpos : 0 < E q := zero_lt_one.trans_le (hE q hq)
   have hRpos : 0 < R := zero_lt_one.trans_le hR
-  let J0 := (F.parameter 0 0 q hq).congr
-    (fun y _ => by simp only [mixedDerivative, iteratedDeriv_zero])
+  let J0 : SmoothDirections U (fun y => f y q) :=
+    (F.parameter 0 0 q hq).congr
+      (fun y _ => by simp only [mixedDerivative, iteratedDeriv_zero])
   let JO (m : ℕ) : SmoothDirections U (fun y => iteratedDeriv m g (f y q)) :=
     smoothDirections_contDiff_comp J0 hV (contDiffOn_iteratedDeriv_open hV hg m)
       (fun y hy => hKV (hmap y hy hq))
@@ -339,7 +340,9 @@ theorem MixedPowerBounds.scalarComp
   calc
     _ ≤ ∑ c : OrderedFinpartition (a + b), ‖(JT c).D k x v‖ := by
       rw [hd]
-      simpa only [one_mul] using norm_sum_le _ _
+      simpa only [one_mul] using
+        (norm_sum_le (Finset.univ : Finset (OrderedFinpartition (a + b)))
+          (fun c : OrderedFinpartition (a + b) => (1 : ℝ) * (JT c).D k x v))
     _ ≤ ∑ _c : OrderedFinpartition (a + b), Cp * C0 * Cf ^ s * W :=
       Finset.sum_le_sum (fun c _ => hterm c)
     _ ≤ Q * (Cp * C0 * Cf ^ s * W) := by

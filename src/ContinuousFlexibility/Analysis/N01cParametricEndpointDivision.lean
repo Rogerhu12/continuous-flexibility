@@ -28,7 +28,7 @@ theorem contDiffAt_radialParameter_deriv
   have hd := (contDiffAt_parameter_fderiv
     (f := fun p : ℝ × E => F (p.2, p.1)) hs).comp (x, r)
     (contDiffAt_snd.prodMk contDiffAt_fst)
-  simpa only [fderiv_apply_one_eq_deriv] using
+  simpa only [Function.comp_apply, fderiv_apply_one_eq_deriv] using
     hd.clm_apply (contDiffAt_const (c := (1 : ℝ)))
 
 variable [FiniteDimensional ℝ E]
