@@ -81,7 +81,7 @@ theorem positiveBuffer_exists_single_boundary_profile {V : ℝ → ℝ}
     exact hx.trans (hpUo hxs).symm
   have hpd := positiveBuffer_classical_derivative_ae u hO hderiv hpUo
   refine ⟨p, hp, (hpU (mem_insert c O)).trans (htrace hc),
-    ((Lp.memLp (positiveBufferEnergyCoordinate V 0 u)).restrict O).congr hpu,
+    (memLp_congr_ae hpu).mp ((Lp.memLp (positiveBufferEnergyCoordinate V 0 u)).restrict O),
     positiveBuffer_classical_energy_integrableOn hV.continuous u O hpu hpd, ?_, ?_, ?_⟩
   · intro x hx
     rw [hpUdd hx, hpUo hx]

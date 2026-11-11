@@ -20,7 +20,7 @@ theorem buffer_memLp_Ioi_of_zero_after {f : ℝ → ℝ} (hf : Continuous f) (L 
       (hf.pow 2).integrableOn_Icc
   have hi : MemLp ((Icc 0 L).indicator f) 2 volume :=
     (memLp_indicator_iff_restrict measurableSet_Icc).mpr hc
-  apply (hi.restrict (Ioi 0)).congr
+  refine MemLp.ae_eq ?_ (hi.restrict (Ioi 0))
   filter_upwards [ae_restrict_mem measurableSet_Ioi] with x hx
   by_cases hxL : x ≤ L
   · exact indicator_of_mem (show x ∈ Icc 0 L from ⟨hx.le, hxL⟩) f
@@ -50,7 +50,7 @@ theorem positiveBufferGreenProfileDerivative_memLp {σ : ℝ} {pin pout : ℝ �
       funext t
       exact positiveBuffer_reflection_deriv (hpout.differentiable (by simp) (-t))
     rw [hd]
-    apply hreflect.neg.congr
+    refine MemLp.ae_eq ?_ hreflect.neg
     filter_upwards [] with t
     change -(deriv pout (-t)) = -(deriv pout (-t))
     rfl
@@ -104,7 +104,7 @@ theorem positiveBufferGreenProfileWeight_memLp {B : BufferData}
       (hw.mul ((positiveBufferCutoff_contDiff (B.action i)).continuous.mul hpin)) (B.action i + 4)
     intro t ht
     rw [positiveBufferCutoff_zero ht, zero_mul, mul_zero]
-  apply (positiveBuffer_cutGlue_memLp 0 hleft hright).congr
+  refine MemLp.ae_eq ?_ (positiveBuffer_cutGlue_memLp 0 hleft hright)
   filter_upwards [] with t
   by_cases ht : t ≤ 0 <;> simp [positiveBufferGreenProfile, bufferCutGlue, ht, w]
 
@@ -124,7 +124,7 @@ theorem positiveBufferGreenKernel_weight_memLp {B : BufferData}
   have hphysical : MemLp (fun x => A⁻¹ * W (positiveBufferCoordinate B i x)) 2 volume := by
     simpa only [preimage_univ, Measure.restrict_univ, ← positiveBufferCoordinate_affine] using
       h.const_mul A⁻¹
-  apply hphysical.congr
+  refine MemLp.ae_eq ?_ hphysical
   filter_upwards [] with x
   dsimp [W, positiveBufferGreenKernel]
   rw [positiveBufferPoint_coordinate hB i x]

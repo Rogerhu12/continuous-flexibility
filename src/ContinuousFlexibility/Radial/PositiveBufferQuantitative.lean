@@ -31,11 +31,16 @@ theorem positiveBuffer_choose_constants {P F : ℝ} (hP : 1 ≤ P) (hF : 1 ≤ F
   have hD : 0 < D := by dsimp [D, positiveBufferErrorConstant]; positivity
   have hK : 1 ≤ K := by
     dsimp [K, positiveBufferColumnConstant]
-    nlinarith
-  have hPK : P ≤ K := by dsimp [K, positiveBufferColumnConstant]; nlinarith
+    nlinarith [mul_nonneg hP0.le hF0.le]
+  have hPK : P ≤ K := by
+    dsimp [K, positiveBufferColumnConstant]
+    nlinarith [mul_nonneg hP0.le hF0.le]
   have hDK : D ≤ K := by
     dsimp [D, K, positiveBufferColumnConstant, positiveBufferErrorConstant]
     nlinarith
+  have hKsq : K ≤ K ^ 2 := by
+    simpa only [one_mul, pow_two] using
+      mul_le_mul_of_nonneg_right hK (show 0 ≤ K by linarith)
   let ε := min 1 (1 / (32 * P * D))
   have hden : 0 < 32 * P * D := by positivity
   have hε : 0 < ε := lt_min (by norm_num) (div_pos (by norm_num) hden)
@@ -108,7 +113,7 @@ theorem positiveBufferPhysicalConormal_normalized_error
     nlinarith [hAsum i]
   · simp only [positiveBufferPhysicalConormal, Matrix.sub_apply, Matrix.one_apply, if_neg hij,
       sub_zero]
-    field_simp [hi, hj]
+    field_simp [hi, hj] <;> ring
 
 theorem positiveBufferPhysicalConormal_positive
     (A αin αout m w : Fin 2 → ℝ) (hA : ∀ i, 0 < A i)
@@ -159,6 +164,8 @@ theorem positiveBuffer_attenuated_entry_bound {C D B₀ : ℝ}
     {x : ℝ} (i j : Fin 2)
     (hx : |x| ≤ 2 * (D * B₀) * (m i * exp (-σ i)) * (m j * exp (-σ j))) :
     |x| ≤ C * B₀ * m i * m j * exp (-σ i - σ j) := by
+  have hmi := hm i
+  have hmj := hm j
   have he : exp (-σ i - σ j) = exp (-σ i) * exp (-σ j) := by
     rw [sub_eq_add_neg, Real.exp_add]
   calc

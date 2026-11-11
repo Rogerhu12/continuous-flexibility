@@ -30,8 +30,10 @@ def positiveBufferPoissonMap (B : BufferData) (g : Fin 2 → RadialL2 × ℝ)
     positiveBufferPoissonMap B g Q A z =
       positiveBufferRetainedProjection B.l B.h
         (positiveBufferStateSynthesis g (Q *ᵥ (fun i => sqrt (A i) * z i))) := by
+  have hd : Matrix.diagonal (fun i => sqrt (A i)) *ᵥ z = fun i => sqrt (A i) * z i :=
+    funext (fun i => Matrix.mulVec_diagonal (fun k => sqrt (A k)) z i)
   simp only [positiveBufferPoissonMap, ContinuousLinearMap.comp_apply,
-    positiveBufferMatrixCLM_apply, Matrix.diagonal_mulVec, Pi.mul_apply]
+    positiveBufferMatrixCLM_apply, hd]
 
 theorem positiveBufferState_euclidean_le (U : RadialL2 × ℝ) :
     sqrt (‖U.1‖ ^ 2 + U.2 ^ 2) ≤ 2 * ‖U‖ := by
@@ -41,9 +43,8 @@ theorem positiveBufferState_euclidean_le (U : RadialL2 × ℝ) :
   have h2sq := pow_le_pow_left₀ (abs_nonneg U.2) h2 2
   rw [sq_abs] at h2sq
   have hs : 0 ≤ ‖U.1‖ ^ 2 + U.2 ^ 2 := by positivity
-  have hroot := Real.sq_sqrt hs
-  have hroot0 := Real.sqrt_nonneg (‖U.1‖ ^ 2 + U.2 ^ 2)
-  nlinarith [norm_nonneg U, sq_nonneg ‖U‖]
+  apply Real.sqrt_le_iff.mpr
+  exact ⟨by positivity, by nlinarith [sq_nonneg ‖U‖]⟩
 
 theorem positiveBuffer_weighted_sup_le (A z : Fin 2 → ℝ) (hA : ∀ i, 0 ≤ A i) :
     ‖fun i => sqrt (A i) * z i‖ ≤ sqrt (∑ i, A i * z i ^ 2) := by
@@ -53,18 +54,20 @@ theorem positiveBuffer_weighted_sup_le (A z : Fin 2 → ℝ) (hA : ∀ i, 0 ≤ 
   intro i
   have hi : A i * z i ^ 2 ≤ ∑ j, A j * z j ^ 2 :=
     Finset.single_le_sum (fun j _ => mul_nonneg (hA j) (sq_nonneg _)) (Finset.mem_univ i)
-  have heq : |sqrt (A i) * z i| ^ 2 = A i * z i ^ 2 := by
-    rw [sq_abs, mul_pow, Real.sq_sqrt (hA i)]
   rw [Real.norm_eq_abs]
-  nlinarith [Real.sq_sqrt hs, Real.sqrt_nonneg (∑ j, A j * z j ^ 2),
-    abs_nonneg (sqrt (A i) * z i)]
+  apply Real.abs_le_sqrt
+  rw [mul_pow, Real.sq_sqrt (hA i)]
+  exact hi
 
 theorem positiveBuffer_norm_sum_le_sqrt (g : Fin 2 → RadialL2 × ℝ) :
     (∑ i, ‖g i‖) ≤ 2 * sqrt (∑ i, ‖g i‖ ^ 2) := by
   have hsq := positiveBuffer_two_weights_sq (fun i => ‖g i‖)
   have hs : 0 ≤ ∑ i, ‖g i‖ ^ 2 := Finset.sum_nonneg (fun i _ => sq_nonneg _)
-  have hn : 0 ≤ ∑ i, ‖g i‖ := Finset.sum_nonneg (fun i _ => norm_nonneg _)
-  nlinarith [Real.sq_sqrt hs, Real.sqrt_nonneg (∑ i, ‖g i‖ ^ 2)]
+  calc
+    _ ≤ sqrt (4 * ∑ i, ‖g i‖ ^ 2) := Real.le_sqrt_of_sq_le (by linarith)
+    _ = _ := by
+      rw [Real.sqrt_mul (by norm_num : (0 : ℝ) ≤ 4)]
+      norm_num
 
 theorem positiveBufferPoissonMap_euclidean_bound (B : BufferData)
     (g : Fin 2 → RadialL2 × ℝ) (Q : Matrix (Fin 2) (Fin 2) ℝ)

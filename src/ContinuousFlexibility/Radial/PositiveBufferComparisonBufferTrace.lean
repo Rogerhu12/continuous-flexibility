@@ -82,7 +82,7 @@ theorem positiveBuffer_oriented_cut_trace_bound {B : BufferData}
     have h := positiveBufferPoint_normalized_potential_lower hB i ht
     rw [positiveBufferPoint_outward_affine] at h
     simpa only [one_pow, q, b] using h
-  have hfU : MemLp U 2 volume := (Lp.memLp F).congr hrep
+  have hfU : MemLp U 2 volume := (memLp_congr_ae hrep).mp (Lp.memLp F)
   have hUto : hfU.toLp U = F := by
     apply Lp.ext
     exact (MemLp.coeFn_toLp hfU).trans hrep.symm

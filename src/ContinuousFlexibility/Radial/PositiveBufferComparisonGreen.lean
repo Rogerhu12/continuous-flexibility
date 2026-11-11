@@ -25,7 +25,7 @@ def positiveBufferGreenProfile (σ : ℝ) (pin pout : ℝ → ℝ) : ℝ → ℝ
 
 theorem positiveBufferGreenProfile_cut {σ : ℝ} {pin pout : ℝ → ℝ}
     (hpout : pout 0 = 1) : positiveBufferGreenProfile σ pin pout 0 = 1 := by
-  simp only [positiveBufferGreenProfile, bufferCutGlue, le_refl, if_true, neg_zero, hpout]
+  simp only [positiveBufferGreenProfile, bufferCutGlue, le_refl, ite_true, neg_zero, hpout]
 
 theorem positiveBufferGreenProfile_continuous {σ : ℝ} {pin pout : ℝ → ℝ}
     (hσ : 0 < σ) (hpin : Continuous pin) (hpout : Continuous pout)
@@ -38,6 +38,7 @@ theorem positiveBufferGreenProfile_continuous {σ : ℝ} {pin pout : ℝ → ℝ
   intro t ht
   change t = 0 at ht
   subst t
+  change pout (-0) = positiveBufferCutoff σ 0 * pin 0
   rw [neg_zero, hpout0, positiveBufferCutoff_one (by linarith), hpin0, mul_one]
 
 theorem positiveBufferGreenProfile_zero {σ t : ℝ} {pin pout : ℝ → ℝ}
@@ -55,14 +56,14 @@ theorem positiveBufferGreenProfile_square_majorant {σ : ℝ} (hσ : 0 < σ)
         (Icc 0 (σ + 6)).indicator (fun x => pin x ^ 2) t := by
   by_cases ht : t ≤ 0
   · rw [positiveBufferGreenProfile, bufferCutGlue_of_le _ _ _ ht,
-      indicator_of_mem ht]
+      indicator_of_mem (show t ∈ Iic (0 : ℝ) from ht)]
     by_cases hti : t ∈ Icc 0 (σ + 6)
     · rw [indicator_of_mem hti]
       linarith [sq_nonneg (pin t)]
     · rw [indicator_of_notMem hti, add_zero]
   · have htpos : 0 < t := lt_of_not_ge ht
     rw [positiveBufferGreenProfile, bufferCutGlue_of_lt _ _ _ htpos,
-      indicator_of_notMem ht, zero_add]
+      indicator_of_notMem (show t ∉ Iic (0 : ℝ) from ht), zero_add]
     by_cases htw : t ≤ σ + 6
     · have hti : t ∈ Icc 0 (σ + 6) := ⟨htpos.le, htw⟩
       rw [indicator_of_mem hti, mul_pow]
@@ -70,7 +71,7 @@ theorem positiveBufferGreenProfile_square_majorant {σ : ℝ} (hσ : 0 < σ)
       have hχsq : positiveBufferCutoff σ t ^ 2 ≤ 1 := by nlinarith
       exact mul_le_of_le_one_left (sq_nonneg (pin t)) hχsq
     · rw [positiveBufferCutoff_zero (by linarith), zero_mul, zero_pow (by norm_num),
-        indicator_of_notMem (show t ∉ Icc 0 (σ + 6) from fun h => htw h.2)]
+        indicator_of_notMem (show t ∉ Icc 0 (σ + 6) from fun h => htw h.2)] <;> exact le_rfl
 
 theorem positiveBufferGreenProfile_majorant_integrable {σ : ℝ} {pin pout : ℝ → ℝ}
     (hpin : Continuous pin)
@@ -81,7 +82,11 @@ theorem positiveBufferGreenProfile_majorant_integrable {σ : ℝ} {pin pout : �
   have hleft0 : Integrable ((Ici (0 : ℝ)).indicator (fun t => pout t ^ 2)) volume :=
     (integrable_indicator_iff measurableSet_Ici).2 hpout
   have hleft : Integrable ((Iic (0 : ℝ)).indicator (fun t => pout (-t) ^ 2)) volume := by
-    simpa only [indicator_apply, mem_Ici, mem_Iic, neg_nonneg] using hleft0.comp_neg
+    apply hleft0.comp_neg.congr
+    filter_upwards [] with t
+    change (Ici (0 : ℝ)).indicator (fun x => pout x ^ 2) (-t) =
+      (Iic (0 : ℝ)).indicator (fun x => pout (-x) ^ 2) t
+    simp only [indicator_apply, mem_Ici, mem_Iic, neg_nonneg]
   have hright : Integrable ((Icc 0 (σ + 6)).indicator (fun t => pin t ^ 2)) volume :=
     (integrable_indicator_iff measurableSet_Icc).2 (hpin.pow 2).integrableOn_Icc
   exact hleft.add hright
@@ -93,7 +98,7 @@ theorem positiveBufferGreenProfile_memLp {σ : ℝ} {pin pout : ℝ → ℝ}
     MemLp (positiveBufferGreenProfile σ pin pout) 2 volume := by
   have hc := positiveBufferGreenProfile_continuous hσ hpin hpout hpin0 hpout0
   apply (memLp_two_iff_integrable_sq hc.aestronglyMeasurable).2
-  apply (positiveBufferGreenProfile_majorant_integrable hpin hpoutI).mono'
+  apply (positiveBufferGreenProfile_majorant_integrable (σ := σ) hpin hpoutI).mono'
     (hc.pow 2).aestronglyMeasurable
   filter_upwards [] with t
   rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)]
@@ -110,14 +115,18 @@ theorem positiveBufferGreenProfile_toLp_norm_sq_le {σ : ℝ} {pin pout : ℝ �
       (positiveBufferGreenProfile σ pin pout)‖ ^ 2 ≤
       (∫ t in Icc 0 (σ + 6), pin t ^ 2) + ∫ t in Ici 0, pout t ^ 2 := by
   rw [positiveBuffer_toLp_norm_sq]
-  have hmajor := positiveBufferGreenProfile_majorant_integrable hpin hpoutI
+  have hmajor := positiveBufferGreenProfile_majorant_integrable (σ := σ) hpin hpoutI
   have hle := integral_mono_ae
     (positiveBufferGreenProfile_memLp hσ hpin hpout hpin0 hpout0 hpoutI).integrable_sq
     hmajor (Eventually.of_forall (positiveBufferGreenProfile_square_majorant hσ pin pout))
   have hleft0 : Integrable ((Ici (0 : ℝ)).indicator (fun t => pout t ^ 2)) volume :=
     (integrable_indicator_iff measurableSet_Ici).2 hpoutI
   have hleft : Integrable ((Iic (0 : ℝ)).indicator (fun t => pout (-t) ^ 2)) volume := by
-    simpa only [indicator_apply, mem_Ici, mem_Iic, neg_nonneg] using hleft0.comp_neg
+    apply hleft0.comp_neg.congr
+    filter_upwards [] with t
+    change (Ici (0 : ℝ)).indicator (fun x => pout x ^ 2) (-t) =
+      (Iic (0 : ℝ)).indicator (fun x => pout (-x) ^ 2) t
+    simp only [indicator_apply, mem_Ici, mem_Iic, neg_nonneg]
   have hright : Integrable ((Icc 0 (σ + 6)).indicator (fun t => pin t ^ 2)) volume :=
     (integrable_indicator_iff measurableSet_Icc).2 (hpin.pow 2).integrableOn_Icc
   rw [integral_add hleft hright, integral_indicator measurableSet_Iic,
@@ -143,6 +152,7 @@ theorem positiveBufferGreenKernel_memLp {B : BufferData} (hB : BufferHypotheses 
     (hpin0 : pin 0 = 1) (hpout0 : pout 0 = 1)
     (hpoutI : IntegrableOn (fun t => pout t ^ 2) (Ici 0) volume) :
     MemLp (positiveBufferGreenKernel B i A pin pout) 2 volume := by
+  unfold positiveBufferGreenKernel
   have hσ := buffer_action_pos hB i
   have hc := positiveBufferGreenProfile_continuous hσ hpin hpout hpin0 hpout0
   have hf := positiveBufferGreenProfile_memLp hσ hpin hpout hpin0 hpout0 hpoutI
@@ -162,7 +172,8 @@ theorem positiveBufferGreenKernel_toLp_norm {B : BufferData} (hB : BufferHypothe
         ‖(positiveBufferGreenProfile_memLp (buffer_action_pos hB i)
           hpin hpout hpin0 hpout0 hpoutI).toLp
           (positiveBufferGreenProfile (B.action i) pin pout)‖ := by
-  simpa only [positiveBufferGreenKernel, ← positiveBufferCoordinate_affine,
+  unfold positiveBufferGreenKernel
+  simpa only [ ← positiveBufferCoordinate_affine,
     positiveBufferCoordinate_abs_slope hB i] using
     positiveBuffer_affine_scaled_toLp_norm
       (positiveBufferGreenProfile_continuous (buffer_action_pos hB i) hpin hpout hpin0 hpout0)

@@ -52,10 +52,10 @@ theorem positiveBuffer_derivative_eq_of_eqOn_right {a du dv : ℝ} {u v : ℝ �
   have hzero : u a - v a = 0 := sub_eq_zero.mpr (he ha)
   have hd := hu.fun_sub hv
   have hle := positiveBuffer_right_derivative_nonpos hd hzero (fun x hx => by
-    rw [he (Ioi_subset_Ici_self hx), sub_self])
+    rw [he (Ioi_subset_Ici_self hx), sub_self] <;> exact le_rfl)
   have hge := positiveBuffer_right_derivative_nonpos hd.fun_neg
     (by rw [hzero, neg_zero]) (fun x hx => by
-      rw [he (Ioi_subset_Ici_self hx), sub_self, neg_zero])
+      rw [he (Ioi_subset_Ici_self hx), sub_self, neg_zero] <;> exact le_rfl)
   linarith
 
 theorem positiveBuffer_halfline_proportional_derivative {a m Mu Mp : ℝ}

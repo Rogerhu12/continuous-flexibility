@@ -31,6 +31,7 @@ theorem positiveBufferCoordinate_contDiff (B : BufferData) (i : Fin 2) :
 theorem positiveBufferCutoffError_contDiff (σ : ℝ) {u du : ℝ → ℝ}
     (hu : ContDiff ℝ ∞ u) (hdu : ContDiff ℝ ∞ du) :
     ContDiff ℝ ∞ (positiveBufferCutoffError σ u du) := by
+  unfold positiveBufferCutoffError
   have hχ' := (contDiff_infty_iff_deriv.mp (positiveBufferCutoff_contDiff σ)).2
   have hχ'' := (contDiff_infty_iff_deriv.mp hχ').2
   exact (hχ''.neg.mul hu).sub ((contDiff_const.mul hχ').mul hdu)
@@ -38,6 +39,7 @@ theorem positiveBufferCutoffError_contDiff (σ : ℝ) {u du : ℝ → ℝ}
 theorem positiveBufferGreenError_contDiff (B : BufferData) (i : Fin 2) (A : ℝ)
     {pin dpin : ℝ → ℝ} (hpin : ContDiff ℝ ∞ pin) (hdpin : ContDiff ℝ ∞ dpin) :
     ContDiff ℝ ∞ (positiveBufferGreenError B i A pin dpin) := by
+  unfold positiveBufferGreenError
   exact contDiff_const.mul
     ((positiveBufferCutoffError_contDiff (B.action i) hpin hdpin).comp
       (positiveBufferCoordinate_contDiff B i))
@@ -63,6 +65,7 @@ def positiveBufferGreenInterior (B : BufferData) (i : Fin 2) (A : ℝ)
 theorem positiveBufferGreenInterior_contDiff (B : BufferData) (i : Fin 2) (A : ℝ)
     {pin : ℝ → ℝ} (hpin : ContDiff ℝ ∞ pin) :
     ContDiff ℝ ∞ (positiveBufferGreenInterior B i A pin) := by
+  unfold positiveBufferGreenInterior
   exact contDiff_const.mul
     (((positiveBufferCutoff_contDiff (B.action i)).mul hpin).comp
       (positiveBufferCoordinate_contDiff B i))

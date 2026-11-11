@@ -64,7 +64,7 @@ theorem positiveBuffer_energy_memLp {V p d : ℝ → ℝ}
   have hw : Continuous (fun x => sqrt (1 + |V x|) * p x) :=
     (continuous_const.add hV.abs).sqrt.mul hp
   have hwSq : IntegrableOn (fun x => (sqrt (1 + |V x|) * p x) ^ 2) s volume := by
-    apply (hpLp.integrable_sq.add hE).mono' (hw.pow 2).aestronglyMeasurable
+    apply (hpLp.integrable_sq.fun_add hE).mono' (hw.pow 2).aestronglyMeasurable
     filter_upwards [ae_restrict_mem hs] with x hx
     rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _), mul_pow,
       sq_sqrt (by positivity), abs_of_nonneg (hpos x hx)]

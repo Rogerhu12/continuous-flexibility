@@ -68,6 +68,7 @@ theorem positiveBufferGreenError_memLp {B : BufferData}
     (hu : ∀ t ∈ Ioo 0 (B.action i + 6), HasDerivAt pin (dpin t) t)
     (hdu : ∀ t ∈ Ioo 0 (B.action i + 6), HasDerivAt dpin (q t * pin t) t) :
     MemLp (positiveBufferGreenError B i A pin dpin) 2 volume := by
+  unfold positiveBufferGreenError
   have hσ := buffer_action_pos hB i
   simpa only [positiveBufferGreenError, ← positiveBufferCoordinate_affine] using
     (positiveBuffer_affine_memLp_two (positiveBufferCutoffError_continuous hσ hu hdu)
@@ -84,6 +85,7 @@ theorem positiveBufferGreenError_toLp_norm {B : BufferData}
       |B.mass i ^ 2 / A| * sqrt ((B.mass i)⁻¹) *
         ‖(positiveBufferCutoffError_memLp (buffer_action_pos hB i) hu hdu).toLp
           (positiveBufferCutoffError (B.action i) pin dpin)‖ := by
+  unfold positiveBufferGreenError
   simpa only [positiveBufferGreenError, ← positiveBufferCoordinate_affine,
     positiveBufferCoordinate_abs_slope hB i] using
     positiveBuffer_affine_scaled_toLp_norm
