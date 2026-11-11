@@ -29,9 +29,11 @@ theorem r07_hasDerivAt_radius (right : Bool) (x : ℝ) :
     HasDerivAt (tailPhysicalRadius right)
       (r07OutwardSign right * tailPhysicalRadius right x) x := by
   cases right
-  · simpa only [tailPhysicalRadius, r07OutwardSign, Bool.false_eq_true, if_false,
-      mul_neg_one, neg_one_mul] using (hasDerivAt_exp (-x)).comp x (hasDerivAt_neg x)
-  · simpa only [tailPhysicalRadius, r07OutwardSign, if_true, one_mul] using hasDerivAt_exp x
+  · change HasDerivAt (fun y : ℝ => exp (-y)) (-exp (-x)) x
+    simpa only [Function.comp_def, mul_neg_one] using
+      (hasDerivAt_exp (-x)).comp x (hasDerivAt_neg x)
+  · change HasDerivAt exp (exp x) x
+    exact hasDerivAt_exp x
 
 /-- Substitution by the outward radius map, with the orientation recorded
 explicitly outside the physical radial integral. -/
@@ -76,9 +78,10 @@ theorem r07_density_two_pullback {D : ReferenceData} (right : Bool) (x : ℝ)
     rw [show 2 * (2 : ℝ) ^ 2 = (8 : ℝ) by norm_num]
     exact rpow_natCast _ 8
   unfold r07PhysicalDensity
+  simp only [Nat.cast_ofNat]
   rw [hpow]
   field_simp [hr, he.ne']
-  ring
+  <;> ring
 
 theorem r07_density_two_inverse_pullback {D : ReferenceData} (right : Bool) (x : ℝ)
     (he : 0 < (if right then D.b else D.a))
@@ -89,7 +92,7 @@ theorem r07_density_two_inverse_pullback {D : ReferenceData} (right : Bool) (x :
         tailPhysicalRadius right x := by
   rw [r07_density_two_pullback right x he]
   field_simp [(r07_radius_pos right x).ne', he.ne', hw]
-  ring
+  <;> ring
 
 /-- The exact frequency-two mass in logarithmic coordinates, including the
 constant normalization at the endpoint and the left-tail orientation. -/
@@ -110,8 +113,12 @@ theorem r07_density_two_mass_change {D : ReferenceData} (right : Bool) (a b : �
         (∫ x in a..b, D.w (tailPhysicalRadius right x) * tailPhysicalRadius right x ^ 6 *
           tailPhysicalRadius right x) := intervalIntegral.integral_const_mul _ _
     _ = _ := by
-      rw [r07_integral_radius_change right a b
-        (hw.mul (continuous_id.pow 6)).continuousOn]
+      have hc : ContinuousOn (fun r : ℝ => D.w r * r ^ 6)
+          (tailPhysicalRadius right '' uIcc a b) :=
+        (hw.mul (continuous_id.pow 6)).continuousOn
+      have hsub := r07_integral_radius_change right a b hc
+      dsimp only at hsub
+      rw [hsub]
       ring
 
 /-- The exact resistance identity.  Only nonvanishing on the physical
@@ -133,13 +140,16 @@ theorem r07_density_two_resistance_change {D : ReferenceData} (right : Bool) (a 
           tailPhysicalRadius right x) := by
       apply intervalIntegral.integral_congr
       intro x hx
+      dsimp only
       rw [r07_density_two_inverse_pullback right x he (hw0 x hx)]
       ring
     _ = (if right then D.b else D.a) ^ 8 *
         (∫ x in a..b, (D.w (tailPhysicalRadius right x) * tailPhysicalRadius right x ^ 8)⁻¹ *
           tailPhysicalRadius right x) := intervalIntegral.integral_const_mul _ _
     _ = _ := by
-      rw [r07_integral_radius_change right a b hcont]
+      have hsub := r07_integral_radius_change right a b hcont
+      dsimp only at hsub
+      rw [hsub]
       ring
 
 end ContinuousFlexibility.Radial

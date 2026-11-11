@@ -465,7 +465,8 @@ theorem exists_morseChainChosenJoin_jetBounds {T : Statements.MorseChainData}
     have hn' : 1 ≤ T.index + k := by have h := G.start_large; omega
     exact hJet.adjacent hn' (Or.inl hnEq) hC.le
 
-private theorem morseSelected_jetBounds_of_germ {n s : ℕ} {C x : ℝ} {f g : ℝ → ℝ}
+/-- The full coefficient bounds depend only on the germ of the profile. -/
+theorem morseSelected_jetBounds_of_germ {n s : ℕ} {C x : ℝ} {f g : ℝ → ℝ}
     (h : MorseChainJetBounds n s C g x) (he : f =ᶠ[𝓝 x] g) :
     MorseChainJetBounds n s C f x := by
   have hInv : f⁻¹ =ᶠ[𝓝 x] g⁻¹ := he.fun_comp (fun t : ℝ => t⁻¹)

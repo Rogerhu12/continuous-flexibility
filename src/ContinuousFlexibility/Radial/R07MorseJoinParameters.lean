@@ -38,13 +38,13 @@ private theorem morseChainAmplitude_doubleInitial (T : Statements.MorseChainData
       2 * Statements.morseChainAmplitude T morseUnitHeights n := by
   have hp : (∏ i ∈ Finset.Icc T.index n, morseDoubleInitialHeight T i) = 2 := by
     rw [Finset.prod_eq_single T.index]
-    · simp only [morseDoubleInitialHeight, if_pos rfl]
+    · norm_num [morseDoubleInitialHeight]
     · intro i _ hi
       simp only [morseDoubleInitialHeight, if_neg hi]
     · intro hnot
       exact False.elim (hnot (Finset.mem_Icc.mpr ⟨le_rfl, hn⟩))
   simp only [Statements.morseChainAmplitude, hp, morseUnitHeights, Finset.prod_const_one,
-    mul_one, mul_comm]
+    mul_one, one_mul, mul_comm]
 
 theorem morseChainPhysicalModelHeight_amplitude {T : Statements.MorseChainData}
     (G : MorseChainGeometryWitness T) (A : ℝ) (side : Bool) (k : ℕ) (x : ℝ) :
@@ -185,10 +185,11 @@ theorem continuous_morseChainAmplitude (T : Statements.MorseChainData) (n : ℕ)
 
 theorem continuous_morseChainHeightLogRatio (T : Statements.MorseChainData) (n : ℕ) :
     Continuous (fun σ : Statements.HeightRatios => morseChainHeightLogRatio T σ.val n) := by
-  apply Continuous.sub_const
-  apply ((continuous_morseChainAmplitude T n).comp continuous_subtype_val).log
-  intro σ
-  exact (morseChainAmplitude_pos T σ.val σ.property n).ne'
+  have hlog : Continuous (fun σ : Statements.HeightRatios =>
+      log (Statements.morseChainAmplitude T σ.val n)) :=
+    ((continuous_morseChainAmplitude T n).comp continuous_subtype_val).log
+      (fun σ => (morseChainAmplitude_pos T σ.val σ.property n).ne')
+  exact hlog.sub continuous_const
 
 /-- Product-topology continuity of the actual, choice-defined join height,
 jointly in all admissible height ratios and its physical coordinate. -/

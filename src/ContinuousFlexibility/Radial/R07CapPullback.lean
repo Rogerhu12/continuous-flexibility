@@ -27,7 +27,8 @@ theorem radialJacobi_const_mul (J c : ℝ) (w u : ℝ → ℝ) (r : ℝ) :
     rw [deriv_const_mul_field]
     ring
   unfold radialJacobi
-  rw [hflux, deriv_const_mul_field, deriv_const_mul_field]
+  rw [hflux, deriv_const_mul_field]
+  dsimp only
   ring
 
 /-- Differentiating the profile identity on a nontrivial closed cap is
@@ -42,6 +43,8 @@ theorem r07_cap_weight_derivative {R w : ℝ → ℝ} {scale L : ℝ}
     (hR.differentiable (by simp) x).hasDerivAt
   have hright := (hR'.differentiable (by simp) x).hasDerivAt.const_mul scale
   have he := derivWithin_congr hweight (hweight x hx)
+  change derivWithin (w ∘ R) (Icc 0 L) x =
+    derivWithin (fun y => scale * deriv R y) (Icc 0 L) x at he
   rw [hleft.differentiableAt.derivWithin (uniqueDiffOn_Icc hL x hx),
     hright.differentiableAt.derivWithin (uniqueDiffOn_Icc hL x hx),
     hleft.deriv, hright.deriv] at he

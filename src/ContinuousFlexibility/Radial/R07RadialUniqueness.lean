@@ -17,6 +17,29 @@ namespace ContinuousFlexibility.Radial
 open Set Filter Real
 open scoped Topology ContDiff
 
+theorem continuousOn_radialJacobi {w u : ℝ → ℝ}
+    (hw : ContDiff ℝ ∞ w) (hu : ContDiff ℝ ∞ u) (J : ℝ)
+    {S : Set ℝ} (hS : ∀ r ∈ S, r ≠ 0) :
+    ContinuousOn (radialJacobi J w u) S := by
+  have hw' := (contDiff_infty_iff_deriv.mp hw).2
+  have hu' := (contDiff_infty_iff_deriv.mp hu).2
+  have hf := (contDiff_infty_iff_deriv.mp (hw.mul hu')).2
+  exact hf.continuous.continuousOn.sub
+    (((continuous_const.mul hw'.continuous).continuousOn.div continuousOn_id hS).mul
+      hu.continuous.continuousOn)
+
+/-- Smooth radial equations extend to the two finite endpoints of their
+open interval. No condition at a flat physical endpoint is used here. -/
+theorem radialJacobi_zero_on_Icc {w u : ℝ → ℝ}
+    (hw : ContDiff ℝ ∞ w) (hu : ContDiff ℝ ∞ u) {J l h : ℝ}
+    (hl : 0 < l) (hlh : l < h)
+    (heq : ∀ r ∈ Ioo l h, radialJacobi J w u r = 0) :
+    ∀ r ∈ Icc l h, radialJacobi J w u r = 0 := by
+  apply Set.EqOn.of_subset_closure heq
+    (continuousOn_radialJacobi hw hu J (fun r hr => (hl.trans_le hr.1).ne'))
+    continuousOn_const Ioo_subset_Icc_self
+  rw [closure_Ioo hlh.ne]
+
 theorem radialHomogeneous_eqOn_Icc {D : Statements.ReferenceData}
     (hD : Statements.RadialProfileGeometry D) {l h t₀ J : ℝ}
     (hl : D.a < l) (hlh : l ≤ h) (hh : h < D.b) (ht : t₀ ∈ Icc l h)
@@ -71,5 +94,60 @@ theorem radialHomogeneous_zero_on_Icc {D : Statements.ReferenceData}
     simp [radialJacobi]
   · exact h₀
   · simpa only [deriv_const] using h₁
+
+/-- Match a given solution on a genuine neighborhood of the initial point,
+while extending it over a larger retained compact interval. -/
+theorem exists_radialSolution_matching_germ {D : Statements.ReferenceData}
+    (hD : Statements.RadialProfileGeometry D) {l h a b t₀ J : ℝ}
+    (hl : D.a < l) (hh : h < D.b) (hla : l ≤ a) (hat : a < t₀)
+    (htb : t₀ < b) (hbh : b ≤ h) {v : ℝ → ℝ} (hv : ContDiff ℝ ∞ v)
+    (hveq : ∀ r ∈ Icc a b, radialJacobi J D.w v r = 0) :
+    ∃ u : ℝ → ℝ, ContDiff ℝ ∞ u ∧
+      (∀ r ∈ Icc l h, radialJacobi J D.w u r = 0) ∧ u =ᶠ[𝓝 t₀] v := by
+  have ht : t₀ ∈ Icc l h := ⟨hla.trans hat.le, htb.le.trans hbh⟩
+  have hlh : l ≤ h := ht.1.trans ht.2
+  obtain ⟨u, hu, h₀, h₁, hueq⟩ := exists_radialSolution_on_Icc hD hl hlh hh ht
+    J (v t₀) (deriv v t₀)
+  have he : EqOn u v (Icc a b) := radialHomogeneous_eqOn_Icc hD
+    (hl.trans_le hla) (hat.le.trans htb.le) (hbh.trans_lt hh) ⟨hat.le, htb.le⟩ hu hv
+    (fun r hr => hueq r ⟨hla.trans hr.1, hr.2.trans hbh⟩) hveq h₀ h₁
+  refine ⟨u, hu, hueq, ?_⟩
+  filter_upwards [Icc_mem_nhds hat htb] with r hr
+  exact he hr
+
+/-- A nontrivial natural solution has nonzero Cauchy data at its finite
+entrance. This is a finite interval consequence of the radial IVP. -/
+theorem radialNaturalTail_cauchyData_ne_zero {D : Statements.ReferenceData}
+    (hD : Statements.RadialProfileGeometry D) {right : Bool} {j : ℕ} {e : ℝ}
+    (he : e ∈ Statements.radialCore D) {v : ℝ → ℝ} (hv : ContDiff ℝ ∞ v)
+    (hN : Statements.RadialNaturalTail D right j e v) :
+    (v e, deriv v e) ≠ (0, 0) := by
+  intro hz
+  have hv₀ : v e = 0 := congrArg Prod.fst hz
+  have hv₁ : deriv v e = 0 := congrArg Prod.snd hz
+  obtain ⟨r, hr, hvr⟩ := hN.2.2.2
+  have hrCore : r ∈ Statements.radialCore D := by
+    cases right
+    · exact ⟨hr.1, hr.2.trans he.2⟩
+    · exact ⟨he.1.trans hr.1, hr.2⟩
+  have hne : e ≠ r := by
+    cases right
+    · exact (ne_of_gt hr.2)
+    · exact ne_of_lt hr.1
+  have hlh : min e r < max e r := min_lt_max.mpr hne
+  have hcoreL : D.a < min e r := lt_min he.1 hrCore.1
+  have hcoreH : max e r < D.b := max_lt he.2 hrCore.2
+  have heq : ∀ x ∈ Icc (min e r) (max e r), radialJacobi ((j : ℝ) ^ 2) D.w v x = 0 := by
+    apply radialJacobi_zero_on_Icc hD.2.2.1.1 hv (hD.1.trans hcoreL) hlh
+    intro x hx
+    apply hN.2.1.2 x
+    cases right
+    · rw [min_eq_right hr.2.le, max_eq_left hr.2.le] at hx
+      exact ⟨hrCore.1.trans hx.1, hx.2⟩
+    · rw [min_eq_left hr.1.le, max_eq_right hr.1.le] at hx
+      exact ⟨hx.1, hx.2.trans hrCore.2⟩
+  have hzero := radialHomogeneous_zero_on_Icc hD hcoreL hlh.le hcoreH
+    (mem_Icc.mpr ⟨min_le_left _ _, le_max_left _ _⟩) hv heq hv₀ hv₁
+  exact hvr (hzero (mem_Icc.mpr ⟨min_le_right _ _, le_max_right _ _⟩))
 
 end ContinuousFlexibility.Radial

@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Real Set Filter MeasureTheory
-open scoped Topology ContDiff
+open scoped Topology ContDiff ENNReal
 
 /-- The Jacobi expression is exactly linear under a constant rescaling of
 its physical coefficient, without auxiliary differentiability hypotheses. -/
@@ -74,7 +74,7 @@ theorem radialHilbertMeasure_restrict_scale {D E : Statements.ReferenceData}
     (Statements.radialHilbertMeasure E).restrict s =
       ENNReal.ofReal scale • (Statements.radialHilbertMeasure D).restrict s := by
   rw [Statements.radialHilbertMeasure, Statements.radialHilbertMeasure,
-    Measure.restrict_withDensity hs, Measure.restrict_withDensity hs, hcore]
+    restrict_withDensity hs, restrict_withDensity hs, hcore]
   let μ : Measure ℝ := (volume.restrict (Statements.radialCore D)).restrict s
   change μ.withDensity (fun r => ENNReal.ofReal (12 * E.w r / r ^ 2)) =
     ENNReal.ofReal scale • μ.withDensity (fun r => ENNReal.ofReal (12 * D.w r / r ^ 2))
