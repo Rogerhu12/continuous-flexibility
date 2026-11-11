@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Radial
 
-open Set Filter
+open Set Filter Real
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 

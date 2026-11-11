@@ -38,7 +38,7 @@ theorem aestronglyMeasurable_referenceBasisProjection {μ : Measure ℝ} [SFinit
   change AEStronglyMeasurable
     (fun x : PolarPoint => ∑ n ∈ I, referenceRadialCoefficient u n x.1 *
       referenceAngularBasis n x.2) _
-  apply aestronglyMeasurable_fun_sum
+  apply I.aestronglyMeasurable_fun_sum
   intro n _hn
   exact (aestronglyMeasurable_referenceRadialCoefficient hu n).comp_fst.mul
     (((contDiff_referenceAngularBasis n).continuous.comp continuous_snd).aestronglyMeasurable)
@@ -51,7 +51,7 @@ theorem integral_angularBasisProjection_sq_le {f : ℝ → ℝ}
   have h := angularBasisProjection_sq_le hf I
   simp only [radialAngularMean,
     intervalIntegral.integral_of_le (show (0 : ℝ) ≤ 2 * Real.pi by positivity)] at h
-  exact (mul_le_mul_left (show (0 : ℝ) < (2 * Real.pi)⁻¹ by positivity)).mp h
+  exact le_of_mul_le_mul_left h (show (0 : ℝ) < (2 * Real.pi)⁻¹ by positivity)
 
 theorem memLp_referenceBasisProjection_prod {μ : Measure ℝ} [SFinite μ]
     {u : PolarPoint → ℝ}
