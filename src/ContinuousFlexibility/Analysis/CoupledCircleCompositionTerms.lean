@@ -63,8 +63,20 @@ theorem evaluate_periodic (t : CoupledCircleCompositionTerm k)
   have hc : (θ + Real.pi) + ψ (θ + Real.pi) = (θ + ψ θ) + Real.pi := by
     rw [hψ θ]
     ring
-  simp only [evaluate, hc, spaces_periodic_iteratedDeriv hv t.outerOrder,
-    spaces_periodic_iteratedDeriv hψ, spaces_periodic_iteratedDeriv (hw _)]
+  change
+    iteratedDeriv t.outerOrder v ((θ + Real.pi) + ψ (θ + Real.pi)) *
+        (∏ i, iteratedDeriv (t.baseOrder i + 1) ψ (θ + Real.pi)) *
+        (∏ i, iteratedDeriv (t.directionOrder i) (w i) (θ + Real.pi)) =
+      iteratedDeriv t.outerOrder v (θ + ψ θ) *
+        (∏ i, iteratedDeriv (t.baseOrder i + 1) ψ θ) *
+        (∏ i, iteratedDeriv (t.directionOrder i) (w i) θ)
+  rw [hc, spaces_periodic_iteratedDeriv hv t.outerOrder (θ + ψ θ)]
+  congr 1
+  · congr 1
+    exact Finset.prod_congr rfl (fun i _ =>
+      spaces_periodic_iteratedDeriv hψ (t.baseOrder i + 1) θ)
+  · exact Finset.prod_congr rfl (fun i _ =>
+      spaces_periodic_iteratedDeriv (hw i) (t.directionOrder i) θ)
 
 def chainIdentity (t : CoupledCircleCompositionTerm k) : CoupledCircleCompositionTerm k :=
   { t with outerOrder := t.outerOrder + 1 }
@@ -193,7 +205,8 @@ theorem evaluate_deriv (t : CoupledCircleCompositionTerm k)
     rfl
   rw [← hsumBase, ← hsumDir]
   simp only [evaluate, chainIdentity, chainBase, Fin.prod_univ_succ,
-    Fin.cons_zero, Fin.cons_succ, zero_add, Function.comp_apply]
+    Fin.cons_zero, Fin.cons_succ, zero_add, Function.comp_apply,
+    Pi.add_apply, Pi.mul_apply, id_eq]
   ring
 
 end CoupledCircleCompositionTerm

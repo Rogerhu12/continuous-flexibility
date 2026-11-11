@@ -43,9 +43,9 @@ theorem coupled_regularizing_composition_bound
     simpa only [Nat.add_assoc] using hHs x hx u
   have hbase : q b (H x u) ≤ cB * (1 + M) * ‖u‖ :=
     (hHb x hx u).trans (mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_left (add_le_add_left (hlow x hx) 1) hcB) (norm_nonneg _))
+      (mul_le_mul_of_nonneg_left (add_le_add le_rfl (hlow x hx)) hcB) (norm_nonneg _))
   have hparam : 1 + p (s + lossA) x ≤ 1 + p (s + (lossA + lossH)) x :=
-    add_le_add_left (hp (by omega) x) 1
+    add_le_add le_rfl (hp (by omega) x)
   have hparam0 : 0 ≤ 1 + p (s + (lossA + lossH)) x := by positivity
   calc
     r s (A x (H x u)) ≤ cA * (q (s + lossA) (H x u) +

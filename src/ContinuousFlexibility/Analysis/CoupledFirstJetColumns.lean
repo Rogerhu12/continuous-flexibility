@@ -53,7 +53,9 @@ theorem coupled_scalar_nu_firstJet
   have hunit := (coupled_scalar_first_derivative J hz (coupledSectorNuDirection S 1)).unique
     (hnu _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl))
   have hscale : (coupledSectorNuDirection S μ, (0 : ℝ)) =
-      μ • (coupledSectorNuDirection S 1, (0 : ℝ)) := by
+      @SMul.smul ℝ (StateDirections S × ℝ)
+        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul μ
+        (coupledSectorNuDirection S 1, (0 : ℝ)) := by
     apply Prod.ext
     · apply Subtype.ext
       simp only [Submodule.coe_smul, coupledSectorNuDirection_val, Prod.smul_mk,
@@ -117,11 +119,17 @@ theorem coupled_circle_firstJet_of_return_derivative
     (projectiveJetHeadLinear J.D 0 z Fin.elim0 (v, 0)).2.val = df := by
   apply (coupled_circle_first_derivative J hz v).unique
   apply coupled_lineDerivAt_congr_line hd
-  have hcont : Continuous (fun t : ℝ => z + t • (v, (0 : ℝ))) :=
+  have hcont : Continuous (fun t : ℝ => z +
+      @SMul.smul ℝ (StateDirections S × ℝ)
+        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (v, 0)) :=
     continuous_const.add (continuous_id.smul continuous_const)
-  have hnear : ∀ᶠ t : ℝ in 𝓝 0, z + t • (v, (0 : ℝ)) ∈
+  have hnear : ∀ᶠ t : ℝ in 𝓝 0, z +
+      @SMul.smul ℝ (StateDirections S × ℝ)
+        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (v, 0) ∈
       sectorNeighborhood S base ε ε := by
-    have ht : Tendsto (fun t : ℝ => z + t • (v, (0 : ℝ))) (𝓝 0) (𝓝 z) := by
+    have ht : Tendsto (fun t : ℝ => z +
+        @SMul.smul ℝ (StateDirections S × ℝ)
+          (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (v, 0)) (𝓝 0) (𝓝 z) := by
       simpa only [zero_smul, add_zero] using hcont.tendsto 0
     exact ht.eventually (J.open_domain.mem_nhds hz)
   filter_upwards [hnear] with t ht

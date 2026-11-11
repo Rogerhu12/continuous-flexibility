@@ -102,7 +102,7 @@ theorem weightedEvaluate_prebound
     _ = _ := by
       simp only [factorOrder, factorFamily, Fintype.prod_sum_type, Sum.elim_inl,
         Sum.elim_inr, Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ, pow_add]
-      ring
+      ac_rfl
 
 end CoupledCircleCompositionTerm
 
@@ -144,6 +144,6 @@ theorem coupled_circle_composition_term_one_high
         (C * ∑ i, M.grading (s + loss) (t.factorFamily v ψ w i) *
           ∏ j ∈ Finset.univ.erase i, M.grading base (t.factorFamily v ψ w j)) :=
       mul_le_mul_of_nonneg_left (hbound (t.factorFamily v ψ w)) (mul_nonneg hA hp)
-    _ = _ := by ring
+    _ = _ := by ac_rfl
 
 end ContinuousFlexibility.Statements

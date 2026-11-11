@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.CoupledErrorParity
+import ContinuousFlexibility.Analysis.CoupledDerivativeAlgebra
 import ContinuousFlexibility.Scalar.WeightedScalarError
 import ContinuousFlexibility.Scalar.WeightedErrorConservation
 
@@ -44,7 +45,31 @@ def coupledBilinearTransport (B : E →ₗ[ℝ] F →ₗ[ℝ] G)
 theorem coupledBilinearTransport_apply (B : E →ₗ[ℝ] F →ₗ[ℝ] G)
     (L : E' →ₗ[ℝ] E) (M : F' →ₗ[ℝ] F) (N : G →ₗ[ℝ] G') (x : E') (y : F') :
     coupledBilinearTransport B L M N x y = N (B (L x) (M y)) := by
-  simp only [coupledBilinearTransport, LinearMap.comp_apply]
+  change (N.comp ((B (L x)).comp M)) y = _
+  simp only [LinearMap.comp_apply]
+
+/-- Pair two bilinear maps before substituting the concrete physical spaces. -/
+def coupledBilinearProd (A : E →ₗ[ℝ] F →ₗ[ℝ] G) (B : E →ₗ[ℝ] F →ₗ[ℝ] G') :
+    E →ₗ[ℝ] F →ₗ[ℝ] G × G' where
+  toFun x := (A x).prod (B x)
+  map_add' := by
+    intro x y
+    apply LinearMap.ext
+    intro v
+    simp only [LinearMap.prod_apply, Function.prod_apply, map_add,
+      LinearMap.add_apply, Prod.mk_add_mk]
+  map_smul' := by
+    intro c x
+    apply LinearMap.ext
+    intro v
+    simp only [LinearMap.prod_apply, Function.prod_apply, map_smul,
+      LinearMap.smul_apply, Prod.smul_mk, RingHom.id_apply]
+
+theorem coupledBilinearProd_apply (A : E →ₗ[ℝ] F →ₗ[ℝ] G)
+    (B : E →ₗ[ℝ] F →ₗ[ℝ] G') (x : E) (y : F) :
+    coupledBilinearProd A B x y = (A x y, B x y) := by
+  change ((A x).prod (B x)) y = _
+  simp only [LinearMap.prod_apply, Function.prod_apply]
 
 /-- Restrict the range of a bilinear map once its actual values belong to
 the submodule. The restriction preserves both independent linearities. -/
@@ -148,7 +173,9 @@ def coupledErrorHeightLinear (V : CoupledInverseData S) (z : AnnularState S × �
 theorem coupledErrorHeightLinear_apply (V : CoupledInverseData S)
     (z : AnnularState S × ℝ) (y : ResidualSpace S) :
     coupledErrorHeightLinear V z y = (V.V z y).1 := by
-  rw [coupledErrorHeightLinear, LinearMap.comp_apply, LinearMap.fst_apply]
+  change ((LinearMap.fst ℝ (HeightPair S)
+    (ℝ × (CircleSpace S × CircleSpace S))).comp (V.V z)) y = _
+  simp only [LinearMap.comp_apply, LinearMap.fst_apply]
 
 def coupledErrorKappaLinear (V : CoupledInverseData S) (z : AnnularState S × ℝ) :
     ResidualSpace S →ₗ[ℝ] CircleSpace S :=
@@ -179,7 +206,8 @@ theorem coupledErrorInverseLinear_apply (R : ReturnEquationData S) (B : ControlC
         B.circleColumn z (V.V z y).2.2.1) := by
   simp only [coupledErrorInverseLinear, LinearMap.comp_apply, LinearMap.sub_apply,
     LinearMap.smul_apply, LinearMap.snd_apply, Submodule.subtype_apply,
-    coupledErrorHeightLinear_apply, coupledErrorKappaLinear_apply]
+    coupledErrorHeightLinear_apply, coupledErrorKappaLinear_apply,
+    ContinuousLinearMap.coe_coe]
 
 /-- Both scalar errors are already Source-valued before they are added. -/
 def coupledScalarQuadraticLinear
@@ -205,7 +233,7 @@ theorem coupledScalarQuadraticLinear_apply
   simp only [coupledScalarQuadraticLinear, LinearMap.add_apply, LinearMap.smul_apply,
     coupledBilinearTransport_apply, LinearMap.comp_apply, LinearMap.fst_apply,
     LinearMap.snd_apply, Submodule.subtype_apply, coupledErrorHeightLinear_apply,
-    LinearMap.id_apply]
+    LinearMap.id_apply] <;> rfl
 
 /-- A total even-circle-valued bilinear map. On the N02 domain the
 projection will preserve the actual independent return error. -/
@@ -227,7 +255,7 @@ theorem coupledCircleQuadraticLinear_apply (hS : IsPhysicalSpaces D T S)
             B.circleColumn z (V.V z y).2.2.1))) := by
   simp only [coupledCircleQuadraticLinear, coupledBilinearTransport_apply,
     LinearMap.comp_apply, LinearMap.snd_apply, Submodule.subtype_apply,
-    coupledErrorInverseLinear_apply]
+    coupledErrorInverseLinear_apply, ContinuousLinearMap.coe_coe]
 
 /-- The total coupled error, retaining exact linearity in both independent
 residual variables and the original Source and even-circle codomains. -/
@@ -236,23 +264,19 @@ def coupledQuadraticLinear
     (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
     (t : ScalarHeightSpace S) (z : AnnularState S × ℝ) :
-    ResidualSpace S →ₗ[ℝ] ResidualSpace S →ₗ[ℝ] ResidualSpace S where
-  toFun r := (coupledScalarQuadraticLinear hD hT hS L V t z r).prod
-    (coupledCircleQuadraticLinear hS R B V z r)
-  map_add' := by
-    intro r s
-    apply LinearMap.ext
-    intro y
-    apply Prod.ext <;>
-      simp only [LinearMap.prod_apply, Prod.fst_add, Prod.snd_add,
-        map_add, LinearMap.add_apply]
-  map_smul' := by
-    intro c r
-    apply LinearMap.ext
-    intro y
-    apply Prod.ext <;>
-      simp only [LinearMap.prod_apply, Prod.smul_fst, Prod.smul_snd,
-        map_smul, LinearMap.smul_apply, RingHom.id_apply]
+    ResidualSpace S →ₗ[ℝ] ResidualSpace S →ₗ[ℝ] ResidualSpace S :=
+  coupledBilinearProd (coupledScalarQuadraticLinear hD hT hS L V t z)
+    (coupledCircleQuadraticLinear hS R B V z)
+
+theorem coupledQuadraticLinear_apply
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
+    (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
+    (t : ScalarHeightSpace S) (z : AnnularState S × ℝ) (r y : ResidualSpace S) :
+    coupledQuadraticLinear hD hT hS R L B V t z r y =
+      (coupledScalarQuadraticLinear hD hT hS L V t z r y,
+        coupledCircleQuadraticLinear hS R B V z r y) :=
+  coupledBilinearProd_apply _ _ r y
 
 def coupledQuadraticErrorData
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -270,8 +294,9 @@ theorem coupledQuadraticErrorData_scalar
     ((coupledQuadraticErrorData hD hT hS R L B V typeCoefficient).Q z r y).1 =
       z.2 • coupledScalarTypeErrorSourceLinear hD hT hS (typeCoefficient z)
           r.1.val (V.V z y).1 + L.error z r.2.val (V.V z y).1 := by
-  simp only [coupledQuadraticErrorData, coupledQuadraticLinear,
-    LinearMap.prod_apply, coupledScalarQuadraticLinear_apply]
+  exact (congrArg Prod.fst
+    (coupledQuadraticLinear_apply hD hT hS R L B V (typeCoefficient z) z r y)).trans
+      (coupledScalarQuadraticLinear_apply hD hT hS L V (typeCoefficient z) z r y)
 
 theorem coupledQuadraticErrorData_circle
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -284,8 +309,9 @@ theorem coupledQuadraticErrorData_circle
         (R.error z r.2.val
           (R.inverse (y.2.val - z.2 • B.heightRow z (V.V z y).1 -
             B.circleColumn z (V.V z y).2.2.1))) := by
-  simp only [coupledQuadraticErrorData, coupledQuadraticLinear,
-    LinearMap.prod_apply, coupledCircleQuadraticLinear_apply]
+  exact (congrArg Prod.snd
+    (coupledQuadraticLinear_apply hD hT hS R L B V (typeCoefficient z) z r y)).trans
+      (coupledCircleQuadraticLinear_apply hS R B V z r y)
 
 /-- The scalar decoding clause is forced by the normalized coefficient
 identity; the Source and bilinear structures were constructed independently. -/
@@ -305,14 +331,13 @@ theorem coupledQuadraticErrorData_scalar_decode
         (S.height (3 / 4 : ℝ)).decode r.1.val x *
         angularPartial (heightPairField S (V.V z y).1) x) p +
       (S.height (3 / 4 : ℝ)).decode (L.error z r.2.val (V.V z y).1).val p := by
-  rw [coupledQuadraticErrorData_scalar]
-  simp only [Submodule.coe_add, Submodule.coe_smul, map_add, map_smul,
-    Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+  have hscalar := coupledQuadraticErrorData_scalar hD hT hS R L B V typeCoefficient z r y
+  have heval := congrArg (coupledSourceEvaluation S p) hscalar
+  simp only [map_add, map_smul, smul_eq_mul, coupledSourceEvaluation_apply] at heval
   have he := congrFun (coupledScalarTypeErrorSourceLinear_decode hD hT hS
     (typeCoefficient z) (residualErrorCoefficient D S C z) ht r.1.val (V.V z y).1) p
-  simpa only [scalarCorrectionError] using
-    congrArg (fun a : ℝ => z.2 * a +
-      (S.height (3 / 4 : ℝ)).decode (L.error z r.2.val (V.V z y).1).val p) he
+  exact heval.trans (congrArg (fun a : ℝ => z.2 * a +
+    (S.height (3 / 4 : ℝ)).decode (L.error z r.2.val (V.V z y).1).val p) he)
 
 /-- On the N02 domain the total circle component decodes to the unmodified
 independent chart error prescribed by N10. -/
@@ -330,8 +355,14 @@ theorem coupledQuadraticErrorData_circle_decode
       circleChartError S C z r.2.val
         (R.inverse (y.2.val - z.2 • B.heightRow z (V.V z y).1 -
           B.circleColumn z (V.V z y).2.2.1)) m θ := by
-  rw [coupledQuadraticErrorData_circle, coupled_projected_returnError_eq hS h2 hz hs r.2]
-  exact h2.2.2.2.2.1 z hz hs r.2.val _ m θ
+  have hcircle := coupledQuadraticErrorData_circle hD hT hS R L B V typeCoefficient z r y
+  have hproject := coupled_projected_returnError_eq hS h2 hz hs r.2
+    (R.inverse (y.2.val - z.2 • B.heightRow z (V.V z y).1 -
+      B.circleColumn z (V.V z y).2.2.1))
+  exact (congrArg (fun f : EvenCircle S => (S.circle (3 / 4 : ℝ)).decode f.val m θ)
+    hcircle).trans
+      ((congrArg (fun f : CircleSpace S => (S.circle (3 / 4 : ℝ)).decode f m θ) hproject).trans
+        (h2.2.2.2.2.1 z hz hs r.2.val _ m θ))
 
 /-- Conservation holds for every value of the constructed error, including
 outside the geometric neighborhood, because its scalar component is a Source. -/

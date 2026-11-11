@@ -61,7 +61,10 @@ theorem continuousOn_coupledParameterDerivative
   have hm : Continuous
       (fun z : (X × ℝ) × E => (z.1, (v, z.2))) :=
     continuous_fst.prodMk (continuous_const.prodMk continuous_snd)
-  have hc := (continuousOn_inverseForwardJet J 1).comp hm.continuousOn
+  have hmOn : ContinuousOn
+      (fun z : (X × ℝ) × E => (z.1, (v, z.2))) (U ×ˢ univ) :=
+    hm.continuousOn
+  have hc := (continuousOn_inverseForwardJet J 1).comp hmOn
     (fun z hz => ⟨hz.1, mem_univ _⟩)
   apply hc.congr
   intro z hz

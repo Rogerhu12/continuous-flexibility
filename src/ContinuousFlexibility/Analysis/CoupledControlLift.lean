@@ -87,6 +87,8 @@ theorem coupledInverseControlLift_grading_le (hM : IsCircleModel T γ M)
     _ = M.grading n (coupledCircleMultiplier hM (fun m => (a m)⁻¹) 2
         (coupled_inverseDiagonal_bound a ha) (circleAngularMeanProjection hM u)) :=
       congrArg (M.grading n) (coupledInverseControlLift_apply hM a ha u)
+    _ = M.grading n (coupledCircleMultiplierLinear hM (fun m => (a m)⁻¹) 2
+        (coupled_inverseDiagonal_bound a ha) (circleAngularMeanProjection hM u)) := rfl
     _ ≤ 2 * M.grading n (circleAngularMeanProjection hM u) := by
       simpa only [NNReal.coe_ofNat] using
         coupledCircleMultiplierLinear_grading_le hM (fun m => (a m)⁻¹) 2
@@ -99,7 +101,8 @@ theorem coupledInverseControlLift_isTame (hM : IsCircleModel T γ M)
     ContinuousFlexibility.Analysis.IsTameLinear M.grading M.grading
       (coupledInverseControlLift hM a ha).toLinearMap 0 0 := by
   intro n _
-  exact ⟨2, fun u => by simpa only [Nat.add_zero, NNReal.coe_ofNat] using
+  exact ⟨2, fun u => by simpa only [Nat.add_zero, NNReal.coe_ofNat,
+    ContinuousLinearMap.coe_coe] using
     coupledInverseControlLift_grading_le hM a ha n u⟩
 
 end CircleModel

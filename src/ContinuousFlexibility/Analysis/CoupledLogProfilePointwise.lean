@@ -72,7 +72,7 @@ theorem coupled_stateKappa_add (hS : IsPhysicalSpaces D T S)
 
 theorem coupled_stateKappa_smul (hS : IsPhysicalSpaces D T S)
     (a : ℝ) (x : AnnularState S) (m : ℕ) :
-    stateKappa S (@SMul.smul ℝ (AnnularState S) _ a x) m = a * stateKappa S x m := by
+    stateKappa S (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul a x) m = a * stateKappa S x m := by
   simpa only [coupled_stateKappaEvalCLM_apply, smul_eq_mul] using
     (coupled_stateKappaEvalCLM hS m).map_smul a x
 
@@ -151,17 +151,17 @@ theorem coupled_logProfilePointwiseCLM_apply (hS : IsPhysicalSpaces D T S)
 
 theorem coupled_stateLogProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    coupled_stateLogProfile D S C (x + @SMul.smul ℝ (AnnularState S) _ t v) r =
+    coupled_stateLogProfile D S C (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r =
       coupled_stateLogProfile D S C x r + t * coupled_stateLogProfile D S C v r := by
   simpa only [coupled_logProfileEvalCLM_apply] using
     coupled_clm_affine (coupled_logProfileEvalCLM hS hC r) x v t
 
 theorem coupled_stateProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) _ t v) r =
+    stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r =
       stateProfile D S C x r * Real.exp (t * coupled_stateLogProfile D S C v r) := by
   change D.w r * Real.exp (coupled_stateLogProfile D S C
-      (x + @SMul.smul ℝ (AnnularState S) _ t v) r) =
+      (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r) =
     (D.w r * Real.exp (coupled_stateLogProfile D S C x r)) *
       Real.exp (t * coupled_stateLogProfile D S C v r)
   rw [coupled_stateLogProfile_affine hS hC, Real.exp_add, mul_assoc]
@@ -170,7 +170,7 @@ theorem coupled_stateProfile_affine (hS : IsPhysicalSpaces D T S)
 including every circle direction and every state outside the sector. -/
 theorem coupled_stateProfile_hasDerivAt (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (r : ℝ) :
-    HasDerivAt (fun t : ℝ => stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) _ t v) r)
+    HasDerivAt (fun t : ℝ => stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r)
       (stateProfile D S C x r * coupled_stateLogProfile D S C v r) 0 := by
   have h : HasDerivAt
       (fun t : ℝ => Real.exp (t * coupled_stateLogProfile D S C v r))

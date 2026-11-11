@@ -291,26 +291,39 @@ theorem coupled_circle_nu_firstJet_eq_zero
   have href : referenceStateConditions D S C := h1.2.2.1
   have heq :
       (fun t : ℝ => (sectorJointResidual S C P
-        (z + t • (coupledSectorNuDirection S μ, 0))).2) =ᶠ[𝓝 0]
+        (z + @SMul.smul ℝ (StateDirections S × ℝ)
+          (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t
+          (coupledSectorNuDirection S μ, 0))).2) =ᶠ[𝓝 0]
       (fun _ : ℝ => (sectorJointResidual S C P z).2) := by
     filter_upwards [hnear] with t ht
     apply Subtype.ext
     change (P.circle (liftSectorParameter S C
-      (z + t • (coupledSectorNuDirection S μ, 0)))).val =
+      (z + @SMul.smul ℝ (StateDirections S × ℝ)
+        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t
+        (coupledSectorNuDirection S μ, 0)))).val =
         (P.circle (liftSectorParameter S C z)).val
     rw [hcircle _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
       (href.liftSectorParameter_sector _),
       hcircle _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
         (href.liftSectorParameter_sector _)]
     have hxt :
-        ((liftSectorParameter S C z).1 + t • (coupledSectorNuDirection S μ).val, z.2) ∈
+        ((liftSectorParameter S C z).1 +
+          @SMul.smul ℝ (AnnularState S)
+            (inferInstance : Module ℝ (AnnularState S)).toSMul t
+            (coupledSectorNuDirection S μ).val, z.2) ∈
           stateNeighborhood S C base ε := by
       simpa only [coupled_liftSectorParameter_add] using
         liftSectorParameter_mem_stateNeighborhood (C := C) ht le_rfl
     have hsxt : stateSector S
-        ((liftSectorParameter S C z).1 + t • (coupledSectorNuDirection S μ).val) := by
+        ((liftSectorParameter S C z).1 +
+          @SMul.smul ℝ (AnnularState S)
+            (inferInstance : Module ℝ (AnnularState S)).toSMul t
+            (coupledSectorNuDirection S μ).val) := by
       simpa only [coupled_liftSectorParameter_add] using
-        href.liftSectorParameter_sector (z + t • (coupledSectorNuDirection S μ, 0))
+        href.liftSectorParameter_sector
+          (z + @SMul.smul ℝ (StateDirections S × ℝ)
+            (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t
+            (coupledSectorNuDirection S μ, 0))
     rw [coupled_liftSectorParameter_add]
     apply coupled_returnResidual_eq_of_nu_change hT hS h1 h2
       hxt

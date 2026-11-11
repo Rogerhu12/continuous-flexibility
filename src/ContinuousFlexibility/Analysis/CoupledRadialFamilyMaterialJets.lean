@@ -114,7 +114,7 @@ theorem coupled_mixedDerivative_radial (f : ℝ → ℝ) (a b : ℕ) (p : PolarP
       if b = 0 then iteratedDeriv a f p.1 else 0 := by
   by_cases hb : b = 0
   · subst b
-    simp only [mixedDerivative, iteratedDeriv_zero, if_pos rfl]
+    simp only [mixedDerivative, iteratedDeriv_zero, ite_true]
   · have hz : (fun r : ℝ => iteratedDeriv b (fun _ : ℝ => f r) p.2) = (0 : ℝ → ℝ) := by
       funext r
       simp only [iteratedDeriv_const, if_neg hb, Pi.zero_apply]

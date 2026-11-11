@@ -67,6 +67,7 @@ private theorem coupled_response_fst_smoothTameOn
   have hpr := tamePairGrading_monotone hp hr
   have htpr := withSeminorms_pairGrading htp htr
   have htps := withSeminorms_pairGrading htp hts
+  letI : LocallyConvexSpace ℝ (X × Y) := htps.toLocallyConvexSpace
   have hfst : SmoothTameOn (pairGrading p r) p (U ×ˢ univ) (fun z : X × E => z.1) :=
     smoothTameOn_continuousLinear_on (hU.prod isOpen_univ)
       (ContinuousLinearMap.fst ℝ X E) (scalar_pair_fst_isTame p r)
@@ -130,6 +131,12 @@ theorem coupled_controlHeightResponse_smoothTameOn
   letI : ∀ n, CompleteSpace ((S.height (3 / 4 : ℝ)).level n) := fun n =>
     SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 (3 / 4 : ℝ)) n
   have h := coupled_response_fst_smoothTameOn
+    (p := pairGrading (sectorGrading S) realGrading)
+    (r := controlGrading) (s := S.sourceGrading)
+    (F := (S.height (3 / 4 : ℝ)).level) (bond := (S.height (3 / 4 : ℝ)).bond)
+    (q := (S.height (3 / 4 : ℝ)).grading)
+    (column := fun z u => B.heightColumn (liftSectorParameter S C z) u)
+    (response := fun z f => G.G (liftSectorParameter S C z) f)
     (tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone)
     (withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms)
     coupled_controlGrading_monotone coupled_controlGrading_withSeminorms
