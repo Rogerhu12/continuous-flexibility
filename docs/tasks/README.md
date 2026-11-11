@@ -91,7 +91,18 @@ gh run view <run-id> --log-failed
 - The step "Build every library" prints every `error:` line with the following 60 lines; the full
   log is the artifact `build-log`.
 - Push small, complete steps (one file or one lemma group at a time), so that one CI round tells
-  you about one change. Do not pile up thousands of unchecked lines before the first push.
+  you about one change.
+- **Hard limit: your branch may be at most 500 added lines of Lean ahead of its last commit that
+  passed CI.** When CI fails, the next pushes only fix the failure; do not add new material on top
+  of a failing build. When you are at the limit, stop writing and make CI green first. Check the
+  distance with:
+
+```bash
+git diff --shortstat $(gh run list --branch line/<Task> --status success --limit 1 --json headSha --jq '.[0].headSha') HEAD -- '*.lean'
+```
+
+  Code that does not compile is not progress: a branch with thousands of uncompiled lines usually
+  hides layered errors, and repairing them costs more than writing in small checked steps.
 
 ## Lean
 
