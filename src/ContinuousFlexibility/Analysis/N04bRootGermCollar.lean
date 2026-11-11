@@ -45,7 +45,7 @@ theorem n04b_originalCoefficients_periodic
       Function.Periodic (fun θ => (originalCoefficients D S C z).b (r, θ)) Real.pi ∧
       Function.Periodic (fun θ => (originalCoefficients D S C z).c (r, θ)) Real.pi := by
   have hp := periodic_heightCorrectedCoefficients
-    (stateProfile D S C z.1) (n04b_stateHeight_periodic hS z)
+    (stateProfile D S C z.1) (n04b_stateHeight_periodic (C := C) hS z)
   refine ⟨?_, ?_, ?_⟩ <;> intro θ
   · simpa only [originalCoefficients, Prod.mk_add_mk, add_zero] using hp.1 (r, θ)
   · simpa only [originalCoefficients, Prod.mk_add_mk, add_zero] using hp.2.1 (r, θ)
@@ -78,7 +78,7 @@ theorem n04b_through03_root_coefficient_collar
     intro t θ
     by_cases ht : r₀ + t ∈ Ioo D.a D.b
     · have hl := hL.periodic_coefficients z hz hs (r₀ + t) ht
-      have ho := n04b_originalCoefficients_periodic hS z (r₀ + t)
+      have ho := n04b_originalCoefficients_periodic (C := C) hS z (r₀ + t)
       simp only [Q, hl.2.1 θ, hl.2.2 θ, ho.2.1 θ, ho.2.2 θ]
     · simp only [Q, ht, false_and]
   have hlocal : ∀ θ : ℝ, ∀ᶠ p in 𝓝 (0, θ), Q p := by

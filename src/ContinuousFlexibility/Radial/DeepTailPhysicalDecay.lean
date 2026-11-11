@@ -34,7 +34,7 @@ theorem physicalDecay_fiveHalf_step (n : ℕ) :
   have hnext := mul_le_mul_of_nonneg_left hsqrt' (sq_nonneg ((n : ℝ) + 1))
   nlinarith
 
-private theorem physicalDecay_exponent_step {A B : ℝ} (hA : 0 < A) (hB : 0 ≤ B)
+theorem physicalDecay_exponent_step {A B : ℝ} (hA : 0 < A) (hB : 0 ≤ B)
     (n : ℕ) :
     log A - 2 * (n : ℝ) ^ 2 + B * ((n : ℝ) ^ (3 / 2 : ℝ) + n) ≤
       -(radialS (n + 1) - radialS n) +

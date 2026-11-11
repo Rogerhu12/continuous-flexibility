@@ -34,6 +34,8 @@ namespace N04bCircleFlowRegularity
 variable {Φ : PolarPoint → ℝ} {a b P : ℝ}
   (hΦ : N04bCircleFlowRegularity Φ a b P)
 
+include hΦ
+
 theorem strictMono {r : ℝ} (hr : r ∈ Icc a b) :
     StrictMono (fun θ : ℝ => Φ (r, θ)) :=
   strictMono_of_deriv_pos (hΦ.positive r hr)

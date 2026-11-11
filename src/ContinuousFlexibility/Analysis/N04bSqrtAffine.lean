@@ -1,6 +1,10 @@
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.Analysis.Calculus.Deriv.Mul
+import Mathlib.Analysis.Calculus.Deriv.Add
+import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Convert
+import Mathlib.Tactic.NormNum
 
 /-!
 # An affine optical radicand cannot cross zero smoothly
@@ -20,18 +24,13 @@ open Set
 theorem n04b_sqrt_not_differentiableAt_zero :
     ¬ DifferentiableAt ℝ Real.sqrt (0 : ℝ) := by
   intro h
-  have hsqrt : HasDerivAt Real.sqrt (deriv Real.sqrt (0 : ℝ)) (0 : ℝ) :=
-    h.hasDerivAt
-  have hproduct : HasDerivAt (fun t : ℝ => Real.sqrt t * Real.sqrt t)
-      (deriv Real.sqrt (0 : ℝ) * Real.sqrt 0 +
-        Real.sqrt 0 * deriv Real.sqrt (0 : ℝ)) (0 : ℝ) := by
-    simpa only [Pi.mul_apply] using (HasDerivAt.mul hsqrt hsqrt)
-  have hsquare : HasDerivAt (fun t : ℝ => Real.sqrt t * Real.sqrt t) 0 0 := by
-    simpa only [Real.sqrt_zero, mul_zero, zero_mul, add_zero] using hproduct
+  have hsquare : HasDerivAt (fun t : ℝ => (Real.sqrt t) ^ 2) 0 (0 : ℝ) := by
+    convert! (hasDerivAt_pow 2 (Real.sqrt (0 : ℝ))).comp (0 : ℝ) h.hasDerivAt using 1 <;>
+      norm_num
   have hid : HasDerivWithinAt (fun t : ℝ => t) 0 (Ici (0 : ℝ)) 0 :=
     hsquare.hasDerivWithinAt.congr_of_mem
-      (fun t ht => by rw [← pow_two, Real.sq_sqrt ht])
-      (show (0 : ℝ) ∈ Ici (0 : ℝ) from le_rfl)
+      (fun t ht => (Real.sq_sqrt ht).symm)
+      (Set.mem_Ici.mpr (le_refl (0 : ℝ)))
   have hzero : derivWithin (fun t : ℝ => t) (Ici (0 : ℝ)) 0 = 0 :=
     hid.derivWithin (uniqueDiffWithinAt_Ici (0 : ℝ))
   have hone : derivWithin (fun t : ℝ => t) (Ici (0 : ℝ)) 0 = 1 :=
@@ -48,7 +47,7 @@ theorem n04b_sqrt_affine_not_differentiableAt_zero
   have hlinear : HasDerivAt (fun u : ℝ => b⁻¹ * u) b⁻¹ (0 : ℝ) :=
     hasDerivAt_const_mul b⁻¹
   have hparameterDeriv : HasDerivAt (fun u : ℝ => t₀ + b⁻¹ * u) b⁻¹ (0 : ℝ) := by
-    simpa only [Pi.add_apply, zero_add] using (HasDerivAt.add hconst hlinear)
+    simpa only [Pi.add_apply, zero_add] using! (HasDerivAt.add hconst hlinear)
   have hparameter : DifferentiableAt ℝ (fun u : ℝ => t₀ + b⁻¹ * u) (0 : ℝ) :=
     hparameterDeriv.differentiableAt
   have houter : DifferentiableAt ℝ (fun t : ℝ => Real.sqrt (a + b * t))

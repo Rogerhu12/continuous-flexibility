@@ -67,8 +67,9 @@ theorem n04b_negative_domain_normalization_inter
     {D : ReferenceData} {Ω : Set PolarPoint}
     (hnegative : ∀ p ∈ Ω, deriv D.w p.1 < 0) :
     Ω ∩ (n04bNormalizationRegion D ×ˢ (univ : Set ℝ)) = ∅ := by
-  apply Set.eq_empty_iff_forall_not_mem.mpr
-  intro p hp
-  exact n04b_not_mem_normalizationRegion_of_negative (hnegative p hp.1) hp.2.1
+  apply Set.Subset.antisymm
+  · intro p hp
+    exact (n04b_not_mem_normalizationRegion_of_negative (hnegative p hp.1) hp.2.1).elim
+  · exact empty_subset _
 
 end ContinuousFlexibility.Analysis

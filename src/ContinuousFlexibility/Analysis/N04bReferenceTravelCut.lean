@@ -46,7 +46,8 @@ theorem n04b_referenceTravel_continuousOn
     (hD : RadialProfileGeometry D) (hC : controlGeometryConditions D S C) (m : ℕ) :
     ContinuousOn (opticalTravel D.w (C.left m)) (Icc (C.left m) (C.right m)) := by
   have hc := n04b_referenceOpticalSpeed_continuousOn hD hC m
-  have hi := hc.intervalIntegrable_of_Icc (hC.1 m).2.1.le
+  have hi : IntervalIntegrable (opticalSpeed D.w) volume (C.left m) (C.right m) :=
+    hc.intervalIntegrable_of_Icc (hC.1 m).2.1.le
   simpa only [opticalTravel, uIcc_of_le (hC.1 m).2.1.le] using
     (intervalIntegral.continuousOn_primitive_interval' hi
       (left_mem_uIcc : C.left m ∈ Set.uIcc (C.left m) (C.right m)))
@@ -57,7 +58,8 @@ theorem n04b_referenceTravel_hasDerivAt
     HasDerivAt (opticalTravel D.w (C.left m)) (opticalSpeed D.w r) r := by
   have hc := n04b_referenceOpticalSpeed_continuousOn hD hC m
   have ho := hc.mono Ioo_subset_Icc_self
-  have hi := (hc.mono (Icc_subset_Icc le_rfl hr.2.le)).intervalIntegrable_of_Icc hr.1.le
+  have hi : IntervalIntegrable (opticalSpeed D.w) volume (C.left m) r :=
+    (hc.mono (Icc_subset_Icc le_rfl hr.2.le)).intervalIntegrable_of_Icc hr.1.le
   exact intervalIntegral.integral_hasDerivAt_right hi
     (ContinuousOn.stronglyMeasurableAtFilter isOpen_Ioo ho r hr)
     ((ho r hr).continuousAt (isOpen_Ioo.mem_nhds hr))
@@ -84,8 +86,8 @@ theorem n04b_referenceTravel_pos
   have hab := (hC.1 m).2.1
   have h := n04b_referenceTravel_strictMonoOn hD hC m
     (left_mem_Icc.mpr hab.le) (right_mem_Icc.mpr hab.le) hab
-  simpa only [n04b_referenceTravel_right hC m, opticalTravel,
-    intervalIntegral.integral_same] using h
+  rw [n04b_referenceTravel_right hC m] at h
+  simpa only [opticalTravel, intervalIntegral.integral_same] using h
 
 /-- The reference cut is fixed by its actual travel value, uniquely. -/
 theorem n04b_exists_unique_referenceTravel_cut

@@ -43,6 +43,8 @@ namespace N04bScalarFieldRegularity
 variable {F : PolarPoint → ℝ} {a b P : ℝ}
   (hF : N04bScalarFieldRegularity F a b P)
 
+include hF
+
 theorem period_ne_zero : P ≠ 0 := hF.period_pos.ne'
 
 theorem continuous : ContinuousOn F (Icc a b ×ˢ univ) := by

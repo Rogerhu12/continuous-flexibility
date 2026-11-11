@@ -76,7 +76,7 @@ private theorem mem_openInterval_iff_of_periodic_boundary_fibers
         rw [neg_add_cancel, hf0] at hneg
         linarith
       obtain ⟨s, hs, hfs⟩ := isPreconnected_Iio.intermediate_value
-        (show -P ∈ Iio (0 : ℝ) by dsimp; linarith)
+        (show -P ∈ Iio (0 : ℝ) by linarith)
         (show t ∈ Iio (0 : ℝ) from htneg) hf.continuousOn
         (show (0 : ℝ) ∈ Icc (f (-P)) (f t) from
           ⟨by rw [hfnegP]; linarith, ht.1.le⟩)
@@ -91,7 +91,7 @@ private theorem mem_openInterval_iff_of_periodic_boundary_fibers
       have hfTwoP : f (P + P) = P + P := by rw [htranslate, hfP]
       obtain ⟨s, hs, hfs⟩ := isPreconnected_Ioi.intermediate_value
         (show t ∈ Ioi P from htgt)
-        (show P + P ∈ Ioi P by dsimp; linarith) hf.continuousOn
+        (show P + P ∈ Ioi P by linarith) hf.continuousOn
         (show P ∈ Icc (f t) (f (P + P)) from
           ⟨ht.2.le, by rw [hfTwoP]; linarith⟩)
       exact (ne_of_gt hs) (hPfiber s hfs)

@@ -61,7 +61,7 @@ private theorem n04b_deriv_neg_of_negative_right
     (hneg : ∀ t ∈ Ioo (0 : ℝ) δ, f t < 0) : v < 0 := by
   have hle : v ≤ 0 := le_of_tendsto hf.tendsto_slope_zero_right (by
     filter_upwards [self_mem_nhdsWithin,
-      (Iio_mem_nhds hδ).filter_mono nhdsWithin_le_nhds] with t ht htδ
+      nhdsWithin_le_nhds (Iio_mem_nhds hδ)] with t ht htδ
     have ht0 : 0 < t := ht
     simpa only [zero_add, hf0, sub_zero, smul_eq_mul] using
       mul_nonpos_of_nonneg_of_nonpos (inv_nonneg.mpr ht0.le)
@@ -172,8 +172,9 @@ theorem n04b_actualRootSpeed_germ
   let f : ℝ → ℝ := fun x => -deriv D.w (r₀ + σ * x)
   have hf : ContDiff ℝ ∞ f :=
     (hwd.comp (contDiff_const.add (contDiff_const.mul contDiff_id))).neg
+  have hroot0 : deriv D.w r₀ = 0 := hroot.2.1
   have hf0 : f 0 = 0 := by
-    simp only [f, mul_zero, add_zero, hroot.2.1, neg_zero]
+    simp only [f, mul_zero, add_zero, hroot0, neg_zero]
   obtain ⟨g, hg, hgzero, hdivide⟩ := exists_smooth_division_at_zero hf hf0
   have houter : HasDerivAt (deriv D.w) (deriv (deriv D.w) r₀) (r₀ + σ * 0) := by
     simpa only [mul_zero, add_zero] using (hwd.differentiable (by simp) r₀).hasDerivAt
@@ -190,7 +191,7 @@ theorem n04b_actualRootSpeed_germ
     Real.sqrt (A p) * characteristicAngularFactor D S C z (shift p)
   have hp₀ : (r₀, θ) ∈ annularOpen D := ⟨hroot.1, mem_univ _⟩
   have hlim : Tendsto shift (𝓝 (0, θ)) (𝓝 (r₀, θ)) := by
-    simpa only [hshift0] using hshift.continuous.continuousAt (x := (0, θ))
+    simpa only [hshift0] using (hshift.continuous.continuousAt (x := (0, θ))).tendsto
   have hradlim : Tendsto (fun p : PolarPoint => (shift p).1)
       (𝓝 (0, θ)) (𝓝 r₀) := continuousAt_fst.tendsto.comp hlim
   have hprofile := n04b_stateProfile_endpoint_germ hN01 hz m side
