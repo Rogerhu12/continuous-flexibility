@@ -135,7 +135,7 @@ theorem outerRadialRegionOperator_test_pairing
       simpa only [outerOutwardRadius_eq_sign] using
         (outerOutwardRegion_ae_iff hD hcut (p := q))
     · intro x hx
-      apply (selectedOutwardDensity_pos hD hcut _).ne'
+      refine (selectedOutwardDensity_pos (right := right) hD hcut x ?_).ne'
       simpa only [outerOutwardRadius_eq_sign] using Ioo_subset_Ico_self hx
     · exact hφ
     · exact hsφ

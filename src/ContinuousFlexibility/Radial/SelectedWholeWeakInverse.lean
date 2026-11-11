@@ -51,7 +51,10 @@ theorem exists_wholeWeakInverse
         OuterWeightedHomogeneousUnique μ w a b ((j : ℝ) ^ 2) lam H.entrance := by
   have hex := F.exists_wholeGreenOperator hD hcut hentry hac.le hlam hT hphysical
     hη hK hKinv
-  simp only [outerOutwardRegionMeasure_eq_density, outerOutwardRadius_eq_sign] at hex ⊢
+  have hmeasure : μ = ν := by
+    simpa only [outerOutwardRadius_eq_sign] using
+      outerOutwardRegionMeasure_eq_density D right cut
+  rw [hmeasure] at hex ⊢
   obtain ⟨H, R, hR, hrow⟩ := hex
   have hg := matchingProfileGeometry hD
   have hep : 0 < entrance := hg.1.trans hentry.1
@@ -75,7 +78,7 @@ theorem exists_wholeWeakInverse
     rw [hz, outerOutwardRadius_eq_sign, mul_zero] at hp
     exact (lt_irrefl 0) hp
   have hρ₀ (x : ℝ) (hx : x ∈ Ioo a b) : 0 ≤ ρ x := by
-    apply (selectedOutwardDensity_pos hD hcut _).le
+    refine (selectedOutwardDensity_pos (right := right) hD hcut x ?_).le
     simpa only [outerOutwardRadius_eq_sign] using Ioo_subset_Ico_self hx
   have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hep
   have horder : outerOutwardRadius right cut ≤

@@ -192,8 +192,10 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
         Γ.reference.w ((H).left i.succ) / (H).left i.succ ≤ l * (A).kappa i := by
     intro i Q hi
     obtain ⟨p, hs | hs⟩ := innerModelChain_cut_incidence i
-    · rw [hs.2, retainedMorseActualChain_model] at hi
-      cases hi
+    · have htag : Sum.elim (fun _ => true) (fun _ => false) ((A).piece i.succ) = false :=
+        congrArg (Sum.elim (fun _ => true) (fun _ => false)) hi
+      rw [hs.2, retainedMorseActualChain_model] at htag
+      cases htag
     · have hm := P.retainedMorseActualChain_model hD hw hS G₀ hfirst hq hT
         hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hjpos
         column hB models centralModel p
