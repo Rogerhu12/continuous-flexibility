@@ -105,7 +105,6 @@ theorem morseConnector_scaled_mass_resistance_bounds
           (mul_le_mul hwidth harrival (hwp r hrMem).le hwidthNonneg) (by positivity)
       _ = (L * K * β ^ 6 * lam) * ((eta / lam) * B * H ^ 12) := by
         field_simp [hlam.ne']
-        ring
       _ ≤ (L * K * β ^ 6 * lam) * (S * A ^ 6) :=
         mul_le_mul_of_nonneg_left hMscale' hMcoef
       _ = _ := by ring
@@ -116,7 +115,6 @@ theorem morseConnector_scaled_mass_resistance_bounds
           (inv_nonneg.mpr (mul_nonneg (hwp l hlMem).le (pow_nonneg hα.le 8))) hwidthNonneg
       _ = (L * K / α ^ 8 * lam⁻¹ * (A ^ 4)⁻¹) * (H ^ 12 / A) := by
         field_simp [hlam.ne', hK.ne', hA.ne', hα.ne']
-        ring
       _ ≤ (L * K / α ^ 8 * lam⁻¹ * (A ^ 4)⁻¹) * S :=
         mul_le_mul_of_nonneg_left hRscale hRcoef
       _ = _ := by ring
