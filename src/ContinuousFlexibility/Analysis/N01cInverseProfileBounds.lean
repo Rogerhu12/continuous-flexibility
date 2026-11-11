@@ -368,7 +368,8 @@ theorem abs_iteratedDeriv_stateInverseProfile_le_majorant
         hS hT hA hD hχ hB (n - a.val) r hr hz)
   have he := congrArg abs (iteratedDeriv_stateProfile_inverse_eq_reflected_sum
     hS hT hA.1.1 hD hA.2.2.1 hχ n r hr z.1)
-  exact he.trans_le (by simpa only [mul_one] using h)
+  exact he.trans_le (by
+    simpa only [referenceInverseSquareLeibnizMajorant, mul_one] using h)
 
 /-- Every positive parameter derivative of every radial reciprocal
 profile jet retains the full material height weight on the original ball. -/
