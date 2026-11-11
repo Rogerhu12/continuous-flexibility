@@ -70,7 +70,7 @@ theorem n05CanonicalFiniteTruncate_bound (S : PhysicalSpacesData)
     (K : CanonicalData S) (s : ℕ) (q : Finset ℕ)
     (v : n05CanonicalClosedSubmodule S K s) :
     ‖n05CanonicalFiniteTruncate S K s q v‖ ≤ ‖v‖ := by
-  simpa only [one_mul] using n05CanonicalJetMultiplier_bound S K s
+  simpa only [n05CanonicalFiniteTruncate, one_mul] using n05CanonicalJetMultiplier_bound S K s
     (n05CanonicalCellMask q) 1 zero_le_one (n05CanonicalCellMask_bound q) v
 
 theorem n05CanonicalFiniteTruncate_tendsto (S : PhysicalSpacesData)
@@ -94,8 +94,14 @@ theorem n05CanonicalFiniteTruncate_forget (T : MaterialData) (S : PhysicalSpaces
     (n05CanonicalVolumeModel T S K).forget γ t s
         (n05CanonicalFiniteTruncate S K s q v) m =
       if m ∈ q then (n05CanonicalVolumeModel T S K).forget γ t s v m else 0 := by
-  by_cases hm : m ∈ q <;>
-    simp [n05CanonicalVolumeModel_forget, n05CanonicalFiniteTruncate_apply, hm]
+  simp only [n05CanonicalVolumeModel_forget]
+  have hj := n05CanonicalFiniteTruncate_apply S K s q
+    (show n05CanonicalClosedSubmodule S K s from v) m 0
+  have hw := congrArg (fun z : CanonicalL2 S K m =>
+    (T.M (T.sample (K.cell m)) ^ (-t) * T.H (T.sample (K.cell m)) ^ γ) • z) hj
+  by_cases hm : m ∈ q
+  · simpa only [if_pos hm] using hw
+  · simpa only [if_neg hm, smul_zero] using hw
 
 
 theorem n05CanonicalFiniteTruncate_forget_eq (T : MaterialData) (S : PhysicalSpacesData)

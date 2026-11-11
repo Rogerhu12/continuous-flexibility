@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
 import ContinuousFlexibility.Radial.ReferenceGraphProjection
+import ContinuousFlexibility.Radial.ReferenceCommonInverse
 
 /-!
 # The actual reference inverse commutes with finite angular projection

@@ -88,7 +88,7 @@ theorem n05CanonicalTestSubmodule_dense (S : PhysicalSpacesData)
   intro u hu
   apply n05CanonicalL2_eq_zero_of_test S K m u
   intro φ hφ
-  have hi : ⟪n05CanonicalTestL2 hφ, u⟫_ℝ = 0 :=
+  have hi : inner ℝ (n05CanonicalTestL2 hφ) u = 0 :=
     ((n05CanonicalTestSubmodule S K m).mem_orthogonal u).mp hu _
       ⟨φ, hφ, rfl⟩
   exact (n05CanonicalTestPairing_apply S K m φ (n05CanonicalTest_memLp hφ) u).symm.trans hi

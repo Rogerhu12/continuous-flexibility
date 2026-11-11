@@ -30,8 +30,15 @@ theorem n05_referenceState_mem (hε : 0 < ε) :
     (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
   change stateGrading S base (C.referenceState - C.referenceState) < ε ∧
     |(0 : ℝ)| < ε
-  rw [sub_self, map_zero (stateGrading S base), abs_zero]
-  exact ⟨hε, hε⟩
+  constructor
+  · calc
+      stateGrading S base (C.referenceState - C.referenceState) =
+          stateGrading S base (0 : AnnularState S) :=
+        congrArg (fun x : AnnularState S => stateGrading S base x)
+          (sub_self C.referenceState)
+      _ = 0 := (stateGrading S base).map_zero'
+      _ < ε := hε
+  · exact lt_of_eq_of_lt (abs_zero : |(0 : ℝ)| = 0) hε
 
 theorem n05_referenceState_sector (hC : referenceStateConditions D S C) :
     stateSector S C.referenceState := by
