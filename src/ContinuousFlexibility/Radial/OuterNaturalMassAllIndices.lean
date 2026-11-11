@@ -73,12 +73,12 @@ def outerNaturalBandMassCoefficient (T : MorseChainData)
 
 /-- The true next mass is uniformly bounded on every single frequency
 band, with no asymptotic lower bound on the transition index. -/
-theorem morseRealized_next_normalized_mass_band_bound
+theorem morseRealized_next_normalized_mass_band_bound_of_upper
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ} {K Cstar : ℝ}
     (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
     (hcell : MorseRealizedCellEstimates T K)
-    (side : Bool) (n : ℕ) (hn : 1 ≤ n) (j : ℕ)
-    (hj : radialFrequencyBand T Cstar n j) {entrance : ℝ}
+    (side : Bool) (n : ℕ) (hn : 1 ≤ n) (hnidx : T.index ≤ n) (j : ℕ)
+    (hj : (j : ℝ) < radialFrequencyThreshold T Cstar n) {entrance : ℝ}
     (hentry : T.radius side (n + 1) (T.leftX side (n + 1)) ≤ entrance) :
     normalizedRadialGaugeMass D j entrance
         (T.radius side (n + 1) (T.leftX side (n + 1)))
@@ -89,7 +89,7 @@ theorem morseRealized_next_normalized_mass_band_bound
   let l := T.radius side m (T.leftX side m)
   let s := morseChainMassEnd T side m
   let G := exp (2 * radialFrequencyThreshold T Cstar n ^ 2 * log (D.b / D.a))
-  have hm : T.index ≤ m := hj.1.trans (Nat.le_succ n)
+  have hm : T.index ≤ m := hnidx.trans (Nat.le_succ n)
   obtain ⟨hB, hAB, _, hlt, htr, _, _⟩ := h.retained_data side m hm
   have hA₀ : 0 ≤ morseChainA T m := ((mul_pos (by norm_num) hB).trans hAB).le
   have hA := morseChainA_le_nine T m (h.d_eq m hm)
@@ -104,7 +104,7 @@ theorem morseRealized_next_normalized_mass_band_bound
     ⟨hlcore.1.trans_le hx.1, hx.2.trans_lt hscore.2⟩
   have hgauge (x : ℝ) (hx : x ∈ Icc l s) :
       (x / entrance) ^ (2 * j ^ 2) ≤ G :=
-    radialGauge_annulus_power_le h.geometry j hj.2.2.le
+    radialGauge_annulus_power_le h.geometry j hj.le
       (hlcore.1.le.trans hentry) (hsub hx)
   have hmoment : morseCellMass T D side m ≤
       morseChainAmplitude T σ m * (K * 81) := by
@@ -113,7 +113,7 @@ theorem morseRealized_next_normalized_mass_band_bound
       ((hcell.mass_upper side m hm).trans
         (mul_le_mul_of_nonneg_left hA₂ hcell.pos.le))
       (morseChainAmplitude_pos T σ hσ m).le
-  have hamp := morseAdjacentScale_amplitude_le_exp_sq T σ hσ hn hj.1 hm (Or.inl rfl)
+  have hamp := morseAdjacentScale_amplitude_le_exp_sq T σ hσ hn hnidx hm (Or.inl rfl)
   calc
     _ ≤ (G / D.a ^ 8) * morseCellMass T D side m :=
       normalizedRadialGaugeMass_le_moment h.geometry j hls hsub (exp_pos _).le hgauge
@@ -126,24 +126,41 @@ theorem morseRealized_next_normalized_mass_band_bound
         (mul_nonneg (mul_nonneg (by positivity) hcell.pos.le) (by norm_num))
     _ = _ := by dsimp only [outerNaturalBandMassCoefficient, G]; ring
 
+/-- The original frequency-band statement follows from its upper bound. -/
+theorem morseRealized_next_normalized_mass_band_bound
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ} {K Cstar : ℝ}
+    (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
+    (hcell : MorseRealizedCellEstimates T K)
+    (side : Bool) (n : ℕ) (hn : 1 ≤ n) (j : ℕ)
+    (hj : radialFrequencyBand T Cstar n j) {entrance : ℝ}
+    (hentry : T.radius side (n + 1) (T.leftX side (n + 1)) ≤ entrance) :
+    normalizedRadialGaugeMass D j entrance
+        (T.radius side (n + 1) (T.leftX side (n + 1)))
+        (morseChainMassEnd T side (n + 1)) ≤
+      outerNaturalBandMassCoefficient T D.a D.b K Cstar n *
+        morseChainAmplitude T σ n * exp (27 * (n : ℝ) ^ 2) :=
+  morseRealized_next_normalized_mass_band_bound_of_upper
+    h hσ hcell side n hn hj.1 j hj.2.2 hentry
+
 /-- Every positive transition index, including the initial frequency
 band, satisfies the first-mass estimate. The single constant is chosen
 before every allowed height sequence and every realization of the charts. -/
-theorem morseRealized_next_normalized_mass_all_indices_uniform
+theorem morseRealized_next_normalized_mass_all_indices_uniform_of_upper
     {T : MorseChainData} {σ₀ : ℕ → ℝ} {D₀ : ReferenceData} {C₀ : ℕ → ℝ}
     {K Cstar : ℝ} (h₀ : MorseChainRealization T σ₀ D₀ C₀)
     (hcell : MorseRealizedCellEstimates T K) (hCstar : 0 < Cstar) :
     ∃ Cbound : ℝ, 0 < Cbound ∧
       ∀ (σ : ℕ → ℝ) (D : ReferenceData) (C : ℕ → ℝ),
         (∀ k, 1 ≤ σ k ∧ σ k ≤ 2) → MorseChainRealization T σ D C →
-        ∀ n : ℕ, 1 ≤ n → ∀ j : ℕ, radialFrequencyBand T Cstar n j →
+        ∀ n : ℕ, 1 ≤ n → T.index ≤ n →
+          ∀ j : ℕ, (j : ℝ) < radialFrequencyThreshold T Cstar n →
           ∀ side : Bool, ∀ entrance : ℝ,
             T.radius side (n + 1) (T.leftX side (n + 1)) ≤ entrance →
             normalizedRadialGaugeMass D j entrance
                 (T.radius side (n + 1) (T.leftX side (n + 1)))
                 (morseChainMassEnd T side (n + 1)) ≤
               morseChainAmplitude T σ n * exp (Cbound * (n : ℝ) ^ 2) := by
-  have hlarge := (morseTransition_eventually_gauge_small h₀ hCstar).and
+  have hlarge := (morseTransition_eventually_gauge_small_of_upper h₀ hCstar).and
     (eventually_ge_atTop (100 : ℕ))
   obtain ⟨N, hN⟩ := eventually_atTop.1 hlarge
   let H : ℕ → ℝ := outerNaturalBandMassCoefficient T D₀.a D₀.b K Cstar
@@ -155,7 +172,7 @@ theorem morseRealized_next_normalized_mass_all_indices_uniform
   let P := |B| + 1 + M
   have hP : 0 ≤ P := by dsimp only [P]; positivity
   refine ⟨27 + P, by linarith only [hP], ?_⟩
-  intro σ D C hσ h n hn j hj side entrance hentry
+  intro σ D C hσ h n hn hnidx j hj side entrance hentry
   obtain ⟨ha, hb⟩ := morseChainRealization_endpoints_eq h₀ h
   have hcoeff : normalizedRadialGaugeMass D j entrance
       (T.radius side (n + 1) (T.leftX side (n + 1)))
@@ -164,8 +181,8 @@ theorem morseRealized_next_normalized_mass_all_indices_uniform
     by_cases hNn : N ≤ n
     · have hlarge_n := hN n hNn
       have hh := morseRealized_next_normalized_mass_le_height_exp h hσ hcell
-        side n hj.1 hlarge_n.2 j
-        (hlarge_n.1 j hj (n + 1) (Nat.lt_succ_self n)) hentry
+        side n hnidx hlarge_n.2 j
+        (hlarge_n.1 j hnidx hj (n + 1) (Nat.lt_succ_self n)) hentry
       rw [ha] at hh
       have hMP : M ≤ P := by dsimp only [P]; linarith only [abs_nonneg B]
       exact hh.trans (mul_le_mul_of_nonneg_right
@@ -176,8 +193,8 @@ theorem morseRealized_next_normalized_mass_all_indices_uniform
       have hHP : H n ≤ P := by
         dsimp only [P]
         linarith only [hHB, le_abs_self B, hM]
-      have hh := morseRealized_next_normalized_mass_band_bound
-        h hσ hcell side n hn j hj hentry
+      have hh := morseRealized_next_normalized_mass_band_bound_of_upper
+        h hσ hcell side n hn hnidx j hj hentry
       rw [ha, hb] at hh
       exact hh.trans (mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_right hHP (morseChainAmplitude_pos T σ hσ n).le)
@@ -195,5 +212,27 @@ theorem morseRealized_next_normalized_mass_all_indices_uniform
         mul_assoc, ← exp_add]
       congr 2
       ring
+
+/-- Retain the frequency-band API as a direct consequence of the
+estimate which uses only the upper frequency threshold. -/
+theorem morseRealized_next_normalized_mass_all_indices_uniform
+    {T : MorseChainData} {σ₀ : ℕ → ℝ} {D₀ : ReferenceData} {C₀ : ℕ → ℝ}
+    {K Cstar : ℝ} (h₀ : MorseChainRealization T σ₀ D₀ C₀)
+    (hcell : MorseRealizedCellEstimates T K) (hCstar : 0 < Cstar) :
+    ∃ Cbound : ℝ, 0 < Cbound ∧
+      ∀ (σ : ℕ → ℝ) (D : ReferenceData) (C : ℕ → ℝ),
+        (∀ k, 1 ≤ σ k ∧ σ k ≤ 2) → MorseChainRealization T σ D C →
+        ∀ n : ℕ, 1 ≤ n → ∀ j : ℕ, radialFrequencyBand T Cstar n j →
+          ∀ side : Bool, ∀ entrance : ℝ,
+            T.radius side (n + 1) (T.leftX side (n + 1)) ≤ entrance →
+            normalizedRadialGaugeMass D j entrance
+                (T.radius side (n + 1) (T.leftX side (n + 1)))
+                (morseChainMassEnd T side (n + 1)) ≤
+              morseChainAmplitude T σ n * exp (Cbound * (n : ℝ) ^ 2) := by
+  obtain ⟨Cbound, hCbound, hbound⟩ :=
+    morseRealized_next_normalized_mass_all_indices_uniform_of_upper h₀ hcell hCstar
+  refine ⟨Cbound, hCbound, ?_⟩
+  intro σ D C hσ h n hn j hj side entrance hentry
+  exact hbound σ D C hσ h n hn hj.1 j hj.2.2 side entrance hentry
 
 end ContinuousFlexibility.Radial

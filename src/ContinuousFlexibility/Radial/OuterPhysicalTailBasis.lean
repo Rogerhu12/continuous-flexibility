@@ -148,6 +148,15 @@ structure MorsePhysicalTailBasis (M : MorseChainData) (D : ReferenceData)
   Q_entry : tailPhysicalLift D right j logQ entrance = 0
   Q_outward_flux : outerTailSign right * tailPhysicalFlux D right j logQ entrance = 1
   P_node_ne : ∀ k, logP ((morsePhysicalDeepTail M D right j start entrance η K).node k) ≠ 0
+  P_node_step :
+    let T := morsePhysicalDeepTail M D right j start entrance η K
+    ∀ n, |logP (T.node (n + 1))| ≤
+      8 / (T.Λ * tailMass T (n + 1) * tailResistance T n) * |logP (T.node n)|
+  P_initial_node_bound :
+    let T := morsePhysicalDeepTail M D right j start entrance η K
+    T.entrance < T.node 0 →
+      |logP (T.node 0)| ≤ 8 / (T.Λ * tailMass T 0 * tailInitialResistance T) *
+        |logP T.entrance|
   P_bound : 12 * (∫ x, logP x ^ 2
       ∂deepTailMeasure (morsePhysicalDeepTail M D right j start entrance η K)) ≤
     396 * (tailMass (morsePhysicalDeepTail M D right j start entrance η K) 0 /
@@ -169,7 +178,7 @@ theorem exists_morsePhysicalTailBasis
     · exact hD.1
     · exact hD.1.trans hD.2.1
   have hg : 0 < g := rpow_pos_of_pos (div_pos hentry hend) _
-  obtain ⟨P, ZP, hP, hPs, hZPs, hPsys, _, hPe, hPnode, _, hnorm, _⟩ :=
+  obtain ⟨P, ZP, hP, hPs, hZPs, hPsys, _, hPe, hPnode, hstep, hnorm, hfirst⟩ :=
     exists_tailNaturalPoisson_norm_bound hT hη hK
   obtain ⟨Q, ZQ, hQs, _, hQsys, hQe, hZQe, hW⟩ :=
     exists_tailDirichlet_unit_flux hT hPs hZPs hPsys hPe (hPnode 0)
@@ -199,6 +208,23 @@ theorem exists_morsePhysicalTailBasis
     calc
       _ = (g * g⁻¹) * (ZQ x * P x - Q x * ZP x) := by dsimp only [u, q]; ring
       _ = 1 := by rw [mul_inv_cancel₀ hg.ne', hW x hx, one_mul]
+  have hustep (n : ℕ) : |u (T.node (n + 1))| ≤
+      8 / (T.Λ * tailMass T (n + 1) * tailResistance T n) * |u (T.node n)| := by
+    dsimp only [u]
+    rw [abs_mul, abs_mul]
+    calc
+      _ ≤ |g⁻¹| * (8 / (T.Λ * tailMass T (n + 1) * tailResistance T n) *
+          |P (T.node n)|) := mul_le_mul_of_nonneg_left (hstep n) (abs_nonneg _)
+      _ = _ := by ring
+  have huinitial (hgap : T.entrance < T.node 0) :
+      |u (T.node 0)| ≤ 8 / (T.Λ * tailMass T 0 * tailInitialResistance T) *
+        |u T.entrance| := by
+    dsimp only [u]
+    rw [hPe, mul_one, abs_mul]
+    calc
+      _ ≤ |g⁻¹| * (8 / (T.Λ * tailMass T 0 * tailInitialResistance T)) :=
+        mul_le_mul_of_nonneg_left (hfirst hgap) (abs_nonneg _)
+      _ = _ := mul_comm _ _
   refine ⟨{
     logP := u
     logPFlux := fun x => g⁻¹ * ZP x
@@ -217,6 +243,8 @@ theorem exists_morsePhysicalTailBasis
     Q_entry := hqphys
     Q_outward_flux := hqflux
     P_node_ne := fun k => mul_ne_zero (inv_ne_zero hg.ne') (hPnode k)
+    P_node_step := hustep
+    P_initial_node_bound := huinitial
     P_bound := ?_
   }⟩
   have hscale : (∫ x, u x ^ 2 ∂deepTailMeasure T) =

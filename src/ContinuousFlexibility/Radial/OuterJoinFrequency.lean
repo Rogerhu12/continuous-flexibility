@@ -211,6 +211,23 @@ theorem morse_preceding_join_factor_le_sq_exp
   exact outer_positive_factor_le_exp hN hJ hG hAn.le (Nat.cast_nonneg j)
     (by linarith only [ha₀, hb₀] : 0 ≤ 1 + a + b) hsize hprod
 
+theorem morse_preceding_join_factor_le_frequency_exp_of_upper
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
+    {K Cstar L scale : ℝ} {n j : ℕ}
+    (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
+    (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
+    (side : Bool) (hn : T.index < n) (hupper : (j : ℝ) < radialFrequencyThreshold T Cstar n)
+    (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
+    (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
+    outerPositivePhysicalFactor D (j : ℝ) scale
+        (T.joinLeft side (n - 1)) (T.joinRight side (n - 1)) ≤
+      exp ((4 * (outerJoinPrefactor C K D.a + (outerFrequencyExponent Cstar + L + 32)) + 2) *
+        (n : ℝ) ^ 2 + 2 * sqrt (outerJoinActionCoefficient C K D.a) *
+          ((j : ℝ) * sqrt (morseChainA T n))) := by
+  exact morse_preceding_join_factor_le_sq_exp h hσ hcell hscale hL
+    (by unfold outerFrequencyExponent; positivity) side hn
+    (outer_frequency_sq_le_exp_of_upper (by omega) (h.d_eq n hn.le) hupper) hhi hlo
+
 theorem morse_preceding_join_factor_le_frequency_exp
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
     {K Cstar L scale : ℝ} {n j : ℕ}
@@ -223,9 +240,7 @@ theorem morse_preceding_join_factor_le_frequency_exp
         (T.joinLeft side (n - 1)) (T.joinRight side (n - 1)) ≤
       exp ((4 * (outerJoinPrefactor C K D.a + (outerFrequencyExponent Cstar + L + 32)) + 2) *
         (n : ℝ) ^ 2 + 2 * sqrt (outerJoinActionCoefficient C K D.a) *
-          ((j : ℝ) * sqrt (morseChainA T n))) := by
-  exact morse_preceding_join_factor_le_sq_exp h hσ hcell hscale hL
-    (by unfold outerFrequencyExponent; positivity) side hn
-    (outer_frequency_sq_le_exp (by omega) (h.d_eq n hn.le) hband) hhi hlo
+          ((j : ℝ) * sqrt (morseChainA T n))) :=
+  morse_preceding_join_factor_le_frequency_exp_of_upper h hσ hcell hscale hL side hn hband.2.2 hhi hlo
 
 end ContinuousFlexibility.Radial

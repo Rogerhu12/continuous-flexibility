@@ -208,18 +208,19 @@ theorem morseRealized_normalized_mass_le {T : MorseChainData} {σ : ℕ → ℝ}
       mul_le_mul_of_nonneg_left hmoment (by positivity)
     _ = _ := by ring
 
-/-- The already-proved frequency bands make the gauge uniformly small
-on every cell after the transition cell. -/
-theorem morseTransition_eventually_gauge_small {T : MorseChainData} {σ : ℕ → ℝ}
+/-- The moving upper frequency bound makes the gauge uniformly small
+on every deeper cell, including for the low frequencies in a new initial band. -/
+theorem morseTransition_eventually_gauge_small_of_upper {T : MorseChainData} {σ : ℕ → ℝ}
     {D : ReferenceData} {C : ℕ → ℝ} (h : MorseChainRealization T σ D C)
     {Cstar : ℝ} (hCstar : 0 < Cstar) :
-    ∀ᶠ n : ℕ in atTop, ∀ j, radialFrequencyBand T Cstar n j → ∀ m, n < m →
+    ∀ᶠ n : ℕ in atTop, ∀ j : ℕ, T.index ≤ n →
+      (j : ℝ) < radialFrequencyThreshold T Cstar n → ∀ m, n < m →
       (j : ℝ) ^ 2 * morseChainA T m ≤ 1 := by
   have hsqrt : 0 < sqrt (log 4) := sqrt_pos.mpr (log_pos (by norm_num))
-  filter_upwards [morseTransition_eventually_deep T hCstar
+  filter_upwards [morseTransition_eventually_deep_of_upper T hCstar
     (fun k hk => h.d_eq k hk) hsqrt] with n hn
-  intro j hj m hm
-  have hidx : T.index ≤ m := hj.1.trans hm.le
+  intro j hnidx hj m hm
+  have hidx : T.index ≤ m := hnidx.trans hm.le
   obtain ⟨hB, hAB, _⟩ := h.retained_data true m hidx
   have hA : 0 < morseChainA T m := (mul_pos (by norm_num) hB).trans hAB
   have hratio : (4 : ℝ) ≤ morseChainA T m / morseChainB T m := by
@@ -228,11 +229,21 @@ theorem morseTransition_eventually_gauge_small {T : MorseChainData} {σ : ℕ �
     sqrt_le_sqrt (log_le_log (by norm_num) hratio)
   have hmul := mul_le_mul_of_nonneg_left hsqrtle
     (mul_nonneg (sq_nonneg (j : ℝ)) hA.le)
-  have hlt := hmul.trans_lt (hn j hj m hm)
+  have hlt := hmul.trans_lt (hn j hnidx hj m hm)
   have hlast : (j : ℝ) ^ 2 * morseChainA T m < 1 := by
     apply (mul_lt_mul_iff_left₀ hsqrt).mp
     simpa only [one_mul] using hlt
   exact hlast.le
+
+/-- The frequency-band form of the upper-only gauge estimate. -/
+theorem morseTransition_eventually_gauge_small {T : MorseChainData} {σ : ℕ → ℝ}
+    {D : ReferenceData} {C : ℕ → ℝ} (h : MorseChainRealization T σ D C)
+    {Cstar : ℝ} (hCstar : 0 < Cstar) :
+    ∀ᶠ n : ℕ in atTop, ∀ j, radialFrequencyBand T Cstar n j → ∀ m, n < m →
+      (j : ℝ) ^ 2 * morseChainA T m ≤ 1 := by
+  filter_upwards [morseTransition_eventually_gauge_small_of_upper h hCstar] with n hn
+  intro j hj
+  exact hn j hj.1 hj.2.2
 
 
 /-- The first cell after the transition has the preceding height scale,

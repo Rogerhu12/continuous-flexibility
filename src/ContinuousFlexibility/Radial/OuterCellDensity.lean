@@ -70,18 +70,30 @@ def outerRadialDensityEquiv {D : ReferenceData} (hD : IsAccumulatingProfile D) :
   (l2MeasureCongr (radialHilbertMeasure_eq_squareDensity hD)).trans
     (squareDensityEquiv _ (measurable_outerRadialSqrtDensity hD) (outerRadialSqrtDensity_pos hD))
 
-/-- The coefficient power is uniform over all cells and all points in
-each cell. It is derived from the profile's reciprocal coefficient bound. -/
-theorem outerCell_inverse_sqrt_density_bound {D : ReferenceData} (hD : IsAccumulatingProfile D) :
-    ∃ C : ℝ, 0 < C ∧ ∀ m : ℕ, 1 ≤ D.cellIndex m →
-      ∀ r ∈ D.cells m, |(outerRadialSqrtDensity D r)⁻¹| ≤ radialE (D.cellIndex m) ^ C := by
-  obtain ⟨C₀, hC⟩ := hD
+/-- The density loss depends only on the common outer radius and the
+common zeroth coefficient bound. -/
+def outerCellDensityExponent (b : ℝ) (C : ℕ → ℝ) : ℝ :=
+  1 + b ^ 2 * C 0 / 12 + C 0
+
+theorem outerCellDensityExponent_pos (b : ℝ) {C : ℕ → ℝ} (hC : 0 < C 0) :
+    0 < outerCellDensityExponent b C := by
+  unfold outerCellDensityExponent
+  positivity
+
+/-- The explicit coefficient power is uniform over all profiles with the
+same coefficient bounds and the same outer radius. -/
+theorem outerCell_inverse_sqrt_density_bound_of_bounds
+    {D : ReferenceData} {C₀ : ℕ → ℝ} (hC : AccumulatingProfileBounds D C₀) :
+    ∀ m : ℕ, 1 ≤ D.cellIndex m → ∀ r ∈ D.cells m,
+      |(outerRadialSqrtDensity D r)⁻¹| ≤
+        radialE (D.cellIndex m) ^ outerCellDensityExponent D.b C₀ := by
   have hD' : IsAccumulatingProfile D := ⟨C₀, hC⟩
   rcases hC with ⟨hgeom, hpart, hCpos, _, _, _, _, _, _, hinv, _, _, _⟩
   have hC0 : 0 < C₀ 0 := hCpos 0
   let L : ℝ := 1 + D.b ^ 2 * C₀ 0 / 12
   have hL : 0 < L := by dsimp only [L]; positivity
-  refine ⟨L + C₀ 0, add_pos hL (hCpos 0), fun m hm r hr => ?_⟩
+  intro m hm r hr
+  change |(outerRadialSqrtDensity D r)⁻¹| ≤ radialE (D.cellIndex m) ^ (L + C₀ 0)
   have hrCore : r ∈ radialCore D := hpart.2.2.2.1 m hr
   have hrpos : 0 < r := hgeom.1.trans hrCore.1
   have hbpos : 0 < D.b := hrpos.trans hrCore.2
@@ -124,5 +136,14 @@ theorem outerCell_inverse_sqrt_density_bound {D : ReferenceData} (hD : IsAccumul
     _ ≤ radialE (D.cellIndex m) ^ L * radialE (D.cellIndex m) ^ (C₀ 0) :=
       mul_le_mul_of_nonneg_right hconstant (rpow_pos_of_pos (exp_pos _) _).le
     _ = _ := (rpow_add (exp_pos _) L (C₀ 0)).symm
+
+/-- The coefficient power is uniform over all cells and all points in
+each cell. It is derived from the profile's reciprocal coefficient bound. -/
+theorem outerCell_inverse_sqrt_density_bound {D : ReferenceData} (hD : IsAccumulatingProfile D) :
+    ∃ C : ℝ, 0 < C ∧ ∀ m : ℕ, 1 ≤ D.cellIndex m →
+      ∀ r ∈ D.cells m, |(outerRadialSqrtDensity D r)⁻¹| ≤ radialE (D.cellIndex m) ^ C := by
+  obtain ⟨C₀, hC⟩ := hD
+  exact ⟨outerCellDensityExponent D.b C₀, outerCellDensityExponent_pos D.b (hC.2.2.1 0),
+    outerCell_inverse_sqrt_density_bound_of_bounds hC⟩
 
 end ContinuousFlexibility.Radial
