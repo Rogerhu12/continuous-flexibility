@@ -42,7 +42,7 @@ theorem angularBasisProjection_error_sq {f : ℝ → ℝ}
     reference_memLp_norm_sq_eq_integral hF,
     reference_memLp_inner_eq_integral hP hF,
     integral_referenceAngularProbability, angularBasisProjection_sq,
-    angularBasisProjection_pairing hf]
+    angularBasisProjection_pairing hf, ← pow_two]
   ring
 
 theorem angularBasisProjection_error_sq_le {f : ℝ → ℝ}

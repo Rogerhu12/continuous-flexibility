@@ -104,10 +104,14 @@ theorem SourceMember.exists_smoothFinite_error_lt
           ‖hg.toLp g - (hc n).toLp (c n)‖ < δ := by
     cases n with
     | zero =>
+      have hmean : c 0 = fun r => radialAngularMean (fun θ => F.1 (r, θ)) :=
+        funext (fun r => referenceRadialCoefficient_zero F.1 r)
       have hi : IntervalIntegrable (c 0) volume D.a D.b := by
-        simpa only [c, referenceRadialCoefficient_zero] using hF.2.2.2.2.1
+        rw [hmean]
+        exact hF.2.2.2.2.1
       have hz : (∫ r in D.a..D.b, c 0 r) = 0 := by
-        simpa only [c, referenceRadialCoefficient_zero] using hF.2.2.2.2.2
+        rw [hmean]
+        exact hF.2.2.2.2.2
       obtain ⟨g, hg, hgc, hgs, hgz, hgm, hdist⟩ :=
         exists_referenceRadial_zeroMean_approximation hD (hc 0) hi hz hδ
       exact ⟨g, hg, hgc, hgs, fun _ => hgz, hgm, hdist⟩
@@ -139,7 +143,8 @@ theorem SourceMember.exists_smoothFinite_error_lt
     (memLp_referenceRadial_basis (he n) n).toLp
       (fun x : PolarPoint => e n x.1 * referenceAngularBasis n x.2)
   have hPpoint (x : PolarPoint) :
-      P x = ∑ n ∈ Finset.range (N + 1), c n x.1 * referenceAngularBasis n x.2 := by
+      referenceCosineProjection (Finset.range N) F.1 x =
+        ∑ n ∈ Finset.range (N + 1), c n x.1 * referenceAngularBasis n x.2 := by
     change angularCosineProjection (Finset.range N) (fun θ => F.1 (x.1, θ)) x.2 = _
     rw [angularCosineProjection_range_eq]
     rfl
@@ -195,7 +200,8 @@ theorem SourceMember.exists_smoothFinite_error_lt
       ‖hGμ.toLp G.1 - hu.toLp F.1‖ ^ 2 := by
     change (F.2 - F.2) ^ 2 + (∑' m, sourceCellSquare D γ M (G.1 - F.1) m) = _
     rw [sub_self, zero_pow (by decide : (2 : ℕ) ≠ 0), zero_add,
-      ← integral_sq_referenceWeightedMeasure_eq hgeom.2.1.le hpart hsub.1 hsub.2.1,
+      ← integral_sq_referenceWeightedMeasure_eq (f := G.1 - F.1)
+        hgeom.2.1.le hpart hsub.1 hsub.2.1,
       ← reference_memLp_norm_sq_eq_integral (hGμ.sub hu),
       MemLp.toLp_sub hGμ hu]
   refine ⟨G, hGsmooth, rfl, hG, ?_⟩

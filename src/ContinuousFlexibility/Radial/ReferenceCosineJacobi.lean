@@ -104,7 +104,7 @@ theorem referenceRadialCoefficient_angularPartial_twice {u : PolarPoint → ℝ}
   have hf : ContDiff ℝ ∞ f := hu.comp (contDiff_const.prodMk contDiff_id)
   have hfp : Function.Periodic f (2 * Real.pi) := by
     intro θ
-    simpa only [f, Prod.fst_add, Prod.snd_add, add_zero] using hp (r, θ)
+    simpa only [f, Prod.mk_add_mk, add_zero] using hp (r, θ)
   have hα : ContDiff ℝ ∞ (angularPartial u) :=
     r11b_contDiff_directionalPartial hu (0, 1)
   have hdf : deriv f = fun θ => angularPartial u (r, θ) := by
@@ -150,15 +150,18 @@ theorem referenceRadialCoefficient_radialPDE {w : ℝ → ℝ} {u : PolarPoint �
         w r * radialPartial (radialPartial u) (r, θ)) +
           deriv w r / r * angularPartial (angularPartial u) (r, θ)) := by
     funext θ
-    exact radialPDE_eq_polar_jets (hw.differentiable (by simp) r) hu
+    exact radialPDE_eq_polar_jets (w := w) (η := u) (x := (r, θ))
+      (hw.differentiable (by simp) r) hu
   have hcoef : referenceRadialCoefficient
       (fun x => radialPDE w (fun s θ => u (s, θ)) x.1 x.2) n r =
       deriv w r * referenceRadialCoefficient (radialPartial u) n r +
         w r * referenceRadialCoefficient (radialPartial (radialPartial u)) n r +
           (deriv w r / r) * referenceRadialCoefficient (angularPartial (angularPartial u)) n r := by
     change referenceAngularCoefficient (fun θ => radialPDE w (fun s φ => u (s, φ)) r θ) n = _
+    have h₁₂ : Continuous (fun θ => deriv w r * radialPartial u (r, θ) +
+        w r * radialPartial (radialPartial u) (r, θ)) := h₁.add h₂
     rw [hfun, referenceAngularCoefficient_add
-      (memLp_referenceAngular_interval_of_continuous (h₁.add h₂))
+      (memLp_referenceAngular_interval_of_continuous h₁₂)
       (memLp_referenceAngular_interval_of_continuous h₃),
       referenceAngularCoefficient_add (memLp_referenceAngular_interval_of_continuous h₁)
         (memLp_referenceAngular_interval_of_continuous h₂)]
