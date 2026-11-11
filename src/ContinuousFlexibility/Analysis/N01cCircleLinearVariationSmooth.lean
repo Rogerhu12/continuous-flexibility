@@ -129,7 +129,11 @@ theorem circleLinearVariationOfSmooth_sobolev_le
           (∫ r in a..b, circleRealSobolevNorm (s : ℝ)
             (circleFlowSpeedJet A hA hAperiod r 0)) *
           ∫ r in a..b, circleRealSobolevNorm 1 (circleFlowSpeedJet F hF hFperiod r 0)) := by
-  exact (circleLinearVariationOfSmooth hY hA hF hYperiod hAperiod hFperiod hinit hode).sobolev_le s ht
+  simpa only [CircleLinearVariationData.valueNorm,
+    CircleLinearVariationData.coefficientSize, CircleLinearVariationData.forcingSize,
+    CircleLinearVariationData.coefficientNorm, CircleLinearVariationData.forcingNorm,
+    circleLinearVariationOfSmooth, Nat.cast_one] using
+      (circleLinearVariationOfSmooth hY hA hF hYperiod hAperiod hFperiod hinit hode).sobolev_le s ht
 
 /-- The actual angular derivatives satisfy the same one-high estimate,
 with a single additional Sobolev order. -/
@@ -153,7 +157,9 @@ theorem circleLinearVariationOfSmooth_angular_le
           ∫ r in a..b, circleRealSobolevNorm 1 (circleFlowSpeedJet F hF hFperiod r 0)) := by
   have h := (circleLinearVariationOfSmooth hY hA hF hYperiod hAperiod hFperiod hinit hode).angular_value_le n ht (θ : AddCircle P)
   change |circleFlowSpeedJet Y hY hYperiod t n (θ : AddCircle P)| ≤ _ at h
-  simpa only [circleFlowSpeedJet_coe_apply] using h
+  simpa only [CircleLinearVariationData.coefficientSize, CircleLinearVariationData.forcingSize,
+    CircleLinearVariationData.coefficientNorm, CircleLinearVariationData.forcingNorm,
+    circleLinearVariationOfSmooth, Nat.cast_one, circleFlowSpeedJet_coe_apply] using h
 
 end ContinuousFlexibility.Analysis
 

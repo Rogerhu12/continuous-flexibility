@@ -41,7 +41,9 @@ def eval (w : PhysicalLieWord) (f : PolarPoint → ℝ) (p : PolarPoint) : ℝ :
 
 theorem eval_empty (f : PolarPoint → ℝ) (p : PolarPoint) :
     empty.eval f p = f p := by
-  simp only [eval, empty, iteratedFDeriv_zero_apply]
+  change iteratedFDeriv ℝ 0 f p
+    (fun i : Fin 0 => cylinderBasisVector (Fin.elim0 i)) = f p
+  exact iteratedFDeriv_zero_apply _
 
 theorem radialOrder_add_angularOrder (w : PhysicalLieWord) :
     w.radialOrder + w.angularOrder = w.order := by
@@ -62,11 +64,21 @@ theorem angularOrder_le (w : PhysicalLieWord) : w.angularOrder ≤ w.order := by
 
 theorem radialOrder_prepend (j : Fin 2) (w : PhysicalLieWord) :
     (prepend j w).radialOrder = (if j = 0 then 1 else 0) + w.radialOrder := by
-  simp only [radialOrder, prepend, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ]
+  change (∑ i : Fin (w.order + 1),
+      if (Fin.cons (α := fun _ : Fin (w.order + 1) => Fin 2) j w.axes) i = 0
+      then (1 : ℕ) else 0) =
+    (if j = 0 then 1 else 0) + ∑ i : Fin w.order, if w.axes i = 0 then 1 else 0
+  rw [Fin.sum_univ_succ]
+  simp only [Fin.cons_zero, Fin.cons_succ]
 
 theorem angularOrder_prepend (j : Fin 2) (w : PhysicalLieWord) :
     (prepend j w).angularOrder = (if j = 0 then 0 else 1) + w.angularOrder := by
-  simp only [angularOrder, prepend, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ]
+  change (∑ i : Fin (w.order + 1),
+      if (Fin.cons (α := fun _ : Fin (w.order + 1) => Fin 2) j w.axes) i = 0
+      then (0 : ℕ) else 1) =
+    (if j = 0 then 0 else 1) + ∑ i : Fin w.order, if w.axes i = 0 then 0 else 1
+  rw [Fin.sum_univ_succ]
+  simp only [Fin.cons_zero, Fin.cons_succ]
 
 theorem eval_eq_mixedDerivative
     {Ω : Set PolarPoint} {f : PolarPoint → ℝ}
@@ -95,15 +107,18 @@ theorem fderiv_eval
     ((hf.contDiffAt (hΩ.mem_nhds hp)).iteratedFDeriv_right
       (m := ∞) (by simp)).differentiableAt (by simp)
   have hv : (fun i : Fin (w.order + 1) =>
-      cylinderBasisVector (Fin.cons j w.axes i)) =
-      Fin.cons (cylinderBasisVector j) (fun i => cylinderBasisVector (w.axes i)) := by
+      cylinderBasisVector
+        (Fin.cons (α := fun _ : Fin (w.order + 1) => Fin 2) j w.axes i)) =
+      Fin.cons (α := fun _ : Fin (w.order + 1) => PolarPoint)
+        (cylinderBasisVector j) (fun i => cylinderBasisVector (w.axes i)) := by
     funext i
     refine Fin.cases ?_ (fun i => ?_) i
     · simp only [Fin.cons_zero]
     · simp only [Fin.cons_succ]
   simpa only [eval, prepend, hv, Fin.tail_cons, Fin.cons_zero] using
     (hj.iteratedFDeriv_succ_apply_left'
-      (m := Fin.cons (cylinderBasisVector j) (fun i => cylinderBasisVector (w.axes i)))).symm
+      (m := Fin.cons (α := fun _ : Fin (w.order + 1) => PolarPoint)
+        (cylinderBasisVector j) (fun i => cylinderBasisVector (w.axes i)))).symm
 
 end PhysicalLieWord
 
@@ -151,7 +166,7 @@ theorem fderiv_physicalLieMonomial
   rw [← Finset.mul_prod_erase Finset.univ
     (fun l => (physicalLieHit w j i l).eval f p) (Finset.mem_univ i)]
   apply congrArg₂ (fun a b : ℝ => a * b)
-  · simp only [physicalLieHit, if_pos rfl]
+  · simp only [physicalLieHit, ite_true]
   · apply Finset.prod_congr rfl
     intro l hl
     simp only [physicalLieHit, if_neg (Finset.mem_erase.mp hl).1]

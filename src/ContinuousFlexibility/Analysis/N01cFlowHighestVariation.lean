@@ -165,7 +165,8 @@ theorem flowJetComposition_eq_linear_add_truncated
     have hsmul := map_smul L ((B n).value p v) (0, 1)
     have hp : (B n).value p v • ((0 : E), (1 : ℝ)) = ((0 : E), (B n).value p v) := by simp
     rw [hp] at hsmul
-    simpa only [smul_eq_mul, mul_comm] using hsmul
+    simpa only [L, ContinuousMultilinearMap.ofSubsingleton_symm_apply_apply,
+      speedAlongFlowAngularJet, smul_eq_mul, mul_comm] using hsmul
   rw [hdiff, hlinear] at he
   rw [truncatedFlowForcing_apply]
   change _ - _ = _ at he

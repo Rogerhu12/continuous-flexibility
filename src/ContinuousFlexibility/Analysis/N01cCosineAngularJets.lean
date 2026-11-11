@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01cComponentSpeedPeriodicity
+import ContinuousFlexibility.Blueprint.N01c.Statements
 
 /-!
 # Actual angular jets under the cosine change of variable

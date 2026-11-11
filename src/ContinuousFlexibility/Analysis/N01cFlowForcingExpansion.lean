@@ -131,6 +131,7 @@ theorem flowSelectedSpeedCoefficient_eq_zero
   classical
   apply (J.D c.length (flowTrajectoryGraph Θ p)).map_coord_zero i
   simp only [if_pos hi, flowParameterIdentityJet_eq_zero hsize, Prod.fst_zero]
+  exact Prod.ext rfl rfl
 
 /-- An unselected block at the current or higher order also vanishes,
 so every surviving angle factor has strictly lower parameter order. -/

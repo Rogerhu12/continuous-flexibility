@@ -53,7 +53,7 @@ theorem n01c_angular_value_le_valueNorm (b : ℕ)
   have hpoint := circle_real_norm_apply_le_sobolev_one_of_derivatives
     (V.value t) (V.value_derivative t ht) b θ
   have horder : circleRealSobolevNorm 1 (V.value t b) ≤ V.valueNorm (b + 1) t := by
-    simpa only [Nat.add_comm, Nat.cast_one] using
+    simpa only [valueNorm, Nat.add_comm, Nat.cast_one] using
       circle_real_sobolevNorm_derivative_le (V.value t) (V.value_derivative t ht) 1 b
   have hpoint' : |V.value t b θ| ≤
       circleSobolevEmbeddingConstant P * circleRealSobolevNorm 1 (V.value t b) := by

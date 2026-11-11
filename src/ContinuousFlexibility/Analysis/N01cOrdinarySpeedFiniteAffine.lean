@@ -62,6 +62,34 @@ theorem n01c_contDiffOn_radialIterate_family
     (contDiffOn_snd.fst))
     (fun y hy => ⟨⟨hy.1, mem_univ _⟩, hy.2.1⟩)
 
+/-- The normalized scalar formula is assembled before instantiating the
+actual state-dependent coefficient functions. -/
+private theorem n01c_contDiffOn_normalized_sqrt_formula
+    {V : Set P} {I R : Set ℝ}
+    (F A B : P × (ℝ × ℝ) → ℝ) (Q Qactual : P × ℝ → ℝ)
+    (hIR : I ⊆ R)
+    (hA : ContDiffOn ℝ ∞ A (V ×ˢ (R ×ˢ (univ : Set ℝ))))
+    (hB : ContDiffOn ℝ ∞ B (V ×ˢ (R ×ˢ (univ : Set ℝ))))
+    (hQ : ContDiffOn ℝ ∞ Q ((univ : Set P) ×ˢ R))
+    (hpos : ∀ x ∈ V, ∀ r ∈ I, 0 < Q (x, r))
+    (hformula : ∀ x ∈ V, ∀ q ∈ I ×ˢ (univ : Set ℝ),
+      F (x, q) = -A (x, q) - B (x, q) * Real.sqrt (Qactual (x, q.1)))
+    (hactual : ∀ x ∈ V, ∀ r ∈ I, Q (x, r) = Qactual (x, r)) :
+    ContDiffOn ℝ ∞ F (V ×ˢ (I ×ˢ (univ : Set ℝ))) := by
+  have hsub : V ×ˢ (I ×ˢ (univ : Set ℝ)) ⊆
+      V ×ˢ (R ×ˢ (univ : Set ℝ)) :=
+    fun p hp => ⟨hp.1, hIR hp.2.1, mem_univ _⟩
+  have hQc : ContDiffOn ℝ ∞ (fun p : P × (ℝ × ℝ) => Q (p.1, p.2.1))
+      (V ×ˢ (I ×ˢ (univ : Set ℝ))) :=
+    hQ.comp (contDiffOn_fst.prodMk (contDiffOn_snd.fst))
+      (fun p hp => ⟨mem_univ _, hIR hp.2.1⟩)
+  have hs := (hA.mono hsub).neg.sub
+    ((hB.mono hsub).mul (hQc.sqrt (fun p hp => (hpos p.1 hp.1 p.2.1 hp.2.1).ne')))
+  exact hs.congr (fun p hp =>
+    (hformula p.1 hp.1 p.2 hp.2).trans
+      (congrArg (fun q : ℝ => -A p - B p * Real.sqrt q)
+        (hactual p.1 hp.1 p.2.1 hp.2.1).symm))
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -108,32 +136,25 @@ theorem contDiffOn_minusCharacteristicSpeed_finiteAffine
       minusCharacteristicSpeed (originalCoefficients D S C (x + L p.1)) p.2)
       (((fun y => x + L y) ⁻¹' stateNeighborhood S C base ε) ×ˢ
         (Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ))) := by
-  let V : Set ((Fin n → ℝ) × PolarPoint) :=
-    ((fun y => x + L y) ⁻¹' stateNeighborhood S C base ε) ×ˢ
-      (Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ))
-  have hcore {q : PolarPoint} (hq : q ∈ Ioo (C.left m) (C.right m) ×ˢ univ) :
-      q ∈ annularOpen D :=
-    ⟨⟨(hA.2.2.1.1 m).1.trans hq.1.1, hq.1.2.trans (hA.2.2.1.1 m).2.2⟩, mem_univ _⟩
-  have hsub : V ⊆ ((fun y => x + L y) ⁻¹' stateNeighborhood S C base ε) ×ˢ
-      annularOpen D := fun p hp => ⟨hp.1, hcore hp.2⟩
-  have ha := (contDiffOn_normalizedSpeedFactor_finiteAffine hS hT hA hB x L 0).mono hsub
-  have hb := (contDiffOn_normalizedSpeedFactor_finiteAffine hS hT hA hB x L 1).mono hsub
-  have hQ : ContDiffOn ℝ ∞ (fun p : (Fin n → ℝ) × PolarPoint =>
-      componentOpticalSquare D S C m (x + L p.1) p.2.1) V :=
-    (contDiffOn_componentOpticalSquare_finiteAffine hS hT hA m x L).comp
-      (contDiffOn_fst.prodMk (contDiffOn_snd.fst))
-      (fun p hp => ⟨mem_univ _, (hcore hp.2).1⟩)
-  have hn (p) (hp : p ∈ V) :
-      componentOpticalSquare D S C m (x + L p.1) p.2.1 ≠ 0 :=
-    (componentOpticalSquare_pos_of_quotient hA hpos hp.1 m hp.2.1).ne'
-  have hs : ContDiffOn ℝ ∞ (fun p : (Fin n → ℝ) × PolarPoint =>
-      -normalizedSpeedFactor D S C 0 (x + L p.1) p.2 -
-        normalizedSpeedFactor D S C 1 (x + L p.1) p.2 *
-          Real.sqrt (componentOpticalSquare D S C m (x + L p.1) p.2.1)) V :=
-    ha.neg.sub (hb.mul (hQ.sqrt hn))
-  exact hs.congr (fun p hp => by
-    rw [minusCharacteristicSpeed_normalized_factors hS hT hA hB hp.1 (hcore hp.2),
-      ← componentOpticalSquare_eq_actual hA m (x + L p.1) hp.2.1])
+  have hIR : Ioo (C.left m) (C.right m) ⊆ Ioo D.a D.b :=
+    fun r hr => ⟨(hA.2.2.1.1 m).1.trans hr.1, hr.2.trans (hA.2.2.1.1 m).2.2⟩
+  exact n01c_contDiffOn_normalized_sqrt_formula
+    (fun p : (Fin n → ℝ) × PolarPoint =>
+      minusCharacteristicSpeed (originalCoefficients D S C (x + L p.1)) p.2)
+    (fun p : (Fin n → ℝ) × PolarPoint => normalizedSpeedFactor D S C 0 (x + L p.1) p.2)
+    (fun p : (Fin n → ℝ) × PolarPoint => normalizedSpeedFactor D S C 1 (x + L p.1) p.2)
+    (fun p : (Fin n → ℝ) × ℝ => componentOpticalSquare D S C m (x + L p.1) p.2)
+    (fun p : (Fin n → ℝ) × ℝ =>
+      -deriv (stateProfile D S C (x + L p.1).1) p.2 /
+        (p.2 * stateProfile D S C (x + L p.1).1 p.2))
+    hIR
+    (contDiffOn_normalizedSpeedFactor_finiteAffine hS hT hA hB x L 0)
+    (contDiffOn_normalizedSpeedFactor_finiteAffine hS hT hA hB x L 1)
+    (contDiffOn_componentOpticalSquare_finiteAffine hS hT hA m x L)
+    (fun y hy r hr => componentOpticalSquare_pos_of_quotient (z := x + L y) hA hpos hy m hr)
+    (fun y hy q hq => minusCharacteristicSpeed_normalized_factors
+      (z := x + L y) (q := q) hS hT hA hB hy ⟨hIR hq.1, mem_univ _⟩)
+    (fun y _ r hr => componentOpticalSquare_eq_actual hA m (x + L y) hr)
 
 /-- At every fixed interior radius, every actual radial speed jet is
 jointly smooth on finite affine state planes and the angular line. The
@@ -153,13 +174,18 @@ theorem minusCharacteristicSpeed_radialJet_finiteAffine
         mixedDerivative a 0 (minusCharacteristicSpeed (originalCoefficients D S C p.1))
           (r, p.2.2)) := by
   intro n x L
-  have hV := (isOpen_stateNeighborhood S C base ε).preimage
-    (continuous_const.add L.continuous)
+  have hV : IsOpen ((fun y : Fin n → ℝ => x + L y) ⁻¹'
+      stateNeighborhood S C base ε) :=
+    (isOpen_stateNeighborhood S C base ε).preimage (continuous_const.add L.continuous)
   have hd := n01c_contDiffOn_radialIterate_family hV isOpen_Ioo
     (contDiffOn_minusCharacteristicSpeed_finiteAffine hS hT hA hB hpos m x L) a
-  have hc := hd.comp
-    (contDiffOn_fst.prodMk (contDiffOn_const.prodMk (contDiffOn_snd.snd)))
-    (fun p hp => ⟨hp.1, hr, mem_univ _⟩)
-  simpa only [mixedDerivative, iteratedDeriv_zero] using hc
+  have hc : ContDiffOn ℝ ∞ (fun p : (Fin n → ℝ) × PolarPoint =>
+      iteratedDeriv a (fun s =>
+        minusCharacteristicSpeed (originalCoefficients D S C (x + L p.1)) (s, p.2.2)) r)
+      (((fun y => x + L y) ⁻¹' stateNeighborhood S C base ε) ×ˢ
+        (univ : Set PolarPoint)) :=
+    hd.comp (contDiffOn_fst.prodMk (contDiffOn_const.prodMk (contDiffOn_snd.snd)))
+      (fun p hp => ⟨hp.1, hr, mem_univ _⟩)
+  simpa only [mixedDerivative, iteratedDeriv_zero, Function.comp_def] using hc
 
 end ContinuousFlexibility.Statements

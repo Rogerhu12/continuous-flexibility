@@ -90,7 +90,9 @@ actual unit angle direction, and state slots have zero angle component. -/
 def StateAngleWord.pureSlots : {n : ℕ} → (w : StateAngleWord n) →
     (Fin w.stateArity → E) → (Fin n → E × ℝ)
   | _, .nil, _ => Fin.elim0
-  | _, .state w, v => Fin.cons (v 0, 0) (w.pureSlots (Fin.tail v))
+  | _, .state w, v =>
+      Fin.cons ((show Fin (w.stateArity + 1) → E from v) 0, 0)
+        (w.pureSlots (Fin.tail v))
   | _, .angle w, v => Fin.cons (0, 1) (w.pureSlots v)
 
 end Slots
@@ -147,7 +149,7 @@ def stateAngleWordLinearLift : {n : ℕ} → (w : StateAngleWord n) →
 theorem stateAngleWordLinearLift_apply {n : ℕ} (w : StateAngleWord n)
     (K : MultilinearMap ℝ (fun _ : Fin w.stateArity => E) ℝ) (v : Fin n → E × ℝ) :
     stateAngleWordLinearLift w K v = K (w.stateDirections v) * w.angleFactor v := by
-  induction w generalizing K with
+  induction w with
   | nil =>
       change K (fun i : Fin 0 => (v i).1) = K Fin.elim0 * 1
       rw [mul_one]
@@ -161,8 +163,11 @@ theorem stateAngleWordLinearLift_apply {n : ℕ} (w : StateAngleWord n)
   | angle w ih =>
       change (v 0).2 * stateAngleWordLinearLift w K (Fin.tail v) = _
       rw [ih]
-      simp only [StateAngleWord.stateDirections, StateAngleWord.angleFactor]
-      ring
+      change (v 0).2 * (K (w.stateDirections (Fin.tail v)) *
+          w.angleFactor (Fin.tail v)) =
+        K (w.stateDirections (Fin.tail v)) *
+          ((v 0).2 * w.angleFactor (Fin.tail v))
+      exact mul_left_comm _ _ _
 
 end AlgebraicLift
 
@@ -187,14 +192,22 @@ theorem continuous_stateAngleWord_angleFactor {n : ℕ} (w : StateAngleWord n) :
   induction w with
   | nil => exact continuous_const
   | state w ih => exact ih.comp (continuous_pi (fun i => continuous_apply i.succ))
-  | angle w ih => exact (continuous_snd.comp (continuous_apply 0)).mul
-      (ih.comp (continuous_pi (fun i => continuous_apply i.succ)))
+  | @angle n w ih =>
+      have hhead : Continuous (fun v : Fin (n + 1) → E × ℝ => (v 0).2) :=
+        (continuous_apply 0).snd
+      exact hhead.mul (ih.comp (continuous_pi (fun i => continuous_apply i.succ)))
 
 def stateAngleWordMultilinear {n : ℕ} (w : StateAngleWord n)
     (K : E [×w.stateArity]→L[ℝ] ℝ) : (E × ℝ) [×n]→L[ℝ] ℝ where
   toMultilinearMap := stateAngleWordLinearLift w K.toMultilinearMap
   cont := by
-    simp only [stateAngleWordLinearLift_apply]
+    change Continuous (fun v : Fin n → E × ℝ =>
+      stateAngleWordLinearLift w K.toMultilinearMap v)
+    have he : (fun v : Fin n → E × ℝ =>
+        stateAngleWordLinearLift w K.toMultilinearMap v) =
+        fun v => K (w.stateDirections v) * w.angleFactor v :=
+      funext (stateAngleWordLinearLift_apply w K.toMultilinearMap)
+    rw [he]
     exact (K.cont.comp (continuous_stateAngleWord_stateDirections w)).mul
       (continuous_stateAngleWord_angleFactor w)
 
@@ -272,9 +285,10 @@ theorem stateAngleJet_pureSlots {n : ℕ} (w : StateAngleWord n)
       rw [StateAngleWord.pureSlots, stateAngleJet_cons_apply]
       simp only [zero_mul, add_zero]
       rw [ih]
-      change K w.angleArity (w.stateArity + 1) (Fin.cons (v 0) (Fin.tail v)) = _
+      let u : Fin (w.stateArity + 1) → E := v
+      change K w.angleArity (w.stateArity + 1) (Fin.cons (u 0) (Fin.tail u)) =
+        K w.angleArity (w.stateArity + 1) u
       rw [Fin.cons_self_tail]
-      rfl
   | angle w ih =>
       rw [StateAngleWord.pureSlots, stateAngleJet_cons_apply]
       simp only [continuousMultilinearFixHead_zero, stateAngleJet_zero_family, one_mul, zero_add]
