@@ -13,7 +13,7 @@ open ContinuousFlexibility.Statements
 
 /-- A positive increasing homogeneous pair may replace the inward side,
 provided the complete profile and height germs agree at the splice. -/
-theorem SeedPureTail.replace_inward {D : ReferenceData} {right : Bool}
+theorem SeedPureTail.replace_inward_retaining {D : ReferenceData} {right : Bool}
     {entry : ℝ} {u : ℝ → ℝ} (T : SeedPureTail D right entry u)
     (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
     {W U : ℝ → ℝ} {splice cut c a p : ℝ}
@@ -27,7 +27,10 @@ theorem SeedPureTail.replace_inward {D : ReferenceData} {right : Bool}
     (hc : 0 < c) (ha : a ≠ 0) (hp : p ^ 2 = 4)
     (hpure : ∀ r, 0 < r → (if right then r < cut else cut < r) →
       W r = c * r ∧ U r = a * r ^ p) :
-    ∃ V : SeedPureTail D right entry u, V.mode = p := by
+    ∃ V : SeedPureTail D right entry u, V.mode = p ∧ V.cut = cut ∧
+      (∀ r, (if right then splice ≤ r else r ≤ splice) →
+        V.profile =ᶠ[𝓝 r] T.profile ∧ V.height =ᶠ[𝓝 r] T.height) ∧
+      ∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv V.profile r := by
   have hdomain (r : ℝ) (hr : r ∈ seedConeTailDomain D right) : 0 < r := by
     cases right
     · exact hD.1.trans hr
@@ -66,7 +69,7 @@ theorem SeedPureTail.replace_inward {D : ReferenceData} {right : Bool}
     amplitude_ne_zero := ha
     mode_sq := hp
     pure_eq := ?_
-  }, rfl⟩
+  }, rfl, rfl, ?_, ?_⟩
   · intro r hr
     have hside := houtzero r hr
     rw [(seedOrientedGlue_outward_germ hmatchW hside).eq_of_nhds,
@@ -107,5 +110,34 @@ theorem SeedPureTail.replace_inward {D : ReferenceData} {right : Bool}
     rw [(seedOrientedGlue_inward_germ hmatchW hside).eq_of_nhds,
       (seedOrientedGlue_inward_germ hmatchU hside).eq_of_nhds]
     exact hpure r hr hrc
+  · intro r hr
+    exact ⟨seedOrientedGlue_outward_germ hmatchW hr,
+      seedOrientedGlue_outward_germ hmatchU hr⟩
+  · intro r hp hd
+    rcases seedOrientedGlue_sides right splice r with hi | ho
+    · rw [(seedOrientedGlue_inward_germ hmatchW hi).deriv_eq]
+      exact hderiv r hp
+    · rw [(seedOrientedGlue_outward_germ hmatchW ho).deriv_eq]
+      exact hd
+
+/-- The original inward-replacement interface. -/
+theorem SeedPureTail.replace_inward {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ} (T : SeedPureTail D right entry u)
+    (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
+    {W U : ℝ → ℝ} {splice cut c a p : ℝ}
+    (hsplice : if right then splice < entry else entry < splice)
+    (hcut : 0 < cut) (hcutsplice : if right then cut ≤ splice else splice ≤ cut)
+    (hW : ContDiffOn ℝ ∞ W (Ioi 0)) (hU : ContDiffOn ℝ ∞ U (Ioi 0))
+    (hpos : ∀ r, 0 < r → 0 < W r)
+    (hderiv : ∀ r, 0 < r → 0 < deriv W r)
+    (hode : ∀ r, 0 < r → radialJacobi 4 W U r = 0)
+    (hmatchW : W =ᶠ[𝓝 splice] T.profile) (hmatchU : U =ᶠ[𝓝 splice] T.height)
+    (hc : 0 < c) (ha : a ≠ 0) (hp : p ^ 2 = 4)
+    (hpure : ∀ r, 0 < r → (if right then r < cut else cut < r) →
+      W r = c * r ∧ U r = a * r ^ p) :
+    ∃ V : SeedPureTail D right entry u, V.mode = p := by
+  obtain ⟨V, hm, _, _, _⟩ := T.replace_inward_retaining hD hentry hsplice hcut hcutsplice
+    hW hU hpos hderiv hode hmatchW hmatchU hc ha hp hpure
+  exact ⟨V, hm⟩
 
 end ContinuousFlexibility.Radial

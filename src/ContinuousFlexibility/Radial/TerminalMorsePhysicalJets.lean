@@ -36,7 +36,8 @@ theorem terminalMorse_physical_layer_jets (long : Bool) {A B j s weightScale z :
     (hr : IsNormalizedMorseCell A B r) (hw : ContDiff ℝ ∞ w) (hu : ContDiff ℝ ∞ u)
     (hweight : ∀ x ∈ Icc morseCellLeftCut (morseRightCapEnd A B (1 / 100)),
       w (s * r x) = weightScale * (s * deriv r x))
-    (hode : ∀ x ∈ Icc morseCellLeftCut (morseRightCapEnd A B (1 / 100)),
+    (hode : ∀ x ∈ Icc (if long then morseRightTurn A B else morseCellLeftCut)
+        (if long then morseRightCapEnd A B (1 / 100) else morseShortLeftCapCut),
       radialJacobi (j ^ 2) w u (s * r x) = 0)
     (hzero : u (s * r (if long then morseRightTurn A B else morseShortLeftCapCut)) = 0)
     (hjoin : u (s * r (if long then morseRightCapEnd A B (1 / 100) else morseCellLeftCut)) = 1)
@@ -86,7 +87,7 @@ theorem terminalMorse_physical_layer_jets (long : Bool) {A B j s weightScale z :
   cases long
   · change t ∈ Icc (morseShortLeftCapLength / 4) (morseShortLeftCapLength / 2) at ht
     have hjet := terminalMorse_short_cap_layer_bounds hB hAB hj hs hscale hr hw hu
-      (fun x hx => hweight x (hsubshort hx)) (fun x hx => hode x (hsubshort hx))
+      (fun x hx => hweight x (hsubshort hx)) hode
       hjoin hzero ((by norm_num : (1000 : ℝ) ≤ 1000000000).trans haction) ht
     have hexp : exp (-(j * sqrt A / 48)) ≤ exp (-(j * sqrt A / 50000000)) := by
       apply exp_le_exp.mpr
@@ -104,7 +105,7 @@ theorem terminalMorse_physical_layer_jets (long : Bool) {A B j s weightScale z :
   · change t ∈ Icc (morseRightCapLength A (1 / 100) / 4)
       (morseRightCapLength A (1 / 100) / 2) at ht
     have hjet := terminalMorse_long_cap_layer_bounds hB hAB hj hs hscale hA₀ hBAlo hr hw hu
-      (fun x hx => hweight x (hsublong hx)) (fun x hx => hode x (hsublong hx))
+      (fun x hx => hweight x (hsublong hx)) hode
       hzero (hinit rfl) hjoin haction ht
     have hd : |deriv u (s * r (morseRightTurn A B + t))| ≤
         (600 * j * sqrt A / (s * A ^ 5)) * exp (-(j * sqrt A / 50000000)) := by

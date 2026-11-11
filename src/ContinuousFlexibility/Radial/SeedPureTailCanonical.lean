@@ -20,7 +20,7 @@ open ContinuousFlexibility.Statements
 
 /-- Insert a dilated positive bridge whose outward pure cone agrees
 exactly with the original inward cone. -/
-theorem SeedPureTail.bridge_to_opposite {D : ReferenceData} {right : Bool}
+theorem SeedPureTail.bridge_to_opposite_retaining {D : ReferenceData} {right : Bool}
     {entry : ℝ} {u : ℝ → ℝ} (T : SeedPureTail D right entry u)
     (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
     (B : SeedBridgePair) {R splice : ℝ} (hR : 0 < R)
@@ -28,7 +28,11 @@ theorem SeedPureTail.bridge_to_opposite {D : ReferenceData} {right : Bool}
     (hregion : if right then R * B.right < splice ∧ splice < T.cut
       else T.cut < splice ∧ splice < R * B.left) :
     ∃ V : SeedPureTail D right entry u,
-      V.mode = (if right then (-2 : ℝ) else 2) := by
+      V.mode = (if right then (-2 : ℝ) else 2) ∧
+      (if right then V.cut < T.cut else T.cut < V.cut) ∧
+      (∀ r, (if right then T.cut ≤ r else r ≤ T.cut) →
+        V.profile =ᶠ[𝓝 r] T.profile ∧ V.height =ᶠ[𝓝 r] T.height) ∧
+      ∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv V.profile r := by
   let cOld : ℝ := if right then B.rightScale else B.leftScale
   let aOld : ℝ := if right then B.rightHeight else B.leftHeight
   let cNew : ℝ := if right then B.leftScale else B.rightScale
@@ -139,22 +143,51 @@ theorem SeedPureTail.bridge_to_opposite {D : ReferenceData} {right : Bool}
       simpa [W, U, cNew, aNew, p] using
         And.intro (seedRescale_cone (H := H) hR.ne' hw)
           (seedRescale_power (A := A) hR hr hu)
-  exact T.replace_inward hD hentry hsplice hcut hcutsplice
+  obtain ⟨V, hVm, hVc, hVret, hVpos⟩ := T.replace_inward_retaining hD hentry hsplice hcut hcutsplice
     (contDiffOn_seedRescale hR B.profile_smooth)
     (contDiffOn_seedRescale hR B.height_smooth) hpos hderiv hode
     (hmatch.mono fun _ h => h.1) (hmatch.mono fun _ h => h.2)
     (mul_pos hH hcNew)
     (div_ne_zero (mul_ne_zero hA haNew.ne') (rpow_pos_of_pos hR p).ne') hp hpure
+  refine ⟨V, hVm, ?_, ?_, hVpos⟩
+  · rw [hVc]
+    cases right
+    · exact hregion.1.trans_le hcutsplice
+    · exact hcutsplice.trans_lt hregion.2
+  · intro r hr
+    apply hVret r
+    cases right
+    · exact hr.trans hregion.1.le
+    · exact hregion.2.le.trans hr
+
+/-- The original bridge interface. -/
+theorem SeedPureTail.bridge_to_opposite {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ} (T : SeedPureTail D right entry u)
+    (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
+    (B : SeedBridgePair) {R splice : ℝ} (hR : 0 < R)
+    (hmode : T.mode = (if right then (2 : ℝ) else -2))
+    (hregion : if right then R * B.right < splice ∧ splice < T.cut
+      else T.cut < splice ∧ splice < R * B.left) :
+    ∃ V : SeedPureTail D right entry u,
+      V.mode = (if right then (-2 : ℝ) else 2) := by
+  obtain ⟨V, hm, _, _, _⟩ := T.bridge_to_opposite_retaining hD hentry B hR hmode hregion
+  exact ⟨V, hm⟩
 
 /-- Every pure tail can be continued farther inward with the canonical
 mode: +2 on the left, -2 on the right. -/
-theorem SeedPureTail.toCanonical {D : ReferenceData} {right : Bool}
+theorem SeedPureTail.toCanonical_retaining {D : ReferenceData} {right : Bool}
     {entry : ℝ} {u : ℝ → ℝ} (T : SeedPureTail D right entry u)
     (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D) :
     ∃ V : SeedPureTail D right entry u,
-      V.mode = (if right then (-2 : ℝ) else 2) := by
+      V.mode = (if right then (-2 : ℝ) else 2) ∧
+      (if right then V.cut ≤ T.cut else T.cut ≤ V.cut) ∧
+      (∀ r, (if right then T.cut ≤ r else r ≤ T.cut) →
+        V.profile =ᶠ[𝓝 r] T.profile ∧ V.height =ᶠ[𝓝 r] T.height) ∧
+      ∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv V.profile r := by
   by_cases hm : T.mode = (if right then (-2 : ℝ) else 2)
-  · exact ⟨T, hm⟩
+  · refine ⟨T, hm, ?_, fun _ _ => ⟨Filter.EventuallyEq.rfl, Filter.EventuallyEq.rfl⟩,
+      fun _ _ hd => hd⟩
+    cases right <;> exact le_rfl
   have hmode : T.mode = (if right then (2 : ℝ) else -2) := by
     have hz : (T.mode - 2) * (T.mode + 2) = 0 := by nlinarith [T.mode_sq]
     rcases mul_eq_zero.mp hz with hz | hz
@@ -172,21 +205,32 @@ theorem SeedPureTail.toCanonical {D : ReferenceData} {right : Bool}
       div_pos (mul_pos (by norm_num) T.cut_pos) B.left_pos
     have heq : (4 * T.cut / B.left) * B.left = 4 * T.cut := by
       field_simp [B.left_pos.ne']
-    apply T.bridge_to_opposite hD hentry B (splice := 2 * T.cut) hR hmode
-    constructor
-    · linarith [T.cut_pos]
-    · rw [heq]
-      linarith [T.cut_pos]
+    have hregion : T.cut < 2 * T.cut ∧ 2 * T.cut < (4 * T.cut / B.left) * B.left := by
+      rw [heq]
+      constructor <;> linarith [T.cut_pos]
+    obtain ⟨V, hm, hc, hr, hd⟩ :=
+      T.bridge_to_opposite_retaining hD hentry B (splice := 2 * T.cut) hR hmode hregion
+    exact ⟨V, hm, hc.le, hr, hd⟩
   · have hright : 0 < B.right := B.left_pos.trans B.ordered
     have hR : 0 < T.cut / (4 * B.right) :=
       div_pos T.cut_pos (mul_pos (by norm_num) hright)
     have heq : (T.cut / (4 * B.right)) * B.right = T.cut / 4 := by
       field_simp [hright.ne']
       <;> ring
-    apply T.bridge_to_opposite hD hentry B (splice := T.cut / 2) hR hmode
-    constructor
-    · rw [heq]
-      linarith [T.cut_pos]
-    · linarith [T.cut_pos]
+    have hregion : (T.cut / (4 * B.right)) * B.right < T.cut / 2 ∧ T.cut / 2 < T.cut := by
+      rw [heq]
+      constructor <;> linarith [T.cut_pos]
+    obtain ⟨V, hm, hc, hr, hd⟩ :=
+      T.bridge_to_opposite_retaining hD hentry B (splice := T.cut / 2) hR hmode hregion
+    exact ⟨V, hm, hc.le, hr, hd⟩
+
+/-- The original canonical-mode interface. -/
+theorem SeedPureTail.toCanonical {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ} (T : SeedPureTail D right entry u)
+    (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D) :
+    ∃ V : SeedPureTail D right entry u,
+      V.mode = (if right then (-2 : ℝ) else 2) := by
+  obtain ⟨V, hm, _, _, _⟩ := T.toCanonical_retaining hD hentry
+  exact ⟨V, hm⟩
 
 end ContinuousFlexibility.Radial

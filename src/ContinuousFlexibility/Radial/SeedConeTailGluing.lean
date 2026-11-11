@@ -19,19 +19,21 @@ open Real Set Filter
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
-theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} {entry : ℝ}
+theorem exists_seedConeTail_of_logExtension {D : ReferenceData} {right : Bool} {entry : ℝ}
     {u V : ℝ → ℝ} (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
-    (hder : 0 < deriv D.w entry) (hV : ContDiff ℝ ∞ V)
+    (E : SeedPositiveLogExtension (fun y => log (D.w (exp y))) (log entry))
+    (hV : ContDiff ℝ ∞ V)
     (hVtail : ∀ r ∈ radialTailInterval D right entry, V r = u r)
     (hVzero : ∀ r, (if right then D.b ≤ r else r ≤ D.a) → V r = 0)
     (hODE : radialJacobi 4 D.w V entry = 0 ∧
       ∀ r ∈ radialTailInterval D right entry, radialJacobi 4 D.w V r = 0)
     (hne : (V entry, deriv V entry) ≠ (0, 0)) :
-    Nonempty (SeedConeTail D right entry u) := by
+    ∃ T : SeedConeTail D right entry u,
+      ∀ r, (if right then r ≤ entry else entry ≤ r) →
+        T.profile =ᶠ[𝓝 r] E.radialProfile := by
   have hGeometry : RadialProfileGeometry D := hD
   obtain ⟨ha, hab, hwFlat, hphiFlat, hwpos, hphine, hwcrit⟩ := hD
   have hepos : 0 < entry := ha.trans hentry.1
-  obtain ⟨E⟩ := exists_seedConeProfileExtension ha hentry hwFlat.1 hwpos hder
   have hdata : (V entry, entry * deriv V entry) ≠ (0, 0) := by
     intro hz
     apply hne
@@ -118,7 +120,7 @@ theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} 
     scale_pos := by cases right <;> assumption
     coeff_ne_zero := by cases right <;> first | exact S.right_ne | exact S.left_ne
     cone_eq := ?_
-  }⟩
+  }, ?_⟩
   · intro r hr
     have ho : if right then c ≤ r else r ≤ c := by
       cases right with
@@ -170,5 +172,27 @@ theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} 
           simpa only [Real.log_exp] using log_lt_log hr hcut
         exact ⟨hconeL r hr (by linarith only [hy]),
           S.radial_left_modes hr hy.le⟩
+  · intro r hr
+    apply hWi r
+    cases right
+    · exact hc.2.le.trans hr
+    · exact hr.trans hc.1.le
+
+/-- The original interface chooses a positive logarithmic extension from
+the entry germ. The stronger constructor permits a prescribed extension. -/
+theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} {entry : ℝ}
+    {u V : ℝ → ℝ} (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
+    (hder : 0 < deriv D.w entry) (hV : ContDiff ℝ ∞ V)
+    (hVtail : ∀ r ∈ radialTailInterval D right entry, V r = u r)
+    (hVzero : ∀ r, (if right then D.b ≤ r else r ≤ D.a) → V r = 0)
+    (hODE : radialJacobi 4 D.w V entry = 0 ∧
+      ∀ r ∈ radialTailInterval D right entry, radialJacobi 4 D.w V r = 0)
+    (hne : (V entry, deriv V entry) ≠ (0, 0)) :
+    Nonempty (SeedConeTail D right entry u) := by
+  have hGeometry : RadialProfileGeometry D := hD
+  obtain ⟨ha, _, hwFlat, _, hwpos, _, _⟩ := hD
+  obtain ⟨E⟩ := exists_seedConeProfileExtension ha hentry hwFlat.1 hwpos hder
+  obtain ⟨T, _⟩ := exists_seedConeTail_of_logExtension hGeometry hentry E hV hVtail hVzero hODE hne
+  exact ⟨T⟩
 
 end ContinuousFlexibility.Radial
