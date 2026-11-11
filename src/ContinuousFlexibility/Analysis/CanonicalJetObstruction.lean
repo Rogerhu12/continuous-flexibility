@@ -56,6 +56,7 @@ theorem n04PartB_unboundedNegativeDividedCanonicalData
   obtain ⟨hcut, htrans, hop, hneg, hpos⟩ := h
   refine ⟨hcut, htrans, hop, hneg, ?_⟩
   intro z hz hs m hm p hp
+  change K.positive m = true at hm
   simpa only [unboundedNegativeDividedCanonicalData, hm, if_true]
     using hpos z hz hs m hm p hp
 
@@ -71,7 +72,8 @@ theorem not_canonicalJetBounds_unboundedNegativeDividedCanonicalData
   obtain ⟨B, _, hB⟩ := hbound 0
   unfold CanonicalJetBoundAtOrder at hB
   obtain ⟨r, hlr, hrr⟩ := exists_between hinterval
-  let Q : ℝ := B * T.E0 (T.sample (K.cell m)) ^ B
+  let Q : ℝ := B * T.E0 (T.sample (K.cell m)) ^ B *
+    (1 + stateGrading S loss (C.referenceState - C.referenceState))
   have hz := reference_mem_stateNeighborhood S C base hε
   have hp : (r, |Q| + 1) ∈
       canonicalOpen S (unboundedNegativeDividedCanonicalData S K) m :=
@@ -79,9 +81,8 @@ theorem not_canonicalJetBounds_unboundedNegativeDividedCanonicalData
   have hb := hB (C.referenceState, 0) hz m (r, |Q| + 1) hp 0 0 (Nat.le_refl 0)
   simp only [mixedDerivative, iteratedDeriv_zero,
     unboundedNegativeDividedCanonicalData, hm, Bool.false_eq_true, if_false,
-    angularCanonicalCoefficients, Nat.zero_add, sub_self, map_zero,
-    abs_zero, add_zero, mul_one] at hb
-  change |K.potential (C.referenceState, 0) m (r, |Q| + 1)| + ||Q| + 1| ≤ Q at hb
+    angularCanonicalCoefficients, Nat.zero_add, abs_zero, add_zero] at hb
+  change |K.potential (C.referenceState, 0) m (r, |Q| + 1)| + |(|Q| + 1)| ≤ Q at hb
   have hangle : 0 ≤ |Q| + 1 := by linarith [abs_nonneg Q]
   rw [abs_of_nonneg hangle] at hb
   linarith [abs_nonneg (K.potential (C.referenceState, 0) m (r, |Q| + 1)), le_abs_self Q]

@@ -162,10 +162,11 @@ theorem isMaterialData_enlargedMaterialData {D : ReferenceData} {T : MaterialDat
         (hpositive r hr).2.2.2 hC hA (hb r hr)
     · refine ⟨1, zero_lt_one, ?_⟩
       intro r hr
-      simpa only [one_mul] using
-        (Real.rpow_le_one_of_one_le_of_nonpos
-          (one_le_materialEnvelopeMajorant (hpositive r hr).2.2.1.le)
-          (le_of_not_ge hA)).trans (hpositive r hr).2.2.2
+      change materialEnvelopeMajorant (T.E0 r) ^ A ≤ 1 * T.M r
+      rw [one_mul]
+      exact (Real.rpow_le_one_of_one_le_of_nonpos
+        (one_le_materialEnvelopeMajorant (hpositive r hr).2.2.1.le)
+        (le_of_not_ge hA)).trans (hpositive r hr).2.2.2
   · intro n
     obtain ⟨c, hc, ⟨C, A, hC, hA, hb⟩, heq⟩ := hexpansion n
     refine ⟨c, hc, ⟨C, A, hC, hA, ?_⟩, heq⟩
@@ -226,6 +227,19 @@ private theorem materialSample_factor_le_enlarged {D : ReferenceData} {T : Mater
     (Real.rpow_le_rpow hp.2.2.1.le (le_materialEnvelopeMajorant _) hB)
     (mul_nonneg hB (Real.rpow_nonneg hp.2.1.le _))
 
+private theorem enlarge_directional_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U : Set E} {f : E → ℝ} {p : ℕ → Seminorm ℝ E}
+    (base high : ℕ) (x0 : E) (k : ℕ) {A A' w : ℝ} (hA : A ≤ A')
+    (h : ∃ J : SmoothDirections U f, ∀ z ∈ U, ∀ v : Fin k → E,
+      w * |J.D k z v| ≤ A * oneHighVariationWeight p base high (z - x0) v) :
+    ∃ J : SmoothDirections U f, ∀ z ∈ U, ∀ v : Fin k → E,
+      w * |J.D k z v| ≤ A' * oneHighVariationWeight p base high (z - x0) v := by
+  obtain ⟨J, hJ⟩ := h
+  refine ⟨J, fun z hz v => ?_⟩
+  exact (hJ z hz v).trans (mul_le_mul_of_nonneg_right hA
+    (oneHighVariationWeight_nonneg p base high (z - x0) v))
+
 private theorem n01CoefficientJetBounds_enlargedMaterialData
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -236,12 +250,11 @@ private theorem n01CoefficientJetBounds_enlargedMaterialData
   obtain ⟨B, hB, hb⟩ := h k s
   refine ⟨B, hB, ?_⟩
   intro m i a b p hab hp
-  obtain ⟨J, hJ⟩ := hb m i a b p hab hp
-  refine ⟨J, ?_⟩
-  intro z hz v
-  exact (hJ z hz v).trans (mul_le_mul_of_nonneg_right
+  simpa only [one_mul] using enlarge_directional_bound
+    (p := pairGrading (stateGrading S) realGrading) base (s + loss)
+    (C.referenceState, 0) k (w := 1)
     (materialSample_factor_le_enlarged hD hT hB.le m)
-    (oneHighVariationWeight_nonneg _ _ _ _ v))
+    (by simpa only [one_mul] using hb m i a b p hab hp)
 
 private theorem n01FlowJetBounds_enlargedMaterialData
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -253,12 +266,11 @@ private theorem n01FlowJetBounds_enlargedMaterialData
   obtain ⟨B, hB, hb⟩ := h k s
   refine ⟨B, hB, ?_⟩
   intro m a b p hab hp
-  obtain ⟨J, hJ⟩ := hb m a b p hab hp
-  refine ⟨J, ?_⟩
-  intro z hz v
-  exact (hJ z hz v).trans (mul_le_mul_of_nonneg_right
+  exact enlarge_directional_bound
+    (p := pairGrading (stateGrading S) realGrading) base (s + loss)
+    (C.referenceState, 0) k
     (materialSample_factor_le_enlarged hD hT hB.le (C.cell m))
-    (oneHighVariationWeight_nonneg _ _ _ _ v))
+    (hb m a b p hab hp)
 
 /-- All genuine coefficient and ordinary-flow towers already supplied by N01
 retain their constants and losses under the envelope enlargement. -/

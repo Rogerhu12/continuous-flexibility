@@ -22,6 +22,8 @@ open Set Filter
 open ContinuousFlexibility.Statements
 open scoped Topology BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 section FirstVariation
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -173,20 +175,67 @@ theorem pairGrading_displacement_le_two_mul_radius
   have h₂ := hz.2
   linarith
 
-/-- N01's first derivative estimate gives a value estimate with no
-constant displacement term, at every physical coefficient order. -/
-theorem coefficientFamily_le_displacement_of_n01
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
-    (hT : IsMaterialData D T) (hN : N01Properties D T S C base loss ε) (s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m i a b p,
+/-- One coefficient-value order, with its low and high displacement factors kept explicit.
+Naming the body keeps existential elimination independent of state-space expansion. -/
+def N01CoefficientDisplacementBoundAtOrder (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (base loss : ℕ) (ε : ℝ) (s : ℕ) (B : ℝ) : Prop :=
+  ∀ m i a b p,
       a + b ≤ s → p.1 ∈ D.cells m → ∀ z ∈ stateNeighborhood S C base ε,
       |coefficientFamily D S C i a b p z| ≤
         B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
           (pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0)) +
             (1 + pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0))) *
               pairGrading (stateGrading S) realGrading (s + loss)
-                (z - (C.referenceState, 0))) := by
+                (z - (C.referenceState, 0)))
+
+/-- One coefficient-value order with linear high-displacement control.
+Naming the body keeps existential elimination independent of state-space expansion. -/
+def N01CoefficientLinearHighBoundAtOrder (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (base loss : ℕ) (ε : ℝ) (s : ℕ) (B : ℝ) : Prop :=
+  ∀ m i a b p,
+      a + b ≤ s → p.1 ∈ D.cells m → ∀ z ∈ stateNeighborhood S C base ε,
+      |coefficientFamily D S C i a b p z| ≤
+        B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
+          (2 + 2 * ε) * pairGrading (stateGrading S) realGrading
+            (max base (s + loss)) (z - (C.referenceState, 0))
+
+/-- One angular flow-value order, without a radial collar weight.
+Naming the body keeps existential elimination independent of state-space expansion. -/
+def N01FlowDisplacementBoundAtOrder (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ)
+    (s : ℕ) (B : ℝ) : Prop :=
+  ∀ m b p,
+      b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+      ∀ z ∈ stateNeighborhood S C base ε,
+      |ordinaryFlowFamily S C m 0 b p z| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+          (pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0)) +
+            (1 + pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0))) *
+              pairGrading (stateGrading S) realGrading (s + loss)
+                (z - (C.referenceState, 0)))
+
+/-- One angular flow-value order with linear high-displacement control.
+Naming the body keeps existential elimination independent of state-space expansion. -/
+def N01FlowLinearHighBoundAtOrder (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ)
+    (s : ℕ) (B : ℝ) : Prop :=
+  ∀ m b p,
+      b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+      ∀ z ∈ stateNeighborhood S C base ε,
+      |ordinaryFlowFamily S C m 0 b p z| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+          (2 + 2 * ε) * pairGrading (stateGrading S) realGrading
+            (max base (s + loss)) (z - (C.referenceState, 0))
+
+/-- N01's first derivative estimate gives a value estimate with no
+constant displacement term, at every physical coefficient order. -/
+theorem coefficientFamily_le_displacement_of_n01
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hT : IsMaterialData D T) (hN : N01Properties D T S C base loss ε) (s : ℕ) :
+    ∃ B : ℝ, 0 < B ∧ N01CoefficientDisplacementBoundAtOrder D T S C base loss ε s B := by
   obtain ⟨B, hB, hbound⟩ := (n01CoefficientJetBounds_of_properties hN) 1 s
   refine ⟨B, hB, ?_⟩
   intro m i a b p hab hp z hz
@@ -202,12 +251,7 @@ theorem coefficientFamily_le_linear_high_of_n01
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hT : IsMaterialData D T) (hN : N01Properties D T S C base loss ε) (s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m i a b p,
-      a + b ≤ s → p.1 ∈ D.cells m → ∀ z ∈ stateNeighborhood S C base ε,
-      |coefficientFamily D S C i a b p z| ≤
-        B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
-          (2 + 2 * ε) * pairGrading (stateGrading S) realGrading
-            (max base (s + loss)) (z - (C.referenceState, 0)) := by
+    ∃ B : ℝ, 0 < B ∧ N01CoefficientLinearHighBoundAtOrder D T S C base loss ε s B := by
   obtain ⟨B, hB, hbound⟩ := coefficientFamily_le_displacement_of_n01 hT hN s
   refine ⟨B, hB, ?_⟩
   intro m i a b p hab hp z hz
@@ -234,15 +278,7 @@ theorem ordinaryFlowFamily_le_displacement_of_n01
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hT : IsMaterialData D T) (hN : N01Properties D T S C base loss ε) (s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m b p,
-      b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
-      ∀ z ∈ stateNeighborhood S C base ε,
-      |ordinaryFlowFamily S C m 0 b p z| ≤
-        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
-          (pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0)) +
-            (1 + pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0))) *
-              pairGrading (stateGrading S) realGrading (s + loss)
-                (z - (C.referenceState, 0))) := by
+    ∃ B : ℝ, 0 < B ∧ N01FlowDisplacementBoundAtOrder T S C base loss ε s B := by
   obtain ⟨B, hB, hbound⟩ := (n01FlowJetBounds_of_properties hN) 1 s
   refine ⟨B, hB, ?_⟩
   intro m b p hb hp z hz
@@ -260,13 +296,7 @@ theorem ordinaryFlowFamily_le_linear_high_of_n01
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hT : IsMaterialData D T) (hN : N01Properties D T S C base loss ε) (s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m b p,
-      b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
-      ∀ z ∈ stateNeighborhood S C base ε,
-      |ordinaryFlowFamily S C m 0 b p z| ≤
-        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
-          (2 + 2 * ε) * pairGrading (stateGrading S) realGrading
-            (max base (s + loss)) (z - (C.referenceState, 0)) := by
+    ∃ B : ℝ, 0 < B ∧ N01FlowLinearHighBoundAtOrder T S C base loss ε s B := by
   obtain ⟨B, hB, hbound⟩ := ordinaryFlowFamily_le_displacement_of_n01 hT hN s
   refine ⟨B, hB, ?_⟩
   intro m b p hb hp z hz
