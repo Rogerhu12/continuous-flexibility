@@ -203,6 +203,29 @@ theorem exists_source_smoothDirections_of_local_scalar_jets
     { open_domain := hU, D := L, zero := hzeroL, continuous := hcont, derivative := hline }
   exact ⟨J, hdecode⟩
 
+private theorem smoothTameOn_of_decoded_local_bounds
+    {F G : Type*} [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {f : E → F} (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (decode : F → G) (N : ℕ → G → ℝ)
+    (hN : ∀ s y, q s y ≤ N s (decode y))
+    (A : ∀ n : ℕ, E → (Fin n → E) → G)
+    (hjet : ∃ J : SmoothDirections U f, ∀ n x, x ∈ U → ∀ v,
+      decode (J.D n x v) = A n x v)
+    (hbound : ∀ k x₀, x₀ ∈ U → ∃ loss base : ℕ, ∃ δ : ℝ, 0 < δ ∧
+      ∀ s, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U,
+        p base (x - x₀) < δ → ∀ v : Fin k → E,
+        N s (A k x v) ≤ C * oneHighVariationWeight p base (s + loss) x v) :
+    SmoothTameOn p q U f := by
+  obtain ⟨J, hJ⟩ := hjet
+  refine ⟨J, fun k x₀ hx₀ => ?_⟩
+  obtain ⟨loss, base, δ, hδ, hb⟩ := hbound k x₀ hx₀
+  refine ⟨loss, base, δ, hδ, fun s hs => ?_⟩
+  obtain ⟨C, hC, hnorm⟩ := hb s hs
+  refine ⟨C, hC, fun x hx hnear v => ?_⟩
+  have hmajorant := hN s (J.D k x v)
+  rw [hJ k x hx v] at hmajorant
+  exact hmajorant.trans (hnorm x hx hnear v)
+
 /-- Local physical bounds and real weighted scalar derivatives produce
 the exact source-valued smooth tame map, with the original fixed loss. -/
 theorem smoothTameOn_source_of_local_scalar_jets
@@ -226,18 +249,11 @@ theorem smoothTameOn_source_of_local_scalar_jets
           C * oneHighVariationWeight p base (s + loss) x v) :
     SmoothTameOn p S.sourceGrading U f := by
   have hlocal := sourceLocalJetNormBounds_of_local_oneHigh hT hU hc p hp hmono A hmember hbound
-  let data := exists_source_smoothDirections_of_local_scalar_jets
-    hS hT hU f A hmember hlocal hzero hscalar henergy
-  let J : SmoothDirections U f := data.choose
-  have hJ : ∀ n x, x ∈ U → ∀ v,
-      physicalSourceDecode S (J.D n x v) = A n x v := data.choose_spec
-  apply smoothTameOn_source_of_local_oneHigh_norm_bounds hS p J
-  intro k x₀ hx₀
-  obtain ⟨loss, base, δ, hδ, hb⟩ := hbound k x₀ hx₀
-  refine ⟨loss, base, δ, hδ, fun s hs => ?_⟩
-  obtain ⟨C, hC, hnorm⟩ := hb s hs
-  refine ⟨C, hC, fun x hx hnear v => ?_⟩
-  rw [hJ k x hx v]
-  exact hnorm x hx hnear v
+  exact smoothTameOn_of_decoded_local_bounds p S.sourceGrading (physicalSourceDecode S)
+    (fun s g => physicalNorm T (3 / 4 : ℝ) s g)
+    (fun s y => sourceGrading_le_physicalNorm hS y s)
+    (fun n x v => A n x v)
+    (exists_source_smoothDirections_of_local_scalar_jets
+      hS hT hU f A hmember hlocal hzero hscalar henergy) hbound
 
 end ContinuousFlexibility.Statements

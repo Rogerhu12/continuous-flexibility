@@ -34,7 +34,7 @@ theorem sectorParameter_height_grading_le
     (S.height (3 / 4 : ℝ)).grading n v.1.val.1.1 ≤
       pairGrading (sectorGrading S) realGrading n v := by
   calc
-    _ ≤ heightPairGrading S n v.1.val.1 := le_add_of_nonneg_right (norm_nonneg _)
+    _ ≤ heightPairGrading S n v.1.val.1 := le_add_of_nonneg_right (apply_nonneg _ _)
     _ ≤ sectorGrading S n v.1 := by
       change heightPairGrading S n v.1.val.1 ≤
         heightPairGrading S n v.1.val.1 +
@@ -43,7 +43,7 @@ theorem sectorParameter_height_grading_le
               (S.circle (3 / 4 : ℝ)).grading n v.1.val.2.2.2))
       exact le_add_of_nonneg_right (add_nonneg (apply_nonneg _ _)
         (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _)))
-    _ ≤ _ := le_add_of_nonneg_right (norm_nonneg _)
+    _ ≤ _ := le_add_of_nonneg_right (apply_nonneg _ _)
 
 theorem sectorParameter_control_grading_le
     (S : PhysicalSpacesData) (n : ℕ) (v : StateDirections S × ℝ) :
@@ -88,9 +88,17 @@ theorem N01Properties.stateLocalizationEnergy_tsum_le_grading_sq
     ∃ K : ℝ, 0 ≤ K ∧ ∀ v : StateDirections S × ℝ,
       (∑' m : ℕ, stateLocalizationEnergy D T C s d v m) ≤
         ENNReal.ofReal (K * (pairGrading (sectorGrading S) realGrading (s + d + 5) v) ^ 2) := by
-  obtain ⟨K, hK, hheight⟩ :=
+  let data :=
     hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq hS hT (hS.1 (3 / 4 : ℝ)) s d
-  refine ⟨K + 1, by positivity, fun v => ?_⟩
+  let K : ℝ := data.choose
+  have hK : 0 ≤ K := data.choose_spec.1
+  have hheight (u : (S.height (3 / 4 : ℝ)).Space) :
+      (∑' m : ℕ, ENNReal.ofReal ((T.M (T.sample m) ^ d) ^ 2) *
+        physicalPlateauEnergy D T C (3 / 4 : ℝ) s
+          ((S.height (3 / 4 : ℝ)).decode u) m) ≤
+        ENNReal.ofReal (K * (S.height (3 / 4 : ℝ)).grading (s + d + 5) u ^ 2) :=
+    data.choose_spec.2 u
+  refine ⟨K + 1, add_nonneg hK zero_le_one, fun v => ?_⟩
   let P : ℝ := pairGrading (sectorGrading S) realGrading (s + d + 5) v
   have hPh : (S.height (3 / 4 : ℝ)).grading (s + d + 5) v.1.val.1.1 ≤ P :=
     sectorParameter_height_grading_le S (s + d + 5) v
@@ -122,8 +130,8 @@ theorem N01Properties.stateLocalizationEnergy_tsum_lt_top
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (s d : ℕ) (v : StateDirections S × ℝ) :
     (∑' m : ℕ, stateLocalizationEnergy D T C s d v m) < ⊤ := by
-  obtain ⟨K, _, hK⟩ := hN.stateLocalizationEnergy_tsum_le_grading_sq hS hT s d
-  exact (hK v).trans_lt ENNReal.ofReal_lt_top
+  let data := hN.stateLocalizationEnergy_tsum_le_grading_sq hS hT s d
+  exact (data.choose_spec.2 v).trans_lt ENNReal.ofReal_lt_top
 
 theorem N01Properties.exists_localized_state_energy_directions
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -142,8 +150,9 @@ theorem N01Properties.exists_localized_state_energy_directions
         T.M (T.sample m) ^ d * pairGrading (sectorGrading S) realGrading s (w m) ≤
           (1 + circleSingletonGradingConstant s * (2 * circleSobolevConstant)) *
             Real.sqrt (stateLocalizationEnergy D T C s d v m).toReal) := by
-  obtain ⟨w, hwq, hjet, hweight⟩ := hN.exists_localized_state_directions hS hT v hvq
-  refine ⟨w, hwq, hjet, fun m s d => ?_⟩
+  let data := hN.exists_localized_state_directions hS hT v hvq
+  let w : ℕ → (StateDirections S × ℝ) := data.choose
+  refine ⟨w, data.choose_spec.1, data.choose_spec.2.1, fun m s d => ?_⟩
   have hfinite : stateLocalizationEnergy D T C s d v m < ⊤ :=
     (ENNReal.le_tsum m).trans_lt (hN.stateLocalizationEnergy_tsum_lt_top hS hT s d v)
   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans
@@ -167,7 +176,7 @@ theorem N01Properties.exists_localized_state_energy_directions
   have hconstant : 0 ≤ circleSingletonGradingConstant s * (2 * circleSobolevConstant) :=
     mul_nonneg (circleSingletonGradingConstant_nonneg s)
       (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
-  exact (hweight m s d).trans
+  exact (data.choose_spec.2.2 m s d).trans
     ((add_le_add hh (mul_le_mul_of_nonneg_left hc hconstant)).trans_eq (by ring))
 
 end ContinuousFlexibility.Statements

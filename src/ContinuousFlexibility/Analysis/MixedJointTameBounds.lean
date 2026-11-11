@@ -63,8 +63,10 @@ private theorem jointJet_unit_bound_aux
           |mixedDerivative a b
             (fun q => (J.fixedLast (w, 0)).D k (x, q) (fun i => (u i, 0))) p| ≤
             C * ((H + high w) + ∑ i : Fin k, high (u i)) := by
-        have hslots : Fin.snoc (fun i : Fin k => (u i, (0 : PolarPoint))) (w, 0) =
-            fun i : Fin (k + 1) => (Fin.snoc u w i, (0 : PolarPoint)) := by
+        have hslots : Fin.snoc (α := fun _ : Fin (k + 1) => E × PolarPoint)
+            (fun i : Fin k => (u i, (0 : PolarPoint))) (w, 0) =
+            fun i : Fin (k + 1) =>
+              (Fin.snoc (α := fun _ : Fin (k + 1) => E) u w i, (0 : PolarPoint)) := by
           funext i
           refine Fin.lastCases ?_ (fun j => ?_) i
           · simp only [Fin.snoc_last]
@@ -72,19 +74,23 @@ private theorem jointJet_unit_bound_aux
         have heq : (fun q => (J.fixedLast (w, 0)).D k (x, q)
             (fun i => (u i, (0 : PolarPoint)))) =
             fun q => J.D (k + 1) (x, q)
-              (fun i => (Fin.snoc u w i, (0 : PolarPoint))) := by
+              (fun i => (Fin.snoc (α := fun _ : Fin (k + 1) => E) u w i,
+                (0 : PolarPoint))) := by
           funext q
           rw [J.fixedLast_apply, hslots]
         rw [heq]
-        have hus (i : Fin (k + 1)) : low (Fin.snoc u w i) ≤ 1 := by
+        have hus (i : Fin (k + 1)) :
+            low (Fin.snoc (α := fun _ : Fin (k + 1) => E) u w i) ≤ 1 := by
           refine Fin.lastCases ?_ (fun j => ?_) i
           · simpa only [Fin.snoc_last] using (hv 0).1
           · simpa only [Fin.snoc_castSucc] using hu j
-        have hs : (∑ i : Fin (k + 1), high (Fin.snoc u w i)) =
+        have hs : (∑ i : Fin (k + 1),
+            high (Fin.snoc (α := fun _ : Fin (k + 1) => E) u w i)) =
             (∑ i : Fin k, high (u i)) + high w := by
           rw [Fin.sum_univ_castSucc]
           simp only [Fin.snoc_castSucc, Fin.snoc_last]
-        exact (hb (k + 1) a b (by omega) (Fin.snoc u w) hus).trans_eq
+        exact (hb (k + 1) a b (by omega)
+          (Fin.snoc (α := fun _ : Fin (k + 1) => E) u w) hus).trans_eq
           (by rw [hs]; ring)
       have hrad (k a b : ℕ) (horder : k + a + b ≤ r)
           (u : Fin k → E) (hu : ∀ i, low (u i) ≤ 1) :
@@ -139,9 +145,14 @@ private theorem jointJet_unit_bound_aux
             (v 0).2.1 * (J.fixedLast er).D r (x, p) tail +
             (v 0).2.2 * (J.fixedLast ea).D r (x, p) tail := by
         have hdir : v 0 = (w, (0 : PolarPoint)) + (v 0).2.1 • er + (v 0).2.2 • ea := by
-          ext <;> simp only [w, er, ea, Prod.fst_add, Prod.snd_add,
-            Prod.fst_smul, Prod.snd_smul, Prod.fst_zero, Prod.snd_zero,
-            smul_zero, zero_add, add_zero, smul_eq_mul, mul_one, mul_zero]
+          apply Prod.ext
+          · change (v 0).1 = w + (v 0).2.1 • (0 : E) + (v 0).2.2 • (0 : E)
+            simp only [w, smul_zero, add_zero]
+          · apply Prod.ext
+            · change (v 0).2.1 = (0 : ℝ) + (v 0).2.1 * 1 + (v 0).2.2 * 0
+              ring
+            · change (v 0).2.2 = (0 : ℝ) + (v 0).2.1 * 0 + (v 0).2.2 * 1
+              ring
         calc
           _ = L (v 0) := by
             dsimp only [L]
@@ -220,8 +231,12 @@ theorem uniformWeightedJointGrowth_of_mixed_parameter_oneHigh
     have hs : ‖(v j).2‖ ≤ 1 :=
       (le_add_of_nonneg_left (apply_nonneg (p B) (v j).1)).trans (hv j)
     refine ⟨(hp hB (v j).1).trans hl, ?_, ?_⟩
-    · exact (by simpa only [Real.norm_eq_abs] using norm_fst_le (v j).2).trans hs
-    · exact (by simpa only [Real.norm_eq_abs] using norm_snd_le (v j).2).trans hs
+    · have hfst : |(v j).2.1| ≤ ‖(v j).2‖ := by
+        simpa only [Real.norm_eq_abs] using norm_fst_le (v j).2
+      exact hfst.trans hs
+    · have hsnd : |(v j).2.2| ≤ ‖(v j).2‖ := by
+        simpa only [Real.norm_eq_abs] using norm_snd_le (v j).2
+      exact hsnd.trans hs
   have h := (J i).jointJet_unit_bound_of_mixed_parameter_bounds (hV i) (hc i)
     (p base) (p (r + loss)) r x hx y hy hA
     (add_nonneg zero_le_one (apply_nonneg _ _)) hinput v hunit

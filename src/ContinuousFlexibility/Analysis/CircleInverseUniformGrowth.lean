@@ -24,6 +24,44 @@ local instance circleInverseUniformGrowthPairSMul (S : CircleModelData) :
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem uniformLowGrowth_of_linear_unit_bounds
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (base loss : ℕ) (V : E → E →ₗ[ℝ] E) (P : E → Prop)
+    (hzero : ∀ e, ¬P e → V e = 0)
+    (hunit : ∀ K : ℝ, 0 ≤ K → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ e ∈ {e | p base e ≤ K ∧ P e}, ∀ u : E, p base u ≤ 1 →
+        p s (V e u) ≤ C * (1 + p (s + loss) e + p (s + loss) u)) :
+    HasUniformLowGrowth (pairGrading p p) p (fun x : E × E => V x.1 x.2) := by
+  classical
+  refine ⟨base, loss, fun K hK s => ?_⟩
+  obtain ⟨C, hC, hc⟩ := hunit K hK s
+  refine ⟨C * (1 + K), mul_nonneg hC (add_nonneg zero_le_one hK), fun x hx => ?_⟩
+  have hxe : p base x.1 ≤ K :=
+    (le_add_of_nonneg_right (apply_nonneg (p base) x.2)).trans hx
+  have hxu : p base x.2 ≤ K :=
+    (le_add_of_nonneg_left (apply_nonneg (p base) x.1)).trans hx
+  by_cases hpos : P x.1
+  · have hnorm := linearMap_oneHigh_bound_of_unitBall (V x.1)
+      (p s) (p base) (p (s + loss)) hC
+      (fun u hu => hc x.1 ⟨hxe, hpos⟩ u hu.le) x.2
+    have hprod : (1 + p (s + loss) x.1) * p base x.2 ≤
+        (1 + p (s + loss) x.1) * K :=
+      mul_le_mul_of_nonneg_left hxu (add_nonneg zero_le_one (apply_nonneg _ _))
+    have hsize : (1 + p (s + loss) x.1) * p base x.2 + p (s + loss) x.2 ≤
+        (1 + K) * (1 + p (s + loss) x.1 + p (s + loss) x.2) := by
+      nlinarith only [hprod, apply_nonneg (p (s + loss)) x.1,
+        apply_nonneg (p (s + loss)) x.2, mul_nonneg hK (apply_nonneg (p (s + loss)) x.2)]
+    exact hnorm.trans ((mul_le_mul_of_nonneg_left hsize hC).trans_eq
+      (by rw [pairGrading_apply]; ring))
+  · rw [hzero x.1 hpos, LinearMap.zero_apply, map_zero]
+    exact mul_nonneg (mul_nonneg hC (add_nonneg zero_le_one hK))
+      (add_nonneg zero_le_one (apply_nonneg _ _))
+
+private theorem seminorm_self_sub_lt
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (x : E) {δ : ℝ} (hδ : 0 < δ) : p (x - x) < δ := by
+  simpa only [sub_self, map_zero] using hδ
+
 theorem uniformLowGrowth_circleInverseComposeLinear
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
@@ -36,43 +74,18 @@ theorem uniformLowGrowth_circleInverseComposeLinear
   let iloss : ℕ := hinterp.choose_spec.choose
   have hi := hinterp.choose_spec.choose_spec
   let base : ℕ := max initialBase (iloss + 2)
-  let loss : ℕ := base + iloss + 2
   have hbase : iloss + 2 ≤ base := le_max_right _ _
   have hib : initialBase ≤ base := le_max_left _ _
-  refine ⟨base, loss, fun K hK s => ?_⟩
-  let U : Set S.Space := {e | S.grading base e ≤ K ∧
-    ∀ m θ, a ≤ deriv (circleAffineLift travel (S.decode e) 1 m) θ}
-  have hunit := circleInverseComposeLinear_unit_growth hS hT hD hγ
-    base iloss hbase (fun b c hb hc => hi base b c hib hb hc)
-    travel a ha U K hK (fun e he => he.1) (fun e he => he.2) s
-  let C : ℝ := hunit.choose
-  have hC : 0 ≤ C := hunit.choose_spec.1
-  have hc := hunit.choose_spec.2
-  refine ⟨C * (1 + K), mul_nonneg hC (add_nonneg zero_le_one hK), fun x hx => ?_⟩
-  have hxe : S.grading base x.1 ≤ K := by
-    exact (le_add_of_nonneg_right (apply_nonneg (S.grading base) x.2)).trans hx
-  have hxu : S.grading base x.2 ≤ K := by
-    exact (le_add_of_nonneg_left (apply_nonneg (S.grading base) x.1)).trans hx
-  by_cases hpos : ∀ m θ, a ≤ deriv (circleAffineLift travel (S.decode x.1) 1 m) θ
-  · have hnorm := linearMap_oneHigh_bound_of_unitBall
-      (circleInverseComposeLinear hS hT hD hγ travel a ha x.1)
-      (S.grading s) (S.grading base) (S.grading (s + loss)) hC
-      (fun u hu => hc x.1 ⟨hxe, hpos⟩ u hu.le) x.2
-    have hprod : (1 + S.grading (s + loss) x.1) * S.grading base x.2 ≤
-        (1 + S.grading (s + loss) x.1) * K :=
-      mul_le_mul_of_nonneg_left hxu (add_nonneg zero_le_one (apply_nonneg _ _))
-    have hsize : (1 + S.grading (s + loss) x.1) * S.grading base x.2 +
-        S.grading (s + loss) x.2 ≤
-        (1 + K) * (1 + S.grading (s + loss) x.1 + S.grading (s + loss) x.2) := by
-      nlinarith [apply_nonneg (S.grading (s + loss)) x.1,
-        apply_nonneg (S.grading (s + loss)) x.2,
-        mul_nonneg hK (apply_nonneg (S.grading (s + loss)) x.2)]
-    exact hnorm.trans ((mul_le_mul_of_nonneg_left hsize hC).trans_eq
-      (by rw [pairGrading_apply]; ring))
-  · simp only [circleInverseComposeLinear, dif_neg hpos, LinearMap.zero_apply,
-      (S.grading s).map_zero']
-    exact mul_nonneg (mul_nonneg hC (add_nonneg zero_le_one hK))
-      (add_nonneg zero_le_one (apply_nonneg _ _))
+  exact uniformLowGrowth_of_linear_unit_bounds S.grading base (base + iloss + 2)
+    (circleInverseComposeLinear hS hT hD hγ travel a ha)
+    (fun e => ∀ m θ, a ≤ deriv (circleAffineLift travel (S.decode e) 1 m) θ)
+    (fun e he => dif_neg he)
+    (fun K hK s => circleInverseComposeLinear_unit_growth
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ
+      base iloss hbase (fun b c hb hc => hi base b c hib hb hc)
+      travel a ha {e | S.grading base e ≤ K ∧
+        ∀ m θ, a ≤ deriv (circleAffineLift travel (S.decode e) 1 m) θ}
+      K hK (fun e he => he.1) (fun e he => he.2) s)
 
 private theorem circleInverseUniform_deriv_sub
     (hS : IsCircleModel T γ S) (e f : S.Space) (m : ℕ) (θ : ℝ) :
@@ -85,8 +98,10 @@ private theorem circleInverseUniform_deriv_sub
   have hfield : S.decode (e - f) m = fun t => S.decode e m t - S.decode f m t := by
     funext t
     exact congrFun (congrFun (S.decode.map_sub e f) m) t
-  rw [hfield]
-  simpa only [Pi.sub_apply] using (he.sub hf).deriv
+  have hd : HasDerivAt (fun t => S.decode e m t - S.decode f m t)
+      (deriv (S.decode e m) θ - deriv (S.decode f m) θ) θ :=
+    (he.sub hf).congr_of_eventuallyEq (Filter.Eventually.of_forall (fun _ => rfl))
+  exact (congrArg (fun g : ℝ → ℝ => deriv g θ) hfield).trans hd.deriv
 
 /-- All lifts satisfying the same positive lower bound lie in the
 interior of the set with half that bound. -/
@@ -108,7 +123,7 @@ theorem circleAffineLift_mem_interior_half_lower
       (continuous_id.sub continuous_const)
   have hball : {e : S.Space | S.grading 2 (e - e₀) < δ} ∈ 𝓝 e₀ :=
     (isOpen_lt hc continuous_const).mem_nhds
-      (by simpa only [mem_setOf_eq, sub_self, (S.grading 2).map_zero'] using hδ)
+      (seminorm_self_sub_lt (S.grading 2) e₀ hδ)
   apply mem_interior_iff_mem_nhds.mpr
   apply mem_of_superset hball
   intro e he m θ

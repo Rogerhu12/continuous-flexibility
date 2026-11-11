@@ -115,7 +115,8 @@ theorem N01Properties.exists_opticalCorrection_source_members
             (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p := by
       have hpow : radialE (D.cellIndex (j m)) ^ (-(2 * P)) =
           (radialE (D.cellIndex (j m)) ^ (-P)) ^ 2 := by
-        rw [pow_two, ← Real.rpow_add (Real.exp_pos _)]
+        have hE : 0 < radialE (D.cellIndex (j m)) := Real.exp_pos _
+        rw [pow_two, ← Real.rpow_add hE]
         congr 1
         ring
       have hscale : (lam / 2) ^ 2 * radialE (D.cellIndex (j m)) ^ (-(2 * P)) =

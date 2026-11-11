@@ -24,7 +24,7 @@ variable {E : Type*}
   {U : Set E} {I : Set ℝ} {F : ℕ → ℕ → PolarPoint → E → ℝ}
   (J : ∀ a b p, p ∈ I ×ˢ (univ : Set ℝ) → SmoothDirections U (F a b p))
   (hU : IsOpen U) (hcU : Convex ℝ U) (hI : IsOpen I)
-  (hf : ∀ a b x ∈ U, ContinuousOn (fun p => F a b p x) (I ×ˢ univ))
+  (hf : ∀ a b, ∀ x ∈ U, ContinuousOn (fun p => F a b p x) (I ×ˢ univ))
   (hbound : ∀ a b, UniformScalarJetSeminormBounds
     (fun p : I ×ˢ (univ : Set ℝ) => J a b p p.property))
   (hrad : ∀ a b p, p ∈ I ×ˢ (univ : Set ℝ) → ∀ x ∈ U,

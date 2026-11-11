@@ -55,7 +55,7 @@ private def parameterDiagonalMap (n : ℕ) :
     symmetricParameterForms n →ₗ[ℝ] BoundedContinuousFunction (DiagonalUnitBall n) ℝ where
   toFun A := BoundedContinuousFunction.ofNormedAddCommGroup
     (fun x => A.val (fun _ => x.val))
-    (A.val.continuous.comp (continuous_pi (fun _ => continuous_subtype_val)))
+    (A.val.cont.comp (continuous_pi (fun _ : Fin n => continuous_subtype_val)))
     ‖A.val‖ (fun x => by
       apply (A.val.le_opNorm (fun _ => x.val)).trans
       have hprod : (∏ _i : Fin n, ‖x.val‖) ≤ 1 := by
@@ -66,7 +66,7 @@ private def parameterDiagonalMap (n : ℕ) :
     exact ContinuousMultilinearMap.add_apply A.val B.val (fun _ => x.val)
   map_smul' c A := by
     ext x
-    exact ContinuousMultilinearMap.smul_apply c A.val (fun _ => x.val)
+    exact smul_apply A.val c (fun _ : Fin n => x.val)
 
 private theorem parameterDiagonalMap_apply (n : ℕ) (A : symmetricParameterForms n)
     (x : DiagonalUnitBall n) : parameterDiagonalMap n A x = A.val (fun _ => x.val) := rfl

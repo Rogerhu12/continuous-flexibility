@@ -58,8 +58,8 @@ theorem jointMixedDiagonal_const_mul
   have hnear : ∀ᶠ t : ℝ in 𝓝 0, x + t • w ∈ U :=
     (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
       (by simpa only [zero_smul, add_zero] using hU.mem_nhds hx)
-  have he : (fun t => mixedDerivative a b (fun q => g (x + t • w, q)) p) =ᶠ[𝓝 0]
-      (fun t => c * mixedDerivative a b (fun q => f (x + t • w, q)) p) := by
+  have he : (fun t : ℝ => mixedDerivative a b (fun q => g (x + t • w, q)) p) =ᶠ[𝓝 0]
+      (fun t : ℝ => c * mixedDerivative a b (fun q => f (x + t • w, q)) p) := by
     filter_upwards [hnear] with t ht
     exact (mixedDerivative_congr_on_open hV (fun q hq => heq _ ht q hq) a b hp).trans
       (mixedDerivative_const_mul c _ a b p)
@@ -82,13 +82,13 @@ theorem jointMixedDiagonal_sub
       continuous_const.add (continuous_id.smul continuous_const))
   have hz : (0 : ℝ) ∈ I := by simpa only [I, mem_preimage, zero_smul, add_zero] using hx
   have hf : ContDiffAt ℝ ∞
-      (fun t => mixedDerivative a b (fun q => f (x + t • w, q)) p) 0 :=
+      (fun t : ℝ => mixedDerivative a b (fun q => f (x + t • w, q)) p) 0 :=
     (J.mixed_actual_line_contDiffOn hU hV hc a b x w hp).contDiffAt (hI.mem_nhds hz)
   have hg : ContDiffAt ℝ ∞
-      (fun t => mixedDerivative a b (fun q => g (x + t • w, q)) p) 0 :=
+      (fun t : ℝ => mixedDerivative a b (fun q => g (x + t • w, q)) p) 0 :=
     (K.mixed_actual_line_contDiffOn hU hV hc a b x w hp).contDiffAt (hI.mem_nhds hz)
-  have he : (fun t => mixedDerivative a b (fun q => h (x + t • w, q)) p) =ᶠ[𝓝 0]
-      (fun t => mixedDerivative a b (fun q => f (x + t • w, q)) p -
+  have he : (fun t : ℝ => mixedDerivative a b (fun q => h (x + t • w, q)) p) =ᶠ[𝓝 0]
+      (fun t : ℝ => mixedDerivative a b (fun q => f (x + t • w, q)) p -
         mixedDerivative a b (fun q => g (x + t • w, q)) p) := by
     filter_upwards [hI.mem_nhds hz] with t ht
     exact (mixedDerivative_congr_on_open hV (fun q hq => heq _ ht q hq) a b hp).trans

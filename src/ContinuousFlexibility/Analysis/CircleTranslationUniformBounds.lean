@@ -57,8 +57,16 @@ theorem circleTranslationContinuousLinear_decode
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ) (travel : ℕ → ℝ) (u : S.Space) :
     S.decode (circleTranslationContinuousLinear hS hT hD hγ travel u) =
       fun m θ => S.decode u m (θ + travel m) := by
-  simp only [circleTranslationContinuousLinear, circleShiftedChartComposeContinuousLinear_apply,
-    circleShiftedChartComposeLinear_decode, map_zero, Pi.zero_apply, add_zero]
+  have hmap := circleShiftedChartComposeContinuousLinear_apply
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel (0 : S.Space) u
+  funext m θ
+  have hzero : S.decode (0 : S.Space) m θ = 0 :=
+    congrFun (congrFun S.decode.map_zero m) θ
+  have harg : θ + travel m + S.decode (0 : S.Space) m θ = θ + travel m :=
+    (congrArg (fun y : ℝ => θ + travel m + y) hzero).trans (add_zero _)
+  exact (congrArg (fun z : S.Space => S.decode z m θ) hmap).trans
+    ((circleShiftedChartComposeLinear_decode hS hT hD hγ travel (0 : S.Space) u m θ).trans
+      (congrArg (S.decode u m) harg))
 
 theorem circleTranslationContinuousLinear_grading_le
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -78,11 +86,18 @@ theorem circleShiftedChartComposeLinear_eq_zero_travel
       circleShiftedChartComposeLinear hS hT hD hγ (fun _ => 0) e
         (circleTranslationContinuousLinear hS hT hD hγ travel u) := by
   apply hS.2.2.2.2.2.1
-  rw [circleShiftedChartComposeLinear_decode, circleShiftedChartComposeLinear_decode]
   funext m θ
-  rw [circleTranslationContinuousLinear_decode]
-  congr 1
-  ring
+  have hleft := circleShiftedChartComposeLinear_decode
+    hS hT hD hγ travel e u m θ
+  have hright := circleShiftedChartComposeLinear_decode hS hT hD hγ (fun _ => 0) e
+    (circleTranslationContinuousLinear hS hT hD hγ travel u) m θ
+  have htranslate := congrFun (congrFun
+    (circleTranslationContinuousLinear_decode hS hT hD hγ travel u) m)
+    (θ + 0 + S.decode e m θ)
+  have harg : θ + travel m + S.decode e m θ =
+      (θ + 0 + S.decode e m θ) + travel m := by ring
+  exact hleft.trans ((congrArg (S.decode u m) harg).trans
+    (htranslate.symm.trans hright.symm))
 
 theorem circleAffineInverse_eq_zero_travel
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -111,12 +126,19 @@ theorem circlePositiveInverseComposeLinear_eq_zero_travel
       circleTranslationContinuousLinear hS hT hD hγ (fun m => -travel m)
         (circlePositiveInverseComposeLinear hS hT hD hγ (fun _ => 0) e u) := by
   apply hS.2.2.2.2.2.1
-  rw [circlePositiveInverseComposeLinear_decode hS hT hD hγ travel e u he,
-    circleTranslationContinuousLinear_decode,
-    circlePositiveInverseComposeLinear_decode hS hT hD hγ (fun _ => 0) e u he]
   funext m θ
-  exact congrArg (S.decode u m)
-    (by simpa only [sub_eq_add_neg] using
-      circleAffineInverse_eq_zero_travel hS hT hD hγ travel e he m θ)
+  let z := circlePositiveInverseComposeLinear hS hT hD hγ (fun _ => 0) e u
+  have hleft := congrFun (congrFun
+    (circlePositiveInverseComposeLinear_decode hS hT hD hγ travel e u he) m) θ
+  have hzero := congrFun (congrFun
+    (circlePositiveInverseComposeLinear_decode hS hT hD hγ (fun _ => 0) e u he) m)
+    (θ - travel m)
+  have htranslate := congrFun (congrFun
+    (circleTranslationContinuousLinear_decode hS hT hD hγ (fun j => -travel j) z) m) θ
+  exact hleft.trans
+    ((congrArg (S.decode u m)
+      (circleAffineInverse_eq_zero_travel hS hT hD hγ travel e he m θ)).trans
+        (hzero.symm.trans ((congrArg (S.decode z m) (sub_eq_add_neg θ (travel m))).trans
+          htranslate.symm)))
 
 end ContinuousFlexibility.Statements

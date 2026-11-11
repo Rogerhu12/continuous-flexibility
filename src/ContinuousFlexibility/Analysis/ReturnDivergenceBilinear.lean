@@ -86,15 +86,15 @@ def decodedHeightPairPartialLinear
       (physical_height_contDiff_and_flatJets hT hS
         (by norm_num : (0 : ℝ) < 3 / 4) η.1).1.differentiable (by simp) p)
 
+set_option backward.isDefEq.respectTransparency false in
 theorem decodedHeightPairPartialLinear_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (v : PolarPoint) (η : HeightPair S) (p : PolarPoint) :
     decodedHeightPairPartialLinear hS hT v η p =
       fderiv ℝ ((S.height (3 / 4 : ℝ)).decode η.1) p v := by
-  change (if p ∈ (univ : Set PolarPoint) then
-    fderiv ℝ ((S.height (3 / 4 : ℝ)).decode η.1) p v else 0) = _
-  rw [if_pos (mem_univ p)]
+  simp only [decodedHeightPairPartialLinear, spatialDirectionalLinear_apply,
+    mem_univ, if_true, decodedHeightPairLinear_apply]
 
 def symmetricRadialFluxBilinear
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

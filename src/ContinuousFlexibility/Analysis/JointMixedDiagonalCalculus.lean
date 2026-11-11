@@ -229,18 +229,18 @@ theorem jointMixedDiagonal_mul
       continuous_const.add (continuous_id.smul continuous_const))
   have hz : (0 : ℝ) ∈ I := by simpa only [I, mem_preimage, zero_smul, add_zero] using hx
   have hfr (i j : ℕ) : ContDiffAt ℝ ∞
-      (fun t => mixedDerivative i j (fun q => f (x + t • w, q)) p) 0 :=
+      (fun t : ℝ => mixedDerivative i j (fun q => f (x + t • w, q)) p) 0 :=
     (J.mixed_actual_line_contDiffOn hU hV hc i j x w hp).contDiffAt (hI.mem_nhds hz)
   have hgr (i j : ℕ) : ContDiffAt ℝ ∞
-      (fun t => mixedDerivative i j (fun q => g (x + t • w, q)) p) 0 :=
+      (fun t : ℝ => mixedDerivative i j (fun q => g (x + t • w, q)) p) 0 :=
     (K.mixed_actual_line_contDiffOn hU hV hc i j x w hp).contDiffAt (hI.mem_nhds hz)
-  have hterm (j i : ℕ) : ContDiffAt ℝ ∞ (fun t =>
+  have hterm (j i : ℕ) : ContDiffAt ℝ ∞ (fun t : ℝ =>
       (b.choose j : ℝ) * (a.choose i : ℝ) *
         mixedDerivative i j (fun q => f (x + t • w, q)) p *
           mixedDerivative (a - i) (b - j) (fun q => g (x + t • w, q)) p) 0 :=
     (contDiffAt_const.mul (hfr i j)).mul (hgr (a - i) (b - j))
-  have heq : (fun t => mixedDerivative a b (fun q => h (x + t • w, q)) p) =ᶠ[𝓝 0]
-      (fun t => ∑ j ∈ Finset.range (b + 1), ∑ i ∈ Finset.range (a + 1),
+  have heq : (fun t : ℝ => mixedDerivative a b (fun q => h (x + t • w, q)) p) =ᶠ[𝓝 0]
+      (fun t : ℝ => ∑ j ∈ Finset.range (b + 1), ∑ i ∈ Finset.range (a + 1),
         (b.choose j : ℝ) * (a.choose i : ℝ) *
           mixedDerivative i j (fun q => f (x + t • w, q)) p *
             mixedDerivative (a - i) (b - j) (fun q => g (x + t • w, q)) p) := by
@@ -249,7 +249,7 @@ theorem jointMixedDiagonal_mul
       (mixedDerivative_mul_on_open hV (J.spatial_value_contDiffOn hV _ ht)
         (K.spatial_value_contDiffOn hV _ ht) a b hp)
   have hL : jointMixedDiagonal L n a b x w p =
-      iteratedDeriv n (fun t => mixedDerivative a b (fun q => h (x + t • w, q)) p) 0 := by
+      iteratedDeriv n (fun t : ℝ => mixedDerivative a b (fun q => h (x + t • w, q)) p) 0 := by
     simpa only [zero_smul, add_zero] using
       (jointMixedDiagonal_eq_iteratedDeriv L hU hV hc n a b x w hz hp).symm
   rw [hL, heq.iteratedDeriv_eq n,
@@ -260,10 +260,10 @@ theorem jointMixedDiagonal_mul
   rw [iteratedDeriv_fun_sum (fun i _ => (hterm j i).of_le (by simp))]
   apply Finset.sum_congr rfl
   intro i hi
-  have hgroup : (fun t => (b.choose j : ℝ) * (a.choose i : ℝ) *
+  have hgroup : (fun t : ℝ => (b.choose j : ℝ) * (a.choose i : ℝ) *
       mixedDerivative i j (fun q => f (x + t • w, q)) p *
         mixedDerivative (a - i) (b - j) (fun q => g (x + t • w, q)) p) =
-      (fun t => ((b.choose j : ℝ) * (a.choose i : ℝ)) *
+      (fun t : ℝ => ((b.choose j : ℝ) * (a.choose i : ℝ)) *
         (mixedDerivative i j (fun q => f (x + t • w, q)) p *
           mixedDerivative (a - i) (b - j) (fun q => g (x + t • w, q)) p)) := by
     funext t

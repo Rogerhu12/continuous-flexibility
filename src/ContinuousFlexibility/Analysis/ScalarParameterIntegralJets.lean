@@ -26,7 +26,7 @@ theorem iteratedDeriv_intervalIntegral_smooth
   have hs (t : ℝ) : ContDiff ℝ ∞ (H t) :=
     hH.comp (contDiff_const.prodMk contDiff_id)
   have hc (k : ℕ) : Continuous (fun p : PolarPoint => iteratedDeriv k (H p.1) p.2) :=
-    (angularRegular_of_contDiff hH k).iteratedDeriv_continuous
+    (n02n03_angularRegular_of_contDiff hH k).iteratedDeriv_continuous
   induction n generalizing θ with
   | zero => simp only [iteratedDeriv_zero]
   | succ n ih =>
