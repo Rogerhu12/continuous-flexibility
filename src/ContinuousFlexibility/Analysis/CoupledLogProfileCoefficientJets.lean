@@ -56,7 +56,7 @@ theorem coupled_coefficientA_zeroParameter (hT : IsMaterialData D T)
     Radial.heightRadial_radialHeightField hhw,
     Radial.heightAngular_radialHeightField hhw,
     angularPartial_const, heightQ, mul_zero, add_zero,
-    heightDiscriminant_radial, inverseDThreeHalves_one, mul_one]
+    heightDiscriminant_radial, inverseDThreeHalves_one, mul_one, Radial.radialHeightField]
 
 theorem coupled_contDiff_stateControlSum (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
@@ -90,39 +90,49 @@ theorem coupled_coefficientFamily_zeroParameter (hT : IsMaterialData D T)
   rw [coupled_coefficientA_zeroParameter hT hS hN,
     coupled_coefficientA_zeroParameter hT hS hN, coupled_stateProfile_reference hN.2.2.1]
 
+private theorem coupled_exp_line_mixedDerivative_hasDerivAt
+    {w L w₀ : ℝ → ℝ} (hw : ContDiff ℝ ∞ w) (hL : ContDiff ℝ ∞ L)
+    (hw₀ : ContDiff ℝ ∞ w₀) (a b : ℕ) (p : PolarPoint) :
+    HasDerivAt
+      (fun t : ℝ => mixedDerivative a b
+        (fun q => w q.1 * Real.exp (t * L q.1) - w₀ q.1) p)
+      (mixedDerivative a b (fun q => w q.1 * L q.1) p) 0 := by
+  let F : ℝ × PolarPoint → ℝ := fun z =>
+    w z.2.1 * Real.exp (z.1 * L z.2.1) - w₀ z.2.1
+  have hF : ContDiff ℝ ∞ F :=
+    ((hw.comp contDiff_snd.fst).mul
+      (contDiff_fst.mul (hL.comp contDiff_snd.fst)).exp).sub
+        (hw₀.comp contDiff_snd.fst)
+  have hd := spaces_hasDerivAt_parameter_mixedDerivative hF a b 0 p
+  have hparameter : (fun q : PolarPoint => deriv (fun t : ℝ => F (t, q)) 0) =
+      fun q => w q.1 * L q.1 := by
+    funext q
+    have h := ((((hasDerivAt_id (0 : ℝ)).mul_const (L q.1)).exp).const_mul
+      (w q.1)).sub_const (w₀ q.1)
+    simpa only [F, id_eq, zero_mul, Real.exp_zero, one_mul] using h.deriv
+  rw [hparameter] at hd
+  exact hd
+
 /-- Parameter differentiation commutes with every actual spatial coefficient
 jet because the exponential line is jointly smooth in the parameter and point. -/
 theorem coupled_coefficientA_jet_state_hasDerivAt (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
     (x v : AnnularState S) (a b : ℕ) (p : PolarPoint) :
     HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 a b p (x + (coupledScalarAction (E := AnnularState S) t v), 0))
+      (fun t : ℝ => coefficientFamily D S C 0 a b p
+        (x + coupledScalarAction (E := AnnularState S) t v, 0))
       (mixedDerivative a b
         (fun q => stateProfile D S C x q.1 * coupled_stateLogProfile D S C v q.1) p) 0 := by
-  let F : ℝ × PolarPoint → ℝ := fun z =>
-    stateProfile D S C x z.2.1 * Real.exp (z.1 * coupled_stateLogProfile D S C v z.2.1) -
-      D.w z.2.1
   have hw := contDiff_stateProfile_of_n01 hS hT hN x
   have hL := coupled_contDiff_stateLogProfile hT hS hN v
-  obtain ⟨B, hB⟩ := hN.1.1
-  have hF : ContDiff ℝ ∞ F :=
-    ((hw.comp contDiff_snd.fst).mul
-      (contDiff_fst.mul (hL.comp contDiff_snd.fst)).exp).sub
-        (hB.1.2.2.1.1.comp contDiff_snd.fst)
-  have hd := spaces_hasDerivAt_parameter_mixedDerivative hF a b 0 p
-  have hparameter : (fun q : PolarPoint => deriv (fun t : ℝ => F (t, q)) 0) =
-      fun q => stateProfile D S C x q.1 * coupled_stateLogProfile D S C v q.1 := by
+  have hw₀ : ContDiff ℝ ∞ D.w := hN.1.1.choose_spec.1.2.2.1.1
+  apply (coupled_exp_line_mixedDerivative_hasDerivAt hw hL hw₀ a b p).congr_of_eventuallyEq
+  exact Eventually.of_forall fun t => by
+    rw [coupled_coefficientFamily_zeroParameter hT hS hN]
+    apply congrArg (fun f : PolarPoint → ℝ => mixedDerivative a b f p)
     funext q
-    have h := (coupled_stateProfile_hasDerivAt hS hN.2.2.2.1 x v q.1).sub_const (D.w q.1)
-    simpa only [F, coupled_stateProfile_affine hS hN.2.2.2.1] using h.deriv
-  rw [hparameter] at hd
-  convert hd using 1
-  funext t
-  rw [coupled_coefficientFamily_zeroParameter hT hS hN]
-  apply congrArg (fun f : PolarPoint → ℝ => mixedDerivative a b f p)
-  funext q
-  exact congrArg (fun y : ℝ => y - D.w q.1)
-    (coupled_stateProfile_affine hS hN.2.2.2.1 x v t q.1)
+    exact congrArg (fun y : ℝ => y - D.w q.1)
+      (coupled_stateProfile_affine hS hN.2.2.2.1 x v t q.1)
 
 private theorem coupled_oneHigh_first_product_zero
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -139,11 +149,15 @@ theorem coupled_logProfile_reference_jet_bound (hT : IsMaterialData D T)
       |iteratedDeriv s (fun t => D.w t * coupled_stateLogProfile D S C v t) r| ≤
         B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
           (stateGrading S base v + stateGrading S (s + loss) v) := by
-  have hcoeff := hN.2.2.2.2.2.2.2.2.2.2.2.1
-  obtain ⟨B, hB, hBj⟩ := hcoeff 1 s
+  let hcoeff := hN.2.2.2.2.2.2.2.2.2.2.2.1 1 s
+  let B : ℝ := hcoeff.choose
+  have hB : 0 < B := hcoeff.choose_spec.1
+  let hBj := hcoeff.choose_spec.2
   refine ⟨B, hB, ?_⟩
   intro m r hr v
-  obtain ⟨J, hJ⟩ := hBj m 0 s 0 (r, 0) (by omega) hr
+  let hjets := hBj m 0 s 0 (r, 0) (by omega) hr
+  let J := hjets.choose
+  have hJ := hjets.choose_spec
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
     constructor
     · simpa only [sub_self, map_zero] using hN.2.1

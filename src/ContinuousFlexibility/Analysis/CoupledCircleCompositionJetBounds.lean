@@ -18,6 +18,7 @@ open Set ContinuousFlexibility.Analysis
 open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 def coupledCircleKernelMajorant (M : CircleModelData) (base high : ℕ)
     (ψ : M.Space) {n : ℕ} (v : Fin n → M.Space) : ℝ :=
@@ -32,6 +33,34 @@ theorem coupledCircleKernelMajorant_nonneg (M : CircleModelData) (base high : �
       (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
   · exact Finset.sum_nonneg (fun _ _ => mul_nonneg (apply_nonneg _ _)
       (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)))
+
+private theorem coupled_factor_family_bound
+    {E : Type*} (p q : E → ℝ) (hp : ∀ x, 0 ≤ p x) (hq : ∀ x, 0 ≤ q x)
+    {k : ℕ} (t : CoupledCircleCompositionTerm k) (ψ v : E) (w : Fin k → E)
+    {R : ℝ} (hR : 1 ≤ R) (hψ : p ψ ≤ R) :
+    (∑ i, q (t.factorFamily v ψ w i) *
+      ∏ j ∈ Finset.univ.erase i, p (t.factorFamily v ψ w j)) ≤
+      ((t.baseFactors : ℝ) + 1) * R ^ t.baseFactors *
+        ((1 + q ψ) * ∏ i, p (Fin.cons v w i) +
+          ∑ i, q (Fin.cons v w i) * ∏ j ∈ Finset.univ.erase i, p (Fin.cons v w j)) := by
+  have hmap (f : E → ℝ) (i : Fin t.baseFactors ⊕ Fin (k + 1)) :
+      f (t.factorFamily v ψ w i) =
+        Sum.elim (fun _ : Fin t.baseFactors => f ψ) (fun j => f (Fin.cons v w j)) i := by
+    cases i <;> rfl
+  have he : (∑ i, q (t.factorFamily v ψ w i) *
+      ∏ j ∈ Finset.univ.erase i, p (t.factorFamily v ψ w j)) =
+      ∑ i : Fin t.baseFactors ⊕ Fin (k + 1),
+        Sum.elim (fun _ : Fin t.baseFactors => q ψ) (fun j => q (Fin.cons v w j)) i *
+          ∏ j ∈ Finset.univ.erase i,
+            Sum.elim (fun _ : Fin t.baseFactors => p ψ) (fun j => p (Fin.cons v w j)) j := by
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [hmap q i]
+    congr 1
+    exact Finset.prod_congr rfl (fun j _ => hmap p j)
+  exact he.trans_le (spaces_repeated_low_factors_bound t.baseFactors (k + 1)
+    (p ψ) (q ψ) R (fun i => p (Fin.cons v w i)) (fun i => q (Fin.cons v w i))
+    hR (hp ψ) hψ (hq ψ) (fun _ => hp _) (fun _ => hq _))
 
 private theorem coupled_circle_composition_term_local_bound
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
@@ -59,24 +88,27 @@ private theorem coupled_circle_composition_term_local_bound
               ∏ j ∈ Finset.univ.erase i, M.grading base (t.factorFamily v ψ w j) :=
     hexists.choose_spec.choose_spec
   refine ⟨base, loss, fun k t c s ht R hR => ?_⟩
-  obtain ⟨A, hA, hbound⟩ := hterm k t c s ht
+  have hAexists := hterm k t c s ht
+  let A : ℝ := hAexists.choose
+  have hA : 0 ≤ A := hAexists.choose_spec.1
+  have hbound : ∀ (v ψ : M.Space) (w : Fin k → M.Space) (m : ℕ) (θ : ℝ),
+      |(T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+          t.evaluate (M.decode v m) (M.decode ψ m) (fun i => M.decode (w i) m) θ| ≤
+        A * (T.M (T.sample m))⁻¹ *
+          ∑ i, M.grading (s + loss) (t.factorFamily v ψ w i) *
+            ∏ j ∈ Finset.univ.erase i, M.grading base (t.factorFamily v ψ w j) :=
+    hAexists.choose_spec.2
   let B : ℝ := ((t.baseFactors : ℝ) + 1) * R ^ t.baseFactors
   have hB : 0 ≤ B := mul_nonneg (by positivity) (pow_nonneg (zero_le_one.trans hR) _)
   refine ⟨A * B, mul_nonneg hA hB, fun ψ hψ v w m θ => ?_⟩
-  have hb := spaces_repeated_low_factors_bound t.baseFactors (k + 1)
-    (M.grading base ψ) (M.grading (s + loss) ψ) R
-    (fun i => M.grading base (Fin.cons v w i))
-    (fun i => M.grading (s + loss) (Fin.cons v w i))
-    hR (apply_nonneg _ _) hψ (apply_nonneg _ _)
-    (fun _ => apply_nonneg _ _) (fun _ => apply_nonneg _ _)
   have hi : 0 ≤ (T.M (T.sample m))⁻¹ :=
     inv_nonneg.mpr (zero_le_one.trans (hT.2.1 _ (hsample m)).2.2.2)
   have hsum :
       (∑ i, M.grading (s + loss) (t.factorFamily v ψ w i) *
         ∏ j ∈ Finset.univ.erase i, M.grading base (t.factorFamily v ψ w j)) ≤
-      B * coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) := by
-    simpa only [CoupledCircleCompositionTerm.factorFamily, B, coupledCircleKernelMajorant]
-      using hb
+      B * coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) :=
+    coupled_factor_family_bound (M.grading base) (M.grading (s + loss))
+      (fun _ => apply_nonneg _ _) (fun _ => apply_nonneg _ _) t ψ v w hR hψ
   exact (hbound v ψ w m θ).trans
     ((mul_le_mul_of_nonneg_left hsum (mul_nonneg hA hi)).trans_eq (by ac_rfl))
 
@@ -125,8 +157,27 @@ theorem coupled_circle_composition_jet_tame
         simp only [CoupledCircleCompositionTerm.evaluateTerms_nil, mul_zero, abs_zero,
           zero_mul, le_refl]⟩
     | cons t L ih =>
-      obtain ⟨A, hA, ha⟩ := hterm k t c s (hL t (by simp)) R hR
-      obtain ⟨B, hB, hb⟩ := ih (fun τ hτ => hL τ (List.mem_cons_of_mem _ hτ))
+      have hAexists := hterm k t c s (hL t (List.mem_cons_self)) R hR
+      let A : ℝ := hAexists.choose
+      have hA : 0 ≤ A := hAexists.choose_spec.1
+      have ha : ∀ ψ : M.Space, M.grading base ψ ≤ R →
+          ∀ (v : M.Space) (w : Fin k → M.Space) (m : ℕ) (θ : ℝ),
+            |(T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+              t.evaluate (M.decode v m) (M.decode ψ m) (fun i => M.decode (w i) m) θ| ≤
+              A * (T.M (T.sample m))⁻¹ *
+                coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) :=
+        hAexists.choose_spec.2
+      have hBexists := ih (fun τ hτ => hL τ (List.mem_cons_of_mem _ hτ))
+      let B : ℝ := hBexists.choose
+      have hB : 0 ≤ B := hBexists.choose_spec.1
+      have hb : ∀ ψ : M.Space, M.grading base ψ ≤ R →
+          ∀ (v : M.Space) (w : Fin k → M.Space) (m : ℕ) (θ : ℝ),
+            |(T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+                CoupledCircleCompositionTerm.evaluateTerms L
+                  (M.decode v m) (M.decode ψ m) (fun i => M.decode (w i) m) θ| ≤
+              B * (T.M (T.sample m))⁻¹ *
+                coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) :=
+        hBexists.choose_spec.2
       refine ⟨A + B, add_nonneg hA hB, fun ψ hψ v w m θ => ?_⟩
       rw [CoupledCircleCompositionTerm.evaluateTerms_cons, mul_add]
       calc
@@ -141,9 +192,19 @@ theorem coupled_circle_composition_jet_tame
             coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) :=
           add_le_add (ha ψ hψ v w m θ) (hb ψ hψ v w m θ)
         _ = _ := by rw [add_mul, add_mul]
-  obtain ⟨C, hC, hbound⟩ := hlist (CoupledCircleCompositionTerm.expansion r k b)
+  have hCexists := hlist (CoupledCircleCompositionTerm.expansion r k b)
     (fun t ht => (Nat.add_le_add_right
       (CoupledCircleCompositionTerm.expansion_order r k b t ht) c).trans hs)
+  let C : ℝ := hCexists.choose
+  have hC : 0 ≤ C := hCexists.choose_spec.1
+  have hbound : ∀ ψ : M.Space, M.grading base ψ ≤ R →
+      ∀ (v : M.Space) (w : Fin k → M.Space) (m : ℕ) (θ : ℝ),
+        |(T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+            CoupledCircleCompositionTerm.evaluateTerms (CoupledCircleCompositionTerm.expansion r k b)
+              (M.decode v m) (M.decode ψ m) (fun i => M.decode (w i) m) θ| ≤
+          C * (T.M (T.sample m))⁻¹ *
+            coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) :=
+    hCexists.choose_spec.2
   refine ⟨C, hC, fun ψ hψ v w m θ => ?_⟩
   have he := CoupledCircleCompositionTerm.evaluate_expansion r k b
     ((hM.2.2.2.1 v).1 m).1 ((hM.2.2.2.1 ψ).1 m).1

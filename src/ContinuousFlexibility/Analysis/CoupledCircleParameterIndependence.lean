@@ -203,7 +203,9 @@ theorem coupled_returnResidual_eq_of_nu_change
       (coupled_stateProfile_germ_of_nu_change h1.1.2.2.2.1 h1.2.2.2.1 htail hr)
       (Or.inr hheight) θ
   · intro m
-    simp only [stateLeftChart, htail]
+    exact congrArg
+      (fun u : CircleSpace S => fun θ => θ + (S.circle (3 / 4 : ℝ)).decode u m θ)
+      (congrArg Prod.snd htail)
 
 /-- At zero independent parameter the full return residual is independent
 of the height, with the control and chart coordinates fixed. -/
@@ -224,7 +226,25 @@ theorem coupled_returnResidual_zero_parameter_eq_of_tail
     exact coupled_minusSpeed_eq_of_profile_germ hT hS h1
       (Filter.Eventually.of_forall fun r => congrFun hp r) (Or.inl rfl) θ
   · intro m
-    simp only [stateLeftChart, htail]
+    exact congrArg
+      (fun u : CircleSpace S => fun θ => θ + (S.circle (3 / 4 : ℝ)).decode u m θ)
+      (congrArg (fun p : ℝ × (CircleSpace S × CircleSpace S) => p.2.2) htail)
+
+private theorem coupled_returnResidual_eq_of_nu_change_parameters
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h1 : N01Properties D T S C base loss ε)
+    (h2 : N02Properties D T S C R base ε)
+    {x y : AnnularState S × ℝ}
+    (hx : x ∈ stateNeighborhood S C base ε)
+    (hy : y ∈ stateNeighborhood S C base ε)
+    (hsx : stateSector S x.1) (hsy : stateSector S y.1)
+    (hq : x.2 = y.2) (hheight : x.1.1 = y.1.1)
+    (htail : x.1.2.2 = y.1.2.2) : R.residual x = R.residual y := by
+  rcases x with ⟨x, q⟩
+  rcases y with ⟨y, r⟩
+  change q = r at hq
+  subst r
+  exact coupled_returnResidual_eq_of_nu_change hT hS h1 h2 hx hy hsx hsy hheight htail
 
 /-- The scalar border direction belongs to the same state sector. -/
 def coupledSectorNuDirection (S : PhysicalSpacesData) (μ : ℝ) : StateDirections S := by
@@ -238,6 +258,41 @@ def coupledSectorNuDirection (S : PhysicalSpacesData) (μ : ℝ) : StateDirectio
 
 theorem coupledSectorNuDirection_val (S : PhysicalSpacesData) (μ : ℝ) :
     (coupledSectorNuDirection S μ).val = (0, (μ, (0, 0))) := rfl
+
+private theorem coupled_sector_nu_line_coordinates
+    (z : StateDirections S × ℝ) (μ t : ℝ) :
+    (liftSectorParameter S C
+      (z + coupledScalarAction (E := StateDirections S × ℝ) t
+        (coupledSectorNuDirection S μ, 0))).1.1 = (liftSectorParameter S C z).1.1 ∧
+    (liftSectorParameter S C
+      (z + coupledScalarAction (E := StateDirections S × ℝ) t
+        (coupledSectorNuDirection S μ, 0))).1.2.2 = (liftSectorParameter S C z).1.2.2 ∧
+    (liftSectorParameter S C
+      (z + coupledScalarAction (E := StateDirections S × ℝ) t
+        (coupledSectorNuDirection S μ, 0))).2 = (liftSectorParameter S C z).2 := by
+  simp only [coupled_liftSectorParameter_add, coupledSectorNuDirection_val,
+    Prod.fst_add, Prod.snd_add,
+    coupledScalarAction_fst, coupledScalarAction_snd, coupledScalarAction_zero,
+    coupled_liftSectorParameter_snd, add_zero, and_self]
+
+private theorem coupled_returnResidual_sector_nu_line
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h1 : N01Properties D T S C base loss ε)
+    (h2 : N02Properties D T S C R base ε)
+    {z : StateDirections S × ℝ} (hz : z ∈ sectorNeighborhood S base ε ε)
+    (μ t : ℝ)
+    (ht : z + coupledScalarAction (E := StateDirections S × ℝ) t
+      (coupledSectorNuDirection S μ, 0) ∈ sectorNeighborhood S base ε ε) :
+    R.residual (liftSectorParameter S C
+      (z + coupledScalarAction (E := StateDirections S × ℝ) t
+        (coupledSectorNuDirection S μ, 0))) = R.residual (liftSectorParameter S C z) := by
+  have href : referenceStateConditions D S C := h1.2.2.1
+  have hc := coupled_sector_nu_line_coordinates (C := C) z μ t
+  exact coupled_returnResidual_eq_of_nu_change_parameters hT hS h1 h2
+    (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
+    (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+    (href.liftSectorParameter_sector _) (href.liftSectorParameter_sector _)
+    hc.2.2 hc.1 hc.2.1
 
 theorem coupled_sector_circle_first_derivative
     {U : Set (StateDirections S × ℝ)}
@@ -297,34 +352,11 @@ theorem coupled_circle_nu_firstJet_eq_zero
       (z + coupledScalarAction (E := StateDirections S × ℝ) t
         (coupledSectorNuDirection S μ, 0)))).val =
         (P.circle (liftSectorParameter S C z)).val
-    rw [hcircle _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
-      (href.liftSectorParameter_sector _),
-      hcircle _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
-        (href.liftSectorParameter_sector _)]
-    have hxt :
-        ((liftSectorParameter S C z).1 +
-          coupledScalarAction (E := AnnularState S) t
-            (coupledSectorNuDirection S μ).val, z.2) ∈
-          stateNeighborhood S C base ε := by
-      simpa only [coupled_liftSectorParameter_add] using
-        liftSectorParameter_mem_stateNeighborhood (C := C) ht le_rfl
-    have hsxt : stateSector S
-        ((liftSectorParameter S C z).1 +
-          coupledScalarAction (E := AnnularState S) t
-            (coupledSectorNuDirection S μ).val) := by
-      simpa only [coupled_liftSectorParameter_add] using
-        href.liftSectorParameter_sector
-          (z + coupledScalarAction (E := StateDirections S × ℝ) t
-            (coupledSectorNuDirection S μ, 0))
-    rw [coupled_liftSectorParameter_add]
-    apply coupled_returnResidual_eq_of_nu_change hT hS h1 h2
-      hxt
-      (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
-      hsxt (href.liftSectorParameter_sector _)
-    · simp only [coupledSectorNuDirection_val,
-        Prod.fst_add, coupledScalarAction_fst, coupledScalarAction_zero, add_zero]
-    · simp only [coupledSectorNuDirection_val,
-        Prod.snd_add, coupledScalarAction_snd, coupledScalarAction_zero, add_zero]
+    exact (hcircle _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
+      (href.liftSectorParameter_sector _)).trans
+      ((coupled_returnResidual_sector_nu_line hT hS h1 h2 hz μ t ht).trans
+        (hcircle _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+          (href.liftSectorParameter_sector _)).symm)
   exact hd.unique (coupled_lineDerivAt_congr_line
     (hasProjectiveLineDerivAt_const ((sectorJointResidual S C P z).2) z
       (coupledSectorNuDirection S μ, 0)) heq)
@@ -340,9 +372,9 @@ theorem coupled_circle_nu_hasLineDerivAt_zero
     HasProjectiveLineDerivAt (fun x => (P.circle (x, z.2)).val) 0
       (liftSectorParameter S C z).1 (0, (μ, (0, 0))) := by
   have hd := coupled_circle_first_derivative J hz (coupledSectorNuDirection S μ)
-  rw [coupled_circle_nu_firstJet_eq_zero hT hS h1 h2 hcircle J hz μ,
-    coupledSectorNuDirection_val] at hd
-  exact hd
+  have he := congrArg Subtype.val
+    (coupled_circle_nu_firstJet_eq_zero hT hS h1 h2 hcircle J hz μ)
+  simpa only [he, coupledSectorNuDirection_val] using hd
 
 /-- N08 already identifies the actual height derivative with `q` times
 the height row. Its zero-parameter specialization gives zero immediately. -/

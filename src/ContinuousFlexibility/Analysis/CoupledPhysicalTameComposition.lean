@@ -31,7 +31,7 @@ theorem coupled_smoothTameOn_sub
     (hf : SmoothTameOn p q U f) (hg : SmoothTameOn p q U g) :
     SmoothTameOn p q U (fun x => f x - g x) := by
   have hn := solve_smoothTameOn_postcomp hg (-(ContinuousLinearMap.id ℝ Y))
-    (B := 1) zero_le_one (fun n y => by
+    (r := q) (B := 1) zero_le_one (fun n y => by
       simp only [ContinuousLinearMap.neg_apply, ContinuousLinearMap.id_apply,
         map_neg_eq_map, one_mul, le_refl])
   apply smoothTameOn_congr (smoothTameOn_add hp hf hn)
@@ -99,6 +99,8 @@ theorem coupled_smoothTameOn_comp_source
     (hmap : MapsTo f U V) : SmoothTameOn p S.sourceGrading U (g ∘ f) := by
   letI : ∀ n, CompleteSpace ((S.height (3 / 4 : ℝ)).level n) := fun n =>
     SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 (3 / 4 : ℝ)) n
+  letI : ∀ n, CompleteSpace ↥(subLevel S.Q.toLinearMap.ker n) := fun n =>
+    subLevel_completeSpace S.Q.toLinearMap.ker n
   exact coupled_smoothTameOn_comp_equiv hp htp htq
     (subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker) hf hg hmap
 
@@ -110,6 +112,8 @@ theorem coupled_smoothTameOn_comp_constantCircle
     (hmap : MapsTo f U V) : SmoothTameOn p (coupledConstantCircleGrading hM) U (g ∘ f) := by
   letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
     (hM.2.1 n).isComplete.completeSpace_coe
+  letI : ∀ n, CompleteSpace ↥(subLevel (coupledConstantCircleSubmodule hM) n) := fun n =>
+    subLevel_completeSpace (coupledConstantCircleSubmodule hM) n
   exact coupled_smoothTameOn_comp_equiv hp htp htq
     (subspaceEquiv (coupledConstantCircleSubmodule hM) (coupledConstantCircle_isClosed hM))
     hf hg hmap

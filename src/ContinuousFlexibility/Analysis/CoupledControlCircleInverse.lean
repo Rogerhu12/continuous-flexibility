@@ -18,6 +18,9 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable {T : MaterialData} {S : PhysicalSpacesData}
 
 def coupledControlCircleOperator
@@ -31,10 +34,8 @@ theorem coupledControlCircleOperator_val
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (B : ControlColumnData S) (z : AnnularState S × ℝ) (u : CoupledConstantCircle hS) :
     (coupledControlCircleOperator hS B z u).val =
-      circleAngularMeanProjection hS (B.circleColumn z u.val) := by
-  rw [coupledControlCircleOperator, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply,
-    coupledConstantCircleProjection_val]
+      circleAngularMeanProjection hS (B.circleColumn z u.val) :=
+  coupledConstantCircleProjection_val hS (B.circleColumn z u.val)
 
 /-- The same reciprocal diagonal, made total by zero outside its numerical
 lower-bound domain. -/
@@ -54,8 +55,12 @@ theorem coupledControlCircleInverse_val
     (hlo : ∀ m, (1 / 2 : ℝ) ≤ |B.diagonal z m|) (u : CoupledConstantCircle hS) :
     (coupledControlCircleInverse hS B z u).val =
       coupledInverseControlLift hS (B.diagonal z) hlo u.val := by
-  rw [coupledControlCircleInverse, dif_pos hlo, ContinuousLinearMap.comp_apply,
-    Submodule.subtypeL_apply, coupledConstantCircleInverse_val]
+  have he : coupledControlCircleInverse hS B z =
+      (coupledConstantCircleInverse hS (B.diagonal z) hlo).comp
+        (coupledConstantCircleSubmodule hS).subtypeL := by
+    simp only [coupledControlCircleInverse, dite_eq_left hlo]
+  exact (congrArg (fun L : CoupledConstantCircle hS →L[ℝ] CoupledConstantCircle hS =>
+    (L u).val) he).trans (coupledConstantCircleInverse_val hS (B.diagonal z) hlo u.val)
 
 theorem coupledControlCircleInverse_grading_le
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -67,10 +72,13 @@ theorem coupledControlCircleInverse_grading_le
   by_cases hlo : ∀ m, (1 / 2 : ℝ) ≤ |B.diagonal z m|
   · change (S.circle (3 / 4 : ℝ)).grading n (coupledControlCircleInverse hS B z u).val ≤
       2 * (S.circle (3 / 4 : ℝ)).grading n u.val
-    rw [coupledControlCircleInverse_val hS B z hlo]
-    exact coupledInverseControlLift_grading_le hS (B.diagonal z) hlo n u.val
-  · rw [coupledControlCircleInverse, dif_neg hlo, ContinuousLinearMap.zero_apply, map_zero]
-    exact mul_nonneg (by norm_num) (apply_nonneg _ _)
+    exact (congrArg ((S.circle (3 / 4 : ℝ)).grading n)
+      (coupledControlCircleInverse_val hS B z hlo u)).trans_le
+        (coupledInverseControlLift_grading_le hS (B.diagonal z) hlo n u.val)
+  · simpa only [coupledControlCircleInverse, dite_eq_right hlo,
+      ContinuousLinearMap.zero_apply, map_zero] using
+      mul_nonneg (by norm_num : (0 : ℝ) ≤ 2)
+        (apply_nonneg (coupledConstantCircleGrading hS n) u)
 
 theorem controlRestriction_angularMeanProjection
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -80,11 +88,13 @@ theorem controlRestriction_angularMeanProjection
     B.restriction (circleAngularMeanProjection hS u) = B.restriction u := by
   apply lp.ext
   funext m
-  rw [hrestriction, hrestriction]
   have hm : (S.circle (3 / 4 : ℝ)).decode (circleAngularMeanProjection hS u) m =
       (fun _ : ℝ => angularMean ((S.circle (3 / 4 : ℝ)).decode u m)) :=
     funext (circleAngularMeanProjection_decode hS u m)
-  rw [hm, coupled_angularMean_const]
+  exact (hrestriction (circleAngularMeanProjection hS u) m).trans
+    ((congrArg (fun a : ℝ => T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * a)
+      ((congrArg angularMean hm).trans (coupled_angularMean_const _))).trans
+        (hrestriction u m).symm)
 
 theorem coupledControlCircleOperator_restriction
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -93,10 +103,11 @@ theorem coupledControlCircleOperator_restriction
       angularMean ((S.circle (3 / 4 : ℝ)).decode u m))
     (hcolumn : ∀ u, B.restriction (B.circleColumn z u) = B.J z (B.restriction u))
     (u : CoupledConstantCircle hS) :
-    B.restriction (coupledControlCircleOperator hS B z u).val = B.J z (B.restriction u.val) := by
-  rw [coupledControlCircleOperator_val,
-    controlRestriction_angularMeanProjection hS B hrestriction]
-  exact hcolumn u.val
+    B.restriction (coupledControlCircleOperator hS B z u).val = B.J z (B.restriction u.val) :=
+  (congrArg (fun v : CircleSpace S => B.restriction v)
+    (coupledControlCircleOperator_val hS B z u)).trans
+      ((controlRestriction_angularMeanProjection hS B hrestriction
+        (B.circleColumn z u.val)).trans (hcolumn u.val))
 
 theorem coupledControlCircleInverse_restriction
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -107,9 +118,10 @@ theorem coupledControlCircleInverse_restriction
     (hJ : ∀ u, B.J z (B.JInverse z u) = u)
     (hlo : ∀ m, (1 / 2 : ℝ) ≤ |B.diagonal z m|) (u : CoupledConstantCircle hS) :
     B.restriction (coupledControlCircleInverse hS B z u).val =
-      B.JInverse z (B.restriction u.val) := by
-  rw [coupledControlCircleInverse_val hS B z hlo]
-  exact coupledInverseControlLift_restriction hS B z hrestriction hdiag hJ hlo u.val
+      B.JInverse z (B.restriction u.val) :=
+  (congrArg (fun v : CircleSpace S => B.restriction v)
+    (coupledControlCircleInverse_val hS B z hlo u)).trans
+      (coupledInverseControlLift_restriction hS B z hrestriction hdiag hJ hlo u.val)
 
 theorem coupledControlCircleInverse_left
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -125,10 +137,11 @@ theorem coupledControlCircleInverse_left
   apply Subtype.ext
   apply controlRestriction_injective_on_constants hS B hrestriction hH
     (coupledConstantCircle_constant hS _) (coupledConstantCircle_constant hS u)
-  rw [coupledControlCircleInverse_restriction hS B z hrestriction hdiag
-      (fun v => (hJ v).2) hlo,
-    coupledControlCircleOperator_restriction hS B z hrestriction hcolumn]
-  exact (hJ _).1
+  exact (coupledControlCircleInverse_restriction hS B z hrestriction hdiag
+      (fun v => (hJ v).2) hlo (coupledControlCircleOperator hS B z u)).trans
+    ((congrArg (fun v : ControlBanach => B.JInverse z v)
+      (coupledControlCircleOperator_restriction hS B z hrestriction hcolumn u)).trans
+        (hJ (B.restriction u.val)).1)
 
 theorem coupledControlCircleInverse_right
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -144,10 +157,11 @@ theorem coupledControlCircleInverse_right
   apply Subtype.ext
   apply controlRestriction_injective_on_constants hS B hrestriction hH
     (coupledConstantCircle_constant hS _) (coupledConstantCircle_constant hS u)
-  rw [coupledControlCircleOperator_restriction hS B z hrestriction hcolumn,
-    coupledControlCircleInverse_restriction hS B z hrestriction hdiag
-      (fun v => (hJ v).2) hlo]
-  exact (hJ _).2
+  exact (coupledControlCircleOperator_restriction hS B z hrestriction hcolumn
+      (coupledControlCircleInverse hS B z u)).trans
+    ((congrArg (fun v : ControlBanach => B.J z v)
+      (coupledControlCircleInverse_restriction hS B z hrestriction hdiag
+        (fun v => (hJ v).2) hlo u)).trans (hJ (B.restriction u.val)).2)
 
 section ParameterFamily
 
@@ -165,7 +179,7 @@ theorem coupledControlCircleInverse_linearFamilyTame
   have hb := coupledControlCircleInverse_grading_le hS B (z x) n u
   have hn : 0 ≤ (1 + p n x) * coupledConstantCircleGrading hS 0 u :=
     mul_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (apply_nonneg _ _)
-  simpa only [Nat.add_zero] using hb.trans
+  simpa only [Nat.add_zero, ContinuousLinearMap.coe_coe] using hb.trans
     (mul_le_mul_of_nonneg_left (le_add_of_nonneg_right hn) (by norm_num : (0 : ℝ) ≤ 2))
 
 variable [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
