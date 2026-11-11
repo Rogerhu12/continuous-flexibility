@@ -364,3 +364,8 @@ import ContinuousFlexibility.Blueprint.ScalarCalculus
 
 import ContinuousFlexibility.Radial.ReferenceDilation
 import ContinuousFlexibility.Radial.SeedLogarithmicSlope
+import ContinuousFlexibility.Radial.SeedConnectorInterpolation
+import ContinuousFlexibility.Radial.SeedTailFlatExtension
+import ContinuousFlexibility.Radial.MorseSecondModeCoordinates
+import ContinuousFlexibility.Radial.SeedConnectorReconstruction
+import ContinuousFlexibility.Radial.ReferenceIndexFloor

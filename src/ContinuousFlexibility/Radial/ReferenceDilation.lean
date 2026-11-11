@@ -93,6 +93,7 @@ theorem radialTravel_radius_height_change {D E : ReferenceData} {R H l h : ℝ}
       congr 1
       apply intervalIntegral.integral_congr
       intro r hr
+      dsimp only
       rw [hw r hr, hdw r hr]
       exact travelDensity_radius_height_change hR hH
     _ = R * ((∫ r in l..h, sqrt (-deriv D.w r / (r * D.w r))) / R) := by

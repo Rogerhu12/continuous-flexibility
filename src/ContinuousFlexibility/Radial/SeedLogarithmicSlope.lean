@@ -45,7 +45,7 @@ theorem hasDerivAt_seedLogSlope {u : ℝ → ℝ} {y : ℝ}
   have h := (he.mul (hu'.hasDerivAt.comp y he)).div
     (hu.hasDerivAt.comp y he) hne
   apply h.congr_deriv
-  simp only [seedLogSlope, Function.comp_apply]
+  simp only [seedLogSlope, Function.comp_apply, Pi.mul_apply]
   field_simp
   <;> ring
 
@@ -61,12 +61,14 @@ theorem deriv_seedLogSlope_of_radialJacobi {w u : ℝ → ℝ} {y : ℝ}
         seedLogSlope u y ^ 2 + seedLogSlope u y := by
   rw [(hasDerivAt_seedLogSlope hu hu' hune).deriv]
   have he : exp y ≠ 0 := (exp_pos y).ne'
-  have hflux := hw.hasDerivAt.mul hu'.hasDerivAt
+  have hflux := hw.hasDerivAt.fun_mul hu'.hasDerivAt
   unfold radialJacobi at hode
   rw [hflux.deriv] at hode
+  suffices hterm : exp y ^ 2 * deriv (deriv u) (exp y) / u (exp y) =
+      (4 - seedLogSlope u y) * seedProfileSlope w y by linarith only [hterm]
   unfold seedLogSlope seedProfileSlope
   field_simp [hwne, hune, he] at hode ⊢
-  nlinarith only [hode]
+  linear_combination (exp y) * hode
 
 theorem contDiff_seedLogSlope {u : ℝ → ℝ}
     (hu : ContDiffOn ℝ ∞ u (Ioi 0))
@@ -119,8 +121,9 @@ theorem centralSeedLogSlope_deriv (x : ℝ) :
   have hune : centralKernelHeight (exp (log (centralRadius x))) ≠ 0 :=
     (centralKernelHeight_pos _).ne'
   have hwne : centralRadialProfile 1 (exp (log (centralRadius x))) ≠ 0 := by
-    rw [exp_log (centralRadius_pos x), centralRadialProfile_pullback]
-    positivity
+    rw [exp_log (centralRadius_pos x), centralRadialProfile_pullback, one_mul]
+    exact mul_ne_zero (pow_ne_zero 2 (centralDensityRoot_pos x).ne')
+      (deriv_centralRadius_pos x).ne'
   have hode : radialJacobi 4 (centralRadialProfile 1) centralKernelHeight
       (exp (log (centralRadius x))) = 0 := by
     rw [exp_log (centralRadius_pos x)]
@@ -164,5 +167,79 @@ theorem centralSeedLogSlope_C1_right :
   rcases centralRadialContact_statement with
     ⟨_, _, _, _, _, _, hk, _, hq⟩
   exact centralSeedLogSlope_C1_at_end (by norm_num) hk hq
+
+
+/-- The inverse central radius in the logarithmic physical coordinate. -/
+def seedModelCoordinate (y : ℝ) : ℝ := centralModelCoordinate (exp y)
+
+theorem centralRadius_seedModelCoordinate (y : ℝ) :
+    centralRadius (seedModelCoordinate y) = exp y :=
+  centralRadius_modelCoordinate (exp_pos y)
+
+theorem seedModelCoordinate_le_iff (x y : ℝ) :
+    seedModelCoordinate y ≤ x ↔ y ≤ log (centralRadius x) := by
+  calc
+    seedModelCoordinate y ≤ x ↔
+        centralRadius (seedModelCoordinate y) ≤ centralRadius x :=
+      strictMono_centralRadius.le_iff_le.symm
+    _ ↔ exp y ≤ exp (log (centralRadius x)) := by
+      rw [centralRadius_seedModelCoordinate, exp_log (centralRadius_pos x)]
+    _ ↔ y ≤ log (centralRadius x) := exp_le_exp
+
+theorem seedModelCoordinate_tendsto_atTop :
+    Tendsto seedModelCoordinate atTop atTop := by
+  apply tendsto_atTop.2
+  intro x
+  filter_upwards [eventually_ge_atTop (log (centralRadius x))] with y hy
+  apply le_of_not_gt
+  intro h
+  have hh := strictMono_centralRadius h
+  rw [centralRadius_seedModelCoordinate] at hh
+  have he : centralRadius x ≤ exp y := by
+    simpa only [exp_log (centralRadius_pos x)] using exp_le_exp.mpr hy
+  exact (not_lt_of_ge he) hh
+
+theorem seedModelCoordinate_tendsto_atBot :
+    Tendsto seedModelCoordinate atBot atBot := by
+  apply tendsto_atBot.2
+  intro x
+  filter_upwards [eventually_le_atBot (log (centralRadius x))] with y hy
+  exact (seedModelCoordinate_le_iff x y).mpr hy
+
+theorem centralSeedLogSlope_lt_two (y : ℝ) :
+    seedLogSlope centralKernelHeight y < 2 := by
+  let x := seedModelCoordinate y
+  have hr : log (centralRadius x) = y := by
+    rw [centralRadius_seedModelCoordinate, log_exp]
+  rw [← hr, centralSeedLogSlope_pullback]
+  change (centralRadiusA - 2 * x) / centralRadiusLogDerivative x < 2
+  apply (div_lt_iff₀ (centralRadiusLogDerivative_pos x)).mpr
+  rw [centralRadiusLogDerivative_eq]
+  have hβ : 0 < centralRadiusAlpha := by linarith [centralRadiusAlpha_gt_half]
+  have hg := gaussianLaplaceRatio_pos hβ x
+  have hp : 0 < sqrt 2 * gaussianLaplaceRatio centralRadiusAlpha x := by positivity
+  linarith [centralRadiusA_pos]
+
+theorem centralSeedLogSlope_log_C1_left :
+    Tendsto (seedLogSlope centralKernelHeight) atBot (𝓝 2) ∧
+      Tendsto (deriv (seedLogSlope centralKernelHeight)) atBot (𝓝 0) := by
+  have hs (y : ℝ) : log (centralRadius (seedModelCoordinate y)) = y := by
+    rw [centralRadius_seedModelCoordinate, log_exp]
+  constructor
+  · simpa only [Function.comp_def, hs] using
+      centralSeedLogSlope_C1_left.1.comp seedModelCoordinate_tendsto_atBot
+  · simpa only [Function.comp_def, hs] using
+      centralSeedLogSlope_C1_left.2.comp seedModelCoordinate_tendsto_atBot
+
+theorem centralSeedLogSlope_log_C1_right :
+    Tendsto (seedLogSlope centralKernelHeight) atTop (𝓝 (-2)) ∧
+      Tendsto (deriv (seedLogSlope centralKernelHeight)) atTop (𝓝 0) := by
+  have hs (y : ℝ) : log (centralRadius (seedModelCoordinate y)) = y := by
+    rw [centralRadius_seedModelCoordinate, log_exp]
+  constructor
+  · simpa only [Function.comp_def, hs] using
+      centralSeedLogSlope_C1_right.1.comp seedModelCoordinate_tendsto_atTop
+  · simpa only [Function.comp_def, hs] using
+      centralSeedLogSlope_C1_right.2.comp seedModelCoordinate_tendsto_atTop
 
 end ContinuousFlexibility.Radial
