@@ -79,7 +79,7 @@ theorem n07a_exists_referenceTransport_C1
       ⟨by simpa only [Prod.fst_add, add_zero] using hp.1, mem_univ _⟩
     rw [hopen m hpπ, hopen m hp]
     exact n07aReferencePieceHeight_periodic_on h01 h04 hz' hs
-      (fun _ => Set.EqOn.refl _ _) aL hηπ m p hp
+      (fun _ _ _ => rfl) aL hηπ m p hp
   have heven : ∀ r θ, v (r, -θ) = v (r, θ) := by
     apply n07a_physical_even_of_piecewise h04 hv.continuousOn hzero
     intro m p hp

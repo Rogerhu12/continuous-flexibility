@@ -126,8 +126,7 @@ theorem n07a_sampleLinearJet_volume_bound
         mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right
           ((le_abs_self _).trans (hAb m)) (inv_nonneg.mpr (sq_nonneg _))) hB
       _ = _ := by
-        field_simp [(zero_lt_one.trans_le (hpos m).2.2.2).ne']
-        ring
+        field_simp [(zero_lt_one.trans_le (hpos m).2.2.2).ne'] <;> ring
   have hb (m : ℕ) : ‖v m‖ ^ 2 ≤ (T.M (T.sample (K.cell m)))⁻¹ * (A * B) ^ 2 :=
     n07a_materialInverse_square_bound (norm_nonneg _) hA.le hB (hpos m).2.2.2 (hv m)
   obtain ⟨hmem, hnorm⟩ := n07a_lp_of_square_majorant v
@@ -135,8 +134,10 @@ theorem n07a_sampleLinearJet_volume_bound
     (fun m => inv_nonneg.mpr (zero_le_one.trans (hpos m).2.2.2)) (mul_nonneg hA.le hB) hb
   let Fts := n07aOpenCoefficientVolume hV γ (t : ℝ) s χ (hfe z hz u) hmem
   refine ⟨Fts, ?_, ?_⟩
-  · intro m
-    rw [n07aOpenCoefficientVolume_forget hD hT]
+  · have hforget : V.forget γ (t : ℝ) s Fts = fun m => (χ m).toLp :=
+      n07aOpenCoefficientVolume_forget hD hT hV γ (t : ℝ) s χ (hfe z hz u) hmem
+    intro m
+    rw [congrFun hforget m]
     exact (χ m).toLp_ae
   · change ‖(⟨v, hmem⟩ : CanonicalVolumeJets S K s)‖ ≤ _
     exact hnorm.trans (by dsimp only [Z]; nlinarith only [hB])
