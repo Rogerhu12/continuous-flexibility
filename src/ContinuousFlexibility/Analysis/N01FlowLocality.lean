@@ -43,7 +43,8 @@ theorem polar_coefficients_eq_of_eventuallyEq
       polarCorrectedC w f p = polarCorrectedC v g p := by
   have hE : profileEnergy w =ᶠ[𝓝 p] profileEnergy v := by
     filter_upwards [hw.comp_tendsto continuous_fst.continuousAt] with q hq
-    simp only [profileEnergy, hq]
+    have hq' : w q.1 = v q.1 := by simpa only [Function.comp_apply] using hq
+    exact congrArg radialEnergy hq'
   have hk : heightRadial f =ᶠ[𝓝 p] heightRadial g :=
     radialPartial_eventuallyEq hf
   have ht : heightAngular f =ᶠ[𝓝 p] heightAngular g := by

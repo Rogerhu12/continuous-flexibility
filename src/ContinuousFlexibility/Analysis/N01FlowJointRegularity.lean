@@ -24,6 +24,8 @@ open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+
 section ActualFlow
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -70,10 +72,15 @@ theorem N01Properties.minusFlow_hasStrictFDerivAt
     (hN01.minusCharacteristicSpeed_continuousAt hS hT hz hsector
       (p := (p.1, C.minusFlow z m p.1 p.2))
       ⟨⟨(hcontrol.1 m).1.trans hp.1, hp.2.trans (hcontrol.1 m).2.2⟩,
-        mem_univ _⟩).comp (continuousAt_fst.prodMk hΦ)
+        mem_univ _⟩).comp (g := fun r : PolarPoint => (r.1, C.minusFlow z m r.1 r.2))
+        (continuousAt_fst.prodMk hΦ)
   have hlin : Continuous (fun c : ℝ => ContinuousLinearMap.toSpanSingleton ℝ c) := by
-    simpa only [ContinuousLinearMap.lsmul_flip_apply] using
-      (ContinuousLinearMap.lsmul ℝ ℝ : ℝ →L[ℝ] ℝ →L[ℝ] ℝ).flip.continuous
+    have heq : (fun c : ℝ => ContinuousLinearMap.toSpanSingleton ℝ c) =
+        (ContinuousLinearMap.toSpanSingletonLIE ℝ ℝ : ℝ → (ℝ →L[ℝ] ℝ)) := by
+      funext c
+      exact (ContinuousLinearMap.toSpanSingletonLIE_apply ℝ ℝ c).symm
+    rw [heq]
+    exact (ContinuousLinearMap.toSpanSingletonLIE ℝ ℝ).continuous
   have hpartial := hasStrictFDerivAt_uncurry_coprod
     (f := C.minusFlow z m)
     (f₁ := fun r θ => ContinuousLinearMap.toSpanSingleton ℝ
@@ -81,16 +88,21 @@ theorem N01Properties.minusFlow_hasStrictFDerivAt
     (f₂ := fun r θ => ContinuousLinearMap.toSpanSingleton ℝ (deriv (C.minusFlow z m r) θ))
     (by
       filter_upwards [hopen] with q hq
-      simpa only [Function.uncurry_def] using
+      simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using
         ((hflow z hz m q.2).2.2.1 q.1 hq.1).hasFDerivAt)
     (by
       filter_upwards [hopen] with q hq
-      simpa only [Function.uncurry_def] using
+      simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using
         ((N01Properties.minusFlow_differentiable S C z m hN01 hz
           ⟨hq.1.1.le, hq.1.2.le⟩) q.2).hasDerivAt.hasFDerivAt)
-    (by simpa only [Function.uncurry_def] using hlin.continuousAt.comp hv)
-    (by simpa only [Function.uncurry_def] using hlin.continuousAt.comp hJ)
-  simpa only [Function.uncurry_def] using hpartial
+    (by simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using hlin.continuousAt.comp hv)
+    (by simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using hlin.continuousAt.comp hJ)
+  simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using hpartial
 
 theorem N01Properties.returnCorrectedMinusFlow_hasDerivAt_of_physical
     (χ : ℕ → ℝ → ℝ) (m : ℕ) (r θ : ℝ)

@@ -114,24 +114,34 @@ theorem circleReturnInverseLinear_tame :
     IsTameLinear S.grading S.grading
       (circleReturnInverseLinear hS travel margin hmargin hdiv k hA hbound hM hH)
       (3 + k) 0 := by
-  apply liftCircleLinear_isTame hS _ _ S.grading
-    (gradedSeminorm_monotone (fun i => S.level i) S.bond) (3 + k)
-  intro n
-  refine ⟨⟨circleReturnL2Constant * A, mul_nonneg circleReturnL2Constant_nonneg hA⟩, ?_⟩
-  intro u
-  have hu := hS.2.2.2.1 u
-  have h := circleNorm_le_of_L2_derivative_bound hu n 3 k
-    (mul_nonneg circleReturnL2Constant_nonneg hA) hM hH
-    (circleReturnSolution_weighted_L2_bound hu travel margin hmargin hdiv k hbound)
-  apply h.trans
-  apply mul_le_mul_of_nonneg_left _ (mul_nonneg circleReturnL2Constant_nonneg hA)
-  rw [← hS.2.2.2.2.2.2.2 u (n + 3 + k), Nat.add_assoc]
-  exact norm_coordinate_le_graded (fun i => S.level i) S.bond le_rfl u
+  let F : S.Space →ₗ[ℝ] (ℕ → ℝ → ℝ) :=
+    circleReturnInverseFieldLinear hS travel margin hmargin hdiv
+  have hF : ∀ u, CircleMember T γ (F u) :=
+    circleReturnInverseField_member hS travel margin hmargin hdiv k hA hbound hM hH
+  have hb : ∀ n, ∃ B : ℝ≥0, ∀ u,
+      circleNorm T γ n (F u) ≤ (B : ℝ) * S.grading (n + (3 + k)) u := by
+    intro n
+    refine ⟨⟨circleReturnL2Constant * A, mul_nonneg circleReturnL2Constant_nonneg hA⟩, ?_⟩
+    intro u
+    have hu := hS.2.2.2.1 u
+    have h := circleNorm_le_of_L2_derivative_bound hu n 3 k
+      (mul_nonneg circleReturnL2Constant_nonneg hA) hM hH
+      (circleReturnSolution_weighted_L2_bound hu travel margin hmargin hdiv k hbound)
+    have hg : circleNorm T γ (n + 3 + k) (S.decode u) ≤
+        S.grading (n + (3 + k)) u := by
+      rw [Nat.add_assoc]
+      exact ((circleGrading_le_iff_circleNorm hS (n + (3 + k)) u
+        (apply_nonneg _ _)).mp (le_refl (S.grading (n + (3 + k)) u)))
+        (n + (3 + k)) le_rfl
+    exact h.trans (mul_le_mul_of_nonneg_left hg
+      (mul_nonneg circleReturnL2Constant_nonneg hA))
+  exact liftCircleLinear_isTame hS F hF S.grading
+    (gradedSeminorm_monotone (fun i => S.level i) S.bond) (3 + k) hb
 
 theorem circleReturnInverseLinear_odd (u : S.Space) (m : ℕ) (θ : ℝ) :
     S.decode (circleReturnInverseLinear hS travel margin hmargin hdiv k hA hbound hM hH u) m (-θ) =
       -S.decode (circleReturnInverseLinear hS travel margin hmargin hdiv k hA hbound hM hH u) m θ := by
-  rw [circleReturnInverseLinear_decode, circleReturnInverseLinear_decode]
+  rw [circleReturnInverseLinear_decode]
   exact odd_circleReturnSolution _ _ θ
 
 theorem circleReturnInverseLinear_right_inverse (u : S.Space)

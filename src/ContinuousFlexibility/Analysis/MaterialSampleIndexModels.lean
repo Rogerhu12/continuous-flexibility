@@ -36,8 +36,10 @@ theorem exists_pos_mul_bound_of_cofinite
   by_cases hm : f m ≤ K * g m
   · exact hm.trans (mul_le_mul_of_nonneg_right (le_max_left _ _) (hg m).le)
   · have hmb : m ∈ bad := hfinite.mem_toFinset.mpr hm
-    have hterm : |f m / g m| ≤ S :=
-      Finset.single_le_sum (fun _ _ => abs_nonneg _) hmb
+    have hterm : |f m / g m| ≤ S := by
+      dsimp only [S]
+      exact Finset.single_le_sum (f := fun n : ℕ => |f n / g n|)
+        (fun _ _ => abs_nonneg _) hmb
     have hratio : f m / g m ≤ C :=
       (le_abs_self _).trans (hterm.trans ((by linarith : S ≤ 1 + S).trans (le_max_right _ _)))
     exact (div_le_iff₀ (hg m)).mp hratio
@@ -68,7 +70,8 @@ theorem materialSample_eventually_endpoint_models
   rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, hend, _, _, _, _, hsamp, _, hcomp⟩
   obtain ⟨d0, δ, hd0, hδ, hδbound, hleft, hright⟩ := hend
   obtain ⟨C, A, hC, _, hcmp⟩ := hcomp
-  obtain ⟨_, hbounds⟩ := hRef
+  have hRef' := hRef
+  obtain ⟨_, hbounds⟩ := hRef'
   let L := C + Real.sqrt |Real.log d0|
   have hL : 0 ≤ L := add_nonneg hC.le (Real.sqrt_nonneg _)
   refine ⟨d0, L, hd0, hL, ?_⟩

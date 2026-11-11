@@ -32,7 +32,7 @@ def stateChartLine (S : PhysicalSpacesData) (z : AnnularState S × ℝ)
 
 theorem stateChartLine_eq_add_smul (S : PhysicalSpacesData)
     (z : AnnularState S × ℝ) (w : CircleSpace S) (s : ℝ) :
-    stateChartLine S z w s = (z.1 + s • ((0, (0, (0, w))) : AnnularState S), z.2) := by
+    stateChartLine S z w s = (z.1 + @SMul.smul ℝ (AnnularState S) inferInstance s (0, (0, (0, w))), z.2) := by
   change ((z.1.1, (z.1.2.1, (z.1.2.2.1, z.1.2.2.2 + s • w))), z.2) =
     ((z.1.1 + s • (0 : HeightPair S), (z.1.2.1 + s • (0 : ℝ),
       (z.1.2.2.1 + s • (0 : CircleSpace S), z.1.2.2.2 + s • w))), z.2)
@@ -75,11 +75,11 @@ theorem stateChartLine_eventually_mem (S : PhysicalSpacesData)
   filter_upwards [hn] with s hs
   rw [stateChartLine_eq_add_smul]
   refine ⟨?_, hz.2⟩
-  change p (z.1 + s • d - C.referenceState) < ε
+  change p (z.1 + @SMul.smul ℝ (AnnularState S) inferInstance s d - C.referenceState) < ε
   calc
-    p (z.1 + s • d - C.referenceState) =
-        p ((z.1 - C.referenceState) + s • d) := congrArg p (by abel)
-    _ ≤ p (z.1 - C.referenceState) + p (s • d) := map_add_le_add p _ _
+    p (z.1 + @SMul.smul ℝ (AnnularState S) inferInstance s d - C.referenceState) =
+        p ((z.1 - C.referenceState) + @SMul.smul ℝ (AnnularState S) inferInstance s d) := congrArg p (by abel)
+    _ ≤ p (z.1 - C.referenceState) + p (@SMul.smul ℝ (AnnularState S) inferInstance s d) := map_add_le_add p _ _
     _ = p (z.1 - C.referenceState) + ‖s‖ * p d := by rw [map_smul_eq_mul]
     _ < ε := hs
 
@@ -194,8 +194,8 @@ theorem N01Properties.hasDerivAt_returnResidual_chartDirection
       (S.circle (3 / 4 : ℝ)).decode v m (stateLeftChart S z.1 m θ))
     (hr : ∀ m θ, (S.circle (3 / 4 : ℝ)).decode r m θ = returnResidualField S C z m θ)
     (m : ℕ) (θ : ℝ) :
-    HasDerivAt (fun s => returnResidualField S C
-      (z.1 + s • ((0, (0, (0, w))) : AnnularState S), z.2) m θ)
+    HasDerivAt (fun s : ℝ => returnResidualField S C
+      (z.1 + @SMul.smul ℝ (AnnularState S) inferInstance s (0, (0, (0, w))), z.2) m θ)
       (circleRotationDifference S C v m θ + circleChartError S C z r v m θ) 0 := by
   simpa only [stateChartLine_eq_add_smul] using
     N01Properties.hasDerivAt_returnResidual_chartLine hN01 hS hT hz hsector w v r hv hw hr m θ

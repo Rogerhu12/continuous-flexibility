@@ -63,7 +63,8 @@ theorem N01Properties.transportedLeftChart_contDiff_one :
   have hi := N01Properties.minusReturnInverse_contDiff_one hN01 hS hT hz hsector m
   apply contDiff_iff_contDiffAt.mpr
   intro θ
-  exact ((hl.comp hi).sub contDiff_const).contDiffAt.congr_of_eventuallyEq
+  exact ((hl.comp hi).sub
+    (contDiff_const : ContDiff ℝ 1 (fun _ : ℝ => C.travel m))).contDiffAt.congr_of_eventuallyEq
     (Eventually.of_forall fun t => by simp only [Function.comp_def, Pi.sub_apply])
 
 theorem N01Properties.rightChartCandidate_contDiff_one :

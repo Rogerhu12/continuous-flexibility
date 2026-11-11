@@ -94,7 +94,7 @@ theorem circleWeighted_comp_L2_square_le
         ∫ θ, w ^ 2 * J θ ^ 2 ∂angleMeasure := by
       rw [hEq, integral_const_mul]
     _ ≤ ∫ _ : ℝ, K ^ 2 * E ∂angleMeasure :=
-      integral_mono hfi hci (Eventually.of_forall hpointSq)
+      integral_mono hfi hci hpointSq
     _ = (Real.pi * K ^ 2) * E := by
       rw [integral_const]
       simp only [measureReal_def, angleMeasure, Measure.restrict_apply_univ,
@@ -127,9 +127,9 @@ theorem circleComponentEnergy_comp_le
         T.H (T.sample m) ^ (-γ)) ^ 2) *
         eLpNorm (iteratedDeriv (j.val 0).val (circleComposeField u φ m))
           2 angleMeasure ^ 2 < ⊤ := by
-      simpa only [pow_two] using ENNReal.mul_lt_top
-        (ENNReal.ofReal_lt_top (r := (T.M (T.sample m) ^ (j.val 1).val *
-          T.H (T.sample m) ^ (-γ)) ^ 2)) (ENNReal.mul_lt_top hJfin hJfin)
+      apply ENNReal.mul_lt_top ENNReal.ofReal_lt_top
+      rw [pow_two]
+      exact ENNReal.mul_lt_top hJfin hJfin
     have hr : ENNReal.ofReal A * circleComponentEnergy T γ (s + 1) u m < ⊤ :=
       ENNReal.mul_lt_top ENNReal.ofReal_lt_top hE
     apply (ENNReal.toReal_le_toReal hl.ne hr.ne).mp

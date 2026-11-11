@@ -23,6 +23,8 @@ open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+
 theorem returnFlow_coprod_toSpan (a b : ℝ) :
     (ContinuousLinearMap.toSpanSingleton ℝ a).coprod
         (ContinuousLinearMap.toSpanSingleton ℝ b) =
@@ -107,8 +109,12 @@ theorem N01Properties.minusFlow_angular_deriv_hasStrictFDerivAt
     simpa only [iteratedDeriv_succ, iteratedDeriv_zero] using
       hN01.minusFlow_angular_iteratedDeriv_continuousOn hS hT hz hsector m 2
   have hlin : Continuous (fun c : ℝ => ContinuousLinearMap.toSpanSingleton ℝ c) := by
-    simpa only [ContinuousLinearMap.lsmul_flip_apply] using
-      (ContinuousLinearMap.lsmul ℝ ℝ : ℝ →L[ℝ] ℝ →L[ℝ] ℝ).flip.continuous
+    have heq : (fun c : ℝ => ContinuousLinearMap.toSpanSingleton ℝ c) =
+        (ContinuousLinearMap.toSpanSingletonLIE ℝ ℝ : ℝ → (ℝ →L[ℝ] ℝ)) := by
+      funext c
+      exact (ContinuousLinearMap.toSpanSingletonLIE_apply ℝ ℝ c).symm
+    rw [heq]
+    exact (ContinuousLinearMap.toSpanSingletonLIE ℝ ℝ).continuous
   have hpartial := hasStrictFDerivAt_uncurry_coprod
     (f := fun r => deriv (C.minusFlow z m r))
     (f₁ := fun r θ => ContinuousLinearMap.toSpanSingleton ℝ
@@ -118,19 +124,24 @@ theorem N01Properties.minusFlow_angular_deriv_hasStrictFDerivAt
       (deriv (deriv (C.minusFlow z m r)) θ))
     (by
       filter_upwards [hopen] with q hq
-      simpa only [Function.uncurry_def] using
+      simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using
         (hN01.minusFlow_angular_deriv_hasDerivAt_radial hS hT hz hsector m hq.1 q.2).hasFDerivAt)
     (by
       filter_upwards [hopen] with q hq
       have hreg : ContDiff ℝ 2 (C.minusFlow z m q.1) :=
         (hN01.minusFlow_angular_contDiff hS hT hz hsector m
           ⟨hq.1.1.le, hq.1.2.le⟩).of_le (by simp)
-      simpa only [Function.uncurry_def] using
+      simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using
         (hreg.differentiable_deriv_two q.2).hasDerivAt.hasFDerivAt)
-    (by simpa only [Function.uncurry_def] using
+    (by simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using
       hlin.continuousAt.comp ((hH.mul hJ).continuousAt hclosed))
-    (by simpa only [Function.uncurry_def] using hlin.continuousAt.comp (hJJ.continuousAt hclosed))
-  simpa only [Function.uncurry_def] using hpartial
+    (by simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using hlin.continuousAt.comp (hJJ.continuousAt hclosed))
+  simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
+        Function.hasUncurryInduction, id_eq, Function.comp_def] using hpartial
 
 theorem N01Properties.minusFlow_angular_deriv_contDiffAt_one
     (p : PolarPoint) (hp : p.1 ∈ Ioo (C.left m) (C.right m)) :
@@ -175,7 +186,8 @@ theorem N01Properties.minusFlow_contDiffAt_one
     exact ((hN01.minusCharacteristicSpeed_continuousAt hS hT hz hsector
       (p := (q.1, C.minusFlow z m q.1 q.2))
       ⟨⟨(hC.1 m).1.trans hq.1.1, hq.1.2.trans (hC.1 m).2.2⟩,
-        mem_univ _⟩).comp (continuousAt_fst.prodMk hΦ)).continuousWithinAt
+        mem_univ _⟩).comp (g := fun r : PolarPoint => (r.1, C.minusFlow z m r.1 r.2))
+        (continuousAt_fst.prodMk hΦ)).continuousWithinAt
   have hJ := (hN01.minusFlow_angular_deriv_continuousOn hS hT hz hsector m).mono
     (show U ⊆ Icc (C.left m) (C.right m) ×ˢ univ from
       fun q hq => ⟨⟨hq.1.1.le, hq.1.2.le⟩, hq.2⟩)

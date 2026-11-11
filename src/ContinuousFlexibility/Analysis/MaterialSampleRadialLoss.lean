@@ -97,7 +97,8 @@ theorem materialSample_radialE_rpow_le_M_of_index_bound
   have hdata := hT
   rcases hdata with ⟨_, hpos, _, _, _, _, _, _, _, _, _, hE, _, _, _, _, _, _⟩
   obtain ⟨CE, _, he⟩ := hE P
-  obtain ⟨_, hgeom⟩ := hRef
+  have hRef' := hRef
+  obtain ⟨_, hgeom⟩ := hRef'
   have hsample (m : ℕ) : T.sample m ∈ Ioo D.a D.b :=
     materialSample_mem_radialCore hT hgeom.2.1 m
   let F (m : ℕ) := materialE0 (A * ((D.cellIndex m : ℝ) + 1)) ^ R

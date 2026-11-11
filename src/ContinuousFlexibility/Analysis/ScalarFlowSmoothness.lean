@@ -103,6 +103,6 @@ theorem scalar_flow_angular_iteratedDeriv_continuousOn
     funext θ
     exact closedStripExtend_eq hab.le (fun q : PolarPoint => F q.1 q.2)
       (p := (p.1, θ)) hp.1
-  rw [heq]
+  exact congrArg (fun f : ℝ → ℝ => iteratedDeriv n f p.2) heq.symm
 
 end ContinuousFlexibility.Analysis
