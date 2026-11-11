@@ -72,7 +72,7 @@ theorem N01Properties.minusFlow_hasStrictFDerivAt
     (hN01.minusCharacteristicSpeed_continuousAt hS hT hz hsector
       (p := (p.1, C.minusFlow z m p.1 p.2))
       ⟨⟨(hcontrol.1 m).1.trans hp.1, hp.2.trans (hcontrol.1 m).2.2⟩,
-        mem_univ _⟩).comp (g := fun r : PolarPoint => (r.1, C.minusFlow z m r.1 r.2))
+        mem_univ _⟩).comp (f := fun r : PolarPoint => (r.1, C.minusFlow z m r.1 r.2))
         (continuousAt_fst.prodMk hΦ)
   have hlin : Continuous (fun c : ℝ => ContinuousLinearMap.toSpanSingleton ℝ c) := by
     have heq : (fun c : ℝ => ContinuousLinearMap.toSpanSingleton ℝ c) =

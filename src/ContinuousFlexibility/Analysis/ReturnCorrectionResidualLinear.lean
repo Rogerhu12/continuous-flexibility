@@ -69,10 +69,19 @@ theorem N01Properties.returnCorrectionDisplacementLinear_integral
         ∫ t in (0 : ℝ)..1,
           deriv (fun s => C.minusReturnInverse z m (C.rightChartInverse z m s))
             (y + t * returnResidualField S C z m y) := by
-  rw [returnCorrectionDisplacementLinear_apply,
-    returnCorrection_dslope_integral
-      (hN01.returnTransportInverse_contDiff_one hS hT hz hsector m)]
-  ring
+  let y := rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ)
+  let G : ℝ → ℝ := fun s => C.minusReturnInverse z m (C.rightChartInverse z m s)
+  let d := returnResidualField S C z m y
+  have hG : ContDiff ℝ 1 G :=
+    hN01.returnTransportInverse_contDiff_one hS hT hz hsector m
+  have hdiv : dslope G y (y + d) =
+      ∫ t in (0 : ℝ)..1, deriv G (y + t * d) :=
+    returnCorrection_dslope_integral (F := G) hG y d
+  rw [returnCorrectionDisplacementLinear_apply]
+  change dslope G y (y + d) * (S.circle (3 / 4 : ℝ)).decode ρ m y =
+    (S.circle (3 / 4 : ℝ)).decode ρ m y *
+      ∫ t in (0 : ℝ)..1, deriv G (y + t * d)
+  rw [hdiv, mul_comm]
 
 theorem returnCorrectionDisplacementLinear_at_actual
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -183,8 +192,9 @@ theorem returnCorrectionDriftSpeedLinear_at_actual
   have href := minusCharacteristicSpeed_reflection (originalCoefficients D S C z)
     p.1 p.2 hpar.1 hpar.2.1 hpar.2.2
   simp only [returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply,
-    returnCorrectionVelocityLinear_at_actual hN01 hN02 χ hz hsector, href,
-    minusCharacteristicSpeed, plusCharacteristicSpeed]
+    returnCorrectionVelocityLinear_at_actual hN01 hN02 χ hz hsector]
+  simp only [href]
+  unfold minusCharacteristicSpeed plusCharacteristicSpeed
   constructor <;> ring
 
 end ContinuousFlexibility.Statements

@@ -13,9 +13,11 @@ variation formulas. Its grading estimate is uniform in the component.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
+
+-- Use the canonical product action directly, avoiding a costly search
+-- through the abstract models that make up the state space.
+local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set Filter
 open scoped Topology ContDiff

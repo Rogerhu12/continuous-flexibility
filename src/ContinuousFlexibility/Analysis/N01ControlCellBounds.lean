@@ -12,9 +12,11 @@ a reference cell is assumed.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
+
+-- Use the canonical product action directly, avoiding a costly search
+-- through the abstract models that make up the state space.
+local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set
 open scoped ContDiff

@@ -43,21 +43,29 @@ variable {T : MaterialData} {γ : ℝ} {S : CircleModelData}
   (hjets : ∀ s, ∃ B : ℝ, 0 ≤ B ∧
     ∀ m i θ, 1 ≤ i → i ≤ s → |iteratedDeriv i (φ m) θ| ≤ B ^ i)
 
+include hS hM hH hφ hp hjets
+
+theorem circleComposeFieldLinear_member (u : S.Space) :
+    CircleMember T γ (circleComposeFieldLinear S φ u) := by
+  change CircleMember T γ (circleComposeField (S.decode u) φ)
+  exact circleMember_comp_of_uniform_jets (u := S.decode u) (φ := φ)
+    (hS.2.2.2.1 u) hM hH hφ hp hjets
+
 def circleComposeModelLinear : S.Space →ₗ[ℝ] S.Space :=
   liftCircleLinear hS (circleComposeFieldLinear S φ)
-    (fun u => circleMember_comp_of_uniform_jets (hS.2.2.2.1 u) hM hH hφ hp hjets)
+    (circleComposeFieldLinear_member hS hM hH φ hφ hp hjets)
 
 theorem circleComposeModelLinear_decode (u : S.Space) :
     S.decode (circleComposeModelLinear hS hM hH φ hφ hp hjets u) =
       circleComposeField (S.decode u) φ :=
   liftCircleLinear_decode hS (circleComposeFieldLinear S φ)
-    (fun v => circleMember_comp_of_uniform_jets (hS.2.2.2.1 v) hM hH hφ hp hjets) u
+    (circleComposeFieldLinear_member hS hM hH φ hφ hp hjets) u
 
 theorem circleComposeModelLinear_isTame :
     IsTameLinear S.grading S.grading
       (circleComposeModelLinear hS hM hH φ hφ hp hjets) 1 0 := by
   apply liftCircleLinear_isTame hS (circleComposeFieldLinear S φ)
-    (fun u => circleMember_comp_of_uniform_jets (hS.2.2.2.1 u) hM hH hφ hp hjets)
+    (circleComposeFieldLinear_member hS hM hH φ hφ hp hjets)
     S.grading (gradedSeminorm_monotone (fun i => S.level i) S.bond) 1
   intro n
   obtain ⟨B, hB0, hB⟩ := hjets n
@@ -117,8 +125,8 @@ theorem circleModelLift_uniform_jets {T : MaterialData} {γ : ℝ} {S : CircleMo
   have hsplit :
       iteratedDeriv i (circleModelLift S u m) θ =
         iteratedDeriv i (fun t : ℝ => t) θ + iteratedDeriv i (S.decode u m) θ := by
-    exact iteratedDeriv_fun_add (contDiffAt_id.of_le (by simp))
-      (hui.contDiffAt.of_le (by simp))
+    have hidreg : ContDiffAt ℝ (i : ℕ∞ω) (fun t : ℝ => t) θ := contDiffAt_id
+    exact iteratedDeriv_fun_add hidreg (hui.contDiffAt.of_le (by simp))
   have hid : |iteratedDeriv i (fun t : ℝ => t) θ| ≤ 1 := by
     rw [iteratedDeriv_fun_id, if_neg (by omega : i ≠ 0)]
     split_ifs <;> norm_num

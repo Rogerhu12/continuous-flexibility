@@ -58,7 +58,7 @@ theorem materialSample_H_radialE_envelope
           materialE0 (D.cellIndex m : ℝ) ^ A) := by ring
     _ ≤ Real.exp (-A) * (K * materialH (D.cellIndex m : ℝ) ^ (γ / 16)) :=
       mul_le_mul_of_nonneg_left he (Real.exp_pos _).le
-    _ = _ := by rw [materialH_natCast]; ring
+    _ = _ := by rw [materialH_natCast, radialH]; ring
 
 /-- This coarse upper bound is sufficient when the sample height occurs
 with a negative exponent in the control-curvature estimate. -/

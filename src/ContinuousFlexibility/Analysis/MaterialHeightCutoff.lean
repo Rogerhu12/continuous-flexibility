@@ -48,7 +48,7 @@ theorem mixedDerivative_radial_mul {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
   have hg : ContDiff ℝ ∞ (fun r => iteratedDeriv b (fun θ => f (r, θ)) p.2) := by
     have h := (contDiff_mixedDerivative hf 0 b).comp
       (contDiff_id.prodMk (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => p.2)))
-    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero] using h
+    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero, id_eq] using h
   have hangle (r : ℝ) :
       iteratedDeriv b (fun θ => χ r * f (r, θ)) p.2 =
         χ r * iteratedDeriv b (fun θ => f (r, θ)) p.2 :=
@@ -56,8 +56,8 @@ theorem mixedDerivative_radial_mul {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
   unfold mixedDerivative
   simp only [hangle]
   simpa only [Pi.mul_apply] using
-    iteratedDeriv_mul (hχ.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ ∞))
-      (hg.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ ∞))
+    iteratedDeriv_mul (hχ.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ (∞ : ℕ∞ω)))
+      (hg.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ (∞ : ℕ∞ω)))
 
 theorem weightedPhysicalJet_cutoff {D : ReferenceData} {T : MaterialData}
     {γ : ℝ} {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
@@ -88,10 +88,8 @@ theorem materialCutoffHeight_member_of_bounded_jets
   · intro r θ
     simp only [materialCutoffHeight, hf.2.1 r θ]
   · intro p
-    have hp := hf.2.2.1 p
-    change f (p.1 + 0, p.2 + Real.pi) = f p at hp
-    simpa only [materialCutoffHeight, Prod.fst_add, Prod.snd_add, add_zero, hp] using
-      congrArg (fun t => χ (T.rho p.1) * t) hp
+    simpa only [materialCutoffHeight, Prod.fst_add, add_zero] using
+      congrArg (fun t => χ (T.rho p.1) * t) (hf.2.2.1 p)
   · intro p hp
     simp only [materialCutoffHeight, hf.2.2.2.1 p hp, mul_zero]
   · intro a b c
@@ -109,7 +107,7 @@ theorem materialCutoffHeight_member_of_bounded_jets
         apply (hj.const_mul K).of_le
           ((hχi.continuous.comp continuous_fst).aestronglyMeasurable.mul hj.aestronglyMeasurable)
         exact Filter.Eventually.of_forall fun p => by
-          simp only [Real.norm_eq_abs, abs_mul, abs_of_nonneg hK]
+          simp only [Pi.mul_apply, Function.comp_apply, Real.norm_eq_abs, abs_mul, abs_of_nonneg hK]
           exact mul_le_mul_of_nonneg_right (hKi p.1) (abs_nonneg _)
       simpa only [mul_assoc] using hprod.const_mul (a.choose i : ℝ)
     have hsum := memLp_finsetSum (Finset.range (a + 1)) (fun i _ => hterm i)
@@ -120,16 +118,18 @@ theorem materialCutoffHeight_member_of_bounded_jets
 theorem compactCutoff_iteratedDeriv_bounded {χ : ℝ → ℝ}
     (hχ : ContDiff ℝ ∞ χ) (hsupp : HasCompactSupport χ) (n : ℕ) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ x, |iteratedDeriv n χ x| ≤ K := by
-  have hc : ContDiff ℝ ∞ (iteratedDeriv n χ) := by
-    rw [iteratedDeriv_eq_iterate]
-    exact ContDiff.iterate_deriv n hχ
   have hs : HasCompactSupport (iteratedDeriv n χ) := by
     induction n with
     | zero => simpa only [iteratedDeriv_zero] using hsupp
     | succ n ih => simpa only [iteratedDeriv_succ] using ih.deriv
+  have hc : ContDiff ℝ ∞ (iteratedDeriv n χ) := by
+    rw [iteratedDeriv_eq_iterate]
+    exact ContDiff.iterate_deriv n hχ
   obtain ⟨K, hK⟩ := hs.exists_bound_of_continuous hc.continuous
   refine ⟨max K 0, le_max_right _ _, fun x => ?_⟩
-  exact (by simpa only [Real.norm_eq_abs] using hK x).trans (le_max_left _ _)
+  have hx : |iteratedDeriv n χ x| ≤ K := by
+    simpa only [Real.norm_eq_abs] using hK x
+  exact hx.trans (le_max_left _ _)
 
 theorem materialCutoffHeight_member
     {D : ReferenceData} {T : MaterialData} {γ : ℝ}

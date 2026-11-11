@@ -186,7 +186,7 @@ theorem N01Properties.minusFlow_contDiffAt_one
     exact ((hN01.minusCharacteristicSpeed_continuousAt hS hT hz hsector
       (p := (q.1, C.minusFlow z m q.1 q.2))
       ⟨⟨(hC.1 m).1.trans hq.1.1, hq.1.2.trans (hC.1 m).2.2⟩,
-        mem_univ _⟩).comp (g := fun r : PolarPoint => (r.1, C.minusFlow z m r.1 r.2))
+        mem_univ _⟩).comp (f := fun r : PolarPoint => (r.1, C.minusFlow z m r.1 r.2))
         (continuousAt_fst.prodMk hΦ)).continuousWithinAt
   have hJ := (hN01.minusFlow_angular_deriv_continuousOn hS hT hz hsector m).mono
     (show U ⊆ Icc (C.left m) (C.right m) ×ˢ univ from

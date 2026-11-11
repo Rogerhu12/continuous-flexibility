@@ -15,10 +15,12 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
+-- Use the canonical product action directly, avoiding a costly search
+-- through the abstract models that make up the state space.
+local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+
 open Set Filter
 open scoped Topology ContDiff
-
-set_option backward.isDefEq.respectTransparency false
 
 /-- The affine line which changes only the left-chart coordinate. -/
 def stateChartLine (S : PhysicalSpacesData) (z : AnnularState S × ℝ)
