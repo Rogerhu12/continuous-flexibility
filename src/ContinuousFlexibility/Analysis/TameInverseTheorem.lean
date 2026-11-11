@@ -71,12 +71,12 @@ theorem smoothTameOn_inverseFamily
   have hJVlocal (k : ℕ) : LocallyTameOn (jetGrading (pairGrading p r) k) q
       ((U ×ˢ univ) ×ˢ univ) (fun z => JV.D k z.1 z.2) := by
     have he := (inverseExpressionJet (X := X) (Y := Y) (Z := Z) k).locallyTameOn_eval
-      hp hq hr (tupleGrading_monotone _ (fun _ => pairGrading_monotone hp hr))
+      hp hq hr (tupleGrading_monotone _ (fun _ => tamePairGrading_monotone hp hr))
       (inverseExpressionJet_zeroLoss p q r k) J VC hVlocal hJlocal
     apply (inverseLocallyTame_fst he).congr
     intro z hz
     exact inverseFamilySmoothDirections_apply J hU VC hleftC hrightC hVCcont k hz.1.1 z.2
-  have hsmooth := smoothTameOn_of_locallyTameOn_jets (pairGrading_monotone hp hr)
+  have hsmooth := smoothTameOn_of_locallyTameOn_jets (tamePairGrading_monotone hp hr)
     (withSeminorms_pairGrading htp htr) JV hJVlocal
   exact smoothTameOn_congr hsmooth (fun z hz => hVC z.1 hz.1 z.2)
 

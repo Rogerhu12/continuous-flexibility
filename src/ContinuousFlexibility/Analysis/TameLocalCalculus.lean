@@ -169,7 +169,7 @@ theorem pairGrading_apply (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ
   simp only [pairGrading, add_apply, Seminorm.comp_apply,
     LinearMap.fst_apply, LinearMap.snd_apply]
 
-theorem pairGrading_monotone {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+theorem tamePairGrading_monotone {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
     (hp : Monotone p) (hq : Monotone q) : Monotone (pairGrading p q) := by
   intro m n hmn x
   simp only [pairGrading_apply]

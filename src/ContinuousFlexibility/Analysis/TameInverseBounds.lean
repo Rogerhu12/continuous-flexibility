@@ -198,7 +198,7 @@ theorem TameInverseExpression.locallyTameOn_eval
       ((U ×ˢ univ) ×ˢ univ) (fun z => e.eval J V z.1 z.2) := by
   let d := pairGrading (pairGrading p r) a
   let S : Set ((X × Z) × A) := (U ×ˢ univ) ×ˢ univ
-  have hd : Monotone d := pairGrading_monotone (pairGrading_monotone hp hr) ha
+  have hd : Monotone d := tamePairGrading_monotone (tamePairGrading_monotone hp hr) ha
   have hstate : LocallyTameOn d (pairGrading p r) S (fun z => z.1) :=
     locallyTameOn_of_isTameLinear (ContinuousLinearMap.fst ℝ (X × Z) A)
       (inverseTame_fst (pairGrading p r) a) S

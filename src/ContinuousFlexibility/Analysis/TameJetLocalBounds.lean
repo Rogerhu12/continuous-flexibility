@@ -34,7 +34,7 @@ theorem jetGrading_apply (p : ℕ → Seminorm ℝ E) (k n : ℕ) (z : E × (Fin
 
 theorem jetGrading_monotone {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (k : ℕ) :
     Monotone (jetGrading p k) :=
-  pairGrading_monotone hp (tupleGrading_monotone _ (fun _ => hp))
+  tamePairGrading_monotone hp (tupleGrading_monotone _ (fun _ => hp))
 
 theorem exists_seminormBall_subset_nhds {p : ℕ → Seminorm ℝ E}
     (hp : Monotone p) (ht : WithSeminorms p) {x0 : E} {W : Set E}
