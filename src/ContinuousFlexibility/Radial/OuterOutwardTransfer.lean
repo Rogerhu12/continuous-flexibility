@@ -20,7 +20,7 @@ def outerFluxReflection : (ℝ × ℝ) ≃ₗᵢ[ℝ] (ℝ × ℝ) where
   invFun v := (v.1, -v.2)
   left_inv v := by simp
   right_inv v := by simp
-  map_add' v w := by ext <;> simp
+  map_add' v w := by ext <;> simp [add_comm]
   map_smul' r v := by ext <;> simp
   norm_map' v := by
     change max |v.1| |-v.2| = max |v.1| |v.2|
@@ -44,7 +44,8 @@ def outerReflectedTransfer (A : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ)) :
 @[simp] theorem outerReflectedTransfer_symm
     (A : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ)) :
     (outerReflectedTransfer A).symm = outerReflectedTransfer A.symm := by
-  ext v
+  apply ContinuousLinearEquiv.ext
+  intro v
   rfl
 
 theorem outerReflectedTransfer_norm
@@ -63,6 +64,7 @@ theorem outerReflectedTransfer_norm
     have h := (outerReflectedTransfer A).toContinuousLinearMap.le_opNorm (outerFluxReflection v)
     change ‖outerFluxReflection (A (outerFluxReflection (outerFluxReflection v)))‖ ≤
       ‖(outerReflectedTransfer A).toContinuousLinearMap‖ * ‖outerFluxReflection v‖ at h
+    change ‖A v‖ ≤ ‖(outerReflectedTransfer A).toContinuousLinearMap‖ * ‖v‖
     simpa only [outerFluxReflection_twice, outerFluxReflection.norm_map] using h
 
 /-- The true outward transfer, for either radial end. -/

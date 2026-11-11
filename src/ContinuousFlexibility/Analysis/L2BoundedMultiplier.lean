@@ -22,8 +22,9 @@ variable (μ : Measure ℝ) {φ : ℝ → ℝ} {M : ℝ}
 theorem l2Multiplier_memLp (hφ : AEStronglyMeasurable φ μ)
     (hbound : ∀ᵐ x ∂μ, |φ x| ≤ M) (f : Lp ℝ 2 μ) :
     MemLp (fun x => φ x * f x) 2 μ := by
-  apply (Lp.memLp f).of_le_mul (hφ.mul (Lp.aestronglyMeasurable f))
+  apply (Lp.memLp f).of_le_mul (c := M) (hφ.mul (Lp.aestronglyMeasurable f))
   filter_upwards [hbound] with x hx
+  change ‖φ x * f x‖ ≤ M * ‖f x‖
   rw [norm_mul, Real.norm_eq_abs (φ x)]
   exact mul_le_mul_of_nonneg_right hx (norm_nonneg _)
 
@@ -95,8 +96,9 @@ theorem l2BoundedMultiplier_comp
     (hψ : AEStronglyMeasurable ψ μ)
     (hφb : ∀ᵐ x ∂μ, |φ x| ≤ M) (hψb : ∀ᵐ x ∂μ, |ψ x| ≤ N) :
     (l2BoundedMultiplier μ hφ hφb).comp (l2BoundedMultiplier μ hψ hψb) =
-      l2BoundedMultiplier μ (hφ.mul hψ) (by
+      l2BoundedMultiplier μ (M := M * N) (hφ.mul hψ) (by
         filter_upwards [hφb, hψb] with x hx hy
+        change |φ x * ψ x| ≤ M * N
         rw [abs_mul]
         exact mul_le_mul hx hy (abs_nonneg _) (le_trans (abs_nonneg _) hx)) := by
   have hprod : ∀ᵐ x ∂μ, |φ x * ψ x| ≤ M * N := by

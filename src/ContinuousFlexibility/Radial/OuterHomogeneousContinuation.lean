@@ -34,7 +34,9 @@ theorem hasDerivAt_morseGlueCut_of_matching {c d : ℝ} {f g : ℝ → ℝ}
     HasDerivAt (morseGlueCut c f g) d c := by
   have hL : HasDerivWithinAt (morseGlueCut c f g) d (Iic c) c :=
     hf.hasDerivWithinAt.congr_of_mem
-      (fun x hx => by simp only [morseGlueCut, hx, ite_true]) le_rfl
+      (fun x hx => by
+        change x ≤ c at hx
+        simp only [morseGlueCut, hx, ite_true]) le_rfl
   have hR : HasDerivWithinAt (morseGlueCut c f g) d (Ici c) c :=
     hg.hasDerivWithinAt.congr_of_mem
       (fun x hx => morseGlueCut_eq_right_of_matching hmatch hx) le_rfl
@@ -61,9 +63,11 @@ theorem outerFirstOrderSystem_glue {a b c : ℝ} {alpha beta uL zL uR zR : ℝ �
   · have hxl : x ∈ Icc a c := ⟨hx.1, hxc.le⟩
     have hug : morseGlueCut c uL uR =ᶠ[𝓝 x] uL := by
       filter_upwards [Iio_mem_nhds hxc] with y hy
+      change y < c at hy
       simp only [morseGlueCut, hy.le, ite_true]
     have hzg : morseGlueCut c zL zR =ᶠ[𝓝 x] zL := by
       filter_upwards [Iio_mem_nhds hxc] with y hy
+      change y < c at hy
       simp only [morseGlueCut, hy.le, ite_true]
     simpa only [morseGlueCut, hxc.le, ite_true] using
       ⟨(hL x hxl).1.congr_of_eventuallyEq hug, (hL x hxl).2.congr_of_eventuallyEq hzg⟩
@@ -78,9 +82,11 @@ theorem outerFirstOrderSystem_glue {a b c : ℝ} {alpha beta uL zL uR zR : ℝ �
   · have hxr : x ∈ Ico c b := ⟨hcx.le, hx.2⟩
     have hug : morseGlueCut c uL uR =ᶠ[𝓝 x] uR := by
       filter_upwards [Ioi_mem_nhds hcx] with y hy
+      change c < y at hy
       simp only [morseGlueCut, not_le_of_gt hy, ite_false]
     have hzg : morseGlueCut c zL zR =ᶠ[𝓝 x] zR := by
       filter_upwards [Ioi_mem_nhds hcx] with y hy
+      change c < y at hy
       simp only [morseGlueCut, not_le_of_gt hy, ite_false]
     simpa only [morseGlueCut, not_le_of_gt hcx, ite_false] using
       ⟨(hR x hxr).1.congr_of_eventuallyEq hug, (hR x hxr).2.congr_of_eventuallyEq hzg⟩

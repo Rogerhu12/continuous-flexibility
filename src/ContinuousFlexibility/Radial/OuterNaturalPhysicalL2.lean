@@ -124,6 +124,8 @@ theorem morsePhysicalDeepTail_integrable_lift_sq
   have hi : IntegrableOn (fun x => T.p x * u x ^ 2) (Ioo T.entrance T.endpoint) :=
     (tail_integrable_density_iff ((deepTail_contDiffOn hT).mono Ioo_subset_Ico_self)
       (fun x hx => deepTail_pos hT x (Ioo_subset_Ico_self hx)) _).mp hu.integrable_sq
+  change Integrable (fun r => tailPhysicalLift D right j u r ^ 2)
+    (outerRadialIntervalMeasure D (tailPhysicalRadius right '' Ioo T.entrance T.endpoint))
   rw [← outerPhysicalPullbackMeasure_map,
     (measurableEmbedding_tailPhysicalRadius right).integrable_map_iff,
     outerPhysicalPullbackMeasure, integrable_withDensity_iff_integrable_smul'
@@ -153,10 +155,11 @@ theorem morsePhysicalDeepTail_lift_memLp
     · exact hD.1.trans hD.2.1
   have hc : ContinuousOn (tailPhysicalLift D right j u) s := by
     rintro r ⟨x, hx, rfl⟩
-    apply ContinuousAt.continuousWithinAt
-    apply ContDiffAt.continuousAt
-    apply contDiffAt_tailPhysicalLift hend.ne' (tailPhysicalRadius_pos right x)
-    simpa only [tailPhysicalLog_radius] using tailNatural_contDiffAt hu hx
+    have hcd : ContDiffAt ℝ ∞ (tailPhysicalLift D right j u)
+        (tailPhysicalRadius right x) := by
+      apply contDiffAt_tailPhysicalLift hend.ne' (tailPhysicalRadius_pos right x)
+      simpa only [tailPhysicalLog_radius] using tailNatural_contDiffAt hu hx
+    exact hcd.continuousAt.continuousWithinAt
   have hm : AEStronglyMeasurable (tailPhysicalLift D right j u)
       (outerRadialIntervalMeasure D s) :=
     AEStronglyMeasurable.mono_ac
@@ -234,7 +237,7 @@ theorem morsePhysicalDeepTail_interval_measure_eq
             refine ⟨-x, ⟨by linarith only [hx.2], by linarith only [hx.1]⟩, neg_neg x⟩
         change (exp ∘ Neg.neg) '' Ioo (-log entrance) (-log D.a) = Ioo D.a entrance
         calc
-          _ = exp '' (Neg.neg '' Ioo (-log entrance) (-log D.a)) := by rw [Set.image_image]
+          _ = exp '' (Neg.neg '' Ioo (-log entrance) (-log D.a)) := by rw [Set.image_image]; rfl
           _ = _ := by rw [hn, image_exp_Ioo, exp_log hD.1, exp_log hentry]
   have hs : MeasurableSet (tailPhysicalRadius right '' Ioo T.entrance T.endpoint) :=
     (measurableEmbedding_tailPhysicalRadius right).measurableSet_image.mpr measurableSet_Ioo
@@ -271,6 +274,7 @@ theorem morsePhysicalDeepTail_lift_radial_norm_le
         sqrt scale * exp ((exponent / 2) * (n : ℝ) ^ 2) := by
   apply outerNatural_toLp_norm_le _ hscale n
   have hi := morsePhysicalDeepTail_integral_lift_sq hD hT u
+  dsimp only at hi
   rw [morsePhysicalDeepTail_interval_measure_eq hD hentry hT] at hi
   rw [hi]
   exact hbound

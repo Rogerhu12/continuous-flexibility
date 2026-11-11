@@ -136,7 +136,10 @@ theorem morseRealizedJoin_state_integrals {T : MorseChainData} {σ : ℕ → ℝ
         apply mul_le_mul_of_nonneg_left _ hscale.le
         exact (div_le_div_of_nonneg_right hwidth (hwp l (left_mem_Icc.mpr hj.1.le)).le).trans
           (div_le_div_of_nonneg_left (by positivity) (by positivity) hdeparture)
-      _ = _ := by field_simp [hlam.ne', hK.ne', hA.ne'] <;> ring
+      _ = _ := by
+        change scale * ((C 0 * (max A B) ^ 12) / (lam * A ^ 5 / K)) =
+          C 0 * K * (max A B) ^ 12 * (scale / lam) * A⁻¹ ^ 5
+        field_simp [hlam.ne', hK.ne', hA.ne'] <;> ring
   · calc
       _ ≤ (j ^ 2 / scale) * (D.w r / D.a) :=
         mul_le_mul_of_nonneg_left hi.2.2.2 (div_nonneg (sq_nonneg j) hscale.le)

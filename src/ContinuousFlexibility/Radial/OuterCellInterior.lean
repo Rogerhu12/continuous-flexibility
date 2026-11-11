@@ -176,16 +176,16 @@ theorem morseRealized_cell_energy_on {T : MorseChainData} {σ : ℕ → ℝ}
   have hl : T.leftX side n = morseCellLeftCut := hret.2.2.1
   have hr : T.rightX side n =
       morseRightCapEnd (morseChainA T n) (morseChainB T n) (1 / 100) := by
-    simpa only [morseRightCapEnd, morseRightCapLength, morseChainRightTurn] using hret.2.2.2.2.2.1
+    simpa only [morseRightCapEnd, morseRightCapLength, morseChainRightTurn,
+      morseRightTurn, morseRightRootT] using hret.2.2.2.2.2.1
   have hp := morseRealized_state_pullback h hσ hscale side n hn hstate
   rw [hl, hr] at hp hX hY
   have he := morse_cell_energy_on (j := j) hret.1 hret.2.1
     (by norm_num : (0 : ℝ) ≤ 1 / 100)
     (fun x hx => (hp x hx).1) (fun x hx => (hp x hx).2) hX hY
-  dsimp only at he
   rw [hsX, htY] at he
   have hweighted : u t ^ 2 + q ^ 2 * z t ^ 2 ≤ (u s ^ 2 + q ^ 2 * z s ^ 2) * F := by
-    simpa only [mul_pow] using he
+    simpa only [mul_pow, q, F] using he
   have hqhi : q ^ 2 ≤ M ^ 2 := pow_le_pow_left₀ hq.le hhi 2
   have hprod : 1 ≤ M * q := by
     have hh := mul_le_mul_of_nonneg_right hlo hq.le
