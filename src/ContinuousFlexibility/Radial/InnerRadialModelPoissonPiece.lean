@@ -129,6 +129,7 @@ theorem exists_innerRadialModelPoissonPiece (ξ : EuclideanSpace ℝ (Fin n)) :
     innerLiouvilleLocalizedUnit_flux_solution D hB M hlam hR hscale hp hcore hweight
       U hU hv hDw j hcoeff i
   choose dP vP hPdom hPtrace hPpot hProw hPweak hPflux using hunit
+  change (∀ i, if B.bordered then ⟪col, (P i).1⟫_ℝ = 0 else (P i).2 = 0) at hProw
   let qP : Fin 2 → InnerRadialH1Pair D := fun i => ((P i).1, dP i)
   let q := z 0 • qP 0 + z 1 • qP 1
   let v := z 0 • vP 0 + z 1 • vP 1
@@ -147,7 +148,7 @@ theorem exists_innerRadialModelPoissonPiece (ξ : EuclideanSpace ℝ (Fin n)) :
     cases hb : B.bordered with
     | false =>
       simp only [hb, Bool.false_eq_true, ite_false] at hProw ⊢
-      refine ⟨?_, rfl⟩
+      refine ⟨?_, True.intro⟩
       simp only [out, Prod.snd_add, Prod.smul_snd, smul_eq_mul,
         hProw 0, hProw 1, mul_zero, add_zero]
     | true =>
@@ -201,7 +202,8 @@ theorem exists_innerRadialModelPoissonPiece (ξ : EuclideanSpace ℝ (Fin n)) :
     { q := q, potential := v, borderScalar := out.2, domain := hfull.1,
       trace := hfull.2, potential_relation := hpotential, row := hrow, weak := hweak }
   refine ⟨solution, ?_, rfl, ?_⟩
-  · simp only [solution, q, qP, out, Prod.fst_add, Prod.smul_fst]
+  · change q.1 = out.1
+    simp only [q, qP, out, Prod.fst_add, Prod.smul_fst]
   · intro k
     have hhat := innerRadialModelPoissonAffine_congr D hDw.continuous
       (G.left_pos piece) (G.in_core piece) (G.weight_pos piece)
@@ -210,10 +212,9 @@ theorem exists_innerRadialModelPoissonPiece (ξ : EuclideanSpace ℝ (Fin n)) :
     rw [hres, hhat, hcomb, hPflux 0 k, hPflux 1 k]
     have hm := congrFun (Matrix.ofLp_toEuclideanCLM
       (M.physicalFluxMatrix lam scale) (innerChainBoundaryCLM n piece ξ)) k
-    simp only [InnerBufferLocalizedData.physicalFluxMatrix, Matrix.add_mulVec,
-      Pi.add_apply, Matrix.mulVec_diagonal, Matrix.mulVec_apply_eq_sum,
-      Fin.sum_univ_two, innerChainBoundaryCLM_apply] at hm
-    rw [hm]
+    rw [hm, InnerBufferLocalizedData.physicalFluxMatrix, Matrix.add_mulVec,
+      Pi.add_apply, Matrix.mulVec_diagonal]
+    simp only [Matrix.mulVec_apply_eq_sum, Fin.sum_univ_two, innerChainBoundaryCLM_apply]
     dsimp only [z]
     fin_cases k <;> norm_num <;> ring
 

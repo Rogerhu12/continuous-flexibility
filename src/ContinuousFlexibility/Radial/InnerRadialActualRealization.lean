@@ -77,7 +77,7 @@ theorem exists_poisson (ξ : EuclideanSpace ℝ (Fin n)) :
   · rw [hvalue, hscalar, InnerRadialModelChart.poisson_apply]
     simp only [innerChainBoundaryCLM_apply]
   · intro i
-    simpa only [InnerBufferLocalizedData.physicalFluxMatrix,
+    simpa +unfoldPartialApp only [InnerBufferLocalizedData.physicalFluxMatrix,
       InnerRadialModelChart.kappa, InnerRadialModelChart.errorMatrix] using hflux i
 
 end InnerRadialModelChart

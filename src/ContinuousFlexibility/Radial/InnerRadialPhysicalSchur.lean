@@ -89,7 +89,6 @@ theorem innerRadialPhysicalWeakGraph_iff (u F : H) :
       rw [innerRadialPhysicalRealization_apply]
       exact hu.symm
     · rw [innerRadialDomainSource_apply]
-      rfl
     · rw [innerRadialDomainFlux_apply]
       exact hraw.2
 
