@@ -27,7 +27,10 @@ def inverseAuxTail (n : ℕ) : (Fin (n + 1) → P) →L[ℝ] (Fin n → P) :=
   ContinuousLinearMap.pi fun i => ContinuousLinearMap.proj i.succ
 
 @[simp] theorem inverseAuxTail_apply (n : ℕ) (v : Fin (n + 1) → P) :
-    inverseAuxTail P n v = Fin.tail v := rfl
+    inverseAuxTail P n v = Fin.tail v := by
+  funext i
+  simp only [inverseAuxTail, ContinuousLinearMap.pi_apply, ContinuousLinearMap.proj_apply,
+    Fin.tail]
 
 end AuxiliaryMaps
 
@@ -63,8 +66,10 @@ theorem inverseExpressionJetValue_succ
     (V : X → Z →L[ℝ] Y) (n : ℕ) (z : X × Z) (v : Fin (n + 1) → X × Z) :
     inverseExpressionJetValue J V (n + 1) z v =
       (inverseExpressionJet n).differential J V z (Fin.tail v) (v 0) := by
-  exact (inverseExpressionJet n).eval_diff J V (inverseAuxTail (X × Z) n)
-    (ContinuousLinearMap.proj 0) z v
+  simpa only [inverseExpressionJetValue, inverseExpressionJet,
+    inverseAuxTail_apply, ContinuousLinearMap.proj_apply] using
+      (inverseExpressionJet n).eval_diff J V (inverseAuxTail (X × Z) n)
+        (ContinuousLinearMap.proj 0) z v
 
 variable
   (J : Statements.SmoothDirections (U ×ˢ univ) (fun z : X × Y => L z.1 z.2))
@@ -162,7 +167,8 @@ def inverseExpressionJetMultilinear (n : ℕ) (z : X × Z) (hz : z.1 ∈ U) :
 @[simp] theorem inverseExpressionJetMultilinear_apply
     (n : ℕ) (z : X × Z) (hz : z.1 ∈ U) (v : Fin n → X × Z) :
     inverseExpressionJetMultilinear J hU V hleft hright hV n z hz v =
-      inverseExpressionJetValue J V n z v := rfl
+      inverseExpressionJetValue J V n z v := by
+  simp only [inverseExpressionJetMultilinear, MultilinearMap.mk'_apply]
 
 /-- The global family of multilinear maps is set to zero outside the open
 domain; this does not change any germ at a point in the domain. -/
@@ -175,7 +181,7 @@ def inverseExpressionJets : ProjectiveJetFamily (X × Z) (Y × Z) := by
     (n : ℕ) {z : X × Z} (hz : z.1 ∈ U) (v : Fin n → X × Z) :
     inverseExpressionJets J hU V hleft hright hV n z v =
       inverseExpressionJetValue J V n z v := by
-  simp only [inverseExpressionJets, dif_pos hz, inverseExpressionJetMultilinear_apply]
+  simp only [inverseExpressionJets, dite_eq_left hz, inverseExpressionJetMultilinear_apply]
 
 /-- All expression jets form one smooth directional tower on the original
 open domain, with no restriction to a smaller parameter neighborhood. -/
@@ -211,19 +217,28 @@ def inverseFamilySmoothDirections :
   zero := by
     intro z hz
     have hzero := (hasProjectiveJetsOn_inverseFamily J hU V hleft hright hV).1 z hz
-    exact congrArg Prod.fst hzero
-  continuous := fun n =>
-    ((hasProjectiveJetsOn_inverseFamily J hU V hleft hright hV).2.1 n).fst
-  derivative := fun n z hz v h =>
-    ((hasProjectiveJetsOn_inverseFamily J hU V hleft hright hV).2.2 n z hz h v).clm_comp
-      (ContinuousLinearMap.fst ℝ Y Z)
+    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe,
+      Function.comp_apply, ContinuousLinearMap.coe_fst'] using congrArg Prod.fst hzero
+  continuous := by
+    intro n
+    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe,
+      Function.comp_apply, ContinuousLinearMap.coe_fst'] using
+      ((hasProjectiveJetsOn_inverseFamily J hU V hleft hright hV).2.1 n).fst
+  derivative := by
+    intro n z hz v h
+    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe,
+      Function.comp_apply, ContinuousLinearMap.coe_fst'] using
+      ((hasProjectiveJetsOn_inverseFamily J hU V hleft hright hV).2.2 n z hz h v).clm_comp
+        (ContinuousLinearMap.fst ℝ Y Z)
 
 @[simp] theorem inverseFamilySmoothDirections_apply
     (n : ℕ) {z : X × Z} (hz : z.1 ∈ U) (v : Fin n → X × Z) :
     (inverseFamilySmoothDirections J hU V hleft hright hV).D n z v =
       (inverseExpressionJetValue J V n z v).1 := by
-  change (inverseExpressionJets J hU V hleft hright hV n z v).1 = _
-  rw [inverseExpressionJets_apply J hU V hleft hright hV n hz]
+  simp only [inverseFamilySmoothDirections,
+    ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
+    ContinuousLinearMap.coe_fst',
+    inverseExpressionJets_apply J hU V hleft hright hV n hz]
 
 end Jets
 

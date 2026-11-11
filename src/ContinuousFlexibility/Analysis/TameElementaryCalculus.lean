@@ -351,7 +351,12 @@ def bilinearPairMultilinear (B : E →L[ℝ] F →L[ℝ] G)
   map_update_smul' := by
     intro _ v i c x
     fin_cases i <;> simp [map_smul, smul_apply]
-  cont := hB.comp (((continuous_apply 0).fst).prodMk ((continuous_apply 1).snd))
+  cont := by
+    have h0 : Continuous (fun v : Fin 2 → E × F => (v 0).1) :=
+      continuous_fst.comp (continuous_apply 0)
+    have h1 : Continuous (fun v : Fin 2 → E × F => (v 1).2) :=
+      continuous_snd.comp (continuous_apply 1)
+    simpa only [Function.comp_def] using hB.comp (h0.prodMk h1)
 
 theorem bilinearPairMultilinear_apply (B : E →L[ℝ] F →L[ℝ] G)
     (hB : Continuous (fun z : E × F => B z.1 z.2)) (v : Fin 2 → E × F) :

@@ -20,4 +20,6 @@ theorem Tame : H01Statement ∧ H02Statement := by
   exact ⟨ContinuousFlexibility.Analysis.h01Statement,
     ContinuousFlexibility.Analysis.h02Statement⟩
 
+#print axioms Tame
+
 end ContinuousFlexibility.Blueprint

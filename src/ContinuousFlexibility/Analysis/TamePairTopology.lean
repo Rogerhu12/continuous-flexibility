@@ -36,7 +36,11 @@ theorem withSeminorms_pairGrading {p : ℕ → Seminorm ℝ E} {q : ℕ → Semi
     · exact (LinearMap.snd ℝ E F).withSeminorms_induced hq
     · exact (LinearMap.fst ℝ E F).withSeminorms_induced hp
   have hσ : WithSeminorms (SeminormFamily.sigma r) := by
-    simpa only [iInf_bool_eq] using withSeminorms_iInf hr
+    have hi : WithSeminorms (topology := ⨅ b : Bool, t b)
+        (SeminormFamily.sigma r) :=
+      withSeminorms_iInf (𝕜 := ℝ) (E := E × F) (ι := Bool)
+        (κ := fun _ => ℕ) (p := r) (t := t) hr
+    simpa only [iInf_bool_eq] using hi
   have hr₁ (n : ℕ) (x : E × F) :
       SeminormFamily.sigma r ⟨true, n⟩ x = p n x.1 :=
     Seminorm.comp_apply (p n) (LinearMap.fst ℝ E F) x

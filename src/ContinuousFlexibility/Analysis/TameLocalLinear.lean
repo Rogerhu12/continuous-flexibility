@@ -29,7 +29,7 @@ theorem inverseTame_fst (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F
   intro s _
   refine ⟨1, fun x => ?_⟩
   simp only [Nat.add_zero, NNReal.coe_one, one_mul, ContinuousLinearMap.coe_coe,
-    ContinuousLinearMap.fst_apply, pairGrading_apply]
+    ContinuousLinearMap.coe_fst', pairGrading_apply]
   exact le_add_of_nonneg_right (apply_nonneg _ _)
 
 theorem inverseTame_snd (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) :
@@ -37,7 +37,7 @@ theorem inverseTame_snd (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F
   intro s _
   refine ⟨1, fun x => ?_⟩
   simp only [Nat.add_zero, NNReal.coe_one, one_mul, ContinuousLinearMap.coe_coe,
-    ContinuousLinearMap.snd_apply, pairGrading_apply]
+    ContinuousLinearMap.coe_snd', pairGrading_apply]
   exact le_add_of_nonneg_left (apply_nonneg _ _)
 
 theorem inverseTame_inl (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) :
@@ -45,14 +45,14 @@ theorem inverseTame_inl (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F
   intro s _
   refine ⟨1, fun x => ?_⟩
   simp only [Nat.add_zero, NNReal.coe_one, one_mul, ContinuousLinearMap.coe_coe,
-    ContinuousLinearMap.inl_apply, pairGrading_apply, map_zero, add_zero]
+    ContinuousLinearMap.inl_apply, pairGrading_apply, map_zero, add_zero, le_refl]
 
 theorem inverseTame_inr (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) :
     IsTameLinear q (pairGrading p q) (ContinuousLinearMap.inr ℝ E F).toLinearMap 0 0 := by
   intro s _
   refine ⟨1, fun x => ?_⟩
   simp only [Nat.add_zero, NNReal.coe_one, one_mul, ContinuousLinearMap.coe_coe,
-    ContinuousLinearMap.inr_apply, pairGrading_apply, map_zero, zero_add]
+    ContinuousLinearMap.inr_apply, pairGrading_apply, map_zero, zero_add, le_refl]
 
 theorem inverseTame_comp_zero
     {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F} {r : ℕ → Seminorm ℝ G}
@@ -60,7 +60,7 @@ theorem inverseTame_comp_zero
     (hB : IsTameLinear q r B.toLinearMap 0 0)
     (hA : IsTameLinear p q A.toLinearMap 0 0) :
     IsTameLinear p r (B.comp A).toLinearMap 0 0 := by
-  simpa only [Nat.zero_add, max_self] using hB.comp hA
+  simpa only [Nat.zero_add, max_self, ContinuousLinearMap.toLinearMap_comp] using hB.comp hA
 
 theorem inverseLocallyTame_fst
     {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F} {r : ℕ → Seminorm ℝ G}

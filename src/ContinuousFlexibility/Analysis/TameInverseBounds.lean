@@ -77,7 +77,7 @@ theorem locallyTameOn_inverse_of_linearFamilyTame
   calc
     _ ≤ C * (r (s + loss) z.2 + (1 + p (s + loss) z.1) * r base z.2) := hbz
     _ ≤ C * (r (s + loss) z.2 + (1 + p (s + loss) z.1) * R) :=
-      mul_le_mul_of_nonneg_left (add_le_add_left hmul _) hC
+      mul_le_mul_of_nonneg_left (add_le_add le_rfl hmul) hC
     _ ≤ C * ((1 + R) * (1 + (p (s + loss) z.1 + r (s + loss) z.2))) :=
       mul_le_mul_of_nonneg_left (by nlinarith [mul_nonneg hR hry]) hC
     _ = C * (1 + R) * (1 + (p (s + loss) z.1 + r (s + loss) z.2)) := by ring

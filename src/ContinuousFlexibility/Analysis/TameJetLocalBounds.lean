@@ -89,7 +89,7 @@ variable {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
   {U : Set E} {f : E → F}
 
 /-- The bounds attached to one specified genuine derivative tower. -/
-def SmoothDirections.TameBounds (J : SmoothDirections U f)
+def _root_.ContinuousFlexibility.Statements.SmoothDirections.TameBounds (J : SmoothDirections U f)
     (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) : Prop :=
   ∀ k : ℕ, ∀ x0 ∈ U, ∃ loss base : ℕ, ∃ ε : ℝ, 0 < ε ∧
     ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U,
@@ -125,9 +125,13 @@ theorem locallyTameOn_jetEvaluation (ht : WithSeminorms p)
   let W : Set (E × (Fin k → E)) :=
     {z | z.1 ∈ U ∧ p base (z.1 - z0.1) < ε ∧ ∀ i, p base (z.2 i) < M}
   have hWa : {z : E × (Fin k → E) | p base (z.1 - z0.1) < ε} ∈ 𝓝 z0 := by
-    have hcont := ((ht.continuous_seminorm base).comp
-      (continuous_fst.sub continuous_const)).continuousAt
-    simpa only [sub_self, map_zero] using hcont.preimage_mem_nhds (Iio_mem_nhds hε)
+    have hcont : ContinuousAt
+        (fun z : E × (Fin k → E) => p base (z.1 - z0.1)) z0 :=
+      ((ht.continuous_seminorm base).comp
+        (continuous_fst.sub continuous_const)).continuousAt
+    have hzero : p base (z0.1 - z0.1) < ε := by
+      simpa only [sub_self, map_zero] using hε
+    exact hcont.preimage_mem_nhds (Iio_mem_nhds hzero)
   have hWb : {z : E × (Fin k → E) | ∀ i, p base (z.2 i) < M} ∈ 𝓝 z0 := by
     apply Filter.eventually_all.mpr
     intro i
