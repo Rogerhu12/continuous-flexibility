@@ -94,8 +94,17 @@ theorem n05CanonicalGlobalInverse_finite_block_sum (t : ℝ) (s : ℕ)
       lp.evalCLM, LinearMap.mkContinuous_apply, lp.evalₗ_apply, n05CanonicalInverseCLM_apply]
   have he := map_sum P (fun m => n05CanonicalFiniteTruncate S K s {m} v) q
   rw [← n05CanonicalFiniteTruncate_sum_singletons] at he
-  simpa only [hP, n05CanonicalFiniteTruncate_forget_singleton,
-    n05CanonicalInverseBlock] using he
+  calc
+    _ = P (n05CanonicalFiniteTruncate S K s q v) :=
+      (hP (n05CanonicalFiniteTruncate S K s q v)).symm
+    _ = ∑ m ∈ q, P (n05CanonicalFiniteTruncate S K s {m} v) := he
+    _ = _ := by
+      apply Finset.sum_congr rfl
+      intro m _
+      exact (hP (n05CanonicalFiniteTruncate S K s {m} v)).trans
+        (congrArg (fun F : CanonicalSequence S K =>
+          (n05CanonicalGlobalInverse D S C K G F).1 k)
+          (n05CanonicalFiniteTruncate_forget_singleton T S K γ t s m v))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite block sums converge to the coordinate of the already fixed
