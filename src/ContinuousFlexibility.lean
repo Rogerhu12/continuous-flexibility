@@ -361,3 +361,7 @@ import ContinuousFlexibility.Scalar.S04CalculusProof
 import ContinuousFlexibility.Scalar.S05StateDerivative
 import ContinuousFlexibility.Scalar.S05CalculusProof
 import ContinuousFlexibility.Blueprint.ScalarCalculus
+import ContinuousFlexibility.Scalar.WeightedStateRegularity
+import ContinuousFlexibility.Scalar.WeightedTowerCalculus
+import ContinuousFlexibility.Scalar.WeightedPointwise
+import ContinuousFlexibility.Scalar.WeightedGraph
