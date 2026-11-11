@@ -64,7 +64,8 @@ theorem n04b_continuousOn_closedStrip_inverse_of_angular_bound
     refine ⟨(hG hy).1, ?_⟩
     constructor <;> linarith [hangle.1, hangle.2]
   by_contra hn
-  have hGyB : G y ∈ B := ⟨hGyK, by simpa only [Metric.mem_ball] using hn⟩
+  have hGyB : G y ∈ B :=
+    ⟨hGyK, by simpa only [mem_compl_iff, Metric.mem_ball] using hn⟩
   exact havoid ⟨G y, hGyB, hRight hy⟩
 
 /-- The angular-displacement bound is derived from the actual lifted

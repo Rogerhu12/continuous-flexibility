@@ -44,9 +44,10 @@ theorem n04bRootPhysicalInverse_zero_image
     (X : PolarPoint → PolarPoint) (T : ℝ) (side : Bool) :
     n04bRootPhysicalInverse X T side '' ({(0 : ℝ)} ×ˢ (univ : Set ℝ)) =
       X '' ({if side then T else 0} ×ˢ (univ : Set ℝ)) := by
-  simpa only [n04bRootPhysicalInverse, image_image, Function.comp_def] using
-    congrArg (fun E : Set PolarPoint => X '' E)
-      (n04bRootStripInverse_zero_image T side)
+  have hcomp : n04bRootPhysicalInverse X T side = X ∘ n04bRootStripInverse T side := by
+    funext p
+    simp only [n04bRootPhysicalInverse, Function.comp_apply]
+  rw [hcomp, image_comp, n04bRootStripInverse_zero_image]
 
 /-- The stored cut is exactly the moving middle-travel inverse curve. -/
 theorem n04b_canonicalCutPoint_of_constructedRoot

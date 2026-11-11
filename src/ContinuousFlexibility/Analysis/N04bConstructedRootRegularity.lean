@@ -74,8 +74,8 @@ theorem n04b_rootPhysicalChart_lift
     {x : PolarPoint} (hF : F (x + (0, P)) = F x + (0, P)) :
     n04bRootPhysicalChart F T side (x + (0, P)) =
       n04bRootPhysicalChart F T side x + (0, P) := by
-  simp only [n04bRootPhysicalChart, Function.comp_def, hF,
-    n04bRootStripChart, Prod.fst_add, Prod.snd_add, add_zero]
+  simp only [n04bRootPhysicalChart, hF, n04bRootStripChart,
+    Prod.mk_add_mk, Prod.fst_add, Prod.snd_add, add_zero]
 
 theorem n04b_rootPhysicalChart_reflection
     {F : PolarPoint → PolarPoint} (T : ℝ) (side : Bool)

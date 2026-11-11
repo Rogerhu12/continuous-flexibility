@@ -91,6 +91,7 @@ theorem n04b_rootSidePaste_eqOn
     EqOn (fun p => if 0 < (e p).1 then fphysical p else froot (e p))
       (fun p => froot (e p)) (e ⁻¹' S) := by
   intro p hp
+  change (if 0 < (e p).1 then fphysical p else froot (e p)) = froot (e p)
   by_cases hpos : 0 < (e p).1
   · rw [if_pos hpos]
     simpa only [Homeomorph.symm_apply_apply] using hMatch ⟨hp, hpos⟩

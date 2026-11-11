@@ -35,8 +35,9 @@ theorem n04b_boundaryInverseGerm_of_same_germs
     rw [← he]
     exact e.map_source hp
   have hNearForward : ∀ᶠ q in 𝓝 (F₀ p), F (G q) = F₀ (G q) := by
-    apply hGSmooth.continuousAt.tendsto.eventually
-    rwa [hValue]
+    have hlim : Tendsto G (𝓝 (F₀ p)) (𝓝 p) := by
+      simpa only [hValue] using hGSmooth.continuousAt.tendsto
+    exact hForward.comp_tendsto hlim
   have hRight : ∀ᶠ q in 𝓝 (F₀ p), F (G q) = q := by
     filter_upwards [hNearForward, hGe, e.open_target.mem_nhds hTarget] with q hq hGeq hqt
     rw [hq, hGeq, ← he]

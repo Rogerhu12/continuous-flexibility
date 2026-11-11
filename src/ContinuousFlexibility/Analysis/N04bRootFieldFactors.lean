@@ -80,7 +80,11 @@ theorem n04b_exists_corrected_root_factors
       _ ≤ (|σ| + 1) * |p.1| :=
         mul_le_mul_of_nonneg_right (by linarith) (abs_nonneg _)
       _ < η := by simpa only [mul_comm] using hm
-  have hcoeff := heq (r₀ + σ * p.1) p.2 hdist
+  have hcoeff : y.1 ∈ Ioo D.a D.b ∧
+      (L.coefficients z).a y = (originalCoefficients D S C z).a y ∧
+      (L.coefficients z).b y = (originalCoefficients D S C z).b y ∧
+      (L.coefficients z).c y = (originalCoefficients D S C z).c y :=
+    heq (r₀ + σ * p.1) p.2 hdist
   have hy : y ∈ annularOpen D := ⟨hcoeff.1, mem_univ _⟩
   have hfactor := hdata.2.2 p (hsub hp)
   refine ⟨hy, hfactor.1, ?_⟩

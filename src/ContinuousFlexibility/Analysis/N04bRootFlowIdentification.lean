@@ -233,8 +233,8 @@ theorem n04b_rootStoredFlow_reflect
     (hminus_cont (-θ)) (hminus_flow (-θ)) (hplus_cont θ).neg _ _ hx
   · intro r hr
     apply (hplus_flow θ r hr).neg.congr_deriv
-    simp only [rootPhysicalSpeed, hdodd, hceven]
+    simp only [rootPhysicalSpeed, Pi.neg_apply, hdodd, hceven]
     ring
-  · rw [hminus_init, hplus_init]
+  · simp only [Pi.neg_apply, hminus_init, hplus_init]
 
 end ContinuousFlexibility.Analysis

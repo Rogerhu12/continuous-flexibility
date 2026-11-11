@@ -65,7 +65,7 @@ theorem n04b_actualRootPhysicalInverse_contDiffAt
     (n04b_actualTravel_positive hN hS hT hfield hz hs m) side hq
   have hX := (n04b_actualTravelInverse_spec hN hS hT hfield hz hs m).2.2.2
   exact (hX.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hTarget)).comp q
-    (n04b_contDiffAt_rootStripInverse hq.1)
+    (n04b_contDiffAt_rootStripInverse (C.travel m) side hq.1)
 
 include hN hS hT hfield hz hs in
 theorem n04b_actualRootPhysical_interior_inverse_germ

@@ -185,10 +185,10 @@ theorem n04b_actualTravelInverse_symmetries
   have hBij := n04b_actualTravelChart_bijOn hN hS hT hfield hz hsector m
   constructor
   · apply travelStrip_invFunOn_periodic hBij _ hp
-    intro q hq
+    rintro ⟨r, θ⟩ hq
     simpa only [Prod.mk_add_mk, add_zero] using
       n04b_actualTravelChart_period_add hN hS hT hfield hz hsector m
-        ⟨hq.1.1.le, hq.1.2.le⟩ q.2
+        ⟨hq.1.1.le, hq.1.2.le⟩ θ
   · exact travelStrip_invFunOn_reflection hBij
       (fun q _ => n04b_actualTravelChart_reflection m q) hp
 

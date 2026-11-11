@@ -91,7 +91,8 @@ theorem n04b_corrected_return_geometry
     intro θ
     rw [hformula]
     change G (h (θ + Real.pi) - C.travel m) = G (h θ - C.travel m) + Real.pi
-    rw [(hleft θ).2.2.1,
+    have hperiod : h (θ + Real.pi) = h θ + Real.pi := (hleft θ).2.2.1
+    rw [hperiod,
       show h θ + Real.pi - C.travel m = (h θ - C.travel m) + Real.pi by ring]
     exact hN.rightChartInverse_add_period hz hs m (h θ - C.travel m)
   have hbij : Function.Bijective f :=

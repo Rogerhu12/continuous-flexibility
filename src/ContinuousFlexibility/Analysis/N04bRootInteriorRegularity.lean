@@ -85,18 +85,6 @@ theorem n04b_contDiffAt_rootPhysicalHeight
     div_pos (mul_pos hap hvp) (Real.sqrt_pos.mpr hξ)
   exact (hQ.sqrt hQpos.ne').inv (Real.sqrt_pos.mpr hQpos).ne'
 
-theorem n04b_contDiffAt_rootStripInverse
-    {T : ℝ} {side : Bool} {q : PolarPoint} (hq : 0 < q.1) :
-    ContDiffAt ℝ ∞ (n04bRootStripInverse T side) q := by
-  have ht : ContDiffAt ℝ ∞ (fun p : PolarPoint => n04bRootTravel p.1) q :=
-    contDiffAt_const.mul (contDiffAt_fst.rpow_const_of_ne (p := (3 / 2 : ℝ)) hq.ne')
-  have ho : ContDiffAt ℝ ∞
-      (fun p : PolarPoint => n04bTravelOrientation T side (n04bRootTravel p.1)) q := by
-    cases side with
-    | false => exact ht
-    | true => exact contDiffAt_const.sub ht
-  exact ho.prodMk contDiffAt_snd
-
 theorem n04bRootStripInverse_chart_of_oriented_nonneg
     (T : ℝ) (side : Bool) {q : PolarPoint}
     (hq : 0 ≤ n04bTravelOrientation T side q.1) :
@@ -138,7 +126,7 @@ theorem n04b_rootPhysical_interior_inverse_germ
     exact hMaps hp
   have hXAt := hX.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hBackMem)
   have hInverse : ContDiffAt ℝ ∞ (n04bRootPhysicalInverse X T side) q :=
-    hXAt.comp q (n04b_contDiffAt_rootStripInverse hq)
+    hXAt.comp q (n04b_contDiffAt_rootStripInverse T side hq)
   have hValue : n04bRootPhysicalInverse X T side q = p := by
     change X (n04bRootStripInverse T side q) = p
     rw [hBack]

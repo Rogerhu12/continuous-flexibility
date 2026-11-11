@@ -46,7 +46,7 @@ theorem n04b_right_simple_root_derivative_pos
       nhdsWithin_le_nhds (Ioi_mem_nhds hab)
     filter_upwards [self_mem_nhdsWithin, ha] with x hxb hax
     rw [slope_def_field, hb, sub_zero]
-    exact div_nonneg_of_nonpos_of_nonpos (hneg x ⟨hax, hxb⟩).le
+    exact div_nonneg_of_nonpos (hneg x ⟨hax, hxb⟩).le
       (sub_nonpos.mpr hxb.le)
   exact lt_of_le_of_ne hle hne.symm
 
