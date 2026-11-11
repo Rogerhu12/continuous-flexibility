@@ -70,6 +70,7 @@ private def l2ZeroExtendLinear (s : Set X) (hs : MeasurableSet s) :
       l2ZeroExtendValue_coeFn μ s hs f,
       Lp.coeFn_smul a (l2ZeroExtendValue μ s hs f),
       ae_imp_of_ae_restrict (Lp.coeFn_smul a f)] with x haf hf hsmul hscalar
+    simp only [RingHom.id_apply]
     rw [haf, hsmul, Pi.smul_apply, hf]
     by_cases hx : x ∈ s
     · simpa only [indicator_of_mem hx, Pi.smul_apply] using hscalar hx
@@ -138,7 +139,8 @@ theorem l2Glue_split (s : Set X) (hs : MeasurableSet s) (f : Lp ℝ 2 μ) :
   by_cases hxs : x ∈ s
   · simp only [indicator_of_mem hxs, indicator_of_notMem (notMem_compl_iff.mpr hxs),
       hleft hxs, add_zero]
-  · simp only [indicator_of_notMem hxs, indicator_of_mem hxs, hright hxs, zero_add]
+  · have hsc : x ∈ sᶜ := hxs
+    simp only [indicator_of_notMem hxs, indicator_of_mem hsc, hright hsc, zero_add]
 
 theorem l2Split_glue (s : Set X) (hs : MeasurableSet s)
     (f : Lp ℝ 2 (μ.restrict s) × Lp ℝ 2 (μ.restrict sᶜ)) :

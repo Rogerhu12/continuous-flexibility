@@ -204,6 +204,7 @@ theorem outerSolutionFlux_weakDerivative_from_left
     apply integral_congr_ae
     apply Eventually.of_forall
     intro x
+    dsimp only
     by_cases hx : x ∈ Ioo a b
     · rw [hflux hx]
     · have hz : deriv ψ x = 0 :=
@@ -215,6 +216,7 @@ theorem outerSolutionFlux_weakDerivative_from_left
     apply integral_congr_ae
     apply Eventually.of_forall
     intro x
+    dsimp only
     by_cases hx : x ∈ Ioo a b
     · rw [hvalue hx]
     · have hz : ψ x = 0 :=

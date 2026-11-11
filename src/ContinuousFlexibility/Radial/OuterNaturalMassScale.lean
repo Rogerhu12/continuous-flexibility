@@ -110,7 +110,9 @@ theorem morseRealized_mass_radius_lower {T : MorseChainData} {σ : ℕ → ℝ}
   have hvb : deriv r (morseRightTurn A B) = (1 / 100 : ℝ) * A ^ 5 := by
     rw [hd]
     change deriv (T.radius side n) (morseChainRightTurn T n) / s = _
-    rw [hspeed, mul_div_cancel_right₀ _ hs.ne']
+    rw [hspeed]
+    change ((1 / 100 : ℝ) * A ^ 5 * s) / s = (1 / 100 : ℝ) * A ^ 5
+    exact mul_div_cancel_right₀ _ hs.ne'
   have hEq (x : ℝ) (hx : x ∈ Icc morseCellLeftCut (morseRightTurn A B)) :
       deriv (deriv r) x = -morseRho A B x * r x := by
     have hsub : x ∈ Icc (T.leftX side n) (T.rightX side n) := by
@@ -228,7 +230,7 @@ theorem morseTransition_eventually_gauge_small {T : MorseChainData} {σ : ℕ �
     (mul_nonneg (sq_nonneg (j : ℝ)) hA.le)
   have hlt := hmul.trans_lt (hn j hj m hm)
   have hlast : (j : ℝ) ^ 2 * morseChainA T m < 1 := by
-    apply (mul_lt_mul_right hsqrt).mp
+    apply (mul_lt_mul_iff_left₀ hsqrt).mp
     simpa only [one_mul] using hlt
   exact hlast.le
 

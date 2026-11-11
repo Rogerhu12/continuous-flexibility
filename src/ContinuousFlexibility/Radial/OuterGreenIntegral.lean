@@ -104,7 +104,12 @@ def outerContinuousGreenKernel (lam : ℝ) (U V : C(X, ℝ)) : C(X, C(X, ℝ)) :
 
 theorem outerContinuousGreenKernel_apply (lam : ℝ) (U V : C(X, ℝ)) (x y : X) :
     outerContinuousGreenKernel lam U V x y = outerGreenKernel lam U V x y := by
-  simp only [outerContinuousGreenKernel, ContinuousMap.curry_apply, ContinuousMap.coe_mk]
+  rw [outerContinuousGreenKernel, ContinuousMap.curry_apply]
+  exact congrFun (ContinuousMap.coe_mk
+    (fun xy : X × X => outerGreenKernel lam U V xy.1 xy.2)
+    (continuous_const.mul
+      ((U.continuous.comp (continuous_fst.min continuous_snd)).mul
+        (V.continuous.comp (continuous_fst.max continuous_snd))))) (x, y)
 
 variable [MeasurableSpace X] [BorelSpace X] [SecondCountableTopology X]
   (μ : Measure X) [IsFiniteMeasure μ]

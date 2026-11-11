@@ -112,9 +112,11 @@ theorem dense_tailInteriorSources (T : DeepTailData) [IsFiniteMeasure (deepTailM
     have hbound (n : ℕ) (x : ℝ) :
         |intervalCutoffTest T.entrance T.endpoint ψ n x - φ x| ≤ |ψ x| := by
       by_cases hx : x ∈ Ioo T.entrance T.endpoint
-      · rw [φ, Set.indicator_of_mem hx]
+      · dsimp only [φ]
+        rw [Set.indicator_of_mem hx]
         exact abs_intervalCutoffTest_sub_le _ _ _ _ _
-      · rw [φ, Set.indicator_of_notMem hx, hzero n hx, sub_self, abs_zero]
+      · dsimp only [φ]
+        rw [Set.indicator_of_notMem hx, hzero n hx, sub_self, abs_zero]
         exact abs_nonneg _
     have hlim (x : ℝ) : Tendsto
         (fun n => intervalCutoffTest T.entrance T.endpoint ψ n x) atTop (𝓝 (φ x)) := by
@@ -126,7 +128,9 @@ theorem dense_tailInteriorSources (T : DeepTailData) [IsFiniteMeasure (deepTailM
     have hφf : hφLp.toLp φ = f := by
       apply Lp.ext
       filter_upwards [MemLp.coeFn_toLp hφLp, hfψ, deepTailMeasure_ae_mem T] with x hφ hf hx
-      rw [hφ, φ, Set.indicator_of_mem hx, hf]
+      rw [hφ]
+      dsimp only [φ]
+      rw [Set.indicator_of_mem hx, hf]
     have ht := realL2_tendsto_toLp_of_dominated hcutLp hφLp hLp hbound hlim
     rw [hφf] at ht
     apply isClosed_closure.mem_of_tendsto ht

@@ -36,7 +36,8 @@ theorem hasDerivAt_tailPhysicalRadius (right : Bool) (x : ℝ) :
     HasDerivAt (tailPhysicalRadius right)
       (if right then tailPhysicalRadius right x else -tailPhysicalRadius right x) x := by
   cases right
-  · simpa [tailPhysicalRadius] using (hasDerivAt_neg x).exp
+  · change HasDerivAt (fun y : ℝ => Real.exp (-y)) (-Real.exp (-x)) x
+    simpa only [mul_neg_one] using (hasDerivAt_neg x).exp
   · exact Real.hasDerivAt_exp x
 
 private theorem tailPhysicalRadius_abs_coefficient (right : Bool) (x : ℝ) :
@@ -118,7 +119,9 @@ theorem tailPhysicalRadius_image {D : ReferenceData} {T : DeepTailData}
         refine ⟨-x, ⟨by linarith [hx.2], by linarith [hx.1]⟩, neg_neg x⟩
     change (Real.exp ∘ Neg.neg) '' Ioo T.entrance T.endpoint =
       Ioo D.a (Real.exp (-T.entrance))
-    rw [← Set.image_image, hn, Real.image_exp_Ioo, he, neg_neg, Real.exp_log ha]
+    calc
+      _ = Real.exp '' (Neg.neg '' Ioo T.entrance T.endpoint) := by rw [Set.image_image]
+      _ = _ := by rw [hn, Real.image_exp_Ioo, he, neg_neg, Real.exp_log ha]
   · have he : T.endpoint = Real.log D.b := hphysical.2.1
     change Real.exp '' Ioo T.entrance T.endpoint = Ioo (Real.exp T.entrance) D.b
     rw [Real.image_exp_Ioo, he, Real.exp_log hb]

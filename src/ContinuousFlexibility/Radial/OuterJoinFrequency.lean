@@ -52,23 +52,23 @@ def outerJoinPrefactor (C : ℕ → ℝ) (K a : ℝ) : ℝ :=
 def outerJoinActionCoefficient (C : ℕ → ℝ) (K a : ℝ) : ℝ :=
   (C 0 * K ^ 2 / a) * exp 400
 
-theorem morse_preceding_join_factor_le_frequency_exp
+theorem morse_preceding_join_factor_le_sq_exp
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
-    {K Cstar L scale : ℝ} {n j : ℕ}
+    {K F L scale : ℝ} {n j : ℕ}
     (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
     (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
-    (side : Bool) (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (hF : 0 ≤ F) (side : Bool) (hn : T.index < n)
+    (hj2 : (j : ℝ) ^ 2 ≤ exp (F * (n : ℝ) ^ 2))
     (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
     (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
     outerPositivePhysicalFactor D (j : ℝ) scale
         (T.joinLeft side (n - 1)) (T.joinRight side (n - 1)) ≤
-      exp ((4 * (outerJoinPrefactor C K D.a + (outerFrequencyExponent Cstar + L + 32)) + 2) *
+      exp ((4 * (outerJoinPrefactor C K D.a + (F + L + 32)) + 2) *
         (n : ℝ) ^ 2 + 2 * sqrt (outerJoinActionCoefficient C K D.a) *
           ((j : ℝ) * sqrt (morseChainA T n))) := by
   let p := if side then n - 1 else n
   let q := if side then n else n - 1
   let N := (n : ℝ) ^ 2
-  let F := outerFrequencyExponent Cstar
   let P := F + L + 32
   let U := C 0 * K * 9 ^ 12 * 243
   let V := 9 * K / D.a
@@ -92,7 +92,6 @@ theorem morse_preceding_join_factor_le_frequency_exp
   have hK : 0 < K := hcell.pos
   have hC : 0 < C 0 := h.constants_pos 0
   have ha : 0 < D.a := h.geometry.1
-  have hF : 0 ≤ F := by dsimp only [F, outerFrequencyExponent]; positivity
   have hU : 0 ≤ U := by dsimp only [U]; positivity
   have hV : 0 ≤ V := by dsimp only [V]; positivity
   have hJ : 0 ≤ J := by dsimp only [J, outerJoinPrefactor]; positivity
@@ -160,7 +159,6 @@ theorem morse_preceding_join_factor_le_frequency_exp
           ← exp_add]
         congr 2
         ring
-  have hj2 : (j : ℝ) ^ 2 ≤ exp (F * N) := outer_frequency_sq_le_exp hn1 (h.d_eq n hn.le) hband
   have hbBound : b ≤ V * exp ((F + L + 27) * N) := by
     calc
       _ ≤ (K / D.a) * (j : ℝ) ^ 2 * (morseChainAmplitude T σ q / scale) *
@@ -212,5 +210,22 @@ theorem morse_preceding_join_factor_le_frequency_exp
       _ = _ := by ring
   exact outer_positive_factor_le_exp hN hJ hG hAn.le (Nat.cast_nonneg j)
     (by linarith only [ha₀, hb₀] : 0 ≤ 1 + a + b) hsize hprod
+
+theorem morse_preceding_join_factor_le_frequency_exp
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
+    {K Cstar L scale : ℝ} {n j : ℕ}
+    (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
+    (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
+    (side : Bool) (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
+    (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
+    outerPositivePhysicalFactor D (j : ℝ) scale
+        (T.joinLeft side (n - 1)) (T.joinRight side (n - 1)) ≤
+      exp ((4 * (outerJoinPrefactor C K D.a + (outerFrequencyExponent Cstar + L + 32)) + 2) *
+        (n : ℝ) ^ 2 + 2 * sqrt (outerJoinActionCoefficient C K D.a) *
+          ((j : ℝ) * sqrt (morseChainA T n))) := by
+  exact morse_preceding_join_factor_le_sq_exp h hσ hcell hscale hL
+    (by unfold outerFrequencyExponent; positivity) side hn
+    (outer_frequency_sq_le_exp (by omega) (h.d_eq n hn.le) hband) hhi hlo
 
 end ContinuousFlexibility.Radial

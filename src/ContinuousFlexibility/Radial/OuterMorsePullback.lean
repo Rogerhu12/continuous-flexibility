@@ -64,6 +64,7 @@ theorem morseRealized_state_pullback {T : MorseChainData} {σ : ℕ → ℝ}
   obtain ⟨hu, hz⟩ := hstate (R X) hRX
   constructor
   · apply (hu.comp X hRd).congr_deriv
+    change scale / D.w (R X) * z (R X) * deriv R X = scale / lam * z (R X)
     have hprofileX : D.w (R X) = lam * deriv R X := hprofile hX
     rw [hprofileX]
     field_simp [hlam.ne', hRvpos.ne'] <;> ring
