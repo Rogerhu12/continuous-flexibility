@@ -64,7 +64,7 @@ theorem angular_pow_le_epsilon_succ {w epsilon : ℝ}
         _ ≤ epsilon * w := mul_le_mul_of_nonneg_left hcut' hepsilon.le
     have hmul := mul_le_mul_of_nonneg_right hone (pow_nonneg hw m)
     have hfirst : w ^ m ≤ epsilon * w ^ (m + 1) := by
-      simpa only [one_mul, pow_succ, mul_assoc, mul_left_comm, mul_comm] using hmul
+      simpa only [one_mul, mul_one, pow_succ, mul_assoc, mul_left_comm, mul_comm] using hmul
     exact hfirst.trans (le_add_of_nonneg_right (pow_nonneg (inv_nonneg.mpr hepsilon.le) m))
 
 /-- The explicit constant after absorption. `m` is one less than the
@@ -104,7 +104,7 @@ theorem angular_absorb_lower_order (m : ℕ) {D B A X Y U F Fzero : ℝ}
   have hcoef : 0 ≤ 2 * D * (T + A) := by positivity
   have hbase' := mul_le_mul_of_nonneg_left hbase hcoef
   have hbound : X ≤ 2 * D * F + 2 * D * (T + A) * (B * Fzero) :=
-    habsorbed.trans (add_le_add_left hbase' _)
+    habsorbed.trans (add_le_add le_rfl hbase')
   have hB1 : B ≤ 1 + B := le_add_of_nonneg_left zero_le_one
   have hnext : 2 * D * (T + A) * (B * Fzero) ≤
       2 * D * ((1 + T) * A) * ((1 + B) * Fzero) := by

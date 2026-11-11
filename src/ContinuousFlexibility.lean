@@ -1,7 +1,10 @@
 import ContinuousFlexibility.Analysis.AffineMaterialData
 import ContinuousFlexibility.Analysis.AffineMaterialFull
 import ContinuousFlexibility.Analysis.AffineMaterialSampling
+import ContinuousFlexibility.Analysis.AngularComplexification
+import ContinuousFlexibility.Analysis.AngularFrequency
 import ContinuousFlexibility.Analysis.AngularTameConstants
+import ContinuousFlexibility.Analysis.AngularWeightBounds
 import ContinuousFlexibility.Analysis.BastianiCurveChain
 import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
 import ContinuousFlexibility.Analysis.CubicDivisionL2
