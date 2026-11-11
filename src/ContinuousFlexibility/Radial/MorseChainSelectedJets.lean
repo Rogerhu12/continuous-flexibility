@@ -140,6 +140,18 @@ private theorem morseSelected_model_velocity_pos (M : MorseJoinJetModel) :
     ∀ x ∈ Ioo M.p M.q, 0 < deriv M.radius x :=
   fun x hx => (div_pos (pow_pos M.hA 5) (by norm_num)).trans_le (M.hVelocity x hx)
 
+private theorem morseSelected_scaledRadius_strictMonoOn (M : MorseJoinJetModel) :
+    StrictMonoOn (fun x => M.scale * M.radius x) (Icc M.p M.q) := by
+  have hcont : Continuous (fun x => M.scale * M.radius x) :=
+    continuous_const.mul M.hSmooth.continuous
+  apply strictMonoOn_of_deriv_pos (convex_Icc M.p M.q) hcont.continuousOn
+  intro x hx
+  have hx' : x ∈ Ioo M.p M.q := by simpa only [interior_Icc] using hx
+  have hd : HasDerivAt (fun x => M.scale * M.radius x) (M.scale * deriv M.radius x) x :=
+    ((M.hSmooth.differentiable (by simp) x).hasDerivAt).const_mul M.scale
+  rw [hd.deriv]
+  exact mul_pos M.hScale (morseSelected_model_velocity_pos M x hx')
+
 private theorem morseSelected_scaled_mem (M : MorseJoinJetModel) {x : ℝ} (hx : x ∈ Ioo M.p M.q) :
     M.scale * M.radius x ∈ M.image := by
   change M.scale * M.radius x ∈ Ioo (M.scale * M.radius M.p) (M.scale * M.radius M.q)
@@ -252,7 +264,6 @@ private theorem morseSelected_logFloor_of_model (M : MorseJoinJetModel)
   rw [hd.deriv]
   exact hSlope t ht rfl
 
-set_option maxHeartbeats 800000 in
 /-- Pointwise jets of the very connector chosen for the glued profile.
 The reference label is the outward block on both sides. -/
 theorem exists_morseChainChosenJoin_jetBounds {T : Statements.MorseChainData}
@@ -377,7 +388,7 @@ theorem exists_morseChainChosenJoin_jetBounds {T : Statements.MorseChainData}
   have hFloorL (y : ℝ) (hy : y ∈ Icc a (a + h)) : 2 / a ≤ deriv P.leftLog y := by
     apply morseSelected_logFloor_of_model L (hLsub hy) (hLg y hy)
     intro t ht htEq
-    have hmono := morseCollar_scaledRadius_strictMonoOn L.hScale L.hSmooth (morseSelected_model_velocity_pos L)
+    have hmono := morseSelected_scaledRadius_strictMonoOn L
     have hte : e ≤ t := by
       by_contra hbad
       have hlt : L.scale * L.radius t < a :=
@@ -394,7 +405,7 @@ theorem exists_morseChainChosenJoin_jetBounds {T : Statements.MorseChainData}
   have hFloorR (y : ℝ) (hy : y ∈ Icc (b - h) b) : 2 / a ≤ deriv P.rightLog y := by
     apply morseSelected_logFloor_of_model R (hRsub hy) (hRg y hy)
     intro t ht htEq
-    have hmono := morseCollar_scaledRadius_strictMonoOn R.hScale R.hSmooth (morseSelected_model_velocity_pos R)
+    have hmono := morseSelected_scaledRadius_strictMonoOn R
     have htc : t ≤ morseCellLeftCut := by
       by_contra hbad
       have hlt : b < R.scale * R.radius t :=
