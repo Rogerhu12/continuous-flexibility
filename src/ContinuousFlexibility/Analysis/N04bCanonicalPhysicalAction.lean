@@ -34,16 +34,16 @@ theorem n04b_physicalOperator_of_parts
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ)
     {u : PolarPoint → ℝ} (hu : ContDiff ℝ ∞ u) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) :
+    (hx : x ∈ physicalPieceOpen S K z m) :
     divergenceOperator (L.coefficients z) u x =
       |planeJacobian (K.chart z m) x| / K.height z m x *
         (divergenceOperator (K.coefficients z m)
           (canonicalHeight S K z m u) (K.chart z m x) +
         ((if K.positive m then -1 else (1 : ℝ)) *
           K.potential z m (K.chart z m x)) * (u x / K.height z m x)) := by
-  have hcharts := hA.2.2.2.2.2.2.2.1 z hz hsector m
-  have hU : IsOpen (physicalPieceOpen S K m) :=
-    isOpen_Ioo.prod isOpen_univ
+  have hcharts := hA.charts z hz hsector m
+  have hU : IsOpen (physicalPieceOpen S K z m) :=
+    (hA.domains z hz hsector m).1
   have hΩ : IsOpen (canonicalOpen S K m) :=
     isOpen_Ioo.prod isOpen_univ
   have hact : ∀ W : PolarPoint → ℝ, ContDiff ℝ ∞ W →

@@ -74,14 +74,7 @@ does not change any field used by the preceding clauses. -/
 theorem n04bWithInteriorDivision_partB_of_parts {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
     {base : ℕ} {ε : ℝ}
-    (hcut : ∀ m,
-      K.positive (K.cutPair m).1 = false ∧ K.positive (K.cutPair m).2 = false ∧
-      K.physicalLeft (K.cutPair m).1 = C.left m ∧
-      K.physicalRight (K.cutPair m).2 = C.right m ∧
-      K.physicalRight (K.cutPair m).1 = K.physicalLeft (K.cutPair m).2 ∧
-      0 < K.cutRadius m ∧ K.left (K.cutPair m).1 = 0 ∧ K.left (K.cutPair m).2 = 0 ∧
-      K.right (K.cutPair m).1 = K.cutRadius m ∧
-      K.right (K.cutPair m).2 = K.cutRadius m)
+    (hcut : CanonicalCutGeometry S C K base ε)
     (htrans : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       ∀ u : PolarPoint → ℝ, ContDiff ℝ ∞ u → ∀ m θ,
       let Wl := canonicalHeight S K z (K.cutPair m).1 u

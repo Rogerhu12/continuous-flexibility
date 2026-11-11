@@ -126,12 +126,12 @@ theorem n04bCanonicalOperatorData_positive_operator
       (if K.positive m then -1 else (1 : ℝ)) *
         divergenceOperator ((n04bCanonicalOperatorData S L K).coefficients z m) W p +
       (n04bCanonicalOperatorData S L K).potential z m p * W p := by
-  have hcharts := hA.2.2.2.2.2.2.2.1 z hz hs m
-  have hx : K.inverseChart z m p ∈ physicalPieceOpen S K m := hcharts.2.1 hp
+  have hcharts := hA.charts z hz hs m
+  have hx : K.inverseChart z m p ∈ physicalPieceOpen S K z m := hcharts.2.1 hp
   have hAnn : K.inverseChart z m p ∈ annularOpen D :=
-    ⟨(hA.2.2.2.1 m).2.2 hx.1, mem_univ _⟩
+    (hA.domains z hz hs m).2.2.1 hx
   have hpos : 0 < deriv D.w (K.inverseChart z m p).1 :=
-    hA.2.2.2.2.1 m hm _ hx.1
+    (hA.domains z hz hs m).2.2.2.2.2.2.1 _ hx hm
   obtain ⟨ha, hb, hc⟩ :=
     n04b_returnCoefficients_nonnegative_contDiffAt hT hS hN hz hs hAnn hpos.le
   exact n04bCanonicalOperatorData_operator hA hz hs m hp ha hb hc W hW

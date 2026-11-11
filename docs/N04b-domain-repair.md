@@ -8,9 +8,10 @@ Keep the canonical intervals, their common negative radius, the actual
 operator formulas, the transmission equation, the normalization, and the
 quantitative conclusions.
 
-This is a statement-repair design for review. It does not modify a shared
-Lean definition, add a theorem hypothesis, or claim that the repaired
-coordinate construction has been proved. The mathematical reason for the
+This branch implements the statement repair described here, together with
+the corresponding Assembly and N04a affine-atlas migration. It adds no
+normal-form hypothesis to an earlier node and does not claim that the
+repaired N04b coordinate construction has been proved. The mathematical reason for the
 repair is documented in [N04b-fixed-cut-audit.md](N04b-fixed-cut-audit.md).
 
 The inventory below was checked against local `line/N04b` through
@@ -18,8 +19,11 @@ The inventory below was checked against local `line/N04b` through
 `63a4cb2293c1e618dc4aebf5022a9a4cdf30b04a` merged, and against
 `origin/line/N04a` at `7870c3bc91ae2f075d829fafee2e55e7000e5c5c` and
 `origin/line/N04Coordinates` at `7a710c39ca424751134f091be4a2c6f43a379b69`.
-Names and code blocks below describe proposed declarations; they are not
-represented as compiled Lean additions.
+The shared implementation uses one `CanonicalGeometry` structure and one
+`CanonicalCutOperatorProperties` predicate, reexported by Part A/B, so the
+statement layer and Assembly cannot retain different geometry copies. The
+code blocks below specify their clauses; CI validation is reported in the
+pull request rather than inferred from this design document.
 
 ## 1. Why the interface should allow a curve
 
@@ -570,7 +574,7 @@ the new physical partition and the curved-cut transport from Section 7.
 
 ## 9. Review and verification gates
 
-The eventual repair should be accepted only with these specific checks:
+The repair and its eventual constructive proof have these specific verification gates:
 
 - The common domain field is the only new geometric data field; the cut is
   tied to the actual inverse trace, and all boundary derivatives are tied

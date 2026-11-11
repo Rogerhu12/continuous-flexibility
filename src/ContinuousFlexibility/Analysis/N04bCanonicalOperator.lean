@@ -44,10 +44,10 @@ theorem n04b_canonicalOperator_explicit_fields
         inverseChartPotential (L.coefficients z)
           (K.chart z m) (K.inverseChart z m) (K.height z m) p) * W p := by
   let x : PolarPoint := K.inverseChart z m p
-  have hcharts := hA.2.2.2.2.2.2.2.1 z hz hs m
-  have hx : x ∈ physicalPieceOpen S K m := hcharts.2.1 hp
+  have hcharts := hA.charts z hz hs m
+  have hx : x ∈ physicalPieceOpen S K z m := hcharts.2.1 hp
   have hFx : K.chart z m x = p := hcharts.2.2.2.1 p hp
-  have hOpen : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
+  have hOpen : IsOpen (physicalPieceOpen S K z m) := (hA.domains z hz hs m).1
   have hCanonicalOpen : IsOpen (canonicalOpen S K m) := isOpen_Ioo.prod isOpen_univ
   have hF : ContDiffAt ℝ ∞ (K.chart z m) x :=
     (hcharts.2.2.2.2.1 x hx).contDiffAt (hOpen.mem_nhds hx)
@@ -132,7 +132,7 @@ theorem n04bCanonicalOperatorData_operator_clause
     {L : ReturnCorrectionData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hA : N04PartA D S C K base ε)
     (hreg : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
-      ∀ m x, x ∈ physicalPieceOpen S K m →
+      ∀ m x, x ∈ physicalPieceOpen S K z m →
         ContDiffAt ℝ ∞ (L.coefficients z).a x ∧
         ContDiffAt ℝ ∞ (L.coefficients z).b x ∧
         ContDiffAt ℝ ∞ (L.coefficients z).c x) :
@@ -145,8 +145,8 @@ theorem n04bCanonicalOperatorData_operator_clause
           (n04bCanonicalOperatorData S L K).potential z m p * W p := by
   intro z hz hs m W hW p hp
   have hp' : p ∈ canonicalOpen S K m := hp
-  have hcharts := hA.2.2.2.2.2.2.2.1 z hz hs m
-  have hx : K.inverseChart z m p ∈ physicalPieceOpen S K m := hcharts.2.1 hp'
+  have hcharts := hA.charts z hz hs m
+  have hx : K.inverseChart z m p ∈ physicalPieceOpen S K z m := hcharts.2.1 hp'
   obtain ⟨ha, hb, hc⟩ := hreg z hz hs m (K.inverseChart z m p) hx
   exact n04bCanonicalOperatorData_operator hA hz hs m hp' ha hb hc W hW
 

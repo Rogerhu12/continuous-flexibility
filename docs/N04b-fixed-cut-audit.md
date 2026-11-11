@@ -2,7 +2,8 @@
 
 ## Scope and status
 
-This audit concerns the exact frozen endpoint
+This audit concerns the fixed-domain version of the endpoint at commit
+`4ad5c96d9e19d7d35606c3b2e9e9b84bfa0efe35`, before the moving-domain repair
 
 ```lean
 theorem N04b (hN04a : N04aStatement) : N04bStatement
@@ -27,7 +28,13 @@ subsequent coefficient and bounded-corrector work. The four statement files
 below are unchanged between the earlier audit's pin `7393d67` and main
 `875357e209ac27cdb94c9db0429946daf553d3f3`.
 
-The audited definitions are in
+The current branch repairs those domain predicates as described in
+[N04b-domain-repair.md](N04b-domain-repair.md); the quoted clauses below
+remain quotations of the pinned fixed-domain version, not descriptions of
+the repaired definitions. The mathematical audit is not a Lean-certified
+negation of that earlier existential statement.
+
+The audited definitions were in
 [Blueprint/Statements.lean](../src/ContinuousFlexibility/Blueprint/Statements.lean),
 [Statements/Nonlinear.lean](../src/ContinuousFlexibility/Statements/Nonlinear.lean),
 [Statements/Analysis.lean](../src/ContinuousFlexibility/Statements/Analysis.lean),
