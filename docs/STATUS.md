@@ -30,6 +30,15 @@ root/control estimates for the speeds, and the all-order ODE estimates remain
 separate obligations. No independent-witness implication has been substituted
 for the existential construction.
 
+The first proof modules make the input norms quantitative:
+`N01cStateSeminorms` bounds actual control means by the state grading and
+restricts to a common neighbourhood; `N01cHeightSeminorms` bounds material
+jets by the actual height grading with an explicit two-derivative loss.
+`N01cTranslationJets` states the finite-order Fourier obstruction precisely.
+These modules are being checked by CI; no successful validation is asserted
+before its result. The Numbers table below still records the last verified
+main build, rather than an unverified count for this branch.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
