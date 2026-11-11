@@ -4,40 +4,20 @@ Last updated: 2026-11-11.
 
 ## Active lines
 
-- `line/Spaces` (2026-11-11), based on `main` at `97f8b35`: the exact W03
-  statement is proved by `Statements.spaces_W03_statement`, including joint
-  smoothness on the original parameter interval. Both supporting modules
-  compile, and its axiom audit lists only `propext`, `Classical.choice`, and
-  `Quot.sound`. Verified W02 prerequisites now include the exact circle model,
-  even/odd projections, the physical source integral and its compact
-  normalizer, the compatibility projection, height products, a reciprocal
-  reduction to smooth composition, and the sequence-retraction construction.
-  The checkpoints through `e8bd075` passed the complete CI build,
-  including the project axiom audit. The exact physical Sobolev model,
-  actual smooth tame multiplication, and complete split trace with fixed
-  loss 3 are proved. The concrete circle retraction is now proved by
-  `canonicalCircleModel_tameRetraction`: its actual band series reconstructs
-  every weighted closed-graph coordinate, with analysis loss 0 and synthesis
-  loss 1. Its axiom audit lists only the three standard axioms. Further
-  compiled results include the exact physical cell Fourier coefficient
-  identities, weighted bounded-overlap localization and gluing, physical
-  frequency-band operators, and the complete finite spatial-jet expansion
-  for smooth composition. The local dominated L² curve derivative and the
-  repeated low-factor estimate are also proved. The complete physical analysis family now has loss 0, and envelope
-  gluing exactly reconstructs the localized function. Every smooth-composition
-  kernel has its actual weighted jets, multilinearity and fixed-base tame
-  estimates; affine L² majorants and spatial/parameter differentiation are
-  proved. The complete physical retraction is now compiled and audited: it has
-  analysis loss 0 and synthesis loss 1 in the prescribed fixed model. The
-  projective multilinear joint-continuity bridge and actual composition
-  direction derivatives are also compiled and audited. Full proof bodies
-  for the physical retraction, projective smooth-composition tower, W02 and
-  the original `Blueprint.Spaces` statement are now in place. The final
-  smooth-composition packaging and exact node are undergoing compilation
-  and CI verification; the node is also explicitly in the root import. The `931888f` check compiled all new
-  modules individually, then exposed an anonymous local-instance name
-  collision in the root import; the relevant instances now have unique names.
-  `Spaces` stays open until the full W02/W03 statement and CI pass.
+- `line/Spaces` (2026-11-11), based on `main` at `97f8b35`: the exact
+  `Blueprint.Spaces` theorem now compiles with its original W02/W03 statement.
+  Its final `#print axioms` lists only `propext`, `Classical.choice`, and
+  `Quot.sound`. The W02 assembly, physical retraction and full smooth
+  composition theorem have the same audited axiom set. The construction uses
+  the actual physical and circle weak-jet models; both retractions have
+  analysis loss 0 and synthesis loss 1, and the split trace has fixed loss 3.
+  Multiplication, scalar composition, reciprocal, source compatibility and
+  parity are the prescribed decoded operations. W03 includes all ordinary
+  endpoint-flat jets and joint smoothness on the original parameter interval.
+  All 184 project modules in the exact proof's dependency closure are explicitly
+  in the root import, including `Blueprint.Spaces` itself. No frozen statement
+  or assembly interface was changed. The final full CI build is pending;
+  the task remains active until that completion gate passes.
 
 ## Target
 
@@ -56,18 +36,17 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 459 / 467 |
+| Lean modules compiled / total | 463 / 468 |
 | Modules in the root import | 420 |
-| Lines of Lean under `src/` | 104,363 |
+| Lines of Lean under `src/` | 104,407 |
 | Axiom audit (`lake build`, `e8bd075`) | passed |
 | Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 469 |
+| Modules on the module system | 1 (the Challenge) of 470 |
 
 The compilation count intersects the source files in this checkpoint with their
 compiled artifacts; stale artifacts from the restored cache are not counted.
-The new final proof-chain modules and `Blueprint.Spaces` are awaiting verification.
-The other 5 modules without a verified build are unfinished files of the earlier workflow:
+The 5 modules without a verified build are unfinished files of the earlier workflow:
 `Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
 `Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
 

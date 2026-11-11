@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.SpacesNemytskiiCurveDerivative
 import ContinuousFlexibility.Analysis.SpacesNemytskiiMultilinear
 import ContinuousFlexibility.Analysis.SpacesMultilinearContinuity
+import ContinuousFlexibility.Analysis.SpacesSmoothTameBounds
 import ContinuousFlexibility.Analysis.TameTransfer
 
 /-!
@@ -40,28 +41,6 @@ theorem spacesContinuousMultilinearMapOfContinuous_apply {E F : Type*}
     (B : MultilinearMap ℝ (fun _ : Fin k => E) F) (hB : Continuous B) (v : Fin k → E) :
     spacesContinuousMultilinearMapOfContinuous B hB v = B v := rfl
 
-/-- A fixed low-seminorm bound on the base gives the local estimates in
-the smooth-tame definition without changing the directional tower. -/
-theorem spaces_smoothTameOn_univ_of_bounded_base {E F : Type*}
-    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
-    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) {f : E → F}
-    (J : Statements.SmoothDirections Set.univ f) (base loss : ℕ)
-    (hb : ∀ k s : ℕ, ∀ R : ℝ, 1 ≤ R → ∃ C : ℝ, 0 ≤ C ∧
-      ∀ x, p base x ≤ R → ∀ v : Fin k → E,
-        q s (J.D k x v) ≤ C *
-          ((1 + p (s + loss) x) * ∏ i, p base (v i) +
-            ∑ i, p (s + loss) (v i) * ∏ j ∈ Finset.univ.erase i, p base (v j))) :
-    Statements.SmoothTameOn p q Set.univ f := by
-  refine ⟨J, fun k x₀ _ => ⟨loss, base, 1, zero_lt_one, fun s _ => ?_⟩⟩
-  have hR : 1 ≤ 1 + p base x₀ := by have h := apply_nonneg (p base) x₀; linarith
-  obtain ⟨C, hC, hbound⟩ := hb k s (1 + p base x₀) hR
-  refine ⟨C, hC, fun x _ hx v => hbound x ?_ v⟩
-  calc
-    p base x = p base ((x - x₀) + x₀) := by rw [sub_add_cancel]
-    _ ≤ p base (x - x₀) + p base x₀ := map_add_le_add (p base) _ _
-    _ ≤ 1 + p base x₀ := add_le_add hx.le le_rfl
-
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -70,6 +49,7 @@ open Set MeasureTheory ContinuousFlexibility.Analysis
 open scoped ContDiff BigOperators ENNReal Topology
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 variable {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T)
   (hI : HasInterpolation (spacesPhysicalGrading hT))
@@ -129,17 +109,33 @@ theorem spacesNemytskiiSmoothDirections_D_apply (k : ℕ) (u : PhysicalJetProjec
     (spacesNemytskiiSmoothDirections hT hI hγ hF hF0 hFb).D k u v =
       spacesNemytskiiKernel hT hI hγ hF hF0 hFb k u v := rfl
 
+theorem spaces_nemytskii_kernel_tame_fixed :
+    ∃ base loss : ℕ, ∀ k s : ℕ, ∀ R : ℝ, 1 ≤ R → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ (u : PhysicalJetProjectiveLimit hT), spacesPhysicalGrading hT base u ≤ R →
+      ∀ v : Fin k → PhysicalJetProjectiveLimit hT,
+        spacesPhysicalGrading hT s (spacesNemytskiiKernel hT hI hγ hF hF0 hFb k u v) ≤
+          C * spacesNemytskiiMajorant hT base (s + loss) u v := by
+  obtain ⟨base, loss, hb⟩ := spaces_nemytskii_kernel_tame hT hI
+  exact ⟨base, loss, hb γ hγ F hF hF0 hFb⟩
+
+theorem spaces_nemytskii_kernel_tame_fixed_expanded :
+    ∃ base loss : ℕ, ∀ k s : ℕ, ∀ R : ℝ, 1 ≤ R → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ (u : PhysicalJetProjectiveLimit hT), spacesPhysicalGrading hT base u ≤ R →
+      ∀ v : Fin k → PhysicalJetProjectiveLimit hT,
+        spacesPhysicalGrading hT s (spacesNemytskiiKernel hT hI hγ hF hF0 hFb k u v) ≤
+          C * ((1 + spacesPhysicalGrading hT (s + loss) u) * ∏ i, spacesPhysicalGrading hT base (v i) +
+            ∑ i, spacesPhysicalGrading hT (s + loss) (v i) *
+              ∏ j ∈ Finset.univ.erase i, spacesPhysicalGrading hT base (v j)) := by
+  simpa only [spacesNemytskiiMajorant] using spaces_nemytskii_kernel_tame_fixed hT hI hγ hF hF0 hFb
+
 theorem spaces_nemytskii_bounded_smoothTame :
     SmoothTameOn (spacesPhysicalGrading hT) (spacesPhysicalGrading hT) univ
       (fun u => spacesNemytskiiKernel hT hI hγ hF hF0 hFb 0 u Fin.elim0) := by
-  obtain ⟨base, loss, hb⟩ := spaces_nemytskii_kernel_tame hT hI
-  apply spaces_smoothTameOn_univ_of_bounded_base (spacesPhysicalGrading hT) (spacesPhysicalGrading hT)
-    (spacesNemytskiiSmoothDirections hT hI hγ hF hF0 hFb) base loss
-  intro k s R hR
-  obtain ⟨C, hC, hbound⟩ := hb γ hγ F hF hF0 hFb k s R hR
-  refine ⟨C, hC, fun u hu v => ?_⟩
-  rw [spacesNemytskiiSmoothDirections_D_apply]
-  exact hbound u hu v
+  obtain ⟨base, loss, hb⟩ := spaces_nemytskii_kernel_tame_fixed_expanded hT hI hγ hF hF0 hFb
+  exact spaces_smoothTameOn_univ_of_kernel_bounds (spacesPhysicalGrading hT) (spacesPhysicalGrading hT)
+    (spacesNemytskiiSmoothDirections hT hI hγ hF hF0 hFb)
+    (spacesNemytskiiKernel hT hI hγ hF hF0 hFb)
+    (spacesNemytskiiSmoothDirections_D_apply hT hI hγ hF hF0 hFb) base loss hb
 
 end ContinuousFlexibility.Statements
 
@@ -149,6 +145,7 @@ open Set ContinuousFlexibility.Analysis
 open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 /-- The full scalar composition clause, with its genuine smooth directional
 tower on one fixed low-seminorm neighborhood. -/

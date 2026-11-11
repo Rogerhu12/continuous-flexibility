@@ -416,5 +416,5 @@ import ContinuousFlexibility.Analysis.SpacesPhysicalBandReconstruction
 import ContinuousFlexibility.Analysis.SpacesPhysicalRetraction
 import ContinuousFlexibility.Analysis.SpacesPhysicalRowEquiv
 import ContinuousFlexibility.Analysis.SpacesPhysicalShellSynthesis
-import ContinuousFlexibility.Blueprint.Statements
 import ContinuousFlexibility.Blueprint.Spaces
+import ContinuousFlexibility.Analysis.SpacesSmoothTameBounds

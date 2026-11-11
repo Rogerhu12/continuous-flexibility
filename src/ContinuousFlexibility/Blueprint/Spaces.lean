@@ -1,4 +1,3 @@
-import ContinuousFlexibility.Blueprint.Statements
 import ContinuousFlexibility.Analysis.SpacesConclusion
 import ContinuousFlexibility.Analysis.SpacesFlatFamilies
 
