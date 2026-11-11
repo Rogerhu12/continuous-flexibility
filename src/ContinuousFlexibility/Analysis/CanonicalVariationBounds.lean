@@ -89,6 +89,18 @@ theorem oneHigh_displacement_le_linear_high
   have hsmall := mul_le_mul_of_nonneg_right hlow (apply_nonneg (p (max base high)) d)
   nlinarith
 
+omit [TopologicalSpace E] [IsTopologicalAddGroup E] [ContinuousSMul ℝ E] in
+/-- The weighted scalar consequence is proved before specializing to the
+projective state space, so no large concrete term needs rewriting. -/
+theorem weighted_oneHigh_displacement_le_linear_high
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (base high : ℕ) (d : E)
+    {A η V : ℝ} (hA : 0 ≤ A) (hlow : p base d ≤ η)
+    (hV : V ≤ A * (p base d + (1 + p base d) * p high d)) :
+    V ≤ A * (2 + η) * p (max base high) d := by
+  have h := hV.trans (mul_le_mul_of_nonneg_left
+    (oneHigh_displacement_le_linear_high p hp base high d hlow) hA)
+  simpa only [mul_assoc] using h
+
 /-- Integrating a one-high-factor first-variation estimate removes the
 constant term from the value bound. -/
 theorem abs_sub_le_of_oneHigh_first_bound
@@ -255,15 +267,15 @@ theorem coefficientFamily_le_linear_high_of_n01
   obtain ⟨B, hB, hbound⟩ := coefficientFamily_le_displacement_of_n01 hT hN s
   refine ⟨B, hB, ?_⟩
   intro m i a b p hab hp z hz
-  apply (hbound m i a b p hab hp z hz).trans
-  rw [mul_assoc (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
-    (2 + 2 * ε)]
-  apply mul_le_mul_of_nonneg_left _ (materialSample_factor_nonneg hN.1.1 hT hB.le m)
   have hgrade : Monotone (pairGrading (stateGrading S) realGrading) :=
     tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
-  exact oneHigh_displacement_le_linear_high
+  exact weighted_oneHigh_displacement_le_linear_high
     (pairGrading (stateGrading S) realGrading) hgrade base (s + loss)
-    (z - (C.referenceState, 0)) (pairGrading_displacement_le_two_mul_radius hz)
+    (z - (C.referenceState, 0))
+    (A := B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+    (η := 2 * ε) (V := |coefficientFamily D S C i a b p z|)
+    (materialSample_factor_nonneg hN.1.1 hT hB.le m)
+    (pairGrading_displacement_le_two_mul_radius hz) (hbound m i a b p hab hp z hz)
 
 /-- The ordinary flow family is also the actual difference from its
 reference value, including at every angular derivative order. -/
@@ -300,15 +312,14 @@ theorem ordinaryFlowFamily_le_linear_high_of_n01
   obtain ⟨B, hB, hbound⟩ := ordinaryFlowFamily_le_displacement_of_n01 hT hN s
   refine ⟨B, hB, ?_⟩
   intro m b p hb hp z hz
-  apply (hbound m b p hb hp z hz).trans
-  rw [mul_assoc (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-    T.E0 (T.sample (C.cell m)) ^ B) (2 + 2 * ε)]
-  apply mul_le_mul_of_nonneg_left _
-    (materialSample_factor_nonneg hN.1.1 hT hB.le (C.cell m))
   have hgrade : Monotone (pairGrading (stateGrading S) realGrading) :=
     tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
-  exact oneHigh_displacement_le_linear_high
+  exact weighted_oneHigh_displacement_le_linear_high
     (pairGrading (stateGrading S) realGrading) hgrade base (s + loss)
-    (z - (C.referenceState, 0)) (pairGrading_displacement_le_two_mul_radius hz)
+    (z - (C.referenceState, 0))
+    (A := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+    (η := 2 * ε) (V := |ordinaryFlowFamily S C m 0 b p z|)
+    (materialSample_factor_nonneg hN.1.1 hT hB.le (C.cell m))
+    (pairGrading_displacement_le_two_mul_radius hz) (hbound m b p hb hp z hz)
 
 end ContinuousFlexibility.Analysis
