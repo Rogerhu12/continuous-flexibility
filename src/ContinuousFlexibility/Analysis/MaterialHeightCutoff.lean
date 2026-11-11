@@ -49,7 +49,11 @@ theorem weightedPhysicalJet_cutoff {D : ReferenceData} {T : MaterialData}
           weightedPhysicalJet T γ (a - i) b c f p := by
   unfold weightedPhysicalJet
   rw [materialPullback_cutoff hT, mixedDerivative_radial_mul hχ
-    (contDiff_materialPullback hT hf), Fin.sum_univ_eq_sum_range, Finset.mul_sum]
+    (contDiff_materialPullback hT hf)]
+  rw [Fin.sum_univ_eq_sum_range
+    (fun i : ℕ => (a.choose i : ℝ) * iteratedDeriv i χ p.1 *
+      mixedDerivative (a - i) b (materialPullback T γ f) p) (a + 1),
+    Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
   ring
