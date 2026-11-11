@@ -252,6 +252,9 @@ Integration repairs (no statement changed):
 Unclaimed at 2026-11-11 11:45 UTC: N01a, N01b, N04a, N04b, N05, N06, N07a, N07b, N08, N09N10.
 Every other task has a branch. The current state is always `git ls-remote --heads origin "line/*"`.
 
+Every task has a branch (2026-11-12 01:10 Beijing time). A line that finishes moves to the six
+reserved topics of `Rogerhu12/math-research` (`docs/tasks/README.md`, "When you finish", step 4).
+
 A line that has finished takes the first task below whose branch does not exist:
 
 1. Scalar and geometry of the iteration: N01a, N01b.
