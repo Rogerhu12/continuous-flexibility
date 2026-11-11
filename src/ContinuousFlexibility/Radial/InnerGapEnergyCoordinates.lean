@@ -122,7 +122,8 @@ theorem innerGapEnergyPair_norm_sq (D : ReferenceData) (hw : ContDiff ℝ ∞ D.
     innerRadialIntervalToLp_norm_sq D hw.continuous hab,
     innerRadialIntervalToLp_norm_sq D hw.continuous hab]
   have hρ := innerRadialGapDensity_continuousOn (b := b) ha hw.continuous
-  have hd := (innerGapGradientField_continuous hu).continuousOn
+  have hd : ContinuousOn (innerGapGradientField u) (Icc a b) :=
+    (innerGapGradientField_continuous hu).continuousOn
   have hq := innerGapPotentialField_continuousOn hw hu hpos j
   unfold innerRadialGapMass innerRadialGapEnergy
   rw [← intervalIntegral.integral_add

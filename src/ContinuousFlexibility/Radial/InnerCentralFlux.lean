@@ -67,7 +67,6 @@ theorem innerCentral_radialFlux_matrix
   have hF := innerCentral_flux_at
     ((hp i k).const_mul (centralDensityRoot (cuts k))) (hu i k) (hw i) (hheight i k)
   rw [hd] at hF
-  dsimp only at hF
   simp only [Matrix.of_apply, Matrix.add_apply, Matrix.smul_apply,
     smul_eq_mul, Matrix.mul_diagonal, Matrix.diagonal_mul, Matrix.diagonal_apply]
   calc
@@ -82,7 +81,7 @@ theorem innerCentral_radialFlux_matrix
       rw [htrace k i]
       by_cases hik : i = k
       · subst k
-        simp only [if_pos rfl]
+        simp only [eq_self_iff_true, ite_true]
         ring
       · simp only [if_neg hik, if_neg (Ne.symm hik)]
         ring
@@ -109,7 +108,7 @@ theorem innerCentral_radialFlux_split (lam : ℝ) (cuts αin : Fin 2 → ℝ)
     Matrix.mul_diagonal, Matrix.diagonal_mul, Matrix.diagonal_apply]
   by_cases hik : i = k
   · subst k
-    simp only [if_pos rfl, innerCentralKappa]
+    simp only [eq_self_iff_true, ite_true, innerCentralKappa]
     ring
   · simp only [if_neg hik]
     ring
@@ -143,8 +142,10 @@ theorem innerCentralKappa_compare {lam C m : ℝ} (cuts αin : Fin 2 → ℝ) (i
         2 * innerCentralKappa lam cuts αin i := by
   have hlo' : m ≤ αin i * C := (div_le_iff₀ hC).mp hlo
   have hα : 2 * centralRadiusA ≤ αin i := by
-    apply (mul_le_mul_right hC).mp
-    nlinarith only [hfar, hlo']
+    by_contra hn
+    have hlt : αin i < 2 * centralRadiusA := lt_of_not_ge hn
+    have hmul := mul_lt_mul_of_pos_right hlt hC
+    nlinarith only [hfar, hlo', hmul]
   have hd := innerCentral_drift_bounds i hα
   have hscale : 0 < lam * centralDensityRoot (cuts i) ^ 2 :=
     mul_pos hlam (sq_pos_of_pos (centralDensityRoot_pos _))

@@ -68,19 +68,20 @@ theorem innerBuffer_potential_lower_closed {B : BufferData} (hB : BufferHypothes
     B.mass i ^ 2 ≤ B.potential x := by
   have hW := innerBuffer_walls_inside hB
   rcases hB with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hlo, _, _⟩
-  fin_cases i
-  · have hx' : x ∈ uIcc B.l (bufferInnerWall B 0) := by
-      simpa only [bufferCut, if_pos rfl] using hx
+  by_cases hi : i = 0
+  · subst i
+    have hx' : x ∈ uIcc B.l (bufferInnerWall B 0) := by
+      simpa [bufferCut] using hx
     rw [uIcc_of_le hW.1.le] at hx'
     apply hlo 0
-    simpa only [bufferInnerWall, bufferCut, bufferSign, if_pos rfl, neg_mul,
-      one_mul, neg_div, sub_neg_eq_add] using hx'.2
-  · have hx' : x ∈ uIcc B.h (bufferInnerWall B 1) := by
-      simpa only [bufferCut, if_neg (by decide : (1 : Fin 2) ≠ 0)] using hx
+    simpa [bufferInnerWall, bufferCut, bufferSign] using hx'.2
+  · have hi' : i = 1 := by omega
+    subst i
+    have hx' : x ∈ uIcc B.h (bufferInnerWall B 1) := by
+      simpa [bufferCut] using hx
     rw [uIcc_of_ge hW.2.2.le] at hx'
     apply hlo 1
-    simpa only [bufferInnerWall, bufferCut, bufferSign,
-      if_neg (by decide : (1 : Fin 2) ≠ 0), one_mul] using hx'.1
+    simpa [bufferInnerWall, bufferCut, bufferSign] using hx'.1
 
 /-- The actual leading cutoff has no larger height than its buffer
 column and is supported in that same buffer. -/
@@ -131,11 +132,11 @@ theorem innerBufferLeading_norm_bound {B : BufferData} (hB : BufferHypotheses B)
   have hE' : IntervalIntegrable (fun x => deriv p x ^ 2 + B.potential x * p x ^ 2)
       volume (min (bufferCut B i) (bufferInnerWall B i))
         (max (bufferCut B i) (bufferInnerWall B i)) := by
-    rw [intervalIntegrable_iff_integrableOn_Icc_of_le (min_le_max _ _)]
+    apply (intervalIntegrable_iff_integrableOn_Icc_of_le min_le_max).mpr
     exact (intervalIntegrable_iff').mp hE
   apply innerL2_norm_le_sqrt_energy (buffer_mass_pos hB i) L
   rw [hα]
-  apply innerL2_interval_energy_bound (min_le_max _ _) (buffer_mass_pos hB i)
+  apply innerL2_interval_energy_bound (min_le_max) (buffer_mass_pos hB i)
     (fun x hx => innerBuffer_potential_lower_closed hB i hx) hE' L
   · filter_upwards [hnorm.1] with x hx _
     exact hx

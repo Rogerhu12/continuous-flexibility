@@ -68,7 +68,11 @@ theorem innerWeakGreen_potential_class {a b : ℝ} {V p : ℝ → ℝ}
     {P : RadialL2} (hP : (P : ℝ → ℝ) =ᵐ[volume] (Ioo a b).indicator p) :
     ∃ Pv : RadialL2, (Pv : ℝ → ℝ) =ᵐ[volume] (fun x => V x * P x) := by
   have hprod : ContinuousOn (fun x => V x * p x) (Icc a b) := by
-    simpa only [Pi.mul_apply] using hV.mul hp
+    have he : V * p = (fun x => V x * p x) := by
+      funext x
+      exact Pi.mul_apply V p x
+    rw [← he]
+    exact hV.mul hp
   have hm : MemLp ((Ioo a b).indicator (fun x => V x * p x)) 2 volume :=
     innerDirichlet_indicator_memLp hprod
   refine ⟨hm.toLp ((Ioo a b).indicator (fun x => V x * p x)), ?_⟩
@@ -94,7 +98,11 @@ theorem innerEnergyClosure_poisson_pairing {a b α : ℝ} {V column p : ℝ → 
   have hpc : ContinuousOn p (Icc a b) :=
     fun x hx => (hp x hx).continuousAt.continuousWithinAt
   have hprod : ContinuousOn (fun x => V x * p x) (Icc a b) := by
-    simpa only [Pi.mul_apply] using hV.mul hpc
+    have he : V * p = (fun x => V x * p x) := by
+      funext x
+      exact Pi.mul_apply V p x
+    rw [← he]
+    exact hV.mul hpc
   have hm : MemLp ((Ioo a b).indicator (fun x => V x * p x)) 2 volume :=
     innerDirichlet_indicator_memLp hprod
   let Pv : RadialL2 := hm.toLp ((Ioo a b).indicator (fun x => V x * p x))

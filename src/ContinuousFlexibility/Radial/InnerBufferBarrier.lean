@@ -21,8 +21,9 @@ open scoped Topology ContDiff
 
 theorem innerBufferPoint_hasDerivAt (B : BufferData) (i : Fin 2) (t : ℝ) :
     HasDerivAt (positiveBufferPoint B i) (-bufferSign i / B.mass i) t := by
-  convert (((hasDerivAt_id t).const_mul (bufferSign i)).div_const (B.mass i)).const_sub
-    (bufferCut B i) using 1 <;> simp only [positiveBufferPoint, id_eq, mul_one] <;> ring
+  simpa only [positiveBufferPoint, id_eq, mul_one, neg_div] using
+    (((hasDerivAt_id t).const_mul (bufferSign i)).div_const (B.mass i)).const_sub
+      (bufferCut B i)
 
 theorem innerBufferPoint_contDiff (B : BufferData) (i : Fin 2) :
     ContDiff ℝ ∞ (positiveBufferPoint B i) := by
@@ -70,24 +71,27 @@ theorem innerBuffer_column_coordinate_equation {B : BufferData}
   · intro t ht
     have hx := innerBufferPoint_mem_openSpan hB i ht.1 ht.2
     have hd := (hpopen.contDiffAt (isOpen_Ioo.mem_nhds hx)).differentiableAt (by norm_num)
-    convert hd.hasDerivAt.comp t (innerBufferPoint_hasDerivAt B i t) using 1 <;> ring
+    simpa only [Function.comp_def, mul_comm] using
+      hd.hasDerivAt.comp t (innerBufferPoint_hasDerivAt B i t)
   · intro t ht
     have hx := innerBufferPoint_mem_openSpan hB i ht.1 ht.2
     have hd := (hpd.contDiffAt (isOpen_Ioo.mem_nhds hx)).differentiableAt (by norm_num)
     have he : deriv (deriv p) (positiveBufferPoint B i t) =
         B.potential (positiveBufferPoint B i t) * p (positiveBufferPoint B i t) := by
       linarith only [heq _ hx]
-    convert (hd.hasDerivAt.comp t (innerBufferPoint_hasDerivAt B i t)).const_mul
-      (-bufferSign i / B.mass i) using 1
-    rw [he]
-    calc
-      B.potential (positiveBufferPoint B i t) / B.mass i ^ 2 *
-          p (positiveBufferPoint B i t) =
-        (-bufferSign i / B.mass i) ^ 2 *
-          (B.potential (positiveBufferPoint B i t) * p (positiveBufferPoint B i t)) := by
-            rw [hsquare]
-            ring
-      _ = _ := by ring
+    have hcoeff :
+        (-bufferSign i / B.mass i) *
+            (deriv (deriv p) (positiveBufferPoint B i t) * (-bufferSign i / B.mass i)) =
+          B.potential (positiveBufferPoint B i t) / B.mass i ^ 2 *
+            p (positiveBufferPoint B i t) := by
+      rw [he]
+      calc
+        _ = (-bufferSign i / B.mass i) ^ 2 *
+            (B.potential (positiveBufferPoint B i t) * p (positiveBufferPoint B i t)) := by ring
+        _ = _ := by rw [hsquare]; ring
+    simpa only [Function.comp_def, hcoeff] using
+      (hd.hasDerivAt.comp t (innerBufferPoint_hasDerivAt B i t)).const_mul
+        (-bufferSign i / B.mass i)
   · intro t ht
     apply (le_div_iff₀ (sq_pos_of_pos hm)).mpr
     simpa only [one_mul] using positiveBufferPoint_potential_lower hB i ht.2.le
@@ -194,7 +198,7 @@ theorem innerBuffer_column_inner_derivative {B : BufferData} (hB : BufferHypothe
     abs_of_pos hm] at hbound
   have hdiv : |deriv p (positiveBufferPoint B i t)| / B.mass i ≤
       (2 + B.layerBound) * M := by
-    simpa only [one_div, div_eq_mul_inv, mul_comm] using hbound
+    simpa only [one_div, div_eq_mul_inv, mul_comm, one_mul] using hbound
   calc
     _ ≤ ((2 + B.layerBound) * M) * B.mass i := (div_le_iff₀ hm).mp hdiv
     _ = _ := by ring

@@ -41,6 +41,8 @@ theorem innerLiouville_mass_change {R s w u ψ : ℝ → ℝ} {a b lam : ℝ}
   apply setIntegral_congr_fun measurableSet_Ioc
   intro x hx
   have hx' := Ioc_subset_Icc_self hx
+  change |deriv R x| • ((12 * w (R x) / R x ^ 2) * u (R x) ^ 2) =
+    12 * lam * ((deriv R x / R x) * ψ x) ^ 2
   rw [abs_of_pos (hVp x hx'), smul_eq_mul, hw x hx', hu x hx']
   field_simp [(hRp x hx').ne', hs x hx'] <;> ring
 
@@ -67,6 +69,7 @@ theorem innerLiouville_mass_le_of_model_energy {R s w u ψ : ℝ → ℝ} {a b l
       (((hvcont.mul hψ).pow 2).intervalIntegrable_of_Icc hab)
       ((continuousOn_const.mul (hψ.pow 2)).intervalIntegrable_of_Icc hab)
     intro x hx
+    change ((deriv R x / R x) * ψ x) ^ 2 ≤ U ^ 2 * ψ x ^ 2
     by_cases hz : ψ x = 0
     · simp only [hz, mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0)]
     · have hv := (sq_le_sq₀ (abs_nonneg (deriv R x / R x)) hU).mpr (hvelocity x hx hz)

@@ -194,7 +194,7 @@ theorem innerBufferSource_L2_bound {B : BufferData} (hB : BufferHypotheses B)
     rw [habs]
     simpa only [show B.action i + 3 - (B.action i + 4) = (-1 : ℝ) by ring,
       abs_neg, abs_one] using hdist
-  have h := innerIntervalL2_norm_le_of_support_bound (min_le_max a b) f
+  have h := innerIntervalL2_norm_le_of_support_bound (min_le_max) f
     (by positivity) hbound hsupport
   rw [hlength] at h
   calc
