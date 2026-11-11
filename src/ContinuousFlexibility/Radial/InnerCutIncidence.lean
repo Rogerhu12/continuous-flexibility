@@ -80,7 +80,8 @@ theorem innerCut_restriction_norm_sq_eq (J I : Finset α) (hI : I ⊆ J)
       apply Finset.sum_congr rfl
       intro c _
       rw [EuclideanSpace.restrict₂_apply, dif_pos (hI c.property)]
-    _ = _ := Finset.sum_coe_sort I _
+    _ = _ := Finset.sum_coe_sort I
+      (fun c : α => if hc : c ∈ J then (x ⟨c, hc⟩) ^ 2 else 0)
 
 /-- The Hilbert Bessel bound follows from counting cut incidences. -/
 theorem innerCut_restrictions_bessel (J : Finset α) (I : β → Finset α)

@@ -72,10 +72,11 @@ def innerDirichletCutoff (a b k x : ℝ) : ℝ :=
 
 theorem innerDirichletCutoff_contDiff (a b k : ℝ) :
     ContDiff ℝ ∞ (innerDirichletCutoff a b k) := by
-  exact (smoothTransition.contDiff.comp
-    (((contDiff_id.sub contDiff_const).const_mul k).sub contDiff_const)).mul
-      (smoothTransition.contDiff.comp
-        (((contDiff_const.sub contDiff_id).const_mul k).sub contDiff_const))
+  have hL : ContDiff ℝ ∞ (fun x : ℝ => k * (x - a) - 1) :=
+    (contDiff_const.mul (contDiff_id.sub contDiff_const)).sub contDiff_const
+  have hR : ContDiff ℝ ∞ (fun x : ℝ => k * (b - x) - 1) :=
+    (contDiff_const.mul (contDiff_const.sub contDiff_id)).sub contDiff_const
+  exact (smoothTransition.contDiff.comp hL).mul (smoothTransition.contDiff.comp hR)
 
 theorem innerDirichletCutoff_nonneg (a b k x : ℝ) :
     0 ≤ innerDirichletCutoff a b k x :=
@@ -165,14 +166,16 @@ theorem innerDirichletCutoff_mul_support {a b k : ℝ} {u : ℝ → ℝ} (hk : 0
   intro x hx
   apply innerDirichletCutoff_support hk
   intro hzero
-  exact hx (by rw [hzero, zero_mul])
+  apply hx
+  change innerDirichletCutoff a b k x * u x = 0
+  rw [hzero, zero_mul]
 
 theorem innerDirichlet_endpoint_bound {a b c x M : ℝ} {u : ℝ → ℝ}
     (hu : ∀ y ∈ Icc a b, DifferentiableAt ℝ u y)
     (hM : ∀ y ∈ Icc a b, |deriv u y| ≤ M)
     (hc : c ∈ Icc a b) (hx : x ∈ Icc a b) (huc : u c = 0) :
     |u x| ≤ M * |x - c| := by
-  have h := norm_image_sub_le_of_norm_deriv_le hu
+  have h := Convex.norm_image_sub_le_of_norm_deriv_le hu
     (fun y hy => by simpa only [Real.norm_eq_abs] using hM y hy) (convex_Icc a b) hc hx
   simpa only [huc, sub_zero, Real.norm_eq_abs] using h
 

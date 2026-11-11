@@ -67,13 +67,13 @@ theorem innerInterfaceNeumann_toEuclideanCLM (R : Matrix ι ι ℝ)
 
 theorem innerInterfaceNeumann_mul (R : Matrix ι ι ℝ) (hR : ‖R‖ < 1 / 2) :
     innerInterfaceNeumann R hR * (1 + R) = 1 := by
-  apply (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ)).injective
+  apply EquivLike.injective (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ))
   rw [map_mul, innerInterfaceNeumann_toEuclideanCLM, map_add, map_one]
   exact neumannInverse_mul (E := EuclideanSpace ℝ ι) _ _
 
 theorem mul_innerInterfaceNeumann (R : Matrix ι ι ℝ) (hR : ‖R‖ < 1 / 2) :
     (1 + R) * innerInterfaceNeumann R hR = 1 := by
-  apply (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ)).injective
+  apply EquivLike.injective (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ))
   rw [map_mul, map_add, map_one, innerInterfaceNeumann_toEuclideanCLM]
   exact mul_neumannInverse (E := EuclideanSpace ℝ ι) _ _
 
