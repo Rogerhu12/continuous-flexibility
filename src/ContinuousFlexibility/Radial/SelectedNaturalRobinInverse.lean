@@ -99,8 +99,7 @@ theorem radialNatural_robin_iff
         apply (radialTailInterval_outward D right cut _).mpr
         simpa only [outerOutwardRadius_twice] using hx
       have he := radialJacobi_outward D right ((j : ℝ) ^ 2) V x
-      simpa only [w, y, outerTailOutwardWeight, outerOutwardRadius_eq_sign,
-        hN.2.1.2 _ hi] using he
+      exact he.trans (hN.2.1.2 _ hi)
   have hyLp : MemLp y 2
       (outerOutwardIntervalMeasure D right (radialTailInterval D right cut)) := by
     rw [outerOutwardRegionMeasure_eq_map hcut]

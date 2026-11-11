@@ -57,12 +57,13 @@ theorem radialOuterPairOperator_graph {D : ReferenceData}
     filter_upwards [Lp.coeFn_add
       (radialTailZeroExtendOperator D false M.innerLeft (R false) F.1)
       (radialTailZeroExtendOperator D true M.innerRight (R true) F.1),
-      radialTailZeroExtendOperator_ae (he false), radialTailZeroExtendOperator_ae (he true)]
+      radialTailZeroExtendOperator_ae (right := false) (cut := M.innerLeft) (he false),
+      radialTailZeroExtendOperator_ae (right := true) (cut := M.innerRight) (he true)]
       with r hr hL hR
     change (radialTailZeroExtendOperator D false M.innerLeft (R false) F.1 +
       radialTailZeroExtendOperator D true M.innerRight (R true) F.1) r = _
     rw [hr, Pi.add_apply]
-    simpa only [Bool.false_eq_true, ite_false, ite_true, radialTailInterval] using
+    simpa only [radialTailInterval] using
       congrArg₂ (fun x y : ℝ => x + y) hL hR
   have heq := radialOuterPairOperator_weak hD hB ha hm hb (hweak false) (hweak true) F
   apply matching_outerGraph_of_representative hD ha hb (u := v) heq rfl
