@@ -245,8 +245,8 @@ theorem contDiff_morseRho (A B : ℝ) : ContDiff ℝ ∞ (morseRho A B) := by
   exact (contDiff_const.mul (contDiff_id.neg.exp.sub (contDiff_const.mul contDiff_id).exp)).sub
     contDiff_const
 
-/-- Arbitrary initial data at a point of the retained interval give a smooth
-radius and velocity satisfying the actual system on a neighborhood of it. -/
+/-- Arbitrary initial data for a smooth scalar second-order equation give a
+globally smooth pair satisfying the equation near the retained interval. -/
 theorem exists_smoothSecondOrderSystem {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
     {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
     ∃ r v : ℝ → ℝ, ContDiff ℝ ∞ r ∧ ContDiff ℝ ∞ v ∧ r t₀ = r₀ ∧ v t₀ = v₀ ∧
@@ -267,6 +267,33 @@ theorem exists_smoothSecondOrderSystem {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ 
   exact ⟨(ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h,
     (ContinuousLinearMap.snd ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h⟩
 
+/-- Continuous scalar states with the same interior initial data agree
+through both endpoints. Only interior derivatives are required. -/
+theorem smoothScalarSystem_eqOn {q U D r v : ℝ → ℝ} {a b t₀ : ℝ}
+    (hq : Continuous q) (ht₀ : t₀ ∈ Ioo a b)
+    (hU : ContinuousOn U (Icc a b)) (hD : ContinuousOn D (Icc a b))
+    (hr : ContinuousOn r (Icc a b)) (hv : ContinuousOn v (Icc a b))
+    (hUd : ∀ x ∈ Ioo a b, HasDerivAt U (D x) x)
+    (hDd : ∀ x ∈ Ioo a b, HasDerivAt D (-q x * U x) x)
+    (hrd : ∀ x ∈ Ioo a b, HasDerivAt r (v x) x)
+    (hvd : ∀ x ∈ Ioo a b, HasDerivAt v (-q x * r x) x)
+    (h₀ : U t₀ = r t₀) (h₁ : D t₀ = v t₀) :
+    EqOn U r (Icc a b) ∧ EqOn D v (Icc a b) := by
+  obtain ⟨C, hC⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn
+    hq.continuousOn
+  let K : ℝ≥0 := ⟨max 1 C, zero_le_one.trans (le_max_left _ _)⟩
+  have hLip (x : ℝ) (hx : x ∈ Ioo a b) : LipschitzWith K (radiusField q x) :=
+    radiusField_lipschitz (le_max_left _ _) ((hC x (Ioo_subset_Icc_self hx)).trans
+      (le_max_right _ _))
+  have hpair : EqOn (fun x => (U x, D x)) (fun x => (r x, v x)) (Icc a b) :=
+    ODE_solution_unique_of_mem_Icc (v := radiusField q) (s := fun _ => univ)
+      (fun x hx => (hLip x hx).lipschitzOnWith) ht₀
+      (hU.prodMk hD) (fun x hx => (hUd x hx).prodMk (hDd x hx))
+      (fun _ _ => mem_univ _) (hr.prodMk hv)
+      (fun x hx => (hrd x hx).prodMk (hvd x hx)) (fun _ _ => mem_univ _)
+      (Prod.ext h₀ h₁)
+  exact ⟨fun x hx => congrArg Prod.fst (hpair hx),
+    fun x hx => congrArg Prod.snd (hpair hx)⟩
 
 /-- Local uniqueness for the arbitrary smooth second-order system.
 Only a continuous coefficient and actual local solution germs are used. -/
@@ -300,19 +327,13 @@ theorem smoothSecondOrderSystem_germ {q r v s z : ℝ → ℝ} {t₀ : ℝ}
   exact ⟨heq.mono (fun _ ht => congrArg Prod.fst ht),
     heq.mono (fun _ ht => congrArg Prod.snd ht)⟩
 
-/-- Morse specialization of the arbitrary-coefficient finite system. -/
-theorem exists_morseRadiusSystem (A B : ℝ) {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
-    ∃ r v : ℝ → ℝ, ContDiff ℝ ∞ r ∧ ContDiff ℝ ∞ v ∧ r t₀ = r₀ ∧ v t₀ = v₀ ∧
-      ∀ x ∈ Ioo (a - 1) (b + 1), HasDerivAt r (v x) x ∧
-        HasDerivAt v (-morseRho A B x * r x) x :=
-  exists_smoothSecondOrderSystem (contDiff_morseRho A B) ht₀ r₀ v₀
-
-/-- The same finite-interval radius solves the actual scalar second-order
-equation, including at both endpoints of the retained interval. -/
-theorem exists_morseRadius (A B : ℝ) {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
+/-- The scalar solution with prescribed value and derivative, including at
+the two endpoints of the retained interval. -/
+theorem exists_smoothSecondOrderSolution {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
     ∃ r : ℝ → ℝ, ContDiff ℝ ∞ r ∧ r t₀ = r₀ ∧ deriv r t₀ = v₀ ∧
-      ∀ x ∈ Icc a b, deriv (deriv r) x = -morseRho A B x * r x := by
-  obtain ⟨r, v, hrs, _, hr₀, hv₀, hd⟩ := exists_morseRadiusSystem A B ht₀ r₀ v₀
+      ∀ x ∈ Icc a b, deriv (deriv r) x = -q x * r x := by
+  obtain ⟨r, v, hrs, _, hr₀, hv₀, hd⟩ := exists_smoothSecondOrderSystem hq ht₀ r₀ v₀
   have hsub : Icc a b ⊆ Ioo (a - 1) (b + 1) := by
     intro x hx
     exact ⟨by linarith only [hx.1], by linarith only [hx.2]⟩
@@ -324,14 +345,14 @@ theorem exists_morseRadius (A B : ℝ) {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a 
     exact (hd y hy).1.deriv
   exact he.deriv_eq.trans (hd x (hsub hx)).2.deriv
 
-/-- The radius and its initial derivative determine the solution on the
-retained interval. -/
-theorem morseRadius_eqOn {A B a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) {r s : ℝ → ℝ}
+/-- Value and derivative determine a smooth scalar second-order solution
+on a closed interval. -/
+theorem smoothSecondOrder_eqOn {q : ℝ → ℝ} (hq : Continuous q)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) {r s : ℝ → ℝ}
     (hr : ContDiff ℝ ∞ r) (hs : ContDiff ℝ ∞ s)
-    (hrEq : ∀ x ∈ Icc a b, deriv (deriv r) x = -morseRho A B x * r x)
-    (hsEq : ∀ x ∈ Icc a b, deriv (deriv s) x = -morseRho A B x * s x)
+    (hrEq : ∀ x ∈ Icc a b, deriv (deriv r) x = -q x * r x)
+    (hsEq : ∀ x ∈ Icc a b, deriv (deriv s) x = -q x * s x)
     (h₀ : r t₀ = s t₀) (h₁ : deriv r t₀ = deriv s t₀) : EqOn r s (Icc a b) := by
-  let q : ℝ → ℝ := morseRho A B
   let p (u : ℝ → ℝ) : ℝ → RadiusState := fun x => (u x, deriv u x)
   have hp (u : ℝ → ℝ) (hu : ContDiff ℝ ∞ u)
       (hEq : ∀ x ∈ Icc a b, deriv (deriv u) x = -q x * u x) (x : ℝ) (hx : x ∈ Icc a b) :
@@ -343,7 +364,7 @@ theorem morseRadius_eqOn {A B a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) {r s : 
   have hdr := hp r hr hrEq
   have hds := hp s hs hsEq
   obtain ⟨C, hC⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn
-    (contDiff_morseRho A B).continuous.continuousOn
+    hq.continuousOn
   let K : ℝ≥0 := ⟨max 1 C, zero_le_one.trans (le_max_left _ _)⟩
   have hLip (x : ℝ) (hx : x ∈ Icc a b) : LipschitzWith K (radiusField q x) :=
     radiusField_lipschitz (le_max_left _ _) ((hC x hx).trans (le_max_right _ _))
@@ -372,6 +393,28 @@ theorem morseRadius_eqOn {A B a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) {r s : 
   by_cases h : x ≤ t₀
   · exact congrArg Prod.fst (hL (show x ∈ Icc a t₀ from ⟨hx.1, h⟩))
   · exact congrArg Prod.fst (hR (show x ∈ Icc t₀ b from ⟨le_of_lt (lt_of_not_ge h), hx.2⟩))
+
+/-- Arbitrary initial data at a point of the retained interval give a smooth
+radius and velocity satisfying the actual Morse system on a neighborhood. -/
+theorem exists_morseRadiusSystem (A B : ℝ) {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
+    ∃ r v : ℝ → ℝ, ContDiff ℝ ∞ r ∧ ContDiff ℝ ∞ v ∧ r t₀ = r₀ ∧ v t₀ = v₀ ∧
+      ∀ x ∈ Ioo (a - 1) (b + 1), HasDerivAt r (v x) x ∧
+        HasDerivAt v (-morseRho A B x * r x) x :=
+  exists_smoothSecondOrderSystem (contDiff_morseRho A B) ht₀ r₀ v₀
+
+/-- The finite-interval radius solves the actual scalar Morse equation. -/
+theorem exists_morseRadius (A B : ℝ) {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
+    ∃ r : ℝ → ℝ, ContDiff ℝ ∞ r ∧ r t₀ = r₀ ∧ deriv r t₀ = v₀ ∧
+      ∀ x ∈ Icc a b, deriv (deriv r) x = -morseRho A B x * r x :=
+  exists_smoothSecondOrderSolution (contDiff_morseRho A B) ht₀ r₀ v₀
+
+/-- The radius and its initial derivative determine the Morse solution. -/
+theorem morseRadius_eqOn {A B a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) {r s : ℝ → ℝ}
+    (hr : ContDiff ℝ ∞ r) (hs : ContDiff ℝ ∞ s)
+    (hrEq : ∀ x ∈ Icc a b, deriv (deriv r) x = -morseRho A B x * r x)
+    (hsEq : ∀ x ∈ Icc a b, deriv (deriv s) x = -morseRho A B x * s x)
+    (h₀ : r t₀ = s t₀) (h₁ : deriv r t₀ = deriv s t₀) : EqOn r s (Icc a b) :=
+  smoothSecondOrder_eqOn (contDiff_morseRho A B).continuous ht₀ hr hs hrEq hsEq h₀ h₁
 
 /-- The signed velocity identity holds in either time direction. -/
 theorem morseRadius_velocity_eq_integral {A B a b t₀ x : ℝ} {r : ℝ → ℝ}
