@@ -51,7 +51,7 @@ theorem n01c_stateAngleGraph_term_bound
     rw [w.abs_angleFactor]
     have hh := w.selectedProduct_mono (fun i => abs_nonneg ((v i).2)) hfactor
     simpa only [StateAngleWord.selectedProduct_mul, StateAngleWord.selectedProduct_const,
-      StateAngleWord.selectedProduct_spatialPower _ _ hRp s, Q, PH, orders] using hh
+      StateAngleWord.selectedProduct_spatialPower _ _ hRp s, Q, PH, orders, mul_pow] using hh
   have hheight : parameterHeightWeight H w.stateArity * PH ≤ L ^ N * H := by
     have hh := w.selected_heightProduct_le κ hH hHL hL 0
     have hk := w.flowParameterOrder_pos κ hκ
@@ -112,7 +112,8 @@ theorem n01c_stateAngleGraph_term_bound
       mul_le_mul_of_nonneg_left hRmono
         (mul_nonneg hCN (mul_nonneg (pow_nonneg (zero_le_one.trans hL) _) hH))
     _ = _ := by
-      rw [Q, mul_pow, ← Real.rpow_mul_natCast hEp.le A₁ N,
+      dsimp only [Q]
+      rw [mul_pow, ← Real.rpow_mul_natCast hEp.le A₁ N,
         Real.rpow_add hEp]
       ring
 

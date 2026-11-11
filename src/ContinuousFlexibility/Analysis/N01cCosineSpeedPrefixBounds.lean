@@ -57,7 +57,16 @@ theorem n01_componentCosineAngularStateJets_prefix_bounds
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
             base (s + loss + d) (z - (C.referenceState, 0)) v := by
-  exact n01c_finiteOrderPrefix _ loss
+  let P : ℕ → ℕ → ℕ → ℝ → Prop := fun k s high B =>
+    ∀ m b t θ, b ≤ s → t ∈ Icc (0 : ℝ) Real.pi → 0 < k + b →
+      ∀ J : SmoothDirections (stateNeighborhood S C base ε)
+        (fun z => iteratedDeriv b (fun η => componentCosineSpeed D S C m (z, (t, η))) θ),
+      ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+        |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ B *
+          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+            base high (z - (C.referenceState, 0)) v
+  exact n01c_finiteOrderPrefix P loss
     (fun k s high high' B B' hh hBpos hBB' hraw m b t θ hb ht hkb J z hz v => by
       have hsample := materialSample_mem_radialCore hT hA.1.1.choose_spec.2.1 (C.cell m)
       exact (hraw m b t θ hb ht hkb J z hz v).trans

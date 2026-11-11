@@ -37,7 +37,7 @@ private theorem convex_productSeminormNeighborhood
   have he : {z : X × ℝ | p (z.1 - center) < ε ∧ |z.2| < ε} =
       ({x : X | p (x - center) < ε} ×ˢ {t : ℝ | |t| < ε}) := by
     ext z
-    exact (Set.mem_prod (p := z)).symm
+    simp only [Set.mem_prod, Set.mem_ofPred_eq]
   rw [he]
   have h := (convex_seminormDisplacement_lt p center ε).prod
     (convex_seminormDisplacement_lt (normSeminorm ℝ ℝ) 0 ε)

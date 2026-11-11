@@ -74,7 +74,8 @@ theorem flowSpeedJointField_periodic {P : ℝ}
   have hshift :
       iteratedFDeriv ℝ n (fun y : E × ℝ => G (y.1, (t, P + y.2))) (q, α) v =
         (J.jet t).D n (q, P + α) v := by
-    simpa only [ContinuousLinearMap.id_apply, Prod.mk_add_mk, zero_add] using ha
+    simpa only [ContinuousLinearMap.id_apply, Prod.fst_add, Prod.snd_add,
+      Prod.mk_add_mk, zero_add] using ha
   have he : (fun y : E × ℝ => G (y.1, (t, P + y.2))) =
       fun y => G (y.1, (t, y.2)) := by
     funext y
@@ -94,6 +95,7 @@ variable {G Θ : E × PolarPoint → ℝ}
   (J : ContinuousTimeSpeedTower (univ : Set E) G)
   (hΘ : ContDiff ℝ ∞ Θ)
 
+include hΘ in
 theorem flowParameterField_periodic_of_pos {P : ℝ}
     (hΘp : ∀ q t α, Θ (q, (t, α + P)) = Θ (q, (t, α)) + P)
     {n : ℕ} (hn : 0 < n) (q : E) (v : Fin n → E) (t : ℝ) :
@@ -102,6 +104,7 @@ theorem flowParameterField_periodic_of_pos {P : ℝ}
   | zero => omega
   | succ n => exact flowParameterField_periodic_of_lift hΘ hΘp n q v t
 
+include hΘ in
 theorem contDiff_flowSelectedSpeedCoefficient
     (hG : ContDiff ℝ ∞ G) {N : ℕ}
     (c : _root_.OrderedFinpartition N) (s : Finset (Fin c.length))
@@ -262,8 +265,10 @@ theorem flowParameterCircleVariationData_forcingNorm_le
     ext θ
     induction θ using QuotientAddGroup.induction_on
     rename_i α
-    change circleFlowSpeedJet (flowVariationForcing J hs (n + 1) q v) _ _ t 0
-      (α : AddCircle P) = _
+    change circleFlowSpeedJet (flowVariationForcing J hs (n + 1) q v)
+      (contDiff_flowVariationForcing hG J hs (Nat.succ_pos n) q v)
+      (flowVariationForcing_periodic hG J hs hGp hΘp n q v) t 0
+        (α : AddCircle P) = _
     simp only [circleFlowSpeedJet_coe_apply, truncatedFlowForcingCircleJet,
       periodicCircleJet_coe_apply, iteratedDeriv_zero]
     rfl

@@ -71,7 +71,7 @@ theorem pureSlots_fst_seminorm_le
   | state w ih =>
       intro i
       refine Fin.cases ?_ (fun j => ?_) i
-      · exact hv 0
+      · exact hv (0 : Fin (w.stateArity + 1))
       · exact ih (Fin.tail v) (fun j => hv j.succ) j
   | angle w ih =>
       intro i
@@ -159,12 +159,15 @@ theorem stateFlow_composition_D_pureSlots
     {n : ℕ} (input : StateAngleWord n) {x : X} (hx : x ∈ U)
     (θ : ℝ) (v : Fin input.stateArity → X) :
     (smoothDirections_realCompTVS (smoothDirections_stateFlowGraph J) K
-      (fun q hq => ⟨hq.1, mem_univ _⟩)).D n (x, θ) (input.pureSlots v) =
+      (fun q hq => Set.mem_prod.mpr ⟨(Set.mem_prod.mp hq).1, mem_univ _⟩)).D n
+        (x, θ) (input.pureSlots v) =
       ∑ c : OrderedFinpartition n, ∑ output : StateAngleWord c.length,
         (Ka output.angleArity (Θ (x, θ))).D output.stateArity x
           (output.stateDirections (stateFlowPartitionSlot J input c (x, θ) v)) *
             output.angleFactor (stateFlowPartitionSlot J input c (x, θ) v) := by
-  rw [smoothDirections_realCompTVS_D_apply]
+  refine (smoothDirections_realCompTVS_D_apply (smoothDirections_stateFlowGraph J) K
+    (fun q hq => Set.mem_prod.mpr ⟨(Set.mem_prod.mp hq).1, mem_univ _⟩)
+    n (x, θ) (input.pureSlots v)).trans ?_
   apply Finset.sum_congr rfl
   intro c _
   have hh := smoothDirections_joint_D_eq_stateAngleJet K Ka c.length x hx

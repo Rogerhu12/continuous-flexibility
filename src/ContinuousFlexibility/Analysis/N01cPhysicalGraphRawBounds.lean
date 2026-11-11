@@ -72,7 +72,8 @@ theorem stateFlow_composition_raw_bound
             R ^ (((if j = 0 then b - 1 else b + offset : ℕ) : ℝ) /
               ((s : ℝ) + 1))) :
     δ * |(smoothDirections_realCompTVS (smoothDirections_stateFlowGraph J) K
-        (fun q hq => ⟨hq.1, mem_univ _⟩)).D N (x, θ) (input.pureSlots v)| ≤
+        (fun q hq => Set.mem_prod.mpr ⟨(Set.mem_prod.mp hq).1, mem_univ _⟩)).D N
+          (x, θ) (input.pureSlots v)| ≤
       n01c_graphPartitionWordCount N * (C₀ * C₁ ^ N * L ^ N) *
         E ^ (A₀ + A₁ * (N : ℝ)) * H *
           R ^ (((n + input.angleArity + (offset + 1) * input.stateArity : ℕ) : ℝ) /

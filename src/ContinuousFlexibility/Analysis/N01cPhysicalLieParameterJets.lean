@@ -38,7 +38,7 @@ theorem iteratedDeriv_angularSlice_radialMixed
         (p := (r, η)) ⟨hr, mem_univ η⟩).symm
   rw [he]
   simpa only [mixedDerivative, iteratedDeriv_zero, Nat.zero_add] using
-    mixedDerivative_iteratedRadialPartial hΩ hf a 0 b ⟨hr, mem_univ θ⟩
+    mixedDerivative_iteratedRadialPartial hΩ hf a 0 b (p := (r, θ)) ⟨hr, mem_univ θ⟩
 
 section ParameterTowers
 
@@ -118,10 +118,12 @@ def physicalFlowPositiveMixedSmoothDirections
     SmoothDirections U (fun x => mixedDerivative (n + 1) b (Θ x) (r, θ)) := by
   let JO := physicalLieJointSmoothDirections hU hI hlam hr Jlam n
   let JG := smoothDirections_stateFlowGraph JΘ
-  let JC := smoothDirections_realCompTVS JG JO (fun p hp => ⟨hp.1, mem_univ _⟩)
-  exact (smoothDirections_angularStateSlice JC b θ).congr (fun x hx =>
-    (mixedDerivative_physicalFlow_eq_lie hI (hlam x hx) (hΘ x hx)
-      (hODE x hx) n b ⟨hr, mem_univ θ⟩).symm)
+  let JC := smoothDirections_realCompTVS JG JO
+    (fun p hp => Set.mem_prod.mpr ⟨(Set.mem_prod.mp hp).1, mem_univ _⟩)
+  exact (smoothDirections_angularStateSlice JC b θ).congr (fun x hx => by
+    simpa only [Function.comp_apply] using
+      (mixedDerivative_physicalFlow_eq_lie hI (hlam x hx) (hΘ x hx)
+        (hODE x hx) n b (p := (r, θ)) ⟨hr, mem_univ θ⟩).symm)
 
 end ParameterTowers
 
