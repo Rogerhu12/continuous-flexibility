@@ -59,17 +59,15 @@ theorem n07aNormalizedForwardCLM_apply
     ContinuousLinearMap.add_apply, ContinuousLinearMap.smulRight_apply,
     ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', Submodule.subtypeL_apply]
 
-theorem n07aNormalizedForwardCLM_smoothTame
-    {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
+private theorem n07aNormalizedForward_height_smoothTame
+    {U : Set (StateDirections S × ℝ)}
     (F : (StateDirections S × ℝ) → HeightPair S →L[ℝ] S.Source)
-    (N : (StateDirections S × ℝ) → S.Source)
     (hF : SmoothTameOn (n07aParameterHeightGrading S) S.sourceGrading (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × HeightPair S => F z.1 z.2))
-    (hN : SmoothTameOn (n07aParameterGrading S) S.sourceGrading U N) :
-    SmoothTameOn (n07aParameterNormalizedGrading hD hT hS) S.sourceGrading
-      (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × HeightPair S => F z.1 z.2)) :
+    SmoothTameOn (n07aParameterNormalizedGrading hD hT hS)
+      (S.height (3 / 4 : ℝ)).grading (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS =>
-        n07aNormalizedForwardCLM hD hT hS F N z.1 z.2) := by
+        (F z.1 z.2.val.1).val) := by
   let Y := N07aNormalizedUnknown hD hT hS
   let p := n07aParameterGrading S
   let q := n07aNormalizedGrading hD hT hS
@@ -110,6 +108,26 @@ theorem n07aNormalizedForwardCLM_smoothTame
     hFp S.Q.toLinearMap.ker.subtypeL
     (B := 1) zero_le_one (fun n u => by
       simp only [Submodule.subtypeL_apply, one_mul, le_refl])
+  apply smoothTameOn_congr hFh
+  intro z _
+  simp only [hI, Submodule.subtypeL_apply]
+
+private theorem n07aNormalizedForward_scalar_smoothTame
+    {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
+    (N : (StateDirections S × ℝ) → S.Source)
+    (hN : SmoothTameOn (n07aParameterGrading S) S.sourceGrading U N) :
+    SmoothTameOn (n07aParameterNormalizedGrading hD hT hS)
+      (S.height (3 / 4 : ℝ)).grading (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS =>
+        z.2.val.2 • (N z.1).val) := by
+  let Y := N07aNormalizedUnknown hD hT hS
+  let p := n07aParameterGrading S
+  let q := n07aNormalizedGrading hD hT hS
+  have hgrading (n : ℕ) (z : (StateDirections S × ℝ) × Y) :
+      pairGrading p q n z = p n z.1 +
+        (heightPairGrading S n z.2.val.1 + |z.2.val.2|) :=
+    (pairGrading_apply p q n z).trans (congrArg (fun t : ℝ => p n z.1 + t)
+      (n07aNormalizedForward_grading_apply hD hT hS n z.2))
   have hNh := solve_smoothTameOn_postcomp (r := (S.height (3 / 4 : ℝ)).grading)
     hN S.Q.toLinearMap.ker.subtypeL
     (B := 1) zero_le_one (fun n u => by
@@ -146,10 +164,36 @@ theorem n07aNormalizedForwardCLM_smoothTame
   letI : IsTopologicalAddGroup ((StateDirections S × ℝ) × Y) := ht.isTopologicalAddGroup
   letI : ContinuousSMul ℝ ((StateDirections S × ℝ) × Y) := ht.continuousSMul
   have hproduct := n07a_height_smoothTame_smul_comp hS hp ht hmu hNf
-  apply solve_smoothTameOn_codRestrict S.Q.toLinearMap.ker S.Q.isClosed_ker
-    (smoothTameOn_add hp hFh hproduct)
+  apply smoothTameOn_congr hproduct
   intro z _
-  simp only [n07aNormalizedForwardCLM_apply, Submodule.coe_add, Submodule.coe_smul,
-    hI, hm, Submodule.subtypeL_apply]
+  simp only [hm, Submodule.subtypeL_apply]
+
+theorem n07aNormalizedForwardCLM_smoothTame
+    {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
+    (F : (StateDirections S × ℝ) → HeightPair S →L[ℝ] S.Source)
+    (N : (StateDirections S × ℝ) → S.Source)
+    (hF : SmoothTameOn (n07aParameterHeightGrading S) S.sourceGrading (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × HeightPair S => F z.1 z.2))
+    (hN : SmoothTameOn (n07aParameterGrading S) S.sourceGrading U N) :
+    SmoothTameOn (n07aParameterNormalizedGrading hD hT hS) S.sourceGrading
+      (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS =>
+        n07aNormalizedForwardCLM hD hT hS F N z.1 z.2) := by
+  have hheight := n07aNormalizedForward_height_smoothTame hD hT hS F hF
+  have hscalar := n07aNormalizedForward_scalar_smoothTame hD hT hS hU N hN
+  have hp : Monotone (n07aParameterNormalizedGrading hD hT hS) :=
+    tamePairGrading_monotone (n07aParameterGrading_monotone S)
+      (n07aNormalizedGrading_monotone hD hT hS)
+  have ht : WithSeminorms (n07aParameterNormalizedGrading hD hT hS) :=
+    withSeminorms_pairGrading (n07aParameterGrading_withSeminorms S)
+      (n07aNormalizedGrading_withSeminorms hD hT hS)
+  letI : IsTopologicalAddGroup ((StateDirections S × ℝ) ×
+      N07aNormalizedUnknown hD hT hS) := ht.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ ((StateDirections S × ℝ) ×
+      N07aNormalizedUnknown hD hT hS) := ht.continuousSMul
+  apply solve_smoothTameOn_codRestrict S.Q.toLinearMap.ker S.Q.isClosed_ker
+    (smoothTameOn_add hp hheight hscalar)
+  intro z _
+  simp only [n07aNormalizedForwardCLM_apply, Submodule.coe_add, Submodule.coe_smul]
 
 end ContinuousFlexibility.Analysis

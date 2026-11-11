@@ -64,23 +64,25 @@ theorem n07aReferenceCanonicalRhs_norm
         |U.2.1| * ‖(n07aReferenceScalarOpenCoefficient hJ m hm 0).toLp‖ +
         |U.2.2.1| * ‖(n07aReferenceScalarOpenCoefficient hJ m hm 1).toLp‖ +
         |U.2.2.2| * ‖(n07aReferenceScalarOpenCoefficient hJ m hm 2).toLp‖ := by
-  unfold n07aReferenceCanonicalRhs
-  have h₀ := norm_sub_le (F m)
-    ((N07aCanonicalOpenCoefficient.constMul
+  let qU : CanonicalL2 S K m :=
+    (N07aCanonicalOpenCoefficient.constMul
       (if K.positive m then -1 else (1 : ℝ))
-      (n07aReferenceOpenCoefficient hJ m hm 4)).mul (U.1 m))
-  calc
-    _ ≤ ‖F m - (N07aCanonicalOpenCoefficient.constMul
-          (if K.positive m then -1 else (1 : ℝ))
-          (n07aReferenceOpenCoefficient hJ m hm 4)).mul (U.1 m)‖ +
-        ‖U.2.1 • (n07aReferenceScalarOpenCoefficient hJ m hm 0).toLp‖ +
-        ‖U.2.2.1 • (n07aReferenceScalarOpenCoefficient hJ m hm 1).toLp‖ +
-        ‖U.2.2.2 • (n07aReferenceScalarOpenCoefficient hJ m hm 2).toLp‖ := by
-      exact (norm_sub_le _ _).trans (add_le_add_right
-        ((norm_sub_le _ _).trans (add_le_add_right (norm_sub_le _ _) _)) _)
-    _ ≤ _ := by
-      simp only [norm_smul, Real.norm_eq_abs]
-      exact add_le_add_right (add_le_add_right (add_le_add_right
-        (h₀.trans (add_le_add_left hq _)) _) _) _
+      (n07aReferenceOpenCoefficient hJ m hm 4)).mul (U.1 m)
+  let c₀ : CanonicalL2 S K m :=
+    U.2.1 • (n07aReferenceScalarOpenCoefficient hJ m hm 0).toLp
+  let c₁ : CanonicalL2 S K m :=
+    U.2.2.1 • (n07aReferenceScalarOpenCoefficient hJ m hm 1).toLp
+  let c₂ : CanonicalL2 S K m :=
+    U.2.2.2 • (n07aReferenceScalarOpenCoefficient hJ m hm 2).toLp
+  have hq' : ‖qU‖ ≤ A * ‖U.1 m‖ := hq
+  have h₀ := norm_sub_le (F m) qU
+  have h₁ := norm_sub_le (F m - qU) c₀
+  have h₂ := norm_sub_le (F m - qU - c₀) c₁
+  have h₃ := norm_sub_le (F m - qU - c₀ - c₁) c₂
+  have hbound : ‖F m - qU - c₀ - c₁ - c₂‖ ≤
+      ‖F m‖ + A * ‖U.1 m‖ + ‖c₀‖ + ‖c₁‖ + ‖c₂‖ := by
+    linarith only [h₀, h₁, h₂, h₃, hq']
+  simpa only [qU, c₀, c₁, c₂, n07aReferenceCanonicalRhs,
+    norm_smul, Real.norm_eq_abs] using hbound
 
 end ContinuousFlexibility.Analysis

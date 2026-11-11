@@ -48,9 +48,9 @@ def n07aUnknownScalarMap (i : Fin 3) : CanonicalUnknown S K →L[ℝ] ℝ :=
 theorem n07aUnknownScalarMap_apply (i : Fin 3) (U : CanonicalUnknown S K) :
     n07aUnknownScalarMap i U = n07aUnknownScalar U i := by
   fin_cases i <;>
-    simp only [n07aUnknownScalarMap, n07aUnknownScalar, Matrix.cons_val_zero,
-      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons,
-      ContinuousLinearMap.comp_apply, ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply]
+    simp only [n07aUnknownScalarMap, n07aUnknownScalar, Matrix.cons_val_zero',
+      Matrix.cons_val_succ', ContinuousLinearMap.comp_apply,
+      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
 
 theorem n07aUnknownScalar_abs_le_norm (U : CanonicalUnknown S K) (i : Fin 3) :
     |n07aUnknownScalar U i| ≤ ‖U‖ := by
@@ -64,19 +64,41 @@ def n07aReferenceScalarMap (i : Fin 3) : V.level (3 / 4 : ℝ) 0 b →L[ℝ] ℝ
     (((ContinuousLinearMap.fst ℝ (CanonicalUnknown S K) (V.level (3 / 4 : ℝ) 0 b)).comp
       B.graph.subtypeL).comp B.inverse)
 
+private theorem n07a_scalar_graph_projection_apply
+    {X E Y : Type*} [NormedAddCommGroup X] [NormedSpace ℝ X]
+    [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup Y] [NormedSpace ℝ Y]
+    (Q : Submodule ℝ (E × Y)) (g : X →L[ℝ] Q) (f : E →L[ℝ] ℝ) (x : X) :
+    (f.comp (((ContinuousLinearMap.fst ℝ E Y).comp Q.subtypeL).comp g)) x =
+      f (g x).val.1 := by
+  simp only [ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply,
+    ContinuousLinearMap.coe_fst']
+
 theorem n07aReferenceScalarMap_apply (i : Fin 3) (F : V.level (3 / 4 : ℝ) 0 b) :
     n07aReferenceScalarMap B i F = n07aUnknownScalar (B.inverse F).val.1 i := by
-  rw [n07aReferenceScalarMap, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.comp_apply, ContinuousLinearMap.comp_apply,
-    Submodule.subtypeL_apply, ContinuousLinearMap.fst_apply, n07aUnknownScalarMap_apply]
+  exact (n07a_scalar_graph_projection_apply B.graph B.inverse
+    (n07aUnknownScalarMap i) F).trans (n07aUnknownScalarMap_apply i (B.inverse F).val.1)
 
 theorem n07aReferenceScalarMap_norm_le (i : Fin 3) :
     ‖n07aReferenceScalarMap B i‖ ≤ ‖B.inverse‖ := by
   apply ContinuousLinearMap.opNorm_le_bound _ (norm_nonneg _)
   intro F
-  rw [n07aReferenceScalarMap_apply, Real.norm_eq_abs]
-  exact (n07aUnknownScalar_abs_le_norm (B.inverse F).val.1 i).trans
-    ((norm_fst_le (B.inverse F).val).trans (B.inverse.le_opNorm F))
+  have he : ‖n07aReferenceScalarMap B i F‖ = |n07aUnknownScalar (B.inverse F).val.1 i| :=
+    (congrArg (fun x : ℝ => ‖x‖) (n07aReferenceScalarMap_apply B i F)).trans
+      (Real.norm_eq_abs _)
+  have hB : ‖(B.inverse F).val‖ ≤ ‖B.inverse‖ * ‖F‖ :=
+    (Submodule.norm_coe (B.inverse F)).le.trans (B.inverse.le_opNorm F)
+  exact he.le.trans ((n07aUnknownScalar_abs_le_norm (B.inverse F).val.1 i).trans
+    ((norm_fst_le (B.inverse F).val).trans hB))
+
+theorem n07aUnknownScalar_angularBand
+    (hI : ∀ m, K.left m < K.right m) (i : Fin 3) (j : ℕ) (U : CanonicalUnknown S K) :
+    n07aUnknownScalar (n07aAngularUnknownBand hI j U) i =
+      if n07aScalarFrequency i = j then n07aUnknownScalar U i else 0 := by
+  fin_cases i <;>
+    simp only [n07aUnknownScalar, n07aScalarFrequency, Matrix.cons_val_zero',
+      Matrix.cons_val_succ', n07aAngularUnknownBand_left,
+      n07aAngularUnknownBand_border, n07aAngularUnknownBand_auxiliary]
 
 theorem n07aReferenceScalarMap_band
     (hD : IsAccumulatingProfile D) (hborder : RadialTrueBorder D)
@@ -88,12 +110,16 @@ theorem n07aReferenceScalarMap_band
     (i : Fin 3) (j : ℕ) (F : V.level (3 / 4 : ℝ) 0 b) :
     n07aReferenceScalarMap B i (n07aAngularLevelBand h05.2.1 (3 / 4 : ℝ) 0 hI b j F) =
       if n07aScalarFrequency i = j then n07aReferenceScalarMap B i F else 0 := by
-  rw [n07aReferenceScalarMap_apply,
-    n07a_referenceInverse_angularBand hD hborder h05 hI hR hAux hmap hsm F j,
-    n07aReferenceScalarMap_apply]
-  fin_cases i <;>
-    simp only [n07aUnknownScalar, n07aScalarFrequency, Matrix.cons_val_zero,
-      Matrix.cons_val_one, Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons,
-      n07aAngularUnknownBand_left, n07aAngularUnknownBand_border, n07aAngularUnknownBand_auxiliary]
+  calc
+    _ = n07aUnknownScalar
+        (B.inverse (n07aAngularLevelBand h05.2.1 (3 / 4 : ℝ) 0 hI b j F)).val.1 i :=
+      n07aReferenceScalarMap_apply B i _
+    _ = n07aUnknownScalar (n07aAngularUnknownBand hI j (B.inverse F).val.1) i :=
+      congrArg (fun U : CanonicalUnknown S K => n07aUnknownScalar U i)
+        (n07a_referenceInverse_angularBand hD hborder h05 hI hR hAux hmap hsm F j)
+    _ = if n07aScalarFrequency i = j then n07aUnknownScalar (B.inverse F).val.1 i else 0 :=
+      n07aUnknownScalar_angularBand hI i j (B.inverse F).val.1
+    _ = _ := congrArg (fun x : ℝ => if n07aScalarFrequency i = j then x else 0)
+      (n07aReferenceScalarMap_apply B i F).symm
 
 end ContinuousFlexibility.Analysis

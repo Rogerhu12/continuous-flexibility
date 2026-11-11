@@ -93,12 +93,15 @@ theorem n07aAngularJetWeight_root_block_split (b p j l : ℕ) :
     _ ≤ Real.sqrt (2 * 4 ^ (b + p)) * angularWeight l ^ (b + p) :=
       n07aAngularJetWeight_root_upper (b + p) l
     _ = Real.sqrt (2 * 4 ^ (b + p)) * (angularWeight l ^ b * angularWeight l ^ p) := by
-      rw [pow_add]
+      rw [pow_add (angularWeight l) b p]
     _ ≤ Real.sqrt (2 * 4 ^ (b + p)) *
         ((2 ^ b * angularWeight j ^ b * n07aAngularGap j l ^ b) *
           (2 ^ p * (angularWeight j ^ p + n07aAngularGap j l ^ p))) :=
       mul_le_mul_of_nonneg_left (mul_le_mul hb hp
-        (pow_nonneg (angularWeight_nonneg l) p) (by positivity)) (Real.sqrt_nonneg _)
+        (pow_nonneg (angularWeight_nonneg l) p)
+        (mul_nonneg (mul_nonneg (pow_nonneg (by norm_num : (0 : ℝ) ≤ 2) b)
+          (pow_nonneg (angularWeight_nonneg j) b)) (pow_nonneg hg b)))
+        (Real.sqrt_nonneg _)
     _ = n07aAngularBlockWeightConstant b p *
         (angularWeight j ^ (b + p) * n07aAngularGap j l ^ b +
           angularWeight j ^ b * n07aAngularGap j l ^ (b + p)) := by

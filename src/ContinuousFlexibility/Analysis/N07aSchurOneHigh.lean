@@ -88,7 +88,7 @@ theorem exists_n07aSchurRiesz_oneHigh
     have hi := mul_le_mul_of_nonneg_left (I.le_opNorm x) (Real.sqrt_nonneg (A₁ * B₁))
     calc
       _ ≤ (Real.sqrt (A₀ * B₀) * ‖x‖ + Real.sqrt (A₁ * B₁) * (‖I‖ * ‖x‖)) * ‖y‖ :=
-        mul_le_mul_of_nonneg_right (add_le_add_left hi _) (norm_nonneg y)
+        mul_le_mul_of_nonneg_right (add_le_add le_rfl hi) (norm_nonneg y)
       _ = _ := by dsimp only [C]; ring
   let K := n07aBilinearRiesz b hsum C hC
   have hpair (x : E) (y : F) : ⟪K x, y⟫ = ∑' i, b i x y :=
@@ -102,6 +102,6 @@ theorem exists_n07aSchurRiesz_oneHigh
     positivity
   · have hk : 0 < ‖K x‖ := lt_of_le_of_ne (norm_nonneg _) (Ne.symm hz)
     rw [pow_two] at h
-    exact (mul_le_mul_iff_right₀ hk).mp h
+    exact le_of_mul_le_mul_right h hk
 
 end ContinuousFlexibility.Analysis

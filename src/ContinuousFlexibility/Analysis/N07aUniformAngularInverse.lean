@@ -48,6 +48,77 @@ local instance n07aUniformInverseLpInner (hV : IsVolumeModel T S K V)
     InnerProductSpace ℝ (lp (fun n => n07aAngularBandSpace hV γ 0 hI b n) 2) :=
   lp.instInnerProductSpace
 
+private theorem n07a_uniformAngularSpectralBounds
+    (hV : IsVolumeModel T S K V) (γ : ℝ)
+    (hI : ∀ m, K.left m < K.right m) (b : ℕ) (a c : ℕ → ℝ≥0)
+    (R Q : V.level γ 0 b →L[ℝ] V.level γ 0 b) (N : ℕ → ℝ≥0)
+    (hlevel : ∀ q (commute : Bool) (U : V.level γ 0 (b + q)),
+      ∃ W : V.level γ 0 (b + q),
+        V.forget γ 0 (b + q) W = V.forget γ 0 b
+          ((if commute then Q else R)
+            (n07aAngularLevelTruncate hV γ 0 (Nat.le_add_right b q) U)) ∧
+        ‖W‖ ≤ (a q : ℝ) * ‖U‖ + (c q : ℝ) * (N q : ℝ) *
+          ‖n07aAngularLevelTruncate hV γ 0 (Nat.le_add_right b q) U‖) :
+    (∀ q u,
+      MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b u) →
+      MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b (R u))) ∧
+    (∀ q u,
+      MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b u) →
+      MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b (Q u)) ∧
+        angularSobolevNorm (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b (Q u)) ≤
+          (n07aAngularMonotoneEnvelope (fun j => a j *
+            ⟨n07aAngularLiftConstant j, n07aAngularLiftConstant_nonneg j⟩) q : ℝ) *
+              angularSobolevNorm (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b u) +
+          (n07aAngularMonotoneEnvelope (fun j => c j * N j) q : ℝ) * ‖u‖) := by
+  constructor
+  · intro q u hu
+    exact (n07aAngular_sobolev_bound_of_level hV γ 0 hI b R q
+      (a q).coe_nonneg (fun U => by
+        simpa only [Bool.false_eq_true, ite_false] using hlevel q false U) u hu).1
+  · intro q u hu
+    have h := n07aAngular_sobolev_bound_of_level hV γ 0 hI b Q q
+      (a q).coe_nonneg (fun U => by simpa only [ite_true] using hlevel q true U) u hu
+    have ha' : (a q : ℝ) * n07aAngularLiftConstant q ≤
+        (n07aAngularMonotoneEnvelope (fun j => a j *
+          ⟨n07aAngularLiftConstant j, n07aAngularLiftConstant_nonneg j⟩) q : ℝ) := by
+      exact_mod_cast n07aAngularMonotoneEnvelope_ge
+        (fun j => a j * ⟨n07aAngularLiftConstant j, n07aAngularLiftConstant_nonneg j⟩) q
+    have hc' : (c q : ℝ) * (N q : ℝ) ≤
+        (n07aAngularMonotoneEnvelope (fun j => c j * N j) q : ℝ) := by
+      exact_mod_cast n07aAngularMonotoneEnvelope_ge (fun j => c j * N j) q
+    exact ⟨h.1, h.2.trans (add_le_add
+      (mul_le_mul_of_nonneg_right ha'
+        (angularSobolevNorm_nonneg (𝕜 := ℝ) q _))
+      (mul_le_mul_of_nonneg_right hc' (norm_nonneg u)))⟩
+
+private theorem n07a_uniformAngularLift
+    (hV : IsVolumeModel T S K V) (γ : ℝ)
+    (hI : ∀ m, K.left m < K.right m) (b : ℕ)
+    (B : V.level γ 0 b →L[ℝ] V.level γ 0 b) (p : ℕ) (A : ℝ) (C : ℝ≥0)
+    (hA : 0 ≤ A)
+    (hreg : ∀ u, MemAngularSobolev (𝕜 := ℝ) p
+      (n07aAngularHilbertEquiv hV γ 0 hI b u) →
+      MemAngularSobolev (𝕜 := ℝ) p (n07aAngularHilbertEquiv hV γ 0 hI b (B u)))
+    (hbound : ∀ u, MemAngularSobolev (𝕜 := ℝ) p
+      (n07aAngularHilbertEquiv hV γ 0 hI b u) →
+      angularSobolevNorm (𝕜 := ℝ) p (n07aAngularHilbertEquiv hV γ 0 hI b (B u)) ≤
+        A * (angularSobolevNorm (𝕜 := ℝ) p
+          (n07aAngularHilbertEquiv hV γ 0 hI b u) + (C : ℝ) * ‖u‖))
+    (f : V.level γ 0 (b + p)) :
+    ∃ u : V.level γ 0 (b + p),
+      n07aAngularLevelTruncate hV γ 0 (Nat.le_add_right b p) u =
+        B (n07aAngularLevelTruncate hV γ 0 (Nat.le_add_right b p) f) ∧
+      ‖u‖ ≤ (1 + n07aAngularLiftConstant p * A) *
+        (‖f‖ + (C : ℝ) * ‖n07aAngularLevelTruncate hV γ 0 (Nat.le_add_right b p) f‖) := by
+  obtain ⟨u, hu, hn⟩ := n07aAngular_inverse_lift_of_estimate hV γ 0 hI b B p A C
+    hA hreg hbound f
+  have hsize : 0 ≤ ‖f‖ + (C : ℝ) *
+      ‖n07aAngularLevelTruncate hV γ 0 (Nat.le_add_right b p) f‖ :=
+    add_nonneg (norm_nonneg f) (mul_nonneg C.coe_nonneg (norm_nonneg _))
+  have hconstant : n07aAngularLiftConstant p * A ≤
+      1 + n07aAngularLiftConstant p * A := le_add_of_nonneg_left zero_le_one
+  exact ⟨u, hu, hn.trans (mul_le_mul_of_nonneg_right hconstant hsize)⟩
+
 theorem n07a_uniformAngularInverse
     (hV : IsVolumeModel T S K V) (γ : ℝ)
     (hI : ∀ m, K.left m < K.right m) (b : ℕ) (a c : ℕ → ℝ≥0) :
@@ -90,43 +161,23 @@ theorem n07a_uniformAngularInverse
       (A (p - 1)).coe_nonneg (mul_nonneg (by norm_num) (c 0).coe_nonneg) (by norm_num)
     let k' : ℝ := k * (1 + (C (p - 1) : ℝ))
     have hk' : 0 ≤ k' := mul_nonneg hk.le (by positivity)
-    refine ⟨1 + n07aAngularLiftConstant p * k', by positivity,
+    refine ⟨1 + n07aAngularLiftConstant p * k',
+      add_pos_of_pos_of_nonneg zero_lt_one
+        (mul_nonneg (n07aAngularLiftConstant_nonneg p) hk'),
       fun R Q B N hN hN₁ hN₀ hlevel hcomm hleft hright hB f => ?_⟩
     let CN : ℕ → ℝ≥0 := n07aAngularMonotoneEnvelope (fun q => c q * N q)
-    have hR : ∀ q u,
-        MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b u) →
-        MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b (R u)) := by
-      intro q u hu
-      apply (n07aAngular_sobolev_bound_of_level hV γ 0 hI b R q
-        (a q).coe_nonneg (fun U => ?_) u hu).1
-      simpa only [Bool.false_eq_true, if_false] using hlevel q false U
-    have hQ : ∀ q u,
-        MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b u) →
-        MemAngularSobolev (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b (Q u)) ∧
-          angularSobolevNorm (𝕜 := ℝ) q (n07aAngularHilbertEquiv hV γ 0 hI b (Q u)) ≤
-            (A q : ℝ) * angularSobolevNorm (𝕜 := ℝ) q
-              (n07aAngularHilbertEquiv hV γ 0 hI b u) + (CN q : ℝ) * ‖u‖ := by
-      intro q u hu
-      have h := n07aAngular_sobolev_bound_of_level hV γ 0 hI b Q q
-        (a q).coe_nonneg (fun U => by simpa only [ite_true] using hlevel q true U) u hu
-      have ha' : (a q : ℝ) * n07aAngularLiftConstant q ≤ (A q : ℝ) :=
-        n07aAngularMonotoneEnvelope_ge _ q
-      have hc' : (c q : ℝ) * (N q : ℝ) ≤ (CN q : ℝ) :=
-        n07aAngularMonotoneEnvelope_ge _ q
-      exact ⟨h.1, h.2.trans (add_le_add
-        (mul_le_mul_of_nonneg_right ha'
-          (angularSobolevNorm_nonneg (𝕜 := ℝ) q _))
-        (mul_le_mul_of_nonneg_right hc' (norm_nonneg u)))⟩
+    obtain ⟨hR, hQ⟩ := n07a_uniformAngularSpectralBounds hV γ hI b a c R Q N hlevel
     obtain ⟨hreg, hnorm⟩ := n07aAngular_inverse_tame hV γ 0 hI b R Q B A CN
       (n07aAngularMonotoneEnvelope_mono _) (n07aAngularMonotoneEnvelope_mono _)
       hR hQ hcomm hleft hright
     have hc₀ : (CN 0 : ℝ) ≤ 2 * (c 0 : ℝ) := by
-      rw [n07aAngularMonotoneEnvelope_zero, NNReal.coe_mul]
+      simp only [CN, n07aAngularMonotoneEnvelope_zero, NNReal.coe_mul]
       exact (mul_le_mul_of_nonneg_left hN₀ (c 0).coe_nonneg).trans_eq (mul_comm _ _)
     have hcₚ : (CN (p - 1) : ℝ) ≤ (C (p - 1) : ℝ) * (N p : ℝ) := by
       have h := (n07aAngularMonotoneEnvelope_oneHigh c N hN (p - 1)).trans
-        (mul_le_mul_of_nonneg_left (hN (Nat.sub_le p 1)) (zero_le (C (p - 1))))
-      exact h
+        (mul_le_mul_of_nonneg_left (hN (Nat.sub_le p 1))
+          (zero_le : (0 : ℝ≥0) ≤ C (p - 1)))
+      exact_mod_cast h
     have hcoef : 1 + (CN (p - 1) : ℝ) ≤ (1 + (C (p - 1) : ℝ)) * (N p : ℝ) := by
       nlinarith only [hcₚ, hN₁ p]
     have hbound : ∀ u,
@@ -149,10 +200,9 @@ theorem n07a_uniformAngularInverse
         nlinarith only [hmul, mul_nonneg (C (p - 1)).coe_nonneg hs]
       exact (hnorm p hp₁ u hu).trans
         ((mul_le_mul hkbound hinside
-          (by positivity) hk.le).trans_eq (by dsimp only [k']; ring))
-    obtain ⟨u, hu, hn⟩ := n07aAngular_inverse_lift_of_estimate hV γ 0 hI b B p k'
-      (N p) hk' (hreg p) hbound f
-    refine ⟨u, hu, hn.trans ?_⟩
-    exact mul_le_mul_of_nonneg_right (le_add_of_nonneg_left zero_le_one) (by positivity)
+          (add_nonneg (angularSobolevNorm_nonneg (𝕜 := ℝ) p _)
+            (mul_nonneg (add_nonneg zero_le_one (CN (p - 1)).coe_nonneg)
+              (norm_nonneg u))) hk.le).trans_eq (by dsimp only [k']; ring))
+    exact n07a_uniformAngularLift hV γ hI b B p k' (N p) hk' (hreg p) hbound f
 
 end ContinuousFlexibility.Analysis

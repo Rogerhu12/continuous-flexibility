@@ -120,5 +120,7 @@ theorem n07a_relativeMain_negative
   rw [n07aRelativeMainSource,
     n07a_relativeCanonical_negative hab hS hT h01 h02 h03 h04 href hcur h05 h06 z hz F m hm hneg,
     n07aRelativeCanonicalLower_eq_potential_add_scalars, add_sub_cancel_right]
+  exact congrArg (n07aRelativePotentialCoefficient href hcur z hz m hm).mul
+    (show (B.inverse F).val.1.1 m = n07aReferenceInverseField (B := B) F m from rfl)
 
 end ContinuousFlexibility.Analysis

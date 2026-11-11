@@ -28,7 +28,7 @@ theorem N07aCanonicalOpenCoefficient.jet_toLp_eq_zero_of_eqOn {m : ℕ}
     Lp.coeFn_zero ℝ 2 (canonicalMeasure S K m)] with p hp hpU hp0
   have hd := n07a_mixedDerivative_eqOn (isOpen_Ioo.prod isOpen_univ) hzero a b hpU
   have hz : mixedDerivative a b χ.value p = 0 := by
-    simpa only [mixedDerivative, iteratedDeriv_const_zero, Pi.zero_apply] using hd
+    simpa only [mixedDerivative, iteratedDeriv_fun_const_zero] using hd
   exact hp.trans (hz.trans hp0.symm)
 
 theorem n07a_lp_finite_norm_le
@@ -39,13 +39,13 @@ theorem n07a_lp_finite_norm_le
   have he : v = ∑ i ∈ I, lp.single 2 i (v i) := by
     ext i
     by_cases hi : i ∈ I
-    · simp only [lp.coeFn_sum]
+    · simp only [lp.coeFn_sum, Finset.sum_apply]
       rw [Finset.sum_eq_single i]
       · exact (lp.single_apply_self _ _ _).symm
       · intro j _ hji
         exact lp.single_apply_ne (E := E) 2 j (v j) hji.symm
       · exact fun h => (h hi).elim
-    · simp only [lp.coeFn_sum]
+    · simp only [lp.coeFn_sum, Finset.sum_apply]
       rw [hzero i hi]
       symm
       apply Finset.sum_eq_zero

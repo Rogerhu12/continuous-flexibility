@@ -69,7 +69,8 @@ theorem n07a_exists_nuReducedResidual
   have hU₀ : IsOpen U₀ := isOpen_uniformTameBall
     (n07aNuParameterGrading_withSeminorms S) b _ δ
   have hc₀ : n07aNuParameterCenter S v₀ ∈ U₀ := by
-    have hz : n07aNuParameterGrading S b (0 : N07aNuParameter S) = 0 := map_zero _
+    have hz : n07aNuParameterGrading S b (0 : N07aNuParameter S) = 0 :=
+      (n07aNuParameterGrading S b).map_zero'
     simpa only [U₀, Set.mem_ofPred_eq, sub_self, hz] using hδ
   have hIV : n07aNuParameterState hT hS hb ⁻¹' V ∈
       𝓝 (n07aNuParameterCenter S v₀) := by
@@ -85,7 +86,8 @@ theorem n07a_exists_nuReducedResidual
     (n07aNuParameterGrading_withSeminorms S) c _ η
   refine ⟨U, hU, ?_, W.residual ∘ n07aNuParameterState hT hS hb,
     (hf.restrict hU (fun x hx => (hsub hx).1)).1, ?_, ?_⟩
-  · have hz : n07aNuParameterGrading S c (0 : N07aNuParameter S) = 0 := map_zero _
+  · have hz : n07aNuParameterGrading S c (0 : N07aNuParameter S) = 0 :=
+      (n07aNuParameterGrading S c).map_zero'
     simpa only [U, Set.mem_ofPred_eq, sub_self, hz] using hη
   · intro x hx
     exact hQ _ (hsub hx).2
@@ -138,9 +140,10 @@ theorem n07a_exists_nuReducedSource
   have hd := scalarHeightTower_decode_derivative hS J 0 x hx Fin.elim0 w p
   have hv : (Fin.cons w Fin.elim0 : Fin 1 → N07aNuParameter S) =
       Fin.snoc (α := fun _ : Fin 1 => N07aNuParameter S) Fin.elim0 w := by
-    ext i
-    fin_cases i
-    rfl
+    funext i
+    have hi : i = 0 := Subsingleton.elim i 0
+    subst i
+    simp only [Fin.cons_zero, Fin.snoc_zero]
   rw [hv] at hd
   have hline : Continuous (fun t : ℝ => x + t • w) :=
     continuous_const.add (continuous_id.smul continuous_const)
@@ -157,8 +160,10 @@ theorem n07a_exists_nuReducedSource
       show x + t • w = ((x.1.1, t + x.1.2), x.2) by
         rw [show w = n07aNuParameterDirection S from rfl,
           n07aNuParameter_add_direction, add_comm x.1.2 t]]
-  have heq := hd'.deriv
-  rw [deriv_comp_add_const, zero_add] at heq
-  exact heq.symm
+  let Rν : ℝ → ℝ := fun ν => scalarStateResidual D S
+    (n07aNuParameterState hT hS hb ((x.1.1, ν), x.2)) p
+  have hshift : deriv (fun t : ℝ => Rν (t + x.1.2)) 0 = deriv Rν x.1.2 := by
+    simpa only [zero_add] using deriv_comp_add_const Rν x.1.2 (0 : ℝ)
+  exact hd'.deriv.symm.trans hshift
 
 end ContinuousFlexibility.Analysis

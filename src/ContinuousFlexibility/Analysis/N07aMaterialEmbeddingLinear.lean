@@ -54,7 +54,8 @@ theorem n07aAngularMaterialToBaseLinear_apply
 theorem n07aAngularMaterialToBaseLinear_norm_le
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hV : IsVolumeModel T S K V) {γ t : ℝ} (ht : 0 ≤ t)
-    {b s : ℕ} (hbs : b ≤ s) : ‖n07aAngularMaterialToBaseLinear hD hT hV ht hbs‖ ≤ 1 := by
+    {b s : ℕ} (hbs : b ≤ s) :
+    ‖n07aAngularMaterialToBaseLinear hD hT hV (γ := γ) ht hbs‖ ≤ 1 := by
   apply ContinuousLinearMap.opNorm_le_bound _ zero_le_one
   intro F
   rw [one_mul, n07aAngularMaterialToBaseLinear_apply]

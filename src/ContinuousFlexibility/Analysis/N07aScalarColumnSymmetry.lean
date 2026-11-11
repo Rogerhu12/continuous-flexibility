@@ -127,7 +127,12 @@ theorem n07a_divergenceOperator_even (A : SymmetricCoefficients) {f : PolarPoint
     simp only [hb, hc, (n07a_coordinatePartials_reflection h r θ).1,
       (n07a_coordinatePartials_reflection h r θ).2, one_mul, neg_one_mul]
     ring
-  simp only [divergenceOperator, (n07a_coordinatePartials_reflection hrad r θ).1,
-    (n07a_coordinatePartials_reflection hang r θ).2, neg_neg, one_mul]
+  simp only [divergenceOperator,
+    (n07a_coordinatePartials_reflection
+      (f := fun y => A.a y * radialPartial f y + A.b y * angularPartial f y)
+      (σ := 1) hrad r θ).1,
+    (n07a_coordinatePartials_reflection
+      (f := fun y => A.b y * radialPartial f y + A.c y * angularPartial f y)
+      (σ := -1) hang r θ).2, neg_neg, one_mul]
 
 end ContinuousFlexibility.Analysis
