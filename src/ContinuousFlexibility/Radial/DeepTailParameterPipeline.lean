@@ -135,7 +135,9 @@ theorem r06Parameter_of_r06Full {C η K : ℝ} (hfull : R06Full C η K)
     have hbcont (n : ℕ) : Continuous (fun σ => b σ n) :=
       continuous_tailPoissonJacobiDiagonal B b₀ (hBIr.neg.sub (hBl 0)) hBl hBr n
     have hci (σ : HeightRatios) : 0 < (BI σ).offDiagonal :=
-      (BI σ).offDiagonal_pos hinitial (continuousOn_tailFamilyDensity hpI σ)
+      (BI σ).offDiagonal_pos hinitial
+        (continuousOn_tailFamilyDensity (p := fun τ : HeightRatios => (F τ).p)
+          (a := T₀.entrance) (b := T₀.node 0) hpI σ)
         (hpIpos σ) (hT σ).2.2.1.le
     have hslope := continuous_tailNaturalInitialSlope b c
       (fun σ => (BI σ).offDiagonal) (fun σ => (BI σ).leftDiagonal)
