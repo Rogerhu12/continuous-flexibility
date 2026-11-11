@@ -49,7 +49,7 @@ theorem terminalCapBoundaryFlux_hasDerivAt {J r : ℝ} {w χ u : ℝ → ℝ}
   have hχD := hχ.differentiable (by simp)
   have huD := hu.differentiable (by simp)
   have hu₂ := (contDiff_infty_iff_deriv.mp hu).2.differentiable (by simp)
-  have hb := (hwD r).hasDerivAt.mul (hu₂ r).hasDerivAt
+  have hb := (hwD r).hasDerivAt.fun_mul (hu₂ r).hasDerivAt
   have heq : deriv w r * deriv u r + w r * deriv (deriv u) r =
       J * deriv w r / r * u r := by
     unfold radialJacobi at hode
@@ -60,7 +60,7 @@ theorem terminalCapBoundaryFlux_hasDerivAt {J r : ℝ} {w χ u : ℝ → ℝ}
   change HasDerivAt (fun t => χ t ^ 2 * u t * (w t * deriv u t)) _ r
   convert hf using 1
   simp only [terminalCapEnergyDensity, terminalCapCutoffEnergy,
-    Nat.cast_ofNat, Nat.reduceSub, pow_one]
+    Nat.cast_ofNat, Nat.reduceSub, pow_one, Pi.mul_apply, Pi.pow_apply]
   rw [deriv_fun_mul (hχD r) (huD r)]
   ring
 

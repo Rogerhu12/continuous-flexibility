@@ -74,7 +74,10 @@ def modeRegionProjection (D : ReferenceData) (J : Set ℝ) (hJ : MeasurableSet J
     { toFun := modeRegionVector D J hJ
       map_add' := modeRegionVector_add D J hJ
       map_smul' := modeRegionVector_smul D J hJ }
-    1 (by intro f; simpa only [one_mul] using modeRegionVector_norm_le D J hJ f)
+    1 (by
+      intro f
+      change ‖modeRegionVector D J hJ f‖ ≤ 1 * ‖f‖
+      simpa only [one_mul] using modeRegionVector_norm_le D J hJ f)
 
 theorem modeRegionVector_idempotent (D : ReferenceData) (J : Set ℝ)
     (hJ : MeasurableSet J) (f : RadialModeL2 D) :
@@ -84,8 +87,9 @@ theorem modeRegionVector_idempotent (D : ReferenceData) (J : Set ℝ)
   apply Lp.ext
   filter_upwards [modeRegionVector_coe D J hJ (modeRegionVector D J hJ f),
     modeRegionVector_coe D J hJ f] with r htwice honce
-  by_cases hr : r ∈ J <;> simp only [htwice, honce,
-    Set.indicator_of_mem, Set.indicator_of_notMem, hr]
+  by_cases hr : r ∈ J
+  · simpa only [Set.indicator_of_mem hr] using htwice
+  · rw [htwice, Set.indicator_of_notMem hr, honce, Set.indicator_of_notMem hr]
 
 /-- The inner source retains the entire scalar source. -/
 def modeInnerSource (D : ReferenceData) (l h : ℝ)
@@ -107,18 +111,27 @@ theorem modeRegionSources_spec (D : ReferenceData) (l h : ℝ)
       (fun r => if r ∈ Ioo l h then 0 else F.1 r) := by
   classical
   refine ⟨rfl, rfl, ?_, ?_⟩
-  · exact modeRegionVector_coe D (Ioo l h) measurableSet_Ioo F.1
-  · filter_upwards [modeRegionVector_coe D (Ioo l h)ᶜ
+  · change (modeRegionVector D (Ioo l h) measurableSet_Ioo F.1 : ℝ → ℝ) =ᵐ[
+        radialHilbertMeasure D] _
+    filter_upwards [modeRegionVector_coe D (Ioo l h) measurableSet_Ioo F.1] with r hr
+    by_cases hx : r ∈ Ioo l h
+    · simpa only [Set.indicator_of_mem hx, if_pos hx] using hr
+    · simpa only [Set.indicator_of_notMem hx, if_neg hx] using hr
+  · change (modeRegionVector D (Ioo l h)ᶜ measurableSet_Ioo.compl F.1 : ℝ → ℝ) =ᵐ[
+        radialHilbertMeasure D] _
+    filter_upwards [modeRegionVector_coe D (Ioo l h)ᶜ
       measurableSet_Ioo.compl F.1] with r hr
-    by_cases hx : r ∈ Ioo l h <;> simpa only [Set.indicator, Set.mem_compl_iff,
-      hx, not_true_eq_false, not_false_eq_true, if_true, if_false] using hr
+    by_cases hx : r ∈ Ioo l h
+    · simpa only [Set.indicator_of_notMem (not_not.mpr hx), if_pos hx] using hr
+    · simpa only [Set.indicator_of_mem hx, if_neg hx] using hr
 
 theorem modeRegionSources_add (D : ReferenceData) (l h : ℝ)
     (F : RadialModePair D) :
     modeInnerSource D l h F + modeOuterSource D l h F = F := by
   have hs := modeRegionSources_spec D l h F
   apply Prod.ext
-  · apply Lp.ext
+  · change (modeInnerSource D l h F).1 + (modeOuterSource D l h F).1 = F.1
+    apply Lp.ext
     filter_upwards [hs.2.2.1, hs.2.2.2,
       Lp.coeFn_add (modeInnerSource D l h F).1 (modeOuterSource D l h F).1]
       with r hi ho hsum

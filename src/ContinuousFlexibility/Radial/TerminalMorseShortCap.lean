@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.TerminalCapAttenuation
 import ContinuousFlexibility.Radial.R07CapPullback
 import ContinuousFlexibility.Radial.MorseChainGeometry
+import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Actual Morse short-cap attenuation
@@ -190,14 +191,17 @@ theorem terminalMorse_short_cap_layer_bounds {A B j s scale t : ℝ} {r w u : �
   have heq (x : ℝ) (hx : x ∈ Icc 0 morseShortLeftCapLength) :
       deriv (deriv p) x = (j ^ 2 * (-morseRho A B (morseCellLeftCut + x))) * p x := by
     have hg := terminalMorse_short_cap_geometry (j := j) hB hAB hs hr hx
+    have hRx : R x ≠ 0 := hg.1.ne'
+    have hReq : deriv (deriv R) x = -morseRho A B (morseCellLeftCut + x) * R x :=
+      hg.2.2.1
     calc
       _ = (j ^ 2 * deriv (deriv R) x / R x) * u (R x) := by
         rw [hpd]
         exact (hsecond x hx).deriv
       _ = _ := by
-        rw [hg.2.2.1]
+        rw [hReq]
         dsimp only [p]
-        field_simp [hg.1.ne']
+        field_simp [hRx]
         ring
   have hlo (x : ℝ) (hx : x ∈ Icc 0 morseShortLeftCapLength) :
       m ^ 2 ≤ j ^ 2 * (-morseRho A B (morseCellLeftCut + x)) :=

@@ -85,7 +85,7 @@ theorem centralPotential_near_mass_bound {j T x a : ℝ}
   have hxabs : |x| ≤ 3 * T / 2 := by
     calc
       |x| = |(x - a) + a| := by congr 1; ring
-      _ ≤ |x - a| + |a| := abs_add _ _
+      _ ≤ |x - a| + |a| := abs_add_le _ _
       _ ≤ 4 / centralBufferMass j T + T := add_le_add hx ha
       _ ≤ 3 * T / 2 := by linarith
   have hx2 : x ^ 2 ≤ (3 * T / 2) ^ 2 := by
@@ -151,7 +151,7 @@ theorem centralModelBuffer_hypotheses {j T B₀ : ℝ} (bordered : Bool)
   · change ContDiff ℝ ∞ (centralPotential j)
     unfold centralPotential
     fun_prop
-  · simpa [centralModelBuffer_innerWall bordered g f hjpos hTpos] using hsupp
+  · simpa [centralModelBuffer_innerWall bordered g f hjpos hTpos, centralModelBuffer] using hsupp
   · intro i
     exact ⟨hm, centralBufferAction_pos hj hT⟩
   · intro i x hx
@@ -169,7 +169,7 @@ theorem centralModelBuffer_hypotheses {j T B₀ : ℝ} (bordered : Bool)
       by_cases hi : i = 0 <;> simp [bufferCut, centralModelBuffer, hi, abs_of_pos hTpos]
     have hwall : |bufferInnerWall (centralModelBuffer j T B₀ bordered g f) i| ≤ T := by
       rw [centralModelBuffer_innerWall bordered g f hjpos hTpos]
-      split_ifs <;> simp [abs_of_pos hTpos] <;> linarith
+      split_ifs <;> apply abs_le.mpr <;> constructor <;> linarith
     rcases hx with hx | hx
     · exact centralPotential_near_mass_bound hj hT hcut hx
     · exact centralPotential_near_mass_bound hj hT hwall hx

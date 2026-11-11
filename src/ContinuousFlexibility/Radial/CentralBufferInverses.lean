@@ -47,11 +47,12 @@ theorem exists_centralUnborderedPairMap {V : ℝ → ℝ} {C : ℝ}
     (centralUnborderedPairMap_norm_le R).trans hnorm, ?_, ?_⟩
   · intro F hF
     rw [centralUnborderedPairMap_apply]
-    simp only [BorderedFullGraph, ite_false]
+    change WeakSchrodingerGraph V (R F.1) F.1 ∧ (0 : ℝ) = 0 ∧ F.2 = 0
     exact ⟨by simpa only [zero_smul, add_zero] using hsolve F.1, rfl, hF⟩
   · intro U F hU
     have hu : WeakSchrodingerGraph V U.1 F.1 ∧ U.2 = 0 ∧ F.2 = 0 := by
-      simpa only [BorderedFullGraph, ite_false] using hU
+      change WeakSchrodingerGraph V U.1 F.1 ∧ U.2 = 0 ∧ F.2 = 0 at hU
+      exact hU
     rw [centralUnborderedPairMap_apply]
     apply Prod.ext
     · apply hunique U.1 F.1
