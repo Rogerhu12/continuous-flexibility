@@ -88,7 +88,11 @@ jobs:
           tar --zstd -cf lake-build.tar.zst .lake/build
           ls -lh lake-build.tar.zst
           git rev-parse HEAD > lake-build.commit
-          gh release upload lake-cache lake-build.tar.zst lake-build.commit --clobber -R "$GITHUB_REPOSITORY"
+          if gh release view lake-cache -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload lake-cache lake-build.tar.zst lake-build.commit --clobber -R "$GITHUB_REPOSITORY"
+          else
+            echo "::warning::release lake-cache does not exist; the compiled build was not published"
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
