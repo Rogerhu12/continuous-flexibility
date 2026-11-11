@@ -22,4 +22,8 @@ theorem R09 : R09Statement :=
 
 end ContinuousFlexibility.Blueprint
 
+/--
+info: 'ContinuousFlexibility.Blueprint.R09' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
 #print axioms ContinuousFlexibility.Blueprint.R09

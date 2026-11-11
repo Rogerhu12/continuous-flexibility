@@ -134,7 +134,7 @@ private theorem circleJetEncodedRow_energy_eq (hf : CircleMember T γ f) (s m : 
 
 private theorem summable_circleJetEncodedRow (hf : CircleMember T γ f) (s : ℕ) :
     Summable (fun m : ℕ => ‖circleJetEncodedRow hf s m‖ ^ 2) := by
-  have hsum : (∑' m : ℕ, circleJetCellEnergy T γ f s m) < ∞ := hf.2.2 s
+  have hsum : (∑' m : ℕ, circleJetCellEnergy T γ f s m) < (⊤ : ℝ≥0∞) := hf.2.2 s
   simpa only [← circleJetEncodedRow_energy_eq hf s, ENNReal.toReal_ofReal (sq_nonneg _)] using
     ENNReal.summable_toReal hsum.ne
 
@@ -234,6 +234,7 @@ theorem circleJetDecoded_encode (hH : ∀ m, 0 < T.H (T.sample m)) (hf : CircleM
 theorem circleJetDecoded_injective (hH : ∀ m, 0 < T.H (T.sample m)) (γ : ℝ) :
     Function.Injective (fun u : CircleJetProjectiveLimit T hM => circleJetDecoded u γ) := by
   intro u v huv
+  change circleJetDecoded u γ = circleJetDecoded v γ at huv
   apply Subtype.ext
   funext s
   apply Subtype.ext
@@ -261,7 +262,7 @@ def canonicalCircleModelData (T : MaterialData) (hM : ∀ m, 0 < T.M (T.sample m
 
 theorem canonicalCircleModelData_decode (γ : ℝ)
     (u : (canonicalCircleModelData T hM γ).Space) :
-    (canonicalCircleModelData T hM γ).decode u = circleJetDecoded u γ :=
+    (canonicalCircleModelData T hM γ).decode u = circleJetDecoded (hM := hM) u γ :=
   circleJetDecodeCLM_apply T hM γ u
 
 theorem isCircleModel_canonicalCircleModelData (hH : ∀ m, 0 < T.H (T.sample m))
@@ -284,6 +285,7 @@ theorem isCircleModel_canonicalCircleModelData (hH : ∀ m, 0 < T.H (T.sample m)
     rw [canonicalCircleModelData_decode]
     exact circleJetDecoded_circleNorm hH u γ s
 
+include hM in
 theorem exists_isCircleModel_of_sample_pos (hH : ∀ m, 0 < T.H (T.sample m)) (γ : ℝ) :
     ∃ S : CircleModelData, IsCircleModel T γ S :=
   ⟨canonicalCircleModelData T hM γ, isCircleModel_canonicalCircleModelData hM hH γ⟩
