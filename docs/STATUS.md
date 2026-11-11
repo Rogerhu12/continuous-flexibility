@@ -19,13 +19,13 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 367 / 375 (current source paths, including blueprint) |
-| Modules in the root import | 325 |
-| Lines of Lean under `src/` | 90,233 |
-| Axiom audit (CI, 3799 jobs) | passed for every project declaration in the root import |
-| Blueprint statements proved / total | 8 / 42 (S01, S02, R01, R02, R03, R04, W01, N12) |
+| Lean modules compiled / total | 372 / 380 (current source paths, including blueprint) |
+| Modules in the root import | 331 |
+| Lines of Lean under `src/` | 90,710 |
+| Axiom audit (CI) | passed for every project declaration in the root import |
+| Blueprint statements proved / total | 9 / 42 (S01, S02, R01, R02, R03, R04, W01, N04Cubic, N12) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 379 |
+| Modules on the module system | 1 (the Challenge) of 384 |
 
 The compiled-module count matches artifacts to current source paths; the raw CI cache count
 can also include artifacts of removed blueprint modules. The 8 unfinished modules of the earlier workflow are:
@@ -46,6 +46,16 @@ can also include artifacts of removed blueprint modules. The 8 unfinished module
   `Analysis/PointSolutionCore.lean` constructs the core from the same normalized nonzero
   solution point. No control-interval placement hypothesis is added. All proof dependencies
   are in the root import; N12 depends only on `propext`, `Classical.choice`, `Quot.sound`.
+- **Cubic division (N04Cubic).** The unchanged `CubicDivisionTarget` is proved with
+  the uniform constant `C = 8` for every derivative order. Taylor's integral formula
+  identifies the prescribed quotient, including its value at zero, with a globally smooth
+  function (`Analysis/SmoothScaledIntegral.lean`, `Analysis/CubicDivisionSmooth.lean`).
+  The estimate for `x * deriv u + a * u`, for `a ≥ 1`, follows from the fundamental
+  theorem of calculus and a completed square (`Analysis/EulerL2Division.lean`).
+  `Analysis/IteratedDerivLinearFactor.lean` and `Analysis/CubicDivisionL2.lean` apply it
+  three times, giving the required loss of exactly three derivatives. All five modules
+  and the node are in the root import; the node's exact axiom output is checked in its
+  source and contains only `propext`, `Classical.choice`, `Quot.sound`.
 - **Abstract Nash–Moser, fixed parameter.** `exists_projectiveNewton_fixed_branch`
   (`Analysis/ProjectiveNewtonFixedBranch.lean`).
 - **Lemmas for §5–§9** (21 modules added on 2026-11-11, listed in `docs/archive/2026-11-11-lemmas.md`).
@@ -76,8 +86,8 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (34): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
-R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
+Open nodes (33): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
+R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Transmission, N04a,
 N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
@@ -134,6 +144,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 34 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.

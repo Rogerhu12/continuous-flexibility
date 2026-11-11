@@ -74,12 +74,12 @@ theorem eLpNorm_iteratedDeriv_cubicQuotient {f : ℝ → ℝ}
     _ ≤ ENNReal.ofReal 2 * (ENNReal.ofReal 2 *
         eLpNorm (iteratedDeriv (s + 2) q₂) 2
           (volume.restrict (Ioo (0 : ℝ) 1))) := by
-      exact mul_le_mul_left' (by simpa only [Nat.add_assoc] using h₁) _
+      exact mul_le_mul_right (by simpa only [Nat.add_assoc] using h₁) _
     _ ≤ ENNReal.ofReal 2 * (ENNReal.ofReal 2 * (ENNReal.ofReal 2 *
         eLpNorm (iteratedDeriv (s + 3) f) 2
           (volume.restrict (Ioo (0 : ℝ) 1)))) := by
-      apply mul_le_mul_left'
-      apply mul_le_mul_left'
+      apply mul_le_mul_right
+      apply mul_le_mul_right
       simpa only [hfactor, Nat.add_assoc] using h₂
     _ = _ := by rw [← mul_assoc, ← mul_assoc, htwo]
 
