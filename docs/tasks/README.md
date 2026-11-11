@@ -57,8 +57,30 @@ Build single targets, never a bare `lake build` in a small sandbox:
 LEAN_NUM_THREADS=2 lake build ContinuousFlexibility.Blueprint.<Node>
 ```
 
-Check one file without writing artifacts with `lake env lean <file>`. CI builds everything on every
-push to a `line/**` branch and on every pull request, and prints the blueprint status.
+Check one file without writing artifacts with `lake env lean <file>`.
+
+## If the sandbox cannot compile, use CI
+
+Do not spend time fighting the sandbox. If a compile runs out of memory, is killed, or takes more
+than a few minutes for one file, stop compiling locally: write the code, push, and read the result
+of CI. That loop always works.
+
+- CI builds everything on every push to a `line/**` branch and on every pull request, prints the
+  blueprint status, and takes about 5 minutes with the cache. A newer push cancels the older run.
+- Find the run of your branch and its errors:
+
+```bash
+gh run list --branch line/<Node> --limit 3
+```
+
+```bash
+gh run view <run-id> --log-failed
+```
+
+- The step "Build every library" prints every `error:` line with the following 60 lines; the full
+  log is the artifact `build-log`.
+- Push small, complete steps (one file or one lemma group at a time), so that one CI round tells
+  you about one change. Do not pile up thousands of unchecked lines before the first push.
 
 ## Lean
 
