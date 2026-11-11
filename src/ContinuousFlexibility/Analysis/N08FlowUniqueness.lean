@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Calculus.Deriv.MeanValue
+import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 
 /-!
@@ -29,11 +30,11 @@ theorem n08_scalarTrajectory_unique {a b K : ℝ} (hab : a ≤ b)
       Real.exp (-(2 * K) * t)
   have hE : ContinuousOn E (Icc a b) :=
     ((hf.sub hg).pow 2).mul
-      ((continuous_const.mul continuous_id).exp.continuousOn)
+      ((Real.continuous_exp.comp (continuous_const.mul continuous_id)).continuousOn)
   have hdE (t : ℝ) (ht : t ∈ Ioo a b) : HasDerivAt E (E' t) t := by
     have hexp : HasDerivAt (fun s : ℝ => Real.exp (-(2 * K) * s))
         (Real.exp (-(2 * K) * t) * (-(2 * K))) t := by
-      simpa only [mul_one] using ((hasDerivAt_id t).const_mul (-(2 * K))).exp
+      simpa only [mul_one, id_eq] using ((hasDerivAt_id t).const_mul (-(2 * K))).exp
     convert (((hdf t ht).sub (hdg t ht)).pow 2).mul hexp using 1 <;>
       dsimp only [E, E'] <;> ring
   have hnonpos (t : ℝ) (ht : t ∈ Ioo a b) : E' t ≤ 0 := by

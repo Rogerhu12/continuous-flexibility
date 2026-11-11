@@ -64,7 +64,8 @@ theorem n08_heightRadial_stateHeight
     ((Radial.contDiff_radialHeightField (n08_stateRadialHeight_contDiff hT hS hN x)).differentiable
       (by simp)) ((n08_stateU_contDiff hT hS x).differentiable (by simp))]
   simp only [heightFamily,
-    Radial.heightRadial_radialHeightField (n08_stateRadialHeight_hasDerivAt hT hS hN x)]
+    Radial.heightRadial_radialHeightField (n08_stateRadialHeight_hasDerivAt hT hS hN x),
+    Radial.radialHeightField]
 
 theorem n08_heightAngular_stateHeight
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -92,6 +93,7 @@ theorem n08_polarCoefficients_eq_of_germs
   have hE : profileEnergy w =ᶠ[𝓝 p] profileEnergy v := by
     have hwp := hw.comp_tendsto (continuous_fst.continuousAt : ContinuousAt Prod.fst p)
     filter_upwards [hwp] with x hx
+    simp only [Function.comp_apply] at hx
     change radialEnergy (w x.1) = radialEnergy (v x.1)
     rw [hx]
   have hEr : radialPartial (profileEnergy w) p = radialPartial (profileEnergy v) p := by
@@ -124,6 +126,7 @@ theorem n08_originalCoefficients_component_eq
     have hwp := hw.comp_tendsto
       (continuous_fst.continuousAt : ContinuousAt Prod.fst (r, θ))
     filter_upwards [hwp] with p hp
+    simp only [Function.comp_apply] at hp
     rw [n08_heightRadial_stateHeight hT hS hN, n08_heightRadial_stateHeight hT hS hN, hp, hU]
   have hp : heightAngular (stateHeight D S C (x, q)) =ᶠ[𝓝 (r, θ)]
       heightAngular (stateHeight D S C (y, q)) := by

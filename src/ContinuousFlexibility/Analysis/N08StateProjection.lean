@@ -42,10 +42,11 @@ private theorem n08_productProjection_existsTame
   have hfull := solve_isTameLinear_prodMap hp
     (pairGrading_monotone hr (pairGrading_monotone hq hq)) (IsTameLinear.id p) hrest
   refine ⟨loss, base, ?_⟩
+  dsimp +unfoldPartialApp only [pairGrading] at hfull ⊢
   simpa only [ContinuousLinearMap.coe_prodMap, ContinuousLinearMap.coe_id,
     Nat.zero_max] using hfull
 
-private theorem n08_codRestrict_existsTame
+theorem n08_codRestrict_existsTame
     {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
     (W : Submodule ℝ F) (L : E →L[ℝ] F) (hmem : ∀ x, L x ∈ W)
     (h : ∃ loss base, IsTameLinear p q L.toLinearMap loss base) :
