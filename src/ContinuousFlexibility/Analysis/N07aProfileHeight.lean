@@ -22,13 +22,13 @@ open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance (S : PhysicalSpacesData) : AddCommGroup (AnnularState S) := inferInstance
-local instance (S : PhysicalSpacesData) : Module ℝ (AnnularState S) := inferInstance
-local instance (S : PhysicalSpacesData) : AddGroup (AnnularState S) :=
+local instance n07aProfileHeightInst1 (S : PhysicalSpacesData) : AddCommGroup (AnnularState S) := inferInstance
+local instance n07aProfileHeightInst2 (S : PhysicalSpacesData) : Module ℝ (AnnularState S) := inferInstance
+local instance n07aProfileHeightInst3 (S : PhysicalSpacesData) : AddGroup (AnnularState S) :=
   (inferInstance : AddCommGroup (AnnularState S)).toAddGroup
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
+local instance n07aProfileHeightInst4 (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
   (inferInstance : Module ℝ (AnnularState S)).toSMul
-local instance (S : PhysicalSpacesData) : Sub (AnnularState S) :=
+local instance n07aProfileHeightInst5 (S : PhysicalSpacesData) : Sub (AnnularState S) :=
   (inferInstance : AddCommGroup (AnnularState S)).toSub
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

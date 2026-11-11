@@ -20,19 +20,19 @@ open scoped BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance (S : PhysicalSpacesData) : AddCommGroup (AnnularState S) := inferInstance
+local instance n07aCoefficientMaterialInst1 (S : PhysicalSpacesData) : AddCommGroup (AnnularState S) := inferInstance
 
-local instance (S : PhysicalSpacesData) : Module ℝ (AnnularState S) := inferInstance
+local instance n07aCoefficientMaterialInst2 (S : PhysicalSpacesData) : Module ℝ (AnnularState S) := inferInstance
 
-local instance (S : PhysicalSpacesData) : TopologicalSpace (AnnularState S) := inferInstance
+local instance n07aCoefficientMaterialInst3 (S : PhysicalSpacesData) : TopologicalSpace (AnnularState S) := inferInstance
 
-local instance (S : PhysicalSpacesData) : AddGroup (AnnularState S) :=
+local instance n07aCoefficientMaterialInst4 (S : PhysicalSpacesData) : AddGroup (AnnularState S) :=
   (inferInstance : AddCommGroup (AnnularState S)).toAddGroup
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
+local instance n07aCoefficientMaterialInst5 (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
   (inferInstance : Module ℝ (AnnularState S)).toSMul
 
-local instance (S : PhysicalSpacesData) : Sub (AnnularState S) :=
+local instance n07aCoefficientMaterialInst6 (S : PhysicalSpacesData) : Sub (AnnularState S) :=
   (inferInstance : AddCommGroup (AnnularState S)).toSub
 
 private theorem n07a_oneHighVariationWeight_nonneg

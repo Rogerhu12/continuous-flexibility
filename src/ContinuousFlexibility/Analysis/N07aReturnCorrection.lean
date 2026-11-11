@@ -24,9 +24,9 @@ open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance (S : PhysicalSpacesData) : AddGroup (StateDirections S) :=
+local instance n07aReturnCorrectionInst1 (S : PhysicalSpacesData) : AddGroup (StateDirections S) :=
   (Submodule.addCommGroup (stateSectorSubmodule S)).toAddGroup
-local instance (S : PhysicalSpacesData) : SMul ℝ (StateDirections S) :=
+local instance n07aReturnCorrectionInst2 (S : PhysicalSpacesData) : SMul ℝ (StateDirections S) :=
   (Submodule.module (stateSectorSubmodule S)).toSMul
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

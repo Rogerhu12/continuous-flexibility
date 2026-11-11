@@ -23,10 +23,10 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {K : CanonicalData S} {V : VolumeModelData S K}
   {b : ℕ} {B : CanonicalDomainData S K V b}
 
-local instance (γ t : ℝ) (s : ℕ) : NormedAddCommGroup (V.level γ t s) :=
+local instance n07aReferenceBlocksInst1 (γ t : ℝ) (s : ℕ) : NormedAddCommGroup (V.level γ t s) :=
   Submodule.normedAddCommGroup _
 
-local instance (γ t : ℝ) (s : ℕ) : NormedSpace ℝ (V.level γ t s) :=
+local instance n07aReferenceBlocksInst2 (γ t : ℝ) (s : ℕ) : NormedSpace ℝ (V.level γ t s) :=
   Submodule.normedSpace _
 
 private def n07aReferenceWeightBound (γ t : ℝ) (s : ℕ) (A : ℝ) : Prop :=

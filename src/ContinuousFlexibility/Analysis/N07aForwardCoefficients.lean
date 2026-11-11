@@ -21,14 +21,14 @@ open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance (S : PhysicalSpacesData) : AddCommGroup (AnnularState S) := inferInstance
-local instance (S : PhysicalSpacesData) : Module ℝ (AnnularState S) := inferInstance
-local instance (S : PhysicalSpacesData) : TopologicalSpace (AnnularState S) := inferInstance
-local instance (S : PhysicalSpacesData) : AddGroup (AnnularState S) :=
+local instance n07aForwardCoefficientsInst1 (S : PhysicalSpacesData) : AddCommGroup (AnnularState S) := inferInstance
+local instance n07aForwardCoefficientsInst2 (S : PhysicalSpacesData) : Module ℝ (AnnularState S) := inferInstance
+local instance n07aForwardCoefficientsInst3 (S : PhysicalSpacesData) : TopologicalSpace (AnnularState S) := inferInstance
+local instance n07aForwardCoefficientsInst4 (S : PhysicalSpacesData) : AddGroup (AnnularState S) :=
   (inferInstance : AddCommGroup (AnnularState S)).toAddGroup
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
+local instance n07aForwardCoefficientsInst5 (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
   (inferInstance : Module ℝ (AnnularState S)).toSMul
-local instance (S : PhysicalSpacesData) : Sub (AnnularState S) :=
+local instance n07aForwardCoefficientsInst6 (S : PhysicalSpacesData) : Sub (AnnularState S) :=
   (inferInstance : AddCommGroup (AnnularState S)).toSub
 
 /-- The actual sum grading evaluated as a real number. Naming its value
