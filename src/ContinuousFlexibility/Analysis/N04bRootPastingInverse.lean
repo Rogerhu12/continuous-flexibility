@@ -84,11 +84,12 @@ theorem exists_literal_root_germs
       hPhysical hMatch hInj hHMaps' hHRight'
   refine ⟨G, ?_, ?_⟩
   · intro θ
+    have heRoot : e (r₀, θ) = (0, θ) := n04bRootAffine_at_root r₀ side θ
     have hp : e (r₀, θ) ∈ V := by
-      rw [n04bRootAffine_at_root]
+      rw [heRoot]
       exact ⟨⟨by linarith [M.radius_pos], by linarith [M.radius_pos]⟩, mem_univ _⟩
     have hImage : M.rootChart (e (r₀, θ)) ∈ W := by
-      rw [n04bRootAffine_at_root]
+      rw [heRoot]
       refine ⟨?_, mem_univ _⟩
       rw [M.axis θ]
       exact ⟨neg_lt_zero.mpr hη', hη'⟩

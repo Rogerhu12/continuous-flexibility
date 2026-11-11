@@ -106,7 +106,13 @@ theorem n04b_rootPastingModel_of_matched_collar
   intro p hp
   have hPhysicalPoint := hPhysical ⟨⟨hp.2, (hSub hp.1).1.2⟩, mem_univ _⟩
   apply n04b_mem_travelHalf_of_rootCoordinate_mem hT side hF hPhysicalPoint
-  rw [hChart (hSubPos hp)]
+  have hChartPoint :
+      n04bRootPhysicalChart F T side ((n04bRootAffine r₀ side).symm p) =
+        extendedRootEvenOddChart G p := hChart (hSubPos hp)
+  have hRadius :
+      (n04bRootPhysicalChart F T side ((n04bRootAffine r₀ side).symm p)).1 =
+        (extendedRootEvenOddChart G p).1 := congrArg Prod.fst hChartPoint
+  rw [hRadius]
   refine ⟨n04b_extended_root_first_pos hp.2 (hReg p (hSub hp.1)).2.1, ?_⟩
   apply hBound p.1 p.2
   exact (abs_lt.mpr hp.1.1).trans_le (min_le_right _ _)
@@ -139,13 +145,16 @@ theorem n04b_exists_actual_rootPastingModel
         hcollar p.1 p.2 (abs_lt.mpr hp.1)
       exact ⟨hf, hχ, hJ, ha, hh, hhpos⟩
     · intro p hp
-      simp only [n04bRootAffine_symm_apply, rootProfileShift, one_mul]
-      exact ⟨⟨by linarith [hp.1.1], by linarith [hp.1.2]⟩, mem_univ _⟩
+      have hpoint : (C.left m + p.1, p.2) ∈
+          Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) :=
+        ⟨⟨by linarith only [hp.1.1],
+          by linarith only [hp.1.2, hδρ, hspan]⟩, mem_univ _⟩
+      simpa [n04bRootAffine_symm_apply, rootProfileShift] using hpoint
     · intro p hp
-      simpa only [n04bRootAffine_symm_apply, rootProfileShift, one_mul] using
+      simpa [n04bRootAffine_symm_apply, rootProfileShift] using
         (hmatch p.1 ⟨hp.2, hp.1.1.2⟩ p.2).1.symm
     · intro p hp
-      simpa only [n04bRootAffine_symm_apply, rootProfileShift, one_mul] using
+      simpa [n04bRootAffine_symm_apply, rootProfileShift] using
         (hmatch p.1 ⟨hp.2, hp.1.1.2⟩ p.2).2.symm
   | true =>
     obtain ⟨ρ, δ, d, c₀, G, hρ, hspan, H, hδ, hδρ, hcollar, hmatch⟩ :=
@@ -156,13 +165,16 @@ theorem n04b_exists_actual_rootPastingModel
         hcollar p.1 p.2 (abs_lt.mpr hp.1)
       exact ⟨hf, hχ, hJ, ha, hh, hhpos⟩
     · intro p hp
-      simp only [n04bRootAffine_symm_apply, rootProfileShift, neg_one_mul, ← sub_eq_add_neg]
-      exact ⟨⟨by linarith [hp.1.2], by linarith [hp.1.1]⟩, mem_univ _⟩
+      have hpoint : (C.right m - p.1, p.2) ∈
+          Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) :=
+        ⟨⟨by linarith only [hp.1.2, hδρ, hspan],
+          by linarith only [hp.1.1]⟩, mem_univ _⟩
+      simpa [n04bRootAffine_symm_apply, rootProfileShift, sub_eq_add_neg] using hpoint
     · intro p hp
-      simpa only [n04bRootAffine_symm_apply, rootProfileShift, neg_one_mul, ← sub_eq_add_neg] using
+      simpa [n04bRootAffine_symm_apply, rootProfileShift, sub_eq_add_neg] using
         (hmatch p.1 ⟨hp.2, hp.1.1.2⟩ p.2).1.symm
     · intro p hp
-      simpa only [n04bRootAffine_symm_apply, rootProfileShift, neg_one_mul, ← sub_eq_add_neg] using
+      simpa [n04bRootAffine_symm_apply, rootProfileShift, sub_eq_add_neg] using
         (hmatch p.1 ⟨hp.2, hp.1.1.2⟩ p.2).2.symm
 
 end ContinuousFlexibility.Analysis
