@@ -465,7 +465,8 @@ theorem exists_morseChainChosenJoin_jetBounds {T : Statements.MorseChainData}
     have hn' : 1 ≤ T.index + k := by have h := G.start_large; omega
     exact hJet.adjacent hn' (Or.inl hnEq) hC.le
 
-private theorem morseSelected_jetBounds_of_germ {n s : ℕ} {C x : ℝ} {f g : ℝ → ℝ}
+/-- The full coefficient bounds depend only on the germ of the profile. -/
+theorem morseSelected_jetBounds_of_germ {n s : ℕ} {C x : ℝ} {f g : ℝ → ℝ}
     (h : MorseChainJetBounds n s C g x) (he : f =ᶠ[𝓝 x] g) :
     MorseChainJetBounds n s C f x := by
   have hInv : f⁻¹ =ᶠ[𝓝 x] g⁻¹ := he.fun_comp (fun t : ℝ => t⁻¹)
@@ -645,19 +646,18 @@ private theorem morseSelected_middle_abs_bound {a b : ℝ} {f : ℝ → ℝ}
     (hf.continuous_iteratedDeriv s (by simp)).continuousOn
   exact ⟨K, fun x hx => by simpa only [Real.norm_eq_abs] using hK x hx⟩
 
-/-- Fixed-order middle jets, uniformly in all admissible height choices.
-The single chosen unit bridge is multiplied by the actual head amplitude. -/
-theorem exists_morseChainGluedProfile_middle_jetBounds {T : Statements.MorseChainData}
-    (G : MorseChainGeometryWitness T) (s : ℕ) :
+/-- Any fixed positive smooth middle profile has uniform jets after multiplication
+by the actual head amplitude. This permits later finite middle replacements
+without changing the tail estimates or their height sequence. -/
+theorem exists_morseChainScaledMiddle_jetBounds {T : Statements.MorseChainData}
+    (G : MorseChainGeometryWitness T) (s : ℕ) (u : ℝ → ℝ)
+    (hu : ContDiff ℝ ∞ u ∧ ∀ x, 0 < u x) :
     ∃ C : ℝ, 0 < C ∧ ∀ (σ : ℕ → ℝ) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2) (x : ℝ),
       x ∈ Icc (morseChainCellRightRadius T false 0) (morseChainCellLeftRadius T true 0) →
-        MorseChainJetBounds T.index s C (morseChainGluedProfile G σ hσ) x := by
+        MorseChainJetBounds T.index s C
+          (fun y => Statements.morseChainAmplitude T σ T.index * u y) x := by
   let a := morseChainCellRightRadius T false 0
   let b := morseChainCellLeftRadius T true 0
-  let u := morseChainMiddleUnit G
-  have hu : ContDiff ℝ ∞ u ∧ ∀ x, 0 < u x :=
-    let h := Classical.choose_spec (exists_morseChainMiddleUnit G)
-    ⟨h.1, h.2.1⟩
   have hui : ContDiff ℝ ∞ (u⁻¹) := hu.1.inv (fun x => (hu.2 x).ne')
   obtain ⟨M₀, hM₀⟩ := morseSelected_middle_abs_bound (a := a) (b := b) hu.1 0
   obtain ⟨M₁, hM₁⟩ := morseSelected_middle_abs_bound (a := a) (b := b) hu.1 s
@@ -753,7 +753,20 @@ theorem exists_morseChainGluedProfile_middle_jetBounds {T : Statements.MorseChai
     exact ⟨hlow, hhigh, hW₁.trans (hKexp.trans (mul_le_mul_of_nonneg_left hExp hC.le)),
       hI₁raw.trans (hCK.trans (le_mul_of_one_le_right hC.le hplus)),
       hI₁raw.trans (hCK.trans (le_mul_of_one_le_right hC.le (Real.one_le_rpow hE hC.le)))⟩
-  exact morseSelected_jetBounds_of_germ hb (morseChainGluedProfile_middle_germ G σ hσ hx)
+  exact hb
+
+/-- Fixed-order middle jets of the selected profile, uniformly over heights. -/
+theorem exists_morseChainGluedProfile_middle_jetBounds {T : Statements.MorseChainData}
+    (G : MorseChainGeometryWitness T) (s : ℕ) :
+    ∃ C : ℝ, 0 < C ∧ ∀ (σ : ℕ → ℝ) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2) (x : ℝ),
+      x ∈ Icc (morseChainCellRightRadius T false 0) (morseChainCellLeftRadius T true 0) →
+        MorseChainJetBounds T.index s C (morseChainGluedProfile G σ hσ) x := by
+  have h := Classical.choose_spec (exists_morseChainMiddleUnit G)
+  obtain ⟨C, hC, hB⟩ := exists_morseChainScaledMiddle_jetBounds G s
+    (morseChainMiddleUnit G) ⟨h.1, h.2.1⟩
+  refine ⟨C, hC, fun σ hσ x hx => ?_⟩
+  exact morseSelected_jetBounds_of_germ (hB σ hσ x hx)
+    (morseChainGluedProfile_middle_germ G σ hσ hx)
 
 private theorem morseSelected_seam_widths {T : Statements.MorseChainData}
     (G : MorseChainGeometryWitness T) (side : Bool) (k : ℕ) :
@@ -857,18 +870,24 @@ private theorem morseSelected_middle_window_split {T : Statements.MorseChainData
       exact Or.inr ⟨true, morseSelected_mem_block hmR ⟨hlo, hhi⟩⟩
     · exact Or.inl ⟨le_of_not_gt hL, le_of_not_gt hR⟩
 
-/-- All physical derivative bounds on the actual widened partition.
-The constants depend on the geometry and derivative order and are uniform
-over the admissible height sequences. The order zero result supplies the
-height lower bound with the same zeroth constant. -/
-theorem exists_morsePartitionReference_profile_jetBounds {T : Statements.MorseChainData}
-    (G : MorseChainGeometryWitness T) (s : ℕ) :
+/-- Piecewise bounds on the same physical profile pass to the fixed widened
+partition. Only the two supplied bounds depend on the choice of middle. -/
+theorem exists_morsePartitionReference_jetBounds_of_pieces {T : Statements.MorseChainData}
+    (G : MorseChainGeometryWitness T) (s : ℕ)
+    (W : (σ : ℕ → ℝ) → (∀ n, 1 ≤ σ n ∧ σ n ≤ 2) → ℝ → ℝ)
+    (hTail : ∃ C : ℝ, 0 < C ∧ ∀ (σ : ℕ → ℝ) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2)
+      (side : Bool) (k : ℕ) (x : ℝ), x ∈ Statements.morseChainBlock T side (T.index + k) →
+        MorseChainJetBounds (T.index + k) s C (W σ hσ) x)
+    (hMiddle : ∃ C : ℝ, 0 < C ∧ ∀ (σ : ℕ → ℝ) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2)
+      (x : ℝ),
+      x ∈ Icc (morseChainCellRightRadius T false 0) (morseChainCellLeftRadius T true 0) →
+        MorseChainJetBounds T.index s C (W σ hσ) x) :
     ∃ C : ℝ, 0 < C ∧ ∀ (σ : ℕ → ℝ) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2)
       (phi chi chiLeft : ℝ → ℝ) (m : ℕ) (x : ℝ),
-      let D := morsePartitionReference G (morseChainGluedProfile G σ hσ) phi chi chiLeft
+      let D := morsePartitionReference G (W σ hσ) phi chi chiLeft
       x ∈ D.cells m → MorseChainJetBounds (D.cellIndex m) s C D.w x := by
-  obtain ⟨CT, hCT, hT⟩ := exists_morseChainGluedProfile_tail_jetBounds G s
-  obtain ⟨CM, hCM, hM⟩ := exists_morseChainGluedProfile_middle_jetBounds G s
+  obtain ⟨CT, hCT, hT⟩ := hTail
+  obtain ⟨CM, hCM, hM⟩ := hMiddle
   let C := max CM (11 + 4 * CT)
   have hCM' : CM ≤ C := le_max_left _ _
   have hShift : 11 + 4 * CT ≤ C := le_max_right _ _
@@ -878,7 +897,7 @@ theorem exists_morsePartitionReference_profile_jetBounds {T : Statements.MorseCh
   intro σ hσ phi chi chiLeft m x
   dsimp only
   intro hx
-  let w := morseChainGluedProfile G σ hσ
+  let w := W σ hσ
   have hn (k : ℕ) : 1 ≤ T.index + k :=
     ((by norm_num : 1 ≤ 100).trans G.start_large).trans (Nat.le_add_right _ _)
   cases m with
@@ -900,5 +919,18 @@ theorem exists_morsePartitionReference_profile_jetBounds {T : Statements.MorseCh
         exact ((hT σ hσ q.1 j x h).adjacent (hn q.2) (Or.inr he) hCT.le).mono hShift₀ hShift
       · rw [hj, Nat.add_zero]
         exact (hM σ hσ x h).mono hCM.le hCM'
+
+
+/-- All physical derivative bounds on the actual widened partition. The
+constants are uniform over all admissible height sequences. -/
+theorem exists_morsePartitionReference_profile_jetBounds {T : Statements.MorseChainData}
+    (G : MorseChainGeometryWitness T) (s : ℕ) :
+    ∃ C : ℝ, 0 < C ∧ ∀ (σ : ℕ → ℝ) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2)
+      (phi chi chiLeft : ℝ → ℝ) (m : ℕ) (x : ℝ),
+      let D := morsePartitionReference G (morseChainGluedProfile G σ hσ) phi chi chiLeft
+      x ∈ D.cells m → MorseChainJetBounds (D.cellIndex m) s C D.w x :=
+  exists_morsePartitionReference_jetBounds_of_pieces G s (morseChainGluedProfile G)
+    (exists_morseChainGluedProfile_tail_jetBounds G s)
+    (exists_morseChainGluedProfile_middle_jetBounds G s)
 
 end ContinuousFlexibility.Radial

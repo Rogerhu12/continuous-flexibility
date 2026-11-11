@@ -343,4 +343,80 @@ theorem exists_interval_classical_rep {a b x₀ : ℝ} {f g : ℝ → ℝ}
   intro x hx
   exact (hasDerivAt_intervalWeakPrimitive hg hx₀ hx).const_add c
 
+/-! Compatibility names for the radial weak-equation callers. Each wrapper
+uses the shared integral-representative implementation above. -/
+
+theorem exists_inner_interval_of_isCompact_subset_Ioo {a b : ℝ} (hab : a < b)
+    {K : Set ℝ} (hK : IsCompact K) (hKI : K ⊆ Ioo a b) :
+    ∃ l r : ℝ, a < l ∧ l < r ∧ r < b ∧ K ⊆ Ioo l r :=
+  interval_compact_subset_Ioo hab hK hKI
+
+theorem exists_contDiff_compactPrimitive_Ioo {a b : ℝ} (hab : a < b)
+    {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f)
+    (hfs : tsupport f ⊆ Ioo a b) (hfi : (∫ x, f x) = 0) :
+    ∃ φ : ℝ → ℝ, ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧
+      tsupport φ ⊆ Ioo a b ∧ deriv φ = f :=
+  exists_interval_compact_primitive hab hf hfc hfs hfi
+
+theorem exists_contDiff_unitIntegral_Ioo {a b : ℝ} (hab : a < b) :
+    ∃ ρ : ℝ → ℝ, ContDiff ℝ ∞ ρ ∧ HasCompactSupport ρ ∧
+      tsupport ρ ⊆ Ioo a b ∧ (∫ x, ρ x) = 1 :=
+  exists_interval_unit_test hab
+
+theorem integrable_mul_test_of_locallyIntegrableOn_Ioo {a b : ℝ}
+    {u ψ : ℝ → ℝ} (hu : LocallyIntegrableOn u (Ioo a b) volume)
+    (hψ : Continuous ψ) (hψc : HasCompactSupport ψ)
+    (hψs : tsupport ψ ⊆ Ioo a b) :
+    Integrable (fun x => u x * ψ x) :=
+  interval_integrable_mul_test hu hψ hψc hψs
+
+theorem exists_ae_eq_const_of_integral_mul_deriv_eq_zero_Ioo {a b : ℝ}
+    (hab : a < b) {u : ℝ → ℝ}
+    (hu : LocallyIntegrableOn u (Ioo a b) volume)
+    (hw : ∀ φ : ℝ → ℝ, ContDiff ℝ ∞ φ → HasCompactSupport φ →
+      tsupport φ ⊆ Ioo a b → (∫ x, u x * deriv φ x) = 0) :
+    ∃ c : ℝ, u =ᵐ[volume.restrict (Ioo a b)] (fun _ => c) :=
+  interval_ae_constant_of_integral_deriv_zero hab hu hw
+
+/-- The same conclusion when the weak derivative is expressed with the
+restricted interval measure. -/
+theorem exists_ae_eq_const_of_setIntegral_mul_deriv_eq_zero_Ioo {a b : ℝ}
+    (hab : a < b) {u : ℝ → ℝ}
+    (hu : LocallyIntegrableOn u (Ioo a b) volume)
+    (hw : ∀ φ : ℝ → ℝ, ContDiff ℝ ∞ φ → HasCompactSupport φ →
+      tsupport φ ⊆ Ioo a b → (∫ x in Ioo a b, u x * deriv φ x) = 0) :
+    ∃ c : ℝ, u =ᵐ[volume.restrict (Ioo a b)] (fun _ => c) := by
+  apply exists_ae_eq_const_of_integral_mul_deriv_eq_zero_Ioo hab hu
+  intro φ hφ hφc hφs
+  have he : (∫ x in Ioo a b, u x * deriv φ x) = ∫ x, u x * deriv φ x := by
+    apply setIntegral_eq_integral_of_forall_compl_eq_zero
+    intro x hx
+    have hxφ : x ∉ tsupport φ := fun hh => hx (hφs hh)
+    have hzero : φ =ᶠ[𝓝 x] (fun _ : ℝ => 0) := by
+      filter_upwards [(isClosed_tsupport φ).isOpen_compl.mem_nhds hxφ] with y hy
+      exact image_eq_zero_of_notMem_tsupport hy
+    have hder : deriv φ x = 0 := by
+      rw [hzero.deriv_eq]
+      exact deriv_const x 0
+    rw [hder, mul_zero]
+  rw [← he]
+  exact hw φ hφ hφc hφs
+
+/-- Two locally integrable representatives with the same distributional first
+derivative differ by a single constant on the connected interval. -/
+theorem exists_ae_eq_add_const_of_integral_sub_mul_deriv_eq_zero_Ioo {a b : ℝ}
+    (hab : a < b) {u v : ℝ → ℝ}
+    (hu : LocallyIntegrableOn u (Ioo a b) volume)
+    (hv : LocallyIntegrableOn v (Ioo a b) volume)
+    (hw : ∀ φ : ℝ → ℝ, ContDiff ℝ ∞ φ → HasCompactSupport φ →
+      tsupport φ ⊆ Ioo a b → (∫ x, (u x - v x) * deriv φ x) = 0) :
+    ∃ c : ℝ, u =ᵐ[volume.restrict (Ioo a b)] (fun x => v x + c) := by
+  obtain ⟨c, hc⟩ :=
+    exists_ae_eq_const_of_integral_mul_deriv_eq_zero_Ioo hab (hu.sub hv) hw
+  refine ⟨c, ?_⟩
+  filter_upwards [hc] with x hx
+  change u x - v x = c at hx
+  linarith
+
+
 end ContinuousFlexibility.Analysis
