@@ -149,16 +149,17 @@ theorem correctedData_nonempty
     (hsmall : ∀ i, B.B₀ * B.mass i ^ 2 * exp (-B.action i) ≤ 1) :
     Nonempty (PositiveBufferCorrectedData B D.profiles.A D.profiles.alphaOut
       (2 * P * (1 + F)) (2 * P * F * B.B₀)) := by
-  exact ⟨{ column := D.correctedColumn hB H hH,
-    representative := D.correctedRepresentative hB H hH,
-    smooth := D.corrected_smooth hB H hH,
-    representative_eq := D.corrected_representative_eq hB H hH,
-    equation := fun j x hx => D.corrected_equation hB H hH j hx,
-    border_row := D.corrected_border_row hB H hH,
-    conormal := D.corrected_conormal hB H hH,
-    delta_form := D.corrected_delta_form hB H hH,
-    norm_bound := D.corrected_norm_bound hB H hH hHnorm hP hF hAupper hsource hsmall,
-    trace_error := D.corrected_trace_error hB H hH hHnorm hP hF hAupper hsource }⟩
+  exact ⟨
+    { column := D.correctedColumn hB H hH
+      representative := D.correctedRepresentative hB H hH
+      smooth := D.corrected_smooth hB H hH
+      representative_eq := D.corrected_representative_eq hB H hH
+      equation := fun j x hx => D.corrected_equation hB H hH j hx
+      border_row := D.corrected_border_row hB H hH
+      conormal := D.corrected_conormal hB H hH
+      delta_form := D.corrected_delta_form hB H hH
+      norm_bound := D.corrected_norm_bound hB H hH hHnorm hP hF hAupper hsource hsmall
+      trace_error := D.corrected_trace_error hB H hH hHnorm hP hF hAupper hsource }⟩
 
 theorem correctedData_nonempty_of_layerBound
     (hCcut : 0 ≤ Ccut) {C₀ : ℝ} (hC₀ : 0 < C₀) (hLayer : B.layerBound ≤ C₀)

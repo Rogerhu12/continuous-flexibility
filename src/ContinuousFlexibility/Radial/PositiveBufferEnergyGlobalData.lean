@@ -140,13 +140,29 @@ structure PositiveBufferGreenData (B : BufferData) (Ccut : ℝ) where
 theorem positiveBuffer_profileData_nonempty {B : BufferData} (hB : BufferHypotheses B) :
     Nonempty (PositiveBufferProfileData B) := by
   obtain ⟨pin, pout, alphaIn, alphaOut, hp⟩ := positiveBuffer_exists_buffer_profiles hB
-  refine ⟨{ pin := pin, pout := pout, alphaIn := alphaIn, alphaOut := alphaOut,
-    pin_smooth := ?_, pout_smooth := ?_, inner_energy_integrable := ?_,
-    outer_energy_integrable := ?_, pin_cut := ?_, pin_wall := ?_, pout_cut := ?_,
-    pout_memLp := ?_, pin_equation := ?_, pout_equation := ?_,
-    alphaIn_conormal := ?_, alphaOut_conormal := ?_, alphaIn_energy := ?_,
-    alphaOut_energy := ?_, alphaIn_lower := ?_, alphaIn_upper := ?_,
-    alphaOut_lower := ?_, alphaOut_upper := ?_ }⟩
+  refine ⟨
+    { pin := pin
+      pout := pout
+      alphaIn := alphaIn
+      alphaOut := alphaOut
+      pin_smooth := ?_
+      pout_smooth := ?_
+      inner_energy_integrable := ?_
+      outer_energy_integrable := ?_
+      pin_cut := ?_
+      pin_wall := ?_
+      pout_cut := ?_
+      pout_memLp := ?_
+      pin_equation := ?_
+      pout_equation := ?_
+      alphaIn_conormal := ?_
+      alphaOut_conormal := ?_
+      alphaIn_energy := ?_
+      alphaOut_energy := ?_
+      alphaIn_lower := ?_
+      alphaIn_upper := ?_
+      alphaOut_lower := ?_
+      alphaOut_upper := ?_ }⟩
   all_goals
     intro i
     rcases hp i with ⟨hsin, hsout, hEin, hEout, hinc, hinw, houtc, houtLp,
@@ -166,10 +182,19 @@ theorem positiveBuffer_greenData_nonempty {B : BufferData} (hB : BufferHypothese
     (D.pin_equation i) (D.pout_equation i) (D.alphaIn_conormal i) (D.alphaOut_conormal i)
     (D.alphaIn_energy i) (D.alphaOut_energy i) (D.alphaIn_lower i) (D.alphaOut_lower i)
   choose energy source hbase hsource hsmooth hcompact hzero hborder htrace hnorm hsnorm hform using hc
-  exact ⟨{ profiles := D, energy := energy, source := source, base_ae := hbase,
-    source_ae := hsource, source_smooth := hsmooth, source_compact := hcompact,
-    source_zero := hzero, border_orthogonal := hborder, own_trace := htrace,
-    norm_bound := hnorm, source_norm_bound := hsnorm,
-    form_identity := fun _ i w => hform i w }⟩
+  exact ⟨
+    { profiles := D
+      energy := energy
+      source := source
+      base_ae := hbase
+      source_ae := hsource
+      source_smooth := hsmooth
+      source_compact := hcompact
+      source_zero := hzero
+      border_orthogonal := hborder
+      own_trace := htrace
+      norm_bound := hnorm
+      source_norm_bound := hsnorm
+      form_identity := fun _ i w => hform i w }⟩
 
 end ContinuousFlexibility.Radial
