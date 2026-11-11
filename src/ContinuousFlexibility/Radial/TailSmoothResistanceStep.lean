@@ -158,7 +158,8 @@ theorem tailSmoothResistanceStep_spec {p : ℝ → ℝ} {a b M : ℝ}
         intervalIntegral.integral_mono_on hab.le hi₁ hi₂ (fun x _ => henergy x)
       _ = (4 * (M + 1) ^ 2 / R ^ 2) * R := by
         rw [intervalIntegral.integral_const_mul]
-      _ = _ := by field_simp [hR.ne']; ring
+        rfl
+      _ = _ := by field_simp [hR.ne'] <;> ring
   exact ⟨hθ, fun x => ⟨smoothTransition.nonneg _, smoothTransition.le_one _⟩,
     fun x hx => smoothTransition.zero_of_nonpos (hAleft x hx).le,
     fun x hx => smoothTransition.one_of_one_le (hAright x hx).le,

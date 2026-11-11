@@ -32,13 +32,17 @@ theorem tailFormBase_apply (T : DeepTailData) (endCut : ℝ)
     (u : tailGradientSpace T endCut) :
     tailFormBase T endCut u = (u : GradientHilbert (DeepTailL2 T)).fst := by
   simp only [tailFormBase, ContinuousLinearMap.comp_apply,
-    Submodule.subtypeL_apply, WithLp.fstL_apply]
+    WithLp.fstL_apply]
+  exact congrArg (fun q : GradientHilbert (DeepTailL2 T) => q.fst)
+    (Submodule.subtypeL_apply (tailGradientSpace T endCut).toSubmodule u)
 
 theorem tailFormGradient_apply (T : DeepTailData) (endCut : ℝ)
     (u : tailGradientSpace T endCut) :
     tailFormGradient T endCut u = (u : GradientHilbert (DeepTailL2 T)).snd := by
   simp only [tailFormGradient, ContinuousLinearMap.comp_apply,
-    Submodule.subtypeL_apply, WithLp.sndL_apply]
+    WithLp.sndL_apply]
+  exact congrArg (fun q : GradientHilbert (DeepTailL2 T) => q.snd)
+    (Submodule.subtypeL_apply (tailGradientSpace T endCut).toSubmodule u)
 
 theorem tailForm_norm_sq (T : DeepTailData) (endCut : ℝ)
     (u : tailGradientSpace T endCut) :

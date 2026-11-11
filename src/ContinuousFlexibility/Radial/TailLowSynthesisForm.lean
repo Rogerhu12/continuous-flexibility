@@ -159,6 +159,7 @@ theorem tailLowCoefficients_mass (T : DeepTailData) (hT : DeepTailHypotheses T)
     Finsupp.sum_onFinset, tailFiniteEmbedding_norm_sq]
   · apply Finset.sum_congr rfl
     intro i _
+    try dsimp only
     rw [Real.norm_eq_abs, sq_abs, mul_pow, inv_pow, Real.sq_sqrt (tailMass_pos hT i).le]
     field_simp [(tailMass_pos hT i).ne']
   · intro i _
@@ -303,7 +304,7 @@ theorem tailNormalizedHat_analysis (T : DeepTailData) (hT : DeepTailHypotheses T
         apply integral_congr_ae
         filter_upwards [ae_restrict_of_ae (tailNormalizedHat_base_coeFn T hT cut j),
           ae_restrict_mem (tailMassCell_measurable T i)] with x hx hxi
-        dsimp only
+        try dsimp only
         rw [hx, tailLowHat_mass T hT j j.property.1 i ⟨hxi.1.le, hxi.2.le⟩]
       _ = _ := by rw [setIntegral_const, smul_eq_mul, tailMassCell_real hT]
   rw [hint]

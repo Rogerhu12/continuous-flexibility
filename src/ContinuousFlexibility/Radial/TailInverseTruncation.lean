@@ -82,7 +82,6 @@ theorem tailIndicator_inner_form {T : DeepTailData} {c : ℝ}
   apply integral_congr_ae
   filter_upwards [tailIndicator_coeFn T (Iio c) measurableSet_Iio f,
     (tailFormLift_ae_zero_outside hp).1] with x hx hz
-  dsimp only
   rw [hx]
   by_cases hxc : x < c
   · rw [indicator_of_mem hxc]
