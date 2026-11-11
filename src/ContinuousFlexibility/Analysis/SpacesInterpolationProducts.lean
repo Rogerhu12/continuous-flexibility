@@ -163,4 +163,50 @@ theorem spaces_interpolation_product_bound {E : Type*} [AddCommGroup E] [Module 
       Finset.prod_mul_distrib
     _ ≤ _ := mul_le_mul_of_nonneg_left hprod (Finset.prod_nonneg (fun i _ => hC i))
 
+/-- The bilinear specialization retains a fixed loss and one high factor. -/
+theorem spaces_interpolation_pair_bound {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : ∀ x, Monotone (fun n => p n x))
+    (hI : Statements.HasInterpolation p) :
+    ∃ base loss : ℕ, ∀ a b s : ℕ, a + b ≤ s → ∃ C : ℝ, 0 ≤ C ∧ ∀ x y : E,
+      p (a + 2) x * p (b + 2) y ≤ C *
+        (p (s + loss) x * p base y + p base x * p (s + loss) y) := by
+  obtain ⟨base, loss, h⟩ := spaces_interpolation_product_bound p hp hI
+  refine ⟨base, loss, fun a b s hs => ?_⟩
+  obtain ⟨C, hC, hb⟩ := h (ι := Fin 2) ![a, b] s (by simpa using hs)
+  refine ⟨C, hC, fun x y => ?_⟩
+  have he : ({0, 1} : Finset (Fin 2)).erase 1 = {0} := by decide
+  simpa [Fin.prod_univ_two, Fin.sum_univ_two, Finset.univ_fin2, he, mul_comm] using hb ![x, y]
+
+/-- A single constant controls all splittings of a fixed total order. -/
+theorem spaces_interpolation_pair_uniform_bound {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : ∀ x, Monotone (fun n => p n x))
+    (hI : Statements.HasInterpolation p) :
+    ∃ base loss : ℕ, ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ a b : ℕ, a + b ≤ s → ∀ x y : E,
+        p (a + 2) x * p (b + 2) y ≤ C *
+          (p (s + loss) x * p base y + p base x * p (s + loss) y) := by
+  classical
+  obtain ⟨base, loss, h⟩ := spaces_interpolation_pair_bound p hp hI
+  refine ⟨base, loss, fun s => ?_⟩
+  have hb (a b : ℕ) : ∃ C : ℝ, 0 ≤ C ∧ ∀ x y : E, a + b ≤ s →
+      p (a + 2) x * p (b + 2) y ≤ C *
+        (p (s + loss) x * p base y + p base x * p (s + loss) y) := by
+    by_cases hab : a + b ≤ s
+    · obtain ⟨C, hC, hbound⟩ := h a b s hab
+      exact ⟨C, hC, fun x y _ => hbound x y⟩
+    · exact ⟨0, le_rfl, fun _ _ hs => (hab hs).elim⟩
+  choose C hC hbound using hb
+  refine ⟨∑ a ∈ Finset.range (s + 1), ∑ b ∈ Finset.range (s + 1), C a b,
+    Finset.sum_nonneg (fun a _ => Finset.sum_nonneg (fun b _ => hC a b)), ?_⟩
+  intro a b hab x y
+  have ha : a ∈ Finset.range (s + 1) := Finset.mem_range.mpr (by omega)
+  have hb : b ∈ Finset.range (s + 1) := Finset.mem_range.mpr (by omega)
+  have hle : C a b ≤ ∑ i ∈ Finset.range (s + 1), ∑ j ∈ Finset.range (s + 1), C i j :=
+    (Finset.single_le_sum (f := C a) (fun j _ => hC a j) hb).trans
+      (Finset.single_le_sum (f := fun i => ∑ j ∈ Finset.range (s + 1), C i j)
+        (fun i _ => Finset.sum_nonneg (fun j _ => hC i j)) ha)
+  exact (hbound a b x y hab).trans (mul_le_mul_of_nonneg_right hle
+    (add_nonneg (mul_nonneg (apply_nonneg _ _) (apply_nonneg _ _))
+      (mul_nonneg (apply_nonneg _ _) (apply_nonneg _ _))))
+
 end ContinuousFlexibility.Analysis

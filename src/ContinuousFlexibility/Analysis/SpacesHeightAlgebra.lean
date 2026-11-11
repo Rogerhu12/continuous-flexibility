@@ -80,6 +80,27 @@ theorem spaces_memLp_mul_bounded {α : Type*} [MeasurableSpace α] {μ : Measure
   simp only [Pi.mul_apply, norm_mul, Real.norm_eq_abs]
   exact (mul_le_mul_of_nonneg_left (hB x) (abs_nonneg _)).trans_eq (mul_comm _ _)
 
+theorem spaces_weightedPhysicalJet_mul {D : ReferenceData} {T : MaterialData}
+    (hT : IsMaterialData D T) {γ δ : ℝ} {f g : PolarPoint → ℝ}
+    (hf : HeightMember D T γ f) (hg : HeightMember D T δ g) (a b c : ℕ) :
+    weightedPhysicalJet T (γ + δ) a b c (fun p => f p * g p) =
+      fun p => ∑ j ∈ Finset.range (b + 1), ∑ i ∈ Finset.range (a + 1),
+        ((b.choose j : ℝ) * (a.choose i : ℝ)) *
+          (weightedPhysicalJet T γ i j c f p *
+            mixedDerivative (a - i) (b - j) (materialPullback T δ g) p) := by
+  have hfs := contDiff_materialPullback (γ := γ) hT hf.1
+  have hgs := contDiff_materialPullback (γ := δ) hT hg.1
+  funext p
+  rw [weightedPhysicalJet, spaces_materialPullback_mul hT,
+    spaces_mixedDerivative_mul hfs hgs, Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro j hj
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro i hi
+  simp only [weightedPhysicalJet]
+  ring
+
 /-- Multiplication preserves every mixed weighted integrability condition. -/
 theorem spaces_heightMember_mul {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) {γ δ : ℝ} {f g : PolarPoint → ℝ}
@@ -96,24 +117,8 @@ theorem spaces_heightMember_mul {D : ReferenceData} {T : MaterialData}
     dsimp only
     rw [hf.2.2.2.1 p hp, zero_mul]
   · intro a b c
-    have hfs := contDiff_materialPullback (γ := γ) hT hf.1
     have hgs := contDiff_materialPullback (γ := δ) hT hg.1
-    have he : weightedPhysicalJet T (γ + δ) a b c (fun p => f p * g p) =
-        fun p => ∑ j ∈ Finset.range (b + 1), ∑ i ∈ Finset.range (a + 1),
-          ((b.choose j : ℝ) * (a.choose i : ℝ)) *
-            (weightedPhysicalJet T γ i j c f p *
-              mixedDerivative (a - i) (b - j) (materialPullback T δ g) p) := by
-      funext p
-      rw [weightedPhysicalJet, spaces_materialPullback_mul hT,
-        spaces_mixedDerivative_mul hfs hgs, Finset.mul_sum]
-      apply Finset.sum_congr rfl
-      intro j hj
-      rw [Finset.mul_sum]
-      apply Finset.sum_congr rfl
-      intro i hi
-      simp only [weightedPhysicalJet]
-      ring
-    rw [he]
+    rw [spaces_weightedPhysicalJet_mul hT hf hg]
     apply memLp_finsetSum
     intro j hj
     apply memLp_finsetSum
