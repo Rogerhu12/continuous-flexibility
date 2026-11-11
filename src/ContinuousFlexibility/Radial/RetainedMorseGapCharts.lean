@@ -23,10 +23,12 @@ def innerRadialGapChartOfPositiveDerivative (D : ReferenceData)
     (hpositive : ∀ r ∈ Icc (H.left piece) (H.right piece), 0 < deriv D.w r) :
     InnerRadialGapChart D H j central piece :=
   Classical.choice (by
-    have hl := radialCore_mem_of_profile_pos hD
-      (H.weight_pos piece _ (left_mem_Icc.mpr (H.left_lt_right piece).le))
-    have hr := radialCore_mem_of_profile_pos hD
-      (H.weight_pos piece _ (right_mem_Icc.mpr (H.left_lt_right piece).le))
+    have hl : D.a < H.left piece := (radialCore_mem_of_profile_pos hD
+      (H.weight_pos piece (H.left piece)
+        (left_mem_Icc.mpr (H.left_lt_right piece).le))).1
+    have hr : H.right piece < D.b := (radialCore_mem_of_profile_pos hD
+      (H.weight_pos piece (H.right piece)
+        (right_mem_Icc.mpr (H.left_lt_right piece).le))).2
     obtain ⟨s, hs, hslope⟩ := innerPositiveGap_exists_slope
       (H.left_pos piece) hD.2.2.1.1 (H.weight_pos piece) hpositive
     have hnonneg : ∀ r, 0 ≤ D.w r := by
@@ -39,11 +41,11 @@ def innerRadialGapChartOfPositiveDerivative (D : ReferenceData)
     obtain ⟨p, hp, hb, heq⟩ := exists_innerGapPoissonColumns
       (A := (D.a + H.left piece) / 2) (l := H.left piece)
       (h := H.right piece) (B := (H.right piece + D.b) / 2)
-      (by linarith only [hD.1, H.left_pos piece])
-      (by linarith only [hl.1]) (H.left_lt_right piece)
-      (by linarith only [hr.2]) hD.2.2.1.1 hnonneg
+      (by linarith only [hD.1, hl])
+      (by linarith only [hl]) (H.left_lt_right piece)
+      (by linarith only [hr]) hD.2.2.1.1 hnonneg
       (fun r hr' => hD.2.2.2.2.1 r
-        ⟨by linarith only [hl.1, hr'.1], by linarith only [hr.2, hr'.2]⟩)
+        ⟨by linarith only [hl, hr'.1], by linarith only [hr, hr'.2]⟩)
       (fun r hr' => hs.le.trans (hslope r hr')) j
     exact ⟨{
       away_center := haway
