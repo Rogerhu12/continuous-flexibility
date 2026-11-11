@@ -309,6 +309,7 @@ import ContinuousFlexibility.Analysis.TameTransfer
 import ContinuousFlexibility.Analysis.SolveApplication
 import ContinuousFlexibility.Analysis.SolveCircleProjection
 import ContinuousFlexibility.Analysis.SolveCoupledSystem
+import ContinuousFlexibility.Analysis.SolveKernelApplication
 import ContinuousFlexibility.Analysis.SolveNewtonBridge
 import ContinuousFlexibility.Analysis.SolveNewtonLimit
 import ContinuousFlexibility.Analysis.SolveNormalization
