@@ -38,6 +38,26 @@ private theorem complexification_real_normedSpace_eq :
     rfl
   exact hinjective hmodule
 
+private theorem spectrum_real_extend_canonical (B : H →L[ℝ] H) :
+    (letI : NormedSpace ℝ (AngularComplexification H) := NormedSpace.complexToReal
+      spectrum ℝ (extend B)) = spectrum ℝ B := by
+  letI : NormedSpace ℝ (AngularComplexification H) := NormedSpace.complexToReal
+  change spectrum ℝ (extend B) = spectrum ℝ B
+  ext r
+  rw [spectrum.mem_iff, spectrum.mem_iff]
+  have hscalar : algebraMap ℝ
+      (AngularComplexification H →L[ℂ] AngularComplexification H) r =
+      extend (algebraMap ℝ (H →L[ℝ] H) r) := by
+    apply ContinuousLinearMap.ext
+    intro u
+    rw [ContinuousLinearMap.algebraMap_apply]
+    change (r : ℂ) • u = extend (algebraMap ℝ (H →L[ℝ] H) r) u
+    rw [extend_apply]
+    apply AngularComplexification.ext <;>
+      simp only [re_smul, im_smul, re_mk, im_mk, ContinuousLinearMap.algebraMap_apply,
+        Complex.ofReal_re, Complex.ofReal_im, zero_smul, sub_zero, zero_add]
+  rw [hscalar, ← extend_sub, isUnit_extend_iff]
+
 /-- The real part of a complexified real eigenvector is a real eigenvector. -/
 theorem re_mem_angularResolventEigenspace {B : H →L[ℝ] H} {n : ℕ}
     {u : AngularComplexification H}
@@ -54,9 +74,11 @@ theorem angularResolventPartial_re_mem_iSup {B : H →L[ℝ] H} (hB : IsSelfAdjo
     (angularResolventPartial (extend B) N (ofReal x)).re ∈
       ⨆ n, angularResolventEigenspace B n := by
   have hBC : IsSelfAdjoint (extend B) := (isSelfAdjoint_extend_iff B).mpr hB
-  have hSpectrumC : spectrum ℝ (extend B) ⊆ angularReciprocalSpectrum := by
-    simpa only [spectrum_real_extend] using hSpectrum
-  simp only [complexification_real_normedSpace_eq] at hSpectrumC
+  have hSpectrumC :
+      (letI : NormedSpace ℝ (AngularComplexification H) := NormedSpace.complexToReal
+        spectrum ℝ (extend B)) ⊆ angularReciprocalSpectrum := by
+    rw [spectrum_real_extend_canonical]
+    exact hSpectrum
   let S : Submodule ℝ H := ⨆ n, angularResolventEigenspace B n
   have hterm (n : ℕ) :
       angularResolventEigenvalue n • (angularResolventProjection (extend B) n (ofReal x)).re ∈ S := by
@@ -81,9 +103,11 @@ theorem angularRealResolvent_range_le {B : H →L[ℝ] H} (hB : IsSelfAdjoint B)
     B.range ≤ (⨆ n, angularResolventEigenspace B n).topologicalClosure := by
   let S : Submodule ℝ H := ⨆ n, angularResolventEigenspace B n
   have hBC : IsSelfAdjoint (extend B) := (isSelfAdjoint_extend_iff B).mpr hB
-  have hSpectrumC : spectrum ℝ (extend B) ⊆ angularReciprocalSpectrum := by
-    simpa only [spectrum_real_extend] using hSpectrum
-  simp only [complexification_real_normedSpace_eq] at hSpectrumC
+  have hSpectrumC :
+      (letI : NormedSpace ℝ (AngularComplexification H) := NormedSpace.complexToReal
+        spectrum ℝ (extend B)) ⊆ angularReciprocalSpectrum := by
+    rw [spectrum_real_extend_canonical]
+    exact hSpectrum
   rintro _ ⟨x, rfl⟩
   have hlimC : Tendsto (fun N => angularResolventPartial (extend B) N (ofReal x))
       atTop (𝓝 (extend B (ofReal x))) :=
