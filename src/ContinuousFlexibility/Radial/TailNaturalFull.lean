@@ -38,7 +38,8 @@ theorem tailNaturalLineAndGreenKernel {T : DeepTailData}
   have hwcont : ContinuousOn w (Ico T.entrance T.endpoint) :=
     hwc.continuousOn.mono (fun _ hx => hx.2)
   have hcross := tailActualState_discrete_wronskian hT hus hws hW
-  obtain ⟨B, hB, hΓ⟩ := exists_tailFundamentalNode_bound hT hη hK hune
+  obtain ⟨B, hB, hΓ⟩ := exists_tailFundamentalNode_bound
+    (a := fun n => u (T.node n)) (w := fun n => w (T.node n)) hT hη hK hune
     (tailNaturalEquation_node_recurrence hT hu) hstep hcross
   refine ⟨⟨u, hu, hnonzero, hUnique, ⟨8, by norm_num, hstep⟩⟩,
     ⟨tailFundamentalGreenKernel T.entrance T.endpoint w u 1,
