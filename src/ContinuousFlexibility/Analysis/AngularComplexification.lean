@@ -165,7 +165,7 @@ def ofReal : H →ₗᵢ[ℝ] AngularComplexification H where
   toFun x := mk x 0
   map_add' x y := by ext <;> simp only [re_mk, im_mk, re_add, im_add, add_zero]
   map_smul' r x := by
-    ext <;> simp only [re_mk, im_mk, re_real_smul, im_real_smul, smul_zero]
+    ext <;> simp only [re_mk, im_mk, re_real_smul, im_real_smul, smul_zero, RingHom.id_apply]
   norm_map' x := by
     apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
     rw [norm_sq, re_mk, im_mk, norm_zero, zero_pow (by decide : 2 ≠ 0), add_zero]
@@ -173,6 +173,138 @@ def ofReal : H →ₗᵢ[ℝ] AngularComplexification H where
 @[simp] theorem ofReal_apply (x : H) : ofReal x = mk x 0 := rfl
 @[simp] theorem re_ofReal (x : H) : (ofReal x).re = x := re_mk x 0
 @[simp] theorem im_ofReal (x : H) : (ofReal x).im = 0 := im_mk x 0
+
+@[simp] theorem norm_ofReal (x : H) : ‖ofReal x‖ = ‖x‖ := ofReal.norm_map x
+
+/-- Replacing the two components by their norms preserves the product norm. -/
+theorem norm_mk_norm (x y : H) :
+    ‖mk ‖x‖ ‖y‖ : AngularComplexification ℝ‖ = ‖mk x y‖ := by
+  apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
+  simp only [norm_sq, re_mk, im_mk, Real.norm_of_nonneg (norm_nonneg _)]
+
+/-- Coordinatewise norm bounds imply the corresponding Hilbert product bound. -/
+theorem norm_mk_le_of_bounds {x y : H} {X Y : ℝ}
+    (hX : 0 ≤ X) (hY : 0 ≤ Y) (hx : ‖x‖ ≤ X) (hy : ‖y‖ ≤ Y) :
+    ‖mk x y‖ ≤ ‖mk X Y : AngularComplexification ℝ‖ := by
+  apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
+  simpa only [norm_sq, re_mk, im_mk, Real.norm_of_nonneg hX,
+    Real.norm_of_nonneg hY] using
+    add_le_add ((sq_le_sq₀ (norm_nonneg _) hX).mpr hx)
+      ((sq_le_sq₀ (norm_nonneg _) hY).mpr hy)
+
+section Operators
+
+variable {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℝ F]
+variable {G : Type*} [NormedAddCommGroup G] [InnerProductSpace ℝ G]
+
+/-- Componentwise extension of a real linear map, as a complex linear map. -/
+def extendLinear (T : H →ₗ[ℝ] F) :
+    AngularComplexification H →ₗ[ℂ] AngularComplexification F where
+  toFun u := mk (T u.re) (T u.im)
+  map_add' u v := by
+    ext <;> simp only [re_mk, im_mk, re_add, im_add, map_add]
+  map_smul' z u := by
+    ext <;> simp only [re_mk, im_mk, re_smul, im_smul, map_sub, map_add, map_smul,
+      RingHom.id_apply]
+
+@[simp] theorem extendLinear_apply (T : H →ₗ[ℝ] F) (u : AngularComplexification H) :
+    extendLinear T u = mk (T u.re) (T u.im) := rfl
+
+theorem norm_extendLinear_le (T : H →ₗ[ℝ] F) {M : ℝ} (hM : 0 ≤ M)
+    (hT : ∀ x, ‖T x‖ ≤ M * ‖x‖) (u : AngularComplexification H) :
+    ‖extendLinear T u‖ ≤ M * ‖u‖ := by
+  apply (sq_le_sq₀ (norm_nonneg _) (mul_nonneg hM (norm_nonneg _))).mp
+  have hx := (sq_le_sq₀ (norm_nonneg _) (mul_nonneg hM (norm_nonneg _))).mpr (hT u.re)
+  have hy := (sq_le_sq₀ (norm_nonneg _) (mul_nonneg hM (norm_nonneg _))).mpr (hT u.im)
+  simp only [extendLinear_apply, norm_sq, re_mk, im_mk, mul_pow] at hx hy ⊢
+  nlinarith
+
+/-- A bounded real operator extends to a bounded complex operator. -/
+def extend (T : H →L[ℝ] F) :
+    AngularComplexification H →L[ℂ] AngularComplexification F :=
+  (extendLinear T.toLinearMap).mkContinuous ‖T‖
+    (norm_extendLinear_le T.toLinearMap (norm_nonneg T) T.le_opNorm)
+
+@[simp] theorem extend_apply (T : H →L[ℝ] F) (u : AngularComplexification H) :
+    extend T u = mk (T u.re) (T u.im) := by
+  unfold extend
+  rw [LinearMap.mkContinuous_apply, extendLinear_apply]
+
+@[simp] theorem re_extend (T : H →L[ℝ] F) (u : AngularComplexification H) :
+    (extend T u).re = T u.re := by rw [extend_apply, re_mk]
+
+@[simp] theorem im_extend (T : H →L[ℝ] F) (u : AngularComplexification H) :
+    (extend T u).im = T u.im := by rw [extend_apply, im_mk]
+
+@[simp] theorem extend_ofReal (T : H →L[ℝ] F) (x : H) :
+    extend T (ofReal x) = ofReal (T x) := by
+  ext <;> simp only [re_extend, im_extend, re_ofReal, im_ofReal, map_zero]
+
+/-- Complexification preserves the operator norm exactly. -/
+@[simp] theorem norm_extend (T : H →L[ℝ] F) : ‖extend T‖ = ‖T‖ := by
+  apply le_antisymm
+  · apply (extend T).opNorm_le_bound (norm_nonneg T)
+    intro u
+    simpa only [extend_apply, extendLinear_apply] using
+      norm_extendLinear_le T.toLinearMap (norm_nonneg T) T.le_opNorm u
+  · apply T.opNorm_le_bound (norm_nonneg (extend T))
+    intro x
+    simpa only [extend_ofReal, norm_ofReal] using (extend T).le_opNorm (ofReal x)
+
+@[simp] theorem extend_id :
+    extend (ContinuousLinearMap.id ℝ H) = ContinuousLinearMap.id ℂ (AngularComplexification H) := by
+  apply ContinuousLinearMap.ext
+  intro u
+  ext <;> simp only [re_extend, im_extend, ContinuousLinearMap.id_apply]
+
+@[simp] theorem extend_comp (S : F →L[ℝ] G) (T : H →L[ℝ] F) :
+    extend (S.comp T) = (extend S).comp (extend T) := by
+  apply ContinuousLinearMap.ext
+  intro u
+  ext <;> simp only [re_extend, im_extend, ContinuousLinearMap.comp_apply]
+
+@[simp] theorem extend_add (S T : H →L[ℝ] F) : extend (S + T) = extend S + extend T := by
+  apply ContinuousLinearMap.ext
+  intro u
+  ext <;> simp only [re_extend, im_extend, re_add, im_add, ContinuousLinearMap.add_apply]
+
+@[simp] theorem extend_sub (S T : H →L[ℝ] F) : extend (S - T) = extend S - extend T := by
+  apply ContinuousLinearMap.ext
+  intro u
+  ext <;> simp only [re_extend, im_extend, re_sub, im_sub, ContinuousLinearMap.sub_apply]
+
+@[simp] theorem extend_zero : extend (0 : H →L[ℝ] F) = 0 := by
+  apply ContinuousLinearMap.ext
+  intro u
+  ext <;> simp only [re_extend, im_extend, re_zero, im_zero, ContinuousLinearMap.zero_apply]
+
+/-- A real two-term estimate transfers with exactly the same coefficients.
+The comparison components may belong to different Hilbert spaces. -/
+theorem norm_mk_le_two_term {x y : H} {x₁ y₁ : F} {x₂ y₂ : G} {a c : ℝ}
+    (ha : 0 ≤ a) (hc : 0 ≤ c)
+    (hx : ‖x‖ ≤ a * ‖x₁‖ + c * ‖x₂‖)
+    (hy : ‖y‖ ≤ a * ‖y₁‖ + c * ‖y₂‖) :
+    ‖mk x y‖ ≤ a * ‖mk x₁ y₁‖ + c * ‖mk x₂ y₂‖ := by
+  have hpair :
+      (mk (a * ‖x₁‖ + c * ‖x₂‖) (a * ‖y₁‖ + c * ‖y₂‖) : AngularComplexification ℝ) =
+        a • mk ‖x₁‖ ‖y₁‖ + c • mk ‖x₂‖ ‖y₂‖ := by
+    ext <;> simp only [re_mk, im_mk, re_add, im_add,
+      re_real_smul, im_real_smul, smul_eq_mul]
+  calc
+    ‖mk x y‖ ≤ ‖mk (a * ‖x₁‖ + c * ‖x₂‖) (a * ‖y₁‖ + c * ‖y₂‖) :
+        AngularComplexification ℝ‖ :=
+      norm_mk_le_of_bounds
+        (add_nonneg (mul_nonneg ha (norm_nonneg _)) (mul_nonneg hc (norm_nonneg _)))
+        (add_nonneg (mul_nonneg ha (norm_nonneg _)) (mul_nonneg hc (norm_nonneg _))) hx hy
+    _ = ‖a • (mk ‖x₁‖ ‖y₁‖ : AngularComplexification ℝ) + c • mk ‖x₂‖ ‖y₂‖‖ := by
+      rw [hpair]
+    _ ≤ ‖a • (mk ‖x₁‖ ‖y₁‖ : AngularComplexification ℝ)‖ +
+        ‖c • (mk ‖x₂‖ ‖y₂‖ : AngularComplexification ℝ)‖ := norm_add_le _ _
+    _ = a * ‖mk x₁ y₁‖ + c * ‖mk x₂ y₂‖ := by
+      rw [norm_smul, norm_smul, Real.norm_of_nonneg ha, Real.norm_of_nonneg hc,
+        norm_mk_norm, norm_mk_norm]
+
+end Operators
 
 end AngularComplexification
 

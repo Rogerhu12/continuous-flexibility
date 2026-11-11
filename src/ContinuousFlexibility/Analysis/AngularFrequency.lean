@@ -45,7 +45,7 @@ theorem natCast_le_angularWeight (n : ℕ) : (n : ℝ) ≤ angularWeight n := by
 theorem angularWeight_le_one_add (n : ℕ) : angularWeight n ≤ 1 + (n : ℝ) := by
   rw [angularWeight]
   apply (Real.sqrt_le_left (by positivity)).mpr
-  nlinarith [Nat.cast_nonneg (R := ℝ) n]
+  nlinarith [Nat.cast_nonneg (α := ℝ) n]
 
 theorem angularWeight_sq (n : ℕ) : angularWeight n ^ 2 = 1 + (n : ℝ) ^ 2 :=
   Real.sq_sqrt (by positivity)
@@ -89,24 +89,32 @@ theorem norm_angularMultiplierVector (w : ℕ → ℝ) (v : lp E 2)
 
 theorem MemAngularWeight.zero (w : ℕ → ℝ) :
     MemAngularWeight (𝕜 := 𝕜) w (0 : lp E 2) := by
-  simpa [MemAngularWeight] using (zero_memℓp : Memℓp (0 : ∀ n, E n) 2)
+  simpa only [MemAngularWeight, lp.coeFn_zero, Pi.zero_apply, smul_zero, Pi.zero_def] using
+    (zero_memℓp : Memℓp (0 : ∀ n, E n) 2)
 
 theorem MemAngularWeight.add {w : ℕ → ℝ} {u v : lp E 2}
     (hu : MemAngularWeight (𝕜 := 𝕜) w u)
     (hv : MemAngularWeight (𝕜 := 𝕜) w v) :
     MemAngularWeight (𝕜 := 𝕜) w (u + v) := by
-  simpa [MemAngularWeight, smul_add] using Memℓp.add hu hv
+  simpa only [MemAngularWeight, lp.coeFn_add, Pi.add_apply, smul_add, Pi.add_def] using
+    Memℓp.add hu hv
 
 theorem MemAngularWeight.smul {w : ℕ → ℝ} {v : lp E 2}
     (hv : MemAngularWeight (𝕜 := 𝕜) w v) (c : 𝕜) :
     MemAngularWeight (𝕜 := 𝕜) w (c • v) := by
-  simpa [MemAngularWeight, smul_comm] using Memℓp.const_smul hv c
+  have heq : (fun n => (w n : 𝕜) • (c • v n)) =
+      (fun n => c • ((w n : 𝕜) • v n)) := by
+    funext n
+    exact smul_comm _ _ _
+  simpa only [MemAngularWeight, lp.coeFn_smul, Pi.smul_apply, Pi.smul_def, heq] using
+    Memℓp.const_smul hv c
 
 theorem MemAngularWeight.sub {w : ℕ → ℝ} {u v : lp E 2}
     (hu : MemAngularWeight (𝕜 := 𝕜) w u)
     (hv : MemAngularWeight (𝕜 := 𝕜) w v) :
     MemAngularWeight (𝕜 := 𝕜) w (u - v) := by
-  simpa [MemAngularWeight, smul_sub] using Memℓp.sub hu hv
+  simpa only [MemAngularWeight, lp.coeFn_sub, Pi.sub_apply, smul_sub, Pi.sub_def] using
+    Memℓp.sub hu hv
 
 theorem MemAngularWeight.mono {w z : ℕ → ℝ} {v : lp E 2}
     (hz : MemAngularWeight (𝕜 := 𝕜) z v) (hwz : ∀ n, |w n| ≤ |z n|) :
@@ -247,6 +255,6 @@ theorem mem_angularFrequencyDomain_of_sobolev {v : lp E 2}
   apply MemAngularWeight.mono hv
   intro n
   simpa [abs_of_nonneg (angularWeight_nonneg n),
-    abs_of_nonneg (Nat.cast_nonneg (R := ℝ) n)] using natCast_le_angularWeight n
+    abs_of_nonneg (Nat.cast_nonneg (α := ℝ) n)] using natCast_le_angularWeight n
 
 end ContinuousFlexibility.Analysis

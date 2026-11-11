@@ -23,12 +23,12 @@ theorem MemAngularWeight.add_weight {g h : ℕ → ℝ} {v : lp E 2}
     (hg : MemAngularWeight (𝕜 := 𝕜) g v)
     (hh : MemAngularWeight (𝕜 := 𝕜) h v) :
     MemAngularWeight (𝕜 := 𝕜) (fun n => g n + h n) v := by
-  simpa only [MemAngularWeight, RCLike.ofReal_add, add_smul] using Memℓp.add hg hh
+  simpa only [MemAngularWeight, RCLike.ofReal_add, add_smul, Pi.add_def] using Memℓp.add hg hh
 
 theorem MemAngularWeight.const_mul_weight {w : ℕ → ℝ} {v : lp E 2}
     (hw : MemAngularWeight (𝕜 := 𝕜) w v) (c : ℝ) :
     MemAngularWeight (𝕜 := 𝕜) (fun n => c * w n) v := by
-  simpa only [MemAngularWeight, RCLike.ofReal_mul, mul_smul] using
+  simpa only [MemAngularWeight, RCLike.ofReal_mul, mul_smul, Pi.smul_def] using
     Memℓp.const_smul hw (c : 𝕜)
 
 theorem memAngularWeight_const (c : ℝ) (v : lp E 2) :
