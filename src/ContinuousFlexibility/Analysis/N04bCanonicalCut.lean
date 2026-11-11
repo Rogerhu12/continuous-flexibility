@@ -61,7 +61,7 @@ theorem n04b_canonicalHeight_root_cut
           (n04bRootCutRadius T, θ) := by
     unfold radialPartial
     rw [(he side).fderiv_eq]
-  simpa only [hv true, hv false, hd true, hd false] using
+  simpa [hv true, hv false, hd true, hd false] using
     (n04b_root_unknown_transmission hT θ X A u hX hA hA0
       (hu.differentiable (by simp) (X (T / 2, θ))))
 
