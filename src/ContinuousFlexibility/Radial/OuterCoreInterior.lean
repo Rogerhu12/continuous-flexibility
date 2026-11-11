@@ -141,7 +141,7 @@ theorem morseOuterCore_energy_on_exp
     intro s hs t ht
     exact (outer_positive_physical_energy_on h.geometry hscale hj.1
       (hpieces.2.trans hcore.2) hj.2.2.2.2 (fun r hr => hstate r (hpieces.2 hr)) hs ht).trans
-        (mul_le_mul_of_nonneg_left hjf (by dsimp only [E]; positivity))
+        (mul_le_mul_of_nonneg_left hjf (by positivity))
   cases side with
   | false =>
       have hseam : T.joinLeft false (n - 1) = T.radius false n (T.rightX false n) := by

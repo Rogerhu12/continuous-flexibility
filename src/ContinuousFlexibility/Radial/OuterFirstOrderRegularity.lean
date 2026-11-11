@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter
-open scoped Topology
+open scoped Topology ContDiff
 
 theorem OuterFirstOrderSystem.continuousOn {alpha beta u z : ℝ → ℝ} {s : Set ℝ}
     (h : OuterFirstOrderSystem alpha beta u z s) :

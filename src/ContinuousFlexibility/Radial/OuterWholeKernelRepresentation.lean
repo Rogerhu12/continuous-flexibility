@@ -50,9 +50,13 @@ theorem outer_compact_inner_eq_integral (U : ℝ → ℝ)
         (compactIntervalMeasure μ a c) (outerCoreRestriction U hU),
         outer_compact_source_coeFn μ hac f] with x hx hfx
       rw [Real.inner_apply, hx, hfx, outerCoreRestriction_apply]
-    _ = _ := integral_subtype_comap measurableSet_Icc _
+    _ = _ := by
+      simpa only [compactIntervalMeasure] using
+        (integral_subtype_comap (μ := μ) (s := Icc a c) measurableSet_Icc
+          (fun x => U x * f x))
 
 /-- The core product is integrable, even for an arbitrary L² source. -/
+include hac in
 theorem integrable_outer_core_product (U : ℝ → ℝ)
     (hU : ContinuousOn U (Icc a c)) (f : Lp ℝ 2 μ) :
     Integrable (fun x => U x * f x) (μ.restrict (Icc a c)) := by
@@ -202,7 +206,7 @@ theorem outerIntervalGreenOperator_tail_rep (lam : ℝ) (U V P : ℝ → ℝ)
   have hrestriction : l2Restrict μ (Icc a c)ᶜ
       (outerIntervalGreenOperator μ hac lam U V hU hV D p f) =
       A • p + D ft + B • p := by
-    simpa only [smul_smul] using htail
+    simpa only [A, B, Uc, Vc, outerCoreRestriction_apply, smul_smul] using htail
   have hrep : (A • p + D ft + B • p : Lp ℝ 2 (μ.restrict (Icc a c)ᶜ)) =ᵐ[
       μ.restrict (Icc a c)ᶜ] fun x => A * P x + D ft x + B * P x := by
     filter_upwards [Lp.coeFn_add (A • p + D ft) (B • p),

@@ -1,6 +1,5 @@
 import ContinuousFlexibility.Radial.OuterPhysicalMeasure
-import ContinuousFlexibility.Analysis.SquareDensityIsometry
-import ContinuousFlexibility.Analysis.CoordinateL2Isometry
+import ContinuousFlexibility.Analysis.L2MeasureCongr
 
 /-!
 # The physical deep-tail Hilbert space
@@ -13,40 +12,7 @@ at the singular endpoint.
 
 noncomputable section
 
-namespace ContinuousFlexibility.Analysis
 
-open MeasureTheory
-
-def l2MeasureCongr {μ ν : Measure ℝ} (h : μ = ν) :
-    Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν := by
-  subst ν
-  exact LinearIsometryEquiv.refl ℝ _
-
-theorem l2MeasureCongr_ae {μ ν : Measure ℝ} (h : μ = ν) (f : Lp ℝ 2 μ) :
-    l2MeasureCongr h f =ᵐ[ν] f := by
-  subst ν
-  exact Filter.Eventually.of_forall (fun _ => rfl)
-
-theorem ae_eq_of_measure_eq {μ ν : Measure ℝ} (h : μ = ν) {f g : ℝ → ℝ}
-    (hfg : f =ᵐ[μ] g) : f =ᵐ[ν] g := by
-  rw [← h]
-  exact hfg
-
-/-- A generic density change after equality of measures. The equality
-is eliminated before proving the representative formula. -/
-def squareDensityMeasureEquiv {μ ν : Measure ℝ} {a : ℝ → ℝ}
-    (h : ν = squareDensityMeasure μ a) (ha : Measurable a) (hpos : ∀ x, 0 < a x) :
-    Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 μ :=
-  (l2MeasureCongr h).trans (squareDensityEquiv μ ha hpos)
-
-theorem squareDensityMeasureEquiv_ae {μ ν : Measure ℝ} {a : ℝ → ℝ}
-    (h : ν = squareDensityMeasure μ a) (ha : Measurable a) (hpos : ∀ x, 0 < a x)
-    (f : Lp ℝ 2 ν) :
-    squareDensityMeasureEquiv h ha hpos f =ᵐ[μ] fun x => a x * f x := by
-  subst ν
-  exact squareDensityEquiv_ae μ ha hpos f
-
-end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Radial
 
@@ -213,11 +179,11 @@ theorem outerPhysicalTailEquiv_ae
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start)
     (f : OuterPhysicalTailL2 D T right) :
     outerPhysicalTailEquiv hD hphysical f =ᵐ[deepTailMeasure T] fun x =>
-      outerPhysicalAmplitude D right j x * f (tailPhysicalRadius right x) := by
-  have hc := outerPhysicalPullback_ae_eq hD hphysical
-    (outerPhysicalCoordinateEquiv_ae hD hphysical f)
-  have hg := outerPhysicalGaugeEquiv_ae hD hphysical (outerPhysicalCoordinateEquiv hD hphysical f)
-  filter_upwards [hc, hg] with x hx hy
-  exact hy.trans (congrArg (fun t => outerPhysicalAmplitude D right j x * t) hx)
+      outerPhysicalAmplitude D right j x * f (tailPhysicalRadius right x) :=
+  l2Equiv_trans_mul_ae (outerPhysicalCoordinateEquiv hD hphysical)
+    (outerPhysicalGaugeEquiv hD hphysical) f (outerPhysicalAmplitude D right j)
+    (fun x => f (tailPhysicalRadius right x))
+    (outerPhysicalPullback_ae_eq hD hphysical (outerPhysicalCoordinateEquiv_ae hD hphysical f))
+    (outerPhysicalGaugeEquiv_ae hD hphysical (outerPhysicalCoordinateEquiv hD hphysical f))
 
 end ContinuousFlexibility.Radial

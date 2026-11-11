@@ -86,6 +86,13 @@ theorem morsePhysicalDeepTail_outward_firstOrder
   have hcoord := outerTail_outward_log_mem hD right hentry ht
   have hstate := morsePhysicalDeepTail_state_firstOrder_at hD hlam hT hu hsys hcoord.2
   rw [tailPhysicalRadius_log right hcoord.1] at hstate
+  change HasDerivAt (fun r => tailPhysicalLift D right j u (outerTailSign right * r))
+      (lam / D.w (outerTailSign right * t) *
+        (outerTailSign right * tailPhysicalFlux D right j u (outerTailSign right * t) / lam)) t ∧
+    HasDerivAt (fun r =>
+      outerTailSign right * tailPhysicalFlux D right j u (outerTailSign right * r) / lam)
+      ((j : ℝ) ^ 2 * deriv (fun r => D.w (outerTailSign right * r)) t / (lam * t) *
+        tailPhysicalLift D right j u (outerTailSign right * t)) t
   cases right with
   | true =>
       simpa [outerTailOutwardWeight, outerTailOutwardLift,

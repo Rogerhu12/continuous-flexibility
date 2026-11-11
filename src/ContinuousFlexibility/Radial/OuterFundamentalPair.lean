@@ -132,14 +132,16 @@ theorem OuterFundamentalStatePair.flux_states
       outerFluxState lam w F.V x = (F.V x, F.ZV x) := by
   intro x hx
   constructor
-  · apply Prod.ext rfl
-    change w x * deriv F.U x / lam = F.ZU x
-    rw [(F.U_system x hx).1.deriv]
-    field_simp [hw x hx, hlam] <;> ring
-  · apply Prod.ext rfl
-    change w x * deriv F.V x / lam = F.ZV x
-    rw [(F.V_system x hx).1.deriv]
-    field_simp [hw x hx, hlam] <;> ring
+  · apply Prod.ext
+    · rfl
+    · change w x * deriv F.U x / lam = F.ZU x
+      rw [(F.U_system x hx).1.deriv]
+      field_simp [hw x hx, hlam] <;> ring
+  · apply Prod.ext
+    · rfl
+    · change w x * deriv F.V x / lam = F.ZV x
+      rw [(F.V_system x hx).1.deriv]
+      field_simp [hw x hx, hlam] <;> ring
 
 /-- The actual radial Wronskian is exactly minus the frequency scale. -/
 theorem OuterFundamentalStatePair.radialWronskian
@@ -155,9 +157,9 @@ theorem OuterFundamentalStatePair.radialWronskian
     rw [(F.V_system x hx).1.deriv]
     field_simp [hw x hx] <;> ring
   calc
-    radialWronskian w F.U F.V x =
+    ContinuousFlexibility.Radial.radialWronskian w F.U F.V x =
         F.U x * (w x * deriv F.V x) - (w x * deriv F.U x) * F.V x := by
-      unfold radialWronskian
+      unfold ContinuousFlexibility.Radial.radialWronskian
       ring
     _ = lam * (F.U x * F.ZV x - F.ZU x * F.V x) := by rw [hfu, hfv]; ring
     _ = -lam := by rw [F.determinant x hx]; ring

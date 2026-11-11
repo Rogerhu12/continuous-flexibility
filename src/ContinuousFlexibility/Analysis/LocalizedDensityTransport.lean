@@ -97,6 +97,7 @@ theorem localizedDensityInverse_kernel
           (ha.pow_const 2).ennreal_ofReal (by simp)]
         apply integral_congr_ae
         exact Filter.Eventually.of_forall (fun y => by
+          dsimp only
           rw [ENNReal.toReal_ofReal (sq_nonneg _), smul_eq_mul])
       _ = _ := by
         apply integral_congr_ae
@@ -104,7 +105,7 @@ theorem localizedDensityInverse_kernel
         intro y
         calc
           a y ^ 2 * (K x y * (bm y * f y / a y)) =
-              (a y * bm y * K x y) * f y := by field_simp [(hpos y).ne']; ring
+              (a y * bm y * K x y) * f y := by field_simp [(hpos y).ne'] <;> ring
           _ = K x y * f y := by rw [hright]
   have hRi := squareDensity_ae_eq μ ha hpos (hR q)
   have hE := squareDensityEquiv_ae μ ha hpos (R q)
