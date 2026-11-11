@@ -78,7 +78,14 @@ of CI. That loop always works.
 
 - CI builds everything on every push to a `line/**` branch and on every pull request, prints the
   blueprint status, and takes about 5 minutes with the cache. A newer push cancels the older run.
-- Find the run of your branch and its errors:
+- See the CI result of your pull request (this uses GraphQL, which does not spend the REST quota
+  below):
+
+```bash
+gh pr checks <PR-number>
+```
+
+- When it failed, find the run and read its errors once:
 
 ```bash
 gh run list --branch line/<Node> --limit 3
@@ -103,6 +110,24 @@ git diff --shortstat $(gh run list --branch line/<Task> --status success --limit
 
   Code that does not compile is not progress: the further a branch runs ahead of a green build,
   the more layered its errors become.
+
+## GitHub API quota
+
+All lines share one GitHub account, and with it one REST quota of 5,000 requests per hour. When it
+is used up, every `gh` command of every line fails with `API rate limit exceeded` for up to an hour.
+
+- Never run `gh run watch`: it polls every 3 seconds, about 1,200 requests an hour.
+- Never poll in a loop. Wait at least 5 minutes after a push, then check at most once a minute.
+- Check CI with `gh pr checks` (GraphQL, a separate quota), not with repeated `gh run list` or
+  `gh run view`.
+- Download a failed log once per run and keep it in a file.
+- List branches with `git ls-remote`, which uses no API quota.
+- If a command reports `API rate limit exceeded`, do not retry. Keep writing and checking code
+  locally; this shows when the quota resets (it does not count against the quota):
+
+```bash
+gh api rate_limit --jq '.resources.core.reset | todate'
+```
 
 ## Lean
 
