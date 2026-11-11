@@ -45,8 +45,9 @@ theorem circle_sobolevNorm_finite_sum_le_of_derivatives
   calc
     _ ≤ (2 : ℝ) ^ s *
         ((eLpNorm (∑ i, f i 0) 2 AddCircle.haarAddCircle).toReal +
-          (eLpNorm (∑ i, f i s) 2 AddCircle.haarAddCircle).toReal) :=
-      circle_real_sobolevNorm_le_derivative_endpoints (fun n => ∑ i, f i n) hsum s
+          (eLpNorm (∑ i, f i s) 2 AddCircle.haarAddCircle).toReal) := by
+      simpa only [ContinuousMap.coe_sum] using
+        circle_real_sobolevNorm_le_derivative_endpoints (fun n => ∑ i, f i n) hsum s
     _ ≤ (2 : ℝ) ^ s *
         ((∑ i, circleRealSobolevNorm (s : ℝ) (f i 0)) +
           ∑ i, circleRealSobolevNorm (s : ℝ) (f i 0)) :=
@@ -91,6 +92,8 @@ theorem truncatedFlowForcing_periodic_of_factors
     Function.Periodic (fun α => truncatedFlowForcing J (Θ α) (B α) p v) P := by
   classical
   intro α
+  change truncatedFlowForcing J (Θ (α + P)) (B (α + P)) p v =
+    truncatedFlowForcing J (Θ α) (B α) p v
   rw [truncatedFlowForcing_eq_finite_products, truncatedFlowForcing_eq_finite_products]
   apply Finset.sum_congr rfl
   intro d _
@@ -104,7 +107,7 @@ theorem truncatedFlowForcing_contDiff_of_factors
       fun α => ∑ d : FlowForcingChoice N, ∏ i, flowForcingFactors J Θ B p v d i α :=
     funext (truncatedFlowForcing_eq_finite_products J Θ B p v)
   rw [he]
-  exact contDiff_sum (fun d _ => contDiff_prod (fun i _ => hf d i))
+  exact ContDiff.sum (fun d _ => contDiff_prod (fun i _ => hf d i))
 
 /-- Canonical circle jets of the genuine truncated forcing. -/
 def truncatedFlowForcingCircleJet

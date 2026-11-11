@@ -71,6 +71,72 @@ theorem n01c_transport_order_constants
   obtain ⟨B, hB, hb⟩ := hd s
   exact hstep k d s B hB hb
 
+/-- Transport the complete physical jet estimate through the cosine path.
+All existential choices and arbitrary-target-tower comparisons take place
+with opaque state and field types. -/
+private theorem cosine_stateJets_bound_transport
+    (U : Set X) (F : ℕ → ℕ → PolarPoint → X → ℝ)
+    (G : ℕ → ℕ → ℝ → ℝ → X → ℝ)
+    (W : (k d s : ℕ) → X → (Fin k → X) → ℝ)
+    (left right H E : ℕ → ℝ) (L γ : ℝ)
+    (hlr : ∀ m, left m < right m)
+    (hwidth : ∀ m, (right m - left m) / 2 ≤ L)
+    (hH : ∀ m, 0 ≤ H m) (hE : ∀ m, 1 ≤ E m)
+    (hW : ∀ k d s x v, 0 ≤ W k d s x v)
+    (hzero : ∀ m b k t, Real.sin t = 0 → ∀ θ,
+      ∀ J : SmoothDirections U (G m b t θ), ∀ x ∈ U, ∀ v : Fin k → X,
+        J.D k x v = 0)
+    (hscale : ∀ m b k, 0 < k + b → ∀ t, t ∈ Ioo (0 : ℝ) Real.pi → ∀ θ,
+      ∀ J : SmoothDirections U (G m b t θ),
+      ∀ K : SmoothDirections U (F 0 b (rootCosinePath (left m) (right m) t, θ)),
+      ∀ x ∈ U, ∀ v : Fin k → X,
+        J.D k x v = ((right m - left m) / 2 * Real.sin t) * K.D k x v)
+    (hsource : ∀ k : ℕ, ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m a b (p : PolarPoint), a + b ≤ s → p.1 ∈ Ioo (left m) (right m) →
+      ∃ K : SmoothDirections U (F a b p), ∀ x ∈ U, ∀ v : Fin k → X,
+        min (p.1 - left m) (right m - p.1) ^ a * |K.D k x v| ≤
+          B * H m ^ γ * E m ^ B * W k d s x v) :
+    ∀ k : ℕ, ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m b t θ, b ≤ s → t ∈ Icc (0 : ℝ) Real.pi → 0 < k + b →
+      ∀ J : SmoothDirections U (G m b t θ), ∀ x ∈ U, ∀ v : Fin k → X,
+        |J.D k x v| ≤ B * H m ^ γ * E m ^ B * W k d s x v := by
+  apply n01c_transport_order_constants _ _ hsource
+  intro k d s B hBpos hbound
+  obtain ⟨C, hC, hweight⟩ := exists_sameConstant_materialWeight_bound (L * B) B γ
+  refine ⟨C, hC, ?_⟩
+  intro m b t θ hb ht hkb J x hx v
+  have htarget : 0 ≤ C * H m ^ γ * E m ^ C * W k d s x v :=
+    mul_nonneg
+      (mul_nonneg (mul_nonneg hC.le (Real.rpow_nonneg (hH m) _))
+        (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)) (hW k d s x v)
+  by_cases ht0 : t = 0
+  · subst t
+    rw [hzero m b k 0 Real.sin_zero θ J x hx v, abs_zero]
+    exact htarget
+  by_cases htπ : t = Real.pi
+  · subst t
+    rw [hzero m b k Real.pi Real.sin_pi θ J x hx v, abs_zero]
+    exact htarget
+  have hti : t ∈ Ioo (0 : ℝ) Real.pi :=
+    ⟨lt_of_le_of_ne ht.1 (Ne.symm ht0), lt_of_le_of_ne ht.2 htπ⟩
+  obtain ⟨K, hK⟩ := hbound m 0 b (rootCosinePath (left m) (right m) t, θ)
+    (by simpa only [zero_add] using hb) (rootCosinePath_mem_Ioo (hlr m) hti)
+  have hraw : |K.D k x v| ≤ B * H m ^ γ * E m ^ B * W k d s x v := by
+    simpa only [pow_zero, one_mul] using hK x hx v
+  have hlen : 0 ≤ (right m - left m) / 2 :=
+    div_nonneg (sub_nonneg.mpr (hlr m).le) (by norm_num)
+  have hcos : |(right m - left m) / 2 * Real.sin t| ≤ L := by
+    rw [abs_mul, abs_of_nonneg hlen]
+    exact (mul_le_of_le_one_right hlen
+      (abs_le.mpr ⟨Real.neg_one_le_sin t, Real.sin_le_one t⟩)).trans (hwidth m)
+  calc
+    |J.D k x v| = |(right m - left m) / 2 * Real.sin t| * |K.D k x v| := by
+      rw [hscale m b k hkb t hti θ J K x hx v, abs_mul]
+    _ ≤ L * (B * H m ^ γ * E m ^ B * W k d s x v) :=
+      mul_le_mul hcos hraw (abs_nonneg _) (hlen.trans (hwidth m))
+    _ = (L * B) * H m ^ γ * E m ^ B * W k d s x v := by ring
+    _ ≤ _ := hweight _ _ _ (hH m) (hE m) (hW k d s x v)
+
 end ScalarTransport
 
 end ContinuousFlexibility.Analysis
@@ -89,6 +155,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
   (hA : N01PartA D T S C) (hε : 0 < ε) (hB : N01PartB D S C base ε)
 
+include hS hT hA hε hB in
 /-- Exact identification for every genuine angular state tower, including
 zero state order when the angular order is positive. -/
 theorem componentCosineAngularStateJet_D_eq
@@ -112,7 +179,7 @@ theorem componentCosineAngularStateJet_D_eq
     intro y hy
     simp only [iteratedDeriv_zero, characteristicSpeedFamily, mixedDerivative]
     rw [componentCosineSpeed_eq_transformed hS hT hA hB hy m ht]
-    ring
+    rw [mul_sub, sub_add_cancel]
   · exact n01c_smoothDirections_D_const_mul J K _
       (fun y hy => iteratedDeriv_componentCosineSpeed_positive
         hS hT hA hε hB hy m b (Nat.pos_of_ne_zero hb) ht θ) k hz v
@@ -164,71 +231,27 @@ theorem n01_componentCosineAngularStateJets_bounds
             base (s + loss + d) (z - (C.referenceState, 0)) v := by
   letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
   letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
-  apply n01c_transport_order_constants _ _ hSpeed.2
-  intro k d s B hBpos hbound
-  obtain ⟨C₀, hC₀, hweight⟩ :=
-    exists_sameConstant_materialWeight_bound (((D.b - D.a) / 2) * B) B (3 / 4 : ℝ)
-  refine ⟨C₀, hC₀, ?_⟩
-  intro m b t θ hb ht hkb J z hz v
-  have hsample := materialSample_mem_radialCore hT hA.1.1.choose_spec.2.1 (C.cell m)
-  have hH : 0 ≤ T.H (T.sample (C.cell m)) :=
-    (hT.2.1 _ hsample).2.1.le
-  have hE0 : 1 ≤ T.E0 (T.sample (C.cell m)) := hE _ hsample
-  have hW := oneHighVariationWeight_nonneg
-    (pairGrading (stateGrading S) realGrading) base (s + loss + d)
-    (z - (C.referenceState, 0)) v
-  have htarget : 0 ≤ C₀ * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-      T.E0 (T.sample (C.cell m)) ^ C₀ *
-      oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base (s + loss + d) (z - (C.referenceState, 0)) v := by
-    exact mul_nonneg
-      (mul_nonneg (mul_nonneg hC₀.le (Real.rpow_nonneg hH _))
-        (Real.rpow_nonneg (zero_le_one.trans hE0) _)) hW
-  by_cases ht0 : t = 0
-  · subst t
-    rw [componentCosineAngularStateJet_D_zero m b k Real.sin_zero θ J hz v, abs_zero]
-    exact htarget
-  by_cases htπ : t = Real.pi
-  · subst t
-    rw [componentCosineAngularStateJet_D_zero m b k Real.sin_pi θ J hz v, abs_zero]
-    exact htarget
-  have hti : t ∈ Ioo (0 : ℝ) Real.pi :=
-    ⟨lt_of_le_of_ne ht.1 (Ne.symm ht0), lt_of_le_of_ne ht.2 htπ⟩
-  have hr := rootCosinePath_mem_Ioo (hA.2.2.1.1 m).2.1 hti
-  have hdata := hbound m 0 b (rootCosinePath (C.left m) (C.right m) t, θ)
-    (by simpa only [zero_add] using hb) hr
-  let K := Classical.choose hdata
-  have hK := Classical.choose_spec hdata
-  have hvalue := componentCosineAngularStateJet_D_eq
-    hS hT hA hε hB m b k hkb hti θ J K hz v
-  have hraw :
-      |K.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (C.cell m)) ^ B *
-        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (s + loss + d) (z - (C.referenceState, 0)) v := by
-    simpa only [pow_zero, one_mul] using hK z hz v
-  have hlen : 0 ≤ (C.right m - C.left m) / 2 :=
-    div_nonneg (sub_nonneg.mpr (hA.2.2.1.1 m).2.1.le) (by norm_num)
-  have hwidth : (C.right m - C.left m) / 2 ≤ (D.b - D.a) / 2 := by
-    linarith [(hA.2.2.1.1 m).1, (hA.2.2.1.1 m).2.2]
-  have hcos : |(C.right m - C.left m) / 2 * Real.sin t| ≤ (D.b - D.a) / 2 := by
-    rw [abs_mul, abs_of_nonneg hlen]
-    exact (mul_le_of_le_one_right hlen
-      (abs_le.mpr ⟨Real.neg_one_le_sin t, Real.sin_le_one t⟩)).trans hwidth
-  have hwidth0 : 0 ≤ (D.b - D.a) / 2 := hlen.trans hwidth
-  calc
-    |J.D k z v| = |(C.right m - C.left m) / 2 * Real.sin t| * |K.D k z v| := by
-      rw [hvalue, abs_mul]
-    _ ≤ ((D.b - D.a) / 2) *
-        (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B *
-          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-            base (s + loss + d) (z - (C.referenceState, 0)) v) :=
-      mul_le_mul hcos hraw (abs_nonneg _) hwidth0
-    _ = (((D.b - D.a) / 2) * B) * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (C.cell m)) ^ B *
-        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (s + loss + d) (z - (C.referenceState, 0)) v := by ring
-    _ ≤ _ := hweight _ _ _ hH hE0 hW
+  exact cosine_stateJets_bound_transport
+    (stateNeighborhood S C base ε) (characteristicSpeedFamily D S C)
+    (fun m b t θ z =>
+      iteratedDeriv b (fun η => componentCosineSpeed D S C m (z, (t, η))) θ)
+    (fun k d s z v => oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+      base (s + loss + d) (z - (C.referenceState, 0)) v)
+    C.left C.right (fun m => T.H (T.sample (C.cell m)))
+    (fun m => T.E0 (T.sample (C.cell m))) ((D.b - D.a) / 2) (3 / 4 : ℝ)
+    (fun m => (hA.2.2.1.1 m).2.1)
+    (fun m => by linarith [(hA.2.2.1.1 m).1, (hA.2.2.1.1 m).2.2])
+    (fun m => (hT.2.1 _ (materialSample_mem_radialCore hT
+      hA.1.1.choose_spec.2.1 (C.cell m))).2.1.le)
+    (fun m => hE _ (materialSample_mem_radialCore hT
+      hA.1.1.choose_spec.2.1 (C.cell m)))
+    (fun k d s z v => oneHighVariationWeight_nonneg
+      (pairGrading (stateGrading S) realGrading) base (s + loss + d)
+      (z - (C.referenceState, 0)) v)
+    (fun m b k t ht θ J z hz v =>
+      componentCosineAngularStateJet_D_zero m b k ht θ J hz v)
+    (fun m b k hkb t ht θ J K z hz v =>
+      componentCosineAngularStateJet_D_eq hS hT hA hε hB m b k hkb ht θ J K hz v)
+    hSpeed.2
 
 end ContinuousFlexibility.Blueprint

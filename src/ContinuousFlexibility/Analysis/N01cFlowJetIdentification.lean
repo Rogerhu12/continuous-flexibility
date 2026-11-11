@@ -48,6 +48,7 @@ theorem iteratedFDeriv_parameter_graph {f : E → ℝ}
   have hid : iteratedFDeriv ℝ n (id : E → E) q =
       continuousLinearJets (ContinuousLinearMap.id ℝ E) n q :=
     ((hasProjectiveJetsOn_continuousLinear (ContinuousLinearMap.id ℝ E) univ).eq_iteratedFDeriv_finiteDimensional isOpen_univ n (mem_univ q)).symm
+  change iteratedFDeriv ℝ n (fun x => ((id : E → E) x, f x)) q v = _
   rw [iteratedFDeriv_prodMk (contDiffAt_id : ContDiffAt ℝ ∞ (id : E → E) q)
     hf.contDiffAt (by simp)]
   change (iteratedFDeriv ℝ n (id : E → E) q v, iteratedFDeriv ℝ n f q v) = _
@@ -158,7 +159,8 @@ theorem volterraStateVariation_eq_iteratedFDeriv
       intro v
       rw [show v = Fin.elim0 from Subsingleton.elim _ _,
         volterraStateVariation_zero_apply]
-      exact (iteratedFDeriv_zero_apply _).symm
+      exact (iteratedFDeriv_zero_apply (𝕜 := ℝ)
+        (f := fun x : E => Θ (x, p.2)) (x := p.1) Fin.elim0).symm
     | succ n =>
       apply ContinuousMultilinearMap.ext
       intro v

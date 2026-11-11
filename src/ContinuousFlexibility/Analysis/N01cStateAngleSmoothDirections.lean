@@ -107,6 +107,22 @@ theorem stateAngleJet_joint_continuous
     (fun p hp => ⟨hp.1, mem_univ _⟩)).mul
       (((continuous_stateAngleWord_angleFactor a).comp continuous_snd).continuousOn)
 
+private theorem stateAngle_fixedTime_continuousOn
+    {U : Set E} {n : ℕ}
+    (A : (E × PolarPoint) × (Fin n → E × ℝ) → ℝ)
+    (hA : ContinuousOn A ((U ×ˢ (univ : Set PolarPoint)) ×ˢ univ))
+    (t : ℝ) :
+    ContinuousOn
+      (fun p : (E × ℝ) × (Fin n → E × ℝ) => A ((p.1.1, (t, p.1.2)), p.2))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) := by
+  have hmap : Continuous
+      (fun p : (E × ℝ) × (Fin n → E × ℝ) =>
+        ((p.1.1, (t, p.1.2)), p.2)) :=
+    (continuous_fst.fst.prodMk (continuous_const.prodMk continuous_fst.snd)).prodMk continuous_snd
+  exact hA.comp'
+    (f := fun p : (E × ℝ) × (Fin n → E × ℝ) => ((p.1.1, (t, p.1.2)), p.2))
+    hmap.continuousOn (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
+
 /-- The algebraic word lift is the genuine state-and-angle smooth tower
 of the original scalar family at the fixed external time. -/
 def stateAngleSmoothDirections
@@ -129,15 +145,16 @@ def stateAngleSmoothDirections
       smoothDirections_D_zero_apply (J 0 (t, y.2)) hy.1 Fin.elim0
   continuous := by
     intro n
-    have hmap : Continuous
-        (fun p : (E × ℝ) × (Fin n → E × ℝ) =>
-          ((p.1.1, (t, p.1.2)), p.2)) :=
-      (continuous_fst.fst.prodMk (continuous_const.prodMk continuous_fst.snd)).prodMk continuous_snd
-    exact (stateAngleJet_joint_continuous J hJ n).comp hmap.continuousOn
-      (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
+    change ContinuousOn (fun p : (E × ℝ) × (Fin n → E × ℝ) =>
+      stateAngleJet (fun b k => (J b (t, p.1.2)).D k p.1.1) n p.2)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ)
+    exact stateAngle_fixedTime_continuousOn
+      (fun p : (E × PolarPoint) × (Fin n → E × ℝ) =>
+        stateAngleJet (fun b k => (J b p.1.2).D k p.1.1) n p.2)
+      (stateAngleJet_joint_continuous (U := U) (f := f) J hJ n) t
   derivative := by
     intro n y hy v u
-    exact stateAngleJet_hasProjectiveLineDerivAt hU hf J n hy.1 t y.2 v u
+    exact stateAngleJet_hasProjectiveLineDerivAt (U := U) (f := f) hU hf J n hy.1 t y.2 v u
 
 /-- All external-time evaluation continuity is retained by the genuine
 joint tower required for the Volterra construction. -/

@@ -115,6 +115,9 @@ theorem fderiv_eval
     refine Fin.cases ?_ (fun i => ?_) i
     · simp only [Fin.cons_zero]
     · simp only [Fin.cons_succ]
+  have he : w.eval f = fun y => iteratedFDeriv ℝ w.order f y
+      (fun i => cylinderBasisVector (w.axes i)) := rfl
+  rw [he]
   simpa only [eval, prepend, hv, Fin.tail_cons, Fin.cons_zero] using
     (hj.iteratedFDeriv_succ_apply_left'
       (m := Fin.cons (α := fun _ : Fin (w.order + 1) => PolarPoint)

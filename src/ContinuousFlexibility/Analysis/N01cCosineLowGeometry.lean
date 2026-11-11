@@ -24,7 +24,10 @@ theorem circleFlowSubtractJet_coe_apply
     (c : ℝ → ℝ) (t : ℝ) (n : ℕ) (θ : ℝ) :
     circleSubtractConstantJet (circleFlowSpeedJet G hG hperiod t) (c t) n
       (θ : AddCircle P) = iteratedDeriv n (fun η => G (t, η) - c t) θ := by
-  rw [circleFlowSpeedJet, periodicCircleJet_sub_const, periodicCircleJet_coe_apply]
+  change circleSubtractConstantJet
+    (periodicCircleJet (fun η => G (t, η)) (hperiod t)
+      (hG.comp (contDiff_const.prodMk contDiff_id))) (c t) n (θ : AddCircle P) = _
+  rw [periodicCircleJet_sub_const, periodicCircleJet_coe_apply]
 
 /-- A pointwise bound on the genuine endpoint angular jets gives the
 integrated reference norm, with no dependence on the mean velocity. -/
@@ -147,6 +150,7 @@ theorem componentCosineSpeed_referenceSize_le
   have hwidth : 0 < D.b - D.a := sub_pos.mpr
     ((hA.2.2.1.1 m).1.trans ((hA.2.2.1.1 m).2.1.trans (hA.2.2.1.1 m).2.2))
   have hi := circleFlowReferenceSize_le_of_uniformJetBounds
+    (M := (D.b - D.a) / 2 * M)
     (fun p => componentCosineSpeed D S C m (z, p)) hG
     (componentCosineSpeed_periodic hS z m) Real.pi_pos.le
     (hG₀.intervalIntegrable 0 Real.pi) s
