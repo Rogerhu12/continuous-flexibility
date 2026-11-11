@@ -84,10 +84,10 @@ theorem SeedRetainedPair.exists_selectedOuterRealizations {S : SelectedTailData}
           (radialTailInterval D right (if right then M.innerRight else M.innerLeft))),
         RadialTailWeakPairing D hD right
           (if right then M.innerRight else M.innerLeft) M.frequency R' ∧
-          (let i : Fin 2 := if right then 1 else 0
+          (let i : Fin 2 := if right then 1 else 0;
             RadialTailRegularResponse D right (if right then M.innerRight else M.innerLeft)
               (M.boundaryScale i) (M.A i i, M.B i i) R') ∧
-          (let i : Fin 2 := if right then 1 else 0
+          (let i : Fin 2 := if right then 1 else 0;
             RadialTailCauchyUnique D right (if right then M.innerRight else M.innerLeft)
               ((M.frequency : ℝ) ^ 2) (M.boundaryScale i) (M.A i i, M.B i i)) := by
     let i : Fin 2 := if right then 1 else 0
