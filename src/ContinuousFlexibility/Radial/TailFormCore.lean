@@ -119,6 +119,21 @@ theorem tailFormSubmodule_mono (T : DeepTailData) {a b : ℝ} (hab : a ≤ b) :
   exact (mem_tailFormSubmodule T b p).mpr
     (tailFormLift_mono T hab ((mem_tailFormSubmodule T a p).mp hp))
 
+/-- Compact sets in the open tail fit into a finite Dirichlet truncation. -/
+theorem deepTail_compact_subset_some_cut {T : DeepTailData}
+    (hT : DeepTailHypotheses T) {K : Set ℝ} (hK : IsCompact K)
+    (hs : K ⊆ Ioo T.entrance T.endpoint) :
+    ∃ n : ℕ, K ⊆ Ioo T.entrance (T.node (n + 1)) := by
+  rcases K.eq_empty_or_nonempty with he | hn
+  · exact ⟨0, by rw [he]; exact empty_subset _⟩
+  · obtain ⟨b, hb, hmax⟩ := hK.exists_isGreatest hn
+    have ht : Tendsto T.node atTop (𝓝 T.endpoint) := hT.2.2.2.2.2.2.2.2.2.1
+    obtain ⟨n, hn⟩ := (ht.eventually (Ioi_mem_nhds (hs hb).2)).exists
+    refine ⟨n, ?_⟩
+    intro x hx
+    exact ⟨(hs hx).1, (hmax hx).trans_lt (hn.trans
+      (deepTail_node_strictMono hT (Nat.lt_succ_self n)))⟩
+
 /-- Compact containment makes every smooth core element belong to a finite
 Dirichlet truncation. No endpoint cutoff estimate is needed here. -/
 theorem tailEnergyCore_mem_some_truncation {T : DeepTailData}
@@ -126,15 +141,8 @@ theorem tailEnergyCore_mem_some_truncation {T : DeepTailData}
     (hp : p ∈ TailEnergyCore T T.endpoint) :
     ∃ n : ℕ, p ∈ TailEnergyCore T (T.node (n + 1)) := by
   rcases hp with ⟨φ, hφ, hc, hs, hu, hd⟩
-  rcases (tsupport φ).eq_empty_or_nonempty with he | hn
-  · exact ⟨0, φ, hφ, hc, by rw [he]; exact empty_subset _, hu, hd⟩
-  · obtain ⟨b, hb, hmax⟩ := hc.exists_isGreatest hn
-    have ht : Tendsto T.node atTop (𝓝 T.endpoint) := hT.2.2.2.2.2.2.2.2.2.1
-    obtain ⟨n, hn⟩ := (ht.eventually (Ioi_mem_nhds (hs hb).2)).exists
-    refine ⟨n, φ, hφ, hc, ?_, hu, hd⟩
-    intro x hx
-    exact ⟨(hs hx).1, (hmax hx).trans_lt (hn.trans
-      (deepTail_node_strictMono hT (Nat.lt_succ_self n)))⟩
+  obtain ⟨n, hn⟩ := deepTail_compact_subset_some_cut hT hc hs
+  exact ⟨n, φ, hφ, hc, hn, hu, hd⟩
 
 /-- The full Friedrichs form is the closure of its finite Dirichlet forms. -/
 theorem tailFormLift_eq_closure_iUnion {T : DeepTailData} (hT : DeepTailHypotheses T) :

@@ -132,7 +132,8 @@ theorem tailSynthesis_analysis_leftInverse {v : ι → E} {C : ℝ}
     simp only [ContinuousLinearMap.comp_apply, lp.singleContinuousLinearMap_apply,
       tailSynthesis_single hbound, map_smul, hhat, ContinuousLinearMap.one_apply,
       ← lp.single_smul, smul_eq_mul, mul_one]
-  exact congrArg (fun L : ℓ²(ι, ℝ) →L[ℝ] ℓ²(ι, ℝ) => L x) hmap
+  simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.one_apply] using
+    congrArg (fun L : ℓ²(ι, ℝ) →L[ℝ] ℓ²(ι, ℝ) => L x) hmap
 
 end Synthesis
 
@@ -207,6 +208,14 @@ theorem tailOrthonormalAnalysis_apply (e : ι → H) (he : Orthonormal ℝ e)
 theorem norm_tailOrthonormalAnalysis_le (e : ι → H) (he : Orthonormal ℝ e) :
     ‖tailOrthonormalAnalysis e he‖ ≤ 1 :=
   norm_tailAnalysis_le _ _ _ _
+
+theorem tailOrthonormalAnalysis_of_pairings (e : ι → H) (he : Orthonormal ℝ e)
+    {w : ι → H} (hpair : ∀ i j, ⟪e i, w j⟫_ℝ = if i = j then 1 else 0)
+    (j : ι) : tailOrthonormalAnalysis e he (w j) = lp.single 2 j (1 : ℝ) := by
+  apply lp.ext
+  funext i
+  rw [tailOrthonormalAnalysis_apply, hpair, lp.single_apply]
+  simp only [Pi.single_apply, eq_comm]
 
 end OrthonormalAnalysis
 

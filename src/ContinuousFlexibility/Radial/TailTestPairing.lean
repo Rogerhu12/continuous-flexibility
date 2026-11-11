@@ -144,8 +144,7 @@ theorem tailTestPairing_apply {T : DeepTailData} {φ : ℝ → ℝ}
     (hφ : MemLp (fun x => φ x / T.p x) 2 (deepTailMeasure T))
     (u : DeepTailL2 T) :
     tailTestPairing T φ hφ u = ∫ x, u x * φ x := by
-  change ⟪hφ.toLp (fun x => φ x / T.p x), u⟫_ℝ = _
-  rw [L2.inner_def]
+  rw [tailTestPairing, innerSL_apply_apply, L2.inner_def]
   calc
     (∫ x, ⟪(hφ.toLp (fun x => φ x / T.p x)) x, u x⟫_ℝ ∂deepTailMeasure T) =
         ∫ x, u x * (φ x / T.p x) ∂deepTailMeasure T := by

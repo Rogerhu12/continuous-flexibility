@@ -67,7 +67,7 @@ theorem tailFriedrichsGraph_iff_closedGradientGraph (T : DeepTailData) (endCut :
     · rw [← hqu]
       have hq' := (mem_tailGradientSpace T endCut q).mp hq
       have heq : (q.fst, q.snd) = WithLp.ofLp q :=
-        Prod.eta (WithLp.ofLp q)
+        Prod.ext (WithLp.ofLp_fst q).symm (WithLp.ofLp_snd q).symm
       rwa [heq]
     · intro p hp
       have hmem : WithLp.toLp 2 p ∈ tailGradientSpace T endCut := by
@@ -108,8 +108,8 @@ theorem tailGradientSpace_eq_closure_iSup {T : DeepTailData} (hT : DeepTailHypot
   rw [Submodule.topologicalClosure_coe, Submodule.coe_iSup_of_directed _ hm.directed_le]
   simp only [ClosedSubmodule.coe_toSubmodule, coe_tailGradientSpace]
   rw [tailFormLift_eq_closure_iUnion hT]
-  have he := (WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T) (DeepTailL2 T)).toHomeomorph
-    .preimage_closure (⋃ n : ℕ, TailFormLift T (T.node (n + 1)))
+  have he := (WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T) (DeepTailL2 T)).toHomeomorph.preimage_closure
+    (⋃ n : ℕ, TailFormLift T (T.node (n + 1)))
   simpa only [ContinuousLinearEquiv.toHomeomorph_apply,
     WithLp.prodContinuousLinearEquiv_apply, preimage_iUnion] using he
 
