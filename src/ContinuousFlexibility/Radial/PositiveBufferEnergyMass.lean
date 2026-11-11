@@ -66,6 +66,8 @@ theorem positiveBuffer_energy_memLp {V p d : ℝ → ℝ}
   have hwSq : IntegrableOn (fun x => (sqrt (1 + |V x|) * p x) ^ 2) s volume := by
     apply (hpLp.integrable_sq.fun_add hE).mono' (hw.pow 2).aestronglyMeasurable
     filter_upwards [ae_restrict_mem hs] with x hx
+    change ‖(sqrt (1 + |V x|) * p x) ^ 2‖ ≤
+      p x ^ 2 + (d x ^ 2 + V x * p x ^ 2)
     rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _), mul_pow,
       sq_sqrt (by positivity), abs_of_nonneg (hpos x hx)]
     nlinarith [sq_nonneg (d x)]
@@ -83,7 +85,11 @@ theorem positiveBuffer_affine_integrableOn {f : ℝ → ℝ} {s : Set ℝ}
   have heq : ((fun x : ℝ => a + b * x) ⁻¹' s).indicator (fun x => f (a + b * x)) =
       fun x => s.indicator f (a + b * x) := by
     funext x
-    simp only [indicator_apply, mem_preimage]
+    by_cases hx : a + b * x ∈ s
+    · have hx' : x ∈ (fun y : ℝ => a + b * y) ⁻¹' s := hx
+      rw [indicator_of_mem hx', indicator_of_mem hx]
+    · have hx' : x ∉ (fun y : ℝ => a + b * y) ⁻¹' s := hx
+      rw [indicator_of_notMem hx', indicator_of_notMem hx]
   rw [heq]
   exact h
 
@@ -94,7 +100,7 @@ theorem positiveBuffer_affine_memLp_two_restrict {f : ℝ → ℝ} {s : Set ℝ}
     (a : ℝ) {b : ℝ} (hb : b ≠ 0) :
     MemLp (fun x => f (a + b * x)) 2
       (volume.restrict ((fun x : ℝ => a + b * x) ⁻¹' s)) := by
-  have hq : QuasiMeasurePreserving (fun x : ℝ => a + b * x) volume volume := by
+  have hq : Measure.QuasiMeasurePreserving (fun x : ℝ => a + b * x) volume volume := by
     simpa only [Function.comp_def, smul_eq_mul] using
       (measurePreserving_add_left (volume : Measure ℝ) a).quasiMeasurePreserving.comp
         (Measure.quasiMeasurePreserving_smul (volume : Measure ℝ) hb)
@@ -137,12 +143,18 @@ theorem positiveBuffer_normalized_profile_square_mass {B : BufferData}
     · exact measurableSet_Iio
     · exact measurableSet_Ioi
   have hinI : IntegrableOn (fun x => deriv pin x ^ 2 + B.potential x * pin x ^ 2)
-      (uIcc (bufferCut B i) (bufferInnerWall B i)) volume := intervalIntegrable_iff'.mp hEin
+      (uIcc (bufferCut B i) (bufferInnerWall B i)) volume :=
+    (intervalIntegrable_iff'
+      (f := fun x => deriv pin x ^ 2 + B.potential x * pin x ^ 2)
+      (μ := volume) (a := bufferCut B i) (b := bufferInnerWall B i) (by finiteness)).mp hEin
   have hinE : (∫ x in uIcc (bufferCut B i) (bufferInnerWall B i),
       deriv pin x ^ 2 + B.potential x * pin x ^ 2) = αin := by
-    simpa only [intervalIntegral.integral_of_le
-      (min_le_max (bufferCut B i) (bufferInnerWall B i)),
-      ← integral_Icc_eq_integral_Ioc, Icc_min_max] using hαin.symm
+    have h := hαin.symm
+    rw [intervalIntegral.integral_of_le
+      (show min (bufferCut B i) (bufferInnerWall B i) ≤
+        max (bufferCut B i) (bufferInnerWall B i) from min_le_max),
+      ← integral_Icc_eq_integral_Ioc] at h
+    exact h
   have hFin := positiveBuffer_square_mass_bound
     (uIcc (bufferCut B i) (bufferInnerWall B i)) measurableSet_uIcc
     (fun x hx => positiveBuffer_potential_lower_span hB i hx)
@@ -172,9 +184,10 @@ theorem positiveBuffer_normalized_profile_square_mass {B : BufferData}
     have hcomp := positiveBuffer_affine_integrableOn measurableSet_Iio hPointI
       (0 : ℝ) (by norm_num : (-1 : ℝ) ≠ 0)
     have hpre : (fun x : ℝ => 0 + -1 * x) ⁻¹' Iio 0 = Ioi 0 := by ext x; simp
+    rw [hpre] at hcomp
     have hio : IntegrableOn (fun t => pout (positiveBufferPoint B i (-t)) ^ 2)
         (Ioi 0) volume := by
-      simpa only [hpre, zero_add, neg_one_mul] using hcomp
+      simpa only [zero_add, neg_one_mul] using hcomp
     change Integrable _ (volume.restrict (Ioi (0 : ℝ))) at hio
     change Integrable _ (volume.restrict (Ici (0 : ℝ)))
     rwa [restrict_Ioi_eq_restrict_Ici] at hio
