@@ -50,7 +50,10 @@ theorem exists_wholeWeakInverse
         OuterWeightedHomogeneousUnique μ w a b ((j : ℝ) ^ 2) lam H.entrance := by
   have hex := F.exists_wholeGreenOperator hD hcut hentry hac.le hlam hT hphysical
     hη hK hKinv
-  simp only [outerOutwardRegionMeasure_eq_density, outerOutwardRadius_eq_sign] at hex ⊢
+  have hmeasure : μ = ν := by
+    simpa only [outerOutwardRadius_eq_sign] using
+      outerOutwardRegionMeasure_eq_density D right cut
+  rw [hmeasure] at hex ⊢
   obtain ⟨H, R, hR, hrow⟩ := hex
   have hg := matchingProfileGeometry hD
   have hep : 0 < entrance := hg.1.trans hentry.1
@@ -59,8 +62,8 @@ theorem exists_wholeWeakInverse
     · simpa [outerTailSign, tailPhysicalEndpoint] using neg_lt_neg hentry.1
     · simpa [outerTailSign, tailPhysicalEndpoint] using hentry.2
   letI : IsFiniteMeasure ν := by
-    simpa only [outerOutwardRegionMeasure_eq_density, outerOutwardRadius_eq_sign] using
-      isFiniteMeasure_outerOutwardRegion hD hcut
+    rw [← hmeasure]
+    exact isFiniteMeasure_outerOutwardRegion hD hcut
   have hw : ContDiff ℝ ∞ w := hg.2.2.1.1.comp (contDiff_const.mul contDiff_id)
   have hcore (x : ℝ) (hx : x ∈ Ico a b) : outerOutwardRadius right x ∈ radialCore D :=
     outerOutwardRadius_mem_core hcut (by simpa only [outerOutwardRadius_eq_sign] using hx)
@@ -74,8 +77,8 @@ theorem exists_wholeWeakInverse
     rw [hz, outerOutwardRadius_eq_sign, mul_zero] at hp
     exact (lt_irrefl 0) hp
   have hρ₀ (x : ℝ) (hx : x ∈ Ioo a b) : 0 ≤ ρ x := by
-    apply (selectedOutwardDensity_pos hD hcut _).le
-    simpa only [outerOutwardRadius_eq_sign] using Ioo_subset_Ico_self hx
+    exact (selectedOutwardDensity_pos (right := right) hD hcut x (by
+      simpa only [outerOutwardRadius_eq_sign] using Ioo_subset_Ico_self hx)).le
   have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hep
   have horder : outerOutwardRadius right cut ≤
       outerOutwardRadius right (tailPhysicalRadius right (T).entrance) := by
@@ -95,7 +98,8 @@ theorem exists_wholeWeakInverse
       (H.V_system.continuousOn.1.mono Ioo_subset_Ico_self) R hR
   · intro u z hu hz hsys hL2 hRobin
     have hL2' : MemLp u 2 μ := by
-      simpa only [outerOutwardRegionMeasure_eq_density, outerOutwardRadius_eq_sign] using hL2
+      rw [hmeasure]
+      exact hL2
     exact F.whole_robin_unique hD hcut hentry hac hlam hT hphysical hη hK
       H hu hz hsys hL2' hRobin
 
