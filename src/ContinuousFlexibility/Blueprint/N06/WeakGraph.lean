@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Statements.N06Parts
+import ContinuousFlexibility.Analysis.N06WeakGraph
 
 /-!
 # N06: the maximal weak modal graph
@@ -11,7 +11,13 @@ namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Statements
 
-theorem N06WeakGraph : N06WeakGraphStatement := by
-  sorry
+theorem N06WeakGraph : N06WeakGraphStatement :=
+  ContinuousFlexibility.Analysis.n06_weakGraphStatement
 
 end ContinuousFlexibility.Blueprint
+
+/--
+info: 'ContinuousFlexibility.Blueprint.N06WeakGraph' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms ContinuousFlexibility.Blueprint.N06WeakGraph
