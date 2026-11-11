@@ -61,20 +61,31 @@ theorem circleComposeModelLinear_decode (u : S.Space) :
   liftCircleLinear_decode hS (circleComposeFieldLinear S φ)
     (circleComposeFieldLinear_member hS hM hH φ hφ hp hjets) u
 
-theorem circleComposeModelLinear_isTame :
-    IsTameLinear S.grading S.grading
-      (circleComposeModelLinear hS hM hH φ hφ hp hjets) 1 0 := by
-  apply liftCircleLinear_isTame hS (circleComposeFieldLinear S φ)
-    (circleComposeFieldLinear_member hS hM hH φ hφ hp hjets)
-    S.grading (gradedSeminorm_monotone (fun i => S.level i) S.bond) 1
-  intro n
+theorem circleComposeFieldLinear_norm_bound (n : ℕ) :
+    ∃ C : ℝ≥0, ∀ u : S.Space,
+      circleNorm T γ n (circleComposeFieldLinear S φ u) ≤
+        (C : ℝ) * S.grading (n + 1) u := by
   obtain ⟨B, hB0, hB⟩ := hjets n
   refine ⟨⟨circleCompositionNormConstant n B, circleCompositionNormConstant_nonneg n B⟩, ?_⟩
   intro u
-  have hbound := circleNorm_comp_le (hS.2.2.2.1 u) hM hH hφ n hB0 hB
-  have hgrade := ((circleGrading_le_iff_circleNorm hS (n + 1) u (apply_nonneg _ _)).mp
-    (le_refl (S.grading (n + 1) u))) (n + 1) le_rfl
+  have hbound := circleNorm_comp_le (u := S.decode u) (φ := φ)
+    (hS.2.2.2.1 u) hM hH hφ n hB0 hB
+  have hgrade : circleNorm T γ (n + 1) (S.decode u) ≤ S.grading (n + 1) u :=
+    ((circleGrading_le_iff_circleNorm hS (n + 1) u ((S.grading (n + 1)).apply_nonneg u)).mp
+      (le_refl (S.grading (n + 1) u))) (n + 1) le_rfl
+  change circleNorm T γ n (circleComposeField (S.decode u) φ) ≤
+    circleCompositionNormConstant n B * S.grading (n + 1) u
   exact hbound.trans (mul_le_mul_of_nonneg_left hgrade (circleCompositionNormConstant_nonneg n B))
+
+set_option backward.isDefEq.respectTransparency true in
+theorem circleComposeModelLinear_isTame :
+    IsTameLinear S.grading S.grading
+      (circleComposeModelLinear hS hM hH φ hφ hp hjets) 1 0 := by
+  unfold circleComposeModelLinear
+  exact liftCircleLinear_isTame hS (circleComposeFieldLinear S φ)
+    (circleComposeFieldLinear_member hS hM hH φ hφ hp hjets)
+    S.grading (gradedSeminorm_monotone (fun i => S.level i) S.bond) 1
+    (circleComposeFieldLinear_norm_bound hS hM hH φ hφ hp hjets)
 
 theorem circleComposeModelLinear_continuous :
     Continuous (circleComposeModelLinear hS hM hH φ hφ hp hjets) :=

@@ -55,9 +55,15 @@ theorem mixedDerivative_radial_mul {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
     iteratedDeriv_const_mul_field (χ r) (fun θ => f (r, θ))
   unfold mixedDerivative
   simp only [hangle]
-  simpa only [Pi.mul_apply] using
-    iteratedDeriv_mul (hχ.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ (∞ : ℕ∞ω)))
+  have heq : χ * (fun r => iteratedDeriv b (fun θ => f (r, θ)) p.2) =
+      (fun r => χ r * iteratedDeriv b (fun θ => f (r, θ)) p.2) := by
+    funext r
+    exact Pi.mul_apply _ _ r
+  have hprod :=
+    iteratedDeriv_mul (x := p.1) (hχ.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ (∞ : ℕ∞ω)))
       (hg.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ (∞ : ℕ∞ω)))
+  rw [heq] at hprod
+  exact hprod
 
 theorem weightedPhysicalJet_cutoff {D : ReferenceData} {T : MaterialData}
     {γ : ℝ} {χ : ℝ → ℝ} {f : PolarPoint → ℝ}

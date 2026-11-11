@@ -25,6 +25,11 @@ open scoped Topology ContDiff
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S}
 
+private theorem seminorm_affine_difference {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (p : Seminorm ℝ E) (x v : E) (t : ℝ) :
+    p ((x + t • v) - x) = |t| * p v := by
+  rw [add_sub_cancel_left, map_smul_eq_mul, Real.norm_eq_abs]
+
 def singletonKappaDirection
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ))) (m : ℕ) :
     AnnularState S :=
@@ -64,15 +69,19 @@ theorem singletonKappaDirection_grading_le
   rw [singletonKappaDirection_grading]
   exact circleSingletonLinear_grading_le hS s m hM hH
 
+set_option backward.isDefEq.respectTransparency false in
 theorem singletonKappaLine_control
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (href : referenceStateConditions D S C) (m : ℕ) (t : ℝ) :
     (C.referenceState + (@SMul.smul ℝ (AnnularState S) inferInstance t (singletonKappaDirection hS m))).2.2.1 =
       circleSingletonLinear hS m t := by
   change C.referenceState.2.2.1 + t • circleSingletonLinear hS m 1 = _
-  rw [href.2.2.2.1, zero_add]
   have hsmul := (circleSingletonLinear hS m).map_smul t (1 : ℝ)
-  simpa only [smul_eq_mul, mul_one] using hsmul.symm
+  have hlast : t • circleSingletonLinear hS m 1 = circleSingletonLinear hS m t := by
+    simpa only [smul_eq_mul, mul_one] using hsmul.symm
+  have hrefκ : C.referenceState.2.2.1 = (0 : CircleSpace S) := href.2.2.2.1
+  exact (congrArg (fun a : CircleSpace S => a + t • circleSingletonLinear hS m 1)
+    hrefκ).trans ((zero_add _).trans hlast)
 
 theorem singletonKappaLine_nu
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -90,6 +99,7 @@ theorem singletonKappaLine_mean
   rw [singletonKappaLine_control hS href]
   exact circleSingletonLinear_mean hS m n t
 
+set_option backward.isDefEq.respectTransparency false in
 theorem singletonKappaLine_sector
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (href : referenceStateConditions D S C) (m : ℕ) (t : ℝ) :
@@ -101,8 +111,16 @@ theorem singletonKappaLine_sector
   · intro n θ
     change (S.circle (3 / 4 : ℝ)).decode (C.referenceState.2.2.2 + t • 0) n (-θ) =
       -(S.circle (3 / 4 : ℝ)).decode (C.referenceState.2.2.2 + t • 0) n θ
-    rw [href.2.2.2.2.1, smul_zero, zero_add]
-    simp only [map_zero, Pi.zero_apply, neg_zero]
+    have hrefh : C.referenceState.2.2.2 = (0 : CircleSpace S) := href.2.2.2.2.1
+    have hz : C.referenceState.2.2.2 + t • (0 : CircleSpace S) = 0 :=
+      (congrArg (fun a : CircleSpace S => a + t • (0 : CircleSpace S)) hrefh).trans
+        ((zero_add _).trans (smul_zero t))
+    have heval (φ : ℝ) :
+        (S.circle (3 / 4 : ℝ)).decode (C.referenceState.2.2.2 + t • 0) n φ = 0 :=
+      (congrArg (fun a : CircleSpace S => (S.circle (3 / 4 : ℝ)).decode a n φ) hz).trans
+        (by simp only [map_zero, Pi.zero_apply])
+    exact (heval (-θ)).trans ((neg_zero : -(0 : ℝ) = 0).symm.trans
+      (congrArg Neg.neg (heval θ)).symm)
 
 theorem singletonKappaLine_profile
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -112,6 +130,7 @@ theorem singletonKappaLine_profile
   exact stateProfile_of_single_kappa (singletonKappaLine_nu hS href m t)
     (fun n => singletonKappaLine_mean hS href m n t)
 
+set_option backward.isDefEq.respectTransparency false in
 theorem singletonKappaLine_mem
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (m base : ℕ) {ε t : ℝ} (hε : 0 < ε)
@@ -119,7 +138,8 @@ theorem singletonKappaLine_mem
     (C.referenceState + (@SMul.smul ℝ (AnnularState S) inferInstance t (singletonKappaDirection hS m)), 0) ∈
       stateNeighborhood S C base ε := by
   constructor
-  · simpa only [add_sub_cancel_left, map_smul_eq_mul, Real.norm_eq_abs] using ht
+  · exact lt_of_eq_of_lt (seminorm_affine_difference (stateGrading S base)
+      C.referenceState (singletonKappaDirection hS m) t) ht
   · simpa only [abs_zero] using hε
 
 theorem singletonKappaLine_eventually_mem

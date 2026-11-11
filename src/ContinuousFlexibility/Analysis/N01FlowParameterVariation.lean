@@ -41,8 +41,29 @@ theorem oneHighVariationWeight_externalParameter
   have hu : (Finset.univ : Finset (Fin 1)) = {0} := by
     ext i
     simp [Subsingleton.elim i (0 : Fin 1)]
-  simp [oneHighVariationWeight, hu, pairGrading_apply, realGrading, Real.norm_eq_abs]
-  <;> ring
+  have hunit (n : ℕ) :
+      pairGrading (stateGrading S) realGrading n ((0 : AnnularState S), (1 : ℝ)) = 1 := by
+    rw [pairGrading_apply, (stateGrading S n).map_zero']
+    change (0 : ℝ) + |1| = 1
+    norm_num
+  simp only [oneHighVariationWeight, hu, Finset.prod_singleton,
+    Finset.sum_singleton, Finset.erase_singleton, Finset.prod_empty, hunit, mul_one]
+  rw [pairGrading_apply]
+  change (1 + (stateGrading S high x + |q|)) + 1 = _
+  ring
+
+/-- The two-dimensional chain rule is normalized before any physical
+state data are substituted. -/
+theorem hasDerivAt_composed_velocity_coprod
+    {F : ℝ → ℝ → ℝ} {Y : ℝ → ℝ} {q a b y : ℝ}
+    (hF : HasFDerivAt (fun p : ℝ × ℝ => F p.1 p.2)
+      ((ContinuousLinearMap.toSpanSingleton ℝ a).coprod
+        (ContinuousLinearMap.toSpanSingleton ℝ b)) (q, Y q))
+    (hY : HasDerivAt Y y q) :
+    HasDerivAt (fun t : ℝ => F t (Y t)) (a + b * y) q := by
+  have hd := hF.comp_hasDerivAt q ((hasDerivAt_id q).prodMk hY)
+  simpa only [Function.comp_def, ContinuousLinearMap.coprod_apply,
+    ContinuousLinearMap.toSpanSingleton_apply, smul_eq_mul, one_mul, mul_comm y b] using hd
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -97,7 +118,6 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
   have hd := (ordinaryFlow_q_hasDerivAt_of_tower J hxq).deriv
   have hbound := hJ (x, q) hxq
     (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
-  rw [← hd] at hbound
   have hweight :
       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
         base (0 + loss) ((x, q) - (C.referenceState, 0))
@@ -107,7 +127,16 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
       base (0 + loss) (x - C.referenceState, q - 0)
         (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) = _
     rw [oneHighVariationWeight_externalParameter, zero_add, sub_zero]
-  simpa only [pow_zero, one_mul, hweight] using hbound
+  calc
+    _ = |J.D 1 (x, q) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))| :=
+      congrArg abs hd
+    _ ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (C.cell m)) ^ B *
+        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+          base (0 + loss) ((x, q) - (C.referenceState, 0))
+          (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) := by
+      simpa only [pow_zero, one_mul] using hbound
+    _ = _ := by rw [hweight]
 
 /-- For a fixed state and component, the derivative bound is uniform in
 the radial point, the external parameter in the N01 neighborhood, and
@@ -182,9 +211,10 @@ theorem N01Properties.minusFlow_q_zero_hasDerivAt_of_speed
     (hflow (x, q) (hqmem q hq) m θ).2.1
   have hVi (q : ℝ) (hq : q ∈ Ioo (-δ) δ) :
       IntervalIntegrable (fun r => V q r (Y q r)) volume (C.left m) (C.right m) := by
-    apply ContinuousOn.intervalIntegrable_of_Icc ?_ hab.le
-    exact (hV q hq).comp (continuousOn_id.prodMk (hY q hq))
-      (fun r hr => ⟨hr, mem_univ _⟩)
+    have hc : ContinuousOn (fun r => V q r (Y q r)) (Icc (C.left m) (C.right m)) :=
+      (hV q hq).comp (continuousOn_id.prodMk (hY q hq))
+        (fun r hr => ⟨hr, mem_univ _⟩)
+    exact hc.intervalIntegrable_of_Icc hab.le
   have hGzero (r : ℝ) (hr : r ∈ Icc (C.left m) (C.right m)) :
       G 0 r = Vq 0 r (Y 0 r) := by
     simp only [G, hVθ0 r hr, zero_mul, add_zero]
@@ -206,7 +236,7 @@ theorem N01Properties.minusFlow_q_zero_hasDerivAt_of_speed
     rw [Real.norm_eq_abs]
     calc
       _ ≤ |Vq q r (Y q r)| +
-          |Vθ q r (Y q r) * deriv (fun t => Y t r) q| := abs_add _ _
+          |Vθ q r (Y q r) * deriv (fun t => Y t r) q| := abs_add_le _ _
       _ = |Vq q r (Y q r)| +
           |Vθ q r (Y q r)| * |deriv (fun t => Y t r) q| := by rw [abs_mul]
       _ ≤ KV + KV * KY :=
@@ -217,9 +247,8 @@ theorem N01Properties.minusFlow_q_zero_hasDerivAt_of_speed
     apply ae_uIoc_imp_of_forall_Ioo hab.le
     intro r hr q hq
     have hy := hN.minusFlow_q_hasDerivAt (hqmem q hq) m hr θ
-    have hd := (hjet q hq r hr (Y q r)).comp_hasDerivAt q
-      ((hasDerivAt_id q).prodMk hy)
-    simpa [V, Y, G, Function.comp_def, smul_eq_mul, mul_comm] using hd
+    exact hasDerivAt_composed_velocity_coprod (F := fun t y => V t r y)
+      (Y := fun t => Y t r) (hjet q hq r hr (Y q r)) hy
   have hd := hasDerivAt_scalarFlow_endpoint_of_dominated hab.le
     (Ioo_mem_nhds (neg_lt_zero.mpr hδ) hδ) hY
     (fun q hq => (hflow (x, q) (hqmem q hq) m θ).1)

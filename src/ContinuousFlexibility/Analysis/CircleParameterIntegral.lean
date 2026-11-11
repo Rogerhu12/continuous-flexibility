@@ -52,7 +52,8 @@ theorem iteratedDeriv_unitParameterIntegral
         (fun p : PolarPoint => iteratedDeriv n (F p.1) p.2) :=
       (hF n).iteratedDeriv_continuous
     have hdiff (a : ℝ) : Differentiable ℝ (iteratedDeriv n (F a)) :=
-      (contDiff_of_angularRegular_all hF a).differentiable_iteratedDeriv n (by simp)
+      (contDiff_of_angularRegular_all hF a).differentiable_iteratedDeriv n
+        (by exact_mod_cast (ENat.natCast_lt_top n))
     have hnext : Continuous
         (fun p : PolarPoint => deriv (iteratedDeriv n (F p.1)) p.2) := by
       simpa only [iteratedDeriv_succ] using (hF (n + 1)).iteratedDeriv_continuous

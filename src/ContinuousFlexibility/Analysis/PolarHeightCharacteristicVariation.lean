@@ -46,14 +46,12 @@ theorem polarMinusSpeed_eq_jet_expression
   simp only [polarLinearA, polarLinearB, linearRadial, linearMixed,
     polarScale, inverseDThreeHalves]
   field_simp [hD.ne', (Real.sqrt_pos.mpr hD).ne', hQ]
-  ring
 
 theorem sqrt_profile_radical_eq_profile_mul_opticalSpeed
     {w : ℝ → ℝ} {r : ℝ} (hr : r ≠ 0) (hw : 0 < w r) :
     Real.sqrt (-(w r * deriv w r / r)) = w r * opticalSpeed w r := by
   have heq : -(w r * deriv w r / r) = (w r) ^ 2 * (-deriv w r / (r * w r)) := by
     field_simp [hr, hw.ne']
-    ring
   rw [heq, Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq hw.le]
   rfl
 
@@ -114,12 +112,12 @@ theorem hasDerivAt_polarMinusSpeed_heightFamily_radial
     apply (hcalc.congr_of_eventuallyEq
       (Eventually.of_forall fun q => by
         simp only [Pi.sub_apply, Pi.div_apply, Pi.mul_apply, Function.comp_def])).congr_deriv
+    simp only [Pi.sub_apply]
     rw [hd0, hQ0, hP0, Real.sqrt_one]
     dsimp only [K, E, heightSpeedVariation]
     rw [sqrt_profile_radical_eq_profile_mul_opticalSpeed hr hwp]
     simp only [profileEnergy, radialEnergy]
-    field_simp [hwp.ne']
-    ring
+    field_simp [hwp.ne'] <;> ring
   have hdp : ∀ᶠ q in 𝓝 (0 : ℝ), 0 < d q :=
     hd.continuousAt.eventually (Ioi_mem_nhds (by rw [hd0]; norm_num))
   have hQp : ∀ᶠ q in 𝓝 (0 : ℝ), Q q ≠ 0 := hQ.continuousAt.eventually_ne hQn
@@ -176,8 +174,12 @@ theorem N01Properties.hasDerivAt_minusCharacteristicSpeed_q_zero
   have hwp : 0 < stateProfile D S C x p.1 :=
     mul_pos (hgeom.1.2.2.2.2.1 p.1 hp.1) (Real.exp_pos _)
   have h := hasDerivAt_polarMinusSpeed_heightFamily_radial hw hh hhw hu hr hwp
+  have heq (q : ℝ) : stateHeight D S C (x, q) =
+      heightFamily (Radial.radialHeightField (stateRadialHeight D S C x)) (stateU S x) q := by
+    funext y
+    simp only [stateHeight, heightFamily, Radial.radialHeightField]
   exact h.congr_of_eventuallyEq (Eventually.of_forall fun q => by
-    simp only [minusCharacteristicSpeed, originalCoefficients, polarMinusSpeed,
-      stateHeight, heightFamily, Radial.radialHeightField])
+    change polarMinusSpeed (stateProfile D S C x) (stateHeight D S C (x, q)) p = _
+    rw [heq q])
 
 end ContinuousFlexibility.Statements

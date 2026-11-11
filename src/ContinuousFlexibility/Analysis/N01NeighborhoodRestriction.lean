@@ -46,10 +46,10 @@ theorem oneHighVariationWeight_mono
     oneHighVariationWeight p b₀ h₀ x v ≤ oneHighVariationWeight p b₁ h₁ x v := by
   have hprod (s : Finset (Fin k)) :
       (∏ i ∈ s, p b₀ (v i)) ≤ ∏ i ∈ s, p b₁ (v i) :=
-    Finset.prod_le_prod (fun i hi => apply_nonneg _ _) (fun i hi => hp hb (v i))
+    Finset.prod_le_prod₀ (fun i hi => apply_nonneg _ _) (fun i hi => hp hb (v i))
   unfold oneHighVariationWeight
   apply add_le_add
-  · exact mul_le_mul (add_le_add_left (hp hh x) 1) (hprod Finset.univ)
+  · exact mul_le_mul (add_le_add_right (hp hh x) 1) (hprod Finset.univ)
       (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
       (add_nonneg zero_le_one (apply_nonneg _ _))
   · apply Finset.sum_le_sum
@@ -75,6 +75,7 @@ theorem stateNeighborhood_mono (S : PhysicalSpacesData)
   exact ⟨((solve_stateGrading_monotone S hb (z.1 - C.referenceState)).trans_lt hz.1).trans_le hε,
     hz.2.trans_le hε⟩
 
+set_option backward.isDefEq.respectTransparency false in
 theorem N01Properties.restrict_neighborhood
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base base' loss : ℕ} {ε ε' : ℝ}

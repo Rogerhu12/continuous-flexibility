@@ -81,8 +81,9 @@ theorem stateChartLine_eventually_mem (S : PhysicalSpacesData)
   calc
     p (z.1 + @SMul.smul ℝ (AnnularState S) inferInstance s d - C.referenceState) =
         p ((z.1 - C.referenceState) + @SMul.smul ℝ (AnnularState S) inferInstance s d) := congrArg p (by abel)
-    _ ≤ p (z.1 - C.referenceState) + p (@SMul.smul ℝ (AnnularState S) inferInstance s d) := map_add_le_add p _ _
-    _ = p (z.1 - C.referenceState) + ‖s‖ * p d := by rw [map_smul_eq_mul]
+    _ ≤ p (z.1 - C.referenceState) + p (@SMul.smul ℝ (AnnularState S) inferInstance s d) := p.add_le' _ _
+    _ = p (z.1 - C.referenceState) + ‖s‖ * p d :=
+      congrArg (fun t : ℝ => p (z.1 - C.referenceState) + t) (p.smul' s d)
     _ < ε := hs
 
 /-- Composition with the actual odd left chart preserves oddness. -/

@@ -35,7 +35,7 @@ theorem abs_deriv_control_le_inverse_jets
   rw [heq]
   calc
     _ ≤ |(w r)⁻¹ * (deriv w r * χ r + w r * deriv χ r)| +
-        |deriv (fun s => (w s)⁻¹) r * (w r * χ r)| := abs_add _ _
+        |deriv (fun s => (w s)⁻¹) r * (w r * χ r)| := abs_add_le _ _
     _ = |(w r)⁻¹| * |deriv w r * χ r + w r * deriv χ r| +
         |deriv (fun s => (w s)⁻¹) r| * |w r * χ r| := by rw [abs_mul, abs_mul]
     _ ≤ |(w r)⁻¹| * A + |deriv (fun s => (w s)⁻¹) r| * A :=

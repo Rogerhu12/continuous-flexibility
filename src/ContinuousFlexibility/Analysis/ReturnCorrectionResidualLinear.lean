@@ -56,6 +56,27 @@ theorem returnCorrectionDisplacementLinear_apply
   simp only [returnCorrectionDisplacementLinear, LinearMap.smul_apply,
     LinearMap.comp_apply, LinearMap.proj_apply, smul_eq_mul]
 
+theorem returnCorrectionDisplacementLinear_integral_of_contDiff
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (θ : ℝ) (ρ : CircleSpace S)
+    (hG : ContDiff ℝ 1
+      (fun s => C.minusReturnInverse z m (C.rightChartInverse z m s))) :
+    let y := rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ)
+    returnCorrectionDisplacementLinear S C z m θ ρ =
+      (S.circle (3 / 4 : ℝ)).decode ρ m y *
+        ∫ t in (0 : ℝ)..1,
+          deriv (fun s => C.minusReturnInverse z m (C.rightChartInverse z m s))
+            (y + t * returnResidualField S C z m y) := by
+  let y := rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ)
+  let G : ℝ → ℝ := fun s => C.minusReturnInverse z m (C.rightChartInverse z m s)
+  let d := returnResidualField S C z m y
+  have hdiv : dslope G y (y + d) =
+      ∫ t in (0 : ℝ)..1, deriv G (y + t * d) :=
+    returnCorrection_dslope_integral (F := G) hG y d
+  have hm := congrArg (fun a : ℝ => a * (S.circle (3 / 4 : ℝ)).decode ρ m y) hdiv
+  exact (returnCorrectionDisplacementLinear_apply S C z m θ ρ).trans
+    (hm.trans (mul_comm _ _))
+
 theorem N01Properties.returnCorrectionDisplacementLinear_integral
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -69,19 +90,8 @@ theorem N01Properties.returnCorrectionDisplacementLinear_integral
         ∫ t in (0 : ℝ)..1,
           deriv (fun s => C.minusReturnInverse z m (C.rightChartInverse z m s))
             (y + t * returnResidualField S C z m y) := by
-  let y := rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ)
-  let G : ℝ → ℝ := fun s => C.minusReturnInverse z m (C.rightChartInverse z m s)
-  let d := returnResidualField S C z m y
-  have hG : ContDiff ℝ 1 G :=
-    hN01.returnTransportInverse_contDiff_one hS hT hz hsector m
-  have hdiv : dslope G y (y + d) =
-      ∫ t in (0 : ℝ)..1, deriv G (y + t * d) :=
-    returnCorrection_dslope_integral (F := G) hG y d
-  rw [returnCorrectionDisplacementLinear_apply]
-  change dslope G y (y + d) * (S.circle (3 / 4 : ℝ)).decode ρ m y =
-    (S.circle (3 / 4 : ℝ)).decode ρ m y *
-      ∫ t in (0 : ℝ)..1, deriv G (y + t * d)
-  rw [hdiv, mul_comm]
+  exact returnCorrectionDisplacementLinear_integral_of_contDiff S C z m θ ρ
+    (hN01.returnTransportInverse_contDiff_one hS hT hz hsector m)
 
 theorem returnCorrectionDisplacementLinear_at_actual
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
