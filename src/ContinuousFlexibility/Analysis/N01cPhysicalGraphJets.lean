@@ -66,7 +66,7 @@ theorem pureSlots_fst_seminorm_le
     (w : StateAngleWord n) (p : Seminorm ℝ X) {B : ℝ} (hB : 0 ≤ B)
     (v : Fin w.stateArity → X) (hv : ∀ i, p (v i) ≤ B) :
     ∀ i, p ((w.pureSlots v i).1) ≤ B := by
-  induction w generalizing v with
+  induction w with
   | nil => intro i; exact i.elim0
   | state w ih =>
       intro i

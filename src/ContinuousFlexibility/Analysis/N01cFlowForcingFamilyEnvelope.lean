@@ -29,8 +29,9 @@ theorem n01c_forcingFamily_envelope {I : Type*} (P : ℝ) (N : ℕ)
     (hhead : ∃ offset : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ i ω,
       f s i ω 0 ≤ B * H i ^ (3 / 4 : ℝ) * E i ^ B *
         R (s + offset) i * R offset i)
-    (hlower : ∃ offset : ℕ, ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧ ∀ i ω j,
-      f s i ω j.succ ≤ A * R (s + offset) i) :
+    (hlower : ∃ offset : ℕ, ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧
+      ∀ i (ω : FlowForcingChoice N) (j : Fin ω.1.length),
+        f s i ω j.succ ≤ A * R (s + offset) i) :
     ∃ offset : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ i,
       F s i ≤ B * H i ^ (3 / 4 : ℝ) * E i ^ B *
         R (s + offset) i * R offset i ^ (2 * N + 3) := by

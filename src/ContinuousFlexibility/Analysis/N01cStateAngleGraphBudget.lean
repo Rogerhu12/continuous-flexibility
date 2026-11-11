@@ -33,7 +33,7 @@ def selectedProduct : {n : ℕ} → StateAngleWord n → (Fin n → ℝ) → ℝ
 theorem angleFactor_eq_selectedProduct {E : Type*} {n : ℕ}
     (w : StateAngleWord n) (v : Fin n → E × ℝ) :
     w.angleFactor v = w.selectedProduct (fun i => (v i).2) := by
-  induction w generalizing v with
+  induction w with
   | nil => rfl
   | state w ih => exact ih (Fin.tail v)
   | angle w ih =>
@@ -43,7 +43,7 @@ theorem angleFactor_eq_selectedProduct {E : Type*} {n : ℕ}
 
 theorem selectedProduct_nonneg {n : ℕ} (w : StateAngleWord n)
     {f : Fin n → ℝ} (hf : ∀ i, 0 ≤ f i) : 0 ≤ w.selectedProduct f := by
-  induction w generalizing f with
+  induction w with
   | nil => exact zero_le_one
   | state w ih => exact ih (fun i => hf i.succ)
   | angle w ih => exact mul_nonneg (hf 0) (ih (fun i => hf i.succ))
@@ -51,7 +51,7 @@ theorem selectedProduct_nonneg {n : ℕ} (w : StateAngleWord n)
 theorem selectedProduct_mono {n : ℕ} (w : StateAngleWord n)
     {f g : Fin n → ℝ} (hf : ∀ i, 0 ≤ f i) (hfg : ∀ i, f i ≤ g i) :
     w.selectedProduct f ≤ w.selectedProduct g := by
-  induction w generalizing f g with
+  induction w with
   | nil => exact le_rfl
   | state w ih => exact ih (fun i => hf i.succ) (fun i => hfg i.succ)
   | angle w ih =>
@@ -62,7 +62,7 @@ theorem selectedProduct_mul {n : ℕ} (w : StateAngleWord n)
     (f g : Fin n → ℝ) :
     w.selectedProduct (fun i => f i * g i) =
       w.selectedProduct f * w.selectedProduct g := by
-  induction w generalizing f g with
+  induction w with
   | nil => simp only [selectedProduct, one_mul]
   | state w ih => exact ih (Fin.tail f) (Fin.tail g)
   | angle w ih =>
@@ -81,7 +81,7 @@ theorem selectedProduct_const {n : ℕ} (w : StateAngleWord n) (c : ℝ) :
 theorem abs_angleFactor {E : Type*} {n : ℕ} (w : StateAngleWord n)
     (v : Fin n → E × ℝ) :
     |w.angleFactor v| = w.selectedProduct (fun i => |(v i).2|) := by
-  induction w generalizing v with
+  induction w with
   | nil => simp only [angleFactor, selectedProduct, abs_one]
   | state w ih => exact ih (Fin.tail v)
   | angle w ih =>
@@ -91,7 +91,7 @@ theorem selectedProduct_spatialPower {n : ℕ} (w : StateAngleWord n)
     (orders : Fin n → ℕ) {R : ℝ} (hR : 0 < R) (s : ℕ) :
     w.selectedProduct (fun i => R ^ ((orders i : ℝ) / ((s : ℝ) + 1))) =
       R ^ (((w.selectedSum orders : ℕ) : ℝ) / ((s : ℝ) + 1)) := by
-  induction w generalizing orders with
+  induction w with
   | nil =>
       simp only [selectedProduct, selectedSum, Nat.cast_zero, zero_div, Real.rpow_zero]
   | state w ih => exact ih (Fin.tail orders)
@@ -114,7 +114,7 @@ theorem flowSpatialOrder_le {n : ℕ} (w : StateAngleWord n)
     (κ β : Fin n → ℕ) (offset : ℕ) (hpart : ∀ i, 0 < κ i + β i) :
     w.flowSpatialOrder κ β offset ≤
       (∑ i, β i) + (offset + 1) * ∑ i, κ i := by
-  induction w generalizing κ β with
+  induction w with
   | nil =>
       simp only [flowSpatialOrder, angleArity, selectedSum, Fin.sum_univ_zero,
         Nat.mul_zero, Nat.add_zero, le_refl]
@@ -139,7 +139,7 @@ theorem flowSpatialOrder_le {n : ℕ} (w : StateAngleWord n)
 
 theorem flowParameterOrder_pos {n : ℕ} (w : StateAngleWord n)
     (κ : Fin n → ℕ) (hk : 0 < ∑ i, κ i) : 0 < w.flowParameterOrder κ := by
-  induction w generalizing κ with
+  induction w with
   | nil => simpa only [Fin.sum_univ_zero] using hk
   | state w ih =>
       simp only [flowParameterOrder, stateArity, selectedSum]
@@ -201,7 +201,7 @@ theorem StateAngleWord.selected_heightProduct_le
     parameterHeightWeight H (j + w.stateArity) *
         w.selectedProduct (fun i => parameterHeightWeight H (κ i)) ≤
       L ^ n * parameterHeightWeight H (j + w.flowParameterOrder κ) := by
-  induction w generalizing j κ with
+  induction w generalizing j with
   | nil =>
       simp only [StateAngleWord.stateArity, StateAngleWord.selectedProduct,
         StateAngleWord.flowParameterOrder, StateAngleWord.selectedSum, Nat.add_zero,

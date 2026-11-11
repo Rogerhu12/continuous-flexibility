@@ -61,8 +61,9 @@ theorem n01_ordinaryFlowForcing_bounds
     refine n01c_transport_offset_bounds _ _ hhead ?_
     intro o s B hBpos hb i ω
     exact hb i.1 i.2 i.2.property ω
-  have hl : ∃ o : ℕ, ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧ ∀ i : I, ∀ ω j,
-      f s i ω j.succ ≤ A * R (s + o) i := by
+  have hl : ∃ o : ℕ, ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧ ∀ i : I,
+      ∀ (ω : FlowForcingChoice (n + 1)) (j : Fin ω.1.length),
+        f s i ω j.succ ≤ A * R (s + o) i := by
     refine n01c_transport_offset_bounds _ _
       (n01_ordinaryFlowLowerFactors_bounds hS hT hA hB hpos hE hIH) ?_
     intro o s A hApos hb i ω j
