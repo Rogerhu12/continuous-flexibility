@@ -99,7 +99,7 @@ theorem rootHeight_pointwise_fixed_loss_material_bound
     (hlow angularBase (by dsimp only [base]; omega)) G θ hφ hχ hφjet hχjet
   have hReciprocal : PointwiseMaterialJetBound p reciprocalLoss R z
       (fun y => (rootAngularProduct G y)⁻¹) (0, θ) := by
-    simpa only [Real.rpow_neg_one] using hreciprocalBound z
+    simpa only [PointwiseMaterialJetBound, Real.rpow_neg_one] using hreciprocalBound z
       (hlow reciprocalBase (by dsimp only [base]; omega)) _ (0, θ)
       hDenom hBvalue (fun n _ => hDenomJet n)
   have hReciprocalSmooth : ContDiffAt ℝ ∞ (fun y => (rootAngularProduct G y)⁻¹) (0, θ) :=
@@ -120,9 +120,15 @@ theorem rootHeight_pointwise_fixed_loss_material_bound
   have hReciprocalQ := hReciprocal.mono hp (le_max_right numeratorLoss reciprocalLoss)
     (fun n => (hR n).le) (fun n => le_add_of_nonneg_left (hP n).le)
   have hFactor : PointwiseMaterialJetBound p quotientLoss V z (rootHeightFactor a G) (0, θ) := by
-    simpa only [rootHeightFactor, div_eq_mul_inv] using
-      hquotientBound z (hlow quotientBase (by dsimp only [base]; omega)) _ _ (0, θ)
-        (ha.mul hJac) hReciprocalSmooth hNumeratorQ hReciprocalQ
+    have hq := hquotientBound z
+      (hlow quotientBase (by dsimp only [base]; omega)) _ _ (0, θ)
+      (ha.mul hJac) hReciprocalSmooth hNumeratorQ hReciprocalQ
+    have he : (fun y : PolarPoint => a y * planeJacobian (extendedRootEvenOddChart G) y *
+        (rootAngularProduct G y)⁻¹) = rootHeightFactor a G := by
+      funext y
+      simp only [rootHeightFactor, div_eq_mul_inv]
+    rw [he] at hq
+    simpa only [PointwiseMaterialJetBound] using hq
   have hFactorSmooth : ContDiffAt ℝ ∞ (rootHeightFactor a G) (0, θ) :=
     (ha.mul hJac).fun_div hDenom hDenom0
   have hFactorPos : 0 < rootHeightFactor a G (0, θ) := hlα.trans_le hαvalue.1
@@ -147,7 +153,7 @@ theorem rootHeight_pointwise_fixed_loss_material_bound
     exact hHeightPower n
   have hInverseHeight : PointwiseMaterialJetBound p heightLoss I z
       (fun y => (rootSmoothHeight a G y)⁻¹) (0, θ) := by
-    simpa only [rootSmoothHeight, inv_inv, Real.sqrt_eq_rpow] using
+    simpa only [PointwiseMaterialJetBound, rootSmoothHeight, inv_inv, Real.sqrt_eq_rpow] using
       hinverseHeightBound z (hlow heightBase (by dsimp only [base]; omega)) _ (0, θ)
         hFactorSmooth hαvalue (fun n _ => hFactor n)
   have hVB (n : ℕ) : V n ≤ B n := by dsimp only [B]; linarith [hH n, hI' n]
