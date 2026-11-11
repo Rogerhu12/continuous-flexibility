@@ -182,9 +182,11 @@ theorem contDiffAt_parameter_normalizedHeightResidual
   apply hf.congr_of_eventuallyEq
   have hrad : ∀ᶠ s : P × PolarPoint in 𝓝 (p, x), s.2.1 ≠ 0 :=
     (continuousAt_snd.fst).eventually_ne hr
+  have hfst : Filter.Tendsto (Prod.fst : P × PolarPoint → P)
+      (𝓝 (p, x)) (𝓝 p) := continuous_fst.tendsto (p, x)
   have hbase : ∀ᶠ s : P × PolarPoint in 𝓝 (p, x), ∀ y : PolarPoint, y.1 ≠ 0 →
       polarCurvatureNumerator (fun r => W (s.1, r)) (fun z => Z (s.1, z)) y = 0 :=
-    continuousAt_fst.eventually hzero
+    hfst.eventually hzero
   filter_upwards [hrad, hbase] with s hs hbase
   exact normalizedHeightResidual_eq_factored (fun r => W (s.1, r))
     (hZ.comp (contDiff_const.prodMk contDiff_id))
@@ -255,7 +257,7 @@ theorem hasDerivAt_radialScaledResidual_divergence_parameter
       (fun t => x.1 * polarCoordinateResidual w (heightFamily (heightFamily z u q) u t) x)
       (heightLinearizedDivergence w (heightFamily z u q) u x) (q - q) := by
     simpa using hd
-  have ht := hd'.comp q hs
+  have ht := hd'.comp q (h := fun t : ℝ => t - q) (h' := (1 : ℝ)) hs
   have heq (t : ℝ) : heightFamily (heightFamily z u q) u (t - q) =
       heightFamily z u t := by
     funext y
@@ -304,8 +306,11 @@ theorem normalizedHeightResidual_eq_integral_linearization
       intro t ht
       have hs := contDiffAt_radialScaledResidual_parameter hw hz hu hr
         (hD t (by simpa [uIcc_of_le zero_le_one] using ht))
-      exact (((hs.derivWithin (m := 0) (by simp)).continuousAt).comp
-        (continuousAt_id.mul continuousAt_const)).continuousWithinAt
+      have hscale : ContinuousAt (fun s : ℝ => s * q) t :=
+        continuousAt_id.mul_const q
+      have hdf : ContinuousAt (deriv F) (t * q) :=
+        (hs.derivWithin (m := 0) (by simp)).continuousAt
+      exact (hdf.comp' (f := fun s : ℝ => s * q) (x := t) hscale).continuousWithinAt
     have hL : ContinuousOn L (uIcc (0 : ℝ) 1) := by
       apply hc.congr
       intro t ht
@@ -313,7 +318,8 @@ theorem normalizedHeightResidual_eq_integral_linearization
     have hpath : ∀ t ∈ uIcc (0 : ℝ) 1,
         HasDerivAt (fun s => F (s * q)) (L t * q) t := by
       intro t ht
-      simpa using (hder t ht).comp t ((hasDerivAt_id t).mul_const q)
+      simpa only [Function.comp_def, id_eq, one_mul] using
+        (hder t ht).comp t (h := fun s : ℝ => s * q) ((hasDerivAt_id t).mul_const q)
     have hi := intervalIntegral.integral_eq_sub_of_hasDerivAt hpath
       (hL.mul_const q).intervalIntegrable
     have hFzero : F 0 = 0 := by

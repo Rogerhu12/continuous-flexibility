@@ -93,10 +93,14 @@ theorem integral_scalarCorrectionError_eq_zero
       intro y
       simp only [flux, hBp y, hRp y, periodic_angularPartial hηp y]
     simpa only [Prod.mk_add_mk, add_zero, zero_add] using hp (r, 0)
+  have hslice : Continuous (fun θ : ℝ => angularPartial flux (r, θ)) := by
+    simpa only [Function.comp_def, id_eq] using
+      hfluxθ.continuous.comp ((continuous_const : Continuous (fun _ : ℝ => r)).prodMk
+        continuous_id)
   change (∫ θ in (0 : ℝ)..T, angularPartial flux (r, θ)) = 0
   rw [intervalIntegral.integral_eq_sub_of_hasDerivAt
     (fun θ _ => hasDerivAt_angular_slice (hflux.differentiable (by simp) (r, θ)))
-    ((hfluxθ.continuous.comp (continuous_const.prodMk continuous_id)).intervalIntegrable),
+    (hslice.intervalIntegrable 0 T),
     hperiod, sub_self]
 
 /-- The independent correction error preserves zero total source. -/
@@ -173,7 +177,6 @@ theorem polarLinearA_mul_characteristicDrift
   unfold polarLinearA polarLinearB linearRadial linearMixed characteristicDrift
   rw [hdiff]
   field_simp [hr, hQ]
-  <;> ring
 
 /-- The speed is exactly the square root of minus the corrected determinant, divided by `a`. -/
 theorem polarLinearA_sq_mul_characteristicSpeed_sq
@@ -194,7 +197,9 @@ theorem polarLinearA_sq_mul_characteristicSpeed_sq
         inverseDThreeHalves_sq _ hD]
       field_simp [hQ, hD.ne', hr.ne']
       <;> ring
-    _ = _ := by linarith only [hdet]
+    _ = _ := by
+      rw [neg_div, ← hdet]
+      ring
 
 /-- Both characteristic directions, with the drift and speed of the manuscript. -/
 theorem correctedCharacteristicEquation_iff
@@ -255,18 +260,22 @@ theorem characteristicSpeed_sqrt_of_smooth_factor
     (hE.mul (contDiffAt_const.sub (hp.pow 2))).sub (hk.pow 2)
   have hq : ContDiffAt ℝ ∞ Q (r, θ) := hk.add (hE.mul hpt)
   have hDshift : ContDiffAt ℝ ∞ (fun y => polarDiscriminant w z (shift y)) (0, θ) := by
-    apply ContDiffAt.comp (0, θ) _ hshift.contDiffAt
-    simpa only [hshift0] using hdisc
+    have houter : ContDiffAt ℝ ∞ (polarDiscriminant w z) (shift (0, θ)) := by
+      simpa only [hshift0] using hdisc
+    simpa only [Function.comp_def] using houter.comp (0, θ) hshift.contDiffAt
   have hQshift : ContDiffAt ℝ ∞ (fun y => Q (shift y)) (0, θ) := by
-    apply ContDiffAt.comp (0, θ) _ hshift.contDiffAt
-    simpa only [hshift0] using hq
+    have houter : ContDiffAt ℝ ∞ Q (shift (0, θ)) := by
+      simpa only [hshift0] using hq
+    simpa only [Function.comp_def] using houter.comp (0, θ) hshift.contDiffAt
   have hfactor : ContDiffAt ℝ ∞ factor (0, θ) :=
     ((hA.sqrt hApos.ne').mul (hDshift.sqrt (by simpa only [hshift0] using hD.ne'))).div
       hQshift (by simpa only [hshift0, Q] using hQ.ne')
   have hfactorpos : 0 < factor (0, θ) := by
-    apply div_pos (mul_pos (Real.sqrt_pos.mpr hApos) (Real.sqrt_pos.mpr _))
-    · simpa only [hshift0] using hD
-    · simpa only [hshift0, Q] using hQ
+    have hDs : 0 < polarDiscriminant w z (shift (0, θ)) := by
+      simpa only [hshift0] using hD
+    have hQs : 0 < Q (shift (0, θ)) := by
+      simpa only [hshift0, Q] using hQ
+    exact div_pos (mul_pos (Real.sqrt_pos.mpr hApos) (Real.sqrt_pos.mpr hDs)) hQs
   have hposnhds : {y | 0 < factor y} ∈ 𝓝 (0, θ) :=
     hfactor.continuousAt.preimage_mem_nhds (Ioi_mem_nhds hfactorpos)
   obtain ⟨ε, hε, hball⟩ := Metric.mem_nhds_iff.mp hposnhds
@@ -310,11 +319,14 @@ theorem exists_smooth_division_at_zero
   · intro t
     have hpath (s : ℝ) :
         HasDerivAt (fun u => f (u * t)) (deriv f (s * t) * t) s := by
-      simpa only [one_mul] using
+      simpa only [Function.comp_def, id_eq, one_mul] using
         (hf.differentiable (by simp) (s * t)).hasDerivAt.comp s
           ((hasDerivAt_id s).mul_const t)
+    have hslice : Continuous (fun s : ℝ => deriv f (s * t) * t) := by
+      simpa only [Function.comp_def, id_eq] using
+        (hdf.continuous.comp (continuous_id.mul_const t)).mul_const t
     have hint : IntervalIntegrable (fun s => deriv f (s * t) * t) volume 0 1 :=
-      ((hdf.continuous.comp (continuous_id.mul continuous_const)).mul continuous_const).intervalIntegrable
+      hslice.intervalIntegrable 0 1
     have hftc := intervalIntegral.integral_eq_sub_of_hasDerivAt
       (fun s _ => hpath s) hint
     rw [intervalIntegral.integral_mul_const] at hftc
@@ -347,7 +359,7 @@ theorem characteristicSpeed_simple_turning_germ
       simpa only [mul_zero, add_zero] using (hwd.differentiable (by simp) r).hasDerivAt
     have hd := (houter.comp 0
       (((hasDerivAt_id 0).const_mul σ).const_add r)).neg
-    simpa only [mul_zero, add_zero, mul_one] using hd
+    simpa only [Function.comp_def, id_eq, Pi.neg_apply, f, mul_zero, add_zero, mul_one] using hd
   have hgpos : 0 < g 0 := by
     rw [hgzero, hfderiv.deriv]
     nlinarith only [hsign]

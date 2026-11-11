@@ -71,6 +71,7 @@ variable [FiniteDimensional ℝ P] [MeasurableSpace X] [BorelSpace X]
 
 /-- The compact-set parameter derivative. The dominating function is a
 constant bound on a compact parameter ball times the physical set. -/
+omit [SecondCountableTopology X] [CompleteSpace F] in
 theorem hasFDerivAt_compactIntegral_parameter
     {f : P × X → F} {O : Set P} {K : Set X}
     (hO : IsOpen O) (hK : IsCompact K)
@@ -158,13 +159,14 @@ theorem iteratedFDeriv_compactIntegral_parameter
       exact ((continuousMultilinearCurryFin0 ℝ P F).symm.toContinuousLinearEquiv.integral_comp_comm
         (fun x => f (p, x))).symm
   | succ s hs =>
-      letI : NormedAddCommGroup (P [×s]→L[ℝ] F) :=
+      -- Pin the normed structures before forming the TVS-valued derivative.
+      let : NormedAddCommGroup (P [×s]→L[ℝ] F) :=
         ContinuousMultilinearMap.normedAddCommGroup
-      letI : NormedSpace ℝ (P [×s]→L[ℝ] F) :=
+      let : NormedSpace ℝ (P [×s]→L[ℝ] F) :=
         ContinuousMultilinearMap.normedSpace
-      letI : NormedAddCommGroup (P →L[ℝ] P [×s]→L[ℝ] F) :=
+      let : NormedAddCommGroup (P →L[ℝ] P [×s]→L[ℝ] F) :=
         ContinuousLinearMap.toNormedAddCommGroup
-      letI : NormedSpace ℝ (P →L[ℝ] P [×s]→L[ℝ] F) :=
+      let : NormedSpace ℝ (P →L[ℝ] P [×s]→L[ℝ] F) :=
         ContinuousLinearMap.toNormedSpace
       have heq : iteratedFDeriv ℝ s (fun q => ∫ x in K, f (q, x) ∂μ) =ᶠ[𝓝 p]
           (fun q => ∫ x in K, iteratedFDeriv ℝ s (fun q => f (q, x)) q ∂μ) := by
