@@ -108,6 +108,21 @@ already exists in the tree.
 - Below 30,000: ScalarWeighted, Tame, Spaces, R05b, R06b, R06c, R08, R10b, R11b, R12, N01a, N01b,
   N04Root, N04Cubic, N04Transmission, N07b, N09N10, N12, and the five tool tasks.
 
+## Pick next
+
+Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
+R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
+
+A line that has finished takes the first task below whose branch does not exist:
+
+1. Standalone, mathlib only: N04Cubic, N04Transmission, N04Root.
+2. Pipelines whose first piece is running: R05b, R06b, R06c.
+3. Tools used by several nodes: Tool-OneHighFactor, Tool-SobolevExtension, Tool-AngularCommutator.
+4. Radial chain: R07, R09, R08, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
+5. Scalar and geometry of the iteration: ScalarWeighted, N01a, N01b, N01c, N02N03.
+6. Coordinates and inverse: N04a, N04b, N04Coordinates, N05, N06, N07a, N07b.
+7. Nonlinear: N08, N09N10.
+
 ## Next
 
 1. Lines on the 35 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).

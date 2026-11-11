@@ -88,6 +88,31 @@ gh run view <run-id> --log-failed
 - Use plain `import` headers (no `module` keyword) until the module migration is merged.
 - Do not raise heartbeat limits; find the slow declaration.
 
+## Claiming a task
+
+A task is taken when the branch `line/<Task>` exists on GitHub. Nothing else records a claim.
+
+```bash
+git ls-remote --heads origin "line/*"
+```
+
+To claim a task, create its branch from `main` and push it at once, before doing any work:
+
+```bash
+git fetch origin && git switch -c line/<Task> origin/main && git commit --allow-empty -m "Claim <Task>" && git push -u origin line/<Task>
+```
+
+If the push is rejected because the branch exists, someone else has the task: pick another.
+Then open a draft pull request into `main` titled `<Task>`.
+
+## When you finish
+
+1. Mark your pull request ready for review and write the final report in it.
+2. Take the next task that nobody has: the first one in the list "Pick next" of `docs/STATUS.md`
+   whose branch does not exist. Claim it as above and continue. Do not wait for a review.
+3. If your own task turned out to need a sub-blueprint, its pieces go to the top of the candidates:
+   push the sub-blueprint first, so that they can be claimed.
+
 ## Final report in the pull request
 
 1. Is `theorem <Node>` sorry-free, and what does `#print axioms` show?
