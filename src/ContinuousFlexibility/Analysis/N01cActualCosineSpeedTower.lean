@@ -34,6 +34,11 @@ private theorem convex_productSeminormNeighborhood
     [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
     (p : Seminorm ℝ X) (center : X) (ε : ℝ) :
     Convex ℝ {z : X × ℝ | p (z.1 - center) < ε ∧ |z.2| < ε} := by
+  have he : {z : X × ℝ | p (z.1 - center) < ε ∧ |z.2| < ε} =
+      ({x : X | p (x - center) < ε} ×ˢ {t : ℝ | |t| < ε}) := by
+    ext z
+    exact (Set.mem_prod (p := z)).symm
+  rw [he]
   have h := (convex_seminormDisplacement_lt p center ε).prod
     (convex_seminormDisplacement_lt (normSeminorm ℝ ℝ) 0 ε)
   simpa only [sub_zero, coe_normSeminorm, Real.norm_eq_abs] using h

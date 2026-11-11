@@ -116,7 +116,7 @@ theorem flowParameterField_periodic_of_lift {F : E × PolarPoint → ℝ} {P : �
   simp only [flowParameterField, he,
     fun_iteratedFDeriv_add_apply hf contDiffAt_const,
     ContinuousMultilinearMap.add_apply, iteratedFDeriv_succ_const,
-    ContinuousMultilinearMap.zero_apply, add_zero]
+    Pi.zero_apply, ContinuousMultilinearMap.zero_apply, add_zero]
 
 def flowInitialSlice (Θ : E × PolarPoint → ℝ) (α : ℝ) (p : E × ℝ) : ℝ :=
   Θ (p.1, (p.2, α))
@@ -172,7 +172,10 @@ theorem flowVariationCoefficient_periodic {G Θ : E × PolarPoint → ℝ} {P : 
     (q : E) (t : ℝ) :
     Function.Periodic (fun α => flowVariationCoefficient G Θ q (t, α)) P := by
   intro α
-  rw [flowVariationCoefficient_eq_deriv hG, flowVariationCoefficient_eq_deriv hG, hΘp]
+  change flowVariationCoefficient G Θ q (t, α + P) =
+    flowVariationCoefficient G Θ q (t, α)
+  rw [flowVariationCoefficient_eq_deriv hG q (t, α + P),
+    flowVariationCoefficient_eq_deriv hG q (t, α), hΘp q t α]
   exact periodic_circle_deriv (hGp q t) (Θ (q, (t, α)))
 
 /-- This is exactly the previously defined truncated lower forcing,
@@ -225,14 +228,20 @@ theorem flowVariationForcing_periodic
     Function.Periodic (fun α => flowVariationForcing J hΘ (n + 1) q v (t, α)) P := by
   have hsource : ∀ x r, Function.Periodic (fun α => G (x, (r, Θ (x, (r, α))))) P := by
     intro x r α
-    rw [hΘp]
+    change G (x, (r, Θ (x, (r, α + P)))) = G (x, (r, Θ (x, (r, α))))
+    rw [hΘp x r α]
     exact hGp x r _
   intro α
-  rw [flowVariationForcing_eq_source_sub hG J hΘ (Nat.succ_pos n),
-    flowVariationForcing_eq_source_sub hG J hΘ (Nat.succ_pos n),
-    flowParameterField_periodic hsource,
-    flowVariationCoefficient_periodic hG hGp hΘp,
-    flowParameterField_periodic_of_lift hΘ hΘp]
+  change flowVariationForcing J hΘ (n + 1) q v (t, α + P) =
+    flowVariationForcing J hΘ (n + 1) q v (t, α)
+  rw [flowVariationForcing_eq_source_sub hG J hΘ (Nat.succ_pos n) q v (t, α + P),
+    flowVariationForcing_eq_source_sub hG J hΘ (Nat.succ_pos n) q v (t, α)]
+  exact congrArg₂ (fun a b : ℝ => a - b)
+    (flowParameterField_periodic (F := fun z => G (z.1, (z.2.1, Θ z)))
+      hsource (n + 1) q v t α)
+    (congrArg₂ (fun a b : ℝ => a * b)
+      (flowVariationCoefficient_periodic hG hGp hΘp q t α)
+      (flowParameterField_periodic_of_lift hΘ hΘp n q v t α))
 
 end ParameterFields
 
@@ -283,9 +292,14 @@ theorem flowParameterCircleVariationData_value (b : ℝ) (n : ℕ) (q : E)
     (flowParameterCircleVariationData hG J hΘ hinit hflow hGp hΘp b n q v).value
         t j (α : AddCircle P) =
       iteratedDeriv j (fun η => flowParameterField Θ (n + 1) q v (t, η)) α := by
-  change circleFlowSpeedJet (flowParameterField Θ (n + 1) q v) _ _ t j
+  let hs : ContDiff ℝ ∞ Θ := contDiff_globalCircleVectorFlow hG hΘ hinit hflow
+  change circleFlowSpeedJet (flowParameterField Θ (n + 1) q v)
+    (contDiff_flowParameterField hs (n + 1) q v)
+    (flowParameterField_periodic_of_lift hs hΘp n q v) t j
     (α : AddCircle P) = _
-  rw [circleFlowSpeedJet_coe_apply]
+  exact circleFlowSpeedJet_coe_apply (flowParameterField Θ (n + 1) q v)
+    (contDiff_flowParameterField hs (n + 1) q v)
+    (flowParameterField_periodic_of_lift hs hΘp n q v) t j α
 
 /-- The actual higher variation has one high forcing or coefficient
 factor, with its exponential constant depending only on the low

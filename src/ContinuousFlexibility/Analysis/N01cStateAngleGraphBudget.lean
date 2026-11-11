@@ -120,22 +120,34 @@ theorem flowSpatialOrder_le {n : ℕ} (w : StateAngleWord n)
         Nat.mul_zero, Nat.add_zero, le_refl]
   | state w ih =>
       have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
-      simp only [flowSpatialOrder, angleArity, selectedSum, Fin.tail_def] at ht ⊢
-      simp only [Fin.sum_univ_succ, Nat.mul_add]
+      change w.flowSpatialOrder (Fin.tail κ) (Fin.tail β) offset ≤ _
+      apply ht.trans
+      simp only [Fin.sum_univ_succ, Fin.tail_def, Nat.mul_add]
       omega
   | angle w ih =>
       have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
       have hhead := hpart 0
-      simp only [flowSpatialOrder, angleArity, selectedSum, Fin.tail_def] at ht ⊢
-      simp only [Fin.sum_univ_succ, Nat.mul_add]
-      by_cases hk : κ 0 = 0
-      · simp only [hk, if_pos rfl, ite_true, Nat.mul_zero]
-        omega
-      · have hmul : offset + 1 ≤ (offset + 1) * κ 0 := by
-          simpa only [Nat.mul_one] using
-            Nat.mul_le_mul_left (offset + 1) (show 1 ≤ κ 0 by omega)
-        simp only [if_neg hk]
-        omega
+      have hheadOrder : 1 + (if κ 0 = 0 then β 0 - 1 else β 0 + offset) ≤
+          β 0 + (offset + 1) * κ 0 := by
+        by_cases hk : κ 0 = 0
+        · simp only [hk, if_pos rfl, ite_true, Nat.mul_zero, Nat.add_zero]
+          omega
+        · have hmul : offset + 1 ≤ (offset + 1) * κ 0 := by
+            simpa only [Nat.mul_one] using
+              Nat.mul_le_mul_left (offset + 1) (show 1 ≤ κ 0 by omega)
+          simp only [if_neg hk]
+          omega
+      calc
+        _ = (1 + (if κ 0 = 0 then β 0 - 1 else β 0 + offset)) +
+            w.flowSpatialOrder (Fin.tail κ) (Fin.tail β) offset := by
+          simp only [flowSpatialOrder, angleArity, selectedSum, Fin.tail_def]
+          ac_rfl
+        _ ≤ (β 0 + (offset + 1) * κ 0) +
+            ((∑ i, (Fin.tail β) i) + (offset + 1) * ∑ i, (Fin.tail κ) i) :=
+          Nat.add_le_add hheadOrder ht
+        _ = _ := by
+          simp only [Fin.sum_univ_succ, Fin.tail_def, Nat.mul_add]
+          ac_rfl
 
 theorem flowParameterOrder_pos {n : ℕ} (w : StateAngleWord n)
     (κ : Fin n → ℕ) (hk : 0 < ∑ i, κ i) : 0 < w.flowParameterOrder κ := by

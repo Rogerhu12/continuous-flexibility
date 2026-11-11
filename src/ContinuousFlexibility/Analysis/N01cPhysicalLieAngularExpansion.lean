@@ -115,8 +115,8 @@ def physicalLieAngularExpansion (n : ℕ) : (b : ℕ) → PhysicalLieAngularExpa
 
 theorem physicalLieAngularExpansion_spatial_order
     (n b : ℕ) (t : (physicalLieAngularExpansion n b).Index) :
-    (∑ i, ((physicalLieAngularExpansion n b).words t i).radialOrder +
-      ((physicalLieAngularExpansion n b).words t i).angularOrder) = n + b := by
+    (∑ i, (((physicalLieAngularExpansion n b).words t i).radialOrder +
+      ((physicalLieAngularExpansion n b).words t i).angularOrder)) = n + b := by
   simp only [PhysicalLieWord.radialOrder_add_angularOrder]
   exact (physicalLieAngularExpansion n b).total_order t
 

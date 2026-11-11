@@ -108,7 +108,7 @@ theorem flowForcingStateDirections_seminorm_le {N : ℕ}
     simpa only [FlowForcingChoice.stateWord, StateAngleWord.isState_ofBool] using hj
   change p (ω.stateWord.stateDirections _ i) ≤ M
   rw [he]
-  simp only [hselected, if_true, Prod.fst_mk]
+  simp only [hselected, if_true]
   exact seminorm_flowParameterIdentityJet_fst_le p L.toLinearMap (v ∘ ω.1.emb j)
     hM (fun k => hv (ω.1.emb j k))
 

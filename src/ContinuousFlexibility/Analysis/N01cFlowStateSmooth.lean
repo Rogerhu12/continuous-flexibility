@@ -51,9 +51,12 @@ theorem affineJet_at_point_of_at_zero
   have he : (fun y => f ((x + L q) + L y)) =
       fun y => (fun z => f (x + L z)) (q + y) := by
     funext y
+    change f ((x + L q) + L y) = f (x + L (q + y))
     rw [map_add, add_assoc]
   have h := hjet m (x + L q) hq L n v
-  rw [he, iteratedFDeriv_comp_add_left, add_zero] at h
+  rw [he] at h
+  rw [iteratedFDeriv_comp_add_left (𝕜 := ℝ)
+    (f := fun z : Fin m → ℝ => f (x + L z)) n q (0 : Fin m → ℝ), add_zero] at h
   exact h
 
 /-- Jointly continuous multilinear candidates identified on every
@@ -80,10 +83,13 @@ def smoothDirections_of_finiteAffine_germs
     let e : P := Pi.single 0 1
     let a : Fin n → P := fun i => Pi.single i.succ 1
     let F : P → ℝ := fun q => f (x + L q)
-    have he : L e = w := by simp only [L, e, finiteDirectionsLinear_single, Fin.cons_zero]
+    have he : L e = w := by
+      change finiteDirectionsLinear (Fin.cons w v) (Pi.single (0 : Fin (n + 1)) 1) = w
+      exact finiteDirectionsLinear_single (Fin.cons w v) (0 : Fin (n + 1))
     have ha : (fun i => L (a i)) = v := by
       funext i
-      simp only [L, a, finiteDirectionsLinear_single, Fin.cons_succ]
+      change finiteDirectionsLinear (Fin.cons w v) (Pi.single i.succ 1) = v i
+      exact finiteDirectionsLinear_single (Fin.cons w v) i.succ
     have hcons : (fun i => L ((Fin.cons e a : Fin (n + 1) → P) i)) =
         Fin.cons w v := by
       funext i
