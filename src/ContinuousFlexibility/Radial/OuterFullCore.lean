@@ -71,12 +71,12 @@ theorem morseOuterFullCore_outgoing_subset {T : MorseChainData} {σ : ℕ → �
 
 /-- Actual homogeneous states are controlled between arbitrary physical
 points of the entire core, including the outgoing right connector. -/
-theorem morseOuterFullCore_energy_on_exp
+theorem morseOuterFullCore_energy_on_exp_of_upper
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
     {K Cstar L scale s t : ℝ} {n j : ℕ} {u z : ℝ → ℝ}
     (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
     (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
-    (side : Bool) (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (side : Bool) (hn : T.index < n) (hupper : (j : ℝ) < radialFrequencyThreshold T Cstar n)
     (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
     (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2))
     (hstate : ∀ r ∈ Icc (morseOuterCoreLeft T side n) (morseOuterFullCoreRight T side n),
@@ -117,7 +117,7 @@ theorem morseOuterFullCore_energy_on_exp
   have hbase : ∀ s ∈ Icc (morseOuterCoreLeft T side n) (morseOuterCoreRight T side n),
       ∀ t ∈ Icc (morseOuterCoreLeft T side n) (morseOuterCoreRight T side n),
       E t ≤ E s * Fc :=
-    fun s hs t ht => morseOuterCore_energy_on_exp h hσ hcell hscale hL side hn hband hhi hlo
+    fun s hs t ht => morseOuterCore_energy_on_exp_of_upper h hσ hcell hscale hL side hn hupper hhi hlo
       (fun r hr => hstate r (hsub hr)) hs ht
   cases side with
   | false =>
@@ -133,7 +133,7 @@ theorem morseOuterFullCore_energy_on_exp
         simpa only [morseOuterCoreRight, ite_true] using hj.2.1
       have hjoinSub := morseOuterFullCore_outgoing_subset h n hn
       have hfull := morseOuterFullCore_interval h true n hn
-      have hjoinFactor := morse_outgoing_join_factor_le_frequency_exp h hσ hcell hscale hL hn hband hhi hlo
+      have hjoinFactor := morse_outgoing_join_factor_le_frequency_exp_of_upper h hσ hcell hscale hL hn hupper hhi hlo
       have hje : ∀ s ∈ Icc (T.joinLeft true n) (T.joinRight true n),
           ∀ t ∈ Icc (T.joinLeft true n) (T.joinRight true n), E t ≤ E s * Fo := by
         intro s hs t ht
@@ -148,5 +148,23 @@ theorem morseOuterFullCore_energy_on_exp
         (fun x _ => show 0 ≤ E x by dsimp only [E]; positivity) hbase hje hs ht
       rw [hprod] at hh
       exact hh
+
+theorem morseOuterFullCore_energy_on_exp
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
+    {K Cstar L scale s t : ℝ} {n j : ℕ} {u z : ℝ → ℝ}
+    (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
+    (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
+    (side : Bool) (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
+    (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2))
+    (hstate : ∀ r ∈ Icc (morseOuterCoreLeft T side n) (morseOuterFullCoreRight T side n),
+      HasDerivAt u (scale / D.w r * z r) r ∧
+        HasDerivAt z ((j : ℝ) ^ 2 * deriv D.w r / (scale * r) * u r) r)
+    (hs : s ∈ Icc (morseOuterCoreLeft T side n) (morseOuterFullCoreRight T side n))
+    (ht : t ∈ Icc (morseOuterCoreLeft T side n) (morseOuterFullCoreRight T side n)) :
+    u t ^ 2 + z t ^ 2 ≤ (u s ^ 2 + z s ^ 2) *
+      exp (outerFullCoreQuadraticExponent C K D.a Cstar L * (n : ℝ) ^ 2 +
+        outerFullCoreActionExponent C K D.a * ((j : ℝ) * sqrt (morseChainA T n))) :=
+  morseOuterFullCore_energy_on_exp_of_upper h hσ hcell hscale hL side hn hband.2.2 hhi hlo hstate hs ht
 
 end ContinuousFlexibility.Radial

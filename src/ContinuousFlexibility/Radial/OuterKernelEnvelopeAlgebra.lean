@@ -107,4 +107,63 @@ theorem outer_kernel_cutoff_bound {φ ψ : ℝ → ℝ} {K : ℝ → ℝ → ℝ
       (hK x y hx hy) (abs_nonneg _) (by norm_num)
     _ = B := by ring
 
+/-- The actual Dirichlet and rank-one block estimates give one common
+whole-kernel envelope, with the action factor kept separate. -/
+theorem outer_rank_one_envelope {N p q : ℕ} (hN : 1 ≤ N)
+    (hp : N ≤ p) (hq : N ≤ q) {H L lam K R : ℝ}
+    (hH : 0 ≤ H) (hL : 0 ≤ L) (hlam : 0 < lam) (hK : 1 ≤ K)
+    (hscale : lam⁻¹ ≤ radialE N ^ H)
+    (hR : R ≤ radialE p ^ L * radialE q ^ L * exp (-|radialS p - radialS q|) +
+      (lam⁻¹ * K ^ 2) *
+        (radialE p ^ L * exp (-|radialS p - radialS N|)) *
+        (radialE q ^ L * exp (-|radialS q - radialS N|))) :
+    R ≤ radialE p ^ (2 + H + 2 * L) * radialE q ^ (2 + H + 2 * L) *
+      K ^ 2 * exp (-|radialS p - radialS q|) := by
+  let W := radialE p ^ L * radialE q ^ L
+  let D := exp (-|radialS p - radialS q|)
+  let A := radialE p ^ H
+  have hW : 0 ≤ W := mul_nonneg
+    (rpow_nonneg (show 0 ≤ radialE p from (exp_pos _).le) _)
+    (rpow_nonneg (show 0 ≤ radialE q from (exp_pos _).le) _)
+  have hD : 0 ≤ D := (exp_pos _).le
+  have hA : 1 ≤ A := outer_envelope_one_le p hH
+  have hK2 : 1 ≤ K ^ 2 := by nlinarith only [hK]
+  have hAK : 1 ≤ A * K ^ 2 := one_le_mul_of_one_le_of_one_le hA hK2
+  have hs : lam⁻¹ ≤ A := hscale.trans (outer_envelope_index_mono hp hH)
+  have hM : 0 ≤ lam⁻¹ * K ^ 2 := mul_nonneg (inv_nonneg.mpr hlam.le) (sq_nonneg _)
+  have hprod :
+      (radialE p ^ L * exp (-|radialS p - radialS N|)) *
+        (radialE q ^ L * exp (-|radialS q - radialS N|)) ≤ W * D := by
+    calc
+      _ = W * (exp (-|radialS p - radialS N|) * exp (-|radialS q - radialS N|)) := by
+        dsimp only [W]
+        ring
+      _ ≤ _ := mul_le_mul_of_nonneg_left (outer_attenuation_product_le p q N) hW
+  have hterm :
+      (lam⁻¹ * K ^ 2) *
+        (radialE p ^ L * exp (-|radialS p - radialS N|)) *
+        (radialE q ^ L * exp (-|radialS q - radialS N|)) ≤ (A * K ^ 2) * (W * D) := by
+    rw [mul_assoc]
+    exact (mul_le_mul_of_nonneg_left hprod hM).trans
+      (mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_right hs (sq_nonneg K)) (mul_nonneg hW hD))
+  have hdir : W * D ≤ (A * K ^ 2) * (W * D) :=
+    le_mul_of_one_le_left (mul_nonneg hW hD) hAK
+  have hpair := outer_envelope_pair_prefactor (hN.trans hp)
+    (by norm_num : (0 : ℝ) ≤ 2) (add_nonneg hH hL) hL
+    (n := q)
+  rw [show (2 : ℝ) + (H + L) + L = 2 + H + 2 * L by ring] at hpair
+  calc
+    R ≤ W * D +
+        (lam⁻¹ * K ^ 2) *
+          (radialE p ^ L * exp (-|radialS p - radialS N|)) *
+          (radialE q ^ L * exp (-|radialS q - radialS N|)) := hR
+    _ ≤ (A * K ^ 2) * (W * D) + (A * K ^ 2) * (W * D) := add_le_add hdir hterm
+    _ = (2 * radialE p ^ (H + L) * radialE q ^ L) * K ^ 2 * D := by
+      rw [rpow_add (show 0 < radialE p from exp_pos _) H L]
+      dsimp only [A, W]
+      ring
+    _ ≤ _ := mul_le_mul_of_nonneg_right
+      (mul_le_mul_of_nonneg_right hpair (sq_nonneg K)) hD
+
 end ContinuousFlexibility.Radial

@@ -126,9 +126,9 @@ theorem morse_right_cap_coefficient_bounds {A B : ℝ} (hB : 0 < B)
 
 /-- A uniform quantitative estimate for every retained model cell in its
 actual frequency band. -/
-theorem morse_cell_factor_le_frequency_exp {T : MorseChainData} {C : ℝ} {n j : ℕ}
+theorem morse_cell_factor_le_frequency_exp_of_upper {T : MorseChainData} {C : ℝ} {n j : ℕ}
     (hn : 1 ≤ n) (hd : T.d n = morseChainInteger n)
-    (hband : radialFrequencyBand T C n j) :
+    (hupper : (j : ℝ) < radialFrequencyThreshold T C n) :
     morseCellEnergyFactor (morseChainA T n) (morseChainB T n) (j : ℝ) (1 / 100) ≤
       exp ((10 * outerFrequencyExponent C + 500000) * (n : ℝ) ^ 2 +
         10 * ((j : ℝ) * sqrt (morseChainA T n))) := by
@@ -149,7 +149,7 @@ theorem morse_cell_factor_le_frequency_exp {T : MorseChainData} {C : ℝ} {n j :
   have hA9 : A ≤ 9 := morseChainA_le_nine T n hd
   have hBA : B ≤ A ^ 9 := (morseChainB_A_bounds T n (by linarith only [hd₂])).2
   have hj : 0 ≤ (j : ℝ) := Nat.cast_nonneg j
-  have hj2 : (j : ℝ) ^ 2 ≤ exp (F * N) := outer_frequency_sq_le_exp hn hd hband
+  have hj2 : (j : ℝ) ^ 2 ≤ exp (F * N) := outer_frequency_sq_le_exp_of_upper hn hd hupper
   have hE : 1 ≤ exp ((F + 4) * N) := one_le_exp_iff.mpr (by positivity)
   have hEF : exp (F * N) ≤ exp ((F + 4) * N) :=
     exp_le_exp.mpr (by nlinarith only [hN₀])
@@ -272,5 +272,13 @@ theorem morse_cell_factor_le_frequency_exp {T : MorseChainData} {C : ℝ} {n j :
       congr 1
       ring
     _ ≤ _ := exp_le_exp.mpr (by dsimp only [F, N, tau, A] at *; nlinarith only [hN₀])
+
+theorem morse_cell_factor_le_frequency_exp {T : MorseChainData} {C : ℝ} {n j : ℕ}
+    (hn : 1 ≤ n) (hd : T.d n = morseChainInteger n)
+    (hband : radialFrequencyBand T C n j) :
+    morseCellEnergyFactor (morseChainA T n) (morseChainB T n) (j : ℝ) (1 / 100) ≤
+      exp ((10 * outerFrequencyExponent C + 500000) * (n : ℝ) ^ 2 +
+        10 * ((j : ℝ) * sqrt (morseChainA T n))) :=
+  morse_cell_factor_le_frequency_exp_of_upper hn hd hband.2.2
 
 end ContinuousFlexibility.Radial
