@@ -53,7 +53,7 @@ theorem circleFlow_reference_source_eq (c : ℝ → ℝ) {t : ℝ} (ht : t ∈ I
   ext x
   induction x using QuotientAddGroup.induction_on
   rename_i θ
-  simp only [circleSubtractConstantJet_apply, if_pos rfl,
+  simp [circleSubtractConstantJet_apply,
     circleFlowComposedSpeedJet_coe_apply hG hperiod hΘ hinit hflow ht,
     periodicCircleJet_coe_apply, iteratedDeriv_zero, Function.comp_apply]
 
@@ -67,7 +67,8 @@ theorem circleFlow_reference_source_zero_le (c : ℝ → ℝ) {t : ℝ} (ht : t 
           circleFlowReferenceNorm G hG hperiod c 0 t := by
   rw [circleFlow_reference_source_eq hG hperiod hΘ hinit hflow c ht,
     circleFlowReferenceNorm_eq G hG hperiod c 0 t]
-  exact circleLift_sobolev_comp_le_low (fun θ => G (t, θ) - c t)
+  simpa only [Nat.cast_zero] using
+    (circleLift_sobolev_comp_le_low (fun θ => G (t, θ) - c t)
     (circle_periodic_sub_const (hperiod t) (c t))
     ((hG.comp (contDiff_const.prodMk contDiff_id)).sub contDiff_const)
     (fun θ => Θ (t, θ)) (circleFlow_contDiff_angle hG hP.out hperiod hΘ hinit hflow ht)
@@ -75,7 +76,7 @@ theorem circleFlow_reference_source_zero_le (c : ℝ → ℝ) {t : ℝ} (ht : t 
     (Real.exp_pos _) (circleFlowLowGeometryBound_nonneg P
       (circleFlowLambda_nonneg G hG hperiod 4 (ht.1.trans ht.2)))
     (fun θ => (circleFlow_deriv_bounds_lowSobolev hG hperiod hΘ hinit hflow ht θ).1)
-    (circleFlow_defect_h3_le hG hperiod hΘ hinit hflow ht) 0 (by norm_num)
+    (circleFlow_defect_h3_le hG hperiod hΘ hinit hflow ht) 0 (by norm_num))
 
 theorem circleFlow_reference_source_succ_le {c : ℝ → ℝ}
     (hc : IntervalIntegrable c volume a b) (s : ℕ) {t : ℝ} (ht : t ∈ Icc a b) :
