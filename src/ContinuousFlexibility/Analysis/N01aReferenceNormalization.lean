@@ -54,6 +54,23 @@ theorem referenceRow_phi_cosineMode {D : ReferenceData} (hborder : RadialTrueBor
 
 /-- Once its actual weighted jets are known, the reference field is represented
 by the height model with all the auxiliary state coordinates equal to zero. -/
+private theorem n01a_exists_height_representation {D : ReferenceData} {T : MaterialData}
+    {γ : ℝ} {H : SobolevModelData} (hH : IsSobolevModel D T γ H)
+    {f : PolarPoint → ℝ} (hf : HeightMember D T γ f) :
+    ∃ u : H.Space, H.decode u = f :=
+  hH.2.2.2.2.1 f hf
+
+private def n01aReferenceStateOfHeight (S : PhysicalSpacesData)
+    (u : (S.height (3 / 4 : ℝ)).Space) : AnnularState S :=
+  ((u, 0), 0, 0, 0)
+
+private theorem n01aReferenceStateOfHeight_field (S : PhysicalSpacesData)
+    (u : (S.height (3 / 4 : ℝ)).Space) :
+    stateU S (n01aReferenceStateOfHeight S u) = (S.height (3 / 4 : ℝ)).decode u := by
+  funext p
+  simp only [stateU, heightPairField, n01aReferenceStateOfHeight, zero_mul, add_zero]
+
+set_option backward.isDefEq.respectTransparency false in
 theorem exists_referenceState_of_heightMember {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S)
     (hborder : RadialTrueBorder D)
@@ -63,14 +80,16 @@ theorem exists_referenceState_of_heightMember {D : ReferenceData} {T : MaterialD
       (∀ p, stateU S x p = D.phi p.1 * Radial.cosineMode 2 p.2) ∧
       x.1.2 = 0 ∧ x.2.1 = 0 ∧ x.2.2.1 = 0 ∧ x.2.2.2 = 0 ∧
       referenceRow D (stateU S x) = 1 := by
-  obtain ⟨u, hu⟩ := (hS.1 (3 / 4 : ℝ)).2.2.2.2.1 _ hphi
-  let x : AnnularState S := ((u, 0), 0, 0, 0)
-  have hx : stateU S x =
-      (fun p : PolarPoint => D.phi p.1 * Radial.cosineMode 2 p.2) := by
-    funext p
-    simp only [stateU, heightPairField, x, zero_mul, add_zero]
-    exact congrFun hu p
-  refine ⟨x, ?_, rfl, rfl, rfl, rfl, ?_⟩
+  have hrepr : ∃ u : (S.height (3 / 4 : ℝ)).Space,
+      (S.height (3 / 4 : ℝ)).decode u =
+        (fun p : PolarPoint => D.phi p.1 * Radial.cosineMode 2 p.2) :=
+    n01a_exists_height_representation (H := S.height (3 / 4 : ℝ))
+      (hS.1 (3 / 4 : ℝ)) hphi
+  obtain ⟨u, hu⟩ := hrepr
+  have hx : stateU S (n01aReferenceStateOfHeight S u) =
+      (fun p : PolarPoint => D.phi p.1 * Radial.cosineMode 2 p.2) :=
+    (n01aReferenceStateOfHeight_field S u).trans hu
+  refine ⟨n01aReferenceStateOfHeight S u, ?_, rfl, rfl, rfl, rfl, ?_⟩
   · intro p
     exact congrFun hx p
   · rw [hx]

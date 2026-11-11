@@ -119,7 +119,7 @@ theorem n01aOpticalCutoff_constant {x : ℝ} (hx : 2 ≤ x) :
       rw [uIcc_of_le hx] at ht
       exact n01aOpticalCutoffDensity_zero_right ht.1
     rw [intervalIntegral.integral_congr he, intervalIntegral.integral_zero]
-  have hadd := intervalIntegral.integral_add_adjacent_intervals
+  have hadd := intervalIntegral.integral_add_adjacent_intervals (μ := volume)
     (hc.intervalIntegrable 1 2) (hc.intervalIntegrable 2 x)
   simpa only [n01aOpticalCutoff, hz, add_zero] using hadd.symm
 
