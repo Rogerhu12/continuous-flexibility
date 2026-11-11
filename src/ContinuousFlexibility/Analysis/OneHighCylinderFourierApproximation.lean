@@ -28,7 +28,7 @@ theorem cylinderCutoffJet_tendsto_derivative_l2 (u : CylinderSmoothJet P)
     (hF1 : Integrable (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
       cylinderFrequencyMeasure) (hij : i + j ≤ s) :
     Tendsto (fun N : ℕ => (eLpNorm (fun p =>
-      (cylinderCutoffJet (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
+      (cylinderCutoffJet (P := P) (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
         (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2) hF1 N).jet i j p -
           u.jet i j p) 2 (cylinderPhysicalMeasure P)).toReal) atTop (𝓝 0) := by
   let F := cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2
@@ -36,18 +36,18 @@ theorem cylinderCutoffJet_tendsto_derivative_l2 (u : CylinderSmoothJet P)
   have hF2 : MemLp F 2 cylinderFrequencyMeasure :=
     cylinderFourier_memLp_two (u.jet 0 0) (u.continuous 0 0) hu2
   have hM2 : MemLp (fun ζ => cylinderDerivativeMultiplier P i j ζ * F ζ)
-      2 cylinderFrequencyMeasure := cylinderDerivativeMultiplier_mul_memLp hF hij hs
+      2 cylinderFrequencyMeasure := cylinderDerivativeMultiplier_mul_memLp (P := P) hF hij hs
   have he (N : ℕ) : eLpNorm
-      (fun p => (cylinderCutoffJet F hF hF1 N).jet i j p - u.jet i j p)
+      (fun p => (cylinderCutoffJet (P := P) F hF hF1 N).jet i j p - u.jet i j p)
         2 (cylinderPhysicalMeasure P) =
       eLpNorm (fun ζ => cylinderFrequencyCutoff (P := P) N
         (fun η => cylinderDerivativeMultiplier P i j η * F η) ζ -
           cylinderDerivativeMultiplier P i j ζ * F ζ) 2 cylinderFrequencyMeasure := by
     rw [cylinderFourier_sub_eLpNorm_two _ _
-      ((cylinderCutoffJet F hF hF1 N).continuous i j) (u.continuous i j)
-      (cylinderCutoffJet_memLp_two hF hF1 hF2 N i j) (u.memLp_derivative hu2 hs hij)]
+      ((cylinderCutoffJet (P := P) F hF hF1 N).continuous i j) (u.continuous i j)
+      (cylinderCutoffJet_memLp_two (P := P) hF hF1 hF2 N i j) (u.memLp_derivative hu2 hs hij)]
     apply eLpNorm_congr_ae
-    filter_upwards [cylinderCutoffJet_fourier_ae hF hF1 hF2 N i j,
+    filter_upwards [cylinderCutoffJet_fourier_ae (P := P) hF hF1 hF2 N i j,
       u.fourier_derivative_ae hu2 hs hij] with ζ hN hU
     dsimp only
     rw [hN, hU]
@@ -56,7 +56,7 @@ theorem cylinderCutoffJet_tendsto_derivative_l2 (u : CylinderSmoothJet P)
       (congrFun (cylinderFrequencyCutoff_mul_left (P := P) N
         (cylinderDerivativeMultiplier P i j) F) ζ)
   change Tendsto (fun N : ℕ => (eLpNorm
-    (fun p => (cylinderCutoffJet F hF hF1 N).jet i j p - u.jet i j p)
+    (fun p => (cylinderCutoffJet (P := P) F hF hF1 N).jet i j p - u.jet i j p)
       2 (cylinderPhysicalMeasure P)).toReal) atTop (𝓝 0)
   simpa only [he] using (cylinderFrequencyCutoff_tendsto_l2 (P := P) hM2)
 
@@ -65,7 +65,7 @@ def CylinderSmoothJet.frequencyCutoff (u : CylinderSmoothJet P)
     (hu2 : MemLp (u.jet 0 0) 2 (cylinderPhysicalMeasure P))
     (hF1 : MemLp (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
       1 cylinderFrequencyMeasure) (N : ℕ) : CylinderSmoothJet P :=
-  cylinderCutoffJet (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
+  cylinderCutoffJet (P := P) (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
     (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
     (memLp_one_iff_integrable.mp hF1) N
 
@@ -74,7 +74,7 @@ theorem CylinderSmoothJet.frequencyCutoff_memLp (u : CylinderSmoothJet P)
     (hF1 : MemLp (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
       1 cylinderFrequencyMeasure) (N i j : ℕ) :
     MemLp ((u.frequencyCutoff hu2 hF1 N).jet i j) 2 (cylinderPhysicalMeasure P) :=
-  cylinderCutoffJet_memLp_two
+  cylinderCutoffJet_memLp_two (P := P)
     (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
     (memLp_one_iff_integrable.mp hF1)
     (cylinderFourier_memLp_two (u.jet 0 0) (u.continuous 0 0) hu2) N i j
@@ -84,7 +84,7 @@ theorem CylinderSmoothJet.frequencyCutoff_memSobolev (u : CylinderSmoothJet P)
     (hF1 : MemLp (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
       1 cylinderFrequencyMeasure) (N s : ℕ) :
     (u.frequencyCutoff hu2 hF1 N).MemSobolev s (u.frequencyCutoff_memLp hu2 hF1 N 0 0) :=
-  cylinderCutoffJet_memSobolev_all
+  cylinderCutoffJet_memSobolev_all (P := P)
     (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
     (memLp_one_iff_integrable.mp hF1)
     (cylinderFourier_memLp_two (u.jet 0 0) (u.continuous 0 0) hu2) N s
@@ -96,7 +96,7 @@ theorem CylinderSmoothJet.frequencyCutoff_fourier_memLp_one (u : CylinderSmoothJ
     MemLp (cylinderFourier ((u.frequencyCutoff hu2 hF1 N).jet i j)
       ((u.frequencyCutoff hu2 hF1 N).continuous i j)
       (u.frequencyCutoff_memLp hu2 hF1 N i j)) 1 cylinderFrequencyMeasure :=
-  cylinderCutoffJet_fourier_memLp_one
+  cylinderCutoffJet_fourier_memLp_one (P := P)
     (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
     (memLp_one_iff_integrable.mp hF1)
     (cylinderFourier_memLp_two (u.jet 0 0) (u.continuous 0 0) hu2) N i j
@@ -110,7 +110,7 @@ theorem CylinderSmoothJet.frequencyCutoff_sobolev_le (u : CylinderSmoothJet P)
       ((u.frequencyCutoff hu2 hF1 N).continuous 0 0)
       (u.frequencyCutoff_memLp hu2 hF1 N 0 0) ≤
         cylinderSobolevNorm s (u.jet 0 0) (u.continuous 0 0) hu2 :=
-  cylinderCutoffJet_sobolev_le
+  cylinderCutoffJet_sobolev_le (P := P)
     (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
     (memLp_one_iff_integrable.mp hF1)
     (cylinderFourier_memLp_two (u.jet 0 0) (u.continuous 0 0) hu2) N s hs
@@ -125,7 +125,7 @@ theorem CylinderSmoothJet.frequencyCutoff_fourierL1_le (u : CylinderSmoothJet P)
         (u.frequencyCutoff_memLp hu2 hF1 N 0 0)) ≤
       frequencyL1Norm cylinderFrequencyMeasure
         (cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2) :=
-  cylinderCutoffJet_fourierL1_le
+  cylinderCutoffJet_fourierL1_le (P := P)
     (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)
     (memLp_one_iff_integrable.mp hF1)
     (cylinderFourier_memLp_two (u.jet 0 0) (u.continuous 0 0) hu2) N

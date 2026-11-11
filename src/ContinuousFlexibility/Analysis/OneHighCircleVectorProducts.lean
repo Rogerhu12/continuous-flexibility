@@ -30,18 +30,20 @@ theorem circle_vector_derivative_product_le
       (m : ℝ) ^ k * (k : ℝ) * R ^ (k - 1) *
         ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i) := by
   classical
-  let N (sel : Fin k → Fin m) : C(AddCircle P, ℝ) :=
-    circleNormMap (∏ j, circleComponent (f (a j)) (sel j))
+  let Q (sel : Fin k → Fin m) : C(AddCircle P, ℝ) :=
+    ∏ j, circleComponent (f (a j)) (sel j)
+  let W : C(AddCircle P, ℝ) := ∏ j, circleNormMap (f (a j))
+  have hW : (∏ j : Fin k, (circleNormMap (f (a j)) : AddCircle P → ℝ)) =
+      (W : AddCircle P → ℝ) := by
+    funext θ
+    simp only [W, Finset.prod_apply, ContinuousMap.prod_apply]
   have hpoint (θ : AddCircle P) :
-      ‖(∏ j, circleNormMap (f (a j))) θ‖ ≤ ‖(∑ sel, N sel) θ‖ := by
-    have hl : 0 ≤ (∏ j, circleNormMap (f (a j))) θ := by
-      simp only [ContinuousMap.prod_apply, circleNormMap_apply]
+      ‖W θ‖ ≤ ∑ sel : Fin k → Fin m, 1 * ‖Q sel θ‖ := by
+    have hl : 0 ≤ W θ := by
+      simp only [W, ContinuousMap.prod_apply, circleNormMap_apply]
       exact Finset.prod_nonneg fun _ _ => norm_nonneg _
-    have hr : 0 ≤ (∑ sel, N sel) θ := by
-      simp only [ContinuousMap.sum_apply, N, circleNormMap_apply]
-      exact Finset.sum_nonneg fun _ _ => norm_nonneg _
-    rw [Real.norm_of_nonneg hl, Real.norm_of_nonneg hr]
-    simp only [ContinuousMap.prod_apply, ContinuousMap.sum_apply, N, circleNormMap_apply,
+    rw [Real.norm_of_nonneg hl]
+    simp only [W, Q, one_mul, ContinuousMap.prod_apply, circleNormMap_apply,
       circleComponent_apply, norm_prod]
     calc
       _ ≤ ∏ j, ∑ i : Fin m, ‖f (a j) θ i‖ :=
@@ -49,24 +51,39 @@ theorem circle_vector_derivative_product_le
           (fun j _ => norm_pi_le_sum_norm (f (a j) θ))
       _ = _ := Fintype.prod_sum (fun (j : Fin k) (i : Fin m) => ‖f (a j) θ i‖)
   have hterm (sel : Fin k → Fin m) :
-      (eLpNorm (N sel) 2 AddCircle.haarAddCircle).toReal ≤
+      (eLpNorm (Q sel) 2 AddCircle.haarAddCircle).toReal ≤
         (k : ℝ) * R ^ (k - 1) *
           ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i) := by
-    rw [N, circle_l2_norm_map]
-    exact circle_real_selected_derivative_product_le
+    have h := circle_real_selected_derivative_product_le
       (fun i n => circleComponent (f n) i)
       (fun i => circleComponent_hasDerivAt f hderiv i) hk sel a ha hR0 hR
-  calc
-    _ ≤ (eLpNorm (∑ sel, N sel) 2 AddCircle.haarAddCircle).toReal :=
-      circle_l2_le_of_norm_le (∏ j, circleNormMap (f (a j))) (∑ sel, N sel) hpoint
-    _ ≤ ∑ sel, (eLpNorm (N sel) 2 AddCircle.haarAddCircle).toReal := circle_l2_sum_le N
-    _ ≤ ∑ _sel : Fin k → Fin m, (k : ℝ) * R ^ (k - 1) *
-        ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i) :=
-      Finset.sum_le_sum fun sel _ => hterm sel
-    _ = _ := by
-      simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fun,
-        Fintype.card_fin, nsmul_eq_mul, Nat.cast_pow]
-      ring
+    have he : (∏ j : Fin k, (circleComponent (f (a j)) (sel j) : AddCircle P → ℝ)) =
+        (Q sel : AddCircle P → ℝ) := by
+      funext θ
+      simp only [Q, Finset.prod_apply, ContinuousMap.prod_apply]
+    rw [he] at h
+    exact h
+  have hD := oneHigh_l2_finite_domination
+    (μ := AddCircle.haarAddCircle) (g := (W : AddCircle P → ℝ))
+    W.continuous.aestronglyMeasurable
+    (fun sel : Fin k → Fin m => (Q sel : AddCircle P → ℝ))
+    (fun sel => ContinuousMap.memLp (p := 2) (μ := AddCircle.haarAddCircle) ℝ (Q sel))
+    (fun _ => (1 : ℝ)) (fun _ => zero_le_one) (Filter.Eventually.of_forall hpoint)
+  have hout : (eLpNorm W 2 AddCircle.haarAddCircle).toReal ≤
+      (m : ℝ) ^ k * (k : ℝ) * R ^ (k - 1) *
+        ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i) := by
+    apply hD.2.trans
+    calc
+      _ ≤ ∑ _sel : Fin k → Fin m, (k : ℝ) * R ^ (k - 1) *
+          ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i) := by
+        apply Finset.sum_le_sum
+        intro sel _
+        simpa only [one_mul] using hterm sel
+      _ = _ := by
+        simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fun,
+          Fintype.card_fin, nsmul_eq_mul, Nat.cast_pow]
+        ring
+  simpa only [hW] using hout
 
 def circleVectorCompositionCoefficient (m s : ℕ) (R : ℝ) (B : ℕ → ℝ) : ℝ :=
   ∑ c : OrderedFinpartition s,

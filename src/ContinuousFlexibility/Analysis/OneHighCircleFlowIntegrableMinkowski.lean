@@ -20,7 +20,7 @@ variable {P : ℝ} [Fact (0 < P)]
 theorem circle_l2_intervalIntegral_le_of_integrable
     (f : ℝ → C(AddCircle P, ℝ)) {a b : ℝ} (hab : a ≤ b)
     (hf : IntervalIntegrable f volume a b) :
-    (eLpNorm (∫ t in a..b, f t) 2 AddCircle.haarAddCircle).toReal ≤
+    (eLpNorm ((∫ t in a..b, f t) : C(AddCircle P, ℝ)) 2 AddCircle.haarAddCircle).toReal ≤
       ∫ t in a..b, (eLpNorm (f t) 2 AddCircle.haarAddCircle).toReal := by
   let L : C(AddCircle P, ℝ) →L[ℝ] Lp ℝ 2 AddCircle.haarAddCircle :=
     ContinuousMap.toLp 2 AddCircle.haarAddCircle ℝ
@@ -51,7 +51,8 @@ theorem circle_real_sobolevNorm_intervalIntegral_le_of_integrable
   have heq (k : ℕ) : F k = ∫ t in a..b, f t k := by
     ext x
     have hh := (ContinuousMap.evalCLM ℝ x).intervalIntegral_comp_comm (hintegrable k)
-    have heval : (∫ t in a..b, f t k x) = (∫ t in a..b, f t k) x := by
+    have heval : (∫ t in a..b, f t k x) =
+        ((∫ t in a..b, f t k) : C(AddCircle P, ℝ)) x := by
       simpa only [ContinuousMap.evalCLM_apply] using hh
     exact (hidentity k x).trans heval
   have hL2 (k : ℕ) (hks : k ≤ s) :
@@ -65,7 +66,7 @@ theorem circle_real_sobolevNorm_intervalIntegral_le_of_integrable
         (fun t => (eLpNorm (f t k) 2 AddCircle.haarAddCircle).toReal) volume a b := by
       simpa only [L, circle_norm_toLp] using hI.norm
     calc
-      _ = (eLpNorm (∫ t in a..b, f t k) 2 AddCircle.haarAddCircle).toReal := by rw [heq k]
+      _ = (eLpNorm ((∫ t in a..b, f t k) : C(AddCircle P, ℝ)) 2 AddCircle.haarAddCircle).toReal := by rw [heq k]
       _ ≤ ∫ t in a..b, (eLpNorm (f t k) 2 AddCircle.haarAddCircle).toReal :=
         circle_l2_intervalIntegral_le_of_integrable (fun t => f t k) hab (hintegrable k)
       _ ≤ ∫ t in a..b, circleRealSobolevNorm (s : ℝ) (f t 0) :=

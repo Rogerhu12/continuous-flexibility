@@ -75,8 +75,15 @@ theorem cylinder_enorm_weighted_convolution_le (a q : ℝ) (s : ℕ)
     (continuous_cylinderFrequencyWeight a q).measurable.ennreal_ofReal.pow_const s
   have hshift : Measurable (fun η : ℝ × ℤ => -η + ζ) := measurable_neg.add measurable_const
   have hbase := hF.enorm.mul (hG.enorm.comp hshift)
-  have hleft := (hw.mul hF.enorm).mul (hG.enorm.comp hshift)
-  have hright := hF.enorm.mul ((hw.comp hshift).mul (hG.enorm.comp hshift))
+  have hleft : Measurable (fun η => (w η * ‖F η‖ₑ) * ‖G (-η + ζ)‖ₑ) := by
+    simpa only [Pi.mul_def, Function.comp_def] using
+      (hw.mul hF.enorm).mul (hG.enorm.comp hshift)
+  have hright : Measurable (fun η => ‖F η‖ₑ * (w (-η + ζ) * ‖G (-η + ζ)‖ₑ)) := by
+    simpa only [Pi.mul_def, Function.comp_def] using
+      hF.enorm.mul ((hw.comp hshift).mul (hG.enorm.comp hshift))
+  have hsum : Measurable (fun η => (w η * ‖F η‖ₑ) * ‖G (-η + ζ)‖ₑ +
+      ‖F η‖ₑ * (w (-η + ζ) * ‖G (-η + ζ)‖ₑ)) := by
+    simpa only [Pi.add_def] using hleft.add hright
   rw [cylinder_enorm_frequencyWeighted_nat]
   apply (mul_le_mul_of_nonneg_left
     (enorm_complexConvolution_le (μ := cylinderFrequencyMeasure) F G ζ) (by positivity)).trans
@@ -97,7 +104,7 @@ theorem cylinder_enorm_weighted_convolution_le (a q : ℝ) (s : ℕ)
           mul_le_mul_of_nonneg_right hweight (by positivity)
         _ = _ := by ring
     _ = _ := by
-      rw [lintegral_const_mul'' _ (hleft.add hright).aemeasurable,
+      rw [lintegral_const_mul'' _ hsum.aemeasurable,
         lintegral_add_left' hleft.aemeasurable]
 
 /-- The genuine weighted mixed convolution satisfies the binary Young
@@ -141,7 +148,7 @@ theorem cylinder_eLpNorm_weighted_convolution_le (a q : ℝ) (s : ℕ)
         2 cylinderFrequencyMeasure * eLpNorm G 1 cylinderFrequencyMeasure := by
     have h := lconvolution_eLpNorm_two_le' (μ := cylinderFrequencyMeasure)
       (hw.mul hF.enorm).aemeasurable hG.enorm.aemeasurable
-    simpa only [A, cylinder_eLpNorm_weighted_enorm a q s F hF,
+    simpa only [Pi.mul_def, Function.comp_def, A, cylinder_eLpNorm_weighted_enorm a q s F hF,
       eLpNorm_enorm G hG.aestronglyMeasurable] using h
   have hB : eLpNorm B 2 cylinderFrequencyMeasure ≤
       eLpNorm F 1 cylinderFrequencyMeasure *
@@ -149,7 +156,7 @@ theorem cylinder_eLpNorm_weighted_convolution_le (a q : ℝ) (s : ℕ)
           2 cylinderFrequencyMeasure := by
     have h := lconvolution_eLpNorm_two_le (μ := cylinderFrequencyMeasure)
       hF.enorm.aemeasurable (hw.mul hG.enorm).aemeasurable
-    simpa only [B, cylinder_eLpNorm_weighted_enorm a q s G hG,
+    simpa only [Pi.mul_def, Function.comp_def, B, cylinder_eLpNorm_weighted_enorm a q s G hG,
       eLpNorm_enorm F hF.aestronglyMeasurable] using h
   exact hscaled.trans (mul_le_mul_of_nonneg_left
     ((eLpNorm_add_le (f := A) (g := B) (p := (2 : ℝ≥0∞)) (μ := cylinderFrequencyMeasure)

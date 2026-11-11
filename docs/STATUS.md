@@ -5,14 +5,18 @@ Last updated: 2026-11-11.
 ## Active line: Tool-OneHighFactor
 
 `line/Tool-OneHighFactor` implements Lemmas 7.2 and 7.3. This tool task is
-not yet complete. CI has compiled weighted Fourier interpolation, the actual
-circle Parseval and derivative identities, the infinite Fourier product
-formula, and the integrating-factor and variational formulas. Smooth angular
-dependence and interior joint smoothness are derived from the classical time
-ODE; they are not assumptions on the final flow statements. The next proof
-groups connect actual derivative products to Sobolev norms, prove uniform
-smooth composition, and establish cylinder Fourier inversion and circle-flow
-norm bounds. Full composition, inversion, and flow estimates remain required.
+not yet complete. CI has compiled the actual circle and cylinder Fourier
+identities and inversion, finite-Sobolev control of actual cylinder derivatives,
+the ordinary smooth-input jet constructor, scalar circle composition, and
+the derivation of angular flow regularity from the classical time ODE.
+The full arbitrary-arity cylinder product and scalar/multivariable composition
+assemblies are now written. Validation is continuing through the remaining
+composition, inverse, cutoff-limit, and closed-time flow estimates. Completion
+requires the entire default build and axiom audit at the final commit.
+
+The derivative-product clause now explicitly states positive arity `k >= 1`.
+This makes its standard nonempty-product convention unambiguous: an empty
+product would be the constant one while the displayed high-factor sum is zero.
 
 The stated dependence in Lemma 7.2(iii) is false. For the fixed circle input
 `v = 1`, the globally smooth functions `Phi_M(x) = M * (2*x - x^2)` have

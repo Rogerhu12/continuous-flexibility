@@ -32,7 +32,7 @@ theorem oneHigh_exists_common_subsequence [Fintype ι] [PseudoEMetricSpace E]
     induction t using Finset.induction_on with
     | empty =>
       refine ⟨id, strictMono_id, Eventually.of_forall (fun x i hi => ?_)⟩
-      simp only [Finset.not_mem_empty] at hi
+      simp at hi
     | @insert i t hit ih =>
       obtain ⟨ns, hns, hns_lim⟩ := ih
       obtain ⟨ms, hms, hms_lim⟩ :=

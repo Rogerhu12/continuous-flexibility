@@ -38,16 +38,10 @@ theorem circle_vector_composition_derivative_l2_le
   let f := periodicCircleJet v hp hv
   let w := periodicCircleJet (fun x => Φ (v x) - Φ 0)
     (periodic_sub_base_comp hp Φ) (contDiff_sub_base_comp hv hΦ)
-  let N (c : OrderedFinpartition s) : C(AddCircle P, ℝ) :=
-    B c.length • ∏ j, circleNormMap (f (c.partSize j))
-  have hN (c : OrderedFinpartition s) (θ : AddCircle P) : 0 ≤ N c θ := by
-    simp only [N, ContinuousMap.smul_apply, smul_eq_mul,
-      ContinuousMap.prod_apply, circleNormMap_apply]
-    exact mul_nonneg (hB0 c.length) (Finset.prod_nonneg fun _ _ => norm_nonneg _)
-  have hpoint (θ : AddCircle P) : ‖w s θ‖ ≤ ‖(∑ c, N c) θ‖ := by
-    have hn : 0 ≤ (∑ c, N c) θ := by
-      simpa only [ContinuousMap.sum_apply] using Finset.sum_nonneg (fun c _ => hN c θ)
-    rw [Real.norm_of_nonneg hn]
+  let Q (c : OrderedFinpartition s) : C(AddCircle P, ℝ) :=
+    ∏ j, circleNormMap (f (c.partSize j))
+  have hpoint (θ : AddCircle P) :
+      ‖w s θ‖ ≤ ∑ c : OrderedFinpartition s, B c.length * ‖Q c θ‖ := by
     refine QuotientAddGroup.induction_on θ ?_
     intro x
     have hsub : iteratedDeriv s (fun y => Φ (v y) - Φ 0) x =
@@ -57,24 +51,31 @@ theorem circle_vector_composition_derivative_l2_le
     have hc := norm_iteratedFDeriv_comp_le_bounded_partition_sum
       (hΦ x) hv.contDiffAt hs (hB x)
     simp_rw [norm_iteratedFDeriv_eq_norm_iteratedDeriv] at hc
-    simpa only [w, f, N, periodicCircleJet_coe_apply, hsub,
-      ContinuousMap.sum_apply, ContinuousMap.smul_apply, smul_eq_mul,
-      ContinuousMap.prod_apply, circleNormMap_apply] using hc
+    simpa only [w, f, Q, periodicCircleJet_coe_apply, hsub,
+      ContinuousMap.prod_apply, circleNormMap_apply, norm_prod, norm_norm] using hc
   have hprod (c : OrderedFinpartition s) :
-      (eLpNorm (∏ j, circleNormMap (f (c.partSize j))) 2 AddCircle.haarAddCircle).toReal ≤
+      (eLpNorm (Q c) 2 AddCircle.haarAddCircle).toReal ≤
         (m : ℝ) ^ c.length * (c.length : ℝ) * R ^ (c.length - 1) *
-          ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i) :=
-    circle_vector_derivative_product_le f (periodicCircleJet_hasDerivAt v hp hv)
+          ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i) := by
+    have h := circle_vector_derivative_product_le f (periodicCircleJet_hasDerivAt v hp hv)
       (c.length_pos hs) c.partSize (oneHighPartition_sum_orders c).le hR0 hR
+    have he : (∏ j : Fin c.length,
+        (circleNormMap (f (c.partSize j)) : AddCircle P → ℝ)) =
+        (Q c : AddCircle P → ℝ) := by
+      funext θ
+      simp only [Q, Finset.prod_apply, ContinuousMap.prod_apply]
+    rw [he] at h
+    exact h
+  have hD := oneHigh_l2_finite_domination
+    (μ := AddCircle.haarAddCircle) (g := (w s : AddCircle P → ℝ))
+    (w s).continuous.aestronglyMeasurable
+    (fun c : OrderedFinpartition s => (Q c : AddCircle P → ℝ))
+    (fun c => ContinuousMap.memLp (p := 2) (μ := AddCircle.haarAddCircle) ℝ (Q c))
+    (fun c => B c.length) (fun c => hB0 c.length)
+    (Filter.Eventually.of_forall hpoint)
   calc
-    _ ≤ (eLpNorm (∑ c, N c) 2 AddCircle.haarAddCircle).toReal :=
-      circle_l2_le_of_norm_le (w s) (∑ c, N c) hpoint
-    _ ≤ ∑ c, (eLpNorm (N c) 2 AddCircle.haarAddCircle).toReal := circle_l2_sum_le N
-    _ = ∑ c : OrderedFinpartition s, B c.length *
-        (eLpNorm (∏ j, circleNormMap (f (c.partSize j))) 2 AddCircle.haarAddCircle).toReal := by
-      apply Finset.sum_congr rfl
-      intro c _
-      exact circle_l2_const_smul _ (hB0 c.length)
+    _ ≤ ∑ c : OrderedFinpartition s, B c.length *
+        (eLpNorm (Q c) 2 AddCircle.haarAddCircle).toReal := hD.2
     _ ≤ ∑ c : OrderedFinpartition s, B c.length *
         ((m : ℝ) ^ c.length * (c.length : ℝ) * R ^ (c.length - 1) *
           ∑ i, circleRealSobolevNorm (s : ℝ) (circleComponent (f 0) i)) :=
@@ -144,8 +145,7 @@ theorem circle_vector_composition_sobolev_le
   have hbase' := hbase.trans (mul_le_mul_of_nonneg_left hinput (hB0 1))
   by_cases hs : s = 0
   · subst s
-    simpa only [circleVectorCompositionConstant, if_pos rfl, Nat.cast_zero,
-      circle_real_sobolevNorm_zero_eq_l2] using hbase'
+    simpa [circleVectorCompositionConstant, circle_real_sobolevNorm_zero_eq_l2] using hbase'
   · have hspos : 0 < s := Nat.pos_of_ne_zero hs
     have hhigh := circle_vector_composition_derivative_l2_le v Φ hp hv hΦv hspos hR0 hB0
       (fun x k hk hks => hB (v x) (hvin x) k hk (hks.trans (le_max_right _ _))) hR

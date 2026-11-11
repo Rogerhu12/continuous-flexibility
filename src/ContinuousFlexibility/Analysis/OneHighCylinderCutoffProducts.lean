@@ -85,17 +85,17 @@ theorem cylinder_cutoff_derivative_product_oneHigh (k s N : ℕ)
     rw [← ENNReal.ofReal_one]
     exact ENNReal.ofReal_le_ofReal (cylinderFrequencyWeight_one_le _ _ ζ)
   have h := cylinder_inverse_product_oneHigh (P := P) k s
-    (fun i => measurable_cylinderFrequencyCutoffJet (hF i) N (a i) (b i))
+    (fun i => measurable_cylinderFrequencyCutoffJet (P := P) (hF i) N (a i) (b i))
     (fun i => memLp_one_iff_integrable.mpr
-      (integrable_cylinderFrequencyCutoffJet (hF i)
+      (integrable_cylinderFrequencyCutoffJet (P := P) (hF i)
         (memLp_one_iff_integrable.mp (hF1 i)) N (a i) (b i)))
-    (fun i => cylinderFrequencyCutoffJet_memLp_two (hF i) (hF2 i) N (a i) (b i))
+    (fun i => cylinderFrequencyCutoffJet_memLp_two (P := P) (hF i) (hF2 i) N (a i) (b i))
     hw hw1 (fun i => (hF i).enorm) (fun i => a i + b i) hab
-    (fun i ζ => enorm_cylinderFrequencyCutoffJet_le_weight N (a i) (b i) (F i) ζ)
+    (fun i ζ => enorm_cylinderFrequencyCutoffJet_le_weight (P := P) N (a i) (b i) (F i) ζ)
   refine ⟨h.1, h.2.trans_eq ?_⟩
   apply Finset.sum_congr rfl
   intro j _
-  rw [cylinder_eLpNorm_weighted_enorm s (F j) (hF j).aestronglyMeasurable 2]
+  rw [cylinder_eLpNorm_weighted_enorm (P := P) s (F j) (hF j).aestronglyMeasurable 2]
   congr 1
   apply Finset.prod_congr rfl
   intro i _

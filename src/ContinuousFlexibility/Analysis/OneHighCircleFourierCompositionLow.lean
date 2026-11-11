@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.OneHighCircleFourierChangeVariables
 import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
 import ContinuousFlexibility.Analysis.OneHighCompositionJets
+import ContinuousFlexibility.Analysis.OneHighL2Domination
 import Mathlib.Topology.ContinuousMap.Lattice
 
 /-!
@@ -81,25 +82,12 @@ private theorem circle_l2_le_weighted_sum {ι : Type*} [Fintype ι]
     (hpoint : ∀ θ, ‖f θ‖ ≤ ∑ i, b i * ‖g i θ‖) :
     (eLpNorm f 2 AddCircle.haarAddCircle).toReal ≤
       ∑ i, b i * (eLpNorm (g i) 2 AddCircle.haarAddCircle).toReal := by
-  classical
-  let A : ι → C(AddCircle P, ℝ) := fun i => b i • |g i|
-  have hsum (θ : AddCircle P) : 0 ≤ (∑ i, A i) θ := by
-    simp only [ContinuousMap.sum_apply, A, ContinuousMap.smul_apply,
-      ContinuousMap.abs_apply, smul_eq_mul]
-    exact Finset.sum_nonneg (fun i _ => mul_nonneg (hb i) (abs_nonneg _))
-  have hdom (θ : AddCircle P) : ‖f θ‖ ≤ ‖(∑ i, A i) θ‖ := by
-    rw [Real.norm_of_nonneg (hsum θ)]
-    simpa only [ContinuousMap.sum_apply, A, ContinuousMap.smul_apply,
-      ContinuousMap.abs_apply, smul_eq_mul, Real.norm_eq_abs] using hpoint θ
-  have hterm (i : ι) : (eLpNorm (A i) 2 AddCircle.haarAddCircle).toReal =
-      b i * (eLpNorm (g i) 2 AddCircle.haarAddCircle).toReal := by
-    dsimp only [A]
-    rw [circle_l2_const_smul _ (hb i), circle_l2_abs]
-  calc
-    _ ≤ (eLpNorm (∑ i, A i) 2 AddCircle.haarAddCircle).toReal :=
-      circle_l2_le_of_norm_le f (∑ i, A i) hdom
-    _ ≤ ∑ i, (eLpNorm (A i) 2 AddCircle.haarAddCircle).toReal := circle_l2_sum_le A
-    _ = _ := Finset.sum_congr rfl (fun i _ => hterm i)
+  exact (oneHigh_l2_finite_domination
+    (μ := AddCircle.haarAddCircle) (g := (f : AddCircle P → ℝ))
+    f.continuous.aestronglyMeasurable
+    (fun i => (g i : AddCircle P → ℝ))
+    (fun i => ContinuousMap.memLp (p := 2) (μ := AddCircle.haarAddCircle) ℝ (g i))
+    b hb (Filter.Eventually.of_forall hpoint)).2
 
 /-- An actual outer derivative, composed with the lift, is controlled by
 change of variables and the original finite Sobolev norm. -/

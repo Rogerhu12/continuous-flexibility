@@ -74,10 +74,12 @@ theorem circleFlow_deriv_bounds_sobolev {G Θ : PolarPoint → ℝ} {a b : ℝ}
       deriv (fun η => Θ (t, η)) θ ≤
         Real.exp (circleFlowEmbeddingConstant P * circleFlowLambda G hG hperiod 1 a b) := by
   have hB : Continuous (fun r => circleFlowEmbeddingConstant P *
-      circleRealSobolevNorm 1 (circleFlowSpeedJet G hG hperiod r 1)) :=
-    continuous_const.mul (continuous_circleFlowSpeedSobolevNorm G hG hperiod 1 1)
+      circleRealSobolevNorm 1 (circleFlowSpeedJet G hG hperiod r 1)) := by
+    apply continuous_const.mul
+    simpa only [Nat.cast_one] using
+      continuous_circleFlowSpeedSobolevNorm G hG hperiod 1 1
   have hbound := circleFlow_deriv_bounds hG hP.out hperiod hΘ hinit hflow
     hB.continuousOn (fun r _ η => circleFlow_angularSpeed_le_h1 G hG hperiod r η) ht θ
-  simpa only [circleFlowLambda, intervalIntegral.integral_const_mul] using hbound
+  simpa only [circleFlowLambda, Nat.cast_one, intervalIntegral.integral_const_mul] using hbound
 
 end ContinuousFlexibility.Analysis
