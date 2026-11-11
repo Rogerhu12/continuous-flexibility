@@ -158,6 +158,14 @@ theorem iteratedFDeriv_compactIntegral_parameter
       exact ((continuousMultilinearCurryFin0 ℝ P F).symm.toContinuousLinearEquiv.integral_comp_comm
         (fun x => f (p, x))).symm
   | succ s hs =>
+      letI : NormedAddCommGroup (P [×s]→L[ℝ] F) :=
+        ContinuousMultilinearMap.normedAddCommGroup
+      letI : NormedSpace ℝ (P [×s]→L[ℝ] F) :=
+        ContinuousMultilinearMap.normedSpace
+      letI : NormedAddCommGroup (P →L[ℝ] P [×s]→L[ℝ] F) :=
+        ContinuousLinearMap.toNormedAddCommGroup
+      letI : NormedSpace ℝ (P →L[ℝ] P [×s]→L[ℝ] F) :=
+        ContinuousLinearMap.toNormedSpace
       have heq : iteratedFDeriv ℝ s (fun q => ∫ x in K, f (q, x) ∂μ) =ᶠ[𝓝 p]
           (fun q => ∫ x in K, iteratedFDeriv ℝ s (fun q => f (q, x)) q ∂μ) := by
         filter_upwards [hO.mem_nhds hp] with q hq using hs hq

@@ -58,9 +58,9 @@ theorem hasDerivAt_normalizedHeightResidual_state
         polarResidualVariation_heightFamily_direction w z hu hη hr]
       ring
     rw [heq, heightLinearizedDivergence_eq_variation hw hz hη hr hD]
-    simpa only [Pi.add_apply, id_eq, one_mul, zero_add] using
-      (hasDerivAt_const 0 (x.1 * polarResidualVariation w z u x)).add
-        ((hasDerivAt_id 0).mul_const (x.1 * polarResidualVariation w z η x))
+    simpa only [id_eq, one_mul] using
+      ((hasDerivAt_id 0).mul_const (x.1 * polarResidualVariation w z η x)).const_add
+        (x.1 * polarResidualVariation w z u x)
   · have hf := hasDerivAt_radialScaledResidual_divergence hw
       (contDiff_heightFamily hz hu q) hη hr hD
     have hf' : HasDerivAt
