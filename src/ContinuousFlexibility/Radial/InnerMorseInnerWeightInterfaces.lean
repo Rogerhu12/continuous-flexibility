@@ -165,14 +165,18 @@ theorem innerMorseInnerWeight_actual_gap_data (g : Fin (2 * K + 2)) :
     exact innerMorseInnerWeight_on_gap N K a γ G C.leftWall C.rightWall g
       ⟨hx.1, hx.2.le⟩
   · intro hleft
-    simpa only [innerMorseInnerInterfaceWeight] using
-      (innerChainScalarRestriction_full_left (2 * (2 * K + 1)) (innerModelChainGap g)
-        (innerMorseInnerCutWeight N K a γ) hleft).trans
-          (innerMorseInnerCutWeight_gap N K a γ g)
+    change innerChainScalarRestriction (2 * (2 * K + 1)) (innerModelChainGap g)
+        (fun i => innerMorseInnerCutWeight N K a γ i.castSucc.succ) 1 0 =
+      innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ
+    exact (innerChainScalarRestriction_full_left (2 * (2 * K + 1)) (innerModelChainGap g)
+      (innerMorseInnerCutWeight N K a γ) hleft).trans
+        (innerMorseInnerCutWeight_gap N K a γ g)
   · intro hright
-    simpa only [innerMorseInnerInterfaceWeight] using
-      innerChainScalarRestriction_full_right (2 * (2 * K + 1)) (innerModelChainGap g)
-        (innerMorseInnerCutWeight N K a γ) hright
+    change innerChainScalarRestriction (2 * (2 * K + 1)) (innerModelChainGap g)
+        (fun i => innerMorseInnerCutWeight N K a γ i.castSucc.succ) 1 1 =
+      innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ
+    exact innerChainScalarRestriction_full_right (2 * (2 * K + 1)) (innerModelChainGap g)
+      (innerMorseInnerCutWeight N K a γ) hright
 
 end ActualChain
 

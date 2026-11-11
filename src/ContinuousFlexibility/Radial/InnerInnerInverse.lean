@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.InnerSelectedInnerInverse
+import ContinuousFlexibility.Radial.InnerSelectedPhysicalConvention
 import ContinuousFlexibility.Radial.PositiveBufferR09
 
 /-!
@@ -34,7 +35,7 @@ theorem innerMorsePhysicalFamily_at_selected
 proved R09 theorem. The remaining quantified geometry consists only
 of the actual selected profile, charts, cuts, and positive connectors.
 
-The fixed localized loss in InnerSelectedInverseStatement is 37. Its
+The fixed localized loss in InnerSelectedPhysicalConventionStatement is 37. Its
 single inverse precedes every allowed gamma and both weight signs. -/
 theorem inner_inverse {a : ℝ} (ha : 0 ≤ a) :
     ∃ CM KM CC KC Cstar : ℝ,
@@ -54,7 +55,7 @@ theorem inner_inverse {a : ℝ} (ha : 0 ≤ a) :
                 ∀ (S : SelectedTailData) (D : ReferenceData)
                   (P : InnerSelectedPhysicalGeometry S D X₀)
                   (hCstar : S.Cstar = Cstar) (hindex : S.chain.index = N),
-                  ∃ C : ℝ, 0 < C ∧ InnerSelectedInverseStatement P hCentralFamily
+                  ∃ C : ℝ, 0 < C ∧ InnerSelectedPhysicalConventionStatement P hCentralFamily
                     (innerMorsePhysicalFamily_at_selected hMorseFamily S hCstar hindex)
                     hX hsupport C := by
   obtain ⟨CM, KM, CC, KC, hCM, hKM, hCC, hKC, Cstar, hCstar, hthreshold, hchoices⟩ :=
@@ -79,9 +80,12 @@ theorem inner_inverse {a : ℝ} (ha : 0 ≤ a) :
   have hNa : 64 * a ≤ (S.chain.index : ℝ) := by
     rw [hSindex]
     exact hweight.trans (by exact_mod_cast hNfloor)
-  exact P.exists_innerInverseStatement hCentralFamily
+  obtain ⟨C, hC, hstatement⟩ := P.exists_innerInverseStatement hCentralFamily
     (innerMorsePhysicalFamily_at_selected hMorseFamily S hSCstar hSindex)
     hX hsupport ha hN hNa hCC.le hCM (by norm_num) (by norm_num)
+  exact ⟨C, hC, innerSelectedInverseStatement_physicalConvention P hCentralFamily
+    (innerMorsePhysicalFamily_at_selected hMorseFamily S hSCstar hSindex)
+    hX hsupport hstatement⟩
 
 /-- info: 'ContinuousFlexibility.Radial.inner_inverse' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in

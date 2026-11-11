@@ -25,10 +25,25 @@ def innerModelChainGapOfCut {m : ℕ} (i : Fin (2 * m)) : Fin (m + 1) :=
 theorem innerModelChainGapOfCut_fiber {m : ℕ} (g : Fin (m + 1)) :
     Finset.univ.filter (fun i : Fin (2 * m) => innerModelChainGapOfCut i = g) =
       innerChainPieceCuts (2 * m) (innerModelChainGap g) := by
-  ext i
-  simp only [innerChainPieceCuts, Finset.mem_filter, Finset.mem_univ, true_and,
-    innerModelChainGapOfCut, innerModelChainGap, Fin.ext_iff]
-  omega
+  apply Finset.ext
+  intro i
+  constructor
+  · intro hi
+    have hlabel := (Finset.mem_filter.mp hi).2
+    have hval := congrArg Fin.val hlabel
+    change (i.val + 1) / 2 = g.val at hval
+    apply Finset.mem_filter.mpr
+    refine ⟨Finset.mem_univ _, ?_⟩
+    change i.val = 2 * g.val ∨ i.val + 1 = 2 * g.val
+    omega
+  · intro hi
+    have hval : i.val = 2 * g.val ∨ i.val + 1 = 2 * g.val :=
+      (Finset.mem_filter.mp hi).2
+    apply Finset.mem_filter.mpr
+    refine ⟨Finset.mem_univ _, ?_⟩
+    apply Fin.ext
+    change (i.val + 1) / 2 = g.val
+    rcases hval with hval | hval <;> omega
 
 /-- This counts the actual cut variables in each reference block. -/
 theorem innerModelChainGapOfCut_card_le_two {m : ℕ} (g : Fin (m + 1)) :
