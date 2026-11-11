@@ -22,15 +22,18 @@ private theorem exp_neg_log_two : exp (-log (2 : ℝ)) = 1 / 2 := by
   rw [exp_neg, exp_log (by norm_num : (0 : ℝ) < 2)]
   norm_num
 
+private theorem outer_exp_two (x : ℝ) : exp (-2 * x) = exp (-x) ^ 2 := by
+  rw [show -2 * x = -x + -x by ring, exp_add, pow_two]
+
 theorem morseRho_at_peak (A B : ℝ) : morseRho A B (log 2) = A / 4 - B := by
-  rw [morseRho, morse_exp_two, exp_neg_log_two]
+  rw [morseRho, outer_exp_two, exp_neg_log_two]
   ring
 
 theorem morseRho_le_peak {A : ℝ} (hA : 0 ≤ A) (B x : ℝ) :
     morseRho A B x ≤ A / 4 - B := by
   have h := mul_nonneg hA (sq_nonneg (exp (-x) - 1 / 2))
   unfold morseRho
-  rw [morse_exp_two]
+  rw [outer_exp_two]
   nlinarith only [h]
 
 theorem morseRho_monotoneOn_left {A B : ℝ} (hA : 0 ≤ A) :
@@ -45,7 +48,7 @@ theorem morseRho_monotoneOn_left {A B : ℝ} (hA : 0 ≤ A) :
   have hpoly : exp (-x) - exp (-x) ^ 2 ≤ exp (-y) - exp (-y) ^ 2 := by
     nlinarith only [hprod]
   unfold morseRho
-  simp only [morse_exp_two]
+  simp only [outer_exp_two]
   exact sub_le_sub_right (mul_le_mul_of_nonneg_left hpoly hA) B
 
 theorem morseRho_antitoneOn_right {A B : ℝ} (hA : 0 ≤ A) :
@@ -60,7 +63,7 @@ theorem morseRho_antitoneOn_right {A B : ℝ} (hA : 0 ≤ A) :
   have hpoly : exp (-y) - exp (-y) ^ 2 ≤ exp (-x) - exp (-x) ^ 2 := by
     nlinarith only [hprod]
   unfold morseRho
-  simp only [morse_exp_two]
+  simp only [outer_exp_two]
   exact sub_le_sub_right (mul_le_mul_of_nonneg_left hpoly hA) B
 
 theorem morse_peak_between_turns {A B : ℝ} (hB : 0 < B) (hAB : 4 * B < A) :
@@ -136,7 +139,7 @@ theorem morse_negative_endpoint_energy {A B j : ℝ} (hB : 0 < B)
     rw [abs_of_nonneg hI₀, intervalIntegral.integral_add
       (continuous_const.intervalIntegrable l r) (hqc.intervalIntegrable_of_Icc hlr),
       intervalIntegral.integral_const, smul_eq_mul, mul_one]
-    exact add_le_add_left (morse_negative_integral_log_le hB hAB j) (r - l)
+    exact add_le_add le_rfl (morse_negative_integral_log_le hB hAB j)
   have hleft : morseRho A B l = 0 :=
     (morseRho_zero_iff_turn hB hAB l).mpr (Or.inl rfl)
   have hright : morseRho A B r = 0 :=
@@ -182,7 +185,7 @@ theorem morse_right_cap_balanced_product {A B c : ℝ} (hB : 0 < B)
     _ ≤ (r - l) * ((r - l) * B) := mul_le_mul_of_nonneg_left hI hlen₀
     _ ≤ (r - l) * ((r - l) * A ^ 9) :=
       mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hBA hlen₀) hlen₀
-    _ = c ^ 2 * A := by rw [hlength]; field_simp [hA.ne']; ring
+    _ = c ^ 2 * A := by rw [hlength]; field_simp [hA.ne']
 
 /-- The short left cap has uniformly bounded model length and a coefficient
 of size `A`, so it has the same cap-action scale as the long cap. -/
@@ -215,7 +218,7 @@ theorem morse_left_cap_balanced_product {A B : ℝ} (hB : 0 < B)
     have hupper := mul_le_mul_of_nonneg_left he₂ hA.le
     have hpositive := mul_nonneg hA.le (exp_pos (-x)).le
     unfold morseRho
-    rw [morse_exp_two]
+    rw [outer_exp_two]
     nlinarith only [hupper, hpositive, hAB, hA]
   have hρc : Continuous (morseRho A B) :=
     continuous_iff_continuousAt.mpr fun x => (hasDerivAt_morseRho A B x).continuousAt

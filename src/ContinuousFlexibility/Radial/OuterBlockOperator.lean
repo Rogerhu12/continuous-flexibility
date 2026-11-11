@@ -36,7 +36,7 @@ def outerBlockMatrix (A : E →L[ℝ] E) (B : F →L[ℝ] E)
 theorem outerBlockMatrix_apply (A : E →L[ℝ] E) (B : F →L[ℝ] E)
     (C : E →L[ℝ] F) (D : F →L[ℝ] F) (x : E × F) :
     outerBlockMatrix A B C D x = (A x.1 + B x.2, C x.1 + D x.2) := by
-  simp only [outerBlockMatrix, prod_apply, add_apply, comp_apply, fst_apply, snd_apply]
+  simp only [outerBlockMatrix, prod_apply, add_apply, comp_apply, coe_fst', coe_snd']
 
 private theorem norm_comp_fst_le {G : Type*} [NormedAddCommGroup G]
     [NormedSpace ℝ G] (A : E →L[ℝ] G) : ‖A.comp (fst ℝ E F)‖ ≤ ‖A‖ := by
@@ -107,11 +107,12 @@ theorem norm_outerBlockOperator_le_rows (C : E →L[ℝ] E) (D : F →L[ℝ] F)
     (alpha • rankOne ℝ p u) (D + beta • rankOne ℝ p p)
   dsimp only [outerBlockOperator]
   refine h.trans (max_le_max ?_ ?_)
-  · simp only [norm_smul, Real.norm_eq_abs, norm_rankOne]
+  · simpa only [norm_smul, Real.norm_eq_abs, norm_rankOne] using
+      (le_refl (‖C‖ + |alpha| * (‖u‖ * ‖p‖)))
   · calc
       ‖alpha • rankOne ℝ p u‖ + ‖D + beta • rankOne ℝ p p‖
           ≤ ‖alpha • rankOne ℝ p u‖ + (‖D‖ + |beta| * ‖p‖ ^ 2) :=
-        add_le_add_left hD _
+        add_le_add le_rfl hD
       _ = _ := by rw [norm_smul, Real.norm_eq_abs, norm_rankOne]; ring
 
 /-- The factors `√λ` on the two sides cancel the kernel factor `λ⁻¹`. -/
