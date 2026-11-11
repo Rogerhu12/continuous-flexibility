@@ -95,8 +95,11 @@ theorem n05CanonicalRadialCutoffFunction_eventually_one {a b r : ℝ}
 
 theorem n05CanonicalRadialCutoffFunction_tendsto {a b r : ℝ}
     (hr : r ∈ Ioo a b) :
-    Tendsto (fun n => n05CanonicalRadialCutoffFunction a b n r) atTop (𝓝 1) :=
-  tendsto_const_nhds.congr' (n05CanonicalRadialCutoffFunction_eventually_one hr).symm
+    Tendsto (fun n => n05CanonicalRadialCutoffFunction a b n r) atTop (𝓝 1) := by
+  have heq : (fun n => n05CanonicalRadialCutoffFunction a b n r) =ᶠ[atTop]
+      (fun _ : ℕ => (1 : ℝ)) :=
+    n05CanonicalRadialCutoffFunction_eventually_one hr
+  exact tendsto_const_nhds.congr' heq.symm
 
 def n05CanonicalRadialCutoffOperator (S : PhysicalSpacesData) (K : CanonicalData S)
     (m n : ℕ) : CanonicalL2 S K m →L[ℝ] CanonicalL2 S K m :=
@@ -115,6 +118,7 @@ theorem n05CanonicalRadialCutoffOperator_ae (S : PhysicalSpacesData) (K : Canoni
 theorem n05CanonicalRadialCutoffOperator_norm_le (S : PhysicalSpacesData)
     (K : CanonicalData S) (m n : ℕ) (u : CanonicalL2 S K m) :
     ‖n05CanonicalRadialCutoffOperator S K m n u‖ ≤ ‖u‖ := by
+  unfold n05CanonicalRadialCutoffOperator
   simpa only [one_mul] using n05CanonicalRadialMultiply_norm_le S K m
     (n05CanonicalRadialCutoffFunction (K.left m) (K.right m) n)
     (n05CanonicalRadialCutoffFunction_contDiff _ _ n).continuous 1

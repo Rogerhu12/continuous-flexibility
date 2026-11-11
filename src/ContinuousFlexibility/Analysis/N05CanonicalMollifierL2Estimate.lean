@@ -68,8 +68,13 @@ theorem n05_weighted_integral_sq_le {α : Type*} [MeasurableSpace α] {μ : Meas
         filter_upwards [] with x
         ring
       _ = _ := by
-        rw [integral_add (hr₂.sub (hr.const_mul (2 * a))) (hκ.const_mul (a ^ 2)),
-          integral_sub hr₂ (hr.const_mul (2 * a)), integral_const_mul, integral_const_mul]
+        have hlinear : Integrable (fun x => (2 * a) * (κ x * r x)) μ :=
+          hr.const_mul (2 * a)
+        have hsub : Integrable
+            (fun x => κ x * r x ^ 2 - (2 * a) * (κ x * r x)) μ :=
+          hr₂.sub hlinear
+        rw [integral_add hsub (hκ.const_mul (a ^ 2)),
+          integral_sub hr₂ hlinear, integral_const_mul, integral_const_mul]
   have hn : 0 ≤ ∫ x, κ x * (r x - a) ^ 2 ∂μ :=
     integral_nonneg (fun x => mul_nonneg (hnon x) (sq_nonneg _))
   rw [he, hmass] at hn

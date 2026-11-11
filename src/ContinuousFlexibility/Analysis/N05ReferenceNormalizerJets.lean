@@ -83,6 +83,8 @@ theorem n05_physicalNormalizer_weak_angularJet
     exact (n05_physicalNormalizer_contDiff hS).comp
       (contDiff_const.prodMk contDiff_id)
   · intro r θ
+    change (S.height (3 / 4 : ℝ)).decode S.psi (r, θ + 2 * Real.pi) =
+      (S.height (3 / 4 : ℝ)).decode S.psi (r, θ)
     have hp (x : ℝ) : (S.height (3 / 4 : ℝ)).decode S.psi (r, x + Real.pi) =
         (S.height (3 / 4 : ℝ)).decode S.psi (r, x) := by
       simpa only [Prod.mk_add_mk, add_zero] using hψ.2.2.1 (r, x)
