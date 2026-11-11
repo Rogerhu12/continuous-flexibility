@@ -65,7 +65,7 @@ theorem smoothDirections_D_sub_constant
   have heq := HasProjectiveJetsOn.unique J.open_domain
     K.hasProjectiveJetsOn JS.hasProjectiveJetsOn k x hx
   have h := congrArg (fun A : X [×k]→L[ℝ] ℝ => A v) heq
-  simpa only [JS, smoothDirectionsAdd, add_apply,
+  simpa only [JS, SmoothDirections.congr, smoothDirectionsAdd, add_apply,
     smoothDirections_D_constant JC hk hx v, add_zero] using h
 
 /-- The zeroth difference uses the genuine first derivative along the

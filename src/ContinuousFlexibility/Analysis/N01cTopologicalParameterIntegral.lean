@@ -34,7 +34,7 @@ theorem continuousOn_parametric_intervalIntegral_topological
   obtain ⟨V, hV, hclose⟩ :
       ∃ V ∈ 𝓝[U] q, ∀ x ∈ V, ∀ t ∈ uIcc a b,
         dist (f x t) (f q t) < δ :=
-    isCompact_uIcc.mem_uniformity_of_prod hf hq (dist_mem_uniformity hδ)
+    isCompact_uIcc.mem_uniformity_of_prod hf hq (Metric.dist_mem_uniformity hδ)
   filter_upwards [hV, self_mem_nhdsWithin] with x hx hxU
   calc
     dist (∫ t in a..b, f x t) (∫ t in a..b, f q t) =

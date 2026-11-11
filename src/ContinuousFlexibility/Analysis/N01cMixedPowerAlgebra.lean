@@ -37,12 +37,12 @@ theorem mixedDerivative_mul_on_open
       (fun r => iteratedDeriv j (fun θ => f (r, θ)) q.2) q.1 := by
     have h := ((contDiffOn_mixedDerivative hΩ hf 0 j).contDiffAt
       (hΩ.mem_nhds hq)).comp q.1 (contDiffAt_id.prodMk contDiffAt_const)
-    simpa only [Function.comp_apply, mixedDerivative, iteratedDeriv_zero] using h
+    simpa only [Function.comp_def, id_eq, mixedDerivative, iteratedDeriv_zero] using h
   have hgr (j : ℕ) : ContDiffAt ℝ ∞
       (fun r => iteratedDeriv j (fun θ => g (r, θ)) q.2) q.1 := by
     have h := ((contDiffOn_mixedDerivative hΩ hg 0 j).contDiffAt
       (hΩ.mem_nhds hq)).comp q.1 (contDiffAt_id.prodMk contDiffAt_const)
-    simpa only [Function.comp_apply, mixedDerivative, iteratedDeriv_zero] using h
+    simpa only [Function.comp_def, id_eq, mixedDerivative, iteratedDeriv_zero] using h
   have he : (fun r => iteratedDeriv b (fun θ => f (r, θ) * g (r, θ)) q.2) =ᶠ[𝓝 q.1]
       (fun r => ∑ j ∈ Finset.range (b + 1), (b.choose j : ℝ) *
         (iteratedDeriv j (fun θ => f (r, θ)) q.2 *
@@ -52,8 +52,17 @@ theorem mixedDerivative_mul_on_open
       (contDiffAt_const.prodMk contDiffAt_id)
     have hgt := (hg.contDiffAt (hΩ.mem_nhds hr)).comp q.2
       (contDiffAt_const.prodMk contDiffAt_id)
-    simpa only [mul_assoc] using
+    simpa only [Function.comp_def, id_eq, mul_assoc] using
       iteratedDeriv_fun_mul (hft.of_le (by simp)) (hgt.of_le (by simp))
+  have hfin (F : ℕ → ℕ → ℝ) :
+      (∑ i : Fin (a + 1), ∑ j : Fin (b + 1), F i.val j.val) =
+        ∑ i ∈ Finset.range (a + 1), ∑ j ∈ Finset.range (b + 1), F i j := by
+    rw [Fin.sum_univ_eq_sum_range (fun i : ℕ =>
+      ∑ j : Fin (b + 1), F i j.val) (a + 1)]
+    exact Finset.sum_congr rfl (fun i _ =>
+      Fin.sum_univ_eq_sum_range (F i) (b + 1))
+  rw [hfin (fun i j => (a.choose i : ℝ) * (b.choose j : ℝ) *
+    (mixedDerivative i j f q * mixedDerivative (a - i) (b - j) g q))]
   unfold mixedDerivative
   rw [he.iteratedDeriv_eq a,
     iteratedDeriv_fun_sum (fun j _ =>
@@ -70,7 +79,6 @@ theorem mixedDerivative_mul_on_open
     iteratedDeriv_fun_mul ((hfr j).of_le (by simp)) ((hgr (b - j)).of_le (by simp))
   simp_rw [hh, Finset.mul_sum]
   rw [Finset.sum_comm]
-  simp only [Fin.sum_univ_eq_sum_range]
   apply Finset.sum_congr rfl
   intro i _
   apply Finset.sum_congr rfl
@@ -147,7 +155,7 @@ theorem MixedPowerBounds.add
     J.hasProjectiveJetsOn Jadd.hasProjectiveJetsOn k x hx
   have hd : J.D k x v = Jf.D k x v + Jg.D k x v := by
     have hh := congrArg (fun A : X [×k]→L[ℝ] ℝ => A v) heq
-    simpa only [Jadd, smoothDirectionsAdd, add_apply] using hh
+    simpa only [Jadd, SmoothDirections.congr, smoothDirectionsAdd, add_apply] using hh
   have hW : 0 ≤ parameterHeightWeight (H q) k *
       R ^ (((a + b : ℕ) : ℝ) / ((s : ℝ) + 1)) :=
     mul_nonneg (parameterHeightWeight_nonneg (hH q hq) k)
@@ -177,7 +185,7 @@ theorem mixedLeibniz_coefficient_sum (a b : ℕ) :
     (∑ i : Fin (a + 1), ∑ j : Fin (b + 1),
       (a.choose i.val : ℝ) * (b.choose j.val : ℝ)) = (2 : ℝ) ^ (a + b) := by
   have hsum (n : ℕ) : (∑ i : Fin (n + 1), (n.choose i.val : ℝ)) = (2 : ℝ) ^ n := by
-    rw [Fin.sum_univ_eq_sum_range]
+    rw [Fin.sum_univ_eq_sum_range (fun i : ℕ => (n.choose i : ℝ)) (n + 1)]
     exact_mod_cast Nat.sum_range_choose n
   simp_rw [← Finset.mul_sum]
   rw [← Finset.sum_mul, hsum, hsum, pow_add]
@@ -272,9 +280,13 @@ theorem MixedPowerBounds.mul
     let ff : Fin 2 → X → ℝ := Fin.cases f₀ (fun _ => g₀)
     let JJ : ∀ i, SmoothDirections U (ff i) := Fin.cases Jf (fun _ => Jg)
     let BB : Fin 2 → ℝ := Fin.cases Bf (fun _ => Bg)
+    have hff₀ : ff 0 = f₀ := by simp only [ff, Fin.cases_zero]
+    have hff₁ : ff 1 = g₀ := by
+      rw [show (1 : Fin 2) = (0 : Fin 1).succ from by decide]
+      simp only [ff, Fin.cases_succ]
     let JP : SmoothDirections U (fun y => ∏ i, ff i y) :=
       (JT t).congr (fun y _ => by
-        simp only [terms, ff, Fin.prod_univ_two, Fin.cases_zero, Fin.cases_succ])
+        simp only [Fin.prod_univ_two, hff₀, hff₁, terms, f₀, g₀])
     have hBB : ∀ i : Fin 2, 0 < BB i := Fin.cases hBf (fun _ => hBg)
     have hBP := hcb ⟨k, Nat.lt_succ_of_le hk⟩ JJ JP x hx (H q)
       (hH q hq).1 (hH q hq).2 BB hBB
@@ -301,22 +313,27 @@ theorem MixedPowerBounds.mul
           (mul_le_mul_of_nonneg_right (hcCp _) (parameterHeightWeight_nonneg (hH q hq).1 k))
           hBprod
       _ = Cp * Cf * Cg * W := by rw [hprod]; dsimp only [W]; ring
+  have hsplit (F : I → ℝ) : (∑ t : I, F t) =
+      ∑ i : Fin (a + 1), ∑ j : Fin (b + 1), F (i, j) :=
+    Fintype.sum_prod_type (fun t : Fin (a + 1) × Fin (b + 1) => F t)
   have hd := smoothDirections_D_eq_linearCombination J JT coeff
     (fun y hy => by
-      simpa only [Fintype.sum_prod_type, coeff, terms] using
-        mixedDerivative_mul_on_open hΩ (F.spatial y hy) (G.spatial y hy) a b hq)
+      rw [hsplit (fun t => coeff t * terms t y)]
+      exact mixedDerivative_mul_on_open hΩ (F.spatial y hy) (G.spatial y hy) a b hq)
     k hx v
   have hcoeff (t : I) : 0 ≤ coeff t :=
     mul_nonneg (Nat.cast_nonneg _) (Nat.cast_nonneg _)
   have hnormCoeff (t : I) : ‖coeff t‖ = coeff t := Real.norm_of_nonneg (hcoeff t)
   have hsum : (∑ t : I, coeff t) = (2 : ℝ) ^ (a + b) := by
-    simpa only [Fintype.sum_prod_type, coeff] using mixedLeibniz_coefficient_sum a b
+    rw [hsplit coeff]
+    exact mixedLeibniz_coefficient_sum a b
   have hpow : (2 : ℝ) ^ (a + b) ≤ (2 : ℝ) ^ s :=
     pow_le_pow_right₀ (by norm_num) hab
   calc
     ‖J.D k x v‖ ≤ ∑ t, coeff t * ‖(JT t).D k x v‖ := by
       rw [hd]
-      simpa only [norm_mul, hnormCoeff] using norm_sum_le _ _
+      simpa only [norm_mul, hnormCoeff] using
+        norm_sum_le (Finset.univ : Finset I) (fun t : I => coeff t * (JT t).D k x v)
     _ ≤ ∑ t, coeff t * (Cp * Cf * Cg * W) :=
       Finset.sum_le_sum (fun t _ => mul_le_mul_of_nonneg_left (hterm t) (hcoeff t))
     _ = (2 : ℝ) ^ (a + b) * (Cp * Cf * Cg * W) := by rw [← Finset.sum_mul, hsum]

@@ -44,7 +44,7 @@ theorem HasProjectiveJetsOn.hasFDerivAt_eval_finiteDimensional
       (fun y hy => ⟨hy, mem_univ w⟩)
   obtain ⟨ε, hε, hball⟩ := Metric.mem_nhds_iff.mp (hU.mem_nhds hx)
   apply hasFDerivAt_of_continuous_line_differential
-    isOpen_ball (convex_ball x ε) (hD.mono hball) _ (Metric.mem_ball_self hε)
+    Metric.isOpen_ball (convex_ball x ε) (hD.mono hball) _ (Metric.mem_ball_self hε)
   intro y hy w
   apply hasLineDerivAt_iff_tendsto_slope_zero.mpr
   simpa only [projectiveJetHeadLinear_apply, HasProjectiveLineDerivAt,
@@ -71,13 +71,15 @@ theorem HasProjectiveJetsOn.contDiffOn_eval_finiteDimensional
       intro n v
       have hd (x : X) (hx : x ∈ U) :=
         hJ.hasFDerivAt_eval_finiteDimensional hU n v hx
-      apply contDiffOn_succ_of_fderiv_apply
-        (fun x hx => (hd x hx).differentiableAt.differentiableWithinAt) (by simp)
-      intro w
-      apply (ih (n + 1) (Fin.cons w v)).congr
-      intro x hx
-      rw [fderivWithin_of_isOpen hU hx, (hd x hx).fderiv,
-        projectiveJetHeadLinear_apply]
+      have hnext : ContDiffOn ℝ ((m : WithTop ℕ∞) + 1) (fun x => J n x v) U := by
+        apply contDiffOn_succ_of_fderiv_apply (n := (m : WithTop ℕ∞))
+          (fun x hx => (hd x hx).differentiableAt.differentiableWithinAt) (by simp)
+        intro w
+        apply (ih (n + 1) (Fin.cons w v)).congr
+        intro x hx
+        rw [fderivWithin_of_isOpen hU hx, (hd x hx).fderiv,
+          projectiveJetHeadLinear_apply]
+      simpa only [Nat.cast_add, Nat.cast_one] using hnext
   exact contDiffOn_infty.mpr (fun m => hm m n v)
 
 /-- Genuine directional smoothness on a finite-dimensional open domain

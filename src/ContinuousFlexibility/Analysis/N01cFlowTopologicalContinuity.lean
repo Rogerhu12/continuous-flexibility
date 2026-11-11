@@ -66,7 +66,8 @@ theorem circleTopologicalSpeed_eventually_uniform_difference_lt
       ∃ V ∈ 𝓝[U] q₀, ∀ q ∈ V, ∀ p ∈ Icc a b ×ˢ Icc (0 : ℝ) P,
         dist (G (q, p)) (G (q₀, p)) < ε :=
     (isCompact_Icc.prod isCompact_Icc).mem_uniformity_of_prod
-      hc hq₀ (dist_mem_uniformity hε)
+      (f := fun (q : X) (p : PolarPoint) => G (q, p))
+      hc hq₀ (Metric.dist_mem_uniformity hε)
   filter_upwards [hV, self_mem_nhdsWithin] with q hq hqU
   intro t ht θ
   have hp : Function.Periodic (fun η => G (q, (t, η)) - G (q₀, (t, η))) P :=
@@ -145,8 +146,12 @@ theorem circleTopologicalFlow_continuousOn
   let Ψ : (X × ℝ) × ℝ → ℝ := fun p =>
     Θ (p.1.1, (p.2, p.1.2)) - p.1.2
   have hF (q : X × ℝ) (hq : q ∈ U ×ˢ (univ : Set ℝ)) :
-      ContDiff ℝ ∞ (fun p => F (q, p)) :=
-    (hG q.1 hq.1).comp (contDiff_fst.prodMk (contDiff_snd.add contDiff_const))
+      ContDiff ℝ ∞ (fun p => F (q, p)) := by
+    change ContDiff ℝ ∞ (fun p : PolarPoint => G (q.1, (p.1, p.2 + q.2)))
+    exact (hG q.1 hq.1).comp
+      ((contDiff_fst : ContDiff ℝ ∞ (fun p : PolarPoint => p.1)).prodMk
+        ((contDiff_snd : ContDiff ℝ ∞ (fun p : PolarPoint => p.2)).add
+          (contDiff_const : ContDiff ℝ ∞ (fun _ : PolarPoint => q.2))))
   have hFjoint : ContinuousOn F
       ((U ×ˢ (univ : Set ℝ)) ×ˢ (Icc a b ×ˢ (univ : Set ℝ))) :=
     hjoint.comp

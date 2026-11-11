@@ -108,8 +108,11 @@ def smoothDirections_affineRpow (α q₀ : ℝ) (L : E →L[ℝ] ℝ)
     simp only [affineRpowJets, smul_apply, smul_eq_mul]
     have hq : Continuous (fun z : E × (Fin n → E) => q₀ + L z.1) :=
       continuous_const.add (L.continuous.comp continuous_fst)
-    have hp := hq.continuousOn.rpow_const
-      (fun z hz => Or.inl (hpos z.1 hz.1).ne') (p := α - (n : ℝ))
+    have hp : ContinuousOn
+        (fun z : E × (Fin n → E) => (q₀ + L z.1) ^ (α - (n : ℝ)))
+        (U ×ˢ (univ : Set (Fin n → E))) :=
+      hq.continuousOn.rpow_const
+        (fun z hz => Or.inl (hpos z.1 hz.1).ne')
     exact (continuousOn_const.mul hp).mul
       ((scalarFunctionalProduct L n).cont.comp continuous_snd).continuousOn
   derivative := by

@@ -105,7 +105,7 @@ theorem iteratedDeriv_comp_const_mul_of_contDiffOn
   rw [he, iteratedDeriv_eq_iteratedFDeriv, hd,
     ContinuousMultilinearMap.compContinuousLinearMap_apply]
   simp only [hL, mul_one, iteratedFDeriv_apply_eq_iteratedDeriv_mul_prod,
-    Finset.prod_const, Fintype.card_fin, smul_eq_mul]
+    Finset.prod_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul]
 
 theorem iteratedDeriv_comp_rootAffine
     {U : Set ℝ} {f : ℝ → ℝ} (hU : IsOpen U)
@@ -117,10 +117,13 @@ theorem iteratedDeriv_comp_rootAffine
   have hV : IsOpen V := hU.preimage (continuous_const.add continuous_id)
   have hg : ContDiffOn ℝ ∞ (fun y : ℝ => f (a + y)) V :=
     hf.comp (contDiff_const.add contDiff_id).contDiffOn (fun _ hy => hy)
-  change iteratedDeriv n (fun y => (fun q => f (a + c * q)) (y - a)) x = _
-  rw [iteratedDeriv_comp_sub_const]
-  have h := iteratedDeriv_comp_const_mul_of_contDiffOn hV hg c hx n
-  simpa only [iteratedDeriv_comp_const_add] using h
+  calc
+    _ = iteratedDeriv n (fun q => f (a + c * q)) (x - a) :=
+      congrFun (iteratedDeriv_comp_sub_const n (fun q => f (a + c * q)) a) x
+    _ = c ^ n * iteratedDeriv n (fun q => f (a + q)) (c * (x - a)) :=
+      iteratedDeriv_comp_const_mul_of_contDiffOn hV hg c hx n
+    _ = _ := congrArg (fun y => c ^ n * y)
+      (congrFun (iteratedDeriv_comp_const_add n f a) (c * (x - a)))
 
 /-- Every actual jet of the endpoint quotient is an integral of the
 next original jet. The scalar factor records the exact radial order. -/
@@ -232,7 +235,9 @@ theorem abs_iteratedDeriv_twoRootDivided_le
     intro y hy
     exact abs_iteratedDeriv_dslope_le hU hconv hf hclosed hl hy hM (n + 1) hbound
   have hi := abs_iteratedDeriv_dslope_le hU hconv hg hclosed hh hx hM n hb
-  simpa only [twoRootDivided, iteratedDeriv_neg, abs_neg] using hi
+  change |iteratedDeriv n (fun r => -dslope (dslope f l) h r) x| ≤ M
+  rw [iteratedDeriv_fun_neg, abs_neg]
+  exact hi
 
 /-- A linear distance lower bound gives a positive lower bound for the
 smooth two-root quotient. No endpoint distance is divided out at a root. -/
