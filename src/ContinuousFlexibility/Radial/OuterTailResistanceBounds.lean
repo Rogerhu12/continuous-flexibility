@@ -24,7 +24,7 @@ theorem outer_tail_length_le_one {T : DeepTailData} {j : ℕ} (hj : 2 ≤ j)
   have hjR : (2 : ℝ) ≤ j := by exact_mod_cast hj
   have hlarge : (1 : ℝ) ≤ 2 * (j : ℝ) ^ 2 := by nlinarith
   have hh := one_div_le_one_div_of_le (by norm_num : (0 : ℝ) < 1) hlarge
-  exact hclose.trans (by simpa only [one_div_one, one_div] using hh)
+  exact hclose.trans (by simpa only [one_div, inv_one] using hh)
 
 theorem outer_tail_short_interval_resistance {T : DeepTailData}
     (hT : DeepTailHypotheses T) {a b B : ℝ} (hab : a ≤ b)
@@ -36,8 +36,8 @@ theorem outer_tail_short_interval_resistance {T : DeepTailData}
     ((deepTail_contDiffOn hT).continuousOn.mono hsub).inv₀
       (fun x hx => (deepTail_pos hT x (hsub hx)).ne')
   have h := intervalIntegral.integral_mono_on_of_le_Ioo hab
-    (ContinuousOn.intervalIntegrable_of_Icc hab hcont)
-    (intervalIntegrable_const (c := B)) hbound
+    (ContinuousOn.intervalIntegrable_of_Icc (μ := volume) hab hcont)
+    (intervalIntegrable_const (μ := volume) (c := B)) hbound
   calc
     _ ≤ (b - a) * B := by
       simpa only [intervalIntegral.integral_const, smul_eq_mul] using h
@@ -76,7 +76,10 @@ theorem outer_tail_resistances_le
   let B := exp 1 * D.b * (C 0 * radialE (start + n + 1) ^ (C 0))
   have hC0 : 0 < C 0 := hC.2.2.1 0
   have hb : 0 < D.b := hC.1.1.trans hC.1.2.1
-  have hB : 0 ≤ B := by dsimp only [B]; positivity
+  have hB : 0 ≤ B :=
+    mul_nonneg (mul_nonneg (exp_pos 1).le hb.le)
+      (mul_nonneg hC0.le
+        (rpow_nonneg (show 0 ≤ radialE (start + n + 1) from (exp_pos _).le) _))
   have ho := hT.2.2.2.2.2.2.2.2.2.2 n
   have he := deepTail_entrance_le_node hT n
   have hend := deepTail_node_lt_endpoint hT (n + 1)

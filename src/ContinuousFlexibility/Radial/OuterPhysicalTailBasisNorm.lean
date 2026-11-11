@@ -55,7 +55,9 @@ theorem P_square_integral (F : MorsePhysicalTailBasis M D right j start entrance
         tailPhysicalLift D right j F.logP r ^ 2 ∂radialHilbertMeasure D := by
       apply integral_congr_ae
       exact Filter.Eventually.of_forall (fun r => by
-        rw [P, outerTailOutwardLift_reflect])
+        change outerTailOutwardLift D right j F.logP (outerOutwardRadius right r) ^ 2 =
+          tailPhysicalLift D right j F.logP r ^ 2
+        rw [outerTailOutwardLift_reflect])
     _ = _ := hrad
 
 theorem P_norm_le (F : MorsePhysicalTailBasis M D right j start entrance η K)

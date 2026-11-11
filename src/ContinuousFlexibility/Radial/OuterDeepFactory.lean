@@ -39,7 +39,7 @@ theorem morsePhysicalDeepTail_eq_r07 {M : MorseChainData} {σ : ℕ → ℝ}
   have hp : outerMassLogDensity D j (tailPhysicalEndpoint D right) right =
       r07PhysicalDensity D right j := by
     funext x
-    simpa only [r07PhysicalDensity, tailPhysicalEndpoint] using
+    simpa only [morsePhysicalDeepTail, r07PhysicalDensity, tailPhysicalEndpoint] using
       morsePhysicalDeepTail_density_eq M D right j (n + 1)
         (morseOuterDeepEntrance M right n) η K x
   unfold morsePhysicalDeepTail r07DeepTailData

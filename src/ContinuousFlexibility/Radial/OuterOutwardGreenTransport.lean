@@ -178,6 +178,10 @@ theorem outerOutwardDirichletKernel_row_memLp
     MemLp (outerOutwardDirichletKernel D right j w u (outerOutwardLogRadius right x))
       2 (outerOutwardTailMeasure D T right) :=
   coordinateGauge_kernel_row_memLp
+    (μ := deepTailMeasure T) (ν := outerOutwardTailMeasure D T right)
+    (R := outerOutwardLogRadius right) (a := outerPhysicalAmplitude D right j)
+    (s := (12 : ℝ)) (K := fun x y => w (min x y) * u (max x y))
+    (H := outerOutwardDirichletKernel D right j w u)
     (measurableEmbedding_outerOutwardLogRadius right)
     (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
     (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j)

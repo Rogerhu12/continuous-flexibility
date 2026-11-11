@@ -28,8 +28,10 @@ theorem log_entry_abs_product
     let T := morsePhysicalDeepTail M D right j start entrance η K
     |F.logQFlux T.entrance| * |F.logP T.entrance| = 1 := by
   let T := morsePhysicalDeepTail M D right j start entrance η K
+  change |F.logQFlux T.entrance| * |F.logP T.entrance| = 1
+  have hQe : F.logQ T.entrance = 0 := F.Q_log_entry
   have h := F.log_wronskian T.entrance ⟨le_rfl, hT.1⟩
-  rw [F.Q_log_entry, zero_mul, sub_zero] at h
+  rw [hQe, zero_mul, sub_zero] at h
   rw [← abs_mul, h, abs_one]
 
 theorem logQ_initial_node_le_resistance
@@ -47,8 +49,10 @@ theorem logP_initial_node_le_entry
     let T := morsePhysicalDeepTail M D right j start entrance η K
     |F.logP (T.node 0)| ≤ |F.logP T.entrance| := by
   let T := morsePhysicalDeepTail M D right j start entrance η K
+  change |F.logP (T.node 0)| ≤ |F.logP T.entrance|
   rcases hT.2.2.2.1 with heq | hgap
-  · rw [heq]
+  · change T.node 0 = T.entrance at heq
+    rw [heq]
   · have hR := tailInitialResistance_pos hT hgap.1
     have hden : 0 < T.Λ * tailMass T 0 * tailInitialResistance T :=
       mul_pos (mul_pos hT.2.2.1 (tailMass_pos hT 0)) hR
@@ -70,7 +74,9 @@ theorem logQ_initial_bound
       |F.logQ ((morsePhysicalDeepTail M D right j start entrance η K).node 0)| := by
   have h := outer_tail_initial_state_bound hT
     (hη.trans (by norm_num : (1 / 16 : ℝ) ≤ 1 / 2)) F.Q_log_system hx
-  simpa only [F.Q_log_entry, abs_zero, zero_add] using h
+  have hQe : F.logQ (morsePhysicalDeepTail M D right j start entrance η K).entrance = 0 :=
+    F.Q_log_entry
+  simpa only [hQe, abs_zero, zero_add] using h
 
 theorem logP_initial_bound
     (F : MorsePhysicalTailBasis M D right j start entrance η K)
@@ -94,8 +100,11 @@ theorem log_initial_product_bound
     let T := morsePhysicalDeepTail M D right j start entrance η K
     tailMass T 0 * |F.logP (T.node 0) * F.logQ (T.node 0)| ≤ 8 / T.Λ := by
   let T := morsePhysicalDeepTail M D right j start entrance η K
+  change tailMass T 0 * |F.logP (T.node 0) * F.logQ (T.node 0)| ≤ 8 / T.Λ
+  have hQe : F.logQ T.entrance = 0 := F.Q_log_entry
   rcases hT.2.2.2.1 with heq | hgap
-  · rw [heq, F.Q_log_entry, mul_zero, abs_zero, mul_zero]
+  · change T.node 0 = T.entrance at heq
+    rw [heq, hQe, mul_zero, abs_zero, mul_zero]
     exact (div_pos (by norm_num) hT.2.2.1).le
   · have hΛ : 0 < T.Λ := hT.2.2.1
     have hμ : 0 < tailMass T 0 := tailMass_pos hT 0

@@ -14,6 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
+open scoped ENNReal
 open ContinuousFlexibility.Statements
 
 def outerWholeMeasure (D : ReferenceData) (right : Bool) (entry : ℝ) : Measure ℝ :=
@@ -59,7 +60,7 @@ theorem outerWholeMeasure_real_univ (D : ReferenceData) (right : Bool) (entry : 
     (outerWholeMeasure D right entry).real univ =
       (radialHilbertMeasure D).real (radialTailInterval D right entry) := by
   rw [outerWholeMeasure, map_measureReal_apply
-    (measurableEmbedding_outerOutwardRadius right).measurable measurableSet_univ,
+    (measurableEmbedding_outerOutwardRadius right).measurable MeasurableSet.univ,
     preimage_univ, measureReal_restrict_apply_univ]
 
 /-- The same common profile mass controls all outer cuts and frequencies. -/
