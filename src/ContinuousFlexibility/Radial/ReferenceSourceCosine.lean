@@ -92,10 +92,16 @@ theorem referenceSourceCosineAnalysis_reconstruct_ae {D : ReferenceData}
     (hF : SourceMember D γ M F) :
     referenceCosineRepresentative (referenceSourceCosineAnalysis hab hD hF)
       =ᵐ[radialPhysicalMeasure D] F.1 := by
-  have hh := referenceCosineRepresentative_analysis_ae (hF.memLp_radial_angular hab hD)
-    (referenceSource_angular_periodic hF) hF.2.2.2.1
+  have hh :
+      referenceCosineRepresentative (referenceSourceCosineAnalysis hab hD hF)
+        =ᵐ[(referenceRadialWeightedMeasure D γ M).prod referenceAngularMeasure] F.1 :=
+    referenceCosineRepresentative_analysis_ae (hF.memLp_radial_angular hab hD)
+      (referenceSource_angular_periodic hF) hF.2.2.2.1
   apply (referenceWeightedMeasure_ae_iff hD γ M).mp
-  simpa only [referenceWeightedMeasure_eq_prod hD γ M, referenceSourceCosineAnalysis] using hh
+  change ∀ᵐ x ∂referenceWeightedMeasure D γ M,
+    referenceCosineRepresentative (referenceSourceCosineAnalysis hab hD hF) x = F.1 x
+  rw [referenceWeightedMeasure_eq_prod hD γ M]
+  exact hh
 
 theorem referenceCosineRepresentative_periodic_polar {μ : Measure ℝ} [SFinite μ]
     (a : lp (fun _ : ℕ => Lp ℝ 2 μ) 2) :

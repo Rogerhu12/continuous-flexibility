@@ -113,9 +113,12 @@ theorem hasDerivAt_referenceCosineCoefficient {ψ : PolarPoint → ℝ}
     (hψ : ContDiff ℝ ∞ ψ) (n : ℕ) (r : ℝ) :
     HasDerivAt (referenceCosineCoefficient ψ n)
       (referenceCosineCoefficient (radialPartial ψ) n r) r := by
-  have hd := hasDerivAt_radialAngularMean_mul hψ (referenceCircleCosine_contDiff n) r
-  simpa only [referenceCosineCoefficient, referenceCosineCoeff,
-    integral_referenceAngularMeasure] using hd
+  have heq : referenceCosineCoefficient ψ n =
+      (fun s => radialAngularMean (fun θ =>
+        ψ (s, θ) * referenceCircleCosine n (θ : AddCircle Real.pi))) :=
+    funext (referenceCosineCoefficient_eq_angularMean ψ n)
+  rw [heq, referenceCosineCoefficient_eq_angularMean]
+  exact hasDerivAt_radialAngularMean_mul hψ (referenceCircleCosine_contDiff n) r
 
 theorem deriv_referenceCosineCoefficient {ψ : PolarPoint → ℝ}
     (hψ : ContDiff ℝ ∞ ψ) (n : ℕ) :

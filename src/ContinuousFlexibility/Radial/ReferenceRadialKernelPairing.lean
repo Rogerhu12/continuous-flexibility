@@ -76,6 +76,7 @@ theorem referenceRadial_integral_sq_le {D : ReferenceData}
   have hisq : Integrable (fun r => g r ^ 2) μ := hg.integrable_sq
   have hlin : Integrable (fun r => (2 * c) * g r) μ := hi.const_mul _
   have hconst : Integrable (fun _ : ℝ => c ^ 2) μ := integrable_const _
+  have hsub : Integrable (fun r => g r ^ 2 - (2 * c) * g r) μ := hisq.sub hlin
   have hn : 0 ≤ ∫ r, (g r - c) ^ 2 ∂μ :=
     integral_nonneg (fun r => sq_nonneg (g r - c))
   have he : (∫ r, (g r - c) ^ 2 ∂μ) = E - (2 * c) * I + c ^ 2 * (D.b - D.a) := by
@@ -84,7 +85,9 @@ theorem referenceRadial_integral_sq_le {D : ReferenceData}
         apply integral_congr_ae
         exact ae_of_all _ (fun r => by ring)
       _ = _ := by
-        rw [integral_add (hisq.sub hlin) hconst, integral_sub hisq hlin,
+        rw [integral_add (f := fun r => g r ^ 2 - (2 * c) * g r)
+          (g := fun _ : ℝ => c ^ 2) hsub hconst,
+          integral_sub (f := fun r => g r ^ 2) (g := fun r => (2 * c) * g r) hisq hlin,
           integral_const_mul, integral_const, hmass, smul_eq_mul]
         dsimp only [E, I]
         ring

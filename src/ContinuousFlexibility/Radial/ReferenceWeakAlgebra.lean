@@ -14,6 +14,7 @@ namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory
 
+set_option backward.isDefEq.respectTransparency false in
 theorem integral_angularMean_add {D : ReferenceData} (hab : D.a ≤ D.b)
     {f g : PolarPoint → ℝ}
     (hf : Integrable f (radialPhysicalMeasure D))
