@@ -48,11 +48,11 @@ theorem radialTailHalf_outward (D : ReferenceData) (right : Bool) (cut r : ℝ) 
 
 theorem hasDerivAt_outerOutwardRadius (right : Bool) (r : ℝ) :
     HasDerivAt (outerOutwardRadius right) (outerTailSign right) r := by
-  have hfun : outerOutwardRadius right = fun x : ℝ => outerTailSign right * x :=
-    funext (outerOutwardRadius_eq_sign right)
-  rw [hfun]
-  simpa only [mul_one] using
-    (hasDerivAt_id r).const_mul (outerTailSign right)
+  cases right
+  · change HasDerivAt (fun x : ℝ => -x) (-1) r
+    exact hasDerivAt_neg' r
+  · change HasDerivAt (fun x : ℝ => x) 1 r
+    exact hasDerivAt_id' r
 
 def RadialTailRegularResponse (D : ReferenceData) (right : Bool)
     (cut lam : ℝ) (v : ℝ × ℝ)
@@ -138,7 +138,9 @@ theorem derivWithin_radialRadiusScale {s t : Set ℝ} {u : ℝ → ℝ}
     simpa only [hcancel] using hu.hasDerivWithinAt
   have hd := ((hu'.comp (κ * r)
     ((hasDerivAt_id (κ * r)).div_const κ).hasDerivWithinAt hmap).const_mul α).derivWithin ht
-  simpa only [radialRadiusScale, Function.comp_def, div_eq_mul_inv, mul_one,
+  have hfun : (fun y : ℝ => α * u (id y / κ)) = radialRadiusScale κ α u := rfl
+  rw [hfun] at hd
+  simpa only [div_eq_mul_inv, one_mul, mul_one,
     mul_assoc, mul_comm, mul_left_comm] using hd
 
 theorem RadialTailRegularResponse.radiusScale
