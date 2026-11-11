@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open MeasureTheory
-open scoped ENNReal
+open scoped ENNReal NNReal
 
 private theorem eLpNorm_two_sq {X : Type*} [MeasurableSpace X] {μ : Measure X}
     {f : X → ℂ} (hf : AEStronglyMeasurable f μ) :
@@ -51,7 +51,7 @@ measurable function on the complete mixed frequency space. -/
 theorem measurable_cylinderFourier (f : ℝ × AddCircle P → ℂ) (hf : Continuous f)
     (hL2 : MemLp f 2 (cylinderPhysicalMeasure P)) : Measurable (cylinderFourier f hf hL2) :=
   measurable_from_prod_countable_left fun n =>
-    (cylinderFourierMode f hf hL2 n).stronglyMeasurable.measurable
+    (Lp.stronglyMeasurable (cylinderFourierMode f hf hL2 n)).measurable
 
 private theorem cylinderFourierMode_lintegral_sq (f : ℝ × AddCircle P → ℂ)
     (hf : Continuous f) (hL2 : MemLp f 2 (cylinderPhysicalMeasure P)) (n : ℤ) :
@@ -62,7 +62,7 @@ private theorem cylinderFourierMode_lintegral_sq (f : ℝ × AddCircle P → ℂ
     apply (ENNReal.toReal_eq_toReal_iff' (Lp.eLpNorm_ne_top _)
       (cylinderAngularCoefficient_memLp hf hL2 n).ne).mp
     exact (Lp.norm_def _).symm.trans (norm_cylinderFourierMode f hf hL2 n)
-  rw [← eLpNorm_two_sq (cylinderFourierMode f hf hL2 n).aestronglyMeasurable,
+  rw [← eLpNorm_two_sq (Lp.aestronglyMeasurable (cylinderFourierMode f hf hL2 n)),
     ← eLpNorm_two_sq (continuous_cylinderAngularCoefficient hf n).aestronglyMeasurable, hn]
 
 /-- The mixed transform preserves the full squared integral, as an

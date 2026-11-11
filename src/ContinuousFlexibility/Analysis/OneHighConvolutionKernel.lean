@@ -60,7 +60,7 @@ private theorem measurable_fin_cons {A : Type*} [MeasurableSpace A] {k : ℕ}
   intro i
   refine Fin.cases ?_ (fun j => ?_) i
   · simpa only [Fin.cons_zero] using ha
-  · simpa only [Fin.cons_succ] using (measurable_pi_apply j).comp hv
+  · simpa only [Fin.cons_succ, Function.comp_def] using (measurable_pi_apply j).comp hv
 
 private theorem measurable_convolutionKernel_param_aux (k : ℕ) :
     ∀ {A : Type (max u v)} [MeasurableSpace A] (F : A → (Fin (k + 1) → G) → ℝ≥0∞),
@@ -93,7 +93,7 @@ theorem measurable_convolutionKernel_param (k : ℕ) {A : Type v} [MeasurableSpa
   have hFlift : Measurable (Function.uncurry
       (fun (a : ULift.{u} A) ζ => F a.down ζ)) :=
     hF.comp ((measurable_down.comp measurable_fst).prodMk measurable_snd)
-  have h := measurable_convolutionKernel_param_aux k
+  have h := measurable_convolutionKernel_param_aux (μ := μ) k
     (fun (a : ULift.{u} A) ζ => F a.down ζ) hFlift
   exact h.comp ((measurable_up.comp measurable_fst).prodMk measurable_snd)
 

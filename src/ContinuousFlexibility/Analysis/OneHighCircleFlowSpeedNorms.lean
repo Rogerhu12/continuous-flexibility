@@ -51,7 +51,7 @@ theorem continuous_circleFlowSpeedJet (G : PolarPoint → ℝ)
   apply continuous_periodicCircleJet_family
   have hc := (contDiffOn_univ.mp
     (Statements.contDiffOn_mixedDerivative isOpen_univ hG.contDiffOn 0 n)).continuous
-  simpa only [Statements.mixedDerivative, iteratedDeriv_zero] using hc
+  exact hc.congr (fun p => by simp only [Statements.mixedDerivative, iteratedDeriv_zero])
 
 /-- All actual speed-derivative Sobolev norms are continuous in time. -/
 theorem continuous_circleFlowSpeedSobolevNorm (G : PolarPoint → ℝ)

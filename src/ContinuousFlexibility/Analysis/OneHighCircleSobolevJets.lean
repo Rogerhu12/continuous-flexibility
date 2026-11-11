@@ -138,7 +138,7 @@ theorem circle_sobolevNorm_le_derivative_endpoints
           (eLpNorm (fun n => ‖fourierCoeff (f 0) n‖) 2 Measure.count +
             eLpNorm (fun n => ‖fourierCoeff (f s) n‖) 2 Measure.count) :=
         mul_le_mul_of_nonneg_left
-          (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)) (zero_le _)
+          (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)) zero_le
       _ = _ := by
         rw [eLpNorm_norm _ h0.aestronglyMeasurable, eLpNorm_norm _ hs.aestronglyMeasurable]
   have hfinite : ENNReal.ofReal ((2 : ℝ) ^ s) *

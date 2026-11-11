@@ -34,7 +34,8 @@ theorem circle_enorm_fourierCoeff_prod_le_positiveConvolution (k : ℕ)
       rw [lconvolution_def, lconvolution_def]
       apply lintegral_mono
       intro m
-      exact mul_le_mul_left' (ih (fun i => f i.succ) (fun i => hf i.succ) (-m + n)) _
+      exact mul_le_mul_of_nonneg_left
+        (ih (fun i => f i.succ) (fun i => hf i.succ) (-m + n)) (by positivity)
 
 /-- The same actual-product comparison at the `L²` frequency norm level. -/
 theorem circle_eLpNorm_fourierCoeff_prod_le_positiveConvolution (k : ℕ)

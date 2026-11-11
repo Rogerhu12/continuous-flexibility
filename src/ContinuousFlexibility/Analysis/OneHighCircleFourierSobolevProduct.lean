@@ -34,9 +34,9 @@ theorem circle_enorm_weighted_fourierCoeff_mul_le (s : ℕ)
             (fun k : ℤ => ENNReal.ofReal (circleFrequencyWeight P k) ^ s *
               ‖fourierCoeff g k‖ₑ)) n) := by
   rw [circle_enorm_frequencyWeighted_nat]
-  apply (mul_le_mul_left'
+  apply (mul_le_mul_of_nonneg_left
     (circle_enorm_fourierCoeff_mul_le_lconvolution f g hf n)
-    (ENNReal.ofReal (circleFrequencyWeight P n) ^ s)).trans
+    (show 0 ≤ ENNReal.ofReal (circleFrequencyWeight P n) ^ s by positivity)).trans
   rw [lconvolution_def, lconvolution_def, lconvolution_def]
   simp only [lintegral_count]
   rw [← ENNReal.tsum_mul_left, ← ENNReal.tsum_add, ← ENNReal.tsum_mul_left]
@@ -82,7 +82,7 @@ theorem circle_eLpNorm_weighted_fourierCoeff_mul_le (s : ℕ)
       (Eventually.of_forall (fun n => by
         simpa only [hscale, Pi.add_apply, enorm_eq_self, A, B] using
           circle_enorm_weighted_fourierCoeff_mul_le s f g hf n)) 2
-    simpa only [ENNReal.smul_def, hscale] using h
+    simpa only [ENNReal.smul_def, smul_eq_mul, hscale] using h
   have hnorm (v : C(AddCircle P, ℂ)) :
       eLpNorm (fun n : ℤ => ‖fourierCoeff v n‖ₑ) 1 Measure.count =
         eLpNorm (fourierCoeff v) 1 Measure.count :=
@@ -105,9 +105,9 @@ theorem circle_eLpNorm_weighted_fourierCoeff_mul_le (s : ℕ)
         ‖fourierCoeff g k‖ₑ)
       (measurable_of_countable _).aemeasurable (measurable_of_countable _).aemeasurable
     simpa only [B, circle_eLpNorm_weighted_enorm, hnorm f] using h
-  exact hscaled.trans (mul_le_mul_left'
+  exact hscaled.trans (mul_le_mul_of_nonneg_left
     ((eLpNorm_add_le (f := A) (g := B) (p := (2 : ℝ≥0∞)) (μ := Measure.count)
-      (by norm_num)).trans (add_le_add hA hB)) _)
+      (by norm_num)).trans (add_le_add hA hB)) (by positivity))
 
 /-- The product has finite physical Sobolev norm whenever both factors
 have finite Sobolev and absolute Fourier norms. -/

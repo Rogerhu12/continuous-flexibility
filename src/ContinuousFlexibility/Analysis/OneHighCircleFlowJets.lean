@@ -16,8 +16,10 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set
+open Set Topology
 open scoped ContDiff Topology
+
+set_option backward.isDefEq.respectTransparency false
 
 /-- Continuity descends from a compact, surjective reparametrization of
 the time coordinate, even though the angle coordinate is noncompact. -/
@@ -71,12 +73,12 @@ theorem circleFlow_continuousOn_angularJet {G Θ : PolarPoint → ℝ} {a b P : 
         iteratedDeriv n (fun η => Θ (circleFlowCompactTime a b p.1, η)) p.2) := by
       have hc := (contDiffOn_univ.mp
         (Statements.contDiffOn_mixedDerivative isOpen_univ hsmooth.contDiffOn 0 n)).continuous
-      simpa only [Statements.mixedDerivative, iteratedDeriv_zero] using hc
+      exact hc.congr (fun p => by simp only [Statements.mixedDerivative, iteratedDeriv_zero])
     exact continuousOn_of_compact_time_reparam
       (contDiff_circleFlowCompactTime a b).continuous
       (fun s _ => circleFlowCompactTime_mem hab s)
       (circleFlowCompactTime_surjOn a b) hjet
   · rw [Icc_eq_empty_of_lt (lt_of_not_ge hab), empty_prod]
-    exact continuousOn_empty
+    exact continuousOn_empty _
 
 end ContinuousFlexibility.Analysis

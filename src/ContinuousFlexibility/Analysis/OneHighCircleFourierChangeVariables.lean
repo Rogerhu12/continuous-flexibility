@@ -31,6 +31,7 @@ theorem circleLift_integral_comp_sq_le {P c : ℝ} (hP : 0 < P)
   have hv2 : Continuous (fun x => ‖v x‖ ^ 2) := hv.norm.pow 2
   have hp2 : Periodic (fun x => ‖v x‖ ^ 2) P := by
     intro x
+    dsimp only
     rw [hp x]
   have hsub := intervalIntegral.integral_comp_mul_deriv
     (a := (0 : ℝ)) (b := P) (fun x _ => hderiv x) hdh.continuousOn hv2
@@ -45,7 +46,7 @@ theorem circleLift_integral_comp_sq_le {P c : ℝ} (hP : 0 < P)
         ((continuous_const.mul (hv2.comp hh)).intervalIntegrable 0 P)
         (((hv2.comp hh).mul hdh).intervalIntegrable 0 P)
       intro x _
-      simpa only [mul_comm] using
+      simpa only [Pi.mul_apply, Function.comp_apply, mul_comm] using
         mul_le_mul_of_nonneg_left (hlower x) (sq_nonneg ‖v (h x)‖)
     _ = ∫ x in (0 : ℝ)..P, ‖v x‖ ^ 2 := hsub
 
@@ -85,6 +86,7 @@ theorem circle_l2_comp_le (f g : C(AddCircle P, E)) {c : ℝ} (hc : 0 < c)
     f.continuous.comp (AddCircle.continuous_mk' P)
   have hp : Periodic (fun x : ℝ => f (x : AddCircle P)) P := by
     intro x
+    dsimp only
     rw [AddCircle.coe_add_period]
   have hraw := circleLift_integral_comp_sq_le hP.out
     (fun x : ℝ => f (x : AddCircle P)) hv hp h dh hderiv hdh hlift hlower
@@ -92,6 +94,7 @@ theorem circle_l2_comp_le (f g : C(AddCircle P, E)) {c : ℝ} (hc : 0 < c)
       ∫ x in (0 : ℝ)..P, ‖f (h x : AddCircle P)‖ ^ 2 := by
     apply intervalIntegral.integral_congr
     intro x _
+    dsimp only
     rw [hcomp x]
   rw [circle_l2_toReal_eq_sqrt_interval, circle_l2_toReal_eq_sqrt_interval]
   apply sqrt_le_inv_sqrt_mul_of_mul_le hc
@@ -106,7 +109,8 @@ theorem circle_l2_comp_le (f g : C(AddCircle P, E)) {c : ℝ} (hc : 0 < c)
 theorem periodic_comp_circleLift {E : Type*} {v : ℝ → E} (hp : Periodic v P)
     {h : ℝ → ℝ} (hlift : ∀ x, h (x + P) = h x + P) : Periodic (v ∘ h) P := by
   intro x
-  simp only [Function.comp_apply, hlift, hp]
+  simp only [Function.comp_apply, hlift]
+  exact hp (h x)
 
 /-- The base composition estimate for genuine smooth periodic lifts.
 All circle representatives and derivatives are constructed from the input. -/

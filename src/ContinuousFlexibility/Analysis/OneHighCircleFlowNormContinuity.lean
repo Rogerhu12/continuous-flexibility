@@ -14,7 +14,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open Set Filter MeasureTheory
+open Set Filter MeasureTheory Topology
 open scoped ContDiff Topology ENNReal
 
 variable {P : ℝ} [Fact (0 < P)]
