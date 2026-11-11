@@ -47,7 +47,8 @@ theorem finiteEnergyEnvelope_term_le
       (fun j _ => ENNReal.mul_lt_top ENNReal.ofReal_lt_top (hE j))
   have hsingle : ENNReal.ofReal (C i ^ 2) * E i ≤
       ∑ j, ENNReal.ofReal (C j ^ 2) * E j :=
-    Finset.single_le_sum (fun j _ => zero_le) (Finset.mem_univ i)
+    Finset.single_le_sum (f := fun j => ENNReal.ofReal (C j ^ 2) * E j)
+      (fun j _ => zero_le) (Finset.mem_univ i)
   have h := Real.sqrt_le_sqrt (ENNReal.toReal_mono hsum.ne hsingle)
   simpa only [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg (C i)),
     Real.sqrt_mul (sq_nonneg (C i)), Real.sqrt_sq (hC i)] using h

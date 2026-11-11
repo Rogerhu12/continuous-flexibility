@@ -32,7 +32,8 @@ theorem N01Properties.physicalPlateauEnergy_tsum_le_grading_sq
   have hK₀ : 0 ≤ K₀ :=
     Finset.sum_nonneg (fun a _ => mul_nonneg (hKa a) (Nat.cast_nonneg _))
   have hKa₀ (a : Fin (s + 1)) : Ka a * ((a.val + 1 : ℕ) : ℝ) ≤ K₀ :=
-    Finset.single_le_sum (fun i _ => mul_nonneg (hKa i) (Nat.cast_nonneg _))
+    Finset.single_le_sum (f := fun i : Fin (s + 1) => Ka i * ((i.val + 1 : ℕ) : ℝ))
+      (fun i _ => mul_nonneg (hKa i) (Nat.cast_nonneg _))
       (Finset.mem_univ a)
   let N : ℕ := ∑ i : Fin (s + 1), Fintype.card (JetIndex i.val)
   refine ⟨(N : ℝ) * K₀, mul_nonneg (Nat.cast_nonneg _) hK₀, fun u => ?_⟩

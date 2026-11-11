@@ -43,7 +43,8 @@ theorem oneHighVariationWeight_finTwo_zero
       (∏ i : Fin 2, p base (z i)) +
       (∑ i : Fin 2, p high (z i) *
         ∏ j ∈ (Finset.univ : Finset (Fin 2)).erase i, p base (z j)) = _
-  rw [(p high).map_zero', add_zero, one_mul]
+  have hz : p high (0 : E) = 0 := map_zero (p high)
+  rw [hz, add_zero, one_mul]
   rw [Fin.prod_univ_two, Fin.sum_univ_two]
   simp only [he0, he1, Finset.prod_singleton, z, Fin.cons_zero, Fin.cons_one]
 

@@ -36,7 +36,8 @@ theorem radialCoefficient_upper_of_ratios
     norm_num at h
     exact h
   apply (div_le_iff₀ ((by norm_num : (0 : ℝ) < 1 / 4).trans_le hp)).mpr
-  have hmul := mul_le_mul_of_nonneg_left hp (mul_nonneg (by norm_num) hw.le)
+  have hmul := mul_le_mul_of_nonneg_left hp
+    (mul_nonneg (by norm_num : (0 : ℝ) ≤ 9) hw.le)
   nlinarith only [hQw, hmul]
 
 theorem N01Properties.originalRadialCoefficient_le_nine_profile
@@ -67,13 +68,15 @@ theorem N01Properties.originalRadialCoefficient_uniform_upper
       stateSector S z.1 → ∀ p ∈ annularOpen D, (originalCoefficients D S C z).a p ≤ A := by
   obtain ⟨_, hdata⟩ := hN.1.1
   have hw : ContDiff ℝ ∞ D.w := hdata.1.2.2.1.1
-  obtain ⟨K, hK⟩ := isCompact_Icc.exists_bound_of_continuousOn hw.continuous.continuousOn
+  obtain ⟨K, hK⟩ := (isCompact_Icc (a := D.a) (b := D.b)).exists_bound_of_continuousOn
+    hw.continuous.continuousOn
   let A := 9 * max K 1
   have hA : 0 < A := mul_pos (by norm_num) (zero_lt_one.trans_le (le_max_right _ _))
   refine ⟨A, hA, fun z hz hsector p hp => ?_⟩
+  have hbound : |D.w p.1| ≤ K := by
+    simpa only [Real.norm_eq_abs] using hK p.1 ⟨hp.1.1.le, hp.1.2.le⟩
   have hwK : D.w p.1 ≤ max K 1 :=
-    (le_abs_self _).trans ((by simpa only [Real.norm_eq_abs] using
-      hK p.1 ⟨hp.1.1.le, hp.1.2.le⟩).trans (le_max_left _ _))
+    (le_abs_self _).trans (hbound.trans (le_max_left _ _))
   exact (hN.originalRadialCoefficient_le_nine_profile hz hsector hp).trans
     (mul_le_mul_of_nonneg_left hwK (by norm_num))
 
@@ -125,7 +128,7 @@ theorem N01Properties.returnCorrectedMinusSpeed_error_weighted
     have hd := (hk base' hbase hhigh η hη hηε hη₁ z hz hsector m p.1 hp θ).2.trans hηK
     calc
       _ = |(deriv (C.minusFlow z m p.1) θ - 1) + 1| := by congr 1; ring
-      _ ≤ |deriv (C.minusFlow z m p.1) θ - 1| + |(1 : ℝ)| := abs_add _ _
+      _ ≤ |deriv (C.minusFlow z m p.1) θ - 1| + |(1 : ℝ)| := abs_add_le _ _
       _ ≤ 1 + 1 := add_le_add hd (by norm_num)
       _ = 2 := by norm_num
   have h := returnCorrectedMinusSpeed_error_bound D S C χ z m p hderiv

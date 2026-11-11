@@ -186,14 +186,14 @@ theorem circleCompositionPartition_norm_local_bound
 
 /-- Genuine chart composition, including any fixed number of outer
 angular derivatives, has fixed-loss joint local seminorm growth. -/
-theorem circleNorm_comp_outerJet_local_growth
+theorem circleNorm_comp_outerJet_uniform_low_order
     (hS : IsCircleModel T γ S) (hM : ∀ m, 0 < T.M (T.sample m))
     (hH : ∀ m, 0 < T.H (T.sample m))
     {A : ℝ} (hA : 0 ≤ A) (hHA : ∀ m, T.H (T.sample m) ^ γ ≤ A)
     (hinterp : HasInterpolation S.grading)
-    (travel : ℕ → ℝ) (n requestedBase : ℕ) (K : ℝ) (hK : 0 ≤ K) :
-    ∃ base loss : ℕ, requestedBase ≤ base ∧
-      ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧ ∀ e u : S.Space,
+    (travel : ℕ → ℝ) (requestedBase : ℕ) :
+    ∃ base : ℕ, requestedBase ≤ base ∧ ∀ n : ℕ, ∃ loss : ℕ,
+      ∀ K : ℝ, 0 ≤ K → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ e u : S.Space,
         S.grading base e ≤ K → S.grading base u ≤ K →
         circleNorm T γ s (fun m => (iteratedDeriv n (S.decode u m)) ∘
           circleAffineLift travel (S.decode e) 1 m) ≤
@@ -201,11 +201,13 @@ theorem circleNorm_comp_outerJet_local_growth
   classical
   obtain ⟨bi, li, hi⟩ := hinterp
   let base : ℕ := max requestedBase (max bi (li + 2))
-  let loss : ℕ := base + n + li + 2
   have hbi : bi ≤ base := (le_max_left bi _).trans (le_max_right _ _)
   have hbase : li + 2 ≤ base := (le_max_right bi _).trans (le_max_right _ _)
-  refine ⟨base, loss, le_max_left _ _, ?_⟩
-  intro s hs
+  refine ⟨base, le_max_left _ _, ?_⟩
+  intro n
+  let loss : ℕ := base + n + li + 2
+  refine ⟨loss, ?_⟩
+  intro K hK s
   have hterm (i : CircleCompositionTermIndex s) :
       ∃ C : ℝ, 0 ≤ C ∧ ∀ e u : S.Space,
         S.grading base e ≤ K → S.grading base u ≤ K →
@@ -228,5 +230,26 @@ theorem circleNorm_comp_outerJet_local_growth
     exact Finset.sum_le_sum (fun i _ => hbound i e u he hu)
   exact (circleNorm_comp_outerJet_le_mixed_orders hS hM hH hA hHA travel e u n s).trans
     ((mul_le_mul_of_nonneg_left hsum (Real.sqrt_nonneg _)).trans_eq (by ring))
+
+
+/-- The low order can be selected before the radius and before every
+outer-derivative order; this conventional interface is retained for
+callers needing only one fixed order and one low-seminorm bound. -/
+theorem circleNorm_comp_outerJet_local_growth
+    (hS : IsCircleModel T γ S) (hM : ∀ m, 0 < T.M (T.sample m))
+    (hH : ∀ m, 0 < T.H (T.sample m))
+    {A : ℝ} (hA : 0 ≤ A) (hHA : ∀ m, T.H (T.sample m) ^ γ ≤ A)
+    (hinterp : HasInterpolation S.grading)
+    (travel : ℕ → ℝ) (n requestedBase : ℕ) (K : ℝ) (hK : 0 ≤ K) :
+    ∃ base loss : ℕ, requestedBase ≤ base ∧
+      ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧ ∀ e u : S.Space,
+        S.grading base e ≤ K → S.grading base u ≤ K →
+        circleNorm T γ s (fun m => (iteratedDeriv n (S.decode u m)) ∘
+          circleAffineLift travel (S.decode e) 1 m) ≤
+          C * (1 + S.grading (s + loss) e + S.grading (s + loss) u) := by
+  obtain ⟨base, hbase, hb⟩ :=
+    circleNorm_comp_outerJet_uniform_low_order hS hM hH hA hHA hinterp travel requestedBase
+  obtain ⟨loss, hloss⟩ := hb n
+  exact ⟨base, loss, hbase, fun s _ => hloss K hK s⟩
 
 end ContinuousFlexibility.Statements

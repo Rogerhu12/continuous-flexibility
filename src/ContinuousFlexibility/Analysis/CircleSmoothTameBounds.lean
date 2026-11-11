@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.CircleJetAssembly
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+import ContinuousFlexibility.Analysis.SmoothTameOneHigh
 
 /-!
 # Sharp physical circle norms imply the frozen smooth tame bounds
@@ -55,14 +55,9 @@ theorem smoothTameOn_circle_of_oneHigh_norm_bounds
         circleNorm T γ s (S.decode (J.D k x v)) ≤
           C * oneHighVariationWeight p base (s + loss) x v) :
     SmoothTameOn p S.grading U f := by
-  refine ⟨J, ?_⟩
-  intro k x₀ hx₀
+  apply smoothTameOn_of_global_oneHigh_jet_bounds p S.grading J
+  intro k
   obtain ⟨loss, base, hb⟩ := hbound k
-  refine ⟨loss, base, 1, zero_lt_one, ?_⟩
-  intro s hs
-  obtain ⟨C, hC, hCs⟩ := circle_grading_oneHigh_bound hS p hp J k loss base hb s
-  refine ⟨C, hC, ?_⟩
-  intro x hx hnear v
-  exact hCs x hx v
+  exact ⟨loss, base, circle_grading_oneHigh_bound hS p hp J k loss base hb⟩
 
 end ContinuousFlexibility.Statements

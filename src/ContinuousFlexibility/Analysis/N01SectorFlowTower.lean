@@ -14,6 +14,9 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 local instance n01SectorFlowTowerStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01SectorFlowTowerParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
+local instance n01SectorFlowTowerRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
@@ -34,9 +37,7 @@ theorem N01Properties.sectorFlow_tower
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) z v := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
-  let B : ℝ := hdata.choose
-  have hB : 0 < B := hdata.choose_spec.1
+  obtain ⟨B, hB, hdata⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
   have hpoint : ∀ (m b : ℕ) (θ r : ℝ), b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
@@ -46,14 +47,15 @@ theorem N01Properties.sectorFlow_tower
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) z v := by
     intro m b θ r hb hr
-    let htower := hdata.choose_spec.2 m 0 b (r, θ) (by simpa only [zero_add] using hb) hr
-    let J := htower.choose
+    obtain ⟨J, hJ⟩ := hdata m 0 b (r, θ) (by simpa only [zero_add] using hb) hr
     have hmap : MapsTo (fun z : StateDirections S × ℝ =>
         (C.referenceState, 0) + sectorParameterInclusion S z)
         (sectorNeighborhood S base ε ε) (stateNeighborhood S C base ε) := by
       intro z hz
-      exact (liftSectorParameter_eq_affine S C z) ▸
-        liftSectorParameter_mem_stateNeighborhood hz le_rfl
+      exact Eq.mp
+        (congrArg (fun u : AnnularState S × ℝ => u ∈ stateNeighborhood S C base ε)
+          (liftSectorParameter_eq_affine S C z))
+        (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
     let K : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)) :=
       (J.compAffine (sectorParameterInclusion S) (C.referenceState, 0)
@@ -62,7 +64,7 @@ theorem N01Properties.sectorFlow_tower
         (liftSectorParameter_eq_affine S C z).symm)
     refine ⟨K, ?_⟩
     intro z hz v
-    have hraw := htower.choose_spec (liftSectorParameter S C z)
+    have hraw := hJ (liftSectorParameter S C z)
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
       (fun i => sectorParameterInclusion S (v i))
     have heq : K.D k z v = J.D k (liftSectorParameter S C z)

@@ -51,6 +51,9 @@ private def scalarJetPlaneMap (u v : E) : ScalarJetPlane →L[ℝ] E where
   cont := (continuous_fst.smul continuous_const).add
     (continuous_snd.smul continuous_const)
 
+@[simp] private theorem scalarJetPlaneMap_apply (u v : E) (w : ScalarJetPlane) :
+    scalarJetPlaneMap u v w = w.1 • u + w.2 • v := rfl
+
 private def scalarJetPoint (x u v : E) (q : ScalarJetPlane) : E :=
   x + scalarJetPlaneMap u v q
 
@@ -94,8 +97,15 @@ private theorem scalarJetLinear_head_apply (J : SmoothDirections U f)
       (J.D (n + 1) x (Fin.cons v vs)) w =
       J.D (n + 1) x (Fin.cons (scalarJetPlaneMap u v w) vs) := by
   let L := projectiveJetHeadLinear J.D n x vs
-  change scalarJetLinear (L u) (L v) w = L (w.1 • u + w.2 • v)
-  simp only [scalarJetLinear_apply, map_add, map_smul]
+  have hL (y : E) : L y = J.D (n + 1) x (Fin.cons y vs) :=
+    projectiveJetHeadLinear_apply J.D n x vs y
+  calc
+    scalarJetLinear (J.D (n + 1) x (Fin.cons u vs))
+        (J.D (n + 1) x (Fin.cons v vs)) w = scalarJetLinear (L u) (L v) w := by
+      rw [hL u, hL v]
+    _ = L (scalarJetPlaneMap u v w) := by
+      simp only [scalarJetLinear_apply, scalarJetPlaneMap_apply, map_add, map_smul]
+    _ = _ := hL _
 
 theorem SmoothDirections.front_two_symmetric (J : SmoothDirections U f)
     (hUc : Convex ℝ U) (n : ℕ) (x : E) (hx : x ∈ U)
@@ -147,8 +157,17 @@ theorem SmoothDirections.front_two_symmetric (J : SmoothDirections U f)
     have h1 : HasDerivAt (fun t : ℝ => a (q + t • w) v) (C1 q w) 0 := hDa q hq v w
     have hd := (scalarJetLeft.hasFDerivAt.comp_hasDerivAt 0 h0).add
       (scalarJetRight.hasFDerivAt.comp_hasDerivAt 0 h1)
-    simpa only [HasLineDerivAt, D, scalarJetLinear, DD, Pi.add_apply, Function.comp_apply,
-      ContinuousLinearMap.add_apply, ContinuousLinearMap.comp_apply] using hd
+    have hfun :
+        ((⇑scalarJetLeft ∘ fun t : ℝ => a (q + t • w) u) +
+          (⇑scalarJetRight ∘ fun t : ℝ => a (q + t • w) v)) =
+        (fun t : ℝ => scalarJetLeft (a (q + t • w) u) +
+          scalarJetRight (a (q + t • w) v)) := by
+      funext t
+      simp only [Pi.add_apply, Function.comp_apply]
+    rw [hfun] at hd
+    change HasDerivAt (fun t : ℝ => scalarJetLeft (a (q + t • w) u) +
+      scalarJetRight (a (q + t • w) v)) (DD q w) 0
+    simpa only [DD, add_apply, ContinuousLinearMap.comp_apply] using hd
   have hFline : ∀ q ∈ S, ∀ w,
       HasLineDerivAt ℝ (fun p => J.D n (scalarJetPoint x u v p) vs) (D q w) q w := by
     intro q hq w
@@ -180,17 +199,18 @@ theorem SmoothDirections.cons_eq_snoc (J : SmoothDirections U f) (hUc : Convex �
     intro x hx w v
     apply congrArg (J.D 1 x)
     funext i
-    have hi : i = 0 := Subsingleton.elim _ _
-    subst i
-    simp
+    fin_cases i
+    simp only [Fin.cons_zero]
+    exact (Fin.snoc_last v w).symm
   | succ n ih =>
     intro x hx w v
     let a := v 0
     let tail := Fin.tail v
     have hv : v = Fin.cons a tail := (Fin.cons_self_tail v).symm
     have hline : Tendsto (fun t : ℝ => x + t • a) (𝓝 (0 : ℝ)) (𝓝 x) := by
-      simpa only [zero_smul, add_zero] using
-        (continuous_const.add (continuous_id.smul continuous_const)).tendsto (0 : ℝ)
+      have hc : Continuous (fun t : ℝ => x + t • a) :=
+        continuous_const.add (continuous_id.smul continuous_const)
+      simpa only [zero_smul, add_zero] using hc.tendsto (0 : ℝ)
     have hmem : ∀ᶠ t in 𝓝 (0 : ℝ), x + t • a ∈ U :=
       hline.eventually (J.open_domain.mem_nhds hx)
     have heq : (fun t : ℝ => J.D (n + 1) (x + t • a) (Fin.cons w tail)) =ᶠ[𝓝 0]
@@ -209,8 +229,11 @@ theorem SmoothDirections.cons_eq_snoc (J : SmoothDirections U f) (hUc : Convex �
       _ = J.D (n + 2) x (Fin.cons a (Fin.cons w tail)) :=
         J.front_two_symmetric hUc n x hx w a tail
       _ = J.D (n + 2) x (Fin.cons a (Fin.snoc tail w)) := hmove
-      _ = J.D (n + 2) x (Fin.snoc v w) :=
-        congrArg (J.D (n + 2) x) ((Fin.cons_snoc_eq_snoc_cons a tail w).trans
-          (congrArg (fun q => Fin.snoc q w) hv.symm))
+      _ = J.D (n + 2) x (Fin.snoc v w) := by
+        have hs : Fin.snoc (α := fun _ : Fin (n + 2) => E) (Fin.cons a tail) w =
+            Fin.snoc v w :=
+          congrArg (fun q : Fin (n + 1) → E =>
+            Fin.snoc (α := fun _ : Fin (n + 2) => E) q w) hv.symm
+        exact congrArg (J.D (n + 2) x) ((Fin.cons_snoc_eq_snoc_cons a tail w).trans hs)
 
 end ContinuousFlexibility.Statements

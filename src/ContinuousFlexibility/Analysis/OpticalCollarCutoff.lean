@@ -28,22 +28,23 @@ theorem smoothTransition_iteratedDeriv_uniform_bound (n : ℕ) :
         Real.smoothTransition.le_one r
   | succ n =>
       have hc : Continuous (iteratedDeriv (n + 1) Real.smoothTransition) :=
-        (Real.smoothTransition.contDiff (n := ∞)).continuous_iteratedDeriv (n + 1) (by simp)
+        (Real.smoothTransition.contDiff (n := ⊤)).continuous_iteratedDeriv (n + 1) (by simp)
       obtain ⟨B, hB⟩ := isCompact_Icc.exists_bound_of_continuousOn
         (hc.continuousOn (s := Icc (-1 : ℝ) 2))
       refine ⟨max B 1, zero_lt_one.trans_le (le_max_right _ _), fun r => ?_⟩
       by_cases hr : r ∈ Icc (-1 : ℝ) 2
-      · exact (by simpa only [Real.norm_eq_abs] using hB r hr).trans (le_max_left _ _)
+      · have hrB : |iteratedDeriv (n + 1) Real.smoothTransition r| ≤ B := by
+          simpa only [Real.norm_eq_abs] using hB r hr
+        exact hrB.trans (le_max_left _ _)
       · have he : Real.smoothTransition =ᶠ[𝓝 r] (fun _ => if r < 0 then 0 else 1) := by
           by_cases hleft : r < 0
           · filter_upwards [Iio_mem_nhds hleft] with s hs
             rw [if_pos hleft]
             exact Real.smoothTransition.zero_of_nonpos hs.le
           · have hright : 1 < r := by
-              have hn := not_mem_Icc.mp hr
-              rcases hn with hn | hn
-              · linarith
-              · linarith
+              by_contra hn
+              apply hr
+              constructor <;> linarith
             filter_upwards [Ioi_mem_nhds hright] with s hs
             rw [if_neg hleft]
             exact Real.smoothTransition.one_of_one_le hs.le
@@ -103,13 +104,17 @@ theorem returnOpticalCutoff_iteratedDeriv_bound (n : ℕ) :
       ((2 * δ)⁻¹) ^ n * iteratedDeriv n Real.smoothTransition
         ((2 * δ)⁻¹ * (r + (δ - x))) := by
     rw [returnOpticalCutoff_affine x hδ]
-    change iteratedDeriv n ((fun y => Real.smoothTransition ((2 * δ)⁻¹ * y)) ∘
-      (fun y => y + (δ - x))) r = _
-    rw [show ((fun y => Real.smoothTransition ((2 * δ)⁻¹ * y)) ∘
-        (fun y => y + (δ - x))) =
-      (fun y => (fun t => Real.smoothTransition ((2 * δ)⁻¹ * t)) (y + (δ - x))) from rfl,
-      iteratedDeriv_comp_add_const,
-      iteratedDeriv_comp_const_mul (Real.smoothTransition.contDiff (n := (n : ℕ∞))) ((2 * δ)⁻¹)]
+    let f : ℝ → ℝ := fun y => Real.smoothTransition ((2 * δ)⁻¹ * y)
+    have hshift : iteratedDeriv n (fun y => f (y + (δ - x))) r =
+        iteratedDeriv n f (r + (δ - x)) :=
+      congrArg (fun g : ℝ → ℝ => g r) (iteratedDeriv_comp_add_const n f (δ - x))
+    have hscale : iteratedDeriv n f (r + (δ - x)) =
+        ((2 * δ)⁻¹) ^ n * iteratedDeriv n Real.smoothTransition
+          ((2 * δ)⁻¹ * (r + (δ - x))) :=
+      congrArg (fun g : ℝ → ℝ => g (r + (δ - x)))
+        (iteratedDeriv_comp_const_mul
+          (Real.smoothTransition.contDiff (n := (n : ℕ∞))) ((2 * δ)⁻¹))
+    exact hshift.trans hscale
   have hc0 : 0 ≤ (2 * δ)⁻¹ := inv_nonneg.mpr (by linarith)
   have hcd : (2 * δ)⁻¹ ≤ δ⁻¹ := (inv_le_inv₀ (by linarith : 0 < 2 * δ) hδ).mpr (by linarith)
   rw [hformula, abs_mul, abs_of_nonneg (pow_nonneg hc0 n)]

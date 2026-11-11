@@ -21,6 +21,9 @@ local instance n01FlowHeightScalingStateSMul (S : PhysicalSpacesData) : SMul ℝ
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ContDiff BigOperators
 
+local instance n01FlowHeightScalingRealNormedSpace : NormedSpace ℝ ℝ :=
+    NormedField.toNormedSpace
+
 theorem stateProfile_height_parameter_line
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     (z : StateDirections S × ℝ) (η : HeightPair S) (t : ℝ) :
@@ -31,6 +34,24 @@ theorem stateProfile_height_parameter_line
   exact stateProfile_eq_of_physical_coordinates
     (congrArg Prod.fst ht) (congrArg (fun v => v.2.1) ht)
 
+private theorem height_scaling_scalar_parameter
+    (S : PhysicalSpacesData) (z : StateDirections S × ℝ) (t : ℝ) :
+    z + t • (z.2 • scalarParameterDirection S) = (z.1, z.2 + t * z.2) := by
+  have hsmul : t • (z.2 • scalarParameterDirection S) =
+      (t * z.2) • scalarParameterDirection S :=
+    smul_smul t z.2 (scalarParameterDirection S)
+  exact (congrArg (fun v : StateDirections S × ℝ => z + v) hsmul).trans
+    (scalarParameter_line S z (t * z.2))
+
+private theorem coefficients_eq_of_profile_and_height
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    (x y : AnnularState S × ℝ)
+    (hw : stateProfile D S C x.1 = stateProfile D S C y.1)
+    (hh : stateHeight D S C x = stateHeight D S C y) :
+    originalCoefficients D S C x = originalCoefficients D S C y :=
+  congrArg₂ (fun (w : ℝ → ℝ) (h : PolarPoint → ℝ) =>
+    (⟨polarLinearA w h, polarLinearB w h, polarCorrectedC w h⟩ : SymmetricCoefficients)) hw hh
+
 theorem originalCoefficients_height_scaling
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     (z : StateDirections S × ℝ) (t : ℝ) :
@@ -38,31 +59,38 @@ theorem originalCoefficients_height_scaling
       (z + t • heightParameterDirection S (liftSectorParameter S C z).1.1)) =
     originalCoefficients D S C (liftSectorParameter S C
       (z + t • (z.2 • scalarParameterDirection S))) := by
-  have hw : stateProfile D S C (liftSectorParameter S C
-      (z + t • heightParameterDirection S (liftSectorParameter S C z).1.1)).1 =
-      stateProfile D S C (liftSectorParameter S C
-        (z + t • (z.2 • scalarParameterDirection S))).1 := by
-    rw [smul_smul, liftSectorParameter_scalar_line]
-    exact stateProfile_height_parameter_line z _ t
-  have hh : stateHeight D S C (liftSectorParameter S C
-      (z + t • heightParameterDirection S (liftSectorParameter S C z).1.1)) =
-      stateHeight D S C (liftSectorParameter S C
-        (z + t • (z.2 • scalarParameterDirection S))) := by
-    funext p
-    have hfield := liftSectorParameter_height_line_field S C z
-      (liftSectorParameter S C z).1.1 t p
-    change stateU S (liftSectorParameter S C
-      (z + t • heightParameterDirection S (liftSectorParameter S C z).1.1)).1 p =
+  let ξ : HeightPair S := (liftSectorParameter S C z).1.1
+  let zL : AnnularState S × ℝ := liftSectorParameter S C (z + t • heightParameterDirection S ξ)
+  let zR : AnnularState S × ℝ := ((liftSectorParameter S C z).1, z.2 + t * z.2)
+  have hright : liftSectorParameter S C (z + t • (z.2 • scalarParameterDirection S)) = zR :=
+    congrArg (liftSectorParameter S C) (height_scaling_scalar_parameter S z t)
+  have hw : stateProfile D S C zL.1 = stateProfile D S C zR.1 :=
+    stateProfile_height_parameter_line z ξ t
+  have hrad : stateRadialHeight D S C zL.1 = stateRadialHeight D S C zR.1 := by
+    funext r
+    exact congrArg (fun w : ℝ → ℝ => ∫ a in D.b..r, w a) hw
+  have hq : zL.2 = z.2 :=
+    congrArg (fun y : AnnularState S × ℝ => y.2) (liftSectorParameter_height_line S C z ξ t)
+  have hfield (p : PolarPoint) : stateU S zL.1 p =
       stateU S (liftSectorParameter S C z).1 p +
-        t * stateU S (liftSectorParameter S C z).1 p at hfield
-    simp only [stateHeight, stateRadialHeight, hw, hfield]
-    rw [smul_smul, liftSectorParameter_scalar_line]
-    have hq : (liftSectorParameter S C
-        (z + t • heightParameterDirection S (liftSectorParameter S C z).1.1)).2 = z.2 := by
-      rw [liftSectorParameter_height_line]
-    rw [hq]
+        t * stateU S (liftSectorParameter S C z).1 p :=
+    liftSectorParameter_height_line_field S C z ξ t p
+  have hh : stateHeight D S C zL = stateHeight D S C zR := by
+    funext p
+    change stateRadialHeight D S C zL.1 p.1 + zL.2 * stateU S zL.1 p =
+      stateRadialHeight D S C zR.1 p.1 +
+        (z.2 + t * z.2) * stateU S (liftSectorParameter S C z).1 p
+    rw [hrad, hq, hfield]
     ring
-  simp only [originalCoefficients, hw, hh]
+  exact (coefficients_eq_of_profile_and_height zL zR hw hh).trans
+    (congrArg (originalCoefficients D S C) hright.symm)
+
+private theorem scalar_first_jet_smul
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (A : E [×1]→L[ℝ] ℝ) (c : ℝ) (w : E) :
+    A (fun _ => c • w) = c * A (fun _ => w) := by
+  simpa only [Fin.prod_univ_one, smul_eq_mul] using
+    A.map_smul_univ (fun _ : Fin 1 => c) (fun _ : Fin 1 => w)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -81,12 +109,21 @@ theorem N01Properties.minusFlow_height_scaling
       (fun r => C.minusFlow (liftSectorParameter S C
         (z + t • (z.2 • scalarParameterDirection S))) m r θ)
       (Icc (C.left m) (C.right m)) := by
-  apply hN.minusFlow_eq_of_characteristic_speed hS hT
-    (liftSectorParameter_mem_stateNeighborhood hl le_rfl)
-    (liftSectorParameter_mem_stateNeighborhood hr le_rfl)
-    (hN.2.2.1.liftSectorParameter_sector _) m θ
-  intro r hr' ψ
-  rw [originalCoefficients_height_scaling]
+  let y : StateDirections S × ℝ :=
+    z + t • heightParameterDirection S (liftSectorParameter S C z).1.1
+  let y' : StateDirections S × ℝ := z + t • (z.2 • scalarParameterDirection S)
+  have hy : liftSectorParameter S C y ∈ stateNeighborhood S C base ε :=
+    liftSectorParameter_mem_stateNeighborhood hl le_rfl
+  have hy' : liftSectorParameter S C y' ∈ stateNeighborhood S C base ε :=
+    liftSectorParameter_mem_stateNeighborhood hr le_rfl
+  have hsector : stateSector S (liftSectorParameter S C y).1 :=
+    hN.2.2.1.liftSectorParameter_sector y
+  have hcoeff : originalCoefficients D S C (liftSectorParameter S C y) =
+      originalCoefficients D S C (liftSectorParameter S C y') :=
+    originalCoefficients_height_scaling z t
+  exact hN.minusFlow_eq_of_characteristic_speed hS hT hy hy' hsector m θ
+    (fun r _ ψ => congrArg (fun L : SymmetricCoefficients =>
+      minusCharacteristicSpeed L (r, ψ)) hcoeff)
 
 /-- This is an identity of the actual angular derivatives of the same
 flow; no formal angular jet is introduced. -/
@@ -129,9 +166,10 @@ theorem N01Properties.ordinaryFlowFamily_height_scalar_jet
     J.D 1 z (fun _ => heightParameterDirection S (liftSectorParameter S C z).1.1) =
       z.2 * J.D 1 z (fun _ => scalarParameterDirection S) := by
   have hd := (hN.ordinaryFlowFamily_height_scaling_eventually hS hT hz m b θ hr).deriv_eq
-  rw [J.deriv_line z _ hz, J.deriv_line z _ hz] at hd
-  have hscale := (J.D 1 z).map_smul_univ (fun _ : Fin 1 => z.2)
-    (fun _ : Fin 1 => scalarParameterDirection S)
-  simpa only [Fin.prod_univ_one, smul_eq_mul] using hd.trans hscale
+  have hleft := J.deriv_line z
+    (heightParameterDirection S (liftSectorParameter S C z).1.1) hz
+  have hright := J.deriv_line z (z.2 • scalarParameterDirection S) hz
+  exact hleft.symm.trans (hd.trans (hright.trans
+    (scalar_first_jet_smul (J.D 1 z) z.2 (scalarParameterDirection S))))
 
 end ContinuousFlexibility.Statements

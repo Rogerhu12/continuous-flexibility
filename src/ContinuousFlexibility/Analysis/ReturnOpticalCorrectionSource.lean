@@ -71,9 +71,7 @@ theorem N01Properties.returnCorrectionResidualErrorField_contDiffOn_of_cutoffs
   filter_upwards [hmem] with q hq
   unfold returnCorrectionResidualErrorField
     returnCorrectionRadialErrorFlux returnCorrectionAngularErrorFlux
-  split_ifs with h
-  · rfl
-  · exact False.elim (h hq)
+  split_ifs with h <;> rfl
 
 omit hS hT hz hsector hχ hχrange hdisc in
 theorem N01Properties.returnCorrectionResidualErrorField_eq_zero_outside_of_cutoffs

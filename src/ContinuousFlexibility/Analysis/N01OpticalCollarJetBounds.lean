@@ -60,25 +60,27 @@ theorem opticalSpeed_lower_boundaryDistance
   have hQr : 0 < Q r := Real.sqrt_pos.mp (hτ.trans_le hspeed)
   have hsq : τ ^ 2 ≤ Q r := by
     have h := pow_le_pow_left₀ hτ.le hspeed 2
-    simpa only [opticalSpeed, Real.sq_sqrt hQr.le] using h
+    change τ ^ 2 ≤ (Real.sqrt (Q r)) ^ 2 at h
+    simpa only [Real.sq_sqrt hQr.le] using h
   have hQl : Q l = 0 := by simp only [Q, hrootl, neg_zero, zero_div]
   have hQh : Q h = 0 := by simp only [Q, hrooth, neg_zero, zero_div]
   have hleft : Q r ≤ M * (r - l) := by
     have h := hQlip l ⟨le_rfl, hlh.le⟩ r ⟨hr.1.le, hr.2.le⟩
     simpa only [hQl, sub_zero, abs_of_pos hQr, abs_of_pos (sub_pos.mpr hr.1)] using h
   have hright : Q r ≤ M * (h - r) := by
-    have h := hQlip h ⟨hlh.le, le_rfl⟩ r ⟨hr.1.le, hr.2.le⟩
+    have hb := hQlip h ⟨hlh.le, le_rfl⟩ r ⟨hr.1.le, hr.2.le⟩
     simpa only [hQh, sub_zero, abs_of_pos hQr, abs_sub_comm r h,
-      abs_of_pos (sub_pos.mpr hr.2)] using h
+      abs_of_pos (sub_pos.mpr hr.2)] using hb
   let d := min (r - l) (h - r)
   have hdpos : 0 < d := lt_min (sub_pos.mpr hr.1) (sub_pos.mpr hr.2)
   have hqdist : τ ^ 2 ≤ M * d := by
-    rw [d, mul_min_of_nonneg _ _ hM]
+    dsimp only [d]
+    rw [mul_min_of_nonneg _ _ hM]
     exact le_min (hsq.trans hleft) (hsq.trans hright)
   have hsq' : τ ^ 2 ≤ (M + 1) * d :=
     hqdist.trans (mul_le_mul_of_nonneg_right (by linarith : M ≤ M + 1) hdpos.le)
   apply (inv_le_iff_one_le_mul₀ hdpos).mpr
-  rw [← mul_div_assoc]
+  rw [div_mul_eq_mul_div]
   apply (le_div_iff₀ (sq_pos_of_pos hτ)).mpr
   simpa only [one_mul, mul_comm] using hsq'
 
@@ -138,6 +140,51 @@ theorem N01Properties.opticalCollar_inverse_boundaryDistance_bound
   <;> ring
 
 
+/-- Extract the zeroth parameter jet once, before applying the geometric
+collar factor. The equality of actual jets is transported explicitly. -/
+theorem N01Properties.ordinaryFlowFamily_weighted_zeroth_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε) (s : ℕ) :
+    ∃ B : ℝ, 0 < B ∧ ∀ z ∈ stateNeighborhood S C base ε, ∀ m a b p,
+      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+      min (p.1 - C.left m) (C.right m - p.1) ^ a *
+        |ordinaryFlowFamily S C m a b p z| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ B *
+          (1 + pairGrading (stateGrading S) realGrading (s + loss)
+            (z - (C.referenceState, 0))) := by
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  have hpoint : ∀ z ∈ stateNeighborhood S C base ε, ∀ m a b p,
+      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+      min (p.1 - C.left m) (C.right m - p.1) ^ a *
+        |ordinaryFlowFamily S C m a b p z| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ B *
+          (1 + pairGrading (stateGrading S) realGrading (s + loss)
+            (z - (C.referenceState, 0))) := by
+    intro z hz m a b p hab hp
+    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m a b p hab hp
+    have hraw : min (p.1 - C.left m) (C.right m - p.1) ^ a *
+        |J.D 0 z Fin.elim0| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ B *
+          (1 + pairGrading (stateGrading S) realGrading (s + loss)
+            (z - (C.referenceState, 0))) := by
+      dsimp only [B]
+      simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
+        mul_one, add_zero] using hJ z hz Fin.elim0
+    have heq : min (p.1 - C.left m) (C.right m - p.1) ^ a *
+        |J.D 0 z Fin.elim0| =
+        min (p.1 - C.left m) (C.right m - p.1) ^ a *
+          |ordinaryFlowFamily S C m a b p z| :=
+      congrArg (fun t : ℝ => min (p.1 - C.left m) (C.right m - p.1) ^ a * |t|)
+        (J.zero z hz)
+    exact heq.symm.le.trans hraw
+  exact ⟨B, hB, hpoint⟩
+
 /-- The actual N01 spatial-flow jet estimate on the selected collars,
 with the endpoint factors divided out quantitatively. This is the
 ordinary mixed derivative appearing in the original tower. -/
@@ -160,37 +207,21 @@ theorem N01Properties.ordinaryFlowFamily_collar_bound
             T.E0 (T.sample (C.cell m)) ^ B *
             (1 + pairGrading (stateGrading S) realGrading (s + loss)
               (z - (C.referenceState, 0)))) := by
-  obtain ⟨K, A, hK, hA, hdist⟩ :=
-    hN.opticalCollar_inverse_boundaryDistance_bound j x δ hB₀ hcell hinside hspeed
-  have hdata := hN
-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩
-  obtain ⟨B, hB, hflow⟩ := hflow 0 s
+  have hgeom : ∃ K A : ℝ, 0 < K ∧ 0 < A ∧ ∀ m r,
+      r ∈ Icc (x m - δ m) (x m + δ m) →
+      (min (r - C.left m) (C.right m - r))⁻¹ ≤
+        K * radialE (D.cellIndex (j m)) ^ A :=
+    @N01Properties.opticalCollar_inverse_boundaryDistance_bound
+      D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
+  obtain ⟨K, A, hK, hA, hdist⟩ := hgeom
+  obtain ⟨B, hB, hraw⟩ := hN.ordinaryFlowFamily_weighted_zeroth_bound s
   refine ⟨K, A, B, hK, hA, hB, fun z hz m a b p hab hp => ?_⟩
   have hm : p.1 ∈ Ioo (C.left m) (C.right m) :=
     ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
-  let d := min (p.1 - C.left m) (C.right m - p.1)
-  have hd : 0 < d := lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
-  obtain ⟨J, hJ⟩ := hflow m a b p hab hm
-  have hraw := hJ z hz Fin.elim0
-  rw [J.zero z hz] at hraw
-  simp only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-    mul_one, add_zero] at hraw
-  let M := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-    T.E0 (T.sample (C.cell m)) ^ B *
-      (1 + pairGrading (stateGrading S) realGrading (s + loss)
-        (z - (C.referenceState, 0)))
-  change d ^ a * |ordinaryFlowFamily S C m a b p z| ≤ M at hraw
-  have hM : 0 ≤ M := (mul_nonneg (pow_nonneg hd.le _) (abs_nonneg _)).trans hraw
-  have hraw' := mul_le_mul_of_nonneg_left hraw (pow_nonneg (inv_nonneg.mpr hd.le) a)
-  have heq : d⁻¹ ^ a * (d ^ a * |ordinaryFlowFamily S C m a b p z|) =
-      |ordinaryFlowFamily S C m a b p z| := by
-    rw [← mul_assoc, ← mul_pow, inv_mul_cancel₀ hd.ne', one_pow, one_mul]
-  rw [heq] at hraw'
-  have hpow := pow_le_pow_left₀ (inv_nonneg.mpr hd.le) (hdist m p.1 hp) a
-  have h := hraw'.trans (mul_le_mul_of_nonneg_right hpow hM)
-  have hE : 0 < radialE (D.cellIndex (j m)) := Real.exp_pos _
-  rw [mul_pow, ← Real.rpow_mul_natCast hE.le] at h
-  exact h
+  have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
+    lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
+  exact abs_le_of_power_weight_bound a hd (Real.exp_pos _)
+    (hdist m p.1 hp) (hraw z hz m a b p hab hm)
 
 /-- The same two geometric constants precede every parameter and spatial
 order. The actual N01 directional tower, its neighborhood and its
@@ -214,8 +245,13 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
               base (s + loss) (z - (C.referenceState, 0)) v) := by
-  obtain ⟨K, A, hK, hA, hdist⟩ :=
-    hN.opticalCollar_inverse_boundaryDistance_bound j x δ hB₀ hcell hinside hspeed
+  have hgeom : ∃ K A : ℝ, 0 < K ∧ 0 < A ∧ ∀ m r,
+      r ∈ Icc (x m - δ m) (x m + δ m) →
+      (min (r - C.left m) (C.right m - r))⁻¹ ≤
+        K * radialE (D.cellIndex (j m)) ^ A :=
+    @N01Properties.opticalCollar_inverse_boundaryDistance_bound
+      D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
+  obtain ⟨K, A, hK, hA, hdist⟩ := hgeom
   refine ⟨K, A, hK, hA, fun k s => ?_⟩
   let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
   let B : ℝ := hdata.choose
@@ -234,8 +270,10 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
     have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
       lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
     obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m a b p hab hm
-    exact ⟨J, fun z hz v => abs_le_of_power_weight_bound a hd (Real.exp_pos _)
-      (hdist m p.1 hp) (hJ z hz v)⟩
+    refine ⟨J, fun z hz v => ?_⟩
+    dsimp only [B]
+    exact abs_le_of_power_weight_bound a hd (Real.exp_pos _)
+      (hdist m p.1 hp) (hJ z hz v)
   exact Exists.intro B (And.intro hB hpoint)
 
 

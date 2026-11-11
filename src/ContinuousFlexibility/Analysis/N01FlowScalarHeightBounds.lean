@@ -102,8 +102,8 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
       simp only [Nat.cast_add, Nat.cast_one]
       linarith only [hgrade]
     exact h.trans (mul_le_mul_of_nonneg_left
-      (add_le_add_right (mul_le_mul_of_nonneg_right hadd hbase)
-        (heightPairGrading S (s + loss) η)) hP)
+      (add_le_add (mul_le_mul_of_nonneg_right hadd hbase)
+        (le_refl (heightPairGrading S (s + loss) η))) hP)
   have h := J.abs_pure_scalar_jet_le_of_mixed_euler_bound x₀
     (scalarParameterDirection S) (heightParameterDirection S η) hEuler n z.2 _ hline hbound
   simpa only [x₀, scalarParameter_zero_line, P] using h

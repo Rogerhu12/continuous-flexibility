@@ -14,12 +14,62 @@ Both inverse identities retain the required even/zero-mean and odd sectors.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
 
 open ContinuousFlexibility.Analysis
 open scoped NNReal
+
+/-- Packaging takes place in one circle model before any physical-state
+types are introduced. All maps are the already constructed actual
+Fourier operators. -/
+theorem circleReturnOperators_of_weighted_margin
+    {T : MaterialData} {γ : ℝ} {S : CircleModelData}
+    (hCircle : IsCircleModel T γ S) (travel c : ℕ → ℝ)
+    (hc : ∀ m, 0 < c m)
+    (hdiv : ∀ m j : ℕ, 1 ≤ j → c m / j ≤ |Real.sin (j * travel m)|)
+    {A : ℝ} (hA : 0 ≤ A) (hbound : ∀ m, (c m)⁻¹ ≤ A * T.M (T.sample m))
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m)) :
+    ∃ L : S.Space →L[ℝ] S.Space,
+      ∃ J : S.Space →ₗ[ℝ] S.Space,
+        (∀ v m θ, S.decode (L v) m θ =
+          evenPart (fun t => S.decode v m (t + travel m)) θ) ∧
+        (∀ g, (∀ m, Function.Even (S.decode g m) ∧ angularMean (S.decode g m) = 0) →
+          L (J g) = g ∧ ∀ m θ, S.decode (J g) m (-θ) = -S.decode (J g) m θ) ∧
+        (∀ v, (∀ m θ, S.decode v m (-θ) = -S.decode v m θ) → J (L v) = v) ∧
+        IsTameLinear S.grading S.grading J 4 0 := by
+  have hbound' : ∀ m, (c m)⁻¹ ≤ A * T.M (T.sample m) ^ (1 : ℕ) := by
+    simpa only [pow_one] using hbound
+  let L : S.Space →L[ℝ] S.Space := circleReturnContinuousLinear hCircle travel
+  let J : S.Space →ₗ[ℝ] S.Space :=
+    circleReturnInverseLinear hCircle travel c hc hdiv 1 hA hbound' hM hH
+  have hL (v : S.Space) : L v = circleReturnLinear hCircle travel v :=
+    IsTameLinear.toContinuousLinearMap_apply (circleReturnLinear_tame hCircle travel)
+      (withSeminorms_graded (fun i => S.level i) S.bond)
+      (withSeminorms_graded (fun i => S.level i) S.bond)
+      (gradedSeminorm_monotone (fun i => S.level i) S.bond) v
+  have hdecode : ∀ v m θ, S.decode (L v) m θ =
+      evenPart (fun t => S.decode v m (t + travel m)) θ := by
+    intro v m θ
+    simpa only [evenPart, circleReturnShift, circleReturnEven] using
+      circleReturnContinuousLinear_decode hCircle travel v m θ
+  have hright : ∀ g, (∀ m, Function.Even (S.decode g m) ∧ angularMean (S.decode g m) = 0) →
+      L (J g) = g ∧ ∀ m θ, S.decode (J g) m (-θ) = -S.decode (J g) m θ := by
+    intro g hg
+    have heq : L (J g) = g := by
+      rw [hL]
+      exact circleReturnInverseLinear_right_inverse hCircle travel c hc hdiv 1
+        hA hbound' hM hH g (fun m => (hg m).1) (fun m => (hg m).2)
+    exact And.intro heq (fun m θ => circleReturnInverseLinear_odd hCircle travel c hc hdiv 1
+      hA hbound' hM hH g m θ)
+  have hleft : ∀ v, (∀ m θ, S.decode v m (-θ) = -S.decode v m θ) → J (L v) = v := by
+    intro v hv
+    rw [hL]
+    exact circleReturnInverseLinear_left_inverse hCircle travel c hc hdiv 1
+      hA hbound' hM hH v hv
+  have htame : IsTameLinear S.grading S.grading J 4 0 :=
+    circleReturnInverseLinear_tame hCircle travel c hc hdiv 1 hA hbound' hM hH
+  exact Exists.intro L (Exists.intro J (And.intro hdecode
+    (And.intro hright (And.intro hleft htame))))
 
 theorem N01Properties.returnLinearOperators
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -34,41 +84,13 @@ theorem N01Properties.returnLinearOperators
         (∀ v, IsOddCircle S v → J (L v) = v) ∧
         IsTameLinear (S.circle (3 / 4 : ℝ)).grading
           (S.circle (3 / 4 : ℝ)).grading J 4 0 := by
-  let SC : CircleModelData := S.circle (3 / 4 : ℝ)
-  have hCircle : IsCircleModel T (3 / 4 : ℝ) SC := hS.2.1 _
+  have hCircle : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 _
   have hM : ∀ m, 0 ≤ T.M (T.sample m) :=
-    fun m => (material_circle_sample_weights_pos hT hN.1.1).1 m |>.le
+    fun m => ((material_circle_sample_weights_pos hT hN.1.1).1 m).le
   have hH : ∀ m, 0 ≤ T.H (T.sample m) :=
-    fun m => (material_circle_sample_weights_pos hT hN.1.1).2 m |>.le
+    fun m => ((material_circle_sample_weights_pos hT hN.1.1).2 m).le
   obtain ⟨A, hA, c, hc, hbound, hdiv⟩ := hN.uniform_returnMargin_family hS hT
-  have hbound' : ∀ m, (c m)⁻¹ ≤ A * T.M (T.sample m) ^ (1 : ℕ) := by
-    simpa only [pow_one] using hbound
-  let L : CircleSpace S →L[ℝ] CircleSpace S :=
-    circleReturnContinuousLinear hCircle C.travel
-  let J : CircleSpace S →ₗ[ℝ] CircleSpace S :=
-    circleReturnInverseLinear hCircle C.travel c hc hdiv 1 hA.le hbound' hM hH
-  have hL (v : CircleSpace S) : L v = circleReturnLinear hCircle C.travel v :=
-    IsTameLinear.toContinuousLinearMap_apply (circleReturnLinear_tame hCircle C.travel)
-      (withSeminorms_graded (fun i => SC.level i) SC.bond)
-      (withSeminorms_graded (fun i => SC.level i) SC.bond)
-      (gradedSeminorm_monotone (fun i => SC.level i) SC.bond) v
-  refine ⟨L, J, ?_, ?_, ?_, ?_⟩
-  · intro v m θ
-    simpa only [circleRotationDifference, evenPart, circleReturnShift, circleReturnEven] using
-      circleReturnContinuousLinear_decode hCircle C.travel v m θ
-  · intro g hg
-    constructor
-    · rw [hL]
-      exact circleReturnInverseLinear_right_inverse hCircle C.travel c hc hdiv 1
-        hA.le hbound' hM hH g (fun m => (hg m).1) (fun m => (hg m).2)
-    · intro m θ
-      exact circleReturnInverseLinear_odd hCircle C.travel c hc hdiv 1
-        hA.le hbound' hM hH g m θ
-  · intro v hv
-    rw [hL]
-    exact circleReturnInverseLinear_left_inverse hCircle C.travel c hc hdiv 1
-      hA.le hbound' hM hH v hv
-  · exact circleReturnInverseLinear_tame hCircle C.travel c hc hdiv 1
-      hA.le hbound' hM hH
+  exact circleReturnOperators_of_weighted_margin hCircle C.travel c hc hdiv
+    hA.le hbound hM hH
 
 end ContinuousFlexibility.Statements

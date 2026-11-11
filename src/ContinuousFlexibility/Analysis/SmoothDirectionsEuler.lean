@@ -16,6 +16,8 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 local instance smoothDirectionsEulerRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -55,6 +57,7 @@ theorem SmoothDirections.euler_scalar_jet
       have hnext := J.hasDerivAt_line_jet x w (n + 1) (fun _ => w) hq
       have hprev := J.hasDerivAt_line_jet x w n (fun _ => w) hq
       have hright := ((hasDerivAt_id q).fun_mul hnext).fun_add (hprev.const_mul (n : ℝ))
+      simp only [id_eq] at hright
       have hd := heq.deriv_eq
       rw [hleft.deriv, hright.deriv] at hd
       simp only [Fin.cons_snoc_eq_snoc_cons, euler_cons_const, one_mul] at hd
@@ -83,9 +86,15 @@ theorem SmoothDirections.abs_pure_scalar_jet_le_of_mixed_euler_bound
     have hj' : HasDerivAt
         (fun a : ℝ => J.D (n + 1) (x + (a * q) • w) (fun _ => w))
         (J.D (n + 2) (x + (t * q) • w) (fun _ => w) * q) t := by
-      simpa only [Function.comp_def, euler_cons_const, one_mul] using
+      simpa only [Function.comp_def, euler_cons_const, id_eq, one_mul] using
         hj.comp t ((hasDerivAt_id t).mul_const q)
-    have hp := ((hasDerivAt_id t).pow (n + 1)).fun_mul hj'
+    have hpred : n + 1 - 1 = n := by omega
+    have hp : HasDerivAt g
+        (((n + 1 : ℕ) : ℝ) * t ^ n *
+          J.D (n + 1) (x + (t * q) • w) (fun _ => w) +
+        t ^ (n + 1) * (J.D (n + 2) (x + (t * q) • w) (fun _ => w) * q)) t := by
+      simpa only [g, id_eq, Pi.pow_apply, hpred, one_mul, mul_one] using
+        ((hasDerivAt_id t).pow (n + 1)).fun_mul hj'
     apply hp.congr_deriv
     have he := J.euler_scalar_jet x w u heuler (n + 1) (t * q) (hline t ht)
     dsimp only [g']

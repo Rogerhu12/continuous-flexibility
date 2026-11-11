@@ -86,7 +86,7 @@ theorem localizedStateParameterDirection_grading_le
   rw [map_smul_eq_mul, Real.norm_eq_abs, controlParameterDirection_grading,
     heightParameterDirection_grading] at htri
   apply htri.trans
-  apply add_le_add_left
+  apply add_le_add (le_refl _)
   exact (mul_le_mul_of_nonneg_left
     (singletonKappaDirection_grading_le hC m s hM hH) (abs_nonneg c)).trans_eq (by ring)
 
@@ -122,8 +122,8 @@ theorem localizedStateParameterDirection_weighted_grading_le
           (2 * circleSobolevConstant * Real.sqrt
             (circleComponentEnergy T (3 / 4 : ℝ) (s + d + 1)
               ((S.circle (3 / 4 : ℝ)).decode u) m).toReal) :=
-      add_le_add_left (mul_le_mul_of_nonneg_left hpoint
-        (circleSingletonGradingConstant_nonneg s)) _
+      add_le_add (le_refl _) (mul_le_mul_of_nonneg_left hpoint
+        (circleSingletonGradingConstant_nonneg s))
     _ = _ := by ring
 
 theorem N01Properties.exists_localized_state_directions
@@ -171,7 +171,7 @@ theorem N01Properties.exists_localized_state_directions
     have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
     exact (localizedStateParameterDirection_weighted_grading_le (hS.2.1 (3 / 4 : ℝ))
       v.1.val.2.2.1 m s d (η m) hM hH).trans
-      (add_le_add_right (mul_le_mul_of_nonneg_left ((henergy s).2 m)
-        (pow_nonneg (zero_le_one.trans hM) d)) _)
+      (add_le_add (mul_le_mul_of_nonneg_left ((henergy s).2 m)
+        (pow_nonneg (zero_le_one.trans hM) d)) (le_refl _))
 
 end ContinuousFlexibility.Statements

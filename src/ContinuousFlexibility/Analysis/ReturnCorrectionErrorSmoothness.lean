@@ -234,9 +234,7 @@ theorem N01Properties.returnCorrectionResidualErrorField_contDiffOn
   filter_upwards [hmem] with q hq
   unfold returnCorrectionResidualErrorField
     returnCorrectionRadialErrorFlux returnCorrectionAngularErrorFlux
-  split_ifs with h
-  · rfl
-  · exact False.elim (h hq)
+  split_ifs with h <;> rfl
 
 theorem N01Properties.returnCorrectionResidualErrorField_materialPullback_contDiff
     (ρ : CircleSpace S) (η : HeightPair S) :

@@ -20,6 +20,15 @@ open scoped Topology
 
 local instance n02ProjectiveChartVariationStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n02ProjectiveChartVariationParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
+local instance n02ProjectiveChartVariationRealNormedSpace :
+    NormedSpace ℝ ℝ := NormedField.toNormedSpace
+
+private theorem chart_affine_line_pair {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (a b w : E) (q t : ℝ) :
+    (a + (b + t • w), q + t * 0) = ((a + b) + t • w, q) :=
+  Prod.ext (add_assoc a b (t • w)).symm (by rw [mul_zero, add_zero])
 
 theorem SmoothDirections.hasProjectiveLineDerivAt_self
     {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -81,7 +90,8 @@ theorem liftSectorParameter_chart_line (S : PhysicalSpacesData)
   change (C.referenceState + (y.1.val + t • ((0, (0, (0, w))) : AnnularState S)),
     y.2 + t * 0) =
       ((C.referenceState + y.1.val) + t • ((0, (0, (0, w))) : AnnularState S), y.2)
-  rw [add_assoc, mul_zero, add_zero]
+  exact chart_affine_line_pair C.referenceState y.1.val
+    ((0, (0, (0, w))) : AnnularState S) y.2 t
 
 theorem N01Properties.hasProjectiveLineDerivAt_returnResidual_chartDirection
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -120,11 +130,11 @@ theorem N01Properties.hasProjectiveLineDerivAt_returnResidual_chartDirection
     have heq : (fun t : ℝ => f (liftSectorParameter S C (y + t • d))) =
         (fun t : ℝ => f (z.1 + t • (0, (0, (0, w))), z.2)) := by
       funext t
-      rw [show liftSectorParameter S C (y + t • d) =
-        ((liftSectorParameter S C y).1 + t • (0, (0, (0, w))), y.2) from
-          liftSectorParameter_chart_line S C y w hwodd t, hylift]
-      rfl
-    exact heq ▸ hd
+      exact congrArg f ((liftSectorParameter_chart_line S C y w hwodd t).trans
+        (congrArg (fun a : AnnularState S × ℝ =>
+          (a.1 + t • ((0, (0, (0, w))) : AnnularState S), a.2)) hylift))
+    exact Eq.mp (congrArg (fun g : ℝ → CircleSpace S =>
+      HasProjectiveCurveDerivAt g q 0) heq) hd
   have hq : q = out := by
     apply (hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.1
     funext m θ
@@ -143,6 +153,8 @@ theorem N01Properties.hasProjectiveLineDerivAt_returnResidual_chartDirection
         (stateChartLine_sector S z w hsector hwodd t) m θ).symm
     exact (hraw.unique (hN.hasDerivAt_returnResidual_chartDirection hS hT hz hsector
       w v (f z) hv hw (hdecode z hz hsector) m θ)).trans (hout m θ).symm
-  exact hq ▸ hfull
+  exact Eq.mp (congrArg (fun a : CircleSpace S =>
+    HasProjectiveLineDerivAt (fun x => f (x, z.2)) a
+      z.1 (0, (0, (0, w)))) hq) hfull
 
 end ContinuousFlexibility.Statements

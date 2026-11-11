@@ -245,7 +245,7 @@ theorem N01Properties.returnCorrectionLocalCoefficientError_mixed_weighted_bound
       ring
   rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds,
     iteratedFDeriv_prodMk ((hf m).contDiffAt ((hU m).mem_nhds hpU))
-      ((hg m).contDiffAt ((hU m).mem_nhds hpU)),
+      ((hg m).contDiffAt ((hU m).mem_nhds hpU)) (by simp),
     ContinuousMultilinearMap.opNorm_prod]
   have ha' : A * H m * W m ^ P ≤ A * H m * W m ^ (P + Q) :=
     mul_le_mul_of_nonneg_left

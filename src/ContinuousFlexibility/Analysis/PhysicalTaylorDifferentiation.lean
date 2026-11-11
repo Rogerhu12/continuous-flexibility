@@ -52,7 +52,9 @@ theorem physicalNorm_le_of_jet_envelopes
     have hnorm := eLpNorm_le_real_scalar_envelope
       (hf.2.2.2.2 (j.val 0).val (j.val 1).val (j.val 2).val) (hG j) hA (hb j)
     have hj : (eLpNorm (G j) 2 materialCylinderMeasure).toReal ≤ B :=
-      Finset.single_le_sum (fun _ _ => ENNReal.toReal_nonneg) (Finset.mem_univ j)
+      Finset.single_le_sum
+        (f := fun i : JetIndex s => (eLpNorm (G i) 2 materialCylinderMeasure).toReal)
+        (fun _ _ => ENNReal.toReal_nonneg) (Finset.mem_univ j)
     exact hnorm.trans (ENNReal.ofReal_le_ofReal (mul_le_mul_of_nonneg_left hj hA))
   exact (physicalNorm_le_of_common_jet_bound (mul_nonneg hA hB) hjet).trans_eq (by
     dsimp only [B]
@@ -129,7 +131,7 @@ theorem height_hasProjectiveCurveDerivAt_of_second_jet_envelopes
     simpa only [Metric.ball, Real.dist_eq, sub_zero] using Metric.ball_mem_nhds (0 : ℝ) hδ
   filter_upwards [nhdsWithin_le_nhds hsmall, self_mem_nhdsWithin] with h hh hne
   have hne' : h ≠ 0 := by simpa only [mem_compl_iff, mem_singleton_iff] using hne
-  simpa only [zero_add] using height_curve_slope_error_bound hH hT c dc J₁ J₂ hδ
+  simpa only [physicalNorm, K, zero_add] using height_curve_slope_error_bound hH hT c dc J₁ J₂ hδ
     hfirst hsecond hvalue s Gs (fun j => hG _ _ _) (fun j p => hGpos _ _ _ p)
     (fun t ht j p => hb _ _ _ t ht p) hh hne'
 

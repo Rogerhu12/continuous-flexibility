@@ -69,6 +69,7 @@ theorem N01Properties.ordinaryFlowFamily_angular_uniform_bound
     have hraw : |J.D 0 z Fin.elim0| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B * Q := by
+      dsimp only [B]
       simpa only [pow_zero, one_mul, oneHighVariationWeight, Fin.prod_univ_zero,
         Fin.sum_univ_zero, mul_one, add_zero, Q] using hJ z hz Fin.elim0
     have hzero : J.D 0 z Fin.elim0 = ordinaryFlowFamily S C m 0 n (r, θ) z :=

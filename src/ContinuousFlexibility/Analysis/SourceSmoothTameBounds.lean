@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.SourceJetAssembly
-import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
+import ContinuousFlexibility.Analysis.SmoothTameOneHigh
 
 /-!
 # Fixed-loss source bounds in the original projective grading
@@ -53,14 +53,9 @@ theorem smoothTameOn_source_of_oneHigh_norm_bounds
         physicalNorm T (3 / 4 : ℝ) s (physicalSourceDecode S (J.D k x v)) ≤
           C * oneHighVariationWeight p base (s + loss) x v) :
     SmoothTameOn p S.sourceGrading U f := by
-  refine ⟨J, ?_⟩
-  intro k x₀ hx₀
+  apply smoothTameOn_of_global_oneHigh_jet_bounds p S.sourceGrading J
+  intro k
   obtain ⟨loss, base, hb⟩ := hbound k
-  refine ⟨loss, base, 1, zero_lt_one, ?_⟩
-  intro s hs
-  obtain ⟨C, hC, hCs⟩ := source_grading_oneHigh_bound hS p hp J k loss base hb s
-  refine ⟨C, hC, ?_⟩
-  intro x hx hnear v
-  exact hCs x hx v
+  exact ⟨loss, base, source_grading_oneHigh_bound hS p hp J k loss base hb⟩
 
 end ContinuousFlexibility.Statements

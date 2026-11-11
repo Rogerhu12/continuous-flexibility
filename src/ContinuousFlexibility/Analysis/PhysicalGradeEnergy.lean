@@ -16,8 +16,6 @@ open Set MeasureTheory
 open ContinuousFlexibility.Analysis
 open scoped ENNReal BigOperators
 
-set_option backward.isDefEq.respectTransparency false
-
 def physicalLevelEnergy (T : MaterialData) (γ : ℝ) (s : ℕ)
     (f : PolarPoint → ℝ) : ℝ≥0∞ :=
   ∑ j : JetIndex s,
@@ -75,6 +73,21 @@ theorem sobolevModel_weightedJet_energy_le_grading_sq
   (weightedPhysicalJet_energy_le_level (H.decode u) horder).trans
     (sobolevModel_physicalLevelEnergy_le_grading_sq hH u s)
 
+private theorem nonneg_le_sqrt_ennreal_of_sq_le
+    {x : ℝ} {E : ℝ≥0∞} (hx : 0 ≤ x) (hE : E < ⊤)
+    (hbound : ENNReal.ofReal (x ^ 2) ≤ E) : x ≤ Real.sqrt E.toReal := by
+  have hsq : x ^ 2 ≤ E.toReal := by
+    simpa only [ENNReal.toReal_ofReal (sq_nonneg x)] using
+      ENNReal.toReal_mono hE.ne hbound
+  have h := Real.sqrt_le_sqrt hsq
+  simpa only [Real.sqrt_sq hx] using h
+
+private theorem physicalNorm_nonneg_for_energy
+    (T : MaterialData) (γ : ℝ) (i : ℕ) (f : PolarPoint → ℝ) :
+    0 ≤ physicalNorm T γ i f := by
+  unfold physicalNorm
+  exact Real.sqrt_nonneg _
+
 theorem physicalNorm_le_sqrt_levelEnergy_sum
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
     (hf : HeightMember D T γ f) {i s : ℕ} (hi : i ≤ s) :
@@ -82,22 +95,18 @@ theorem physicalNorm_le_sqrt_levelEnergy_sum
       Real.sqrt (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f).toReal := by
   classical
   let k : Fin (s + 1) := ⟨i, Nat.lt_succ_of_le hi⟩
-  have hsum : (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f) < ⊤ := by
-    apply ENNReal.sum_lt_top.mpr
-    intro j hj
-    exact physicalLevelEnergy_lt_top hf j.val
+  have hsum : (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f) < ⊤ :=
+    ENNReal.sum_lt_top.mpr (fun j _ => physicalLevelEnergy_lt_top hf j.val)
   have hle : physicalLevelEnergy T γ i f ≤
       ∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f :=
     Finset.single_le_sum
       (f := fun j : Fin (s + 1) => physicalLevelEnergy T γ j.val f)
-      (fun _ _ => by positivity) (Finset.mem_univ k)
-  rw [physicalLevelEnergy_eq_ofReal_norm_sq hf i] at hle
-  have hsq : physicalNorm T γ i f ^ 2 ≤
-      (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f).toReal := by
-    simpa only [ENNReal.toReal_ofReal (sq_nonneg _)] using
-      ENNReal.toReal_mono hsum.ne hle
-  have hroot := Real.sqrt_le_sqrt hsq
-  simpa only [Real.sqrt_sq (show 0 ≤ physicalNorm T γ i f from Real.sqrt_nonneg _)] using hroot
+      (fun _ _ => zero_le) (Finset.mem_univ k)
+  have hsq : ENNReal.ofReal (physicalNorm T γ i f ^ 2) ≤
+      ∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f :=
+    (physicalLevelEnergy_eq_ofReal_norm_sq hf i).symm.trans_le hle
+  exact nonneg_le_sqrt_ennreal_of_sq_le
+    (physicalNorm_nonneg_for_energy T γ i f) hsum hsq
 
 theorem sobolevModel_grading_le_iff_physicalNorm
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
