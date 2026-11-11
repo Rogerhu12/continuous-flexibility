@@ -22,6 +22,29 @@ local instance n01EndpointZeroCircleMemberRealNormedSpace : NormedSpace ℝ ℝ 
 open Set Filter MeasureTheory ContinuousFlexibility.Analysis
 open scoped Topology ENNReal BigOperators ContDiff
 
+private theorem scalar_pair_path_bounds
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (base : ℕ) (ε₀ ε₁ : ℝ)
+    (z : E × ℝ) (path : ℝ → E × ℝ)
+    (hpath : ∀ t : ℝ, path t = (z.1, t * z.2))
+    (hz : p base z.1 < ε₀ ∧ |z.2| < ε₁) :
+    (∀ t : ℝ, t ∈ Icc (0 : ℝ) 1 →
+      p base (path t).1 < ε₀ ∧ |(path t).2| < ε₁) ∧
+    (∀ (j : ℕ) (t : ℝ), t ∈ Icc (0 : ℝ) 1 →
+      pairGrading p realGrading j (path t) ≤ pairGrading p realGrading j z) := by
+  have habs (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) : |t * z.2| ≤ |z.2| := by
+    rw [abs_mul, abs_of_nonneg ht.1]
+    exact mul_le_of_le_one_left (abs_nonneg _) ht.2
+  constructor
+  · intro t ht
+    rw [hpath]
+    exact ⟨hz.1, (habs t ht).trans_lt hz.2⟩
+  · intro j t ht
+    rw [hpath]
+    change p j z.1 + ‖t * z.2‖ ≤ p j z.1 + ‖z.2‖
+    simpa only [Real.norm_eq_abs] using
+      add_le_add (le_refl (p j z.1)) (habs t ht)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -38,19 +61,15 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     fun t => z₀ + (t * z.2) • scalarParameterDirection S
   have hpath_eq (t : ℝ) : path t = (z.1, t * z.2) :=
     scalarParameter_zero_line S z.1 (t * z.2)
-  have habs (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) : |t * z.2| ≤ |z.2| := by
-    rw [abs_mul, abs_of_nonneg ht.1]
-    exact mul_le_of_le_one_left (abs_nonneg _) ht.2
+  have hpathData := scalar_pair_path_bounds (E := StateDirections S)
+    (sectorGrading S) base ε ε z path hpath_eq hz
   have hpath (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-      path t ∈ sectorNeighborhood S base ε ε := by
-    rw [hpath_eq]
-    exact ⟨hz.1, (habs t ht).trans_lt hz.2⟩
+      path t ∈ sectorNeighborhood S base ε ε :=
+    hpathData.1 t ht
   have hgrade (j : ℕ) (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       pairGrading (sectorGrading S) realGrading j (path t) ≤
-        pairGrading (sectorGrading S) realGrading j z := by
-    rw [hpath_eq]
-    change sectorGrading S j z.1 + ‖t * z.2‖ ≤ sectorGrading S j z.1 + ‖z.2‖
-    simpa only [Real.norm_eq_abs] using add_le_add (le_refl (sectorGrading S j z.1)) (habs t ht)
+        pairGrading (sectorGrading S) realGrading j z :=
+    hpathData.2 j t ht
   let F : ℝ → ℕ → ℝ → ℝ := fun t =>
     hN.endpointFlowScalarJets hS hT rsel hrsel 0 (path t) Fin.elim0
   let G : ℝ → ℕ → ℕ → ℝ → ℝ := fun t m b θ =>
