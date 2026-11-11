@@ -76,8 +76,9 @@ theorem isAccumulatingProfile_positiveIndexReference {D : ReferenceData}
   let C' : ℕ → ℝ := fun s => (exp 1 + 1) * C s + 1
   have hExp : 1 ≤ exp 1 := one_le_exp_iff.mpr (by norm_num)
   have hC' (s : ℕ) : 0 < C' s := by
+    have hp : 0 < (exp 1 + 1) * C s := mul_pos (by positivity) (hC s)
     dsimp only [C']
-    positivity
+    linarith
   have hOne (s : ℕ) : 1 ≤ C' s := by
     dsimp only [C']
     have := mul_nonneg (show 0 ≤ exp 1 + 1 by positivity) (hC s).le

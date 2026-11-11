@@ -154,13 +154,16 @@ theorem connectorLogHeight_eq_affine_of_const {k : ℝ → ℝ} {J : Set ℝ}
       HasDerivAt (fun y => G y₃ + a * (y - y₃)) a y := by
     simpa only [mul_one] using
       (((hasDerivAt_id' y).sub_const y₃).const_mul a).const_add (G y₃)
-  exact hJ.eqOn_of_deriv_eq hconn
-    (fun y _ => (hasDerivAt_connectorLogHeight hk y₀ κ₀ y).differentiableAt.differentiableWithinAt)
-    (fun y _ => (hd y).differentiableAt.differentiableWithinAt)
-    (fun y hy => by
-      rw [(hasDerivAt_connectorLogHeight hk y₀ κ₀ y).deriv, (hd y).deriv]
-      exact hka hy)
-    hy₃ (by simp only [sub_self, mul_zero, add_zero])
+  have heq : EqOn G (fun y => G y₃ + a * (y - y₃)) J :=
+    hJ.eqOn_of_deriv_eq hconn
+      (fun y _ => (hasDerivAt_connectorLogHeight hk y₀ κ₀ y).differentiableAt.differentiableWithinAt)
+      (fun y _ => (hd y).differentiableAt.differentiableWithinAt)
+      (fun y hy => by
+        rw [(hasDerivAt_connectorLogHeight hk y₀ κ₀ y).deriv, (hd y).deriv]
+        exact hka hy)
+      hy₃ (by simp only [sub_self, mul_zero, add_zero])
+  intro y hy
+  exact heq hy
 
 /-- Exact height on a cone; in particular this applies to both powers ±2. -/
 theorem connectorHeight_eq_power_of_const {k : ℝ → ℝ} {J : Set ℝ}
