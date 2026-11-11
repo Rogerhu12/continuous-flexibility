@@ -62,6 +62,10 @@ theorem R05_of_nodes (hA : R05aStatement) (hB : R05bStatement) : R05Statement :=
   obtain ⟨C', hC'⟩ := hB T C family hreal
   exact ⟨T, hT, C', family, hC', hind⟩
 
+/-- The R06 stages share the compact-interior test core in
+`Statements.DeepTailOperator`: its test-support condition uses `tsupport`.
+The scalar definition extraction and support repair preserve this assembly
+signature and all R08 statements. -/
 theorem R06_of_nodes (hA : R06aStatement) (hB : R06bStatement) (hC : R06cStatement) :
     R06Statement := by
   obtain ⟨C, η, K, h1, h2, h3, h4, hop⟩ := hA

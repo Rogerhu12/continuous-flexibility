@@ -2,6 +2,37 @@
 
 Last updated: 2026-11-11.
 
+## Active line: R08
+
+`line/R08` is constructing the unchanged
+`R08 (hR03 : R03Statement) (hR07 : R07Statement) : R08Statement`.
+The work includes exact logarithmic-slope reconstruction, a two-sided C¹
+cutoff, physical dilation, compact surgery of accumulating profiles, and
+the actual Morse-to-deep-tail coordinate and mass/resistance estimates.
+
+The natural-line and physical-flatness dependency closure is reused from
+`line/R06b` at `eb1f4bd4ed3b73f4112ff2a7c72721c07b0de3aa` and
+`line/R06c` at `8a8c4537f12adbc5b0909b8cc81f320d4ab2f3a8`.
+These are ordinary proof modules; the open R06 blueprint nodes are not used.
+The shared scalar definitions move from `Statements/Radial.lean` to
+`Statements/DeepTailOperator.lean`, retaining their declaration names.
+
+The reused statement repair is exactly the compact-test clause in
+`TailEnergyCore`, `TailWeakDerivative`, and `TailDistributionGraph`:
+`Function.support ψ ⊆ Ioo entrance endCut` becomes
+`tsupport ψ ⊆ Ioo entrance endCut`. The ordinary support condition allows
+a compact smooth test to have support closure touching the boundary;
+the Friedrichs test core requires its compact support to lie in the open
+interval. This repair changes no R08 hypothesis or conclusion.
+The R06 assembly composition keeps the same signature and uses the
+corrected common operator definitions.
+
+The R08 main theorem remains open while its concrete pieces are integrated.
+The latest completed CI at `3067353b8b556748107721b048946343f9b68d79`
+reported elaboration errors in three new helper modules; those are being
+fixed and the next source import closure is being compiled.
+No compiled-module count is inferred from stale cross-branch cache artifacts.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.

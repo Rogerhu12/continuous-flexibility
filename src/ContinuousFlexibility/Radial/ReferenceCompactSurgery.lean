@@ -164,8 +164,8 @@ theorem isAccumulatingProfile_replaceReferenceProfile
       apply (hJet m r hr s).trans
       apply mul_le_mul (hCC' s) _ (exp_pos _).le (hC' s).le
       apply exp_le_exp.mpr
-      exact add_le_add_left
-        (mul_le_mul_of_nonneg_right (hCC' s) (sq_nonneg (D.cellIndex m : ℝ))) _
+      have hmul := mul_le_mul_of_nonneg_right (hCC' s) (sq_nonneg (D.cellIndex m : ℝ))
+      linarith
   · intro m r hr s
     by_cases hKr : r ∈ K
     · exact (hMBounds s r hKr).2.trans ((hMC' s).trans

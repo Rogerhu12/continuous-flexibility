@@ -104,8 +104,9 @@ theorem isAccumulatingProfile_positiveIndexReference {D : ReferenceData}
       have hcast : (D.cellIndex m : ℝ) ≤ (max (D.cellIndex m) 1 : ℕ) := by
         exact_mod_cast Nat.le_max_left (D.cellIndex m) 1
       have hs : ((D.cellIndex m : ℝ) + 1) ^ 2 ≤
-          (((max (D.cellIndex m) 1 : ℕ) : ℝ) + 1) ^ 2 :=
-        pow_le_pow_left₀ (by positivity) (add_le_add_right hcast 1) 2
+          (((max (D.cellIndex m) 1 : ℕ) : ℝ) + 1) ^ 2 := by
+        apply pow_le_pow_left₀ (by positivity) _ 2
+        linarith
       have he := exp_le_exp.mpr (neg_le_neg hs)
       exact (mul_le_mul (inv_anti₀ (hC 0) (hCC' 0)) he
         (exp_pos _).le (inv_nonneg.mpr (hC 0).le)).trans hlo
@@ -144,8 +145,8 @@ theorem isAccumulatingProfile_positiveIndexReference {D : ReferenceData}
       apply h.trans
       apply mul_le_mul (hCC' s) _ (exp_pos _).le (hC' s).le
       apply exp_le_exp.mpr
-      exact add_le_add_left
-        (mul_le_mul_of_nonneg_right (hCC' s) (sq_nonneg (D.cellIndex m : ℝ))) _
+      have hh := mul_le_mul_of_nonneg_right (hCC' s) (sq_nonneg (D.cellIndex m : ℝ))
+      linarith
   · intro m r hr s
     have h := hInvJet m r hr s
     change |radialJet s (fun t => (D.w t)⁻¹) r| ≤

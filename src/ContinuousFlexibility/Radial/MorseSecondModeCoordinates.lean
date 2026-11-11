@@ -60,6 +60,7 @@ theorem morseSecondMode_signed_mass {w : ℝ → ℝ} {R s a b : ℝ}
     _ = ∫ r in a..b, (s / R ^ 8) * (w r * r ^ 6) := by
       apply intervalIntegral.integral_congr
       intro r hr
+      dsimp only
       rw [morseSecondModeDensity_log hs (hpos r hr)]
       field_simp [hR, (hpos r hr).ne']
       <;> ring
@@ -94,6 +95,7 @@ theorem morseSecondMode_signed_resistance {w : ℝ → ℝ} {R s a b : ℝ}
     _ = ∫ r in a..b, (s * R ^ 8) * (w r * r ^ 8)⁻¹ := by
       apply intervalIntegral.integral_congr
       intro r hr
+      dsimp only
       rw [morseSecondModeDensity_log hs (hpos r hr)]
       field_simp [hR, hw₀ r hr, (hpos r hr).ne']
       <;> ring

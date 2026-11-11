@@ -68,7 +68,7 @@ theorem deriv_seedLogSlope_of_radialJacobi {w u : ℝ → ℝ} {y : ℝ}
       (4 - seedLogSlope u y) * seedProfileSlope w y by linarith only [hterm]
   unfold seedLogSlope seedProfileSlope
   field_simp [hwne, hune, he] at hode ⊢
-  linear_combination (exp y) * hode
+  linear_combination hode
 
 theorem contDiff_seedLogSlope {u : ℝ → ℝ}
     (hu : ContDiffOn ℝ ∞ u (Ioi 0))
