@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Contracts.SphereClosedBending
+import ContinuousFlexibility.Blueprint.Assembly
 
 /-!
 # Solution: a smooth periodic isometric bending of an embedded sphere
@@ -10,6 +11,10 @@ The definitions below are copied verbatim from the independent Challenge
 `ContinuousFlexibility.Statements.ClosedBending` to the Challenge structure, and
 `exists_closedBending_of_core` is the proved geometric half of the theorem: it reduces
 the Challenge to `Nonempty ContinuousFlexibility.FlatAnnularCore`.
+
+`exists_closedBending` is the Challenge theorem. Its proof has no `sorry` of its own; it
+depends on `sorryAx` exactly through the blueprint nodes that are still open
+(`ContinuousFlexibility.Blueprint`), and is finished when all of them are proved.
 -/
 
 noncomputable section
@@ -236,5 +241,9 @@ theorem exists_closedBending_of_core
     (hcore : Nonempty ContinuousFlexibility.FlatAnnularCore) : Nonempty ClosedBending := by
   obtain ⟨B⟩ := ContinuousFlexibility.mainStatement_of_flatAnnularCore hcore
   exact ⟨closedBending_of_statements B⟩
+
+/-- `thm:main`, assembled from the blueprint. -/
+theorem exists_closedBending : Nonempty ClosedBending :=
+  exists_closedBending_of_core ContinuousFlexibility.Blueprint.flatAnnularCore_nonempty
 
 end FlexibleSphere
