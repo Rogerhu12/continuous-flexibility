@@ -29,7 +29,7 @@ theorem n08ControlMeanConstant_nonneg : 0 ≤ n08ControlMeanConstant :=
 
 private theorem n08_angularMean_eq_angleIntegral (f : ℝ → ℝ) :
     angularMean f = (1 / Real.pi) * ∫ θ, f θ ∂angleMeasure := by
-  rw [angularMean, intervalIntegral.integral_of_le Real.pi_pos.le]
+  rw [angularMean, intervalIntegral.integral_of_le Real.pi_pos.le, angleMeasure]
 
 /-- Normalized averaging is a continuous functional on the actual angular L² space. -/
 def n08AngleMean : AngleL2 →L[ℝ] ℝ :=
@@ -67,43 +67,72 @@ theorem n08CircleJetMeans_norm_le (u : CircleJetHilbert 0) :
   unfold n08CircleJetMeans
   exact lpSpectralDiagonal_norm_le _ _ _ u
 
+/-- Extract the actual zero-level jet before taking angular means. -/
+def n08CircleZeroJet (M : CircleModelData) : M.Space →L[ℝ] CircleJetHilbert 0 :=
+  (M.level 0).subtypeL.comp (projectiveCoordinate (fun s => M.level s) M.bond 0)
+
+theorem n08CircleZeroJet_apply (M : CircleModelData) (u : M.Space) :
+    n08CircleZeroJet M u = (u.val 0).val := by
+  rw [n08CircleZeroJet, ContinuousLinearMap.comp_apply,
+    projectiveCoordinate_apply, Submodule.subtypeL_apply]
+
+theorem n08CircleZeroJet_norm_le (M : CircleModelData) (u : M.Space) :
+    ‖n08CircleZeroJet M u‖ ≤ M.grading 0 u := by
+  rw [n08CircleZeroJet_apply]
+  exact norm_coordinate_le_graded (fun s => M.level s) M.bond (le_refl 0) u
+
+def n08ModelControlRestriction (M : CircleModelData) : M.Space →L[ℝ] ControlBanach :=
+  n08CircleJetMeans.comp (n08CircleZeroJet M)
+
+theorem n08ModelControlRestriction_value (M : CircleModelData) (u : M.Space) :
+    n08ModelControlRestriction M u = n08CircleJetMeans (n08CircleZeroJet M u) := by
+  rw [n08ModelControlRestriction, ContinuousLinearMap.comp_apply]
+
+theorem n08ModelControlRestriction_jet_apply (M : CircleModelData)
+    (u : M.Space) (m : ℕ) :
+    n08ModelControlRestriction M u m =
+      angularMean (((u.val 0).val m (zeroCircleJetIndex 0)) : ℝ → ℝ) := by
+  rw [n08ModelControlRestriction_value, n08CircleJetMeans_apply, n08CircleZeroJet_apply]
+
+theorem n08ModelControlRestriction_norm_le (M : CircleModelData) (u : M.Space) :
+    ‖n08ModelControlRestriction M u‖ ≤ n08ControlMeanConstant * M.grading 0 u := by
+  rw [n08ModelControlRestriction_value]
+  exact (n08CircleJetMeans_norm_le _).trans
+    (mul_le_mul_of_nonneg_left (n08CircleZeroJet_norm_le M u) n08ControlMeanConstant_nonneg)
+
+theorem n08ModelControlRestriction_apply {T : MaterialData} {γ : ℝ}
+    {M : CircleModelData} (hM : IsCircleModel T γ M) (u : M.Space) (m : ℕ) :
+    n08ModelControlRestriction M u m =
+      T.H (T.sample m) ^ (-γ) * angularMean (M.decode u m) := by
+  have hae := hM.2.2.2.2.2.2.1 u 0 m
+  rw [n08ModelControlRestriction_jet_apply]
+  simp only [n08_angularMean_eq_angleIntegral]
+  rw [integral_congr_ae hae, integral_const_mul]
+  ring
+
 /-- The restriction is defined from actual model coordinates, with no
 assumed summability or assumed continuous extension. -/
 def n08ControlRestriction (S : PhysicalSpacesData) : CircleSpace S →L[ℝ] ControlBanach :=
-  n08CircleJetMeans.comp
-    (((S.circle (3 / 4 : ℝ)).level 0).subtypeL.comp
-      (projectiveCoordinate (fun s => (S.circle (3 / 4 : ℝ)).level s)
-        (S.circle (3 / 4 : ℝ)).bond 0))
+  n08ModelControlRestriction (S.circle (3 / 4 : ℝ))
 
 theorem n08ControlRestriction_jet_apply (S : PhysicalSpacesData)
     (u : CircleSpace S) (m : ℕ) :
     n08ControlRestriction S u m =
-      angularMean (((u.val 0).val m (zeroCircleJetIndex 0)) : ℝ → ℝ) := by
-  simp only [n08ControlRestriction, ContinuousLinearMap.comp_apply,
-    projectiveCoordinate_apply, Submodule.subtypeL_apply, n08CircleJetMeans_apply]
+      angularMean (((u.val 0).val m (zeroCircleJetIndex 0)) : ℝ → ℝ) :=
+  n08ModelControlRestriction_jet_apply (S.circle (3 / 4 : ℝ)) u m
 
 theorem n08ControlRestriction_norm_le (S : PhysicalSpacesData) (u : CircleSpace S) :
     ‖n08ControlRestriction S u‖ ≤
-      n08ControlMeanConstant * (S.circle (3 / 4 : ℝ)).grading 0 u := by
-  rw [n08ControlRestriction, ContinuousLinearMap.comp_apply, ContinuousLinearMap.comp_apply,
-    projectiveCoordinate_apply, Submodule.subtypeL_apply]
-  refine (n08CircleJetMeans_norm_le ((u.val 0).val)).trans ?_
-  exact mul_le_mul_of_nonneg_left
-    (norm_coordinate_le_graded (fun s => (S.circle (3 / 4 : ℝ)).level s)
-      (S.circle (3 / 4 : ℝ)).bond (le_refl 0) u) n08ControlMeanConstant_nonneg
+      n08ControlMeanConstant * (S.circle (3 / 4 : ℝ)).grading 0 u :=
+  n08ModelControlRestriction_norm_le (S.circle (3 / 4 : ℝ)) u
 
 /-- The restriction has precisely the actual weighted mean coordinates. -/
 theorem n08ControlRestriction_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) (u : CircleSpace S) (m : ℕ) :
     n08ControlRestriction S u m = T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
-      angularMean ((S.circle (3 / 4 : ℝ)).decode u m) := by
-  have hmodel : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 _
-  have hae := hmodel.2.2.2.2.2.2.1 u 0 m
-  rw [n08ControlRestriction_jet_apply]
-  simp only [n08_angularMean_eq_angleIntegral]
-  rw [integral_congr_ae hae, integral_const_mul]
-  ring
+      angularMean ((S.circle (3 / 4 : ℝ)).decode u m) :=
+  n08ModelControlRestriction_apply (hS.2.1 (3 / 4 : ℝ)) u m
 
 theorem exists_n08ControlRestriction
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

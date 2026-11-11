@@ -64,35 +64,67 @@ theorem n08_originalCoefficients_reference
     (n08_stateRadialHeight_reference_hasDerivAt hD href)
     (hD.2.2.1.1.differentiable (by simp) p.1)
 
+/-- A positive radial coefficient gives the signed optical speed. -/
+theorem n08_minusCharacteristicSpeed_of_radial_coefficients
+    {L : SymmetricCoefficients} {w : ℝ → ℝ} {r θ : ℝ}
+    (hr : r ≠ 0) (hw : 0 < w r)
+    (hcoeff : L.a (r, θ) = w r ∧ L.b (r, θ) = 0 ∧
+      L.c (r, θ) = deriv w r / r) :
+    minusCharacteristicSpeed L (r, θ) = -opticalSpeed w r := by
+  have hrad : -(w r * (deriv w r / r)) / w r ^ 2 =
+      -deriv w r / (r * w r) := by
+    field_simp [hr, hw.ne'] <;> ring
+  have hsqrt : Real.sqrt (-(w r * (deriv w r / r))) / w r =
+      opticalSpeed w r := by
+    calc
+      _ = Real.sqrt (-(w r * (deriv w r / r))) /
+          Real.sqrt (w r ^ 2) := by rw [Real.sqrt_sq hw.le]
+      _ = Real.sqrt (-(w r * (deriv w r / r)) / w r ^ 2) :=
+        (Real.sqrt_div' _ (sq_nonneg _)).symm
+      _ = _ := congrArg Real.sqrt hrad
+  simpa only [minusCharacteristicSpeed, hcoeff.1, hcoeff.2.1, hcoeff.2.2,
+    zero_div, pow_two, zero_mul, zero_sub] using congrArg (fun t : ℝ => -t) hsqrt
+
 /-- The signed ordinary speed is the negative optical speed, including
 the type-change endpoints whenever they lie in the radial core. -/
 theorem n08_minusCharacteristicSpeed_reference
     (hD : RadialProfileGeometry D) (href : referenceStateConditions D S C)
     (r θ : ℝ) (hr : r ∈ radialCore D) :
     minusCharacteristicSpeed (originalCoefficients D S C (C.referenceState, 0))
-      (r, θ) = -opticalSpeed D.w r := by
-  have hrpos : 0 < r := hD.1.trans hr.1
-  have hwpos : 0 < D.w r := hD.2.2.2.2.1 r hr
-  have hrad : -(D.w r * (deriv D.w r / r)) / D.w r ^ 2 =
-      -deriv D.w r / (r * D.w r) := by
-    field_simp [hrpos.ne', hwpos.ne']
-    <;> ring
-  have hsqrt : Real.sqrt (-(D.w r * (deriv D.w r / r))) / D.w r =
-      opticalSpeed D.w r := by
-    calc
-      _ = Real.sqrt (-(D.w r * (deriv D.w r / r))) /
-          Real.sqrt (D.w r ^ 2) := by rw [Real.sqrt_sq hwpos.le]
-      _ = Real.sqrt (-(D.w r * (deriv D.w r / r)) / D.w r ^ 2) :=
-        (Real.sqrt_div' _ (sq_nonneg _)).symm
-      _ = _ := congrArg Real.sqrt hrad
-  have hcoeff := n08_originalCoefficients_reference hD href (r, θ)
-  simpa only [minusCharacteristicSpeed, hcoeff.1, hcoeff.2.1, hcoeff.2.2,
-    zero_div, zero_pow, zero_sub] using congrArg (fun t : ℝ => -t) hsqrt
+      (r, θ) = -opticalSpeed D.w r :=
+  n08_minusCharacteristicSpeed_of_radial_coefficients (hD.1.trans hr.1).ne'
+    (hD.2.2.2.2.1 r hr) (n08_originalCoefficients_reference hD href (r, θ))
+
+/-- Integrate one actual radial characteristic equation on a closed
+component. The derivative is needed only in its interior. -/
+theorem n08_radialFlow_eq_sub_integral {w f : ℝ → ℝ} {l h r : ℝ}
+    (hw : ContDiff ℝ ∞ w) (hpos : ∀ s ∈ Icc l h, 0 < s ∧ 0 < w s)
+    (hf : ContinuousOn f (Icc l h))
+    (hderiv : ∀ s ∈ Ioo l h, HasDerivAt f (-opticalSpeed w s) s)
+    (hr : r ∈ Icc l h) :
+    f r = f l - ∫ s in l..r, opticalSpeed w s := by
+  have hwd : Continuous (deriv w) := (contDiff_infty_iff_deriv.mp hw).2.continuous
+  have hv : ContinuousOn (opticalSpeed w) (Icc l h) := by
+    exact (hwd.neg.continuousOn.div
+      (continuous_id.mul hw.continuous).continuousOn
+      (fun s hs => mul_ne_zero (hpos s hs).1.ne' (hpos s hs).2.ne')).sqrt
+  have hsub : Icc l r ⊆ Icc l h := Icc_subset_Icc le_rfl hr.2
+  have hderiv' : ∀ s ∈ Ioo l r, HasDerivAt f (-opticalSpeed w s) s := by
+    intro s hs
+    exact hderiv s ⟨hs.1, hs.2.trans_le hr.2⟩
+  have hint : IntervalIntegrable (fun s => -opticalSpeed w s) volume l r :=
+    ContinuousOn.intervalIntegrable_of_Icc hr.1 (hv.neg.mono hsub)
+  have ht := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hr.1
+    (hf.mono hsub) hderiv' hint
+  rw [intervalIntegral.integral_neg] at ht
+  linarith only [ht]
 
 private theorem reference_mem_stateNeighborhood (hε : 0 < ε) :
     (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
+  change stateGrading S base (C.referenceState - C.referenceState) < ε ∧ |(0 : ℝ)| < ε
   constructor
-  · simpa only [sub_self, map_zero] using hε
+  · rw [sub_self, map_zero (stateGrading S base)]
+    exact hε
   · simpa only [abs_zero] using hε
 
 /-- N01's actual ordinary flow is determined on the entire closed
@@ -106,33 +138,22 @@ theorem n08_minusFlow_reference_rotation
   obtain ⟨bounds, hbounds⟩ := hD.1
   have hg : RadialProfileGeometry D := hbounds.1
   have hw : ContDiff ℝ ∞ D.w := hg.2.2.1.1
-  have hwd : Continuous (deriv D.w) := (contDiff_infty_iff_deriv.mp hw).2.continuous
   have hinter := hcontrol.1 m
   have hcore : ∀ s ∈ Icc (C.left m) (C.right m), s ∈ radialCore D := by
     intro s hs
     exact ⟨hinter.1.trans_le hs.1, hs.2.trans_lt hinter.2.2⟩
-  have hv : ContinuousOn (opticalSpeed D.w) (Icc (C.left m) (C.right m)) := by
-    exact (hwd.neg.continuousOn.div
-      (continuous_id.mul hw.continuous).continuousOn
-      (fun s hs => mul_ne_zero (hg.1.trans (hcore s hs).1).ne'
-        (hg.2.2.2.2.1 s (hcore s hs)).ne')).sqrt
   have hf := hflow (C.referenceState, 0) (reference_mem_stateNeighborhood hε) m θ
-  have hsub : Icc (C.left m) r ⊆ Icc (C.left m) (C.right m) :=
-    Icc_subset_Icc le_rfl hr.2
-  have hderiv : ∀ s ∈ Ioo (C.left m) r,
+  have hderiv : ∀ s ∈ Ioo (C.left m) (C.right m),
       HasDerivAt (fun t => C.minusFlow (C.referenceState, 0) m t θ)
         (-opticalSpeed D.w s) s := by
     intro s hs
-    have hs' : s ∈ Ioo (C.left m) (C.right m) := ⟨hs.1, hs.2.trans_le hr.2⟩
-    exact (hf.2.2.1 s hs').congr_deriv
+    exact (hf.2.2.1 s hs).congr_deriv
       (n08_minusCharacteristicSpeed_reference hg href s _
-        (hcore s (Ioo_subset_Icc_self hs')))
-  have hint : IntervalIntegrable (fun s => -opticalSpeed D.w s) volume (C.left m) r :=
-    ContinuousOn.intervalIntegrable_of_Icc hr.1 (hv.neg.mono hsub)
-  have ht := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hr.1
-    (hf.2.1.mono hsub) hderiv hint
-  rw [intervalIntegral.integral_neg, hf.1] at ht
-  linarith only [ht]
+        (hcore s (Ioo_subset_Icc_self hs)))
+  have ht := n08_radialFlow_eq_sub_integral hw
+    (fun s hs => ⟨hg.1.trans (hcore s hs).1, hg.2.2.2.2.1 s (hcore s hs)⟩)
+    hf.2.1 hderiv hr
+  simpa only [hf.1] using ht
 
 theorem n08_minusFlow_reference_return
     (hN : N01Properties D T S C base loss ε) (m : ℕ) (θ : ℝ) :

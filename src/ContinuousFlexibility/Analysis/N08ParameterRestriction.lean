@@ -18,6 +18,8 @@ open Set
 open ContinuousFlexibility.Analysis
 open scoped Topology BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 private theorem n08_sample_weights_nonneg {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (hD : IsAccumulatingProfile D) :
     ∀ m, 0 ≤ T.H (T.sample m) ∧ 0 ≤ T.E0 (T.sample m) := by
@@ -25,6 +27,84 @@ private theorem n08_sample_weights_nonneg {D : ReferenceData} {T : MaterialData}
   intro m
   have hp := hT.2.1 (T.sample m) (materialSample_mem_radialCore hT hC.2.1 m)
   exact ⟨hp.2.1.le, hp.2.2.1.le⟩
+
+/- These aliases isolate the two large final conjuncts of N01 so each
+restriction proof elaborates and checks independently of the geometric data. -/
+private def n08CoefficientTowerBounds (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ) : Prop :=
+  ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b p,
+    a + b ≤ s → p.1 ∈ D.cells m →
+    ∃ J : SmoothDirections (stateNeighborhood S C base ε) (coefficientFamily D S C i a b p),
+      ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+        |J.D k z v| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
+          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+            base (s + loss) (z - (C.referenceState, 0)) v
+
+private def n08FlowTowerBounds (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S) (base loss : ℕ) (ε : ℝ) : Prop :=
+  ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
+    a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+    ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
+      ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+        min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
+          B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+            base (s + loss) (z - (C.referenceState, 0)) v
+
+private theorem n08_coefficientTowerBounds_mono
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base base' loss loss' : ℕ} {ε ε' : ℝ}
+    (hweights : ∀ m, 0 ≤ T.H (T.sample m) ∧ 0 ≤ T.E0 (T.sample m))
+    (h : n08CoefficientTowerBounds D T S C base loss ε)
+    (hb : base ≤ base') (hl : loss ≤ loss') (hε : ε' ≤ ε) :
+    n08CoefficientTowerBounds D T S C base' loss' ε' := by
+  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
+    n08_stateNeighborhood_mono hb hε
+  have hopen : IsOpen (stateNeighborhood S C base' ε') :=
+    n08_isOpen_stateNeighborhood S C base' ε'
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
+  intro k s
+  obtain ⟨B, hB, hBj⟩ := h k s
+  refine ⟨B, hB, ?_⟩
+  intro m i a b p hab hpm
+  obtain ⟨J, hJ⟩ := hBj m i a b p hab hpm
+  refine ⟨smoothDirectionsRestrict J hopen hsub, ?_⟩
+  intro z hz v
+  have hc : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B :=
+    mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hweights m).1 _))
+      (Real.rpow_nonneg (hweights m).2 _)
+  exact (hJ z (hsub hz) v).trans (mul_le_mul_of_nonneg_left
+    (n08_oneHighVariationWeight_mono hp hb (Nat.add_le_add_left hl s)
+      (z - (C.referenceState, 0)) v) hc)
+
+private theorem n08_flowTowerBounds_mono
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base base' loss loss' : ℕ} {ε ε' : ℝ}
+    (hweights : ∀ m, 0 ≤ T.H (T.sample m) ∧ 0 ≤ T.E0 (T.sample m))
+    (h : n08FlowTowerBounds D T S C base loss ε)
+    (hb : base ≤ base') (hl : loss ≤ loss') (hε : ε' ≤ ε) :
+    n08FlowTowerBounds D T S C base' loss' ε' := by
+  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
+    n08_stateNeighborhood_mono hb hε
+  have hopen : IsOpen (stateNeighborhood S C base' ε') :=
+    n08_isOpen_stateNeighborhood S C base' ε'
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
+  intro k s
+  obtain ⟨B, hB, hBj⟩ := h k s
+  refine ⟨B, hB, ?_⟩
+  intro m a b p hab hpm
+  obtain ⟨J, hJ⟩ := hBj m a b p hab hpm
+  refine ⟨smoothDirectionsRestrict J hopen hsub, ?_⟩
+  intro z hz v
+  have hc : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B :=
+    mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hweights (C.cell m)).1 _))
+      (Real.rpow_nonneg (hweights (C.cell m)).2 _)
+  exact (hJ z (hsub hz) v).trans (mul_le_mul_of_nonneg_left
+    (n08_oneHighVariationWeight_mono hp hb (Nat.add_le_add_left hl s)
+      (z - (C.referenceState, 0)) v) hc)
 
 /-- Preserve the actual coefficients and flow towers on a smaller neighborhood. -/
 theorem n08_n01Properties_mono
@@ -35,42 +115,18 @@ theorem n08_n01Properties_mono
     N01Properties D T S C base' loss' ε' := by
   obtain ⟨hRef, _, hreference, hcontrol, hindex, hjets, hflow, hchart, hreturns,
     hgeometry, hcritical, hcoeff, hflowJets⟩ := h
-  have hsub := n08_stateNeighborhood_mono (C := C) hb hε
-  have hopen := n08_isOpen_stateNeighborhood S C base' ε'
-  have hweights := n08_sample_weights_nonneg hT hRef.1
-  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
-    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
-  refine ⟨hRef, hεpos, hreference, hcontrol, hindex, hjets,
+  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
+    n08_stateNeighborhood_mono hb hε
+  have hweights : ∀ m, 0 ≤ T.H (T.sample m) ∧ 0 ≤ T.E0 (T.sample m) :=
+    n08_sample_weights_nonneg hT hRef.1
+  have hcoeff' : n08CoefficientTowerBounds D T S C base' loss' ε' :=
+    n08_coefficientTowerBounds_mono hweights hcoeff hb hl hε
+  have hflowJets' : n08FlowTowerBounds D T S C base' loss' ε' :=
+    n08_flowTowerBounds_mono hweights hflowJets hb hl hε
+  exact ⟨hRef, hεpos, hreference, hcontrol, hindex, hjets,
     (fun z hz => hflow z (hsub hz)), (fun z hz => hchart z (hsub hz)),
     (fun z hz => hreturns z (hsub hz)), (fun z hz => hgeometry z (hsub hz)),
-    (fun z hz => hcritical z (hsub hz)), ?_, ?_⟩
-  · intro k s
-    obtain ⟨B, hB, hBj⟩ := hcoeff k s
-    refine ⟨B, hB, ?_⟩
-    intro m i a b p hab hpm
-    obtain ⟨J, hJ⟩ := hBj m i a b p hab hpm
-    refine ⟨smoothDirectionsRestrict J hopen hsub, ?_⟩
-    intro z hz v
-    have hc : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B :=
-      mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hweights m).1 _))
-        (Real.rpow_nonneg (hweights m).2 _)
-    exact (hJ z (hsub hz) v).trans (mul_le_mul_of_nonneg_left
-      (n08_oneHighVariationWeight_mono hp hb (Nat.add_le_add_left hl s)
-        (z - (C.referenceState, 0)) v) hc)
-  · intro k s
-    obtain ⟨B, hB, hBj⟩ := hflowJets k s
-    refine ⟨B, hB, ?_⟩
-    intro m a b p hab hpm
-    obtain ⟨J, hJ⟩ := hBj m a b p hab hpm
-    refine ⟨smoothDirectionsRestrict J hopen hsub, ?_⟩
-    intro z hz v
-    have hc : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (C.cell m)) ^ B :=
-      mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hweights (C.cell m)).1 _))
-        (Real.rpow_nonneg (hweights (C.cell m)).2 _)
-    exact (hJ z (hsub hz) v).trans (mul_le_mul_of_nonneg_left
-      (n08_oneHighVariationWeight_mono hp hb (Nat.add_le_add_left hl s)
-        (z - (C.referenceState, 0)) v) hc)
+    (fun z hz => hcritical z (hsub hz)), hcoeff', hflowJets'⟩
 
 /-- Restriction leaves the actual return residual and chart derivative unchanged. -/
 theorem n08_n02Properties_mono
@@ -107,6 +163,38 @@ theorem n08_n03Properties_mono
     (((n08_isOpen_sectorNeighborhood S base' ε' ε').prod isOpen_univ).prod isOpen_univ)
     (Set.prod_mono (Set.prod_mono hsector (subset_refl _)) (subset_refl _))
 
+private def n08CanonicalCoefficientBounds (S : PhysicalSpacesData) (T : MaterialData)
+    (C : NonlinearGeometryData S) (K : CanonicalData S) (base loss : ℕ) (ε : ℝ) : Prop :=
+  ∀ s : ℕ, ∃ A : ℝ, 0 < A ∧ ∀ z ∈ stateNeighborhood S C base ε, ∀ m p,
+    p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →
+      |mixedDerivative a b (K.potential z m) p| +
+      |mixedDerivative a b (K.dividedDifference z m).a p| +
+      |mixedDerivative a b (K.dividedDifference z m).b p| +
+      |mixedDerivative a b (K.dividedDifference z m).c p| ≤
+        A * T.E0 (T.sample (K.cell m)) ^ A *
+          (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)
+
+private theorem n08_canonicalCoefficientBounds_mono
+    {T : MaterialData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {K : CanonicalData S} {base base' loss loss' : ℕ} {ε ε' : ℝ}
+    (hE : ∀ m, 0 ≤ T.E0 (T.sample m))
+    (h : n08CanonicalCoefficientBounds S T C K base loss ε)
+    (hb : base ≤ base') (hl : loss ≤ loss') (hε : ε' ≤ ε) :
+    n08CanonicalCoefficientBounds S T C K base' loss' ε' := by
+  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
+    n08_stateNeighborhood_mono hb hε
+  intro s
+  obtain ⟨A, hA, hAs⟩ := h s
+  refine ⟨A, hA, ?_⟩
+  intro z hz m p hp a b hab
+  have horder : 1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2| ≤
+      1 + stateGrading S (s + loss') (z.1 - C.referenceState) + |z.2| :=
+    add_le_add_right (add_le_add_left
+      (solve_stateGrading_monotone S (Nat.add_le_add_left hl s) (z.1 - C.referenceState)) 1) _
+  exact (hAs z (hsub hz) m p hp a b hab).trans
+    (mul_le_mul_of_nonneg_left horder
+      (mul_nonneg hA.le (Real.rpow_nonneg (hE (K.cell m)) _)))
+
 /-- Only the displayed state grading changes in the coordinate estimates;
 all charts, source transforms, cuts and transmission identities are retained. -/
 theorem n08_n04Properties_mono
@@ -120,25 +208,17 @@ theorem n08_n04Properties_mono
   obtain ⟨hopen, hsupport, hfixed, hinterval, hpositive, hnegative, hcover,
     hcharts, hboundary, hparity, hinverse, hcuts, htransmission, hoperator,
     hnormal, hcubic, hbound, hintegral⟩ := h
-  have hsub := n08_stateNeighborhood_mono (C := C) hb hε
-  refine ⟨hopen, hsupport, (fun z hz => hfixed z (hsub hz)),
+  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
+    n08_stateNeighborhood_mono hb hε
+  have hbound' : n08CanonicalCoefficientBounds S T C K base' loss' ε' :=
+    n08_canonicalCoefficientBounds_mono hE hbound hb hl hε
+  exact ⟨hopen, hsupport, (fun z hz => hfixed z (hsub hz)),
     hinterval, hpositive, hnegative, hcover,
     (fun z hz => hcharts z (hsub hz)), (fun z hz => hboundary z (hsub hz)),
     (fun z hz => hparity z (hsub hz)), (fun z hz => hinverse z (hsub hz)), hcuts,
     (fun z hz => htransmission z (hsub hz)), (fun z hz => hoperator z (hsub hz)),
-    (fun z hz => hnormal z (hsub hz)), (fun z hz => hcubic z (hsub hz)), ?_,
+    (fun z hz => hnormal z (hsub hz)), (fun z hz => hcubic z (hsub hz)), hbound',
     (fun z hz => hintegral z (hsub hz))⟩
-  intro s
-  obtain ⟨A, hA, hAs⟩ := hbound s
-  refine ⟨A, hA, ?_⟩
-  intro z hz m p hp a b hab
-  have horder : 1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2| ≤
-      1 + stateGrading S (s + loss') (z.1 - C.referenceState) + |z.2| :=
-    add_le_add_right (add_le_add_left
-      (solve_stateGrading_monotone S (Nat.add_le_add_left hl s) (z.1 - C.referenceState)) 1) _
-  exact (hAs z (hsub hz) m p hp a b hab).trans
-    (mul_le_mul_of_nonneg_left horder
-      (mul_nonneg hA.le (Real.rpow_nonneg (hE (K.cell m)) _)))
 
 /-- The Banach inverse is unchanged; only its state neighborhood is restricted. -/
 theorem n08_n06Properties_mono
