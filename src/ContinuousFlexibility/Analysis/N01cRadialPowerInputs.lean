@@ -137,7 +137,7 @@ theorem projectedRadialJets_powerBounds
     obtain ⟨C, A, hC, hA, hb⟩ := hzero n
     refine ⟨C, A, hC, hA, fun r hr x hx v hv => ?_⟩
     simpa only [smoothDirections_D_zero_apply (Jjoint n r hr) (mem_univ x),
-      parameterHeightWeight, ite_true, mul_one] using hb r hr x hx
+      parameterHeightWeight, ite_true, mul_one, Function.comp_def] using hb r hr x hx
   · obtain ⟨C, A, hC, hA, hb⟩ := hpositive n k (Nat.pos_of_ne_zero hk)
     refine ⟨C, A, hC, hA, fun r hr x hx v hv => ?_⟩
     have hprod : (∏ i, q (L (v i))) ≤ 1 :=
@@ -147,7 +147,7 @@ theorem projectedRadialJets_powerBounds
         (hH r hr)
     have hh := (hb r hr x hx (fun i => L (v i))).trans
       (mul_le_mul_of_nonneg_left hprod hweight)
-    simpa only [smoothDirections_precompCLM_D_apply, parameterHeightWeight, if_neg hk,
-      mul_one] using hh
+    simpa only [Jjoint, smoothDirections_precompCLM_D_apply,
+      parameterHeightWeight, if_neg hk, mul_one] using hh
 
 end ContinuousFlexibility.Analysis
