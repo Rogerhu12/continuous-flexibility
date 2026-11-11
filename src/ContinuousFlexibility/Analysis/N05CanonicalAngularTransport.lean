@@ -39,7 +39,9 @@ theorem n05CanonicalAngularTransport_angular (S : PhysicalSpacesData)
   simp only [mixedDerivative, iteratedDeriv_zero]
   by_cases hr : p.1 ∈ Ioo (K.physicalLeft m) (K.physicalRight m)
   · simp only [n05CanonicalAngularTransport, if_pos hr, iteratedDeriv_const_mul_field]
-  · simp only [n05CanonicalAngularTransport, if_neg hr, iteratedDeriv_const_zero]
+    simp only [mixedDerivative, iteratedDeriv_zero]
+  · simp only [n05CanonicalAngularTransport, if_neg hr]
+    exact iteratedDeriv_fun_const_zero
 
 theorem n05CanonicalAngularTransport_periodic (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S) (m : ℕ)
@@ -108,7 +110,12 @@ theorem n05CanonicalAngularTransport_compact_support (m : ℕ)
         refine ⟨(K.chart (C.referenceState, 0) m (r, 0)).1, hx, ?_⟩
         have hp : (r, (0 : ℝ)) ∈ physicalPieceOpen S K m := ⟨hri, mem_univ _⟩
         have he := congrArg (fun q : PolarPoint => q.1) (hleft (r, 0) hp)
-        simpa only [(hcoordinates.1 m (r, 0) hp).1] using he
+        have hchart := congrArg
+          (fun q : PolarPoint => (K.inverseChart (C.referenceState, 0) m q).1)
+          (hcoordinates.1 m (r, 0) hp).1
+        change (K.inverseChart (C.referenceState, 0) m
+          ((K.chart (C.referenceState, 0) m (r, 0)).1, 0)).1 = r
+        exact hchart.symm.trans he
       simp only [n05CanonicalAngularTransport, if_pos hri, hzero _ hξ θ, mul_zero]
     · simp only [n05CanonicalAngularTransport, if_neg hri]
 

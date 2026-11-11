@@ -73,7 +73,10 @@ theorem n05CanonicalSmoothJet_radial_mul (S : PhysicalSpacesData) (K : Canonical
   filter_upwards [n05CanonicalSmoothJet_ae S K m ((hχ.comp contDiff_fst).mul hf) j,
     n05CanonicalRadialMultiply_ae S K m χ hχ.continuous C hC (n05CanonicalSmoothJet S K m hf j),
     n05CanonicalSmoothJet_ae S K m hf j] with p hp hq hr
-  rw [hp, hq, hr, n05CanonicalAngularDerivative_radial_mul]
+  rw [hp, hq, hr]
+  change mixedDerivative 0 j (fun q => χ q.1 * f q) p =
+    χ p.1 * mixedDerivative 0 j f p
+  exact n05CanonicalAngularDerivative_radial_mul χ f j p
 
 theorem n05WeakCanonicalAngularDerivative_of_tendsto
     {S : PhysicalSpacesData} {K : CanonicalData S} {m j : ℕ}
