@@ -46,7 +46,8 @@ theorem n05CanonicalAngularSource_source_ae (γ t : ℝ)
         (fun p => n05CanonicalSampleWeight T S K γ t m * a m p) := by
     filter_upwards [Lp.coeFn_smul (n05CanonicalSampleWeight T S K γ t m) (a m)] with p hp
     simpa only [Pi.smul_apply, smul_eq_mul] using hp
-  exact hsmul.symm.trans (n05CanonicalAngularLift_source_ae h hcoordinates _ m)
+  exact hsmul.symm.trans (n05CanonicalAngularLift_source_ae h hcoordinates
+    (fun j => n05CanonicalSampleWeight T S K γ t j • a j) m)
 
 include h hcoordinates in
 theorem n05CanonicalAngularSource_linear_combination_ae (γ t : ℝ)
@@ -133,8 +134,10 @@ theorem n05CanonicalAngularSource_tendsto_physical
         (referenceWeightedMeasure D γw M) :=
     memLp_referenceWeightedMeasure horder hpart (hsource c).1.1 (hsource c).1.2
   have hnorm : Tendsto (fun n => ‖a n - b‖ ^ 2) atTop (𝓝 0) := by
+    have hdiff : Tendsto (fun n => a n - b) atTop (𝓝 (b - b)) :=
+      hab.sub tendsto_const_nhds
     simpa only [sub_self, norm_zero, zero_pow (by decide : 2 ≠ 0)] using
-      ((hab.sub tendsto_const_nhds).norm.pow 2)
+      (hdiff.norm.pow 2)
   have hlim : Tendsto (fun n => ∫ p,
       (n05CanonicalAngularSource T S C K γ t (a n) p -
         n05CanonicalAngularSource T S C K γ t b p) ^ 2

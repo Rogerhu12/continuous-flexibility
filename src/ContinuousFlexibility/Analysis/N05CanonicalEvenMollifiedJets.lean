@@ -91,7 +91,7 @@ theorem n05CanonicalEvenCutoffMollification_jet_tendsto_signed
     (n05CanonicalRadialCutoffOperator S K m n g) |>.comp ht
   have hr := (n05CanonicalRadialCutoffOperator S K m (2 * n + 1)).continuous.tendsto
     (n05CanonicalSignedProjection S K m j (n05CanonicalRadialCutoffOperator S K m n g)) |>.comp hs
-  simpa only [n05CanonicalEvenCutoffMollification_jet] using hr
+  simpa only [Function.comp_def, n05CanonicalEvenCutoffMollification_jet] using hr
 
 theorem n05CanonicalEvenCutoffMollification_zero_tendsto
     (S : PhysicalSpacesData) (K : CanonicalData S) (m n : ℕ)
