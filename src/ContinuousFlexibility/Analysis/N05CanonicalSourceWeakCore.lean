@@ -74,7 +74,7 @@ theorem n05CanonicalJetSource_smooth_single_ae (γ t : ℝ) (m s : ℕ)
     simpa only [zero_smul, add_zero, zero_mul] using
       n05CanonicalAngularLift_linear_combination_ae h hcoordinates F F
         (n05CanonicalSampleWeight T S K γ t m) 0
-  change n05CanonicalAngularLift S C K _ =ᵐ[radialPhysicalMeasure D] _
+  unfold n05CanonicalJetSource n05CanonicalAngularSource
   rw [he]
   filter_upwards [hscaled,
     n05CanonicalAngularLift_smooth_single_ae h hcoordinates m hφ.1 hφ.2.1 j.val]

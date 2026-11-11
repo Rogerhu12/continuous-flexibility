@@ -76,8 +76,7 @@ theorem n05CanonicalSingle_mem_smoothCoreClosure (S : PhysicalSpacesData)
     exact v.property
   have hrow := n05CanonicalSmoothRow_mem_closure S K m s (v.val m)
     ((n05CanonicalReflection_fixed_iff S K m (v.val m 0)).mpr (hv.1 m)) (hv.2 m)
-  have hc : Continuous (lp.single 2 m :
-      PiLp 2 (fun _ : Fin (s + 1) => CanonicalL2 S K m) → CanonicalVolumeJets S K s) :=
+  have hc :=
     (lp.isometry_single (p := (2 : ENNReal))
       (E := fun k : ℕ => PiLp 2 (fun _ : Fin (s + 1) => CanonicalL2 S K k)) m).continuous
   have hi := mem_closure_image hc.continuousAt hrow
