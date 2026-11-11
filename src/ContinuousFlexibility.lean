@@ -318,6 +318,8 @@ import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
 import ContinuousFlexibility.Radial.TailEdgePoissonComparison
 import ContinuousFlexibility.Radial.TailNaturalNodeLine
 import ContinuousFlexibility.Radial.TailResistanceTransport
+import ContinuousFlexibility.Radial.DeepTailPhysicalDecay
+import ContinuousFlexibility.Radial.DeepTailPhysicalSource
 import ContinuousFlexibility.Radial.TransitionTransfer
 import ContinuousFlexibility.Radial.TridiagonalDominance
 import ContinuousFlexibility.Radial.WeightKernelBounds

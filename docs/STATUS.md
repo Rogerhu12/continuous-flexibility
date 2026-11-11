@@ -2,6 +2,16 @@
 
 Last updated: 2026-11-11.
 
+## Active line: R06c
+
+`line/R06c` is proving the physical flatness, source identity, and height-ratio
+continuity clauses after `R06Full`. The first proof modules derive the cubic
+attenuation of the actual natural node values and one source identity for both
+endpoint orientations. The remaining work connects the actual edge equation
+to the physical jet bounds and proves continuous dependence of the normalized
+natural line. R06c remains open until its exact theorem, root import, and axiom
+audit all pass CI; the numbers below are the last verified main baseline.
+
 ## Target
 
 `thm:main` of the manuscript. The statement was first taken from the 62-page version
