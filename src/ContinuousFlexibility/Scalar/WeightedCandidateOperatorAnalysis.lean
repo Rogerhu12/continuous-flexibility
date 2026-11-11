@@ -82,14 +82,16 @@ theorem exists_scalarCandidateOperators_jointSmoothTameOn
   have hUc : IsOpen Uc := isOpen_uniformTameBall ht bc (scalarStateCenter S v0) ec
   have hUt : IsOpen Ut := isOpen_uniformTameBall ht bt (scalarStateCenter S v0) et
   have hV : IsOpen V := (hUa.inter hUb).inter (hUc.inter hUt)
+  have hzero (s : ℕ) : scalarStateGrading S s (0 : ScalarWeightedState S) = 0 :=
+    (scalarStateGrading S s).map_zero'
   have hxa : scalarStateCenter S v0 ∈ Ua := by
-    simpa only [Ua, Set.mem_setOf_eq, sub_self, map_zero] using hea
+    simpa only [Ua, Set.mem_setOf_eq, sub_self, hzero ba] using hea
   have hxb : scalarStateCenter S v0 ∈ Ub := by
-    simpa only [Ub, Set.mem_setOf_eq, sub_self, map_zero] using heb
+    simpa only [Ub, Set.mem_setOf_eq, sub_self, hzero bb] using heb
   have hxc : scalarStateCenter S v0 ∈ Uc := by
-    simpa only [Uc, Set.mem_setOf_eq, sub_self, map_zero] using hec
+    simpa only [Uc, Set.mem_setOf_eq, sub_self, hzero bc] using hec
   have hxt : scalarStateCenter S v0 ∈ Ut := by
-    simpa only [Ut, Set.mem_setOf_eq, sub_self, map_zero] using het
+    simpa only [Ut, Set.mem_setOf_eq, sub_self, hzero bt] using het
   have ha : SmoothTameOn (scalarStateGrading S) (scalarHeightGrading S) V
       (scalarCoefficientAHeight hD hT hS) :=
     (hfa.restrict hV (fun _ hx => hx.1.1)).1

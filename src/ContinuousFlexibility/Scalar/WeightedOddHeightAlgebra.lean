@@ -144,7 +144,9 @@ theorem angularPartial_decode_scalarReferenceWCLM
   obtain ⟨B, hB⟩ := hD
   have hw : ContDiff ℝ ∞ D.w := hB.1.2.2.1.1
   have hu := (scalarHeight_decode_contDiff_and_flatJets hT hS u).1
-  rw [heq, angularPartial_mul ((hw.comp contDiff_fst).differentiable (by simp) p)
+  have hwfield : ContDiff ℝ ∞ (fun q : PolarPoint => D.w q.1) :=
+    hw.comp contDiff_fst
+  rw [heq, angularPartial_mul (hwfield.differentiable (by simp) p)
     (hu.differentiable (by simp) p)]
   have hz : angularPartial (fun q : PolarPoint => D.w q.1) p = 0 :=
     Radial.angularPartial_radialHeightField (hw.differentiable (by simp) p.1)

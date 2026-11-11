@@ -54,8 +54,11 @@ theorem UniformTameGerm.scalarDecode_small
   have hcont : ContinuousAt (fun x => scalarHeightGrading S 4 (f x)) x0 :=
     (continuous_scalarHeightGrading S 4).continuousAt.comp hf.continuousAt
   have hval : scalarHeightGrading S 4 (f x0) < δ / C := by
-    rw [hf0, map_zero]
-    exact div_pos hδ hC
+    rw [hf0]
+    calc
+      scalarHeightGrading S 4 (0 : ScalarHeightSpace S) = 0 :=
+        (scalarHeightGrading S 4).map_zero'
+      _ < δ / C := div_pos hδ hC
   have hevent : ∀ᶠ x in 𝓝 x0, scalarHeightGrading S 4 (f x) < δ / C :=
     hcont.preimage_mem_nhds (isOpen_Iio.mem_nhds hval)
   filter_upwards [hevent] with x hx z

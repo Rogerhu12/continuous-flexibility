@@ -40,7 +40,13 @@ theorem scalarCommonDirectionCLM_isTame (S : PhysicalSpacesData) :
   change scalarStateGrading S s (scalarHeightDirection S u) ≤
     (1 : ℝ) * scalarCommonHeightGrading S (s + 0) u
   rw [Nat.add_zero, one_mul, scalarStateGrading_apply, scalarCommonHeightGrading_apply]
-  simp only [scalarHeightDirection, map_zero, norm_zero, zero_add, add_zero, le_refl]
+  change scalarHeightGrading S s (0 : ScalarHeightSpace S) +
+    scalarHeightGrading S s u.1 + ‖u.2‖ + ‖(0 : ℝ)‖ ≤
+      scalarHeightGrading S s u.1 + ‖u.2‖
+  have hz : scalarHeightGrading S s (0 : ScalarHeightSpace S) = 0 :=
+    (scalarHeightGrading S s).map_zero'
+  simpa only [hz, norm_zero, zero_add, add_zero] using
+    (le_refl (scalarHeightGrading S s u.1 + ‖u.2‖))
 
 def scalarCommonProjectionCLM (S : PhysicalSpacesData) :
     ScalarCommonHeight S →L[ℝ] ScalarHeightSpace S :=
@@ -81,7 +87,8 @@ theorem scalarCommonHeightDecode_angularPartial
     angularPartial (scalarCommonHeightDecode S u) =
       angularPartial ((S.height scalarBeta).decode u.1) := by
   have hf := (scalarHeight_decode_contDiff_and_flatJets hT hS u.1).1
-  have hχ := hS.2.2.1.1.comp contDiff_fst
+  have hχ : ContDiff ℝ ∞ (fun p : PolarPoint => S.chiLeft p.1) :=
+    hS.2.2.1.1.comp contDiff_fst
   funext p
   have hzero : angularPartial (fun q : PolarPoint => S.chiLeft q.1) p = 0 :=
     Radial.angularPartial_radialHeightField (hS.2.2.1.1.differentiable (by simp) p.1)
@@ -141,6 +148,7 @@ theorem angularPartial_decode_scalarReferenceCorrectedCLM
   have hprod := (scalarHeight_decode_contDiff_and_flatJets hT hS
     (scalarReferenceCorrectedCLM hD hT hS u)).1
   rw [decode_scalarReferenceCorrectedCLM] at hprod ⊢
-  exact angularPartial_radialProduct_of_contDiff hf hprod
+  exact angularPartial_radialProduct_of_contDiff
+    (k := fun r => deriv D.w r / r) hf hprod
 
 end ContinuousFlexibility.Statements

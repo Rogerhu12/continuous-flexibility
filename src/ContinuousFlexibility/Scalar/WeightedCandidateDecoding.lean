@@ -22,7 +22,6 @@ set_option backward.isDefEq.respectTransparency false
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 variable (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
   (hS : IsPhysicalSpaces D T S) (x : ScalarWeightedState S)
-  (hb : ScalarCandidatePowerBounds hD hT hS x)
 
 theorem scalarFieldDecode_even (S : PhysicalSpacesData) (u : ScalarHeightSpace S) (p : PolarPoint) :
     scalarFieldDecode S (u, 0) p = (S.height scalarBeta).decode u p := by
@@ -32,7 +31,8 @@ theorem scalarFieldDecode_odd (S : PhysicalSpacesData) (u : ScalarHeightSpace S)
     scalarFieldDecode S (0, u) p = angularPartial ((S.height scalarBeta).decode u) p := by
   simp only [scalarFieldDecode, map_zero, Pi.zero_apply, zero_add]
 
-theorem decode_scalarJetCoframeRadialHeight_finite (p : PolarPoint) :
+theorem decode_scalarJetCoframeRadialHeight_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarJetCoframeRadialHeight hD hT hS x) p =
       scalarJetFiniteFormula D S x 2 p := by
   simp only [scalarJetCoframeRadialHeight, decode_scalarHeightUnitalMul,
@@ -41,7 +41,8 @@ theorem decode_scalarJetCoframeRadialHeight_finite (p : PolarPoint) :
     scalarJetFiniteFormula, div_eq_mul_inv]
   ring
 
-theorem angularPartial_decode_scalarJetCoframeMixedPrimitive_finite (p : PolarPoint) :
+theorem angularPartial_decode_scalarJetCoframeMixedPrimitive_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarJetCoframeMixedPrimitive hD hT hS x)) p =
       scalarJetFiniteFormula D S x 3 p := by
   simp only [scalarJetCoframeMixedPrimitive, angularPartial_decode_height_neg,
@@ -52,13 +53,15 @@ theorem angularPartial_decode_scalarJetCoframeMixedPrimitive_finite (p : PolarPo
     scalarJetFiniteFormula, scalarStateProfile_eq_mean, div_eq_mul_inv]
   ring
 
-theorem decode_scalarJetCoframeAngularHeight_finite (p : PolarPoint) :
+theorem decode_scalarJetCoframeAngularHeight_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarJetCoframeAngularHeight hD hT hS x) p =
       scalarJetFiniteFormula D S x 4 p := by
   simp only [scalarJetCoframeAngularHeight, decode_scalarReferenceRadiusCLM,
     decode_scalarStateAngularPower_half hD hT hS x hb, scalarJetFiniteFormula]
 
-theorem angularPartial_decode_scalarJetConnectionRadialPrimitive_finite (p : PolarPoint) :
+theorem angularPartial_decode_scalarJetConnectionRadialPrimitive_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarJetConnectionRadialPrimitive hD hT hS x)) p =
       scalarJetFiniteFormula D S x 5 p := by
   simp only [scalarJetConnectionRadialPrimitive, angularPartial_decode_scalarHeightOddUnitalAct,
@@ -68,7 +71,8 @@ theorem angularPartial_decode_scalarJetConnectionRadialPrimitive_finite (p : Pol
     scalarJetFiniteFormula, scalarStateProfile_eq_mean, div_eq_mul_inv, mul_inv_rev]
   ring
 
-theorem decode_scalarJetConnectionAngularHeight_finite (p : PolarPoint) :
+theorem decode_scalarJetConnectionAngularHeight_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarJetConnectionAngularHeight hD hT hS x) p =
       scalarJetFiniteFormula D S x 6 p := by
   simp only [scalarJetConnectionAngularHeight, map_add, Pi.add_apply,
@@ -78,7 +82,8 @@ theorem decode_scalarJetConnectionAngularHeight_finite (p : PolarPoint) :
     scalarJetFiniteFormula, scalarStateProfile_eq_mean, div_eq_mul_inv, mul_inv_rev, one_mul]
   ring
 
-theorem decode_scalarCandidateJets_finite (i : Fin 7) (p : PolarPoint) :
+theorem decode_scalarCandidateJets_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (i : Fin 7) (p : PolarPoint) :
     scalarFieldDecode S (scalarCandidateJets hD hT hS x i) p =
       scalarJetFiniteFormula D S x i p := by
   fin_cases i <;> simp only [scalarCandidateJets, Matrix.cons_val_zero, Matrix.cons_val_succ,
@@ -92,13 +97,15 @@ theorem decode_scalarCandidateJets_finite (i : Fin 7) (p : PolarPoint) :
   · exact angularPartial_decode_scalarJetConnectionRadialPrimitive_finite hD hT hS x hb p
   · exact decode_scalarJetConnectionAngularHeight_finite hD hT hS x hb p
 
-theorem decode_scalarCandidateJets (i : Fin 7) (p : PolarPoint) :
+theorem decode_scalarCandidateJets
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (i : Fin 7) (p : PolarPoint) :
     scalarFieldDecode S (scalarCandidateJets hD hT hS x i) p =
       scalarJetComponent D S x i p :=
   (decode_scalarCandidateJets_finite hD hT hS x hb i p).trans
     (scalarJetComponent_eq_finiteFormula_global hD hT hS x i p).symm
 
-theorem decode_scalarCandidateCoefficients_finite (i : Fin 3) (p : PolarPoint) :
+theorem decode_scalarCandidateCoefficients_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (i : Fin 3) (p : PolarPoint) :
     scalarFieldDecode S (scalarCandidateCoefficients hD hT hS x i) p =
       scalarCoefficientFiniteFormula D S x i p := by
   fin_cases i <;> simp only [scalarCandidateCoefficients, Matrix.cons_val_zero, Matrix.cons_val_succ,
@@ -107,7 +114,8 @@ theorem decode_scalarCandidateCoefficients_finite (i : Fin 3) (p : PolarPoint) :
   · exact angularPartial_decode_scalarCoefficientBPrimitive_finite hD hT hS x hb p
   · exact decode_scalarCoefficientCHeight_finite hD hT hS x hb p
 
-theorem decode_scalarCandidateCoefficients (hg : ScalarStateGeometry D S x)
+theorem decode_scalarCandidateCoefficients
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (hg : ScalarStateGeometry D S x)
     (i : Fin 3) (p : PolarPoint) :
     scalarFieldDecode S (scalarCandidateCoefficients hD hT hS x i) p =
       scalarCoefficientComponent D S x i p := by
@@ -117,13 +125,15 @@ theorem decode_scalarCandidateCoefficients (hg : ScalarStateGeometry D S x)
   · rw [scalarFieldDecode_eq_zero_outside hT hS _ hp,
       scalarCoefficientComponent_eq_zero_outside hD hT hS x i hp]
 
-theorem decode_scalarCoefficientAHeight (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
+theorem decode_scalarCoefficientAHeight
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientAHeight hD hT hS x) p =
       scalarStateA D S x p - D.w p.1 := by
   simpa only [scalarCandidateCoefficients, Matrix.cons_val_zero, scalarFieldDecode_even,
     scalarCoefficientComponent] using decode_scalarCandidateCoefficients hD hT hS x hb hg 0 p
 
 theorem angularPartial_decode_scalarCoefficientBPrimitive
+    (hb : ScalarCandidatePowerBounds hD hT hS x)
     (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarCoefficientBPrimitive hD hT hS x)) p =
       scalarStateB D S x p := by
@@ -131,14 +141,16 @@ theorem angularPartial_decode_scalarCoefficientBPrimitive
     scalarFieldDecode_odd, scalarCoefficientComponent] using
     decode_scalarCandidateCoefficients hD hT hS x hb hg 1 p
 
-theorem decode_scalarCoefficientCHeight (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
+theorem decode_scalarCoefficientCHeight
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (hg : ScalarStateGeometry D S x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientCHeight hD hT hS x) p =
       scalarStateCorrectedC D S x p - deriv D.w p.1 / p.1 := by
   simpa only [scalarCandidateCoefficients, Matrix.cons_val_zero, Matrix.cons_val_succ,
     scalarFieldDecode_even, scalarCoefficientComponent] using
     decode_scalarCandidateCoefficients hD hT hS x hb hg 2 p
 
-theorem decode_scalarCandidateResidual (p : PolarPoint) :
+theorem decode_scalarCandidateResidual
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCandidateResidual hD hT hS x) p =
       scalarStateResidual D S x p := by
   by_cases hr : p.1 = 0
@@ -152,7 +164,8 @@ theorem decode_scalarCandidateResidual (p : PolarPoint) :
   · exact (decode_scalarCandidateResidual_finite hD hT hS x hb p).trans
       (scalarStateResidual_eq_finiteFormula hD hT hS x hr).symm
 
-theorem decode_scalarTypePerturbationHeight (hg : ScalarStateGeometry D S x)
+theorem decode_scalarTypePerturbationHeight
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (hg : ScalarStateGeometry D S x)
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     (S.height scalarBeta).decode (scalarTypePerturbationHeight hD hT hS x) p =
       D.w p.1 * scalarStateTypeB D S x p - (1 + D.w p.1 ^ 2) / p.1 := by

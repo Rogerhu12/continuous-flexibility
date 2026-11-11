@@ -22,31 +22,35 @@ set_option backward.isDefEq.respectTransparency false
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 variable (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
   (hS : IsPhysicalSpaces D T S) (x : ScalarWeightedState S)
-  (hb : ScalarCandidatePowerBounds hD hT hS x)
 
-theorem decode_scalarStateDPower_half (p : PolarPoint) :
+theorem decode_scalarStateDPower_half
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateDPower hD hT hS (1 / 2 : ℝ) x) p =
       Real.sqrt (1 + scalarStateDDefect D S x p) - 1 := by
   rw [scalarStateDPower, decode_scalarHeightPower_half hT hS _ (hb.2.1 p),
     decode_scalarStateDiscriminantHeight]
 
-theorem decode_scalarStateDPower_neg_half (p : PolarPoint) :
+theorem decode_scalarStateDPower_neg_half
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateDPower hD hT hS (-(1 / 2) : ℝ) x) p =
       (Real.sqrt (1 + scalarStateDDefect D S x p))⁻¹ - 1 := by
   rw [scalarStateDPower, decode_scalarHeightPower_neg_half hT hS _ (hb.2.1 p),
     decode_scalarStateDiscriminantHeight]
 
-theorem decode_scalarStateDPower_neg_three_halves (p : PolarPoint) :
+theorem decode_scalarStateDPower_neg_three_halves
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateDPower hD hT hS (-(3 / 2) : ℝ) x) p =
       inverseDThreeHalves (1 + scalarStateDDefect D S x p) - 1 := by
   rw [scalarStateDPower, decode_scalarHeightPower_neg_three_halves hT hS _ (hb.2.1 p),
     decode_scalarStateDiscriminantHeight]
 
-private theorem scalarState_neg_angularSquare_bound (p : PolarPoint) :
+private theorem scalarState_neg_angularSquare_bound
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     |(S.height scalarBeta).decode (-scalarStateAngularSquare hD hT hS x) p| ≤ 1 / 2 := by
   simpa only [map_neg, Pi.neg_apply, abs_neg] using hb.2.2.1 p
 
-theorem decode_scalarStateAngularPower_half (p : PolarPoint) :
+theorem decode_scalarStateAngularPower_half
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateAngularPower hD hT hS (1 / 2 : ℝ) x) p =
       Real.sqrt (1 - (x.2 * heightAngular (scalarStateIncrement S x) p) ^ 2) - 1 := by
   rw [scalarStateAngularPower, decode_scalarHeightPower_half hT hS _
@@ -54,7 +58,8 @@ theorem decode_scalarStateAngularPower_half (p : PolarPoint) :
     map_neg, Pi.neg_apply, decode_scalarStateAngularSquare]
   <;> simp only [sub_eq_add_neg]
 
-theorem decode_scalarStateAngularPower_neg_half (p : PolarPoint) :
+theorem decode_scalarStateAngularPower_neg_half
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateAngularPower hD hT hS (-(1 / 2) : ℝ) x) p =
       (Real.sqrt (1 - (x.2 * heightAngular (scalarStateIncrement S x) p) ^ 2))⁻¹ - 1 := by
   rw [scalarStateAngularPower, decode_scalarHeightPower_neg_half hT hS _
@@ -62,7 +67,8 @@ theorem decode_scalarStateAngularPower_neg_half (p : PolarPoint) :
     map_neg, Pi.neg_apply, decode_scalarStateAngularSquare]
   <;> simp only [sub_eq_add_neg]
 
-theorem decode_scalarStateAngularPower_neg_one (p : PolarPoint) :
+theorem decode_scalarStateAngularPower_neg_one
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateAngularPower hD hT hS (-1) x) p =
       (1 - (x.2 * heightAngular (scalarStateIncrement S x) p) ^ 2)⁻¹ - 1 := by
   rw [scalarStateAngularPower, decode_scalarHeightPower_neg_one hT hS _
@@ -70,13 +76,15 @@ theorem decode_scalarStateAngularPower_neg_one (p : PolarPoint) :
     map_neg, Pi.neg_apply, decode_scalarStateAngularSquare]
   <;> simp only [sub_eq_add_neg]
 
-theorem decode_scalarStateQPower_neg_one (p : PolarPoint) :
+theorem decode_scalarStateQPower_neg_one
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateQPower hD hT hS (-1) x) p =
       (1 + scalarStateQDefect D S x p)⁻¹ - 1 := by
   rw [scalarStateQPower, decode_scalarHeightPower_neg_one hT hS _ (hb.2.2.2 p),
     decode_scalarStateQuotientHeight hD hT hS x p (hb.1 p)]
 
-theorem decode_scalarStateInverseMeanHeight (p : PolarPoint) :
+theorem decode_scalarStateInverseMeanHeight
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateInverseMeanHeight hD hT hS x) p =
       (1 + scalarStateProfileMean S x p.1)⁻¹ - 1 := by
   rw [scalarStateInverseMeanHeight, decode_scalarHeightPower_neg_one hT hS _ (hb.1 p),
@@ -109,7 +117,8 @@ theorem decode_scalarStateWDerivAct (u : ScalarHeightSpace S) (p : PolarPoint) :
     scalarStateProfile_deriv_expansion hD hT hS]
   ring
 
-theorem decode_scalarStateConnectionFactor (p : PolarPoint) :
+theorem decode_scalarStateConnectionFactor
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateConnectionFactor hD hT hS x) p =
       (1 - (x.2 * heightAngular (scalarStateIncrement S x) p) ^ 2)⁻¹ *
         (Real.sqrt (1 + scalarStateDDefect D S x p))⁻¹ - 1 := by
@@ -130,7 +139,8 @@ theorem decode_scalarStateMeanFourth (p : PolarPoint) :
   simp only [scalarStateMeanFourth, decode_scalarHeightUnitalMul, decode_scalarStateMeanSquare]
   ring
 
-theorem decode_scalarStateSigma (p : PolarPoint) :
+theorem decode_scalarStateSigma
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarStateSigma hD hT hS x) p =
       (1 + scalarStateQDefect D S x p)⁻¹ *
         (Real.sqrt (1 + scalarStateDDefect D S x p))⁻¹ - 1 := by
@@ -139,7 +149,8 @@ theorem decode_scalarStateSigma (p : PolarPoint) :
     decode_scalarStateDPower_neg_half hD hT hS x hb]
   ring
 
-theorem decode_scalarCoefficientAHeight_finite (p : PolarPoint) :
+theorem decode_scalarCoefficientAHeight_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientAHeight hD hT hS x) p =
       scalarCoefficientFiniteFormula D S x 0 p := by
   simp only [scalarCoefficientAHeight, decode_scalarReferenceWCLM,
@@ -149,7 +160,8 @@ theorem decode_scalarCoefficientAHeight_finite (p : PolarPoint) :
     scalarCoefficientFiniteFormula]
   ring
 
-theorem angularPartial_decode_scalarCoefficientBPrimitive_finite (p : PolarPoint) :
+theorem angularPartial_decode_scalarCoefficientBPrimitive_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarCoefficientBPrimitive hD hT hS x)) p =
       scalarCoefficientFiniteFormula D S x 1 p := by
   simp only [scalarCoefficientBPrimitive, angularPartial_decode_height_neg,
@@ -171,7 +183,8 @@ theorem decode_scalarCoefficientQuadraticHeight (p : PolarPoint) :
     decode_scalarHeightAngularMul, angularPartial_decode_scalarStateMixedPrimitive]
   ring
 
-theorem decode_scalarCoefficientCHeight_finite (p : PolarPoint) :
+theorem decode_scalarCoefficientCHeight_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientCHeight hD hT hS x) p =
       scalarCoefficientFiniteFormula D S x 2 p := by
   simp only [scalarCoefficientCHeight, map_add, Pi.add_apply,
@@ -184,7 +197,8 @@ theorem decode_scalarCoefficientCHeight_finite (p : PolarPoint) :
     decode_scalarCoefficientQuadraticHeight, scalarCoefficientFiniteFormula, div_eq_mul_inv]
   ring
 
-theorem decode_scalarCandidateResidual_finite (p : PolarPoint) :
+theorem decode_scalarCandidateResidual_finite
+    (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCandidateResidual hD hT hS x) p =
       scalarResidualFiniteFormula D S x p := by
   simp only [scalarCandidateResidual, scalarResidualNumeratorHeight,

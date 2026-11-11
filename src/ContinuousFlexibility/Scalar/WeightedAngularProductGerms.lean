@@ -21,6 +21,21 @@ set_option backward.isDefEq.respectTransparency false
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {A : SobolevModelData}
 
+private theorem oneHigh_pair_of_fin_two
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (M : (Fin 2 → E) → E) {base loss : ℕ}
+    (hM : ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ u : Fin 2 → E,
+      p s (M u) ≤ C * ∑ i, p (s + loss) (u i) *
+        ∏ j ∈ Finset.univ.erase i, p base (u j)) :
+    ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x y : E,
+      p s (M ![x, y]) ≤
+        C * (p (s + loss) x * p base y + p base x * p (s + loss) y) := by
+  intro s
+  obtain ⟨C, hC, hCu⟩ := hM s
+  refine ⟨C, hC, fun x y => ?_⟩
+  rw [← oneHigh_fin_two (p base) (p (s + loss)) x y]
+  exact hCu ![x, y]
+
 theorem oddProductPrimitiveMap_oneHigh_pair
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
     (hinterp : HasInterpolation A.grading) (hγ : 0 < γ) :
@@ -28,16 +43,9 @@ theorem oddProductPrimitiveMap_oneHigh_pair
       A.grading s (oddProductPrimitiveMap hT hA hinterp hγ ![x, y]) ≤
         C * (A.grading (s + loss) x * A.grading base y +
           A.grading base x * A.grading (s + loss) y) := by
-  classical
   obtain ⟨base, loss, hbase, hbound⟩ := oddProductPrimitiveMap_oneHigh hT hA hinterp hγ
-  refine ⟨base, loss, hbase, ?_⟩
-  intro s
-  obtain ⟨C, hC, hCu⟩ := hbound s
-  refine ⟨C, hC, fun x y => ?_⟩
-  have h0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
-  have h1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
-  simpa only [Fin.sum_univ_two, h0, h1, Finset.prod_singleton,
-    Matrix.cons_val_zero, Matrix.cons_val_one, mul_comm] using hCu ![x, y]
+  exact ⟨base, loss, hbase, oneHigh_pair_of_fin_two A.grading
+    (oddProductPrimitiveMap hT hA hinterp hγ) hbound⟩
 
 theorem oddProductPrimitiveMap_uniformTameGerm
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)

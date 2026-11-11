@@ -48,9 +48,47 @@ theorem weightedCompositionMap_zero
   apply hA.2.2.2.2.2.1
   rw [decode_weightedCompositionMap, map_zero]
   funext p
-  simp only [map_zero, Pi.zero_apply, hF0]
+  simp only [Pi.zero_apply, hF0]
 
 end SobolevModelData
+
+/-- An injective decoder transports a genuine local tower to any global
+map with the same literal decoded values.  All transport takes place with
+an abstract carrier, so a concrete lift is never unfolded by rewriting. -/
+private theorem uniformTameGerm_of_local_decoder
+    {E P V : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (decode : E → P → V) (hinj : Function.Injective decode)
+    (φ : E → P → V) (g : E → E) (hg : ∀ x, decode (g x) = φ x)
+    (hlocal : ∃ base loss : ℕ, ∃ ε : ℝ, 0 < ε ∧
+      ∃ f : E → E,
+        (∀ x, p base x < ε → ∀ z, decode (f x) z = φ x z) ∧
+        FixedNeighborhoodSmoothTame p p {x | p base x < ε} base loss f) :
+    UniformTameGerm p p 0 g := by
+  obtain ⟨base, loss, ε, hε, f, hfdecode, hftame⟩ := hlocal
+  have hcanonical : FixedNeighborhoodSmoothTame p p
+      {x | p base x < ε} base loss g :=
+    hftame.congr (fun x hx => hinj ((funext (hfdecode x hx)).trans (hg x).symm))
+  refine ⟨base, loss, ε, hε, ?_⟩
+  simpa only [sub_zero] using hcanonical
+
+/-- Change the outer center before specializing to an implemented map. -/
+private theorem uniformTameGerm_comp_zero
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    {E : ℕ → Type*} [∀ n, NormedAddCommGroup (E n)] [∀ n, NormedSpace ℝ (E n)]
+    [∀ n, CompleteSpace (E n)] {bond : ∀ n, E (n + 1) →L[ℝ] E n}
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ (ProjectiveLimit E bond)}
+    {x0 : X} {f : X → ProjectiveLimit E bond}
+    {g : ProjectiveLimit E bond → ProjectiveLimit E bond}
+    (hf : UniformTameGerm p q x0 f) (hf0 : f x0 = 0)
+    (hg : UniformTameGerm q q 0 g)
+    (hp : Monotone p) (ht : WithSeminorms p) (hq : Monotone q) :
+    UniformTameGerm p q x0 (fun x => g (f x)) := by
+  letI : IsTopologicalAddGroup X := ht.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ X := ht.continuousSMul
+  have houter : UniformTameGerm q q (f x0) g := by
+    rw [hf0]
+    exact hg
+  simpa only [Function.comp_def] using hf.comp houter hp ht hq
 
 /-- The globally defined canonical lift has one fixed-loss actual tower on
 one neighborhood of zero in the physical height space. -/
@@ -62,21 +100,13 @@ theorem weightedCompositionMap_uniformTameGerm
     UniformTameGerm (S.height γ).grading (S.height γ).grading 0
       (SobolevModelData.weightedCompositionMap hT (hS.1 γ)
         ((hS.2.2.2.1 γ).2.2) hγ hF hF0) := by
-  obtain ⟨base, loss, ε, hε, f, hfdecode, hftame⟩ :=
-    exists_fixedNeighborhood_weightedComposition hT hS hγ hF hF0
-  have hcanonical : FixedNeighborhoodSmoothTame
-      (S.height γ).grading (S.height γ).grading
-      {u | (S.height γ).grading base u < ε} base loss
-      (SobolevModelData.weightedCompositionMap hT (hS.1 γ)
-        ((hS.2.2.2.1 γ).2.2) hγ hF hF0) := by
-    apply hftame.congr
-    intro u hu
-    apply (hS.1 γ).2.2.2.2.2.1
-    exact (funext (hfdecode u hu)).trans
-      (SobolevModelData.decode_weightedCompositionMap hT (hS.1 γ)
-        ((hS.2.2.2.1 γ).2.2) hγ hF hF0 u).symm
-  refine ⟨base, loss, ε, hε, ?_⟩
-  simpa only [sub_zero] using hcanonical
+  exact uniformTameGerm_of_local_decoder (S.height γ).grading (S.height γ).decode
+    (hS.1 γ).2.2.2.2.2.1 (fun u p => F ((S.height γ).decode u p))
+    (SobolevModelData.weightedCompositionMap hT (hS.1 γ)
+      ((hS.2.2.2.1 γ).2.2) hγ hF hF0)
+    (SobolevModelData.decode_weightedCompositionMap hT (hS.1 γ)
+      ((hS.2.2.2.1 γ).2.2) hγ hF hF0)
+    (exists_fixedNeighborhood_weightedComposition hT hS hγ hF hF0)
 
 section StateComposition
 
@@ -96,16 +126,14 @@ theorem UniformTameGerm.weightedComposition
     UniformTameGerm p (S.height γ).grading x0
       (fun x => SobolevModelData.weightedCompositionMap hT (hS.1 γ)
         ((hS.2.2.2.1 γ).2.2) hγ hF hF0 (f x)) := by
-  letI : IsTopologicalAddGroup X := ht.isTopologicalAddGroup
-  letI : ContinuousSMul ℝ X := ht.continuousSMul
   letI : ∀ n, CompleteSpace ((S.height γ).level n) :=
     fun n => SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 γ) n
-  have houter : UniformTameGerm (S.height γ).grading (S.height γ).grading (f x0)
-      (SobolevModelData.weightedCompositionMap hT (hS.1 γ)
-        ((hS.2.2.2.1 γ).2.2) hγ hF hF0) := by
-    rw [hf0]
-    exact weightedCompositionMap_uniformTameGerm hT hS hγ hF hF0
-  simpa only [Function.comp_def] using hf.comp houter hp ht (gradedSeminorm_monotone _ _)
+  exact uniformTameGerm_comp_zero
+    (E := (S.height γ).level) (bond := (S.height γ).bond)
+    (g := SobolevModelData.weightedCompositionMap hT (hS.1 γ)
+      ((hS.2.2.2.1 γ).2.2) hγ hF hF0)
+    hf hf0 (weightedCompositionMap_uniformTameGerm hT hS hγ hF hF0)
+    hp ht (gradedSeminorm_monotone (fun n => (S.height γ).level n) (S.height γ).bond)
 
 end StateComposition
 

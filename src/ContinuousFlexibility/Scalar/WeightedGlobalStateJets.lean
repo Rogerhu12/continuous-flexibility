@@ -20,10 +20,9 @@ open scoped ContDiff
 set_option backward.isDefEq.respectTransparency false
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-variable (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-  (hS : IsPhysicalSpaces D T S)
-
-theorem scalarStateIncrement_heightAngular_contDiff (x : ScalarWeightedState S) :
+theorem scalarStateIncrement_heightAngular_contDiff
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (x : ScalarWeightedState S) :
     ContDiff ℝ ∞ (heightAngular (scalarStateIncrement S x)) := by
   rw [← angularPartial_decode_scalarStateAngularPrimitiveCLM hD hT hS x]
   have hf := (scalarHeight_decode_contDiff_and_flatJets hT hS
@@ -31,6 +30,7 @@ theorem scalarStateIncrement_heightAngular_contDiff (x : ScalarWeightedState S) 
   exact contDiff_iff_contDiffAt.mpr fun p => contDiffAt_angularPartial hf.contDiffAt (by simp)
 
 theorem scalarStateHeight_radialPartial_heightAngular_global
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (x : ScalarWeightedState S) (p : PolarPoint) :
     radialPartial (heightAngular (scalarStateHeight D S x)) p =
       x.2 * radialPartial (heightAngular (scalarStateIncrement S x)) p := by
@@ -42,6 +42,7 @@ theorem scalarStateHeight_radialPartial_heightAngular_global
     radialPartial_const, zero_mul, zero_add]
 
 theorem scalarStateHeight_angularPartial_heightAngular_global
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (x : ScalarWeightedState S) (p : PolarPoint) :
     angularPartial (heightAngular (scalarStateHeight D S x)) p =
       x.2 * angularPartial (heightAngular (scalarStateIncrement S x)) p := by
@@ -53,6 +54,7 @@ theorem scalarStateHeight_angularPartial_heightAngular_global
     angularPartial_const, zero_mul, zero_add]
 
 theorem scalarStateHeight_radialPartial_heightRadial_global
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (x : ScalarWeightedState S) (p : PolarPoint) :
     radialPartial (heightRadial (scalarStateHeight D S x)) p =
       deriv (scalarStateProfile D S x) p.1 +
@@ -64,11 +66,19 @@ theorem scalarStateHeight_radialPartial_heightRadial_global
   have hu : ContDiff ℝ ∞ (radialPartial (scalarStateIncrement S x)) :=
     contDiff_iff_contDiffAt.mpr fun p =>
       contDiffAt_radialPartial (scalarStateIncrement_contDiff hT hS x).contDiffAt (by simp)
-  rw [he, radialPartial_add ((hw.comp contDiff_fst).differentiable (by simp) p)
-    ((contDiff_const.mul hu).differentiable (by simp) p),
+  have hwfield : ContDiff ℝ ∞ (fun q : PolarPoint => scalarStateProfile D S x q.1) :=
+    hw.comp contDiff_fst
+  have huscaled : ContDiff ℝ ∞
+      (fun q : PolarPoint => x.2 * radialPartial (scalarStateIncrement S x) q) :=
+    contDiff_const.mul hu
+  have hwr : radialPartial (fun q : PolarPoint => scalarStateProfile D S x q.1) p =
+      deriv (scalarStateProfile D S x) p.1 := by
+    change radialPartial (radialHeightField (scalarStateProfile D S x)) p = _
+    exact Radial.radialPartial_radialHeightField (hw.differentiable (by simp) p.1)
+  rw [he, radialPartial_add (hwfield.differentiable (by simp) p)
+    (huscaled.differentiable (by simp) p),
     radialPartial_mul (differentiableAt_const x.2) (hu.differentiable (by simp) p),
-    radialPartial_const, zero_mul, zero_add,
-    Radial.radialPartial_radialHeightField (hw.differentiable (by simp) p.1)]
+    radialPartial_const, zero_mul, zero_add, hwr]
 
 theorem scalarJetComponent_eq_finiteFormula_global
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -112,12 +122,14 @@ theorem scalarJetComponent_eq_finiteFormula_global
 
 
 theorem scalarHeight_angularPartial_eq_zero_outside
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (u : ScalarHeightSpace S) {p : PolarPoint} (hp : p ∉ annularOpen D) :
     angularPartial ((S.height scalarBeta).decode u) p = 0 := by
   simpa only [scalarFieldDecode, map_zero, Pi.zero_apply, zero_add] using
     scalarFieldDecode_eq_zero_outside hT hS (0, u) hp
 
 theorem scalarStateCoefficients_eq_zero_outside
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (x : ScalarWeightedState S) {p : PolarPoint} (hp : p ∉ annularOpen D) :
     scalarStateA D S x p = 0 ∧ scalarStateB D S x p = 0 ∧
       scalarStateCorrectedC D S x p = 0 := by
@@ -160,6 +172,7 @@ theorem scalarStateCoefficients_eq_zero_outside
       zero_div, div_zero]
 
 theorem scalarCoefficientComponent_eq_zero_outside
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (x : ScalarWeightedState S) (i : Fin 3) {p : PolarPoint} (hp : p ∉ annularOpen D) :
     scalarCoefficientComponent D S x i p = 0 := by
   have hr : p.1 ≤ D.a ∨ D.b ≤ p.1 := by
