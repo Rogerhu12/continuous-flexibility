@@ -26,11 +26,13 @@ theorem seedRadialProfile_pos (H : ℝ → ℝ) (r : ℝ) :
 
 theorem seedRadialProfile_contDiffOn {H : ℝ → ℝ} (hH : ContDiff ℝ ∞ H) :
     ContDiffOn ℝ ∞ (seedRadialProfile H) (Ioi 0) :=
-  (hH.comp_contDiffOn (Real.contDiffOn_log.mono Ioi_subset_compl_zero)).exp
+  (hH.comp_contDiffOn (Real.contDiffOn_log.mono (fun r hr => by
+    simpa only [mem_compl_iff, mem_singleton_iff] using hr.ne'))).exp
 
 theorem seedRadialHeight_contDiffOn {v : ℝ → ℝ} (hv : ContDiff ℝ ∞ v) :
     ContDiffOn ℝ ∞ (seedRadialHeight v) (Ioi 0) :=
-  hv.comp_contDiffOn (Real.contDiffOn_log.mono Ioi_subset_compl_zero)
+  hv.comp_contDiffOn (Real.contDiffOn_log.mono (fun r hr => by
+    simpa only [mem_compl_iff, mem_singleton_iff] using hr.ne'))
 
 theorem hasDerivAt_seedRadialProfile {H : ℝ → ℝ} (hH : ContDiff ℝ ∞ H)
     {r : ℝ} (hr : 0 < r) :
@@ -63,7 +65,7 @@ theorem radialJacobi_seedRadialHeight {H v z : ℝ → ℝ} {J : Set ℝ}
     (((hs (log r) hlog).2.comp r hlogd).div (hasDerivAt_id r) hr.ne')).congr_of_eventuallyEq heq
   unfold radialJacobi
   rw [hd.deriv, (hasDerivAt_seedRadialProfile hH hr).deriv]
-  simp only [seedRadialHeight, Function.comp_apply, Pi.div_apply, Pi.mul_apply, Pi.add_apply]
+  simp only [seedRadialHeight, Function.comp_apply, Pi.div_apply, id_eq]
   field_simp [hr.ne']
   ring
 
@@ -165,8 +167,10 @@ theorem exists_seedRadialContinuation {H : ℝ → ℝ} (hH : ContDiff ℝ ∞ H
     rw [hv₀, hz₀]
     intro he
     apply hAB
-    apply Prod.ext (congrArg Prod.fst he)
-    exact (mul_eq_zero.mp (congrArg Prod.snd he)).resolve_left (Real.exp_pos y₀).ne'
+    have hA : A = 0 := congrArg Prod.fst he
+    have hB : B = 0 :=
+      (mul_eq_zero.mp (congrArg Prod.snd he)).resolve_left (Real.exp_pos y₀).ne'
+    exact Prod.ext hA hB
   have hne := seedLogSystem_state_ne_zero
     (contDiff_infty_iff_deriv.mp hH).2.continuous.continuousOn hy₀
     (fun y hy => hd y (hsub hy)) hinit (log r) hlog

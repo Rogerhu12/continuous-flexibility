@@ -119,14 +119,16 @@ theorem deepTail_whole_resistance_ge {T : DeepTailData} (hT : DeepTailHypotheses
     ((deepTail_contDiffOn hT).continuousOn.mono hsub).inv₀
       (fun x hx => (deepTail_pos hT x (hsub hx)).ne')
   have h₀ : IntervalIntegrable (fun x => (T.p x)⁻¹) volume (T.node n) (T.massEnd n) :=
-    (hi.mono (fun _ hx => ⟨hx.1, hx.2.trans (deepTail_massEnd_lt_succ_node hT n).le⟩)).
-      intervalIntegrable_of_Icc (deepTail_node_lt_massEnd hT n).le
+    (hi.mono (fun x (hx : x ∈ Icc (T.node n) (T.massEnd n)) =>
+      ⟨hx.1, hx.2.trans (deepTail_massEnd_lt_succ_node hT n).le⟩)).intervalIntegrable_of_Icc
+        (deepTail_node_lt_massEnd hT n).le
   have h₁ : IntervalIntegrable (fun x => (T.p x)⁻¹) volume (T.massEnd n) (T.node (n + 1)) :=
-    (hi.mono (fun _ hx => ⟨(deepTail_node_lt_massEnd hT n).le.trans hx.1, hx.2⟩)).
-      intervalIntegrable_of_Icc (deepTail_massEnd_lt_succ_node hT n).le
+    (hi.mono (fun x (hx : x ∈ Icc (T.massEnd n) (T.node (n + 1))) =>
+      ⟨(deepTail_node_lt_massEnd hT n).le.trans hx.1, hx.2⟩)).intervalIntegrable_of_Icc
+        (deepTail_massEnd_lt_succ_node hT n).le
   have heq : (∫ x in T.node n..T.node (n + 1), (T.p x)⁻¹) =
       tailInnerResistance T n + tailResistance T n :=
-    (intervalIntegral.integral_add_adjacent h₀ h₁).symm
+    (intervalIntegral.integral_add_adjacent_intervals h₀ h₁).symm
   rw [heq]
   exact le_add_of_nonneg_left (tailInnerResistance_pos hT n).le
 
@@ -154,8 +156,8 @@ theorem tailNatural_flux_edge_bound {T : DeepTailData} {u : ℝ → ℝ}
     fun y hy => ((tailNatural_contDiffAt_Ico hu (hsub hy)).derivWithin
       (m := 1) (by simp)).continuousAt.continuousWithinAt
   have hbound := tail_flux_bound_of_height_bound hab hp hpos hT.2.2.1.le huC hduC
-    (fun y hy => ((tailNatural_contDiffAt_Ico hu (Ioo_subset_Ico_self (hinterior hy))).
-      differentiableAt (by simp)).hasDerivAt)
+    (fun y hy => ((tailNatural_contDiffAt_Ico hu
+      (Ioo_subset_Ico_self (hinterior hy))).differentiableAt (by simp)).hasDerivAt)
     (fun _ hy => tailNatural_hasFluxDerivAt hT hu (hinterior hy))
     (fun y hy => hP y (hsub hy)) (fun _ hy => tailNatural_edge_bound hT hu hη n hy) hx
   have hres : 1 / (∫ t in T.node n..T.node (n + 1), (T.p t)⁻¹) ≤

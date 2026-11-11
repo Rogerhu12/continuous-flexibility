@@ -38,7 +38,8 @@ theorem morseSecondMode_entrance_radius_tendsto {T : MorseChainData} {σ : ℕ �
     Tendsto (fun N : ℕ =>
       tailPhysicalRadius right (morseSecondModeTail D T N right).entrance)
       atTop (𝓝 (if right then D.b else D.a)) := by
-  obtain ⟨_, _, _, _, _, _, hends, _, _, _⟩ := hreal
+  have hkeep := hreal
+  obtain ⟨_, _, _, _, _, _, hends, _, _, _⟩ := hkeep
   have hpred : Tendsto (fun N : ℕ => N - 1) atTop atTop := by
     apply tendsto_atTop.2
     intro n

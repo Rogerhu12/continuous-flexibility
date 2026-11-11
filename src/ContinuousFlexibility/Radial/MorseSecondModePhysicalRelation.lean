@@ -35,7 +35,7 @@ theorem morseSecondMode_same_coefficient {T : MorseChainData} {σ : ℕ → ℝ}
   rw [exp_log (by positivity : 0 < (morseChainA T n ^ 2)⁻¹)] at hh
   calc
     _ ≤ (morseChainA T n ^ 2)⁻¹ := hh
-    _ = _ := by field_simp [hlam.ne', hA.ne']; ring
+    _ = _ := by field_simp [hlam.ne', hA.ne'] <;> ring
 
 theorem morseSecondMode_outward_coefficient {T : MorseChainData} {σ : ℕ → ℝ}
     {D : ReferenceData} {C : ℕ → ℝ}

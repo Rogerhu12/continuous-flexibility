@@ -56,12 +56,12 @@ theorem morseSecondMode_massBounds_algebra
       μ * I ≤ μ * (C / lam * L) := mul_le_mul_of_nonneg_left hI hμ.le
       _ ≤ (C * lam * A ^ 2) * (C / lam * L) :=
         mul_le_mul_of_nonneg_right hμhi (by positivity)
-      _ = _ := by field_simp [hlam.ne']; ring
+      _ = _ := by field_simp [hlam.ne'] <;> ring
   · calc
       ν * R ≤ (C * lam * A ^ 6) * R := mul_le_mul_of_nonneg_right hν hR.le
       _ ≤ (C * lam * A ^ 6) * (C * lam⁻¹ * (A ^ 4)⁻¹) :=
         mul_le_mul_of_nonneg_left hRhi (by positivity)
-      _ = _ := by field_simp [hlam.ne', hA.ne']; ring
+      _ = _ := by field_simp [hlam.ne', hA.ne'] <;> ring
   · calc
       (lam' / lam) * (A' ^ 2 / A ^ 4) / C ^ 2 =
           (lam' * A' ^ 2 / C) * (lam⁻¹ * (A ^ 4)⁻¹ / C) := by

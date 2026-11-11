@@ -85,7 +85,7 @@ theorem morseSecondMode_coefficient_lower {T : MorseChainData} {σ : ℕ → ℝ
     rw [exp_log (by positivity : 0 < (morseChainA T n ^ 2)⁻¹)] at h
     calc
       _ ≤ (morseChainA T n ^ 2)⁻¹ := h
-      _ = _ := by field_simp [hlam.ne', hA.ne']; ring
+      _ = _ := by field_simp [hlam.ne', hA.ne'] <;> ring
   · exact morseSecondMode_adjacent_coefficient hreal hσ hn₁ hn hm hadj
 
 /-- A fixed finite cutoff absorbs the subquadratic error in the

@@ -104,7 +104,7 @@ theorem exists_seedSelectedTail_regular_entrance (hR07 : R07Statement) :
   have hpos' : 0 < deriv (S.family S.sigma).w (S.entry right n) := by
     rw [hentry]
     exact hpos
-  simpa only [seedSelectedTailAtBand, if_pos rfl] using
+  simpa [seedSelectedTailAtBand] using
     And.intro he (And.intro hpos' hnatural)
 
 end ContinuousFlexibility.Radial

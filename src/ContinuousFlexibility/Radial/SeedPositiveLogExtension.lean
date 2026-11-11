@@ -53,7 +53,7 @@ theorem exists_seedPositiveLogExtension_of_positive {f : ℝ → ℝ} {a b y₀ 
   obtain ⟨ε, hε, hεsub⟩ := Metric.mem_nhds_iff.mp hnb
   have hHf : H =ᶠ[𝓝 y₀] f := by
     have heq : EqOn H f (Metric.ball y₀ ε) :=
-      isOpen_ball.eqOn_of_deriv_eq (convex_ball y₀ ε).isPreconnected
+      (Metric.isOpen_ball : IsOpen (Metric.ball y₀ ε)).eqOn_of_deriv_eq (convex_ball y₀ ε).isPreconnected
         (fun y _ => (hHd y).differentiableAt.differentiableWithinAt)
         (fun y hy => (hf.contDiffAt
           (isOpen_Ioo.mem_nhds (hεsub hy).2)).differentiableAt
@@ -67,7 +67,7 @@ theorem exists_seedPositiveLogExtension_of_positive {f : ℝ → ℝ} {a b y₀ 
   have hzero (y : ℝ) (hy : M < |y|) : F y = 0 := by
     by_contra hne
     have hm := hM y (subset_tsupport F (Function.mem_support.mpr hne))
-    exact (not_le_of_gt hy) (by simpa only [Real.norm_eq_abs] using hm)
+    exact (not_le_of_gt hy) (by simpa only [Real.norm_eq_abs, id_eq] using hm)
   let L := min (y₀ - 1) (-M - 1)
   let R := max (y₀ + 1) (M + 1)
   refine ⟨⟨H, L, R, ?_, ?_, connectorLogHeight_contDiff hqs _ _, ?_, hHf, ?_, ?_⟩⟩
@@ -96,9 +96,10 @@ theorem exists_seedPositiveLogExtension_of_positive {f : ℝ → ℝ} {a b y₀ 
 theorem exists_seedPositiveLogExtension {f : ℝ → ℝ} {a b y₀ : ℝ}
     (hf : ContDiffOn ℝ ∞ f (Ioo a b)) (hy₀ : y₀ ∈ Ioo a b)
     (hp : 0 < deriv f y₀) : Nonempty (SeedPositiveLogExtension f y₀) := by
+  have hdf : ContDiffOn ℝ ∞ (deriv f) (Ioo a b) :=
+    hf.deriv_of_isOpen isOpen_Ioo (by simp)
   have hd : ContinuousAt (deriv f) y₀ :=
-    (hf.deriv_of_isOpen isOpen_Ioo (by simp)).continuousOn.continuousAt
-      (Ioo_mem_nhds hy₀.1 hy₀.2)
+    hdf.continuousOn.continuousAt (Ioo_mem_nhds hy₀.1 hy₀.2)
   have he : {y | 0 < deriv f y ∧ y ∈ Ioo a b} ∈ 𝓝 y₀ :=
     (hd.eventually (Ioi_mem_nhds hp)).and (Ioo_mem_nhds hy₀.1 hy₀.2)
   obtain ⟨ε, hε, hsub⟩ := Metric.mem_nhds_iff.mp he

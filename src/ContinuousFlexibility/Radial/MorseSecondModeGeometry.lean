@@ -23,7 +23,8 @@ theorem morseSecondMode_modelOrder {T : MorseChainData} {σ : ℕ → ℝ}
     (hn : T.index ≤ n) :
     morseSecondModeMassLeft T right n < morseChainMassEnd T right n ∧
       morseChainMassEnd T right n < T.radius right n (T.rightX right n) := by
-  obtain ⟨_, hgeometry, hmodels, _, _, _, _, _, _, _⟩ := h
+  have hkeep := h
+  obtain ⟨_, hgeometry, hmodels, _, _, _, _, _, _, _⟩ := hkeep
   have hG := hgeometry right n hn
   obtain ⟨hr, hinterval, hmodel⟩ := hmodels right n hn
   have hmono := morseCell_strictMonoOn hr (fun x hx => (hmodel x hx).1)
@@ -41,7 +42,8 @@ theorem morseSecondMode_gapOrder {T : MorseChainData} {σ : ℕ → ℝ}
     (right : Bool) :
     morseChainMassEnd T right (if right then n else n + 1) <
       morseSecondModeMassLeft T right (if right then n + 1 else n) := by
-  obtain ⟨_, _, _, hjoins, _, _, _, _, _, _⟩ := h
+  have hkeep := h
+  obtain ⟨_, _, _, hjoins, _, _, _, _, _, _⟩ := hkeep
   have hj := hjoins right n hn
   have horder := hj.1
   rw [hj.2.1, hj.2.2.1] at horder
@@ -141,7 +143,8 @@ theorem morseSecondMode_massEnd_tendsto {T : MorseChainData} {σ : ℕ → ℝ}
     (right : Bool) :
     Tendsto (fun n => morseChainMassEnd T right (N + n)) atTop
       (𝓝 (if right then D.b else D.a)) := by
-  obtain ⟨_, _, _, _, _, _, hends, _, _, _⟩ := h
+  have hkeep := h
+  obtain ⟨_, _, _, _, _, _, hends, _, _, _⟩ := hkeep
   have hL := (hends right).1.comp (morseSecondMode_shift N)
   have hR := (hends right).2.comp (morseSecondMode_shift N)
   apply tendsto_of_tendsto_of_tendsto_of_le_of_le hL hR
@@ -158,7 +161,8 @@ theorem morseSecondMode_node_tendsto {T : MorseChainData} {σ : ℕ → ℝ}
       (𝓝 (morseSecondModeTail D T N right).endpoint) := by
   have hg := morseSecondMode_profileGeometry h
   have hM := morseSecondMode_massEnd_tendsto h hN right
-  obtain ⟨_, _, _, _, _, _, hends, _, _, _⟩ := h
+  have hkeep := h
+  obtain ⟨_, _, _, _, _, _, hends, _, _, _⟩ := hkeep
   cases right
   · have ht := (Real.continuousAt_log hg.1.ne').tendsto.comp hM
     exact ht.neg

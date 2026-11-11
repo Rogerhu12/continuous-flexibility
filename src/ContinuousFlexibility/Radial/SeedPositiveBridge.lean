@@ -81,7 +81,7 @@ theorem positiveConeBridgeSlope_left_tendsto :
   have h := (tendsto_const_nhds (x := (2 : ℝ))).sub
     ((tendsto_const_nhds (x := (4 : ℝ))).div
       ((tendsto_const_nhds (x := (1 : ℝ))).add ht) (by norm_num))
-  simpa only [positiveConeBridgeSlope, add_zero, div_one,
+  simpa only [positiveConeBridgeSlope, Pi.div_apply, add_zero, div_one,
     show (2 : ℝ) - 4 = -2 by norm_num] using h
 
 theorem positiveConeBridgeSlope_right_tendsto :
@@ -94,7 +94,7 @@ theorem positiveConeBridgeSlope_right_tendsto :
   have heq : positiveConeBridgeSlope = fun y => -2 + 4 / (1 + exp (-4 * y)) :=
     funext positiveConeBridgeSlope_reciprocal
   rw [heq]
-  simpa only [add_zero, div_one, show (-2 : ℝ) + 4 = 2 by norm_num] using h
+  simpa only [Pi.div_apply, add_zero, div_one, show (-2 : ℝ) + 4 = 2 by norm_num] using h
 
 theorem positiveConeBridgeSlope_deriv_tendsto {F : Filter ℝ} {a : ℝ}
     (ha : a ^ 2 = 4) (hk : Tendsto positiveConeBridgeSlope F (𝓝 a)) :

@@ -62,7 +62,8 @@ theorem isSelectedTail_seedSelectedTailAtBand {S : SelectedTailData}
     intro hm
     subst m
     exact hno j hj hb
-  simpa only [seedSelectedTailAtBand, if_neg hm] using hdata right m j hj he hb
+  dsimp only [seedSelectedTailAtBand]
+  simpa only [if_neg hm] using hdata right m j hj he hb
 
 /-- The same selected family, with its advertised innermost entry carrying
 the actual natural second-mode solution. -/
@@ -78,6 +79,6 @@ theorem exists_seedSelectedTail_second_mode (hR07 : R07Statement) :
   intro right
   have hd := hS.2.2.2.2.2 right n 2 (by omega) (by decide) hn
   rcases hd with ⟨_, he, _, _, _, _, _, _, _, _, _, hnatural, _⟩
-  simpa only [seedSelectedTailAtBand, if_pos rfl] using And.intro he hnatural
+  simpa [seedSelectedTailAtBand] using And.intro he hnatural
 
 end ContinuousFlexibility.Radial

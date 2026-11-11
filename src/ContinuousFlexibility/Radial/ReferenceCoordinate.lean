@@ -112,8 +112,11 @@ theorem radialProfileGeometry_coordinateReference {D : ReferenceData}
     have hn := hmorse (e r) ((coordinateReference_core_iff D e r).mp hr) hc'
     change deriv (deriv (fun t => D.w (e t))) r ≠ 0
     rw [hd]
-    have hh := (((hdw' (e r)).hasDerivAt.comp r (hde r).hasDerivAt).mul
-      (hde' r).hasDerivAt).deriv
+    have hh : deriv (fun t => deriv D.w (e t) * deriv (fun x => e x) t) r =
+        deriv (deriv D.w) (e r) * deriv (fun x => e x) r * deriv (fun x => e x) r +
+          deriv D.w (e r) * deriv (deriv (fun x => e x)) r :=
+      (((hdw' (e r)).hasDerivAt.comp r (hde r).hasDerivAt).mul
+        (hde' r).hasDerivAt).deriv
     rw [hh, hc', zero_mul, add_zero]
     exact mul_ne_zero (mul_ne_zero hn (hne r)) (hne r)
 
