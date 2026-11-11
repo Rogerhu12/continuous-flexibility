@@ -161,8 +161,10 @@ def inverseExpressionJetMultilinear (n : ℕ) (z : X × Z) (hz : z.1 ∈ U) :
     have hc := (inverseExpressionJet n).continuousOn_eval J V hV
     have hm : Continuous (fun v : Fin n → X × Z => (z, v)) :=
       continuous_const.prodMk continuous_id
-    exact continuousOn_univ.mp (hc.comp hm.continuousOn
-      (fun v _ => ⟨⟨hz, mem_univ z.2⟩, mem_univ v⟩))
+    simpa only [Function.comp_def, inverseExpressionJetValue,
+      MultilinearMap.toFun_eq_coe, MultilinearMap.mk'_apply] using
+      continuousOn_univ.mp (hc.comp hm.continuousOn
+        (fun v _ => ⟨⟨hz, mem_univ z.2⟩, mem_univ v⟩))
 
 @[simp] theorem inverseExpressionJetMultilinear_apply
     (n : ℕ) (z : X × Z) (hz : z.1 ∈ U) (v : Fin n → X × Z) :

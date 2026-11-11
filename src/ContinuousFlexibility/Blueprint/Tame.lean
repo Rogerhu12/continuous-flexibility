@@ -7,7 +7,8 @@ import ContinuousFlexibility.Analysis.TameInverseTheorem
 
 Tame calculus on projective limits of Banach scales and Hamilton's theorem on families of inverses.
 
-Source: `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 102–150; `paper/flexible-surface-rewrite/08-stable-inverse.tex` lines 523–550.
+Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–354;
+`paper/flexible-surface-readable/09-solving-the-equation.tex` lines 251–273.
 
 Task file: `docs/tasks/Tame.md`. The statement is frozen.
 -/

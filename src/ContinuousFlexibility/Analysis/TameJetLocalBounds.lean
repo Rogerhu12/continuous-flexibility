@@ -134,9 +134,10 @@ theorem locallyTameOn_jetEvaluation (ht : WithSeminorms p)
   have hWb : {z : E × (Fin k → E) | ∀ i, p base (z.2 i) < M} ∈ 𝓝 z0 := by
     apply Filter.eventually_all.mpr
     intro i
-    exact (((ht.continuous_seminorm base).comp
-      ((continuous_apply i).comp continuous_snd)).continuousAt).preimage_mem_nhds
-        (Iio_mem_nhds (hiM i))
+    have hcont : ContinuousAt (fun z : E × (Fin k → E) => p base (z.2 i)) z0 :=
+      ((ht.continuous_seminorm base).comp
+        ((continuous_apply i).comp continuous_snd)).continuousAt
+    exact hcont.preimage_mem_nhds (Iio_mem_nhds (hiM i))
   have hW : W ∈ 𝓝[U ×ˢ univ] z0 := by
     filter_upwards [self_mem_nhdsWithin, nhdsWithin_le_nhds (inter_mem hWa hWb)] with z hz hzw
     exact ⟨hz.1, hzw.1, hzw.2⟩
@@ -171,7 +172,7 @@ theorem smoothTameOn_of_locallyTameOn_jets (hp : Monotone p) (ht : WithSeminorms
   intro k x0 hx0
   obtain ⟨loss, base, W, hW, hbound⟩ := (hJ k).2 (x0, 0) ⟨hx0, mem_univ _⟩
   have hW' : W ∈ 𝓝 (x0, (0 : Fin k → E)) := by
-    rwa [nhdsWithin_of_mem_nhds ((J.open_domain.prod isOpen_univ).mem_nhds
+    rwa [nhdsWithin_eq_nhds.mpr ((J.open_domain.prod isOpen_univ).mem_nhds
       ⟨hx0, mem_univ _⟩)] at hW
   obtain ⟨b, ε, hε, hbox⟩ := exists_jetBox_subset_nhds hp ht k hW'
   refine ⟨loss, max base b, ε, hε, ?_⟩

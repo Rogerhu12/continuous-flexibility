@@ -123,7 +123,8 @@ theorem hasProjectiveLineDerivAt_inverseForwardJet
     funext i
     refine Fin.cases ?_ (fun j => ?_) i <;> rfl
   simpa only [HasProjectiveLineDerivAt, inverseForwardJet,
-    Prod.smul_mk, Prod.fst_add, Prod.snd_add, smul_zero, add_zero, hi] using hd
+    Prod.smul_mk, Prod.mk_add_mk, Prod.fst_add, Prod.snd_add,
+    smul_zero, add_zero, zero_add, hi] using hd
 
 /-- Joint continuity of the ordered forward jets. -/
 theorem continuousOn_inverseForwardJet
