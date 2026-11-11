@@ -369,3 +369,5 @@ import ContinuousFlexibility.Analysis.SeeleyFiniteBlocks
 import ContinuousFlexibility.Analysis.SeeleyCoefficients
 import ContinuousFlexibility.Analysis.SobolevHalfLineJets
 import ContinuousFlexibility.Analysis.SmoothSobolevCore
+import ContinuousFlexibility.Analysis.IntervalSobolevCutoff
+import ContinuousFlexibility.Analysis.SobolevAffineTransport

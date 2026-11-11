@@ -1,5 +1,5 @@
 import Mathlib.Analysis.Normed.Group.InfiniteSum
-import Mathlib.Analysis.Normed.Ring.Basic
+import Mathlib.Analysis.Normed.Field.Basic
 import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!
@@ -34,7 +34,7 @@ theorem b_nonneg (i : ι) : 0 ≤ S.b i := (S.b_pos i).le
 
 theorem norm_signed_moment (i : ι) (m : ℕ) :
     ‖S.a i * (-S.b i) ^ m‖ = |S.a i| * S.b i ^ m := by
-  rw [norm_mul, norm_pow, Real.norm_eq_abs, Real.norm_eq_abs, abs_neg,
+  rw [Real.norm_eq_abs, abs_mul, abs_pow, abs_neg,
     abs_of_nonneg (S.b_nonneg i)]
 
 theorem summable_signed_moment (m : ℕ) :

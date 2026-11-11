@@ -123,9 +123,9 @@ private theorem hasDerivAt_seeleyReflection (S : SeeleyData ι) {J : ℕ → ℝ
   · intro i y hy
     have hp : 0 < -S.b i * y := mul_pos_of_neg_of_neg
       (neg_neg_of_pos (seeley_scale_pos S i)) hy
-    have hd := ((hJ.derivative n _ hp).comp y ((hasDerivAt_id y).const_mul (-S.b i))).const_smul
+    have hd := ((hJ.derivative n _ hp).scomp y ((hasDerivAt_id y).const_mul (-S.b i))).const_smul
       (S.a i * (-S.b i) ^ n)
-    simpa only [smul_smul, pow_succ, mul_assoc, mul_one] using hd
+    simpa only [Pi.smul_def, Function.comp_def, smul_smul, pow_succ, mul_assoc, mul_one] using hd
   · intro i y hy
     rw [norm_smul, norm_seeley_coefficient]
     exact mul_le_mul_of_nonneg_left
