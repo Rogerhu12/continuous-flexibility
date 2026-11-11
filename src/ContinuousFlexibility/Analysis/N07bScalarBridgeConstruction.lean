@@ -207,7 +207,6 @@ local instance n07bScalarBridgeDomainNormedAddCommGroup :
 local instance n07bScalarBridgeDomainNormedSpace :
     NormedSpace ℝ B.Space := Submodule.normedSpace _
 
-set_option diagnostics true in
 /-- At each state the represented physical scalar solution is the actual
 chosen Banach solution, with all scalar coordinates retained. The only
 quantitative premise concerns genuine geometric finite-expansion fields. -/
@@ -231,7 +230,6 @@ theorem n07b_scalarInverse_banach_identification
       ((S.height (3 / 4 : ℝ)).decode.toFun f.val)) :
     N07bScalarBridgeConclusion D S C K V b B P z F
       ((G.G z).toLinearMap.toFun f) ((S.height (3 / 4 : ℝ)).decode.toFun f.val) := by
-  run_tac Lean.logInfo "N07b scalar bridge body entered"
   let sol : HeightPair S × ℝ := (G.G z).toLinearMap.toFun f
   let decodeRaw : (S.height (3 / 4 : ℝ)).Space → PolarPoint → ℝ :=
     (S.height (3 / 4 : ℝ)).decode.toFun
@@ -257,7 +255,6 @@ theorem n07b_scalarInverse_banach_identification
   have hdone : N07bScalarBridgeConclusion D S C K V b B P z F sol (decodeRaw f.val) :=
     n07b_fixedGraph_scalarInverse_identification hT hS hK h05 h06 hG hgeom
       hprofile.2.1 hz hs f F Fref U hreference hrep rfl rfl rfl
-  run_tac Lean.logInfo "N07b scalar bridge final term elaborated"
   exact hdone
 
 end ContinuousFlexibility.Analysis

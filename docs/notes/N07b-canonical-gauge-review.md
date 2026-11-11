@@ -633,7 +633,7 @@ cannot be hidden by appending a new estimate predicate to the old fields.
 
 ## The coordinated N07b implementation
 
-The complete candidate couples the dynamic-domain repair above to the
+The implementation couples the dynamic-domain repair above to the
 separate primitive geometric certificate. `N04Properties` retains its four
 named groups after the domain migration: geometry, cut/operator identities,
 the old quantitative coefficient clause, and actual source pairing. The
@@ -679,7 +679,7 @@ has to prove it. Thus the cumulative N04 output is explicitly stronger;
 the surface theorem signature of N07b is unchanged, but this is a repaired
 statement layer rather than a proof from the previous frozen definitions.
 
-The candidate derives the actual consequences in this order:
+The implementation derives the actual consequences in this order:
 
 1. The original source is encoded in the prescribed `V.level (3/4) 0 b`
    from its true finite angular expansion, coefficient-square bound and
@@ -711,5 +711,6 @@ The final neighborhood is the intersection of the two finite geometric
 estimate neighborhoods. Every original witness is retained. The final
 source grading is `b+1`; multiplying its uniform bound by the required
 state factor is legitimate because that factor is at least one. The
-proof and all consumer ports still require a green CI run and the exact
-standard-axiom audit before this candidate is reported as a closed node.
+exact endpoint is `N07b (hN07a : N07aStatement) : N07Statement`. Full CI and
+the exact standard-axiom audit are the completion gates; the pull request
+records the verified commits and audit output.
