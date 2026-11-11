@@ -47,3 +47,4 @@ run_cmd do
 #print axioms ContinuousFlexibility.Blueprint.R08
 #print axioms ContinuousFlexibility.Blueprint.R12
 #print axioms ContinuousFlexibility.Blueprint.R10b
+#print axioms ContinuousFlexibility.Blueprint.R11b
