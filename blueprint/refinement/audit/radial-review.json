@@ -1,0 +1,4999 @@
+{
+  "schema_version": 1,
+  "review_kind": "source_statement_and_acceptance_coverage; build/audit is performed by integration on frozen snapshot",
+  "source_snapshot": "blueprint/refinement/audit/source-snapshot.json",
+  "snapshot_root": "C:\\Users\\Boyang\\Desktop\\Math\\ContinuousFlexibility\\scratch\\refinement-audit-20261110T180629Z",
+  "captured_at_utc": "2026-11-10T18:06:30.103423+00:00",
+  "review_scope": "All 115 Radial refined units R01.01–R12.13; no Lean, part, or parent-manifest edits",
+  "task_manifest_sha256": "9f2c11bf8c21d816074203e162c18fe955250fb363a83eabb37a3db527c9dd92",
+  "counts": {
+    "complete": 8,
+    "partial": 16,
+    "unstarted": 91
+  },
+  "candidate_complete_ids": [
+    "R01.01",
+    "R03.01",
+    "R03.02",
+    "R03.04",
+    "R03.05",
+    "R03.06",
+    "R03.08",
+    "R03.11"
+  ],
+  "live_changed_since_snapshot": [
+    "ContinuousFlexibility/Radial/CentralEnergyIdentity.lean"
+  ],
+  "interpretation_notes": [
+    "R03.04 and R03.06 are evaluated on the actual maximal compact-test weak L² differential graph, using centralClosedGraph_iff_compact_weak; this is not merely an abstract spectral-graph definition.",
+    "R03.03 remains partial: actual closed weak-derivative form-domain/Friedrichs identification is absent. No parent R03 completion is claimed.",
+    "R03.05 uses the complete coefficient graph, actual compact-test weak-domain equivalence and bounded two-sided full-source inverse as the required zero-energy gap realization; it does not assert an unproved Friedrichs form.",
+    "R02.01 is conservatively partial because the original task is model-level and not explicitly restricted to the central radius. The central-radius-only subclaim is fully covered.",
+    "Every partial row names the remaining exact output; unstarted rows mean no implementation of that actual refined target was found, even where general helpers may be reusable."
+  ],
+  "reviews": [
+    {
+      "id": "R01.01",
+      "status": "complete",
+      "title": "保留已有完整局部证明",
+      "statement": "u(r)=r^aV(log r)、r>0，在现有明确可微假设下计算实际一二阶导数及 L_a u。令 p(y)=w(e^y)e^((2a-1)y)，有 (pV')'+a(a-1)pV=e^((a+1)y)L_a u(e^y)；取 a=j²。",
+      "rationale": "10个实际局部微分定理覆盖原R01精确陈述；闭域和全局配对本来不在此局部节点范围。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/Gauge.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.hasDerivAt_gaugeLift",
+            "ContinuousFlexibility.Radial.deriv_gaugeLift",
+            "ContinuousFlexibility.Radial.hasDerivAt_gaugeFirst",
+            "ContinuousFlexibility.Radial.deriv_deriv_gaugeLift",
+            "ContinuousFlexibility.Radial.radialJacobi_gauge",
+            "ContinuousFlexibility.Radial.radialJacobi_gauge_divided",
+            "ContinuousFlexibility.Radial.logGaugeWeight_eq",
+            "ContinuousFlexibility.Radial.logGaugeEquation_eq",
+            "ContinuousFlexibility.Radial.logGaugeEquation_source_identity",
+            "ContinuousFlexibility.Radial.radialJacobi_gauge_eq_zero_iff"
+          ],
+          "correspondence": "实际一阶、二阶导数、L_a共轭和非齐次源exp((a+1)y)因子；没有引入闭域或Green端点结论。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "10条定理覆盖此局部微分节点",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/Gauge.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.hasDerivAt_gaugeLift",
+                "ContinuousFlexibility.Radial.deriv_gaugeLift",
+                "ContinuousFlexibility.Radial.hasDerivAt_gaugeFirst",
+                "ContinuousFlexibility.Radial.deriv_deriv_gaugeLift",
+                "ContinuousFlexibility.Radial.radialJacobi_gauge",
+                "ContinuousFlexibility.Radial.radialJacobi_gauge_divided",
+                "ContinuousFlexibility.Radial.logGaugeWeight_eq",
+                "ContinuousFlexibility.Radial.logGaugeEquation_eq",
+                "ContinuousFlexibility.Radial.logGaugeEquation_source_identity",
+                "ContinuousFlexibility.Radial.radialJacobi_gauge_eq_zero_iff"
+              ]
+            }
+          ],
+          "correspondence": "所列10个定理逐项覆盖导数、方程及源因子。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "Green配对与闭算子域换元仍由R06/R12证明",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/Gauge.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.hasDerivAt_gaugeLift",
+                "ContinuousFlexibility.Radial.deriv_gaugeLift",
+                "ContinuousFlexibility.Radial.hasDerivAt_gaugeFirst",
+                "ContinuousFlexibility.Radial.deriv_deriv_gaugeLift",
+                "ContinuousFlexibility.Radial.radialJacobi_gauge",
+                "ContinuousFlexibility.Radial.radialJacobi_gauge_divided",
+                "ContinuousFlexibility.Radial.logGaugeWeight_eq",
+                "ContinuousFlexibility.Radial.logGaugeEquation_eq",
+                "ContinuousFlexibility.Radial.logGaugeEquation_source_identity",
+                "ContinuousFlexibility.Radial.radialJacobi_gauge_eq_zero_iff"
+              ]
+            }
+          ],
+          "correspondence": "证据仅为局部微分恒等式，未将R06/R12的Green配对或闭域结论混入；保留原任务边界。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/Gauge.lean": "89a7ce0c663bcd9f98ba873b3c8e3b079094284c1aed0ab89f4303d8b2c31d5c"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R02.01",
+      "status": "partial",
+      "title": "实际半径坐标的可逆性",
+      "statement": "对构造的模型半径r，证明r_X=v>0并确定range，构造实际逆坐标及其光滑性。",
+      "rationale": "中央模型的实际半径逆完整；任务按R02模型级通用/两类模型接口理解，尚无Morse实际保留区半径及相同逆接口。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadius",
+            "ContinuousFlexibility.Radial.hasDerivAt_centralRadius",
+            "ContinuousFlexibility.Radial.deriv_centralRadius_pos",
+            "ContinuousFlexibility.Radial.strictMono_centralRadius",
+            "ContinuousFlexibility.Radial.contDiff_centralRadius"
+          ],
+          "correspondence": "中央半径来自实际Laplace–Gaussian积分，严格正导数是已证结论。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.range_centralRadius",
+            "ContinuousFlexibility.Radial.centralModelCoordinate_radius",
+            "ContinuousFlexibility.Radial.centralRadius_modelCoordinate",
+            "ContinuousFlexibility.Radial.hasStrictDerivAt_centralModelCoordinate",
+            "ContinuousFlexibility.Radial.contDiffAt_centralModelCoordinate"
+          ],
+          "correspondence": "中央半径range=Ioi 0、真实invFun的两向复合、逆导数及C∞已证。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "v>0由模型的已证明结论提供而非最终新增假设",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadius",
+                "ContinuousFlexibility.Radial.hasDerivAt_centralRadius",
+                "ContinuousFlexibility.Radial.deriv_centralRadius_pos",
+                "ContinuousFlexibility.Radial.strictMono_centralRadius",
+                "ContinuousFlexibility.Radial.contDiff_centralRadius"
+              ]
+            }
+          ],
+          "correspondence": "中央模型没有假设r_X>0；Morse模型尚未实际构造半径。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "双向复合恒等式与导数公式齐备",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.range_centralRadius",
+                "ContinuousFlexibility.Radial.centralModelCoordinate_radius",
+                "ContinuousFlexibility.Radial.centralRadius_modelCoordinate",
+                "ContinuousFlexibility.Radial.hasStrictDerivAt_centralModelCoordinate",
+                "ContinuousFlexibility.Radial.contDiffAt_centralModelCoordinate"
+              ]
+            }
+          ],
+          "correspondence": "中央模型两向复合和逆导数齐备；尚未提供覆盖待构造Morse单元的同一接口。"
+        }
+      ],
+      "remaining": [
+        "Morse保留区半径的实际正导数、range和逆坐标。",
+        "将模型级接口统一为原R02所需的构造结果。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralRadius.lean": "b173bcd59d9e2763d13559d080f49233a25e678f12a0fe03cb9d713de91d8871",
+        "ContinuousFlexibility/Radial/CentralRadiusMetric.lean": "a7a9289b029c5fdf503244b64acd8aa7e120062208fe5d94dcec3e4af610b7b1"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit",
+      "scope_note": "若总控把本子任务明确限定为“中央模型半径逆”，现有定理可完全覆盖；本报告没有擅自缩小原任务范围。"
+    },
+    {
+      "id": "R02.02",
+      "status": "partial",
+      "title": "径向轮廓和基线高度",
+      "statement": "由同一模型P,v与逆坐标定义w(r)=λP(X(r))v(X(r))和实际高度primitive，证明正性、C∞及pullback恒等式。",
+      "rationale": "真实中央profile已构造，但同一profile的实际基线高度primitive及统一profile/height输出尚缺。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralPulledProfile",
+            "ContinuousFlexibility.Radial.centralRadialProfile",
+            "ContinuousFlexibility.Radial.centralRadialProfile_pullback",
+            "ContinuousFlexibility.Radial.centralRadialProfile_pos",
+            "ContinuousFlexibility.Radial.contDiffOn_centralRadialProfile"
+          ],
+          "correspondence": "同一中央逆坐标定义真实profile并有pullback、正性和Ioi 0上的C∞。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/RadialHeight.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.radialHeightField",
+            "ContinuousFlexibility.Radial.heightRadial_radialHeightField",
+            "ContinuousFlexibility.Radial.normalizedHeightResidual_radialHeightField_zero"
+          ],
+          "correspondence": "径向高度的一般结论仍以给定h及h′=w为前提，未构造当前profile的primitive。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "同一半径逆用于profile和height",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralPulledProfile",
+                "ContinuousFlexibility.Radial.centralRadialProfile",
+                "ContinuousFlexibility.Radial.centralRadialProfile_pullback",
+                "ContinuousFlexibility.Radial.centralRadialProfile_pos",
+                "ContinuousFlexibility.Radial.contDiffOn_centralRadialProfile"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/RadialHeight.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.radialHeightField",
+                "ContinuousFlexibility.Radial.heightRadial_radialHeightField",
+                "ContinuousFlexibility.Radial.normalizedHeightResidual_radialHeightField_zero"
+              ]
+            }
+          ],
+          "correspondence": "profile确实使用中央半径逆；高度模块只处理给定primitive。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "λ>0以及全域/区间边界明确",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralPulledProfile",
+                "ContinuousFlexibility.Radial.centralRadialProfile",
+                "ContinuousFlexibility.Radial.centralRadialProfile_pullback",
+                "ContinuousFlexibility.Radial.centralRadialProfile_pos",
+                "ContinuousFlexibility.Radial.contDiffOn_centralRadialProfile"
+              ]
+            }
+          ],
+          "correspondence": "c>0与r>0下profile正且C∞，但height的全域构造和共同pullback未完成。"
+        }
+      ],
+      "remaining": [
+        "实际定义并证明同一profile的height primitive、C∞和导数。",
+        "建立模型级共同profile/height接口。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralRadiusMetric.lean": "a7a9289b029c5fdf503244b64acd8aa7e120062208fe5d94dcec3e4af610b7b1",
+        "ContinuousFlexibility/Radial/RadialHeight.lean": "c08c761f0560d5039bfbd50969fb241c0279bb95562c3ebb6cc0fc93697e860e"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R02.03",
+      "status": "partial",
+      "title": "Liouville共轭与源因子",
+      "statement": "把已有坐标恒等式实例化到实际构造的L_j，精确证明非齐次方程两向等价及source Jacobian。",
+      "rationale": "通用共轭和source因子已证，实际中央二模齐次实例也存在；任务要求实际构造L_j上一般非齐次方程的完整实例化，尚未形成。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/Liouville.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.liouville_flux_at",
+            "ContinuousFlexibility.Radial.radialJacobi_liouville",
+            "ContinuousFlexibility.Radial.liouville_forcing_iff",
+            "ContinuousFlexibility.Radial.liouvilleSource",
+            "ContinuousFlexibility.Radial.liouville_source_pairing_density"
+          ],
+          "correspondence": "通用真实导数恒等式和非齐次源两向等价、source因子完整。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.radialJacobi_centralKernel",
+            "ContinuousFlexibility.Radial.centralKernelHeight_liouville_pullback"
+          ],
+          "correspondence": "已经对实际中央profile与明确二模零解实例化；并未对任意forcing/source作同样模型封装。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "源项缩放符号与λ因子逐项保持",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/Liouville.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_flux_at",
+                "ContinuousFlexibility.Radial.radialJacobi_liouville",
+                "ContinuousFlexibility.Radial.liouville_forcing_iff",
+                "ContinuousFlexibility.Radial.liouvilleSource",
+                "ContinuousFlexibility.Radial.liouville_source_pairing_density"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.radialJacobi_centralKernel",
+                "ContinuousFlexibility.Radial.centralKernelHeight_liouville_pullback"
+              ]
+            }
+          ],
+          "correspondence": "通用恒等式保留λ及负号，实际模型仅有明确中央二模零源实例。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "使用真实导数而非形式微分",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/Liouville.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_flux_at",
+                "ContinuousFlexibility.Radial.radialJacobi_liouville",
+                "ContinuousFlexibility.Radial.liouville_forcing_iff",
+                "ContinuousFlexibility.Radial.liouvilleSource",
+                "ContinuousFlexibility.Radial.liouville_source_pairing_density"
+              ]
+            }
+          ],
+          "correspondence": "所有微分由HasDerivAt/deriv和局部函数相等推导。"
+        }
+      ],
+      "remaining": [
+        "把真实半径、profile和任意模型高度/source数据代入非齐次共轭，消去其所有结构假设。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/Liouville.lean": "32510babdee588a53e0c97bc0df9ff5aaf51b6a72d2f4cd44dc2f819f3790950",
+        "ContinuousFlexibility/Radial/CentralModel.lean": "f0fcde30af15d2b337ca9ae6b83fe98c197a511ad6a69bca017d536984aeea7a"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R02.04",
+      "status": "partial",
+      "title": "两种测度的积分运输",
+      "statement": "将dr源配对和varpi dr谱测度在同一实际逆坐标下运输，证明可积条件及积分等式。",
+      "rationale": "有限区间上的两种测度换元已完成；全域可积性、截断极限和全域等式尚未证明。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.liouville_source_pairing_integral",
+            "ContinuousFlexibility.Radial.liouville_hilbert_integral"
+          ],
+          "correspondence": "两种真正有限区间积分换元都有明确条件并分别保留dr和12w/r²dr。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "dr与谱测度分别给出等式",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_source_pairing_integral",
+                "ContinuousFlexibility.Radial.liouville_hilbert_integral"
+              ]
+            }
+          ],
+          "correspondence": "两个定理分别给普通source配对与谱Hilbert范数的精确密度。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "全域结果由截断极限证明而非仅有限区间",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "现有定理明确只处理A..B有限区间，没有全域截断极限。"
+        }
+      ],
+      "remaining": [
+        "全域可积性运输和截断极限。",
+        "将全域结论绑定同一实际模型逆坐标。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/RadiusChange.lean": "68271bf76ee334fbf5eb57c974dbf5e9fea335827c033082b9bb2a0e766adb81"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R02.05",
+      "status": "unstarted",
+      "title": "L²等价类与共轭映射",
+      "statement": "由测度运输构造实际L²等价类之间的线性等距同构，证明反向映射与微分表达式兼容。",
+      "rationale": "尚未构造对应的全域L²等价类Liouville同构与反向微分兼容映射。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "a.e.代表元不影响映射",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚未构造对应的全域L²等价类Liouville同构与反向微分兼容映射。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "闭算子域识别留给R03/R06/R12而不从形式共轭推断",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚未构造对应的全域L²等价类Liouville同构与反向微分兼容映射。"
+        }
+      ],
+      "remaining": [
+        "由测度运输构造实际L²等价类之间的线性等距同构，证明反向映射与微分表达式兼容。",
+        "尚需满足：a.e.代表元不影响映射",
+        "尚需满足：闭算子域识别留给R03/R06/R12而不从形式共轭推断"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R02.06",
+      "status": "partial",
+      "title": "组合并验收Liouville变换与径向实现",
+      "statement": "在半径方程和 r_X=v>0 下，严格推导由谱势到径向轮廓的Liouville变换，给出真实L_j的共轭表达式、源因子和两种测度。",
+      "rationale": "原R02核心微分公式有真实证明，完整构造/全域运输仍未组合闭合。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/Liouville.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.radialJacobi_liouville",
+            "ContinuousFlexibility.Radial.liouville_forcing_iff",
+            "ContinuousFlexibility.Radial.liouville_hilbert_density"
+          ],
+          "correspondence": "原节点的核心坐标表达式和两向source因子已证。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadialProfile_pullback",
+            "ContinuousFlexibility.Radial.centralRadialProfile_pos",
+            "ContinuousFlexibility.Radial.range_centralRadius"
+          ],
+          "correspondence": "中央实际半径及profile支持模型实例；Morse和完整高度接口仍未提供。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.liouville_source_pairing_integral",
+            "ContinuousFlexibility.Radial.liouville_hilbert_integral"
+          ],
+          "correspondence": "目前只有有限区间积分运输，不是全域L²等价类同构。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/Liouville.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.radialJacobi_liouville",
+                "ContinuousFlexibility.Radial.liouville_forcing_iff",
+                "ContinuousFlexibility.Radial.liouville_hilbert_density"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_pullback",
+                "ContinuousFlexibility.Radial.centralRadialProfile_pos",
+                "ContinuousFlexibility.Radial.range_centralRadius"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_source_pairing_integral",
+                "ContinuousFlexibility.Radial.liouville_hilbert_integral"
+              ]
+            }
+          ],
+          "correspondence": "R02.01–05尚有实际模型/height/全域Hilbert运输义务。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不得把r_X>0假设当作模型构造",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_pullback",
+                "ContinuousFlexibility.Radial.centralRadialProfile_pos",
+                "ContinuousFlexibility.Radial.range_centralRadius"
+              ]
+            }
+          ],
+          "correspondence": "中央半径正性确为构造结论；待构造Morse仍缺。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "保留dr源配对与Hilbert谱测度的区别",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/Liouville.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.radialJacobi_liouville",
+                "ContinuousFlexibility.Radial.liouville_forcing_iff",
+                "ContinuousFlexibility.Radial.liouville_hilbert_density"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_source_pairing_integral",
+                "ContinuousFlexibility.Radial.liouville_hilbert_integral"
+              ]
+            }
+          ],
+          "correspondence": "source配对和谱测度明确区分，有限区间恒等式实际保留密度。"
+        }
+      ],
+      "remaining": [
+        "先完成R02.01–05中尚缺的模型与全域接口，再导出完整原节点。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/Liouville.lean": "32510babdee588a53e0c97bc0df9ff5aaf51b6a72d2f4cd44dc2f819f3790950",
+        "ContinuousFlexibility/Radial/CentralRadiusMetric.lean": "a7a9289b029c5fdf503244b64acd8aa7e120062208fe5d94dcec3e4af610b7b1",
+        "ContinuousFlexibility/Radial/RadiusChange.lean": "68271bf76ee334fbf5eb57c974dbf5e9fea335827c033082b9bb2a0e766adb81"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.01",
+      "status": "complete",
+      "title": "真实Hermite Hilbert基",
+      "statement": "把已证明的归一化Hermite总性实现为实际HilbertBasis，证明系数展开和Parseval。",
+      "rationale": "全部statement与两条验收均被真实HilbertBasis和L²收敛定理覆盖。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/HermiteBasis.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.hermiteBasis",
+            "ContinuousFlexibility.Radial.hermiteBasis_apply",
+            "ContinuousFlexibility.Radial.hermiteBasis_coeFn",
+            "ContinuousFlexibility.Radial.hermiteCoefficientTransform",
+            "ContinuousFlexibility.Radial.hermiteExpansion_hasSum",
+            "ContinuousFlexibility.Radial.hermiteExpansion_partialSums",
+            "ContinuousFlexibility.Radial.hermiteCoefficient_parseval"
+          ],
+          "correspondence": "真正Lebesgue L²等价类HilbertBasis、系数等距同构、L²展开收敛和Parseval全部存在。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "基向量与已有真实L²函数相等",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/HermiteBasis.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.hermiteBasis",
+                "ContinuousFlexibility.Radial.hermiteBasis_apply",
+                "ContinuousFlexibility.Radial.hermiteBasis_coeFn",
+                "ContinuousFlexibility.Radial.hermiteCoefficientTransform",
+                "ContinuousFlexibility.Radial.hermiteExpansion_hasSum",
+                "ContinuousFlexibility.Radial.hermiteExpansion_partialSums",
+                "ContinuousFlexibility.Radial.hermiteCoefficient_parseval"
+              ]
+            }
+          ],
+          "correspondence": "hermiteBasis_apply/coeFn识别与原normalizedOscillatorHermite同一a.e.向量。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "展开在L²拓扑收敛",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/HermiteBasis.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.hermiteBasis",
+                "ContinuousFlexibility.Radial.hermiteBasis_apply",
+                "ContinuousFlexibility.Radial.hermiteBasis_coeFn",
+                "ContinuousFlexibility.Radial.hermiteCoefficientTransform",
+                "ContinuousFlexibility.Radial.hermiteExpansion_hasSum",
+                "ContinuousFlexibility.Radial.hermiteExpansion_partialSums",
+                "ContinuousFlexibility.Radial.hermiteCoefficient_parseval"
+              ]
+            }
+          ],
+          "correspondence": "HasSum和partialSums在实际HermiteL2范数拓扑收敛；Parseval给系数平方和。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/HermiteBasis.lean": "5365b29b1c6f5a06a8dae35beeedd2b15875330456639c03c0a4ad7071c424b0"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.02",
+      "status": "complete",
+      "title": "对角闭算子的图域",
+      "statement": "在Hermite系数中定义带实际能级的平方可和图域，证明对角算子闭合与自伴。",
+      "rationale": "图域、闭合、稠密、完备和自伴关系均已有实际定理；此处没有把它混同于尚未建成的Friedrichs二次型域。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralFiniteGraph",
+            "ContinuousFlexibility.Radial.centralClosedGraph",
+            "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+            "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff",
+            "ContinuousFlexibility.Radial.centralClosedGraph_isClosed",
+            "ContinuousFlexibility.Radial.centralClosedGraph_domain_dense"
+          ],
+          "correspondence": "图是实际L²×L²闭包，域恰为能级乘系数属于l²，并证明闭合与稠密。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralGraphAdjoint.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralClosedGraph_symmetric",
+            "ContinuousFlexibility.Radial.centralClosedGraph_pairing_iff",
+            "ContinuousFlexibility.Radial.centralClosedGraph_completeSpace"
+          ],
+          "correspondence": "真实图内积对称与graph-adjoint最大性给自伴关系；闭图子空间在实际product graph norm下完备。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "域条件是能级乘系数属于l²",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralFiniteGraph",
+                "ContinuousFlexibility.Radial.centralClosedGraph",
+                "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_isClosed",
+                "ContinuousFlexibility.Radial.centralClosedGraph_domain_dense"
+              ]
+            }
+          ],
+          "correspondence": "centralClosedGraph_domain_iff准确为Memℓp(E_n c_n) 2。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "证明稠密和图范数完备",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralFiniteGraph",
+                "ContinuousFlexibility.Radial.centralClosedGraph",
+                "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_isClosed",
+                "ContinuousFlexibility.Radial.centralClosedGraph_domain_dense"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralGraphAdjoint.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_symmetric",
+                "ContinuousFlexibility.Radial.centralClosedGraph_pairing_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_completeSpace"
+              ]
+            }
+          ],
+          "correspondence": "domain_dense和completeSpace分别给稠密与product graph norm完备；pairing_iff给adjoint relation的两向刻画。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean": "274070a67b4a84427fa7e37eb0a2e685b7234353305a65bc11de5c5522581a3c",
+        "ContinuousFlexibility/Radial/CentralGraphAdjoint.lean": "6ef3252d26004db60a34fde1c8bd647239f3917876cdc68f2a0ae11a10f940ff"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit",
+      "scope_note": "自伴性以实Hilbert空间中的最大图伴随关系表达，不依赖尚未接入的unbounded-operator包装API。"
+    },
+    {
+      "id": "R03.03",
+      "status": "partial",
+      "title": "微分闭二次型实现",
+      "statement": "构造谐振子实际微分二次型及其闭包，证明cutoff核心稠密与分部积分。",
+      "rationale": "已有物理微分能量和紧支撑微分图核心，但尚未定义并识别真实弱一阶导数加X加权L²的闭二次型域/Friedrichs实现。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralEnergyIdentity.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.oscillatorEnergyPairing",
+            "ContinuousFlexibility.Radial.shiftedCentralEnergyPairing",
+            "ContinuousFlexibility.Radial.oscillator_form_pairing",
+            "ContinuousFlexibility.Radial.central_shifted_form_pairing",
+            "ContinuousFlexibility.Radial.finiteHermiteFunction_shifted_energy"
+          ],
+          "correspondence": "真实整实线Lebesgue微分能量、积分分部和有限Hermite和的精确能量公式已证。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.compactHermiteFunction_tendsto_L2",
+            "ContinuousFlexibility.Radial.compactHermiteImage_tendsto_L2",
+            "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+          ],
+          "correspondence": "真实紧支撑cutoff在微分graph norm收敛；这是算子图核心，不自动等于闭形式核心。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "表述为真实弱导数和X加权L²条件",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralEnergyIdentity.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.oscillatorEnergyPairing",
+                "ContinuousFlexibility.Radial.shiftedCentralEnergyPairing",
+                "ContinuousFlexibility.Radial.oscillator_form_pairing",
+                "ContinuousFlexibility.Radial.central_shifted_form_pairing",
+                "ContinuousFlexibility.Radial.finiteHermiteFunction_shifted_energy"
+              ]
+            }
+          ],
+          "correspondence": "已有真实deriv和Xψ的积分公式；现有OscillatorEnergyDomain仍要求C²，不是完成的弱导数闭形式域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "边界项由cutoff极限消失",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralEnergyIdentity.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.oscillatorEnergyPairing",
+                "ContinuousFlexibility.Radial.shiftedCentralEnergyPairing",
+                "ContinuousFlexibility.Radial.oscillator_form_pairing",
+                "ContinuousFlexibility.Radial.central_shifted_form_pairing",
+                "ContinuousFlexibility.Radial.finiteHermiteFunction_shifted_energy"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.compactHermiteFunction_tendsto_L2",
+                "ContinuousFlexibility.Radial.compactHermiteImage_tendsto_L2",
+                "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+              ]
+            }
+          ],
+          "correspondence": "整线积分分部和微分图cutoff收敛已证；形式范数下的cutoff核心稠密、闭包识别仍缺。"
+        }
+      ],
+      "remaining": [
+        "构造真实弱一阶导数与Xψ属于L²的闭形式域，证明其完备及稠密。",
+        "证明紧支撑C∞核心在形式范数稠密。",
+        "识别该闭形式关联的Friedrichs算子与现有最大弱微分图。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralEnergyIdentity.lean": "cdec52bcbb1ca227ba0f1d81d69f9b6e04cffa780fa2a6fdcb6caac04777c7cf",
+        "ContinuousFlexibility/Radial/OscillatorCompactCore.lean": "72ad34b33ddab15bb7945555074eeaa10ee277584d0d48c34c0c288d8bb41f58"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.04",
+      "status": "complete",
+      "title": "微分域与谱域识别",
+      "statement": "证明实际谐振子微分实现等于Hermite对角实现，两种域双向包含。",
+      "rationale": "已经有真正紧支撑测试的分布弱微分图与Hermite图的双向等价，不再只是把谱图定义当作微分域。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+            "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff"
+          ],
+          "correspondence": "Hermite对角图及平方可和域有完整双向刻画。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.CentralCompactWeakEquation",
+            "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak",
+            "ContinuousFlexibility.Radial.central_smooth_energy_graph",
+            "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+          ],
+          "correspondence": "最大紧支撑C∞测试弱微分方程与同一Hermite图双向等价；真实紧支撑微分图闭包也被识别。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不能只用候选本征方程推出域相等",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.CentralCompactWeakEquation",
+                "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak",
+                "ContinuousFlexibility.Radial.central_smooth_energy_graph",
+                "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+              ]
+            }
+          ],
+          "correspondence": "centralClosedGraph_iff_compact_weak通过所有C∞紧支撑测试函数给双向弱方程，不仅是本征函数候选。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "逐项闭包极限与分布方程一致",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.CentralCompactWeakEquation",
+                "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak",
+                "ContinuousFlexibility.Radial.central_smooth_energy_graph",
+                "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+              ]
+            }
+          ],
+          "correspondence": "compactHermite的函数及实际微分像同时L²收敛，centralCompactSmoothGraph_closure把闭包与真实微分方程一致地识别。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean": "274070a67b4a84427fa7e37eb0a2e685b7234353305a65bc11de5c5522581a3c",
+        "ContinuousFlexibility/Radial/OscillatorCompactCore.lean": "72ad34b33ddab15bb7945555074eeaa10ee277584d0d48c34c0c288d8bb41f58"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit",
+      "scope_note": "本项按“最大L²弱微分实现”验收；Friedrichs/闭二次型实现仍明确属于R03.03，未在此报告为完成。"
+    },
+    {
+      "id": "R03.05",
+      "status": "complete",
+      "title": "偶频零能隙与二模核",
+      "statement": "把中央能级整数分解估计接到实际闭谱，证明所有偶j≥4的统一零能隙和j=2核恰为高斯一维。",
+      "rationale": "所有偶频的算术gap已作用于有完整域刻画的真实弱微分图，并已有同图有界双侧逆和精确核，达到原路线允许的零能估计意义。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralSpectralGap.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralGapDelta_pos",
+            "ContinuousFlexibility.Radial.centralSpectralLevel_two",
+            "ContinuousFlexibility.Radial.centralSpectralLevel_even_gap",
+            "ContinuousFlexibility.Radial.central_normalizedHermite_spectralLevel"
+          ],
+          "correspondence": "全部m、全部偶j≥4的实际中央能级统一正gap，j=2能级=4m。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+            "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff"
+          ],
+          "correspondence": "完整闭图用所有Hermite系数双向刻画，排除仅凭候选本征函数外推。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralGraphAdjoint.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralClosedGraph_two_kernel_iff",
+            "ContinuousFlexibility.Radial.centralClosedGraph_even_kernel_iff",
+            "ContinuousFlexibility.Radial.centralClosedGraph_pairing_iff"
+          ],
+          "correspondence": "同一闭图二模核恰归一化Gaussian一维，其余偶模核零，图伴随最大。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralHilbertInverse_norm_le",
+            "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+            "ContinuousFlexibility.Radial.centralHilbertInverse_left",
+            "ContinuousFlexibility.Radial.centralClosedGraph_even_exists_unique"
+          ],
+          "correspondence": "同一完整图上实际有界双侧逆给所需零能resolvent界，覆盖全部源。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak"
+          ],
+          "correspondence": "该完整图就是最大弱微分图，不能遗漏额外分布L²齐次解。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "所有m同时覆盖",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralGap.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralGapDelta_pos",
+                "ContinuousFlexibility.Radial.centralSpectralLevel_two",
+                "ContinuousFlexibility.Radial.centralSpectralLevel_even_gap",
+                "ContinuousFlexibility.Radial.central_normalizedHermite_spectralLevel"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralGraphAdjoint.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_two_kernel_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_even_kernel_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_pairing_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralHilbertInverse_norm_le",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_left",
+                "ContinuousFlexibility.Radial.centralClosedGraph_even_exists_unique"
+              ]
+            }
+          ],
+          "correspondence": "uniform gap对每个m和偶j同时成立；两类kernel定理和逆结论也没有有限截断限制。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "算术下界作用于已识别完整谱",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.mem_centralClosedGraph_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_domain_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralGraphAdjoint.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_two_kernel_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_even_kernel_iff",
+                "ContinuousFlexibility.Radial.centralClosedGraph_pairing_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralHilbertInverse_norm_le",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_left",
+                "ContinuousFlexibility.Radial.centralClosedGraph_even_exists_unique"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak"
+              ]
+            }
+          ],
+          "correspondence": "以完整系数图刻画、真实弱域等价及全源双侧逆检验零能隙，绝非只列候选能级；未宣称Friedrichs闭形式已建成。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralSpectralGap.lean": "20a887582069dc68aa937cb319d57fcf910b0185845097a2c319d4ed602b2dfd",
+        "ContinuousFlexibility/Radial/OscillatorClosedGraph.lean": "274070a67b4a84427fa7e37eb0a2e685b7234353305a65bc11de5c5522581a3c",
+        "ContinuousFlexibility/Radial/CentralGraphAdjoint.lean": "6ef3252d26004db60a34fde1c8bd647239f3917876cdc68f2a0ae11a10f940ff",
+        "ContinuousFlexibility/Radial/CentralSpectralInverse.lean": "7db3a431f32bcec3df7819caf72791750f59eed8ab69ae92d8002f9ce1e0acac",
+        "ContinuousFlexibility/Radial/OscillatorCompactCore.lean": "72ad34b33ddab15bb7945555074eeaa10ee277584d0d48c34c0c288d8bb41f58"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit",
+      "scope_note": "这里验收的是原节点所需的完整闭弱微分图零能gap/有界逆估计；没有另造未证明的闭二次型谱API，R03.03继续为partial。"
+    },
+    {
+      "id": "R03.06",
+      "status": "complete",
+      "title": "实际约化逆和投影",
+      "statement": "用真实正交投影构造j=2约化逆及其两向逆恒等式，并由零能隙构造其它偶频逆。",
+      "rationale": "实际正交投影、二模约化逆和其它偶频逆均已构造，并由compact-test桥接属于真实弱微分域。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralHilbertInverse",
+            "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+            "ContinuousFlexibility.Radial.centralHilbertInverse_left",
+            "ContinuousFlexibility.Radial.centralReducedHilbertInverse",
+            "ContinuousFlexibility.Radial.centralReducedHilbertInverse_zero_coefficient",
+            "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph",
+            "ContinuousFlexibility.Radial.centralReducedHilbertInverse_left",
+            "ContinuousFlexibility.Radial.centralGroundProjection",
+            "ContinuousFlexibility.Radial.centralGroundProjection_idempotent",
+            "ContinuousFlexibility.Radial.centralGroundProjection_orthogonal",
+            "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph_projected",
+            "ContinuousFlexibility.Radial.centralReducedHilbertInverse_left_projected"
+          ],
+          "correspondence": "实际有界无权逆、ground正交投影和约化逆，均在同一真实Hermite闭图满足两向恒等式。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak"
+          ],
+          "correspondence": "逆输出所属的闭图与真实最大弱微分域双向相等。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "j=2只在核的正交补反演",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralHilbertInverse",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_left",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_zero_coefficient",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_left",
+                "ContinuousFlexibility.Radial.centralGroundProjection",
+                "ContinuousFlexibility.Radial.centralGroundProjection_idempotent",
+                "ContinuousFlexibility.Radial.centralGroundProjection_orthogonal",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph_projected",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_left_projected"
+              ]
+            }
+          ],
+          "correspondence": "zero_coefficient与投影的idempotent/orthogonal性质保证在真实ground正交补反演；projected两向公式保留核分量。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "逆映回实际微分域",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralHilbertInverse",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralHilbertInverse_left",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_zero_coefficient",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_left",
+                "ContinuousFlexibility.Radial.centralGroundProjection",
+                "ContinuousFlexibility.Radial.centralGroundProjection_idempotent",
+                "ContinuousFlexibility.Radial.centralGroundProjection_orthogonal",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph_projected",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_left_projected"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak"
+              ]
+            }
+          ],
+          "correspondence": "graph和left定理给两向逆关系，compact_weak等价将值域识别为实际弱微分域。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralSpectralInverse.lean": "7db3a431f32bcec3df7819caf72791750f59eed8ab69ae92d8002f9ce1e0acac",
+        "ContinuousFlexibility/Radial/OscillatorCompactCore.lean": "72ad34b33ddab15bb7945555074eeaa10ee277584d0d48c34c0c288d8bb41f58"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit",
+      "scope_note": "完成范围是无权最大弱微分实现；双侧upsilon权界属于R03.09，Friedrichs二次型识别属于R03.03。"
+    },
+    {
+      "id": "R03.07",
+      "status": "partial",
+      "title": "中央高阶端渐近",
+      "statement": "对实际Laplace–Gaussian半径和其逆证明论文所需各固定阶端渐近及权upsilon增长界。",
+      "rationale": "实际半径与两端基本极限已有，论文所需各固定阶精确端渐近、逆坐标渐近和upsilon定量增长尚缺。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadius_le_exp_of_nonpos",
+            "ContinuousFlexibility.Radial.tendsto_centralRadius_atBot",
+            "ContinuousFlexibility.Radial.tendsto_centralRadius_atTop",
+            "ContinuousFlexibility.Radial.range_centralRadius"
+          ],
+          "correspondence": "真实中央半径有两端基本极限与左端粗上界，但不是所有固定阶渐近。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.contDiff_centralRadius",
+            "ContinuousFlexibility.Radial.centralRadius_ode"
+          ],
+          "correspondence": "真实C∞半径和实际ODE可供继续推导jets。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "任意固定阶常数可依赖阶数",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadius_le_exp_of_nonpos",
+                "ContinuousFlexibility.Radial.tendsto_centralRadius_atBot",
+                "ContinuousFlexibility.Radial.tendsto_centralRadius_atTop",
+                "ContinuousFlexibility.Radial.range_centralRadius"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.contDiff_centralRadius",
+                "ContinuousFlexibility.Radial.centralRadius_ode"
+              ]
+            }
+          ],
+          "correspondence": "当前仅有低阶基本极限，未给所有固定阶渐近常数。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "渐近绑定同一真实r而非替代模型",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadius_le_exp_of_nonpos",
+                "ContinuousFlexibility.Radial.tendsto_centralRadius_atBot",
+                "ContinuousFlexibility.Radial.tendsto_centralRadius_atTop",
+                "ContinuousFlexibility.Radial.range_centralRadius"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.contDiff_centralRadius",
+                "ContinuousFlexibility.Radial.centralRadius_ode"
+              ]
+            }
+          ],
+          "correspondence": "所有已有界均作用于同一真实Laplace–Gaussian半径。"
+        }
+      ],
+      "remaining": [
+        "各固定阶半径及逆坐标端渐近。",
+        "论文实际upsilon的统一上下界和固定阶导数控制。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralRadiusMetric.lean": "a7a9289b029c5fdf503244b64acd8aa7e120062208fe5d94dcec3e4af610b7b1",
+        "ContinuousFlexibility/Radial/CentralRadius.lean": "b173bcd59d9e2763d13559d080f49233a25e678f12a0fe03cb9d713de91d8871"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.08",
+      "status": "complete",
+      "title": "中央转点简单性",
+      "statement": "由实际半径/profile导数证明两个内部转点简单，并确定负区间与旅行角积分区间。",
+      "rationale": "实际两个转点的简单性、真实profile负区和旅行角区间均可由现有精确定理衔接。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralTurningPoints.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadialProfile_critical_iff",
+            "ContinuousFlexibility.Radial.central_turning_radii_pos_ordered",
+            "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_left_neg",
+            "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_right_pos"
+          ],
+          "correspondence": "真实profile恰有两个正且有序临界半径，二阶导数分别严格负/正。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadialProfile_deriv_scaled",
+            "ContinuousFlexibility.Radial.centralRadialProfile_deriv_neg_iff",
+            "ContinuousFlexibility.Radial.centralRadialProfile_deriv_pos_iff"
+          ],
+          "correspondence": "真实profile导数负区在X坐标恰由X²<A_c识别。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadius_liouvilleRho"
+          ],
+          "correspondence": "同一半径和密度的真实Liouville rho恰A_c-X²。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.quadratic_positive_component"
+          ],
+          "correspondence": "ρ正分量严格是(-sqrt A_c,sqrt A_c)，与真实profile负导数区间一致。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "转点处二阶量非零",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTurningPoints.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_critical_iff",
+                "ContinuousFlexibility.Radial.central_turning_radii_pos_ordered",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_left_neg",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_right_pos"
+              ]
+            }
+          ],
+          "correspondence": "左右转点二阶导数严格异号，因而均非零。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "负区间端点与真实profile对应",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTurningPoints.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_critical_iff",
+                "ContinuousFlexibility.Radial.central_turning_radii_pos_ordered",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_left_neg",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_right_pos"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_deriv_scaled",
+                "ContinuousFlexibility.Radial.centralRadialProfile_deriv_neg_iff",
+                "ContinuousFlexibility.Radial.centralRadialProfile_deriv_pos_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadius_liouvilleRho"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.quadratic_positive_component"
+              ]
+            }
+          ],
+          "correspondence": "有序正半径、导数sign iff、实际rho识别和positive_component共同给负区与旅行积分端点。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralTurningPoints.lean": "5ee0df70b656e6b7213f40cf02f83d21e4eb6583e791a71c39ddcf3749855e91",
+        "ContinuousFlexibility/Radial/CentralModel.lean": "f0fcde30af15d2b337ca9ae6b83fe98c197a511ad6a69bca017d536984aeea7a",
+        "ContinuousFlexibility/Radial/CentralRadius.lean": "b173bcd59d9e2763d13559d080f49233a25e678f12a0fe03cb9d713de91d8871",
+        "ContinuousFlexibility/Radial/CentralTravelAngle.lean": "1e4cd1434b4278f6453bb601fc208442debab32817027b7e8a26925247b5c55c"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.09",
+      "status": "unstarted",
+      "title": "双侧加权resolvent",
+      "statement": "先证upsilon H_j⁻¹单侧界，再以伴随与能量吸收证明upsilon H_j⁻¹ upsilon双侧界，二模使用约化逆。",
+      "rationale": "尚未实现本项的实际upsilon加权逆或紧支撑辅助border；已有无权逆/ground正交投影不替代该目标。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "给出实际有界算子及其定义域",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚未实现本项的实际upsilon加权逆或紧支撑辅助border；已有无权逆/ground正交投影不替代该目标。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不能把无权谱隙直接当作双权界",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚未实现本项的实际upsilon加权逆或紧支撑辅助border；已有无权逆/ground正交投影不替代该目标。"
+        }
+      ],
+      "remaining": [
+        "先证upsilon H_j⁻¹单侧界，再以伴随与能量吸收证明upsilon H_j⁻¹ upsilon双侧界，二模使用约化逆。",
+        "尚需满足：给出实际有界算子及其定义域",
+        "尚需满足：不能把无权谱隙直接当作双权界"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.10",
+      "status": "unstarted",
+      "title": "辅助二模边框和缩放",
+      "statement": "构造紧支撑g₀及row ℓ₀，证明∫g₀φ₀dr=1、增广逆界和w高度缩放下的Hilbert归一化。",
+      "rationale": "尚未实现本项的实际upsilon加权逆或紧支撑辅助border；已有无权逆/ground正交投影不替代该目标。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "同一row/column用于后续buffer",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚未实现本项的实际upsilon加权逆或紧支撑辅助border；已有无权逆/ground正交投影不替代该目标。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "λ缩放后行列范数有统一界",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚未实现本项的实际upsilon加权逆或紧支撑辅助border；已有无权逆/ground正交投影不替代该目标。"
+        }
+      ],
+      "remaining": [
+        "构造紧支撑g₀及row ℓ₀，证明∫g₀φ₀dr=1、增广逆界和w高度缩放下的Hilbert归一化。",
+        "尚需满足：同一row/column用于后续buffer",
+        "尚需满足：λ缩放后行列范数有统一界"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.11",
+      "status": "complete",
+      "title": "中央实际旅行角小除数",
+      "statement": "把已有T_c=π/(2√2)和所有k≥1的正小除数下界绑定到同一实际负区间。",
+      "rationale": "真实中央负区的旅行积分已计算，并在同一积分上证明全部正整数频率的定量小除数。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.quadratic_positive_component",
+            "ContinuousFlexibility.Radial.central_travel_integral_eq",
+            "ContinuousFlexibility.Radial.central_travel_integral_small_divisor",
+            "ContinuousFlexibility.Radial.exists_central_travel_integral_small_divisor"
+          ],
+          "correspondence": "实际sqrt(A-X²)积分及全部k≥1小除数下界已有；正区间端点明示。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadius_liouvilleRho"
+          ],
+          "correspondence": "实际中央模型的rho正是积分所用A_c-X²。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadialProfile_deriv_neg_iff"
+          ],
+          "correspondence": "同一实际profile的负导数区与该rho正区对应。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralSmallDivisor.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralTravelAngle",
+            "ContinuousFlexibility.Radial.central_sine_small_divisor"
+          ],
+          "correspondence": "旅行角的算术估计单独于谱gap处理，k≥1条件明确。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "旅行角与谱相位分别陈述",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.quadratic_positive_component",
+                "ContinuousFlexibility.Radial.central_travel_integral_eq",
+                "ContinuousFlexibility.Radial.central_travel_integral_small_divisor",
+                "ContinuousFlexibility.Radial.exists_central_travel_integral_small_divisor"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralRadius.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadius_liouvilleRho"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_deriv_neg_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSmallDivisor.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralTravelAngle",
+                "ContinuousFlexibility.Radial.central_sine_small_divisor"
+              ]
+            }
+          ],
+          "correspondence": "rho和profile区间桥接实际积分；旅行角证明与谱能级gap是不同模块和定理。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "零频不套用正频不等式",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.quadratic_positive_component",
+                "ContinuousFlexibility.Radial.central_travel_integral_eq",
+                "ContinuousFlexibility.Radial.central_travel_integral_small_divisor",
+                "ContinuousFlexibility.Radial.exists_central_travel_integral_small_divisor"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSmallDivisor.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralTravelAngle",
+                "ContinuousFlexibility.Radial.central_sine_small_divisor"
+              ]
+            }
+          ],
+          "correspondence": "所有正频率定理有1≤k前提，没有对零模套用下界。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralTravelAngle.lean": "1e4cd1434b4278f6453bb601fc208442debab32817027b7e8a26925247b5c55c",
+        "ContinuousFlexibility/Radial/CentralRadius.lean": "b173bcd59d9e2763d13559d080f49233a25e678f12a0fe03cb9d713de91d8871",
+        "ContinuousFlexibility/Radial/CentralModel.lean": "f0fcde30af15d2b337ca9ae6b83fe98c197a511ad6a69bca017d536984aeea7a",
+        "ContinuousFlexibility/Radial/CentralSmallDivisor.lean": "2aef804fe33b1c27b67da52a6fef15ac39e1ea395af8326dbabcd07a060efe58"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R03.12",
+      "status": "partial",
+      "title": "组合并验收中央谐振子模型的完整实现",
+      "statement": "中央模型的闭二次型实现具有文中完整谱；二模恰一维零核，其余偶模有所需零能隙；得到正递增半径、端渐近、约化逆和双侧加权resolvent估计。另证明中央负区旅行角T_c=π/(2√2)及全部k≥1上的|sin(kT_c)|≥c/k。",
+      "rationale": "已完成多项局部/弱微分成果；闭二次型Friedrichs、全阶渐近、双侧权界和紧支撑辅助边框尚未闭合，不能认定中央模型完整。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/HermiteBasis.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.hermiteBasis",
+            "ContinuousFlexibility.Radial.hermiteCoefficient_parseval"
+          ],
+          "correspondence": "完整真实Hilbert基已经构造。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak",
+            "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+          ],
+          "correspondence": "实际最大弱微分图和紧支撑微分core闭包识别完成。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+            "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph_projected"
+          ],
+          "correspondence": "同图无权逆和二模约化逆完成。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralTurningPoints.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralRadialProfile_critical_iff",
+            "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_left_neg",
+            "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_right_pos"
+          ],
+          "correspondence": "真实简单转点完成。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.central_travel_integral_eq",
+            "ContinuousFlexibility.Radial.central_travel_integral_small_divisor"
+          ],
+          "correspondence": "实际旅行积分与正频下界完成。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/HermiteBasis.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.hermiteBasis",
+                "ContinuousFlexibility.Radial.hermiteCoefficient_parseval"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak",
+                "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph_projected"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTurningPoints.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_critical_iff",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_left_neg",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_right_pos"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.central_travel_integral_eq",
+                "ContinuousFlexibility.Radial.central_travel_integral_small_divisor"
+              ]
+            }
+          ],
+          "correspondence": "R03.03、R03.07、R03.09、R03.10未闭合。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "候选能级间隔不等于完整谱证明",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/HermiteBasis.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.hermiteBasis",
+                "ContinuousFlexibility.Radial.hermiteCoefficient_parseval"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak",
+                "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph_projected"
+              ]
+            }
+          ],
+          "correspondence": "已有全系数图、弱域和有界逆，未仅凭候选能级宣称谱完成。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "约化逆保留二模边框",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralHilbertInverse_graph",
+                "ContinuousFlexibility.Radial.centralReducedHilbertInverse_graph_projected"
+              ]
+            }
+          ],
+          "correspondence": "ground正交投影的约化逆已完成；论文compact辅助border未构造。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "实际半径/权函数与抽象谱模型联系完整",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralClosedGraph_iff_compact_weak",
+                "ContinuousFlexibility.Radial.centralCompactSmoothGraph_closure"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTurningPoints.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralRadialProfile_critical_iff",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_left_neg",
+                "ContinuousFlexibility.Radial.centralRadialProfile_second_deriv_right_pos"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.central_travel_integral_eq",
+                "ContinuousFlexibility.Radial.central_travel_integral_small_divisor"
+              ]
+            }
+          ],
+          "correspondence": "真实半径/转点/旅行角已绑定；Friedrichs及upsilon加权实现仍缺。"
+        }
+      ],
+      "remaining": [
+        "R03.03闭形式/Friedrichs识别。",
+        "R03.07完整固定阶渐近。",
+        "R03.09双侧upsilon权resolvent。",
+        "R03.10紧支撑辅助row/column及高度缩放界。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/HermiteBasis.lean": "5365b29b1c6f5a06a8dae35beeedd2b15875330456639c03c0a4ad7071c424b0",
+        "ContinuousFlexibility/Radial/OscillatorCompactCore.lean": "72ad34b33ddab15bb7945555074eeaa10ee277584d0d48c34c0c288d8bb41f58",
+        "ContinuousFlexibility/Radial/CentralSpectralInverse.lean": "7db3a431f32bcec3df7819caf72791750f59eed8ab69ae92d8002f9ce1e0acac",
+        "ContinuousFlexibility/Radial/CentralTurningPoints.lean": "5ee0df70b656e6b7213f40cf02f83d21e4eb6583e791a71c39ddcf3749855e91",
+        "ContinuousFlexibility/Radial/CentralTravelAngle.lean": "1e4cd1434b4278f6453bb601fc208442debab32817027b7e8a26925247b5c55c"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.01",
+      "status": "partial",
+      "title": "Morse实际闭二次型",
+      "statement": "对真实Morse势构造稠密半有界闭二次型及其Friedrichs微分实现。",
+      "rationale": "已有实际强能量数据和有限区间形式恒等式，但无稠密闭弱二次型及Friedrichs微分实现。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.MorseEnergyDomain",
+            "ContinuousFlexibility.Radial.morseGround_energyDomain",
+            "ContinuousFlexibility.Radial.integral_morse_factor",
+            "ContinuousFlexibility.Radial.integral_morse_shifted_nonneg"
+          ],
+          "correspondence": "真实强能量谓词、基态成员、有限区间积分分部和Dirichlet平方非负性已有；并非闭弱形式域。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "cutoff core的闭包条件明确",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有cutoff core的形式闭包/完备性识别。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "算子域由分布表达识别",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有闭Morse算子域的分布刻画。"
+        }
+      ],
+      "remaining": [
+        "构造真实弱导数加指数权的闭形式域并证明稠密/完备。",
+        "识别Friedrichs算子及分布微分域。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/MorseModel.lean": "9ef5abc00665e014b82551556cc46a919b8a84c85ed304f3a5ff6260b7c7ee3e"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.02",
+      "status": "partial",
+      "title": "Morse一阶因子分解",
+      "statement": "在共同cutoff核心证明Dα及其伴随的两条因子恒等式，再以闭包推广至所需域。",
+      "rationale": "两条真实微分因子式已有，闭域伴随和闭包推广尚缺。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.morseExpression_factor",
+            "ContinuousFlexibility.Radial.morseExpression_partner_factor",
+            "ContinuousFlexibility.Radial.hasDerivAt_morseAnnihilation",
+            "ContinuousFlexibility.Radial.hasDerivAt_morseCreation",
+            "ContinuousFlexibility.Radial.integral_morse_factor",
+            "ContinuousFlexibility.Radial.integral_morse_shifted_nonneg"
+          ],
+          "correspondence": "C²实际函数上的两条微分因子分解和有限区间边界项已证，不是仅形式符号。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "伴随包含边界条件",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.morseExpression_factor",
+                "ContinuousFlexibility.Radial.morseExpression_partner_factor",
+                "ContinuousFlexibility.Radial.hasDerivAt_morseAnnihilation",
+                "ContinuousFlexibility.Radial.hasDerivAt_morseCreation",
+                "ContinuousFlexibility.Radial.integral_morse_factor",
+                "ContinuousFlexibility.Radial.integral_morse_shifted_nonneg"
+              ]
+            }
+          ],
+          "correspondence": "有限区间的真实boundary term已给；闭伴随operator domain和无穷端点条件尚未识别。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "形式恒等式须实际延伸到闭域",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有把两条恒等式推广到已证明闭域。"
+        }
+      ],
+      "remaining": [
+        "定义并识别Dα的闭实现及真正Hilbert伴随域。",
+        "通过cutoff闭包将因子恒等式推广到目标闭域。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/MorseModel.lean": "9ef5abc00665e014b82551556cc46a919b8a84c85ed304f3a5ff6260b7c7ee3e"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.03",
+      "status": "partial",
+      "title": "Morse基态的精确L²条件",
+      "statement": "对exp(-αX-ωexp(-X))证明微分方程及α>0恰为L²条件，并证明基态核一维。",
+      "rationale": "基态公式、真实微分方程及精确L²条件完成；仍未证明目标闭Morse实现的基态核恰一维。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.morseGround_equation",
+            "ContinuousFlexibility.Radial.morseGround_paper_equation",
+            "ContinuousFlexibility.Radial.integrable_morseGround_sq",
+            "ContinuousFlexibility.Radial.memLp_morseGround_iff",
+            "ContinuousFlexibility.Radial.not_memLp_morseGround_of_nonpos",
+            "ContinuousFlexibility.Radial.morseGround_energyDomain"
+          ],
+          "correspondence": "实际基态微分方程与w>0时α>0恰L²条件、α≤0排除均已证明。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "左右两端可积分别处理",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.morseGround_equation",
+                "ContinuousFlexibility.Radial.morseGround_paper_equation",
+                "ContinuousFlexibility.Radial.integrable_morseGround_sq",
+                "ContinuousFlexibility.Radial.memLp_morseGround_iff",
+                "ContinuousFlexibility.Radial.not_memLp_morseGround_of_nonpos",
+                "ContinuousFlexibility.Radial.morseGround_energyDomain"
+              ]
+            }
+          ],
+          "correspondence": "正α可积证明和非正α下界排除共同覆盖两端条件，非正支由半直线下界发散得到。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "α≤0的排除不靠未证明谱公式",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.morseGround_equation",
+                "ContinuousFlexibility.Radial.morseGround_paper_equation",
+                "ContinuousFlexibility.Radial.integrable_morseGround_sq",
+                "ContinuousFlexibility.Radial.memLp_morseGround_iff",
+                "ContinuousFlexibility.Radial.not_memLp_morseGround_of_nonpos",
+                "ContinuousFlexibility.Radial.morseGround_energyDomain"
+              ]
+            }
+          ],
+          "correspondence": "not_memLp_morseGround_of_nonpos用真实函数下界，不依赖Morse谱公式。"
+        }
+      ],
+      "remaining": [
+        "证明Dα或相应闭Morse基态方程的所有L²解均为该基态的常数倍。",
+        "连接到实际闭Morse域，而非只有C²候选函数。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/MorseModel.lean": "9ef5abc00665e014b82551556cc46a919b8a84c85ed304f3a5ff6260b7c7ee3e"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.04",
+      "status": "partial",
+      "title": "Morse升降与离散能级",
+      "statement": "用交织算子逐阶构造并识别E_m,j=j²B-(α_j-m)²的简单离散能级。",
+      "rationale": "显式基态level及形式升降的真实微分基础存在；高m交织域、非零性和简单离散谱识别未完成。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.morseGround_paper_equation",
+            "ContinuousFlexibility.Radial.morseGround_paper_energyDomain",
+            "ContinuousFlexibility.Radial.morseExpression_factor",
+            "ContinuousFlexibility.Radial.morseExpression_partner_factor"
+          ],
+          "correspondence": "已证明m=0候选函数实际方程和强energy成员，并有真实微分伙伴因子式；尚不是完整闭谱升降。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "升降映射非零与域成员实际证明",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.morseGround_paper_equation",
+                "ContinuousFlexibility.Radial.morseGround_paper_energyDomain",
+                "ContinuousFlexibility.Radial.morseExpression_factor",
+                "ContinuousFlexibility.Radial.morseExpression_partner_factor"
+              ]
+            }
+          ],
+          "correspondence": "基态energy成员已有，升降后的所有域成员及非零性尚缺。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "整数m范围0≤m<α_j严格限定",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有以0≤m<α_j刻画完整升降能级的定理。"
+        }
+      ],
+      "remaining": [
+        "真正闭域上的升降交织、非零性、所有允许m的能级和简单性。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/MorseModel.lean": "9ef5abc00665e014b82551556cc46a919b8a84c85ed304f3a5ff6260b7c7ee3e"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.05",
+      "status": "unstarted",
+      "title": "Morse无遗漏离散谱",
+      "statement": "下降至-1<α≤0时用非负形式排除阈值下残余谱，证明能级表完整。",
+      "rationale": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "明确有限下降终止",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不把候选本征函数当作完整性",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        }
+      ],
+      "remaining": [
+        "下降至-1<α≤0时用非负形式排除阈值下残余谱，证明能级表完整。",
+        "尚需满足：明确有限下降终止",
+        "尚需满足：不把候选本征函数当作完整性"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.06",
+      "status": "unstarted",
+      "title": "Morse本质谱阈值",
+      "statement": "对左端约束势和右端指数趋常势，证明阈值j²B及零能resolvent所需的谱隔离。",
+      "rationale": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "实际闭实现上作紧扰动或等价充分估计",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "阈值与离散能级分开处理",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        }
+      ],
+      "remaining": [
+        "对左端约束势和右端指数趋常势，证明阈值j²B及零能resolvent所需的谱隔离。",
+        "尚需满足：实际闭实现上作紧扰动或等价充分估计",
+        "尚需满足：阈值与离散能级分开处理"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.07",
+      "status": "unstarted",
+      "title": "非平方参数算术隙",
+      "statement": "对同一非平方整数d的A,B证明所有允许j,m的离散能级零能下界及阈值下界。",
+      "rationale": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "A>4B>0实际验证",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "覆盖全部j≥2而非有限检查",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        }
+      ],
+      "remaining": [
+        "对同一非平方整数d的A,B证明所有允许j,m的离散能级零能下界及阈值下界。",
+        "尚需满足：A>4B>0实际验证",
+        "尚需满足：覆盖全部j≥2而非有限检查"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.08",
+      "status": "unstarted",
+      "title": "Morse实际零能逆",
+      "statement": "将谱隔离和非平方算术隙组合成实际闭算子的有界双侧逆及8d⁹型范数界。",
+      "rationale": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逆的值域落在真实算子域",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "参数依赖和常数界明确",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        }
+      ],
+      "remaining": [
+        "将谱隔离和非平方算术隙组合成实际闭算子的有界双侧逆及8d⁹型范数界。",
+        "尚需满足：逆的值域落在真实算子域",
+        "尚需满足：参数依赖和常数界明确"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.09",
+      "status": "unstarted",
+      "title": "Morse旅行角积分",
+      "statement": "求ρ正区间的两个简单根，严格积分得到T=π(√A/2-√B)=π/(2√d)。",
+      "rationale": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "换元积分的端点奇性受控",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "绑定与谱算术相同的A,B,d",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        }
+      ],
+      "remaining": [
+        "求ρ正区间的两个简单根，严格积分得到T=π(√A/2-√B)=π/(2√d)。",
+        "尚需满足：换元积分的端点奇性受控",
+        "尚需满足：绑定与谱算术相同的A,B,d"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.10",
+      "status": "unstarted",
+      "title": "Morse正频返回下界",
+      "statement": "由非平方整数分解和最近整数估计证明所有k≥1的|sin(kT)|≥1/(3k√d)。",
+      "rationale": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "小k与大k分支齐全",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不得用谱能隙代替特征返回非共振",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "目前只有MorseModel的实际基态和有限区间因子式；没有本项所需完整闭谱/全频参数/旅行角构造。"
+        }
+      ],
+      "remaining": [
+        "由非平方整数分解和最近整数估计证明所有k≥1的|sin(kT)|≥1/(3k√d)。",
+        "尚需满足：小k与大k分支齐全",
+        "尚需满足：不得用谱能隙代替特征返回非共振"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R04.11",
+      "status": "partial",
+      "title": "组合并验收Morse模型的两类非共振",
+      "statement": "Morse闭实现具有所需离散谱和essential threshold，非平方参数给零能逆界；另精确计算旅行角并证明全部正频率的特征返回小除数下界。",
+      "rationale": "Morse实际局部基态与因子式已有；父任务的闭谱、逆和特征返回链未闭合。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.morseGround_paper_equation",
+            "ContinuousFlexibility.Radial.memLp_morseGround_iff",
+            "ContinuousFlexibility.Radial.morseExpression_factor",
+            "ContinuousFlexibility.Radial.morseExpression_partner_factor"
+          ],
+          "correspondence": "存在实际基态和微分因子分解支持，但全闭谱、阈值、逆和旅行角均未完成。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.morseGround_paper_equation",
+                "ContinuousFlexibility.Radial.memLp_morseGround_iff",
+                "ContinuousFlexibility.Radial.morseExpression_factor",
+                "ContinuousFlexibility.Radial.morseExpression_partner_factor"
+              ]
+            }
+          ],
+          "correspondence": "R04.01–10尚有核心未完成义务。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "正频率k≥1，零模另处理",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "Morse所有正频率的旅行角返回下界尚未实现。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "谱相位与特征相位不可混同",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/MorseModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.morseGround_paper_equation",
+                "ContinuousFlexibility.Radial.memLp_morseGround_iff",
+                "ContinuousFlexibility.Radial.morseExpression_factor",
+                "ContinuousFlexibility.Radial.morseExpression_partner_factor"
+              ]
+            }
+          ],
+          "correspondence": "源码没有将基态公式当作旅行角结果，但两条非共振的完整结论仍缺。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "闭算子实现和resolvent界不能由形式谱公式代替",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有实际闭Morse谱实现及有界resolvent。"
+        }
+      ],
+      "remaining": [
+        "闭Morse实现、完整离散谱/本质阈值、非平方全频隙、实际零能逆。",
+        "实际Morse旅行积分和全部正频率返回下界。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/MorseModel.lean": "9ef5abc00665e014b82551556cc46a919b8a84c85ed304f3a5ff6260b7c7ee3e"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.01",
+      "status": "unstarted",
+      "title": "非平方单元参数与尺度预算",
+      "statement": "实际选择d_n及A_n,B_n,λ_n(σ)，证明统一于σ∈[1,2]^ℕ的指数比较和可继续增大N的阈值。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "指数阶数2<5/2<3的吸收逐条证明",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "常数与N、σ的允许依赖登记",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "实际选择d_n及A_n,B_n,λ_n(σ)，证明统一于σ∈[1,2]^ℕ的指数比较和可继续增大N的阈值。",
+        "尚需满足：指数阶数2<5/2<3的吸收逐条证明",
+        "尚需满足：常数与N、σ的允许依赖登记"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.02",
+      "status": "unstarted",
+      "title": "单个Morse半径的Volterra构造",
+      "statement": "按指定右转点初值实际解半径系统，并在保留区证明r=1+O(A)与v>0。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "存在唯一的真实光滑解",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不能将v>0留为输入假设",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "按指定右转点初值实际解半径系统，并在保留区证明r=1+O(A)与v>0。",
+        "尚需满足：存在唯一的真实光滑解",
+        "尚需满足：不能将v>0留为输入假设"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.03",
+      "status": "unstarted",
+      "title": "Morse单元几何的统一估计",
+      "statement": "由真实半径解证明左右cut处r,v及长正区间界，确定两个转点的简单性。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "所有小A常数统一",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "保留区与cut位置精确定义",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "由真实半径解证明左右cut处r,v及长正区间界，确定两个转点的简单性。",
+        "尚需满足：所有小A常数统一",
+        "尚需满足：保留区与cut位置精确定义"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.04",
+      "status": "unstarted",
+      "title": "正连接的光滑插值",
+      "statement": "构造实际正连接profile，匹配两端全jets并证明长度A_n¹²型控制与所需正类型符号。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是仅匹配函数值或一阶",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "高度对比允许很大",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "构造实际正连接profile，匹配两端全jets并证明长度A_n¹²型控制与所需正类型符号。",
+        "尚需满足：不是仅匹配函数值或一阶",
+        "尚需满足：高度对比允许很大"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.05",
+      "status": "unstarted",
+      "title": "无限单元的径向累积",
+      "statement": "递推放置并缩放真实单元和连接，证明半径端点有限、正且所有单元无重叠地覆盖尾。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "对整个高度参数立方体统一",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "左右方向分别确定",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "递推放置并缩放真实单元和连接，证明半径端点有限、正且所有单元无重叠地覆盖尾。",
+        "尚需满足：对整个高度参数立方体统一",
+        "尚需满足：左右方向分别确定"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.06",
+      "status": "unstarted",
+      "title": "轮廓全阶平坦延拓",
+      "statement": "证明无限拼接w内部正且C∞，每个固定阶径向导数在有限端点趋零并有实际零延拓。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "每个阶数均由一致jet估计推出",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "有限接缝和累积端点分别处理",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "证明无限拼接w内部正且C∞，每个固定阶径向导数在有限端点趋零并有实际零延拓。",
+        "尚需满足：每个阶数均由一致jet估计推出",
+        "尚需满足：有限接缝和累积端点分别处理"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.07",
+      "status": "unstarted",
+      "title": "真实质量与阻力积分",
+      "statement": "由同一w,r计算μ_n,R_n^I,ν_n,R_n的两侧估计，包含连接误差和半径缩放因子。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "使用真实积分而非定义为近似值",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "mass与resistance两种测度均显式",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "由同一w,r计算μ_n,R_n^I,ν_n,R_n的两侧估计，包含连接误差和半径缩放因子。",
+        "尚需满足：使用真实积分而非定义为近似值",
+        "尚需满足：mass与resistance两种测度均显式"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.08",
+      "status": "unstarted",
+      "title": "离散增长与衰减尺度",
+      "statement": "从积分估计证明H_n,E_n,S_n及μ_nR_n等全部离散比较和累计误差界。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "每个比较保留索引阈值",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "对所有σ统一常数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "从积分估计证明H_n,E_n,S_n及μ_nR_n等全部离散比较和累计误差界。",
+        "尚需满足：每个比较保留索引阈值",
+        "尚需满足：对所有σ统一常数"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.09",
+      "status": "unstarted",
+      "title": "深尾条件的频率范围",
+      "statement": "证明j²A_n√log(A_n/B_n)足够小时真实尾满足全部deep-tail不等式。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "质量-阻力三类小量和两类大量分别验证",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "左端一格索引移动预先注明",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "证明j²A_n√log(A_n/B_n)足够小时真实尾满足全部deep-tail不等式。",
+        "尚需满足：质量-阻力三类小量和两类大量分别验证",
+        "尚需满足：左端一格索引移动预先注明"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.10",
+      "status": "unstarted",
+      "title": "高度参数的局部与全局依赖",
+      "statement": "证明半径cut与σ无关、σ_n同比缩放后续profile；建立有限prefix光滑依赖和所需product连续性。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不得把自然端线连续性提前当假设",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "仅几何数据在此闭合",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "证明半径cut与σ无关、σ_n同比缩放后续profile；建立有限prefix光滑依赖和所需product连续性。",
+        "尚需满足：不得把自然端线连续性提前当假设",
+        "尚需满足：仅几何数据在此闭合"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R05.11",
+      "status": "unstarted",
+      "title": "组合并验收真实单元、连接与累积平坦轮廓",
+      "statement": "对所有足够大的N及全部高度选择σ_n∈[1,2]，构造Morse单元和正连接，使半径累积于正的有限端点、轮廓正、转点简单、零延拓C∞平坦；推出质量/阻力、离散尺度和全部固定阶jet界。",
+      "rationale": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "显式保留N可继续增大的构造自由",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "零延拓包括全部阶数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "证明估计对整个参数立方体一致",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有实际Morse径向单元、正连接、无限累积profile或其统一定量估计；中央profile不能替代该构造。"
+        }
+      ],
+      "remaining": [
+        "对所有足够大的N及全部高度选择σ_n∈[1,2]，构造Morse单元和正连接，使半径累积于正的有限端点、轮廓正、转点简单、零延拓C∞平坦；推出质量/阻力、离散尺度和全部固定阶jet界。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：显式保留N可继续增大的构造自由",
+        "尚需满足：零延拓包括全部阶数",
+        "尚需满足：证明估计对整个参数立方体一致"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.01",
+      "status": "unstarted",
+      "title": "阻力坐标和边界方向",
+      "statement": "在真实deep tail上构造ds=dx/p，证明测度和方程换元，明确左端初始阻力边及后续一格索引。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "两侧source Jacobian精确保留",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "有限入口Dirichlet条件与外端条件分别陈述",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "在真实deep tail上构造ds=dx/p，证明测度和方程换元，明确左端初始阻力边及后续一格索引。",
+        "尚需满足：两侧source Jacobian精确保留",
+        "尚需满足：有限入口Dirichlet条件与外端条件分别陈述"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.02",
+      "status": "unstarted",
+      "title": "单边Dirichlet Green核",
+      "statement": "构造有限edge零势核G₀，证明核乘积不等式与Λ∫ωG₀(s,s)≤3η。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "edge端点和核对角点包括在陈述中",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "实际积分与权密度对应",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "构造有限edge零势核G₀，证明核乘积不等式与Λ∫ωG₀(s,s)≤3η。",
+        "尚需满足：edge端点和核对角点包括在陈述中",
+        "尚需满足：实际积分与权密度对应"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.03",
+      "status": "unstarted",
+      "title": "单边实际逆与Poisson函数",
+      "statement": "在同一edge空间用收敛核级数构造GΛ及v₀,v₁，证明比较界、零边界能量界和实际方程。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "先证同空间有界小量再用Neumann",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "Poisson边界值与Green零边界均验证",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "在同一edge空间用收敛核级数构造GΛ及v₀,v₁，证明比较界、零边界能量界和实际方程。",
+        "尚需满足：先证同空间有界小量再用Neumann",
+        "尚需满足：Poisson边界值与Green零边界均验证"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.04",
+      "status": "unstarted",
+      "title": "精确边界导数矩阵",
+      "statement": "由Green恒等式计算edge的c_n,d_n,i，证明c_n≈R_n⁻¹和b_n≈Λμ_n。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "所有有向符号正确",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "初始阻力边独立包含",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "由Green恒等式计算edge的c_n,d_n,i，证明c_n≈R_n⁻¹和b_n≈Λμ_n。",
+        "尚需满足：所有有向符号正确",
+        "尚需满足：初始阻力边独立包含"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.05",
+      "status": "unstarted",
+      "title": "节点插值的L²两侧界",
+      "statement": "对Ta=a_nv₀+a_n+1v₁证明l²(μ)到连续L²(pdx)的两侧范数界。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "无限求和收敛实际证明",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "相邻误差索引移动受控",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "对Ta=a_nv₀+a_n+1v₁证明l²(μ)到连续L²(pdx)的两侧范数界。",
+        "尚需满足：无限求和收敛实际证明",
+        "尚需满足：相邻误差索引移动受控"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.06",
+      "status": "unstarted",
+      "title": "节点Jacobi算子逆",
+      "statement": "在加权l²中证明节点矩阵对角占优、有界可逆及C/Λ界。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "算子定义于完整l²而非仅有限矩阵",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "常数独立截断长度",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "在加权l²中证明节点矩阵对角占优、有界可逆及C/Λ界。",
+        "尚需满足：算子定义于完整l²而非仅有限矩阵",
+        "尚需满足：常数独立截断长度"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.07",
+      "status": "unstarted",
+      "title": "连续闭形式域分解",
+      "statement": "构造真实连续闭二次型，证明每个域元素的节点trace属于l²并唯一分解为Ta+v，v各节点为零。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "trace由能量估计控制",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "两部分对shifted form正交",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "构造真实连续闭二次型，证明每个域元素的节点trace属于l²并唯一分解为Ta+v，v各节点为零。",
+        "尚需满足：trace由能量估计控制",
+        "尚需满足：两部分对shifted form正交"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.08",
+      "status": "unstarted",
+      "title": "Friedrichs实现和实际逆公式",
+      "statement": "从闭形式分解识别连续Dirichlet/Friedrichs算子，证明其逆为G_D+T D⁻¹T*及C/Λ界。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是只把逆的像定义成目标域",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "正反向逆恒等式都在实际域上成立",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "从闭形式分解识别连续Dirichlet/Friedrichs算子，证明其逆为G_D+T D⁻¹T*及C/Λ界。",
+        "尚需满足：不是只把逆的像定义成目标域",
+        "尚需满足：正反向逆恒等式都在实际域上成立"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.09",
+      "status": "unstarted",
+      "title": "有限Dirichlet截断强极限",
+      "statement": "证明有限edge直和和节点逆压缩均强收敛，并识别极限为前项Friedrichs逆。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "有限截断的边界条件一致",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "极限不能仅由统一范数界推断",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "证明有限edge直和和节点逆压缩均强收敛，并识别极限为前项Friedrichs逆。",
+        "尚需满足：有限截断的边界条件一致",
+        "尚需满足：极限不能仅由统一范数界推断"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.10",
+      "status": "unstarted",
+      "title": "自然衰减节点解的构造",
+      "statement": "在[1,2]上证明后向continued fraction统一收缩，由外墙极限构造正y_n及精确比值界。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "全部height参数统一收缩常数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "证明y_n非零且满足真实节点方程",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "在[1,2]上证明后向continued fraction统一收缩，由外墙极限构造正y_n及精确比值界。",
+        "尚需满足：全部height参数统一收缩常数",
+        "尚需满足：证明y_n非零且满足真实节点方程"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.11",
+      "status": "unstarted",
+      "title": "连续L²自然线的唯一性",
+      "statement": "将节点解插值为连续齐次解，并用离散Wronskian公式证明任何独立解的连续L²质量发散。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不能仅证明节点l²发散而漏掉连续质量",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "得出limit-point及恰一维自然线",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "将节点解插值为连续齐次解，并用离散Wronskian公式证明任何独立解的连续L²质量发散。",
+        "尚需满足：不能仅证明节点l²发散而漏掉连续质量",
+        "尚需满足：得出limit-point及恰一维自然线"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.12",
+      "status": "unstarted",
+      "title": "原半径衰减与全阶平坦性",
+      "statement": "累计比值证明e^{-(S_k-S_m)}型衰减，再恢复gauge及各固定阶真实径向导数，构造平坦延拓。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "gauge有界性只在已证deep频段使用",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "每阶极限实际证明",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "累计比值证明e^{-(S_k-S_m)}型衰减，再恢复gauge及各固定阶真实径向导数，构造平坦延拓。",
+        "尚需满足：gauge有界性只在已证deep频段使用",
+        "尚需满足：每阶极限实际证明"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.13",
+      "status": "unstarted",
+      "title": "端线的product拓扑连续性",
+      "statement": "用continued fraction统一尾误差和有限prefix连续依赖证明自然端线随所有σ的product拓扑连续。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不要求不合理的全参数一致范数拓扑",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "对任意固定频率和入口给连续性",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "用continued fraction统一尾误差和有限prefix连续依赖证明自然端线随所有σ的product拓扑连续。",
+        "尚需满足：不要求不合理的全参数一致范数拓扑",
+        "尚需满足：对任意固定频率和入口给连续性"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.14",
+      "status": "unstarted",
+      "title": "离散Green列和局域核界",
+      "statement": "构造节点逆的Green列，借自然线商与对称性证明两侧e^{-|S_n-S_m|}界，再加入same-edge项。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "插值符号和邻边项不遗漏",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "绝对核界与算子范数分别陈述",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "构造节点逆的Green列，借自然线商与对称性证明两侧e^{-|S_n-S_m|}界，再加入same-edge项。",
+        "尚需满足：插值符号和邻边项不遗漏",
+        "尚需满足：绝对核界与算子范数分别陈述"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.15",
+      "status": "unstarted",
+      "title": "径向源配对和端点Green项",
+      "statement": "恢复真实L_j的dr Green核、B_j逆Cj⁻⁴界及两种入口impedance，证明自然端点Green pairing消失。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "明确g²w/r² dr密度与非齐次因子",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "初始阻力edge的impedance符号独立检查",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "恢复真实L_j的dr Green核、B_j逆Cj⁻⁴界及两种入口impedance，证明自然端点Green pairing消失。",
+        "尚需满足：明确g²w/r² dr密度与非齐次因子",
+        "尚需满足：初始阻力edge的impedance符号独立检查"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R06.16",
+      "status": "unstarted",
+      "title": "组合并验收深尾连续算子逆与唯一衰减线",
+      "statement": "深尾条件下，A_p=-p⁻¹(p∂x)'的Dirichlet/Friedrichs实现具有文中逆界，端点恰有一条自然L²齐次解线；其衰减、原半径平坦性、Green核衰减和参数连续性成立。",
+      "rationale": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "连续与离散form domain对应",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "有限截断极限确实实现目标连续算子",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "唯一解线、平坦性及product-topology连续性分别证明",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        },
+        {
+          "criterion": "acceptance.05",
+          "text": "左端x=−log r时显式处理mass/resistance顺序的一格索引移动及源Jacobian",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实deep-tail密度/edge/节点系统及连续Dirichlet–Friedrichs实现；中央Hermite闭图不替代尾部闭域。"
+        }
+      ],
+      "remaining": [
+        "深尾条件下，A_p=-p⁻¹(p∂x)'的Dirichlet/Friedrichs实现具有文中逆界，端点恰有一条自然L²齐次解线；其衰减、原半径平坦性、Green核衰减和参数连续性成立。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：连续与离散form domain对应",
+        "尚需满足：有限截断极限确实实现目标连续算子",
+        "尚需满足：唯一解线、平坦性及product-topology连续性分别证明",
+        "尚需满足：左端x=−log r时显式处理mass/resistance顺序的一格索引移动及源Jacobian"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.01",
+      "status": "unstarted",
+      "title": "所有偶频的唯一band划分",
+      "statement": "证明H_n单调趋无穷，含首band的I_n对全部偶j≥2恰好分区，下一单元已deep且更早单元有大正cap action。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "没有遗漏中间频段",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "频率区间边界等号归属唯一",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "证明H_n单调趋无穷，含首band的I_n对全部偶j≥2恰好分区，下一单元已deep且更早单元有大正cap action。",
+        "尚需满足：没有遗漏中间频段",
+        "尚需满足：频率区间边界等号归属唯一"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.02",
+      "status": "unstarted",
+      "title": "辅助正cone的实际incoming线",
+      "statement": "构造真实w=cr cone与正插值，证明r^±j incoming线、Dirichlet逆界及首band符号。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "cone幅度选择先于σ_N",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "最终只保留有限cone片段",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "构造真实w=cr cone与正插值，证明r^±j incoming线、Dirichlet逆界及首band符号。",
+        "尚需满足：cone幅度选择先于σ_N",
+        "尚需满足：最终只保留有限cone片段"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.03",
+      "status": "unstarted",
+      "title": "incoming斜率统一区间",
+      "statement": "由正cap上的实际ODE比较证明ζ_j/u∈[-3/2,-1/2]，覆盖左右方向和首band。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "normalization u=1合法且非零",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "常数统一于其它高度参数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "由正cap上的实际ODE比较证明ζ_j/u∈[-3/2,-1/2]，覆盖左右方向和首band。",
+        "尚需满足：normalization u=1合法且非零",
+        "尚需满足：常数统一于其它高度参数"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.04",
+      "status": "unstarted",
+      "title": "短连接真实传递误差",
+      "statement": "采用Y=(u,wζ_j/W_in)消去w′/w，证明实际基本解矩阵与恒等阵相差o(e^-n²)。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "使用真实Volterra级数及矩阵范数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不以大导数上界破坏短连接预算",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "采用Y=(u,wζ_j/W_in)消去w′/w，证明实际基本解矩阵与恒等阵相差o(e^-n²)。",
+        "尚需满足：使用真实Volterra级数及矩阵范数",
+        "尚需满足：不以大导数上界破坏短连接预算"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.05",
+      "status": "unstarted",
+      "title": "单坐标坏角集合测度",
+      "statement": "证明B(σ)=(B₁,σΞ_nB₂)的坏角集合长度≤Cδ_n，并把传递误差加入真实incoming角。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "B₁=0单独处理",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "常数独立于其余全部σ",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "证明B(σ)=(B₁,σΞ_nB₂)的坏角集合长度≤Cδ_n，并把传递误差加入真实incoming角。",
+        "尚需满足：B₁=0单独处理",
+        "尚需满足：常数独立于其余全部σ"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.06",
+      "status": "unstarted",
+      "title": "有限立方体同时选高",
+      "statement": "在任意有限band集合上用Fubini、可测性和并集界证明存在同时满足全部好角条件的σ。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "实际证明ΣC#I_nδ_n<1/2",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "未来ratios固定后估计仍统一",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "在任意有限band集合上用Fubini、可测性和并集界证明存在同时满足全部好角条件的σ。",
+        "尚需满足：实际证明ΣC#I_nδ_n<1/2",
+        "尚需满足：未来ratios固定后估计仍统一"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.07",
+      "status": "unstarted",
+      "title": "无限好条件的闭性",
+      "statement": "将固定频率角度写成prefix传递与自然端线的连续函数，证明good set在紧乘积中闭。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "自然线使用R06已证product连续性",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不能只取每频率不同的几何",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "将固定频率角度写成prefix传递与自然端线的连续函数，证明good set在紧乘积中闭。",
+        "尚需满足：自然线使用R06已证product连续性",
+        "尚需满足：不能只取每频率不同的几何"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.08",
+      "status": "unstarted",
+      "title": "同一高度序列覆盖全部频率",
+      "statement": "由有限维可满足性和乘积紧性得到一个σ_n序列满足所有偶正频率，并为两端分别选择再配成同一几何。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "量词严格为∃σ∀j",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "极限保持每个定量δ_n下界",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "由有限维可满足性和乘积紧性得到一个σ_n序列满足所有偶正频率，并为两端分别选择再配成同一几何。",
+        "尚需满足：量词严格为∃σ∀j",
+        "尚需满足：极限保持每个定量δ_n下界"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R07.09",
+      "status": "unstarted",
+      "title": "组合并验收过渡区与所有频率同时选高",
+      "statement": "每个偶正频率具有唯一过渡单元；存在同一个高度序列(σ_n)，使所有频率的incoming line与自然端线具有文中定量角度下界。",
+      "rationale": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "量词为∃(σ_n)∀j，而非∀j∃(σ_n)",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "无限条件的闭性与线连续性",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "核验过渡/深尾频率区域确实穷尽全部偶正频率",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实频带、辅助cone、height-ratio坏集或全频同时选高的证明。"
+        }
+      ],
+      "remaining": [
+        "每个偶正频率具有唯一过渡单元；存在同一个高度序列(σ_n)，使所有频率的incoming line与自然端线具有文中定量角度下界。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：量词为∃(σ_n)∀j，而非∀j∃(σ_n)",
+        "尚需满足：无限条件的闭性与线连续性",
+        "尚需满足：核验过渡/深尾频率区域确实穷尽全部偶正频率"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R08.01",
+      "status": "unstarted",
+      "title": "两条自然尾线的统一归一化",
+      "statement": "从已选左右尾自然解选择非零归一化代表，固定真实入口值/flux以及允许的cut参数。",
+      "rationale": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "左右方向符号一致",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不更改已选高度序列和旅行角",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        }
+      ],
+      "remaining": [
+        "从已选左右尾自然解选择非零归一化代表，固定真实入口值/flux以及允许的cut参数。",
+        "尚需满足：左右方向符号一致",
+        "尚需满足：不更改已选高度序列和旅行角"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R08.02",
+      "status": "partial",
+      "title": "中央二模解的cut状态",
+      "statement": "在实际中央模型两个远cut提取二模核解及对数斜率，证明可连接的严格不等式。",
+      "rationale": "已构造实际中央二模解，但没有两个可调远cut上的完整state/log斜率和连接不等式。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.centralKernelHeight",
+            "ContinuousFlexibility.Radial.centralKernelHeight_pos",
+            "ContinuousFlexibility.Radial.centralKernelHeight_pullback",
+            "ContinuousFlexibility.Radial.centralKernelHeight_liouville_pullback",
+            "ContinuousFlexibility.Radial.radialJacobi_centralKernel"
+          ],
+          "correspondence": "中央真实非零二模解和pullback状态已有；尚未形成远cut的可连接log斜率不等式。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "沿真实半径逆计算",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/CentralModel.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.centralKernelHeight",
+                "ContinuousFlexibility.Radial.centralKernelHeight_pos",
+                "ContinuousFlexibility.Radial.centralKernelHeight_pullback",
+                "ContinuousFlexibility.Radial.centralKernelHeight_liouville_pullback",
+                "ContinuousFlexibility.Radial.radialJacobi_centralKernel"
+              ]
+            }
+          ],
+          "correspondence": "二模解通过实际半径逆定义并满足真实径向方程；远cut log斜率仍缺。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "cut仍可增大而未提前冻结",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有带未冻结cut参数及其允许范围的输出定理。"
+        }
+      ],
+      "remaining": [
+        "给出两个可调远cut的值/flux/log斜率及严格可连接估计。",
+        "证明增大cut参数仍满足同一构造接口。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/CentralModel.lean": "f0fcde30af15d2b337ca9ae6b83fe98c197a511ad6a69bca017d536984aeea7a"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R08.03",
+      "status": "unstarted",
+      "title": "保核正连接的实际构造",
+      "statement": "按二模解对数斜率设计正连接w并构造非零φ，证明L₂φ=0及两端全jets匹配。",
+      "rationale": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "φ不通过除零的入口值归一化",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "连接内w>0且无新增负区",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        }
+      ],
+      "remaining": [
+        "按二模解对数斜率设计正连接w并构造非零φ，证明L₂φ=0及两端全jets匹配。",
+        "尚需满足：φ不通过除零的入口值归一化",
+        "尚需满足：连接内w>0且无新增负区"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R08.04",
+      "status": "unstarted",
+      "title": "中央和双尾的全局光滑拼合",
+      "statement": "把中央、两条连接和尾拼为同一w*及φ*，证明内部光滑、两端平坦、φ*非零。",
+      "rationale": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "无限端点平坦性继承真实估计",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "接口值和flux精确匹配",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        }
+      ],
+      "remaining": [
+        "把中央、两条连接和尾拼为同一w*及φ*，证明内部光滑、两端平坦、φ*非零。",
+        "尚需满足：无限端点平坦性继承真实估计",
+        "尚需满足：接口值和flux精确匹配"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R08.05",
+      "status": "unstarted",
+      "title": "旅行角与已选角的保持",
+      "statement": "证明新增正连接不改变每个原负区旅行角，人工incoming的先定方向保持不变，变化仅进入后续Eb误差。",
+      "rationale": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不宣称任意中央改动自动保持全局角度",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "明确R10应控制的Eb项",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        }
+      ],
+      "remaining": [
+        "证明新增正连接不改变每个原负区旅行角，人工incoming的先定方向保持不变，变化仅进入后续Eb误差。",
+        "尚需满足：不宣称任意中央改动自动保持全局角度",
+        "尚需满足：明确R10应控制的Eb项"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R08.06",
+      "status": "unstarted",
+      "title": "cut和head参数的依赖登记",
+      "statement": "建立带cut/cone-head参数的同一构造族和允许冻结次序，证明后续只调未冻结参数。",
+      "rationale": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "已有σ和M₀不能因输出阶数重选",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "给出供R10/R11调用的参数范围",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        }
+      ],
+      "remaining": [
+        "建立带cut/cone-head参数的同一构造族和允许冻结次序，证明后续只调未冻结参数。",
+        "尚需满足：已有σ和M₀不能因输出阶数重选",
+        "尚需满足：给出供R10/R11调用的参数范围"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R08.07",
+      "status": "unstarted",
+      "title": "组合并验收保留二模的中央目标连接",
+      "statement": "构造把两个已选尾和中央模型连起来的光滑径向轮廓及非零全局二模平坦解φ*，保留可调cut/cone-head长度并不改变负区旅行角。",
+      "rationale": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "φ*是真实非零解",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "新增连接不破坏已选角度",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "后续不得暗中重选已冻结的几何",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有已选自然双尾与中央保核连接的实际构造；明确中央二模解不等于全局平坦φ*。"
+        }
+      ],
+      "remaining": [
+        "构造把两个已选尾和中央模型连起来的光滑径向轮廓及非零全局二模平坦解φ*，保留可调cut/cone-head长度并不改变负区旅行角。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：φ*是真实非零解",
+        "尚需满足：新增连接不破坏已选角度",
+        "尚需满足：后续不得暗中重选已冻结的几何"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.01",
+      "status": "unstarted",
+      "title": "正buffer的单位边界能量",
+      "statement": "在有真实闭实现的正势区域构造自然/Dirichlet单位边界解，证明α_in,α_out≈m。",
+      "rationale": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "自然外端条件明确",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "使用真实能量下界及试函数上界",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        }
+      ],
+      "remaining": [
+        "在有真实闭实现的正势区域构造自然/Dirichlet单位边界解，证明α_in,α_out≈m。",
+        "尚需满足：自然外端条件明确",
+        "尚需满足：使用真实能量下界及试函数上界"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.02",
+      "status": "unstarted",
+      "title": "cut附近点源Green近似列",
+      "statement": "构造带cutoff的局部Green列K_i，证明其分布像为δ_ci+f_i及L²残差界。",
+      "rationale": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "点源明确放在分布空间",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "f_i是真正L²源且避开scalar border support",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        }
+      ],
+      "remaining": [
+        "构造带cutoff的局部Green列K_i，证明其分布像为δ_ci+f_i及L²残差界。",
+        "尚需满足：点源明确放在分布空间",
+        "尚需满足：f_i是真正L²源且避开scalar border support"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.03",
+      "status": "unstarted",
+      "title": "精确Green列与cut矩阵",
+      "statement": "以全模型逆纠正f_i，证明Γ_ik=g_k(c_i)及双重衰减误差D^½ΓD^½=I+E。",
+      "rationale": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "点值trace由正buffer估计获得",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "i,k方向各贡献一个衰减因子",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        }
+      ],
+      "remaining": [
+        "以全模型逆纠正f_i，证明Γ_ik=g_k(c_i)及双重衰减误差D^½ΓD^½=I+E。",
+        "尚需满足：点值trace由正buffer估计获得",
+        "尚需满足：i,k方向各贡献一个衰减因子"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.04",
+      "status": "unstarted",
+      "title": "保留区Dirichlet逆公式",
+      "statement": "证明切割矩阵Γ可逆及H_D⁻¹=RH⁻¹ι-g_IΓ⁻¹g_I*，并证明不存在隐藏Dirichlet核。",
+      "rationale": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不能由形式Schur公式跳过域成员",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "保留scalar coordinate及row",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        }
+      ],
+      "remaining": [
+        "证明切割矩阵Γ可逆及H_D⁻¹=RH⁻¹ι-g_IΓ⁻¹g_I*，并证明不存在隐藏Dirichlet核。",
+        "尚需满足：不能由形式Schur公式跳过域成员",
+        "尚需满足：保留scalar coordinate及row"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.05",
+      "status": "unstarted",
+      "title": "Poisson lift的真实界",
+      "statement": "由g_IΓ⁻¹构造row-zero Poisson map，证明真实边界值、齐次方程和归一化L²界。",
+      "rationale": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "按D^-½作边界规范化",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "边框row确实为零",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        }
+      ],
+      "remaining": [
+        "由g_IΓ⁻¹构造row-zero Poisson map，证明真实边界值、齐次方程和归一化L²界。",
+        "尚需满足：按D^-½作边界规范化",
+        "尚需满足：边框row确实为零"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.06",
+      "status": "unstarted",
+      "title": "边界导数矩阵和正定性",
+      "statement": "证明Λ=Γ⁻¹-diag α_out，推导归一化误差和Λ正定。",
+      "rationale": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "outward导数符号精确",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "紧支撑对称border在Green恒等式中无遗漏项",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        }
+      ],
+      "remaining": [
+        "证明Λ=Γ⁻¹-diag α_out，推导归一化误差和Λ正定。",
+        "尚需满足：outward导数符号精确",
+        "尚需满足：紧支撑对称border在Green恒等式中无遗漏项"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.07",
+      "status": "partial",
+      "title": "径向norm和flux运输",
+      "statement": "把buffer结论运输回同一径向模型，保留Liouville中央gauge附加impedance并证明幅度λ消去。",
+      "rationale": "Liouville norm/flux基础已证；实际buffer结论、中央gauge边界矩阵及λ归一化还未组合。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Radial/Liouville.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.liouville_flux_at",
+            "ContinuousFlexibility.Radial.liouville_hilbert_density"
+          ],
+          "correspondence": "真实flux和谱norm密度运输的基本恒等式已有。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.liouville_hilbert_integral"
+          ],
+          "correspondence": "有限区间真实Hilbert积分换元已有；尚未运输实际buffer boundary matrix。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "Morse与中央分别实例化",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/Liouville.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_flux_at",
+                "ContinuousFlexibility.Radial.liouville_hilbert_density"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_hilbert_integral"
+              ]
+            }
+          ],
+          "correspondence": "中央/Morse通用微分换元可用，但没有两个实际buffer模型的完整实例化。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "中央λa_c diag(ε_iP_i)项不得丢弃",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "未发现中央λa_c diag(ε_iP_i)边界矩阵定理。"
+        }
+      ],
+      "remaining": [
+        "实际buffer Dirichlet/Poisson/derivative结论的径向运输。",
+        "中央附加gauge impedance与绝对幅度λ消去的矩阵估计。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Radial/Liouville.lean": "32510babdee588a53e0c97bc0df9ff5aaf51b6a72d2f4cd44dc2f819f3790950",
+        "ContinuousFlexibility/Radial/RadiusChange.lean": "68271bf76ee334fbf5eb57c974dbf5e9fea335827c033082b9bb2a0e766adb81"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R09.08",
+      "status": "unstarted",
+      "title": "组合并验收正buffer压缩与Poisson边界矩阵",
+      "statement": "从full-model或bordered inverse及正势下界，得到保留区Dirichlet逆、Poisson lift及boundary derivative矩阵的实际界和正定性。",
+      "rationale": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "标量边框support远离cut",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "点源不能当作普通L²源",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "得到可用于拼接的边界配对和符号",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有正buffer的实际边界能量、点源Green列、Dirichlet压缩或Poisson/边界矩阵证明。"
+        }
+      ],
+      "remaining": [
+        "从full-model或bordered inverse及正势下界，得到保留区Dirichlet逆、Poisson lift及boundary derivative矩阵的实际界和正定性。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：标量边框support远离cut",
+        "尚需满足：点源不能当作普通L²源",
+        "尚需满足：得到可用于拼接的边界配对和符号"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.01",
+      "status": "unstarted",
+      "title": "正interface骨架能量",
+      "statement": "组装所有保留区边界数据与正connector能量，证明完整骨架S₀及其归一化正定性。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "保留跨interface全部正能量",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "二模scalar border贯穿",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "组装所有保留区边界数据与正connector能量，证明完整骨架S₀及其归一化正定性。",
+        "尚需满足：保留跨interface全部正能量",
+        "尚需满足：二模scalar border贯穿"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.02",
+      "status": "unstarted",
+      "title": "内部局部误差的全频压制",
+      "statement": "证明早期单元、中央远cut和首cone-head误差在任意高频下统一小，登记M₀→C*→N→cut/head次序。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "覆盖j远高于局部threshold的频率",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "几何选择不依赖输出微分阶数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "证明早期单元、中央远cut和首cone-head误差在任意高频下统一小，登记M₀→C*→N→cut/head次序。",
+        "尚需满足：覆盖j远高于局部threshold的频率",
+        "尚需满足：几何选择不依赖输出微分阶数"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.03",
+      "status": "unstarted",
+      "title": "真实内部逆与Poisson插值",
+      "statement": "反演同一骨架小扰动并证明内部G_h、T_h及加权源/边界估计，包含scalar row。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "先证同空间有界小扰动",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "频率、截断长度的统一界实际给出",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "反演同一骨架小扰动并证明内部G_h、T_h及加权源/边界估计，包含scalar row。",
+        "尚需满足：先证同空间有界小扰动",
+        "尚需满足：频率、截断长度的统一界实际给出"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.04",
+      "status": "unstarted",
+      "title": "过渡核心基本解和外端列",
+      "statement": "在过渡单元构造真实基本解及接自然端线的V，证明归一化状态和有限核心增长界。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "允许入口高度分量为零",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "从同一已选自然线取得列",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "在过渡单元构造真实基本解及接自然端线的V，证明归一化状态和有限核心增长界。",
+        "尚需满足：允许入口高度分量为零",
+        "尚需满足：从同一已选自然线取得列"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.05",
+      "status": "unstarted",
+      "title": "外部非齐次Green逆",
+      "statement": "由规范化状态构造外逆R_o，证明真实方程、自然端条件和包含deep块的局域范数界。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "核的λ^-1由实际mass/Poisson范数抵消",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "交叉block各自估计",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "由规范化状态构造外逆R_o，证明真实方程、自然端条件和包含deep块的局域范数界。",
+        "尚需满足：核的λ^-1由实际mass/Poisson范数抵消",
+        "尚需满足：交叉block各自估计"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.06",
+      "status": "unstarted",
+      "title": "内部截断列及残差衰减",
+      "statement": "构造近似内部Poisson列L_i和真实F_i=B_hL_i，证明zero row、独立support及前一正cap衰减。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "分别留出buffer与cutoff的固定份额",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "残差实际属于Hilbert源空间",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "构造近似内部Poisson列L_i和真实F_i=B_hL_i，证明zero row、独立support及前一正cap衰减。",
+        "尚需满足：分别留出buffer与cutoff的固定份额",
+        "尚需满足：残差实际属于Hilbert源空间"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.07",
+      "status": "unstarted",
+      "title": "真实内部导数矩阵的修正",
+      "statement": "证明P_h=L-G_hF及D_b=Q_h(L,L)-F*G_hF=D₀+E_b，得到每个矩阵元的双衰减界。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "完成平方时scalar项不遗漏",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "等式与误差估计分别证明",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "证明P_h=L-G_hF及D_b=Q_h(L,L)-F*G_hF=D₀+E_b，得到每个矩阵元的双衰减界。",
+        "尚需满足：完成平方时scalar项不遗漏",
+        "尚需满足：等式与误差估计分别证明"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.08",
+      "status": "unstarted",
+      "title": "两边值匹配的精确矩阵",
+      "statement": "从真实内部/外部flux恒等式推出K=A(D₀+E_b)-B及全部source列的匹配方程。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是只从形式状态猜矩阵",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "左右方向和归一化λ_i明确",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "从真实内部/外部flux恒等式推出K=A(D₀+E_b)-B及全部source列的匹配方程。",
+        "尚需满足：不是只从形式状态猜矩阵",
+        "尚需满足：左右方向和归一化λ_i明确"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.09",
+      "status": "unstarted",
+      "title": "选高角到匹配矩阵可逆",
+      "statement": "证明原选高frame到当前frame条件数有界，|v₁d-v₂|≥cδ_n，再用δ_n^-1||E_b||小证明K逆界。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "v₁=0仍合法",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "首band用已保留head长度单独压制",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "证明原选高frame到当前frame条件数有界，|v₁d-v₂|≥cδ_n，再用δ_n^-1||E_b||小证明K逆界。",
+        "尚需满足：v₁=0仍合法",
+        "尚需满足：首band用已保留head长度单独压制"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.10",
+      "status": "unstarted",
+      "title": "返回固定内部的代价吸收",
+      "statement": "证明E_n^Cδ_n^-1 exp(C_oτ_n,j-cτ_n-1,j)<1/4及其首band版本。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "C*及N在常数之后选择",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不能依赖增大输出权来控制固定内部",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "证明E_n^Cδ_n^-1 exp(C_oτ_n,j-cτ_n-1,j)<1/4及其首band版本。",
+        "尚需满足：C*及N在常数之后选择",
+        "尚需满足：不能依赖增大输出权来控制固定内部"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.11",
+      "status": "unstarted",
+      "title": "全局对称block公式",
+      "statement": "证明matched G的完整block表达及中间矩阵对称性，保留辅助二模border和dr源密度运输。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "实际值/conormal在所有有限interface匹配",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "两条逆恒等式先在光滑有限频源上验证",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "证明matched G的完整block表达及中间矩阵对称性，保留辅助二模border和dr源密度运输。",
+        "尚需满足：实际值/conormal在所有有限interface匹配",
+        "尚需满足：两条逆恒等式先在光滑有限频源上验证"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R10.12",
+      "status": "unstarted",
+      "title": "组合并验收全局匹配Green逆",
+      "statement": "保留完整正interface能量构造内部逆，构造不除入口高度的外逆，证明最终2×2匹配矩阵可逆，得到真实全局matched Green逆和对称block公式。",
+      "rationale": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "Hilbert测度12w/r² dr与源dr显式转换",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "辅助二模边框贯穿拼接",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "匹配矩阵恒等式与其定量可逆性分开",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有构造全局径向参考的内部/外部matched Green逆、interface骨架或2×2匹配矩阵。"
+        }
+      ],
+      "remaining": [
+        "保留完整正interface能量构造内部逆，构造不除入口高度的外逆，证明最终2×2匹配矩阵可逆，得到真实全局matched Green逆和对称block公式。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：Hilbert测度12w/r² dr与源dr显式转换",
+        "尚需满足：辅助二模边框贯穿拼接",
+        "尚需满足：匹配矩阵恒等式与其定量可逆性分开"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.01",
+      "status": "unstarted",
+      "title": "固定β与邻近指数的权",
+      "statement": "固定β=3/4及0<ε<1/4，构造三指数在同一几何上的source/output weights并证明相邻权比统一界。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "先冻结M₀和几何再选允许的输出权",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不能每个γ另造profile",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "固定β=3/4及0<ε<1/4，构造三指数在同一几何上的source/output weights并证明相邻权比统一界。",
+        "尚需满足：先冻结M₀和几何再选允许的输出权",
+        "尚需满足：不能每个γ另造profile"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.02",
+      "status": "unstarted",
+      "title": "外部block的精确指数预算",
+      "statement": "对R_o、外列及leading lifts分别证明加权block指数式，显式吸收source measure与transition index成本。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "输出索引在过渡区外是使用增大M₁的前提",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "所有邻居索引偏移实际控制",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "对R_o、外列及leading lifts分别证明加权block指数式，显式吸收source measure与transition index成本。",
+        "尚需满足：输出索引在过渡区外是使用增大M₁的前提",
+        "尚需满足：所有邻居索引偏移实际控制"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.03",
+      "status": "unstarted",
+      "title": "双索引Schur求和",
+      "statement": "由q慢变和S_n增量下界证明外部block kernel的统一行列可和界及有界算子。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "无限求和由实际Schur估计完成",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "两尾和localizer有界重叠计入常数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "由q慢变和S_n增量下界证明外部block kernel的统一行列可和界及有界算子。",
+        "尚需满足：无限求和由实际Schur估计完成",
+        "尚需满足：两尾和localizer有界重叠计入常数"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.04",
+      "status": "unstarted",
+      "title": "外Poisson列的双符号权界",
+      "statement": "对同一外列V证明W和W^-1两种权下的平方和界，保留e^{C_oτ_n,j}成本。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "伴随列的权符号实际反转",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "边界两端采用同一band权",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "对同一外列V证明W和W^-1两种权下的平方和界，保留e^{C_oτ_n,j}成本。",
+        "尚需满足：伴随列的权符号实际反转",
+        "尚需满足：边界两端采用同一band权"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.05",
+      "status": "unstarted",
+      "title": "返回内部block的有界性",
+      "statement": "把G_hF、K⁻¹、V*三个实际有界因子组合，以前一cap衰减吸收过渡核心增长。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "固定内部输出的控制不依赖改M₁",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "首band用同一固定head长度",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "把G_hF、K⁻¹、V*三个实际有界因子组合，以前一cap衰减吸收过渡核心增长。",
+        "尚需满足：固定内部输出的控制不依赖改M₁",
+        "尚需满足：首band用同一固定head长度"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.06",
+      "status": "unstarted",
+      "title": "全部边界修正项的闭合",
+      "statement": "分别控制转置block、两残差列项和一残差一leading lift项，合并为真实G的全局加权界。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "转置block使用反号权",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不得把一个cross block界代替全部校正项",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "分别控制转置block、两残差列项和一残差一leading lift项，合并为真实G的全局加权界。",
+        "尚需满足：转置block使用反号权",
+        "尚需满足：不得把一个cross block界代替全部校正项"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.07",
+      "status": "unstarted",
+      "title": "局部径向一阶恢复",
+      "statement": "在扩大单元上由实际方程和插值/Young不等式证明u_r的L²局部界，含cutoff项与二模compact border。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不对未识别的谱展开逐项微分",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "全部系数cost记入E_m固定幂",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "在扩大单元上由实际方程和插值/Young不等式证明u_r的L²局部界，含cutoff项与二模compact border。",
+        "尚需满足：不对未识别的谱展开逐项微分",
+        "尚需满足：全部系数cost记入E_m固定幂"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.08",
+      "status": "unstarted",
+      "title": "同一逆上的三指数验收",
+      "statement": "将全局界与一阶恢复同时用于β-ε、β、β+ε，证明各指数使用同一自然端点逆和同一row/column。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "只改变范数常数与允许输出权",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "几何和domain选择不随指数或输出阶数重选",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "将全局界与一阶恢复同时用于β-ε、β、β+ε，证明各指数使用同一自然端点逆和同一row/column。",
+        "尚需满足：只改变范数常数与允许输出权",
+        "尚需满足：几何和domain选择不随指数或输出阶数重选"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R11.09",
+      "status": "unstarted",
+      "title": "组合并验收同一几何上的双权全局估计",
+      "statement": "先固定β=3/4和一个ε∈(0,1/4)，在同一几何上对β−ε、β、β+ε获得足够的加权block/Schur逆界和一阶法向估计。",
+      "rationale": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不同指数必须共用w*,φ*,边框和自然端点逆",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "几何不依赖最终微分阶数",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "全(0,1)紧区间版本另列X01，不是不同指数分别造几何",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有同一已构造径向几何的三指数weighted block/Schur逆及径向局部恢复估计；通用权函数基础不能替代。"
+        }
+      ],
+      "remaining": [
+        "先固定β=3/4和一个ε∈(0,1/4)，在同一几何上对β−ε、β、β+ε获得足够的加权block/Schur逆界和一阶法向估计。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：不同指数必须共用w*,φ*,边框和自然端点逆",
+        "尚需满足：几何不依赖最终微分阶数",
+        "尚需满足：全(0,1)紧区间版本另列X01，不是不同指数分别造几何"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.01",
+      "status": "unstarted",
+      "title": "实际分布图域与source空间",
+      "statement": "定义§4 source范数、兼容源及含左常数a_Lχ_L的实际ambient空间，再以分布L_w建立最大图域。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不能将域只定义成逆的像",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不依赖§7物理空间W02",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "定义§4 source范数、兼容源及含左常数a_Lχ_L的实际ambient空间，再以分布L_w建立最大图域。",
+        "尚需满足：不能将域只定义成逆的像",
+        "尚需满足：不依赖§7物理空间W02"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.02",
+      "status": "unstarted",
+      "title": "零模第一primitive及尾界",
+      "statement": "对∫f₀dr=0构造p₀(r)=∫左至r f₀=-∫r至右 f₀，证明真实导数和端点权界。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "原dr测度和正负符号明确",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "无非零homogeneous flux混入",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "对∫f₀dr=0构造p₀(r)=∫左至r f₀=-∫r至右 f₀，证明真实导数和端点权界。",
+        "尚需满足：原dr测度和正负符号明确",
+        "尚需满足：无非零homogeneous flux混入"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.03",
+      "status": "unstarted",
+      "title": "零模高度primitive与唯一性",
+      "statement": "构造右端归零u₀=-∫r至右 p₀/w，证明收敛、左常数有界及减去a_Lχ_L后的权估计和齐次唯一性。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "允许左右常数不同",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "以增长排除非零flux而非新增端点trace假设",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "构造右端归零u₀=-∫r至右 p₀/w，证明收敛、左常数有界及减去a_Lχ_L后的权估计和齐次唯一性。",
+        "尚需满足：允许左右常数不同",
+        "尚需满足：以增长排除非零flux而非新增端点trace假设"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.04",
+      "status": "unstarted",
+      "title": "兼容光滑有限频source稠密",
+      "statement": "实际截断、mollify及有限Fourier逼近source，并以固定紧bump恢复均值兼容。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "修复积分后的范数误差趋零",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "scalar row一并逼近",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "实际截断、mollify及有限Fourier逼近source，并以固定紧bump恢复均值兼容。",
+        "尚需满足：修复积分后的范数误差趋零",
+        "尚需满足：scalar row一并逼近"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.05",
+      "status": "unstarted",
+      "title": "真实角向重建与右逆恒等式",
+      "statement": "在兼容source上用非零模matched逆加零模primitive，证明Fourier重建收敛并得L_w G_w=I。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "取值确实属于最大分布图域",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "先在光滑有限频源验证再由有界性和稠密推广",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "在兼容source上用非零模matched逆加零模primitive，证明Fourier重建收敛并得L_w G_w=I。",
+        "尚需满足：取值确实属于最大分布图域",
+        "尚需满足：先在光滑有限频源验证再由有界性和稠密推广"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.06",
+      "status": "unstarted",
+      "title": "最大图域齐次解的唯一性",
+      "statement": "对任意图域齐次差证明局部H²和finite interface匹配，权蕴含自然端L²，从端线与K可逆推出零。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "每个频率上的代表元和trace实际可用",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不额外强加flat端点边界条件",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "对任意图域齐次差证明局部H²和finite interface匹配，权蕴含自然端L²，从端线与K可逆推出零。",
+        "尚需满足：每个频率上的代表元和trace实际可用",
+        "尚需满足：不额外强加flat端点边界条件"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.07",
+      "status": "unstarted",
+      "title": "左逆与最大图域闭合",
+      "statement": "证明G_w L_w=I，并用图收敛下分布像收敛证明最大图域闭合。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "左逆适用于所有图域元素",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "闭合不由逆的像定义获得",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "证明G_w L_w=I，并用图收敛下分布像收敛证明最大图域闭合。",
+        "尚需满足：左逆适用于所有图域元素",
+        "尚需满足：闭合不由逆的像定义获得"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.08",
+      "status": "unstarted",
+      "title": "smooth admissible core的图闭包",
+      "statement": "证明稠密光滑source之逆像是真实smooth admissible field，并在graph norm逼近全部域元素。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "有限接缝光滑及source外自然平坦实际证明",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "图闭包等于最大分布域",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "证明稠密光滑source之逆像是真实smooth admissible field，并在graph norm逼近全部域元素。",
+        "尚需满足：有限接缝光滑及source外自然平坦实际证明",
+        "尚需满足：图闭包等于最大分布域"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.09",
+      "status": "partial",
+      "title": "普通dr Green reciprocity",
+      "statement": "把局部积分分部、自然端边界项消失和对称block矩阵合成为真实全局dr配对恒等式，含scalar border。",
+      "rationale": "局部Green分部积分和有限区间dr转换已有，但真实全局w*、自然端点项、对称matched逆及无限模极限尚缺。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/GreenIdentity.lean",
+          "declarations": [
+            "ContinuousFlexibility.symmetric_green_identity",
+            "ContinuousFlexibility.integral_symmetric_green_eq_zero_of_periodic"
+          ],
+          "correspondence": "一般真实对称散度在有限矩形/周期角向的局部Green配对和积分恒等式可作为局部支持。"
+        },
+        {
+          "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+          "declarations": [
+            "ContinuousFlexibility.Radial.liouville_source_pairing_integral"
+          ],
+          "correspondence": "普通dr源配对的有限区间运输已有；未当作谱测度。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是误用Hilbert varpi dr代替源配对",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Radial/RadiusChange.lean",
+              "declarations": [
+                "ContinuousFlexibility.Radial.liouville_source_pairing_integral"
+              ]
+            }
+          ],
+          "correspondence": "有限区间运输明确是普通dr源配对，与谱Hilbert测度分开。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "无限端点及Fourier极限的可积性逐一核对",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有全局构造的自然端线及Fourier重建上的可积极限定理。"
+        }
+      ],
+      "remaining": [
+        "把局部配对实例化到同一全局径向参考和scalar border。",
+        "实际自然端点boundary term消失、无限端点及Fourier求和极限。",
+        "与matched逆的全局对称block公式组合。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/GreenIdentity.lean": "0e6bd07148aad1d5495bb0389c10a095c2974bd018b20e11143505b2bd565c60",
+        "ContinuousFlexibility/Radial/RadiusChange.lean": "68271bf76ee334fbf5eb57c974dbf5e9fea335827c033082b9bb2a0e766adb81"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.10",
+      "status": "unstarted",
+      "title": "无边框核与二模归一化",
+      "statement": "由增广逆的单射性证明全局无边框二模核恰ℝφ*、其它偶模核为零，规范化辅助row。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "非零φ*沿R08同一见证",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不由局部候选核推断全局核",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "由增广逆的单射性证明全局无边框二模核恰ℝφ*、其它偶模核为零，规范化辅助row。",
+        "尚需满足：非零φ*沿R08同一见证",
+        "尚需满足：不由局部候选核推断全局核"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.11",
+      "status": "unstarted",
+      "title": "真实度量变分border的非零配对",
+      "statement": "在右正connector选择非零χ≥0，实际分部积分证明a*=∫φ*L′₂,w[wχ]φ*dr<0。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "support位于φ*′/φ*<0的真实连接区",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "L′是已识别的实际度量变分",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "在右正connector选择非零χ≥0，实际分部积分证明a*=∫φ*L′₂,w[wχ]φ*dr<0。",
+        "尚需满足：support位于φ*′/φ*<0的真实连接区",
+        "尚需满足：L′是已识别的实际度量变分"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.12",
+      "status": "unstarted",
+      "title": "替换row和column后的同一逆",
+      "statement": "定义χ*=χ/a*,g*=L′₂,w[wχ*]φ*和ℓ*u=∫g*u₂dr，以有限秩改造构造最终增广逆并证明三指数有界及双侧恒等式保留。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "∫g*φ*dr=1精确成立",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "同一g*,ℓ*,域闭包在三个指数上一致",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "定义χ*=χ/a*,g*=L′₂,w[wχ*]φ*和ℓ*u=∫g*u₂dr，以有限秩改造构造最终增广逆并证明三指数有界及双侧恒等式保留。",
+        "尚需满足：∫g*φ*dr=1精确成立",
+        "尚需满足：同一g*,ℓ*,域闭包在三个指数上一致"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "R12.13",
+      "status": "unstarted",
+      "title": "组合并验收固定径向参考与闭图域双侧逆",
+      "statement": "实例化RadialReference：同一w*,φ*,g*,ℓ*满足偶余弦二模核恰一维、其余偶模核零、返回小除数、边框归一化及兼容源上的双侧逆。图域有分布意义、smooth core闭包识别；右端归零、左端常数自由。",
+      "rationale": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐项实例化此前子任务并导出原节点完整结论",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不能仅把域定义成逆的像而略去物理域识别",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.03",
+          "text": "ℓ*u=∫g*u₂dr且∫g*φ*dr=1",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        },
+        {
+          "criterion": "acceptance.04",
+          "text": "R12只使用§4源范数/§6图域，不依赖§7物理空间W02，防止循环",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "冻结源码没有真实全局RadialReference、其weighted最大图域、零模primitive逆或最终度量变分border。"
+        }
+      ],
+      "remaining": [
+        "实例化RadialReference：同一w*,φ*,g*,ℓ*满足偶余弦二模核恰一维、其余偶模核零、返回小除数、边框归一化及兼容源上的双侧逆。图域有分布意义、smooth core闭包识别；右端归零、左端常数自由。",
+        "尚需满足：逐项实例化此前子任务并导出原节点完整结论",
+        "尚需满足：不能仅把域定义成逆的像而略去物理域识别",
+        "尚需满足：ℓ*u=∫g*u₂dr且∫g*φ*dr=1",
+        "尚需满足：R12只使用§4源范数/§6图域，不依赖§7物理空间W02，防止循环"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    }
+  ]
+}

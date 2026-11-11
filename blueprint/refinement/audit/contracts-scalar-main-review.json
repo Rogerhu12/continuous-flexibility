@@ -1,0 +1,2501 @@
+{
+  "schema_version": 1,
+  "review_kind": "frozen_source_statement_and_acceptance_review",
+  "source_snapshot": "blueprint/refinement/audit/source-snapshot.json",
+  "snapshot_root": "C:\\Users\\Boyang\\Desktop\\Math\\ContinuousFlexibility\\scratch\\refinement-audit-20261110T180629Z",
+  "captured_at_utc": "2026-11-10T18:06:30.103423+00:00",
+  "review_scope": "Contracts/Scalar/Main/Extensions excluding R01.01",
+  "counts": {
+    "complete": 10,
+    "partial": 9,
+    "unstarted": 38
+  },
+  "reviews": [
+    {
+      "id": "S01.01",
+      "title": "保留已有完整局部证明",
+      "statement": "r>0、E>0 时，余度量坐标二次型正定 ⇔ D=E(1-p²)-k²>0；并有 D>0 ⇔ k²/E+p²<1、两个对角因子正性及余标架平方和等式。",
+      "status": "complete",
+      "rationale": "原已完整登记的点态局部结果；本次重新核对源码并将以快照重编和owner审计复核。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/Positivity.lean",
+          "declarations": [
+            "ContinuousFlexibility.radialEnergy_pos",
+            "ContinuousFlexibility.angular_factor_pos_of_discriminant_pos",
+            "ContinuousFlexibility.radial_factor_pos_of_discriminant_pos",
+            "ContinuousFlexibility.discriminant_pos_iff_height_norm_sq_lt_one",
+            "ContinuousFlexibility.remainder_matrix_determinant",
+            "ContinuousFlexibility.remainder_complete_square",
+            "ContinuousFlexibility.remainderPositive_of_discriminant_pos",
+            "ContinuousFlexibility.discriminant_pos_of_remainderPositive",
+            "ContinuousFlexibility.remainderPositive_iff_discriminant_pos",
+            "ContinuousFlexibility.radial_remainderPositive_iff_discriminant_pos"
+          ],
+          "correspondence": "原局部节点精确陈述的完整证据；不增加流形曲率或真实微分解释。"
+        },
+        {
+          "file": "ContinuousFlexibility/Scalar/Coframe.lean",
+          "declarations": [
+            "ContinuousFlexibility.coframe_square_sum"
+          ],
+          "correspondence": "原局部节点精确陈述的完整证据；不增加流形曲率或真实微分解释。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "现有 Positivity 的10条及 Coframe 的1条精确覆盖此节点",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Positivity.lean",
+              "declarations": [
+                "ContinuousFlexibility.radialEnergy_pos",
+                "ContinuousFlexibility.angular_factor_pos_of_discriminant_pos",
+                "ContinuousFlexibility.radial_factor_pos_of_discriminant_pos",
+                "ContinuousFlexibility.discriminant_pos_iff_height_norm_sq_lt_one",
+                "ContinuousFlexibility.remainder_matrix_determinant",
+                "ContinuousFlexibility.remainder_complete_square",
+                "ContinuousFlexibility.remainderPositive_of_discriminant_pos",
+                "ContinuousFlexibility.discriminant_pos_of_remainderPositive",
+                "ContinuousFlexibility.remainderPositive_iff_discriminant_pos",
+                "ContinuousFlexibility.radial_remainderPositive_iff_discriminant_pos"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/Coframe.lean",
+              "declarations": [
+                "ContinuousFlexibility.coframe_square_sum"
+              ]
+            }
+          ],
+          "correspondence": "原已完整登记的点态局部结果；本次重新核对源码并将以快照重编和owner审计复核。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "尚未声称识别了流形范数或曲率",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Positivity.lean",
+              "declarations": [
+                "ContinuousFlexibility.radialEnergy_pos",
+                "ContinuousFlexibility.angular_factor_pos_of_discriminant_pos",
+                "ContinuousFlexibility.radial_factor_pos_of_discriminant_pos",
+                "ContinuousFlexibility.discriminant_pos_iff_height_norm_sq_lt_one",
+                "ContinuousFlexibility.remainder_matrix_determinant",
+                "ContinuousFlexibility.remainder_complete_square",
+                "ContinuousFlexibility.remainderPositive_of_discriminant_pos",
+                "ContinuousFlexibility.discriminant_pos_of_remainderPositive",
+                "ContinuousFlexibility.remainderPositive_iff_discriminant_pos",
+                "ContinuousFlexibility.radial_remainderPositive_iff_discriminant_pos"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/Coframe.lean",
+              "declarations": [
+                "ContinuousFlexibility.coframe_square_sum"
+              ]
+            }
+          ],
+          "correspondence": "原已完整登记的点态局部结果；本次重新核对源码并将以快照重编和owner审计复核。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/Positivity.lean": "0c8239d8a040fdf3abdcf2e442f4642fbb376a088494df01bfa8a26c1e65a616",
+        "ContinuousFlexibility/Scalar/Coframe.lean": "20526165fa39512cb2bfb3dbc474428b6af9aed32af04f0f8058a1ff4bfcced2"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S02.01",
+      "title": "保留已有完整局部证明",
+      "statement": "对明确坐标残差 Nres 和系数 a,b,c，r≠0、D>0 时 ac-b²=K₀/D²+E D^(-3/2)Nres；再加 Q≠0，c̄=c-E Nres/Q 给 ac̄-b²=K₀/D²。含径向特化与零残差时修正消失。",
+      "status": "complete",
+      "rationale": "原已完整登记的点态局部结果；本次重新核对源码并将以快照重编和owner审计复核。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/Determinant.lean",
+          "declarations": [
+            "ContinuousFlexibility.correctedAngular_eq_residual_correction",
+            "ContinuousFlexibility.correctedAngular_of_residual_zero",
+            "ContinuousFlexibility.heightQ_discriminant_identity",
+            "ContinuousFlexibility.linear_determinant_scaled",
+            "ContinuousFlexibility.inverseDThreeHalves_sq",
+            "ContinuousFlexibility.inverseDThreeHalves_pos",
+            "ContinuousFlexibility.discriminant_mul_inverseDThreeHalves_sq",
+            "ContinuousFlexibility.linear_determinant",
+            "ContinuousFlexibility.corrected_determinant_scaled",
+            "ContinuousFlexibility.corrected_determinant",
+            "ContinuousFlexibility.heightDiscriminant_radial",
+            "ContinuousFlexibility.inverseDThreeHalves_one",
+            "ContinuousFlexibility.radial_linear_coefficients",
+            "ContinuousFlexibility.radial_coordinate_residual_zero"
+          ],
+          "correspondence": "原局部节点精确陈述的完整证据；不增加流形曲率或真实微分解释。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "14条定理已覆盖点态代数",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Determinant.lean",
+              "declarations": [
+                "ContinuousFlexibility.correctedAngular_eq_residual_correction",
+                "ContinuousFlexibility.correctedAngular_of_residual_zero",
+                "ContinuousFlexibility.heightQ_discriminant_identity",
+                "ContinuousFlexibility.linear_determinant_scaled",
+                "ContinuousFlexibility.inverseDThreeHalves_sq",
+                "ContinuousFlexibility.inverseDThreeHalves_pos",
+                "ContinuousFlexibility.discriminant_mul_inverseDThreeHalves_sq",
+                "ContinuousFlexibility.linear_determinant",
+                "ContinuousFlexibility.corrected_determinant_scaled",
+                "ContinuousFlexibility.corrected_determinant",
+                "ContinuousFlexibility.heightDiscriminant_radial",
+                "ContinuousFlexibility.inverseDThreeHalves_one",
+                "ContinuousFlexibility.radial_linear_coefficients",
+                "ContinuousFlexibility.radial_coordinate_residual_zero"
+              ]
+            }
+          ],
+          "correspondence": "原已完整登记的点态局部结果；本次重新核对源码并将以快照重编和owner审计复核。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "实际残差的微分识别另在S03/S05",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Determinant.lean",
+              "declarations": [
+                "ContinuousFlexibility.correctedAngular_eq_residual_correction",
+                "ContinuousFlexibility.correctedAngular_of_residual_zero",
+                "ContinuousFlexibility.heightQ_discriminant_identity",
+                "ContinuousFlexibility.linear_determinant_scaled",
+                "ContinuousFlexibility.inverseDThreeHalves_sq",
+                "ContinuousFlexibility.inverseDThreeHalves_pos",
+                "ContinuousFlexibility.discriminant_mul_inverseDThreeHalves_sq",
+                "ContinuousFlexibility.linear_determinant",
+                "ContinuousFlexibility.corrected_determinant_scaled",
+                "ContinuousFlexibility.corrected_determinant",
+                "ContinuousFlexibility.heightDiscriminant_radial",
+                "ContinuousFlexibility.inverseDThreeHalves_one",
+                "ContinuousFlexibility.radial_linear_coefficients",
+                "ContinuousFlexibility.radial_coordinate_residual_zero"
+              ]
+            }
+          ],
+          "correspondence": "原已完整登记的点态局部结果；本次重新核对源码并将以快照重编和owner审计复核。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/Determinant.lean": "ee227d182326377abc45e2f81f083bc63403cf9d3af76d028f7d98dcccc0f436"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "C00.01",
+      "title": "标准球面与光滑阶的类型接口",
+      "statement": "固定E3、标准S2及现有球面光滑结构，统一C∞所用ContDiff/ContMDiff阶为∞。",
+      "status": "partial",
+      "rationale": "项目已固定真实E3和C∞阶，但快照没有标准S2类型及其球面图册接口。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Geometry/GraphEmbedding.lean",
+          "declarations": [
+            "ContinuousFlexibility.E3"
+          ],
+          "correspondence": "E3为实际三维EuclideanSpace；现有ContDiff阶使用∞。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "S2确为标准单位球面的子类型。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Geometry/GraphEmbedding.lean",
+              "declarations": [
+                "ContinuousFlexibility.E3"
+              ]
+            }
+          ],
+          "correspondence": "项目已固定真实E3和C∞阶，但快照没有标准S2类型及其球面图册接口。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "平坦bump相关接口不使用解析阶⊤。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Geometry/GraphEmbedding.lean",
+              "declarations": [
+                "ContinuousFlexibility.E3"
+              ]
+            }
+          ],
+          "correspondence": "项目已固定真实E3和C∞阶，但快照没有标准S2类型及其球面图册接口。"
+        }
+      ],
+      "remaining": [
+        "固定标准单位球面子类型及ContMDiff光滑图册接口。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Geometry/GraphEmbedding.lean": "21de271b588de7e2e688bcb577ef4997edf8c8fa34676b5fb98d2c3c03c8e286"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "C00.02",
+      "title": "环带输入字段与条件输出区分",
+      "statement": "逐字段核对FlatAnnularCore及AnnularSolution的实际函数、两端常数、正性区域和扩大领圈；给出条件性发展输出的统一参数接口。",
+      "status": "complete",
+      "rationale": "实际Core与扩大领圈接口及同一Core参数化的发展输出均已构造；这些定理显式以A:FlatAnnularCore为输入，没有产生Core非空假设之外的存在性声明。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Contracts/Annular.lean",
+          "declarations": [
+            "ContinuousFlexibility.FlatAnnularCore",
+            "ContinuousFlexibility.AnnularSolution",
+            "ContinuousFlexibility.FlatAnnularCore.enlarge",
+            "ContinuousFlexibility.AnnularSolution.left_collar",
+            "ContinuousFlexibility.AnnularSolution.right_collar",
+            "ContinuousFlexibility.AnnularSolution.left_collar_nonempty",
+            "ContinuousFlexibility.AnnularSolution.right_collar_nonempty"
+          ],
+          "correspondence": "Core只在Ioo a b要求w>0；AnnularSolution继承同一w,z且两侧真实领圈w=0、高度分别cLeft/cRight。"
+        },
+        {
+          "file": "ContinuousFlexibility/Contracts/IsometricGraph.lean",
+          "declarations": [
+            "ContinuousFlexibility.IsometricGraphDevelopment",
+            "ContinuousFlexibility.FlatAnnularCore.exists_isometricGraphDevelopment",
+            "ContinuousFlexibility.FlatAnnularCore.graphDevelopment",
+            "ContinuousFlexibility.AnnularSolution.exists_isometricGraphDisk"
+          ],
+          "correspondence": "输出indexed by同一A并由A实际构造发展/图盘；没有Nonempty FlatAnnularCore结论。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "扩大环带上的w=0领圈不被要求严格正。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Contracts/Annular.lean",
+              "declarations": [
+                "ContinuousFlexibility.FlatAnnularCore",
+                "ContinuousFlexibility.AnnularSolution",
+                "ContinuousFlexibility.FlatAnnularCore.enlarge",
+                "ContinuousFlexibility.AnnularSolution.left_collar",
+                "ContinuousFlexibility.AnnularSolution.right_collar",
+                "ContinuousFlexibility.AnnularSolution.left_collar_nonempty",
+                "ContinuousFlexibility.AnnularSolution.right_collar_nonempty"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Contracts/IsometricGraph.lean",
+              "declarations": [
+                "ContinuousFlexibility.IsometricGraphDevelopment",
+                "ContinuousFlexibility.FlatAnnularCore.exists_isometricGraphDevelopment",
+                "ContinuousFlexibility.FlatAnnularCore.graphDevelopment",
+                "ContinuousFlexibility.AnnularSolution.exists_isometricGraphDisk"
+              ]
+            }
+          ],
+          "correspondence": "Core正性字段只限原环带，左右collar定理实际给w=0及独立常高度。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "Core到发展的条件构造不充当Core非空。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Contracts/Annular.lean",
+              "declarations": [
+                "ContinuousFlexibility.FlatAnnularCore",
+                "ContinuousFlexibility.AnnularSolution",
+                "ContinuousFlexibility.FlatAnnularCore.enlarge",
+                "ContinuousFlexibility.AnnularSolution.left_collar",
+                "ContinuousFlexibility.AnnularSolution.right_collar",
+                "ContinuousFlexibility.AnnularSolution.left_collar_nonempty",
+                "ContinuousFlexibility.AnnularSolution.right_collar_nonempty"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Contracts/IsometricGraph.lean",
+              "declarations": [
+                "ContinuousFlexibility.IsometricGraphDevelopment",
+                "ContinuousFlexibility.FlatAnnularCore.exists_isometricGraphDevelopment",
+                "ContinuousFlexibility.FlatAnnularCore.graphDevelopment",
+                "ContinuousFlexibility.AnnularSolution.exists_isometricGraphDisk"
+              ]
+            }
+          ],
+          "correspondence": "所有输出定理都保留显式A输入；实例化Core仍是N12/MAIN.01义务。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Contracts/Annular.lean": "9940457e243dc1e4a40d89105b67ad8bb77429999591de31f730476a9f7eb6a7",
+        "ContinuousFlexibility/Contracts/IsometricGraph.lean": "0b1b61403fe28245dabce8ecbde93fcfad00550513e37047e4a9162f97e71638"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S03.01",
+      "title": "实际高度jet与混合导数",
+      "statement": "把p、k及各偏导绑定到实际w,z，证明r∂rp=∂θk-p与所需混合导数交换。",
+      "status": "complete",
+      "rationale": "p、k都由真实fderiv定义；C²条件下混合偏导交换和高度兼容恒等式已实际证明。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/HeightDerivatives.lean",
+          "declarations": [
+            "ContinuousFlexibility.radial_angular_commute",
+            "ContinuousFlexibility.height_compatibility",
+            "ContinuousFlexibility.radialPartial_polarDiscriminant",
+            "ContinuousFlexibility.angularPartial_polarDiscriminant"
+          ],
+          "correspondence": "精确r p_r=kθ-p与真实混合偏导。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "量化真实可微函数而非自由jet。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/HeightDerivatives.lean",
+              "declarations": [
+                "ContinuousFlexibility.radial_angular_commute",
+                "ContinuousFlexibility.height_compatibility",
+                "ContinuousFlexibility.radialPartial_polarDiscriminant",
+                "ContinuousFlexibility.angularPartial_polarDiscriminant"
+              ]
+            }
+          ],
+          "correspondence": "p、k都由真实fderiv定义；C²条件下混合偏导交换和高度兼容恒等式已实际证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "r>0及可微阶假设足够且明确。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/HeightDerivatives.lean",
+              "declarations": [
+                "ContinuousFlexibility.radial_angular_commute",
+                "ContinuousFlexibility.height_compatibility",
+                "ContinuousFlexibility.radialPartial_polarDiscriminant",
+                "ContinuousFlexibility.angularPartial_polarDiscriminant"
+              ]
+            }
+          ],
+          "correspondence": "p、k都由真实fderiv定义；C²条件下混合偏导交换和高度兼容恒等式已实际证明。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/HeightDerivatives.lean": "23f1e5b32150474d94f01611a11a83f47bc4b99fa190d390dfec96b9ae832d12"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S03.02",
+      "title": "真实余标架结构方程",
+      "statement": "对实际余标架逐坐标证明Cartan一阶结构方程。",
+      "status": "complete",
+      "rationale": "真实Cartan方程由实际高度jet与正定余标架给出，平方根仅用于D>0且与S01同一余度量平方和相连。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/Cartan.lean",
+          "declarations": [
+            "ContinuousFlexibility.polar_cartan_equations",
+            "ContinuousFlexibility.polar_coframe_determinant_pos"
+          ],
+          "correspondence": "由实际w,z及r≠0,D>0得到两个结构方程及定向。"
+        },
+        {
+          "file": "ContinuousFlexibility/Geometry/HeightCoframe.lean",
+          "declarations": [
+            "ContinuousFlexibility.heightCoframe_square_sum",
+            "ContinuousFlexibility.heightCoframe_cartan"
+          ],
+          "correspondence": "同一height coframe的实际二次型和Cartan形式版本。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "平方根和除法只用于D>0区域。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Cartan.lean",
+              "declarations": [
+                "ContinuousFlexibility.polar_cartan_equations",
+                "ContinuousFlexibility.polar_coframe_determinant_pos"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Geometry/HeightCoframe.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightCoframe_square_sum",
+                "ContinuousFlexibility.heightCoframe_cartan"
+              ]
+            }
+          ],
+          "correspondence": "真实Cartan方程由实际高度jet与正定余标架给出，平方根仅用于D>0且与S01同一余度量平方和相连。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "与S01的同一个余度量配对。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Cartan.lean",
+              "declarations": [
+                "ContinuousFlexibility.polar_cartan_equations",
+                "ContinuousFlexibility.polar_coframe_determinant_pos"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Geometry/HeightCoframe.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightCoframe_square_sum",
+                "ContinuousFlexibility.heightCoframe_cartan"
+              ]
+            }
+          ],
+          "correspondence": "真实Cartan方程由实际高度jet与正定余标架给出，平方根仅用于D>0且与S01同一余度量平方和相连。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/Cartan.lean": "c9d078867a36645c4421772ab91afbc97d06ce3490c69f40d330448757e9214a",
+        "ContinuousFlexibility/Geometry/HeightCoframe.lean": "6e326c487079bbf7582b1355324397fdaae515a3b77aae916dd0b7e2f06c89eb"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S03.03",
+      "title": "连接与残差的二阶识别",
+      "statement": "证明真实α的表达式与dα=rNres dr∧dθ。",
+      "status": "complete",
+      "rationale": "连接由实际系数定义；真实外微分严格等于r乘原残差，因此残差零给闭连接，dr∧dθ因子显式保留。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/Connection.lean",
+          "declarations": [
+            "ContinuousFlexibility.polar_connectionCurl_eq_residual",
+            "ContinuousFlexibility.polar_connection_closed_iff"
+          ],
+          "correspondence": "连接curl与rNres的真实二阶导数识别。"
+        },
+        {
+          "file": "ContinuousFlexibility/Geometry/HeightCoframe.lean",
+          "declarations": [
+            "ContinuousFlexibility.heightConnectionForm",
+            "ContinuousFlexibility.heightConnection_exterior_eq_residual",
+            "ContinuousFlexibility.heightConnection_closed_of_residual_zero"
+          ],
+          "correspondence": "实际一形式α及闭连接结论。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "角向源密度的r因子不丢失。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Connection.lean",
+              "declarations": [
+                "ContinuousFlexibility.polar_connectionCurl_eq_residual",
+                "ContinuousFlexibility.polar_connection_closed_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Geometry/HeightCoframe.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightConnectionForm",
+                "ContinuousFlexibility.heightConnection_exterior_eq_residual",
+                "ContinuousFlexibility.heightConnection_closed_of_residual_zero"
+              ]
+            }
+          ],
+          "correspondence": "连接由实际系数定义；真实外微分严格等于r乘原残差，因此残差零给闭连接，dr∧dθ因子显式保留。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "残差零给真正闭连接。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Connection.lean",
+              "declarations": [
+                "ContinuousFlexibility.polar_connectionCurl_eq_residual",
+                "ContinuousFlexibility.polar_connection_closed_iff"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Geometry/HeightCoframe.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightConnectionForm",
+                "ContinuousFlexibility.heightConnection_exterior_eq_residual",
+                "ContinuousFlexibility.heightConnection_closed_of_residual_zero"
+              ]
+            }
+          ],
+          "correspondence": "连接由实际系数定义；真实外微分严格等于r乘原残差，因此残差零给闭连接，dr∧dθ因子显式保留。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/Connection.lean": "d02b087ed6a6ce07e0bad8fa3ca6ea19a04ba838ca8190b94c4939adef3708f4",
+        "ContinuousFlexibility/Geometry/HeightCoframe.lean": "6e326c487079bbf7582b1355324397fdaae515a3b77aae916dd0b7e2f06c89eb"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S03.04",
+      "title": "高度变分的实际导数",
+      "statement": "对z+sη求实际参数导数，证明对称散度系数及混合偏导相容。",
+      "status": "complete",
+      "rationale": "仿射高度族的全部一二阶空间jet参数导数已证明，并组合成真实HasDerivAt的对称散度线性化。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/HeightVariation.lean",
+          "declarations": [
+            "ContinuousFlexibility.hasDerivAt_heightRadial_heightFamily",
+            "ContinuousFlexibility.hasDerivAt_heightAngular_heightFamily",
+            "ContinuousFlexibility.hasDerivAt_radialPartial_heightRadial_heightFamily",
+            "ContinuousFlexibility.hasDerivAt_radialPartial_heightAngular_heightFamily",
+            "ContinuousFlexibility.hasDerivAt_angularPartial_heightAngular_heightFamily",
+            "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_heightFamily"
+          ],
+          "correspondence": "高度一二阶变化及原残差实际参数导数。"
+        },
+        {
+          "file": "ContinuousFlexibility/Scalar/Linearization.lean",
+          "declarations": [
+            "ContinuousFlexibility.heightLinearizedDivergence_eq_variation",
+            "ContinuousFlexibility.polarResidualVariation_eq_divergence",
+            "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_divergence",
+            "ContinuousFlexibility.hasDerivAt_radialScaledResidual_divergence"
+          ],
+          "correspondence": "扩展系数被识别为真实散度而非独立jet代数。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "含全部高度一二阶变化项。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/HeightVariation.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_heightRadial_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_heightAngular_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_radialPartial_heightRadial_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_radialPartial_heightAngular_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_angularPartial_heightAngular_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_heightFamily"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/Linearization.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_variation",
+                "ContinuousFlexibility.polarResidualVariation_eq_divergence",
+                "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_divergence",
+                "ContinuousFlexibility.hasDerivAt_radialScaledResidual_divergence"
+              ]
+            }
+          ],
+          "correspondence": "仿射高度族的全部一二阶空间jet参数导数已证明，并组合成真实HasDerivAt的对称散度线性化。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "结论是微分恒等式而非形式系数定义。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/HeightVariation.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_heightRadial_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_heightAngular_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_radialPartial_heightRadial_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_radialPartial_heightAngular_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_angularPartial_heightAngular_heightFamily",
+                "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_heightFamily"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/Linearization.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_variation",
+                "ContinuousFlexibility.polarResidualVariation_eq_divergence",
+                "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_divergence",
+                "ContinuousFlexibility.hasDerivAt_radialScaledResidual_divergence"
+              ]
+            }
+          ],
+          "correspondence": "仿射高度族的全部一二阶空间jet参数导数已证明，并组合成真实HasDerivAt的对称散度线性化。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/HeightVariation.lean": "d455c46769f752f8527812bf29e329b7e1647bf3f31a7ca4102b1f29444ed798",
+        "ContinuousFlexibility/Scalar/Linearization.lean": "dd3c6eda3a906801e19df493bc436d62d6b2e29a3d4fa04f7608456b9b79e7bb"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S03.05",
+      "title": "零残差的局部发展桥接",
+      "statement": "把闭连接、旋转余标架和局部积分连成实际局部欧氏余度量结论。",
+      "status": "complete",
+      "rationale": "在明确凸开局部域上，从真实残差零、闭连接和闭余标架积分得到实际C∞局部发展、余度量等式及光滑局部逆；不要求环带上的全局primitive。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Geometry/Primitive.lean",
+          "declarations": [
+            "ContinuousFlexibility.exists_primitive_of_closed",
+            "ContinuousFlexibility.exists_smooth_development_of_closed_coframe"
+          ],
+          "correspondence": "原函数只在凸开域使用。"
+        },
+        {
+          "file": "ContinuousFlexibility/Geometry/FlatDevelopment.lean",
+          "declarations": [
+            "ContinuousFlexibility.exists_smooth_remainder_development",
+            "ContinuousFlexibility.exists_locally_invertible_remainder_development",
+            "ContinuousFlexibility.development_pullback_bilinear"
+          ],
+          "correspondence": "实际平方和、双线性配对和局部C∞逆。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "局部原函数的区域条件明确。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Geometry/Primitive.lean",
+              "declarations": [
+                "ContinuousFlexibility.exists_primitive_of_closed",
+                "ContinuousFlexibility.exists_smooth_development_of_closed_coframe"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Geometry/FlatDevelopment.lean",
+              "declarations": [
+                "ContinuousFlexibility.exists_smooth_remainder_development",
+                "ContinuousFlexibility.exists_locally_invertible_remainder_development",
+                "ContinuousFlexibility.development_pullback_bilinear"
+              ]
+            }
+          ],
+          "correspondence": "在明确凸开局部域上，从真实残差零、闭连接和闭余标架积分得到实际C∞局部发展、余度量等式及光滑局部逆；不要求环带上的全局primitive。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不假设环带连接有全局实原函数。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Geometry/Primitive.lean",
+              "declarations": [
+                "ContinuousFlexibility.exists_primitive_of_closed",
+                "ContinuousFlexibility.exists_smooth_development_of_closed_coframe"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Geometry/FlatDevelopment.lean",
+              "declarations": [
+                "ContinuousFlexibility.exists_smooth_remainder_development",
+                "ContinuousFlexibility.exists_locally_invertible_remainder_development",
+                "ContinuousFlexibility.development_pullback_bilinear"
+              ]
+            }
+          ],
+          "correspondence": "在明确凸开局部域上，从真实残差零、闭连接和闭余标架积分得到实际C∞局部发展、余度量等式及光滑局部逆；不要求环带上的全局primitive。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Geometry/Primitive.lean": "161b26739074b8080a8e552710658dd50e707d2ef4a408013976b3694bf453b6",
+        "ContinuousFlexibility/Geometry/FlatDevelopment.lean": "78dd60da4c54a7ac23085c024521362e6aa1b7c638768dadf24fce16f6559587"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S03.06",
+      "title": "函数空间光滑与导数接口",
+      "statement": "在W02实际levels上把上述坐标公式提升为联合smooth tame映射及其实际方向导数。",
+      "status": "unstarted",
+      "rationale": "没有实际W02加权levels上的联合smooth tame残差接口；当前只有坐标/有限维参数C∞。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "点态C∞与函数空间smooth tame分别证明。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有实际W02加权levels上的联合smooth tame残差接口；当前只有坐标/有限维参数C∞。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "全部估计使用同一低阶邻域及固定损失。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有实际W02加权levels上的联合smooth tame残差接口；当前只有坐标/有限维参数C∞。"
+        }
+      ],
+      "remaining": [
+        "实际加权函数空间、全阶方向微分与同一低阶邻域估计。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S03.07",
+      "title": "标量核心局部节点组合",
+      "statement": "将真实坐标微分、闭连接/发展、散度变分和函数空间接口合为原S03完整结论。",
+      "status": "partial",
+      "rationale": "真实标量坐标计算和局部发展均已有，但节点要求的函数空间接口尚未实现。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/Linearization.lean",
+          "declarations": [
+            "ContinuousFlexibility.hasDerivAt_radialScaledResidual_divergence"
+          ],
+          "correspondence": "源仍为dr dθ的实际线性化。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "逐条核对prop:scalar-core对应公式。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Linearization.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_radialScaledResidual_divergence"
+              ]
+            }
+          ],
+          "correspondence": "真实标量坐标计算和局部发展均已有，但节点要求的函数空间接口尚未实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "源仍是dr dθ而不是未识别的加权测度。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Linearization.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_radialScaledResidual_divergence"
+              ]
+            }
+          ],
+          "correspondence": "真实标量坐标计算和局部发展均已有，但节点要求的函数空间接口尚未实现。"
+        }
+      ],
+      "remaining": [
+        "S03.06全部函数空间smooth tame接口。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/Linearization.lean": "dd3c6eda3a906801e19df493bc436d62d6b2e29a3d4fa04f7608456b9b79e7bb"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S04.01",
+      "title": "参数商的可去延拓",
+      "statement": "以参数线段积分定义Fq在q=0的真实延拓并识别其值为线性化。",
+      "status": "partial",
+      "rationale": "q=0的真实C∞可去延拓及q≠0商等式已证明；采用显式二次多项式因子化，尚未给任务明确要求的参数线段积分表示/定义。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/Normalization.lean",
+          "declarations": [
+            "ContinuousFlexibility.normalizedHeightResidual",
+            "ContinuousFlexibility.normalizedHeightResidual_of_ne_zero",
+            "ContinuousFlexibility.normalizedHeightResidual_eq_factored",
+            "ContinuousFlexibility.contDiffAt_normalizedHeightResidual_of_residual_zero"
+          ],
+          "correspondence": "真实连续/光滑可去延拓，不只是命名q=0值。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "q≠0处等于rN(h+qu)/q。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Normalization.lean",
+              "declarations": [
+                "ContinuousFlexibility.normalizedHeightResidual",
+                "ContinuousFlexibility.normalizedHeightResidual_of_ne_zero",
+                "ContinuousFlexibility.normalizedHeightResidual_eq_factored",
+                "ContinuousFlexibility.contDiffAt_normalizedHeightResidual_of_residual_zero"
+              ]
+            }
+          ],
+          "correspondence": "q=0的真实C∞可去延拓及q≠0商等式已证明；采用显式二次多项式因子化，尚未给任务明确要求的参数线段积分表示/定义。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "q=0处真实可微而不是分段命名。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Normalization.lean",
+              "declarations": [
+                "ContinuousFlexibility.normalizedHeightResidual",
+                "ContinuousFlexibility.normalizedHeightResidual_of_ne_zero",
+                "ContinuousFlexibility.normalizedHeightResidual_eq_factored",
+                "ContinuousFlexibility.contDiffAt_normalizedHeightResidual_of_residual_zero"
+              ]
+            }
+          ],
+          "correspondence": "q=0的真实C∞可去延拓及q≠0商等式已证明；采用显式二次多项式因子化，尚未给任务明确要求的参数线段积分表示/定义。"
+        }
+      ],
+      "remaining": [
+        "以参数线段积分表示同一个Fq并识别q=0线性化值的完整恒等式。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/Normalization.lean": "3ca9fddab69f928baef1e0073ab1be24719529c6c45dbe1f14facd808d83fbaa"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S04.02",
+      "title": "高度与度量的混合参数导数",
+      "statement": "证明Fq对q、u、w的混合方向微分及积分表达式，包含h_w的变化。",
+      "status": "partial",
+      "rationale": "已有高度参数导数和独立E,k,p的连接变化公式，但没有Fq对w,u,q全部混合方向导数及h_w随w变化的完整积分交换结论。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/ConnectionVariation.lean",
+          "declarations": [
+            "ContinuousFlexibility.hasDerivAt_connectionInverseRoot",
+            "ContinuousFlexibility.hasDerivAt_connectionB1",
+            "ContinuousFlexibility.hasDerivAt_connectionAngularValue"
+          ],
+          "correspondence": "含dE,dk,dp的真实有限维参数导数。"
+        },
+        {
+          "file": "ContinuousFlexibility/Scalar/HeightVariation.lean",
+          "declarations": [
+            "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_heightFamily"
+          ],
+          "correspondence": "固定w的高度导数。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "度量变化时基准高度随w求导。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/ConnectionVariation.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_connectionInverseRoot",
+                "ContinuousFlexibility.hasDerivAt_connectionB1",
+                "ContinuousFlexibility.hasDerivAt_connectionAngularValue"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/HeightVariation.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_heightFamily"
+              ]
+            }
+          ],
+          "correspondence": "已有高度参数导数和独立E,k,p的连接变化公式，但没有Fq对w,u,q全部混合方向导数及h_w随w变化的完整积分交换结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "有限矩形中的参数与积分交换条件明确。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/ConnectionVariation.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_connectionInverseRoot",
+                "ContinuousFlexibility.hasDerivAt_connectionB1",
+                "ContinuousFlexibility.hasDerivAt_connectionAngularValue"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/HeightVariation.lean",
+              "declarations": [
+                "ContinuousFlexibility.hasDerivAt_polarCoordinateResidual_heightFamily"
+              ]
+            }
+          ],
+          "correspondence": "已有高度参数导数和独立E,k,p的连接变化公式，但没有Fq对w,u,q全部混合方向导数及h_w随w变化的完整积分交换结论。"
+        }
+      ],
+      "remaining": [
+        "将w变化、h_w变化及混合参数积分表达式组合到同一Fq。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/ConnectionVariation.lean": "ec958c85fd58fcca739a8592362000a5b6c2fd0e8a921cb474abbfcadb43ef77",
+        "ContinuousFlexibility/Scalar/HeightVariation.lean": "d455c46769f752f8527812bf29e329b7e1647bf3f31a7ca4102b1f29444ed798"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S04.03",
+      "title": "有限领圈守恒与角平均",
+      "statement": "由真实连接period推导常高度领圈情况下的归一化源积分为零。",
+      "status": "complete",
+      "rationale": "有限矩形上实际连接守恒、左右独立常高度领圈的标准连接、归一化角平均及包括q=0的基线Fq积分零均已证明。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/Conservation.lean",
+          "declarations": [
+            "ContinuousFlexibility.heightConnection_of_flat_collar",
+            "ContinuousFlexibility.integral_heightResidual_eq_zero_of_flat_collars",
+            "ContinuousFlexibility.integral_mean_heightResidual_eq_zero"
+          ],
+          "correspondence": "两边真实α=dθ，T=2π时各period均为2π；FTC+Fubini保留物理dr源和1/T角平均。"
+        },
+        {
+          "file": "ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+          "declarations": [
+            "ContinuousFlexibility.integral_mean_normalizedHeightResidual_eq_zero_of_ne_zero",
+            "ContinuousFlexibility.integral_mean_normalizedHeightResidual_radialHeight_eq_zero"
+          ],
+          "correspondence": "同一归一化Fq的零均值包含q≠0和实际径向基线q=0。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "两端连接period均为2π。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Conservation.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightConnection_of_flat_collar",
+                "ContinuousFlexibility.integral_heightResidual_eq_zero_of_flat_collars",
+                "ContinuousFlexibility.integral_mean_heightResidual_eq_zero"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+              "declarations": [
+                "ContinuousFlexibility.integral_mean_normalizedHeightResidual_eq_zero_of_ne_zero",
+                "ContinuousFlexibility.integral_mean_normalizedHeightResidual_radialHeight_eq_zero"
+              ]
+            }
+          ],
+          "correspondence": "有限矩形上实际连接守恒、左右独立常高度领圈的标准连接、归一化角平均及包括q=0的基线Fq积分零均已证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "角平均明确归一化测度且源为dr。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/Conservation.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightConnection_of_flat_collar",
+                "ContinuousFlexibility.integral_heightResidual_eq_zero_of_flat_collars",
+                "ContinuousFlexibility.integral_mean_heightResidual_eq_zero"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+              "declarations": [
+                "ContinuousFlexibility.integral_mean_normalizedHeightResidual_eq_zero_of_ne_zero",
+                "ContinuousFlexibility.integral_mean_normalizedHeightResidual_radialHeight_eq_zero"
+              ]
+            }
+          ],
+          "correspondence": "有限矩形上实际连接守恒、左右独立常高度领圈的标准连接、归一化角平均及包括q=0的基线Fq积分零均已证明。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/Conservation.lean": "7c0ae9361932bbc987816911fcd0e4e3695d73e16d113db7e2ed7c89cefd2419",
+        "ContinuousFlexibility/Scalar/NormalizedConservation.lean": "031d94bded5c743d6ef031d18e6d85f30cfe9b3f3ef25f7c2cce6479d80bbbe8"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S04.04",
+      "title": "加权平坦端点的守恒极限",
+      "statement": "用W03端点估计将有限截断守恒推进原环带，证明边界项与参数导数交换的统一控制。",
+      "status": "unstarted",
+      "rationale": "尚无实际W03加权端点估计到有限截断守恒极限的共同参数证明。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是重新假定端点边界项为零。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际W03加权端点估计到有限截断守恒极限的共同参数证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "所有所需导数共用一个参数邻域。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际W03加权端点估计到有限截断守恒极限的共同参数证明。"
+        }
+      ],
+      "remaining": [
+        "端点项真实极限、所有参数导数交换及同一参数邻域。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S04.05",
+      "title": "归一化残差的smooth tame兼容性",
+      "statement": "在实际加权空间证明Fq联合smooth tame以及全部高度/度量导数落在兼容源子空间。",
+      "status": "unstarted",
+      "rationale": "实际W02/W03源空间及联合smooth tame残差未实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "零均值来自实际积分等式。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际W02/W03源空间及联合smooth tame残差未实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "包含q=0及非零q同一开集。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际W02/W03源空间及联合smooth tame残差未实现。"
+        }
+      ],
+      "remaining": [
+        "Fq在实际加权开集的smooth tame与全部混合导数源兼容。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S04.06",
+      "title": "守恒节点完整组合",
+      "statement": "统一可去延拓、全部真实混合微分、端点极限及兼容源约束。",
+      "status": "partial",
+      "rationale": "点态归一化与有限矩形守恒有证明；全阶混合导数、加权端点极限和函数空间兼容性未组合。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+          "declarations": [
+            "ContinuousFlexibility.integral_mean_normalizedHeightResidual_radialHeight_eq_zero"
+          ],
+          "correspondence": "有限矩形、明确边界jet下的实际Fq守恒。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "原积分表示和q=0值同时成立。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+              "declarations": [
+                "ContinuousFlexibility.integral_mean_normalizedHeightResidual_radialHeight_eq_zero"
+              ]
+            }
+          ],
+          "correspondence": "点态归一化与有限矩形守恒有证明；全阶混合导数、加权端点极限和函数空间兼容性未组合。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "以后N08能直接使用同一个Fq。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+              "declarations": [
+                "ContinuousFlexibility.integral_mean_normalizedHeightResidual_radialHeight_eq_zero"
+              ]
+            }
+          ],
+          "correspondence": "点态归一化与有限矩形守恒有证明；全阶混合导数、加权端点极限和函数空间兼容性未组合。"
+        }
+      ],
+      "remaining": [
+        "S04.01的积分表示、S04.02、S04.04、S04.05完整覆盖。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/NormalizedConservation.lean": "031d94bded5c743d6ef031d18e6d85f30cfe9b3f3ef25f7c2cce6479d80bbbe8"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S05.01",
+      "title": "真实修正算子系数识别",
+      "statement": "将S02代数代入S03真实变分，得到Lbar及q∂θ(B A ηθ)精确恒等式。",
+      "status": "partial",
+      "rationale": "已证明精确系数/空间散度比较及真实rN高度导数；但尚未证明固定q时u↦normalizedHeightResidual的实际方向导数等于该空间散度，尤其q=0。论文左端D_u Fq的桥接不能省略。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+          "declarations": [
+            "ContinuousFlexibility.polarTypeB",
+            "ContinuousFlexibility.polarCorrectedC_eq_residual_correction",
+            "ContinuousFlexibility.polarCorrectedC_eq_typeB",
+            "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_of_smooth",
+            "ContinuousFlexibility.hasDerivAt_radialScaledResidual_corrected",
+            "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+          ],
+          "correspondence": "不是O(q)估计，而是原修正Lbar与q∂θ(B Fq ηθ)的精确恒等式；hQ和D>0用于真实系数正则。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "B=E/(rQ)仅在合法区域使用。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.polarTypeB",
+                "ContinuousFlexibility.polarCorrectedC_eq_residual_correction",
+                "ContinuousFlexibility.polarCorrectedC_eq_typeB",
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_of_smooth",
+                "ContinuousFlexibility.hasDerivAt_radialScaledResidual_corrected",
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+              ]
+            }
+          ],
+          "correspondence": "实际高度变分的修正散度比较、B=E/(rQ)定义及同一归一化源产生的精确q角向散度误差均已证明；合法域条件显式。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不把残差误差量级代替精确恒等式。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.polarTypeB",
+                "ContinuousFlexibility.polarCorrectedC_eq_residual_correction",
+                "ContinuousFlexibility.polarCorrectedC_eq_typeB",
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_of_smooth",
+                "ContinuousFlexibility.hasDerivAt_radialScaledResidual_corrected",
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+              ]
+            }
+          ],
+          "correspondence": "实际高度变分的修正散度比较、B=E/(rQ)定义及同一归一化源产生的精确q角向散度误差均已证明；合法域条件显式。"
+        }
+      ],
+      "remaining": [
+        "对u+tη、固定q证明normalizedHeightResidual真实state-path方向导数，包括q=0，再与精确q角向散度恒等式合并。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/TypeCorrection.lean": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit",
+      "independent_review": "独立复核确认C00.02、S04.03、S05.03完整；本项因normalized state derivative桥缺失降为partial。"
+    },
+    {
+      "id": "S05.02",
+      "title": "独立残差与增量双线性",
+      "statement": "将修正误差单独定义于独立残差和高度增量并验证各变量线性。",
+      "status": "partial",
+      "rationale": "已有代入实际残差的精确误差乘积，但未对独立任意残差r及增量η定义并证明双线性和源兼容。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+          "declarations": [
+            "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+          ],
+          "correspondence": "实际残差代入后的精确角向散度。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是只验证代入实际残差后的大小界。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+              ]
+            }
+          ],
+          "correspondence": "已有代入实际残差的精确误差乘积，但未对独立任意残差r及增量η定义并证明双线性和源兼容。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "散度形式保持源兼容。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+              ]
+            }
+          ],
+          "correspondence": "已有代入实际残差的精确误差乘积，但未对独立任意残差r及增量η定义并证明双线性和源兼容。"
+        }
+      ],
+      "remaining": [
+        "独立变量的线性/双线性映射及兼容源证明。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/TypeCorrection.lean": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S05.03",
+      "title": "法向通量与Green配对",
+      "statement": "对明确端点/测试函数条件证明修正不改法向通量、形式对称且杀常数。",
+      "status": "complete",
+      "rationale": "修正前后法向通量的A,B定义完全相同；真实Green配对、明确周期/Dirichlet/Robin或端点jet条件及杀常数均已证明。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+          "declarations": [
+            "ContinuousFlexibility.heightCorrectedDivergence",
+            "ContinuousFlexibility.heightCorrectedDivergence_const",
+            "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected"
+          ],
+          "correspondence": "修正只改角向C，法向A u_r+B uθ逐字相同。"
+        },
+        {
+          "file": "ContinuousFlexibility/Scalar/GreenIdentity.lean",
+          "declarations": [
+            "ContinuousFlexibility.symmetricNormalFlux",
+            "ContinuousFlexibility.greenNormalFlux_eq_zero_of_robin",
+            "ContinuousFlexibility.greenNormalFlux_eq_zero_of_dirichlet",
+            "ContinuousFlexibility.heightCorrected_green_identity",
+            "ContinuousFlexibility.integral_heightCorrected_green_eq_zero_of_admissible",
+            "ContinuousFlexibility.integral_heightCorrected_green_eq_zero_of_boundary_jets"
+          ],
+          "correspondence": "实际dr dθ积分的形式对称，端点/测试函数条件显式。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "S05只改角向系数。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightCorrectedDivergence",
+                "ContinuousFlexibility.heightCorrectedDivergence_const",
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/GreenIdentity.lean",
+              "declarations": [
+                "ContinuousFlexibility.symmetricNormalFlux",
+                "ContinuousFlexibility.greenNormalFlux_eq_zero_of_robin",
+                "ContinuousFlexibility.greenNormalFlux_eq_zero_of_dirichlet",
+                "ContinuousFlexibility.heightCorrected_green_identity",
+                "ContinuousFlexibility.integral_heightCorrected_green_eq_zero_of_admissible",
+                "ContinuousFlexibility.integral_heightCorrected_green_eq_zero_of_boundary_jets"
+              ]
+            }
+          ],
+          "correspondence": "修正前后法向通量的A,B定义完全相同；真实Green配对、明确周期/Dirichlet/Robin或端点jet条件及杀常数均已证明。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "Green配对与dr dθ源的密度一致。",
+          "status": "covered",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightCorrectedDivergence",
+                "ContinuousFlexibility.heightCorrectedDivergence_const",
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected"
+              ]
+            },
+            {
+              "file": "ContinuousFlexibility/Scalar/GreenIdentity.lean",
+              "declarations": [
+                "ContinuousFlexibility.symmetricNormalFlux",
+                "ContinuousFlexibility.greenNormalFlux_eq_zero_of_robin",
+                "ContinuousFlexibility.greenNormalFlux_eq_zero_of_dirichlet",
+                "ContinuousFlexibility.heightCorrected_green_identity",
+                "ContinuousFlexibility.integral_heightCorrected_green_eq_zero_of_admissible",
+                "ContinuousFlexibility.integral_heightCorrected_green_eq_zero_of_boundary_jets"
+              ]
+            }
+          ],
+          "correspondence": "修正前后法向通量的A,B定义完全相同；真实Green配对、明确周期/Dirichlet/Robin或端点jet条件及杀常数均已证明。"
+        }
+      ],
+      "remaining": [],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/TypeCorrection.lean": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83",
+        "ContinuousFlexibility/Scalar/GreenIdentity.lean": "0e6bd07148aad1d5495bb0389c10a095c2974bd018b20e11143505b2bd565c60"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S05.04",
+      "title": "固定转型圆与特征斜率",
+      "statement": "由实际系数行列式识别w′变号的类型及负区根点附近的特征斜率。",
+      "status": "partial",
+      "rationale": "实际行列式零集及正负号与w′一致已证明；还没有一般负区特征斜率及简单根附近平方根退化的完整推导。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+          "declarations": [
+            "ContinuousFlexibility.polar_corrected_determinant_zero_iff",
+            "ContinuousFlexibility.polar_corrected_determinant_pos_iff",
+            "ContinuousFlexibility.polar_corrected_determinant_neg_iff"
+          ],
+          "correspondence": "在w>0,D>0与合法Q下识别类型。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "类型不是w变号。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.polar_corrected_determinant_zero_iff",
+                "ContinuousFlexibility.polar_corrected_determinant_pos_iff",
+                "ContinuousFlexibility.polar_corrected_determinant_neg_iff"
+              ]
+            }
+          ],
+          "correspondence": "实际行列式零集及正负号与w′一致已证明；还没有一般负区特征斜率及简单根附近平方根退化的完整推导。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "平方根退化从简单转点推导。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.polar_corrected_determinant_zero_iff",
+                "ContinuousFlexibility.polar_corrected_determinant_pos_iff",
+                "ContinuousFlexibility.polar_corrected_determinant_neg_iff"
+              ]
+            }
+          ],
+          "correspondence": "实际行列式零集及正负号与w′一致已证明；还没有一般负区特征斜率及简单根附近平方根退化的完整推导。"
+        }
+      ],
+      "remaining": [
+        "负区实际特征斜率与简单转点平方根退化。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/TypeCorrection.lean": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S05.05",
+      "title": "加权端点系数延拓",
+      "statement": "在实际W02/W03 levels对A、B、修正C逐项处理平坦端点可去性和共同域。",
+      "status": "unstarted",
+      "rationale": "现有内部系数正则显式要求Q≠0，不能用于平坦端点。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不在平坦端点假设Q非零。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "现有内部系数正则显式要求Q≠0，不能用于平坦端点。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "系数延拓与原内部表达式一致。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "现有内部系数正则显式要求Q≠0，不能用于平坦端点。"
+        }
+      ],
+      "remaining": [
+        "在实际W02/W03 levels上对A/B/C作可去延拓并识别共同闭域。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S05.06",
+      "title": "特征根点定量估计",
+      "statement": "在显式共同正性邻域内证明根点速度及固定类型系数的全阶有损估计。",
+      "status": "unstarted",
+      "rationale": "没有共同正性低阶邻域上的全阶根点速度及固定损失估计。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "损失和低阶小性条件不随输出阶变化。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有共同正性低阶邻域上的全阶根点速度及固定损失估计。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "这是条件系数定理，不反向依赖N01的实例化结论。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "没有共同正性低阶邻域上的全阶根点速度及固定损失估计。"
+        }
+      ],
+      "remaining": [
+        "固定低阶小性、全阶估计、实际特征系数。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "S05.07",
+      "title": "修正算子节点组合",
+      "statement": "把实际导数、独立双线性误差、通量、端点共同域和类型估计合为原S05。",
+      "status": "partial",
+      "rationale": "精确修正和通量/Green结论已有；端点共同域及根点统一估计尚缺。",
+      "evidence": [
+        {
+          "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+          "declarations": [
+            "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+          ],
+          "correspondence": "已证实际修正核心等式。"
+        }
+      ],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "交付供N01/N03使用的同一算子。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+              ]
+            }
+          ],
+          "correspondence": "精确修正和通量/Green结论已有；端点共同域及根点统一估计尚缺。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "后续N03的混合系数修正不被误称为全局通量不变。",
+          "status": "partial",
+          "evidence": [
+            {
+              "file": "ContinuousFlexibility/Scalar/TypeCorrection.lean",
+              "declarations": [
+                "ContinuousFlexibility.heightLinearizedDivergence_eq_corrected_normalized"
+              ]
+            }
+          ],
+          "correspondence": "精确修正和通量/Green结论已有；端点共同域及根点统一估计尚缺。"
+        }
+      ],
+      "remaining": [
+        "S05.02、S05.04–06未闭合。"
+      ],
+      "source_sha256": {
+        "ContinuousFlexibility/Scalar/TypeCorrection.lean": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83"
+      },
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "C00.03",
+      "title": "径向参考与共同闭域接口",
+      "statement": "给RadialReference指定同一几何上的核、真实边框、兼容源、分布图域及双侧逆的精确类型；不把逆存在写作最终假设。",
+      "status": "unstarted",
+      "rationale": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "β及β±ε使用同一几何和自然逆。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "源密度dr与谱测度的转换必须有后续证明位置。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        }
+      ],
+      "remaining": [
+        "给RadialReference指定同一几何上的核、真实边框、兼容源、分布图域及双侧逆的精确类型；不把逆存在写作最终假设。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "C00.04",
+      "title": "闭曲面嵌入与拉回度量接口",
+      "statement": "为ClosedBending指定F:S2×ℝ→E3联合光滑、每相位smooth embedding及切向量内积等式的精确类型。",
+      "status": "unstarted",
+      "rationale": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "度量要求为实际dF的切向量配对。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "成员嵌入同时包含immersion和全局topological embedding。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        }
+      ],
+      "remaining": [
+        "为ClosedBending指定F:S2×ℝ→E3联合光滑、每相位smooth embedding及切向量内积等式的精确类型。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "C00.05",
+      "title": "固定区域与像集非全等接口",
+      "statement": "规定非退化内盘、补帽拓扑及逐点固定条件，规定量化全部AffineIsometryEquiv的两个range非全等。",
+      "status": "unstarted",
+      "rationale": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "内盘有非空内部且位于图盘内部。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "非全等覆盖反射并比较像集。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        }
+      ],
+      "remaining": [
+        "规定非退化内盘、补帽拓扑及逐点固定条件，规定量化全部AffineIsometryEquiv的两个range非全等。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "C00.06",
+      "title": "几何积分语义接口",
+      "statement": "给面积、实际有界内部的Lebesgue体积、向外H=(k1+k2)/2积分指定接口及标准含义桥接的后续义务。",
+      "status": "unstarted",
+      "rationale": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "积分对象不是任意常值别名。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "区域和向外法向的识别列入D02/G15/G16后续证据要求。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        }
+      ],
+      "remaining": [
+        "给面积、实际有界内部的Lebesgue体积、向外H=(k1+k2)/2积分指定接口及标准含义桥接的后续义务。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "C00.07",
+      "title": "完整量词与同一见证接口",
+      "statement": "把联合光滑、所有实相位、一周期、同一度量和三项不变量合为同一个ClosedBending规格。",
+      "status": "unstarted",
+      "rationale": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "所有结论使用同一Core、发展、帽与F。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "规格不声称所定义输入或输出结构非空。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照没有该完整接口的实际Lean声明；现有条件图盘接口不能替代标准闭球面或完整径向参考规格。"
+        }
+      ],
+      "remaining": [
+        "把联合光滑、所有实相位、一周期、同一度量和三项不变量合为同一个ClosedBending规格。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.01",
+      "title": "实际非空输入实例化",
+      "statement": "从N12/G01的已证明存在见证选择一个非零q和实际Core，统一其全部后续数据。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "最终定理无Core非空或环带解存在前提。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "q与弯曲参数τ区分。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "从N12/G01的已证明存在见证选择一个非零q和实际Core，统一其全部后续数据。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.02",
+      "title": "同一标准球面与初始度量",
+      "statement": "实例化G07的标准S2、补帽及F0，固定gΣ=F0*δ。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "gΣ为实际光滑正定拉回度量。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "后续所有成员使用这一gΣ。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "实例化G07的标准S2、补帽及F0，固定gΣ=F0*δ。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.03",
+      "title": "共同周期嵌入族组合",
+      "statement": "以同一发展、帽和相位族组合联合光滑、所有实τ的嵌入、度量等式及一周期。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是逐参数光滑代替联合光滑。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不是环境距离等距代替切向量度量。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "以同一发展、帽和相位族组合联合光滑、所有实τ的嵌入、度量等式及一周期。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.04",
+      "title": "固定区域与非全等像组合",
+      "statement": "组合非退化固定内盘及补帽、两个闭像对全部环境仿射等距非全等。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "固定区域有要求的拓扑和非空内部。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "反射包括在全等量词内。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "组合非退化固定内盘及补帽、两个闭像对全部环境仿射等距非全等。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.05",
+      "title": "三项真实几何不变量组合",
+      "statement": "对同一F调用G14/G15/G16，统一面积、实际围成区域体积及向外有向H积分。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不在三个结论中另选不同见证。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "法向和H=(k1+k2)/2约定一致。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "对同一F调用G14/G15/G16，统一面积、实际围成区域体积及向外有向H积分。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.06",
+      "title": "全部分析假设消除",
+      "statement": "检查径向参考、闭域逆、smooth tame及Hamilton存在结论均由实际证明实例化。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "最终存在定理无RadialReference或逆存在假设。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "结构非空由构造给出而不是从空类型推出条件结论。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "检查径向参考、闭域逆、smooth tame及Hamilton存在结论均由实际证明实例化。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.07",
+      "title": "主定理类型与内核审计",
+      "statement": "将论文thm:main逐条对应最终Lean存在定理的类型，运行所属模块及统一owner-based审计。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "所有私有helper也在审计范围。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "构建会话有明确终端exit status。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "将论文thm:main逐条对应最终Lean存在定理的类型，运行所属模块及统一owner-based审计。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "MAIN.08",
+      "title": "完整主定理交付",
+      "statement": "组合全部见证与结论，以最终Lean声明和实际构建输出交付无条件主定理。",
+      "status": "unstarted",
+      "rationale": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不得用蓝图结构通过代替内核证明。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "完成声明仅在integration核对全部原始结论后给出。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "完整无条件Core/标准S2/闭嵌入族及三项不变量尚未构造，不能组装本项主定理结论。"
+        }
+      ],
+      "remaining": [
+        "组合全部见证与结论，以最终Lean声明和实际构建输出交付无条件主定理。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X01.01",
+      "title": "指数区间与固定几何量词",
+      "statement": "固定已经选定的一套几何，再引入任意紧指数区间[γ-,γ+]⊂(0,1)，列出可依赖区间的常数。",
+      "status": "unstarted",
+      "rationale": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "几何选择在指数区间量词之前。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不得逐γ重选轮廓或边框。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        }
+      ],
+      "remaining": [
+        "固定已经选定的一套几何，再引入任意紧指数区间[γ-,γ+]⊂(0,1)，列出可依赖区间的常数。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X01.02",
+      "title": "紧区间单元估计一致性",
+      "statement": "将R05单元估计的指数依赖压缩为紧区间上统一常数。",
+      "status": "unstarted",
+      "rationale": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "尾部索引阈值的允许依赖明确。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "保持原有同一自然端线。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        }
+      ],
+      "remaining": [
+        "将R05单元估计的指数依赖压缩为紧区间上统一常数。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X01.03",
+      "title": "紧区间Green核与匹配界",
+      "statement": "在不改变几何的前提下推广Green核、匹配块和界面矩阵的指数一致估计。",
+      "status": "unstarted",
+      "rationale": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "同一个全局Green逆。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "源配对测度不随指数变更而隐去。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        }
+      ],
+      "remaining": [
+        "在不改变几何的前提下推广Green核、匹配块和界面矩阵的指数一致估计。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X01.04",
+      "title": "全指数尾部求和",
+      "statement": "证明紧区间上尾部级数的统一收敛、权交换及双侧逆估计。",
+      "status": "unstarted",
+      "rationale": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不得交换未经控制的无限求和与supγ。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "图域与自然端点解释保持一致。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        }
+      ],
+      "remaining": [
+        "证明紧区间上尾部级数的统一收敛、权交换及双侧逆估计。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X01.05",
+      "title": "全指数加强组合",
+      "statement": "组合得到原X01的全部紧区间加强，维持几何与指数区间选择的量词顺序。",
+      "status": "unstarted",
+      "rationale": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不新增MAIN前置依赖。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "主定理所用固定β三指数是此加强的特例而非循环前提。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "尚无实际全局固定径向参考及其指数区间统一Green逆，不能开展此加强。"
+        }
+      ],
+      "remaining": [
+        "组合得到原X01的全部紧区间加强，维持几何与指数区间选择的量词顺序。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X02.01",
+      "title": "两弱因子的双权乘积",
+      "statement": "在实际加权levels证明两个β弱因子的乘积落入2β权，并记录导数损失。",
+      "status": "unstarted",
+      "rationale": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "估计对同一q区间成立。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "角向和径向混合导数一并控制。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        }
+      ],
+      "remaining": [
+        "在实际加权levels证明两个β弱因子的乘积落入2β权，并记录导数损失。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X02.02",
+      "title": "二次余项的双权识别",
+      "statement": "将真实非线性二次余项逐项分解，验证其2β权源估计。",
+      "status": "unstarted",
+      "rationale": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "实际残差而非任意命名的二次项。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "保留源兼容与奇偶条件。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        }
+      ],
+      "remaining": [
+        "将真实非线性二次余项逐项分解，验证其2β权源估计。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X02.03",
+      "title": "平均primitive无指数损失",
+      "statement": "求解实际平均方程并证明primitive保持所需指数及端点常数自由。",
+      "status": "unstarted",
+      "rationale": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "右端归零而左端常数可不同。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "积分使用实际dr源测度。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        }
+      ],
+      "remaining": [
+        "求解实际平均方程并证明primitive保持所需指数及端点常数自由。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X02.04",
+      "title": "高度和圆控制二阶恢复",
+      "statement": "从同一弱解恢复νq、κq并证明O(q²)的指定加权范数界。",
+      "status": "unstarted",
+      "rationale": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "控制来自原方程。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "无需重新进行非线性迭代或缩小每阶参数区间。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        }
+      ],
+      "remaining": [
+        "从同一弱解恢复νq、κq并证明O(q²)的指定加权范数界。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X02.05",
+      "title": "强拓扑参数光滑性",
+      "statement": "把二次恢复和双权估计提升为强拓扑中的实际参数方向导数及全阶连续性。",
+      "status": "unstarted",
+      "rationale": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不能用各q分别有界代替参数光滑。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "全部阶数保留同一q0。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        }
+      ],
+      "remaining": [
+        "把二次恢复和双权估计提升为强拓扑中的实际参数方向导数及全阶连续性。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X02.06",
+      "title": "H的一减ε端点估计",
+      "statement": "在论文指定范围ε内证明H^(1-ε)端点估计并识别原高度/控制。",
+      "status": "unstarted",
+      "rationale": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "范数和端点区域明确。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不替代N12必需的弱权全阶延拓。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        }
+      ],
+      "remaining": [
+        "在论文指定范围ε内证明H^(1-ε)端点估计并识别原高度/控制。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X02.07",
+      "title": "双权加强组合",
+      "statement": "组合双权余项、平均primitive、二阶控制、强光滑性及端点估计。",
+      "status": "unstarted",
+      "rationale": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "首次MAIN闭合不依赖X02。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "N12弱空间延拓义务继续单独验收。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "实际弱权非线性解和具体加权levels尚未构造，本项双权/二阶恢复加强没有实现。"
+        }
+      ],
+      "remaining": [
+        "组合双权余项、平均primitive、二阶控制、强光滑性及端点估计。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.01",
+      "title": "有限Fourier最高模抽取",
+      "statement": "在实际有限角向展开中抽取真实标量方程最高频系数。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "处理实值条件及最高非零模。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "系数计算与S03实际微分相连。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "在实际有限角向展开中抽取真实标量方程最高频系数。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.02",
+      "title": "非零区间的复平方根分支",
+      "statement": "对最高模相关复函数，在适当非零区间构造可微平方根分支。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "分支存在由局部非零与区间性质证明。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不假设跨零点全局平方根。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "对最高模相关复函数，在适当非零区间构造可微平方根分支。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.03",
+      "title": "分支对应的一阶ODE",
+      "statement": "由最高模方程推导平方根的真实一阶ODE及系数可积性。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "明确复导数解释为实参数导数。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "所有除法在非零区间内部合法。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "由最高模方程推导平方根的真实一阶ODE及系数可积性。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.04",
+      "title": "Gronwall与零点传播",
+      "statement": "用已满足系数条件的ODE/Gronwall证明局部分支的唯一性和到边界的控制。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不是仅形式写出ODE后宣称唯一。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "量化有限区间与端点极限。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "用已满足系数条件的ODE/Gronwall证明局部分支的唯一性和到边界的控制。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.05",
+      "title": "孤立零点的两侧拼接",
+      "statement": "证明最高模在孤立零点两侧的分支约束可传递，恢复原函数一致性。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "不要求两侧平方根选取同一符号。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "实际拼接对象为原最高模函数。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "证明最高模在孤立零点两侧的分支约束可传递，恢复原函数一致性。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.06",
+      "title": "零点累积的延拓",
+      "statement": "处理零点非孤立及累积情形，利用连续性/ODE控制完成最高模消失结论。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "显式覆盖零点累积情况。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "不能以有限分片假设跳过该情形。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "处理零点非孤立及累积情形，利用连续性/ODE控制完成最高模消失结论。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.07",
+      "title": "有限最高频降阶归纳",
+      "statement": "迭代最高模消失结果，完成有限Fourier次数的严格降阶。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "次数归纳有终止基例。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "结论保持附录命题的全部原假设。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "迭代最高模消失结果，完成有限Fourier次数的严格降阶。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    },
+    {
+      "id": "X03.08",
+      "title": "有限截断障碍组合",
+      "statement": "组合最高频、局部平方根、零点延拓及有限降阶，得到prop:obs-finite-square完整陈述。",
+      "status": "unstarted",
+      "rationale": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。",
+      "evidence": [],
+      "acceptance_coverage": [
+        {
+          "criterion": "acceptance.01",
+          "text": "旁支不引入MAIN依赖。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        },
+        {
+          "criterion": "acceptance.02",
+          "text": "复平方根及累积零点分别有实际证明。",
+          "status": "uncovered",
+          "evidence": [],
+          "correspondence": "快照未实现附录有限Fourier最高模、复平方根ODE及零点延拓路线的这一具体步骤。"
+        }
+      ],
+      "remaining": [
+        "组合最高频、局部平方根、零点延拓及有限降阶，得到prop:obs-finite-square完整陈述。"
+      ],
+      "source_sha256": {},
+      "build_status": "pending_root_frozen_snapshot_build_and_owner_audit"
+    }
+  ]
+}

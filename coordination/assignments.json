@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "objective": "完成主定理形式化",
+  "status": "geometry_closed_from_core_analysis_existence_open",
+  "toolchain": "leanprover/lean4:v4.35.0-rc3",
+  "mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "baseline": "checkpoint-2026-11-11-radial-contract-wave.json",
+  "roles": [
+    {
+      "id": "integration",
+      "thread_id": "01a1c553-dbc1-72c0-b3a7-ad6321a97333",
+      "title": "规划文章形式化",
+      "nodes": [
+        "C00",
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "MAIN"
+      ],
+      "write_scope": [
+        "ContinuousFlexibility/Scalar/",
+        "ContinuousFlexibility/Contracts/",
+        "ContinuousFlexibility/Main.lean",
+        "ContinuousFlexibility.lean",
+        "AxiomAudit.lean",
+        "blueprint/",
+        "scripts/",
+        "coordination/",
+        "docs/",
+        "README.md"
+      ],
+      "next": "维护唯一编译队列与正式蓝图，审计每个通过的声明；将实际环带核心存在性接入已验证的完整几何闭合。"
+    },
+    {
+      "id": "radial",
+      "thread_id": "01a1c679-404a-7431-8dd5-96356c1dd323",
+      "nodes": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "write_scope": [
+        "ContinuousFlexibility/Radial/"
+      ],
+      "next": "完成 Morse 离散谱和零能估计；利用已证的保留单元与质量/阻力换元完成两侧正连接、拼接和 R06–R12。",
+      "title": "协调 ContinuousFlexibility 形式化"
+    },
+    {
+      "id": "spaces",
+      "thread_id": null,
+      "nodes": [
+        "W01",
+        "W02",
+        "W03",
+        "H01",
+        "H02",
+        "H03"
+      ],
+      "write_scope": [
+        "ContinuousFlexibility/Analysis/"
+      ],
+      "next": "实际高度及具有单元归属的径向控制端点估计已通过。完成实际物理加权空间及参数联合正则性。"
+    },
+    {
+      "id": "nonlinear",
+      "thread_id": null,
+      "nodes": [
+        "N01",
+        "N02",
+        "N03",
+        "N04",
+        "N05",
+        "N06",
+        "N07",
+        "N08",
+        "N09",
+        "N10",
+        "N11",
+        "N12"
+      ],
+      "write_scope": [
+        "ContinuousFlexibility/Nonlinear/"
+      ],
+      "next": "构造归属正确的光学控制、耦合残差的实际逆与非零弱分支；将同一弱分支接入已通过的 FlatAnnularCore 桥。"
+    },
+    {
+      "id": "geometry",
+      "thread_id": "01a1c655-f121-77d3-adab-122cc010840b",
+      "nodes": [
+        "D01",
+        "D02",
+        "G01",
+        "G02",
+        "G03",
+        "G04",
+        "G05",
+        "G06",
+        "G07",
+        "G08",
+        "G09",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G15",
+        "G16"
+      ],
+      "write_scope": [
+        "ContinuousFlexibility/Geometry/"
+      ],
+      "next": "完整几何闭合已通过。另按登记范围推进固定参数 Newton 递推，完成后续迭代收敛和参数依赖。",
+      "title": "协调形式化工作"
+    }
+  ],
+  "rules": [
+    "Lean 4.35.0-rc3、mathlib 锁定版本及手稿不可改；仅 integration 修改根入口、公理审计、蓝图及公共 Contracts 接口。",
+    "接手前先读baseline和manifest，现有已编译文件修改须先与integration登记接口变更",
+    "共享工作目录采用独占文件；远端对话交付完整Lean文件或补丁及真实构建输出，由integration集成",
+    "交付必须给出实际定理类型、论文定位、实际通过的构建命令及结果、未完成义务、所需新imports",
+    "不允许sorry/admit、自设axiom、native_decide或unsafe补洞；私有helper同样审计",
+    "每个节点只有一个写入负责人，审阅者只读；跨包依赖变更先登记，禁止循环依赖",
+    "主定理完成只能由integration核对实际Lean声明全部原始结论后宣布",
+    "只允许一位登记执行者启动本机 Lean/Lake，LEAN_NUM_THREADS=4；每条构建跟到本执行者真实终态，禁止以他人的进程列表或会话推断。"
+  ],
+  "fallback_for_three_peers": "仅有三个其它对话时，nonlinear先由integration承担，spaces与radial仍保持分开",
+  "peer_status_note": "Geometry and radial peer chats are now bound. The earlier user reply that other chats were not open is historical; current exclusive ownership is active-workers.json. No additional user-owned chats were created by integration.",
+  "last_verified": {
+    "date": "2026-11-11",
+    "checkpoint": "checkpoint-2026-11-11-radial-contract-wave.json",
+    "build_jobs": 3690,
+    "audit_declarations": 8966,
+    "audit_theorems": 6638,
+    "public_theorems": 3240,
+    "lean_files": 264,
+    "lean_lines": 67989,
+    "excluded_parallel_sources": 25,
+    "main_formalized": false,
+    "geometry_closure_proved_from_core": true,
+    "decoded_height_flat_extension_proved": true
+  },
+  "refinement_audit": "blueprint/refinement/AUDIT.md",
+  "last_statement_verification": {
+    "path": "ContinuousFlexibility/Statements/manifest.json",
+    "manifest_sha256": "45ad939287d2e1ee88e48b78de3a77a34031c6d4e0ba930b691336e6c73400f1",
+    "build_log": "ContinuousFlexibility/Statements/build.log",
+    "owner": "/root",
+    "owner_session": 6289,
+    "terminal_chunk": "0e3a80",
+    "exit_code": 0,
+    "target_types": 58,
+    "build_jobs": 3501,
+    "proof_progress_changed": false,
+    "previous_window_evidence_archive": "coordination/statement-registry-2026-11-11-before-radial-contract.zip"
+  },
+  "specification_peer": {
+    "thread_id": "01a1c67e-27ff-7653-8f6b-f5ce0ba3ce9b",
+    "status": "58目标类型已编译并独立审计",
+    "scope": "ContinuousFlexibility/Statements/",
+    "proof_progress_changed": false
+  }
+}

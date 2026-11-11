@@ -1,0 +1,376 @@
+\section{What the height equation requires}
+\label{sec:scalar-core}
+
+The geometric reduction leaves considerable freedom: we may choose
+the rotational metric as well as its nonradial height. This section
+identifies the conditions that guide those choices. A connection
+form gives the scalar equation and its conservation law; its
+linearization reveals the changes of type; a finite model then
+separates the two resonance problems that the construction must solve.
+
+\subsection{A curvature residual with a symmetric derivative}
+
+Write $h'=w$, $E=1+w^2$, and introduce the local height jets
+\begin{equation}\label{eq:height-jet-notation}
+ k=z_r,\qquad p=z_\theta/r,\qquad
+ D=E(1-p^2)-k^2,\qquad Q=k+Ep_\theta.
+\end{equation}
+The metric $g-dz^2$ is positive if and only if $D>0$. A useful
+orthonormal coframe for it is
+\[
+ \eta_1=\frac{\sqrt D}{\sqrt{1-p^2}}\,dr,\qquad
+ \eta_2=r\sqrt{1-p^2}\,d\theta-
+             \frac{kp}{\sqrt{1-p^2}}\,dr.
+\]
+In this polar frame the Euclidean connection is $d\theta$.
+We use $dr\,d\theta$ for all scalar adjoints; the source measure
+must remain explicit when coordinates are changed later.
+
+\begin{proposition}\label{prop:scalar-core}
+For $D>0$, the connection form and the curvature residual are
+\begin{align}
+ \alpha&=D^{-1/2}\left(d\theta+\frac{k}{1-p^2}\,dp\right),
+       \label{eq:conn-one-form}\\
+ r\mathcal N_h(z)&=D^{-3/2}
+ \left[Qk_r-Erp_r^2-\frac{E'}2(1-p^2+kp_\theta)\right],
+       \label{eq:cart-curvature-scalar}
+\end{align}
+where $\mathcal N_h(z)=-\sqrt D\,K(g-dz^2)$ and
+$d\alpha=r\mathcal N_h(z)\,dr\wedge d\theta$.
+Holding $w$ fixed, the derivative is
+\begin{equation}\label{eq:cart-true-derivative}
+ rD_z\mathcal N_h(z)\eta
+  =\partial_r(a\eta_r+b\eta_\theta)
+       +\partial_\theta(b\eta_r+c\eta_\theta),
+\end{equation}
+with
+\begin{equation}\label{eq:linear-coefficients}
+ a=QD^{-3/2},\quad b=-Ep_rD^{-3/2},\quad
+ c=r^{-1}(Ek_r-E'k/2)D^{-3/2}.
+\end{equation}
+Its determinant satisfies
+\begin{equation}\label{eq:cart-determinant-identity}
+ ac-b^2=\frac{K_0}{D^2}+ED^{-3/2}\mathcal N_h(z),
+ \qquad K_0=\frac{ww'}r.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Equality of mixed height derivatives gives
+\begin{equation}\label{eq:height-compatibility}
+ rp_r=k_\theta-p.
+\end{equation}
+Substitution in the two structure equations for $\eta_1,\eta_2$
+gives \eqref{eq:conn-one-form}. Here is a direct check of its
+curvature numerator, which also fixes all signs. Use
+$D_r=E'(1-p^2)-2Epp_r-2kk_r$ and
+$D_\theta=-2Epp_\theta-2kk_\theta$. The coefficient of
+$dr\wedge d\theta$ in $D^{3/2}d\alpha$ is
+\[
+ -\tfrac12D_r+\frac{D}{1-p^2}(k_rp_\theta-k_\theta p_r)
+ -\frac{k}{2(1-p^2)}(D_rp_\theta-D_\theta p_r).
+\]
+Replacing $k_\theta-p$ by $rp_r$ reduces it to the bracket in
+\eqref{eq:cart-curvature-scalar}. This is also the Darboux numerator:
+\begin{equation}\label{eq:darboux-numerator}
+ Qk_r-Erp_r^2-\frac{E'}2(1-p^2+kp_\theta)=0.
+\end{equation}
+For example the Christoffel symbols are
+$\Gamma^r_{rr}=E'/2E$, $\Gamma^r_{\theta\theta}=-r/E$,
+$\Gamma^\theta_{r\theta}=1/r$, and
+\begin{equation}\label{eq:radial-curvature}
+ K_g=E'/(2rE^2).
+\end{equation}
+These formulas give the same numerator from
+\eqref{eq:intro-darboux}.
+
+For the variation, set $B_1=k/((1-p^2)\sqrt D)$. The identities
+$(B_1)_k=ED^{-3/2}$ and $(B_1)_E=-k/(2D^{3/2})$ give
+\begin{equation}\label{eq:conn-exact-variation}
+ \delta\alpha=d(B_1\delta p)
+  +(a\eta_r+b\eta_\theta)\,d\theta
+  -(b\eta_r+c\eta_\theta)\,dr,
+ \qquad\delta p=\eta_\theta/r.
+\end{equation}
+Taking the exterior derivative removes the exact term and proves
+\eqref{eq:cart-true-derivative}. In particular the normal flux is
+$a\eta_r+b\eta_\theta$.
+
+Finally, let $N$ denote the bracket in
+\eqref{eq:cart-curvature-scalar}. Since
+$kQ+D=E(1-p^2+kp_\theta)$,
+\[
+ ac-b^2=\frac E{rD^3}\left(N+\frac{E'D}{2E}\right).
+\]
+Using $N=rD^{3/2}\mathcal N_h(z)$ proves the determinant identity.
+\end{proof}
+
+At the radial height $z=h$, these expressions simplify to
+$D=1$, $a=w$, $b=0$, $c=w'/r$. Thus
+\begin{equation}\label{eq:intro-linearization}
+ \mathscr L_wu=(wu_r)_r+\frac{w'}r u_{\theta\theta}.
+\end{equation}
+For $w>0$ it is elliptic where $w'>0$ and hyperbolic where $w'<0$.
+A simple zero of $w'$ is a turning circle. Notice that it is the
+slope of the profile that changes sign, not the profile itself.
+
+\subsection{Why the endpoint must keep changing type}
+
+It is tempting to take an uncomplicated bump for $w$, solve in its
+middle, and flatten its ends. The next observation explains why
+that does not preserve a nonzero infinitesimal height.
+
+\begin{proposition}[The monotone-end obstruction]
+\label{prop:obs-monotone-tail}
+Let $w>0$ on $(r_-,r_+)$ be $C^1$, with $w(r_-)=0$ and $w'\ge0$
+near $r_-$. If a continuous endpoint extension of a solution satisfies
+\[
+ (wf')'-j^2w'f/r=0,\qquad f(r_-)=0,\qquad
+ \lim_{r\downarrow r_-}wf'=0,
+\]
+then $f=0$. The analogous assertion holds at a right endpoint with
+$w(r_+)=0$ and $w'\le0$ nearby.
+\end{proposition}
+
+\begin{proof}
+Integrating the flux equation and putting
+$m(r)=\max_{r_-\le t\le r}|f(t)|$ gives
+\[
+ |f'(r)|\le \frac{j^2}{w(r)}
+       \int_{r_-}^r\frac{w'(t)}t|f(t)|\,dt
+ \le\frac{j^2}{r_-}m(r).
+\]
+Integration once more and Gronwall's inequality give $m=0$ on a
+collar; ordinary interior uniqueness continues the zero. At the
+right endpoint integrate backwards and use
+$\int_r^{r_+}|w'|=w(r)$. The proof also applies to complex $f$.
+\end{proof}
+
+Consequently a positive profile with only finitely many changes of
+monotonicity cannot carry our endpoint-flat nonzero angular mode.
+The infinitely many turning circles are forced by this obstruction
+within the present construction. Their amplitudes and widths will
+decrease fast enough that the profile nevertheless extends smoothly.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth,font=\small]
+\draw[->] (0,0)--(11,0) node[right] {$r$};
+\draw[thick,blue!70!black] (0,0)--(.4,0)
+ .. controls (.6,0) and (.65,.15) .. (.8,.1)
+ .. controls (.95,.05) and (1,.4) .. (1.2,.3)
+ .. controls (1.4,.2) and (1.5,.85) .. (1.8,.65)
+ .. controls (2.1,.45) and (2.2,1.4) .. (2.8,1.2)
+ .. controls (3.5,1) and (3.5,2) .. (4.5,1.75)
+ .. controls (5.5,1.4) and (6,2.1) .. (6.8,1.5)
+ .. controls (7.5,.9) and (7.5,1.4) .. (8.0,.85)
+ .. controls (8.5,.35) and (8.5,.8) .. (8.8,.4)
+ .. controls (9.0,.16) and (9.1,.36) .. (9.3,.16)
+ .. controls (9.5,0) and (9.6,.12) .. (9.8,0)--(10.5,0);
+\node[above] at (5.2,2.15) {positive profile $w$};
+\node[below,align=center] at (1.4,-.2) {accumulating turns\\flat extension};
+\node[below,align=center] at (8.9,-.2) {accumulating turns\\flat extension};
+\draw[->,orange!70!black] (4.8,1.1)--(5.2,1.6);
+\node[below] at (5.1,.9) {falling: hyperbolic};
+\draw[->,teal!70!black] (3.1,.45)--(3.65,1.5);
+\node[below] at (3.1,.4) {rising: elliptic};
+\end{tikzpicture}
+\caption{Why there are infinitely many interfaces. The drawing shows
+only finitely many representative turns, without their actual scales.
+On each rising interval the linearized equation is elliptic; on each
+falling interval it is hyperbolic. Every derivative still tends to
+zero at the accumulation endpoints.}
+\label{fig:profile-type}
+\end{figure}
+
+\subsection{Two denominators in one finite model}
+\label{sec:worked-example}
+
+The next calculation is a guide to the spectral construction, not
+an approximation to its full inverse. Set $\epsilon=\sqrt2/100$,
+$\rho(X)=\epsilon^2X(1-X)$, and on $[-1,2]$ solve
+\begin{equation}\label{eq:example-radius}
+ r_{XX}=-\rho r,\qquad r(0)=1,\qquad r_X(0)=1/10.
+\end{equation}
+Its integral equation bounds $R:=\max|r|$ by
+$R\le1.2+8\epsilon^2R$, so $R<1.203$,
+$r>0.798$, and $|r_X-.1|\le4\epsilon^2R<.001$.
+Hence $w(r(X))=r_X(X)$ is a genuine positive radial profile.
+It has two simple turning points, at $X=0,1$.
+For an angular mode $j$ and $J=j\epsilon$, its equation becomes
+\begin{equation}\label{eq:example-mode}
+ L_jU=\frac1{r_X}\bigl(U_{XX}+J^2X(1-X)U\bigr).
+\end{equation}
+
+The characteristics have slopes
+$d\theta/dX=\pm\epsilon\sqrt{X(1-X)}$ on $0<X<1$.
+Their travel angle is
+\begin{equation}\label{eq:example-action}
+ T=\epsilon\int_0^1\sqrt{X(1-X)}\,dX=\epsilon\pi/8.
+\end{equation}
+The difference of the two endpoint translations acts by
+\begin{equation}\label{eq:example-circle-operator}
+ \mathcal D_T f=f(\theta+T)-f(\theta-T),\qquad
+ \mathcal D_T\sin(j\theta)=2\sin(jT)\cos(j\theta).
+\end{equation}
+Thus straightening the two characteristic returns costs the divisor
+$\sin(jT)$. For this quadratic irrational travel angle the integer
+$2j^2-640000m^2\ne0$, where $m$ is nearest to $j\sqrt2/800$, yields
+\begin{equation}\label{eq:example-diophantine-bound}
+ |\sin(jT)|\ge (320000j)^{-1}.
+\end{equation}
+Indeed factor that integer, use
+$j\sqrt2/800+|m|\le j$, and then
+$|\sin(\pi x)|\ge2\dist(x,\mathbb Z)$.
+The inverse of $\mathcal D_T$ therefore loses one angular derivative.
+
+Now impose a radial boundary condition. Under
+$x=\sqrt J(X-1/2)$ the homogeneous equation becomes
+\begin{equation}\label{eq:example-oscillator}
+ (-\partial_x^2+x^2)U=(J/4)U.
+\end{equation}
+At each end of the finite interval take the solution line obtained
+by restricting the corresponding decaying solution of this
+whole-line oscillator. These are legitimate boundary lines for
+\eqref{eq:example-mode}; the radius itself need not extend outside
+$[-1,2]$. The two lines agree exactly at an oscillator eigenvalue.
+Since those eigenvalues are $2m+1$
+\cite[Section~8.3]{Teschl2009}, the resonance is
+\begin{equation}\label{eq:example-spectral-phase}
+ J/4=2m+1,
+ \qquad\text{or equivalently}\qquad
+ jT=(m+\tfrac12)\pi.
+\end{equation}
+For an inhomogeneous source, multiply by $-r_X/J$, extend by zero
+outside $[-3\sqrt J/2,3\sqrt J/2]$, apply the whole-line oscillator
+resolvent, and restrict back. This proves that the prescribed boundary
+problem has precisely these spectral denominators; it is not just
+a comparison of formal phases.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.5cm,y=.8cm,>=Stealth,font=\small]
+\node[anchor=east] at (-.2,1.5) {characteristic return};
+\node[anchor=east] at (-.2,0) {decaying radial lines};
+\draw[->] (0,1.5)--(4.4,1.5);
+\draw[->] (0,0)--(4.4,0) node[right] {$jT$};
+\foreach \x/\t in {0/0,1/\pi,2/2\pi,3/3\pi,4/4\pi}{
+ \fill[blue!70!black] (\x,1.5) circle (2pt);
+ \node[below] at (\x,-.15) {$\t$};}
+\foreach \x in {.5,1.5,2.5,3.5}{
+ \fill[orange!80!black] (\x,0) circle (2pt);}
+\node[above] at (2,1.7) {$\sin(jT)=0$};
+\node[above] at (2,.2) {$jT=(m+\tfrac12)\pi$};
+\end{tikzpicture}
+\caption{Two distinct resonance sets in the exact finite model.
+The horizontal variable is the phase, with marks spaced by $\pi$.
+Controlling one row does not control the other. Both must stay
+separated when the cells of the infinite construction are joined.}
+\label{fig:two-denominators}
+\end{figure}
+
+The half-step shift also has a local interpretation. Near $X=0$,
+put $y=J^{2/3}X$. Then
+\[
+ U_{yy}+yU=J^{-2/3}y^2U.
+\]
+On any fixed $y$-interval the leading solutions are
+$\operatorname{Ai}(-y),\operatorname{Bi}(-y)$, with an error
+$O(J^{-2/3})$ in value and first derivative for fixed initial data.
+Variation of constants against their bounded fundamental matrix
+on that interval, followed by Gronwall, gives this estimate.
+Their standard asymptotics carry the phase shift $\pi/4$ at each
+turn \cite[9.7.5--9.7.12]{DLMFAiry}. The exact oscillator calculation,
+rather than this local heuristic, proves
+\eqref{eq:example-spectral-phase}.
+
+\subsection{Normalization, conservation and the first residual correction}
+
+The nonlinear unknown is $z=h+qu$. Divide its residual by the small
+parameter, using the removable definition
+\begin{equation}\label{eq:cart-removable-equation}
+ \mathcal A=\mathcal F_q(w,u)=
+ \begin{cases}r\mathcal N_h(h+qu)/q,&q\ne0,\\
+ \mathscr L_wu,&q=0.
+ \end{cases}
+\end{equation}
+Smoothness at zero follows from the exact formula
+\begin{equation}\label{eq:normalized-integral}
+ \mathcal F_q(w,u)=\int_0^1 rD_z\mathcal N_h(h+tqu)u\,dt.
+\end{equation}
+We work with heights even in $\theta$ and invariant under
+$\theta\mapsto\theta+\pi$. Nonlinear products preserve this class.
+For functions constant at the endpoint collars, Stokes' theorem
+applied to the connection gives
+\begin{equation}\label{eq:zero-total-integral}
+ \int_{r_-}^{r_+}\av{\mathcal F_q(w,u)}\,dr=0,
+ \qquad \av f=\frac1{2\pi}\int_0^{2\pi}f\,d\theta.
+\end{equation}
+Both boundary periods equal $2\pi$. Every differential of this
+identity, including metric differentials, has the same compatibility.
+Constants in $u$ do not affect the equation.
+\label{lem:scalar-integral}
+
+The mean is more transparent at the level of the connection period.
+For $U=z-h$ set
+\begin{equation}\label{eq:cart-mean-path-flux}
+ \mathfrak F_w(U)=\av{\alpha_\theta}-1
+ =\left\langle\frac{1+kp_\theta/(1-p^2)}{\sqrt D}\right\rangle-1.
+\end{equation}
+Its derivative is $r\av{\mathcal N_h(h+U)}$, and its endpoint
+value is zero. If $U=Z+m(r)$ with $\av Z=0$, the mean equation
+is therefore $\mathfrak F_w(Z+m)=0$. Formula
+\eqref{eq:conn-exact-variation} gives
+\begin{equation}\label{eq:mean-period-derivative}
+ \partial_{m'}\mathfrak F_w(U)=\av a,
+ \qquad D_U\mathfrak F_w(0)[U]=w\av{U_r}.
+\end{equation}
+This linear cancellation is the reason the mean can later gain
+twice the decay of the nonconstant height.
+
+The true linearization has one inconvenient feature: away from a
+solution, the residual term in
+\eqref{eq:cart-determinant-identity} moves the turning circles.
+We remove that term while preserving the normal flux.
+
+\begin{lemma}[Fixing the type-change set]\label{lem:type-completion}
+On the neighborhood $D\ge1/2$, $Q\ge7w/8>0$, put
+\[
+ B=E/(rQ),\qquad \bar c=c-Br\mathcal N_h(z),\qquad
+ \bar L=\partial_r(a\partial_r+b\partial_\theta)
+             +\partial_\theta(b\partial_r+\bar c\partial_\theta).
+\]
+Then
+\begin{equation}\label{eq:cart-completed-normalized-derivative}
+ a\bar c-b^2=K_0/D^2,\qquad
+ D_u\mathcal F_q\eta=\bar L\eta+
+                 q\partial_\theta(B\mathcal A\eta_\theta).
+\end{equation}
+The corrected operator is symmetric for $dr\,d\theta$, kills
+constants, and has the same normal flux as the true derivative.
+\end{lemma}
+
+\begin{proof}
+The change in determinant is
+$aBr\mathcal N_h=ED^{-3/2}\mathcal N_h$, exactly the unwanted
+term. The change of operator is
+$\partial_\theta(Br\mathcal N_h\partial_\theta)$;
+substitute $r\mathcal N_h=q\mathcal A$.
+Only the tangential coefficient changed, proving the remaining
+assertions.
+\end{proof}
+
+The correction vanishes with the equation being solved. Its error
+is bilinear in the residual and the increment, the form needed in
+Hamilton's implicit theorem. A second correction will fix the
+characteristic returns. For reference the present characteristic
+slopes on a negative component are
+\begin{equation}\label{eq:completed-characteristics}
+ \frac{d\theta}{dr}=d\pm v_{\mathrm{char}},\qquad
+ d=\frac{E(p-k_\theta)}{rQ},\qquad
+ v_{\mathrm{char}}=\frac{\sqrt{-ww'/r}\sqrt D}{Q}.
+\end{equation}
+At a simple turning circle this speed is a smooth positive factor
+times the square root of inward distance. The subsequent coordinate
+construction must respect that degeneracy; merely treating all
+intervals as uniformly elliptic would lose the geometry of the problem.

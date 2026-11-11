@@ -1,0 +1,37 @@
+{
+  "status": "radial_and_geometry_bound_two_peer_roles_unbound",
+  "integration_thread": "01a1c553-dbc1-72c0-b3a7-ad6321a97333",
+  "prompts": [
+    {
+      "role": "radial",
+      "suggested_chat_title": "径向谱与固定参考",
+      "prompt": "此角色已绑定「协调 ContinuousFlexibility 形式化」（01a1c679-404a-7431-8dd5-96356c1dd323），不要重复认领。精确活动文件范围以active-workers.json为准。\n你负责 ContinuousFlexibility 主定理形式化的「径向谱与固定参考」工作包。工作目录：C:\\Users\\Boyang\\Desktop\\Math\\ContinuousFlexibility。\n先读 AGENTS.md、coordination/assignments.json、coordination/active-workers.json，以及对应的 blueprint/manifest.json 节点。以当前源码和真实构建为准。\n你的节点：R01, R02, R03, R04, R05, R06, R07, R08, R09, R10, R11, R12。写入范围：ContinuousFlexibility/Radial/。第一优先工作：实际中央/Morse闭谱实现、累积平尾与连续深尾域，随后同一参数序列的全频选高。\n使用 Lean 4.35.0-rc3，保持已锁定 mathlib 和依赖不变。已有已编译接口不要擅自改名；不修改根入口、公理审计、公共 Contracts、版本锁或蓝图。不要修改 active-workers.json 中仍被占用的文件。\n先只读核验并提出下一份可并行交付的具体文件及定理类型；向总集成对话「规划文章形式化」（01a1c553-dbc1-72c0-b3a7-ad6321a97333）发送认领和接口信息，协调文件所有权后实现。用户授权你主动向该总集成对话发送本项目的协调消息、进度和交付。\n交付完整 Lean 文件或补丁、精确定理类型、论文定位、实际 lake build 输出、新 imports 和剩余义务。禁止 sorry/admit、新公理、native_decide 或 unsafe；不把条件性局部结果宣称为完整主定理。",
+      "availability": "bound",
+      "bound_thread_id": "01a1c679-404a-7431-8dd5-96356c1dd323"
+    },
+    {
+      "role": "spaces",
+      "suggested_chat_title": "加权空间与Nash–Moser基础",
+      "prompt": "你负责 ContinuousFlexibility 主定理形式化的「加权空间与Nash–Moser基础」工作包。工作目录：C:\\Users\\Boyang\\Desktop\\Math\\ContinuousFlexibility。\n先读 AGENTS.md、coordination/assignments.json、coordination/active-workers.json，以及对应的 blueprint/manifest.json 节点。以当前源码和真实构建为准。\n你的节点：W01, W02, W03, H01, H02, H03。写入范围：ContinuousFlexibility/Analysis/。第一优先工作：真实分次空间、加权完备性和端点延拓；实现可应用的Nash–Moser基础。\n使用 Lean 4.35.0-rc3，保持已锁定 mathlib 和依赖不变。已有已编译接口不要擅自改名；不修改根入口、公理审计、公共 Contracts、版本锁或蓝图。不要修改 active-workers.json 中仍被占用的文件。\n先只读核验并提出下一份可并行交付的具体文件及定理类型；向总集成对话「规划文章形式化」（01a1c553-dbc1-72c0-b3a7-ad6321a97333）发送认领和接口信息，协调文件所有权后实现。用户授权你主动向该总集成对话发送本项目的协调消息、进度和交付。\n交付完整 Lean 文件或补丁、精确定理类型、论文定位、实际 lake build 输出、新 imports 和剩余义务。禁止 sorry/admit、新公理、native_decide 或 unsafe；不把条件性局部结果宣称为完整主定理。",
+      "availability": "unbound"
+    },
+    {
+      "role": "nonlinear",
+      "suggested_chat_title": "非线性环带求解",
+      "prompt": "你负责 ContinuousFlexibility 主定理形式化的「非线性环带求解」工作包。工作目录：C:\\Users\\Boyang\\Desktop\\Math\\ContinuousFlexibility。\n先读 AGENTS.md、coordination/assignments.json、coordination/active-workers.json，以及对应的 blueprint/manifest.json 节点。以当前源码和真实构建为准。\n你的节点：N01, N02, N03, N04, N05, N06, N07, N08, N09, N10, N11, N12。写入范围：ContinuousFlexibility/Nonlinear/。第一优先工作：先固定公共域与残差接口，再实际构造兼容源逆及非线性环带核心；不把待证逆作为新公理。\n使用 Lean 4.35.0-rc3，保持已锁定 mathlib 和依赖不变。已有已编译接口不要擅自改名；不修改根入口、公理审计、公共 Contracts、版本锁或蓝图。不要修改 active-workers.json 中仍被占用的文件。\n先只读核验并提出下一份可并行交付的具体文件及定理类型；向总集成对话「规划文章形式化」（01a1c553-dbc1-72c0-b3a7-ad6321a97333）发送认领和接口信息，协调文件所有权后实现。用户授权你主动向该总集成对话发送本项目的协调消息、进度和交付。\n交付完整 Lean 文件或补丁、精确定理类型、论文定位、实际 lake build 输出、新 imports 和剩余义务。禁止 sorry/admit、新公理、native_decide 或 unsafe；不把条件性局部结果宣称为完整主定理。",
+      "availability": "unbound"
+    },
+    {
+      "role": "geometry",
+      "suggested_chat_title": "几何闭合与不变量",
+      "prompt": "此角色已绑定「协调形式化工作」（01a1c655-f121-77d3-adab-122cc010840b），不要重复认领。以下保留原始工作包说明；精确活动文件范围以active-workers.json为准。\n你负责 ContinuousFlexibility 主定理形式化的「几何闭合与不变量」工作包。工作目录：C:\\Users\\Boyang\\Desktop\\Math\\ContinuousFlexibility。\n先读 AGENTS.md、coordination/assignments.json、coordination/active-workers.json，以及对应的 blueprint/manifest.json 节点。以当前源码和真实构建为准。\n你的节点：D01, D02, G01, G02, G03, G04, G05, G06, G07, G08, G09, G10, G11, G12, G13, G14, G15, G16。写入范围：ContinuousFlexibility/Geometry/。第一优先工作：先完成实际Cartesian填盘发展及归一化，接全局逆、图盘、标记帽、非全等与三项不变量。\n使用 Lean 4.35.0-rc3，保持已锁定 mathlib 和依赖不变。已有已编译接口不要擅自改名；不修改根入口、公理审计、公共 Contracts、版本锁或蓝图。不要修改 active-workers.json 中仍被占用的文件。\n先只读核验并提出下一份可并行交付的具体文件及定理类型；向总集成对话「规划文章形式化」（01a1c553-dbc1-72c0-b3a7-ad6321a97333）发送认领和接口信息，协调文件所有权后实现。用户授权你主动向该总集成对话发送本项目的协调消息、进度和交付。\n交付完整 Lean 文件或补丁、精确定理类型、论文定位、实际 lake build 输出、新 imports 和剩余义务。禁止 sorry/admit、新公理、native_decide 或 unsafe；不把条件性局部结果宣称为完整主定理。",
+      "availability": "bound",
+      "bound_thread_id": "01a1c655-f121-77d3-adab-122cc010840b"
+    }
+  ],
+  "unbound_roles": [
+    "spaces",
+    "nonlinear"
+  ],
+  "no_chats_created_by_integration": true
+}

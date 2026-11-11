@@ -1,0 +1,51 @@
+{
+  "main_formalized": false,
+  "integrated_checkpoint": "checkpoint-2026-11-11-coordination.json",
+  "refinement_audit": "../blueprint/refinement/AUDIT.md",
+  "targeted_graph_wave": "targeted-2026-11-11-graph-region.json",
+  "ownership": "active-workers.json",
+  "next_priority": [
+    {
+      "node": "C00,MAIN",
+      "owner": "statements peer",
+      "task": "Compile concrete statements for all milestones and the unconditional full MAIN in exclusive Statements drafts; integration reviews and freezes. Statement compilation does not prove existence."
+    },
+    {
+      "node": "R03.07,R03.09,R03.10",
+      "owner": "radial peer and its assigned helpers",
+      "task": "Use actual physical closed form and same-graph inverse to prove real nu-weighted left/right/two-sided inverse and j=2 projection compatibility; left/right high-order actual radius asymptotics remain explicit."
+    },
+    {
+      "node": "R04.01-R04.03",
+      "owner": "internal radial",
+      "task": "Actual weak derivative and exp(-X) closed Hilbert energy domain and coercive physical Morse form; later associated operator, form core and spectrum."
+    },
+    {
+      "node": "H01.03-H01.04,W02-W03,H02-H03",
+      "owner": "internal nonlinear",
+      "task": "True nonlinear Bastiani curve chain rule in projective topology using Banach FTC, compact uniform control and level assembly. Actual Sobolev/retraction and Nash-Moser still must be built."
+    },
+    {
+      "node": "G12-G13",
+      "owner": "internal geometry",
+      "task": "After actual Core closed-disk rigidity and image variation, construct genuine smooth local reparameterization from ambient image congruence and derive actual marker stabilizer constraints."
+    },
+    {
+      "node": "G07-G09",
+      "owner": "geometry peer",
+      "task": "From the actual jointly smooth standard-S2 embedded family, construct phase-independent positive smooth tangent pullback metric and true library immersion bridge."
+    },
+    {
+      "node": "G15-G16,D02",
+      "owner": "integration",
+      "task": "Glue the explicit cap wall body with the moving central subgraph, identify full frontier and actual outward orientation, and prove actual surface measure and signed curvature integral invariance."
+    },
+    {
+      "node": "R05-R12,N01-N12,H03",
+      "owner": "integration coordinates subsequent scopes",
+      "task": "Actual accumulating radial tails/all-frequency reference, common closed-domain inverse/tame estimates and Nash-Moser must yield a nonempty FlatAnnularCore."
+    }
+  ],
+  "peer_chats": "radial, geometry and concrete statement peers bound; no user-owned chats created by integration",
+  "handoff_rule": "Keep exact exclusive scopes and stable hashes; every owner tracks 4-thread command to actual terminal output; no local helper or statement compilation counts as MAIN."
+}

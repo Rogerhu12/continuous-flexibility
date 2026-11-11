@@ -1,0 +1,2943 @@
+{
+  "parents": {
+    "R02": [
+      {
+        "id": "R02.01",
+        "title": "实际半径坐标的可逆性",
+        "statement": "对构造的模型半径r，证明r_X=v>0并确定range，构造实际逆坐标及其光滑性。",
+        "depends_on": [],
+        "acceptance": [
+          "v>0由模型的已证明结论提供而非最终新增假设",
+          "双向复合恒等式与导数公式齐备"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          500
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "r_X>0",
+          "实际半径逆"
+        ],
+        "status": "planned",
+        "existing_support": "CentralRadius.lean与CentralRadiusMetric.lean已有中央模型支持，通用接口仍需核对。"
+      },
+      {
+        "id": "R02.02",
+        "title": "径向轮廓和基线高度",
+        "statement": "由同一模型P,v与逆坐标定义w(r)=λP(X(r))v(X(r))和实际高度primitive，证明正性、C∞及pullback恒等式。",
+        "depends_on": [
+          "R02.01"
+        ],
+        "acceptance": [
+          "同一半径逆用于profile和height",
+          "λ>0以及全域/区间边界明确"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          550
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "profile",
+          "height",
+          "ContDiff"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R02.03",
+        "title": "Liouville共轭与源因子",
+        "statement": "把已有坐标恒等式实例化到实际构造的L_j，精确证明非齐次方程两向等价及source Jacobian。",
+        "depends_on": [
+          "R02.01",
+          "R02.02"
+        ],
+        "acceptance": [
+          "源项缩放符号与λ因子逐项保持",
+          "使用真实导数而非形式微分"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          450
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "L_j共轭",
+          "源因子"
+        ],
+        "status": "planned",
+        "existing_support": "Liouville.lean已有微分恒等式。"
+      },
+      {
+        "id": "R02.04",
+        "title": "两种测度的积分运输",
+        "statement": "将dr源配对和varpi dr谱测度在同一实际逆坐标下运输，证明可积条件及积分等式。",
+        "depends_on": [
+          "R02.01",
+          "R02.03"
+        ],
+        "acceptance": [
+          "dr与谱测度分别给出等式",
+          "全域结果由截断极限证明而非仅有限区间"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "dr配对",
+          "Hilbert谱测度"
+        ],
+        "status": "planned",
+        "existing_support": "RadiusChange.lean已有有限区间积分换元。"
+      },
+      {
+        "id": "R02.05",
+        "title": "L²等价类与共轭映射",
+        "statement": "由测度运输构造实际L²等价类之间的线性等距同构，证明反向映射与微分表达式兼容。",
+        "depends_on": [
+          "R02.03",
+          "R02.04"
+        ],
+        "acceptance": [
+          "a.e.代表元不影响映射",
+          "闭算子域识别留给R03/R06/R12而不从形式共轭推断"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Hilbert同构",
+          "代表元",
+          "域边界"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R02.06",
+        "title": "组合并验收Liouville变换与径向实现",
+        "statement": "在半径方程和 r_X=v>0 下，严格推导由谱势到径向轮廓的Liouville变换，给出真实L_j的共轭表达式、源因子和两种测度。",
+        "depends_on": [
+          "R02.01",
+          "R02.02",
+          "R02.03",
+          "R02.04",
+          "R02.05"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "不得把r_X>0假设当作模型构造",
+          "保留dr源配对与Hilbert谱测度的区别"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R03": [
+      {
+        "id": "R03.01",
+        "title": "真实Hermite Hilbert基",
+        "statement": "把已证明的归一化Hermite总性实现为实际HilbertBasis，证明系数展开和Parseval。",
+        "depends_on": [],
+        "acceptance": [
+          "基向量与已有真实L²函数相等",
+          "展开在L²拓扑收敛"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          500
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "HilbertBasis",
+          "完整谱前置"
+        ],
+        "status": "planned",
+        "existing_support": "HermiteCompleteness.lean已证明实际L²完备性，HermiteBasis.lean属于活动工作。"
+      },
+      {
+        "id": "R03.02",
+        "title": "对角闭算子的图域",
+        "statement": "在Hermite系数中定义带实际能级的平方可和图域，证明对角算子闭合与自伴。",
+        "depends_on": [
+          "R03.01"
+        ],
+        "acceptance": [
+          "域条件是能级乘系数属于l²",
+          "证明稠密和图范数完备"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "闭图域",
+          "对角自伴"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R03.03",
+        "title": "微分闭二次型实现",
+        "statement": "构造谐振子实际微分二次型及其闭包，证明cutoff核心稠密与分部积分。",
+        "depends_on": [],
+        "acceptance": [
+          "表述为真实弱导数和X加权L²条件",
+          "边界项由cutoff极限消失"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "闭二次型",
+          "smooth core"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R03.04",
+        "title": "微分域与谱域识别",
+        "statement": "证明实际谐振子微分实现等于Hermite对角实现，两种域双向包含。",
+        "depends_on": [
+          "R03.01",
+          "R03.02",
+          "R03.03"
+        ],
+        "acceptance": [
+          "不能只用候选本征方程推出域相等",
+          "逐项闭包极限与分布方程一致"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "闭微分算子域",
+          "谱全集"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R03.05",
+        "title": "偶频零能隙与二模核",
+        "statement": "把中央能级整数分解估计接到实际闭谱，证明所有偶j≥4的统一零能隙和j=2核恰为高斯一维。",
+        "depends_on": [
+          "R03.04"
+        ],
+        "acceptance": [
+          "所有m同时覆盖",
+          "算术下界作用于已识别完整谱"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          550
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "偶频零能隙",
+          "二模核"
+        ],
+        "status": "planned",
+        "existing_support": "CentralSpectralGap.lean在活动工作中，只能作为待核对支持。"
+      },
+      {
+        "id": "R03.06",
+        "title": "实际约化逆和投影",
+        "statement": "用真实正交投影构造j=2约化逆及其两向逆恒等式，并由零能隙构造其它偶频逆。",
+        "depends_on": [
+          "R03.05"
+        ],
+        "acceptance": [
+          "j=2只在核的正交补反演",
+          "逆映回实际微分域"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "约化逆",
+          "双侧逆"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R03.07",
+        "title": "中央高阶端渐近",
+        "statement": "对实际Laplace–Gaussian半径和其逆证明论文所需各固定阶端渐近及权upsilon增长界。",
+        "depends_on": [],
+        "acceptance": [
+          "任意固定阶常数可依赖阶数",
+          "渐近绑定同一真实r而非替代模型"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "端渐近",
+          "实际权函数"
+        ],
+        "status": "planned",
+        "existing_support": "CentralRadius.lean已有正递增半径和实际ODE。"
+      },
+      {
+        "id": "R03.08",
+        "title": "中央转点简单性",
+        "statement": "由实际半径/profile导数证明两个内部转点简单，并确定负区间与旅行角积分区间。",
+        "depends_on": [
+          "R03.07"
+        ],
+        "acceptance": [
+          "转点处二阶量非零",
+          "负区间端点与真实profile对应"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          500
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "转型非退化",
+          "旅行角区间"
+        ],
+        "status": "planned",
+        "existing_support": "CentralTurningPoints.lean为活动文件，不登记为本子任务已完成。"
+      },
+      {
+        "id": "R03.09",
+        "title": "双侧加权resolvent",
+        "statement": "先证upsilon H_j⁻¹单侧界，再以伴随与能量吸收证明upsilon H_j⁻¹ upsilon双侧界，二模使用约化逆。",
+        "depends_on": [
+          "R03.06",
+          "R03.07"
+        ],
+        "acceptance": [
+          "给出实际有界算子及其定义域",
+          "不能把无权谱隙直接当作双权界"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "双侧加权resolvent"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R03.10",
+        "title": "辅助二模边框和缩放",
+        "statement": "构造紧支撑g₀及row ℓ₀，证明∫g₀φ₀dr=1、增广逆界和w高度缩放下的Hilbert归一化。",
+        "depends_on": [
+          "R03.06",
+          "R03.09"
+        ],
+        "acceptance": [
+          "同一row/column用于后续buffer",
+          "λ缩放后行列范数有统一界"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "辅助二模边框",
+          "高度缩放"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R03.11",
+        "title": "中央实际旅行角小除数",
+        "statement": "把已有T_c=π/(2√2)和所有k≥1的正小除数下界绑定到同一实际负区间。",
+        "depends_on": [
+          "R03.08"
+        ],
+        "acceptance": [
+          "旅行角与谱相位分别陈述",
+          "零频不套用正频不等式"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          400
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "真实旅行角",
+          "全部正频率"
+        ],
+        "status": "planned",
+        "existing_support": "CentralTravelAngle.lean和CentralSmallDivisor.lean已有明确积分及算术定理。"
+      },
+      {
+        "id": "R03.12",
+        "title": "组合并验收中央谐振子模型的完整实现",
+        "statement": "中央模型的闭二次型实现具有文中完整谱；二模恰一维零核，其余偶模有所需零能隙；得到正递增半径、端渐近、约化逆和双侧加权resolvent估计。另证明中央负区旅行角T_c=π/(2√2)及全部k≥1上的|sin(kT_c)|≥c/k。",
+        "depends_on": [
+          "R03.01",
+          "R03.02",
+          "R03.03",
+          "R03.04",
+          "R03.05",
+          "R03.06",
+          "R03.07",
+          "R03.08",
+          "R03.09",
+          "R03.10",
+          "R03.11"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "候选能级间隔不等于完整谱证明",
+          "约化逆保留二模边框",
+          "实际半径/权函数与抽象谱模型联系完整"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R04": [
+      {
+        "id": "R04.01",
+        "title": "Morse实际闭二次型",
+        "statement": "对真实Morse势构造稠密半有界闭二次型及其Friedrichs微分实现。",
+        "depends_on": [],
+        "acceptance": [
+          "cutoff core的闭包条件明确",
+          "算子域由分布表达识别"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Morse闭实现",
+          "二次型"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.02",
+        "title": "Morse一阶因子分解",
+        "statement": "在共同cutoff核心证明Dα及其伴随的两条因子恒等式，再以闭包推广至所需域。",
+        "depends_on": [
+          "R04.01"
+        ],
+        "acceptance": [
+          "伴随包含边界条件",
+          "形式恒等式须实际延伸到闭域"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "因子分解",
+          "域兼容"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.03",
+        "title": "Morse基态的精确L²条件",
+        "statement": "对exp(-αX-ωexp(-X))证明微分方程及α>0恰为L²条件，并证明基态核一维。",
+        "depends_on": [
+          "R04.02"
+        ],
+        "acceptance": [
+          "左右两端可积分别处理",
+          "α≤0的排除不靠未证明谱公式"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "基态",
+          "L²阈值"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.04",
+        "title": "Morse升降与离散能级",
+        "statement": "用交织算子逐阶构造并识别E_m,j=j²B-(α_j-m)²的简单离散能级。",
+        "depends_on": [
+          "R04.02",
+          "R04.03"
+        ],
+        "acceptance": [
+          "升降映射非零与域成员实际证明",
+          "整数m范围0≤m<α_j严格限定"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "离散谱",
+          "简单性"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.05",
+        "title": "Morse无遗漏离散谱",
+        "statement": "下降至-1<α≤0时用非负形式排除阈值下残余谱，证明能级表完整。",
+        "depends_on": [
+          "R04.04"
+        ],
+        "acceptance": [
+          "明确有限下降终止",
+          "不把候选本征函数当作完整性"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "无遗漏谱",
+          "阈值下排除"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.06",
+        "title": "Morse本质谱阈值",
+        "statement": "对左端约束势和右端指数趋常势，证明阈值j²B及零能resolvent所需的谱隔离。",
+        "depends_on": [
+          "R04.01",
+          "R04.05"
+        ],
+        "acceptance": [
+          "实际闭实现上作紧扰动或等价充分估计",
+          "阈值与离散能级分开处理"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "essential threshold",
+          "谱隔离"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.07",
+        "title": "非平方参数算术隙",
+        "statement": "对同一非平方整数d的A,B证明所有允许j,m的离散能级零能下界及阈值下界。",
+        "depends_on": [],
+        "acceptance": [
+          "A>4B>0实际验证",
+          "覆盖全部j≥2而非有限检查"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          500
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "非平方参数",
+          "零能隙"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.08",
+        "title": "Morse实际零能逆",
+        "statement": "将谱隔离和非平方算术隙组合成实际闭算子的有界双侧逆及8d⁹型范数界。",
+        "depends_on": [
+          "R04.05",
+          "R04.06",
+          "R04.07"
+        ],
+        "acceptance": [
+          "逆的值域落在真实算子域",
+          "参数依赖和常数界明确"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "resolvent界",
+          "双侧逆"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.09",
+        "title": "Morse旅行角积分",
+        "statement": "求ρ正区间的两个简单根，严格积分得到T=π(√A/2-√B)=π/(2√d)。",
+        "depends_on": [
+          "R04.07"
+        ],
+        "acceptance": [
+          "换元积分的端点奇性受控",
+          "绑定与谱算术相同的A,B,d"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "旅行角",
+          "简单转点"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.10",
+        "title": "Morse正频返回下界",
+        "statement": "由非平方整数分解和最近整数估计证明所有k≥1的|sin(kT)|≥1/(3k√d)。",
+        "depends_on": [
+          "R04.09"
+        ],
+        "acceptance": [
+          "小k与大k分支齐全",
+          "不得用谱能隙代替特征返回非共振"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          500
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "特征返回",
+          "全部正频率"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R04.11",
+        "title": "组合并验收Morse模型的两类非共振",
+        "statement": "Morse闭实现具有所需离散谱和essential threshold，非平方参数给零能逆界；另精确计算旅行角并证明全部正频率的特征返回小除数下界。",
+        "depends_on": [
+          "R04.01",
+          "R04.02",
+          "R04.03",
+          "R04.04",
+          "R04.05",
+          "R04.06",
+          "R04.07",
+          "R04.08",
+          "R04.09",
+          "R04.10"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "正频率k≥1，零模另处理",
+          "谱相位与特征相位不可混同",
+          "闭算子实现和resolvent界不能由形式谱公式代替"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R05": [
+      {
+        "id": "R05.01",
+        "title": "非平方单元参数与尺度预算",
+        "statement": "实际选择d_n及A_n,B_n,λ_n(σ)，证明统一于σ∈[1,2]^ℕ的指数比较和可继续增大N的阈值。",
+        "depends_on": [],
+        "acceptance": [
+          "指数阶数2<5/2<3的吸收逐条证明",
+          "常数与N、σ的允许依赖登记"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "d_n选择",
+          "全部高度参数",
+          "尺度分离"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.02",
+        "title": "单个Morse半径的Volterra构造",
+        "statement": "按指定右转点初值实际解半径系统，并在保留区证明r=1+O(A)与v>0。",
+        "depends_on": [],
+        "acceptance": [
+          "存在唯一的真实光滑解",
+          "不能将v>0留为输入假设"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "单元半径",
+          "正递增"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.03",
+        "title": "Morse单元几何的统一估计",
+        "statement": "由真实半径解证明左右cut处r,v及长正区间界，确定两个转点的简单性。",
+        "depends_on": [
+          "R05.02"
+        ],
+        "acceptance": [
+          "所有小A常数统一",
+          "保留区与cut位置精确定义"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "cut估计",
+          "真实简单转点"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.04",
+        "title": "正连接的光滑插值",
+        "statement": "构造实际正连接profile，匹配两端全jets并证明长度A_n¹²型控制与所需正类型符号。",
+        "depends_on": [
+          "R05.01",
+          "R05.03"
+        ],
+        "acceptance": [
+          "不是仅匹配函数值或一阶",
+          "高度对比允许很大"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "正连接",
+          "全jets匹配"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.05",
+        "title": "无限单元的径向累积",
+        "statement": "递推放置并缩放真实单元和连接，证明半径端点有限、正且所有单元无重叠地覆盖尾。",
+        "depends_on": [
+          "R05.01",
+          "R05.03",
+          "R05.04"
+        ],
+        "acceptance": [
+          "对整个高度参数立方体统一",
+          "左右方向分别确定"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "有限端点",
+          "无限拼接"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.06",
+        "title": "轮廓全阶平坦延拓",
+        "statement": "证明无限拼接w内部正且C∞，每个固定阶径向导数在有限端点趋零并有实际零延拓。",
+        "depends_on": [
+          "R05.05"
+        ],
+        "acceptance": [
+          "每个阶数均由一致jet估计推出",
+          "有限接缝和累积端点分别处理"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "全部阶数",
+          "零延拓"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.07",
+        "title": "真实质量与阻力积分",
+        "statement": "由同一w,r计算μ_n,R_n^I,ν_n,R_n的两侧估计，包含连接误差和半径缩放因子。",
+        "depends_on": [
+          "R05.03",
+          "R05.04",
+          "R05.05"
+        ],
+        "acceptance": [
+          "使用真实积分而非定义为近似值",
+          "mass与resistance两种测度均显式"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "mass/resistance",
+          "实际积分"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.08",
+        "title": "离散增长与衰减尺度",
+        "statement": "从积分估计证明H_n,E_n,S_n及μ_nR_n等全部离散比较和累计误差界。",
+        "depends_on": [
+          "R05.01",
+          "R05.07"
+        ],
+        "acceptance": [
+          "每个比较保留索引阈值",
+          "对所有σ统一常数"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "离散尺度",
+          "误差累积"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.09",
+        "title": "深尾条件的频率范围",
+        "statement": "证明j²A_n√log(A_n/B_n)足够小时真实尾满足全部deep-tail不等式。",
+        "depends_on": [
+          "R05.07",
+          "R05.08"
+        ],
+        "acceptance": [
+          "质量-阻力三类小量和两类大量分别验证",
+          "左端一格索引移动预先注明"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "deep条件",
+          "全部频率区域"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.10",
+        "title": "高度参数的局部与全局依赖",
+        "statement": "证明半径cut与σ无关、σ_n同比缩放后续profile；建立有限prefix光滑依赖和所需product连续性。",
+        "depends_on": [
+          "R05.04",
+          "R05.05",
+          "R05.08"
+        ],
+        "acceptance": [
+          "不得把自然端线连续性提前当假设",
+          "仅几何数据在此闭合"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          550
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "参数立方体",
+          "冻结几何"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R05.11",
+        "title": "组合并验收真实单元、连接与累积平坦轮廓",
+        "statement": "对所有足够大的N及全部高度选择σ_n∈[1,2]，构造Morse单元和正连接，使半径累积于正的有限端点、轮廓正、转点简单、零延拓C∞平坦；推出质量/阻力、离散尺度和全部固定阶jet界。",
+        "depends_on": [
+          "R05.01",
+          "R05.02",
+          "R05.03",
+          "R05.04",
+          "R05.05",
+          "R05.06",
+          "R05.07",
+          "R05.08",
+          "R05.09",
+          "R05.10"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "显式保留N可继续增大的构造自由",
+          "零延拓包括全部阶数",
+          "证明估计对整个参数立方体一致"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R06": [
+      {
+        "id": "R06.01",
+        "title": "阻力坐标和边界方向",
+        "statement": "在真实deep tail上构造ds=dx/p，证明测度和方程换元，明确左端初始阻力边及后续一格索引。",
+        "depends_on": [],
+        "acceptance": [
+          "两侧source Jacobian精确保留",
+          "有限入口Dirichlet条件与外端条件分别陈述"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "阻力坐标",
+          "左端索引",
+          "源Jacobian"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.02",
+        "title": "单边Dirichlet Green核",
+        "statement": "构造有限edge零势核G₀，证明核乘积不等式与Λ∫ωG₀(s,s)≤3η。",
+        "depends_on": [
+          "R06.01"
+        ],
+        "acceptance": [
+          "edge端点和核对角点包括在陈述中",
+          "实际积分与权密度对应"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "连续edge核",
+          "小参数"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.03",
+        "title": "单边实际逆与Poisson函数",
+        "statement": "在同一edge空间用收敛核级数构造GΛ及v₀,v₁，证明比较界、零边界能量界和实际方程。",
+        "depends_on": [
+          "R06.02"
+        ],
+        "acceptance": [
+          "先证同空间有界小量再用Neumann",
+          "Poisson边界值与Green零边界均验证"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "edge逆",
+          "Poisson函数"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.04",
+        "title": "精确边界导数矩阵",
+        "statement": "由Green恒等式计算edge的c_n,d_n,i，证明c_n≈R_n⁻¹和b_n≈Λμ_n。",
+        "depends_on": [
+          "R06.03"
+        ],
+        "acceptance": [
+          "所有有向符号正确",
+          "初始阻力边独立包含"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Dirichlet-to-Neumann",
+          "对角估计"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.05",
+        "title": "节点插值的L²两侧界",
+        "statement": "对Ta=a_nv₀+a_n+1v₁证明l²(μ)到连续L²(pdx)的两侧范数界。",
+        "depends_on": [
+          "R06.03",
+          "R06.04"
+        ],
+        "acceptance": [
+          "无限求和收敛实际证明",
+          "相邻误差索引移动受控"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "节点插值",
+          "范数等价"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.06",
+        "title": "节点Jacobi算子逆",
+        "statement": "在加权l²中证明节点矩阵对角占优、有界可逆及C/Λ界。",
+        "depends_on": [
+          "R06.04"
+        ],
+        "acceptance": [
+          "算子定义于完整l²而非仅有限矩阵",
+          "常数独立截断长度"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "离散逆",
+          "统一截断界"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.07",
+        "title": "连续闭形式域分解",
+        "statement": "构造真实连续闭二次型，证明每个域元素的节点trace属于l²并唯一分解为Ta+v，v各节点为零。",
+        "depends_on": [
+          "R06.03",
+          "R06.05"
+        ],
+        "acceptance": [
+          "trace由能量估计控制",
+          "两部分对shifted form正交"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "连续与离散form domain"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.08",
+        "title": "Friedrichs实现和实际逆公式",
+        "statement": "从闭形式分解识别连续Dirichlet/Friedrichs算子，证明其逆为G_D+T D⁻¹T*及C/Λ界。",
+        "depends_on": [
+          "R06.05",
+          "R06.06",
+          "R06.07"
+        ],
+        "acceptance": [
+          "不是只把逆的像定义成目标域",
+          "正反向逆恒等式都在实际域上成立"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Friedrichs实现",
+          "连续逆"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.09",
+        "title": "有限Dirichlet截断强极限",
+        "statement": "证明有限edge直和和节点逆压缩均强收敛，并识别极限为前项Friedrichs逆。",
+        "depends_on": [
+          "R06.06",
+          "R06.08"
+        ],
+        "acceptance": [
+          "有限截断的边界条件一致",
+          "极限不能仅由统一范数界推断"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "有限截断极限",
+          "域识别"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.10",
+        "title": "自然衰减节点解的构造",
+        "statement": "在[1,2]上证明后向continued fraction统一收缩，由外墙极限构造正y_n及精确比值界。",
+        "depends_on": [
+          "R06.04",
+          "R06.06"
+        ],
+        "acceptance": [
+          "全部height参数统一收缩常数",
+          "证明y_n非零且满足真实节点方程"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "唯一衰减线存在",
+          "收缩"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.11",
+        "title": "连续L²自然线的唯一性",
+        "statement": "将节点解插值为连续齐次解，并用离散Wronskian公式证明任何独立解的连续L²质量发散。",
+        "depends_on": [
+          "R06.05",
+          "R06.10"
+        ],
+        "acceptance": [
+          "不能仅证明节点l²发散而漏掉连续质量",
+          "得出limit-point及恰一维自然线"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "自然线唯一",
+          "limit-point"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.12",
+        "title": "原半径衰减与全阶平坦性",
+        "statement": "累计比值证明e^{-(S_k-S_m)}型衰减，再恢复gauge及各固定阶真实径向导数，构造平坦延拓。",
+        "depends_on": [
+          "R06.10",
+          "R06.11"
+        ],
+        "acceptance": [
+          "gauge有界性只在已证deep频段使用",
+          "每阶极限实际证明"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "原半径平坦性",
+          "衰减"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.13",
+        "title": "端线的product拓扑连续性",
+        "statement": "用continued fraction统一尾误差和有限prefix连续依赖证明自然端线随所有σ的product拓扑连续。",
+        "depends_on": [
+          "R06.09",
+          "R06.10",
+          "R06.11"
+        ],
+        "acceptance": [
+          "不要求不合理的全参数一致范数拓扑",
+          "对任意固定频率和入口给连续性"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "参数连续",
+          "无限尾极限"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.14",
+        "title": "离散Green列和局域核界",
+        "statement": "构造节点逆的Green列，借自然线商与对称性证明两侧e^{-|S_n-S_m|}界，再加入same-edge项。",
+        "depends_on": [
+          "R06.06",
+          "R06.08",
+          "R06.10",
+          "R06.11",
+          "R06.12"
+        ],
+        "acceptance": [
+          "插值符号和邻边项不遗漏",
+          "绝对核界与算子范数分别陈述"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Green核衰减",
+          "局域逆"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.15",
+        "title": "径向源配对和端点Green项",
+        "statement": "恢复真实L_j的dr Green核、B_j逆Cj⁻⁴界及两种入口impedance，证明自然端点Green pairing消失。",
+        "depends_on": [
+          "R06.01",
+          "R06.08",
+          "R06.11",
+          "R06.14"
+        ],
+        "acceptance": [
+          "明确g²w/r² dr密度与非齐次因子",
+          "初始阻力edge的impedance符号独立检查"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "dr源配对",
+          "端点边界项",
+          "impedance"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R06.16",
+        "title": "组合并验收深尾连续算子逆与唯一衰减线",
+        "statement": "深尾条件下，A_p=-p⁻¹(p∂x)'的Dirichlet/Friedrichs实现具有文中逆界，端点恰有一条自然L²齐次解线；其衰减、原半径平坦性、Green核衰减和参数连续性成立。",
+        "depends_on": [
+          "R06.01",
+          "R06.02",
+          "R06.03",
+          "R06.04",
+          "R06.05",
+          "R06.06",
+          "R06.07",
+          "R06.08",
+          "R06.09",
+          "R06.10",
+          "R06.11",
+          "R06.12",
+          "R06.13",
+          "R06.14",
+          "R06.15"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "连续与离散form domain对应",
+          "有限截断极限确实实现目标连续算子",
+          "唯一解线、平坦性及product-topology连续性分别证明",
+          "左端x=−log r时显式处理mass/resistance顺序的一格索引移动及源Jacobian"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R07": [
+      {
+        "id": "R07.01",
+        "title": "所有偶频的唯一band划分",
+        "statement": "证明H_n单调趋无穷，含首band的I_n对全部偶j≥2恰好分区，下一单元已deep且更早单元有大正cap action。",
+        "depends_on": [],
+        "acceptance": [
+          "没有遗漏中间频段",
+          "频率区间边界等号归属唯一"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "唯一过渡单元",
+          "频率穷尽"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.02",
+        "title": "辅助正cone的实际incoming线",
+        "statement": "构造真实w=cr cone与正插值，证明r^±j incoming线、Dirichlet逆界及首band符号。",
+        "depends_on": [],
+        "acceptance": [
+          "cone幅度选择先于σ_N",
+          "最终只保留有限cone片段"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "incoming line",
+          "首band"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.03",
+        "title": "incoming斜率统一区间",
+        "statement": "由正cap上的实际ODE比较证明ζ_j/u∈[-3/2,-1/2]，覆盖左右方向和首band。",
+        "depends_on": [
+          "R07.01",
+          "R07.02"
+        ],
+        "acceptance": [
+          "normalization u=1合法且非零",
+          "常数统一于其它高度参数"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "斜率界",
+          "Riccati比较"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.04",
+        "title": "短连接真实传递误差",
+        "statement": "采用Y=(u,wζ_j/W_in)消去w′/w，证明实际基本解矩阵与恒等阵相差o(e^-n²)。",
+        "depends_on": [
+          "R07.01",
+          "R07.03"
+        ],
+        "acceptance": [
+          "使用真实Volterra级数及矩阵范数",
+          "不以大导数上界破坏短连接预算"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "传递矩阵",
+          "短join误差"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.05",
+        "title": "单坐标坏角集合测度",
+        "statement": "证明B(σ)=(B₁,σΞ_nB₂)的坏角集合长度≤Cδ_n，并把传递误差加入真实incoming角。",
+        "depends_on": [
+          "R07.03",
+          "R07.04"
+        ],
+        "acceptance": [
+          "B₁=0单独处理",
+          "常数独立于其余全部σ"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "单坐标排除",
+          "真实角度"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.06",
+        "title": "有限立方体同时选高",
+        "statement": "在任意有限band集合上用Fubini、可测性和并集界证明存在同时满足全部好角条件的σ。",
+        "depends_on": [
+          "R07.01",
+          "R07.05"
+        ],
+        "acceptance": [
+          "实际证明ΣC#I_nδ_n<1/2",
+          "未来ratios固定后估计仍统一"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Fubini",
+          "有限维选高"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.07",
+        "title": "无限好条件的闭性",
+        "statement": "将固定频率角度写成prefix传递与自然端线的连续函数，证明good set在紧乘积中闭。",
+        "depends_on": [
+          "R07.04",
+          "R07.05"
+        ],
+        "acceptance": [
+          "自然线使用R06已证product连续性",
+          "不能只取每频率不同的几何"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "闭条件",
+          "product连续"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.08",
+        "title": "同一高度序列覆盖全部频率",
+        "statement": "由有限维可满足性和乘积紧性得到一个σ_n序列满足所有偶正频率，并为两端分别选择再配成同一几何。",
+        "depends_on": [
+          "R07.06",
+          "R07.07"
+        ],
+        "acceptance": [
+          "量词严格为∃σ∀j",
+          "极限保持每个定量δ_n下界"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "无限紧性",
+          "所有频率同时选高"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R07.09",
+        "title": "组合并验收过渡区与所有频率同时选高",
+        "statement": "每个偶正频率具有唯一过渡单元；存在同一个高度序列(σ_n)，使所有频率的incoming line与自然端线具有文中定量角度下界。",
+        "depends_on": [
+          "R07.01",
+          "R07.02",
+          "R07.03",
+          "R07.04",
+          "R07.05",
+          "R07.06",
+          "R07.07",
+          "R07.08"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "量词为∃(σ_n)∀j，而非∀j∃(σ_n)",
+          "无限条件的闭性与线连续性",
+          "核验过渡/深尾频率区域确实穷尽全部偶正频率"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R08": [
+      {
+        "id": "R08.01",
+        "title": "两条自然尾线的统一归一化",
+        "statement": "从已选左右尾自然解选择非零归一化代表，固定真实入口值/flux以及允许的cut参数。",
+        "depends_on": [],
+        "acceptance": [
+          "左右方向符号一致",
+          "不更改已选高度序列和旅行角"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          500
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "同一已选尾",
+          "参数自由"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R08.02",
+        "title": "中央二模解的cut状态",
+        "statement": "在实际中央模型两个远cut提取二模核解及对数斜率，证明可连接的严格不等式。",
+        "depends_on": [
+          "R08.01"
+        ],
+        "acceptance": [
+          "沿真实半径逆计算",
+          "cut仍可增大而未提前冻结"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "中央二模",
+          "log斜率"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R08.03",
+        "title": "保核正连接的实际构造",
+        "statement": "按二模解对数斜率设计正连接w并构造非零φ，证明L₂φ=0及两端全jets匹配。",
+        "depends_on": [
+          "R08.01",
+          "R08.02"
+        ],
+        "acceptance": [
+          "φ不通过除零的入口值归一化",
+          "连接内w>0且无新增负区"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "保留二模",
+          "真实正连接"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R08.04",
+        "title": "中央和双尾的全局光滑拼合",
+        "statement": "把中央、两条连接和尾拼为同一w*及φ*，证明内部光滑、两端平坦、φ*非零。",
+        "depends_on": [
+          "R08.03"
+        ],
+        "acceptance": [
+          "无限端点平坦性继承真实估计",
+          "接口值和flux精确匹配"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "全局二模",
+          "平坦端点"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R08.05",
+        "title": "旅行角与已选角的保持",
+        "statement": "证明新增正连接不改变每个原负区旅行角，人工incoming的先定方向保持不变，变化仅进入后续Eb误差。",
+        "depends_on": [
+          "R08.03",
+          "R08.04"
+        ],
+        "acceptance": [
+          "不宣称任意中央改动自动保持全局角度",
+          "明确R10应控制的Eb项"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          550
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "旅行角保持",
+          "选高不破坏"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R08.06",
+        "title": "cut和head参数的依赖登记",
+        "statement": "建立带cut/cone-head参数的同一构造族和允许冻结次序，证明后续只调未冻结参数。",
+        "depends_on": [
+          "R08.02",
+          "R08.04",
+          "R08.05"
+        ],
+        "acceptance": [
+          "已有σ和M₀不能因输出阶数重选",
+          "给出供R10/R11调用的参数范围"
+        ],
+        "estimated_new_lean_lines": [
+          180,
+          450
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "冻结选择",
+          "参数预算"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R08.07",
+        "title": "组合并验收保留二模的中央目标连接",
+        "statement": "构造把两个已选尾和中央模型连起来的光滑径向轮廓及非零全局二模平坦解φ*，保留可调cut/cone-head长度并不改变负区旅行角。",
+        "depends_on": [
+          "R08.01",
+          "R08.02",
+          "R08.03",
+          "R08.04",
+          "R08.05",
+          "R08.06"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "φ*是真实非零解",
+          "新增连接不破坏已选角度",
+          "后续不得暗中重选已冻结的几何"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R09": [
+      {
+        "id": "R09.01",
+        "title": "正buffer的单位边界能量",
+        "statement": "在有真实闭实现的正势区域构造自然/Dirichlet单位边界解，证明α_in,α_out≈m。",
+        "depends_on": [],
+        "acceptance": [
+          "自然外端条件明确",
+          "使用真实能量下界及试函数上界"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "正buffer",
+          "能量和impedance"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R09.02",
+        "title": "cut附近点源Green近似列",
+        "statement": "构造带cutoff的局部Green列K_i，证明其分布像为δ_ci+f_i及L²残差界。",
+        "depends_on": [
+          "R09.01"
+        ],
+        "acceptance": [
+          "点源明确放在分布空间",
+          "f_i是真正L²源且避开scalar border support"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "点源",
+          "commutator残差"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R09.03",
+        "title": "精确Green列与cut矩阵",
+        "statement": "以全模型逆纠正f_i，证明Γ_ik=g_k(c_i)及双重衰减误差D^½ΓD^½=I+E。",
+        "depends_on": [
+          "R09.02"
+        ],
+        "acceptance": [
+          "点值trace由正buffer估计获得",
+          "i,k方向各贡献一个衰减因子"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "实际Green列",
+          "双重衰减"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R09.04",
+        "title": "保留区Dirichlet逆公式",
+        "statement": "证明切割矩阵Γ可逆及H_D⁻¹=RH⁻¹ι-g_IΓ⁻¹g_I*，并证明不存在隐藏Dirichlet核。",
+        "depends_on": [
+          "R09.03"
+        ],
+        "acceptance": [
+          "不能由形式Schur公式跳过域成员",
+          "保留scalar coordinate及row"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Dirichlet压缩",
+          "无隐藏核"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R09.05",
+        "title": "Poisson lift的真实界",
+        "statement": "由g_IΓ⁻¹构造row-zero Poisson map，证明真实边界值、齐次方程和归一化L²界。",
+        "depends_on": [
+          "R09.03",
+          "R09.04"
+        ],
+        "acceptance": [
+          "按D^-½作边界规范化",
+          "边框row确实为零"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Poisson lift",
+          "边界范数"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R09.06",
+        "title": "边界导数矩阵和正定性",
+        "statement": "证明Λ=Γ⁻¹-diag α_out，推导归一化误差和Λ正定。",
+        "depends_on": [
+          "R09.01",
+          "R09.03",
+          "R09.04",
+          "R09.05"
+        ],
+        "acceptance": [
+          "outward导数符号精确",
+          "紧支撑对称border在Green恒等式中无遗漏项"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "boundary derivative",
+          "正定"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R09.07",
+        "title": "径向norm和flux运输",
+        "statement": "把buffer结论运输回同一径向模型，保留Liouville中央gauge附加impedance并证明幅度λ消去。",
+        "depends_on": [
+          "R09.04",
+          "R09.05",
+          "R09.06"
+        ],
+        "acceptance": [
+          "Morse与中央分别实例化",
+          "中央λa_c diag(ε_iP_i)项不得丢弃"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Hilbert测度",
+          "真实conormal"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R09.08",
+        "title": "组合并验收正buffer压缩与Poisson边界矩阵",
+        "statement": "从full-model或bordered inverse及正势下界，得到保留区Dirichlet逆、Poisson lift及boundary derivative矩阵的实际界和正定性。",
+        "depends_on": [
+          "R09.01",
+          "R09.02",
+          "R09.03",
+          "R09.04",
+          "R09.05",
+          "R09.06",
+          "R09.07"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "标量边框support远离cut",
+          "点源不能当作普通L²源",
+          "得到可用于拼接的边界配对和符号"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R10": [
+      {
+        "id": "R10.01",
+        "title": "正interface骨架能量",
+        "statement": "组装所有保留区边界数据与正connector能量，证明完整骨架S₀及其归一化正定性。",
+        "depends_on": [],
+        "acceptance": [
+          "保留跨interface全部正能量",
+          "二模scalar border贯穿"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "内部骨架",
+          "正interface能量"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.02",
+        "title": "内部局部误差的全频压制",
+        "statement": "证明早期单元、中央远cut和首cone-head误差在任意高频下统一小，登记M₀→C*→N→cut/head次序。",
+        "depends_on": [
+          "R10.01"
+        ],
+        "acceptance": [
+          "覆盖j远高于局部threshold的频率",
+          "几何选择不依赖输出微分阶数"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "统一误差",
+          "参数冻结"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.03",
+        "title": "真实内部逆与Poisson插值",
+        "statement": "反演同一骨架小扰动并证明内部G_h、T_h及加权源/边界估计，包含scalar row。",
+        "depends_on": [
+          "R10.01",
+          "R10.02"
+        ],
+        "acceptance": [
+          "先证同空间有界小扰动",
+          "频率、截断长度的统一界实际给出"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "内部逆",
+          "boundary lifts"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.04",
+        "title": "过渡核心基本解和外端列",
+        "statement": "在过渡单元构造真实基本解及接自然端线的V，证明归一化状态和有限核心增长界。",
+        "depends_on": [],
+        "acceptance": [
+          "允许入口高度分量为零",
+          "从同一已选自然线取得列"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "外部列",
+          "不除入口高度"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.05",
+        "title": "外部非齐次Green逆",
+        "statement": "由规范化状态构造外逆R_o，证明真实方程、自然端条件和包含deep块的局域范数界。",
+        "depends_on": [
+          "R10.04"
+        ],
+        "acceptance": [
+          "核的λ^-1由实际mass/Poisson范数抵消",
+          "交叉block各自估计"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "外逆",
+          "deep限制恒等式"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.06",
+        "title": "内部截断列及残差衰减",
+        "statement": "构造近似内部Poisson列L_i和真实F_i=B_hL_i，证明zero row、独立support及前一正cap衰减。",
+        "depends_on": [
+          "R10.02",
+          "R10.03"
+        ],
+        "acceptance": [
+          "分别留出buffer与cutoff的固定份额",
+          "残差实际属于Hilbert源空间"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "残差列",
+          "前一cap衰减"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.07",
+        "title": "真实内部导数矩阵的修正",
+        "statement": "证明P_h=L-G_hF及D_b=Q_h(L,L)-F*G_hF=D₀+E_b，得到每个矩阵元的双衰减界。",
+        "depends_on": [
+          "R10.03",
+          "R10.06"
+        ],
+        "acceptance": [
+          "完成平方时scalar项不遗漏",
+          "等式与误差估计分别证明"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "真实边界矩阵",
+          "双衰减"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.08",
+        "title": "两边值匹配的精确矩阵",
+        "statement": "从真实内部/外部flux恒等式推出K=A(D₀+E_b)-B及全部source列的匹配方程。",
+        "depends_on": [
+          "R10.04",
+          "R10.05",
+          "R10.07"
+        ],
+        "acceptance": [
+          "不是只从形式状态猜矩阵",
+          "左右方向和归一化λ_i明确"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "2×2匹配恒等式"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.09",
+        "title": "选高角到匹配矩阵可逆",
+        "statement": "证明原选高frame到当前frame条件数有界，|v₁d-v₂|≥cδ_n，再用δ_n^-1||E_b||小证明K逆界。",
+        "depends_on": [
+          "R10.02",
+          "R10.07",
+          "R10.08"
+        ],
+        "acceptance": [
+          "v₁=0仍合法",
+          "首band用已保留head长度单独压制"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "定量可逆",
+          "角度运输"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.10",
+        "title": "返回固定内部的代价吸收",
+        "statement": "证明E_n^Cδ_n^-1 exp(C_oτ_n,j-cτ_n-1,j)<1/4及其首band版本。",
+        "depends_on": [
+          "R10.02",
+          "R10.06",
+          "R10.09"
+        ],
+        "acceptance": [
+          "C*及N在常数之后选择",
+          "不能依赖增大输出权来控制固定内部"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "前一cap压制",
+          "返回内部"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.11",
+        "title": "全局对称block公式",
+        "statement": "证明matched G的完整block表达及中间矩阵对称性，保留辅助二模border和dr源密度运输。",
+        "depends_on": [
+          "R10.03",
+          "R10.05",
+          "R10.07",
+          "R10.08",
+          "R10.09",
+          "R10.10"
+        ],
+        "acceptance": [
+          "实际值/conormal在所有有限interface匹配",
+          "两条逆恒等式先在光滑有限频源上验证"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "matched Green逆",
+          "对称block",
+          "源测度"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R10.12",
+        "title": "组合并验收全局匹配Green逆",
+        "statement": "保留完整正interface能量构造内部逆，构造不除入口高度的外逆，证明最终2×2匹配矩阵可逆，得到真实全局matched Green逆和对称block公式。",
+        "depends_on": [
+          "R10.01",
+          "R10.02",
+          "R10.03",
+          "R10.04",
+          "R10.05",
+          "R10.06",
+          "R10.07",
+          "R10.08",
+          "R10.09",
+          "R10.10",
+          "R10.11"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "Hilbert测度12w/r² dr与源dr显式转换",
+          "辅助二模边框贯穿拼接",
+          "匹配矩阵恒等式与其定量可逆性分开"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R11": [
+      {
+        "id": "R11.01",
+        "title": "固定β与邻近指数的权",
+        "statement": "固定β=3/4及0<ε<1/4，构造三指数在同一几何上的source/output weights并证明相邻权比统一界。",
+        "depends_on": [],
+        "acceptance": [
+          "先冻结M₀和几何再选允许的输出权",
+          "不能每个γ另造profile"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          550
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "同一几何",
+          "β±ε"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.02",
+        "title": "外部block的精确指数预算",
+        "statement": "对R_o、外列及leading lifts分别证明加权block指数式，显式吸收source measure与transition index成本。",
+        "depends_on": [
+          "R11.01"
+        ],
+        "acceptance": [
+          "输出索引在过渡区外是使用增大M₁的前提",
+          "所有邻居索引偏移实际控制"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "外部输出",
+          "block估计"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.03",
+        "title": "双索引Schur求和",
+        "statement": "由q慢变和S_n增量下界证明外部block kernel的统一行列可和界及有界算子。",
+        "depends_on": [
+          "R11.02"
+        ],
+        "acceptance": [
+          "无限求和由实际Schur估计完成",
+          "两尾和localizer有界重叠计入常数"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "Schur逆界",
+          "无限求和"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.04",
+        "title": "外Poisson列的双符号权界",
+        "statement": "对同一外列V证明W和W^-1两种权下的平方和界，保留e^{C_oτ_n,j}成本。",
+        "depends_on": [
+          "R11.01"
+        ],
+        "acceptance": [
+          "伴随列的权符号实际反转",
+          "边界两端采用同一band权"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "边界列",
+          "双符号权"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.05",
+        "title": "返回内部block的有界性",
+        "statement": "把G_hF、K⁻¹、V*三个实际有界因子组合，以前一cap衰减吸收过渡核心增长。",
+        "depends_on": [
+          "R11.04"
+        ],
+        "acceptance": [
+          "固定内部输出的控制不依赖改M₁",
+          "首band用同一固定head长度"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "返回固定内部",
+          "衰减吸收"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.06",
+        "title": "全部边界修正项的闭合",
+        "statement": "分别控制转置block、两残差列项和一残差一leading lift项，合并为真实G的全局加权界。",
+        "depends_on": [
+          "R11.03",
+          "R11.05"
+        ],
+        "acceptance": [
+          "转置block使用反号权",
+          "不得把一个cross block界代替全部校正项"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "双权全局估计",
+          "全部block"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.07",
+        "title": "局部径向一阶恢复",
+        "statement": "在扩大单元上由实际方程和插值/Young不等式证明u_r的L²局部界，含cutoff项与二模compact border。",
+        "depends_on": [],
+        "acceptance": [
+          "不对未识别的谱展开逐项微分",
+          "全部系数cost记入E_m固定幂"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "一阶法向估计",
+          "实际局部方程"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.08",
+        "title": "同一逆上的三指数验收",
+        "statement": "将全局界与一阶恢复同时用于β-ε、β、β+ε，证明各指数使用同一自然端点逆和同一row/column。",
+        "depends_on": [
+          "R11.01",
+          "R11.06",
+          "R11.07"
+        ],
+        "acceptance": [
+          "只改变范数常数与允许输出权",
+          "几何和domain选择不随指数或输出阶数重选"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          550
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "同几何三指数",
+          "冻结参数"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R11.09",
+        "title": "组合并验收同一几何上的双权全局估计",
+        "statement": "先固定β=3/4和一个ε∈(0,1/4)，在同一几何上对β−ε、β、β+ε获得足够的加权block/Schur逆界和一阶法向估计。",
+        "depends_on": [
+          "R11.01",
+          "R11.02",
+          "R11.03",
+          "R11.04",
+          "R11.05",
+          "R11.06",
+          "R11.07",
+          "R11.08"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "不同指数必须共用w*,φ*,边框和自然端点逆",
+          "几何不依赖最终微分阶数",
+          "全(0,1)紧区间版本另列X01，不是不同指数分别造几何"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ],
+    "R12": [
+      {
+        "id": "R12.01",
+        "title": "实际分布图域与source空间",
+        "statement": "定义§4 source范数、兼容源及含左常数a_Lχ_L的实际ambient空间，再以分布L_w建立最大图域。",
+        "depends_on": [],
+        "acceptance": [
+          "不能将域只定义成逆的像",
+          "不依赖§7物理空间W02"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "分布图域",
+          "source兼容",
+          "无循环"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.02",
+        "title": "零模第一primitive及尾界",
+        "statement": "对∫f₀dr=0构造p₀(r)=∫左至r f₀=-∫r至右 f₀，证明真实导数和端点权界。",
+        "depends_on": [
+          "R12.01"
+        ],
+        "acceptance": [
+          "原dr测度和正负符号明确",
+          "无非零homogeneous flux混入"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          600
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "零模flux",
+          "兼容积分"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.03",
+        "title": "零模高度primitive与唯一性",
+        "statement": "构造右端归零u₀=-∫r至右 p₀/w，证明收敛、左常数有界及减去a_Lχ_L后的权估计和齐次唯一性。",
+        "depends_on": [
+          "R12.02"
+        ],
+        "acceptance": [
+          "允许左右常数不同",
+          "以增长排除非零flux而非新增端点trace假设"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "零模高度",
+          "左常数自由"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.04",
+        "title": "兼容光滑有限频source稠密",
+        "statement": "实际截断、mollify及有限Fourier逼近source，并以固定紧bump恢复均值兼容。",
+        "depends_on": [
+          "R12.01"
+        ],
+        "acceptance": [
+          "修复积分后的范数误差趋零",
+          "scalar row一并逼近"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "source稠密",
+          "积分修正"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.05",
+        "title": "真实角向重建与右逆恒等式",
+        "statement": "在兼容source上用非零模matched逆加零模primitive，证明Fourier重建收敛并得L_w G_w=I。",
+        "depends_on": [
+          "R12.03",
+          "R12.04"
+        ],
+        "acceptance": [
+          "取值确实属于最大分布图域",
+          "先在光滑有限频源验证再由有界性和稠密推广"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "LG=I",
+          "实际角向重建"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.06",
+        "title": "最大图域齐次解的唯一性",
+        "statement": "对任意图域齐次差证明局部H²和finite interface匹配，权蕴含自然端L²，从端线与K可逆推出零。",
+        "depends_on": [
+          "R12.01",
+          "R12.03"
+        ],
+        "acceptance": [
+          "每个频率上的代表元和trace实际可用",
+          "不额外强加flat端点边界条件"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "最大域唯一",
+          "自然端线"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.07",
+        "title": "左逆与最大图域闭合",
+        "statement": "证明G_w L_w=I，并用图收敛下分布像收敛证明最大图域闭合。",
+        "depends_on": [
+          "R12.05",
+          "R12.06"
+        ],
+        "acceptance": [
+          "左逆适用于所有图域元素",
+          "闭合不由逆的像定义获得"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "GL=I",
+          "closed graph"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.08",
+        "title": "smooth admissible core的图闭包",
+        "statement": "证明稠密光滑source之逆像是真实smooth admissible field，并在graph norm逼近全部域元素。",
+        "depends_on": [
+          "R12.04",
+          "R12.05",
+          "R12.07"
+        ],
+        "acceptance": [
+          "有限接缝光滑及source外自然平坦实际证明",
+          "图闭包等于最大分布域"
+        ],
+        "estimated_new_lean_lines": [
+          350,
+          750
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "smooth core",
+          "graph closure"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.09",
+        "title": "普通dr Green reciprocity",
+        "statement": "把局部积分分部、自然端边界项消失和对称block矩阵合成为真实全局dr配对恒等式，含scalar border。",
+        "depends_on": [
+          "R12.05",
+          "R12.07",
+          "R12.08"
+        ],
+        "acceptance": [
+          "不是误用Hilbert varpi dr代替源配对",
+          "无限端点及Fourier极限的可积性逐一核对"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "dr Green配对",
+          "scalar border"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.10",
+        "title": "无边框核与二模归一化",
+        "statement": "由增广逆的单射性证明全局无边框二模核恰ℝφ*、其它偶模核为零，规范化辅助row。",
+        "depends_on": [
+          "R12.06",
+          "R12.07"
+        ],
+        "acceptance": [
+          "非零φ*沿R08同一见证",
+          "不由局部候选核推断全局核"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          550
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "二模核",
+          "其余偶模零核"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.11",
+        "title": "真实度量变分border的非零配对",
+        "statement": "在右正connector选择非零χ≥0，实际分部积分证明a*=∫φ*L′₂,w[wχ]φ*dr<0。",
+        "depends_on": [
+          "R12.09",
+          "R12.10"
+        ],
+        "acceptance": [
+          "support位于φ*′/φ*<0的真实连接区",
+          "L′是已识别的实际度量变分"
+        ],
+        "estimated_new_lean_lines": [
+          250,
+          650
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "真实边框列",
+          "非零配对"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.12",
+        "title": "替换row和column后的同一逆",
+        "statement": "定义χ*=χ/a*,g*=L′₂,w[wχ*]φ*和ℓ*u=∫g*u₂dr，以有限秩改造构造最终增广逆并证明三指数有界及双侧恒等式保留。",
+        "depends_on": [
+          "R12.07",
+          "R12.08",
+          "R12.09",
+          "R12.10",
+          "R12.11"
+        ],
+        "acceptance": [
+          "∫g*φ*dr=1精确成立",
+          "同一g*,ℓ*,域闭包在三个指数上一致"
+        ],
+        "estimated_new_lean_lines": [
+          300,
+          700
+        ],
+        "estimate_reason": "单个明确构造或估计；按实际辅助引理数量复核，超过800行继续拆分。",
+        "covers": [
+          "最终边框",
+          "同一几何",
+          "双侧逆"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "R12.13",
+        "title": "组合并验收固定径向参考与闭图域双侧逆",
+        "statement": "实例化RadialReference：同一w*,φ*,g*,ℓ*满足偶余弦二模核恰一维、其余偶模核零、返回小除数、边框归一化及兼容源上的双侧逆。图域有分布意义、smooth core闭包识别；右端归零、左端常数自由。",
+        "depends_on": [
+          "R12.01",
+          "R12.02",
+          "R12.03",
+          "R12.04",
+          "R12.05",
+          "R12.06",
+          "R12.07",
+          "R12.08",
+          "R12.09",
+          "R12.10",
+          "R12.11",
+          "R12.12"
+        ],
+        "acceptance": [
+          "逐项实例化此前子任务并导出原节点完整结论",
+          "不能仅把域定义成逆的像而略去物理域识别",
+          "ℓ*u=∫g*u₂dr且∫g*φ*dr=1",
+          "R12只使用§4源范数/§6图域，不依赖§7物理空间W02，防止循环"
+        ],
+        "estimated_new_lean_lines": [
+          120,
+          300
+        ],
+        "estimate_reason": "组合已证明输出和核对原合同，数学重负担已列为前置子任务。",
+        "covers": [
+          "完整原节点陈述",
+          "原验收条件"
+        ],
+        "status": "planned"
+      }
+    ]
+  },
+  "coverage": {
+    "R02": {
+      "acceptance.01": [
+        "R02.01",
+        "R02.02"
+      ],
+      "acceptance.02": [
+        "R02.03",
+        "R02.04",
+        "R02.05"
+      ],
+      "remaining.01": [
+        "R02.01",
+        "R02.02",
+        "R02.03"
+      ],
+      "remaining.02": [
+        "R02.04",
+        "R02.05"
+      ]
+    },
+    "R03": {
+      "acceptance.01": [
+        "R03.01",
+        "R03.02",
+        "R03.03",
+        "R03.04",
+        "R03.05"
+      ],
+      "acceptance.02": [
+        "R03.06",
+        "R03.09",
+        "R03.10"
+      ],
+      "acceptance.03": [
+        "R03.07",
+        "R03.08",
+        "R03.09",
+        "R03.11"
+      ],
+      "remaining.01": [
+        "R03.06",
+        "R03.07",
+        "R03.08",
+        "R03.09"
+      ],
+      "remaining.02": [
+        "R03.01",
+        "R03.02",
+        "R03.03",
+        "R03.04"
+      ],
+      "remaining.03": [
+        "R03.05",
+        "R03.06",
+        "R03.09"
+      ]
+    },
+    "R04": {
+      "acceptance.01": [
+        "R04.07",
+        "R04.08",
+        "R04.10"
+      ],
+      "acceptance.02": [
+        "R04.07",
+        "R04.09",
+        "R04.10"
+      ],
+      "acceptance.03": [
+        "R04.01",
+        "R04.02",
+        "R04.04",
+        "R04.05",
+        "R04.06",
+        "R04.08"
+      ]
+    },
+    "R05": {
+      "acceptance.01": [
+        "R05.01",
+        "R05.08",
+        "R05.09",
+        "R05.10"
+      ],
+      "acceptance.02": [
+        "R05.04",
+        "R05.05",
+        "R05.06"
+      ],
+      "acceptance.03": [
+        "R05.01",
+        "R05.03",
+        "R05.05",
+        "R05.07",
+        "R05.08",
+        "R05.10"
+      ]
+    },
+    "R06": {
+      "acceptance.01": [
+        "R06.05",
+        "R06.06",
+        "R06.07",
+        "R06.08"
+      ],
+      "acceptance.02": [
+        "R06.07",
+        "R06.08",
+        "R06.09"
+      ],
+      "acceptance.03": [
+        "R06.10",
+        "R06.11",
+        "R06.12",
+        "R06.13"
+      ],
+      "acceptance.04": [
+        "R06.01",
+        "R06.04",
+        "R06.15"
+      ]
+    },
+    "R07": {
+      "acceptance.01": [
+        "R07.06",
+        "R07.07",
+        "R07.08"
+      ],
+      "acceptance.02": [
+        "R07.07",
+        "R07.08"
+      ],
+      "acceptance.03": [
+        "R07.01",
+        "R07.02",
+        "R07.03"
+      ]
+    },
+    "R08": {
+      "acceptance.01": [
+        "R08.01",
+        "R08.02",
+        "R08.03",
+        "R08.04"
+      ],
+      "acceptance.02": [
+        "R08.03",
+        "R08.05"
+      ],
+      "acceptance.03": [
+        "R08.01",
+        "R08.02",
+        "R08.05",
+        "R08.06"
+      ]
+    },
+    "R09": {
+      "acceptance.01": [
+        "R09.02",
+        "R09.04",
+        "R09.05",
+        "R09.06"
+      ],
+      "acceptance.02": [
+        "R09.02",
+        "R09.03",
+        "R09.04"
+      ],
+      "acceptance.03": [
+        "R09.01",
+        "R09.05",
+        "R09.06",
+        "R09.07"
+      ]
+    },
+    "R10": {
+      "acceptance.01": [
+        "R10.05",
+        "R10.08",
+        "R10.11"
+      ],
+      "acceptance.02": [
+        "R10.01",
+        "R10.03",
+        "R10.06",
+        "R10.07",
+        "R10.11"
+      ],
+      "acceptance.03": [
+        "R10.08",
+        "R10.09"
+      ]
+    },
+    "R11": {
+      "acceptance.01": [
+        "R11.01",
+        "R11.06",
+        "R11.08"
+      ],
+      "acceptance.02": [
+        "R11.01",
+        "R11.07",
+        "R11.08"
+      ],
+      "acceptance.03": [
+        "R11.01",
+        "R11.08"
+      ]
+    },
+    "R12": {
+      "acceptance.01": [
+        "R12.01",
+        "R12.05",
+        "R12.06",
+        "R12.07",
+        "R12.08"
+      ],
+      "acceptance.02": [
+        "R12.10",
+        "R12.11",
+        "R12.12"
+      ],
+      "acceptance.03": [
+        "R12.01",
+        "R12.02",
+        "R12.03",
+        "R12.04",
+        "R12.05"
+      ]
+    }
+  },
+  "coverage_notes": {
+    "R02.remaining.02": "R02.04–05提供全域Hilbert运输与共轭桥；真实闭微分域的具体识别由后继R03.04、R06.07–09、R12.01/06–08承担。此映射不将后继域结论标成R02已证明。"
+  }
+}

@@ -1,0 +1,431 @@
+{
+  "milestones": 58,
+  "tasks": 514,
+  "main_tasks": 494,
+  "optional_tasks": 20,
+  "retained_complete_tasks": 3,
+  "new_completion_claims": 62,
+  "complete_tasks": 65,
+  "partial_tasks": 87,
+  "planned_tasks": 362,
+  "reviewed_tasks": 514,
+  "reviewed_snapshot_utc": "2026-11-10T18:06:30.103423+00:00",
+  "completed_ids": [
+    "C00.02",
+    "S01.01",
+    "S02.01",
+    "R01.01",
+    "S03.01",
+    "S03.02",
+    "S03.03",
+    "S03.04",
+    "S03.05",
+    "S04.03",
+    "S05.03",
+    "R03.01",
+    "R03.02",
+    "R03.04",
+    "R03.05",
+    "R03.06",
+    "R03.08",
+    "R03.11",
+    "W01.01",
+    "W01.02",
+    "W01.05",
+    "H01.01",
+    "H01.06",
+    "N12.07",
+    "D01.01",
+    "D01.02",
+    "D01.03",
+    "G01.01",
+    "G01.03",
+    "G02.01",
+    "G02.02",
+    "G02.03",
+    "G02.04",
+    "G02.05",
+    "G02.06",
+    "G02.07",
+    "G02.08",
+    "G03.01",
+    "G03.02",
+    "G03.03",
+    "G03.04",
+    "G04.01",
+    "G04.02",
+    "G04.03",
+    "G04.04",
+    "G05.01",
+    "G05.02",
+    "G05.03",
+    "G05.04",
+    "G06.02",
+    "G06.03",
+    "G06.04",
+    "G06.05",
+    "G06.06",
+    "G06.07",
+    "G06.08",
+    "G08.01",
+    "G09.01",
+    "G10.02",
+    "G10.03",
+    "G10.04",
+    "G10.07",
+    "G10.08",
+    "G10.10",
+    "G11.01"
+  ],
+  "status_by_group": {
+    "Contracts": {
+      "partial": 1,
+      "complete": 1,
+      "planned": 5
+    },
+    "Scalar": {
+      "retained_proof": 2,
+      "complete": 7,
+      "planned": 5,
+      "partial": 8
+    },
+    "Radial": {
+      "retained_proof": 1,
+      "partial": 16,
+      "planned": 91,
+      "complete": 7
+    },
+    "Analysis": {
+      "complete": 5,
+      "partial": 12,
+      "planned": 63
+    },
+    "Nonlinear": {
+      "planned": 124,
+      "partial": 4,
+      "complete": 1
+    },
+    "Geometry": {
+      "complete": 41,
+      "partial": 46,
+      "planned": 46
+    },
+    "Main": {
+      "planned": 8
+    },
+    "Extensions": {
+      "planned": 20
+    }
+  },
+  "by_group": {
+    "Contracts": 7,
+    "Scalar": 22,
+    "Radial": 115,
+    "Analysis": 80,
+    "Nonlinear": 129,
+    "Geometry": 133,
+    "Main": 8,
+    "Extensions": 20
+  },
+  "by_kind": {
+    "proof_task": 456,
+    "assembly": 55,
+    "retained_proof": 3
+  },
+  "tasks_per_milestone": {
+    "C00": 7,
+    "S01": 1,
+    "S02": 1,
+    "R01": 1,
+    "S03": 7,
+    "S04": 6,
+    "S05": 7,
+    "R02": 6,
+    "R03": 12,
+    "R04": 11,
+    "R05": 11,
+    "R06": 16,
+    "R07": 9,
+    "R08": 7,
+    "R09": 8,
+    "R10": 12,
+    "R11": 9,
+    "R12": 13,
+    "W01": 9,
+    "H01": 14,
+    "W02": 17,
+    "W03": 8,
+    "N01": 9,
+    "N02": 9,
+    "N03": 9,
+    "N04": 20,
+    "N05": 15,
+    "N06": 12,
+    "H02": 8,
+    "N07": 9,
+    "N08": 10,
+    "N09": 11,
+    "N10": 8,
+    "H03": 24,
+    "N11": 7,
+    "N12": 10,
+    "D01": 8,
+    "D02": 11,
+    "G01": 4,
+    "G02": 8,
+    "G03": 4,
+    "G04": 5,
+    "G05": 4,
+    "G06": 14,
+    "G07": 10,
+    "G08": 6,
+    "G09": 6,
+    "G10": 12,
+    "G11": 6,
+    "G12": 7,
+    "G13": 7,
+    "G14": 3,
+    "G15": 13,
+    "G16": 5,
+    "MAIN": 8,
+    "X01": 5,
+    "X02": 7,
+    "X03": 8
+  },
+  "line_bands": {
+    "40-140": 3,
+    "40-150": 2,
+    "50-160": 2,
+    "50-170": 3,
+    "60-180": 8,
+    "60-200": 3,
+    "70-200": 1,
+    "70-220": 1,
+    "80-220": 9,
+    "80-240": 1,
+    "100-250": 18,
+    "100-280": 1,
+    "120-300": 14,
+    "120-320": 1,
+    "120-330": 4,
+    "140-360": 2,
+    "140-380": 1,
+    "150-400": 1,
+    "150-450": 8,
+    "160-400": 1,
+    "160-420": 10,
+    "180-450": 14,
+    "180-480": 2,
+    "200-450": 1,
+    "200-500": 106,
+    "200-550": 7,
+    "200-600": 47,
+    "220-550": 24,
+    "250-600": 20,
+    "250-650": 38,
+    "300-650": 96,
+    "300-700": 34,
+    "350-700": 1,
+    "350-750": 27
+  },
+  "dependency_edges": 3162,
+  "original_requirements_covered": 263,
+  "additional_dependency_edges": [
+    {
+      "task": "S03.06",
+      "milestone": "W02",
+      "reason": "原剩余义务明确要求函数空间smooth tame，须使用实际加权levels而非点态公式。"
+    },
+    {
+      "task": "S04.04",
+      "milestone": "W03",
+      "reason": "原remaining要求实际加权端点延拓来消除有限矩形边界假设。"
+    },
+    {
+      "task": "S04.05",
+      "milestone": "W02",
+      "reason": "归一化残差须在实际源/高度空间而非仅点态参数上smooth tame。"
+    },
+    {
+      "task": "S05.05",
+      "milestone": "W03",
+      "reason": "原剩余义务要求实际加权端点延拓和共同域，不由内部代数自动得到。"
+    },
+    {
+      "task": "W02.10",
+      "milestone": "R12",
+      "reason": "二模slice使用同一真实ℓ*，须在R12构造后实例化；原proof_outline已限定此选择次序。"
+    }
+  ],
+  "delegated_instantiation_obligations": [
+    {
+      "requirement": "W01.remaining.03",
+      "tasks": [
+        "W02.02",
+        "W02.07"
+      ]
+    },
+    {
+      "requirement": "H01.remaining.01",
+      "tasks": [
+        "W02.02",
+        "W02.07",
+        "W02.16"
+      ]
+    },
+    {
+      "requirement": "H01.remaining.02",
+      "tasks": [
+        "H03.05",
+        "H03.07",
+        "H03.13",
+        "H03.15",
+        "H03.17",
+        "H03.22",
+        "H03.23"
+      ]
+    },
+    {
+      "requirement": "D01.remaining.02",
+      "tasks": [
+        "G15.09",
+        "G15.10",
+        "D02.04",
+        "D02.05",
+        "D02.10"
+      ]
+    },
+    {
+      "requirement": "G01.remaining.01",
+      "tasks": [
+        "W03.03",
+        "W03.04",
+        "W03.05",
+        "W03.06",
+        "W03.07",
+        "N12.04",
+        "N12.05",
+        "N12.09",
+        "MAIN.01"
+      ]
+    },
+    {
+      "requirement": "G02.remaining.01",
+      "tasks": [
+        "N12.09",
+        "G01.04",
+        "MAIN.01"
+      ]
+    },
+    {
+      "requirement": "G03.remaining.01",
+      "tasks": [
+        "N12.09",
+        "G01.04",
+        "MAIN.01",
+        "G07.05",
+        "G07.10",
+        "MAIN.02",
+        "MAIN.03"
+      ]
+    },
+    {
+      "requirement": "G04.remaining.02",
+      "tasks": [
+        "G02.08",
+        "G06.14",
+        "G07.05",
+        "G08.03",
+        "MAIN.02",
+        "MAIN.03"
+      ]
+    },
+    {
+      "requirement": "G05.remaining.01",
+      "tasks": [
+        "G06.08",
+        "G06.12",
+        "G06.14",
+        "G07.05",
+        "G07.07",
+        "G07.08",
+        "G07.10",
+        "G08.03",
+        "G09.04",
+        "G09.05",
+        "G13.07",
+        "MAIN.02",
+        "MAIN.03",
+        "MAIN.04"
+      ]
+    },
+    {
+      "requirement": "G05.remaining.02",
+      "tasks": [
+        "N12.09",
+        "G01.04",
+        "MAIN.01"
+      ]
+    },
+    {
+      "requirement": "G06.remaining.03",
+      "tasks": [
+        "D01.04",
+        "D01.06",
+        "G12.04",
+        "G12.05",
+        "G12.06",
+        "G12.07"
+      ]
+    },
+    {
+      "requirement": "G08.remaining.01",
+      "tasks": [
+        "G06.08",
+        "G06.12",
+        "G06.14",
+        "G07.03",
+        "G07.04",
+        "G07.05",
+        "G07.06"
+      ]
+    },
+    {
+      "requirement": "G08.remaining.02",
+      "tasks": [
+        "N12.09",
+        "G01.04",
+        "MAIN.01",
+        "G07.05",
+        "MAIN.03"
+      ]
+    },
+    {
+      "requirement": "G09.remaining.01",
+      "tasks": [
+        "G06.08",
+        "G06.12",
+        "G06.14",
+        "G07.05",
+        "G07.07",
+        "G07.08",
+        "G07.10",
+        "G08.03"
+      ]
+    },
+    {
+      "requirement": "G09.remaining.02",
+      "tasks": [
+        "G07.02",
+        "G07.03",
+        "G07.04",
+        "G07.06",
+        "G07.08"
+      ]
+    }
+  ],
+  "dag_valid": true,
+  "main_closure_preserved": true,
+  "coverage_mapping_is_mathematical_proof": false,
+  "main_formalized": false
+}

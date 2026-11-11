@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-10",
+  "files": {
+    "AxiomAudit.lean": "db3c5bed7dd5c730c90ed80a757ced073feb0a08e0c42ea83e71d57ad1170e54",
+    "ContinuousFlexibility/Radial/Gauge.lean": "89a7ce0c663bcd9f98ba873b3c8e3b079094284c1aed0ab89f4303d8b2c31d5c",
+    "ContinuousFlexibility/Scalar/Coframe.lean": "20526165fa39512cb2bfb3dbc474428b6af9aed32af04f0f8058a1ff4bfcced2",
+    "ContinuousFlexibility/Scalar/Definitions.lean": "06dfe8054cb871fbf35a27003a63076dd5dce541a298cff89f094e4b02696501",
+    "ContinuousFlexibility/Scalar/Determinant.lean": "ee227d182326377abc45e2f81f083bc63403cf9d3af76d028f7d98dcccc0f436",
+    "ContinuousFlexibility/Scalar/Positivity.lean": "0c8239d8a040fdf3abdcf2e442f4642fbb376a088494df01bfa8a26c1e65a616",
+    "ContinuousFlexibility.lean": "3465652970af152691b34c674f3924121f342299041ee150eec7e252d6eec97e",
+    "lake-manifest.json": "656a2627159b017656547ff6905c4c6b50d48f232b5fec5bc3b95af4ddc93026",
+    "lakefile.toml": "8fbf22794396e4b1dc2b70e70803b0cc9f10ba3241cdc7a2f880af6c17255063",
+    "lean-toolchain": "bc84812c94489d1e3e191baa1dc10d5eb684382d7fe9d2a5ab085e72c1c67e47"
+  }
+}

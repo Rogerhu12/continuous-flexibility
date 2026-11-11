@@ -1,0 +1,339 @@
+\section{The endpoint gain and the closed surface}
+\label{sec:final-proof}
+
+The nonlinear construction used the weak weight $H^\beta$ because
+the reference inverse is available for exponents below one. The
+metric controls nevertheless acquire twice that exponent. This is
+forced by two angular average equations. The first recovers the mean
+height from a quadratic expression; the second recovers the metric
+controls from that mean and another quadratic expression. There is
+no new nonlinear iteration in a stronger function space.
+Every height in $\mathcal X_\beta$ already has a smooth flat endpoint
+extension. The gain below strengthens the annular result by
+quantifying the corrections to the mean height and the metric;
+geometric closure uses the flat extensions established in
+Section~\ref{sec:fixed-geometry}.
+
+\subsection{The two identities that improve decay}
+
+Let $\mathfrak F_w(U)$ be the connection period from
+\eqref{eq:cart-mean-path-flux}. Its derivative at $U=0$ is
+$w\av{U_r}$. Write its bilinear Taylor remainder as
+\begin{equation}\label{eq:posterior-period-bilinear}
+ \mathcal B_{w,U}(v_1,v_2)
+ =\int_0^1(1-t)D_U^2\mathfrak F_w(tU)[v_1,v_2]\,dt.
+\end{equation}
+The normalized period of a solution vanishes, because its radial
+derivative is the mean scalar residual and its endpoint value is
+zero. Therefore, with $u^{\rm av}=\av u$,
+\begin{equation}\label{eq:mean-recovered-derivative}
+ (u^{\rm av})'=-q w^{-1}\mathcal B_{w,qu}(u,u).
+\end{equation}
+
+For the mean circle map use additive coordinates
+$\mathbf v=(Z,\kappa,a)$, where $Z=qu$ and $h_L=\id+a$, and put
+\[
+ \mathcal C(\mathbf v)=\av{\mathfrak e(\mathbf v)},
+ \qquad
+ \mathcal B^\circ_{\mathbf v}(v_1,v_2)
+ =\int_0^1(1-t)D^2\mathcal C(t\mathbf v)[v_1,v_2]\,dt.
+\]
+Its first derivative is the identity on $\kappa$, zero on odd chart
+directions, and $R_0^\circ$ on the radial mean height. Thus the
+second identity at a solution is
+\begin{equation}\label{eq:weak-posterior-control}
+ 0=\kappa+qR_0^\circ u^{\rm av}
+                       +\mathcal B^\circ_{\mathbf v}(\mathbf v,\mathbf v).
+\end{equation}
+The two displayed formulas already explain the exponent $2\beta$.
+We must verify these estimates in the stronger topology, including
+parameter derivatives, to retain this quantitative conclusion for
+the entire branch.
+
+\subsection{Two weak factors give one strong remainder}
+
+Choose a convex neighborhood of the raw state
+$(U,\nu,\kappa,a)=(0,0,0,0)$ in the weak product spaces, small in
+one finite norm. On it the denominators $D,Q/w$ are positive and
+the circle lifts are uniformly increasing. Both Taylor segments
+above stay in this neighborhood; the circle map is independent of
+$\nu$. All constants below refer to this one neighborhood.
+
+\begin{lemma}[Quadratic remainders in the doubled weight]
+\label{lem:posterior-two-weight}
+The maps $w^{-1}\mathcal B_{w,U}$ and
+$\mathcal B^\circ_{\mathbf v}$ are smooth tame with outputs in,
+respectively, the radial space $\mathcal X^0_{2\beta}$ and
+$\mathcal K_{2\beta}$. For every fixed number $k$ of state
+variations there is a loss $d_k$, independent of the output order
+$s$, for which
+\begin{equation}\label{eq:posterior-multilinear-bound}
+ \begin{split}
+ &\|D^k\mathcal B[\eta_1,\ldots,\eta_k]
+                         (\eta_{k+1},\eta_{k+2})\|_{2\beta,s}\\
+ &\quad\le C_{s,k}\left[
+   \sum_{i=1}^{k+2}\|\eta_i\|_{s+d_k}
+                    \prod_{j\ne i}\|\eta_j\|_{b+d_k}
+   +(1+\|\mathbf y\|_{s+d_k})
+                    \prod_j\|\eta_j\|_{b+d_k}\right].
+ \end{split}
+\end{equation}
+The inputs use their weak product norms; compact scalar directions
+use their absolute values. The same bound holds for all higher
+derivatives of $\mathcal C$ with at least two arguments.
+\end{lemma}
+
+\begin{proof}
+On component $m$ every control or chart increment, and every positive
+height jet, has a factor $H_m^\beta$. Constants at an endpoint cause
+no difficulty: their positive jets are supported in the compact
+positive region, and vanish on all negative control supports.
+Writing $u=H^\beta\widetilde u$ gives, for example,
+\[
+ H^{-\beta}\mathsf D u
+ =\mathsf D\widetilde u+\beta(\mathsf D\log H)\widetilde u.
+\]
+Thus positive differentiation does not remove a weak factor.
+Products and restriction to normalized pieces cost fixed derivatives
+and reference factors $\mathcal E_m^{C_{s,k}}$.
+Retain two weak factors for the output weight, place the highest
+derivative on one input or one state coefficient, and absorb the
+\emph{complete} coefficient product into one extra $M$ order.
+Finite overlap and
+$\|ab\|_{\ell^2}\le\|a\|_{\ell^2}\|b\|_{\ell^\infty}$
+sum the estimates. It remains to check that the nonlinear operations
+retain these two factors.
+
+For the period this is visible from its integrand. With
+$k=w+U_r$, $p=U_\theta/r$ and $E=1+w^2$, it is
+\[
+ \frac{1+kp_\theta/(1-p^2)}{\sqrt{E(1-p^2)-k^2}}-1.
+\]
+It is a smooth function of $w$ and the positive jets
+$(U_r,U_\theta/r,U_{\theta\theta}/r)$ on the chosen neighborhood.
+Each second derivative contains one such jet from each argument.
+Further state differentiation cannot remove either argument.
+The reciprocal $w^{-1}=w_*^{-1}
+ e^{-\nu\chi_*-\sum\kappa_m\chi_m}$ is included in the coefficient
+product before its absorption; it does not cost an endpoint exponent.
+
+For the circle map consider a local normalized characteristic flow
+$\dot\Theta=G(t,\Theta;\mathbf y)$, using
+\eqref{eq:fixed-strip-root-flow} at a root. Its first and second
+state variations satisfy
+\[
+ \dot\Theta_i=G_\theta\Theta_i+G_i,
+\]
+\[
+ \dot\Theta_{12}=G_\theta\Theta_{12}
+   +G_{\theta\theta}\Theta_1\Theta_2
+   +(G_1)_\theta\Theta_2+(G_2)_\theta\Theta_1+G_{12}.
+\]
+The homogeneous integrating factor is uniformly bounded, since the
+reference speed has zero angular derivative and the perturbation has
+a small integrated derivative. $G_i$ has one weak factor and
+$G_{12}$ has two. Variation of constants gives one factor in
+$\Theta_i$ and two in $\Theta_{12}$. Composing flows does not change
+the component weight.
+
+Inversion preserves this count. If $\iota=h^{-1}$, then
+\[
+ \iota_i=-\frac{h_i\circ\iota}{h'\circ\iota},\qquad
+ \iota_{12}=-\frac{h_{12}\circ\iota
+ +(h_1'\circ\iota)\iota_2+(h_2'\circ\iota)\iota_1
+ +(h''\circ\iota)\iota_1\iota_2}{h'\circ\iota}.
+\]
+The denominator is bounded below, and every term in the second
+numerator contains both variations. Apply this to $f^{-1}$ and
+$h_R^{-1}$ in \eqref{eq:full-height-one-chart}; parity projection
+and averaging preserve the weights.
+
+For higher variations label the directions by a set $I$. In the
+chain rule for $G(t,\Theta;\mathbf y)$ a subset $J\subset I$ acts
+directly on the state and a partition of $I\setminus J$ acts on
+the flow. Each term is
+\[
+ (D_{\mathbf y}^{|J|}\partial_\theta^{\ell}G
+                   [\eta_j:j\in J])\circ\Theta
+                            \prod_{B}\Theta_B,
+\]
+where $\ell$ is the number of blocks. Keep $G_\theta\Theta_I$
+on the linear side; all other terms use proper lower variations and
+contain each label exactly once. Induction retains both designated
+argument factors. The inverse identity has the same induction.
+Additional weak factors are bounded in low norms. Local tame product
+and composition estimates put only one factor at high order. The
+coefficient formulas, root regularization and finite restrictions
+have fixed order; $k$ variations add a cost depending on $k$, not
+on $s$. This proves \eqref{eq:posterior-multilinear-bound}.
+
+Finally these are estimates for the actual differentiated formulas.
+Taylor's integral remainder with one additional variation proves
+continuity and differentiability in the $2\beta$ norm. Iterating
+proves smoothness in the stronger Fr\'echet topology, not merely
+pointwise stronger decay.
+\end{proof}
+
+\subsection{Integrating the mean without losing the exponent}
+
+For $\gamma>0$ a primitive from its own endpoint preserves exponent
+$\gamma$. To see this, orient $\varrho$ toward the endpoint. Then
+$(\log H)'\to-1$ and $(\log E_0)'\to0$. For a fixed $A$,
+the ratio of $H^\gamma E_0^A$ at $\sigma\ge\varrho$ to its value at
+$\varrho$ is eventually bounded by
+$e^{-\gamma(\sigma-\varrho)/2}$. The conjugated integration kernel
+has bounded row and column integrals; $dr=\ell\,d\varrho$ supplies
+only a fixed coefficient factor. The $L^2$ Schur estimate applies.
+Further derivatives use the integrand itself, while for $c\ge0$
+the weight ratio $M(\varrho)^c/M(\sigma)^c\le1$.
+The remaining compact interval has ordinary bounded integration.
+This proves a tame primitive estimate with fixed loss. For a
+primitive normalized at the right endpoint, subtract its left
+constant times $\chi_L$ to use the left endpoint estimate.
+
+Let $\mathscr P$ denote this right-normalized primitive. Formula
+\eqref{eq:mean-recovered-derivative} identifies the weak mean with
+the explicit stronger-space map
+\begin{equation}\label{eq:rewrite-mean-recovery}
+ \mathcal U(\mathbf x,q)
+ =-q\mathscr P[w^{-1}\mathcal B_{w,qu}(u,u)]
+ =u^{\rm av}\quad\text{on the solution branch}.
+\end{equation}
+It is smooth into $\mathcal X_{2\beta}$ and has size $O(q)$ in
+every norm. In particular its endpoint scalar is also $O(q)$.
+The fixed row \eqref{eq:rewrite-reference-circle-row} maps its
+strong radial part into $\mathcal K_{2\beta}$ with fixed loss,
+and annihilates the endpoint step. The circle identity therefore gives
+\begin{equation}\label{eq:rewrite-control-recovery}
+ \kappa_q=-qR_0^\circ\mathcal U(\mathbf x(q),q)
+            -\mathcal B^\circ_{\mathbf v(q)}(\mathbf v(q),\mathbf v(q)).
+\end{equation}
+The weak branch has $\mathbf v(q)=O(q)$. The two terms on the right
+are consequently $O(q^2)$ in every $\mathcal K_{2\beta}$ norm.
+This identity also proves smoothness of the existing controls in
+that stronger topology and $\dot\kappa_0=0$.
+
+The compact scalar is quadratic as well. Differentiate the scalar
+equation at $q=0$:
+\[
+ \mathscr L_{w_*}\dot u_0+\dot\nu_0 k_*+K_*\dot\kappa_0
+       +\left.\partial_q\mathcal F_q(w_*,\Phi_*)\right|_{q=0}=0,
+ \qquad \ell_*\dot u_0=0.
+\]
+The final term is quadratic in second-mode jets. Products of
+$\cos2\theta$ and $\sin2\theta$ have frequencies zero and four,
+so its second-mode projection vanishes. Since $\dot\kappa_0=0$,
+the second-mode equation is the homogeneous bordered reference
+equation. Its left inverse gives $\dot\nu_0=0$, hence $\nu_q=O(q^2)$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=6.6cm,y=1cm,font=\small,>=Stealth]
+\draw[->] (0,0)--(1.75,0) node[right] {endpoint exponent};
+\fill[blue!8] (.5,-.12) rectangle (1,.12);
+\foreach \x/\lab in {0/0,.5/{1/2},.75/{\beta=3/4},1/1,1.5/{2\beta=3/2}}
+ {\draw (\x,-.12)--(\x,.12); \node[below] at (\x,-.16) {$\lab$};}
+\draw[->,thick,orange!85!black] (.75,.4) to[bend left=30] (1.5,.4);
+\node[above] at (1.12,.95) {two weak factors in each mean remainder};
+\node[align=center] at (.75,-1.05) {choice for both estimates\\$1/2<\beta<1$};
+\end{tikzpicture}
+\caption{The choice $\beta=3/4$ serves two estimates. Neighboring
+exponents below one control the reference inverse. The mean equations
+multiply two weak factors and produce an exponent above one, giving
+the strengthened metric bound in Theorem~\ref{thm:new-annular-height}.
+Flat extension already follows from any positive exponent.}
+\label{fig:exponent-gain}
+\end{figure}
+
+\subsection{The annular conclusion}
+
+\begin{theorem}[A nonradial height with flat ends]
+\label{thm:new-annular-height}
+For the fixed reference of Proposition~\ref{prop:rad-fixed-theorem}
+there is $q_0>0$ and a smooth branch
+$(u_q,\nu_q,\kappa_q,h_{L,q})$, $|q|<q_0$, through
+$(\Phi_*,0,0,\id)$, with the following properties.
+Set $w_q=w_*e^{\nu_q\chi_*+\sum_m\kappa_{q,m}\chi_m}$ and
+$z_q=h_{w_q}+qu_q$, choosing a fixed additive normalization for
+$h_{w_q}'=w_q$. Then
+\[
+ \mathcal N_{h_{w_q}}(z_q)=0,\qquad
+ |dz_q|_{(1+w_q^2)dr^2+r^2d\theta^2}<1,\qquad \ell_*u_q=1.
+\]
+The profile is positive in the annular interior and extends smoothly
+by zero across both endpoints. The height is even and $\pi$-periodic
+in angle, extends smoothly by a constant at each endpoint, and is
+nonradial for $q\ne0$. The two constants may differ.
+All roots of $w_q'$ and their radial germs agree with the reference.
+The two characteristic returns of the true height derivative obey
+\begin{equation}\label{eq:annular-return-condition}
+ h_{R,q,m}f_{q,m,\pm}h_{L,q,m}^{-1}=R_{\pm T_m}
+\end{equation}
+for increasing odd $\pi$-equivariant charts and the fixed reference angles.
+On the same interval of $q$, for every $s$,
+\begin{equation}\label{eq:annular-branch-estimates}
+ \|u_q-\Phi_*\|_{\mathcal X_\beta,s}\le C_s|q|,\qquad
+ |\nu_q|+\|\kappa_q\|_{\mathcal K_{2\beta},s}\le C_sq^2.
+\end{equation}
+The branch is smooth with these topologies. In particular, for
+every $a\ge0$ and $\epsilon>0$,
+\[
+ |\partial_r^a(w_q-w_*)|\le C_{a,\epsilon}q^2H^{1-\epsilon}
+\]
+at the endpoints, and $w_q-w_*=O(q^2)$ in every smooth norm.
+\end{theorem}
+
+\begin{proof}
+The weak branch was constructed in Section~\ref{sec:solving-the-equation}.
+Equations \eqref{eq:rewrite-mean-recovery} and
+\eqref{eq:rewrite-control-recovery} give the strengthened estimates
+and smooth dependence just proved. Choose $q_0$ so that
+$[-q_0,q_0]$ lies inside its domain. Every seminorm of this smooth
+branch is bounded on that one compact interval; the constants depend
+on the order, but $q_0$ does not.
+
+On the tails the compact control vanishes. Differentiating the
+formula for $w_q$ gives
+$|\partial_r^a(w_q-w_*)|\le C_aq^2H^{2\beta}E_0^{C_a}$.
+Since $2\beta>1$, \eqref{eq:full-material-envelope} implies the
+displayed endpoint estimate. In the compact middle use smoothness
+and the quadratic bound for $\nu_q$. All controls vanish near each
+turning circle, preserving its full metric germ; the common low
+neighborhood preserves the signs elsewhere.
+
+At a zero both residual corrections vanish. The exact return
+identities for $\widehat L$ therefore hold for the true derivative.
+The common inequality $D>0$ is equivalent to $|dz_q|_g<1$.
+The scalar residual vanishes, and the curvature formula identifies
+this with flatness of $g-dz_q^2$. Since $\ell_*u_q=1$, the second
+angular component is nonzero, so $z_q$ is nonradial for $q\ne0$.
+
+The height space already gives a flat extension after subtracting
+its endpoint constants, including all parameter derivatives.
+Extend $w_q$ by zero and $z_q$ by those constants and enlarge the
+annulus slightly. The enlarged annulus has zero-profile open collars around its
+original positive-profile core. The remainder metric stays positive
+and flat on these collars, giving the data needed for geometric
+closure. This proves the theorem.
+\end{proof}
+
+\subsection{Fixing the metric and moving the surface}
+
+We finish by distinguishing the two parameters. The small parameter
+$q$ was used to construct one nonradial realization of one rotational
+metric. Choose a sufficiently small nonzero value and keep it fixed.
+The annular theorem then supplies exactly the data of
+Theorem~\ref{thm:geometric-closure}: a positive flat metric
+$g-dz_q^2$, the half-turn symmetry, and two constant-height collars.
+
+That theorem develops the graph, fills its inner disk, and attaches
+the fixed marked complementary cap. Its independent phase parameter
+$\tau$ gives the jointly smooth periodic family
+\[
+ F_\tau(r,\theta)=R_{-2\pi\tau}F(r,\theta+2\pi\tau)
+\]
+on the moving annulus and the fixed map elsewhere. The collars cancel
+the two rotations pointwise. The marked cap makes two resulting
+closed images noncongruent. The same geometric theorem proves
+embeddedness, constant area, constant enclosed volume and constant
+total oriented mean curvature. This proves Theorem~\ref{thm:main}.

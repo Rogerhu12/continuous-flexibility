@@ -1,0 +1,274 @@
+\section{The geometric mechanism}
+\label{sec:geometric-closure}
+
+This section isolates what the analysis has to produce. Throughout,
+$0<r_-<r_+$, $\T=\R/(2\pi\mathbb Z)$, and
+\begin{equation}\label{eq:intro-metric}
+ g=E(r)\,dr^2+r^2\,d\theta^2,\qquad E=1+w^2.
+\end{equation}
+A function is flat at an endpoint when it extends smoothly there
+with every derivative zero. A height has a constant endpoint extension
+when its value has a limit and every positive-order derivative of its
+difference from that limit vanishes. Extending these functions and
+slightly enlarging the annulus then gives actual open collars on
+which $w=0$ and the height is constant. Thus endpoint flatness, rather
+than a merely small error at the boundary, is the appropriate analytic
+target.
+\label{def:flat-endpoint}
+
+\subsection{Removing one coordinate from the metric}
+
+An embedding of the form $F=(P,z)$ is isometric exactly when
+\[
+ P^*g_{\R^2}=\bar g:=g-dz\otimes dz.
+\]
+We need $\bar g$ to be a positive flat metric and its planar
+development to be injective. The local condition is a scalar equation.
+For a symmetric tensor $B$, write
+$\det_g B=\det(B_{ij})/\det(g_{ij})$.
+
+\begin{lemma}\label{lem:darboux-invariant}
+For a smooth height $z$ with $v=|dz|_g^2<1$,
+\begin{equation}\label{eq:darboux-curvature}
+ K_{g-dz^2}=
+ \frac{K_g(1-v)-\det_g\nabla_g^2z}{(1-v)^2}.
+\end{equation}
+In particular, the positive metric $g-dz^2$ is flat precisely when
+\begin{equation}\label{eq:intro-darboux}
+ \det_g\nabla_g^2z=K_g(1-|dz|_g^2).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+In a $g$-orthonormal frame with its first covector parallel to $dz$,
+$\bar g$ has matrix $\diag(1-v,1)$. Regard $(x,z(x))$ as a graph
+in $(\Sigma,\bar g)\times\R$, with induced metric $g$. Its upward
+unit normal has vertical component $\sqrt{1-v}$, and its second
+fundamental form satisfies
+$\nabla_g^2z=\sqrt{1-v}\,\mathrm{II}$.
+The ambient sectional curvature of its tangent plane is
+$(1-v)K_{\bar g}$, because horizontal projection multiplies squared
+area by $1-v$. The Gauss equation therefore reads
+\[
+ K_g=(1-v)K_{\bar g}+(1-v)^{-1}\det_g\nabla_g^2z,
+\]
+which gives the formula.
+\end{proof}
+
+This proof also explains the equation: it is exactly the compatibility
+condition for the two horizontal coordinates after a vertical
+coordinate has been chosen. No local embedding theorem is being
+used to bypass the global reconstruction.
+
+\subsection{Why the development is a graph over a round disk}
+
+Flatness on an annulus alone leaves a holonomy problem. Filling the
+inner collar by a planar disk removes it. Half-turn symmetry then
+ensures that this disk is centered correctly.
+
+\begin{proposition}[Planar reconstruction]\label{lem:disk-development}
+Suppose $w$ vanishes on open collars of both ends and $z$ is constant
+there, with $z(r,\theta+\pi)=z(r,\theta)$. If $g-dz^2$ is positive
+and flat, extend $w=0$ and $z=c_L$ across the inner disk. There is an
+orientation-preserving diffeomorphism
+$P:D_{r_+}\longrightarrow D_{r_+}$ with
+\[
+ P^*g_{\R^2}=g-dz^2,
+ \qquad P=\id\text{ on the outer collar},
+ \qquad P=R_\gamma\text{ on the inner disk}
+\]
+for some angle $\gamma$. Consequently $(P,z)$ is an isometric
+embedded disk.
+\end{proposition}
+
+\begin{proof}
+The extended metric is smooth on the disk, including its center,
+where it is Euclidean. Take a global oriented orthonormal coframe
+$\eta_1,\eta_2$, equal to $dx,dy$ on the outer collar, and let $\alpha$
+be its connection form, with
+$d\eta_1=\alpha\wedge\eta_2$ and
+$d\eta_2=-\alpha\wedge\eta_1$. Flatness and simple connectivity
+give $\alpha=d\psi$, normalized by $\psi=0$ on that collar. Thus
+$e^{i\psi}(\eta_1+i\eta_2)$ is closed. Its primitive $P$, normalized
+to be the identity on the collar, is an oriented local isometry to
+the plane.
+
+The half-turn $I:x\mapsto-x$ preserves the metric.
+Both $P$ and $-P\circ I$ are normalized developments, so they agree:
+two oriented planar developments of a connected flat surface differ
+by a fixed Euclidean motion, as follows by differentiating their
+relative rotation. Hence $P$ is odd. On the inner Euclidean disk it
+is a Euclidean motion, and oddness removes its translation. This
+gives the asserted rotation there.
+
+Extend $P$ by the identity outside the disk. It is a proper local
+diffeomorphism of $\R^2$, hence a covering. It has one sheet outside
+a compact set, so it is a diffeomorphism. Since the exterior is
+fixed, the disk maps onto itself. The height graph $(P,z)$ is
+therefore embedded, with metric $\bar g+dz^2=g$.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.87,>=Stealth,font=\small]
+\begin{scope}
+\filldraw[fill=blue!6,draw=black] (0,0) circle (1.65);
+\filldraw[fill=green!12,draw=green!45!black] (0,0) circle (.58);
+\draw[dashed] (0,0) circle (1.42);
+\draw[->] (0,0)--(1.25,.55) node[right] {$r$};
+\node[below,align=center] at (0,-1.9) {intrinsic disk\\metric $g-dz^2$};
+\end{scope}
+\draw[->,thick] (2.1,0)--(3.9,0) node[midway,above] {$P$};
+\node[align=center] at (3,-.65) {flatness\\and no holonomy};
+\begin{scope}[xshift=6cm]
+\filldraw[fill=blue!6,draw=black] (0,0) circle (1.65);
+\filldraw[fill=green!12,draw=green!45!black] (0,0) circle (.58);
+\draw[dashed] (0,0) circle (1.42);
+\draw[->] (.1,.1) arc[start angle=45,end angle=210,radius=.25];
+\node at (0,.95) {$P=\id$ near the rim};
+\node[below,align=center] at (0,-1.9) {planar image\\same round disk};
+\end{scope}
+\end{tikzpicture}
+\caption{The inner fill removes the annular holonomy. Normalization
+fixes the outer collar; half-turn symmetry fixes the center of the
+inner disk. Properness then upgrades the local development to a
+global diffeomorphism. The sketch records these constraints, not
+the pointwise distortion of $P$.}
+\label{fig:development}
+\end{figure}
+
+\subsection{A stationary cap which distinguishes shapes}
+
+We need more than a cap that closes the graph. A completely symmetric
+cap could hide the relative rotation. The following explicit marker
+reduces the possible congruences to a finite set.
+
+\begin{lemma}\label{lem:fixed-cap}
+A smooth graph over $D_{r_+}$ which is horizontal near its boundary
+extends to a smooth embedded sphere. The complementary cap may be
+chosen to contain the unique global maximum of Gaussian curvature,
+with distinct principal curvatures at that point.
+\end{lemma}
+
+\begin{proof}
+Translate the boundary height to zero and extend the horizontal
+collar to a radius $R>r_+$. Choose a smooth nondecreasing function
+$\chi:[0,1]\to[0,1]$, constant at its endpoint values near the
+endpoints and satisfying $\chi(1-t)=1-\chi(t)$. The unit-speed
+meridian starting at $(R,0)$ with
+\[
+ r'(s)=\cos(\pi\chi(s/L)),\qquad
+ z'(s)=-\sin(\pi\chi(s/L)),\qquad 0\le s\le L,
+\]
+stays at radius at least $R$ and returns to radius $R$ with inward
+horizontal tangent. Its height decreases by a positive constant
+times $L$. Take $L$ large enough to pass below the minimum of the
+graph, and finish with a horizontal disk to the axis. Rotation of
+this meridian gives a smooth embedded cap disjoint from the graph
+except at its attaching collar.
+
+Place a bump in the unused horizontal annulus $r_+<r<R$. In local
+Cartesian coordinates choose $A,B>0$ with $A\ne B$, put
+$\xi=Ax^2+By^2$, and set
+\[
+ u(x,y)=\frac{k}{2}\int_\xi^{\rho^2}
+       e^{-s/(\rho^2-s)}\,ds\quad(\xi<\rho^2),
+ \qquad u=0\quad(\xi\ge\rho^2).
+\]
+This is smooth across its support boundary. If
+$\Xi=\xi/(\rho^2-\xi)$, the curvature of its graph is
+\begin{equation}\label{eq:marker-curvature}
+ K=\frac{ABk^2e^{-2\Xi}(1-2\xi\Xi')}
+ {\bigl[1+k^2e^{-2\Xi}(A^2x^2+B^2y^2)\bigr]^2}.
+\end{equation}
+At the center it equals $ABk^2$. Elsewhere its numerator is either
+nonpositive or strictly smaller, and its denominator is at least
+one. Choose $k$ to make this value larger than the curvature of the
+rest of the sphere. Then choose $\rho$ small enough to fit the
+support and keep its height, at most $k\rho^2/2$, away from the
+bottom cap. The principal curvatures at the center are $-kA,-kB$
+for the upward normal, so they are distinct.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=.8cm,y=.8cm,>=Stealth,font=\small]
+\draw[thick,blue!70!black]
+ (-3.3,0)--(-2.8,0) .. controls (-2.5,.1) and (-2.5,.9) .. (-1.5,.75)
+ .. controls (-1,.65) and (-.8,.65) .. (-.5,.65)--(.5,.65)
+ .. controls (.8,.65) and (1,.65) .. (1.5,.75)
+ .. controls (2.5,.9) and (2.5,.1) .. (2.8,0)--(3.3,0);
+\draw[thick,gray!75] (3.3,0)--(4,0)
+ .. controls (5.5,0) and (5.5,-2) .. (4,-2)--(-4,-2)
+ .. controls (-5.5,-2) and (-5.5,0) .. (-4,0)--(-3.3,0);
+\fill[red!75!black] (3.7,0) circle (2.5pt);
+\draw[dashed,gray] (-2.8,0)--(-2.8,-2);
+\draw[dashed,gray] (2.8,0)--(2.8,-2);
+\node[above] at (0,1.4) {constant inner disk};
+\draw[->] (0,1.3)--(0,.7);
+\node[above] at (-3.3,.3) {flat collar};
+\node[above] at (3.8,.65) {marker};
+\draw[->,red!75!black] (3.8,.6)--(3.7,.1);
+\node[below] at (0,-2.1) {fixed cap below the entire moving graph};
+\end{tikzpicture}
+\caption{A meridional sketch of the closure. The actual blue graph
+depends on angle; its whole rotation stays inside the central
+cylinder and above the bottom disk. The marker lies in the
+stationary horizontal extension.}
+\label{fig:geometric-closure}
+\end{figure}
+
+\subsection{The annulus implies the theorem}
+
+\begin{theorem}[Geometric closure]\label{thm:geometric-closure}
+If a nonradial, half-turn invariant height $z$ for
+\eqref{eq:intro-metric} is constant on two collars where $w=0$, and
+$g-dz^2$ is positive and flat, then all the conclusions of
+Theorem~\ref{thm:main} hold.
+\end{theorem}
+
+\begin{proof}
+Develop the filled disk by Proposition~\ref{lem:disk-development}
+and attach the cap of Lemma~\ref{lem:fixed-cap}. On the disk set
+$F_\tau=R_{-2\pi\tau}\circ F\circ R_{2\pi\tau}$, and leave the
+cap fixed. The intrinsic rotation preserves $g$. On the inner disk
+and outer collar its action cancels the ambient rotation, since
+$P$ is a centered rotation there and $z$ is constant. The formula
+therefore glues smoothly in both variables and is one-periodic.
+Each disk image is a rotation of a graph over the same round disk;
+the separated cap closes it without introducing intersections.
+
+The disk images cannot all coincide. Otherwise
+$F^{-1}R_\vartheta F$ would be an intrinsic isometry equal to
+$R_\vartheta$ on the outer collar. An isometry of a connected
+Riemannian manifold is determined by its value and derivative at an
+interior point, by geodesic uniqueness. Thus it would equal
+$R_\vartheta$ everywhere. Its height component would force
+$z(r,\theta+\vartheta)=z(r,\theta)$ for every $\vartheta$, contrary
+to nonradiality.
+
+Any congruence between two closed images fixes the unique curvature
+maximum in the cap. It preserves the outward normal and the two
+distinct principal lines there. There are at most four orthogonal
+maps with these properties. If all the closed images were congruent,
+their continuous family would therefore lie in a finite set and
+would be constant. Its disk portion would be constant too, which
+we have just excluded.
+
+Finally, the moving disk is an ambient rotation of itself, while
+the rest of the surface is stationary. This proves invariance of
+area and of the oriented mean-curvature integral. If $Z_\tau$ is
+the height over the planar disk and $c_B$ is the bottom height, the
+part of the enclosed volume inside its cylinder is
+\[
+ \int_{D_{r_+}}(Z_\tau(y)-c_B)\,dy
+ =\int_{D_{r_+}}(Z_0(R_{2\pi\tau}y)-c_B)\,dy,
+\]
+which is constant by rotation invariance of planar area. The
+remaining volume is stationary.
+\end{proof}
+
+The task left for the analysis is now precise: construct one
+nonradial annular height with a positive flat remainder metric and
+constant endpoint extensions. The family itself then follows
+without an additional existence argument.

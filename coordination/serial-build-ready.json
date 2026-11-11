@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "purpose": "Historical legacy hash table; not current READY. Only per-owner registries are accepted by the current runner.",
+  "modules": {
+    "ContinuousFlexibility.Contracts.CapInteriorClosure": "20ad5a7d331ed1e1b0ea44e1453eb879e8791851068775059b801c66bba12ea7",
+    "ContinuousFlexibility.Geometry.SphereArea": "986d38c5cbaca9d82db6696fc18a4ce9b2591797ce94965812a32a55834dc4d2",
+    "ContinuousFlexibility.Radial.RadialDampedBounds": "786ff51299ba052765133f69a2c1ba5a2101c4a14edca4eea40f34c3fa781a91",
+    "ContinuousFlexibility.Radial.CentralLeftAsymptotics": "56350d78f98a90485909e3735b3dee2172a0b2fcf33aa7de07f5b928fcc4e29d",
+    "ContinuousFlexibility.Radial.CentralRadialMeasure": "800276e1e8275a0f8319f79ace3927c1af9da7b0a00644a31b7ccf927d301692",
+    "ContinuousFlexibility.Geometry.SphereCurvature": "1eaaf503c3818d5243ed8a11d780661f18ad9610cb381afde837ac462b2cbd27",
+    "ContinuousFlexibility.Statements.Radial": "65f720ce26a72378f8e4857566653807b5cf3f11350dd96d7bcf0ec8a52e403c",
+    "ContinuousFlexibility.Statements.Analysis": "17fdb4b19b300b96a5c62f4a0e32ae21826b16c8aa2d633fa8cfe24fa2e2d5b9",
+    "ContinuousFlexibility.Geometry.SphereShapeOperator": "beded795085db3c27d4b47d2b5f3691d3f7b24ee185dadcef315d11d2cf9cf32",
+    "ContinuousFlexibility.Radial.MorseEnergyCutoff": "ba1ec30d73d32fdea09499b8a1f6c0d363da4d572e2eb84aab79b94b62950a67",
+    "ContinuousFlexibility.Radial.RadialMaterialJets": "865e3a236fab0f489cf6b40c4429b0d72054926b3f5e2b0e18fc746db02dfa3e",
+    "ContinuousFlexibility.Radial.CentralRadialHilbert": "b1bda30bcc5a0c151699eadf423e0d5ede1fc55743b0c399ce6632159464e3d0",
+    "ContinuousFlexibility.Radial.CentralRightAsymptotics": "220bdc60bbfdec5dfb62792a98beb9118f2542cc7db53d52cfadb301419c69de"
+  },
+  "status": "deprecated_historical_only",
+  "replacement": "coordination/ready/"
+}

@@ -1,0 +1,7 @@
+{
+  "snapshot_root": "C:\\Users\\Boyang\\Desktop\\Math\\ContinuousFlexibility\\scratch\\refinement-audit-20261110T180629Z",
+  "note": "更晚并行编辑不混入本轮冻结验收；此文件只记录核对时看到的差异。",
+  "changed_files": [
+    "ContinuousFlexibility/Geometry/CapDisk.lean"
+  ]
+}

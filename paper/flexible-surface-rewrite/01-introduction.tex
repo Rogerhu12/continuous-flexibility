@@ -1,0 +1,177 @@
+\section{A closed shell with a moving annulus}
+\label{sec:introduction}
+
+Imagine a round disk rotating inside a stationary shell. If the disk
+is a surface of revolution, its image does not change. If its height
+depends on angle, the image does change, but a rotation will generally
+move its attaching boundary. We arrange a third possibility: the
+metric is rotational, the embedded disk is not, and a whole collar of
+its boundary is planar. An intrinsic rotation followed by the opposite
+ambient rotation then fixes the collar pointwise. A stationary cap
+closes the disk and turns its relative rotation into a change of shape
+of a closed surface.
+
+The geometrical motion is elementary once such a disk exists. Most of
+this paper is devoted to its existence, and especially to the exact
+flatness required at the attaching collars.
+
+\begin{maintheorem}\label{thm:main}
+There are a smooth surface $\Sigma$ diffeomorphic to $S^2$, a smooth
+Riemannian metric $g_\Sigma$, and a jointly smooth map
+$\mathcal F:\Sigma\times\R\longrightarrow\R^3$ such that, writing
+$F_\tau=\mathcal F(\,\cdot\,,\tau)$,
+\[
+ F_\tau\text{ is an embedding},\qquad
+ F_\tau^*g_{\mathrm E}=g_\Sigma,\qquad F_{\tau+1}=F_\tau.
+\]
+At least two images $F_\tau(\Sigma)$ are not congruent under the
+Euclidean isometry group. An inner disk and a complementary cap are
+fixed pointwise throughout the family. The area, enclosed volume and
+total oriented mean curvature are independent of $\tau$.
+\end{maintheorem}
+
+Here a closed surface is compact without boundary. A bending refers
+to a family of isometric embeddings of one fixed metric; nontriviality
+in this paper always means noncongruence of images, not just motion of
+material points. Mean curvature is $(k_1+k_2)/2$, with the outward
+orientation. These conventions matter because a relabelling of a
+fixed surface is an isometric motion of its material points, but does
+not change its shape.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.91,>=Stealth,font=\small]
+\foreach \shift/\phase/\word in {0/0/initial,6/55/later}{
+ \begin{scope}[xshift=\shift cm]
+ \fill[gray!15] (0,0) circle (2.05);
+ \fill[blue!6] (0,0) circle (1.65);
+ \draw[gray!65,thick] (0,0) circle (2.05);
+ \draw[dashed] (0,0) circle (1.65);
+ \foreach \radius in {.85,1.12,1.38}{
+  \draw[blue!70!black,thick,rotate=\phase]
+   plot[domain=0:360,samples=65,variable=\t]
+   ({(\radius+.10*cos(2*\t))*cos(\t)},
+    {(\radius+.10*cos(2*\t))*sin(\t)});}
+ \filldraw[fill=green!15,draw=green!45!black] (0,0) circle (.52);
+ \fill[red!75!black] (1.30,1.33) circle (2.4pt);
+ \node at (0,-2.36) {\word\ position};
+ \end{scope}}
+\draw[->,thick] (2.45,0)--(3.55,0);
+\node[above] at (3,0) {phase};
+\node[below,align=center] at (3,-.4) {same metric};
+\node[above] at (0,2.15) {fixed inner disk};
+\draw[->,green!45!black] (-.5,2.0)--(-.18,.45);
+\node[above] at (6,2.15) {fixed cap marker};
+\draw[->,red!75!black] (6.8,2.0)--(7.30,1.36);
+\end{tikzpicture}
+\caption{Relative rotation, viewed from above. The blue curves are
+schematic height contours, not numerical data for the constructed
+surface. The circular collars and the green inner disk stay fixed
+pointwise. The cap's red marker stays fixed while the nonradial part
+turns, so an ambient rotation cannot account for the entire motion.}
+\label{fig:surface-motion}
+\end{figure}
+
+\subsection{Where the question sits in surface theory}
+
+Ghomi asks whether a closed $C^2$ surface in $\R^3$ can be flexible
+in Problem~1.1 of \cite{Ghomi2019}. The problem requires a continuous
+family. Replacing a dimple by its reflection across a flat rim gives
+two different isometric realizations, but gives no path between them.
+Theorem~\ref{thm:main} provides such a path in the smooth category.
+
+The distinction from infinitesimal bending is just as substantial.
+A normal vector field supported inside a planar patch has zero first
+variation of the metric. This observation already appears in
+Cohn-Vossen's discussion of closed infinitesimally nonrigid surfaces
+\cite[footnote~2]{CohnVossen1930}. It does not solve the nonlinear
+isometry equations. Efimov's classical survey
+\cite{Efimov1948Survey} and his work on deformation at zero-curvature
+points \cite{Efimov1948Zero} belong to the historical setting of this
+distinction; the later survey \cite[Sections~1.1--1.4]{IvanovaSabitov1991}
+treats finite bendings, their infinitesimal equations and higher-order
+extension. Our first deformation is also infinitesimal. The analytic
+argument below is what turns it into an actual annular height.
+
+On the rigid side, the hypotheses on curvature and boundary data
+are decisive. For example, Ghomi and Spruck
+\cite[Theorem~1.1]{GhomiSpruck2020} prove that two properly oriented
+$C^{2,1}$ positively curved isometric immersions which agree on a
+curve segment agree everywhere on their connected domain. The present
+annulus has both signs of curvature, with infinitely many transitions
+at either flat end. Thus neither strict positivity nor a finite
+collection of nondegenerate interfaces describes its geometry.
+
+Connelly's flexible embedded polyhedral sphere \cite{Connelly1977}
+establishes flexibility in the polyhedral category. Rounding its
+edges would change the metric, so it does not furnish a smooth
+bending. Nash's and Kuiper's $C^1$ theorems
+\cite{Nash1954,Kuiper1955} concern another regularity regime. In the
+smooth problem the second fundamental form and the type of the
+Darboux equation must be controlled at every scale.
+
+Our analytic method has closer connections with smooth isometric
+embedding. Smoothing compensates for derivative loss already in
+Nash's argument \cite{Nash1956}. Han, Hong and Lin
+\cite[Theorem~1.1]{HanHongLin2003} use a Nash--Moser--H\"ormander
+scheme for nonpositive curvature under a specified degeneracy
+condition. Han and Khuri treat local mixed-type problems with
+finite-order changes of type \cite{HanKhuri2010,HanKhuri2013}.
+In particular, the residual modification of the linearization in
+\cite[pp.~650--653]{HanKhuri2010} is a precedent for keeping useful
+geometric features fixed before the nonlinear equation is solved.
+Here the extra issue is simultaneous control of infinitely many
+interfaces and both flat ends on a single closed domain.
+
+The three invariants in Theorem~\ref{thm:main} follow directly from
+our rotation construction. They should be read with their respective
+scopes: Sabitov's volume theorem \cite{Sabitov1996} is polyhedral;
+Almgren and Rivin \cite{AlmgrenRivin1998} prove the smooth bending
+invariance of the mean-curvature integral. Curvature-precession
+motions also arise in the shell model of Hamouche, Maurini, Vidoli
+and Vincenti \cite{Hamouche2017}. That mechanical comparison does
+not supply the flat collars or the closed embedded surface here.
+
+\subsection{How the construction is organized}
+
+Let $\T=\R/(2\pi\mathbb Z)$ and choose a radial metric
+\[
+ g=(1+w(r)^2)\,dr^2+r^2\,d\theta^2,
+ \qquad h'(r)=w(r).
+\]
+The radial graph of $h$ has this metric. We seek a different height
+$z=h+qu$, where $q$ is a small construction parameter. The condition
+that $g-dz\otimes dz$ be positive and flat is the Darboux equation.
+It is enough to solve that scalar equation with a nonradial $u$ and
+constant endpoint extensions. Section~\ref{sec:geometric-closure}
+proves this geometric reduction completely, including injectivity
+and noncongruence.
+
+Three decisions then determine the analysis. First, a monotone flat
+end kills every nonzero flat angular Jacobi field. We therefore use
+an infinite sequence of rising and falling pieces, and design their
+scales so that one angular mode survives while all jets still vanish
+at the endpoint. Second, propagation of characteristics and matching
+of endpoint solution lines have different resonances. We separate
+them in a finite model before making the infinite construction.
+Third, the inverse is needed for nearby nonlinear states, on the
+same function space. We adjust the linearization by terms
+proportional to the unsolved equations, keeping the turning circles
+and characteristic returns fixed. These terms vanish at a solution.
+
+The estimates are arranged to spend precision where these decisions
+are implemented. The model spectra and elementary operator facts
+are standard inputs; the matching of infinitely many intervals,
+the fixed domain of the perturbed inverse, and the improvement of
+endpoint decay receive the detailed proofs. In particular the
+numbers $2n^3/3$, $n^{5/2}$, $12$ and $3/4$ are introduced with the
+inequalities they must satisfy, rather than as unexplained choices.
+
+Once a nonzero $q$ has been fixed, the height and the metric are fixed.
+The bending parameter is a different variable:
+\begin{equation}\label{eq:phase-family}
+ F_\tau(r,\theta)=R_{-2\pi\tau}F(r,\theta+2\pi\tau).
+\end{equation}
+The rest of the proof returns to this formula. No nonlinear
+integration of an infinitesimal bending in the variable $\tau$
+remains to be done.

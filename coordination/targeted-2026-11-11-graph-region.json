@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-11-10T19:03:13.462086+00:00",
+  "scope": "Targeted graph geometry and explicit regions only; not a whole-project checkpoint or main-theorem proof",
+  "toolchain": "leanprover/lean4:v4.35.0-rc3",
+  "main_formalized": false,
+  "builds": [
+    {
+      "owner_session": 11283,
+      "command": "lake --wfail build ContinuousFlexibility.Contracts.GraphBoundaryNormals",
+      "LEAN_NUM_THREADS": 4,
+      "exit_code": 0,
+      "jobs": 2993,
+      "warnings": 0
+    },
+    {
+      "owner_session": 29001,
+      "command": "lake --wfail build ContinuousFlexibility.Contracts.GraphBoundaryNormals ContinuousFlexibility.Contracts.GraphCurvatureBounds",
+      "LEAN_NUM_THREADS": 4,
+      "exit_code": 0,
+      "jobs": 2994,
+      "warnings": 0,
+      "note": "Before later phase-normal binding added; final Boundary result is session11283"
+    },
+    {
+      "owner_session": 45720,
+      "command": "lake --wfail build ContinuousFlexibility.Contracts.CapInteriorProfile",
+      "LEAN_NUM_THREADS": 4,
+      "exit_code": 0,
+      "jobs": 3023,
+      "warnings": 0
+    }
+  ],
+  "audit": {
+    "owner_session": 8182,
+    "command": "lake env lean scratch/RootGeometryWaveAudit.lean",
+    "LEAN_NUM_THREADS": 4,
+    "exit_code": 0,
+    "project_declarations": 1355,
+    "project_theorems": 1119,
+    "allowlist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "script": "scratch/RootGeometryWaveAudit.lean",
+    "script_sha256": "a4eb9c61cade79a3b3c21c160251be23a200f1d5e5ab040ac09bf4b22da6dad8"
+  },
+  "sources": {
+    "ContinuousFlexibility/Contracts/GraphFamilyCurvature.lean": {
+      "sha256": "27a4def56bd8ad96175b0f19d6aa4b774445fec605729856f7fb6e87d47c5132",
+      "lines": 250,
+      "public_explicit_theorems": 18,
+      "private_explicit_theorems": 0
+    },
+    "ContinuousFlexibility/Contracts/GraphDiskIntegrals.lean": {
+      "sha256": "431a00e90db81bc315c3983e02f834d1da36b46003f3e147a148c0dc9f18eec5",
+      "lines": 226,
+      "public_explicit_theorems": 16,
+      "private_explicit_theorems": 0
+    },
+    "ContinuousFlexibility/Contracts/GraphCylinderVolume.lean": {
+      "sha256": "54cdf441d957c1c7338fe2e13fcb273bf1542cffeee08075d9a53c38336fe4d5",
+      "lines": 130,
+      "public_explicit_theorems": 9,
+      "private_explicit_theorems": 0
+    },
+    "ContinuousFlexibility/Contracts/GraphBoundaryNormals.lean": {
+      "sha256": "9194d8e3a1c242c768be6d4def850e9a0cb797e39948ec8c31faf1aea8dd818a",
+      "lines": 255,
+      "public_explicit_theorems": 14,
+      "private_explicit_theorems": 0
+    },
+    "ContinuousFlexibility/Contracts/GraphCurvatureBounds.lean": {
+      "sha256": "d435814269138ee1125a447cccb05c6b1243528309a3a02ecdbb3f0bda38d555",
+      "lines": 71,
+      "public_explicit_theorems": 3,
+      "private_explicit_theorems": 0
+    },
+    "ContinuousFlexibility/Contracts/CapInteriorProfile.lean": {
+      "sha256": "67be78b9d510bff0923f2871a791154ce49f95b1f1a11c66dce8800b3f992897",
+      "lines": 224,
+      "public_explicit_theorems": 20,
+      "private_explicit_theorems": 1
+    }
+  },
+  "remaining": [
+    "Full moving and marked cap inside/frontier identification and global outward normals",
+    "Actual closed-surface area and signed mean-curvature measure/integral bridge",
+    "Analytic core existence, full radial reference and Nash-Moser construction",
+    "Whole-project integration and updated source theorem correspondence audit"
+  ]
+}

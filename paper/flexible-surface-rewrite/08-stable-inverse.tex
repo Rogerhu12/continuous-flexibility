@@ -1,0 +1,550 @@
+\section{Inverting on one common domain}
+\label{sec:stable-inverse}
+\label{sec:grn-fixed-phase-green}
+
+A tame estimate with derivative loss is not a bounded inverse on a
+single Banach space. It cannot by itself justify a Neumann series.
+We first identify a source space on which the \emph{relative}
+operator is bounded. The extra endpoint factor in its coefficients
+will compensate for the coefficient-weight loss of the reference
+inverse. Only after that Banach-space inversion do we recover all
+derivatives. This order of argument keeps one neighborhood for the
+entire nonlinear problem.
+
+\subsection{Sources, scalars and the domain}
+
+Use the canonical cylinders of Section~\ref{sec:fixed-geometry} and
+retain the physical sign of the equation: on a positive cylinder its
+canonical operator is $-P_{\mathbf x}$. Let $h_{\mathbf x}$ denote the
+height factor in physical coordinates, $\Psi_{\mathbf x}$ the chart,
+and $J_{\mathbf x}$ its Jacobian. Define
+\[
+ \mathscr C_{\mathbf x}u=(u/h_{\mathbf x})\circ\Psi_{\mathbf x}^{-1},
+ \qquad
+ \mathscr S_{\mathbf x}f=(h_{\mathbf x}f/|J_{\mathbf x}|)
+                                      \circ\Psi_{\mathbf x}^{-1},
+ \qquad
+ \mathbb L_{\mathbf x}=
+ \mathscr S_{\mathbf x}\widehat L_{\mathbf x}\mathscr C_{\mathbf x}^{-1}.
+\]
+These preserve the pairing with $dr\,d\theta$. For real $t$ and
+angular order $s\ge0$ use the volume-source norms
+\begin{equation}\label{eq:vol-source-spaces}
+ \|F\|_{t,s}^2
+ =\sum_m M_m^{2t}H_m^{-2\beta}
+                  \|F_m\|_{L^2_{\mathrm{rad}}H^s_\varphi}^2,
+ \qquad F\in\mathbb V_{t,s}.
+\end{equation}
+The index includes the two halves of every negative component and
+the positive components. No matching or integral condition is imposed
+on these sources. For inverse outputs, the corresponding volume norm is supplemented
+by the absolute values of the three scalar unknowns introduced below;
+these scalar coordinates are assigned to the finite middle.
+
+The charts agree with the reference on $J_*$, so the second-mode
+normalization has the fixed form $\ell_*^c W$.
+Choose a compact radial $\psi$ in $J_*$ with $\mathsf Q\psi=1$ and
+put $c_* =\mathscr S_*\psi=\mathscr S_{\mathbf x}\psi$.
+A physical height is represented by
+\[
+ \eta=\mathscr C_{\mathbf x}^{-1}W+a_L\chi_L,\qquad
+ \ell_*^cW=0.
+\]
+Its left endpoint constant is $a_L$; the right one is zero. Define
+\[
+ k_{\mathbf x}=D_\nu\mathcal F_q(w,u),\quad
+ k_{\mathbf x}^c=\mathscr S_{\mathbf x}k_{\mathbf x},\quad
+ s_{\mathbf x}=\mathscr S_{\mathbf x}\widehat L_{\mathbf x}\chi_L.
+\]
+Here $D_\nu$ differentiates the true residual with $u,q$ fixed,
+including both its metric and reference height. The augmented operator is
+\begin{equation}\label{eq:vol-abstract-complete-operator}
+ \mathbb P_{\mathbf x}(W,a_L,\mu,\lambda)
+ =\mathbb L_{\mathbf x}W+a_Ls_{\mathbf x}
+                       +\mu k_{\mathbf x}^c+\lambda c_*.
+\end{equation}
+The parameter $\mu$ removes the second-mode obstruction. The additional
+$\lambda$ removes the integral obstruction for arbitrary sources;
+it will disappear for the original compatible problem.
+
+At the reference let $\mathfrak g_* =\mathscr C_*1$ and
+$\mathsf Q_*F=\langle\mathfrak g_*,F\rangle$.
+The coefficient bounds make this continuous and
+$\mathsf Q_*c_*=1$. Set $\lambda=\mathsf Q_*F$ and apply the
+compatible reference inverse to $F-\lambda c_*$. This constructs a
+two-sided augmented inverse $\mathbb G_*$.
+In the zero angular mode the construction can be seen directly:
+with $f_* =\mathscr S_*^{-1}F$,
+\[
+ p_0(r)=\int_{r_-}^r(\av{f_*}-\lambda\psi)(t)\,dt,
+ \qquad
+ u_0(r)=-\int_r^{r_+}\frac{p_0(t)}{w_*(t)}\,dt.
+\]
+The first integrand has total integral zero. At either endpoint use
+the primitive starting there; division by $w_*$ costs a coefficient
+factor, not an endpoint exponent. Subtract the left endpoint value
+times $\chi_L$. This yields the required field, endpoint scalar and
+normalization. It also proves uniqueness in the zero mode.
+
+\subsection{Why two endpoint exponents are needed}
+
+The reference construction gives one natural endpoint inverse for
+every exponent in a compact subinterval of $(0,1)$
+(Lemma~\ref{lem:radial-uniform-exponents}). Choose
+$0<\epsilon<\min(\beta,1-\beta)$.
+The inverses at $\beta-\epsilon$ and $\beta+\epsilon$ agree on compact
+smooth sources: their difference satisfies the homogeneous equation,
+the normalization and the natural endpoint conditions. The reference
+uniqueness, together with the zero-mode formula above, makes it zero.
+Hence both estimates apply to the same $\mathbb G_*$.
+
+\begin{lemma}[A fixed coefficient loss]
+\label{lem:two-weights-closed-domain}
+For a fixed $L$, every real $t$ and every $s\ge0$,
+\begin{equation}\label{eq:reference-negative-material-extension}
+ \|\mathbb G_*F\|^{\mathrm{vol}}_{t-L,s}
+                       \le C_{t,s}\|F\|_{t,s}.
+\end{equation}
+The first normal derivative has the same bound with at most one
+additional angular source derivative. For a fixed $b\ge2$,
+\begin{equation}\label{eq:fixed-base-graph-domain}
+ \mathbb D_*:=\mathbb G_*(\mathbb V_{0,b}),\qquad
+ \|v\|_{\mathbb D_*}=\|\mathbb P_*v\|_{0,b}
+\end{equation}
+is a complete closed graph domain. It includes every smooth admissible
+field with the stated transmissions, endpoint conditions and slice,
+whose reference source belongs to $\mathbb V_{0,b}$.
+\end{lemma}
+
+\begin{proof}
+Write $\bar S_m=S_m-S_N$ on the tails and $\bar S_m=0$ on the
+finite middle. Let $\pi_k,\iota_m$ be restriction to an output piece
+and extension of a source on a piece by zero. The reference estimate
+at exponent $\gamma$ gives
+\[
+ \|\pi_k\mathbb G_*\iota_m\|_{s\to s}
+ \le C_s\mathcal E_k^{C_s}\mathcal E_m^{C_s}
+                        e^{-\gamma(\bar S_k-\bar S_m)}.
+\]
+Conjugate by the $\beta$ weight. Choose $\gamma=\beta+\epsilon$
+when $\bar S_k\ge\bar S_m$ and $\gamma=\beta-\epsilon$ otherwise.
+The resulting block $K_{km}$ satisfies
+\begin{equation}\label{eq:global-two-weight-block-bound}
+ \|K_{km}\|_{s\to s}
+ \le C_s\mathcal E_k^{C_s}\mathcal E_m^{C_s}
+                    e^{-\epsilon|\bar S_k-\bar S_m|}.
+\end{equation}
+There is no angular-order loss in this volume estimate. The first
+normal estimate of the radial construction adds at most one angular
+derivative and otherwise has the same block argument.
+
+For each $\delta>0$ the enlarged weight satisfies
+\[
+ |\log M_k-\log M_m|
+ \le\delta|\bar S_k-\bar S_m|+C_\delta.
+\]
+This follows from the derivative of
+$n^{5/2}\log^2(e+n)$ with respect to $2n^3/3$ tending to zero.
+Using $\mathcal E^{C_s}\le C_sM$, we find, for $L\ge2$,
+\[
+ M_k^{t-L}\|K_{km}\|M_m^{-t}
+ \le C_sM_k^{2-L}(M_k/M_m)^{t-1}
+                         e^{-\epsilon|\bar S_k-\bar S_m|}
+ \le C_{t,s}e^{-(\epsilon/2)|\bar S_k-\bar S_m|}.
+\]
+Choose $\delta$ so that $|t-1|\delta\le\epsilon/2$.
+The last matrix has bounded row and column sums: the $S_n$ are
+uniformly separated and there are only finitely many pieces at each
+index. The $\ell^2$ Schur estimate proves
+\eqref{eq:reference-negative-material-extension}.
+
+The definition of $\mathbb D_*$ makes it complete. Approximate a
+source by compact smooth sources. The estimate gives local volume
+convergence and the equation passes to distributions, with weak
+transmissions. If $v_j\to v$ in the ambient volume space and
+$\mathbb P_*v_j\to F$ in the source space, then
+$v_j=\mathbb G_*\mathbb P_*v_j\to\mathbb G_*F$, so
+$v=\mathbb G_*F$; the graph is closed. First-normal estimates identify
+the local weak traces. Finally, any smooth admissible $y$ with source
+$F$ differs from $\mathbb G_*F$ by a homogeneous normalized natural
+endpoint solution, hence is equal to it. This proves the stated
+exhaustion of admissible smooth fields.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=.92cm,y=.9cm,font=\small,>=Stealth]
+\draw[->] (0,0)--(6.2,0) node[right] {source depth $\bar S_m$};
+\draw[->] (0,0)--(0,4.9) node[above] {output depth $\bar S_k$};
+\fill[blue!7] (0,0)--(4.5,4.5)--(0,4.5)--cycle;
+\fill[orange!9] (0,0)--(5.7,0)--(5.7,4.5)--(4.5,4.5)--cycle;
+\draw[thick] (0,0)--(4.5,4.5);
+\node at (1.45,3.4) {$\gamma=\beta+\epsilon$};
+\node at (4,1.2) {$\gamma=\beta-\epsilon$};
+\node[align=left,anchor=west] at (6.55,2.8)
+ {$e^{-\epsilon|\bar S_k-\bar S_m|}$\\[3pt]
+  controls transfer between pieces.};
+\end{tikzpicture}
+\caption{The same reference inverse is estimated with two endpoint
+weights. Each weight is used on one side of the diagonal. Their minimum
+gives decay in the distance between source and output depths.}
+\label{fig:two-weights}
+\end{figure}
+
+\subsection{The estimate that explains cubic matching}
+
+On a normalized positive cylinder consider
+\[
+ P_ju=-(au')'+j^2cu+Vu=F,
+ \qquad a\ge\mathcal E_m^{-C},\quad
+ c\ge\mathcal E_m^{-C}d,\quad d=y(1-y).
+\]
+Coefficient derivatives through order two, and $a^{-1}$, are bounded
+by $\mathcal E_m^{C_1}$. Boundary values are arbitrary. We claim
+\begin{equation}\label{eq:vol-arbitrary-boundary-graph-bound}
+ \begin{split}
+ &\|du'\|_2+\|\av j d^{3/2}u\|_2+\|d^2u''\|_2
+   +\|\av j^2d^3u\|_2+\|\av j d^{5/2}u'\|_2\\
+ &\hspace{30mm}\le\mathcal E_m^C(\|F\|_2+\|u\|_2),
+ \end{split}
+\end{equation}
+where $\av j=(1+j^2)^{1/2}$ in this display.
+For fixed $j$, a distributional $L^2$ solution with $F\in L^2$
+is $H^2$ up to the endpoints by the regular ordinary differential
+equation. Uniform bounds come from the following calculation, not
+from that preliminary regularity statement.
+
+Multiply by $d^2\bar u$ and integrate. Since $d=0$ at the ends,
+\[
+ \int a|(du)'|^2+j^2\int cd^2|u|^2
+ =\operatorname{Re}\langle F,d^2u\rangle
+       +\int a|d'|^2|u|^2-\int Vd^2|u|^2.
+\]
+This bounds $du'$ and $jd^{3/2}u$. Now put $v=d^2u$; it has
+zero trace and
+\[
+ P_jv=d^2F-2a(d^2)'u'-(a(d^2)')'u.
+\]
+The right side is controlled by the first estimate. With $q_0=c/a$,
+the same is true of $F_1=-v''+j^2q_0v$. Squaring and integrating
+the cross term twice gives
+\[
+ \|v''\|_2^2+j^4\|q_0v\|_2^2+2j^2\int q_0|v'|^2
+ =\|F_1\|_2^2+j^2\int q_0''|v|^2.
+\]
+The final integral is controlled because $d^4\le Cd^3$.
+Use $q_0\ge\mathcal E_m^{-C}d$ and expand $v',v''$ to obtain
+\eqref{eq:vol-arbitrary-boundary-graph-bound}.
+
+Every second-order term in the perturbation
+\eqref{eq:readable-positive-difference} is now controlled:
+$d^3u_{yy}$ by $d^2u''$, $d^3u_{y\varphi}$ by
+$\av j d^{5/2}u'$, and $d^3u_{\varphi\varphi}$ by
+$\av j^2d^3u$. A derivative on the coefficient leaves only terms
+controlled by the first two norms. Fourier convolution in $\varphi$
+therefore gives, for $s\ge b$,
+\begin{equation}\label{eq:readable-positive-relative-bound}
+ \|\delta P_{\mathbf x}u\|_s
+ \le C_sH_m^\beta\mathcal E_m^{C_s}
+ \left[\mathfrak n_{b_0,m}(\|F\|_s+\|u\|_s)
+       +\mathfrak n_{s+d_*,m}(\|F\|_b+\|u\|_b)\right].
+\end{equation}
+This is the reason for matching the principal density to order two.
+It controls a second-order perturbation without imposing artificial
+boundary conditions on the reference solution.
+
+We also use an elementary first-normal estimate on every normalized
+piece. Its radial equation has the form
+$Au''+Bu'+(j^2C+D_0)u=F$ with $A$ bounded away from zero and all
+coefficients bounded by fixed powers of $\mathcal E_m$.
+The equation and
+$\|u'\|_2^2\le C\|u\|_2(\|u''\|_2+\|u\|_2)$ give
+\begin{equation}\label{eq:vol-reference-first-normal-bound}
+ \|u'\|_2\le\mathcal E_m^C(\|F\|_2+\av j\|u\|_2),
+ \qquad
+ \|u''\|_2\le\mathcal E_m^C(\|F\|_2+\av j^2\|u\|_2).
+\end{equation}
+Young's inequality absorbs the intermediate $u'$ term. Density
+extends the estimates to volume solutions. Neither estimate assumes
+zero boundary data.
+
+\subsection{The bounded relative operator}
+
+Define on compact smooth sources
+\[
+ \mathscr R_{\mathbf x}=(\mathbb P_{\mathbf x}-\mathbb P_*)\mathbb G_*.
+\]
+If $\mathbb G_*F=(W,a_L,\mu,\lambda)$, then
+\begin{equation}\label{eq:vol-normalized-relative-identity}
+ \mathscr R_{\mathbf x}F
+ =\delta\mathbb L_{\mathbf x}W
+      +a_L(s_{\mathbf x}-s_*)+\mu(k_{\mathbf x}^c-k_*^c).
+\end{equation}
+The last scalar has no difference. On a negative piece only the
+canonical potential varies. On a positive piece use
+\eqref{eq:readable-positive-relative-bound}, putting its compact scalar
+sources into $F$. Every coefficient difference at the output piece
+$k$ contains $H_k^\beta$.
+
+Here is the actual base-space calculation. Combine that factor with
+\eqref{eq:global-two-weight-block-bound}. For low coefficients the
+norm of the block from $m$ to $k$ is bounded by
+\begin{equation}\label{eq:rewrite-relative-block}
+ C\mathfrak n_{b_0}\,M_k^CM_m^C
+            e^{-\beta\bar S_k-\epsilon|\bar S_k-\bar S_m|}.
+\end{equation}
+For every fixed $C$ and $\delta>0$,
+$M_j^C\le C_\delta e^{\delta\bar S_j}$, while
+$\bar S_m\le\bar S_k+|\bar S_k-\bar S_m|$.
+Choose $\delta<\min(\beta/4,\epsilon/2)$. The matrix in
+\eqref{eq:rewrite-relative-block} is bounded by
+\[
+ C'\mathfrak n_{b_0}
+       e^{-(\beta/2)\bar S_k-(\epsilon/2)|\bar S_k-\bar S_m|}.
+\]
+Its row and column sums are uniformly bounded. Thus
+\begin{equation}\label{eq:rewrite-base-relative}
+ \|\mathscr R_{\mathbf x}\|_{\mathbb V_{0,b}\to\mathbb V_{0,b}}
+                         \le C\mathfrak n_{b_0}<\tfrac12
+\end{equation}
+after increasing $b_0$ to cover the finite low derivatives and
+then decreasing $\epsilon_0$. This is a bounded operator on precisely
+one source space; no identification of a derivative-losing inverse
+with a bounded endomorphism has been made.
+
+For higher orders keep one coefficient factor at high order in the
+product estimate. The same summation proves, for $t\ge0$, $s\ge b$,
+\begin{equation}\label{eq:compact-volume-relative-bound}
+ \begin{split}
+ \|\mathscr R_{\mathbf x}F\|_{t,s}
+ +\|[\Lambda,\mathscr R_{\mathbf x}]F\|_{t,s}
+ \le C_{t,s}\bigl[\epsilon_0\|F\|_{0,s}
+             +\mathfrak n_{t+s+d_*}\|F\|_{0,b}\bigr],
+ \end{split}
+\end{equation}
+where $\Lambda=|D_\varphi|$. Assign frequency zero to $a_L,\lambda$
+and frequency two to $\mu$. For multiplication by a coefficient,
+the commutator Fourier matrix gains $|k|-|j|$, bounded by $|k-j|$;
+one additional coefficient derivative therefore proves the same bound.
+The scalar commutators are retained:
+$\Lambda(s_{\mathbf x}-s_*)a_L$ and
+$(\Lambda-2)(k_{\mathbf x}^c-k_*^c)\mu$.
+
+Approximation by compact smooth sources identifies this extension
+with the differential difference in distributions on $\mathbb D_*$.
+The canonical transmissions are fixed, hence
+\begin{equation}\label{eq:current-fixed-domain-factorization}
+ \mathbb P_{\mathbf x}=(I+\mathscr R_{\mathbf x})\mathbb P_*
+                         \quad\text{on }\mathbb D_*.
+\end{equation}
+This is the desired comparison on a common domain.
+
+\subsection{Higher derivatives from the one base inverse}
+
+By \eqref{eq:rewrite-base-relative}, set
+\[
+ \widetilde F=(I+\mathscr R_{\mathbf x})^{-1}F,
+ \qquad v=\mathbb G_*\widetilde F.
+\]
+The inverse in the first formula is taken only on $\mathbb V_{0,b}$.
+We now explain why this same solution has all the required regularity.
+
+First recover angular derivatives. If $C=[\Lambda,\mathscr R]$, then
+for $U_\delta=e^{i\delta\Lambda}$,
+\[
+ [U_\delta,\mathscr R]
+ =i\int_0^\delta U_{\delta-t}CU_t\,dt.
+\]
+Apply this to $(I+\mathscr R)\widetilde F=F$. The base inverse
+bounds the difference quotients of $\widetilde F$ whenever those
+of $F$ are bounded. Fatou's lemma on Fourier coefficients gives the
+first derivative; iteration gives all integer orders. Quantitatively,
+the commuted equation at order $N$ contains
+$\sum_{k=0}^{N-1}\Lambda^kC\Lambda^{N-1-k}\widetilde F$.
+Interpolate the bound for $C$ at the base and at order $N-1$, treating
+the high coefficient size as a weight in the source Hilbert norm.
+Each term is then bounded by
+\[
+ C_N\bigl(\|\widetilde F\|_{N-1}
+ +(1+\mathfrak n_{N+d_*})\|\widetilde F\|_b\bigr).
+\]
+Interpolation and Young's inequality absorb the first term into
+half the order-$N$ norm plus a base norm. This proves the one-high-factor
+estimate without smallness of high coefficient norms. Real orders
+follow by Hilbert interpolation, or may be replaced by their ceilings.
+
+Next use the already solved identity
+$\widetilde F=F-\mathscr R_{\mathbf x}\widetilde F$.
+Estimate its last term by \eqref{eq:compact-volume-relative-bound}.
+It belongs to every coefficient-weight order once angular regularity
+is known. Thus
+\begin{equation}\label{eq:full-source-tame-resolvent}
+ \|\widetilde F\|_{t,s}
+ \le C_{t,s}\bigl[\|F\|_{t,s}
+       +(1+\mathfrak n_{t+s+d_*})\|F\|_{0,b}\bigr].
+\end{equation}
+No second inversion is required.
+
+\paragraph{The normal recursion uses the original source.}
+Estimate \eqref{eq:full-source-tame-resolvent} controls angular
+derivatives of $\widetilde F$. We do not assume normal derivatives
+of that corrected source. Use instead the current equation
+$\mathbb P_{\mathbf x}v=F$, and subtract its three scalar columns:
+\[
+ F^\circ=F-a_Ls_{\mathbf x}-\mu k_{\mathbf x}^c-\lambda c_*.
+\]
+Rescale each negative half to a unit radial interval, denoted by $y$;
+the positive intervals already have this normalization. All rescaling
+factors and their reciprocals are reference coefficient factors.
+Solving the equation for its nonvanishing normal coefficient gives
+\begin{equation}\label{eq:rewrite-normal-recursion-base}
+ \partial_y^2W=\sum_{(i,j)\in I}A_{ij}\partial_y^i
+                      \partial_\varphi^jW+B F^\circ,\qquad
+ I=\{(1,1),(0,2),(1,0),(0,1),(0,0)\}.
+\end{equation}
+On a negative half the unscaled equation is
+$W_{\xi\xi}=\xi W_{\varphi\varphi}-VW+F^\circ$.
+On a positive piece the normal coefficient has a lower bound
+$\mathcal E_m^{-C}$ on the common neighborhood. Thus all the
+$A_{ij},B$ obey the coefficient calculus of
+Proposition~\ref{prop:uniform-physical-geometry}, with a fixed
+state-derivative loss $d_{\rm geo}$.
+
+For $a\ge2$ the actual mixed recursion is
+\begin{equation}\label{eq:rewrite-mixed-normal-recursion}
+ \begin{split}
+ \partial_y^a\partial_\varphi^b W
+ ={}&\sum_{(i,j)\in I}\sum_{p=0}^{a-2}\sum_{q=0}^{b}
+       \binom{a-2}{p}\binom bq
+       (\partial_y^p\partial_\varphi^q A_{ij})
+       \partial_y^{a-2-p+i}\partial_\varphi^{b-q+j}W\\
+ &+\partial_y^{a-2}\partial_\varphi^b(BF^\circ).
+ \end{split}
+\end{equation}
+Every field on the right has at most $a-1$ normal derivatives
+and total order at most $a+b$. A derivative falling on a
+coefficient lowers the remaining field order by that amount.
+Consequently the expansion terminates in angular derivatives of
+$W$, angular derivatives of $W_y$, and mixed derivatives of
+$F^\circ$. At total order $s$ their respective orders are at most
+$s$, $s-1$, and $s-2$.
+Starting with the already established angular and first-normal
+regularity, this identity in distributions proves the existence of
+the mixed derivatives successively.
+
+Here is the quantitative form of this recursion. Fix a base order
+$b_1\ge4$, and let $\mathfrak n_{r,m}$ be the localized displacement
+seminorm on the bounded-overlap neighborhoods used in
+Section~\ref{sec:fixed-geometry}. For $s\ge b_1+2$ put
+\[
+ \mathcal A_{s,m}
+ =\|W_m\|_{L_y^2H_\varphi^s}
+   +\|\partial_yW_m\|_{L_y^2H_\varphi^{s-1}}
+   +\|F_m^\circ\|_{H^{s-2}_{y,\varphi}}.
+\]
+The finite expansion of \eqref{eq:rewrite-mixed-normal-recursion}
+gives
+\begin{equation}\label{eq:rewrite-local-mixed-bound}
+ \|W_m\|_{H^s_{y,\varphi}}
+ \le C_s\mathcal E_m^{C_s}
+       \left[\mathcal A_{s,m}
+       +(1+\mathfrak n_{s+d_{\rm geo},m})\mathcal A_{b_1,m}\right].
+\end{equation}
+To justify the tame form, keep the derivative count in each
+expanded term: the sum of coefficient derivative orders and the
+remaining field or source order is at most $s$. Interpolate each
+intermediate coefficient norm between its fixed low norm and its
+order-$s+d_{\rm geo}$ norm, and each remaining field norm between
+the corresponding entries of $\mathcal A_{b_1,m}$ and
+$\mathcal A_{s,m}$. The interpolation exponents have sum at most
+one. The weighted arithmetic--geometric mean inequality therefore
+places at most one factor at high order. Sobolev embedding uses only
+the fixed base order $b_1$. Reciprocal normal coefficients have the
+same property by their positive lower bound. This proves
+\eqref{eq:rewrite-local-mixed-bound}; it does not require smallness
+of any order-$s$ state norm.
+
+The reference factors in that finite expansion may have an exponent
+$C_s$ growing with $s$. Absorb their \emph{complete product} only
+after the expansion: $\mathcal E_m^{C_s}\le C_sM_m$ costs one
+coefficient-weight order. Paying for each recursion separately
+would obscure this fixed loss.
+For precision, write
+\[
+ \bigl(\|Z\|_{t,s}^{\rm mix}\bigr)^2
+ =\sum_m M_m^{2t}H_m^{-2\beta}
+       \sum_{a+b\le s}\|\partial_y^a\partial_\varphi^b Z_m\|_2^2.
+\]
+The zeroth-normal entry of $\mathcal A_{s,m}$ is controlled by
+\eqref{eq:reference-negative-material-extension}. For its
+first-normal entry, use the first-normal reference bound at angular
+order $s-1$: its one extra angular derivative asks for precisely
+order $s$ of $\widetilde F$. Summing
+\eqref{eq:rewrite-local-mixed-bound} therefore yields
+\begin{equation}\label{eq:rewrite-global-mixed-bound}
+ \begin{split}
+ \|W\|_{t,s}^{\rm mix}
+ \le C_{t,s}\bigl[&
+   \|\widetilde F\|_{t+L+1,s}
+   +\|F\|_{t+1,s-2}^{\rm mix}\\
+ &+(1+\mathfrak n_{t+s+D})\|F\|_{0,b_1}^{\rm mix}\bigr].
+ \end{split}
+\end{equation}
+Here $D$ is fixed: it covers $L+1$, $d_{\rm geo}$ and the fixed
+base and embedding orders. The scalar columns are compactly
+supported and satisfy the same tame estimate; their scalars are
+bounded by the base inverse. In the high-coefficient term the
+$M^{t+L+1}$ weight is placed on the localized state norm, leaving
+the low field in the reference output space of weight $-L$.
+Choose the original $b_0$ large enough to control the finitely many
+base norms used here. The finitely many orders below $b_1+2$ follow
+from this same base calculation.
+
+Apply \eqref{eq:full-source-tame-resolvent} to the first term in
+\eqref{eq:rewrite-global-mixed-bound}. The weight and derivative
+indices there have sum $t+s+L+1$; the source term has sum $t+s-1$.
+Thus taking $t+s\le r$ costs a fixed number of grading orders,
+independent of $r$. The physical coordinate and source transformations
+have their already proved fixed tame losses. Increasing $d_*$
+once to include those losses gives \eqref{eq:readable-physical-inverse-tame}.
+Physical seam jets match by the argument at the end of
+Section~\ref{sec:fixed-geometry}.
+
+Undoing the transformations gives
+\[
+ \widehat L_{\mathbf x}\eta+k_{\mathbf x}\mu+\lambda\psi=f,
+ \qquad \ell_*\eta=0.
+\]
+Endpoint fluxes vanish. Moreover $\mathsf Qk_{\mathbf x}=0$ by
+differentiating the integral compatibility of the original residual.
+Integration therefore gives $\lambda=\mathsf Qf$. For
+$f\in\mathcal Y_\beta$ it is zero.
+
+\begin{proposition}[The perturbed scalar inverse]
+\label{prop:rewrite-volume-inverse}
+On the single neighborhood fixed above there is a unique normalized
+pair $G_{\mathbf x}f=(\eta,\mu)$ solving
+$\widehat L_{\mathbf x}\eta+k_{\mathbf x}\mu=f$ for every
+$f\in\mathcal Y_\beta$. The height belongs to
+$\mathcal X_\beta\cap\ker\ell_*$ and has right endpoint value zero.
+Its left endpoint value is free. For a fixed $d_*$,
+\begin{equation}\label{eq:readable-physical-inverse-tame}
+ \|G_{\mathbf x}f\|_s
+ \le C_s\bigl[\|f\|_{s+d_*}
+       +(1+\mathfrak n_{s+d_*})\|f\|_{b+d_*}\bigr].
+\end{equation}
+The inverse is smooth tame jointly in state and source.
+\end{proposition}
+
+\begin{proof}
+Existence and the estimate were proved above. Factorization on
+$\mathbb D_*$ gives both inverse identities, and its exhaustion
+property gives uniqueness among smooth admissible fields. The
+resolvent identity first proves continuity in the base space and
+then, using the higher estimates, at every stronger order. The
+coefficient family is smooth tame. Hamilton's inverse-family theorem
+\cite[II, Theorem~3.1.1, p.~150]{Hamilton1982} now applies: a smooth
+tame linear family with unique solutions and a continuous tame inverse
+has a smooth tame inverse. Its uniqueness and continuity hypotheses
+have thus been checked before invoking it.
+\end{proof}

@@ -1,0 +1,1485 @@
+{
+  "parents": {
+    "S01": [
+      {
+        "id": "S01.01",
+        "title": "保留已有完整局部证明",
+        "statement": "r>0、E>0 时，余度量坐标二次型正定 ⇔ D=E(1-p²)-k²>0；并有 D>0 ⇔ k²/E+p²<1、两个对角因子正性及余标架平方和等式。",
+        "depends_on": [],
+        "acceptance": [
+          "现有 Positivity 的10条及 Coframe 的1条精确覆盖此节点",
+          "尚未声称识别了流形范数或曲率"
+        ],
+        "estimated_new_lean_lines": [
+          0,
+          0
+        ],
+        "estimate_reason": "已登记完整局部证明，不为增加节点数量而重拆。",
+        "covers": [
+          "余度量正定与余标架"
+        ],
+        "status": "retained_proof",
+        "existing_support": "原节点lean_evidence及coordination/checkpoint-2026-11-11-coordination.json；这里继承记录，不声称本次重新构建。"
+      }
+    ],
+    "S02": [
+      {
+        "id": "S02.01",
+        "title": "保留已有完整局部证明",
+        "statement": "对明确坐标残差 Nres 和系数 a,b,c，r≠0、D>0 时 ac-b²=K₀/D²+E D^(-3/2)Nres；再加 Q≠0，c̄=c-E Nres/Q 给 ac̄-b²=K₀/D²。含径向特化与零残差时修正消失。",
+        "depends_on": [],
+        "acceptance": [
+          "14条定理已覆盖点态代数",
+          "实际残差的微分识别另在S03/S05"
+        ],
+        "estimated_new_lean_lines": [
+          0,
+          0
+        ],
+        "estimate_reason": "已登记完整局部证明，不为增加节点数量而重拆。",
+        "covers": [
+          "线性系数行列式与残差修正"
+        ],
+        "status": "retained_proof",
+        "existing_support": "原节点lean_evidence及coordination/checkpoint-2026-11-11-coordination.json；这里继承记录，不声称本次重新构建。"
+      }
+    ],
+    "R01": [
+      {
+        "id": "R01.01",
+        "title": "保留已有完整局部证明",
+        "statement": "u(r)=r^aV(log r)、r>0，在现有明确可微假设下计算实际一二阶导数及 L_a u。令 p(y)=w(e^y)e^((2a-1)y)，有 (pV')'+a(a-1)pV=e^((a+1)y)L_a u(e^y)；取 a=j²。",
+        "depends_on": [],
+        "acceptance": [
+          "10条定理覆盖此局部微分节点",
+          "Green配对与闭算子域换元仍由R06/R12证明"
+        ],
+        "estimated_new_lean_lines": [
+          0,
+          0
+        ],
+        "estimate_reason": "已登记完整局部证明，不为增加节点数量而重拆。",
+        "covers": [
+          "真实导数下的对数幂 gauge"
+        ],
+        "status": "retained_proof",
+        "existing_support": "原节点lean_evidence及coordination/checkpoint-2026-11-11-coordination.json；这里继承记录，不声称本次重新构建。"
+      }
+    ],
+    "C00": [
+      {
+        "id": "C00.01",
+        "title": "标准球面与光滑阶的类型接口",
+        "statement": "固定E3、标准S2及现有球面光滑结构，统一C∞所用ContDiff/ContMDiff阶为∞。",
+        "depends_on": [],
+        "acceptance": [
+          "S2确为标准单位球面的子类型。",
+          "平坦bump相关接口不使用解析阶⊤。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "标准球面与光滑阶的类型接口"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "C00.02",
+        "title": "环带输入字段与条件输出区分",
+        "statement": "逐字段核对FlatAnnularCore及AnnularSolution的实际函数、两端常数、正性区域和扩大领圈；给出条件性发展输出的统一参数接口。",
+        "depends_on": [
+          "C00.01"
+        ],
+        "acceptance": [
+          "扩大环带上的w=0领圈不被要求严格正。",
+          "Core到发展的条件构造不充当Core非空。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "环带输入字段与条件输出区分"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "C00.03",
+        "title": "径向参考与共同闭域接口",
+        "statement": "给RadialReference指定同一几何上的核、真实边框、兼容源、分布图域及双侧逆的精确类型；不把逆存在写作最终假设。",
+        "depends_on": [
+          "C00.01"
+        ],
+        "acceptance": [
+          "β及β±ε使用同一几何和自然逆。",
+          "源密度dr与谱测度的转换必须有后续证明位置。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "径向参考与共同闭域接口"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "C00.04",
+        "title": "闭曲面嵌入与拉回度量接口",
+        "statement": "为ClosedBending指定F:S2×ℝ→E3联合光滑、每相位smooth embedding及切向量内积等式的精确类型。",
+        "depends_on": [
+          "C00.01"
+        ],
+        "acceptance": [
+          "度量要求为实际dF的切向量配对。",
+          "成员嵌入同时包含immersion和全局topological embedding。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "闭曲面嵌入与拉回度量接口"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "C00.05",
+        "title": "固定区域与像集非全等接口",
+        "statement": "规定非退化内盘、补帽拓扑及逐点固定条件，规定量化全部AffineIsometryEquiv的两个range非全等。",
+        "depends_on": [
+          "C00.04"
+        ],
+        "acceptance": [
+          "内盘有非空内部且位于图盘内部。",
+          "非全等覆盖反射并比较像集。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "固定区域与像集非全等接口"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "C00.06",
+        "title": "几何积分语义接口",
+        "statement": "给面积、实际有界内部的Lebesgue体积、向外H=(k1+k2)/2积分指定接口及标准含义桥接的后续义务。",
+        "depends_on": [
+          "C00.04"
+        ],
+        "acceptance": [
+          "积分对象不是任意常值别名。",
+          "区域和向外法向的识别列入D02/G15/G16后续证据要求。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "几何积分语义接口"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "C00.07",
+        "title": "完整量词与同一见证接口",
+        "statement": "把联合光滑、所有实相位、一周期、同一度量和三项不变量合为同一个ClosedBending规格。",
+        "depends_on": [
+          "C00.02",
+          "C00.03",
+          "C00.04",
+          "C00.05",
+          "C00.06"
+        ],
+        "acceptance": [
+          "所有结论使用同一Core、发展、帽与F。",
+          "规格不声称所定义输入或输出结构非空。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "完整量词与同一见证接口"
+        ],
+        "status": "planned"
+      }
+    ],
+    "S03": [
+      {
+        "id": "S03.01",
+        "title": "实际高度jet与混合导数",
+        "statement": "把p、k及各偏导绑定到实际w,z，证明r∂rp=∂θk-p与所需混合导数交换。",
+        "depends_on": [],
+        "acceptance": [
+          "量化真实可微函数而非自由jet。",
+          "r>0及可微阶假设足够且明确。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "实际高度jet与混合导数"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S03.02",
+        "title": "真实余标架结构方程",
+        "statement": "对实际余标架逐坐标证明Cartan一阶结构方程。",
+        "depends_on": [
+          "S03.01"
+        ],
+        "acceptance": [
+          "平方根和除法只用于D>0区域。",
+          "与S01的同一个余度量配对。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "真实余标架结构方程"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S03.03",
+        "title": "连接与残差的二阶识别",
+        "statement": "证明真实α的表达式与dα=rNres dr∧dθ。",
+        "depends_on": [
+          "S03.01",
+          "S03.02"
+        ],
+        "acceptance": [
+          "角向源密度的r因子不丢失。",
+          "残差零给真正闭连接。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "连接与残差的二阶识别"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S03.04",
+        "title": "高度变分的实际导数",
+        "statement": "对z+sη求实际参数导数，证明对称散度系数及混合偏导相容。",
+        "depends_on": [
+          "S03.01",
+          "S03.02",
+          "S03.03"
+        ],
+        "acceptance": [
+          "含全部高度一二阶变化项。",
+          "结论是微分恒等式而非形式系数定义。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "高度变分的实际导数"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S03.05",
+        "title": "零残差的局部发展桥接",
+        "statement": "把闭连接、旋转余标架和局部积分连成实际局部欧氏余度量结论。",
+        "depends_on": [
+          "S03.02",
+          "S03.03"
+        ],
+        "acceptance": [
+          "局部原函数的区域条件明确。",
+          "不假设环带连接有全局实原函数。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "零残差的局部发展桥接"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S03.06",
+        "title": "函数空间光滑与导数接口",
+        "statement": "在W02实际levels上把上述坐标公式提升为联合smooth tame映射及其实际方向导数。",
+        "depends_on": [
+          "S03.01",
+          "S03.02",
+          "S03.03",
+          "S03.04"
+        ],
+        "acceptance": [
+          "点态C∞与函数空间smooth tame分别证明。",
+          "全部估计使用同一低阶邻域及固定损失。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "函数空间光滑与导数接口"
+        ],
+        "status": "planned",
+        "extra_dependencies": [
+          {
+            "milestone": "W02",
+            "reason": "原剩余义务明确要求函数空间smooth tame，须使用实际加权levels而非点态公式。"
+          }
+        ]
+      },
+      {
+        "id": "S03.07",
+        "title": "标量核心局部节点组合",
+        "statement": "将真实坐标微分、闭连接/发展、散度变分和函数空间接口合为原S03完整结论。",
+        "depends_on": [
+          "S03.01",
+          "S03.02",
+          "S03.03",
+          "S03.04",
+          "S03.05",
+          "S03.06"
+        ],
+        "acceptance": [
+          "逐条核对prop:scalar-core对应公式。",
+          "源仍是dr dθ而不是未识别的加权测度。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "标量核心局部节点组合"
+        ],
+        "status": "planned"
+      }
+    ],
+    "S04": [
+      {
+        "id": "S04.01",
+        "title": "参数商的可去延拓",
+        "statement": "以参数线段积分定义Fq在q=0的真实延拓并识别其值为线性化。",
+        "depends_on": [],
+        "acceptance": [
+          "q≠0处等于rN(h+qu)/q。",
+          "q=0处真实可微而不是分段命名。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "参数商的可去延拓"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S04.02",
+        "title": "高度与度量的混合参数导数",
+        "statement": "证明Fq对q、u、w的混合方向微分及积分表达式，包含h_w的变化。",
+        "depends_on": [
+          "S04.01"
+        ],
+        "acceptance": [
+          "度量变化时基准高度随w求导。",
+          "有限矩形中的参数与积分交换条件明确。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "高度与度量的混合参数导数"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S04.03",
+        "title": "有限领圈守恒与角平均",
+        "statement": "由真实连接period推导常高度领圈情况下的归一化源积分为零。",
+        "depends_on": [
+          "S04.01",
+          "S04.02"
+        ],
+        "acceptance": [
+          "两端连接period均为2π。",
+          "角平均明确归一化测度且源为dr。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "有限领圈守恒与角平均"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S04.04",
+        "title": "加权平坦端点的守恒极限",
+        "statement": "用W03端点估计将有限截断守恒推进原环带，证明边界项与参数导数交换的统一控制。",
+        "depends_on": [
+          "S04.02",
+          "S04.03"
+        ],
+        "acceptance": [
+          "不是重新假定端点边界项为零。",
+          "所有所需导数共用一个参数邻域。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "加权平坦端点的守恒极限"
+        ],
+        "status": "planned",
+        "extra_dependencies": [
+          {
+            "milestone": "W03",
+            "reason": "原remaining要求实际加权端点延拓来消除有限矩形边界假设。"
+          }
+        ]
+      },
+      {
+        "id": "S04.05",
+        "title": "归一化残差的smooth tame兼容性",
+        "statement": "在实际加权空间证明Fq联合smooth tame以及全部高度/度量导数落在兼容源子空间。",
+        "depends_on": [
+          "S04.01",
+          "S04.02",
+          "S04.04"
+        ],
+        "acceptance": [
+          "零均值来自实际积分等式。",
+          "包含q=0及非零q同一开集。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "归一化残差的smooth tame兼容性"
+        ],
+        "status": "planned",
+        "extra_dependencies": [
+          {
+            "milestone": "W02",
+            "reason": "归一化残差须在实际源/高度空间而非仅点态参数上smooth tame。"
+          }
+        ]
+      },
+      {
+        "id": "S04.06",
+        "title": "守恒节点完整组合",
+        "statement": "统一可去延拓、全部真实混合微分、端点极限及兼容源约束。",
+        "depends_on": [
+          "S04.01",
+          "S04.02",
+          "S04.03",
+          "S04.04",
+          "S04.05"
+        ],
+        "acceptance": [
+          "原积分表示和q=0值同时成立。",
+          "以后N08能直接使用同一个Fq。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "守恒节点完整组合"
+        ],
+        "status": "planned"
+      }
+    ],
+    "S05": [
+      {
+        "id": "S05.01",
+        "title": "真实修正算子系数识别",
+        "statement": "将S02代数代入S03真实变分，得到Lbar及q∂θ(B A ηθ)精确恒等式。",
+        "depends_on": [],
+        "acceptance": [
+          "B=E/(rQ)仅在合法区域使用。",
+          "不把残差误差量级代替精确恒等式。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "真实修正算子系数识别"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S05.02",
+        "title": "独立残差与增量双线性",
+        "statement": "将修正误差单独定义于独立残差和高度增量并验证各变量线性。",
+        "depends_on": [
+          "S05.01"
+        ],
+        "acceptance": [
+          "不是只验证代入实际残差后的大小界。",
+          "散度形式保持源兼容。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "独立残差与增量双线性"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S05.03",
+        "title": "法向通量与Green配对",
+        "statement": "对明确端点/测试函数条件证明修正不改法向通量、形式对称且杀常数。",
+        "depends_on": [
+          "S05.01",
+          "S05.02"
+        ],
+        "acceptance": [
+          "S05只改角向系数。",
+          "Green配对与dr dθ源的密度一致。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "法向通量与Green配对"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S05.04",
+        "title": "固定转型圆与特征斜率",
+        "statement": "由实际系数行列式识别w′变号的类型及负区根点附近的特征斜率。",
+        "depends_on": [
+          "S05.01"
+        ],
+        "acceptance": [
+          "类型不是w变号。",
+          "平方根退化从简单转点推导。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "固定转型圆与特征斜率"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S05.05",
+        "title": "加权端点系数延拓",
+        "statement": "在实际W02/W03 levels对A、B、修正C逐项处理平坦端点可去性和共同域。",
+        "depends_on": [
+          "S05.01",
+          "S05.03"
+        ],
+        "acceptance": [
+          "不在平坦端点假设Q非零。",
+          "系数延拓与原内部表达式一致。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "加权端点系数延拓"
+        ],
+        "status": "planned",
+        "extra_dependencies": [
+          {
+            "milestone": "W03",
+            "reason": "原剩余义务要求实际加权端点延拓和共同域，不由内部代数自动得到。"
+          }
+        ]
+      },
+      {
+        "id": "S05.06",
+        "title": "特征根点定量估计",
+        "statement": "在显式共同正性邻域内证明根点速度及固定类型系数的全阶有损估计。",
+        "depends_on": [
+          "S05.04",
+          "S05.05"
+        ],
+        "acceptance": [
+          "损失和低阶小性条件不随输出阶变化。",
+          "这是条件系数定理，不反向依赖N01的实例化结论。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "特征根点定量估计"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "S05.07",
+        "title": "修正算子节点组合",
+        "statement": "把实际导数、独立双线性误差、通量、端点共同域和类型估计合为原S05。",
+        "depends_on": [
+          "S05.01",
+          "S05.02",
+          "S05.03",
+          "S05.04",
+          "S05.05",
+          "S05.06"
+        ],
+        "acceptance": [
+          "交付供N01/N03使用的同一算子。",
+          "后续N03的混合系数修正不被误称为全局通量不变。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "修正算子节点组合"
+        ],
+        "status": "planned"
+      }
+    ],
+    "MAIN": [
+      {
+        "id": "MAIN.01",
+        "title": "实际非空输入实例化",
+        "statement": "从N12/G01的已证明存在见证选择一个非零q和实际Core，统一其全部后续数据。",
+        "depends_on": [],
+        "acceptance": [
+          "最终定理无Core非空或环带解存在前提。",
+          "q与弯曲参数τ区分。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "实际非空输入实例化"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "MAIN.02",
+        "title": "同一标准球面与初始度量",
+        "statement": "实例化G07的标准S2、补帽及F0，固定gΣ=F0*δ。",
+        "depends_on": [
+          "MAIN.01"
+        ],
+        "acceptance": [
+          "gΣ为实际光滑正定拉回度量。",
+          "后续所有成员使用这一gΣ。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "同一标准球面与初始度量"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "MAIN.03",
+        "title": "共同周期嵌入族组合",
+        "statement": "以同一发展、帽和相位族组合联合光滑、所有实τ的嵌入、度量等式及一周期。",
+        "depends_on": [
+          "MAIN.01",
+          "MAIN.02"
+        ],
+        "acceptance": [
+          "不是逐参数光滑代替联合光滑。",
+          "不是环境距离等距代替切向量度量。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "共同周期嵌入族组合"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "MAIN.04",
+        "title": "固定区域与非全等像组合",
+        "statement": "组合非退化固定内盘及补帽、两个闭像对全部环境仿射等距非全等。",
+        "depends_on": [
+          "MAIN.02",
+          "MAIN.03"
+        ],
+        "acceptance": [
+          "固定区域有要求的拓扑和非空内部。",
+          "反射包括在全等量词内。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "固定区域与非全等像组合"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "MAIN.05",
+        "title": "三项真实几何不变量组合",
+        "statement": "对同一F调用G14/G15/G16，统一面积、实际围成区域体积及向外有向H积分。",
+        "depends_on": [
+          "MAIN.02",
+          "MAIN.03"
+        ],
+        "acceptance": [
+          "不在三个结论中另选不同见证。",
+          "法向和H=(k1+k2)/2约定一致。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "三项真实几何不变量组合"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "MAIN.06",
+        "title": "全部分析假设消除",
+        "statement": "检查径向参考、闭域逆、smooth tame及Hamilton存在结论均由实际证明实例化。",
+        "depends_on": [
+          "MAIN.01",
+          "MAIN.02",
+          "MAIN.03",
+          "MAIN.04",
+          "MAIN.05"
+        ],
+        "acceptance": [
+          "最终存在定理无RadialReference或逆存在假设。",
+          "结构非空由构造给出而不是从空类型推出条件结论。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "全部分析假设消除"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "MAIN.07",
+        "title": "主定理类型与内核审计",
+        "statement": "将论文thm:main逐条对应最终Lean存在定理的类型，运行所属模块及统一owner-based审计。",
+        "depends_on": [
+          "MAIN.01",
+          "MAIN.02",
+          "MAIN.03",
+          "MAIN.04",
+          "MAIN.05",
+          "MAIN.06"
+        ],
+        "acceptance": [
+          "所有私有helper也在审计范围。",
+          "构建会话有明确终端exit status。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "主定理类型与内核审计"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "MAIN.08",
+        "title": "完整主定理交付",
+        "statement": "组合全部见证与结论，以最终Lean声明和实际构建输出交付无条件主定理。",
+        "depends_on": [
+          "MAIN.01",
+          "MAIN.02",
+          "MAIN.03",
+          "MAIN.04",
+          "MAIN.05",
+          "MAIN.06",
+          "MAIN.07"
+        ],
+        "acceptance": [
+          "不得用蓝图结构通过代替内核证明。",
+          "完成声明仅在integration核对全部原始结论后给出。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "完整主定理交付"
+        ],
+        "status": "planned"
+      }
+    ],
+    "X01": [
+      {
+        "id": "X01.01",
+        "title": "指数区间与固定几何量词",
+        "statement": "固定已经选定的一套几何，再引入任意紧指数区间[γ-,γ+]⊂(0,1)，列出可依赖区间的常数。",
+        "depends_on": [],
+        "acceptance": [
+          "几何选择在指数区间量词之前。",
+          "不得逐γ重选轮廓或边框。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "指数区间与固定几何量词"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X01.02",
+        "title": "紧区间单元估计一致性",
+        "statement": "将R05单元估计的指数依赖压缩为紧区间上统一常数。",
+        "depends_on": [
+          "X01.01"
+        ],
+        "acceptance": [
+          "尾部索引阈值的允许依赖明确。",
+          "保持原有同一自然端线。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "紧区间单元估计一致性"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X01.03",
+        "title": "紧区间Green核与匹配界",
+        "statement": "在不改变几何的前提下推广Green核、匹配块和界面矩阵的指数一致估计。",
+        "depends_on": [
+          "X01.01",
+          "X01.02"
+        ],
+        "acceptance": [
+          "同一个全局Green逆。",
+          "源配对测度不随指数变更而隐去。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "紧区间Green核与匹配界"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X01.04",
+        "title": "全指数尾部求和",
+        "statement": "证明紧区间上尾部级数的统一收敛、权交换及双侧逆估计。",
+        "depends_on": [
+          "X01.02",
+          "X01.03"
+        ],
+        "acceptance": [
+          "不得交换未经控制的无限求和与supγ。",
+          "图域与自然端点解释保持一致。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "全指数尾部求和"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X01.05",
+        "title": "全指数加强组合",
+        "statement": "组合得到原X01的全部紧区间加强，维持几何与指数区间选择的量词顺序。",
+        "depends_on": [
+          "X01.01",
+          "X01.02",
+          "X01.03",
+          "X01.04"
+        ],
+        "acceptance": [
+          "不新增MAIN前置依赖。",
+          "主定理所用固定β三指数是此加强的特例而非循环前提。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "全指数加强组合"
+        ],
+        "status": "planned"
+      }
+    ],
+    "X02": [
+      {
+        "id": "X02.01",
+        "title": "两弱因子的双权乘积",
+        "statement": "在实际加权levels证明两个β弱因子的乘积落入2β权，并记录导数损失。",
+        "depends_on": [],
+        "acceptance": [
+          "估计对同一q区间成立。",
+          "角向和径向混合导数一并控制。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "两弱因子的双权乘积"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X02.02",
+        "title": "二次余项的双权识别",
+        "statement": "将真实非线性二次余项逐项分解，验证其2β权源估计。",
+        "depends_on": [
+          "X02.01"
+        ],
+        "acceptance": [
+          "实际残差而非任意命名的二次项。",
+          "保留源兼容与奇偶条件。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "二次余项的双权识别"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X02.03",
+        "title": "平均primitive无指数损失",
+        "statement": "求解实际平均方程并证明primitive保持所需指数及端点常数自由。",
+        "depends_on": [
+          "X02.02"
+        ],
+        "acceptance": [
+          "右端归零而左端常数可不同。",
+          "积分使用实际dr源测度。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "平均primitive无指数损失"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X02.04",
+        "title": "高度和圆控制二阶恢复",
+        "statement": "从同一弱解恢复νq、κq并证明O(q²)的指定加权范数界。",
+        "depends_on": [
+          "X02.02",
+          "X02.03"
+        ],
+        "acceptance": [
+          "控制来自原方程。",
+          "无需重新进行非线性迭代或缩小每阶参数区间。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "高度和圆控制二阶恢复"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X02.05",
+        "title": "强拓扑参数光滑性",
+        "statement": "把二次恢复和双权估计提升为强拓扑中的实际参数方向导数及全阶连续性。",
+        "depends_on": [
+          "X02.01",
+          "X02.02",
+          "X02.03",
+          "X02.04"
+        ],
+        "acceptance": [
+          "不能用各q分别有界代替参数光滑。",
+          "全部阶数保留同一q0。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "强拓扑参数光滑性"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X02.06",
+        "title": "H的一减ε端点估计",
+        "statement": "在论文指定范围ε内证明H^(1-ε)端点估计并识别原高度/控制。",
+        "depends_on": [
+          "X02.02",
+          "X02.03",
+          "X02.04"
+        ],
+        "acceptance": [
+          "范数和端点区域明确。",
+          "不替代N12必需的弱权全阶延拓。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "H的一减ε端点估计"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X02.07",
+        "title": "双权加强组合",
+        "statement": "组合双权余项、平均primitive、二阶控制、强光滑性及端点估计。",
+        "depends_on": [
+          "X02.01",
+          "X02.02",
+          "X02.03",
+          "X02.04",
+          "X02.05",
+          "X02.06"
+        ],
+        "acceptance": [
+          "首次MAIN闭合不依赖X02。",
+          "N12弱空间延拓义务继续单独验收。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "双权加强组合"
+        ],
+        "status": "planned"
+      }
+    ],
+    "X03": [
+      {
+        "id": "X03.01",
+        "title": "有限Fourier最高模抽取",
+        "statement": "在实际有限角向展开中抽取真实标量方程最高频系数。",
+        "depends_on": [],
+        "acceptance": [
+          "处理实值条件及最高非零模。",
+          "系数计算与S03实际微分相连。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "有限Fourier最高模抽取"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X03.02",
+        "title": "非零区间的复平方根分支",
+        "statement": "对最高模相关复函数，在适当非零区间构造可微平方根分支。",
+        "depends_on": [
+          "X03.01"
+        ],
+        "acceptance": [
+          "分支存在由局部非零与区间性质证明。",
+          "不假设跨零点全局平方根。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "非零区间的复平方根分支"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X03.03",
+        "title": "分支对应的一阶ODE",
+        "statement": "由最高模方程推导平方根的真实一阶ODE及系数可积性。",
+        "depends_on": [
+          "X03.01",
+          "X03.02"
+        ],
+        "acceptance": [
+          "明确复导数解释为实参数导数。",
+          "所有除法在非零区间内部合法。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "分支对应的一阶ODE"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X03.04",
+        "title": "Gronwall与零点传播",
+        "statement": "用已满足系数条件的ODE/Gronwall证明局部分支的唯一性和到边界的控制。",
+        "depends_on": [
+          "X03.03"
+        ],
+        "acceptance": [
+          "不是仅形式写出ODE后宣称唯一。",
+          "量化有限区间与端点极限。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "Gronwall与零点传播"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X03.05",
+        "title": "孤立零点的两侧拼接",
+        "statement": "证明最高模在孤立零点两侧的分支约束可传递，恢复原函数一致性。",
+        "depends_on": [
+          "X03.02",
+          "X03.03",
+          "X03.04"
+        ],
+        "acceptance": [
+          "不要求两侧平方根选取同一符号。",
+          "实际拼接对象为原最高模函数。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "孤立零点的两侧拼接"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X03.06",
+        "title": "零点累积的延拓",
+        "statement": "处理零点非孤立及累积情形，利用连续性/ODE控制完成最高模消失结论。",
+        "depends_on": [
+          "X03.04",
+          "X03.05"
+        ],
+        "acceptance": [
+          "显式覆盖零点累积情况。",
+          "不能以有限分片假设跳过该情形。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "零点累积的延拓"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X03.07",
+        "title": "有限最高频降阶归纳",
+        "statement": "迭代最高模消失结果，完成有限Fourier次数的严格降阶。",
+        "depends_on": [
+          "X03.01",
+          "X03.06"
+        ],
+        "acceptance": [
+          "次数归纳有终止基例。",
+          "结论保持附录命题的全部原假设。"
+        ],
+        "estimated_new_lean_lines": [
+          200,
+          600
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "有限最高频降阶归纳"
+        ],
+        "status": "planned"
+      },
+      {
+        "id": "X03.08",
+        "title": "有限截断障碍组合",
+        "statement": "组合最高频、局部平方根、零点延拓及有限降阶，得到prop:obs-finite-square完整陈述。",
+        "depends_on": [
+          "X03.01",
+          "X03.02",
+          "X03.03",
+          "X03.04",
+          "X03.05",
+          "X03.06",
+          "X03.07"
+        ],
+        "acceptance": [
+          "旁支不引入MAIN依赖。",
+          "复平方根及累积零点分别有实际证明。"
+        ],
+        "estimated_new_lean_lines": [
+          150,
+          450
+        ],
+        "estimate_reason": "先按单一输出组织；实际证明超过800行或含独立困难时再次拆分。",
+        "covers": [
+          "有限截断障碍组合"
+        ],
+        "status": "planned"
+      }
+    ]
+  },
+  "coverage": {
+    "S01": {
+      "acceptance.01": [
+        "S01.01"
+      ],
+      "acceptance.02": [
+        "S01.01"
+      ]
+    },
+    "S02": {
+      "acceptance.01": [
+        "S02.01"
+      ],
+      "acceptance.02": [
+        "S02.01"
+      ]
+    },
+    "R01": {
+      "acceptance.01": [
+        "R01.01"
+      ],
+      "acceptance.02": [
+        "R01.01"
+      ]
+    },
+    "C00": {
+      "acceptance.01": [
+        "C00.04"
+      ],
+      "acceptance.02": [
+        "C00.05"
+      ],
+      "acceptance.03": [
+        "C00.06"
+      ],
+      "acceptance.04": [
+        "C00.01"
+      ],
+      "remaining.01": [
+        "C00.04",
+        "C00.05",
+        "C00.06",
+        "C00.07"
+      ],
+      "remaining.02": [
+        "C00.02",
+        "C00.03",
+        "C00.07"
+      ]
+    },
+    "S03": {
+      "acceptance.01": [
+        "S03.01",
+        "S03.04"
+      ],
+      "acceptance.02": [
+        "S03.03",
+        "S03.04"
+      ],
+      "acceptance.03": [
+        "S03.03",
+        "S03.05"
+      ],
+      "remaining.01": [
+        "S03.06"
+      ]
+    },
+    "S04": {
+      "acceptance.01": [
+        "S04.02"
+      ],
+      "acceptance.02": [
+        "S04.03"
+      ],
+      "acceptance.03": [
+        "S04.04"
+      ],
+      "remaining.01": [
+        "S04.02",
+        "S04.05"
+      ],
+      "remaining.02": [
+        "S04.04",
+        "S04.05"
+      ]
+    },
+    "S05": {
+      "acceptance.01": [
+        "S05.03"
+      ],
+      "acceptance.02": [
+        "S05.02"
+      ],
+      "acceptance.03": [
+        "S05.04"
+      ],
+      "remaining.01": [
+        "S05.05"
+      ],
+      "remaining.02": [
+        "S05.04",
+        "S05.06"
+      ]
+    },
+    "MAIN": {
+      "acceptance.01": [
+        "MAIN.02",
+        "MAIN.03",
+        "MAIN.04",
+        "MAIN.05",
+        "MAIN.07"
+      ],
+      "acceptance.02": [
+        "MAIN.06",
+        "MAIN.07"
+      ],
+      "acceptance.03": [
+        "MAIN.01",
+        "MAIN.06",
+        "MAIN.07"
+      ]
+    },
+    "X01": {
+      "acceptance.01": [
+        "X01.01",
+        "X01.05"
+      ],
+      "acceptance.02": [
+        "X01.01",
+        "X01.02",
+        "X01.03",
+        "X01.04"
+      ]
+    },
+    "X02": {
+      "acceptance.01": [
+        "X02.06",
+        "X02.07"
+      ],
+      "acceptance.02": [
+        "X02.03",
+        "X02.06",
+        "X02.07"
+      ]
+    },
+    "X03": {
+      "acceptance.01": [
+        "X03.01",
+        "X03.07",
+        "X03.08"
+      ],
+      "acceptance.02": [
+        "X03.02",
+        "X03.04",
+        "X03.05",
+        "X03.06"
+      ]
+    }
+  }
+}

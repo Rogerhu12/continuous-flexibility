@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "owner": "01a1c67e-27ff-7653-8f6b-f5ce0ba3ce9b",
+  "status": "passed_zero_live",
+  "LEAN_NUM_THREADS": 4,
+  "handoff": "root actual session89171 terminal exit1; explicit zero-live handoff",
+  "commands": [
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "tool_session": 76204,
+      "source_sha256": "16876cc256b024b5813a6b1a4362af22d3ce96eaca91cdfffeff82cdae82730c",
+      "exit_code": 0,
+      "terminal_chunk": "de8f55",
+      "actual_output": "Built ContinuousFlexibility.Statements.Nonlinear (123s); Build completed successfully (3236 jobs)."
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.NonlinearCompletion",
+      "tool_session": 70936,
+      "source_sha256": "b6a9096ec3ce49a826823e57dd153b40f162ffae374866d21981feb057bbda2a",
+      "exit_code": 1,
+      "terminal_chunk": "23c651",
+      "errors": [
+        "line144 HSMul output metavariable typeclass timeout20000",
+        "line176 nested pairGrading whnf timeout200000",
+        "DoubledRemainderTarget unknown downstream"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.NonlinearCompletion",
+      "tool_session": 95734,
+      "source_sha256": "e20e9e640f881e39ac14814f3195c97189f112a07bc8e0950023aeb9543acc6c",
+      "exit_code": 1,
+      "change": "fixed scalar action result type; localized elaboration budget for nested actual grading",
+      "terminal_chunk": "366675",
+      "errors": [
+        "explicit SMul instance search timeout20000",
+        "doc comment must follow local set_option scope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.NonlinearCompletion",
+      "tool_session": 44047,
+      "source_sha256": "d4df3cef439f0fca93e668e0bff8616501d610976c36c41cbac7d3b2ea1b87ec",
+      "exit_code": 0,
+      "terminal_chunk": "bf172d",
+      "actual_output": "Built ContinuousFlexibility.Statements.NonlinearCompletion (57s); Build completed successfully (3237 jobs)."
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Milestones",
+      "tool_session": 80407,
+      "source_sha256": "82aee4c1daa95b2d30b11db16972c6f022045468815ed49cc7fa3ef154bc37c0",
+      "exit_code": 0,
+      "terminal_chunk": "088c00",
+      "actual_output": "Built ContinuousFlexibility.Statements.Milestones (14s); Build completed successfully (3500 jobs)."
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Audit",
+      "tool_session": 78380,
+      "source_sha256": "801d8b264665d0debdb6add7fc49db7316446745481cf1c145295820cba37c70",
+      "exit_code": 1,
+      "terminal_chunk": "ec0dc6",
+      "errors": [
+        "Compiler-generated partial runtime auxiliary of safe radialJet was rejected by initial safety classifier"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Audit",
+      "tool_session": 19284,
+      "source_sha256": "549a7af61ecef11cf2959079d8fbe28f179119c16c3a506129cd37cb2a993187",
+      "exit_code": 0,
+      "terminal_chunk": "8120ee",
+      "actual_output": "Built ContinuousFlexibility.Statements.Audit (82s); 3501 jobs; 58 closed Prop targets; 4644 project declarations; 1748 target declarations; 466 target-generated theorems; 110 project modules; axioms Quot.sound Classical.choice propext; one compiler recursion auxiliary."
+    },
+    {
+      "command": "python -u ContinuousFlexibility/Statements/check_statements.py --build",
+      "tool_session": 58826,
+      "exit_code": 0,
+      "terminal_chunk": "38e5c0",
+      "actual_output": "MainGeometryAudit replay passed 3131 jobs; Milestones and Audit replay passed 3501 jobs; 58/58 explicit closed proposition types verified against recorded build artifacts; proof progress unchanged."
+    }
+  ],
+  "manifest_sha256": "902435fa7d61a0a5f048789ca79690909a64fb9f2d60da3a255b6769b20badef",
+  "build_log_sha256": "4cfb3d0a268ba6697a72192d35e12c6a0bd521bb292d25eb73d17b2c5cecbeb9"
+}
