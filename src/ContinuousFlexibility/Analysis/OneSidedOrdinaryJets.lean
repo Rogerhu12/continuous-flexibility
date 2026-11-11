@@ -65,11 +65,13 @@ theorem iteratedFDeriv_succ_eq_zero_or_eq_of_eqOn_open
     iteratedFDeriv ℝ (n + 1) f x = 0 ∨
       iteratedFDeriv ℝ (n + 1) f x = iteratedFDeriv ℝ (n + 1) g x := by
   have hgj : DifferentiableAt ℝ (iteratedFDeriv ℝ n g) x :=
-    hg.contDiffAt.differentiableAt_iteratedFDeriv (by simp)
+    hg.contDiffAt.differentiableAt_iteratedFDeriv
+      (ENat.natCast_lt_of_coe_top_le_withTop le_rfl n)
   rcases fderiv_eq_zero_or_eq_of_eqOn
       (iteratedFDeriv_eqOn_of_isOpen hs hfg n) hx hgj with hzero | heq
   · left
-    simp only [iteratedFDeriv_succ_eq_comp_left, Function.comp_apply, hzero, map_zero]
+    simp only [iteratedFDeriv_succ_eq_comp_left, Function.comp_apply, hzero,
+      LinearIsometryEquiv.map_zero]
   · right
     simp only [iteratedFDeriv_succ_eq_comp_left, Function.comp_apply, heq]
 

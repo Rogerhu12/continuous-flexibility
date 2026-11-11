@@ -6,6 +6,7 @@ import ContinuousFlexibility.Analysis.ControlCellEndpointBounds
 import ContinuousFlexibility.Analysis.CylinderMixedJets
 import ContinuousFlexibility.Analysis.CylinderSobolev
 import ContinuousFlexibility.Analysis.ExponentialSequenceSpace
+import ContinuousFlexibility.Analysis.FiniteJetRemainder
 import ContinuousFlexibility.Analysis.FlatCylinderExtension
 import ContinuousFlexibility.Analysis.FlatExtension
 import ContinuousFlexibility.Analysis.Graded
@@ -39,6 +40,7 @@ import ContinuousFlexibility.Analysis.ProjectiveNewtonSeed
 import ContinuousFlexibility.Analysis.ProjectiveNewtonSmoothing
 import ContinuousFlexibility.Analysis.ProjectiveNewtonTameBounds
 import ContinuousFlexibility.Analysis.ProjectiveNewtonTameData
+import ContinuousFlexibility.Analysis.RootCompositionEven
 import ContinuousFlexibility.Analysis.RootCompositionIntegral
 import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
 import ContinuousFlexibility.Analysis.StateControlDecay

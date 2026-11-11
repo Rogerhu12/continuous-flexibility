@@ -39,9 +39,9 @@ theorem hasFDerivAt_intervalIntegral_of_contDiff
     hG.continuous.comp (continuous_const.prodMk continuous_id)
   have hsection' (x : E) : Continuous (fun t : ℝ => G' (x, t)) :=
     hG'.continuous.comp (continuous_const.prodMk continuous_id)
-  obtain ⟨B, hB⟩ :=
-    ((isCompact_closedBall x₀ 1).prod (isCompact_uIcc : IsCompact (uIcc a b)))
-      .exists_bound_of_continuousOn hG'.continuous.continuousOn
+  have hc : IsCompact (closedBall x₀ 1 ×ˢ uIcc a b) :=
+    (isCompact_closedBall x₀ 1).prod isCompact_uIcc
+  obtain ⟨B, hB⟩ := hc.exists_bound_of_continuousOn hG'.continuous.continuousOn
   exact intervalIntegral.hasFDerivAt_integral_of_dominated_of_fderiv_le
     (F := fun x t => G (x, t)) (F' := fun x t => G' (x, t))
     (μ := volume) (a := a) (b := b) (s := ball x₀ 1)
