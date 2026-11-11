@@ -67,6 +67,24 @@ theorem stateNeighborhood_isOpen (S : PhysicalSpacesData)
   exact (isOpen_lt hc continuous_const).inter
     (isOpen_lt continuous_snd.abs continuous_const)
 
+/-- Restriction preserves a one-high-factor bound in the same tower.
+The target measurement may include a fixed spatial weight. -/
+theorem smoothDirections_restrict_oneHigh_bound
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {U V : Set E} {f : E → F} {q : ℕ → Seminorm ℝ E}
+    {k base base' high : ℕ} {K : ℝ} (measure : F → ℝ) (x₀ : E)
+    (hV : IsOpen V) (hVU : V ⊆ U) (hq : Monotone q)
+    (hb : base ≤ base') (hK : 0 ≤ K)
+    (hbound : ∃ J : SmoothDirections U f, ∀ x ∈ U, ∀ v : Fin k → E,
+      measure (J.D k x v) ≤ K * oneHighVariationWeight q base high (x - x₀) v) :
+    ∃ J : SmoothDirections V f, ∀ x ∈ V, ∀ v : Fin k → E,
+      measure (J.D k x v) ≤ K * oneHighVariationWeight q base' high (x - x₀) v := by
+  obtain ⟨J, hJ⟩ := hbound
+  refine ⟨J.restrict hV hVU, fun x hx v => ?_⟩
+  exact (hJ x (hVU hx) v).trans (mul_le_mul_of_nonneg_left
+    (oneHighVariationWeight_mono hq hb le_rfl (x - x₀) v) hK)
+
 theorem stateNeighborhood_mono (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) {base base' : ℕ} {ε ε' : ℝ}
     (hb : base ≤ base') (hε : ε' ≤ ε) :
@@ -103,26 +121,21 @@ theorem N01Properties.restrict_neighborhood
     obtain ⟨B, hB, hcoeff⟩ := hcoeff k s
     refine ⟨B, hB, ?_⟩
     intro m i a b p hab hpm
-    obtain ⟨J, hJ⟩ := hcoeff m i a b p hab hpm
-    refine ⟨J.restrict hopen hsub, ?_⟩
-    intro z hz v
     have hC : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B :=
       mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hH m).le _))
         (Real.rpow_nonneg (hE m).le _)
-    exact (hJ z (hsub hz) v).trans (mul_le_mul_of_nonneg_left
-      (oneHighVariationWeight_mono hp hb le_rfl (z - (C.referenceState, 0)) v) hC)
+    exact smoothDirections_restrict_oneHigh_bound (fun y : ℝ => |y|)
+      (C.referenceState, (0 : ℝ)) hopen hsub hp hb hC (hcoeff m i a b p hab hpm)
   · intro k s
     obtain ⟨B, hB, hflowjets⟩ := hflowjets k s
     refine ⟨B, hB, ?_⟩
     intro m a b p hab hpm
-    obtain ⟨J, hJ⟩ := hflowjets m a b p hab hpm
-    refine ⟨J.restrict hopen hsub, ?_⟩
-    intro z hz v
     have hC : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B :=
       mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hH (C.cell m)).le _))
         (Real.rpow_nonneg (hE (C.cell m)).le _)
-    exact (hJ z (hsub hz) v).trans (mul_le_mul_of_nonneg_left
-      (oneHighVariationWeight_mono hp hb le_rfl (z - (C.referenceState, 0)) v) hC)
+    exact smoothDirections_restrict_oneHigh_bound
+      (fun y : ℝ => min (p.1 - C.left m) (C.right m - p.1) ^ a * |y|)
+      (C.referenceState, (0 : ℝ)) hopen hsub hp hb hC (hflowjets m a b p hab hpm)
 
 end ContinuousFlexibility.Statements

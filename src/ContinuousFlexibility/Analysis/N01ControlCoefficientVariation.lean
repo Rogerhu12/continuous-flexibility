@@ -17,6 +17,7 @@ namespace ContinuousFlexibility.Statements
 -- Use the canonical product action directly, avoiding a costly search
 -- through the abstract models that make up the state space.
 local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set Filter
 open scoped Topology ContDiff BigOperators
@@ -76,9 +77,15 @@ theorem oneHighVariationWeight_state_pair_one_zero
     oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
       base high 0 (fun _ : Fin 1 => (v, (0 : ℝ))) =
         stateGrading S base v + stateGrading S high v := by
-  rw [oneHighVariationWeight_one_zero]
-  simp only [pairGrading, Seminorm.add_apply, Seminorm.comp_apply,
-    LinearMap.fst_apply, LinearMap.snd_apply, map_zero, add_zero]
+  have hpair (n : ℕ) :
+      pairGrading (stateGrading S) realGrading n (v, (0 : ℝ)) =
+        stateGrading S n v := by
+    change stateGrading S n v + realGrading n (0 : ℝ) = _
+    exact (congrArg (fun t : ℝ => stateGrading S n v + t)
+      (realGrading n).map_zero').trans (add_zero _)
+  exact (oneHighVariationWeight_one_zero
+    (pairGrading (stateGrading S) realGrading) base high (v, (0 : ℝ))).trans
+      (congrArg₂ (fun a b : ℝ => a + b) (hpair base) (hpair high))
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -138,7 +145,7 @@ theorem N01Properties.coefficientFamily_singleton_line_deriv_zero
       (fun t => opticalLogPerturbation D.w (C.control m) t p.1 - D.w p.1) := by
     funext t
     rw [singletonKappa_joint_line hS, hN.coefficientFamily_singletonKappaLine hS hT]
-    exact congrFun (iteratedDeriv_zero _) p.1
+    simp only [iteratedDeriv_zero]
   rw [heq]
   exact (hasDerivAt_opticalLogPerturbation_difference D.w (C.control m) p.1).deriv
 
@@ -195,8 +202,16 @@ theorem N01Properties.control_product_jets_cell_bound
       (hN.coefficientFamily_singleton_line_deriv_radial hS hT m (r, 0))
   have hb0 := hJ0 (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
   have hb1 := hJ1 (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
-  rw [hd0, sub_self, oneHighVariationWeight_state_pair_one_zero] at hb0
-  rw [hd1, sub_self, oneHighVariationWeight_state_pair_one_zero] at hb1
-  exact ⟨hb0, hb1⟩
+  have hw :
+      oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+        base (1 + loss) ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
+          (fun _ : Fin 1 => (v, (0 : ℝ))) =
+        stateGrading S base v + stateGrading S (1 + loss) v := by
+    simpa only [sub_self] using
+      oneHighVariationWeight_state_pair_one_zero S base (1 + loss) v
+  have hright := congrArg
+    (fun t : ℝ => B * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B * t) hw
+  exact ⟨(congrArg abs hd0).symm.trans_le (hb0.trans_eq hright),
+    (congrArg abs hd1).symm.trans_le (hb1.trans_eq hright)⟩
 
 end ContinuousFlexibility.Statements

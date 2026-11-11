@@ -15,6 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set Filter
 open ContinuousFlexibility.Analysis
@@ -41,18 +42,26 @@ theorem oneHighVariationWeight_state_external_zero
   have hstate (n : ℕ) :
       pairGrading (stateGrading S) realGrading n (η, (0 : ℝ)) =
         stateGrading S n η := by
-    rw [pairGrading_apply, (realGrading n).map_zero', add_zero]
+    change stateGrading S n η + realGrading n (0 : ℝ) = _
+    rw [(realGrading n).map_zero', add_zero]
   have hparameter (n : ℕ) :
       pairGrading (stateGrading S) realGrading n ((0 : AnnularState S), (1 : ℝ)) = 1 := by
-    rw [pairGrading_apply, (stateGrading S n).map_zero']
+    change stateGrading S n (0 : AnnularState S) + realGrading n (1 : ℝ) = 1
+    rw [(stateGrading S n).map_zero']
     change (0 : ℝ) + |1| = 1
     norm_num
-  have hzero : pairGrading (stateGrading S) realGrading high
-      (0 : AnnularState S × ℝ) = 0 :=
-    (pairGrading (stateGrading S) realGrading high).map_zero'
-  simp only [oneHighVariationWeight, Fin.prod_univ_two, Fin.sum_univ_two,
-    he0, he1, Finset.prod_singleton, Fin.cons_zero, Fin.cons_one,
-    hstate, hparameter, hzero, add_zero, one_mul, mul_one]
+  have hfin {E : Type*} [AddCommGroup E] [Module ℝ E]
+      (p : ℕ → Seminorm ℝ E) (v w : E) :
+      oneHighVariationWeight p base high 0
+        (Fin.cons v (fun _ : Fin 1 => w)) =
+        p base v * p base w + (p high v * p base w + p high w * p base v) := by
+    simp only [oneHighVariationWeight, Fin.prod_univ_two, Fin.sum_univ_two,
+      he0, he1, Finset.prod_singleton, Fin.cons_zero, Fin.cons_one,
+      (p high).map_zero', add_zero, one_mul]
+  apply (hfin (pairGrading (stateGrading S) realGrading)
+    (η, (0 : ℝ)) ((0 : AnnularState S), (1 : ℝ))).trans
+  rw [hstate, hstate, hparameter, hparameter]
+  simp only [mul_one, one_mul]
   ring
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

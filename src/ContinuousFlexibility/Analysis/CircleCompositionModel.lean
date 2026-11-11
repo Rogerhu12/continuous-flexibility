@@ -71,7 +71,7 @@ theorem circleComposeFieldLinear_norm_bound (n : ℕ) :
   have hbound := circleNorm_comp_le (u := S.decode u) (φ := φ)
     (hS.2.2.2.1 u) hM hH hφ n hB0 hB
   have hgrade : circleNorm T γ (n + 1) (S.decode u) ≤ S.grading (n + 1) u :=
-    ((circleGrading_le_iff_circleNorm hS (n + 1) u ((S.grading (n + 1)).apply_nonneg u)).mp
+    ((circleGrading_le_iff_circleNorm hS (n + 1) u (apply_nonneg (S.grading (n + 1)) u)).mp
       (le_refl (S.grading (n + 1) u))) (n + 1) le_rfl
   change circleNorm T γ n (circleComposeField (S.decode u) φ) ≤
     circleCompositionNormConstant n B * S.grading (n + 1) u

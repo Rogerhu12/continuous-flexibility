@@ -28,7 +28,7 @@ set_option backward.isDefEq.respectTransparency false
 /-- The genuine parameter derivative of the separated smooth factors. -/
 def characteristicQDerivative (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (x : AnnularState S) (s : ℝ × PolarPoint) : ℝ :=
-  fderiv ℝ (fun t : ℝ × PolarPoint => characteristicDrift D S C (x, t.1) t.2)
+  fderiv ℝ (fun t : ℝ × PolarPoint => stateCharacteristicDrift D S C (x, t.1) t.2)
     s (1, (0, 0)) -
   characteristicRadialRoot D S C (x, 0) s.2.1 *
     fderiv ℝ (fun t : ℝ × PolarPoint => characteristicAngularFactor D S C (x, t.1) t.2)
@@ -100,7 +100,7 @@ include hN01 hS hT hxq hsector
 theorem N01Properties.characteristic_factors_parameter_contDiffAt
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     ContDiffAt ℝ ∞
-      (fun s : ℝ × PolarPoint => characteristicDrift D S C (x, s.1) s.2) (q, p) ∧
+      (fun s : ℝ × PolarPoint => stateCharacteristicDrift D S C (x, s.1) s.2) (q, p) ∧
     ContDiffAt ℝ ∞
       (fun s : ℝ × PolarPoint => characteristicAngularFactor D S C (x, s.1) s.2) (q, p) := by
   have hw := contDiff_stateProfile_of_n01 hS hT hN01 x
@@ -164,7 +164,7 @@ theorem N01Properties.characteristicQDerivative_continuousAt
   obtain ⟨hA, hB⟩ :=
     hN01.characteristic_factors_parameter_contDiffAt hS hT hxq hsector hp
   have hAq : ContinuousAt (fun s : ℝ × PolarPoint =>
-      fderiv ℝ (fun t : ℝ × PolarPoint => characteristicDrift D S C (x, t.1) t.2)
+      fderiv ℝ (fun t : ℝ × PolarPoint => stateCharacteristicDrift D S C (x, t.1) t.2)
         s (1, (0, 0))) (q, p) :=
     (hA.fderiv_right (m := 0) (by simp)).continuousAt.clm_apply continuousAt_const
   have hBq : ContinuousAt (fun s : ℝ × PolarPoint =>
@@ -201,9 +201,9 @@ theorem N01Properties.minusCharacteristicSpeed_hasDerivAt_q
     hN01.characteristic_factors_parameter_contDiffAt hS hT hxq hsector hp
   have hmap : HasDerivAt (fun t : ℝ => (t, p)) (1, (0, 0)) q :=
     (hasDerivAt_id q).prodMk (hasDerivAt_const q p)
-  have hAq : HasDerivAt (fun t : ℝ => characteristicDrift D S C (x, t) p)
+  have hAq : HasDerivAt (fun t : ℝ => stateCharacteristicDrift D S C (x, t) p)
       (fderiv ℝ (fun s : ℝ × PolarPoint =>
-        characteristicDrift D S C (x, s.1) s.2) (q, p) (1, (0, 0))) q := by
+        stateCharacteristicDrift D S C (x, s.1) s.2) (q, p) (1, (0, 0))) q := by
     simpa only [Function.comp_def] using
       (hA.differentiableAt (by simp)).hasFDerivAt.comp_hasDerivAt q hmap
   have hBq : HasDerivAt (fun t : ℝ => characteristicAngularFactor D S C (x, t) p)
@@ -233,7 +233,7 @@ theorem N01Properties.minusCharacteristicSpeed_hasFDerivAt_q_angle
   obtain ⟨hA, hB⟩ :=
     hN01.characteristic_factors_parameter_contDiffAt hS hT hxq hsector hp
   have hAs : ContDiffAt ℝ ∞ (fun v : PolarPoint =>
-      characteristicDrift D S C (x, v.1) (r, v.2)) (q, θ) :=
+      stateCharacteristicDrift D S C (x, v.1) (r, v.2)) (q, θ) :=
     hA.comp (q, θ) (contDiffAt_fst.prodMk (contDiffAt_const.prodMk contDiffAt_snd))
   have hBs : ContDiffAt ℝ ∞ (fun v : PolarPoint =>
       characteristicAngularFactor D S C (x, v.1) (r, v.2)) (q, θ) :=

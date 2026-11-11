@@ -21,6 +21,7 @@ namespace ContinuousFlexibility.Statements
 -- Use the canonical product action directly, avoiding a costly search
 -- through the abstract models that make up the state space.
 local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis
@@ -43,13 +44,22 @@ theorem oneHighVariationWeight_externalParameter
     simp [Subsingleton.elim i (0 : Fin 1)]
   have hunit (n : ℕ) :
       pairGrading (stateGrading S) realGrading n ((0 : AnnularState S), (1 : ℝ)) = 1 := by
-    rw [pairGrading_apply, (stateGrading S n).map_zero']
+    change stateGrading S n (0 : AnnularState S) + realGrading n (1 : ℝ) = 1
+    rw [(stateGrading S n).map_zero']
     change (0 : ℝ) + |1| = 1
     norm_num
-  simp only [oneHighVariationWeight, hu, Finset.prod_singleton,
-    Finset.sum_singleton, Finset.erase_singleton, Finset.prod_empty, hunit, mul_one]
-  rw [pairGrading_apply]
-  change (1 + (stateGrading S high x + |q|)) + 1 = _
+  have hfin {E : Type*} [AddCommGroup E] [Module ℝ E]
+      (p : ℕ → Seminorm ℝ E) (z v : E) :
+      oneHighVariationWeight p base high z (fun _ : Fin 1 => v) =
+        (1 + p high z) * p base v + p high v := by
+    simp only [oneHighVariationWeight, hu, Finset.prod_singleton,
+      Finset.sum_singleton, Finset.erase_singleton, Finset.prod_empty, mul_one]
+  have he := hfin (pairGrading (stateGrading S) realGrading)
+    (x, q) ((0 : AnnularState S), (1 : ℝ))
+  apply he.trans
+  have hpair : pairGrading (stateGrading S) realGrading high (x, q) =
+      stateGrading S high x + |q| := rfl
+  rw [hunit base, hunit high, mul_one, hpair]
   ring
 
 /-- The two-dimensional chain rule is normalized before any physical
@@ -62,7 +72,7 @@ theorem hasDerivAt_composed_velocity_coprod
     (hY : HasDerivAt Y y q) :
     HasDerivAt (fun t : ℝ => F t (Y t)) (a + b * y) q := by
   have hd := hF.comp_hasDerivAt q ((hasDerivAt_id q).prodMk hY)
-  simpa only [Function.comp_def, ContinuousLinearMap.coprod_apply,
+  simpa only [Function.comp_def, id_eq, ContinuousLinearMap.coprod_apply,
     ContinuousLinearMap.toSpanSingleton_apply, smul_eq_mul, one_mul, mul_comm y b] using hd
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -124,9 +134,10 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
           (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) =
         2 + stateGrading S loss (x - C.referenceState) + |q| := by
     change oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-      base (0 + loss) (x - C.referenceState, q - 0)
+      base loss (x - C.referenceState, q - 0)
         (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) = _
-    rw [oneHighVariationWeight_externalParameter, zero_add, sub_zero]
+    simpa only [sub_zero] using
+      oneHighVariationWeight_externalParameter S base loss (x - C.referenceState) q
   calc
     _ = |J.D 1 (x, q) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))| :=
       congrArg abs hd

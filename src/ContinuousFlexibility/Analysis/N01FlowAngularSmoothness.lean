@@ -40,7 +40,7 @@ theorem N01Properties.characteristicAngularDerivative_angularRegular
       p ∈ annularOpen D :=
     ⟨⟨(hcontrol.1 m).1.trans_le hp.1, hp.2.trans_lt (hcontrol.1 m).2.2⟩, mem_univ _⟩
   have hAθ : ∀ p ∈ Icc (C.left m) (C.right m) ×ˢ (univ : Set ℝ),
-      ContDiffAt ℝ ∞ (angularPartial (characteristicDrift D S C z)) p := by
+      ContDiffAt ℝ ∞ (angularPartial (stateCharacteristicDrift D S C z)) p := by
     intro p hp
     have hA := (N01Properties.characteristic_factors_contDiffAt hN01 hS hT hz hsector
       (hcore (p := p) hp.1)).1
@@ -60,7 +60,7 @@ theorem N01Properties.characteristicAngularDerivative_angularRegular
       characteristicRadialRoot D S C z (projIcc (C.left m) (C.right m) hab r)) :=
     hk.comp_continuous hρ (fun r => (projIcc (C.left m) (C.right m) hab r).property)
   have hAr := Analysis.angularRegular_closedStripExtend_of_contDiffAt hab
-    (angularPartial (characteristicDrift D S C z)) hAθ n
+    (angularPartial (stateCharacteristicDrift D S C z)) hAθ n
   have hBr := Analysis.angularRegular_closedStripExtend_of_contDiffAt hab
     (angularPartial (characteristicAngularFactor D S C z)) hBθ n
   have hkr := Analysis.angularRegular_time n _ hke

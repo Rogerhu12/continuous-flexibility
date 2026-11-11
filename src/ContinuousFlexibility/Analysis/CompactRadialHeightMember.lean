@@ -65,8 +65,12 @@ theorem weightedPhysicalJet_isCylinderTest_of_compactRadialSupport
     change T.M (T.radius (x + 0)) ^ c *
         mixedDerivative a b (materialPullback T γ f) (x + 0, θ + Real.pi) =
       T.M (T.radius x) ^ c * mixedDerivative a b (materialPullback T γ f) (x, θ)
-    rw [add_zero, mixedDerivative_angular_periodic
-      (materialPullback_angular_periodic hperiod) a b x θ]
+    rw [add_zero]
+    have hh : mixedDerivative a b (materialPullback T γ f) (x, θ + Real.pi) =
+        mixedDerivative a b (materialPullback T γ f) (x, θ) :=
+      mixedDerivative_angular_periodic
+        (materialPullback_angular_periodic (T := T) (γ := γ) hperiod) a b x θ
+    exact congrArg (fun v : ℝ => T.M (T.radius x) ^ c * v) hh
   · intro p hp
     simp only [weightedPhysicalJet,
       mixedDerivative_zero_of_radial_support hF hzero a b p hp, mul_zero]
@@ -123,9 +127,9 @@ theorem materialCutoff_annularSmooth_member
   apply heightMember_of_compactRadialSupport hT
     ((hχ.comp_contDiffOn hρ).mul hf₀)
   · intro r θ
-    simp only [materialCutoffHeight, he₀ r θ]
+    simp only [materialCutoffHeight, Function.comp_def, he₀ r θ]
   · intro p
-    simpa only [materialCutoffHeight, Prod.fst_add, add_zero] using
+    simpa only [materialCutoffHeight, Function.comp_def, Prod.fst_add, add_zero] using
       congrArg (fun t => χ (T.rho p.1) * t) (hp₀ p)
   · intro p hp
     simp only [materialCutoffHeight, hz₀ p hp, mul_zero]

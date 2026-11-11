@@ -129,7 +129,7 @@ theorem returnCorrectionCoefficientError_at_actual
       using hlocal
   · have heq := returnCorrectedCoefficients_eq_original_at_of_inactive D S C χ z p hex
     simp only [returnCorrectionCoefficientError, dif_neg hex, LinearMap.zero_apply,
-      heq.1, heq.2, sub_self]
+      heq.1, heq.2, sub_self, Prod.mk_zero_zero]
 
 /-- The actual scalar differential error. The global source decoder
 requires zero outside the open annulus, so that extension is explicit. -/

@@ -21,7 +21,7 @@ open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
 
-def characteristicDrift (D : ReferenceData) (S : PhysicalSpacesData)
+def stateCharacteristicDrift (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : AnnularState S × ℝ) (p : PolarPoint) : ℝ :=
   (originalCoefficients D S C z).b p / (originalCoefficients D S C z).a p
 
@@ -36,7 +36,7 @@ def characteristicRadialRoot (D : ReferenceData) (S : PhysicalSpacesData)
 
 def characteristicAngularDerivative (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : AnnularState S × ℝ) (p : PolarPoint) : ℝ :=
-  angularPartial (characteristicDrift D S C z) p - characteristicRadialRoot D S C z p.1 *
+  angularPartial (stateCharacteristicDrift D S C z) p - characteristicRadialRoot D S C z p.1 *
     angularPartial (characteristicAngularFactor D S C z) p
 
 section ActualRegularity
@@ -52,7 +52,7 @@ include hN01 hS hT hz hsector
 
 theorem N01Properties.characteristic_factors_contDiffAt
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
-    ContDiffAt ℝ ∞ (characteristicDrift D S C z) p ∧
+    ContDiffAt ℝ ∞ (stateCharacteristicDrift D S C z) p ∧
     ContDiffAt ℝ ∞ (characteristicAngularFactor D S C z) p := by
   obtain ⟨ha, hD, _, hA, hB, hDreg⟩ :=
     N01Properties.characteristic_coefficient_regular hN01 hS hT hz hsector hp
@@ -71,7 +71,7 @@ theorem N01Properties.characteristicRadialRoot_continuousAt
 theorem N01Properties.minusCharacteristicSpeed_eq_separated
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     minusCharacteristicSpeed (originalCoefficients D S C z) p =
-      characteristicDrift D S C z p - characteristicRadialRoot D S C z p.1 *
+      stateCharacteristicDrift D S C z p - characteristicRadialRoot D S C z p.1 *
         characteristicAngularFactor D S C z p := by
   have hw := contDiff_stateProfile_of_n01 hS hT hN01 z.1
   obtain ⟨_, hgeom⟩ := hN01.1.1
