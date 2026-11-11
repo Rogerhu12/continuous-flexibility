@@ -17,7 +17,24 @@ open Set MeasureTheory
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ENNReal
 
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
+
+/-- Perform the square-root calculation on real numbers, before the
+norm and seminorm arguments are specialized to the actual volume model. -/
+private theorem source_norm_bound_of_sq
+    {N K p q : ℝ} (hN : 0 ≤ N) (hK : 0 ≤ K) (hp : 0 ≤ p)
+    (hpq : p ≤ q) (hbound : N ^ 2 ≤ K * p ^ 2) :
+    N ≤ (Real.sqrt K + 1) * q := by
+  have hq : 0 ≤ q := hp.trans hpq
+  have hn : N ≤ Real.sqrt K * q := by
+    apply (sq_le_sq₀ hN (mul_nonneg (Real.sqrt_nonneg K) hq)).mp
+    calc
+      N ^ 2 ≤ K * p ^ 2 := hbound
+      _ ≤ K * q ^ 2 :=
+        mul_le_mul_of_nonneg_left (pow_le_pow_left₀ hp hpq 2) hK
+      _ = (Real.sqrt K * q) ^ 2 := by rw [mul_pow, Real.sq_sqrt hK]
+  exact hn.trans (mul_le_mul_of_nonneg_right
+    (le_add_of_nonneg_right zero_le_one) hq)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {K : CanonicalData S} {V : VolumeModelData S K}
@@ -41,10 +58,12 @@ theorem n07b_sourceLift_uniform_bound_of_primitive_growth
     n07b_exists_uniform_sourceCoefficient_M_bound_of_primitive hD hT hK hε hgeom
   let K₀ : ℝ := A * n07bSourcePathConstant b
   have hK₀ : 0 ≤ K₀ := mul_nonneg hA (n07bSourcePathConstant_nonneg b)
-  have hC₀ : 0 < Real.sqrt K₀ + 1 := by linarith [Real.sqrt_nonneg K₀]
+  have hC₀ : 0 < Real.sqrt K₀ + 1 :=
+    add_pos_of_nonneg_of_pos (Real.sqrt_nonneg K₀) zero_lt_one
   refine ⟨base', ε', Real.sqrt K₀ + 1, hb, hε', hεle, hsmall, hC₀, ?_⟩
   intro z hz hs f
-  have hzold := n06_stateNeighborhood_mono (C := C) hb hεle hz
+  have hzold : z ∈ stateNeighborhood S C base ε :=
+    n06_stateNeighborhood_mono (C := C) hb hεle hz
   obtain ⟨F, hF, hforget⟩ := n07b_exists_sourceLift_of_M_bound
     hD hT hS hV hK hzold hs f b hA (hcoeff z hz hs)
   have hsource : physicalNorm T (3 / 4 : ℝ) (b + 1)
@@ -52,19 +71,10 @@ theorem n07b_sourceLift_uniform_bound_of_primitive_growth
     change physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val) ≤
       (S.height (3 / 4 : ℝ)).grading (b + 1) f.val
     exact physicalNorm_decode_le_grading (hS.1 (3 / 4 : ℝ)) f.val (b + 1)
-  have hp : 0 ≤ S.sourceGrading (b + 1) f := apply_nonneg _ _
-  have hn : ‖F‖ ≤ Real.sqrt K₀ * S.sourceGrading (b + 1) f := by
-    apply (sq_le_sq₀ (norm_nonneg _) (mul_nonneg (Real.sqrt_nonneg _) hp)).mp
-    calc
-      ‖F‖ ^ 2 ≤ A * n07bSourcePathConstant b *
-          physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val) ^ 2 := hF
-      _ ≤ K₀ * (S.sourceGrading (b + 1) f) ^ 2 :=
-        mul_le_mul_of_nonneg_left
-          (pow_le_pow_left₀ (Real.sqrt_nonneg _) hsource 2) hK₀
-      _ = (Real.sqrt K₀ * S.sourceGrading (b + 1) f) ^ 2 := by
-        rw [mul_pow, Real.sq_sqrt hK₀]
-  refine ⟨F, hn.trans ?_, hforget⟩
-  exact mul_le_mul_of_nonneg_right (by linarith : Real.sqrt K₀ ≤ Real.sqrt K₀ + 1) hp
+  refine ⟨F, ?_, hforget⟩
+  exact source_norm_bound_of_sq
+    (p := physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val))
+    (norm_nonneg F) hK₀ (Real.sqrt_nonneg _) hsource hF
 
 /-- A common `E0` growth exponent on the four genuine primitive jet fields
 is sufficient; the material data turn it into the needed subpower bound. -/

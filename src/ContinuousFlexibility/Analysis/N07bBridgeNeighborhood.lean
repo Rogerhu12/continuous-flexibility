@@ -69,12 +69,15 @@ theorem n07b_exists_scalarBanachBridge_on_smaller
     obtain ⟨F, _, hF⟩ := hsource (C.referenceState, 0)
       (n07b_reference_mem_stateNeighborhood S C bs hεs) hsref f
     exact ⟨F, hF⟩
-  refine ⟨base', ε', hbase', hε', hε'le, b + 1, by omega, Cs, hCs, ?_⟩
+  refine ⟨base', ε', hbase', hε', hε'le, b + 1, Nat.le_succ b, Cs, hCs, ?_⟩
   intro z hz hs f
   obtain ⟨F, hFnorm, hF⟩ := hsource z (hUs hz) hs f
   refine ⟨F, ?_, hF, ?_⟩
   · have hQ : 1 ≤ 1 + stateGrading S (b + 1) (z.1 - C.referenceState) + |z.2| := by
-      linarith [apply_nonneg (stateGrading S (b + 1)) (z.1 - C.referenceState), abs_nonneg z.2]
+      calc
+        (1 : ℝ) ≤ 1 + stateGrading S (b + 1) (z.1 - C.referenceState) :=
+          le_add_of_nonneg_right (apply_nonneg _ _)
+        _ ≤ _ := le_add_of_nonneg_right (abs_nonneg z.2)
     have hCsQ : Cs ≤ Cs *
         (1 + stateGrading S (b + 1) (z.1 - C.referenceState) + |z.2|) := by
       simpa only [mul_one] using mul_le_mul_of_nonneg_left hQ hCs.le
@@ -82,7 +85,7 @@ theorem n07b_exists_scalarBanachBridge_on_smaller
   · apply n07b_scalarInverse_banach_identification hD hT hS hborder hK h05 h06 hG
       hgeom href hsref hreferenceSource (hU hz) hs hAr ?_ f F hF
     intro m x hx j i
-    have h := hcoeff z (hUr hz) hs m x hx j.val (by omega) i
+    have h := hcoeff z (hUr hz) hs m x hx j.val (Nat.le_of_lt_succ j.isLt) i
     simpa only [n07bReferenceBulkCoefficient, n07b_canonicalPrimitiveDirection_one,
       n07b_canonicalPrimitiveDirection_two] using h
 

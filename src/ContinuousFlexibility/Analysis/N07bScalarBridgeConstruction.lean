@@ -29,6 +29,108 @@ set_option backward.isDefEq.respectTransparency true
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {V : VolumeModelData S K} {b base : ℕ} {ε : ℝ}
+
+/-- Assemble the actual reference source while the transported remainder
+and its physical height are independent of the scalar inverse and graph. -/
+private theorem n07b_referenceSourceLift_of_remainder
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) (hborder : RadialTrueBorder D)
+    (hK : N04PartA D S C K base ε) (hV : IsVolumeModel T S K V)
+    (href : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hsref : stateSector S C.referenceState)
+    {z : AnnularState S × ℝ}
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    {u R : PolarPoint → ℝ} (hu : HeightMember D T (3 / 4 : ℝ) u)
+    (hR : ContDiff ℝ 2 R) (hRp : Function.Periodic R (0, Real.pi))
+    (hRe : ∀ r θ, R (r, -θ) = R (r, θ))
+    (hpiece : ∀ m, EqOn
+      (canonicalSource S K (C.referenceState, 0) m
+        (fun p : PolarPoint => radialPDE D.w (fun r θ => R (r, θ)) p.1 p.2))
+      (n07bReferencePieceCanonicalSource D C K z m u) (canonicalOpen S K m))
+    (hclosed : ∀ m p, p ∈ canonicalClosed S K m →
+      ContDiffAt ℝ ∞ (n07bReferencePieceCanonicalSource D C K z m u) p)
+    (hsource : ∀ f : S.Source, ∃ F : V.level (3 / 4 : ℝ) 0 b,
+      ∀ m, (V.forget (3 / 4 : ℝ) 0 b F m : PolarPoint → ℝ)
+        =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m
+          ((S.height (3 / 4 : ℝ)).decode f.val))
+    {A : ℝ} (hA : 0 ≤ A)
+    (hcoeff : ∀ m x, x ∈ physicalPieceOpen S K z m →
+      ∀ j : Fin (b + 1), ∀ i : n07bReferenceBulkIndex j.val,
+        (n07bSourceNormalizer T K z m (3 / 4 : ℝ) x *
+          n07bReferenceBulkCoefficient D T C K z m (3 / 4 : ℝ) j.val i x) ^ 2 ≤
+            A * T.M x.1 ^ 2)
+    (a μ : ℝ) :
+    ∃ Fref : V.level (3 / 4 : ℝ) 0 b,
+      ∀ m, (V.forget (3 / 4 : ℝ) 0 b Fref m : PolarPoint → ℝ)
+        =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m
+          (n07bReferenceForcing D μ (fun p : PolarPoint => R p + a * S.chiLeft p.1)) := by
+  let g : ℕ → PolarPoint → ℝ := fun m => canonicalSource S K (C.referenceState, 0) m
+    (fun p : PolarPoint => radialPDE D.w (fun r θ => R (r, θ)) p.1 p.2)
+  have hPp := n07b_radialPDE_periodic D.w hRp
+  have hPe := n07b_radialPDE_even D.w hRe
+  obtain ⟨Fbulk, hFbulk, _⟩ := n07b_exists_referenceBulkLift hK href hsref hz hs
+    hD hT hV (3 / 4 : ℝ) hu b g hpiece hclosed
+    (fun m _ hr => n07b_canonicalSource_periodic hK href hsref _ hPp m hr)
+    (fun m => n07b_canonicalSource_reflection_ae hK href hsref _ hPe hPp m) hA hcoeff
+  exact n07b_exists_referenceSource_of_bulk
+    hD hT hS hborder hsource hR a μ Fbulk hFbulk
+
+/-- The reference relation is constructed using independent physical data
+and numerical weights. No scalar inverse or Banach graph is unfolded in
+the height encoding, transport or source construction. -/
+private theorem n07b_exists_referenceRelation_of_height
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) (hborder : RadialTrueBorder D)
+    (hK : N04PartA D S C K base ε) (hV : IsVolumeModel T S K V)
+    (hgeom : CanonicalPrimitiveGeometry D T S C L K base ε)
+    (href : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hsref : stateSector S C.referenceState)
+    {z : AnnularState S × ℝ}
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    {u : PolarPoint → ℝ} (hu : HeightMember D T (3 / 4 : ℝ) u)
+    {γ : ℝ} (hγ : 0 < γ) (hγβ : γ < (3 / 4 : ℝ))
+    (loss : ℝ) (hloss : 0 ≤ loss) (a μ M₀ M₁ : ℝ)
+    (hrow : referenceRow D (fun p : PolarPoint => u p + a * S.chiLeft p.1) = 0)
+    (hsource : ∀ f : S.Source, ∃ F : V.level (3 / 4 : ℝ) 0 b,
+      ∀ m, (V.forget (3 / 4 : ℝ) 0 b F m : PolarPoint → ℝ)
+        =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m
+          ((S.height (3 / 4 : ℝ)).decode f.val))
+    {A : ℝ} (hA : 0 ≤ A)
+    (hcoeff : ∀ m x, x ∈ physicalPieceOpen S K z m →
+      ∀ j : Fin (b + 1), ∀ i : n07bReferenceBulkIndex j.val,
+        (n07bSourceNormalizer T K z m (3 / 4 : ℝ) x *
+          n07bReferenceBulkCoefficient D T C K z m (3 / 4 : ℝ) j.val i x) ^ 2 ≤
+            A * T.M x.1 ^ 2) :
+    ∃ U₀ : CanonicalL2Sequence S K, ∃ Fref : V.level (3 / 4 : ℝ) 0 b,
+      (∀ m, (U₀ m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
+        canonicalHeight S K z m u) ∧
+      ReferenceCanonicalRelation D T S C K V γ M₀ M₁ loss (U₀, (a, μ, 0))
+        (V.forget (3 / 4 : ℝ) 0 b Fref) := by
+  obtain ⟨U₀, hUvolume, hUheight⟩ :=
+    n07b_exists_canonicalHeightSequence_of_primitive_geometry hD hT hV hK hz hs
+      hgeom loss hloss hu
+  obtain ⟨τ, q, R, η, _, hηeq, hR, _, hRp, hRe, _, _, _,
+    hheight, hpiece, hclosed, hgraph⟩ :=
+    n07b_exists_referenceTransport_of_primitive_geometry hD hT hborder hS.2.2.1
+      hK href hsref hgeom hz hs hu hγ hγβ a μ M₀ M₁ hrow
+  obtain ⟨Fref, hFref⟩ := n07b_referenceSourceLift_of_remainder
+    hD hT hS hborder hK hV href hsref hz hs hu hR hRp hRe
+    hpiece hclosed hsource hA hcoeff a μ
+  have hFrefη : ∀ m, (V.forget (3 / 4 : ℝ) 0 b Fref m : PolarPoint → ℝ)
+      =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m
+        (n07bReferenceForcing D μ η) := by
+    simpa only [hηeq] using hFref
+  refine ⟨U₀, Fref, hUheight, hUvolume, η, n07bReferenceForcing D μ η,
+    ⟨?_, hFrefη⟩, ?_⟩
+  · intro m
+    have hmem : ∀ᵐ p ∂canonicalMeasure S K m,
+        p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi :=
+      ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)
+    filter_upwards [hUheight m, hmem] with p hp hpmem
+    exact hp.trans (hheight m ⟨hpmem.1, mem_univ _⟩).symm
+  · simpa only [zero_mul, sub_zero] using hgraph
+
+variable
   {B : CanonicalDomainData S K V b} {P : RelativeInverseData S K V b B}
   {G : ScalarInverseData S}
 
@@ -72,48 +174,18 @@ theorem n07b_scalarInverse_banach_identification
   let μ : ℝ := (G.G z f).2
   have hu : HeightMember D T (3 / 4 : ℝ) u :=
     (hS.1 (3 / 4 : ℝ)).2.2.2.1 (G.G z f).1.1
-  have hV : IsVolumeModel T S K V := h05.2.1
   have hprofile : RadialProfileGeometry D := hD.choose_spec.1
-  obtain ⟨U₀, hUvolume, hUheight⟩ :=
-    n07b_exists_canonicalHeightSequence_of_primitive_geometry hD hT hV hK hz hs
-      hgeom B.lossMaterial h05.2.2.2.2.1 hu
-  let U : CanonicalUnknown S K := (U₀, (a, μ, 0))
   have hrow : referenceRow D (fun p => u p + a * S.chiLeft p.1) = 0 :=
     (hG.1 z hz hs f).1
-  obtain ⟨τ, q, R, η, _, hηeq, hR, _, hRp, hRe, _, _, hRpiece,
-    hheight, hpiece, hclosed, hgraph⟩ :=
-    n07b_exists_referenceTransport_of_primitive_geometry hD hT hborder hS.2.2.1
-      hK href hsref hgeom hz hs hu h05.2.2.1 h05.2.2.2.1
-      a μ B.sourceMaterial B.outputMaterial hrow
-  let g : ℕ → PolarPoint → ℝ := fun m => canonicalSource S K (C.referenceState, 0) m
-    (fun p => radialPDE D.w (fun r θ => R (r, θ)) p.1 p.2)
-  have hPp := n07b_radialPDE_periodic D.w hRp
-  have hPe := n07b_radialPDE_even D.w hRe
-  obtain ⟨Fbulk, hFbulk, _⟩ := n07b_exists_referenceBulkLift hK href hsref hz hs
-    hD hT hV (3 / 4 : ℝ) hu b g hpiece hclosed
-    (fun m _ hr => n07b_canonicalSource_periodic hK href hsref _ hPp m hr)
-    (fun m => n07b_canonicalSource_reflection_ae hK href hsref _ hPe hPp m) hA hcoeff
-  obtain ⟨Fref, hFref⟩ := n07b_exists_referenceSource_of_bulk
-    hD hT hS hborder hsource hR a μ Fbulk hFbulk
-  have hFrefη : ∀ m, (V.forget (3 / 4 : ℝ) 0 b Fref m : PolarPoint → ℝ)
-      =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m
-        (n07bReferenceForcing D μ η) := by
-    simpa only [hηeq] using hFref
-  have hreference : ReferenceCanonicalRelation D T S C K V B.weakExponent
-      B.sourceMaterial B.outputMaterial B.lossMaterial U
-        (V.forget (3 / 4 : ℝ) 0 b Fref) := by
-    refine ⟨hUvolume, η, n07bReferenceForcing D μ η, ⟨?_, hFrefη⟩, ?_⟩
-    · intro m
-      have hmem : ∀ᵐ p ∂canonicalMeasure S K m,
-          p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi :=
-        ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)
-      filter_upwards [hUheight m, hmem] with p hp hpmem
-      exact hp.trans (hheight m ⟨hpmem.1, mem_univ _⟩).symm
-    · simpa only [U, zero_mul, sub_zero] using hgraph
+  obtain ⟨U₀, Fref, hUheight, hreference⟩ :=
+    n07b_exists_referenceRelation_of_height hD hT hS hborder hK h05.2.1 hgeom
+      href hsref hz hs hu h05.2.2.1 h05.2.2.2.1 B.lossMaterial h05.2.2.2.2.1
+      a μ B.sourceMaterial B.outputMaterial hrow hsource hA hcoeff
+  let U : CanonicalUnknown S K := (U₀, (a, μ, 0))
   have hrem : (fun p => heightPairField S (G.G z f).1 p - a * S.chiLeft p.1) = u := by
     funext p
     change u p + a * S.chiLeft p.1 - a * S.chiLeft p.1 = u p
-    ring
+    exact add_sub_cancel_right (u p) (a * S.chiLeft p.1)
   have hrep : HasCanonicalRepresentation D S C K z U
       (V.forget (3 / 4 : ℝ) 0 b F)
       (heightPairField S (G.G z f).1) ((S.height (3 / 4 : ℝ)).decode f.val) := by
