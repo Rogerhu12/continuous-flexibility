@@ -35,6 +35,7 @@ theorem fourier_two_pi_neg_apply (n : ℤ) (θ : ℝ) :
   ring
 
 /-- Vanishing real moments give the corresponding actual complex Fourier coefficient. -/
+set_option backward.isDefEq.respectTransparency false in
 theorem angular_fourierCoeffOn_eq_zero_of_moments {f : ℝ → ℝ}
     (hf : MemLp f 2 (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))))
     (n : ℤ)
@@ -87,6 +88,9 @@ theorem angular_fourierCoeffOn_eq_zero_of_moments {f : ℝ → ℝ}
         simp
   rw [fourierCoeffOn_eq_integral]
   simp only [sub_zero, smul_eq_mul]
+  change (1 / (2 * Real.pi) : ℝ) •
+    (∫ θ in (0 : ℝ)..2 * Real.pi,
+      @fourier (2 * Real.pi) (-n) (θ : AddCircle (2 * Real.pi)) * (f θ : ℂ)) = 0
   rw [hint]
   simp
 
@@ -131,7 +135,9 @@ theorem even_periodic_ae_eq_zero_of_cosine_coefficients {f : ℝ → ℝ}
       (integral_mul_cos_int_eq_zero_of_even_coefficients hperiodic hmean hcoeff n)
       (integral_mul_sin_int_eq_zero_of_even_periodic heven hperiodic n)
   filter_upwards [hz] with θ hθ
-  exact_mod_cast hθ
+  change (f θ : ℂ) = 0 at hθ
+  change f θ = 0
+  exact Complex.ofReal_eq_zero.mp hθ
 
 end
 

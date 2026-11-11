@@ -37,7 +37,11 @@ theorem r11b_angularCoefficient_div_memLp_radialHilbert {D : ReferenceData}
       2 (volume.restrict (radialCore D)) := by
     simpa only [mul_assoc, r11b_angularAverage_const_mul] using hcoeff
   have hquot := r11b_memLp_div_radialDensity_of_inverse_sqrt hgeom hweighted
-  simpa only [neg_div, Pi.neg_apply] using hquot.neg
+  apply MemLp.ae_eq _ hquot.neg
+  exact Filter.Eventually.of_forall fun r => by
+    change -(angularAverage (fun θ => f (r, θ) * e θ) / (12 * D.w r / r ^ 2)) =
+      -angularAverage (fun θ => f (r, θ) * e θ) / (12 * D.w r / r ^ 2)
+    rw [neg_div]
 
 theorem r11b_sourceCoefficient_memLp_radialHilbert {D : ReferenceData}
     (hD : IsAccumulatingProfile D) {γ M : ℝ} (hγ : 0 < γ)

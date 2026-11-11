@@ -44,7 +44,8 @@ theorem integral_flux_mul_deriv_eq_neg_Ioo {a b : ℝ} (hab : a < b)
     (hψs : tsupport ψ ⊆ Ioo a b) :
     (∫ x, F x * deriv ψ x) = -(∫ x, h x * ψ x) := by
   have hHcont := continuousOn_intervalLocalPrimitive hab hh hx₀
-  have hHloc := hHcont.locallyIntegrableOn measurableSet_Ioo
+  have hHloc : LocallyIntegrableOn (intervalLocalPrimitive h x₀) (Ioo a b) volume :=
+    hHcont.locallyIntegrableOn (μ := volume) measurableSet_Ioo
   have hψd : Continuous (deriv ψ) := hψ.continuous_deriv le_rfl
   have hψds : tsupport (deriv ψ) ⊆ Ioo a b := tsupport_deriv_subset.trans hψs
   have hHi : Integrable (fun x => intervalLocalPrimitive h x₀ x * deriv ψ x) :=
@@ -113,7 +114,12 @@ theorem interval_cutoff_energy_identity {a b : ℝ} (hab : a < b)
         (hu.differentiableOn (by simp) x hx).differentiableAt
           (isOpen_Ioo.mem_nhds hx)
       have hr := (((hχ.differentiable (by simp) x).hasDerivAt).pow 2).mul hux.hasDerivAt
-      simpa only [ψ, Nat.cast_ofNat, Nat.reduceSub, pow_one] using hr.deriv
+      have heq : ψ = χ ^ 2 * u := by
+        funext y
+        change χ y ^ 2 * u y = χ y ^ 2 * u y
+        rfl
+      rw [heq]
+      simpa only [Nat.cast_ofNat, Nat.reduceSub, pow_one] using hr.deriv
     · have hdx : deriv ψ x = 0 :=
         deriv_of_notMem_tsupport (fun hh' => hx (hψs hh'))
       have hχx : χ x = 0 :=
