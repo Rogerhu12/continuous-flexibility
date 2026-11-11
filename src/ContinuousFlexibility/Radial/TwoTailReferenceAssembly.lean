@@ -52,7 +52,7 @@ private theorem scalar_bounds_of_sum_le {F c M : ℝ}
 
 /-- Construct the complete accumulating reference with the prescribed
 new profile, field and independently rescaled endpoints. -/
-theorem exists_accumulating_reference_of_two_tail_surgery
+theorem exists_accumulating_reference_of_two_tail_surgery_with_cells
     {D : ReferenceData} {W Phi : ℝ → ℝ} {A B HL HR c d : ℝ}
     (hD : IsAccumulatingProfile D)
     (hA : 0 < A) (hAB : A ≤ B) (hHL : 0 < HL) (hHR : 0 < HR)
@@ -63,7 +63,11 @@ theorem exists_accumulating_reference_of_two_tail_surgery
     (hright : ∀ r ∈ Ioo d D.b, W (B * r) = HR * B * D.w r) :
     ∃ E : ReferenceData,
       E.a = A * D.a ∧ E.b = B * D.b ∧ E.w = W ∧ E.phi = Phi ∧
-      IsAccumulatingProfile E := by
+      IsAccumulatingProfile E ∧
+      ∃ e : ℝ ≃o ℝ, E.cells = (fun m => e ⁻¹' D.cells m) ∧
+        E.cellIndex = (fun m => max (D.cellIndex m) 1) ∧
+        (∀ r, r ≤ c → e.symm r = A * r) ∧
+        (∀ r, d ≤ r → e.symm r = B * r) := by
   rcases hD with ⟨C, hDb⟩
   have hc : 0 < c := hDb.1.1.trans hac
   have hB : 0 < B := hA.trans_le hAB
@@ -77,7 +81,7 @@ theorem exists_accumulating_reference_of_two_tail_surgery
   have hEb : E.b = B * D.b := hb
   have hNew : RadialProfileGeometry E := by
     simpa only [RadialProfileGeometry, EndpointFlat, radialCore, E,
-      replaceReferenceProfile, coordinateReference, D₁, positiveIndexReference, ha, hb] using hGeo
+      replaceReferenceProfile, coordinateReference, D₁, positiveIndexReference, floorReferenceIndex, ha, hb] using hGeo
   let K : Set ℝ := Icc (A * c) (B * d)
   have hK : IsCompact K := isCompact_Icc
   have hKcore : K ⊆ radialCore (coordinateReference D₁ e) := by
@@ -123,7 +127,25 @@ theorem exists_accumulating_reference_of_two_tail_surgery
       (isAccumulatingProfile_positiveIndexReference ⟨C, hDb⟩)
       (positiveIndexReference_index_pos D) he hL hforward hbackward
       hNew hK hKcore hM hTail
-  exact ⟨E, hEa, hEb, rfl, rfl, hAccum⟩
+  exact ⟨E, hEa, hEb, rfl, rfl, hAccum, e, rfl, rfl, heLeft, heRight⟩
+
+/-- The original surgery API follows by forgetting the retained coordinate. -/
+theorem exists_accumulating_reference_of_two_tail_surgery
+    {D : ReferenceData} {W Phi : ℝ → ℝ} {A B HL HR c d : ℝ}
+    (hD : IsAccumulatingProfile D)
+    (hA : 0 < A) (hAB : A ≤ B) (hHL : 0 < HL) (hHR : 0 < HR)
+    (hac : D.a < c) (hcd : c < d) (hdb : d < D.b)
+    (hGeo : RadialProfileGeometry
+      { D with a := A * D.a, b := B * D.b, w := W, phi := Phi })
+    (hleft : ∀ r ∈ Ioo D.a c, W (A * r) = HL * A * D.w r)
+    (hright : ∀ r ∈ Ioo d D.b, W (B * r) = HR * B * D.w r) :
+    ∃ E : ReferenceData,
+      E.a = A * D.a ∧ E.b = B * D.b ∧ E.w = W ∧ E.phi = Phi ∧
+      IsAccumulatingProfile E := by
+  obtain ⟨E, ha, hb, hw, hPhi, hE, _⟩ :=
+    exists_accumulating_reference_of_two_tail_surgery_with_cells hD hA hAB hHL hHR
+      hac hcd hdb hGeo hleft hright
+  exact ⟨E, ha, hb, hw, hPhi, hE⟩
 
 /-- Open tail equality is enough for the full closed negative component:
 its endpoints are interior points of the tail on which the identity

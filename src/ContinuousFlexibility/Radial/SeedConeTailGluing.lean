@@ -107,6 +107,14 @@ theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} 
     outward_zero := ?_
     tail_eq := ?_
     positive := ?_
+    inward_increasing := by
+      intro r hr hinner
+      have hi : if right then r ≤ c else c ≤ r := by
+        cases right with
+        | false => exact hc.2.le.trans hinner
+        | true => exact hinner.trans hc.1.le
+      rw [(hWi r hi).deriv_eq]
+      exact E.radialProfile_deriv_pos hr
     simple_critical := ?_
     homogeneous := ?_
     cut := cut

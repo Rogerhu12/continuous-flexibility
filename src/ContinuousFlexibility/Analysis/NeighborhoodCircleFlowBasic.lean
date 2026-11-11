@@ -26,11 +26,14 @@ def continuousAngleSpeedSecant (dG : PolarPoint → ℝ) (p : ℝ × (ℝ × ℝ
 
 theorem continuous_continuousAngleSpeedSecant {dG : PolarPoint → ℝ}
     (hdG : Continuous dG) : Continuous (continuousAngleSpeedSecant dG) := by
-  apply continuous_parametric_intervalIntegral
-  exact hdG.comp
-    (continuous_fst.fst.prodMk
-      (((continuous_fst.snd.snd.sub continuous_fst.snd.fst).mul continuous_snd).add
-        continuous_fst.snd.fst))
+  have hc : Continuous (fun q : (ℝ × (ℝ × ℝ)) × ℝ =>
+      dG (q.1.1, (q.1.2.2 - q.1.2.1) * q.2 + q.1.2.1)) :=
+    hdG.comp
+      (continuous_fst.fst.prodMk
+        (((continuous_fst.snd.snd.sub continuous_fst.snd.fst).mul continuous_snd).add
+          continuous_fst.snd.fst))
+  simpa only [continuousAngleSpeedSecant] using
+    (continuous_parametric_intervalIntegral hc (0 : ℝ) 1)
 
 theorem continuousAngleSpeedSecant_diagonal (dG : PolarPoint → ℝ) (t x : ℝ) :
     continuousAngleSpeedSecant dG (t, (x, x)) = dG (t, x) := by
@@ -126,9 +129,9 @@ theorem exists_continuousAngleFlow {G dG : PolarPoint → ℝ} {a b P : ℝ}
     (continuousAngleSpeed_derivative_periodic hderiv hperiod) a b
   have hex (θ : ℝ) : ∃ u : ℝ → ℝ, u a = θ ∧
       ∀ t ∈ Icc a b, HasDerivWithinAt u (G (t, u t)) (Icc a b) t := by
-    let L : ℝ≥0 := ⟨M, hM⟩
-    let K' : ℝ≥0 := ⟨K, hK⟩
-    let R : ℝ≥0 := ⟨M * (b - a), mul_nonneg hM (sub_nonneg.mpr hab)⟩
+    let L : NNReal := ⟨M, hM⟩
+    let K' : NNReal := ⟨K, hK⟩
+    let R : NNReal := ⟨M * (b - a), mul_nonneg hM (sub_nonneg.mpr hab)⟩
     have hpl : IsPicardLindelof (fun t x => G (t, x)) ⟨a, le_rfl, hab⟩ θ R 0 L K' := by
       refine ⟨?_, ?_, ?_, ?_⟩
       · intro t ht

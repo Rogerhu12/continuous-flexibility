@@ -31,27 +31,35 @@ theorem neighborhoodStateGrading_height_le (S : PhysicalSpacesData) (s : ℕ)
     (x : AnnularState S) :
     (S.height (3 / 4 : ℝ)).grading s x.1.1 ≤ stateGrading S s x ∧
       |x.1.2| ≤ stateGrading S s x := by
-  rw [neighborhoodStateGrading_apply]
-  have h₁ := apply_nonneg ((S.height (3 / 4 : ℝ)).grading s) x.1.1
-  have h₂ := norm_nonneg x.1.2
-  have h₃ := norm_nonneg x.2.1
-  have h₄ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1
-  have h₅ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.2
-  rw [← Real.norm_eq_abs]
-  constructor <;> linarith only [h₁, h₂, h₃, h₄, h₅]
+  have hrest : 0 ≤ ‖x.2.1‖ + ((S.circle (3 / 4 : ℝ)).grading s x.2.2.1 +
+      (S.circle (3 / 4 : ℝ)).grading s x.2.2.2) :=
+    add_nonneg (norm_nonneg x.2.1)
+      (add_nonneg (apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1)
+        (apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.2))
+  have hp : (S.height (3 / 4 : ℝ)).grading s x.1.1 + ‖x.1.2‖ ≤
+      stateGrading S s x :=
+    (le_add_of_nonneg_right hrest).trans_eq (neighborhoodStateGrading_apply S s x).symm
+  exact ⟨(le_add_of_nonneg_right (norm_nonneg x.1.2)).trans hp,
+    (Real.norm_eq_abs x.1.2).symm.trans_le
+      ((le_add_of_nonneg_left
+        (apply_nonneg ((S.height (3 / 4 : ℝ)).grading s) x.1.1)).trans hp)⟩
+
+private theorem neighborhood_seminorm_center_bound
+    {E : Type*} [AddCommGroup E] [Module ℝ E] (p : Seminorm ℝ E)
+    {x c : E} {ε : ℝ} (hε : ε ≤ 1) (hx : p (x - c) < ε) :
+    p x ≤ p c + 1 := by
+  calc
+    p x = p ((x - c) + c) := congrArg p (sub_add_cancel x c).symm
+    _ ≤ p (x - c) + p c := map_add_le_add p (x - c) c
+    _ ≤ ε + p c := add_le_add_right hx.le _
+    _ ≤ 1 + p c := add_le_add_right hε _
+    _ = p c + 1 := add_comm _ _
 
 theorem neighborhoodStateGrading_bound {C : NonlinearGeometryData S}
     {base : ℕ} {ε : ℝ} (hε : ε ≤ 1) {z : AnnularState S × ℝ}
     (hz : z ∈ stateNeighborhood S C base ε) :
-    stateGrading S base z.1 ≤ stateGrading S base C.referenceState + 1 := by
-  have hb : stateGrading S base (z.1 - C.referenceState) < ε := hz.1
-  calc
-    stateGrading S base z.1 =
-        stateGrading S base ((z.1 - C.referenceState) + C.referenceState) := by
-      rw [sub_add_cancel]
-    _ ≤ stateGrading S base (z.1 - C.referenceState) + stateGrading S base C.referenceState :=
-      map_add_le_add (stateGrading S base) (z.1 - C.referenceState) C.referenceState
-    _ ≤ stateGrading S base C.referenceState + 1 := by linarith only [hb, hε]
+    stateGrading S base z.1 ≤ stateGrading S base C.referenceState + 1 :=
+  neighborhood_seminorm_center_bound (stateGrading S base) hε hz.1
 
 /-- The scalar common-height decoder is exactly the nonlinear height pair. -/
 theorem neighborhood_stateU_contDiff
@@ -70,13 +78,22 @@ theorem stateU_low_jet_bounds
         |heightAngular (stateU S x) p| ≤ Ct * stateGrading S 4 x ∧
         |angularPartial (heightAngular (stateU S x)) p| ≤
           Ctt * stateGrading S 4 x * D.w p.1 := by
-  obtain ⟨Cr, hCr, hr⟩ := scalarHeight_radial_low_jet_bound
-    (D := D) (T := T) (S := S) hD hT hS
-  obtain ⟨Ct, hCt, ht⟩ := scalarHeight_angular_low_jet_bound
-    (D := D) (T := T) (S := S) hD hT hS
-  obtain ⟨Ctt, hCtt, htt⟩ := scalarHeight_angularSecond_low_jet_bound
-    (D := D) (T := T) (S := S) hD hT hS
-  obtain ⟨Cχ, hCχ, hχ⟩ := scalarCutoff_deriv_le_reference hD hS
+  have pr := scalarHeight_radial_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
+  have pt := scalarHeight_angular_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
+  have ptt := scalarHeight_angularSecond_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
+  have pχ := scalarCutoff_deriv_le_reference hD hS
+  let Cr : ℝ := pr.choose
+  let Ct : ℝ := pt.choose
+  let Ctt : ℝ := ptt.choose
+  let Cχ : ℝ := pχ.choose
+  have hCr : 0 ≤ Cr := pr.choose_spec.1
+  have hCt : 0 ≤ Ct := pt.choose_spec.1
+  have hCtt : 0 ≤ Ctt := ptt.choose_spec.1
+  have hCχ : 0 ≤ Cχ := pχ.choose_spec.1
+  have hr := pr.choose_spec.2
+  have ht := pt.choose_spec.2
+  have htt := ptt.choose_spec.2
+  have hχ := pχ.choose_spec.2
   refine ⟨Cr + Cχ, Ct, Ctt, add_nonneg hCr hCχ, hCt, hCtt, ?_⟩
   intro x p hp
   have hc := neighborhoodStateGrading_height_le S 4 x
