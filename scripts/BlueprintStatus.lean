@@ -49,6 +49,7 @@ run_cmd do
 #print axioms ContinuousFlexibility.Blueprint.R12
 #print axioms ContinuousFlexibility.Blueprint.R10b
 #print axioms ContinuousFlexibility.Blueprint.R11b
+#print axioms ContinuousFlexibility.Blueprint.N04a
 
 -- Tool-R10a-Outer: actual inverse, ordinary compact sources, and the refuted global bound.
 #print axioms ContinuousFlexibility.Radial.exists_uniform_morseOuterInverse_fixed_parameters
