@@ -89,6 +89,13 @@ private theorem n01c_ordinaryFlowAngular_common_selection
     bt et htowers bn normLoss hnormalization base' ε'
     (hbase₀.trans hbase') hε' heε he2 hbg' hbq' hbt' hbn' heg' heq' het'
 
+private theorem n01c_ordinaryFlowAngular_towers_elim
+    {Part Positive Result : Prop} {Tower : Type*}
+    (htowers : Part ∧ Positive ∧ Nonempty Tower)
+    (close : Part → Positive → Tower → Result) : Result := by
+  obtain ⟨hPart, hPositive, ⟨J⟩⟩ := htowers
+  exact close hPart hPositive J
+
 theorem n01_exists_ordinaryFlowAngularPositivePrefixBounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -122,7 +129,8 @@ theorem n01_exists_ordinaryFlowAngularPositivePrefixBounds
   intro bg eg c M Mlin hc hM hMlin hlow bq eq hBq hGs d₀ hQ
     bt et htowers bn normLoss hnormalization base' ε'
     hbase' hε' heε he2 hbg' hbq' hbt' hbn' heg' heq' het'
-  obtain ⟨hB', hpos, ⟨J⟩⟩ := htowers base' hbt' ε' hε' het'
+  refine n01c_ordinaryFlowAngular_towers_elim (htowers base' hbt' ε' hε' het') ?_
+  intro hB' hpos J
   have hSpeed' : CharacteristicSpeedTameBounds D T S C base' loss ε' :=
     characteristicSpeedTameBounds_mono hT hA.1.1 hSpeed
       hbase' le_rfl heε
@@ -136,13 +144,15 @@ theorem n01_exists_ordinaryFlowAngularPositivePrefixBounds
     intro N u t
     have hh := hlow base' hbg' ε' hε' heg' hB' hpos
       u.component u.tower u.dimension u.state u.mem u.plot
-    exact ⟨hh.1 t, hh.2.1 t⟩
+    refine ⟨hh.1 t, ?_⟩
+    simpa only [OrdinaryFlowVariationInput.defectNorm, Nat.cast_ofNat] using hh.2.1 t
   have hlinear :
       ∀ n, ∀ u : OrdinaryFlowVariationInput D S C base' ε' (n + 1),
         (u.data hS hT hA hB' hpos).coefficientSize 1 ≤ Mlin := by
     intro n u
-    exact (hlow base' hbg' ε' hε' heg' hB' hpos
-      u.component u.tower u.dimension u.state u.mem u.plot).2.2 n u.directions
+    simpa only [OrdinaryFlowVariationInput.data] using
+      (hlow base' hbg' ε' hε' heg' hB' hpos
+        u.component u.tower u.dimension u.state u.mem u.plot).2.2 n u.directions
   have horders := n01_ordinaryFlowAngularOrderBounds_of_actual_lowGeometry
     hS hT hA hε' hB' hpos hE hSpeed' he2 (hnormalization base' hbn')
     hBq hGs hQ hsubq c M Mlin hc hM.le hgeometry hlinear
