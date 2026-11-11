@@ -238,27 +238,38 @@ theorem n07bNormalizedSourceCoefficient_stay
     n07bNormalizedSourceCoefficient T K z m β (j + 1) (i, 0) x =
       n07bInverseAngleDerivative (K.chart z m) (n07bNormalizedSourceCoefficient T K z m β j i) x +
         n07bSourceNormalizationDrift T K z m x * n07bNormalizedSourceCoefficient T K z m β j i x := by
-  simpa [n07bNormalizedSourceCoefficient, n07bAngularChainCoefficient] using
-    n07b_normalizedSource_stay hD hT hK hz hs m β hx
-      (n07b_angularChainCoefficient_contDiffAt hT hK hz hs m β j i hx)
+  change n07bSourceNormalizer T K z m β x *
+      n07bMaterialCoeffStay T β (K.chart z m) (n07bAngularChainCoefficient T K z m β j i) x =
+    n07bInverseAngleDerivative (K.chart z m)
+        (fun y => n07bSourceNormalizer T K z m β y * n07bAngularChainCoefficient T K z m β j i y) x +
+      n07bSourceNormalizationDrift T K z m x *
+        (n07bSourceNormalizer T K z m β x * n07bAngularChainCoefficient T K z m β j i x)
+  exact n07b_normalizedSource_stay hD hT hK hz hs m β hx
+    (n07b_angularChainCoefficient_contDiffAt hT hK hz hs m β j i hx)
 
 theorem n07bNormalizedSourceCoefficient_radial (T : MaterialData) (K : CanonicalData S)
     (z : AnnularState S × ℝ) (m : ℕ) (β : ℝ) (j : ℕ) (i : n07bAngularChainIndex j)
     (x : PolarPoint) :
     n07bNormalizedSourceCoefficient T K z m β (j + 1) (i, 1) x =
       (n07bSourceMaterialAngleVector T K z m x).1 * n07bNormalizedSourceCoefficient T K z m β j i x := by
-  simp only [n07bNormalizedSourceCoefficient, n07bAngularChainCoefficient,
-    n07bSourceMaterialAngleVector, n07bMaterialCoeffRadial]
-  norm_num <;> ring
+  change n07bSourceNormalizer T K z m β x *
+      (((n07bInverseAngleVector (K.chart z m) x).1 / T.ell x.1) *
+        n07bAngularChainCoefficient T K z m β j i x) =
+    ((n07bInverseAngleVector (K.chart z m) x).1 / T.ell x.1) *
+      (n07bSourceNormalizer T K z m β x * n07bAngularChainCoefficient T K z m β j i x)
+  ring
 
 theorem n07bNormalizedSourceCoefficient_angular (T : MaterialData) (K : CanonicalData S)
     (z : AnnularState S × ℝ) (m : ℕ) (β : ℝ) (j : ℕ) (i : n07bAngularChainIndex j)
     (x : PolarPoint) :
     n07bNormalizedSourceCoefficient T K z m β (j + 1) (i, 2) x =
       (n07bSourceMaterialAngleVector T K z m x).2 * n07bNormalizedSourceCoefficient T K z m β j i x := by
-  simp only [n07bNormalizedSourceCoefficient, n07bAngularChainCoefficient,
-    n07bSourceMaterialAngleVector, n07bMaterialCoeffAngular]
-  norm_num <;> ring
+  change n07bSourceNormalizer T K z m β x *
+      ((n07bInverseAngleVector (K.chart z m) x).2 *
+        n07bAngularChainCoefficient T K z m β j i x) =
+    (n07bInverseAngleVector (K.chart z m) x).2 *
+      (n07bSourceNormalizer T K z m β x * n07bAngularChainCoefficient T K z m β j i x)
+  ring
 
 theorem n07bNormalizedSourceCoefficient_zero (T : MaterialData) (K : CanonicalData S)
     (z : AnnularState S × ℝ) (m : ℕ) (β : ℝ) (x : PolarPoint) :

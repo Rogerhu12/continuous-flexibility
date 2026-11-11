@@ -84,7 +84,18 @@ theorem n07b_c2_reference_physicalSourceIntegral_eq_zero
   have hconstant (p : PolarPoint) :
       symmetricDivergence (radialHeightField D.w) (fun _ => 0)
         (radialHeightField (fun r => deriv D.w r / r)) (fun _ => 1) p = 0 := by
-    simp [symmetricDivergence, symmetricNormalFlux, symmetricAngularFlux]
+    have hn : symmetricNormalFlux (radialHeightField D.w) (fun _ => 0)
+        (fun _ => 1) = fun _ => 0 := by
+      funext q
+      simp only [symmetricNormalFlux, radialPartial_const, angularPartial_const,
+        mul_zero, add_zero]
+    have ht : symmetricAngularFlux (fun _ => 0)
+        (radialHeightField (fun r => deriv D.w r / r)) (fun _ => 1) = fun _ => 0 := by
+      funext q
+      simp only [symmetricAngularFlux, radialPartial_const, angularPartial_const,
+        mul_zero, add_zero]
+    simp only [symmetricDivergence, hn, ht, radialPartial_const, angularPartial_const,
+      add_zero]
   have hraw : (∫ r in D.a..D.b, ∫ θ in (0 : ℝ)..Real.pi,
       radialPDE D.w (fun s α => u (s, α)) r θ) = 0 := by
     calc

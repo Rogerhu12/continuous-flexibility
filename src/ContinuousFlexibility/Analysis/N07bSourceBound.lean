@@ -57,9 +57,29 @@ theorem n07bSourceGeometricWeight_eq
   calc
     _ = T.ell x.1 * |planeJacobian (K.chart z m) x| *
         (T.H x.1 ^ (3 / 4 : ℝ) / T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ)) ^ 2 := by
-      simp only [n07bSourceGeometricWeight, hfactor, div_eq_mul_inv, mul_pow]
+      change T.ell x.1 * ((n07bCanonicalSourceFactor T K (3 / 4 : ℝ) 0 m)⁻¹ ^ 2 *
+        |planeJacobian (K.chart z m) x| * (T.H x.1 ^ (3 / 4 : ℝ)) ^ 2) = _
+      rw [hfactor]
+      simp only [div_eq_mul_inv, mul_pow]
       ring
     _ = _ := by rw [hp]
+
+/-- Scalar square-root arithmetic is checked before a concrete weak-jet
+space is supplied, so the norm comparison does not unfold that space. -/
+private theorem norm_le_sqrt_mul_of_square_bound
+    {E : Type*} [SeminormedAddCommGroup E] {u : E} {A Q p q : ℝ}
+    (hA : 0 ≤ A) (hQ : 0 ≤ Q) (hp : 0 ≤ p) (hpq : p ≤ q)
+    (h : ‖u‖ ^ 2 ≤ A * Q ^ 2 * p ^ 2) :
+    ‖u‖ ≤ Real.sqrt A * Q * q := by
+  have hq : 0 ≤ q := hp.trans hpq
+  apply (sq_le_sq₀ (norm_nonneg _)
+    (mul_nonneg (mul_nonneg (Real.sqrt_nonneg _) hQ) hq)).mp
+  calc
+    ‖u‖ ^ 2 ≤ A * Q ^ 2 * p ^ 2 := h
+    _ ≤ A * Q ^ 2 * q ^ 2 :=
+      mul_le_mul_of_nonneg_left (pow_le_pow_left₀ hp hpq 2) (mul_nonneg hA (sq_nonneg _))
+    _ = (Real.sqrt A * Q * q) ^ 2 := by
+      rw [mul_pow, mul_pow, Real.sq_sqrt hA]
 
 /-- The geometric coefficient estimate implies the actual uniform source
 bound with source order `b+1` and final common index `b+loss+1`.
@@ -120,20 +140,14 @@ theorem n07b_sourceLift_uniform_bound_of_coefficients
     apply (physicalNorm_decode_le_grading (hS.1 (3 / 4 : ℝ)) f.val (b + 1)).trans
     exact gradedSeminorm_monotone _ _ (by omega) f.val
   have hp : 0 ≤ S.sourceGrading (b + loss + 1) f := apply_nonneg _ _
-  have hn : ‖F‖ ≤ Real.sqrt K₀ * Q * S.sourceGrading (b + loss + 1) f := by
-    apply (sq_le_sq₀ (norm_nonneg _)
-      (mul_nonneg (mul_nonneg (Real.sqrt_nonneg _) hQ) hp)).mp
-    calc
-      ‖F‖ ^ 2 ≤ A₀ * n07bSourcePathConstant b *
-          physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val) ^ 2 := hF
-      _ ≤ A₀ * n07bSourcePathConstant b * (S.sourceGrading (b + loss + 1) f) ^ 2 :=
-        mul_le_mul_of_nonneg_left
-          (pow_le_pow_left₀ (Real.sqrt_nonneg _) hsource 2)
-          (mul_nonneg hA₀ (n07bSourcePathConstant_nonneg b))
-      _ = (Real.sqrt K₀ * Q * S.sourceGrading (b + loss + 1) f) ^ 2 := by
-        rw [mul_pow, mul_pow, Real.sq_sqrt hK₀]
-        dsimp only [A₀, K₀]
-        ring
+  have hFsq : ‖F‖ ^ 2 ≤ K₀ * Q ^ 2 *
+      physicalNorm T (3 / 4 : ℝ) (b + 1) ((S.height (3 / 4 : ℝ)).decode f.val) ^ 2 := by
+    apply hF.trans_eq
+    dsimp only [A₀, K₀]
+    ring
+  have hn : ‖F‖ ≤ Real.sqrt K₀ * Q * S.sourceGrading (b + loss + 1) f :=
+    norm_le_sqrt_mul_of_square_bound (E := V.level (3 / 4 : ℝ) 0 b)
+      hK₀ hQ (Real.sqrt_nonneg _) hsource hFsq
   have hQle : Q ≤ 1 + stateGrading S (b + loss + 1) (z.1 - C.referenceState) + |z.2| :=
     add_le_add (add_le_add le_rfl
       (solve_stateGrading_monotone S (by omega) (z.1 - C.referenceState))) le_rfl

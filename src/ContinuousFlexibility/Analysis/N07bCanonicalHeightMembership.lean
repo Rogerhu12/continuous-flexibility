@@ -105,13 +105,17 @@ def n07bPhysicalHeightEnergy {T : MaterialData} (γ t : ℝ)
 /-- Exact identification of the zeroth-jet Hilbert energy. -/
 theorem n07b_canonicalHeight_jetEnergy {T : MaterialData} (γ t : ℝ)
     (u : PolarPoint → ℝ) (hu : Continuous u) (m : ℕ) :
-    n07bCanonicalJetEnergy (T := T)
-      (g := fun m (_ : Fin (0 + 1)) => canonicalHeight S K z m u)
+    n07bCanonicalJetEnergy (T := T) (K := K) (s := 0)
+      (g := fun m (_ : Fin 1) => canonicalHeight S K z m u)
       (fun m _ => n07b_canonicalHeight_memLp hK hz hs m hu.continuousOn) γ t m =
-        n07bPhysicalHeightEnergy (T := T) γ t z u m := by
-  simp only [n07bCanonicalJetEnergy, Fin.sum_univ_one, n07bCanonicalWeightedJet,
-    norm_smul, Real.norm_eq_abs, mul_pow, sq_abs]
-  rw [n07b_canonicalHeight_toLp_norm_sq hK hz hs m u]
+        n07bPhysicalHeightEnergy (T := T) (K := K) γ t z u m := by
+  change (∑ _j : Fin 1,
+    ‖(n07bCanonicalSourceFactor T K γ t m)⁻¹ •
+      (n07b_canonicalHeight_memLp hK hz hs m hu.continuousOn).toLp
+        (canonicalHeight S K z m u)‖ ^ 2) = _
+  rw [Fin.sum_univ_one, norm_smul, Real.norm_eq_abs, mul_pow, sq_abs,
+    n07b_canonicalHeight_toLp_norm_sq hK hz hs m u
+      (n07b_canonicalHeight_memLp hK hz hs m hu.continuousOn)]
   rfl
 
 /-- A genuine physical energy series supplies the prescribed zeroth-order
@@ -123,33 +127,34 @@ theorem n07b_exists_canonicalHeightLevel
     (γ t : ℝ) (u : PolarPoint → ℝ) (hu : Continuous u)
     (heven : ∀ r θ, u (r, -θ) = u (r, θ))
     (hperiod : Function.Periodic u (0, Real.pi))
-    (hsum : Summable (n07bPhysicalHeightEnergy (T := T) γ t z u)) :
+    (hsum : Summable (n07bPhysicalHeightEnergy (T := T) (K := K) γ t z u)) :
     ∃ W : V.level γ t 0, ∀ m,
       (V.forget γ t 0 W m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
         canonicalHeight S K z m u := by
-  let g : ∀ m : ℕ, Fin (0 + 1) → PolarPoint → ℝ :=
+  let g : ∀ m : ℕ, Fin 1 → PolarPoint → ℝ :=
     fun m _ => canonicalHeight S K z m u
   have hg : ∀ m j, MemLp (g m j) 2 (canonicalMeasure S K m) :=
     fun m _ => n07b_canonicalHeight_memLp hK hz hs m hu.continuousOn
   have href : ∀ m, (fun p : PolarPoint => g m 0 (p.1, Real.pi - p.2))
       =ᵐ[canonicalMeasure S K m] g m 0 :=
     n07b_canonicalHeight_reflection_ae hK hz hs u heven hperiod
-  have hweak : ∀ m (j : Fin (0 + 1)) φ, CanonicalTest S K m φ →
+  have hweak : ∀ m (j : Fin 1) φ, CanonicalTest S K m φ →
       (∫ p, g m j p * φ p ∂canonicalMeasure S K m) =
         (-1 : ℝ) ^ j.val * ∫ p, g m 0 p * mixedDerivative 0 j.val φ p
           ∂canonicalMeasure S K m := by
     intro m j φ _
-    have hj : j = 0 := Subsingleton.elim _ _
+    have hj : j = 0 := Fin.eq_zero j
     subst j
     simp only [Fin.val_zero, pow_zero, one_mul, mixedDerivative, iteratedDeriv_zero, g]
-  have henergy : Summable (n07bCanonicalJetEnergy (T := T) hg γ t) := by
-    have he : n07bCanonicalJetEnergy (T := T) hg γ t =
-        n07bPhysicalHeightEnergy (T := T) γ t z u :=
+  have henergy : Summable (n07bCanonicalJetEnergy (T := T) (K := K)
+      (s := 0) (g := g) hg γ t) := by
+    have he : n07bCanonicalJetEnergy (T := T) (K := K) (s := 0) (g := g) hg γ t =
+        n07bPhysicalHeightEnergy (T := T) (K := K) γ t z u :=
       funext fun m => n07b_canonicalHeight_jetEnergy hK hz hs γ t u hu m
     rw [he]
     exact hsum
-  refine ⟨n07bCanonicalSourceLift hg hV href hweak henergy, fun m => ?_⟩
-  apply n07bCanonicalSourceLift_forget_ae hg hV href hweak henergy
+  refine ⟨n07bCanonicalSourceLift (s := 0) (g := g) hg hV href hweak henergy, fun m => ?_⟩
+  apply n07bCanonicalSourceLift_forget_ae (s := 0) (g := g) hg hV href hweak henergy
   intro k
   have hsample := spaces_trace_sample_mem hD hT (K.cell k)
   exact (mul_pos

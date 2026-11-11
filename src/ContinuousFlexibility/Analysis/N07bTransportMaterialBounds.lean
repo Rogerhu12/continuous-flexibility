@@ -52,9 +52,10 @@ theorem n07b_heightMember_frechetJets_le_two
     let ia : Fin 3 := ⟨a, by omega⟩
     let ib : Fin 3 := ⟨b, by omega⟩
     have habound : K ia ib ≤ ∑ j : Fin 3, K ia j :=
-      Finset.single_le_sum (fun j _ => hK ia j) (Finset.mem_univ ib)
+      Finset.single_le_sum (f := fun j : Fin 3 => K ia j)
+        (fun j _ => hK ia j) (Finset.mem_univ ib)
     have hbouter : (∑ j : Fin 3, K ia j) ≤ B :=
-      Finset.single_le_sum
+      Finset.single_le_sum (f := fun i : Fin 3 => ∑ j : Fin 3, K i j)
         (fun i _ => Finset.sum_nonneg fun j _ => hK i j) (Finset.mem_univ ia)
     have hKB : K a b ≤ B := habound.trans hbouter
     rw [Real.norm_eq_abs]
