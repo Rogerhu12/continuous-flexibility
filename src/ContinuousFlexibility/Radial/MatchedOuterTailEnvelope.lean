@@ -127,9 +127,13 @@ theorem matchedOuterTailEnvelope_of_radius_data
     have hne := selectedBoundaryState_ne_zero_of_natural (ε := r07OutwardSign right)
       (matchingProfileGeometry hE) hjn hcutE
       (by cases right <;> norm_num [r07OutwardSign]) hu hN
-    have hi := F.scaledNatural_robin_iff hD hcut hdeep
-      (by simpa only [outerOutwardRadius_eq_sign] using hac) hlam.ne' hT hphysical hη hK H
-      hκ hβ hcutE hend hprofile hprofileCut hu hN
+    have hrobin := F.scaledNatural_robin_iff (E := E) (κ := κ) (β := β)
+      hD hcut hdeep (by simpa only [outerOutwardRadius_eq_sign] using hac)
+      hlam.ne' hT hphysical hη hK
+    rw [← outerOutwardRadius_eq_sign right cut,
+      ← outerOutwardRadius_eq_sign right deep,
+      ← outerOutwardRadius_eq_sign right (tailPhysicalEndpoint D right)] at hrobin
+    have hi := hrobin H hκ hβ hcutE hend hprofile hprofileCut hu hN
       (by simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hne) z
     simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hi
   · have hVeq : H'.V = fun x => H.V (x / κ) :=
@@ -143,7 +147,9 @@ theorem matchedOuterTailEnvelope_of_radius_data
         with x hs hx
       rw [hs]
       change (sqrt (β * lam))⁻¹ * (hV'.toLp H'.V) x = H.V (x / κ) / sqrt (β * lam)
-      rw [hx, congrFun hVeq x, div_eq_mul_inv, mul_comm]
+      rw [hx, congrFun hVeq x]
+      exact (mul_comm (sqrt (β * lam))⁻¹ (H.V (x / κ))).trans
+        (div_eq_mul_inv (H.V (x / κ)) (sqrt (β * lam))).symm
     exact hcolumn ((sqrt (β * lam))⁻¹ • hV'.toLp H'.V) hnormalized
 
 end ContinuousFlexibility.Radial

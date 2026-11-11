@@ -197,7 +197,8 @@ theorem SeedRetainedPair.exists_uniform_selectedInner_matching_bounds
       column hB tailModels centralModel
     have hbool : centralModelBordered (q + 1) = decide ((W q).matching.frequency = 2) := by
       by_cases hz : q = 0
-      · simp [centralModelBordered, hfrequency q, hz]
+      · rw [hfrequency q]
+        simp [centralModelBordered, hz]
       · have hq1 : q + 1 ≠ 1 := by omega
         have hf : (W q).matching.frequency ≠ 2 := by rw [hfrequency q]; omega
         simp only [centralModelBordered, if_neg hq1, decide_eq_false hf]
@@ -224,7 +225,8 @@ theorem SeedRetainedPair.exists_uniform_selectedInner_matching_bounds
       hb hcut' hstand hsource' hatt' Chain hbool hfreq hS CW hCW hP hcost.le hbound
     have hgate : decide ((W q).matching.frequency = 2) = decide (q = 0) := by
       by_cases hz : q = 0
-      · simp [hfrequency q, hz]
+      · rw [hfrequency q]
+        simp [hz]
       · have hf : (W q).matching.frequency ≠ 2 := by rw [hfrequency q]; omega
         simp only [hf, hz, decide_false]
     rw [hgate] at hh

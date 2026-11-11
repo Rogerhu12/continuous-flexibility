@@ -99,14 +99,14 @@ theorem matchedOuter_actual_channels_of_whole_bounds
     apply ContinuousLinearMap.ext
     intro F
     simp only [ContinuousLinearMap.comp_apply, hG, G, matchedModeBorder_apply,
-      matchedOuterSeparatedInverse_scalar, ContinuousLinearMap.zero_apply]
+      matchedOuterSeparatedInverse_scalar, ContinuousLinearMap.zero_apply, Prod.mk_zero_zero]
   have hborderRight :
       M.outerInverse.comp (matchedModeBorder D) = 0 := by
     apply ContinuousLinearMap.ext
     intro F
     simp only [ContinuousLinearMap.comp_apply, hG, G, matchedModeBorder_apply,
       matchedOuterSeparatedInverse_apply, map_zero, add_zero,
-      ContinuousLinearMap.zero_apply]
+      ContinuousLinearMap.zero_apply, Prod.mk_zero_zero]
   constructor
   · intro active k m
     have heq :
