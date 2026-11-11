@@ -11,7 +11,7 @@ compression, physical Poisson estimate, and weighted conormal estimate.
 The weights are based at the actual `T.index`, so the first retained inward
 weight is one even when the selected chain begins strictly after the scalar
 threshold.  The physical-column step uses the public version of the existing
-`physical_bound_of_remainder` theorem from `InnerMorsePhysicalPoisson`.
+`innerMorsePhysicalPoissonBound_of_remainder` theorem from `InnerMorsePhysicalPoisson`.
 -/
 
 noncomputable section

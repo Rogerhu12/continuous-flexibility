@@ -48,7 +48,7 @@ theorem innerGapDirichletInverse_multiplier_right (W : ℝ → ℝ)
     have hMr : M r.fst = c • r.fst :=
       innerWeightMultiplier_eq_smul_of_support (radialHilbertMeasure D) W hW C hbound
         (Ioo a b) r.fst (innerGapFormSpace_support D j a b r hr) c
-        (fun x hx => hconstant hx)
+        (fun _ hx => hconstant hx)
     have hMadj : M.adjoint = M := innerWeightMultiplier_adjoint
       (radialHilbertMeasure D) W hW C hbound
     have hpair := M.adjoint_inner_left r.fst F
@@ -77,7 +77,7 @@ theorem innerGapDirichletInverse_multiplier_conjugate (W V : ℝ → ℝ)
     V hV B hVB d hVd, map_smul,
     innerWeightMultiplier_eq_smul_of_support (radialHilbertMeasure D) W hW C hWC
       (Ioo a b) _ (innerGapDirichletInverse_support D hw hab ha hj hs hcore hpos hslope F)
-      c (fun x hx => hWc hx),
+      c (fun _ hx => hWc hx),
     smul_smul, hcd, one_smul]
 
 theorem norm_innerGapDirichletInverse_weighted_le (W V : ℝ → ℝ)
@@ -110,7 +110,7 @@ theorem innerGapPoissonL2_multiplier_cancel (D : ReferenceData) (hw : Continuous
   rw [map_smul, map_smul,
     innerWeightMultiplier_eq_smul_of_support (radialHilbertMeasure D) W hW C hWC
       (Ioo a b) _ (innerGapPoissonL2_support D hw ha hcore hpos p hp ξ)
-      c (fun x hx => hWc hx),
+      c (fun _ hx => hWc hx),
     smul_smul, inv_mul_cancel₀ hc, one_smul]
 
 theorem innerGapPoissonL2_weighted_norm_le (D : ReferenceData) (hw : ContDiff ℝ ∞ D.w)

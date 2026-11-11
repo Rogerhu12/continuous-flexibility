@@ -23,8 +23,8 @@ theorem inner_ordered_morse_choices_of_threshold (a : ℝ)
     {c₁ c₂ c₃ Cstar : ℝ} (hc₂ : 0 ≤ c₂) (hc₃ : 0 < c₃)
     (hCstar : 0 < Cstar) (hscale : 4 * (c₁ + 5) / c₃ ≤ Cstar)
     {η : ℝ} (hη : 0 < η) (initial : ℕ) :
-    ∃ N : ℕ, initial ≤ N ∧ 4096 ≤ N ∧ 64 * a ≤ (N : ℝ) ∧
-      ∀ T : MorseChainData, T.index = N →
+    ∃ Nfloor : ℕ, initial ≤ Nfloor ∧ 4096 ≤ Nfloor ∧ 64 * a ≤ (Nfloor : ℝ) ∧
+      ∀ N : ℕ, Nfloor ≤ N → ∀ T : MorseChainData, T.index = N →
         (∀ m, N ≤ m → T.d m = morseChainInteger m) →
         ∀ m n j : ℕ, N ≤ m → m < n → radialFrequencyBand T Cstar n j →
           exp (c₁ * radialQ m + c₂ * log (1 + (j : ℝ) * sqrt (morseChainA T m)) -
@@ -32,10 +32,10 @@ theorem inner_ordered_morse_choices_of_threshold (a : ℝ)
           (j : ℝ) * exp (c₁ * radialQ m +
             c₂ * log (1 + (j : ℝ) * sqrt (morseChainA T m)) -
             c₃ * ((j : ℝ) * sqrt (morseChainA T m))) < η := by
-  obtain ⟨N, hN, hlarge, hweight, hsmall⟩ := inner_uniform_frequency_suppression
+  obtain ⟨Nfloor, hN, hlarge, hweight, hsmall⟩ := inner_uniform_frequency_suppression
     radialQ inner_radialQ_tendsto a initial hc₂ hc₃ hCstar hscale hη
-  refine ⟨N, hN, hlarge, hweight, ?_⟩
-  intro T hindex hd m n j hm hmn hband
+  refine ⟨Nfloor, hN, hlarge, hweight, ?_⟩
+  intro N hNfloor T hindex hd m n j hm hmn hband
   have hmIndex : T.index ≤ m := by simpa only [hindex] using hm
   have hd' : ∀ k, T.index ≤ k → T.d k = morseChainInteger k := by
     intro k hk
@@ -55,7 +55,7 @@ theorem inner_ordered_morse_choices_of_threshold (a : ℝ)
       log (1 + (j : ℝ) * sqrt (morseChainA T m)) + 5 * radialQ m :=
     (log_le_log (zero_lt_one.trans_le hj) (by linarith : (j : ℝ) ≤ 1 + (j : ℝ))).trans
       (inner_morse_frequency_log_bound T (hd m hm) hm1 (Nat.cast_nonneg j))
-  exact hsmall m hm _ j haction hj hlog
+  exact hsmall m (hNfloor.trans hm) _ j haction hj hlog
 
 /-- The same ordered choices construct the raw models and suppress all
 their polynomial envelopes, uniformly for every later realization and
@@ -64,9 +64,10 @@ exponent, but the geometric action scale and polynomial degree do not. -/
 theorem exists_inner_morse_model_choices (a : ℝ) {p b A c : ℝ}
     (hp : 0 ≤ p) (hb : 0 ≤ b) (hA : 1 ≤ A) (hc : 0 < c) :
     ∃ Cstar : ℝ, 0 < Cstar ∧ innerMorseBufferThreshold ≤ Cstar ∧
-      ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ N : ℕ,
-        initial ≤ N ∧ 4096 ≤ N ∧ 64 * a ≤ (N : ℝ) ∧
-        ∀ (T : MorseChainData) (σ : ℕ → ℝ) (D : ReferenceData) (cost : ℕ → ℝ),
+      ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ Nfloor : ℕ,
+        initial ≤ Nfloor ∧ 4096 ≤ Nfloor ∧ 64 * a ≤ (Nfloor : ℝ) ∧
+        ∀ N : ℕ, Nfloor ≤ N →
+          ∀ (T : MorseChainData) (σ : ℕ → ℝ) (D : ReferenceData) (cost : ℕ → ℝ),
           MorseChainRealization T σ D cost → T.index = N →
           ∀ m n j : ℕ, N ≤ m → m < n → 2 ≤ j → radialFrequencyBand T Cstar n j →
             BufferHypotheses (innerMorseBufferData (morseChainA T m) (morseChainB T m)
@@ -90,14 +91,14 @@ theorem exists_inner_morse_model_choices (a : ℝ) {p b A c : ℝ}
       (le_max_right _ _)
   refine ⟨Cstar, hCstar, hgeometry, ?_⟩
   intro η hη initial
-  obtain ⟨N, hN, hlarge, hweight, hsmall⟩ :=
+  obtain ⟨Nfloor, hN, hlarge, hweight, hsmall⟩ :=
     inner_ordered_morse_choices_of_threshold a hb hc hCstar hscale hη initial
-  refine ⟨N, hN, hlarge, hweight, ?_⟩
-  intro T σ D cost hreal hindex m n j hm hmn hj hband
+  refine ⟨Nfloor, hN, hlarge, hweight, ?_⟩
+  intro N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
   have hmIndex : T.index ≤ m := by simpa only [hindex] using hm
   have hindex10 : 10 ≤ T.index := by omega
   have hraw := innerMorseChain_buffer hreal hgeometry hindex10 hmIndex hmn hj hband
-  have hsmall' := hsmall T hindex
+  have hsmall' := hsmall N hNfloor T hindex
     (fun k hk => hreal.d_eq k (by simpa only [hindex] using hk)) m n j hm hmn hband
   have henv := inner_morse_polynomial_envelope T (hreal.d_eq m hmIndex)
     (show 1 ≤ m by omega) (Nat.cast_nonneg j) hb hA (p := p) (c := c)

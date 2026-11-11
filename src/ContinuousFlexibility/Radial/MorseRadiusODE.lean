@@ -3,13 +3,15 @@ import Mathlib.Analysis.ODE.ExistUnique
 import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
-# The finite Morse radius initial value problem
+# Finite smooth linear systems and the Morse radius initial value problem
 
 Clip the two state coordinates to obtain a bounded field on the whole time
 interval. A two-sided Grönwall estimate then puts the solution inside the
 region where clipping is the identity. Solving on a wider interval permits
 a globally smooth extension that satisfies the original system on a
-neighborhood of the retained closed interval.
+neighborhood of the retained closed interval. The same construction gives
+the actual off-diagonal flux system `u' = p v`, `v' = q u`, with arbitrary
+smooth coefficients and arbitrary initial data.
 -/
 
 noncomputable section
@@ -412,6 +414,13 @@ theorem exists_smoothSecondOrderSolution {q : ℝ → ℝ} (hq : ContDiff ℝ �
     filter_upwards [Ioo_mem_nhds hx'.1 hx'.2] with y hy
     exact (hd y hy).1.deriv
   exact he.deriv_eq.trans (hd x (hsub hx)).2.deriv
+
+/-- Compatibility name for the same finite-interval scalar solution. -/
+theorem exists_smoothSecondOrder {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
+    ∃ r : ℝ → ℝ, ContDiff ℝ ∞ r ∧ r t₀ = r₀ ∧ deriv r t₀ = v₀ ∧
+      ∀ x ∈ Icc a b, deriv (deriv r) x = -q x * r x :=
+  exists_smoothSecondOrderSolution hq ht₀ r₀ v₀
 
 /-- Value and derivative determine a smooth scalar second-order solution
 on a closed interval. -/

@@ -190,8 +190,9 @@ theorem exists_innerMorsePhysicalChoices (hR09 : R09Statement) {a : ℝ} (ha : 0
     ∃ C K : ℝ, 0 < C ∧ 0 < K ∧
       ∀ A : ℝ, innerMorseModelAmplitude C K ≤ A →
       ∃ Cstar : ℝ, 0 < Cstar ∧ innerMorseBufferThreshold ≤ Cstar ∧
-        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ N : ℕ,
-          initial ≤ N ∧ 4096 ≤ N ∧ 64 * a ≤ (N : ℝ) ∧
+        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ Nfloor : ℕ,
+          initial ≤ Nfloor ∧ 4096 ≤ Nfloor ∧ 64 * a ≤ (Nfloor : ℝ) ∧
+          ∀ N : ℕ, Nfloor ≤ N →
           ∀ (T : MorseChainData) (σ : ℕ → ℝ) (D : ReferenceData) (cost : ℕ → ℝ),
             ∀ hreal : MorseChainRealization T σ D cost, T.index = N →
             ∀ m n j : ℕ, N ≤ m → m < n → 2 ≤ j → radialFrequencyBand T Cstar n j →
@@ -201,6 +202,7 @@ theorem exists_innerMorsePhysicalChoices (hR09 : R09Statement) {a : ℝ} (ha : 0
               ∃ M : InnerBufferLocalizedData
                 (innerMorseBufferData (morseChainA T m) (morseChainB T m) j
                   (8 * (T.d m : ℝ) ^ 9)) C K,
+                (∀ i, innerMorseModelNormalizedRemainder M i ≤ 1 / (j : ℝ)) ∧
                 InnerMorsePhysicalPoissonBound hreal N a M ∧
                 ∀ γ : ℝ, |γ| ≤ 1 → ∀ side : Bool, ∀ height : ℝ, 0 < height → ∀ sign : Bool,
                   ‖innerTwoCutWeightedError
@@ -213,14 +215,16 @@ theorem exists_innerMorsePhysicalChoices (hR09 : R09Statement) {a : ℝ} (ha : 0
   obtain ⟨Cstar, hCstar, hgeometry, hmodels⟩ := hchoice A hA
   refine ⟨Cstar, hCstar, hgeometry, ?_⟩
   intro η hη initial
-  obtain ⟨N, hN, hlarge, hweight, htail⟩ := hmodels η hη initial
-  refine ⟨N, hN, hlarge, hweight, ?_⟩
-  intro T σ D cost hreal hindex m n j hm hmn hj hband
-  obtain ⟨hB, M, hrem, herror⟩ := htail T σ D cost hreal hindex m n j hm hmn hj hband
+  obtain ⟨Nfloor, hN, hlarge, hweight, htail⟩ := hmodels η hη initial
+  refine ⟨Nfloor, hN, hlarge, hweight, ?_⟩
+  intro N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
+  obtain ⟨hB, M, hrem, herror⟩ := htail N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
   have hj1 : (1 : ℝ) ≤ j := by exact_mod_cast (show 1 ≤ j by omega)
   have hj0 : (0 : ℝ) ≤ j := Nat.cast_nonneg j
   have hr : ∀ i, innerMorseModelNormalizedRemainder M i ≤ 1 / (j : ℝ) :=
     fun i => (hrem i).le.trans (div_le_div_of_nonneg_right (min_le_left 1 η) hj0)
-  exact ⟨hB, M, innerMorsePhysicalPoissonBound_of_remainder hreal N ha hlarge hweight hm hj1 hC M hr, herror⟩
+  exact ⟨hB, M, hr,
+    innerMorsePhysicalPoissonBound_of_remainder hreal N ha (hlarge.trans hNfloor)
+      (hweight.trans (Nat.cast_le.mpr hNfloor)) hm hj1 hC M hr, herror⟩
 
 end ContinuousFlexibility.Radial
