@@ -175,10 +175,12 @@ theorem modeSupportedHilbertRestrict_inclusion (F : K) :
   exact (modeSupportedHilbertProjection_fixed_iff D J hJ bordered _).mpr
     ((hK _).mp F.property)
 
+include hK in
 theorem modeSupportedHilbert_member_supported (F : K) :
     ∀ᵐ r ∂radialHilbertMeasure D, r ∉ J → F.val.fst r = 0 :=
   (modeRegionVector_eq_self_iff D J hJ F.val.fst).mp ((hK _).mp F.property).2
 
+include hK in
 theorem modeSupportedHilbert_member_scalar (hb : bordered = false) (F : K) :
     F.val.snd = 0 := by
   have h := ((hK _).mp F.property).1
@@ -245,7 +247,8 @@ end ActualSource
 theorem modeHilbertPair_ofLp_norm_le {D : ReferenceData} (F : ModeHilbertPair D) :
     ‖WithLp.ofLp F‖ ≤ ‖F‖ := by
   rw [Prod.norm_def, WithLp.ofLp_fst, WithLp.ofLp_snd]
-  exact max_le (WithLp.norm_fst_le F) (WithLp.norm_snd_le F)
+  exact max_le (WithLp.norm_fst_le (α := RadialModeL2 D) (β := ℝ) (p := 2) F)
+    (WithLp.norm_snd_le (α := RadialModeL2 D) (β := ℝ) (p := 2) F)
 
 theorem modeHilbertPair_toLp_norm_le {D : ReferenceData} (F : RadialModePair D) :
     ‖(WithLp.toLp 2 F : ModeHilbertPair D)‖ ≤ Real.sqrt 2 * ‖F‖ := by

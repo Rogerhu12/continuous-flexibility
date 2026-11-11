@@ -104,10 +104,16 @@ theorem R10aGeometry (hR06 : R06Statement) : R10aGeometrySupply := by
     retained_entries := hretained
     later_cut := by
       intro right n hn
-      rw [hcut, if_neg hn.ne']
+      rw [hcut]
+      change (if n = S.chain.index then H.cut right
+        else r07PreviousCellCut S.chain right (n - 1)) = _
+      exact if_neg hn.ne'
     later_join := by
       intro right n hn
-      rw [hjoin, if_neg hn.ne']
+      rw [hjoin]
+      change (if n = S.chain.index then H.join right
+        else r07PreviousCellJoin S.chain right (n - 1)) = _
+      exact if_neg hn.ne'
     regular := fun right n j hj heven hband =>
       ⟨(hregular right n j hj heven hband).1, (hregular right n j hj heven hband).2.1⟩
     later_join_state := fun right n j hj heven hn hband =>

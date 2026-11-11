@@ -36,10 +36,13 @@ theorem R10aPoisson {D : ReferenceData} (hD : IsAccumulatingProfile D)
     have hfix : M.sourceInner (F i) = F i :=
       (W.inner_source (F i)).trans (hFfix i)
     have h := W.inner_solve (F i) (fun _ => hFscalar i)
-    simpa only [hfix] using h
+    change ModeInnerDirichletGraph D M
+      (M.innerInverse (M.sourceInner (F i))) (M.sourceInner (F i)) at h
+    rwa [hfix] at h
   have hflux' (i k : Fin 2) :
       matchingInnerFlux D M (ell k) i = if i = k then M.D0 i else 0 := by
-    simpa only [W.boundary_slope] using hflux i k
+    have hslope : terminalCutoffSlope M W.standIn i = M.D0 i := W.boundary_slope i
+    simpa only [hslope] using hflux i k
   obtain ⟨P, p, Db, _, _, hcolumns, hsym, herror⟩ :=
     terminalInnerPoisson_columns_exists hD hB M W.cut_order.2.1 hsub W.column_inside
       L F ell M.D0 (terminalCutoffEnergy M W.cutoff W.standIn) W.attenuation
