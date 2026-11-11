@@ -84,17 +84,17 @@ theorem n06PositivePhysicalGraphFields_reflection
 The constant is chosen before any source or modal representatives. -/
 theorem n06_positiveGraphFields_material_bound
     {D : ReferenceData} (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-    (β A loss C : ℝ) (hβ : 0 < β) (hC : 0 < C)
+    (β A loss C Aκ : ℝ) (hβ : 0 < β) (hC : 0 < C)
     (a c V : ℕ → ℝ → ℝ) (κ : ℕ → ℝ)
     (hκ : ∀ m, K.positive m = true → 1 ≤ κ m)
     (hgrowth : ∀ m, K.positive m = true →
-      κ m ≤ C * T.E0 (T.sample (K.cell m)) ^ C) :
+      κ m ≤ C * T.E0 (T.sample (K.cell m)) ^ Aκ) :
     ∃ Q : ℝ, 0 < Q ∧ ∀ F W : CanonicalVolumeJets S K b,
       ∀ P : N06PositiveWeakGraphFamily T K β loss F W a c V κ,
       ∀ r m,
         ‖T.E0 (T.sample (K.cell m)) ^ A • n06PositivePhysicalGraphFields P r m‖ ≤
           Q * (‖F m‖ + ‖W m‖) := by
-  obtain ⟨Q, hQ, habsorb⟩ := n06_material_graph_row_absorb hT β A loss C hβ hC
+  obtain ⟨Q, hQ, habsorb⟩ := n06_material_graph_row_absorb hT β A loss C Aκ hβ hC
   refine ⟨Q, hQ, ?_⟩
   intro F W P r m
   by_cases hm : K.positive m = true
@@ -126,11 +126,11 @@ theorem n06_positiveGraphFields_material_bound
 canonical lp. Their weak jets and parity are retained on every piece. -/
 theorem n06_positiveGraphFields_package
     {D : ReferenceData} (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-    (β A loss C : ℝ) (hβ : 0 < β) (hC : 0 < C)
+    (β A loss C Aκ : ℝ) (hβ : 0 < β) (hC : 0 < C)
     (a c V : ℕ → ℝ → ℝ) (κ : ℕ → ℝ)
     (hκ : ∀ m, K.positive m = true → 1 ≤ κ m)
     (hgrowth : ∀ m, K.positive m = true →
-      κ m ≤ C * T.E0 (T.sample (K.cell m)) ^ C) :
+      κ m ≤ C * T.E0 (T.sample (K.cell m)) ^ Aκ) :
     ∃ Q : ℝ, 0 < Q ∧ ∀ F W : CanonicalVolumeJets S K b,
       ∀ P : N06PositiveWeakGraphFamily T K β loss F W a c V κ,
       ∃ f : Fin 5 → CanonicalVolumeJets S K b,
@@ -140,7 +140,7 @@ theorem n06_positiveGraphFields_package
           =ᵐ[canonicalMeasure S K m] fun p => n06CubicGraphParity r * f r m 0 p) ∧
         (∀ r, ‖f r‖ ≤ Q * (‖F‖ + ‖W‖)) := by
   obtain ⟨Q, hQ, hlocal⟩ := n06_positiveGraphFields_material_bound
-    hD hT β A loss C hβ hC a c V κ hκ hgrowth (b := b)
+    hD hT β A loss C Aκ hβ hC a c V κ hκ hgrowth (b := b)
   refine ⟨Q, hQ, ?_⟩
   intro F W P
   choose f hf hnorm using fun r => n06_graphJets_of_piecewise_sum_bound F W
