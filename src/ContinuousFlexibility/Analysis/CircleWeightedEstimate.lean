@@ -173,7 +173,10 @@ theorem circleWeightedJet_le_of_derivative_bound
         (ENNReal.ofReal (C * T.M (T.sample m) ^ k) *
           eLpNorm (iteratedDeriv ((j.val 0).val + d) (u m)) 2 angleMeasure) ^ 2 :=
       mul_le_mul_of_nonneg_left (pow_le_pow_left' hb 2) zero_le
-    _ = _ := by rw [mul_pow, ← mul_assoc, hcoeff, mul_assoc]
+    _ = _ := by
+      rw [mul_pow (ENNReal.ofReal (C * T.M (T.sample m) ^ k))
+        (eLpNorm (iteratedDeriv ((j.val 0).val + d) (u m)) 2 angleMeasure) 2,
+        ← mul_assoc, hcoeff, mul_assoc]
 
 /-- Uniform derivative estimates with fixed losses produce an actual
 weighted circle field, including finiteness of every complete norm sum. -/

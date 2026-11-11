@@ -95,14 +95,16 @@ coefficient is unchanged. Selection is restricted to the support of the
 cutoff derivative inside a negative component. -/
 def returnCorrectedCoefficients (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (χ : ℕ → ℝ → ℝ)
-    (z : AnnularState S × ℝ) : SymmetricCoefficients where
-  a := (originalCoefficients D S C z).a
-  b := fun p => if h : ∃ m, p.1 ∈ Ioo (C.left m) (C.right m) ∧ deriv (χ m) p.1 ≠ 0 then
-    (returnCorrectedComponentCoefficients D S C χ z (Classical.choose h)).b p
-    else (originalCoefficients D S C z).b p
-  c := fun p => if h : ∃ m, p.1 ∈ Ioo (C.left m) (C.right m) ∧ deriv (χ m) p.1 ≠ 0 then
-    (returnCorrectedComponentCoefficients D S C χ z (Classical.choose h)).c p
-    else (originalCoefficients D S C z).c p
+    (z : AnnularState S × ℝ) : SymmetricCoefficients := by
+  classical
+  exact {
+    a := (originalCoefficients D S C z).a
+    b := fun p => if h : ∃ m, p.1 ∈ Ioo (C.left m) (C.right m) ∧ deriv (χ m) p.1 ≠ 0 then
+      (returnCorrectedComponentCoefficients D S C χ z (Classical.choose h)).b p
+      else (originalCoefficients D S C z).b p
+    c := fun p => if h : ∃ m, p.1 ∈ Ioo (C.left m) (C.right m) ∧ deriv (χ m) p.1 ≠ 0 then
+      (returnCorrectedComponentCoefficients D S C χ z (Classical.choose h)).c p
+      else (originalCoefficients D S C z).c p }
 
 theorem returnCorrectedCoefficients_a (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (χ : ℕ → ℝ → ℝ) (z : AnnularState S × ℝ) :
@@ -180,14 +182,16 @@ theorem returnCorrectedCoefficients_minusCharacteristicSpeed
       returnCorrectedMinusSpeed D S C χ z m p := by
   by_cases hχ : deriv (χ m) p.1 = 0
   · obtain ⟨hb, hc⟩ := returnCorrectedCoefficients_eq_original_at_of_deriv_zero
-      hdisj χ z m p hp hχ
+      (D := D) hdisj χ z m p hp hχ
     simp only [returnCorrectedMinusSpeed, hχ, mul_zero, zero_mul, add_zero,
       minusCharacteristicSpeed, returnCorrectedCoefficients_a, hb, hc]
-  · obtain ⟨hb, hc⟩ := returnCorrectedCoefficients_eq_component_at hdisj χ z m p hp hχ
+  · obtain ⟨hb, hc⟩ := returnCorrectedCoefficients_eq_component_at (D := D)
+      hdisj χ z m p hp hχ
     have hs := (returnCorrectedComponentCoefficients_characteristicSpeeds D S C χ z m p
       ha hv).1
-    simpa only [minusCharacteristicSpeed, returnCorrectedCoefficients_a, hb, hc,
-      returnCorrectedComponentCoefficients, returnCorrectionCoefficients_a] using hs
+    unfold minusCharacteristicSpeed at hs ⊢
+    rw [returnCorrectedCoefficients_a, hb, hc]
+    exact hs
 
 /-- Reflection of the actual symmetric coefficients reflects the two
 characteristic families. -/
@@ -300,7 +304,8 @@ theorem N01Properties.returnCorrectedCoefficients_eventuallyEq_at_positive
         =ᶠ[𝓝 p] (originalCoefficients D S C z).c := by
   obtain ⟨bounds, hbounds⟩ := hN01.1.1
   have hw : ContDiff ℝ ∞ D.w := hbounds.1.2.2.1.1
-  have hc := (hw.continuous_deriv (by norm_num)).continuousAt
+  have hc : ContinuousAt (deriv D.w) p.1 :=
+    (hw.continuous_deriv (by norm_num)).continuousAt
   have hpos : ∀ᶠ r in 𝓝 p.1, 0 < deriv D.w r :=
     hc.preimage_mem_nhds (Ioi_mem_nhds hp)
   rcases hN01 with ⟨_, _, _, hcontrol, _⟩

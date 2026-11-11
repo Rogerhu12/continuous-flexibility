@@ -104,7 +104,7 @@ theorem circle_iteratedDeriv_ofReal {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) 
     have hd := (hf.differentiable_iteratedDeriv k
       (ENat.natCast_lt_of_coe_top_le_withTop le_rfl k) x).hasDerivAt
     have h := Complex.ofRealCLM.hasFDerivAt.comp_hasDerivAt x hd
-    simpa only [Function.comp_def, iteratedDeriv_succ] using h.deriv
+    simpa only [Function.comp_def, Complex.ofRealCLM_apply, iteratedDeriv_succ] using h.deriv
 
 private theorem circle_periodic_two_pi {E : Type*} {f : ℝ → E}
     (hp : Function.Periodic f Real.pi) : Function.Periodic f (2 * Real.pi) := by

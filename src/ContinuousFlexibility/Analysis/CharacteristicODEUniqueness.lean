@@ -18,7 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set Filter MeasureTheory
-open scoped Topology ContDiff
+open scoped Topology ContDiff NNReal
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -40,13 +40,14 @@ theorem hasDerivWithinAt_right_of_continuousOn_Icc
       (hf.mono (Icc_subset_Icc le_rfl ht.2))
       (fun r hr => by
         have hrab : r ∈ Ioo a b := ⟨hr.1, hr.2.trans_le ht.2⟩
-        simpa only [heq r ⟨hrab.1.le, hrab.2.le⟩] using hf' r hrab)
+        simpa only [heq ⟨hrab.1.le, hrab.2.le⟩] using hf' r hrab)
       (hde.intervalIntegrable a t)
     linarith only [hFTC]
   have hFTC : HasDerivAt (fun t => f a + ∫ r in a..t, de r) (d a) a := by
-    simpa only [heq a (left_mem_Icc.mpr hab.le)] using
-      (intervalIntegral.integral_hasDerivAt_right (hde.intervalIntegrable a a)
-        hde.aestronglyMeasurable.stronglyMeasurableAtFilter hde.continuousAt).const_add (f a)
+    have h := (intervalIntegral.integral_hasDerivAt_right (hde.intervalIntegrable a a)
+      hde.aestronglyMeasurable.stronglyMeasurableAtFilter hde.continuousAt).const_add (f a)
+    exact (h.congr_deriv (heq (left_mem_Icc.mpr hab.le))).congr_of_eventuallyEq
+      (Eventually.of_forall fun t => by simp only [Pi.add_apply])
   apply hFTC.hasDerivWithinAt.congr_of_eventuallyEq
   · filter_upwards [Icc_mem_nhdsGE hab] with t ht
     exact hprimitive t ht
@@ -155,6 +156,7 @@ theorem ode_solution_unique_of_separated_radial_speed
   have hcBθ : ContinuousOn (angularPartial B) (Icc a b ×ˢ (univ : Set ℝ)) :=
     fun p hp => (contDiffAt_angularPartial (hB p hp) (m := ∞) (by simp)).continuousAt.continuousWithinAt
   apply ode_solution_unique_of_continuous_angular_derivative
+    (v := fun t x => A (t, x) - k t * B (t, x))
     (d := fun p => angularPartial A p - k p.1 * angularPartial B p)
     hab (hcA.sub (hck.mul hcB)) ?_ (hcAθ.sub (hck.mul hcBθ)) hf hf' hg hg' ha
   intro t ht θ
