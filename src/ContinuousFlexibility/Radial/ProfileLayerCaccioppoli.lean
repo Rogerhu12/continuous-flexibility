@@ -43,10 +43,10 @@ theorem profile_layer_caccioppoli_constants
       rw [Real.volume_Ioo]
       exact ENNReal.ofReal_lt_top⟩
   have hfloc : LocallyIntegrableOn f (radialCore D) volume :=
-    (hf.integrable (by norm_num)).locallyIntegrableOn
-  have hw∞ : ContDiff ℝ ∞ D.w := h.1.2.2.1.1
+    IntegrableOn.locallyIntegrableOn (hf.integrable (by norm_num))
+  have hwsmooth : ContDiff ℝ ∞ D.w := h.1.2.2.1.1
   have hwd : Continuous (deriv D.w) :=
-    (contDiff_infty_iff_deriv.mp hw∞).2.continuous
+    (contDiff_infty_iff_deriv.mp hwsmooth).2.continuous
   have hc : ContinuousOn (fun r => deriv D.w r / r) (radialCore D) :=
     hwd.continuousOn.div continuousOn_id
       (fun r hr => (h.1.1.trans hr.1).ne')
@@ -61,7 +61,7 @@ theorem profile_layer_caccioppoli_constants
     hasCompactSupport_intervalLayerCutoff
       (profileLayerLower_pos (h.2.2.1 0) n) (profileLayerUpper_pos (h.2.2.1 0) n)
   have hb := interval_cutoff_caccioppoli_on_set h.1.2.1
-    (measurableSet_profileEndpointLayer _ _ _) hsI hu hw∞.continuous.continuousOn hc
+    (measurableSet_profileEndpointLayer _ _ _) hsI hu hwsmooth.continuous.continuousOn hc
     hfloc hfS huS hχ hχc (tsupport_profileLayerCutoff_subset (h.2.2.1 0) n)
     (hcoeff n).1 (hcoeff n).1
     (fun r hr => by
