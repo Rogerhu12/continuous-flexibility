@@ -62,7 +62,9 @@ theorem materialCoordinate_positive_fderiv_bounded
     (ContinuousLinearMap.fst ℝ ℝ ℝ) n hb
   let L : PolarPoint →L[ℝ] ℝ := ContinuousLinearMap.snd ℝ ℝ ℝ
   refine ⟨A + ‖L‖, add_nonneg hA (ContinuousLinearMap.opNorm_nonneg L), fun p => ?_⟩
-  rw [iteratedFDeriv_prodMk ((hr.comp contDiff_fst).contDiffAt)
+  have hrad : ContDiffAt ℝ ∞ (fun q : PolarPoint => T.radius q.1) p :=
+    hr.contDiffAt.comp p contDiffAt_fst
+  rw [iteratedFDeriv_prodMk hrad
     (contDiffAt_snd : ContDiffAt ℝ ∞ (fun q : PolarPoint => q.2) p) (by simp),
     ContinuousMultilinearMap.opNorm_prod]
   apply max_le
@@ -153,6 +155,11 @@ theorem memLp_weightedPhysicalJet_mul_of_bounded_coefficient
     funext p
     dsimp only [materialPullback, F, G]
     ring
-  simpa only [weightedPhysicalJet, heq] using h
+  have hjet : weightedPhysicalJet T γ a b c (fun p => f p * u p) =
+      (fun p => W p ^ c * mixedDerivative a b (fun q => F q * G q) p) := by
+    funext p
+    change W p ^ c * mixedDerivative a b (materialPullback T γ (fun q => f q * u q)) p = _
+    rw [heq]
+  exact hjet.symm ▸ h
 
 end ContinuousFlexibility.Statements

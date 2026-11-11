@@ -201,7 +201,7 @@ theorem SmoothDirections.cons_eq_snoc (J : SmoothDirections U f) (hUc : Convex â
     funext i
     fin_cases i
     simp only [Fin.cons_zero]
-    exact (Fin.snoc_last v w).symm
+    exact (Fin.snoc_last w v).symm
   | succ n ih =>
     intro x hx w v
     let a := v 0

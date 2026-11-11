@@ -46,7 +46,7 @@ theorem material_inv_ell_le_M {D : ReferenceData} {T : MaterialData}
 theorem materialInvEll_radius_contDiff {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) :
     ContDiff ℝ ∞ (fun x => (T.ell (T.radius x))⁻¹) := by
-  apply materialRadius_comp_contDiff hT
+  apply materialRadius_comp_contDiff hT (f := fun r => (T.ell r)⁻¹)
   exact (hT.1 T.ell (by simp)).inv (fun r hr => (hT.2.1 r hr).1.ne')
 
 theorem materialInvEll_radius_iteratedDeriv_bound

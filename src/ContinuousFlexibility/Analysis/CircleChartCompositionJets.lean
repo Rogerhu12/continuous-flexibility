@@ -177,7 +177,11 @@ theorem circleComposition_outerJet_line_hasDerivAt
         q * iteratedDeriv n (S.decode w.2 m) (a + q * d)) := by
     funext q
     change iteratedDeriv n (S.decode (x.2 + q • w.2) m) _ = _
-    rw [circleAngularJetEvaluation_line, circleCompositionPhase_line]
+    exact (circleAngularJetEvaluation_line hS x.2 w.2 n m q
+      (circleCompositionPhase travel (x + q • w) m θ)).trans
+      (congrArg (fun y : ℝ => iteratedDeriv n (S.decode x.2 m) y +
+        q * iteratedDeriv n (S.decode w.2 m) y)
+        (circleCompositionPhase_line travel x w m θ q))
   have hderiv :
       iteratedDeriv (n + 1) (S.decode (x + t • w).2 m)
           (circleCompositionPhase travel (x + t • w) m θ) * S.decode w.1 m θ +
@@ -186,7 +190,16 @@ theorem circleComposition_outerJet_line_hasDerivAt
         t * iteratedDeriv (n + 1) (S.decode w.2 m) (a + t * d)) * d +
         iteratedDeriv n (S.decode w.2 m) (a + t * d) := by
     change iteratedDeriv (n + 1) (S.decode (x.2 + t • w.2) m) _ * _ + _ = _
-    rw [circleAngularJetEvaluation_line, circleCompositionPhase_line]
+    have hjet := circleAngularJetEvaluation_line hS x.2 w.2 (n + 1) m t
+      (circleCompositionPhase travel (x + t • w) m θ)
+    have h₁ := congrArg (fun y : ℝ => y * d + iteratedDeriv n (S.decode w.2 m)
+      (circleCompositionPhase travel (x + t • w) m θ)) hjet
+    have h₂ := congrArg (fun y : ℝ =>
+      (iteratedDeriv (n + 1) (S.decode x.2 m) y +
+        t * iteratedDeriv (n + 1) (S.decode w.2 m) y) * d +
+        iteratedDeriv n (S.decode w.2 m) y)
+      (circleCompositionPhase_line travel x w m θ t)
+    exact h₁.trans h₂
   rw [hfun, hderiv]
   exact h
 
@@ -215,6 +228,30 @@ theorem fin_prod_erase_succ {n : ℕ} (h : Fin (n + 1) → ℝ) (i : Fin n) :
     simpa only [one_mul] using (prod_single_replacement h i.succ (1 : ℝ)).symm
   exact hprod.trans heq
 
+theorem circle_mixed_product_cons_algebra {n : ℕ}
+    (A B d : ℝ) (p q : Fin n → ℝ) :
+    A * (d * ∏ i, p i) +
+        (B * ∏ i, p i + ∑ i, q i * (d * ∏ j ∈ Finset.univ.erase i, p j)) =
+      (A * d + B) * ∏ i, p i +
+        d * ∑ i, q i * ∏ j ∈ Finset.univ.erase i, p j := by
+  classical
+  rw [Finset.mul_sum]
+  have hs : (∑ i, q i * (d * ∏ j ∈ Finset.univ.erase i, p j)) =
+      ∑ i, d * (q i * ∏ j ∈ Finset.univ.erase i, p j) := by
+    apply Finset.sum_congr rfl
+    intro i hi
+    ring
+  rw [hs]
+  ring
+
+theorem circle_mul_sum_middle {ι : Type*} [Fintype ι]
+    (d : ℝ) (p q : ι → ℝ) :
+    d * (∑ i, p i * q i) = ∑ i, (p i * d) * q i := by
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro i hi
+  ring
+
 theorem circleChartCompositionJets_cons (hS : IsCircleModel T γ S)
     (travel : ℕ → ℝ) (n : ℕ) (x w : S.Space × S.Space)
     (v : Fin n → S.Space × S.Space) (m : ℕ) (θ : ℝ) :
@@ -231,18 +268,11 @@ theorem circleChartCompositionJets_cons (hS : IsCircleModel T γ S)
   apply (circleChartCompositionJets_apply hS travel (n + 1) x (Fin.cons w v) m θ).trans
   simp only [Nat.add_sub_cancel, Fin.prod_univ_succ, Fin.sum_univ_succ,
     fin_prod_erase_zero, fin_prod_erase_succ, Fin.cons_zero, Fin.cons_succ]
-  rw [Finset.mul_sum]
-  have hs : (∑ i : Fin n, iteratedDeriv n (S.decode (v i).2 m)
-      (circleCompositionPhase travel x m θ) *
-        (S.decode w.1 m θ * ∏ j ∈ Finset.univ.erase i, S.decode (v j).1 m θ)) =
-      ∑ i : Fin n, S.decode w.1 m θ *
-        (iteratedDeriv n (S.decode (v i).2 m) (circleCompositionPhase travel x m θ) *
-          ∏ j ∈ Finset.univ.erase i, S.decode (v j).1 m θ) := by
-    apply Finset.sum_congr rfl
-    intro i hi
-    ring
-  rw [hs]
-  ring
+  exact circle_mixed_product_cons_algebra
+    (iteratedDeriv (n + 1) (S.decode x.2 m) (circleCompositionPhase travel x m θ))
+    (iteratedDeriv n (S.decode w.2 m) (circleCompositionPhase travel x m θ))
+    (S.decode w.1 m θ) (fun i => S.decode (v i).1 m θ)
+    (fun i => iteratedDeriv n (S.decode (v i).2 m) (circleCompositionPhase travel x m θ))
 
 /-- Every displayed parameter jet differentiates to the next displayed
 jet along the actual affine parameter line. -/
@@ -281,11 +311,16 @@ theorem circleChartCompositionJets_line_hasDerivAt
       simp only [circleChartCompositionJets_apply, Nat.add_sub_cancel, P, Q, φ]
     · apply (circleChartCompositionJets_cons hS travel (n + 1) (x + t • w) w v m θ).trans
       dsimp only [P, Q, φ]
-      rw [Finset.mul_sum]
-      congr 1
-      apply Finset.sum_congr rfl
-      intro i hi
-      ring
+      exact congrArg (fun z : ℝ =>
+        (iteratedDeriv (n + 2) (S.decode (x + t • w).2 m)
+            (circleCompositionPhase travel (x + t • w) m θ) * S.decode w.1 m θ +
+          iteratedDeriv (n + 1) (S.decode w.2 m)
+            (circleCompositionPhase travel (x + t • w) m θ)) *
+          (∏ i, S.decode (v i).1 m θ) + z)
+        (circle_mul_sum_middle (S.decode w.1 m θ)
+          (fun i => iteratedDeriv (n + 1) (S.decode (v i).2 m)
+            (circleCompositionPhase travel (x + t • w) m θ))
+          (fun i => ∏ j ∈ Finset.univ.erase i, S.decode (v j).1 m θ))
 
 theorem circleCompositionPhase_contDiff (hS : IsCircleModel T γ S)
     (travel : ℕ → ℝ) (x : S.Space × S.Space) (m : ℕ) :

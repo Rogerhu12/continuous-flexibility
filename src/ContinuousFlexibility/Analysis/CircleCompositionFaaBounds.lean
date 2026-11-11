@@ -28,6 +28,25 @@ theorem orderedFinpartition_sum_partSize {n : ℕ} (c : OrderedFinpartition n) :
     ∑ i, c.partSize i = n := by
   simpa only [Fintype.card_sigma, Fintype.card_fin] using Fintype.card_congr c.equivSigma
 
+theorem scalar_affineLift_positive_jet_abs_le
+    {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) (a : ℝ)
+    {i : ℕ} (hi : 1 ≤ i) (θ : ℝ) :
+    |iteratedDeriv i (fun x : ℝ => x + a + f x) θ| ≤
+      1 + |iteratedDeriv i f θ| := by
+  have heq : (fun x : ℝ => x + a + f x) = fun x => a + (x + f x) := by
+    funext x
+    ring
+  have hj : iteratedDeriv i (fun x : ℝ => x + a + f x) θ =
+      iteratedDeriv i (fun x : ℝ => x) θ + iteratedDeriv i f θ := by
+    rw [heq, iteratedDeriv_const_add (by omega : 0 < i) a]
+    exact iteratedDeriv_fun_add (f := fun x : ℝ => x) (g := f)
+      (n := i) (x := θ) contDiffAt_id (hf.contDiffAt.of_le (by simp))
+  have hid : |iteratedDeriv i (fun x : ℝ => x) θ| ≤ 1 := by
+    rw [iteratedDeriv_fun_id, if_neg (by omega : i ≠ 0)]
+    split_ifs <;> norm_num
+  rw [hj]
+  exact (abs_add_le _ _).trans (add_le_add hid le_rfl)
+
 /-- The global bound keeps the precise angular order, rather than
 replacing every derivative by the largest one in a chain-rule formula. -/
 theorem circleModel_jet_abs_le_material_upper
@@ -53,22 +72,17 @@ theorem circleAffineLift_jet_abs_le_exact_order
     (travel : ℕ → ℝ) (e : S.Space) (m i : ℕ) (θ : ℝ) (hi : 1 ≤ i) :
     |iteratedDeriv i (circleAffineLift travel (S.decode e) 1 m) θ| ≤
       1 + (2 * circleSobolevConstant * A) * S.grading (i + 1) e := by
-  have he := ((hS.2.2.2.1 e).1 m).1
-  have hshift : circleAffineLift travel (S.decode e) 1 m =
-      (fun x : ℝ => travel m + (x + S.decode e m x)) := by
+  have hscalar := scalar_affineLift_positive_jet_abs_le
+    ((hS.2.2.2.1 e).1 m).1 (travel m) hi θ
+  have hlift : circleAffineLift travel (S.decode e) 1 m =
+      fun x : ℝ => x + travel m + S.decode e m x := by
     funext x
     simp only [circleAffineLift, one_mul]
-    ring
-  have hjet : iteratedDeriv i (circleAffineLift travel (S.decode e) 1 m) θ =
-      iteratedDeriv i (fun x : ℝ => x) θ + iteratedDeriv i (S.decode e m) θ := by
-    rw [hshift, iteratedDeriv_const_add (by omega : 0 < i) (travel m)]
-    exact iteratedDeriv_fun_add contDiffAt_id (he.contDiffAt.of_le (by simp))
-  have hid : |iteratedDeriv i (fun x : ℝ => x) θ| ≤ 1 := by
-    rw [iteratedDeriv_fun_id, if_neg (by omega : i ≠ 0)]
-    split_ifs <;> norm_num
-  rw [hjet]
-  exact (abs_add_le _ _).trans
-    (add_le_add hid (circleModel_jet_abs_le_material_upper hS hH hA hHA e m i θ))
+  have hfirst : |iteratedDeriv i (circleAffineLift travel (S.decode e) 1 m) θ| ≤
+      1 + |iteratedDeriv i (S.decode e m) θ| :=
+    (congrArg (fun f : ℝ → ℝ => |iteratedDeriv i f θ|) hlift).trans_le hscalar
+  exact hfirst.trans (add_le_add le_rfl
+    (circleModel_jet_abs_le_material_upper hS hH hA hHA e m i θ))
 
 def circleCompositionPartitionCoefficient
     (S : CircleModelData) (A : ℝ) (e : S.Space)
@@ -84,7 +98,9 @@ theorem circleCompositionPartitionCoefficient_nonneg
   apply mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
   apply Finset.prod_nonneg
   intro i hi
-  positivity
+  exact add_nonneg zero_le_one (mul_nonneg
+    (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) hA)
+    (apply_nonneg _ _))
 
 /-- A chain-rule term is controlled by its own outer derivative energy. -/
 theorem circleWeighted_comp_outerJet_abs_le_partitions
@@ -116,10 +132,12 @@ theorem circleWeighted_comp_outerJet_abs_le_partitions
     have hout := circleWeighted_abs_le_componentEnergy hu (hM m).le (hH m).le
       (a := c.length + n) (b := k) (s := c.length + n + k + 1) le_rfl (φ θ)
     have hin : (∏ i, |iteratedDeriv (c.partSize i) φ θ|) ≤
-        ∏ i, (1 + (2 * circleSobolevConstant * A) * S.grading (c.partSize i + 1) e) :=
-      Finset.prod_le_prod₀ (fun i _ => abs_nonneg _)
-        (fun i _ => circleAffineLift_jet_abs_le_exact_order hS hH hA hHA
-          travel e m (c.partSize i) θ (c.partSize_pos i))
+        ∏ i, (1 + (2 * circleSobolevConstant * A) * S.grading (c.partSize i + 1) e) := by
+      have hpoint (i : Fin c.length) : |iteratedDeriv (c.partSize i) φ θ| ≤
+          1 + (2 * circleSobolevConstant * A) * S.grading (c.partSize i + 1) e :=
+        circleAffineLift_jet_abs_le_exact_order (T := T) (γ := γ) (S := S)
+          hS hH hA hHA travel e m (c.partSize i) θ (c.partSize_pos i)
+      exact Finset.prod_le_prod₀ (fun i _ => abs_nonneg _) (fun i _ => hpoint i)
     rw [circle_iteratedDeriv_iteratedDeriv, abs_mul, Finset.abs_prod]
     calc
       w * (|iteratedDeriv (c.length + n) (S.decode u m) (φ θ)| *

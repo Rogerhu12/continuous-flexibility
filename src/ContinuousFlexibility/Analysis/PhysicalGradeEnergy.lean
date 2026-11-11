@@ -88,25 +88,29 @@ private theorem physicalNorm_nonneg_for_energy
   unfold physicalNorm
   exact Real.sqrt_nonneg _
 
+private theorem sqrt_ennreal_level_le_finite_sum
+    (E : ℕ → ℝ≥0∞) (hE : ∀ j, E j < ⊤) {i s : ℕ} (hi : i ≤ s) :
+    Real.sqrt (E i).toReal ≤ Real.sqrt (∑ j : Fin (s + 1), E j.val).toReal := by
+  classical
+  have hsum : (∑ j : Fin (s + 1), E j.val) < ⊤ :=
+    ENNReal.sum_lt_top.mpr (fun j _ => hE j.val)
+  have hle : E i ≤ ∑ j : Fin (s + 1), E j.val :=
+    Finset.single_le_sum (f := fun j : Fin (s + 1) => E j.val)
+      (fun _ _ => zero_le) (Finset.mem_univ ⟨i, Nat.lt_succ_of_le hi⟩)
+  exact Real.sqrt_le_sqrt (ENNReal.toReal_mono hsum.ne hle)
+
+private theorem physicalNorm_eq_sqrt_levelEnergy
+    (T : MaterialData) (γ : ℝ) (i : ℕ) (f : PolarPoint → ℝ) :
+    physicalNorm T γ i f = Real.sqrt (physicalLevelEnergy T γ i f).toReal := rfl
+
 theorem physicalNorm_le_sqrt_levelEnergy_sum
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
     (hf : HeightMember D T γ f) {i s : ℕ} (hi : i ≤ s) :
     physicalNorm T γ i f ≤
       Real.sqrt (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f).toReal := by
-  classical
-  let k : Fin (s + 1) := ⟨i, Nat.lt_succ_of_le hi⟩
-  have hsum : (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f) < ⊤ :=
-    ENNReal.sum_lt_top.mpr (fun j _ => physicalLevelEnergy_lt_top hf j.val)
-  have hle : physicalLevelEnergy T γ i f ≤
-      ∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f :=
-    Finset.single_le_sum
-      (f := fun j : Fin (s + 1) => physicalLevelEnergy T γ j.val f)
-      (fun _ _ => zero_le) (Finset.mem_univ k)
-  have hsq : ENNReal.ofReal (physicalNorm T γ i f ^ 2) ≤
-      ∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f :=
-    (physicalLevelEnergy_eq_ofReal_norm_sq hf i).symm.trans_le hle
-  exact nonneg_le_sqrt_ennreal_of_sq_le
-    (physicalNorm_nonneg_for_energy T γ i f) hsum hsq
+  exact (physicalNorm_eq_sqrt_levelEnergy T γ i f).trans_le
+    (sqrt_ennreal_level_le_finite_sum (fun j => physicalLevelEnergy T γ j f)
+      (fun j => physicalLevelEnergy_lt_top hf j) hi)
 
 theorem sobolevModel_grading_le_iff_physicalNorm
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}

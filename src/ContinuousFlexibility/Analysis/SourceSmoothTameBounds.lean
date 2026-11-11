@@ -15,6 +15,8 @@ namespace ContinuousFlexibility.Statements
 open Set ContinuousFlexibility.Analysis
 open scoped BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {U : Set E} {f : E → S.Source}
@@ -53,9 +55,9 @@ theorem smoothTameOn_source_of_oneHigh_norm_bounds
         physicalNorm T (3 / 4 : ℝ) s (physicalSourceDecode S (J.D k x v)) ≤
           C * oneHighVariationWeight p base (s + loss) x v) :
     SmoothTameOn p S.sourceGrading U f := by
-  apply smoothTameOn_of_global_oneHigh_jet_bounds p S.sourceGrading J
-  intro k
-  obtain ⟨loss, base, hb⟩ := hbound k
-  exact ⟨loss, base, source_grading_oneHigh_bound hS p hp J k loss base hb⟩
+  exact smoothTameOn_of_global_oneHigh_jet_bounds p S.sourceGrading J (fun k =>
+    ⟨(hbound k).choose, (hbound k).choose_spec.choose,
+      source_grading_oneHigh_bound hS p hp J k (hbound k).choose
+        (hbound k).choose_spec.choose (hbound k).choose_spec.choose_spec⟩)
 
 end ContinuousFlexibility.Statements

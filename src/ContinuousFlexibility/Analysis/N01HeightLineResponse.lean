@@ -15,6 +15,8 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 local instance n01HeightLineResponseStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01HeightLineResponseRealNormedSpace : NormedSpace ℝ ℝ :=
+    NormedField.toNormedSpace
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis
@@ -54,7 +56,7 @@ theorem heightOnlyLine_sector
     stateSector S (C.referenceState + t • ((η, 0) : AnnularState S)) := by
   simp only [stateSector, heightOnlyLine_tail, href.2.2.2.1,
     href.2.2.2.2.1, map_zero, Pi.zero_apply, neg_zero]
-  exact ⟨fun _ _ _ => rfl, fun _ _ => rfl⟩
+  exact ⟨fun _ _ _ => True.intro, fun _ _ => True.intro⟩
 
 theorem stateLine_eventually_mem
     (v : AnnularState S) (hε : 0 < ε) :
@@ -105,14 +107,55 @@ theorem heightResponseIntegrand_continuousOn
   have hi : IntervalIntegrable (opticalSpeed w) volume l h :=
     ho.intervalIntegrable_of_Icc hlh
   have ht : ContinuousOn (opticalTravel w l) (Icc l h) := by
-    simpa only [opticalTravel, opticalSpeed, uIcc_of_le hlh] using
-      intervalIntegral.continuousOn_primitive_interval' hi left_mem_uIcc
+    have hc : ContinuousOn (fun b : ℝ => ∫ r in l..b, opticalSpeed w r) (Icc l h) := by
+      simpa only [uIcc_of_le hlh] using
+        intervalIntegral.continuousOn_primitive_interval' hi left_mem_uIcc
+    exact hc.congr (fun _ _ => rfl)
   have hφ : ContinuousOn (fun r => θ - opticalTravel w l r) (Icc l h) :=
     continuousOn_const.sub ht
   intro r hr
   exact (heightSpeedVariation_continuousAt hw hη (hl.trans_le hr.1).ne'
     (hwpos r hr).ne').comp_continuousWithinAt
       (continuousWithinAt_id.prodMk (hφ r hr))
+
+private theorem heightResponseIntegral_heightFamily
+    {w : ℝ → ℝ} {u η : PolarPoint → ℝ} {l b : ℝ}
+    (hw : ContDiff ℝ ∞ w) (hu : ContDiff ℝ ∞ u) (hη : ContDiff ℝ ∞ η)
+    (hl : 0 < l) (hlb : l ≤ b) (hwpos : ∀ r ∈ Icc l b, 0 < w r) (θ t : ℝ) :
+    (∫ r in l..b, heightSpeedVariation w (heightFamily u η t)
+      (r, θ - opticalTravel w l r)) =
+      (∫ r in l..b, heightSpeedVariation w u (r, θ - opticalTravel w l r)) +
+      t * ∫ r in l..b, heightSpeedVariation w η (r, θ - opticalTravel w l r) := by
+  have hi0 := (heightResponseIntegrand_continuousOn hw hu hl hlb hwpos θ).intervalIntegrable_of_Icc hlb
+  have hiη := (heightResponseIntegrand_continuousOn hw hη hl hlb hwpos θ).intervalIntegrable_of_Icc hlb
+  calc
+    _ = ∫ r in l..b, heightSpeedVariation w u (r, θ - opticalTravel w l r) +
+        t * heightSpeedVariation w η (r, θ - opticalTravel w l r) := by
+      apply intervalIntegral.integral_congr
+      intro r hr
+      rw [uIcc_of_le hlb] at hr
+      exact heightSpeedVariation_heightFamily hu hη (hl.trans_le hr.1).ne' t
+    _ = _ := by
+      rw [intervalIntegral.integral_add hi0 (hiη.const_mul t), intervalIntegral.integral_const_mul]
+
+private theorem N01Properties.heightLine_scalar_deriv_formula
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (η : HeightPair S) (t : ℝ)
+    (ht : (C.referenceState + t • ((η, 0) : AnnularState S), 0) ∈ stateNeighborhood S C base ε)
+    (m : ℕ) (θ : ℝ) {b : ℝ} (hb : b ∈ Icc (C.left m) (C.right m)) :
+    deriv (fun q : ℝ => C.minusFlow
+      (C.referenceState + t • ((η, 0) : AnnularState S), q) m b θ) 0 =
+      ∫ r in C.left m..b, heightSpeedVariation D.w
+        (heightFamily (stateU S C.referenceState) (heightPairField S η) t)
+        (r, θ - opticalTravel D.w (C.left m) r) := by
+  have href : referenceStateConditions D S C := hN.2.2.1
+  have hd := hN.minusFlow_q_zero_partial_height_response_of_physical hS hT ht
+    (heightOnlyLine_sector href η t) m θ hb
+  let F : (ℝ → ℝ) → (PolarPoint → ℝ) → ℝ := fun w u =>
+    ∫ r in C.left m..b, heightSpeedVariation w u (r, θ - opticalTravel w (C.left m) r)
+  exact hd.deriv.trans (congrArg₂ F (heightOnlyLine_profile href η t)
+    (heightOnlyLine_heightFamily S C.referenceState η t))
 
 theorem N01Properties.minusFlow_height_q_mixed_hasDerivAt
     (hN : N01Properties D T S C base loss ε)
@@ -139,35 +182,18 @@ theorem N01Properties.minusFlow_height_q_mixed_hasDerivAt
     exact hgeom.1.2.2.2.2.1 r
       ⟨(hcontrol.1 m).1.trans_le hr.1,
         (hr.2.trans hb.2).trans_lt (hcontrol.1 m).2.2⟩
-  let f0 : ℝ → ℝ := fun r => heightSpeedVariation D.w (stateU S C.referenceState)
+  let I0 : ℝ := ∫ r in C.left m..b, heightSpeedVariation D.w (stateU S C.referenceState)
     (r, θ - opticalTravel D.w (C.left m) r)
-  let fη : ℝ → ℝ := fun r => heightSpeedVariation D.w (heightPairField S η)
+  let Iη : ℝ := ∫ r in C.left m..b, heightSpeedVariation D.w (heightPairField S η)
     (r, θ - opticalTravel D.w (C.left m) r)
-  have hi0 : IntervalIntegrable f0 volume (C.left m) b :=
-    (heightResponseIntegrand_continuousOn hw hu hl hb.1 hwp θ).intervalIntegrable_of_Icc hb.1
-  have hiη : IntervalIntegrable fη volume (C.left m) b :=
-    (heightResponseIntegrand_continuousOn hw hη hl hb.1 hwp θ).intervalIntegrable_of_Icc hb.1
-  let I0 : ℝ := ∫ r in C.left m..b, f0 r
-  let Iη : ℝ := ∫ r in C.left m..b, fη r
   have heq :
       (fun t : ℝ => deriv (fun q : ℝ =>
         C.minusFlow (C.referenceState + t • ((η, 0) : AnnularState S), q) m b θ) 0)
         =ᶠ[𝓝 (0 : ℝ)] (fun t : ℝ => I0 + t * Iη) := by
     filter_upwards [stateLine_eventually_mem (C := C) (base := base)
       ((η, 0) : AnnularState S) hN.2.1] with t ht
-    have hd := hN.minusFlow_q_zero_partial_height_response_of_physical hS hT ht
-      (heightOnlyLine_sector href η t) m θ hb
-    rw [heightOnlyLine_profile href η t, heightOnlyLine_heightFamily] at hd
-    rw [hd.deriv]
-    calc
-      _ = ∫ r in C.left m..b, f0 r + t * fη r := by
-        apply intervalIntegral.integral_congr
-        intro r hr
-        rw [uIcc_of_le hb.1] at hr
-        exact heightSpeedVariation_heightFamily hu hη (hl.trans_le hr.1).ne' t
-      _ = I0 + t * Iη := by
-        rw [intervalIntegral.integral_add hi0 (hiη.const_mul t),
-          intervalIntegral.integral_const_mul]
+    exact (hN.heightLine_scalar_deriv_formula hS hT η t ht m θ hb).trans
+      (heightResponseIntegral_heightFamily hw hu hη hl hb.1 hwp θ t)
   have hlin : HasDerivAt (fun t : ℝ => I0 + t * Iη) Iη 0 := by
     simpa only [id_eq, one_mul] using
       ((hasDerivAt_id (0 : ℝ)).mul_const Iη).const_add I0

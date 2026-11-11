@@ -16,6 +16,8 @@ namespace ContinuousFlexibility.Statements
 open Set ContinuousFlexibility.Analysis
 open scoped BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   {T : MaterialData} {γ : ℝ} {S : CircleModelData} {U : Set E} {f : E → S.Space}
 
@@ -55,9 +57,9 @@ theorem smoothTameOn_circle_of_oneHigh_norm_bounds
         circleNorm T γ s (S.decode (J.D k x v)) ≤
           C * oneHighVariationWeight p base (s + loss) x v) :
     SmoothTameOn p S.grading U f := by
-  apply smoothTameOn_of_global_oneHigh_jet_bounds p S.grading J
-  intro k
-  obtain ⟨loss, base, hb⟩ := hbound k
-  exact ⟨loss, base, circle_grading_oneHigh_bound hS p hp J k loss base hb⟩
+  exact smoothTameOn_of_global_oneHigh_jet_bounds p S.grading J (fun k =>
+    ⟨(hbound k).choose, (hbound k).choose_spec.choose,
+      circle_grading_oneHigh_bound hS p hp J k (hbound k).choose
+        (hbound k).choose_spec.choose (hbound k).choose_spec.choose_spec⟩)
 
 end ContinuousFlexibility.Statements

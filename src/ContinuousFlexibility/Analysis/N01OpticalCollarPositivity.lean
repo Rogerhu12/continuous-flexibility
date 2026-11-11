@@ -97,7 +97,6 @@ theorem profile_mul_opticalSpeed_sq
     div_nonneg (neg_nonneg.mpr hwd) (mul_nonneg hr.le hw.le)
   rw [opticalSpeed, Real.sq_sqrt hq]
   field_simp [hr.ne', hw.ne']
-  ring
 
 theorem N01Properties.opticalCollar_reference_coefficient_lower
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -182,7 +181,7 @@ theorem N01Properties.opticalCollar_uniform_positive
     have hεl : ε' ≤ lam / (4 * K) := (min_le_right _ _).trans (min_le_right _ _)
     calc
       _ ≤ K * (lam / (4 * K)) := mul_le_mul_of_nonneg_left hεl hK.le
-      _ = lam / 4 := by field_simp [hK.ne']; ring
+      _ = lam / 4 := by field_simp [hK.ne']
   refine ⟨base', ε', lam, P, le_max_left _ _, hε', hεε, hlam, hP,
     hN.restrict_neighborhood hT (le_max_left _ _) hε' hεε,
     fun z hz m p hp => ?_⟩

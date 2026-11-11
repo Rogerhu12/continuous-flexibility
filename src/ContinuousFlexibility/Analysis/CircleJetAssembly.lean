@@ -80,22 +80,21 @@ def CircleJetSecondEnvelopes
               |iteratedDeriv b (A (n + 2) (x + t • w)
                 (Fin.cons w (Fin.cons w v)) m) θ| ≤ B * Real.sqrt (energy m).toReal
 
-theorem circleJetLift_hasProjectiveLineDerivAt
+theorem circleJetFamily_hasProjectiveLineDerivAt
     (hS : IsCircleModel T γ S)
     (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
     (hU : IsOpen U)
     (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
-    (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
-    (hbound : CircleJetNormBounds (T := T) (γ := γ) (U := U) A)
+    (L : ∀ n : ℕ, E → E [×n]→L[ℝ] S.Space)
+    (hdecode : ∀ n x, x ∈ U → ∀ v : Fin n → E, S.decode (L n x v) = A n x v)
     (hscalar : ∀ n (x w : E) (v : Fin n → E) (t : ℝ), x + t • w ∈ U → ∀ m b θ,
       HasDerivAt (fun u => iteratedDeriv b (A n (x + u • w) v m) θ)
         (iteratedDeriv b (A (n + 1) (x + t • w) (Fin.cons w v) m) θ) t)
     (henergy : CircleJetSecondEnvelopes (T := T) (γ := γ) (U := U) A)
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) (w : E) :
     HasProjectiveLineDerivAt
-      (fun y => circleJetLift hS A hmember hbound n y v)
-      (circleJetLift hS A hmember hbound (n + 1) x (Fin.cons w v)) x w := by
-  let L := circleJetLift hS A hmember hbound
+      (fun y => L n y v)
+      (L (n + 1) x (Fin.cons w v)) x w := by
   obtain ⟨δ, hδ, hmem, hb⟩ := henergy n x hx v w
   let J₁ : ℝ → ℕ → ℕ → ℝ → ℝ := fun t m b θ =>
     iteratedDeriv b (A (n + 1) (x + t • w) (Fin.cons w v) m) θ
@@ -111,18 +110,37 @@ theorem circleJetLift_hasProjectiveLineDerivAt
       hlineCont.continuousAt.eventually (hU.mem_nhds (hmem t ht))
     filter_upwards [hu] with u hux
     rw [show S.decode (L n (x + u • w) v) = A n (x + u • w) v from
-      circleJetLift_decode hS A hmember hbound n _ hux v]
+      hdecode n _ hux v]
   have hsecond (t : ℝ) (ht : |t| < δ) (m b : ℕ) (θ : ℝ) :
       HasDerivAt (fun u => J₁ u m b θ) (J₂ t m b θ) t :=
     hscalar (n + 1) x w (Fin.cons w v) t (hmem t ht) m b θ
   have hvalue (m b : ℕ) (θ : ℝ) :
       J₁ 0 m b θ = iteratedDeriv b (S.decode (L (n + 1) x (Fin.cons w v)) m) θ := by
     rw [show S.decode (L (n + 1) x (Fin.cons w v)) = A (n + 1) x (Fin.cons w v) from
-      circleJetLift_decode hS A hmember hbound (n + 1) x hx (Fin.cons w v)]
+      hdecode (n + 1) x hx (Fin.cons w v)]
     simp only [J₁, zero_smul, add_zero]
   exact circle_hasProjectiveCurveDerivAt_of_weighted_second_jets hS hM hH
     (fun t : ℝ => L n (x + t • w) v) (L (n + 1) x (Fin.cons w v))
     J₁ J₂ hδ hfirst hsecond hvalue hb
+
+theorem circleJetLift_hasProjectiveLineDerivAt
+    (hS : IsCircleModel T γ S)
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (hU : IsOpen U)
+    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
+    (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
+    (hbound : CircleJetNormBounds (T := T) (γ := γ) (U := U) A)
+    (hscalar : ∀ n (x w : E) (v : Fin n → E) (t : ℝ), x + t • w ∈ U → ∀ m b θ,
+      HasDerivAt (fun u => iteratedDeriv b (A n (x + u • w) v m) θ)
+        (iteratedDeriv b (A (n + 1) (x + t • w) (Fin.cons w v) m) θ) t)
+    (henergy : CircleJetSecondEnvelopes (T := T) (γ := γ) (U := U) A)
+    (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) (w : E) :
+    HasProjectiveLineDerivAt
+      (fun y => circleJetLift hS A hmember hbound n y v)
+      (circleJetLift hS A hmember hbound (n + 1) x (Fin.cons w v)) x w :=
+  circleJetFamily_hasProjectiveLineDerivAt hS hM hH hU A
+    (circleJetLift hS A hmember hbound)
+    (circleJetLift_decode hS A hmember hbound) hscalar henergy n x hx v w
 
 /-- Complete circle-valued smoothness, including joint continuity and
 actual projective difference quotients, from the scalar jet data. -/

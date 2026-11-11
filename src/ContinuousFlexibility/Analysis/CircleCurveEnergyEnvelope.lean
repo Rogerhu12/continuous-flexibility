@@ -65,6 +65,7 @@ theorem circleMember_sub_of_curve_energy_envelope
     constructor
     · exact (hF1 m).1.sub (hF0 m).1
     · intro θ
+      dsimp only
       rw [(hF1 m).2 θ, (hF0 m).2 θ]
   apply circleMember_of_energy_envelope hregular hM hH
   intro s

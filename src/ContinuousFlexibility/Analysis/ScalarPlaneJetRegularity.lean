@@ -61,10 +61,9 @@ theorem scalarPlane_hasStrictFDerivAt_of_partials
   have heq : (ContinuousLinearMap.toSpanSingleton ℝ (a p)).coprod
       (ContinuousLinearMap.toSpanSingleton ℝ (b p)) =
       a p • ContinuousLinearMap.fst ℝ ℝ ℝ + b p • ContinuousLinearMap.snd ℝ ℝ ℝ := by
-    ext q
-    simp only [ContinuousLinearMap.coprod_apply, ContinuousLinearMap.toSpanSingleton_apply,
-      ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
-      ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_eq_mul]
+    apply ContinuousLinearMap.ext
+    intro q
+    change q.1 * a p + q.2 * b p = a p * q.1 + b p * q.2
     ring
   simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
     Function.hasUncurryInduction, id_eq, Function.comp_def, heq] using hd

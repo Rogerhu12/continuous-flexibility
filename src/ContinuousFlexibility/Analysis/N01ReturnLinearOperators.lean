@@ -89,8 +89,17 @@ theorem N01Properties.returnLinearOperators
     fun m => ((material_circle_sample_weights_pos hT hN.1.1).1 m).le
   have hH : ∀ m, 0 ≤ T.H (T.sample m) :=
     fun m => ((material_circle_sample_weights_pos hT hN.1.1).2 m).le
-  obtain ⟨A, hA, c, hc, hbound, hdiv⟩ := hN.uniform_returnMargin_family hS hT
-  exact circleReturnOperators_of_weighted_margin hCircle C.travel c hc hdiv
-    hA.le hbound hM hH
+  let hmarg := hN.uniform_returnMargin_family hS hT
+  let A : ℝ := hmarg.choose
+  have hA : 0 < A := hmarg.choose_spec.1
+  let c : ℕ → ℝ := hmarg.choose_spec.2.choose
+  have hc : ∀ m, 0 < c m := hmarg.choose_spec.2.choose_spec.1
+  have hbound : ∀ m, (c m)⁻¹ ≤ A * T.M (T.sample m) :=
+    hmarg.choose_spec.2.choose_spec.2.1
+  have hdiv : ∀ m j : ℕ, 1 ≤ j → c m / j ≤ |Real.sin (j * C.travel m)| :=
+    hmarg.choose_spec.2.choose_spec.2.2
+  exact circleReturnOperators_of_weighted_margin
+    (T := T) (γ := (3 / 4 : ℝ)) (S := S.circle (3 / 4 : ℝ))
+    hCircle C.travel c hc hdiv hA.le hbound hM hH
 
 end ContinuousFlexibility.Statements

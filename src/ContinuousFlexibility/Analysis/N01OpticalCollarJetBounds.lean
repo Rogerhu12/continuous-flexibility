@@ -36,6 +36,36 @@ theorem abs_le_of_power_weight_bound
   rw [mul_pow, ← Real.rpow_mul_natCast hE.le] at hb
   exact hb
 
+/-- Extracting a scalar zeroth jet is independent of the concrete
+parameter model and does not unfold any of its seminorm instances. -/
+theorem smoothDirections_zeroth_spatialWeight_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U : Set E} {f : E → ℝ} (q : ℕ → Seminorm ℝ E)
+    (base high : ℕ) (x₀ : E) (d A : ℝ)
+    (h : ∃ J : SmoothDirections U f, ∀ x ∈ U, ∀ v : Fin 0 → E,
+      d * |J.D 0 x v| ≤ A * oneHighVariationWeight q base high (x - x₀) v)
+    (x : E) (hx : x ∈ U) :
+    d * |f x| ≤ A * (1 + q high (x - x₀)) := by
+  obtain ⟨J, hJ⟩ := h
+  simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
+    mul_one, add_zero, J.zero x hx] using hJ x hx Fin.elim0
+
+/-- Division by a scalar spatial weight keeps the same parameter tower
+and its complete one-high-factor budget. -/
+theorem smoothDirections_divide_spatialWeight_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U : Set E} {f : E → ℝ} (q : ℕ → Seminorm ℝ E)
+    (base high k a : ℕ) (x₀ : E) (d K W P A : ℝ)
+    (hd : 0 < d) (hW : 0 < W) (hdist : d⁻¹ ≤ K * W ^ P)
+    (h : ∃ J : SmoothDirections U f, ∀ x ∈ U, ∀ v : Fin k → E,
+      d ^ a * |J.D k x v| ≤ A * oneHighVariationWeight q base high (x - x₀) v) :
+    ∃ J : SmoothDirections U f, ∀ x ∈ U, ∀ v : Fin k → E,
+      |J.D k x v| ≤ K ^ a * W ^ (P * a) *
+        (A * oneHighVariationWeight q base high (x - x₀) v) := by
+  obtain ⟨J, hJ⟩ := h
+  refine ⟨J, fun x hx v => ?_⟩
+  exact abs_le_of_power_weight_bound a hd hW hdist (hJ x hx v)
+
 theorem opticalSpeed_lower_boundaryDistance
     {w : ℝ → ℝ} {l h r τ M : ℝ}
     (hl : 0 < l) (hlh : l < h) (hw : ContDiff ℝ ∞ w)
@@ -82,7 +112,7 @@ theorem opticalSpeed_lower_boundaryDistance
   apply (inv_le_iff_one_le_mul₀ hdpos).mpr
   rw [div_mul_eq_mul_div]
   apply (le_div_iff₀ (sq_pos_of_pos hτ)).mpr
-  simpa only [one_mul, mul_comm] using hsq'
+  simpa only [one_mul, mul_one, mul_comm] using hsq'
 
 theorem N01Properties.opticalCollar_inverse_boundaryDistance_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -166,23 +196,12 @@ theorem N01Properties.ordinaryFlowFamily_weighted_zeroth_bound
           (1 + pairGrading (stateGrading S) realGrading (s + loss)
             (z - (C.referenceState, 0))) := by
     intro z hz m a b p hab hp
-    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m a b p hab hp
-    have hraw : min (p.1 - C.left m) (C.right m - p.1) ^ a *
-        |J.D 0 z Fin.elim0| ≤
-        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B *
-          (1 + pairGrading (stateGrading S) realGrading (s + loss)
-            (z - (C.referenceState, 0))) := by
-      dsimp only [B]
-      simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-        mul_one, add_zero] using hJ z hz Fin.elim0
-    have heq : min (p.1 - C.left m) (C.right m - p.1) ^ a *
-        |J.D 0 z Fin.elim0| =
-        min (p.1 - C.left m) (C.right m - p.1) ^ a *
-          |ordinaryFlowFamily S C m a b p z| :=
-      congrArg (fun t : ℝ => min (p.1 - C.left m) (C.right m - p.1) ^ a * |t|)
-        (J.zero z hz)
-    exact heq.symm.le.trans hraw
+    exact smoothDirections_zeroth_spatialWeight_bound
+      (pairGrading (stateGrading S) realGrading) base (s + loss)
+      (C.referenceState, (0 : ℝ))
+      (min (p.1 - C.left m) (C.right m - p.1) ^ a)
+      (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+      (hdata.choose_spec.2 m a b p hab hp) z hz
   exact ⟨B, hB, hpoint⟩
 
 /-- The actual N01 spatial-flow jet estimate on the selected collars,
@@ -220,7 +239,14 @@ theorem N01Properties.ordinaryFlowFamily_collar_bound
     ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
   have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
     lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
-  exact abs_le_of_power_weight_bound a hd (Real.exp_pos _)
+  exact abs_le_of_power_weight_bound
+    (d := min (p.1 - C.left m) (C.right m - p.1))
+    (K := K) (E := radialE (D.cellIndex (j m))) (A := A)
+    (C := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B *
+      (1 + pairGrading (stateGrading S) realGrading (s + loss)
+        (z - (C.referenceState, 0))))
+    (y := ordinaryFlowFamily S C m a b p z) a hd (Real.exp_pos _)
     (hdist m p.1 hp) (hraw z hz m a b p hab hm)
 
 /-- The same two geometric constants precede every parameter and spatial
@@ -269,11 +295,14 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
       ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
     have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
       lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
-    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m a b p hab hm
-    refine ⟨J, fun z hz v => ?_⟩
-    dsimp only [B]
-    exact abs_le_of_power_weight_bound a hd (Real.exp_pos _)
-      (hdist m p.1 hp) (hJ z hz v)
+    exact smoothDirections_divide_spatialWeight_bound
+      (pairGrading (stateGrading S) realGrading) base (s + loss) k a
+      (C.referenceState, (0 : ℝ))
+      (min (p.1 - C.left m) (C.right m - p.1)) K
+      (radialE (D.cellIndex (j m))) A
+      (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+      hd (Real.exp_pos _) (hdist m p.1 hp)
+      (hdata.choose_spec.2 m a b p hab hm)
   exact Exists.intro B (And.intro hB hpoint)
 
 

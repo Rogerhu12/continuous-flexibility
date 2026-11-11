@@ -65,6 +65,53 @@ theorem projectiveJet_base_variation_le
     (fun t ht => hnorm t ⟨ht.1, ht.2.le⟩)
   simpa only [zero_smul, add_zero, one_smul, add_sub_cancel] using hm
 
+theorem continuousOn_projectiveJets_of_positive_seminorm_bounds
+    (A : ∀ n : ℕ, E → E [×n]→L[ℝ] ProjectiveLimit F bond)
+    (hU : IsOpen U) (hc : Convex ℝ U)
+    (hline : ∀ n x, x ∈ U → ∀ (v : Fin n → E) (w : E),
+      HasProjectiveLineDerivAt (fun y => A n y v) (A (n + 1) x (Fin.cons w v)) x w)
+    (hbound : ∀ n s, ∃ p : Seminorm ℝ E, ∃ B : ℝ, Continuous p ∧ 0 ≤ B ∧
+      ∀ x ∈ U, ∀ v : Fin (n + 1) → E,
+        ‖(A (n + 1) x v).val s‖ ≤ B * (1 + p x) * ∏ i, p (v i))
+    (n : ℕ) :
+    ContinuousOn (fun z : E × (Fin n → E) => A n z.1 z.2) (U ×ˢ univ) := by
+  have hcoordinate (s : ℕ) :
+      ContinuousOn (fun z : E × (Fin n → E) => (A n z.1 z.2).val s) (U ×ˢ univ) := by
+    obtain ⟨p, B, hp, hB, hb⟩ := hbound n s
+    rintro ⟨x, v⟩ hx
+    apply ContinuousAt.continuousWithinAt
+    apply tendsto_iff_norm_sub_tendsto_zero.mpr
+    let err : E × (Fin n → E) → ℝ := fun z =>
+      B * (1 + p x + p (z.1 - x)) * (p (z.1 - x) * ∏ j, p (z.2 j)) +
+        ‖(A n x z.2).val s - (A n x v).val s‖
+    have hpbase : Continuous (fun z : E × (Fin n → E) => p (z.1 - x)) :=
+      hp.comp (continuous_fst.sub continuous_const)
+    have hpdirs : Continuous (fun z : E × (Fin n → E) => ∏ j, p (z.2 j)) :=
+      continuous_finsetProd _ (fun j _ => hp.comp ((continuous_apply j).comp continuous_snd))
+    have hfixed : Continuous (fun z : E × (Fin n → E) => (A n x z.2).val s) :=
+      (projectiveCoordinate F bond s).continuous.comp
+        ((A n x).cont.comp continuous_snd)
+    have herr : Continuous err :=
+      ((continuous_const.mul (continuous_const.add hpbase)).mul (hpbase.mul hpdirs)).add
+        (hfixed.sub continuous_const).norm
+    have herr0 : err (x, v) = 0 := by
+      simp only [err, sub_self, map_zero, mul_zero, zero_mul,
+        norm_zero, add_zero]
+    have hmem : ∀ᶠ z : E × (Fin n → E) in 𝓝 (x, v), z.1 ∈ U :=
+      continuous_fst.continuousAt.eventually (hU.mem_nhds hx.1)
+    have hupper : ∀ᶠ z : E × (Fin n → E) in 𝓝 (x, v),
+        ‖(A n z.1 z.2).val s - (A n x v).val s‖ ≤ err z := by
+      filter_upwards [hmem] with z hz
+      have hbase := projectiveJet_base_variation_le A hline hc n s p hB hb hx.1 hz z.2
+      exact (norm_sub_le_norm_sub_add_norm_sub ((A n z.1 z.2).val s) ((A n x z.2).val s)
+        ((A n x v).val s)).trans (add_le_add hbase (le_refl _))
+    exact squeeze_zero' (Eventually.of_forall (fun _ => norm_nonneg _)) hupper
+      (by simpa only [herr0] using herr.tendsto (x, v))
+  intro z hz
+  rw [ContinuousWithinAt, tendsto_projectiveLimit_iff]
+  exact fun s => hcoordinate s z hz
+
+/-- The original all-order interface follows from the positive-order bound. -/
 theorem continuousOn_projectiveJets_of_seminorm_bounds
     (A : ∀ n : ℕ, E → E [×n]→L[ℝ] ProjectiveLimit F bond)
     (hU : IsOpen U) (hc : Convex ℝ U)
@@ -74,44 +121,26 @@ theorem continuousOn_projectiveJets_of_seminorm_bounds
       ∀ x ∈ U, ∀ v : Fin n → E,
         ‖(A n x v).val s‖ ≤ B * (1 + p x) * ∏ i, p (v i))
     (n : ℕ) :
-    ContinuousOn (fun z : E × (Fin n → E) => A n z.1 z.2) (U ×ˢ univ) := by
-  have hcoordinate (s : ℕ) :
-      ContinuousOn (fun z : E × (Fin n → E) => (A n z.1 z.2).val s) (U ×ˢ univ) := by
-    obtain ⟨p, B, hp, hB, hb⟩ := hbound (n + 1) s
-    obtain ⟨q, C, hq, hC, hcq⟩ := hbound n s
-    rintro ⟨x, v⟩ hx
-    apply ContinuousAt.continuousWithinAt
-    apply tendsto_iff_norm_sub_tendsto_zero.mpr
-    let err : E × (Fin n → E) → ℝ := fun z =>
-      B * (1 + p x + p (z.1 - x)) * (p (z.1 - x) * ∏ j, p (z.2 j)) +
-        C * (1 + q x) * seminormMultilinearDifference q v z.2
-    have hpbase : Continuous (fun z : E × (Fin n → E) => p (z.1 - x)) :=
-      hp.comp (continuous_fst.sub continuous_const)
-    have hpdirs : Continuous (fun z : E × (Fin n → E) => ∏ j, p (z.2 j)) :=
-      continuous_finsetProd _ (fun j _ => hp.comp ((continuous_apply j).comp continuous_snd))
-    have herr : Continuous err :=
-      ((continuous_const.mul (continuous_const.add hpbase)).mul (hpbase.mul hpdirs)).add
-        (continuous_const.mul ((continuous_seminormMultilinearDifference q hq v).comp continuous_snd))
-    have herr0 : err (x, v) = 0 := by
-      simp only [err, sub_self, map_zero, mul_zero, zero_mul,
-        seminormMultilinearDifference_self, add_zero]
-    have hmem : ∀ᶠ z : E × (Fin n → E) in 𝓝 (x, v), z.1 ∈ U :=
-      continuous_fst.continuousAt.eventually (hU.mem_nhds hx.1)
-    have hupper : ∀ᶠ z : E × (Fin n → E) in 𝓝 (x, v),
-        ‖(A n z.1 z.2).val s - (A n x v).val s‖ ≤ err z := by
-      filter_upwards [hmem] with z hz
-      have hbase := projectiveJet_base_variation_le A hline hc n s p hB hb hx.1 hz z.2
-      let Q := projectiveCoordinate F bond s
-      let M := Q.toLinearMap.compMultilinearMap (A n x).toMultilinearMap
-      have hdirs := norm_multilinear_sub_le_of_seminorm_bound M q (C * (1 + q x))
-        (hcq x hx.1) v z.2
-      exact (norm_sub_le_norm_sub_add_norm_sub ((A n z.1 z.2).val s) ((A n x z.2).val s)
-        ((A n x v).val s)).trans (add_le_add hbase hdirs)
-    exact squeeze_zero' (Eventually.of_forall (fun _ => norm_nonneg _)) hupper
-      (by simpa only [herr0] using herr.tendsto (x, v))
-  intro z hz
-  rw [ContinuousWithinAt, tendsto_projectiveLimit_iff]
-  exact fun s => hcoordinate s z hz
+    ContinuousOn (fun z : E × (Fin n → E) => A n z.1 z.2) (U ×ˢ univ) :=
+  continuousOn_projectiveJets_of_positive_seminorm_bounds A hU hc hline
+    (fun n s => hbound (n + 1) s) n
+
+def smoothDirectionsOfPositiveProjectiveJetBounds
+    {f : E → ProjectiveLimit F bond}
+    (A : ∀ n : ℕ, E → E [×n]→L[ℝ] ProjectiveLimit F bond)
+    (hU : IsOpen U) (hc : Convex ℝ U)
+    (hzero : ∀ x ∈ U, A 0 x Fin.elim0 = f x)
+    (hline : ∀ n x, x ∈ U → ∀ (v : Fin n → E) (w : E),
+      HasProjectiveLineDerivAt (fun y => A n y v) (A (n + 1) x (Fin.cons w v)) x w)
+    (hbound : ∀ n s, ∃ p : Seminorm ℝ E, ∃ B : ℝ, Continuous p ∧ 0 ≤ B ∧
+      ∀ x ∈ U, ∀ v : Fin (n + 1) → E,
+        ‖(A (n + 1) x v).val s‖ ≤ B * (1 + p x) * ∏ i, p (v i)) :
+    SmoothDirections U f where
+  open_domain := hU
+  D := A
+  zero := hzero
+  continuous := continuousOn_projectiveJets_of_positive_seminorm_bounds A hU hc hline hbound
+  derivative := hline
 
 def smoothDirectionsOfProjectiveJetBounds
     {f : E → ProjectiveLimit F bond}

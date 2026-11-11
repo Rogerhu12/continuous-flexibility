@@ -36,6 +36,8 @@ theorem componentFamily_eventually_zero_at_isolated_root
   have hlf : Set.Finite {m | l m = r₀} := by
     apply Set.Subsingleton.finite
     intro m hm n hn
+    change l m = r₀ at hm
+    change l n = r₀ at hn
     by_contra hmn
     let r := (r₀ + min (h m) (h n)) / 2
     have hmin : r₀ < min (h m) (h n) :=
@@ -52,6 +54,8 @@ theorem componentFamily_eventually_zero_at_isolated_root
   have hhf : Set.Finite {m | h m = r₀} := by
     apply Set.Subsingleton.finite
     intro m hm n hn
+    change h m = r₀ at hm
+    change h n = r₀ at hn
     by_contra hmn
     let r := (max (l m) (l n) + r₀) / 2
     have hmax : max (l m) (l n) < r₀ :=
@@ -69,8 +73,10 @@ theorem componentFamily_eventually_zero_at_isolated_root
     apply ((hlf.union hhf).eventually_all).mpr
     intro m hm
     rcases hm with hm | hm
-    · simpa only [hm] using hleft m
-    · simpa only [hm] using hright m
+    · change l m = r₀ at hm
+      simpa only [hm] using hleft m
+    · change h m = r₀ at hm
+      simpa only [hm] using hright m
   obtain ⟨δ, hδ, hisoδ⟩ := Metric.mem_nhds_iff.mp hiso
   filter_upwards [he, Metric.ball_mem_nhds r₀ hδ] with r her hr
   have hrabs : |r - r₀| < δ := by simpa only [Metric.mem_ball, Real.dist_eq] using hr

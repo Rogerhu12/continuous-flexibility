@@ -18,6 +18,8 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 local instance n02ProjectiveChartVariationStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 local instance n02ProjectiveChartVariationParameterSMul (S : PhysicalSpacesData) :
@@ -148,9 +150,15 @@ theorem N01Properties.hasProjectiveLineDerivAt_returnResidual_chartDirection
         ((S.circle (3 / 4 : ℝ)).decode q m θ) 0 := by
       apply hd.congr_of_eventuallyEq
       filter_upwards [stateChartLine_eventually_mem S C hz w] with t ht
-      rw [← stateChartLine_eq_add_smul]
-      exact (hdecode (stateChartLine S z w t) ht
-        (stateChartLine_sector S z w hsector hwodd t) m θ).symm
+      have he : stateChartLine S z w t =
+          (z.1 + t • ((0, (0, (0, w))) : AnnularState S), z.2) :=
+        stateChartLine_eq_add_smul S z w t
+      exact (congrArg (fun a : AnnularState S × ℝ => returnResidualField S C a m θ)
+        he.symm).trans
+        ((hdecode (stateChartLine S z w t) ht
+          (stateChartLine_sector S z w hsector hwodd t) m θ).symm.trans
+          (congrArg (fun a : AnnularState S × ℝ =>
+            (S.circle (3 / 4 : ℝ)).decode (f a) m θ) he))
     exact (hraw.unique (hN.hasDerivAt_returnResidual_chartDirection hS hT hz hsector
       w v (f z) hv hw (hdecode z hz hsector) m θ)).trans (hout m θ).symm
   exact Eq.mp (congrArg (fun a : CircleSpace S =>

@@ -52,6 +52,9 @@ private theorem coefficients_eq_of_profile_and_height
   congrArg₂ (fun (w : ℝ → ℝ) (h : PolarPoint → ℝ) =>
     (⟨polarLinearA w h, polarLinearB w h, polarCorrectedC w h⟩ : SymmetricCoefficients)) hw hh
 
+private theorem scalar_height_scaling_identity (a q u t : ℝ) :
+    a + q * (u + t * u) = a + (q + t * q) * u := by ring
+
 theorem originalCoefficients_height_scaling
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     (z : StateDirections S × ℝ) (t : ℝ) :
@@ -80,8 +83,10 @@ theorem originalCoefficients_height_scaling
     change stateRadialHeight D S C zL.1 p.1 + zL.2 * stateU S zL.1 p =
       stateRadialHeight D S C zR.1 p.1 +
         (z.2 + t * z.2) * stateU S (liftSectorParameter S C z).1 p
-    rw [hrad, hq, hfield]
-    ring
+    exact (congrArg₂ (fun a b : ℝ => a + b) (congrFun hrad p.1)
+      (congrArg₂ (fun a b : ℝ => a * b) hq (hfield p))).trans
+        (scalar_height_scaling_identity (stateRadialHeight D S C zR.1 p.1) z.2
+          (stateU S (liftSectorParameter S C z).1 p) t)
   exact (coefficients_eq_of_profile_and_height zL zR hw hh).trans
     (congrArg (originalCoefficients D S C) hright.symm)
 

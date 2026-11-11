@@ -96,9 +96,12 @@ theorem N01Properties.returnCorrectionResidualErrorField_eq_decoded_divergence
         angularPartial ((S.height (3 / 4 : ℝ)).decode η.1) q) p := by
   classical
   obtain ⟨hF, hG⟩ := hN.returnCorrectionErrorFluxes_eq_decoded_height hS R χ z ρ η
-  change (if p ∈ annularOpen D then
-    radialPartial (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p +
-    angularPartial (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p else 0) = _
-  rw [if_pos hp, hF, hG]
+  have hactual : returnCorrectionResidualErrorField D S C R χ z ρ η p =
+      radialPartial (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p +
+      angularPartial (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p :=
+    if_pos hp
+  exact hactual.trans (congrArg₂ (fun a b : ℝ => a + b)
+    (congrArg (fun f : PolarPoint → ℝ => radialPartial f p) hF)
+    (congrArg (fun f : PolarPoint → ℝ => angularPartial f p) hG))
 
 end ContinuousFlexibility.Statements

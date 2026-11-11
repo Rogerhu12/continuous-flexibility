@@ -192,9 +192,11 @@ theorem N01Properties.rightChartCandidate_positive_jets_uniform
   let F : ℝ → ℝ := fun t => stateLeftChart S z.1 m (C.minusReturnInverse z m t) - C.travel m
   have hF := hN.transportedLeftChart_contDiff hS hT hz hsector m
   apply iteratedDeriv_oddPart_abs_le hF n (fun t => ?_) θ
-  rw [iteratedDeriv_sub_const_of_pos
-    ((stateLeftChart_contDiff S z m (hS.2.1 (3 / 4 : ℝ))).comp
-      (hN.minusReturnInverse_contDiff hS hT hz hsector m)) n hn]
+  have hcomp : ContDiff ℝ ∞ (fun y : ℝ =>
+      stateLeftChart S z.1 m (C.minusReturnInverse z m y)) :=
+    (stateLeftChart_contDiff S z m (hS.2.1 (3 / 4 : ℝ))).comp
+      (hN.minusReturnInverse_contDiff hS hT hz hsector m)
+  rw [iteratedDeriv_sub_const_of_pos hcomp n hn]
   exact hbound m t
 
 theorem N01Properties.rightChartInverse_positive_jets_uniform

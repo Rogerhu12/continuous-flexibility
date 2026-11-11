@@ -21,6 +21,8 @@ local instance n01SectorFlowTowerRealNormedSpace : NormedSpace ℝ ℝ := Normed
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 private theorem sector_drop_zero_power_factor {a b c : ℝ}
     (h : c ^ (0 : ℕ) * a ≤ b) : a ≤ b := by
   simpa only [pow_zero, one_mul] using h
@@ -37,7 +39,9 @@ theorem N01Properties.sectorFlow_tower
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) z v := by
-  obtain ⟨B, hB, hdata⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m b : ℕ) (θ r : ℝ), b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
@@ -47,7 +51,10 @@ theorem N01Properties.sectorFlow_tower
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) z v := by
     intro m b θ r hb hr
-    obtain ⟨J, hJ⟩ := hdata m 0 b (r, θ) (by simpa only [zero_add] using hb) hr
+    let htower := hdata.choose_spec.2 m 0 b (r, θ)
+      (by simpa only [zero_add] using hb) hr
+    let J := htower.choose
+    have hJ := htower.choose_spec
     have hmap : MapsTo (fun z : StateDirections S × ℝ =>
         (C.referenceState, 0) + sectorParameterInclusion S z)
         (sectorNeighborhood S base ε ε) (stateNeighborhood S C base ε) := by
