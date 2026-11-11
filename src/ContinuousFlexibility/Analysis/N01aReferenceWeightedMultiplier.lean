@@ -83,10 +83,14 @@ theorem n01a_weighted_radial_multiplier_memLp {D : ReferenceData}
     dsimp only [F]
     unfold Radial.cosineMode
     fun_prop
+  have hrem : outputRemainder D 0
+      ((fun p => f p.1 * Radial.cosineMode 2 p.2), 0) = F := by
+    funext p
+    simp only [outputRemainder, zero_mul, sub_zero, F]
   have hcell : RadialCellIntegrable D F := by
-    simpa only [outputRemainder, zero_mul, sub_zero] using houtput.1
+    simpa only [hrem] using houtput.1
   have hsum : Summable (outputCellSquare D γ M F) := by
-    simpa only [outputRemainder, zero_mul, sub_zero] using houtput.2.1
+    simpa only [hrem] using houtput.2.1
   have hV := n01a_reference_multiplier_memLp hab hpart hF hcell hsum hg hK hbound
   have hm := referenceMode_memLp_two hV 2
   have heq : referenceMode (fun p => g p.1 * F p) 2 = fun r => g r * f r := by

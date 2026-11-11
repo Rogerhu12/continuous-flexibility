@@ -65,7 +65,7 @@ theorem n01a_affine_scalar_rpow_jets {D : ReferenceData} {sample : ℕ → ℝ}
     hf.log (fun r hr => (hp r hr).ne')
   let L : ℝ → ℝ := fun x => Real.log (f (T.radius x)) * γ
   have hL : ContDiff ℝ ∞ L :=
-    (hlf.comp_contDiff contDiff_affineMaterialData_radius hi).mul contDiff_const
+    (hlf.comp_contDiff (contDiff_affineMaterialData_radius (sample := sample)) hi).mul contDiff_const
   have hLb (k : ℕ) (hk : 0 < k) :
       ∃ C : ℝ, 0 ≤ C ∧ ∀ x, |iteratedDeriv k L x| ≤ C := by
     obtain ⟨C, hC, hb⟩ := hlog k hk
@@ -88,12 +88,15 @@ theorem n01a_affine_H_rpow_jets {D : ReferenceData} {sample : ℕ → ℝ}
       |iteratedDeriv n (fun t => (affineMaterialData D sample).H
           ((affineMaterialData D sample).radius t) ^ γ) x| ≤
         C * (affineMaterialData D sample).H ((affineMaterialData D sample).radius x) ^ γ := by
-  apply n01a_affine_scalar_rpow_jets hab
-    (affineMaterialData_smooth_scalar hab _ (by simp))
-    (fun r hr => (affineMaterialData_positive hab hr).2.1) _ γ n
-  intro k hk
-  obtain ⟨C, hC, hb⟩ := logarithmicDerivativeBounds_affineMaterialData (sample := sample) hab k hk
-  exact ⟨C, hC, fun r hr => (hb r hr).1⟩
+  let T := affineMaterialData D sample
+  have hH : ContDiffOn ℝ ∞ T.H (radialCore D) :=
+    affineMaterialData_smooth_scalar (sample := sample) hab T.H (by simp [T])
+  have hlog (k : ℕ) (hk : 0 < k) : ∃ C : ℝ, 0 ≤ C ∧ ∀ r ∈ radialCore D,
+      |materialDerivativeIterate T k (fun y => Real.log (T.H y)) r| ≤ C := by
+    obtain ⟨C, hC, hb⟩ := logarithmicDerivativeBounds_affineMaterialData (sample := sample) hab k hk
+    exact ⟨C, hC, fun r hr => (hb r hr).1⟩
+  exact n01a_affine_scalar_rpow_jets (sample := sample) hab hH
+    (fun r hr => (affineMaterialData_positive (sample := sample) hab hr).2.1) hlog γ n
 
 theorem n01a_affine_radius_jets {D : ReferenceData} {sample : ℕ → ℝ}
     (hab : D.a < D.b) (n : ℕ) :
@@ -109,7 +112,7 @@ theorem n01a_affine_radius_jets {D : ReferenceData} {sample : ℕ → ℝ}
         by linarith [(hi x).2, le_abs_self D.b, abs_nonneg D.a]⟩
   | succ n =>
       have hell : ContDiffOn ℝ ∞ T.ell (radialCore D) :=
-        affineMaterialData_smooth_scalar hab _ (by simp [T])
+        affineMaterialData_smooth_scalar (sample := sample) hab _ (by simp [T])
       have hp (r : ℝ) (hr : r ∈ radialCore D) : 0 < T.ell r :=
         (affineMaterialData_positive (sample := sample) hab hr).1
       have hlog (k : ℕ) (hk : 0 < k) : ∃ C : ℝ, 0 ≤ C ∧ ∀ r ∈ radialCore D,
@@ -117,13 +120,14 @@ theorem n01a_affine_radius_jets {D : ReferenceData} {sample : ℕ → ℝ}
         obtain ⟨C, hC, hb⟩ := logarithmicDerivativeBounds_affineMaterialData
           (sample := sample) hab k hk
         exact ⟨C, hC, fun r hr => (hb r hr).2.2⟩
-      obtain ⟨C, hC, hb⟩ := n01a_affine_scalar_rpow_jets hab hell hp hlog 1 n
+      obtain ⟨C, hC, hb⟩ := n01a_affine_scalar_rpow_jets (sample := sample) hab hell hp hlog 1 n
       have hd : deriv T.radius = fun x => T.ell (T.radius x) :=
         funext fun x => (hasDerivAt_affineMaterialData_radius (sample := sample) hab x).deriv
       refine ⟨C * (D.b - D.a), mul_nonneg hC (sub_pos.mpr hab).le, fun x => ?_⟩
       rw [iteratedDeriv_succ', hd]
       have hb' : |iteratedDeriv n (fun t => T.ell (T.radius t)) x| ≤ C * T.ell (T.radius x) := by
         simpa only [Real.rpow_one] using hb x
-      exact hb'.trans (mul_le_mul_of_nonneg_left (n01a_affine_ell_upper hab (hi x)) hC)
+      exact hb'.trans (mul_le_mul_of_nonneg_left
+        (n01a_affine_ell_upper (sample := sample) hab (hi x)) hC)
 
 end ContinuousFlexibility.Statements

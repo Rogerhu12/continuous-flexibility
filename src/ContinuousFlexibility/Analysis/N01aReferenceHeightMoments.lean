@@ -29,7 +29,7 @@ theorem n01a_memLp_comp_affineRadius_of_density {D : ReferenceData} {sample : �
   have hinside (x : ℝ) : T.radius x ∈ radialCore D :=
     (affineMaterialData_radius_mem_rho (sample := sample) hab x).1
   have hc : Continuous (fun x => f (T.radius x)) :=
-    hf.comp_continuous contDiff_affineMaterialData_radius.continuous hinside
+    hf.comp_continuous (contDiff_affineMaterialData_radius (sample := sample)).continuous hinside
   have himage : T.rho '' radialCore D = univ := by
     apply Set.eq_univ_iff_forall.mpr
     intro x
@@ -63,7 +63,8 @@ theorem n01a_reference_material_moment_memLp {D : ReferenceData} {sample : ℕ �
       (affineMaterialData D sample).H ((affineMaterialData D sample).radius x) ^ (-β) *
       f ((affineMaterialData D sample).radius x)) 2 volume := by
   let T := affineMaterialData D sample
-  obtain ⟨C, hbounds⟩ := hD
+  have hprofile := hD
+  obtain ⟨C, hbounds⟩ := hprofile
   have hgeom := hbounds.1
   have hpart := hbounds.2.1
   have hab : D.a < D.b := hgeom.2.1

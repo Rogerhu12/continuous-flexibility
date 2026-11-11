@@ -51,8 +51,13 @@ theorem n01aEndpointOffset_interval (D : ReferenceData) (left : Bool) (R r : ℝ
 theorem n01aCellTag_same_side (D : ReferenceData) (p : ℕ → ℝ) {i j : ℕ}
     (hij : n01aCellTag D p i = n01aCellTag D p j) :
     (p i ≤ (D.a + D.b) / 2 ↔ p j ≤ (D.a + D.b) / 2) := by
+  have hindex := congrArg (fun n : ℕ => n / 2) hij
+  simp only [n01aCellTag_div_two] at hindex
   unfold n01aCellTag at hij
-  split_ifs at hij with hi hj <;> simp_all <;> omega
+  rw [hindex] at hij
+  have hside := Nat.add_left_cancel hij
+  by_cases hi : p i ≤ (D.a + D.b) / 2 <;>
+    by_cases hj : p j ≤ (D.a + D.b) / 2 <;> simp_all
 
 theorem n01a_cell_endpoint_bound (D : ReferenceData) (C : ℕ → ℝ)
     (hC : AccumulatingProfileBounds D C) (p : ℕ → ℝ)

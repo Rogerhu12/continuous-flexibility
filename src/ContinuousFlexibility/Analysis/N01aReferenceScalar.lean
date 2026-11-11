@@ -85,7 +85,8 @@ theorem referenceGraph_pure_row_scalar_eq_zero {D : ReferenceData}
     exists_smooth_reference_scalar_bound hgeo hpart hkernel hborder hγ M₀
   obtain ⟨Un, Fn, an, hn, hF, hU⟩ := hcore U ((0 : PolarPoint → ℝ), η) hgraph
   have hscalar0 : Tendsto (fun n => (Un n).2) atTop (𝓝 0) := by
-    apply tendsto_zero_iff_abs_tendsto_zero.mpr
+    apply (tendsto_zero_iff_abs_tendsto_zero _).mpr
+    simp only [Function.comp_def]
     apply squeeze_zero' (Eventually.of_forall fun n => abs_nonneg ((Un n).2))
       (Eventually.of_forall fun n => hbound M₁ (Un n) (Fn n) (hn n).1 (hn n).2.1 η)
     simpa only [Real.sqrt_zero, mul_zero] using hF.sqrt.const_mul K

@@ -76,7 +76,7 @@ private theorem n01a_tendsto_zero_of_square_bound {f g : ℕ → ℝ}
     squeeze_zero' (Eventually.of_forall fun n => sq_nonneg (f n))
       (Eventually.of_forall hfg) hg
   apply (tendsto_zero_iff_abs_tendsto_zero _).mpr
-  simpa only [Real.sqrt_sq_eq_abs, Real.sqrt_zero] using hsq.sqrt
+  simpa only [Function.comp_def, Real.sqrt_sq_eq_abs, Real.sqrt_zero] using hsq.sqrt
 
 theorem tendsto_source_scalar_of_normSquare {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M : ℝ) (F : ℕ → RadialSource)

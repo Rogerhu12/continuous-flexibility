@@ -32,7 +32,7 @@ theorem n01a_affine_inv_ell_le_M {D : ReferenceData} {sample : ℕ → ℝ}
     zero_le_one.trans (affineMaterialData_positive (sample := sample) hab hr).2.2.2
   have he : (affineMaterialData D sample).E0 r ^ (2 : ℕ) ≤
       B * (affineMaterialData D sample).M r := by
-    simpa only [Real.rpow_natCast] using hb r hr
+    simpa only [Real.rpow_two] using hb r hr
   calc
     _ ≤ A * (B * (affineMaterialData D sample).M r) :=
       (ha r hr).trans (mul_le_mul_of_nonneg_left he hA)
@@ -89,8 +89,9 @@ theorem n01a_affine_height_cell_density_bound {D : ReferenceData} {sample : ℕ 
         K * Real.exp (-2 * M * radialQ (D.cellIndex m) +
           2 * (β + ε) * radialS (D.cellIndex m)) := by
   let T := affineMaterialData D sample
+  have hprofile := hD
   obtain ⟨C, hgeom, hpart, hC, hnonempty, hfinite, hlocal, hdist,
-    hlower, hwjets, hinvjets, hwidth, habsorb, htrace⟩ := hD
+    hlower, hwjets, hinvjets, hwidth, habsorb, htrace⟩ := hprofile
   obtain ⟨A, hA, ha⟩ := n01a_affine_height_density_bound
     (sample := sample) hgeom.2.1 β hε k
   obtain ⟨_, J, _, hJ, hj⟩ := affineMaterialData_cell_log_bounds (sample := sample) hD

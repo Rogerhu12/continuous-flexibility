@@ -40,6 +40,7 @@ theorem measure_eq : radialPhysicalMeasure E = radialPhysicalMeasure D := by
   simp only [radialPhysicalMeasure, h.core_eq]
 
 theorem column_eq : referenceColumn E = referenceColumn D := by
+  funext r
   simp only [referenceColumn, h.w_eq, h.phi_eq, h.chi_eq]
 
 theorem row_eq (u : PolarPoint → ℝ) : referenceRow E u = referenceRow D u := by
@@ -47,6 +48,7 @@ theorem row_eq (u : PolarPoint → ℝ) : referenceRow E u = referenceRow D u :=
 
 theorem remainder_eq (aL : ℝ) (U : RadialUnknown) :
     outputRemainder E aL U = outputRemainder D aL U := by
+  funext p
   simp only [outputRemainder, h.chiLeft_eq]
 
 theorem test_iff (ψ : PolarPoint → ℝ) : RadialTest E ψ ↔ RadialTest D ψ := by
@@ -98,6 +100,7 @@ theorem cell_integrable_iff (hD : RadialPartition D) (hE : RadialPartition E)
     intro j
     have hc := n01aCoarseLocalizer_square_integrable (radialPhysicalMeasure D)
       σ h.finite_fibers hm (hf.aemeasurable_sq hD) (fun i => hf.integrable_square i) j
+    change Integrable (fun p => (E.localizer j p.1 * f p) ^ 2) (radialPhysicalMeasure E)
     simpa only [h.coarse_localizer_apply, ← h.measure_eq] using hc
 
 end N01aReferenceCoarsening

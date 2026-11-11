@@ -34,7 +34,7 @@ theorem n01a_tendstoInMeasure_of_integral_sq {α : Type*} [MeasurableSpace α]
       atTop (𝓝 0) := by
     have hsqrt : Tendsto (fun n => Real.sqrt (∫ x, (f n x - g x) ^ 2 ∂μ))
         atTop (𝓝 0) := by simpa only [Real.sqrt_zero] using hlim.sqrt
-    simpa only [heq, ENNReal.ofReal_zero] using
+    simpa only [Function.comp_def, heq, ENNReal.ofReal_zero] using
       (ENNReal.continuous_ofReal.tendsto 0).comp hsqrt
   have habs : TendstoInMeasure μ (fun n x => |f n x - g x|) atTop (fun _ => 0) := by
     apply tendstoInMeasure_of_tendsto_eLpNorm (p := 2) (by norm_num)

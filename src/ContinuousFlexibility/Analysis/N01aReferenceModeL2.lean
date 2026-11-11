@@ -65,7 +65,8 @@ theorem radialAngularMean_mul_cosine_sq_le {f : ℝ → ℝ}
           (mul_le_mul_of_nonneg_left habs (Real.sqrt_nonneg _)) (by positivity)
       _ = _ := by unfold referenceModeL2Constant; ring
   have h := pow_le_pow_left₀ (abs_nonneg _) hb 2
-  simpa only [sq_abs, mul_pow, Real.sq_sqrt (integral_nonneg fun _ => sq_nonneg _)] using h
+  have hI : 0 ≤ ∫ θ, f θ ^ 2 ∂ν := integral_nonneg fun θ => sq_nonneg (f θ)
+  simpa only [sq_abs, mul_pow, Real.sq_sqrt hI] using h
 
 theorem referenceMode_mul_radial (a : ℝ → ℝ) (u : PolarPoint → ℝ)
     (j : ℕ) (r : ℝ) :

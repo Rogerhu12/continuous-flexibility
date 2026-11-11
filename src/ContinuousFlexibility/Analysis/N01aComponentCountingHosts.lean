@@ -43,7 +43,7 @@ theorem exists_n01a_cell_index_bound_before_right_band {D : ReferenceData} {C : 
       _ ≤ p - D.a := hkLeft
       _ ≤ y - D.a := sub_le_sub_right hpy _
   have hright : k * Real.exp (-N ^ 2) ≤ D.b - y := by
-    have hhalf := mul_le_mul_of_nonneg_right hkHalf (Real.exp_pos _).le
+    have hhalf := mul_le_mul_of_nonneg_right hkHalf (Real.exp_pos (-N ^ 2)).le
     linarith only [hhalf, hyr, hr]
   have hdist : min (y - D.a) (D.b - y) ≤ C 0 * Real.exp (-(D.cellIndex m : ℝ) ^ 2) :=
     (hD.2.2.2.2.2.2.1 m y hym).2

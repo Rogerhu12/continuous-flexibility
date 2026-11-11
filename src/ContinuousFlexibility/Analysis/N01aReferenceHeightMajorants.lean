@@ -84,6 +84,20 @@ theorem N01aPointwiseBound.const_mul (hf : N01aPointwiseBound U E W f)
     N01aPointwiseBound U E W (fun x => c * f x) :=
   (n01aPointwiseBound_const c).coeff_mul hf hE
 
+theorem N01aPointwiseBound.mul {V : ℝ → ℝ}
+    (hf : N01aPointwiseBound U E V f) (hg : N01aPointwiseBound U E W g)
+    (hE : ∀ x ∈ U, 0 ≤ E x) (hV : ∀ x ∈ U, 0 ≤ V x) :
+    N01aPointwiseBound U E (fun x => V x * W x) (fun x => f x * g x) := by
+  obtain ⟨k, A, hA, ha⟩ := hf
+  obtain ⟨l, B, hB, hb⟩ := hg
+  refine ⟨k + l, A * B, mul_nonneg hA hB, fun x hx => ?_⟩
+  calc
+    _ = |f x| * |g x| := abs_mul _ _
+    _ ≤ (A * E x ^ k * V x) * (B * E x ^ l * W x) :=
+      mul_le_mul (ha x hx) (hb x hx) (abs_nonneg _)
+        (mul_nonneg (mul_nonneg hA (pow_nonneg (hE x hx) _)) (hV x hx))
+    _ = _ := by rw [pow_add]; ring
+
 theorem n01aPointwiseBound_sum {ι : Type*} (s : Finset ι) (f : ι → ℝ → ℝ)
     (hE : ∀ x ∈ U, 1 ≤ E x) (hW : ∀ x ∈ U, 0 ≤ W x)
     (hf : ∀ i ∈ s, N01aPointwiseBound U E W (f i)) :
@@ -137,6 +151,28 @@ theorem n01aPointwiseBound_iteratedDeriv_mul (k : ℕ)
   exact (iteratedDeriv_mul ((hf x hx).of_le (by simp))
     ((hg x hx).of_le (by simp))).symm
 
+theorem n01aPointwiseBound_iteratedDeriv_weighted_mul {V : ℝ → ℝ} (k : ℕ)
+    (hE : ∀ x ∈ U, 1 ≤ E x) (hV : ∀ x ∈ U, 0 ≤ V x) (hW : ∀ x ∈ U, 0 ≤ W x)
+    (hf : ∀ x ∈ U, ContDiffAt ℝ ∞ f x) (hg : ∀ x ∈ U, ContDiffAt ℝ ∞ g x)
+    (hfB : ∀ i ≤ k, N01aPointwiseBound U E V (iteratedDeriv i f))
+    (hgB : ∀ i ≤ k, N01aPointwiseBound U E W (iteratedDeriv i g)) :
+    N01aPointwiseBound U E (fun x => V x * W x)
+      (iteratedDeriv k (fun x => f x * g x)) := by
+  have hsum : N01aPointwiseBound U E (fun x => V x * W x)
+      (fun x => ∑ i ∈ Finset.range (k + 1),
+        (k.choose i : ℝ) * iteratedDeriv i f x * iteratedDeriv (k - i) g x) := by
+    apply n01aPointwiseBound_sum _ _ hE (fun x hx => mul_nonneg (hV x hx) (hW x hx))
+    intro i hi
+    have hi' : i ≤ k := Nat.le_of_lt_succ (Finset.mem_range.mp hi)
+    have hm := (hfB i hi').mul (hgB (k - i) (Nat.sub_le _ _))
+      (fun x hx => zero_le_one.trans (hE x hx)) hV
+    simpa only [mul_assoc] using hm.const_mul
+      (fun x hx => zero_le_one.trans (hE x hx)) (k.choose i : ℝ)
+  apply hsum.congr
+  intro x hx
+  exact (iteratedDeriv_mul ((hf x hx).of_le (by simp))
+    ((hg x hx).of_le (by simp))).symm
+
 end Majorants
 
 /-- Actual derivatives of a scalar second-order equation retain its
@@ -164,7 +200,8 @@ theorem n01aPointwiseJets_of_secondOrder {U : Set ℝ} (hU : IsOpen U)
           | zero =>
               apply n01aPointwiseBound_of_le
               intro x hx
-              simpa only [iteratedDeriv_one] using le_add_of_nonneg_left (abs_nonneg (f x))
+              change |deriv f x| ≤ |f x| + |deriv f x|
+              exact le_add_of_nonneg_left (abs_nonneg (f x))
           | succ k =>
               have hfa := n01aPointwiseBound_iteratedDeriv_mul k hE hW
                 (fun x hx => (ha x hx).contDiffAt (hU.mem_nhds hx))
@@ -181,9 +218,11 @@ theorem n01aPointwiseJets_of_secondOrder {U : Set ℝ} (hU : IsOpen U)
                   (fun y => a y * f y + b y * deriv f y) := by
                 filter_upwards [hU.mem_nhds hx] with y hy
                 exact hode y hy
-              rw [iteratedDeriv_succ', iteratedDeriv_succ', heq.iteratedDeriv_eq k,
-                iteratedDeriv_add
-                  (((ha.mul hf) x hx).contDiffAt (hU.mem_nhds hx) |>.of_le (by simp))
-                  (((hb.mul hf') x hx).contDiffAt (hU.mem_nhds hx) |>.of_le (by simp))]
+              rw [iteratedDeriv_succ', iteratedDeriv_succ', heq.iteratedDeriv_eq k]
+              dsimp only
+              exact (iteratedDeriv_fun_add
+                (f := fun y => a y * f y) (g := fun y => b y * deriv f y)
+                (((ha.mul hf) x hx).contDiffAt (hU.mem_nhds hx) |>.of_le (by simp))
+                (((hb.mul hf') x hx).contDiffAt (hU.mem_nhds hx) |>.of_le (by simp))).symm
 
 end ContinuousFlexibility.Statements

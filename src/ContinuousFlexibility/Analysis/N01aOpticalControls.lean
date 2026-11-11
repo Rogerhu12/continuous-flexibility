@@ -95,7 +95,9 @@ theorem exists_n01a_uniform_opticalControls {ι : Type*}
   · intro i
     have hd := hasDerivAt_n01aOpticalControl_travel (hl i) (hgeom i).2.1 (hδ i)
       hw (hpos i) (hneg i) (hroots i).1 (hroots i).2 (hkernel i).1
-    simpa only [χ, opticalTravel, opticalLogPerturbation, opticalSpeed] using hd
+    have hpert (t : ℝ) : opticalLogPerturbation w (n01aOpticalControl w (l i) (h i) (δ i)) t =
+        (fun x => w x * Real.exp (t * χ i x)) := rfl
+    simpa only [opticalTravel, opticalSpeed, hpert] using hd
   · intro s
     obtain ⟨Aₛ, hAₛ, hfinite⟩ := n01aOptical_finite_weightedJet_bound hE hjets s
     have hAₛpos : 0 < Aₛ := zero_lt_one.trans_le hAₛ

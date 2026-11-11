@@ -31,11 +31,12 @@ theorem abs_radial_pairing_le_sqrt_squares {D : ReferenceData} (hab : D.a ≤ D.
   have hraw := abs_radial_pairing_le_integral_abs hab hprod
     (ψ := fun _ => 1) (B := 1) zero_le_one (fun _ => by norm_num)
   have hholder := n01a_abs_integral_mul_le_sqrt_sq hf2 hg2
+  have hprod_nonneg : 0 ≤ ∫ p, |f p| * |g p| ∂radialPhysicalMeasure D :=
+    integral_nonneg fun p => mul_nonneg (abs_nonneg (f p)) (abs_nonneg (g p))
   have hi : (∫ p, |f p * g p| ∂radialPhysicalMeasure D) ≤
       Real.sqrt (∫ p, f p ^ 2 ∂radialPhysicalMeasure D) *
         Real.sqrt (∫ p, g p ^ 2 ∂radialPhysicalMeasure D) := by
-    simpa only [abs_mul, sq_abs,
-      abs_of_nonneg (integral_nonneg fun p => mul_nonneg (abs_nonneg (f p)) (abs_nonneg (g p)))]
+    simpa only [abs_mul, sq_abs, abs_of_nonneg hprod_nonneg]
       using hholder
   apply (show |∫ r in D.a..D.b,
       radialAngularMean (fun θ => f (r, θ) * g (r, θ))| ≤
