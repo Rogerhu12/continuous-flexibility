@@ -103,9 +103,9 @@ theorem weakAngularDerivative_of_contDiff {D : ReferenceData} {u : PolarPoint �
       radialAngularMean (fun θ => u (r, θ) * angularPartial ψ (r, θ)) =
         -radialAngularMean (fun θ => angularPartial u (r, θ) * ψ (r, θ)) := by
     have hub : u (r, 2 * Real.pi) = u (r, 0) := by
-      simpa only [Prod.fst_add, Prod.snd_add, add_zero, zero_add] using hp (r, 0)
+      simpa only [Prod.mk_add_mk, add_zero, zero_add] using hp (r, 0)
     have hψb : ψ (r, 2 * Real.pi) = ψ (r, 0) := by
-      simpa only [Prod.fst_add, Prod.snd_add, add_zero, zero_add] using hψ.2.1 (r, 0)
+      simpa only [Prod.mk_add_mk, add_zero, zero_add] using hψ.2.1 (r, 0)
     have h := intervalIntegral.integral_mul_deriv_eq_deriv_mul
       (a := (0 : ℝ)) (b := 2 * Real.pi)
       (u := fun θ => u (r, θ)) (v := fun θ => ψ (r, θ))

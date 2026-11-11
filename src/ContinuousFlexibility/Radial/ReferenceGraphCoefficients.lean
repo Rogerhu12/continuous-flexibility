@@ -32,6 +32,7 @@ theorem reference_basis_lift_test {D : ReferenceData} {φ : ℝ → ℝ}
     have hz : φ r = 0 := by
       by_contra h
       exact hr (subset_tsupport φ (Function.mem_support.mpr h))
+    change φ r * referenceAngularBasis n θ = 0
     rw [hz, zero_mul]
 
 theorem radialPDE_reference_basis_lift {w φ : ℝ → ℝ}
@@ -176,7 +177,11 @@ theorem referenceRadialCoefficient_output_zero_weighted {D : ReferenceData}
     (hu : OutputRealization D γ M 0 (u, 0)) (n : ℕ) :
     ReferenceRadialWeighted D γ (-2 * M) (referenceRadialCoefficient u n) := by
   have h := referenceRadialCoefficient_output_weighted_remainder hab hu n
-  simpa only [outputRemainder, zero_mul, sub_zero] using h
+  have he : outputRemainder D 0 (u, 0) = u := by
+    funext x
+    simp only [outputRemainder, zero_mul, sub_zero]
+  rw [he] at h
+  exact h
 
 end
 
