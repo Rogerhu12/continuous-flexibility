@@ -178,7 +178,10 @@ Then open a draft pull request into `main` titled `<Task>`.
 
 ## When you finish
 
-1. Mark your pull request ready for review and write the final report in it.
+1. Merge the current `origin/main` into your branch, push, and wait until CI is green on that
+   merge. Other lines land on `main` every hour; a branch that was green before can clash with
+   them (two declarations of the same name, a changed shared file). Then mark your pull request
+   ready for review and write the final report in it.
 2. Take the next task that nobody has: the first one in the list "Pick next" of `docs/STATUS.md`
    whose branch does not exist. Claim it as above and continue. Do not wait for a review.
 3. If your own task turned out to need a sub-blueprint, its pieces go to the top of the candidates:

@@ -78,7 +78,7 @@ theorem coarse_cost_and_correction (CC CM : ℝ) (K q : ℕ) (hq : 1 ≤ q) :
     P.dirichletConstant CC CM * radialE (S.chain.index + K) ^ (37 : ℝ) +
       2 * P.poissonConstant ^ 2 / ((2 : ℝ) * q) ^ 2 ≤
         radialE (S.chain.index + K) ^ P.inverseCoarseExponent CC CM := by
-  apply (add_le_add_left (inner_selected_even_correction_le P.poissonConstant hq) _).trans
+  apply (add_le_add le_rfl (inner_selected_even_correction_le P.poissonConstant hq)).trans
   exact inner_coefficient_absorb_cost_and_correction
     (P.dirichletConstant_pos CC CM).le (by positivity) (by norm_num)
     (P.band_coefficient_log_ge_one K)

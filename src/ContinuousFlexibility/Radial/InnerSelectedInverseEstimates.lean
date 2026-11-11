@@ -62,7 +62,7 @@ theorem inverse_localized_bound
     hX hsupport K q hq hband hS ha hN hNa hCM hη hηsmall hγ L
     (innerMorseInnerSupportedLoss_norm_le_one S.chain.index K (P.chain K) (decide (q = 1))
       37 (by norm_num)) true hD).trans
-        (add_le_add_left (inner_selected_even_correction_le P.poissonConstant hq) _)
+        (add_le_add le_rfl (inner_selected_even_correction_le P.poissonConstant hq))
   simpa only [innerMorseInnerSupportedLocalizedWeight_eq_loss_comp, L, W,
     innerHilbertWeight, Bool.not_true, Bool.false_eq_true, ite_true, ite_false,
     ContinuousLinearMap.comp_assoc, inverseLocalizedConstant] using h

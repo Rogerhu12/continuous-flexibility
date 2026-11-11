@@ -24,6 +24,8 @@ structure SeedPureTail (D : ReferenceData) (right : Bool) (entry : ℝ) (u : ℝ
     profile r = 0 ∧ height r = 0
   tail_eq : ∀ r ∈ radialTailInterval D right entry, profile r = D.w r ∧ height r = u r
   positive : ∀ r ∈ seedConeTailDomain D right, 0 < profile r
+  inward_increasing : ∀ r, 0 < r → (if right then r ≤ entry else entry ≤ r) →
+    0 < deriv profile r
   simple_critical : ∀ r ∈ seedConeTailDomain D right,
     deriv profile r = 0 → deriv (deriv profile) r ≠ 0
   homogeneous : ∀ r ∈ seedConeTailDomain D right, radialJacobi 4 profile height r = 0

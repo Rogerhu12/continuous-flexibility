@@ -135,7 +135,11 @@ theorem innerRadialPhysicalWeakGraph_scalarSign_iff (u F : H) :
   · intro h
     have h' := innerRadialPhysicalWeakGraph_scalarSign D hw G bordered j central
       (-column) h
-    simpa only [neg_neg, innerSupportedScalarSign_involutive] using h'
+    simpa only [neg_neg,
+      innerSupportedScalarSign_involutive (radialHilbertMeasure D)
+        (innerRadialChainRegion D G) bordered u,
+      innerSupportedScalarSign_involutive (radialHilbertMeasure D)
+        (innerRadialChainRegion D G) bordered F] using h'
   · exact innerRadialPhysicalWeakGraph_scalarSign D hw G bordered j central column
 
 /-- Equivalently, a solution in the manuscript convention is obtained
@@ -143,7 +147,11 @@ by applying the same involution to the original source and solution. -/
 theorem innerRadialPhysicalWeakGraph_negColumn_iff (u F : H) :
     InnerRadialPhysicalWeakGraph D hw G bordered j central (-column) u F ↔
       InnerRadialPhysicalWeakGraph D hw G bordered j central column (J u) (J F) := by
-  simpa only [innerSupportedScalarSign_involutive] using
+  simpa only [
+    innerSupportedScalarSign_involutive (radialHilbertMeasure D)
+      (innerRadialChainRegion D G) bordered u,
+    innerSupportedScalarSign_involutive (radialHilbertMeasure D)
+      (innerRadialChainRegion D G) bordered F] using
     innerRadialPhysicalWeakGraph_scalarSign_iff D hw G bordered j central column (J u) (J F)
 
 end PhysicalGraph
@@ -192,7 +200,9 @@ theorem innerRadialScalarSignInverse_graph_iff (A : H →L[ℝ] H)
     rw [h, innerSupportedScalarSign_involutive]
   · intro h
     have h' := congrArg J h
-    simpa only [innerSupportedScalarSign_involutive] using h'
+    simpa only [
+      innerSupportedScalarSign_involutive (radialHilbertMeasure D)
+        (innerRadialChainRegion D G) bordered (A (J F))] using h'
 
 theorem innerRadialScalarSignInverse_right_inverse (A : H →L[ℝ] H)
     (hA : ∀ u F : H,

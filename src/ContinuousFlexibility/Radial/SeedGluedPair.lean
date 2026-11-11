@@ -42,6 +42,10 @@ structure SeedGluedPair (D : ReferenceData) (c d : ℝ) (uL uR : ℝ → ℝ)
   right_entry : exp (K.right + q + 4) < radiusR * d
   middle_germ : ∀ r ∈ Ioo (exp (K.left - q - 4)) (exp (K.right + q + 4)),
     profile =ᶠ[𝓝 r] K.profile ∧ height =ᶠ[𝓝 r] K.height
+  left_increasing : ∀ r, radiusL * c ≤ r → r ≤ exp K.left →
+    0 < deriv profile r
+  right_increasing : ∀ r, exp K.right ≤ r → r ≤ radiusR * d →
+    0 < deriv profile r
   left_tail : ∀ r ∈ Ioo D.a c,
     profile (radiusL * r) = heightL * radiusL * D.w r ∧
     height (radiusL * r) = amplitudeL * uL r
