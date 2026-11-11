@@ -24,10 +24,8 @@ open scoped Topology ContDiff
 set_option backward.isDefEq.respectTransparency false
 
 variable {P X F : Type} [NormedAddCommGroup P] [NormedSpace ℝ P]
-  [FiniteDimensional ℝ P] [NormedAddCommGroup X] [NormedSpace ℝ X]
-  [MeasurableSpace X] [BorelSpace X] [SecondCountableTopology X]
-  [NormedAddCommGroup F] [NormedSpace ℝ F] [CompleteSpace F]
-  {μ : Measure X} [IsLocallyFiniteMeasure μ]
+  [NormedAddCommGroup X] [NormedSpace ℝ X]
+  [NormedAddCommGroup F] [NormedSpace ℝ F]
 
 /-- Joint smoothness of the derivative in the parameter, with the physical
 point retained as a variable. -/
@@ -66,6 +64,10 @@ private theorem continuousOn_parameter_slice
   intro x hx
   exact ((hf p hp x hx).continuousAt.comp
     (continuousAt_const.prodMk continuousAt_id)).continuousWithinAt
+
+variable [FiniteDimensional ℝ P] [MeasurableSpace X] [BorelSpace X]
+  [SecondCountableTopology X] [CompleteSpace F]
+  {μ : Measure X} [IsLocallyFiniteMeasure μ]
 
 /-- The compact-set parameter derivative. The dominating function is a
 constant bound on a compact parameter ball times the physical set. -/
@@ -163,8 +165,14 @@ theorem iteratedFDeriv_compactIntegral_parameter
       rw [heq.fderiv_eq]
       rw [(hasFDerivAt_compactIntegral_parameter hO hK
         (fun q hq x hx => contDiffAt_parameter_iteratedFDeriv (hf q hq x hx) s) hp).fderiv]
-      exact ((continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (s + 1) => P) F).symm.toContinuousLinearEquiv.integral_comp_comm
-          (fun x => fderiv ℝ (iteratedFDeriv ℝ s (fun q => f (q, x))) p)).symm
+      let L : (P →L[ℝ] P [×s]→L[ℝ] F) →L[ℝ] P [×(s + 1)]→L[ℝ] F :=
+        (continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (s + 1) => P) F).symm
+      have hInt : IntegrableOn
+          (fun x => fderiv ℝ (iteratedFDeriv ℝ s (fun q => f (q, x))) p) K μ :=
+        (continuousOn_parameter_slice
+          (fun q hq x hx => contDiffAt_parameter_fderiv
+            (contDiffAt_parameter_iteratedFDeriv (hf q hq x hx) s)) hp).integrableOn_compact hK
+      exact (L.integral_comp_comm hInt).symm
 
 /-- Evaluating the mixed derivative in arbitrary directions also commutes
 with the physical integral. -/
@@ -235,8 +243,8 @@ theorem iteratedFDeriv_rectangleIntegral_parameter
   intro x hx
   have hs : ContDiffAt ℝ s (fun q => f (q, x)) p :=
     ((hf p hp x hx).comp p (contDiffAt_id.prodMk contDiffAt_const)).of_le (by simp)
-  simpa only [Pi.smul_apply, ContinuousMultilinearMap.smul_apply, smul_eq_mul] using
+  simpa only [smul_apply, smul_eq_mul] using
     congrArg (fun A : P [×s]→L[ℝ] ℝ => A v)
-      (iteratedFDeriv_const_smul_apply (a := C) hs)
+      (iteratedFDeriv_const_smul_apply' (a := C) hs)
 
 end ContinuousFlexibility

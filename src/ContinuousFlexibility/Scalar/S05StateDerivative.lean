@@ -58,7 +58,7 @@ theorem hasDerivAt_normalizedHeightResidual_state
         polarResidualVariation_heightFamily_direction w z hu hη hr]
       ring
     rw [heq, heightLinearizedDivergence_eq_variation hw hz hη hr hD]
-    simpa only [one_mul, zero_add] using
+    simpa only [Pi.add_apply, id_eq, one_mul, zero_add] using
       (hasDerivAt_const 0 (x.1 * polarResidualVariation w z u x)).add
         ((hasDerivAt_id 0).mul_const (x.1 * polarResidualVariation w z η x))
   · have hf := hasDerivAt_radialScaledResidual_divergence hw
@@ -68,7 +68,7 @@ theorem hasDerivAt_normalizedHeightResidual_state
         (heightLinearizedDivergence w (heightFamily z u q) η x) (q * 0) := by
       simpa only [mul_zero] using hf
     have hscale : HasDerivAt (fun t : ℝ => q * t) q 0 := by
-      simpa only [mul_one] using (hasDerivAt_id 0).const_mul q
+      simpa only [id_eq, mul_one] using (hasDerivAt_id 0).const_mul q
     have hcomp := (hf'.comp 0 hscale).div_const q
     have hfamily (t : ℝ) : heightFamily z (heightFamily u η t) q =
         heightFamily (heightFamily z u q) η (q * t) := by

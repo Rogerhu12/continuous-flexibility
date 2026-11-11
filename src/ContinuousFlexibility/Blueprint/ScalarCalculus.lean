@@ -8,9 +8,9 @@ import ContinuousFlexibility.Scalar.S05CalculusProof
 
 The pointwise and finite-rectangle calculus of the height equation: connection, residual, conservation, type correction.
 
-Source: `paper/flexible-surface-rewrite/03-height-equation.tex` lines 11–106; `paper/flexible-surface-rewrite/03-height-equation.tex` lines 287–376.
+Source: `paper/flexible-surface-readable/03-height-equation.tex` lines 23–189 and 406–543.
 
-Task file: `docs/tasks/ScalarCalculus.md`. The statement is frozen; replace the `sorry`.
+Task file: `docs/tasks/ScalarCalculus.md`. The statement is frozen.
 -/
 
 namespace ContinuousFlexibility.Blueprint
@@ -19,5 +19,7 @@ open ContinuousFlexibility.Statements
 
 theorem ScalarCalculus : S03CalculusStatement ∧ S04CalculusStatement ∧ S05CalculusStatement := by
   exact ⟨s03CalculusStatement, s04CalculusStatement, s05CalculusStatement⟩
+
+#print axioms ScalarCalculus
 
 end ContinuousFlexibility.Blueprint
