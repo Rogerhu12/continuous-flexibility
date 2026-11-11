@@ -17,7 +17,8 @@ namespace ContinuousFlexibility.Analysis
 /-- A proved scalar-field interface for the spectral theorem used here.
 Instances below discharge it for both real and complex Hilbert spaces. -/
 class HasAngularSpectralDecomposition (𝕜 H : Type*) [RCLike 𝕜]
-    [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H] : Prop where
+    [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]
+    [NormedSpace ℝ H] [IsScalarTower ℝ 𝕜 H] : Prop where
   decompose (A : AngularResolventData 𝕜 H) :
     IsHilbertSum 𝕜 (fun n => angularResolventEigenspace A.operator n)
       (fun n => (angularResolventEigenspace A.operator n).subtypeₗᵢ)
@@ -32,6 +33,7 @@ instance {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H] [CompleteS
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]
+  [NormedSpace ℝ H] [IsScalarTower ℝ 𝕜 H]
   [HasAngularSpectralDecomposition 𝕜 H]
 
 namespace AngularResolventData

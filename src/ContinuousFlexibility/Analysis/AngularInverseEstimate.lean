@@ -274,7 +274,7 @@ theorem angular_inverse_tame_complex (R K B : lp E 2 →L[ℂ] lp E 2)
       X ≤ (2 : ℝ) ^ p * (U + ‖angularDerivativePower (𝕜 := ℂ) p u‖) :=
         angularSobolevNorm_le_base_derivativePower hu
       _ ≤ (2 : ℝ) ^ p * (U + ‖B‖ * (F + (p : ℝ) * C * (2 * Y + A * U))) :=
-        mul_le_mul_of_nonneg_left (add_le_add_left hpower U) (by positivity)
+        mul_le_mul_of_nonneg_left (add_le_add le_rfl hpower) (by positivity)
       _ ≤ D * (F + Y + A * U) := by
         simpa only [D, angularInversePreConstant, C, mul_assoc] using
           angular_inverse_preabsorb_scalar (t := (2 : ℝ) ^ p) (b := ‖B‖)

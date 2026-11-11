@@ -50,6 +50,7 @@ private theorem angular_reciprocal_succ_smul {F : Type*}
     _ = x := by rw [h, one_smul]
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]
+  [NormedSpace ℝ H] [IsScalarTower ℝ 𝕜 H]
   [HasAngularSpectralDecomposition 𝕜 H]
 
 namespace AngularResolventData

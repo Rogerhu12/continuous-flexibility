@@ -38,7 +38,7 @@ theorem angularResolventOperator_apply (B : H →L[𝕜] H)
     angularResolventOperator B hInjective y =
       (LinearEquiv.ofInjective B.toLinearMap hInjective).symm y - (y : H) := by
   rw [← LinearPMap.toFun_eq_coe (angularResolventOperator B hInjective) y]
-  simp only [angularResolventOperator, LinearMap.sub_apply,
+  simp only [angularResolventOperator, _root_.sub_apply, LinearMap.sub_apply, Pi.sub_apply,
     LinearEquiv.coe_toLinearMap, Submodule.subtype_apply]
 
 /-- The defining formula on the range of the bounded resolvent. -/
@@ -51,9 +51,10 @@ theorem angularResolventOperator_apply_image (B : H →L[𝕜] H)
     apply Subtype.ext
     simpa only [ContinuousLinearMap.coe_coe] using
       (LinearEquiv.ofInjective_apply B.toLinearMap (h := hInjective) x).symm
-  rw [angularResolventOperator_apply]
-  simp only [harg, LinearEquiv.symm_apply_apply, LinearEquiv.ofInjective_apply,
-    ContinuousLinearMap.coe_coe]
+  exact (angularResolventOperator_apply B hInjective _).trans
+    (congrArg (fun z : H => z - B x)
+      ((congrArg (LinearEquiv.ofInjective B.toLinearMap hInjective).symm harg).trans
+        ((LinearEquiv.ofInjective B.toLinearMap hInjective).symm_apply_apply x)))
 
 /-- Applying `I + Λ` after `B` gives the identity. -/
 theorem angularResolventOperator_left_inverse (B : H →L[𝕜] H)

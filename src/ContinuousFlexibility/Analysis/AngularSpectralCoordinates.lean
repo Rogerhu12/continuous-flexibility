@@ -17,13 +17,15 @@ namespace ContinuousFlexibility.Analysis
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]
+  [NormedSpace ℝ H] [IsScalarTower ℝ 𝕜 H]
 
 /-- Bounded-resolvent data for a nonnegative self-adjoint angular
 frequency with integer spectrum. The corresponding maximal unbounded
 operator has domain `operator.range` and sends `operator x` to
 `x - operator x`. -/
 structure AngularResolventData (𝕜 H : Type*) [RCLike 𝕜]
-    [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H] where
+    [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]
+    [NormedSpace ℝ H] [IsScalarTower ℝ 𝕜 H] where
   operator : H →L[𝕜] H
   selfAdjoint : IsSelfAdjoint operator
   injective : Function.Injective operator
@@ -64,7 +66,7 @@ theorem angularResolventCoordinates_symm_diagonal (B : H →L[𝕜] H)
     B ((angularResolventCoordinates B h).symm v) =
       (angularResolventCoordinates B h).symm (angularResolventDiagonal B v) := by
   have hsum := h.hasSum_linearIsometryEquiv_symm v
-  have hmap := hsum.map B.toAddMonoidHom B.continuous
+  have hmap := hsum.map B B.continuous
   have hdiag := h.hasSum_linearIsometryEquiv_symm (angularResolventDiagonal B v)
   have hterm : (fun n => B ((v n : angularResolventEigenspace B n) : H)) =
       (fun n => ((angularResolventDiagonal B v n : angularResolventEigenspace B n) : H)) := by
@@ -72,10 +74,11 @@ theorem angularResolventCoordinates_symm_diagonal (B : H →L[𝕜] H)
     have hn := (mem_angularResolventEigenspace B n (v n)).mp (v n).property
     simpa only [angularResolventDiagonal_apply, SetLike.val_smul] using hn
   have hmap' : HasSum
-      (fun n => ((angularResolventDiagonal B v n : angularResolventEigenspace B n) : H))
+      (fun n => B ((v n : angularResolventEigenspace B n) : H))
       (B ((angularResolventCoordinates B h).symm v)) := by
     simpa only [angularResolventCoordinates, Submodule.coe_subtypeₗᵢ,
-      Function.comp_def, hterm] using hmap
+      Submodule.subtype_apply, Function.comp_def] using hmap
+  rw [hterm] at hmap'
   exact hmap'.unique hdiag
 
 /-- The spectral coordinates intertwine the given bounded resolvent and

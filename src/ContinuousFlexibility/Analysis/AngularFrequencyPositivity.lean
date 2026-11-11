@@ -43,7 +43,8 @@ theorem angularDerivative_re_inner_nonneg {v : lp E 2}
     angularFrequency_re_inner_nonneg (𝕜 := 𝕜) ⟨v, hv⟩
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace 𝕜 H]
-  [CompleteSpace H] [HasAngularSpectralDecomposition 𝕜 H]
+  [NormedSpace ℝ H] [IsScalarTower ℝ 𝕜 H] [CompleteSpace H]
+  [HasAngularSpectralDecomposition 𝕜 H]
 
 namespace AngularResolventData
 

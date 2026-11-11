@@ -20,6 +20,14 @@ open scoped Topology
 
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℝ H] [CompleteSpace H]
 
+/-- The original real action on the complexification agrees with the
+canonical restriction of its complex action.  This also identifies the
+real algebra structures used by the two spectrum interfaces. -/
+private theorem complexification_real_normedSpace_eq :
+    (instRealInnerProductSpace (H := H)).toNormedSpace =
+      (NormedSpace.complexToReal : NormedSpace ℝ (AngularComplexification H)) := by
+  ext r u <;> simp only [ofReal_smul]
+
 /-- The real part of a complexified real eigenvector is a real eigenvector. -/
 theorem re_mem_angularResolventEigenspace {B : H →L[ℝ] H} {n : ℕ}
     {u : AngularComplexification H}
@@ -38,6 +46,7 @@ theorem angularResolventPartial_re_mem_iSup {B : H →L[ℝ] H} (hB : IsSelfAdjo
   have hBC : IsSelfAdjoint (extend B) := (isSelfAdjoint_extend_iff B).mpr hB
   have hSpectrumC : spectrum ℝ (extend B) ⊆ angularReciprocalSpectrum := by
     simpa only [spectrum_real_extend] using hSpectrum
+  rw [complexification_real_normedSpace_eq] at hSpectrumC
   let S : Submodule ℝ H := ⨆ n, angularResolventEigenspace B n
   have hterm (n : ℕ) :
       angularResolventEigenvalue n • (angularResolventProjection (extend B) n (ofReal x)).re ∈ S := by
@@ -47,7 +56,8 @@ theorem angularResolventPartial_re_mem_iSup {B : H →L[ℝ] H} (hB : IsSelfAdjo
   have heq : (angularResolventPartial (extend B) N (ofReal x)).re =
       ∑ n ∈ Finset.range N,
         angularResolventEigenvalue n • (angularResolventProjection (extend B) n (ofReal x)).re := by
-    simpa only [angularResolventPartial, sum_apply, smul_apply, reCLM_apply, re_real_smul] using
+    simpa only [angularResolventPartial, ← complexification_real_normedSpace_eq,
+      sum_apply, smul_apply, ContinuousLinearMap.smul_apply, reCLM_apply, re_real_smul] using
       map_sum (reCLM : AngularComplexification H →L[ℝ] H)
         (fun n => angularResolventEigenvalue n • angularResolventProjection (extend B) n (ofReal x))
         (Finset.range N)
@@ -63,6 +73,7 @@ theorem angularRealResolvent_range_le {B : H →L[ℝ] H} (hB : IsSelfAdjoint B)
   have hBC : IsSelfAdjoint (extend B) := (isSelfAdjoint_extend_iff B).mpr hB
   have hSpectrumC : spectrum ℝ (extend B) ⊆ angularReciprocalSpectrum := by
     simpa only [spectrum_real_extend] using hSpectrum
+  rw [complexification_real_normedSpace_eq] at hSpectrumC
   rintro _ ⟨x, rfl⟩
   have hlimC : Tendsto (fun N => angularResolventPartial (extend B) N (ofReal x))
       atTop (𝓝 (extend B (ofReal x))) :=
@@ -70,7 +81,7 @@ theorem angularRealResolvent_range_le {B : H →L[ℝ] H} (hB : IsSelfAdjoint B)
       (angularResolventPartial_tendsto hBC hSpectrumC)
   have hlim : Tendsto (fun N => (angularResolventPartial (extend B) N (ofReal x)).re)
       atTop (𝓝 (B x)) := by
-    simpa only [reCLM_apply, re_extend, re_ofReal] using
+    simpa only [Function.comp_def, reCLM_apply, re_extend, re_ofReal] using
       ((reCLM : AngularComplexification H →L[ℝ] H).continuous.tendsto
         (extend B (ofReal x))).comp hlimC
   apply S.isClosed_topologicalClosure.mem_of_tendsto hlim

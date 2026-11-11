@@ -22,6 +22,7 @@ section Transport
 
 variable {𝕜 : Type*} [RCLike 𝕜]
 variable {H : Type*} [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H]
+  [NormedSpace ℝ H] [IsScalarTower ℝ 𝕜 H]
   [HasAngularSpectralDecomposition 𝕜 H]
 
 /-- Transport the proved coordinate estimate through the canonical
