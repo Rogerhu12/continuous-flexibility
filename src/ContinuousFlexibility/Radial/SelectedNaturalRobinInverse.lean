@@ -126,6 +126,7 @@ theorem radialNatural_robin_iff
     (by rwa [hstateCut]) q
   rwa [hstateCut] at hs
 
+include F in
 /-- A bounded regional inverse with the genuine selected natural full
 state. The input natural function is used only to identify the Robin line;
 the inverse itself is constructed from the deep kernel and finite core. -/

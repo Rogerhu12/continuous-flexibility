@@ -48,7 +48,10 @@ theorem radialTailHalf_outward (D : ReferenceData) (right : Bool) (cut r : ℝ) 
 
 theorem hasDerivAt_outerOutwardRadius (right : Bool) (r : ℝ) :
     HasDerivAt (outerOutwardRadius right) (outerTailSign right) r := by
-  simpa only [outerOutwardRadius_eq_sign, mul_one] using
+  have hfun : outerOutwardRadius right = fun x : ℝ => outerTailSign right * x :=
+    funext (outerOutwardRadius_eq_sign right)
+  rw [hfun]
+  simpa only [mul_one] using
     (hasDerivAt_id r).const_mul (outerTailSign right)
 
 def RadialTailRegularResponse (D : ReferenceData) (right : Bool)
@@ -100,7 +103,7 @@ theorem OuterWeightedGreenResponse.radial_regular
         simpa only [outerTailOutwardWeight, outerOutwardRadius_eq_sign,
           ← mul_assoc, outerTailSign_mul_self, one_mul] using hp.symm
   refine ⟨U, outerRegionEquiv_ae_of_ae hcut he,
-    hu.comp (contDiff_outerOutwardRadius right).contDiffOn hmap, ?_⟩
+    hu.comp ((contDiff_outerOutwardRadius right).of_le (by simp)).contDiffOn hmap, ?_⟩
   rw [hflux']
   simpa only [U, outerOutwardRadius_eq_sign] using hRobin
 

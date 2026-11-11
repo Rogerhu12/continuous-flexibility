@@ -24,6 +24,7 @@ variable {M : MorseChainData} {D E : ReferenceData} {right : Bool} {j start : �
   {entrance η K cut lam κ β : ℝ}
   (F : MorsePhysicalTailBasis M D right j start entrance η K)
 
+include F in
 theorem exists_scaledNaturalInverse
     (hD : IsAccumulatingProfile D) (hE : IsAccumulatingProfile E)
     (hcut : cut ∈ radialCore D) (hentry : entrance ∈ radialCore D)
