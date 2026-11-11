@@ -39,15 +39,15 @@ def circleFourierCoeffCLM (n : ℤ) : C(AddCircle P, ℂ) →L[ℂ] ℂ where
     have h := (lp.lipschitzWith_one_eval (E := fun _ : ℤ => ℂ) 2 n).continuous.comp
       ((fourierBasis (T := P)).repr.continuous.comp
         (ContinuousMap.toLp (E := ℂ) 2 AddCircle.haarAddCircle ℂ).continuous)
-    simpa only [Function.comp_apply, fourierBasis_repr, fourierCoeff_toLp] using h
+    simpa only [Function.comp_def, fourierBasis_repr, fourierCoeff_toLp] using h
 
 @[simp] theorem circleFourierCoeffCLM_apply (n : ℤ) (f : C(AddCircle P, ℂ)) :
     circleFourierCoeffCLM n f = fourierCoeff f n := rfl
 
 /-- Multiplication by a Fourier character shifts the coefficient index. -/
 theorem circle_fourierCoeff_fourier_mul (g : C(AddCircle P, ℂ)) (k n : ℤ) :
-    fourierCoeff (fourier k * g) n = fourierCoeff g (n - k) := by
-  rw [fourierCoeff_eq_intervalIntegral (fourier k * g) n 0,
+    fourierCoeff ((fourier k : C(AddCircle P, ℂ)) * g) n = fourierCoeff g (n - k) := by
+  rw [fourierCoeff_eq_intervalIntegral ((fourier k : C(AddCircle P, ℂ)) * g) n 0,
     fourierCoeff_eq_intervalIntegral g (n - k) 0]
   congr 1
   apply intervalIntegral.integral_congr

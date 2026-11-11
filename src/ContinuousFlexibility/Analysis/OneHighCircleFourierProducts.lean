@@ -60,4 +60,25 @@ theorem circle_enorm_fourierCoeff_prod_le_majorantConvolution (k : ℕ)
   exact convolutionKernel_mono Measure.count k
     (fun ζ => Finset.prod_le_prod' (fun i _ => hb i (ζ i))) n
 
+/-- The general one-high frequency estimate applied to an actual circle
+product. Derivative coefficient identities provide the pointwise premise
+in the smooth-function application. -/
+theorem circle_eLpNorm_fourierCoeff_prod_le_oneHigh (k s : ℕ)
+    (f : Fin (k + 1) → C(AddCircle P, ℂ))
+    (hf : ∀ i, MemLp (fourierCoeff (f i)) 1 Measure.count)
+    (w : ℤ → ℝ≥0∞) (hw : ∀ n, 1 ≤ w n)
+    (b : Fin (k + 1) → ℤ → ℝ≥0∞)
+    (a : Fin (k + 1) → ℕ) (ha : ∑ i, a i ≤ s)
+    (hb : ∀ i n, ‖fourierCoeff (f i) n‖ₑ ≤ w n ^ a i * b i n) :
+    eLpNorm (fourierCoeff (∏ i, f i)) 2 Measure.count ≤
+      ∑ j, eLpNorm (fun n => w n ^ s * b j n) 2 Measure.count *
+        ∏ i ∈ Finset.univ.erase j, eLpNorm (b i) 1 Measure.count := by
+  apply le_trans ?_ (positiveConvolution_oneHigh_eLpNorm_two_le k s
+    (measurable_of_countable w) hw (fun i => measurable_of_countable (b i)) a ha)
+  apply eLpNorm_mono_enorm (measurable_of_countable _).aestronglyMeasurable
+  intro n
+  simpa only [enorm_eq_self] using
+    circle_enorm_fourierCoeff_prod_le_majorantConvolution k f hf
+      (fun i n => w n ^ a i * b i n) hb n
+
 end ContinuousFlexibility.Analysis

@@ -44,7 +44,7 @@ theorem continuous_cylinderAngularCoefficient {f : ℝ × AddCircle P → ℂ}
   have hi : Continuous (fun r : ℝ => ∫ θ in Icc (0 : ℝ) P,
       fourier (-n) (θ : AddCircle P) • f (r, (θ : AddCircle P)) ∂volume) :=
     continuous_parametric_integral_of_continuous
-      (μ := volume) (f := fun r θ =>
+      (μ := (volume : Measure ℝ)) (f := fun (r : ℝ) (θ : ℝ) =>
         fourier (-n) (θ : AddCircle P) • f (r, (θ : AddCircle P))) hc isCompact_Icc
   have hint : Continuous (fun r : ℝ => ∫ θ in (0 : ℝ)..P,
       fourier (-n) (θ : AddCircle P) • f (r, (θ : AddCircle P))) := by
@@ -56,7 +56,8 @@ theorem continuous_cylinderAngularCoefficient {f : ℝ × AddCircle P → ℂ}
     funext r
     rw [cylinderAngularCoefficient_apply, fourierCoeff_eq_intervalIntegral _ n 0, zero_add]
   rw [heq]
-  exact continuous_const.smul hint
+  simpa only [Pi.smul_apply] using
+    (show Continuous (fun _ : ℝ => (1 / P : ℝ)) from continuous_const).smul hint
 
 /-- A single angular coefficient is bounded by the full angular `L²` energy. -/
 theorem cylinderAngularCoefficient_sq_le {f : ℝ × AddCircle P → ℂ}

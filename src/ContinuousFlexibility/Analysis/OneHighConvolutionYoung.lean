@@ -77,7 +77,7 @@ theorem lconvolution_rpow_two_le {f g : G → ℝ≥0∞}
     (f ⋆ₗ[μ] g) x ^ (2 : ℝ) ≤
       (∫⁻ y, f y ∂μ) * (f ⋆ₗ[μ] (fun y => g y ^ (2 : ℝ))) x := by
   have hgx : AEMeasurable (fun y => g (-y + x)) μ := by
-    simpa only [neg_add_eq_sub] using
+    simpa only [Function.comp_def, neg_add_eq_sub] using
       hg.comp_quasiMeasurePreserving (μ.measurePreserving_sub_left x).quasiMeasurePreserving
   simpa only [lconvolution_def] using lintegral_mul_rpow_two_le hf hgx
 
