@@ -39,7 +39,8 @@ local notation "hW" => fun sign =>
 local notation "hloss" => innerMorseInnerLoss_measurable N K G 37
 local notation "hlossBound" => innerMorseInnerLoss_le_one N K G (Nat.cast_nonneg 37)
 
-variable (hCW : ∀ sign x, |W sign x| ≤ CW)
+variable (hCW : ∀ (sign : Bool) (x : ℝ),
+  |(innerMorseInnerWeight N K a γ G l r x) ^ (if sign then (1 : ℝ) else -1)| ≤ CW)
 
 local notation "U" => fun sign =>
   innerSupportedWeightMultiplier (radialHilbertMeasure D)

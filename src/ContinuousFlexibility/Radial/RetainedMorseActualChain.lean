@@ -51,7 +51,11 @@ variable {CM KM : ℝ}
       (morseChainA S.chain (innerMorseInnerTailIndex S.chain.index k side p))
       (morseChainB S.chain (innerMorseInnerTailIndex S.chain.index k side p))
       j (8 * (S.chain.d (innerMorseInnerTailIndex S.chain.index k side p) : ℝ) ^ 9)) CM KM)
-  (centralModel : InnerRadialModelChart Γ.reference H bordered j center column center)
+  (centralModel : InnerRadialModelChart Γ.reference
+    (P.retainedMorseInnerGeometry hD hw hS G₀ hfirst hq hT
+      hleft hright hTL hTR k hk) bordered j
+    (innerModelChainPiece (innerMorseInnerCenter k)) column
+    (innerModelChainPiece (innerMorseInnerCenter k)))
 
 local notation "tails" => P.retainedMorseInnerGeometry_tail hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk
