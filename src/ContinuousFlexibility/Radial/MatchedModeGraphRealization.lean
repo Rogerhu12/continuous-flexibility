@@ -64,7 +64,8 @@ theorem ReferenceGraph.modeFullGraph_of_memLp {D : ReferenceData}
       (Radial.matchedModePhysicalSource D (referenceMode F.1 j) hf
         (if j = 2 then F.2 else 0)) :=
   hG.modeFullGraph_of_ae hD hB hj hu.coeFn_toLp
-    (Radial.matchedModePhysicalSource_ae D (referenceMode F.1 j) hf _)
+    (Radial.matchedModePhysicalSource_ae D (referenceMode F.1 j) hf
+      (if j = 2 then F.2 else 0))
 
 /-- The frozen modal uniqueness theorem identifies the actual coefficient,
 with no replacement of its test class or its scalar sign. -/

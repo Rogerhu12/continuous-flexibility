@@ -59,7 +59,11 @@ theorem referenceRadial_integral_sq_le {D : ReferenceData}
     (hg : MemLp g 2 (volume.restrict (radialCore D))) :
     (∫ r in radialCore D, g r) ^ 2 ≤
       (D.b - D.a) * ∫ r in radialCore D, g r ^ 2 := by
+  letI : IsFiniteMeasure (volume.restrict (radialCore D)) := by
+    change IsFiniteMeasure (volume.restrict (Ioo D.a D.b))
+    infer_instance
   let μ : Measure ℝ := volume.restrict (radialCore D)
+  letI : IsFiniteMeasure μ := by dsimp only [μ]; infer_instance
   have hmass : μ.real univ = D.b - D.a := by
     simp only [μ, measureReal_def, Measure.restrict_apply_univ, radialCore,
       Real.volume_Ioo, ENNReal.toReal_ofReal (sub_nonneg.mpr hab.le)]
@@ -72,7 +76,8 @@ theorem referenceRadial_integral_sq_le {D : ReferenceData}
   have hisq : Integrable (fun r => g r ^ 2) μ := hg.integrable_sq
   have hlin : Integrable (fun r => (2 * c) * g r) μ := hi.const_mul _
   have hconst : Integrable (fun _ : ℝ => c ^ 2) μ := integrable_const _
-  have hn := integral_nonneg (μ := μ) (fun r : ℝ => sq_nonneg (g r - c))
+  have hn : 0 ≤ ∫ r, (g r - c) ^ 2 ∂μ :=
+    integral_nonneg (fun r => sq_nonneg (g r - c))
   have he : (∫ r, (g r - c) ^ 2 ∂μ) = E - (2 * c) * I + c ^ 2 * (D.b - D.a) := by
     calc
       _ = ∫ r, (g r ^ 2 - (2 * c) * g r) + c ^ 2 ∂μ := by

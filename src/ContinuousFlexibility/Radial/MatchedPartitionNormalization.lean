@@ -95,7 +95,8 @@ theorem exists_matchedPartitionSquare_inv_bound {D : ReferenceData}
         (fun m => D.localizer m r)
   have hone : 1 ≤ B * matchedPartitionSquare D r :=
     hCS.trans (mul_le_mul_of_nonneg_right hcard (matchedPartitionSquare_nonneg D r))
-  exact (inv_le_iff₀ (matchedPartitionSquare_pos hP hr)).mpr (by nlinarith)
+  rw [← one_div]
+  exact (one_div_le_iff₀ (matchedPartitionSquare_pos hP hr)).mpr (by nlinarith)
 
 def matchedPartitionCoefficient (D : ReferenceData) (m : ℕ) (r : ℝ) : ℝ :=
   (D.localizer m r) ^ 2 / matchedPartitionSquare D r

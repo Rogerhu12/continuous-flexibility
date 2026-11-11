@@ -21,7 +21,9 @@ theorem integral_angularMean_add {D : ReferenceData} (hab : D.a ≤ D.b)
     (∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ) + g (r, θ))) =
       (∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ))) +
         ∫ r in D.a..D.b, radialAngularMean (fun θ => g (r, θ)) := by
-  rw [integral_angularMean_eq_physical hab (hf.add hg),
+  have hfg : Integrable (fun x => f x + g x) (radialPhysicalMeasure D) := by
+    simpa only [Pi.add_apply] using hf.add hg
+  rw [integral_angularMean_eq_physical hab hfg,
     integral_angularMean_eq_physical hab hf,
     integral_angularMean_eq_physical hab hg,
     integral_add hf hg, mul_add]
@@ -60,11 +62,15 @@ theorem radialWeakPairing_congr_ae {D : ReferenceData}
     (hfg : f =ᵐ[radialPhysicalMeasure D] g) :
     radialWeakPairing D f ψ = radialWeakPairing D g ψ := by
   obtain ⟨C, hC⟩ := hD
-  apply integral_angularMean_congr_ae hC.1.2.1.le
-    (hf.integrable_mul_testOperator ⟨C, hC⟩ hψ)
-  filter_upwards [hfg] with x hx
-  exact congrArg (fun y => y *
-    Radial.radialPDE D.w (fun r θ => ψ (r, θ)) x.1 x.2) hx
+  have he : (fun x => f x *
+      Radial.radialPDE D.w (fun r θ => ψ (r, θ)) x.1 x.2) =ᵐ[radialPhysicalMeasure D]
+      (fun x => g x * Radial.radialPDE D.w (fun r θ => ψ (r, θ)) x.1 x.2) := by
+    filter_upwards [hfg] with x hx
+    exact congrArg (fun y => y *
+      Radial.radialPDE D.w (fun r θ => ψ (r, θ)) x.1 x.2) hx
+  simpa only [radialWeakPairing] using
+    integral_angularMean_congr_ae hC.1.2.1.le
+      (hf.integrable_mul_testOperator ⟨C, hC⟩ hψ) he
 
 theorem radialWeakPairing_sub {D : ReferenceData}
     (hD : IsAccumulatingProfile D) {f g ψ : PolarPoint → ℝ}

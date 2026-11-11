@@ -125,8 +125,8 @@ theorem referenceCosineCoefficient_hasSum_integral_sq {f : α × ℝ → ℝ}
   exact hasSum_integral_of_dominated_convergence
     (fun n r => (referenceCosineCoefficient f n r) ^ 2)
     (fun n => (referenceCosineCoefficient_memLp hf hp he n).integrable_sq.aestronglyMeasurable)
-    (fun n => ae_of_all _ fun r => by
-      simp only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (referenceCosineCoefficient f n r : ℝ))])
+    (fun n => ae_of_all _ fun r =>
+      (Real.norm_of_nonneg (sq_nonneg (referenceCosineCoefficient f n r : ℝ))).le)
     (hsum.mono fun _ hr => hr.summable) hbound hsum
 
 /-- Actual radial L² coefficient vectors. -/
