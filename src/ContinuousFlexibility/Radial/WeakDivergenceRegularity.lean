@@ -379,7 +379,7 @@ theorem exists_contDiff_representative_of_weak_divergence
   have hconst : AbsolutelyContinuousOnInterval (fun _ : ℝ => -C) a b :=
     (contDiffOn_const : ContDiffOn ℝ 1 (fun _ : ℝ => -C) (uIcc a b)).absolutelyContinuousOnInterval
   have hPac : AbsolutelyContinuousOnInterval (fun x => -C + H x) a b :=
-    hconst.add hHac
+    hconst.fun_add hHac
   have hfluxac : AbsolutelyContinuousOnInterval (fun x => w x * deriv v x) a b := by
     apply hPac.congr
     intro x hx

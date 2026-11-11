@@ -95,9 +95,11 @@ theorem matching_innerGraph_of_representative {D : ReferenceData}
   · intro r hr
     exact Set.indicator_of_notMem (hout hr) u
   · change (Icc M.innerLeft M.innerRight).indicator u M.innerLeft = 0
-    rw [Set.indicator_of_mem ⟨le_rfl, hm.le⟩, hleft]
+    have hl : M.innerLeft ∈ Icc M.innerLeft M.innerRight := ⟨le_rfl, hm.le⟩
+    rw [Set.indicator_of_mem hl, hleft]
   · change (Icc M.innerLeft M.innerRight).indicator u M.innerRight = 0
-    rw [Set.indicator_of_mem ⟨hm.le, le_rfl⟩, hright]
+    have hr : M.innerRight ∈ Icc M.innerLeft M.innerRight := ⟨hm.le, le_rfl⟩
+    rw [Set.indicator_of_mem hr, hright]
 
 theorem matchingOuterRegion_closure {D : ReferenceData}
     {M : RadialMatchingData D} (ha : D.a < M.innerLeft) (hb : M.innerRight < D.b) :

@@ -99,7 +99,7 @@ theorem weakPrincipal_withinFlux_regular
   have hconst : AbsolutelyContinuousOnInterval (fun _ : ℝ => p a) a b :=
     (contDiffOn_const : ContDiffOn ℝ 1 (fun _ : ℝ => p a) (uIcc a b)).absolutelyContinuousOnInterval
   have hP : AbsolutelyContinuousOnInterval (fun x => p a + ∫ t in a..x, g t) a b :=
-    hconst.add (hg.absolutelyContinuousOnInterval_intervalIntegral (c := a) (by simp))
+    hconst.fun_add (hg.absolutelyContinuousOnInterval_intervalIntegral (c := a) (by simp))
   have hpac : AbsolutelyContinuousOnInterval p a b := by
     apply hP.congr
     intro x hx
