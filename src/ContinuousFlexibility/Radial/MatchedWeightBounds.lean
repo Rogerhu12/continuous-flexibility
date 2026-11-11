@@ -178,4 +178,84 @@ theorem matched_weightedKernel_estimates {ι : Type*}
   exact ⟨hdecay, matched_kernel_sums_of_decay hCpos.le (by linarith)
     (matchedWeightedKernel_nonneg (hK i)) hdecay⟩
 
+
+/-- A global unweighted decay estimate needs no transition-index hypothesis. -/
+theorem matched_global_weightedKernel_estimates {ι : Type*}
+    (K : ι → ℕ → ℕ → ℝ) (M₀ M₁ C₀ a γlo γhi : ℝ)
+    (hC₀ : 0 < C₀) (hlo : 0 ≤ γlo) (hhi : γhi < 1)
+    (hloss : 2 * a < M₀ + M₁)
+    (hK : ∀ i k m, 0 ≤ K i k m)
+    (hmajor : ∀ i k m, K i k m ≤ C₀ * Real.exp
+      (a * (radialQ k + radialQ m) - |radialS k - radialS m|)) :
+    ∃ C : ℝ, 0 < C ∧ ∀ γ ∈ Icc γlo γhi, ∀ i,
+      (∀ k m, matchedWeightedKernel M₀ M₁ γ (K i) k m ≤
+        C * Real.exp (-((1 - γhi) / 2 * |radialS k - radialS m|))) ∧
+      (∀ k, Summable (fun m => matchedWeightedKernel M₀ M₁ γ (K i) k m) ∧
+        ∑' m, matchedWeightedKernel M₀ M₁ γ (K i) k m ≤
+          C * matchedSchurFactor ((1 - γhi) / 2)) ∧
+      (∀ m, Summable (fun k => matchedWeightedKernel M₀ M₁ γ (K i) k m) ∧
+        ∑' k, matchedWeightedKernel M₀ M₁ γ (K i) k m ≤
+          C * matchedSchurFactor ((1 - γhi) / 2)) := by
+  refine matched_weightedKernel_estimates K (fun _ => 0) M₀ M₁ C₀ a 0 0 0 γlo γhi
+    hC₀ (le_refl 0) hlo hhi ?_ hK ?_ ?_
+  · simpa only [zero_mul, add_zero] using hloss
+  · intro i k m
+    simpa only [zero_mul, add_zero] using hmajor i k m
+  · intro i k m _
+    norm_num [radialQ]
+
+/-- The real Schur pairing bound with its common constant simplified. -/
+theorem matched_kernel_real_schur {K : ℕ → ℕ → ℝ} {C η : ℝ}
+    (hC : 0 ≤ C) (hη : 0 < η) (hK : ∀ k m, 0 ≤ K k m)
+    (hle : ∀ k m, K k m ≤ C * Real.exp (-(η * |radialS k - radialS m|)))
+    (ξ ζ : ℕ → ℝ) (hξ0 : ∀ k, 0 ≤ ξ k) (hζ0 : ∀ m, 0 ≤ ζ m)
+    (hξ : Summable (fun k => ξ k ^ 2)) (hζ : Summable (fun m => ζ m ^ 2)) :
+    Summable (fun q : ℕ × ℕ => K q.1 q.2 * ξ q.1 * ζ q.2) ∧
+      ∑' q : ℕ × ℕ, K q.1 q.2 * ξ q.1 * ζ q.2 ≤
+        (C * matchedSchurFactor η) *
+          Real.sqrt (∑' k, ξ k ^ 2) * Real.sqrt (∑' m, ζ m ^ 2) := by
+  obtain ⟨hrow, hcol⟩ := matched_kernel_sums_of_decay hC hη hK hle
+  have hB : 0 ≤ C * matchedSchurFactor η :=
+    mul_nonneg hC (matchedSchurFactor_pos hη).le
+  have h := real_schur_test K hB hB hK hrow hcol ξ ζ hξ0 hζ0 hξ hζ
+  have hsqrt : Real.sqrt ((C * matchedSchurFactor η) * (C * matchedSchurFactor η)) =
+      C * matchedSchurFactor η := by
+    rw [← pow_two]
+    exact Real.sqrt_sq hB
+  simpa only [hsqrt] using h
+
+/-- Operator Schur estimate from a scalar exponential block majorant.
+The local norm constants account for the chosen localization maps. -/
+theorem matched_kernel_operator_bound {E F : Type*}
+    [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+    [NormedAddCommGroup F] [InnerProductSpace ℝ F]
+    (T : E →L[ℝ] F) (p : ℕ → E → ℝ) (n : ℕ → F → ℝ)
+    (K : ℕ → ℕ → ℝ) {C η c₁ c₂ : ℝ}
+    (hC : 0 ≤ C) (hη : 0 < η) (hc₁ : 0 ≤ c₁) (hc₂ : 0 ≤ c₂)
+    (hK : ∀ k m, 0 ≤ K k m)
+    (hle : ∀ k m, K k m ≤ C * Real.exp (-(η * |radialS k - radialS m|)))
+    (hp0 : ∀ m x, 0 ≤ p m x) (hn0 : ∀ k y, 0 ≤ n k y)
+    (hp : ∀ x, Summable (fun m => p m x ^ 2) ∧ ∑' m, p m x ^ 2 ≤ c₁ * ‖x‖ ^ 2)
+    (hn : ∀ y, Summable (fun k => n k y ^ 2) ∧ ∑' k, n k y ^ 2 ≤ c₂ * ‖y‖ ^ 2)
+    (hT : ∀ x y, |inner ℝ y (T x)| ≤ ∑' q : ℕ × ℕ, K q.1 q.2 * n q.1 y * p q.2 x) :
+    ‖T‖ ≤ (C * matchedSchurFactor η) * Real.sqrt (c₁ * c₂) := by
+  obtain ⟨hrow, hcol⟩ := matched_kernel_sums_of_decay hC hη hK hle
+  have hB : 0 ≤ C * matchedSchurFactor η :=
+    mul_nonneg hC (matchedSchurFactor_pos hη).le
+  have h := schur_operator_bound T p n K hB hB hc₁ hc₂ hK hrow hcol hp0 hn0 hp hn hT
+  have hsqrt : Real.sqrt
+      ((C * matchedSchurFactor η) * (C * matchedSchurFactor η) * c₁ * c₂) =
+      (C * matchedSchurFactor η) * Real.sqrt (c₁ * c₂) := by
+    rw [show (C * matchedSchurFactor η) * (C * matchedSchurFactor η) * c₁ * c₂ =
+      (C * matchedSchurFactor η) ^ 2 * (c₁ * c₂) by ring,
+      Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq hB]
+  exact h.trans_eq hsqrt
+
+/-- The three frozen reference exponents lie in one fixed compact interval. -/
+theorem matched_reference_exponents_mem {γ : ℝ}
+    (hγ : γ = referenceBeta - (1 / 8 : ℝ) ∨ γ = referenceBeta ∨
+      γ = referenceBeta + (1 / 8 : ℝ)) :
+    γ ∈ Icc (5 / 8 : ℝ) (7 / 8 : ℝ) := by
+  rcases hγ with rfl | rfl | rfl <;> norm_num [referenceBeta]
+
 end ContinuousFlexibility.Radial

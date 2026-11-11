@@ -36,13 +36,17 @@ theorem RadialCellIntegrable.zero (D : ReferenceData) :
     RadialCellIntegrable D (fun _ => 0) := by
   intro m
   simpa only [mul_zero] using
-    (memLp_zero : MemLp (fun _ : PolarPoint => (0 : ℝ)) 2 (radialPhysicalMeasure D))
+    (MemLp.zero' : MemLp (fun _ : PolarPoint => (0 : ℝ)) 2 (radialPhysicalMeasure D))
 
 theorem RadialCellIntegrable.add {D : ReferenceData} {f g : PolarPoint → ℝ}
     (hf : RadialCellIntegrable D f) (hg : RadialCellIntegrable D g) :
     RadialCellIntegrable D (fun x => f x + g x) := by
   intro m
-  simpa only [Pi.add_apply, mul_add] using (hf m).add (hg m)
+  have h := (hf m).add (hg m)
+  change MemLp (fun x : PolarPoint =>
+    D.localizer m x.1 * f x + D.localizer m x.1 * g x) 2
+      (radialPhysicalMeasure D) at h
+  simpa only [mul_add] using h
 
 theorem RadialCellIntegrable.const_mul {D : ReferenceData} {f : PolarPoint → ℝ}
     (hf : RadialCellIntegrable D f) (c : ℝ) :
@@ -111,5 +115,69 @@ theorem integral_referenceCell_sq_eq_norm_sq (D : ReferenceData) (m : ℕ)
   rw [heq]
   simpa only [real_inner_self_eq_norm_sq, Real.norm_eq_abs, sq_abs] using
     (L2.inner_def (𝕜 := ℝ) (referenceCellL2 D m f hf) (referenceCellL2 D m f hf)).symm
+
+
+/-- The physical annulus measure is the product of the two restricted
+Lebesgue measures. -/
+theorem radialPhysicalMeasure_eq_prod (D : ReferenceData) :
+    radialPhysicalMeasure D = (volume.restrict (radialCore D)).prod
+      (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := by
+  exact (Measure.prod_restrict (μ := (volume : Measure ℝ))
+    (ν := (volume : Measure ℝ)) (radialCore D)
+    (Ioc (0 : ℝ) (2 * Real.pi))).symm
+
+/-- Fubini identifies the frozen iterated cell square with the actual
+two-dimensional square integral, including its angular normalization. -/
+theorem referenceCellSquare_eq_integral {D : ReferenceData} (hab : D.a ≤ D.b)
+    (m : ℕ) {f : PolarPoint → ℝ} (hf : RadialCellIntegrable D f) :
+    referenceCellSquare D m f = (2 * Real.pi)⁻¹ *
+      ∫ x, (D.localizer m x.1 * f x) ^ 2 ∂radialPhysicalMeasure D := by
+  have hsq : Integrable (fun x : PolarPoint => (D.localizer m x.1 * f x) ^ 2)
+      ((volume.restrict (radialCore D)).prod
+        (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))) := by
+    simpa only [radialPhysicalMeasure_eq_prod] using (hf m).integrable_sq
+  have hFub := integral_prod
+    (fun x : PolarPoint => (D.localizer m x.1 * f x) ^ 2) hsq
+  unfold referenceCellSquare radialAngularMean
+  rw [intervalIntegral.integral_const_mul]
+  congr 1
+  rw [intervalIntegral.integral_of_le hab, integral_Ioc_eq_integral_Ioo]
+  simp_rw [intervalIntegral.integral_of_le
+    (show (0 : ℝ) ≤ 2 * Real.pi by positivity)]
+  simpa only [radialCore, radialPhysicalMeasure_eq_prod] using hFub.symm
+
+theorem referenceCellSquare_eq_norm_sq {D : ReferenceData} (hab : D.a ≤ D.b)
+    (m : ℕ) {f : PolarPoint → ℝ} (hf : RadialCellIntegrable D f) :
+    referenceCellSquare D m f =
+      (2 * Real.pi)⁻¹ * ‖referenceCellL2 D m f hf‖ ^ 2 := by
+  rw [referenceCellSquare_eq_integral hab m hf,
+    integral_referenceCell_sq_eq_norm_sq]
+
+theorem referenceCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
+    (m : ℕ) {f : PolarPoint → ℝ} (hf : RadialCellIntegrable D f) :
+    0 ≤ referenceCellSquare D m f := by
+  rw [referenceCellSquare_eq_norm_sq hab m hf]
+  exact mul_nonneg (by positivity) (sq_nonneg _)
+
+theorem sourceCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
+    (γ M : ℝ) {f : PolarPoint → ℝ} (hf : RadialCellIntegrable D f) (m : ℕ) :
+    0 ≤ sourceCellSquare D γ M f m :=
+  mul_nonneg (Real.exp_pos _).le (referenceCellSquare_nonneg hab m hf)
+
+theorem outputCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
+    (γ M : ℝ) {f : PolarPoint → ℝ} (hf : RadialCellIntegrable D f) (m : ℕ) :
+    0 ≤ outputCellSquare D γ M f m :=
+  mul_nonneg (Real.exp_pos _).le (referenceCellSquare_nonneg hab m hf)
+
+theorem referenceCellSquare_congr_ae {D : ReferenceData} (hab : D.a ≤ D.b)
+    (m : ℕ) {f g : PolarPoint → ℝ} (hf : RadialCellIntegrable D f)
+    (hfg : f =ᵐ[radialPhysicalMeasure D] g) :
+    referenceCellSquare D m f = referenceCellSquare D m g := by
+  rw [referenceCellSquare_eq_integral hab m hf,
+    referenceCellSquare_eq_integral hab m (hf.congr_ae hfg)]
+  congr 1
+  apply integral_congr_ae
+  filter_upwards [hfg] with x hx
+  exact congrArg (fun z : ℝ => (D.localizer m x.1 * z) ^ 2) hx
 
 end ContinuousFlexibility.Statements
