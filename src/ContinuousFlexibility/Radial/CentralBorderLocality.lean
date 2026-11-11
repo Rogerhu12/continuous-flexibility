@@ -44,10 +44,12 @@ theorem radialJacobi_border_congr_on_support
   by_cases hr : r ∈ U
   · have hv : EqOn (fun t => w t * χ t) (fun t => w' t * χ t) U := by
       intro t ht
+      change w t * χ t = w' t * χ t
       rw [hw ht]
     have hg : EqOn (fun t => (w t * χ t) * deriv φ t)
         (fun t => (w' t * χ t) * deriv φ' t) U := by
       intro t ht
+      change (w t * χ t) * deriv φ t = (w' t * χ t) * deriv φ' t
       rw [hw ht, hφ.deriv hU ht]
     simp only [radialJacobi]
     rw [hg.deriv hU hr, hv.deriv hU hr, hφ hr]
@@ -89,6 +91,7 @@ theorem exists_contDiff_eqOn_positive_interval {f : ℝ → ℝ} {l h : ℝ}
       change m - (d + l / 8) ≤ r ∧ r ≤ m + (d + l / 8)
       dsimp only [m, d]
       constructor <;> linarith [hr.1, hr.2]
+    change (β : ℝ → ℝ) r * f r = f r
     rw [β.one_of_mem_closedBall hball, one_mul]
 
 end ContinuousFlexibility.Radial

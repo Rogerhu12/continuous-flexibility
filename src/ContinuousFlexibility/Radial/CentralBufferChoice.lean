@@ -79,8 +79,9 @@ theorem exists_centralBuffer_radius {f : ℝ → ℝ} (hc : HasCompactSupport f)
   refine ⟨T, hT, hTmin, ?_, ?_⟩
   · intro x hx
     have hnorm : |x| ≤ R := by
-      simpa only [Real.norm_eq_abs] using hR x (subset_tsupport f hx)
+      simpa only [id_eq, Real.norm_eq_abs] using hR x (subset_tsupport f hx)
     have hxabs : |x| < T / 2 := (hnorm.trans (le_abs_self R)).trans_lt hRT
+    change -T / 2 < x ∧ x < T / 2
     simpa only [neg_div] using abs_lt.mp hxabs
   · intro j hj
     exact (centralBuffer_smallness_bound (by linarith) hTpos hB₀).trans_lt hsmall

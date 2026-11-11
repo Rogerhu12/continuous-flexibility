@@ -78,7 +78,12 @@ theorem terminalCapInnerLift_equation {D : ReferenceData} (hD : IsAccumulatingPr
       (terminalCapInnerSource l h lam χ u hf) := by
   unfold terminalCapInnerLift terminalCapInnerSource
   apply modeLocalEquation_modeInnerRestriction hD
-  apply modeLocalEquation_of_smooth_pointwise hD (terminalCapLift_smooth lam hχ hu)
+  apply modeLocalEquation_of_smooth_pointwise hD
+    (U := (terminalCapVector hD lam hχ hu, 0))
+    (F := (hf.toLp (terminalCapHilbertSource lam D.w χ u), 0))
+    (u := terminalCapLift lam χ u)
+    (f := terminalCapHilbertSource lam D.w χ u)
+    (terminalCapLift_smooth lam hχ hu)
     (terminalCapVector_coe hD lam hχ hu) (MemLp.coeFn_toLp hf) rfl
   intro r hr
   have hg := matchingProfileGeometry hD

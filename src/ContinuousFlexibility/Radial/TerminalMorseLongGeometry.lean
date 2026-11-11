@@ -55,7 +55,9 @@ theorem terminalMorse_long_cap_geometry {A B j s t : ℝ} {r : ℝ → ℝ}
   · rw [mul_pow, sq_sqrt hB.le]
     exact mul_le_mul_of_nonneg_left hq.2 (sq_nonneg j)
   · intro htfar
-    have hlo := morseRho_right_cap_lower hB hAB (by linarith only [htfar])
+    have hfar : morseRightTurn A B + log 4 ≤ morseRightTurn A B + t := by
+      linarith only [htfar]
+    have hlo := morseRho_right_cap_lower hB hAB hfar
     have hmul := mul_le_mul_of_nonneg_left hlo (sq_nonneg j)
     rw [div_pow, mul_pow, sq_sqrt hB.le]
     norm_num

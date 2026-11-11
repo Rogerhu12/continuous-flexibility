@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Radial.Gauge
+import ContinuousFlexibility.Radial.R07RadialODE
 import ContinuousFlexibility.Radial.DirichletRiccatiComparison
 
 /-!
