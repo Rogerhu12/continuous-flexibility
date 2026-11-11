@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.R11bHilbertModes
+import ContinuousFlexibility.Statements.RadialTargets
 
 /-!
 # Representatives and ordinary radial integrals

@@ -21,89 +21,89 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false
 
-def intervalCompressionMap (a b λ x : ℝ) : ℝ :=
-  (a + b) / 2 + λ * (x - (a + b) / 2)
+def intervalCompressionMap (a b scale x : ℝ) : ℝ :=
+  (a + b) / 2 + scale * (x - (a + b) / 2)
 
-def intervalTestCompression (a b λ : ℝ) (ψ : ℝ → ℝ) (x : ℝ) : ℝ :=
-  ψ (intervalCompressionMap a b λ x)
+def intervalTestCompression (a b scale : ℝ) (ψ : ℝ → ℝ) (x : ℝ) : ℝ :=
+  ψ (intervalCompressionMap a b scale x)
 
 def intervalCompressionScale (n : ℕ) : ℝ :=
   1 + 1 / ((n : ℝ) + 1)
 
-theorem contDiff_intervalCompressionMap (a b λ : ℝ) :
-    ContDiff ℝ ∞ (intervalCompressionMap a b λ) :=
+theorem contDiff_intervalCompressionMap (a b scale : ℝ) :
+    ContDiff ℝ ∞ (intervalCompressionMap a b scale) :=
   contDiff_const.add (contDiff_const.mul (contDiff_id.sub contDiff_const))
 
-theorem hasDerivAt_intervalCompressionMap (a b λ x : ℝ) :
-    HasDerivAt (intervalCompressionMap a b λ) λ x := by
+theorem hasDerivAt_intervalCompressionMap (a b scale x : ℝ) :
+    HasDerivAt (intervalCompressionMap a b scale) scale x := by
   simpa only [intervalCompressionMap, mul_one] using
-    (((hasDerivAt_id x).sub_const ((a + b) / 2)).const_mul λ).const_add ((a + b) / 2)
+    (((hasDerivAt_id x).sub_const ((a + b) / 2)).const_mul scale).const_add ((a + b) / 2)
 
 theorem contDiff_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ)
-    (a b λ : ℝ) : ContDiff ℝ ∞ (intervalTestCompression a b λ ψ) :=
-  hψ.comp (contDiff_intervalCompressionMap a b λ)
+    (a b scale : ℝ) : ContDiff ℝ ∞ (intervalTestCompression a b scale ψ) :=
+  hψ.comp (contDiff_intervalCompressionMap a b scale)
 
 theorem deriv_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ)
-    (a b λ : ℝ) :
-    deriv (intervalTestCompression a b λ ψ) =
-      fun x => λ * deriv ψ (intervalCompressionMap a b λ x) := by
+    (a b scale : ℝ) :
+    deriv (intervalTestCompression a b scale ψ) =
+      fun x => scale * deriv ψ (intervalCompressionMap a b scale x) := by
   funext x
-  have hd := ((hψ.differentiable (by simp) (intervalCompressionMap a b λ x)).hasDerivAt.comp
-    x (hasDerivAt_intervalCompressionMap a b λ x)).deriv
-  simpa only [intervalTestCompression, mul_comm] using hd
+  have hd := ((hψ.differentiable (by simp) (intervalCompressionMap a b scale x)).hasDerivAt.comp
+    x (hasDerivAt_intervalCompressionMap a b scale x)).deriv
+  simpa only [intervalTestCompression, Function.comp_def, mul_comm] using hd
 
 theorem secondDeriv_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ)
-    (a b λ : ℝ) :
-    deriv (deriv (intervalTestCompression a b λ ψ)) =
-      fun x => λ ^ 2 * deriv (deriv ψ) (intervalCompressionMap a b λ x) := by
+    (a b scale : ℝ) :
+    deriv (deriv (intervalTestCompression a b scale ψ)) =
+      fun x => scale ^ 2 * deriv (deriv ψ) (intervalCompressionMap a b scale x) := by
   rw [deriv_intervalTestCompression hψ]
   funext x
   have hψ' : ContDiff ℝ ∞ (deriv ψ) := (contDiff_infty_iff_deriv.mp hψ).2
-  have hd := (((hψ'.differentiable (by simp) (intervalCompressionMap a b λ x)).hasDerivAt.comp
-    x (hasDerivAt_intervalCompressionMap a b λ x)).const_mul λ).deriv
+  have hd := (((hψ'.differentiable (by simp) (intervalCompressionMap a b scale x)).hasDerivAt.comp
+    x (hasDerivAt_intervalCompressionMap a b scale x)).const_mul scale).deriv
   exact hd.trans (by ring)
 
 /-- Both endpoints are handled by the midpoint distance estimate. -/
-theorem tsupport_intervalTestCompression_subset {a b λ : ℝ} (hab : a < b) (hλ : 1 < λ)
+theorem tsupport_intervalTestCompression_subset {a b scale : ℝ} (hab : a < b) (hscale : 1 < scale)
     {ψ : ℝ → ℝ} (hψs : Function.support ψ ⊆ Ioo a b) :
-    tsupport (intervalTestCompression a b λ ψ) ⊆ Ioo a b := by
+    tsupport (intervalTestCompression a b scale ψ) ⊆ Ioo a b := by
   let m : ℝ := (a + b) / 2
   let R : ℝ := (b - a) / 2
   have hR : 0 < R := by dsimp [R]; linarith
-  have hλpos : 0 < λ := lt_trans zero_lt_one hλ
-  have hpre : tsupport (intervalTestCompression a b λ ψ) ⊆
-      (intervalCompressionMap a b λ) ⁻¹' Icc a b := by
+  have hscalepos : 0 < scale := lt_trans zero_lt_one hscale
+  have hpre : tsupport (intervalTestCompression a b scale ψ) ⊆
+      (intervalCompressionMap a b scale) ⁻¹' Icc a b := by
     apply closure_minimal
     · intro x hx
-      have hx' : intervalCompressionMap a b λ x ∈ Function.support ψ := hx
+      have hx' : intervalCompressionMap a b scale x ∈ Function.support ψ := hx
       exact ⟨(hψs hx').1.le, (hψs hx').2.le⟩
-    · exact isClosed_Icc.preimage (contDiff_intervalCompressionMap a b λ).continuous
+    · exact isClosed_Icc.preimage (contDiff_intervalCompressionMap a b scale).continuous
   intro x hx
   have hAx := hpre hx
-  have habs : |intervalCompressionMap a b λ x - m| ≤ R := by
+  have habs : |intervalCompressionMap a b scale x - m| ≤ R := by
     apply abs_le.mpr
     dsimp only [m, R]
     constructor <;> linarith [hAx.1, hAx.2]
-  have hmap : intervalCompressionMap a b λ x - m = λ * (x - m) := by
+  have hmap : intervalCompressionMap a b scale x - m = scale * (x - m) := by
     dsimp only [intervalCompressionMap, m]
     ring
-  rw [hmap, abs_mul, abs_of_pos hλpos] at habs
+  rw [hmap, abs_mul, abs_of_pos hscalepos] at habs
   have hinner : |x - m| < R := by
     by_contra hh
     have hge : R ≤ |x - m| := le_of_not_gt hh
-    have hprod : 0 < (λ - 1) * |x - m| :=
-      mul_pos (sub_pos.mpr hλ) (hR.trans_le hge)
+    have hprod : 0 < (scale - 1) * |x - m| :=
+      mul_pos (sub_pos.mpr hscale) (hR.trans_le hge)
     nlinarith
   obtain ⟨hleft, hright⟩ := abs_lt.mp hinner
   dsimp only [m, R] at hleft hright
   constructor <;> linarith
 
-theorem hasCompactSupport_intervalTestCompression {a b λ : ℝ}
-    (hab : a < b) (hλ : 1 < λ) {ψ : ℝ → ℝ}
+theorem hasCompactSupport_intervalTestCompression {a b scale : ℝ}
+    (hab : a < b) (hscale : 1 < scale) {ψ : ℝ → ℝ}
     (hψs : Function.support ψ ⊆ Ioo a b) :
-    HasCompactSupport (intervalTestCompression a b λ ψ) :=
+    HasCompactSupport (intervalTestCompression a b scale ψ) :=
   IsCompact.of_isClosed_subset isCompact_Icc (isClosed_tsupport _)
-    ((tsupport_intervalTestCompression_subset hab hλ hψs).trans Ioo_subset_Icc_self)
+    ((tsupport_intervalTestCompression_subset hab hscale hψs).trans Ioo_subset_Icc_self)
 
 theorem intervalCompressionScale_bounds (n : ℕ) :
     1 < intervalCompressionScale n ∧ intervalCompressionScale n ≤ 2 := by
@@ -118,9 +118,10 @@ theorem intervalCompressionScale_bounds (n : ℕ) :
 
 theorem tendsto_intervalCompressionScale :
     Tendsto intervalCompressionScale atTop (𝓝 (1 : ℝ)) := by
+  change Tendsto (fun n : ℕ => 1 + 1 / ((n : ℝ) + 1)) atTop (𝓝 (1 : ℝ))
   have h : Tendsto (fun n : ℕ => 1 / ((n : ℝ) + 1)) atTop (𝓝 (0 : ℝ)) :=
     tendsto_one_div_add_atTop_nhds_zero_nat
-  simpa only [intervalCompressionScale, add_zero] using
+  simpa only [add_zero] using
     (tendsto_const_nhds.add h : Tendsto (fun n : ℕ => 1 + 1 / ((n : ℝ) + 1))
       atTop (𝓝 (1 + 0 : ℝ)))
 

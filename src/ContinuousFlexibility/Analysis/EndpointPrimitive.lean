@@ -45,11 +45,12 @@ theorem inverse_primitive_unbounded {a b : ℝ} (hab : a < b)
       exact hab
   have hti (x : ℝ) : IntegrableOn (fun r => (w r)⁻¹) (Ioc a (t x)) volume :=
     (intervalIntegrable_inverse_on_inner_Icc hw.continuous hwpos (ht x)).1
+  have hlo : ∀ᶠ x in 𝓝 b, a < x := Ioi_mem_nhds hab
   have hnear : ∀ᶠ x in 𝓝[<] b, x ∈ Ioo a b :=
-    ((Ioi_mem_nhds hab).filter_mono nhdsWithin_le_nhds).and self_mem_nhdsWithin
+    (hlo.filter_mono nhdsWithin_le_nhds).and self_mem_nhdsWithin
   have htendsto : Tendsto t (𝓝[<] b) (𝓝 b) := by
     apply (continuousAt_id.tendsto.mono_left nhdsWithin_le_nhds).congr'
-    exact hnear.mono (fun x hx => by simp only [t, if_pos hx])
+    exact hnear.mono (fun x hx => by simp only [t, if_pos hx, id_eq])
   have hbounded : ∀ᶠ x in 𝓝[<] b,
       (∫ r in Ioc a (t x), ‖(w r)⁻¹‖) ≤ max R 0 := by
     apply Eventually.of_forall
@@ -66,7 +67,7 @@ theorem inverse_primitive_unbounded {a b : ℝ} (hab : a < b)
             (hwpos r ⟨hr.1.le, hr.2.trans_lt hx.2⟩).le)
         _ ≤ R := hn x hx
         _ ≤ max R 0 := le_max_left _ _
-    · simp only [t, if_neg hx, Ioc_self, integral_empty]
+    · simp only [t, if_neg hx, Ioc_self, setIntegral_empty]
       exact le_max_right _ _
   have hi : IntegrableOn (fun r => (w r)⁻¹) (Ioc a b) volume :=
     integrableOn_Ioc_of_intervalIntegral_norm_bounded_right hti htendsto hbounded

@@ -65,42 +65,42 @@ theorem interval_weak_potential_expand {a b : ℝ} (hab : a ≤ b)
 theorem interval_weak_forcing_expand {a b : ℝ} (hab : a ≤ b)
     {u f V g φ : ℝ → ℝ} (hu : MemLp u 2 (volume.restrict (Ioo a b)))
     (hf : MemLp f 2 (volume.restrict (Ioo a b)))
-    (hV : Continuous V) (hg : Continuous g) (hφ : Continuous φ) (λ : ℝ) :
-    (∫ x in a..b, (f x + u x * V x - λ * g x) * φ x) =
+    (hV : Continuous V) (hg : Continuous g) (hφ : Continuous φ) (κ : ℝ) :
+    (∫ x in a..b, (f x + u x * V x - κ * g x) * φ x) =
       (∫ x in a..b, f x * φ x) +
         (∫ x in a..b, u x * (V x * φ x)) -
-          λ * (∫ x in a..b, g x * φ x) := by
+          κ * (∫ x in a..b, g x * φ x) := by
   have hfφ := intervalIntegrable_mul_continuous hab hf hφ
   have huVφ := intervalIntegrable_mul_continuous hab hu (hV.mul hφ)
   have hgφ : IntervalIntegrable (fun x => g x * φ x) volume a b :=
     (hg.mul hφ).intervalIntegrable _ _
-  have heq : (fun x => (f x + u x * V x - λ * g x) * φ x) =
-      (fun x => (f x * φ x + u x * (V x * φ x)) - λ * (g x * φ x)) := by
+  have heq : (fun x => (f x + u x * V x - κ * g x) * φ x) =
+      (fun x => (f x * φ x + u x * (V x * φ x)) - κ * (g x * φ x)) := by
     funext x
     ring
-  rw [heq, intervalIntegral.integral_sub (hfφ.add huVφ) (hgφ.const_mul λ),
+  rw [heq, intervalIntegral.integral_sub (hfφ.add huVφ) (hgφ.const_mul κ),
     intervalIntegral.integral_add hfφ huVφ, intervalIntegral.integral_const_mul]
 
 /-- A bounded potential does not change the test compression argument. -/
 theorem extend_weak_potential_tests_interval {a b : ℝ} (hab : a < b)
     {u f w V g : ℝ → ℝ} (hu : MemLp u 2 (volume.restrict (Ioo a b)))
     (hf : MemLp f 2 (volume.restrict (Ioo a b)))
-    (hw : ContDiff ℝ ∞ w) (hV : Continuous V) (hg : Continuous g) (λ : ℝ)
+    (hw : ContDiff ℝ ∞ w) (hV : Continuous V) (hg : Continuous g) (κ : ℝ)
     (hstrict : ∀ φ : ℝ → ℝ, ContDiff ℝ ∞ φ → HasCompactSupport φ →
       tsupport φ ⊆ Ioo a b →
         (∫ x in a..b, u x *
           (deriv (fun y => w y * deriv φ y) x - V x * φ x)) +
-            λ * (∫ x in a..b, g x * φ x) = ∫ x in a..b, f x * φ x)
+            κ * (∫ x in a..b, g x * φ x) = ∫ x in a..b, f x * φ x)
     {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ) (hψc : HasCompactSupport ψ)
     (hψs : Function.support ψ ⊆ Ioo a b) :
     (∫ x in a..b, u x *
       (deriv (fun y => w y * deriv ψ y) x - V x * ψ x)) +
-        λ * (∫ x in a..b, g x * ψ x) = ∫ x in a..b, f x * ψ x := by
-  let H : ℝ → ℝ := fun x => f x + u x * V x - λ * g x
+        κ * (∫ x in a..b, g x * ψ x) = ∫ x in a..b, f x * ψ x := by
+  let H : ℝ → ℝ := fun x => f x + u x * V x - κ * g x
   have hH : IntegrableOn H (Ioo a b) volume :=
     ((interval_memLp_integrable hf).add
       (interval_integrable_mul_continuous hu hV)).sub
-        ((interval_memLp_integrable (interval_memLp_of_continuous hg)).const_mul λ)
+        ((interval_memLp_integrable (interval_memLp_of_continuous hg)).const_mul κ)
   have hstrict' : ∀ φ : ℝ → ℝ, ContDiff ℝ ∞ φ → HasCompactSupport φ →
       tsupport φ ⊆ Ioo a b →
         (∫ x in a..b, u x * deriv (fun y => w y * deriv φ y) x) =
@@ -108,14 +108,14 @@ theorem extend_weak_potential_tests_interval {a b : ℝ} (hab : a < b)
     intro φ hφ hφc hφs
     have h := hstrict φ hφ hφc hφs
     rw [interval_weak_potential_expand hab.le hu hw hV hφ] at h
-    change _ = ∫ x in a..b, (f x + u x * V x - λ * g x) * φ x
-    rw [interval_weak_forcing_expand hab.le hu hf hV hg hφ.continuous λ]
+    change _ = ∫ x in a..b, (f x + u x * V x - κ * g x) * φ x
+    rw [interval_weak_forcing_expand hab.le hu hf hV hg hφ.continuous κ]
     linarith
   have heq := extend_weak_divergence_tests_interval hab
     (interval_memLp_integrable hu) hH hw hstrict' hψ hψc hψs
   change (∫ x in a..b, u x * deriv (fun y => w y * deriv ψ y) x) =
-    ∫ x in a..b, (f x + u x * V x - λ * g x) * ψ x at heq
-  rw [interval_weak_forcing_expand hab.le hu hf hV hg hψ.continuous λ] at heq
+    ∫ x in a..b, (f x + u x * V x - κ * g x) * ψ x at heq
+  rw [interval_weak_forcing_expand hab.le hu hf hV hg hψ.continuous κ] at heq
   rw [interval_weak_potential_expand hab.le hu hw hV hψ]
   linarith
 
