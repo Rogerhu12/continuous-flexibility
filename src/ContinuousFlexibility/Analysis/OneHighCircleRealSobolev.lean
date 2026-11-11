@@ -93,8 +93,19 @@ theorem circle_real_derivative_product_oneHigh (k s : ℕ)
   have h := circle_derivative_product_oneHigh k s
     (fun i j => circleComplexify (f i j))
     (fun i => circleComplexify_hasDerivAt (f i) (hderiv i)) a ha
+  have hprodR : (∏ i : Fin (k + 1), (f i (a i) : AddCircle P → ℝ)) =
+      ((∏ i : Fin (k + 1), f i (a i) : C(AddCircle P, ℝ)) : AddCircle P → ℝ) := by
+    funext θ
+    simp only [Finset.prod_apply, ContinuousMap.prod_apply]
+  have hprodC :
+      (∏ i : Fin (k + 1), (circleComplexify (f i (a i)) : AddCircle P → ℂ)) =
+      ((∏ i : Fin (k + 1), circleComplexify (f i (a i)) : C(AddCircle P, ℂ)) :
+        AddCircle P → ℂ) := by
+    funext θ
+    simp only [Finset.prod_apply, ContinuousMap.prod_apply]
   have he : eLpNorm (∏ i, circleComplexify (f i (a i))) 2 AddCircle.haarAddCircle =
       eLpNorm (∏ i, f i (a i)) 2 AddCircle.haarAddCircle := by
+    rw [hprodC, hprodR]
     apply eLpNorm_congr_norm_ae
       (∏ i, circleComplexify (f i (a i))).continuous.aestronglyMeasurable
       (∏ i, f i (a i)).continuous.aestronglyMeasurable

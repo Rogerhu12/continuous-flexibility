@@ -91,6 +91,14 @@ theorem cylinderFrequencyCutoff_sobolev_le {F : ℝ × ℤ → ℂ} {s : ℝ}
   rw [cylinderFrequencyCutoff_weighted]
   exact cylinderFrequencyCutoff_eLpNorm_le N _ 2
 
+theorem cylinderFrequencyCutoff_mul_left (N : ℕ) (M F : ℝ × ℤ → ℂ) :
+    (fun ζ => M ζ * cylinderFrequencyCutoff (P := P) N F ζ) =
+      cylinderFrequencyCutoff (P := P) N (fun ζ => M ζ * F ζ) := by
+  funext ζ
+  by_cases h : cylinderFrequencyWeight (2 * Real.pi) (2 * Real.pi / P) ζ ≤ (N : ℝ)
+  · simp only [cylinderFrequencyCutoff, if_pos h]
+  · simp only [cylinderFrequencyCutoff, if_neg h, mul_zero]
+
 theorem norm_cylinderMultiplier_cutoff_le (N i j : ℕ) (F : ℝ × ℤ → ℂ) (ζ : ℝ × ℤ) :
     ‖cylinderDerivativeMultiplier P i j ζ * cylinderFrequencyCutoff (P := P) N F ζ‖ ≤
       (N : ℝ) ^ (i + j) * ‖F ζ‖ := by
@@ -119,7 +127,28 @@ theorem cylinderMultiplier_cutoff_memLp_two {F : ℝ × ℤ → ℂ}
     ((measurable_cylinderDerivativeMultiplier P i j).mul
       (measurable_cylinderFrequencyCutoff hF N)).aestronglyMeasurable
   exact Eventually.of_forall fun ζ => by
-    simpa only [Pi.smul_apply, norm_smul, Real.norm_of_nonneg
+    simpa only [Pi.mul_apply, Pi.smul_apply, norm_smul, Real.norm_of_nonneg
       (pow_nonneg (Nat.cast_nonneg N) (i + j))] using norm_cylinderMultiplier_cutoff_le N i j F ζ
+
+/-- Every natural Sobolev weight is bounded on the cutoff support. -/
+theorem cylinderFrequencyCutoff_weighted_memLp_all {F : ℝ × ℤ → ℂ}
+    (hF : Measurable F) (hF2 : MemLp F 2 cylinderFrequencyMeasure) (N s : ℕ) :
+    MemLp (frequencyWeighted
+      (cylinderFrequencyWeight (2 * Real.pi) (2 * Real.pi / P)) (s : ℝ)
+      (cylinderFrequencyCutoff (P := P) N F)) 2 cylinderFrequencyMeasure := by
+  apply (hF2.const_smul ((N : ℝ) ^ s)).of_le
+    (frequencyWeighted_aestronglyMeasurable
+      (continuous_cylinderFrequencyWeight _ _).measurable.aemeasurable
+      (measurable_cylinderFrequencyCutoff hF N).aestronglyMeasurable _)
+  exact Eventually.of_forall fun ζ => by
+    simp only [Pi.smul_apply, norm_smul,
+      Real.norm_of_nonneg (pow_nonneg (Nat.cast_nonneg N) s)]
+    rw [cylinder_norm_frequencyWeighted_nat]
+    by_cases h : cylinderFrequencyWeight (2 * Real.pi) (2 * Real.pi / P) ζ ≤ (N : ℝ)
+    · rw [cylinderFrequencyCutoff, if_pos h]
+      exact mul_le_mul_of_nonneg_right
+        (pow_le_pow_left₀ (cylinderFrequencyWeight_pos _ _ ζ).le h s) (norm_nonneg _)
+    · rw [cylinderFrequencyCutoff, if_neg h, norm_zero, mul_zero]
+      positivity
 
 end ContinuousFlexibility.Analysis

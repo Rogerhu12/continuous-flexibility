@@ -55,7 +55,7 @@ theorem norm_cylinderDerivativeMultiplier (P : ℝ) (i j : ℕ) (ζ : ℝ × ℤ
     ‖cylinderDerivativeMultiplier P i j ζ‖ =
       |2 * Real.pi * ζ.1| ^ i * |(2 * Real.pi / P) * (ζ.2 : ℝ)| ^ j := by
   simp only [cylinderDerivativeMultiplier, norm_mul, norm_pow, Complex.norm_I,
-    Complex.norm_real, Real.norm_eq_abs, one_mul]
+    Complex.norm_real, Real.norm_eq_abs, one_mul, abs_mul]
 
 theorem norm_cylinderDerivativeMultiplier_le_weight (P : ℝ) (i j s : ℕ)
     (hij : i + j ≤ s) (ζ : ℝ × ℤ) :

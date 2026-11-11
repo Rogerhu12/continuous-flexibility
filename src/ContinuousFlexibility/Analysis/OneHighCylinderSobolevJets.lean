@@ -51,7 +51,6 @@ private theorem CylinderSmoothJet.exists_memLp_fourier_derivative
             cylinderFourier (u.jet 0 j) (u.continuous 0 j) hj2 ζ) =ᵐ[cylinderFrequencyMeasure]
           fun ζ => cylinderDerivativeMultiplier P 0 (j + 1) ζ * F ζ := by
         filter_upwards [hje] with ζ hζ
-        dsimp only
         rw [hζ, cylinderDerivativeMultiplier_angular_succ]
         simp only [circlePhysicalFrequency, mul_assoc]
       have hM2 := (memLp_congr_ae hMeq).mpr hnext
@@ -72,7 +71,6 @@ private theorem CylinderSmoothJet.exists_memLp_fourier_derivative
           cylinderFourier (u.jet i j) (u.continuous i j) hij2 ζ) =ᵐ[cylinderFrequencyMeasure]
         fun ζ => cylinderDerivativeMultiplier P (i + 1) j ζ * F ζ := by
       filter_upwards [hije] with ζ hζ
-      dsimp only
       rw [hζ, cylinderDerivativeMultiplier_radial_succ]
       simp only [Complex.ofReal_mul, Complex.ofReal_ofNat]
       ring
@@ -123,6 +121,7 @@ theorem CylinderSmoothJet.derivative_eLpNorm_two_le (u : CylinderSmoothJet P)
         ((measurable_cylinderDerivativeMultiplier P i j).mul
           (measurable_cylinderFourier (u.jet 0 0) (u.continuous 0 0) hu2)).aestronglyMeasurable
       exact Eventually.of_forall fun ζ => by
+        simp only [Pi.mul_apply]
         rw [norm_mul, cylinder_norm_frequencyWeighted_nat]
         exact mul_le_mul_of_nonneg_right
           (norm_cylinderDerivativeMultiplier_le_weight P i j s hij ζ) (norm_nonneg _)

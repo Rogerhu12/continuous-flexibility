@@ -25,7 +25,7 @@ theorem continuous_cylinder_of_lift {f : ℝ × AddCircle P → E}
     (hf : Continuous (fun p : ℝ × ℝ => f (p.1, (p.2 : AddCircle P)))) :
     Continuous f := by
   have hq := (IsOpenQuotientMap.id (X := ℝ)).prodMap
-    (QuotientAddGroup.isOpenQuotientMap_mk (AddSubgroup.zmultiples P))
+    (QuotientAddGroup.isOpenQuotientMap_mk (N := AddSubgroup.zmultiples P))
   exact hq.isQuotientMap.continuous_iff.mpr hf
 
 private theorem contDiff_parametric_angular_derivative

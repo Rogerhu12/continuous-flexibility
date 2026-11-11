@@ -77,7 +77,7 @@ theorem cylinder_memLp_angularDerivative_of_frequency
     have ht : cylinderAngularCoefficient df n =ᵐ[volume]
         c n • cylinderAngularCoefficient f n := Eventually.of_forall (congrFun (heq n))
     have hl := (hc n).toLp_congr (hcf.const_smul (c n)) ht
-    rw [MemLp.toLp_const_smul] at hl
+    rw [MemLp.toLp_const_smul (c n) hcf] at hl
     rw [hl, FourierTransform.fourier_smul]
     exact Lp.coeFn_smul _ _
   exact cylinder_memLp_two_of_fourier_modes df hdf M hM hM2 hc he

@@ -91,7 +91,11 @@ theorem cylinderFourier_mul_ae (f g : ℝ × AddCircle P → ℂ)
     (continuous_cylinderFourierInverse hH1) (hf.mul hg)
     (cylinderFourierInverse_memLp_two hHm hH1 hH2)
     (cylinder_mul_memLp_two f g hf hg hf2 hg2 hF1 hG1) he
-  exact (Eventually.of_forall fun ζ => congrFun hFe.symm ζ).trans
-    (cylinderFourier_inverse_ae hHm hH1 hH2)
+  have hFeAE : cylinderFourier (fun p => f p * g p) (hf.mul hg)
+      (cylinder_mul_memLp_two f g hf hg hf2 hg2 hF1 hG1) =ᵐ[cylinderFrequencyMeasure]
+      cylinderFourier (cylinderFourierInverse H) (continuous_cylinderFourierInverse hH1)
+        (cylinderFourierInverse_memLp_two hHm hH1 hH2) :=
+    Eventually.of_forall fun ζ => congrFun hFe.symm ζ
+  exact hFeAE.trans (cylinderFourier_inverse_ae hHm hH1 hH2)
 
 end ContinuousFlexibility.Analysis

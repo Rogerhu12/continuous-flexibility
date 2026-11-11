@@ -56,9 +56,10 @@ theorem cylinder_real_sobolevNorm_zero_eq_l2 (f : ℝ × AddCircle P → ℝ)
     (hf : Continuous f) (hf2 : MemLp f 2 (cylinderPhysicalMeasure P)) :
     cylinderRealSobolevNorm 0 f hf hf2 =
       (eLpNorm f 2 (cylinderPhysicalMeasure P)).toReal := by
-  simpa only [cylinder_eLpNorm_complexify] using
-    cylinder_frequencySobolevNorm_zero_eq_l2 (cylinderComplexify f)
-      (continuous_cylinderComplexify hf) (cylinderComplexify_memLp hf hf2)
+  have h := cylinder_frequencySobolevNorm_zero_eq_l2 (cylinderComplexify f)
+    (continuous_cylinderComplexify hf) (cylinderComplexify_memLp hf hf2)
+  rw [cylinder_eLpNorm_complexify f hf 2] at h
+  exact h
 
 /-- Finite Sobolev membership of a real jet in the same actual Fourier
 representation used for complex functions. -/
