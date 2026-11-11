@@ -27,14 +27,22 @@ theorem angularBasisProjection_error_sq {f : ℝ → ℝ}
   let hF := memLp_referenceAngularProbability hf
   let hP := memLp_referenceAngularProbability
     (memLp_referenceAngular_interval_of_continuous (continuous_angularBasisProjection I f))
-  rw [← integral_referenceAngularProbability, ← reference_memLp_norm_sq_eq_integral (hP.sub hF),
-    MemLp.toLp_sub, norm_sub_sq_real,
-    reference_memLp_norm_sq_eq_integral hP, reference_memLp_norm_sq_eq_integral hF,
+  have hnorm :
+      radialAngularMean (fun θ => (angularBasisProjection I f θ - f θ) ^ 2) =
+        ‖hP.toLp (angularBasisProjection I f) - hF.toLp f‖ ^ 2 := by
+    rw [← integral_referenceAngularProbability]
+    calc
+      (∫ θ, (angularBasisProjection I f θ - f θ) ^ 2 ∂referenceAngularProbability) =
+          ‖(hP.sub hF).toLp (angularBasisProjection I f - f)‖ ^ 2 :=
+        (reference_memLp_norm_sq_eq_integral (hP.sub hF)).symm
+      _ = ‖hP.toLp (angularBasisProjection I f) - hF.toLp f‖ ^ 2 := by
+        rw [MemLp.toLp_sub hP hF]
+  rw [hnorm, norm_sub_sq_real]
+  simp only [reference_memLp_norm_sq_eq_integral hP,
+    reference_memLp_norm_sq_eq_integral hF,
     reference_memLp_inner_eq_integral hP hF,
-    integral_referenceAngularProbability, integral_referenceAngularProbability,
     integral_referenceAngularProbability, angularBasisProjection_sq,
     angularBasisProjection_pairing hf]
-  simp only [← pow_two]
   ring
 
 theorem angularBasisProjection_error_sq_le {f : ℝ → ℝ}

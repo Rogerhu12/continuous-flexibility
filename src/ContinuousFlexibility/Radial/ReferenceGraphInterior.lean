@@ -167,10 +167,14 @@ theorem referenceGraph_exists_smooth_coefficient {D : ReferenceData}
     (referenceCoefficientForcing_contDiff hgeom hborder hF n)
   intro φ hφ hφc hφs
   have h := referenceGraph_coefficient_equation hgeom hgraph n hφ hφc hφs
-  have hfI := ((contDiff_referenceRadialCoefficient hF n).continuous.mul
-    hφ.continuous).intervalIntegrable D.a D.b
-  have hcI := ((referenceColumn_contDiff hgeom hborder).continuous.mul
-    hφ.continuous).intervalIntegrable D.a D.b
+  have hfI : IntervalIntegrable
+      (fun r => referenceRadialCoefficient F.1 n r * φ r) volume D.a D.b :=
+    ((contDiff_referenceRadialCoefficient hF n).continuous.mul
+      hφ.continuous).intervalIntegrable D.a D.b
+  have hcI : IntervalIntegrable
+      (fun r => referenceColumn D r * φ r) volume D.a D.b :=
+    ((referenceColumn_contDiff hgeom hborder).continuous.mul
+      hφ.continuous).intervalIntegrable D.a D.b
   have he :
       (∫ r in D.a..D.b, referenceCoefficientForcing D U F n r * φ r) =
         (∫ r in D.a..D.b, referenceRadialCoefficient F.1 n r * φ r) -

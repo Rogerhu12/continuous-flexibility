@@ -50,7 +50,7 @@ theorem hasDerivAt_referenceRadialCoefficient {u : PolarPoint → ℝ}
     intro θ _hθ
     have h₁ : HasDerivAt (fun t => G (t, θ)) (L θ 1) r := by
       have h := ((hG.differentiable (by simp)) (r, θ)).hasFDerivAt.comp r
-        (hasFDerivAt_prodMk_left r θ)
+        (hasFDerivAt_prodMk_left (𝕜 := ℝ) r θ)
       simpa only [L, Function.comp_def] using h.hasDerivAt
     have h₂ : HasDerivAt (fun t => G (t, θ))
         (radialPartial u (r, θ) * referenceAngularBasis n θ) r :=
