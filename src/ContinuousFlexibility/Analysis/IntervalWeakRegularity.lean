@@ -52,7 +52,12 @@ theorem exists_contDiffOn_one_rep_of_weak_divergence_Ioo {a b : ℝ}
     (hw.inv hwn).continuousOn
   let g : ℝ → ℝ := fun x => H x / w x
   have hg : ContinuousOn g (Ioo a b) := by
-    simpa only [g, div_eq_mul_inv, Pi.mul_apply] using hH.mul hInv
+    have heq : g = H * (fun x => (w x)⁻¹) := by
+      funext x
+      change H x / w x = H x * (w x)⁻¹
+      exact div_eq_mul_inv (H x) (w x)
+    rw [heq]
+    exact hH.mul hInv
   let V : ℝ → ℝ := intervalLocalPrimitive g x₀
   have hVder (x : ℝ) (hx : x ∈ Ioo a b) : HasDerivAt V (g x) x :=
     hasDerivAt_intervalLocalPrimitive_of_continuousOn hg hx₀ hx

@@ -14,6 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
+open scoped ContDiff Topology
 open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false

@@ -36,6 +36,7 @@ theorem r11b_memLp_withDensity_ofReal_of_bound
   apply hf.of_le_mul (c := Real.sqrt C)
     (hw.sqrt.aestronglyMeasurable.mul hf.aestronglyMeasurable)
   filter_upwards [hbound] with x hx
+  change ‖Real.sqrt (w x) * f x‖ ≤ Real.sqrt C * ‖f x‖
   rw [norm_mul, Real.norm_of_nonneg (Real.sqrt_nonneg _)]
   exact mul_le_mul_of_nonneg_right (Real.sqrt_le_sqrt hx) (norm_nonneg _)
 

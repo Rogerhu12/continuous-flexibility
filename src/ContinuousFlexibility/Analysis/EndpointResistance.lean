@@ -32,7 +32,7 @@ theorem exists_endpoint_linear_bound {a b : ℝ} (hab : a < b)
   refine ⟨K, hK, fun r hr => ?_⟩
   have h := Convex.norm_image_sub_le_of_norm_deriv_le
     (fun x (_ : x ∈ Icc a b) => hw.differentiable (by simp) x)
-    hbound convex_Icc (show b ∈ Icc a b from ⟨hab.le, le_rfl⟩) hr
+    hbound (convex_Icc a b) (show b ∈ Icc a b from ⟨hab.le, le_rfl⟩) hr
   simpa only [hwb, sub_zero, Real.norm_eq_abs, abs_of_nonpos (sub_nonpos.mpr hr.2),
     neg_sub] using h
 

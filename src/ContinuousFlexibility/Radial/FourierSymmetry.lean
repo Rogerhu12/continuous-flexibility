@@ -49,7 +49,7 @@ theorem integral_eq_zero_of_half_turn_neg {g : ℝ → ℝ}
       (∫ θ in (0 : ℝ)..2 * Real.pi, g (θ + Real.pi)) =
         ∫ θ in (0 : ℝ)..2 * Real.pi, g θ := by
     rw [intervalIntegral.integral_comp_add_right]
-    simpa only [zero_add, add_comm] using hp.intervalIntegral_add_eq Real.pi 0
+    simpa only [zero_add, add_zero, add_comm] using hp.intervalIntegral_add_eq Real.pi 0
   have hneg :
       (∫ θ in (0 : ℝ)..2 * Real.pi, g (θ + Real.pi)) =
         -(∫ θ in (0 : ℝ)..2 * Real.pi, g θ) := by
