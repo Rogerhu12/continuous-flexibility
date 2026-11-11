@@ -48,8 +48,7 @@ private theorem n01c_coefficientNorm_one_le_of_head
   have hproduct : circleRealSobolevNorm 3 (O 0) *
       circleRealSobolevNorm 0 (Q 0) ≤ B * M :=
     mul_le_mul houter hQ₀ (circle_real_sobolevNorm_nonneg _ _) hB
-  change circleRealSobolevNorm 1 (V.coefficient t 0) ≤ _
-  rw [hcoefficient]
+  rw [CircleLinearVariationData.coefficientNorm, Nat.cast_one, hcoefficient]
   exact hhead.trans (mul_le_mul_of_nonneg_left
     (add_le_add (hO₁.trans houter) hproduct) hK)
 

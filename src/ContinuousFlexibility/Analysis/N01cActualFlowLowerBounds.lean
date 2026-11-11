@@ -100,7 +100,9 @@ theorem n01_ordinaryFlowLowerFactors_bounds
             (u.state - (C.referenceState, 0)) v
             (fun j => u.plot (u.directions j))
             (fun j => u.unit (choice.1.emb i j))
-            (fun j => Finset.single_le_sum (fun l _ => apply_nonneg _ _)
+            (fun j => Finset.single_le_sum
+              (f := fun l : Fin N => p high (u.plot (u.directions l)))
+              (fun l _ => apply_nonneg _ _)
               (Finset.mem_univ (choice.1.emb i j)))
           exact hs.trans (mul_le_mul_of_nonneg_right
             (by exact_mod_cast Nat.add_le_add_right hk.le 1)

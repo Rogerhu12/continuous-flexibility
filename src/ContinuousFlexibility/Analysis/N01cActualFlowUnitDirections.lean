@@ -19,6 +19,30 @@ set_option backward.isDefEq.respectTransparency true
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
+private theorem n01c_finiteDirectionMap_unitTuple
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {n : ℕ} (v : Fin n → E) :
+    (fun i : Fin n => finiteDirectionMap v (Pi.single i (1 : ℝ))) = v := by
+  funext i
+  exact (finiteDirectionMap_single v i (1 : ℝ)).trans (one_smul ℝ (v i))
+
+private theorem n01c_finiteDirectionMap_unitTuple_eval
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {n : ℕ} (v : Fin n → E) (F : (Fin n → E) → ℝ) :
+    F (fun i => finiteDirectionMap v (Pi.single i (1 : ℝ))) = F v :=
+  congrArg F (n01c_finiteDirectionMap_unitTuple v)
+
+private theorem n01c_radius_tuple_value_transport
+    {X : Type*} {I : Set ℝ} (F : ∀ r : ℝ, r ∈ I → X → ℝ)
+    {r₀ r : ℝ} (hr₀ : r₀ ∈ I) (hr : r ∈ I) (he : r₀ = r)
+    {u v : X} (hu : u = v) {value : ℝ} (hvalue : value = F r₀ hr₀ u) :
+    value = F r hr v := by
+  subst r
+  subst v
+  exact hvalue
+
 variable {D : ReferenceData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base N : ℕ} {ε : ℝ}
 
@@ -51,8 +75,10 @@ theorem ordinaryFlowVariationInputOfDirections_aggregate
     (ordinaryFlowVariationInputOfDirections m J x hx v hv).aggregate s =
       (1 + pairGrading (stateGrading S) realGrading s (x - (C.referenceState, 0))) +
         ∑ i, pairGrading (stateGrading S) realGrading s (v i) := by
-  simp only [OrdinaryFlowVariationInput.aggregate, ordinaryFlowVariationInputOfDirections,
-    finiteDirectionMap_single, one_smul]
+  exact n01c_finiteDirectionMap_unitTuple_eval v
+    (fun w => (1 + pairGrading (stateGrading S) realGrading s
+      (x - (C.referenceState, 0))) +
+        ∑ i, pairGrading (stateGrading S) realGrading s (w i))
 
 variable {T : MaterialData}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -61,8 +87,8 @@ variable {T : MaterialData}
     r ∈ Icc (C.left i) (C.right i) →
       0 < twoRootDivided (componentOpticalSquare D S C i z) (C.left i) (C.right i) r)
 
-/-- Both surjections concern the original closed component. -/
 include hA in
+/-- Both surjections concern the original closed component. -/
 theorem exists_ordinaryFlowCompactTime_of_radius (m : ℕ) {r : ℝ}
     (hr : r ∈ Icc (C.left m) (C.right m)) :
     ∃ t ∈ Icc (0 : ℝ) 1,
@@ -84,10 +110,14 @@ theorem ordinaryFlowVariationInputOfDirections_value {n : ℕ}
       (circleFlowCompactTime 0 Real.pi t) = r) :
     ((ordinaryFlowVariationInputOfDirections m J x hx v hv).data hS hT hA hB hpos).value t b (θ : AddCircle Real.pi) =
       (ordinaryFlowAngularStateSmoothDirections hS hT hA hB hpos m J hr b θ).D (n + 1) x v := by
-  have he := ordinaryFlowCircleVariationData_value hS hT hA hB hpos m J x hx
-    (finiteDirectionMap v) n (fun i => Pi.single i 1) t b θ
-  rw [ht] at he
-  simpa only [OrdinaryFlowVariationInput.data, ordinaryFlowVariationInputOfDirections,
-    finiteDirectionMap_single, one_smul] using he
+  exact n01c_radius_tuple_value_transport
+    (fun r hr (w : Fin (n + 1) → AnnularState S × ℝ) =>
+      (ordinaryFlowAngularStateSmoothDirections hS hT hA hB hpos m J hr b θ).D
+        (n + 1) x w)
+    (rootCosinePath_mem_Icc (hA.2.2.1.1 m).2.1.le
+      (circleFlowCompactTime 0 Real.pi t)) hr ht
+    (n01c_finiteDirectionMap_unitTuple v)
+    (ordinaryFlowCircleVariationData_value hS hT hA hB hpos m J x hx
+      (finiteDirectionMap v) n (fun i => Pi.single i (1 : ℝ)) t b θ)
 
 end ContinuousFlexibility.Statements
