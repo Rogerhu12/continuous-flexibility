@@ -51,6 +51,7 @@ theorem n05_canonicalHeight_output_piece_bound
       (K.chart (C.referenceState, 0) k p).2 = p.2 :=
     fun _ hp => n05_controlledReference_chart_second hcoordinates k hp
   let n : ℕ := D.cellIndex (K.cell k)
+  have hE : 0 < radialE n := Real.exp_pos _
   let P : Set PolarPoint :=
     Ioo (K.physicalLeft k) (K.physicalRight k) ×ˢ Ioc (0 : ℝ) Real.pi
   let q : PolarPoint → ℝ := fun p =>
@@ -86,8 +87,9 @@ theorem n05_canonicalHeight_output_piece_bound
         (Real.exp (2 * γ * radialS n) * ∫ p, f p ^ 2 ∂volume.restrict P) := by ring
     _ ≤ (B * radialE n ^ A) *
         (C0 * radialE n ^ A0 * ∑' j, outputCellSquare D γ M f j) :=
-      mul_le_mul_of_nonneg_left hbound (by positivity)
-    _ = _ := by rw [Real.rpow_add (Real.exp_pos _)]; ring
+      mul_le_mul_of_nonneg_left hbound
+        (mul_nonneg hB.le (Real.rpow_nonneg hE.le A))
+    _ = _ := by rw [Real.rpow_add hE]; ring
 
 /-- The same estimate uses the left scalar selected for the physical
 inverse, with the actual physical-space cutoff in its canonical output. -/
@@ -114,13 +116,15 @@ theorem n05_outputRealization_canonical_piece_bound
     n05_outputRemainder_cutoff_bound hD.1 hD.2.2.2.1 hS.2.2.1 γ M
   refine ⟨C0 * C1, A, mul_pos hC0 hC1, hA, fun k a U u hU hrep => ?_⟩
   obtain ⟨hf, hsum, hbound⟩ := hcutoff a U hU
+  have hE : 0 < radialE (D.cellIndex (K.cell k)) := Real.exp_pos _
   calc
     _ ≤ C0 * radialE (D.cellIndex (K.cell k)) ^ A *
         ∑' j, outputCellSquare D γ M (fun p => U.1 p - a * S.chiLeft p.1) j :=
       hpiece k _ u hf hsum hrep
     _ ≤ C0 * radialE (D.cellIndex (K.cell k)) ^ A *
         (C1 * outputNormSquare D γ M a U) :=
-      mul_le_mul_of_nonneg_left hbound (by positivity)
+      mul_le_mul_of_nonneg_left hbound
+        (mul_nonneg hC0.le (Real.rpow_nonneg hE.le A))
     _ = _ := by ring
 
 end ContinuousFlexibility.Statements
