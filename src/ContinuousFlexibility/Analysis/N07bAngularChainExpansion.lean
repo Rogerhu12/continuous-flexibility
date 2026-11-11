@@ -66,7 +66,7 @@ theorem n07b_angularChain_card (j : ℕ) :
 /-- Each branch raises the total material jet order by at most one. -/
 theorem n07b_angularChain_order (j : ℕ) (i : n07bAngularChainIndex j) :
     n07bAngularChainRadial j i + n07bAngularChainAngular j i ≤ j := by
-  induction j generalizing i with
+  induction j with
   | zero => simp [n07bAngularChainRadial, n07bAngularChainAngular]
   | succ j ih =>
       rcases i with ⟨i, k⟩
@@ -122,7 +122,7 @@ theorem n07b_angularChainCoefficient_contDiffAt (m : ℕ) (β : ℝ)
   have hxclosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
     ⟨hx.1.1.le, hx.1.2.le⟩
   have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hs m x hxclosed
-  induction j generalizing i with
+  induction j with
   | zero =>
       have hJ := ContinuousFlexibility.contDiffAt_planeJacobian hclosed.1
       exact hclosed.2.1.div (hJ.abs hclosed.2.2.1) (abs_ne_zero.mpr hclosed.2.2.1)

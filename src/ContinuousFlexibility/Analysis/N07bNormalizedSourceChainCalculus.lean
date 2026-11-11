@@ -21,7 +21,7 @@ theorem n07b_inverseAngle_const_mul (Ψ : PolarPoint → PolarPoint) (a : ℝ)
     {g : PolarPoint → ℝ} {x : PolarPoint} (hg : DifferentiableAt ℝ g x) :
     n07bInverseAngleDerivative Ψ (fun y => a * g y) x =
       a * n07bInverseAngleDerivative Ψ g x := by
-  rw [n07b_inverseAngle_mul Ψ differentiableAt_const hg]
+  rw [n07b_inverseAngle_mul Ψ (differentiableAt_const a) hg]
   simp [n07bInverseAngleDerivative, radialPartial, angularPartial]
 
 /-- The actual square-root derivative in the inverse angular direction. -/
@@ -32,7 +32,7 @@ theorem n07b_inverseAngle_sqrt (Ψ : PolarPoint → PolarPoint)
       n07bInverseAngleDerivative Ψ Ω x / (2 * Real.sqrt (Ω x)) := by
   have hs := hΩ.sqrt hpos.ne'
   have heq : (fun y => Real.sqrt (Ω y) * Real.sqrt (Ω y)) =ᶠ[𝓝 x] Ω := by
-    filter_upwards [hΩ.continuousAt.eventually (gt_mem_nhds hpos)] with y hy
+    filter_upwards [hΩ.continuousAt.eventually (isOpen_Ioi.mem_nhds hpos)] with y hy
     exact Real.mul_self_sqrt hy.le
   have hd : n07bInverseAngleDerivative Ψ
       (fun y => Real.sqrt (Ω y) * Real.sqrt (Ω y)) x =

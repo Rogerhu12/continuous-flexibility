@@ -29,21 +29,21 @@ theorem n07b_c2_radialPDE_eq_polar_jets
   have hnear : ∀ᶠ y in 𝓝 x, DifferentiableAt ℝ u y :=
     (hu.eventually (by norm_num)).mono (fun _ hy => hy.differentiableAt (by norm_num))
   have hrmap : Tendsto (fun r : ℝ => (r, x.2)) (𝓝 x.1) (𝓝 x) := by
-    simpa only [Prod.eta] using
+    simpa only [ContinuousAt, id_eq, Prod.eta] using
       (continuousAt_id.prodMk continuousAt_const :
         ContinuousAt (fun r : ℝ => (r, x.2)) x.1)
   have hθmap : Tendsto (fun θ : ℝ => (x.1, θ)) (𝓝 x.2) (𝓝 x) := by
-    simpa only [Prod.eta] using
+    simpa only [ContinuousAt, id_eq, Prod.eta] using
       (continuousAt_const.prodMk continuousAt_id :
         ContinuousAt (fun θ : ℝ => (x.1, θ)) x.2)
   have hrad : deriv (fun r => u (r, x.2)) =ᶠ[𝓝 x.1]
       (fun r => radialPartial u (r, x.2)) := by
-    filter_upwards [hnear.comp_tendsto hrmap] with r hr
-    exact (hasDerivAt_radialSlice hr).deriv
+    filter_upwards [hrmap.eventually hnear] with r hr
+    exact (hasDerivAt_radialSlice (f := u) (x := (r, x.2)) hr).deriv
   have hang : deriv (fun θ => u (x.1, θ)) =ᶠ[𝓝 x.2]
       (fun θ => angularPartial u (x.1, θ)) := by
-    filter_upwards [hnear.comp_tendsto hθmap] with θ hθ
-    exact (hasDerivAt_angularSlice hθ).deriv
+    filter_upwards [hθmap.eventually hnear] with θ hθ
+    exact (hasDerivAt_angularSlice (f := u) (x := (x.1, θ)) hθ).deriv
   have hdr : DifferentiableAt ℝ (radialPartial u) x :=
     (contDiffAt_radialPartial hu (m := 1) (by norm_num)).differentiableAt one_ne_zero
   have hdθ : DifferentiableAt ℝ (angularPartial u) x :=

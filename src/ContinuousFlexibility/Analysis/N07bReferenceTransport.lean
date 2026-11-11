@@ -58,7 +58,8 @@ theorem n07bReferenceTransport_periodic
     (hη : Function.Periodic η (0, Real.pi)) (a : ℝ) :
     Function.Periodic (n07bReferenceTransport S τ q a η) (0, Real.pi) := by
   intro p
-  simp only [n07bReferenceTransport, hτ, hq, hη, Prod.fst_add, add_zero]
+  simp only [n07bReferenceTransport, hτ, Prod.fst_add, add_zero]
+  rw [hq p, hη (τ p)]
 
 /-- Global geometric reflection gives the actual even field. -/
 theorem n07bReferenceTransport_even

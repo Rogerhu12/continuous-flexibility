@@ -26,29 +26,29 @@ theorem n07b_frechetJet_quadratic_decay
     (hbound : ∃ K A : ℝ, 0 ≤ K ∧ ∀ p ∈ annularOpen D,
       ‖iteratedFDeriv ℝ n f p‖ ≤ K * T.H p.1 ^ γ * T.M p.1 ^ A) :
     ∃ δ : ℝ, 0 < δ ∧ ∀ p : PolarPoint, p.1 ∈ Ioo D.a D.b →
-      endpointDistance D p.1 < δ →
-        ‖iteratedFDeriv ℝ n f p‖ ≤ endpointDistance D p.1 ^ 2 := by
+      Statements.endpointDistance D p.1 < δ →
+        ‖iteratedFDeriv ℝ n f p‖ ≤ Statements.endpointDistance D p.1 ^ 2 := by
   obtain ⟨K, A, hK, hbound⟩ := hbound
   have hK1 : 0 < K + 1 := by linarith
   obtain ⟨δ, hδ, hdecay⟩ :=
     exists_material_endpoint_decay hT hγ (inv_pos.mpr hK1) A 2
   refine ⟨δ, hδ, fun p hp hnear => ?_⟩
-  have hd : 0 < endpointDistance D p.1 :=
+  have hd : 0 < Statements.endpointDistance D p.1 :=
     lt_min (sub_pos.mpr hp.1) (sub_pos.mpr hp.2)
-  have hd2 : 0 < endpointDistance D p.1 ^ 2 := pow_pos hd 2
+  have hd2 : 0 < Statements.endpointDistance D p.1 ^ 2 := pow_pos hd 2
   have hpos := hT.2.1 p.1 hp
   have hw : 0 ≤ T.H p.1 ^ γ * T.M p.1 ^ A :=
     mul_nonneg (Real.rpow_pos_of_pos hpos.2.1 _).le
       (Real.rpow_pos_of_pos (zero_lt_one.trans_le hpos.2.2.2) _).le
   have hsmall : T.H p.1 ^ γ * T.M p.1 ^ A <
-      (K + 1)⁻¹ * endpointDistance D p.1 ^ 2 :=
+      (K + 1)⁻¹ * Statements.endpointDistance D p.1 ^ 2 :=
     (div_lt_iff₀ hd2).mp (hdecay p.1 hp hnear)
   calc
     _ ≤ K * T.H p.1 ^ γ * T.M p.1 ^ A := hbound p ⟨hp, mem_univ _⟩
     _ = K * (T.H p.1 ^ γ * T.M p.1 ^ A) := mul_assoc _ _ _
     _ ≤ (K + 1) * (T.H p.1 ^ γ * T.M p.1 ^ A) :=
       mul_le_mul_of_nonneg_right (by linarith) hw
-    _ ≤ (K + 1) * ((K + 1)⁻¹ * endpointDistance D p.1 ^ 2) :=
+    _ ≤ (K + 1) * ((K + 1)⁻¹ * Statements.endpointDistance D p.1 ^ 2) :=
       mul_le_mul_of_nonneg_left hsmall.le hK1.le
     _ = _ := by rw [← mul_assoc, mul_inv_cancel₀ hK1.ne', one_mul]
 

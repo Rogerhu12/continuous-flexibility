@@ -69,7 +69,7 @@ theorem n07b_sourceBound_integrable_chart_iff (m : ℕ) (g : PolarPoint → ℝ)
   have hc := integrableOn_image_iff_integrableOn_abs_det_fderiv_smul
     (volume : Measure PolarPoint) hU hd hinj g
   rw [canonicalChart_image_openStrip hK hz hs m] at hc
-  simpa only [← planeJacobian_eq_fderiv_det, smul_eq_mul] using hc
+  simpa only [IntegrableOn, ← planeJacobian_eq_fderiv_det, smul_eq_mul] using hc
 
 /-- The corresponding raw integral identity uses the same actual chart
 and the same half-open angular period on both sides. -/

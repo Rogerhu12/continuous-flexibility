@@ -21,6 +21,33 @@ open scoped Topology
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n07b_linearFamilyTame_mono
+    {E F G : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (r : ℕ → Seminorm ℝ G) (A : E → G →ₗ[ℝ] F)
+    {U V : Set E} (hVU : V ⊆ U) (h : LinearFamilyTame p q r U A) :
+    LinearFamilyTame p q r V A := by
+  obtain ⟨loss, base, hbound⟩ := h
+  refine ⟨loss, base, fun s hs => ?_⟩
+  obtain ⟨C, hC, hCs⟩ := hbound s hs
+  exact ⟨C, hC, fun x hx => hCs x (hVU hx)⟩
+
+private theorem n07b_smoothTameOn_product_mono
+    {E F G : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (r : ℕ → Seminorm ℝ G) (f : E × G → F)
+    {U V : Set E} (hV : IsOpen V) (hVU : V ⊆ U)
+    (h : SmoothTameOn (pairGrading p r) q (U ×ˢ univ) f) :
+    SmoothTameOn (pairGrading p r) q (V ×ˢ univ) f :=
+  smoothTameOn_mono h (hV.prod isOpen_univ)
+    (Set.prod_mono hVU (subset_refl _))
+
 theorem n07b_N06Properties_mono {D : ReferenceData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {L : ReturnCorrectionData S}
@@ -63,14 +90,17 @@ theorem n07b_ScalarInverseProperties_mono {D : ReferenceData}
   have hU := n06_stateNeighborhood_mono (C := C) hb hε
   have hsector := n06_sectorNeighborhood_mono (S := S) hb hε hε
   refine ⟨(fun z hz => hsolve z (hU hz)), (fun z hz => hunique z (hU hz)), ?_, ?_⟩
-  · rcases htame with ⟨lossG, baseG, hbound⟩
-    refine ⟨lossG, baseG, ?_⟩
-    intro s hs
-    obtain ⟨C0, hC0, hC⟩ := hbound s hs
-    exact ⟨C0, hC0, fun z hz => hC z (hsector hz)⟩
-  · exact smoothTameOn_mono hsmooth
-      ((n06_isOpen_sectorNeighborhood S base' ε' ε').prod isOpen_univ)
-      (Set.prod_mono hsector (subset_refl _))
+  · exact n07b_linearFamilyTame_mono
+      (E := StateDirections S × ℝ) (F := HeightPair S × ℝ) (G := S.Source)
+      (pairGrading (sectorGrading S) realGrading)
+      (pairGrading (heightPairGrading S) realGrading) S.sourceGrading
+      (fun z => (G.G (liftSectorParameter S C z)).toLinearMap) hsector htame
+  · exact n07b_smoothTameOn_product_mono
+      (E := StateDirections S × ℝ) (F := HeightPair S × ℝ) (G := S.Source)
+      (pairGrading (sectorGrading S) realGrading)
+      (pairGrading (heightPairGrading S) realGrading) S.sourceGrading
+      (fun z => G.G (liftSectorParameter S C z.1) z.2)
+      (n06_isOpen_sectorNeighborhood S base' ε' ε') hsector hsmooth
 
 /-- Restriction retains the actual source representative and the same
 Banach solution, including both scalar coordinates. -/

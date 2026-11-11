@@ -56,8 +56,7 @@ theorem n07b_norm_jet_comp_le_two
   rw [iteratedFDerivWithin_of_isOpen n hU hx] at h
   have hfactorial : (n.factorial : ℝ) ≤ 2 := by
     interval_cases n <;> norm_num
-  have hpower : R ^ n ≤ R ^ 2 := by
-    interval_cases n <;> norm_num <;> nlinarith
+  have hpower : R ^ n ≤ R ^ 2 := pow_le_pow_right₀ hR hn
   exact h.trans (mul_le_mul
     (mul_le_mul_of_nonneg_right hfactorial hC) hpower
     (pow_nonneg hR0 n) (mul_nonneg (by norm_num) hC))

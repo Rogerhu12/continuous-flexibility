@@ -47,7 +47,7 @@ theorem n07b_volume_forget_memℓp
     {γ : ℝ} (hγ : 0 < γ) (t : ℝ) (s : ℕ) (v : V.level γ t s) :
     Memℓp (V.forget γ t s v) 2 := by
   obtain ⟨C, hC, hfactor⟩ := n07b_canonicalSourceFactor_bounded hD hT K hγ t
-  apply ((v.val.memℓp).const_smul C).mono'
+  apply ((lp.memℓp v.val).const_smul C).mono'
   intro m
   rw [hV.2.2.2 γ t s]
   change ‖n07bCanonicalSourceFactor T K γ t m • v.val m 0‖ ≤ ‖C • v.val m‖

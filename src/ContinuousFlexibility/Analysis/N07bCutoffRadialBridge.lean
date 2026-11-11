@@ -59,10 +59,16 @@ theorem n07b_outputRealization_add_ae_core_compact
     (heven : ∀ r θ, g (r, -θ) = g (r, θ)) :
     OutputRealization D γ M a ((fun p => U.1 p + g p), U.2) := by
   have hs := n07b_outputCellSquare_summable_of_ae_core_compact hD hJ hJcore hg hzero γ M
+  have hrem : outputRemainder D 0 (g, 0) = g := by
+    funext p
+    change g p - 0 * D.chiLeft p.1 = g p
+    rw [zero_mul, sub_zero]
   have hV : OutputRealization D γ M 0 (g, 0) := by
     refine ⟨?_, ?_, hperiod, heven⟩
-    · simpa only [outputRemainder, zero_mul, sub_zero] using hg
-    · simpa only [outputRemainder, zero_mul, sub_zero] using hs
+    · rw [hrem]
+      exact hg
+    · rw [hrem]
+      exact hs
   obtain ⟨C, hgeom, _⟩ := hD
   have hsum := OutputRealization.add hgeom.2.1.le hU hV
   have he : U + (g, 0) = ((fun p => U.1 p + g p), U.2) := by
