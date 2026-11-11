@@ -65,7 +65,8 @@ theorem circleModel_deriv_le_grading
   have hEnvelope := hPower 0 γ hγ
   let H : ℝ := hEnvelope.choose
   have hH : 0 < H := hEnvelope.choose_spec.1
-  have hHbound := hEnvelope.choose_spec.2.1
+  have hHbound : ∀ r ∈ Ioo D.a D.b, T.H r ^ γ * T.M r ^ (0 : ℝ) ≤ H :=
+    hEnvelope.choose_spec.2.1
   refine ⟨anglePairEvaluationConstant * H,
     mul_nonneg anglePairEvaluationConstant_nonneg hH.le, ?_⟩
   intro u m θ
