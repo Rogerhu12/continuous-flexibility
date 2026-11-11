@@ -40,8 +40,13 @@ theorem continuous_scalarSecantAverage {D : ℝ × ℝ → ℝ}
       (f := fun (p : ℝ × (ℝ × ℝ)) (s : ℝ) =>
         D (p.1, (p.2.2 - p.2.1) * s + p.2.1))
       h isCompact_Icc
-  simpa only [scalarSecantAverage, intervalIntegral.integral_of_le zero_le_one,
-    integral_Icc_eq_integral_Ioc] using hc
+  have he : scalarSecantAverage D = fun p : ℝ × (ℝ × ℝ) =>
+      ∫ s in Icc (0 : ℝ) 1, D (p.1, (p.2.2 - p.2.1) * s + p.2.1) := by
+    funext p
+    dsimp only [scalarSecantAverage]
+    rw [intervalIntegral.integral_of_le zero_le_one, integral_Icc_eq_integral_Ioc]
+  rw [he]
+  exact hc
 
 theorem scalarSecantAverage_diagonal (D : ℝ × ℝ → ℝ) (t x : ℝ) :
     scalarSecantAverage D (t, (x, x)) = D (t, x) := by

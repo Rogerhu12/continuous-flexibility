@@ -126,7 +126,7 @@ private theorem composed_circle_deriv_bounds
   have hd := (hFd (J θ)).hasDerivAt.comp θ (hJd θ).hasDerivAt
   have hcomp : f ∘ J = fun t => f (J t) := by
     funext t
-    exact Function.comp_apply f J t
+    exact Function.comp_apply
   rw [hcomp] at hd
   rw [hd.deriv]
   have hF0 : 0 ≤ deriv f (J θ) := le_trans (by norm_num) (hf _).1
