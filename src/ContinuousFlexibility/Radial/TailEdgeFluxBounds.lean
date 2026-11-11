@@ -28,7 +28,7 @@ theorem tail_poisson_pairing_integral_bounds {l r low high δ : ℝ}
       (∫ s in l..r, w s * h s * u s) ≤
         (high ^ 2 / (1 - δ)) * (∫ s in l..r, w s) := by
   have hden : 0 < 1 - δ := sub_pos.mpr hδ
-  have hint := ((hw.mul hh).mul hu).intervalIntegrable_of_Icc hlr
+  have hint := ((hw.mul hh).mul hu).intervalIntegrable_of_Icc (μ := volume) hlr
   constructor
   · rw [← intervalIntegral.integral_const_mul]
     apply intervalIntegral.integral_mono_on hlr
@@ -123,14 +123,14 @@ theorem tailEdge_flux_coupling_bounds {a b : ℝ} (hab : a < b)
         _ = g s / ((b - a) * (1 - δ)) := by
           rw [tailEdgeLeftHeight_mul_right]
           dsimp only [g]
-          ring
+          field_simp [hL.ne', hden.ne'] <;> ring
     have hi := intervalIntegral.integral_mono_on hab.le (hf.intervalIntegrable a b)
       ((hg.div_const _).intervalIntegrable a b) hpoint
     rw [intervalIntegral.integral_div] at hi
     exact hi
   refine ⟨le_add_of_nonneg_right hnonneg, ?_⟩
   calc
-    _ ≤ (b - a)⁻¹ + δ / ((b - a) * (1 - δ)) := add_le_add_left hupper _
+    _ ≤ (b - a)⁻¹ + δ / ((b - a) * (1 - δ)) := add_le_add le_rfl hupper
     _ = 1 / ((b - a) * (1 - δ)) := by
       field_simp [hL.ne', hden.ne']
       ring

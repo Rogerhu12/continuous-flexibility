@@ -160,7 +160,7 @@ theorem tendsto_tailWeightedNode_zero {μ u : ℕ → ℝ}
     rw [mul_pow, Real.sq_sqrt (hμ n)]
   rw [tendsto_zero_iff_norm_tendsto_zero]
   simp only [Real.norm_eq_abs]
-  simpa only [Real.sqrt_zero, Real.sqrt_sq_eq_abs] using
+  simpa only [Function.comp_def, Real.sqrt_zero, Real.sqrt_sq_eq_abs] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hsq
 
 /-- Weighted square-summable solutions are proportional on every right tail.

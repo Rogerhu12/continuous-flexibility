@@ -19,29 +19,6 @@ namespace ContinuousFlexibility.Radial
 open Set MeasureTheory
 open scoped BigOperators
 
-/-- The preceding-node error in the physical mass estimate is controlled
-by the square of the small inner-resistance product divided by the two
-large neighboring mass--resistance products. -/
-theorem tailNode_neighbor_mass_ratio_le {Λ η K μ ν S R : ℝ}
-    (hΛ : 0 < Λ) (hK : 0 < K) (hμ : 0 < μ) (hν : 0 < ν)
-    (hS : 0 ≤ S) (hR : 0 < R) (hsmall : Λ * μ * S ≤ η)
-    (hleft : K ≤ Λ * μ * R) (hright : K ≤ Λ * ν * R) :
-    μ * S ^ 2 / (ν * R ^ 2) ≤ η ^ 2 / K ^ 2 := by
-  have hA : 0 ≤ Λ * μ * S := mul_nonneg (mul_pos hΛ hμ).le hS
-  have hB : 0 < Λ * μ * R := mul_pos (mul_pos hΛ hμ) hR
-  have hC : 0 < Λ * ν * R := mul_pos (mul_pos hΛ hν) hR
-  have hnum : (Λ * μ * S) ^ 2 ≤ η ^ 2 := pow_le_pow_left₀ hA hsmall 2
-  have hden : K ^ 2 ≤ (Λ * μ * R) * (Λ * ν * R) := by
-    simpa only [pow_two] using mul_le_mul hleft hright hK.le hB.le
-  calc
-    μ * S ^ 2 / (ν * R ^ 2) =
-        (Λ * μ * S) ^ 2 / ((Λ * μ * R) * (Λ * ν * R)) := by
-      field_simp [hΛ.ne', hμ.ne', hν.ne', hR.ne'] <;> ring
-    _ ≤ η ^ 2 / ((Λ * μ * R) * (Λ * ν * R)) :=
-      div_le_div_of_nonneg_right hnum (mul_pos hB hC).le
-    _ ≤ η ^ 2 / K ^ 2 :=
-      div_le_div_of_nonneg_left (sq_nonneg η) (pow_pos hK 2) hden
-
 /-- Uniform bounds on finite forcing sums give uniform bounds on finite
 node sums. No infinite sum of the node sequence is assumed to exist. -/
 theorem tailNode_mass_sum_range_le {A E : ℕ → ℝ} {M ρ B : ℝ}

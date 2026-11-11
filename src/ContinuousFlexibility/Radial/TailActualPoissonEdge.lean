@@ -289,11 +289,11 @@ structure TailActualEdgePoissonSpec (T : DeepTailData) (hT : DeepTailHypotheses 
   right_value : ∀ right, V right (tailActualEdgeLength T n) = if right then 1 else 0
   equation : ∀ right s (hs : s ∈ Icc 0 (tailActualEdgeLength T n)),
     HasDerivAt (deriv (V right)) (-(tailActualEdgePotential T hT n ⟨s, hs⟩ * V right s)) s
-  bounds : ∀ right s ∈ Icc 0 (tailActualEdgeLength T n),
+  bounds : ∀ right, ∀ s ∈ Icc 0 (tailActualEdgeLength T n),
     tailActualEdgeAffineHeight T n right s ≤ V right s ∧
       V right s ≤ tailActualEdgeAffineHeight T n right s / (1 - tailActualEdgeDiagonalSize T hT n)
   flux : ∀ x y : ℝ,
-    let v : ℝ → ℝ := fun s => x * V false s + y * V true s
+    let v : ℝ → ℝ := fun s => x * V false s + y * V true s;
     -deriv v 0 = tailActualEdgeDiagonal T hT n V false * x - tailActualEdgeCoupling T hT n V * y ∧
       deriv v (tailActualEdgeLength T n) =
         -tailActualEdgeCoupling T hT n V * x + tailActualEdgeDiagonal T hT n V true * y
@@ -372,9 +372,9 @@ theorem tailActualEdgePoissonPhysical_equation {T : DeepTailData}
 /-- Both physical endpoint fluxes use the coefficients of the same chosen pair. -/
 theorem tailActualEdgePoissonPhysical_flux {T : DeepTailData}
     (hT : DeepTailHypotheses T) (n : ℕ) (x y : ℝ) :
-    let V := tailActualEdgePoisson T hT n
+    let V := tailActualEdgePoisson T hT n;
     let u : ℝ → ℝ := fun t => x * tailActualEdgePoissonPhysical T hT n false t +
-      y * tailActualEdgePoissonPhysical T hT n true t
+      y * tailActualEdgePoissonPhysical T hT n true t;
     -(T.p (T.node n) * deriv u (T.node n)) =
         tailActualEdgeDiagonal T hT n V false * x - tailActualEdgeCoupling T hT n V * y ∧
       T.p (T.node (n + 1)) * deriv u (T.node (n + 1)) =
