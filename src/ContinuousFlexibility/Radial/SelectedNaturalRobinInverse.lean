@@ -54,6 +54,7 @@ variable {M : MorseChainData} {D : ReferenceData} {right : Bool} {j start : ℕ}
   {entrance η K cut lam : ℝ}
   (F : MorsePhysicalTailBasis M D right j start entrance η K)
 
+include F in
 /-- A bounded regional inverse with the genuine selected natural full
 state. The input natural function is used only to identify the Robin line;
 the inverse itself is constructed from the deep kernel and finite core. -/

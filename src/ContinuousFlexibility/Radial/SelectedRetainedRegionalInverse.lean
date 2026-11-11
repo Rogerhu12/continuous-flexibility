@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.SelectedScaledRobinInverse
+import ContinuousFlexibility.Radial.SelectedPhysicalTailFactory
 import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
 import ContinuousFlexibility.Radial.SelectedLaterRetained
 
@@ -131,7 +132,7 @@ theorem SeedRetainedPair.exists_selectedOuterRegionalInverse {S : SelectedTailDa
     have hne := selectedBoundaryState_ne_zero_of_natural (matchingProfileGeometry hE) hjn hpE
       (show r07OutwardSign right ≠ 0 by cases right <;> norm_num [r07OutwardSign])
       (hV right) (hN right)
-    obtain ⟨F⟩ := hs.exists_physicalBasis hS hη hK
+    obtain ⟨F⟩ := SelectedOuterDeepSplitData.exists_physicalBasis hS hs hη hK
     have hac : outerTailSign right * p <
         outerTailSign right * selectedOuterDeepEntrance S right start := by
       simpa only [r07OutwardSign, outerTailSign] using hs.outward_order.1

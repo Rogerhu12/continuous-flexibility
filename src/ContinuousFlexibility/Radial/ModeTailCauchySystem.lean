@@ -44,7 +44,7 @@ theorem modeLocalEquation_homogeneous_flux_hasDerivAt
     change matchingPotential D j r * U.1 r +
       U.2 * referenceColumn D r - matchingDensity D r * (0 : RadialModeL2 D) r = g r
     rw [hr, hscalar, hzero]
-    simp only [zero_mul, mul_zero, add_zero, sub_zero, g]
+    simp only [Pi.zero_apply, zero_mul, mul_zero, add_zero, sub_zero, g]
   have hweak : ∀ ψ : ℝ → ℝ, ContDiff ℝ ∞ ψ → HasCompactSupport ψ →
       tsupport ψ ⊆ Ioo a b →
       (∫ r in a..b, u r * deriv (fun t => D.w t * deriv ψ t) r) =
@@ -137,7 +137,7 @@ theorem RadialTailCauchyUnique.eq_zero_of_weak
       rw [derivWithin_of_mem_nhds (hsn t ht)]
   have hLp : MemLp u 2 ((radialHilbertMeasure D).restrict
       (radialTailInterval D right cut)) :=
-    ((Lp.memLp U.1).congr hrep).restrict _
+    ((memLp_congr_ae hrep).mp (Lp.memLp U.1)).restrict _
   apply hunique u p hu.continuousOn hp hsys hLp
   simpa only [p, s, mul_assoc] using hRobin
 
