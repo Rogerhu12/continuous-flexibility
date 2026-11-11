@@ -82,9 +82,10 @@ theorem n05_divergenceOperator_mul
       g x * symmetricDivergence L.a L.b L.c f x +
         2 * n05PrincipalPair L f g x
   unfold symmetricDivergence
-  rw [hNr, hTt, radialPartial_add (df.mul dNg) (dg.mul dNf),
-    angularPartial_add (df.mul dTg) (dg.mul dTf),
-    radialPartial_mul df dNg, radialPartial_mul dg dNf,
+  have hNadd := radialPartial_add (df.mul dNg) (dg.mul dNf)
+  have hTadd := angularPartial_add (df.mul dTg) (dg.mul dTf)
+  simp only [Pi.mul_apply] at hNadd hTadd
+  rw [hNr, hTt, hNadd, hTadd, radialPartial_mul df dNg, radialPartial_mul dg dNf,
     angularPartial_mul df dTg, angularPartial_mul dg dTf]
   simp only [symmetricNormalFlux, symmetricAngularFlux, n05PrincipalPair]
   ring
@@ -132,6 +133,7 @@ theorem n05_principalPair_of_conjugation
   have hfg := hoperator (fun y => f y * g y) (hf.mul hg)
   have htest := n05_divergenceOperator_height_product hLa hLb hLc hh
     (hf.contDiffAt.comp x hΨ) (hg.contDiffAt.comp x hΨ) hf0 hg0
+  simp only [Function.comp_apply] at htest
   rw [htest, n05_divergenceOperator_mul hAa hAb hAc hf.contDiffAt hg.contDiffAt]
     at hfg
   simp only [hf0, hg0, zero_mul, mul_zero, zero_add, add_zero] at hfg

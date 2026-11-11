@@ -43,7 +43,9 @@ theorem n05_referenceAuxiliaryScalar_unique {D : ReferenceData}
     hg.2.2.2.2.2
   have hmean : (∫ r in D.a..D.b,
       radialAngularMean (fun θ => u (r, θ) - v (r, θ))) = 0 := by
-    rw [r11b_integral_angularMean_eq hab (hu.sub hv),
+    have hsubmean := r11b_integral_angularMean_eq hab (hu.sub hv)
+    simp only [Pi.sub_apply] at hsubmean
+    rw [hsubmean,
       integral_sub hu hv, mul_sub,
       ← r11b_integral_angularMean_eq hab hu,
       ← r11b_integral_angularMean_eq hab hv, humean, hvmean, sub_self]

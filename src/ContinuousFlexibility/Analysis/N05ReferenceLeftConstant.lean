@@ -103,7 +103,7 @@ theorem n05_outputRealization_leftConstant_unique {D : ReferenceData}
     {U : RadialUnknown} (ha : OutputRealization D γ₁ M₁ a U)
     (hb : OutputRealization D γ₂ M₂ b U) : a = b := by
   by_contra hab
-  have hba : b - a ≠ 0 := sub_ne_zero.mpr hab.symm
+  have hba : b - a ≠ 0 := sub_ne_zero.mpr (Ne.symm hab)
   have haLp := r11b_outputRemainder_inverse_sqrt_memLp hD hγ₁ ha
   have hbLp := r11b_outputRemainder_inverse_sqrt_memLp hD hγ₂ hb
   have hscaled := (haLp.sub hbLp).const_mul ((b - a)⁻¹)

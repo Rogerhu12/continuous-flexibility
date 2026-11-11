@@ -47,9 +47,8 @@ theorem n05CanonicalWeightedZeroMap_apply (S : PhysicalSpacesData) (K : Canonica
     (s : ℕ) (w : ℕ → ℝ) (B : ℝ) (hB : 0 ≤ B) (hw : ∀ m, ‖w m‖ ≤ B)
     (v : n05CanonicalClosedSubmodule S K s) (m : ℕ) :
     n05CanonicalWeightedZeroMap S K s w B hB hw v m = w m • v.val m 0 := by
-  simpa only [n05CanonicalWeightedZeroCoordinate_apply] using
-    n05LpMapCLM_apply (n05CanonicalWeightedZeroCoordinate S K s w) B hB
-      (n05CanonicalWeightedZeroCoordinate_bound S K s w B hB hw) v.val m
+  simp only [n05CanonicalWeightedZeroMap, ContinuousLinearMap.comp_apply,
+    Submodule.subtypeL_apply, n05LpMapCLM_apply, n05CanonicalWeightedZeroCoordinate_apply]
 
 theorem n05CanonicalWeightedZeroMap_bound (S : PhysicalSpacesData) (K : CanonicalData S)
     (s : ℕ) (w : ℕ → ℝ) (B : ℝ) (hB : 0 ≤ B) (hw : ∀ m, ‖w m‖ ≤ B)
