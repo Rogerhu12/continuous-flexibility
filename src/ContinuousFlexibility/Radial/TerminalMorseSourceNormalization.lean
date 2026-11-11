@@ -171,13 +171,13 @@ theorem terminalCap_normalized_prefactor_bound
       _ ≤ _ := by
         have h := mul_le_mul_of_nonneg_left hj
           (by positivity : 0 ≤ 81600000 * k * K / (s * A ^ 9))
-        nlinarith only [h]
+        convert h using 1 <;> ring
   have hnum :
       2 * (7 * k * s * A) * (k₁ / d) * (600 * j * sqrt A / (s * A ^ 5)) +
         (((2 * k * s * A) / (s * A ^ 5 / 100)) * (k₁ / d) +
           (7 * k * s * A) * (k₂ / d ^ 2)) * 2 ≤
         101760000 * k * K * j / (s * A ^ 9) := by
-    linarith only [hfirst, hsecond]
+    convert add_le_add hfirst hsecond using 1 <;> ring
   have hR : (2 * s) ^ 2 / (12 * (k * (s * A ^ 5 / 100))) ≤ 100 * s / (k * A ^ 5) := by
     calc
       _ = (100 / 3 : ℝ) * (s / (k * A ^ 5)) := by
@@ -185,7 +185,7 @@ theorem terminalCap_normalized_prefactor_bound
       _ ≤ _ := by
         have h := mul_le_mul_of_nonneg_right
           (by norm_num : (100 / 3 : ℝ) ≤ 100) (by positivity : 0 ≤ s / (k * A ^ 5))
-        nlinarith only [h]
+        convert h using 1 <;> ring
   have hmass : (12 * (7 * k * s * A) / a ^ 2) * d ≤ 672 * k * A := by
     have hasq : (s / 2) ^ 2 ≤ a ^ 2 := (sq_le_sq₀ (by positivity) hapos.le).mpr ha
     calc

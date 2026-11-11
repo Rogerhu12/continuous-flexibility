@@ -29,6 +29,8 @@ theorem exists_seedGluedPair_retaining {D : ReferenceData} {c d : ℝ} {uL uR : 
       (∀ r, G.radiusR * TR.cut ≤ r →
         G.profile =ᶠ[𝓝 r] seedRescale G.radiusR (G.heightR * G.radiusR) TR.profile ∧
         G.height =ᶠ[𝓝 r] seedRescale G.radiusR G.amplitudeR TR.height) ∧
+      G.radiusL * TL.cut < exp (K.left - q - 4) ∧
+      exp (K.right + q + 4) < G.radiusR * TR.cut ∧
       ((∀ r, 0 < r → c ≤ r → 0 < deriv TL.profile r) →
         ∀ r ∈ Icc (G.radiusL * c) (exp K.left), 0 < deriv G.profile r) ∧
       ((∀ r, 0 < r → r ≤ d → 0 < deriv TR.profile r) →
@@ -296,7 +298,7 @@ theorem exists_seedGluedPair_retaining {D : ReferenceData} {c d : ℝ} {uL uR : 
     middle_germ := fun r hr => hmiddle r ⟨hr.1.le, hr.2.le⟩
     left_tail := ?_
     right_tail := ?_
-  }, ?_, ?_, ?_, ?_⟩
+  }, ?_, ?_, hcutL, hcutR, ?_, ?_⟩
   · refine ⟨ha, (hbefore.trans hzLR).trans hafter,
       ⟨hWs, fun r hr => (hflat r hr).1⟩,
       ⟨hUs, fun r hr => (hflat r hr).2⟩,
@@ -384,7 +386,7 @@ theorem exists_seedGluedPair {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → �
     (hTL : TL.mode = 2) (hTR : TR.mode = -2)
     (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q) :
     Nonempty (SeedGluedPair D c d uL uR K q) := by
-  obtain ⟨G, _, _, _, _⟩ := exists_seedGluedPair_retaining hD hc hd TL TR hTL hTR K hq
+  obtain ⟨G, _, _, _, _, _, _⟩ := exists_seedGluedPair_retaining hD hc hd TL TR hTL hTR K hq
   exact ⟨G⟩
 
 end ContinuousFlexibility.Radial

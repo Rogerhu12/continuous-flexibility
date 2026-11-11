@@ -100,7 +100,7 @@ theorem r10a_actual_join_selected_angle {T : MorseChainData} {D : ReferenceData}
     rw [abs_sub_comm p e]
     have ha₀ : 0 ≤ 2 * (j : ℝ) ^ 2 * contrast / T.joinLeft right m * |e - p| := by
       positivity
-    have ha₁ : |2 * (j : ℝ) ^ 2 * contrast / T.joinLeft right m * |e - p|| ≤ 1 := by
+    have ha₁ : |2 * (j : ℝ) ^ 2 * contrast / T.joinLeft right m * abs (e - p)| ≤ 1 := by
       rw [abs_of_nonneg ha₀]
       linarith only [haction, hmargin]
     have hexp := abs_exp_sub_one_le ha₁
@@ -182,13 +182,14 @@ theorem selected_later_natural_join_angle {S : SelectedTailData}
   let k := n - 1 - S.chain.index
   have hm : S.chain.index + k = n - 1 := by dsimp only [k]; omega
   have hn' : S.chain.index + k + 1 = n := by omega
+  have hn'' : n - 1 + 1 = n := by omega
   have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hangle := r10a_actual_join_selected_angle G hreal hS.2.2.1
     hc₀ hc₀1 hsmall right k hj (by simpa only [hn'] using hband) hu hvs
-    (by simpa only [hm, hn', hentry, hjoin] using hodeU)
-    (by simpa only [hm, hn', hentry, hjoin] using hodeV)
-    (by simpa only [hm, hn', hentry, hjoin] using hsepV)
+    (by simpa only [hm, hn', hn'', hentry, hjoin] using hodeU)
+    (by simpa only [hm, hn', hn'', hentry, hjoin] using hodeV)
+    (by simpa only [hm, hn', hn'', hentry, hjoin] using hsepV)
   refine ⟨v, hvs, hNv, hvalue, hderiv, hEq, hstate, ?_⟩
-  simpa only [hm, hn', hentry, hjoin] using hangle
+  simpa only [hm, hn', hn'', hentry, hjoin] using hangle
 
 end ContinuousFlexibility.Radial

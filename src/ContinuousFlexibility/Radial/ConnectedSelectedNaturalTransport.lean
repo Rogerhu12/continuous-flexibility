@@ -132,13 +132,16 @@ theorem selected_band_entry_natural {S : SelectedTailData} (hS : IsSelectedTail 
 /-- One actual R08 witness works for every valid entrance retained in its
 tail. The source of smoothness and all transported profiles is this same
 connected geometry, without adding a new realization hypothesis. -/
-theorem ConnectedReferenceGeometry.selected_natural_tail_transport
+theorem ConnectedReferenceGeometry.selected_natural_tail_transport_retained
     (Γ : ConnectedReferenceGeometry) (hΓ : Γ.Realizes) (right : Bool) :
     let S : SelectedTailData := Γ.selected
     let D : ReferenceData := S.family S.sigma
     let E : ReferenceData := Γ.reference
     ∃ κ β α : ℝ, 0 < κ ∧ 0 < β ∧ α ≠ 0 ∧
       (if right then E.b else E.a) = κ * (if right then D.b else D.a) ∧
+      (∀ r ∈ radialTailInterval D right (S.entry right S.chain.index),
+        κ * r ∈ radialTailInterval E right
+          (if right then Γ.centralRight else Γ.centralLeft)) ∧
       ∀ entry : ℝ, entry ∈ radialCore D →
         (if right then S.entry right S.chain.index ≤ entry
           else entry ≤ S.entry right S.chain.index) →
@@ -170,7 +173,7 @@ theorem ConnectedReferenceGeometry.selected_natural_tail_transport
   obtain ⟨κ, β, α, hκ, hβ, hα, hend0, htail, _⟩ := htails right
   have hend : (if right then E.b else E.a) = κ * (if right then D.b else D.a) := by
     cases right <;> exact hend0
-  refine ⟨κ, β, α, hκ, hβ, hα, hend, ?_⟩
+  refine ⟨κ, β, α, hκ, hβ, hα, hend, (fun r hr => (htail r hr).1), ?_⟩
   intro entry hentry hretained
   have hsub : radialTailInterval D right entry ⊆
       radialTailInterval D right (S.entry right S.chain.index) := by
@@ -202,5 +205,30 @@ theorem ConnectedReferenceGeometry.selected_natural_tail_transport
     exact radialTail_radius_entrance_jet hκ right hentry hphiE.contDiffAt hu hphi
   · intro j u γ hγ hu
     exact radialNaturalTail_reference_scaled hκ hβ hγ right hentry hmem hend hw hu
+
+/-- The original interface forgets only the explicit exterior containment
+of the same radius dilation. -/
+theorem ConnectedReferenceGeometry.selected_natural_tail_transport
+    (Γ : ConnectedReferenceGeometry) (hΓ : Γ.Realizes) (right : Bool) :
+    let S : SelectedTailData := Γ.selected
+    let D : ReferenceData := S.family S.sigma
+    let E : ReferenceData := Γ.reference
+    ∃ κ β α : ℝ, 0 < κ ∧ 0 < β ∧ α ≠ 0 ∧
+      (if right then E.b else E.a) = κ * (if right then D.b else D.a) ∧
+      ∀ entry : ℝ, entry ∈ radialCore D →
+        (if right then S.entry right S.chain.index ≤ entry
+          else entry ≤ S.entry right S.chain.index) →
+        κ * entry ∈ radialCore E ∧
+        E.w (κ * entry) = (β * κ) * D.w entry ∧
+        deriv E.w (κ * entry) = β * deriv D.w entry ∧
+        (ContDiffAt ℝ ∞ (S.outgoing right 2) entry →
+          E.phi (κ * entry) = α * S.outgoing right 2 entry ∧
+          deriv E.phi (κ * entry) = α / κ * deriv (S.outgoing right 2) entry) ∧
+        ∀ (j : ℕ) (u : ℝ → ℝ) (γ : ℝ), γ ≠ 0 →
+          RadialNaturalTail D right j entry u →
+          RadialNaturalTail E right j (κ * entry) (radialRadiusScale κ γ u) := by
+  obtain ⟨κ, β, α, hκ, hβ, hα, hend, _, htransport⟩ :=
+    Γ.selected_natural_tail_transport_retained hΓ right
+  exact ⟨κ, β, α, hκ, hβ, hα, hend, htransport⟩
 
 end ContinuousFlexibility.Radial

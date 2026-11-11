@@ -184,10 +184,10 @@ theorem exists_selectedOuterPoisson {D : ReferenceData}
     rw [hstate_eq] at hn
     by_cases hk : k = i
     · subst k
-      simp only [if_pos rfl] at ht
+      simp only [if_pos rfl, ite_true] at ht
       constructor
-      · simpa only [if_pos rfl] using ht.1.trans hn.1
-      · simpa only [if_pos rfl] using ht.2.trans hn.2
+      · simpa only [if_pos rfl, ite_true] using ht.1.trans hn.1
+      · simpa only [if_pos rfl, ite_true] using ht.2.trans hn.2
     · simpa only [if_neg hk, zero_div] using ht
 
 end ContinuousFlexibility.Radial

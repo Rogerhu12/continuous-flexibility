@@ -97,7 +97,9 @@ theorem exists_seedRetainedFirstCone {S : SelectedTailData}
     simpa only [radialJet_eq_iteratedDeriv, iteratedDeriv_one] using
       radialTail_extension_entry_jets hc hvN.1 hWs.contDiffAt hW₀ hWtail 1
   have hWne : (W c, deriv W c) ≠ (0, 0) := by
-    simpa only [hW₀, hW₁] using radialNaturalTail_entry_state_ne_zero hD hc hvN
+    have hWvalue : W c = v c := hW₀
+    rw [hWvalue, hW₁]
+    exact radialNaturalTail_entry_state_ne_zero hD hc hvN
   obtain ⟨T, hTcone⟩ := exists_seedConeTail_of_coneGerm hD hc hC hCg hWs hWtail hWzero
     (radialTail_extension_radialJacobi hD hc hvN hWs hWtail) hWne
   let a := if right then T.cut * exp (-length - 1) else T.cut * exp (length + 1)

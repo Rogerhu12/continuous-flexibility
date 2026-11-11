@@ -82,25 +82,25 @@ theorem modeOuterSideFunction_eq_extension {l h : ℝ} (hm : l < h)
   by_cases hi : r ∈ Ioo l h
   · rw [modeOuterExtension_zero_inside _ hi]
     cases right
-    · exact Set.indicator_of_notMem (not_le.mpr hi.1) u
-    · exact Set.indicator_of_notMem (not_le.mpr hi.2) u
+    · exact Set.indicator_of_notMem (s := Iic l) (not_le.mpr hi.1) u
+    · exact Set.indicator_of_notMem (s := Ici h) (not_le.mpr hi.2) u
   · rw [modeOuterExtension_eqOn _ hi]
     rcases le_or_gt r l with hr | hr
     · rw [(modeOuterSideLift_left_germ hm hr right u).eq_of_nhds]
       cases right
-      · exact Set.indicator_of_mem hr u
-      · exact Set.indicator_of_notMem (not_le.mpr (hr.trans_lt hm)) u
+      · exact Set.indicator_of_mem (s := Iic l) hr u
+      · exact Set.indicator_of_notMem (s := Ici h) (not_le.mpr (hr.trans_lt hm)) u
     · have hh : h ≤ r := le_of_not_gt (fun hh => hi ⟨hr, hh⟩)
       rw [(modeOuterSideLift_right_germ hm hh right u).eq_of_nhds]
       cases right
-      · exact Set.indicator_of_notMem (not_le.mpr hr) u
-      · exact Set.indicator_of_mem hh u
+      · exact Set.indicator_of_notMem (s := Iic l) (not_le.mpr hr) u
+      · exact Set.indicator_of_mem (s := Ici h) hh u
 
 theorem modeOuterSideFunction_zero_inside {l h r : ℝ} (right : Bool)
     (u : ℝ → ℝ) (hr : r ∈ Ioo l h) : modeOuterSideFunction l h right u r = 0 := by
   cases right
-  · exact Set.indicator_of_notMem (not_le.mpr hr.1) u
-  · exact Set.indicator_of_notMem (not_le.mpr hr.2) u
+  · exact Set.indicator_of_notMem (s := Iic l) (not_le.mpr hr.1) u
+  · exact Set.indicator_of_notMem (s := Ici h) (not_le.mpr hr.2) u
 
 theorem modeOuterSideFunction_contDiffOn {a b l h : ℝ} (hm : l < h)
     (right : Bool) {u : ℝ → ℝ} (hu : ContDiff ℝ ∞ u) :
@@ -143,7 +143,8 @@ theorem modeOuterPoissonVector_coe {D : ReferenceData}
       modeOuterSideFunction l h right u := by
   rw [modeOuterSideFunction_eq_extension hm right u]
   apply modeOuterSource_extension_ae
-  exact MemLp.coeFn_toLp _
+  exact matchingTestInput_coe hD (modeOuterSideLift l h right u)
+    (contDiff_modeOuterSideLift l h right hu) 0
 
 theorem modeOuterPoissonVector_scalar {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (l h : ℝ) (right : Bool)
@@ -167,7 +168,8 @@ theorem modeOuterPoissonVector_weak {D : ReferenceData}
   let W := modeOuterSideLift l h right u
   have hW : ContDiff ℝ ∞ W := contDiff_modeOuterSideLift l h right hu
   let U : RadialModePair D := (matchingSmoothVector D hD W hW, 0)
-  have hUW : (U.1 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D] W := MemLp.coeFn_toLp _
+  have hUW : (U.1 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D] W :=
+    matchingTestInput_coe hD W hW 0
   have hzero : ((0 : RadialModePair D).1 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D]
       fun _ => 0 := Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D)
   have hEq : ModeLocalEquation D j (Ioo D.a l ∪ Ioo h D.b) U 0 := by

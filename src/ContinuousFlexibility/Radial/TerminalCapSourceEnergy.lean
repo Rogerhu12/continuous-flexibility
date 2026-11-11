@@ -35,9 +35,10 @@ theorem terminalCapCutoffCrossFlux_hasDerivAt {w χ u : ℝ → ℝ} (x : ℝ)
       (hχ'.differentiable (by simp) x).hasDerivAt).mul
         ((hu.differentiable (by simp) x).hasDerivAt.pow 2))
   convert hf using 1
-  try dsimp only [terminalCapCutoffCrossFlux, terminalCapCutoffEnergy]
-  norm_num
-  ring
+  · funext y
+    simp only [terminalCapCutoffCrossFlux, Pi.mul_apply, Pi.pow_apply]
+  · simp only [terminalCapCutoffEnergy, Pi.mul_apply, Pi.pow_apply]
+    norm_num <;> ring
 
 theorem terminalCapLift_mul_residual {lam x : ℝ} {w χ u : ℝ → ℝ}
     (hlam : 0 < lam)

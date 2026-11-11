@@ -226,7 +226,7 @@ theorem exists_seedControlledReference {S : SelectedTailData}
       ConnectedPositiveHeads D (exp K.left) (exp K.right) q ∧
       ConnectedSelectedTails S D (exp K.left) (exp K.right) := by
   have hfamily := hS.2.2.2.1 S.sigma hS.2.2.1
-  have hD : RadialProfileGeometry (S.family S.sigma) := hfamily.1.geometry
+  have hD : RadialProfileGeometry (S.family S.sigma) := MorseChainRealization.geometry hfamily.1
   obtain ⟨CL⟩ := exists_morseSecondMode_coneTail hfamily.1 hfamily.2 hS.2.2.1
     (hentry false).1 (hentry false).2.2 (hentry false).2.1
   obtain ⟨CR⟩ := exists_morseSecondMode_coneTail hfamily.1 hfamily.2 hS.2.2.1

@@ -57,7 +57,7 @@ theorem SeedRetainedFirstCone.exists_growingIncoming {S : SelectedTailData}
   let e := S.entry right S.chain.index
   let ν : ℝ := if right then (j : ℝ) else -(j : ℝ)
   have hD : RadialProfileGeometry D :=
-    (hS.2.2.2.1 S.sigma hS.2.2.1).1.geometry
+    MorseChainRealization.geometry (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hm := hS.2.2.2.2.2 right S.chain.index j hj heven hband
   rcases hm with ⟨hc, he, hp, _, horder, _, hfirst, _, _, _, hODE, _, _⟩
   have h₀ : S.incoming right j c = 1 := by
@@ -128,7 +128,7 @@ theorem SeedRetainedFirstCone.exists_normalized_growingIncoming {S : SelectedTai
   let c := S.cut right S.chain.index
   let ν : ℝ := if right then (j : ℝ) else -(j : ℝ)
   have hD : RadialProfileGeometry (S.family S.sigma) :=
-    (hS.2.2.2.1 S.sigma hS.2.2.1).1.geometry
+    MorseChainRealization.geometry (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hm := hS.2.2.2.2.2 right S.chain.index j hj heven hband
   have hcpos : 0 < c := hD.1.trans hm.1.1
   have hppos : 0 < p := hD.1.trans hm.2.2.1.1

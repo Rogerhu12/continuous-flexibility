@@ -24,6 +24,8 @@ structure SeedRetainedPair (S : SelectedTailData) (K : SeedCentralCutoff)
   right_germ : ∀ r, pair.radiusR * right.tail.cut ≤ r →
     pair.profile =ᶠ[𝓝 r] seedRescale pair.radiusR (pair.heightR * pair.radiusR) right.tail.profile ∧
     pair.height =ᶠ[𝓝 r] seedRescale pair.radiusR pair.amplitudeR right.tail.height
+  left_before : pair.radiusL * left.tail.cut < exp (K.left - q - 4)
+  right_after : exp (K.right + q + 4) < pair.radiusR * right.tail.cut
 
 theorem exists_seedRetainedPair {S : SelectedTailData} (hS : IsSelectedTail S)
     (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
@@ -32,12 +34,12 @@ theorem exists_seedRetainedPair {S : SelectedTailData} (hS : IsSelectedTail S)
   obtain ⟨L⟩ := exists_seedRetainedFirstCone hS hband false hlength
   obtain ⟨R⟩ := exists_seedRetainedFirstCone hS hband true hlength
   have hD : RadialProfileGeometry (S.family S.sigma) :=
-    (hS.2.2.2.1 S.sigma hS.2.2.1).1.geometry
+    MorseChainRealization.geometry (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hL := hS.2.2.2.2.2 false S.chain.index 2 le_rfl (by decide) hband
   have hR := hS.2.2.2.2.2 true S.chain.index 2 le_rfl (by decide) hband
-  obtain ⟨G, hGL, hGR, _, _⟩ := exists_seedGluedPair_retaining hD hL.1 hR.1
+  obtain ⟨G, hGL, hGR, hbefore, hafter, _, _⟩ := exists_seedGluedPair_retaining hD hL.1 hR.1
     L.tail R.tail (by simpa using L.canonical) (by simpa using R.canonical) K hq
-  exact ⟨⟨L, R, G, hGL, hGR⟩⟩
+  exact ⟨⟨L, R, G, hGL, hGR, hbefore, hafter⟩⟩
 
 private theorem seed_selected_first_cut_entry_order {S : SelectedTailData}
     (hS : IsSelectedTail S)

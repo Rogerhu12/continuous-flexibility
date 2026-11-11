@@ -27,6 +27,7 @@ theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
       ∃ Γ : ConnectedReferenceGeometry,
         Γ.selected = S ∧ Γ.headLength = q ∧ Γ.Realizes ∧
         Γ.reference.w = P.pair.profile ∧ Γ.reference.phi = P.pair.height ∧
+        Γ.centralLeft = exp K.left ∧ Γ.centralRight = exp K.right ∧
         Γ.centralLeft < centralRadius (-T) ∧ centralRadius T < Γ.centralRight ∧
         referenceColumn Γ.reference = fixedCentralColumn B.chi ∧
         EqOn Γ.reference.w (centralRadialProfile 1)
@@ -78,7 +79,7 @@ theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
       intro r hr
       have hi := B.column_support hr
       exact ⟨fixedCentralCap_order.2.1.trans hi.1, hi.2.trans hrightcap⟩
-  exact ⟨K, P, Γ, rfl, rfl, hreal, hDw', hDφ', hleft, hright, hcol, hw, hφ⟩
+  exact ⟨K, P, Γ, rfl, rfl, hreal, hDw', hDφ', rfl, rfl, hleft, hright, hcol, hw, hφ⟩
 
 /-- Nonvanishing of the actual profile locates the cap in the core; no
 unrecorded inequality concerning the gluing radii is needed. -/
