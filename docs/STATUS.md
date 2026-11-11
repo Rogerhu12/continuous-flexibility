@@ -85,7 +85,14 @@ bottom-up, and the full rebuild belongs in CI.
 ## CI
 
 Repository: https://github.com/Rogerhu12/continuous-flexibility. `.github/workflows/build.yml` runs on
-`main`, on `line/**` branches and on pull requests; no run has finished yet.
+`main`, on `line/**` branches and on pull requests.
+
+First green run: 2026-11-11, commit `b4a8fc1` (run 42967068736). `lake build` of all libraries
+including the axiom audit passed (3787 jobs); modules compiled / total 355 / 363 (the 327 earlier
+files plus the 36 blueprint files; the 8 that do not compile are the unfinished files listed above);
+blueprint 6 / 35. A build from an empty project cache takes about 20 minutes on the GitHub runner;
+with the cache restored, about 5 minutes. The compiled build is published as `lake-build.tar.zst`
+(62 MB) on the `lake-cache` release.
 
 ## Node sizes
 
@@ -100,7 +107,6 @@ One line carries about 20,000–30,000 lines.
 
 ## Next
 
-1. First green CI run on `main`; it publishes the compiled build to the `lake-cache` release.
-2. Lines on the 29 open nodes, one branch `line/<ID>` each (`docs/tasks/README.md`).
-3. Module-system migration of the existing files on a branch, verified by CI.
-4. `formalization.yaml`, `LICENSE`.
+1. Lines on the 29 open nodes, one branch `line/<ID>` each (`docs/tasks/README.md`).
+2. Module-system migration of the existing files on a branch, verified by CI.
+3. `formalization.yaml`, `LICENSE`.
