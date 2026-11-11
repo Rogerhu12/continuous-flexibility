@@ -58,7 +58,7 @@ theorem profile_weighted_layer_integrals_le
   have hbound (n : ℕ) :
       w n * (∫ r in profileEndpointLayer D (C 0) n, f r ^ 2) ≤
         (B : ℝ) * K * ∫ r in profileEndpointLayer D (C 0) n, ρ r := by
-    have hsub := profileEndpointLayer_subset_core (h.2.2.1 0) n
+    have hsub := profileEndpointLayer_subset_core (D := D) (h.2.2.1 0) n
     have hfi : IntegrableOn (fun r => f r ^ 2) (profileEndpointLayer D (C 0) n) volume :=
       (show IntegrableOn (fun r => f r ^ 2) (radialCore D) volume
         from hf.integrable_sq).mono_set hsub

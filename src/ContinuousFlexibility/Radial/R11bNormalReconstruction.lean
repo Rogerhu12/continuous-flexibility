@@ -85,7 +85,10 @@ theorem r11b_normal_reconstruction_of_mode_bounds
   have hs : ∀ N, Summable (fun m => w m * referenceCellSquare D m
       (r11bEvenPartialSum (fun n => deriv (c n)) N)) := by
     intro N
-    simpa only [outputCellSquare, w] using hcell N
+    have h := hcell N
+    change Summable (fun m => w m * referenceCellSquare D m
+      (r11bEvenPartialSum (fun n => deriv (c n)) N)) at h
+    exact h
   have hb : ∀ N, (∑' m, w m * referenceCellSquare D m
       (r11bEvenPartialSum (fun n => deriv (c n)) N)) ≤ B := by
     intro N
@@ -93,7 +96,8 @@ theorem r11b_normal_reconstruction_of_mode_bounds
   obtain ⟨hUrCell, hUrSum, hUrBound⟩ :=
     r11b_weighted_cell_square_closed hpart hab.le w hw hD hUr hDlim hs hb
   have hsum : Summable (outputCellSquare D γ M ur) := by
-    simpa only [outputCellSquare, w] using hUrSum
+    change Summable (fun m => w m * referenceCellSquare D m ur)
+    exact hUrSum
   have hsumBound : (∑' m, outputCellSquare D γ M ur m) ≤ B := by
     simpa only [outputCellSquare, w] using hUrBound
   have hrem : outputRemainder D 0 (ur, 0) = ur := by
