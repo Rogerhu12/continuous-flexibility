@@ -70,19 +70,55 @@ theorem n07aNuSectorProjectionCLM_grading_le (S : PhysicalSpacesData) (n : ℕ)
     (z : StateDirections S × ℝ) :
     n07aNuParameterGrading S n (n07aNuSectorProjectionCLM S z) ≤
       n07aParameterGrading S n z := by
-  simp only [n07aNuSectorProjectionCLM_apply, n07aNuParameterGrading,
-    n07aParameterGrading, scalarCommonHeightGrading, scalarHeightGrading,
-    sectorGrading, stateGrading, heightPairGrading, pairGrading_apply,
-    Seminorm.comp_apply, Submodule.subtype_apply, realGrading, coe_normSeminorm,
-    scalarBeta]
-  have hκ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2.1
-  have hα := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2.2
-  have hheight :
-      (pairGrading (S.height (3 / 4 : ℝ)).grading realGrading n) z.1.val.1 =
-        ((S.height (3 / 4 : ℝ)).grading n) z.1.val.1.1 + ‖z.1.val.1.2‖ := by
-    simpa only [realGrading, coe_normSeminorm] using
-      pairGrading_apply (S.height (3 / 4 : ℝ)).grading realGrading n z.1.val.1
-  linarith only [hκ, hα, hheight]
+  let height : ℝ := heightPairGrading S n z.1.val.1
+  let nu : ℝ := realGrading n z.1.val.2.1
+  let outer : ℝ := realGrading n z.2
+  let controls : ℝ := pairGrading (S.circle (3 / 4 : ℝ)).grading
+    (S.circle (3 / 4 : ℝ)).grading n z.1.val.2.2
+  have hcommon : scalarCommonHeightGrading S n z.1.val.1 = height := by
+    simp only [height, scalarCommonHeightGrading, scalarHeightGrading,
+      scalarBeta, heightPairGrading]
+  have hinner : pairGrading (scalarCommonHeightGrading S) realGrading n
+      (z.1.val.1, z.1.val.2.1) = height + nu :=
+    (pairGrading_apply (scalarCommonHeightGrading S) realGrading n
+      (z.1.val.1, z.1.val.2.1)).trans
+        (congrArg (fun t : ℝ => t + nu) hcommon)
+  have hprojection : n07aNuParameterGrading S n (n07aNuSectorProjectionCLM S z) =
+      (height + nu) + outer := by
+    calc
+      n07aNuParameterGrading S n (n07aNuSectorProjectionCLM S z) =
+          n07aNuParameterGrading S n ((z.1.val.1, z.1.val.2.1), z.2) :=
+        congrArg (fun x : N07aNuParameter S => n07aNuParameterGrading S n x)
+          (n07aNuSectorProjectionCLM_apply S z)
+      _ = pairGrading (scalarCommonHeightGrading S) realGrading n
+          (z.1.val.1, z.1.val.2.1) + outer :=
+        pairGrading_apply (pairGrading (scalarCommonHeightGrading S) realGrading)
+          realGrading n ((z.1.val.1, z.1.val.2.1), z.2)
+      _ = (height + nu) + outer := congrArg (fun t : ℝ => t + outer) hinner
+  have hcontrols : pairGrading realGrading
+      (pairGrading (S.circle (3 / 4 : ℝ)).grading
+        (S.circle (3 / 4 : ℝ)).grading) n z.1.val.2 = nu + controls :=
+    pairGrading_apply realGrading
+      (pairGrading (S.circle (3 / 4 : ℝ)).grading
+        (S.circle (3 / 4 : ℝ)).grading) n z.1.val.2
+  have hstate : stateGrading S n z.1.val = height + (nu + controls) :=
+    (pairGrading_apply (heightPairGrading S)
+      (pairGrading realGrading (pairGrading (S.circle (3 / 4 : ℝ)).grading
+        (S.circle (3 / 4 : ℝ)).grading)) n z.1.val).trans
+          (congrArg (fun t : ℝ => height + t) hcontrols)
+  have hsector : sectorGrading S n z.1 = stateGrading S n z.1.val := by
+    simp only [sectorGrading, Seminorm.comp_apply, Submodule.subtype_apply]
+  have htarget : n07aParameterGrading S n z =
+      (height + (nu + controls)) + outer :=
+    (pairGrading_apply (sectorGrading S) realGrading n z).trans
+      (congrArg (fun t : ℝ => t + outer) (hsector.trans hstate))
+  have hc : 0 ≤ controls := apply_nonneg
+    (pairGrading (S.circle (3 / 4 : ℝ)).grading
+      (S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2
+  have hnu : nu ≤ nu + controls := le_add_of_nonneg_right hc
+  have hnum : (height + nu) + outer ≤ (height + (nu + controls)) + outer :=
+    add_le_add_right (add_le_add_left hnu height) outer
+  exact hprojection.le.trans (hnum.trans htarget.symm.le)
 
 theorem n07aNuSectorProjectionCLM_center
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
