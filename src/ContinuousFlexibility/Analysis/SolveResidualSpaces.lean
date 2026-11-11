@@ -41,10 +41,12 @@ variable {E F : ℕ → Type u}
 private def SolveSubspaceProductLevel (n : ℕ) : Type u :=
   subLevel W n × subLevel V n
 
-private instance (n : ℕ) : NormedAddCommGroup (SolveSubspaceProductLevel W V n) :=
+private instance solveSubspaceProductNormedAddCommGroup (n : ℕ) :
+    NormedAddCommGroup (SolveSubspaceProductLevel W V n) :=
   inferInstanceAs (NormedAddCommGroup (subLevel W n × subLevel V n))
 
-private instance (n : ℕ) : NormedSpace ℝ (SolveSubspaceProductLevel W V n) :=
+private instance solveSubspaceProductNormedSpace (n : ℕ) :
+    NormedSpace ℝ (SolveSubspaceProductLevel W V n) :=
   inferInstanceAs (NormedSpace ℝ (subLevel W n × subLevel V n))
 
 private def solveSubspaceProductBond (n : ℕ) :
@@ -66,7 +68,9 @@ private theorem solveSubspaceProductEquiv_apply (z : W × V) :
         (fun n => subLevel V n) (subBond V)
         (subspaceEquiv (E := E) (e := e) W hW z.1,
           subspaceEquiv (E := F) (e := f) V hV z.2) := by
-  unfold solveSubspaceProductEquiv
+  dsimp +instances only [solveSubspaceProductEquiv, SolveSubspaceProductLevel,
+    solveSubspaceProductBond, solveSubspaceProductNormedAddCommGroup,
+    solveSubspaceProductNormedSpace]
   rw [ContinuousLinearEquiv.trans_apply, ContinuousLinearEquiv.prodCongr_apply]
 
 set_option diagnostics true in
@@ -74,7 +78,10 @@ private theorem solveSubspaceProductEquiv_grading (n : ℕ) (z : W × V) :
     gradedSeminorm (SolveSubspaceProductLevel W V) (solveSubspaceProductBond W V) n
         (solveSubspaceProductEquiv (E := E) (F := F) (e := e) (f := f) W V hW hV z) =
       max (gradedSeminorm E e n z.1.val) (gradedSeminorm F f n z.2.val) := by
-  rw [solveSubspaceProductEquiv_apply (E := E) (F := F) (e := e) (f := f) W V hW hV z,
+  dsimp +instances only [solveSubspaceProductEquiv, SolveSubspaceProductLevel,
+    solveSubspaceProductBond, solveSubspaceProductNormedAddCommGroup,
+    solveSubspaceProductNormedSpace]
+  rw [ContinuousLinearEquiv.trans_apply, ContinuousLinearEquiv.prodCongr_apply,
     gradedSeminorm_prodEquiv,
     gradedSeminorm_subspaceEquiv, gradedSeminorm_subspaceEquiv]
 
@@ -96,8 +103,24 @@ theorem solve_isClosed_evenCircle (hS : IsPhysicalSpaces D T S) :
     ((continuous_apply θ).comp ((continuous_apply m).comp hd))
 
 /-- Levels for the actual two-component residual. -/
-abbrev SolveResidualLevel (S : PhysicalSpacesData) (n : ℕ) : Type :=
+def SolveResidualLevel (S : PhysicalSpacesData) (n : ℕ) : Type :=
   SolveSubspaceProductLevel
+    (E := fun k => (S.height (3 / 4 : ℝ)).level k)
+    (F := fun k => (S.circle (3 / 4 : ℝ)).level k)
+    (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
+    S.Q.toLinearMap.ker (evenCircleSubmodule S) n
+
+instance solveResidualLevelNormedAddCommGroup (S : PhysicalSpacesData) (n : ℕ) :
+    NormedAddCommGroup (SolveResidualLevel S n) :=
+  solveSubspaceProductNormedAddCommGroup
+    (E := fun k => (S.height (3 / 4 : ℝ)).level k)
+    (F := fun k => (S.circle (3 / 4 : ℝ)).level k)
+    (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
+    S.Q.toLinearMap.ker (evenCircleSubmodule S) n
+
+instance solveResidualLevelNormedSpace (S : PhysicalSpacesData) (n : ℕ) :
+    NormedSpace ℝ (SolveResidualLevel S n) :=
+  solveSubspaceProductNormedSpace
     (E := fun k => (S.height (3 / 4 : ℝ)).level k)
     (F := fun k => (S.circle (3 / 4 : ℝ)).level k)
     (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
@@ -135,9 +158,10 @@ theorem solveResidualEquiv_grading (hS : IsPhysicalSpaces D T S)
     (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
     S.Q.toLinearMap.ker (evenCircleSubmodule S) S.Q.isClosed_ker
     (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) n y
-  simpa only [solveResidualEquiv, SolveResidualLevel, solveResidualBond,
-    PhysicalSpacesData.sourceGrading, SobolevModelData.grading, CircleModelData.grading,
-    Seminorm.comp_apply, Submodule.subtype_apply] using h
+  dsimp +instances only [solveResidualEquiv, SolveResidualLevel, solveResidualBond,
+    solveResidualLevelNormedAddCommGroup, solveResidualLevelNormedSpace,
+    PhysicalSpacesData.sourceGrading, SobolevModelData.grading, CircleModelData.grading]
+  simpa only [Seminorm.comp_apply, Submodule.subtype_apply] using h
 
 -- Later comparisons only need the specialized grading theorem.
 attribute [irreducible] solveResidualEquiv

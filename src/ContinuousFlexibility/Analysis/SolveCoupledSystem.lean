@@ -94,11 +94,10 @@ theorem solve_coupled_exists_normalized_zero
   have hVmem (z : W × ℝ) (hz : z ∈ U) (y : ResidualSpace S) :
       V.sectorV (Lz z) y ∈ W := by
     apply LinearMap.mem_ker.mpr
-    change sectorReferenceRowCLM (D := D) (T := T) (S := S) h1.1 hT hS
-      (V.sectorV (Lz z) y) = 0
-    rw [sectorReferenceRowCLM_apply (D := D) (T := T) (S := S) h1.1 hT hS
-      (V.sectorV (Lz z) y)]
-    rw [hVident (Lz z) (hnear z hz) y]
+    refine (sectorReferenceRowCLM_apply (D := D) (T := T) (S := S) h1.1 hT hS
+      (V.sectorV (Lz z) y)).trans ?_
+    refine (congrArg (fun a : AnnularState S => referenceRow D (stateU S a))
+      (hVident (Lz z) (hnear z hz) y)).trans ?_
     exact N09Properties.referenceRow_coupledInverse_zero
       (D := D) (T := T) (S := S) (C := C) (R := R) (L := L) (G := G)
       (B := B) (N := N) (V := V) (base := base) (ε := ε) (q0 := q0)
@@ -113,7 +112,13 @@ theorem solve_coupled_exists_normalized_zero
       (VN z y).val = V.sectorV (Lz z) y := by
     simp only [VN, dif_pos hz, LinearMap.codRestrict_apply]
   have hLz : ∀ n z, pairGrading (sectorGrading S) realGrading n (Lz z) ≤
-      1 * a n z := by intro n z; rw [one_mul]; exact le_rfl
+      1 * a n z := by
+    intro n z
+    simpa only [Lz, a, p, pairGrading, add_apply, Seminorm.comp_apply,
+      ContinuousLinearMap.coe_prodMap', Prod.map_apply', ContinuousLinearMap.id_apply,
+      Submodule.subtypeL_apply, LinearMap.fst_apply, LinearMap.snd_apply,
+      Submodule.subtype_apply, one_mul] using
+      (le_refl (sectorGrading S n z.1.val + realGrading n z.2))
   have hRN : SmoothTameOn a (residualGrading S) U RN := by
     have h := solve_smoothTameOn_precomp hRTame Lz le_rfl hLz
     exact smoothTameOn_mono h hUopen (fun z hz => hnearε z hz)
@@ -124,8 +129,12 @@ theorem solve_coupled_exists_normalized_zero
       pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S) n (Lv z) ≤
         1 * pairGrading a (residualGrading S) n z := by
     intro n z
-    rw [one_mul]
-    exact le_rfl
+    simpa only [Lv, Lz, a, p, pairGrading, add_apply, Seminorm.comp_apply,
+      ContinuousLinearMap.coe_prodMap', Prod.map_apply', ContinuousLinearMap.id_apply,
+      Submodule.subtypeL_apply, LinearMap.fst_apply, LinearMap.snd_apply,
+      Submodule.subtype_apply, one_mul] using
+      (le_refl (sectorGrading S n z.1.1.val + realGrading n z.1.2 +
+        residualGrading S n z.2))
   have hVpre : SmoothTameOn (pairGrading a (residualGrading S)) (sectorGrading S)
       (U ×ˢ univ) (fun z : (W × ℝ) × ResidualSpace S => V.sectorV (Lz z.1) z.2) := by
     have h := solve_smoothTameOn_precomp hVTame Lv le_rfl hLv
@@ -143,8 +152,12 @@ theorem solve_coupled_exists_normalized_zero
         (residualGrading S) n (Lq z) ≤
       1 * pairGrading (pairGrading a (residualGrading S)) (residualGrading S) n z := by
     intro n z
-    rw [one_mul]
-    exact le_rfl
+    simpa only [Lq, Lv, Lz, a, p, pairGrading, add_apply, Seminorm.comp_apply,
+      ContinuousLinearMap.coe_prodMap', Prod.map_apply', ContinuousLinearMap.id_apply,
+      Submodule.subtypeL_apply, LinearMap.fst_apply, LinearMap.snd_apply,
+      Submodule.subtype_apply, one_mul] using
+      (le_refl (sectorGrading S n z.1.1.1.val + realGrading n z.1.1.2 +
+        residualGrading S n z.1.2 + residualGrading S n z.2))
   have hQN : SmoothTameOn (pairGrading (pairGrading a (residualGrading S)) (residualGrading S))
       (residualGrading S) ((U ×ˢ univ) ×ˢ univ)
       (fun z : ((W × ℝ) × ResidualSpace S) × ResidualSpace S => QN z.1.1 z.1.2 z.2) := by
