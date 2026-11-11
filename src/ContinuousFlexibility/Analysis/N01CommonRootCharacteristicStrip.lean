@@ -116,7 +116,9 @@ theorem n01_exists_common_characteristic_root_strip
     (contDiffAt_referenceRootSpeedFactor hwref hg hr0 hw0 hgpos).continuousAt
   have hshift0 : ContinuousAt (fun t : ℝ => r + σ * t) 0 := hshift.continuous.continuousAt
   have hphys : ∀ᶠ t in 𝓝 (0 : ℝ), r + σ * t ∈ Ioo D.a D.b :=
-    hshift0.tendsto.eventually (by simpa only [mul_zero, add_zero] using isOpen_Ioo.mem_nhds hr)
+    hshift0.tendsto.eventually (by
+      change Ioo D.a D.b ∈ 𝓝 (r + σ * 0)
+      simpa only [mul_zero, add_zero] using isOpen_Ioo.mem_nhds hr)
   have hnear : ∀ᶠ t in 𝓝 (0 : ℝ), |r + σ * t - r| < ρ := by
     have hh := hshift0.tendsto.eventually
       (show Metric.ball r ρ ∈ 𝓝 (r + σ * 0) by
@@ -134,7 +136,7 @@ theorem n01_exists_common_characteristic_root_strip
     (hphys.and (hnear.and (hgnear.and (hcl.and hcu))))
   have hdata (t : ℝ) (ht : t ∈ Ioo (-δ) δ) :=
     hball (show t ∈ Metric.ball (0 : ℝ) δ by
-      simpa only [Metric.mem_ball, Real.dist_eq, sub_zero, abs_lt] using ht)
+      simpa only [Metric.mem_ball, Real.dist_eq, sub_zero, abs_lt, mem_Ioo] using ht)
   refine ⟨g, δ, hg, hgpos, hδ, hdivide, ?_, ?_⟩
   · intro t ht
     have hd := hdata t ht
@@ -196,7 +198,7 @@ theorem n01_exists_common_characteristic_root_strip
       · intro hx
         have hpeq : stateProfile D S C z.1 =ᶠ[𝓝 (rootProfileShift r σ p).1] D.w := by
           have hbin : (rootProfileShift r σ p).1 ∈ Metric.ball r ρ := by
-            simpa only [Metric.mem_ball, Real.dist_eq] using hc.2.1
+            simpa only [Metric.mem_ball, Real.dist_eq, rootProfileShift] using hc.2.1
           filter_upwards [Metric.isOpen_ball.mem_nhds hbin] with y hy
           exact hprofile y (by simpa only [Metric.mem_ball, Real.dist_eq] using hy) z.1
         have hd : -deriv (stateProfile D S C z.1) (rootProfileShift r σ p).1 =

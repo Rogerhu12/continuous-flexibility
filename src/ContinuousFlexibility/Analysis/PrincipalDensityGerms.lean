@@ -110,7 +110,7 @@ theorem radialBoundaryJet_principalRemainder_eq_zero_of_germs
     change radialBoundaryJet ρ c k θ -
       radialBoundaryJet (fun q => N ((G q).1)) c k θ = 0
     rw [hnormal, sub_self]
-  have hrem := coordinatePrincipalRemainder_eventuallyEq hFmatch hhmatch N i
+  have hrem := coordinatePrincipalRemainder_eventuallyEq (A := A) hFmatch hhmatch N i
   have hs := hrem.comp_tendsto hline.continuousAt
   exact ((hs.iteratedDeriv k).eq_of_nhds).trans hz
 

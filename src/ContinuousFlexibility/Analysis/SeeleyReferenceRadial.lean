@@ -42,7 +42,7 @@ theorem seeleyPeriodicExtension_eq_zero_of_halfPlane
   · rw [seeleyPeriodicExtension_of_nonneg f hp, hf p.1 hp p.2]
   · rw [seeleyPeriodicExtension_of_neg f (lt_of_not_ge hp)]
     calc
-      _ = ∑' _i : ℕ, (0 : ℝ) := by
+      _ = ∑' _i : SeeleyIndex, (0 : ℝ) := by
         apply tsum_congr
         intro i
         rw [hf (-seeleyData.b i * p.1)
