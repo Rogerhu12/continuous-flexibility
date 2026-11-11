@@ -29,7 +29,7 @@ def radialChainCoefficient (r : ℝ → ℝ) : (n : ℕ) → Fin (n + 1) → ℝ
 theorem radialChainCoefficient_contDiff {r : ℝ → ℝ}
     (hr : ContDiff ℝ ∞ r) (n : ℕ) (i : Fin (n + 1)) :
     ContDiff ℝ ∞ (radialChainCoefficient r n i) := by
-  induction n generalizing i with
+  induction n with
   | zero => exact contDiff_const
   | succ n ih =>
       let A : Fin (n + 1) → ℝ → ℝ := fun j => deriv (radialChainCoefficient r n j)
@@ -88,8 +88,12 @@ theorem mixedDerivative_comp_materialCoordinate_formula
     ⟨(hT.2.2.2.2.2.2.2.1 q.1).1, mem_univ _⟩
   induction a generalizing p with
   | zero =>
-      simp only [mixedDerivative, iteratedDeriv_zero, Fin.sum_univ_one,
-        Fin.val_zero, radialChainCoefficient, one_mul]
+      change iteratedDeriv b (fun θ => f (T.radius p.1, θ)) p.2 =
+        ∑ i : Fin 1, radialChainCoefficient T.radius 0 i p.1 *
+          mixedDerivative i.val b f (T.radius p.1, p.2)
+      rw [Fin.sum_univ_one]
+      simp only [Fin.val_zero, radialChainCoefficient, one_mul,
+        mixedDerivative, iteratedDeriv_zero]
   | succ a ih =>
       have heq : (fun x => mixedDerivative a b (fun q => f (T.radius q.1, q.2)) (x, p.2)) =
           (fun x => ∑ i : Fin (a + 1), radialChainCoefficient T.radius a i x *
@@ -120,7 +124,9 @@ theorem mixedDerivative_comp_materialCoordinate_formula
           deriv (fun x => mixedDerivative a b
             (fun q => f (T.radius q.1, q.2)) (x, p.2)) p.1 := by
         simp only [mixedDerivative, iteratedDeriv_succ]
-      rw [hsucc, heq, hderiv, radialChainCoefficient_sum_succ]
+      rw [hsucc, heq, hderiv]
+      rw [radialChainCoefficient_sum_succ T.radius a p.1
+        (fun j => mixedDerivative j b f (T.radius p.1, p.2))]
       rw [Finset.sum_add_distrib]
       congr 1
       apply Finset.sum_congr rfl

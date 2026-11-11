@@ -86,7 +86,9 @@ theorem physicalJetHasDerivAt_coefficient_mul
     hA.mono fun s hs => hs.comp_contDiff hcoord hinside
   have hBm : ContDiff ℝ ∞ (fun p : PolarPoint => B (T.radius p.1, p.2)) :=
     hB.comp_contDiff hcoord hinside
-  have hd := MixedJetHasDerivAt.mul_const hAm hBm (contDiff_materialPullback hT hu) h
+  have huM : ContDiff ℝ ∞ (materialPullback T γ u) :=
+    contDiff_materialPullback (γ := γ) hT hu
+  have hd := MixedJetHasDerivAt.mul_const (u := materialPullback T γ u) hAm hBm huM h
   apply hd.congr
   · exact Eventually.of_forall fun s => funext fun p => by
       dsimp only [materialPullback]

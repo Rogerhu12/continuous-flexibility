@@ -40,7 +40,15 @@ theorem fixedLastContinuousMultilinear_apply {n : ℕ}
     (A : E [×(n + 1)]→L[ℝ] ℝ) (w : E) (v : Fin n → E) :
     fixedLastContinuousMultilinear A w v = A (Fin.snoc v w) := rfl
 
-variable [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+end ContinuousFlexibility.Analysis
+
+namespace ContinuousFlexibility.Statements
+
+open Set Filter ContinuousFlexibility.Analysis
+open scoped Topology
+
+variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
   {U : Set E} {f : E → ℝ}
 
 def SmoothDirections.fixedLast (J : SmoothDirections U f) (w : E) :
@@ -74,4 +82,4 @@ theorem SmoothDirections.fixedLast_eq_cons (J : SmoothDirections U f)
     (J.fixedLast w).D n x v = J.D (n + 1) x (Fin.cons w v) :=
   (J.cons_eq_snoc hc n x hx w v).symm
 
-end ContinuousFlexibility.Analysis
+end ContinuousFlexibility.Statements

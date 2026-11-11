@@ -122,10 +122,26 @@ theorem returnCorrectionDriftSpeedLinear_contDiff_of_velocity
       (fun p : PolarPoint => returnCorrectionVelocityLinear D S C χ z m (p.1, -p.2) ρ) := by
     simpa only [Function.comp_def] using (hV m).comp hr
   constructor
-  · have h := ((hV m).sub hvr).div_const 2
-    exact h.congr (fun p => (returnCorrectionDriftLinear_apply D S C χ z m p ρ).symm)
-  · have h := (hvr.neg.sub (hV m)).div_const 2
-    exact h.congr (fun p => (returnCorrectionSpeedLinear_apply D S C χ z m p ρ).symm)
+  · have h : ContDiff ℝ ∞ (fun p : PolarPoint =>
+        (returnCorrectionVelocityLinear D S C χ z m p ρ -
+          returnCorrectionVelocityLinear D S C χ z m (p.1, -p.2) ρ) / 2) :=
+      ((hV m).sub hvr).div_const 2
+    have heq : (fun p : PolarPoint =>
+        (returnCorrectionVelocityLinear D S C χ z m p ρ -
+          returnCorrectionVelocityLinear D S C χ z m (p.1, -p.2) ρ) / 2) =
+        fun p => returnCorrectionDriftLinear D S C χ z m p ρ :=
+      funext (fun p => (returnCorrectionDriftLinear_apply D S C χ z m p ρ).symm)
+    exact Eq.mp (congrArg (fun f : PolarPoint → ℝ => ContDiff ℝ ∞ f) heq) h
+  · have h : ContDiff ℝ ∞ (fun p : PolarPoint =>
+        (-returnCorrectionVelocityLinear D S C χ z m (p.1, -p.2) ρ -
+          returnCorrectionVelocityLinear D S C χ z m p ρ) / 2) :=
+      (hvr.neg.sub (hV m)).div_const 2
+    have heq : (fun p : PolarPoint =>
+        (-returnCorrectionVelocityLinear D S C χ z m (p.1, -p.2) ρ -
+          returnCorrectionVelocityLinear D S C χ z m p ρ) / 2) =
+        fun p => returnCorrectionSpeedLinear D S C χ z m p ρ :=
+      funext (fun p => (returnCorrectionSpeedLinear_apply D S C χ z m p ρ).symm)
+    exact Eq.mp (congrArg (fun f : PolarPoint → ℝ => ContDiff ℝ ∞ f) heq) h
 
 theorem returnCorrectionDriftSpeedLinear_weighted_bound_of_velocity
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)

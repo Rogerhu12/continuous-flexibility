@@ -118,7 +118,7 @@ theorem N01Properties.returnInterpolation_invFun_sectorLine_contDiffOn
         continuous_const.add (continuous_id.smul continuous_const)))
     (hN.returnInterpolation_sectorLine_contDiffOn hS hT m c x w)
   · intro t ht θ
-    have hz := liftSectorParameter_mem_stateNeighborhood ht (le_refl ε)
+    have hz := liftSectorParameter_mem_stateNeighborhood (C := C) ht (le_refl ε)
     have hs := hN.2.2.1.liftSectorParameter_sector (x + t • w)
     have hK := hN.returnCorrectionInitialMap_contDiff hS hT hz hs m
     rw [(returnInterpolation_hasDerivAt (χ := c)
@@ -126,7 +126,7 @@ theorem N01Properties.returnInterpolation_invFun_sectorLine_contDiffOn
     exact returnInterpolation_deriv_pos hc.1 hc.2
       (hN.returnCorrectionInitialMap_deriv_pos hz hs m θ)
   · intro t ht θ
-    have hz := liftSectorParameter_mem_stateNeighborhood ht (le_refl ε)
+    have hz := liftSectorParameter_mem_stateNeighborhood (C := C) ht (le_refl ε)
     have hs := hN.2.2.1.liftSectorParameter_sector (x + t • w)
     have hK := hN.returnCorrectionInitialMap_contDiff hS hT hz hs m
     have hcont : Continuous (returnInterpolation c

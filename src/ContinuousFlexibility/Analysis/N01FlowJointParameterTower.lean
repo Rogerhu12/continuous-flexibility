@@ -20,11 +20,24 @@ namespace ContinuousFlexibility.Statements
 
 local instance n01FlowJointParameterTowerStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01FlowJointParameterTowerParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
 local instance n01FlowJointParameterTowerRealNormedSpace : NormedSpace ℝ ℝ :=
   NormedField.toNormedSpace
 
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology
+
+private def restoreAffineScalarTower
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f g : E → ℝ} (J : SmoothDirections U f)
+    (L : E →L[ℝ] ℝ) (c : ℝ)
+    (heq : ∀ x ∈ U, f x + (c + L x) = g x) : SmoothDirections U g := by
+  let K : SmoothDirections U (fun x => c + L x) :=
+    (smoothDirectionsLinear (ContinuousLinearMap.id ℝ ℝ)).compAffine L c J.open_domain
+      (fun _ _ => mem_univ _)
+  exact (smoothDirectionsAdd J K).congrOn (fun x hx => heq x hx)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -57,17 +70,9 @@ def N01Properties.minusFlow_jointTower
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ℝ =>
         C.minusFlow (liftSectorParameter S C z.1) m r z.2) := by
-  let J := hN.sectorFlow_closed_jointTower hS hT m r hr
-  let L : ((StateDirections S × ℝ) × ℝ) →L[ℝ] ℝ :=
-    ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) ℝ
-  let K : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × ℝ =>
-        -opticalTravel D.w (C.left m) r + z.2) :=
-    (smoothDirectionsLinear (ContinuousLinearMap.id ℝ ℝ)).compAffine L
+  apply restoreAffineScalarTower (hN.sectorFlow_closed_jointTower hS hT m r hr)
+    (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) ℝ)
     (-opticalTravel D.w (C.left m) r)
-    ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
-    (fun _ _ => mem_univ _)
-  apply (smoothDirectionsAdd J K).congrOn
   intro z hz
   change ordinaryFlowFamily S C m 0 0 (r, z.2) (liftSectorParameter S C z.1) +
     (-opticalTravel D.w (C.left m) r + z.2) = _

@@ -106,7 +106,7 @@ theorem singleComponentScalarJets_iteratedDeriv
       if i = m then (J b θ).D n x v else 0 := by
   rw [singleComponentScalarJets_apply, circleSingleComponentField_iteratedDeriv]
   have hd := smoothDirections_angular_jet_iteratedDeriv J hU hc hbound hangular n 0 b x hx v θ
-  simpa only [zero_add] using congrArg (fun t : ℝ => if i = m then t else 0) hd
+  simpa only [Nat.zero_add] using congrArg (fun t : ℝ => if i = m then t else 0) hd
 
 include hperiod in
 theorem singleComponentScalarJets_member
@@ -136,11 +136,11 @@ theorem singleComponentScalarJets_normBounds
   have hpos : 0 ≤ B * (1 + p x) * ∏ i, p (v i) :=
     mul_nonneg (mul_nonneg hB (add_nonneg zero_le_one (apply_nonneg _ _)))
       (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
-  have h := circleSingleComponentField_norm_le hM hH m s _
+  have h := circleSingleComponentField_norm_le (γ := γ) hM hH m s _
     (smoothDirections_angular_jet_contDiff J hU hc hbound hangular n 0 x hx v) hpos
     (fun b hbs θ => by
       rw [smoothDirections_angular_jet_iteratedDeriv J hU hc hbound hangular n 0 b x hx v θ,
-        zero_add]
+        Nat.zero_add]
       exact hb b hbs θ x hx v)
   exact h.trans_eq (by dsimp only [C]; ring)
 
@@ -160,7 +160,7 @@ theorem singleComponentScalarJets_hasDerivAt
     apply ((J b θ).hasDerivAt_line_jet x w n v ht).congr_of_eventuallyEq
     filter_upwards [hline] with s hs
     simp only [singleComponentScalarJets_iteratedDeriv J hU hc hbound hangular m n _ hs,
-      if_pos rfl]
+      if_pos rfl, ite_true]
   · rw [singleComponentScalarJets_iteratedDeriv J hU hc hbound hangular m
       (n + 1) _ ht _ i b θ, if_neg hi]
     apply (hasDerivAt_const t (0 : ℝ)).congr_of_eventuallyEq
@@ -172,8 +172,10 @@ theorem singleComponentScalarJets_secondEnvelopes
     (hM : ∀ i, 0 ≤ T.M (T.sample i)) (hH : ∀ i, 0 ≤ T.H (T.sample i)) :
     CircleJetSecondEnvelopes (T := T) (γ := γ) (U := U) (singleComponentScalarJets J m) := by
   intro n x hx v w
+  have hcont : Continuous (fun t : ℝ => x + t • w) :=
+    continuous_const.add (continuous_id.smul continuous_const)
   have hline : {t : ℝ | x + t • w ∈ U} ∈ 𝓝 (0 : ℝ) :=
-    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.preimage_mem_nhds
+    hcont.continuousAt.preimage_mem_nhds
       (hU.mem_nhds (by simpa only [zero_smul, add_zero] using hx))
   obtain ⟨δ, hδ, hδU⟩ := Metric.mem_nhds_iff.mp hline
   have hmem : ∀ t : ℝ, |t| < min δ 1 → x + t • w ∈ U := by
@@ -221,7 +223,8 @@ theorem singleComponentScalarJets_secondEnvelopes
       exact mul_le_mul
         (mul_le_mul_of_nonneg_right hk (Real.rpow_nonneg (hH m) _))
         hjet (abs_nonneg _) hW
-    · simp only [if_neg hi, abs_zero, mul_zero, energy, ENNReal.toReal_zero, Real.sqrt_zero]
+    · simp only [if_neg hi, abs_zero, mul_zero, energy, ENNReal.toReal_zero, Real.sqrt_zero,
+        le_refl]
 
 include hperiod in
 theorem exists_singleComponent_circle_smoothDirections

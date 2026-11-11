@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.JointJetInterpolationBudget
 import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
+import ContinuousFlexibility.Analysis.SmoothDirectionsAffine
 
 /-!
 # Fixed-loss composition of weighted joint jets

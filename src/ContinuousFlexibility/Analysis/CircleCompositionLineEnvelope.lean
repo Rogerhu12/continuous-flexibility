@@ -17,30 +17,49 @@ namespace ContinuousFlexibility.Statements
 open Set MeasureTheory ContinuousFlexibility.Analysis
 open scoped Topology ContDiff ENNReal BigOperators
 
-set_option backward.isDefEq.respectTransparency false
-
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
+
+private theorem field_uniform_jets_affineLine
+    (f g : ℕ → ℝ → ℝ) (F : ℝ → ℕ → ℝ → ℝ) (s : ℕ)
+    (hline : ∀ t m i θ, iteratedDeriv i (F t m) θ =
+      iteratedDeriv i (f m) θ + t * iteratedDeriv i (g m) θ)
+    (hf : ∃ B : ℝ, 0 ≤ B ∧ ∀ m i θ, i ≤ s → |iteratedDeriv i (f m) θ| ≤ B)
+    (hg : ∃ B : ℝ, 0 ≤ B ∧ ∀ m i θ, i ≤ s → |iteratedDeriv i (g m) θ| ≤ B) :
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ t : ℝ, |t| ≤ 1 → ∀ m i θ, i ≤ s →
+      |iteratedDeriv i (F t m) θ| ≤ B := by
+  obtain ⟨Be, he, hbe⟩ := hf
+  obtain ⟨Bw, hw, hbw⟩ := hg
+  refine ⟨Be + Bw, add_nonneg he hw, ?_⟩
+  intro t ht m i θ hi
+  rw [hline t m i θ]
+  calc
+    _ ≤ |iteratedDeriv i (f m) θ| + |t| * |iteratedDeriv i (g m) θ| := by
+      simpa only [abs_mul] using abs_add_le
+        (iteratedDeriv i (f m) θ) (t * iteratedDeriv i (g m) θ)
+    _ ≤ Be + 1 * Bw :=
+      add_le_add (hbe m i θ hi) (mul_le_mul ht (hbw m i θ hi)
+        (abs_nonneg _) zero_le_one)
+    _ = Be + Bw := by rw [one_mul]
+
+private theorem field_uniform_jets_congr
+    {f g : ℕ → ℝ → ℝ} (heq : f = g) (s : ℕ)
+    (hf : ∃ B : ℝ, 0 ≤ B ∧ ∀ m i θ, i ≤ s → |iteratedDeriv i (f m) θ| ≤ B) :
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ m i θ, i ≤ s → |iteratedDeriv i (g m) θ| ≤ B :=
+  heq ▸ hf
 
 theorem circleModel_uniform_jets_affineLine
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
     (e w : S.Space) (s : ℕ) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ t : ℝ, |t| ≤ 1 → ∀ m i θ, i ≤ s →
-      |iteratedDeriv i (S.decode (e + t • w) m) θ| ≤ B := by
-  obtain ⟨Be, he, hbe⟩ := circleModel_uniform_jets_of_material hS hT hD hγ e s
-  obtain ⟨Bw, hw, hbw⟩ := circleModel_uniform_jets_of_material hS hT hD hγ w s
-  refine ⟨Be + Bw, add_nonneg he hw, ?_⟩
-  intro t ht m i θ hi
-  rw [circleAngularJetEvaluation_line]
-  calc
-    _ ≤ |iteratedDeriv i (S.decode e m) θ| +
-        |t| * |iteratedDeriv i (S.decode w m) θ| := by
-      simpa only [abs_mul] using abs_add_le
-        (iteratedDeriv i (S.decode e m) θ) (t * iteratedDeriv i (S.decode w m) θ)
-    _ ≤ Be + 1 * Bw :=
-      add_le_add (hbe m i θ hi) (mul_le_mul ht (hbw m i θ hi)
-        (abs_nonneg _) zero_le_one)
-    _ = Be + Bw := by rw [one_mul]
+      |iteratedDeriv i (S.decode (e + t • w) m) θ| ≤ B :=
+  field_uniform_jets_affineLine (S.decode e) (S.decode w)
+    (fun t => S.decode (e + t • w)) s
+    (fun t m i θ => circleAngularJetEvaluation_line hS e w i m t θ)
+    (circleModel_uniform_jets_of_material (D := D) (T := T) (γ := γ) (S := S)
+      hS hT hD hγ e s)
+    (circleModel_uniform_jets_of_material (D := D) (T := T) (γ := γ) (S := S)
+      hS hT hD hγ w s)
 
 theorem circleShiftedChart_uniform_jets_affineLine
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -49,7 +68,11 @@ theorem circleShiftedChart_uniform_jets_affineLine
     ∃ B : ℝ, 0 ≤ B ∧ ∀ t : ℝ, |t| ≤ 1 → ∀ m i θ,
       1 ≤ i → i ≤ s →
       |iteratedDeriv i (circleAffineLift travel (S.decode (e + t • w)) 1 m) θ| ≤ B ^ i := by
-  obtain ⟨B, hB, hb⟩ := circleModel_uniform_jets_affineLine hS hT hD hγ e w s
+  let h := circleModel_uniform_jets_affineLine (D := D) (T := T) (γ := γ) (S := S)
+    hS hT hD hγ e w s
+  let B : ℝ := h.choose
+  have hB : 0 ≤ B := h.choose_spec.1
+  have hb := h.choose_spec.2
   refine ⟨1 + B, by positivity, ?_⟩
   intro t ht
   exact circleAffineLift_uniform_jets
@@ -106,9 +129,9 @@ theorem circleFiniteProduct_multiplier_uniform_jets
           circleFiniteProductWith_decode hS hT hD hγ (v j) v (I.erase j)]
       funext m θ
       exact Finset.mul_prod_erase I (fun k => S.decode (v k) m θ) hj
-    obtain ⟨B, hB, hb⟩ := circleModel_uniform_jets_of_material hS hT hD hγ u s
-    refine ⟨B, hB, ?_⟩
-    simpa only [heq] using hb
+    exact field_uniform_jets_congr heq s
+      (circleModel_uniform_jets_of_material (D := D) (T := T) (γ := γ) (S := S)
+        hS hT hD hγ u s)
 
 /-- One product term of a parameter jet has a fixed summable envelope
 as the chart moves on an affine parameter interval. -/
@@ -129,9 +152,16 @@ theorem circleFiniteProductWith_comp_line_envelope
   classical
   let U := circleAngularDerivativeIterate hS n u
   let energy : ℕ → ℝ≥0∞ := circleComponentEnergy T γ (s + 2) (S.decode U)
-  obtain ⟨L, hL, hLjets⟩ := circleFiniteProduct_multiplier_uniform_jets hS hT hD hγ v I s
-  obtain ⟨V, hV, hVjets⟩ :=
-    circleShiftedChart_uniform_jets_affineLine hS hT hD hγ travel e w (s + 1)
+  let hmultiplier := circleFiniteProduct_multiplier_uniform_jets
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ v I s
+  let L : ℝ := hmultiplier.choose
+  have hL : 0 ≤ L := hmultiplier.choose_spec.1
+  have hLjets := hmultiplier.choose_spec.2
+  let hchart := circleShiftedChart_uniform_jets_affineLine
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel e w (s + 1)
+  let V : ℝ := hchart.choose
+  have hV : 0 ≤ V := hchart.choose_spec.1
+  have hVjets := hchart.choose_spec.2
   let Q : ℝ := (Fintype.card (CircleJetIndex (s + 1)) : ℝ) *
     (Real.pi * circleCompositionJetConstant (s + 1) V ^ 2)
   have hQ : 0 ≤ Q := by dsimp [Q]; positivity

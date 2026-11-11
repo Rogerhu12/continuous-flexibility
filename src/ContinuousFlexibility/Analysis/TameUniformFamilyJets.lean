@@ -142,16 +142,19 @@ theorem uniformFamilyJetBounds_linear
         exact ⟨C, hC, fun i x _ => hc i x⟩)
   intro n
   cases n with
-  | zero => exact hlin.comp (jetGrading_monotone hp 0)
-      ((uniformLowGrowth_jet_base p 0).uniformFamilyOn (U ×ˢ univ))
-      (fun _ _ _ => mem_univ _)
+  | zero =>
+      exact hlin.comp (jetGrading_monotone hp 0)
+        ((uniformLowGrowth_jet_base p 0).uniformFamilyOn (U ×ˢ univ))
+        (fun _ _ _ => mem_univ _)
   | succ n =>
       cases n with
-      | zero => exact hlin.comp (jetGrading_monotone hp 1)
-          ((uniformLowGrowth_jet_direction p 1 0).uniformFamilyOn (U ×ˢ univ))
-          (fun _ _ _ => mem_univ _)
-      | succ n => exact (uniformLowGrowth_const (jetGrading p (n + 2)) q (0 : F)).uniformFamilyOn
-          (U ×ˢ univ)
+      | zero =>
+          exact hlin.comp (jetGrading_monotone hp 1)
+            ((uniformLowGrowth_jet_direction p 1 0).uniformFamilyOn (U ×ˢ univ))
+            (fun _ _ _ => mem_univ _)
+      | succ n =>
+          exact (uniformLowGrowth_const (jetGrading p (n + 2)) q (0 : F)).uniformFamilyOn
+            (U ×ˢ univ)
 
 theorem uniformFamilyJetBounds_quadratic
     [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
@@ -185,8 +188,9 @@ theorem uniformFamilyJetBounds_quadratic
               apply (h₁.add hp' h₂).congr
               intro i z hz
               exact quadraticJetSecond_apply (B i) z.2
-          | succ n => exact (uniformLowGrowth_const (jetGrading p (n + 3)) q (0 : F)).uniformFamilyOn
-              (U ×ˢ univ)
+          | succ n =>
+              exact (uniformLowGrowth_const (jetGrading p (n + 3)) q (0 : F)).uniformFamilyOn
+                (U ×ˢ univ)
 
 section Composition
 

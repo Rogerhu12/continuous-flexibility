@@ -14,8 +14,6 @@ plateau energy and the original control's circle component energy.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
 
 local instance n01LocalizedStateDirectionsStateSMul (S : PhysicalSpacesData) :
@@ -205,7 +203,11 @@ theorem N01Properties.exists_localized_state_directions
           (circleSingletonGradingConstant s * (2 * circleSobolevConstant)) *
             Real.sqrt (circleComponentEnergy T (3 / 4 : ℝ) (s + d + 1)
               ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1) m).toReal) := by
-  obtain ⟨η, hη⟩ := hN.exists_height_pair_plateau_directions hS hT v.1.val.1
+  let data := N01Properties.exists_height_pair_plateau_directions
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    hN hS hT (show HeightPair S from v.1.val.1)
+  let η : ℕ → HeightPair S := data.choose
+  have hη := data.choose_spec
   have hlocal (m : ℕ) : ∃ c : ℝ, ∀ t ∈ Ioo (C.left m) (C.right m), ∀ θ : ℝ,
       heightPairField S (η m) (t, θ) = heightPairField S v.1.val.1 (t, θ) + c :=
     hη.2.2.1 m

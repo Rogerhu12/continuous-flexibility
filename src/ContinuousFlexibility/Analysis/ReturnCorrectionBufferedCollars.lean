@@ -80,7 +80,8 @@ theorem N01Properties.exists_positive_opticalCorrectionCollars_buffered
       _ ≤ Kₙ * ((2 * K) * radialE (D.cellIndex (j m)) ^ A) ^ n :=
         mul_le_mul_of_nonneg_left hpow hKₙ.le
       _ = _ := by
-        rw [mul_pow, ← Real.rpow_mul_natCast (Real.exp_pos _).le]
+        have hE : 0 ≤ radialE (D.cellIndex (j m)) := (Real.exp_pos _).le
+        rw [mul_pow, ← Real.rpow_mul_natCast hE A n]
         ring
   refine ⟨b₀, ε₀, χ, j, x, δ, K, A, B, lam, P, hb₀, hε₀, hε₀ε,
     hK, hA, hB, hlam, hP, hnew, hdata, fun _ => rfl, ?_, ?_,

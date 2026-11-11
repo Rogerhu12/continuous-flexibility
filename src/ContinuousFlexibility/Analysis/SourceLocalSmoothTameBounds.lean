@@ -15,6 +15,24 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+private theorem smoothTameOn_of_local_majorant
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {U : Set E} {f : E → F}
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (N : ℕ → F → ℝ) (hN : ∀ s y, q s y ≤ N s y)
+    (J : SmoothDirections U f)
+    (hbound : ∀ k x₀, x₀ ∈ U → ∃ loss base : ℕ, ∃ δ : ℝ, 0 < δ ∧
+      ∀ s, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U,
+        p base (x - x₀) < δ → ∀ v : Fin k → E,
+        N s (J.D k x v) ≤ C * oneHighVariationWeight p base (s + loss) x v) :
+    SmoothTameOn p q U f := by
+  refine ⟨J, fun k x₀ hx₀ => ?_⟩
+  obtain ⟨loss, base, δ, hδ, hb⟩ := hbound k x₀ hx₀
+  refine ⟨loss, base, δ, hδ, fun s hs => ?_⟩
+  obtain ⟨C, hC, hnorm⟩ := hb s hs
+  exact ⟨C, hC, fun x hx hnear v => (hN s (J.D k x v)).trans (hnorm x hx hnear v)⟩
+
 theorem sourceGrading_le_physicalNorm
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) (u : S.Source) (s : ℕ) :
@@ -36,12 +54,9 @@ theorem smoothTameOn_source_of_local_oneHigh_norm_bounds
         p base (x - x₀) < δ → ∀ v : Fin k → E,
         physicalNorm T (3 / 4 : ℝ) s (physicalSourceDecode S (J.D k x v)) ≤
           C * oneHighVariationWeight p base (s + loss) x v) :
-    SmoothTameOn p S.sourceGrading U f := by
-  refine ⟨J, fun k x₀ hx₀ => ?_⟩
-  obtain ⟨loss, base, δ, hδ, hb⟩ := hbound k x₀ hx₀
-  refine ⟨loss, base, δ, hδ, fun s hs => ?_⟩
-  obtain ⟨C, hC, hnorm⟩ := hb s hs
-  refine ⟨C, hC, fun x hx hnear v => ?_⟩
-  exact (sourceGrading_le_physicalNorm hS (J.D k x v) s).trans (hnorm x hx hnear v)
+    SmoothTameOn p S.sourceGrading U f :=
+  smoothTameOn_of_local_majorant p S.sourceGrading
+    (fun s u => physicalNorm T (3 / 4 : ℝ) s (physicalSourceDecode S u))
+    (fun s u => sourceGrading_le_physicalNorm hS u s) J hbound
 
 end ContinuousFlexibility.Statements

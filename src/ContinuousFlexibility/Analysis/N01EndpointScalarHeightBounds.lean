@@ -42,17 +42,21 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound_uniform_radius
           T.E0 (T.sample (C.cell m)) ^ B *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  obtain ⟨B, hB, htower⟩ :=
-    hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+  let data := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+  let B : ℝ := data.choose
+  have hB : 0 < B := data.choose_spec.1
   refine ⟨B, hB, fun rsel hrsel m b θ hb z hz η hη => ?_⟩
-  have hr : rsel m ∈ Icc (C.left m) (C.right m) :=
-    (hrsel m)
-  obtain ⟨J, hJ⟩ := htower m b θ (rsel m) hb hr
-  rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz]
+  have hr : rsel m ∈ Icc (C.left m) (C.right m) := hrsel m
+  let pointData := data.choose_spec.2 m b θ (rsel m) hb hr
+  let J := pointData.choose
   have heq := (hN.sectorFlow_closed_angularTower hS hT m (rsel m) hr b θ).unique
     J (n + 1) z hz
-  rw [heq]
-  exact hJ z hz η hη
+  have heval := congrArg (fun A : (StateDirections S × ℝ) [×(n + 1)]→L[ℝ] ℝ =>
+    A (fun _ => scalarParameterDirection S)) heq
+  have hangle := hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1)
+    z hz (fun _ => scalarParameterDirection S) m b θ
+  have habs := congrArg (fun t : ℝ => |t|) (hangle.trans heval)
+  exact habs.trans_le (pointData.choose_spec z hz η hη)
 
 theorem N01Properties.endpointFlow_pure_scalar_height_bound
     (hN : N01Properties D T S C base loss ε)
@@ -69,8 +73,9 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound
           T.E0 (T.sample (C.cell m)) ^ B *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
-  exact ⟨K, hK, hbound rsel hrsel⟩
+  let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
+  exact Exists.intro data.choose
+    (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
 
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius
@@ -88,7 +93,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
         K * T.M (T.sample m) ^ (c + 1) *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  obtain ⟨B, hB, hbound⟩ := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
+  let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
+  let B : ℝ := data.choose
+  have hB : 0 < B := data.choose_spec.1
   obtain ⟨K, hK, hpref⟩ := hN.flow_sample_prefactor_le_M hT hB.le
   refine ⟨B * K, mul_pos hB hK, fun rsel hrsel m b c θ hb z hz η hη => ?_⟩
   have hs := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
@@ -106,7 +113,7 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
     _ ≤ (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B * W) :=
-      mul_le_mul_of_nonneg_left (hbound rsel hrsel m b θ hb z hz η hη)
+      mul_le_mul_of_nonneg_left (data.choose_spec.2 rsel hrsel m b θ hb z hz η hη)
         (mul_nonneg (pow_nonneg hM c) (Real.rpow_nonneg hH _))
     _ = (B * T.M (T.sample m) ^ c) *
         (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
@@ -132,7 +139,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound
         K * T.M (T.sample m) ^ (c + 1) *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n s
-  exact ⟨K, hK, hbound rsel hrsel⟩
+  let data := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n s
+  exact Exists.intro data.choose
+    (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
 
 end ContinuousFlexibility.Statements

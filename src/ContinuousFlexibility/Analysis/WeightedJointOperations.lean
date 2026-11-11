@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.WeightedJointComposition
+import ContinuousFlexibility.Analysis.TameUniformFamilyJets
 import Mathlib.Topology.MetricSpace.ProperSpace
 
 /-!
@@ -82,6 +83,35 @@ theorem UniformWeightedJointGrowth.prodMk
   change max ‖(J i).D n (x, y) v‖ ‖(K i).D n (x, y) v‖ ≤ _
   exact max_le ((hb i x hx hlow y hy v hv).trans ha)
     ((hc i x hx hlow y hy v hv).trans hb')
+
+theorem UniformWeightedJointGrowth.postLinear
+    {p : ℕ → Seminorm ℝ E} {W : I → ℝ}
+    {U : Set E} {V : I → Set P} {f : I → E × P → F}
+    {J : ∀ i, SmoothDirections (U ×ˢ V i) (f i)} {base loss : ℕ}
+    (hJ : UniformWeightedJointGrowth p W J base loss) (A : F →L[ℝ] G) :
+    UniformWeightedJointGrowth p W
+      (fun i => smoothDirectionsPostContinuousLinear (J i) A) base loss := by
+  intro R hR n
+  obtain ⟨C, Q, hC, hQ, hb⟩ := hJ R hR n
+  refine ⟨‖A‖ * C, Q, mul_nonneg (norm_nonneg _) hC, hQ, ?_⟩
+  intro i x hx hlow y hy v hv
+  change ‖A ((J i).D n (x, y) v)‖ ≤ _
+  exact (A.le_opNorm _).trans ((mul_le_mul_of_nonneg_left
+    (hb i x hx hlow y hy v hv) (norm_nonneg _)).trans_eq (by ring))
+
+theorem UniformWeightedJointGrowth.sub
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p)
+    {W : I → ℝ} (hW : ∀ i, 1 ≤ W i)
+    {U : Set E} {V : I → Set P} {f g : I → E × P → F}
+    {J : ∀ i, SmoothDirections (U ×ˢ V i) (f i)}
+    {K : ∀ i, SmoothDirections (U ×ˢ V i) (g i)} {base loss : ℕ}
+    (hJ : UniformWeightedJointGrowth p W J base loss)
+    (hK : UniformWeightedJointGrowth p W K base loss)
+    (H : ∀ i, SmoothDirections (U ×ˢ V i) (fun z => f i z - g i z)) :
+    UniformWeightedJointGrowth p W H base loss := by
+  let A : (F × F) →L[ℝ] F :=
+    ContinuousLinearMap.fst ℝ F F - ContinuousLinearMap.snd ℝ F F
+  exact ((hJ.prodMk hp hW hK).postLinear A).congr H (fun _ _ _ => rfl)
 
 /-- A bounded low parameter ball gives a bounded range in a proper
 normed target. All ordinary outer jets are bounded on that one ball. -/

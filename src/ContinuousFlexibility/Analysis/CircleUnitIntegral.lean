@@ -67,9 +67,17 @@ theorem circleModelValueLevel_apply
     (hS.2.2.2.2.2.2.1 u 1 m) θ
   have hw : T.H (T.sample m) ^ γ * T.H (T.sample m) ^ (-γ) = 1 := by
     rw [← Real.rpow_add (hH m), add_neg_cancel, Real.rpow_zero]
-  exact (circleModelValueLevel_coordinates (T := T) (γ := γ) m θ (u.val 1)).trans
-    ((congrArg (fun y : ℝ => T.H (T.sample m) ^ γ * y) he).trans
-      (by rw [← mul_assoc, hw, one_mul]))
+  calc
+    circleModelValueLevel T γ S m θ (u.val 1) =
+        T.H (T.sample m) ^ γ *
+          anglePairEvaluation (toIocMod Real.pi_pos 0 θ)
+            ((u.val 1).val m (zeroCircleJetIndex 1),
+              (u.val 1).val m (circleJetPureAngularIndex 1)) :=
+      circleModelValueLevel_coordinates (T := T) (γ := γ) (S := S) m θ (u.val 1)
+    _ = T.H (T.sample m) ^ γ *
+        (T.H (T.sample m) ^ (-γ) * S.decode u m θ) :=
+      congrArg (fun y : ℝ => T.H (T.sample m) ^ γ * y) he
+    _ = S.decode u m θ := by rw [← mul_assoc, hw, one_mul]
 
 def circleUnitIntegral (hS : IsCircleModel T γ S)
     (f : ℝ → S.Space) (hf : Continuous f) : S.Space := by

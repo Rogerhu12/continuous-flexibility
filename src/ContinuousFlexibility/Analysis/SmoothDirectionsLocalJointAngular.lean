@@ -63,7 +63,9 @@ theorem localScalarJet_joint_continuousOn_of_uniform_bounds
     (hbound : UniformScalarJetSeminormBounds (fun θ : V => J θ θ.property)) (n : ℕ) :
     ContinuousOn (fun p : ℝ × (E × (Fin n → E)) =>
       localScalarJet J n p.2.1 p.2.2 p.1) (V ×ˢ (U ×ˢ univ)) := by
-  apply continuousOn_joint_of_equicontinuous_local_slices (hU.prod isOpen_univ) hV
+  apply continuousOn_joint_of_equicontinuous_local_slices
+    (F := fun θ (z : E × (Fin n → E)) => localScalarJet J n z.1 z.2 θ)
+    (hU.prod isOpen_univ) hV
   · have heq := equicontinuous_jets_of_uniform_seminorm_bounds
       (fun θ : V => J θ θ.property) hU hc hbound n
     convert heq using 1
@@ -183,8 +185,11 @@ def localAngularTowerJointDirections
     have hmap : Continuous (fun p : (E × ℝ) × (Fin k → E) =>
         (p.1.2, (p.1.1, p.2))) :=
       continuous_fst.snd.prodMk (continuous_fst.fst.prodMk continuous_snd)
-    have h := (hjoint k b).comp hmap.continuousOn
-      (fun p hp => ⟨hp.1.2, hp.1.1, mem_univ _⟩)
+    have h : ContinuousOn
+        (fun p : (E × ℝ) × (Fin k → E) =>
+          localScalarJet (J b) k p.1.1 p.2 p.1.2) ((U ×ˢ V) ×ˢ univ) :=
+      (hjoint k b).comp hmap.continuousOn
+        (fun p hp => ⟨hp.1.2, hp.1.1, mem_univ _⟩)
     convert h using 1
     funext p
     exact localScalarJetMap_apply (J b) k p.1.1 p.1.2 p.2

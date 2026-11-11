@@ -163,12 +163,37 @@ theorem circleInverseComposeLinear_decode
     S.decode (circleInverseComposeLinear hS hT hD hγ travel a ha e u) =
       fun m θ => S.decode u m (circleAffineInverse travel e m θ) := by
   classical
-  rw [circleInverseComposeLinear, dif_pos hlower]
-  exact circleComposeModelLinear_decode hS (material_circle_sample_weights_pos hT hD).1
+  have hmap : circleInverseComposeLinear hS hT hD hγ travel a ha e =
+      circleComposeModelLinear hS (material_circle_sample_weights_pos hT hD).1
+        (material_circle_sample_weights_pos hT hD).2 (circleAffineInverse travel e)
+        (circleAffineInverse_contDiff hS hT hD hγ travel e ha hlower)
+        (circleAffineInverse_period hS hT hD hγ travel e ha hlower)
+        (circleAffineInverse_uniform_jets hS hT hD hγ travel e ha hlower) :=
+    dif_pos hlower
+  have hdecode := circleComposeModelLinear_decode (T := T) (γ := γ) (S := S)
+    hS (material_circle_sample_weights_pos hT hD).1
     (material_circle_sample_weights_pos hT hD).2 (circleAffineInverse travel e)
     (circleAffineInverse_contDiff hS hT hD hγ travel e ha hlower)
     (circleAffineInverse_period hS hT hD hγ travel e ha hlower)
     (circleAffineInverse_uniform_jets hS hT hD hγ travel e ha hlower) u
+  exact (congrArg (fun L : S.Space →ₗ[ℝ] S.Space => S.decode (L u)) hmap).trans hdecode
+
+private theorem circleShiftedChartCompose_decode_at
+    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
+    (travel : ℕ → ℝ) (e u : S.Space) (m : ℕ) (θ : ℝ) :
+    S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel e u) m θ =
+      S.decode u m (circleAffineLift travel (S.decode e) 1 m θ) := by
+  have hmap : circleShiftedChartComposeContinuousLinear hS hT hD hγ travel e u =
+      circleShiftedChartComposeLinear hS hT hD hγ travel e u :=
+    circleShiftedChartComposeContinuousLinear_apply (D := D) (T := T) (γ := γ) (S := S)
+      hS hT hD hγ travel e u
+  have hdecode : S.decode (circleShiftedChartComposeLinear hS hT hD hγ travel e u) m θ =
+      S.decode u m (circleAffineLift travel (S.decode e) 1 m θ) := by
+    simpa only [circleAffineLift, one_mul] using
+      circleShiftedChartComposeLinear_decode (D := D) (T := T) (γ := γ) (S := S)
+        hS hT hD hγ travel e u m θ
+  exact (congrArg (fun v : S.Space => S.decode v m θ) hmap).trans hdecode
 
 theorem circleInverseComposeLinear_left_inverse
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -179,10 +204,18 @@ theorem circleInverseComposeLinear_left_inverse
       (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel e u) = u := by
   apply hS.2.2.2.2.2.1
   funext m θ
-  rw [circleInverseComposeLinear_decode hS hT hD hγ travel a ha e _ hlower,
-    circleShiftedChartComposeContinuousLinear_apply, circleShiftedChartComposeLinear_decode]
-  simpa only [circleAffineLift, one_mul] using
-    congrArg (fun t : ℝ => S.decode u m t)
+  have hi := congrFun (congrFun
+    (circleInverseComposeLinear_decode (D := D) (T := T) (γ := γ) (S := S)
+      hS hT hD hγ travel a ha e
+      (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel e u) hlower) m) θ
+  calc
+    _ = S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel e u)
+        m (circleAffineInverse travel e m θ) := hi
+    _ = S.decode u m (circleAffineLift travel (S.decode e) 1 m
+        (circleAffineInverse travel e m θ)) :=
+      circleShiftedChartCompose_decode_at hS hT hD hγ travel e u m
+        (circleAffineInverse travel e m θ)
+    _ = S.decode u m θ := congrArg (fun t : ℝ => S.decode u m t)
       (circleAffineInverse_right hS hT hD hγ travel e m θ)
 
 theorem circleInverseComposeLinear_right_inverse
@@ -194,10 +227,18 @@ theorem circleInverseComposeLinear_right_inverse
       (circleInverseComposeLinear hS hT hD hγ travel a ha e u) = u := by
   apply hS.2.2.2.2.2.1
   funext m θ
-  rw [circleShiftedChartComposeContinuousLinear_apply, circleShiftedChartComposeLinear_decode,
-    circleInverseComposeLinear_decode hS hT hD hγ travel a ha e u hlower]
-  simpa only [circleAffineLift, one_mul] using
-    congrArg (fun t : ℝ => S.decode u m t)
+  have hi := congrFun (congrFun
+    (circleInverseComposeLinear_decode (D := D) (T := T) (γ := γ) (S := S)
+      hS hT hD hγ travel a ha e u hlower) m)
+      (circleAffineLift travel (S.decode e) 1 m θ)
+  calc
+    _ = S.decode (circleInverseComposeLinear hS hT hD hγ travel a ha e u) m
+        (circleAffineLift travel (S.decode e) 1 m θ) :=
+      circleShiftedChartCompose_decode_at hS hT hD hγ travel e
+        (circleInverseComposeLinear hS hT hD hγ travel a ha e u) m θ
+    _ = S.decode u m (circleAffineInverse travel e m
+        (circleAffineLift travel (S.decode e) 1 m θ)) := hi
+    _ = S.decode u m θ := congrArg (fun t : ℝ => S.decode u m t)
       (circleAffineInverse_left travel e ha hlower m θ)
 
 end ContinuousFlexibility.Statements

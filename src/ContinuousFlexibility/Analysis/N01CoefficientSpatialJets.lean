@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01CoefficientParameterTower
 import ContinuousFlexibility.Analysis.N01CoefficientMixedBounds
+import ContinuousFlexibility.Analysis.N01SectorFlowTower
 import ContinuousFlexibility.Analysis.SmoothDirectionsSpatialJets
 import ContinuousFlexibility.Analysis.MixedDerivativeHierarchy
 
