@@ -29,6 +29,13 @@ def stateLocalizationEnergy (D : ReferenceData) (T : MaterialData)
   circleComponentEnergy T (3 / 4 : ℝ) (s + d + 1)
     ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1) m
 
+private theorem stateLocalization_pairGrading_fst_le
+    {E F : Type*} [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (n : ℕ) (v : E × F) :
+    p n v.1 ≤ pairGrading p q n v := by
+  rw [pairGrading_apply]
+  exact le_add_of_nonneg_right (apply_nonneg (q n) v.2)
+
 theorem sectorParameter_height_grading_le
     (S : PhysicalSpacesData) (n : ℕ) (v : StateDirections S × ℝ) :
     (S.height (3 / 4 : ℝ)).grading n v.1.val.1.1 ≤
@@ -46,9 +53,7 @@ theorem sectorParameter_height_grading_le
               (S.circle (3 / 4 : ℝ)).grading n v.1.val.2.2.2))
       exact le_add_of_nonneg_right (add_nonneg (apply_nonneg _ _)
         (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _)))
-    _ ≤ _ := by
-      rw [pairGrading_apply]
-      exact le_add_of_nonneg_right (apply_nonneg _ _)
+    _ ≤ _ := stateLocalization_pairGrading_fst_le (sectorGrading S) realGrading n v
 
 theorem sectorParameter_control_grading_le
     (S : PhysicalSpacesData) (n : ℕ) (v : StateDirections S × ℝ) :
@@ -156,14 +161,15 @@ private theorem sqrt_weighted_energy_bound
     (ha : a ≤ M * Real.sqrt E.toReal + c * Real.sqrt F.toReal) :
     a ≤ (1 + c) * Real.sqrt (ENNReal.ofReal (M ^ 2) * E + F).toReal := by
   have hleft : ENNReal.ofReal (M ^ 2) * E ≤ ENNReal.ofReal (M ^ 2) * E + F :=
-    le_add_of_nonneg_right (zero_le _)
+    le_add_of_nonneg_right (show (0 : ℝ≥0∞) ≤ F from bot_le)
   have hh : M * Real.sqrt E.toReal ≤
       Real.sqrt (ENNReal.ofReal (M ^ 2) * E + F).toReal := by
     have hsqrt := Real.sqrt_le_sqrt (ENNReal.toReal_mono hfinite.ne hleft)
     simpa only [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg M),
       Real.sqrt_mul (sq_nonneg M), Real.sqrt_sq hM] using hsqrt
   have hright : F ≤ ENNReal.ofReal (M ^ 2) * E + F :=
-    le_add_of_nonneg_left (zero_le _)
+    le_add_of_nonneg_left
+      (show (0 : ℝ≥0∞) ≤ ENNReal.ofReal (M ^ 2) * E from bot_le)
   have hh' : Real.sqrt F.toReal ≤
       Real.sqrt (ENNReal.ofReal (M ^ 2) * E + F).toReal :=
     Real.sqrt_le_sqrt (ENNReal.toReal_mono hfinite.ne hright)

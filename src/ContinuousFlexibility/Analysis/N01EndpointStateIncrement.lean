@@ -30,8 +30,9 @@ private theorem endpoint_origin_mem
     (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε := by
   constructor
   · change sectorGrading S base (0 : StateDirections S) < ε
-    rw [(sectorGrading S base).map_zero']
-    exact hN.2.1
+    have hzero : sectorGrading S base (0 : StateDirections S) = (0 : ℝ) :=
+      (sectorGrading S base).map_zero'
+    exact hzero.trans_lt hN.2.1
   · change |(0 : ℝ)| < ε
     rw [abs_zero]
     exact hN.2.1
@@ -60,7 +61,11 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
       (hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0) := by
   let u : StateDirections S × ℝ := (z.1, 0)
   have hu : u ∈ sectorNeighborhood S base ε ε := by
-    exact ⟨hz.1, by simpa only [abs_zero] using hN.2.1⟩
+    constructor
+    · change sectorGrading S base z.1 < ε
+      exact hz.1
+    · change |(0 : ℝ)| < ε
+      simpa only [abs_zero] using hN.2.1
   have hpath (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       t • u ∈ sectorNeighborhood S base ε ε := by
     have hm := sectorNeighborhood_convex S base ε ε (endpoint_origin_mem hN) hu
@@ -70,9 +75,13 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
     hN.endpointFlowScalarJets hS hT rsel hrsel 0 (t • u) Fin.elim0
   let G : ℝ → ℕ → ℕ → ℝ → ℝ := fun t m b θ =>
     iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (t • u)
-      (Fin.snoc Fin.elim0 u) m) θ
-  have htuple : (Fin.cons u (Fin.elim0 : Fin 0 → (StateDirections S × ℝ))) =
-      Fin.snoc Fin.elim0 u := by
+      (Fin.snoc (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) u :
+        Fin 1 → (StateDirections S × ℝ)) m) θ
+  have htuple :
+      (Fin.cons u (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) :
+        Fin 1 → (StateDirections S × ℝ)) =
+      (Fin.snoc (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) u :
+        Fin 1 → (StateDirections S × ℝ)) := by
     funext i
     have hi : i = 0 := Subsingleton.elim _ _
     subst i

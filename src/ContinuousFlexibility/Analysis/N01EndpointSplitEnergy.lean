@@ -40,7 +40,12 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_ra
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
           Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT (n + 1) b
+  let pointData := N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    hN hS hT (n + 1) b
+  let K : ℝ := pointData.choose
+  have hK : 0 < K := pointData.choose_spec.1
+  have hpoint := pointData.choose_spec.2
   let L₀ : ℝ := 1 + circleSingletonGradingConstant base * (2 * circleSobolevConstant)
   let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss) * (2 * circleSobolevConstant)
   have hL₀ : 0 < L₀ := by
@@ -114,7 +119,10 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
           Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n b c
-  exact ⟨K, hK, hbound rsel hrsel⟩
+  let data := N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    hN hS hT n b c
+  exact Exists.intro data.choose
+    (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
 
 end ContinuousFlexibility.Statements

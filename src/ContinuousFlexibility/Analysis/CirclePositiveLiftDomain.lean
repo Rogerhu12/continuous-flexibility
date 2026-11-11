@@ -34,8 +34,16 @@ theorem circleAffineLift_deriv
       1 + deriv (S.decode e m) θ := by
   have he : HasDerivAt (S.decode e m) (deriv (S.decode e m) θ) θ :=
     (((hS.2.2.2.1 e).1 m).1.differentiable (by simp)).differentiableAt.hasDerivAt
-  simpa only [circleAffineLift, one_mul, id_eq] using
+  have hlift : circleAffineLift travel (S.decode e) 1 m =
+      fun t : ℝ => t + travel m + S.decode e m t := by
+    funext t
+    change t + travel m + (1 : ℝ) * S.decode e m t =
+      t + travel m + S.decode e m t
+    rw [one_mul]
+  have hd : deriv (fun t : ℝ => t + travel m + S.decode e m t) θ =
+      1 + deriv (S.decode e m) θ :=
     (((hasDerivAt_id θ).add_const (travel m)).fun_add he).deriv
+  exact (congrArg (fun F : ℝ → ℝ => deriv F θ) hlift).trans hd
 
 theorem circlePositiveLiftDomain_iff
     (hS : IsCircleModel T γ S) (travel : ℕ → ℝ) (e : S.Space) :
@@ -153,7 +161,8 @@ theorem circlePositiveLiftDomain_uniform_lower
     (by norm_num : (0 : ℝ) < 1 / 2)
   let N : ℕ := tail.choose
   have hN : ∀ m, N ≤ m → ∀ θ, |deriv (S.decode e m) θ| < 1 / 2 := by
-    simpa only [iteratedDeriv_one] using tail.choose_spec
+    intro m hm θ
+    simpa only [iteratedDeriv_one] using (tail.choose_spec m hm θ)
   refine ⟨N, ?_⟩
   intro m hm θ
   have hlow : -(1 / 2 : ℝ) < deriv (S.decode e m) θ := (abs_lt.mp (hN m hm θ)).1
@@ -209,9 +218,11 @@ theorem circlePositiveLiftDomain_local_lower
   let A : ℝ := upper.choose
   have hA : 0 ≤ A := upper.choose_spec.1
   have hHA : ∀ m, T.H (T.sample m) ^ γ ≤ A := upper.choose_spec.2
-  apply seminorm_positive_family_local (S.grading 2)
+  apply seminorm_positive_family_local (a := a)
+    (A := 2 * circleSobolevConstant * A) (S.grading 2)
     (fun e m θ => deriv (S.decode e m) θ) e₀ ha
-    (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) hA) hlower
+    (mul_nonneg (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2)
+      circleSobolevConstant_nonneg) hA) hlower
   intro e m θ
   have hb := circleModel_jet_abs_le_material_upper hS
     (material_circle_sample_weights_pos hT hD).2 hA hHA (e - e₀) m 1 θ
@@ -227,12 +238,11 @@ theorem circlePositiveLiftDomain_isOpen
   have hc : Continuous (fun e : S.Space => S.grading 2 (e - e₀)) :=
     ((withSeminorms_graded (fun j => S.level j) S.bond).continuous_seminorm 2).comp
       (continuous_id.sub continuous_const)
+  have hcenter : S.grading 2 (e₀ - e₀) = (0 : ℝ) := by
+    rw [sub_self]
+    exact (map_zero (S.grading 2) : S.grading 2 (0 : S.Space) = (0 : ℝ))
   have hball : {e : S.Space | S.grading 2 (e - e₀) < δ} ∈ 𝓝 e₀ :=
-    (isOpen_lt hc continuous_const).mem_nhds
-      (by
-        change S.grading 2 (e₀ - e₀) < δ
-        rw [sub_self, map_zero]
-        exact hδ)
+    (isOpen_lt hc continuous_const).mem_nhds (hcenter.trans_lt hδ)
   apply mem_of_superset hball
   intro e he m θ
   exact ha.trans_le (hbound e he m θ)

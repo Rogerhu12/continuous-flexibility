@@ -140,9 +140,17 @@ private theorem circleOuterJetCompose_decode_comp
     S.decode (circleOuterJetComposeContinuousLinear hS hT hD hγ travel n e u) =
       circleComposeField (S.decode (circleAngularDerivativeIterate hS n u))
         (circleAffineLift travel (S.decode e) 1) := by
-  simp only [circleOuterJetComposeContinuousLinear_decode,
-    circleAngularDerivativeIterate_decode, circleComposeField, circleAffineLift,
-    circleCompositionPhase, Function.comp_def, one_mul]
+  have hout := circleOuterJetComposeContinuousLinear_decode
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel n e u
+  have hder := circleAngularDerivativeIterate_decode (T := T) (γ := γ) (S := S) hS n u
+  funext m θ
+  have hphase : circleCompositionPhase travel (e, u) m θ =
+      circleAffineLift travel (S.decode e) 1 m θ := by
+    simp only [circleCompositionPhase, circleAffineLift, one_mul]
+  exact (congrFun (congrFun hout m) θ).trans
+    ((congrArg (iteratedDeriv n (S.decode u m)) hphase).trans
+      (congrFun (congrFun hder m)
+        (circleAffineLift travel (S.decode e) 1 m θ)).symm)
 
 private theorem circle_product_comp_point_bound
     {u z φ f : ℕ → ℝ → ℝ}
