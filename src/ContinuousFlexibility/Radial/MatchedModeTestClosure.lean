@@ -37,6 +37,7 @@ theorem matchedMode_profile_intervalIntegrable {D : ReferenceData}
   intro r hr
   rw [uIoo_of_le hg.2.1.le] at hr
   have hr0 : r ≠ 0 := (hg.1.trans hr.1).ne'
+  simp only [Pi.pow_apply, id_eq]
   unfold matchingDensity
   field_simp [hr0]
   <;> ring
@@ -58,6 +59,7 @@ theorem matchedMode_profileDeriv_intervalIntegrable {D : ReferenceData}
   rw [uIoo_of_le hg.2.1.le] at hr
   have hr0 : r ≠ 0 := (hg.1.trans hr.1).ne'
   have hw0 : D.w r ≠ 0 := (hg.2.2.2.2.1 r hr).ne'
+  simp only [Pi.pow_apply, id_eq]
   unfold matchingDensity
   field_simp [hr0, hw0]
   <;> ring

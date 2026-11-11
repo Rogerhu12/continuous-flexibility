@@ -73,6 +73,9 @@ theorem referenceCircleReflection_synthesis (f : lp (fun _ : ℕ => Lp ℝ 2 μ)
       referenceCosineL2Synthesis f := by
   have hs := referenceCosineL2Synthesis_hasSum f
   have hr := hs.mapL (referenceCircleReflection (μ := μ)).toContinuousLinearMap
+  change HasSum
+    (fun n => referenceCircleReflection (referenceL2Tensor (f n) (referenceCircleCosineLp n)))
+    (referenceCircleReflection (referenceCosineL2Synthesis f)) at hr
   have hr' : HasSum (fun n => referenceL2Tensor (f n) (referenceCircleCosineLp n))
       (referenceCircleReflection (referenceCosineL2Synthesis f)) := by
     simpa only [referenceCircleReflection_tensor] using hr
@@ -125,8 +128,11 @@ theorem referenceCosineRepresentative_ae
       referenceCirclePullback (referenceCosineL2Synthesis f) := by
   have hc := referenceCircleEvenRepresentative_ae
     (referenceCosineL2Synthesis f) (referenceCircleReflection_synthesis f)
-  have hp := (referenceCircleProduct_measurePreserving (μ := μ)).quasiMeasurePreserving.ae hc
-  exact hp.trans (referenceCirclePullback_ae (referenceCosineL2Synthesis f)).symm
+  have hp : referenceCosineRepresentative f =ᵐ[μ.prod referenceAngularMeasure]
+      (fun x : α × ℝ => referenceCosineL2Synthesis f (x.1, (x.2 : AddCircle Real.pi))) :=
+    (referenceCircleProduct_measurePreserving (μ := μ)).quasiMeasurePreserving.ae hc
+  exact Filter.EventuallyEq.trans hp
+    (Filter.EventuallyEq.symm (referenceCirclePullback_ae (referenceCosineL2Synthesis f)))
 
 theorem referenceCosineRepresentative_memLp
     (f : lp (fun _ : ℕ => Lp ℝ 2 μ) 2) :

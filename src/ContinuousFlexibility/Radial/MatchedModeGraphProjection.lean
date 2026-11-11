@@ -31,6 +31,7 @@ theorem radialTest_cosine_lift {D : ReferenceData} {ψ : ℝ → ℝ}
     unfold Radial.cosineMode
     rw [mul_add, Real.cos_add_nat_mul_two_pi]
   · intro r hr θ
+    change ψ r * Radial.cosineMode j θ = 0
     rw [image_eq_zero_of_notMem_tsupport hr, zero_mul]
 
 theorem radialAngularMean_separated_cosine (f : ℝ → ℝ) (c : ℝ) (j : ℕ) :
@@ -96,11 +97,11 @@ theorem ReferenceGraph.modeWeak_compactCore {D : ReferenceData}
   have he := hG.2.2.2 (fun x => ψ x.1 * Radial.cosineMode j x.2)
     (radialTest_cosine_lift hψ hcψ hψs j)
   rw [radialWeakPairing_cosine_lift hD U.1 hψ j] at he
-  simp only [radialAngularMean_separated_cosine, referenceColumn_cosine_lift_mean D ψ _ hj,
-    ← referenceMode] at he
+  simp only [radialAngularMean_separated_cosine,
+    referenceColumn_cosine_lift_mean D ψ _ hj] at he
   by_cases hj2 : j = 2
-  · simpa only [hj2, ite_true] using he
-  · simpa only [hj2, ite_false, intervalIntegral.integral_zero, mul_zero,
+  · simpa only [referenceMode, hj2, ite_true] using he
+  · simpa only [referenceMode, hj2, ite_false, intervalIntegral.integral_zero, mul_zero,
       zero_mul, add_zero] using he
 
 /-- The bordered row is the same actual frequency-two coefficient, also

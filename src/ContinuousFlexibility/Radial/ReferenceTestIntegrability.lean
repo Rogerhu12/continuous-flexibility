@@ -84,8 +84,8 @@ theorem RadialCellIntegrable.integrable_mul_radialSupport {D : ReferenceData}
     · intro hx
       exact ⟨⟨hx.1, mem_univ _⟩, hsub hx.1, hx.2⟩
   rw [radialPhysicalMeasure,
-    Measure.restrict_restrict (measurableSet_Icc.prod MeasurableSet.univ), hrect,
-    ← Measure.prod_restrict]
+    Measure.restrict_restrict (measurableSet_Icc.prod MeasurableSet.univ), hrect]
+  rw [Measure.prod_restrict] at hi
   exact hi
 
 theorem RadialCellIntegrable.integrable_mul_test {D : ReferenceData}

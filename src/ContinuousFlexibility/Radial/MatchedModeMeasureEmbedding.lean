@@ -143,7 +143,7 @@ theorem matchedMode_source_memLp_of_inverseDensity {D : ReferenceData}
   filter_upwards [ae_restrict_mem (show MeasurableSet (radialCore D) from measurableSet_Ioo)]
     with r hr
   have hρ := matchingDensity_pos hD hr
-  simp only [ENNReal.toReal_ofReal (inv_nonneg.mpr hρ.le), smul_eq_mul]
+  simp only [Pi.inv_apply, ENNReal.toReal_ofReal (inv_nonneg.mpr hρ.le), smul_eq_mul]
   field_simp [hρ.ne']
   <;> ring
 

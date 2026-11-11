@@ -84,7 +84,7 @@ theorem zeroMode_resistance_tendsto_atTop
     filter_upwards [eventually_mem_nhdsWithin] with r hr
     exact sub_pos.mpr (show r < D.b from hr)
   have hright : Tendsto (fun r : ℝ => D.b - r) (𝓝[<] D.b) (𝓝[>] (0 : ℝ)) := by
-    simpa only [inf_idem] using hzero.inf hpos
+    simpa only [nhdsWithin, inf_idem] using hzero.inf hpos
   have hlog : Tendsto (fun r : ℝ => log (D.b - r)) (𝓝[<] D.b) atBot :=
     Real.tendsto_log_nhdsGT_zero.comp hright
   apply tendsto_atTop.mpr

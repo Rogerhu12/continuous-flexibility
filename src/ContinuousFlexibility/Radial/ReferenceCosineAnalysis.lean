@@ -100,11 +100,14 @@ theorem referenceCosineCoefficient_memLp {f : α × ℝ → ℝ}
   have hm := referenceCosineCoefficient_aestronglyMeasurable hf n
   apply (memLp_two_iff_integrable_sq hm).2
   have hmsq : AEStronglyMeasurable (fun r => (referenceCosineCoefficient f n r) ^ 2) μ := by
-    simpa only [pow_two] using hm.mul hm
+    have hh := hm.mul hm
+    change AEStronglyMeasurable (fun r =>
+      referenceCosineCoefficient f n r * referenceCosineCoefficient f n r) μ at hh
+    simpa only [pow_two] using hh
   apply hf.integrable_sq.integral_prod_left.mono' hmsq
   filter_upwards [referenceCosineCoefficient_ae_hasSum_sq hf hp he] with r hr
   have hb := le_hasSum hr n (fun j _ => sq_nonneg (referenceCosineCoefficient f j r))
-  simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hb
+  simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (referenceCosineCoefficient f n r : ℝ))] using hb
 
 /-- Parseval integrated in the actual radial measure. -/
 theorem referenceCosineCoefficient_hasSum_integral_sq {f : α × ℝ → ℝ}
@@ -123,7 +126,7 @@ theorem referenceCosineCoefficient_hasSum_integral_sq {f : α × ℝ → ℝ}
     (fun n r => (referenceCosineCoefficient f n r) ^ 2)
     (fun n => (referenceCosineCoefficient_memLp hf hp he n).integrable_sq.aestronglyMeasurable)
     (fun n => ae_of_all _ fun r => by
-      simp only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)])
+      simp only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (referenceCosineCoefficient f n r : ℝ))])
     (hsum.mono fun _ hr => hr.summable) hbound hsum
 
 /-- Actual radial L² coefficient vectors. -/
@@ -164,7 +167,7 @@ theorem referenceCosineAnalysisCoeff_hasSum_norm_sq {f : α × ℝ → ℝ}
     (hp : ∀ r, Function.Periodic (fun θ => f (r, θ)) Real.pi)
     (he : ∀ r θ, f (r, -θ) = f (r, θ)) :
     HasSum (fun n : ℕ => ‖referenceCosineAnalysisCoeff hf hp he n‖ ^ 2)
-      ‖hf.toLp f‖ ^ 2 := by
+      (‖hf.toLp f‖ ^ 2) := by
   simp only [referenceCosineAnalysisCoeff_norm_sq, referenceL2_toLp_norm_sq]
   exact referenceCosineCoefficient_hasSum_integral_sq hf hp he
 
