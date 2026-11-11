@@ -19,6 +19,29 @@ local instance n01EndpointScalarSplitNormStateSMul (S : PhysicalSpacesData) :
 open Set MeasureTheory ContinuousFlexibility.Analysis
 open scoped Topology ENNReal BigOperators ContDiff
 
+private theorem scalar_height_scaled_energy_bound
+    {M K A lo hi y : ℝ} {E F : ℝ≥0∞} (c : ℕ)
+    (hM : 0 ≤ M) (hK : 0 ≤ K) (hA : 0 ≤ A)
+    (hlo : lo ≤ Real.sqrt E.toReal) (hhi : hi ≤ Real.sqrt F.toReal)
+    (hpoint : y ≤ K * M ^ (c + 1) * (A * lo + hi)) :
+    y ≤ K * (A * Real.sqrt (ENNReal.ofReal ((M ^ (c + 1)) ^ 2) * E).toReal +
+      Real.sqrt (ENNReal.ofReal ((M ^ (c + 1)) ^ 2) * F).toReal) := by
+  have hsqrt (Q : ℝ≥0∞) :
+      Real.sqrt (ENNReal.ofReal ((M ^ (c + 1)) ^ 2) * Q).toReal =
+        M ^ (c + 1) * Real.sqrt Q.toReal := by
+    rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg _),
+      Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg hM _)]
+  calc
+    y ≤ K * M ^ (c + 1) * (A * lo + hi) := hpoint
+    _ ≤ K * M ^ (c + 1) * (A * Real.sqrt E.toReal + Real.sqrt F.toReal) :=
+      mul_le_mul_of_nonneg_left
+        (add_le_add (mul_le_mul_of_nonneg_left hlo hA) hhi)
+        (mul_nonneg hK (pow_nonneg hM _))
+    _ = K * (A * Real.sqrt (ENNReal.ofReal ((M ^ (c + 1)) ^ 2) * E).toReal +
+        Real.sqrt (ENNReal.ofReal ((M ^ (c + 1)) ^ 2) * F).toReal) := by
+      rw [hsqrt, hsqrt]
+      ring
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -36,90 +59,61 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_unif
             (liftSectorParameter S C z).1.1.1 +
           (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
             (liftSectorParameter S C z).1.1.1) := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n b
-  obtain ⟨K₀, hK₀, hE₀⟩ := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
+  let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n b
+  let K : ℝ := pointData.choose
+  have hK : 0 < K := pointData.choose_spec.1
+  let lowData := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
     hS hT (hS.1 (3 / 4 : ℝ)) base (c + 1)
-  obtain ⟨K₁, hK₁, hE₁⟩ := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
+  let K₀ : ℝ := lowData.choose
+  have hK₀ : 0 ≤ K₀ := lowData.choose_spec.1
+  let highData := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
     hS hT (hS.1 (3 / 4 : ℝ)) (b + loss) (c + 1)
+  let K₁ : ℝ := highData.choose
+  have hK₁ : 0 ≤ K₁ := highData.choose_spec.1
   let L : ℝ := Real.sqrt K₀ + Real.sqrt K₁
   have hL : 0 ≤ L := add_nonneg (Real.sqrt_nonneg _) (Real.sqrt_nonneg _)
   refine ⟨Real.sqrt (2 * Real.pi) * K * L,
     mul_nonneg (mul_nonneg (Real.sqrt_nonneg _) hK.le) hL, ?_⟩
   intro rsel hrsel z hz
   let ξ : HeightPair S := (liftSectorParameter S C z).1.1
-  obtain ⟨η, _, _, hlocal, henergy⟩ := hN.exists_height_pair_plateau_directions hS hT ξ
+  let directions := hN.exists_height_pair_plateau_directions hS hT ξ
+  let η : ℕ → HeightPair S := directions.choose
   let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z
   have hA : 0 ≤ A := add_nonneg (by positivity) (apply_nonneg _ _)
   let E : ℕ → ℕ → ℝ≥0∞ := fun j m =>
     ENNReal.ofReal ((T.M (T.sample m) ^ (c + 1)) ^ 2) *
       physicalPlateauEnergy D T C (3 / 4 : ℝ) j
         ((S.height (3 / 4 : ℝ)).decode ξ.1) m
-  let U : ℝ := Real.sqrt K₀ * (S.height (3 / 4 : ℝ)).grading (base + c + 6) ξ.1
-  let V : ℝ := Real.sqrt K₁ * (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) ξ.1
-  have hU : 0 ≤ U := mul_nonneg (Real.sqrt_nonneg _) (apply_nonneg _ _)
-  have hV : 0 ≤ V := mul_nonneg (Real.sqrt_nonneg _) (apply_nonneg _ _)
-  have hE : (∑' m, E base m) ≤ ENNReal.ofReal (U ^ 2) := by
-    dsimp only [U]
-    rw [mul_pow, Real.sq_sqrt hK₀]
+  have hE : (∑' m, E base m) ≤ ENNReal.ofReal
+      (K₀ * ((S.height (3 / 4 : ℝ)).grading (base + c + 6) ξ.1) ^ 2) := by
     have hi : base + (c + 1) + 5 = base + c + 6 := by omega
-    simpa only [E, hi] using hE₀ ξ.1
-  have hF : (∑' m, E (b + loss) m) ≤ ENNReal.ofReal (V ^ 2) := by
-    dsimp only [V]
-    rw [mul_pow, Real.sq_sqrt hK₁]
+    exact (lowData.choose_spec.2 ξ.1).trans_eq
+      (congrArg (fun i : ℕ => ENNReal.ofReal
+        (K₀ * ((S.height (3 / 4 : ℝ)).grading i ξ.1) ^ 2)) hi)
+  have hF : (∑' m, E (b + loss) m) ≤ ENNReal.ofReal
+      (K₁ * ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) ξ.1) ^ 2) := by
     have hi : b + loss + (c + 1) + 5 = b + loss + c + 6 := by omega
-    simpa only [E, hi] using hE₁ ξ.1
+    exact (highData.choose_spec.2 ξ.1).trans_eq
+      (congrArg (fun i : ℕ => ENNReal.ofReal
+        (K₁ * ((S.height (3 / 4 : ℝ)).grading i ξ.1) ^ 2)) hi)
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
-  have hsqrt (j m : ℕ) : Real.sqrt (E j m).toReal =
-      T.M (T.sample m) ^ (c + 1) *
-        Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) j
-          ((S.height (3 / 4 : ℝ)).decode ξ.1) m).toReal := by
-    dsimp only [E]
-    rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg _),
-      Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg (hM m) _)]
   have hb (m : ℕ) (θ : ℝ) :
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S) m) θ| ≤
-        (K * A) * Real.sqrt (E base m).toReal +
-          K * Real.sqrt (E (b + loss) m).toReal := by
-    have hp := hpoint rsel hrsel m b c θ le_rfl z hz (η m) (hlocal m)
-    calc
-      _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-          (A * heightPairGrading S base (η m) +
-            heightPairGrading S (b + loss) (η m)) := hp
-      _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-          (A * Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) base
-              ((S.height (3 / 4 : ℝ)).decode ξ.1) m).toReal +
-            Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) (b + loss)
-              ((S.height (3 / 4 : ℝ)).decode ξ.1) m).toReal) :=
-        mul_le_mul_of_nonneg_left
-          (add_le_add (mul_le_mul_of_nonneg_left ((henergy base).2 m) hA)
-            ((henergy (b + loss)).2 m)) (mul_nonneg hK.le (pow_nonneg (hM m) _))
-      _ = _ := by rw [hsqrt, hsqrt]; ring
-  have hn := circleWeightedJetNorm_le_two_envelopes
-    (mul_nonneg hK.le hA) hK.le hU hV hE hF
+        K * (A * Real.sqrt (E base m).toReal +
+          Real.sqrt (E (b + loss) m).toReal) :=
+    scalar_height_scaled_energy_bound c (hM m) hK.le hA
+      ((directions.choose_spec.2.2.2 base).2 m)
+      ((directions.choose_spec.2.2.2 (b + loss)).2 m)
+      (pointData.choose_spec.2 rsel hrsel m b c θ le_rfl z hz (η m)
+        (directions.choose_spec.2.2.1 m))
+  exact weightedJetNorm_le_scaled_two_envelopes
+    hK.le hK₀ hK₁ hA (apply_nonneg _ _) (apply_nonneg _ _) hE hF
     (fun m => (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz
       (fun _ => scalarParameterDirection S) m).1) hM hH b c hb
-  have h₀ : Real.sqrt K₀ ≤ L := le_add_of_nonneg_right (Real.sqrt_nonneg _)
-  have h₁ : Real.sqrt K₁ ≤ L := le_add_of_nonneg_left (Real.sqrt_nonneg _)
-  calc
-    _ ≤ Real.sqrt (2 * Real.pi) * (K * A * U + K * V) := hn
-    _ = Real.sqrt (2 * Real.pi) * K *
-        (A * (Real.sqrt K₀ * (S.height (3 / 4 : ℝ)).grading (base + c + 6) ξ.1) +
-          Real.sqrt K₁ * (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) ξ.1) := by
-      dsimp only [U, V]
-      ring
-    _ ≤ Real.sqrt (2 * Real.pi) * K *
-        (A * (L * (S.height (3 / 4 : ℝ)).grading (base + c + 6) ξ.1) +
-          L * (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) ξ.1) :=
-      mul_le_mul_of_nonneg_left
-        (add_le_add (mul_le_mul_of_nonneg_left
-          (mul_le_mul_of_nonneg_right h₀ (apply_nonneg _ _)) hA)
-          (mul_le_mul_of_nonneg_right h₁ (apply_nonneg _ _)))
-        (mul_nonneg (Real.sqrt_nonneg _) hK.le)
-    _ = _ := by dsimp only [A, ξ]; ring
 
 theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound
     (hN : N01Properties D T S C base loss ε)
@@ -134,8 +128,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound
             (liftSectorParameter S C z).1.1.1 +
           (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
             (liftSectorParameter S C z).1.1.1) := by
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
-  exact ⟨K, hK, hbound rsel hrsel⟩
+  let data := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
+  exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
 
 theorem liftSectorParameter_physical_height_grading_le
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
@@ -161,8 +155,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_unif
         K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
           (1 + pairGrading (sectorGrading S) realGrading (b + loss + c + 6) z)) := by
-  obtain ⟨K, hK, hbound⟩ :=
-    hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
+  let normData := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
+  let K : ℝ := normData.choose
+  have hK : 0 ≤ K := normData.choose_spec.1
   let J : ℝ := 1 + (S.height (3 / 4 : ℝ)).grading (base + c + 6) C.referenceState.1.1 +
     (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) C.referenceState.1.1
   let N : ℝ := (n : ℝ) + 2
@@ -210,7 +205,7 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_unif
     _ ≤ K * ((N + p (b + loss) z) *
         (S.height (3 / 4 : ℝ)).grading (base + c + 6) (liftSectorParameter S C z).1.1.1 +
         (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) (liftSectorParameter S C z).1.1.1) :=
-      hbound rsel hrsel z hz
+      normData.choose_spec.2 rsel hrsel z hz
     _ ≤ K * (N * (1 + p (b + loss) z) * (J * (1 + p (base + c + 6) z)) +
         N * (J * (1 + p (b + loss + c + 6) z))) :=
       mul_le_mul_of_nonneg_left
@@ -230,7 +225,7 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound
         K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
           (1 + pairGrading (sectorGrading S) realGrading (b + loss + c + 6) z)) := by
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n b c
-  exact ⟨K, hK, hbound rsel hrsel⟩
+  let data := hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n b c
+  exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

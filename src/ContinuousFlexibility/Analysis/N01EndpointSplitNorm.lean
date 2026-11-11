@@ -72,6 +72,29 @@ private theorem circleWeightedJetNorm_le_split_energy_bounds
         (mul_nonneg (Real.sqrt_nonneg _) hK)
     _ = _ := by dsimp only [L]; ring
 
+/-- The scaled two-envelope estimate, using the verified split-energy proof. -/
+theorem weightedJetNorm_le_scaled_two_envelopes
+    {T : MaterialData} {γ : ℝ} {v : ℕ → ℝ → ℝ}
+    {E F : ℕ → ℝ≥0∞} {K K₀ K₁ A u₀ u₁ : ℝ}
+    (hK : 0 ≤ K) (hK₀ : 0 ≤ K₀) (hK₁ : 0 ≤ K₁)
+    (hA : 0 ≤ A) (hu₀ : 0 ≤ u₀) (hu₁ : 0 ≤ u₁)
+    (hE : (∑' m, E m) ≤ ENNReal.ofReal (K₀ * u₀ ^ 2))
+    (hF : (∑' m, F m) ≤ ENNReal.ofReal (K₁ * u₁ ^ 2))
+    (hv : ∀ m, ContDiff ℝ ∞ (v m))
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (b c : ℕ)
+    (hpoint : ∀ m θ,
+      (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+        |iteratedDeriv b (v m) θ| ≤
+      K * (A * Real.sqrt (E m).toReal + Real.sqrt (F m).toReal)) :
+    circleWeightedJetNorm T γ b c v ≤
+      Real.sqrt (2 * Real.pi) * K * (Real.sqrt K₀ + Real.sqrt K₁) *
+        (A * u₀ + u₁) := by
+  exact circleWeightedJetNorm_le_split_energy_bounds
+    (T := T) (γ := γ) (f := v) (E := E) (F := F)
+    (K := K) (A := A) (K₀ := K₀) (K₁ := K₁) (u := u₀) (v := u₁)
+    hK hA hK₀ hK₁ hu₀ hu₁ hE hF hv hM hH b c hpoint
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 

@@ -45,6 +45,58 @@ private theorem scalar_pair_path_bounds
     simpa only [Real.norm_eq_abs] using
       add_le_add (le_refl (p j z.1)) (habs t ht)
 
+private theorem scalar_height_curve_energy_bound
+    {q M K A B lo hi p y : ℝ} {E : ℝ≥0∞}
+    (c s : ℕ) (hM : 1 ≤ M) (hcs : c ≤ s)
+    (hK : 0 ≤ K) (hA : 0 ≤ A) (hB : 2 + B ≤ A)
+    (hlo : 0 ≤ lo) (hloE : lo ≤ Real.sqrt E.toReal)
+    (hhiE : hi ≤ Real.sqrt E.toReal)
+    (hpoint : p * |y| ≤ K * M ^ (c + 1) * (((0 : ℝ) + 2 + B) * lo + hi)) :
+    p * |q * y| ≤ |q| * K * (A + 1) *
+      Real.sqrt (ENNReal.ofReal ((M ^ (s + 1)) ^ 2) * E).toReal := by
+  let e : ℝ := Real.sqrt E.toReal
+  have he : 0 ≤ e := Real.sqrt_nonneg _
+  have hW : (2 + B) * lo + hi ≤ (A + 1) * e := by
+    calc
+      (2 + B) * lo + hi ≤ A * lo + hi :=
+        add_le_add (mul_le_mul_of_nonneg_right hB hlo) (le_refl _)
+      _ ≤ A * e + e := add_le_add (mul_le_mul_of_nonneg_left hloE hA) hhiE
+      _ = (A + 1) * e := by ring
+  have hp : p * |y| ≤ K * M ^ (c + 1) * ((2 + B) * lo + hi) := by
+    simpa only [zero_add] using hpoint
+  have hc : M ^ (c + 1) ≤ M ^ (s + 1) :=
+    pow_le_pow_right₀ hM (by omega)
+  have hsqrt : Real.sqrt (ENNReal.ofReal ((M ^ (s + 1)) ^ 2) * E).toReal =
+      M ^ (s + 1) * e := by
+    dsimp only [e]
+    rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg _),
+      Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg (zero_le_one.trans hM) _)]
+  calc
+    p * |q * y| = |q| * (p * |y|) := by rw [abs_mul]; ring
+    _ ≤ |q| * (K * M ^ (c + 1) * ((2 + B) * lo + hi)) :=
+      mul_le_mul_of_nonneg_left hp (abs_nonneg _)
+    _ ≤ |q| * (K * M ^ (c + 1) * ((A + 1) * e)) :=
+      mul_le_mul_of_nonneg_left
+        (mul_le_mul_of_nonneg_left hW
+          (mul_nonneg hK (pow_nonneg (zero_le_one.trans hM) _))) (abs_nonneg _)
+    _ ≤ |q| * (K * M ^ (s + 1) * ((A + 1) * e)) :=
+      mul_le_mul_of_nonneg_left
+        (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hc hK)
+          (mul_nonneg (add_nonneg hA zero_le_one) he)) (abs_nonneg _)
+    _ = |q| * K * (A + 1) *
+        Real.sqrt (ENNReal.ofReal ((M ^ (s + 1)) ^ 2) * E).toReal := by
+      rw [hsqrt]
+      ring
+
+private theorem scalar_rescale_hasDerivAt
+    {f : ℝ → ℝ} {d d' q t : ℝ}
+    (hd : HasDerivAt f d (t * q)) (heq : d = d') :
+    HasDerivAt (fun a : ℝ => f (a * q)) (q * d') t := by
+  have hd' : HasDerivAt f d' (t * q) :=
+    (congrArg (fun u : ℝ => HasDerivAt f u (t * q)) heq).mp hd
+  have h := hd'.comp t ((hasDerivAt_id t).mul_const q)
+  simpa only [Function.comp_def, mul_comm] using h
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -79,16 +131,19 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
       (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) =
       (fun _ : Fin 1 => scalarParameterDirection S) := by
     funext i
-    have hi : i = 0 := Subsingleton.elim _ _
+    have hi : i = 0 := Fin.ext (by have hiLt := i.isLt; omega)
     subst i
-    simp
+    simp only [Fin.cons_zero]
   have hderiv (m b : ℕ) (θ t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       HasDerivAt (fun a => iteratedDeriv b (F a m) θ) (G t m b θ) t := by
     have hd := hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel 0 z₀
       (scalarParameterDirection S) Fin.elim0 (t * z.2) (hpath t ht) m b θ
-    rw [htuple] at hd
-    have h := hd.comp t ((hasDerivAt_id t).mul_const z.2)
-    simpa only [F, G, path, Function.comp_def, mul_comm] using h
+    have hvalue := congrArg
+      (fun u : Fin 1 → (StateDirections S × ℝ) =>
+        iteratedDeriv b
+          (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (path t) u m) θ)
+      htuple
+    exact scalar_rescale_hasDerivAt (q := z.2) (t := t) hd hvalue
   let ξ : HeightPair S := (liftSectorParameter S C z).1.1
   let directions := hN.exists_height_pair_plateau_directions hS hT ξ
   let η : ℕ → HeightPair S := directions.choose
@@ -122,7 +177,6 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     intro m b c hbc θ t ht
     let e : ℝ := Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) j
       ((S.height (3 / 4 : ℝ)).decode ξ.1) m).toReal
-    have he : 0 ≤ e := Real.sqrt_nonneg _
     have hbase : heightPairGrading S base (η m) ≤ e :=
       (hmono (le_max_left _ _) (η m)).trans ((directions.choose_spec.2.2.2 j).2 m)
     have hhigh : heightPairGrading S (s + loss) (η m) ≤ e :=
@@ -131,48 +185,26 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
         heightPairField S (η m) (r, ψ) = stateU S (liftSectorParameter S C (path t)).1 (r, ψ) + a := by
       obtain ⟨a, ha⟩ := directions.choose_spec.2.2.1 m
       refine ⟨a, fun r hr ψ => ?_⟩
-      rw [hpath_eq]
-      exact ha r hr ψ
-    let W : ℝ := (2 + pairGrading (sectorGrading S) realGrading (s + loss) (path t)) *
-      heightPairGrading S base (η m) + heightPairGrading S (s + loss) (η m)
-    have hW : W ≤ (A + 1) * e := by
-      calc
-        W ≤ A * heightPairGrading S base (η m) + heightPairGrading S (s + loss) (η m) :=
-          add_le_add (mul_le_mul_of_nonneg_right
-            (add_le_add (le_refl 2) (hgrade (s + loss) t ht)) (apply_nonneg _ _)) (le_refl _)
-        _ ≤ A * e + e := add_le_add (mul_le_mul_of_nonneg_left hbase hA) hhigh
-        _ = _ := by ring
-    have hp := pointData.choose_spec.2 m b c θ (by omega) (path t) (hpath t ht) (η m) hη
-    simp only [Nat.cast_zero, zero_add] at hp
-    have hc : T.M (T.sample m) ^ (c + 1) ≤ T.M (T.sample m) ^ (s + 1) :=
-      pow_le_pow_right₀ (hM m) (by omega)
-    have hsqrt : Real.sqrt (E m).toReal = T.M (T.sample m) ^ (s + 1) * e := by
-      dsimp only [E, e]
-      rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg _),
-        Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg (zero_le_one.trans (hM m)) _)]
-    calc
-      _ = |z.2| * ((T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-          |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (path t)
-            (fun _ => scalarParameterDirection S) m) θ|) := by
-        dsimp only [G]
-        rw [abs_mul]
-        ring
-      _ ≤ |z.2| * (K * T.M (T.sample m) ^ (c + 1) * W) :=
-        mul_le_mul_of_nonneg_left hp (abs_nonneg _)
-      _ ≤ |z.2| * (K * T.M (T.sample m) ^ (c + 1) * ((A + 1) * e)) :=
-        mul_le_mul_of_nonneg_left
-          (mul_le_mul_of_nonneg_left hW
-            (mul_nonneg hK.le (pow_nonneg (zero_le_one.trans (hM m)) _))) (abs_nonneg _)
-      _ ≤ |z.2| * (K * T.M (T.sample m) ^ (s + 1) * ((A + 1) * e)) :=
-        mul_le_mul_of_nonneg_left
-          (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hc hK.le)
-            (mul_nonneg (by positivity) he)) (abs_nonneg _)
-      _ = |z.2| * K * (A + 1) * Real.sqrt (E m).toReal := by rw [hsqrt]; ring
-  have hp1 : path 1 = z := by
-    rw [hpath_eq, one_mul]
-  have hp0 : path 0 = z₀ := by
-    rw [hpath_eq, zero_mul]
-  simpa only [F, hp1, hp0, z₀] using hmem
+      exact (ha r hr ψ).trans
+        (congrArg (fun x : StateDirections S × ℝ =>
+          stateU S (liftSectorParameter S C x).1 (r, ψ) + a) (hpath_eq t)).symm
+    exact scalar_height_curve_energy_bound c s (hM m) (by omega) hK.le hA
+      (add_le_add (le_refl 2) (hgrade (s + loss) t ht))
+      (apply_nonneg _ _) hbase hhigh
+      (pointData.choose_spec.2 m b c θ (by omega) (path t) (hpath t ht) (η m) hη)
+  have hp1 : path 1 = z :=
+    (hpath_eq 1).trans (congrArg (fun q : ℝ => (z.1, q)) (one_mul z.2))
+  have hp0 : path 0 = z₀ :=
+    (hpath_eq 0).trans (congrArg (fun q : ℝ => (z.1, q)) (zero_mul z.2))
+  have heq : (fun m θ => F 1 m θ - F 0 m θ) =
+      (fun m θ => hN.endpointFlowScalarJets hS hT rsel hrsel 0 z Fin.elim0 m θ -
+        hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0 m θ) :=
+    congrArg₂ (fun f g : ℕ → ℝ → ℝ => fun m θ => f m θ - g m θ)
+      (congrArg (fun x : StateDirections S × ℝ =>
+        hN.endpointFlowScalarJets hS hT rsel hrsel 0 x Fin.elim0) hp1)
+      (congrArg (fun x : StateDirections S × ℝ =>
+        hN.endpointFlowScalarJets hS hT rsel hrsel 0 x Fin.elim0) hp0)
+  exact (congrArg (CircleMember T (3 / 4 : ℝ)) heq).mp hmem
 
 theorem N01Properties.endpointFlowScalarJets_zero_circleMember
     (hN : N01Properties D T S C base loss ε)
@@ -195,7 +227,7 @@ theorem N01Properties.endpointFlowScalarJets_zero_circleMember
       hN.endpointFlowScalarJets hS hT rsel hrsel 0 z Fin.elim0 := by
     funext m θ
     exact sub_add_cancel _ _
-  simpa only [heq] using P.add_mem hq hs
+  exact (congrArg (fun f : ℕ → ℝ → ℝ => f ∈ P) heq).mp (P.add_mem hq hs)
 
 /-- Every selected scalar jet, including its actual zero-order field,
 belongs to the supplied physical circle model. -/
@@ -208,9 +240,12 @@ theorem N01Properties.endpointFlowScalarJets_circleMember
     CircleMember T (3 / 4 : ℝ) (hN.endpointFlowScalarJets hS hT rsel hrsel n z v) := by
   cases n with
   | zero =>
-    have hv : v = Fin.elim0 := Subsingleton.elim _ _
-    rw [hv]
-    exact hN.endpointFlowScalarJets_zero_circleMember hS hT rsel hrsel z hz
+    have hv : v = Fin.elim0 := by
+      funext i
+      exact Fin.elim0 i
+    exact (congrArg (fun w : Fin 0 → (StateDirections S × ℝ) =>
+      CircleMember T (3 / 4 : ℝ) (hN.endpointFlowScalarJets hS hT rsel hrsel 0 z w)) hv).mpr
+      (hN.endpointFlowScalarJets_zero_circleMember hS hT rsel hrsel z hz)
   | succ n => exact hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz v
 
 end ContinuousFlexibility.Statements

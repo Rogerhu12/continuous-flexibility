@@ -20,13 +20,17 @@ local instance n01EndpointHeightLineEnvelopeStateSMul (S : PhysicalSpacesData) :
 open Set MeasureTheory ContinuousFlexibility.Analysis
 open scoped Topology ENNReal BigOperators ContDiff
 
+private theorem heightLine_linear_affine_apply
+    {E ι : Type*} [AddCommGroup E] [Module ℝ E]
+    (L : E →ₗ[ℝ] (ι → ℝ)) (u v : E) (t : ℝ) (i : ι) :
+    L (u + t • v) i = L u i + t * L v i := by
+  exact (congrArg (fun f : ι → ℝ => f i) (L.map_add u (t • v))).trans
+    (congrArg (fun f : ι → ℝ => L u i + f i) (L.map_smul t v))
+
 theorem heightPairField_affine_apply (S : PhysicalSpacesData)
     (ξ η : HeightPair S) (t : ℝ) (p : PolarPoint) :
     heightPairField S (ξ + t • η) p = heightPairField S ξ p + t * heightPairField S η p := by
-  have h := congrArg (fun f : PolarPoint → ℝ => f p)
-    ((heightPairFieldLinear S).map_add ξ (t • η))
-  rw [(heightPairFieldLinear S).map_smul] at h
-  simpa only [heightPairFieldLinear_apply, Pi.add_apply, Pi.smul_apply, smul_eq_mul] using h
+  exact heightLine_linear_affine_apply (heightPairFieldLinear S) ξ η t p
 
 theorem liftSectorParameter_height_field_line (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (x w : StateDirections S × ℝ) (t : ℝ) (p : PolarPoint) :
@@ -44,6 +48,17 @@ theorem liftSectorParameter_height_field_line (S : PhysicalSpacesData)
 private theorem affine_additive_constants (u v a b t : ℝ) :
     (u + a) + t * (v + b) = (u + t * v) + (a + t * b) := by ring
 
+private theorem heightLine_sqrt_scaled_energy (q : ℝ) (e : ℝ≥0∞) (hq : 0 ≤ q) :
+    Real.sqrt (ENNReal.ofReal (q ^ 2) * e).toReal = q * Real.sqrt e.toReal := by
+  rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg q),
+    Real.sqrt_mul (sq_nonneg q), Real.sqrt_sq hq]
+
+private theorem heightLine_factor_reorder (K q A u v : ℝ) :
+    K * q * (A * u + v) = K * (A * (q * u) + q * v) := by ring
+
+private theorem heightLine_finish_reorder (K A e : ℝ) :
+    K * (A * (2 * e) + 2 * e) = (2 * K * (A + 1)) * e := by ring
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -60,8 +75,14 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
           (fun _ => scalarParameterDirection S) m) θ| ≤ K * Real.sqrt (E m).toReal := by
   let ξ₀ : HeightPair S := (liftSectorParameter S C x).1.1
   let ξ₁ : HeightPair S := w.1.val.1
-  obtain ⟨η₀, _, _, hlocal₀, henergy₀⟩ := hN.exists_height_pair_plateau_directions hS hT ξ₀
-  obtain ⟨η₁, _, _, hlocal₁, henergy₁⟩ := hN.exists_height_pair_plateau_directions hS hT ξ₁
+  let data₀ := hN.exists_height_pair_plateau_directions hS hT ξ₀
+  let η₀ : ℕ → HeightPair S := data₀.choose
+  have hlocal₀ := data₀.choose_spec.2.2.1
+  have henergy₀ := data₀.choose_spec.2.2.2
+  let data₁ := hN.exists_height_pair_plateau_directions hS hT ξ₁
+  let η₁ : ℕ → HeightPair S := data₁.choose
+  have hlocal₁ := data₁.choose_spec.2.2.1
+  have henergy₁ := data₁.choose_spec.2.2.2
   let j : ℕ := max base (s + loss)
   let p := pairGrading (sectorGrading S) realGrading
   let E₀ : ℕ → ℝ≥0∞ := fun m =>
@@ -77,9 +98,12 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
     hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT (hS.1 (3 / 4 : ℝ)) ξ₁.1 j (s + 1)
   have hE : (∑' m, E m) < ⊤ := by
     change (∑' m, E₀ m + E₁ m) < ⊤
-    rw [ENNReal.tsum_add]
-    exact ENNReal.add_lt_top.mpr ⟨hE₀, hE₁⟩
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n s
+    exact (ENNReal.tsum_add (f := E₀) (g := E₁)).trans_lt
+      (ENNReal.add_lt_top.mpr ⟨hE₀, hE₁⟩)
+  let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n s
+  let K : ℝ := pointData.choose
+  have hK : 0 < K := pointData.choose_spec.1
+  have hpoint := pointData.choose_spec.2
   let A : ℝ := (n : ℝ) + 2 + (p j x + p j w)
   have hA : 0 ≤ A := add_nonneg (by positivity)
     (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))
@@ -110,16 +134,16 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
     Real.sqrt_le_sqrt (ENNReal.toReal_mono hefinite.ne (le_add_of_nonneg_left zero_le))
   have hsqrt₀ : Real.sqrt (E₀ m).toReal = T.M (T.sample m) ^ (s + 1) *
       Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) j
-        ((S.height (3 / 4 : ℝ)).decode ξ₀.1) m).toReal := by
-    dsimp only [E₀]
-    rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg _),
-      Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg hM0 _)]
+        ((S.height (3 / 4 : ℝ)).decode ξ₀.1) m).toReal :=
+    heightLine_sqrt_scaled_energy (T.M (T.sample m) ^ (s + 1))
+      (physicalPlateauEnergy D T C (3 / 4 : ℝ) j
+        ((S.height (3 / 4 : ℝ)).decode ξ₀.1) m) (pow_nonneg hM0 _)
   have hsqrt₁ : Real.sqrt (E₁ m).toReal = T.M (T.sample m) ^ (s + 1) *
       Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) j
-        ((S.height (3 / 4 : ℝ)).decode ξ₁.1) m).toReal := by
-    dsimp only [E₁]
-    rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg _),
-      Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg hM0 _)]
+        ((S.height (3 / 4 : ℝ)).decode ξ₁.1) m).toReal :=
+    heightLine_sqrt_scaled_energy (T.M (T.sample m) ^ (s + 1))
+      (physicalPlateauEnergy D T C (3 / 4 : ℝ) j
+        ((S.height (3 / 4 : ℝ)).decode ξ₁.1) m) (pow_nonneg hM0 _)
   have hmono : Monotone (heightPairGrading S) := pairGrading_monotone
     (gradedSeminorm_monotone (fun a => (S.height (3 / 4 : ℝ)).level a)
       (S.height (3 / 4 : ℝ)).bond) (fun _ _ _ _ => le_rfl)
@@ -143,8 +167,8 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
           Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) j
             ((S.height (3 / 4 : ℝ)).decode ξ₁.1) m).toReal) :=
         mul_le_mul_of_nonneg_left hnorm (pow_nonneg hM0 _)
-      _ = Real.sqrt (E₀ m).toReal + Real.sqrt (E₁ m).toReal := by
-        rw [hsqrt₀, hsqrt₁, mul_add]
+      _ = Real.sqrt (E₀ m).toReal + Real.sqrt (E₁ m).toReal :=
+        (mul_add _ _ _).trans (congrArg₂ (fun u v : ℝ => u + v) hsqrt₀.symm hsqrt₁.symm)
       _ ≤ 2 * Real.sqrt (E m).toReal := by linarith only [he₀, he₁]
   have hbase := hheight base (le_max_left _ _)
   have hhigh := hheight (s + loss) (le_max_right _ _)
@@ -164,10 +188,12 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
         (add_le_add (mul_le_mul_of_nonneg_right hcoeff (apply_nonneg _ _)) (le_refl _))
         (mul_nonneg hK.le (pow_nonneg hM0 _))
     _ = K * (A * (T.M (T.sample m) ^ (c + 1) * heightPairGrading S base η) +
-        T.M (T.sample m) ^ (c + 1) * heightPairGrading S (s + loss) η) := by ring
+        T.M (T.sample m) ^ (c + 1) * heightPairGrading S (s + loss) η) :=
+      heightLine_factor_reorder K (T.M (T.sample m) ^ (c + 1)) A
+        (heightPairGrading S base η) (heightPairGrading S (s + loss) η)
     _ ≤ K * (A * (2 * Real.sqrt (E m).toReal) + 2 * Real.sqrt (E m).toReal) :=
       mul_le_mul_of_nonneg_left
         (add_le_add (mul_le_mul_of_nonneg_left hbase hA) hhigh) hK.le
-    _ = _ := by ring
+    _ = _ := heightLine_finish_reorder K A (Real.sqrt (E m).toReal)
 
 end ContinuousFlexibility.Statements
