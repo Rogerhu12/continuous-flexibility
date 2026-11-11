@@ -92,17 +92,17 @@ gh run view <run-id> --log-failed
   log is the artifact `build-log`.
 - Push small, complete steps (one file or one lemma group at a time), so that one CI round tells
   you about one change.
-- **Hard limit: your branch may be at most 500 added lines of Lean ahead of its last commit that
-  passed CI.** When CI fails, the next pushes only fix the failure; do not add new material on top
-  of a failing build. When you are at the limit, stop writing and make CI green first. Check the
-  distance with:
+- **Hard limit: your branch may be at most 20,000 added lines of Lean ahead of its last commit that
+  passed CI.** A line can repair a few tens of thousands of uncompiled lines; beyond that the errors
+  pile up faster than they are fixed. When you reach the limit, stop writing new material and make
+  CI green first. Check the distance with:
 
 ```bash
 git diff --shortstat $(gh run list --branch line/<Task> --status success --limit 1 --json headSha --jq '.[0].headSha') HEAD -- '*.lean'
 ```
 
-  Code that does not compile is not progress: a branch with thousands of uncompiled lines usually
-  hides layered errors, and repairing them costs more than writing in small checked steps.
+  Code that does not compile is not progress: the further a branch runs ahead of a green build,
+  the more layered its errors become.
 
 ## Lean
 
