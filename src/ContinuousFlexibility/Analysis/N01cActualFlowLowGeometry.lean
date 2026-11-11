@@ -22,6 +22,18 @@ set_option backward.isDefEq.respectTransparency true
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
+private theorem n01c_lowGeometry_of_function_eq
+    {f g : ℝ → ℝ} (he : f = g)
+    (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g)
+    (hflift : ∀ θ, f (θ + Real.pi) = f θ + Real.pi)
+    (hglift : ∀ θ, g (θ + Real.pi) = g θ + Real.pi)
+    {c K θ : ℝ} (hderiv : c ≤ deriv g θ)
+    (hdefect : circleRealSobolevNorm 3 (circleLiftDefectJet g hg hglift 0) ≤ K) :
+    c ≤ deriv f θ ∧
+      circleRealSobolevNorm 3 (circleLiftDefectJet f hf hflift 0) ≤ K := by
+  subst g
+  exact ⟨hderiv, hdefect⟩
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -69,12 +81,18 @@ theorem ordinaryFlowFiniteAngle_lowGeometry_le
   have hnonneg := circleFlowLambda_nonneg
     (fun p => componentCosineSpeed D S C m (x, p)) hGx
     (componentCosineSpeed_periodic hS x m) 4 Real.pi_pos.le
-  refine ⟨?_, ?_⟩
-  · simpa only [ordinaryFlowFiniteAngle, ordinaryFlowFiniteTrajectory_zero,
-      ordinaryFlowInCosineTime, Θ] using hbound.trans hderiv
-  · simpa only [ordinaryFlowFiniteDefectJet, ordinaryFlowFiniteAngle,
-      ordinaryFlowFiniteTrajectory_zero, ordinaryFlowInCosineTime, Θ] using
-        hdefect.trans (hK _ ⟨hnonneg, hΛ⟩)
+  have hangle : ordinaryFlowFiniteAngle m x hx L t =
+      fun η => Θ (circleFlowCompactTime 0 Real.pi t, η) := by
+    funext η
+    exact ordinaryFlowFiniteTrajectory_zero x hx L m (t, η)
+  exact n01c_lowGeometry_of_function_eq hangle
+    (contDiff_ordinaryFlowFiniteAngle hS hT hA hB hpos m J x hx L t)
+    (circleFlow_contDiff_angle hGx Real.pi_pos
+      (componentCosineSpeed_periodic hS x m) hΘ hinit hflow ht)
+    (ordinaryFlowFiniteAngle_lift hS hT hA hB hpos m x hx L t)
+    (circleFlow_lift_add hGx (componentCosineSpeed_periodic hS x m)
+      hΘ hinit hflow ht)
+    (hbound.trans hderiv) (hdefect.trans (hK _ ⟨hnonneg, hΛ⟩))
 
 end ContinuousFlexibility.Statements
 
@@ -86,6 +104,28 @@ open scoped ContDiff ENNReal
 set_option backward.isDefEq.respectTransparency true
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
+
+private theorem n01c_stableLowGeometry_of_common
+    {base : ℕ} {ε : ℝ} {Q Smooth : ℕ → ℝ → Prop}
+    {Low : ℕ → ℝ → ℝ → Prop} {P : ℕ → ℝ → ℝ → ℝ → Prop}
+    (h : ∃ b : ℕ, ∃ e : ℝ, base ≤ b ∧ 0 < e ∧ e ≤ ε ∧
+      Q b e ∧ Smooth b e ∧ ∃ R : ℝ, 0 < R ∧ Low b e R)
+    (hP : ∀ b e R, Smooth b e → Low b e R → ∀ K : ℝ,
+      (∀ R' ∈ Icc (0 : ℝ) R, circleFlowLowGeometryBound Real.pi R' ≤ K) →
+      ∀ b' e', b ≤ b' → 0 < e' → e' ≤ e →
+        P b' e' (Real.exp (-(circleFlowEmbeddingConstant Real.pi * R))) K) :
+    ∃ b : ℕ, ∃ e : ℝ, base ≤ b ∧ 0 < e ∧ e ≤ min ε (1 / 2) ∧
+      ∃ c M : ℝ, 0 < c ∧ 0 < M ∧
+        ∀ b' : ℕ, b ≤ b' → ∀ e' : ℝ, 0 < e' → e' ≤ e → P b' e' c M := by
+  obtain ⟨b, e, hb, he, heε, _, hsmooth, R, _, hlow⟩ := h
+  obtain ⟨M, hM, hMbound⟩ := exists_circleFlowLowGeometryBound_uniform Real.pi R
+  refine ⟨b, min e (1 / 2), hb, lt_min he (by norm_num),
+    min_le_min heε le_rfl,
+    Real.exp (-(circleFlowEmbeddingConstant Real.pi * R)), M,
+    Real.exp_pos _, hM, ?_⟩
+  intro b' hb' e' he' he'e
+  exact hP b e R hsmooth hlow M hMbound b' e' hb' he'
+    (he'e.trans (min_le_left _ _))
 
 /-- The same two constants work for every stronger base, smaller positive
 radius, genuine speed tower, and finite parameter plot. -/
@@ -112,19 +152,15 @@ theorem n01_exists_stable_actualFlow_lowGeometry
         (∀ θ, c ≤ deriv (ordinaryFlowFiniteAngle m x hx L t) θ) ∧
         circleRealSobolevNorm 3
           (ordinaryFlowFiniteDefectJet hS hT hA hB' hpos m J x hx L t 0) ≤ M := by
-  obtain ⟨bg, eg, hbg, heg, hege, hposg, hGs, MΛ, hMΛ, hΛ⟩ :=
-    n01_exists_common_cosineLowGeometry hS hT hA hε hB hG hSpeed
-  obtain ⟨M, hM, hMbound⟩ := exists_circleFlowLowGeometryBound_uniform Real.pi MΛ
-  refine ⟨bg, min eg (1 / 2), hbg, lt_min heg (by norm_num),
-    min_le_min hege le_rfl,
-    Real.exp (-(circleFlowEmbeddingConstant Real.pi * MΛ)), M,
-    Real.exp_pos _, hM, ?_⟩
-  intro base' hb ε' hε' he hB' hpos m J d x hx L t
-  have hxg : x ∈ stateNeighborhood S C bg eg :=
-    stateNeighborhood_subset hb (he.trans (min_le_left _ _)) hx
-  have hGx := hGs x hxg m
-  have hlow (θ : ℝ) := ordinaryFlowFiniteAngle_lowGeometry_le
-    hS hT hA hB' hpos m J x hx L hGx (hΛ x hxg m hGx).1 hMbound t θ
-  exact ⟨fun θ => (hlow θ).1, (hlow 0).2⟩
+  exact n01c_stableLowGeometry_of_common
+    (n01_exists_common_cosineLowGeometry hS hT hA hε hB hG hSpeed)
+    (fun bg eg MΛ hGs hΛ M hMbound base' ε' hb hε' he => by
+      intro hB' hpos m J d x hx L t
+      have hxg : x ∈ stateNeighborhood S C bg eg :=
+        stateNeighborhood_subset hb he hx
+      have hGx := hGs x hxg m
+      have hlow (θ : ℝ) := ordinaryFlowFiniteAngle_lowGeometry_le
+        hS hT hA hB' hpos m J x hx L hGx (hΛ x hxg m hGx).1 hMbound t θ
+      exact ⟨fun θ => (hlow θ).1, (hlow 0).2⟩)
 
 end ContinuousFlexibility.Blueprint

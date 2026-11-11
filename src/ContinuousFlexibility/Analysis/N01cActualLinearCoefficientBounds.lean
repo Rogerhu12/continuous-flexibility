@@ -21,6 +21,37 @@ set_option backward.isDefEq.respectTransparency true
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
+private theorem n01c_coefficientNorm_one_le_of_head
+    (V : CircleLinearVariationData Real.pi 0 1)
+    (O Q : ℕ → C(AddCircle Real.pi, ℝ)) (head : C(AddCircle Real.pi, ℝ)) (t : ℝ)
+    (hO : ∀ (b : ℕ) (θ : ℝ), HasDerivAt
+      (fun η : ℝ => O b (η : AddCircle Real.pi)) (O (b + 1) (θ : AddCircle Real.pi)) θ)
+    (hQ : ∀ (b : ℕ) (θ : ℝ), HasDerivAt
+      (fun η : ℝ => Q b (η : AddCircle Real.pi)) (Q (b + 1) (θ : AddCircle Real.pi)) θ)
+    {K M B : ℝ} (hK : 0 ≤ K) (hB : 0 ≤ B)
+    (hlow : circleRealSobolevNorm 3 (Q 0) ≤ M)
+    (houter : circleRealSobolevNorm 3 (O 0) ≤ B)
+    (hhead : circleRealSobolevNorm 1 head ≤ K *
+      (circleRealSobolevNorm 1 (O 0) +
+        circleRealSobolevNorm 3 (O 0) * circleRealSobolevNorm 0 (Q 0)))
+    (hcoefficient : V.coefficient t 0 = head) :
+    V.coefficientNorm 1 t ≤ K * (B + B * M) := by
+  have hO₁ : circleRealSobolevNorm 1 (O 0) ≤ circleRealSobolevNorm 3 (O 0) :=
+    circle_sobolevNorm_mono_of_derivatives
+      (fun b => circleComplexify (O b)) (circleComplexify_hasDerivAt O hO)
+      (by decide : (1 : ℕ) ≤ 3)
+  have hQ₀ : circleRealSobolevNorm 0 (Q 0) ≤ M :=
+    (circle_sobolevNorm_mono_of_derivatives
+      (fun b => circleComplexify (Q b)) (circleComplexify_hasDerivAt Q hQ)
+      (by decide : (0 : ℕ) ≤ 3)).trans hlow
+  have hproduct : circleRealSobolevNorm 3 (O 0) *
+      circleRealSobolevNorm 0 (Q 0) ≤ B * M :=
+    mul_le_mul houter hQ₀ (circle_real_sobolevNorm_nonneg _ _) hB
+  change circleRealSobolevNorm 1 (V.coefficient t 0) ≤ _
+  rw [hcoefficient]
+  exact hhead.trans (mul_le_mul_of_nonneg_left
+    (add_le_add (hO₁.trans houter) hproduct) hK)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -49,32 +80,21 @@ theorem ordinaryFlowCircleVariationData_coefficientNorm_one_le
       (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice
   let Q : ℕ → C(AddCircle Real.pi, ℝ) :=
     ordinaryFlowFiniteDefectJet hS hT hA hB hpos m J x hx L t
-  have hO : ∀ b θ, HasDerivAt (fun η : ℝ => O b (η : AddCircle Real.pi))
+  have hO : ∀ (b : ℕ) (θ : ℝ), HasDerivAt (fun η : ℝ => O b (η : AddCircle Real.pi))
       (O (b + 1) (θ : AddCircle Real.pi)) θ :=
     periodicCircleJet_hasDerivAt _ _ _
-  have hQ : ∀ b θ, HasDerivAt (fun η : ℝ => Q b (η : AddCircle Real.pi))
+  have hQ : ∀ (b : ℕ) (θ : ℝ), HasDerivAt (fun η : ℝ => Q b (η : AddCircle Real.pi))
       (Q (b + 1) (θ : AddCircle Real.pi)) θ :=
     circleLiftDefectJet_hasDerivAt _ _ _
-  have hO₁ : circleRealSobolevNorm 1 (O 0) ≤ circleRealSobolevNorm 3 (O 0) := by
-    exact circle_sobolevNorm_mono_of_derivatives
-      (fun b => circleComplexify (O b)) (circleComplexify_hasDerivAt O hO)
-      (by decide : (1 : ℕ) ≤ 3)
-  have hQ₀ : circleRealSobolevNorm 0 (Q 0) ≤ M :=
-    (circle_sobolevNorm_mono_of_derivatives
-      (fun b => circleComplexify (Q b)) (circleComplexify_hasDerivAt Q hQ)
-      (by decide : (0 : ℕ) ≤ 3)).trans hlow
-  have hproduct : circleRealSobolevNorm 3 (O 0) *
-      circleRealSobolevNorm 0 (Q 0) ≤ B * M :=
-    mul_le_mul houter hQ₀ (circle_real_sobolevNorm_nonneg _ _) hB₀
-  have hhead := ordinaryFlowForcingFactorJet_head_sobolev_le
-    hS hT hA hB hpos m J x hx L
-    (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 1 hc hM hlower hlow
-  change circleRealSobolevNorm 1
-    ((ordinaryFlowCircleVariationData hS hT hA hB hpos m J x hx L n v).coefficient t 0) ≤ _
-  rw [ordinaryFlowCircleVariationData_coefficient_eq_head]
-  apply hhead.trans
-  exact mul_le_mul_of_nonneg_left (add_le_add (hO₁.trans houter) hproduct)
+  exact n01c_coefficientNorm_one_le_of_head
+    (ordinaryFlowCircleVariationData hS hT hA hB hpos m J x hx L n v) O Q
+    (ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L
+      (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 0 0) t hO hQ
     (zero_le_one.trans (circleLiftCompositionConstant_one_le Real.pi c M 1))
+    hB₀ hlow houter
+    (ordinaryFlowForcingFactorJet_head_sobolev_le hS hT hA hB hpos m J x hx L
+      (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 1 hc hM hlower hlow)
+    (ordinaryFlowCircleVariationData_coefficient_eq_head hS hT hA hB hpos m J x hx L n v t)
 
 theorem ordinaryFlowCircleVariationData_coefficientSize_one_le
     (n : ℕ) (v : Fin (n + 1) → (Fin d → ℝ))

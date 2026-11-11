@@ -20,6 +20,13 @@ open scoped BigOperators ContDiff
 
 set_option backward.isDefEq.respectTransparency true
 
+private theorem n01c_plot_seminorm_zero
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (p : Seminorm ℝ F) (L : E →L[ℝ] F) : p (L 0) = 0 := by
+  rw [L.map_zero]
+  exact p.map_zero'
+
 /-- The original data of a finite affine plot, with its low unit-ball
 condition. No flow estimate is part of this index. -/
 structure OrdinaryFlowVariationInput
@@ -68,7 +75,7 @@ theorem aggregate_mono (u : OrdinaryFlowVariationInput D S C base ε N) :
   intro a b hab
   have hp := jointStateGrading_monotone S
   exact add_le_add
-    (add_le_add_left (hp hab (u.state - (C.referenceState, 0))) 1)
+    (add_le_add (le_refl (1 : ℝ)) (hp hab (u.state - (C.referenceState, 0))))
     (Finset.sum_le_sum (fun i _ => hp hab (u.plot (u.directions i))))
 
 /-- The same plot with one zero parameter direction. Its all-angle
@@ -82,7 +89,8 @@ def angleInput (u : OrdinaryFlowVariationInput D S C base ε N) :
   mem := u.mem
   plot := u.plot
   directions := fun _ => 0
-  unit := fun _ => by simp only [map_zero]; norm_num
+  unit := fun _ => (n01c_plot_seminorm_zero
+    (pairGrading (stateGrading S) realGrading base) u.plot).le.trans zero_le_one
 
 theorem angleInput_aggregate_le
     (u : OrdinaryFlowVariationInput D S C base ε N) (n : ℕ) :
@@ -90,7 +98,8 @@ theorem angleInput_aggregate_le
   change (1 + pairGrading (stateGrading S) realGrading n
     (u.state - (C.referenceState, 0))) +
       (∑ _i : Fin 1, pairGrading (stateGrading S) realGrading n (u.plot 0)) ≤ _
-  simp only [map_zero, Finset.sum_const_zero, add_zero]
+  rw [n01c_plot_seminorm_zero (pairGrading (stateGrading S) realGrading n) u.plot]
+  simp only [Finset.sum_const_zero, add_zero]
   exact le_add_of_nonneg_right (Finset.sum_nonneg (fun i _ => apply_nonneg _ _))
 
 variable {T : MaterialData}

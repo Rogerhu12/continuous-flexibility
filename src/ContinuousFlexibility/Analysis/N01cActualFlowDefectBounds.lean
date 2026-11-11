@@ -25,6 +25,27 @@ theorem n01c_transfer_positiveConstants {I : Type*}
   obtain ⟨K, hK, hPK⟩ := hP i
   exact ⟨K, hK, hstep i K hK hPK⟩
 
+private theorem n01c_defectGrowth_restrict_timeChange
+    {X Z : Type*} {U V : Set X} (hUV : U ⊆ V)
+    (Tower : ℕ → Type*) (Plot : ℕ → Type*)
+    (size : ℕ → X → ℝ) (norm : ℕ → Z → ℝ)
+    (F : ∀ x : X, x ∈ V → ℕ → ℝ → Z)
+    (G : ∀ m : ℕ, Tower m → ∀ d : ℕ, ∀ x : X, x ∈ U → Plot d → ℝ → Z)
+    (I : Set ℝ) (τ : ℝ → ℝ) (hτ : ∀ t, τ t ∈ I)
+    (hidentify : ∀ m J d x hx L t,
+      G m J d x hx L t = F x (hUV hx) m (τ t))
+    (hbound : ∀ s : ℕ, ∃ K : ℝ, 0 < K ∧
+      ∀ x (hx : x ∈ V) m t, t ∈ I →
+        norm s (F x hx m t) ≤ K * (1 + size s x)) :
+    ∀ s : ℕ, ∃ K : ℝ, 0 < K ∧
+      ∀ m, ∀ J : Tower m, ∀ d : ℕ, ∀ x : X, ∀ hx : x ∈ U,
+      ∀ L : Plot d, ∀ t : ℝ,
+        norm s (G m J d x hx L t) ≤ K * (1 + size s x) := by
+  refine n01c_transfer_positiveConstants _ _ hbound ?_
+  intro s K _ hb m J d x hx L t
+  rw [hidentify m J d x hx L t]
+  exact hb x (hUV hx) m (τ t) (hτ t)
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -91,11 +112,21 @@ theorem ordinaryFlowFiniteDefectJet_sobolev_growth
         (ordinaryFlowFiniteDefectJet hS hT hA hB hpos m J x hx L t 0) ≤
           K * (1 + pairGrading (stateGrading S) realGrading
             (s + 1 + loss + d₀) (x - (C.referenceState, 0))) := by
-  refine n01c_transfer_positiveConstants _ _ hQ.1 ?_
-  intro s K hK hbound m J d x hx L t
-  rw [ordinaryFlowFiniteDefectJet_eq_component hS hT hA hB hpos m J x hx L
-    hB₀ (hsub hx) (hGs x (hsub hx) m)]
-  exact hbound x (hsub hx) m (circleFlowCompactTime 0 Real.pi t)
-    (circleFlowCompactTime_mem Real.pi_pos.le t)
+  exact n01c_defectGrowth_restrict_timeChange hsub
+    (fun m => ContinuousTimeSpeedTower (stateNeighborhood S C base ε)
+      (componentCosineSpeed D S C m))
+    (fun d => (Fin d → ℝ) →L[ℝ] (AnnularState S × ℝ))
+    (fun s z => pairGrading (stateGrading S) realGrading
+      (s + 1 + loss + d₀) (z - (C.referenceState, 0)))
+    (fun s (f : C(AddCircle Real.pi, ℝ)) => circleRealSobolevNorm (s : ℝ) f)
+    (fun z hz m t => componentCosineFlowDefectJet hS hT hA hB₀ hz m
+      (hGs z hz m) t 0)
+    (fun m J d z hz L t => ordinaryFlowFiniteDefectJet hS hT hA hB hpos
+      m J z hz L t 0)
+    (Set.Icc (0 : ℝ) Real.pi) (circleFlowCompactTime 0 Real.pi)
+    (circleFlowCompactTime_mem Real.pi_pos.le)
+    (fun m J d z hz L t => ordinaryFlowFiniteDefectJet_eq_component
+      hS hT hA hB hpos m J z hz L hB₀ (hsub hz) (hGs z (hsub hz) m) t 0)
+    hQ.1
 
 end ContinuousFlexibility.Statements
