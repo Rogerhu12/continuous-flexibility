@@ -82,8 +82,12 @@ theorem exists_fixedAngularMultiplier_constant
       isOpen_univ hG.contDiffOn p.1 (fun _ => mem_univ _) a j p.2]
     exact hGj j hj
   change |mixedDerivative a b (fun q : PolarPoint => φ q.2 * G q) p| ≤ C * M
-  rw [hj, iteratedDeriv_mul (hφ.contDiffAt.of_le (by simp))
-    (hg.contDiffAt.of_le (by simp))]
+  have hleibniz : iteratedDeriv b (fun θ => φ θ * g θ) p.2 =
+      ∑ j ∈ Finset.range (b + 1),
+        (b.choose j : ℝ) * iteratedDeriv j φ p.2 * iteratedDeriv (b - j) g p.2 := by
+    exact iteratedDeriv_mul (hφ.contDiffAt.of_le (by simp))
+      (hg.contDiffAt.of_le (by simp))
+  rw [hj, hleibniz]
   calc
     _ ≤ ∑ j ∈ Finset.range (b + 1), (b.choose j : ℝ) * A j * M := by
       apply (Finset.abs_sum_le_sum_abs _ _).trans
