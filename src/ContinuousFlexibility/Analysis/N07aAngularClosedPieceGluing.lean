@@ -92,7 +92,7 @@ theorem n07a_glue_closed_physical_pieces
       simpa only [hi, Prod.eta] using he
     rcases n07a_physicalClosedPieces_overlap h04 hij hi hj with h | h
     · exact hadj i j hij h.1 h.2
-    · exact (hadj j i hij.symm h.1 h.2).symm
+    · exact (hadj j i (fun hji => hij hji.symm) h.1 h.2).symm
   have hcover (r : ℝ) (hr : r ∈ Ioo D.a D.b) :=
     n07a_physicalClosedPieces_cover hD hT h04 href hr
   let index (r : ℝ) : ℕ := if hr : r ∈ Ioo D.a D.b then (hcover r hr).choose else 0
