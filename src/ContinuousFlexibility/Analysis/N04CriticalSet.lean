@@ -32,7 +32,7 @@ theorem n04_countable_simple_zeros {f : ℝ → ℝ} {s : Set ℝ}
     exact hne.mono fun y hy hyZ => hy hyZ.2)
   letI : DiscreteTopology Z := hd
   exact Set.countable_coe_iff.mp
-    (separableSpace_iff_countable.mp (inferInstance : SeparableSpace Z))
+    (TopologicalSpace.separableSpace_iff_countable.mp (inferInstance : SeparableSpace Z))
 
 theorem n04_reference_critical_set_countable {D : ReferenceData}
     (hD : RadialProfileGeometry D) :
