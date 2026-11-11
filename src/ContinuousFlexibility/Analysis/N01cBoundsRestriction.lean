@@ -62,6 +62,70 @@ theorem exists_smoothDirections_restrict_oneHighWeight
   exact (hJ z (hVU hz) v).trans
     (mul_le_mul_of_nonneg_left (oneHighVariationWeight_mono hp hb hh (z - center) v) hK)
 
+
+/-- The complete coefficient quantifier pattern restricts over an abstract
+state space.  The concrete-state specialization below is a single application. -/
+theorem coefficientBounds_restrict
+    {U V : Set E} {grading : ℕ → Seminorm ℝ E} {center : E}
+    {family : Fin 3 → ℕ → ℕ → PolarPoint → E → ℝ}
+    {cells : ℕ → Set ℝ} {weight : ℝ → ℕ → ℝ}
+    {base base' loss loss' : ℕ}
+    (hV : IsOpen V) (hVU : V ⊆ U) (hp : Monotone grading)
+    (hb : base ≤ base') (hl : loss ≤ loss')
+    (hw : ∀ B : ℝ, 0 < B → ∀ m : ℕ, 0 ≤ weight B m)
+    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b point,
+      a + b ≤ s → point.1 ∈ cells m →
+      ∃ J : SmoothDirections U (family i a b point),
+        ∀ z ∈ U, ∀ v : Fin k → E,
+          |J.D k z v| ≤ weight B m *
+            oneHighVariationWeight grading base (s + loss) (z - center) v) :
+    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b point,
+      a + b ≤ s → point.1 ∈ cells m →
+      ∃ J : SmoothDirections V (family i a b point),
+        ∀ z ∈ V, ∀ v : Fin k → E,
+          |J.D k z v| ≤ weight B m *
+            oneHighVariationWeight grading base' (s + loss') (z - center) v := by
+  intro k s
+  obtain ⟨B, hB, hbound⟩ := h k s
+  refine ⟨B, hB, ?_⟩
+  intro m i a b point hab hpnt
+  exact exists_smoothDirections_restrict_oneHighWeight hV hVU hp hb
+    (Nat.add_le_add_left hl s) (hw B hB m) (hbound m i a b point hab hpnt)
+
+/-- The complete ordinary-flow quantifier pattern restricts over an abstract
+state space, preserving the loss selected at each parameter order. -/
+theorem ordinaryFlowBounds_restrict
+    {U V : Set E} {grading : ℕ → Seminorm ℝ E} {center : E}
+    {family : ℕ → ℕ → ℕ → PolarPoint → E → ℝ}
+    {left right : ℕ → ℝ} {weight : ℝ → ℕ → ℝ}
+    {base base' loss loss' : ℕ}
+    (hV : IsOpen V) (hVU : V ⊆ U) (hp : Monotone grading)
+    (hb : base ≤ base') (hl : loss ≤ loss')
+    (hw : ∀ B : ℝ, 0 < B → ∀ m : ℕ, 0 ≤ weight B m)
+    (h : ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m a b point, a + b ≤ s → point.1 ∈ Ioo (left m) (right m) →
+      ∃ J : SmoothDirections U (family m a b point),
+        ∀ z ∈ U, ∀ v : Fin k → E,
+          min (point.1 - left m) (right m - point.1) ^ a * |J.D k z v| ≤
+            weight B m * oneHighVariationWeight grading base
+              (s + loss + parameterLoss) (z - center) v) :
+    ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m a b point, a + b ≤ s → point.1 ∈ Ioo (left m) (right m) →
+      ∃ J : SmoothDirections V (family m a b point),
+        ∀ z ∈ V, ∀ v : Fin k → E,
+          min (point.1 - left m) (right m - point.1) ^ a * |J.D k z v| ≤
+            weight B m * oneHighVariationWeight grading base'
+              (s + loss' + parameterLoss) (z - center) v := by
+  intro k
+  obtain ⟨parameterLoss, hparameter⟩ := h k
+  refine ⟨parameterLoss, fun s => ?_⟩
+  obtain ⟨B, hB, hbound⟩ := hparameter s
+  refine ⟨B, hB, ?_⟩
+  intro m a b point hab hpnt
+  exact exists_smoothDirections_restrict_oneHighWeight hV hVU hp hb
+    (Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss)
+    (hw B hB m) (hbound m a b point hab hpnt)
+
 end GenericEstimateRestriction
 
 /-- The component weight multiplying the one-high-factor expression is
@@ -75,6 +139,7 @@ theorem n01_componentWeight_nonneg {D : ReferenceData} {T : MaterialData}
   exact mul_nonneg (mul_nonneg hB (Real.rpow_nonneg hH.le _))
     (Real.rpow_nonneg hE.le _)
 
+set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
 /-- Coefficient estimates persist on a stronger low-order ball with a larger
 spatial loss.  No constant or directional derivative is replaced. -/
@@ -85,23 +150,17 @@ theorem coefficientFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
     (h : CoefficientFamilyTameBounds D T S C base loss ε)
     (hb : base ≤ base') (hl : loss ≤ loss') (hε : ε' ≤ ε) :
     CoefficientFamilyTameBounds D T S C base' loss' ε' := by
-  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
-    stateNeighborhood_subset hb hε
-  intro k s
-  obtain ⟨B, hB, hbound⟩ := h k s
-  refine ⟨B, hB, ?_⟩
-  intro m i a b p hab hp
-  exact exists_smoothDirections_restrict_oneHighWeight
+  exact coefficientBounds_restrict
     (E := AnnularState S × ℝ)
-    (f := coefficientFamily D S C i a b p)
-    (p := pairGrading (stateGrading S) realGrading)
-    (base := base) (base' := base') (high := s + loss) (high' := s + loss')
-    (k := k) (center := (C.referenceState, 0)) (φ := fun t : ℝ => |t|)
-    (K := B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
-    (isOpen_stateNeighborhood S C base' ε') hsub
-    (jointStateGrading_monotone S) hb (Nat.add_le_add_left hl s)
-    (n01_componentWeight_nonneg hT hsample hB.le m)
-    (hbound m i a b p hab hp)
+    (U := stateNeighborhood S C base ε) (V := stateNeighborhood S C base' ε')
+    (grading := pairGrading (stateGrading S) realGrading)
+    (center := (C.referenceState, 0)) (family := coefficientFamily D S C)
+    (cells := D.cells)
+    (weight := fun B m =>
+      B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+    (isOpen_stateNeighborhood S C base' ε') (stateNeighborhood_subset hb hε)
+    (jointStateGrading_monotone S) hb hl
+    (fun B hB m => n01_componentWeight_nonneg hT hsample hB.le m) h
 
 /-- The accumulating profile supplies the sample-membership hypothesis in the
 coefficient restriction theorem. -/
@@ -116,6 +175,7 @@ theorem coefficientFamilyTameBounds_mono_of_accumulatingProfile
   exact coefficientFamilyTameBounds_mono hT
     (materialSample_mem_radialCore hT hbounds.2.1) h hb hl hε
 
+set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
 /-- Ordinary-flow estimates restrict with exactly the same state-derivative
 loss at each parameter order. -/
@@ -126,29 +186,17 @@ theorem ordinaryFlowFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
     (h : OrdinaryFlowFamilyTameBounds T S C base loss ε)
     (hb : base ≤ base') (hl : loss ≤ loss') (hε : ε' ≤ ε) :
     OrdinaryFlowFamilyTameBounds T S C base' loss' ε' := by
-  have hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
-    stateNeighborhood_subset hb hε
-  intro k
-  obtain ⟨parameterLoss, hparameter⟩ := h k
-  refine ⟨parameterLoss, fun s => ?_⟩
-  obtain ⟨B, hB, hbound⟩ := hparameter s
-  refine ⟨B, hB, ?_⟩
-  intro m a b p hab hp
-  exact exists_smoothDirections_restrict_oneHighWeight
+  exact ordinaryFlowBounds_restrict
     (E := AnnularState S × ℝ)
-    (f := ordinaryFlowFamily S C m a b p)
-    (p := pairGrading (stateGrading S) realGrading)
-    (base := base) (base' := base')
-    (high := s + loss + parameterLoss) (high' := s + loss' + parameterLoss)
-    (k := k) (center := (C.referenceState, 0))
-    (φ := fun t : ℝ => min (p.1 - C.left m) (C.right m - p.1) ^ a * |t|)
-    (K := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+    (U := stateNeighborhood S C base ε) (V := stateNeighborhood S C base' ε')
+    (grading := pairGrading (stateGrading S) realGrading)
+    (center := (C.referenceState, 0)) (family := ordinaryFlowFamily S C)
+    (left := C.left) (right := C.right)
+    (weight := fun B m => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B)
-    (isOpen_stateNeighborhood S C base' ε') hsub
-    (jointStateGrading_monotone S) hb
-    (Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss)
-    (n01_componentWeight_nonneg hT hsample hB.le (C.cell m))
-    (hbound m a b p hab hp)
+    (isOpen_stateNeighborhood S C base' ε') (stateNeighborhood_subset hb hε)
+    (jointStateGrading_monotone S) hb hl
+    (fun B hB m => n01_componentWeight_nonneg hT hsample hB.le (C.cell m)) h
 
 theorem ordinaryFlowFamilyTameBounds_mono_of_accumulatingProfile
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

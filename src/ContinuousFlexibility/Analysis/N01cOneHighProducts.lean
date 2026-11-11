@@ -29,8 +29,10 @@ theorem prod_one_add_rpow_le_one_add_sum {k : ℕ} (z θ : Fin k → ℝ)
   have hsumz : 0 ≤ ∑ i, z i := Finset.sum_nonneg (fun i _ => hz i)
   have hM : 1 ≤ 1 + ∑ i, z i := by linarith
   have hMpos : 0 < 1 + ∑ i, z i := zero_lt_one.trans_le hM
-  have hi (i : Fin k) : 1 + z i ≤ 1 + ∑ j, z j :=
-    add_le_add_left (Finset.single_le_sum (fun j _ => hz j) (Finset.mem_univ i)) 1
+  have hi (i : Fin k) : 1 + z i ≤ 1 + ∑ j, z j := by
+    have hzi : z i ≤ ∑ j, z j :=
+      Finset.single_le_sum (fun j _ => hz j) (Finset.mem_univ i)
+    linarith
   calc
     ∏ i, (1 + z i) ^ θ i ≤ ∏ i, (1 + ∑ j, z j) ^ θ i :=
       Finset.prod_le_prod₀
@@ -197,7 +199,7 @@ theorem exists_oneHighMultilinearProductBounds (p : ℕ → Seminorm ℝ E)
       ∀ x : E, p base x ≤ 1 →
       ∀ A : E [×k]→L[ℝ] F, ∀ q : Seminorm ℝ F, ∀ K : ℝ, 0 ≤ K →
         (∀ v : Fin k → E, q (A v) ≤
-          K * ∏ i, p (a i + offset) (Fin.cons x v (select i))) →
+          K * ∏ i, p (a i + offset) ((Fin.cons x v : Fin (k + 1) → E) (select i))) →
         ∀ v : Fin k → E, q (A v) ≤
           K * C * multilinearTameSize (p base) (p (s + loss)) k
             (1 + p (s + loss) x) v := by
@@ -211,9 +213,12 @@ theorem exists_oneHighMultilinearProductBounds (p : ℕ → Seminorm ℝ E)
   apply multilinear_bound_of_unitBall A q (p base) (p (s + loss))
     (mul_nonneg hK (mul_nonneg hC hfactors))
   intro v hv
-  let w : Fin factors → E := fun i => Fin.cons x v (select i)
+  let w : Fin factors → E := fun i => (Fin.cons x v : Fin (k + 1) → E) (select i)
   have hw (i : Fin factors) : p base (w i) ≤ 1 := by
-    exact Fin.cases hx (fun j => (hv j).le) (select i)
+    exact Fin.cases
+      (motive := fun j : Fin (k + 1) =>
+        p base ((Fin.cons x v : Fin (k + 1) → E) j) ≤ 1)
+      hx (fun j => (hv j).le) (select i)
   let U : ℝ := p (s + loss) x + ∑ j, p (s + loss) (v j)
   have hx0 : 0 ≤ p (s + loss) x := apply_nonneg _ _
   have hvsum : 0 ≤ ∑ j, p (s + loss) (v j) :=
@@ -224,7 +229,10 @@ theorem exists_oneHighMultilinearProductBounds (p : ℕ → Seminorm ℝ E)
     have hvU (j : Fin k) : p (s + loss) (v j) ≤ U :=
       (Finset.single_le_sum (fun j _ => apply_nonneg (p (s + loss)) (v j))
         (Finset.mem_univ j)).trans (le_add_of_nonneg_left hx0)
-    exact Fin.cases hxU hvU (select i)
+    exact Fin.cases
+      (motive := fun j : Fin (k + 1) =>
+        p (s + loss) ((Fin.cons x v : Fin (k + 1) → E) j) ≤ U)
+      hxU hvU (select i)
   have hsumw : ∑ i, p (s + loss) (w i) ≤ (factors : ℝ) * U := by
     calc
       ∑ i, p (s + loss) (w i) ≤ ∑ _i : Fin factors, U :=

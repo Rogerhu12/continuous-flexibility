@@ -54,6 +54,40 @@ theorem scaledExpLinearJets_apply (a : ℝ) (L : E →L[ℝ] ℝ)
     scaledExpLinearJets a L n x v = a * Real.exp (L x) * ∏ i, L (v i) := by
   simp only [scaledExpLinearJets, smul_apply, smul_eq_mul, scalarFunctionalProduct_apply]
 
+/-- The elementary real exponential rule, before linear precomposition. -/
+private theorem hasProjectiveLineDerivAt_scaledScalarExp
+    (a b x w : ℝ) :
+    HasProjectiveLineDerivAt (fun y : ℝ => a * Real.exp y * b)
+      ((a * (Real.exp x * w)) * b) x w := by
+  have hline : HasDerivAt (fun t : ℝ => x + t * w) w (0 : ℝ) := by
+    simpa only [one_mul, id_eq] using
+      ((hasDerivAt_id (0 : ℝ)).mul_const w).const_add x
+  have hcurve : HasDerivAt (fun t : ℝ => a * Real.exp (x + t * w) * b)
+      ((a * (Real.exp x * w)) * b) (0 : ℝ) := by
+    simpa only [zero_mul, add_zero] using
+      ((hline.exp.const_mul a).mul_const b)
+  simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt, smul_eq_mul] using
+    hcurve.tendsto_slope_zero
+
+private theorem scaledExpLinearJets_hasLineDerivAt
+    (a : ℝ) (L : E →L[ℝ] ℝ) (n : ℕ) (x : E) (v : Fin n → E) (w : E) :
+    HasProjectiveLineDerivAt (fun y : E => scaledExpLinearJets a L n y v)
+      (scaledExpLinearJets a L (n + 1) x (Fin.cons w v)) x w := by
+  have hd : HasProjectiveLineDerivAt
+      (fun y : E => a * Real.exp (L y) * ∏ i, L (v i))
+      ((a * (Real.exp (L x) * L w)) * ∏ i, L (v i)) x w :=
+    (hasProjectiveLineDerivAt_scaledScalarExp a (∏ i, L (v i)) (L x) (L w)).comp_linear
+      L.toLinearMap
+  have hvalue : ((a * (Real.exp (L x) * L w)) * ∏ i, L (v i)) =
+      scaledExpLinearJets a L (n + 1) x (Fin.cons w v) := by
+    rw [scaledExpLinearJets_apply, Fin.prod_univ_succ]
+    simp only [Fin.cons_zero, Fin.cons_succ]
+    ring
+  have hd' : HasProjectiveLineDerivAt
+      (fun y : E => a * Real.exp (L y) * ∏ i, L (v i))
+      (scaledExpLinearJets a L (n + 1) x (Fin.cons w v)) x w := hvalue ▸ hd
+  simpa only [scaledExpLinearJets_apply] using hd'
+
 /-- The scaled-exponential tower consists of genuine topological line
 derivatives, on the entire parameter space. -/
 def smoothDirections_scaledExpLinear (a : ℝ) (L : E →L[ℝ] ℝ) :
@@ -76,23 +110,7 @@ def smoothDirections_scaledExpLinear (a : ℝ) (L : E →L[ℝ] ℝ) :
     exact ((continuous_const.mul hExp).mul hProd).continuousOn
   derivative := by
     intro n x _ v w
-    have hL : HasDerivAt (fun t : ℝ => L (x + t • w)) (L w) (0 : ℝ) := by
-      simpa only [map_add, map_smul, smul_eq_mul, one_mul, id_eq] using
-        ((hasDerivAt_id (0 : ℝ)).mul_const (L w)).const_add (L x)
-    have hcurve : HasDerivAt
-        (fun t : ℝ => a * Real.exp (L (x + t • w)) * ∏ i, L (v i))
-        ((a * (Real.exp (L x) * L w)) * ∏ i, L (v i)) (0 : ℝ) := by
-      simpa only [zero_smul, add_zero] using
-        ((hL.exp.const_mul a).mul_const (∏ i, L (v i)))
-    have hvalue : ((a * (Real.exp (L x) * L w)) * ∏ i, L (v i)) =
-        scaledExpLinearJets a L (n + 1) x (Fin.cons w v) := by
-      rw [scaledExpLinearJets_apply, Fin.prod_univ_succ]
-      simp only [Fin.cons_zero, Fin.cons_succ]
-      ring
-    rw [hvalue] at hcurve
-    unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
-    apply hasDerivAt_iff_tendsto_slope_zero.mp
-    simpa only [scaledExpLinearJets_apply] using hcurve
+    exact scaledExpLinearJets_hasLineDerivAt a L n x v w
 
 end ExponentialJets
 
@@ -145,7 +163,8 @@ private abbrev n01cStateModule (S : PhysicalSpacesData) :
 attribute [local instance] n01cStateModule
 
 private abbrev n01cStateSMul (S : PhysicalSpacesData) :
-    SMul ℝ (AnnularState S) := inferInstance
+    SMul ℝ (AnnularState S) :=
+  (n01cStateModule S).toDistribMulAction.toDistribSMul.toSMul
 attribute [local instance] n01cStateSMul
 
 private theorem scalarMean_add {f g : ℝ → ℝ}
@@ -666,7 +685,9 @@ theorem stateProfile_eventuallyEq_finiteControlProfile
       D.w s * Real.exp (x.2.1 * D.chi s + ∑ m ∈ I, stateKappa S x m * C.control m s) := by
     exact (congrArg (fun y : ℝ × (I → ℝ) => finiteControlProfile D C I y s)
       (stateFiniteControlCLM_apply hS hT hRef I x)).trans (by
-        simp only [finiteControlProfile, Finset.sum_coe_sort])
+        exact congrArg
+          (fun t : ℝ => D.w s * Real.exp (x.2.1 * D.chi s + t))
+          (Finset.sum_coe_sort I (fun m : ℕ => stateKappa S x m * C.control m s)))
   exact hleft.trans hright.symm
 
 /-- Genuine parameter towers for every radial jet of the actual profile.
