@@ -34,11 +34,11 @@ theorem continuousOn_r07HeightExtension {Y : Type*} [TopologicalSpace Y] (defaul
     {f : Statements.HeightRatios → Y} (hf : Continuous f) :
     ContinuousOn (r07HeightExtension default f) heightCube := by
   apply continuousOn_iff_continuous_domRestrict.mpr
-  change Continuous (fun σ : heightCube => r07HeightExtension default f σ.val)
   let lift : heightCube → Statements.HeightRatios := fun σ => ⟨σ.val, mem_heightCube.mp σ.property⟩
   have hlift : Continuous lift := continuous_subtype_val.subtype_mk _
-  have he : (fun σ : heightCube => r07HeightExtension default f σ.val) = fun σ => f (lift σ) := by
+  have he : heightCube.domRestrict (r07HeightExtension default f) = fun σ => f (lift σ) := by
     funext σ
+    rw [Set.domRestrict_apply]
     exact r07HeightExtension_admissible default f σ.val (mem_heightCube.mp σ.property)
   rw [he]
   exact hf.comp hlift

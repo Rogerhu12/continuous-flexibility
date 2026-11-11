@@ -98,11 +98,15 @@ theorem exists_r07OriginalOutgoing {T : MorseChainData} (hR06 : R06Statement)
       exact ⟨(hf base).1.trans_le hr.1, hr.2⟩
     · rw [uIcc_of_ge hef.le] at hr
       exact ⟨hr.1, hr.2.trans_lt (hf base).2⟩
+  have hspanSet : {z : HeightRatios × ℝ | z.2 ∈ uIcc f e} ⊆
+      {z : HeightRatios × ℝ | z.2 ∈ tail} := by
+    intro z hz
+    exact hspan hz
   have hw₀ : ContinuousOn (fun z : HeightRatios × ℝ => (D z.1).w z.2) {z | z.2 ∈ uIcc f e} := by
-    simpa only [iteratedDeriv_zero] using (hprofileJets 0).mono (fun _ hz => hspan hz)
+    simpa only [iteratedDeriv_zero] using (hprofileJets 0).mono hspanSet
   have hw₁ : ContinuousOn (fun z : HeightRatios × ℝ => deriv (D z.1).w z.2)
       {z | z.2 ∈ uIcc f e} := by
-    simpa only [iteratedDeriv_one] using (hprofileJets 1).mono (fun _ hz => hspan hz)
+    simpa only [iteratedDeriv_one] using (hprofileJets 1).mono hspanSet
   have hline (σ : HeightRatios) : TailNaturalLineAndKernel (Q σ) := by
     rcases hoperator (Q σ) (hFull σ).1 le_rfl le_rfl with ⟨_, _, L, _, _, _, _, hL, _⟩
     exact hL
@@ -142,7 +146,17 @@ theorem exists_r07OriginalOutgoing {T : MorseChainData} (hR06 : R06Statement)
     (fun r hr => hscale r (hspan (by simpa only [uIcc_comm e f] using hr)))
     (hV σ).1 (hV τ).1 (hV σ).2.1 (hV τ).2.1
   · exact ((hV τ).2.2.1).trans ((hV σ).2.2.1).symm
-  · rw [(hV τ).2.2.2, (hV σ).2.2.2, hUder]
+  · have hEnd : (if side then (D τ).b else (D τ).a) =
+        (if side then (D σ).b else (D σ).a) := rfl
+    have hSlopeEq :
+        r07PhysicalInitialSlope (if side then (D τ).b else (D τ).a) side j
+            (Q τ).entrance (deriv (U τ) (Q τ).entrance) =
+          r07PhysicalInitialSlope (if side then (D σ).b else (D σ).a) side j
+            (Q σ).entrance (deriv (U σ) (Q σ).entrance) := by
+      simpa only [hEnd, (hfixed τ σ).1] using congrArg
+        (fun z : ℝ => r07PhysicalInitialSlope (if side then (D σ).b else (D σ).a)
+          side j (Q σ).entrance z) hUder
+    exact ((hV τ).2.2.2).trans (hSlopeEq.trans ((hV σ).2.2.2).symm)
 
 /-- Total raw-sequence form of the actual outgoing family, with its state
 defined directly from that same physical solution. -/
@@ -176,6 +190,7 @@ theorem exists_r07OriginalOutgoing_raw {T : MorseChainData} (hR06 : R06Statement
     exact hV ⟨σ, mem_heightCube.mp hσ⟩
   · refine (continuousOn_r07HeightExtension (1, 0) hBc).congr ?_
     intro σ hσ
+    change r07OutgoingState j e (Vraw σ) = r07HeightExtension (1, 0) B σ
     rw [hstate σ hσ, r07HeightExtension_admissible (1, 0) B σ (mem_heightCube.mp hσ)]
   · intro σ hσ
     rw [hstate σ hσ]

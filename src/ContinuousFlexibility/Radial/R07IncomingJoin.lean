@@ -34,7 +34,6 @@ theorem r07_preceding_join_length {T : MorseChainData}
     |r07CellEntry T right (T.index + k + 1) - r07PreviousCellJoin T right (T.index + k)| =
       |T.joinRight right (T.index + k) - T.joinLeft right (T.index + k)| := by
   have hJ := G.joins k
-  simp only [Nat.add_assoc] at hJ
   cases right
   · simp only [r07CellEntry, r07PreviousCellJoin, Bool.false_eq_true, if_false, Nat.add_assoc]
     rw [← hJ.2.2.1, ← hJ.2.2.2]

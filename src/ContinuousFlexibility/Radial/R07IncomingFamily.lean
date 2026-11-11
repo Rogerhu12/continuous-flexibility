@@ -204,8 +204,7 @@ theorem exists_r07_original_incoming_family {T : MorseChainData}
     have hcY := hY.comp hlift
     convert hcY using 1
     funext σ
-    change radialState (D (lift σ)) j e ((D (lift σ)).w p) (u σ.val) =
-      radialState (D (lift σ)) j e ((D (lift σ)).w p) (U (lift σ))
+    rw [Set.domRestrict_apply, Function.comp_apply]
     rw [hu σ.val (mem_heightCube.mp σ.property)]
 
 end ContinuousFlexibility.Radial
