@@ -31,8 +31,8 @@ theorem matchedPhysicalOutputCell_localized_memLp {D : ReferenceData}
     (k : ℕ) (U : RadialModePair D) :
     MemLp (fun r => D.localizer k r * U.1 r) 2
       (volume.restrict (radialCore D)) :=
-  (Lp.memLp (matchedPhysicalOutputCell D hD hP k U)).congr
-    (matchedPhysicalCellField_ae hD hP k U)
+  (memLp_congr_ae (matchedPhysicalCellField_ae hD hP k U)).mp
+    (Lp.memLp (matchedPhysicalOutputCell D hD hP k U))
 
 theorem matchedPhysicalOutputSequence_energy {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
@@ -147,7 +147,7 @@ theorem exists_matchedPhysicalSchur_uniform_bound {D : ReferenceData}
     filter_upwards [hF, hfpμ] with r hr hfr
     rw [hr, hfr]
   obtain ⟨hmem, hb⟩ := matchedPhysicalSchur_weighted_bound hD hP G fp F.1 F.2 hinput
-    hA hB hT hpart (hf.congr hfpW.symm) K hK hrow hcol hmajor
+    hA hB hT hpart ((memLp_congr_ae hfpW.symm).mp hf) K hK hrow hcol hmajor
   have hI : (∫ r, fp r ^ 2 ∂referenceRadialWeightedMeasure D γ M₀) =
       ∫ r, f r ^ 2 ∂referenceRadialWeightedMeasure D γ M₀ := by
     apply integral_congr_ae
