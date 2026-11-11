@@ -51,6 +51,7 @@ import ContinuousFlexibility.Analysis.StateControlCofiniteJets
 import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
 import ContinuousFlexibility.Blueprint.Statements
 import ContinuousFlexibility.Blueprint.N12
+import ContinuousFlexibility.Blueprint.N04Transmission
 import ContinuousFlexibility.Contracts.Annular
 import ContinuousFlexibility.Contracts.CapInteriorClosure
 import ContinuousFlexibility.Contracts.CapInteriorFrontier
@@ -280,6 +281,7 @@ import ContinuousFlexibility.Analysis.NeumannPackage
 import ContinuousFlexibility.Analysis.PhysicalJetBonding
 import ContinuousFlexibility.Analysis.PhysicalJetClosedGraph
 import ContinuousFlexibility.Analysis.PhysicalTransmissionGluing
+import ContinuousFlexibility.Analysis.PhysicalTransmissionJets
 import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
 import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
 import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain

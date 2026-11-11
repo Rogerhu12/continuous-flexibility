@@ -19,13 +19,13 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 367 / 375 (current source paths, including blueprint) |
-| Modules in the root import | 325 |
-| Lines of Lean under `src/` | 90,233 |
-| Axiom audit (CI, 3799 jobs) | passed for every project declaration in the root import |
-| Blueprint statements proved / total | 8 / 42 (S01, S02, R01, R02, R03, R04, W01, N12) |
+| Lean modules compiled / total | 372 / 380 (current source paths, including blueprint) |
+| Modules in the root import | 331 |
+| Lines of Lean under `src/` | 90,878 |
+| Axiom audit (CI) | passed for every project declaration in the root import |
+| Blueprint statements proved / total | 9 / 42 (S01, S02, R01, R02, R03, R04, W01, N04Transmission, N12) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 379 |
+| Modules on the module system | 1 (the Challenge) of 384 |
 
 The compiled-module count matches artifacts to current source paths; the raw CI cache count
 can also include artifacts of removed blueprint modules. The 8 unfinished modules of the earlier workflow are:
@@ -38,6 +38,14 @@ can also include artifacts of removed blueprint modules. The 8 unfinished module
 - **Geometry (paper §2, part of §10).** `mainStatement_of_flatAnnularCore :
   Nonempty FlatAnnularCore → Statements.MainStatement` (`Contracts/SphereClosedBending.lean`).
   The whole remaining problem is `Nonempty FlatAnnularCore`.
+- **Physical transmission (N04Transmission).** The unchanged `PhysicalTransmissionTarget`
+  is proved. The two equations with a common smooth source hold to every derivative order
+  at the interface by continuity. Value and conormal matching give the first normal jet;
+  normal induction, tangential differentiation and cancellation of the nonzero leading
+  coefficient give every mixed jet. The actual Fréchet jets then form a Taylor series for
+  the piecewise function, proving smoothness across the interface. The five supporting
+  modules and the node are in the root import. N04Transmission depends only on
+  `propext`, `Classical.choice`, `Quot.sound`.
 - **Endpoint closure (N12).** The unchanged theorem
   `PointBranchStatement → W03Statement → S03Statement → N12Statement` is proved.
   `Analysis/MaterialSampleCofinite.lean`, `Analysis/StateControlCofiniteJets.lean` and
@@ -76,8 +84,8 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (34): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
-R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
+Open nodes (33): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
+R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04a,
 N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
@@ -87,8 +95,9 @@ Tool-R10a-Inner (Lemma 6.3), Tool-R10a-Outer (Lemmas 6.4, 6.5).
 
 One task file each in `docs/tasks/` (40 in total).
 
-Whether each node can be derived from its hypotheses is tested by its line. `N12` has
-passed this test with its original statement; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
+Whether each node can be derived from its hypotheses is tested by its line. `N12` and
+`N04Transmission` have passed this test with their original statements; `Solve` remains open.
+`R10a` has one frozen statement for the inner and the outer
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
@@ -134,6 +143,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 34 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.

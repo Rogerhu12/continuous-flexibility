@@ -114,11 +114,12 @@ theorem contDiff_physicalTransmission (r0 : ℝ)
     transmission_iteratedFDeriv_match r0 hu hv hjets n θ
   have hdiff (n : ℕ) (p : PolarPoint) :
       HasFDerivAt (fun q => P q n) (P p (n + 1)).curryLeft p := by
+    have hn : (n : ℕ∞ω) < ∞ := WithTop.coe_lt_coe.mpr (ENat.natCast_lt_top n)
     have h := hasFDerivAt_transmission r0
       (fun q => ftaylorSeries ℝ u q n) (fun q => ftaylorSeries ℝ v q n)
       (fun q => (ftaylorSeries ℝ u q (n + 1)).curryLeft)
       (fun q => (ftaylorSeries ℝ v q (n + 1)).curryLeft)
-      (hu.ftaylorSeries.fderiv n (by simp)) (hv.ftaylorSeries.fderiv n (by simp))
+      (hu.ftaylorSeries.fderiv n hn) (hv.ftaylorSeries.fderiv n hn)
       (hmatch n) (fun θ => congrArg ContinuousMultilinearMap.curryLeft (hmatch (n + 1) θ)) p
     by_cases hp : p.1 ≤ r0
     · simpa only [P, if_pos hp] using h
