@@ -147,7 +147,7 @@ theorem exists_angularFiberBoundaryJets_bound
     (fun j hj hjk => hξraw j hj (by omega) _)
   have hσ := contDiff_angularFiberPullback hT hφ hξ hpositive hperiod
   have hrad := abs_mixedDerivative_le_norm_iteratedFDeriv
-    Set.isOpen_univ hσ.contDiffOn k 0 (Set.mem_univ (c, θ))
+    isOpen_univ hσ.contDiffOn k 0 (Set.mem_univ (c, θ))
   have hvalue : |radialBoundaryJet (angularFiberPullback φ ξ) c k θ| ≤ C (k - 1) := by
     have hk' : k - 1 + 1 = k := Nat.sub_add_cancel hk
     rw [hk'] at hb

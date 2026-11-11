@@ -195,6 +195,93 @@ private theorem localizedOriginalCoefficient_difference_jet
       unfold coefficientFamily canonicalCoefficientComponent
       split_ifs <;> rfl
 
+/-- One fixed-order coefficient estimate, with the complete state body
+named before existential elimination. This is exactly the estimate used
+by the public fixed-loss theorem below. -/
+def LocalizedOriginalCoefficientBoundAtOrder
+    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (base loss : ℕ) (ε : ℝ) {l u ρ : ℝ} (hlu : l ≤ u) (hρ : 0 < ρ)
+    (s : ℕ) (A : ℝ) : Prop :=
+  ∀ z ∈ stateNeighborhood S C base ε,
+    stateSector S z.1 → ∀ i : Fin 3, ∀ a b : ℕ, a + b ≤ s →
+    ∀ q ∈ Ioo l u ×ˢ (univ : Set ℝ),
+      |mixedDerivative a b (localizedOriginalCoefficient D S C hlu hρ z i) q| ≤
+        A * (1 + pairGrading (stateGrading S) realGrading (s + loss)
+          (z - (C.referenceState, 0)))
+
+private theorem localizedOriginalCoefficient_reference_smooth
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε)
+    {l u ρ : ℝ} (hlu : l ≤ u) (hρ : 0 < ρ)
+    (hphysical : Ioo (l - ρ) (u + ρ) ⊆ Ioo D.a D.b)
+    (i : Fin 3) :
+    ContDiff ℝ ∞
+      (localizedOriginalCoefficient D S C hlu hρ (C.referenceState, 0) i) :=
+  contDiff_localizedOriginalCoefficient hS hT hN hlu hρ hphysical
+    (reference_mem_stateNeighborhood S C base hN.2.1) hN.2.2.1.stateSector i
+
+private theorem localizedOriginalCoefficient_reference_angle
+    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    {l u ρ : ℝ} (hlu : l ≤ u) (hρ : 0 < ρ)
+    (i : Fin 3) (r θ : ℝ) :
+    localizedOriginalCoefficient D S C hlu hρ (C.referenceState, 0) i (r, θ) =
+      localizedOriginalCoefficient D S C hlu hρ (C.referenceState, 0) i (r, 0) := by
+  change canonicalCoefficientComponent i
+      (originalCoefficients D S C (C.referenceState, 0))
+      (circleFlowSmoothTimeClamp l u ρ hlu hρ r, θ) =
+    canonicalCoefficientComponent i
+      (originalCoefficients D S C (C.referenceState, 0))
+      (circleFlowSmoothTimeClamp l u ρ hlu hρ r, 0)
+  exact originalCoefficientComponent_zeroParameter_angle_invariant D S C C.referenceState i
+    (circleFlowSmoothTimeClamp l u ρ hlu hρ r) θ 0
+
+private theorem localizedOriginalCoefficient_difference_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    {l u ρ : ℝ} (hlu : l ≤ u) (hρ : 0 < ρ)
+    (m : ℕ) (hcell : Ioo l u ⊆ D.cells m) (s : ℕ) (B : ℝ)
+    (hbound : N01CoefficientValueBoundAtOrder D T S C base loss ε s B)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (i : Fin 3) (a b : ℕ) (hab : a + b ≤ s) {q : PolarPoint}
+    (hq : q ∈ Ioo l u ×ˢ (univ : Set ℝ)) :
+    |mixedDerivative a b
+      (fun x => localizedOriginalCoefficient D S C hlu hρ z i x -
+        localizedOriginalCoefficient D S C hlu hρ (C.referenceState, 0) i x) q| ≤
+      (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B) *
+        (1 + pairGrading (stateGrading S) realGrading (s + loss)
+          (z - (C.referenceState, 0))) :=
+  (congrArg abs
+    (localizedOriginalCoefficient_difference_jet D S C hlu hρ z i a b hq)).trans_le
+      (hbound m i a b q hab (hcell hq.1) z hz)
+
+private theorem localizedOriginalCoefficient_bound_of_value_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε)
+    {l u ρ : ℝ} (hlu : l ≤ u) (hρ : 0 < ρ)
+    (hphysical : Ioo (l - ρ) (u + ρ) ⊆ Ioo D.a D.b)
+    (m : ℕ) (hcell : Ioo l u ⊆ D.cells m) (s : ℕ) (B : ℝ)
+    (hbound : N01CoefficientValueBoundAtOrder D T S C base loss ε s B) :
+    ∃ A : ℝ, 1 ≤ A ∧
+      LocalizedOriginalCoefficientBoundAtOrder D S C base loss ε hlu hρ s A := by
+  exact exists_coefficient_jet_bound_of_difference
+    (E := AnnularState S × ℝ)
+    (localizedOriginalCoefficient D S C hlu hρ) (C.referenceState, 0)
+    (stateNeighborhood S C base ε) (fun z => stateSector S z.1)
+    (fun z => pairGrading (stateGrading S) realGrading (s + loss)
+      (z - (C.referenceState, 0)))
+    l u s (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+    (fun z => apply_nonneg _ _)
+    (fun z hz hs i => contDiff_localizedOriginalCoefficient
+      hS hT hN hlu hρ hphysical hz hs i)
+    (localizedOriginalCoefficient_reference_smooth hS hT hN hlu hρ hphysical)
+    (localizedOriginalCoefficient_reference_angle D S C hlu hρ)
+    (fun z hz _ i a b hab q hq =>
+      localizedOriginalCoefficient_difference_bound hlu hρ m hcell s B hbound hz i a b hab hq)
+
 /-- The common N01 loss controls actual total coefficient jets on any
 fixed inner strip lying in one actual radial cell. The constant is
 selected before the state, component selector, derivative split, and
@@ -208,34 +295,10 @@ theorem localizedOriginalCoefficient_fixed_loss_bound_of_n01
     {l u ρ : ℝ} (hlu : l ≤ u) (hρ : 0 < ρ)
     (hphysical : Ioo (l - ρ) (u + ρ) ⊆ Ioo D.a D.b)
     (m : ℕ) (hcell : Ioo l u ⊆ D.cells m) (s : ℕ) :
-    ∃ A : ℝ, 1 ≤ A ∧ ∀ z ∈ stateNeighborhood S C base ε,
-      stateSector S z.1 → ∀ i : Fin 3, ∀ a b : ℕ, a + b ≤ s →
-      ∀ q ∈ Ioo l u ×ˢ (univ : Set ℝ),
-        |mixedDerivative a b (localizedOriginalCoefficient D S C hlu hρ z i) q| ≤
-          A * (1 + pairGrading (stateGrading S) realGrading (s + loss)
-            (z - (C.referenceState, 0))) := by
-  let zref : AnnularState S × ℝ := (C.referenceState, 0)
-  let K : (AnnularState S × ℝ) → Fin 3 → PolarPoint → ℝ :=
-    localizedOriginalCoefficient D S C hlu hρ
-  have hzref : zref ∈ stateNeighborhood S C base ε :=
-    reference_mem_stateNeighborhood S C base hN.2.1
-  have hsref : stateSector S zref.1 := hN.2.2.1.stateSector
-  have hKref (i : Fin 3) : ContDiff ℝ ∞ (K zref i) :=
-    contDiff_localizedOriginalCoefficient hS hT hN hlu hρ hphysical hzref hsref i
-  have hangle (i : Fin 3) (r θ : ℝ) : K zref i (r, θ) = K zref i (r, 0) := by
-    exact originalCoefficientComponent_zeroParameter_angle_invariant D S C C.referenceState i
-      (circleFlowSmoothTimeClamp l u ρ hlu hρ r) θ 0
+    ∃ A : ℝ, 1 ≤ A ∧
+      LocalizedOriginalCoefficientBoundAtOrder D S C base loss ε hlu hρ s A := by
   obtain ⟨B, _hB, hbound⟩ := coefficientFamily_value_bound_of_n01 hN s
-  let A₀ : ℝ := B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B
-  apply exists_coefficient_jet_bound_of_difference K zref
-    (stateNeighborhood S C base ε) (fun z => stateSector S z.1)
-    (fun z => pairGrading (stateGrading S) realGrading (s + loss) (z - zref))
-    l u s A₀ (fun z => apply_nonneg _ _)
-    (fun z hz hs i => contDiff_localizedOriginalCoefficient
-      hS hT hN hlu hρ hphysical hz hs i) hKref hangle
-  intro z hz hsector i a b hab q hq
-  exact (congrArg abs
-    (localizedOriginalCoefficient_difference_jet D S C hlu hρ z i a b hq)).trans_le
-      (hbound m i a b q hab (hcell hq.1) z hz)
+  exact localizedOriginalCoefficient_bound_of_value_bound
+    hS hT hN hlu hρ hphysical m hcell s B hbound
 
 end ContinuousFlexibility.Analysis

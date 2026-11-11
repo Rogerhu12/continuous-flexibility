@@ -95,7 +95,7 @@ theorem airyFirstIntegral_endpoint_of_actual_ode
   have hu (r : ℝ) (hr : r ∈ Ioo a b) :
       DifferentiableAt ℝ (airyFirstIntegral F σ) (r, u r) := by
     obtain ⟨hF, _, _, hξ, _⟩ := hregular r hr
-    exact hF.snd.add (differentiableAt_const.mul
+    exact hF.snd.add ((differentiableAt_const σ).mul
       ((hasDerivAt_airyTravelPrimitive hξ).differentiableAt.comp (r, u r) hF.fst))
   have hpde (r : ℝ) (hr : r ∈ Ioo a b) :
       radialPartial (airyFirstIntegral F σ) (r, u r) =

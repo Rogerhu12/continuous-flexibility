@@ -143,7 +143,8 @@ theorem exists_csBound_extendedRoot_differences (s : ℕ) :
         -rootOdd (fun y => G y - G₀ y) q
       rw [extendedRootOddCoefficient_of_nonneg G hq.1.le,
         extendedRootOddCoefficient_of_nonneg G₀ hq.1.le]
-      simp only [rootOddCoefficient, rootOdd, if_neg hq.1.ne']
+      have hqpos : 0 < q.1 := mem_Ioi.mp hq.1
+      simp only [rootOddCoefficient, rootOdd, if_neg hqpos.ne']
       ring
     rw [iteratedFDeriv_eqOn_of_isOpen (isOpen_Ioi.prod isOpen_univ)
       he n (show p ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hp.1.1, mem_univ _⟩)]

@@ -35,7 +35,7 @@ theorem hasDerivAt_boundaryTaylorPolynomial_radial
     have hj := (((hasDerivAt_id r).sub_const c).fun_pow (j + 1)).const_mul
       (A (j + 1) θ / ((j + 1).factorial : ℝ))
     apply hj.congr_deriv
-    simp only [Nat.add_sub_cancel, mul_one]
+    simp only [id_eq, Nat.add_sub_cancel, mul_one]
     rw [Nat.factorial_succ, Nat.cast_mul, Nat.cast_add, Nat.cast_one]
     have hfact : (j.factorial : ℝ) ≠ 0 := Nat.cast_ne_zero.mpr j.factorial_ne_zero
     have hsucc : (j : ℝ) + 1 ≠ 0 := by positivity
