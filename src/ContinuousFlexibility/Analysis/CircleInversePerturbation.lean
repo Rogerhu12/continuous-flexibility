@@ -38,8 +38,10 @@ theorem smoothTameOn_neg_diagonal
     -ContinuousLinearMap.id ℝ (ProjectiveLimit G g)
   have hN : IsTameLinear p p N.toLinearMap 0 0 := (IsTameLinear.id p).neg
   have hneg : SmoothTameOn p p univ (fun e : ProjectiveLimit G g => -e) := by
-    simpa only [N, ContinuousLinearMap.neg_apply, ContinuousLinearMap.id_apply] using
-      smoothTameOn_continuousLinear N hN
+    refine smoothTameOn_congr (smoothTameOn_continuousLinear N hN) ?_
+    intro e he
+    change (-ContinuousLinearMap.id ℝ (ProjectiveLimit G g)) e = -e
+    simp only [neg_apply, ContinuousLinearMap.id_apply]
   exact smoothTameOn_comp_topological hp ht ht hU isOpen_univ
     (fun _ _ => mem_univ _) hvalue hneg
 
