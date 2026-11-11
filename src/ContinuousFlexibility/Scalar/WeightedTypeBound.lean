@@ -79,7 +79,7 @@ theorem scalarStateProfile_uniform_bound_on_ball
       |1 + angularMean (fun θ => (S.height scalarBeta).decode x.1.1.1 (r, θ))| ≤ 1 + Cm := by
     calc
       _ ≤ |(1 : ℝ)| + |angularMean (fun θ => (S.height scalarBeta).decode x.1.1.1 (r, θ))| :=
-        abs_add _ _
+        abs_add_le _ _
       _ ≤ 1 + Cm := by simpa only [abs_one] using add_le_add_left hm 1
   have hw : 0 < D.w r := hD.choose_spec.1.2.2.2.2.1 r hr
   rw [scalarStateProfile, abs_mul, abs_of_pos hw]

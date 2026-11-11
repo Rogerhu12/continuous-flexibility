@@ -38,8 +38,9 @@ private theorem fin_prod_erase_cons_succ {E : Type*} {n : ℕ}
     (L : E → ℝ) (x : E) (v : Fin n → E) (i : Fin n) :
     (∏ j ∈ Finset.univ.erase i.succ, L (Fin.cons (α := fun _ : Fin (n + 1) => E) x v j)) =
       L x * ∏ j ∈ Finset.univ.erase i, L (v j) := by
+  have hzero : (0 : Fin (n + 1)) ≠ i.succ := by omega
   rw [fin_prod_erase_eq_ite, Fin.prod_univ_succ, fin_prod_erase_eq_ite]
-  simp
+  simp [hzero]
 
 theorem scalarOneHighCost_cons {E : Type*} {n : ℕ}
     (L H : E → ℝ) (x : E) (v : Fin n → E) :

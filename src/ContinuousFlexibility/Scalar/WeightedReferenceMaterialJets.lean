@@ -73,7 +73,9 @@ theorem referenceInverse_material_subpower
   intro n ε hε
   obtain ⟨K, hK, hb⟩ := referenceInverseJet_le_subpowerM ⟨B, hB⟩ hT n hε
   refine ⟨K, hK.le, fun r hr => ?_⟩
-  simpa only [scalar_reference_radialJet_eq_iteratedDeriv] using hb r hr
+  change |iteratedDeriv n (fun t => (D.w t)⁻¹) r| ≤ K * T.M r ^ ε
+  rw [← scalar_reference_radialJet_eq_iteratedDeriv]
+  exact hb r hr
 
 theorem referenceProfile_material_subpower
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) :

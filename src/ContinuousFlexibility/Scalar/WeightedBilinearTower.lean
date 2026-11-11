@@ -191,7 +191,9 @@ theorem fixedNeighborhoodSmoothTame_bilinearMultilinear
       bilinearPairOfMultilinear_apply B x y]
     apply (hbound x.1 y.2).trans
     apply mul_le_mul_of_nonneg_left _ hC
-    simp only [tamePairGrading_apply]
+    change p (s + loss) x.1 * p base y.2 + p base x.1 * p (s + loss) y.2 ≤
+      (p (s + loss) x.1 + p (s + loss) x.2) * (p base y.1 + p base y.2) +
+        (p base x.1 + p base x.2) * (p (s + loss) y.1 + p (s + loss) y.2)
     apply add_le_add
     · exact mul_le_mul (le_add_of_nonneg_right (apply_nonneg _ _))
         (le_add_of_nonneg_left (apply_nonneg _ _)) (apply_nonneg _ _)

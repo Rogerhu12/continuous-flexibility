@@ -78,7 +78,8 @@ theorem normalizedCompositionMonomial_bound
       funext p
       simp only [normalizedCompositionMonomial, materialFamilyMonomial,
         normalizedMaterialJetFamily, normalizedMaterialJet, mixedDerivative,
-        iteratedDeriv_zero, Fin.prod_univ_zero, Fin.prod_univ_one, mul_one]
+        iteratedDeriv_zero, Fin.prod_univ_zero, Finset.prod_const, Finset.card_univ,
+        Fintype.card_fin, pow_one, mul_one]
       change g p * T.M (T.radius p.1) ^ c * T.H (T.radius p.1) ^ (-γ) * F (U p) =
         (g p * (F (U p) / U p)) * T.M (T.radius p.1) ^ c *
           (T.H (T.radius p.1) ^ (-γ) * U p)
@@ -104,8 +105,7 @@ theorem normalizedCompositionMonomial_bound
       g p * iteratedDeriv (k + 1) F (U p) * T.H (T.radius p.1) ^ ((k : ℝ) * γ)
     have hc : AEStronglyMeasurable coefficient materialCylinderMeasure :=
       (hg.mul (hn.continuous.comp hU).aestronglyMeasurable).mul
-        (((contDiff_materialH_rpow hT ((k : ℝ) * γ)).comp contDiff_fst).continuous
-          .aestronglyMeasurable)
+        (((contDiff_materialH_rpow hT ((k : ℝ) * γ)).comp contDiff_fst).continuous.aestronglyMeasurable)
     have hcb (p : PolarPoint) :
         |coefficient p| ≤ (K * L * H) * T.M (T.radius p.1) := by
       change |g p * iteratedDeriv (k + 1) F (U p) *

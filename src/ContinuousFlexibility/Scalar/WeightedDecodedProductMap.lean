@@ -86,8 +86,12 @@ private theorem decodedProductField_productBound
     mul_nonneg hC (Nat.cast_nonneg _), ?_⟩
   intro u
   rw [decodedProductFieldMultilinear_apply]
-  have hsum := oneHigh_le_card_product
-    (gradedSeminorm_monotone (fun n => A.level n) A.bond) base (s + loss) u
+  have hsum :
+      (∑ i, A.grading (s + loss) (u i) *
+        ∏ j ∈ Finset.univ.erase i, A.grading base (u j)) ≤
+      (Fintype.card (Fin (k + 1)) : ℝ) * ∏ i, A.grading (max base (s + loss)) (u i) :=
+    oneHigh_le_card_product (p := A.grading)
+      (gradedSeminorm_monotone (fun n => A.level n) A.bond) base (s + loss) u
   exact ((hCu u).trans (mul_le_mul_of_nonneg_left hsum hC)).trans_eq (by
     simp only [Fintype.card_fin]
     ring)
@@ -98,7 +102,7 @@ def decodedProductMap
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
     (hinterp : HasInterpolation A.grading) (hγ : 0 ≤ γ) (k : ℕ) :
     ContinuousMultilinearMap ℝ (fun _ : Fin (k + 1) => A.Space) A.Space :=
-  liftContinuousMultilinear hA (decodedProductFieldMultilinear A k)
+  liftContinuousMultilinear (p := A.grading) hA (decodedProductFieldMultilinear A k)
     (decodedProductField_heightMember hT hA hinterp hγ k)
     (withSeminorms_graded (fun n => A.level n) A.bond)
     (decodedProductField_productBound hT hA hinterp hγ k)
@@ -109,7 +113,12 @@ theorem decode_decodedProductMap
     (u : Fin (k + 1) → A.Space) :
     A.decode (decodedProductMap hT hA hinterp hγ k u) =
       fun p => ∏ i, A.decode (u i) p := by
-  rw [decodedProductMap, decode_liftContinuousMultilinear, decodedProductFieldMultilinear_apply]
+  exact (decode_liftContinuousMultilinear (p := A.grading) hA
+    (decodedProductFieldMultilinear A k)
+    (decodedProductField_heightMember hT hA hinterp hγ k)
+    (withSeminorms_graded (fun n => A.level n) A.bond)
+    (decodedProductField_productBound hT hA hinterp hγ k) u).trans
+      (decodedProductFieldMultilinear_apply k u)
 
 theorem decodedProductMap_apply
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)

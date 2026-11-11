@@ -100,10 +100,10 @@ theorem HasProjectiveJetsOn.compositionTerm_hasLineDerivAt_generic
     (hu : HasProjectiveJetsOn u J U) (hv : HasProjectiveJetsOn v K V)
     (hmap : MapsTo u U V) {n : ℕ} (part : OrderedFinpartition n)
     {x : X} (hx : x ∈ U) (w : X) (vs : Fin n → X) :
-    HasProjectiveLineDerivAt (fun y => projectiveCompositionTerm u J K part y vs)
-      (projectiveCompositionTerm u J K (part.extend none) x (Fin.cons w vs) +
+    HasProjectiveLineDerivAt (fun y : X => projectiveCompositionTerm (X := X) (Y := Y) (Z := Z) u J K part y vs)
+      (projectiveCompositionTerm (X := X) (Y := Y) (Z := Z) u J K (part.extend none) x (Fin.cons w vs) +
         ∑ i : Fin part.length,
-          projectiveCompositionTerm u J K (part.extend (some i)) x (Fin.cons w vs)) x w := by
+          projectiveCompositionTerm (X := X) (Y := Y) (Z := Z) u J K (part.extend (some i)) x (Fin.cons w vs)) x w := by
   obtain ⟨W, ⟨hW, hWc⟩, hWV⟩ :=
     (LocallyConvexSpace.convex_basis (𝕜 := ℝ) (u x)).mem_iff.mp (hV.mem_nhds (hmap hx))
   have hsub : interior W ⊆ V := interior_subset.trans hWV
@@ -141,23 +141,34 @@ theorem HasProjectiveJetsOn.comp_generic
     (hU : IsOpen U) (hV : IsOpen V)
     (hu : HasProjectiveJetsOn u J U) (hv : HasProjectiveJetsOn v K V)
     (hmap : MapsTo u U V) :
-    HasProjectiveJetsOn (v ∘ u) (projectiveCompositionJets u J K) U := by
+    HasProjectiveJetsOn (v ∘ u) (projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K) U := by
   classical
-  refine ⟨?_, ?_, ?_⟩
-  · intro x hx
+  have hzero : ∀ x ∈ U,
+      projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K 0 x Fin.elim0 = v (u x) := by
+    intro x hx
     rw [projectiveCompositionJets_apply, Fintype.sum_unique]
     change K 0 (u x) (fun i : Fin 0 => J 1 x (fun _ => Fin.elim0 i)) = v (u x)
     convert hv.1 (u x) (hmap hx) using 2
-  · intro n
+  have hcont : ∀ n, ContinuousOn
+      (fun z : X × (Fin n → X) =>
+        projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K n z.1 z.2)
+      (U ×ˢ univ) := by
+    intro n
     simp only [projectiveCompositionJets_apply]
     exact continuousOn_finsetSum Finset.univ
       (fun part _ => hu.continuousOn_compositionTerm hv hmap part)
-  · intro n x hx w vs
+  have hderiv : ∀ n (x : X), x ∈ U → ∀ w vs,
+      HasProjectiveLineDerivAt
+        (fun y : X => projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K n y vs)
+        (projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K (n + 1) x
+          (Fin.cons w vs)) x w := by
+    intro n x hx w vs
     rw [projectiveCompositionJets_succ]
     have h := HasProjectiveCurveDerivAt.finset_sum Finset.univ
       (fun part _ => HasProjectiveJetsOn.compositionTerm_hasLineDerivAt_generic
         hU hV hu hv hmap part hx w vs)
     simpa only [HasProjectiveLineDerivAt, projectiveCompositionJets_apply] using h
+  exact ⟨hzero, hcont, hderiv⟩
 
 end Composition
 

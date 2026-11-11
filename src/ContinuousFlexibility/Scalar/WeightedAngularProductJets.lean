@@ -33,7 +33,10 @@ theorem materialPullback_scalarAngularProduct
   calc
     _ = fun p => materialPullback T γ f p *
         materialPullback T γ (angularPartial g) p := by
-      simpa [scalarAngularProduct, Fin.prod_univ_two] using
+      change materialPullback T (2 * γ) (fun p => f p * angularPartial g p) =
+        fun p => materialPullback T γ f p * materialPullback T γ (angularPartial g) p
+      simpa only [Fin.prod_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
+        Nat.cast_ofNat] using
         materialPullback_prod hT γ (![f, angularPartial g] : Fin 2 → PolarPoint → ℝ)
     _ = _ := by rw [materialPullback_angularPartial hT hg]
 

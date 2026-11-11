@@ -74,9 +74,13 @@ theorem heightMember_radial_of_compact_support
       have hJc : HasCompactSupport J := (scalar_hasCompactSupport_iteratedDeriv hFc a).mul_left
       have hJmem : MemLp J 2 (volume : Measure ℝ) :=
         hJ.continuous.memLp_of_hasCompactSupport hJc
-      rw [materialCylinderMeasure_eq_prod]
-      simpa only [weightedPhysicalJet, materialPullback, mixedDerivative,
-        iteratedDeriv_zero, F, J] using hJmem.comp_fst angleMeasure
+      have he : weightedPhysicalJet T γ a 0 c (fun p => k p.1) =
+          fun p => J p.1 := by
+        funext p
+        simp only [weightedPhysicalJet, materialPullback, mixedDerivative,
+          iteratedDeriv_zero, F, J]
+      rw [he, materialCylinderMeasure_eq_prod]
+      exact hJmem.comp_fst angleMeasure
     | succ b =>
       have he : weightedPhysicalJet T γ a (b + 1) c (fun p => k p.1) = 0 := by
         funext p

@@ -115,6 +115,87 @@ theorem scalarCutoff_deriv_le_reference
   · rw [hzero r hrK, abs_zero]
     exact mul_nonneg (le_max_right _ _) (hwpos r hr).le
 
+/-- The normalized mean needs only the actual order-four input grading. -/
+theorem scalarHeight_mean_low_jet_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ v : ScalarHeightSpace S, ∀ r ∈ Ioo D.a D.b,
+      |angularMean (fun θ => (S.height scalarBeta).decode v (r, θ))| ≤
+        C * scalarHeightGrading S 4 v := by
+  obtain ⟨M, hM, hMbound⟩ := referenceProfile_uniform_upper_bound hD
+  obtain ⟨C₀, hC₀, hC₀bound⟩ :=
+    scalarMixedDerivative_le_reference_grading hD hT hS 0 0 4 (by omega)
+  refine ⟨C₀ * M, mul_nonneg hC₀ hM, ?_⟩
+  intro v r hr
+  apply abs_angularMean_le_of_uniform_bound
+  intro θ
+  have hjet : |(S.height scalarBeta).decode v (r, θ)| ≤
+      C₀ * scalarHeightGrading S 4 v * D.w r := by
+    simpa only [mixedDerivative, iteratedDeriv_zero] using
+      hC₀bound v (r, θ) ⟨hr, mem_univ _⟩
+  calc
+    _ ≤ C₀ * scalarHeightGrading S 4 v * D.w r := hjet
+    _ ≤ C₀ * scalarHeightGrading S 4 v * M :=
+      mul_le_mul_of_nonneg_left (hMbound r hr) (mul_nonneg hC₀ (apply_nonneg _ _))
+    _ = (C₀ * M) * scalarHeightGrading S 4 v := by ring
+
+theorem scalarHeight_radial_low_jet_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ v : ScalarHeightSpace S, ∀ p ∈ annularOpen D,
+      |radialPartial ((S.height scalarBeta).decode v) p| ≤
+        C * scalarHeightGrading S 4 v * D.w p.1 := by
+  obtain ⟨C, hC, hbound⟩ :=
+    scalarMixedDerivative_le_reference_grading hD hT hS 1 0 4 (by omega)
+  refine ⟨C, hC, ?_⟩
+  intro v p hp
+  rw [radialPartial_eq_mixedDerivative_on (isOpen_Ioo.prod isOpen_univ)
+    ((hS.1 scalarBeta).2.2.2.1 v).1 hp]
+  exact hbound v p hp
+
+theorem scalarHeight_angular_low_jet_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ v : ScalarHeightSpace S, ∀ p ∈ annularOpen D,
+      |heightAngular ((S.height scalarBeta).decode v) p| ≤
+        C * scalarHeightGrading S 4 v := by
+  obtain ⟨M, hM, hMbound⟩ := referenceProfile_uniform_upper_bound hD
+  obtain ⟨Ct, hCt, hCtbound⟩ :=
+    scalarMixedDerivative_le_reference_grading hD hT hS 0 1 4 (by omega)
+  have ha : 0 < D.a := hD.choose_spec.1.1
+  refine ⟨Ct * M / D.a, div_nonneg (mul_nonneg hCt hM) ha.le, ?_⟩
+  intro v p hp
+  rw [heightAngular_eq_mixedDerivative_on (isOpen_Ioo.prod isOpen_univ)
+    ((hS.1 scalarBeta).2.2.2.1 v).1 hp]
+  have hb : |mixedDerivative 0 1 ((S.height scalarBeta).decode v) p| ≤
+      (Ct * M) * scalarHeightGrading S 4 v := by
+    calc
+      _ ≤ Ct * scalarHeightGrading S 4 v * D.w p.1 := hCtbound v p hp
+      _ ≤ Ct * scalarHeightGrading S 4 v * M :=
+        mul_le_mul_of_nonneg_left (hMbound p.1 hp.1) (mul_nonneg hCt (apply_nonneg _ _))
+      _ = (Ct * M) * scalarHeightGrading S 4 v := by ring
+  exact scalar_div_radius_bound hD hp.1 (mul_nonneg hCt hM) (apply_nonneg _ _) hb
+
+theorem scalarHeight_angularSecond_low_jet_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ v : ScalarHeightSpace S, ∀ p ∈ annularOpen D,
+      |angularPartial (heightAngular ((S.height scalarBeta).decode v)) p| ≤
+        C * scalarHeightGrading S 4 v * D.w p.1 := by
+  obtain ⟨Ctt, hCtt, hCttbound⟩ :=
+    scalarMixedDerivative_le_reference_grading hD hT hS 0 2 4 (by omega)
+  have ha : 0 < D.a := hD.choose_spec.1.1
+  refine ⟨Ctt / D.a, div_nonneg hCtt ha.le, ?_⟩
+  intro v p hp
+  rw [angularPartial_heightAngular_eq_mixedDerivative_on (isOpen_Ioo.prod isOpen_univ)
+    ((hS.1 scalarBeta).2.2.2.1 v).1 hp (ha.trans hp.1.1).ne']
+  have hw : 0 ≤ D.w p.1 := (hD.choose_spec.1.2.2.2.2.1 p.1 hp.1).le
+  have hb : |mixedDerivative 0 2 ((S.height scalarBeta).decode v) p| ≤
+      Ctt * (scalarHeightGrading S 4 v * D.w p.1) := by
+    simpa only [mul_assoc] using hCttbound v p hp
+  simpa only [mul_assoc] using
+    scalar_div_radius_bound hD hp.1 hCtt (mul_nonneg (apply_nonneg _ _) hw) hb
+
 /-- The four quantitative decoder bounds used by the geometry ball all hold
 at the same actual input grading, namely order four. -/
 theorem scalarHeight_low_jet_bounds
@@ -133,56 +214,10 @@ theorem scalarHeight_low_jet_bounds
       (∀ v : ScalarHeightSpace S, ∀ p ∈ annularOpen D,
         |angularPartial (heightAngular ((S.height scalarBeta).decode v)) p| ≤
           Ctt * scalarHeightGrading S 4 v * D.w p.1) := by
-  obtain ⟨M, hM, hMbound⟩ := referenceProfile_uniform_upper_bound hD
-  obtain ⟨C₀, hC₀, hC₀bound⟩ :=
-    scalarMixedDerivative_le_reference_grading hD hT hS 0 0 4 (by omega)
-  obtain ⟨Cr, hCr, hCrbound⟩ :=
-    scalarMixedDerivative_le_reference_grading hD hT hS 1 0 4 (by omega)
-  obtain ⟨Ct, hCt, hCtbound⟩ :=
-    scalarMixedDerivative_le_reference_grading hD hT hS 0 1 4 (by omega)
-  obtain ⟨Ctt, hCtt, hCttbound⟩ :=
-    scalarMixedDerivative_le_reference_grading hD hT hS 0 2 4 (by omega)
-  have ha : 0 < D.a := hD.choose_spec.1.1
-  have hU : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
-  have hsmooth (v : ScalarHeightSpace S) :
-      ContDiffOn ℝ ∞ ((S.height scalarBeta).decode v) (annularOpen D) :=
-    ((hS.1 scalarBeta).2.2.2.1 v).1
-  refine ⟨C₀ * M, Cr, Ct * M / D.a, Ctt / D.a,
-    mul_nonneg hC₀ hM, hCr, div_nonneg (mul_nonneg hCt hM) ha.le,
-    div_nonneg hCtt ha.le, ?_, ?_, ?_, ?_⟩
-  · intro v r hr
-    apply abs_angularMean_le_of_uniform_bound
-    intro θ
-    have hjet : |(S.height scalarBeta).decode v (r, θ)| ≤
-        C₀ * scalarHeightGrading S 4 v * D.w r := by
-      simpa only [mixedDerivative, iteratedDeriv_zero] using
-        hC₀bound v (r, θ) ⟨hr, mem_univ _⟩
-    calc
-      _ ≤ C₀ * scalarHeightGrading S 4 v * D.w r := hjet
-      _ ≤ C₀ * scalarHeightGrading S 4 v * M :=
-        mul_le_mul_of_nonneg_left (hMbound r hr) (mul_nonneg hC₀ (apply_nonneg _ _))
-      _ = (C₀ * M) * scalarHeightGrading S 4 v := by ring
-  · intro v p hp
-    rw [radialPartial_eq_mixedDerivative_on hU (hsmooth v) hp]
-    exact hCrbound v p hp
-  · intro v p hp
-    rw [heightAngular_eq_mixedDerivative_on hU (hsmooth v) hp]
-    have hb : |mixedDerivative 0 1 ((S.height scalarBeta).decode v) p| ≤
-        (Ct * M) * scalarHeightGrading S 4 v := by
-      calc
-        _ ≤ Ct * scalarHeightGrading S 4 v * D.w p.1 := hCtbound v p hp
-        _ ≤ Ct * scalarHeightGrading S 4 v * M :=
-          mul_le_mul_of_nonneg_left (hMbound p.1 hp.1) (mul_nonneg hCt (apply_nonneg _ _))
-        _ = (Ct * M) * scalarHeightGrading S 4 v := by ring
-    exact scalar_div_radius_bound hD hp.1 (mul_nonneg hCt hM) (apply_nonneg _ _) hb
-  · intro v p hp
-    rw [angularPartial_heightAngular_eq_mixedDerivative_on hU (hsmooth v) hp
-      (ha.trans hp.1.1).ne']
-    have hw : 0 ≤ D.w p.1 := (hD.choose_spec.1.2.2.2.2.1 p.1 hp.1).le
-    have hb : |mixedDerivative 0 2 ((S.height scalarBeta).decode v) p| ≤
-        Ctt * (scalarHeightGrading S 4 v * D.w p.1) := by
-      simpa only [mul_assoc] using hCttbound v p hp
-    simpa only [mul_assoc] using
-      scalar_div_radius_bound hD hp.1 hCtt (mul_nonneg (apply_nonneg _ _) hw) hb
+  obtain ⟨Cm, hCm, hm⟩ := scalarHeight_mean_low_jet_bound hD hT hS
+  obtain ⟨Cr, hCr, hr⟩ := scalarHeight_radial_low_jet_bound hD hT hS
+  obtain ⟨Ct, hCt, ht⟩ := scalarHeight_angular_low_jet_bound hD hT hS
+  obtain ⟨Ctt, hCtt, htt⟩ := scalarHeight_angularSecond_low_jet_bound hD hT hS
+  exact ⟨Cm, Cr, Ct, Ctt, hCm, hCr, hCt, hCtt, hm, hr, ht, htt⟩
 
 end ContinuousFlexibility.Statements

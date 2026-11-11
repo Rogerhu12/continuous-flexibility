@@ -93,7 +93,7 @@ def oddProductPrimitiveFieldMultilinear
   exact {
     toFun := fun u => scalarOddProductPrimitive (A.decode (u 0)) (A.decode (u 1))
     map_update_add' := by
-      intro u i x y
+      intro _ u i x y
       fin_cases i
       · simpa only [Function.update_self, Function.update_of_ne
           (by decide : (1 : Fin 2) ≠ 0), map_add] using
@@ -102,7 +102,7 @@ def oddProductPrimitiveFieldMultilinear
           (by decide : (0 : Fin 2) ≠ 1), map_add] using
           scalarOddProductPrimitive_add_right (hc (u 0)) (hc x) (hc y)
     map_update_smul' := by
-      intro u i c x
+      intro _ u i c x
       fin_cases i
       · simpa only [Function.update_self, Function.update_of_ne
           (by decide : (1 : Fin 2) ≠ 0), map_smul, RingHom.id_apply] using
