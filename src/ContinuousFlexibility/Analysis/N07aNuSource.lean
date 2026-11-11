@@ -77,7 +77,12 @@ theorem n07aNuSectorProjectionCLM_grading_le (S : PhysicalSpacesData) (n : ℕ)
     scalarBeta]
   have hκ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2.1
   have hα := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) z.1.val.2.2.2
-  linarith only [hκ, hα]
+  have hheight :
+      (pairGrading (S.height (3 / 4 : ℝ)).grading realGrading n) z.1.val.1 =
+        ((S.height (3 / 4 : ℝ)).grading n) z.1.val.1.1 + ‖z.1.val.1.2‖ := by
+    simpa only [realGrading, coe_normSeminorm] using
+      pairGrading_apply (S.height (3 / 4 : ℝ)).grading realGrading n z.1.val.1
+  linarith only [hκ, hα, hheight]
 
 theorem n07aNuSectorProjectionCLM_center
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
