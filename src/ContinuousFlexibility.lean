@@ -337,3 +337,7 @@ import ContinuousFlexibility.Radial.TridiagonalDominance
 import ContinuousFlexibility.Radial.WeightKernelBounds
 import ContinuousFlexibility.Radial.WeightedSchurTest
 import ContinuousFlexibility.Radial.ZeroModePrimitive
+import ContinuousFlexibility.Radial.TailEdgeGluing
+import ContinuousFlexibility.Radial.TailActualNodeCoefficients
+import ContinuousFlexibility.Radial.TailClassicalRegularity
+import ContinuousFlexibility.Analysis.IntervalWeakPrimitive

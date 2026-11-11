@@ -21,7 +21,7 @@ with either adjacent mass. -/
 theorem tailNode_coupling_le_eighth_mass {Λ K μ R c : ℝ}
     (hR : 0 < R) (hK : 32 ≤ K) (hlarge : K ≤ Λ * μ * R)
     (hc : c ≤ 2 / R) : c ≤ Λ * μ / 8 := by
-  apply (mul_le_mul_right hR).mp
+  apply (mul_le_mul_iff_right₀ hR).mp
   have hcR : c * R ≤ 2 := (le_div_iff₀ hR).mp hc
   nlinarith only [hcR, hK, hlarge]
 
@@ -203,7 +203,8 @@ theorem exists_tailNaturalNodeLine_bounds {b c μ R : ℕ → ℝ} {Λ K : ℝ}
       c n / b (n + 1) * tailFractionLimit
           (fun k => c k ^ 2 / (b k * b (k + 1))) hε n ≤
           (4 / (Λ * μ (n + 1) * R n)) * 2 :=
-        mul_le_mul hcoeff ht.2 (zero_le_one.trans ht.1) (by positivity)
+        mul_le_mul hcoeff ht.2 (zero_le_one.trans ht.1)
+          (div_nonneg (by norm_num) (mul_pos (mul_pos hΛ (hμ (n + 1))) (hR n)).le)
       _ = 8 / (Λ * μ (n + 1) * R n) := by ring
   have hmassstep (n : ℕ) : μ (n + 1) * |y (n + 1)| ≤
       (8 / K) * (μ n * |y n|) := by
@@ -225,7 +226,8 @@ theorem exists_tailNaturalNodeLine_bounds {b c μ R : ℕ → ℝ} {Λ K : ℝ}
     exact tailNode_geometric_bound hmasspos hq hmassstep hmn
   · intro m n hmn
     have hyabs (k : ℕ) : 0 < |y k| := abs_pos.mpr (hypos k).ne'
-    have hfactor (k : ℕ) : 0 ≤ 8 / (Λ * μ (k + 1) * R k) := by positivity
+    have hfactor (k : ℕ) : 0 ≤ 8 / (Λ * μ (k + 1) * R k) :=
+      div_nonneg (by norm_num) (mul_pos (mul_pos hΛ (hμ (k + 1))) (hR k)).le
     have hprod := tailNode_ratio_le_prod hyabs hfactor hstep hmn
     have hmul := (div_le_iff₀ (hyabs m)).mp hprod
     simpa only [mul_comm] using hmul

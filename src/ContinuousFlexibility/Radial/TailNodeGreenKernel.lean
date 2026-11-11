@@ -66,7 +66,9 @@ theorem tail_jacobiOp_isSymmetric {β γ : ℕ → ℝ} {M N : ℝ}
   change ⟪diagOp β x + upOp γ x + downOp γ x, y⟫_ℝ =
     ⟪x, diagOp β y + upOp γ y + downOp γ y⟫_ℝ
   simp only [inner_add_left, inner_add_right]
-  rw [(tail_diagOp_isSymmetric hβ) x y, tail_inner_upOp hγ, tail_inner_downOp hγ]
+  have hd : ⟪diagOp β x, y⟫_ℝ = ⟪x, diagOp β y⟫_ℝ :=
+    (tail_diagOp_isSymmetric hβ) x y
+  rw [hd, tail_inner_upOp hγ, tail_inner_downOp hγ]
   ring
 
 /-- A right inverse of a symmetric Jacobi operator is symmetric. -/
@@ -150,7 +152,7 @@ theorem tailNodeGreen_equation {β γ : ℕ → ℝ} {M N : ℝ}
   rw [tail_jacobiOp_apply_succ hβ hγ] at h
   by_cases hnm : n + 1 = m
   · subst m
-    simpa only [tailNodeGreen, lp.single_apply_self, if_pos rfl] using h
+    simpa only [tailNodeGreen, lp.single_apply_self, if_pos rfl, ite_true] using h
   · rw [lp.single_apply_ne 2 m 1 hnm] at h
     simpa only [tailNodeGreen, if_neg hnm] using h
 
@@ -163,7 +165,7 @@ theorem tailNodeGreen_equation_zero {β γ : ℕ → ℝ} {M N : ℝ}
   rw [tail_jacobiOp_apply_zero hβ hγ] at h
   by_cases hm : 0 = m
   · subst m
-    simpa only [tailNodeGreen, lp.single_apply_self, if_pos rfl] using h
+    simpa only [tailNodeGreen, lp.single_apply_self, if_pos rfl, ite_true] using h
   · rw [lp.single_apply_ne 2 m 1 hm] at h
     simpa only [tailNodeGreen, if_neg hm] using h
 
