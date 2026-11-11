@@ -38,6 +38,7 @@ theorem outer_physical_decay_factor_le {C q : ℝ} (hC : 0 ≤ C) (n : ℕ)
       div_le_div_of_nonneg_left (by norm_num) (exp_pos _) hq
     _ = exp (log 8 - (2 * (n : ℝ) ^ 2 -
         C * ((n : ℝ) ^ (3 / 2 : ℝ) + n))) := by
+      symm
       rw [exp_sub, exp_log (by norm_num : (0 : ℝ) < 8)]
     _ ≤ _ := by
       apply exp_le_exp.mpr

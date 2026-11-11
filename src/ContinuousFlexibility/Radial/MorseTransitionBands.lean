@@ -419,7 +419,7 @@ including frequencies below the lower endpoint of its old transition band. -/
 theorem morseTransition_eventually_deep_of_upper (T : Statements.MorseChainData)
     {C : ℝ} (hC : 0 < C)
     (hd : ∀ n, T.index ≤ n → T.d n = morseChainInteger n) {ε : ℝ} (hε : 0 < ε) :
-    ∀ᶠ n : ℕ in atTop, ∀ j, T.index ≤ n →
+    ∀ᶠ n : ℕ in atTop, ∀ j : ℕ, T.index ≤ n →
       (j : ℝ) < Statements.radialFrequencyThreshold T C n → ∀ m, n < m →
         (j : ℝ) ^ 2 * Statements.morseChainA T m *
           sqrt (log (Statements.morseChainA T m / Statements.morseChainB T m)) < ε := by

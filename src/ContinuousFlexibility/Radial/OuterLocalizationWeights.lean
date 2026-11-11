@@ -87,7 +87,7 @@ theorem outer_coefficient_weight_nearby {A : ℝ} (hA : 0 ≤ A) :
       mul_le_mul_of_nonneg_right (outer_prefactor_le_envelope hi hC.le)
         (rpow_nonneg (exp_pos _).le _)
     _ = radialE i ^ (2 * C) := by
-      rw [← rpow_add (exp_pos _)]
+      rw [← rpow_add (show 0 < radialE i from exp_pos _)]
       congr 1
       ring
 
