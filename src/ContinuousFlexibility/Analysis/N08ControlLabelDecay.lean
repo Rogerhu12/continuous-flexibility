@@ -63,7 +63,7 @@ theorem n08_sample_weightedCoefficient_tendsto
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hdecay, _, _, hsamp, _, _⟩ := hdata
   obtain ⟨_, _, _, hleft, hright⟩ := hdecay 0 (γ / 16) (by positivity)
   have hweight : Tendsto (fun m => T.H (T.sample m) ^ (γ / 16)) cofinite (𝓝 0) := by
-    apply materialSample_tendsto_zero_of_endpoint_limits hT hD
+    apply materialSample_tendsto_zero_of_endpoint_limits (f := fun r : ℝ => T.H r ^ (γ / 16)) hT hD
     · simpa only [Real.rpow_zero, mul_one] using hleft
     · simpa only [Real.rpow_zero, mul_one] using hright
   obtain ⟨C0, hC0⟩ := hD
@@ -78,7 +78,7 @@ theorem n08_sample_weightedCoefficient_tendsto
       (materialSample_mem_radialCore hT hC0.2.1 (σ m)) (hsamp (σ m))
       ((abs_sub_comm _ _).trans_le (hindex m)) hm
   apply squeeze_zero' (Eventually.of_forall hnonneg) hbound
-  simpa only [mul_zero] using (hweight.comp hσ).const_mul K
+  simpa only [Function.comp_def, mul_zero] using (hweight.comp hσ).const_mul K
 
 private theorem n08_cofinite_limit_bounded {f : ℕ → ℝ}
     (hf : Tendsto f cofinite (𝓝 0)) : ∃ K : ℝ, 0 < K ∧ ∀ m, f m ≤ K := by

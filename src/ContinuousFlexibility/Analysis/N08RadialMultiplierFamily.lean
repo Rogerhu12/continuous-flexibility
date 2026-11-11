@@ -122,13 +122,20 @@ theorem n08_physicalNorm_radialMultiplier_family_bound
     ∃ C : ℝ, 0 ≤ C ∧ ∀ i, ∀ f : PolarPoint → ℝ, HeightMember D T γ f →
       physicalNorm T γ s (fun p => k i p.1 * f p) ≤
         C * physicalNorm T γ (s + loss) f := by
-  apply n08_physicalNorm_family_bound_of_operator_jets (loss := loss) ?_ s
+  apply n08_physicalNorm_family_bound_of_operator_jets
+    (D := D) (T := T) (γ := γ) (δ := γ) (loss := loss)
+    (op := fun i f p => k i p.1 * f p) ?_ s
   intro a b c
   obtain ⟨C, hC, hCb⟩ := n08_weightedRadialMultiplier_family_jet_bound (γ := γ)
     hT (fun i x => k i (T.radius x)) hk loss hkb a b c
   refine ⟨C, hC, fun i f hf => ?_⟩
-  simpa only [weightedPhysicalJet, materialPullback_radialMultiplier T γ (k i) f] using
-    hCb i f hf
+  have heq : weightedPhysicalJet T γ a b c (fun p => k i p.1 * f p) =
+      fun p => T.M (T.radius p.1) ^ c *
+        mixedDerivative a b (fun q => k i (T.radius q.1) * materialPullback T γ f q) p := by
+    unfold weightedPhysicalJet
+    rw [materialPullback_radialMultiplier T γ (k i) f]
+  rw [heq]
+  exact hCb i f hf
 
 /-- The norm estimate applies to any actual realization of the multiplier;
 its constants are independent of the realization and family index. -/

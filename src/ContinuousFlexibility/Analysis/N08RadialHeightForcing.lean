@@ -70,6 +70,11 @@ private theorem n08_oneHigh_mixed_height_parameter
     oneHighVariationWeight (pairGrading p realGrading) base high (0 : E × ℝ)
       (Fin.cons (v, (0 : ℝ)) (Fin.cons ((0 : E), (1 : ℝ)) Fin.elim0)) =
       2 * p base v + p high v := by
+  have hvector : Fin.cons (v, (0 : ℝ)) (Fin.cons ((0 : E), (1 : ℝ)) Fin.elim0) =
+      ![(v, (0 : ℝ)), ((0 : E), (1 : ℝ))] := by
+    funext i
+    fin_cases i <;> rfl
+  rw [hvector]
   rw [oneHighVariationWeight, oneHigh_fin_two]
   simp [Fin.prod_univ_two, pairGrading, realGrading] <;> ring
 

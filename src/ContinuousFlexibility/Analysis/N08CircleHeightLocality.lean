@@ -53,20 +53,10 @@ theorem n08CircleDiagonal_eq_of_local_height
     hasDerivAt_iff_tendsto_slope_zero.mpr
       ((n08CircleColumn_hasLineDerivAt hS hN.2.2.1 hR hy hsy
         (n08ControlBasis hS m)).clm_comp (n08ControlMeanCoordinate S m))
-  have hcX : Continuous (fun t : ℝ => (X t, q)) :=
-    (continuous_const.add (continuous_id.smul continuous_const)).prodMk continuous_const
-  have hcY : Continuous (fun t : ℝ => (Y t, q')) :=
-    (continuous_const.add (continuous_id.smul continuous_const)).prodMk continuous_const
-  have hX : ∀ᶠ t : ℝ in 𝓝 0, (X t, q) ∈ stateNeighborhood S C base ε := by
-    have h := (hcX.continuousAt (x := 0)).preimage_mem_nhds
-      ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds
-        (by simpa only [X, n08StateSMul, n08RealSMul, zero_smul, add_zero] using hx))
-    exact h
-  have hY : ∀ᶠ t : ℝ in 𝓝 0, (Y t, q') ∈ stateNeighborhood S C base ε := by
-    have h := (hcY.continuousAt (x := 0)).preimage_mem_nhds
-      ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds
-        (by simpa only [Y, n08StateSMul, n08RealSMul, zero_smul, add_zero] using hy))
-    exact h
+  have hX : ∀ᶠ t : ℝ in 𝓝 0, (X t, q) ∈ stateNeighborhood S C base ε :=
+    n08_affine_parameter_eventually x v q (n08_isOpen_stateNeighborhood S C base ε) hx
+  have hY : ∀ᶠ t : ℝ in 𝓝 0, (Y t, q') ∈ stateNeighborhood S C base ε :=
+    n08_affine_parameter_eventually y v q' (n08_isOpen_stateNeighborhood S C base ε) hy
   have hsX (t : ℝ) : stateSector S (X t) :=
     (stateSectorSubmodule S).add_mem hsx
       ((stateSectorSubmodule S).smul_mem t (n08ControlBasis_direction_sector hS m))
@@ -74,31 +64,29 @@ theorem n08CircleDiagonal_eq_of_local_height
     (stateSectorSubmodule S).add_mem hsy
       ((stateSectorSubmodule S).smul_mem t (n08ControlBasis_direction_sector hS m))
   have hUX (t : ℝ) : stateU S (X t) = stateU S x := by
-    apply congrArg (heightPairField S)
-    simp only [X, v, n08StateSMul, n08RealSMul, Prod.fst_add, Prod.fst_smul,
-      smul_zero, add_zero]
+    exact congrArg (heightPairField S)
+      (n08_kappaLine_fixed_coordinates S x (n08ControlBasis hS m) t).1
   have hUY (t : ℝ) : stateU S (Y t) = stateU S y := by
-    apply congrArg (heightPairField S)
-    simp only [Y, v, n08StateSMul, n08RealSMul, Prod.fst_add, Prod.fst_smul,
-      smul_zero, add_zero]
+    exact congrArg (heightPairField S)
+      (n08_kappaLine_fixed_coordinates S y (n08ControlBasis hS m) t).1
   have heq : fx =ᶠ[𝓝 0] fy := by
     filter_upwards [hX, hY] with t hXt hYt
     have hνt : (X t).2.1 = (Y t).2.1 := by
-      simpa only [X, Y, v, n08StateSMul, n08RealSMul, Prod.snd_add, Prod.snd_smul,
-        Prod.fst_add, Prod.fst_smul, smul_zero, add_zero] using hν
+      exact (n08_kappaLine_fixed_coordinates S x (n08ControlBasis hS m) t).2.1.trans
+        (hν.trans (n08_kappaLine_fixed_coordinates S y (n08ControlBasis hS m) t).2.1.symm)
     have hκt : stateKappa S (X t) m = stateKappa S (Y t) m := by
-      simp only [X, Y, n08_stateKappa_add hS, n08_stateKappa_smul hS, hκ]
+      exact (n08_stateKappa_add hS x (n08StateSMul S t v) m).trans
+        ((congrArg (fun a : ℝ => a + stateKappa S (n08StateSMul S t v) m) hκ).trans
+          (n08_stateKappa_add hS y (n08StateSMul S t v) m).symm)
     have hht : ∀ r ∈ Ioo (C.left m) (C.right m), ∀ θ, ∃ c : ℝ,
         (fun p => q * stateU S (X t) p) =ᶠ[𝓝 (r, θ)]
           (fun p => q' * stateU S (Y t) p + c) := by
       simpa only [hUX t, hUY t] using hheight
     have hct : stateLeftChart S (X t) m = stateLeftChart S (Y t) m := by
-      have hxchart : (X t).2.2.2 = x.2.2.2 := by
-        simp only [X, v, n08StateSMul, n08RealSMul, Prod.snd_add, Prod.snd_smul,
-          smul_zero, add_zero]
-      have hychart : (Y t).2.2.2 = y.2.2.2 := by
-        simp only [Y, v, n08StateSMul, n08RealSMul, Prod.snd_add, Prod.snd_smul,
-          smul_zero, add_zero]
+      have hxchart : (X t).2.2.2 = x.2.2.2 :=
+        (n08_kappaLine_fixed_coordinates S x (n08ControlBasis hS m) t).2.2
+      have hychart : (Y t).2.2.2 = y.2.2.2 :=
+        (n08_kappaLine_fixed_coordinates S y (n08ControlBasis hS m) t).2.2
       simpa only [stateLeftChart, hxchart, hychart] using hchart
     dsimp only [fx, fy]
     rw [n08ControlMeanCoordinate_apply, n08ControlMeanCoordinate_apply,

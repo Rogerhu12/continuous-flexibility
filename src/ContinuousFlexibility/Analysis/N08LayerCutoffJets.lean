@@ -56,7 +56,7 @@ theorem n08_intervalLayerThreshold_jet (δ x : ℝ) (j : ℕ) :
     funext y
     simp only [Analysis.intervalLayerThreshold, div_eq_mul_inv, mul_comm]
   have hs : ContDiff ℝ j (fun t : ℝ => Real.smoothTransition (t - 1)) :=
-    (Real.smoothTransition.contDiff.comp (contDiff_id.sub contDiff_const)).of_le (by simp)
+    Real.smoothTransition.contDiff.comp (contDiff_id.sub contDiff_const)
   rw [he, congrFun (iteratedDeriv_comp_const_mul hs δ⁻¹) x,
     iteratedDeriv_comp_sub_const]
   simp only [div_eq_mul_inv, mul_comm]

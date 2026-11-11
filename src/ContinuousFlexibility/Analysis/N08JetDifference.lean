@@ -69,7 +69,10 @@ theorem n08_oneHigh_two_le
     mul_le_mul (hp hh d) (hp hb v) (apply_nonneg _ _) (apply_nonneg _ _)
   have hthird : p base d * p high v ≤ p n d * p n v :=
     mul_le_mul (hp hb d) (hp hh v) (apply_nonneg _ _) (apply_nonneg _ _)
-  rw [oneHighVariationWeight, oneHigh_fin_two, Fin.prod_univ_two]
+  have hv : (Fin.cons d (Fin.cons v Fin.elim0) : Fin 2 → E) = ![d, v] := by
+    funext i
+    fin_cases i <;> rfl
+  rw [hv, oneHighVariationWeight, oneHigh_fin_two, Fin.prod_univ_two]
   change (1 + p high x) * (p base d * p base v) +
     (p high d * p base v + p base d * p high v) ≤ 4 * p n d * p n v
   linarith only [hfirst, hsecond, hthird]

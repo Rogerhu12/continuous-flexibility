@@ -113,10 +113,12 @@ theorem n08CellLayerBand_inverseWidth_distance {D : ReferenceData} {A : ℝ}
     change endpointDistance D r ≤ 2 * (2 * A * Real.exp (-(n ^ 2))) at h
     linarith only [h]
   have hInv : (n08CellLayerInner A (D.cellIndex m))⁻¹ = 2 * A * Real.exp ((n + 1) ^ 2) := by
-    simp only [n08CellLayerInner, inv_div, Real.exp_neg, div_eq_mul_inv, inv_inv, n]
+    change (Real.exp (-((n + 1) ^ 2)) / (2 * A))⁻¹ = _
+    rw [inv_div, Real.exp_neg, div_inv_eq_mul]
   have hE : Real.exp ((n + 1) ^ 2) * Real.exp (-(n ^ 2)) ^ 2 ≤ Real.exp 2 := by
     rw [← Real.exp_nat_mul, ← Real.exp_add]
     apply Real.exp_le_exp.mpr
+    norm_num only [Nat.cast_ofNat]
     nlinarith only [sq_nonneg (n - 1)]
   rw [hInv]
   calc

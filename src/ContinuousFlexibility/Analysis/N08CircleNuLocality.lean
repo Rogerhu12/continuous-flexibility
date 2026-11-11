@@ -129,7 +129,7 @@ private theorem n08_kappaLine_chart (hS : IsPhysicalSpaces D T S)
     (x : AnnularState S) (m : ℕ) (t : ℝ) :
     stateLeftChart S (n08_kappaLine hS x m t) m = stateLeftChart S x m := by
   have he : (n08_kappaLine hS x m t).2.2.2 = x.2.2.2 := by
-    simp only [n08_kappaLine, n08StateSMul, n08RealSMul, Prod.snd_add, Prod.snd_smul,
+    simp only [n08_kappaLine, n08StateSMul, n08RealSMul, Prod.snd_add, Prod.smul_snd,
       smul_zero, add_zero]
   simp only [stateLeftChart, he]
 

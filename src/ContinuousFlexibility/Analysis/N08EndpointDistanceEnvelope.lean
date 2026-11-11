@@ -51,7 +51,7 @@ theorem n08_distance_inverse_le_E0 {D : ReferenceData} {T : MaterialData}
   have hi : (endpointDistance D r)⁻¹ ≤ K * (T.ell r)⁻¹ := by
     have h : (1 : ℝ) / endpointDistance D r ≤ K / T.ell r :=
       (div_le_div_iff₀ hd hell).mpr (by simpa only [one_mul] using hKb r hr)
-    simpa only [one_div, div_eq_mul_inv] using h
+    simpa only [one_div, div_eq_mul_inv, one_mul] using h
   exact hi.trans ((mul_le_mul_of_nonneg_left (hCb r hr) (zero_le_one.trans hK)).trans_eq (by ring))
 
 theorem n08_distance_power_le_subpowerM {D : ReferenceData} {T : MaterialData}

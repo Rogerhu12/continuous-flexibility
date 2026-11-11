@@ -95,6 +95,27 @@ theorem n08CircleSingleField_circleNorm_decay {T : MaterialData} {γ : ℝ}
   rw [← div_eq_inv_mul]
   exact (le_div_iff₀ (pow_pos hM _)).mpr (by simpa only [mul_comm] using hscaled)
 
+private theorem n08_gradedSeminorm_shift_bound
+    {E : ℕ → Type*} [∀ i, NormedAddCommGroup (E i)] [∀ i, NormedSpace ℝ (E i)]
+    (e : ∀ i, E (i + 1) →L[ℝ] E i) (x y : ProjectiveLimit E e)
+    (s N : ℕ) {A : ℝ} (hA : 0 ≤ A)
+    (h : ∀ i ≤ s, ‖x.val i‖ ≤ A * ‖y.val (i + N)‖) :
+    gradedSeminorm E e s x ≤ A * gradedSeminorm E e (s + N) y :=
+  (gradedSeminorm_le_iff E e s x (mul_nonneg hA (apply_nonneg _ _))).mpr
+    (fun i hi => (h i hi).trans (mul_le_mul_of_nonneg_left
+      (norm_coordinate_le_graded E e (Nat.add_le_add_right hi N) y) hA))
+
+private theorem n08CircleSingle_level_norm_decay
+    {T : MaterialData} {γ : ℝ} {S : CircleModelData}
+    (hS : IsCircleModel T γ S) (m i N : ℕ) (u : S.Space)
+    (hM : 0 < T.M (T.sample m)) :
+    ‖(n08CircleSingle hS m u).val i‖ ≤ (T.M (T.sample m) ^ N)⁻¹ * ‖u.val (i + N)‖ :=
+  (hS.2.2.2.2.2.2.2 (n08CircleSingle hS m u) i).trans_le
+    ((congrArg (circleNorm T γ i) (n08CircleSingle_decode hS m u)).trans_le
+      ((n08CircleSingleField_circleNorm_decay (hS.2.2.2.1 u) m i N hM).trans_eq
+        (congrArg (fun a : ℝ => (T.M (T.sample m) ^ N)⁻¹ * a)
+          (hS.2.2.2.2.2.2.2 u (i + N)).symm)))
+
 /-- The decay is in the prescribed projective grading, not an auxiliary
 sequence norm. Its constant is one and its extra order is exactly `N`. -/
 theorem n08CircleSingle_grading_decay
@@ -102,15 +123,9 @@ theorem n08CircleSingle_grading_decay
     (hS : IsCircleModel T γ S) (m s N : ℕ) (u : S.Space)
     (hM : 0 < T.M (T.sample m)) :
     S.grading s (n08CircleSingle hS m u) ≤
-      (T.M (T.sample m) ^ N)⁻¹ * S.grading (s + N) u := by
-  have hnonneg : 0 ≤ (T.M (T.sample m) ^ N)⁻¹ := inv_nonneg.mpr (pow_nonneg hM.le _)
-  apply (gradedSeminorm_le_iff (fun s => S.level s) S.bond s _
-    (mul_nonneg hnonneg (apply_nonneg _ _))).mpr
-  intro i hi
-  rw [hS.2.2.2.2.2.2.2, n08CircleSingle_decode]
-  exact (n08CircleSingleField_circleNorm_decay (hS.2.2.2.1 u) m i N hM).trans
-    (mul_le_mul_of_nonneg_left
-      ((hS.2.2.2.2.2.2.2 u (i + N)).symm.trans_le
-        (norm_coordinate_le_graded _ _ (Nat.add_le_add_right hi N) u)) hnonneg)
+      (T.M (T.sample m) ^ N)⁻¹ * S.grading (s + N) u :=
+  n08_gradedSeminorm_shift_bound S.bond (n08CircleSingle hS m u) u s N
+    (inv_nonneg.mpr (pow_nonneg hM.le _))
+    (fun i _ => n08CircleSingle_level_norm_decay hS m i N u hM)
 
 end ContinuousFlexibility.Statements

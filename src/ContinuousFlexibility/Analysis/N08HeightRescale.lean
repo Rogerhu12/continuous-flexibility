@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N08CircleHeightLocality
 import ContinuousFlexibility.Analysis.N08CircleJetComparison
+import ContinuousFlexibility.Analysis.N08FlowHeightVariation
 
 /-!
 # Comparing different parameters through the same height derivative
@@ -47,9 +48,8 @@ def n08LocalHeightState (S : PhysicalSpacesData) (x : AnnularState S)
 
 theorem n08LocalHeightState_tail (S : PhysicalSpacesData) (x : AnnularState S)
     (h : (S.height (3 / 4 : ℝ)).Space) (t : ℝ) :
-    (n08LocalHeightState S x h t).2 = x.2 := by
-  simp only [n08LocalHeightState, n08StateSMul, n08RealSMul,
-    Prod.snd_add, Prod.snd_smul, ← Prod.zero_eq_mk, smul_zero, add_zero]
+    (n08LocalHeightState S x h t).2 = x.2 :=
+  congrArg Prod.snd (n08HeightLine_eq x (h, 0) t)
 
 theorem n08LocalHeightState_sector (S : PhysicalSpacesData) {x : AnnularState S}
     (hs : stateSector S x) (h : (S.height (3 / 4 : ℝ)).Space) (t : ℝ) :
@@ -82,10 +82,8 @@ theorem n08LocalHeightState_field (S : PhysicalSpacesData) (x : AnnularState S)
     (h : (S.height (3 / 4 : ℝ)).Space) (t : ℝ) (p : PolarPoint) :
     stateU S (n08LocalHeightState S x h t) p =
       stateU S x p + t * (S.height (3 / 4 : ℝ)).decode h p := by
-  simp only [stateU, heightPairField, n08LocalHeightState, n08StateSMul, n08RealSMul,
-    Prod.fst_add, Prod.snd_add, Prod.fst_smul, Prod.snd_smul,
-    map_add, map_smul, Pi.add_apply, Pi.smul_apply, smul_eq_mul, mul_zero, add_zero]
-  ring
+  simpa only [heightFamily, heightPairField, zero_mul, add_zero] using
+    congrFun (n08HeightLine_stateU x (h, 0) t) p
 
 theorem n08LocalHeightState_scaled_germ (S : PhysicalSpacesData)
     (x : AnnularState S) (h : (S.height (3 / 4 : ℝ)).Space)

@@ -20,6 +20,8 @@ open Set Filter
 open ContinuousFlexibility.Analysis
 open scoped Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -84,14 +86,12 @@ theorem n08CircleDiagonal_reference
     (stateSectorSubmodule S).add_mem href.stateSector
       ((stateSectorSubmodule S).smul_mem t (n08ControlBasis_direction_sector hS m))
   have hchart (t θ : ℝ) : stateLeftChart S (x t) m θ = θ := by
-    change θ + (S.circle (3 / 4 : ℝ)).decode
-      (C.referenceState.2.2.2 + t • 0) m θ = θ
-    simp only [href.2.2.2.2.1, smul_zero, zero_add, map_zero, Pi.zero_apply, add_zero]
-  have hc : Continuous (fun t : ℝ => (x t, (0 : ℝ))) :=
-    (continuous_const.add (continuous_id.smul continuous_const)).prodMk continuous_const
-  have ht : Tendsto (fun t : ℝ => (x t, (0 : ℝ))) (𝓝 0) (𝓝 (C.referenceState, 0)) := by
-    simpa only [x, n08StateSMul, n08RealSMul, zero_smul, add_zero] using hc.tendsto 0
-  have hev := ht.eventually ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hzero)
+    have he : (x t).2.2.2 = C.referenceState.2.2.2 :=
+      (n08_kappaLine_fixed_coordinates S C.referenceState (n08ControlBasis hS m) t).2.2
+    simp only [stateLeftChart, he, href.2.2.2.2.1, map_zero, Pi.zero_apply, add_zero]
+  have hev : ∀ᶠ t : ℝ in 𝓝 0, (x t, 0) ∈ stateNeighborhood S C base ε :=
+    n08_affine_parameter_eventually C.referenceState v 0
+      (n08_isOpen_stateNeighborhood S C base ε) hzero
   have heq : f =ᶠ[𝓝 0] fun t => B * (τ (t * A) - C.travel m) := by
     filter_upwards [hev] with t ht
     dsimp only [f]

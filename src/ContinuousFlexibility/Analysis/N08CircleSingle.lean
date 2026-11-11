@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.SolveCircleProjection
+import ContinuousFlexibility.Analysis.ProjectiveLimitSubspace
 
 /-!
 # Retaining one actual circle component
@@ -115,16 +116,21 @@ theorem n08CircleSingleLinear_decode
     S.decode (n08CircleSingleLinear hS m u) = n08CircleSingleField m (S.decode u) :=
   n08CircleSingleValue_decode hS m u
 
+private theorem n08CircleSingleLinear_level_norm_le
+    {T : MaterialData} {γ : ℝ} {S : CircleModelData}
+    (hS : IsCircleModel T γ S) (m i : ℕ) (u : S.Space) :
+    ‖(n08CircleSingleLinear hS m u).val i‖ ≤ ‖u.val i‖ :=
+  (hS.2.2.2.2.2.2.2 (n08CircleSingleLinear hS m u) i).trans_le
+    ((congrArg (circleNorm T γ i) (n08CircleSingleLinear_decode hS m u)).trans_le
+      ((n08CircleSingleField_circleNorm_le (hS.2.2.2.1 u) m i).trans_eq
+        (hS.2.2.2.2.2.2.2 u i).symm))
+
 theorem n08CircleSingleLinear_grading_le
     {T : MaterialData} {γ : ℝ} {S : CircleModelData}
     (hS : IsCircleModel T γ S) (m s : ℕ) (u : S.Space) :
-    S.grading s (n08CircleSingleLinear hS m u) ≤ S.grading s u := by
-  apply (gradedSeminorm_le_iff (fun s => S.level s) S.bond s _
-    (apply_nonneg _ _)).mpr
-  intro i hi
-  rw [hS.2.2.2.2.2.2.2, n08CircleSingleLinear_decode]
-  exact (n08CircleSingleField_circleNorm_le (hS.2.2.2.1 u) m i).trans
-    ((hS.2.2.2.2.2.2.2 u i).symm.trans_le (norm_coordinate_le_graded _ _ hi u))
+    S.grading s (n08CircleSingleLinear hS m u) ≤ S.grading s u :=
+  gradedSeminorm_le_of_norm_le s (n08CircleSingleLinear hS m u) u
+    (fun i _ => n08CircleSingleLinear_level_norm_le hS m i u)
 
 def n08CircleSingle {T : MaterialData} {γ : ℝ} {S : CircleModelData}
     (hS : IsCircleModel T γ S) (m : ℕ) : S.Space →L[ℝ] S.Space where

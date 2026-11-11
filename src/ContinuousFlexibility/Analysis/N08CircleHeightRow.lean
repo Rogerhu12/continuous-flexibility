@@ -66,6 +66,24 @@ private theorem heightLine_derivative_value
   rw [h]
   exact hd
 
+private theorem heightLine_derivative_zero
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [T2Space F]
+    (f : E → F) (x v : E) (df : F)
+    (hd : HasProjectiveLineDerivAt f df x v)
+    (hz : HasProjectiveLineDerivAt f 0 x v) : df = 0 := hd.unique hz
+
+private def heightScalarMap
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [ContinuousSMul ℝ F]
+    (q : ℝ) (L : E →L[ℝ] F) : E →L[ℝ] F := q • L
+
+private theorem heightScalarMap_apply
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [ContinuousSMul ℝ F]
+    (q : ℝ) (L : E →L[ℝ] F) (x : E) : heightScalarMap q L x = q • L x := by
+  simp only [heightScalarMap, smul_apply]
+
 private theorem heightRow_scale_inverse
     {F : Type*} [AddCommGroup F] [Module ℝ F]
     (q : ℝ) (v : F) (h : q = 0 → v = 0) : q • (q⁻¹ • v) = v := by
@@ -101,6 +119,27 @@ theorem n08CircleHeightDerivative_apply (hS : IsPhysicalSpaces D T S)
     (n08HeightDirection S) η).trans
       (congrArg (n08CircleStateDerivative hS hR z) (n08HeightDirection_apply S η))
 
+private theorem n08CircleResidual_zero_eq_of_projected_tail
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε)
+    (x y : AnnularState S)
+    (hx : (n08_stateProjection hS x, 0) ∈ stateNeighborhood S C base ε)
+    (hy : (n08_stateProjection hS y, 0) ∈ stateNeighborhood S C base ε)
+    (htail : (n08_stateProjection hS x).2 = (n08_stateProjection hS y).2) :
+    (n08CircleResidual hS hR (x, 0)).val = (n08CircleResidual hS hR (y, 0)).val := by
+  have hleft : (n08CircleResidual hS hR (x, 0)).val =
+      R.residual (n08_stateProjection hS x, 0) :=
+    n08CircleResidual_projected_coe hS hR (z := (x, 0)) hx
+  have hright : (n08CircleResidual hS hR (y, 0)).val =
+      R.residual (n08_stateProjection hS y, 0) :=
+    n08CircleResidual_projected_coe hS hR (z := (y, 0)) hy
+  have hactual : R.residual (n08_stateProjection hS x, 0) =
+      R.residual (n08_stateProjection hS y, 0) :=
+    n08_returnResidual_zero_parameter_eq_of_tail hS hT hN hR
+      (x := n08_stateProjection hS x) (y := n08_stateProjection hS y)
+      hx hy (n08_stateProjection_mem hS x) (n08_stateProjection_mem hS y) htail
+  exact hleft.trans (hactual.trans hright.symm)
+
 private theorem n08CircleResidual_height_zero_eq
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε)
@@ -116,10 +155,8 @@ private theorem n08CircleResidual_height_zero_eq
     simpa only [n08StateSMul, Prod.zero_eq_mk] using
       heightProjectedLine_tail (n08_stateProjection hS) x η
         (by simpa only [Prod.zero_eq_mk] using n08_stateProjection_heightDirection hS η) t
-  exact (n08CircleResidual_projected_coe hS hR ht).trans
-    ((n08_returnResidual_zero_parameter_eq_of_tail hS hT hN hR ht hx
-      (n08_stateProjection_mem hS _) (n08_stateProjection_mem hS x) htail).trans
-        (n08CircleResidual_projected_coe hS hR hx).symm)
+  exact n08CircleResidual_zero_eq_of_projected_tail hS hT hN hR
+    (x + n08StateSMul S t (η, (0, (0, 0)))) x ht hx htail
 
 /-- Constancy follows from the actual ordinary flow and its inverses,
 and persists for the projected representative on ambient height lines. -/
@@ -141,22 +178,30 @@ theorem n08CircleHeightDerivative_zero_parameter
     (hN : N01Properties D T S C base loss ε) (hR : N02Properties D T S C R base ε)
     (x : AnnularState S)
     (hx : (n08_stateProjection hS x, 0) ∈ stateNeighborhood S C base ε)
-    (η : HeightPair S) : n08CircleHeightDerivative hS hR (x, 0) η = 0 :=
-  (n08CircleHeightDerivative_apply hS hR (x, 0) η).trans
-    ((n08CircleStateDerivative_hasLineDerivAt hS hN.2.2.1 hR hx (η, (0, (0, 0)))).unique
-      (n08CircleResidual_height_zero_hasLineDerivAt hS hT hN hR x hx η))
+    (η : HeightPair S) : n08CircleHeightDerivative hS hR (x, 0) η = 0 := by
+  have hactual : HasProjectiveLineDerivAt
+      (fun y : AnnularState S => (n08CircleResidual hS hR (y, 0)).val)
+      (n08CircleStateDerivative hS hR (x, 0) (η, (0, (0, 0)))) x (η, (0, (0, 0))) :=
+    n08CircleStateDerivative_hasLineDerivAt hS hN.2.2.1 hR
+      (z := (x, 0)) hx (η, (0, (0, 0)))
+  have hzero : n08CircleStateDerivative hS hR (x, 0) (η, (0, (0, 0))) = 0 :=
+    heightLine_derivative_zero
+      (fun y : AnnularState S => (n08CircleResidual hS hR (y, 0)).val)
+      x (η, (0, (0, 0))) (n08CircleStateDerivative hS hR (x, 0) (η, (0, (0, 0))))
+      hactual (n08CircleResidual_height_zero_hasLineDerivAt hS hT hN hR x hx η)
+  exact (n08CircleHeightDerivative_apply hS hR (x, 0) η).trans hzero
 
 /-- The height row is a continuous linear map at each parameter. Its
 required `q` multiple is the genuine height derivative, also at zero. -/
 def n08HeightRow (hS : IsPhysicalSpaces D T S)
     (hR : N02Properties D T S C R base ε) (z : AnnularState S × ℝ) :
     HeightPair S →L[ℝ] CircleSpace S :=
-  z.2⁻¹ • n08CircleHeightDerivative hS hR z
+  heightScalarMap z.2⁻¹ (n08CircleHeightDerivative hS hR z)
 
 theorem n08HeightRow_apply (hS : IsPhysicalSpaces D T S)
     (hR : N02Properties D T S C R base ε) (z : AnnularState S × ℝ) (η : HeightPair S) :
-    n08HeightRow hS hR z η = z.2⁻¹ • n08CircleHeightDerivative hS hR z η := by
-  simp only [n08HeightRow, smul_apply]
+    n08HeightRow hS hR z η = z.2⁻¹ • n08CircleHeightDerivative hS hR z η :=
+  heightScalarMap_apply z.2⁻¹ (n08CircleHeightDerivative hS hR z) η
 
 theorem n08HeightRow_scaled
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -185,6 +230,7 @@ theorem n08HeightRow_hasLineDerivAt
   exact heightLine_derivative_value
     ((n08HeightRow_scaled hS hT hN hR hp η).trans
       (n08CircleHeightDerivative_apply hS hR z η))
-    (n08CircleStateDerivative_hasLineDerivAt hS hN.2.2.1 hR hp (η, (0, (0, 0))))
+    (n08CircleStateDerivative_hasLineDerivAt hS hN.2.2.1 hR
+      (z := z) hp (η, (0, (0, 0))))
 
 end ContinuousFlexibility.Statements
