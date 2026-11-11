@@ -80,7 +80,7 @@ theorem n08CircleDiagonal_finite_near_reference
       (continuousAt_const (y := (1 : ℝ)))).abs
   have ht : Tendsto (fun z => |n08CircleDiagonal hS hR z m - 1|)
       (𝓝 (C.referenceState, (0 : ℝ))) (𝓝 0) := by
-    simpa only [n08CircleDiagonal_reference hT hS hN hR, sub_self, abs_zero] using hc
+    simpa only [n08CircleDiagonal_reference hT hS hN hR, sub_self, abs_zero] using hc.tendsto
   filter_upwards [ht.eventually_lt_const (by norm_num : (0 : ℝ) < 1 / 2)] with z hz
   have hab := abs_lt.mp hz
   have hpos : 0 ≤ n08CircleDiagonal hS hR z m := by linarith only [hab.1]

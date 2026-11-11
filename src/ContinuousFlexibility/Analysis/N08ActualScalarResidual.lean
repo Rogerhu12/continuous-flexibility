@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N08ExpProfile
 import ContinuousFlexibility.Analysis.N08LogProfileLift
 import ContinuousFlexibility.Analysis.N08ScalarProfileRealization
 import ContinuousFlexibility.Analysis.N08NuDerivative
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 import ContinuousFlexibility.Analysis.TameLocalLinear
 
 /-!
@@ -104,14 +105,11 @@ theorem n08ActualScalarResidual_decode
 theorem n08ActualScalarResidual_reference
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) :
-    n08ActualScalarResidual hT hS hN (C.referenceState, 0) = 0 := by
-  have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
-    n08_reference_mem_stateNeighborhood hN.2.1
-  have hs : stateSector S C.referenceState := by
-    have h := n08_stateProjection_mem hS C.referenceState
-    rwa [n08_stateProjection_reference hS hN.2.2.1] at h
-  exact n08_source_reference_zero hS hN.1 hN.2.2.1 _
-    (n08ActualScalarResidual_decode hT hS hN hz hs)
+    n08ActualScalarResidual hT hS hN (C.referenceState, 0) = 0 :=
+  n08_source_reference_zero hS hN.1 hN.2.2.1
+    (n08ActualScalarResidual hT hS hN (C.referenceState, 0))
+    (n08ActualScalarResidual_decode hT hS hN (z := (C.referenceState, 0))
+      (n08_reference_mem_stateNeighborhood hN.2.1) hN.2.2.1.stateSector)
 
 theorem n08ActualScalarResidual_uniformTameGerm
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

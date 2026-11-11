@@ -70,6 +70,36 @@ private theorem n08_affine_radicand_bound
     rw [n08_zero_parameter_line]
     exact hf t (hmem t ht)
 
+private theorem n08_affine_radicand_bound_of_exists
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    (p : Seminorm ℝ E) (x v : E) (f : E × ℝ → ℝ) {ε A B K : ℝ}
+    (hε : 0 < ε) (hA : 0 < A)
+    (hJ : ∃ J : SmoothDirections
+      {z : E × ℝ | p (z.1 - x) < ε ∧ |z.2| < ε} f, True)
+    (hf : ∀ t : ℝ, (x + n08RealSMul t v, 0) ∈
+      {z : E × ℝ | p (z.1 - x) < ε ∧ |z.2| < ε} →
+        f (x + n08RealSMul t v, 0) = K - Real.sqrt (A + t * B)) :
+    (ε / (1 + p v)) * |B| ≤ A := by
+  obtain ⟨J, _⟩ := hJ
+  exact n08_affine_radicand_bound p x v f hε hA J hf
+
+private theorem n08_smoothDirections_of_flow_tower
+    {E P : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (U : Set E)
+    (f : ℕ → ℕ → ℕ → P → E → ℝ) (region : ℕ → P → Prop)
+    (normFun : ℕ → ℕ → P → ℝ → ℝ) (weight : ℝ → ℕ → ℝ)
+    (base loss : ℕ) (x0 : E)
+    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+      a + b ≤ s → region m y → ∃ J : SmoothDirections U (f m a b y),
+        ∀ z ∈ U, ∀ v : Fin k → E, normFun m a y (J.D k z v) ≤
+          weight B m * oneHighVariationWeight p base (s + loss) (z - x0) v)
+    (m a b : ℕ) (y : P) (hy : region m y) :
+    ∃ J : SmoothDirections U (f m a b y), True := by
+  obtain ⟨B, _, hB⟩ := h 1 (a + b)
+  obtain ⟨J, _⟩ := hB m a b y le_rfl hy
+  exact ⟨J, trivial⟩
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -123,11 +153,53 @@ private theorem n08_ordinaryFlow_radial_smoothDirections
     (hN : N01Properties D T S C base loss ε) (m : ℕ) (r : ℝ)
     (hr : r ∈ Ioo (C.left m) (C.right m)) :
     ∃ J : SmoothDirections (stateNeighborhood S C base ε)
-      (ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ))), True := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩ := hN
-  obtain ⟨K, _, hK⟩ := hflow 1 1
-  obtain ⟨J, _⟩ := hK m 1 0 (r, (0 : ℝ)) (by omega) hr
-  exact ⟨J, trivial⟩
+      (ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ))), True :=
+  n08_smoothDirections_of_flow_tower (E := AnnularState S × ℝ) (P := PolarPoint)
+    (pairGrading (stateGrading S) realGrading) (stateNeighborhood S C base ε)
+    (ordinaryFlowFamily S C) (fun m p => p.1 ∈ Ioo (C.left m) (C.right m))
+    (fun m a p u => min (p.1 - C.left m) (C.right m - p.1) ^ a * |u|)
+    (fun B m => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B)
+    base loss (C.referenceState, 0) hN.2.2.2.2.2.2.2.2.2.2.2.2 m 1 0 (r, 0) hr
+
+private theorem n08_optical_component_data
+    (hN : N01Properties D T S C base loss ε)
+    (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (C.left m) (C.right m)) :
+    r ≠ 0 ∧ D.w r ≠ 0 ∧ DifferentiableAt ℝ D.w r ∧
+      DifferentiableAt ℝ (C.control m) r ∧ 0 < -deriv D.w r / (r * D.w r) := by
+  have hg : RadialProfileGeometry D := hN.1.1.choose_spec.1
+  have hC := hN.2.2.2.1
+  have hcore : r ∈ radialCore D :=
+    ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
+  have hrpos : 0 < r := hg.1.trans hcore.1
+  have hwpos : 0 < D.w r := hg.2.2.2.2.1 r hcore
+  exact ⟨hrpos.ne', hwpos.ne', hg.2.2.1.1.differentiable (by simp) r,
+    (hC.2.2.2.2.2.1 m).1.differentiable (by simp) r,
+    div_pos (neg_pos.mpr (hC.2.2.2.1 m r hr)) (mul_pos hrpos hwpos)⟩
+
+private theorem n08_opticalSpeed_log_difference {w χ : ℝ → ℝ} {a t r : ℝ}
+    (hw : DifferentiableAt ℝ w r) (hχ : DifferentiableAt ℝ χ r)
+    (hr : r ≠ 0) (hwr : w r ≠ 0) :
+    -opticalSpeed (opticalLogPerturbation w χ (t * a)) r + opticalSpeed w r =
+      opticalSpeed w r - Real.sqrt (-deriv w r / (r * w r) +
+        t * (a * (-deriv χ r / r))) := by
+  rw [n08_opticalSpeed_logPerturbation hw hχ hr hwr]
+  simp only [mul_assoc, sub_eq_add_neg, add_comm]
+
+private theorem n08_controlBasis_optical_affine
+    (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
+    (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (C.left m) (C.right m)) (t : ℝ) :
+    -opticalSpeed (stateProfile D S C
+        (C.referenceState + n08StateSMul S t (0, 0, n08ControlBasis hS m, 0))) r +
+      opticalSpeed D.w r =
+      opticalSpeed D.w r - Real.sqrt (-deriv D.w r / (r * D.w r) +
+        t * (T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r))) := by
+  have hd := n08_optical_component_data hN m r hr
+  exact (congrArg (fun w : ℝ → ℝ => -opticalSpeed w r + opticalSpeed D.w r)
+      (n08_controlBasis_reference_profile hS hN.2.2.1 hN.2.2.2.1 m t)).trans
+    (n08_opticalSpeed_log_difference (w := D.w) (χ := C.control m)
+      (a := T.H (T.sample m) ^ (3 / 4 : ℝ)) (t := t) (r := r)
+      hd.2.2.1 hd.2.2.2.1 hd.1 hd.2.1)
 
 private theorem n08_controlBasis_flow_jet_affine
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -138,20 +210,11 @@ private theorem n08_controlBasis_flow_jet_affine
     ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ))
       (C.referenceState + n08StateSMul S t (0, 0, n08ControlBasis hS m, 0), 0) =
       opticalSpeed D.w r - Real.sqrt (-deriv D.w r / (r * D.w r) +
-        t * (T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r))) := by
-  have hC := hN.2.2.2.1
-  obtain ⟨bounds, hbounds⟩ := hN.1.1
-  have hg : RadialProfileGeometry D := hbounds.1
-  have hcore : r ∈ radialCore D :=
-    ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
-  have hrpos : 0 < r := hg.1.trans hcore.1
-  have hwpos : 0 < D.w r := hg.2.2.2.2.1 r hcore
-  have hf := n08_ordinaryFlow_radial_jet_zero_parameter hS hT hN _ ht m r 0 hr
-  rw [n08_controlBasis_reference_profile hS hN.2.2.1 hC m t,
-    n08_opticalSpeed_logPerturbation
-      (hg.2.2.1.1.differentiable (by simp) r)
-      ((hC.2.2.2.2.2.1 m).1.differentiable (by simp) r) hrpos.ne' hwpos.ne'] at hf
-  simpa only [mul_assoc, sub_eq_add_neg, add_comm] using hf
+        t * (T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r))) :=
+  (n08_ordinaryFlow_radial_jet_zero_parameter hS hT hN
+      (C.referenceState + n08StateSMul S t (0, 0, n08ControlBasis hS m, 0))
+      ht m r 0 hr).trans
+    (n08_controlBasis_optical_affine hS hN m r hr t)
 
 /-- The same weighted control basis used by the circle diagonal has an
 actual relative radicand bound on its own negative component. -/
@@ -161,19 +224,14 @@ theorem n08_controlBasis_radical_relative_bound
     (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (C.left m) (C.right m)) :
     (ε / (1 + stateGrading S base (0, 0, n08ControlBasis hS m, 0))) *
         |T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r)| ≤
-      -deriv D.w r / (r * D.w r) := by
-  have hC := hN.2.2.2.1
-  obtain ⟨bounds, hbounds⟩ := hN.1.1
-  have hg : RadialProfileGeometry D := hbounds.1
-  have hcore : r ∈ radialCore D :=
-    ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
-  have hrpos : 0 < r := hg.1.trans hcore.1
-  have hwpos : 0 < D.w r := hg.2.2.2.2.1 r hcore
-  have hA : 0 < -deriv D.w r / (r * D.w r) :=
-    div_pos (neg_pos.mpr (hC.2.2.2.1 m r hr)) (mul_pos hrpos hwpos)
-  obtain ⟨J, _⟩ := n08_ordinaryFlow_radial_smoothDirections hN m r hr
-  exact n08_affine_radicand_bound (stateGrading S base) C.referenceState
+      -deriv D.w r / (r * D.w r) :=
+  n08_affine_radicand_bound_of_exists (E := AnnularState S)
+    (stateGrading S base) C.referenceState
     (0, 0, n08ControlBasis hS m, 0) (ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ)))
-    hN.2.1 hA J (fun t ht => n08_controlBasis_flow_jet_affine hS hT hN m r hr t ht)
+    (A := -deriv D.w r / (r * D.w r))
+    (B := T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r))
+    (K := opticalSpeed D.w r) hN.2.1 (n08_optical_component_data hN m r hr).2.2.2.2
+    (n08_ordinaryFlow_radial_smoothDirections hN m r hr)
+    (n08_controlBasis_flow_jet_affine hS hT hN m r hr)
 
 end ContinuousFlexibility.Statements

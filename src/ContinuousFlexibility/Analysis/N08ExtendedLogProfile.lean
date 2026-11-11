@@ -59,6 +59,16 @@ private def n08_extendedLinear (L : E →L[ℝ] F) (M : B →L[ℝ] F) :
       (ContinuousLinearMap.fst ℝ (E × ℝ) B) +
     M.comp (ContinuousLinearMap.snd ℝ (E × ℝ) B)
 
+private theorem n08_scalarZero_add (L : ℝ →L[ℝ] F) (y : F) : L 0 + y = y := by
+  rw [map_zero, zero_add]
+
+private theorem n08_extendedLinear_controlLine
+    (L : E →L[ℝ] F) (M : B →L[ℝ] F) (z : E × ℝ) (v : E) (b : B) (t : ℝ)
+    (hv : L v = M b) :
+    n08_extendedLinear L M (z, t • b) = L (z.1 + n08RealSMul t v) := by
+  change L z.1 + M (t • b) = L (z.1 + n08RealSMul t v)
+  simp only [n08RealSMul, map_add, map_smul, hv]
+
 private theorem n08_extendedLinear_tame
     {p : ℕ → Seminorm ℝ E} {b : ℕ → Seminorm ℝ B} {q : ℕ → Seminorm ℝ F}
     {L : E →L[ℝ] F} {M : B →L[ℝ] F}
@@ -76,6 +86,15 @@ private theorem n08_extendedLinear_tame
       (tamePairGrading_monotone hp weighted_realGrading_monotone) hb) hright
 
 end LinearCombination
+
+private theorem n08_heightOnly_controlLine
+    {H K Y : Type*} [AddCommGroup H] [Module ℝ H] [AddCommGroup K] [Module ℝ K]
+    (f : (H × K) × ℝ → Y) (g : H × ℝ → Y)
+    (hf : ∀ z, f z = g (z.1.1, z.2)) (z : (H × K) × ℝ) (u : K) (t : ℝ) :
+    f (z.1 + n08RealSMul t (0, u), z.2) = f z := by
+  rw [hf, hf]
+  change g (z.1.1 + t • (0 : H), z.2) = g (z.1.1, z.2)
+  rw [smul_zero, add_zero]
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -122,11 +141,10 @@ theorem n08LogProfileLift_kappaDirection
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (u : CircleSpace S) :
     n08LogProfileLift hT hS hN (0, (0, (u, 0))) =
-      n08WeakControlLift hT hS hN (n08ControlRestriction S u) := by
-  rw [n08LogProfileLift_apply]
-  change n08NuProfileLift hT hS hN 0 +
-    n08WeakControlLift hT hS hN (n08ControlRestriction S u) = _
-  rw [map_zero, zero_add]
+      n08WeakControlLift hT hS hN (n08ControlRestriction S u) :=
+  (n08LogProfileLift_apply hT hS hN (0, (0, (u, 0)))).trans
+    (n08_scalarZero_add (n08NuProfileLift hT hS hN)
+      (n08WeakControlLift hT hS hN (n08ControlRestriction S u)))
 
 theorem n08ExtendedLogProfileLift_controlLine
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -134,25 +152,20 @@ theorem n08ExtendedLogProfileLift_controlLine
     (z : AnnularState S × ℝ) (u : CircleSpace S) (t : ℝ) :
     n08ExtendedLogProfileLift hT hS hN (z, t • n08ControlRestriction S u) =
       n08LogProfileLift hT hS hN
-        (z.1 + n08StateSMul S t (0, (0, (u, 0)))) := by
-  rw [n08ExtendedLogProfileLift_apply]
-  calc
-    _ = n08LogProfileLift hT hS hN z.1 +
-        t • n08WeakControlLift hT hS hN (n08ControlRestriction S u) :=
-      congrArg (fun v => n08LogProfileLift hT hS hN z.1 + v)
-        ((n08WeakControlLift hT hS hN).map_smul t (n08ControlRestriction S u))
-    _ = _ := by
-      rw [n08StateSMul, n08RealSMul, map_add, map_smul,
-        n08LogProfileLift_kappaDirection hT hS hN]
+        (z.1 + n08StateSMul S t (0, (0, (u, 0)))) :=
+  n08_extendedLinear_controlLine (n08LogProfileLift hT hS hN)
+    (n08WeakControlLift hT hS hN) z (0, (0, (u, 0)))
+    (n08ControlRestriction S u) t (n08LogProfileLift_kappaDirection hT hS hN u)
 
 theorem n08ScalarHeightParameter_controlLine (S : PhysicalSpacesData)
     (z : AnnularState S × ℝ) (u : CircleSpace S) (t : ℝ) :
     n08ScalarHeightParameter S
       (z.1 + n08StateSMul S t (0, (0, (u, 0))), z.2) =
-        n08ScalarHeightParameter S z := by
-  rw [n08ScalarHeightParameter_apply, n08ScalarHeightParameter_apply]
-  change (((0, z.1.1.1 + t • (0 : (S.height (3 / 4 : ℝ)).Space)),
-      z.1.1.2 + t • (0 : ℝ)), z.2) = (((0, z.1.1.1), z.1.1.2), z.2)
-  simp only [smul_zero, add_zero]
+        n08ScalarHeightParameter S z :=
+  n08_heightOnly_controlLine (H := HeightPair S)
+    (K := ℝ × CircleSpace S × CircleSpace S) (Y := ScalarWeightedState S)
+    (n08ScalarHeightParameter S)
+    (fun y : HeightPair S × ℝ => (((0, y.1.1), y.1.2), y.2))
+    (n08ScalarHeightParameter_apply S) z (0, (u, 0)) t
 
 end ContinuousFlexibility.Statements

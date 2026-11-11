@@ -107,7 +107,8 @@ theorem n08CircleDiagonal_state_difference_bound
     (fun _ _ _ _ => le_rfl)
   have hzero : (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε := by
     constructor
-    · simpa only [map_zero] using hN.2.1
+    · simpa only [sub_self] using
+        n08_seminorm_center_lt (sectorGrading S base) (0 : StateDirections S) hN.2.1
     · simpa only [abs_zero] using hN.2.1
   obtain ⟨l, a, ρ, hρ, hb⟩ := (n08_return_smoothTame hR).choose_spec 2 0 hzero
   obtain ⟨K, hK, hKb⟩ := hb a le_rfl
