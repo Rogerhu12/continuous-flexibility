@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedProduct
+import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 
 /-!
@@ -106,7 +106,8 @@ theorem referenceRadial_withDensity_le_weighted
     (volume.restrict (radialCore D)).withDensity (fun r => ENNReal.ofReal (g r)) ≤
       (volume.restrict (radialCore D)).withDensity (ENNReal.ofReal (K * N) • ρ) := hdom
     _ = ENNReal.ofReal (K * N) • referenceRadialWeightedMeasure D γ M := by
-      rw [withDensity_smul' _ _ ENNReal.ofReal_ne_top]
+      rw [referenceRadialWeightedMeasure_eq_sum hpart γ M,
+        withDensity_smul' _ _ ENNReal.ofReal_ne_top]
       dsimp only [ρ]
       rw [withDensity_tsum (referenceRadialCellDensity_measurable hpart γ M)]
       rfl

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.ReferenceCosineFourier
+import ContinuousFlexibility.Radial.ReferenceCosineProjection
 import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 
 /-!
@@ -6,7 +7,8 @@ import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 
 This file identifies the genuine circle Fourier coefficients with the
 normalized physical cosine coefficients, and pairs the positive and
-negative integer frequencies in Parseval.
+negative integer frequencies in Parseval.  The final wrappers expose the
+same identity for the physical constant/cosine basis, including index zero.
 -/
 
 noncomputable section
@@ -190,3 +192,43 @@ theorem reference_cosine_parseval {f : ℝ → ℝ}
       exact two_mul_referencePiFourierCoeff_norm_sq hp he hf (n + 1)
 
 end ContinuousFlexibility.Statements
+
+namespace ContinuousFlexibility.Radial
+
+open Set MeasureTheory
+open ContinuousFlexibility.Statements
+
+/-- The half-period mean formula uses the same proved periodic integral
+identity as the Fourier coefficients. -/
+theorem radialAngularMean_eq_halfPeriod {f : ℝ → ℝ}
+    (hp : Function.Periodic f Real.pi)
+    (hf : IntervalIntegrable f volume 0 (2 * Real.pi)) :
+    radialAngularMean f = Real.pi⁻¹ * ∫ θ in (0 : ℝ)..Real.pi, f θ := by
+  apply ContinuousFlexibility.Statements.radialAngularMean_eq_pi_mean hp
+  exact hf.mono_set (by
+    rw [uIcc_of_le Real.pi_pos.le, uIcc_of_le (by positivity)]
+    exact Icc_subset_Icc le_rfl (by linarith [Real.pi_pos]))
+
+/-- Parseval for the physical basis is the established cosine identity
+with its zero term restored; there is only one Fourier proof. -/
+theorem hasSum_sq_referenceAngularCoefficient {f : ℝ → ℝ}
+    (hf : MemLp f 2 (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))))
+    (hp : Function.Periodic f Real.pi) (he : Function.Even f) :
+    HasSum (fun n : ℕ => referenceAngularCoefficient f n ^ 2)
+      (radialAngularMean (fun θ => f θ ^ 2)) := by
+  have hhalf : MemLp f 2 (volume.restrict (Ioc (0 : ℝ) Real.pi)) :=
+    hf.mono_measure (Measure.restrict_mono_set _ (Ioc_subset_Ioc le_rfl
+      (by linarith [Real.pi_pos])))
+  have hsucc : Summable (fun n : ℕ => referenceAngularCoefficient f (n + 1) ^ 2) := by
+    simpa only [referenceAngularCoefficient_succ] using
+      ContinuousFlexibility.Statements.summable_sq_referenceCosineCoeff hp he hhalf
+  have hall : Summable (fun n : ℕ => referenceAngularCoefficient f n ^ 2) :=
+    (summable_nat_add_iff 1).mp hsucc
+  have heq : (∑' n : ℕ, referenceAngularCoefficient f n ^ 2) =
+      radialAngularMean (fun θ => f θ ^ 2) := by
+    rw [hall.tsum_eq_zero_add, referenceAngularCoefficient_zero]
+    simpa only [referenceAngularCoefficient_succ] using
+      (ContinuousFlexibility.Statements.reference_cosine_parseval hp he hhalf).symm
+  exact heq ▸ hall.hasSum
+
+end ContinuousFlexibility.Radial

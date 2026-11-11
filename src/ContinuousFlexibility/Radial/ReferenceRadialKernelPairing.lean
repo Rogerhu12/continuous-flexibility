@@ -22,6 +22,7 @@ theorem referenceRadialWeightedMeasure_ae_iff {D : ReferenceData}
     (hD : RadialPartition D) (γ M : ℝ) {p : ℝ → Prop} :
     (∀ᵐ r ∂referenceRadialWeightedMeasure D γ M, p r) ↔
       ∀ᵐ r ∂volume.restrict (radialCore D), p r := by
+  rw [referenceRadialWeightedMeasure_eq_sum hD γ M]
   constructor
   · intro h
     have hcell := Measure.ae_sum_iff.mp h

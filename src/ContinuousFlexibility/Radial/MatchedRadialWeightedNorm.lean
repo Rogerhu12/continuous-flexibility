@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedProduct
+import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
 import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
 import ContinuousFlexibility.Radial.MatchedPhysicalPartition
 import ContinuousFlexibility.Radial.WeightKernelBounds
@@ -77,6 +77,7 @@ theorem matchedRadialWeighted_ae_iff {D : ReferenceData}
     (hP : RadialPartition D) (γ M : ℝ) {p : ℝ → Prop} :
     (∀ᵐ r ∂referenceRadialWeightedMeasure D γ M, p r) ↔
       ∀ᵐ r ∂volume.restrict (radialCore D), p r := by
+  rw [referenceRadialWeightedMeasure_eq_sum hP γ M]
   constructor
   · intro h
     have hc := Measure.ae_sum_iff.mp h
@@ -109,10 +110,8 @@ theorem matchedRadial_absolutelyContinuous_weighted {D : ReferenceData}
 
 theorem matchedRadial_aestronglyMeasurable_weighted {D : ReferenceData}
     {f : ℝ → ℝ} (hf : AEStronglyMeasurable f (volume.restrict (radialCore D)))
-    (γ M : ℝ) : AEStronglyMeasurable f (referenceRadialWeightedMeasure D γ M) := by
-  apply aestronglyMeasurable_sum_measure_iff.mpr
-  intro m
-  exact hf.mono_ac (withDensity_absolutelyContinuous _ _)
+    (γ M : ℝ) : AEStronglyMeasurable f (referenceRadialWeightedMeasure D γ M) :=
+  hf.mono_ac (referenceRadialWeightedMeasure_absolutelyContinuous D γ M)
 
 theorem matchedRadial_localized_memLp_of_weighted {D : ReferenceData}
     (hP : RadialPartition D) {γ M : ℝ} {f : ℝ → ℝ}
@@ -123,9 +122,11 @@ theorem matchedRadial_localized_memLp_of_weighted {D : ReferenceData}
     (matchedRadial_absolutelyContinuous_weighted hP γ M)
   apply (memLp_two_iff_integrable_sq
     ((hP.1 m).continuous.aestronglyMeasurable.mul hfm)).mpr
+  have hisum := hf.integrable_sq
+  rw [referenceRadialWeightedMeasure_eq_sum hP γ M] at hisum
   have hi : Integrable (fun r => f r ^ 2)
       (referenceRadialWeightedCellMeasure D γ M m) :=
-    hf.integrable_sq.mono_measure (Measure.le_sum (referenceRadialWeightedCellMeasure D γ M) m)
+    hisum.mono_measure (Measure.le_sum (referenceRadialWeightedCellMeasure D γ M) m)
   have hh := (integrable_withDensity_iff_integrable_smul'
     (referenceRadialCellDensity_measurable hP γ M m)
     (ae_of_all _ (fun _ => ENNReal.ofReal_lt_top))).mp hi
@@ -139,7 +140,9 @@ theorem matchedRadialCellSquare_summable {D : ReferenceData}
     (hP : RadialPartition D) {γ M : ℝ} {f : ℝ → ℝ}
     (hf : MemLp f 2 (referenceRadialWeightedMeasure D γ M)) :
     Summable (matchedRadialCellSquare D γ M f) := by
-  have hs := hf.integrable_sq.summable_integral
+  have hi := hf.integrable_sq
+  rw [referenceRadialWeightedMeasure_eq_sum hP γ M] at hi
+  have hs := hi.summable_integral
   simpa only [Real.norm_of_nonneg (sq_nonneg _), matchedRadialCell_integral_sq hP] using hs
 
 theorem matchedRadial_memLp_of_cellSquare_summable {D : ReferenceData}
@@ -151,6 +154,7 @@ theorem matchedRadial_memLp_of_cellSquare_summable {D : ReferenceData}
     MemLp f 2 (referenceRadialWeightedMeasure D γ M) := by
   apply (memLp_two_iff_integrable_sq
     (matchedRadial_aestronglyMeasurable_weighted hm γ M)).mpr
+  rw [referenceRadialWeightedMeasure_eq_sum hP γ M]
   apply integrable_sum_measure (fun m => matchedRadialCell_integrable_sq hP γ M m (hl m))
   simpa only [Real.norm_of_nonneg (sq_nonneg _), matchedRadialCell_integral_sq hP] using hs
 
@@ -159,7 +163,7 @@ theorem matchedRadialWeighted_integral_sq {D : ReferenceData}
     (hf : MemLp f 2 (referenceRadialWeightedMeasure D γ M)) :
     (∫ r, f r ^ 2 ∂referenceRadialWeightedMeasure D γ M) =
       ∑' m, matchedRadialCellSquare D γ M f m := by
-  unfold referenceRadialWeightedMeasure
+  rw [referenceRadialWeightedMeasure_eq_sum hP γ M] at hf ⊢
   rw [integral_sum_measure hf.integrable_sq]
   exact tsum_congr (fun m => matchedRadialCell_integral_sq hP γ M m f)
 

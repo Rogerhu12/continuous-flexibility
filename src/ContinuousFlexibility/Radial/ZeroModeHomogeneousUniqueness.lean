@@ -86,14 +86,8 @@ theorem zeroMode_homogeneous_representative_eq_zero
   have hremw :
       (fun r => u r - aL * D.chiLeft r) =ᵐ[referenceRadialWeightedMeasure D γ (-M)]
         (fun r => A + B * (∫ s in c..r, (D.w s)⁻¹) - aL * D.chiLeft r) := by
-    change ∀ᵐ r ∂Measure.sum (referenceRadialWeightedCellMeasure D γ (-M)),
-      u r - aL * D.chiLeft r =
-        A + B * (∫ s in c..r, (D.w s)⁻¹) - aL * D.chiLeft r
-    apply Measure.ae_sum_iff.mpr
-    intro m
     exact hrem.filter_mono
-      (withDensity_absolutelyContinuous (volume.restrict (radialCore D))
-        (referenceRadialCellDensity D γ (-M) m)).ae_le
+      (referenceRadialWeightedMeasure_absolutelyContinuous D γ (-M)).ae_le
   obtain ⟨hA, hB⟩ := zeroMode_affine_resistance_coefficients_eq_zero hD hborder hγ hc
     ((memLp_congr_ae hremw).mp hu)
   refine ⟨hA, hB, ?_⟩

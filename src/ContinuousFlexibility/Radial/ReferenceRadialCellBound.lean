@@ -102,15 +102,13 @@ theorem referenceRadial_memLp_of_cellwise_sq_bound {D : ReferenceData}
           Real.volume_Ioo, ENNReal.toReal_ofReal (sub_nonneg.mpr hab.le), smul_eq_mul]
   have hesum : Summable e := summable_of_sum_le he0 hfinite
   have huisum : Integrable (fun r => (u r) ^ 2) (referenceRadialWeightedMeasure D γ M) := by
+    rw [referenceRadialWeightedMeasure_eq_sum hD γ M]
     apply integrable_sum_measure hui
     simpa only [Real.norm_of_nonneg (sq_nonneg _)] using hesum
-  have hum : AEStronglyMeasurable u (referenceRadialWeightedMeasure D γ M) := by
-    apply aestronglyMeasurable_sum_measure_iff.mpr
-    intro m
-    exact hu.mono_ac (withDensity_absolutelyContinuous
-      (volume.restrict (radialCore D)) (referenceRadialCellDensity D γ M m))
+  have hum : AEStronglyMeasurable u (referenceRadialWeightedMeasure D γ M) :=
+    hu.mono_ac (referenceRadialWeightedMeasure_absolutelyContinuous D γ M)
   refine ⟨(memLp_two_iff_integrable_sq hum).mpr huisum, ?_⟩
-  unfold referenceRadialWeightedMeasure
+  rw [referenceRadialWeightedMeasure_eq_sum hD γ M] at huisum ⊢
   rw [integral_sum_measure huisum]
   exact Real.tsum_le_of_sum_le he0 hfinite
 

@@ -1,106 +1,86 @@
-import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
+import ContinuousFlexibility.Radial.ReferenceWeightedCompact
+import ContinuousFlexibility.Radial.ReferenceCosineCoefficients
+import Mathlib.MeasureTheory.Measure.WithDensity
 
 /-!
-# Product structure of the actual weighted reference measure
+# Exact product disintegration of the reference weight
 
-The radial weights are independent of the angular variable. Moving the
-normalization into the angular measure expresses the Hilbert realization
-as the product of the actual weighted radial measure and normalized
-Lebesgue measure on one full angular period.
+The radial marginal of the frozen weighted physical measure and normalized
+angular measure reconstruct the same measure exactly. This supplies
+Fubini and L² estimates for the actual radial Fourier coefficients.
 -/
 
 noncomputable section
 
-namespace ContinuousFlexibility.Statements
+namespace ContinuousFlexibility.Radial
 
-open Set MeasureTheory
-open scoped ENNReal
-
-def referenceAngularMeasure : Measure ℝ :=
-  ENNReal.ofReal ((2 * Real.pi)⁻¹) •
-    volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))
-
-instance referenceAngularMeasure_probability : IsProbabilityMeasure referenceAngularMeasure where
-  measure_univ := by
-    simp only [referenceAngularMeasure, Measure.smul_apply, Measure.restrict_apply_univ,
-      Real.volume_Ioc, sub_zero, smul_eq_mul]
-    rw [← ENNReal.ofReal_mul (by positivity : 0 ≤ (2 * Real.pi)⁻¹),
-      inv_mul_cancel₀ (by positivity : 2 * Real.pi ≠ 0), ENNReal.ofReal_one]
-
-theorem integral_referenceAngularMeasure (f : ℝ → ℝ) :
-    (∫ θ, f θ ∂referenceAngularMeasure) = radialAngularMean f := by
-  unfold referenceAngularMeasure radialAngularMean
-  rw [integral_smul_measure, ENNReal.toReal_ofReal (by positivity), smul_eq_mul,
-    intervalIntegral.integral_of_le (show (0 : ℝ) ≤ 2 * Real.pi by positivity)]
-
-def referenceRadialCellDensity (D : ReferenceData) (γ M : ℝ) (m : ℕ) (r : ℝ) : ℝ≥0∞ :=
-  ENNReal.ofReal
-    (Real.exp (2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
-      (D.localizer m r) ^ 2)
-
-def referenceRadialWeightedCellMeasure (D : ReferenceData) (γ M : ℝ) (m : ℕ) : Measure ℝ :=
-  (volume.restrict (radialCore D)).withDensity (referenceRadialCellDensity D γ M m)
-
-def referenceRadialWeightedMeasure (D : ReferenceData) (γ M : ℝ) : Measure ℝ :=
-  Measure.sum (referenceRadialWeightedCellMeasure D γ M)
-
-instance referenceRadialWeightedCellMeasure_sFinite (D : ReferenceData) (γ M : ℝ) (m : ℕ) :
-    SFinite (referenceRadialWeightedCellMeasure D γ M m) := by
-  unfold referenceRadialWeightedCellMeasure
-  infer_instance
-
-instance referenceRadialWeightedMeasure_sFinite (D : ReferenceData) (γ M : ℝ) :
-    SFinite (referenceRadialWeightedMeasure D γ M) := by
-  unfold referenceRadialWeightedMeasure
-  infer_instance
-
-instance referenceWeightedCellMeasure_sFinite (D : ReferenceData) (γ M : ℝ) (m : ℕ) :
-    SFinite (referenceWeightedCellMeasure D γ M m) := by
-  unfold referenceWeightedCellMeasure radialPhysicalMeasure
-  infer_instance
+open Set Filter MeasureTheory
+open scoped Topology ENNReal
+open ContinuousFlexibility.Statements
 
 instance referenceWeightedMeasure_sFinite (D : ReferenceData) (γ M : ℝ) :
-    SFinite (referenceWeightedMeasure D γ M) := by
-  unfold referenceWeightedMeasure
-  infer_instance
+    SFinite (referenceWeightedMeasure D γ M) :=
+  ContinuousFlexibility.Statements.referenceWeightedMeasure_sFinite D γ M
 
-theorem referenceRadialCellDensity_measurable {D : ReferenceData}
-    (hD : RadialPartition D) (γ M : ℝ) (m : ℕ) :
-    Measurable (referenceRadialCellDensity D γ M m) :=
-  (measurable_const.mul ((hD.1 m).continuous.measurable.pow_const 2)).ennreal_ofReal
+instance referenceRadialWeightedMeasure_sFinite (D : ReferenceData) (γ M : ℝ) :
+    SFinite (referenceRadialWeightedMeasure D γ M) :=
+  ContinuousFlexibility.Statements.referenceRadialWeightedMeasure_sFinite D γ M
 
-theorem referenceCellMeasureDensity_eq_radial (D : ReferenceData) (γ M : ℝ) (m : ℕ) :
-    referenceCellMeasureDensity D γ M m =
-      ENNReal.ofReal ((2 * Real.pi)⁻¹) •
-        (fun x : PolarPoint => referenceRadialCellDensity D γ M m x.1) := by
-  funext x
-  change ENNReal.ofReal (referenceCellMeasureWeight D γ M m * (D.localizer m x.1) ^ 2) =
-    ENNReal.ofReal ((2 * Real.pi)⁻¹) *
-      ENNReal.ofReal
-        (Real.exp (2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
-          (D.localizer m x.1) ^ 2)
-  unfold referenceCellMeasureWeight
-  rw [mul_assoc, ENNReal.ofReal_mul (by positivity : 0 ≤ (2 * Real.pi)⁻¹)]
+instance referenceAngularProbability_isProbability :
+    IsProbabilityMeasure referenceAngularProbability :=
+  ContinuousFlexibility.Statements.referenceAngularMeasure_probability
 
-theorem referenceWeightedCellMeasure_eq_prod {D : ReferenceData}
-    (hD : RadialPartition D) (γ M : ℝ) (m : ℕ) :
-    referenceWeightedCellMeasure D γ M m =
-      (referenceRadialWeightedCellMeasure D γ M m).prod referenceAngularMeasure := by
-  unfold referenceWeightedCellMeasure referenceRadialWeightedCellMeasure referenceAngularMeasure
-  rw [Measure.prod_smul_right, prod_withDensity_left (referenceRadialCellDensity_measurable hD γ M m),
-    ← radialPhysicalMeasure_eq_prod, referenceCellMeasureDensity_eq_radial]
-  simpa only [Function.comp_def] using
-    withDensity_smul (μ := radialPhysicalMeasure D) (ENNReal.ofReal ((2 * Real.pi)⁻¹))
-      ((referenceRadialCellDensity_measurable hD γ M m).comp measurable_fst)
-
-theorem referenceWeightedMeasure_eq_prod {D : ReferenceData}
+/-- Both public radial APIs refer to the same physical marginal and use
+the already proved cell-product representation. -/
+theorem referenceWeightedMeasure_eq_radial_prod {D : ReferenceData}
     (hD : RadialPartition D) (γ M : ℝ) :
     referenceWeightedMeasure D γ M =
-      (referenceRadialWeightedMeasure D γ M).prod referenceAngularMeasure := by
-  unfold referenceWeightedMeasure referenceRadialWeightedMeasure
-  rw [Measure.prod_sum_left]
-  apply congrArg Measure.sum
-  funext m
-  exact referenceWeightedCellMeasure_eq_prod hD γ M m
+      (referenceRadialWeightedMeasure D γ M).prod referenceAngularProbability :=
+  ContinuousFlexibility.Statements.referenceWeightedMeasure_eq_prod hD γ M
 
-end ContinuousFlexibility.Statements
+theorem referenceWeightedMeasure_eq_scaled_radial_prod {D : ReferenceData}
+    (hD : RadialPartition D) (γ M : ℝ) :
+    referenceWeightedMeasure D γ M = ENNReal.ofReal ((2 * Real.pi)⁻¹) •
+      (referenceRadialWeightedMeasure D γ M).prod
+        (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := by
+  rw [referenceWeightedMeasure_eq_radial_prod hD, referenceAngularProbability,
+    referenceAngularMeasure, Measure.prod_smul_right]
+
+theorem memLp_radial_prod_of_referenceWeighted {D : ReferenceData}
+    (hD : RadialPartition D) {γ M : ℝ} {u : PolarPoint → ℝ}
+    (hu : MemLp u 2 (referenceWeightedMeasure D γ M)) :
+    MemLp u 2 ((referenceRadialWeightedMeasure D γ M).prod
+      (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))) := by
+  rw [referenceWeightedMeasure_eq_scaled_radial_prod hD] at hu
+  have h := hu.smul_measure (c := (ENNReal.ofReal ((2 * Real.pi)⁻¹))⁻¹) (by finiteness)
+  rwa [smul_smul, ENNReal.inv_mul_cancel (by positivity) ENNReal.ofReal_ne_top,
+    one_smul] at h
+
+theorem memLp_referenceRadialCoefficient {D : ReferenceData}
+    (hD : RadialPartition D) {γ M : ℝ} {u : PolarPoint → ℝ}
+    (hu : MemLp u 2 (referenceWeightedMeasure D γ M)) (n : ℕ) :
+    MemLp (referenceRadialCoefficient u n) 2 (referenceRadialWeightedMeasure D γ M) :=
+  memLp_referenceRadialCoefficient_prod (memLp_radial_prod_of_referenceWeighted hD hu) n
+
+theorem integral_referenceWeightedMeasure_eq_radial {D : ReferenceData}
+    (hD : RadialPartition D) {γ M : ℝ} {f : PolarPoint → ℝ}
+    (hf : Integrable f (referenceWeightedMeasure D γ M)) :
+    (∫ x, f x ∂referenceWeightedMeasure D γ M) =
+      ∫ r, radialAngularMean (fun θ => f (r, θ)) ∂referenceRadialWeightedMeasure D γ M := by
+  rw [referenceWeightedMeasure_eq_radial_prod hD] at hf ⊢
+  rw [integral_prod _ hf]
+  exact integral_congr_ae (ae_of_all _ (fun r =>
+    integral_referenceAngularProbability (fun θ => f (r, θ))))
+
+theorem integral_referenceRadialCoefficient_sq_le {D : ReferenceData}
+    (hD : RadialPartition D) {γ M : ℝ} {u : PolarPoint → ℝ}
+    (hu : MemLp u 2 (referenceWeightedMeasure D γ M)) (n : ℕ) :
+    (∫ r, referenceRadialCoefficient u n r ^ 2 ∂referenceRadialWeightedMeasure D γ M) ≤
+      ∫ x, u x ^ 2 ∂referenceWeightedMeasure D γ M := by
+  have h := integral_referenceRadialCoefficient_sq_le_prod
+    (memLp_radial_prod_of_referenceWeighted hD hu) n
+  rw [referenceWeightedMeasure_eq_scaled_radial_prod hD, integral_smul_measure,
+    ENNReal.toReal_ofReal (by positivity), smul_eq_mul]
+  exact h
+
+end ContinuousFlexibility.Radial

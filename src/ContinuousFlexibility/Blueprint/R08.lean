@@ -8,7 +8,9 @@ Joining the central model to the selected tails while keeping the second-mode so
 
 Source: paper/flexible-surface-readable/06-global-reference-inverse.tex, lines 100–180.
 
-Task file: docs/tasks/R08.md. The milestone statement is unchanged.
+Task file: docs/tasks/R08.md. The original theorem arguments are retained.
+The construction also retains the homogeneous profile equation and return
+margins on the same witness for the corrected downstream interface.
 -/
 
 namespace ContinuousFlexibility.Blueprint
