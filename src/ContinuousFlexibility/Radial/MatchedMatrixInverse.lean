@@ -57,7 +57,7 @@ theorem matchingK_inverse_entry_bound_two
       _ ≤ 1 * |E i 0 * x 0 + E i 1 * x 1| :=
         mul_le_mul_of_nonneg_right (ha i) (abs_nonneg _)
       _ = |E i 0 * x 0 + E i 1 * x 1| := one_mul _
-      _ ≤ |E i 0 * x 0| + |E i 1 * x 1| := abs_add _ _
+      _ ≤ |E i 0 * x 0| + |E i 1 * x 1| := abs_add_le _ _
       _ ≤ δ / 16 * ‖x‖ + δ / 16 * ‖x‖ :=
         add_le_add (hterm 0) (hterm 1)
       _ ≤ δ / 2 * ‖x‖ := by
@@ -83,17 +83,13 @@ namespace ContinuousFlexibility.Blueprint
 open ContinuousFlexibility.Statements
 open ContinuousFlexibility.Radial
 
-/-- The statement layer's product is ordinary matrix multiplication. -/
+/-- The statement layer's product, expressed with the matrix constructor
+so that multiplication cannot be inferred as pointwise multiplication. -/
 theorem radialMatrixProduct_eq_matrix_mul (P Q : RadialMatrix) :
-    radialMatrixProduct P Q = (P : Matrix (Fin 2) (Fin 2) ℝ) * Q := by
+    radialMatrixProduct P Q =
+      fun i j => (Matrix.of P * Matrix.of Q) i j := by
   funext i j
-  simp only [radialMatrixProduct, Matrix.mul_apply]
-
-/-- The statement layer's identity is the identity matrix. -/
-theorem radialMatrixIdentity_eq_matrix_one :
-    radialMatrixIdentity = (1 : Matrix (Fin 2) (Fin 2) ℝ) := by
-  funext i j
-  simp only [radialMatrixIdentity, Matrix.one_apply]
+  simp only [radialMatrixProduct, Matrix.mul_apply, Matrix.of_apply]
 
 /-- The matrix clauses of MatchedPieces supply a two-sided inverse with
 the precise entry bound required by ActualMatchedRepresentation. -/
@@ -112,40 +108,50 @@ theorem MatchedPieces.exists_matchingMatrixInverse
     ⟨_, _, _, _, hmargin, hdiag, hentry, _, _, hoff, hnorm⟩
   let a : Fin 2 → ℝ := fun i => M.A i i
   let b : Fin 2 → ℝ := fun i => M.B i i
-  have hA :
-      (M.A : Matrix (Fin 2) (Fin 2) ℝ) = Matrix.diagonal a := by
-    funext i j
+  have hA : Matrix.of M.A = Matrix.diagonal a := by
+    ext i j
     by_cases hij : i = j
     · subst j
-      simp only [Matrix.diagonal_apply_eq, a]
-    · rw [Matrix.diagonal_apply_ne _ hij]
+      simp only [Matrix.of_apply, Matrix.diagonal_apply_eq, a]
+    · simp only [Matrix.of_apply, Matrix.diagonal_apply_ne _ hij]
       exact (hoff i j hij).1
-  have hB :
-      (M.B : Matrix (Fin 2) (Fin 2) ℝ) = Matrix.diagonal b := by
-    funext i j
+  have hB : Matrix.of M.B = Matrix.diagonal b := by
+    ext i j
     by_cases hij : i = j
     · subst j
-      simp only [Matrix.diagonal_apply_eq, b]
-    · rw [Matrix.diagonal_apply_ne _ hij]
+      simp only [Matrix.of_apply, Matrix.diagonal_apply_eq, b]
+    · simp only [Matrix.of_apply, Matrix.diagonal_apply_ne _ hij]
       exact (hoff i j hij).2
-  have hK :
-      (fun i j => radialMatrixProduct M.A M.Db i j - M.B i j) =
-        matchingK a b M.Db := by
-    rw [radialMatrixProduct_eq_matrix_mul, hA, hB]
-    funext i j
-    simp only [matchingK, Matrix.sub_apply]
+  let K : Matrix (Fin 2) (Fin 2) ℝ := matchingK a b (Matrix.of M.Db)
+  let I : Matrix (Fin 2) (Fin 2) ℝ := K⁻¹
+  have hK (i j : Fin 2) :
+      radialMatrixProduct M.A M.Db i j - M.B i j = K i j := by
+    have hprod := congrFun (congrFun (radialMatrixProduct_eq_matrix_mul M.A M.Db) i) j
+    rw [hprod]
+    have hb : M.B i j = (Matrix.diagonal b) i j := by
+      simpa only [Matrix.of_apply] using congrFun (congrFun hB i) j
+    rw [hA, hb]
+    exact (Matrix.sub_apply _ _ i j).symm
   obtain ⟨hdet, hbound⟩ :=
-    matchingK_inverse_entry_bound_two a b M.D0 M.Db M.margin hmargin
-      hnorm (fun i => (hdiag i).2.2.2) hentry
-  refine ⟨(matchingK a b M.Db)⁻¹, ?_, ?_, ?_⟩
+    matchingK_inverse_entry_bound_two a b M.D0 (Matrix.of M.Db) M.margin hmargin
+      hnorm (fun i => (hdiag i).2.2.2) (by
+        intro i j
+        simpa only [Matrix.of_apply] using hentry i j)
+  refine ⟨(fun i j => I i j), ?_, ?_, ?_⟩
   · intro i j
     exact (hbound i j).trans
       (div_le_div_of_nonneg_right (by norm_num : (2 : ℝ) ≤ 4) hmargin.le)
-  · rw [hK, radialMatrixProduct_eq_matrix_mul,
-      radialMatrixIdentity_eq_matrix_one]
-    exact Matrix.nonsing_inv_mul _ hdet
-  · rw [hK, radialMatrixProduct_eq_matrix_mul,
-      radialMatrixIdentity_eq_matrix_one]
-    exact Matrix.mul_nonsing_inv _ hdet
+  · funext i j
+    have hleft : I * K = (1 : Matrix (Fin 2) (Fin 2) ℝ) :=
+      Matrix.nonsing_inv_mul K hdet
+    have hij := congrFun (congrFun hleft i) j
+    simpa only [radialMatrixProduct, hK, radialMatrixIdentity,
+      Matrix.mul_apply, Matrix.one_apply] using hij
+  · funext i j
+    have hright : K * I = (1 : Matrix (Fin 2) (Fin 2) ℝ) :=
+      Matrix.mul_nonsing_inv K hdet
+    have hij := congrFun (congrFun hright i) j
+    simpa only [radialMatrixProduct, hK, radialMatrixIdentity,
+      Matrix.mul_apply, Matrix.one_apply] using hij
 
 end ContinuousFlexibility.Blueprint
