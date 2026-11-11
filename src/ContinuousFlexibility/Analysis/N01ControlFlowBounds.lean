@@ -139,6 +139,7 @@ theorem N01Properties.controlTravelPartial_hasDerivAt_second
         opticalSpeed D.w s * opticalLogRatio D.w (C.control m) s ^ 2 / 4)) 0 := by
   obtain ⟨_, hgeom⟩ := hN.1.1
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
+  have hsupport := hcontrol.support_subset m
   rcases hcontrol with ⟨hinterval, hturn, _, hneg, _, hcontrols, _⟩
   have hl : 0 < C.left m := hgeom.1.1.trans (hinterval m).1
   have hpos : ∀ s ∈ Icc (C.left m) (C.right m), 0 < D.w s := by
@@ -154,14 +155,14 @@ theorem N01Properties.controlTravelPartial_hasDerivAt_second
     intro s hs
     rw [uIcc_of_le hr.1.le] at hs
     exact opticalSpeed_logPerturbation_factor hl hgeom.1.2.2.1.1 (hcontrols m).1
-      hpos (hneg m) ⟨(hturn m).1, (hturn m).2.1⟩ (hcontrols m).2.2
+      hpos (hneg m) ⟨(hturn m).1, (hturn m).2.1⟩ hsupport
       ⟨hs.1, hs.2.trans hr.2.le⟩
   rw [heq]
   exact (Analysis.hasDerivAt_sqrtFactor_integral_twice hr.1
     ((continuousOn_opticalSpeed_of_profile hgeom.1.2.2.1.1 hl hpos).mono
       (Icc_subset_Icc le_rfl hr.2.le))
     ((continuousOn_opticalLogRatio hgeom.1.2.2.1.1 (hcontrols m).1
-      (hneg m) (hturn m) (hcontrols m).2.2).mono
+      (hneg m) (hturn m) hsupport).mono
       (Icc_subset_Icc le_rfl hr.2.le))).2
 
 theorem N01Properties.controlCurvaturePrimitive_continuousOn
@@ -171,6 +172,7 @@ theorem N01Properties.controlCurvaturePrimitive_continuousOn
       (Icc (C.left m) (C.right m)) := by
   obtain ⟨_, hgeom⟩ := hN.1.1
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
+  have hsupport := hcontrol.support_subset m
   rcases hcontrol with ⟨hinterval, hturn, _, hneg, _, hcontrols, _⟩
   have hl : 0 < C.left m := hgeom.1.1.trans (hinterval m).1
   have hpos : ∀ s ∈ Icc (C.left m) (C.right m), 0 < D.w s := by
@@ -179,7 +181,7 @@ theorem N01Properties.controlCurvaturePrimitive_continuousOn
       ⟨(hinterval m).1.trans_le hs.1, hs.2.trans_lt (hinterval m).2.2⟩
   have ha := continuousOn_opticalSpeed_of_profile hgeom.1.2.2.1.1 hl hpos
   have hv := continuousOn_opticalLogRatio hgeom.1.2.2.1.1 (hcontrols m).1
-    (hneg m) (hturn m) (hcontrols m).2.2
+    (hneg m) (hturn m) hsupport
   have hc : ContinuousOn (fun s => opticalSpeed D.w s *
       opticalLogRatio D.w (C.control m) s ^ 2 / 4)
       (Icc (C.left m) (C.right m)) := by

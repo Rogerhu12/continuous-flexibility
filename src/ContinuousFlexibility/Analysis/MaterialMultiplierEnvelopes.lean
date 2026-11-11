@@ -76,7 +76,7 @@ theorem WeightedMixedJetEnvelopes.add {ι : Type*}
   obtain ⟨G, hG, hGpos, hgb⟩ := hgenv a b c
   refine ⟨fun p => F p + G p, hF.add hG,
     fun p => add_nonneg (hFpos p) (hGpos p), fun i p => ?_⟩
-  rw [mixedDerivative_add_of_contDiff (hf i) (hg i), mul_add]
+  rw [n02n03_mixedDerivative_add_of_contDiff (hf i) (hg i), mul_add]
   exact (abs_add_le _ _).trans (add_le_add (hfb i p) (hgb i p))
 
 private theorem weighted_coefficient_product_bound

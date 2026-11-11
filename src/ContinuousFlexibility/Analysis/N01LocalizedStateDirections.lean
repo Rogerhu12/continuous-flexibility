@@ -182,6 +182,55 @@ private theorem localizedStateParameterDirection_flow_jet
   exact hN.ordinaryFlowFamily_state_jet_locality hS hT hz v w hvq hwq
     m b θ hr hκ (-c) hh J n vs
 
+private theorem exists_localized_state_directions_from_height
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (v : StateDirections S × ℝ) (hvq : v.2 = 0)
+    (η : ℕ → HeightPair S)
+    (hlocal : ∀ m, ∃ c : ℝ, ∀ t ∈ Ioo (C.left m) (C.right m), ∀ θ : ℝ,
+      heightPairField S (η m) (t, θ) = heightPairField S v.1.val.1 (t, θ) + c)
+    (henergy : ∀ s m, heightPairGrading S s (η m) ≤
+      Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) s
+        ((S.height (3 / 4 : ℝ)).decode v.1.val.1.1) m).toReal) :
+    ∃ w : ℕ → (StateDirections S × ℝ),
+      (∀ m, (w m).2 = 0) ∧
+      (∀ m n b θ r (hr : r ∈ Icc (C.left m) (C.right m))
+        (J : SmoothDirections (sectorNeighborhood S base ε ε)
+          (fun y => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C y))),
+        ∀ z ∈ sectorNeighborhood S base ε ε, ∀ vs : Fin n → (StateDirections S × ℝ),
+          J.D (n + 1) z (Fin.snoc vs v) = J.D (n + 1) z (Fin.snoc vs (w m))) ∧
+      (∀ m s d,
+        T.M (T.sample m) ^ d * pairGrading (sectorGrading S) realGrading s (w m) ≤
+          T.M (T.sample m) ^ d *
+            Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) s
+              ((S.height (3 / 4 : ℝ)).decode v.1.val.1.1) m).toReal +
+          (circleSingletonGradingConstant s * (2 * circleSobolevConstant)) *
+            Real.sqrt (circleComponentEnergy T (3 / 4 : ℝ) (s + d + 1)
+              ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1) m).toReal) := by
+  let w : ℕ → (StateDirections S × ℝ) := fun m =>
+    localizedStateParameterDirection (hS.2.1 (3 / 4 : ℝ)) m (η m)
+      ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1 m 0)
+  have hwq (m : ℕ) : (w m).2 = 0 :=
+    localizedStateParameterDirection_scalar (hS.2.1 (3 / 4 : ℝ)) m (η m) _
+  refine ⟨w, hwq, ?_, ?_⟩
+  · intro m n b θ r hr J z hz vs
+    let c : ℝ := (hlocal m).choose
+    have hc : ∀ t ∈ Ioo (C.left m) (C.right m), ∀ θ : ℝ,
+        heightPairField S (η m) (t, θ) = heightPairField S v.1.val.1 (t, θ) + c :=
+      (hlocal m).choose_spec
+    exact localizedStateParameterDirection_flow_jet hN hS hT v hvq
+      m n b θ r hr (η m) c hc J z hz vs
+  · intro m s d
+    have hs := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
+    have hM : 1 ≤ T.M (T.sample m) := (hT.2.1 _ hs).2.2.2
+    have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
+    exact (localizedStateParameterDirection_weighted_grading_le (hS.2.1 (3 / 4 : ℝ))
+      v.1.val.2.2.1 m s d (η m) hM hH).trans
+      (add_le_add (mul_le_mul_of_nonneg_left (henergy s m)
+        (pow_nonneg (zero_le_one.trans hM) d)) (le_refl _))
+
 theorem N01Properties.exists_localized_state_directions
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -206,31 +255,7 @@ theorem N01Properties.exists_localized_state_directions
   let data := N01Properties.exists_height_pair_plateau_directions
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hN hS hT (show HeightPair S from v.1.val.1)
-  let η : ℕ → HeightPair S := data.choose
-  have hη := data.choose_spec
-  have hlocal (m : ℕ) : ∃ c : ℝ, ∀ t ∈ Ioo (C.left m) (C.right m), ∀ θ : ℝ,
-      heightPairField S (η m) (t, θ) = heightPairField S v.1.val.1 (t, θ) + c :=
-    hη.2.2.1 m
-  have henergy (s m : ℕ) : heightPairGrading S s (η m) ≤
-      Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) s
-        ((S.height (3 / 4 : ℝ)).decode v.1.val.1.1) m).toReal := (hη.2.2.2 s).2 m
-  let w : ℕ → (StateDirections S × ℝ) := fun m =>
-    localizedStateParameterDirection (hS.2.1 (3 / 4 : ℝ)) m (η m)
-      ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1 m 0)
-  have hwq (m : ℕ) : (w m).2 = 0 :=
-    localizedStateParameterDirection_scalar (hS.2.1 (3 / 4 : ℝ)) m (η m) _
-  refine ⟨w, hwq, ?_, ?_⟩
-  · intro m n b θ r hr J z hz vs
-    obtain ⟨c, hc⟩ := hlocal m
-    exact localizedStateParameterDirection_flow_jet hN hS hT v hvq
-      m n b θ r hr (η m) c hc J z hz vs
-  · intro m s d
-    have hs := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
-    have hM : 1 ≤ T.M (T.sample m) := (hT.2.1 _ hs).2.2.2
-    have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
-    exact (localizedStateParameterDirection_weighted_grading_le (hS.2.1 (3 / 4 : ℝ))
-      v.1.val.2.2.1 m s d (η m) hM hH).trans
-      (add_le_add (mul_le_mul_of_nonneg_left (henergy s m)
-        (pow_nonneg (zero_le_one.trans hM) d)) (le_refl _))
+  exact exists_localized_state_directions_from_height hN hS hT v hvq data.choose
+    data.choose_spec.2.2.1 (fun s m => (data.choose_spec.2.2.2 s).2 m)
 
 end ContinuousFlexibility.Statements

@@ -23,8 +23,7 @@ open scoped ContDiff Topology
 
 private theorem sqrt_discriminant_from_minus_speed {a b c : ℝ} (ha : a ≠ 0) :
     b - a * (b / a - Real.sqrt (b ^ 2 - a * c) / a) = Real.sqrt (b ^ 2 - a * c) := by
-  field_simp [ha]
-  ring
+  field_simp [ha] <;> ring
 
 theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

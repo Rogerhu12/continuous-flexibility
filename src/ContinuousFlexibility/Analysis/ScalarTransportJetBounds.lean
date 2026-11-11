@@ -235,7 +235,9 @@ theorem weightedJetBound_of_transport_recurrence
             apply ih (rank a i t j) (Nat.lt_succ_of_le (hrank a i t j)) (index a i t j)
             have hj : degree (rank a i t j) (index a i t j) ≤
                 ∑ k, degree (rank a i t k) (index a i t k) :=
-              Finset.single_le_sum (fun k _ => Nat.zero_le _) (Finset.mem_univ j)
+              Finset.single_le_sum
+                (f := fun k => degree (rank a i t k) (index a i t k))
+                (fun k _ => Nat.zero_le _) (Finset.mem_univ j)
             exact hj.trans ((le_add_of_nonneg_left (Nat.zero_le (knownDegree a i t))).trans
               ((hdegree a i t).trans hi))
           have hterm (t : Fin (terms a i)) :

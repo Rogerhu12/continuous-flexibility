@@ -79,7 +79,7 @@ theorem PhysicalJetEnvelopes.angularPartial
   apply physicalJetEnvelopes_iff_material.mpr
   apply henv'.congr
   intro i
-  exact (funext (materialPullback_angularPartial hT (hf i))).symm
+  exact (funext (n02n03_materialPullback_angularPartial hT (hf i))).symm
 
 theorem PhysicalJetEnvelopes.radialPartial
     {ι : Type*} {D : ReferenceData} {T : MaterialData} {γ : ℝ}
@@ -125,7 +125,7 @@ theorem PhysicalJetEnvelopes.radialPartial
   apply physicalJetEnvelopes_iff_material.mpr
   apply hproduct.congr
   intro i
-  exact (funext (materialPullback_radialPartial hT (hf i))).symm
+  exact (funext (n02n03_materialPullback_radialPartial hT (hf i))).symm
 
 theorem PhysicalJetEnvelopes.symmetric_divergence
     {ι : Type*} {D : ReferenceData} {T : MaterialData} {γ : ℝ}

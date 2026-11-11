@@ -84,13 +84,15 @@ theorem abs_iteratedDeriv_stateControlSum_le {D : ReferenceData} {S : PhysicalSp
     · intro i _ hi
       have hnot : r ∉ Ioo (C.left i) (C.right i) := fun hir =>
         Set.disjoint_left.mp (hdisjoint i m hi) hir hmr
-      rw [iteratedDeriv_zero_off_open_interval (hcontrol i).1 (hcontrol i).2.2 n hnot,
+      rw [iteratedDeriv_zero_off_open_interval (hcontrol i).1
+        ((subset_tsupport (C.control i)).trans (hcontrol i).2.2) n hnot,
         mul_zero]
   · have hz : ∑ i ∈ indices, stateKappa S x i * iteratedDeriv n (C.control i) r = 0 := by
       apply Finset.sum_eq_zero
       intro i hi
       have hnot : r ∉ Ioo (C.left i) (C.right i) := fun hir => h ⟨i, hi, hir⟩
-      rw [iteratedDeriv_zero_off_open_interval (hcontrol i).1 (hcontrol i).2.2 n hnot,
+      rw [iteratedDeriv_zero_off_open_interval (hcontrol i).1
+        ((subset_tsupport (C.control i)).trans (hcontrol i).2.2) n hnot,
         mul_zero]
     rwa [hz, abs_zero]
 

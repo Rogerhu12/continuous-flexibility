@@ -89,10 +89,13 @@ theorem UniformSmoothFamilyOn.neg
     {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F} {U : Set E}
     {f : I → E → F} (hf : UniformSmoothFamilyOn p q U f) (hp : Monotone p) :
     UniformSmoothFamilyOn p q U (fun i x => -f i x) := by
-  exact hf.postContinuousLinear hp (fun _ => -ContinuousLinearMap.id ℝ F) 0
+  let L : F →L[ℝ] F :=
+    { toLinearMap := -LinearMap.id
+      cont := continuous_neg }
+  exact hf.postContinuousLinear hp (fun _ => L) 0
     (fun s => ⟨1, zero_le_one, fun i y => by
-      simp only [ContinuousLinearMap.neg_apply, ContinuousLinearMap.id_apply,
-        map_neg_eq_map, Nat.add_zero, one_mul, le_refl]⟩)
+      change q s (-y) ≤ 1 * q (s + 0) y
+      simp only [map_neg_eq_map, Nat.add_zero, one_mul, le_refl]⟩)
 
 theorem UniformSmoothFamilyOn.sub
     [IsTopologicalAddGroup F]
@@ -165,7 +168,8 @@ theorem UniformSmoothFamilyOn.fst
     (fun _ : I => ContinuousLinearMap.fst ℝ E G) 0
   · intro s
     exact ⟨1, zero_le_one, fun i x => by
-      simp only [Nat.add_zero, one_mul, ContinuousLinearMap.fst_apply, pairGrading_apply]
+      change p s x.1 ≤ 1 * (p (s + 0) x.1 + r (s + 0) x.2)
+      simp only [Nat.add_zero, one_mul]
       exact le_add_of_nonneg_right (apply_nonneg _ _)⟩
   · exact fun _ _ hx => hx.1
 

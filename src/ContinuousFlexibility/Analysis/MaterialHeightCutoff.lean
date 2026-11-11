@@ -40,7 +40,7 @@ theorem materialPullback_cutoff {D : ReferenceData} {T : MaterialData}
 
 /-- The full mixed jet of a radial multiplier uses exactly the radial
 Leibniz sum; angular differentiation does not touch the multiplier. -/
-theorem mixedDerivative_radial_mul {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
+theorem n02n03_mixedDerivative_radial_mul {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
     (hχ : ContDiff ℝ ∞ χ) (hf : ContDiff ℝ ∞ f) (a b : ℕ) (p : PolarPoint) :
     mixedDerivative a b (fun q => χ q.1 * f q) p =
       ∑ i ∈ Finset.range (a + 1),
@@ -74,7 +74,7 @@ theorem weightedPhysicalJet_cutoff {D : ReferenceData} {T : MaterialData}
         (a.choose i : ℝ) * iteratedDeriv i χ p.1 *
           weightedPhysicalJet T γ (a - i) b c f p := by
   unfold weightedPhysicalJet
-  rw [materialPullback_cutoff hT, mixedDerivative_radial_mul hχ
+  rw [materialPullback_cutoff hT, n02n03_mixedDerivative_radial_mul hχ
     (contDiff_materialPullback hT hf), Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi

@@ -112,10 +112,11 @@ theorem N01Properties.control_curvature_product_lower_bound
     2 * C.left m ≤ (C.right m - C.left m) ^ 2 * B * K := by
   obtain ⟨_, hgeom⟩ := hN.1.1
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
+  have hsupport := hcontrol.support_subset m
   rcases hcontrol with ⟨hinterval, hturn, _, hneg, _, hcontrols, _, _, hunit⟩
   apply normalized_opticalControl_full_curvature_bound
     (hgeom.1.1.trans (hinterval m).1) (hinterval m).2.1
-    hgeom.1.2.2.1.1 (hcontrols m).1 ?_ (hneg m) (hturn m) (hcontrols m).2.2 ?_ ?_ hK
+    hgeom.1.2.2.1.1 (hcontrols m).1 ?_ (hneg m) (hturn m) hsupport ?_ ?_ hK
   · intro r hr
     exact hgeom.1.2.2.2.2.1 r
       ⟨(hinterval m).1.trans_le hr.1, hr.2.trans_lt (hinterval m).2.2⟩
@@ -123,7 +124,7 @@ theorem N01Properties.control_curvature_product_lower_bound
     by_cases hri : r ∈ Ioo (C.left m) (C.right m)
     · exact hχB r hri
     · rw [(control_first_second_deriv_zero_off_interval
-        (hcontrols m).1 (hcontrols m).2.2 hri).1, abs_zero]
+        (hcontrols m).1 hsupport hri).1, abs_zero]
       exact hB
   · have heq (t : ℝ) : opticalLogPerturbation D.w (C.control m) t =
         (fun s => D.w s * Real.exp (t * C.control m s)) := rfl
@@ -139,10 +140,11 @@ theorem N01Properties.controlTravel_hasDerivAt_second
         opticalSpeed D.w r * opticalLogRatio D.w (C.control m) r ^ 2 / 4)) 0 := by
   obtain ⟨_, hgeom⟩ := hN.1.1
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
+  have hsupport := hcontrol.support_subset m
   rcases hcontrol with ⟨hinterval, hturn, _, hneg, _, hcontrols, _⟩
   apply (hasDerivAt_opticalTravel_logPerturbation_full_twice
     (hgeom.1.1.trans (hinterval m).1) (hinterval m).2.1
-    hgeom.1.2.2.1.1 (hcontrols m).1 ?_ (hneg m) (hturn m) (hcontrols m).2.2).2
+    hgeom.1.2.2.1.1 (hcontrols m).1 ?_ (hneg m) (hturn m) hsupport).2
   intro r hr
   exact hgeom.1.2.2.2.2.1 r
     ⟨(hinterval m).1.trans_le hr.1, hr.2.trans_lt (hinterval m).2.2⟩

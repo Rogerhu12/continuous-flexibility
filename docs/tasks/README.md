@@ -7,6 +7,26 @@ cite the 62-page version in `paper/flexible-surface-rewrite/`, which has the sam
 One line works on one branch `line/<Node>` and opens one pull request into `main`.
 The rules below are the same for every line.
 
+## Notices to individual lines
+
+Read this section every time you check the rules. A notice is removed when it is done.
+
+- **N01a (PR #31): do not mark ready yet; merge `origin/main` and port to R12's definitions.**
+  R12 (merged) changed two definitions in `Statements/Radial.lean`:
+  `RadialCellIntegrable D f` is now `∀ m, MemLp (fun x => D.localizer m x.1 * f x) 2
+  (radialPhysicalMeasure D)`, and the first-normal estimate takes `SourceDerivativeMember D γ M fθ`
+  instead of `SourceMember D γ M (fθ, 0)`. R12 also added declarations with the names of six of
+  yours in `ContinuousFlexibility.Statements`. Branch `integrate/batch-7` already contains two
+  fixes you can merge: the six clashing names renamed `n01a_*`, and the argument in
+  `N01aReferencePureRow.lean`. The next error is `N01aReferenceMeasure.lean:40`
+  (`integrable_square` becomes `(hf m).integrable_sq`); the places that construct
+  `RadialCellIntegrable` (`n01a_radialCellIntegrable_sub`, `cell_integrable_iff`, ...) need
+  `memLp_two_iff_integrable_sq` with the measurability you already assume. Mark ready again when
+  CI is green on the merge with current `main`.
+  Since then N01b (merged) also changed `controlGeometryConditions` (`Statements/Nonlinear.lean`):
+  the control support clause is now `tsupport (C.control m) ⊆ Ioo (C.left m) (C.right m)`, so the
+  controls N01a constructs must satisfy the strict inclusion.
+
 ## Start
 
 Read `AGENTS.md`, `docs/STATUS.md`, your task file, your node file
@@ -18,12 +38,35 @@ in minutes because a theorem with exactly the node statement was already in the 
 Work until the completion standard is fully met. Do not stop at a draft or an interim report.
 Push often.
 
+## The rules change: check them often
+
+The rules are this file and `AGENTS.md` **on `main`**. The lead updates them while lines work, and
+the copy on your branch is the one from when you branched, so it goes stale. The version on `main`
+always wins. Check for changes before each push, and at least once an hour (git only, no API quota):
+
+```bash
+git fetch -q origin main && git log --oneline HEAD..origin/main -- docs/tasks/README.md AGENTS.md
+```
+
+If it prints anything, read the current rules and follow them from then on:
+
+```bash
+git show origin/main:docs/tasks/README.md
+```
+
+```bash
+git show origin/main:AGENTS.md
+```
+
 ## What you edit
 
 - Your node file.
 - New files you create. Proofs go in new modules under `src/ContinuousFlexibility/<Area>/`
   with distinctive names; sub-blueprint statements go in `src/ContinuousFlexibility/Blueprint/<Node>/`.
 - Existing files of other areas only when the proof needs a change there; say so in the pull request.
+  Before changing or generalizing an existing file, merge `origin/main` and search it for the lemma:
+  three lines once proved the same ODE lemma in the same file under three names, and every copy
+  became a merge conflict. Give a new declaration a name that is not used anywhere in `src/`.
 - **Not** `src/ContinuousFlexibility.lean` and **not** `docs/STATUS.md`. The root import is generated
   by `scripts/gen_root.py` from every `.lean` file under `src/ContinuousFlexibility/` (outside
   `Blueprint/`), in CI and before local builds; the ledger is kept by the lead. Report your numbers
@@ -76,9 +119,17 @@ Do not spend time fighting the sandbox. If a compile runs out of memory, is kill
 than a few minutes for one file, stop compiling locally: write the code, push, and read the result
 of CI. That loop always works.
 
-- CI builds everything on every push to a `line/**` branch and on every pull request, prints the
-  blueprint status, and takes about 5 minutes with the cache. A newer push cancels the older run.
-- Find the run of your branch and its errors:
+- CI builds everything once per push to a `line/**` branch (your pull request shows the checks of
+  its head commit) and prints the blueprint status. Each branch keeps its own build cache, so a run
+  takes about 2 minutes plus the time to compile what you changed. A newer push cancels the older run.
+- See the CI result of your pull request (this uses GraphQL, which does not spend the REST quota
+  below):
+
+```bash
+gh pr checks <PR-number>
+```
+
+- When it failed, find the run and read its errors once:
 
 ```bash
 gh run list --branch line/<Node> --limit 3
@@ -91,7 +142,36 @@ gh run view <run-id> --log-failed
 - The step "Build every library" prints every `error:` line with the following 60 lines; the full
   log is the artifact `build-log`.
 - Push small, complete steps (one file or one lemma group at a time), so that one CI round tells
-  you about one change. Do not pile up thousands of unchecked lines before the first push.
+  you about one change.
+- **Hard limit: your branch may be at most 20,000 added lines of Lean ahead of its last commit that
+  passed CI.** A line can repair a few tens of thousands of uncompiled lines; beyond that the errors
+  pile up faster than they are fixed. When you reach the limit, stop writing new material and make
+  CI green first. Check the distance with:
+
+```bash
+git diff --shortstat $(gh run list --branch line/<Task> --status success --limit 1 --json headSha --jq '.[0].headSha') HEAD -- '*.lean'
+```
+
+  Code that does not compile is not progress: the further a branch runs ahead of a green build,
+  the more layered its errors become.
+
+## GitHub API quota
+
+All lines share one GitHub account, and with it one REST quota of 5,000 requests per hour. When it
+is used up, every `gh` command of every line fails with `API rate limit exceeded` for up to an hour.
+
+- Never run `gh run watch`: it polls every 3 seconds, about 1,200 requests an hour.
+- Never poll in a loop. Wait at least 5 minutes after a push, then check at most once a minute.
+- Check CI with `gh pr checks` (GraphQL, a separate quota), not with repeated `gh run list` or
+  `gh run view`.
+- Download a failed log once per run and keep it in a file.
+- List branches with `git ls-remote`, which uses no API quota.
+- If a command reports `API rate limit exceeded`, do not retry. Keep writing and checking code
+  locally; this shows when the quota resets (it does not count against the quota):
+
+```bash
+gh api rate_limit --jq '.resources.core.reset | todate'
+```
 
 ## Lean
 
@@ -118,11 +198,34 @@ Then open a draft pull request into `main` titled `<Task>`.
 
 ## When you finish
 
-1. Mark your pull request ready for review and write the final report in it.
+1. Merge the current `origin/main` into your branch, push, and wait until CI is green on that
+   merge. Other lines land on `main` every hour; a branch that was green before can clash with
+   them (two declarations of the same name, a changed shared file). Then mark your pull request
+   ready for review and write the final report in it.
 2. Take the next task that nobody has: the first one in the list "Pick next" of `docs/STATUS.md`
    whose branch does not exist. Claim it as above and continue. Do not wait for a review.
 3. If your own task turned out to need a sub-blueprint, its pieces go to the top of the candidates:
    push the sub-blueprint first, so that they can be claimed.
+4. **If every task here has a branch, switch to the research repository `Rogerhu12/math-research`.**
+   The author has reserved six topics there for sessions that finish here. Take the first of them,
+   in this order, whose row in `QUEUE.md` still says 待领:
+   `topics/primes-n2-plus-1`, `topics/primes-4x3-27y2`, `topics/hodge-abelian-varieties`,
+   `topics/abelian-surface-torsion-uniform`, `topics/selberg-eigenvalue-conjecture`,
+   `topics/ramsey-r55`.
+   - Check access first: `git ls-remote https://github.com/Rogerhu12/math-research.git HEAD`. If it
+     fails, your credentials do not cover that repository: write "no access to math-research" at the
+     end of your pull request's final report and stop; the lead will tell the author.
+   - Clone it and pull `main`. Read its root `README.md` in full, including the authorization section
+     and every rule, and the topic's `README.md`. Change the topic's row in `QUEUE.md` to
+     进行中（会话名/日期）, push, and start the research. From then on follow that repository's rules,
+     not these.
+   - Keep going until the completion standard in the topic's `README.md` is met. Do not stop at a
+     stage report, an intermediate result or a "suggested next step" to wait for a reply; reaching a
+     time limit is not a reason to stop. When a subproblem is done, take the next one in the topic's
+     `open.md`. Wrap up only when the topic is truly complete or the conversation is close to its
+     length limit, and update `HANDOFF.md` before you wrap up.
+   - Never write a token into any file, commit, log, HANDOFF or note, and never repeat it in a reply.
+     Do not upload PDFs, do not render pages as images, keep each file under 5 MB.
 
 ## Final report in the pull request
 

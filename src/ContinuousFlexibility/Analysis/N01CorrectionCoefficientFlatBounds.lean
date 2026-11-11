@@ -133,10 +133,12 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_material_bound_of_fl
     have hs0 := hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
       hS hT hR j hcell χ hχrange hcutoff hdisc
       (ContinuousLinearMap.snd ℝ ℝ ℝ) hzero a b n x hx.1 v
+    simp only [ContinuousLinearMap.fst_apply] at hf0
+    simp only [ContinuousLinearMap.snd_apply] at hs0
     constructor
-    · simpa only [ContinuousLinearMap.fst_apply, hf0, abs_zero] using
+    · simpa only [hf0, abs_zero] using
         (mul_nonneg (mul_nonneg hA hK.le) hW)
-    · simpa only [ContinuousLinearMap.snd_apply, hs0, abs_zero] using
+    · simpa only [hs0, abs_zero] using
         (mul_nonneg (mul_nonneg hA hK.le) hW)
 
 /-- The local tame interface for the same smooth coefficient jets. The

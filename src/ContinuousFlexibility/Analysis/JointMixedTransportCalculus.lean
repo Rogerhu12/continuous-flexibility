@@ -101,7 +101,7 @@ theorem jointMixedDiagonal_sub
   rw [← hL, he.iteratedDeriv_eq n,
     iteratedDeriv_fun_sub (hf.of_le (by simp)) (hg.of_le (by simp)), hJ, hK]
 
-theorem SmoothDirections.radialPartial_value_eq_fixedLast
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.radialPartial_value_eq_fixedLast
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (x : E) (hx : x ∈ U) {p : PolarPoint} (hp : p ∈ V) :
     radialPartial (fun q => f (x, q)) p =
@@ -116,7 +116,7 @@ theorem SmoothDirections.radialPartial_value_eq_fixedLast
   rw [(J.fixedLast (0, (1, 0))).zero (x, p) ⟨hx, hp⟩] at hs
   exact he'.symm.trans hs
 
-theorem SmoothDirections.angularPartial_value_eq_fixedLast
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.angularPartial_value_eq_fixedLast
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (x : E) (hx : x ∈ U) {p : PolarPoint} (hp : p ∈ V) :
     angularPartial (fun q => f (x, q)) p =
@@ -132,14 +132,14 @@ theorem SmoothDirections.angularPartial_value_eq_fixedLast
   exact he'.symm.trans hs
 
 /-- The genuine joint tower of the actual radial derivative. -/
-def SmoothDirections.spatialRadialTower
+def _root_.ContinuousFlexibility.Statements.SmoothDirections.spatialRadialTower
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V)) :
     SmoothDirections (U ×ˢ V) (fun z => radialPartial (fun q => f (z.1, q)) z.2) :=
   (J.fixedLast (0, (1, 0))).congrOn (fun z hz =>
     (J.radialPartial_value_eq_fixedLast hV hc z.1 hz.1 hz.2).symm)
 
 /-- The genuine joint tower of the actual angular derivative. -/
-def SmoothDirections.spatialAngularTower
+def _root_.ContinuousFlexibility.Statements.SmoothDirections.spatialAngularTower
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V)) :
     SmoothDirections (U ×ˢ V) (fun z => angularPartial (fun q => f (z.1, q)) z.2) :=
   (J.fixedLast (0, (0, 1))).congrOn (fun z hz =>

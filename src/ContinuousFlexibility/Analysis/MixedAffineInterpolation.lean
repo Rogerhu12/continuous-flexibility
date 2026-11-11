@@ -71,7 +71,7 @@ theorem hasInterpolation_affine_mixed_product
     have h' : (1 + p (a + lossA) y) * p (b + lossB) z ≤
         C₀ * (1 + p (s + B + ℓ) y + p (s + B + ℓ) z) := by
       simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-        mul_one, add_zero, pairGrading_apply] using h
+        mul_one, add_zero, pairGrading_apply, add_assoc] using h
     have hy' := (hp hhigh y).trans hyH
     have hz' := (hp hhigh z).trans hzH
     calc

@@ -20,7 +20,7 @@ open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
-theorem materialEll_bounded {D : ReferenceData} {T : MaterialData}
+theorem n02n03_materialEll_bounded {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ r ∈ Ioo D.a D.b, |T.ell r| ≤ K := by
   obtain ⟨hsmooth, hpos, _, _, _, _, _, _, _, _, hend, _⟩ := hT
@@ -81,7 +81,7 @@ theorem materialEll_radius_iteratedDeriv_bounded
     rw [iteratedDeriv_comp_materialRadius hT hlogell]
     exact (hb (T.radius x) (hinside x).1).2.2
   obtain ⟨C, hC, hb⟩ := iteratedDeriv_exp_majorant hL hLb n
-  obtain ⟨A, hA, hAb⟩ := materialEll_bounded hT
+  obtain ⟨A, hA, hAb⟩ := n02n03_materialEll_bounded hT
   have heq : (fun t => T.ell (T.radius t)) =
       (fun t => Real.exp (Real.log (T.ell (T.radius t)))) :=
     funext (fun t => (Real.exp_log (hp t)).symm)

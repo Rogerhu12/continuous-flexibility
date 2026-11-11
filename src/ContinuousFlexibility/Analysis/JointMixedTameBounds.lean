@@ -103,7 +103,7 @@ private theorem mixedJet_unit_bound_aux
 
 /-- Restricting joint jets to the two spatial unit directions does not
 change the parameter growth factor. -/
-theorem SmoothDirections.mixedJet_unit_bound_of_jointJet
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.mixedJet_unit_bound_of_jointJet
     {f : E × PolarPoint → ℝ} (J : SmoothDirections (U ×ˢ V) f)
     (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (low high : Seminorm ℝ E) (n a b : ℕ)
@@ -140,7 +140,7 @@ private theorem pureJointParameterLinear_apply (v : E) :
 
 /-- The actual mixed spatial derivative is an algebraic multilinear map
 of its parameter slots. Smoothness is used to justify its additivity. -/
-def SmoothDirections.mixedParameterMultilinearMap
+def _root_.ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap
     {f : E × PolarPoint → ℝ} (J : SmoothDirections (U ×ˢ V) f)
     (hV : IsOpen V) (n a b : ℕ) (x : E) (hx : x ∈ U)
     (p : PolarPoint) (hp : p ∈ V) : MultilinearMap ℝ (fun _ : Fin n => E) ℝ where
@@ -170,7 +170,7 @@ def SmoothDirections.mixedParameterMultilinearMap
     exact (congrArg (fun g : PolarPoint → ℝ => mixedDerivative a b g p) heq).trans
       (mixedDerivative_const_mul c _ a b p)
 
-theorem SmoothDirections.mixedParameterMultilinearMap_apply
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap_apply
     {f : E × PolarPoint → ℝ} (J : SmoothDirections (U ×ˢ V) f)
     (hV : IsOpen V) (n a b : ℕ) (x : E) (hx : x ∈ U)
     (p : PolarPoint) (hp : p ∈ V) (v : Fin n → E) :
@@ -231,11 +231,11 @@ theorem UniformWeightedJointGrowth.mixed_parameter_oneHigh
     have h := (J i).mixedJet_unit_bound_of_jointJet (hV i) (hc i)
       (p base) (p high) n a b x hx y hy (A * W i ^ P) (1 + p high x)
       hjoint u (fun j => (hu j).le)
-    simpa only [L, SmoothDirections.mixedParameterMultilinearMap_apply,
+    simpa only [L, ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap_apply,
       coe_normSeminorm, Real.norm_eq_abs] using h
   have h := multilinearMap_bound_of_unitBall L (normSeminorm ℝ ℝ)
     (p base) (p high) hscale hunit v
-  simpa only [L, SmoothDirections.mixedParameterMultilinearMap_apply,
+  simpa only [L, ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap_apply,
     coe_normSeminorm, Real.norm_eq_abs, high] using h
 
 end ContinuousFlexibility.Analysis

@@ -161,7 +161,7 @@ theorem N01Properties.returnCorrectionCoefficientError_uniform_fderiv_bound
         _ ≤ A * M := mul_le_mul_of_nonneg_left (hweight m) hA
     · have heq := returnCorrectionLocalCoefficientError_eventually_zero_of_radial_support
         D S C R χ z m ρ (hsupp m) p hp
-      rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds, iteratedFDeriv_fun_zero, norm_zero]
+      rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds, iteratedFDeriv_fun_zero, Pi.zero_apply, norm_zero]
       exact mul_nonneg hA hM.le
   have hsupp' (m : ℕ) : Function.support (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m) := by
     intro r hr
@@ -186,7 +186,7 @@ theorem N01Properties.returnCorrectionCoefficientError_uniform_fderiv_bound
       filter_upwards [returnCorrectionCoefficientError_eventually_zero D S C R χ z p
         (hN.cutoffs_deriv_eventually_zero_of_nonnegative χ hsupp' hend hp.1 hn)] with q hq
       rw [hq, LinearMap.zero_apply]
-    rw [(hzero.iteratedFDeriv ℝ n).eq_of_nhds, iteratedFDeriv_fun_zero, norm_zero]
+    rw [(hzero.iteratedFDeriv ℝ n).eq_of_nhds, iteratedFDeriv_fun_zero, Pi.zero_apply, norm_zero]
     exact mul_nonneg hA hM.le
 
 

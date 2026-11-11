@@ -21,7 +21,7 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ContDiff Topology
 
-theorem materialPullback_radialPartial
+theorem n02n03_materialPullback_radialPartial
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
     (hT : IsMaterialData D T) (hf : ContDiffOn ℝ ∞ f (annularOpen D))
     (p : PolarPoint) :
@@ -81,7 +81,7 @@ theorem materialPullback_radialPartial
   field_simp [hell]
   <;> ring
 
-theorem materialPullback_angularPartial
+theorem n02n03_materialPullback_angularPartial
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
     (hT : IsMaterialData D T) (hf : ContDiffOn ℝ ∞ f (annularOpen D))
     (p : PolarPoint) :
@@ -137,7 +137,7 @@ theorem memLp_weightedPhysicalJet_angularPartial
     (a b c : ℕ) :
     MemLp (weightedPhysicalJet T γ a b c (angularPartial f)) 2 materialCylinderMeasure := by
   have heq : materialPullback T γ (angularPartial f) =
-      angularPartial (materialPullback T γ f) := funext (materialPullback_angularPartial hT hf)
+      angularPartial (materialPullback T γ f) := funext (n02n03_materialPullback_angularPartial hT hf)
   have hjet : weightedPhysicalJet T γ a b c (angularPartial f) =
       (fun p => T.M (T.radius p.1) ^ c *
         mixedDerivative a b (angularPartial (materialPullback T γ f)) p) := by
@@ -212,11 +212,11 @@ theorem memLp_weightedPhysicalJet_radialPartial
         W p ^ k * mixedDerivative i j (fun q => L q * G q) p =
           W p ^ k * mixedDerivative i j V p
       rw [show V = (fun q => radialPartial G q + L q * G q) from rfl,
-        mixedDerivative_add_of_contDiff hR (hL.mul hG), mul_add]
+        n02n03_mixedDerivative_add_of_contDiff hR (hL.mul hG), mul_add]
   have hV : ContDiff ℝ ∞ V := hR.add (hL.mul hG)
   have hproduct := memLp_weighted_mixed_product hW hWpos hA hV 1 hAb hVLp a b c
   have heq : materialPullback T γ (radialPartial f) = (fun p => A p * V p) :=
-    funext (materialPullback_radialPartial hT hf)
+    funext (n02n03_materialPullback_radialPartial hT hf)
   have hjet : weightedPhysicalJet T γ a b c (radialPartial f) =
       (fun p => W p ^ c * mixedDerivative a b (fun q => A q * V q) p) := by
     funext p

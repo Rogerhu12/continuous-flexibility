@@ -71,9 +71,12 @@ theorem returnCorrectionPulledDisplacementLinear_on_flow
         (r, returnCorrectedMinusFlow S C χ z m r θ) ρ =
       returnCorrectionDisplacementLinear S C z m θ ρ := by
   unfold returnCorrectionPulledDisplacementLinear returnCorrectedMinusFlow
-  rw [Function.leftInverse_invFun hF
-    (returnInterpolation (χ m r) (returnCorrectionInitialMap S C z m) θ),
-    Function.leftInverse_invFun hJ θ]
+  exact congrArg (fun α : ℝ => returnCorrectionDisplacementLinear S C z m α ρ)
+    ((congrArg
+      (Function.invFun (returnInterpolation (χ m r) (returnCorrectionInitialMap S C z m)))
+      (Function.leftInverse_invFun hF
+        (returnInterpolation (χ m r) (returnCorrectionInitialMap S C z m) θ))).trans
+      (Function.leftInverse_invFun hJ θ))
 
 /-- A differentiable field evaluated along a genuine characteristic
 curve has the corresponding transport derivative. -/
@@ -92,7 +95,7 @@ theorem scalar_transport_identity_of_curve
       (returnFlow_linearMap_coordinates A)
     simpa only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
       ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_eq_mul,
-      mul_one, A, radialPartial, angularPartial, mul_comm] using h
+      mul_one, one_mul, A, radialPartial, angularPartial, mul_comm] using h
   exact hcoord.symm.trans (hd.unique hcomp)
 
 theorem N01Properties.minusFlow_slice_bijective
@@ -155,7 +158,10 @@ theorem N01Properties.returnCorrectionPulledDisplacementLinear_contDiffAt_one
       (returnInterpolation (χ m q.1) (returnCorrectionInitialMap S C z m)) q.2) (p.1, A p) :=
     (hN.returnInterpolation_invFun_contDiffAt hS hT hz hsector χ m hχ hχrange
       (p.1, A p) hp).of_le (by simp)
-  have hB : ContDiffAt ℝ 1 B p := hJ.comp p (contDiffAt_fst.prodMk hA)
+  have hpull : ContDiffAt ℝ 1 (fun q : PolarPoint => (q.1, A q)) p :=
+    contDiffAt_fst.prodMk hA
+  have hB : ContDiffAt ℝ 1 B p :=
+    (hJ.comp p hpull).congr_of_eventuallyEq (Eventually.of_forall fun q => rfl)
   exact ((hN.returnCorrectionDisplacementLinear_contDiff hS hT hz hsector m ρ).contDiffAt.of_le
     (by simp)).comp p hB
 

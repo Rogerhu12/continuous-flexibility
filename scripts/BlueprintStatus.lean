@@ -1,4 +1,7 @@
 import FlexibleSphereSolution
+import ContinuousFlexibility.Analysis.SobolevExtension
+import ContinuousFlexibility.Analysis.HadamardThreeLinesExtension
+import ContinuousFlexibility.Radial.OuterUniformInverse
 import Lean.Util.CollectAxioms
 
 /-!
@@ -32,4 +35,27 @@ run_cmd do
   logInfo m!"axioms of FlexibleSphere.exists_closedBending: {endpoint}"
 
 #print axioms ContinuousFlexibility.Blueprint.R06a
+#print axioms ContinuousFlexibility.Blueprint.ScalarWeighted
+
+-- The external-input tool has no blueprint node: audit its actual endpoints.
+#print axioms ContinuousFlexibility.Analysis.exists_halfLineSobolevExtension
+#print axioms ContinuousFlexibility.Analysis.exists_intervalSobolevExtension
+#print axioms ContinuousFlexibility.Analysis.SobolevExtensionOperator.completion_rightInverse
+#print axioms ContinuousFlexibility.Analysis.SobolevExtensionOperator.completion_compatible
+#print axioms ContinuousFlexibility.Analysis.hadamard_threeLines_operator_norm_unit
+#print axioms ContinuousFlexibility.Analysis.hadamardThreeLinesExtension_spec_unit
+#print axioms ContinuousFlexibility.Blueprint.R07
+#print axioms ContinuousFlexibility.Blueprint.R08
+#print axioms ContinuousFlexibility.Blueprint.R12
+#print axioms ContinuousFlexibility.Blueprint.R10b
+#print axioms ContinuousFlexibility.Blueprint.N01b
+#print axioms ContinuousFlexibility.Blueprint.R11b
+#print axioms ContinuousFlexibility.Blueprint.N04a
+
+-- Tool-R10a-Outer: actual inverse, ordinary compact sources, and the refuted global bound.
+#print axioms ContinuousFlexibility.Radial.exists_uniform_morseOuterInverse_fixed_parameters
+#print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.assertions
+#print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.ordinary_jacobi_source
+#print axioms ContinuousFlexibility.Radial.accumulatingProfile_no_unweighted_outer_inverse
+
 #print axioms ContinuousFlexibility.Blueprint.N02N03

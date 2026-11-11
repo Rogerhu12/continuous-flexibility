@@ -94,10 +94,11 @@ theorem UniformFamilyJetBounds.diagonal_spatial_interpolation
   refine ⟨B, fun R hR N k hk b hb => ?_⟩
   let j : Fin (nmax + 1) := ⟨k, by omega⟩
   have hbase : base j ≤ B :=
-    (Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ j)).trans hB
+    (Finset.single_le_sum (f := base) (fun _ _ => Nat.zero_le _)
+      (Finset.mem_univ j)).trans hB
   have hloss : 1 + loss j ≤ oldLoss := by
     have hj : loss j ≤ ∑ i : Fin (nmax + 1), loss i :=
-      Finset.single_le_sum (fun _ _ => Nat.zero_le _) (Finset.mem_univ j)
+      Finset.single_le_sum (f := loss) (fun _ _ => Nat.zero_le _) (Finset.mem_univ j)
     dsimp only [oldLoss]
     omega
   obtain ⟨Cj, hCj, hcj⟩ := hbound j (R + (k : ℝ)) (by positivity) (b + 1)
@@ -137,6 +138,33 @@ theorem UniformFamilyJetBounds.diagonal_spatial_interpolation
   exact (hraw.trans (mul_le_mul_of_nonneg_left horder hCj)).trans
     ((mul_le_mul_of_nonneg_left hscale hCj).trans_eq (by dsimp only [Q]; ring))
 
+private theorem diagonal_spatial_evaluation_interpolation
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    {U : Set E} {f : I → E → F} {J : ∀ i, SmoothDirections U (f i)}
+    (hJ : UniformFamilyJetBounds p q J) (hp : Monotone p)
+    (hIp : HasInterpolation p) (nmax : ℕ)
+    (eval : ℕ → F → ℕ → ℝ → ℝ) (weight : ℕ → ℝ) (c : ℝ)
+    (hc : 0 ≤ c) (hweight : ∀ m, 0 ≤ weight m)
+    (heval : ∀ u m b θ, |eval b u m θ| ≤ (c * q (b + 1) u) * weight m) :
+    ∃ B : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ N k : ℕ, k ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ i x, x ∈ U → ∀ w : E,
+        p B x ≤ R → p B w ≤ 1 → ∀ m θ,
+        |eval b ((J i).D k x (fun _ => w)) m θ| ≤
+          C * weight m * (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+            ((b : ℝ) / ((N : ℝ) + 1)) := by
+  obtain ⟨B, hb⟩ := hJ.diagonal_spatial_interpolation hp hIp nmax
+  refine ⟨B, fun R hR N k hk b hbN => ?_⟩
+  obtain ⟨C, hC, hCbound⟩ := hb R hR N k hk b hbN
+  refine ⟨c * C, mul_nonneg hc hC, fun i x hx w hxlow hwlow m θ => ?_⟩
+  have hg := hCbound i x hx w hxlow hwlow
+  calc
+    _ ≤ (c * q (b + 1) ((J i).D k x (fun _ => w))) * weight m :=
+      heval _ m b θ
+    _ ≤ (c * (C * (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+          ((b : ℝ) / ((N : ℝ) + 1)))) * weight m :=
+      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hg hc) (hweight m)
+    _ = _ := by ring
+
 /-- The actual circle decoder keeps the original sample-height factor.
 All constants precede the family index, circle label, angle, state, and
 direction. The common low order precedes both `R` and `N`. -/
@@ -154,25 +182,11 @@ theorem UniformFamilyJetBounds.circle_diagonal_angular_interpolation
           C * T.H (T.sample m) ^ γ *
             (1 + p (N + B + 1) x + p (N + B + 1) w) ^
               ((b : ℝ) / ((N : ℝ) + 1)) := by
-  obtain ⟨B, hb⟩ := hJ.diagonal_spatial_interpolation hp hIp nmax
-  refine ⟨B, fun R hR N k hk b hbN => ?_⟩
-  obtain ⟨C, hC, hc⟩ := hb R hR N k hk b hbN
-  refine ⟨2 * circleSobolevConstant * C,
-    mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) hC,
-    fun i x hx w hxlow hwlow m θ => ?_⟩
-  have hpoint := circleModel_iteratedDeriv_abs_le hH hpos
-    ((J i).D k x (fun _ => w)) m b θ
-  have hg := hc i x hx w hxlow hwlow
-  have hweight : 0 ≤ T.H (T.sample m) ^ γ := Real.rpow_nonneg (hpos m).le _
-  calc
-    _ ≤ (2 * circleSobolevConstant * H.grading (b + 1)
-          ((J i).D k x (fun _ => w))) * T.H (T.sample m) ^ γ := hpoint
-    _ ≤ (2 * circleSobolevConstant *
-          (C * (1 + p (N + B + 1) x + p (N + B + 1) w) ^
-            ((b : ℝ) / ((N : ℝ) + 1)))) * T.H (T.sample m) ^ γ :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left hg
-          (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)) hweight
-    _ = _ := by ring
+  exact diagonal_spatial_evaluation_interpolation hJ hp hIp nmax
+    (fun b u m θ => iteratedDeriv b (H.decode u m) θ)
+    (fun m => T.H (T.sample m) ^ γ) (2 * circleSobolevConstant)
+    (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
+    (fun m => Real.rpow_nonneg (hpos m).le γ)
+    (fun u m b θ => circleModel_iteratedDeriv_abs_le hH hpos u m b θ)
 
 end ContinuousFlexibility.Analysis

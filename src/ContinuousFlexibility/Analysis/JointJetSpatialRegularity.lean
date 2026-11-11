@@ -25,7 +25,7 @@ variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
   {U : Set E} {V : Set PolarPoint} {f : E × PolarPoint → ℝ}
 
-def SmoothDirections.freezeSpatial (J : SmoothDirections (U ×ˢ V) f)
+def _root_.ContinuousFlexibility.Statements.SmoothDirections.freezeSpatial (J : SmoothDirections (U ×ˢ V) f)
     (hU : IsOpen U) (p : PolarPoint) (hp : p ∈ V) :
     SmoothDirections U (fun x => f (x, p)) := by
   let L : E →L[ℝ] E × PolarPoint :=
@@ -33,19 +33,20 @@ def SmoothDirections.freezeSpatial (J : SmoothDirections (U ×ˢ V) f)
   have hmap : MapsTo (fun x => (0, p) + L x) U (U ×ˢ V) := by
     intro x hx
     change (0 + x, p + 0) ∈ U ×ˢ V
-    simpa only [zero_add, add_zero] using And.intro hx hp
+    simpa only [zero_add, add_zero] using
+      (show (x, p) ∈ U ×ˢ V from ⟨hx, hp⟩)
   exact (J.compAffine L (0, p) hU hmap).congrOn (fun x _ => by
     change f (0 + x, p + 0) = f (x, p)
     rw [zero_add, add_zero])
 
-theorem SmoothDirections.freezeSpatial_apply (J : SmoothDirections (U ×ˢ V) f)
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.freezeSpatial_apply (J : SmoothDirections (U ×ˢ V) f)
     (hU : IsOpen U) (p : PolarPoint) (hp : p ∈ V)
     (n : ℕ) (x : E) (v : Fin n → E) :
     (J.freezeSpatial hU p hp).D n x v = J.D n (x, p) (fun i => (v i, 0)) := by
   change J.D n (0 + x, p + 0) (fun i => (v i, 0)) = _
   rw [zero_add, add_zero]
 
-theorem SmoothDirections.pointTower_eq_jointJet
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.pointTower_eq_jointJet
     (J : SmoothDirections (U ×ˢ V) f) (hU : IsOpen U)
     (p : PolarPoint) (hp : p ∈ V) (K : SmoothDirections U (fun x => f (x, p)))
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
@@ -53,7 +54,7 @@ theorem SmoothDirections.pointTower_eq_jointJet
   rw [K.unique (J.freezeSpatial hU p hp) n x hx]
   exact J.freezeSpatial_apply hU p hp n x v
 
-theorem SmoothDirections.jointJet_spatial_continuousOn
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_continuousOn
     (J : SmoothDirections (U ×ˢ V) f) (n : ℕ) (x : E) (hx : x ∈ U)
     (v : Fin n → E × PolarPoint) :
     ContinuousOn (fun p => J.D n (x, p) v) V := by
@@ -62,7 +63,7 @@ theorem SmoothDirections.jointJet_spatial_continuousOn
   simpa only [Function.comp_def] using
     (J.continuous n).comp hmap.continuousOn (fun p hp => ⟨⟨hx, hp⟩, mem_univ _⟩)
 
-theorem SmoothDirections.jointJet_spatial_hasDerivAt_fst
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_hasDerivAt_fst
     (J : SmoothDirections (U ×ˢ V) f) (n : ℕ) (x : E) (hx : x ∈ U)
     (v : Fin n → E × PolarPoint) {p : PolarPoint} (hp : p ∈ V) :
     HasDerivAt (fun r => J.D n (x, (r, p.2)) v)
@@ -76,7 +77,7 @@ theorem SmoothDirections.jointJet_spatial_hasDerivAt_fst
   simpa only [hline, Prod.mk.eta] using J.hasDerivAt_line_jet
     (x, ((0 : ℝ), p.2)) (0, ((1 : ℝ), 0)) n v hmem
 
-theorem SmoothDirections.jointJet_spatial_hasDerivAt_snd
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_hasDerivAt_snd
     (J : SmoothDirections (U ×ˢ V) f) (n : ℕ) (x : E) (hx : x ∈ U)
     (v : Fin n → E × PolarPoint) {p : PolarPoint} (hp : p ∈ V) :
     HasDerivAt (fun θ => J.D n (x, (p.1, θ)) v)
@@ -90,7 +91,7 @@ theorem SmoothDirections.jointJet_spatial_hasDerivAt_snd
   simpa only [hline, Prod.mk.eta] using J.hasDerivAt_line_jet
     (x, (p.1, (0 : ℝ))) (0, ((0 : ℝ), 1)) n v hmem
 
-theorem SmoothDirections.jointJet_spatial_contDiffOn
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_spatial_contDiffOn
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V)
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E × PolarPoint) :
     ContDiffOn ℝ ∞ (fun p => J.D n (x, p) v) V := by
@@ -125,7 +126,7 @@ theorem SmoothDirections.jointJet_spatial_contDiffOn
   exact (contDiffAt_infty.mpr (fun k =>
     (hfinite k n v).contDiffAt (hV.mem_nhds hp))).contDiffWithinAt
 
-theorem SmoothDirections.jointJet_radialPartial_eq_fixedLast
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_radialPartial_eq_fixedLast
     (J : SmoothDirections (U ×ˢ V) f) (hc : Convex ℝ (U ×ˢ V))
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E × PolarPoint)
     {p : PolarPoint} (hp : p ∈ V) :
@@ -143,7 +144,7 @@ theorem SmoothDirections.jointJet_radialPartial_eq_fixedLast
   exact (hasDerivAt_radial_slice_of_differentiableAt hd).unique
     (J.jointJet_spatial_hasDerivAt_fst n x hx v hp)
 
-theorem SmoothDirections.jointJet_angularPartial_eq_fixedLast
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_angularPartial_eq_fixedLast
     (J : SmoothDirections (U ×ˢ V) f) (hc : Convex ℝ (U ×ˢ V))
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E × PolarPoint)
     {p : PolarPoint} (hp : p ∈ V) :
@@ -161,7 +162,7 @@ theorem SmoothDirections.jointJet_angularPartial_eq_fixedLast
   exact (hasDerivAt_angular_slice_of_differentiableAt hd).unique
     (J.jointJet_spatial_hasDerivAt_snd n x hx v hp)
 
-theorem SmoothDirections.jointJet_mixed_radial_step
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_mixed_radial_step
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (a b n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E × PolarPoint)
     {p : PolarPoint} (hp : p ∈ V) :
@@ -171,7 +172,7 @@ theorem SmoothDirections.jointJet_mixed_radial_step
   exact mixedDerivative_congr_on_open hV
     (fun q hq => J.jointJet_radialPartial_eq_fixedLast hc n x hx v hq) a b hp
 
-theorem SmoothDirections.jointJet_mixed_angular_step
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_mixed_angular_step
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (a b n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E × PolarPoint)
     {p : PolarPoint} (hp : p ∈ V) :
@@ -235,7 +236,7 @@ private theorem jointJet_mixed_line_by_order
               filter_upwards [hnear] with s hs
               exact J.jointJet_mixed_angular_step hV hc 0 b n (x + s • w) hs v hp
 
-theorem SmoothDirections.jointJet_mixed_hasDerivAt_line
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_mixed_hasDerivAt_line
     (J : SmoothDirections (U ×ˢ V) f)
     (hU : IsOpen U) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (a b n : ℕ) (x w : E) {t : ℝ} (ht : x + t • w ∈ U)

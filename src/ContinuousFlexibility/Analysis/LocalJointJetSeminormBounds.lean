@@ -63,7 +63,7 @@ private theorem joint_scalar_bound_mono
   have hprod : (∏ i, p (v i)) ≤ ∏ i, q (v i) :=
     Finset.prod_le_prod₀ (fun _ _ => apply_nonneg _ _) (fun i _ => hpq (v i))
   exact mul_le_mul
-    (mul_le_mul hAB (add_le_add_left (hpq x) 1)
+    (mul_le_mul hAB (add_le_add (le_refl (1 : ℝ)) (hpq x))
       (add_nonneg zero_le_one (apply_nonneg _ _)) (hA.trans hAB))
     hprod (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
     (mul_nonneg (hA.trans hAB) (add_nonneg zero_le_one (apply_nonneg _ _)))

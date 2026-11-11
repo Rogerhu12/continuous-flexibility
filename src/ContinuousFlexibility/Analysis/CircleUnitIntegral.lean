@@ -20,6 +20,10 @@ open scoped Topology
 
 variable {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem scalar_mul_cancel_pair (a b c : ℝ) (h : a * b = 1) :
+    a * (b * c) = c := by
+  rw [← mul_assoc, h, one_mul]
+
 def circleModelValueLevel (T : MaterialData) (γ : ℝ) (S : CircleModelData)
     (m : ℕ) (θ : ℝ) : S.level 1 →L[ℝ] ℝ :=
   T.H (T.sample m) ^ γ • (anglePairEvaluation (toIocMod Real.pi_pos 0 θ)).comp
@@ -77,7 +81,9 @@ theorem circleModelValueLevel_apply
     _ = T.H (T.sample m) ^ γ *
         (T.H (T.sample m) ^ (-γ) * S.decode u m θ) :=
       congrArg (fun y : ℝ => T.H (T.sample m) ^ γ * y) he
-    _ = S.decode u m θ := by rw [← mul_assoc, hw, one_mul]
+    _ = S.decode u m θ :=
+      scalar_mul_cancel_pair (T.H (T.sample m) ^ γ)
+        (T.H (T.sample m) ^ (-γ)) (S.decode u m θ) hw
 
 def circleUnitIntegral (hS : IsCircleModel T γ S)
     (f : ℝ → S.Space) (hf : Continuous f) : S.Space := by

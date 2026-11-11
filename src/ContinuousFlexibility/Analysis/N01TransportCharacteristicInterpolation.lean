@@ -29,7 +29,7 @@ variable {I E F P G : Type*}
   [NormedAddCommGroup P] [NormedSpace ℝ P]
   [NormedAddCommGroup G] [NormedSpace ℝ G]
 
-theorem SmoothDirections.fstParameter_apply
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.fstParameter_apply
     {U : Set E} {V : Set P} {f : E × P → G}
     (J : SmoothDirections (U ×ˢ V) f) (hU : IsOpen U) (hV : IsOpen V)
     (n : ℕ) (x : E × F) (y : P) (v : Fin n → (E × F) × P) :

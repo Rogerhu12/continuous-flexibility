@@ -405,9 +405,19 @@ def outputCellSquare (D : ReferenceData) (γ M : ℝ)
   exp (-2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
     referenceCellSquare D m f
 
+/-- Actual local L² membership, including a.e. strong measurability of the
+localized field itself.  Integrability of its square alone would admit
+nonmeasurable sign changes and would not define a distributional graph. -/
 def RadialCellIntegrable (D : ReferenceData) (f : PolarPoint → ℝ) : Prop :=
-  ∀ m, IntegrableOn (fun x : PolarPoint => (D.localizer m x.1 * f x) ^ 2)
-    (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)) volume
+  ∀ m, MemLp (fun x : PolarPoint => D.localizer m x.1 * f x) 2
+    (radialPhysicalMeasure D)
+
+/-- The angular derivative is measured in the source weights.  It need not
+be an even compatible source: differentiating an even field produces an odd
+field, and weak derivatives are specified only up to a.e. equality. -/
+def SourceDerivativeMember (D : ReferenceData) (γ M : ℝ)
+    (fθ : PolarPoint → ℝ) : Prop :=
+  RadialCellIntegrable D fθ ∧ Summable (sourceCellSquare D γ M fθ)
 
 def SourceMember (D : ReferenceData) (γ M : ℝ) (F : RadialSource) : Prop :=
   RadialCellIntegrable D F.1 ∧ Summable (sourceCellSquare D γ M F.1) ∧
@@ -517,7 +527,7 @@ def WeakAngularDerivative (D : ReferenceData) (u d : PolarPoint → ℝ) : Prop 
 def FirstNormalInverseEstimate (D : ReferenceData) (γ M₀ M₁ : ℝ)
     (G : RadialSource → RadialUnknown) : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ F fθ, SourceMember D γ M₀ F →
-    WeakAngularDerivative D F.1 fθ → SourceMember D γ M₀ (fθ, 0) →
+    WeakAngularDerivative D F.1 fθ → SourceDerivativeMember D γ M₀ fθ →
     ∃ ur : PolarPoint → ℝ, WeakNormalDerivative D (G F).1 ur ∧
       OutputRealization D γ M₁ 0 (ur, 0) ∧
       outputNormSquare D γ M₁ 0 (ur, 0) ≤ C ^ 2 *
@@ -554,11 +564,25 @@ def RadialReturnMargins (D : ReferenceData) : Prop :=
 
 def RadialTrueBorder (D : ReferenceData) : Prop :=
   ContDiff ℝ ∞ D.chi ∧ HasCompactSupport D.chi ∧
-    Function.support D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r} ∧
+    tsupport D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r} ∧
     (∫ r in D.a..D.b, referenceColumn D r * D.phi r) = 1 ∧
     ContDiff ℝ ∞ D.chiLeft ∧
     (∃ ε : ℝ, 0 < ε ∧ (∀ r ∈ Ioo D.a (D.a + ε), D.chiLeft r = 1) ∧
       (∀ r ∈ Ioo (D.b - ε) D.b, D.chiLeft r = 0))
+
+/-- The strict support certificate also supplies the ordinary support
+inclusion used in pointwise arguments. -/
+theorem RadialTrueBorder.support_subset {D : ReferenceData} (hD : RadialTrueBorder D) :
+    Function.support D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r} :=
+  (subset_tsupport D.chi).trans hD.2.2.1
+
+/-- Geometric facts established when the central solution is joined to the
+selected tails, retained by every subsequent inverse construction.
+These are properties of the actual profile and cells, not inverse or
+graph-closure assumptions. -/
+def RadialConstructionGeometry (D : ReferenceData) : Prop :=
+  (∀ r ∈ radialCore D, Radial.radialJacobi 4 D.w D.phi r = 0) ∧
+    RadialReturnMargins D
 
 def referenceBeta : ℝ := 3 / 4
 

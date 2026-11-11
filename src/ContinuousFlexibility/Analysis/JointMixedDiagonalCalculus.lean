@@ -92,7 +92,7 @@ def jointMixedDiagonal (J : SmoothDirections (U ×ˢ V) f)
     (n a b : ℕ) (x w : E) (p : PolarPoint) : ℝ :=
   mixedDerivative a b (fun q => J.D n (x, q) (fun _ => (w, (0 : PolarPoint)))) p
 
-theorem SmoothDirections.spatial_value_contDiffOn
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.spatial_value_contDiffOn
     (J : SmoothDirections (U ×ˢ V) f) (hV : IsOpen V) (x : E) (hx : x ∈ U) :
     ContDiffOn ℝ ∞ (fun p => f (x, p)) V := by
   apply (J.jointJet_spatial_contDiffOn hV 0 x hx Fin.elim0).congr
@@ -186,7 +186,7 @@ theorem jointMixedDiagonal_eq_iteratedDeriv
       rw [iteratedDeriv_succ, heq.deriv_eq]
       exact (jointMixedDiagonal_hasDerivAt_line J hU hV hc n a b x w ht hp).deriv
 
-theorem SmoothDirections.mixed_actual_line_contDiffOn
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.mixed_actual_line_contDiffOn
     (J : SmoothDirections (U ×ˢ V) f)
     (hU : IsOpen U) (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (a b : ℕ) (x w : E) {p : PolarPoint} (hp : p ∈ V) :

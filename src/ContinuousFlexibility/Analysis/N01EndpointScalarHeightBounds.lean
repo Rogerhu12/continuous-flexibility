@@ -26,6 +26,23 @@ open scoped Topology ContDiff BigOperators
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem weighted_height_transfer
+    {B K M H J E X W : ℝ} (c : ℕ)
+    (hB : 0 ≤ B) (hM : 0 ≤ M) (hH : 0 ≤ H) (hW : 0 ≤ W)
+    (hX : |X| ≤ B * J ^ (3 / 4 : ℝ) * E ^ B * W)
+    (hpref : H ^ (-(3 / 4 : ℝ)) * J ^ (3 / 4 : ℝ) * E ^ B ≤ K * M) :
+    (M ^ c * H ^ (-(3 / 4 : ℝ))) * |X| ≤ (B * K) * M ^ (c + 1) * W := by
+  calc
+    _ ≤ (M ^ c * H ^ (-(3 / 4 : ℝ))) * (B * J ^ (3 / 4 : ℝ) * E ^ B * W) :=
+      mul_le_mul_of_nonneg_left hX
+        (mul_nonneg (pow_nonneg hM c) (Real.rpow_nonneg hH _))
+    _ = (B * M ^ c) * (H ^ (-(3 / 4 : ℝ)) * J ^ (3 / 4 : ℝ) * E ^ B) * W := by
+      ring
+    _ ≤ (B * M ^ c) * (K * M) * W :=
+      mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left hpref (mul_nonneg hB (pow_nonneg hM c))) hW
+    _ = _ := by rw [pow_succ]; ring
+
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlow_pure_scalar_height_bound_uniform_radius
     (hN : N01Properties D T S C base loss ε)
@@ -96,7 +113,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
   let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
-  obtain ⟨K, hK, hpref⟩ := hN.flow_sample_prefactor_le_M hT hB.le
+  let prefData := hN.flow_sample_prefactor_le_M hT hB.le
+  let K : ℝ := prefData.choose
+  have hK : 0 < K := prefData.choose_spec.1
   refine ⟨B * K, mul_pos hB hK, fun rsel hrsel m b c θ hb z hz η hη => ?_⟩
   have hs := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ hs).2.2.2
@@ -109,20 +128,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
     exact add_nonneg (mul_nonneg
       (add_nonneg (by positivity) (apply_nonneg _ _)) (apply_nonneg _ _))
       (apply_nonneg _ _)
-  calc
-    _ ≤ (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B * W) :=
-      mul_le_mul_of_nonneg_left (data.choose_spec.2 rsel hrsel m b θ hb z hz η hη)
-        (mul_nonneg (pow_nonneg hM c) (Real.rpow_nonneg hH _))
-    _ = (B * T.M (T.sample m) ^ c) *
-        (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
-          T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B) * W := by ring
-    _ ≤ (B * T.M (T.sample m) ^ c) * (K * T.M (T.sample m)) * W :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (hpref m) (mul_nonneg hB.le (pow_nonneg hM c))) hW
-    _ = _ := by rw [pow_succ]; dsimp only [W]; ring
+  exact weighted_height_transfer c hB.le hM hH hW
+    (data.choose_spec.2 rsel hrsel m b θ hb z hz η hη) (prefData.choose_spec.2 m)
 
 theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound
     (hN : N01Properties D T S C base loss ε)

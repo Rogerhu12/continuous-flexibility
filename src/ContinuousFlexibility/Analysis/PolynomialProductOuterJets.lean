@@ -50,7 +50,7 @@ theorem norm_iteratedFDeriv_mul_on_polynomial_ball
       ‖z‖ ≤ A * W i ^ Q →
         ‖iteratedFDeriv ℝ n (fun y : ℝ × ℝ => y.1 * y.2) z‖ ≤ C * W i ^ P := by
   let U : I → Set (ℝ × ℝ) := fun i => Metric.ball 0 ((A + 1) * W i ^ Q)
-  have hU (i : I) : IsOpen (U i) := isOpen_ball
+  have hU (i : I) : IsOpen (U i) := Metric.isOpen_ball
   have hcoord (L : (ℝ × ℝ) →L[ℝ] ℝ) (k : ℕ) :
       ∃ C P : ℝ, 0 ≤ C ∧ 0 ≤ P ∧ ∀ i z, z ∈ U i →
         ‖iteratedFDeriv ℝ k L z‖ ≤ C * W i ^ P := by

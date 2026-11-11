@@ -14,8 +14,6 @@ applies to every radius in the closed flow interval.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
 
 local instance n01FlowJointParameterTowerStateSMul (S : PhysicalSpacesData) :
@@ -63,6 +61,8 @@ theorem N01Properties.sectorFlow_closed_jointTower_apply
       scalarAngularExpansion n (fun b k =>
         ((hN.sectorFlow_closed_angularTower hS hT m r hr b z.2).D k z.1).toMultilinearMap) v := rfl
 
+attribute [local irreducible] N01Properties.sectorFlow_closed_jointTower
+
 def N01Properties.minusFlow_jointTower
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -70,14 +70,21 @@ def N01Properties.minusFlow_jointTower
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ℝ =>
         C.minusFlow (liftSectorParameter S C z.1) m r z.2) := by
-  apply restoreAffineScalarTower (hN.sectorFlow_closed_jointTower hS hT m r hr)
+  refine restoreAffineScalarTower
+    (E := (StateDirections S × ℝ) × ℝ)
+    (U := sectorNeighborhood S base ε ε ×ˢ univ)
+    (f := fun z : (StateDirections S × ℝ) × ℝ =>
+      ordinaryFlowFamily S C m 0 0 (r, z.2) (liftSectorParameter S C z.1))
+    (g := fun z : (StateDirections S × ℝ) × ℝ =>
+      C.minusFlow (liftSectorParameter S C z.1) m r z.2)
+    (hN.sectorFlow_closed_jointTower hS hT m r hr)
     (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) ℝ)
-    (-opticalTravel D.w (C.left m) r)
+    (-opticalTravel D.w (C.left m) r) ?_
   intro z hz
   change ordinaryFlowFamily S C m 0 0 (r, z.2) (liftSectorParameter S C z.1) +
     (-opticalTravel D.w (C.left m) r + z.2) = _
   simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero]
-  rw [hN.minusFlow_reference_eq hS hT m hr z.2]
-  ring
+  have href := hN.minusFlow_reference_eq hS hT m hr z.2
+  linarith only [href]
 
 end ContinuousFlexibility.Statements

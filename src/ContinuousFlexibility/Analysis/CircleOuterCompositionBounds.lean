@@ -62,7 +62,8 @@ theorem circleOuterJetCompose_grading_uniform_low_order
       circleNorm T γ i
         (S.decode (circleOuterJetComposeContinuousLinear hS hT hD hγ travel n e u)) ≤
       C i * (1 + S.grading (i + loss) e + S.grading (i + loss) u) := by
-    simpa only [circleOuterJetComposeContinuousLinear_decode, circleCompositionPhase,
+    simpa only [C, coefficientData, loss, lossData,
+      circleOuterJetComposeContinuousLinear_decode, circleCompositionPhase,
       circleAffineLift, Function.comp_def, one_mul] using hc i e u he hu
   have hCi : C i ≤ B := Finset.single_le_sum
     (f := C) (fun j _ => hC j) (Finset.mem_range.mpr (by omega))

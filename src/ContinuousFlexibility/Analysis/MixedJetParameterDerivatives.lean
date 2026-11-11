@@ -40,10 +40,10 @@ theorem MixedJetHasDerivAt.add
     (h : MixedJetHasDerivAt F G t) (h' : MixedJetHasDerivAt H K t) :
     MixedJetHasDerivAt (fun s p => F s p + H s p) (fun p => G p + K p) t := by
   intro a b p
-  rw [mixedDerivative_add_of_contDiff hG hK]
+  rw [n02n03_mixedDerivative_add_of_contDiff hG hK]
   apply ((h a b p).add (h' a b p)).congr_of_eventuallyEq
   filter_upwards [hF, hH] with s hs hs'
-  rw [mixedDerivative_add_of_contDiff hs hs']
+  rw [n02n03_mixedDerivative_add_of_contDiff hs hs']
   rfl
 
 theorem MixedJetHasDerivAt.mul_const

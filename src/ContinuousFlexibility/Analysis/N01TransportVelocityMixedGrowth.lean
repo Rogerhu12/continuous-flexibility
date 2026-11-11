@@ -15,8 +15,6 @@ same cutoff and the same flow inverses.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
@@ -117,8 +115,10 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
       half_pos (mul_pos hlam (Real.rpow_pos_of_pos (zero_lt_one.trans_le (hW m)) _))
     exact (pow_pos hd 2).trans_le (hpositive (liftSectorParameter S C z)
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl) m y hy).2
-  obtain ⟨JL₀, _, _, _, _, _⟩ := hN.exists_minusCharacteristicSpeed_strip_joint_growth
+  let characteristicData := hN.exists_minusCharacteristicSpeed_strip_joint_growth
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hS hT j hcell l h hl hh hlam hP hpositive
+  let JL₀ := characteristicData.choose
   let JL := fun m => (JL₀ m).fstParameter (F := CircleSpace S) hU₀ (hV m)
   let JA := fun m =>
     (hN.returnFlowInverseSlope_parameterSpatialTower hS hT m (l m) (h m) (hl m) (hh m)
@@ -137,14 +137,27 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
   let JZ : ∀ c m, SmoothDirections (U ×ˢ V m) (fZ c m) :=
     Fin.cases J₀ (Fin.cases J₁ Fin.elim0)
   let JC := fun m => radialCutoffScalarTower hU (hV m) (hχ m)
-  obtain ⟨BL, hBL⟩ := hN.minusCharacteristicSpeed_correction_mixed_interpolation hS hT
-    j hcell l h hl hh hlam hP hpositive JL nmax
-  obtain ⟨BA, hBA⟩ := hN.returnFlowInverseSlope_angular_diagonal_interpolation
+  let characteristicBounds := hN.minusCharacteristicSpeed_correction_mixed_interpolation
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    hS hT j hcell l h hl hh hlam hP hpositive JL nmax
+  let BL : ℕ := characteristicBounds.choose
+  have hBL := characteristicBounds.choose_spec
+  let slopeBounds := hN.returnFlowInverseSlope_angular_diagonal_interpolation
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hS hT hflow l h hl hh JA nmax
-  obtain ⟨B₀, hB₀⟩ := hN.returnCorrectionPulledResidual_angular_diagonal_interpolation
+  let BA : ℕ := slopeBounds.choose
+  have hBA := slopeBounds.choose_spec
+  let residualBounds := hN.returnCorrectionPulledResidual_angular_diagonal_interpolation
+    (D := D) (T := T) (S := S) (C := C) (R := R)
+    (base := base) (loss := loss) (ε := ε)
     hS hT hflow l h hl hh χ hχrange hR J₀ nmax
-  obtain ⟨B₁, hB₁⟩ := hN.returnCorrectionPulledDisplacement_angular_diagonal_interpolation
+  let B₀ : ℕ := residualBounds.choose
+  have hB₀ := residualBounds.choose_spec
+  let displacementBounds := hN.returnCorrectionPulledDisplacement_angular_diagonal_interpolation
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hS hT hflow l h hl hh χ hχrange J₁ nmax
+  let B₁ : ℕ := displacementBounds.choose
+  have hB₁ := displacementBounds.choose_spec
   let B : ℕ := BL + BA + B₀ + B₁
   have hbL : BL ≤ B := by dsimp only [B]; omega
   have hbA : BA ≤ B := by dsimp only [B]; omega

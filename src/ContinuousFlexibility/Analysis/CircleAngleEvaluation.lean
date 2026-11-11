@@ -97,7 +97,7 @@ theorem anglePairEvaluation_of_weakDerivative {f d : AngleL2} {g : ℝ → ℝ}
     have hm := integral_angleIntegralPrimitive_mul_deriv d (φ := fun t => t) contDiff_id
     simpa only [deriv_id'', mul_one, integral_angleL2_eq_zero_of_hasWeakAngularDerivative h,
       mul_zero, zero_sub] using hm
-  letI := angleMeasure_finite_for_evaluation
+  let := angleMeasure_finite_for_evaluation
   have hiP : Integrable (angleIntegralPrimitive d) angleMeasure :=
     (memLp_angleMeasure_of_continuous (continuous_angleIntegralPrimitive d)).integrable (by norm_num)
   have hmeanf : (∫ t, f t ∂angleMeasure) =

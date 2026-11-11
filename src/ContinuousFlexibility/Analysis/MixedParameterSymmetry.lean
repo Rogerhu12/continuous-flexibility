@@ -21,7 +21,7 @@ variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
 
 /-- No symmetry is assumed of the algebraic multilinear map: it follows
 from the genuine scalar tower and locality of the spatial derivatives. -/
-theorem SmoothDirections.mixedParameterMultilinearMap_comp_perm
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap_comp_perm
     {f : E × PolarPoint → ℝ} (J : SmoothDirections (U ×ˢ V) f)
     (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (n a b : ℕ) (x : E) (hx : x ∈ U) (p : PolarPoint) (hp : p ∈ V)

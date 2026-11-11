@@ -248,7 +248,7 @@ circle and $b=2$ on the cylinder.
   \|f\|_{H^i}\,\|g\|_{H^j}
   \le\|f\|_{H^k}\,\|g\|_{H^l}+\|f\|_{H^m}\,\|g\|_{H^n}.
  \]
-\item \textup{(Products.)} If $\alpha_1,\ldots,\alpha_k$ are
+\item \textup{(Products.)} If $k\ge1$ and $\alpha_1,\ldots,\alpha_k$ are
  multi-indices with $|\alpha_1|+\cdots+|\alpha_k|\le s$, then
  \[
   \Bigl\|\prod_{i=1}^k\partial^{\alpha_i}v_i\Bigr\|_{L^2}
@@ -257,12 +257,17 @@ circle and $b=2$ on the cylinder.
  In particular
  $\|v_1v_2\|_{H^s}\le C_s\bigl(\|v_1\|_{H^s}|v_2|_{\mathcal F}
  +|v_1|_{\mathcal F}\|v_2\|_{H^s}\bigr)$.
-\item \textup{(Functions.)} Let $\Phi$ be smooth on an interval which
- contains the closure of the range of a real function $v$. Then
+\item \textup{(Functions.)} Let $\Phi$ be smooth on a neighbourhood of
+ the convex hull of $\{0\}$ and the closure of the range of a real
+ function $v$. Then
  $\|\Phi(v)-\Phi(0)\|_{H^s}\le C_s\,\|v\|_{H^s}$ for every $s$,
  where $C_s$ depends only on $|v|_{\mathcal F}$ and on the suprema of
- $|\Phi'|,\ldots,|\Phi^{(s)}|$ over the range of $v$. The same holds
- for a smooth function of several real functions.
+ $|\Phi'|,\ldots,|\Phi^{(\max\{1,s\})}|$ on that convex hull.
+ The constants are uniform when these derivative bounds and an upper bound
+ for $|v|_{\mathcal F}$ are fixed. The same holds for a smooth function
+ of several real functions, using a convex region containing zero and the
+ closed joint range, with bounds on its derivatives of orders $1$ through
+ $\max\{1,s\}$ on that region.
 \item \textup{(Composition and inversion on the circle.)} Let $h$ be
  the lift of a diffeomorphism of the circle with $h'\ge c_0>0$. Then,
  for $s\ge1$,
@@ -311,7 +316,9 @@ $\Phi(v)$ is a sum of terms
 $\Phi^{(m)}(v)\prod_{i=1}^m\partial^{\alpha_i}v$ with
 $\alpha_1+\cdots+\alpha_m=\alpha$; bound $\Phi^{(m)}(v)$ by its
 supremum and apply (ii). In $L^2$,
-$|\Phi(v)-\Phi(0)|\le\sup|\Phi'|\,|v|$.
+$|\Phi(v)-\Phi(0)|\le\sup|\Phi'|\,|v|$, where this supremum controls
+the entire segment from zero to each input value. This first-derivative
+bound is also required when $s=0$.
 
 (iv) Change of variables gives
 $\|f\circ h\|_{L^2}\le c_0^{-1/2}\|f\|_{L^2}$. For $s\le3$ the chain

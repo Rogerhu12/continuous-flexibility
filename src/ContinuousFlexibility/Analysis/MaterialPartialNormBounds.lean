@@ -27,7 +27,7 @@ theorem physicalNorm_angularPartial_le
       Real.sqrt (Fintype.card (JetIndex s) : ℝ) * physicalNorm T γ (s + 1) u := by
   have hpull : materialPullback T γ (angularPartial u) =
       angularPartial (materialPullback T γ u) :=
-    funext (materialPullback_angularPartial hT hu)
+    funext (n02n03_materialPullback_angularPartial hT hu)
   have hG := contDiff_materialPullback (γ := γ) hT hu
   apply physicalNorm_le_of_common_jet_bound (Real.sqrt_nonneg _)
   intro J
@@ -140,7 +140,7 @@ theorem exists_physicalNorm_radialPartial_bound
           (fun p => W p ^ c * mixedDerivative a b (fun q => L q * G q) p) := by
       funext p
       change W p ^ c * mixedDerivative a b (fun q => radialPartial G q + L q * G q) p = _
-      rw [mixedDerivative_add_of_contDiff hR (hL.mul hG), mul_add]
+      rw [n02n03_mixedDerivative_add_of_contDiff hR (hL.mul hG), mul_add]
       rfl
     rw [heq]
     have hb := (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)).trans
@@ -158,7 +158,7 @@ theorem exists_physicalNorm_radialPartial_bound
   have hAV := weightedMixedJets_eLpNorm_mul_bound hW hWpos hA hV s 1 hKA
     (mul_nonneg hB hN) hbA hVb
   have hpull : materialPullback T γ (radialPartial u) = (fun p => A p * V p) :=
-    funext (materialPullback_radialPartial hT hu)
+    funext (n02n03_materialPullback_radialPartial hT hu)
   have hjet (J : JetIndex s) :
       eLpNorm (weightedPhysicalJet T γ (J.val 0).val (J.val 1).val (J.val 2).val
         (radialPartial u)) 2 materialCylinderMeasure ≤

@@ -3,15 +3,18 @@ name: Build
 # Builds every library of the lakefile, runs the axiom audit (part of the default
 # targets) and prints the axioms of the endpoint. A newer commit on the same ref
 # cancels the running build.
+#
+# Runs once per pushed commit. Pull requests show the checks of their head commit,
+# so there is no separate pull_request run; the lead verifies the merged result
+# on an integration branch before pushing to main.
 on:
   push:
     branches: [main, 'line/**']
-  pull_request:
-    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
   contents: write # upload the precompiled build to the `lake-cache` release (main only)
+  actions: write # replace this branch's previous build cache entry
 
 concurrency:
   group: build-${{ github.ref }}
@@ -27,10 +30,9 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Reserve space for the toolchain and artifacts
-        run: |
-          sudo rm -rf -- /usr/share/dotnet /usr/local/lib/android /usr/local/.ghcup /usr/share/swift /opt/ghc /opt/hostedtoolcache/CodeQL
-          df -h /
+      - name: Disk space
+        # The runner has about 88 GB free; no cleanup is needed.
+        run: df -h /
       - name: Set up the pinned Lean and Mathlib environment
         uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
         with:
@@ -41,12 +43,19 @@ jobs:
           use-mathlib-cache: "true"
           use-github-cache: "false"
       - name: Restore project build artifacts
+        # One cache entry per branch (the previous one is deleted when a new one is
+        # saved); a branch without its own entry starts from the newest entry of main,
+        # else from the newest entry of any branch. `~` separates the branch from the
+        # commit because git forbids it in branch names, so the prefix of line/R10a
+        # does not match line/R10a-Inner.
         id: restore
         uses: actions/cache/restore@v4
         with:
           path: .lake/build
-          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
           restore-keys: |
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~
             lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
       - name: Report which cache was restored
         run: echo "matched key = ${{ steps.restore.outputs.cache-matched-key }}"
@@ -64,12 +73,21 @@ jobs:
               }' || status=$?
           grep -E '^(error|✖)' build.log | head -100 || true
           exit "$status"
+      - name: Delete this branch's previous build cache
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+        run: |
+          gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id --jq '.[].id' |
+            while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
       - name: Save project build artifacts
         if: always()
         uses: actions/cache/save@v4
         with:
           path: .lake/build
-          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
       - name: Count compiled modules
         if: always()
         shell: bash

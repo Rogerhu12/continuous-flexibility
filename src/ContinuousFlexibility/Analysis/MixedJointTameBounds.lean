@@ -163,7 +163,7 @@ private theorem jointJet_unit_bound_aux
 
 /-- Mixed pure-parameter bounds up to one total order control the actual
 joint jet. The factor `3^r` counts the three genuine directional pieces. -/
-theorem SmoothDirections.jointJet_unit_bound_of_mixed_parameter_bounds
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_unit_bound_of_mixed_parameter_bounds
     {f : E × PolarPoint → ℝ} (J : SmoothDirections (U ×ˢ V) f)
     (hV : IsOpen V) (hc : Convex ℝ (U ×ˢ V))
     (low high : Seminorm ℝ E) (r : ℕ) (x : E) (hx : x ∈ U)

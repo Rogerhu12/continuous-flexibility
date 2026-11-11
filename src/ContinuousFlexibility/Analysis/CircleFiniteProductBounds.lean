@@ -184,7 +184,7 @@ theorem circleProduct_grading_coarse_loss
         C * S.grading (s + loss) u * S.grading (s + loss) v := by
   exact grading_product_coarse_loss S.grading
     (gradedSeminorm_monotone (fun i => S.level i) S.bond)
-    (circleProductBilinear hS hT hD hγ)
+    (fun u v => circleProductBilinear hS hT hD hγ u v)
     (circleProduct_oneHigh_bound hS hT hD hγ hinterp)
 
 theorem circleFiniteProductWith_coarse_bound
@@ -197,7 +197,7 @@ theorem circleFiniteProductWith_coarse_bound
         C * S.grading (s + loss) u * ∏ i ∈ I, S.grading (s + loss) (v i) := by
   exact grading_finiteProduct_coarse_bound S.grading
     (gradedSeminorm_monotone (fun i => S.level i) S.bond)
-    (circleProductBilinear hS hT hD hγ) (circleFiniteProductWith hS hT hD hγ)
+    (fun u v => circleProductBilinear hS hT hD hγ u v) (circleFiniteProductWith hS hT hD hγ)
     (circleFiniteProductWith_empty hS hT hD hγ)
     (circleFiniteProductWith_insert hS hT hD hγ)
     (circleProduct_grading_coarse_loss hS hT hD hγ hinterp) I
@@ -215,7 +215,7 @@ theorem circleFiniteProductWith_local_growth
           C * (1 + S.grading (s + loss) u + ∑ i ∈ I, S.grading (s + loss) (v i)) := by
   exact grading_finiteProduct_local_growth S.grading
     (gradedSeminorm_monotone (fun i => S.level i) S.bond)
-    (circleProductBilinear hS hT hD hγ) (circleFiniteProductWith hS hT hD hγ)
+    (fun u v => circleProductBilinear hS hT hD hγ u v) (circleFiniteProductWith hS hT hD hγ)
     (circleFiniteProductWith_empty hS hT hD hγ)
     (circleFiniteProductWith_insert hS hT hD hγ)
     (circleProduct_oneHigh_bound hS hT hD hγ hinterp) I

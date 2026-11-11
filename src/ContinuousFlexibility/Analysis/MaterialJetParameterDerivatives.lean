@@ -110,8 +110,8 @@ theorem PhysicalJetHasDerivAt.angularPartial
     (contDiff_materialPullback hT hG) h
   apply hd.congr
   · filter_upwards [hF] with s hs
-    exact (funext (materialPullback_angularPartial hT hs)).symm
-  · exact (funext (materialPullback_angularPartial hT hG)).symm
+    exact (funext (n02n03_materialPullback_angularPartial hT hs)).symm
+  · exact (funext (n02n03_materialPullback_angularPartial hT hG)).symm
 
 theorem PhysicalJetHasDerivAt.radialPartial
     {D : ReferenceData} {T : MaterialData} {γ : ℝ}
@@ -148,8 +148,8 @@ theorem PhysicalJetHasDerivAt.radialPartial
     ((hr _ hGm).add (hL.mul hGm)) hA hV
   apply hd.congr
   · filter_upwards [hF] with s hs
-    exact (funext (materialPullback_radialPartial hT hs)).symm
-  · exact (funext (materialPullback_radialPartial hT hG)).symm
+    exact (funext (n02n03_materialPullback_radialPartial hT hs)).symm
+  · exact (funext (n02n03_materialPullback_radialPartial hT hG)).symm
 
 /-- The coefficient derivative propagates through both actual fluxes
 and through every weighted physical jet of their divergence. -/

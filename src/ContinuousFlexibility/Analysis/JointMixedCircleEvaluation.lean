@@ -25,7 +25,7 @@ variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
 
 /-- Equality of the underlying scalar values identifies every pure
 parameter jet, for arbitrary tuples of parameter directions. -/
-theorem SmoothDirections.jointJet_eq_circleDecoded
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_eq_circleDecoded
     (J : SmoothDirections (U ×ˢ (Ioo l h ×ˢ univ)) f)
     (hH : IsCircleModel T γ H) (K : SmoothDirections U g)
     (m : ℕ) (hr : r ∈ Ioo l h)
@@ -62,7 +62,7 @@ theorem jointMixedDiagonal_eq_circleAngularJet
   rw [hfun]
 
 /-- A fixed scalar offset contributes only to the zeroth parameter jet. -/
-theorem SmoothDirections.jointJet_eq_circleDecoded_add_const
+theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_eq_circleDecoded_add_const
     (J : SmoothDirections (U ×ˢ (Ioo l h ×ˢ univ)) f)
     (hH : IsCircleModel T γ H) (K : SmoothDirections U g)
     (m : ℕ) (hr : r ∈ Ioo l h) (c : ℝ)

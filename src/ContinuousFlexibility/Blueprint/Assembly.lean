@@ -73,8 +73,8 @@ theorem R06_of_nodes (hA : R06aStatement) (hB : R06bStatement) (hC : R06cStateme
   exact ⟨C₂, η₂, K₂, g1, g2, g3, g4, hfull', hphys, hcont⟩
 
 theorem R10_of_nodes (hA : R10aStatement) (hB : R10bStatement) : R10Statement := by
-  obtain ⟨D, hacc, hborder, hpieces⟩ := hA
-  refine ⟨D, hacc, hborder, fun j hj he => ?_⟩
+  obtain ⟨D, hacc, hborder, hgeometry, hpieces⟩ := hA
+  refine ⟨D, hacc, hborder, hgeometry, fun j hj he => ?_⟩
   obtain ⟨M, hM, hp⟩ := hpieces j hj he
   exact hB D hacc hborder j hj he M hM hp
 
@@ -97,11 +97,21 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR08 : R08Statement := R08 hR03 hR07
   have hR09 : R09Statement := R09
   have hR10 : R10Statement := R10_of_nodes (R10a hR06 hR07 hR08 hR09) R10b
-  have hR11 : R11Statement := R11b (R11a hR05 hR10)
+  -- R11a supplies the maximum graph on actual measurable L² fields.
+  -- R11b measures the weak angular derivative in the source weights without
+  -- imposing the even-source symmetry on that derivative.
+  have hR11a : R11aStatement := R11a hR05 hR10
+  have hR11 : R11Statement := R11b hR11a
+  -- The radial pipeline retains the homogeneous profile and return margins
+  -- on the same reference data throughout its inverse constructions.
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
-  have hN01 : N01Statement := N01c (N01b (N01a hR12 hW01 hSpaces.1) hS05)
+  -- Retain the strict support certificates through the reference/control
+  -- construction and the common-neighbourhood flow construction.
+  have hN01a : N01aStatement := N01a hR12 hW01 hSpaces.1
+  have hN01b : N01bStatement := N01b hN01a hS05
+  have hN01 : N01Statement := N01c hN01b
   have hN03 : N03Statement := N02N03 hN01 hS05
   have hN04 : N04Statement := N04_of_nodes (N04Coordinates (N04b (N04a hN03))) N04Root N04Cubic N04Transmission
   have hN05 : N05Statement := N05 hN04

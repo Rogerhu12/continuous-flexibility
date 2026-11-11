@@ -79,10 +79,35 @@ theorem N01Properties.exists_opticalCorrection_flow_buffered_uniform
         ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
           1 / 2 ≤ deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ∧
           deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ≤ 3 / 2 := by
-  obtain ⟨b₀, ε₀, χ, hb₀, hε₀, hε₀ε, hN₀, hχ, hend, hcollar,
-    hdisc, hcorrected⟩ := hN.exists_opticalCorrection_flow_buffered hS hT
-  obtain ⟨b₁, ε₁, hb₁, hε₁, hε₁₀, hN₁, hinverse⟩ :=
-    hN₀.exists_uniform_inverse_angular_jets hS hT
+  let buffered := N01Properties.exists_opticalCorrection_flow_buffered
+    (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+    hN hS hT
+  let b₀ : ℕ := buffered.choose
+  let radiusData := buffered.choose_spec
+  let ε₀ : ℝ := radiusData.choose
+  let cutoffData := radiusData.choose_spec
+  let χ : ℕ → ℝ → ℝ := cutoffData.choose
+  have h₀ := cutoffData.choose_spec
+  have hb₀ : base ≤ b₀ := h₀.1
+  have hε₀ε : ε₀ ≤ ε := h₀.2.2.1
+  have hN₀ : N01Properties D T S C b₀ loss ε₀ := h₀.2.2.2.1
+  have hχ := h₀.2.2.2.2.1
+  have hend := h₀.2.2.2.2.2.1
+  have hcollar := h₀.2.2.2.2.2.2.1
+  have hdisc := h₀.2.2.2.2.2.2.2.1
+  have hcorrected := h₀.2.2.2.2.2.2.2.2
+  let inverseData := N01Properties.exists_uniform_inverse_angular_jets
+    (D := D) (T := T) (S := S) (C := C) (base := b₀) (loss := loss) (ε := ε₀)
+    hN₀ hS hT
+  let b₁ : ℕ := inverseData.choose
+  let inverseRadiusData := inverseData.choose_spec
+  let ε₁ : ℝ := inverseRadiusData.choose
+  have h₁ := inverseRadiusData.choose_spec
+  have hb₁ : b₀ ≤ b₁ := h₁.1
+  have hε₁ : 0 < ε₁ := h₁.2.1
+  have hε₁₀ : ε₁ ≤ ε₀ := h₁.2.2.1
+  have hN₁ : N01Properties D T S C b₁ loss ε₁ := h₁.2.2.2.1
+  have hinverse := h₁.2.2.2.2
   have hsub : stateNeighborhood S C b₁ ε₁ ⊆ stateNeighborhood S C b₀ ε₀ :=
     stateNeighborhood_mono S C hb₁ hε₁₀
   have hflow : ∀ z ∈ stateNeighborhood S C b₁ ε₁, stateSector S z.1 →
@@ -93,10 +118,26 @@ theorem N01Properties.exists_opticalCorrection_flow_buffered_uniform
   refine ⟨b₁, ε₁, χ, hb₀.trans hb₁, hε₁, hε₁₀.trans hε₀ε,
     hN₁, hχ, hend, ?_, (fun z hz => hdisc z (hsub hz)),
     (fun z hz => hcorrected z (hsub hz)), hflow, ?_⟩
-  · obtain ⟨j, x, δ, K, A, B, lam, P, hK, hA, hB, hlam, hP,
-      hdata, heq, hsupp, hbuffer, hjets, hpositive⟩ := hcollar
-    exact ⟨j, x, δ, K, A, B, lam, P, hK, hA, hB, hlam, hP,
-      hdata, heq, hsupp, hbuffer, hjets, fun z hz => hpositive z (hsub hz)⟩
+  · let j : ℕ → ℕ := hcollar.choose
+    let xData := hcollar.choose_spec
+    let x : ℕ → ℝ := xData.choose
+    let widthData := xData.choose_spec
+    let δ : ℕ → ℝ := widthData.choose
+    let constantData := widthData.choose_spec
+    let K : ℝ := constantData.choose
+    let exponentData := constantData.choose_spec
+    let A : ℝ := exponentData.choose
+    let opticalData := exponentData.choose_spec
+    let B : ℝ := opticalData.choose
+    let lowerData := opticalData.choose_spec
+    let lam : ℝ := lowerData.choose
+    let lowerExponentData := lowerData.choose_spec
+    let P : ℝ := lowerExponentData.choose
+    have hc := lowerExponentData.choose_spec
+    exact ⟨j, x, δ, K, A, B, lam, P, hc.1, hc.2.1, hc.2.2.1,
+      hc.2.2.2.1, hc.2.2.2.2.1, hc.2.2.2.2.2.1, hc.2.2.2.2.2.2.1,
+      hc.2.2.2.2.2.2.2.1, hc.2.2.2.2.2.2.2.2.1, hc.2.2.2.2.2.2.2.2.2.1,
+      fun z hz => hc.2.2.2.2.2.2.2.2.2.2 z (hsub hz)⟩
   · intro z hz
     exact hflow (liftSectorParameter S C z)
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl)

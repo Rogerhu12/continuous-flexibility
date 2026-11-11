@@ -52,7 +52,7 @@ private abbrev DiagonalUnitBall (n : ℕ) :=
   {x : DiagonalParameterSpace n // ‖x‖ ≤ 1}
 
 private def parameterDiagonalMap (n : ℕ) :
-    symmetricParameterForms n →ₗ[ℝ] (DiagonalUnitBall n →ᵇ ℝ) where
+    symmetricParameterForms n →ₗ[ℝ] BoundedContinuousFunction (DiagonalUnitBall n) ℝ where
   toFun A := BoundedContinuousFunction.ofNormedAddCommGroup
     (fun x => A.val (fun _ => x.val))
     (A.val.continuous.comp (continuous_pi (fun _ => continuous_subtype_val)))
@@ -79,7 +79,7 @@ private theorem parameterDiagonalMap_injective (n : ℕ) :
   intro A hA
   have hunit (x : DiagonalParameterSpace n) (hx : ‖x‖ ≤ 1) :
       A.val (fun _ => x) = 0 := by
-    exact congrArg (fun g : DiagonalUnitBall n →ᵇ ℝ => g ⟨x, hx⟩) hA
+    exact congrArg (fun g : BoundedContinuousFunction (DiagonalUnitBall n) ℝ => g ⟨x, hx⟩) hA
   have hdiag (x : DiagonalParameterSpace n) : A.val (fun _ => x) = 0 := by
     let c : ℝ := (1 + ‖x‖)⁻¹
     have hcpos : 0 < c := inv_pos.mpr (by positivity)
@@ -137,7 +137,7 @@ private def finiteDirectionSum {E : Type*} [AddCommGroup E] [Module ℝ E]
   toFun t := ∑ i, t i • v i
   map_add' s t := by simp only [Pi.add_apply, add_smul, Finset.sum_add_distrib]
   map_smul' c t := by
-    simp only [Pi.smul_apply, smul_eq_mul, mul_smul, Finset.smul_sum]
+    simp only [Pi.smul_apply, smul_eq_mul, mul_smul, Finset.smul_sum, RingHom.id_apply]
 
 private theorem finiteDirectionSum_apply {E : Type*} [AddCommGroup E] [Module ℝ E]
     {n : ℕ} (v : Fin n → E) (t : Fin n → ℝ) :
@@ -160,6 +160,8 @@ private def finiteDirectionPullback {E : Type*} [AddCommGroup E] [Module ℝ E]
         intro s hs
         simpa only [smul_eq_mul] using A.map_smul_univ (fun i => t i (s i))
           (fun i => v (s i))
+      change Continuous (fun t : Fin n → (Fin n → ℝ) =>
+        A.compLinearMap (fun _ => finiteDirectionSum v) t)
       rw [heq]
       fun_prop }
 

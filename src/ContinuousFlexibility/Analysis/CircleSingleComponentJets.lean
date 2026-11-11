@@ -106,7 +106,8 @@ theorem singleComponentScalarJets_iteratedDeriv
       if i = m then (J b θ).D n x v else 0 := by
   rw [singleComponentScalarJets_apply, circleSingleComponentField_iteratedDeriv]
   have hd := smoothDirections_angular_jet_iteratedDeriv J hU hc hbound hangular n 0 b x hx v θ
-  simpa only [Nat.zero_add] using congrArg (fun t : ℝ => if i = m then t else 0) hd
+  have hindex := congrArg (fun k : ℕ => (J k θ).D n x v) (Nat.zero_add b)
+  exact congrArg (fun t : ℝ => if i = m then t else 0) (hd.trans hindex)
 
 include hperiod in
 theorem singleComponentScalarJets_member

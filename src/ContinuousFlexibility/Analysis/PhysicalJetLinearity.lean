@@ -23,7 +23,7 @@ theorem mixedDerivative_const_mul (c : ℝ) (f : PolarPoint → ℝ)
   unfold mixedDerivative
   simp only [iteratedDeriv_const_mul_field]
 
-theorem mixedDerivative_add_of_contDiff {f g : PolarPoint → ℝ}
+theorem n02n03_mixedDerivative_add_of_contDiff {f g : PolarPoint → ℝ}
     (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (a b : ℕ) (p : PolarPoint) :
     mixedDerivative a b (fun q => f q + g q) p =
       mixedDerivative a b f p + mixedDerivative a b g p := by
@@ -47,7 +47,7 @@ theorem weightedPhysicalJet_add {D : ReferenceData} {T : MaterialData} {γ : ℝ
     funext q
     simp only [materialPullback, mul_add]
   unfold weightedPhysicalJet
-  rw [heq, mixedDerivative_add_of_contDiff (contDiff_materialPullback hT hf)
+  rw [heq, n02n03_mixedDerivative_add_of_contDiff (contDiff_materialPullback hT hf)
     (contDiff_materialPullback hT hg), mul_add]
 
 theorem weightedPhysicalJet_const_mul {T : MaterialData} {γ : ℝ}

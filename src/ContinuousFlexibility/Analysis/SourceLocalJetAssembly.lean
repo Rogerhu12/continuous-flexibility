@@ -65,7 +65,7 @@ theorem sourceLocalJetNormBounds_of_local_oneHigh
     apply hc.inter
     exact (p base).convex_ball x₀ δ
   have hVx : x₀ ∈ V :=
-    ⟨hx₀, by simpa only [sub_self, map_zero] using hδ⟩
+    ⟨hx₀, by simpa only [Set.mem_setOf_eq, sub_self, map_zero] using hδ⟩
   let t : ℕ := max base s
   let q : Seminorm ℝ E := p (t + loss)
   obtain ⟨C, hC, hbC⟩ := hb t (le_max_left _ _)
@@ -226,8 +226,11 @@ theorem smoothTameOn_source_of_local_scalar_jets
           C * oneHighVariationWeight p base (s + loss) x v) :
     SmoothTameOn p S.sourceGrading U f := by
   have hlocal := sourceLocalJetNormBounds_of_local_oneHigh hT hU hc p hp hmono A hmember hbound
-  obtain ⟨J, hJ⟩ := exists_source_smoothDirections_of_local_scalar_jets
+  let data := exists_source_smoothDirections_of_local_scalar_jets
     hS hT hU f A hmember hlocal hzero hscalar henergy
+  let J : SmoothDirections U f := data.choose
+  have hJ : ∀ n x, x ∈ U → ∀ v,
+      physicalSourceDecode S (J.D n x v) = A n x v := data.choose_spec
   apply smoothTameOn_source_of_local_oneHigh_norm_bounds hS p J
   intro k x₀ hx₀
   obtain ⟨loss, base, δ, hδ, hb⟩ := hbound k x₀ hx₀

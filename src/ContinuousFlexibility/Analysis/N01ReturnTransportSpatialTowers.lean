@@ -22,7 +22,7 @@ open scoped Topology
 
 /-- Add an independent parameter while preserving the actual spatial
 coordinate and the original genuine jets. -/
-def SmoothDirections.fstParameter
+def _root_.ContinuousFlexibility.Statements.SmoothDirections.fstParameter
     {E F P G : Type*}
     [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]

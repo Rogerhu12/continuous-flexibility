@@ -18,7 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
-open scoped ContDiff Topology
+open scoped ContDiff Topology Classical
 
 local instance returnDivergenceBilinearRealNormedSpace : NormedSpace ℝ ℝ :=
     NormedField.toNormedSpace
@@ -92,8 +92,9 @@ theorem decodedHeightPairPartialLinear_apply
     (v : PolarPoint) (η : HeightPair S) (p : PolarPoint) :
     decodedHeightPairPartialLinear hS hT v η p =
       fderiv ℝ ((S.height (3 / 4 : ℝ)).decode η.1) p v := by
-  simp only [decodedHeightPairPartialLinear, spatialDirectionalLinear_apply,
-    mem_univ, if_true, decodedHeightPairLinear_apply]
+  change (if p ∈ (univ : Set PolarPoint) then
+    fderiv ℝ ((S.height (3 / 4 : ℝ)).decode η.1) p v else 0) = _
+  rw [if_pos (mem_univ p)]
 
 def symmetricRadialFluxBilinear
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -199,8 +200,9 @@ theorem symmetricDivergenceBilinear_contDiffOn
     (contDiffOn_angularPartial_of_isOpen (isOpen_Ioo.prod isOpen_univ) hG)
   apply h.congr
   intro p hp
+  have hp' : p ∈ annularOpen D := hp
   simp only [symmetricDivergenceBilinear, LinearMap.add_apply, Pi.add_apply,
-    spatialDirectionalBilinear_apply, if_pos hp, radialPartial, angularPartial]
+    spatialDirectionalBilinear_apply, if_pos hp', radialPartial, angularPartial]
 
 def symmetricDivergenceSmoothBilinear
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

@@ -25,7 +25,7 @@ theorem controlGeometryConditions.control_zero_other
     (hC : controlGeometryConditions D S C) {m n : ℕ} (hmn : n ≠ m)
     {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) : C.control n r = 0 := by
   by_contra hn
-  have hnr : r ∈ Ioo (C.left n) (C.right n) := (hC.2.2.2.2.2.1 n).2.2 hn
+  have hnr : r ∈ Ioo (C.left n) (C.right n) := hC.support_subset n hn
   exact Set.disjoint_left.mp (hC.2.2.1 n m hmn) hnr hr
 
 theorem N01Properties.border_zero_on_component
@@ -34,7 +34,7 @@ theorem N01Properties.border_zero_on_component
     (hN : N01Properties D T S C base loss ε) (m : ℕ)
     {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) : D.chi r = 0 := by
   by_contra hχ
-  have hpositive : 0 < deriv D.w r := (hN.1.2.2.2.1.2.2.1 hχ).2
+  have hpositive : 0 < deriv D.w r := (hN.1.2.2.2.1.support_subset hχ).2
   have hnegative := hN.2.2.2.1.2.2.2.1 m r hr
   exact (not_lt_of_ge hpositive.le) hnegative
 
