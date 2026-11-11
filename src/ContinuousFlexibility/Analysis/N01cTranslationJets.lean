@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Positivity
@@ -34,8 +35,8 @@ theorem translatedEvaluation_apply (h : ℝ → ℝ) (θ a : ℝ) :
 /-- Each translation derivative is the corresponding spatial derivative. -/
 theorem iteratedDeriv_translatedEvaluation (k : ℕ) (h : ℝ → ℝ) (θ a : ℝ) :
     iteratedDeriv k (translatedEvaluation h θ) a = iteratedDeriv k h (θ + a) := by
-  simpa only [translatedEvaluation_apply] using
-    congrFun (iteratedDeriv_comp_const_add k h θ) a
+  change iteratedDeriv k (fun t : ℝ => h (θ + t)) a = _
+  exact congrFun (iteratedDeriv_comp_const_add k h θ) a
 
 /-- For a smooth function these are genuine derivatives at every parameter. -/
 theorem hasDerivAt_translationJet {h : ℝ → ℝ} (hh : ContDiff ℝ ∞ h)
@@ -56,7 +57,8 @@ theorem translationProbe_apply (h : ℝ → ℝ) (θ a b : ℝ) :
 
 theorem hasDerivAt_translationProbe (h : ℝ → ℝ) (θ a b : ℝ) :
     HasDerivAt (translationProbe h θ a) (h (θ + a)) b := by
-  simpa only [translationProbe_apply, one_mul] using
+  change HasDerivAt (fun t : ℝ => t * h (θ + a)) (h (θ + a)) b
+  simpa only [id_eq, one_mul] using
     (hasDerivAt_id b).mul_const (h (θ + a))
 
 theorem deriv_translationProbe (h : ℝ → ℝ) (θ a b : ℝ) :
@@ -130,10 +132,11 @@ theorem finiteJetUnit_normalizedCosMode (L n : ℕ) :
           |iteratedDeriv j Real.cos ((2 * ((n : ℝ) + 1)) * θ)| /
         (2 * ((n : ℝ) + 1)) ^ L ≤
         (2 * ((n : ℝ) + 1)) ^ j / (2 * ((n : ℝ) + 1)) ^ L := by
-      exact div_le_div_of_nonneg_right
-        (by simpa only [mul_one] using mul_le_mul_of_nonneg_left
-          (Real.abs_iteratedDeriv_cos_le_one j ((2 * ((n : ℝ) + 1)) * θ))
-          (pow_nonneg hω0.le j)) (pow_nonneg hω0.le L)
+      apply div_le_div_of_nonneg_right _ (pow_nonneg hω0.le L)
+      have hcos : |iteratedDeriv j Real.cos ((2 * ((n : ℝ) + 1)) * θ)| ≤ 1 :=
+        Real.abs_iteratedDeriv_cos_le_one j ((2 * ((n : ℝ) + 1)) * θ)
+      have hmul := mul_le_mul_of_nonneg_left hcos (pow_nonneg hω0.le j)
+      simpa only [mul_one] using hmul
     _ ≤ 1 := (div_le_one (pow_pos hω0 L)).2 (pow_le_pow_right₀ hω hj)
 
 /-- At the next sufficiently large even order the same modes have exact

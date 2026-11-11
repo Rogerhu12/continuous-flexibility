@@ -41,7 +41,7 @@ theorem weightedPhysicalJet_L2_le_physicalNorm
   have hsq : (eLpNorm (weightedPhysicalJet T γ a b c f)
       2 materialCylinderMeasure).toReal ^ 2 ≤ (∑ i : JetIndex s, term i).toReal := by
     simpa only [term, j, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
-      ENNReal.toReal_pow] using hreal
+      Matrix.head_cons, Matrix.tail_cons, ENNReal.toReal_pow] using hreal
   have hroot := Real.sqrt_le_sqrt hsq
   rw [Real.sqrt_sq ENNReal.toReal_nonneg] at hroot
   exact hroot

@@ -18,7 +18,7 @@ bounds and all geometric conditions must hold for the same output data.
 
 - The displayed theorem has the same statement and uses only `propext`,
   `Classical.choice`, `Quot.sound`.
-- Every proof module is in the root import and CI is green.
+- Every proof module compiles in CI (the root import is generated), and CI is green.
 - Establish the actual quantitative type and control-ratio estimates needed to
   differentiate the square root. Totalized square roots and derivatives do not
   supply smoothness. Keep one low-order neighbourhood for all orders.

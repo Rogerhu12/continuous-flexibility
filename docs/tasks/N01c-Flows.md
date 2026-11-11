@@ -17,7 +17,7 @@ neighbourhood, and assemble the exact N01 properties.
 
 - The displayed theorem has the same statement and uses only `propext`,
   `Classical.choice`, `Quot.sound`.
-- Every proof module is in the root import and CI is green.
+- Every proof module compiles in CI (the root import is generated), and CI is green.
 - Prove the complete directional towers and the uniform one-high-factor
   estimates with the actual component weights and radial endpoint factors.
 - Keep one common base and positive radius. Only the additional parameter loss

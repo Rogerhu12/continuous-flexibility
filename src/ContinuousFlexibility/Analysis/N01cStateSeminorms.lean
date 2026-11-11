@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.StateKappaBounds
+import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # State seminorms and restriction to a common neighbourhood
@@ -33,26 +34,23 @@ theorem stateGrading_apply (S : PhysicalSpacesData) (n : ℕ) (x : AnnularState 
     LinearMap.fst_apply, LinearMap.snd_apply, realGrading, coe_normSeminorm]
 
 theorem stateGrading_monotone (S : PhysicalSpacesData) : Monotone (stateGrading S) := by
-  intro m n hmn x
-  rw [stateGrading_apply, stateGrading_apply]
-  have hheight : (S.height (3 / 4 : ℝ)).grading m x.1.1 ≤
-      (S.height (3 / 4 : ℝ)).grading n x.1.1 :=
-    gradedSeminorm_monotone _ _ hmn x.1.1
-  have hkappa : (S.circle (3 / 4 : ℝ)).grading m x.2.2.1 ≤
-      (S.circle (3 / 4 : ℝ)).grading n x.2.2.1 :=
-    gradedSeminorm_monotone _ _ hmn x.2.2.1
-  have hchart : (S.circle (3 / 4 : ℝ)).grading m x.2.2.2 ≤
-      (S.circle (3 / 4 : ℝ)).grading n x.2.2.2 :=
-    gradedSeminorm_monotone _ _ hmn x.2.2.2
-  exact add_le_add (add_le_add hheight le_rfl)
-    (add_le_add le_rfl (add_le_add hkappa hchart))
+  have hheight : Monotone ((S.height (3 / 4 : ℝ)).grading) :=
+    gradedSeminorm_monotone (fun n => (S.height (3 / 4 : ℝ)).level n)
+      (S.height (3 / 4 : ℝ)).bond
+  have hcircle : Monotone ((S.circle (3 / 4 : ℝ)).grading) :=
+    gradedSeminorm_monotone (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond
+  have hreal : Monotone realGrading := fun _ _ _ => le_rfl
+  have hpair : Monotone (heightPairGrading S) :=
+    tamePairGrading_monotone hheight hreal
+  have htail : Monotone (pairGrading realGrading
+      (pairGrading (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading)) :=
+    tamePairGrading_monotone hreal (tamePairGrading_monotone hcircle hcircle)
+  exact tamePairGrading_monotone hpair htail
 
 theorem jointStateGrading_monotone (S : PhysicalSpacesData) :
-    Monotone (pairGrading (stateGrading S) realGrading) := by
-  intro m n hmn z
-  simp only [pairGrading, add_apply, Seminorm.comp_apply,
-    LinearMap.fst_apply, LinearMap.snd_apply]
-  exact add_le_add (stateGrading_monotone S hmn z.1) le_rfl
+    Monotone (pairGrading (stateGrading S) realGrading) :=
+  tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
 
 theorem continuous_stateGrading (S : PhysicalSpacesData) (n : ℕ) :
     Continuous (stateGrading S n) := by
@@ -76,12 +74,21 @@ theorem continuous_stateGrading (S : PhysicalSpacesData) (n : ℕ) :
 
 theorem isOpen_stateNeighborhood (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (base : ℕ) (ε : ℝ) : IsOpen (stateNeighborhood S C base ε) := by
+  have hprojection : Continuous (fun z : AnnularState S × ℝ => z.1) :=
+    continuous_fst
+  have hreference : Continuous (fun _ : AnnularState S × ℝ => C.referenceState) :=
+    continuous_const
+  have hsubtract : Continuous (fun z : AnnularState S × ℝ =>
+      z.1 - C.referenceState) := hprojection.sub hreference
   have hstate : Continuous (fun z : AnnularState S × ℝ =>
       stateGrading S base (z.1 - C.referenceState)) :=
-    (continuous_stateGrading S base).comp (continuous_fst.sub continuous_const)
+    (continuous_stateGrading S base).comp hsubtract
+  have hrealProjection : Continuous (fun z : AnnularState S × ℝ => z.2) :=
+    continuous_snd
   have hparameter : Continuous (fun z : AnnularState S × ℝ => |z.2|) :=
-    continuous_snd.abs
-  exact (isOpen_lt hstate continuous_const).inter (isOpen_lt hparameter continuous_const)
+    hrealProjection.abs
+  have hradius : Continuous (fun _ : AnnularState S × ℝ => ε) := continuous_const
+  exact (isOpen_lt hstate hradius).inter (isOpen_lt hparameter hradius)
 
 /-- The same reference belongs to every positive-radius state neighbourhood. -/
 theorem reference_mem_stateNeighborhood (S : PhysicalSpacesData)
@@ -166,16 +173,22 @@ theorem abs_stateKappa_le_stateGrading_of_accumulatingProfile
   exact abs_stateKappa_le_stateGrading hS hT
     (materialSample_mem_radialCore hT hbounds.2.1) x n m
 
+/-- The decoded mean depends only on the control-circle component. -/
+theorem stateKappa_eq_of_controlComponent_eq {S : PhysicalSpacesData}
+    {x y : AnnularState S} (h : x.2.2.1 = y.2.2.1) (m : ℕ) :
+    stateKappa S x m = stateKappa S y m := by
+  exact congrArg (fun u : CircleSpace S =>
+    angularMean ((S.circle (3 / 4 : ℝ)).decode u m)) h
+
 /-- The displacement has the same control component because the reference
 control sequence is zero. -/
 theorem stateKappa_sub_reference {D : ReferenceData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} (href : referenceStateConditions D S C)
     (x : AnnularState S) (m : ℕ) :
     stateKappa S (x - C.referenceState) m = stateKappa S x m := by
-  obtain ⟨_, _, _, hkappa, _, _⟩ := href
-  have hcomponent : (x - C.referenceState).2.2.1 = x.2.2.1 := by
-    simp only [Prod.fst_sub, Prod.snd_sub, hkappa, sub_zero]
-  exact congrArg (fun u => angularMean ((S.circle (3 / 4 : ℝ)).decode u m)) hcomponent
+  apply stateKappa_eq_of_controlComponent_eq (m := m)
+  have hkappa : C.referenceState.2.2.1 = 0 := href.2.2.2.1
+  simp only [Prod.fst_sub, Prod.snd_sub, hkappa, sub_zero]
 
 /-- A common low-order state ball gives one uniform smallness bound for
 every actual control mean. -/

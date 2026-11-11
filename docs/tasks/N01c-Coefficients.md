@@ -18,7 +18,7 @@ needed: the input does not identify every control component with `C.cell m`.
 
 - The displayed theorem has the same statement and uses only `propext`,
   `Classical.choice`, `Quot.sound`.
-- Every proof module is in the root import and CI is green.
+- Every proof module compiles in CI (the root import is generated), and CI is green.
 - Prove the actual coefficient and mixed-derivative families, with the stated
   weights and one-high-factor bound. A local unweighted smoothness statement or
   a state-dependent existential constant does not suffice.
