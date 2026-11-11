@@ -119,14 +119,14 @@ theorem MorseOuterGreenData.exists_localized_ordinary
       ring
     · refine ⟨0, ?_, ?_⟩
       · rw [norm_zero]
-        positivity
+        exact outerMorse_localized_envelope_nonneg _ _ _ hact
       · intro f
         simpa only [ContinuousLinearMap.zero_apply] using
           morseOuter_zero_localized_ordinary_kernel (j := j) (η := η) (K := K)
             h hN hlabels (Or.inr (by omega)) (outerGreenKernel lam F.pair.U F.pair.V) f
   · refine ⟨0, ?_, ?_⟩
     · rw [norm_zero]
-      positivity
+      exact outerMorse_localized_envelope_nonneg _ _ _ hact
     · intro f
       simpa only [ContinuousLinearMap.zero_apply] using
         morseOuter_zero_localized_ordinary_kernel (j := j) (η := η) (K := K)

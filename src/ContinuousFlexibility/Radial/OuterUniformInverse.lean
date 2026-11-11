@@ -85,6 +85,36 @@ theorem exists_uniform_morseOuterInverse
   exact G.manuscript_bounds hreal hreal.accumulating.2.1 hsame.1 hsame.2 he hnidx hlabelsσ
     hlam hCb.le hQ.le hCenv hWenv hOenv hpointG
 
+/-- Fix the two auxiliary tail-construction constants internally. The
+remaining hypotheses are only the realized family, its frequency scale,
+and the permitted change of physical state scale. -/
+theorem exists_uniform_morseOuterInverse_fixed_parameters
+    (M : MorseChainData) (C : ℕ → ℝ) (family : (ℕ → ℝ) → ReferenceData)
+    (hfamily : ∀ σ, (∀ k, 1 ≤ σ k ∧ σ k ≤ 2) →
+      MorseChainRealization M σ (family σ) C ∧
+        MorseMassResistanceBounds M σ (family σ) C)
+    (hends : ∀ σ τ, (family σ).a = (family τ).a ∧
+      (family σ).b = (family τ).b)
+    {Cstar L : ℝ} (hCstar : 0 < Cstar) (hL : 0 ≤ L) (minimum : ℕ) :
+    let η : ℝ := 1 / 16
+    let K : ℝ := max 32 (10 * tailSmoothStepConstant + 2)
+    ∃ Cbound Co Cenv : ℝ, 0 < Cbound ∧ 0 < Co ∧ 0 < Cenv ∧
+      ∃ N₀ : ℕ, minimum ≤ N₀ ∧ M.index + 3 ≤ N₀ ∧ 31 ≤ N₀ ∧
+        ∀ n : ℕ, N₀ ≤ n → ∀ σ, ∀ hσ : (∀ k, 1 ≤ σ k ∧ σ k ≤ 2),
+          ∀ j : ℕ, 2 ≤ j → (j : ℝ) < radialFrequencyThreshold M Cstar n →
+            ∀ entry : ℝ, entry ∈ morseInitialMiddle M → ∀ right : Bool,
+              ∀ lam : ℝ, 0 < lam →
+                lam / morseChainAmplitude M σ n ≤ exp (L * (n : ℝ) ^ 2) →
+                morseChainAmplitude M σ n / lam ≤ exp (L * (n : ℝ) ^ 2) →
+                ∃ G : MorseOuterGreenData M (family σ) right n j
+                    entry η K lam Cbound Co,
+                  MorseOuterInverseBounds G (hfamily σ hσ).1.accumulating.2.1 Cenv := by
+  dsimp only
+  exact exists_uniform_morseOuterInverse M C family hfamily hends hCstar hL
+    (by norm_num : 0 < (1 / 16 : ℝ)) le_rfl (le_max_left _ _) (le_max_right _ _) minimum
+
+#print axioms exists_uniform_morseOuterInverse_fixed_parameters
+
 #print axioms exists_uniform_morseOuterInverse
 #print axioms OuterPhysicalRobinInverse.assertions
 #print axioms OuterPhysicalRobinInverse.ordinary_jacobi_source

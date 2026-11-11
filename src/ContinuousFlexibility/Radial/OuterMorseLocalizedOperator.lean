@@ -20,6 +20,19 @@ namespace ContinuousFlexibility.Radial
 open Real Set Filter MeasureTheory
 open ContinuousFlexibility.Statements
 
+/-- Every real coefficient power is nonnegative; the action factor is the
+only additional sign condition in the localized envelope. -/
+theorem outerMorse_localized_envelope_nonneg (i k : ℕ) (A : ℝ)
+    {action : ℝ} (hact : 0 ≤ action) :
+    0 ≤ radialE i ^ A * radialE k ^ A * action *
+      exp (-|radialS i - radialS k|) :=
+  mul_nonneg
+    (mul_nonneg
+      (mul_nonneg
+        (rpow_nonneg (show 0 ≤ radialE i from (exp_pos _).le) _)
+        (rpow_nonneg (show 0 ≤ radialE k from (exp_pos _).le) _)) hact)
+    (exp_pos _).le
+
 def outerMorseShiftExponent (A : ℝ) (hA : 0 ≤ A) : ℝ :=
   Classical.choose (outer_localized_envelope_shift hA)
 
@@ -97,7 +110,8 @@ theorem morseOuter_localized_point_kernel_bound
           exp (-|radialS (D.cellIndex k) - radialS (D.cellIndex m)|) := by
   have htarget : 0 ≤ radialE (D.cellIndex k) ^ outerMorseShiftExponent A hA *
       radialE (D.cellIndex m) ^ outerMorseShiftExponent A hA * action *
-        exp (-|radialS (D.cellIndex k) - radialS (D.cellIndex m)|) := by positivity
+        exp (-|radialS (D.cellIndex k) - radialS (D.cellIndex m)|) :=
+    outerMorse_localized_envelope_nonneg _ _ _ hact
   by_cases hk0 : D.localizer k (outerOutwardRadius right x) = 0
   · simpa only [outerWholeLocalizedKernel, hk0, zero_mul, abs_zero] using htarget
   by_cases hm0 : D.localizer m (outerOutwardRadius right y) = 0
@@ -195,7 +209,8 @@ theorem MorseOuterGreenData.localized_norm_le
   · by_cases hm : 1 ≤ D.cellIndex m
     · have hB : 0 ≤ radialE (D.cellIndex k) ^ outerMorseShiftExponent A hA *
           radialE (D.cellIndex m) ^ outerMorseShiftExponent A hA * action *
-            exp (-|radialS (D.cellIndex k) - radialS (D.cellIndex m)|) := by positivity
+            exp (-|radialS (D.cellIndex k) - radialS (D.cellIndex m)|) :=
+        outerMorse_localized_envelope_nonneg _ _ _ hact
       have hh := outerWholeLocalizedOperator_norm_le hD h.accumulating.2.1 right hentry k m
         F.inverse.operator (outerGreenKernel lam F.pair.U F.pair.V) F.inverse.kernel hrow hB
         (fun x hx y hy => morseOuter_localized_point_kernel_bound h hN hlabels hA hact hpoint k m hx hy)
@@ -218,7 +233,9 @@ theorem MorseOuterGreenData.localized_norm_le
               (action * exp (-|radialS (D.cellIndex k) - radialS (D.cellIndex m)|)) :=
           mul_le_mul_of_nonneg_right hcoeff (mul_nonneg hact (exp_pos _).le)
         _ = _ := by ring
-    · exact (hzero (Or.inr (by omega))).trans (by positivity)
-  · exact (hzero (Or.inl (by omega))).trans (by positivity)
+    · exact (hzero (Or.inr (by omega))).trans
+        (outerMorse_localized_envelope_nonneg _ _ _ hact)
+  · exact (hzero (Or.inl (by omega))).trans
+      (outerMorse_localized_envelope_nonneg _ _ _ hact)
 
 end ContinuousFlexibility.Radial
