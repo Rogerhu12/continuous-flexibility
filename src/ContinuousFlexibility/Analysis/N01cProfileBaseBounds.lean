@@ -105,6 +105,52 @@ theorem scaledExponentialJetMajorant_material_bound
     _ ≤ (1 + CW * F) * T.E0 r ^ A :=
       mul_le_mul_of_nonneg_right (by linarith) (Real.rpow_nonneg hEpos.le A)
 
+private abbrev profileBaseStateTopology (S : PhysicalSpacesData) :
+    TopologicalSpace (AnnularState S) := inferInstance
+attribute [local instance] profileBaseStateTopology
+
+private abbrev profileBaseStateGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S) := inferInstance
+attribute [local instance] profileBaseStateGroup
+
+private abbrev profileBaseStateModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S) := inferInstance
+attribute [local instance] profileBaseStateModule
+
+private abbrev profileBaseStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
+  (profileBaseStateModule S).toDistribMulAction.toDistribSMul.toSMul
+attribute [local instance] profileBaseStateSMul
+
+/-- A pointwise bound by the fixed genuine majorant on the original
+neighbourhood, before any existential material constants are transported. -/
+theorem abs_iteratedDeriv_stateProfile_le_majorant_on_neighborhood
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hA : N01PartA D T S C) (hD : RadialProfileGeometry D)
+    (hχ : ContDiff ℝ ∞ D.chi) (hB : N01PartB D S C base ε)
+    (n : ℕ) (r : ℝ) (hr : r ∈ Ioo D.a D.b)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε) :
+    |iteratedDeriv n (stateProfile D S C z.1) r| ≤
+      2 * scaledExponentialJetMajorant (fun j => |iteratedDeriv j D.w r|)
+        (fun j => stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr)
+        (stateGrading S 0 C.referenceState + ε) n := by
+  let W : ℕ → ℝ := fun j => |iteratedDeriv j D.w r|
+  let P : ℕ → ℝ := fun j =>
+    stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr
+  have hW (j : ℕ) : 0 ≤ W j := abs_nonneg _
+  have hP (j : ℕ) : 0 ≤ P j :=
+    stateProfileExponentJetMajorant_nonneg hT hA.1.1 hA.2.2.1 j r hr
+  have hq₀ : 0 ≤ stateGrading S 0 z.1 := apply_nonneg _ _
+  exact (abs_iteratedDeriv_stateProfile_le_rawMajorant
+    hS hT hA.1.1 hD hA.2.2.1 hχ n r hr z.1).trans
+      (mul_le_mul
+        (n01PartB_stateProfileExponent_exp_le_two hD hS hA.2.1 hB hz r hr)
+        (scaledExponentialJetMajorant_mono W P hW hP hq₀
+          (stateGrading_zero_le_reference_add_radius hz) n)
+        (scaledExponentialJetMajorant_nonneg W P _ hW hP hq₀ n)
+        (by norm_num))
+
 /-- Uniform ordinary radial jets of the actual base profile on the
 original common neighbourhood, including zero spatial order. -/
 theorem iteratedDeriv_stateProfile_material_bound
@@ -120,32 +166,16 @@ theorem iteratedDeriv_stateProfile_material_bound
     ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
       ∀ m r (hr : r ∈ Ioo D.a D.b), r ∈ D.cells m →
       ∀ z ∈ stateNeighborhood S C base ε,
-        |iteratedDeriv n (stateProfile D S C z.1) r| ≤ B * T.E0 r ^ A := by
-  have hq : 0 ≤ stateGrading S 0 C.referenceState + ε :=
-    add_nonneg (apply_nonneg _ _) hε.le
-  obtain ⟨B, A, hB', hA', hbound⟩ :=
-    scaledExponentialJetMajorant_material_bound hT hA hE hloc hχloc hq n
-  refine ⟨2 * B, A, mul_pos (by norm_num) hB', hA',
-    fun m r hr hrm z hz => ?_⟩
-  let W : ℕ → ℝ := fun j => |iteratedDeriv j D.w r|
-  let P : ℕ → ℝ := fun j =>
-    stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr
-  have hW (j : ℕ) : 0 ≤ W j := abs_nonneg _
-  have hP (j : ℕ) : 0 ≤ P j :=
-    stateProfileExponentJetMajorant_nonneg hT hA.1.1 hA.2.2.1 j r hr
-  have hq₀ : 0 ≤ stateGrading S 0 z.1 := apply_nonneg _ _
-  have hmajorant :
-      scaledExponentialJetMajorant W P (stateGrading S 0 z.1) n ≤ B * T.E0 r ^ A :=
-    (scaledExponentialJetMajorant_mono W P hW hP hq₀
-      (stateGrading_zero_le_reference_add_radius hz) n).trans (hbound m r hr hrm)
-  calc
-    _ ≤ Real.exp (z.1.2.1 * D.chi r + stateControlSum C z.1 r) *
-        scaledExponentialJetMajorant W P (stateGrading S 0 z.1) n :=
-      abs_iteratedDeriv_stateProfile_le_rawMajorant hS hT hA.1.1 hD hA.2.2.1 hχ n r hr z.1
-    _ ≤ 2 * (B * T.E0 r ^ A) :=
-      mul_le_mul (n01PartB_stateProfileExponent_exp_le_two hD hS hA.2.1 hB hz r hr)
-        hmajorant (scaledExponentialJetMajorant_nonneg W P _ hW hP hq₀ n)
-        (by norm_num)
-    _ = (2 * B) * T.E0 r ^ A := by ring
+        |iteratedDeriv n (stateProfile D S C z.1) r| ≤ B * T.E0 r ^ A :=
+  exists_scalar_envelope_bound_of_majorant (X := AnnularState S × ℝ)
+    (Ioo D.a D.b) D.cells T.E0 (stateNeighborhood S C base ε)
+    (fun r hr => scaledExponentialJetMajorant (fun j => |iteratedDeriv j D.w r|)
+      (fun j => stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr)
+      (stateGrading S 0 C.referenceState + ε) n)
+    (fun r _ z => iteratedDeriv n (stateProfile D S C z.1) r)
+    (scaledExponentialJetMajorant_material_bound hT hA hE hloc hχloc
+      (add_nonneg (apply_nonneg (stateGrading S 0) C.referenceState) hε.le) n)
+    (fun r hr z hz => abs_iteratedDeriv_stateProfile_le_majorant_on_neighborhood
+      hS hT hA hD hχ hB n r hr hz)
 
 end ContinuousFlexibility.Statements

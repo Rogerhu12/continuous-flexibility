@@ -18,6 +18,77 @@ No tame estimate for the profile itself is assumed.
 
 noncomputable section
 
+namespace ContinuousFlexibility.Analysis
+
+open Set
+
+set_option backward.isDefEq.respectTransparency false
+
+/-- Transport a scalar material majorant through its original nonnegative
+direction factor.  All existence and domain binders stay generic. -/
+theorem exists_material_bound_of_majorant
+    {X V : Type*} (core : Set ℝ) (cells : ℕ → Set ℝ)
+    (H E : ℝ → ℝ) (U : Set X)
+    (M : ∀ r, r ∈ core → ℝ) (f : ∀ r, r ∈ core → X → V → ℝ)
+    (P : X → V → ℝ) (hP : ∀ x v, 0 ≤ P x v)
+    (hM : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ core), r ∈ cells m → M r hr ≤ B * H r * E r ^ A)
+    (hf : ∀ r (hr : r ∈ core), ∀ x ∈ U, ∀ v,
+      |f r hr x v| ≤ 2 * M r hr * P x v) :
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ core), r ∈ cells m → ∀ x ∈ U, ∀ v,
+        |f r hr x v| ≤ (B * H r * E r ^ A) * P x v := by
+  obtain ⟨B, A, hB, hA, hbound⟩ := hM
+  refine ⟨2 * B, A, mul_pos (by norm_num) hB, hA, fun m r hr hm x hx v => ?_⟩
+  calc
+    _ ≤ 2 * M r hr * P x v := hf r hr x hx v
+    _ ≤ 2 * (B * H r * E r ^ A) * P x v :=
+      mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left (hbound m r hr hm) (by norm_num)) (hP x v)
+    _ = _ := by ring
+
+/-- The same transport for an actual scalar family with a base-point
+weight, including a seminorm of the reference displacement. -/
+theorem exists_scalar_material_bound_of_majorant
+    {X : Type*} (core : Set ℝ) (cells : ℕ → Set ℝ)
+    (H E : ℝ → ℝ) (U : Set X)
+    (M : ∀ r, r ∈ core → ℝ) (f : ∀ r, r ∈ core → X → ℝ)
+    (P : X → ℝ) (hP : ∀ x, 0 ≤ P x)
+    (hM : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ core), r ∈ cells m → M r hr ≤ B * H r * E r ^ A)
+    (hf : ∀ r (hr : r ∈ core), ∀ x ∈ U,
+      |f r hr x| ≤ 2 * M r hr * P x) :
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ core), r ∈ cells m → ∀ x ∈ U,
+        |f r hr x| ≤ (B * H r * E r ^ A) * P x := by
+  obtain ⟨B, A, hB, hA, h⟩ := exists_material_bound_of_majorant
+    (X := X) (V := Unit) core cells H E U M (fun r hr x _ => f r hr x)
+    (fun x _ => P x) (fun x _ => hP x) hM (fun r hr x hx _ => hf r hr x hx)
+  exact ⟨B, A, hB, hA, fun m r hr hm x hx => h m r hr hm x hx ()⟩
+
+/-- A parameter family bounded by twice an envelope majorant retains one
+uniform envelope exponent on the same set. -/
+theorem exists_scalar_envelope_bound_of_majorant
+    {X : Type*} (core : Set ℝ) (cells : ℕ → Set ℝ)
+    (E : ℝ → ℝ) (U : Set X)
+    (M : ∀ r, r ∈ core → ℝ) (f : ∀ r, r ∈ core → X → ℝ)
+    (hM : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ core), r ∈ cells m → M r hr ≤ B * E r ^ A)
+    (hf : ∀ r (hr : r ∈ core), ∀ x ∈ U, |f r hr x| ≤ 2 * M r hr) :
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ core), r ∈ cells m → ∀ x ∈ U,
+        |f r hr x| ≤ B * E r ^ A := by
+  have hM' : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ core), r ∈ cells m → M r hr ≤ B * 1 * E r ^ A := by
+    simpa only [mul_one] using hM
+  have hf' : ∀ r (hr : r ∈ core), ∀ x ∈ U,
+      |f r hr x| ≤ 2 * M r hr * 1 := by
+    simpa only [mul_one] using hf
+  simpa only [mul_one] using exists_scalar_material_bound_of_majorant
+    core cells (fun _ => 1) E U M f (fun _ => 1) (fun _ => zero_le_one) hM' hf'
+
+end ContinuousFlexibility.Analysis
+
 namespace ContinuousFlexibility.Statements
 
 open Set
@@ -150,26 +221,22 @@ theorem stateProfileRadialJetSmoothDirections_material_bound
         |(stateProfileRadialJetSmoothDirections
           hS hT hA.1.1 hD hA.2.2.1 hχ n r hr).D k z.1 v| ≤
           (B * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ A) *
-            ∏ i, stateGrading S 0 (v i) := by
-  have hq : 0 ≤ stateGrading S 0 C.referenceState + ε :=
-    add_nonneg (apply_nonneg _ _) hε.le
-  obtain ⟨B, A, hB', hA', hbound⟩ :=
-    profileParameterProductMajorant_material_bound hT hA hE hloc hχloc hq n k hk
-  refine ⟨2 * B, A, mul_pos (by norm_num) hB', hA',
-    fun m r hr hrm z hz v => ?_⟩
-  calc
-    _ ≤ 2 * profileParameterProductMajorant (fun j => |iteratedDeriv j D.w r|)
-        (fun j => stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr)
-        (stateGrading S 0 C.referenceState + ε) n k *
-          ∏ i, stateGrading S 0 (v i) :=
-      stateProfileRadialJetSmoothDirections_rawProductBound_on_neighborhood
-        hS hT hA.1.1 hD hA.2.2.1 hχ hA.2.1 hB n k r hr hz v
-    _ ≤ 2 * (B * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ A) *
-        ∏ i, stateGrading S 0 (v i) :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (hbound m r hr hrm) (by norm_num))
-        (Finset.prod_nonneg (fun i _ => apply_nonneg _ _))
-    _ = _ := by ring
+            ∏ i, stateGrading S 0 (v i) :=
+  exists_material_bound_of_majorant
+    (X := AnnularState S × ℝ) (V := Fin k → AnnularState S)
+    (Ioo D.a D.b) D.cells (fun r => T.H r ^ (3 / 4 : ℝ)) T.E0
+    (stateNeighborhood S C base ε)
+    (fun r hr => profileParameterProductMajorant (fun j => |iteratedDeriv j D.w r|)
+      (fun j => stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr)
+      (stateGrading S 0 C.referenceState + ε) n k)
+    (fun r hr z v =>
+      (stateProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ n r hr).D k z.1 v)
+    (fun _ v => ∏ i, stateGrading S 0 (v i))
+    (fun _ v => Finset.prod_nonneg (fun i _ => apply_nonneg (stateGrading S 0) (v i)))
+    (profileParameterProductMajorant_material_bound hT hA hE hloc hχloc
+      (add_nonneg (apply_nonneg (stateGrading S 0) C.referenceState) hε.le) n k hk)
+    (fun r hr z hz v => stateProfileRadialJetSmoothDirections_rawProductBound_on_neighborhood
+      hS hT hA.1.1 hD hA.2.2.1 hχ hA.2.1 hB n k r hr hz v)
 
 /-- The actual zeroth-parameter profile difference has the same full
 material weight and retains one level-zero state-displacement factor. -/
@@ -189,26 +256,20 @@ theorem iteratedDeriv_stateProfile_difference_material_bound
         |iteratedDeriv n (fun s => stateProfile D S C z.1 s -
             stateProfile D S C C.referenceState s) r| ≤
           (B * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ A) *
-            stateGrading S 0 (z.1 - C.referenceState) := by
-  have hq : 0 ≤ stateGrading S 0 C.referenceState + ε :=
-    add_nonneg (apply_nonneg _ _) hε.le
-  obtain ⟨B, A, hB', hA', hbound⟩ :=
-    profileParameterProductMajorant_material_bound hT hA hE hloc hχloc hq n 1
-      (by norm_num)
-  refine ⟨2 * B, A, mul_pos (by norm_num) hB', hA',
-    fun m r hr hrm z hz => ?_⟩
-  calc
-    _ ≤ 2 * profileParameterProductMajorant (fun j => |iteratedDeriv j D.w r|)
-        (fun j => stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr)
-        (stateGrading S 0 C.referenceState + ε) n 1 *
-          stateGrading S 0 (z.1 - C.referenceState) :=
-      iteratedDeriv_stateProfile_difference_bound
-        hS hT hA.1.1 hD hA.2.2.1 hχ hA.2.1 hB n r hr hz
-    _ ≤ 2 * (B * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ A) *
-        stateGrading S 0 (z.1 - C.referenceState) :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (hbound m r hr hrm) (by norm_num))
-        (apply_nonneg _ _)
-    _ = _ := by ring
+            stateGrading S 0 (z.1 - C.referenceState) :=
+  exists_scalar_material_bound_of_majorant (X := AnnularState S × ℝ)
+    (Ioo D.a D.b) D.cells (fun r => T.H r ^ (3 / 4 : ℝ)) T.E0
+    (stateNeighborhood S C base ε)
+    (fun r hr => profileParameterProductMajorant (fun j => |iteratedDeriv j D.w r|)
+      (fun j => stateProfileExponentJetMajorant D T C hA.2.2.1 j r hr)
+      (stateGrading S 0 C.referenceState + ε) n 1)
+    (fun r _ z => iteratedDeriv n
+      (fun s => stateProfile D S C z.1 s - stateProfile D S C C.referenceState s) r)
+    (fun z => stateGrading S 0 (z.1 - C.referenceState))
+    (fun z => apply_nonneg (stateGrading S 0) (z.1 - C.referenceState))
+    (profileParameterProductMajorant_material_bound hT hA hE hloc hχloc
+      (add_nonneg (apply_nonneg (stateGrading S 0) C.referenceState) hε.le) n 1 (by norm_num))
+    (fun r hr z hz => iteratedDeriv_stateProfile_difference_bound
+      hS hT hA.1.1 hD hA.2.2.1 hχ hA.2.1 hB n r hr hz)
 
 end ContinuousFlexibility.Statements
