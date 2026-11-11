@@ -26,7 +26,9 @@ private theorem iteratedFDeriv_cons_cons_eq (f : E → F) (n : ℕ)
       fderiv ℝ (fderiv ℝ (iteratedFDeriv ℝ n f)) x a b v := by
   rw [iteratedFDeriv_succ_apply_left]
   simp only [Fin.cons_zero, Fin.tail_cons]
-  rw [iteratedFDeriv_succ_eq_comp_left, LinearIsometryEquiv.comp_fderiv]
+  rw [iteratedFDeriv_succ_eq_comp_left]
+  rw [(continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => E) F).symm.comp_fderiv
+    (f := fderiv ℝ (iteratedFDeriv ℝ n f)) (x := x)]
   rfl
 
 private theorem iteratedFDeriv_cons_cons_swap {f : E → F}
@@ -73,7 +75,8 @@ private theorem iteratedFDeriv_comp_adjacent {f : E → F}
         · simp [Function.comp_def, swap_apply_def, Fin.ext_iff]
         · change v (swap j.castSucc.succ j.succ.succ k.succ) =
             v ((swap j.castSucc j.succ k).succ)
-          exact congrArg v (Fin.succ_injective.map_swap j.castSucc j.succ k).symm
+          exact congrArg v
+            ((Fin.succ_injective (n + 1)).map_swap j.castSucc j.succ k).symm
       have hn : DifferentiableAt ℝ (iteratedFDeriv ℝ (n + 1) f) x :=
         (hf.iteratedFDeriv_right (m := ∞) (by simp)).differentiable (by simp) x
       have hfun : (fun y => iteratedFDeriv ℝ (n + 1) f y

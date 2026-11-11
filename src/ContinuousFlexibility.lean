@@ -46,7 +46,9 @@ import ContinuousFlexibility.Analysis.RootCompositionEven
 import ContinuousFlexibility.Analysis.RootCompositionIntegral
 import ContinuousFlexibility.Analysis.RootCompositionSmooth
 import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
+import ContinuousFlexibility.Analysis.RootCoordinateJets
 import ContinuousFlexibility.Analysis.RootPowerJets
+import ContinuousFlexibility.Analysis.RootTaylorBounds
 import ContinuousFlexibility.Analysis.RootTaylorPolynomial
 import ContinuousFlexibility.Analysis.StateControlDecay
 import ContinuousFlexibility.Analysis.StateControlEndpointClosure
@@ -55,6 +57,7 @@ import ContinuousFlexibility.Analysis.StateProfileRegularity
 import ContinuousFlexibility.Analysis.TameLinear
 import ContinuousFlexibility.Analysis.WeakBranchCore
 import ContinuousFlexibility.Analysis.WeightedJetComposition
+import ContinuousFlexibility.Analysis.TaylorRemainderBounds
 import ContinuousFlexibility.Analysis.MaterialSampleCofinite
 import ContinuousFlexibility.Analysis.PointSolutionCore
 import ContinuousFlexibility.Analysis.StateControlCofiniteJets

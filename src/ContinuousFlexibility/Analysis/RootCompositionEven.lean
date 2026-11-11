@@ -59,10 +59,11 @@ theorem hasDerivAt_rootLastDerivative {G : E × ℝ → F}
 
 theorem contDiff_rootDivideLast [ProperSpace E] {G : E × ℝ → F}
     (hG : ContDiff ℝ ∞ G) : ContDiff ℝ ∞ (rootDivideLast G) := by
-  dsimp only [rootDivideLast]
-  apply contDiff_intervalIntegral_of_contDiff
-  exact (contDiff_rootLastDerivative hG).comp
-    (contDiff_fst.fst.prodMk (contDiff_snd.mul contDiff_fst.snd))
+  have hIntegrand : ContDiff ℝ ∞
+      (fun q : (E × ℝ) × ℝ => rootLastDerivative G (q.1.1, q.2 * q.1.2)) :=
+    (contDiff_rootLastDerivative hG).comp
+      (contDiff_fst.fst.prodMk (contDiff_snd.mul contDiff_fst.snd))
+  exact contDiff_intervalIntegral_of_contDiff hIntegrand 0 1
 
 /-- The integral divided difference has the expected factorization. -/
 theorem rootDivideLast_factor {G : E × ℝ → F} (hG : ContDiff ℝ ∞ G)

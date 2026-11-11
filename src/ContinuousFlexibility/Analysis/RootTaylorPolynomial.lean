@@ -8,7 +8,7 @@ import Mathlib.Topology.Order.Compact
 import Mathlib.Tactic.FunProp
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Omega
+import Lean.Elab.Tactic.Omega
 import Mathlib.Tactic.Ring
 
 /-!
@@ -219,5 +219,113 @@ theorem exists_multilinear_comp_jet_bound
       norm_iteratedFDeriv_comp_le A.contDiff hu
         (ENat.natCast_le_of_coe_top_le_withTop le_rfl s) x houter hinner
     _ = ((s.factorial : ℝ) * Q * B ^ s) * ‖A‖ := by ring
+
+private def rootTaylorAugmentedCoefficient
+    (A : ContinuousMultilinearMap ℝ (fun _ : Fin n => ℝ × ℝ × ℝ) ℝ) :
+    ContinuousMultilinearMap ℝ (fun _ : Fin (n + 1) => ℝ × ℝ × ℝ) ℝ :=
+  ((ContinuousLinearMap.fst ℝ ℝ (ℝ × ℝ)).smulRight A).uncurryLeft
+
+private theorem rootTaylorAugmentedCoefficient_apply
+    (A : ContinuousMultilinearMap ℝ (fun _ : Fin n => ℝ × ℝ × ℝ) ℝ)
+    (c : ℝ) (v : Fin n → ℝ × ℝ × ℝ) :
+    rootTaylorAugmentedCoefficient A (Fin.cons (c, 0, 0) v) = c * A v := by
+  simp only [rootTaylorAugmentedCoefficient, ContinuousLinearMap.uncurryLeft_apply,
+    Fin.cons_zero, Fin.tail_cons, ContinuousLinearMap.smulRight_apply,
+    ContinuousLinearMap.fst_apply, smul_apply, smul_eq_mul]
+
+private theorem norm_rootTaylorAugmentedCoefficient
+    (A : ContinuousMultilinearMap ℝ (fun _ : Fin n => ℝ × ℝ × ℝ) ℝ) :
+    ‖rootTaylorAugmentedCoefficient A‖ = ‖A‖ := by
+  rw [rootTaylorAugmentedCoefficient, ContinuousLinearMap.uncurryLeft_norm,
+    ContinuousLinearMap.norm_smulRight_apply, ContinuousLinearMap.norm_fst, one_mul]
+
+private def rootTaylorTermInput (S : Finset (Fin n))
+    (q : ℝ × (ℝ × ℝ)) : Fin (n + 1) → ℝ × ℝ × ℝ :=
+  Fin.cons ((q.1 + q.2.1) ^ (3 * (S.card / 2)), 0, 0) (rootTaylorSlots S q.2)
+
+private theorem contDiff_rootTaylorTermInput (S : Finset (Fin n)) :
+    ContDiff ℝ ∞ (rootTaylorTermInput S) := by
+  classical
+  apply contDiff_pi.mpr
+  intro i
+  refine Fin.cases ?_ (fun j => ?_) i
+  · simp only [rootTaylorTermInput, Fin.cons_zero]
+    fun_prop
+  · simp only [rootTaylorTermInput, Fin.cons_succ, rootTaylorSlots]
+    by_cases hj : j ∈ S <;> simp only [hj, if_true, if_false] <;> fun_prop
+
+private theorem exists_rootTaylorTerm_jet_bound (S : Finset (Fin n)) (s : ℕ) :
+    ∃ C : ℝ, 0 ≤ C ∧
+      ∀ A : ContinuousMultilinearMap ℝ (fun _ : Fin n => ℝ × ℝ × ℝ) ℝ,
+      ∀ x₀ ∈ Icc (0 : ℝ) 1,
+        ‖iteratedFDeriv ℝ s
+          (fun h : ℝ × ℝ =>
+            (x₀ + h.1) ^ (3 * (S.card / 2)) * A (rootTaylorSlots S h)) 0‖ ≤ C * ‖A‖ := by
+  let K : Set (ℝ × (ℝ × ℝ)) :=
+    (fun x₀ : ℝ => (x₀, (0 : ℝ × ℝ))) '' Icc (0 : ℝ) 1
+  have hK : IsCompact K :=
+    isCompact_Icc.image (continuous_id.prodMk continuous_const)
+  obtain ⟨C, hC0, hC⟩ :=
+    exists_multilinear_comp_jet_bound (contDiff_rootTaylorTermInput S) hK s
+  refine ⟨C, hC0, ?_⟩
+  intro A x₀ hx₀
+  let H : ℝ × (ℝ × ℝ) → ℝ :=
+    fun q => rootTaylorAugmentedCoefficient A (rootTaylorTermInput S q)
+  have hH : ContDiff ℝ ∞ H :=
+    (rootTaylorAugmentedCoefficient A).contDiff.comp (contDiff_rootTaylorTermInput S)
+  have heq :
+      (fun h : ℝ × ℝ =>
+        (x₀ + h.1) ^ (3 * (S.card / 2)) * A (rootTaylorSlots S h)) =
+      (fun h => H (x₀, h)) := by
+    funext h
+    simp only [H, rootTaylorTermInput, rootTaylorAugmentedCoefficient_apply]
+  rw [heq]
+  refine (norm_iteratedFDeriv_prod_right_le hH x₀ (0 : ℝ × ℝ) s).trans ?_
+  simpa only [norm_rootTaylorAugmentedCoefficient] using
+    hC (rootTaylorAugmentedCoefficient A) (x₀, (0 : ℝ × ℝ)) ⟨x₀, hx₀, rfl⟩
+
+/-- Every fixed-order jet of the polynomial extension is bounded by a
+constant times the norm of its multilinear coefficient, uniformly for
+`x₀ ∈ [0, 1]`. -/
+theorem exists_rootTaylorPolynomial_jet_bound (s : ℕ) :
+    ∃ C : ℝ, 0 < C ∧
+      ∀ A : ContinuousMultilinearMap ℝ (fun _ : Fin n => ℝ × ℝ × ℝ) ℝ,
+      ∀ x₀ ∈ Icc (0 : ℝ) 1,
+        ‖iteratedFDeriv ℝ s (rootTaylorPolynomial A x₀) 0‖ ≤ C * ‖A‖ := by
+  classical
+  choose C hC0 hC using fun S : Finset (Fin n) => exists_rootTaylorTerm_jet_bound S s
+  have hsum : 0 ≤ ∑ S : Finset (Fin n), C S := Finset.sum_nonneg (fun S _ => hC0 S)
+  refine ⟨1 + ∑ S : Finset (Fin n), C S, by linarith, ?_⟩
+  intro A x₀ hx₀
+  have hsmooth (S : Finset (Fin n)) :
+      ContDiff ℝ ∞ (fun h : ℝ × ℝ => if Even S.card then
+        (x₀ + h.1) ^ (3 * (S.card / 2)) * A (rootTaylorSlots S h) else 0) := by
+    by_cases hS : Even S.card
+    · simp only [if_pos hS]
+      exact ((contDiff_const.add contDiff_fst).pow _).mul
+        (A.contDiff.comp (contDiff_rootTaylorSlots S))
+    · simp only [if_neg hS]
+      exact contDiff_const
+  unfold rootTaylorPolynomial
+  rw [iteratedFDeriv_fun_sum_apply (fun S _ =>
+    ((hsmooth S).of_le (ENat.natCast_le_of_coe_top_le_withTop le_rfl s)).contDiffAt)]
+  calc
+    ‖∑ S : Finset (Fin n), iteratedFDeriv ℝ s
+        (fun h : ℝ × ℝ => if Even S.card then
+          (x₀ + h.1) ^ (3 * (S.card / 2)) * A (rootTaylorSlots S h) else 0) 0‖ ≤
+        ∑ S : Finset (Fin n), ‖iteratedFDeriv ℝ s
+          (fun h : ℝ × ℝ => if Even S.card then
+            (x₀ + h.1) ^ (3 * (S.card / 2)) * A (rootTaylorSlots S h) else 0) 0‖ :=
+      norm_sum_le _ _
+    _ ≤ ∑ S : Finset (Fin n), C S * ‖A‖ := by
+      apply Finset.sum_le_sum
+      intro S _
+      by_cases hS : Even S.card
+      · simpa only [if_pos hS] using hC S A x₀ hx₀
+      · simp only [if_neg hS, iteratedFDeriv_fun_zero, Pi.zero_apply, norm_zero]
+        exact mul_nonneg (hC0 S) (norm_nonneg A)
+    _ = (∑ S : Finset (Fin n), C S) * ‖A‖ := (Finset.sum_mul ..).symm
+    _ ≤ (1 + ∑ S : Finset (Fin n), C S) * ‖A‖ :=
+      mul_le_mul_of_nonneg_right (by linarith) (norm_nonneg A)
 
 end ContinuousFlexibility.Analysis

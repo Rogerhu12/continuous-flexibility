@@ -34,7 +34,7 @@ theorem norm_iteratedFDeriv_comp_le_weighted
       ‖iteratedFDeriv ℝ i g (f x)‖ ≤ C * ρ ^ (n - i))
     (hinner : ∀ i : ℕ, 1 ≤ i → i ≤ n →
       ‖iteratedFDeriv ℝ i f x‖ ≤ ρ * (D / ρ) ^ i) :
-    ‖iteratedFDeriv ℝ n (g ∘ f) x‖ ≤ (n ! : ℝ) * C * D ^ n := by
+    ‖iteratedFDeriv ℝ n (g ∘ f) x‖ ≤ (n.factorial : ℝ) * C * D ^ n := by
   let f₁ : E → F := fun y => ρ⁻¹ • f y
   let g₁ : F → G := fun y => g (ρ • y)
   have hf₁ : ContDiffOn ℝ ∞ f₁ U := hf.const_smul _
@@ -74,8 +74,8 @@ theorem norm_iteratedFDeriv_comp_le_weighted
     dsimp only [Function.comp_apply, g₁, f₁]
     rw [smul_smul, mul_inv_cancel₀ hρ.ne', one_smul]
   rw [heq, iteratedFDerivWithin_of_isOpen n hU hx] at hcomp
-  have hconstant : (n ! : ℝ) * (C * ρ ^ n) * (D / ρ) ^ n =
-      (n ! : ℝ) * C * D ^ n := by
+  have hconstant : (n.factorial : ℝ) * (C * ρ ^ n) * (D / ρ) ^ n =
+      (n.factorial : ℝ) * C * D ^ n := by
     rw [div_pow]
     field_simp [hρ.ne']
     <;> ring
