@@ -100,6 +100,72 @@ private theorem coupled_regular_parameterApply_smoothTameOn
 
 end GenericParameterComposition
 
+section GenericRecoveryOperations
+
+variable {X Y E : Type*}
+  [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+  [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+
+private theorem coupled_regular_control_comp
+    {T : MaterialData} {γ : ℝ} {M : CircleModelData} (hM : IsCircleModel T γ M)
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y}
+    (hp : Monotone p) (htp : WithSeminorms p) (htq : WithSeminorms q)
+    {U : Set X} {V : Set Y} {parameter : X → Y} {left right : X → M.Space}
+    {inverse : Y × CoupledConstantCircle hM → CoupledConstantCircle hM}
+    (hz : SmoothTameOn p q U parameter)
+    (hl : SmoothTameOn p M.grading U left) (hr : SmoothTameOn p M.grading U right)
+    (hi : SmoothTameOn (pairGrading q (coupledConstantCircleGrading hM))
+      (coupledConstantCircleGrading hM) (V ×ˢ univ) inverse)
+    (hmap : MapsTo parameter U V) :
+    SmoothTameOn p (coupledConstantCircleGrading hM) U
+      (fun x => inverse (parameter x, coupledConstantCircleProjection hM (left x - right x))) := by
+  letI : IsTopologicalAddGroup X := htp.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ X := htp.continuousSMul
+  letI : IsTopologicalAddGroup Y := htq.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ Y := htq.continuousSMul
+  letI : ∀ n, CompleteSpace (M.level n) := fun n =>
+    (hM.2.1 n).isComplete.completeSpace_coe
+  letI : ∀ n, CompleteSpace ↥(subLevel (coupledConstantCircleSubmodule hM) n) := fun n =>
+    subLevel_completeSpace (coupledConstantCircleSubmodule hM) n
+  have htk := coupledConstantCircleGrading_withSeminorms hM
+  have htqk := withSeminorms_pairGrading htq htk
+  letI : LocallyConvexSpace ℝ (Y × CoupledConstantCircle hM) := htqk.toLocallyConvexSpace
+  have hm := coupled_regular_mean_smoothTameOn hM (coupled_smoothTameOn_sub hp hl hr)
+  exact coupled_smoothTameOn_comp_equiv hp htp htqk
+    (subspaceEquiv (coupledConstantCircleSubmodule hM) (coupledConstantCircle_isClosed hM))
+    (smoothTameOn_prodMk_generic hp htp hz hm) hi
+    (fun x hx => ⟨hmap hx, mem_univ _⟩)
+
+private theorem coupled_regular_restriction_comp
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ E}
+    (hp : Monotone p) (htp : WithSeminorms p)
+    (hq : Monotone q) (htq : WithSeminorms q) (ρ : E →L[ℝ] ControlBanach)
+    {U : Set X} {f : X → E} (hf : SmoothTameOn p q U f) :
+    SmoothTameOn p controlGrading U (fun x => ρ (f x)) := by
+  letI : IsTopologicalAddGroup X := htp.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ X := htp.continuousSMul
+  letI : IsTopologicalAddGroup E := htq.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ E := htq.continuousSMul
+  letI : LocallyConvexSpace ℝ E := htq.toLocallyConvexSpace
+  let hρ := coupled_continuousLinear_to_norm_isTame hq htq ρ
+  exact coupled_smoothTameOn_comp_banach hp htp htq hf
+    (smoothTameOn_continuousLinear ρ hρ.choose_spec) (fun _ _ => mem_univ _)
+
+private theorem coupled_regular_tuple_smoothTameOn
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y} {r : ℕ → Seminorm ℝ E}
+    (hp : Monotone p) (htp : WithSeminorms p)
+    {U : Set X} {height : X → Y × ℝ} {control chart : X → E}
+    (hh : SmoothTameOn p (pairGrading q realGrading) U height)
+    (hk : SmoothTameOn p r U control) (hc : SmoothTameOn p r U chart) :
+    SmoothTameOn p (pairGrading q (pairGrading realGrading (pairGrading r r))) U
+      (fun x => ((height x).1, ((height x).2, (control x, chart x)))) := by
+  exact smoothTameOn_prodMk_generic hp htp (coupled_regular_fst_smoothTameOn hh)
+    (smoothTameOn_prodMk_generic hp htp (coupled_regular_snd_smoothTameOn hh)
+      (smoothTameOn_prodMk_generic hp htp hk hc))
+
+end GenericRecoveryOperations
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {L : ReturnCorrectionData S} {G : ScalarInverseData S}
@@ -203,6 +269,72 @@ private theorem coupled_regular_row_smoothTameOn
     (coupled_heightPairGrading_withSeminorms S)
     (coupled_regular_parameter_smoothTameOn (S := S) hU) hη hrow (fun z hz => hz.1)
 
+private theorem coupled_regular_control_apply
+    (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
+    (z : AnnularState S × ℝ) (y : ResidualSpace S) :
+    coupledRecoveryConstantControl hM B G z y =
+      coupledConstantFeedbackInverse hM B G z (coupledConstantCircleProjection hM
+        (y.2.val - z.2 • B.heightRow z (G.G z y.1).1)) := rfl
+
+private theorem coupled_regular_height_apply
+    (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
+    (z : AnnularState S × ℝ) (y : ResidualSpace S) :
+    coupledRecoveryHeightFormula hM B G z y =
+      G.G z y.1 - G.G z (B.heightColumn z
+        (coupledConstantControlRestriction hM B (coupledRecoveryConstantControl hM B G z y))) := rfl
+
+private theorem coupled_regular_formula_apply
+    (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
+    (z : AnnularState S × ℝ) (y : ResidualSpace S) :
+    coupledRecoveryRegularFormula hM B G z y R =
+      ((coupledRecoveryHeightFormula hM B G z y).1,
+        ((coupledRecoveryHeightFormula hM B G z y).2,
+          ((coupledRecoveryConstantControl hM B G z y).val,
+            R.chartIncrement z (R.inverse (coupledRecoveryRemainderFormula hM B G z y))))) := rfl
+
+private theorem coupled_regular_column_smoothTameOn
+    (hS : IsPhysicalSpaces D T S)
+    (h8 : N08Properties D T S C R G P B base loss ε)
+    (hU : IsOpen U) (hsub : U ⊆ sectorNeighborhood S base ε ε)
+    {f : (StateDirections S × ℝ) × ResidualSpace S → ControlBanach}
+    (hf : SmoothTameOn (coupledRegularInputGrading S) controlGrading (U ×ˢ univ) f) :
+    SmoothTameOn (coupledRegularInputGrading S) S.sourceGrading (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
+        B.heightColumn (liftSectorParameter S C z.1) (f z)) := by
+  have hg := coupled_regular_gradings S
+  have htpc := withSeminorms_pairGrading hg.2.2 coupled_controlGrading_withSeminorms
+  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × ControlBanach) :=
+    htpc.toLocallyConvexSpace
+  have hcolumn := smoothTameOn_mono
+    h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2
+    (hU.prod (isOpen_univ : IsOpen (univ : Set ControlBanach)))
+    (Set.prod_mono hsub (subset_refl _))
+  exact coupled_smoothTameOn_comp_source (S := S) hS hg.1 hg.2.1 htpc
+    (smoothTameOn_prodMk_generic hg.1 hg.2.1
+      (coupled_regular_parameter_smoothTameOn (S := S) hU) hf)
+    hcolumn (fun z hz => ⟨hz.1, mem_univ _⟩)
+
+private theorem coupled_regular_scalarApply_smoothTameOn
+    (hS : IsPhysicalSpaces D T S)
+    (hG : ScalarInverseProperties D S C L G base ε)
+    (hU : IsOpen U) (hsub : U ⊆ sectorNeighborhood S base ε ε)
+    {f : (StateDirections S × ℝ) × ResidualSpace S → S.Source}
+    (hf : SmoothTameOn (coupledRegularInputGrading S) S.sourceGrading (U ×ˢ univ) f) :
+    SmoothTameOn (coupledRegularInputGrading S)
+      (pairGrading (heightPairGrading S) realGrading) (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
+        G.G (liftSectorParameter S C z.1) (f z)) := by
+  have hg := coupled_regular_gradings S
+  have htps := withSeminorms_pairGrading hg.2.2 (coupled_sourceGrading_withSeminorms S)
+  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × S.Source) := htps.toLocallyConvexSpace
+  have hGs := smoothTameOn_mono hG.2.2.2
+    (hU.prod (isOpen_univ : IsOpen (univ : Set S.Source)))
+    (Set.prod_mono hsub (subset_refl _))
+  exact coupled_smoothTameOn_comp_scalarOutput (S := S) hS hg.1 hg.2.1 htps
+    (smoothTameOn_prodMk_generic hg.1 hg.2.1
+      (coupled_regular_parameter_smoothTameOn (S := S) hU) hf)
+    hGs (fun z hz => ⟨hz.1, mem_univ _⟩)
+
 private theorem coupled_regular_control_smoothTameOn
     (hS : IsPhysicalSpaces D T S)
     (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -219,19 +351,15 @@ private theorem coupled_regular_control_smoothTameOn
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         coupledRecoveryConstantControl hM B G (liftSectorParameter S C z.1) z.2) := by
   have hg := coupled_regular_gradings S
-  have htpk := withSeminorms_pairGrading hg.2.2 (coupledConstantCircleGrading_withSeminorms hM)
-  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × CoupledConstantCircle hM) :=
-    htpk.toLocallyConvexSpace
   have hfree := coupled_regular_scalarFree_smoothTameOn hS hG hU hsub
-  have hrow := coupled_regular_row_smoothTameOn hM hRef h8 hU hsub
+  have hrow := coupled_regular_row_smoothTameOn (S := S) hM hRef h8 hU hsub
     (coupled_regular_fst_smoothTameOn hfree)
-  have heffective := coupled_smoothTameOn_sub hg.1
-    (coupled_regular_circle_smoothTameOn (S := S) hU) hrow
-  have hmean := coupled_regular_mean_smoothTameOn hM heffective
-  exact coupled_smoothTameOn_comp_constantCircle hM hg.1 hg.2.1 htpk
-    (smoothTameOn_prodMk_generic hg.1 hg.2.1
-      (coupled_regular_parameter_smoothTameOn (S := S) hU) hmean)
-    hcontrol (fun z hz => ⟨hz.1, mem_univ _⟩)
+  have h := coupled_regular_control_comp (M := S.circle (3 / 4 : ℝ)) hM hg.1 hg.2.1 hg.2.2
+    (coupled_regular_parameter_smoothTameOn (S := S) hU)
+    (coupled_regular_circle_smoothTameOn (S := S) hU) hrow hcontrol (fun z hz => hz.1)
+  exact smoothTameOn_congr h (fun z _ =>
+    (coupled_regular_control_apply (S := S) (B := B) (G := G) hM
+      (liftSectorParameter S C z.1) z.2).symm)
 
 private theorem coupled_regular_height_smoothTameOn
     (hS : IsPhysicalSpaces D T S)
@@ -247,35 +375,16 @@ private theorem coupled_regular_height_smoothTameOn
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         coupledRecoveryHeightFormula hM B G (liftSectorParameter S C z.1) z.2) := by
   have hg := coupled_regular_gradings S
-  have htk := coupledConstantCircleGrading_withSeminorms hM
-  letI : LocallyConvexSpace ℝ (CoupledConstantCircle hM) := htk.toLocallyConvexSpace
-  have htpc := withSeminorms_pairGrading hg.2.2 coupled_controlGrading_withSeminorms
-  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × ControlBanach) :=
-    htpc.toLocallyConvexSpace
-  have htps := withSeminorms_pairGrading hg.2.2 (coupled_sourceGrading_withSeminorms S)
-  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × S.Source) := htps.toLocallyConvexSpace
-  let hρ := coupled_continuousLinear_to_norm_isTame
-    (coupledConstantCircleGrading_monotone hM) htk (coupledConstantControlRestriction hM B)
-  have hξ := coupled_smoothTameOn_comp_banach hg.1 hg.2.1 htk hκ
-    (smoothTameOn_continuousLinear (coupledConstantControlRestriction hM B) hρ.choose_spec)
-    (fun _ _ => mem_univ _)
-  have hcolumn := smoothTameOn_mono
-    h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2
-    (hU.prod (isOpen_univ : IsOpen (univ : Set ControlBanach)))
-    (Set.prod_mono hsub (subset_refl _))
-  have hsource := coupled_smoothTameOn_comp_source hS hg.1 hg.2.1 htpc
-    (smoothTameOn_prodMk_generic hg.1 hg.2.1
-      (coupled_regular_parameter_smoothTameOn (S := S) hU) hξ)
-    hcolumn (fun z hz => ⟨hz.1, mem_univ _⟩)
-  have hGs := smoothTameOn_mono hG.2.2.2
-    (hU.prod (isOpen_univ : IsOpen (univ : Set S.Source)))
-    (Set.prod_mono hsub (subset_refl _))
-  have hG1 := coupled_smoothTameOn_comp_scalarOutput hS hg.1 hg.2.1 htps
-    (smoothTameOn_prodMk_generic hg.1 hg.2.1
-      (coupled_regular_parameter_smoothTameOn (S := S) hU) hsource)
-    hGs (fun z hz => ⟨hz.1, mem_univ _⟩)
-  exact coupled_smoothTameOn_sub hg.1
+  have hξ := coupled_regular_restriction_comp hg.1 hg.2.1
+    (coupledConstantCircleGrading_monotone hM) (coupledConstantCircleGrading_withSeminorms hM)
+    (coupledConstantControlRestriction (S := S) hM B) hκ
+  have hsource := coupled_regular_column_smoothTameOn (S := S) hS h8 hU hsub hξ
+  have hG1 := coupled_regular_scalarApply_smoothTameOn (S := S) hS hG hU hsub hsource
+  have h := coupled_smoothTameOn_sub hg.1
     (coupled_regular_scalarFree_smoothTameOn hS hG hU hsub) hG1
+  exact smoothTameOn_congr h (fun z _ =>
+    (coupled_regular_height_apply (S := S) (B := B) (G := G) hM
+      (liftSectorParameter S C z.1) z.2).symm)
 
 private theorem coupled_regular_remainder_smoothTameOn
     (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -365,17 +474,16 @@ theorem coupledRecoveryRegularFormula_smoothTameOn
           (liftSectorParameter S C z.1) z.2 R) := by
   let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
   have hg := coupled_regular_gradings S
-  have hκ := coupled_regular_control_smoothTameOn hS hM hRef hG h8 hU hsub hcontrol
-  have hheight := coupled_regular_height_smoothTameOn hS hM hG h8 hU hsub hκ
-  have hrem := coupled_regular_remainder_smoothTameOn hM hRef h8 hU hsub hκ hheight
-  have hchartOut := coupled_regular_chart_smoothTameOn hM hU hinverse hchart hrem
+  have hκ := coupled_regular_control_smoothTameOn (S := S) hS hM hRef hG h8 hU hsub hcontrol
+  have hheight := coupled_regular_height_smoothTameOn (S := S) hS hM hG h8 hU hsub hκ
+  have hrem := coupled_regular_remainder_smoothTameOn (S := S) hM hRef h8 hU hsub hκ hheight
+  have hchartOut := coupled_regular_chart_smoothTameOn (S := S) hM hU hinverse hchart hrem
   have hκval := coupled_regular_subtype_smoothTameOn
     (q := (S.circle (3 / 4 : ℝ)).grading) (coupledConstantCircleSubmodule hM) hκ
-  exact smoothTameOn_prodMk_generic hg.1 hg.2.1
-    (coupled_regular_fst_smoothTameOn hheight)
-    (smoothTameOn_prodMk_generic hg.1 hg.2.1
-      (coupled_regular_snd_smoothTameOn hheight)
-      (smoothTameOn_prodMk_generic hg.1 hg.2.1 hκval hchartOut))
+  have h := coupled_regular_tuple_smoothTameOn hg.1 hg.2.1 hheight hκval hchartOut
+  exact smoothTameOn_congr h (fun z _ =>
+    (coupled_regular_formula_apply (S := S) (B := B) (G := G) (R := R) hM
+      (liftSectorParameter S C z.1) z.2).symm)
 
 private theorem coupled_recoveredSectorV_eq_regularFormula
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

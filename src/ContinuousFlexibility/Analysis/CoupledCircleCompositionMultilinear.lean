@@ -114,6 +114,9 @@ theorem coupledCircleKernelMultilinear_continuous (r k : ℕ) :
     (coupledCircleKernelMultilinear hD hT hγ hM hI r k)
     (coupledCircleKernelMultilinearDerivative hD hT hγ hM hI r k)
   · intro ψ v u
+    change HasProjectiveLineDerivAt
+      (fun x : M.Space => coupledCircleKernelMultilinear hD hT hγ hM hI r k x v)
+      (coupledCircleKernelMultilinearDerivative hD hT hγ hM hI r k ψ (Fin.cons u v)) ψ u
     simpa only [coupledCircleKernelMultilinear_apply,
       coupledCircleKernelMultilinearDerivative, Fin.cons_zero, Fin.cons_one, Fin.cons_succ] using
       coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI r k ψ u (v 0) (Fin.tail v)
@@ -130,6 +133,8 @@ theorem coupledCircleKernelMultilinear_continuous (r k : ℕ) :
               ∏ i : Fin (k + 1), M.grading N ((Fin.cons v w : Fin (k + 1) → M.Space) i) :=
       hdata.choose_spec.2.choose_spec.2
     refine ⟨N, hN, C, hC, fun ψ hψ v => ?_⟩
+    change M.grading s (coupledCircleKernelMultilinear hD hT hγ hM hI r k ψ v) ≤
+      C * (1 + M.grading N ψ) * ∏ i : Fin (k + 1), M.grading N (v i)
     simpa only [coupledCircleKernelMultilinear_apply, coupled_fin_cons_head_tail] using
       hc ψ hψ (v 0) (Fin.tail v)
   · intro s R hR
