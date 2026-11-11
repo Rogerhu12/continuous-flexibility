@@ -34,7 +34,7 @@ theorem matching_homogeneous_green_on_compact {D : ReferenceData}
       (u l * (D.w l * deriv φ l) -
         φ l * (D.w l * derivWithin u (Icc l h) l)) := by
   have hg := modeLocalEquation_green_on_compact hD hB hEq hu
-    hlh hsub hJ hreg (hφ.of_le (by norm_num)).contDiffOn
+    hlh hsub hJ hreg (hφ.of_le (by simp)).contDiffOn
   simp only [Prod.fst_zero] at hg
   have hzero :
       (∫ x in l..h, u x * radialJacobi ((j : ℝ) ^ 2) D.w φ x -
@@ -190,13 +190,13 @@ theorem matchingOuter_green_test {D : ReferenceData}
     (fun x hx => Or.inr ⟨hx.1, hx.2.trans hrb⟩)
     (hreg.mono (fun x hx => Or.inr ⟨hx.1, hx.2.trans_lt hrb⟩)) hφ
   have hφl : φ l = 0 := image_eq_zero_of_notMem_tsupport
-    (fun ht => (htφ ht).1.false)
+    (fun ht => (lt_irrefl l) (htφ ht).1)
   have hdφl : deriv φ l = 0 := deriv_of_notMem_tsupport
-    (fun ht => (htφ ht).1.false)
+    (fun ht => (lt_irrefl l) (htφ ht).1)
   have hφr : φ r = 0 := image_eq_zero_of_notMem_tsupport
-    (fun ht => (htφ ht).2.false)
+    (fun ht => (lt_irrefl r) (htφ ht).2)
   have hdφr : deriv φ r = 0 := deriv_of_notMem_tsupport
-    (fun ht => (htφ ht).2.false)
+    (fun ht => (lt_irrefl r) (htφ ht).2)
   have hφL := heφ M.innerLeft ⟨le_rfl, hm.le⟩
   have hφR := heφ M.innerRight ⟨hm.le, le_rfl⟩
   rw [hreduce]

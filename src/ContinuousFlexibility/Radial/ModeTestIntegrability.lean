@@ -47,8 +47,14 @@ theorem matchingLogDerivative_memLp {D : ReferenceData} (hD : IsAccumulatingProf
   letI := hfinite
   apply (integrable_const (12 * C / D.a ^ 2)).mono'
     (by
-      simpa only [pow_two] using
-        ((matchingDensity_measurable hD).mul (hm.mul hm)).aestronglyMeasurable)
+      have he :
+          (fun r => matchingDensity D r * (deriv D.w r / D.w r) ^ 2) =
+            matchingDensity D *
+              ((fun r => deriv D.w r / D.w r) * (fun r => deriv D.w r / D.w r)) := by
+        funext r
+        simp only [Pi.mul_apply, pow_two]
+      rw [he]
+      exact ((matchingDensity_measurable hD).mul (hm.mul hm)).aestronglyMeasurable)
   filter_upwards [ae_restrict_mem (show MeasurableSet (radialCore D) from measurableSet_Ioo)]
     with r hr
   have hw0 : 0 < D.w r := hg.2.2.2.2.1 r hr
