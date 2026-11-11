@@ -46,8 +46,11 @@ theorem innerLiouvilleIntervalPullback_ae
         (volume.restrict (Ioo a b)).withDensity
           (fun x => ENNReal.ofReal (innerLiouvilleIntervalAmplitude R s lam x ^ 2))]
         (fun x => u (R x)) := by
-    simpa only [Lp.compMeasurePreservingₗᵢ_apply, Function.comp_apply] using
-      Lp.coeFn_compMeasurePreserving u hmap
+    change (Lp.compMeasurePreserving R hmap u : ℝ → ℝ) =ᵐ[
+      (volume.restrict (Ioo a b)).withDensity
+        (fun x => ENNReal.ofReal (innerLiouvilleIntervalAmplitude R s lam x ^ 2))]
+      (fun x => u (R x))
+    exact Lp.coeFn_compMeasurePreserving u hmap
   have hA := innerSquareDensityPullback_ae (volume.restrict (Ioo a b))
     (innerLiouvilleIntervalAmplitude R s lam)
     (innerLiouvilleIntervalAmplitude_measurable hR hs lam)
@@ -76,8 +79,7 @@ theorem innerLiouvilleIntervalPullback_surjective :
   have hum : AEStronglyMeasurable u
       ((radialHilbertMeasure D).restrict (Ioo (R a) (R b))) :=
     ((hf.stronglyMeasurable_mk.measurable.comp_aemeasurable hX).div
-      ((innerLiouvilleIntervalAmplitude_measurable hR hs lam).comp_aemeasurable hX)).
-        aestronglyMeasurable
+      ((innerLiouvilleIntervalAmplitude_measurable hR hs lam).comp_aemeasurable hX)).aestronglyMeasurable
   have hmodel : (fun x => innerLiouvilleIntervalAmplitude R s lam x * u (R x)) =ᵐ[
       volume.restrict (Ioo a b)] f₀ := by
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
@@ -97,7 +99,8 @@ theorem innerLiouvilleIntervalPullback_surjective :
     [innerLiouvilleIntervalPullback_ae D hab hlam hR hs hp hcore hw (hu.toLp u),
       innerLiouvilleInterval_pullback_ae D hab hlam hR hs hp hcore hw hu.coeFn_toLp,
       hmodel, hf.ae_eq_mk] with x hx hu' hm hf'
-  rw [hx, hu', hm, ← hf']
+  rw [hx, hu', hm]
+  exact hf'.symm
 
 def innerLiouvilleIntervalEquiv :
     Lp ℝ 2 ((radialHilbertMeasure D).restrict (Ioo (R a) (R b))) ≃ₗᵢ[ℝ]

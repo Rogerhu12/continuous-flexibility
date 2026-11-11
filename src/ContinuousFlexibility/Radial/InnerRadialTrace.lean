@@ -59,9 +59,9 @@ def innerRadialTraceValueTest (p : ℝ → ℝ)
     (fun r => (r ^ 2 / (12 * D.w r)) * deriv p r)
     (traceValueTest_continuousOn D hw hpos p hp)
 
+include hab in
 /-- The physical density and normalized derivative cancel exactly in
 the trace pairings. No norm-equivalence assumption is used. -/
-include hab in
 theorem innerRadialH1_smooth_trace_pairing
     {φ p : ℝ → ℝ}
     (hφ : ∀ x ∈ Icc a b, ContDiffAt ℝ ∞ φ x)
@@ -166,8 +166,8 @@ theorem innerRadialH1Trace_smooth {φ : ℝ → ℝ}
   rw [hp]
   fin_cases i <;> norm_num [bufferSign, innerEndpointValues]
 
-/-- The trace vanishes on the physical zero-endpoint closure. -/
 include hab in
+/-- The trace vanishes on the physical zero-endpoint closure. -/
 theorem innerRadialH1Trace_zero {q : InnerRadialH1Pair D}
     (hq : q ∈ innerRadialH1Zero D a b) :
     innerRadialH1Trace D hw ha hcore hpos q = 0 := by
@@ -184,6 +184,7 @@ theorem innerRadialH1Trace_zero {q : InnerRadialH1Pair D}
   rcases hr with ⟨φ, hφ, _, hs, hu, hd⟩
   have hφa : φ a = 0 := image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl a) (hs h).1)
   have hφb : φ b = 0 := image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl b) (hs h).2)
+  change innerRadialH1Trace D hw ha hcore hpos r i = 0
   rw [innerRadialH1Trace_smooth D hw hab ha hcore hpos
     (fun _ _ => hφ.contDiffAt) hu hd, hφa, hφb, ite_self]
 

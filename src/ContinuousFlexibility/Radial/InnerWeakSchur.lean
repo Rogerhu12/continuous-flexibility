@@ -35,10 +35,10 @@ def innerWeakSourceTraceEquiv (L : V →ₗ[ℝ] H) (tr : V →ₗ[ℝ] B)
       apply hzero
       · rw [map_sub]
         apply sub_eq_zero.mpr
-        simpa only [LinearMap.prod_apply] using congrArg Prod.fst hvw
+        simpa only [LinearMap.prod_apply, Function.prod_apply] using congrArg Prod.fst hvw
       · rw [map_sub]
         apply sub_eq_zero.mpr
-        simpa only [LinearMap.prod_apply] using congrArg Prod.snd hvw
+        simpa only [LinearMap.prod_apply, Function.prod_apply] using congrArg Prod.snd hvw
     · rintro ⟨F, ξ⟩
       obtain ⟨v, hL, htr⟩ := hex F ξ
       exact ⟨v, Prod.ext hL htr⟩)

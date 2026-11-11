@@ -61,7 +61,9 @@ theorem innerBorderFieldMap_selfAdjoint (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ)
   simp only [innerBorderL2_inner_coordinates]
   change ⟪A F.fst, H.fst⟫_ℝ + F.snd * H.snd =
     ⟪F.fst, A H.fst⟫_ℝ + F.snd * H.snd
-  rw [hA.isSymmetric]
+  have hfield : ⟪A F.fst, H.fst⟫_ℝ = ⟪F.fst, A H.fst⟫_ℝ :=
+    hA.isSymmetric F.fst H.fst
+  exact congrArg (fun z : ℝ => z + F.snd * H.snd) hfield
 
 /-- The exact Hilbert estimate, without a norm-equivalence factor. -/
 theorem norm_innerBorderFieldMap_le (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ)

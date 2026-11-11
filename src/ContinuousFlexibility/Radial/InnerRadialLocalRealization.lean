@@ -147,6 +147,15 @@ def innerRadialSourceTraceEquiv
     (innerRadialDomain_kernel D hw G forcing rowSource bordered j central column hunique)
     (innerRadialDomain_source_trace_exists D hw G forcing rowSource bordered j central column hex)
 
+@[simp] theorem innerRadialSourceTraceEquiv_apply
+    (hunique : ∀ p, InnerRadialPieceKernelUnique D G bordered j central column p)
+    (hex : ∀ F ξ p, Nonempty
+      (InnerRadialPieceSolution D hw G forcing rowSource bordered j central column F ξ p))
+    (x : W) :
+    innerRadialSourceTraceEquiv D hw G forcing rowSource bordered j central column hunique hex x =
+      (innerRadialDomainSource D hw G forcing rowSource bordered j central column x,
+       innerRadialDomainTrace D hw G forcing rowSource bordered j central column x) := rfl
+
 /-- Every actual family of local witnesses is the same source/trace
 inverse. This identifies the canonical realization with the existing
 local G and Poisson fields, including their derivative and scalar. -/
