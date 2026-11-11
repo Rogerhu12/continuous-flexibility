@@ -40,6 +40,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
       pairGrading (stateGrading S) realGrading (n + 4) x ≤
         B * R ^ ((n : ℝ) / ((s : ℝ) + 1)))
 
+include hS hT hA hε hε2 hB hE hloc hχloc hI
+
 /-- Pointwise weighted bounds for the actual reference-subtracted family,
 including parameter order zero. -/
 theorem coefficientFamily_point_bound (k s : ℕ) (i : Fin 3) :
