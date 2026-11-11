@@ -32,7 +32,7 @@ theorem r11b_cell_weighted_L2_bound {D : ReferenceData} (hpart : RadialPartition
   have hweight' : ∀ m, (1 : ℝ) ≤ K *
       exp (A * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) := by
     intro m
-    simpa only [zero_mul, zero_add, exp_zero] using hweight (D.cellIndex m)
+    simpa only [zero_mul, mul_zero, zero_add, exp_zero] using hweight (D.cellIndex m)
   let C₀ : ℝ := (B : ℝ) * (2 * Real.pi) * K
   have hC₀ : 0 ≤ C₀ := mul_nonneg
     (mul_nonneg (Nat.cast_nonneg B) (by positivity)) (zero_le_one.trans hK)

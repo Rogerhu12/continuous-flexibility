@@ -28,7 +28,7 @@ noncomputable section
 
 /-- A compact subset of an open real interval lies in a smaller closed
 interval. The two endpoints are treated together. -/
-private theorem weakPrimitive_compact_inner_interval {a b : ℝ} (hab : a < b)
+theorem exists_inner_interval_of_isCompact_subset_Ioo {a b : ℝ} (hab : a < b)
     {K : Set ℝ} (hK : IsCompact K) (hKI : K ⊆ Ioo a b) :
     ∃ l r : ℝ, a < l ∧ l < r ∧ r < b ∧ K ⊆ Ioo l r := by
   rcases K.eq_empty_or_nonempty with hzero | hne
@@ -61,7 +61,7 @@ theorem exists_contDiff_compactPrimitive_Ioo {a b : ℝ} (hab : a < b)
     ∃ φ : ℝ → ℝ, ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧
       tsupport φ ⊆ Ioo a b ∧ deriv φ = f := by
   obtain ⟨l, r, hal, hlr, hrb, hs⟩ :=
-    weakPrimitive_compact_inner_interval hab hfc hfs
+    exists_inner_interval_of_isCompact_subset_Ioo hab hfc hfs
   let φ : ℝ → ℝ := fun x => ∫ y in l..x, f y
   have hd (x : ℝ) : HasDerivAt φ (f x) x :=
     intervalIntegral.integral_hasDerivAt_right (hf.continuous.intervalIntegrable _ _)
@@ -179,7 +179,7 @@ theorem exists_ae_eq_const_of_integral_mul_deriv_eq_zero_Ioo {a b : ℝ}
         hksupport
     have hks : tsupport k ⊆ Ioo a b := by
       intro x hx
-      exact (hkts hx).elim hψs hρs
+      exact (hkts hx).elim (fun hxψ => hψs hxψ) (fun hxρ => hρs hxρ)
     have hψi : Integrable ψ := hψ.continuous.integrable_of_hasCompactSupport hψc
     have hki : (∫ x, k x) = 0 := by
       dsimp only [k]
@@ -215,6 +215,7 @@ theorem exists_ae_eq_const_of_integral_mul_deriv_eq_zero_Ioo {a b : ℝ}
       hpair ψ hψ hψc hψs]
     ring
   refine ⟨c, ?_⟩
+  change ∀ᵐ x ∂volume.restrict (Ioo a b), u x = c
   rw [ae_restrict_iff' measurableSet_Ioo]
   filter_upwards [hz] with x hx hxin
   exact sub_eq_zero.mp (hx hxin)
