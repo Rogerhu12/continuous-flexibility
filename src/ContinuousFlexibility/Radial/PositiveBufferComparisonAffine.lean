@@ -65,8 +65,11 @@ derivative and no sign in the second derivative. -/
 theorem positiveBuffer_reflection_deriv {u : ℝ → ℝ} {x : ℝ}
     (hu : DifferentiableAt ℝ u (-x)) :
     deriv (fun t : ℝ => u (-t)) x = -deriv u (-x) := by
+  have hd : HasDerivAt u (deriv u (-x)) (-x) := hu.hasDerivAt
+  have hd' : HasDerivAt u (deriv u (-x)) (0 + (-1) * x) := by
+    simpa only [zero_add, neg_one_mul] using hd
   have h := positiveBuffer_affine_hasDerivAt (a := 0) (b := -1) (x := x)
-    (by simpa using hu.hasDerivAt)
+    hd'
   simpa only [zero_add, neg_one_mul] using h.deriv
 
 theorem positiveBuffer_reflection_contDiff {n : ℕ∞ω} {u : ℝ → ℝ}
@@ -145,7 +148,9 @@ theorem positiveBuffer_reflection_deriv_energy {u V : ℝ → ℝ} (c : ℝ)
       intro x hx
       change deriv (fun t : ℝ => u (-t)) x ^ 2 + V (-x) * u (-x) ^ 2 =
         (-deriv u (-x)) ^ 2 + V (-x) * u (-x) ^ 2
-      rw [positiveBuffer_reflection_deriv (hu (-x) (by linarith))]
+      have hx' : -c < x := hx
+      have hneg : -x ∈ Iio c := by change -x < c; linarith
+      rw [positiveBuffer_reflection_deriv (hu (-x) hneg)]
     _ = _ := positiveBuffer_reflection_energy u (deriv u) V c
 
 end ContinuousFlexibility.Radial

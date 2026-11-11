@@ -111,7 +111,7 @@ def positiveBufferLiftedInverse {V : ℝ → ℝ}
       map_smul' := by
         intro a F
         apply positiveBufferBorderedState_injective V bordered
-        simp only [map_smul, L, positiveBufferFullGraphEnergyLift_state] }
+        simp only [map_smul, L, positiveBufferFullGraphEnergyLift_state, RingHom.id_apply] }
 
 @[simp] theorem positiveBufferLiftedInverse_state {V : ℝ → ℝ}
     (hreal : ActualClosedFormRealization V) (g : RadialL2) (bordered : Bool)

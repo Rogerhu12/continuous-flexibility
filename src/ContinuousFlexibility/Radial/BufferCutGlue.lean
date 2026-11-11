@@ -249,6 +249,8 @@ theorem bufferCutGlue_delta_schrodinger {V : ℝ → ℝ} (hV : Continuous V)
   have hI : Integrable (fun x : ℝ => u x * deriv (deriv φ) x) volume :=
     (Lp.memLp u).integrable_mul (show MemLp (deriv (deriv φ)) 2 volume from
       hφ''.continuous.memLp_of_hasCompactSupport hcφ.deriv.deriv)
+  have hIneg : Integrable (fun x : ℝ => -(u x * deriv (deriv φ) x)) volume := by
+    simpa only [Pi.neg_apply] using hI.neg
   have hVu : LocallyIntegrable (fun x => V x * u x) volume :=
     MeasureTheory.LocallyIntegrable.continuous_mul hV
       ((Lp.memLp u).locallyIntegrable (by norm_num))
@@ -257,7 +259,7 @@ theorem bufferCutGlue_delta_schrodinger {V : ℝ → ℝ} (hV : Continuous V)
       hφ.continuous hcφ
   calc
     _ = -(∫ x : ℝ, u x * deriv (deriv φ) x) + ∫ x : ℝ, V x * u x * φ x := by
-      rw [← integral_neg, ← integral_add hI.neg hJ]
+      rw [← integral_neg, ← integral_add hIneg hJ]
       apply integral_congr_ae
       filter_upwards [] with x
       ring

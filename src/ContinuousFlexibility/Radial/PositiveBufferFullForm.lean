@@ -99,7 +99,7 @@ theorem positiveBufferBorderedState_injective (V : ℝ → ℝ) (bordered : Bool
   apply Subtype.ext
   apply Prod.ext
   · exact positiveBufferEnergy_base_injective V (congrArg Prod.fst h)
-  · exact congrArg Prod.snd h
+  · exact congrArg (fun X : RadialL2 × ℝ => X.2) h
 
 /-- The pairing of the frozen `L² × ℝ` space does not presume an inner
 product for its max norm. -/
@@ -112,18 +112,20 @@ def positiveBufferStatePairing : (RadialL2 × ℝ) →ₗ[ℝ] (RadialL2 × ℝ)
         ring
       map_smul' := by
         intro a F
-        simp only [Prod.fst_smul, Prod.snd_smul, inner_smul_right, smul_eq_mul]
+        simp only [Prod.smul_fst, Prod.smul_snd, inner_smul_right, smul_eq_mul, RingHom.id_apply]
         ring }
   map_add' := by
     intro U W
-    ext F
+    apply LinearMap.ext
+    intro F
     simp only [LinearMap.add_apply, Prod.fst_add, Prod.snd_add, inner_add_left]
     ring
   map_smul' := by
     intro a U
-    ext F
-    simp only [LinearMap.smul_apply, Prod.fst_smul, Prod.snd_smul,
-      inner_smul_left, conj_trivial, smul_eq_mul]
+    apply LinearMap.ext
+    intro F
+    simp only [LinearMap.smul_apply, Prod.smul_fst, Prod.smul_snd,
+      inner_smul_left, conj_trivial, smul_eq_mul, RingHom.id_apply]
     ring
 
 @[simp] theorem positiveBufferStatePairing_apply (U F : RadialL2 × ℝ) :
@@ -191,8 +193,8 @@ def positiveBufferBorderedFormLinear (V : ℝ → ℝ) (hV : Continuous V) (g : 
       ring)
     (by
       intro a U W
-      simp only [positiveBufferBorderedForm, Submodule.coe_smul, Prod.fst_smul, Prod.snd_smul,
-        map_smul, ContinuousLinearMap.smul_apply, inner_smul_right, smul_eq_mul]
+      simp only [positiveBufferBorderedForm, Submodule.coe_smul, Prod.smul_fst, Prod.smul_snd,
+        map_smul, ContinuousLinearMap.smul_apply, inner_smul_right, smul_eq_mul, RingHom.id_apply]
       ring)
     (by
       intro U W Z
@@ -201,14 +203,14 @@ def positiveBufferBorderedFormLinear (V : ℝ → ℝ) (hV : Continuous V) (g : 
       ring)
     (by
       intro a U W
-      simp only [positiveBufferBorderedForm, Submodule.coe_smul, Prod.fst_smul, Prod.snd_smul,
-        map_smul, ContinuousLinearMap.smul_apply, inner_smul_right, smul_eq_mul]
+      simp only [positiveBufferBorderedForm, Submodule.coe_smul, Prod.smul_fst, Prod.smul_snd,
+        map_smul, ContinuousLinearMap.smul_apply, inner_smul_right, smul_eq_mul, RingHom.id_apply]
       ring)
 
 @[simp] theorem positiveBufferBorderedFormLinear_apply (V : ℝ → ℝ) (hV : Continuous V)
     (g : RadialL2) (bordered : Bool) (U W : PositiveBufferBorderedEnergy V bordered) :
     positiveBufferBorderedFormLinear V hV g bordered U W =
       positiveBufferBorderedForm V hV g bordered U W :=
-  LinearMap.mk₂_apply _ U W
+  LinearMap.mk₂_apply ℝ _ U W
 
 end ContinuousFlexibility.Radial

@@ -205,7 +205,7 @@ theorem positiveBufferCutoffError_bound {σ C : ℝ} {u du q : ℝ → ℝ}
             2 * (|deriv (positiveBufferCutoff σ) x| * |du x|) := by
         simpa only [positiveBufferCutoffError, sub_eq_add_neg, abs_mul, abs_neg,
           abs_of_nonneg (show (0 : ℝ) ≤ 2 by norm_num), mul_assoc] using
-          abs_add (-deriv (deriv (positiveBufferCutoff σ)) x * u x)
+          abs_add_le (-deriv (deriv (positiveBufferCutoff σ)) x * u x)
             (-(2 * deriv (positiveBufferCutoff σ) x * du x))
       _ ≤ 3 * C * exp (-σ) := by nlinarith
   · have hd := positiveBufferCutoff_derivatives_zero hx

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.PositiveBufferComparisonGreen
+import ContinuousFlexibility.Radial.PositiveBufferComparisonDomains
 
 /-!
 # The physical cutoff source and its exponential norm bound
@@ -40,6 +41,27 @@ theorem positiveBufferGreenError_border_zero {B : BufferData}
   have hz := positiveBufferPoint_border_eq_zero hB i
     (t := positiveBufferCoordinate B i x) (by linarith [ht.2])
   rwa [positiveBufferPoint_coordinate hB i x] at hz
+
+/-- Every cutoff source vanishes throughout the comparison region at
+either endpoint. Distinct endpoints use the actual disjointness of
+the two positive end regions. -/
+theorem positiveBufferGreenError_zero_on_buffer {B : BufferData}
+    (hB : BufferHypotheses B) (i j : Fin 2) (A : ℝ) (pin dpin : ℝ → ℝ)
+    {t : ℝ} (ht : t < B.action i + 2) :
+    positiveBufferGreenError B j A pin dpin (positiveBufferPoint B i t) = 0 := by
+  by_contra hn
+  have hs := positiveBufferGreenError_support B j A pin dpin hn
+  change positiveBufferCoordinate B j (positiveBufferPoint B i t) ∈
+    Icc (B.action j + 2) (B.action j + 4) at hs
+  by_cases hij : i = j
+  · subst j
+    rw [positiveBufferCoordinate_point hB i t] at hs
+    linarith [hs.1]
+  · have hne := positiveBufferPoint_end_regions_disjoint hB hij
+      (s := t) (t := positiveBufferCoordinate B j (positiveBufferPoint B i t))
+      (by linarith) (by linarith [hs.2])
+    apply hne
+    exact (positiveBufferPoint_coordinate hB j (positiveBufferPoint B i t)).symm
 
 theorem positiveBufferGreenError_memLp {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) (A : ℝ) {pin dpin q : ℝ → ℝ}

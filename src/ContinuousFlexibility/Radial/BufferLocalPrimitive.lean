@@ -72,7 +72,8 @@ theorem bufferCompactPrimitive_in_interval {g : ℝ → ℝ} {a b : ℝ}
       funext x
       exact image_eq_zero_of_notMem_tsupport (fun hx => hne ⟨x, hx⟩)
     refine ⟨fun _ => 0, contDiff_const, ?_, ?_, ?_⟩
-    · simp
+    · exact HasCompactSupport.intro (isCompact_empty : IsCompact (∅ : Set ℝ))
+        (fun _ _ => rfl)
     · change closure (Function.support (0 : ℝ → ℝ)) ⊆ Ioo a b
       simp only [Function.support_zero, closure_empty, empty_subset]
     · rw [hgzero]

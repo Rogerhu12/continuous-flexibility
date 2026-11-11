@@ -22,6 +22,12 @@ theorem positiveBufferPoint_affine (B : BufferData) (i : Fin 2) (t : ℝ) :
   unfold positiveBufferPoint
   ring
 
+theorem positiveBufferPoint_outward_affine (B : BufferData) (i : Fin 2) (t : ℝ) :
+    positiveBufferPoint B i (-t) =
+      bufferCut B i + (bufferSign i / B.mass i) * t := by
+  unfold positiveBufferPoint
+  ring
+
 theorem positiveBufferPoint_slope_sq (B : BufferData) (i : Fin 2) :
     (-bufferSign i / B.mass i) ^ 2 = 1 / B.mass i ^ 2 := by
   rw [div_pow, neg_sq, bufferSign_sq]

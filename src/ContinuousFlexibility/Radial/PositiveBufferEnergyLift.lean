@@ -129,7 +129,8 @@ theorem deriv_positiveBufferTraceLift (c m x : ℝ) :
     (((hasDerivAt_id x).sub_const c).const_mul m)
   have he : deriv (positiveBufferTraceLift c m) x =
       deriv oscillatorCutoff (m * (x - c)) * m := by
-    simpa only [positiveBufferTraceLift, Function.comp_def, id_eq, mul_one] using h.deriv
+    change deriv (fun y : ℝ => oscillatorCutoff (m * (y - c))) x = _
+    simpa only [Function.comp_def, id_eq, mul_one] using h.deriv
   exact he.trans (mul_comm _ _)
 
 theorem positiveBufferTraceLift_deriv_abs_le (c : ℝ) {m : ℝ} (hm : 0 ≤ m) (x : ℝ) :
