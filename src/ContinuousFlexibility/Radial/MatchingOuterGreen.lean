@@ -127,7 +127,7 @@ theorem matchingOuter_green_test {D : ReferenceData}
     rw [matchingJacobi_integral_eq_inner hD U.1 hχ M.frequency]
     have he := (modeLocalEquation_iff_inner hD M.frequency
       (matchingOuterRegion D M) U 0).mp hEq χ hχ hcχ hsχ
-    simpa only [hscalar, Prod.fst_zero, inner_zero_left, zero_mul,
+    simpa only [matchingJacobiVector, hscalar, Prod.fst_zero, inner_zero_left, zero_mul,
       sub_zero, neg_zero] using he
   have hreduce :
       (∫ x in D.a..D.b, U.1 x * radialJacobi ((M.frequency : ℝ) ^ 2) D.w ψ x) =
@@ -166,7 +166,8 @@ theorem matchingOuter_green_test {D : ReferenceData}
       _ = ∫ _x in Ioo M.innerLeft M.innerRight, (0 : ℝ) := by
         apply integral_congr_ae
         filter_upwards [hs', ae_restrict_mem measurableSet_Ioo] with x hx hxI
-        simp only [f, hx, if_pos hxI, zero_mul]
+        have hx0 : U.1 x = 0 := by simpa only [if_pos hxI] using hx
+        simp only [f, hx0, zero_mul]
       _ = 0 := by simp
   have hsplit : (∫ x in l..r, f x) =
       (∫ x in l..M.innerLeft, f x) + ∫ x in M.innerRight..r, f x := by
