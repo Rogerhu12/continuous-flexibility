@@ -67,7 +67,7 @@ theorem hasDerivAt_of_continuous_interval_weakDerivative
     (hu.locallyIntegrableOn measurableSet_Ioo) hg hc hweak
   have hv : ContinuousOn v (Ioo a b) :=
     fun x hx => (hd x hx).continuousAt.continuousWithinAt
-  have heq : EqOn u v (Ioo a b) := Measure.eqOn_Ioo_of_ae_eq hae hu hv
+  have heq : EqOn u v (Ioo a b) := Measure.eqOn_Ioo_of_ae_eq volume hae hu hv
   intro x hx
   apply (hd x hx).congr_of_eventuallyEq
   filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy

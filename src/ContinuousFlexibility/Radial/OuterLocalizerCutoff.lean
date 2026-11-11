@@ -112,13 +112,17 @@ theorem morseOuter_localizer_labels_of_low {M : MorseChainData} {σ : ℕ → �
         ((morseRealized_mem_block_iff_outward h right p hpi r).mp hr).1
     exact morseRealized_localizer_block_indices h right (hlow right m r hafter hθ) hpi hr hθ
   refine ⟨?_, ?_, ?_⟩
-  · intro right j η K n m x hx hθ
+  · intro right j η K n m x
+    dsimp only
+    intro hx hθ
     rcases morsePhysicalDeepTail_edge_blocks h right j N hNi η K n x hx with hr | hr
     · have hb := hblock right (N + 1 + n) m (by omega) hr hθ
       omega
     · have hb := hblock right (N + 1 + n + 1) m (by omega) hr hθ
       omega
-  · intro right j η K m x hx hθ
+  · intro right j η K m x
+    dsimp only
+    intro hx hθ
     rcases lt_or_eq_of_le hx.2 with hlt | heq
     · rcases morsePhysicalDeepTail_initial_blocks h right j N hNi η K x ⟨hx.1, hlt⟩ with hr | hr
       · have hb := hblock right N m (by omega) hr hθ

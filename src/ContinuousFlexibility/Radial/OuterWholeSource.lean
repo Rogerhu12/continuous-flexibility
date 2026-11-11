@@ -20,6 +20,14 @@ open ContinuousFlexibility.Statements
 def outerWholeDensity (D : ReferenceData) (right : Bool) (x : ℝ) : ℝ :=
   12 * D.w (outerOutwardRadius right x) / x ^ 2
 
+theorem outerWholeMeasure_eq_outerDensity {D : ReferenceData} {right : Bool} {entry : ℝ}
+    (hentry : entry ∈ radialCore D) :
+    outerWholeMeasure D right entry =
+      (volume.restrict (Ioo (outerOutwardRadius right entry)
+        (outerOutwardRadius right (tailPhysicalEndpoint D right)))).withDensity
+          (fun x => ENNReal.ofReal (outerWholeDensity D right x)) :=
+  outerWholeMeasure_eq_density hentry
+
 variable {D : ReferenceData} (hD : IsAccumulatingProfile D)
   {right : Bool} {entry : ℝ} (hentry : entry ∈ radialCore D)
 
@@ -45,7 +53,7 @@ theorem outerWholeMeasure_ae_iff {p : ℝ → Prop} :
     (∀ᵐ x ∂outerWholeMeasure D right entry, p x) ↔
       ∀ᵐ x ∂volume.restrict (Ioo (outerOutwardRadius right entry)
         (outerOutwardRadius right (tailPhysicalEndpoint D right))), p x := by
-  rw [outerWholeMeasure_eq_density hentry,
+  rw [outerWholeMeasure_eq_outerDensity hentry,
     ae_withDensity_iff (outerWholeDensity_measurable (right := right) hD).ennreal_ofReal]
   constructor
   · intro h
@@ -60,7 +68,7 @@ theorem outerWholeDensity_integrable_iff (f : ℝ → ℝ) :
       IntegrableOn (fun x => outerWholeDensity D right x * f x)
         (Ioo (outerOutwardRadius right entry)
           (outerOutwardRadius right (tailPhysicalEndpoint D right))) := by
-  rw [outerWholeMeasure_eq_density hentry,
+  rw [outerWholeMeasure_eq_outerDensity hentry,
     integrable_withDensity_iff_integrable_smul'
       (outerWholeDensity_measurable (right := right) hD).ennreal_ofReal
       (Eventually.of_forall (fun _ => ENNReal.ofReal_lt_top))]
@@ -74,7 +82,7 @@ theorem outerWholeDensity_integral (f : ℝ → ℝ) :
       ∫ x in (outerOutwardRadius right entry)..
         (outerOutwardRadius right (tailPhysicalEndpoint D right)),
           outerWholeDensity D right x * f x := by
-  rw [outerWholeMeasure_eq_density hentry,
+  rw [outerWholeMeasure_eq_outerDensity hentry,
     integral_withDensity_eq_integral_toReal_smul
       (outerWholeDensity_measurable (right := right) hD).ennreal_ofReal
       (Eventually.of_forall (fun _ => ENNReal.ofReal_lt_top)),
@@ -102,7 +110,7 @@ theorem outerWholeDensity_initial_integral (f : ℝ → ℝ) {x : ℝ}
       exact ⟨hy.1, hyx⟩
     · intro hy
       exact ⟨hy.2, hy.1, hy.2.trans_lt hx.2⟩
-  rw [outerWholeMeasure_eq_density hentry, restrict_withDensity measurableSet_Iic,
+  rw [outerWholeMeasure_eq_outerDensity hentry, restrict_withDensity measurableSet_Iic,
     Measure.restrict_restrict measurableSet_Iic, hs,
     integral_withDensity_eq_integral_toReal_smul
       (outerWholeDensity_measurable (right := right) hD).ennreal_ofReal
@@ -131,7 +139,7 @@ theorem outerWholeDensity_initial_integrable_iff (f : ℝ → ℝ) {x : ℝ}
       exact ⟨hy.1, hyx⟩
     · intro hy
       exact ⟨hy.2, hy.1, hy.2.trans_lt hx.2⟩
-  rw [IntegrableOn, outerWholeMeasure_eq_density hentry,
+  rw [IntegrableOn, outerWholeMeasure_eq_outerDensity hentry,
     restrict_withDensity measurableSet_Iic, Measure.restrict_restrict measurableSet_Iic, hs,
     integrable_withDensity_iff_integrable_smul'
       (outerWholeDensity_measurable (right := right) hD).ennreal_ofReal

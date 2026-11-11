@@ -45,6 +45,7 @@ theorem morsePhysicalDeepTail_edge_blocks {M : MorseChainData} {σ : ℕ → ℝ
     ∀ x ∈ Icc (Q.node n) (Q.node (n + 1)),
       tailPhysicalRadius right x ∈ morseChainBlock M right (N + 1 + n) ∨
         tailPhysicalRadius right x ∈ morseChainBlock M right (N + 1 + n + 1) := by
+  dsimp only
   intro x hx
   let p := N + 1 + n
   have hp : M.index ≤ p := by dsimp only [p]; omega
@@ -80,6 +81,7 @@ theorem morsePhysicalDeepTail_initial_blocks {M : MorseChainData} {σ : ℕ → 
     ∀ x ∈ Ico Q.entrance (Q.node 0),
       tailPhysicalRadius right x ∈ morseChainBlock M right N ∨
         tailPhysicalRadius right x ∈ morseChainBlock M right (N + 1) := by
+  dsimp only
   intro x hx
   cases right with
   | true =>

@@ -59,6 +59,8 @@ theorem MorsePhysicalTailBasis.physical_natural_point_envelope
       have hE := outer_envelope_one_le start hcost
       have hh := hi.trans (le_mul_of_one_le_right
         (mul_nonneg (by norm_num : (0 : ℝ) ≤ 4) (abs_nonneg _)) hE)
+      change |F.logP x| ≤ 4 * |F.logP (tailPhysicalLog right entrance)| *
+        radialE start ^ outerPhysicalDecayCost A at hh
       simpa only [W, Nat.add_zero, sub_self, abs_zero, neg_zero, exp_zero, mul_one] using hh
     · exact F.logP_edge_envelope hT hη hK hA hden n hx
   have hphys := outer_tail_physical_lift_bound hD hj hphysical hclose

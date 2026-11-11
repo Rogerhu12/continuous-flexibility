@@ -33,12 +33,19 @@ theorem outerFirstOrderSystem_radial_of_outward
   intro x hx
   cases right with
   | true =>
-      simpa only [outerOutwardRadius, outerTailSign, outerTailOutwardWeight,
+      have hw : outerTailOutwardWeight D true = D.w := by
+        funext y
+        simp [outerTailOutwardWeight, outerTailSign]
+      simpa only [hw, outerOutwardRadius, outerTailSign,
         ite_true, one_mul] using hsys x hx
   | false =>
       have hh := hsys (-x)
         (show -x ∈ Icc (-r) (-l) from
           ⟨neg_le_neg hx.2, neg_le_neg hx.1⟩)
+      have hw : outerTailOutwardWeight D false = fun y => D.w (-y) := by
+        funext y
+        simp [outerTailOutwardWeight, outerTailSign]
+      rw [hw] at hh
       simp only [outerTailOutwardWeight, outerTailSign, Bool.false_eq_true,
         ite_false, neg_one_mul, neg_neg] at hh
       have hwd : deriv (fun y => D.w (-y)) (-x) = -deriv D.w x := by
