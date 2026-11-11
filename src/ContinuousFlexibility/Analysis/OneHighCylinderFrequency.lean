@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.OneHighFrequencyEmbedding
+import ContinuousFlexibility.Analysis.OneHighCircleFourierWeights
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Function.L2Space
 import Mathlib.MeasureTheory.Integral.Prod
@@ -55,8 +56,11 @@ private theorem mixed_inverse_square_le (x y : ℝ) :
     ((1 + x ^ 2 + y ^ 2)⁻¹) ^ 2 ≤ (1 + x ^ 2)⁻¹ * (1 + y ^ 2)⁻¹ := by
   have hden : (1 + x ^ 2) * (1 + y ^ 2) ≤ (1 + x ^ 2 + y ^ 2) ^ 2 := by
     nlinarith [sq_nonneg (x ^ 2), sq_nonneg (y ^ 2), mul_nonneg (sq_nonneg x) (sq_nonneg y)]
-  rw [← inv_pow, ← mul_inv_rev]
-  exact (inv_le_inv₀ (by positivity) (by positivity)).mpr hden
+  rw [inv_pow]
+  calc
+    ((1 + x ^ 2 + y ^ 2) ^ 2)⁻¹ ≤ ((1 + x ^ 2) * (1 + y ^ 2))⁻¹ :=
+      (inv_le_inv₀ (by positivity) (by positivity)).mpr hden
+    _ = (1 + x ^ 2)⁻¹ * (1 + y ^ 2)⁻¹ := by rw [mul_inv_rev, mul_comm]
 
 /-- The cylinder inverse weight is in `L²` once the one-dimensional
 angular inverse weight is integrable. The radial integrability is proved
@@ -69,7 +73,7 @@ theorem cylinder_inverse_weight_memLp_of_count_integrable {a q : ℝ} (ha : a �
     (continuous_cylinderFrequencyWeight a q).rpow_const
       (fun ζ => Or.inl (cylinderFrequencyWeight_pos a q ζ).ne')
   apply (memLp_two_iff_integrable_sq hc.aestronglyMeasurable).mpr
-  apply ((Real.integrable_inv_one_add_mul_sq ha).mul_prod hq).mono'
+  apply ((integrable_inv_one_add_mul_sq ha).mul_prod hq).mono'
     (hc.pow 2).aestronglyMeasurable
   filter_upwards [] with ζ
   rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _), cylinderFrequencyWeight_neg_two]
@@ -89,5 +93,40 @@ theorem cylinder_frequencyL1_le_H2_of_count_integrable {a q : ℝ} (ha : a ≠ 0
   frequencyL1Norm_le_inverse_weight_mul
     (Filter.Eventually.of_forall (cylinderFrequencyWeight_pos a q))
     (cylinder_inverse_weight_memLp_of_count_integrable ha hq) hf
+
+/-- The angular inverse square weight is genuinely integrable for every
+positive frequency spacing. -/
+theorem integrable_circleInverseWeightSq {q : ℝ} (hq : 0 < q) :
+    Integrable (fun n : ℤ => (1 + (q * (n : ℝ)) ^ 2)⁻¹) Measure.count := by
+  apply integrable_count_iff.mpr
+  refine (summable_circleInverseWeightSq hq).congr fun n => ?_
+  rw [Real.norm_of_nonneg (by positivity), one_div]
+
+/-- The dimension-two inverse-weight membership, without any summability
+premise: both physical frequency scales may be arbitrary positive numbers. -/
+theorem cylinder_inverse_weight_memLp {a q : ℝ} (ha : 0 < a) (hq : 0 < q) :
+    MemLp (fun ζ => cylinderFrequencyWeight a q ζ ^ (-2 : ℝ)) 2
+      cylinderFrequencyMeasure :=
+  cylinder_inverse_weight_memLp_of_count_integrable ha.ne' (integrable_circleInverseWeightSq hq)
+
+theorem cylinder_frequency_memLp_one_of_h2 {a q : ℝ} (ha : 0 < a) (hq : 0 < q)
+    {f : ℝ × ℤ → ℂ}
+    (hf : MemLp (frequencyWeighted (cylinderFrequencyWeight a q) 2 f) 2
+      cylinderFrequencyMeasure) : MemLp f 1 cylinderFrequencyMeasure :=
+  frequency_memLp_one_of_inverse_weight
+    (Filter.Eventually.of_forall (cylinderFrequencyWeight_pos a q))
+    (cylinder_inverse_weight_memLp ha hq) hf
+
+/-- Fourier `L¹` control by the actual order-two Bessel weight on all
+mixed frequencies. The finite constant depends only on the two scales. -/
+theorem cylinder_frequencyL1Norm_le_h2 {a q : ℝ} (ha : 0 < a) (hq : 0 < q)
+    {f : ℝ × ℤ → ℂ}
+    (hf : MemLp (frequencyWeighted (cylinderFrequencyWeight a q) 2 f) 2
+      cylinderFrequencyMeasure) :
+    frequencyL1Norm cylinderFrequencyMeasure f ≤
+      (eLpNorm (fun ζ => cylinderFrequencyWeight a q ζ ^ (-2 : ℝ)) 2
+        cylinderFrequencyMeasure).toReal *
+      frequencySobolevNorm cylinderFrequencyMeasure (cylinderFrequencyWeight a q) 2 f :=
+  cylinder_frequencyL1_le_H2_of_count_integrable ha.ne' (integrable_circleInverseWeightSq hq) hf
 
 end ContinuousFlexibility.Analysis

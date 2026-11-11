@@ -18,6 +18,8 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter MeasureTheory
 open scoped ContDiff Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The scalar integrating-factor formula needs differentiability only in
 the open interval and continuity at its endpoints. -/
 theorem scalar_linearODE_eq_mul_exp {κ y : ℝ → ℝ} {a b : ℝ} (hab : a ≤ b)
@@ -99,7 +101,10 @@ theorem smoothCircleFlow_angular_variational {G Θ : PolarPoint → ℝ} {a b : 
     _ = angularPartial G (t, Θ (t, θ)) * angularPartial Θ (t, θ) := by
       have hcomp : HasDerivAt (fun η : ℝ => G (t, Θ (t, η)))
           (angularPartial G (t, Θ (t, θ)) * angularPartial Θ (t, θ)) θ :=
-        (hGangle t (Θ (t, θ))).comp θ (hangle t θ)
+        HasDerivAt.comp (𝕜 := ℝ) (𝕜' := ℝ)
+          (h := fun η : ℝ => Θ (t, η)) (h₂ := fun η : ℝ => G (t, η))
+          (h' := angularPartial Θ (t, θ)) (h₂' := angularPartial G (t, Θ (t, θ)))
+          θ (hGangle t (Θ (t, θ))) (hangle t θ)
       exact hcomp.deriv
 
 /-- The actual angular Jacobian of a smooth flow is the exponential of

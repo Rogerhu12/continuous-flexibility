@@ -32,6 +32,8 @@ namespace ContinuousFlexibility.Analysis
 open Real MeasureTheory
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- A polynomial whose derivative vanishes at the constant input one. -/
 def oneHighFactorQuadratic (M : ℝ) (x : ℝ) : ℝ := M * (2 * x - x ^ 2)
 

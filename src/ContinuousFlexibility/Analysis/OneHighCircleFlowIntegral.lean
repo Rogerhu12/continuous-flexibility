@@ -28,11 +28,13 @@ theorem continuous_parametric_intervalIntegral {F : H × ℝ → E}
     (hF : Continuous F) (a b : ℝ) :
     Continuous (fun x : H => ∫ t in a..b, F (x, t)) := by
   have hc (c d : ℝ) : Continuous (fun x : H => ∫ t in Icc c d, F (x, t)) :=
-    continuous_parametric_integral_of_continuous hF isCompact_Icc
+    continuous_parametric_integral_of_continuous (f := fun x t => F (x, t))
+      hF isCompact_Icc
   rcases le_total a b with hab | hba
   · simpa only [intervalIntegral.integral_of_le hab, integral_Icc_eq_integral_Ioc]
       using hc a b
-  · simpa only [intervalIntegral.integral_of_ge hba, integral_Icc_eq_integral_Ioc]
+  · simpa only [intervalIntegral.integral_of_ge hba, integral_Icc_eq_integral_Ioc,
+      Pi.neg_apply]
       using (hc b a).neg
 
 /-- Continuous actual parameter derivatives can be moved under a compact
@@ -96,7 +98,7 @@ theorem contDiff_parametric_intervalIntegral {F : H × ℝ → E}
   · have hc : ContDiffAt ℝ ∞ (fun y : H => ∫ t in b..a, F (y, t)) x :=
       contDiffAt_intervalIntegral_parameter (O := univ) isOpen_univ hba
         (fun _ _ _ _ => hF.contDiffAt) (mem_univ x)
-    simpa only [intervalIntegral.integral_symm a b] using hc.neg
+    simpa only [intervalIntegral.integral_symm a b, neg_neg] using hc.neg
 
 /-- The endpoint and all other parameters may vary together. Affine
 rescaling also includes the zero-length interval without a division. -/

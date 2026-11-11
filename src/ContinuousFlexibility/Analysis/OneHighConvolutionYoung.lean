@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open MeasureTheory
+open MeasureTheory MeasureTheory.Measure
 open scoped ENNReal MeasureTheory
 
 variable {G : Type*} [MeasurableSpace G]
