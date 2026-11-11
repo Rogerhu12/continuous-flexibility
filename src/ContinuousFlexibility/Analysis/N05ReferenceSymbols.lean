@@ -84,7 +84,7 @@ theorem n05_divergenceOperator_mul
   unfold symmetricDivergence
   have hNadd := radialPartial_add (df.mul dNg) (dg.mul dNf)
   have hTadd := angularPartial_add (df.mul dTg) (dg.mul dTf)
-  simp only [Pi.mul_apply] at hNadd hTadd
+  simp only [Pi.mul_def] at hNadd hTadd
   rw [hNr, hTt, hNadd, hTadd, radialPartial_mul df dNg, radialPartial_mul dg dNf,
     angularPartial_mul df dTg, angularPartial_mul dg dTf]
   simp only [symmetricNormalFlux, symmetricAngularFlux, n05PrincipalPair]
@@ -139,7 +139,7 @@ theorem n05_principalPair_of_conjugation
   simp only [hf0, hg0, zero_mul, mul_zero, zero_add, add_zero] at hfg
   have hJabs : |planeJacobian Ψ x| ≠ 0 := abs_ne_zero.mpr hJ
   field_simp [hJabs] at hfg
-  nlinarith [hfg]
+  simpa only [Function.comp_def] using hfg
 
 /-- Algebraic determinant of a transported symmetric two-dimensional
 principal form. This will be applied to actual coordinate partials. -/

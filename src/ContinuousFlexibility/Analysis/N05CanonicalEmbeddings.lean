@@ -45,8 +45,10 @@ theorem n05CanonicalForgetCLM_apply {D : ReferenceData} {T : MaterialData}
     (v : (n05CanonicalVolumeModel T S K).level γ t s) (m : ℕ) :
     n05CanonicalForgetCLM hT hPart S K hγ t s v m =
       (n05CanonicalVolumeModel T S K).forget γ t s v m := by
-  simp only [n05CanonicalForgetCLM, n05CanonicalWeightedZeroMap_apply,
-    n05CanonicalSampleWeight, n05CanonicalVolumeModel_forget]
+  rw [n05CanonicalVolumeModel_forget]
+  unfold n05CanonicalForgetCLM
+  exact n05CanonicalWeightedZeroMap_apply S K s (n05CanonicalSampleWeight T S K γ t)
+    _ _ _ (show n05CanonicalClosedSubmodule S K s from v) m
 
 theorem n05CanonicalForgetCLM_bound {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (hPart : RadialPartition D) (S : PhysicalSpacesData)
@@ -99,7 +101,10 @@ theorem n05CanonicalVolumeEmbed_apply {D : ReferenceData} {T : MaterialData}
     (m : ℕ) (j : Fin (s + 1)) :
     (n05CanonicalVolumeEmbed hT hPart S K hγ tlo thi s v).val m j =
       n05CanonicalWeightRatio T S K γlo γhi tlo thi m • v.val m j := by
-  simp only [n05CanonicalVolumeEmbed, n05CanonicalJetMultiplier_apply]
+  unfold n05CanonicalVolumeEmbed
+  exact n05CanonicalJetMultiplier_apply S K s
+    (n05CanonicalWeightRatio T S K γlo γhi tlo thi)
+    _ _ _ (show n05CanonicalClosedSubmodule S K s from v) m j
 
 theorem n05CanonicalVolumeEmbed_forget {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (hPart : RadialPartition D) (S : PhysicalSpacesData)
