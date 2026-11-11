@@ -137,6 +137,7 @@ theorem SeedRetainedPair.first_terminal_cutoff_estimates {S : SelectedTailData}
   · apply ENNReal.toReal_le_of_le_ofReal (mul_nonneg hε (sqrt_nonneg _))
     exact hsrc.trans (ENNReal.ofReal_le_ofReal (by simpa only [mul_comm] using hsource))
   · obtain ⟨hnonneg, hbound⟩ := hene _ _ hlo hhi
+    dsimp only [SeedRetainedPair.firstTerminalCutoff, SeedRetainedPair.firstTerminalLayer]
     rw [abs_of_nonneg hnonneg]
     exact hbound.trans (by simpa only [mul_comm] using henergy)
 
@@ -231,6 +232,13 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData_with_data {S : Select
       outerRepresentative := rep
       outerPoisson := Q
       outerFunction := p }
+  have hMscale (i : Fin 2) : M.boundaryScale i =
+      standInBoundaryScale ((f.1 : ℝ) ^ 2)
+        (D.w (cut (selectedTerminalSide i))) (cut (selectedTerminalSide i)) := rfl
+  have hMD0 (i : Fin 2) : M.D0 i = 1 / (f.1 : ℝ) := rfl
+  have hMleft : M.innerLeft = cut false := rfl
+  have hMright : M.innerRight = cut true := rfl
+  have hMmargin : M.margin = η := rfl
   let U (side : Bool) : SeedPhysicalFirstIncoming P D side f.1 :=
     Classical.choice (P.exists_physical_firstIncoming hw hS side f.2.1 f.2.2.1 f.2.2.2
       (hincoming side) (hcone side))
@@ -311,6 +319,7 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData_with_data {S : Select
     boundary_scale := by
       intro i
       rw [hcut]
+      rfl
     frequency_pos := hjpos
     boundary_slope := by
       intro i
@@ -326,15 +335,17 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData_with_data {S : Select
     energyCost_nonneg := hε
     source_bound := by
       intro i
-      simpa only [neg_zero, exp_zero, mul_one] using (hbounds (selectedTerminalSide i)).2.1
+      simpa only [hMscale, hMD0, χ, standIn, D, cut, neg_zero, exp_zero, mul_one] using
+        (hbounds (selectedTerminalSide i)).2.1
     energy_bound := by
       intro i
-      simpa only [mul_zero, neg_zero, exp_zero, mul_one] using
+      simpa only [terminalCutoffEnergy, hMleft, hMright, hMscale, hMD0,
+        χ, standIn, D, cut, mul_zero, neg_zero, exp_zero, mul_one] using
         (hbounds (selectedTerminalSide i)).2.2
     inverse_bound := hnorm.trans hcost
     error_budget := by
       intro i k
-      simpa only [neg_zero, sub_zero, exp_zero, mul_one] using hbudget }
+      simpa only [hMmargin, neg_zero, sub_zero, exp_zero, mul_one] using hbudget }
   exact ⟨W, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, (fun _ => rfl),
     rfl, ⟨U, rfl⟩, rfl, hdiag,
     fun side => ⟨(hdata side).2.1, (hdata side).2.2.1⟩⟩
