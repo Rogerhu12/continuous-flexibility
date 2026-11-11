@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.SelectedScaledRobinInverse
 import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
 import ContinuousFlexibility.Radial.SelectedLaterRetained
+import ContinuousFlexibility.Radial.SelectedOuterDeepSplit
 
 /-!
 # Actual regional inverses on the retained pair's two selected cuts
@@ -131,12 +132,35 @@ theorem SeedRetainedPair.exists_selectedOuterRegionalInverse {S : SelectedTailDa
     have hne := selectedBoundaryState_ne_zero_of_natural (matchingProfileGeometry hE) hjn hpE
       (show r07OutwardSign right ≠ 0 by cases right <;> norm_num [r07OutwardSign])
       (hV right) (hN right)
-    obtain ⟨F⟩ := hs.exists_physicalBasis hS hη hK
+    have hfactory : morsePhysicalDeepTail S.chain D right j start
+        (selectedOuterDeepEntrance S right start) η K =
+        r07DeepTailData S.chain D right j start η K := by
+      have hlog : tailPhysicalLog right = r07OutwardLog right := by
+        cases right <;> rfl
+      have hdensity : outerMassLogDensity D j (tailPhysicalEndpoint D right) right =
+          r07PhysicalDensity D right j := by
+        funext x
+        simpa only [morsePhysicalDeepTail, r07PhysicalDensity, tailPhysicalEndpoint] using
+          morsePhysicalDeepTail_density_eq S.chain D right j start
+            (selectedOuterDeepEntrance S right start) η K x
+      unfold morsePhysicalDeepTail r07DeepTailData
+      rw [hlog, hdensity]
+      rfl
+    have hT : DeepTailHypotheses (morsePhysicalDeepTail S.chain D right j start
+        (selectedOuterDeepEntrance S right start) η K) := by
+      rw [hfactory]
+      exact hs.hypotheses
+    have hphysical : TailPhysicalRelation D (morsePhysicalDeepTail S.chain D right j start
+        (selectedOuterDeepEntrance S right start) η K) right j start := by
+      rw [hfactory]
+      exact hs.physical
+    obtain ⟨F⟩ := exists_morsePhysicalTailBasis (matchingProfileGeometry hD) right j start
+      ((matchingProfileGeometry hD).1.trans hs.entrance_core.1) hT hη hK
     have hac : outerTailSign right * p <
         outerTailSign right * selectedOuterDeepEntrance S right start := by
       simpa only [r07OutwardSign, outerTailSign] using hs.outward_order.1
     obtain ⟨R, hweak, hregular, hunique⟩ := F.exists_scaledNaturalInverse hD hE hp
-      hs.entrance_core hac hlam.ne' hs.physicalFactory.1 hs.physicalFactory.2 hη hK hKinv
+      hs.entrance_core hac hlam.ne' hT hphysical hη hK hKinv
       hκ hβ hpE (P.reference_side_endpoint (matchingProfileGeometry hE) hw right)
       hprofile hvalue (hV right) (hN right)
       (by simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hne)

@@ -73,6 +73,8 @@ theorem modeLocalEquation_homogeneous_flux_hasDerivAt
   apply hd.congr_of_eventuallyEq
   filter_upwards [isOpen_Ioo.mem_nhds hx] with r hr
   have hp' := hp r (Ioo_subset_Icc_self hr)
+  change D.w r * derivWithin u (Icc a b) r =
+    D.w a * derivWithin u (Icc a b) a + ∫ t in a..r, g t at hp'
   rw [derivWithin_of_mem_nhds (Icc_mem_nhds hr.1 hr.2)] at hp'
   exact hp'
 
