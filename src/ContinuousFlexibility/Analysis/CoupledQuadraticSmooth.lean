@@ -19,6 +19,7 @@ namespace ContinuousFlexibility.Statements
 open Set Function ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 section Projections
 

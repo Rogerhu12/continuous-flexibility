@@ -17,6 +17,28 @@ open Set ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem coupled_subtype_first_isTame
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (W : Submodule ℝ E) (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) :
+    IsTameLinear (pairGrading (fun n => (p n).comp W.subtype) q) p
+      (W.subtypeL.comp (ContinuousLinearMap.fst ℝ W F)).toLinearMap 0 0 := by
+  intro s _
+  refine ⟨1, fun z => ?_⟩
+  change p s z.1.val ≤ (1 : ℝ) * (p (s + 0) z.1.val + q (s + 0) z.2)
+  simpa only [Nat.add_zero, one_mul] using
+    (le_add_of_nonneg_right (apply_nonneg (q s) z.2) :
+      p s z.1.val ≤ p s z.1.val + q s z.2)
+
+private theorem coupled_linear_translate_zero
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (L : E →L[ℝ] F) {a : E} (ha : L a = 0) (x : E) :
+    L (a + x) = L x := by
+  simpa only [ha, zero_add] using L.map_add a x
+
 def coupledSectorStateCLM (S : PhysicalSpacesData) :
     (StateDirections S × ℝ) →L[ℝ] AnnularState S :=
   (stateSectorSubmodule S).subtypeL.comp (ContinuousLinearMap.fst ℝ (StateDirections S) ℝ)
@@ -26,13 +48,8 @@ theorem coupledSectorStateCLM_apply (S : PhysicalSpacesData) (z : StateDirection
 
 theorem coupledSectorStateCLM_isTame (S : PhysicalSpacesData) :
     IsTameLinear (pairGrading (sectorGrading S) realGrading) (stateGrading S)
-      (coupledSectorStateCLM S).toLinearMap 0 0 := by
-  intro s _
-  refine ⟨1, fun z => ?_⟩
-  change sectorGrading S s z.1 ≤
-    (1 : ℝ) * (sectorGrading S (s + 0) z.1 + realGrading (s + 0) z.2)
-  rw [Nat.add_zero, one_mul]
-  exact le_add_of_nonneg_right (apply_nonneg _ _)
+      (coupledSectorStateCLM S).toLinearMap 0 0 :=
+  coupled_subtype_first_isTame (stateSectorSubmodule S) (stateGrading S) realGrading
 
 def coupledStateHeightCoordinateCLM (S : PhysicalSpacesData) :
     AnnularState S →L[ℝ] HeightPair S :=
@@ -52,9 +69,9 @@ theorem coupledLogProfileLift_liftSector
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (z : StateDirections S × ℝ) :
     coupledLogProfileLift hT hS hN (liftSectorParameter S C z).1 =
-      coupledLogProfileLift hT hS hN z.1.val := by
-  change coupledLogProfileLift hT hS hN (C.referenceState + z.1.val) = _
-  rw [map_add, coupledLogProfileLift_reference hT hS hN, zero_add]
+      coupledLogProfileLift hT hS hN z.1.val :=
+  coupled_linear_translate_zero (coupledLogProfileLift hT hS hN)
+    (coupledLogProfileLift_reference hT hS hN) z.1.val
 
 theorem coupledScalarErrorCoefficient_uniformTameGerm
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -78,9 +95,9 @@ theorem coupledScalarErrorCoefficient_uniformTameGerm
     ((coupledLogProfileLift_isTame hT hS hN).comp (coupledSectorStateCLM_isTame S))
   have hl : UniformTameGerm p (coupledWeakHeightGrading S) 0 l :=
     hlLinear.congr (fun z => (coupledLogProfileLift_liftSector hT hS hN z).symm)
-  have hl0 : l 0 = 0 := by
-    rw [l, coupledLogProfileLift_liftSector]
-    exact (coupledLogProfileLift hT hS hN).map_zero
+  have hl0 : l 0 = 0 :=
+    (coupledLogProfileLift_liftSector hT hS hN (0 : StateDirections S × ℝ)).trans
+      (coupledLogProfileLift hT hS hN).map_zero
   have huLinear := uniformTameGerm_continuousLinear ht (0 : StateDirections S × ℝ)
     ((coupledStateHeightCoordinateCLM S).comp (coupledSectorStateCLM S))
     ((coupledStateHeightCoordinateCLM_isTame S).comp (coupledSectorStateCLM_isTame S))
@@ -115,7 +132,14 @@ theorem coupledScalarErrorCoefficient_smoothTameOn
       SmoothTameOn (pairGrading (sectorGrading S) realGrading) (coupledWeakHeightGrading S)
         (sectorNeighborhood S b δ δ)
         (fun z => coupledScalarErrorCoefficient hT hS hN (liftSectorParameter S C z)) := by
-  obtain ⟨b, ell, τ, hτ, hfixed⟩ := coupledScalarErrorCoefficient_uniformTameGerm hT hS hN
+  let hgerm := coupledScalarErrorCoefficient_uniformTameGerm hT hS hN
+  let b : ℕ := hgerm.choose
+  let hbase := hgerm.choose_spec
+  let ell : ℕ := hbase.choose
+  let hloss := hbase.choose_spec
+  let τ : ℝ := hloss.choose
+  have hτ : 0 < τ := hloss.choose_spec.1
+  let hfixed := hloss.choose_spec.2
   have hδ : 0 < min ε (τ / 2) := lt_min hN.2.1 (half_pos hτ)
   refine ⟨max base b, min ε (τ / 2), le_max_left _ _, hδ, min_le_left _ _, ?_⟩
   apply (hfixed.restrict

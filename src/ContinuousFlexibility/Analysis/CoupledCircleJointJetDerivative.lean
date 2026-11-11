@@ -17,6 +17,9 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter
 open scoped Topology BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable {X Y : Type*}
   [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
   [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
@@ -161,6 +164,54 @@ private theorem coupled_cons_joint_value {n : ℕ}
   simp only [Fin.cons_zero, Fin.cons_succ, Fin.zero_succAbove,
     coupled_cons_omit, add_assoc]
 
+private theorem coupledKernelJointJet_succ_fun (n : ℕ) (w : Fin (n + 1) → X × X) :
+    (fun y : X × X => coupledKernelJointJet K (n + 1) y w) =
+      (fun y : X × X => K (n + 1) y.1 (Fin.cons y.2 (fun i => (w i).1)) +
+        ∑ i : Fin (n + 1), K n y.1
+          (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1))) :=
+  funext (fun y => coupledKernelJointJet_succ_apply K n y w)
+
+private theorem coupledKernelJointJet_cons_value (n : ℕ) (z h : X × X)
+    (w : Fin (n + 1) → X × X) :
+    coupledKernelJointJet K (n + 1 + 1) z (Fin.cons h w) =
+      (K (n + 1 + 1) z.1 (Fin.cons z.2 (Fin.cons h.1 (fun i => (w i).1))) +
+        K (n + 1) z.1 (Fin.cons h.2 (fun i => (w i).1))) +
+        ∑ i : Fin (n + 1), K (n + 1) z.1 (Fin.cons (w i).2
+          (Fin.cons h.1 (fun j => (w (i.succAbove j)).1))) := by
+  exact (coupledKernelJointJet_succ_apply K (n + 1) z (Fin.cons h w)).trans
+    (coupled_cons_joint_value (n := n)
+      (fun a : Fin (n + 3) → X => K (n + 1 + 1) z.1 a)
+      (fun a : Fin (n + 2) → X => K (n + 1) z.1 a) z.2 h w)
+
+include hline in
+private theorem coupledKernelDirectionSum_hasLineDerivAt (n : ℕ) (z h : X × X)
+    (w : Fin (n + 1) → X × X) :
+    HasProjectiveLineDerivAt
+      (fun y : X × X => ∑ i : Fin (n + 1), K n y.1
+        (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1)))
+      (∑ i : Fin (n + 1), K (n + 1) z.1 (Fin.cons (w i).2
+        (Fin.cons h.1 (fun j => (w (i.succAbove j)).1)))) z h := by
+  have hterm (i : Fin (n + 1)) : HasProjectiveLineDerivAt
+      (fun y : X × X => K n y.1
+        (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1)))
+      (K (n + 1) z.1 (Fin.cons (w i).2
+        (Fin.cons h.1 (fun j => (w (i.succAbove j)).1)))) z h :=
+    HasProjectiveLineDerivAt.comp_linear (LinearMap.fst ℝ X X)
+      (hline n z.1 (w i).2 (fun j => (w (i.succAbove j)).1) h.1)
+  exact HasProjectiveCurveDerivAt.finset_sum Finset.univ (fun i _ => hterm i)
+
+include hK hline in
+private theorem coupledKernelJointJet_succ_hasLineDerivAt (n : ℕ) (z h : X × X)
+    (w : Fin (n + 1) → X × X) :
+    HasProjectiveLineDerivAt (fun y => coupledKernelJointJet K (n + 1) y w)
+      (coupledKernelJointJet K (n + 1 + 1) z (Fin.cons h w)) z h := by
+  exact (congrArg₂ (fun (f : X × X → Y) (d : Y) => HasProjectiveLineDerivAt f d z h)
+    (coupledKernelJointJet_succ_fun K n w)
+    (coupledKernelJointJet_cons_value K n z h w)).mpr
+      (HasProjectiveLineDerivAt.add
+        (coupledKernelBaseJoint_hasLineDerivAt K hK hline (n + 1) z h (fun i => (w i).1))
+        (coupledKernelDirectionSum_hasLineDerivAt K hline n z h w))
+
 include hK hline in
 theorem coupledKernelJointJet_hasLineDerivAt (n : ℕ) (z h : X × X)
     (w : Fin n → X × X) :
@@ -177,36 +228,7 @@ theorem coupledKernelJointJet_hasLineDerivAt (n : ℕ) (z h : X × X)
       coupled_cons_fst, Fin.sum_univ_succ, Fin.sum_univ_zero, Fin.cons_zero,
       Fin.cons_succ, Fin.zero_succAbove, hnil, add_zero] using hd
   | succ n =>
-    have hbase := coupledKernelBaseJoint_hasLineDerivAt K hK hline (n + 1) z h
-      (fun i => (w i).1)
-    have hterm (i : Fin (n + 1)) : HasProjectiveLineDerivAt
-        (fun y : X × X => K n y.1
-          (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1)))
-        (K (n + 1) z.1 (Fin.cons (w i).2
-          (Fin.cons h.1 (fun j => (w (i.succAbove j)).1)))) z h :=
-      HasProjectiveLineDerivAt.comp_linear (LinearMap.fst ℝ X X)
-        (hline n z.1 (w i).2 (fun j => (w (i.succAbove j)).1) h.1)
-    have hsum : HasProjectiveLineDerivAt
-        (fun y : X × X => ∑ i : Fin (n + 1), K n y.1
-          (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1)))
-        (∑ i : Fin (n + 1), K (n + 1) z.1 (Fin.cons (w i).2
-          (Fin.cons h.1 (fun j => (w (i.succAbove j)).1)))) z h :=
-      HasProjectiveCurveDerivAt.finset_sum Finset.univ (fun i _ => hterm i)
-    have hfun : (fun y : X × X => coupledKernelJointJet K (n + 1) y w) =
-        (fun y : X × X => K (n + 1) y.1 (Fin.cons y.2 (fun i => (w i).1)) +
-          ∑ i : Fin (n + 1), K n y.1
-            (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1))) :=
-      funext (fun y => coupledKernelJointJet_succ_apply K n y w)
-    have hvalue : coupledKernelJointJet K (n + 1 + 1) z (Fin.cons h w) =
-        (K (n + 1 + 1) z.1 (Fin.cons z.2 (Fin.cons h.1 (fun i => (w i).1))) +
-          K (n + 1) z.1 (Fin.cons h.2 (fun i => (w i).1))) +
-          ∑ i : Fin (n + 1), K (n + 1) z.1 (Fin.cons (w i).2
-            (Fin.cons h.1 (fun j => (w (i.succAbove j)).1))) := by
-      exact (coupledKernelJointJet_succ_apply K (n + 1) z (Fin.cons h w)).trans
-        (coupled_cons_joint_value (K (n + 1 + 1) z.1) (K (n + 1) z.1) z.2 h w)
-    exact (congrArg₂ (fun (f : X × X → Y) (d : Y) =>
-      HasProjectiveLineDerivAt f d z h) hfun hvalue).mpr
-        (HasProjectiveLineDerivAt.add hbase hsum)
+    exact coupledKernelJointJet_succ_hasLineDerivAt K hK hline n z h w
 
 def coupledKernelSmoothDirections :
     Statements.SmoothDirections univ (fun z : X × X => K 0 z.1 (Fin.cons z.2 Fin.elim0)) where

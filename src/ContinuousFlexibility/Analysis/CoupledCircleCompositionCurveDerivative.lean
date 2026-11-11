@@ -69,9 +69,18 @@ theorem coupledCircleKernelJetLp_affine_hasDerivAt (r k s : ℕ)
         (ψ + t • u) v w m)
       (coupledCircleKernelJetLp hM (r + 1) (k + 1) (j.val 0).val (j.val 1).val
         (ψ + t₀ • u) v (Fin.cons u w) m) t₀ := by
-  obtain ⟨A, hA, hb⟩ := coupled_circle_kernel_affine_jet_bound hD hT hγ hM hI
+  have hAexists := coupled_circle_kernel_affine_jet_bound hD hT hγ hM hI
     (r + 1) (k + 1) s ψ u v (Fin.cons u w)
     (show 0 ≤ |t₀| + 1 by positivity)
+  let A : ℝ := hAexists.choose
+  have hA : 0 ≤ A := hAexists.choose_spec.1
+  have hb : ∀ t : ℝ, |t| ≤ |t₀| + 1 →
+      ∀ (m : ℕ) (j : CircleJetIndex s) (θ : ℝ),
+        |(T.M (T.sample m) ^ (j.val 1).val * T.H (T.sample m) ^ (-γ)) *
+            iteratedDeriv (j.val 0).val
+              (coupledCircleKernelField M (r + 1) (k + 1)
+                (ψ + t • u) v (Fin.cons u w) m) θ| ≤
+          A * (T.M (T.sample m))⁻¹ := hAexists.choose_spec.2
   have hg : MemLp (fun _ : ℝ => A * (T.M (T.sample m))⁻¹) 2 angleMeasure :=
     memLp_angleMeasure_of_continuous continuous_const
   unfold coupledCircleKernelJetLp
@@ -101,9 +110,18 @@ theorem coupledCircleKernel_hilbert_affine_hasDerivAt (r k s : ℕ)
       (fun t => ((coupledCircleKernel hD hT hγ hM hI r k (ψ + t • u) v w).val s).val)
       (((coupledCircleKernel hD hT hγ hM hI (r + 1) (k + 1)
         (ψ + t₀ • u) v (Fin.cons u w)).val s).val) t₀ := by
-  obtain ⟨A, hA, hb⟩ := coupled_circle_kernel_affine_jet_bound hD hT hγ hM hI
+  have hAexists := coupled_circle_kernel_affine_jet_bound hD hT hγ hM hI
     (r + 1) (k + 1) s ψ u v (Fin.cons u w)
     (show 0 ≤ |t₀| + 1 by positivity)
+  let A : ℝ := hAexists.choose
+  have hA : 0 ≤ A := hAexists.choose_spec.1
+  have hb : ∀ t : ℝ, |t| ≤ |t₀| + 1 →
+      ∀ (m : ℕ) (j : CircleJetIndex s) (θ : ℝ),
+        |(T.M (T.sample m) ^ (j.val 1).val * T.H (T.sample m) ^ (-γ)) *
+            iteratedDeriv (j.val 0).val
+              (coupledCircleKernelField M (r + 1) (k + 1)
+                (ψ + t • u) v (Fin.cons u w) m) θ| ≤
+          A * (T.M (T.sample m))⁻¹ := hAexists.choose_spec.2
   let C : ℝ := ((Fintype.card (CircleJetIndex s) : ℝ) + 1) * spacesAngleL2Constant * A
   have hsum : Summable (fun m => C * (T.M (T.sample m))⁻¹) :=
     (spaces_trace_sample_inv_summable hD hT).mul_left C

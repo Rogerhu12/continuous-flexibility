@@ -76,7 +76,8 @@ theorem coupled_circle_kernel_locallyTame
     have hm : Continuous (fun x =>
         (ψ x, (Fin.cons (v x) (w x) : Fin (k + 1) → M.Space))) :=
       hψ.prodMk (continuous_pi (fun i => Fin.cases hv hw i))
-    simpa only [coupledCircleKernelMultilinear_apply, Fin.cons_zero, Fin.tail_cons] using
+    simpa only [Function.comp_def, coupledCircleKernelMultilinear_apply,
+      Fin.cons_zero, Fin.tail_cons] using
       (coupledCircleKernelMultilinear_continuous hD hT hγ hM hI r k).comp hm
   refine ⟨hc.continuousOn, fun x₀ _ => ?_⟩
   have hexists := coupled_circle_kernel_grading_bounds hD hT hγ hM hI
