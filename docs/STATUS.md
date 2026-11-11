@@ -19,16 +19,17 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 367 / 375 (current source paths, including blueprint) |
-| Modules in the root import | 325 |
-| Lines of Lean under `src/` | 90,233 |
-| Axiom audit (CI, 3799 jobs) | passed for every project declaration in the root import |
-| Blueprint statements proved / total | 8 / 42 (S01, S02, R01, R02, R03, R04, W01, N12) |
+| Lean modules compiled / total | 375 / 383 (current source paths, including blueprint) |
+| Modules in the root import | 334 |
+| Lines of Lean under `src/` | 91,578 |
+| Axiom audit (CI, 3807 jobs) | passed for every project declaration in the root import |
+| Blueprint statements proved / total | 9 / 42 (S01, S02, R01, R02, R03, R04, W01, R05b, N12) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 379 |
+| Modules on the module system | 1 (the Challenge) of 387 |
 
-The compiled-module count matches artifacts to current source paths; the raw CI cache count
-can also include artifacts of removed blueprint modules. The 8 unfinished modules of the earlier workflow are:
+The compiled-module count is the current-source dependency closure of the default build
+targets, verified by the full green build. The raw CI cache count can also include artifacts
+of unused or removed modules. The 8 unfinished modules of the earlier workflow are:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
 `Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
 `Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
@@ -38,6 +39,18 @@ can also include artifacts of removed blueprint modules. The 8 unfinished module
 - **Geometry (paper §2, part of §10).** `mainStatement_of_flatAnnularCore :
   Nonempty FlatAnnularCore → Statements.MainStatement` (`Contracts/SphereClosedBending.lean`).
   The whole remaining problem is `Nonempty FlatAnnularCore`.
+- **Mass and resistance of every realized chain (R05b).** The unchanged
+  `R05bStatement` is proved for every admissible height family. Eight new radial
+  modules derive the uniform constants from the frozen realization: normalize
+  the actual radius charts, bound all model integrals and endpoint speeds, absorb
+  the finitely many initial indices, and control both connector orientations by
+  their matched endpoint heights. Physical change of variables gives the exact
+  amplitude factors. The long cap supplies the lower resistance bound, including
+  the initial left cell whose following connector is empty. Enlarging the original
+  constants preserves every realization clause. The node and all proof dependencies
+  are in the root import; R05b depends only on `propext`, `Classical.choice`,
+  `Quot.sound`. No sub-blueprint or frozen-statement repair was needed.
+  The complete proof was verified by [CI at `bed5af9`](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42985225721).
 - **Endpoint closure (N12).** The unchanged theorem
   `PointBranchStatement → W03Statement → S03Statement → N12Statement` is proved.
   `Analysis/MaterialSampleCofinite.lean`, `Analysis/StateControlCofiniteJets.lean` and
@@ -76,7 +89,7 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (34): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
+Open nodes (33): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R06a, R06b, R06c, R07, R08,
 R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
 N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
