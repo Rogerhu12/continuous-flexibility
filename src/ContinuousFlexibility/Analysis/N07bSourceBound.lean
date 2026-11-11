@@ -22,6 +22,26 @@ open scoped ContDiff BigOperators ENNReal
 
 set_option backward.isDefEq.respectTransparency true
 
+-- Cache the inherited structures before using the nested state and volume types.
+local instance n07bSourceBoundStateAddCommGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S) := inferInstance
+
+local instance n07bSourceBoundStateSub (S : PhysicalSpacesData) :
+    Sub (AnnularState S) := inferInstance
+
+local instance n07bSourceBoundStateModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S) := inferInstance
+
+local instance n07bSourceBoundLevelNormedAddCommGroup
+    {S : PhysicalSpacesData} {K : CanonicalData S} (V : VolumeModelData S K) (b : ℕ) :
+    NormedAddCommGroup (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedAddCommGroup _
+
+local instance n07bSourceBoundLevelNormedSpace
+    {S : PhysicalSpacesData} {K : CanonicalData S} (V : VolumeModelData S K) (b : ℕ) :
+    NormedSpace ℝ (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedSpace _
+
 /-- The exact geometric condition used by the analytic source estimate.
 The constants are chosen before the state, piece, path, and source. This
 condition is not a field of the frozen canonical geometry statement. -/
@@ -104,29 +124,30 @@ private theorem source_square_factors_reorder (A Q P R : ℝ) :
     (A * Q ^ 2) * P * R ^ 2 = (A * P) * Q ^ 2 * R ^ 2 := by
   ring
 
+/-- This comparison is proved on arbitrary index and state types. In particular,
+no geometric record or inherited state-space structure is reduced here. -/
 private theorem sourceCoefficient_uniform_M_bound
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {K : CanonicalData S}
-    {base : ℕ} {ε : ℝ} (hT : IsMaterialData D T)
-    (hK : N04PartA D S C K base ε) (b loss : ℕ)
-    (hgeom : N07bSourceCoefficientBound T S C K base ε b loss) :
+    {Z X J : Type*} {I : J → Type*}
+    (U : Set Z) (sector : Z → Prop) (piece : Z → ℕ → Set X) (core : Set X)
+    (E M : X → ℝ) (Q : Z → ℝ)
+    (coefficient : Z → ℕ → X → (j : J) → I j → ℝ)
+    (hE : ∀ A : ℝ, ∃ CA : ℝ, 0 < CA ∧ ∀ x ∈ core, E x ^ A ≤ CA * M x)
+    (hM : ∀ x ∈ core, 1 ≤ M x)
+    (hcore : ∀ z ∈ U, sector z → ∀ m, piece z m ⊆ core)
+    (hgeom : ∃ B A : ℝ, 0 ≤ B ∧ 0 ≤ A ∧
+      ∀ z ∈ U, sector z → ∀ m x, x ∈ piece z m →
+        ∀ j : J, ∀ i : I j, coefficient z m x j i ≤ B * E x ^ A * Q z ^ 2) :
     ∃ A₀ : ℝ, 0 ≤ A₀ ∧
-      ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
-        ∀ m x, x ∈ physicalPieceOpen S K m →
-          ∀ j : Fin (b + 1), ∀ i : n07bAngularChainIndex j.val,
-            n07bSourceGeometricWeight T K z m x *
-                n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2 ≤
-              (A₀ * (1 + stateGrading S (b + loss) (z.1 - C.referenceState) + |z.2|) ^ 2) *
-                T.M x.1 ^ 2 := by
+      ∀ z ∈ U, sector z → ∀ m x, x ∈ piece z m →
+        ∀ j : J, ∀ i : I j,
+          coefficient z m x j i ≤ (A₀ * Q z ^ 2) * M x ^ 2 := by
   obtain ⟨B, A, hB, _, hcoeff⟩ := hgeom
-  obtain ⟨CA, hCA, hEA⟩ := hT.2.2.2.2.2.2.2.2.2.2.2.1 A
+  obtain ⟨CA, hCA, hEA⟩ := hE A
   refine ⟨B * CA, mul_nonneg hB hCA.le, ?_⟩
   intro z hz hs m x hx j i
-  have hxcore : x.1 ∈ Ioo D.a D.b := (hK.2.2.2.1 m).2.2 hx.1
-  have hM : 1 ≤ T.M x.1 := (hT.2.1 x.1 hxcore).2.2.2
-  exact source_coefficient_real_bound B CA (T.E0 x.1 ^ A) (T.M x.1)
-    (1 + stateGrading S (b + loss) (z.1 - C.referenceState) + |z.2|) _
-    hB hCA.le hM (hEA x.1 hxcore) (hcoeff z hz hs m x hx j i)
+  have hxcore : x ∈ core := hcore z hz hs m hx
+  exact source_coefficient_real_bound B CA (E x ^ A) (M x) (Q z) _
+    hB hCA.le (hM x hxcore) (hEA x hxcore) (hcoeff z hz hs m x hx j i)
 
 set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
@@ -146,8 +167,19 @@ private theorem sourceLift_uniform_square_bound
           ∀ m, (V.forget (3 / 4 : ℝ) 0 b F m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
             canonicalSource S K z m ((S.height (3 / 4 : ℝ)).decode f.val) := by
   obtain ⟨A, hA, hcoeff⟩ := sourceCoefficient_uniform_M_bound
-    (D := D) (T := T) (S := S) (C := C) (K := K) (base := base) (ε := ε)
-    hT hK b loss hgeom
+    (Z := AnnularState S × ℝ) (X := PolarPoint) (J := Fin (b + 1))
+    (I := fun j => n07bAngularChainIndex j.val)
+    (stateNeighborhood S C base ε) (fun z => stateSector S z.1)
+    (fun _ m => physicalPieceOpen S K m) (annularOpen D)
+    (fun x => T.E0 x.1) (fun x => T.M x.1)
+    (fun z => 1 + stateGrading S (b + loss) (z.1 - C.referenceState) + |z.2|)
+    (fun z m x j i => n07bSourceGeometricWeight T K z m x *
+      n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2)
+    (fun p => by
+      obtain ⟨CA, hCA, hEA⟩ := hT.2.2.2.2.2.2.2.2.2.2.2.1 p
+      exact ⟨CA, hCA, fun x hx => hEA x.1 hx.1⟩)
+    (fun x hx => (hT.2.1 x.1 hx.1).2.2.2)
+    (fun _ _ _ m x hx => ⟨(hK.2.2.2.1 m).2.2 hx.1, mem_univ _⟩) hgeom
   refine ⟨A * n07bSourcePathConstant b,
     mul_nonneg hA (n07bSourcePathConstant_nonneg b), ?_⟩
   intro z hz hs f
