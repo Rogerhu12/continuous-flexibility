@@ -165,8 +165,10 @@ theorem circleTopologicalFlow_continuousOn
     rw [add_right_comm θ P q.2]
     exact hperiod q.1 hq.1 t (θ + q.2)
   have hΨtime (q : X × ℝ) (hq : q ∈ U ×ˢ (univ : Set ℝ)) :
-      ContinuousOn (fun t => Ψ (q, t)) (Icc a b) :=
-    (htime q.1 hq.1 q.2).sub continuousOn_const
+      ContinuousOn (fun t => Ψ (q, t)) (Icc a b) := by
+    change ContinuousOn (fun t : ℝ => Θ (q.1, (t, q.2)) - q.2) (Icc a b)
+    exact (htime q.1 hq.1 q.2).sub
+      (continuousOn_const : ContinuousOn (fun _ : ℝ => q.2) (Icc a b))
   have hΨinit (q : X × ℝ) (hq : q ∈ U ×ˢ (univ : Set ℝ)) : Ψ (q, a) = 0 := by
     dsimp only [Ψ]
     rw [hinit q.1 hq.1 q.2, sub_self]

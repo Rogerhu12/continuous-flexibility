@@ -26,7 +26,7 @@ private theorem endpointX_one_antitone {d e : ℝ} (hd : 0 < d) (hde : d ≤ e) 
   rw [Real.log_div one_ne_zero he.ne', Real.log_div one_ne_zero hd.ne']
   simpa only [Real.log_one, zero_sub] using neg_le_neg (Real.log_le_log hd hde)
 
-private theorem lt_endpointX_one_of_distance_lt {d L : ℝ} (hd : 0 < d) (hL : 0 ≤ L)
+theorem lt_endpointX_one_of_distance_lt {d L : ℝ} (hd : 0 < d) (hL : 0 ≤ L)
     (hnear : d < Real.exp (-(L ^ 2))) : L < endpointX 1 d := by
   have hh := Real.log_lt_log hd hnear
   rw [Real.log_exp] at hh

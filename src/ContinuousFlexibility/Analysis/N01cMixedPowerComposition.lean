@@ -47,7 +47,8 @@ theorem mixedDerivative_scalarComp_ordered
           mixedDerivative (coordinateRadialOrder (cylinderMixedWord a b ∘ c.emb i))
             (coordinateAngularOrder (cylinderMixedWord a b ∘ c.emb i)) f q := by
   rw [mixedDerivative_eq_iteratedFDeriv_word hΩ (hg.comp hf hmap) a b hq,
-    iteratedFDeriv_comp_ordered_apply hΩ hV hf hg hmap]
+    iteratedFDeriv_comp_ordered_apply hΩ hV hf hg hmap (a + b) hq
+      (fun i => cylinderBasisVector (cylinderMixedWord a b i))]
   apply Finset.sum_congr rfl
   intro c _
   rw [iteratedFDeriv_apply_eq_iteratedDeriv_mul_prod, smul_eq_mul, mul_comm]
@@ -89,7 +90,7 @@ theorem scalarComposition_parameterJet_power_bound
     have hb : ‖g (f x)‖ ≤ B := by
       simpa only [norm_iteratedFDeriv_zero] using houter 0 le_rfl
     rw [smoothDirections_D_zero_apply K hx v]
-    simpa only [parameterHeightWeight, ite_true, mul_one, mul_assoc] using
+    simpa only [Function.comp_def, parameterHeightWeight, ite_true, mul_one, mul_assoc] using
       hb.trans (le_mul_of_one_le_right (zero_le_one.trans hB) hMP)
   · have hkpos : 0 < k := Nat.pos_of_ne_zero hk0
     have hterm (c : OrderedFinpartition k) :
@@ -147,7 +148,8 @@ theorem MixedPowerBounds.scalarComp
         (hV.mem_nhds (hKV hy))) N)
   let Cg : ℝ := 1 + ∑ m : Fin (s + 1), cg m
   have hCg : 1 ≤ Cg := by
-    have hh := Finset.sum_nonneg (fun m _ => (hcg m).le)
+    have hh : 0 ≤ ∑ m : Fin (s + 1), cg m :=
+      Finset.sum_nonneg (fun m _ => (hcg m).le)
     dsimp only [Cg]
     linarith
   have houter (m : ℕ) (hm : m ≤ s) (j : ℕ) (hj : j ≤ N) (y : ℝ) (hy : y ∈ K) :
@@ -163,20 +165,29 @@ theorem MixedPowerBounds.scalarComp
   have hQ : 1 ≤ Q := le_add_of_nonneg_right
     (Finset.sum_nonneg (fun _ _ => Nat.cast_nonneg (α := ℝ) _))
   have hcardP (j : ℕ) (hj : j ≤ N) :
-      (Fintype.card (OrderedFinpartition j) : ℝ) ≤ P :=
-    (Finset.single_le_sum (fun i _ => Nat.cast_nonneg (α := ℝ) _)
-      (Finset.mem_univ (⟨j, Nat.lt_succ_of_le hj⟩ : Fin (N + 1)))).trans
-      (le_add_of_nonneg_left zero_le_one)
+      (Fintype.card (OrderedFinpartition j) : ℝ) ≤ P := by
+    have hh : (Fintype.card (OrderedFinpartition j) : ℝ) ≤
+        ∑ i : Fin (N + 1), (Fintype.card (OrderedFinpartition i.val) : ℝ) :=
+      Finset.single_le_sum
+        (fun i (_ : i ∈ (Finset.univ : Finset (Fin (N + 1)))) =>
+          Nat.cast_nonneg (α := ℝ) (Fintype.card (OrderedFinpartition i.val)))
+        (Finset.mem_univ (⟨j, Nat.lt_succ_of_le hj⟩ : Fin (N + 1)))
+    exact hh.trans (le_add_of_nonneg_left zero_le_one)
   have hcardQ (n : ℕ) (hn : n ≤ s) :
-      (Fintype.card (OrderedFinpartition n) : ℝ) ≤ Q :=
-    (Finset.single_le_sum (fun i _ => Nat.cast_nonneg (α := ℝ) _)
-      (Finset.mem_univ (⟨n, Nat.lt_succ_of_le hn⟩ : Fin (s + 1)))).trans
-      (le_add_of_nonneg_left zero_le_one)
+      (Fintype.card (OrderedFinpartition n) : ℝ) ≤ Q := by
+    have hh : (Fintype.card (OrderedFinpartition n) : ℝ) ≤
+        ∑ i : Fin (s + 1), (Fintype.card (OrderedFinpartition i.val) : ℝ) :=
+      Finset.single_le_sum
+        (fun i (_ : i ∈ (Finset.univ : Finset (Fin (s + 1)))) =>
+          Nat.cast_nonneg (α := ℝ) (Fintype.card (OrderedFinpartition i.val)))
+        (Finset.mem_univ (⟨n, Nat.lt_succ_of_le hn⟩ : Fin (s + 1)))
+    exact hh.trans (le_add_of_nonneg_left zero_le_one)
   choose cp hcp hcpb using (fun i : Fin (s + 2) × Fin (N + 1) =>
     exists_finiteProduct_allParameterJet_bound (X := X) i.1.val i.2.val RH)
   let Cp : ℝ := 1 + ∑ i : Fin (s + 2) × Fin (N + 1), cp i
   have hCp : 1 ≤ Cp := by
-    have hh := Finset.sum_nonneg (fun i _ => (hcp i).le)
+    have hh : 0 ≤ ∑ i : Fin (s + 2) × Fin (N + 1), cp i :=
+      Finset.sum_nonneg (fun i _ => (hcp i).le)
     dsimp only [Cp]
     linarith
   have hcpCp (i : Fin (s + 2) × Fin (N + 1)) : cp i ≤ Cp :=
@@ -218,7 +229,8 @@ theorem MixedPowerBounds.scalarComp
         have hh := hfb (d.partSize i) ((d.partSize_le i).trans hj) 0 0
           (Nat.zero_le s) q hq (F.parameter 0 0 q hq) x hx hlow
           (w ∘ d.emb i) (fun l => hw _) R hR hhigh (fun l => hwhigh _)
-        simpa only [Nat.add_zero, Nat.cast_zero, zero_div, Real.rpow_zero, mul_one,
+        simpa only [J0, SmoothDirections.congr, Nat.add_zero, Nat.cast_zero, zero_div,
+          Real.rpow_zero, mul_one,
           parameterHeightWeight, if_neg (Nat.ne_of_gt (d.partSize_pos i)),
           mul_comm, mul_left_comm, mul_assoc] using hh)
     simpa only [B0, C0, mul_pow, Real.rpow_mul_natCast hEpos.le,

@@ -119,9 +119,15 @@ theorem continuousOn_volterraWeightedForcing {n : ℕ} {K : X × ℝ → ℝ}
     ContinuousOn (fun p : (X × ℝ) × (Fin n → E) =>
       volterraWeightedForcing K A p.1 p.2)
       ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) := by
-  have hi := (continuousOn_volterraPrimitive hK).comp
-    continuous_fst.continuousOn (fun p hp => hp.1)
-  have he := Real.continuous_exp.comp_continuousOn hi.neg
+  have hi : ContinuousOn
+      (fun p : (X × ℝ) × (Fin n → E) => volterraPrimitive K p.1)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set (Fin n → E))) :=
+    (continuousOn_volterraPrimitive hK).comp
+      continuous_fst.continuousOn (fun p hp => hp.1)
+  have he : ContinuousOn
+      (fun p : (X × ℝ) × (Fin n → E) => Real.exp (-volterraPrimitive K p.1))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set (Fin n → E))) :=
+    Real.continuous_exp.comp_continuousOn hi.neg
   simpa only [volterraWeightedForcing, smul_apply, smul_eq_mul] using he.mul hA
 
 theorem continuousOn_volterraValue {n : ℕ} {K : X × ℝ → ℝ}
@@ -131,7 +137,10 @@ theorem continuousOn_volterraValue {n : ℕ} {K : X × ℝ → ℝ}
       ((U ×ˢ (univ : Set ℝ)) ×ˢ univ)) :
     ContinuousOn (fun p : (X × ℝ) × (Fin n → E) => volterraValue K A p.1 p.2)
       ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) := by
-  have hw := continuousOn_volterraWeightedForcing hK hA
+  have hw : ContinuousOn
+      (fun p : (X × ℝ) × (Fin n → E) => volterraWeightedForcing K A p.1 p.2)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set (Fin n → E))) :=
+    continuousOn_volterraWeightedForcing hK hA
   have hg : ContinuousOn
       (fun p : (X × (Fin n → E)) × ℝ =>
         volterraWeightedForcing K A (p.1.1, p.2) p.1.2)
@@ -139,7 +148,11 @@ theorem continuousOn_volterraValue {n : ℕ} {K : X × ℝ → ℝ}
     hw.comp
       ((continuous_fst.fst.prodMk continuous_snd).prodMk continuous_fst.snd).continuousOn
       (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
-  have hprimitive := continuousOn_parametric_primitive_univ_topological hg 0
+  have hprimitive : ContinuousOn
+      (fun p : (X × (Fin n → E)) × ℝ =>
+        ∫ t in (0 : ℝ)..p.2, volterraWeightedForcing K A (p.1.1, t) p.1.2)
+      ((U ×ˢ (univ : Set (Fin n → E))) ×ˢ (univ : Set ℝ)) :=
+    continuousOn_parametric_primitive_univ_topological hg 0
   have hinner : ContinuousOn
       (fun p : (X × ℝ) × (Fin n → E) =>
         ∫ t in (0 : ℝ)..p.1.2, volterraWeightedForcing K A (p.1.1, t) p.2)
@@ -147,8 +160,15 @@ theorem continuousOn_volterraValue {n : ℕ} {K : X × ℝ → ℝ}
     hprimitive.comp
       ((continuous_fst.fst.prodMk continuous_snd).prodMk continuous_fst.snd).continuousOn
       (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
-  have houter := (continuousOn_volterraPrimitive hK).comp
-    continuous_fst.continuousOn (fun p hp => hp.1)
+  have houter : ContinuousOn
+      (fun p : (X × ℝ) × (Fin n → E) => volterraPrimitive K p.1)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set (Fin n → E))) :=
+    (continuousOn_volterraPrimitive hK).comp
+      continuous_fst.continuousOn (fun p hp => hp.1)
+  change ContinuousOn
+    (fun p : (X × ℝ) × (Fin n → E) => Real.exp (volterraPrimitive K p.1) *
+      ∫ t in (0 : ℝ)..p.1.2, volterraWeightedForcing K A (p.1.1, t) p.2)
+    ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set (Fin n → E)))
   exact (Real.continuous_exp.comp_continuousOn houter).mul hinner
 
 private theorem continuous_volterraWeightedForcing_slice

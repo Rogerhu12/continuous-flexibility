@@ -15,7 +15,7 @@ namespace ContinuousFlexibility.Analysis
 open Set
 open scoped ContDiff
 
-variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+variable {E : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
 
 /-- Radial differentiation preserves joint smoothness of the genuine
 finite-dimensional parameter family. -/
@@ -25,7 +25,8 @@ theorem contDiffAt_radialParameter_deriv
     ContDiffAt ℝ ∞ (fun p : E × ℝ => deriv (fun t => F (p.1, t)) p.2) (x, r) := by
   have hs : ContDiffAt ℝ ∞ (fun p : ℝ × E => F (p.2, p.1)) (r, x) :=
     hF.comp (r, x) (contDiffAt_snd.prodMk contDiffAt_fst)
-  have hd := (contDiffAt_parameter_fderiv hs).comp (x, r)
+  have hd := (contDiffAt_parameter_fderiv
+    (f := fun p : ℝ × E => F (p.2, p.1)) hs).comp (x, r)
     (contDiffAt_snd.prodMk contDiffAt_fst)
   simpa only [fderiv_apply_one_eq_deriv] using
     hd.clm_apply (contDiffAt_const (c := (1 : ℝ)))
@@ -47,14 +48,17 @@ theorem contDiffOn_dslope_parameter
     intro p hp t ht
     have hr := rootDivision_affine_mem hconv ha hp.2 ht
     have hd := contDiffAt_radialParameter_deriv
-      (hF.contDiffAt ((hU.prod hR).mem_nhds ⟨hp.1, hr⟩))
+      (x := p.1) (r := a + t * (p.2 - a))
+      (hF.contDiffAt ((hU.prod hR).mem_nhds
+        (show (p.1, a + t * (p.2 - a)) ∈ U ×ˢ R from ⟨hp.1, hr⟩)))
     exact hd.comp (p, t)
       (contDiffAt_fst.fst.prodMk (contDiffAt_const.add
         (contDiffAt_snd.mul (contDiffAt_fst.snd.sub contDiffAt_const))))
   have hi : ContDiffOn ℝ ∞ (fun p : E × ℝ => ∫ t in (0 : ℝ)..1, G (p, t))
       (U ×ˢ R) := by
     intro p hp
-    exact (contDiffAt_intervalIntegral_parameter (hU.prod hR)
+    exact (contDiffAt_intervalIntegral_parameter
+      (f := G) (O := U ×ˢ R) (a := (0 : ℝ)) (b := 1) (hU.prod hR)
       (by norm_num) hparam hp).contDiffWithinAt
   apply hi.congr
   intro p hp

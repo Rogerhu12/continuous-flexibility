@@ -27,7 +27,9 @@ theorem contDiff_rootCosinePath (l h : ℝ) :
 
 theorem hasDerivAt_rootCosinePath (l h t : ℝ) :
     HasDerivAt (rootCosinePath l h) ((h - l) / 2 * Real.sin t) t := by
-  simpa only [rootCosinePath, zero_sub, neg_neg] using
+  change HasDerivAt (fun u : ℝ => l + (h - l) / 2 * (1 - Real.cos u))
+    ((h - l) / 2 * Real.sin t) t
+  simpa only [Pi.sub_apply, zero_sub, neg_neg] using
     ((((hasDerivAt_const t (1 : ℝ)).sub (Real.hasDerivAt_cos t)).const_mul
       ((h - l) / 2)).const_add l)
 
@@ -110,8 +112,8 @@ theorem cosineRegularizedSpeed_eq_transformed
       ((h - l) / 2 * Real.sin t) *
         (-A (x, (rootCosinePath l h t, θ)) -
           B (x, (rootCosinePath l h t, θ)) * Real.sqrt (Q (x, rootCosinePath l h t))) := by
-  rw [sqrt_comp_rootCosinePath hlh hl hh ht]
   dsimp only [cosineRegularizedSpeed]
+  rw [sqrt_comp_rootCosinePath (f := fun r => Q (x, r)) hlh hl hh ht]
   ring
 
 section Parameters
@@ -132,8 +134,8 @@ theorem contDiffOn_cosineRegularizedSpeed
       (U ×ˢ (univ : Set (ℝ × ℝ))) := by
   have hpath : ContDiff ℝ ∞ (fun p : E × (ℝ × ℝ) =>
       (p.1, (rootCosinePath l h p.2.1, p.2.2))) :=
-    contDiff_fst.prodMk (((contDiff_rootCosinePath l h).comp contDiff_snd.fst).
-      prodMk contDiff_snd.snd)
+    contDiff_fst.prodMk (((contDiff_rootCosinePath l h).comp contDiff_snd.fst).prodMk
+      contDiff_snd.snd)
   have hmap : MapsTo (fun p : E × (ℝ × ℝ) =>
       (p.1, (rootCosinePath l h p.2.1, p.2.2)))
       (U ×ˢ (univ : Set (ℝ × ℝ))) (U ×ˢ (R ×ˢ (univ : Set ℝ))) :=

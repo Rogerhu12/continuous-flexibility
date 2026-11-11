@@ -39,6 +39,7 @@ run_cmd do
 #print axioms ContinuousFlexibility.Blueprint.N01cSpeeds
 #print axioms ContinuousFlexibility.Blueprint.N01cFlows
 #print axioms ContinuousFlexibility.Blueprint.N01c
+#print axioms ContinuousFlexibility.Blueprint.ScalarWeighted
 
 -- The external-input tool has no blueprint node: audit its actual endpoints.
 #print axioms ContinuousFlexibility.Analysis.exists_halfLineSobolevExtension
