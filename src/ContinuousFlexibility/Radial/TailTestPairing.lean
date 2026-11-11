@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Statements.DeepTailOperator
-import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
+import Mathlib.MeasureTheory.Function.LocallyIntegrable
 import Mathlib.Analysis.Calculus.Deriv.Support
 import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 

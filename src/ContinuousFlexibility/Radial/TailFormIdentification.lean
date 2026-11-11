@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.TailTestPairing
 import ContinuousFlexibility.Radial.TailFormCore
+import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 
 /-!

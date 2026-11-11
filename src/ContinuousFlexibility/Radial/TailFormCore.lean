@@ -1,4 +1,6 @@
 import ContinuousFlexibility.Statements.DeepTailOperator
+import Mathlib.Analysis.Calculus.Deriv.Add
+import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Analysis.Calculus.Deriv.Support
 import Mathlib.MeasureTheory.Function.LpSpace.Indicator
 import Mathlib.Topology.Algebra.Module.Basic

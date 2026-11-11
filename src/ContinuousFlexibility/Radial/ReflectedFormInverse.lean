@@ -33,7 +33,8 @@ def coordinateInner (a : V →L[ℝ] H) : V →L[ℝ] V →L[ℝ] ℝ :=
 theorem coordinateInner_apply (a : V →L[ℝ] H) (u v : V) :
     coordinateInner a u v = ⟪a u, a v⟫_ℝ := by
   simp only [coordinateInner, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.flip_apply, ContinuousLinearMap.compL_apply, innerSL_apply_apply]
+    ContinuousLinearMap.flip_apply, ContinuousLinearMap.compL_apply]
+  exact innerSL_apply_apply ℝ (a u) (a v)
 
 /-- The form of `A - Λ`, on its closed energy domain. -/
 def shiftedEnergyForm (base grad : V →L[ℝ] H) (Λ : ℝ) : V →L[ℝ] V →L[ℝ] ℝ :=
@@ -168,7 +169,9 @@ private theorem reflected_form_l2_bound (base grad : V →L[ℝ] H) {Λ : ℝ}
       have hprod : ‖base (lowModeReflection P u)‖ *
           (Λ * ‖base (lowModeReflection P u)‖ - 4 * ‖f‖) ≤ 0 := by
         nlinarith
-      exact sub_nonpos.mp ((mul_nonpos_iff_of_pos_left hpos).mp hprod)
+      have hsub : Λ * ‖base (lowModeReflection P u)‖ - 4 * ‖f‖ ≤ 0 :=
+        le_of_mul_le_mul_left (by simpa only [mul_zero] using hprod) hpos
+      exact sub_nonpos.mp hsub
   have hΛD : Λ * reflectedEnergyForm base grad Λ P u u ≤ 4 * ‖f‖ ^ 2 := by
     have h₁ := mul_le_mul_of_nonneg_left hCS hΛ.le
     have h₂ := mul_le_mul_of_nonneg_left hSN (norm_nonneg f)

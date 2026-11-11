@@ -110,7 +110,7 @@ theorem tailGradientSpace_eq_closure_iSup {T : DeepTailData} (hT : DeepTailHypot
   rw [tailFormLift_eq_closure_iUnion hT]
   have he := (WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T) (DeepTailL2 T)).toHomeomorph.preimage_closure
     (⋃ n : ℕ, TailFormLift T (T.node (n + 1)))
-  simpa only [ContinuousLinearEquiv.toHomeomorph_apply,
+  simpa only [ContinuousLinearEquiv.coe_toHomeomorph,
     WithLp.prodContinuousLinearEquiv_apply, preimage_iUnion] using he
 
 /-- The positive resolvents of finite Dirichlet intervals converge strongly

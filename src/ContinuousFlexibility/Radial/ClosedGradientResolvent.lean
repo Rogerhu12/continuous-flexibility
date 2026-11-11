@@ -93,7 +93,7 @@ theorem closedGradientGraph_iff_resolvent
         WithLp.sub_fst, WithLp.sub_snd, gradientInjection_apply,
         WithLp.toLp_fst, WithLp.toLp_snd, zero_sub, inner_neg_left, hqu,
         add_sub_cancel_right]
-      exact sub_eq_zero.mpr (hform r hr)
+      linarith only [hform r hr]
     rw [closedGradientResolvent_apply, closedGradientResolventPair_apply, hproj, hqu]
   · intro h
     have hg := closedGradientResolvent_graph K (f + u)
@@ -160,7 +160,8 @@ theorem closedGradientResolvent_tendsto
       exact K.toSubmodule.starProjection_inner_eq_zero (gradientInjection f) w
         ((congrArg (fun M : Submodule ℝ (GradientHilbert H) => w ∈ M) hclosure).mpr hw)
   rw [hproj] at ht
-  have hf := (WithLp.continuous_fst.tendsto _).comp ht
-  simpa only [closedGradientResolvent_apply, closedGradientResolventPair_apply] using hf
+  have hf := ((WithLp.fstL 2 ℝ H H).continuous.tendsto _).comp ht
+  simpa only [WithLp.fstL_apply, closedGradientResolvent_apply,
+    closedGradientResolventPair_apply] using hf
 
 end ContinuousFlexibility.Radial

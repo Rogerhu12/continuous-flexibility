@@ -46,10 +46,10 @@ theorem tailFiniteEmbedding_apply (a : ι →₀ ℝ) (i : ι) :
   rw [tailFiniteEmbedding_eq_sum]
   simp only [lp.coeFn_sum, Finset.sum_apply, lp.single_apply]
   calc
-    _ = Pi.single i (a i) i :=
+    _ = (Pi.single i (a i) : ι → ℝ) i :=
       Finset.sum_eq_single i (fun j _ hji => Pi.single_eq_of_ne hji.symm _)
         (fun hi => by rw [Pi.single_eq_same, Finsupp.notMem_support_iff.mp hi])
-    _ = a i := Pi.single_eq_same _ _
+    (Pi.single i (a i) : ι → ℝ) i = a i := Pi.single_eq_same _ _
 
 theorem tailFiniteEmbedding_norm_sq (a : ι →₀ ℝ) :
     ‖tailFiniteEmbedding a‖ ^ 2 = ∑ i ∈ a.support, ‖a i‖ ^ 2 := by

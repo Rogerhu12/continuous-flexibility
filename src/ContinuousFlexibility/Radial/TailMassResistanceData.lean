@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.TailFormCore
+import Mathlib.Tactic.Linarith
 
 /-!
 # Consequences of the deep-tail data

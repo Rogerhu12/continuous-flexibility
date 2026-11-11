@@ -20,7 +20,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Filter
-open scoped Topology ENNReal InnerProductSpace RealInnerProductSpace
+open scoped Topology NNReal ENNReal InnerProductSpace RealInnerProductSpace
 
 section Normed
 
@@ -45,8 +45,9 @@ theorem tail_strong_apply_tendsto (A : ℕ → E →L[ℝ] F) (Ainf : E →L[ℝ
     Tendsto (fun n => A n (u n)) atTop (𝓝 (Ainf uinf)) := by
   have hz : Tendsto (fun n => A n (u n - uinf)) atTop (𝓝 0) :=
     tail_bounded_apply_tendsto_zero A hbound
-      (by simpa only [sub_self] using hu.sub
-        (tendsto_const_nhds : Tendsto (fun _ : ℕ => uinf) atTop (𝓝 uinf)))
+      (by
+        simpa only [sub_self] using
+          hu.sub (tendsto_const_nhds : Tendsto (fun _ : ℕ => uinf) atTop (𝓝 uinf)))
   have h := hz.add (hstrong uinf)
   simpa only [map_sub, sub_add_cancel, zero_add] using h
 
@@ -156,7 +157,8 @@ theorem tail_exists_inverse_of_strong_limit (A G : ℕ → E →L[ℝ] E)
     ContinuousLinearMap.closed_range_of_antilipschitz hanti
   have hs : Ainf.toLinearMap.IsSymmetric := tail_strong_limit_symmetric A Ainf hsym hstrong
   have hdense : Ainf.range.topologicalClosure = ⊤ :=
-    (Submodule.topologicalClosure_eq_top_iff _).mpr (hs.orthogonal_range.trans hker)
+    (Submodule.topologicalClosure_eq_top_iff (K := Ainf.range)).mpr
+      (hs.orthogonal_range.trans hker)
   have hrange : Ainf.range = ⊤ := hclosed.symm.trans hdense
   let Ginf : E →L[ℝ] E := (ContinuousLinearEquiv.ofBijective Ainf hker hrange).symm
   have hGleft (x : E) : Ginf (Ainf x) = x :=
