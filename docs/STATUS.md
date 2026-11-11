@@ -18,6 +18,10 @@ reported only `propext`, `Classical.choice`, and `Quot.sound`.
 [Verified build](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42982787838).
 No frozen statement or assembly repair was needed.
 
+The [PR integration build](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42982795292)
+also passed with main's completed N12 proof: 3,814 jobs, an axiom audit of
+11,066 project declarations (8,324 theorems), and 9 / 42 blueprint statements proved.
+
 ## Target
 
 `thm:main` of the manuscript. The statement was first taken from the 62-page version
@@ -35,15 +39,15 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 378 / 386 |
-| Modules in the root import | 334 |
-| Lines of Lean under `src/` | 93,083 |
-| Axiom audit (default build, 3,810 jobs) | passed: 11,013 declarations, 8,294 theorems |
-| Blueprint statements proved / total | 8 / 42 (S01, S02, R01, R02, R03, R04, W01, Tame) |
+| Lean modules compiled / total | 382 / 390 |
+| Modules in the root import | 340 |
+| Lines of Lean under `src/` | 93,574 |
+| Axiom audit (integration build, 3,814 jobs) | passed: 11,066 declarations, 8,324 theorems |
+| Blueprint statements proved / total | 9 / 42 (S01, S02, R01, R02, R03, R04, W01, Tame, N12) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 390 |
+| Modules on the module system | 1 (the Challenge) of 394 |
 
-These counts describe this line's source tree. The compiled count is the
+These counts include main's completed N12 proof. The compiled count is the
 source import closure of the four successful default targets; it excludes
 stale artifacts restored from other branches. The 8 modules outside that
 default build are unfinished files of the earlier workflow:
@@ -56,6 +60,14 @@ default build are unfinished files of the earlier workflow:
 - **Geometry (paper §2, part of §10).** `mainStatement_of_flatAnnularCore :
   Nonempty FlatAnnularCore → Statements.MainStatement` (`Contracts/SphereClosedBending.lean`).
   The whole remaining problem is `Nonempty FlatAnnularCore`.
+- **Endpoint closure (N12).** The unchanged theorem
+  `PointBranchStatement → W03Statement → S03Statement → N12Statement` is proved.
+  `Analysis/MaterialSampleCofinite.lean`, `Analysis/StateControlCofiniteJets.lean` and
+  `Analysis/StateControlCofiniteClosure.lean` prove smooth endpoint extension of the actual
+  controlled profile from the existing bounded index shift and weighted control bounds.
+  `Analysis/PointSolutionCore.lean` constructs the core from the same normalized nonzero
+  solution point. No control-interval placement hypothesis is added. All proof dependencies
+  are in the root import; N12 depends only on `propext`, `Classical.choice`, `Quot.sound`.
 - **Abstract Nash–Moser, fixed parameter.** `exists_projectiveNewton_fixed_branch`
   (`Analysis/ProjectiveNewtonFixedBranch.lean`).
 - **Tame calculus and inverse families.** `Blueprint.Tame : H01Statement ∧ H02Statement`,
@@ -66,8 +78,8 @@ default build are unfinished files of the earlier workflow:
 ## What is not proved
 
 `Nonempty FlatAnnularCore`, i.e. paper §3–§10: the accumulating radial reference (§4–§6),
-the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9) and its
-endpoint regularity (§10).
+the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9). The passage from a point solution to the endpoint-regular
+annular core (§10) is now proved conditionally in N12; existence of that point solution remains open.
 
 ## Blueprint v4
 
@@ -89,9 +101,9 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (34): ScalarCalculus, ScalarWeighted, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
+Open nodes (33): ScalarCalculus, ScalarWeighted, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
 R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
-N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve, N12.
+N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
 Lean statements follow the manuscript and are not frozen: Tool-OneHighFactor (Lemmas 7.2, 7.3),
@@ -100,8 +112,8 @@ Tool-R10a-Inner (Lemma 6.3), Tool-R10a-Outer (Lemmas 6.4, 6.5).
 
 One task file each in `docs/tasks/` (40 in total).
 
-Whether each node can be derived from its hypotheses is tested by its line; `N12` and `Solve`
-are the first real tests of the chain. `R10a` has one frozen statement for the inner and the outer
+Whether each node can be derived from its hypotheses is tested by its line. `N12` has
+passed this test with its original statement; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
@@ -130,8 +142,23 @@ already exists in the tree.
 - Below 30,000: ScalarWeighted, Tame, Spaces, R05b, R06b, R06c, R08, R10b, R11b, R12, N01a, N01b,
   N04Root, N04Cubic, N04Transmission, N07b, N09N10, N12, and the five tool tasks.
 
+## Pick next
+
+Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
+R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
+
+A line that has finished takes the first task below whose branch does not exist:
+
+1. Standalone, mathlib only: N04Cubic, N04Transmission, N04Root.
+2. Pipelines whose first piece is running: R05b, R06b, R06c.
+3. Tools used by several nodes: Tool-OneHighFactor, Tool-SobolevExtension, Tool-AngularCommutator.
+4. Radial chain: R07, R09, R08, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
+5. Scalar and geometry of the iteration: ScalarWeighted, N01a, N01b, N01c, N02N03.
+6. Coordinates and inverse: N04a, N04b, N04Coordinates, N05, N06, N07a, N07b.
+7. Nonlinear: N08, N09N10.
+
 ## Next
 
-1. Lines on the 34 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
