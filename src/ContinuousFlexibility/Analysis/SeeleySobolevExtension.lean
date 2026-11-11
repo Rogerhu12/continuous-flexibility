@@ -42,9 +42,14 @@ def seeleySobolevCoreExtension (S : SeeleyData ι) :
       iteratedDeriv_seeleyExtend_of_contDiffOn S f.property.1 f.property.2 n]
     exact memLp_seeleyExtensionJet S (fun k => iteratedDerivWithin k f (Ici 0)) n
       (f.property.2 n)⟩
-  map_add' f g := Subtype.ext <| seeleyExtend_add S
-    (HalfLineSobolevCore.bounded f) (HalfLineSobolevCore.bounded g)
-  map_smul' c f := Subtype.ext <| seeleyExtend_smul S c f
+  map_add' f g := by
+    apply Subtype.ext
+    simpa only [Submodule.coe_add] using seeleyExtend_add S
+      (HalfLineSobolevCore.bounded f) (HalfLineSobolevCore.bounded g)
+  map_smul' c f := by
+    apply Subtype.ext
+    simpa only [Submodule.coe_smul, RingHom.id_apply] using
+      seeleyExtend_smul S c (f : ℝ → F)
 
 @[simp] theorem seeleySobolevCoreExtension_coe (S : SeeleyData ι)
     (f : HalfLineSobolevCore F) :

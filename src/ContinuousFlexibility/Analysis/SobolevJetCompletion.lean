@@ -66,7 +66,7 @@ theorem norm_sobolevCoreDerivative (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (n : ℕ) (f : smoothSobolevCore F s hs hu) :
     ‖sobolevCoreDerivative F s hs hu n f‖ =
       (eLpNorm (iteratedDerivWithin n f s) 2 (volume.restrict s)).toReal :=
-  Lp.norm_toLp _ _
+  Lp.norm_toLp (iteratedDerivWithin n f s) (f.property.2 n)
 
 /-- The actual finite derivative jet as a linear map. -/
 def sobolevCoreJet (s : Set ℝ) (hs : MeasurableSet s)
@@ -86,7 +86,8 @@ def sobolevCoreJet (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (k : ℕ) (f : smoothSobolevCore F s hs hu)
     (j : Fin (k + 1)) :
     sobolevCoreJet F s hs hu k f j = sobolevCoreDerivative F s hs hu j.val f :=
-  PiLp.toLp_apply _ _
+  PiLp.toLp_apply 2 (fun _ : Fin (k + 1) ↦ Lp F 2 (volume.restrict s))
+    (fun i ↦ sobolevCoreDerivative F s hs hu i.val f) j
 
 /-- This is precisely the usual derivative Sobolev norm on the smooth core. -/
 theorem norm_sobolevCoreJet_sq (s : Set ℝ) (hs : MeasurableSet s)
@@ -109,8 +110,9 @@ abbrev SobolevJetCompletion (s : Set ℝ) (hs : MeasurableSet s)
 
 instance sobolevJetCompletion_completeSpace (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (k : ℕ) : CompleteSpace (SobolevJetCompletion F s hs hu k) := by
-  dsimp only [SobolevJetCompletion, sobolevJetClosedSubmodule]
-  infer_instance
+  have hc : IsClosed (sobolevJetClosedSubmodule F s hs hu k : Set (SobolevJetAmbient F s k)) :=
+    (sobolevCoreJet F s hs hu k).range.isClosed_topologicalClosure
+  exact hc.isComplete.completeSpace_coe
 
 theorem sobolevJetClosedSubmodule_coe (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (k : ℕ) :
@@ -135,7 +137,12 @@ def coreToSobolevJet (s : Set ℝ) (hs : MeasurableSet s)
 @[simp] theorem norm_coreToSobolevJet (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (k : ℕ) (f : smoothSobolevCore F s hs hu) :
     ‖coreToSobolevJet F s hs hu k f‖ = ‖sobolevCoreJet F s hs hu k f‖ := by
-  rw [AddSubgroupClass.coe_norm, coreToSobolevJet_coe]
+  calc
+    ‖coreToSobolevJet F s hs hu k f‖ =
+        ‖(coreToSobolevJet F s hs hu k f : SobolevJetAmbient F s k)‖ :=
+      (Submodule.norm_coe _).symm
+    _ = ‖sobolevCoreJet F s hs hu k f‖ :=
+      congrArg norm (coreToSobolevJet_coe F s hs hu k f)
 
 theorem coreToSobolevJet_denseRange (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (k : ℕ) : DenseRange (coreToSobolevJet F s hs hu k) := by
@@ -149,7 +156,9 @@ theorem coreToSobolevJet_denseRange (s : Set ℝ) (hs : MeasurableSet s)
     · rintro ⟨f, rfl⟩
       exact ⟨coreToSobolevJet F s hs hu k f, ⟨f, rfl⟩,
         coreToSobolevJet_coe F s hs hu k f⟩
-  simpa only [hi] using (sobolevJetClosedSubmodule_coe F s hs hu k).subset
+  intro v hv
+  exact Eq.mpr (congrArg (fun A : Set (SobolevJetAmbient F s k) ↦ v ∈ closure A) hi)
+    ((sobolevJetClosedSubmodule_coe F s hs hu k).subset hv)
 
 variable {s t : Set ℝ} {hs : MeasurableSet s} {ht : MeasurableSet t}
   {hu : UniqueDiffOn ℝ s} {hv : UniqueDiffOn ℝ t}

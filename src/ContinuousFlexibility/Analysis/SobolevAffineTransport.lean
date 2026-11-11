@@ -39,7 +39,7 @@ theorem iteratedDerivWithin_affine {s t : Set ℝ} {f : ℝ → F}
         (hf.differentiableOn_iteratedDerivWithin (m := n)
           (ENat.natCast_lt_of_coe_top_le_withTop le_rfl n) ht _ (hmap hx)).hasDerivWithinAt
     have ha : HasDerivWithinAt (fun y : ℝ => a + c * y) c s x := by
-      simpa only [mul_one] using
+      simpa only [mul_one, id_eq] using
         (((hasDerivAt_id x).const_mul c).const_add a).hasDerivWithinAt
     rw [iteratedDerivWithin_succ, derivWithin_congr he (ih hx)]
     have hcomp := ((hd.scomp x ha hmap).const_smul (c ^ n)).derivWithin (hs x hx)
@@ -50,9 +50,14 @@ theorem measurePreserving_affine_orientation (a c : ℝ) (hc : c = 1 ∨ c = -1)
     MeasurePreserving (fun x : ℝ => a + c * x) volume volume := by
   rcases hc with rfl | rfl
   · simpa only [one_mul] using measurePreserving_add_left (volume : Measure ℝ) a
-  · simpa only [Function.comp_def, neg_one_mul] using
+  · have hneg : MeasurePreserving (fun x : ℝ => -x) volume volume := by
+      refine ⟨measurable_neg, ?_⟩
+      simpa only [neg_one_mul, inv_neg, inv_one, abs_neg, abs_one,
+        ENNReal.ofReal_one, one_smul] using
+        (Real.map_volume_mul_left (show (-1 : ℝ) ≠ 0 by norm_num))
+    simpa only [Function.comp_def, neg_one_mul] using
       (measurePreserving_add_left (volume : Measure ℝ) a).comp
-        (Measure.measurePreserving_neg (volume : Measure ℝ))
+        hneg
 
 theorem measurePreserving_affine_orientation_restrict {s t : Set ℝ}
     (ht : MeasurableSet t) (a c : ℝ) (hc : c = 1 ∨ c = -1)

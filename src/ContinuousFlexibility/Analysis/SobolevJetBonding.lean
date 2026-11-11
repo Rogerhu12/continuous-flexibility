@@ -35,7 +35,8 @@ private def sobolevJetTruncateLinear (s : Set ℝ) {k m : ℕ} (hkm : k ≤ m) :
 private theorem sobolevJetTruncateLinear_apply (s : Set ℝ) {k m : ℕ} (hkm : k ≤ m)
     (v : SobolevJetAmbient F s m) (j : Fin (k + 1)) :
     sobolevJetTruncateLinear F s hkm v j = v (Fin.castLE (Nat.succ_le_succ hkm) j) :=
-  PiLp.toLp_apply _ _
+  PiLp.toLp_apply 2 (fun _ : Fin (k + 1) ↦ Lp F 2 (volume.restrict s))
+    (fun i ↦ v (Fin.castLE (Nat.succ_le_succ hkm) i)) j
 
 private theorem norm_sobolevJetTruncateLinear_le (s : Set ℝ) {k m : ℕ} (hkm : k ≤ m)
     (v : SobolevJetAmbient F s m) : ‖sobolevJetTruncateLinear F s hkm v‖ ≤ ‖v‖ := by
