@@ -33,12 +33,13 @@ theorem r07_radialJacobi_cone_power {w u : ℝ → ℝ} {r c ν scale J : ℝ}
     radialJacobi J w u r = 0 := by
   have hd := r07_hasDerivAt_normalized_power hr hu
   have hwd : deriv w r = scale := by
-    rw [hw.deriv_eq, ((hasDerivAt_id r).const_mul scale).deriv, mul_one]
+    rw [hw.deriv_eq]
+    simpa only [id_eq, mul_one] using ((hasDerivAt_id r).const_mul scale).deriv
   have hflux : (fun x => w x * deriv u x) =ᶠ[𝓝 r] fun x => (scale * ν) * u x := by
     filter_upwards [hw, hu.eventuallyEq_nhds, Ioi_mem_nhds hr] with x hx hxg hx₀
-    rw [hx, (r07_hasDerivAt_normalized_power hx₀ hxg).deriv]
-    field_simp [hx₀.ne']
-    ring
+    have hxpos : 0 < x := hx₀
+    rw [hx, (r07_hasDerivAt_normalized_power hxpos hxg).deriv]
+    field_simp [hxpos.ne'] <;> ring
   unfold radialJacobi
   rw [hflux.deriv_eq, (hd.const_mul (scale * ν)).deriv, hwd, ← hν]
   ring
@@ -117,7 +118,10 @@ theorem exists_r07_cone_incoming {D : Statements.ReferenceData}
   refine ⟨u, hu, hu₀, hu₁, hup, fun r hr => hueq r hr, hd, ?_⟩
   intro r hr
   have hr' : r ∈ uIcc c p := ⟨hr.1.le, hr.2.le⟩
-  rw [(hcone r hr').deriv_eq, ((hasDerivAt_id r).const_mul scale).deriv, mul_one]
+  rw [(hcone r hr').deriv_eq]
+  have hdlinear : deriv (fun x : ℝ => scale * x) r = scale := by
+    simpa only [id_eq, mul_one] using ((hasDerivAt_id r).const_mul scale).deriv
+  rw [hdlinear]
   exact hs
 
 end ContinuousFlexibility.Radial

@@ -92,10 +92,8 @@ theorem continuousOn_morseChainGluedProfile_iteratedDeriv_model {T : Statements.
   have h₀g := hM₀.2.2 z.2 hz
   have he : morseChainGluedProfile G z.1.val z.1.property =ᶠ[𝓝 z.2]
       fun y => (Statements.morseChainAmplitude T z.1.val (T.index + k) / A₀) * M₀ y := by
-    refine hσg.trans ((Filter.Eventually.of_forall ?_).trans
-      (h₀g.symm.fun_comp (fun y =>
-        (Statements.morseChainAmplitude T z.1.val (T.index + k) / A₀) * y)))
-    intro y
+    filter_upwards [hσg, h₀g] with y hyσ hy₀
+    rw [hyσ, hy₀]
     change morseChainPhysicalModelHeight G
         (Statements.morseChainAmplitude T z.1.val (T.index + k)) side k y =
       (Statements.morseChainAmplitude T z.1.val (T.index + k) / A₀) *
@@ -103,6 +101,9 @@ theorem continuousOn_morseChainGluedProfile_iteratedDeriv_model {T : Statements.
     simp only [morseChainPhysicalModelHeight]
     field_simp [hA₀.ne']
     <;> ring
+  change iteratedDeriv n (morseChainGluedProfile G z.1.val z.1.property) z.2 =
+    (Statements.morseChainAmplitude T z.1.val (T.index + k) / A₀) *
+      iteratedDeriv n M₀ z.2
   rw [he.iteratedDeriv_eq n, iteratedDeriv_const_mul_field]
 
 /-- The same continuity holds on a physical join, including its two
@@ -145,6 +146,8 @@ theorem continuousOn_morseChainGluedProfile_iteratedDeriv_tail {T : Statements.M
           hneg.continuousOn ?_
         intro z hz
         rw [(G.joins k).2.2.1, (G.joins k).2.2.2]
+        change morseChainCellRightRadius T false (k + 1) ≤ -z.2 ∧
+          -z.2 ≤ morseChainCellLeftRadius T false k
         have h₁ : -morseChainCellLeftRadius T false k ≤ z.2 := hz.1
         have h₂ : z.2 ≤ -morseChainCellRightRadius T false (k + 1) := hz.2
         exact ⟨by linarith only [h₂], by linarith only [h₁]⟩
@@ -154,7 +157,7 @@ theorem continuousOn_morseChainGluedProfile_iteratedDeriv_tail {T : Statements.M
       intro z hz
       refine ⟨?_, neg_lt_neg hz.1⟩
       exact (D.enter_strictMono.monotone (Nat.zero_le N)).trans (neg_le_neg hz.2)
-    simpa only [neg_neg] using htail
+    simpa only [f, neg_neg, Bool.false_eq_true, ite_false] using htail
   · let D := morseChainRightProfileData G morseUnitHeights morseUnitHeights_admissible
     have hc : ContinuousOn f {z | z.2 ∈ Ico (D.enter 0) G.rightEnd} := by
       apply continuousOn_parametric_outward_pieces D
@@ -162,7 +165,10 @@ theorem continuousOn_morseChainGluedProfile_iteratedDeriv_tail {T : Statements.M
         exact continuousOn_morseChainGluedProfile_iteratedDeriv_model G true k n
       · intro k
         have h := continuousOn_morseChainGluedProfile_iteratedDeriv_join G true k n
-        simpa only [(G.joins k).1, (G.joins k).2.1] using h
+        change ContinuousOn f {z | z.2 ∈ Icc
+          (morseChainCellRightRadius T true k) (morseChainCellLeftRadius T true (k + 1))}
+        simpa only [f, morseChainCellRightRadius, morseChainCellLeftRadius,
+          (G.joins k).1, (G.joins k).2.1] using h
     refine hc.mono ?_
     intro z hz
     exact ⟨(D.enter_strictMono.monotone (Nat.zero_le N)).trans hz.1, hz.2⟩
@@ -197,6 +203,10 @@ theorem continuousOn_morseChain_family_iteratedDeriv_tail {T : Statements.MorseC
         (if side then Ico (morseChainCellLeftRadius T true N) G.rightEnd
           else Ioc 1 (morseChainCellRightRadius T false N))) := by
   apply continuousOn_prod_of_continuousOn_subtype
+  change ContinuousOn (fun z : Statements.HeightRatios × ℝ =>
+    iteratedDeriv n (w z.1.val) z.2)
+    {z | z.2 ∈ (if side then Ico (morseChainCellLeftRadius T true N) G.rightEnd
+      else Ioc 1 (morseChainCellRightRadius T false N))}
   have hset : {z : Statements.HeightRatios × ℝ |
       z.2 ∈ (if side then Ico (morseChainCellLeftRadius T true N) G.rightEnd
         else Ioc 1 (morseChainCellRightRadius T false N))} =

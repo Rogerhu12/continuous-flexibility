@@ -37,7 +37,6 @@ theorem morseChainAmplitude_update {T : Statements.MorseChainData} {σ : ℕ →
   unfold Statements.morseChainAmplitude
   rw [Finset.prod_update_of_mem hn, Finset.sdiff_singleton_eq_erase, ← hp]
   field_simp [hσn]
-  ring
 
 theorem morseChainHeightLogRatio_scale {T : Statements.MorseChainData}
     {σ τ : ℕ → ℝ} (hσ : ∀ i, 1 ≤ σ i ∧ σ i ≤ 2) {m : ℕ} {scale : ℝ}
@@ -134,8 +133,8 @@ theorem morseChain_tail_cell_or_join {T : Statements.MorseChainData}
       rw [(G.joins k).2.2.1, (G.joins k).2.2.2]
       have h₁ : -morseChainCellLeftRadius T false k ≤ -x := hj.1
       have h₂ : -x ≤ -morseChainCellRightRadius T false (k + 1) := hj.2
-      exact ⟨by simpa only [neg_neg] using neg_le_neg h₂,
-        by simpa only [neg_neg] using neg_le_neg h₁⟩
+      exact ⟨by simpa only [morseChainCellRightRadius, neg_neg] using neg_le_neg h₂,
+        by simpa only [morseChainCellLeftRadius, neg_neg] using neg_le_neg h₁⟩
   · let D := morseChainRightProfileData G morseUnitHeights morseUnitHeights_admissible
     obtain ⟨k, hk, hm | hj⟩ := morseOutward_piece_exists_ge D N hx.1 hx.2
     · exact ⟨k, hk, Or.inl hm⟩
@@ -158,9 +157,8 @@ theorem morseChainGluedProfile_scale_tail_germ {T : Statements.MorseChainData}
   obtain ⟨k, hk, hm | hj⟩ := morseChain_tail_cell_or_join G side N hx
   · have hτg := morseChainGluedProfile_model_germ G τ hτ side k hm
     have hσg := morseChainGluedProfile_model_germ G σ hσ side k hm
-    refine hτg.trans ((Filter.Eventually.of_forall ?_).trans
-      (hσg.symm.fun_comp (fun z => scale * z)))
-    intro y
+    filter_upwards [hτg, hσg] with y hyτ hyσ
+    rw [hyτ, hyσ]
     simp only [morseChainPhysicalModelHeight, hA k hk]
     ring
   · have hdep : N ≤ morseChainJoinDeparture side k := by

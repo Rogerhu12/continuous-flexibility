@@ -68,11 +68,14 @@ theorem exists_r07_cone_middle {a b WL WR η : ℝ} {f : ℝ → ℝ}
     (hRg x hx).fun_comp (fun y => s * y)
   have hCd (s : ℝ) (x : ℝ) (hx : x ∈ Icc a b) :
       deriv (fun r => s * R r) x = s := by
-    rw [(hCg s x hx).deriv_eq, ((hasDerivAt_id x).const_mul s).deriv, mul_one]
+    rw [(hCg s x hx).deriv_eq]
+    simpa only [id_eq, mul_one] using ((hasDerivAt_id x).const_mul s).deriv
   have hCLj : CL jL = WL := by
+    change sL * R jL = WL
     rw [(hCg sL jL hjLmem).eq_of_nhds]
     exact div_mul_cancel₀ _ hjL₀.ne'
   have hCRj : CR jR = WR := by
+    change sR * R jR = WR
     rw [(hCg sR jR hjRmem).eq_of_nhds]
     exact div_mul_cancel₀ _ hjR₀.ne'
   obtain ⟨L, hL, hLp, hLa, hLj, hLd⟩ := exists_r07_positive_bridge hajL hf hCL hfp hCLp
@@ -80,7 +83,10 @@ theorem exists_r07_cone_middle {a b WL WR η : ℝ} {f : ℝ → ℝ}
     (by rw [hCLj]; exact hWL)
   obtain ⟨B, hB, hBp, hBL, hBR, hBd⟩ := exists_r07_positive_bridge hcLcR hCL hCR hCLp hCRp
     (by rw [hCd sL cL hcLmem]; exact hsL) (by rw [hCd sR cR hcRmem]; exact hsR)
-    (by rw [(hCg sL cL hcLmem).eq_of_nhds, (hCg sR cR hcRmem).eq_of_nhds]; exact hgap)
+    (by
+      change sL * R cL < sR * R cR
+      rw [(hCg sL cL hcLmem).eq_of_nhds, (hCg sR cR hcRmem).eq_of_nhds]
+      exact hgap)
   obtain ⟨U, hU, hUp, hUj, hUb, hUd⟩ := exists_r07_positive_bridge hjRb hCR hf hCRp hfp
     (by rw [hCd sR jR hjRmem]; exact hsR) (hfd b (right_mem_Icc.mpr hab.le))
     (by rw [hCRj]; exact hWR)

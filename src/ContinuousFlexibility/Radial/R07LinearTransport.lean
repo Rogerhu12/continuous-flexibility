@@ -47,7 +47,9 @@ theorem continuous_linearODE_endpoint {X E : Type*} [TopologicalSpace X]
     δ p * exp (K p * (b - a)) + ε p / K p * (exp (K p * (b - a)) - 1)
   have hK (p : X) : 0 < K p := add_pos_of_nonneg_of_pos (norm_nonneg (B p)) zero_lt_one
   have hδc : Continuous δ := (hinit.sub continuous_const).norm
-  have hKc : Continuous K := hBc.norm.add_const 1
+  have hKc : Continuous K := by
+    change Continuous (fun p : X => ‖B p‖ + (1 : ℝ))
+    exact (hBc.norm : Continuous (fun p : X => ‖B p‖)).add continuous_const
   have hεc : Continuous ε := (hBc.sub continuous_const).norm.mul_const ‖V‖
   have hexp : Continuous (fun p => exp (K p * (b - a))) :=
     Real.continuous_exp.comp (hKc.mul_const (b - a))

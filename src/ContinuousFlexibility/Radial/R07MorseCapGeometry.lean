@@ -88,10 +88,13 @@ theorem r07CapRadius_deriv (right : Bool) (A B s t : ℝ) {r : ℝ → ℝ}
     deriv (r07CapRadius right A B s r) t =
       s * deriv r (r07CapPoint right A B t) * r07OutwardSign right := by
   have hp : HasDerivAt (r07CapPoint right A B) (r07OutwardSign right) t := by
-    simpa only [r07CapPoint, mul_one] using
+    change HasDerivAt (fun x : ℝ => r07CapCut right A B + r07OutwardSign right * x)
+      (r07OutwardSign right) t
+    simpa only [id_eq, mul_one] using
       ((hasDerivAt_id t).const_mul (r07OutwardSign right)).const_add (r07CapCut right A B)
   have h := ((hr.differentiable (by simp) (r07CapPoint right A B t)).hasDerivAt.comp t hp).const_mul s
-  simpa only [r07CapRadius, Function.comp_apply, mul_assoc] using h.deriv
+  change deriv (fun y : ℝ => s * r (r07CapPoint right A B y)) t = _
+  simpa only [Function.comp_apply, mul_assoc] using h.deriv
 
 theorem r07CapRadius_second (right : Bool) (A B s t : ℝ) {r : ℝ → ℝ}
     (hr : ContDiff ℝ ∞ r) :
@@ -240,8 +243,8 @@ theorem r07_model_cap_slope_bound (right : Bool) {A B j : ℝ} {r : ℝ → ℝ}
       (j * sqrt A + 1 / morseShortLeftCapLength) ≤ _
     calc
       _ ≤ (8 / (j ^ 2 * A)) * (j * sqrt A + 6) :=
-        mul_le_mul hratio' (add_le_add_left r07_short_cap_inverse_length_le _)
-          (by positivity) (by positivity)
+        mul_le_mul hratio' (add_le_add le_rfl r07_short_cap_inverse_length_le)
+          (add_nonneg hja.le (one_div_pos.mpr morseShortLeftCapLength_pos).le) (by positivity)
       _ = 8 / (j * sqrt A) + 48 / (j * sqrt A) ^ 2 := by
         set a := sqrt A with haDef
         have ha₂ : a ^ 2 = A := sq_sqrt hA.le

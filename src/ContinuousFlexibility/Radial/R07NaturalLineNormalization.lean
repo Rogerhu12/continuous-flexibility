@@ -49,9 +49,9 @@ theorem tailNaturalLine_normalized_spans {T : Statements.DeepTailData}
   obtain ⟨b, hb⟩ := hspan v hv
   have hbd : DifferentiableAt ℝ base T.entrance := hbase.1.differentiableAt (by simp)
   have hU := cauchyData_eq_of_eqOn_Ioo_right hgap (hu.1.differentiableAt (by simp))
-    (differentiableAt_const.mul hbd) ha
+    (hbd.const_mul a) ha
   have hV := cauchyData_eq_of_eqOn_Ioo_right hgap (hv.1.differentiableAt (by simp))
-    (differentiableAt_const.mul hbd) hb
+    (hbd.const_mul b) hb
   have hone : a * base T.entrance = 1 := hU.1.symm.trans hu₀
   have heq : EqOn v (fun x => v T.entrance * u x) (Ioo T.entrance T.endpoint) := by
     intro x hx
@@ -62,7 +62,7 @@ theorem tailNaturalLine_normalized_spans {T : Statements.DeepTailData}
       _ = (b * base T.entrance) * (a * base x) := by ring
   refine ⟨heq, ?_⟩
   have hd := (cauchyData_eq_of_eqOn_Ioo_right hgap (hv.1.differentiableAt (by simp))
-    (differentiableAt_const.mul (hu.1.differentiableAt (by simp))) heq).2
+    ((hu.1.differentiableAt (by simp)).const_mul (v T.entrance)) heq).2
   simpa only [deriv_const_mul_field] using hd
 
 /-- Two natural solutions with entrance value one have the same natural

@@ -259,7 +259,7 @@ theorem r07_deepTail_entrance_lt_endpoint {T : MorseChainData} {D : ReferenceDat
       (r07DeepTailData T D right j start η K).endpoint := by
   have hlt := r07_outwardLog_lt_endpoint (r07_realization_geometry h) right
     (r07_deepTail_entrance_core h right j hstart η K)
-  simpa only [r07_outwardLog_radius] using hlt
+  simpa only [r07DeepTailData, r07_outwardLog_radius] using hlt
 
 theorem r07_deepTail_nodes_tendsto {T : MorseChainData} {D : ReferenceData}
     {σ C : ℕ → ℝ} (h : MorseChainRealization T σ D C)
