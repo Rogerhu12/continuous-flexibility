@@ -42,7 +42,8 @@ private theorem mixedComposition_fderiv_term
       iteratedDeriv (n + 1) F (u p) * fderiv ℝ u p v * (∏ i, g i p) +
         ∑ i, iteratedDeriv n F (u p) * fderiv ℝ (g i) p v *
           ∏ j ∈ Finset.univ.erase i, g j p := by
-  have hc := (composition_iteratedDeriv_contDiff hF n).comp hu
+  have hc : ContDiff ℝ ∞ (fun q => iteratedDeriv n F (u q)) := by
+    simpa only [Function.comp_def] using (composition_iteratedDeriv_contDiff hF n).comp hu
   have hp : ContDiff ℝ ∞ (fun q => ∏ i, g i q) :=
     contDiff_prod (fun i _ => hg i)
   rw [fderiv_fun_mul (hc.differentiable (by simp) p) (hp.differentiable (by simp) p)]
@@ -124,7 +125,9 @@ def MixedCompositionLeibniz.step {a b : ℕ} (e : MixedCompositionLeibniz a b)
     have heq : mixedDerivative a b (fun q => F (u q)) =
         fun q => ∑ t : e.Index, iteratedDeriv (e.arity t) F (u q) * ∏ i, g t i q :=
       funext (e.formula F hF u hu)
-    rw [← mixedProduct_axis_jet (hF.comp hu) a b radial p, heq]
+    have hcomp : ContDiff ℝ ∞ (fun q => F (u q)) := by
+      simpa only [Function.comp_def] using hF.comp hu
+    rw [← mixedProduct_axis_jet hcomp a b radial p, heq]
     rw [fderiv_fun_sum (fun t _ => (hterm t).differentiable (by simp) p)]
     simp only [sum_apply]
     rw [Fintype.sum_sigma]

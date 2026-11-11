@@ -87,7 +87,10 @@ theorem mixedDerivative_radial_mul
       (contDiff_mixedDerivative hf 0 b).comp (contDiff_id.prodMk contDiff_const)
   unfold mixedDerivative
   simp_rw [hinner]
-  rw [Fin.sum_univ_eq_sum_range]
+  rw [Fin.sum_univ_eq_sum_range
+    (fun i : ℕ => (a.choose i : ℝ) * iteratedDeriv i g p.1 *
+      iteratedDeriv (a - i) (fun r => iteratedDeriv b (fun θ => f (r, θ)) p.2) p.1)
+    (a + 1)]
   exact iteratedDeriv_mul (hg.contDiffAt.of_le (by simp)) (hslice.contDiffAt.of_le (by simp))
 
 /-- A radial multiplier with one fixed material-envelope power has that
@@ -114,10 +117,10 @@ theorem weightedRadialMultiplier_jet_bound
   let coefficient : Fin (a + 1) → PolarPoint → ℝ := fun i p =>
     (a.choose i.val : ℝ) * iteratedDeriv i.val g p.1
   have hc (i : Fin (a + 1)) : AEStronglyMeasurable (coefficient i) materialCylinderMeasure := by
-    have hd : ContDiff ℝ ∞ (fun p : PolarPoint => iteratedDeriv i.val g p.1) := by
-      simpa only [mixedDerivative, iteratedDeriv_zero] using
-        contDiff_mixedDerivative (hg.comp contDiff_fst) i.val 0
-    exact (hd.continuous.const_mul _).aestronglyMeasurable
+    have hd : Continuous (fun p : PolarPoint => iteratedDeriv i.val g p.1) := by
+      simpa only [Function.comp_def] using
+        (ContDiff.continuous_iteratedDeriv i.val hg (by simp)).comp continuous_fst
+    exact (hd.const_mul _).aestronglyMeasurable
   have hcb (i : Fin (a + 1)) (p : PolarPoint) :
       |coefficient i p| ≤ C i * T.M (T.radius p.1) ^ r := by
     dsimp [coefficient, C]

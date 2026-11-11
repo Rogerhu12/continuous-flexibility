@@ -33,6 +33,7 @@ theorem EndpointFlat.div_id {f : ℝ → ℝ} (hf : EndpointFlat D f) (ha : 0 < 
       simp only [hf.2 t (Or.inl ht.le), zero_div]
     · exact hf.1.contDiffAt.div contDiffAt_id hr
   · intro r hr
+    change f r / r = 0
     rw [hf.2 r hr, zero_div]
 
 theorem referenceProfile_deriv_div_radius_endpointFlat (hD : IsAccumulatingProfile D) :

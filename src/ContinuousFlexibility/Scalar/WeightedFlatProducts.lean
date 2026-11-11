@@ -75,8 +75,11 @@ private theorem scalarFlatValue_mixed_mul {D : ReferenceData} (a b : ℕ)
     | zero =>
       have hflat : scalarFlatValue D f := by
         simpa only [scalarFlatValue, mixedDerivative, iteratedDeriv_zero] using hf 0 0
-      simpa only [mixedDerivative, iteratedDeriv_zero] using
-        scalarFlatValue_mul_continuous hflat hcg.continuous
+      have he : mixedDerivative 0 0 (fun p => f p * g p) = (fun p => f p * g p) := by
+        funext p
+        simp only [mixedDerivative, iteratedDeriv_zero]
+      rw [he]
+      exact scalarFlatValue_mul_continuous hflat hcg.continuous
     | succ b ih =>
       have hcfθ : ContDiff ℝ ∞ (angularPartial f) :=
         contDiff_iff_contDiffAt.mpr fun p => contDiffAt_angularPartial hcf.contDiffAt (by simp)

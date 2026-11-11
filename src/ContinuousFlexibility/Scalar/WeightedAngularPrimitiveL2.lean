@@ -102,22 +102,22 @@ theorem scalarAngularPrimitive_memLp_and_norm_le {f : PolarPoint → ℝ}
     exact hG.comp_fst angleMeasure
   have hbound : ∀ᵐ p ∂materialCylinderMeasure,
       scalarAngularPrimitive f p ^ 2 ≤ G p.1 := by
-    filter_upwards [ae_restrict_mem (measurableSet_univ.prod measurableSet_Ioc)] with p hp
+    filter_upwards [ae_restrict_mem (MeasurableSet.prod measurableSet_univ measurableSet_Ioc)] with p hp
     exact scalarAngularPrimitive_sq_le hf.continuous p.1 ⟨hp.2.1.le, hp.2.2⟩
   have hFint : Integrable (fun p => scalarAngularPrimitive f p ^ 2)
       materialCylinderMeasure := by
     apply hGp.mono' ((scalarAngularPrimitive_contDiff hf).pow 2).continuous.aestronglyMeasurable
     filter_upwards [hbound] with p hp
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hp
+    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (scalarAngularPrimitive f p))] using hp
   have hF : MemLp (scalarAngularPrimitive f) 2 materialCylinderMeasure :=
     (memLp_two_iff_integrable_sq
       (scalarAngularPrimitive_contDiff hf).continuous.aestronglyMeasurable).mpr hFint
   have hGint : (∫ p, G p.1 ∂materialCylinderMeasure) =
       Real.pi ^ 2 * ∫ p, f p ^ 2 ∂materialCylinderMeasure := by
     simp only [materialCylinderMeasure_eq_prod]
-    rw [integral_prod (hG.comp_fst angleMeasure)]
+    rw [integral_prod (fun p : PolarPoint => G p.1) (hG.comp_fst angleMeasure)]
     simp only [scalar_integral_angle_const, G, ← mul_assoc, ← pow_two]
-    rw [integral_const_mul, ← integral_prod hsq]
+    rw [integral_const_mul, ← integral_prod (fun p : PolarPoint => f p ^ 2) hsq]
   have hint : (eLpNorm (scalarAngularPrimitive f) 2 materialCylinderMeasure).toReal ^ 2 ≤
       Real.pi ^ 2 * (eLpNorm f 2 materialCylinderMeasure).toReal ^ 2 := by
     rw [scalar_eLpNorm_two_sq hF, scalar_eLpNorm_two_sq hmem, ← hGint]
