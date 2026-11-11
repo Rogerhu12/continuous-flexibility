@@ -64,7 +64,7 @@ theorem finiteDiagonal_weight_norm_le (s : Finset ℕ) (w : ℕ → ℝ) (v : lp
     ext n
     by_cases hn : n ∈ s <;>
       simp only [finiteDiagonal_apply, hn, if_true, if_false,
-        angularMultiplierVector_apply, one_smul]
+        angularMultiplierVector_apply, RCLike.ofReal_eq_complex_ofReal, one_smul]
   rw [heq, ← norm_angularMultiplierVector w v hv]
   exact finiteDiagonal_projection_norm_le s _
 
@@ -77,8 +77,8 @@ theorem memAngularWeight_finiteDiagonal (s : Finset ℕ) (w : ℕ → ℝ) (v : 
     by_cases hn : n ∈ s <;>
       simp only [finiteDiagonal_apply, hn, if_true, if_false, one_smul, smul_zero]
   unfold MemAngularWeight
-  rw [heq]
-  exact lp.memℓp _
+  simpa only [RCLike.ofReal_eq_complex_ofReal, ← heq] using
+    lp.memℓp (finiteDiagonal s (fun n => (w n : ℂ)) v)
 
 theorem angularWeightNorm_finiteDiagonal (s : Finset ℕ) (w : ℕ → ℝ) (v : lp E 2) :
     angularWeightNorm (𝕜 := ℂ) w (finiteDiagonal s (fun _ => 1) v) =
@@ -88,7 +88,7 @@ theorem angularWeightNorm_finiteDiagonal (s : Finset ℕ) (w : ℕ → ℝ) (v :
   ext n
   by_cases hn : n ∈ s <;>
     simp only [finiteDiagonal_apply, angularMultiplierVector_apply,
-      hn, if_true, if_false, one_smul, smul_zero]
+      RCLike.ofReal_eq_complex_ofReal, hn, if_true, if_false, one_smul, smul_zero]
 
 /-- The canonical finite spectral projections converge in the base norm. -/
 theorem tendsto_finiteDiagonal_projection (v : lp E 2) :

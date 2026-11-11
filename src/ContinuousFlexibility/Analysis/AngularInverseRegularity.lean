@@ -27,7 +27,7 @@ theorem angularInverse_mem_sobolev_one (R K B : lp E 2 →L[𝕜] lp E 2)
     (hR : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
       R v ∈ angularFrequencyDomain (𝕜 := 𝕜))
     (hcomm : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
-      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative v) + K v)
+      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative (𝕜 := 𝕜) v) + K v)
     (hleft : ∀ v, B (v + R v) = v)
     (hright : ∀ f, B f + R (B f) = f)
     {f : lp E 2} (hf : MemAngularSobolev (𝕜 := 𝕜) 1 f) :
@@ -35,12 +35,12 @@ theorem angularInverse_mem_sobolev_one (R K B : lp E 2 →L[𝕜] lp E 2)
   let u : lp E 2 := B f
   have hfdom := mem_angularFrequencyDomain_of_sobolev hf
   have heq (N : ℕ) : angularYosidaDerivative (𝕜 := 𝕜) N u =
-      B (angularYosidaDerivative N f - angularYosida N (K (angularYosida N u))) := by
+      B (angularYosidaDerivative (𝕜 := 𝕜) N f - angularYosida (𝕜 := 𝕜) N (K (angularYosida (𝕜 := 𝕜) N u))) := by
     have h := congrArg (angularYosidaDerivative (𝕜 := 𝕜) N) (hright f)
     rw [map_add, angularYosidaDerivative_commutator R K hR hcomm] at h
     have h' : angularYosidaDerivative (𝕜 := 𝕜) N u +
-        R (angularYosidaDerivative N u) =
-        angularYosidaDerivative N f - angularYosida N (K (angularYosida N u)) := by
+        R (angularYosidaDerivative (𝕜 := 𝕜) N u) =
+        angularYosidaDerivative (𝕜 := 𝕜) N f - angularYosida (𝕜 := 𝕜) N (K (angularYosida (𝕜 := 𝕜) N u)) := by
       apply eq_sub_of_add_eq
       simpa only [u, add_assoc] using h
     rw [← h', hleft]
@@ -52,9 +52,9 @@ theorem angularInverse_mem_sobolev_one (R K B : lp E 2 →L[𝕜] lp E 2)
     apply (norm_sub_le _ _).trans
     apply add_le_add (norm_angularYosidaDerivative_le N hfdom)
     calc
-      ‖angularYosida (𝕜 := 𝕜) N (K (angularYosida N u))‖ ≤
-          ‖K (angularYosida N u)‖ := norm_angularYosida_le _ _
-      _ ≤ ‖K‖ * ‖angularYosida N u‖ := K.le_opNorm _
+      ‖angularYosida (𝕜 := 𝕜) N (K (angularYosida (𝕜 := 𝕜) N u))‖ ≤
+          ‖K (angularYosida (𝕜 := 𝕜) N u)‖ := norm_angularYosida_le _ _
+      _ ≤ ‖K‖ * ‖angularYosida (𝕜 := 𝕜) N u‖ := K.le_opNorm _
       _ ≤ ‖K‖ * ‖u‖ := mul_le_mul_of_nonneg_left (norm_angularYosida_le _ _) (norm_nonneg K)
   have hbdd : Bornology.IsBounded
       (Set.range (fun N => angularYosidaDerivative (𝕜 := 𝕜) N u)) := by
@@ -84,16 +84,16 @@ theorem angularInverse_derivative_eq (R K B : lp E 2 →L[𝕜] lp E 2)
     (hR : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
       R v ∈ angularFrequencyDomain (𝕜 := 𝕜))
     (hcomm : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
-      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative v) + K v)
+      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative (𝕜 := 𝕜) v) + K v)
     (hleft : ∀ v, B (v + R v) = v)
     (hright : ∀ f, B f + R (B f) = f)
     {f : lp E 2} (hu : B f ∈ angularFrequencyDomain (𝕜 := 𝕜)) :
     angularDerivative (𝕜 := 𝕜) (B f) =
-      B (angularDerivative f - K (B f)) := by
+      B (angularDerivative (𝕜 := 𝕜) f - K (B f)) := by
   have h := congrArg (angularDerivative (𝕜 := 𝕜)) (hright f)
   rw [angularDerivative_add hu (hR _ hu), hcomm _ hu] at h
-  have h' : angularDerivative (𝕜 := 𝕜) (B f) + R (angularDerivative (B f)) =
-      angularDerivative f - K (B f) := by
+  have h' : angularDerivative (𝕜 := 𝕜) (B f) + R (angularDerivative (𝕜 := 𝕜) (B f)) =
+      angularDerivative (𝕜 := 𝕜) f - K (B f) := by
     apply eq_sub_of_add_eq
     simpa only [add_assoc] using h
   rw [← h', hleft]
@@ -107,7 +107,7 @@ theorem angularInverse_preserves_sobolev (R K B : lp E 2 →L[𝕜] lp E 2)
     (hK : ∀ p v, MemAngularSobolev (𝕜 := 𝕜) p v →
       MemAngularSobolev (𝕜 := 𝕜) p (K v))
     (hcomm : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
-      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative v) + K v)
+      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative (𝕜 := 𝕜) v) + K v)
     (hleft : ∀ v, B (v + R v) = v)
     (hright : ∀ f, B f + R (B f) = f) :
     ∀ p f, MemAngularSobolev (𝕜 := 𝕜) p f → MemAngularSobolev (𝕜 := 𝕜) p (B f) := by

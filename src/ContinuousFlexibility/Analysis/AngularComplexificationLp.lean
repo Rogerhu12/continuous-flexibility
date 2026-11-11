@@ -95,6 +95,7 @@ def lpEquiv : AngularComplexification (lp E 2) ≃ₗᵢ[ℂ]
         lp.coeFn_smul, lp.coeFn_add, lp.coeFn_sub, Pi.smul_apply, Pi.add_apply, Pi.sub_apply,
         RingHom.id_apply]
   norm_map' u := by
+    change ‖lpMk u.re u.im‖ = ‖u‖
     apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
     rw [norm_lpMk_sq, norm_sq]
 
@@ -113,7 +114,8 @@ theorem memAngularWeight_lpRe {w : ℕ → ℝ}
     MemAngularWeight (𝕜 := ℝ) w (lpRe v) := by
   apply Memℓp.mono' hv
   intro n
-  simpa only [lpRe_apply, ofReal_smul, re_real_smul] using
+  simpa only [lpRe_apply, RCLike.ofReal_eq_complex_ofReal, RCLike.ofReal_real_eq_id,
+    id_eq, ofReal_smul, re_real_smul] using
     norm_re_le ((w n : ℂ) • v n)
 
 /-- A real spectral domain on the imaginary component follows from the complex domain. -/
@@ -123,7 +125,8 @@ theorem memAngularWeight_lpIm {w : ℕ → ℝ}
     MemAngularWeight (𝕜 := ℝ) w (lpIm v) := by
   apply Memℓp.mono' hv
   intro n
-  simpa only [lpIm_apply, ofReal_smul, im_real_smul] using
+  simpa only [lpIm_apply, RCLike.ofReal_eq_complex_ofReal, RCLike.ofReal_real_eq_id,
+    id_eq, ofReal_smul, im_real_smul] using
     norm_im_le ((w n : ℂ) • v n)
 
 /-- Pairing two real weighted vectors gives a complex weighted vector. -/
@@ -137,8 +140,10 @@ theorem memAngularWeight_lpMk {w : ℕ → ℝ} {x y : lp E 2}
     funext n
     apply AngularComplexification.ext <;>
       simp only [lpMk_apply, re_mk, im_mk, ofReal_smul, re_real_smul, im_real_smul,
-        angularMultiplierVector_apply]
-  exact heq.symm ▸ hpair
+        angularMultiplierVector_apply, RCLike.ofReal_real_eq_id, id_eq]
+  change Memℓp (fun n => (w n : ℂ) • lpMk x y n) 2
+  rw [heq]
+  exact hpair
 
 /-- Complex spectral-domain membership is exactly membership of both real components. -/
 theorem memAngularWeight_iff {w : ℕ → ℝ}
@@ -161,7 +166,8 @@ theorem angularMultiplierVector_eq_lpMk {w : ℕ → ℝ}
   funext n
   apply AngularComplexification.ext <;>
     simp only [angularMultiplierVector_apply, lpMk_apply, re_mk, im_mk,
-      lpRe_apply, lpIm_apply, ofReal_smul, re_real_smul, im_real_smul]
+      lpRe_apply, lpIm_apply, RCLike.ofReal_eq_complex_ofReal, RCLike.ofReal_real_eq_id,
+      id_eq, ofReal_smul, re_real_smul, im_real_smul]
 
 /-- The exact squared weighted norm splits into the two real squared norms. -/
 theorem angularWeightNorm_sq_eq {w : ℕ → ℝ}
@@ -320,8 +326,9 @@ theorem angularWeightNorm_lpExtend_le (T : lp E 2 →L[ℝ] lp F 2) {w z : ℕ �
     ← norm_angularMultiplierVector w _ him] at hright
   have h := norm_mk_le_two_term ha hc hleft hright
   rw [← norm_angularMultiplierVector z _ hout, angularMultiplierVector_eq_lpMk hout,
-    norm_lpMk, lpRe_lpExtend, lpIm_lpExtend,
-    ← norm_angularMultiplierVector w _ hv, angularMultiplierVector_eq_lpMk hv, norm_lpMk]
+    norm_lpMk]
+  simp only [lpRe_lpExtend, lpIm_lpExtend]
+  rw [← norm_angularMultiplierVector w _ hv, angularMultiplierVector_eq_lpMk hv, norm_lpMk]
   simpa only [← norm_lpMk, lpMk_re_im] using h
 
 end Operators

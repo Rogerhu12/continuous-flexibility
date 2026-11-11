@@ -20,7 +20,7 @@ theorem angularReciprocalBump_eigenvalue (n m : ℕ) :
     angularReciprocalBump n (angularResolventEigenvalue m) = if m = n then 1 else 0 := by
   by_cases hmn : m = n
   · subst m
-    simp only [angularReciprocalBump_self, if_pos rfl]
+    simp only [angularReciprocalBump_self, if_pos rfl, if_true]
   · simp only [angularReciprocalBump_other hmn, if_neg hmn]
 
 /-- The scalar finite spectral sum. -/

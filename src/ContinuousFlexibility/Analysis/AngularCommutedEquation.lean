@@ -29,12 +29,12 @@ def angularDerivativePower (p : ℕ) (v : lp E 2) : lp E 2 :=
 
 theorem angularDerivativePower_succ (p : ℕ) (v : lp E 2) :
     angularDerivativePower (𝕜 := 𝕜) (p + 1) v =
-      angularDerivativePower p (angularDerivative (𝕜 := 𝕜) v) :=
+      angularDerivativePower (𝕜 := 𝕜) p (angularDerivative (𝕜 := 𝕜) v) :=
   Function.iterate_succ_apply _ _ _
 
 theorem angularDerivativePower_add_order (p q : ℕ) (v : lp E 2) :
     angularDerivativePower (𝕜 := 𝕜) (p + q) v =
-      angularDerivativePower p (angularDerivativePower q v) :=
+      angularDerivativePower (𝕜 := 𝕜) p (angularDerivativePower (𝕜 := 𝕜) q v) :=
   Function.iterate_add_apply _ _ _ _
 
 theorem MemAngularSobolev.derivative_power {p q : ℕ} {v : lp E 2}
@@ -63,7 +63,7 @@ theorem angularDerivativePower_add (p : ℕ) {u v : lp E 2}
     (hu : MemAngularSobolev (𝕜 := 𝕜) p u)
     (hv : MemAngularSobolev (𝕜 := 𝕜) p v) :
     angularDerivativePower (𝕜 := 𝕜) p (u + v) =
-      angularDerivativePower p u + angularDerivativePower p v := by
+      angularDerivativePower (𝕜 := 𝕜) p u + angularDerivativePower (𝕜 := 𝕜) p v := by
   ext n
   rw [angularDerivativePower_apply p _ (MemAngularWeight.add hu hv)]
   simp only [lp.coeFn_add, Pi.add_apply, angularDerivativePower_apply p u hu,
@@ -111,12 +111,12 @@ theorem angularDerivativePower_commutator (R K : lp E 2 →L[𝕜] lp E 2)
     (hK : ∀ p v, MemAngularSobolev (𝕜 := 𝕜) p v →
       MemAngularSobolev (𝕜 := 𝕜) p (K v))
     (hcomm : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
-      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative v) + K v)
+      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative (𝕜 := 𝕜) v) + K v)
     (p : ℕ) (v : lp E 2) (hv : MemAngularSobolev (𝕜 := 𝕜) p v) :
     angularDerivativePower (𝕜 := 𝕜) p (R v) =
-      R (angularDerivativePower p v) +
+      R (angularDerivativePower (𝕜 := 𝕜) p v) +
         ∑ k ∈ Finset.range p,
-          angularDerivativePower k (K (angularDerivativePower (p - 1 - k) v)) := by
+          angularDerivativePower (𝕜 := 𝕜) k (K (angularDerivativePower (𝕜 := 𝕜) (p - 1 - k) v)) := by
   induction p generalizing v with
   | zero => simp only [angularDerivativePower_zero, Finset.range_zero, Finset.sum_empty, add_zero]
   | succ p ih =>
@@ -127,9 +127,9 @@ theorem angularDerivativePower_commutator (R K : lp E 2 →L[𝕜] lp E 2)
         angularDerivativePower_add p (hR p _ hDv) (hK p v (hv.of_le (by omega))), ih _ hDv]
       have hsum : (∑ k ∈ Finset.range p,
           angularDerivativePower (𝕜 := 𝕜) k
-            (K (angularDerivativePower (p - 1 - k) (angularDerivative (𝕜 := 𝕜) v)))) =
+            (K (angularDerivativePower (𝕜 := 𝕜) (p - 1 - k) (angularDerivative (𝕜 := 𝕜) v)))) =
           ∑ k ∈ Finset.range p,
-            angularDerivativePower (𝕜 := 𝕜) k (K (angularDerivativePower (p - k) v)) := by
+            angularDerivativePower (𝕜 := 𝕜) k (K (angularDerivativePower (𝕜 := 𝕜) (p - k) v)) := by
         apply Finset.sum_congr rfl
         intro k hk
         have hk' : k < p := Finset.mem_range.mp hk
@@ -147,14 +147,14 @@ theorem angularInverse_commuted_equation (R K B : lp E 2 →L[𝕜] lp E 2)
     (hK : ∀ p v, MemAngularSobolev (𝕜 := 𝕜) p v →
       MemAngularSobolev (𝕜 := 𝕜) p (K v))
     (hcomm : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
-      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative v) + K v)
+      angularDerivative (𝕜 := 𝕜) (R v) = R (angularDerivative (𝕜 := 𝕜) v) + K v)
     (hleft : ∀ v, B (v + R v) = v)
     (hright : ∀ f, B f + R (B f) = f)
     (p : ℕ) (f : lp E 2) (hf : MemAngularSobolev (𝕜 := 𝕜) p f) :
-    angularDerivativePower (𝕜 := 𝕜) p (B f) + R (angularDerivativePower p (B f)) =
-      angularDerivativePower p f -
+    angularDerivativePower (𝕜 := 𝕜) p (B f) + R (angularDerivativePower (𝕜 := 𝕜) p (B f)) =
+      angularDerivativePower (𝕜 := 𝕜) p f -
         ∑ k ∈ Finset.range p,
-          angularDerivativePower k (K (angularDerivativePower (p - 1 - k) (B f))) := by
+          angularDerivativePower (𝕜 := 𝕜) k (K (angularDerivativePower (𝕜 := 𝕜) (p - 1 - k) (B f))) := by
   have hRdom : ∀ v, v ∈ angularFrequencyDomain (𝕜 := 𝕜) →
       R v ∈ angularFrequencyDomain (𝕜 := 𝕜) := by
     intro v hv

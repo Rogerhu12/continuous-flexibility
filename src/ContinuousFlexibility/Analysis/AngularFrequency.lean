@@ -246,7 +246,8 @@ def angularFrequency : lp E 2 →ₗ.[𝕜] lp E 2 where
       map_add' := by intro u v; ext n; exact smul_add _ _ _
       map_smul' := by intro c v; ext n; exact smul_comm _ _ _ }
 
-@[simp] theorem angularFrequency_apply (v : angularFrequencyDomain (𝕜 := 𝕜) (E := E))
+@[simp] theorem angularFrequency_apply
+    (v : (angularFrequency (𝕜 := 𝕜) (E := E)).domain)
     (n : ℕ) : angularFrequency v n = ((n : ℝ) : 𝕜) • (v : lp E 2) n := rfl
 
 theorem mem_angularFrequencyDomain_of_sobolev {v : lp E 2}
