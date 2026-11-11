@@ -70,6 +70,7 @@ theorem r07_deepTail_hypotheses {T : MorseChainData} {D : ReferenceData} {σ C :
     have hbign : K ≤ (exp (-2) * Q.Λ / (C 0) ^ 2) * exp ((start + n : ℕ) : ℝ) :=
       hbig.trans (mul_le_mul_of_nonneg_left (exp_le_exp.mpr hcast) (by positivity))
     refine ⟨ho.1, ho.2, hs.trans hsmalln, hbign.trans hn.1, hbign.trans hnext.1, ?_⟩
+    change tailGapMass Q n ≤ η * min (tailMass Q n) (tailMass Q (n + 1))
     rw [mul_min_of_nonneg _ _ hη.le]
     exact le_min
       (hn.2.1.trans (mul_le_mul_of_nonneg_right hratn (hmass n)))
@@ -89,7 +90,7 @@ theorem r07_deepTail_entrances_tendsto {T : MorseChainData} {D : ReferenceData}
       have hprev : T.index ≤ n - 1 := by omega
       have he := (r07_chain_resistance_ends h hprev).2
       have hn1 : 1 ≤ n := by omega
-      simpa only [Nat.sub_add_cancel hn1] using he.symm
+      simpa only [Function.comp_def, Nat.sub_add_cancel hn1] using he.symm
     exact (hr.log hD.1.ne').neg
   · exact ((h.2.2.2.2.2.2.1 true).1.log (hD.1.trans hD.2.1).ne')
 
@@ -138,7 +139,7 @@ theorem r07_exists_uniform_deepTailHypotheses
     have he := r07_deepTail_entrances_tendsto h₀ right j η K
     have hd : Tendsto (fun n => (r07DeepTailData T D₀ right j n η K).endpoint -
         (r07DeepTailData T D₀ right j n η K).entrance) atTop (𝓝 0) := by
-      simpa only [sub_self] using
+      simpa only [D₀, r07DeepTailData, sub_self] using
         (tendsto_const_nhds (x := r07OutwardLog right (if right then D₀.b else D₀.a))).sub he
     exact (hd.eventually (eventually_lt_nhds (by positivity : 0 < (2 * (j : ℝ) ^ 2)⁻¹))).mono
       (fun _ hn => hn.le)

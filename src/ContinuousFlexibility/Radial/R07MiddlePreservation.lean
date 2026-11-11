@@ -72,7 +72,10 @@ theorem r07MiddleReferenceFamily_natural_iff {T : MorseChainData}
       else e ≤ morseChainCellRightRadius T false 0) (j : ℕ) (v : ℝ → ℝ) :
     RadialNaturalTail (r07MiddleReferenceFamily G M phi σ) side j e v ↔
       RadialNaturalTail (morseChainReferenceFamily G phi σ) side j e v := by
-  apply radialNaturalTail_scale_iff (scale := 1) rfl rfl (by norm_num)
+  refine radialNaturalTail_scale_iff
+    (D := morseChainReferenceFamily G phi σ)
+    (E := r07MiddleReferenceFamily G M phi σ)
+    (right := side) (entry := e) (scale := 1) rfl rfl (by norm_num) ?_ j v
   intro r hr
   have hout : r ≤ morseChainCellRightRadius T false 0 ∨ morseChainCellLeftRadius T true 0 ≤ r := by
     cases side

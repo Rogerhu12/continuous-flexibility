@@ -112,7 +112,11 @@ theorem r07_geometry_join_log_contrast {T : MorseChainData}
   have hm : T.index ≤ m := Nat.le_add_right _ _
   have hn₁ : 1 ≤ n := by have := G.start_large; omega
   have hadj : m = n + 1 ∨ n = m + 1 := by
-    cases right <;> dsimp only [m, n, l, r, if_true, if_false, Bool.false_eq_true] <;> omega
+    cases right
+    · right
+      simp only [m, n, l, r, Bool.false_eq_true, ite_false, Nat.add_assoc]
+    · left
+      simp only [m, n, l, r, ite_true, Nat.add_assoc]
   have hcontrast := morseJoin_height_log_contrast T σ hσ hn₁ hn hm hadj
     (G.d_exact n) (G.d_exact m) hlp hrp hscale hL.2.2.2 hR.2.2.1
   have hWL : D.w (T.joinLeft right (T.index + k)) =
@@ -134,7 +138,8 @@ theorem r07_geometry_join_log_contrast {T : MorseChainData}
     simpa only [mul_assoc] using r07_realized_normalized_cell_profile G hreal right r _ hx
   rw [hWL, hWR]
   have he := hcontrast.2.2.1
-  cases right <;> simpa only [n, l, if_true, if_false, Bool.false_eq_true, Nat.add_assoc] using he
+  cases right <;>
+    simpa only [e, m, n, l, r, ite_true, ite_false, Bool.false_eq_true, Nat.add_assoc] using he
 
 /-- Uniform contrast and intermediate-height bounds in the actual
 outward join coordinates. -/
@@ -155,9 +160,11 @@ theorem r07_actual_join_contrast {T : MorseChainData}
   obtain ⟨hn, hn', _, haEq, hbEq, _⟩ := morseRealizedJoin_endpoints hreal right m hm
   have horder (i : ℕ) (hi : T.index ≤ i) := (hreal.2.2.1 right i hi).2.1.le
   have haCore : a ∈ radialCore D := by
+    change T.joinLeft right m ∈ radialCore D
     rw [haEq]
     exact hreal.radius_mem_core right _ hn _ (right_mem_Icc.mpr (horder _ hn))
   have hbCore : b ∈ radialCore D := by
+    change T.joinRight right m ∈ radialCore D
     rw [hbEq]
     exact hreal.radius_mem_core right _ hn' _ (left_mem_Icc.mpr (horder _ hn'))
   have hwp : ∀ x ∈ Icc a b, 0 < D.w x := fun x hx =>

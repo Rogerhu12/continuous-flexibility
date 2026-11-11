@@ -114,7 +114,9 @@ theorem continuous_radialCauchyData_transport {X : Type*} [TopologicalSpace X]
   have hF := continuous_radialFluxState_transport j hw hu h₀ h₁ hwn hrn hode hinit₀ hinit₁
   have hwb : Continuous (fun p => w p b) :=
     h₀.comp_continuous (continuous_id.prodMk continuous_const) (fun _ => right_mem_uIcc)
-  have hq := hF.snd.div hwb (fun p => hwn p b right_mem_uIcc)
+  have hq : Continuous (fun p : X =>
+      (r07RadialFluxState (w p) (u p) b).2 / w p b) :=
+    hF.snd.div hwb (fun p => hwn p b right_mem_uIcc)
   have he : (fun p => (r07RadialFluxState (w p) (u p) b).2 / w p b) =
       (fun p => deriv (u p) b) := by
     funext p

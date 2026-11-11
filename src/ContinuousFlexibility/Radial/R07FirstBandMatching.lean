@@ -122,9 +122,12 @@ theorem exists_r07_first_band_matching {T : MorseChainData}
   let contrast := f b / f a
   have hamp : 0 < amp := morseChainAmplitude_pos T sigma hsigma T.index
   have hD : RadialProfileGeometry D := by
+    change RadialProfileGeometry (r07MiddleReferenceFamily G H.middle phi sigma)
     rw [r07MiddleReferenceFamily_admissible G H.middle phi sigma hsigma]
     exact r07MiddlePatchedProfile_geometry G hM sigma hsigma phi 0 0 hPhi
   have hInside (x : ℝ) (hx : x ∈ Icc a b) : D.w =ᶠ[𝓝 x] fun r => amp * H.middle r := by
+    change (r07MiddleReferenceFamily G H.middle phi sigma).w =ᶠ[𝓝 x]
+      fun r => amp * H.middle r
     rw [r07MiddleReferenceFamily_admissible G H.middle phi sigma hsigma]
     exact (r07MiddlePatchedProfile_germs G hM sigma hsigma).2 x hx
   have hCore (x : ℝ) (hx : x ∈ Icc a b) : x ∈ radialCore D :=

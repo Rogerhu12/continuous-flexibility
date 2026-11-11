@@ -41,7 +41,7 @@ theorem r07_deepPhysicalEntrance_after_entry {T : MorseChainData} {D : Reference
     have hf : morseChainResistanceEnd T false start =
         T.radius false (start - 1) (T.leftX false (start - 1)) := by
       simpa only [hsuc] using (r07_chain_resistance_ends h hp).2
-    let P := morseChainLeftProfileData G morseUnitHeights morseUnitHeights_admissible
+    let P := morseChainLeftProfileData G (fun _ => 1) (fun _ => ⟨le_rfl, by norm_num⟩)
     have hm := P.enter_strictMono.monotone
       (show n - T.index ≤ start - 1 - T.index by omega)
     have hle : T.radius false (start - 1) (T.rightX false (start - 1)) ≤
@@ -53,7 +53,7 @@ theorem r07_deepPhysicalEntrance_after_entry {T : MorseChainData} {D : Reference
     change morseChainResistanceEnd T false start < T.radius false n (T.rightX false n)
     rw [hf]
     exact (hc.1.trans hc.2).trans_le hle
-  · let P := morseChainRightProfileData G morseUnitHeights morseUnitHeights_admissible
+  · let P := morseChainRightProfileData G (fun _ => 1) (fun _ => ⟨le_rfl, by norm_num⟩)
     have hm := P.enter_strictMono (show n - T.index < start - T.index by omega)
     change morseChainCellLeftRadius T true (n - T.index) <
       morseChainCellLeftRadius T true (start - T.index) at hm
