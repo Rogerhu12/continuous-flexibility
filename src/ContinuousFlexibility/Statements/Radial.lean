@@ -564,11 +564,17 @@ def RadialReturnMargins (D : ReferenceData) : Prop :=
 
 def RadialTrueBorder (D : ReferenceData) : Prop :=
   ContDiff ℝ ∞ D.chi ∧ HasCompactSupport D.chi ∧
-    Function.support D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r} ∧
+    tsupport D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r} ∧
     (∫ r in D.a..D.b, referenceColumn D r * D.phi r) = 1 ∧
     ContDiff ℝ ∞ D.chiLeft ∧
     (∃ ε : ℝ, 0 < ε ∧ (∀ r ∈ Ioo D.a (D.a + ε), D.chiLeft r = 1) ∧
       (∀ r ∈ Ioo (D.b - ε) D.b, D.chiLeft r = 0))
+
+/-- The strict support certificate also supplies the ordinary support
+inclusion used in pointwise arguments. -/
+theorem RadialTrueBorder.support_subset {D : ReferenceData} (hD : RadialTrueBorder D) :
+    Function.support D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r} :=
+  (subset_tsupport D.chi).trans hD.2.2.1
 
 /-- Geometric facts established when the central solution is joined to the
 selected tails, retained by every subsequent inverse construction.

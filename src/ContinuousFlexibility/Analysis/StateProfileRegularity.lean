@@ -54,7 +54,7 @@ theorem stateControlSum_zero_off_core {D : ReferenceData} {S : PhysicalSpacesDat
   obtain ⟨hInterval, _, _, _, _, hcontrol, _⟩ := hC
   have hzero (m : ℕ) : C.control m r = 0 := by
     by_contra hne
-    have hh := (hcontrol m).2.2 hne
+    have hh := (hcontrol m).2.2 (subset_tsupport (C.control m) hne)
     exact hr ⟨(hInterval m).1.trans hh.1, hh.2.trans (hInterval m).2.2⟩
   simp only [stateControlSum, hzero, mul_zero, tsum_zero]
 
