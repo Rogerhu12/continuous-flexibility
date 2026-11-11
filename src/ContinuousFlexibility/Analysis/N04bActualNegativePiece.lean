@@ -144,7 +144,7 @@ theorem n04b_exists_actual_negative_piece
       (fun q hq => (hInverseRegular q hq).continuousAt.continuousWithinAt)
       (n04b_actualRootClosedInverse_continuousOn hN hS hT hfield hz hs m side)
       (prod_mono Ioo_subset_Icc_self (Subset.rfl))
-      (by rw [hCanClosure]; exact Subset.rfl)
+      (by rw [hCanClosure])
   refine ⟨F, h, J, {
     closed_chart_eq := hFClosedEq
     closed_inverse_eq := hJClosedEq
