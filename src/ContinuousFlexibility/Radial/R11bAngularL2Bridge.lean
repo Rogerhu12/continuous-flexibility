@@ -60,11 +60,16 @@ theorem r11b_referenceMode_L2_bound {D : ReferenceData} {f : PolarPoint → ℝ}
       unfold cosineMode
       fun_prop))
   have hunit : angularAverage (fun θ => cosineMode j θ ^ 2) = 1 := by
-    simpa only [angularPairing, pow_two, if_pos rfl] using
+    simpa [angularPairing, pow_two] using
       angularPairing_cosineMode j j hj hj
   have h := r11b_memLp_angularCoefficient hf he
   rw [hunit, one_mul] at h
-  simpa only [referenceMode, radialAngularMean, angularAverage, one_div] using h
+  have hmode : referenceMode f j =
+      fun r => angularAverage (fun θ => f (r, θ) * cosineMode j θ) := by
+    funext r
+    simp only [referenceMode, radialAngularMean, angularAverage, one_div]
+  rw [hmode]
+  exact h
 
 theorem r11b_radialAngularMean_L2_bound {D : ReferenceData} {f : PolarPoint → ℝ}
     (hf : MemLp f 2 (radialPhysicalMeasure D)) :

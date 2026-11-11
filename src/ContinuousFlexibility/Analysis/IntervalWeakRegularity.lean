@@ -20,6 +20,8 @@ namespace ContinuousFlexibility.Analysis
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- A displayed continuous local derivative gives C¹ regularity on an open
 real set. -/
 theorem contDiffOn_one_of_hasDerivAt_of_continuousOn {s : Set ℝ} (hs : IsOpen s)
@@ -50,7 +52,7 @@ theorem exists_contDiffOn_one_rep_of_weak_divergence_Ioo {a b : ℝ}
     (hw.inv hwn).continuousOn
   let g : ℝ → ℝ := fun x => H x / w x
   have hg : ContinuousOn g (Ioo a b) := by
-    simpa only [g, div_eq_mul_inv] using hH.mul hInv
+    simpa only [g, div_eq_mul_inv, Pi.mul_apply] using hH.mul hInv
   let V : ℝ → ℝ := intervalLocalPrimitive g x₀
   have hVder (x : ℝ) (hx : x ∈ Ioo a b) : HasDerivAt V (g x) x :=
     hasDerivAt_intervalLocalPrimitive_of_continuousOn hg hx₀ hx

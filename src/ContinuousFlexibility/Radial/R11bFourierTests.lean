@@ -78,8 +78,8 @@ theorem r11b_radialTest_separated {D : ReferenceData} {φ e : ℝ → ℝ}
     RadialTest D (fun x : PolarPoint => φ x.1 * e x.2) := by
   refine ⟨(hφ.comp contDiff_fst).mul (he.comp contDiff_snd), ?_, ?_⟩
   · intro x
-    change φ x.1 * e (x.2 + 2 * Real.pi) = φ x.1 * e x.2
-    rw [hper]
+    change φ (x.1 + 0) * e (x.2 + 2 * Real.pi) = φ x.1 * e x.2
+    rw [add_zero, hper]
   · refine ⟨tsupport φ, hφc, hφs, ?_⟩
     intro r hr θ
     change φ r * e θ = 0

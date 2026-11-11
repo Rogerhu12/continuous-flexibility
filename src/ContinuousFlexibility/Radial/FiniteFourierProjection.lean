@@ -45,6 +45,7 @@ theorem angularAverage_sq_finite_sum {ι : Type*} [DecidableEq ι]
         (fun θ => c i * e i θ) := by
     filter_upwards [Lp.coeFn_smul (c i) (v i),
       (memLp_angularMeanMeasure (he i i.property)).coeFn_toLp] with θ hsmul heq
+    change v i θ = e i θ at heq
     simpa only [Pi.smul_apply, smul_eq_mul, heq] using hsmul
   have hae : (p : ℝ → ℝ) =ᵐ[angularMeanMeasure]
       (fun θ => ∑ i ∈ s, c i * e i θ) := by
@@ -78,6 +79,7 @@ theorem angularAverage_sq_finite_sum {ι : Type*} [DecidableEq ι]
     _ = ‖p‖ ^ 2 := hp.symm
     _ = ∑ i ∈ s, c i ^ 2 := hnorm
 
+set_option backward.isDefEq.respectTransparency false in
 theorem finiteAngularProjection_memLp {ι : Type*} (s : Finset ι)
     (e : ι → ℝ → ℝ) (f : ℝ → ℝ)
     (he : ∀ i ∈ s, MemLp (e i) 2 (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))) :
@@ -85,7 +87,9 @@ theorem finiteAngularProjection_memLp {ι : Type*} (s : Finset ι)
       (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := by
   have hsum := memLp_finsetSum s
     (fun i hi => (he i hi).const_smul (angularPairing f (e i)))
-  simpa only [finiteAngularProjection, Pi.smul_apply, smul_eq_mul] using hsum
+  change MemLp (fun θ => ∑ i ∈ s, angularPairing f (e i) * e i θ) 2
+    (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))
+  simpa only [Pi.smul_apply, smul_eq_mul] using hsum
 
 theorem finiteAngularProjection_square_le {ι : Type*} [DecidableEq ι]
     (s : Finset ι) (e : ι → ℝ → ℝ) {f : ℝ → ℝ}
