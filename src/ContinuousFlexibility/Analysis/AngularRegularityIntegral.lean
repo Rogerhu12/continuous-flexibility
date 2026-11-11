@@ -49,7 +49,8 @@ theorem continuous_angular_radial_primitive
   have hi : Continuous (fun p : PolarPoint × ℝ => H p.2 p.1.2) :=
     hH.comp (continuous_snd.prodMk continuous_fst.snd)
   exact intervalIntegral.continuous_parametric_intervalIntegral_of_continuous
-    (f := fun p : PolarPoint => fun s => H s p.2) hi continuous_fst
+    (f := fun p : PolarPoint => fun s => H s p.2)
+    (by simpa only [Function.uncurry_def] using hi) continuous_fst
 
 theorem AngularRegular.radial_primitive {n : ℕ} {H : ℝ → ℝ → ℝ}
     (hH : AngularRegular n H) (a : ℝ) :

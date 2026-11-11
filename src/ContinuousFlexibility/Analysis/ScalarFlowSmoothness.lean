@@ -38,7 +38,8 @@ theorem scalar_flow_angularRegular_closedStrip
   have hdc : ContinuousOn (fun p : PolarPoint => d p.1 p.2) (Icc a b ×ˢ univ) := by
     apply (hd 0).continuous.continuousOn.congr
     intro p hp
-    exact (closedStripExtend_eq hab.le _ hp.1).symm
+    exact (closedStripExtend_eq hab.le (fun p : PolarPoint => d p.1 p.2)
+      (p := p) hp.1).symm
   have hGder (r θ : ℝ) : HasDerivAt (G r)
       (Real.exp (∫ s in a..ρ r, D s (G s θ))) θ := by
     have h := scalar_flow_hasDerivAt_exp_integral_on hab hdc hvd hF hinit hode (hρmem r) θ
@@ -76,6 +77,32 @@ theorem scalar_flow_angular_contDiff_of_angularRegular
   apply contDiff_iff_contDiffAt.mpr
   intro θ
   exact h.contDiffAt.congr_of_eventuallyEq
-    (Eventually.of_forall fun x => (closedStripExtend_eq hab.le _ ht).symm)
+    (Eventually.of_forall fun x => by
+      change F t x = closedStripExtend hab.le (fun p : PolarPoint => F p.1 p.2) (t, x)
+      exact (closedStripExtend_eq hab.le (fun p : PolarPoint => F p.1 p.2)
+        (p := (t, x)) ht).symm)
+
+/-- Every actual angular derivative is jointly continuous up to the
+closed radial endpoints. -/
+theorem scalar_flow_angular_iteratedDeriv_continuousOn
+    {a b : ℝ} {v d F : ℝ → ℝ → ℝ} (hab : a < b)
+    (hd : ∀ n, AngularRegular n
+      (fun r θ => closedStripExtend hab.le (fun p => d p.1 p.2) (r, θ)))
+    (hvd : ∀ t ∈ Icc a b, ∀ θ, HasDerivAt (v t) (d t θ) θ)
+    (hF : ContinuousOn (fun p : PolarPoint => F p.1 p.2) (Icc a b ×ˢ univ))
+    (hinit : ∀ θ, F a θ = θ)
+    (hode : ∀ θ t, t ∈ Ioo a b → HasDerivAt (fun s => F s θ) (v t (F t θ)) t)
+    (n : ℕ) :
+    ContinuousOn (fun p : PolarPoint => iteratedDeriv n (F p.1) p.2)
+      (Icc a b ×ˢ univ) := by
+  have hreg := scalar_flow_angularRegular_closedStrip hab hd hvd hF hinit hode n
+  apply hreg.iteratedDeriv_continuous.continuousOn.congr
+  intro p hp
+  have heq : (fun θ => closedStripExtend hab.le (fun q : PolarPoint => F q.1 q.2) (p.1, θ)) =
+      F p.1 := by
+    funext θ
+    exact closedStripExtend_eq hab.le (fun q : PolarPoint => F q.1 q.2)
+      (p := (p.1, θ)) hp.1
+  rw [heq]
 
 end ContinuousFlexibility.Analysis

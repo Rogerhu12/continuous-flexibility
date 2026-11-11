@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.CharacteristicODEUniqueness
 import Mathlib.Analysis.Calculus.Deriv.Slope
+import Mathlib.Logic.Function.Basic
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
@@ -95,7 +96,7 @@ theorem scalar_flow_hasDerivAt_exp_integral
           (hu.mul
             ((hF.comp (hs.prodMk (continuous_const.add hh))).sub
               (hF.comp (hs.prodMk continuous_const)))))
-    simpa only [Function.uncurry, Function.comp_def] using hd.comp hmap
+    simpa only [Function.uncurry_def, Function.comp_def] using hd.comp hmap
   have hA0 (s : ℝ) : A 0 s = d s (F s θ) := by
     simp only [A, add_zero, sub_self, mul_zero, add_zero, intervalIntegral.integral_const,
       sub_zero, one_smul]
@@ -124,7 +125,7 @@ theorem scalar_flow_hasDerivAt_exp_integral
     have hc : Continuous (fun h => Real.exp (∫ s in a..t, A h s)) :=
       Real.continuous_exp.comp
         (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
-          (f := A) (by simpa only [Function.uncurry] using hA) a t)
+          (f := A) (by simpa only [Function.uncurry_def] using hA) a t)
     simpa only [hA0] using (hc.continuousAt (x := 0)).tendsto.mono_left nhdsWithin_le_nhds
   rw [hasDerivAt_iff_tendsto_slope_zero]
   apply hlim.congr'
@@ -216,7 +217,7 @@ theorem scalar_flow_angular_deriv_continuousOn
     Real.continuous_exp.comp
       (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous
         (f := fun p : PolarPoint => fun s => de (s, Fe (s, p.2)))
-        (by simpa only [Function.uncurry] using hi) continuous_fst)
+        (by simpa only [Function.uncurry_def] using hi) continuous_fst)
   apply hc.continuousOn.congr
   intro p hp
   have h := (scalar_flow_hasDerivAt_exp_integral_on hab hd hvd hF hinit hode hp.1 p.2).deriv

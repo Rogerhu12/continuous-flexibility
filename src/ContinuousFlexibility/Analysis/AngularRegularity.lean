@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ScalarFlowVariation
 import Mathlib.Analysis.Calculus.ContDiff.Deriv
+import Mathlib.Analysis.Calculus.IteratedDeriv.Defs
 
 /-!
 # Continuous angular derivatives with a continuous radial parameter
@@ -136,6 +137,14 @@ theorem AngularRegular.contDiff {n : ℕ} {F : ℝ → ℝ → ℝ}
 theorem contDiff_of_angularRegular_all {F : ℝ → ℝ → ℝ}
     (hF : ∀ n, AngularRegular n F) (r : ℝ) : ContDiff ℝ ∞ (F r) :=
   contDiff_infty.mpr fun n => (hF n).contDiff r
+
+/-- The highest actual angular derivative is jointly continuous. -/
+theorem AngularRegular.iteratedDeriv_continuous {n : ℕ} {F : ℝ → ℝ → ℝ}
+    (hF : AngularRegular n F) :
+    Continuous (fun p : PolarPoint => iteratedDeriv n (F p.1) p.2) := by
+  induction n generalizing F with
+  | zero => simpa only [iteratedDeriv_zero] using hF.continuous
+  | succ n ih => simpa only [iteratedDeriv_succ'] using ih hF.2.2
 
 /-- A smooth field on the closed strip has every continuous angular
 derivative after clamping the time parameter. -/

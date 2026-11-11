@@ -29,7 +29,7 @@ theorem circleFourierCoeff_add {f g : ℝ → ℂ} (hf : Continuous f) (hg : Con
       (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • f x)
       volume 0 (2 * Real.pi) := by
     have heq : ((fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi))) • f) =
-        (fun x => fourier (-n) (x : AddCircle (2 * Real.pi)) • f x) := by
+        (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • f x) := by
       funext x
       rfl
     have hi := (hphase.smul hf).intervalIntegrable 0 (2 * Real.pi)
@@ -39,7 +39,7 @@ theorem circleFourierCoeff_add {f g : ℝ → ℂ} (hf : Continuous f) (hg : Con
       (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • g x)
       volume 0 (2 * Real.pi) := by
     have heq : ((fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi))) • g) =
-        (fun x => fourier (-n) (x : AddCircle (2 * Real.pi)) • g x) := by
+        (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • g x) := by
       funext x
       rfl
     have hi := (hphase.smul hg).intervalIntegrable 0 (2 * Real.pi)

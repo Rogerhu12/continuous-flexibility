@@ -31,12 +31,14 @@ theorem continuousAt_div_of_simple_zero
     ContinuousAt (fun r => u r / q r) a := by
   classical
   have hc := hu.continuousAt_div.div hq.continuousAt_div
-    (by simpa only [Function.update_same] using hd)
+    (by simpa using hd)
   have heq :
-      (fun r => Function.update (fun x => (u x - u a) / (x - a)) a 0 r /
-        Function.update (fun x => (q x - q a) / (x - a)) a d r) =
+      (Function.update (fun x => (u x - u a) / (x - a)) a 0 /
+        Function.update (fun x => (q x - q a) / (x - a)) a d) =
       (fun r => u r / q r) := by
     funext r
+    change Function.update (fun x => (u x - u a) / (x - a)) a 0 r /
+      Function.update (fun x => (q x - q a) / (x - a)) a d r = u r / q r
     by_cases hra : r = a
     · simp [hra, hu0, hq0]
     · by_cases hqr : q r = 0
@@ -61,7 +63,7 @@ theorem control_first_second_deriv_zero_off_interval
   constructor
   · simpa only [iteratedDeriv_one] using
       iteratedDeriv_zero_off_open_interval hχ hsupp 1 hr
-  · simpa only [iteratedDeriv_succ, iteratedDeriv_one] using
+  · simpa only [iteratedDeriv_succ, iteratedDeriv_one, iteratedDeriv_zero] using
       iteratedDeriv_zero_off_open_interval hχ hsupp 2 hr
 
 def opticalLogRatio (w χ : ℝ → ℝ) (r : ℝ) : ℝ :=
@@ -82,9 +84,12 @@ theorem continuousOn_opticalLogRatio
       ContinuousAt (opticalLogRatio w χ) a := by
     obtain ⟨hχ1, hχ2⟩ := control_first_second_deriv_zero_off_interval hχ hsupp ha
     have hn : HasDerivAt (fun r => deriv χ r * w r) 0 a := by
-      simpa only [Pi.mul_apply, hχ1, hχ2, zero_mul, zero_add] using
-        ((hχd.differentiable (by simp) a).hasDerivAt.mul
-          (hw.differentiable (by simp) a).hasDerivAt)
+      have hp := (hχd.differentiable (by simp) a).hasDerivAt.mul
+        (hw.differentiable (by simp) a).hasDerivAt
+      have hp' : HasDerivAt (fun r => deriv χ r * w r)
+          (deriv (deriv χ) a * w a + deriv χ a * deriv w a) a :=
+        hp.congr_of_eventuallyEq (Eventually.of_forall (fun _ => rfl))
+      simpa only [hχ1, hχ2, zero_mul, zero_add] using hp'
     exact Analysis.continuousAt_div_of_simple_zero hn
       (hwd.differentiable (by simp) a).hasDerivAt
       (by simp only [hχ1, zero_mul]) hwa hwda

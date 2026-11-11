@@ -93,4 +93,32 @@ theorem N01Properties.minusFlow_angular_contDiff
     (fun x => (hflow z hz m x).1)
     (fun x s hs => (hflow z hz m x).2.2.1 s hs) hr
 
+/-- All actual angular jets are jointly continuous on the closed
+component; this is the input for radial smoothness bootstrapping. -/
+theorem N01Properties.minusFlow_angular_iteratedDeriv_continuousOn
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN01 : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hsector : stateSector S z.1) (m : ℕ)
+    (n : ℕ) :
+    ContinuousOn (fun p : PolarPoint => iteratedDeriv n (C.minusFlow z m p.1) p.2)
+      (Icc (C.left m) (C.right m) ×ˢ univ) := by
+  have hcontrol : controlGeometryConditions D S C := hN01.2.2.2.1
+  have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=
+    hN01.2.2.2.2.2.2.1
+  exact Analysis.scalar_flow_angular_iteratedDeriv_continuousOn
+    (v := fun s x => minusCharacteristicSpeed (originalCoefficients D S C z) (s, x))
+    (d := fun s x => characteristicAngularDerivative D S C z (s, x))
+    (hcontrol.1 m).2.1
+    (fun n => N01Properties.characteristicAngularDerivative_angularRegular
+      hN01 hS hT hz hsector m (hcontrol.1 m).2.1.le n)
+    (fun s hs x => N01Properties.minusCharacteristicSpeed_hasDerivAt_angular
+      hN01 hS hT hz hsector
+      ⟨(hcontrol.1 m).1.trans_le hs.1, hs.2.trans_lt (hcontrol.1 m).2.2⟩ x)
+    (N01Properties.minusFlow_continuousOn hN01 hz m)
+    (fun x => (hflow z hz m x).1)
+    (fun x s hs => (hflow z hz m x).2.2.1 s hs) n
+
 end ContinuousFlexibility.Statements

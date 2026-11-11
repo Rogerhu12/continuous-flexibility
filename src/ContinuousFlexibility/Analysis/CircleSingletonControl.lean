@@ -59,7 +59,7 @@ theorem circleSingletonField_energy (T : MaterialData) (γ : ℝ) (s m : ℕ) (c
         fun _ : ℝ => (0 : ℝ) := by
       funext θ
       exact iteratedDeriv_fun_const_zero
-    rw [hd, eLpNorm_zero]
+    rw [hd, eLpNorm_fun_zero]
     simp
   have hmain : circleSingletonField m c m = fun _ : ℝ => c := by
     funext θ
@@ -123,7 +123,7 @@ private theorem constant_iteratedDeriv_L2_le (b : ℕ) :
   · have hd : iteratedDeriv b (fun _ : ℝ => (1 : ℝ)) = fun _ : ℝ => (0 : ℝ) := by
       funext θ
       simp only [iteratedDeriv_const, if_neg hb]
-    rw [hd, eLpNorm_zero, ENNReal.toReal_zero]
+    rw [hd, eLpNorm_fun_zero, ENNReal.toReal_zero]
     exact ENNReal.toReal_nonneg
 
 /-- The constant depends only on the output order, not on the sample. -/
