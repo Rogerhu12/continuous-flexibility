@@ -28,7 +28,10 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem n05_referenceState_mem (hε : 0 < ε) :
     (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
-  constructor <;> simpa using hε
+  change stateGrading S base (C.referenceState - C.referenceState) < ε ∧
+    |(0 : ℝ)| < ε
+  rw [sub_self, map_zero (stateGrading S base), abs_zero]
+  exact ⟨hε, hε⟩
 
 theorem n05_referenceState_sector (hC : referenceStateConditions D S C) :
     stateSector S C.referenceState := by
@@ -116,7 +119,7 @@ theorem n05_minusCharacteristicSpeed_reference (hD : IsAccumulatingProfile D)
       _ = Real.sqrt ((0 - D.w p.1 * (deriv D.w p.1 / p.1)) / D.w p.1 ^ 2) := by
         rw [Real.sqrt_div' _ (sq_nonneg _), Real.sqrt_sq hw.le]
       _ = _ := congrArg Real.sqrt hratio
-  simp only [minusCharacteristicSpeed, ha, hb, hc, zero_div, zero_pow]
+  simp only [minusCharacteristicSpeed, ha, hb, hc, zero_div, pow_two, mul_zero]
   rw [hsqrt]
   ring
 
@@ -182,9 +185,12 @@ theorem n05_returnResidual_reference_zero
   apply (h02.2.2.1 (C.referenceState, 0) (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1)).2
   intro m θ
-  simp only [n05_rightChart_reference h01 h02,
-    n05_minusFlow_reference_return h01, n05_stateLeftChart_reference h01.2.2.1]
-  constructor <;> ring
+  constructor
+  · simp only [n05_rightChart_reference h01 h02,
+      n05_minusFlow_reference_return h01, n05_stateLeftChart_reference h01.2.2.1]
+  · simp only [n05_rightChart_reference h01 h02,
+      n05_minusFlow_reference_return h01, n05_stateLeftChart_reference h01.2.2.1]
+    ring
 
 /-- The bilinear error vanishes at any state with zero return residual. -/
 theorem n05_correctionOperator_of_residual_zero

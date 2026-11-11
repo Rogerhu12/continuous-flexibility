@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory
-open scoped ContDiff Topology
+open scoped ContDiff Topology RealInnerProductSpace
 
 theorem n05CanonicalTest_zero (S : PhysicalSpacesData) (K : CanonicalData S) (m : ℕ) :
     CanonicalTest S K m (0 : PolarPoint → ℝ) := by

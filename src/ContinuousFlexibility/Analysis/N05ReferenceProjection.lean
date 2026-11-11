@@ -102,7 +102,7 @@ theorem n05_referenceInverse_projected_bound {D : ReferenceData}
   have hFproj := n05_referenceBasisProjection_sourceMember hab hF h0
   obtain ⟨hV, hVbound⟩ := hbound (referenceBasisProjection I F.1, F.2) hFproj
   have hsame := n05_referenceInverse_basisProjection hD hborder hγ hG hF h0 h1
-  have hVproj := hV.congr_ae hab hsame
+  have hVproj := OutputRealization.congr_ae hab hV hsame
     (referenceBasisProjection_periodic I (G F).1)
     (referenceBasisProjection_even I (G F).1)
   have ha := n05_outputRealization_leftConstant_unique hD hborder hγ hγ hVproj hproj

@@ -29,7 +29,9 @@ theorem n05_schur_finite_square_bound
   let ξ : ℕ → ℝ := fun k => if k ∈ q then y k else 0
   have hξ0 (k : ℕ) : 0 ≤ ξ k := by
     dsimp only [ξ]
-    split_ifs <;> positivity
+    split_ifs
+    · exact hy0 k
+    · exact le_rfl
   have hξ : Summable (fun k => ξ k ^ 2) :=
     summable_of_ne_finset_zero (s := q) (fun k hk => by simp [ξ, hk])
   obtain ⟨hsum, hschur⟩ := Radial.real_schur_test a hA hB ha hrow hcol
@@ -62,7 +64,7 @@ theorem n05_schur_finite_square_bound
       positivity
     · have hp : 0 < Real.sqrt (∑ k ∈ q, y k ^ 2) :=
         lt_of_le_of_ne (Real.sqrt_nonneg _) (Ne.symm hz)
-      apply (mul_le_mul_right hp).mp
+      apply le_of_mul_le_mul_right ?_ hp
       calc
         Real.sqrt (∑ k ∈ q, y k ^ 2) * Real.sqrt (∑ k ∈ q, y k ^ 2) =
             ∑ k ∈ q, y k ^ 2 := by rw [← sq, Real.sq_sqrt hY]

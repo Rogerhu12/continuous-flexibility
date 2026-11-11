@@ -84,7 +84,7 @@ def n05CanonicalJetRestrictRaw (S : PhysicalSpacesData) (K : CanonicalData S)
 theorem n05CanonicalJetRestrictRaw_bound (S : PhysicalSpacesData)
     (K : CanonicalData S) {s r : ℕ} (hsr : s ≤ r) (v : CanonicalVolumeJets S K r) :
     ‖n05CanonicalJetRestrictRaw S K hsr v‖ ≤ ‖v‖ := by
-  simpa only [one_mul] using n05LpMapCLM_bound
+  simpa only [n05CanonicalJetRestrictRaw, one_mul] using n05LpMapCLM_bound
     (n05CanonicalJetRestrictCoordinate S K hsr) 1 zero_le_one (by
       intro m u
       simpa only [one_mul] using n05CanonicalJetRestrictCoordinate_bound S K hsr m u) v
@@ -138,8 +138,12 @@ theorem n05CanonicalVolumeRestrict_forget (T : MaterialData) (S : PhysicalSpaces
       (n05CanonicalVolumeRestrict T S K γ t hsr v) =
         (n05CanonicalVolumeModel T S K).forget γ t r v := by
   funext m
-  simp only [n05CanonicalVolumeModel_forget, n05CanonicalVolumeRestrict,
-    n05CanonicalJetRestrict_apply, n05CanonicalJetIndexOfLE_zero]
+  simp only [n05CanonicalVolumeModel_forget, n05CanonicalVolumeRestrict]
+  have hj := n05CanonicalJetRestrict_apply S K hsr
+    (show n05CanonicalClosedSubmodule S K r from v) m 0
+  rw [n05CanonicalJetIndexOfLE_zero] at hj
+  exact congrArg (fun z : CanonicalL2 S K m =>
+    (T.M (T.sample (K.cell m)) ^ (-t) * T.H (T.sample (K.cell m)) ^ γ) • z) hj
 
 theorem n05CanonicalVolumeMember_restrict (T : MaterialData) (S : PhysicalSpacesData)
     (K : CanonicalData S) (γ t : ℝ) {s r : ℕ} (hsr : s ≤ r)
