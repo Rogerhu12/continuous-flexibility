@@ -18,7 +18,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Radial
 
-open scoped RealInnerProductSpace
+open scoped InnerProductSpace RealInnerProductSpace
 
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
 
