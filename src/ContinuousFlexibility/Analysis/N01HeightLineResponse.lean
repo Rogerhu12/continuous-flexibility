@@ -126,8 +126,12 @@ private theorem heightResponseIntegral_heightFamily
       (r, θ - opticalTravel w l r)) =
       (∫ r in l..b, heightSpeedVariation w u (r, θ - opticalTravel w l r)) +
       t * ∫ r in l..b, heightSpeedVariation w η (r, θ - opticalTravel w l r) := by
-  have hi0 := (heightResponseIntegrand_continuousOn hw hu hl hlb hwpos θ).intervalIntegrable_of_Icc hlb
-  have hiη := (heightResponseIntegrand_continuousOn hw hη hl hlb hwpos θ).intervalIntegrable_of_Icc hlb
+  have hi0 : IntervalIntegrable
+      (fun r => heightSpeedVariation w u (r, θ - opticalTravel w l r)) volume l b :=
+    (heightResponseIntegrand_continuousOn hw hu hl hlb hwpos θ).intervalIntegrable_of_Icc hlb
+  have hiη : IntervalIntegrable
+      (fun r => heightSpeedVariation w η (r, θ - opticalTravel w l r)) volume l b :=
+    (heightResponseIntegrand_continuousOn hw hη hl hlb hwpos θ).intervalIntegrable_of_Icc hlb
   calc
     _ = ∫ r in l..b, heightSpeedVariation w u (r, θ - opticalTravel w l r) +
         t * heightSpeedVariation w η (r, θ - opticalTravel w l r) := by
@@ -157,17 +161,18 @@ private theorem N01Properties.heightLine_scalar_deriv_formula
   exact hd.deriv.trans (congrArg₂ F (heightOnlyLine_profile href η t)
     (heightOnlyLine_heightFamily S C.referenceState η t))
 
-theorem N01Properties.minusFlow_height_q_mixed_hasDerivAt
+private theorem N01Properties.heightLine_scalar_deriv_affine
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (η : HeightPair S) (m : ℕ) (θ : ℝ)
+    (η : HeightPair S) (m : ℕ) (θ t : ℝ)
+    (ht : (C.referenceState + t • ((η, 0) : AnnularState S), 0) ∈ stateNeighborhood S C base ε)
     {b : ℝ} (hb : b ∈ Icc (C.left m) (C.right m)) :
-    HasDerivAt
-      (fun t : ℝ => deriv (fun q : ℝ =>
-        C.minusFlow (C.referenceState + t • ((η, 0) : AnnularState S), q) m b θ) 0)
-      (∫ r in C.left m..b, heightSpeedVariation D.w (heightPairField S η)
-        (r, θ - opticalTravel D.w (C.left m) r)) 0 := by
-  have href : referenceStateConditions D S C := hN.2.2.1
+    deriv (fun q : ℝ => C.minusFlow
+      (C.referenceState + t • ((η, 0) : AnnularState S), q) m b θ) 0 =
+      (∫ r in C.left m..b, heightSpeedVariation D.w (stateU S C.referenceState)
+        (r, θ - opticalTravel D.w (C.left m) r)) +
+      t * ∫ r in C.left m..b, heightSpeedVariation D.w (heightPairField S η)
+        (r, θ - opticalTravel D.w (C.left m) r) := by
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
   obtain ⟨_, hgeom⟩ := hN.1.1
   have hw : ContDiff ℝ ∞ D.w := hgeom.1.2.2.1.1
@@ -182,21 +187,45 @@ theorem N01Properties.minusFlow_height_q_mixed_hasDerivAt
     exact hgeom.1.2.2.2.2.1 r
       ⟨(hcontrol.1 m).1.trans_le hr.1,
         (hr.2.trans hb.2).trans_lt (hcontrol.1 m).2.2⟩
-  let I0 : ℝ := ∫ r in C.left m..b, heightSpeedVariation D.w (stateU S C.referenceState)
-    (r, θ - opticalTravel D.w (C.left m) r)
-  let Iη : ℝ := ∫ r in C.left m..b, heightSpeedVariation D.w (heightPairField S η)
-    (r, θ - opticalTravel D.w (C.left m) r)
-  have heq :
+  exact (hN.heightLine_scalar_deriv_formula hS hT η t ht m θ hb).trans
+    (heightResponseIntegral_heightFamily hw hu hη hl hb.1 hwp θ t)
+
+private theorem N01Properties.heightLine_scalar_deriv_eventually_affine
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (η : HeightPair S) (m : ℕ) (θ : ℝ)
+    {b : ℝ} (hb : b ∈ Icc (C.left m) (C.right m)) :
       (fun t : ℝ => deriv (fun q : ℝ =>
         C.minusFlow (C.referenceState + t • ((η, 0) : AnnularState S), q) m b θ) 0)
-        =ᶠ[𝓝 (0 : ℝ)] (fun t : ℝ => I0 + t * Iη) := by
-    filter_upwards [stateLine_eventually_mem (C := C) (base := base)
-      ((η, 0) : AnnularState S) hN.2.1] with t ht
-    exact (hN.heightLine_scalar_deriv_formula hS hT η t ht m θ hb).trans
-      (heightResponseIntegral_heightFamily hw hu hη hl hb.1 hwp θ t)
+        =ᶠ[𝓝 (0 : ℝ)] (fun t : ℝ =>
+          (∫ r in C.left m..b, heightSpeedVariation D.w (stateU S C.referenceState)
+            (r, θ - opticalTravel D.w (C.left m) r)) +
+          t * ∫ r in C.left m..b, heightSpeedVariation D.w (heightPairField S η)
+            (r, θ - opticalTravel D.w (C.left m) r)) := by
+  filter_upwards [stateLine_eventually_mem (C := C) (base := base)
+    ((η, 0) : AnnularState S) hN.2.1] with t ht
+  exact hN.heightLine_scalar_deriv_affine hS hT η m θ t ht hb
+
+private theorem hasDerivAt_of_eventually_affine
+    (f : ℝ → ℝ) (I0 Iη : ℝ)
+    (heq : f =ᶠ[𝓝 (0 : ℝ)] (fun t : ℝ => I0 + t * Iη)) :
+    HasDerivAt f Iη 0 := by
   have hlin : HasDerivAt (fun t : ℝ => I0 + t * Iη) Iη 0 := by
     simpa only [id_eq, one_mul] using
       ((hasDerivAt_id (0 : ℝ)).mul_const Iη).const_add I0
   exact hlin.congr_of_eventuallyEq heq
+
+theorem N01Properties.minusFlow_height_q_mixed_hasDerivAt
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (η : HeightPair S) (m : ℕ) (θ : ℝ)
+    {b : ℝ} (hb : b ∈ Icc (C.left m) (C.right m)) :
+    HasDerivAt
+      (fun t : ℝ => deriv (fun q : ℝ =>
+        C.minusFlow (C.referenceState + t • ((η, 0) : AnnularState S), q) m b θ) 0)
+      (∫ r in C.left m..b, heightSpeedVariation D.w (heightPairField S η)
+        (r, θ - opticalTravel D.w (C.left m) r)) 0 :=
+  hasDerivAt_of_eventually_affine _ _ _
+    (hN.heightLine_scalar_deriv_eventually_affine hS hT η m θ hb)
 
 end ContinuousFlexibility.Statements

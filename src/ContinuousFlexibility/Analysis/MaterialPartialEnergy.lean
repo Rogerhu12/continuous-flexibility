@@ -65,7 +65,9 @@ theorem materialPullback_radialPartial
   have hprod : HasDerivAt (fun t => G (t, p.2))
       (w p.1 * ((-γ) * deriv L p.1) * f (T.radius p.1, p.2) +
         w p.1 * (T.ell (T.radius p.1) * radialPartial f (T.radius p.1, p.2))) p.1 := by
-    simpa only [G, w, materialPullback] using hw.mul hcurve
+    exact (hw.mul hcurve).congr_of_eventuallyEq
+      (Eventually.of_forall fun t => by
+        simp only [G, w, materialPullback, Pi.mul_apply])
   have hG : ContDiff ℝ ∞ G := contDiff_materialPullback hT hf
   have hGder : HasDerivAt (fun t => G (t, p.2)) (radialPartial G p) p.1 := by
     simpa only [Function.comp_def, radialPartial] using
@@ -96,7 +98,7 @@ theorem materialPullback_angularPartial
   have hprod : HasDerivAt (fun t => materialPullback T γ f (p.1, t))
       (materialPullback T γ (angularPartial f) p) p.2 := by
     simpa only [materialPullback] using hcurve.const_mul (T.H (T.radius p.1) ^ (-γ))
-  have hG := contDiff_materialPullback hT hf
+  have hG : ContDiff ℝ ∞ (materialPullback T γ f) := contDiff_materialPullback hT hf
   have hGder : HasDerivAt (fun t => materialPullback T γ f (p.1, t))
       (angularPartial (materialPullback T γ f) p) p.2 := by
     simpa only [Function.comp_def, angularPartial] using
@@ -112,6 +114,8 @@ theorem memLp_weighted_mixed_radialPartial
       2 materialCylinderMeasure := by
   apply (hLp (a + 1) b c).ae_eq
   exact Eventually.of_forall fun p => by
+    change W p ^ c * mixedDerivative (a + 1) b G p =
+      W p ^ c * mixedDerivative a b (radialPartial G) p
     rw [mixedDerivative_radialPartial isOpen_univ hG.contDiffOn a b (mem_univ p)]
 
 theorem memLp_weighted_mixed_angularPartial
@@ -122,6 +126,8 @@ theorem memLp_weighted_mixed_angularPartial
       2 materialCylinderMeasure := by
   apply (hLp a (b + 1) c).ae_eq
   exact Eventually.of_forall fun p => by
+    change W p ^ c * mixedDerivative a (b + 1) G p =
+      W p ^ c * mixedDerivative a b (angularPartial G) p
     rw [mixedDerivative_angularPartial isOpen_univ hG.contDiffOn a b (mem_univ p)]
 
 theorem memLp_weightedPhysicalJet_angularPartial
@@ -132,7 +138,14 @@ theorem memLp_weightedPhysicalJet_angularPartial
     MemLp (weightedPhysicalJet T γ a b c (angularPartial f)) 2 materialCylinderMeasure := by
   have heq : materialPullback T γ (angularPartial f) =
       angularPartial (materialPullback T γ f) := funext (materialPullback_angularPartial hT hf)
-  simpa only [weightedPhysicalJet, heq] using
+  have hjet : weightedPhysicalJet T γ a b c (angularPartial f) =
+      (fun p => T.M (T.radius p.1) ^ c *
+        mixedDerivative a b (angularPartial (materialPullback T γ f)) p) := by
+    funext p
+    change T.M (T.radius p.1) ^ c *
+      mixedDerivative a b (materialPullback T γ (angularPartial f)) p = _
+    rw [heq]
+  exact hjet.symm ▸
     memLp_weighted_mixed_angularPartial (contDiff_materialPullback hT hf) hLp a b c
 
 theorem materialLogH_radius_deriv_mixed_bounded
@@ -195,11 +208,20 @@ theorem memLp_weightedPhysicalJet_radialPartial
     have hsecond := hLG i j k
     apply (hfirst.add hsecond).ae_eq
     exact Eventually.of_forall fun p => by
-      simp only [Pi.add_apply, V, mixedDerivative_add_of_contDiff hR (hL.mul hG), mul_add]
+      change W p ^ k * mixedDerivative i j (radialPartial G) p +
+        W p ^ k * mixedDerivative i j (fun q => L q * G q) p =
+          W p ^ k * mixedDerivative i j V p
+      rw [show V = (fun q => radialPartial G q + L q * G q) from rfl,
+        mixedDerivative_add_of_contDiff hR (hL.mul hG), mul_add]
   have hV : ContDiff ℝ ∞ V := hR.add (hL.mul hG)
   have hproduct := memLp_weighted_mixed_product hW hWpos hA hV 1 hAb hVLp a b c
   have heq : materialPullback T γ (radialPartial f) = (fun p => A p * V p) :=
     funext (materialPullback_radialPartial hT hf)
-  simpa only [weightedPhysicalJet, heq] using hproduct
+  have hjet : weightedPhysicalJet T γ a b c (radialPartial f) =
+      (fun p => W p ^ c * mixedDerivative a b (fun q => A q * V q) p) := by
+    funext p
+    change W p ^ c * mixedDerivative a b (materialPullback T γ (radialPartial f)) p = _
+    rw [heq]
+  exact hjet.symm ▸ hproduct
 
 end ContinuousFlexibility.Statements

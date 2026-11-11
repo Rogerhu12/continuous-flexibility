@@ -33,14 +33,26 @@ theorem reflected_drift_speed_abs_bound
     (v : ℝ → ℝ) {B : ℝ} (hv : ∀ θ, |v θ| ≤ B) (θ : ℝ) :
     |(v θ - v (-θ)) / 2| ≤ B ∧ |(-v (-θ) - v θ) / 2| ≤ B := by
   constructor
-  · rw [abs_div, abs_ofNat]
+  · rw [abs_div, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
     apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).mpr
     exact (abs_sub_le _ _).trans ((add_le_add (hv θ) (hv (-θ))).trans_eq (by ring))
-  · rw [abs_div, abs_ofNat]
+  · rw [abs_div, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
     apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).mpr
     have h := abs_sub_le (-v (-θ)) (v θ)
     rw [abs_neg] at h
     exact h.trans ((add_le_add (hv (-θ)) (hv θ)).trans_eq (by ring))
+
+theorem weighted_velocity_abs_le
+    (d c v C P H : ℝ) (hd : |d| ≤ 3 / 2)
+    (hv : |v| ≤ (12 * C * P) * H) :
+    |d * c * v| ≤ (18 * C * P) * |c| * H := by
+  have hb := mul_le_mul
+    (mul_le_mul_of_nonneg_right hd (abs_nonneg c)) hv (abs_nonneg v)
+    (mul_nonneg (by norm_num : (0 : ℝ) ≤ 3 / 2) (abs_nonneg c))
+  calc
+    _ = |d| * |c| * |v| := by rw [abs_mul, abs_mul]
+    _ ≤ ((3 / 2 : ℝ) * |c|) * ((12 * C * P) * H) := hb
+    _ = _ := by ring
 
 end ContinuousFlexibility.Analysis
 
@@ -127,18 +139,14 @@ theorem N01Properties.returnCorrectionVelocityLinear_weighted_abs_bound
     exact h.2
   have hdisp := hN.returnCorrectionDisplacementLinear_weighted_abs_bound
     hS hT hz hsector hend ρ m θ
-  have hmul := mul_le_mul
-    (mul_le_mul_of_nonneg_right hd (abs_nonneg (deriv (χ m) p.1)))
-    hdisp (abs_nonneg _)
-    (mul_nonneg (by norm_num : (0 : ℝ) ≤ 3 / 2) (abs_nonneg _))
-  calc
-    _ = |deriv (C.minusFlow z m p.1) α| * |deriv (χ m) p.1| *
-        |returnCorrectionDisplacementLinear S C z m θ ρ| := by
-      rw [returnCorrectionVelocityLinear_apply, abs_mul, abs_mul]
-    _ ≤ ((3 / 2 : ℝ) * |deriv (χ m) p.1|) *
-        ((12 * circleSobolevConstant * (S.circle (3 / 4 : ℝ)).grading 1 ρ) *
-          T.H (T.sample m) ^ (3 / 4 : ℝ)) := hmul
-    _ = _ := by ring
+  have heq : returnCorrectionVelocityLinear D S C χ z m p ρ =
+      deriv (C.minusFlow z m p.1) α * deriv (χ m) p.1 *
+        returnCorrectionDisplacementLinear S C z m θ ρ :=
+    returnCorrectionVelocityLinear_apply D S C χ z m p ρ
+  exact (congrArg abs heq).trans_le
+    (weighted_velocity_abs_le (deriv (C.minusFlow z m p.1) α) (deriv (χ m) p.1)
+      (returnCorrectionDisplacementLinear S C z m θ ρ) circleSobolevConstant
+      ((S.circle (3 / 4 : ℝ)).grading 1 ρ) (T.H (T.sample m) ^ (3 / 4 : ℝ)) hd hdisp)
 
 theorem N01Properties.returnCorrectionDriftSpeedLinear_weighted_abs_bound
     (χ : ℕ → ℝ → ℝ) (ρ : CircleSpace S) (m : ℕ) (p : PolarPoint)
@@ -151,6 +159,8 @@ theorem N01Properties.returnCorrectionDriftSpeedLinear_weighted_abs_bound
         |deriv (χ m) p.1| * T.H (T.sample m) ^ (3 / 4 : ℝ) := by
   have h := reflected_drift_speed_abs_bound
     (fun θ => returnCorrectionVelocityLinear D S C χ z m (p.1, θ) ρ)
+    (B := (18 * circleSobolevConstant * (S.circle (3 / 4 : ℝ)).grading 1 ρ) *
+      |deriv (χ m) p.1| * T.H (T.sample m) ^ (3 / 4 : ℝ))
     (fun θ => hN.returnCorrectionVelocityLinear_weighted_abs_bound
       hS hT hz hsector hflow χ ρ m (p.1, θ) hp) p.2
   exact ⟨(congrArg abs (returnCorrectionDriftLinear_apply D S C χ z m p ρ)).trans_le h.1,
@@ -176,8 +186,14 @@ theorem N01Properties.exists_weighted_independent_residual_bounds
         |returnCorrectionSpeedLinear D S C χ z m p ρ| ≤
           (18 * circleSobolevConstant * (S.circle (3 / 4 : ℝ)).grading 1 ρ) *
             |deriv (χ m) p.1| * T.H (T.sample m) ^ (3 / 4 : ℝ) := by
-  obtain ⟨base', ε', hb, hε', hεε, hnew, hbound⟩ :=
-    hN.exists_uniform_inverse_angular_jets hS hT
+  let hdata := hN.exists_uniform_inverse_angular_jets hS hT
+  let base' : ℕ := hdata.choose
+  let ε' : ℝ := hdata.choose_spec.choose
+  have hb : base ≤ base' := hdata.choose_spec.choose_spec.1
+  have hε' : 0 < ε' := hdata.choose_spec.choose_spec.2.1
+  have hεε : ε' ≤ ε := hdata.choose_spec.choose_spec.2.2.1
+  have hnew : N01Properties D T S C base' loss ε' := hdata.choose_spec.choose_spec.2.2.2.1
+  have hbound := hdata.choose_spec.choose_spec.2.2.2.2
   exact ⟨base', ε', hb, hε', hεε, hnew, fun z hz hsector χ ρ m p hp =>
     hnew.returnCorrectionDriftSpeedLinear_weighted_abs_bound
       hS hT hz hsector (hbound z hz hsector).1 χ ρ m p hp⟩

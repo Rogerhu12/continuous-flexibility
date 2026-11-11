@@ -65,7 +65,8 @@ theorem N01Properties.exists_returnEquation_of_smoothTame_residual
         (L v + actualChartError hS hT hN.1.1 C (f z) (f z) v) m θ = _
       rw [map_add]
       simp only [Pi.add_apply]
-      rw [hL v m θ, actualChartError_decode hS hT hN.1.1 C z (f z)
-        (by funext i t; exact hdecode z hz hs i t)]
+      exact congrArg₂ (fun a b : ℝ => a + b) (hL v m θ)
+        (actualChartError_decode hS hT hN.1.1 C z (f z)
+          (by funext i t; exact hdecode z hz hs i t) (f z) v m θ)
 
 end ContinuousFlexibility.Statements

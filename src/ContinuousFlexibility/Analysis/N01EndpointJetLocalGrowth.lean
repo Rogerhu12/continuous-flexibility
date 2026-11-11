@@ -48,7 +48,8 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -56,13 +57,13 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
       ∀ v : Fin (n + 1) → (StateDirections S × ℝ),
       (∀ i, pairGrading (sectorGrading S) realGrading B (v i) ≤ 1) →
       circleNorm T (3 / 4 : ℝ) s
-        (hN.endpointFlowScalarJets hS hT (n + 1) z v) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
   classical
   obtain ⟨Bₛ, Lₛ, hBₛ, hstate⟩ :=
-    hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all hS hT
-  obtain ⟨Bq, Lq, _, hscalar⟩ := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all hS hT
+    hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all hS hT rsel hrsel
+  obtain ⟨Bq, Lq, _, hscalar⟩ := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all hS hT rsel hrsel
   let B : ℕ := max Bₛ Bq
   let L : ℕ := max Lₛ Lq
   have hBs : Bₛ ≤ B := le_max_left _ _
@@ -80,9 +81,9 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
   intro z hz hzb v hv
   let q : Fin (n + 1) → (StateDirections S × ℝ) :=
     fun i => (v i).2 • scalarParameterDirection S
-  let A := hN.endpointFlowScalarJets hS hT (n + 1) z
+  let A := hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
   let M := liftCircleMultilinear (hS.2.1 (3 / 4 : ℝ)) A
-    (hN.endpointFlowScalarJets_positive_circleMember hS hT n z hz)
+    (hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz)
   let coordinate := projectiveCoordinate
     (fun j => (S.circle (3 / 4 : ℝ)).level j) (S.circle (3 / 4 : ℝ)).bond s
   let F := coordinate.toLinearMap.compMultilinearMap M

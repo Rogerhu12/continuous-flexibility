@@ -27,7 +27,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ b c : ℕ, b + c ≤ s →
@@ -38,7 +39,7 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
       ∀ v : StateDirections S × ℝ,
       pairGrading (sectorGrading S) realGrading B v ≤ 1 → v.2 = 0 →
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
-        (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs v)) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
           pairGrading (sectorGrading S) realGrading (s + L) v) := by
@@ -53,7 +54,7 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
   intro n R hR s hs
   obtain ⟨I, hI0, hi⟩ := hinterp n R hR s hs
   have hraw (b c : ℕ) :=
-    hN.endpointFlowScalarJets_state_weightedJetNorm_bound hS hT n b c
+    hN.endpointFlowScalarJets_state_weightedJetNorm_bound hS hT rsel hrsel n b c
   choose K hK hk using hraw
   let K₀ : ℝ := ∑ b : Fin (s + 1), ∑ c : Fin (s + 1), K b.val c.val
   have hK₀ : 0 ≤ K₀ := Finset.sum_nonneg (fun b _ =>
@@ -92,7 +93,8 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
 
 theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -102,13 +104,13 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
       ∀ v : StateDirections S × ℝ,
       pairGrading (sectorGrading S) realGrading B v ≤ 1 → v.2 = 0 →
       circleNorm T (3 / 4 : ℝ) s
-        (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs v)) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
           pairGrading (sectorGrading S) realGrading (s + L) v) := by
   classical
   obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all hS hT
+    hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all hS hT rsel hrsel
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
   obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
   refine ⟨(Fintype.card (CircleJetIndex s) : ℝ) * K,
@@ -120,9 +122,9 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
   calc
     _ ≤ ∑ j : CircleJetIndex s, circleWeightedJetNorm T (3 / 4 : ℝ)
         (j.val 0).val (j.val 1).val
-        (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs v)) :=
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) :=
       circleNorm_le_sum_weightedJetNorm
-        (hN.endpointFlowScalarJets_state_circleMember hS hT n z hz vs v hvq) s
+        (hN.endpointFlowScalarJets_state_circleMember hS hT rsel hrsel n z hz vs v hvq) s
     _ ≤ ∑ _j : CircleJetIndex s, K * A := by
       apply Finset.sum_le_sum
       intro j _
@@ -136,7 +138,8 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
 The right hand side is symmetric in all direction seminorms. -/
 theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -145,11 +148,11 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
       (∀ i, pairGrading (sectorGrading S) realGrading B (v i) ≤ 1) →
       (∃ i, (v i).2 = 0) →
       circleNorm T (3 / 4 : ℝ) s
-        (hN.endpointFlowScalarJets hS hT (n + 1) z v) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
   obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_state_circleNorm_local_growth_all hS hT
+    hN.endpointFlowScalarJets_state_circleNorm_local_growth_all hS hT rsel hrsel
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
   obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
   refine ⟨K, hK, ?_⟩
@@ -158,7 +161,7 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
   have haux : ∀ k : ℕ, ∀ (w : Fin (n + 1) → (StateDirections S × ℝ))
       (j : Fin (n + 1)), j.val = k → (w j).2 = 0 →
       (∀ l, p B (w l) ≤ 1) →
-      circleNorm T (3 / 4 : ℝ) s (hN.endpointFlowScalarJets hS hT (n + 1) z w) ≤
+      circleNorm T (3 / 4 : ℝ) s (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z w) ≤
         K * (1 + p (s + L) z + ∑ l : Fin (n + 1), p (s + L) (w l)) := by
     intro k
     induction k with
@@ -166,7 +169,7 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
       intro w j hj hw hwlow
       have hj0 : j = 0 := Fin.ext hj
       rw [hj0] at hw
-      rw [hN.endpointFlowScalarJets_rotate hS hT n z hz w]
+      rw [hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w]
       have hb := hk z hz hzb (Fin.tail w) (fun l => hwlow l.succ)
         (w 0) (hwlow 0) hw
       have hsum : (∑ l : Fin (n + 1), p (s + L) (w l)) =
@@ -203,7 +206,7 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
             p (s + L) (w 0) + ∑ l : Fin n, p (s + L) (Fin.tail w l) :=
           Fin.sum_univ_succ _
         rw [hleft, hright, add_comm]
-      rw [hN.endpointFlowScalarJets_rotate hS hT n z hz w]
+      rw [hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w]
       have hb := ih w' i'.castSucc rfl hw' hwlow'
       simpa only [hsum] using hb
   exact haux i.val v i rfl hi hv

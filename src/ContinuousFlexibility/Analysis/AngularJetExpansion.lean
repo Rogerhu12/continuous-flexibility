@@ -75,14 +75,17 @@ def scalarAngularExpansion : (n : ℕ) → ScalarAngularJetData E →ₗ[ℝ]
               (scalarAngularExpansion n (scalarAngularShift A))).uncurryLeft
         map_add' A B := by
           ext v
-          simp only [LinearMap.uncurryLeft_apply, add_apply, LinearMap.comp_apply,
-            LinearMap.smulRight_apply, scalarAngularHead_add, map_add, smul_apply,
-            smul_add]
+          simp only [LinearMap.uncurryLeft_apply, LinearMap.add_apply,
+            MultilinearMap.add_apply, LinearMap.comp_apply,
+            LinearMap.smulRight_apply, scalarAngularHead_add, map_add,
+            MultilinearMap.smul_apply, smul_add]
           abel
         map_smul' a A := by
           ext v
-          simp only [LinearMap.uncurryLeft_apply, add_apply, LinearMap.comp_apply,
-            LinearMap.smulRight_apply, scalarAngularHead_smul, map_smul, smul_apply,
+          simp only [LinearMap.uncurryLeft_apply, LinearMap.add_apply,
+            MultilinearMap.add_apply, LinearMap.comp_apply,
+            LinearMap.smulRight_apply, scalarAngularHead_smul, map_smul,
+            LinearMap.smul_apply, MultilinearMap.smul_apply,
             smul_add, smul_smul, RingHom.id_apply, smul_eq_mul]
           ring }
 
@@ -94,8 +97,11 @@ theorem scalarAngularExpansion_succ_apply (n : ℕ) (A : ScalarAngularJetData E)
     scalarAngularExpansion (n + 1) A v =
       scalarAngularExpansion n (scalarAngularHead A (v 0)) (Fin.tail v) +
         (v 0).2 * scalarAngularExpansion n (scalarAngularShift A) (Fin.tail v) := by
-  simp only [scalarAngularExpansion, LinearMap.uncurryLeft_apply, add_apply,
-    LinearMap.comp_apply, LinearMap.smulRight_apply, smul_apply,
+  change (((scalarAngularExpansion n).comp (scalarAngularHead A) +
+    (LinearMap.snd ℝ E ℝ).smulRight
+      (scalarAngularExpansion n (scalarAngularShift A))).uncurryLeft v = _
+  simp only [LinearMap.uncurryLeft_apply, LinearMap.add_apply, MultilinearMap.add_apply,
+    LinearMap.comp_apply, LinearMap.smulRight_apply, MultilinearMap.smul_apply,
     LinearMap.snd_apply, smul_eq_mul]
 
 variable [TopologicalSpace E]
@@ -113,7 +119,7 @@ theorem continuousOn_scalarAngularExpansion (n : ℕ)
       have h := (hA 0 0).comp
         (continuous_fst.prodMk (continuous_const :
           Continuous (fun _ : P × (Fin 0 → E × ℝ) => (Fin.elim0 : Fin 0 → E)))).continuousOn
-        (fun z hz => ⟨hz.1, mem_univ _⟩)
+        (fun z (hz : z ∈ U ×ˢ (univ : Set (Fin 0 → E × ℝ))) => ⟨hz.1, mem_univ _⟩)
       exact h
   | succ n ih =>
       let AH : P × (E × ℝ) → ScalarAngularJetData E :=
@@ -133,10 +139,12 @@ theorem continuousOn_scalarAngularExpansion (n : ℕ)
         continuous_pi (fun i => (continuous_apply i.succ).comp continuous_snd)
       have hhead := (ih AH hAH).comp
         ((continuous_fst.prodMk ((continuous_apply 0).comp continuous_snd)).prodMk htail).continuousOn
-        (fun z hz => ⟨⟨hz.1, mem_univ _⟩, mem_univ _⟩)
+        (fun z (hz : z ∈ U ×ˢ (univ : Set (Fin (n + 1) → E × ℝ))) =>
+          ⟨⟨hz.1, mem_univ _⟩, mem_univ _⟩)
       have hshift := (ih (fun p => scalarAngularShift (A p))
         (fun b k => hA (b + 1) k)).comp
-        (continuous_fst.prodMk htail).continuousOn (fun z hz => ⟨hz.1, mem_univ _⟩)
+        (continuous_fst.prodMk htail).continuousOn
+        (fun z (hz : z ∈ U ×ˢ (univ : Set (Fin (n + 1) → E × ℝ))) => ⟨hz.1, mem_univ _⟩)
       have hcoeff : Continuous (fun z : P × (Fin (n + 1) → E × ℝ) => (z.2 0).2) :=
         ((continuous_apply 0).comp continuous_snd).snd
       apply (hhead.add (hcoeff.continuousOn.mul hshift)).congr

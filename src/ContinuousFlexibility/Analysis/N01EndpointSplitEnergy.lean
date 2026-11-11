@@ -27,18 +27,19 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n b c : ℕ) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n b c : ℕ) :
     ∃ K : ℝ, 0 < K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
       ∀ vs : Fin n → (StateDirections S × ℝ),
       (∀ i, pairGrading (sectorGrading S) realGrading base (vs i) ≤ 1) →
       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs v) m) θ| ≤
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
         K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
           Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_weighted_bound hS hT (n + 1) b
+  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1) b
   let L₀ : ℝ := 1 + circleSingletonGradingConstant base * (2 * circleSobolevConstant)
   let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss) * (2 * circleSobolevConstant)
   have hL₀ : 0 < L₀ := by
@@ -65,13 +66,13 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans
     (hT.2.1 _ (materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m)).2.2.2
   have heq :
-      iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs v) m) θ =
-      iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs (w m)) m) θ := by
-    rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT (n + 1) z hz,
-      hN.endpointFlowScalarJets_iteratedDeriv hS hT (n + 1) z hz]
-    exact hlocal m n b θ (C.right m) ⟨(hN.2.2.2.1.1 m).2.1.le, le_rfl⟩
-      (hN.sectorFlow_closed_angularTower hS hT m (C.right m)
-        ⟨(hN.2.2.2.1.1 m).2.1.le, le_rfl⟩ b θ) z hz vs
+      iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ =
+      iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs (w m)) m) θ := by
+    rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz,
+      hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz]
+    exact hlocal m n b θ (rsel m) (hrsel m)
+      (hN.sectorFlow_closed_angularTower hS hT m (rsel m)
+        (hrsel m) b θ) z hz vs
   have hlow : T.M (T.sample m) ^ (c + 1) * p base (w m) ≤
       L * Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal :=
     (henergy m base (c + 1)).trans

@@ -43,9 +43,14 @@ theorem angularTower_affineLine_contDiffOn
         (fun p : PolarPoint => (p.2, (x + p.1 • w, fun _ : Fin a => w))) :=
       continuous_snd.prodMk
         ((continuous_const.add (continuous_fst.smul continuous_const)).prodMk continuous_const)
-    simpa only [Function.comp_def, F] using
+    have h : ContinuousOn
+        ((fun p : ℝ × (E × (Fin a → E)) => (J b p.1).D a p.2.1 p.2.2) ∘
+          (fun p : PolarPoint => (p.2, (x + p.1 • w, fun _ : Fin a => w)))) V :=
       (hjoint a b).comp hmap.continuousOn
         (fun p hp => ⟨mem_univ _, hp, mem_univ _⟩)
+    apply h.congr
+    intro p hp
+    rfl
   have hfirst (a b : ℕ) (p : PolarPoint) (hp : p ∈ V) :
       HasDerivAt (fun t => F a b (t, p.2)) (F (a + 1) b p) p.1 := by
     have hvec : Fin.cons w (fun _ : Fin a => w) = (fun _ : Fin (a + 1) => w) := by

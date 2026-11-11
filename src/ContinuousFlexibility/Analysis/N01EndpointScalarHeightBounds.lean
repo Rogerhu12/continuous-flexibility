@@ -28,13 +28,14 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlow_pure_scalar_height_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n s : ℕ) :
     ∃ B : ℝ, 0 < B ∧ ∀ m b θ, b ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
       (∃ c : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
         heightPairField S η (r, ψ) = stateU S (liftSectorParameter S C z).1 (r, ψ) + c) →
       |iteratedDeriv b
-        (hN.endpointFlowScalarJets hS hT (n + 1) z
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S) m) θ| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
@@ -43,30 +44,31 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound
   obtain ⟨B, hB, htower⟩ :=
     hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
   refine ⟨B, hB, fun m b θ hb z hz η hη => ?_⟩
-  have hr : C.right m ∈ Icc (C.left m) (C.right m) :=
-    ⟨(hN.2.2.2.1.1 m).2.1.le, le_rfl⟩
-  obtain ⟨J, hJ⟩ := htower m b θ (C.right m) hb hr
-  rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT (n + 1) z hz]
-  have heq := (hN.sectorFlow_closed_angularTower hS hT m (C.right m) hr b θ).unique
+  have hr : rsel m ∈ Icc (C.left m) (C.right m) :=
+    (hrsel m)
+  obtain ⟨J, hJ⟩ := htower m b θ (rsel m) hb hr
+  rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz]
+  have heq := (hN.sectorFlow_closed_angularTower hS hT m (rsel m) hr b θ).unique
     J (n + 1) z hz
   rw [heq]
   exact hJ z hz η hη
 
 theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n s : ℕ) :
     ∃ K : ℝ, 0 < K ∧ ∀ m b c θ, b ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
       (∃ a : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
         heightPairField S η (r, ψ) = stateU S (liftSectorParameter S C z).1 (r, ψ) + a) →
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b
-          (hN.endpointFlowScalarJets hS hT (n + 1) z
+          (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
             (fun _ => scalarParameterDirection S) m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
           (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
             heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  obtain ⟨B, hB, hbound⟩ := hN.endpointFlow_pure_scalar_height_bound hS hT n s
+  obtain ⟨B, hB, hbound⟩ := hN.endpointFlow_pure_scalar_height_bound hS hT rsel hrsel n s
   obtain ⟨K, hK, hpref⟩ := hN.flow_sample_prefactor_le_M hT hB.le
   refine ⟨B * K, mul_pos hB hK, fun m b c θ hb z hz η hη => ?_⟩
   have hs := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m

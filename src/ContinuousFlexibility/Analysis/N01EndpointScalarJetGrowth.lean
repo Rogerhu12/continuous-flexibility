@@ -25,13 +25,14 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
       circleNorm T (3 / 4 : ℝ) s
-        (hN.endpointFlowScalarJets hS hT (n + 1) z
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z) := by
   classical
@@ -43,17 +44,17 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
   obtain ⟨I, hI0, hi⟩ := hinterp R hR s hs
   have hraw (j : CircleJetIndex s) :=
-    hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound hS hT n (j.val 0).val (j.val 1).val
+    hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound hS hT rsel hrsel n (j.val 0).val (j.val 1).val
   choose K hK hk using hraw
   refine ⟨(∑ j : CircleJetIndex s, K j) * I,
     mul_nonneg (Finset.sum_nonneg (fun j _ => hK j)) hI0, ?_⟩
   intro z hz hzb
   calc
     _ ≤ ∑ j : CircleJetIndex s, circleWeightedJetNorm T (3 / 4 : ℝ)
-        (j.val 0).val (j.val 1).val (hN.endpointFlowScalarJets hS hT (n + 1) z
+        (j.val 0).val (j.val 1).val (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) :=
       circleNorm_le_sum_weightedJetNorm
-        (hN.endpointFlow_pure_scalar_circleMember hS hT n z hz) s
+        (hN.endpointFlow_pure_scalar_circleMember hS hT rsel hrsel n z hz) s
     _ ≤ ∑ j : CircleJetIndex s, K j * (I * (1 + p (s + L) z)) := by
       apply Finset.sum_le_sum
       intro j _

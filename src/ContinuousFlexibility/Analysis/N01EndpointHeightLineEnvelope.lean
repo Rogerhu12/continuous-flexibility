@@ -50,12 +50,13 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
     (n s : ℕ) (x w : StateDirections S × ℝ) :
     ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
       ∀ t : ℝ, |t| ≤ 1 → x + t • w ∈ sectorNeighborhood S base ε ε →
       ∀ m b c, b + c ≤ s → ∀ θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) (x + t • w)
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w)
           (fun _ => scalarParameterDirection S) m) θ| ≤ K * Real.sqrt (E m).toReal := by
   let ξ₀ : HeightPair S := (liftSectorParameter S C x).1.1
   let ξ₁ : HeightPair S := w.1.val.1
@@ -78,7 +79,7 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
     change (∑' m, E₀ m + E₁ m) < ⊤
     rw [ENNReal.tsum_add]
     exact ENNReal.add_lt_top.mpr ⟨hE₀, hE₁⟩
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT n s
+  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n s
   let A : ℝ := (n : ℝ) + 2 + (p j x + p j w)
   have hA : 0 ≤ A := add_nonneg (by positivity)
     (add_nonneg (apply_nonneg _ _) (apply_nonneg _ _))

@@ -28,10 +28,11 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
     (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε) :
     CircleMember T (3 / 4 : ℝ) (fun m θ =>
-      hN.endpointFlowScalarJets hS hT 0 z Fin.elim0 m θ -
-        hN.endpointFlowScalarJets hS hT 0 (z.1, 0) Fin.elim0 m θ) := by
+      hN.endpointFlowScalarJets hS hT rsel hrsel 0 z Fin.elim0 m θ -
+        hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0 m θ) := by
   let z₀ : StateDirections S × ℝ := (z.1, 0)
   let path : ℝ → (StateDirections S × ℝ) :=
     fun t => z₀ + (t * z.2) • scalarParameterDirection S
@@ -51,10 +52,10 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     change sectorGrading S j z.1 + ‖t * z.2‖ ≤ sectorGrading S j z.1 + ‖z.2‖
     simpa only [Real.norm_eq_abs] using add_le_add (le_refl (sectorGrading S j z.1)) (habs t ht)
   let F : ℝ → ℕ → ℝ → ℝ := fun t =>
-    hN.endpointFlowScalarJets hS hT 0 (path t) Fin.elim0
+    hN.endpointFlowScalarJets hS hT rsel hrsel 0 (path t) Fin.elim0
   let G : ℝ → ℕ → ℕ → ℝ → ℝ := fun t m b θ =>
     z.2 * iteratedDeriv b
-      (hN.endpointFlowScalarJets hS hT 1 (path t) (fun _ => scalarParameterDirection S) m) θ
+      (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (path t) (fun _ => scalarParameterDirection S) m) θ
   have htuple : Fin.cons (scalarParameterDirection S)
       (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) =
       (fun _ : Fin 1 => scalarParameterDirection S) := by
@@ -64,7 +65,7 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     simp
   have hderiv (m b : ℕ) (θ t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       HasDerivAt (fun a => iteratedDeriv b (F a m) θ) (G t m b θ) t := by
-    have hd := hN.endpointFlowScalarJets_hasDerivAt_line hS hT 0 z₀
+    have hd := hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel 0 z₀
       (scalarParameterDirection S) Fin.elim0 (t * z.2) (hpath t ht) m b θ
     rw [htuple] at hd
     have h := hd.comp t ((hasDerivAt_id t).mul_const z.2)
@@ -81,11 +82,11 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
   have hmem : CircleMember T (3 / 4 : ℝ) (fun m θ => F 1 m θ - F 0 m θ) := by
     apply circleMember_sub_of_curve_energy_envelope F G
-      (hN.endpointFlowScalarJets_regular hS hT 0 (path 0) (hpath 0 (by simp)) Fin.elim0)
-      (hN.endpointFlowScalarJets_regular hS hT 0 (path 1) (hpath 1 (by simp)) Fin.elim0)
+      (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (path 0) (hpath 0 (by simp)) Fin.elim0)
+      (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (path 1) (hpath 1 (by simp)) Fin.elim0)
       (fun m => zero_le_one.trans (hM m)) hH hderiv
     intro s
-    obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT 0 s
+    obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel 0 s
     let j : ℕ := max base (s + loss)
     let E : ℕ → ℝ≥0∞ := fun m =>
       ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
@@ -129,7 +130,7 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
         Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg (zero_le_one.trans (hM m)) _)]
     calc
       _ = |z.2| * ((T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-          |iteratedDeriv b (hN.endpointFlowScalarJets hS hT 1 (path t)
+          |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (path t)
             (fun _ => scalarParameterDirection S) m) θ|) := by
         dsimp only [G]
         rw [abs_mul]
@@ -154,21 +155,22 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
 theorem N01Properties.endpointFlowScalarJets_zero_circleMember
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
     (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε) :
-    CircleMember T (3 / 4 : ℝ) (hN.endpointFlowScalarJets hS hT 0 z Fin.elim0) := by
+    CircleMember T (3 / 4 : ℝ) (hN.endpointFlowScalarJets hS hT rsel hrsel 0 z Fin.elim0) := by
   let P : Submodule ℝ (ℕ → ℝ → ℝ) := LinearMap.range (S.circle (3 / 4 : ℝ)).decode
-  have hs : hN.endpointFlowScalarJets hS hT 0 (z.1, 0) Fin.elim0 ∈ P :=
+  have hs : hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0 ∈ P :=
     (circleDecode_mem_range_iff (hS.2.1 (3 / 4 : ℝ)) _).mpr
-      (hN.endpointFlowScalarJets_state_increment_circleMember hS hT z hz)
-  have hq : (fun m θ => hN.endpointFlowScalarJets hS hT 0 z Fin.elim0 m θ -
-      hN.endpointFlowScalarJets hS hT 0 (z.1, 0) Fin.elim0 m θ) ∈ P :=
+      (hN.endpointFlowScalarJets_state_increment_circleMember hS hT rsel hrsel z hz)
+  have hq : (fun m θ => hN.endpointFlowScalarJets hS hT rsel hrsel 0 z Fin.elim0 m θ -
+      hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0 m θ) ∈ P :=
     (circleDecode_mem_range_iff (hS.2.1 (3 / 4 : ℝ)) _).mpr
-      (hN.endpointFlowScalarJets_scalar_increment_circleMember hS hT z hz)
+      (hN.endpointFlowScalarJets_scalar_increment_circleMember hS hT rsel hrsel z hz)
   apply (circleDecode_mem_range_iff (hS.2.1 (3 / 4 : ℝ)) _).mp
-  have heq : (fun m θ => hN.endpointFlowScalarJets hS hT 0 z Fin.elim0 m θ -
-        hN.endpointFlowScalarJets hS hT 0 (z.1, 0) Fin.elim0 m θ) +
-      hN.endpointFlowScalarJets hS hT 0 (z.1, 0) Fin.elim0 =
-      hN.endpointFlowScalarJets hS hT 0 z Fin.elim0 := by
+  have heq : (fun m θ => hN.endpointFlowScalarJets hS hT rsel hrsel 0 z Fin.elim0 m θ -
+        hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0 m θ) +
+      hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0 =
+      hN.endpointFlowScalarJets hS hT rsel hrsel 0 z Fin.elim0 := by
     funext m θ
     exact sub_add_cancel _ _
   simpa only [heq] using P.add_mem hq hs
@@ -178,14 +180,15 @@ belongs to the supplied physical circle model. -/
 theorem N01Properties.endpointFlowScalarJets_circleMember
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
     (n : ℕ) (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε)
     (v : Fin n → (StateDirections S × ℝ)) :
-    CircleMember T (3 / 4 : ℝ) (hN.endpointFlowScalarJets hS hT n z v) := by
+    CircleMember T (3 / 4 : ℝ) (hN.endpointFlowScalarJets hS hT rsel hrsel n z v) := by
   cases n with
   | zero =>
     have hv : v = Fin.elim0 := Subsingleton.elim _ _
     rw [hv]
-    exact hN.endpointFlowScalarJets_zero_circleMember hS hT z hz
-  | succ n => exact hN.endpointFlowScalarJets_positive_circleMember hS hT n z hz v
+    exact hN.endpointFlowScalarJets_zero_circleMember hS hT rsel hrsel z hz
+  | succ n => exact hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz v
 
 end ContinuousFlexibility.Statements

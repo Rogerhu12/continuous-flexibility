@@ -33,18 +33,19 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n b c : ℕ) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n b c : ℕ) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
       ∀ vs : Fin n → (StateDirections S × ℝ),
       (∀ i, pairGrading (sectorGrading S) realGrading base (vs i) ≤ 1) →
       ∀ v : StateDirections S × ℝ, v.2 = 0 →
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
-        (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs v)) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
         K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
             pairGrading (sectorGrading S) realGrading (base + c + 6) v +
           pairGrading (sectorGrading S) realGrading (b + loss + c + 6) v) := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_state_split_energy_bound hS hT n b c
+  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_state_split_energy_bound hS hT rsel hrsel n b c
   obtain ⟨K₀, hK₀, hE₀⟩ := hN.stateLocalizationEnergy_tsum_le_grading_sq hS hT base (c + 1)
   obtain ⟨K₁, hK₁, hE₁⟩ := hN.stateLocalizationEnergy_tsum_le_grading_sq hS hT (b + loss) (c + 1)
   let L : ℝ := Real.sqrt K₀ + Real.sqrt K₁
@@ -77,7 +78,7 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
   have hn := circleWeightedJetNorm_le_two_envelopes
     (mul_nonneg hK.le hA) hK.le hU hV hE hF
-    (fun m => (hN.endpointFlowScalarJets_regular hS hT (n + 1) z hz (Fin.snoc vs v) m).1)
+    (fun m => (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz (Fin.snoc vs v) m).1)
     hM hH b c (fun m θ => (hpoint z hz vs hvs v hvq m θ).trans_eq (by
       dsimp only [A, p]
       ring))
@@ -85,7 +86,7 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound
   have h₁ : Real.sqrt K₁ ≤ L := le_add_of_nonneg_left (Real.sqrt_nonneg _)
   calc
     circleWeightedJetNorm T (3 / 4 : ℝ) b c
-        (hN.endpointFlowScalarJets hS hT (n + 1) z (Fin.snoc vs v)) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
         Real.sqrt (2 * Real.pi) * (K * A * U + K * V) := hn
     _ = Real.sqrt (2 * Real.pi) * K *
         (A * (Real.sqrt K₀ * p (base + c + 6) v) +

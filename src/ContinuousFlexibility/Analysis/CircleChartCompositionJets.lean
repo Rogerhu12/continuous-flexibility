@@ -155,6 +155,22 @@ theorem affine_outerJet_scalar_hasDerivAt
   have h := (hcoef f hf).fun_add ((hasDerivAt_id t).fun_mul (hcoef g hg))
   convert h using 1 <;> simp only [id_eq, one_mul] <;> ring
 
+theorem circleComposition_outerJet_line_eq
+    (hS : IsCircleModel T γ S) (travel : ℕ → ℝ)
+    (x w : S.Space × S.Space) (n m : ℕ) (θ q : ℝ) :
+    iteratedDeriv n (S.decode (x + q • w).2 m)
+        (circleCompositionPhase travel (x + q • w) m θ) =
+      iteratedDeriv n (S.decode x.2 m)
+          (circleCompositionPhase travel x m θ + q * S.decode w.1 m θ) +
+        q * iteratedDeriv n (S.decode w.2 m)
+          (circleCompositionPhase travel x m θ + q * S.decode w.1 m θ) := by
+  change iteratedDeriv n (S.decode (x.2 + q • w.2) m) _ = _
+  exact (circleAngularJetEvaluation_line hS x.2 w.2 n m q
+    (circleCompositionPhase travel (x + q • w) m θ)).trans
+    (congrArg (fun y : ℝ => iteratedDeriv n (S.decode x.2 m) y +
+      q * iteratedDeriv n (S.decode w.2 m) y)
+      (circleCompositionPhase_line travel x w m θ q))
+
 /-- The coefficient of the all-chart-direction term has its ordinary
 scalar derivative along every actual affine parameter line. -/
 theorem circleComposition_outerJet_line_hasDerivAt
@@ -166,42 +182,15 @@ theorem circleComposition_outerJet_line_hasDerivAt
       (iteratedDeriv (n + 1) (S.decode (x + t • w).2 m)
           (circleCompositionPhase travel (x + t • w) m θ) * S.decode w.1 m θ +
         iteratedDeriv n (S.decode w.2 m) (circleCompositionPhase travel (x + t • w) m θ)) t := by
-  let a := circleCompositionPhase travel x m θ
-  let d := S.decode w.1 m θ
   have h := affine_outerJet_scalar_hasDerivAt
-    ((hS.2.2.2.1 x.2).1 m).1 ((hS.2.2.2.1 w.2).1 m).1 n a d t
-  have hfun :
-      (fun q : ℝ => iteratedDeriv n (S.decode (x + q • w).2 m)
-        (circleCompositionPhase travel (x + q • w) m θ)) =
-      (fun q : ℝ => iteratedDeriv n (S.decode x.2 m) (a + q * d) +
-        q * iteratedDeriv n (S.decode w.2 m) (a + q * d)) := by
-    funext q
-    change iteratedDeriv n (S.decode (x.2 + q • w.2) m) _ = _
-    exact (circleAngularJetEvaluation_line hS x.2 w.2 n m q
-      (circleCompositionPhase travel (x + q • w) m θ)).trans
-      (congrArg (fun y : ℝ => iteratedDeriv n (S.decode x.2 m) y +
-        q * iteratedDeriv n (S.decode w.2 m) y)
-        (circleCompositionPhase_line travel x w m θ q))
-  have hderiv :
-      iteratedDeriv (n + 1) (S.decode (x + t • w).2 m)
-          (circleCompositionPhase travel (x + t • w) m θ) * S.decode w.1 m θ +
-        iteratedDeriv n (S.decode w.2 m) (circleCompositionPhase travel (x + t • w) m θ) =
-      (iteratedDeriv (n + 1) (S.decode x.2 m) (a + t * d) +
-        t * iteratedDeriv (n + 1) (S.decode w.2 m) (a + t * d)) * d +
-        iteratedDeriv n (S.decode w.2 m) (a + t * d) := by
-    change iteratedDeriv (n + 1) (S.decode (x.2 + t • w.2) m) _ * _ + _ = _
-    have hjet := circleAngularJetEvaluation_line hS x.2 w.2 (n + 1) m t
-      (circleCompositionPhase travel (x + t • w) m θ)
-    have h₁ := congrArg (fun y : ℝ => y * d + iteratedDeriv n (S.decode w.2 m)
-      (circleCompositionPhase travel (x + t • w) m θ)) hjet
-    have h₂ := congrArg (fun y : ℝ =>
-      (iteratedDeriv (n + 1) (S.decode x.2 m) y +
-        t * iteratedDeriv (n + 1) (S.decode w.2 m) y) * d +
-        iteratedDeriv n (S.decode w.2 m) y)
-      (circleCompositionPhase_line travel x w m θ t)
-    exact h₁.trans h₂
-  rw [hfun, hderiv]
-  exact h
+    ((hS.2.2.2.1 x.2).1 m).1 ((hS.2.2.2.1 w.2).1 m).1 n
+    (circleCompositionPhase travel x m θ) (S.decode w.1 m θ) t
+  have hd := congrArg₂ (fun y z : ℝ => y * S.decode w.1 m θ + z)
+    (circleComposition_outerJet_line_eq hS travel x w (n + 1) m θ t)
+    (congrArg (iteratedDeriv n (S.decode w.2 m))
+      (circleCompositionPhase_line travel x w m θ t))
+  exact (h.congr_deriv hd.symm).congr_of_eventuallyEq
+    (Eventually.of_forall (fun q => circleComposition_outerJet_line_eq hS travel x w n m θ q))
 
 theorem fin_prod_erase_zero {n : ℕ} (h : Fin (n + 1) → ℝ) :
     (∏ j ∈ Finset.univ.erase (0 : Fin (n + 1)), h j) = ∏ i : Fin n, h i.succ := by

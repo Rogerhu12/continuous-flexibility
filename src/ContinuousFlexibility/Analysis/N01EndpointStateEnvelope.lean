@@ -32,12 +32,13 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n s : ℕ)
     (v : Fin (n + 1) → (StateDirections S × ℝ)) (i : Fin (n + 1)) (hi : (v i).2 = 0) :
     ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m b c, b + c ≤ s → ∀ θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) z v m) θ| ≤
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v m) θ| ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss)) z) *
           Real.sqrt (E m).toReal := by
   let p := pairGrading (sectorGrading S) realGrading
@@ -47,7 +48,7 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
       ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
         ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m b c, b + c ≤ s → ∀ θ,
         (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-          |iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) z w m) θ| ≤
+          |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z w m) θ| ≤
           K * (1 + p j z) * Real.sqrt (E m).toReal := by
     intro k
     induction k with
@@ -55,14 +56,14 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
       intro w a ha hw
       have ha0 : a = 0 := Fin.ext ha
       rw [ha0] at hw
-      obtain ⟨K, hK, hb⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT n s
+      obtain ⟨K, hK, hb⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
       refine ⟨stateLocalizationEnergy D T C j (s + 1) (w 0),
         K * ∏ a : Fin n, p j (Fin.tail w a),
         hN.stateLocalizationEnergy_tsum_lt_top hS hT j (s + 1) (w 0),
         mul_nonneg hK.le (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)), ?_⟩
       intro z hz m b c hbc θ
       have hrot := congrArg (fun f : ℕ → ℝ → ℝ => iteratedDeriv b (f m) θ)
-        (hN.endpointFlowScalarJets_rotate hS hT n z hz w)
+        (hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w)
       rw [hrot]
       exact (hb z hz (Fin.tail w) (w 0) hw m b c hbc θ).trans_eq (by
         dsimp only [j, p]
@@ -83,24 +84,25 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
       refine ⟨E, K, hE, hK, ?_⟩
       intro z hz m b c hbc θ
       have hrot := congrArg (fun f : ℕ → ℝ → ℝ => iteratedDeriv b (f m) θ)
-        (hN.endpointFlowScalarJets_rotate hS hT n z hz w)
+        (hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w)
       rw [hrot]
       exact hb z hz m b c hbc θ
   exact haux i.val v i rfl hi
 
 theorem N01Properties.endpointFlowScalarJets_state_slot_line_energy_envelope
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n s : ℕ)
     (x w : StateDirections S × ℝ)
     (v : Fin (n + 1) → (StateDirections S × ℝ)) (i : Fin (n + 1)) (hi : (v i).2 = 0) :
     ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
       ∀ t : ℝ, |t| ≤ 1 → x + t • w ∈ sectorNeighborhood S base ε ε →
       ∀ m b c, b + c ≤ s → ∀ θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) (x + t • w) v m) θ| ≤
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w) v m) θ| ≤
         K * Real.sqrt (E m).toReal := by
   obtain ⟨E, K, hE, hK, hb⟩ :=
-    hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT n s v i hi
+    hN.endpointFlowScalarJets_state_slot_energy_envelope hS hT rsel hrsel n s v i hi
   let p := pairGrading (sectorGrading S) realGrading
   let j : ℕ := max base (s + loss)
   refine ⟨E, K * (1 + (p j x + p j w)), hE,

@@ -198,10 +198,10 @@ theorem SmoothDirections.cons_eq_snoc (J : SmoothDirections U f) (hUc : Convex â
   | zero =>
     intro x hx w v
     apply congrArg (J.D 1 x)
+    rw [Fin.snoc_zero]
     funext i
     fin_cases i
-    simp only [Fin.cons_zero]
-    exact (Fin.snoc_last w v).symm
+    rfl
   | succ n ih =>
     intro x hx w v
     let a := v 0

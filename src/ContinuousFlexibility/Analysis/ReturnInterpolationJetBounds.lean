@@ -47,11 +47,15 @@ theorem returnInterpolation_positive_jets_uniform
     rw [iteratedDeriv_fun_id, if_neg (by omega : n ≠ 0)]
     split <;> norm_num
   have heq : returnInterpolation t (K i) = fun x => x + t * (K i x - x) := rfl
-  rw [heq, iteratedDeriv_fun_add (contDiffAt_id : ContDiffAt ℝ (n : ℕ∞ω)
-      (fun x : ℝ => x) θ)
-    ((contDiff_const.mul ((hK i).sub contDiff_id)).contDiffAt.of_le (by simp)),
-    iteratedDeriv_const_mul t (((hK i).sub contDiff_id).contDiffAt.of_le (by simp)),
-    iteratedDeriv_fun_sub ((hK i).contDiffAt.of_le (by simp)) contDiffAt_id]
+  have hsubreg : ContDiffAt ℝ (n : ℕ∞ω) (fun x : ℝ => K i x - x) θ :=
+    ((hK i).sub contDiff_id).contDiffAt.of_le (by simp)
+  have hmulreg : ContDiffAt ℝ (n : ℕ∞ω) (fun x : ℝ => t * (K i x - x)) θ :=
+    contDiffAt_const.mul hsubreg
+  rw [heq, iteratedDeriv_fun_add (f := fun x : ℝ => x)
+      (g := fun x : ℝ => t * (K i x - x)) (n := n) (x := θ) contDiffAt_id hmulreg,
+    iteratedDeriv_const_mul (f := fun x : ℝ => K i x - x) t hsubreg,
+    iteratedDeriv_fun_sub (f := K i) (g := fun x : ℝ => x) (n := n) (x := θ)
+      ((hK i).contDiffAt.of_le (by simp)) contDiffAt_id]
   apply (abs_add_le _ _).trans
   rw [abs_mul, abs_of_nonneg ht.1]
   have hsub : |iteratedDeriv n (K i) θ - iteratedDeriv n (fun x : ℝ => x) θ| ≤ A + 1 :=

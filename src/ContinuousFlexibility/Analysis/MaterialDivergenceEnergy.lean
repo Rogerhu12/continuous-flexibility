@@ -75,7 +75,10 @@ theorem weightedPhysicalJet_eq_of_eqOn_annularOpen
     funext p
     unfold materialPullback
     rw [heq ⟨(hT.2.2.2.2.2.2.2.1 p.1).1, mem_univ _⟩]
-  simp only [weightedPhysicalJet, hpull]
+  funext p
+  change T.M (T.radius p.1) ^ c * mixedDerivative a b (materialPullback T γ f) p =
+    T.M (T.radius p.1) ^ c * mixedDerivative a b (materialPullback T γ g) p
+  rw [hpull]
 
 theorem memLp_weightedPhysicalJet_symmetric_divergence
     {D : ReferenceData} {T : MaterialData} {γ : ℝ}

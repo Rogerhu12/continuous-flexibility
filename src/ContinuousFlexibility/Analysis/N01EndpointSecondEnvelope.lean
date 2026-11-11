@@ -53,25 +53,26 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem N01Properties.endpointFlowScalarJets_line_energy_envelope
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
     (n s : ℕ) (x w : StateDirections S × ℝ)
     (v : Fin (n + 1) → (StateDirections S × ℝ)) :
     ∃ E : ℕ → ℝ≥0∞, ∃ K : ℝ, (∑' m, E m) < ⊤ ∧ 0 ≤ K ∧
       ∀ t : ℝ, |t| ≤ 1 → x + t • w ∈ sectorNeighborhood S base ε ε →
       ∀ m b c, b + c ≤ s → ∀ θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) (x + t • w) v m) θ| ≤
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w) v m) θ| ≤
         K * Real.sqrt (E m).toReal := by
   classical
   let q : Fin (n + 1) → (StateDirections S × ℝ) := fun i =>
     (v i).2 • scalarParameterDirection S
   have hstate (i : Fin (n + 1)) :=
-    hN.endpointFlowScalarJets_state_slot_line_energy_envelope hS hT n s x w
+    hN.endpointFlowScalarJets_state_slot_line_energy_envelope hS hT rsel hrsel n s x w
       (multilinearDifferenceTuple q v i) i (by
         simp only [multilinearDifferenceTuple, lt_self_iff_false, if_false, if_true]
         change (v i).2 - (v i).2 * 1 = 0
         rw [mul_one, sub_self])
   choose Es Ks hEs hKs hs using hstate
-  obtain ⟨Eq, Kq, hEq, hKq, hq⟩ := hN.endpointFlow_pure_scalar_line_energy_envelope hS hT n s x w
+  obtain ⟨Eq, Kq, hEq, hKq, hq⟩ := hN.endpointFlow_pure_scalar_line_energy_envelope hS hT rsel hrsel n s x w
   let ι := Option (Fin (n + 1))
   let E : ι → ℕ → ℝ≥0∞
     | none => Eq
@@ -91,12 +92,12 @@ theorem N01Properties.endpointFlowScalarJets_line_energy_envelope
   have htotal : (∑' m, total m) < ⊤ := finiteEnergyEnvelope_tsum_lt_top K E hE
   refine ⟨total, (n : ℝ) + 2, htotal, by positivity, ?_⟩
   intro t ht hz m b c hbc θ
-  let J := hN.sectorFlow_closed_angularTower hS hT m (C.right m)
-    ⟨(hN.2.2.2.1.1 m).2.1.le, le_rfl⟩ b θ
+  let J := hN.sectorFlow_closed_angularTower hS hT m (rsel m)
+    (hrsel m) b θ
   let F := (J.D (n + 1) (x + t • w)).toMultilinearMap
   have hjet (u : Fin (n + 1) → (StateDirections S × ℝ)) :
-      iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) (x + t • w) u m) θ = F u :=
-    hN.endpointFlowScalarJets_iteratedDeriv hS hT (n + 1) (x + t • w) hz u m b θ
+      iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) (x + t • w) u m) θ = F u :=
+    hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) (x + t • w) hz u m b θ
   let weight : ℝ := T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))
   have hsample := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hweight : 0 ≤ weight := mul_nonneg
@@ -134,10 +135,11 @@ theorem N01Properties.endpointFlowScalarJets_line_energy_envelope
 theorem N01Properties.endpointFlowScalarJets_second_envelopes
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
     {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
     (hsub : U ⊆ sectorNeighborhood S base ε ε) :
     CircleJetSecondEnvelopes (T := T) (γ := (3 / 4 : ℝ)) (U := U)
-      (hN.endpointFlowScalarJets hS hT) := by
+      (hN.endpointFlowScalarJets hS hT rsel hrsel) := by
   intro n x hx v w
   have hline : Continuous (fun t : ℝ => x + t • w) :=
     continuous_const.add (continuous_id.smul continuous_const)
@@ -151,7 +153,7 @@ theorem N01Properties.endpointFlowScalarJets_second_envelopes
   refine ⟨min δ 1, lt_min hδ zero_lt_one, hmem, ?_⟩
   intro s
   obtain ⟨E, K, hE, hK, hb⟩ :=
-    hN.endpointFlowScalarJets_line_energy_envelope hS hT (n + 1) s x w
+    hN.endpointFlowScalarJets_line_energy_envelope hS hT rsel hrsel (n + 1) s x w
       (Fin.cons w (Fin.cons w v))
   exact ⟨E, K, hE, hK, fun t ht =>
     hb t (ht.trans_le (min_le_right δ 1)).le (hsub (hmem t ht))⟩

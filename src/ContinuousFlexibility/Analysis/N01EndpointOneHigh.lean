@@ -24,26 +24,27 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
       ∀ v : Fin (n + 1) → (StateDirections S × ℝ),
       circleNorm T (3 / 4 : ℝ) s
-        (hN.endpointFlowScalarJets hS hT (n + 1) z v) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
           B (s + L) z v := by
   obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_positive_circleNorm_local_growth hS hT
+    hN.endpointFlowScalarJets_positive_circleNorm_local_growth hS hT rsel hrsel
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
   obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
   refine ⟨K, hK, ?_⟩
   intro z hz hzb v
   let p := pairGrading (sectorGrading S) realGrading
-  let A := hN.endpointFlowScalarJets hS hT (n + 1) z
+  let A := hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
   let M := liftCircleMultilinear (hS.2.1 (3 / 4 : ℝ)) A
-    (hN.endpointFlowScalarJets_positive_circleMember hS hT n z hz)
+    (hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz)
   let coordinate := projectiveCoordinate
     (fun j => (S.circle (3 / 4 : ℝ)).level j) (S.circle (3 / 4 : ℝ)).bond s
   let F := coordinate.toLinearMap.compMultilinearMap M
@@ -70,18 +71,19 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh
 box. The sharper one-high theorem remains available for tame bounds. -/
 theorem N01Properties.endpointFlowScalarJets_positive_norm_bounds_on_box
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
     ∃ B : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R → ∀ n s : ℕ,
       ∃ j : ℕ, ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
       ∀ v : Fin (n + 1) → (StateDirections S × ℝ),
       circleNorm T (3 / 4 : ℝ) s
-        (hN.endpointFlowScalarJets hS hT (n + 1) z v) ≤
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading j z) *
           ∏ i, pairGrading (sectorGrading S) realGrading j (v i) := by
   obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT
+    hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
   refine ⟨B, hB, fun R hR n s => ?_⟩
   let t : ℕ := max s B
   obtain ⟨K, hK, hk⟩ := hbound n R hR t (le_max_right _ _)
@@ -93,9 +95,9 @@ theorem N01Properties.endpointFlowScalarJets_positive_norm_bounds_on_box
   have hW := oneHighVariationWeight_le_seminorm_product p (p (t + L)) B (t + L)
     (hp (by have hBt : B ≤ t := le_max_right _ _; omega)) le_rfl z v
   calc
-    _ ≤ circleNorm T (3 / 4 : ℝ) t (hN.endpointFlowScalarJets hS hT (n + 1) z v) :=
+    _ ≤ circleNorm T (3 / 4 : ℝ) t (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) :=
       circleNorm_monotone_of_member
-        (hN.endpointFlowScalarJets_positive_circleMember hS hT n z hz v) (le_max_left _ _)
+        (hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz v) (le_max_left _ _)
     _ ≤ K * oneHighVariationWeight p B (t + L) z v := hk z hz hzb v
     _ ≤ K * ((((n + 1 : ℕ) : ℝ) + 1) * (1 + p (t + L) z) * ∏ i, p (t + L) (v i)) :=
       mul_le_mul_of_nonneg_left hW hK

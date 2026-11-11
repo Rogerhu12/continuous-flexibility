@@ -50,6 +50,18 @@ theorem smoothDirections_zeroth_spatialWeight_bound
   simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
     mul_one, add_zero, J.zero x hx] using hJ x hx Fin.elim0
 
+theorem smoothDirections_zeroth_twoFactor_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U : Set E} {f : E → ℝ} (q : ℕ → Seminorm ℝ E)
+    (base high : ℕ) (x₀ : E) (A B : ℝ)
+    (h : ∃ J : SmoothDirections U f, ∀ x ∈ U, ∀ v : Fin 0 → E,
+      |J.D 0 x v| ≤ A * (B * oneHighVariationWeight q base high (x - x₀) v))
+    (x : E) (hx : x ∈ U) :
+    |f x| ≤ A * (B * (1 + q high (x - x₀))) := by
+  obtain ⟨J, hJ⟩ := h
+  simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
+    mul_one, add_zero, J.zero x hx] using hJ x hx Fin.elim0
+
 /-- Division by a scalar spatial weight keeps the same parameter tower
 and its complete one-high-factor budget. -/
 theorem smoothDirections_divide_spatialWeight_bound
@@ -204,51 +216,6 @@ theorem N01Properties.ordinaryFlowFamily_weighted_zeroth_bound
       (hdata.choose_spec.2 m a b p hab hp) z hz
   exact ⟨B, hB, hpoint⟩
 
-/-- The actual N01 spatial-flow jet estimate on the selected collars,
-with the endpoint factors divided out quantitatively. This is the
-ordinary mixed derivative appearing in the original tower. -/
-theorem N01Properties.ordinaryFlowFamily_collar_bound
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
-    (hN : N01Properties D T S C base loss ε)
-    (j : ℕ → ℕ) (x δ : ℕ → ℝ) {B₀ : ℝ} (hB₀ : 0 < B₀)
-    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
-    (hinside : ∀ m, C.left m < x m - δ m ∧ x m + δ m < C.right m)
-    (hspeed : ∀ m r, r ∈ Icc (x m - δ m) (x m + δ m) →
-      radialE (D.cellIndex (j m)) ^ (-B₀) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r)
-    (s : ℕ) :
-    ∃ K A B : ℝ, 0 < K ∧ 0 < A ∧ 0 < B ∧
-      ∀ z ∈ stateNeighborhood S C base ε, ∀ m a b p,
-      a + b ≤ s → p.1 ∈ Icc (x m - δ m) (x m + δ m) →
-      |ordinaryFlowFamily S C m a b p z| ≤
-        K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
-          (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-            T.E0 (T.sample (C.cell m)) ^ B *
-            (1 + pairGrading (stateGrading S) realGrading (s + loss)
-              (z - (C.referenceState, 0)))) := by
-  have hgeom : ∃ K A : ℝ, 0 < K ∧ 0 < A ∧ ∀ m r,
-      r ∈ Icc (x m - δ m) (x m + δ m) →
-      (min (r - C.left m) (C.right m - r))⁻¹ ≤
-        K * radialE (D.cellIndex (j m)) ^ A :=
-    @N01Properties.opticalCollar_inverse_boundaryDistance_bound
-      D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
-  obtain ⟨K, A, hK, hA, hdist⟩ := hgeom
-  obtain ⟨B, hB, hraw⟩ := hN.ordinaryFlowFamily_weighted_zeroth_bound s
-  refine ⟨K, A, B, hK, hA, hB, fun z hz m a b p hab hp => ?_⟩
-  have hm : p.1 ∈ Ioo (C.left m) (C.right m) :=
-    ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
-  have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
-    lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
-  exact abs_le_of_power_weight_bound
-    (d := min (p.1 - C.left m) (C.right m - p.1))
-    (K := K) (E := radialE (D.cellIndex (j m))) (A := A)
-    (C := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-      T.E0 (T.sample (C.cell m)) ^ B *
-      (1 + pairGrading (stateGrading S) realGrading (s + loss)
-        (z - (C.referenceState, 0))))
-    (y := ordinaryFlowFamily S C m a b p z) a hd (Real.exp_pos _)
-    (hdist m p.1 hp) (hraw z hz m a b p hab hm)
-
 /-- The same two geometric constants precede every parameter and spatial
 order. The actual N01 directional tower, its neighborhood and its
 one-high-factor input weight are retained without specialization to a
@@ -305,6 +272,40 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
       (hdata.choose_spec.2 m a b p hab hm)
   exact Exists.intro B (And.intro hB hpoint)
 
+
+/-- The actual N01 spatial-flow jet estimate on the selected collars,
+with the endpoint factors divided out quantitatively. This is the
+ordinary mixed derivative appearing in the original tower. -/
+theorem N01Properties.ordinaryFlowFamily_collar_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (j : ℕ → ℕ) (x δ : ℕ → ℝ) {B₀ : ℝ} (hB₀ : 0 < B₀)
+    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (hinside : ∀ m, C.left m < x m - δ m ∧ x m + δ m < C.right m)
+    (hspeed : ∀ m r, r ∈ Icc (x m - δ m) (x m + δ m) →
+      radialE (D.cellIndex (j m)) ^ (-B₀) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r)
+    (s : ℕ) :
+    ∃ K A B : ℝ, 0 < K ∧ 0 < A ∧ 0 < B ∧
+      ∀ z ∈ stateNeighborhood S C base ε, ∀ m a b p,
+      a + b ≤ s → p.1 ∈ Icc (x m - δ m) (x m + δ m) →
+      |ordinaryFlowFamily S C m a b p z| ≤
+        K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
+          (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample (C.cell m)) ^ B *
+            (1 + pairGrading (stateGrading S) realGrading (s + loss)
+              (z - (C.referenceState, 0)))) := by
+  obtain ⟨K, A, hK, hA, hdata⟩ :=
+    @N01Properties.ordinaryFlowFamily_collar_directional_bounds
+      D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
+  obtain ⟨B, hB, hpoint⟩ := hdata 0 s
+  refine ⟨K, A, B, hK, hA, hB, fun z hz m a b p hab hp => ?_⟩
+  exact smoothDirections_zeroth_twoFactor_bound
+    (pairGrading (stateGrading S) realGrading) base (s + loss)
+    (C.referenceState, (0 : ℝ))
+    (K ^ a * radialE (D.cellIndex (j m)) ^ (A * a))
+    (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
+    (hpoint m a b p hab hp) z hz
 
 end ContinuousFlexibility.Statements
 

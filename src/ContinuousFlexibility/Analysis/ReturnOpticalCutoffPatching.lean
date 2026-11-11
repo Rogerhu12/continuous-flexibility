@@ -74,9 +74,15 @@ theorem componentFamily_eventually_zero_at_isolated_root
     intro m hm
     rcases hm with hm | hm
     · change l m = r₀ at hm
-      simpa only [hm] using hleft m
+      have hmleft := hleft m
+      rw [hm] at hmleft
+      filter_upwards [hmleft] with r hr
+      exact hr
     · change h m = r₀ at hm
-      simpa only [hm] using hright m
+      have hmright := hright m
+      rw [hm] at hmright
+      filter_upwards [hmright] with r hr
+      exact hr
   obtain ⟨δ, hδ, hisoδ⟩ := Metric.mem_nhds_iff.mp hiso
   filter_upwards [he, Metric.ball_mem_nhds r₀ hδ] with r her hr
   have hrabs : |r - r₀| < δ := by simpa only [Metric.mem_ball, Real.dist_eq] using hr

@@ -94,7 +94,7 @@ theorem scalarParameterInverse_hasDerivAt
       (returnFlow_linearMap_coordinates A)
     simpa only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
       ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_eq_mul,
-      mul_one, ← hfirst, ← hsecond, mul_comm] using h
+      mul_one, one_mul, ← hfirst, ← hsecond, mul_comm] using h
   rw [hcoord] at hzero
   apply hg.congr_deriv
   apply (eq_div_iff (hpos t ht (G t θ)).ne').mpr

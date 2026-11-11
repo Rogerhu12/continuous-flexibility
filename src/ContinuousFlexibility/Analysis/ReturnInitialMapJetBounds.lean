@@ -29,50 +29,31 @@ theorem N01Properties.minusFlow_reference_difference_uniform_bound
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε) :
     ∃ A : ℝ, 0 ≤ A ∧ ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
       |C.minusFlow z m r θ - C.minusFlow (C.referenceState, 0) m r θ| ≤ A := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 0
-  let B : ℝ := hdata.choose
-  have hB : 0 < B := hdata.choose_spec.1
-  obtain ⟨K, hK, he⟩ := materialSample_H_E0_envelope hT hN.1.1
-    (γ := (3 / 4 : ℝ)) (by norm_num) B
-  let Q : ℝ := 1 + pairGrading (stateGrading S) realGrading loss
-    (z - (C.referenceState, 0))
-  have hQ : 0 ≤ Q := add_nonneg zero_le_one
-    (apply_nonneg (pairGrading (stateGrading S) realGrading loss)
-      (z - (C.referenceState, 0)))
-  have hpoint : ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
-      |C.minusFlow z m r θ - C.minusFlow (C.referenceState, 0) m r θ| ≤ B * K * Q := by
-    intro m r hr θ
-    have hC : controlGeometryConditions D S C := hN.2.2.2.1
-    have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=
-      hN.2.2.2.2.2.2.1
-    have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
-      constructor
-      · have hzero : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
-          (congrArg (fun v : AnnularState S => stateGrading S base v)
-            (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
-        exact hzero.trans_lt hN.2.1
-      · simpa only [abs_zero] using hN.2.1
-    have hi (s : ℝ) (hs : s ∈ Ioo (C.left m) (C.right m)) :
-        |C.minusFlow z m s θ - C.minusFlow (C.referenceState, 0) m s θ| ≤ B * K * Q := by
-      obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m 0 0 (s, θ) (by norm_num) hs
-      have hraw := hJ z hz Fin.elim0
-      rw [J.zero z hz] at hraw
-      simp only [pow_zero, one_mul, ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero,
-        oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-        mul_one, add_zero, zero_add] at hraw
-      have hweight : B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B * Q ≤ B * K * Q := by
-        have h := mul_le_mul_of_nonneg_left (he (C.cell m)) (mul_nonneg hB.le hQ)
-        convert h using 1 <;> ring
-      exact hraw.trans hweight
-    have hc : ContinuousOn (fun s => |C.minusFlow z m s θ -
-        C.minusFlow (C.referenceState, 0) m s θ|) (Icc (C.left m) (C.right m)) :=
-      ((hflow z hz m θ).2.1.sub (hflow _ hz₀ m θ).2.1).abs
-    have hclosure : closure (Ioo (C.left m) (C.right m)) = Icc (C.left m) (C.right m) :=
-      closure_Ioo (hC.1 m).2.1.ne
-    exact le_on_closure hi (by simpa only [hclosure] using hc) continuousOn_const
-      (by simpa only [hclosure] using hr)
-  exact ⟨B * K * Q, mul_nonneg (mul_nonneg hB.le hK.le) hQ, hpoint⟩
+  obtain ⟨A, hA, hbound⟩ := hN.ordinaryFlowFamily_angular_uniform_bound hT hz 0
+  have hC : controlGeometryConditions D S C := hN.2.2.2.1
+  have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=
+    hN.2.2.2.2.2.2.1
+  have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
+    constructor
+    · have hzero : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
+        (congrArg (fun v : AnnularState S => stateGrading S base v)
+          (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
+      exact hzero.trans_lt hN.2.1
+    · simpa only [abs_zero] using hN.2.1
+  refine ⟨A, hA, ?_⟩
+  intro m r hr θ
+  have hi : ∀ s ∈ Ioo (C.left m) (C.right m),
+      |C.minusFlow z m s θ - C.minusFlow (C.referenceState, 0) m s θ| ≤ A := by
+    intro s hs
+    simpa only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero] using
+      hbound m s hs θ
+  have hc : ContinuousOn (fun s => |C.minusFlow z m s θ -
+      C.minusFlow (C.referenceState, 0) m s θ|) (Icc (C.left m) (C.right m)) :=
+    ((hflow z hz m θ).2.1.sub (hflow _ hz₀ m θ).2.1).abs
+  have hclosure : closure (Ioo (C.left m) (C.right m)) = Icc (C.left m) (C.right m) :=
+    closure_Ioo (hC.1 m).2.1.ne
+  exact le_on_closure hi (by simpa only [hclosure] using hc) continuousOn_const
+    (by simpa only [hclosure] using hr)
 
 theorem N01Properties.returnCorrectionInitialMap_sub_id_uniform_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -103,7 +84,8 @@ theorem N01Properties.returnCorrectionInitialMap_sub_id_uniform_bound
   have hr : C.right m ∈ Icc (C.left m) (C.right m) := ⟨(hC.1 m).2.1.le, le_rfl⟩
   have hf (t : ℝ) : |C.minusFlow z m (C.right m) t - (t - C.travel m)| ≤ A := by
     rw [controlGeometry_travel_eq_radialTravel hC m]
-    simpa only [hN.minusFlow_reference_eq hS hT m hr t] using hflow m (C.right m) hr t
+    simpa only [hN.minusFlow_reference_eq hS hT m hr t,
+      radialTravel, opticalTravel, opticalSpeed] using hflow m (C.right m) hr t
   exact (hN.returnCorrectionInitialMap_and_residual_bound hz hsector m hf (hleft m) θ).1
 
 theorem N01Properties.returnCorrectionInitialMap_sub_id_angular_jets_uniform

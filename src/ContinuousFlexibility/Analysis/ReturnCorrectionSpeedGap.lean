@@ -123,9 +123,10 @@ theorem N01Properties.returnCorrectedMinusSpeed_error_radial_small
     have hf := mul_le_mul_of_nonneg_right (le_max_left (6 * B) (2 * circleSobolevConstant)) hF
     have hg := mul_le_mul_of_nonneg_right (le_max_right (6 * B) (2 * circleSobolevConstant)) hG
     have h := mul_le_mul_of_nonneg_right (add_le_add hf hg) hη
-    convert h using 1 <;> dsimp only [N] <;> ring
+    convert h using 1 <;> ring
   have hwzero : 0 ≤ 6 * B * F * η + (2 * circleSobolevConstant * η) * G := by
-    positivity
+    exact add_nonneg (mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) hB.le) hF) hη)
+      (mul_nonneg (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) hη) hG)
   have hv := hvelocity base' hbase hhigh η hη hηε hη₁ hηK z hz hsector χ m p hp
   have hvw : |returnCorrectedMinusSpeed D S C χ z m p -
       minusCharacteristicSpeed (originalCoefficients D S C z) p| ≤

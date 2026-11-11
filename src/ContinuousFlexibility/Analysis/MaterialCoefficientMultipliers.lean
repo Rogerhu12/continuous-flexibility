@@ -69,7 +69,8 @@ theorem materialCoordinate_positive_fderiv_bounded
     ContinuousMultilinearMap.opNorm_prod]
   apply max_le
   · have ha : ‖iteratedFDeriv ℝ n (fun q : PolarPoint => T.radius q.1) p‖ ≤ A := by
-      simpa only [Real.one_rpow, mul_one] using hbound () p (mem_univ _)
+      simpa only [Real.one_rpow, mul_one, ContinuousLinearMap.coe_fst'] using
+        hbound () p (mem_univ _)
     exact ha.trans (le_add_of_nonneg_right (ContinuousLinearMap.opNorm_nonneg L))
   · exact (norm_iteratedFDeriv_linear_of_pos L n hn p).trans (le_add_of_nonneg_left hA)
 

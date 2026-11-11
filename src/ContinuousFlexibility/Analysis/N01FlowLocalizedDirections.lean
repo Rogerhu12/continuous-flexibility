@@ -40,17 +40,26 @@ theorem N01Properties.ordinaryFlowFamily_height_line_locality_eventually
   have htail :
       (liftSectorParameter S C (z + t • heightParameterDirection S η)).1.2 =
       (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).1.2 := by
-    rw [liftSectorParameter_height_line_tail, liftSectorParameter_height_line_tail]
+    exact (liftSectorParameter_height_line_tail S C z η t).trans
+      (liftSectorParameter_height_line_tail S C z ξ t).symm
   have hq :
       (liftSectorParameter S C (z + t • heightParameterDirection S η)).2 =
       (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).2 := by
-    rw [liftSectorParameter_height_line, liftSectorParameter_height_line]
+    have hηq : (liftSectorParameter S C (z + t • heightParameterDirection S η)).2 = z.2 :=
+      congrArg (fun y : AnnularState S × ℝ => y.2)
+        (liftSectorParameter_height_line S C z η t)
+    have hξq : (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).2 = z.2 :=
+      congrArg (fun y : AnnularState S × ℝ => y.2)
+        (liftSectorParameter_height_line S C z ξ t)
+    exact hηq.trans hξq.symm
   have hu : ∀ s ∈ Ioo (C.left m) (C.right m), ∀ ψ,
       stateU S (liftSectorParameter S C (z + t • heightParameterDirection S η)).1 (s, ψ) =
       stateU S (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).1 (s, ψ) := by
     intro s hs ψ
-    rw [liftSectorParameter_height_line_field, liftSectorParameter_height_line_field,
-      hηξ s hs ψ]
+    exact (liftSectorParameter_height_line_field S C z η t (s, ψ)).trans
+      ((congrArg (fun a : ℝ => stateU S (liftSectorParameter S C z).1 (s, ψ) + t * a)
+        (hηξ s hs ψ)).trans
+          (liftSectorParameter_height_line_field S C z ξ t (s, ψ)).symm)
   have hflow (ψ : ℝ) := hN.minusFlow_eq_of_height_locality hS hT
     (liftSectorParameter_mem_stateNeighborhood hη le_rfl)
     (liftSectorParameter_mem_stateNeighborhood hξ le_rfl)

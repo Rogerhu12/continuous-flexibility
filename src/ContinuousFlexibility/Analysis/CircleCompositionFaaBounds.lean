@@ -102,6 +102,35 @@ theorem circleCompositionPartitionCoefficient_nonneg
     (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) hA)
     (apply_nonneg _ _))
 
+theorem scalar_weighted_abs_mul_prod_le
+    {ι : Type*} [Fintype ι] (w a C E : ℝ) (p q : ι → ℝ)
+    (hCE : 0 ≤ C * E) (hout : w * |a| ≤ C * E)
+    (hin : (∏ i, |p i|) ≤ ∏ i, q i) :
+    w * |a * ∏ i, p i| ≤ (C * ∏ i, q i) * E := by
+  rw [abs_mul, Finset.abs_prod]
+  calc
+    _ = (w * |a|) * ∏ i, |p i| := (mul_assoc _ _ _).symm
+    _ ≤ (C * E) * ∏ i, q i :=
+      mul_le_mul hout hin (Finset.prod_nonneg (fun i _ => abs_nonneg _)) hCE
+    _ = _ := by ring
+
+theorem scalar_weighted_comp_le_partition_sum
+    {f g : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g)
+    (b : ℕ) (θ w : ℝ) (hw : 0 ≤ w) (A : OrderedFinpartition b → ℝ)
+    (hb : ∀ c : OrderedFinpartition b,
+      w * |iteratedDeriv c.length f (g θ) *
+        ∏ i, iteratedDeriv (c.partSize i) g θ| ≤ A c) :
+    w * |iteratedDeriv b (f ∘ g) θ| ≤ ∑ c, A c := by
+  rw [iteratedDeriv_comp_eq_sum_orderedFinpartition hf.contDiffAt hg.contDiffAt (by simp)]
+  calc
+    _ ≤ w * ∑ c : OrderedFinpartition b,
+        |iteratedDeriv c.length f (g θ) * ∏ i, iteratedDeriv (c.partSize i) g θ| :=
+      mul_le_mul_of_nonneg_left (Finset.abs_sum_le_sum_abs _ _) hw
+    _ = ∑ c : OrderedFinpartition b, w *
+        |iteratedDeriv c.length f (g θ) * ∏ i, iteratedDeriv (c.partSize i) g θ| :=
+      Finset.mul_sum _ _ _
+    _ ≤ _ := Finset.sum_le_sum (fun c _ => hb c)
+
 /-- A chain-rule term is controlled by its own outer derivative energy. -/
 theorem circleWeighted_comp_outerJet_abs_le_partitions
     (hS : IsCircleModel T γ S) (hM : ∀ m, 0 < T.M (T.sample m))
@@ -138,32 +167,23 @@ theorem circleWeighted_comp_outerJet_abs_le_partitions
         circleAffineLift_jet_abs_le_exact_order (T := T) (γ := γ) (S := S)
           hS hH hA hHA travel e m (c.partSize i) θ (c.partSize_pos i)
       exact Finset.prod_le_prod₀ (fun i _ => abs_nonneg _) (fun i _ => hpoint i)
-    rw [circle_iteratedDeriv_iteratedDeriv, abs_mul, Finset.abs_prod]
-    calc
-      w * (|iteratedDeriv (c.length + n) (S.decode u m) (φ θ)| *
-          ∏ i, |iteratedDeriv (c.partSize i) φ θ|) =
-          (w * |iteratedDeriv (c.length + n) (S.decode u m) (φ θ)|) *
-            ∏ i, |iteratedDeriv (c.partSize i) φ θ| := (mul_assoc _ _ _).symm
-      _ ≤ (2 * circleSobolevConstant *
-          Real.sqrt (circleComponentEnergy T γ (c.length + n + k + 1) (S.decode u) m).toReal) *
-          ∏ i, (1 + (2 * circleSobolevConstant * A) * S.grading (c.partSize i + 1) e) :=
-        mul_le_mul hout hin (Finset.prod_nonneg (fun i _ => abs_nonneg _))
-          (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
-            (Real.sqrt_nonneg _))
-      _ = _ := by unfold circleCompositionPartitionCoefficient; ring
-  rw [iteratedDeriv_comp_eq_sum_orderedFinpartition hu'.contDiffAt hφ.contDiffAt (by simp)]
-  calc
-    w * |∑ c : OrderedFinpartition b,
-        iteratedDeriv c.length (iteratedDeriv n (S.decode u m)) (φ θ) *
-          ∏ i, iteratedDeriv (c.partSize i) φ θ| ≤
-        w * ∑ c : OrderedFinpartition b,
-          |iteratedDeriv c.length (iteratedDeriv n (S.decode u m)) (φ θ) *
-            ∏ i, iteratedDeriv (c.partSize i) φ θ| :=
-      mul_le_mul_of_nonneg_left (Finset.abs_sum_le_sum_abs _ _) hw
-    _ = ∑ c : OrderedFinpartition b,
-        w * |iteratedDeriv c.length (iteratedDeriv n (S.decode u m)) (φ θ) *
-          ∏ i, iteratedDeriv (c.partSize i) φ θ| := Finset.mul_sum _ _ _
-    _ ≤ _ := Finset.sum_le_sum (fun c _ => hterm c)
+    have hiter : iteratedDeriv c.length (iteratedDeriv n (S.decode u m)) (φ θ) =
+        iteratedDeriv (c.length + n) (S.decode u m) (φ θ) :=
+      congrFun (circle_iteratedDeriv_iteratedDeriv (S.decode u m) c.length n) (φ θ)
+    have heq := congrArg (fun a : ℝ =>
+      w * |a * ∏ i, iteratedDeriv (c.partSize i) φ θ|) hiter
+    exact heq.trans_le (scalar_weighted_abs_mul_prod_le w
+      (iteratedDeriv (c.length + n) (S.decode u m) (φ θ))
+      (2 * circleSobolevConstant)
+      (Real.sqrt (circleComponentEnergy T γ (c.length + n + k + 1) (S.decode u) m).toReal)
+      (fun i => iteratedDeriv (c.partSize i) φ θ)
+      (fun i => 1 + (2 * circleSobolevConstant * A) * S.grading (c.partSize i + 1) e)
+      (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
+        (Real.sqrt_nonneg _)) hout hin)
+  exact scalar_weighted_comp_le_partition_sum hu' hφ b θ w hw
+    (fun c => circleCompositionPartitionCoefficient S A e c *
+      Real.sqrt (circleComponentEnergy T γ (c.length + n + k + 1) (S.decode u) m).toReal)
+    hterm
 
 /-- The finite index only records terms in the existing norm and
 chain-rule formulas; it introduces no replacement circle carrier. -/

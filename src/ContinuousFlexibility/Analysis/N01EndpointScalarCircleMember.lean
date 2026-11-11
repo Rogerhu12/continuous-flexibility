@@ -30,10 +30,11 @@ theorem N01Properties.endpointFlow_pure_scalar_circleMember
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m))
     (n : ℕ) (z : StateDirections S × ℝ)
     (hz : z ∈ sectorNeighborhood S base ε ε) :
     CircleMember T (3 / 4 : ℝ)
-      (hN.endpointFlowScalarJets hS hT (n + 1) z (fun _ => scalarParameterDirection S)) := by
+      (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (fun _ => scalarParameterDirection S)) := by
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 1 ≤ T.M (T.sample m) := (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
@@ -45,11 +46,11 @@ theorem N01Properties.endpointFlow_pure_scalar_circleMember
         (S.height (3 / 4 : ℝ)).bond)
       (fun _ _ _ _ => le_rfl)
   apply circleMember_of_energy_envelope
-    (hN.endpointFlowScalarJets_regular hS hT (n + 1) z hz
+    (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz
       (fun _ => scalarParameterDirection S))
     (fun m => zero_le_one.trans (hM m)) hH
   intro s
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT n s
+  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n s
   let t : ℕ := max base (s + loss)
   let E : ℕ → ℝ≥0∞ := fun m =>
     ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *

@@ -26,12 +26,13 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlowScalarJets_weighted_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s : ℕ) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (k s : ℕ) :
     ∃ K : ℝ, 0 < K ∧ ∀ m b c θ, b ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε,
       ∀ v : Fin k → (StateDirections S × ℝ),
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT k z v m) θ| ≤
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel k z v m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) z v := by
@@ -50,9 +51,9 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound
         (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)))
       (Finset.sum_nonneg (fun _ _ => mul_nonneg (apply_nonneg _ _)
         (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))))
-  have hj := hbound m (C.right m) ⟨(hN.2.2.2.1.1 m).2.1.le, le_rfl⟩
+  have hj := hbound m (rsel m) (hrsel m)
     b θ hb z hz v
-  rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT k z hz]
+  rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel k z hz]
   calc
     _ ≤ (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *

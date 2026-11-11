@@ -24,17 +24,18 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n b c : ℕ) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n b c : ℕ) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
-        (hN.endpointFlowScalarJets hS hT (n + 1) z
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
         K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
           (S.height (3 / 4 : ℝ)).grading (base + c + 6)
             (liftSectorParameter S C z).1.1.1 +
           (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
             (liftSectorParameter S C z).1.1.1) := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT n b
+  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n b
   obtain ⟨K₀, hK₀, hE₀⟩ := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
     hS hT (hS.1 (3 / 4 : ℝ)) base (c + 1)
   obtain ⟨K₁, hK₁, hE₁⟩ := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
@@ -78,7 +79,7 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound
       Real.sqrt_mul (sq_nonneg _), Real.sqrt_sq (pow_nonneg (hM m) _)]
   have hb (m : ℕ) (θ : ℝ) :
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT (n + 1) z
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S) m) θ| ≤
         (K * A) * Real.sqrt (E base m).toReal +
           K * Real.sqrt (E (b + loss) m).toReal := by
@@ -98,7 +99,7 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound
       _ = _ := by rw [hsqrt, hsqrt]; ring
   have hn := circleWeightedJetNorm_le_two_envelopes
     (mul_nonneg hK.le hA) hK.le hU hV hE hF
-    (fun m => (hN.endpointFlowScalarJets_regular hS hT (n + 1) z hz
+    (fun m => (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz
       (fun _ => scalarParameterDirection S) m).1) hM hH b c hb
   have h₀ : Real.sqrt K₀ ≤ L := le_add_of_nonneg_right (Real.sqrt_nonneg _)
   have h₁ : Real.sqrt K₁ ≤ L := le_add_of_nonneg_left (Real.sqrt_nonneg _)
@@ -133,16 +134,17 @@ theorem liftSectorParameter_physical_height_grading_le
 
 theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n b c : ℕ) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n b c : ℕ) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
-        (hN.endpointFlowScalarJets hS hT (n + 1) z
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
         K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
           (1 + pairGrading (sectorGrading S) realGrading (b + loss + c + 6) z)) := by
   obtain ⟨K, hK, hbound⟩ :=
-    hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound hS hT n b c
+    hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound hS hT rsel hrsel n b c
   let J : ℝ := 1 + (S.height (3 / 4 : ℝ)).grading (base + c + 6) C.referenceState.1.1 +
     (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) C.referenceState.1.1
   let N : ℝ := (n : ℝ) + 2
