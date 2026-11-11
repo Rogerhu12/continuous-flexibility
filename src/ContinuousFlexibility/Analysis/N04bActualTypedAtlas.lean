@@ -37,8 +37,7 @@ theorem n04b_reference_valid_of_through03
       stateSector S C.referenceState := by
   refine ⟨?_, n04b_referenceState_sector hN.1.1.2.2.1⟩
   have hε : 0 < ε := hN.1.1.2.1
-  simpa only [stateNeighborhood, mem_setOf_eq, sub_self, map_zero, abs_zero] using
-    And.intro hε hε
+  exact reference_mem_stateNeighborhood S C base hε
 
 variable
   (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
