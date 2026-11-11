@@ -103,9 +103,9 @@ theorem material_referenceCell_endpoint_bound {D : ReferenceData} {T : MaterialD
     Real.rpow_le_rpow (Real.exp_pos _).le hE hA
   have hHone : materialH x ^ (γ / 16) ≤ 1 := by
     rw [materialH, ← Real.exp_mul, Real.exp_le_one_iff]
-    have : 0 ≤ x ^ 3 := pow_nonneg hx0 3
-    have : 0 ≤ γ / 16 := div_nonneg hγ.le (by norm_num)
-    exact mul_nonpos_of_nonpos_of_nonneg (by positivity) this
+    have hn : -2 * x ^ 3 / 3 ≤ 0 := div_nonpos_of_nonpos_of_nonneg
+      (mul_nonpos_of_nonpos_of_nonneg (by norm_num) (pow_nonneg hx0 3)) (by norm_num)
+    exact mul_nonpos_of_nonpos_of_nonneg hn (div_nonneg hγ.le (by norm_num))
   rw [hH]
   calc
     _ ≤ materialH x ^ γ * materialE0 (D.cellIndex m) ^ A :=

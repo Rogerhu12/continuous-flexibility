@@ -42,7 +42,7 @@ theorem weightedPhysicalJet_norm_le_physicalNorm
       (fun (i : JetIndex s) _ => (show (0 : ℝ≥0∞) ≤ N i ^ 2 from bot_le))
       (Finset.mem_univ j)
   have hr := ENNReal.toReal_mono hsum hle
-  simpa only [ENNReal.toReal_pow] using hr
+  simpa [N, j, ENNReal.toReal_pow] using hr
 
 /-- A physical norm is bounded by the specified increasing projective grading. -/
 theorem physicalNorm_decode_le_grading

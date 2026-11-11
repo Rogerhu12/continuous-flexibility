@@ -44,7 +44,8 @@ theorem scalarAngularPrimitive_contDiff {f : PolarPoint → ℝ}
   apply contDiff_snd.mul
   apply contDiff_iff_contDiffAt.mpr
   intro p
-  apply contDiffAt_intervalIntegral_parameter (O := univ) isOpen_univ
+  apply contDiffAt_intervalIntegral_parameter
+    (f := fun z : PolarPoint × ℝ => f (z.1.1, z.1.2 * z.2)) (O := univ) isOpen_univ
     (by norm_num : (0 : ℝ) ≤ 1) (hp := mem_univ p)
   intro q _ t _
   exact (hf.comp
@@ -73,7 +74,8 @@ theorem scalarAngularPrimitive_even {f : PolarPoint → ℝ}
   calc
     _ = -(∫ t in -θ..(0 : ℝ), f (r, t)) := intervalIntegral.integral_symm _ _
     _ = -(∫ t in (0 : ℝ)..θ, f (r, -t)) := by
-      rw [intervalIntegral.integral_comp_neg, neg_zero]
+      simpa only [neg_zero] using congrArg (fun v : ℝ => -v)
+        (intervalIntegral.integral_comp_neg (fun t => f (r, t)) (a := 0) (b := θ)).symm
     _ = ∫ t in (0 : ℝ)..θ, f (r, t) := by
       simp only [hodd, intervalIntegral.integral_neg, neg_neg]
 
@@ -101,8 +103,7 @@ theorem scalarAngularPrimitive_periodic {f : PolarPoint → ℝ} {P : ℝ}
     simpa only [Prod.mk_add_mk, add_zero] using hp (p.1, t)
   have hc : Continuous (fun t : ℝ => f (p.1, t)) :=
     hf.comp (continuous_const.prodMk continuous_id)
-  change (∫ t in (0 : ℝ)..p.2 + P, f (p.1, t)) =
-    ∫ t in (0 : ℝ)..p.2, f (p.1, t)
+  simp only [scalarAngularPrimitive, Prod.fst_add, Prod.snd_add, add_zero]
   rw [hs.intervalIntegral_add_eq_add 0 p.2
     (fun a b => hc.intervalIntegrable a b), zero_add,
     integral_odd_periodic_angular_eq_zero hodd hp, add_zero]

@@ -40,8 +40,8 @@ theorem iteratedDeriv_intervalIntegral_parameter
       funext s
       exact intervalIntegral.integral_symm _ _
     rw [hreverse, iteratedDeriv_neg,
-      iteratedDeriv_intervalIntegral_parameter_of_le hf hba,
-      intervalIntegral.integral_symm]
+      iteratedDeriv_intervalIntegral_parameter_of_le hf hba]
+    exact (intervalIntegral.integral_symm b a).symm
 
 theorem mixedDerivative_scalarAngularPrimitive_zero {f : PolarPoint → ℝ}
     (hf : ContDiff ℝ ∞ f) (a : ℕ) :

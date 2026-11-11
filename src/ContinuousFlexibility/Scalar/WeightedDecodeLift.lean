@@ -97,7 +97,7 @@ def liftLinear (hA : IsSobolevModel D T γ A)
   map_smul' := by
     intro c x
     apply hA.2.2.2.2.2.1
-    simp only [map_smul, decode_liftHeight]
+    simp only [map_smul, decode_liftHeight, RingHom.id_apply]
 
 theorem decode_liftLinear (hA : IsSobolevModel D T γ A)
     (L : E →ₗ[ℝ] (PolarPoint → ℝ)) (hL : ∀ x, HeightMember D T γ (L x)) (x : E) :
@@ -208,11 +208,8 @@ theorem changeModel_inverse (hA : IsSobolevModel D T γ A)
 
 theorem changeModel_isTame (hA : IsSobolevModel D T γ A)
     (hB : IsSobolevModel D T γ B) :
-    IsTameLinear A.grading B.grading (changeModel hA hB).toLinearMap 0 0 := by
-  intro s _
-  refine ⟨1, fun u => ?_⟩
-  simpa only [Nat.add_zero, NNReal.coe_one, one_mul] using
-    (grading_changeModel hA hB u s).le
+    IsTameLinear A.grading B.grading (changeModel hA hB).toLinearMap 0 0 :=
+  liftLinear_isTame hB A.decode hA.2.2.2.1 (changeModel_physicalBound hA)
 
 end ChangeModel
 

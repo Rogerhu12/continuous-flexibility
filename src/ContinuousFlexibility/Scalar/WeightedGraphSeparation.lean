@@ -35,7 +35,7 @@ theorem eq_zero_of_physical_scalar_test_pairing
     intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
       (f := fun r θ => f (r, θ) ^ 2)
       (by
-        simpa only [Function.comp_def, Function.uncurry] using
+        simpa only [Function.comp_def, Function.uncurry] using!
           (continuous_pow 2).comp hf.continuous) 0 Real.pi
   have hGa : ∀ᵐ r ∂(volume : Measure ℝ), r ∈ Ioo D.a D.b → G r = 0 := by
     apply isOpen_Ioo.ae_eq_zero_of_integral_contDiff_smul_eq_zero

@@ -22,7 +22,7 @@ open scoped BigOperators
 one factor is high and every other factor is low.  Zero low factors are
 included; no division by a possibly vanishing seminorm is left in the result. -/
 theorem prod_interpolated_le_oneHigh
-    {ι : Type*} [Fintype ι] [Nonempty ι] (a b θ : ι → ℝ)
+    {ι : Type*} [Fintype ι] [DecidableEq ι] [Nonempty ι] (a b θ : ι → ℝ)
     (ha : ∀ i, 0 ≤ a i) (hab : ∀ i, a i ≤ b i)
     (hθ : ∀ i, 0 ≤ θ i) (hθlt : ∀ i, θ i < 1) (hθsum : ∑ i, θ i ≤ 1) :
     (∏ i, (a i) ^ (1 - θ i) * (b i) ^ θ i) ≤

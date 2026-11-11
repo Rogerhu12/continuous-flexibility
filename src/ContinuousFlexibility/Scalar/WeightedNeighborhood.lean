@@ -62,7 +62,7 @@ theorem scalarStateCenter_mem_ball (S : PhysicalSpacesData) (v₀ : ScalarHeight
     (base : ℕ) {ε : ℝ} (hε : 0 < ε) :
     scalarStateCenter S v₀ ∈ scalarStateBall S v₀ base ε := by
   change scalarStateGrading S base (scalarStateCenter S v₀ - scalarStateCenter S v₀) < ε
-  rw [sub_self, map_zero (scalarStateGrading S base)]
+  rw [sub_self, (scalarStateGrading S base).map_zero']
   exact hε
 
 theorem scalarStateGrading_sub_center (S : PhysicalSpacesData)

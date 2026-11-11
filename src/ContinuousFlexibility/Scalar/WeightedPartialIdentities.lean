@@ -49,6 +49,6 @@ theorem angularPartial_heightAngular_eq_mixedDerivative_on
     (hang.contDiffAt (hU.mem_nhds hp)).differentiableAt (by simp)
   change angularPartial (fun y => angularPartial f y / y.1) p = _
   rw [angularPartial_div hd differentiableAt_fst hr, angularPartial_fst, hsecond]
-  field_simp
+  field_simp <;> ring
 
 end ContinuousFlexibility.Statements

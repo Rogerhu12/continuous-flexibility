@@ -86,12 +86,12 @@ theorem EndpointFlat.uniformFlatJets {D : ReferenceData} {f : ℝ → ℝ}
         have hn : |r - D.a| < δl := by
           rw [abs_of_pos (sub_pos.mpr hrange.1), ← he]
           exact hnear.trans_le (min_le_left _ _)
-        simpa only [abs_of_pos (sub_pos.mpr hrange.1), ← he] using hl r hn
+        simpa only [abs_of_pos (sub_pos.mpr hrange.1), ← he, abs_of_pos hd] using hl r hn
       · have he : endpointDistance D r = D.b - r := min_eq_right hle
         have hn : |r - D.b| < δr := by
           rw [abs_sub_comm, abs_of_pos (sub_pos.mpr hrange.2), ← he]
           exact hnear.trans_le (min_le_right _ _)
-        simpa only [abs_sub_comm r D.b, abs_of_pos (sub_pos.mpr hrange.2), ← he]
+        simpa only [abs_sub_comm r D.b, abs_of_pos (sub_pos.mpr hrange.2), ← he, abs_of_pos hd]
           using hr r hn
     simp only [mixedDerivative, iteratedDeriv_zero]
     rw [zpow_neg, zpow_natCast, abs_mul, abs_inv, abs_of_pos (pow_pos hd k)]

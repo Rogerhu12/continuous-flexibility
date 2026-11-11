@@ -126,6 +126,7 @@ theorem scalarAngularPrimitive_memLp_and_norm_le {f : PolarPoint → ℝ}
   have hn : 0 ≤ (eLpNorm (scalarAngularPrimitive f) 2 materialCylinderMeasure).toReal :=
     ENNReal.toReal_nonneg
   have hm : 0 ≤ (eLpNorm f 2 materialCylinderMeasure).toReal := ENNReal.toReal_nonneg
-  nlinarith [mul_nonneg Real.pi_pos.le hm]
+  apply (sq_le_sq₀ hn (mul_nonneg Real.pi_pos.le hm)).mp
+  simpa only [mul_pow] using hint
 
 end ContinuousFlexibility.Statements
