@@ -140,9 +140,9 @@ theorem deepTail_Poisson_offDiagonal_bound (n : ℕ) :
   exact h.trans (div_le_div_of_nonneg_left (by norm_num) (tailResistance_pos hT n)
     (tailResistance_le_deepTailEdgeResistance hT n))
 
+include hη hK in
 /-- When the first node is the entrance, this continuous flux coefficient
 can serve as the otherwise unused zeroth Jacobi diagonal. -/
-include hη hK in
 theorem deepTail_Poisson_firstDiagonal_bound :
     T.Λ * tailMass T 0 / 4 ≤ -(B 0).leftDiagonal := by
   have hl := deepTail_Poisson_leftDiagonal_bound hT hη hK B 0
@@ -255,9 +255,9 @@ theorem deepTail_Poisson_right_square_bound (n : ℕ) :
         tailMass T n + tailGapMass T n) at h
   linarith only [h, hw, hg, hm]
 
+include hη hK in
 /-- The actual Poisson interpolant has one universal weighted square
 bound, with the two coefficients charged to their own neighboring masses. -/
-include hη hK in
 theorem deepTail_Poisson_interpolate_square_bound (n : ℕ) (A Z : ℝ) :
     (∫ x in T.node n..T.node (n + 1), T.p x * (B n).interpolate A Z x ^ 2) ≤
       16 * (tailMass T n * A ^ 2 + tailMass T (n + 1) * Z ^ 2) := by
