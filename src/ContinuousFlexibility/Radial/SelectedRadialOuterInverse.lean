@@ -81,7 +81,8 @@ theorem outerRadialRegionOperator_test_pairing
     intro x hx
     have hi : x ∈ outerOutwardRadius right '' radialTailInterval D right cut :=
       ⟨outerOutwardRadius right x, hs hx, outerOutwardRadius_twice right x⟩
-    simpa only [outerOutward_tail_image, outerOutwardRadius_eq_sign] using hi
+    rw [outerOutward_tail_image] at hi
+    simpa only [outerOutwardRadius_eq_sign] using hi
   have hφLp := selectedOutwardSmooth_memLp (right := right) hD hcut hφ
   have hJLp := selectedOutwardJacobiTest_memLp (right := right) hD hcut hφ j
   let p := hφLp.toLp φ
