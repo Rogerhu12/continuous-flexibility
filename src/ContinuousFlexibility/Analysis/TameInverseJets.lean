@@ -78,6 +78,8 @@ variable
   (hright : ∀ x ∈ U, ∀ y, L x (V x y) = y)
   (hV : ContinuousOn (fun z : X × Z => V z.1 z.2) (U ×ˢ univ))
 
+include hU hleft hright hV
+
 /-- The constructed formulas satisfy the genuine derivative recurrence at
 every order. -/
 theorem hasProjectiveLineDerivAt_inverseExpressionJet
@@ -85,8 +87,8 @@ theorem hasProjectiveLineDerivAt_inverseExpressionJet
     HasProjectiveLineDerivAt (fun w => inverseExpressionJetValue J V n w v)
       (inverseExpressionJetValue J V (n + 1) z (Fin.cons h v)) z h := by
   have hd := (inverseExpressionJet n).hasLineDerivAt_eval J hU V hleft hright hV hz v h
-  simpa only [inverseExpressionJetValue_succ, Fin.tail_cons, Fin.cons_zero,
-    inverseExpressionJetValue] using hd
+  rw [inverseExpressionJetValue_succ, Fin.tail_cons, Fin.cons_zero]
+  simpa only [inverseExpressionJetValue] using hd
 
 /-- Additivity in every direction follows from actual differentiation,
 including directions occurring inside arbitrary nested inverse formulas. -/
