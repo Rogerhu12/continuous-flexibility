@@ -118,7 +118,7 @@ theorem n04b_exists_zero_total_nonzero_half_test
     apply integral_eq_zero_of_ae
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
     have hnot : x ∉ tsupport g := fun hs => (not_lt_of_ge hx.2.le) (hgs hs).1
-    rw [deriv_of_notMem_tsupport hnot, mul_zero]
+    simp only [deriv_of_notMem_tsupport hnot, mul_zero, Pi.zero_apply]
   refine ⟨fun x => f x - g x, hf.sub hg, hfc.sub hgc,
     (tsupport_sub f g).trans (union_subset hfs' hgs'), ?_, ?_⟩
   · rw [hd]

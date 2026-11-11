@@ -59,6 +59,7 @@ theorem n04b_sin_ne_zero_of_irrational {T : ℝ}
   apply hT.ne_rational n 1
   rw [← hn]
   field_simp [Real.pi_ne_zero]
+  simp
 
 theorem n04bFourierCorrector_coefficients {T : ℝ} (hT : Real.sin T ≠ 0)
     (a b : ℝ) :
@@ -139,6 +140,14 @@ theorem n04bSecondHarmonic_abs_le (a b θ : ℝ) :
         (mul_le_mul_of_nonneg_left (Real.abs_cos_le_one _) (abs_nonneg a))
         (mul_le_mul_of_nonneg_left (Real.abs_sin_le_one _) (abs_nonneg b))
     _ = _ := by ring
+
+/-- The finite corrector is uniformly bounded, so its endpoint terms
+vanish in the orbit-average definition of translation number. -/
+theorem n04bFourierCorrector_abs_le (T a b θ : ℝ) :
+    |n04bFourierCorrector T a b θ| ≤
+      |n04bFourierCosCoeff T a b| + |n04bFourierSinCoeff T a b| :=
+  n04bSecondHarmonic_abs_le (n04bFourierCosCoeff T a b)
+    (n04bFourierSinCoeff T a b) θ
 
 /-- The normalized corrector uses period one and the same Lipschitz constant. -/
 def n04bUnitFourierCorrector (T a b x : ℝ) : ℝ :=

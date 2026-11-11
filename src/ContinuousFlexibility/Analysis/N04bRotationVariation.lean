@@ -4,8 +4,8 @@ import Mathlib.Analysis.Calculus.Deriv.Slope
 /-!
 # The actual first variation of the physical translation number
 
-A uniform angular remainder o(q), together with the explicit finite
-Fourier conjugacy, implies a derivative of the translation number. The
+A uniform angular remainder o(q), together with the explicit bounded
+Fourier corrector, implies a derivative of the translation number. The
 constant Fourier coefficient is that derivative. The initial translation
 and the uniform remainder are inputs about the actual family of maps;
 no derivative of the translation number is assumed.
@@ -39,7 +39,6 @@ theorem n04bPhysicalTranslationNumber_of_translation
 theorem n04b_physicalTranslationNumber_slope_bound
     (f : CircleDeg1Lift) {T : ℝ} (hT : Real.sin T ≠ 0) (a b c q η : ℝ)
     (hq : q ≠ 0)
-    (hsmall : |q| * n04bFourierLipschitz T a b < 1)
     (hrem : ∀ θ : ℝ,
       |n04bPhysicalLift f θ - θ - T -
         q * (c + n04bSecondHarmonic a b θ)| ≤ |q| * η) :
@@ -53,7 +52,7 @@ theorem n04b_physicalTranslationNumber_slope_bound
   apply (div_le_iff₀ (abs_pos.mpr hq)).mpr
   calc
     _ ≤ n04bFourierRemainderBound T a b c q η :=
-      n04b_physicalTranslationNumber_fourier_bound f hT a b c q η hsmall hrem
+      n04b_physicalTranslationNumber_fourier_bound f hT a b c q η hrem
     _ = _ := by
       dsimp only [n04bFourierRemainderBound]
       rw [← sq_abs q]
@@ -76,10 +75,6 @@ theorem n04b_hasDerivAt_physicalTranslationNumber
   have ha : Tendsto (fun q : ℝ => |q|) (𝓝[≠] (0 : ℝ)) (𝓝 0) := by
     simpa only [abs_zero] using
       (continuous_abs.tendsto (0 : ℝ)).mono_left nhdsWithin_le_nhds
-  have hsmallT : Tendsto (fun q : ℝ => |q| * L) (𝓝[≠] (0 : ℝ)) (𝓝 0) := by
-    simpa only [zero_mul] using ha.mul_const L
-  have hsmall : ∀ᶠ q in 𝓝[≠] (0 : ℝ), |q| * L < 1 :=
-    hsmallT.eventually (Iio_mem_nhds (by norm_num : (0 : ℝ) < 1))
   have hq0 : ∀ᶠ q : ℝ in 𝓝[≠] (0 : ℝ), q ≠ 0 := by
     filter_upwards [self_mem_nhdsWithin] with q hq
     simpa using hq
@@ -96,10 +91,10 @@ theorem n04b_hasDerivAt_physicalTranslationNumber
     intro ε hε
     have he : ∀ᶠ q in 𝓝[≠] (0 : ℝ), η q + |q| * L * (M + η q) < ε :=
       herr.eventually (Iio_mem_nhds hε)
-    filter_upwards [hrem, hsmall, hq0, he] with q hrem hsmall hq0 he
+    filter_upwards [hrem, hq0, he] with q hrem hq0 he
     rw [Real.dist_eq]
     exact (n04b_physicalTranslationNumber_slope_bound (f q) hT a b c q (η q)
-      hq0 hsmall hrem).trans_lt he
+      hq0 hrem).trans_lt he
   apply hasDerivAt_iff_tendsto_slope_zero.mpr
   simpa only [zero_add, hzero, smul_eq_mul, div_eq_mul_inv, mul_comm] using hslope
 

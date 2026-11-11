@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Scalar.Coordinates
+import ContinuousFlexibility.Scalar.HeightDerivatives
 import Mathlib.Analysis.Calculus.Deriv.Comp
 import Mathlib.Analysis.Calculus.FDeriv.Add
 import Mathlib.Analysis.Calculus.FDeriv.Mul
@@ -57,12 +57,14 @@ theorem n04b_radialPartial_gaugedTravel
   have hG' : DifferentiableAt ℝ G (n04bSignedTravel T s τ (r, θ)) := by
     rw [he]
     exact hG
-  have hc := hG'.hasFDerivAt.comp (r, θ) hs
-  have hw := hb.fun_mul hc
-  change fderiv ℝ (fun p : PolarPoint => β p.1 * G (n04bSignedTravel T s τ p))
-    (r, θ) (1, 0) = _
-  rw [hw.fderiv]
-  simp only [he, fstL, sndL, ContinuousLinearMap.add_apply,
+  have hc : DifferentiableAt ℝ (fun p : PolarPoint =>
+      G (n04bSignedTravel T s τ p)) (r, θ) :=
+    hG'.comp (r, θ) hs.differentiableAt
+  unfold n04bGaugedTravel
+  rw [radialPartial_mul hb.differentiableAt hc]
+  simp only [radialPartial, hb.fderiv,
+    fderiv_comp (r, θ) hG' hs.differentiableAt, hs.fderiv,
+    he, fstL, sndL, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
     ContinuousLinearMap.coe_snd', smul_eq_mul, mul_one]
