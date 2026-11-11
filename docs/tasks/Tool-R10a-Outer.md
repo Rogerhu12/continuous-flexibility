@@ -10,7 +10,7 @@ This is a tool task: it has no blueprint node. State the lemma in Lean exactly a
 
 - Every assertion of the cited lemma is a Lean theorem with the same hypotheses and conclusions, in the generality the manuscript uses; nothing is weakened, specialised to an easier case or left as a hypothesis.
 - No `sorry`; only the axioms `propext`, `Classical.choice`, `Quot.sound`.
-- The modules are in the root import and CI is green.
+- The modules compile in CI (the root import is generated) and CI is green.
 - The pull request lists each assertion of the lemma with the name of its Lean theorem.
 
 ## Source
