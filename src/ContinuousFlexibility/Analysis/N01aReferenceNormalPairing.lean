@@ -67,7 +67,8 @@ theorem normalPairing_cosine_field {D : ReferenceData} {ψ : ℝ → ℝ}
   simp_rw [radialPartial_cosine_field hψ j]
   apply intervalIntegral.integral_congr
   intro r _
-  dsimp only
+  change radialAngularMean (fun θ => u (r, θ) *
+    (deriv ψ r * Radial.cosineMode j θ)) = referenceMode u j r * deriv ψ r
   rw [show (fun θ => u (r, θ) * (deriv ψ r * Radial.cosineMode j θ)) =
       (fun θ => deriv ψ r * (u (r, θ) * Radial.cosineMode j θ)) by funext θ; ring]
   rw [radialAngularMean_const_mul]
@@ -90,7 +91,8 @@ theorem weakNormalDerivative_mode_pairing {D : ReferenceData}
     have he : referenceMode u 2 =ᵐ[volume.restrict (Ioc D.a D.b)] D.phi := by
       simpa only [radialCore, restrict_Ioo_eq_restrict_Ioc] using hmode
     rw [intervalIntegral.integral_of_le hab, intervalIntegral.integral_of_le hab]
-    exact integral_congr_ae (he.mono fun r hr => by dsimp only; rw [hr])
+    exact integral_congr_ae
+      (he.mono fun r hr => congrArg (fun x : ℝ => x * deriv ψ r) hr)
   have hparts := intervalIntegral.integral_mul_deriv_eq_deriv_mul
     (fun r _ => (hphi.1.differentiable (by simp) r).hasDerivAt)
     (fun r _ => (hψ.differentiable (by simp) r).hasDerivAt)
@@ -118,7 +120,7 @@ theorem tendsto_integral_cutoff_mul {D : ReferenceData} (hab : D.a ≤ D.b)
     · exact hi.abs
     · intro n
       exact Eventually.of_forall fun r => by
-        dsimp only
+        change ‖Radial.intervalTestCutoff D.a D.b n r * f r‖ ≤ |f r|
         rw [Real.norm_eq_abs, abs_mul,
           abs_of_nonneg (Radial.intervalTestCutoff_nonneg D.a D.b n r)]
         exact (mul_le_mul_of_nonneg_right

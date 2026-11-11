@@ -95,7 +95,6 @@ theorem outputRealization_cosine_of_mode_eq {D : ReferenceData}
         ∫ r, (D.localizer m r * f r) ^ 2 ∂volume.restrict (radialCore D) := by
       apply integral_congr_ae
       filter_upwards [hremMode] with r hr
-      dsimp only
       rw [referenceMode_mul_radial, hr]
     rw [heq] at hp
     rw [referenceCellSquare_cosine_lift D m f 2 (by decide),
