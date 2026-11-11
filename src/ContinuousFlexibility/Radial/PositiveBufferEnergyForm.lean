@@ -17,10 +17,6 @@ open Real Set Filter MeasureTheory
 open ContinuousFlexibility.Statements
 open scoped Topology ContDiff RealInnerProductSpace InnerProductSpace
 
-local instance (V : ℝ → ℝ) (s : Set ℝ) (hs : MeasurableSet s) :
-    NormedSpace ℝ (positiveBufferSupportedEnergyGraph V s hs) :=
-  Submodule.normedSpace (positiveBufferSupportedEnergyGraph V s hs)
-
 theorem positiveBufferL2_inner_integral (u v : RadialL2) :
     ⟪u, v⟫_ℝ = ∫ x : ℝ, u x * v x := by
   rw [L2.inner_def]
@@ -164,17 +160,6 @@ theorem positiveBufferEnergyForm_supported_coercive_bound {V : ℝ → ℝ} (hV 
   apply (div_le_iff₀ hden).mpr
   nlinarith [sq_nonneg ‖positiveBufferEnergyCoordinate V 1 u‖]
 
-theorem positiveBufferEnergyForm_supported_isCoercive {V : ℝ → ℝ} (hV : Continuous V)
-    {m : ℝ} (hm : 0 < m) (s : Set ℝ) (hs : MeasurableSet s)
-    (hVm : ∀ x ∈ s, m ^ 2 ≤ V x) :
-    IsCoercive ((positiveBufferEnergyForm V hV).bilinearComp
-      (positiveBufferSupportedEnergyGraph V s hs).subtypeL
-      (positiveBufferSupportedEnergyGraph V s hs).subtypeL) := by
-  refine ⟨m ^ 2 / (m ^ 2 + 2), by positivity, fun u => ?_⟩
-  simpa only [ContinuousLinearMap.bilinearComp_apply, Submodule.subtypeL_apply,
-    Submodule.norm_coe, pow_two, mul_assoc] using
-    positiveBufferEnergyForm_supported_coercive_bound hV hm s hs hVm (u : PositiveBufferEnergy V) u.property
-
 /-- An actual global energy field with a chosen exterior lift and stationary
 physical equation on the positive region. The lift fixes the boundary trace. -/
 theorem positiveBuffer_exists_unique_supported_stationary {V : ℝ → ℝ}
@@ -189,6 +174,8 @@ theorem positiveBuffer_exists_unique_supported_stationary {V : ℝ → ℝ}
   exact positiveBuffer_exists_unique_stationary_of_restrict (positiveBufferEnergyForm V hV)
     (positiveBufferSupportedEnergyGraph V s hs)
     (positiveBufferSupportedEnergyGraph_isClosed V s hs)
-    (positiveBufferEnergyForm_supported_isCoercive hV hm s hs hVm) lift
+    (positiveBuffer_restrict_isCoercive_of_bound (positiveBufferEnergyForm V hV)
+      (positiveBufferSupportedEnergyGraph V s hs) (by positivity : 0 < m ^ 2 / (m ^ 2 + 2))
+      (positiveBufferEnergyForm_supported_coercive_bound hV hm s hs hVm)) lift
 
 end ContinuousFlexibility.Radial

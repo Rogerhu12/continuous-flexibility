@@ -35,6 +35,17 @@ theorem positiveBuffer_restrict_isCoercive
   simpa only [ContinuousLinearMap.bilinearComp_apply, Submodule.subtypeL_apply,
     Submodule.norm_coe] using hco (u : E)
 
+/-- A lower bound on the ambient vectors of a submodule is the coercivity
+of the restricted form. Keeping the submodule abstract also fixes its
+induced norm and scalar action before the bilinear composition is formed. -/
+theorem positiveBuffer_restrict_isCoercive_of_bound
+    (B : E →L[ℝ] E →L[ℝ] ℝ) (K : Submodule ℝ E) {c : ℝ} (hc : 0 < c)
+    (hbound : ∀ u : E, u ∈ K → c * ‖u‖ ^ 2 ≤ B u u) :
+    IsCoercive (B.bilinearComp K.subtypeL K.subtypeL) := by
+  refine ⟨c, hc, fun u => ?_⟩
+  simpa only [ContinuousLinearMap.bilinearComp_apply, Submodule.subtypeL_apply,
+    Submodule.norm_coe, pow_two, mul_assoc] using hbound (u : E) u.property
+
 /-- Coercivity detects a zero-energy vector without any symmetry assumption. -/
 theorem positiveBuffer_eq_zero_of_energy_eq_zero
     (B : E →L[ℝ] E →L[ℝ] ℝ) (hB : IsCoercive B) {u : E}

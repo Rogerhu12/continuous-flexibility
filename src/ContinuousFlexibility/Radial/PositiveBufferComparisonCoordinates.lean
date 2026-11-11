@@ -1,0 +1,135 @@
+import ContinuousFlexibility.Radial.PositiveBufferComparisonAffine
+import ContinuousFlexibility.Radial.PositiveBufferGeometry
+
+/-!
+# Analytic changes to the common buffer coordinate
+
+The inward coordinate is the existing `positiveBufferPoint`.  This file
+specializes the affine calculus and energy substitution to that coordinate
+and records its inverse, so the same construction applies at both cuts.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Radial
+
+open Set Real MeasureTheory
+open ContinuousFlexibility.Statements
+
+theorem positiveBufferPoint_affine (B : BufferData) (i : Fin 2) (t : ℝ) :
+    positiveBufferPoint B i t =
+      bufferCut B i + (-bufferSign i / B.mass i) * t := by
+  unfold positiveBufferPoint
+  ring
+
+theorem positiveBufferPoint_slope_sq (B : BufferData) (i : Fin 2) :
+    (-bufferSign i / B.mass i) ^ 2 = 1 / B.mass i ^ 2 := by
+  rw [div_pow, neg_sq, bufferSign_sq]
+
+theorem positiveBufferPoint_abs_slope {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) :
+    |-bufferSign i / B.mass i| = 1 / B.mass i := by
+  rw [abs_div, abs_neg, abs_bufferSign, abs_of_pos (buffer_mass_pos hB i)]
+
+theorem positiveBufferPoint_slope_ne_zero {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) :
+    -bufferSign i / B.mass i ≠ 0 := by
+  apply div_ne_zero _ (buffer_mass_pos hB i).ne'
+  intro h
+  have hs := abs_bufferSign i
+  rw [neg_eq_zero.mp h, abs_zero] at hs
+  norm_num at hs
+
+/-- The inverse of the inward buffer parametrization. -/
+def positiveBufferCoordinate (B : BufferData) (i : Fin 2) (x : ℝ) : ℝ :=
+  -bufferSign i * B.mass i * (x - bufferCut B i)
+
+@[simp] theorem positiveBufferCoordinate_cut (B : BufferData) (i : Fin 2) :
+    positiveBufferCoordinate B i (bufferCut B i) = 0 := by
+  simp only [positiveBufferCoordinate, sub_self, mul_zero]
+
+@[simp] theorem positiveBufferCoordinate_point {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) (t : ℝ) :
+    positiveBufferCoordinate B i (positiveBufferPoint B i t) = t := by
+  have hm : B.mass i ≠ 0 := (buffer_mass_pos hB i).ne'
+  calc
+    _ = bufferSign i ^ 2 * t := by
+      unfold positiveBufferCoordinate positiveBufferPoint
+      field_simp
+      <;> ring
+    _ = t := by rw [bufferSign_sq, one_mul]
+
+@[simp] theorem positiveBufferPoint_coordinate {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) (x : ℝ) :
+    positiveBufferPoint B i (positiveBufferCoordinate B i x) = x := by
+  have hm : B.mass i ≠ 0 := (buffer_mass_pos hB i).ne'
+  calc
+    _ = bufferCut B i + bufferSign i ^ 2 * (x - bufferCut B i) := by
+      unfold positiveBufferCoordinate positiveBufferPoint
+      field_simp
+      <;> ring
+    _ = x := by rw [bufferSign_sq]; ring
+
+theorem positiveBufferPoint_hasDerivAt {B : BufferData} {i : Fin 2}
+    {u : ℝ → ℝ} {t d : ℝ} (hu : HasDerivAt u d (positiveBufferPoint B i t)) :
+    HasDerivAt (fun s => u (positiveBufferPoint B i s))
+      ((-bufferSign i / B.mass i) * d) t := by
+  simpa only [← positiveBufferPoint_affine] using
+    positiveBuffer_affine_hasDerivAt
+      (a := bufferCut B i) (b := -bufferSign i / B.mass i)
+      (by simpa only [← positiveBufferPoint_affine] using hu)
+
+theorem positiveBufferPoint_homogeneous {B : BufferData} {i : Fin 2}
+    {J : Set ℝ} {u du : ℝ → ℝ}
+    (hu : ∀ x ∈ J, HasDerivAt u (du x) x)
+    (hdu : ∀ x ∈ J, HasDerivAt du (B.potential x * u x) x)
+    {t : ℝ} (ht : positiveBufferPoint B i t ∈ J) :
+    HasDerivAt (fun s => u (positiveBufferPoint B i s))
+        ((-bufferSign i / B.mass i) * du (positiveBufferPoint B i t)) t ∧
+      HasDerivAt (fun s => (-bufferSign i / B.mass i) * du (positiveBufferPoint B i s))
+        ((B.potential (positiveBufferPoint B i t) / B.mass i ^ 2) *
+          u (positiveBufferPoint B i t)) t := by
+  have h := positiveBuffer_affine_homogeneous hu hdu
+    (bufferCut B i) (-bufferSign i / B.mass i)
+    (by simpa only [← positiveBufferPoint_affine] using ht)
+  simpa only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq,
+    one_div, div_eq_mul_inv, mul_comm (B.potential (positiveBufferPoint B i t))] using h
+
+theorem positiveBufferPoint_normalized_potential_lower {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) {t : ℝ}
+    (ht : t ≤ B.action i + 6) :
+    1 ≤ B.potential (positiveBufferPoint B i t) / B.mass i ^ 2 := by
+  exact (one_le_div (sq_pos_of_pos (buffer_mass_pos hB i))).2
+    (positiveBufferPoint_potential_lower hB i ht)
+
+theorem positiveBufferPoint_normalized_potential_upper_cut {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) {t : ℝ} (ht : |t| ≤ 4) :
+    B.potential (positiveBufferPoint B i t) / B.mass i ^ 2 ≤ B.layerBound := by
+  exact (div_le_iff₀ (sq_pos_of_pos (buffer_mass_pos hB i))).2
+    (positiveBufferPoint_potential_upper_cut hB i ht)
+
+/-- The inverse Jacobian from physical length to normalized length. -/
+theorem positiveBufferPoint_setIntegral {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) (f : ℝ → ℝ)
+    {s : Set ℝ} (hs : MeasurableSet s) :
+    (∫ t in (positiveBufferPoint B i) ⁻¹' s, f (positiveBufferPoint B i t)) =
+      B.mass i * ∫ x in s, f x := by
+  simpa only [← positiveBufferPoint_affine, positiveBufferPoint_abs_slope hB i,
+    one_div, inv_inv] using
+    positiveBuffer_affine_setIntegral f hs (bufferCut B i) (-bufferSign i / B.mass i)
+
+/-- Normalized energy equals physical energy divided by the mass. -/
+theorem positiveBufferPoint_energy_change {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) {s : Set ℝ} (hs : MeasurableSet s)
+    (u du : ℝ → ℝ) :
+    (∫ t in (positiveBufferPoint B i) ⁻¹' s,
+      ((-bufferSign i / B.mass i) * du (positiveBufferPoint B i t)) ^ 2 +
+        (B.potential (positiveBufferPoint B i t) / B.mass i ^ 2) *
+          u (positiveBufferPoint B i t) ^ 2) =
+      (1 / B.mass i) * ∫ x in s, du x ^ 2 + B.potential x * u x ^ 2 := by
+  have h := positiveBuffer_affine_energy_change hs u du B.potential
+    (bufferCut B i) (positiveBufferPoint_slope_ne_zero hB i)
+  simpa only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq,
+    positiveBufferPoint_abs_slope hB i, one_div, div_eq_mul_inv, mul_comm] using h
+
+end ContinuousFlexibility.Radial

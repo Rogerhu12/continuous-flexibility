@@ -472,12 +472,13 @@ theorem positiveBuffer_halfline_derivative_bounds {a M : ℝ} {u du q : ℝ → 
     · intro x hx
       rw [interior_Ici] at hx
       rw [(hdu x hx).deriv]
-      exact mul_nonneg (hq x hx) (hnn x hx.le)
+      exact mul_nonneg (hq x hx) (hnn x (Ioi_subset_Ici_self hx))
   have hnonpos : ∀ x ∈ Ici a, du x ≤ 0 := fun x hx =>
     positiveBuffer_halfline_convex_derivative_nonpos hconv hbound hx (hu x hx)
   refine ⟨hmono, fun x hx => ⟨hnonpos x hx, ?_⟩⟩
-  rw [abs_of_nonpos (hnonpos x hx), abs_of_nonpos (hnonpos a le_rfl)]
-  exact neg_le_neg (hmono le_rfl hx hx)
+  have ha : a ∈ Ici a := by change a ≤ a; exact le_rfl
+  rw [abs_of_nonpos (hnonpos x hx), abs_of_nonpos (hnonpos a ha)]
+  exact neg_le_neg (hmono ha hx hx)
 
 /-- The boundary energy flux of a nonnegative bounded homogeneous
 solution tends to zero at the infinite end of a positive buffer. -/
@@ -505,12 +506,16 @@ theorem positiveBuffer_halfline_flux_tendsto_zero {a M m : ℝ}
     have hcancel : y / m * m = y := div_mul_cancel₀ y hm.ne'
     nlinarith
   have he0 := tendsto_exp_atBot.comp harg
-  apply squeeze_zero_norm'
-  · filter_upwards [eventually_ge_atTop a] with x hx
+  have hmajorant : ∀ᶠ x in atTop,
+      ‖u x * du x‖ ≤ |u a| * exp (-m * (x - a)) * |du a| := by
+    filter_upwards [eventually_ge_atTop a] with x hx
     rw [Real.norm_eq_abs, abs_mul]
     exact mul_le_mul (he x hx) (hd.2 x hx).2 (abs_nonneg _)
       (mul_nonneg (abs_nonneg _) (exp_pos _).le)
-  · simpa using (he0.const_mul |u a|).mul_const |du a|
+  have hzero : Tendsto (fun x : ℝ => |u a| * exp (-m * (x - a)) * |du a|)
+      atTop (𝓝 0) := by
+    simpa using (he0.const_mul |u a|).mul_const |du a|
+  exact squeeze_zero_norm' hmajorant hzero
 
 /-- On the inner cutoff layer of a unit-mass buffer of length
 `σ + 6`, both the normalized Dirichlet minimizer and its first

@@ -245,6 +245,7 @@ theorem buffer_weakDerivative_zero_on_open {u d : RadialL2}
   have htest : (∫ x : ℝ, u x * deriv φ x) = 0 := by
     apply integral_eq_zero_of_ae
     filter_upwards [hu'] with x hx
+    change u x * deriv φ x = (0 : ℝ)
     by_cases hxO : x ∈ O
     · rw [hx hxO, zero_mul]
     · rw [deriv_of_notMem_tsupport (fun hm => hxO (hsφ hm)), mul_zero]
@@ -285,7 +286,9 @@ theorem intervalEnergyClosure_zero_traces {V : ℝ → ℝ} {l h : ℝ}
       exact (not_lt_of_ge hx.le) hx'.2) hs
   have hzl := buffer_continuousRepresentative_zero_on_closure hU hu isOpen_Iio hleft
   have hzh := buffer_continuousRepresentative_zero_on_closure hU hu isOpen_Ioi hright
-  exact ⟨hzl (show l ∈ closure (Iio l) by rw [closure_Iio]; exact le_rfl),
-    hzh (show h ∈ closure (Ioi h) by rw [closure_Ioi]; exact le_rfl)⟩
+  exact ⟨hzl (show l ∈ closure (Iio l) by
+      simpa only [closure_Iio, mem_Iic] using (le_refl l)),
+    hzh (show h ∈ closure (Ioi h) by
+      simpa only [closure_Ioi, mem_Ici] using (le_refl h))⟩
 
 end ContinuousFlexibility.Radial
