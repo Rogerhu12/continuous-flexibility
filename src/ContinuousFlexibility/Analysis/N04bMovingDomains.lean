@@ -225,4 +225,129 @@ theorem n04b_travelHalves_union_rangeCutPoint [Nonempty X]
   rw [n04b_range_travelCutPoint hΓ hmid]
   exact (n04b_travelHalves_split hΓ.mapsTo).2
 
+
+/-- Actual forward/inverse identities give the bijection used by the
+travel-domain restriction lemmas. -/
+theorem n04b_bijOn_of_travel_inverse
+    {Ω : Set X} {Γ : X → PolarPoint} {G : PolarPoint → X} {T : ℝ}
+    (hΓ : MapsTo Γ Ω (Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ)))
+    (hG : MapsTo G (Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ)) Ω)
+    (hGF : ∀ x ∈ Ω, G (Γ x) = x)
+    (hFG : ∀ q ∈ Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ), Γ (G q) = q) :
+    BijOn Γ Ω (Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ)) := by
+  refine ⟨hΓ, ?_, ?_⟩
+  · intro x hx y hy he
+    exact (hGF x hx).symm.trans ((congrArg G he).trans (hGF y hy))
+  · intro q hq
+    exact ⟨G q, hG hq, hFG q hq⟩
+
+/-- Each middle half contains an actual inverse image of an interior
+travel point. A single statement handles both sides. -/
+theorem n04b_travelHalfDomain_nonempty
+    {Ω : Set X} {Γ : X → PolarPoint} {T : ℝ}
+    (hT : 0 < T)
+    (hΓ : BijOn Γ Ω (Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ))) (side : Bool) :
+    (n04bTravelHalfDomain Ω Γ T side).Nonempty := by
+  have hI : (n04bTravelHalfInterval T side).Nonempty := by
+    cases side with
+    | false => exact ⟨T / 4, by constructor <;> linarith⟩
+    | true => exact ⟨3 * T / 4, by constructor <;> linarith⟩
+  obtain ⟨t, ht⟩ := hI
+  have hp : (t, (0 : ℝ)) ∈ n04bTravelHalfInterval T side ×ˢ (univ : Set ℝ) :=
+    ⟨ht, mem_univ _⟩
+  obtain ⟨x, hx, _⟩ := (n04b_bijOn_travelHalf hT hΓ side).surjOn hp
+  exact ⟨x, hx⟩
+
+/-- The specified actual inverse restricts to either moving half-domain. -/
+theorem n04b_inverse_mapsTo_travelHalf
+    {Ω : Set X} {Γ : X → PolarPoint} {G : PolarPoint → X} {T : ℝ}
+    (hT : 0 < T)
+    (hG : MapsTo G (Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ)) Ω)
+    (hFG : ∀ q ∈ Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ), Γ (G q) = q)
+    (side : Bool) :
+    MapsTo G (n04bTravelHalfInterval T side ×ˢ (univ : Set ℝ))
+      (n04bTravelHalfDomain Ω Γ T side) := by
+  intro q hq
+  have hq' : q ∈ Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ) :=
+    ⟨n04b_travelHalfInterval_subset hT side hq.1, mem_univ _⟩
+  apply mem_n04bTravelDomain.mpr
+  refine ⟨hG hq', ?_⟩
+  simpa only [hFG q hq'] using hq.1
+
+/-- The two actual halves together with the specified inverse trace cover
+the original physical domain. The inverse is evaluated only at interior
+middle-travel points. -/
+theorem n04b_travelHalves_decomposition_of_inverse
+    {Ω : Set X} {Γ : X → PolarPoint} {G : PolarPoint → X} {T : ℝ}
+    (hT : 0 < T)
+    (hΓ : BijOn Γ Ω (Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ)))
+    (hG : MapsTo G (Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ)) Ω)
+    (hFG : ∀ q ∈ Ioo (0 : ℝ) T ×ˢ (univ : Set ℝ), Γ (G q) = q) :
+    (n04bTravelHalfDomain Ω Γ T false ∪ n04bTravelHalfDomain Ω Γ T true) ∪
+      Set.range (fun θ : ℝ => G (T / 2, θ)) = Ω := by
+  letI : Nonempty X := ⟨G (T / 2, 0)⟩
+  have hmid : T / 2 ∈ Ioo (0 : ℝ) T := ⟨half_pos hT, half_lt_self hT⟩
+  have hcut : n04bTravelCutPoint Ω Γ (T / 2) =
+      (fun θ : ℝ => G (T / 2, θ)) :=
+    funext (n04b_travelCutPoint_eq_of_inverse hΓ hG hFG hmid)
+  have hcover := n04b_travelHalves_union_rangeCutPoint hT hΓ
+  rw [hcut] at hcover
+  rw [hcover]
+  apply Set.Subset.antisymm
+  · intro x hx
+    rcases hx with hx | ⟨θ, rfl⟩
+    · exact hx.1
+    · exact hG ⟨hmid, mem_univ θ⟩
+  · intro x hx
+    by_cases hcut : x ∈ Set.range (fun θ : ℝ => G (T / 2, θ))
+    · exact Or.inr hcut
+    · exact Or.inl ⟨hx, hcut⟩
+
+/-- A symmetry preserving the physical domain and the first travel
+coordinate preserves every travel subdomain, hence either half. -/
+theorem n04b_travelDomain_invariant
+    {Ω : Set X} {Γ : X → PolarPoint} {R : X → X} {I : Set ℝ}
+    (hΩ : ∀ x, R x ∈ Ω ↔ x ∈ Ω)
+    (hΓ : ∀ x ∈ Ω, (Γ (R x)).1 = (Γ x).1) :
+    ∀ x, R x ∈ n04bTravelDomain Ω Γ I ↔ x ∈ n04bTravelDomain Ω Γ I := by
+  intro x
+  simp only [mem_n04bTravelDomain]
+  constructor
+  · rintro ⟨hRx, hI⟩
+    have hx := (hΩ x).mp hRx
+    refine ⟨hx, ?_⟩
+    simpa only [hΓ x hx] using hI
+  · rintro ⟨hx, hI⟩
+    refine ⟨(hΩ x).mpr hx, ?_⟩
+    simpa only [hΓ x hx] using hI
+
+/-- Taking period = π supplies the angular periodicity in the shared
+canonical-domain contract. -/
+theorem n04b_travelHalfDomain_periodic
+    {Ω : Set PolarPoint} {Γ : PolarPoint → PolarPoint} {T : ℝ}
+    (period : ℝ)
+    (hΩ : ∀ p, p + (0, period) ∈ Ω ↔ p ∈ Ω)
+    (hΓ : ∀ p ∈ Ω, Γ (p + (0, period)) = Γ p + (0, period))
+    (side : Bool) :
+    ∀ p, p + (0, period) ∈ n04bTravelHalfDomain Ω Γ T side ↔
+      p ∈ n04bTravelHalfDomain Ω Γ T side := by
+  unfold n04bTravelHalfDomain
+  apply n04b_travelDomain_invariant hΩ
+  intro p hp
+  simpa using congrArg Prod.fst (hΓ p hp)
+
+/-- Reflection equivariance preserves either moving half by the same
+radial-coordinate invariance argument. -/
+theorem n04b_travelHalfDomain_reflection
+    {Ω : Set PolarPoint} {Γ : PolarPoint → PolarPoint} {T : ℝ}
+    (hΩ : ∀ p, (p.1, -p.2) ∈ Ω ↔ p ∈ Ω)
+    (hΓ : ∀ p ∈ Ω, Γ (p.1, -p.2) = ((Γ p).1, -(Γ p).2))
+    (side : Bool) :
+    ∀ p, (p.1, -p.2) ∈ n04bTravelHalfDomain Ω Γ T side ↔
+      p ∈ n04bTravelHalfDomain Ω Γ T side := by
+  unfold n04bTravelHalfDomain
+  apply n04b_travelDomain_invariant hΩ
+  intro p hp
+  simpa using congrArg Prod.fst (hΓ p hp)
+
 end ContinuousFlexibility.Analysis
