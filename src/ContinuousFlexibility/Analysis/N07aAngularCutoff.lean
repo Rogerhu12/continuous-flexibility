@@ -70,9 +70,10 @@ theorem n07aAngularIntervalCutoff_tsupport (a b : ℝ) (hab : a < b) (k : ℕ) :
   have h := abs_lt.mp (hdist.trans_lt hstrict)
   constructor <;> linarith
 
-theorem n07aAngularIntervalCutoff_eventually_one (a b : ℝ) (hab : a < b)
+theorem n07aAngularIntervalCutoff_eventually_one_nhds (a b : ℝ) (hab : a < b)
     {r : ℝ} (hr : r ∈ Ioo a b) :
-    ∀ᶠ k : ℕ in atTop, n07aAngularIntervalCutoff a b hab k r = 1 := by
+    ∀ᶠ k : ℕ in atTop, ∀ᶠ t : ℝ in 𝓝 r,
+      n07aAngularIntervalCutoff a b hab k t = 1 := by
   have hgap : Tendsto n07aAngularCutoffGap atTop (𝓝 0) := by
     unfold n07aAngularCutoffGap
     have h := (tendsto_add_atTop_iff_nat 2).mpr
@@ -87,8 +88,22 @@ theorem n07aAngularIntervalCutoff_eventually_one (a b : ℝ) (hab : a < b)
     rw [Real.dist_eq, abs_lt]
     constructor <;> linarith [hr.1, hr.2]
   filter_upwards [hin.eventually_const_lt hd] with k hk
+  have hball : Metric.ball ((a + b) / 2) (n07aAngularIntervalBump a b hab k).rIn ∈ 𝓝 r :=
+    Metric.isOpen_ball.mem_nhds (Metric.mem_ball.mpr hk)
+  filter_upwards [hball] with t ht
   exact (n07aAngularIntervalBump a b hab k).one_of_mem_closedBall
-    (Metric.mem_closedBall.mpr hk.le)
+    (Metric.mem_closedBall.mpr (Metric.mem_ball.mp ht).le)
+
+theorem n07aAngularIntervalCutoff_eventually_one (a b : ℝ) (hab : a < b)
+    {r : ℝ} (hr : r ∈ Ioo a b) :
+    ∀ᶠ k : ℕ in atTop, n07aAngularIntervalCutoff a b hab k r = 1 := by
+  filter_upwards [n07aAngularIntervalCutoff_eventually_one_nhds a b hab hr] with k hk
+  exact hk.self_of_nhds
+
+theorem n07aAngularIntervalCutoff_exists_one_nhds (a b : ℝ) (hab : a < b)
+    {r : ℝ} (hr : r ∈ Ioo a b) :
+    ∃ k : ℕ, ∀ᶠ t : ℝ in 𝓝 r, n07aAngularIntervalCutoff a b hab k t = 1 :=
+  (n07aAngularIntervalCutoff_eventually_one_nhds a b hab hr).exists
 
 variable {S : PhysicalSpacesData} {K : CanonicalData S}
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
