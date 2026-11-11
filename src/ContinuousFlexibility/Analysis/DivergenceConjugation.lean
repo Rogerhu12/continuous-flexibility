@@ -59,8 +59,8 @@ theorem heightConjugation_divergence
   rw [divergence_expansion_of_coefficients ha hb hc (hh.mul hv),
     divergence_expansion_of_coefficients hwa hwb hwc hv,
     divergence_expansion_of_coefficients ha hb hc hh]
-  simp only [radialPartial, angularPartial,
-    polar_directional_mul hh1 hv1, polar_second_directional_mul hh hv,
+  unfold radialPartial angularPartial
+  simp only [polar_directional_mul hh1 hv1, polar_second_directional_mul hh hv,
     polar_directional_mul hhh ha, polar_directional_mul hhh hb,
     polar_directional_mul hhh hc, polar_directional_mul hh1 hh1]
   ring

@@ -42,8 +42,8 @@ theorem divergenceOperator_mul_sq_of_zero
         (radialPartial f x, angularPartial f x) := by
   unfold divergenceOperator
   rw [divergence_expansion_of_coefficients ha hb hc (hh.mul (hf.pow 2))]
-  simp only [radialPartial, angularPartial,
-    polar_directional_mul_sq_of_zero
+  unfold radialPartial angularPartial
+  simp only [polar_directional_mul_sq_of_zero
       (hh.differentiableAt (by norm_num)) (hf.differentiableAt (by norm_num)) hf0,
     polar_second_directional_mul_sq_of_zero hh hf hf0,
     coefficientQuadratic]
@@ -151,7 +151,7 @@ theorem principalCoefficients_of_operator_identity
   refine ⟨hqa, ?_, hqc⟩
   have hsum := hq (ContinuousLinearMap.fst ℝ ℝ ℝ + ContinuousLinearMap.snd ℝ ℝ ℝ)
   simp only [coefficientQuadratic, ContinuousLinearMap.add_apply,
-    ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply,
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
     zero_add, add_zero, one_pow, mul_one] at hsum
   rw [hqa, hqc] at hsum
   dsimp only [coordinatePrincipalDensity, coefficientQuadratic] at hsum ⊢
