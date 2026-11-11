@@ -51,6 +51,10 @@ theorem modeOuterSeparatedGraph_zero {D : ReferenceData}
     apply (outerRobin_sqrt_iff (hlam i) (M.A i i, M.B i i) _ _).mpr
     have hz := hboundary i
     have hf := matchingOuterFlux_eq_tailHalf ha hm hb hu right
+    change matchingOuterFlux D M u i =
+      outerTailSign right * D.w (matchingCut D M i) *
+        derivWithin u (radialTailHalf D right (matchingCut D M i)) (matchingCut D M i) /
+          sqrt (M.boundaryScale i) at hf
     rw [hf] at hz
     simpa only [hcut, Prod.fst, Prod.snd, mul_div_assoc] using hz
   apply Prod.ext
