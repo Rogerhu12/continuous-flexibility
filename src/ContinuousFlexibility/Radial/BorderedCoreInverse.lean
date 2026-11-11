@@ -63,11 +63,10 @@ theorem borderedAdjoint_pairing_left
         (⟪u.1, (R (v.1, 0)).1⟫_ℝ + ⟪u.2, (R (v.1, 0)).2⟫_ℝ) +
         (⟪u.1, (R (0, v.2)).1⟫_ℝ + ⟪u.2, (R (0, v.2)).2⟫_ℝ) := by
       simp only [borderedPairing, borderedAdjoint, ContinuousLinearMap.prod_apply,
-        ContinuousLinearMap.add_apply, ContinuousLinearMap.comp_apply,
+        add_apply, ContinuousLinearMap.comp_apply,
         ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
         inner_add_left, ContinuousLinearMap.adjoint_inner_left,
         ContinuousLinearMap.inl_apply, ContinuousLinearMap.inr_apply]
-      ring
     _ = borderedPairing u (R (v.1, 0) + R (0, v.2)) := by
       simp only [borderedPairing, Prod.fst_add, Prod.snd_add, inner_add_right]
       ring
@@ -128,7 +127,8 @@ theorem bordered_inverse_of_core
   refine ⟨hright, ?_, ?_⟩
   · intro u f huf
     exact BorderedCoreAdjoint.unique hkernel (hright f) huf
-  · ext f
+  · apply ContinuousLinearMap.ext
+    intro f
     exact (heq f).symm
 
 end ContinuousFlexibility.Radial

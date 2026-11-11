@@ -36,8 +36,8 @@ theorem contDiff_div_of_tsupport_subset
   by_cases hx : x ∈ tsupport φ
   · exact hφ.contDiffAt.div
       (hw.contDiffAt (hU.mem_nhds (hφs hx))) (hwn x (hφs hx))
-  · apply (contDiffAt_const : ContDiffAt ℝ ∞ (fun _ : ℝ => (0 : ℝ)) x).
-      congr_of_eventuallyEq
+  · apply ContDiffAt.congr_of_eventuallyEq
+      (contDiffAt_const : ContDiffAt ℝ ∞ (fun _ : ℝ => (0 : ℝ)) x)
     filter_upwards [(isClosed_tsupport φ).isOpen_compl.mem_nhds hx] with y hy
     have hy0 : φ y = 0 := image_eq_zero_of_notMem_tsupport hy
     simp only [hy0, zero_div]
@@ -53,8 +53,9 @@ of the numerator. -/
 theorem hasCompactSupport_div_right {φ : ℝ → ℝ}
     (hφ : HasCompactSupport φ) (w : ℝ → ℝ) :
     HasCompactSupport (fun x => φ x / w x) := by
-  simpa only [div_eq_mul_inv] using
-    (hφ.mul_right (f' := fun x => (w x)⁻¹))
+  convert (hφ.mul_right (f' := fun x => (w x)⁻¹)) using 1
+  funext x
+  simp only [Pi.mul_apply, div_eq_mul_inv]
 
 /-- A function supported in an open finite interval has the same integral
 over that interval and over the whole line. -/
@@ -174,6 +175,7 @@ theorem exists_weakDeriv_of_integrated_divergence
         _ = ∫ x in a..b, u x * deriv φ x - m * (u x * deriv η₀ x) := by
           apply intervalIntegral.integral_congr
           intro x hx
+          dsimp only
           rw [hd]
           ring
         _ = _ := by
@@ -374,9 +376,10 @@ theorem exists_contDiff_representative_of_weak_divergence
     have hn := hwn x hx
     field_simp [hn]
     <;> ring
+  have hconst : AbsolutelyContinuousOnInterval (fun _ : ℝ => -C) a b :=
+    (contDiffOn_const : ContDiffOn ℝ 1 (fun _ : ℝ => -C) (uIcc a b)).absolutelyContinuousOnInterval
   have hPac : AbsolutelyContinuousOnInterval (fun x => -C + H x) a b :=
-    (contDiffOn_const : ContDiffOn ℝ 1 (fun _ : ℝ => -C) (uIcc a b)).
-      absolutelyContinuousOnInterval.add hHac
+    hconst.add hHac
   have hfluxac : AbsolutelyContinuousOnInterval (fun x => w x * deriv v x) a b := by
     apply hPac.congr
     intro x hx

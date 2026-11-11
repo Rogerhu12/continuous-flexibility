@@ -35,9 +35,9 @@ theorem matching_radialJacobi_add {w ψ φ : ℝ → ℝ}
   have hd : deriv (fun x => ψ x + φ x) =
       fun x => deriv ψ x + deriv φ x := by
     funext x
-    exact deriv_add (hdψ x) (hdφ x)
+    exact deriv_fun_add (hdψ x) (hdφ x)
   simp only [radialJacobi, hd, mul_add]
-  rw [deriv_add (hdwψ r) (hdwφ r)]
+  rw [deriv_fun_add (hdwψ r) (hdwφ r)]
   ring
 
 /-- The residual of exactly the equation frozen in `ModeLocalEquation`. -/

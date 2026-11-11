@@ -52,7 +52,8 @@ theorem nonnegative_compact_deriv_sq_bound {w : ℝ → ℝ}
     have hu := (hw.differentiable (by simp) (x + t * h)).hasDerivAt.comp t ht
     have hv : HasDerivAt (fun s : ℝ => s * h * q) (h * q) t := by
       simpa using ((hasDerivAt_id t).mul_const h).mul_const q
-    convert (hu.sub_const (w x)).fun_sub hv using 1 <;> ring
+    convert (hu.sub_const (w x)).fun_sub hv using 1
+    all_goals first | (funext z; dsimp only [rem, Function.comp_apply]; ring) | ring
   have hrem : |w (x + h) - w x - h * q| ≤ M * h ^ 2 := by
     have hb (t : ℝ) (ht : t ∈ Ico (0 : ℝ) 1) :
         ‖h * (deriv w (x + t * h) - q)‖ ≤ M * h ^ 2 := by

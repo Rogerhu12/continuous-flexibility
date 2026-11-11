@@ -45,29 +45,50 @@ theorem matching_contDiff_indicator_Iio {f : ℝ → ℝ} {c : ℝ}
       simpa only [Set.mem_Iio] using (not_lt.mpr hy'.le : ¬ y < c)
     exact Set.indicator_of_notMem hyc f
 
-/-- A cutoff equal to one near an interior point, with topological
-support strictly inside a prescribed interval. -/
-theorem exists_matching_cutoff {u c v : ℝ} (huc : u < c) (hcv : c < v) :
+/-- A cutoff equal to one near a closed interval, with topological
+support strictly inside a prescribed larger interval. -/
+theorem exists_matching_interval_cutoff {u a b v : ℝ}
+    (hua : u < a) (hab : a ≤ b) (hbv : b < v) :
     ∃ η : ℝ → ℝ, ContDiff ℝ ∞ η ∧ HasCompactSupport η ∧
-      tsupport η ⊆ Ioo u v ∧ η =ᶠ[𝓝 c] fun _ => 1 := by
-  let ε : ℝ := min (c - u) (v - c) / 3
+      tsupport η ⊆ Ioo u v ∧ ∀ x ∈ Icc a b, η =ᶠ[𝓝 x] fun _ => 1 := by
+  let m : ℝ := (a + b) / 2
+  let d : ℝ := (b - a) / 2
+  let ε : ℝ := min (a - u) (v - b) / 3
   have hε : 0 < ε :=
-    div_pos (lt_min (sub_pos.mpr huc) (sub_pos.mpr hcv)) (by norm_num)
-  have hεL : 2 * ε < c - u := by
-    have h := min_le_left (c - u) (v - c)
+    div_pos (lt_min (sub_pos.mpr hua) (sub_pos.mpr hbv)) (by norm_num)
+  have hεL : 2 * ε < a - u := by
+    have h := min_le_left (a - u) (v - b)
     dsimp only [ε]
-    linarith only [h, huc]
-  have hεR : 2 * ε < v - c := by
-    have h := min_le_right (c - u) (v - c)
+    linarith only [h, hua]
+  have hεR : 2 * ε < v - b := by
+    have h := min_le_right (a - u) (v - b)
     dsimp only [ε]
-    linarith only [h, hcv]
-  let η : ContDiffBump c := ⟨ε, 2 * ε, hε, by linarith only [hε]⟩
+    linarith only [h, hbv]
+  let η : ContDiffBump m :=
+    ⟨d + ε, d + 2 * ε, by dsimp only [d]; linarith only [hab, hε],
+      by linarith only [hε]⟩
   have hsupp : tsupport (η : ℝ → ℝ) ⊆ Ioo u v := by
     rw [η.tsupport_eq, Real.closedBall_eq_Icc]
     intro x hx
-    change c - 2 * ε ≤ x ∧ x ≤ c + 2 * ε at hx
+    change m - (d + 2 * ε) ≤ x ∧ x ≤ m + (d + 2 * ε) at hx
+    change u < x ∧ x < v
+    dsimp only [m, d] at hx
     exact ⟨by linarith only [hx.1, hεL], by linarith only [hx.2, hεR]⟩
-  exact ⟨η, η.contDiff, η.hasCompactSupport, hsupp, η.eventuallyEq_one⟩
+  refine ⟨η, η.contDiff, η.hasCompactSupport, hsupp, ?_⟩
+  intro x hx
+  have hi : x ∈ Metric.ball m η.rIn := by
+    rw [Real.ball_eq_Ioo]
+    change m - (d + ε) < x ∧ x < m + (d + ε)
+    dsimp only [m, d]
+    exact ⟨by linarith only [hx.1, hε], by linarith only [hx.2, hε]⟩
+  exact η.eventuallyEq_one_of_mem_ball hi
+
+/-- A cutoff equal to one near an interior point. -/
+theorem exists_matching_cutoff {u c v : ℝ} (huc : u < c) (hcv : c < v) :
+    ∃ η : ℝ → ℝ, ContDiff ℝ ∞ η ∧ HasCompactSupport η ∧
+      tsupport η ⊆ Ioo u v ∧ η =ᶠ[𝓝 c] fun _ => 1 := by
+  obtain ⟨η, hs, hc, ht, he⟩ := exists_matching_interval_cutoff huc (le_refl c) hcv
+  exact ⟨η, hs, hc, ht, he c ⟨le_rfl, le_rfl⟩⟩
 
 /-- Split a test into its left part, an interior cut test, and its right
 part. The left and right tests retain the original endpoint behavior. -/

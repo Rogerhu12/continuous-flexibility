@@ -29,7 +29,8 @@ theorem matching_radialJacobi_eq_zero_of_notMem_tsupport
     radialJacobi J w ψ r = 0 := by
   have he : ψ =ᶠ[𝓝 r] fun _ => 0 := notMem_tsupport_iff_eventuallyEq.mp hr
   have hd : deriv ψ =ᶠ[𝓝 r] fun _ => 0 := by
-    simpa only [deriv_const] using he.deriv
+    filter_upwards [he.deriv] with x hx
+    simpa only [deriv_const] using hx
   have hp : (fun x => w x * deriv ψ x) =ᶠ[𝓝 r] fun _ => 0 := by
     filter_upwards [hd] with x hx
     simp only [hx, mul_zero]

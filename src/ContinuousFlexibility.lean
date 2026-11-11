@@ -384,3 +384,8 @@ import ContinuousFlexibility.Radial.ModeCoreSource
 import ContinuousFlexibility.Radial.MatchingGraphRestrictions
 import ContinuousFlexibility.Radial.ModeCoreGraph
 import ContinuousFlexibility.Radial.MatchingInactiveScalar
+import ContinuousFlexibility.Radial.ModeCoreInverse
+import ContinuousFlexibility.Radial.ModeGraphAlgebra
+import ContinuousFlexibility.Radial.WeakGreenWithin
+import ContinuousFlexibility.Radial.ModeWeakGreen
+import ContinuousFlexibility.Radial.MatchingGraphRepresentatives

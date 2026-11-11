@@ -1,5 +1,4 @@
 import ContinuousFlexibility.Radial.MatchingInverseFormula
-import Mathlib.Analysis.InnerProductSpace.L2
 
 /-!
 # Pairing identities for the actual source restrictions
