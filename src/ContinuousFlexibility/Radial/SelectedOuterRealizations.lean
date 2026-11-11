@@ -53,8 +53,11 @@ theorem exists_outerRealizations_of_regional {D : ReferenceData}
       ∃ rep : RadialModePair D → ℝ → ℝ,
         ∃ Q : Fin 2 → RadialModePair D, ∃ p : Fin 2 → ℝ → ℝ,
           MatchingOuterRealizations D
-            { M with outerInverse := RO, outerRepresentative := rep,
-              outerPoisson := Q, outerFunction := p } := by
+            { M with
+              outerInverse := RO
+              outerRepresentative := rep
+              outerPoisson := Q
+              outerFunction := p } := by
   classical
   let RO := radialOuterPairOperator D M.innerLeft M.innerRight (R false) (R true)
   have hgraph (F : RadialModePair D) : ModeOuterSeparatedGraph D M (RO F) F :=
