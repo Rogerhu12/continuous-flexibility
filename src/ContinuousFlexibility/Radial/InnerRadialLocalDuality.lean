@@ -42,7 +42,7 @@ theorem innerRadialLocalKernel_unique_of_solutions (D : ReferenceData)
       scalar * ⟪column, Q.1⟫_ℝ - ⟪(0 : RadialModeL2 D), Q.1⟫_ℝ = 0 at hk
     change ⟪Q.2, q.2⟫_ℝ + ⟪V, q.1⟫_ℝ +
       c * ⟪column, q.1⟫_ℝ - ⟪F, q.1⟫_ℝ = 0 at hf
-    rw [inner_zero_left, sub_zero, real_inner_comm q.2 Q.2, hv.inner_symm hV] at hk
+    rw [inner_zero_left, sub_zero, real_inner_comm Q.2 q.2, hv.inner_symm hV] at hk
     cases bordered with
     | false =>
       simp only [Bool.false_eq_true, ite_false] at hrow hr
@@ -67,9 +67,9 @@ theorem innerRadialLocalKernel_unique_of_solutions (D : ReferenceData)
       simpa only [inner_zero_left, mul_one, zero_add] using h
   have hpotential : v = 0 := hv.eq_zero_of_value_eq_zero hvalue
   have hgrad : q.2 = 0 := by
-    apply inner_self_eq_zero.mp
+    apply (inner_self_eq_zero (𝕜 := ℝ)).mp
     have h := hweak q hq
-    simpa only [innerRadialWeakResidual, hvalue, hpotential, inner_zero_left,
+    simpa only [innerRadialWeakResidual_apply, hvalue, hpotential, inner_zero_left,
       inner_zero_right, mul_zero, add_zero, sub_zero] using h
   exact ⟨Prod.ext hvalue hgrad, hpotential, hscalar⟩
 

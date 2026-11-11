@@ -41,7 +41,7 @@ theorem innerLiouvilleInterval_pushforward_ae {f g : ℝ → ℝ}
   have hm'' : hf.mk f =ᵐ[Measure.map R ((volume.restrict (Ioo a b)).withDensity
       (fun x => ENNReal.ofReal (innerLiouvilleIntervalAmplitude R s lam x ^ 2)))] hg.mk g :=
     (ae_map_iff hR.continuous.measurable.aemeasurable
-      (measurableSet_eq hf.stronglyMeasurable_mk.measurable
+      (measurableSet_eq_fun hf.stronglyMeasurable_mk.measurable
         hg.stronglyMeasurable_mk.measurable)).mpr hm'
   rw [innerLiouvilleInterval_map_measure D hab hlam hR hp hcore hw] at hm''
   exact hf.ae_eq_mk.trans (hm''.trans hg.ae_eq_mk.symm)
@@ -113,7 +113,7 @@ theorem exists_innerLiouvilleUnitPoissonRepresentative
   have hu (x : ℝ) (hx : x ∈ Icc a b) :
       (fun y => u (R y)) =ᶠ[𝓝 x] (fun y => s t * p y / s y) := by
     have hsp : ∀ᶠ y in 𝓝 x, 0 < s y :=
-      hs.continuous.continuousAt.eventually (gt_mem_nhds (hp x hx).2.2)
+      hs.continuous.continuousAt.eventually (lt_mem_nhds (hp x hx).2.2)
     filter_upwards [hnear x hx, hsp] with y hy hsy
     dsimp only [u, c]
     rw [hy]

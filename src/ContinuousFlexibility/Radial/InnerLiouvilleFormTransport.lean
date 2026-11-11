@@ -104,7 +104,7 @@ theorem innerLiouville_energy_form {V p : ℝ → ℝ}
   have hMp : ⟪M f, Pd - M P⟫_ℝ = ⟪f, M (Pd - M P)⟫_ℝ :=
     innerLiouvilleDriftMultiplier_inner s a b hs (fun x hx => (hp x hx).2.2) f (Pd - M P)
   have hVpair : (∫ x : ℝ, V x * f x * P x) = ⟪f, Pv⟫_ℝ :=
-    (innerWeakGreen_potential_pairing hPv f).symm.trans (real_inner_comm Pv f)
+    (innerWeakGreen_potential_pairing hPv f).symm.trans (real_inner_comm f Pv)
   have hvpair := congrArg (fun z : RadialL2 => ⟪f, z⟫_ℝ) hvector
   rw [inner_add_right, inner_sub_right] at hvpair
   rw [hgrad, hpotential]

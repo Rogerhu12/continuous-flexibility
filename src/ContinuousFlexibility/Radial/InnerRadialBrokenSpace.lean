@@ -48,8 +48,15 @@ def innerRadialBrokenScalar : InnerRadialBrokenData D n H →ₗ[ℝ] ℝ where
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
+@[simp] theorem innerRadialBrokenScalar_apply (x : InnerRadialBrokenData D n H) :
+    innerRadialBrokenScalar D x = x.1.2.2 := rfl
+
 def innerRadialBrokenSource : InnerRadialBrokenData D n H →ₗ[ℝ] H :=
   LinearMap.snd ℝ _ _
+
+@[simp] theorem innerRadialBrokenSource_apply (x : InnerRadialBrokenData D n H) :
+    innerRadialBrokenSource D x = x.2 :=
+  LinearMap.snd_apply ℝ _ _ x
 
 def innerRadialBrokenRow (central : Fin (n + 1)) (column : RadialModeL2 D) :
     InnerRadialBrokenData D n H →ₗ[ℝ] ℝ where
@@ -61,6 +68,11 @@ def innerRadialBrokenRow (central : Fin (n + 1)) (column : RadialModeL2 D) :
     simp only [Prod.smul_fst, Prod.smul_snd, Pi.smul_apply,
       real_inner_smul_right, map_smul, RingHom.id_apply, smul_eq_mul]
     ring
+
+@[simp] theorem innerRadialBrokenRow_apply (central : Fin (n + 1))
+    (column : RadialModeL2 D) (x : InnerRadialBrokenData D n H) :
+    innerRadialBrokenRow D rowSource central column x =
+      ⟪column, (x.1.1 central).1⟫_ℝ - rowSource x.2 := rfl
 
 /-- There is one row in the bordered mode; otherwise both scalar
 coordinates are forced to zero. -/
@@ -79,9 +91,9 @@ theorem mem_innerRadialBrokenBorder (bordered : Bool) (central : Fin (n + 1))
       else x.1.2.2 = 0 ∧ rowSource x.2 = 0 := by
   cases bordered <;>
     simp only [innerRadialBrokenBorder, Bool.false_eq_true, eq_self_iff_true,
-      if_false, if_true, Submodule.mem_inf, LinearMap.mem_ker,
-      innerRadialBrokenRow, innerRadialBrokenScalar, innerRadialBrokenSource,
-      LinearMap.comp_apply, LinearMap.snd_apply, sub_eq_zero]
+      ite_false, ite_true, Submodule.mem_inf, LinearMap.mem_ker,
+      innerRadialBrokenRow_apply, innerRadialBrokenScalar_apply,
+      innerRadialBrokenSource_apply, LinearMap.comp_apply, sub_eq_zero]
 
 /-- Linearity of the actual local energy-minus-forcing functional in
 the whole broken graph datum. -/
@@ -93,14 +105,14 @@ def innerRadialBrokenResidual (central : Fin (n + 1)) (column : RadialModeL2 D)
   map_add' x y := by
     apply LinearMap.ext
     intro r
-    simp only [innerRadialChainResidual, innerRadialWeakResidual,
+    simp only [innerRadialChainResidual, innerRadialWeakResidual_apply,
       Prod.fst_add, Prod.snd_add, Pi.add_apply, map_add,
       LinearMap.add_apply, inner_add_left]
     ring
   map_smul' c x := by
     apply LinearMap.ext
     intro r
-    simp only [innerRadialChainResidual, innerRadialWeakResidual,
+    simp only [innerRadialChainResidual, innerRadialWeakResidual_apply,
       Prod.smul_fst, Prod.smul_snd, Pi.smul_apply, map_smul,
       LinearMap.smul_apply, real_inner_smul_left, RingHom.id_apply, smul_eq_mul]
     ring
@@ -110,7 +122,7 @@ def innerRadialBrokenResidualEval (central : Fin (n + 1)) (column : RadialModeL2
     InnerRadialBrokenData D n H →ₗ[ℝ] ℝ where
   toFun x := innerRadialBrokenResidual D forcing central column p x r
   map_add' x y := by rw [map_add, LinearMap.add_apply]
-  map_smul' c x := by rw [map_smul, LinearMap.smul_apply]
+  map_smul' c x := by simp only [map_smul, LinearMap.smul_apply, RingHom.id_apply]
 
 /-- The actual local weak graph before total interface cancellation. -/
 def innerRadialBrokenSpace (bordered : Bool) (j : ℝ)
@@ -184,7 +196,7 @@ def innerRadialBrokenFlux (central : Fin (n + 1)) (column : RadialModeL2 D) :
     apply LinearMap.ext
     intro ξ
     simp only [LinearMap.sum_apply, LinearMap.comp_apply, map_smul, LinearMap.smul_apply,
-      smul_eq_mul, Finset.mul_sum]
+      RingHom.id_apply, smul_eq_mul, Finset.mul_sum]
 
 theorem innerRadialBrokenFlux_eq (central : Fin (n + 1)) (column : RadialModeL2 D)
     (x : InnerRadialBrokenData D n H) :

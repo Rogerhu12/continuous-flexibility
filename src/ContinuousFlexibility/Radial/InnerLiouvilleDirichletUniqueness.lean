@@ -31,6 +31,7 @@ variable (D : ReferenceData) {B : BufferData} (hB : BufferHypotheses B)
   (hcoeff : ∀ x ∈ Ioo B.l B.h,
     B.potential x = liouvilleV0 s x - j ^ 2 * liouvilleRho R s x)
 
+include M U hU hv hDw hcoeff in
 theorem innerLiouvilleLocalizedDirichlet_kernel
     (q : InnerRadialH1Pair D) (v : RadialModeL2 D) (scalar : ℝ)
     (hq : q ∈ innerRadialH1Zero D (R B.l) (R B.h))

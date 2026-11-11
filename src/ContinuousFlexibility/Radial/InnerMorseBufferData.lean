@@ -181,7 +181,7 @@ theorem innerMorseBufferData_hypotheses {A B j B₀ : ℝ}
         (morseShortLeftCap_negRho_lower hB hAB hx') (sq_nonneg j)
       rw [show (innerMorseBufferData A B j B₀).mass 0 = innerMorseBufferMass A B j 0
         from rfl, innerMorseBufferMass_zero, mul_pow, sq_sqrt (by positivity : 0 ≤ A / 4)]
-      simpa only [innerMorseBufferData, morsePotential, neg_mul] using hρ
+      simpa only [innerMorseBufferData, morsePotential, neg_mul, mul_neg] using hρ
     · have h10 : (1 : Fin 2) ≠ 0 := by decide
       have hx' : morseRightTurn A B + morseRightCapLength A (1 / 100) / 4 ≤ x := by
         have he : (innerMorseBufferData A B j B₀).h -
@@ -199,7 +199,7 @@ theorem innerMorseBufferData_hypotheses {A B j B₀ : ℝ}
         (morseRho_right_cap_lower hB hAB hlower) (sq_nonneg j)
       rw [show (innerMorseBufferData A B j B₀).mass 1 = innerMorseBufferMass A B j 1
         from rfl, innerMorseBufferMass_one, mul_pow, sq_sqrt (by positivity : 0 ≤ B / 2)]
-      simpa only [innerMorseBufferData, morsePotential, neg_mul] using hρ
+      simpa only [innerMorseBufferData, morsePotential, neg_mul, mul_neg] using hρ
   · intro i x hx
     rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
     · have hx' : |x - innerMorseBufferLeftCut| ≤ 4 / innerMorseBufferMass A B j 0 ∨

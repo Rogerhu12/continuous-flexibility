@@ -155,4 +155,34 @@ theorem innerMorseBufferCoefficient_le_weight (T : MorseChainData) (m : ℕ)
       rw [rpow_natCast, mul_pow]
       ring
 
+/-- This version accepts precisely the comparison exported by R09.
+Its universal comparison constant only enlarges the coefficient factor,
+and does not change the ninth coefficient exponent. -/
+theorem innerMorseChain_inverse_sqrt_energy_le_scaled (T : MorseChainData) (m : ℕ)
+    (hd : 2 ≤ (T.d m : ℝ)) {j k C : ℝ} (hj : 1 ≤ j) (hC : 0 < C) (i : Fin 2)
+    (hk : innerMorseBufferMass (morseChainA T m) (morseChainB T m) j i / C ≤ k) :
+    (sqrt k)⁻¹ ≤ (1 + C) * innerMorseBufferCoefficient T m := by
+  let mass := innerMorseBufferMass (morseChainA T m) (morseChainB T m) j i
+  have hp := morseChainParameters_pos T m hd
+  have hm : 0 < mass := innerMorseBufferMass_pos hp.2 hp.1 (zero_lt_one.trans_le hj) i
+  have hk0 : 0 < k := (div_pos hm hC).trans_le hk
+  have hi : k⁻¹ ≤ C * mass⁻¹ := by
+    have h := one_div_le_one_div_of_le (div_pos hm hC) hk
+    simpa only [one_div, inv_div, div_eq_mul_inv] using h
+  have hi' : k⁻¹ ≤ C * (2 * (T.d m : ℝ) ^ 9) :=
+    hi.trans (mul_le_mul_of_nonneg_left
+      (innerMorseChain_buffer_mass_bounds T m hd hj i).1 hC.le)
+  have hs : (sqrt k)⁻¹ ≤ 1 + k⁻¹ := by
+    rw [← sqrt_inv k]
+    exact sqrt_le_iff.mpr ⟨by positivity,
+      by nlinarith only [inv_nonneg.mpr hk0.le, sq_nonneg (k⁻¹)]⟩
+  have hd1 : 1 ≤ (T.d m : ℝ) ^ 9 := by
+    simpa only [one_pow] using pow_le_pow_left₀ zero_le_one
+      ((by norm_num : (1 : ℝ) ≤ 2).trans hd) 9
+  have hprod : 0 ≤ C * (T.d m : ℝ) ^ 9 :=
+    mul_nonneg hC.le (pow_nonneg (Nat.cast_nonneg (T.d m)) 9)
+  apply hs.trans
+  dsimp only [innerMorseBufferCoefficient]
+  nlinarith only [hi', hd1, hprod]
+
 end ContinuousFlexibility.Radial

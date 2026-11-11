@@ -157,6 +157,50 @@ theorem norm_innerRadialPhysicalDirichletCLM_le
     (innerRadialPhysicalDirichlet_norm_le D hw G bordered j central column
       hunique hex K hK hlocal)
 
+/-- An actual ambient finite block operator transfers its bound to the
+same supported Dirichlet map once their physical fields are identified. -/
+theorem innerRadialPhysicalDirichlet_norm_le_ambient
+    (A : InnerBorderL2 (radialHilbertMeasure D) →L[ℝ]
+      InnerBorderL2 (radialHilbertMeasure D))
+    (hA : ∀ F : H, A F.val = (Dphys F).val) (F : H) :
+    ‖Dphys F‖ ≤ ‖A‖ * ‖F‖ := by
+  have hD := (innerRadialPhysicalInclusion D G bordered).norm_map (Dphys F)
+  have hF := (innerRadialPhysicalInclusion D G bordered).norm_map F
+  rw [innerRadialPhysicalInclusion_apply] at hD hF
+  calc
+    _ = ‖(Dphys F).val‖ := hD.symm
+    _ = ‖A F.val‖ := by rw [hA]
+    _ ≤ ‖A‖ * ‖F.val‖ := A.le_opNorm F.val
+    _ = ‖A‖ * ‖F‖ := by rw [hF]
+
+/-- This restriction uses the same actual field identity, so the
+ambient finite Dirichlet sum supplies a concrete canonical CLM. -/
+def innerRadialPhysicalDirichletCLMOfAmbient
+    (A : InnerBorderL2 (radialHilbertMeasure D) →L[ℝ]
+      InnerBorderL2 (radialHilbertMeasure D))
+    (hA : ∀ F : H, A F.val = (Dphys F).val) : H →L[ℝ] H :=
+  Dphys.mkContinuous ‖A‖
+    (innerRadialPhysicalDirichlet_norm_le_ambient D hw G bordered j central column
+      hunique hex A hA)
+
+@[simp] theorem innerRadialPhysicalDirichletCLMOfAmbient_apply
+    (A : InnerBorderL2 (radialHilbertMeasure D) →L[ℝ]
+      InnerBorderL2 (radialHilbertMeasure D))
+    (hA : ∀ F : H, A F.val = (Dphys F).val) (F : H) :
+    innerRadialPhysicalDirichletCLMOfAmbient D hw G bordered j central column
+      hunique hex A hA F = Dphys F := by
+  simp only [innerRadialPhysicalDirichletCLMOfAmbient, LinearMap.mkContinuous_apply]
+
+theorem norm_innerRadialPhysicalDirichletCLMOfAmbient_le
+    (A : InnerBorderL2 (radialHilbertMeasure D) →L[ℝ]
+      InnerBorderL2 (radialHilbertMeasure D))
+    (hA : ∀ F : H, A F.val = (Dphys F).val) :
+    ‖innerRadialPhysicalDirichletCLMOfAmbient D hw G bordered j central column
+      hunique hex A hA‖ ≤ ‖A‖ :=
+  LinearMap.mkContinuous_norm_le Dphys (norm_nonneg A)
+    (innerRadialPhysicalDirichlet_norm_le_ambient D hw G bordered j central column
+      hunique hex A hA)
+
 end ActualNorm
 
 end ContinuousFlexibility.Radial

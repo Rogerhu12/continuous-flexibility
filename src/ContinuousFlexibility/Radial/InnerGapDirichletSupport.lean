@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory Filter ContinuousFlexibility.Statements
-open scoped ContDiff InnerProductSpace
+open scoped ContDiff InnerProductSpace ENNReal
 
 def innerGapOutsideRestriction (D : ReferenceData) (a b : ℝ) :
     RadialModeL2 D →L[ℝ] Lp ℝ 2 ((radialHilbertMeasure D).restrict (Ioo a b)ᶜ) :=
