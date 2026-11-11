@@ -374,3 +374,7 @@ import ContinuousFlexibility.Radial.IntervalWeakPrimitiveStrict
 import ContinuousFlexibility.Radial.ModeWeakLinearity
 import ContinuousFlexibility.Radial.MatchingCutoffTests
 import ContinuousFlexibility.Radial.RadialGreenBoundary
+import ContinuousFlexibility.Radial.WeakDivergenceRegularity
+import ContinuousFlexibility.Radial.MatchingWeakGluing
+import ContinuousFlexibility.Radial.ModeCompactLocal
+import ContinuousFlexibility.Radial.ModeWeakRegularity

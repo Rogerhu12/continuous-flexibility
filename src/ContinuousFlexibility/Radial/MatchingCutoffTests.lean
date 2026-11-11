@@ -28,18 +28,20 @@ theorem matching_contDiff_indicator_Iio {f : ℝ → ℝ} {c : ℝ}
   classical
   apply contDiff_iff_contDiffAt.mpr
   intro x
-  rcases lt_trichotomy x c with hx | rfl | hx
+  rcases lt_trichotomy x c with hx | heq | hx
   · apply hf.contDiffAt.congr_of_eventuallyEq
     filter_upwards [isOpen_Iio.mem_nhds hx] with y hy
     exact Set.indicator_of_mem hy f
-  · apply (contDiffAt_const :
+  · subst x
+    apply (contDiffAt_const :
       ContDiffAt ℝ ∞ (fun _ : ℝ => (0 : ℝ)) c).congr_of_eventuallyEq
     filter_upwards [hc] with y hy
     simp only [Set.indicator_apply, hy, ite_self]
   · apply (contDiffAt_const :
       ContDiffAt ℝ ∞ (fun _ : ℝ => (0 : ℝ)) x).congr_of_eventuallyEq
     filter_upwards [isOpen_Ioi.mem_nhds hx] with y hy
-    exact Set.indicator_of_notMem (not_lt.mpr (le_of_lt hy)) f
+    have hyc : y ∉ Iio c := not_lt.mpr (le_of_lt hy)
+    exact Set.indicator_of_notMem hyc f
 
 /-- A cutoff equal to one near an interior point, with topological
 support strictly inside a prescribed interval. -/

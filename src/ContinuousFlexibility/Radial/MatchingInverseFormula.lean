@@ -35,7 +35,7 @@ private def modeSourceRestrictionLinear (D : ReferenceData) (s : Set ℝ)
       change (T (F + H)).1 r = ((T F).1 + (T H).1) r
       rw [hTH, Pi.add_apply, hsum, hF, hH]
       by_cases hr : r ∈ s
-      · simpa only [Set.indicator_of_mem hr, Pi.add_apply] using hFH
+      · simpa only [Set.indicator_of_mem hr, Pi.add_apply, Prod.fst_add] using hFH
       · simp only [Set.indicator_of_notMem hr, add_zero]
     · change (T (F + H)).2 = (T F).2 + (T H).2
       simp only [hscalar]
@@ -50,7 +50,7 @@ private def modeSourceRestrictionLinear (D : ReferenceData) (s : Set ℝ)
       change (T (c • F)).1 r = (c • (T F).1) r
       rw [hcT, Pi.smul_apply, hprod, hF]
       by_cases hr : r ∈ s
-      · simpa only [Set.indicator_of_mem hr, Pi.smul_apply] using hcF
+      · simpa only [Set.indicator_of_mem hr, Pi.smul_apply, Prod.fst_smul] using hcF
       · simp only [Set.indicator_of_notMem hr, smul_zero]
     · change (T (c • F)).2 = c • (T F).2
       simp only [hscalar]

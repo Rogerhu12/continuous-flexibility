@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology ContDiff RealInnerProductSpace
+open scoped Topology ContDiff RealInnerProductSpace InnerProductSpace
 open ContinuousFlexibility.Statements
 
 def matchingDensity (D : ReferenceData) (r : ℝ) : ℝ :=
@@ -75,7 +75,7 @@ theorem matchingInterval_congr_ae {D : ReferenceData} (hD : IsAccumulatingProfil
     (∫ r in D.a..D.b, f r) = ∫ r in D.a..D.b, g r := by
   have h' := (radialHilbertMeasure_ae_iff hD).mp h
   have hab : D.a ≤ D.b := (matchingProfileGeometry hD).2.1.le
-  simpa only [intervalIntegral.integral_of_le hab, integral_Ioc_eq_integral_Ioo] using
+  simpa only [radialCore, intervalIntegral.integral_of_le hab, integral_Ioc_eq_integral_Ioo] using
     (integral_congr_ae h')
 
 theorem matchingDensity_integrable_iff {D : ReferenceData} (hD : IsAccumulatingProfile D)
@@ -116,7 +116,7 @@ theorem matchingSource_intervalIntegrable {D : ReferenceData} (hD : IsAccumulati
   have hψLp : MemLp ψ 2 (radialHilbertMeasure D) :=
     hψ.memLp_of_hasCompactSupport hcompact
   have hi := (matchingDensity_integrable_iff hD (fun r => F r * ψ r)).mp
-    (F.memLp.integrable_mul hψLp)
+    ((Lp.memLp F).integrable_mul hψLp)
   have hi' : Integrable (fun r => matchingDensity D r * F r * ψ r)
       (volume.restrict (radialCore D)) := by
     simpa only [mul_assoc] using hi

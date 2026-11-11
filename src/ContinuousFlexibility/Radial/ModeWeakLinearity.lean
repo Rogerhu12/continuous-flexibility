@@ -13,7 +13,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology ContDiff RealInnerProductSpace
+open scoped Topology ContDiff RealInnerProductSpace InnerProductSpace
 open ContinuousFlexibility.Statements
 
 def matchingSmoothVector (D : ReferenceData) (hD : IsAccumulatingProfile D)

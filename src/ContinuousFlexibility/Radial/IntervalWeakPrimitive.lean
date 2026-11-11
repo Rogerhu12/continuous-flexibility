@@ -2,6 +2,7 @@ import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 import Mathlib.Analysis.Calculus.BumpFunction.Normed
 import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.MeasureTheory.Measure.OpenPos
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
@@ -286,7 +287,7 @@ theorem eq_add_intervalIntegral_of_weakDeriv
     continuousOn_const.add hPc
   rw [restrict_Ioo_eq_restrict_Icc] at hc
   have hpoint :=
-    Measure.eqOn_Icc_of_ae_eq hab.ne hc hF hrep
+    Measure.eqOn_Icc_of_ae_eq volume hab.ne hc hF hrep
   have ha := hpoint a ⟨le_rfl, hab.le⟩
   simp only [intervalIntegral.integral_same, add_zero] at ha
   intro x hx

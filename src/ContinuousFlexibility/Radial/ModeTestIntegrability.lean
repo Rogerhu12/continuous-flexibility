@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology ContDiff RealInnerProductSpace
+open scoped Topology ContDiff RealInnerProductSpace InnerProductSpace
 open ContinuousFlexibility.Statements
 
 theorem matching_memLp_of_continuousOn {D : ReferenceData} (hD : IsAccumulatingProfile D)
@@ -53,7 +53,7 @@ theorem matchingLogDerivative_memLp {D : ReferenceData} (hD : IsAccumulatingProf
   have hr0 : 0 < r := lt_trans hg.1 hr.1
   have hratio : (deriv D.w r) ^ 2 / D.w r ≤ C :=
     (div_le_iff₀ hw0).mpr (hbound r)
-  have hden : D.a ^ 2 ≤ r ^ 2 := by nlinarith [sq_nonneg (r - D.a)]
+  have hden : D.a ^ 2 ≤ r ^ 2 := by nlinarith [hg.1, hr.1, sq_nonneg (r - D.a)]
   have hinv : 12 / r ^ 2 ≤ 12 / D.a ^ 2 :=
     div_le_div_of_nonneg_left (by norm_num) (sq_pos_of_pos hg.1) hden
   rw [Real.norm_eq_abs, abs_of_nonneg
@@ -136,7 +136,7 @@ theorem matchingJacobi_intervalIntegrable {D : ReferenceData} (hD : IsAccumulati
       volume D.a D.b := by
   have ht := matchingJacobiTest_memLp hD hψ j
   have hi := (matchingDensity_integrable_iff hD
-    (fun r => U r * matchingJacobiTest D j ψ r)).mp (U.memLp.integrable_mul ht)
+    (fun r => U r * matchingJacobiTest D j ψ r)).mp ((Lp.memLp U).integrable_mul ht)
   have hi' : Integrable (fun r => U r * radialJacobi ((j : ℝ) ^ 2) D.w ψ r)
       (volume.restrict (radialCore D)) := by
     apply hi.congr

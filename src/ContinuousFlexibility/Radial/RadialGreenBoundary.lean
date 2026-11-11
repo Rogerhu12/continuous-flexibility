@@ -23,16 +23,19 @@ theorem hasDerivAt_radialWronskian_general {J r : ℝ} {w u v : ℝ → ℝ}
     (hv : DifferentiableAt ℝ v r) (hdv : DifferentiableAt ℝ (deriv v) r) :
     HasDerivAt (radialWronskian w u v)
       (u r * radialJacobi J w v r - v r * radialJacobi J w u r) r := by
-  have hup := (hw.mul hdu).hasDerivAt
-  have hvp := (hw.mul hdv).hasDerivAt
-  have h := (hu.hasDerivAt.mul hvp).sub (hv.hasDerivAt.mul hup)
+  have hup := hw.hasDerivAt.fun_mul hdu.hasDerivAt
+  have hvp := hw.hasDerivAt.fun_mul hdv.hasDerivAt
+  have h := (hu.hasDerivAt.fun_mul hvp).fun_sub (hv.hasDerivAt.fun_mul hup)
   have heq : radialWronskian w u v =
       fun t => u t * (w t * deriv v t) - v t * (w t * deriv u t) := by
     funext t
     unfold radialWronskian
     ring
   rw [heq]
-  exact h.congr_deriv (by unfold radialJacobi; ring)
+  exact h.congr_deriv (by
+    unfold radialJacobi
+    rw [deriv_fun_mul hw hdv, deriv_fun_mul hw hdu]
+    ring)
 
 /-- Green's identity on a regular closed interval. The hypotheses are
 stated at the actual interval, rather than as global smoothness. -/
@@ -98,8 +101,8 @@ theorem integral_green_of_absolutelyContinuous_flux
     hp.ae_differentiableAt, hq.ae_differentiableAt, hpu, hqv, hpf, hqg]
     with x hux hvx hpx hqx hpux hqvx hpfx hqgx hxi
   have hx : x ∈ uIcc a b := uIoc_subset_uIcc hxi
-  have hd := ((hux hx).hasDerivAt.mul (hqx hx).hasDerivAt).sub
-    ((hvx hx).hasDerivAt.mul (hpx hx).hasDerivAt)
+  have hd := ((hux hx).hasDerivAt.fun_mul (hqx hx).hasDerivAt).fun_sub
+    ((hvx hx).hasDerivAt.fun_mul (hpx hx).hasDerivAt)
   change u x * g x - v x * f x =
     deriv (fun t => u t * q t - v t * p t) x
   rw [hd.deriv, hpux hx, hqvx hx, hpfx hx, hqgx hx]

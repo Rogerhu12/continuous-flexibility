@@ -255,7 +255,7 @@ theorem eq_add_intervalIntegral_of_weakDeriv_tsupport
     continuousOn_const.add hPc
   rw [restrict_Ioo_eq_restrict_Icc] at hc
   have hpoint :=
-    Measure.eqOn_Icc_of_ae_eq hab.ne hc hF hrep
+    Measure.eqOn_Icc_of_ae_eq volume hab.ne hc hF hrep
   have ha := hpoint a ⟨le_rfl, hab.le⟩
   simp only [intervalIntegral.integral_same, add_zero] at ha
   intro x hx
