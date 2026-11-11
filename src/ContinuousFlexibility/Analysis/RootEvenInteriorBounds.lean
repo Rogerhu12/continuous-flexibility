@@ -27,11 +27,11 @@ theorem rootCoordinate_mem_sourceBox {σ : ℝ} (hσ : ‖σ‖ ≤ 1) {p : ℝ 
     (hp : p ∈ Icc (0 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi) :
     rootCoordinate σ p ∈
       Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi := by
-  have hλ := Statements.rpow_three_halves_mem_Icc hp.1
+  have hρ := Statements.rpow_three_halves_mem_Icc hp.1
   have hσabs : |σ| ≤ 1 := by simpa only [Real.norm_eq_abs] using hσ
   have hmid : |σ * p.1 ^ (3 / 2 : ℝ)| ≤ 1 := by
-    rw [abs_mul, abs_of_nonneg hλ.1]
-    simpa only [one_mul] using mul_le_mul hσabs hλ.2 hλ.1 zero_le_one
+    rw [abs_mul, abs_of_nonneg hρ.1]
+    simpa only [one_mul] using mul_le_mul hσabs hρ.2 hρ.1 zero_le_one
   exact ⟨hp.1, abs_le.mp hmid, hp.2⟩
 
 /-- In the product max norm the sample lies within one root radius of
@@ -39,12 +39,12 @@ the Taylor center. -/
 theorem norm_rootCoordinate_sub_center_le {σ : ℝ} (hσ : ‖σ‖ ≤ 1)
     {p : ℝ × ℝ} (hp : 0 ≤ p.1) :
     ‖rootCoordinate σ p - (p.1, 0, p.2)‖ ≤ p.1 ^ (3 / 2 : ℝ) := by
-  have hλ : 0 ≤ p.1 ^ (3 / 2 : ℝ) := Real.rpow_nonneg hp _
+  have hρ : 0 ≤ p.1 ^ (3 / 2 : ℝ) := Real.rpow_nonneg hp _
   have hmid : ‖σ * p.1 ^ (3 / 2 : ℝ)‖ ≤ p.1 ^ (3 / 2 : ℝ) := by
-    rw [norm_mul, Real.norm_of_nonneg hλ]
-    simpa only [one_mul] using mul_le_mul_of_nonneg_right hσ hλ
+    rw [norm_mul, Real.norm_of_nonneg hρ]
+    simpa only [one_mul] using mul_le_mul_of_nonneg_right hσ hρ
   simp only [rootCoordinate, Prod.mk_sub_mk, sub_self, sub_zero, Prod.norm_mk, norm_zero]
-  exact max_le hλ (max_le hmid hλ)
+  exact max_le hρ (max_le hmid hρ)
 
 /-- Away from the boundary the even average is an ordinary smooth
 composition. -/
@@ -72,13 +72,15 @@ theorem norm_iteratedFDeriv_rootEven_le_of_coordinate_bounds
   have hminus : ContDiffAt ℝ n (R ∘ rootCoordinate (-1)) p :=
     (hR.contDiffAt.comp p (contDiffAt_rootCoordinate (-1) hp)).of_le
       (ENat.natCast_le_of_coe_top_le_withTop le_rfl n)
+  have hadd : ContDiffAt ℝ n ((R ∘ rootCoordinate 1) + (R ∘ rootCoordinate (-1))) p :=
+    hplus.add hminus
   have heq : Statements.rootEven R =
       (2 : ℝ)⁻¹ • ((R ∘ rootCoordinate 1) + (R ∘ rootCoordinate (-1))) := by
     funext q
     simp only [Statements.rootEven, rootCoordinate, Function.comp_apply,
       Pi.add_apply, Pi.smul_apply, one_mul, neg_one_mul, smul_eq_mul]
     ring
-  rw [heq, iteratedFDeriv_const_smul_apply (hplus.add hminus),
+  rw [heq, iteratedFDeriv_const_smul_apply hadd,
     iteratedFDeriv_add_apply hplus hminus, norm_smul,
     Real.norm_of_nonneg (by norm_num : (0 : ℝ) ≤ (2 : ℝ)⁻¹)]
   calc
