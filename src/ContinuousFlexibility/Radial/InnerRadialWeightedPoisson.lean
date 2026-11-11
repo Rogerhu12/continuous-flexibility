@@ -223,7 +223,7 @@ theorem weighted_poisson_bound (hDw : ContDiff ℝ ∞ D.w)
       (le_max_right (2 * K) (Real.sqrt (12 / s))) hc hconstant hleft hright ξ
     simpa only [hp, InnerRadialActualPiece.poisson, InnerRadialActualPiece.referenceMatrix,
       InnerRadialActualPiece.kappa, InnerRadialActualPiece.gapMatrix,
-      Matrix.diagonal_zero, zero_add] using h
+      Matrix.diagonal_zero', zero_add] using h
 
 /-- Restricting to the genuine supported source costs no constant.
 Thus the previous actual ambient estimate applies to the very Poisson

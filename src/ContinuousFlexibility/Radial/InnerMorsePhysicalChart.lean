@@ -112,8 +112,9 @@ def innerMorsePhysicalModelChart :
   scale_smooth := contDiff_const
   chart_pos := innerMorseChain_buffer_chart_positive hreal side hm
   in_core := by
+    have hcore : Ioo (G.left piece) (G.right piece) ⊆ radialCore D := G.in_core piece
     simpa only [hleft, hright, innerMorseChainCut_zero, innerMorseChainCut_one,
-      innerMorseBufferData] using G.in_core piece
+      innerMorseBufferData] using hcore
   weight_identity := innerMorseChain_buffer_profile hreal side hm
   U := 14
   U_nonneg := by norm_num
@@ -134,8 +135,10 @@ theorem innerMorsePhysicalModelChart_dirichlet_cost (hj : 1 ≤ j) (hC : 0 ≤ C
   exact innerMorseHilbertDirichlet_cost D T m (hreal.d_eq m hm) hj hC hB M
     hB.1.le (innerMorseChain_height_pos hreal side hm) (hreal.radius_smooth side m hm)
     contDiff_const (innerMorseChain_buffer_chart_positive hreal side hm)
-    (by simpa only [hleft, hright, innerMorseChainCut_zero, innerMorseChainCut_one,
-      innerMorseBufferData] using G.in_core piece)
+    (by
+      have hcore : Ioo (G.left piece) (G.right piece) ⊆ radialCore D := G.in_core piece
+      simpa only [hleft, hright, innerMorseChainCut_zero, innerMorseChainCut_one,
+        innerMorseBufferData] using hcore)
     (innerMorseChain_buffer_profile hreal side hm)
     (fun _ hx => innerMorseChain_buffer_velocity hreal side hindex hm hx)
 

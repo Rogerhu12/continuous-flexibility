@@ -25,6 +25,7 @@ variable {C K X₀ η : ℝ} (hfamily : InnerCentralPhysicalFamily C K X₀ η)
 def innerSelectedCentralModel : InnerBufferLocalizedData (innerCentralBufferData q X₀) C K :=
   Classical.choose (hfamily.2 q hq).2
 
+include hfamily hq in
 theorem innerSelectedCentralModel_hypotheses : BufferHypotheses (innerCentralBufferData q X₀) :=
   (hfamily.2 q hq).1
 
@@ -55,6 +56,8 @@ variable {a Cstar C K η : ℝ} {N : ℕ}
   (hreal : MorseChainRealization T σ D cost) (hindex : T.index = N)
   (m n q : ℕ) (hm : N ≤ m) (hmn : m < n) (hq : 1 ≤ q)
   (hband : radialFrequencyBand T Cstar n (2 * q))
+
+include hfamily hreal hindex hm hmn hq hband
 
 theorem innerMorsePhysicalFamily_even :
     BufferHypotheses

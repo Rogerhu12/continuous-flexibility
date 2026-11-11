@@ -63,7 +63,7 @@ def innerCentralPhysicalModelChart :
     ring
   left_eq := hleft
   right_eq := hright
-  bordered_eq := by simp only [innerCentralBufferData, if_pos rfl]
+  bordered_eq := by simp only [innerCentralBufferData, eq_self_iff_true, ite_true]
   column_eq := by
     intro _
     by_cases hq : q = 1

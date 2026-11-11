@@ -26,6 +26,7 @@ variable {I A B : Type*} {β : I → Type*}
   (hcover : ∀ i, (∃ a, i = f a) ∨ ∃ b, i = g b)
   (left : ∀ a, β (f a)) (right : ∀ b, β (g b))
 
+include hf hg hdisjoint hcover in
 private theorem innerCover_value_exists (i : I) :
     ∃ v : β i, (∀ a, i = f a → HEq v (left a)) ∧
       ∀ b, i = g b → HEq v (right b) := by

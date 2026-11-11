@@ -54,7 +54,7 @@ theorem exists_solution (F : H) (ξ : EuclideanSpace ℝ (Fin n)) :
   simp only [InnerRadialModelChart.dirichlet, innerLiouvilleHilbertDirichlet_apply,
     innerRadialPhysical_pieceSource, WithLp.ofLp_toLp, InnerRadialModelChart.poisson_apply,
     innerChainBoundaryCLM_apply, ContinuousLinearMap.coe_coe,
-    WithLp.toLp_add, WithLp.toLp_smul]
+    Prod.mk.eta, WithLp.toLp_add, WithLp.toLp_smul]
 
 theorem exists_poisson (ξ : EuclideanSpace ℝ (Fin n)) :
     ∃ s : InnerRadialPieceSolution D hw.continuous G forcing rowSource
@@ -182,7 +182,7 @@ theorem exists_poisson (ξ : EuclideanSpace ℝ (Fin n)) :
       M.exists_poisson hw ξ
   | inr Q =>
     simpa only [poisson, referenceMatrix, kappa, gapMatrix, errorMatrix,
-      Matrix.diagonal_zero, zero_add, add_zero] using Q.exists_poisson hw bordered column ξ
+      Matrix.diagonal_zero', zero_add, add_zero] using Q.exists_poisson hw bordered column ξ
 
 end InnerRadialActualPiece
 

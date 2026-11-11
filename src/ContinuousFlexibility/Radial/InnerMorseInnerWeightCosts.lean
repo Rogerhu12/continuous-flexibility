@@ -120,6 +120,8 @@ variable {D : ReferenceData} (N K : ℕ) {a γ σ : ℝ}
   (G : InnerRadialChainGeometry D (2 * (2 * K + 1)))
   (l r : Fin (2 * (2 * K + 1) + 1) → ℝ)
 
+include ha hγ hσ hN hNa
+
 theorem innerMorseInnerWeight_model_ratios (p : Fin (2 * K + 1)) {x : ℝ}
     (hx : x ∈ Ioo (G.left (innerModelChainPiece p)) (G.right (innerModelChainPiece p))) :
     (innerMorseInnerWeight N K a γ G l r x) ^ σ /
