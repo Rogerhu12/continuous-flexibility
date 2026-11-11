@@ -167,8 +167,8 @@ theorem SeedRetainedPair.exists_selectedOuterRegionalInverse {S : SelectedTailDa
     refine ⟨R, hpE, ?_, hweak, ?_, ?_⟩
     · rw [hscale]
       exact mul_pos hβ hlam
-    · simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hregular
-    · simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hunique
+    · simpa only [selectedBoundaryState, outerFluxState, hsign, ← hscale] using hregular
+    · simpa only [selectedBoundaryState, outerFluxState, hsign, ← hscale] using hunique
   choose R hR using hside
   exact ⟨R, hR⟩
 
