@@ -88,10 +88,12 @@ The payload concerns only actual geometric functions:
   tower with one high factor for each parameter order.
 - The actual compatibility source is radial and supported in the frozen
   normalization region.
+- Actual forward chart and height first jets retain the fixed root and
+  middle-cut transmission identifications described below.
 
 The coordinate construction must prove these facts. The payload assumes
 no inverse, commutator, Fourier realization, solution regularity, weak
-change of variables, local finiteness, trace matching, or grading
+change of variables, local finiteness, solution trace matching, or grading
 equivalence. Those remain analytic conclusions to prove. In particular,
 the existing N07a band-preservation and bounded-coefficient lemmas consume
 these named primitive facts explicitly; they do not manufacture them from
@@ -138,6 +140,39 @@ The radial compatibility source and its frozen support are chosen in
 `paper/flexible-surface-readable/08-stable-inverse.tex`. The need for the
 original source in the normal recurrence, the one-high-factor bound, and
 the fixed total loss is explicit in that file's lines 658–774.
+
+## Primitive first jets of the fixed transmission geometry
+
+The qualitative `PhysicalTransmissionTarget` takes value/conormal matching as
+inputs. It therefore does not supply the matching data for the actual current
+and reference coordinate constructions. N04's open-piece identities and raw jet
+bounds did not retain the root interface first jets needed to place an arbitrary
+smooth physical candidate in the same N05 reference graph. Also, the existing
+middle-cut clause evaluates `canonicalHeight` through `inverseChart` at a
+boundary, while the inverse identities constrain that candidate only in the open
+canonical strip. Such a totalized endpoint value is not automatically the trace
+of the actual interior inverse.
+
+`CanonicalGeometry.TransmissionGeometry` now retains three raw construction
+outputs. It classifies adjacent physical interfaces as roots or the designated
+middle cuts; gives equality of the actual forward chart and height values and
+first derivatives at roots after fixed normal endpoint orientations are aligned;
+and gives the actual forward chart/height first-jet identity at middle cuts.
+The latter height identity gives exactly the existing Robin relation
+`Wr' = -Wl' - W/(2*cutRadius)`. The same fixed endpoint identifications cover the
+reference construction and every admissible current state. The candidate
+`inverseChart` is not assigned new boundary values; actual traces are recovered
+from the smooth nonsingular forward chart by its local inverse.
+
+These are the coordinate/height facts explicitly used in
+`paper/flexible-surface-readable/07-fixed-geometry.tex`, lines 1733–1760.
+The construction stage must prove them, and neighborhood restriction preserves
+them on the same objects. They do not assert membership of a solution in the
+reference graph, any inverse estimate, or higher regularity of a solution. N07a
+still has to prove reference-graph membership of arbitrary physical candidates,
+weak gluing, and uniqueness. This records the exact missing primitive output
+needed by that proof; it does not claim a counterexample to the former complete
+existential N07a statement.
 
 ## Remaining obligations
 

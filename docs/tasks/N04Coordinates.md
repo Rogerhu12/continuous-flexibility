@@ -19,6 +19,14 @@ Prove `ContinuousFlexibility.Blueprint.N04Coordinates` in `src/ContinuousFlexibi
 theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement
 ```
 
+The primitive coordinate payload includes `CanonicalGeometry.TransmissionGeometry`:
+classify actual adjacent interfaces as roots or designated middle cuts, prove the
+actual forward chart/height values and first derivatives match at roots after the
+fixed endpoint orientations are aligned, and prove the forward-jet middle-cut
+Robin identity. These are construction-stage facts from the fixed transmission
+domain in §7. Boundary values of an unconstrained `inverseChart` are not substitutes
+for the traces of its actual interior inverse.
+
 ## Completion standard
 
 - `theorem N04Coordinates` has exactly this statement and its proof contains no `sorry`; `#print axioms ContinuousFlexibility.Blueprint.N04Coordinates` shows only `propext`, `Classical.choice`, `Quot.sound`.
@@ -27,4 +35,4 @@ theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement
 
 ## Source
 
-`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1497–1725.
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1497–1760.

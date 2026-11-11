@@ -883,6 +883,75 @@ def CurrentJets (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)
                 ∑ l : Fin k, parameterGrading S (s + loss) (v l) *
                   ∏ h ∈ Finset.univ.erase l, parameterGrading S base (v h))
 
+/-- Both the actual reference construction and every current admissible
+construction use the same endpoint identifications. -/
+def TransmissionParameter (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (base : ℕ) (ε : ℝ) (z : AnnularState S × ℝ) : Prop :=
+  z = (C.referenceState, 0) ∨
+    z ∈ stateNeighborhood S C base ε ∧ stateSector S z.1
+
+/-- Translation and reversal of the canonical normal coordinate only.
+The endpoint and orientation are fixed independently of the state. -/
+def endpointAlignedChart {S : PhysicalSpacesData} (K : CanonicalData S)
+    (z : AnnularState S × ℝ) (m : ℕ) (endpoint orientation : ℝ)
+    (p : PolarPoint) : PolarPoint :=
+  (orientation * ((K.chart z m p).1 - endpoint), (K.chart z m p).2)
+
+/-- There are no unnamed internal interfaces: the original construction
+has roots and the designated negative-component middle cuts. -/
+def PhysicalInterfaceClassification (D : ReferenceData) {S : PhysicalSpacesData}
+    (K : CanonicalData S) : Prop :=
+  ∀ i j : ℕ, i ≠ j → K.physicalRight i = K.physicalLeft j →
+    deriv D.w (K.physicalRight i) = 0 ∨ ∃ k, K.cutPair k = (i, j)
+
+/-- The actual forward coordinate and height one-jets agree at a root
+when the two fixed canonical normal orientations are aligned. N04 already
+supplies `ContDiffAt` and the nonzero forward Jacobian at these points. -/
+def RootFirstJetMatching (D : ReferenceData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
+  ∀ i j : ℕ, i ≠ j → K.physicalRight i = K.physicalLeft j →
+    deriv D.w (K.physicalRight i) = 0 →
+    ∃ ei ej si sj : ℝ,
+      (ei = K.left i ∨ ei = K.right i) ∧
+      (ej = K.left j ∨ ej = K.right j) ∧
+      (si = 1 ∨ si = -1) ∧ (sj = 1 ∨ sj = -1) ∧
+      ∀ z, TransmissionParameter S C base ε z → ∀ θ : ℝ,
+        let p : PolarPoint := (K.physicalRight i, θ)
+        let Fi := endpointAlignedChart K z i ei si
+        let Fj := endpointAlignedChart K z j ej sj
+        (Fi p).1 = 0 ∧ Fi p = Fj p ∧
+        fderiv ℝ Fi p = fderiv ℝ Fj p ∧
+        K.height z i p = K.height z j p ∧
+        fderiv ℝ (K.height z i) p = fderiv ℝ (K.height z j) p
+
+/-- A forward-jet version of the existing middle-cut Robin condition.
+It prevents an arbitrary endpoint value of `inverseChart` from being
+mistaken for the trace of its actual interior inverse. Its height-jet
+identity is exactly what produces `Wr' = -Wl' - W/(2*cutRadius)`.
+The construction proves this forward-jet identity directly, so no
+arbitrary boundary value of the inverse-coordinate candidate is used. -/
+def CutFirstJetMatching (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
+  ∀ k : ℕ, ∀ z, TransmissionParameter S C base ε z → ∀ θ : ℝ,
+    let i := (K.cutPair k).1
+    let j := (K.cutPair k).2
+    let p : PolarPoint := (K.physicalRight i, θ)
+    let Fi := endpointAlignedChart K z i (K.cutRadius k) 1
+    let Fj := endpointAlignedChart K z j (K.cutRadius k) (-1)
+    (Fi p).1 = 0 ∧ Fi p = Fj p ∧
+    fderiv ℝ Fi p = fderiv ℝ Fj p ∧
+    K.height z i p = K.height z j p ∧
+    fderiv ℝ (K.height z j) p - fderiv ℝ (K.height z i) p =
+      (-(K.height z i p / (2 * K.cutRadius k))) •
+        fderiv ℝ (fun q => (K.chart z i q).1) p
+
+
+/-- The raw first-jet data of the fixed transmission construction. -/
+def TransmissionGeometry (D : ReferenceData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
+  PhysicalInterfaceClassification D K ∧ RootFirstJetMatching D S C K base ε ∧
+    CutFirstJetMatching S C K base ε
+
 /-- The simple gauge chosen in §8: the compatibility source is radial and
 is supported where current and reference coordinate/height data agree.
 This is a condition on the actual chosen `S.psi`, not a new column. -/
@@ -901,7 +970,7 @@ def PrimitiveGeometryProperties (D : ReferenceData) (T : MaterialData)
     (L : ReturnCorrectionData S) (K : CanonicalData S) (base : ℕ) (ε : ℝ) : Prop :=
   ReferenceRadial S C K ∧ ReferencePrincipal T S C K ∧
     ReferenceJets D T S C L K ∧ CurrentJets D T S C L K base ε ∧
-      AuxiliaryColumnGauge S K
+      AuxiliaryColumnGauge S K ∧ TransmissionGeometry D S C K base ε
 
 end CanonicalGeometry
 

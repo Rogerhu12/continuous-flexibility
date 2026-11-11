@@ -187,12 +187,32 @@ theorem n07a_currentJets_restrict
         (n07a_sectorNeighborhood_isOpen S base' ε' ε') hU
     exact ⟨J', n07aGeometryTowerBounds_restrict hD hT hJ hb hU⟩
 
+theorem n07a_transmissionParameter_restrict
+    (hb : base ≤ base') (he : ε' ≤ ε) {z : AnnularState S × ℝ}
+    (hz : CanonicalGeometry.TransmissionParameter S C base' ε' z) :
+    CanonicalGeometry.TransmissionParameter S C base ε z := by
+  rcases hz with hr | ⟨hz, hs⟩
+  · exact Or.inl hr
+  · exact Or.inr ⟨n07a_stateNeighborhood_mono hb he hz, hs⟩
+
+theorem n07a_transmissionGeometry_restrict
+    (h : CanonicalGeometry.TransmissionGeometry D S C K base ε)
+    (hb : base ≤ base') (he : ε' ≤ ε) :
+    CanonicalGeometry.TransmissionGeometry D S C K base' ε' := by
+  refine ⟨h.1, ?_, ?_⟩
+  · intro i j hij hadj hroot
+    obtain ⟨ei, ej, si, sj, hei, hej, hsi, hsj, hjets⟩ := h.2.1 i j hij hadj hroot
+    exact ⟨ei, ej, si, sj, hei, hej, hsi, hsj,
+      fun z hz θ => hjets z (n07a_transmissionParameter_restrict hb he hz) θ⟩
+  · intro k z hz θ
+    exact h.2.2 k z (n07a_transmissionParameter_restrict hb he hz) θ
+
 theorem n07a_primitiveGeometry_restrict
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (h : CanonicalGeometry.PrimitiveGeometryProperties D T S C L K base ε)
     (hb : base ≤ base') (he : ε' ≤ ε) :
     CanonicalGeometry.PrimitiveGeometryProperties D T S C L K base' ε' :=
   ⟨h.1, h.2.1, h.2.2.1, n07a_currentJets_restrict hD hT h.2.2.2.1 hb he,
-    h.2.2.2.2⟩
+    h.2.2.2.2.1, n07a_transmissionGeometry_restrict h.2.2.2.2.2 hb he⟩
 
 end ContinuousFlexibility.Analysis
