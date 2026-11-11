@@ -38,8 +38,9 @@ theorem referenceRadialCutoff_bounds (D : ReferenceData) (n : ℕ) (r : ℝ) :
   calc
     _ ≤ 1 * smoothTransition (((n : ℝ) + 1) * (D.b - r) - 1) :=
       mul_le_mul_of_nonneg_right (smoothTransition.le_one _) (smoothTransition.nonneg _)
-    _ ≤ 1 := by simpa only [one_mul] using smoothTransition.le_one
-      (((n : ℝ) + 1) * (D.b - r) - 1)
+    _ ≤ 1 := by
+      simpa only [one_mul] using
+        (smoothTransition.le_one (((n : ℝ) + 1) * (D.b - r) - 1))
 
 private theorem reference_transition_scaled_zero {c x : ℝ}
     (hc : 0 < c) (hx : x ≤ c⁻¹) : smoothTransition (c * x - 1) = 0 := by
@@ -93,7 +94,10 @@ theorem referenceRadialCutoff_test {D : ReferenceData} {u : PolarPoint → ℝ}
   · intro x
     simp only [Prod.fst_add, add_zero, hup x]
   · obtain ⟨K, hK, hKcore, hzero⟩ := referenceRadialCutoff_compact_support D n
-    exact ⟨K, hK, hKcore, fun r hr θ => by rw [hzero r hr, zero_mul]⟩
+    refine ⟨K, hK, hKcore, ?_⟩
+    intro r hr θ
+    change referenceRadialCutoff D n r * u (r, θ) = 0
+    rw [hzero r hr, zero_mul]
 
 theorem referenceRadialCutoff_norm_mul_le (D : ReferenceData) (n : ℕ) (r z : ℝ) :
     ‖referenceRadialCutoff D n r * z‖ ≤ ‖z‖ := by

@@ -125,13 +125,18 @@ theorem reference_memLp_tendsto_of_sub_sq {α : Type*} [MeasurableSpace α]
       filter_upwards [Lp.coeFn_sub ((hf n).toLp (f n)) (hg.toLp g),
         (hf n).coeFn_toLp, hg.coeFn_toLp, ((hf n).sub hg).coeFn_toLp]
         with x hsub hfn hgn hdiff
-      simp only [hsub, Pi.sub_apply, hfn, hgn, hdiff]
+      change ((hf n).sub hg).toLp (fun x => f n x - g x) x = f n x - g x at hdiff
+      rw [hsub]
+      change ((hf n).toLp (f n) : α → ℝ) x - (hg.toLp g : α → ℝ) x =
+        ((hf n).sub hg).toLp (fun x => f n x - g x) x
+      rw [hfn, hgn]
+      exact hdiff.symm
     rw [he, reference_memLp_norm_sq_eq_integral]
   have hsq : Tendsto (fun n => ‖(hf n).toLp (f n) - hg.toLp g‖ ^ 2)
       atTop (𝓝 0) := by
     simpa only [heq] using h
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
-  simpa only [Function.comp_apply, Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), Real.sqrt_zero] using
+  simpa only [Function.comp_def, Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), Real.sqrt_zero] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hsq
 
 theorem reference_memLp_pairing_tendsto_of_sub_sq {α : Type*} [MeasurableSpace α]
@@ -209,7 +214,7 @@ theorem referenceSource_scalar_tendsto {D : ReferenceData}
       linarith
     · simpa only [mul_zero] using h.const_mul C
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
-  simpa only [Function.comp_apply, Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
+  simpa only [Function.comp_def, Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hs
 
 theorem referenceOutput_scalar_tendsto {D : ReferenceData}
@@ -233,7 +238,7 @@ theorem referenceOutput_scalar_tendsto {D : ReferenceData}
       linarith
     · simpa only [mul_zero] using h.const_mul C
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
-  simpa only [Function.comp_apply, Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
+  simpa only [Function.comp_def, Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hs
 
 end ContinuousFlexibility.Radial

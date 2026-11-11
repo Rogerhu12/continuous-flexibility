@@ -44,7 +44,7 @@ theorem memLp_radialPhysical_of_continuous (D : ReferenceData)
     rintro ⟨r, θ⟩ ⟨hr, hθ⟩
     exact ⟨⟨hr.1.le, hr.2.le⟩, ⟨hθ.1.le, hθ.2⟩⟩
   letI : IsFiniteMeasure (radialPhysicalMeasure D) := ⟨by
-    change volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)) univ < ∞
+    change volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)) univ < ⊤
     rw [Measure.restrict_apply_univ]
     exact (measure_mono hsub).trans_lt hK.measure_lt_top⟩
   obtain ⟨C, hC⟩ := hK.bddAbove_image hf.norm.continuousOn
@@ -75,7 +75,11 @@ theorem sourceCellSquare_summable_of_radialCompactSupport {D : ReferenceData}
   apply summable_of_ne_finset_zero (s := hfinite.toFinset)
   intro m hm
   have hm' : ¬(D.cells m ∩ K).Nonempty := by
-    simpa only [Set.Finite.mem_toFinset] using hm
+    intro hmeet
+    apply hm
+    rw [Set.Finite.mem_toFinset]
+    change (D.cells m ∩ K).Nonempty
+    exact hmeet
   have hz (r θ : ℝ) : D.localizer m r * f (r, θ) = 0 := by
     by_cases hlocal : D.localizer m r = 0
     · rw [hlocal, zero_mul]

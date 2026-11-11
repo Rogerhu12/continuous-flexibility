@@ -104,7 +104,7 @@ theorem naturalRadialNull_of_smooth {D : ReferenceData} (hD : IsAccumulatingProf
   apply integral_eq_zero_of_ae
   filter_upwards [ae_restrict_mem (show MeasurableSet (Ioo D.a D.b) from measurableSet_Ioo)]
     with r hr
-  rw [heq r hr, mul_zero]
+  simp only [heq r hr, mul_zero, Pi.zero_apply]
 
 theorem naturalRadialNull_congr {D : ReferenceData} (hD : IsAccumulatingProfile D)
     {j : ℕ} {u v : ℝ → ℝ} (hu : NaturalRadialNull D j u)

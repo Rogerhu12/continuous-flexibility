@@ -110,19 +110,19 @@ theorem isAccumulatingProfile_saturateReferenceCells {D : ReferenceData}
     obtain ⟨r, hr, hrK⟩ := hm
     obtain ⟨j, hj, hrj⟩ := saturateReferenceCells_point hr
     have hjN : D.cellIndex j ≤ N := hN ⟨j, ⟨r, hrj, hrK⟩, rfl⟩
-    simpa only [hj] using hjN
+    simpa only [Set.mem_setOf_eq, hj] using hjN
   · intro m r hr
     obtain ⟨j, hj, hrj⟩ := saturateReferenceCells_point hr
-    simpa only [hj] using hdist j r hrj
+    simpa only [saturateReferenceCells, hj] using hdist j r hrj
   · intro m r hr
     obtain ⟨j, hj, hrj⟩ := saturateReferenceCells_point hr
-    simpa only [hj] using hlow j r hrj
+    simpa only [saturateReferenceCells, hj] using hlow j r hrj
   · intro m r hr s
     obtain ⟨j, hj, hrj⟩ := saturateReferenceCells_point hr
-    simpa only [hj] using hjet j r hrj s
+    simpa only [saturateReferenceCells, hj] using hjet j r hrj s
   · intro m r hr s
     obtain ⟨j, hj, hrj⟩ := saturateReferenceCells_point hr
-    simpa only [hj] using hinv j r hrj s
+    simpa only [saturateReferenceCells, hj] using hinv j r hrj s
   · intro m
     obtain ⟨l, h, hsub, hlength⟩ := hbounds.2.2.2.2.2.2.2.2.2.2.1 m
     let δ : ℝ := C 0 * exp (-(D.cellIndex m : ℝ) ^ 2)
@@ -135,7 +135,7 @@ theorem isAccumulatingProfile_saturateReferenceCells {D : ReferenceData}
       change l - 2 * δ ≤ r ∧ r ≤ h + 2 * δ
       dsimp only [δ] at *
       constructor <;> linarith only [hlower, hupper, hsl, hsh]
-    · dsimp only [δ]
+    · dsimp only [δ, saturateReferenceCells]
       nlinarith only [hlength]
 
 /-- Pointwise coverage with one fixed index gives whole-interval coverage

@@ -19,6 +19,8 @@ open Set Filter MeasureTheory
 open scoped ContDiff Topology
 open ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency false
+
 theorem r11b_contDiff_directionalPartial {ψ : PolarPoint → ℝ}
     (hψ : ContDiff ℝ ∞ ψ) (d : PolarPoint) :
     ContDiff ℝ ∞ (fun p => fderiv ℝ ψ p d) :=
@@ -31,7 +33,7 @@ theorem r11b_periodic_directionalPartial {ψ : PolarPoint → ℝ}
   intro p
   have hd : HasFDerivAt (fun q : PolarPoint => ψ (q + v))
       (fderiv ℝ ψ (p + v)) p := by
-    simpa only [ContinuousLinearMap.comp_id] using
+    simpa only [ContinuousLinearMap.comp_id, Function.comp_def, id_eq] using
       ((hψ.differentiable (by simp) (p + v)).hasFDerivAt.comp p
         ((hasFDerivAt_id p).add_const v))
   have heq : (fun q : PolarPoint => ψ (q + v)) = ψ := funext hper
@@ -47,8 +49,8 @@ theorem r11b_directionalPartial_zero_outside {K : Set ℝ} (hK : IsClosed K)
   have heq : ψ =ᶠ[𝓝 (r, θ)] (fun _ : PolarPoint => 0) := by
     filter_upwards [hopen.mem_nhds hr] with p hp
     exact hzero p.1 hp p.2
-  simpa only [fderiv_const, ContinuousLinearMap.zero_apply] using
-    congrArg (fun L : PolarPoint →L[ℝ] ℝ => L d) (heq.fderiv_eq (𝕜 := ℝ))
+  rw [heq.fderiv_eq (𝕜 := ℝ)]
+  simp only [fderiv_const_apply, zero_apply]
 
 theorem r11b_radialTest_directionalPartial {D : ReferenceData}
     {ψ : PolarPoint → ℝ} (hψ : RadialTest D ψ) (d : PolarPoint) :
@@ -98,14 +100,18 @@ theorem r11b_continuous_radialJacobi {D : ReferenceData} (ha : 0 < D.a)
   have hflux : ContDiff ℝ ∞ (fun r => w r * deriv u r) := hw.1.mul hdu
   have hflux' : Continuous (deriv (fun r => w r * deriv u r)) :=
     (contDiff_infty_iff_deriv.mp hflux).2.continuous
-  simpa only [radialJacobi, mul_div_assoc] using
-    hflux'.sub ((continuous_const.mul (r11b_continuous_flat_deriv_div ha hw)).mul hu.continuous)
+  change Continuous (fun r => deriv (fun t => w t * deriv u t) r -
+    j * deriv w r / r * u r)
+  simp_rw [mul_div_assoc]
+  exact hflux'.sub ((continuous_const.mul
+    (r11b_continuous_flat_deriv_div ha hw)).mul hu.continuous)
 
 theorem r11b_continuous_referenceColumn {D : ReferenceData}
     (hgeom : RadialProfileGeometry D) (hborder : RadialTrueBorder D) :
     Continuous (referenceColumn D) := by
   have hflat : EndpointFlat D (fun r => D.w r * D.chi r) := by
     refine ⟨hgeom.2.2.1.1.mul hborder.1, fun r hr => ?_⟩
+    change D.w r * D.chi r = 0
     rw [hgeom.2.2.1.2 r hr, zero_mul]
   exact r11b_continuous_radialJacobi hgeom.1 hflat hgeom.2.2.2.1.1 4
 
@@ -145,7 +151,8 @@ theorem r11b_radialPDE_test_zero_outside {D : ReferenceData}
     fun s hs φ => r11b_directionalPartial_zero_outside hK hzero (1, 0) hs φ
   have hzA : ∀ s ∉ K, ∀ φ, angularPartial ψ (s, φ) = 0 :=
     fun s hs φ => r11b_directionalPartial_zero_outside hK hzero (0, 1) hs φ
-  rw [radialPDE_eq_polar_jets (hgeom.2.2.1.1.differentiable (by simp) r) hψ,
+  rw [radialPDE_eq_polar_jets (x := (r, θ))
+    (hgeom.2.2.1.1.differentiable (by simp) r) hψ,
     hzR r hr θ,
     show radialPartial (radialPartial ψ) (r, θ) = 0 from
       r11b_directionalPartial_zero_outside hK hzR (1, 0) hr θ,
