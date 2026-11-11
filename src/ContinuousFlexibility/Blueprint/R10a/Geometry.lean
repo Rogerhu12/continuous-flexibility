@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.SelectedTailParameters
 import ContinuousFlexibility.Radial.SeedRetainedReference
+import ContinuousFlexibility.Radial.SelectedInitialGapPositivity
 
 /-!
 # R10a: one parameterized selected tail and its reference geometries
@@ -33,6 +34,9 @@ structure R10aSelectedMetadata (C : ℝ) (requestedIndex : ℕ) (S : SelectedTai
     0 < deriv (S.family S.sigma).w (S.entry right S.chain.index) ∧
     RadialNaturalTail (S.family S.sigma) right 2 (S.entry right S.chain.index)
       (S.outgoing right 2)
+  initial_bridge_positive : ∀ right r,
+    r ∈ uIcc (S.cut right S.chain.index) (S.entry right S.chain.index) →
+      0 < deriv (S.family S.sigma).w r
   retained_entries : ∀ right n, S.chain.index ≤ n →
     S.entry right n ∈ radialCore (S.family S.sigma) ∧
     (if right then S.entry right S.chain.index ≤ S.entry right n
@@ -86,7 +90,7 @@ theorem R10aGeometry (hR06 : R06Statement) : R10aGeometrySupply := by
   obtain ⟨S, hS, hCstar, hrequested, hlarge, hentry, horder, hfirst, hinitial,
     hretained, hangle, hregular, hsmall, hcutOrder, hcone, hconstruction⟩ :=
     exists_r10a_parameterized_selectedTail_with_data hR06 C hC requestedIndex
-  rcases hconstruction with ⟨cFirst, G, H, phi, _, _, _, _, _, _, hfamily, hcut, hjoin⟩
+  rcases hconstruction with ⟨cFirst, G, H, phi, _, _, _, hM, _, _, hfamily, hcut, hjoin⟩
   let metadata : R10aSelectedMetadata C requestedIndex S := {
     selected := hS
     cstar := hCstar
@@ -101,6 +105,8 @@ theorem R10aGeometry (hR06 : R06Statement) : R10aGeometrySupply := by
     entries_order := horder
     first_two := hfirst
     initial := hinitial
+    initial_bridge_positive := fun right _ hr =>
+      selected_initial_bridge_deriv_pos hS hfirst hentry hcutOrder G hM hfamily right hr
     retained_entries := hretained
     later_cut := by
       intro right n hn

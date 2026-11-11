@@ -35,7 +35,9 @@ theorem selected_morseCell_retained {S : SelectedTailData}
   rcases hmatch with ⟨_, _, _, _, horder, hentry, _, _, _, _, _, _, _⟩
   have hfirst : if side then S.cut side S.chain.index < r07CellEntry S.chain side S.chain.index
       else r07CellEntry S.chain side S.chain.index < S.cut side S.chain.index := by
-    cases side <;> simpa only [hentry] using horder.1.trans horder.2
+    cases side <;>
+      simpa only [hentry, r07CellEntry, Bool.false_eq_true, ite_false, ite_true] using
+        horder.1.trans horder.2
   have hout := r07CellEntry_outside_middle G side hm
   have hspan := (hreal.2.2.1 side m hm).2.1.le
   have hmono := (hreal.radius_strictMonoOn side m hm).monotoneOn

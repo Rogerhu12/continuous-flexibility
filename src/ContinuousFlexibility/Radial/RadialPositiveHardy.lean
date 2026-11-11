@@ -50,7 +50,8 @@ theorem radialPositiveHardy_boundary {a b J : ℝ} {w dw u du : ℝ → ℝ}
   have hbd (r : ℝ) (hr : r ∈ Ioo a b) : HasDerivAt boundary (dboundary r) r := by
     have h := ((hw r hr).div (hasDerivAt_id r) (hne r (Ioo_subset_Icc_self hr))).mul
       ((hu r hr).pow 2)
-    simpa only [boundary, dboundary, mul_one, Nat.cast_ofNat, Nat.reduceSub, pow_one] using h
+    convert h using 1 <;>
+      simp [boundary, dboundary] <;> ring
   have hbint := hdbc.intervalIntegrable_of_Icc hab
   have heint := hec.intervalIntegrable_of_Icc hab
   have hmint := hmc.intervalIntegrable_of_Icc hab

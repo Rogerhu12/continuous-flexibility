@@ -148,8 +148,11 @@ theorem innerRadialChainDomain_firstOrder_pairing
           p (G.left k) * innerChainBoundaryRestriction n k ξ 0) := by
       apply Finset.sum_congr rfl
       intro k _
-      rw [innerRadialH1Domain_firstOrder_pairing D hw (G.left_lt_right k)
-        (G.left_pos k) (G.in_core k) (G.weight_pos k) hp (hξ k).1, (hξ k).2]
+      exact (innerRadialH1Domain_firstOrder_pairing D hw (G.left_lt_right k)
+        (G.left_pos k) (G.in_core k) (G.weight_pos k) (p := p) hp (q := q k)
+        (hξ k).1).trans
+        (congrArg (fun z : Fin 2 → ℝ => p (G.right k) * z 1 - p (G.left k) * z 0)
+          (hξ k).2)
     _ = 0 := innerRadialChainBoundary_pairing_sum G ξ p
 
 end ContinuousFlexibility.Radial
