@@ -20,7 +20,7 @@ open Set Filter MeasureTheory
 open scoped Topology
 
 private theorem continuous_scalar_parameterIntegral
-    {H : Type*} [NormedAddCommGroup H] [NormedSpace ℝ H]
+    {H : Type*} [NormedAddCommGroup H] [NormedSpace ℝ H] [FiniteDimensional ℝ H]
     {F : H × ℝ → ℝ} (hF : Continuous F) (a b : ℝ) :
     Continuous (fun x : H => ∫ t in a..b, F (x, t)) := by
   have hc (c d : ℝ) :
@@ -135,6 +135,10 @@ theorem scalarFlow_hasDerivAt_parameter
       intro t ht
       have hclosed : t ∈ uIcc a b := uIoo_subset_uIcc_self ht
       have hs := scalarTrajectory_difference_hasDerivAt
+        (F₁ := fun w : ℝ × ℝ => F (q, w))
+        (F₀ := fun w : ℝ × ℝ => F (p, w))
+        (D₁ := fun w : ℝ × ℝ => Dθ (q, w))
+        (u₁ := fun r => Θ (q, r)) (u₀ := fun r => Θ (p, r)) (t := t)
         (hDθ.comp (continuous_const.prodMk continuous_id))
         (hangle q) (hflow q t ht) (hflow p t ht)
       apply hs.congr_deriv
@@ -145,9 +149,10 @@ theorem scalarFlow_hasDerivAt_parameter
         rw [hUeq p t hclosed, hUeq q t hclosed]
       have hb := hforcing q t
       rw [hUeq p t hclosed] at hb
-      dsimp only
-      rw [← hAe, hb]
-      ring
+      calc
+        _ = A (q, t) * (Θ (q, t) - Θ (p, t)) + B (q, t) * (q - p) :=
+          congrArg₂ (fun c d : ℝ => c * (Θ (q, t) - Θ (p, t)) + d) hAe.symm hb
+        _ = _ := by ring
     have hz : Θ (q, a) - Θ (p, a) = 0 := by rw [hinit, hinit, sub_self]
     have hAq : Continuous (fun t => A (q, t)) :=
       hA.comp (continuous_const.prodMk continuous_id)
@@ -173,9 +178,7 @@ theorem scalarFlow_hasDerivAt_parameter
     ring
   have hslope : slope (fun q => Θ (q, b)) p =ᶠ[𝓝[≠] p] E := by
     filter_upwards [self_mem_nhdsWithin] with q hq
-    rw [slope_def_field]
-    dsimp only
-    rw [hdiff q]
+    rw [slope_def_field, hdiff q]
     exact mul_div_cancel_left₀ _ (sub_ne_zero.mpr hq)
   have hparam : HasDerivAt (fun q => Θ (q, b)) (E p) p :=
     hasDerivAt_iff_tendsto_slope.mpr
