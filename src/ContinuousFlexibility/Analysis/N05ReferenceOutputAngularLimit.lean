@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N05ReferenceAngularReconstruction
 import ContinuousFlexibility.Analysis.N05ReferenceAngularJetEstimate
 import ContinuousFlexibility.Analysis.N05ReferencePeriodicJetLimit
+import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
 
 /-!
 # Actual angular jet limits of a physical output
@@ -42,7 +43,7 @@ theorem n05_referenceOutput_highAngularJet_limit {D : ReferenceData}
       omega
     have hP := n05_referenceHighProjection_outputRealization hab hpart hU hI
     have hw := OutputRealization.memLp_weighted hab hpart hP
-    simpa only [outputRemainder, zero_mul, sub_zero] using hw
+    simpa only [n05_outputRemainder_zero] using hw
   have hsout : Summable (fun n => (((2 * (n + 2) : ℕ) : ℝ) ^ (2 * b)) *
       sourceNormSquare D γ (-M) (referenceBasisProjection {n + 2} U.1, 0)) := by
     simpa only [n05_referenceHighOutputSquare,
