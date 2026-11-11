@@ -74,8 +74,8 @@ def smoothDirections_fixedDirection {U : Set E} {f : E → F}
       · simpa only [Fin.snoc_last] using
           (continuous_const : Continuous (fun _ : E × (Fin n → E) => w))
       · simpa only [Fin.snoc_castSucc] using
-          ((continuous_apply j).comp continuous_snd :
-            Continuous (fun p : E × (Fin n → E) => p.2 j))
+          ((continuous_apply j).comp' (f := fun p : E × (Fin n → E) => p.2)
+            continuous_snd)
     exact (J.continuous (n + 1)).comp
       (continuous_fst.prodMk hsnoc).continuousOn
       (fun p hp => ⟨hp.1, mem_univ _⟩)
@@ -173,9 +173,10 @@ def smoothDirections_stateSlice {U : Set E} {f : E × ℝ → ℝ}
       (fun p hp => ⟨⟨hp.1, mem_univ _⟩, mem_univ _⟩)
   derivative := by
     intro n x hx v w
-    have he : (fun i : Fin (n + 1) => ((Fin.cons w v) i, (0 : ℝ))) =
-        (Fin.cons (w, (0 : ℝ)) (fun i : Fin n => (v i, (0 : ℝ))) :
-          Fin (n + 1) → E × ℝ) := by
+    have he : (fun i : Fin (n + 1) =>
+        ((Fin.cons (α := fun _ : Fin (n + 1) => E) w v) i, (0 : ℝ))) =
+        Fin.cons (α := fun _ : Fin (n + 1) => E × ℝ)
+          (w, (0 : ℝ)) (fun i : Fin n => (v i, (0 : ℝ))) := by
       funext i
       refine Fin.cases ?_ (fun j => ?_) i <;> rfl
     simpa only [HasProjectiveLineDerivAt,

@@ -57,9 +57,13 @@ theorem contDiffOn_stateJetEvaluation
       intro z hz
       have hfull : DifferentiableAt ℝ H z :=
         (hH.contDiffAt ((hU.prod hV).mem_nhds hz)).differentiableAt (by simp)
+      have hpair : HasFDerivAt (fun y : X => (y, z.2))
+          (ContinuousLinearMap.inl ℝ X P) z.1 :=
+        hasFDerivAt_prodMk_left (𝕜 := ℝ) z.1 z.2
       have hleft : HasFDerivAt (fun y : X => H (y, z.2))
-          ((fderiv ℝ H z).comp (ContinuousLinearMap.inl ℝ X P)) z.1 :=
-        hfull.hasFDerivAt.comp z.1 (hasFDerivAt_prodMk_left z.1 z.2)
+          ((fderiv ℝ H z).comp (ContinuousLinearMap.inl ℝ X P)) z.1 := by
+        simpa only [Function.comp_def, Prod.eta] using
+          hfull.hasFDerivAt.comp (f := fun y : X => (y, z.2)) z.1 hpair
       have hstate := (J z.2).hasProjectiveJetsOn.hasFDerivAt_eval_finiteDimensional
         hU n (Fin.tail v) hz.1
       have he := congrArg (fun L : X →L[ℝ] ℝ => L (v 0)) (hleft.unique hstate)
@@ -224,7 +228,7 @@ theorem contDiffOn_stateJet_line_external
     (e.contDiff.comp contDiff_fst).contDiffOn.prodMk contDiffOn_snd
   have hd := h.comp hmap
     (fun z hz => ⟨by simpa only [mem_preimage, he] using hz.1, mem_univ _⟩)
-  simpa only [he, hv] using hd
+  simpa only [Function.comp_def, he, hv] using hd
 
 /-- The actual angular derivative commutes with every actual state jet.
 The proof only differentiates smooth real two-dimensional restrictions;
@@ -325,7 +329,7 @@ private theorem hasDerivAt_diagonal_of_partials
       ext <;> simp
     calc
       _ = fderiv ℝ H (0, 0) ((1 : ℝ), 0) + fderiv ℝ H (0, 0) ((0 : ℝ), 1) := by
-        simpa only [hsum] using
+        exact (congrArg (fderiv ℝ H (0, 0)) hsum.symm).trans
           (map_add (fderiv ℝ H (0, 0)) ((1 : ℝ), 0) ((0 : ℝ), 1))
       _ = _ := by rw [hleft.unique hA, hright.unique hB]
   exact hvalue ▸ hdiag
@@ -372,7 +376,8 @@ theorem hasProjectiveLineDerivAt_stateAngleEvaluation
     have hd : HasDerivAt (fun s : ℝ => (J b (t, θ)).D k (x + s • w.1) v)
         ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v)) (0 : ℝ) :=
       finiteAffine_stateJet_line_deriv (J b (t, θ)) k hx v w.1
-    simpa only [H, zero_mul, add_zero] using hd
+    dsimp only [H]
+    simpa only [zero_mul, add_zero] using hd
   have hangle : HasDerivAt (fun s => H (0, s))
       (w.2 * (J (b + 1) (t, θ)).D k x v) 0 := by
     have hinner : HasDerivAt (fun s : ℝ => θ + s * w.2) w.2 0 := by
@@ -388,9 +393,17 @@ theorem hasProjectiveLineDerivAt_stateAngleEvaluation
       ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v) +
         w.2 * (J (b + 1) (t, θ)).D k x v) (0 : ℝ) :=
     hasDerivAt_diagonal_of_partials (hH.differentiableAt (by simp)) hstate hangle
-  simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,
-    Prod.smul_mk, Prod.mk_add_mk, zero_add, zero_smul, zero_mul, add_zero,
-    smul_eq_mul] using hasDerivAt_iff_tendsto_slope_zero.mp hd
+  change HasProjectiveCurveDerivAt
+    (fun s : ℝ => (J b (t, ((x, θ) + s • w).2)).D k ((x, θ) + s • w).1 v)
+    ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v) +
+      w.2 * (J (b + 1) (t, θ)).D k x v) (0 : ℝ)
+  have hline : (fun s : ℝ =>
+      (J b (t, ((x, θ) + s • w).2)).D k ((x, θ) + s • w).1 v) =
+      (fun s : ℝ => (J b (t, θ + s * w.2)).D k (x + s • w.1) v) := by
+    funext s
+    simp only [Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd, smul_eq_mul]
+  rw [hline]
+  exact hasDerivAt_iff_tendsto_slope_zero.mp hd
 
 end JointLines
 

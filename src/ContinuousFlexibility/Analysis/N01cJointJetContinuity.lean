@@ -64,8 +64,9 @@ theorem continuous_multilinearSeminormDifferenceMajorant {n : ℕ}
   apply hp.comp
   by_cases hji : j = i
   · subst j
-    simpa using ((continuous_apply i).sub continuous_const :
-      Continuous (fun v : Fin n → E => v i - v₀ i))
+    simpa [Pi.sub_def] using
+      (continuous_apply i : Continuous (fun v : Fin n → E => v i)).sub
+        (continuous_const : Continuous (fun _ : Fin n → E => v₀ i))
   · simp only [Function.update_of_ne hji, multilinearReplaceBefore]
     by_cases hlt : j.val < i.val
     · simpa only [if_pos hlt] using continuous_apply j
@@ -121,9 +122,9 @@ theorem continuousAt_multilinearEvaluation_of_uniform_seminormBound
   calc
     |A z.1 z.2 - A t₀ v₀| =
         |(A z.1 z.2 - A z.1 v₀) + (A z.1 v₀ - A t₀ v₀)| := by congr 1; ring
-    _ ≤ |A z.1 z.2 - A z.1 v₀| + |A z.1 v₀ - A t₀ v₀| := abs_add _ _
-    _ ≤ g z := add_le_add_right
-      (abs_multilinear_sub_le_seminormDifferenceMajorant (A z.1) p C hz v₀ z.2) _
+    _ ≤ |A z.1 z.2 - A z.1 v₀| + |A z.1 v₀ - A t₀ v₀| := abs_add_le _ _
+    _ ≤ g z := add_le_add
+      (abs_multilinear_sub_le_seminormDifferenceMajorant (A z.1) p C hz v₀ z.2) le_rfl
 
 end UniformMultilinear
 
@@ -158,8 +159,8 @@ theorem continuousAt_of_uniform_seminorm_variation
   calc
     |f z - f (x₀, t₀)| =
         |(f z - f (x₀, z.2)) + (f (x₀, z.2) - f (x₀, t₀))| := by congr 1; ring
-    _ ≤ |f z - f (x₀, z.2)| + |f (x₀, z.2) - f (x₀, t₀)| := abs_add _ _
-    _ ≤ g z := add_le_add_right hz _
+    _ ≤ |f z - f (x₀, z.2)| + |f (x₀, z.2) - f (x₀, t₀)| := abs_add_le _ _
+    _ ≤ g z := add_le_add hz le_rfl
 
 /-- The next genuine parameter derivative controls an arbitrary fixed
 jet along the actual segment. This is the scalar mean-value inequality

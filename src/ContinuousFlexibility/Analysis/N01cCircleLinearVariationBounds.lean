@@ -123,6 +123,24 @@ private theorem circleLinear_source_absorb (C X F : ℝ)
     C * X + F ≤ (1 + C) * (X + F) := by
   nlinarith [mul_nonneg hC hF]
 
+omit [Fact (0 < P)] in
+private theorem circleLinear_source_combine
+    (C M A1 As Y1 Ys F AL YL R Z : ℝ)
+    (hC : 0 ≤ C) (hM : 0 ≤ M) (hA1 : 0 ≤ A1) (hAs : 0 ≤ As)
+    (hY1 : 0 ≤ Y1) (hYs : 0 ≤ Ys) (hF : 0 ≤ F)
+    (hZ : Z ≤ R + F) (hR : R ≤ C * (As * YL + AL * Ys))
+    (hAL : AL ≤ M * A1) (hYL : YL ≤ M * Y1) :
+    Z ≤ (1 + C * M) * (A1 * Ys + As * Y1 + F) := by
+  calc
+    Z ≤ C * (As * YL + AL * Ys) + F := hZ.trans (add_le_add hR le_rfl)
+    _ ≤ C * (As * (M * Y1) + (M * A1) * Ys) + F :=
+      add_le_add (mul_le_mul_of_nonneg_left
+        (add_le_add (mul_le_mul_of_nonneg_left hYL hAs)
+          (mul_le_mul_of_nonneg_right hAL hYs)) hC) le_rfl
+    _ = (C * M) * (A1 * Ys + As * Y1) + F := by ring
+    _ ≤ _ := circleLinear_source_absorb _ _ _ (mul_nonneg hC hM)
+      (add_nonneg (mul_nonneg hA1 hYs) (mul_nonneg hAs hY1)) hF
+
 private theorem circleLinear_source_norm (A Y F : ℕ → C(AddCircle P, ℝ))
     (hA : ∀ n : ℕ, ∀ θ : ℝ, HasDerivAt
       (fun η : ℝ => A n (η : AddCircle P)) (A (n + 1) (θ : AddCircle P)) θ)
@@ -136,45 +154,23 @@ private theorem circleLinear_source_norm (A Y F : ℕ → C(AddCircle P, ℝ))
         (circleRealSobolevNorm 1 (A 0) * circleRealSobolevNorm (s : ℝ) (Y 0) +
           circleRealSobolevNorm (s : ℝ) (A 0) * circleRealSobolevNorm 1 (Y 0) +
           circleRealSobolevNorm (s : ℝ) (F 0)) := by
-  have hmul := circle_real_sobolevNorm_mul_le_of_derivatives A Y hA hY s
-  have hAY := circle_real_fourierL1Norm_le_sobolev_one_of_derivatives Y hY 0
-  have hAA := circle_real_fourierL1Norm_le_sobolev_one_of_derivatives A hA 0
-  have hFmem := circle_frequencyWeighted_memLp_of_derivatives
-    (fun n => circleComplexify (F n)) (circleComplexify_hasDerivAt F hF) s
-  calc
-    _ ≤ circleRealSobolevNorm (s : ℝ) (A 0 * Y 0) +
-        circleRealSobolevNorm (s : ℝ) (F 0) :=
-      circle_real_sobolevNorm_add_le _ _ _ (circleLinear_product_memLp A Y hA hY s) hFmem
-    _ ≤ (2 : ℝ) ^ s *
-        (circleRealSobolevNorm (s : ℝ) (A 0) * circleRealFourierL1Norm (Y 0) +
-          circleRealFourierL1Norm (A 0) * circleRealSobolevNorm (s : ℝ) (Y 0)) +
-          circleRealSobolevNorm (s : ℝ) (F 0) := add_le_add_right hmul _
-    _ ≤ (2 : ℝ) ^ s *
-        (circleRealSobolevNorm (s : ℝ) (A 0) *
-            (circleSobolevEmbeddingConstant P * circleRealSobolevNorm 1 (Y 0)) +
-          (circleSobolevEmbeddingConstant P * circleRealSobolevNorm 1 (A 0)) *
-            circleRealSobolevNorm (s : ℝ) (Y 0)) +
-          circleRealSobolevNorm (s : ℝ) (F 0) :=
-      add_le_add_right (mul_le_mul_of_nonneg_left
-        (add_le_add
-          (mul_le_mul_of_nonneg_left hAY (circle_real_sobolevNorm_nonneg _ _))
-          (mul_le_mul_of_nonneg_right hAA (circle_real_sobolevNorm_nonneg _ _)))
-        (by positivity)) _
-    _ = ((2 : ℝ) ^ s * circleSobolevEmbeddingConstant P) *
-        (circleRealSobolevNorm 1 (A 0) * circleRealSobolevNorm (s : ℝ) (Y 0) +
-          circleRealSobolevNorm (s : ℝ) (A 0) * circleRealSobolevNorm 1 (Y 0)) +
-          circleRealSobolevNorm (s : ℝ) (F 0) := by ring
-    _ ≤ _ := circleLinear_source_absorb
-      ((2 : ℝ) ^ s * circleSobolevEmbeddingConstant P)
-      (circleRealSobolevNorm 1 (A 0) * circleRealSobolevNorm (s : ℝ) (Y 0) +
-        circleRealSobolevNorm (s : ℝ) (A 0) * circleRealSobolevNorm 1 (Y 0))
-      (circleRealSobolevNorm (s : ℝ) (F 0))
-      (mul_nonneg (by positivity)
-        (zero_le_one.trans (circleSobolevEmbeddingConstant_one_le P)))
-      (add_nonneg
-        (mul_nonneg (circle_real_sobolevNorm_nonneg _ _) (circle_real_sobolevNorm_nonneg _ _))
-        (mul_nonneg (circle_real_sobolevNorm_nonneg _ _) (circle_real_sobolevNorm_nonneg _ _)))
-      (circle_real_sobolevNorm_nonneg _ _)
+  exact circleLinear_source_combine ((2 : ℝ) ^ s) (circleSobolevEmbeddingConstant P)
+    (circleRealSobolevNorm 1 (A 0)) (circleRealSobolevNorm (s : ℝ) (A 0))
+    (circleRealSobolevNorm 1 (Y 0)) (circleRealSobolevNorm (s : ℝ) (Y 0))
+    (circleRealSobolevNorm (s : ℝ) (F 0))
+    (circleRealFourierL1Norm (A 0)) (circleRealFourierL1Norm (Y 0))
+    (circleRealSobolevNorm (s : ℝ) (A 0 * Y 0))
+    (circleRealSobolevNorm (s : ℝ) (A 0 * Y 0 + F 0))
+    (by positivity) (zero_le_one.trans (circleSobolevEmbeddingConstant_one_le P))
+    (circle_real_sobolevNorm_nonneg _ _) (circle_real_sobolevNorm_nonneg _ _)
+    (circle_real_sobolevNorm_nonneg _ _) (circle_real_sobolevNorm_nonneg _ _)
+    (circle_real_sobolevNorm_nonneg _ _)
+    (circle_real_sobolevNorm_add_le _ _ _ (circleLinear_product_memLp A Y hA hY s)
+      (circle_frequencyWeighted_memLp_of_derivatives (fun n => circleComplexify (F n))
+        (circleComplexify_hasDerivAt F hF) s))
+    (circle_real_sobolevNorm_mul_le_of_derivatives A Y hA hY s)
+    (circle_real_fourierL1Norm_le_sobolev_one_of_derivatives A hA 0)
+    (circle_real_fourierL1Norm_le_sobolev_one_of_derivatives Y hY 0)
 
 namespace CircleLinearVariationData
 

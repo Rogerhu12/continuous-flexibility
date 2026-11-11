@@ -39,9 +39,12 @@ theorem constantDirectionalPartial_commute {f : X → Y}
   funext x
   have hd : DifferentiableAt ℝ (fderiv ℝ f) x :=
     ((hf.fderiv_right (by simp) : ContDiff ℝ ∞ (fderiv ℝ f)).differentiable (by simp)) x
-  simp only [constantDirectionalPartial, fderiv_clm_apply hd (differentiableAt_const e),
-    fderiv_clm_apply hd (differentiableAt_const d), fderiv_const,
-    ContinuousLinearMap.comp_zero, zero_add, ContinuousLinearMap.flip_apply]
+  change fderiv ℝ (fun y => fderiv ℝ f y e) x d =
+    fderiv ℝ (fun y => fderiv ℝ f y d) x e
+  rw [fderiv_clm_apply hd (differentiableAt_const e),
+    fderiv_clm_apply hd (differentiableAt_const d)]
+  simp only [fderiv_const, ContinuousLinearMap.comp_zero, zero_add,
+    ContinuousLinearMap.flip_apply]
   exact (hf.contDiffAt.isSymmSndFDerivAt (by simp)).eq d e
 
 /-- An actual word of constant-direction differential operators. -/
@@ -102,6 +105,7 @@ theorem iteratedFDeriv_parameter_slice {F : E × ℝ → ℝ}
       (hasProjectiveJetsOn_of_contDiffOn isOpen_univ hF.contDiffOn)
   have h := smoothDirections_iteratedFDeriv_finiteAffine J (0, t)
     (ContinuousLinearMap.inl ℝ E ℝ) n (y := q) (mem_univ _) v
+  dsimp only [J, smoothDirectionsOfJets] at h
   simpa only [ContinuousLinearMap.inl_apply, Prod.mk_add_mk, zero_add, add_zero] using h
 
 /-- Move the true time derivative through any number of actual

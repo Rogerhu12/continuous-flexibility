@@ -80,8 +80,7 @@ theorem radialPartial_eq_of_physicalFlowODE
       HasDerivAt (fun s => Θ (s, θ)) (lam (r, Θ (r, θ))) r)
     {p : PolarPoint} (hp : p ∈ I ×ˢ (univ : Set ℝ)) :
     radialPartial Θ p = lam (p.1, Θ p) := by
-  have hd := ((hΘ.contDiffAt ((hI.prod isOpen_univ).mem_nhds hp)).
-    differentiableAt (by simp)).hasFDerivAt.comp_hasDerivAt p.1
+  have hd := ((hΘ.contDiffAt ((hI.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)).hasFDerivAt.comp_hasDerivAt p.1
       ((hasDerivAt_id' p.1).prodMk (hasDerivAt_const p.1 p.2))
   have hd' : HasDerivAt (fun r => Θ (r, p.2)) (radialPartial Θ p) p.1 := by
     simpa only [Function.comp_def, radialPartial, Prod.eta] using hd
@@ -100,8 +99,9 @@ theorem radialPartial_along_physicalFlow
         lam (p.1, Θ p) * angularPartial F (p.1, Θ p) := by
   have hΩ : IsOpen (I ×ˢ (univ : Set ℝ)) := hI.prod isOpen_univ
   have ht := (hΘ.contDiffAt (hΩ.mem_nhds hp)).differentiableAt (by simp)
-  have hf := (hF.contDiffAt (hΩ.mem_nhds ⟨hp.1, mem_univ _⟩)).
-    differentiableAt (by simp)
+  have hf : DifferentiableAt ℝ F (p.1, Θ p) :=
+    (hF.contDiffAt (hΩ.mem_nhds
+      (show (p.1, Θ p) ∈ I ×ˢ (univ : Set ℝ) from ⟨hp.1, mem_univ _⟩))).differentiableAt (by simp)
   have hg := (hasFDerivAt_fst p).prodMk ht.hasFDerivAt
   have hd := hf.hasFDerivAt.comp p hg
   have he : (fun q => F (q.1, Θ q)) = F ∘ (fun q => (q.1, Θ q)) := by

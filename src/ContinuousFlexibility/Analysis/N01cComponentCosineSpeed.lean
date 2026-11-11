@@ -43,7 +43,7 @@ theorem componentCosineSpeed_eq_transformed
   have hcore : (rootCosinePath (C.left m) (C.right m) t, θ) ∈ annularOpen D :=
     ⟨⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩, mem_univ _⟩
   rw [minusCharacteristicSpeed_normalized_factors hS hT hA hB hz hcore]
-  have he := cosineRegularizedSpeed_eq_transformed (hC.1 m).2.1
+  have he := cosineRegularizedSpeed_eq_transformed (θ := θ) (hC.1 m).2.1
     (fun q : (AnnularState S × ℝ) × PolarPoint => normalizedSpeedFactor D S C 0 q.1 q.2)
     (fun q : (AnnularState S × ℝ) × PolarPoint => normalizedSpeedFactor D S C 1 q.1 q.2)
     (fun q : (AnnularState S × ℝ) × ℝ => componentOpticalSquare D S C m q.1 q.2)
@@ -65,7 +65,7 @@ theorem hasDerivAt_componentCosineFlow
   have hd := ((hB.1 z hz m θ).2.2.1 _ hr).comp t
     (hasDerivAt_rootCosinePath (C.left m) (C.right m) t)
   rw [componentCosineSpeed_eq_transformed hS hT hA hB hz m ht]
-  simpa only [mul_comm] using hd
+  simpa only [Function.comp_def, mul_comm] using hd
 
 theorem contDiffOn_componentCosineSpeed_finiteAffine
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -99,6 +99,23 @@ theorem contDiffOn_componentCosineSpeed_finiteAffine
     (contDiffOn_normalizedSpeedFactor_finiteAffine hS hT hA hB x L 1) hV
     (fun q hq r hr => hpos (x + L q) hq m r hr)
 
+/-- The zero-dimensional affine restriction gives the full spatial slice.
+All coordinate transport is performed before specializing the state type. -/
+private theorem n01c_componentCosine_contDiff_zero_slice
+    {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    {U : Set X} {F : X × PolarPoint → ℝ} {x : X} (hx : x ∈ U)
+    (hf : ∀ L : (Fin 0 → ℝ) →L[ℝ] X,
+      ContDiffOn ℝ ∞ (fun p : (Fin 0 → ℝ) × PolarPoint => F (x + L p.1, p.2))
+        (((fun q => x + L q) ⁻¹' U) ×ˢ (univ : Set PolarPoint))) :
+    ContDiff ℝ ∞ (fun p : PolarPoint => F (x, p)) := by
+  let L : (Fin 0 → ℝ) →L[ℝ] X := 0
+  have hp : ContDiffOn ℝ ∞ (fun p : PolarPoint => F (x + L 0, p)) univ :=
+    (hf L).comp (contDiff_const.prodMk contDiff_id).contDiffOn
+      (fun p _ => ⟨by simpa only [L, ContinuousLinearMap.zero_apply, add_zero] using hx,
+        mem_univ p⟩)
+  simpa only [L, ContinuousLinearMap.zero_apply, add_zero] using contDiffOn_univ.mp hp
+
+set_option backward.isDefEq.respectTransparency true in
 theorem contDiff_componentCosineSpeed
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
@@ -109,13 +126,8 @@ theorem contDiff_componentCosineSpeed
         0 < twoRootDivided (componentOpticalSquare D S C m z) (C.left m) (C.right m) r)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε) (m : ℕ) :
     ContDiff ℝ ∞ (fun p : PolarPoint => componentCosineSpeed D S C m (z, p)) := by
-  let L : (Fin 0 → ℝ) →L[ℝ] (AnnularState S × ℝ) := 0
-  have hf := contDiffOn_componentCosineSpeed_finiteAffine hS hT hA hB hpos m z L
-  have hp : ContDiffOn ℝ ∞
-      (fun p : PolarPoint => componentCosineSpeed D S C m (z + L 0, p)) univ :=
-    hf.comp (contDiff_const.prodMk contDiff_id).contDiffOn
-      (fun p _ => ⟨by simpa only [L, ContinuousLinearMap.zero_apply, add_zero] using hz,
-        mem_univ p⟩)
-  simpa only [L, ContinuousLinearMap.zero_apply, add_zero] using contDiffOn_univ.mp hp
+  exact n01c_componentCosine_contDiff_zero_slice
+    (F := componentCosineSpeed D S C m) hz
+    (contDiffOn_componentCosineSpeed_finiteAffine (n := 0) hS hT hA hB hpos m z)
 
 end ContinuousFlexibility.Statements

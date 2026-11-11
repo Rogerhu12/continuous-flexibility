@@ -93,7 +93,8 @@ theorem flowGraphVariationSlot_succ_succ_zero (n : ℕ) :
   apply ContinuousMultilinearMap.ext
   intro v
   simp only [flowGraphVariationSlot_apply, flowParameterIdentityJet,
-    ContinuousMultilinearMap.zero_apply, Prod.mk_add_mk, add_zero, zero_add]
+    ContinuousMultilinearMap.zero_apply, zero_add]
+  exact Prod.ext rfl rfl
 
 theorem ContinuousStateVariation.continuous_graphSlot {U : Set E} {n : ℕ}
     (B : ContinuousStateVariation U n) :
@@ -104,6 +105,19 @@ theorem ContinuousStateVariation.continuous_graphSlot {U : Set E} {n : ℕ}
     flowParameterIdentityJet n p.2 + flowAngleInjection (B.value p.1 p.2)) _
   exact ((flowParameterIdentityJet n).cont.comp continuous_snd).continuousOn.add
     (flowAngleInjection.continuous.comp_continuousOn B.continuous)
+
+private theorem continuousOn_flowGraphVariationSlot_reindex {U : Set E} {n N : ℕ}
+    (B : ContinuousStateVariation U n) (σ : Fin n → Fin N) :
+    ContinuousOn (fun p : (E × ℝ) × (Fin N → E) =>
+      flowGraphVariationSlot n (B.value p.1) (p.2 ∘ σ))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) := by
+  let g : ((E × ℝ) × (Fin N → E)) → ((E × ℝ) × (Fin n → E)) :=
+    fun p => (p.1, fun j => p.2 (σ j))
+  have hg : Continuous g :=
+    continuous_fst.prodMk
+      (continuous_pi (fun j => (continuous_apply (σ j)).comp continuous_snd))
+  exact B.continuous_graphSlot.comp hg.continuousOn
+    (fun p hp => ⟨hp.1, mem_univ _⟩)
 
 /-- Extension by zero at the current and all higher orders. -/
 def lowerStateVariation {U : Set E} {N : ℕ}
@@ -165,6 +179,29 @@ theorem truncatedFlowForcing_apply {U : Set E} {G : E × PolarPoint → ℝ} {N 
   simp only [truncatedFlowForcing, ContinuousMultilinearMap.sum_apply,
     projectivePartitionMultilinear_apply]
 
+private theorem continuousOn_flowPartitionTerm {U : Set E}
+    {G : E × PolarPoint → ℝ} {Θ : E × ℝ → ℝ} {N : ℕ}
+    (J : ContinuousTimeSpeedTower U G)
+    (hΘ : ContinuousOn Θ (U ×ˢ (univ : Set ℝ)))
+    (c : OrderedFinpartition N)
+    (B : ∀ i : Fin c.length, ContinuousStateVariation U (c.partSize i)) :
+    ContinuousOn (fun p : (E × ℝ) × (Fin N → E) =>
+      J.D c.length (flowTrajectoryGraph Θ p.1)
+        (fun i => flowGraphVariationSlot (c.partSize i) ((B i).value p.1) (p.2 ∘ c.emb i)))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) := by
+  have hbase : ContinuousOn
+      (fun p : (E × ℝ) × (Fin N → E) => flowTrajectoryGraph Θ p.1)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) :=
+    (continuousOn_flowTrajectoryGraph hΘ).comp
+      continuous_fst.continuousOn (fun p hp => hp.1)
+  have hslots : ContinuousOn
+      (fun p : (E × ℝ) × (Fin N → E) =>
+        fun i => flowGraphVariationSlot (c.partSize i) ((B i).value p.1) (p.2 ∘ c.emb i))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) :=
+    continuousOn_pi.mpr (fun i => continuousOn_flowGraphVariationSlot_reindex (B i) (c.emb i))
+  exact (J.continuous c.length).comp (hbase.prodMk hslots)
+    (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
+
 theorem continuousOn_truncatedFlowForcing {U : Set E}
     {G : E × PolarPoint → ℝ} {Θ : E × ℝ → ℝ} {N : ℕ}
     (J : ContinuousTimeSpeedTower U G)
@@ -173,26 +210,8 @@ theorem continuousOn_truncatedFlowForcing {U : Set E}
     ContinuousOn (fun p : (E × ℝ) × (Fin N → E) => truncatedFlowForcing J Θ B p.1 p.2)
       ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) := by
   simp only [truncatedFlowForcing_apply]
-  apply continuousOn_finsetSum Finset.univ
-  intro c _
-  have hbase : ContinuousOn
-      (fun p : (E × ℝ) × (Fin N → E) => flowTrajectoryGraph Θ p.1)
-      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) :=
-    (continuousOn_flowTrajectoryGraph hΘ).comp
-      continuous_fst.continuousOn (fun p hp => hp.1)
-  have hslots : ContinuousOn
-      (fun p : (E × ℝ) × (Fin N → E) =>
-        fun i => flowGraphVariationSlot (c.partSize i)
-          ((lowerStateVariation B (c.partSize i)).value p.1) (p.2 ∘ c.emb i))
-      ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) := by
-    apply continuousOn_pi.mpr
-    intro i
-    exact (lowerStateVariation B (c.partSize i)).continuous_graphSlot.comp
-      (continuous_fst.prodMk (continuous_pi (fun j =>
-        (continuous_apply (c.emb i j)).comp continuous_snd))).continuousOn
-      (fun p hp => ⟨hp.1, mem_univ _⟩)
-  exact (J.continuous c.length).comp (hbase.prodMk hslots)
-    (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
+  exact continuousOn_finsetSum Finset.univ (fun c _ =>
+    continuousOn_flowPartitionTerm J hΘ c (fun i => lowerStateVariation B (c.partSize i)))
 
 theorem truncatedFlowForcing_one {U : Set E} {G : E × PolarPoint → ℝ}
     (J : ContinuousTimeSpeedTower U G)
