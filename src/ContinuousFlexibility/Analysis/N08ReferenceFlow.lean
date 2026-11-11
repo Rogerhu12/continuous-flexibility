@@ -73,7 +73,7 @@ theorem n08_minusCharacteristicSpeed_of_radial_coefficients
     minusCharacteristicSpeed L (r, θ) = -opticalSpeed w r := by
   have hrad : -(w r * (deriv w r / r)) / w r ^ 2 =
       -deriv w r / (r * w r) := by
-    field_simp [hr, hw.ne'] <;> ring
+    field_simp [hr, hw.ne']
   have hsqrt : Real.sqrt (-(w r * (deriv w r / r))) / w r =
       opticalSpeed w r := by
     calc
@@ -119,13 +119,14 @@ theorem n08_radialFlow_eq_sub_integral {w f : ℝ → ℝ} {l h r : ℝ}
   rw [intervalIntegral.integral_neg] at ht
   linarith only [ht]
 
+private theorem seminorm_sub_self_lt {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (x : E) {δ : ℝ} (hδ : 0 < δ) : p (x - x) < δ := by
+  simpa only [sub_self, map_zero] using hδ
+
 private theorem reference_mem_stateNeighborhood (hε : 0 < ε) :
-    (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
-  change stateGrading S base (C.referenceState - C.referenceState) < ε ∧ |(0 : ℝ)| < ε
-  constructor
-  · rw [sub_self, map_zero (stateGrading S base)]
-    exact hε
-  · simpa only [abs_zero] using hε
+    (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+  ⟨seminorm_sub_self_lt (stateGrading S base) C.referenceState hε,
+    (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
 
 /-- N01's actual ordinary flow is determined on the entire closed
 component by its differential equation and its left endpoint value. -/

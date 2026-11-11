@@ -31,6 +31,13 @@ private theorem n08_angularMean_eq_angleIntegral (f : ℝ → ℝ) :
     angularMean f = (1 / Real.pi) * ∫ θ, f θ ∂angleMeasure := by
   rw [angularMean, intervalIntegral.integral_of_le Real.pi_pos.le, angleMeasure]
 
+private theorem n08_angularMean_of_ae_mul {f g : ℝ → ℝ} {c : ℝ}
+    (h : f =ᵐ[angleMeasure] fun θ => c * g θ) :
+    angularMean f = c * angularMean g := by
+  rw [n08_angularMean_eq_angleIntegral, n08_angularMean_eq_angleIntegral,
+    integral_congr_ae h, integral_const_mul]
+  ring
+
 /-- Normalized averaging is a continuous functional on the actual angular L² space. -/
 def n08AngleMean : AngleL2 →L[ℝ] ℝ :=
   (1 / Real.pi) • angleL2TestPairing (fun _ : ℝ => (1 : ℝ))
@@ -81,12 +88,20 @@ theorem n08CircleZeroJet_norm_le (M : CircleModelData) (u : M.Space) :
   rw [n08CircleZeroJet_apply]
   exact norm_coordinate_le_graded (fun s => M.level s) M.bond (le_refl 0) u
 
+private theorem n08_exists_comp_apply {E F G : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+    (L : F →L[ℝ] G) (P : E →L[ℝ] F) :
+    ∃ A : E →L[ℝ] G, ∀ u, A u = L (P u) :=
+  ⟨L.comp P, ContinuousLinearMap.comp_apply L P⟩
+
 def n08ModelControlRestriction (M : CircleModelData) : M.Space →L[ℝ] ControlBanach :=
-  n08CircleJetMeans.comp (n08CircleZeroJet M)
+  (n08_exists_comp_apply n08CircleJetMeans (n08CircleZeroJet M)).choose
 
 theorem n08ModelControlRestriction_value (M : CircleModelData) (u : M.Space) :
-    n08ModelControlRestriction M u = n08CircleJetMeans (n08CircleZeroJet M u) := by
-  rw [n08ModelControlRestriction, ContinuousLinearMap.comp_apply]
+    n08ModelControlRestriction M u = n08CircleJetMeans (n08CircleZeroJet M u) :=
+  (n08_exists_comp_apply n08CircleJetMeans (n08CircleZeroJet M)).choose_spec u
 
 theorem n08ModelControlRestriction_jet_apply (M : CircleModelData)
     (u : M.Space) (m : ℕ) :
@@ -103,12 +118,9 @@ theorem n08ModelControlRestriction_norm_le (M : CircleModelData) (u : M.Space) :
 theorem n08ModelControlRestriction_apply {T : MaterialData} {γ : ℝ}
     {M : CircleModelData} (hM : IsCircleModel T γ M) (u : M.Space) (m : ℕ) :
     n08ModelControlRestriction M u m =
-      T.H (T.sample m) ^ (-γ) * angularMean (M.decode u m) := by
-  have hae := hM.2.2.2.2.2.2.1 u 0 m
-  rw [n08ModelControlRestriction_jet_apply]
-  simp only [n08_angularMean_eq_angleIntegral]
-  rw [integral_congr_ae hae, integral_const_mul]
-  ring
+      T.H (T.sample m) ^ (-γ) * angularMean (M.decode u m) :=
+  (n08ModelControlRestriction_jet_apply M u m).trans
+    (n08_angularMean_of_ae_mul (hM.2.2.2.2.2.2.1 u 0 m))
 
 /-- The restriction is defined from actual model coordinates, with no
 assumed summability or assumed continuous extension. -/

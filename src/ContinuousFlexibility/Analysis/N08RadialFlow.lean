@@ -20,7 +20,7 @@ open scoped ContDiff Topology Interval
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
-theorem n08_stateRadialHeight_hasDerivAt (x : AnnularState S)
+theorem n08_stateRadialHeight_hasDerivAt_of_continuous (x : AnnularState S)
     (hw : Continuous (stateProfile D S C x)) (r : ℝ) :
     HasDerivAt (stateRadialHeight D S C x) (stateProfile D S C x r) r := by
   change HasDerivAt (fun u => ∫ t in D.b..u, stateProfile D S C x t)
@@ -40,7 +40,8 @@ theorem n08_originalCoefficients_zero_parameter (x : AnnularState S)
       deriv (stateProfile D S C x) p.1 / p.1
   rw [n08_stateHeight_zero_parameter]
   exact n08_radialHeight_coefficients
-    (n08_stateRadialHeight_hasDerivAt x hw.continuous) (hw.differentiable (by simp) p.1)
+    (n08_stateRadialHeight_hasDerivAt_of_continuous x hw.continuous)
+    (hw.differentiable (by simp) p.1)
 
 theorem n08_stateProfile_pos (hD : RadialProfileGeometry D) (x : AnnularState S)
     {r : ℝ} (hr : r ∈ radialCore D) : 0 < stateProfile D S C x r :=

@@ -45,7 +45,7 @@ private theorem n08_sumWeightProduct_productBound (hT : IsMaterialData D T)
   have hsum := oneHigh_le_card_product
     (p := A.grading) (gradedSeminorm_monotone _ _) base (s + loss) u
   have hbound := (hCu u).trans (mul_le_mul_of_nonneg_left hsum hC)
-  simpa only [Nat.cast_ofNat, Fintype.card_fin, mul_assoc] using hbound
+  simpa only [Nat.reduceAdd, Nat.cast_ofNat, Fintype.card_fin, mul_assoc] using hbound
 
 /-- The same decoded multiplication, with its full sum-weight codomain. -/
 def n08SumWeightProduct (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)

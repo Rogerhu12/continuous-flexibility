@@ -19,6 +19,56 @@ open scoped Topology NNReal
 
 set_option backward.isDefEq.respectTransparency false
 
+section ProjectionAlgebra
+
+variable {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+
+private theorem n08_productProjection_existsTame
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    (hp : Monotone p) (hq : Monotone q) (mean odd : F →L[ℝ] F)
+    (hm : IsTameLinear q q mean.toLinearMap 0 0)
+    (ho : ∃ loss base, IsTameLinear q q odd.toLinearMap loss base) :
+    ∃ loss base, IsTameLinear
+      (pairGrading p (pairGrading realGrading (pairGrading q q)))
+      (pairGrading p (pairGrading realGrading (pairGrading q q)))
+      ((ContinuousLinearMap.id ℝ E).prodMap
+        ((ContinuousLinearMap.id ℝ ℝ).prodMap (mean.prodMap odd))).toLinearMap loss base := by
+  obtain ⟨loss, base, ho⟩ := ho
+  have hr : Monotone realGrading := fun _ _ _ _ => le_rfl
+  have hpair := solve_isTameLinear_prodMap hq hq hm ho
+  have hrest := solve_isTameLinear_prodMap hr (pairGrading_monotone hq hq)
+    (IsTameLinear.id realGrading) hpair
+  have hfull := solve_isTameLinear_prodMap hp
+    (pairGrading_monotone hr (pairGrading_monotone hq hq)) (IsTameLinear.id p) hrest
+  refine ⟨loss, base, ?_⟩
+  simpa only [ContinuousLinearMap.coe_prodMap, ContinuousLinearMap.coe_id,
+    Nat.zero_max] using hfull
+
+private theorem n08_codRestrict_existsTame
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
+    (W : Submodule ℝ F) (L : E →L[ℝ] F) (hmem : ∀ x, L x ∈ W)
+    (h : ∃ loss base, IsTameLinear p q L.toLinearMap loss base) :
+    ∃ loss base, IsTameLinear p (fun n => (q n).comp W.subtype)
+      (L.codRestrict W hmem).toLinearMap loss base := by
+  obtain ⟨loss, base, ht⟩ := h
+  exact ⟨loss, base, ht⟩
+
+end ProjectionAlgebra
+
+private theorem n08_oddFormula_odd {f g : ℝ → ℝ}
+    (hg : ∀ θ, g θ = (f θ - f (-θ)) / 2) (θ : ℝ) : g (-θ) = -g θ := by
+  rw [hg, hg, neg_neg]
+  ring
+
+private theorem n08_mean_projection_preserves_mean {E : Type*}
+    (decode : E → ℕ → ℝ → ℝ) (M : E → E)
+    (hm : ∀ u m θ, decode (M u) m θ = angularMean (decode u m)) (u : E) (m : ℕ) :
+    angularMean (decode (M u) m) = angularMean (decode u m) := by
+  have he : decode (M u) m = fun _ => angularMean (decode u m) := funext (hm u m)
+  rw [he, angularMean, intervalIntegral.integral_const, sub_zero, smul_eq_mul, one_div]
+  exact inv_mul_cancel_left₀ Real.pi_ne_zero _
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 /-- The actual odd projection supplied by the physical circle model. -/
@@ -41,9 +91,8 @@ theorem n08_oddCircleProjection_isTame (hS : IsPhysicalSpaces D T S) :
 theorem n08_oddCircleProjection_odd (hS : IsPhysicalSpaces D T S)
     (u : CircleSpace S) (m : ℕ) (θ : ℝ) :
     (S.circle (3 / 4 : ℝ)).decode (n08_oddCircleProjection hS u) m (-θ) =
-      -(S.circle (3 / 4 : ℝ)).decode (n08_oddCircleProjection hS u) m θ := by
-  rw [n08_oddCircleProjection_decode, n08_oddCircleProjection_decode, neg_neg]
-  ring
+      -(S.circle (3 / 4 : ℝ)).decode (n08_oddCircleProjection hS u) m θ :=
+  n08_oddFormula_odd (n08_oddCircleProjection_decode hS u m) θ
 
 theorem n08_oddCircleProjection_eq_self (hS : IsPhysicalSpaces D T S)
     (u : CircleSpace S)
@@ -128,24 +177,14 @@ theorem n08_isClosed_stateSector (hS : IsPhysicalSpaces D T S) :
 
 theorem n08_stateProjection_isTame (hS : IsPhysicalSpaces D T S) :
     ∃ loss base, IsTameLinear (stateGrading S) (stateGrading S)
-      (n08_stateProjection hS).toLinearMap loss base := by
-  obtain ⟨loss, base, hodd⟩ := n08_oddCircleProjection_isTame hS
-  have hreal : Monotone realGrading := fun _ _ _ _ => le_rfl
-  have hpair := solve_isTameLinear_prodMap
-    (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)
-    (circleAngularMeanProjection_isTame (hS.2.1 (3 / 4 : ℝ))) hodd
-  have hrest := solve_isTameLinear_prodMap hreal
-    (pairGrading_monotone (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _))
-    (IsTameLinear.id realGrading) hpair
-  have hfull := solve_isTameLinear_prodMap
-    (pairGrading_monotone (gradedSeminorm_monotone _ _) hreal)
-    (pairGrading_monotone hreal
-      (pairGrading_monotone (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)))
-    (IsTameLinear.id (heightPairGrading S)) hrest
-  refine ⟨loss, base, ?_⟩
-  dsimp +unfoldPartialApp only [stateGrading, heightPairGrading, pairGrading] at hfull ⊢
-  simpa only [n08_stateProjection, ContinuousLinearMap.coe_prodMap,
-    ContinuousLinearMap.coe_id, Nat.zero_max] using hfull
+      (n08_stateProjection hS).toLinearMap loss base :=
+  n08_productProjection_existsTame
+    (p := heightPairGrading S) (q := (S.circle (3 / 4 : ℝ)).grading)
+    (pairGrading_monotone (gradedSeminorm_monotone _ _) (fun _ _ _ _ => le_rfl))
+    (gradedSeminorm_monotone _ _)
+    (circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ))) (n08_oddCircleProjection hS)
+    (circleAngularMeanProjection_isTame (hS.2.1 (3 / 4 : ℝ)))
+    (n08_oddCircleProjection_isTame hS)
 
 /-- The same projection with codomain the actual closed sector. -/
 def n08_sectorProjection (hS : IsPhysicalSpaces D T S) :
@@ -161,11 +200,10 @@ theorem n08_sectorProjection_subtype (hS : IsPhysicalSpaces D T S)
 
 theorem n08_sectorProjection_isTame (hS : IsPhysicalSpaces D T S) :
     ∃ loss base, IsTameLinear (stateGrading S) (sectorGrading S)
-      (n08_sectorProjection hS).toLinearMap loss base := by
-  obtain ⟨loss, base, htame⟩ := n08_stateProjection_isTame hS
-  refine ⟨loss, base, fun n hn => ?_⟩
-  obtain ⟨A, hA⟩ := htame n hn
-  exact ⟨A, hA⟩
+      (n08_sectorProjection hS).toLinearMap loss base :=
+  n08_codRestrict_existsTame (p := stateGrading S) (q := stateGrading S)
+    (stateSectorSubmodule S) (n08_stateProjection hS)
+    (n08_stateProjection_mem hS) (n08_stateProjection_isTame hS)
 
 theorem n08_stateProjection_reference (hS : IsPhysicalSpaces D T S)
     {C : NonlinearGeometryData S} (href : referenceStateConditions D S C) :
@@ -182,30 +220,33 @@ theorem n08_stateProjection_reference (hS : IsPhysicalSpaces D T S)
 theorem n08_stateProjection_kappaDirection (hS : IsPhysicalSpaces D T S)
     (u : CircleSpace S) :
     n08_stateProjection hS (0, 0, u, 0) =
-      (0, 0, circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ)) u, 0) := by
-  simp only [n08_stateProjection_apply, map_zero]
+      (0, 0, circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ)) u, 0) :=
+  (n08_stateProjection_apply hS _).trans
+    (Prod.ext rfl (Prod.ext rfl (Prod.ext rfl (map_zero (n08_oddCircleProjection hS)))))
 
 theorem n08_stateProjection_nuDirection (hS : IsPhysicalSpaces D T S) (a : ℝ) :
-    n08_stateProjection hS (0, a, 0, 0) = (0, a, 0, 0) := by
-  simp only [n08_stateProjection_apply, map_zero]
+    n08_stateProjection hS (0, a, 0, 0) = (0, a, 0, 0) :=
+  (n08_stateProjection_apply hS _).trans
+    (Prod.ext rfl (Prod.ext rfl (Prod.ext
+      (map_zero (circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ))))
+      (map_zero (n08_oddCircleProjection hS)))))
 
 theorem n08_stateProjection_heightDirection (hS : IsPhysicalSpaces D T S)
-    (u : HeightPair S) : n08_stateProjection hS (u, 0, 0, 0) = (u, 0, 0, 0) := by
-  simp only [n08_stateProjection_apply, map_zero]
+    (u : HeightPair S) : n08_stateProjection hS (u, 0, 0, 0) = (u, 0, 0, 0) :=
+  (n08_stateProjection_apply hS _).trans
+    (Prod.ext rfl (Prod.ext rfl (Prod.ext
+      (map_zero (circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ))))
+      (map_zero (n08_oddCircleProjection hS)))))
 
 theorem n08_stateU_projection (hS : IsPhysicalSpaces D T S) (x : AnnularState S) :
     stateU S (n08_stateProjection hS x) = stateU S x := rfl
 
 theorem n08_stateKappa_projection (hS : IsPhysicalSpaces D T S)
     (x : AnnularState S) (m : ℕ) :
-    stateKappa S (n08_stateProjection hS x) m = stateKappa S x m := by
-  let hCM := hS.2.1 (3 / 4 : ℝ)
-  change angularMean ((S.circle (3 / 4 : ℝ)).decode
-    (circleAngularMeanProjection hCM x.2.2.1) m) =
-      angularMean ((S.circle (3 / 4 : ℝ)).decode x.2.2.1 m)
-  rw [← circleAngularMeanProjection_decode hCM
-    (circleAngularMeanProjection hCM x.2.2.1) m 0,
-    circleAngularMeanProjection_idempotent, circleAngularMeanProjection_decode]
+    stateKappa S (n08_stateProjection hS x) m = stateKappa S x m :=
+  n08_mean_projection_preserves_mean (S.circle (3 / 4 : ℝ)).decode
+    (circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ)))
+    (circleAngularMeanProjection_decode (hS.2.1 (3 / 4 : ℝ))) x.2.2.1 m
 
 theorem n08_stateProfile_projection (hS : IsPhysicalSpaces D T S)
     (C : NonlinearGeometryData S) (x : AnnularState S) :

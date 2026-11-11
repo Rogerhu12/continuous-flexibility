@@ -73,7 +73,7 @@ theorem n08_polarDiscriminant_radialFamily {w h : ℝ → ℝ}
       (hu.differentiable (by simp)),
     Radial.heightRadial_radialHeightField hhw,
     Radial.heightAngular_radialHeightField hhw]
-  simp only [Radial.radialHeightField, heightDiscriminant, profileEnergy,
+  simp only [heightFamily, Radial.radialHeightField, heightDiscriminant, profileEnergy,
     radialEnergy, heightRadial, zero_add]
 
 theorem n08_normalizedHeightResidual_eq_finiteFormula {w h : ℝ → ℝ}
