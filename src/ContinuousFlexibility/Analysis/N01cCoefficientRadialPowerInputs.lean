@@ -149,7 +149,8 @@ theorem coefficientRadialInput_powerBounds
       refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
       obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
       simpa only [Real.norm_eq_abs, coefficientRadialInputJets, Fin.cases_succ, Fin.cases_zero,
-        L, ContinuousLinearMap.coe_fst', mul_assoc, mul_left_comm, mul_comm] using hb m r hr hm z hz v
+        SmoothDirections.congr, L, ContinuousLinearMap.coe_fst',
+        mul_assoc, mul_left_comm, mul_comm] using hb m r hr hm z hz v
     · obtain ⟨B, A, hB0, hA0, hb⟩ :=
         stateInverseProfileRadialJetSmoothDirections_material_bound
           hS hT hA hD hχ hε hB hE hloc hχloc n k hk
