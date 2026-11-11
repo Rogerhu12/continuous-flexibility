@@ -25,7 +25,7 @@ radius zero, so this statement does not depend on endpoint representatives. -/
 theorem n07b_c2_continuous_referencePDE {D : ReferenceData}
     (hgeom : RadialProfileGeometry D) {u : PolarPoint → ℝ}
     (hu : ContDiff ℝ 2 u) :
-    Continuous (fun p => radialPDE D.w (fun r θ => u (r, θ)) p.1 p.2) := by
+    Continuous (fun p : PolarPoint => radialPDE D.w (fun r θ => u (r, θ)) p.1 p.2) := by
   have hwr : Continuous (deriv D.w) :=
     (contDiff_infty_iff_deriv.mp hgeom.2.2.1.1).2.continuous
   have hr : Continuous (radialPartial u) := by
@@ -141,7 +141,7 @@ theorem n07b_referenceGraph_of_material_decay {D : ReferenceData} {T : MaterialD
     (M₀ M₁ : ℝ) : ReferenceGraph D γ M₀ M₁ (u, μ) (f, 0) := by
   have hgeom : RadialProfileGeometry D := hD.choose_spec.1
   have hopen : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
-  have hforcing : Continuous (fun p =>
+  have hforcing : Continuous (fun p : PolarPoint =>
       radialPDE D.w (fun r θ => u (r, θ)) p.1 p.2 +
         μ * referenceColumn D p.1 * cosineMode 2 p.2) := by
     have hQ := (n07b_referenceGraph_column_continuous hgeom hborder).const_mul μ
