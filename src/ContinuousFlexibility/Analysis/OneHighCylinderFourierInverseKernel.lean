@@ -96,6 +96,7 @@ theorem cylinderFourierInverse_eq_integral_modes {G : ℝ × ℤ → ℂ}
   rw [integral_prod_symm _ (integrable_cylinderInverseCharacter_mul hG p)]
   apply integral_congr_ae
   exact Eventually.of_forall fun n => by
+    dsimp only
     rw [real_fourierInv_eq_integral_character, ← integral_mul_const]
     apply integral_congr_ae
     exact Eventually.of_forall fun ξ => by
@@ -159,6 +160,7 @@ theorem cylinderFourierInverse_fourier (f : ℝ × AddCircle P → ℂ) (hf : Co
   have hs := circleFourierSeries_hasSum_apply
     (integrable_count_iff.mp (integrable_cylinderInverse_modes hi p.1)) p.2
   exact hs.unique (by
-    simpa only [smul_eq_mul] using cylinder_hasSum_inverse_modes f hf hL2 hF1 p.1 p.2)
+    simpa only [smul_eq_mul, cylinderFourier] using
+      cylinder_hasSum_inverse_modes f hf hL2 hF1 p.1 p.2)
 
 end ContinuousFlexibility.Analysis

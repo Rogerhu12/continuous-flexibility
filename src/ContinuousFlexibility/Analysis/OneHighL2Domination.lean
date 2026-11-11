@@ -52,7 +52,8 @@ theorem oneHigh_l2_finite_domination
     rwa [ENNReal.toReal_sum (fun i _ => hnfin i)] at h
   have hscale (i : ι) :
       (eLpNorm (N i) 2 μ).toReal = C i * (eLpNorm (u i) 2 μ).toReal := by
-    rw [N, eLpNorm_const_smul, Real.enorm_of_nonneg (hC i),
+    dsimp only [N]
+    rw [eLpNorm_const_smul, Real.enorm_of_nonneg (hC i),
       eLpNorm_norm _ (hu i).aestronglyMeasurable,
       ENNReal.toReal_mul, ENNReal.toReal_ofReal (hC i)]
   calc

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.OneHighCircleInverseGeometry
 import Mathlib.Analysis.Calculus.IteratedDeriv.WithinZpow
+import Mathlib.Algebra.Ring.Periodic
 
 /-!
 # Actual derivatives of the reciprocal derivative defect

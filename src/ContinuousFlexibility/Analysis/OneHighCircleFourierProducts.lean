@@ -25,12 +25,28 @@ theorem circle_enorm_fourierCoeff_prod_le_positiveConvolution (k : ℕ)
     ‖fourierCoeff (∏ i, f i) n‖ₑ ≤
       positiveConvolution Measure.count k (fun i m => ‖fourierCoeff (f i) m‖ₑ) n := by
   induction k generalizing n with
-  | zero => simp only [Fin.prod_univ_one, positiveConvolution_zero, le_refl]
+  | zero =>
+      have he : (∏ i : Fin 1, (f i : AddCircle P → ℂ)) = (f 0 : AddCircle P → ℂ) := by
+        funext θ
+        simp only [Finset.prod_apply, Fin.prod_univ_one]
+      rw [he, positiveConvolution_zero]
   | succ k ih =>
       rw [Fin.prod_univ_succ,
         positiveConvolution_succ k (fun i => measurable_of_countable _)]
-      apply (circle_enorm_fourierCoeff_mul_le_lconvolution (f 0)
-        (∏ i : Fin (k + 1), f i.succ) (hf 0) n).trans
+      have htail : ((∏ i : Fin (k + 1), f i.succ : C(AddCircle P, ℂ)) :
+          AddCircle P → ℂ) = ∏ i : Fin (k + 1), (f i.succ : AddCircle P → ℂ) := by
+        funext θ
+        simp only [ContinuousMap.prod_apply, Finset.prod_apply]
+      have hprod : ((f 0 * ∏ i : Fin (k + 1), f i.succ : C(AddCircle P, ℂ)) :
+          AddCircle P → ℂ) =
+          (f 0 : AddCircle P → ℂ) * ∏ i : Fin (k + 1), (f i.succ : AddCircle P → ℂ) := by
+        funext θ
+        simp only [ContinuousMap.mul_apply, ContinuousMap.prod_apply,
+          Pi.mul_apply, Finset.prod_apply]
+      have hbin := circle_enorm_fourierCoeff_mul_le_lconvolution (f 0)
+        (∏ i : Fin (k + 1), f i.succ) (hf 0) n
+      rw [hprod, htail] at hbin
+      apply hbin.trans
       rw [lconvolution_def, lconvolution_def]
       apply lintegral_mono
       intro m

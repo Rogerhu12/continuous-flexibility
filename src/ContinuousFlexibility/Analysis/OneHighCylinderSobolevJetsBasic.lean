@@ -18,7 +18,7 @@ open MeasureTheory
 open scoped ENNReal
 
 /-- A continuous mixed derivative tower on the full physical cylinder. -/
-structure CylinderSmoothJet (P : ℝ) (E : Type* := ℂ)
+structure CylinderSmoothJet (P : ℝ) (E : Type := ℂ)
     [NormedAddCommGroup E] [NormedSpace ℝ E] where
   jet : ℕ → ℕ → (ℝ × AddCircle P) → E
   continuous : ∀ i j, Continuous (jet i j)

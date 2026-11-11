@@ -155,7 +155,7 @@ theorem circleFlow_angularJets_le_bound {G Θ : PolarPoint → ℝ} {a b P : ℝ
         (fun k hk hkN η => by simpa only [Real.norm_eq_abs] using hspeed r hr k hk hkN η)
         (fun k hk hkN η => by
           simpa only [Real.norm_eq_abs] using hprevious r hr k hk (by omega) η) θ
-      simpa only [Real.norm_eq_abs] using hc
+      simpa only [Real.norm_eq_abs, Function.comp_def, D] using hc
     have hinitial : |iteratedDeriv (N + 1) (id : ℝ → ℝ) θ| ≤ 1 := by
       rw [iteratedDeriv_id, if_neg (Nat.succ_ne_zero N)]
       split_ifs <;> norm_num
