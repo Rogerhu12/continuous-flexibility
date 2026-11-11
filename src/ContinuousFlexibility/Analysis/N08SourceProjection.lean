@@ -87,6 +87,13 @@ def n08SourceProjection_smoothDirections (hS : IsPhysicalSpaces D T S)
     SmoothDirections U (fun x => n08SourceProjection hS (f x)) :=
   solveSmoothDirectionsPostcomp J (n08SourceProjection hS)
 
+theorem n08SourceProjection_postcompose_uniformTameGerm (hS : IsPhysicalSpaces D T S)
+    {p : ℕ → Seminorm ℝ X} (hp : Monotone p) (ht : WithSeminorms p) {x0 : X}
+    (hf : UniformTameGerm p (S.height (3 / 4 : ℝ)).grading x0 f) :
+    UniformTameGerm p S.sourceGrading x0 (fun x => n08SourceProjection hS (f x)) := by
+  obtain ⟨loss, base, hP⟩ := n08SourceProjection_isTame hS
+  exact hf.postcompose hp ht (n08SourceProjection hS) hP
+
 theorem n08SourceProjection_postcompose_smoothTame (hS : IsPhysicalSpaces D T S)
     {p : ℕ → Seminorm ℝ X} (hp : Monotone p) (ht : WithSeminorms p)
     (hf : SmoothTameOn p (S.height (3 / 4 : ℝ)).grading U f) :

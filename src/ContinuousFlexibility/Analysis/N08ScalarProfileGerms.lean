@@ -116,7 +116,8 @@ theorem n08ProfileDiscriminant_zero_of_q
     (m : (S.height γ).Space) (x : ScalarWeightedState S) (hq : x.2 = 0) :
     n08ProfileDiscriminant hD hT hS hγ m x = 0 := by
   have hw0 : n08ProfileWAct hD hT hS hγ m 0 = 0 := by
-    simp only [n08ProfileWAct, n08MixedWeightAction_zero_right, add_zero, map_zero]
+    rw [n08ProfileWAct, n08MixedWeightAction_zero_right, add_zero]
+    exact (scalarReferenceWCLM hD hT hS).map_zero
   have he0 : n08ProfileEnergyAct hD hT hS hγ m 0 = 0 := by
     rw [n08ProfileEnergyAct, hw0, hw0, add_zero]
   simp only [n08ProfileDiscriminant, scalarStateRadialHeight, scalarStateAngularSquare,

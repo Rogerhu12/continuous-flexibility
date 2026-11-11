@@ -36,7 +36,7 @@ theorem n08_scalarTrajectory_unique {a b K : ℝ} (hab : a ≤ b)
         (Real.exp (-(2 * K) * t) * (-(2 * K))) t := by
       simpa only [mul_one, id_eq] using ((hasDerivAt_id t).const_mul (-(2 * K))).exp
     convert (((hdf t ht).sub (hdg t ht)).pow 2).mul hexp using 1 <;>
-      dsimp only [E, E'] <;> ring
+      simp only [E, E', Pi.sub_apply, Pi.pow_apply] <;> ring
   have hnonpos (t : ℝ) (ht : t ∈ Ioo a b) : E' t ≤ 0 := by
     have habs := mul_le_mul_of_nonneg_left (hbound t ht) (abs_nonneg (f t - g t))
     have hsquare : |f t - g t| * |f t - g t| = (f t - g t) ^ 2 := by

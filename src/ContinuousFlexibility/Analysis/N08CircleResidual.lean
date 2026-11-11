@@ -59,23 +59,32 @@ theorem n08_returnResidual_mem_even
   rw [hR.2.1 z hz hs m (-θ), hR.2.1 z hz hs m θ]
   exact n08_returnResidualField_even hR hz hs m θ
 
+private def guardedSubtype {E : Type*} {P : E → Prop} (p : Prop) (v : E)
+    (hv : p → P v) (fallback : Subtype P) : Subtype P := by
+  classical
+  exact if hp : p then ⟨v, hv hp⟩ else fallback
+
+private theorem guardedSubtype_val {E : Type*} {P : E → Prop} (p : Prop) (v : E)
+    (hv : p → P v) (fallback : Subtype P) (hp : p) :
+    (guardedSubtype p v hv fallback).val = v := by
+  classical
+  simp only [guardedSubtype, dite_eq_left hp]
+
 /-- The physical projection gives a representative on an open domain in
 the full state space. Arbitrary control directions are retained through
 their angular means. -/
 def n08CircleResidual (hS : IsPhysicalSpaces D T S)
-    (hR : N02Properties D T S C R base ε) (z : AnnularState S × ℝ) : EvenCircle S := by
-  classical
-  exact if hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε then
-    ⟨R.residual (n08_stateProjection hS z.1, z.2),
-      n08_returnResidual_mem_even hR hz (n08_stateProjection_mem hS z.1)⟩
-  else 0
+    (hR : N02Properties D T S C R base ε) (z : AnnularState S × ℝ) : EvenCircle S :=
+  guardedSubtype
+    ((n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε)
+    (R.residual (n08_stateProjection hS z.1, z.2))
+    (fun hz => n08_returnResidual_mem_even hR hz (n08_stateProjection_mem hS z.1)) 0
 
 theorem n08CircleResidual_projected_coe (hS : IsPhysicalSpaces D T S)
     (hR : N02Properties D T S C R base ε) {z : AnnularState S × ℝ}
     (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε) :
-    (n08CircleResidual hS hR z).val = R.residual (n08_stateProjection hS z.1, z.2) := by
-  unfold n08CircleResidual
-  rw [dif_pos hz]
+    (n08CircleResidual hS hR z).val = R.residual (n08_stateProjection hS z.1, z.2) :=
+  guardedSubtype_val _ _ _ _ hz
 
 theorem n08CircleResidual_coe (hS : IsPhysicalSpaces D T S)
     (hR : N02Properties D T S C R base ε)

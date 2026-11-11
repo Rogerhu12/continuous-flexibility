@@ -23,7 +23,8 @@ private def n08_heightParameterCLM : ((E × ℝ) × F) × ℝ →L[ℝ] ((E × E
   map_add' x y := by
     simp only [Prod.fst_add, Prod.snd_add, Prod.mk_add_mk, zero_add]
   map_smul' c x := by
-    simp only [Prod.smul_mk, Prod.fst_smul, Prod.snd_smul, smul_zero]
+    rcases x with ⟨⟨⟨u, a⟩, v⟩, q⟩
+    simp only [Prod.smul_mk, smul_zero, RingHom.id_apply]
   cont := ((continuous_const.prodMk continuous_fst.fst.fst).prodMk
     continuous_fst.fst.snd).prodMk continuous_snd
 
@@ -36,7 +37,7 @@ private theorem n08_heightParameterCLM_tame
   refine ⟨1, fun z => ?_⟩
   change ((p s 0 + p s z.1.1.1) + |z.1.1.2|) + |z.2| ≤
     (1 : ℝ) * ((p (s + 0) z.1.1.1 + |z.1.1.2| + q (s + 0) z.1.2) + |z.2|)
-  simp only [map_zero, zero_add, NNReal.coe_one, one_mul, Nat.add_zero]
+  simp only [map_zero, zero_add, one_mul, Nat.add_zero]
   have hq := apply_nonneg (q s) z.1.2
   linarith
 

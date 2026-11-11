@@ -22,6 +22,8 @@ open Set Filter
 open ContinuousFlexibility.Analysis
 open scoped Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 private theorem add_smul_middle_coordinate {E F : Type*}
     [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
     (x : E × (ℝ × F)) (t : ℝ) :
@@ -52,11 +54,12 @@ def n08NuDirection (S : PhysicalSpacesData) : AnnularState S :=
   (0, ((1 : ℝ), (0, 0)))
 
 theorem n08_add_smul_nuDirection (x : AnnularState S) (t : ℝ) :
-    x + t • n08NuDirection S = (x.1, (x.2.1 + t, x.2.2)) :=
+    x + (t • n08NuDirection S : AnnularState S) = (x.1, (x.2.1 + t, x.2.2)) :=
   add_smul_middle_coordinate x t
 
 theorem n08_stateSector_add_nuDirection {x : AnnularState S}
-    (hx : stateSector S x) (t : ℝ) : stateSector S (x + t • n08NuDirection S) := by
+    (hx : stateSector S x) (t : ℝ) :
+    stateSector S (x + (t • n08NuDirection S : AnnularState S)) := by
   rw [n08_add_smul_nuDirection]
   exact hx
 
@@ -77,7 +80,7 @@ theorem n08_decode_nuDerivative
     (S.height (3 / 4 : ℝ)).decode v.val p = nuColumnField D S C z p := by
   have hdpoint : HasDerivAt
       (fun t : ℝ => (S.height (3 / 4 : ℝ)).decode
-        (f (z.1 + t • n08NuDirection S, z.2)).val p)
+        (f (z.1 + (t • n08NuDirection S : AnnularState S), z.2)).val p)
       ((S.height (3 / 4 : ℝ)).decode v.val p) 0 := by
     simpa only [Submodule.subtypeL_apply] using
       sobolev_decode_hasDerivAt_of_projectiveLineDerivAt
@@ -85,11 +88,11 @@ theorem n08_decode_nuDerivative
         ((hS.1 (3 / 4 : ℝ)).2.2.1) (hd.clm_comp S.Q.toLinearMap.ker.subtypeL) p
   have hnear := eventually_mem_affine_line hU hz (n08NuDirection S, (0 : ℝ))
   have heq : (fun t : ℝ => scalarResidualField D S C
-      (z.1 + t • n08NuDirection S, z.2) p) =ᶠ[𝓝 0]
+      (z.1 + (t • n08NuDirection S : AnnularState S), z.2) p) =ᶠ[𝓝 0]
       (fun t : ℝ => (S.height (3 / 4 : ℝ)).decode
-        (f (z.1 + t • n08NuDirection S, z.2)).val p) := by
+        (f (z.1 + (t • n08NuDirection S : AnnularState S), z.2)).val p) := by
     filter_upwards [hnear] with t ht
-    have ht' : (z.1 + t • n08NuDirection S, z.2) ∈ U := by
+    have ht' : (z.1 + (t • n08NuDirection S : AnnularState S), z.2) ∈ U := by
       simpa only [add_smul_fixed_parameter] using ht
     exact (hdecode _ ht' (n08_stateSector_add_nuDirection hs t) p hp).symm
   have hreal := (hdpoint.congr_of_eventuallyEq heq).deriv

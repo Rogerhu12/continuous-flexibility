@@ -21,6 +21,18 @@ open scoped Topology BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
+private theorem n08_sum_smul_clm_apply {E I : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (s : Finset I) (a : I → ℝ) (L : I → E →L[ℝ] ℝ) (x : E) :
+    (∑ i ∈ s, a i • L i) x = ∑ i ∈ s, a i * L i x := by
+  simp only [sum_apply, smul_apply, smul_eq_mul]
+
+private theorem n08_clm_affine {E : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (L : E →L[ℝ] ℝ) (x v : E) (t : ℝ) :
+    L (x + (t • v : E)) = L x + t * L v := by
+  rw [map_add, map_smul, smul_eq_mul]
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S}
 
@@ -60,7 +72,7 @@ theorem n08_stateKappa_add (hS : IsPhysicalSpaces D T S)
 
 theorem n08_stateKappa_smul (hS : IsPhysicalSpaces D T S)
     (a : ℝ) (x : AnnularState S) (m : ℕ) :
-    stateKappa S (a • x) m = a * stateKappa S x m := by
+    stateKappa S (a • x : AnnularState S) m = a * stateKappa S x m := by
   simpa only [n08_stateKappaEvalCLM_apply, smul_eq_mul] using
     (n08_stateKappaEvalCLM hS m).map_smul a x
 
@@ -100,9 +112,14 @@ def n08_stateControlEvalCLM (hS : IsPhysicalSpaces D T S)
 theorem n08_stateControlEvalCLM_apply (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (r : ℝ) (x : AnnularState S) :
     n08_stateControlEvalCLM hS hC r x = stateControlSum C x r := by
-  rw [n08_stateControlSum_eq_sum hC]
-  simp only [n08_stateControlEvalCLM, ContinuousLinearMap.sum_apply,
-    ContinuousLinearMap.smul_apply, smul_eq_mul, n08_stateKappaEvalCLM_apply]
+  calc
+    _ = ∑ m ∈ n08_controlActive hC r, C.control m r * n08_stateKappaEvalCLM hS m x :=
+      n08_sum_smul_clm_apply (n08_controlActive hC r) (fun m => C.control m r)
+        (n08_stateKappaEvalCLM hS) x
+    _ = _ := by
+      rw [n08_stateControlSum_eq_sum hC]
+      exact Finset.sum_congr rfl (fun m _ =>
+        congrArg (fun a : ℝ => C.control m r * a) (n08_stateKappaEvalCLM_apply hS m x))
 
 /-- The literal logarithmic perturbation used in `stateProfile`. -/
 def n08_stateLogProfile (D : ReferenceData) (S : PhysicalSpacesData)
@@ -135,15 +152,16 @@ theorem n08_logProfilePointwiseCLM_apply (hS : IsPhysicalSpaces D T S)
 
 theorem n08_stateLogProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    n08_stateLogProfile D S C (x + t • v) r =
+    n08_stateLogProfile D S C (x + (t • v : AnnularState S)) r =
       n08_stateLogProfile D S C x r + t * n08_stateLogProfile D S C v r := by
-  simp only [← n08_logProfileEvalCLM_apply hS hC, map_add, map_smul, smul_eq_mul]
+  simpa only [n08_logProfileEvalCLM_apply] using
+    n08_clm_affine (n08_logProfileEvalCLM hS hC r) x v t
 
 theorem n08_stateProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    stateProfile D S C (x + t • v) r =
+    stateProfile D S C (x + (t • v : AnnularState S)) r =
       stateProfile D S C x r * Real.exp (t * n08_stateLogProfile D S C v r) := by
-  change D.w r * Real.exp (n08_stateLogProfile D S C (x + t • v) r) =
+  change D.w r * Real.exp (n08_stateLogProfile D S C (x + (t • v : AnnularState S)) r) =
     (D.w r * Real.exp (n08_stateLogProfile D S C x r)) *
       Real.exp (t * n08_stateLogProfile D S C v r)
   rw [n08_stateLogProfile_affine hS hC, Real.exp_add, mul_assoc]
@@ -152,7 +170,7 @@ theorem n08_stateProfile_affine (hS : IsPhysicalSpaces D T S)
 including every circle direction and every state outside the sector. -/
 theorem n08_stateProfile_hasDerivAt (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (r : ℝ) :
-    HasDerivAt (fun t : ℝ => stateProfile D S C (x + t • v) r)
+    HasDerivAt (fun t : ℝ => stateProfile D S C (x + (t • v : AnnularState S)) r)
       (stateProfile D S C x r * n08_stateLogProfile D S C v r) 0 := by
   have h : HasDerivAt
       (fun t : ℝ => Real.exp (t * n08_stateLogProfile D S C v r))

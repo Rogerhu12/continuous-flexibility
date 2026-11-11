@@ -47,7 +47,7 @@ theorem n08_coefficientA_state_hasDerivAt (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
     (x v : AnnularState S) (p : PolarPoint) :
     HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 0 0 p (x + t • v, 0))
+      (fun t : ℝ => coefficientFamily D S C 0 0 0 p (x + (t • v : AnnularState S), 0))
       (stateProfile D S C x p.1 * n08_stateLogProfile D S C v p.1) 0 := by
   simpa only [n08_coefficientFamily_zero_zeroParameter hT hS hN] using
     (n08_stateProfile_hasDerivAt hS hN.2.2.2.1 x v p.1).sub_const (D.w p.1)
@@ -58,10 +58,11 @@ private theorem n08_reference_mem (hε : 0 < ε) :
   · simpa only [sub_self, map_zero] using hε
   · simpa only [abs_zero] using hε
 
-private theorem n08_oneHigh_first_at_zero (v : AnnularState S) :
-    oneHighVariationWeight (pairGrading (stateGrading S) realGrading) base loss
-      (0 : AnnularState S × ℝ) (Fin.cons (v, 0) Fin.elim0) =
-      stateGrading S base v + stateGrading S loss v := by
+private theorem n08_oneHigh_first_at_zero
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (base high : ℕ) (v : E) :
+    oneHighVariationWeight (pairGrading p realGrading) base high
+      (0 : E × ℝ) (Fin.cons (v, 0) Fin.elim0) = p base v + p high v := by
   simp [oneHighVariationWeight, pairGrading, realGrading]
 
 /-- An actual position-dependent bound for every logarithmic state direction.
@@ -83,12 +84,12 @@ theorem n08_logProfile_reference_coefficient_bound (hT : IsMaterialData D T)
   have hline := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain hz (v, 0)
   have hd : HasDerivAt
       (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0)
-        ((C.referenceState, 0) + t • (v, 0)))
+        ((C.referenceState, 0) + (t • (v, 0) : AnnularState S × ℝ)))
       (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 :=
     hasDerivAt_iff_tendsto_slope_zero.mpr hline
   have ha := n08_coefficientA_state_hasDerivAt hT hS hN C.referenceState v (r, 0)
   have hd' : HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0) (C.referenceState + t • v, 0))
+      (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0) (C.referenceState + (t • v : AnnularState S), 0))
       (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 := by
     simpa only [Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero] using hd
   have hvalue : J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0) =
