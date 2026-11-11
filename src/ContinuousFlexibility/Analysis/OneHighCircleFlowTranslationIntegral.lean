@@ -58,10 +58,13 @@ theorem circleFlowTranslationJet_integral_eq {c : ℝ → ℝ}
       (fun r => circleFlowComposedSpeedJet hG hperiod hΘ hinit hflow r n) volume a t :=
     ((continuousOn_circleFlowComposedSpeedJet hG hperiod hΘ hinit hflow n).mono
       (Icc_subset_Icc le_rfl ht.2)).intervalIntegrable_of_Icc ht.1
+  let ev : C(AddCircle P, ℝ) →L[ℝ] ℝ := ContinuousMap.evalCLM ℝ x
+  have hev : IntervalIntegrable
+      (fun r => ev (circleFlowComposedSpeedJet hG hperiod hΘ hinit hflow r n)) volume a t :=
+    ⟨ev.integrable_comp hf.1, ev.integrable_comp hf.2⟩
   have hfe : IntervalIntegrable
-      (fun r => circleFlowComposedSpeedJet hG hperiod hΘ hinit hflow r n x) volume a t :=
-    ⟨(ContinuousMap.evalCLM ℝ x).integrable_comp hf.1,
-      (ContinuousMap.evalCLM ℝ x).integrable_comp hf.2⟩
+      (fun r => circleFlowComposedSpeedJet hG hperiod hΘ hinit hflow r n x) volume a t := by
+    simpa only [ev, ContinuousMap.evalCLM_apply] using hev
   have hbase := circleFlowDisplacementJet_integral_eq hG hperiod hΘ hinit hflow ht n x
   simp only [circleFlowTranslationJet, circleSubtractConstantJet_apply]
   by_cases hn : n = 0

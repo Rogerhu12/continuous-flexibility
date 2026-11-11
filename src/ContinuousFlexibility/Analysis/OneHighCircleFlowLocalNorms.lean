@@ -88,6 +88,7 @@ theorem continuousOn_circleFlowLocalSpeedSobolevNorm (hab : a ≤ b) (s k : ℕ)
       (circleFlowLocalizedSpeed_periodic hab hε hperiod) s k).continuousOn
   apply h.congr
   intro t ht
+  dsimp only
   rw [circleFlowSpeedJet_localized_eq hε hG hperiod hab ht k]
 
 theorem intervalIntegrable_circleFlowLocalSpeedSobolevNorm
@@ -105,6 +106,7 @@ theorem circleFlowLambda_localized_eq (hab : a ≤ b) (s : ℕ) :
   apply intervalIntegral.integral_congr
   intro t ht
   have ht' : t ∈ Icc a b := by simpa only [uIcc_of_le hab] using ht
+  dsimp only
   rw [circleFlowSpeedJet_localized_eq hε hG hperiod hab ht' 1]
 
 theorem circleFlowReferenceSize_localized_eq (hab : a ≤ b)
@@ -123,6 +125,7 @@ theorem circleFlowReferenceSize_localized_eq (hab : a ≤ b)
         (circleFlowLocalizedSpeed_periodic hab hε hperiod) t =
       circleFlowLocalSpeedJet hε hG hperiod t :=
     funext (circleFlowSpeedJet_localized_eq hε hG hperiod hab ht')
+  dsimp only
   rw [hjet]
 
 end ContinuousFlexibility.Analysis

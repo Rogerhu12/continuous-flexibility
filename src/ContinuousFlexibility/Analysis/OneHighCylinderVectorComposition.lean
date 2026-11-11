@@ -114,8 +114,8 @@ theorem cylinder_vector_composition_sobolev_le
   refine ⟨hw2, hsob.1, ?_⟩
   by_cases hs0 : s = 0
   · subst s
-    simpa only [cylinderVectorCompositionConstant, if_pos rfl, Nat.cast_zero,
-      cylinder_real_sobolevNorm_zero_eq_l2, H] using hbase
+    simpa [cylinderVectorCompositionConstant,
+      cylinder_real_sobolevNorm_zero_eq_l2, H, w] using hbase
   · have hrhigh :
         (eLpNorm (cylinderRadialJet w s) 2 (cylinderPhysicalMeasure P)).toReal ≤
           circleVectorCompositionCoefficient m s R B * H := by

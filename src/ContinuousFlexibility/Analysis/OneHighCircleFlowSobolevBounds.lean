@@ -144,7 +144,7 @@ theorem circleFlow_defect_sobolev_le (s : ℕ) {t : ℝ} (ht : t ∈ Icc a b) :
     Real.exp_le_exp.mpr (mul_le_mul_of_nonneg_left hthree hK)
   calc
     u t ≤ (K * ∫ r in a..t, A s r) * Real.exp (K * ∫ r in a..t, A 3 r) := by
-      simpa only [zero_add, intervalIntegral.integral_const_mul] using hgronwall
+      simpa only [zero_add, Pi.mul_def, Pi.mul_apply, K, intervalIntegral.integral_const_mul] using hgronwall
     _ ≤ (K * circleFlowLambda G hG hperiod s a b) * Real.exp (K * L) :=
       mul_le_mul (mul_le_mul_of_nonneg_left (hshort s) hK) hexp (Real.exp_pos _).le
         (mul_nonneg hK (circleFlowLambda_nonneg G hG hperiod s (ht.1.trans ht.2)))

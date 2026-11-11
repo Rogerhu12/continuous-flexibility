@@ -75,6 +75,7 @@ theorem circleFlow_hasDerivAt_angle_local {t : ℝ} (ht : t ∈ Icc a b) (θ : �
     intro r hr
     have hr' : r ∈ Icc a t := by simpa only [uIcc_of_le ht.1] using hr
     have hrab : r ∈ Icc a b := ⟨hr'.1, hr'.2.trans ht.2⟩
+    dsimp only
     rw [← deriv_cylinder_angular_slice (hg.differentiable (by simp)) r (Θ (r, θ)),
       circleFlowLocalizedSpeed_slice_eq hab hε hrab]
   have h := circleFlow_hasDerivAt_angle hg hP.out hp hΘ hinit hf ht θ
