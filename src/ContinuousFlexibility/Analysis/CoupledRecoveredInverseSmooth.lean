@@ -122,8 +122,7 @@ private abbrev coupledRegularParameterGrading (S : PhysicalSpacesData) :
     ℕ → Seminorm ℝ (StateDirections S × ℝ) :=
   pairGrading (sectorGrading S) realGrading
 
-private abbrev coupledRegularInputGrading (S : PhysicalSpacesData) :
-    ℕ → Seminorm ℝ ((StateDirections S × ℝ) × ResidualSpace S) :=
+private abbrev coupledRegularInputGrading (S : PhysicalSpacesData) :=
   pairGrading (coupledRegularParameterGrading S) (residualGrading S)
 
 private theorem coupled_regular_gradings (S : PhysicalSpacesData) :

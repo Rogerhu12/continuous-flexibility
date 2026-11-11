@@ -124,6 +124,34 @@ private theorem coupled_pair_real_grading_apply
   simp only [pairGrading, realGrading, add_apply, Seminorm.comp_apply,
     LinearMap.fst_apply, LinearMap.snd_apply, coe_normSeminorm, Real.norm_eq_abs]
 
+private theorem coupled_uniformTameGerm_productNeighborhood
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F} {f : E × ℝ → F}
+    (hp : Monotone p) (ht : WithSeminorms p)
+    (hf : UniformTameGerm (pairGrading p realGrading) q (0 : E × ℝ) f)
+    (base : ℕ) {ε : ℝ} (hε : 0 < ε) :
+    ∃ b : ℕ, ∃ δ : ℝ, base ≤ b ∧ 0 < δ ∧ δ ≤ ε ∧
+      SmoothTameOn (pairGrading p realGrading) q
+        {z : E × ℝ | p b z.1 < δ ∧ |z.2| < δ} f := by
+  obtain ⟨b, ell, τ, hτ, hfixed⟩ := hf
+  have hδ : 0 < min ε (τ / 2) := lt_min hε (half_pos hτ)
+  have hV : IsOpen {z : E × ℝ |
+      p (max base b) z.1 < min ε (τ / 2) ∧ |z.2| < min ε (τ / 2)} :=
+    (isOpen_lt ((ht.continuous_seminorm (max base b)).comp continuous_fst)
+      continuous_const).inter
+      (isOpen_lt (continuous_abs.comp continuous_snd) continuous_const)
+  refine ⟨max base b, min ε (τ / 2), le_max_left _ _, hδ, min_le_left _ _,
+    (hfixed.restrict hV ?_).1⟩
+  intro z hz
+  change pairGrading p realGrading b (z - 0) < τ
+  rw [sub_zero, coupled_pair_real_grading_apply]
+  have h₁ : p b z.1 < τ / 2 :=
+    (hp (le_max_right base b) z.1).trans_lt (hz.1.trans_le (min_le_right _ _))
+  have h₂ : |z.2| < τ / 2 := hz.2.trans_le (min_le_right _ _)
+  linarith only [h₁, h₂]
+
 /-- A single smaller sector neighborhood carries the actual coefficient tower. -/
 theorem coupledScalarErrorCoefficient_smoothTameOn
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -131,26 +159,9 @@ theorem coupledScalarErrorCoefficient_smoothTameOn
     ∃ b : ℕ, ∃ δ : ℝ, base ≤ b ∧ 0 < δ ∧ δ ≤ ε ∧
       SmoothTameOn (pairGrading (sectorGrading S) realGrading) (coupledWeakHeightGrading S)
         (sectorNeighborhood S b δ δ)
-        (fun z => coupledScalarErrorCoefficient hT hS hN (liftSectorParameter S C z)) := by
-  let hgerm := coupledScalarErrorCoefficient_uniformTameGerm hT hS hN
-  let b : ℕ := hgerm.choose
-  let hbase := hgerm.choose_spec
-  let ell : ℕ := hbase.choose
-  let hloss := hbase.choose_spec
-  let τ : ℝ := hloss.choose
-  have hτ : 0 < τ := hloss.choose_spec.1
-  let hfixed := hloss.choose_spec.2
-  have hδ : 0 < min ε (τ / 2) := lt_min hN.2.1 (half_pos hτ)
-  refine ⟨max base b, min ε (τ / 2), le_max_left _ _, hδ, min_le_left _ _, ?_⟩
-  apply (hfixed.restrict
-    (coupled_sectorNeighborhood_isOpen S (max base b) (min ε (τ / 2)) (min ε (τ / 2))) ?_).1
-  intro z hz
-  change pairGrading (sectorGrading S) realGrading b (z - 0) < τ
-  rw [sub_zero, coupled_pair_real_grading_apply]
-  have h₁ : sectorGrading S b z.1 < τ / 2 :=
-    (solve_sectorGrading_monotone S (le_max_right base b) z.1).trans_lt
-      (hz.1.trans_le (min_le_right _ _))
-  have h₂ : |z.2| < τ / 2 := hz.2.trans_le (min_le_right _ _)
-  linarith only [h₁, h₂]
+        (fun z => coupledScalarErrorCoefficient hT hS hN (liftSectorParameter S C z)) :=
+  coupled_uniformTameGerm_productNeighborhood (solve_sectorGrading_monotone S)
+    (solve_sectorGrading_withSeminorms S)
+    (coupledScalarErrorCoefficient_uniformTameGerm hT hS hN) base hN.2.1
 
 end ContinuousFlexibility.Statements

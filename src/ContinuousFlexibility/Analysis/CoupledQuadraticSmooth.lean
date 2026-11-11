@@ -28,6 +28,33 @@ variable {E F Z : Type*}
   [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
   [TopologicalSpace Z] [AddCommGroup Z] [Module ℝ Z]
 
+private theorem coupled_error_fst_smoothTameOn
+    {p : ℕ → Seminorm ℝ Z} {q : ℕ → Seminorm ℝ E} {r : ℕ → Seminorm ℝ F}
+    {U : Set Z} {f : Z → E × F} (hf : SmoothTameOn p (pairGrading q r) U f) :
+    SmoothTameOn p q U (fun z => (f z).1) := by
+  exact solve_smoothTameOn_postcomp hf (ContinuousLinearMap.fst ℝ E F)
+    (B := 1) zero_le_one (fun n z => by
+      change q n z.1 ≤ 1 * (q n z.1 + r n z.2)
+      simpa only [one_mul] using le_add_of_nonneg_right (apply_nonneg (r n) z.2))
+
+private theorem coupled_error_snd_smoothTameOn
+    {p : ℕ → Seminorm ℝ Z} {q : ℕ → Seminorm ℝ E} {r : ℕ → Seminorm ℝ F}
+    {U : Set Z} {f : Z → E × F} (hf : SmoothTameOn p (pairGrading q r) U f) :
+    SmoothTameOn p r U (fun z => (f z).2) := by
+  exact solve_smoothTameOn_postcomp hf (ContinuousLinearMap.snd ℝ E F)
+    (B := 1) zero_le_one (fun n z => by
+      change r n z.2 ≤ 1 * (q n z.1 + r n z.2)
+      simpa only [one_mul] using le_add_of_nonneg_left (apply_nonneg (q n) z.1))
+
+private theorem coupled_error_subtype_smoothTameOn
+    {p : ℕ → Seminorm ℝ Z} {q : ℕ → Seminorm ℝ E}
+    (W : Submodule ℝ E) {U : Set Z} {f : Z → W}
+    (hf : SmoothTameOn p (fun n => (q n).comp W.subtype) U f) :
+    SmoothTameOn p q U (fun z => (f z).val) := by
+  exact solve_smoothTameOn_postcomp hf W.subtypeL (B := 1) zero_le_one (fun n z => by
+    change q n z.val ≤ 1 * q n z.val
+    exact le_of_eq (one_mul _).symm)
+
 private theorem coupled_error_ignore_right
     {p : ℕ → Seminorm ℝ E} (q : ℕ → Seminorm ℝ F) {r : ℕ → Seminorm ℝ Z}
     {U : Set E} {f : E → Z} (hf : SmoothTameOn p r U f) :
@@ -72,22 +99,58 @@ end Projections
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
+private abbrev coupledErrorParameterGrading (S : PhysicalSpacesData) :=
+  pairGrading (sectorGrading S) realGrading
+
+private abbrev coupledErrorSingleInputGrading (S : PhysicalSpacesData) :=
+  pairGrading (coupledErrorParameterGrading S) (residualGrading S)
+
+private abbrev coupledErrorFullInputGrading (S : PhysicalSpacesData) :=
+  pairGrading (coupledErrorSingleInputGrading S) (residualGrading S)
+
+private abbrev coupledErrorCircleParameterGrading (S : PhysicalSpacesData) :=
+  pairGrading (coupledErrorParameterGrading S) (S.circle (3 / 4 : ℝ)).grading
+
+private abbrev coupledErrorHeightActionGrading (S : PhysicalSpacesData) :=
+  pairGrading (coupledErrorCircleParameterGrading S) (heightPairGrading S)
+
+private abbrev coupledErrorCircleActionGrading (S : PhysicalSpacesData) :=
+  pairGrading (coupledErrorCircleParameterGrading S) (S.circle (3 / 4 : ℝ)).grading
+
+private theorem coupled_error_grading_facts (S : PhysicalSpacesData) :
+    Monotone (coupledErrorFullInputGrading S) ∧
+      WithSeminorms (coupledErrorFullInputGrading S) ∧
+      WithSeminorms (coupledErrorParameterGrading S) := by
+  have hp : Monotone (coupledErrorParameterGrading S) := tamePairGrading_monotone
+    (solve_sectorGrading_monotone S) weighted_realGrading_monotone
+  have htp : WithSeminorms (coupledErrorParameterGrading S) := withSeminorms_pairGrading
+    (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
+  have hr : Monotone (residualGrading S) := tamePairGrading_monotone
+    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
+    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
+  have htr : WithSeminorms (residualGrading S) := withSeminorms_pairGrading
+    (coupled_sourceGrading_withSeminorms S)
+    ((Topology.IsInducing.subtypeVal).withSeminorms
+      (f := (evenCircleSubmodule S).subtype) (withSeminorms_graded _ _))
+  exact ⟨tamePairGrading_monotone (tamePairGrading_monotone hp hr) hr,
+    withSeminorms_pairGrading (withSeminorms_pairGrading htp htr) htr, htp⟩
+
 theorem coupledQuadraticErrorData_smoothTameOn
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (C : NonlinearGeometryData S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
     (typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S)
     {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
-    (htype : SmoothTameOn (pairGrading (sectorGrading S) realGrading)
+    (htype : SmoothTameOn (coupledErrorParameterGrading S)
       (coupledWeakHeightGrading S) U
       (fun z => typeCoefficient (liftSectorParameter S C z)))
     (hheight : SmoothTameOn
-      (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+      (coupledErrorSingleInputGrading S)
       (heightPairGrading S) (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         (V.V (liftSectorParameter S C z.1) z.2).1))
     (hinverse : SmoothTameOn
-      (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+      (coupledErrorSingleInputGrading S)
       (S.circle (3 / 4 : ℝ)).grading (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         R.inverse (z.2.2.val - z.1.2 • B.heightRow (liftSectorParameter S C z.1)
@@ -95,45 +158,32 @@ theorem coupledQuadraticErrorData_smoothTameOn
           B.circleColumn (liftSectorParameter S C z.1)
             (V.V (liftSectorParameter S C z.1) z.2).2.2.1)))
     (hLerror : SmoothTameOn
-      (pairGrading (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (S.circle (3 / 4 : ℝ)).grading) (heightPairGrading S))
+      (coupledErrorHeightActionGrading S)
       S.sourceGrading ((U ×ˢ univ) ×ˢ univ)
       (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
         L.error (liftSectorParameter S C z.1.1) z.1.2 z.2))
     (hRerror : SmoothTameOn
-      (pairGrading (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (S.circle (3 / 4 : ℝ)).grading) (S.circle (3 / 4 : ℝ)).grading)
+      (coupledErrorCircleActionGrading S)
       (S.circle (3 / 4 : ℝ)).grading ((U ×ˢ univ) ×ˢ univ)
       (fun z : ((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S =>
         R.error (liftSectorParameter S C z.1.1) z.1.2 z.2)) :
     SmoothTameOn
-      (pairGrading (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (residualGrading S)) (residualGrading S))
+      (coupledErrorFullInputGrading S)
       (residualGrading S) ((U ×ˢ univ) ×ˢ univ)
       (fun z : ((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S =>
         (coupledQuadraticErrorData hD hT hS R L B V typeCoefficient).Q
           (liftSectorParameter S C z.1.1) z.1.2 z.2) := by
-  let p := pairGrading (sectorGrading S) realGrading
+  let p := coupledErrorParameterGrading S
   let r := residualGrading S
   let c := (S.circle (3 / 4 : ℝ)).grading
-  let a := pairGrading p r
-  let b := pairGrading a r
+  let a := coupledErrorSingleInputGrading S
+  let b := coupledErrorFullInputGrading S
   let W : Set (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
     (U ×ˢ univ) ×ˢ univ
-  have hp : Monotone p := tamePairGrading_monotone
-    (solve_sectorGrading_monotone S) weighted_realGrading_monotone
-  have htp : WithSeminorms p := withSeminorms_pairGrading
-    (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
-  have hr : Monotone r := tamePairGrading_monotone
-    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
-    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
-  have htr : WithSeminorms r := withSeminorms_pairGrading
-    (coupled_sourceGrading_withSeminorms S)
-    ((Topology.IsInducing.subtypeVal).withSeminorms
-      (f := (evenCircleSubmodule S).subtype) (withSeminorms_graded _ _))
-  have hb : Monotone b := tamePairGrading_monotone (tamePairGrading_monotone hp hr) hr
-  have htb : WithSeminorms b := withSeminorms_pairGrading
-    (withSeminorms_pairGrading htp htr) htr
+  have hg := coupled_error_grading_facts S
+  have hb : Monotone b := hg.1
+  have htb : WithSeminorms b := hg.2.1
+  have htp : WithSeminorms p := hg.2.2
   have htc : WithSeminorms c := withSeminorms_graded _ _
   have hW : IsOpen W := (hU.prod isOpen_univ).prod isOpen_univ
   letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
@@ -143,36 +193,13 @@ theorem coupledQuadraticErrorData_smoothTameOn
     smoothTameOn_continuousLinear_on hW
       (ContinuousLinearMap.fst ℝ ((StateDirections S × ℝ) × ResidualSpace S) (ResidualSpace S))
       (scalar_pair_fst_isTame a r)
-  have hz := solve_smoothTameOn_postcomp hzr
-    (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) (ResidualSpace S))
-    (r := p) (B := 1) zero_le_one (fun n z => by
-      change p n z.1 ≤ 1 * (p n z.1 + r n z.2)
-      simpa only [one_mul] using le_add_of_nonneg_right (apply_nonneg (r n) z.2))
-  have hs := solve_smoothTameOn_postcomp hzr
-    (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) (ResidualSpace S))
-    (r := r) (B := 1) zero_le_one (fun n z => by
-      change r n z.2 ≤ 1 * (p n z.1 + r n z.2)
-      simpa only [one_mul] using le_add_of_nonneg_left (apply_nonneg (p n) z.1))
-  have hq := solve_smoothTameOn_postcomp hz
-    (ContinuousLinearMap.snd ℝ (StateDirections S) ℝ)
-    (r := realGrading) (B := 1) zero_le_one (fun n z => by
-      change realGrading n z.2 ≤ 1 * (sectorGrading S n z.1 + realGrading n z.2)
-      simpa only [one_mul] using
-        le_add_of_nonneg_left (apply_nonneg (sectorGrading S n) z.1))
-  let source : ResidualSpace S →L[ℝ] ScalarHeightSpace S :=
-    S.Q.toLinearMap.ker.subtypeL.comp (ContinuousLinearMap.fst ℝ S.Source (EvenCircle S))
-  have hsource := solve_smoothTameOn_postcomp hs source
-    (r := scalarHeightGrading S) (B := 1) zero_le_one (fun n y => by
-      change (S.height (3 / 4 : ℝ)).grading n y.1.val ≤
-        1 * (S.sourceGrading n y.1 + c n y.2.val)
-      simpa only [one_mul] using le_add_of_nonneg_right (apply_nonneg (c n) y.2.val))
-  let circle : ResidualSpace S →L[ℝ] CircleSpace S :=
-    (evenCircleSubmodule S).subtypeL.comp
-      (ContinuousLinearMap.snd ℝ S.Source (EvenCircle S))
-  have hcircle := solve_smoothTameOn_postcomp hs circle
-    (r := c) (B := 1) zero_le_one (fun n y => by
-      change c n y.2.val ≤ 1 * (S.sourceGrading n y.1 + c n y.2.val)
-      simpa only [one_mul] using le_add_of_nonneg_left (apply_nonneg (S.sourceGrading n) y.1))
+  have hz := coupled_error_fst_smoothTameOn hzr
+  have hs := coupled_error_snd_smoothTameOn hzr
+  have hq := coupled_error_snd_smoothTameOn hz
+  have hsource := coupled_error_subtype_smoothTameOn
+    (q := scalarHeightGrading S) S.Q.toLinearMap.ker (coupled_error_fst_smoothTameOn hs)
+  have hcircle := coupled_error_subtype_smoothTameOn
+    (q := c) (evenCircleSubmodule S) (coupled_error_snd_smoothTameOn hs)
   have ht := coupled_error_ignore_right r (coupled_error_ignore_right r htype)
   have hη := coupled_error_forget_middle hheight
   have hψ := coupled_error_forget_middle hinverse

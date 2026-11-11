@@ -19,6 +19,7 @@ open Set ContinuousFlexibility.Analysis
 open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
 
@@ -36,7 +37,10 @@ theorem coupledCircleIteratedDerivativeLinear_decode (hM : IsCircleModel T γ M)
   | succ n ih =>
     change M.decode (coupledCircleDerivativeLinear hM
       (coupledCircleIteratedDerivativeLinear hM n v)) m = _
-    rw [coupledCircleDerivativeLinear_decode, ih, iteratedDeriv_succ]
+    exact (coupledCircleDerivativeLinear_decode hM
+      (coupledCircleIteratedDerivativeLinear hM n v) m).trans
+        ((congrArg (fun f : ℝ → ℝ => deriv f) ih).trans
+          (iteratedDeriv_succ (n := n) (f := M.decode v m)).symm)
 
 theorem coupled_fin_cons_head_tail {X : Type*} {k : ℕ} (v : Fin (k + 1) → X) :
     Fin.cons (v 0) (Fin.tail v) = v := by
@@ -111,26 +115,48 @@ theorem coupledCircleKernelMultilinear_continuous (r k : ℕ) :
     (coupledCircleKernelMultilinearDerivative hD hT hγ hM hI r k)
   · intro ψ v u
     simpa only [coupledCircleKernelMultilinear_apply,
-      coupledCircleKernelMultilinearDerivative, Fin.cons_zero, Fin.cons_succ] using
+      coupledCircleKernelMultilinearDerivative, Fin.cons_zero, Fin.cons_one, Fin.cons_succ] using
       coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI r k ψ u (v 0) (Fin.tail v)
   · intro s R hR
-    obtain ⟨N, hN, C, hC, hc⟩ := hb r k s R hR
+    have hdata := hb r k s R hR
+    let N : ℕ := hdata.choose
+    have hN : base ≤ N := hdata.choose_spec.1
+    let C : ℝ := hdata.choose_spec.2.choose
+    have hC : 0 ≤ C := hdata.choose_spec.2.choose_spec.1
+    have hc : ∀ ψ : M.Space, M.grading base ψ ≤ R →
+        ∀ (v : M.Space) (w : Fin k → M.Space),
+          M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ v w) ≤
+            C * (1 + M.grading N ψ) *
+              ∏ i : Fin (k + 1), M.grading N ((Fin.cons v w : Fin (k + 1) → M.Space) i) :=
+      hdata.choose_spec.2.choose_spec.2
     refine ⟨N, hN, C, hC, fun ψ hψ v => ?_⟩
     simpa only [coupledCircleKernelMultilinear_apply, coupled_fin_cons_head_tail] using
       hc ψ hψ (v 0) (Fin.tail v)
   · intro s R hR
-    obtain ⟨N, hN, C, hC, hc⟩ := hb (r + 1) (k + 1) s R hR
+    have hdata := hb (r + 1) (k + 1) s R hR
+    let N : ℕ := hdata.choose
+    have hN : base ≤ N := hdata.choose_spec.1
+    let C : ℝ := hdata.choose_spec.2.choose
+    have hC : 0 ≤ C := hdata.choose_spec.2.choose_spec.1
+    have hc : ∀ ψ : M.Space, M.grading base ψ ≤ R →
+        ∀ (v : M.Space) (w : Fin (k + 1) → M.Space),
+          M.grading s (coupledCircleKernel hD hT hγ hM hI (r + 1) (k + 1) ψ v w) ≤
+            C * (1 + M.grading N ψ) *
+              ∏ i : Fin (k + 2), M.grading N ((Fin.cons v w : Fin (k + 2) → M.Space) i) :=
+      hdata.choose_spec.2.choose_spec.2
     refine ⟨N, hN, C, hC, fun ψ hψ v => ?_⟩
     have h := hc ψ hψ (v 1) (Fin.cons (v 0) (fun i : Fin k => v i.succ.succ))
     apply h.trans_eq
-    simp only [Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ]
+    simp only [Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ, Fin.succ_zero_eq_one]
     ac_rfl
 
 def coupledCircleKernelContinuousMultilinear (r k : ℕ) (ψ : M.Space) :
     M.Space [×(k + 1)]→L[ℝ] M.Space :=
   spacesContinuousMultilinearMapOfContinuous
     (coupledCircleKernelMultilinear hD hT hγ hM hI r k ψ)
-    (spaces_continuous_fixed_first _
+    (spaces_continuous_fixed_first
+      (fun (x : M.Space) (v : Fin (k + 1) → M.Space) =>
+        coupledCircleKernelMultilinear hD hT hγ hM hI r k x v)
       (coupledCircleKernelMultilinear_continuous hD hT hγ hM hI r k) ψ)
 
 theorem coupledCircleKernelContinuousMultilinear_apply (r k : ℕ) (ψ : M.Space)
