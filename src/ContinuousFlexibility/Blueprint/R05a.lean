@@ -21,3 +21,5 @@ theorem R05a (hR04 : R04Statement) : R05aStatement := by
   exact Radial.exists_morseChainRealization
 
 end ContinuousFlexibility.Blueprint
+
+#print axioms ContinuousFlexibility.Blueprint.R05a
