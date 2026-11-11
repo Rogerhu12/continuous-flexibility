@@ -142,6 +142,7 @@ private theorem normalizedCoefficientPowerField_value
 /-- Package the actual input families and perform the final transport
 with an abstract source, before specializing to the projective state. -/
 private theorem coefficientPowerBounds_of_inputs
+    (hU : IsOpen U) (hΩ : IsOpen Ω) (hE : ∀ q ∈ Ω, 1 ≤ E q)
     (hHbounded : ∃ R : ℝ, ∀ q ∈ Ω, 0 ≤ H q ∧ H q ≤ R)
     (rad : Fin 3 → X → PolarPoint → ℝ) (pol : Fin 5 → X → PolarPoint → ℝ)
     (radReg : ∀ j, MixedJetRegularity U Ω (rad j))
