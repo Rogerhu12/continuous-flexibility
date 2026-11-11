@@ -26,6 +26,13 @@ open scoped ContDiff InnerProductSpace
 def innerSignedWeight {α : Type*} (W : α → ℝ) (sign : Bool) : α → ℝ :=
   fun x => if sign then W x else (W x)⁻¹
 
+/-- Whole-function forms also identify partially applied multipliers. -/
+theorem innerSignedWeight_true {α : Type*} (W : α → ℝ) :
+    innerSignedWeight W true = W := rfl
+
+theorem innerSignedWeight_false {α : Type*} (W : α → ℝ) :
+    innerSignedWeight W false = (fun x => (W x)⁻¹) := rfl
+
 theorem innerSignedWeight_measurable {α : Type*} [MeasurableSpace α]
     (W : α → ℝ) (hW : Measurable W) (sign : Bool) :
     Measurable (innerSignedWeight W sign) := by
@@ -61,7 +68,11 @@ theorem innerChainScalarRestriction_signedWeight (n : ℕ) (p : Fin (n + 1))
     innerChainScalarRestriction n p (innerSignedWeight w sign) 1 i =
       if sign then innerChainScalarRestriction n p w 1 i
       else (innerChainScalarRestriction n p w 1 i)⁻¹ := by
-  simpa only [innerSignedWeight, inv_one, ite_self] using
+  change innerChainScalarRestriction n p
+      (fun k => if sign then w k else (w k)⁻¹) 1 i =
+    if sign then innerChainScalarRestriction n p w 1 i
+    else (innerChainScalarRestriction n p w 1 i)⁻¹
+  simpa only [inv_one, ite_self] using
     innerChainScalarRestriction_map n p w 1 (fun x => if sign then x else x⁻¹) i
 
 section SupportedWeight
@@ -82,10 +93,10 @@ theorem innerSupportedWeightEquiv_signed_toCLM (sign : Bool) :
         (innerSignedWeight_abs_le W C Cinv hWC hWinv sign) := by
   cases sign with
   | false =>
-    simpa only [innerHilbertWeight, innerSignedWeight, Bool.false_eq_true, ite_false] using
+    simpa only [innerHilbertWeight, innerSignedWeight_false, Bool.false_eq_true, ite_false] using
       innerSupportedWeightEquiv_symm_toCLM μ s hs bordered W hW hpos C Cinv hWC hWinv
   | true =>
-    simpa only [innerHilbertWeight, innerSignedWeight, ite_true] using
+    simpa only [innerHilbertWeight, innerSignedWeight_true, ite_true] using
       innerSupportedWeightEquiv_toCLM μ s hs bordered W hW hpos C Cinv hWC hWinv
 
 end SupportedWeight
@@ -130,8 +141,9 @@ theorem innerWeightedPoisson_supported_eq (sign : Bool) :
           (innerSignedWeight_measurable W hW sign) (if sign then C else Cinv)
           (innerSignedWeight_abs_le W C Cinv hWC hWinv sign) ∘L
         T ∘L innerBoundaryDiagonal (fun i => (innerSignedWeight w sign i)⁻¹)) ∘L J := by
-  rw [innerWeightedPoisson, innerSupportedWeightEquiv_signed_toCLM,
-    innerMatrixEquiv_signed_inverse_toCLM]
+  rw [innerWeightedPoisson,
+    innerSupportedWeightEquiv_signed_toCLM μ s hs bordered W hW hpos C Cinv hWC hWinv sign,
+    innerMatrixEquiv_signed_inverse_toCLM w hw sign]
   simp only [ContinuousLinearMap.comp_assoc]
 
 end PoissonIdentity
@@ -193,7 +205,11 @@ theorem weighted_poisson_both_signs (hDw : ContDiff ℝ ∞ D.w)
       rw [innerChainScalarRestriction_signedWeight, hleft hp]
     · intro hp
       rw [innerChainScalarRestriction_signedWeight, hright hp]
-  rw [innerWeightedPoisson_supported_eq]
+  rw [innerWeightedPoisson_supported_eq (radialHilbertMeasure D)
+    (innerRadialChainRegion D G) (innerRadialChainRegion_measurable D G)
+    bordered W hW hpos CW Cinv hWC hWinv w hw (C.poisson hDw)
+    (Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ)
+      (innerInterfaceInverseSqrt C.referenceMatrix)) sign]
   exact (C.weighted_poisson_norm_le_ambient hDw (innerSignedWeight W sign)
     (innerSignedWeight_measurable W hW sign) (if sign then CW else Cinv)
     (innerSignedWeight_abs_le W CW Cinv hWC hWinv sign)

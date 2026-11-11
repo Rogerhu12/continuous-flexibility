@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.InnerActualModelChain
 import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
+import ContinuousFlexibility.Radial.InnerCutIncidence
 
 /-!
 # The full reference has blocks of size at most two
