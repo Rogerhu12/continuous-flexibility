@@ -51,7 +51,6 @@ theorem exists_wholeWeakInverse
         OuterWeightedHomogeneousUnique μ w a b ((j : ℝ) ^ 2) lam H.entrance := by
   have hex := F.exists_wholeGreenOperator hD hcut hentry hac.le hlam hT hphysical
     hη hK hKinv
-  dsimp only at hex
   simp only [outerOutwardRegionMeasure_eq_density, outerOutwardRadius_eq_sign] at hex ⊢
   obtain ⟨H, R, hR, hrow⟩ := hex
   have hg := matchingProfileGeometry hD

@@ -51,7 +51,11 @@ variable {CM KM : ℝ}
       (morseChainA S.chain (innerMorseInnerTailIndex S.chain.index k side p))
       (morseChainB S.chain (innerMorseInnerTailIndex S.chain.index k side p))
       j (8 * (S.chain.d (innerMorseInnerTailIndex S.chain.index k side p) : ℝ) ^ 9)) CM KM)
-  (centralModel : InnerRadialModelChart Γ.reference H bordered j center column center)
+  (centralModel : InnerRadialModelChart Γ.reference
+    (P.retainedMorseInnerGeometry hD hw hS G₀ hfirst hq hT
+      hleft hright hTL hTR k hk) bordered j
+    (innerModelChainPiece (innerMorseInnerCenter k)) column
+    (innerModelChainPiece (innerMorseInnerCenter k)))
 
 local notation "tails" => P.retainedMorseInnerGeometry_tail hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk
@@ -60,9 +64,15 @@ local notation "MF" => P.retainedMorseModelFamily hw hS G₀ hfirst H bordered j
 local notation "QF" => P.retainedMorseGapChart hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk hbridge hmodel hwindow j hj
 
+include hB models centralModel in
 def retainedMorseActualChain :
     InnerRadialActualChain Γ.reference H bordered j center column :=
-  innerActualChainOfModelsAndGaps H bordered j (innerMorseInnerCenter k) column MF QF
+  innerActualChainOfModelsAndGaps H bordered j (innerMorseInnerCenter k) column
+    (P.retainedMorseModelFamily hw hS G₀ hfirst H bordered j column
+      (P.retainedMorseInnerGeometry_tail hD hw hS G₀ hfirst hq hT
+        hleft hright hTL hTR k hk) hB models centralModel)
+    (P.retainedMorseGapChart hD hw hS G₀ hfirst hq hT
+      hleft hright hTL hTR k hk hbridge hmodel hwindow j hj)
 
 local notation "A" => P.retainedMorseActualChain hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hj column hB models centralModel

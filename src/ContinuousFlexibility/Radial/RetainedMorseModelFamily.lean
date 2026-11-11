@@ -126,8 +126,11 @@ def retainedMorseTailModelChart (side : Bool) (p : Fin k) :
     (innerMorseInnerTailPiece_ne_center k side p) (htail side p).1 (htail side p).2
     (hB side p) (M side p)
 
-variable (centralModel : InnerRadialModelChart D H bordered j center column center)
+variable (centralModel : InnerRadialModelChart D H bordered j
+  (innerModelChainPiece (innerMorseInnerCenter k)) column
+  (innerModelChainPiece (innerMorseInnerCenter k)))
 
+include hB M centralModel in
 def retainedMorseModelFamily (p : Fin (2 * k + 1)) :
     InnerRadialModelChart D H bordered j center column (innerModelChainPiece p) :=
   innerMorseModelElim
