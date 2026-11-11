@@ -246,7 +246,8 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
     field_simp [hjpos.ne'] <;> ring
   calc
     _ ≤ d + 2 * (((2 * c / j) ^ 2 + 48) + 24 * l) :=
-      add_le_add_left (mul_le_mul_of_nonneg_left (add_le_add_right hmax _) (by norm_num)) _
+      add_le_add (le_refl d) (mul_le_mul_of_nonneg_left
+        (add_le_add hmax (le_refl (24 * l))) (by norm_num))
     _ = _ := by rw [hcquad]; dsimp only [d, e, p, l]; ring
 
 end SeedRetainedPair

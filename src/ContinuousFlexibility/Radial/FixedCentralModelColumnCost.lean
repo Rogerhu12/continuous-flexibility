@@ -58,7 +58,7 @@ variable (B : FixedCentralBorder) (D : ReferenceData)
 theorem fixedCentralPhysicalModelChart_kappa (i : Fin 2) :
     (fixedCentralPhysicalModelChart B D hD hborder G central q hT hcap hcolumn hcore hw
       hleft hright hB M).kappa i = fixedCentralModelPhysicalKappa M i := by
-  change 1 * centralDensityRoot _ ^ 2 *
+  change 1 * centralDensityRoot (bufferCut (B.modelBuffer q T B₀) i) ^ 2 *
       ((M.column i).inwardEnergy + innerLiouvilleBoundaryDrift
         centralDensityRoot (bufferCut (B.modelBuffer q T B₀)) i) = _
   unfold fixedCentralModelPhysicalKappa innerPhysicalCutKappa fixedCentralModelCutEnergy
@@ -115,7 +115,11 @@ theorem fixedCentralPhysicalModelChart_column_bound
     (fun x hx => A.log_deriv_bound x (hbuf x hx)) (by simp)
   have hnorm : ‖(sqrt (A.kappa i))⁻¹ • A.column i‖ ≤
       fixedCentralModelColumnEnvelope M i := by
-    simpa only [A, fixedCentralPhysicalModelChart_kappa, fixedCentralModelPhysicalKappa,
+    have hkappa : A.kappa i = fixedCentralModelPhysicalKappa M i :=
+      fixedCentralPhysicalModelChart_kappa B D hD hborder G central q hT hcap
+        hcolumn hcore hw hleft hright hB M i
+    rw [hkappa]
+    simpa only [A, fixedCentralModelPhysicalKappa,
       innerPhysicalCutKappa, one_mul, mul_one, innerBorderFieldMap_weight_one,
       ContinuousLinearMap.id_apply, InnerRadialModelChart.column,
       fixedCentralPhysicalModelChart, fixedCentralModelColumnEnvelope] using h

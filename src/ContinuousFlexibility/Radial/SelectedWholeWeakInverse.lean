@@ -33,7 +33,8 @@ local notation "T" => morsePhysicalDeepTail M D right j start entrance η K
 local notation "w" => outerTailOutwardWeight D right
 local notation "ρ" => selectedOutwardDensity D right
 local notation "μ" => outerOutwardIntervalMeasure D right (radialTailInterval D right cut)
-local notation "ν" => (volume.restrict (Ioo a b)).withDensity (fun x => ENNReal.ofReal (ρ x))
+local notation "ν" => Measure.withDensity (Measure.restrict volume (Ioo a b))
+  (fun x => ENNReal.ofReal (ρ x))
 local notation "α" => (fun x => lam / w x)
 local notation "β" => (fun x => (j : ℝ) ^ 2 * deriv w x / (lam * x))
 

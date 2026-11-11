@@ -27,11 +27,13 @@ theorem radialJacobi_outward (D : ReferenceData) (right : Bool)
   have hw : radialRadiusScale (outerTailSign right)
       (outerTailSign right * outerTailSign right) D.w = outerTailOutwardWeight D right := by
     funext t
-    cases right <;> simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign]
+    cases right <;> simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign,
+      div_eq_mul_inv]
   have hu : radialRadiusScale (outerTailSign right) 1 u =
       fun t => u (outerOutwardRadius right t) := by
     funext t
-    cases right <;> simp [radialRadiusScale, outerTailSign, outerOutwardRadius]
+    cases right <;> simp [radialRadiusScale, outerTailSign, outerOutwardRadius,
+      div_eq_mul_inv]
   have he := radialJacobi_radialRadiusScale hs J 1 (outerTailSign right) D.w u
     (outerOutwardRadius right x)
   rw [hw, hu] at he

@@ -22,7 +22,7 @@ section
 
 variable {a c b J lam : ℝ} {w ρ P ZP Q ZQ : ℝ → ℝ}
 
-local notation "μ" => (volume.restrict (Ioo a b)).withDensity
+local notation "μ" => Measure.withDensity (Measure.restrict volume (Ioo a b))
   (fun x => ENNReal.ofReal (ρ x))
 
 theorem OuterFundamentalStatePair.weighted_solution

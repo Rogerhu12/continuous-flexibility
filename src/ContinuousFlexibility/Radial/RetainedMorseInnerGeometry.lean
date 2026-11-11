@@ -171,7 +171,12 @@ theorem retainedMorseInnerGeometry_outer
     rw [hjoin side _ (by omega), he]
     rfl
   constructor
-  · exact (innerModelChainCuts_first _ _ _).trans (hout false)
+  · change innerModelChainCuts
+      (scaledMorseInnerModelCuts S.chain P.sideRadius S.chain.index k (retainedMorseCenterCuts T))
+      (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k false)
+      (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k true) 0 = _
+    rw [innerModelChainCuts_first]
+    exact hout false
   · have heq : (Fin.last (2 * (2 * k + 1))).succ =
         Fin.last (2 * (2 * k + 1) + 1) := Fin.succ_last _
     change innerModelChainCuts _ _ _ (Fin.last (2 * (2 * k + 1))).succ = _

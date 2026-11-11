@@ -30,10 +30,11 @@ theorem innerMorseInnerTailSlot_pair_injective (k : ℕ) :
     omega
   · simp only [innerMorseInnerTailSlot, Bool.false_eq_true, ite_false, ite_true] at hv
     omega
-  · apply Prod.ext rfl
-    apply Fin.ext
-    simp only [innerMorseInnerTailSlot, ite_true] at hv
-    omega
+  · apply Prod.ext
+    · rfl
+    · apply Fin.ext
+      simp only [innerMorseInnerTailSlot, ite_true] at hv
+      omega
 
 theorem innerMorseInnerModelSlot_cases {k : ℕ} (p : Fin (2 * k + 1)) :
     p = innerMorseInnerCenter k ∨ ∃ side q, p = innerMorseInnerTailSlot k side q := by
@@ -129,19 +130,27 @@ variable (centralModel : InnerRadialModelChart D H bordered j center column cent
 
 def retainedMorseModelFamily (p : Fin (2 * k + 1)) :
     InnerRadialModelChart D H bordered j center column (innerModelChainPiece p) :=
-  innerMorseModelElim centralModel
+  innerMorseModelElim
+    (β := fun p => InnerRadialModelChart D H bordered j center column (innerModelChainPiece p))
+    centralModel
     (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M) p
 
 theorem retainedMorseModelFamily_center :
     P.retainedMorseModelFamily hw hS G₀ hband H bordered j column htail hB M centralModel
       (innerMorseInnerCenter k) = centralModel :=
-  innerMorseModelElim_center _ _
+  innerMorseModelElim_center
+    (β := fun p => InnerRadialModelChart D H bordered j center column (innerModelChainPiece p))
+    centralModel
+    (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M)
 
 theorem retainedMorseModelFamily_tail (side : Bool) (p : Fin k) :
     P.retainedMorseModelFamily hw hS G₀ hband H bordered j column htail hB M centralModel
       (innerMorseInnerTailSlot k side p) =
       P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M side p :=
-  innerMorseModelElim_tail _ _ side p
+  innerMorseModelElim_tail
+    (β := fun p => InnerRadialModelChart D H bordered j center column (innerModelChainPiece p))
+    centralModel
+    (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M) side p
 
 theorem retainedMorseTailModelChart_kappa_pos (hC : 0 < Cmodel) (side : Bool)
     (p : Fin k) (i : Fin 2) :

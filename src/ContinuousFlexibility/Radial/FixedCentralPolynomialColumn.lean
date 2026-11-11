@@ -94,7 +94,7 @@ theorem fixedCentralModelColumnEnvelope_polynomial_bound
         ⟨add_nonneg zero_le_one (inv_nonneg.mpr hk.1.le), by
           nlinarith only [inv_nonneg.mpr hk.1.le,
             sq_nonneg ((fixedCentralModelCutEnergy M i)⁻¹)]⟩
-    exact hs.trans ((add_le_add_left hki 1).trans hc.2.2.2.2.2)
+    exact hs.trans ((add_le_add (le_refl 1) hki).trans hc.2.2.2.2.2)
   have hrem := innerBuffer_normalized_remainder_coefficient_envelope hB
     hC.le hK hc.1 hj0 hc.2.1 hc.2.2.1 hinv hupper
     (fun k => (buffer_action_pos hB k).le)

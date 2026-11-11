@@ -143,9 +143,11 @@ theorem exists_innerCentralThreePieceInverse
         exact hcolumns i)
       hgap hcost
   refine ⟨inverse, hgraph, hnorm.trans ?_, hself⟩
-  have hsqrt : Real.sqrt (12 / ((3 : ℝ) / 4)) = 4 := by norm_num
+  have hsqrt : Real.sqrt (12 / ((3 : ℝ) / 4)) = 4 := by
+    rw [show 12 / ((3 : ℝ) / 4) = (4 : ℝ) ^ 2 by norm_num,
+      Real.sqrt_sq (by norm_num : (0 : ℝ) ≤ 4)]
   rw [hsqrt]
-  apply add_le_add_left
+  apply add_le_add (le_refl _)
   have hsq : (4 : ℝ) ≤ j ^ 2 := by nlinarith only [hfrequency]
   have h := div_le_div_of_nonneg_left
     (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2) (sq_nonneg (max (2 * K) 4)))

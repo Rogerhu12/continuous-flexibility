@@ -88,8 +88,8 @@ theorem weighted_poisson_bound_hardy (hDw : ContDiff ℝ ∞ D.w)
       have h := Q.weighted_poisson_energy_hardy hDw W hW CW hWC w hc hconstant
         hleft hright hjhalf ξ
       have he := Q.poisson_energy_nonneg hDw (innerChainBoundaryCLM n p ξ)
-      have hc := h.trans (add_le_add_right
-        (mul_le_mul_of_nonneg_right (le_max_right ((2 * K / j) ^ 2) 48) he) _)
+      have hc := h.trans (add_le_add
+        (mul_le_mul_of_nonneg_right (le_max_right ((2 * K / j) ^ 2) 48) he) (le_refl _))
       simpa only [A, E, MW, Ω, hp, InnerRadialActualPiece.poisson,
         InnerRadialActualPiece.referenceMatrix, InnerRadialActualPiece.kappa,
         InnerRadialActualPiece.gapMatrix, Matrix.diagonal_zero', zero_add,
@@ -126,7 +126,7 @@ theorem weighted_poisson_bound_hardy (hDw : ContDiff ℝ ∞ D.w)
           Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ) C.referenceMatrix (J ξ)⟫_ℝ) := by
       dsimp only [E]
       rw [← C.reference_energy]
-      exact add_le_add_left (mul_le_mul_of_nonneg_left hend (by norm_num)) _
+      exact add_le_add (le_refl _) (mul_le_mul_of_nonneg_left hend (by norm_num))
     _ = (Real.sqrt cost * ‖ξ‖) ^ 2 := by
       rw [henergy, mul_pow, Real.sq_sqrt hcost]
       dsimp only [cost]
