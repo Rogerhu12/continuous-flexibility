@@ -62,7 +62,7 @@ theorem modeOuterSeparatedGraph_zero {D : ReferenceData}
     filter_upwards [hrep, (Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D) :
         ⇑(0 : RadialModeL2 D) =ᵐ[radialHilbertMeasure D] 0),
       matching_ae_inner_or_outer hD M] with r hr hz hri
-    rw [hr, hz]
+    rw [Prod.fst_zero, hr, hz, Pi.zero_apply]
     rcases hri with hin | hL | hR
     · exact hinner r hin
     · exact hout false r (Ioo_subset_Ioc_self hL)
@@ -81,8 +81,9 @@ theorem modeOuterSeparatedGraph_sub {D : ReferenceData}
     hu.sub hv, ?_, ?_⟩
   · simp only [Prod.snd_sub, hscalarU, hscalarV, sub_self]
   · filter_upwards [Lp.coeFn_sub U.1 V.1, hrepU, hrepV] with r hr hur hvr
-    simpa only [Pi.sub_apply, hur, hvr] using hr
+    simpa only [Prod.fst_sub, Pi.sub_apply, hur, hvr] using hr
   · intro r hr
+    dsimp only
     rw [hinnerU r hr, hinnerV r hr, sub_self]
   · intro i
     rw [matchingOuterFlux_sub ha hm hb hu hv]
