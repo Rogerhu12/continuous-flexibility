@@ -63,8 +63,8 @@ theorem divergence_coordinate_change_of_density
         σ * exteriorCoefficient α x := by
     simp only [exteriorCoefficient, radialPartial, angularPartial]
     rw [hea.fderiv_eq, her.fderiv_eq]
-    simp only [polar_directional_mul differentiableAt_const hα.2,
-      polar_directional_mul differentiableAt_const hα.1,
+    simp only [polar_directional_mul (differentiableAt_const σ) hα.2,
+      polar_directional_mul (differentiableAt_const σ) hα.1,
       fderiv_const, ContinuousLinearMap.zero_apply, zero_mul, zero_add]
     ring
   have hTransform := exteriorCoefficient_pullbackPlaneOneForm hF hβ.1 hβ.2
@@ -85,7 +85,9 @@ theorem divergence_coordinate_change_of_density
   apply mul_left_cancel₀ hσ
   calc
     _ = divergenceOperator B W (F x) * planeJacobian F x := hRelation
-    _ = _ := by rw [← hσJ]; ring
+    _ = divergenceOperator B W (F x) * (σ * |planeJacobian F x|) :=
+      congrArg (fun r : ℝ => divergenceOperator B W (F x) * r) hσJ.symm
+    _ = _ := by ring
 
 /-- The complete conjugated operator identity, including the actual
 height-generated potential. -/

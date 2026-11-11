@@ -251,7 +251,7 @@ theorem radialBoundaryJets_coordinatePrincipalDensity_eq
   have h11 : ScalarJetMatch n c
       (fun r => (fderiv ℝ F (r, θ) (1, 0)).1)
       (fun r => (fderiv ℝ G (r, θ) (1, 0)).1) := by
-    simpa only [coordinateDirectionDerivative, cylinderBasisVector, ite_eq_left rfl,
+    simpa only [coordinateDirectionDerivative, cylinderBasisVector, ite_eq_left rfl, ite_true,
       ContinuousLinearMap.coe_fst'] using
       scalarJetMatch_coordinateDirectionDerivative hU hF hG c hc
         (ContinuousLinearMap.fst ℝ ℝ ℝ) (by
@@ -267,7 +267,7 @@ theorem radialBoundaryJets_coordinatePrincipalDensity_eq
   have h21 : ScalarJetMatch n c
       (fun r => (fderiv ℝ F (r, θ) (1, 0)).2)
       (fun r => (fderiv ℝ G (r, θ) (1, 0)).2) := by
-    simpa only [coordinateDirectionDerivative, cylinderBasisVector, ite_eq_left rfl,
+    simpa only [coordinateDirectionDerivative, cylinderBasisVector, ite_eq_left rfl, ite_true,
       ContinuousLinearMap.coe_snd'] using
       scalarJetMatch_coordinateDirectionDerivative hU hF hG c hc
         (ContinuousLinearMap.snd ℝ ℝ ℝ) (by

@@ -73,7 +73,8 @@ theorem canonicalPrincipalCoefficients_eq_density
         neg_mul, one_mul] at he ⊢
       linarith [he]
   have h := principalCoefficients_of_operator_identity ha hb hc hF hh hBa hBb hBc hop
-  simpa only [hFx] using h
+  have hFx' : K.chart z m (K.inverseChart z m p) = p := hFx
+  simpa only [hFx'] using h
 
 /-- The negative canonical coefficient germs are the actual prescribed
 normal form, so their differentiability follows from the open-piece identity. -/
@@ -93,8 +94,8 @@ theorem differentiableAt_negativeCanonicalCoefficients
         (K.coefficients z m).c y = -y.1 := by
     filter_upwards [hOpen.mem_nhds hp] with y hy
     exact hB.2.2.2.1 z hz hs m hm y hy
-  exact ⟨differentiableAt_const.congr_of_eventuallyEq (he.mono (fun _ hy => hy.1)),
-    differentiableAt_const.congr_of_eventuallyEq (he.mono (fun _ hy => hy.2.1)),
+  exact ⟨(differentiableAt_const (1 : ℝ)).congr_of_eventuallyEq (he.mono (fun _ hy => hy.1)),
+    (differentiableAt_const (0 : ℝ)).congr_of_eventuallyEq (he.mono (fun _ hy => hy.2.1)),
     differentiableAt_fst.fun_neg.congr_of_eventuallyEq (he.mono (fun _ hy => hy.2.2))⟩
 
 /-- On the actual physical negative piece the transported principal density

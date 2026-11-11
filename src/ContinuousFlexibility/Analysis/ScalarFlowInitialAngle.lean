@@ -25,6 +25,8 @@ variable {F D : ℝ × ℝ → ℝ} {Θ : ℝ × ℝ → ℝ} {a b : ℝ}
     HasDerivWithinAt (fun r => Θ (θ, r))
       (F (t, Θ (θ, t))) (uIcc a b) t)
 
+include hD hangle hΘ hinit hflow
+
 /-- The angular derivative of the actual chosen flow is its exponential
 variational factor; no angular differentiability of the flow is assumed. -/
 theorem scalarFlow_hasDerivAt_initialAngle (θ : ℝ) :

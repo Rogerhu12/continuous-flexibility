@@ -1,5 +1,5 @@
 import Mathlib.Analysis.Calculus.ImplicitContDiff
-import Mathlib.Analysis.Calculus.MeanValue
+import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Joint smoothness of the actual scalar inverse
@@ -57,9 +57,13 @@ theorem contDiff_parameterized_scalar_rightInverse
     simpa only [H] using (ha.sub_const q.2).hasFDerivAt
   have hp : HasFDerivAt (fun θ => H (q, θ))
       ((fderiv ℝ H (q, G q)).comp (ContinuousLinearMap.inr ℝ (P × ℝ) ℝ)) (G q) := by
-    simpa only [Function.comp_apply] using
-      (hH.differentiable (by simp) (q, G q)).hasFDerivAt.comp (G q)
-        (hasFDerivAt_prodMk_right q (G q))
+    have hh := (hH.differentiable (by simp) (q, G q)).hasFDerivAt.comp (G q)
+      (hasFDerivAt_prodMk_right q (G q))
+    have he : H ∘ Prod.mk q = (fun θ : ℝ => H (q, θ)) := by
+      funext θ
+      exact Function.comp_apply
+    rw [he] at hh
+    exact hh
   have hi : ((fderiv ℝ H (q, G q)).comp
       (ContinuousLinearMap.inr ℝ (P × ℝ) ℝ)).IsInvertible := by
     rw [hp.unique hs]

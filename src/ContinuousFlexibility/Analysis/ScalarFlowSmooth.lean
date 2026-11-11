@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.ScalarFlowParameterFDeriv
 import ContinuousFlexibility.Analysis.ScalarFlowTimeChange
 import Mathlib.Analysis.Calculus.FDeriv.Partial
+import Mathlib.Analysis.Calculus.Deriv.Prod
 import Mathlib.Analysis.Calculus.ContDiff.FiniteDimension
 
 /-!
@@ -79,15 +80,25 @@ theorem contDiff_scalarFlow
   have hDv : ContDiff ℝ ∞ Dv := hv.fderiv_right (m := ∞) (by simp)
   have hangle (p : P) (t x : ℝ) :
       HasDerivAt (fun y => F (p, (t, y))) (Dθ (p, (t, x))) x := by
-    simpa only [Dθ, id_eq, Function.comp_apply] using
-      (hF.differentiable (by simp) (p, (t, x))).hasFDerivAt.comp_hasDerivAt x
-        ((hasDerivAt_const (x := x) (c := p)).prodMk
-          ((hasDerivAt_const (x := x) (c := t)).prodMk (hasDerivAt_id x)))
+    have hcurve : HasDerivAt (fun y : ℝ => (p, (t, y))) (0, (0, 1)) x := by
+      simpa only [id_eq] using
+        HasDerivAt.prodMk (hasDerivAt_const (x := x) (c := p))
+          (HasDerivAt.prodMk (hasDerivAt_const (x := x) (c := t)) (hasDerivAt_id x))
+    have hd := (hF.differentiable (by simp) (p, (t, x))).hasFDerivAt.comp_hasDerivAt x hcurve
+    have he : F ∘ (fun y : ℝ => (p, (t, y))) = (fun y => F (p, (t, y))) := by
+      funext y
+      exact Function.comp_apply
+    rw [he] at hd
+    exact hd
   have hparameter (p : P) (t x : ℝ) :
       HasFDerivAt (fun q => F (q, (t, x))) (Dp (p, (t, x))) p := by
-    simpa only [Dp, Function.comp_apply] using
-      (hF.differentiable (by simp) (p, (t, x))).hasFDerivAt.comp p
-        (hasFDerivAt_prodMk_left p (t, x))
+    have hd := (hF.differentiable (by simp) (p, (t, x))).hasFDerivAt.comp p
+      (hasFDerivAt_prodMk_left p (t, x))
+    have he : F ∘ (fun q : P => (q, (t, x))) = (fun q => F (q, (t, x))) := by
+      funext q
+      exact Function.comp_apply
+    rw [he] at hd
+    exact hd
   have hvalue (p : P) : HasFDerivAt v (Dv p) p :=
     (hv.differentiable (by simp) p).hasFDerivAt
   let K : P × ℝ → ℝ := fun z => Dθ (z.1, (z.2, Θ z))
