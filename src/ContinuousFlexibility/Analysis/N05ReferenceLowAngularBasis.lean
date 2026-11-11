@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N05ReferenceAngularJetBasis
+import ContinuousFlexibility.Statements.Analysis
 
 /-!
 # Actual derivatives of the two low reference modes
@@ -38,10 +39,10 @@ theorem n05_referenceLowJetBasis_pairing (b : ℕ) :
     angularPairing (n05_referenceLowJetBasis b) (n05_referenceLowJetBasis b) = 1 := by
   induction b using Nat.twoStepInduction with
   | zero =>
-    simpa only [n05_referenceLowJetBasis, if_pos rfl] using
+    simpa only [n05_referenceLowJetBasis, ite_true] using
       angularPairing_cosineMode 2 2 (by decide) (by decide)
   | one =>
-    simpa only [n05_referenceLowJetBasis, angularPairing, neg_mul_neg, if_pos rfl] using
+    simpa only [n05_referenceLowJetBasis, angularPairing, neg_mul_neg, ite_true] using
       angularPairing_sineMode 2 2 (by decide) (by decide)
   | more b hb _ =>
     simpa only [n05_referenceLowJetBasis, angularPairing, neg_mul_neg] using hb
@@ -55,9 +56,10 @@ theorem n05_referenceLowBasis_iteratedDeriv (b : ℕ) :
       n05_referenceLowJetBasis, referenceAngularBasis]
   | one =>
     funext θ
-    simp only [iteratedDeriv_one, referenceAngularBasis, deriv_cosineMode,
-      n05_referenceLowJetBasis, pow_one, cosineModeFirst, sineMode,
-      Nat.mul_one, Nat.cast_ofNat]
+    rw [iteratedDeriv_one]
+    change deriv (cosineMode 2) θ = (2 : ℝ) ^ 1 * (-sineMode 2 θ)
+    rw [deriv_cosineMode, pow_one]
+    simp only [cosineModeFirst, sineMode, Nat.cast_ofNat]
     ring
   | more b hb _ =>
     have hsecond : deriv (deriv (referenceAngularBasis 1)) =

@@ -23,8 +23,16 @@ theorem n05_referenceHighJetBasis_periodic (b n : ℕ) :
     Function.Periodic (n05_referenceHighJetBasis b n) (2 * Real.pi) := by
   induction b using Nat.twoStepInduction with
   | zero => exact r11b_cosineMode_periodic _
-  | one => exact (r11b_sineMode_periodic _).neg
-  | more b hb _ => exact hb.neg
+  | one =>
+    intro θ
+    change -sineMode (2 * (n + 2)) (θ + 2 * Real.pi) =
+      -sineMode (2 * (n + 2)) θ
+    rw [r11b_sineMode_periodic (2 * (n + 2)) θ]
+  | more b hb _ =>
+    intro θ
+    change -n05_referenceHighJetBasis b n (θ + 2 * Real.pi) =
+      -n05_referenceHighJetBasis b n θ
+    rw [hb θ]
 
 theorem n05_referenceHighJetBasis_even_order (b n : ℕ) :
     n05_referenceHighJetBasis (2 * b) n =

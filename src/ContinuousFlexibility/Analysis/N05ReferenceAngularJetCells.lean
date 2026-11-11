@@ -79,8 +79,12 @@ theorem n05_referenceHighProjection_cell_square {D : ReferenceData}
       ∫ r, (D.localizer m r * referenceRadialCoefficient f (n + 2) r) ^ 2
         ∂volume.restrict (radialCore D) := by
   have h := (n05_referenceHighAngularJet_cell_parseval hab hf {n} 0).2 m
-  simpa only [n05_referenceHighAngularJet, iteratedDeriv_zero, Finset.image_singleton,
-    Nat.mul_zero, pow_zero, one_mul, Finset.sum_singleton] using h
+  have hjet : n05_referenceHighAngularJet {n} 0 f =
+      referenceBasisProjection {n + 2} f := by
+    funext p
+    simp only [n05_referenceHighAngularJet, iteratedDeriv_zero, Finset.image_singleton]
+  rw [hjet] at h
+  simpa only [Nat.mul_zero, pow_zero, one_mul, Finset.sum_singleton] using h
 
 /-- Exact cell identity in terms of the original singleton projection
 squares, with no change of coordinates or equivalence constant. -/

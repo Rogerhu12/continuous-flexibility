@@ -103,6 +103,10 @@ theorem n05_referenceHighProjection_tendsto {D : ReferenceData}
     simp only [Pi.sub_apply, n05_referenceHighPart]
     ring
   refine ⟨hp, hh, reference_memLp_tendsto_of_sub_sq hp hh ?_⟩
-  simpa only [Function.comp_apply, hraw] using hshift
+  change Tendsto (fun N : ℕ => ∫ x : PolarPoint,
+    (r11bEvenPartialSum (evenFourierCoefficient u) (N + 2) x - u x) ^ 2
+      ∂radialPhysicalMeasure D) atTop (𝓝 (0 : ℝ)) at hshift
+  simp_rw [hraw] at hshift
+  exact hshift
 
 end ContinuousFlexibility.Radial
