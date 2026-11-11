@@ -28,15 +28,11 @@ theorem innerMorseCutWeight_unweighted (N m : ℕ) (side : Bool) :
 theorem retained_radialE_power_le {m n : ℕ} (hmn : m ≤ n) :
     radialE m ^ (36 : ℝ) ≤ radialE n ^ (37 : ℝ) := by
   have hE : radialE m ≤ radialE n := exp_le_exp.mpr (radialQ_monotone hmn)
-  have h1 : 1 ≤ radialE n := one_le_exp.mpr (radialQ_nonneg n)
-  have hp := pow_le_pow_left₀ (exp_pos (radialQ m)).le hE 36
-  have hs : radialE n ^ 36 ≤ radialE n ^ 37 := by
-    calc
-      _ = radialE n ^ 36 * 1 := (mul_one _).symm
-      _ ≤ radialE n ^ 36 * radialE n :=
-        mul_le_mul_of_nonneg_left h1 (pow_nonneg (exp_pos _).le _)
-      _ = _ := (pow_succ _ _).symm
-  simpa only [rpow_ofNat] using hp.trans hs
+  have h1 : 1 ≤ radialE n := one_le_exp (radialQ_nonneg n)
+  have hEm : 0 ≤ radialE m := (exp_pos (radialQ m)).le
+  calc
+    _ ≤ radialE n ^ (36 : ℝ) := rpow_le_rpow hEm hE (by norm_num)
+    _ ≤ _ := rpow_le_rpow_of_exponent_le h1 (by norm_num)
 
 namespace SeedRetainedPair
 

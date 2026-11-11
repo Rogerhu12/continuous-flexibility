@@ -21,6 +21,9 @@ open scoped ContDiff Matrix.Norms.L2Operator
 
 namespace SeedRetainedPair
 
+private def retainedMorseWeightSign (sign : Bool) : ℝ :=
+  if sign then 1 else -1
+
 variable {S : SelectedTailData} {K : SeedCentralCutoff} {q length T : ℝ}
   (P : SeedRetainedPair S K q length) {Γ : ConnectedReferenceGeometry}
   (hD : RadialProfileGeometry Γ.reference) (hw : Γ.reference.w = P.pair.profile)
@@ -72,7 +75,7 @@ local notation "modelInduction" => P.retainedMorseActualChain_model_induction hD
   (zero_lt_one.trans_le hj) column hB models centralModel
 
 
-local notation "σ" => fun sign : Bool => if sign then (1 : ℝ) else -1
+local notation "σ" => retainedMorseWeightSign
 local notation "W" => fun sign x => (innerMorseInnerWeight S.chain.index k 0 1 H
   (InnerRadialActualChain.matchedWeightLeft A) (InnerRadialActualChain.matchedWeightRight A) x) ^ (σ sign)
 local notation "w" => fun sign i =>
@@ -135,14 +138,14 @@ theorem retainedMorseActualChain_signed_inverse_bound
     div_le_div_of_nonneg_right (le_add_of_nonneg_left innerMorsePoissonConstant_pos.le) hjpos.le
   have htailP : innerMorsePoissonConstant / j ≤ p / j :=
     div_le_div_of_nonneg_right (le_add_of_nonneg_right hBc) hjpos.le
-  have hσ : ∀ sign : Bool, |σ sign| ≤ 1 := by intro sign; cases sign <;> norm_num
+  have hσ : ∀ sign : Bool, |σ sign| ≤ 1 := by intro sign; cases sign <;> norm_num [retainedMorseWeightSign]
   obtain ⟨CW, hCWone, hfinite⟩ := innerMorseInnerWeight_finite_bounds
     S.chain.index k 0 1 H (A).matchedWeightLeft (A).matchedWeightRight
   have hCW : ∀ sign x, |W sign x| ≤ CW := by
     intro sign x
     cases sign
-    · simpa only [Bool.false_eq_true, ite_false, rpow_neg_one] using (hfinite x).2
-    · simpa only [ite_true, rpow_one] using (hfinite x).1
+    · simpa only [retainedMorseWeightSign, Bool.false_eq_true, ite_false, rpow_neg_one] using (hfinite x).2
+    · simpa only [retainedMorseWeightSign, ite_true, rpow_one] using (hfinite x).1
   refine ⟨CW, hCW, ?_⟩
   have hκ : ∀ i, 0 < (A).kappa i :=
     P.retainedMorseActualChain_kappa_pos hD hw hS G₀ hfirst hq hT

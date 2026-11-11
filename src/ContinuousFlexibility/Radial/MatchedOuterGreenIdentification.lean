@@ -147,6 +147,7 @@ theorem matchedOuterSeparatedGreen_graph (F : RadialModePair D) :
           outerOutwardRadius, Bool.false_eq_true, ite_false, ite_true,
           neg_one_mul, one_mul, neg_neg]
       apply (matchedOuter_boundary_outward_iff ha hm hb side v (hlam (idx side))).mpr
+      simp only [matchedOuterGreenCut] at hvalue hderiv hweight
       rw [hvalue, hderiv, hweight]
       exact (hline side _).mp (hRobin side)
     intro i

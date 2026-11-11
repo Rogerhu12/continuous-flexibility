@@ -20,6 +20,9 @@ open scoped ContDiff Matrix.Norms.L2Operator
 
 namespace InnerRadialActualChain
 
+private def innerFiniteWeightSign (sign : Bool) : ℝ :=
+  if sign then 1 else -1
+
 variable {D : ReferenceData} (N K : ℕ)
   (G : InnerRadialChainGeometry D (2 * (2 * K + 1)))
   {bordered : Bool} {j : ℝ} {column : RadialModeL2 D}
@@ -28,7 +31,7 @@ variable {D : ReferenceData} (N K : ℕ)
   (l r : Fin (2 * (2 * K + 1) + 1) → ℝ) (a γ : ℝ)
   (CW : ℝ)
 
-local notation "σ" => fun sign : Bool => if sign then (1 : ℝ) else -1
+local notation "σ" => innerFiniteWeightSign
 local notation "W" => fun sign x =>
   (innerMorseInnerWeight N K a γ G l r x) ^ (σ sign)
 local notation "w" => fun sign i =>
@@ -100,20 +103,20 @@ theorem inverse_morse_weighted_fixed_loss
     fun sign x => rpow_pos_of_pos (innerMorseInnerWeight_pos N K a γ G l r x) (σ sign)
   have hInv : ∀ x, W false x = (W true x)⁻¹ := by
     intro x
-    simp only [Bool.false_eq_true, ite_false, ite_true, rpow_neg_one, rpow_one]
+    simp only [innerFiniteWeightSign, Bool.false_eq_true, ite_false, ite_true, rpow_neg_one, rpow_one]
   have hopp : ∀ sign x, W (!sign) x = (W sign x)⁻¹ := by
     intro sign x
     cases sign <;>
-      simp only [Bool.not_false, Bool.not_true, Bool.false_eq_true, ite_false, ite_true,
+      simp only [innerFiniteWeightSign, Bool.not_false, Bool.not_true, Bool.false_eq_true, ite_false, ite_true,
         rpow_neg_one, rpow_one, inv_inv]
   have hwpos : ∀ sign i, 0 < w sign i := fun sign i =>
     rpow_pos_of_pos (innerMorseInnerInterfaceWeight_pos N K a γ i) (σ sign)
   have hwInv : ∀ i, w false i = (w true i)⁻¹ := by
     intro i
-    simp only [Bool.false_eq_true, ite_false, ite_true, rpow_neg_one, rpow_one]
+    simp only [innerFiniteWeightSign, Bool.false_eq_true, ite_false, ite_true, rpow_neg_one, rpow_one]
   have hσ : ∀ sign, |σ sign| ≤ 1 := by
     intro sign
-    cases sign <;> norm_num
+    cases sign <;> norm_num [innerFiniteWeightSign]
   have hgapData : ∀ sign p (Q : InnerRadialGapChart D G j
         (innerModelChainPiece (innerMorseInnerCenter K)) p),
       C.piece p = .inr Q →
@@ -161,7 +164,7 @@ theorem inverse_morse_weighted_fixed_loss
   apply C.inverse_localized_hardy_bound_of_piece_data W hW hpos
     (fun _ => CW) hCW hInv loss hloss hlossBound hw w hwpos hwInv hκ hsep hmodels
     hη hηsmall hKP hCE (mul_nonneg hKD (rpow_nonneg (exp_pos _).le _)) hj hjhalf
-    (fun p M hp sign => by simpa only [ite_true, rpow_one] using herror p M hp sign)
+    (fun p M hp sign => by simpa only [innerFiniteWeightSign, ite_true, rpow_one] using herror p M hp sign)
     hcolumns hgapData hendpoints lossCost
     (fun p => (innerCoefficientLoss_pos N 37 _).le)
     ratio base (fun _ _ => sqrt_nonneg _) (fun sign p => innerMorseInnerPieceBase_pos _ _ _ _ _ _)

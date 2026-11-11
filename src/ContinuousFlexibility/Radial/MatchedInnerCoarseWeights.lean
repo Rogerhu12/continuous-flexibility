@@ -51,6 +51,8 @@ local notation "ML" => innerSupportedWeightMultiplier μ s hs bordered
 local notation "MI" => innerSupportedWeightMultiplier μ s hs bordered
   (fun x => (loss x)⁻¹) hloss.inv R hinv
 
+include hpos hR hinv
+
 /-- Undoing the loss is exact multiplication on the original supported
 space, independently of the auxiliary multiplier bounds. -/
 theorem matchedInner_remove_loss_identity :
