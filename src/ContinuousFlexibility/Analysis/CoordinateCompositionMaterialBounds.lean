@@ -42,7 +42,8 @@ private theorem exists_coordinateComposition_polynomial (n : ℕ) :
   apply Finset.sum_congr rfl
   intro c _
   simp only [Q, flowJetPolynomialEval_cons, flowJetPolynomialEval_nil,
-    List.map_cons, List.prod_cons, List.map_ofFn, List.prod_ofFn, one_mul, add_zero]
+    List.map_cons, List.prod_cons, List.map_ofFn, List.prod_ofFn,
+    Function.comp_apply, one_mul, add_zero]
 
 /-- Uniform estimates on the actual positive-order inner and outer jets
 give a fixed-loss estimate for their actual composition. The constants

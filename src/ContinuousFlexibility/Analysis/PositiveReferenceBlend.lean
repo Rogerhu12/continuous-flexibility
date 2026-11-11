@@ -113,10 +113,16 @@ theorem integral_positiveReferenceSlope
       (contDiff_positiveEndpointCutoff r δ).continuous
   have hmass : positiveReferenceMiddleMass l r δ ≠ 0 :=
     (integral_positiveEndpointCutoff_complement_pos hδ hgap).ne'
+  have hcEnds : Continuous (fun x : ℝ =>
+      positiveEndpointCutoff l δ x * aL x + positiveEndpointCutoff r δ x * aR x) :=
+    hcL.add hcR
+  have hcScaled : Continuous (fun x : ℝ => positiveReferenceScale l r δ aL aR *
+      (1 - positiveEndpointCutoff l δ x - positiveEndpointCutoff r δ x)) :=
+    continuous_const.mul hcM
   unfold positiveReferenceSlope
   rw [intervalIntegral.integral_add
-    ((hcL.add hcR).intervalIntegrable (μ := MeasureTheory.volume) l r)
-    ((continuous_const.mul hcM).intervalIntegrable (μ := MeasureTheory.volume) l r),
+    (hcEnds.intervalIntegrable (μ := MeasureTheory.volume) l r)
+    (hcScaled.intervalIntegrable (μ := MeasureTheory.volume) l r),
     intervalIntegral.integral_const_mul]
   change positiveReferenceEndMass l r δ aL aR +
     positiveReferenceScale l r δ aL aR * positiveReferenceMiddleMass l r δ = 1
@@ -137,13 +143,15 @@ theorem positiveReferenceSlope_endpoint_germ
         linarith)
     filter_upwards [positiveEndpointCutoff_one_germ l δ, hR] with x hxL hxR
     simp only [positiveReferenceSlope, hxL, hxR, Pi.one_apply, Pi.zero_apply,
-      one_mul, zero_mul, sub_self, sub_zero, mul_zero, add_zero]
+      one_mul, zero_mul, sub_self, sub_zero, mul_zero, add_zero,
+      Bool.false_eq_true, ite_false, ite_true]
   · have hL := positiveEndpointCutoff_zero_germ_of_separation
       (c := r) (d := l) hδ (by
         rw [abs_of_nonneg hsep]
         linarith)
     filter_upwards [positiveEndpointCutoff_one_germ r δ, hL] with x hxR hxL
     simp only [positiveReferenceSlope, hxL, hxR, Pi.one_apply, Pi.zero_apply,
-      one_mul, zero_mul, sub_zero, sub_self, mul_zero, zero_add, add_zero]
+      one_mul, zero_mul, sub_zero, sub_self, mul_zero, zero_add, add_zero,
+      Bool.false_eq_true, ite_false, ite_true]
 
 end ContinuousFlexibility.Analysis

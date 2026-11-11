@@ -82,13 +82,13 @@ theorem exists_localInverse_mapsTo_openStrip
     rw [← heF]
     exact e.continuousAt hpe
   have hnear : ∀ᶠ x in 𝓝 p, x ∈ e.source ∧ F x ∈ Metric.ball (F p) δ :=
-    (e.open_source.mem_nhds hpe).and
+    Filter.Eventually.and (e.open_source.mem_nhds hpe)
       (hFcont.eventually (Metric.ball_mem_nhds (F p) hδ))
   obtain ⟨x, hx, hxe, hxball⟩ :=
-    ((self_mem_nhdsWithin :
+    Filter.Eventually.exists (Filter.Eventually.and (self_mem_nhdsWithin :
       ∀ᶠ x in 𝓝[Ioo a b ×ˢ (univ : Set ℝ)] p,
-        x ∈ Ioo a b ×ˢ (univ : Set ℝ)).and
-      (hnear.filter_mono nhdsWithin_le_nhds)).exists
+        x ∈ Ioo a b ×ˢ (univ : Set ℝ))
+      (hnear.filter_mono nhdsWithin_le_nhds))
   have hstart : ∃ q ∈ W, (e.symm q).1 ∈ Ioo a b := by
     refine ⟨F x, ⟨hxball, hmap hx⟩, ?_⟩
     have hinv : e.symm (F x) = x := by

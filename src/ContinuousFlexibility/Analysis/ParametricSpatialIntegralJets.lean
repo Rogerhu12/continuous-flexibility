@@ -69,6 +69,45 @@ theorem hasFDerivAt_parametricSpatialJet {f : Q × ℝ → E}
 
 variable [FiniteDimensional ℝ Q] [CompleteSpace E]
 
+private def spatialJetCurryCLM (n : ℕ) :
+    (Q [×(n + 1)]→L[ℝ] E) →L[ℝ] (Q →L[ℝ] Q [×n]→L[ℝ] E) :=
+  let L := continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => Q) E
+  { toFun := fun X => L X
+    map_add' := fun X Y => L.map_add X Y
+    map_smul' := fun c X => L.map_smul c X
+    cont := L.continuous }
+
+private theorem intervalIntegral_spatialJet_curry (n : ℕ)
+    (g : ℝ → Q [×(n + 1)]→L[ℝ] E) (hg : Continuous g) (a b : ℝ) :
+    (∫ t in a..b,
+      (continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => Q) E) (g t)) =
+      (continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => Q) E)
+        (∫ t in a..b, g t) := by
+  exact ContinuousLinearMap.intervalIntegral_comp_comm
+    (𝕜 := ℝ) (E := Q [×(n + 1)]→L[ℝ] E)
+    (F := Q →L[ℝ] Q [×n]→L[ℝ] E)
+    (spatialJetCurryCLM (Q := Q) (E := E) n) (hg.intervalIntegrable a b)
+
+private theorem hasFDerivAt_integral_parametricSpatialJet
+    {f : Q × ℝ → E}
+    (hf : ∀ t : ℝ, ContDiff ℝ ∞ (fun q : Q => f (q, t)))
+    (hj : ∀ n : ℕ, Continuous (parametricSpatialJet f n))
+    (n : ℕ) (a b : ℝ) (q : Q) :
+    HasFDerivAt (fun y : Q => ∫ t in a..b, parametricSpatialJet f n (y, t))
+      ((continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => Q) E)
+        (∫ t in a..b, parametricSpatialJet f (n + 1) (q, t))) q := by
+  let L := continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => Q) E
+  have hc' : Continuous (fun z : Q × ℝ => L (parametricSpatialJet f (n + 1) z)) :=
+    L.continuous.comp (hj (n + 1))
+  have hh := hasFDerivAt_parametric_intervalIntegral
+    (hj n) hc' (hasFDerivAt_parametricSpatialJet hf n) a b q
+  have hc : Continuous (fun t : ℝ => parametricSpatialJet f (n + 1) (q, t)) :=
+    (hj (n + 1)).comp (continuous_const.prodMk continuous_id)
+  have hI := intervalIntegral_spatialJet_curry n
+    (fun t => parametricSpatialJet f (n + 1) (q, t)) hc a b
+  rw [hI] at hh
+  exact hh
+
 /-- Every actual spatial derivative commutes with a compact interval
 integral. Only joint continuity in time of the true spatial jets is
 required, so a continuous time clamp is allowed. -/
@@ -86,25 +125,8 @@ theorem parametricIntervalIntegral_contDiff_and_iteratedFDeriv
   have hd (n : ℕ) (q : Q) :
       HasFDerivAt (J n)
         ((continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => Q) E)
-          (J (n + 1) q)) q := by
-    let L := continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => Q) E
-    have hc' : Continuous (fun z : Q × ℝ => L (parametricSpatialJet f (n + 1) z)) :=
-      L.continuous.comp (hj (n + 1))
-    have hh := hasFDerivAt_parametric_intervalIntegral
-      (hj n) hc' (hasFDerivAt_parametricSpatialJet hf n) a b q
-    have hI : (∫ t in a..b, L (parametricSpatialJet f (n + 1) (q, t))) =
-        L (∫ t in a..b, parametricSpatialJet f (n + 1) (q, t)) := by
-      have hc : Continuous (fun t : ℝ => parametricSpatialJet f (n + 1) (q, t)) :=
-        (hj (n + 1)).comp (continuous_const.prodMk continuous_id)
-      let Lc : (Q [×(n + 1)]→L[ℝ] E) →L[ℝ] (Q →L[ℝ] Q [×n]→L[ℝ] E) :=
-        { toFun := fun X => L X
-          map_add' := fun X Y => L.map_add X Y
-          map_smul' := fun c X => L.map_smul c X
-          cont := L.continuous }
-      exact ContinuousLinearMap.intervalIntegral_comp_comm
-        (𝕜 := ℝ) (F := Q →L[ℝ] Q [×n]→L[ℝ] E) Lc (hc.intervalIntegrable a b)
-    rw [hI] at hh
-    exact hh
+          (J (n + 1) q)) q :=
+    hasFDerivAt_integral_parametricSpatialJet hf hj n a b q
   have hjet : ∀ n : ℕ, ∀ q : Q,
       iteratedFDeriv ℝ n (fun y : Q => ∫ t in a..b, f (y, t)) q = J n q := by
     intro n

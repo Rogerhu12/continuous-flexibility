@@ -204,11 +204,11 @@ theorem strictMonoOn_angleNormalizedTravel
   have hd := hDiff.hasFDerivAt
   have hc := hd.comp_hasDerivAt r
     ((hasDerivAt_id r).prodMk (hasDerivAt_const r η))
-  have he : (angleNormalizedTravel Γ) ∘ (fun s : ℝ => (s, η)) =
+  have he : (angleNormalizedTravel Γ) ∘ (fun s : ℝ => (id s, η)) =
       (fun s : ℝ => angleNormalizedTravel Γ (s, η)) := by
     funext s
-    exact Function.comp_apply
-  rw [he] at hc
+    simp only [Function.comp_apply, id_eq]
+  rw [he] at hc ⊢
   have hderiv : deriv (fun s : ℝ => angleNormalizedTravel Γ (s, η)) r =
       radialPartial (angleNormalizedTravel Γ) (r, η) := hc.deriv
   rw [hderiv, radialPartial_angleNormalizedTravel isOpen_Ioo hSmooth hAngle hMonoI hSurjI hp]

@@ -40,16 +40,65 @@ theorem circleMember_singleConstant (T : MaterialData) (γ : ℝ) (m : ℕ) (c :
       ENNReal.mul_lt_top ENNReal.ofReal_lt_top
         (ENNReal.pow_lt_top (hm m (j.val 0).val).eLpNorm_lt_top)
   · intro n hn
-    have hf : circleSingleConstant m c n = fun _ : ℝ => 0 := by
+    have hf : circleSingleConstant m c n = (0 : ℝ → ℝ) := by
       funext θ
-      exact if_neg hn
-    simp only [hf, iteratedDeriv_const_zero, eLpNorm_zero,
+      exact ite_eq_right hn
+    have hd (b : ℕ) : iteratedDeriv b (circleSingleConstant m c n) = 0 := by
+      funext θ
+      simp only [hf, iteratedDeriv_fun_const_zero, Pi.zero_apply]
+    simp only [hd, eLpNorm_zero,
       zero_pow (by decide : 2 ≠ 0), mul_zero, Finset.sum_const_zero]
 
 private theorem angularMean_single_constant (a : ℝ) :
     angularMean (fun _ : ℝ => a) = a := by
   rw [angularMean, intervalIntegral.integral_const, sub_zero, smul_eq_mul, one_div]
   exact inv_mul_cancel_left₀ Real.pi_ne_zero a
+
+private theorem pairGrading_control_shift
+    {E K : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace K] [AddCommGroup K] [Module ℝ K]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ K)
+    (n : ℕ) (x : E × (ℝ × (K × K))) (u : K) (t : ℝ) :
+    pairGrading p (pairGrading realGrading (pairGrading q q)) n
+      ((x.1, (x.2.1, (x.2.2.1 + t • u, x.2.2.2))) - x) = |t| * q n u := by
+  simp only [pairGrading_apply, Prod.fst_sub, Prod.snd_sub, sub_self,
+    add_sub_cancel_left, map_zero, map_smul_eq_mul, Real.norm_eq_abs, zero_add, add_zero]
+
+private def profileControlShift (S : PhysicalSpacesData)
+    (x : AnnularState S) (u : CircleSpace S) (t : ℝ) : AnnularState S :=
+  (x.1, (x.2.1, (x.2.2.1 + t • u, x.2.2.2)))
+
+private theorem stateGrading_profileControlShift (S : PhysicalSpacesData)
+    (x : AnnularState S) (u : CircleSpace S) (t : ℝ) (n : ℕ) :
+    stateGrading S n (profileControlShift S x u t - x) =
+      |t| * (S.circle (3 / 4 : ℝ)).grading n u :=
+  pairGrading_control_shift (heightPairGrading S) (S.circle (3 / 4 : ℝ)).grading
+    n x u t
+
+private theorem stateProfile_profileControlShift
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    (href : referenceStateConditions D S C) {u : CircleSpace S} {m : ℕ}
+    (hu : (S.circle (3 / 4 : ℝ)).decode u = circleSingleConstant m 1) (t : ℝ) :
+    stateProfile D S C (profileControlShift S C.referenceState u t) =
+      fun s => D.w s * Real.exp (t * C.control m s) := by
+  have hk (n : ℕ) : stateKappa S (profileControlShift S C.referenceState u t) n =
+      if n = m then t else 0 := by
+    change angularMean ((S.circle (3 / 4 : ℝ)).decode
+      (C.referenceState.2.2.1 + t • u) n) = _
+    rw [href.2.2.2.1, zero_add, map_smul, hu]
+    simp only [Pi.smul_apply, smul_eq_mul, circleSingleConstant]
+    by_cases hn : n = m
+    · simp only [ite_eq_left hn, mul_one, angularMean_single_constant]
+    · simp only [ite_eq_right hn, mul_zero, angularMean_single_constant]
+  funext s
+  change D.w s * Real.exp (C.referenceState.2.1 * D.chi s +
+    ∑' n, stateKappa S (profileControlShift S C.referenceState u t) n * C.control n s) = _
+  rw [href.2.2.1]
+  simp only [zero_mul, zero_add]
+  rw [tsum_eq_single m]
+  · rw [hk, ite_eq_left rfl]
+  · intro n hn
+    simp only [hk, ite_eq_right hn, zero_mul]
 
 /-- Actual finite circle excitation makes each fixed control vanish on a
 neighborhood of every interior critical root. -/
@@ -64,43 +113,26 @@ theorem n01_control_eventuallyEq_zero_at_critical
     (circleSingleConstant m 1) (circleMember_singleConstant T (3 / 4 : ℝ) m 1)
   have href : referenceStateConditions D S C := hN.2.2.1
   have hε : 0 < ε := hN.2.1
-  let v : AnnularState S := (0, (0, (u, 0)))
-  let t : ℝ := (ε / 2) / (stateGrading S base v + 1)
-  have hv : 0 ≤ stateGrading S base v := apply_nonneg _ _
+  let N : ℝ := (S.circle (3 / 4 : ℝ)).grading base u
+  let t : ℝ := (ε / 2) / (N + 1)
+  have hv : 0 ≤ N := apply_nonneg _ _
   have ht : 0 < t := div_pos (half_pos hε) (by linarith)
-  have hmul : t * (stateGrading S base v + 1) = ε / 2 :=
+  have hmul : t * (N + 1) = ε / 2 :=
     div_mul_cancel₀ _ (by linarith)
-  have hsmall : stateGrading S base (t • v) < ε := by
-    rw [map_smul_eq_mul, Real.norm_eq_abs, abs_of_pos ht]
+  have hsmall : |t| * N < ε := by
+    rw [abs_of_pos ht]
     nlinarith only [hmul, ht, hε]
-  have hz : (C.referenceState + t • v, (0 : ℝ)) ∈
+  have hz : (profileControlShift S C.referenceState u t, (0 : ℝ)) ∈
       stateNeighborhood S C base ε := by
-    change stateGrading S base ((C.referenceState + t • v) - C.referenceState) < ε ∧
+    change stateGrading S base
+      (profileControlShift S C.referenceState u t - C.referenceState) < ε ∧
       |(0 : ℝ)| < ε
-    simpa only [add_sub_cancel_left, abs_zero] using And.intro hsmall hε
-  have hk (n : ℕ) : stateKappa S (C.referenceState + t • v) n =
-      if n = m then t else 0 := by
-    change angularMean ((S.circle (3 / 4 : ℝ)).decode
-      (C.referenceState.2.2.1 + t • u) n) = _
-    rw [href.2.2.2.1, zero_add, map_smul, hu]
-    simp only [Pi.smul_apply, smul_eq_mul, circleSingleConstant]
-    by_cases hn : n = m
-    · simp only [ite_eq_left hn, mul_one, angularMean_single_constant]
-    · simp only [ite_eq_right hn, mul_zero, angularMean_single_constant]
-  have hprofile : stateProfile D S C (C.referenceState + t • v) =
-      fun s => D.w s * Real.exp (t * C.control m s) := by
-    funext s
-    change D.w s * Real.exp ((C.referenceState.2.1 + t * 0) * D.chi s +
-      ∑' n, stateKappa S (C.referenceState + t • v) n * C.control n s) = _
-    rw [href.2.2.1]
-    simp only [mul_zero, zero_add]
-    rw [tsum_eq_single m]
-    · rw [hk, ite_eq_left rfl]
-    · intro n hn
-      simp only [hk, ite_eq_right hn, zero_mul]
-  have he : stateProfile D S C (C.referenceState + t • v) =ᶠ[𝓝 r] D.w :=
-    hN.2.2.2.2.2.2.2.2.2.2.1 (C.referenceState + t • v, 0) hz r hr hcritical
-  rw [hprofile] at he
+    rw [stateGrading_profileControlShift, abs_zero]
+    exact ⟨hsmall, hε⟩
+  have he : stateProfile D S C (profileControlShift S C.referenceState u t) =ᶠ[𝓝 r] D.w :=
+    hN.2.2.2.2.2.2.2.2.2.2.1
+      (profileControlShift S C.referenceState u t, 0) hz r hr hcritical
+  rw [stateProfile_profileControlShift href hu t] at he
   obtain ⟨_, hD⟩ := hN.1.1
   filter_upwards [he, isOpen_Ioo.mem_nhds hr] with s hs hsi
   have hwpos : 0 < D.w s := hD.1.2.2.2.2.1 s hsi
