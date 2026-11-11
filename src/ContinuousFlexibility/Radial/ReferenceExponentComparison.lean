@@ -63,17 +63,19 @@ theorem sourceNormSquare_mono_weights {D : ReferenceData} (hab : D.a ≤ D.b)
     {γ δ M N : ℝ} {F : RadialSource} (hF : SourceMember D δ N F)
     (hγ : γ ≤ δ) (hM : M ≤ N) :
     sourceNormSquare D γ M F ≤ sourceNormSquare D δ N F := by
-  exact add_le_add_left
+  unfold sourceNormSquare
+  exact add_le_add le_rfl
     (Summable.tsum_le_tsum (sourceCellSquare_mono_weights hab hF.1 hγ hM)
-      (hF.mono_weights hab hγ hM).2.1 hF.2.1) _
+      (hF.mono_weights hab hγ hM).2.1 hF.2.1)
 
 theorem outputNormSquare_mono_weights {D : ReferenceData} (hab : D.a ≤ D.b)
     {γ δ M N aL : ℝ} {U : RadialUnknown} (hU : OutputRealization D δ N aL U)
     (hγ : γ ≤ δ) (hM : N ≤ M) :
     outputNormSquare D γ M aL U ≤ outputNormSquare D δ N aL U := by
-  exact add_le_add_left
+  unfold outputNormSquare
+  exact add_le_add le_rfl
     (Summable.tsum_le_tsum (outputCellSquare_mono_weights hab hU.1 hγ hM)
-      (hU.mono_weights hab hγ hM).2.1 hU.2.1) _
+      (hU.mono_weights hab hγ hM).2.1 hU.2.1)
 
 theorem sourceNormSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
     {γ M : ℝ} {F : RadialSource} (hF : SourceMember D γ M F) :
