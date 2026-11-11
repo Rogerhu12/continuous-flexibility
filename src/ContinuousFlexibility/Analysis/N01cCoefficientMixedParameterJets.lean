@@ -58,6 +58,11 @@ theorem coefficientPrimitiveVector_evaluations (D : ReferenceData)
       coefficientPrimitiveVector D S C z p j.succ.succ.succ =
         z.2 * stateUPolarInput S j z.1 p := by
     simp only [coefficientPrimitiveVector, Fin.cons_succ]
+  have hi3 : (0 : Fin 5).succ.succ.succ = (3 : Fin 8) := by decide
+  have hi4 : (0 : Fin 4).succ.succ.succ.succ = (4 : Fin 8) := by decide
+  have hi5 : (0 : Fin 3).succ.succ.succ.succ.succ = (5 : Fin 8) := by decide
+  have hi6 : (0 : Fin 2).succ.succ.succ.succ.succ.succ = (6 : Fin 8) := by decide
+  have hi7 : (0 : Fin 1).succ.succ.succ.succ.succ.succ.succ = (7 : Fin 8) := by decide
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · simp only [coefficientPrimitiveVector, Fin.cons_zero]
   · simp only [coefficientPrimitiveVector, Fin.cons_one, Fin.cons_zero]
@@ -66,15 +71,21 @@ theorem coefficientPrimitiveVector_evaluations (D : ReferenceData)
           deriv (stateProfile D S C z.1) p.1 := by
       simp only [coefficientPrimitiveVector, Fin.cons_succ, Fin.cons_zero]
     exact htwo
-  · simpa only [stateUPolarInput, Fin.cases_zero] using htail (0 : Fin 5)
-  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
-      htail (0 : Fin 4).succ
-  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
-      htail (0 : Fin 3).succ.succ
-  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
-      htail (0 : Fin 2).succ.succ.succ
-  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
-      htail (0 : Fin 1).succ.succ.succ.succ
+  · have h := htail (0 : Fin 5)
+    rw [hi3] at h
+    simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using h
+  · have h := htail (0 : Fin 4).succ
+    rw [hi4] at h
+    simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using h
+  · have h := htail (0 : Fin 3).succ.succ
+    rw [hi5] at h
+    simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using h
+  · have h := htail (0 : Fin 2).succ.succ.succ
+    rw [hi6] at h
+    simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using h
+  · have h := htail (0 : Fin 1).succ.succ.succ.succ
+    rw [hi7] at h
+    simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using h
 
 /-- The discriminant expressed in the eight actual primitive inputs. -/
 def coefficientPrimitiveDiscriminant (y : Fin 8 → ℝ) : ℝ :=

@@ -33,7 +33,10 @@ private theorem pair_seminorm_reference_segment_explicit
     p ((x + t • (z.1 - x)) - x) < ε ∧ |t * z.2| < ε := by
   have hfst : ((x, (0 : ℝ)) + t • (z - (x, (0 : ℝ)))).1 =
       x + t • (z.1 - x) := by
-    simp only [Prod.fst_add, Prod.fst_smul, Prod.fst_sub]
+    rw [Prod.fst_add]
+    apply congrArg (fun y : E => x + y)
+    simpa only [LinearMap.fst_apply, Prod.fst_sub] using
+      (LinearMap.fst ℝ E ℝ).map_smul t (z - (x, (0 : ℝ)))
   have hsnd : ((x, (0 : ℝ)) + t • (z - (x, (0 : ℝ)))).2 = t * z.2 := by
     change (0 : ℝ) + t * (z.2 - 0) = t * z.2
     rw [zero_add, sub_zero]
