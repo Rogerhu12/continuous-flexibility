@@ -114,12 +114,12 @@ theorem N01Properties.minusFlow_collar_mixed_jets (a b : ℕ) (hab : 1 ≤ a + b
   have hinner : B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B * Q ≤ M := by
     have h := mul_le_mul_of_nonneg_left (hweight (C.cell m)) (mul_nonneg hB.le hQ)
-    convert h using 1 <;> dsimp only [M] <;> ring
+    convert h using 1 <;> ring
   have hdiff : |ordinaryFlowFamily S C m a b p z| ≤ (K ^ a * M) * E ^ (R * a) := by
     have h := (hraw z hz m a b p le_rfl ⟨hp.1.le, hp.2.le⟩).trans
       (mul_le_mul_of_nonneg_left hinner
         (mul_nonneg (pow_nonneg hK.le _) (Real.rpow_nonneg hE₀.le _)))
-    exact h.trans_eq (by dsimp only [Q]; ring)
+    exact h.trans_eq (by ring)
   let U : Set PolarPoint := Ioo (x m - δ m) (x m + δ m) ×ˢ univ
   have hU : IsOpen U := isOpen_Ioo.prod isOpen_univ
   have hF : ContDiffOn ℝ ∞ (fun q : PolarPoint => C.minusFlow z m q.1 q.2) U :=

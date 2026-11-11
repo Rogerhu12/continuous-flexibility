@@ -55,9 +55,12 @@ theorem N01Properties.returnResidualField_positive_jets_uniform
     refine ⟨A, hA, fun m θ => ?_⟩
     change |iteratedDeriv k (fun t =>
       stateLeftChart S z.1 m (C.minusReturnInverse z m t) - C.travel m) θ| ≤ A
-    rw [iteratedDeriv_sub_const_of_pos
-      ((stateLeftChart_contDiff S z m (hS.2.1 (3 / 4 : ℝ))).comp
-        (hN.minusReturnInverse_contDiff hS hT hz hsector m)) k hk]
+    have hcomp : ContDiff ℝ ∞ (fun t : ℝ =>
+        stateLeftChart S z.1 m (C.minusReturnInverse z m t)) := by
+      simpa only [Function.comp_def] using
+        ((stateLeftChart_contDiff S z m (hS.2.1 (3 / 4 : ℝ))).comp
+          (hN.minusReturnInverse_contDiff hS hT hz hsector m))
+    rw [iteratedDeriv_sub_const_of_pos hcomp k hk (C.travel m) θ]
     exact hb m θ
   have heF (m : ℕ) : ContDiff ℝ ∞ (evenPart (F m)) :=
     ((hF m).add ((hF m).comp contDiff_neg)).div_const 2

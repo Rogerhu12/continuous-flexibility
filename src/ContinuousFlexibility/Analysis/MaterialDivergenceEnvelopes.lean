@@ -22,7 +22,7 @@ open scoped ContDiff Topology
 theorem WeightedMixedJetEnvelopes.radialPartial {ι : Type*}
     {W : PolarPoint → ℝ} {f : ι → PolarPoint → ℝ}
     (hf : ∀ i, ContDiff ℝ ∞ (f i)) (henv : WeightedMixedJetEnvelopes W f) :
-    WeightedMixedJetEnvelopes W (fun i => radialPartial (f i)) := by
+    WeightedMixedJetEnvelopes W (fun i => ContinuousFlexibility.Statements.radialPartial (f i)) := by
   intro a b c
   obtain ⟨G, hG, hGpos, hb⟩ := henv (a + 1) b c
   refine ⟨G, hG, hGpos, fun i p => ?_⟩
@@ -32,7 +32,7 @@ theorem WeightedMixedJetEnvelopes.radialPartial {ι : Type*}
 theorem WeightedMixedJetEnvelopes.angularPartial {ι : Type*}
     {W : PolarPoint → ℝ} {f : ι → PolarPoint → ℝ}
     (hf : ∀ i, ContDiff ℝ ∞ (f i)) (henv : WeightedMixedJetEnvelopes W f) :
-    WeightedMixedJetEnvelopes W (fun i => angularPartial (f i)) := by
+    WeightedMixedJetEnvelopes W (fun i => ContinuousFlexibility.Statements.angularPartial (f i)) := by
   intro a b c
   obtain ⟨G, hG, hGpos, hb⟩ := henv a (b + 1) c
   refine ⟨G, hG, hGpos, fun i p => ?_⟩
@@ -71,7 +71,7 @@ theorem PhysicalJetEnvelopes.angularPartial
     {f : ι → PolarPoint → ℝ} (hT : IsMaterialData D T)
     (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (annularOpen D))
     (henv : PhysicalJetEnvelopes T γ f) :
-    PhysicalJetEnvelopes T γ (fun i => angularPartial (f i)) := by
+    PhysicalJetEnvelopes T γ (fun i => ContinuousFlexibility.Statements.angularPartial (f i)) := by
   have hG (i : ι) : ContDiff ℝ ∞ (materialPullback T γ (f i)) :=
     contDiff_materialPullback hT (hf i)
   have hGenv := physicalJetEnvelopes_iff_material.mp henv
@@ -86,17 +86,17 @@ theorem PhysicalJetEnvelopes.radialPartial
     {f : ι → PolarPoint → ℝ} (hT : IsMaterialData D T)
     (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (annularOpen D))
     (henv : PhysicalJetEnvelopes T γ f) :
-    PhysicalJetEnvelopes T γ (fun i => radialPartial (f i)) := by
+    PhysicalJetEnvelopes T γ (fun i => ContinuousFlexibility.Statements.radialPartial (f i)) := by
   let W (p : PolarPoint) : ℝ := T.M (T.radius p.1)
   let G (i : ι) : PolarPoint → ℝ := materialPullback T γ (f i)
   let L (p : PolarPoint) : ℝ :=
     γ * deriv (fun t => Real.log (T.H (T.radius t))) p.1
   let A (p : PolarPoint) : ℝ := (T.ell (T.radius p.1))⁻¹
-  let V (i : ι) (p : PolarPoint) : ℝ := radialPartial (G i) p + L p * G i p
+  let V (i : ι) (p : PolarPoint) : ℝ := ContinuousFlexibility.Statements.radialPartial (G i) p + L p * G i p
   have hrange (t : ℝ) : T.radius t ∈ Ioo D.a D.b := (hT.2.2.2.2.2.2.2.1 t).1
   have hW (p : PolarPoint) : 0 ≤ W p := zero_le_one.trans (hT.2.1 _ (hrange p.1)).2.2.2
   have hG (i : ι) : ContDiff ℝ ∞ (G i) := contDiff_materialPullback hT (hf i)
-  have hR (i : ι) : ContDiff ℝ ∞ (radialPartial (G i)) := by
+  have hR (i : ι) : ContDiff ℝ ∞ (ContinuousFlexibility.Statements.radialPartial (G i)) := by
     apply contDiff_iff_contDiffAt.mpr
     intro p
     exact contDiffAt_radialPartial (hG i).contDiffAt (m := ∞) (by simp)
@@ -139,17 +139,17 @@ theorem PhysicalJetEnvelopes.symmetric_divergence
     (hu : ∀ i, ContDiffOn ℝ ∞ (u i) (annularOpen D))
     (huenv : PhysicalJetEnvelopes T γ u) :
     PhysicalJetEnvelopes T γ (fun i p =>
-      radialPartial (fun q => A i q * angularPartial (u i) q) p +
-        angularPartial (fun q => A i q * radialPartial (u i) q +
-          B i q * angularPartial (u i) q) p) := by
+      ContinuousFlexibility.Statements.radialPartial (fun q => A i q * ContinuousFlexibility.Statements.angularPartial (u i) q) p +
+        ContinuousFlexibility.Statements.angularPartial (fun q => A i q * ContinuousFlexibility.Statements.radialPartial (u i) q +
+          B i q * ContinuousFlexibility.Statements.angularPartial (u i) q) p) := by
   have hU : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
   have hur (i : ι) := contDiffOn_radialPartial_of_isOpen hU (hu i)
   have hut (i : ι) := contDiffOn_angularPartial_of_isOpen hU (hu i)
   have hurEnv := PhysicalJetEnvelopes.radialPartial hT hu huenv
   have hutEnv := PhysicalJetEnvelopes.angularPartial hT hu huenv
-  let F (i : ι) (p : PolarPoint) : ℝ := A i p * angularPartial (u i) p
+  let F (i : ι) (p : PolarPoint) : ℝ := A i p * ContinuousFlexibility.Statements.angularPartial (u i) p
   let G (i : ι) (p : PolarPoint) : ℝ :=
-    A i p * radialPartial (u i) p + B i p * angularPartial (u i) p
+    A i p * ContinuousFlexibility.Statements.radialPartial (u i) p + B i p * ContinuousFlexibility.Statements.angularPartial (u i) p
   have hF (i : ι) : ContDiffOn ℝ ∞ (F i) (annularOpen D) := (hA i).mul (hut i)
   have hG (i : ι) : ContDiffOn ℝ ∞ (G i) (annularOpen D) :=
     ((hA i).mul (hur i)).add ((hB i).mul (hut i))

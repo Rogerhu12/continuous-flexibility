@@ -32,7 +32,7 @@ theorem mixedDerivative_radial_field (f : ℝ → ℝ) (a b : ℕ) (p : PolarPoi
       if b = 0 then iteratedDeriv a f p.1 else 0 := by
   by_cases hb : b = 0
   · subst b
-    simp only [mixedDerivative, iteratedDeriv_zero, if_pos rfl]
+    simp only [mixedDerivative, iteratedDeriv_zero, ↓reduceIte]
   · have hzero (r : ℝ) : iteratedDeriv b (fun _ : ℝ => f r) p.2 = 0 := by
       simp only [iteratedDeriv_const, if_neg hb]
     simp only [mixedDerivative, hzero, iteratedDeriv_const, ite_self, if_neg hb]
@@ -55,11 +55,12 @@ theorem N01Properties.coefficientFamily_uniform_bound
   have hpoint : ∀ m i a b p, a + b ≤ s → p.1 ∈ D.cells m →
       |coefficientFamily D S C i a b p z| ≤ B * A * Q := by
     intro m i a b p hab hp
-    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m i a b p hab hp
+    let dataJ := hdata.choose_spec.2 m i a b p hab hp
+    let J := dataJ.choose
     have hraw : |J.D 0 z Fin.elim0| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample m) ^ B * Q := by
       simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-        mul_one, add_zero, Q] using hJ z hz Fin.elim0
+        mul_one, add_zero, Q, B] using dataJ.choose_spec z hz Fin.elim0
     have hzero : J.D 0 z Fin.elim0 = coefficientFamily D S C i a b p z := J.zero z hz
     have hM : B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample m) ^ B * Q ≤ B * A * Q := by

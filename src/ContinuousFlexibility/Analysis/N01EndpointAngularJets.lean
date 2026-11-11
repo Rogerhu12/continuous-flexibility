@@ -37,7 +37,8 @@ theorem N01Properties.ordinaryFlowFamily_angular_hasDerivAt
     (hN.minusFlow_angular_contDiff hS hT hz hsector m hr).sub
       (hN.minusFlow_angular_contDiff hS hT hN.reference_mem_stateNeighborhood
         href.stateSector m hr)
-  have hd := (hF.differentiable_iteratedDeriv b (by simp) θ).hasDerivAt
+  have hd := (hF.differentiable_iteratedDeriv b
+    (ENat.natCast_lt_of_coe_top_le_withTop le_rfl b) θ).hasDerivAt
   simpa only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero,
     iteratedDeriv_succ] using hd
 
@@ -59,8 +60,21 @@ theorem N01Properties.ordinaryFlowFamily_angular_periodic
   have heq : (fun θ => F (θ + Real.pi)) = F := funext hperiod
   intro θ
   have hj := congrArg (fun G : ℝ → ℝ => iteratedDeriv b G θ) heq
+  rw [iteratedDeriv_comp_add_const] at hj
   simpa only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero,
-    iteratedDeriv_comp_add_const, F] using hj
+    F] using hj
+
+private theorem scalarTower_bound_of_exists
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : E → ℝ} (J : SmoothDirections U f) (k : ℕ)
+    (P : E → (Fin k → E) → ℝ)
+    (h : ∃ K : SmoothDirections U f, ∀ x ∈ U, ∀ v, |K.D k x v| ≤ P x v) :
+    ∀ x ∈ U, ∀ v, |J.D k x v| ≤ P x v := by
+  intro x hx v
+  have heq : |J.D k x v| = |h.choose.D k x v| :=
+    congrArg (fun L : E [×k]→L[ℝ] ℝ => |L v|) (J.unique h.choose k x hx)
+  exact heq.trans_le (h.choose_spec x hx v)
 
 /-- A selected genuine tower for the actual closed-radius angular jet.
 All estimates below concern this one family of towers. -/
@@ -94,13 +108,10 @@ theorem N01Properties.sectorFlow_closed_angularTower_bound
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
               base (s + loss) z v := by
-    intro m r hr b θ hb z hz v
-    let htower := hdata.choose_spec.2 m b θ r hb hr
-    have heq : (hN.sectorFlow_closed_angularTower hS hT m r hr b θ).D k z =
-        htower.choose.D k z :=
-      (hN.sectorFlow_closed_angularTower hS hT m r hr b θ).unique htower.choose k z hz
-    rw [heq]
-    exact htower.choose_spec z hz v
+    intro m r hr b θ hb
+    exact scalarTower_bound_of_exists
+      (hN.sectorFlow_closed_angularTower hS hT m r hr b θ) k _
+      (hdata.choose_spec.2 m b θ r hb hr)
   exact Exists.intro B (And.intro hB hpoint)
 
 theorem N01Properties.sectorFlow_closed_angularTower_uniformBounds

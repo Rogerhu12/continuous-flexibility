@@ -62,7 +62,8 @@ theorem returnCorrectionSourceError_decode
       (returnCorrectionSourceError hN hS hT R χ hχ hχrange hsupp hend hdisc hmember z ρ η) =
       returnCorrectionResidualErrorField D S C R χ z ρ η := by
   classical
-  simp only [returnCorrectionSourceError, dif_pos ⟨hz, hs⟩,
+  have hz' : z ∈ stateNeighborhood S C base ε ∧ stateSector S z.1 := ⟨hz, hs⟩
+  simp only [returnCorrectionSourceError, dif_pos hz',
     liftPhysicalSourceBilinear_decode, returnCorrectionResidualErrorBilinearOfCutoffs_apply]
 
 theorem returnCorrectionSourceError_eq_of_decode
@@ -72,7 +73,8 @@ theorem returnCorrectionSourceError_eq_of_decode
       returnCorrectionResidualErrorField D S C R χ z ρ η) :
     u = returnCorrectionSourceError hN hS hT R χ hχ hχrange hsupp hend hdisc hmember z ρ η := by
   apply physicalSourceDecode_injective hS
-  rw [hu, returnCorrectionSourceError_decode hN hS hT R χ hχ hχrange hsupp hend hdisc hmember hz hs]
+  exact hu.trans (returnCorrectionSourceError_decode hN hS hT R χ hχ hχrange
+    hsupp hend hdisc hmember hz hs ρ η).symm
 
 theorem returnCorrectionSourceError_grading_le_iff
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)

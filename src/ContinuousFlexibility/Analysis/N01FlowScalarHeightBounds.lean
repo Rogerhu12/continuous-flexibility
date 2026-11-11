@@ -47,9 +47,13 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
             T.E0 (T.sample (C.cell m)) ^ B *
             (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
               heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  obtain ⟨B, hB, hclosed⟩ := hN.sectorFlow_closed_tower hS hT (n + 2) s
+  let hdata := hN.sectorFlow_closed_tower hS hT (n + 2) s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
   refine ⟨B, hB, fun m b θ r hb hr => ?_⟩
-  obtain ⟨J, hJ⟩ := hclosed m b θ r hb hr
+  let htower := hdata.choose_spec.2 m b θ r hb hr
+  let J := htower.choose
+  have hJ := htower.choose_spec
   refine ⟨J, fun z hz η hη => ?_⟩
   obtain ⟨c, hη⟩ := hη
   let x₀ : StateDirections S × ℝ := (z.1, 0)
@@ -125,11 +129,12 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
             T.E0 (T.sample (C.cell m)) ^ B *
             (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
               heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  obtain ⟨B, hB, htower⟩ :=
-    hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+  let hdata := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
   refine ⟨B, hB, fun m b θ r hb hr => ?_⟩
-  obtain ⟨J, hJ⟩ := htower m b θ r hb hr
-  refine ⟨J, fun z hz η hη => hJ z hz η ⟨0, ?_⟩⟩
+  let htower := hdata.choose_spec.2 m b θ r hb hr
+  refine ⟨htower.choose, fun z hz η hη => htower.choose_spec z hz η ⟨0, ?_⟩⟩
   intro t ht ψ
   simpa only [add_zero] using hη t ht ψ
 

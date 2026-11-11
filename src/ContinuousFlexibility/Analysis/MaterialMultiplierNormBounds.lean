@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.MaterialMixedMultiplier
 import ContinuousFlexibility.Analysis.PhysicalGradeEnergy
 import ContinuousFlexibility.Analysis.CylinderUniformNorm
+import ContinuousFlexibility.Analysis.MaterialRadiusJets
 
 /-!
 # Multiplier estimates with the full mixed derivative budget
@@ -73,9 +74,9 @@ private theorem multiplier_eLpNorm_const_mul
     eLpNorm (fun p => c * f p) 2 materialCylinderMeasure ≤ ENNReal.ofReal (c * A) := by
   change eLpNorm (c • f) 2 materialCylinderMeasure ≤ _
   rw [eLpNorm_const_smul, Real.enorm_eq_ofReal hc, ENNReal.ofReal_mul hc]
-  exact mul_le_mul_left' hb _
+  exact mul_le_mul_right hb _
 
-private theorem multiplier_eLpNorm_finset_sum
+theorem multiplier_eLpNorm_finset_sum
     {ι : Type*} (I : Finset ι) (f : ι → PolarPoint → ℝ) (A : ι → ℝ)
     (hA : ∀ i ∈ I, 0 ≤ A i)
     (hb : ∀ i ∈ I, eLpNorm (f i) 2 materialCylinderMeasure ≤ ENNReal.ofReal (A i)) :
@@ -109,6 +110,16 @@ theorem materialMultiplierJetConstant_nonneg (s : ℕ) :
     0 ≤ materialMultiplierJetConstant s := by
   unfold materialMultiplierJetConstant
   positivity
+
+private theorem materialMultiplierJetConstant_term_le (s : ℕ) (J : JetIndex s) :
+    (∑ j ∈ Finset.range ((J.val 1).val + 1),
+      ∑ i ∈ Finset.range ((J.val 0).val + 1),
+        ((J.val 1).val.choose j : ℝ) * ((J.val 0).val.choose i : ℝ)) ≤
+      materialMultiplierJetConstant s := by
+  unfold materialMultiplierJetConstant
+  exact Finset.single_le_sum
+    (fun K _ => Finset.sum_nonneg (fun j _ => Finset.sum_nonneg (fun i _ =>
+      mul_nonneg (Nat.cast_nonneg _) (Nat.cast_nonneg _)))) (Finset.mem_univ J)
 
 def materialMultiplierNormConstant (s : ℕ) : ℝ :=
   Real.sqrt (Fintype.card (JetIndex s) : ℝ) * materialMultiplierJetConstant s
@@ -189,12 +200,8 @@ theorem weightedMixedJets_eLpNorm_mul_bound
       Matrix.head_cons, Matrix.tail_cons] using horder⟩
   have hc : (∑ j ∈ Finset.range (b + 1), ∑ i ∈ Finset.range (a + 1),
       (b.choose j : ℝ) * (a.choose i : ℝ)) ≤ materialMultiplierJetConstant s := by
-    exact Finset.single_le_sum (f := fun J : JetIndex s =>
-      ∑ j ∈ Finset.range ((J.val 1).val + 1),
-        ∑ i ∈ Finset.range ((J.val 0).val + 1),
-          ((J.val 1).val.choose j : ℝ) * ((J.val 0).val.choose i : ℝ))
-      (fun J _ => Finset.sum_nonneg (fun j _ => Finset.sum_nonneg (fun i _ =>
-        mul_nonneg (Nat.cast_nonneg _) (Nat.cast_nonneg _)))) (Finset.mem_univ J)
+    simpa only [J, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.head_cons, Matrix.tail_cons] using materialMultiplierJetConstant_term_le s J
   exact hb.trans (ENNReal.ofReal_le_ofReal
     ((mul_le_mul_of_nonneg_right hc (mul_nonneg hK hN)).trans_eq (mul_assoc _ _ _).symm))
 
@@ -281,7 +288,7 @@ theorem physicalNorm_mul_le_order_budget_of_memLp
                 2 materialCylinderMeasure := by
             rw [eLpNorm_const_smul, Real.enorm_eq_ofReal (hK (i + j))]
           _ ≤ ENNReal.ofReal (K (i + j)) *
-              ENNReal.ofReal (physicalNorm T γ (s - (i + j) + d) u) := mul_le_mul_left' hn _
+              ENNReal.ofReal (physicalNorm T γ (s - (i + j) + d) u) := mul_le_mul_right hn _
           _ = _ := (ENNReal.ofReal_mul (hK (i + j))).symm
       have hs : K (i + j) * physicalNorm T γ (s - (i + j) + d) u ≤ B :=
         Finset.single_le_sum
@@ -307,12 +314,7 @@ theorem physicalNorm_mul_le_order_budget_of_memLp
       exact weighted_mixedDerivative_mul hF hG W a b c p
     have hcoeff : (∑ j ∈ Finset.range (b + 1),
         ∑ i ∈ Finset.range (a + 1), A j i) ≤ materialMultiplierJetConstant s := by
-      exact Finset.single_le_sum (f := fun J : JetIndex s =>
-        ∑ j ∈ Finset.range ((J.val 1).val + 1),
-          ∑ i ∈ Finset.range ((J.val 0).val + 1),
-            ((J.val 1).val.choose j : ℝ) * ((J.val 0).val.choose i : ℝ))
-        (fun J _ => Finset.sum_nonneg (fun j _ => Finset.sum_nonneg (fun i _ =>
-          mul_nonneg (Nat.cast_nonneg _) (Nat.cast_nonneg _)))) (Finset.mem_univ J)
+      exact materialMultiplierJetConstant_term_le s J
     have hreal : (∑ j ∈ Finset.range (b + 1),
         ∑ i ∈ Finset.range (a + 1), A j i * B) ≤ materialMultiplierJetConstant s * B := by
       simpa only [Finset.sum_mul] using mul_le_mul_of_nonneg_right hcoeff hB

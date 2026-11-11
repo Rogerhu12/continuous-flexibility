@@ -194,4 +194,23 @@ def circleJointEvaluationDirections
     (smoothDirectionsLinear (ContinuousLinearMap.id ℝ S.Space)) m
   simpa only [univ_prod_univ, ContinuousLinearMap.id_apply] using J
 
+/-- The decoded circle displacement with its actual affine lift. The
+translation is fixed and may vary arbitrarily with the circle index. -/
+def circleAffineLiftJointDirections
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : E → S.Space}
+    (hS : IsCircleModel T γ S) (hH : ∀ m, 0 < T.H (T.sample m))
+    (J : SmoothDirections U f) (travel : ℕ → ℝ) (m : ℕ) :
+    SmoothDirections (U ×ˢ univ)
+      (fun p : E × ℝ => p.2 + travel m + S.decode (f p.1) m p.2) := by
+  let L : (E × ℝ) →L[ℝ] ℝ := ContinuousLinearMap.snd ℝ E ℝ
+  let R := (smoothDirectionsLinear (ContinuousLinearMap.id ℝ ℝ)).compAffine L
+    (travel m) (J.open_domain.prod isOpen_univ) (fun _ _ => mem_univ _)
+  let K := circleDecodedJointDirections hS hH J m
+  apply (smoothDirectionsAdd R K).congrOn
+  intro p hp
+  change (travel m + p.2) + S.decode (f p.1) m p.2 = _
+  ring
+
 end ContinuousFlexibility.Statements

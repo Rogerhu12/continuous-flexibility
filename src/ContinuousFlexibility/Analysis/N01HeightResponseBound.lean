@@ -19,16 +19,18 @@ open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
 
+private theorem pairGrading_left_zero
+    {E F : Type*} [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (s : ℕ) (x : E) :
+    pairGrading p q s (x, 0) = p s x := by
+  rw [pairGrading_apply, (q s).map_zero', add_zero]
+
 theorem stateGrading_heightOnlyDirection (S : PhysicalSpacesData)
     (s : ℕ) (η : HeightPair S) :
-    stateGrading S s ((η, 0) : AnnularState S) = heightPairGrading S s η := by
-  rw [stateGrading, pairGrading_apply]
-  have hz : pairGrading realGrading
-      (pairGrading (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading) s
-      (0 : ℝ × (CircleSpace S × CircleSpace S)) = 0 :=
+    stateGrading S s ((η, 0) : AnnularState S) = heightPairGrading S s η :=
+  pairGrading_left_zero (heightPairGrading S)
     (pairGrading realGrading
-      (pairGrading (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading) s).map_zero'
-  rw [hz, add_zero]
+      (pairGrading (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading)) s η
 
 theorem heightSpeedVariation_congr_of_eventuallyEq
     {w : ℝ → ℝ} {η ζ : PolarPoint → ℝ} {p : PolarPoint}
@@ -52,6 +54,25 @@ theorem heightSpeedVariation_congr_of_eventuallyEq
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem abs_integral_le_of_partial_bounds
+    {l r K : ℝ} (hlr : l < r) (f : ℝ → ℝ)
+    (hi : IntervalIntegrable f volume l r)
+    (hbound : ∀ b ∈ Ioo l r, |∫ x in l..b, f x| ≤ K) :
+    |∫ x in l..r, f x| ≤ K := by
+  let G (b : ℝ) : ℝ := ∫ x in l..b, f x
+  have hGc : ContinuousOn G (Icc l r) := by
+    simpa only [G, uIcc_of_le hlr.le] using
+      intervalIntegral.continuousOn_primitive_interval' hi left_mem_uIcc
+  have hclosure : r ∈ closure (Ioo l r) := by
+    rw [closure_Ioo hlr.ne]
+    exact ⟨hlr.le, le_rfl⟩
+  haveI : NeBot (𝓝[Ioo l r] r) := mem_closure_iff_nhdsWithin_neBot.mp hclosure
+  have hlim : Tendsto (fun b => |G b|) (𝓝[Ioo l r] r) (𝓝 |G r|) :=
+    (hGc.abs r ⟨hlr.le, le_rfl⟩).mono Ioo_subset_Icc_self
+  apply le_of_tendsto hlim
+  filter_upwards [self_mem_nhdsWithin] with b hb
+  exact hbound b hb
+
 /-- The same constant controls every full-component response in every
 actual height direction. -/
 theorem N01Properties.heightResponse_integral_bound
@@ -63,10 +84,13 @@ theorem N01Properties.heightResponse_integral_bound
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
-  obtain ⟨B, hB, hbound⟩ := hN.minusFlow_state_q_mixed_derivative_bound
+  let hdata := hN.minusFlow_state_q_mixed_derivative_bound
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  have hbound := hdata.choose_spec.2
   refine ⟨B, hB, fun η m θ => ?_⟩
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
-  obtain ⟨_, hgeom⟩ := hN.1.1
+  have hgeom := hN.1.1.choose_spec
   have hlh : C.left m < C.right m := (hcontrol.1 m).2.1
   have hl : 0 < C.left m := hgeom.1.1.trans (hcontrol.1 m).1
   have hwp : ∀ r ∈ Icc (C.left m) (C.right m), 0 < D.w r := by
@@ -77,28 +101,17 @@ theorem N01Properties.heightResponse_integral_bound
     physical_height_with_cutoff_contDiff hT hS (by norm_num : (0 : ℝ) < 3 / 4) η.1 η.2
   let f : ℝ → ℝ := fun r => heightSpeedVariation D.w (heightPairField S η)
     (r, θ - opticalTravel D.w (C.left m) r)
-  let G : ℝ → ℝ := fun b => ∫ r in C.left m..b, f r
   have hi : IntervalIntegrable f volume (C.left m) (C.right m) :=
-    (heightResponseIntegrand_continuousOn hgeom.1.2.2.1.1 hη hl hlh.le hwp θ)
-      .intervalIntegrable_of_Icc hlh.le
-  have hGc : ContinuousOn G (Icc (C.left m) (C.right m)) := by
-    simpa only [G, uIcc_of_le hlh.le] using
-      intervalIntegral.continuousOn_primitive_interval' hi left_mem_uIcc
-  have hc : ContinuousOn (fun b => |G b|) (Icc (C.left m) (C.right m)) := hGc.abs
-  have hclosure : C.right m ∈ closure (Ioo (C.left m) (C.right m)) := by
-    rw [closure_Ioo hlh.ne]
-    exact ⟨hlh.le, le_rfl⟩
-  haveI : NeBot (𝓝[Ioo (C.left m) (C.right m)] (C.right m)) :=
-    mem_closure_iff_nhdsWithin_neBot.mp hclosure
-  have hlim : Tendsto (fun b => |G b|)
-      (𝓝[Ioo (C.left m) (C.right m)] (C.right m)) (𝓝 |G (C.right m)|) :=
-    (hc (C.right m) ⟨hlh.le, le_rfl⟩).mono Ioo_subset_Icc_self
-  apply le_of_tendsto hlim
-  filter_upwards [self_mem_nhdsWithin] with b hb
+    (heightResponseIntegrand_continuousOn hgeom.1.2.2.1.1 hη hl hlh.le hwp θ).intervalIntegrable_of_Icc hlh.le
+  apply abs_integral_le_of_partial_bounds hlh f hi
+  intro b hb
   have hbi := hbound ((η, 0) : AnnularState S) m b θ hb
-  rw [(hN.minusFlow_height_q_mixed_hasDerivAt hS hT η m θ ⟨hb.1.le, hb.2.le⟩).deriv]
-    at hbi
-  simpa only [stateGrading_heightOnlyDirection] using hbi
+  have hd := (hN.minusFlow_height_q_mixed_hasDerivAt hS hT η m θ ⟨hb.1.le, hb.2.le⟩).deriv
+  have hg := congrArg₂ (fun a b : ℝ => 2 * a + b)
+    (stateGrading_heightOnlyDirection S base η) (stateGrading_heightOnlyDirection S loss η)
+  exact ((congrArg abs hd).symm.trans_le hbi).trans_eq
+    (congrArg (fun q : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B * q) hg)
 
 /-- Only local agreement on the open component is needed. Turning
 endpoints are removed as null singletons when identifying the integral. -/
@@ -113,10 +126,13 @@ theorem N01Properties.opticalTravel_le_radialHeightDirection_weight
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
-  obtain ⟨B, hB, hbound⟩ := hN.heightResponse_integral_bound hS hT
+  let hdata := hN.heightResponse_integral_bound hS hT
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  have hbound := hdata.choose_spec.2
   refine ⟨B, hB, fun η m h hhw hgerm => ?_⟩
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
-  obtain ⟨_, hgeom⟩ := hN.1.1
+  have hgeom := hN.1.1.choose_spec
   have hlh : C.left m < C.right m := (hcontrol.1 m).2.1
   have hl : 0 < C.left m := hgeom.1.1.trans (hcontrol.1 m).1
   have hwp : ∀ r ∈ Icc (C.left m) (C.right m), 0 < D.w r := by
@@ -156,7 +172,8 @@ theorem N01Properties.opticalTravel_le_radialHeightDirection_weight
       intro r hr
       have ho : 0 ≤ opticalSpeed D.w r := Real.sqrt_nonneg _
       simpa only [one_mul] using
-        mul_le_mul_of_nonneg_right (le_add_of_nonneg_right (sq_nonneg (D.w r))) ho
+        mul_le_mul_of_nonneg_right
+          (show (1 : ℝ) ≤ 1 + D.w r ^ 2 from le_add_of_nonneg_right (sq_nonneg (D.w r))) ho
     _ ≤ |∫ r in C.left m..C.right m, (1 + D.w r ^ 2) * opticalSpeed D.w r| :=
       le_abs_self _
     _ ≤ _ := hbi

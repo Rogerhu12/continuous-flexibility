@@ -51,14 +51,16 @@ theorem N01Properties.stateProfile_on_component
     rw [hN.2.2.2.1.control_zero_other hn hr, mul_zero]
   simp only [stateProfile, hN.border_zero_on_component m hr, mul_zero, zero_add, hsum]
 
+private theorem angularMean_eq_of_constant (f : ℝ → ℝ)
+    (hf : ∀ θ, f θ = f 0) : angularMean f = f 0 := by
+  have heq : f = fun _ : ℝ => f 0 := funext hf
+  rw [heq, angularMean, intervalIntegral.integral_const, sub_zero, smul_eq_mul]
+  field_simp
+
 theorem stateKappa_eq_decode_zero
     {S : PhysicalSpacesData} {x : AnnularState S} (hx : stateSector S x) (m : ℕ) :
-    stateKappa S x m = (S.circle (3 / 4 : ℝ)).decode x.2.2.1 m 0 := by
-  have heq : (S.circle (3 / 4 : ℝ)).decode x.2.2.1 m =
-      fun _ : ℝ => (S.circle (3 / 4 : ℝ)).decode x.2.2.1 m 0 :=
-    funext (fun θ => hx.1 m θ 0)
-  rw [stateKappa, heq, angularMean, intervalIntegral.integral_const, sub_zero, smul_eq_mul]
-  field_simp
+    stateKappa S x m = (S.circle (3 / 4 : ℝ)).decode x.2.2.1 m 0 :=
+  angularMean_eq_of_constant _ (fun θ => hx.1 m θ 0)
 
 theorem liftSectorParameter_direction_height
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
@@ -91,6 +93,9 @@ theorem liftSectorParameter_direction_control
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem height_line_add_constant (a t b c : ℝ) :
+    a + t * (b + c) = (a + t * b) + t * c := by ring
+
 theorem N01Properties.ordinaryFlowFamily_state_line_locality
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -110,23 +115,34 @@ theorem N01Properties.ordinaryFlowFamily_state_line_locality
   have hq : (liftSectorParameter S C (z + t • v)).2 =
       (liftSectorParameter S C (z + t • w)).2 := by
     change z.2 + t * v.2 = z.2 + t * w.2
-    rw [hvq, hwq]
+    exact congrArg (fun q : ℝ => z.2 + t * q) (hvq.trans hwq.symm)
   have hprofile : EqOn
       (stateProfile D S C (liftSectorParameter S C (z + t • v)).1)
       (stateProfile D S C (liftSectorParameter S C (z + t • w)).1)
       (Ioo (C.left m) (C.right m)) := by
     intro s hs
-    rw [hN.stateProfile_on_component _ m hs, hN.stateProfile_on_component _ m hs,
-      stateKappa_eq_decode_zero (hN.2.2.1.liftSectorParameter_sector _) m,
-      stateKappa_eq_decode_zero (hN.2.2.1.liftSectorParameter_sector _) m,
-      liftSectorParameter_direction_control, liftSectorParameter_direction_control, hκ]
+    have hv := (stateKappa_eq_decode_zero
+      (hN.2.2.1.liftSectorParameter_sector (z + t • v)) m).trans
+        (liftSectorParameter_direction_control S C z v t m 0)
+    have hw := (stateKappa_eq_decode_zero
+      (hN.2.2.1.liftSectorParameter_sector (z + t • w)) m).trans
+        (liftSectorParameter_direction_control S C z w t m 0)
+    have hk := hv.trans ((congrArg (fun q : ℝ =>
+      (S.circle (3 / 4 : ℝ)).decode (liftSectorParameter S C z).1.2.2.1 m 0 + t * q)
+        hκ).trans hw.symm)
+    exact (hN.stateProfile_on_component _ m hs).trans
+      ((congrArg (fun q : ℝ => D.w s * Real.exp (q * C.control m s)) hk).trans
+        (hN.stateProfile_on_component _ m hs).symm)
   have hu : ∀ s ∈ Ioo (C.left m) (C.right m), ∀ ψ,
       stateU S (liftSectorParameter S C (z + t • v)).1 (s, ψ) =
         stateU S (liftSectorParameter S C (z + t • w)).1 (s, ψ) + t * c := by
     intro s hs ψ
-    rw [liftSectorParameter_direction_height, liftSectorParameter_direction_height,
-      hheight s hs ψ]
-    ring
+    have hv := liftSectorParameter_direction_height S C z v t (s, ψ)
+    have hw := liftSectorParameter_direction_height S C z w t (s, ψ)
+    have hh := congrArg (fun q : ℝ =>
+      stateU S (liftSectorParameter S C z).1 (s, ψ) + t * q) (hheight s hs ψ)
+    exact hv.trans (hh.trans ((height_line_add_constant _ _ _ _).trans
+      (congrArg (fun q : ℝ => q + t * c) hw.symm)))
   have hflow (ψ : ℝ) := hN.minusFlow_eq_of_local_profile_height hS hT
     (liftSectorParameter_mem_stateNeighborhood htv le_rfl)
     (liftSectorParameter_mem_stateNeighborhood htw le_rfl)
