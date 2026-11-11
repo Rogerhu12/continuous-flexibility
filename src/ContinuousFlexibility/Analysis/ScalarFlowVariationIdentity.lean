@@ -62,8 +62,8 @@ theorem scalarFlow_parameter_fderiv_apply_eq_kernel
       (Θ := fun z : ℝ × ℝ => Θ p z.2 z.1) (a := a) (b := t)
       (hDθ.comp (continuous_const.prodMk continuous_id))
       (fun r x => hangle p r x) hjoint' (hinit p)
-      (fun η r hr => (hflow p η r (uIcc_subset_uIcc_left ht hr)).
-        mono (uIcc_subset_uIcc_left ht)) θ).deriv
+      (fun η r hr => (hflow p η r (uIcc_subset_uIcc_left ht hr)).mono
+        (uIcc_subset_uIcc_left ht)) θ).deriv
   have htime : ContinuousOn (fun t => Θ p t θ) (uIcc a b) :=
     hjoint.comp (continuous_const.prodMk continuous_id).continuousOn
       (fun t ht => ⟨mem_univ _, ht⟩)
@@ -85,6 +85,9 @@ theorem scalarFlow_parameter_fderiv_apply_eq_kernel
   congr 1
   apply intervalIntegral.integral_congr
   intro t ht
+  change (Real.exp (-∫ r in a..t, Dθ (p, (r, Θ p r θ))) •
+      Dp (p, (t, Θ p t θ))) e =
+    Dp (p, (t, Θ p t θ)) e / deriv (fun η => Θ p t η) θ
   rw [hJ t ht, Real.exp_neg, ContinuousLinearMap.smul_apply, smul_eq_mul, div_eq_mul_inv]
   exact mul_comm _ _
 

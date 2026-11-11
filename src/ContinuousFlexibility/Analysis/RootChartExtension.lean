@@ -61,6 +61,7 @@ private theorem rootEven_displacement_periodic
     (r : ℝ) (hr : 0 ≤ r) :
     Function.Periodic (fun θ => rootEven G (r, θ) - θ) T := by
   intro θ
+  change rootEven G (r, θ + T) - (θ + T) = rootEven G (r, θ) - θ
   rw [hperiod r hr θ]
   ring
 
@@ -87,9 +88,15 @@ theorem extendedRootEvenOddChart_period
     (r θ : ℝ) :
     extendedRootEvenOddChart G (r, θ + T) =
       extendedRootEvenOddChart G (r, θ) + (0, T) := by
-  have hχe := seeleyPeriodicExtension_periodic hχ r θ
-  have hφe := seeleyPeriodicExtension_periodic
-    (f := fun q => rootEven G q - q.2) (rootEven_displacement_periodic hφ) r θ
+  have hχe :
+      seeleyPeriodicExtension (rootOddCoefficient G) (r, θ + T) =
+        seeleyPeriodicExtension (rootOddCoefficient G) (r, θ) :=
+    seeleyPeriodicExtension_periodic hχ r θ
+  have hφe :
+      seeleyPeriodicExtension (fun q => rootEven G q - q.2) (r, θ + T) =
+        seeleyPeriodicExtension (fun q => rootEven G q - q.2) (r, θ) :=
+    seeleyPeriodicExtension_periodic
+      (f := fun q => rootEven G q - q.2) (rootEven_displacement_periodic hφ) r θ
   apply Prod.ext
   · change r * (((3 : ℝ) / 2) *
         seeleyPeriodicExtension (rootOddCoefficient G) (r, θ + T)) ^ (2 / 3 : ℝ) =

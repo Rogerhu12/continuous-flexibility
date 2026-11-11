@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Analysis
 open Function MeasureTheory
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {P : ℝ} [Fact (0 < P)]
 
 def circleLiftInverseJacobian (h : ℝ → ℝ) (θ : ℝ) : ℝ :=
@@ -116,6 +118,53 @@ def circleLiftVariationKernelConstant (P c M : ℝ) (s : ℕ) : ℝ :=
 theorem circleLiftVariationKernelConstant_one_le (P c M : ℝ) (s : ℕ) :
     1 ≤ circleLiftVariationKernelConstant P c M s := le_max_left _ _
 
+private theorem variationKernel_low_arithmetic
+    {E C M u₁ u₃ q₀ v₁ : ℝ} (hE : 0 ≤ E) (hC : 0 ≤ C) (hu : 0 ≤ u₃)
+    (hv : v₁ ≤ C * (u₁ + u₃ * q₀)) (hu₁ : u₁ ≤ u₃) (hq : q₀ ≤ M) :
+    E * v₁ ≤ (E * C * (1 + M)) * u₃ := by
+  calc
+    E * v₁ ≤ E * (C * (u₃ + u₃ * M)) :=
+      mul_le_mul_of_nonneg_left
+        (hv.trans (mul_le_mul_of_nonneg_left
+          (add_le_add hu₁ (mul_le_mul_of_nonneg_left hq hu)) hC)) hE
+    _ = _ := by ring
+
+private theorem variationKernel_oneHigh_arithmetic
+    (s : ℕ) {C A B R u v q X Y Z W : ℝ}
+    (hC : 0 ≤ C) (hA : 0 ≤ A) (hB : 0 ≤ B) (hR : 0 ≤ R)
+    (hu : 0 ≤ u) (hv : 0 ≤ v) (hq : 0 ≤ q)
+    (hZ : 0 ≤ Z) (hW : 0 ≤ W)
+    (hX : X ≤ C * (u + v * q)) (hY : Y ≤ A * v)
+    (hZb : Z ≤ 1 + R * q) (hWb : W ≤ B) :
+    (2 : ℝ) ^ s * (X * W + Y * Z) ≤
+      max 1 ((2 : ℝ) ^ s * (C * B + A * (1 + R))) *
+        (u + v * (1 + q)) := by
+  have H0 : u + v * q ≤ u + v * (1 + q) := by nlinarith only [hv]
+  have H1 : v ≤ u + v * (1 + q) := by
+    nlinarith only [hu, mul_nonneg hv hq]
+  have H2 : v * q ≤ u + v * (1 + q) := by nlinarith only [hu, hv]
+  have hterms : X * W + Y * Z ≤
+      (C * B + A * (1 + R)) * (u + v * (1 + q)) := by
+    calc
+      _ ≤ (C * (u + v * q)) * B + (A * v) * (1 + R * q) :=
+        add_le_add
+          (mul_le_mul hX hWb hW (mul_nonneg hC (add_nonneg hu (mul_nonneg hv hq))))
+          (mul_le_mul hY hZb hZ (mul_nonneg hA hv))
+      _ = (C * B) * (u + v * q) + A * v + (A * R) * (v * q) := by ring
+      _ ≤ (C * B) * (u + v * (1 + q)) +
+          A * (u + v * (1 + q)) + (A * R) * (u + v * (1 + q)) :=
+        add_le_add
+          (add_le_add (mul_le_mul_of_nonneg_left H0 (mul_nonneg hC hB))
+            (mul_le_mul_of_nonneg_left H1 hA))
+          (mul_le_mul_of_nonneg_left H2 (mul_nonneg hA hR))
+      _ = _ := by ring
+  calc
+    _ ≤ (2 : ℝ) ^ s * ((C * B + A * (1 + R)) * (u + v * (1 + q))) :=
+      mul_le_mul_of_nonneg_left hterms (by positivity)
+    _ = ((2 : ℝ) ^ s * (C * B + A * (1 + R))) * (u + v * (1 + q)) := by ring
+    _ ≤ _ := mul_le_mul_of_nonneg_right (le_max_right _ _)
+      (add_nonneg hu (mul_nonneg hv (add_nonneg zero_le_one hq)))
+
 /-- The first-variation kernel has a genuine one-high-factor bound.
 Only fixed low lift geometry enters the constant. -/
 theorem circleLift_variationKernel_sobolev_le
@@ -177,27 +226,25 @@ theorem circleLift_variationKernel_sobolev_le
   have hRs' : circleRealSobolevNorm (s : ℝ) (R 0) ≤ 1 + Rₛ * qs :=
     circleLiftInverseJacobianJet_sobolev_le h hh hlift hc hM hlower hlow s
   have hRlow : circleRealFourierL1Norm (R 0) ≤ B := by
-    have hs1 : circleRealSobolevNorm 1 (R 0) ≤ 1 + R₁ * M :=
-      (circleLiftInverseJacobianJet_sobolev_le h hh hlift hc hM hlower hlow 1).trans
-        (add_le_add le_rfl (mul_le_mul_of_nonneg_left (hqsmall 1 (by omega)) hR1))
+    have hs1 : circleRealSobolevNorm 1 (R 0) ≤ 1 + R₁ * M := by
+      simpa only [Nat.cast_one] using
+        (circleLiftInverseJacobianJet_sobolev_le h hh hlift hc hM hlower hlow 1).trans
+          (add_le_add le_rfl (mul_le_mul_of_nonneg_left (hqsmall 1 (by omega)) hR1))
     exact (circle_real_fourierL1Norm_le_sobolev_one_of_derivatives R hR 0).trans
       (mul_le_mul_of_nonneg_left hs1 hE)
   have hVlow : circleRealFourierL1Norm (V 0) ≤ A * ul := by
-    have hu1 : circleRealSobolevNorm 1 (U 0) ≤ ul :=
-      circle_real_sobolevNorm_mono_of_derivatives U hU (show 1 ≤ 3 by omega)
-    have hv1 := circleLift_sobolev_comp_le 1 hc hM u hp hu h hh hlift hlower hlow
-    have hq0 := hqsmall 0 (by omega)
-    calc
-      _ ≤ E * circleRealSobolevNorm 1 (V 0) :=
-        circle_real_fourierL1Norm_le_sobolev_one_of_derivatives V hV 0
-      _ ≤ E * (C₁ * (circleRealSobolevNorm 1 (U 0) +
-          ul * circleRealSobolevNorm 0 (Q 0))) :=
-        mul_le_mul_of_nonneg_left hv1 hE
-      _ ≤ E * (C₁ * (ul + ul * M)) :=
-        mul_le_mul_of_nonneg_left
-          (mul_le_mul_of_nonneg_left
-            (add_le_add hu1 (mul_le_mul_of_nonneg_left hq0 hul)) hC1) hE
-      _ = A * ul := by dsimp only [A]; ring
+    have hu1 : circleRealSobolevNorm 1 (U 0) ≤ ul := by
+      simpa only [Nat.cast_one, Nat.cast_ofNat] using
+        circle_real_sobolevNorm_mono_of_derivatives U hU (show 1 ≤ 3 by omega)
+    have hv1 : circleRealSobolevNorm 1 (V 0) ≤
+        C₁ * (circleRealSobolevNorm 1 (U 0) +
+          ul * circleRealSobolevNorm 0 (Q 0)) := by
+      simpa only [Nat.cast_one, Nat.sub_self, Nat.cast_zero] using
+        circleLift_sobolev_comp_le 1 hc hM u hp hu h hh hlift hlower hlow
+    have hq0 : circleRealSobolevNorm 0 (Q 0) ≤ M := by
+      simpa only [Nat.cast_zero] using hqsmall 0 (by omega)
+    exact (circle_real_fourierL1Norm_le_sobolev_one_of_derivatives V hV 0).trans
+      (variationKernel_low_arithmetic hE hC1 hul hv1 hu1 hq0)
   have he :
       periodicCircleJet (circleLiftVariationKernel u h)
         (periodic_circleLiftVariationKernel hp hlift)
@@ -209,35 +256,10 @@ theorem circleLift_variationKernel_sobolev_le
       Function.comp_apply]
   rw [he]
   have hprod := circle_real_sobolevNorm_mul_le_of_derivatives V R hV hR s
-  have hterms :
-      circleRealSobolevNorm (s : ℝ) (V 0) * circleRealFourierL1Norm (R 0) +
-        circleRealFourierL1Norm (V 0) * circleRealSobolevNorm (s : ℝ) (R 0) ≤
-      (Cₛ * B + A * (1 + Rₛ)) * (us + ul * (1 + qs)) := by
-    have H0 : us + ul * qs ≤ us + ul * (1 + qs) := by nlinarith only [hul]
-    have H1 : ul ≤ us + ul * (1 + qs) := by
-      nlinarith only [hus, mul_nonneg hul hqs]
-    have H2 : ul * qs ≤ us + ul * (1 + qs) := by nlinarith only [hus, hul]
-    calc
-      _ ≤ (Cₛ * (us + ul * qs)) * B + (A * ul) * (1 + Rₛ * qs) :=
-        add_le_add
-          (mul_le_mul hVs hRlow (frequencyL1Norm_nonneg _ _)
-            (mul_nonneg hCs (add_nonneg hus (mul_nonneg hul hqs))))
-          (mul_le_mul hVlow hRs' (circle_real_sobolevNorm_nonneg _ _) (mul_nonneg hA hul))
-      _ = (Cₛ * B) * (us + ul * qs) + A * ul + (A * Rₛ) * (ul * qs) := by ring
-      _ ≤ (Cₛ * B) * (us + ul * (1 + qs)) +
-          A * (us + ul * (1 + qs)) + (A * Rₛ) * (us + ul * (1 + qs)) :=
-        add_le_add
-          (add_le_add (mul_le_mul_of_nonneg_left H0 (mul_nonneg hCs hB))
-            (mul_le_mul_of_nonneg_left H1 hA))
-          (mul_le_mul_of_nonneg_left H2 (mul_nonneg hA hRs))
-      _ = _ := by ring
-  have hbase := hprod.trans (mul_le_mul_of_nonneg_left hterms (by positivity))
-  change circleRealSobolevNorm (s : ℝ) (V 0 * R 0) ≤
-    circleLiftVariationKernelConstant P c M s * (us + ul * (1 + qs))
-  calc
-    _ ≤ ((2 : ℝ) ^ s * (Cₛ * B + A * (1 + Rₛ))) * (us + ul * (1 + qs)) := by
-      simpa only [mul_assoc] using hbase
-    _ ≤ _ := mul_le_mul_of_nonneg_right
-      (le_max_right _ _) (add_nonneg hus (mul_nonneg hul (add_nonneg zero_le_one hqs)))
+  have hscalar := variationKernel_oneHigh_arithmetic s
+    hCs hA hB hRs hus hul hqs
+    (circle_real_sobolevNorm_nonneg (s : ℝ) (R 0))
+    (frequencyL1Norm_nonneg _ _) hVs hVlow hRs' hRlow
+  exact hprod.trans hscalar
 
 end ContinuousFlexibility.Analysis

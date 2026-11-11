@@ -54,8 +54,10 @@ theorem coordinate_jet_product_le_one_high_of_low
   let q : ℕ → Seminorm ℝ (E × ℝ) :=
     fun n => pairGrading p realGrading (n + offset)
   have hRm : Monotone realGrading := fun _ _ _ => le_rfl
-  have hq : Monotone q := fun i j hij =>
-    tamePairGrading_monotone hp hRm (Nat.add_le_add_right hij offset)
+  have hq : Monotone q := by
+    intro i j hij w
+    exact add_le_add (hp (Nat.add_le_add_right hij offset) w.1)
+      (show realGrading (i + offset) w.2 ≤ realGrading (j + offset) w.2 from le_rfl)
   have hIq : HasInterpolation q :=
     coordinate_hasInterpolation_shift
       (coordinate_hasInterpolation_pair hp hRm hI coordinate_hasInterpolation_realGrading) offset
@@ -70,12 +72,13 @@ theorem coordinate_jet_product_le_one_high_of_low
   intro x hx
   let w : E × ℝ := (x, 1)
   have hqval (n : ℕ) : q n w = p (n + offset) x + 1 := by
-    simp only [q, w, pairGrading_apply, realGrading, coe_normSeminorm, norm_one]
+    simp only [q, w, pairGrading, add_apply, Seminorm.comp_apply,
+      LinearMap.fst_apply, LinearMap.snd_apply, realGrading, coe_normSeminorm, norm_one]
   have hlow : q b w ≤ 2 := by rw [hqval]; linarith only [hx]
   have hhigh : 0 ≤ q (s + l) w := apply_nonneg _ _
   have hstart :
       (∏ i, (1 + p (order i + offset) x)) ≤ ∏ i, q (order i + 2) w := by
-    apply Finset.prod_le_prod
+    apply Finset.prod_le_prod₀
     · intro i _
       exact add_nonneg zero_le_one (apply_nonneg _ _)
     · intro i _
@@ -85,7 +88,7 @@ theorem coordinate_jet_product_le_one_high_of_low
   have hlower (i : ι) :
       (∏ j ∈ Finset.univ.erase i, q b w) ≤
         ∏ j ∈ Finset.univ.erase i, (2 : ℝ) := by
-    exact Finset.prod_le_prod (fun _ _ => apply_nonneg _ _) (fun _ _ => hlow)
+    exact Finset.prod_le_prod₀ (fun _ _ => apply_nonneg _ _) (fun _ _ => hlow)
   calc
     _ ≤ ∏ i, q (order i + 2) w := hstart
     _ ≤ C * ∑ i, q (s + l) w * ∏ j ∈ Finset.univ.erase i, q b w :=

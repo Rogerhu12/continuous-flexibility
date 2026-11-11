@@ -2,7 +2,7 @@ import ContinuousFlexibility.Analysis.RootFlowSymmetry
 import Mathlib.Analysis.Real.Sqrt
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.Calculus.Deriv.Comp
-import Mathlib.Tactic.Nlinarith
+import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
 
 /-!

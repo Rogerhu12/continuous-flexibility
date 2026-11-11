@@ -1,20 +1,22 @@
-import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Blueprint.N04Coordinates.FlowJets
+import ContinuousFlexibility.Blueprint.N04Coordinates.Realization
 
 /-!
 # Blueprint node N04Coordinates
 
-The uniform bounds of the potential and of the divided differences, and the conversion of sources (rest of Proposition 7.8).
+The exact frozen implication is assembled from the genuine mixed-flow
+estimate and the controlled coordinate realization. The subnodes remain
+explicit proof obligations until their axiom audits contain no sorryAx.
 
-Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1497–1725.
-
-Task file: `docs/tasks/N04Coordinates.md`. The statement is frozen; replace the `sorry`.
+Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1497–1725.
+Task: docs/tasks/N04Coordinates.md.
 -/
 
 namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Statements
 
-theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement := by
-  sorry
+theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement :=
+  N04CoordinatesRealization N04CoordinatesFlowJets hN04b
 
 end ContinuousFlexibility.Blueprint

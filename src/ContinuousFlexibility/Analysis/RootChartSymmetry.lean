@@ -36,6 +36,7 @@ theorem rootEven_sub_angle_periodic {G : ℝ × ℝ × ℝ → ℝ} {T : ℝ}
     (x : ℝ) :
     Function.Periodic (fun θ => rootEven G (x, θ) - θ) T := by
   intro θ
+  change rootEven G (x, θ + T) - (θ + T) = rootEven G (x, θ) - θ
   rw [rootEven_period_add hperiod]
   ring
 
@@ -44,6 +45,7 @@ theorem rootOdd_periodic {G : ℝ × ℝ × ℝ → ℝ} {T : ℝ}
     (x : ℝ) :
     Function.Periodic (fun θ => rootOdd G (x, θ)) T := by
   intro θ
+  change rootOdd G (x, θ + T) = rootOdd G (x, θ)
   by_cases hx : x = 0
   · subst x
     rw [rootOdd_zero, rootOdd_zero]
