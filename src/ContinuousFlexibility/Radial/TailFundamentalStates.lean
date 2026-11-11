@@ -111,8 +111,8 @@ theorem exists_tailDirichletLeftState {T : DeepTailData} (hT : DeepTailHypothese
   let k : ℝ := U T.entrance / u T.entrance
   let w : ℝ → ℝ := fun x => U x - k * u x
   let z : ℝ → ℝ := fun x => V x - k * v x
-  have hw : ContDiffOn ℝ ∞ w (Iio T.endpoint) := hU.sub (hu.const_mul k)
-  have hz : ContDiffOn ℝ ∞ z (Iio T.endpoint) := hV.sub (hv.const_mul k)
+  have hw : ContDiffOn ℝ ∞ w (Iio T.endpoint) := hU.sub (contDiffOn_const.mul hu)
+  have hz : ContDiffOn ℝ ∞ z (Iio T.endpoint) := hV.sub (contDiffOn_const.mul hv)
   have hsys : TailFirstOrderSystem T.p T.Λ w z (Ico T.entrance T.endpoint) := by
     intro x hx
     constructor
@@ -122,7 +122,7 @@ theorem exists_tailDirichletLeftState {T : DeepTailData} (hT : DeepTailHypothese
         dsimp only [w]; ring)
   refine ⟨w, z, hw, hz, hsys, ?_, ?_⟩
   · dsimp only [w, k]
-    field_simp [hua]
+    field_simp [hua] <;> ring
   · intro x hx
     have heq := hW x hx
     dsimp only [tailFirstOrderWronskian] at heq

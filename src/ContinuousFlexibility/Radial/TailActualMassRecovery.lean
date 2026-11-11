@@ -211,7 +211,7 @@ theorem tailActualEdgeInterpolation_mass_recovery {T : DeepTailData}
       _ = (128 * (T.η / T.K) ^ 2) * (tailMass T n * a ^ 2) := by ring
       _ ≤ (1 / 2 : ℝ) * (tailMass T n * a ^ 2) :=
         mul_le_mul_of_nonneg_right hfactor (mul_nonneg (tailMass_pos hT n).le (sq_nonneg a))
-  exact hi.trans (add_le_add_left herr _)
+  exact hi.trans (add_le_add le_rfl herr)
 
 theorem tailActualSolution_mass_recovery {T : DeepTailData}
     (hT : DeepTailHypotheses T) (hη : T.η ≤ 1 / 16) (hK : 32 ≤ T.K)
