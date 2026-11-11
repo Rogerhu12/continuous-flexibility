@@ -81,7 +81,7 @@ def centralModelColumnInverse (g : HermiteL2) :
 theorem centralModelColumn_borderedGraph_iff (g : HermiteL2) (U F : HermiteL2 × ℝ) :
     BorderedFullGraph (centralPotential 2) g true U F ↔
       SimpleKernelBorderGraph (centralClosedGraph (by norm_num : (0 : ℝ) < 2)) g U F := by
-  simp only [BorderedFullGraph, if_pos (rfl : true = true), SimpleKernelBorderGraph,
+  simp only [BorderedFullGraph, ite_true, SimpleKernelBorderGraph,
     centralWeakSchrodingerGraph_iff (by norm_num : (0 : ℝ) < 2)]
 
 theorem centralModelColumnInverse_solves (g : HermiteL2)
