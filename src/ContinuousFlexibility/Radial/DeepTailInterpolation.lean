@@ -31,8 +31,9 @@ theorem tailEdge_interpolant_square_bound {a b : ℝ} (hab : a ≤ b)
       2 * (M₀ * c₀ ^ 2 + M₁ * c₁ ^ 2) := by
   have hi₀ := (hp.mul (hv₀.pow 2)).intervalIntegrable_of_Icc (μ := volume) hab
   have hi₁ := (hp.mul (hv₁.pow 2)).intervalIntegrable_of_Icc (μ := volume) hab
-  have hi := (hp.mul (((continuousOn_const.mul hv₀).add
-    (continuousOn_const.mul hv₁)).pow 2)).intervalIntegrable_of_Icc (μ := volume) hab
+  have hi : IntervalIntegrable (fun x => p x * (c₀ * v₀ x + c₁ * v₁ x) ^ 2)
+      volume a b :=
+    (hp.mul (((hv₀.const_mul c₀).add (hv₁.const_mul c₁)).pow 2)).intervalIntegrable_of_Icc hab
   calc
     _ ≤ ∫ x in a..b, (2 * c₀ ^ 2) * (p x * v₀ x ^ 2) +
         (2 * c₁ ^ 2) * (p x * v₁ x ^ 2) := by
@@ -60,7 +61,7 @@ theorem deepTail_open_subset_iUnion_edges {T : DeepTailData}
     Ioo T.entrance T.endpoint ⊆ ⋃ n : ℕ, Icc (T.node n) (T.node (n + 1)) := by
   intro x hx
   have ht := hT.2.2.2.2.2.2.2.2.2.1
-  obtain ⟨N, hN⟩ := (ht.eventually (gt_mem_nhds hx.2)).exists
+  obtain ⟨N, hN⟩ := (ht.eventually (lt_mem_nhds hx.2)).exists
   have hxN : x ∈ Ico (T.node 0) (T.node N) := by
     rw [hstart]
     exact ⟨hx.1.le, hN⟩
@@ -94,6 +95,7 @@ theorem deepTail_memLp_of_edge_square_bound {T : DeepTailData}
       ← integral_Icc_eq_integral_Ioc]
     apply setIntegral_congr_fun measurableSet_Icc
     intro x hx
+    change ‖T.p x * u x ^ 2‖ = T.p x * u x ^ 2
     rw [Real.norm_eq_abs, abs_of_nonneg
       (mul_nonneg (deepTail_pos hT x (hsub n hx)).le (sq_nonneg _))]
   have hshift : Summable (fun n => tailMass T (n + 1) * a (n + 1) ^ 2) :=

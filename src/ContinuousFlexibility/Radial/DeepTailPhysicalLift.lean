@@ -119,6 +119,22 @@ theorem tailNaturalFlux_contDiffAt {D : ReferenceData} {T : DeepTailData}
   exact hC.1.2.2.1.1.contDiffAt.mul
     ((tailNaturalLift_contDiffAt ⟨C, hC⟩ hu hx).derivWithin (by simp))
 
+theorem tailNaturalLift_contDiffAt_entrance {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hu : TailNaturalEquation T u) :
+    ContDiffAt ℝ ∞ (tailPhysicalLift D right j u) (tailPhysicalRadius right T.entrance) := by
+  apply contDiffAt_tailPhysicalLift (tailPhysicalEndpoint_pos hD right).ne'
+    (tailPhysicalRadius_pos right T.entrance)
+  simpa only [tailPhysicalLog_radius] using hu.1
+
+theorem tailNaturalFlux_contDiffAt_entrance {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hu : TailNaturalEquation T u) :
+    ContDiffAt ℝ ∞ (tailPhysicalFlux D right j u) (tailPhysicalRadius right T.entrance) := by
+  obtain ⟨C, hC⟩ := hD
+  exact hC.1.2.2.1.1.contDiffAt.mul
+    ((tailNaturalLift_contDiffAt_entrance ⟨C, hC⟩ hu).derivWithin (by simp))
+
 /-- The two actual first-order equations used for propagation of all
 physical derivative estimates. -/
 theorem tailNaturalLift_firstOrder {D : ReferenceData} {T : DeepTailData}
@@ -137,7 +153,7 @@ theorem tailNaturalLift_firstOrder {D : ReferenceData} {T : DeepTailData}
   have hw₀ : D.w (tailPhysicalRadius right x) ≠ 0 :=
     (hC.1.2.2.2.2.1 _ hcore).ne'
   have hw := hC.1.2.2.1.1.differentiable (by simp) (tailPhysicalRadius right x)
-  have hv := tailNaturalLift_contDiffAt ⟨C, hC⟩ hu hx
+  have hv := tailNaturalLift_contDiffAt (right := right) (j := j) ⟨C, hC⟩ hu hx
   constructor
   · simp only [tailPhysicalFlux, ← mul_assoc, inv_mul_cancel₀ hw₀, one_mul]
   · have hd := hasDerivAt_flux_of_radialJacobi_eq_zero hw
@@ -158,12 +174,15 @@ theorem hasDerivAt_tailPhysicalLift {D : ReferenceData} {right : Bool} {j : ℕ}
   have hc : HasDerivAt (tailPhysicalLog right)
       ((if right then 1 else -1 : ℝ) / r) r := by
     cases right
-    · simpa [tailPhysicalLog, div_eq_mul_inv] using (hasDerivAt_log hr.ne').neg
-    · simpa [tailPhysicalLog, one_div] using hasDerivAt_log hr.ne'
+    · change HasDerivAt (fun y : ℝ => -log y) ((-1 : ℝ) / r) r
+      convert (hasDerivAt_neg (log r)).comp r (hasDerivAt_log hr.ne') using 1 <;>
+        simp [Function.comp_def, div_eq_mul_inv]
+    · change HasDerivAt log ((1 : ℝ) / r) r
+      simpa only [one_div] using hasDerivAt_log hr.ne'
   have hg := ((hasDerivAt_id r).div_const (tailPhysicalEndpoint D right)).rpow_const
     (p := (j : ℝ) ^ 2) (Or.inl hratio.ne')
   apply (hg.mul (hu.hasDerivAt.comp r hc)).congr_deriv
-  simp only [rpow_sub hratio, rpow_one]
+  try simp only [rpow_sub hratio, rpow_one]
   field_simp [hr.ne', hR.ne'] <;> ring
 
 /-- In the flux formula the singular factor from differentiating the
@@ -185,7 +204,7 @@ theorem tailPhysicalFlux_radius {D : ReferenceData} {T : DeepTailData}
   have hratio : 0 < tailPhysicalRadius right x / tailPhysicalEndpoint D right := div_pos hr hR
   have hu' : DifferentiableAt ℝ u (tailPhysicalLog right (tailPhysicalRadius right x)) := by
     simpa only [tailPhysicalLog_radius] using (tailNatural_contDiffAt hu hx).differentiableAt
-      (show (1 : WithTop ℕ∞) ≤ ∞ by simp)
+      (by simp)
   have hd := (hasDerivAt_tailPhysicalLift hR hr hu').deriv
   simp only [tailPhysicalLog_radius] at hd
   have hp : T.p x =

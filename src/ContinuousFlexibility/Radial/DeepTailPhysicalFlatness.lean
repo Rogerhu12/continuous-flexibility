@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.DeepTailPhysicalCoefficients
 import ContinuousFlexibility.Radial.DeepTailPhysicalDecay
 import ContinuousFlexibility.Radial.DeepTailPhysicalLift
+import ContinuousFlexibility.Radial.DeepTailPhysicalExtension
 import ContinuousFlexibility.Radial.TailMassResistanceData
 import ContinuousFlexibility.Radial.MorseChainFlatExtension
 import Mathlib.Algebra.Order.Group.Pointwise.Interval
@@ -308,5 +309,125 @@ theorem tailNaturalLift_jet_limit {D : ReferenceData} {T : DeepTailData}
     apply (hl.comp hc).congr'
     filter_upwards [hpos] with r hr
     simp only [Function.comp_apply, tailPhysicalRadius_log true hr]
+
+/-- The open natural tail is exactly the corresponding physical radial
+interval, including the orientation of the left endpoint. -/
+theorem tailPhysicalInterior_eq {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j start : ℕ} (hD : IsAccumulatingProfile D)
+    (hphysical : TailPhysicalRelation D T right j start) :
+    tailPhysicalRadius right '' Ioo T.entrance T.endpoint =
+      if right then Ioo (tailPhysicalRadius right T.entrance) D.b
+      else Ioo D.a (tailPhysicalRadius right T.entrance) := by
+  have he := tailPhysicalRadius_endpoint hD hphysical
+  cases right
+  · change (exp ∘ Neg.neg) '' Ioo T.entrance T.endpoint =
+      Ioo D.a (exp (-T.entrance))
+    rw [Set.image_comp, Set.image_neg_Ioo, image_exp_Ioo]
+    change exp (-T.endpoint) = D.a at he
+    rw [he]
+  · change exp '' Ioo T.entrance T.endpoint = Ioo (exp T.entrance) D.b
+    rw [image_exp_Ioo]
+    change exp T.endpoint = D.b at he
+    rw [he]
+
+/-- The decay of all physical jets and the regular entrance produce an
+actual global smooth extension, flat at the physical accumulation radius. -/
+theorem tailNaturalLift_global_flat_of_jet_bounds {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j start : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hT : DeepTailHypotheses T) (hphysical : TailPhysicalRelation D T right j start)
+    (hu : TailNaturalEquation T u)
+    (hjets : ∀ k, PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n)))
+        (iteratedDeriv k (tailPhysicalLift D right j u))) :
+    ∃ v : ℝ → ℝ, ContDiff ℝ ∞ v ∧
+      EqOn v (tailPhysicalLift D right j u)
+        (tailPhysicalRadius right '' Ioo T.entrance T.endpoint) ∧
+      ∀ k, iteratedDeriv k v (tailPhysicalEndpoint D right) = 0 := by
+  have himage := tailPhysicalInterior_eq hD hphysical
+  have hentry := tailPhysical_entrance_mem_core hD hT hphysical
+  have hf₀ := tailNaturalLift_contDiffAt_entrance (right := right) (j := j) hD hu
+  have hg₀ := tailNaturalFlux_contDiffAt_entrance (right := right) (j := j) hD hu
+  have hreg : ∀ r ∈ tailPhysicalRadius right '' Ioo T.entrance T.endpoint,
+      ContDiffAt ℝ ∞ (tailPhysicalLift D right j u) r ∧
+        ContDiffAt ℝ ∞ (tailPhysicalFlux D right j u) r := by
+    rintro r ⟨x, hx, rfl⟩
+    exact ⟨tailNaturalLift_contDiffAt hD hu hx, tailNaturalFlux_contDiffAt hD hu hx⟩
+  have hsys : ∀ r ∈ tailPhysicalRadius right '' Ioo T.entrance T.endpoint,
+      deriv (tailPhysicalLift D right j u) r = (D.w r)⁻¹ * tailPhysicalFlux D right j u r ∧
+        deriv (tailPhysicalFlux D right j u) r =
+          ((j : ℝ) ^ 2 * (deriv D.w r * r⁻¹)) * tailPhysicalLift D right j u r := by
+    rintro r ⟨x, hx, rfl⟩
+    exact tailNaturalLift_firstOrder hD hT hphysical hu hx
+  have hlimits (k : ℕ) := tailNaturalLift_jet_limit hD hT hphysical hu k (hjets k)
+  obtain ⟨C, hC⟩ := hD
+  have hw : ContDiff ℝ ∞ D.w := hC.1.2.2.1.1
+  have hw' : ContDiff ℝ ∞ (deriv D.w) := (contDiff_infty_iff_deriv.mp hw).2
+  have ha : ContDiffOn ℝ ∞ (fun r => (D.w r)⁻¹) (radialCore D) := by
+    intro r hr
+    exact (hw.contDiffAt.inv (hC.1.2.2.2.2.1 r hr).ne').contDiffWithinAt
+  have hb : ContDiffOn ℝ ∞ (fun r => (j : ℝ) ^ 2 * (deriv D.w r * r⁻¹)) (radialCore D) := by
+    intro r hr
+    exact (contDiffAt_const.mul (hw'.contDiffAt.mul
+      (contDiffAt_id.inv (ne_of_gt (hC.1.1.trans hr.1))))).contDiffWithinAt
+  cases right
+  · simp only [Bool.false_eq_true, ↓reduceIte] at himage hlimits
+    obtain ⟨v, hv, hveq, hvflat⟩ := physical_flat_extension_from_right isOpen_Ioo hentry hentry.1
+      ha hb hf₀ hg₀
+      (fun r hr => (hreg r (himage.symm ▸ hr)).1.contDiffWithinAt)
+      (fun r hr => (hreg r (himage.symm ▸ hr)).2.contDiffWithinAt)
+      (fun r hr => (hsys r (himage.symm ▸ hr)).1)
+      (fun r hr => (hsys r (himage.symm ▸ hr)).2) hlimits
+    exact ⟨v, hv, himage.symm ▸ hveq, hvflat⟩
+  · simp only [↓reduceIte] at himage hlimits
+    obtain ⟨v, hv, hveq, hvflat⟩ := physical_flat_extension_from_left isOpen_Ioo hentry hentry.2
+      ha hb hf₀ hg₀
+      (fun r hr => (hreg r (himage.symm ▸ hr)).1.contDiffWithinAt)
+      (fun r hr => (hreg r (himage.symm ▸ hr)).2.contDiffWithinAt)
+      (fun r hr => (hsys r (himage.symm ▸ hr)).1)
+      (fun r hr => (hsys r (himage.symm ▸ hr)).2) hlimits
+    exact ⟨v, hv, himage.symm ▸ hveq, hvflat⟩
+
+/-- Once the actual whole-edge height and flux bounds are available,
+all clauses of the frozen physical-flatness conclusion follow for this
+same natural solution and its genuine smooth radial extension. -/
+theorem tailPhysicalFlatConclusion_of_cell_bounds {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j start : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hT : DeepTailHypotheses T) (hphysical : TailPhysicalRelation D T right j start)
+    (hu : TailNaturalEquation T u) (hune : ∃ x ∈ Ioo T.entrance T.endpoint, u x ≠ 0)
+    (hv : PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n))) (tailPhysicalLift D right j u))
+    (hq : PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n))) (tailPhysicalFlux D right j u)) :
+    TailPhysicalFlatConclusion D T right j start := by
+  have hjets := tailNaturalLift_jet_bounds hD hT hphysical hu hv hq
+  obtain ⟨v, hvsm, hveq, hvflat⟩ :=
+    tailNaturalLift_global_flat_of_jet_bounds hD hT hphysical hu hjets
+  have hopen : IsOpen (tailPhysicalRadius right '' Ioo T.entrance T.endpoint) := by
+    rw [tailPhysicalInterior_eq hD hphysical]
+    cases right <;> exact isOpen_Ioo
+  have hgerm (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :
+      v =ᶠ[𝓝 (tailPhysicalRadius right x)] tailPhysicalLift D right j u :=
+    Filter.mem_of_superset (hopen.mem_nhds ⟨x, hx, rfl⟩) (fun r hr => hveq hr)
+  refine ⟨u, v, hu, hune, hvsm, ?_, ?_, ?_, ?_⟩
+  · intro x hx
+    exact (hveq ⟨x, hx, rfl⟩).trans (tailPhysicalLift_radius D right j u x)
+  · intro x hx
+    have hflux : (fun r => D.w r * deriv v r) =ᶠ[𝓝 (tailPhysicalRadius right x)]
+        (fun r => D.w r * deriv (tailPhysicalLift D right j u) r) := by
+      filter_upwards [(hgerm x hx).deriv] with r hr
+      rw [hr]
+    unfold radialJacobi
+    rw [hflux.deriv_eq, (hgerm x hx).eq_of_nhds]
+    exact tailNaturalLift_radialJacobi hD hT hphysical hu hx
+  · intro k
+    simpa only [radialJet_eq_iteratedDeriv] using hvflat k
+  · intro k
+    obtain ⟨C, hC, hb⟩ := hjets k
+    refine ⟨C, hC, fun n x hx => ?_⟩
+    have hxt : x ∈ Ioo T.entrance T.endpoint :=
+      ⟨(deepTail_entrance_le_node hT n).trans_lt hx.1,
+        hx.2.trans (deepTail_node_lt_endpoint hT (n + 1))⟩
+    rw [radialJet_eq_iteratedDeriv, (hgerm x hxt).iteratedDeriv_eq k]
+    exact hb n _ ⟨x, hx, rfl⟩
 
 end ContinuousFlexibility.Radial

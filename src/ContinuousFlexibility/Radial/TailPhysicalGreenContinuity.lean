@@ -45,7 +45,10 @@ theorem continuous_tailClampedResistance_family
       (fun z => (tailClampedDensity_pos hab (hpos z.1) z.2).ne')
   exact intervalIntegral.continuous_parametric_primitive_of_continuous
     (f := fun σ t => (tailClampedDensity (p σ) a b hab t)⁻¹)
-    (by simpa only [Function.uncurry] using hi)
+    (by
+      apply hi.congr
+      rintro ⟨σ, t⟩
+      simp only [Function.uncurry_apply_pair])
 
 end DensityFamily
 
@@ -170,8 +173,11 @@ theorem continuous_tailPhysicalMassPairing {P : Type*} [TopologicalSpace P] {a b
   exact intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
     (f := fun σ t => tailClampedDensity (p σ) a b hab t *
       IccExtend hab (u σ) t * IccExtend hab (v σ) t)
-    (by simpa only [Function.uncurry] using
-      (((continuous_tailClampedDensity_family p hab hp).mul (hext u hu)).mul (hext v hv))) a b
+    (by
+      apply (((continuous_tailClampedDensity_family p hab hp).mul (hext u hu)).mul
+        (hext v hv)).congr
+      rintro ⟨σ, t⟩
+      simp only [Function.uncurry_apply_pair, Pi.mul_apply]) a b
 
 section IntegralOperator
 
@@ -190,7 +196,10 @@ def tailContinuousKernelAction (σ : P) (u : C(Icc a b, ℝ)) : C(Icc a b, ℝ) 
       hk.mul (u.continuous.Icc_extend'.comp continuous_snd)
     exact (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
       (f := fun x t => κ σ x t * IccExtend hab u t)
-      (by simpa only [Function.uncurry] using hi) a b).comp continuous_subtype_val
+      (by
+        apply hi.congr
+        rintro ⟨x, t⟩
+        simp only [Function.uncurry_apply_pair]) a b).comp continuous_subtype_val
 
 theorem tailContinuousKernelAction_apply (σ : P) (u : C(Icc a b, ℝ)) (x : Icc a b) :
     tailContinuousKernelAction hab κ hκ σ u x =
@@ -213,8 +222,11 @@ theorem continuous_tailContinuousKernelAction :
   change Continuous (fun z : (P × C(Icc a b, ℝ)) × Icc a b =>
     ∫ t in a..b, κ z.1.1 z.2 t * IccExtend hab z.1.2 t)
   exact intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
-    (f := fun z t => κ z.1.1 z.2 t * IccExtend hab z.1.2 t)
-    (by simpa only [Function.uncurry] using hk.mul hu) a b
+    (f := fun (z : (P × C(Icc a b, ℝ)) × Icc a b) t => κ z.1.1 z.2 t * IccExtend hab z.1.2 t)
+    (by
+      apply (hk.mul hu).congr
+      rintro ⟨z, t⟩
+      simp only [Function.uncurry_apply_pair, Pi.mul_apply]) a b
 
 /-- A uniformly contracting Green equation with continuous boundary data
 has a continuous solution on the fixed physical edge. -/

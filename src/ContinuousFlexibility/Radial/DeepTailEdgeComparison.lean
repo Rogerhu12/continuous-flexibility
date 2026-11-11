@@ -131,4 +131,56 @@ theorem interpolate_bound (hlt : a < b) (hp : ContinuousOn p (Icc a b))
 
 end TailPhysicalPoissonData
 
+theorem tailNatural_contDiffAt_Ico {T : DeepTailData} {u : ℝ → ℝ}
+    (hu : TailNaturalEquation T u) {x : ℝ} (hx : x ∈ Ico T.entrance T.endpoint) :
+    ContDiffAt ℝ ∞ u x := by
+  rcases eq_or_lt_of_le hx.1 with heq | hlt
+  · simpa only [← heq] using hu.1
+  · exact hu.2.1.contDiffAt (isOpen_Ioo.mem_nhds ⟨hlt, hx.2⟩)
+
+theorem tailNatural_hasFluxDerivAt {T : DeepTailData} {u : ℝ → ℝ}
+    (hT : DeepTailHypotheses T) (hu : TailNaturalEquation T u)
+    {x : ℝ} (hx : x ∈ Ioo T.entrance T.endpoint) :
+    HasDerivAt (fun y => T.p y * deriv u y) (-(T.Λ * T.p x * u x)) x := by
+  have hp : ContDiffAt ℝ ∞ T.p x :=
+    ((deepTail_contDiffOn hT).mono Ioo_subset_Ico_self).contDiffAt (isOpen_Ioo.mem_nhds hx)
+  have hu' := tailNatural_contDiffAt_Ico hu (Ioo_subset_Ico_self hx)
+  have hd : DifferentiableAt ℝ (fun y => T.p y * deriv u y) x :=
+    (hp.differentiableAt (by simp)).mul
+      ((hu'.derivWithin (m := 1) (by simp)).differentiableAt (by norm_num))
+  apply hd.hasDerivAt.congr_deriv
+  linarith only [hu.2.2.2 x hx]
+
+/-- Every natural solution is controlled on the full closed edge by its
+two actual node values, with a constant independent of the edge. -/
+theorem tailNatural_edge_bound {T : DeepTailData} {u : ℝ → ℝ}
+    (hT : DeepTailHypotheses T) (hu : TailNaturalEquation T u)
+    (hη : T.η ≤ 1 / 2) (n : ℕ) {x : ℝ}
+    (hx : x ∈ Icc (T.node n) (T.node (n + 1))) :
+    |u x| ≤ 2 * (|u (T.node n)| + |u (T.node (n + 1))|) := by
+  have hab := deepTail_node_strictMono hT (Nat.lt_succ_self n)
+  have hsub := deepTail_Icc_subset hT (deepTail_entrance_le_node hT n)
+    (deepTail_node_lt_endpoint hT (n + 1))
+  have hp := (deepTail_contDiffOn hT).continuousOn.mono hsub
+  have hpos := fun y hy => deepTail_pos hT y (hsub hy)
+  obtain ⟨B⟩ := exists_tailPhysicalPoissonData hab hp hpos hT.2.2.1.le
+    hT.2.2.2.2.2.1 (deepTailEdge_diagonal_small hT n)
+  have huC : ContinuousOn u (Icc (T.node n) (T.node (n + 1))) :=
+    fun y hy => (tailNatural_contDiffAt_Ico hu (hsub hy)).continuousAt.continuousWithinAt
+  have hduC : ContinuousOn (deriv u) (Icc (T.node n) (T.node (n + 1))) :=
+    fun y hy => ((tailNatural_contDiffAt_Ico hu (hsub hy)).derivWithin
+      (m := 1) (by simp)).continuousAt.continuousWithinAt
+  have hinterior : Ioo (T.node n) (T.node (n + 1)) ⊆ Ioo T.entrance T.endpoint :=
+    fun _ hy => ⟨(deepTail_entrance_le_node hT n).trans_lt hy.1,
+      hy.2.trans (deepTail_node_lt_endpoint hT (n + 1))⟩
+  have heq := B.eq_interpolate hab hp hpos huC hduC
+    (fun y hy => ((tailNatural_contDiffAt_Ico hu (Ioo_subset_Ico_self (hinterior hy))).differentiableAt
+      (by simp)).hasDerivAt)
+    (fun _ hy => tailNatural_hasFluxDerivAt hT hu (hinterior hy))
+  rw [heq hx]
+  apply (B.interpolate_bound hab hp hpos hT.2.2.2.2.2.1 _ _ hx).trans
+  apply (div_le_iff₀ (sub_pos.mpr hT.2.2.2.2.2.1)).mpr
+  have hn := add_nonneg (abs_nonneg (u (T.node n))) (abs_nonneg (u (T.node (n + 1))))
+  nlinarith
+
 end ContinuousFlexibility.Radial
