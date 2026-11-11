@@ -58,7 +58,7 @@ theorem contDiff_parametric_iteratedDeriv {E : Type*} [NormedAddCommGroup E] [No
     {f : E → ℝ → ℝ} (hf : ContDiff ℝ ∞ (Function.uncurry f)) (n : ℕ) :
     ContDiff ℝ ∞ (fun z : E × ℝ => iteratedDeriv n (f z.1) z.2) := by
   induction n with
-  | zero => simpa only [iteratedDeriv_zero] using hf
+  | zero => simpa only [iteratedDeriv_zero, Function.uncurry_def] using hf
   | succ n ih =>
     let F : (E × ℝ) → ℝ → ℝ := fun z t => iteratedDeriv n (f z.1) t
     have hF : ContDiff ℝ ∞ (Function.uncurry F) :=
@@ -91,7 +91,8 @@ theorem continuous_morseJoinProfile_add_const_iteratedDeriv {X : Type*} [Topolog
     {cL cR x : X → ℝ} (hCL : Continuous cL) (hCR : Continuous cR) (hx : Continuous x) :
     Continuous (fun z => iteratedDeriv n
       (morseJoinProfile a b hL hR (fun y => fL y + cL z) (fun y => fR y + cR z)) (x z)) := by
-  have hf := contDiff_morseJoinProfile_two_amplitudes hfL hfR
+  have hf := contDiff_morseJoinProfile_two_amplitudes
+    (a := a) (b := b) (hL := hL) (hR := hR) hfL hfR
   have hi := contDiff_parametric_iteratedDeriv hf n
   exact hi.continuous.comp ((hCL.prodMk hCR).prodMk hx)
 

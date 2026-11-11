@@ -19,12 +19,61 @@ open Set Filter Real
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
-theorem exists_radialNaturalTail_continuation {D : ReferenceData}
+/-- Equality on a genuine overlap determines the Cauchy data at the earlier
+end of the old tail, even though its arbitrary inward extension need not
+agree on a full neighborhood there. -/
+theorem radialNaturalTail_overlap_cauchy {D : ReferenceData}
+    (hD : RadialProfileGeometry D) {right : Bool} {j : ℕ} {e f g : ℝ}
+    (he : e ∈ radialCore D) (hf : f ∈ radialCore D)
+    (hef : if right then e < f else f < e)
+    (hg : g ∈ radialTailInterval D right f)
+    {u v : ℝ → ℝ} (hu : ContDiff ℝ ∞ u) (hv : ContDiff ℝ ∞ v)
+    (hU : RadialNaturalTail D right j e u) (hV : RadialNaturalTail D right j f v)
+    (hmatch : u =ᶠ[𝓝 g] v) : u f = v f ∧ deriv u f = deriv v f := by
+  have hgCore : g ∈ radialCore D := by
+    cases right
+    · exact ⟨hg.1, hg.2.trans hf.2⟩
+    · exact ⟨hf.1.trans hg.1, hg.2⟩
+  have hfg : f ≠ g := by
+    cases right
+    · exact ne_of_gt hg.2
+    · exact ne_of_lt hg.1
+  have hlen : min f g < max f g := min_lt_max.mpr hfg
+  have hleft : D.a < min f g := lt_min hf.1 hgCore.1
+  have hright : max f g < D.b := max_lt hf.2 hgCore.2
+  have hfI : f ∈ Icc (min f g) (max f g) := ⟨min_le_left _ _, le_max_left _ _⟩
+  have hgI : g ∈ Icc (min f g) (max f g) := ⟨min_le_right _ _, le_max_right _ _⟩
+  have huEq : ∀ x ∈ Icc (min f g) (max f g), radialJacobi ((j : ℝ) ^ 2) D.w u x = 0 := by
+    intro x hx
+    apply hU.2.1.2 x
+    cases right
+    · rw [min_eq_right hg.2.le, max_eq_left hg.2.le] at hx
+      exact ⟨hgCore.1.trans_le hx.1, hx.2.trans_lt hef⟩
+    · rw [min_eq_left hg.1.le, max_eq_right hg.1.le] at hx
+      exact ⟨hef.trans_le hx.1, hx.2.trans_lt hgCore.2⟩
+  have hvEq : ∀ x ∈ Icc (min f g) (max f g), radialJacobi ((j : ℝ) ^ 2) D.w v x = 0 := by
+    apply radialJacobi_zero_on_Icc hD.2.2.1.1 hv (hD.1.trans hleft) hlen
+    intro x hx
+    apply hV.2.1.2 x
+    cases right
+    · rw [min_eq_right hg.2.le, max_eq_left hg.2.le] at hx
+      exact ⟨hgCore.1.trans hx.1, hx.2⟩
+    · rw [min_eq_left hg.1.le, max_eq_right hg.1.le] at hx
+      exact ⟨hx.1, hx.2.trans hgCore.2⟩
+  have hEq := radialHomogeneous_eqOn_Icc hD hleft hlen.le hright hgI hu hv huEq hvEq
+    hmatch.eq_of_nhds hmatch.deriv_eq
+  have hder := derivWithin_congr hEq (hEq hfI)
+  rw [(hu.differentiable (by simp) f).derivWithin (uniqueDiffOn_Icc hlen f hfI),
+    (hv.differentiable (by simp) f).derivWithin (uniqueDiffOn_Icc hlen f hfI)] at hder
+  exact ⟨hEq hfI, hder⟩
+
+theorem exists_radialNaturalTail_continuation_with_cauchy {D : ReferenceData}
     (hD : RadialProfileGeometry D) {right : Bool} {j : ℕ} {e f : ℝ}
     (he : e ∈ radialCore D) (hf : f ∈ radialCore D)
     (hef : if right then e < f else f < e)
     {v : ℝ → ℝ} (hv : ContDiff ℝ ∞ v) (hN : RadialNaturalTail D right j f v) :
-    ∃ u : ℝ → ℝ, ContDiff ℝ ∞ u ∧ RadialNaturalTail D right j e u := by
+    ∃ u : ℝ → ℝ, ContDiff ℝ ∞ u ∧ RadialNaturalTail D right j e u ∧
+      u f = v f ∧ deriv u f = deriv v f := by
   obtain ⟨r, hr, hvr⟩ := hN.2.2.2
   let g : ℝ := (f + r) / 2
   have hg : g ∈ radialTailInterval D right f := by
@@ -38,10 +87,12 @@ theorem exists_radialNaturalTail_continuation {D : ReferenceData}
       dsimp only [g]
       constructor <;> linarith only [hr.1, hr.2, hf.2]
   have hgr : if right then g < r else r < g := by
-    cases right <;> dsimp only [g]
-    · change D.a < r ∧ r < f at hr
+    cases right
+    · change r < (f + r) / 2
+      change D.a < r ∧ r < f at hr
       linarith only [hr.2]
-    · change f < r ∧ r < D.b at hr
+    · change (f + r) / 2 < r
+      change f < r ∧ r < D.b at hr
       linarith only [hr.1]
   have hopen : IsOpen (radialTailInterval D right f) := by cases right <;> exact isOpen_Ioo
   obtain ⟨ε, hε, hball⟩ := Metric.isOpen_iff.mp hopen g hg
@@ -115,8 +166,20 @@ theorem exists_radialNaturalTail_continuation {D : ReferenceData}
     · exact ⟨hr.1, hr.2.trans hef⟩
     · exact ⟨hef.trans hr.1, hr.2⟩
   have huR : u r = v r := (houter r (by cases right <;> exact hgr.le)).eq_of_nhds
-  refine ⟨u, hu, hu.contDiffAt, ⟨hu.contDiffOn, heq⟩, ?_, r, hrE, ?_⟩
-  · exact (r07_memLp_radialHilbertMeasure hD.1 hD.2.2.1.1.continuous hu.continuous).restrict _
-  · exact huR ▸ hvr
+  have hNu : RadialNaturalTail D right j e u := by
+    refine ⟨hu.contDiffAt, ⟨hu.contDiffOn, heq⟩, ?_, r, hrE, ?_⟩
+    · exact (r07_memLp_radialHilbertMeasure hD.1 hD.2.2.1.1.continuous hu.continuous).restrict _
+    · simpa only [huR] using hvr
+  have hgerm : u =ᶠ[𝓝 g] v := houter g (by cases right <;> exact le_rfl)
+  exact ⟨u, hu, hNu, radialNaturalTail_overlap_cauchy hD he hf hef hg hu hv hNu hN hgerm⟩
+
+theorem exists_radialNaturalTail_continuation {D : ReferenceData}
+    (hD : RadialProfileGeometry D) {right : Bool} {j : ℕ} {e f : ℝ}
+    (he : e ∈ radialCore D) (hf : f ∈ radialCore D)
+    (hef : if right then e < f else f < e)
+    {v : ℝ → ℝ} (hv : ContDiff ℝ ∞ v) (hN : RadialNaturalTail D right j f v) :
+    ∃ u : ℝ → ℝ, ContDiff ℝ ∞ u ∧ RadialNaturalTail D right j e u := by
+  obtain ⟨u, hu, hNu, _, _⟩ := exists_radialNaturalTail_continuation_with_cauchy hD he hf hef hv hN
+  exact ⟨u, hu, hNu⟩
 
 end ContinuousFlexibility.Radial

@@ -27,8 +27,8 @@ theorem r07_amplitude_log_near (T : MorseChainData) (σ : ℕ → ℝ)
   have hp : 0 ≤ (n : ℝ) ^ (3 / 2 : ℝ) := rpow_nonneg (Nat.cast_nonneg n) _
   have hs := morseChainAmplitude_log_adjacent_bound T σ hσ hn hN
     (hN.trans (Nat.le_succ n)) (Or.inl rfl : n + 1 = n + 1 ∨ n = n + 1 + 1)
-  rcases hm with rfl | rfl <;> rcases hg with rfl | rfl
-  · rw [div_self (morseChainAmplitude_pos T σ hσ n).ne', log_one, abs_zero]
+  rcases hm with hm | hm <;> rcases hg with hg | hg
+  · rw [hm, hg, div_self (morseChainAmplitude_pos T σ hσ n).ne', log_one, abs_zero]
     positivity
   · have he : log (morseChainAmplitude T σ n / morseChainAmplitude T σ (n + 1)) =
         -log (morseChainAmplitude T σ (n + 1) / morseChainAmplitude T σ n) := by
@@ -37,9 +37,10 @@ theorem r07_amplitude_log_near (T : MorseChainData) (σ : ℕ → ℝ)
         log_div (morseChainAmplitude_pos T σ hσ (n + 1)).ne'
           (morseChainAmplitude_pos T σ hσ n).ne']
       ring
-    simpa only [he, abs_neg] using hs
-  · exact hs
-  · rw [div_self (morseChainAmplitude_pos T σ hσ (n + 1)).ne', log_one, abs_zero]
+    rw [hm, hg, he, abs_neg]
+    exact hs
+  · simpa only [hm, hg] using hs
+  · rw [hm, hg, div_self (morseChainAmplitude_pos T σ hσ (n + 1)).ne', log_one, abs_zero]
     positivity
 
 theorem r07_A_log_near (T : MorseChainData) {n m : ℕ}
@@ -47,9 +48,11 @@ theorem r07_A_log_near (T : MorseChainData) {n m : ℕ}
     -((n : ℝ) + 1) ^ 2 - 8 ≤ log (morseChainA T m) ∧
       log (morseChainA T m) ≤ -(n : ℝ) ^ 2 + 8 := by
   have h := abs_le.mp (morseChainA_log_error T m hd)
-  rcases hm with rfl | rfl
-  · constructor <;> nlinarith only [h.1, h.2, Nat.cast_nonneg (α := ℝ) n]
-  · push_cast at h
+  rcases hm with hm | hm
+  · rw [hm] at h ⊢
+    constructor <;> nlinarith only [h.1, h.2, Nat.cast_nonneg (α := ℝ) n]
+  · rw [hm] at h ⊢
+    push_cast at h
     constructor <;> nlinarith only [h.1, h.2, Nat.cast_nonneg (α := ℝ) n]
 
 /-- Every adjacent mass/resistance product has the same leading logarithmic
@@ -73,7 +76,7 @@ theorem r07_deep_model_products (T : MorseChainData) (σ : ℕ → ℝ)
       (morseChainA_exp_bounds T g hdg).1
   have hlm := morseChainAmplitude_pos T σ hσ m
   have hlg := morseChainAmplitude_pos T σ hσ g
-  have hλ := abs_le.mp (r07_amplitude_log_near T σ hσ hn hN hm hg)
+  have hamp := abs_le.mp (r07_amplitude_log_near T σ hσ hn hN hm hg)
   have hmA := r07_A_log_near T hdm hm
   have hgA := r07_A_log_near T hdg hg
   have hflip : log (morseChainAmplitude T σ g / morseChainAmplitude T σ m) =
@@ -86,14 +89,14 @@ theorem r07_deep_model_products (T : MorseChainData) (σ : ℕ → ℝ)
         (pow_ne_zero 4 hAg.ne'),
       log_mul (div_ne_zero hlm.ne' hlg.ne') (pow_ne_zero 2 hAm.ne'), log_pow, log_pow]
     push_cast
-    nlinarith only [hλ.1, hmA.1, hgA.2]
+    nlinarith only [hamp.1, hmA.1, hgA.2]
   · apply (log_le_iff_le_exp (by positivity)).mp
     rw [log_div (mul_ne_zero (div_ne_zero hlg.ne' hlm.ne') (pow_ne_zero 6 hAg.ne'))
         (pow_ne_zero 2 hAm.ne'),
       log_mul (div_ne_zero hlg.ne' hlm.ne') (pow_ne_zero 6 hAg.ne'), log_pow, log_pow,
       hflip]
     push_cast
-    nlinarith only [hλ.1, hgA.2, hmA.1]
+    nlinarith only [hamp.1, hgA.2, hmA.1]
 
 theorem r07_three_halves_young {x : ℝ} (hx : 0 ≤ x) :
     10 * x ^ (3 / 2 : ℝ) ≤ x ^ 2 + 25 * x := by
@@ -178,6 +181,7 @@ theorem r07_deep_small_scales (T : MorseChainData) {n : ℕ} (hn : 8 ≤ n)
     have he := add_one_le_exp ((n : ℝ) ^ 2 / 2)
     have he2 := pow_le_pow_left₀ (by positivity : 0 ≤ (n : ℝ) ^ 2 / 2 + 1) he 2
     rw [← exp_nat_mul] at he2
+    simp only [Nat.cast_ofNat] at he2
     have hexp : (2 : ℝ) * ((n : ℝ) ^ 2 / 2) = (n : ℝ) ^ 2 := by ring
     rw [hexp] at he2
     nlinarith only [he2, hsq,

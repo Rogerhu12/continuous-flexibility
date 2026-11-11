@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.R07CapPullback
+import ContinuousFlexibility.Radial.R07DeepTailChange
 
 /-!
 # A normalized incoming solution from a positive cap
@@ -16,8 +17,6 @@ namespace ContinuousFlexibility.Radial
 
 open Set Real
 open scoped ContDiff
-
-def r07OutwardSign (right : Bool) : ℝ := if right then 1 else -1
 
 theorem r07OutwardSign_sq (right : Bool) : r07OutwardSign right ^ 2 = 1 := by
   cases right <;> norm_num [r07OutwardSign]

@@ -29,10 +29,10 @@ theorem r07_hasDerivAt_radius (right : Bool) (x : ℝ) :
     HasDerivAt (tailPhysicalRadius right)
       (r07OutwardSign right * tailPhysicalRadius right x) x := by
   cases right
-  · change HasDerivAt (fun y : ℝ => exp (-y)) (-exp (-x)) x
+  · simp only [tailPhysicalRadius, r07OutwardSign, Bool.false_eq_true, if_false, neg_one_mul]
     simpa only [Function.comp_def, mul_neg_one] using
       (hasDerivAt_exp (-x)).comp x (hasDerivAt_neg x)
-  · change HasDerivAt exp (exp x) x
+  · simp only [tailPhysicalRadius, r07OutwardSign, if_true, one_mul]
     exact hasDerivAt_exp x
 
 /-- Substitution by the outward radius map, with the orientation recorded
@@ -81,7 +81,6 @@ theorem r07_density_two_pullback {D : ReferenceData} (right : Bool) (x : ℝ)
   simp only [Nat.cast_ofNat]
   rw [hpow]
   field_simp [hr, he.ne']
-  <;> ring
 
 theorem r07_density_two_inverse_pullback {D : ReferenceData} (right : Bool) (x : ℝ)
     (he : 0 < (if right then D.b else D.a))
@@ -92,7 +91,6 @@ theorem r07_density_two_inverse_pullback {D : ReferenceData} (right : Bool) (x :
         tailPhysicalRadius right x := by
   rw [r07_density_two_pullback right x he]
   field_simp [(r07_radius_pos right x).ne', he.ne', hw]
-  <;> ring
 
 /-- The exact frequency-two mass in logarithmic coordinates, including the
 constant normalization at the endpoint and the left-tail orientation. -/
@@ -117,7 +115,6 @@ theorem r07_density_two_mass_change {D : ReferenceData} (right : Bool) (a b : �
           (tailPhysicalRadius right '' uIcc a b) :=
         (hw.mul (continuous_id.pow 6)).continuousOn
       have hsub := r07_integral_radius_change right a b hc
-      dsimp only at hsub
       rw [hsub]
       ring
 
@@ -148,7 +145,6 @@ theorem r07_density_two_resistance_change {D : ReferenceData} (right : Bool) (a 
           tailPhysicalRadius right x) := intervalIntegral.integral_const_mul _ _
     _ = _ := by
       have hsub := r07_integral_radius_change right a b hcont
-      dsimp only at hsub
       rw [hsub]
       ring
 

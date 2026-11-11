@@ -41,7 +41,7 @@ theorem r07CapRadius_second_pos (right : Bool) {A B s t : ℝ} {r : ℝ → ℝ}
   have ht' := Ioo_subset_Icc_self ht
   rw [r07CapRadius_equation right hB hAB hr ht']
   apply mul_pos _ (r07CapRadius_model_bounds right hB hAB hs hr ht').1
-  have hm := r07CapPoint_mem right ht'
+  have hm := r07CapPoint_mem (B := B) right ht'
   cases right
   · have hA : 0 < A := (mul_pos (by norm_num) hB).trans hAB
     exact (div_pos hA (by norm_num)).trans_le (morseShortLeftCap_negRho_lower hB hAB hm.2)

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.R07IncomingCap
 import ContinuousFlexibility.Radial.MorseChainGeometry
+import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # The concrete Morse caps for normalized incoming solutions
@@ -67,7 +68,7 @@ theorem r07CapPoint_mem (right : Bool) {A B t : ℝ}
 theorem r07CapPoint_mem_cell (right : Bool) {A B t : ℝ}
     (hB : 0 < B) (hAB : 4 * B < A) (ht : t ∈ Icc 0 (r07CapLength right A)) :
     r07CapPoint right A B t ∈ Icc morseCellLeftCut (morseRightCapEnd A B (1 / 100)) := by
-  have hm := r07CapPoint_mem right ht
+  have hm := r07CapPoint_mem (B := B) right ht
   have hA : 0 < A := (mul_pos (by norm_num) hB).trans hAB
   have hturn : morseCellLeftCut < morseRightTurn A B := morseCellLeftCut_lt_rightTurn hB hAB
   have hshort : morseShortLeftCapCut < morseRightTurn A B :=
@@ -86,10 +87,11 @@ theorem r07CapRadius_deriv (right : Bool) (A B s t : ℝ) {r : ℝ → ℝ}
     (hr : ContDiff ℝ ∞ r) :
     deriv (r07CapRadius right A B s r) t =
       s * deriv r (r07CapPoint right A B t) * r07OutwardSign right := by
-  have hp : HasDerivAt (r07CapPoint right A B) (r07OutwardSign right) t :=
-    ((hasDerivAt_id t).const_mul (r07OutwardSign right)).const_add (r07CapCut right A B)
+  have hp : HasDerivAt (r07CapPoint right A B) (r07OutwardSign right) t := by
+    simpa only [r07CapPoint, mul_one] using
+      ((hasDerivAt_id t).const_mul (r07OutwardSign right)).const_add (r07CapCut right A B)
   have h := ((hr.differentiable (by simp) (r07CapPoint right A B t)).hasDerivAt.comp t hp).const_mul s
-  convert h.deriv using 1 <;> ring
+  simpa only [r07CapRadius, Function.comp_apply, mul_assoc] using h.deriv
 
 theorem r07CapRadius_second (right : Bool) (A B s t : ℝ) {r : ℝ → ℝ}
     (hr : ContDiff ℝ ∞ r) :
@@ -120,7 +122,7 @@ theorem r07CapRadius_model_bounds (right : Bool) {A B s t : ℝ} {r : ℝ → �
     0 < r07CapRadius right A B s r t ∧
       (if right then 0 < deriv (r07CapRadius right A B s r) t
        else deriv (r07CapRadius right A B s r) t < 0) := by
-  have hm := r07CapPoint_mem right ht
+  have hm := r07CapPoint_mem (B := B) right ht
   have hv := hr.speed_pos _ (r07CapPoint_mem_enlarged right hB hAB ht)
   have hp : 0 < r (r07CapPoint right A B t) := by
     cases right
@@ -167,7 +169,7 @@ theorem r07CapRadius_scalar_bound (right : Bool) {A B s j t : ℝ} {r : ℝ → 
     rw [r07CapRadius_equation right hB hAB hr ht]
     field_simp [hp.ne'] <;> ring
   rw [he]
-  have hm := r07CapPoint_mem right ht
+  have hm := r07CapPoint_mem (B := B) right ht
   cases right
   · have hlo := morseShortLeftCap_negRho_lower hB hAB hm.2
     have hhi := morseLeftCap_negRho_upper hB hAB hm.1

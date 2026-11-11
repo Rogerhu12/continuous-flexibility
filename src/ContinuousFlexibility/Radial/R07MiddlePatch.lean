@@ -171,6 +171,7 @@ theorem r07MiddlePatchedProfile_geometry {T : Statements.MorseChainData}
   have hOld := morseChainGluedProfile_interior_exterior G σ hσ
   obtain ⟨hout, hin⟩ := r07MiddlePatchedProfile_germs G hM σ hσ
   have hpositive (x : ℝ) (hx : x ∈ Ioo 1 G.rightEnd) : 0 < w x := by
+    change 0 < r07MiddlePatchedProfile G M σ hσ x
     by_cases he : x ≤ a ∨ b ≤ x
     · rw [(hout x he).eq_of_nhds]
       exact hOld.2.1 x hx
@@ -182,9 +183,12 @@ theorem r07MiddlePatchedProfile_geometry {T : Statements.MorseChainData}
     ⟨hPhi.1, hPhi.2.1⟩, hpositive, hPhi.2.2, ?_⟩
   · intro x hx
     have he : x ≤ a ∨ b ≤ x := hx.imp (fun h => h.trans hc.1.le) (fun h => hc.2.le.trans h)
+    change r07MiddlePatchedProfile G M σ hσ x = 0
     rw [(hout x he).eq_of_nhds]
     exact hOld.2.2 x hx
   · intro x hx hz
+    change deriv (r07MiddlePatchedProfile G M σ hσ) x = 0 at hz
+    change deriv (deriv (r07MiddlePatchedProfile G M σ hσ)) x ≠ 0
     by_cases he : x ≤ a ∨ b ≤ x
     · have hg := hout x he
       rw [hg.deriv.deriv_eq]

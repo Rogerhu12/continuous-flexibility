@@ -81,12 +81,12 @@ theorem radialHilbertMeasure_restrict_scale {D E : Statements.ReferenceData}
   calc
     _ = μ.withDensity (ENNReal.ofReal scale •
         (fun r => ENNReal.ofReal (12 * D.w r / r ^ 2))) := by
-      apply Measure.withDensity_congr_ae
+      apply withDensity_congr_ae
       filter_upwards [ae_restrict_mem hs] with r hr
       simp only [Pi.smul_apply, smul_eq_mul, hw hr]
       rw [show 12 * (scale * D.w r) / r ^ 2 = scale * (12 * D.w r / r ^ 2) by ring,
         ENNReal.ofReal_mul hscale]
-    _ = _ := Measure.withDensity_smul' _ _ ENNReal.ofReal_ne_top
+    _ = _ := withDensity_smul' _ _ ENNReal.ofReal_ne_top
 
 theorem memLp_radialHilbertMeasure_restrict_scale_iff {D E : Statements.ReferenceData}
     {s : Set ℝ} (hs : MeasurableSet s)
@@ -98,6 +98,7 @@ theorem memLp_radialHilbertMeasure_restrict_scale_iff {D E : Statements.Referenc
   have hforward := radialHilbertMeasure_restrict_scale hs hcore hscale.le hw
   have hwinv : EqOn D.w (fun r => scale⁻¹ * E.w r) s := by
     intro r hr
+    dsimp only
     rw [hw hr, ← mul_assoc, inv_mul_cancel₀ hscale.ne', one_mul]
   have hreverse := radialHilbertMeasure_restrict_scale hs hcore.symm
     (inv_pos.mpr hscale).le hwinv
