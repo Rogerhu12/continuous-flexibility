@@ -195,7 +195,7 @@ theorem canonicalChart_exists_smooth_interiorInverse
     exact hpe
   have hnear : ∀ᶠ q in 𝓝 (K.chart z m p),
       q ∈ e.target ∧ K.inverseChart z m q ∈ e.source :=
-    (e.open_target.mem_nhds hFp).and
+    Filter.Eventually.and (e.open_target.mem_nhds hFp)
       (hGcont.eventually (e.open_source.mem_nhds hGsource))
   obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp hnear
   have heq : EqOn (K.inverseChart z m) e.symm

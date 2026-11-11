@@ -32,6 +32,14 @@ local instance n07bFixedGraphLevelNormedAddCommGroup :
 local instance n07bFixedGraphLevelNormedSpace :
     NormedSpace ℝ (V.level (3 / 4 : ℝ) 0 b) :=
   Submodule.normedSpace _
+local instance n07bFixedGraphUnknownNormedAddCommGroup :
+    NormedAddCommGroup (CanonicalUnknown S K) := inferInstance
+local instance n07bFixedGraphUnknownNormedSpace :
+    NormedSpace ℝ (CanonicalUnknown S K) := inferInstance
+local instance n07bFixedGraphDomainNormedAddCommGroup :
+    NormedAddCommGroup B.Space := Submodule.normedAddCommGroup _
+local instance n07bFixedGraphDomainNormedSpace :
+    NormedSpace ℝ B.Space := Submodule.normedSpace _
 
 theorem n07b_fixedGraph_scalarInverse_identification
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -67,8 +75,8 @@ theorem n07b_fixedGraph_scalarInverse_identification
       hA hB hC hBp hCp hrep hμ hcompat
   have hop : P.operator z d₀ = F :=
     n07b_relativeOperator_eq_of_physical_relation hK h05.2.1 h06 hz hs hab.le d₀ F hweak
-  have hid : B.inverse (P.inverse z F) = d₀ := by
-    simpa only [n07aBaseInverse_apply] using n07aBaseInverse_eq_of_operator h05 h06 hz hs hop
+  have hid : B.inverse (P.inverse z F) = d₀ :=
+    n07aBaseInverse_eq_of_operator h05 h06 hz hs hop
   dsimp only
   rw [hid]
   exact ⟨hcompat, ha, hμ, hrep⟩

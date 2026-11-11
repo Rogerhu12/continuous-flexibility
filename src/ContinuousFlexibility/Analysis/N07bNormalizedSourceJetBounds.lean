@@ -97,7 +97,9 @@ theorem n07b_threeBranch_jets_le
         unfold n07bSourceChainJetConstant
         ring
       fin_cases k
-      · have heq : a (j + 1) (i, 0) =ᶠ[𝓝 x] (fun y => g₁ y + g₂ y + g₃ y) :=
+      · change ‖iteratedFDeriv ℝ n (a (j + 1) (i, 0)) x‖ ≤
+          n07bSourceChainJetConstant b ^ (j + 1) * R ^ (j + 1 + 1)
+        have heq : a (j + 1) (i, 0) =ᶠ[𝓝 x] (fun y => g₁ y + g₂ y + g₃ y) :=
           Filter.eventually_of_mem (hU.mem_nhds hx) (fun y hy => hstay j i hy)
         rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds]
         calc
@@ -108,7 +110,9 @@ theorem n07b_threeBranch_jets_le
           _ ≤ L + L + L := add_le_add (add_le_add h₁ h₂) h₃
           _ = 3 * L := by ring
           _ = _ := hstep
-      · have heq : a (j + 1) (i, 1) =ᶠ[𝓝 x] (fun y => v₁ y * a j i y) :=
+      · change ‖iteratedFDeriv ℝ n (a (j + 1) (i, 1)) x‖ ≤
+          n07bSourceChainJetConstant b ^ (j + 1) * R ^ (j + 1 + 1)
+        have heq : a (j + 1) (i, 1) =ᶠ[𝓝 x] (fun y => v₁ y * a j i y) :=
           Filter.eventually_of_mem (hU.mem_nhds hx) (fun y hy => hradial j i hy)
         rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds]
         calc
@@ -116,7 +120,9 @@ theorem n07b_threeBranch_jets_le
             (fun t ht => hajet t (by omega))
           _ ≤ 3 * L := by linarith
           _ = _ := hstep
-      · have heq : a (j + 1) (i, 2) =ᶠ[𝓝 x] (fun y => v₂ y * a j i y) :=
+      · change ‖iteratedFDeriv ℝ n (a (j + 1) (i, 2)) x‖ ≤
+          n07bSourceChainJetConstant b ^ (j + 1) * R ^ (j + 1 + 1)
+        have heq : a (j + 1) (i, 2) =ᶠ[𝓝 x] (fun y => v₂ y * a j i y) :=
           Filter.eventually_of_mem (hU.mem_nhds hx) (fun y hy => hangular j i hy)
         rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds]
         calc

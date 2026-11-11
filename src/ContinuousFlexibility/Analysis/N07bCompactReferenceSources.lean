@@ -124,7 +124,9 @@ theorem n07b_exists_radialFlux_source
     (contDiff_infty_iff_deriv.mp (hgeom.2.2.1.1.mul hdχ)).2
   apply n07b_exists_source_of_compact_support hT hS (hf.comp contDiff_fst)
   · intro p
-    simp only [Prod.fst_add, add_zero]
+    change deriv (fun r => D.w r * deriv χ r) (p.1 + 0) =
+      deriv (fun r => D.w r * deriv χ r) p.1
+    rw [add_zero]
   · exact fun _ _ => rfl
   · exact hs
   · exact n07b_radialFlux_physicalSourceIntegral_eq_zero hgeom hχ
@@ -184,6 +186,7 @@ theorem n07b_exists_referenceColumn_source
     have hz : referenceColumn D r = 0 :=
       image_eq_zero_of_notMem_tsupport
         (fun hm => hr (referenceColumn_tsupport_subset hm))
+    change μ * referenceColumn D r * cosineMode 2 θ = 0
     rw [hz, mul_zero, zero_mul]
   · exact n07b_referenceColumn_physicalSourceIntegral_eq_zero D μ
 
