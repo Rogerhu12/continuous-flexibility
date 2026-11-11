@@ -132,14 +132,16 @@ theorem poisson_norm_sq_le (hw : ContDiff ℝ ∞ D.w) {s : ℝ} (hs : 0 < s)
     (fun r hr => (G.weight_pos piece r (Ioo_subset_Icc_self hr)).le)
     A.columns A.columns_smooth A.columns_boundary A.columns_homogeneous
     (G.weight_pos piece) (fun r hr => hslope.trans (A.slope_lower r hr)) ξ
-  have hnonneg := A.poisson_energy_nonneg hw ξ
+  have hnonneg :
+      0 ≤ ⟪ξ, innerGapFluxOperator D.w (G.left piece) (G.right piece) A.columns ξ⟫_ℝ := by
+    simpa only [innerGapFluxOperator, fluxMatrix] using A.poisson_energy_nonneg hw ξ
   have hK : 0 ≤ Real.sqrt (12 / s) / j :=
     div_nonneg (Real.sqrt_nonneg _) A.frequency_pos.le
   have hsq := (sq_le_sq₀ (norm_nonneg _) (mul_nonneg hK
     (Real.sqrt_nonneg _))).mpr hn
+  rw [mul_pow, Real.sq_sqrt hnonneg] at hsq
   rw [A.poisson_apply, WithLp.norm_toLp_fst]
-  simpa only [fieldPoisson, fluxMatrix, innerGapFluxOperator,
-    mul_pow, Real.sq_sqrt hnonneg] using hsq
+  simpa only [fieldPoisson, fluxMatrix, innerGapFluxOperator] using hsq
 
 end InnerRadialGapChart
 

@@ -82,7 +82,9 @@ def innerActualChainOfModelsAndGaps :
 theorem innerActualChainOfModelsAndGaps_model (p : Fin m) :
     (innerActualChainOfModelsAndGaps G bordered j center column models gaps).piece
         (innerModelChainPiece p) = Sum.inl (models p) :=
-  innerDisjointCoverElim_left innerModelChainPiece innerModelChainGap
+  innerDisjointCoverElim_left
+    (β := fun q => InnerRadialActualPiece D G bordered j (innerModelChainPiece center) column q)
+    innerModelChainPiece innerModelChainGap
     innerModelChainPiece_injective innerModelChainGap_injective
     (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
     (fun p => Sum.inl (models p)) (fun g => Sum.inr (gaps g)) p
@@ -90,7 +92,9 @@ theorem innerActualChainOfModelsAndGaps_model (p : Fin m) :
 theorem innerActualChainOfModelsAndGaps_gap (g : Fin (m + 1)) :
     (innerActualChainOfModelsAndGaps G bordered j center column models gaps).piece
         (innerModelChainGap g) = Sum.inr (gaps g) :=
-  innerDisjointCoverElim_right innerModelChainPiece innerModelChainGap
+  innerDisjointCoverElim_right
+    (β := fun q => InnerRadialActualPiece D G bordered j (innerModelChainPiece center) column q)
+    innerModelChainPiece innerModelChainGap
     innerModelChainPiece_injective innerModelChainGap_injective
     (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
     (fun p => Sum.inl (models p)) (fun g => Sum.inr (gaps g)) g
