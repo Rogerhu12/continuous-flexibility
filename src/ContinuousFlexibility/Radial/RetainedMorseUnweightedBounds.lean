@@ -63,7 +63,7 @@ local notation "A" => P.retainedMorseModelChart hw hS G₀ hband H bordered j ce
 
 theorem retainedMorseModelChart_unweighted_poisson_bound (hj : 1 ≤ j) (hC : 0 < Cmodel)
     (hrem : ∀ i, innerMorseModelNormalizedRemainder M i ≤ 1 / j) (i : Fin 2) :
-    ‖(sqrt (A.kappa i))⁻¹ • A.column i‖ ≤ innerMorsePoissonConstant / j :=
+    ‖(sqrt ((A).kappa i))⁻¹ • (A).column i‖ ≤ innerMorsePoissonConstant / j :=
   P.retainedMorseModelChart_column_bound hw hS G₀ hband H bordered j central piece column
     side m hm haway hleft hright hB M hj hC hrem i
 
@@ -74,8 +74,8 @@ theorem retainedMorseModelChart_unweighted_error_bound {η : ℝ}
         (innerMorseCutWeight S.chain.index 0 0 side m)
         (M.physicalFluxError height (fun _ => 1)) sign‖ ≤ η)
     (sign : Bool) :
-    ‖innerTwoCutWeightedError A.kappa (fun _ => 1) A.errorMatrix sign‖ ≤ η := by
-  have hkappa : A.kappa = innerPhysicalCutKappa
+    ‖innerTwoCutWeightedError (A).kappa (fun _ => 1) (A).errorMatrix sign‖ ≤ η := by
+  have hkappa : (A).kappa = innerPhysicalCutKappa
       (P.sideHeight side * morseChainAmplitude S.chain S.sigma m)
       (fun _ => 1) (fun i => (M.column i).inwardEnergy) := by
     funext i
@@ -89,7 +89,7 @@ theorem retainedMorseModelChart_unweighted_error_bound {η : ℝ}
 
 theorem retainedMorseModelChart_dirichlet_cost_at_upper {upper : ℕ}
     (hj : 1 ≤ j) (hC : 0 ≤ Cmodel) (hupper : m ≤ upper) :
-    ‖A.dirichlet‖ ≤ innerMorseDirichletConstant Cmodel * radialE upper ^ (37 : ℝ) :=
+    ‖(A).dirichlet‖ ≤ innerMorseDirichletConstant Cmodel * radialE upper ^ (37 : ℝ) :=
   (P.retainedMorseModelChart_dirichlet_cost hw hS G₀ hband H bordered j central piece column
     side m hm haway hleft hright hB M hj hC).trans
     (mul_le_mul_of_nonneg_left (retained_radialE_power_le hupper)

@@ -83,8 +83,8 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
     (hcolumns₀ : ∀ i, ‖(sqrt (centralModel.kappa i))⁻¹ • centralModel.column i‖ ≤
       Bc * (1 + j) ^ 2)
     (hendpoints₀ : ∀ i,
-      Γ.reference.w (if i = 0 then H.left center else H.right center) /
-        (if i = 0 then H.left center else H.right center) ≤ Lc * centralModel.kappa i)
+      Γ.reference.w (if i = 0 then (H).left center else (H).right center) /
+        (if i = 0 then (H).left center else (H).right center) ≤ Lc * centralModel.kappa i)
     (herror₀ : ∀ sign : Bool,
       ‖innerTwoCutWeightedError centralModel.kappa (fun _ => 1)
         centralModel.errorMatrix sign‖ ≤ (1 : ℝ) / 8)
@@ -137,12 +137,12 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
       _ ≤ j * p := by simpa only [one_mul] using mul_le_mul_of_nonneg_right hj hp
       _ ≤ c := by simpa only [mul_one, c] using
         mul_le_mul_of_nonneg_left hpoly (mul_nonneg hjpos.le hp)
-  have hκ : ∀ i, 0 < A.kappa i :=
+  have hκ : ∀ i, 0 < (A).kappa i :=
     P.retainedMorseActualChain_kappa_pos hD hw hS G₀ hfirst hq hT
       hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hjpos
       column hB models centralModel hCM hcentral
   have hmodelκ : ∀ p (M : InnerRadialModelChart Γ.reference H bordered j center column p),
-      A.piece p = .inl M → 0 < p.val ∧ p.val < 2 * (2 * k + 1) ∧ ∀ i, 0 < M.kappa i :=
+      (A).piece p = .inl M → 0 < p.val ∧ p.val < 2 * (2 * k + 1) ∧ ∀ i, 0 < M.kappa i :=
     P.retainedMorseActualChain_model_internal hD hw hS G₀ hfirst hq hT
       hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hjpos
       column hB models centralModel hCM hcentral
@@ -167,8 +167,8 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
         (innerMorseInnerTailPiece_ne_center _ _ _) (tails side p).1 (tails side p).2
         (hB side p) (models side p) hj hCM (hrem side p) i).trans htailP)
   have hends := modelInduction
-    (fun p M => ∀ i, Γ.reference.w (if i = 0 then H.left p else H.right p) /
-      (if i = 0 then H.left p else H.right p) ≤ l * M.kappa i)
+    (fun p M => ∀ i, Γ.reference.w (if i = 0 then (H).left p else (H).right p) /
+      (if i = 0 then (H).left p else (H).right p) ≤ l * M.kappa i)
     (fun i => (hendpoints₀ i).trans
       (mul_le_mul_of_nonneg_right (le_add_of_nonneg_left
         (mul_nonneg (by norm_num) hCM.le)) (hcentral i).le))
@@ -184,8 +184,8 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
           tails hB models hCM side p i).le))
   have hgapends : ∀ (i : Fin (2 * (2 * k + 1)))
       (Q : InnerRadialGapChart Γ.reference H j center i.succ),
-      A.piece i.succ = .inr Q →
-        Γ.reference.w (H.left i.succ) / H.left i.succ ≤ l * A.kappa i := by
+      (A).piece i.succ = .inr Q →
+        Γ.reference.w ((H).left i.succ) / (H).left i.succ ≤ l * (A).kappa i := by
     intro i Q hi
     obtain ⟨p, hs | hs⟩ := innerModelChain_cut_incidence i
     · rw [hs.2, retainedMorseActualChain_model] at hi
@@ -194,10 +194,10 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
         hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hjpos
         column hB models centralModel p
       have hed := hends (innerModelChainPiece p) (MF p) hm 1
-      have hx : H.left i.succ = H.right (innerModelChainPiece p) := by
+      have hx : (H).left i.succ = (H).right (innerModelChainPiece p) := by
         rw [← hs.1]
         rfl
-      rw [hx, A.kappa_apply, hs.1, hm, hi]
+      rw [hx, (A).kappa_apply, hs.1, hm, hi]
       simpa only [InnerRadialActualPiece.kappa, Pi.zero_apply, add_zero,
         show (1 : Fin 2) ≠ 0 by decide, ite_false] using hed
   have hDcBound : Dc ≤ d := by
@@ -223,15 +223,15 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
       (mul_le_mul_of_nonneg_right
         (by dsimp only [retainedMorseDirichletCoefficient]; linarith only [hDc])
         (zero_le_one.trans he)))
-  have hdir : ∀ p, ‖(A.piece p).dirichlet hD.2.2.1.1‖ ≤ d := by
+  have hdir : ∀ p, ‖((A).piece p).dirichlet hD.2.2.1.1‖ ≤ d := by
     intro p
-    cases hp : A.piece p with
+    cases hp : (A).piece p with
     | inl M => simpa only [hp, InnerRadialActualPiece.dirichlet] using hmodelD p M hp
     | inr Q =>
       simpa only [hp, InnerRadialActualPiece.dirichlet] using
         (Q.dirichlet_norm_le_hardy hD.2.2.1.1 (by nlinarith only [hj])).trans h48
   obtain ⟨inverse, hgraph, hnorm, hself⟩ :=
-    A.exists_unweighted_inverse_of_local_bounds_hardy hD.2.2.1.1 hc hl hd hjpos
+    (A).exists_unweighted_inverse_of_local_bounds_hardy hD.2.2.1.1 hc hl hd hjpos
       (by nlinarith only [hj]) hκ
       (P.retainedMorseActualChain_kappa_separated hD hw hS G₀ hfirst hq hT
         hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hjpos

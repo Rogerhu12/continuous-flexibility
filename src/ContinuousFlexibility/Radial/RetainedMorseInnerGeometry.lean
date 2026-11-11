@@ -85,18 +85,18 @@ local notation "H" => P.retainedMorseInnerGeometry hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk
 
 theorem retainedMorseInnerGeometry_center :
-    H.left (innerModelChainPiece (innerMorseInnerCenter k)) = centralRadius (-T) ∧
-      H.right (innerModelChainPiece (innerMorseInnerCenter k)) = centralRadius T := by
+    (H).left (innerModelChainPiece (innerMorseInnerCenter k)) = centralRadius (-T) ∧
+      (H).right (innerModelChainPiece (innerMorseInnerCenter k)) = centralRadius T := by
   dsimp only [retainedMorseInnerGeometry]
   rw [scaledMorseInnerChainGeometry_left, scaledMorseInnerChainGeometry_right,
     scaledMorseInnerModelCuts_center, scaledMorseInnerModelCuts_center]
   norm_num [retainedMorseCenterCuts]
 
 theorem retainedMorseInnerGeometry_tail (side : Bool) (p : Fin k) :
-    H.left (innerModelChainPiece (innerMorseInnerTailSlot k side p)) =
+    (H).left (innerModelChainPiece (innerMorseInnerTailSlot k side p)) =
       P.sideRadius side * innerMorseChainCut S.chain side
         (innerMorseInnerTailIndex S.chain.index k side p) 0 ∧
-      H.right (innerModelChainPiece (innerMorseInnerTailSlot k side p)) =
+      (H).right (innerModelChainPiece (innerMorseInnerTailSlot k side p)) =
       P.sideRadius side * innerMorseChainCut S.chain side
         (innerMorseInnerTailIndex S.chain.index k side p) 1 := by
   dsimp only [retainedMorseInnerGeometry]
@@ -109,11 +109,11 @@ theorem retainedMorseInnerGeometry_tail (side : Bool) (p : Fin k) :
     (P.retained_morse_outer_mem_core hD hw hS G₀ hfirst k true) side p
 
 theorem retainedMorseInnerGeometry_terminal (side : Bool) :
-    H.left (innerModelChainGap (innerMorseTerminalGapSlot k side)) =
+    (H).left (innerModelChainGap (innerMorseTerminalGapSlot k side)) =
       P.sideRadius side * S.chain.radius side (S.chain.index + (k - 1))
         (innerMorseOuterCapStart (morseChainA S.chain (S.chain.index + (k - 1)))
           (morseChainB S.chain (S.chain.index + (k - 1))) side) ∧
-      H.right (innerModelChainGap (innerMorseTerminalGapSlot k side)) =
+      (H).right (innerModelChainGap (innerMorseTerminalGapSlot k side)) =
       P.sideRadius side * S.chain.radius side (S.chain.index + (k - 1))
         (innerMorseOuterCapEnd (morseChainA S.chain (S.chain.index + (k - 1)))
           (morseChainB S.chain (S.chain.index + (k - 1))) side) := by
@@ -127,10 +127,10 @@ theorem retainedMorseInnerGeometry_terminal (side : Bool) :
     (P.retained_morse_outer_mem_core hD hw hS G₀ hfirst k true) side
 
 theorem retainedMorseInnerGeometry_middle (side : Bool) :
-    H.left (innerModelChainGap (innerMorseMiddleGapSlot k side)) =
+    (H).left (innerModelChainGap (innerMorseMiddleGapSlot k side)) =
       scaledMorseMiddleGapLeft S.chain P.sideRadius S.chain.index
         (retainedMorseCenterCuts T) side ∧
-      H.right (innerModelChainGap (innerMorseMiddleGapSlot k side)) =
+      (H).right (innerModelChainGap (innerMorseMiddleGapSlot k side)) =
       scaledMorseMiddleGapRight S.chain P.sideRadius S.chain.index
         (retainedMorseCenterCuts T) side := by
   dsimp only [retainedMorseInnerGeometry]
@@ -143,10 +143,10 @@ theorem retainedMorseInnerGeometry_middle (side : Bool) :
     (P.retained_morse_outer_mem_core hD hw hS G₀ hfirst k true) side
 
 theorem retainedMorseInnerGeometry_tailGap (side : Bool) (p : Fin (k - 1)) :
-    H.left (innerModelChainGap (innerMorseTailGapSlot k side p)) =
+    (H).left (innerModelChainGap (innerMorseTailGapSlot k side p)) =
       P.sideRadius side * innerMorseTailGapLeft S.chain side
         (innerMorseTailGapCell S.chain.index k side p) ∧
-      H.right (innerModelChainGap (innerMorseTailGapSlot k side p)) =
+      (H).right (innerModelChainGap (innerMorseTailGapSlot k side p)) =
       P.sideRadius side * innerMorseTailGapRight S.chain side
         (innerMorseTailGapCell S.chain.index k side p) := by
   dsimp only [retainedMorseInnerGeometry]
@@ -161,8 +161,8 @@ theorem retainedMorseInnerGeometry_tailGap (side : Bool) (p : Fin (k - 1)) :
 theorem retainedMorseInnerGeometry_outer
     (hjoin : ∀ side n, S.chain.index < n →
       S.joinInner side n = r07PreviousCellJoin S.chain side (n - 1)) :
-    H.left 0 = P.sideRadius false * S.joinInner false (S.chain.index + k) ∧
-      H.right (Fin.last (2 * (2 * k + 1))) =
+    (H).left 0 = P.sideRadius false * S.joinInner false (S.chain.index + k) ∧
+      (H).right (Fin.last (2 * (2 * k + 1))) =
         P.sideRadius true * S.joinInner true (S.chain.index + k) := by
   have he : S.chain.index + k - 1 = S.chain.index + (k - 1) := by omega
   have hout (side : Bool) :

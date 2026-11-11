@@ -64,13 +64,13 @@ theorem retainedMorseModelChart_actual_weighted_column_bound
     (i : Fin 2) :
     ‖(innerChainScalarRestriction (2 * (2 * K + 1)) piece
         (fun k => (innerMorseInnerInterfaceWeight S.chain.index K a γ k) ^ σ) 1 i *
-        sqrt (A.kappa i))⁻¹ •
+        sqrt ((A).kappa i))⁻¹ •
       innerBorderFieldMap (radialHilbertMeasure D)
         (innerWeightMultiplier (radialHilbertMeasure D)
           (fun x => (innerMorseInnerWeight S.chain.index K a γ H
             C.matchedWeightLeft C.matchedWeightRight x) ^ σ)
           ((innerMorseInnerWeight_measurable S.chain.index K a γ H
-            C.matchedWeightLeft C.matchedWeightRight).pow_const σ) CW hCW) (A.column i)‖ ≤
+            C.matchedWeightLeft C.matchedWeightRight).pow_const σ) CW hCW) ((A).column i)‖ ≤
       innerMorsePoissonConstant / j := by
   have hcut :
       innerChainScalarRestriction (2 * (2 * K + 1)) piece

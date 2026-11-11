@@ -44,7 +44,7 @@ variable (hCW : ∀ sign x, |W sign x| ≤ CW)
 local notation "U" => fun sign =>
   innerSupportedWeightMultiplier (radialHilbertMeasure D)
     (innerRadialChainRegion D G) (innerRadialChainRegion_measurable D G) bordered
-    (fun x => loss x * W sign x) (hloss.mul (hW sign)) CW
+    (fun x => loss x * W sign x) ((hloss).mul (hW sign)) CW
     (innerWeight_mul_bound_one loss (W sign) hlossBound CW (hCW sign))
 local notation "V" => fun sign =>
   innerSupportedWeightMultiplier (radialHilbertMeasure D)

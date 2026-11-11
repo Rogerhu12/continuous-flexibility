@@ -61,9 +61,9 @@ theorem retainedMorseModelChart_weighted_column_bound
               (8 * (S.chain.d m : ℝ) ^ 9)) 1))
           (P.sideRadius side * S.chain.radius side m x)) ^ sign)
     (i : Fin 2) :
-    ‖((innerMorseCutWeight N a γ side m i) ^ sign * sqrt (A.kappa i))⁻¹ •
+    ‖((innerMorseCutWeight N a γ side m i) ^ sign * sqrt ((A).kappa i))⁻¹ •
       innerBorderFieldMap (radialHilbertMeasure D)
-        (innerWeightMultiplier (radialHilbertMeasure D) W hW CW hWC) (A.column i)‖ ≤
+        (innerWeightMultiplier (radialHilbertMeasure D) W hW CW hWC) ((A).column i)‖ ≤
           innerMorsePoissonConstant / j := by
   have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hindex : 10 ≤ S.chain.index := (by norm_num : 10 ≤ 100).trans G₀.start_large
@@ -92,9 +92,9 @@ theorem retainedMorseModelChart_weighted_error_bound
         (innerMorseCutWeight N a γ side m)
         (M.physicalFluxError height (fun _ => 1)) sign‖ ≤ η)
     (sign : Bool) :
-    ‖innerTwoCutWeightedError A.kappa (innerMorseCutWeight N a γ side m)
-      A.errorMatrix sign‖ ≤ η := by
-  have hkappa : A.kappa = innerPhysicalCutKappa
+    ‖innerTwoCutWeightedError (A).kappa (innerMorseCutWeight N a γ side m)
+      (A).errorMatrix sign‖ ≤ η := by
+  have hkappa : (A).kappa = innerPhysicalCutKappa
       (P.sideHeight side * morseChainAmplitude S.chain S.sigma m)
       (fun _ => 1) (fun i => (M.column i).inwardEnergy) := by
     funext i

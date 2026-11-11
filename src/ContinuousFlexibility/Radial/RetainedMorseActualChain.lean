@@ -68,39 +68,39 @@ local notation "A" => P.retainedMorseActualChain hD hw hS G₀ hfirst hq hT
   hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hj column hB models centralModel
 
 theorem retainedMorseActualChain_model (p : Fin (2 * k + 1)) :
-    A.piece (innerModelChainPiece p) = .inl (MF p) :=
+    (A).piece (innerModelChainPiece p) = .inl (MF p) :=
   innerActualChainOfModelsAndGaps_model H bordered j (innerMorseInnerCenter k) column MF QF p
 
 theorem retainedMorseActualChain_center :
-    A.piece center = .inl centralModel := by
+    (A).piece center = .inl centralModel := by
   rw [retainedMorseActualChain_model, retainedMorseModelFamily_center]
 
 theorem retainedMorseActualChain_tail (side : Bool) (p : Fin k) :
-    A.piece (innerModelChainPiece (innerMorseInnerTailSlot k side p)) =
+    (A).piece (innerModelChainPiece (innerMorseInnerTailSlot k side p)) =
       .inl (P.retainedMorseTailModelChart hw hS G₀ hfirst H bordered j column
         tails hB models side p) := by
   rw [retainedMorseActualChain_model, retainedMorseModelFamily_tail]
 
 theorem retainedMorseActualChain_gap (g : Fin (2 * k + 2)) :
-    A.piece (innerModelChainGap g) = .inr (QF g) :=
+    (A).piece (innerModelChainGap g) = .inr (QF g) :=
   innerActualChainOfModelsAndGaps_gap H bordered j (innerMorseInnerCenter k) column MF QF g
 
 theorem retainedMorseActualChain_kappa_pos (hCM : 0 < CM)
     (hcentral : ∀ i, 0 < centralModel.kappa i) (i : Fin (2 * (2 * k + 1))) :
-    0 < A.kappa i :=
+    0 < (A).kappa i :=
   innerActualChainOfModelsAndGaps_kappa_pos H bordered j (innerMorseInnerCenter k) column MF QF
     (P.retainedMorseModelFamily_kappa_pos hw hS G₀ hfirst H bordered j column
       tails hB models centralModel hCM hcentral) i
 
 theorem retainedMorseActualChain_kappa_separated (i : Fin (2 * (2 * k + 1))) :
-    (A.piece i.castSucc).kappa 1 = 0 ∨ (A.piece i.succ).kappa 0 = 0 :=
+    ((A).piece i.castSucc).kappa 1 = 0 ∨ ((A).piece i.succ).kappa 0 = 0 :=
   innerActualChainOfModelsAndGaps_kappa_separated H bordered j
     (innerMorseInnerCenter k) column MF QF i
 
 theorem retainedMorseActualChain_model_internal (hCM : 0 < CM)
     (hcentral : ∀ i, 0 < centralModel.kappa i) (p : Fin (2 * (2 * k + 1) + 1))
     (M : InnerRadialModelChart Γ.reference H bordered j center column p)
-    (hp : A.piece p = .inl M) :
+    (hp : (A).piece p = .inl M) :
     0 < p.val ∧ p.val < 2 * (2 * k + 1) ∧ ∀ i, 0 < M.kappa i :=
   innerActualChainOfModelsAndGaps_model_internal H bordered j
     (innerMorseInnerCenter k) column MF QF
@@ -115,7 +115,7 @@ theorem retainedMorseActualChain_model_induction
     (htail : ∀ side p, property (innerModelChainPiece (innerMorseInnerTailSlot k side p))
       (P.retainedMorseTailModelChart hw hS G₀ hfirst H bordered j column tails hB models side p)) :
     ∀ p (M : InnerRadialModelChart Γ.reference H bordered j center column p),
-      A.piece p = .inl M → property p M := by
+      (A).piece p = .inl M → property p M := by
   intro p M hp
   rcases innerModelChainPiece_or_gap p with ⟨p, rfl⟩ | ⟨g, rfl⟩
   · rcases innerMorseInnerModelSlot_cases p with rfl | ⟨side, p, rfl⟩
