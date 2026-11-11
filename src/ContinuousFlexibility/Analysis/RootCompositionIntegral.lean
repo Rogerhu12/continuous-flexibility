@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Calculus.ContDiff.Comp
+import Mathlib.Analysis.Calculus.ContDiff.Bounds
 import Mathlib.Analysis.Calculus.ParametricIntervalIntegral
 import Mathlib.Analysis.Normed.Group.Bounded
 import Mathlib.Topology.Order.Compact
@@ -88,5 +89,78 @@ theorem contDiff_intervalIntegral_of_contDiff
   apply contDiff_infty.mpr
   intro n
   exact contDiff_nat_intervalIntegral_of_contDiff n a b hG
+
+/-- Restricting the first derivative to the parameter factor cannot
+increase the norm of any higher jet. -/
+theorem norm_iteratedFDeriv_paramDerivative_le
+    {G : E × ℝ → F} (hG : ContDiff ℝ ∞ G) (n : ℕ) (q : E × ℝ) :
+    ‖iteratedFDeriv ℝ n
+      (fun q : E × ℝ => (fderiv ℝ G q).comp (ContinuousLinearMap.inl ℝ E ℝ)) q‖ ≤
+      ‖iteratedFDeriv ℝ (n + 1) G q‖ := by
+  let T : ((E × ℝ) →L[ℝ] F) →L[ℝ] E →L[ℝ] F :=
+    (ContinuousLinearMap.compL ℝ E (E × ℝ) F).flip (ContinuousLinearMap.inl ℝ E ℝ)
+  have hT : ‖T‖ ≤ 1 := by
+    have hc : ‖(ContinuousLinearMap.compL ℝ E (E × ℝ) F).flip‖ ≤ 1 := by
+      simpa only [ContinuousLinearMap.opNorm_flip] using
+        (ContinuousLinearMap.norm_compL_le (𝕜 := ℝ) (E := E) (Fₗ := E × ℝ) (Gₗ := F))
+    calc
+      ‖T‖ ≤ ‖(ContinuousLinearMap.compL ℝ E (E × ℝ) F).flip‖ *
+          ‖ContinuousLinearMap.inl ℝ E ℝ‖ :=
+        (ContinuousLinearMap.compL ℝ E (E × ℝ) F).flip.le_opNorm _
+      _ ≤ 1 * ‖ContinuousLinearMap.inl ℝ E ℝ‖ :=
+        mul_le_mul_of_nonneg_right hc (norm_nonneg _)
+      _ ≤ 1 := by
+        simpa only [one_mul] using
+          (ContinuousLinearMap.norm_inl_le_one (𝕜 := ℝ) (E := E) (F := ℝ))
+  have hder : ContDiff ℝ ∞ (fderiv ℝ G) := (contDiff_infty_iff_fderiv.mp hG).2
+  have heq : T ∘ fderiv ℝ G =
+      (fun q : E × ℝ => (fderiv ℝ G q).comp (ContinuousLinearMap.inl ℝ E ℝ)) := by
+    ext q v
+    simp only [T, Function.comp_apply, ContinuousLinearMap.flip_apply,
+      ContinuousLinearMap.compL_apply]
+  have h := T.norm_iteratedFDeriv_comp_left (x := q) (n := n) hder.contDiffAt (by simp)
+  rw [heq] at h
+  calc
+    _ ≤ ‖T‖ * ‖iteratedFDeriv ℝ n (fderiv ℝ G) q‖ := h
+    _ ≤ 1 * ‖iteratedFDeriv ℝ n (fderiv ℝ G) q‖ :=
+      mul_le_mul_of_nonneg_right hT (norm_nonneg _)
+    _ = ‖iteratedFDeriv ℝ (n + 1) G q‖ := by
+      rw [one_mul, norm_iteratedFDeriv_fderiv]
+
+private theorem norm_iteratedFDeriv_intervalIntegral_le_aux
+    (n : ℕ) (a b : ℝ) (x : E) (B : ℝ) :
+    ∀ {V : Type u} [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V]
+      {G : E × ℝ → V}, ContDiff ℝ ∞ G →
+      (∀ t ∈ uIcc a b, ‖iteratedFDeriv ℝ n G (x, t)‖ ≤ B) →
+      ‖iteratedFDeriv ℝ n (fun y : E => ∫ t in a..b, G (y, t)) x‖ ≤ B * |b - a| := by
+  induction n with
+  | zero =>
+      intro V _ _ _ G _ hB
+      rw [norm_iteratedFDeriv_zero]
+      apply intervalIntegral.norm_integral_le_of_norm_le_const
+      intro t ht
+      simpa only [norm_iteratedFDeriv_zero] using hB t (uIoc_subset_uIcc ht)
+  | succ n ih =>
+      intro V _ _ _ G hG hB
+      let G' : E × ℝ → E →L[ℝ] V := fun q =>
+        (fderiv ℝ G q).comp (ContinuousLinearMap.inl ℝ E ℝ)
+      have hG' : ContDiff ℝ ∞ G' :=
+        (contDiff_infty_iff_fderiv.mp hG).2.clm_comp contDiff_const
+      have hfd : fderiv ℝ (fun y : E => ∫ t in a..b, G (y, t)) =
+          (fun y : E => ∫ t in a..b, G' (y, t)) := by
+        funext y
+        exact (hasFDerivAt_intervalIntegral_of_contDiff hG a b y).fderiv
+      rw [← norm_iteratedFDeriv_fderiv, hfd]
+      apply ih hG'
+      intro t ht
+      exact (norm_iteratedFDeriv_paramDerivative_le hG n (x, t)).trans (hB t ht)
+
+/-- Uniform bounds for a joint jet of an integrand give the same-order
+bound for its parameter integral, with only the interval length as a factor. -/
+theorem norm_iteratedFDeriv_intervalIntegral_le
+    {G : E × ℝ → F} (hG : ContDiff ℝ ∞ G) (n : ℕ) (a b : ℝ) (x : E) (B : ℝ)
+    (hB : ∀ t ∈ uIcc a b, ‖iteratedFDeriv ℝ n G (x, t)‖ ≤ B) :
+    ‖iteratedFDeriv ℝ n (fun y : E => ∫ t in a..b, G (y, t)) x‖ ≤ B * |b - a| :=
+  norm_iteratedFDeriv_intervalIntegral_le_aux n a b x B hG hB
 
 end ContinuousFlexibility.Analysis
