@@ -49,8 +49,9 @@ theorem matchedPhysicalCellBlock_scalarGate (D : ReferenceData)
     (active : Bool) (k m : ℕ) :
     matchedPhysicalCellBlock D hD hP (G ∘L matchedModeScalarGate D active) k m =
       matchedPhysicalCellBlock D hD hP G k m := by
-  ext f
   rw [matchedPhysicalCellBlock_eq, matchedPhysicalCellBlock_eq]
+  apply ContinuousLinearMap.ext
+  intro f
   simp only [ContinuousLinearMap.comp_apply, matchedModeScalarGate_sourceCell]
 
 theorem matchedPhysicalRawKernel_scalarGate_succ (D : ReferenceData)
@@ -66,7 +67,8 @@ theorem matchedPhysicalRawKernel_scalarGate_succ (D : ReferenceData)
         ‖(ContinuousLinearMap.snd ℝ (RadialModeL2 D) ℝ) ∘L
           G ∘L matchedPhysicalSourceCell D hD hP m‖
       congr 1
-      ext f
+      apply ContinuousLinearMap.ext
+      intro f
       simp only [ContinuousLinearMap.comp_apply, matchedModeScalarGate_sourceCell]
   | succ k =>
       exact congrArg norm (matchedPhysicalCellBlock_scalarGate D hD hP G active k m)
@@ -75,9 +77,19 @@ theorem matchedPhysicalRawKernel_scalarGate_false_zero (D : ReferenceData)
     (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
     (G : RadialModePair D →L[ℝ] RadialModePair D) (k : ℕ) :
     matchedPhysicalRawKernel D hD hP (G ∘L matchedModeScalarGate D false) k 0 = 0 := by
-  cases k <;>
-    simp [matchedPhysicalRawKernel, ContinuousLinearMap.comp_apply,
-      matchedModeScalarGate_apply]
+  have hgate : matchedModeScalarGate D false (0, 1) = 0 := by
+    rfl
+  have hzero : (G ∘L matchedModeScalarGate D false) (0, 1) = 0 := by
+    rw [ContinuousLinearMap.comp_apply, hgate, map_zero]
+  cases k with
+  | zero =>
+      change ‖((G ∘L matchedModeScalarGate D false) (0, 1)).2‖ = 0
+      rw [hzero]
+      exact norm_zero
+  | succ k =>
+      change ‖matchedPhysicalOutputCell D hD hP k
+        ((G ∘L matchedModeScalarGate D false) (0, 1))‖ = 0
+      rw [hzero, map_zero, norm_zero]
 
 theorem matchedMode_scalarGate_apply_inverse (D : ReferenceData)
     (G : RadialModePair D →L[ℝ] RadialModePair D)
@@ -101,9 +113,8 @@ theorem matchedMode_inverse_scalarGate_false_zero {D : ReferenceData} {j : ℕ}
     (hG : ModeInverseProperties D j G) (hj : j ≠ 2)
     (F : RadialModePair D) :
     ((G ∘L matchedModeScalarGate D false) F).2 = 0 := by
-  apply matchedMode_inverse_scalar_zero hG hj
-  rw [matchedModeScalarGate_apply]
-  rfl
+  change (G (matchedModeScalarGate D false F)).2 = 0
+  exact matchedMode_inverse_scalar_zero hG hj (matchedModeScalarGate D false F) rfl
 
 /-- The whole scalar output row of the actual gated raw kernel vanishes
 outside frequency two, including all physical source cells. -/
