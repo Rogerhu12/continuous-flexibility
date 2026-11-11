@@ -61,7 +61,6 @@ theorem n05CanonicalSourceLift_linear_combination_ae
     filter_upwards [hrep (c • v + d • w) m, hrep v m, hrep w m, hsum]
       with p hp hv hw he
     rw [← hp, he]
-    dsimp only
     rw [hv, hw]
     simp only [canonicalSource]
     ring

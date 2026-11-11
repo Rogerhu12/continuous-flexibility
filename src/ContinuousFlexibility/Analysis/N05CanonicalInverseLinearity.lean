@@ -103,7 +103,6 @@ theorem n05CanonicalGlobalInverse_linear_combination_of_source_ae
       simp only [Pi.add_apply, hc, hd, Pi.smul_apply, smul_eq_mul]
     filter_upwards [hcomb, hrep F hF m, hrep H hH m] with p hp hv hw
     rw [hp]
-    dsimp only
     rw [hv, hw]
     simp only [canonicalHeight]
     ring
