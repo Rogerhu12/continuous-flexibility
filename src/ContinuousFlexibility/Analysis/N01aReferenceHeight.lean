@@ -38,7 +38,7 @@ theorem n01a_material_memLp_separated {f g : ℝ → ℝ}
   apply hmajor.mono' hmeas
   have hangle : ∀ᵐ p ∂materialCylinderMeasure, p.2 ∈ Icc (0 : ℝ) Real.pi :=
     (ae_restrict_mem (μ := (volume : Measure PolarPoint))
-      (measurableSet_univ.prod measurableSet_Ioc)).mono
+      ((MeasurableSet.univ : MeasurableSet (Set.univ : Set ℝ)).prod measurableSet_Ioc)).mono
       (fun p hp => ⟨hp.2.1.le, hp.2.2⟩)
   filter_upwards [hangle] with p hp
   rw [norm_mul]
