@@ -120,8 +120,8 @@ theorem isAccumulatingProfile_floorReferenceIndex {D : ReferenceData}
       apply h.trans
       apply mul_le_mul (hCC' s) _ (exp_pos _).le (hC' s).le
       apply exp_le_exp.mpr
-      exact add_le_add_left
-        (mul_le_mul_of_nonneg_right (hCC' s) (sq_nonneg (D.cellIndex m : ℝ))) _
+      exact add_le_add (le_refl _)
+        (mul_le_mul_of_nonneg_right (hCC' s) (sq_nonneg (D.cellIndex m : ℝ)))
     · have hn' : D.cellIndex m ≤ N := (lt_of_not_ge hn).le
       rw [max_eq_right hn']
       have hcast : (D.cellIndex m : ℝ) ≤ N := by exact_mod_cast hn'

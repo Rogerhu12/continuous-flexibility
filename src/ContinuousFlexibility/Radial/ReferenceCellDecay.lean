@@ -18,7 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter Real
-open scoped Topology
+open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
 theorem reference_radialS_tendsto : Tendsto radialS atTop atTop := by
@@ -65,7 +65,9 @@ theorem reference_cellIndex_tendsto {D : ReferenceData}
   have he' : exp (-((N : ℝ) + 1) ^ 2) ≤
       exp (-((D.cellIndex (m x) : ℝ) + 1) ^ 2) := by
     apply exp_le_exp.mpr
-    nlinarith only [hn, Nat.cast_nonneg (D.cellIndex (m x)), Nat.cast_nonneg N]
+    nlinarith only [hn,
+      (Nat.cast_nonneg (D.cellIndex (m x)) : (0 : ℝ) ≤ D.cellIndex (m x)),
+      (Nat.cast_nonneg N : (0 : ℝ) ≤ N)]
   have hb := (mul_le_mul_of_nonneg_left he' (inv_nonneg.mpr (hC 0).le)).trans
     (hdist (m x) (r x) hx).1
   exact (not_lt_of_ge hb) hsmall
@@ -90,8 +92,8 @@ theorem reference_cellwise_tendsto_zero {D : ReferenceData}
     rw [dif_pos hx]
     exact hp.2.2.1 _ (hp.exists_localizer_ne_zero hx).choose_spec
   have hi := reference_cellIndex_tendsto hD hmem hd
-  apply tendsto_zero_iff_abs_tendsto_zero.mpr
-  exact squeeze_zero' (Eventually.of_forall fun x => abs_nonneg (f (r x)))
+  apply tendsto_iff_norm_sub_tendsto_zero.mpr
+  simpa only [sub_zero, Real.norm_eq_abs] using squeeze_zero' (Eventually.of_forall fun x => abs_nonneg (f (r x)))
     (hmem.mono fun x hx => hb (m x) (r x) hx) (hB.comp hi)
 
 /-- One proof supplies both endpoint limits. -/

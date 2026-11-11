@@ -127,6 +127,7 @@ theorem integral_sq_referenceWeightedMeasure_eq {D : ReferenceData}
     (hs : Summable (sourceCellSquare D γ M f)) :
     (∫ x, f x ^ 2 ∂referenceWeightedMeasure D γ M) =
       ∑' m, sourceCellSquare D γ M f m := by
+  unfold referenceWeightedMeasure
   rw [integral_sum_measure (integrable_sq_referenceWeightedMeasure hab hD hf hs)]
   exact tsum_congr (fun m => integral_sq_referenceWeightedCellMeasure_eq hab hD γ M m hf)
 
@@ -196,9 +197,9 @@ theorem radialPhysicalMeasure_absolutelyContinuous_weighted {D : ReferenceData}
   apply Measure.AbsolutelyContinuous.mk
   intro s hs hs0
   have hnot : ∀ᵐ x ∂referenceWeightedMeasure D γ M, x ∉ s := by
-    simpa only [ae_iff, not_not, Set.setOf_mem_eq] using hs0
+    simpa only [ae_iff, not_not, Set.ofPred_mem_eq] using hs0
   have hp := (referenceWeightedMeasure_ae_iff hD γ M).mp hnot
-  simpa only [ae_iff, not_not, Set.setOf_mem_eq] using hp
+  simpa only [ae_iff, not_not, Set.ofPred_mem_eq] using hp
 
 theorem radialCellIntegrable_of_memLp_weighted {D : ReferenceData}
     (hD : RadialPartition D) {γ M : ℝ} {f : PolarPoint → ℝ}
@@ -239,6 +240,13 @@ theorem sourceCellSquare_neg (D : ReferenceData) (γ M : ℝ)
     sourceCellSquare D γ (-M) f m = outputCellSquare D γ M f m := by
   simp only [sourceCellSquare, outputCellSquare, mul_neg, neg_mul]
 
+
+theorem sourceCellSquare_neg_fun (D : ReferenceData) (γ M : ℝ)
+    (f : PolarPoint → ℝ) :
+    sourceCellSquare D γ (-M) f = outputCellSquare D γ M f := by
+  funext m
+  exact sourceCellSquare_neg D γ M f m
+
 theorem SourceMember.memLp_weighted {D : ReferenceData} (hab : D.a ≤ D.b)
     (hD : RadialPartition D) {γ M : ℝ} {F : RadialSource}
     (hF : SourceMember D γ M F) :
@@ -250,7 +258,7 @@ theorem OutputRealization.memLp_weighted {D : ReferenceData} (hab : D.a ≤ D.b)
     (hU : OutputRealization D γ M aL U) :
     MemLp (outputRemainder D aL U) 2 (referenceWeightedMeasure D γ (-M)) := by
   apply memLp_referenceWeightedMeasure hab hD hU.1
-  simpa only [sourceCellSquare_neg] using hU.2.1
+  simpa only [sourceCellSquare_neg_fun] using hU.2.1
 
 theorem outputRealization_iff_memLp_weighted {D : ReferenceData} (hab : D.a ≤ D.b)
     (hD : RadialPartition D) {γ M aL : ℝ} {U : RadialUnknown} :
@@ -264,6 +272,6 @@ theorem outputRealization_iff_memLp_weighted {D : ReferenceData} (hab : D.a ≤ 
   · rintro ⟨hU, hp, he⟩
     obtain ⟨hl, hs⟩ := (memLp_referenceWeightedMeasure_iff hab hD).mp hU
     refine ⟨hl, ?_, hp, he⟩
-    simpa only [sourceCellSquare_neg] using hs
+    simpa only [sourceCellSquare_neg_fun] using hs
 
 end ContinuousFlexibility.Statements

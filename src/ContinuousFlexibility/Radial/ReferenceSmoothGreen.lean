@@ -41,9 +41,16 @@ theorem reference_divergence_eq_radialPDE
     (contDiffAt_angularPartial hu.contDiffAt (m := 1) (by simp)).differentiableAt
       one_ne_zero
   rw [radialPDE_eq_polar_jets hwd hu]
-  simp only [symmetricDivergence, symmetricNormalFlux, symmetricAngularFlux,
-    zero_mul, add_zero, zero_add]
-  rw [radialPartial_mul hA hur, angularPartial_mul hC huθ,
+  have hN : symmetricNormalFlux (radialHeightField w) (fun _ => 0) u =
+      (fun y => radialHeightField w y * radialPartial u y) := by
+    funext y
+    simp only [symmetricNormalFlux, zero_mul, add_zero]
+  have hT : symmetricAngularFlux (fun _ => 0)
+      (radialHeightField (fun r => deriv w r / r)) u =
+      (fun y => radialHeightField (fun r => deriv w r / r) y * angularPartial u y) := by
+    funext y
+    simp only [symmetricAngularFlux, zero_mul, zero_add]
+  rw [symmetricDivergence, hN, hT, radialPartial_mul hA hur, angularPartial_mul hC huθ,
     radialPartial_radialHeightField hwd, angularPartial_radialHeightField hq]
   simp only [radialHeightField, zero_mul, zero_add]
 
@@ -107,6 +114,7 @@ theorem reference_smooth_green_zero {D : ReferenceData}
       intro r hrr
       apply intervalIntegral.integral_congr
       intro θ hθ
+      dsimp only
       rw [reference_divergence_eq_radialPDE hw hv (hr (r, θ) ⟨hrr, hθ⟩),
         reference_divergence_eq_radialPDE hw hu (hr (r, θ) ⟨hrr, hθ⟩)]
     _ = 0 := hi
@@ -139,12 +147,16 @@ theorem reference_smooth_pairing_symm {D : ReferenceData}
     (r11b_continuous_memLp hv.continuous).integrable_mul
       (r11b_continuous_memLp (r11b_continuous_radialPDE_test hgeom hu))
   have hzero := reference_smooth_green_mean_zero hgeom hu hv hup hvp
-  rw [r11b_integral_angularMean_eq hgeom.2.1.le (huv.sub hvu),
-    integral_sub huv hvu] at hzero
-  unfold radialWeakPairing
-  rw [r11b_integral_angularMean_eq hgeom.2.1.le huv,
-    r11b_integral_angularMean_eq hgeom.2.1.le hvu]
-  exact sub_eq_zero.mp (by simpa only [mul_sub] using hzero)
+  have hzero' := (r11b_integral_angularMean_eq hgeom.2.1.le (huv.sub hvu)).symm.trans hzero
+  simp only [Pi.sub_apply, integral_sub huv hvu] at hzero'
+  have huv' : radialWeakPairing D u v =
+      (2 * Real.pi)⁻¹ * ∫ x, u x * radialPDE D.w (fun r θ => v (r, θ)) x.1 x.2
+        ∂radialPhysicalMeasure D := r11b_integral_angularMean_eq hgeom.2.1.le huv
+  have hvu' : radialWeakPairing D v u =
+      (2 * Real.pi)⁻¹ * ∫ x, v x * radialPDE D.w (fun r θ => u (r, θ)) x.1 x.2
+        ∂radialPhysicalMeasure D := r11b_integral_angularMean_eq hgeom.2.1.le hvu
+  rw [huv', hvu']
+  exact sub_eq_zero.mp (by simpa only [mul_sub] using hzero')
 
 theorem reference_smoothAdmissible_pairing_symm {D : ReferenceData}
     (hgeom : RadialProfileGeometry D) {U V : RadialUnknown}

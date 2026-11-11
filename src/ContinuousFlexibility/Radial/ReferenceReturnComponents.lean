@@ -66,9 +66,9 @@ theorem quadraticIrrational_half_inv_sqrt {d : ℕ} (hd : 0 < d)
 
 theorem quadraticIrrational_morseTravelRatio {d : ℕ} (hd : 0 < d)
     (hns : ¬ ∃ k : ℕ, k ^ 2 = d) :
-    QuadraticIrrational ((pi / (2 * sqrt (d : ℝ))) / pi) := by
+    QuadraticIrrational ((Real.pi / (2 * sqrt (d : ℝ))) / Real.pi) := by
   have hs : sqrt (d : ℝ) ≠ 0 := (sqrt_pos.mpr (by exact_mod_cast hd)).ne'
-  rw [show (pi / (2 * sqrt (d : ℝ))) / pi =
+  rw [show (Real.pi / (2 * sqrt (d : ℝ))) / Real.pi =
       1 / (2 * sqrt (d : ℝ)) by field_simp [pi_ne_zero, hs]]
   exact quadraticIrrational_half_inv_sqrt hd hns
 
@@ -107,6 +107,12 @@ theorem morseReturnCoefficient_allowance {n d : ℕ}
       congr 1
       ring
 
+private theorem inverse_three_sqrt_div (d k : ℕ) :
+    (3 * sqrt (d : ℝ))⁻¹ / (k : ℝ) =
+      (3 * (k : ℝ) * sqrt (d : ℝ))⁻¹ := by
+  simp only [div_eq_mul_inv, mul_inv_rev]
+  ring
+
 /-- A cover by actual model components suffices for every return-margin
 clause. Whole-cell containment is obtained by the explicit cell completion,
 rather than included among the hypotheses. -/
@@ -116,7 +122,7 @@ theorem radialReturnMargins_saturate_of_model_components {D : ReferenceData}
         NegativeRadialComponent D l h ∧ r ∈ Ioo l h ∧
         1 ≤ n ∧ 0 < d ∧ (¬ ∃ k : ℕ, k ^ 2 = d) ∧
         (d : ℝ) ≤ exp ((n : ℝ) ^ 2) + 2 ∧
-        radialTravel D l h = pi / (2 * sqrt (d : ℝ)) ∧
+        radialTravel D l h = Real.pi / (2 * sqrt (d : ℝ)) ∧
         ∀ t ∈ Ioo l h, ∃ m, D.cellIndex m = n ∧ t ∈ D.cells m) :
     RadialReturnMargins (saturateReferenceCells D) := by
   constructor
@@ -137,7 +143,7 @@ theorem radialReturnMargins_saturate_of_model_components {D : ReferenceData}
     subst h'
     obtain ⟨m, hm, hcell⟩ := saturateReferenceCells_covers_interval hnegD.2.1 hcover
     refine ⟨?_, m, hcell, (3 * sqrt (d : ℝ))⁻¹, ?_, ?_, ?_⟩
-    · change QuadraticIrrational (radialTravel D l h / pi)
+    · change QuadraticIrrational (radialTravel D l h / Real.pi)
       rw [htravel]
       exact quadraticIrrational_morseTravelRatio hd hns
     · exact inv_pos.mpr (mul_pos (by norm_num) (sqrt_pos.mpr (by exact_mod_cast hd)))
@@ -148,12 +154,7 @@ theorem radialReturnMargins_saturate_of_model_components {D : ReferenceData}
       change (3 * sqrt (d : ℝ))⁻¹ / (k : ℝ) ≤
         |sin ((k : ℝ) * radialTravel D l h)|
       rw [htravel]
-      have hk₀ : (k : ℝ) ≠ 0 := by exact_mod_cast (Nat.succ_le_iff.mp hk).ne'
-      have hs : sqrt (d : ℝ) ≠ 0 := (sqrt_pos.mpr (by exact_mod_cast hd)).ne'
-      rw [show (3 * sqrt (d : ℝ))⁻¹ / (k : ℝ) =
-          (3 * (k : ℝ) * sqrt (d : ℝ))⁻¹ by
-        field_simp [hk₀, hs]
-        <;> ring]
+      rw [inverse_three_sqrt_div]
       exact morse_return_small_divisor hd hns hk
 
 end ContinuousFlexibility.Radial

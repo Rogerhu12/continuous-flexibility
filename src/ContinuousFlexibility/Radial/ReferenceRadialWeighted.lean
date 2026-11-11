@@ -60,7 +60,10 @@ theorem ReferenceRadialWeighted.add {D : ReferenceData} {γ A : ℝ}
     ReferenceRadialWeighted D γ A (fun r => u r + v r) := by
   have hl (m : ℕ) : MemLp (fun r => D.localizer m r * (u r + v r)) 2
       (volume.restrict (radialCore D)) := by
-    simpa only [mul_add] using (hu.1 m).add (hv.1 m)
+    have h := (hu.1 m).add (hv.1 m)
+    change MemLp (fun r => D.localizer m r * u r + D.localizer m r * v r) 2
+      (volume.restrict (radialCore D)) at h
+    simpa only [mul_add] using h
   refine ⟨hl, ?_⟩
   apply ((hu.2.add hv.2).mul_left 2).of_nonneg_of_le
     (fun m => mul_nonneg (exp_pos _).le (integral_nonneg fun r => sq_nonneg _))
@@ -74,6 +77,8 @@ theorem ReferenceRadialWeighted.add {D : ReferenceData} {γ A : ℝ}
         apply integral_mono (hl m).integrable_sq
           (((hu.1 m).integrable_sq.add (hv.1 m).integrable_sq).const_mul 2)
         intro r
+        change (D.localizer m r * (u r + v r)) ^ 2 ≤
+          2 * ((D.localizer m r * u r) ^ 2 + (D.localizer m r * v r) ^ 2)
         nlinarith only [sq_nonneg (D.localizer m r * u r - D.localizer m r * v r)]
       _ = _ := by rw [integral_const_mul, integral_add (hu.1 m).integrable_sq
         (hv.1 m).integrable_sq]
@@ -108,10 +113,13 @@ theorem ReferenceRadialWeighted.mul_coefficient {D : ReferenceData}
       (volume.restrict (radialCore D)) := by
     have hm : AEStronglyMeasurable (fun r => D.localizer m r * (k r * u r))
         (volume.restrict (radialCore D)) := by
-      simpa only [mul_left_comm] using hk.mul (hu.1 m).aestronglyMeasurable
-    apply ((hu.1 m).const_mul (L m)).mono' hm
+      have h := hk.mul (hu.1 m).aestronglyMeasurable
+      change AEStronglyMeasurable (fun r => k r * (D.localizer m r * u r))
+        (volume.restrict (radialCore D)) at h
+      simpa only [mul_left_comm] using h
+    apply ((hu.1 m).norm.const_mul (L m)).mono' hm
     exact Eventually.of_forall fun r => by
-      simpa only [Real.norm_eq_abs, abs_mul, abs_of_nonneg (hL m)] using hpoint m r
+      simpa only [Real.norm_eq_abs] using hpoint m r
   have hsq (m : ℕ) :
       (∫ r, (D.localizer m r * (k r * u r)) ^ 2 ∂volume.restrict (radialCore D)) ≤
         (L m) ^ 2 * ∫ r, (D.localizer m r * u r) ^ 2 ∂volume.restrict (radialCore D) := by

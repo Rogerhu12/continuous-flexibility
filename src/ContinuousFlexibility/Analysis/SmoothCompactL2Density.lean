@@ -76,7 +76,7 @@ theorem smoothCompactL2Submodule_dense
     (hfinite : ∀ K : Set E, IsCompact K → K ⊆ U → μ K < ⊤) :
     Dense (smoothCompactL2Submodule μ U : Set (Lp ℝ 2 μ)) := by
   have hclosure : (smoothCompactL2Submodule μ U).topologicalClosure = ⊤ := by
-    apply (Submodule.topologicalClosure_eq_top_iff _).mpr
+    apply Submodule.topologicalClosure_eq_top_iff.mpr
     apply le_antisymm
     · intro v hv
       have hloc := locallyIntegrableOn_of_memLp_two hU hfinite (Lp.memLp v)

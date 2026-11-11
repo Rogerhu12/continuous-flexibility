@@ -11,7 +11,7 @@ any radial weight is introduced.
 -/
 
 open Set Filter MeasureTheory
-open scoped ContDiff Topology RealInnerProductSpace
+open scoped ContDiff Topology RealInnerProductSpace InnerProductSpace
 
 namespace ContinuousFlexibility.Radial
 
@@ -70,7 +70,7 @@ theorem referenceAngularBasis_pairing (i j : ℕ) :
   | zero =>
     cases j with
     | zero =>
-      change radialAngularMean (fun _ : ℝ => (1 : ℝ)) = 1
+      simp only [referenceAngularBasis, mul_one, ite_true]
       simp only [radialAngularMean, intervalIntegral.integral_const, sub_zero,
         smul_eq_mul, mul_one]
       exact inv_mul_cancel₀ (by positivity)
@@ -162,7 +162,8 @@ theorem angularBasisProjection_toLp (I : Finset ℕ) (f : ℝ → ℝ) :
   let hp := memLp_referenceAngularProbability
     (memLp_referenceAngular_interval_of_continuous (continuous_angularBasisProjection I f))
   have he (n : ℕ) :
-      (referenceAngularCoefficient f n • referenceAngularBasisL2 n : ℝ → ℝ)
+      ((referenceAngularCoefficient f n • referenceAngularBasisL2 n :
+        Lp ℝ 2 referenceAngularProbability) : ℝ → ℝ)
         =ᵐ[referenceAngularProbability]
           (fun θ => referenceAngularCoefficient f n * referenceAngularBasis n θ) := by
     filter_upwards [Lp.coeFn_smul (referenceAngularCoefficient f n) (referenceAngularBasisL2 n),

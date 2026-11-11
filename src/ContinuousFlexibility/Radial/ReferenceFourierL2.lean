@@ -18,7 +18,7 @@ open scoped ENNReal
 
 /-- Complex Fourier coefficients on the physical angular interval. -/
 def referenceAngularFourierCoeff (f : ℝ → ℝ) (n : ℤ) : ℂ :=
-  AddCircle.fourierCoeffOn (show (0 : ℝ) < 2 * Real.pi by positivity)
+  fourierCoeffOn (show (0 : ℝ) < 2 * Real.pi by positivity)
     (fun θ => (f θ : ℂ)) n
 
 theorem referenceAngularFourierCoeff_const_mul (c : ℝ) (f : ℝ → ℝ) (n : ℤ) :
@@ -26,14 +26,15 @@ theorem referenceAngularFourierCoeff_const_mul (c : ℝ) (f : ℝ → ℝ) (n : 
       (c : ℂ) * referenceAngularFourierCoeff f n := by
   unfold referenceAngularFourierCoeff
   simpa only [Complex.ofReal_mul] using
-    AddCircle.fourierCoeffOn.const_mul (fun θ => (f θ : ℂ)) (c : ℂ) n
+    fourierCoeffOn.const_mul (fun θ => (f θ : ℂ)) (c : ℂ) n
       (show (0 : ℝ) < 2 * Real.pi by positivity)
 
 theorem referenceAngularFourierCoeff_congr_ae {f g : ℝ → ℝ}
     (hfg : f =ᵐ[volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))] g) :
     referenceAngularFourierCoeff f = referenceAngularFourierCoeff g := by
-  apply AddCircle.fourierCoeffOn_congr_ae
-  exact hfg.fun_comp (fun x : ℝ => (x : ℂ))
+  exact fourierCoeffOn_congr_ae
+    (show (0 : ℝ) < 2 * Real.pi by positivity)
+    (hfg.fun_comp (fun x : ℝ => (x : ℂ)))
 
 /-- Parseval with the exact angular normalization used in the reference norm. -/
 theorem hasSum_sq_referenceAngularFourierCoeff {f : ℝ → ℝ}
@@ -44,7 +45,7 @@ theorem hasSum_sq_referenceAngularFourierCoeff {f : ℝ → ℝ}
       (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := hf.ofReal
   simpa only [referenceAngularFourierCoeff, sub_zero, smul_eq_mul,
     Complex.norm_real, Real.norm_eq_abs, sq_abs, radialAngularMean] using
-    AddCircle.hasSum_sq_fourierCoeffOn
+    hasSum_sq_fourierCoeffOn
       (show (0 : ℝ) < 2 * Real.pi by positivity) hc
 
 theorem tsum_sq_referenceAngularFourierCoeff {f : ℝ → ℝ}

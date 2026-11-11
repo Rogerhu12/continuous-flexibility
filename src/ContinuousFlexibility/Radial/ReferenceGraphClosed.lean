@@ -32,7 +32,7 @@ theorem referenceRow_eq_physical_pairing {D : ReferenceData}
     referenceRow D u = (2 * Real.pi)⁻¹ *
       ∫ x, u x * (referenceColumn D x.1 * cosineMode 2 x.2)
         ∂radialPhysicalMeasure D := by
-  have hc := r11b_continuous_memLp (reference_column_mode_continuous hgeom hborder)
+  have hc := r11b_continuous_memLp (D := D) (reference_column_mode_continuous hgeom hborder)
   calc
     referenceRow D u =
         ∫ r in D.a..D.b, radialAngularMean (fun θ =>
@@ -77,7 +77,7 @@ theorem referenceRow_tendsto {D : ReferenceData}
     (h : Tendsto (fun n => ∫ x, (f n x - g x) ^ 2 ∂radialPhysicalMeasure D)
       atTop (𝓝 0)) :
     Tendsto (fun n => referenceRow D (f n)) atTop (𝓝 (referenceRow D g)) := by
-  have hc := r11b_continuous_memLp (reference_column_mode_continuous hgeom hborder)
+  have hc := r11b_continuous_memLp (D := D) (reference_column_mode_continuous hgeom hborder)
   have he (n : ℕ) := referenceRow_eq_physical_pairing hgeom hborder (hf n)
   have he' := referenceRow_eq_physical_pairing hgeom hborder hg
   simpa only [he, he'] using

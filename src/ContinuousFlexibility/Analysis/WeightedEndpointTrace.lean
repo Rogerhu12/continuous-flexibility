@@ -58,6 +58,7 @@ theorem continuousAt_eq_zero_of_integrable_div_sub
       (((measurable_id.sub measurable_const).inv).aestronglyMeasurable)
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
     have hb := mul_le_mul_of_nonneg_right (hbound x hx) (abs_nonneg ((x - c)⁻¹))
+    change ‖(x - c)⁻¹‖ ≤ (2 / |v c|) * ‖u x / (x - c)‖
     simpa only [one_mul, Real.norm_eq_abs, div_eq_mul_inv, abs_mul, mul_assoc] using hb
   have hinterval : IntervalIntegrable (fun x => (x - c)⁻¹) volume p q :=
     (intervalIntegrable_iff_integrableOn_Ioo_of_le hpq.le).mpr hinv
@@ -79,7 +80,9 @@ theorem exists_continuous_extension_of_integrable_deriv {a b : ℝ}
     fun x hx => ((hd x hx).sub (hPd x hx)).differentiableAt.differentiableWithinAt
   have hzero (x : ℝ) (hx : x ∈ Ioo a b) :
       deriv (fun y => u y - P y) x = 0 := by
-    simpa only [sub_self] using ((hd x hx).sub (hPd x hx)).deriv
+    have he := ((hd x hx).sub (hPd x hx)).deriv
+    change deriv (fun y => u y - P y) x = d x - d x at he
+    simpa only [sub_self] using he
   obtain ⟨c, hc⟩ := isOpen_Ioo.exists_is_const_of_deriv_eq_zero
     isPreconnected_Ioo hdiff hzero
   refine ⟨fun x => P x + c, hPc.add continuous_const, fun x hx => ?_⟩
