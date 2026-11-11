@@ -108,7 +108,8 @@ theorem outerCell_inverse_sqrt_density_bound {D : ReferenceData} (hD : IsAccumul
       _ = 1 + (r ^ 2 / 12) * (D.w r)⁻¹ := by rw [hs]; ring
       _ ≤ 1 + (D.b ^ 2 / 12) * (C₀ 0 * radialE (D.cellIndex m) ^ (C₀ 0)) := by
         apply add_le_add le_rfl
-        exact mul_le_mul (by nlinarith : r ^ 2 / 12 ≤ D.b ^ 2 / 12) hwi
+        exact mul_le_mul (div_le_div_of_nonneg_right
+          ((sq_le_sq₀ hrpos.le hbpos.le).2 hrCore.2.le) (by norm_num : (0 : ℝ) ≤ 12)) hwi
           (inv_nonneg.mpr hwpos.le) (by positivity)
       _ ≤ L * radialE (D.cellIndex m) ^ (C₀ 0) := by
         dsimp only [L]

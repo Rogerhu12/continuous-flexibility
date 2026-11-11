@@ -184,8 +184,13 @@ theorem MorsePhysicalTailBasis.natural_line
   change VFlux (T.node 1) / T.p (T.node 1) =
     (k * F.logPFlux (T.node 1)) / T.p (T.node 1) at hd
   have hflux : VFlux (T.node 1) = k * F.logPFlux (T.node 1) := by
-    field_simp [(deepTail_pos hT (T.node 1) hx₁').ne'] at hd
-    exact hd
+    have hp : T.p (T.node 1) ≠ 0 := (deepTail_pos hT (T.node 1) hx₁').ne'
+    calc
+      _ = (VFlux (T.node 1) / T.p (T.node 1)) * T.p (T.node 1) :=
+        (div_mul_cancel₀ _ hp).symm
+      _ = ((k * F.logPFlux (T.node 1)) / T.p (T.node 1)) * T.p (T.node 1) :=
+        congrArg (fun t : ℝ => t * T.p (T.node 1)) hd
+      _ = _ := div_mul_cancel₀ _ hp
   have hzero : VFlux (T.node 1) * F.logP (T.node 1) -
       V (T.node 1) * F.logPFlux (T.node 1) = 0 := by
     rw [hflux, heq (T.node 1) hx₁]
