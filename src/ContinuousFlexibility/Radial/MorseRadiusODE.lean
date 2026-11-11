@@ -3,13 +3,15 @@ import Mathlib.Analysis.ODE.ExistUnique
 import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 
 /-!
-# The finite Morse radius initial value problem
+# Finite smooth linear systems and the Morse radius initial value problem
 
 Clip the two state coordinates to obtain a bounded field on the whole time
 interval. A two-sided Grönwall estimate then puts the solution inside the
 region where clipping is the identity. Solving on a wider interval permits
 a globally smooth extension that satisfies the original system on a
-neighborhood of the retained closed interval.
+neighborhood of the retained closed interval. The same construction gives
+the actual off-diagonal flux system `u' = p v`, `v' = q u`, with arbitrary
+smooth coefficients and arbitrary initial data.
 -/
 
 noncomputable section
@@ -45,6 +47,30 @@ private theorem contDiff_radiusField {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
   change ContDiff ℝ ∞ (fun p : ℝ × RadiusState => (p.2.2, -q p.1 * p.2.1))
   exact (contDiff_snd.comp contDiff_snd).prodMk
     ((hq.comp contDiff_fst).neg.mul (contDiff_fst.comp contDiff_snd))
+
+private def fluxField (p q : ℝ → ℝ) (t : ℝ) (z : RadiusState) : RadiusState :=
+  (p t * z.2, q t * z.1)
+
+private theorem fluxField_zero (p q : ℝ → ℝ) (t : ℝ) : fluxField p q t 0 = 0 := by
+  ext <;> simp [fluxField]
+
+private theorem fluxField_lipschitz {p q : ℝ → ℝ} {t : ℝ} {K : ℝ≥0}
+    (hp : ‖p t‖ ≤ (K : ℝ)) (hq : ‖q t‖ ≤ (K : ℝ)) :
+    LipschitzWith K (fluxField p q t) := by
+  apply LipschitzWith.of_dist_le_mul
+  intro z y
+  simp only [dist_eq_norm, fluxField, Prod.norm_def, Prod.fst_sub, Prod.snd_sub,
+    ← mul_sub, norm_mul]
+  exact max_le
+    (mul_le_mul hp (le_max_right _ _) (norm_nonneg _) K.2)
+    (mul_le_mul hq (le_max_left _ _) (norm_nonneg _) K.2)
+
+private theorem contDiff_fluxField {p q : ℝ → ℝ}
+    (hp : ContDiff ℝ ∞ p) (hq : ContDiff ℝ ∞ q) :
+    ContDiff ℝ ∞ (Function.uncurry (fluxField p q)) := by
+  change ContDiff ℝ ∞ (fun z : ℝ × RadiusState => (p z.1 * z.2.2, q z.1 * z.2.1))
+  exact ((hp.comp contDiff_fst).mul (contDiff_snd.comp contDiff_snd)).prodMk
+    ((hq.comp contDiff_fst).mul (contDiff_fst.comp contDiff_snd))
 
 private def clipRadiusCoordinate (R x : ℝ) : ℝ :=
   min (max x (-R)) R
@@ -131,41 +157,36 @@ private theorem radius_norm_bound_from_right {E : Type*} [NormedAddCommGroup E]
   change ‖z (-(-x))‖ ≤ ‖z₀‖ * exp (K * (-x - -b)) at hh
   rwa [neg_neg, show -x - -b = b - x by ring] at hh
 
-private theorem exists_radiusState_on_Icc {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
-    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (z₀ : RadiusState) :
+private theorem exists_state_on_Icc {F : ℝ → RadiusState → RadiusState}
+    (hF : ContDiff ℝ ∞ (Function.uncurry F)) (hFzero : ∀ t, F t 0 = 0)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (K : ℝ≥0)
+    (hfield : ∀ t ∈ Icc a b, LipschitzWith K (F t)) (z₀ : RadiusState) :
     ∃ z : ℝ → RadiusState, z t₀ = z₀ ∧ ContDiffOn ℝ ∞ z (Icc a b) ∧
-      ∀ t ∈ Icc a b, HasDerivWithinAt z (radiusField q t (z t)) (Icc a b) t := by
-  obtain ⟨K₀, hK₀⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn
-    hq.continuous.continuousOn
-  let K : ℝ≥0 := ⟨max 1 K₀, zero_le_one.trans (le_max_left _ _)⟩
-  have hK : 1 ≤ (K : ℝ) := le_max_left _ _
-  have hfield (t : ℝ) (ht : t ∈ Icc a b) : LipschitzWith K (radiusField q t) :=
-    radiusField_lipschitz hK ((hK₀ t ht).trans (le_max_right _ _))
+      ∀ t ∈ Icc a b, HasDerivWithinAt z (F t (z t)) (Icc a b) t := by
   let R : ℝ := ‖z₀‖ * exp ((K : ℝ) * (b - a)) + 1
   have hR : 0 ≤ R := by dsimp only [R]; positivity
   let L : ℝ≥0 := ⟨(K : ℝ) * R, mul_nonneg K.2 hR⟩
   let W : ℝ≥0 := ⟨(L : ℝ) * (b - a), mul_nonneg L.2 (sub_nonneg.mpr (ht₀.1.trans ht₀.2))⟩
   let tstart : Icc a b := ⟨t₀, ht₀⟩
-  let f : ℝ → RadiusState → RadiusState := fun t z => radiusField q t (clipRadiusState R z)
+  let f : ℝ → RadiusState → RadiusState := fun t z => F t (clipRadiusState R z)
   have hf (t : ℝ) (ht : t ∈ Icc a b) : LipschitzWith K (f t) := by
-    change LipschitzWith K (radiusField q t ∘ clipRadiusState R)
+    change LipschitzWith K (F t ∘ clipRadiusState R)
     simpa only [mul_one] using (hfield t ht).comp (clipRadiusState_lipschitz R)
   have hfzero (t : ℝ) : f t 0 = 0 := by
-    change radiusField q t (clipRadiusState R 0) = 0
-    rw [clipRadiusState_zero hR, radiusField_zero]
+    change F t (clipRadiusState R 0) = 0
+    rw [clipRadiusState_zero hR, hFzero]
   have hfgrowth (t : ℝ) (ht : t ∈ Icc a b) (z : RadiusState) : ‖f t z‖ ≤ (K : ℝ) * ‖z‖ := by
     simpa only [hfzero, dist_zero_right] using (hf t ht).dist_le_mul z 0
   have hfbound (t : ℝ) (ht : t ∈ Icc a b) (z : RadiusState) : ‖f t z‖ ≤ (L : ℝ) := by
     have hz : ‖f t z‖ ≤ (K : ℝ) * ‖clipRadiusState R z‖ := by
-      simpa only [radiusField_zero, dist_zero_right] using
+      simpa only [hFzero, dist_zero_right] using
         (hfield t ht).dist_le_mul (clipRadiusState R z) 0
     exact hz.trans (mul_le_mul_of_nonneg_left (clipRadiusState_norm_le hR z) K.2)
   have hPL : IsPicardLindelof f tstart z₀ W 0 L K := by
     refine ⟨fun t ht => (hf t ht).lipschitzOnWith, ?_, fun t ht z _ => hfbound t ht z, ?_⟩
     · intro z _
-      have hc : Continuous (fun t : ℝ =>
-          ((clipRadiusState R z).2, -q t * (clipRadiusState R z).1)) :=
-        continuous_const.prodMk (hq.continuous.neg.mul continuous_const)
+      have hc : Continuous (fun t : ℝ => F t (clipRadiusState R z)) :=
+        hF.continuous.comp (continuous_id.prodMk continuous_const)
       exact hc.continuousOn
     · change (L : ℝ) * max (b - t₀) (t₀ - a) ≤ (L : ℝ) * (b - a) - 0
       rw [sub_zero]
@@ -188,13 +209,25 @@ private theorem exists_radiusState_on_Icc {q : ℝ → ℝ} (hq : ContDiff ℝ �
     · exact (hR' t ⟨le_of_lt (lt_of_not_ge h), ht.2⟩).trans
         (hbound _ (by linarith only [ht.2, ht₀.1]))
   have horig (t : ℝ) (ht : t ∈ Icc a b) :
-      HasDerivWithinAt z (radiusField q t (z t)) (Icc a b) t := by
+      HasDerivWithinAt z (F t (z t)) (Icc a b) t := by
     have hd := hz t ht
-    change HasDerivWithinAt z (radiusField q t (clipRadiusState R (z t))) (Icc a b) t at hd
+    change HasDerivWithinAt z (F t (clipRadiusState R (z t))) (Icc a b) t at hd
     rw [clipRadiusState_eq (hinside t ht)] at hd
     exact hd
   exact ⟨z, hz₀, ODE.contDiffOn_enat_Icc_of_hasDerivWithinAt
-    (u := univ) (contDiff_radiusField hq).contDiffOn horig (mapsTo_univ _ _), horig⟩
+    (u := univ) hF.contDiffOn horig (mapsTo_univ _ _), horig⟩
+
+private theorem exists_radiusState_on_Icc {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (z₀ : RadiusState) :
+    ∃ z : ℝ → RadiusState, z t₀ = z₀ ∧ ContDiffOn ℝ ∞ z (Icc a b) ∧
+      ∀ t ∈ Icc a b, HasDerivWithinAt z (radiusField q t (z t)) (Icc a b) t := by
+  obtain ⟨K₀, hK₀⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn
+    hq.continuous.continuousOn
+  let K : ℝ≥0 := ⟨max 1 K₀, zero_le_one.trans (le_max_left _ _)⟩
+  have hK : 1 ≤ (K : ℝ) := le_max_left _ _
+  have hfield (t : ℝ) (ht : t ∈ Icc a b) : LipschitzWith K (radiusField q t) :=
+    radiusField_lipschitz hK ((hK₀ t ht).trans (le_max_right _ _))
+  exact exists_state_on_Icc (contDiff_radiusField hq) (radiusField_zero q) ht₀ K hfield z₀
 
 private theorem smooth_radiusState_extension {a b : ℝ} (hab : a ≤ b)
     {z dz : ℝ → RadiusState}
@@ -239,6 +272,43 @@ private theorem smooth_radiusState_extension {a b : ℝ} (hab : a ≤ b)
     have hw : Icc (a - 3) (b + 3) ∈ 𝓝 x :=
       Icc_mem_nhds (by linarith only [hx.1]) (by linarith only [hx.2])
     exact ⟨heq, ((hd x (mem_of_mem_nhds hw)).hasDerivAt hw).congr_of_eventuallyEq heq⟩
+
+/-- Arbitrary smooth coefficients admit the actual two-component flux
+initial-value problem on a neighborhood of every retained finite interval.
+No sign, smallness, or nonvanishing assumption on the coefficients is used.
+For a positive radial weight the intended coefficients are `p = 1 / w`
+and `q = j² w' / r`, after smooth extension from the retained interval. -/
+theorem exists_smoothFluxSystem {p q : ℝ → ℝ}
+    (hp : ContDiff ℝ ∞ p) (hq : ContDiff ℝ ∞ q)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (u₀ v₀ : ℝ) :
+    ∃ u v : ℝ → ℝ, ContDiff ℝ ∞ u ∧ ContDiff ℝ ∞ v ∧ u t₀ = u₀ ∧ v t₀ = v₀ ∧
+      ∀ x ∈ Ioo (a - 1) (b + 1), HasDerivAt u (p x * v x) x ∧
+        HasDerivAt v (q x * u x) x := by
+  have hstart : t₀ ∈ Icc (a - 3) (b + 3) :=
+    ⟨by linarith only [ht₀.1], by linarith only [ht₀.2]⟩
+  obtain ⟨K₀, hK₀⟩ :=
+    (isCompact_Icc : IsCompact (Icc (a - 3) (b + 3))).exists_bound_of_continuousOn
+      (hp.continuous.prodMk hq.continuous).continuousOn
+  let K : ℝ≥0 := ⟨max 1 K₀, zero_le_one.trans (le_max_left _ _)⟩
+  have hfield (t : ℝ) (ht : t ∈ Icc (a - 3) (b + 3)) :
+      LipschitzWith K (fluxField p q t) := by
+    have hcoeff := hK₀ t ht
+    rw [Prod.norm_def, max_le_iff] at hcoeff
+    exact fluxField_lipschitz (hcoeff.1.trans (le_max_right _ _))
+      (hcoeff.2.trans (le_max_right _ _))
+  obtain ⟨z, hz₀, hzs, hzd⟩ := exists_state_on_Icc
+    (contDiff_fluxField hp hq) (fluxField_zero p q) hstart K hfield (u₀, v₀)
+  obtain ⟨u, hus, hu⟩ := smooth_radiusState_extension (ht₀.1.trans ht₀.2) hzs hzd
+  have hstart' : t₀ ∈ Ioo (a - 1) (b + 1) :=
+    ⟨by linarith only [ht₀.1], by linarith only [ht₀.2]⟩
+  have hu₀ : u t₀ = (u₀, v₀) := (hu t₀ hstart').1.eq_of_nhds.trans hz₀
+  refine ⟨fun x => (u x).1, fun x => (u x).2, contDiff_fst.comp hus, contDiff_snd.comp hus,
+    congrArg Prod.fst hu₀, congrArg Prod.snd hu₀, ?_⟩
+  intro x hx
+  have h := (hu x hx).2
+  rw [← (hu x hx).1.eq_of_nhds] at h
+  exact ⟨(ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h,
+    (ContinuousLinearMap.snd ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h⟩
 
 theorem contDiff_morseRho (A B : ℝ) : ContDiff ℝ ∞ (morseRho A B) := by
   unfold morseRho
@@ -344,6 +414,13 @@ theorem exists_smoothSecondOrderSolution {q : ℝ → ℝ} (hq : ContDiff ℝ �
     filter_upwards [Ioo_mem_nhds hx'.1 hx'.2] with y hy
     exact (hd y hy).1.deriv
   exact he.deriv_eq.trans (hd x (hsub hx)).2.deriv
+
+/-- Compatibility name for the same finite-interval scalar solution. -/
+theorem exists_smoothSecondOrder {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
+    ∃ r : ℝ → ℝ, ContDiff ℝ ∞ r ∧ r t₀ = r₀ ∧ deriv r t₀ = v₀ ∧
+      ∀ x ∈ Icc a b, deriv (deriv r) x = -q x * r x :=
+  exists_smoothSecondOrderSolution hq ht₀ r₀ v₀
 
 /-- Value and derivative determine a smooth scalar second-order solution
 on a closed interval. -/
