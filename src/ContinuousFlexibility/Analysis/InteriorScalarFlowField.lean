@@ -54,8 +54,11 @@ theorem interiorScalarFlowField_periodic {f : PolarPoint → ℝ} {P : ℝ}
     (a b t : ℝ) (v : ℝ × ℝ) :
     Function.Periodic (fun θ => interiorScalarFlowField f a b (t, (v, θ))) P := by
   intro θ
-  change ((b - a) / 2 * (1 + v.1)) * f (interiorFlowRadius a b t v, θ + P) = _
-  rw [hperiod (interiorFlowRadius a b t v) θ]
+  change ((b - a) / 2 * (1 + v.1)) * f (interiorFlowRadius a b t v, θ + P) =
+    ((b - a) / 2 * (1 + v.1)) * f (interiorFlowRadius a b t v, θ)
+  have hp : f (interiorFlowRadius a b t v, θ + P) =
+      f (interiorFlowRadius a b t v, θ) := hperiod (interiorFlowRadius a b t v) θ
+  rw [hp]
 
 private def interiorFlowParameterProjection : N04FlowPoint →L[ℝ] ℝ :=
   (ContinuousLinearMap.fst ℝ ℝ ℝ).comp (ContinuousLinearMap.fst ℝ (ℝ × ℝ) ℝ)
@@ -95,9 +98,9 @@ private theorem interiorFlowArgument_norm {t d : ℝ} (ht : t ∈ Icc (0 : ℝ) 
   · rw [Real.norm_eq_abs, abs_mul]
     exact (mul_le_mul htd hfirst (abs_nonneg _) (abs_nonneg d)).trans
       (mul_le_mul_of_nonneg_right (le_add_of_nonneg_left zero_le_one) (norm_nonneg q))
-  · exact (norm_snd_le q).trans (by
-      simpa only [one_mul] using mul_le_mul_of_nonneg_right
-        (le_add_of_nonneg_right (abs_nonneg d)) (norm_nonneg q))
+  · have hone : (1 : ℝ) ≤ 1 + |d| := le_add_of_nonneg_right (abs_nonneg d)
+    exact (norm_snd_le q).trans (by
+      simpa only [one_mul] using mul_le_mul_of_nonneg_right hone (norm_nonneg q))
 
 /-- Same-order field jets for the actual straight radial flow. -/
 theorem interiorScalarFlowField_jet_le

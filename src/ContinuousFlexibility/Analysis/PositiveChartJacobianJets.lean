@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.CoordinateFieldJetBounds
+import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 import ContinuousFlexibility.Analysis.AbsoluteReciprocalJetBounds
 import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 import Mathlib.Analysis.Normed.Operator.Prod
@@ -48,12 +49,12 @@ theorem contDiff_coordinateChartDerivativeField
   have hD (v : PolarPoint) : ContDiff ℝ ∞ (fun q => fderiv ℝ F q v) :=
     (hF.fderiv_right (m := ∞) (by simp)).clm_apply contDiff_const
   fin_cases i
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_zero] using (hD (1, 0)).fst
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_succ,
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_zero] using (hD (1, 0)).fst
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_succ,
       Matrix.cons_val_zero] using (hD (0, 1)).fst
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_succ,
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_succ,
       Matrix.cons_val_zero] using (hD (1, 0)).snd
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_succ,
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_succ,
       Matrix.cons_val_zero] using (hD (0, 1)).snd
 
 theorem coordinateChartDerivativeField_norm_le_positiveJet_at
@@ -70,13 +71,13 @@ theorem coordinateChartDerivativeField_norm_le_positiveJet_at
   have ht₂ := chartDerivativeEntry_norm_le_at hF (0, 1) (by simp)
     (ContinuousLinearMap.snd ℝ ℝ ℝ) (ContinuousLinearMap.norm_snd_le ℝ ℝ ℝ) n
   fin_cases i
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_zero,
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_zero,
       ContinuousLinearMap.coe_fst'] using hr₁
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_succ, Matrix.cons_val_zero,
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_succ, Matrix.cons_val_zero,
       ContinuousLinearMap.coe_fst'] using ht₁
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_succ, Matrix.cons_val_zero,
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_succ, Matrix.cons_val_zero,
       ContinuousLinearMap.coe_snd'] using hr₂
-  · simpa only [coordinateChartDerivativeField, Matrix.cons_val_succ, Matrix.cons_val_zero,
+  · simpa [coordinateChartDerivativeField, Matrix.cons_val_succ, Matrix.cons_val_zero,
       ContinuousLinearMap.coe_snd'] using ht₂
 
 theorem coordinateChartDerivativeField_norm_le_positiveJet
