@@ -120,7 +120,10 @@ theorem closed_chart_data :
     rw [H.closed_chart_eq hp, H.closed_inverse_eq (hf hp)]
     exact hjf p hp
   · intro q hq
-    rw [H.closed_inverse_eq hq, H.closed_chart_eq (hj hq)]
+    have hj' : n04bRootPhysicalInverse
+        (n04bActualClosedTravelInverse S C L z m) (C.travel m) side q ∈
+          closure (n04bActualNegativeDomain S C L z m side) := hj hq
+    rw [H.closed_inverse_eq hq, H.closed_chart_eq hj']
     exact hfj q hq
 
 theorem period {p : PolarPoint}

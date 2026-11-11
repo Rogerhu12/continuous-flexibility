@@ -93,8 +93,10 @@ theorem n04b_right_root_firstIntegral_matching
   have hPinj : Function.Injective P := by
     intro a b he
     have hi : Function.invFun F a = Function.invFun F b := hfbij.1 he
-    have hh := congrArg F hi
-    simpa only [Function.rightInverse_invFun hFbij.2] using hh
+    calc
+      a = F (Function.invFun F a) := (Function.rightInverse_invFun hFbij.2 a).symm
+      _ = F (Function.invFun F b) := congrArg F hi
+      _ = b := Function.rightInverse_invFun hFbij.2 b
   have hinverse (η : ℝ) :
       Function.invFun P η = F (Function.invFun f η) := by
     have hv : P (F (Function.invFun f η)) = η := by
