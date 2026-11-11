@@ -212,7 +212,8 @@ theorem matchedMode_twoSign_cell_envelope
         dsimp only [A, B]
         rw [show a * (radialQ (level k) + radialQ (level m)) - height s k + height s m =
           (a * radialQ (level k) - height s k) +
-            (a * radialQ (level m) + height s m) by ring, Real.exp_add]
+            (a * radialQ (level m) + height s m) by ring]
+        simp only [Real.exp_add]
         ring
   by_cases hkm : radialS (level m) ≤ radialS (level k)
   · calc

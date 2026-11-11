@@ -112,6 +112,7 @@ theorem matchedInnerSmoothTest_green {D : ReferenceData}
     filter_upwards [Lp.coeFn_neg (P J),
       innerL2PieceProjection_ae (radialHilbertMeasure D) (Ioo a b) measurableSet_Ioo J,
       (matchingJacobiTest_memLp hD hψ j).coeFn_toLp] with r hn hP hJ
+    change J r = matchingJacobiTest D j ψ r at hJ
     rw [hn, Pi.neg_apply, hP]
     by_cases hr : r ∈ Ioo a b
     · rw [indicator_of_mem hr, indicator_of_mem hr, hJ]
@@ -128,7 +129,10 @@ theorem matchedInnerSmoothTest_green {D : ReferenceData}
   have hproj : ⟪P J, q.1⟫_ℝ = ⟪J, q.1⟫_ℝ :=
     innerL2PieceProjection_inner_fixed (radialHilbertMeasure D) (Ioo a b) J q.1
       (innerRadialH1Domain_piece_projection D hw.continuous ha hcore hpos hq)
-  rw [real_inner_comm T.2 q.2, ← hpot, hproj, real_inner_comm J q.1] at h
+  have hswap : ⟪T.2, q.2⟫_ℝ = ⟪q.2, T.2⟫_ℝ := real_inner_comm _ _
+  have hJswap : ⟪J, q.1⟫_ℝ = ⟪q.1, J⟫_ℝ := real_inner_comm _ _
+  change ⟪T.2, q.2⟫_ℝ + ⟪V, q.1⟫_ℝ + ⟪P J, q.1⟫_ℝ = _ at h
+  rw [hswap, ← hpot, hproj, hJswap] at h
   exact h
 
 def matchedInnerChainSmoothTest (D : ReferenceData) (hw : Continuous D.w)
@@ -151,6 +155,7 @@ theorem matchedInnerChainSmoothTest_mem (D : ReferenceData) (hw : Continuous D.w
   have hp := matchedInnerSmoothTest_domain_trace D hw (G.left_lt_right p)
     (G.left_pos p) (G.in_core p) (G.weight_pos p) ψ hψ
   refine ⟨hp.1, ?_⟩
+  dsimp only [matchedInnerChainSmoothTest]
   rw [hp.2]
   funext i
   fin_cases i
@@ -183,8 +188,8 @@ the two external boundary restrictions are zero by construction. -/
 theorem matchedInnerChain_boundary_cancel {D : ReferenceData} {n : ℕ}
     (G : InnerRadialChainGeometry D n) (ξ : EuclideanSpace ℝ (Fin n)) (f : ℝ → ℝ) :
     (∑ p : Fin (n + 1),
-      innerChainBoundaryRestriction n p ξ 1 * f (G.right p) -
-        innerChainBoundaryRestriction n p ξ 0 * f (G.left p)) = 0 := by
+      (innerChainBoundaryRestriction n p ξ 1 * f (G.right p) -
+        innerChainBoundaryRestriction n p ξ 0 * f (G.left p))) = 0 := by
   have hR : (∑ p : Fin (n + 1),
       innerChainBoundaryRestriction n p ξ 1 * f (G.right p)) =
         ∑ i : Fin n, ξ i * f (G.right i.castSucc) := by

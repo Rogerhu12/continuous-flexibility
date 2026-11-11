@@ -31,7 +31,9 @@ theorem innerBorderL2_inner_piece_sum {α ι : Type*} [MeasurableSpace α]
     (hu : ∀ i, innerL2PieceProjection μ (sets i) (u i) = u i) :
     ⟪F, (WithLp.toLp 2 (∑ i, u i, c) : InnerBorderL2 μ)⟫_ℝ =
       (∑ i, ⟪innerL2PieceProjection μ (sets i) F.fst, u i⟫_ℝ) + F.snd * c := by
-  rw [innerBorderL2_inner_coordinates, WithLp.toLp_fst, WithLp.toLp_snd, inner_sum]
+  rw [innerBorderL2_inner_coordinates,
+    WithLp.toLp_fst (p := 2) (∑ i, u i, c),
+    WithLp.toLp_snd (p := 2) (∑ i, u i, c), inner_sum]
   apply congrArg (fun z : ℝ => z + F.snd * c)
   exact Finset.sum_congr rfl (fun i _ =>
     (innerL2PieceProjection_inner_fixed μ (sets i) F.fst (u i) (hu i)).symm)
@@ -45,7 +47,7 @@ variable (D : ReferenceData) (hw : Continuous D.w) {n : ℕ}
 local notation "B" => EuclideanSpace ℝ (Fin n)
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "W" =>
   InnerRadialDomain D hw G forcing rowSource bordered j central column
 local notation "realize" =>
@@ -70,12 +72,15 @@ theorem innerRadialPhysicalRealization_pairing (F : H) (x : W) :
     (fun p => Ioo (G.left p) (G.right p)) F.val
     (fun p => (x.val.1.1 p).1) x.val.1.2.2 hfix]
   simp only [innerRadialSourcePairing, innerRadialPhysicalForcing_apply,
-    ContinuousLinearMap.coe_coe, innerRadialPhysicalRow_apply]
+    innerRadialPhysicalRowLinear_apply]
 
 variable
   (hunique : ∀ p, InnerRadialPieceKernelUnique D G bordered j central column p)
-  (hex : ∀ F ξ p, Nonempty
-    (InnerRadialPieceSolution D hw G forcing rowSource bordered j central column F ξ p))
+  (hex : ∀ (F : InnerRadialPhysicalSource D G bordered)
+    (ξ : EuclideanSpace ℝ (Fin n)) (p : Fin (n + 1)), Nonempty
+      (InnerRadialPieceSolution D hw G
+        (innerRadialPhysicalForcing D G bordered) (innerRadialPhysicalRowLinear D G bordered)
+        bordered j central column F ξ p))
 
 /-- The actual Dirichlet field map. Its quantitative continuity is
 supplied by the local Dirichlet bounds when the finite inverse is estimated. -/

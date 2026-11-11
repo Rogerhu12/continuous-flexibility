@@ -44,7 +44,7 @@ variable (D : ReferenceData) (hw : Continuous D.w) {n : ℕ}
 local notation "B" => EuclideanSpace ℝ (Fin n)
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "W" =>
   InnerRadialDomain D hw G forcing rowSource bordered j central column
 local notation "realize" =>
@@ -89,7 +89,6 @@ theorem innerRadialPhysicalWeakGraph_iff (u F : H) :
       rw [innerRadialPhysicalRealization_apply]
       exact hu.symm
     · rw [innerRadialDomainSource_apply]
-      rfl
     · rw [innerRadialDomainFlux_apply]
       exact hraw.2
 
@@ -110,8 +109,11 @@ theorem innerRadialPhysicalWeakGraph_green {u v F K : H}
 
 variable
   (hunique : ∀ p, InnerRadialPieceKernelUnique D G bordered j central column p)
-  (hex : ∀ F ξ p, Nonempty
-    (InnerRadialPieceSolution D hw G forcing rowSource bordered j central column F ξ p))
+  (hex : ∀ (F : InnerRadialPhysicalSource D G bordered)
+    (ξ : EuclideanSpace ℝ (Fin n)) (p : Fin (n + 1)), Nonempty
+      (InnerRadialPieceSolution D hw G
+        (innerRadialPhysicalForcing D G bordered) (innerRadialPhysicalRowLinear D G bordered)
+        bordered j central column F ξ p))
 
 local notation "Dir" =>
   innerRadialDirichletRealization D hw G forcing rowSource bordered j central column
