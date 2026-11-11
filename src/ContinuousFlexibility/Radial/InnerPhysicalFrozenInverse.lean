@@ -140,15 +140,14 @@ theorem frozenRepresentative_spec (F : RadialModePair D) :
   have heq : ModeLocalEquation D M.frequency (Ioo M.innerLeft M.innerRight) (A F) (src F) := by
     intro ψ hψ hcompact hsupp
     have he := hgraph.1 ψ hψ hcompact hsupp
-    simpa only [innerRadialPhysicalRestriction_apply, hleft, hright, modeInnerSource,
-      Prod.fst_mk] using he
+    simpa only [innerRadialPhysicalRestriction_apply, hleft, hright, modeInnerSource] using he
   have hrow : if M.frequency = 2 then
       (∫ r in D.a..D.b, referenceColumn D r * u r) = F.2 else (A F).2 = 0 := by
     by_cases hj : M.frequency = 2
     · rw [if_pos hj]
       have hs : (WithLp.ofLp (R (WithLp.toLp 2 F)).val).2 = F.2 := by
         rw [innerRadialPhysicalRestriction_apply]
-        simp only [Prod.snd_mk, decide_eq_true_eq, if_pos hj]
+        simp only [decide_eq_true_eq, if_pos hj]
       have hr : (∫ r in D.a..D.b, referenceColumn D r * (A F).1 r) = F.2 := by
         simpa only [if_pos hj, hs] using hgraph.2.1
       calc
