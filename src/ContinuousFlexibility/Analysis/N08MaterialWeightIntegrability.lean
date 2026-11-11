@@ -37,8 +37,8 @@ theorem n08_integrable_materialScale (hT : IsMaterialData D T) :
       exact ⟨T.rho r, mem_univ _, hinverse r hr⟩
   have hg : IntegrableOn (fun _ : ℝ => (1 : ℝ)) (T.radius '' (univ : Set ℝ)) := by
     rw [himage]
-    exact integrableOn_const
-  have hc := (integrableOn_image_iff_integrableOn_abs_deriv_smul measurableSet_univ
+    exact integrableOn_const (by rw [Real.volume_Ioo]; exact ENNReal.ofReal_ne_top)
+  have hc := (integrableOn_image_iff_integrableOn_abs_deriv_smul MeasurableSet.univ
     (fun x _ => (hderiv x).hasDerivWithinAt) hinj.injOn (fun _ : ℝ => (1 : ℝ))).mp hg
   have hc' : Integrable (fun x : ℝ => |T.ell (T.radius x)| • (1 : ℝ)) := by
     simpa only [integrableOn_univ] using hc
@@ -93,6 +93,7 @@ theorem n08_memLp_materialH_rpow (hT : IsMaterialData D T)
     funext x
     have hH := (hT.2.1 _ (hT.2.2.2.2.2.2.2.1 x).1).2.1
     rw [← Real.rpow_natCast, ← Real.rpow_mul hH.le]
+    norm_num
   rw [heq]
   exact n08_integrable_materialH_rpow hT (mul_pos hη (by norm_num))
 
@@ -100,7 +101,8 @@ theorem n08_memLp_cylinder_materialH_rpow (hT : IsMaterialData D T)
     {η : ℝ} (hη : 0 < η) :
     MemLp (fun p : PolarPoint => T.H (T.radius p.1) ^ η) 2 materialCylinderMeasure := by
   letI : IsFiniteMeasure angleMeasure :=
-    ⟨by rw [angleMeasure_univ_eq_pi]; exact ENNReal.ofReal_lt_top⟩
+    ⟨by rw [angleMeasure, Measure.restrict_apply_univ, Real.volume_Ioc]
+        exact ENNReal.ofReal_lt_top⟩
   rw [materialCylinderMeasure_eq_prod]
   exact (n08_memLp_materialH_rpow hT hη).comp_fst angleMeasure
 

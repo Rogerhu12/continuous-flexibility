@@ -33,7 +33,8 @@ theorem n08_minusFlow_component_eq
     (θ : ℝ) {r : ℝ} (hr : r ∈ Icc (C.left m) (C.right m)) :
     C.minusFlow (x, q) m r θ = C.minusFlow (y, q) m r θ := by
   have hgeom : RadialProfileGeometry D := hN.1.1.choose_spec.1
-  obtain ⟨_, _, _, hcontrol, _, _, hflow, _, _, hadmiss, _⟩ := hN
+  have hdata := hN
+  obtain ⟨_, _, _, hcontrol, _, _, hflow, _, _, hadmiss, _⟩ := hdata
   have hb := hcontrol.1 m
   have hfx := hflow (x, q) hx m θ
   have hfy := hflow (y, q) hy m θ

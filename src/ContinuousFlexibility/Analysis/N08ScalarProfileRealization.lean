@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData} {γ : ℝ}
 
 theorem n08_profile_deriv_from_decode (hD : IsAccumulatingProfile D)
@@ -38,7 +40,7 @@ theorem n08_profile_deriv_from_decode (hD : IsAccumulatingProfile D)
       (fun r => D.w r * (1 + (S.height γ).decode m (r, p.2))) := by
     filter_upwards [isOpen_Ioo.mem_nhds hp.1] with r hr
     exact (hm (r, p.2) ⟨hr, mem_univ _⟩).symm
-  simpa only [zero_add] using (hprod.congr_of_eventuallyEq heq).deriv.symm
+  simpa only [Pi.add_apply, zero_add] using (hprod.congr_of_eventuallyEq heq).deriv.symm
 
 variable {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -55,7 +57,7 @@ theorem n08ProfileDiscriminant_state_decode
   have hcalc := n08ProfileDiscriminant_decode hN.1.1 hT hS hγ m
     (n08ScalarHeightParameter S z) p (hm p hp)
   have hq : (n08ScalarHeightParameter S z).2 = z.2 := rfl
-  rw [n08ScalarHeightParameter_increment, hq] at hcalc
+  rw [n08ScalarHeightParameter_increment S z, hq] at hcalc
   exact hcalc.trans (n08_polarDiscriminant_radialFamily
     (n08_stateRadialHeight_contDiff hT hS hN z.1)
     (n08_stateRadialHeight_hasDerivAt hT hS hN z.1)
@@ -92,7 +94,7 @@ theorem n08ProfileResidual_state_decode
     (stateProfile D S C z.1) (hm p hp)
     (n08_profile_deriv_from_decode hN.1.1 hS m (stateProfile D S C z.1) hm p hp)
     (n08ProfileDiscriminant_small_on_stateNeighborhood hT hS hN hγ m hz hs hm p hp)]
-  rw [n08ScalarHeightParameter_increment]
+  rw [n08ScalarHeightParameter_increment S z]
   have hr : p.1 ≠ 0 := by
     obtain ⟨B, hB⟩ := hN.1.1
     exact (hB.1.1.trans hp.1.1).ne'

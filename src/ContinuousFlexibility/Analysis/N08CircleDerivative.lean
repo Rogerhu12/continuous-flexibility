@@ -19,6 +19,56 @@ open Set Filter
 open ContinuousFlexibility.Analysis
 open scoped Topology
 
+set_option backward.isDefEq.respectTransparency false
+
+private theorem n08_centered_projection_value
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (P : E →L[ℝ] E) (Q : E → E) (hQ : ∀ x, Q x = P x)
+    (a : E) (ha : P a = a) (x : E) : Q (x - a) = P x - a := by
+  rw [hQ, map_sub, ha]
+
+private theorem n08_centered_projection_lift
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (P : E →L[ℝ] E) (Q : E → E) (hQ : ∀ x, Q x = P x)
+    (a : E) (ha : P a = a) (x : E) : a + Q (x - a) = P x := by
+  rw [n08_centered_projection_value P Q hQ a ha x]
+  abel
+
+private theorem n08_centered_projection_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (P : E →L[ℝ] E) (Q : E → E) (hQ : ∀ x, Q x = P x)
+    (a : E) (ha : P a = a) (p : Seminorm ℝ E) (x : E) {ε : ℝ}
+    (h : p (P x - a) < ε) : p (Q (x - a)) < ε :=
+  (congrArg p (n08_centered_projection_value P Q hQ a ha x)).trans_lt h
+
+private theorem n08_centered_pair_line
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (Q : E →L[ℝ] F) (a x v : E) (q t : ℝ) :
+    (Q (x + t • v - a), q) = (Q (x - a), q) + t • (Q v, (0 : ℝ)) := by
+  apply Prod.ext
+  · simp only [Prod.fst_add, Prod.smul_mk, map_sub, map_add, map_smul]
+    abel
+  · simp only [Prod.snd_add, Prod.smul_mk, smul_zero, add_zero]
+
+private theorem n08_lineDerivative_pullback
+    {E F G : Type*} [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
+    [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+    (p : E → F) (f : F → G) {df dg : G} {x v : E} {w : F}
+    (hline : ∀ t : ℝ, p (x + t • v) = p x + t • w)
+    (hd : HasProjectiveLineDerivAt f df (p x) w) (hvalue : dg = df) :
+    HasProjectiveLineDerivAt (fun y => f (p y)) dg x v := by
+  rw [hvalue]
+  simpa only [HasProjectiveLineDerivAt, hline] using hd
+
+private theorem n08_lineDerivative_value
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {f : E → F} {df dg : F} {x v : E} (hvalue : dg = df)
+    (hd : HasProjectiveLineDerivAt f df x v) : HasProjectiveLineDerivAt f dg x v := by
+  rw [hvalue]
+  exact hd
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base : ℕ} {ε : ℝ}
@@ -45,23 +95,19 @@ theorem n08CircleSectorPoint_lift (hS : IsPhysicalSpaces D T S)
     (href : referenceStateConditions D S C) (z : AnnularState S × ℝ) :
     liftSectorParameter S C (n08CircleSectorPoint hS C z) =
       (n08_stateProjection hS z.1, z.2) := by
-  apply Prod.ext
-  · change C.referenceState +
-      (n08_sectorProjection hS (z.1 - C.referenceState)).val = _
-    rw [n08_sectorProjection_val, map_sub, n08_stateProjection_reference hS href]
-    abel
-  · rfl
+  exact Prod.ext
+    (n08_centered_projection_lift (n08_stateProjection hS)
+      (fun x => (n08_sectorProjection hS x).val) (n08_sectorProjection_val hS)
+      C.referenceState (n08_stateProjection_reference hS href) z.1) rfl
 
 theorem n08CircleSectorPoint_mem (hS : IsPhysicalSpaces D T S)
     (href : referenceStateConditions D S C) {z : AnnularState S × ℝ}
     (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε) :
     n08CircleSectorPoint hS C z ∈ sectorNeighborhood S base ε ε := by
-  constructor
-  · change stateGrading S base
-      (n08_sectorProjection hS (z.1 - C.referenceState)).val < ε
-    rw [n08_sectorProjection_val, map_sub, n08_stateProjection_reference hS href]
-    exact hz.1
-  · exact hz.2
+  exact ⟨n08_centered_projection_bound (n08_stateProjection hS)
+    (fun x => (n08_sectorProjection hS x).val) (n08_sectorProjection_val hS)
+    C.referenceState (n08_stateProjection_reference hS href) (stateGrading S base) z.1 hz.1,
+    hz.2⟩
 
 /-- The actual differential in all state directions, with the external
 parameter held fixed. -/
@@ -93,19 +139,15 @@ theorem n08CircleStateDerivative_hasLineDerivAt
   have hj := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain
     (n08CircleSectorPoint_mem hS href hz) (n08_sectorProjection hS v, 0)
   have hpoint (t : ℝ) :
-      n08CircleSectorPoint hS C (z.1 + t • v, z.2) =
-        n08CircleSectorPoint hS C z + t • (n08_sectorProjection hS v, 0) := by
-    apply Prod.ext
-    · change n08_sectorProjection hS (z.1 + t • v - C.referenceState) =
-        n08_sectorProjection hS (z.1 - C.referenceState) + t • n08_sectorProjection hS v
-      rw [map_sub, map_add, map_smul, map_sub]
-      abel
-    · simp only [n08CircleSectorPoint, Prod.snd_add, Prod.snd_smul, smul_zero, add_zero]
+      n08CircleSectorPoint hS C (z.1 + @SMul.smul ℝ (AnnularState S) _ t v, z.2) =
+        n08CircleSectorPoint hS C z + t • (n08_sectorProjection hS v, 0) :=
+    n08_centered_pair_line (n08_sectorProjection hS) C.referenceState z.1 v z.2 t
   have hline : HasProjectiveLineDerivAt
       (fun x => R.residual (liftSectorParameter S C (n08CircleSectorPoint hS C (x, z.2))))
-      (n08CircleStateDerivative hS hR z v) z.1 v := by
-    rw [n08CircleStateDerivative_apply]
-    simpa only [HasProjectiveLineDerivAt, hpoint, projectiveFirstJetValue, J] using hj
+      (n08CircleStateDerivative hS hR z v) z.1 v :=
+    n08_lineDerivative_pullback (fun x => n08CircleSectorPoint hS C (x, z.2))
+      (fun y => R.residual (liftSectorParameter S C y)) hpoint hj
+      (n08CircleStateDerivative_apply hS hR z v)
   apply hline.congr_germ
   have hc : Continuous (fun x : AnnularState S => (n08_stateProjection hS x, z.2)) :=
     (n08_stateProjection hS).continuous.prodMk continuous_const
@@ -133,8 +175,10 @@ def n08CircleColumn (hS : IsPhysicalSpaces D T S)
 
 theorem n08CircleColumn_apply (hS : IsPhysicalSpaces D T S)
     (hR : N02Properties D T S C R base ε) (z : AnnularState S × ℝ) (u : CircleSpace S) :
-    n08CircleColumn hS hR z u = n08CircleStateDerivative hS hR z (0, (0, (u, 0))) := by
-  rw [n08CircleColumn, ContinuousLinearMap.comp_apply, n08KappaDirection_apply]
+    n08CircleColumn hS hR z u = n08CircleStateDerivative hS hR z (0, (0, (u, 0))) :=
+  (ContinuousLinearMap.comp_apply (n08CircleStateDerivative hS hR z)
+    (n08KappaDirection S) u).trans
+      (congrArg (n08CircleStateDerivative hS hR z) (n08KappaDirection_apply S u))
 
 theorem n08CircleColumn_hasLineDerivAt
     (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
@@ -142,8 +186,9 @@ theorem n08CircleColumn_hasLineDerivAt
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1) (u : CircleSpace S) :
     HasProjectiveLineDerivAt (fun x => (n08CircleResidual hS hR (x, z.2)).val)
       (n08CircleColumn hS hR z u) z.1 (0, (0, (u, 0))) := by
-  rw [n08CircleColumn_apply]
-  apply n08CircleStateDerivative_hasLineDerivAt hS href hR
-  simpa only [n08_stateProjection_eq_self hS z.1 hs, Prod.eta] using hz
+  have hp : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε := by
+    simpa only [n08_stateProjection_eq_self hS z.1 hs, Prod.eta] using hz
+  exact n08_lineDerivative_value (n08CircleColumn_apply hS hR z u)
+    (n08CircleStateDerivative_hasLineDerivAt hS href hR hp (0, (0, (u, 0))))
 
 end ContinuousFlexibility.Statements

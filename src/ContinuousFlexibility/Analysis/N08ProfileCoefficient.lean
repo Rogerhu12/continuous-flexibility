@@ -47,7 +47,7 @@ theorem n08_coefficientA_state_hasDerivAt (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
     (x v : AnnularState S) (p : PolarPoint) :
     HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 0 0 p (x + (t • v : AnnularState S), 0))
+      (fun t : ℝ => coefficientFamily D S C 0 0 0 p (x + (@SMul.smul ℝ (AnnularState S) _ t v), 0))
       (stateProfile D S C x p.1 * n08_stateLogProfile D S C v p.1) 0 := by
   simpa only [n08_coefficientFamily_zero_zeroParameter hT hS hN] using
     (n08_stateProfile_hasDerivAt hS hN.2.2.2.1 x v p.1).sub_const (D.w p.1)
@@ -84,12 +84,12 @@ theorem n08_logProfile_reference_coefficient_bound (hT : IsMaterialData D T)
   have hline := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain hz (v, 0)
   have hd : HasDerivAt
       (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0)
-        ((C.referenceState, 0) + (t • (v, 0) : AnnularState S × ℝ)))
+        ((C.referenceState, 0) + (@SMul.smul ℝ (AnnularState S × ℝ) _ t (v, 0))))
       (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 :=
     hasDerivAt_iff_tendsto_slope_zero.mpr hline
   have ha := n08_coefficientA_state_hasDerivAt hT hS hN C.referenceState v (r, 0)
   have hd' : HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0) (C.referenceState + (t • v : AnnularState S), 0))
+      (fun t : ℝ => coefficientFamily D S C 0 0 0 (r, 0) (C.referenceState + (@SMul.smul ℝ (AnnularState S) _ t v), 0))
       (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 := by
     simpa only [Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero] using hd
   have hvalue : J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0) =

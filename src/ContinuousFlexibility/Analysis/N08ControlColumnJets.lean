@@ -48,7 +48,8 @@ theorem orderedJet_zero (J : SmoothDirections U F) (x : X) (b : B) :
   congr 1
   funext i
   fin_cases i
-  simp only [Fin.snoc_zero, Fin.cons_zero]
+  simp only [Fin.snoc_zero]
+  exact (Fin.cons_zero ((0 : X), b) Fin.elim0).symm
 
 def orderedLinear (J : SmoothDirections U F) (n : ℕ) (x : X)
     (v : Fin n → X) : B →L[ℝ] Y :=
@@ -108,7 +109,7 @@ theorem orderedJet_continuousOn (J : SmoothDirections U F) (n : ℕ) :
     intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
     · simpa only [Fin.snoc_last] using continuous_const.prodMk continuous_snd.snd
-    · simpa only [Fin.snoc_castSucc] using
+    · simpa only [Fin.snoc_castSucc, Function.comp_def] using
         (((continuous_apply j).comp continuous_snd.fst).prodMk continuous_const)
   exact (J.continuous (n + 1)).comp
     (((continuous_fst.prodMk continuous_const).prodMk hi).continuousOn)
@@ -201,7 +202,8 @@ theorem Expression.eval_diff (e : Expression X B A) (J : SmoothDirections U F)
     (g : A' →L[ℝ] A) (h : A' →L[ℝ] X × B) (z : X × B) (a : A') :
     (e.diff g h).eval J z a = e.differential J z (g a) (h a) := by
   have hcons {n : ℕ} (v : Fin n → A →L[ℝ] X) :
-      (fun i => Fin.cons ((ContinuousLinearMap.fst ℝ X B).comp h)
+      (fun i => Fin.cons (α := fun _ : Fin (n + 1) => A' →L[ℝ] X)
+        ((ContinuousLinearMap.fst ℝ X B).comp h)
         (fun j => (v j).comp g) i a) =
       Fin.cons (h a).1 (fun i => v i (g a)) := by
     funext i
@@ -244,7 +246,7 @@ theorem Expression.hasLineDerivAt_eval (e : Expression X B A) (J : SmoothDirecti
   induction e with
   | jet n v b =>
       simpa only [eval, differential, ContinuousLinearMap.comp_apply,
-        ContinuousLinearMap.coe_fst', orderedHead_apply] using
+        ContinuousLinearMap.coe_fst', LinearMap.fst_apply, orderedHead_apply] using
         HasProjectiveLineDerivAt.comp_linear (LinearMap.fst ℝ X B)
           (x := z) (v := h)
           (orderedJet_hasLineDerivAt J hz n (fun i => v i a) (b a) h.1)

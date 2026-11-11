@@ -19,7 +19,7 @@ open scoped Topology ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
-private theorem n08_product_jet_majorant {I : Type*} {U : Set ℝ}
+theorem n08_product_jet_majorant {I : Type*} {U : Set ℝ}
     {f : ℝ → ℝ} {g : I → ℝ → ℝ} {W V : ℝ → ℝ} {P : I → ℝ}
     (hU : IsOpen U) (hf : ContDiffOn ℝ ∞ f U) (hg : ∀ i, ContDiffOn ℝ ∞ (g i) U)
     (hW : ∀ r ∈ U, 0 ≤ W r) (hV : ∀ r ∈ U, 0 ≤ V r) (hP : ∀ i, 0 ≤ P i)
