@@ -42,3 +42,7 @@ run_cmd do
 #print axioms ContinuousFlexibility.Analysis.SobolevExtensionOperator.completion_compatible
 #print axioms ContinuousFlexibility.Analysis.hadamard_threeLines_operator_norm_unit
 #print axioms ContinuousFlexibility.Analysis.hadamardThreeLinesExtension_spec_unit
+#print axioms ContinuousFlexibility.Blueprint.R07
+#print axioms ContinuousFlexibility.Blueprint.R08
+#print axioms ContinuousFlexibility.Blueprint.R12
+#print axioms ContinuousFlexibility.Blueprint.R10b
