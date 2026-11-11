@@ -75,7 +75,7 @@ theorem scalarAngularPrimitive_physicalNorm_le
     (weightedPhysicalJet T γ (j.val 0).val (j.val 1).val (j.val 2).val
       (scalarAngularPrimitive f)) 2 materialCylinderMeasure
   have hN : 0 ≤ N := Real.sqrt_nonneg _
-  have hπ : (1 : ℝ) ≤ Real.pi := by linarith [Real.pi_gt_three]
+  have hπ : (1 : ℝ) ≤ Real.pi := by linarith [Real.one_le_pi_div_two]
   have hmem := scalarAngularPrimitive_weightedJets_memLp hT hf hjets
   have hP (j : JetIndex s) : P j ≠ (⊤ : ℝ≥0∞) :=
     (hmem (j.val 0).val (j.val 1).val (j.val 2).val).eLpNorm_ne_top

@@ -29,22 +29,22 @@ private theorem fin_prod_erase_eq_ite {n : ℕ} (f : Fin n → ℝ) (i : Fin n) 
 
 private theorem fin_prod_erase_cons_zero {E : Type*} {n : ℕ}
     (L : E → ℝ) (x : E) (v : Fin n → E) :
-    (∏ j ∈ Finset.univ.erase (0 : Fin (n + 1)), L (Fin.cons x v j)) =
+    (∏ j ∈ Finset.univ.erase (0 : Fin (n + 1)), L (Fin.cons (α := fun _ : Fin (n + 1) => E) x v j)) =
       ∏ j, L (v j) := by
   rw [fin_prod_erase_eq_ite, Fin.prod_univ_succ]
   simp
 
 private theorem fin_prod_erase_cons_succ {E : Type*} {n : ℕ}
     (L : E → ℝ) (x : E) (v : Fin n → E) (i : Fin n) :
-    (∏ j ∈ Finset.univ.erase i.succ, L (Fin.cons x v j)) =
+    (∏ j ∈ Finset.univ.erase i.succ, L (Fin.cons (α := fun _ : Fin (n + 1) => E) x v j)) =
       L x * ∏ j ∈ Finset.univ.erase i, L (v j) := by
   rw [fin_prod_erase_eq_ite, Fin.prod_univ_succ, fin_prod_erase_eq_ite]
   simp
 
 theorem scalarOneHighCost_cons {E : Type*} {n : ℕ}
     (L H : E → ℝ) (x : E) (v : Fin n → E) :
-    (∑ i : Fin (n + 1), H (Fin.cons x v i) *
-      ∏ j ∈ Finset.univ.erase i, L (Fin.cons x v j)) =
+    (∑ i : Fin (n + 1), H (Fin.cons (α := fun _ : Fin (n + 1) => E) x v i) *
+      ∏ j ∈ Finset.univ.erase i, L (Fin.cons (α := fun _ : Fin (n + 1) => E) x v j)) =
       H x * (∏ i, L (v i)) +
         L x * ∑ i, H (v i) * ∏ j ∈ Finset.univ.erase i, L (v j) := by
   rw [Fin.sum_univ_succ, fin_prod_erase_cons_zero]
@@ -89,8 +89,8 @@ theorem scalarOneHighCost_cons_le_tameJetSize
     (x g : E) (v : Fin k → E)
     (hgHigh : p h g ≤ Cₕ * (1 + p (s + loss) x))
     (hgLow : p b g ≤ Cₗ) :
-    (∑ i : Fin (k + 1), p h (Fin.cons g v i) *
-        ∏ j ∈ Finset.univ.erase i, p b (Fin.cons g v j)) ≤
+    (∑ i : Fin (k + 1), p h (Fin.cons (α := fun _ : Fin (k + 1) => E) g v i) *
+        ∏ j ∈ Finset.univ.erase i, p b (Fin.cons (α := fun _ : Fin (k + 1) => E) g v j)) ≤
       (Cₕ + Cₗ) * tameJetSize p k s loss base x v := by
   classical
   rw [scalarOneHighCost_cons]

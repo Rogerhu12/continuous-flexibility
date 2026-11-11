@@ -57,7 +57,18 @@ theorem decodedProduct_weightedJets_oneHigh
   intro k s a b c horder
   obtain ⟨C, hC, hCu⟩ := hprod k s a b c horder
   refine ⟨C, hC, fun u => ?_⟩
-  simpa only [weightedPhysicalJet, materialPullback_prod hT γ] using hCu u
+  have hjet :
+      weightedPhysicalJet T (((k + 1 : ℕ) : ℝ) * γ) a b c
+          (fun p => ∏ i, A.decode (u i) p) =
+        fun p => T.M (T.radius p.1) ^ c *
+          mixedDerivative a b
+            (fun q => ∏ i, materialPullback T γ (A.decode (u i)) q) p := by
+    exact congrArg
+      (fun G : PolarPoint → ℝ => fun p =>
+        T.M (T.radius p.1) ^ c * mixedDerivative a b G p)
+      (materialPullback_prod hT γ (fun i => A.decode (u i)))
+  rw [hjet]
+  exact hCu u
 
 /-- A positive number of actual decoded factors has the sum weight.  The
 positive arity is used only to preserve vanishing outside the annulus. -/

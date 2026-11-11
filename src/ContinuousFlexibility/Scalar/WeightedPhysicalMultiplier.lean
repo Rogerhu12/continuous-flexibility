@@ -45,7 +45,13 @@ theorem weightedPhysicalJet_radialMultiplier_bound
   obtain ⟨C, hC, hCf⟩ :=
     weightedRadialMultiplier_jet_bound (γ := γ) hT hk.1 1 hbound a b c
   refine ⟨C, hC, fun f hf => ?_⟩
-  simpa only [weightedPhysicalJet, materialPullback_radialMultiplier] using hCf f hf
+  have he : weightedPhysicalJet T γ a b c (fun p => k p.1 * f p) =
+      fun p => T.M (T.radius p.1) ^ c *
+        mixedDerivative a b (fun q => k (T.radius q.1) * materialPullback T γ f q) p := by
+    unfold weightedPhysicalJet
+    rw [materialPullback_radialMultiplier T γ k f]
+  rw [he]
+  exact hCf f hf
 
 theorem heightMember_radialMultiplier
     (hT : IsMaterialData D T)

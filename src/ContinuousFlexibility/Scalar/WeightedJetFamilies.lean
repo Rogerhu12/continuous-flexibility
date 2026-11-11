@@ -180,6 +180,38 @@ theorem MaterialJetFamily.inputProduct
     split_ifs <;> omega
   exact hn'.trans (family_input_product_le hp a b d c Q hK hQ₀ hQ hd0 hdi u)
 
+private theorem family_weighted_interpolation
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hinterp : HasInterpolation p) :
+    ∃ base loss : ℕ, 2 ≤ base ∧ ∀ k s : ℕ,
+      ∀ (a b : Fin (k + 1) → ℕ) (c : ℕ),
+      (∑ i, (a i + b i)) + c ≤ s → ∃ C : ℝ, 0 ≤ C ∧ ∀ u : Fin (k + 1) → E,
+        (∏ i, p (a i + b i + (if i = 0 then c + 1 else 0) + 2) (u i)) ≤
+          C * ∑ i, p (s + loss) (u i) *
+            ∏ j ∈ Finset.univ.erase i, p base (u j) := by
+  classical
+  obtain ⟨base, loss, hbase, hproduct⟩ := hinterp.oneHigh_product hp
+  refine ⟨base, loss + 1, hbase, ?_⟩
+  intro k s a b c horder
+  let d : Fin (k + 1) → ℕ := fun i => a i + b i + if i = 0 then c + 1 else 0
+  have hd : (∑ i, d i) ≤ s + 1 := by
+    have heq : (∑ i, d i) = (∑ i, (a i + b i)) + (c + 1) := by
+      simp [d, Finset.sum_add_distrib]
+    rw [heq]
+    omega
+  obtain ⟨C, hC, hCu⟩ := hproduct k (s + 1) d hd
+  refine ⟨C, hC, ?_⟩
+  intro u
+  have hindex : s + 1 + loss = s + (loss + 1) := by omega
+  simpa only [hindex] using hCu u
+
+private theorem family_bound_combine {N K P C X Y : ℝ}
+    (hKP : 0 ≤ K * P) (hN : N ≤ (K * P) * X) (hX : X ≤ C * Y) :
+    N ≤ K * (P * C) * Y := by
+  calc
+    N ≤ (K * P) * (C * Y) := hN.trans (mul_le_mul_of_nonneg_left hX hKP)
+    _ = K * (P * C) * Y := by simp only [mul_assoc]
+
 /-- One interpolation base and loss control every positive-arity monomial
 of any material jet family, before any spatial or directional order is chosen. -/
 theorem MaterialJetFamily.oneHigh
@@ -198,28 +230,15 @@ theorem MaterialJetFamily.oneHigh
             2 materialCylinderMeasure).toReal ≤
             K * C * ∑ i, A.grading (s + loss) (u i) *
               ∏ j ∈ Finset.univ.erase i, A.grading base (u j) := by
-  classical
   have hp : Monotone A.grading := gradedSeminorm_monotone (fun n => A.level n) A.bond
-  obtain ⟨base, loss, hbase, hproduct⟩ := hinterp.oneHigh_product hp
-  refine ⟨base, loss + 1, hbase, ?_⟩
+  obtain ⟨base, loss, hbase, hproduct⟩ := family_weighted_interpolation hp hinterp
+  refine ⟨base, loss, hbase, ?_⟩
   intro k s a b c horder
-  let d : Fin (k + 1) → ℕ := fun i => a i + b i + if i = 0 then c + 1 else 0
-  have hd : (∑ i, d i) ≤ s + 1 := by
-    have heq : (∑ i, d i) = (∑ i, (a i + b i)) + (c + 1) := by
-      simp [d, Finset.sum_add_distrib]
-    rw [heq]
-    omega
-  obtain ⟨C, hC, hCx⟩ := hproduct k (s + 1) d hd
+  obtain ⟨C, hC, hCu⟩ := hproduct k s a b c horder
   obtain ⟨P, hP, hPu⟩ := J.inputProduct hT a b c
   refine ⟨P * C, mul_nonneg hP hC, ?_⟩
   intro coefficient K hK hc hcBound u
   obtain ⟨hm, hn⟩ := hPu coefficient K hK hc hcBound u
-  refine ⟨hm, ?_⟩
-  have hindex : s + 1 + loss = s + (loss + 1) := by omega
-  have hi := hCx u
-  rw [hindex] at hi
-  have hn' : (eLpNorm (materialFamilyMonomial J coefficient a b c u)
-      2 materialCylinderMeasure).toReal ≤ (K * P) * ∏ i, A.grading (d i + 2) (u i) := hn
-  exact (hn'.trans (mul_le_mul_of_nonneg_left hi (mul_nonneg hK hP))).trans_eq (by ring)
+  exact ⟨hm, family_bound_combine (mul_nonneg hK hP) hn (hCu u)⟩
 
 end ContinuousFlexibility.Statements

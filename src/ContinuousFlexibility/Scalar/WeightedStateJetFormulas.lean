@@ -25,7 +25,7 @@ def scalarStateDDefect (D : ReferenceData) (S : PhysicalSpacesData)
   let w := scalarStateProfile D S x p.1
   let a := x.2 * radialPartial (scalarStateIncrement S x) p
   let b := x.2 * heightAngular (scalarStateIncrement S x) p
-  -2 * w * a - a ^ 2 - (1 + w ^ 2) * b ^ 2
+  show ℝ from -2 * w * a - a ^ 2 - (1 + w ^ 2) * b ^ 2
 
 def scalarStateQDefect (D : ReferenceData) (S : PhysicalSpacesData)
     (x : ScalarWeightedState S) (p : PolarPoint) : ℝ :=
@@ -73,7 +73,7 @@ theorem scalarStateProfile_deriv_expansion
   have hw := hdata.1.2.2.1.1.differentiable (by simp) r
   have hm := (scalarStateProfileMean_contDiff hT hS x).differentiable (by simp) r
   exact (hw.hasDerivAt.mul ((hasDerivAt_const r 1).add hm.hasDerivAt)).deriv.trans
-    (by simp only [zero_add])
+    (by simp only [zero_add, Pi.add_apply])
 
 theorem scalarState_discriminant_eq_one_add_defect
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

@@ -26,13 +26,20 @@ def normalizedMaterialJet (T : MaterialData) (γ : ℝ) (a b : ℕ)
   T.H (T.radius p.1) ^ (-γ) *
     mixedDerivative a b (fun q => f (T.radius q.1, q.2)) p
 
+theorem contDiff_unweightedMaterialPullback
+    {D : ReferenceData} {T : MaterialData} {f : PolarPoint → ℝ}
+    (hT : IsMaterialData D T) (hf : ContDiffOn ℝ ∞ f (annularOpen D)) :
+    ContDiff ℝ ∞ (fun p : PolarPoint => f (T.radius p.1, p.2)) := by
+  obtain ⟨_, _, _, _, _, _, hradius, hinside, _⟩ := hT
+  have hcoord : ContDiff ℝ ∞ (fun p : PolarPoint => (T.radius p.1, p.2)) :=
+    (hradius.comp contDiff_fst).prodMk contDiff_snd
+  exact hf.comp_contDiff hcoord (fun p => ⟨(hinside p.1).1, mem_univ _⟩)
+
 theorem normalizedMaterialJet_contDiff
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
     (hT : IsMaterialData D T) (hf : ContDiffOn ℝ ∞ f (annularOpen D)) (a b : ℕ) :
     ContDiff ℝ ∞ (normalizedMaterialJet T γ a b f) := by
-  have hu : ContDiff ℝ ∞ (fun p : PolarPoint => f (T.radius p.1, p.2)) := by
-    simpa only [materialPullback, neg_zero, Real.rpow_zero, one_mul] using
-      contDiff_materialPullback (γ := 0) hT hf
+  have hu := contDiff_unweightedMaterialPullback hT hf
   exact ((contDiff_materialH_rpow hT (-γ)).comp contDiff_fst).mul
     (contDiff_mixedDerivative hu a b)
 
@@ -64,7 +71,8 @@ theorem normalizedMaterialJet_decode_pointwise_bound
       |normalizedMaterialJet T γ a b (A.decode u) p| ≤ C * A.grading (a + b + 2) u := by
   obtain ⟨C, hC, hbound⟩ := materialDerivative_decode_angular_slice_le_grading hT hA a b
   refine ⟨C, hC, fun u p => ?_⟩
-  obtain ⟨_, hpos, _, _, _, _, _, hinside, _⟩ := hT
+  have hdata := hT
+  obtain ⟨_, hpos, _, _, _, _, _, hinside, _⟩ := hdata
   have hH : 0 < T.H (T.radius p.1) := (hpos _ (hinside p.1).1).2.1
   have hcancel : T.H (T.radius p.1) ^ (-γ) * T.H (T.radius p.1) ^ γ = 1 := by
     rw [← Real.rpow_add hH, neg_add_cancel, Real.rpow_zero]

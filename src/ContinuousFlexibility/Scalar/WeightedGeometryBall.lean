@@ -172,7 +172,7 @@ theorem exists_scalarStateBall_positivity_of_low_jet_bounds
     rw [scalarCommonHeightDecode_radialPartial hT hS]
     calc
       _ ≤ |radialPartial ((S.height scalarBeta).decode x.1.1.2) p| +
-          |x.1.2 * deriv S.chiLeft p.1| := abs_add _ _
+          |x.1.2 * deriv S.chiLeft p.1| := abs_add_le _ _
       _ ≤ Cr * scalarHeightGrading S base x.1.1.2 * D.w p.1 +
           |x.1.2| * (Cχ * D.w p.1) := by
         rw [abs_mul]

@@ -81,9 +81,8 @@ theorem MaterialJetFamily.exists_diagonalEstimate
 theorem decodedMaterialPullback_contDiff
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {A : SobolevModelData}
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A) (u : A.Space) :
-    ContDiff ℝ ∞ (fun p : PolarPoint => A.decode u (T.radius p.1, p.2)) := by
-  simpa only [materialPullback, neg_zero, Real.rpow_zero, one_mul] using
-    contDiff_materialPullback (γ := 0) hT (hA.2.2.2.1 u).1
+    ContDiff ℝ ∞ (fun p : PolarPoint => A.decode u (T.radius p.1, p.2)) :=
+  contDiff_unweightedMaterialPullback hT (hA.2.2.2.1 u).1
 
 /-- The actual unweighted decoded range is bounded on a fixed low-norm ball. -/
 theorem decodedMaterialPullback_bound_of_grading
