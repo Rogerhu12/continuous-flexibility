@@ -66,8 +66,12 @@ theorem weighted_poisson_energy
     (fun p => Ioo (G.left p) (G.right p)) central (fun _ => measurableSet_Ioo) piece
       (MW (A.poisson (innerChainBoundaryCLM n piece
         (innerBoundaryDiagonal (fun i => (w i)⁻¹) ξ))))
-  exact ((sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mpr hproj).trans
-    (hraw.trans (innerPoissonCoefficient_sq_le (mul_nonneg (by norm_num) hK) hKL hj henergy))
+  calc
+    _ ≤ ‖MW (A.poisson (innerChainBoundaryCLM n piece
+        (innerBoundaryDiagonal (fun i => (w i)⁻¹) ξ)))‖ ^ 2 :=
+      pow_le_pow_left₀ (norm_nonneg _) hproj 2
+    _ ≤ (L / j) ^ 2 * ⟪z, innerBoundaryDiagonal A.kappa z⟫_ℝ :=
+      hraw.trans (innerPoissonCoefficient_sq_le (mul_nonneg (by norm_num) hK) hKL hj henergy)
 
 end InnerRadialModelChart
 
@@ -98,10 +102,15 @@ theorem weighted_poisson_energy (hDw : ContDiff ℝ ∞ D.w)
   have hproj := innerBorderPieceProjection_contract (radialHilbertMeasure D)
     (fun p => Ioo (G.left p) (G.right p)) central (fun _ => measurableSet_Ioo) piece
       (A.poisson hDw.continuous (innerChainBoundaryCLM n piece ξ))
-  exact ((sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mpr hproj).trans
-    ((A.poisson_norm_sq_le hDw hs hslope _).trans
-      (innerPoissonCoefficient_sq_le (Real.sqrt_nonneg _) hL A.frequency_pos
-        (A.poisson_energy_nonneg hDw _)))
+  calc
+    _ ≤ ‖A.poisson hDw.continuous (innerChainBoundaryCLM n piece ξ)‖ ^ 2 :=
+      pow_le_pow_left₀ (norm_nonneg _) hproj 2
+    _ ≤ (L / j) ^ 2 * ⟪innerChainBoundaryCLM n piece ξ,
+        Matrix.toEuclideanCLM (n := Fin 2) (𝕜 := ℝ) A.fluxMatrix
+          (innerChainBoundaryCLM n piece ξ)⟫_ℝ :=
+      (A.poisson_norm_sq_le hDw hs hslope _).trans
+        (innerPoissonCoefficient_sq_le (Real.sqrt_nonneg _) hL A.frequency_pos
+          (A.poisson_energy_nonneg hDw _))
 
 end InnerRadialGapChart
 
@@ -164,7 +173,7 @@ theorem weighted_poisson_of_local_energy (hDw : ContDiff ℝ ∞ D.w)
   apply ContinuousLinearMap.opNorm_le_bound _ (div_nonneg hL hj.le)
   intro ξ
   simp only [ContinuousLinearMap.comp_apply]
-  apply (sq_le_sq₀ (norm_nonneg _) (mul_nonneg (div_nonneg hL hj.le) (norm_nonneg ξ))).mp
+  refine le_of_sq_le_sq ?_ (mul_nonneg (div_nonneg hL hj.le) (norm_nonneg ξ))
   have henergy := innerMatrix_inverseSqrt_energy C.referenceMatrix
     (C.referenceMatrix_posDef hDw hκ) ξ
   calc

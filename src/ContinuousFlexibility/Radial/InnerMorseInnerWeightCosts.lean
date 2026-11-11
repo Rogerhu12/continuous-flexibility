@@ -153,7 +153,7 @@ theorem innerMorseInnerWeight_model_ratios (p : Fin (2 * K + 1)) {x : ℝ}
         (l (innerModelChainPiece p)) (r (innerModelChainPiece p)) x
   · by_cases hp0 : p.val = K
     · simp only [innerMorseInnerModelWeight, innerMorseInnerModelIndex, hp, hp0,
-        ite_false, ite_true, innerInterpolatedWeight_same _ _ zero_lt_one,
+        lt_self_iff_false, ite_false, ite_true, innerInterpolatedWeight_same _ _ zero_lt_one,
         innerCellWeight_base, one_rpow, div_one]
       exact ⟨inner_radialE_sqrt_ge_one N, inner_radialE_sqrt_ge_one N⟩
     · simpa only [innerMorseInnerModelWeight, innerMorseInnerModelIndex, hp, hp0,
@@ -225,7 +225,7 @@ theorem innerMorseInnerLoss_eq_coefficient (ℓ x : ℝ) :
   · rw [innerMorseInnerLoss, innerPiecewiseCoefficientLoss,
       innerPiecewiseWeight_outside _ _ hx, innerMorseInnerCoefficient,
       innerPiecewiseWeight_outside _ _ hx, mul_one,
-      div_self (exp_pos (radialQ N)).ne', one_rpow]
+      div_self (show radialE N ≠ 0 from (exp_pos (radialQ N)).ne'), one_rpow]
 
 theorem innerMorseInnerLoss_measurable (ℓ : ℝ) : Measurable (innerMorseInnerLoss N K G ℓ) :=
   innerPiecewiseCoefficientLoss_measurable _ (fun _ => measurableSet_Ioc) _ N ℓ
