@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Normed.Group.InfiniteSum
+import Mathlib.Analysis.Normed.Ring.Basic
 import Mathlib.Topology.Algebra.InfiniteSum.Real
 
 /-!

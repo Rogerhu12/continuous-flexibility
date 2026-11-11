@@ -364,3 +364,8 @@ import ContinuousFlexibility.Blueprint.ScalarCalculus
 import ContinuousFlexibility.Analysis.HadamardThreeLines
 import ContinuousFlexibility.Analysis.SeeleyData
 import ContinuousFlexibility.Analysis.SeeleyJetExtension
+import ContinuousFlexibility.Analysis.HadamardThreeLinesExtension
+import ContinuousFlexibility.Analysis.SeeleyFiniteBlocks
+import ContinuousFlexibility.Analysis.SeeleyCoefficients
+import ContinuousFlexibility.Analysis.SobolevHalfLineJets
+import ContinuousFlexibility.Analysis.SmoothSobolevCore
