@@ -33,23 +33,38 @@ local notation "center" => innerModelChainPiece (innerMorseInnerCenter K)
 local notation "piece" => innerModelChainPiece (innerMorseInnerTailSlot K side p)
 
 variable
-  (hleft : H.left piece = P.sideRadius side * innerMorseChainCut S.chain side m 0)
-  (hright : H.right piece = P.sideRadius side * innerMorseChainCut S.chain side m 1)
+  (hleft : H.left (innerModelChainPiece (innerMorseInnerTailSlot K side p)) =
+    P.sideRadius side * innerMorseChainCut S.chain side
+      (innerMorseInnerTailIndex S.chain.index K side p) 0)
+  (hright : H.right (innerModelChainPiece (innerMorseInnerTailSlot K side p)) =
+    P.sideRadius side * innerMorseChainCut S.chain side
+      (innerMorseInnerTailIndex S.chain.index K side p) 1)
   {CM KM : ℝ}
   (hB : BufferHypotheses
-    (innerMorseBufferData (morseChainA S.chain m) (morseChainB S.chain m)
-      j (8 * (S.chain.d m : ℝ) ^ 9)))
+    (innerMorseBufferData
+      (morseChainA S.chain (innerMorseInnerTailIndex S.chain.index K side p))
+      (morseChainB S.chain (innerMorseInnerTailIndex S.chain.index K side p))
+      j (8 * (S.chain.d (innerMorseInnerTailIndex S.chain.index K side p) : ℝ) ^ 9)))
   (M : InnerBufferLocalizedData
-    (innerMorseBufferData (morseChainA S.chain m) (morseChainB S.chain m)
-      j (8 * (S.chain.d m : ℝ) ^ 9)) CM KM)
+    (innerMorseBufferData
+      (morseChainA S.chain (innerMorseInnerTailIndex S.chain.index K side p))
+      (morseChainB S.chain (innerMorseInnerTailIndex S.chain.index K side p))
+      j (8 * (S.chain.d (innerMorseInnerTailIndex S.chain.index K side p) : ℝ) ^ 9)) CM KM)
 
 local notation "A" => P.retainedMorseModelChart hw hS G₀ hfirst H bordered j center piece column
   side m (And.left (innerMorseInnerTailIndex_bounds S.chain.index K side p))
   (innerMorseInnerTailPiece_ne_center K side p) hleft hright hB M
 
 variable
-  (C : InnerRadialActualChain D H bordered j center column)
-  (hpiece : C.piece piece = .inl A)
+  (C : InnerRadialActualChain D H bordered j
+    (innerModelChainPiece (innerMorseInnerCenter K)) column)
+  (hpiece : C.piece (innerModelChainPiece (innerMorseInnerTailSlot K side p)) =
+    .inl (P.retainedMorseModelChart hw hS G₀ hfirst H bordered j
+      (innerModelChainPiece (innerMorseInnerCenter K))
+      (innerModelChainPiece (innerMorseInnerTailSlot K side p)) column
+      side (innerMorseInnerTailIndex S.chain.index K side p)
+      (innerMorseInnerTailIndex_bounds S.chain.index K side p).1
+      (innerMorseInnerTailPiece_ne_center K side p) hleft hright hB M))
 
 include hleft hright hB hpiece
 

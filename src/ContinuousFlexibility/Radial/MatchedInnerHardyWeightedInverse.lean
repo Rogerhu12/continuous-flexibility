@@ -47,6 +47,8 @@ local notation "U" => fun sign : Bool =>
     (innerWeight_mul_bound_one loss (W sign) hlossBound (B sign) (hB sign))
 local notation "sets" => (fun p : Fin (n + 1) => Ioo (G.left p) (G.right p))
 
+include hpos hInv
+
 /-- Model columns, gap endpoint energy and local Dirichlet costs give
 both signed bounds for the same actual inverse after the fixed loss. -/
 theorem inverse_localized_hardy_bound_of_piece_data

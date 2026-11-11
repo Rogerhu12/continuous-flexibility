@@ -56,6 +56,8 @@ local notation "U" => fun sign : Bool =>
     (innerWeight_mul_bound_one loss (W sign) hlossBound (B sign) (hB sign))
 local notation "sets" => (fun p : Fin (n + 1) => Ioo (G.left p) (G.right p))
 
+include hpos hInv
+
 /-- Primitive actual piece, model-column and gap estimates give the
 same physical inverse after the actual fixed output loss. -/
 theorem inverse_localized_bound_of_piece_data

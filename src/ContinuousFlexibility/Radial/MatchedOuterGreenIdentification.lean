@@ -44,22 +44,22 @@ local notation "idx" => matchedOuterGreenIndex
 
 variable {c : Bool → ℝ} {P ZP Q ZQ : Bool → ℝ → ℝ}
   (H : ∀ side : Bool, OuterFundamentalStatePair
-    (fun x => M.boundaryScale (idx side) / outerTailOutwardWeight D side x)
+    (fun x => M.boundaryScale (matchedOuterGreenIndex side) / outerTailOutwardWeight D side x)
     (fun x => (M.frequency : ℝ) ^ 2 * deriv (outerTailOutwardWeight D side) x /
-      (M.boundaryScale (idx side) * x))
+      (M.boundaryScale (matchedOuterGreenIndex side) * x))
     (P side) (ZP side) (Q side) (ZQ side)
-    (outerOutwardRadius side (cut side)) (c side)
+    (outerOutwardRadius side (matchedOuterGreenCut M side)) (c side)
     (outerOutwardRadius side (tailPhysicalEndpoint D side)))
-  (hV : ∀ side, MemLp (H side).V 2 (outerWholeMeasure D side (cut side)))
-  (R : ∀ side : Bool, OuterWholeL2 D side (cut side) →L[ℝ]
-    OuterWholeL2 D side (cut side))
-  (hR : ∀ side (f : OuterWholeL2 D side (cut side)),
-    (R side f : ℝ → ℝ) =ᵐ[outerWholeMeasure D side (cut side)] fun x =>
-      ∫ y, outerGreenKernel (M.boundaryScale (idx side))
-        (H side).U (H side).V x y * f y ∂outerWholeMeasure D side (cut side))
+  (hV : ∀ side, MemLp (H side).V 2 (outerWholeMeasure D side (matchedOuterGreenCut M side)))
+  (R : ∀ side : Bool, OuterWholeL2 D side (matchedOuterGreenCut M side) →L[ℝ]
+    OuterWholeL2 D side (matchedOuterGreenCut M side))
+  (hR : ∀ side (f : OuterWholeL2 D side (matchedOuterGreenCut M side)),
+    (R side f : ℝ → ℝ) =ᵐ[outerWholeMeasure D side (matchedOuterGreenCut M side)] fun x =>
+      ∫ y, outerGreenKernel (M.boundaryScale (matchedOuterGreenIndex side))
+        (H side).U (H side).V x y * f y ∂outerWholeMeasure D side (matchedOuterGreenCut M side))
   (hline : ∀ side (q : ℝ × ℝ),
     outerStatePair (H side).entrance q = 0 ↔
-      outerStatePair (M.A (idx side) (idx side), M.B (idx side) (idx side)) q = 0)
+      outerStatePair (M.A (matchedOuterGreenIndex side) (matchedOuterGreenIndex side), M.B (matchedOuterGreenIndex side) (matchedOuterGreenIndex side)) q = 0)
 
 include hD hB ha hm hb hlam H hV R hR hline
 

@@ -84,6 +84,9 @@ theorem retainedMorseModelChart_endpoint_weight_bound
   apply A.endpoint_weight_le_of_kappa (fun k => (M.column k).inwardEnergy)
     (by
       intro k
+      change A.kappa k =
+        (P.sideHeight side * morseChainAmplitude S.chain S.sigma m) *
+          (1 : ℝ) ^ 2 * (M.column k).inwardEnergy
       simpa only [one_pow, mul_one] using
         (P.retainedMorseModelChart_kappa hw hS G₀ hband H bordered j central piece column
           side m hm haway hleft hright hB M k)) ?_ i
