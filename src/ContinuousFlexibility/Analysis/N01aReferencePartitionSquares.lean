@@ -32,7 +32,9 @@ theorem radialPartition_square_bound {D : ReferenceData} (hD : RadialPartition D
     by_contra hne
     exact hm ((hB r).1.mem_toFinset.mpr hne)
   have hsum : (∑ m ∈ s, D.localizer m r) = 1 := by
-    rw [← tsum_eq_sum hout]
+    have heq : (∑' m : ℕ, D.localizer m r) = ∑ m ∈ s, D.localizer m r :=
+      tsum_eq_sum hout
+    rw [← heq]
     exact (hD.2.2.2.2.1 r hr).2
   have hsquare : (∑' m, (D.localizer m r * a) ^ 2) =
       ∑ m ∈ s, (D.localizer m r * a) ^ 2 := by
@@ -129,13 +131,14 @@ theorem exists_radialPartition_integral_square_bound {D : ReferenceData}
     (radialPhysicalMeasure_ae_radialCore D).mono fun p hp => hbound p.1 hp (f p)
   have hfi : Integrable (fun p => f p ^ 2) (radialPhysicalMeasure D) :=
     (hq.const_mul (B : ℝ)).mono' (hf.aemeasurable_sq hD).aestronglyMeasurable
-      (hmajor.mono fun p hp => by simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hp)
+      (hmajor.mono fun p hp => by
+        simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (f p))] using hp)
   refine ⟨hfi, ?_⟩
   have hlim := integral_mono_ae hfi (hq.const_mul (B : ℝ)) hmajor
   rw [integral_const_mul] at hlim
   have hnormsum : Summable (fun m =>
       ∫ p, ‖(D.localizer m p.1 * f p) ^ 2‖ ∂radialPhysicalMeasure D) := by
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hsum
+    simpa only [Real.norm_eq_abs, abs_pow, sq_abs] using hsum
   rw [← integral_tsum_of_summable_integral_norm (fun m => hf.integrable_square m) hnormsum]
     at hlim
   simp_rw [integral_reference_cell_square hab hf] at hlim

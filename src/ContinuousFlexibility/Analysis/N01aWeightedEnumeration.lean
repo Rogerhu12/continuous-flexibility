@@ -94,7 +94,7 @@ theorem n01aWeightEnumeration_surjective (f : α → ℕ)
   have ha (n : ℕ) : n01aWeightEnumeration f n ≠ a := fun h => hnot ⟨n, h⟩
   have hout (n : ℕ) : a ∉ n01aWeightPrefix f n := by
     induction n with
-    | zero => simp only [n01aWeightPrefix_zero, Finset.notMem_empty]
+    | zero => simp [n01aWeightPrefix_zero]
     | succ n ih =>
       rw [n01aWeightPrefix_succ, Finset.mem_insert]
       exact not_or.mpr ⟨(ha n).symm, ih⟩
@@ -112,7 +112,7 @@ theorem n01aWeightEnumeration_le_of_count (f : α → ℕ)
     (hf : ∀ N : ℕ, {a | f a ≤ N}.Finite) {n N : ℕ}
     (hcount : n < {a | f a ≤ N}.ncard) : f (n01aWeightEnumeration f n) ≤ N := by
   have hc : (n01aWeightPrefix f n).card < (hf N).toFinset.card := by
-    rw [n01aWeightPrefix_card, ← Set.ncard_eq_toFinset_card]
+    rw [n01aWeightPrefix_card, ← Set.ncard_eq_toFinset_card _ (hf N)]
     exact hcount
   obtain ⟨a, ha, hout⟩ := Finset.exists_mem_notMem_of_card_lt_card hc
   exact ((n01aWeightNext_spec f (n01aWeightPrefix f n)).2 a hout).trans
@@ -126,6 +126,6 @@ theorem n01aWeightEnumeration_le_of_finite_family (f : α → ℕ)
   apply n01aWeightEnumeration_le_of_count f hf
   apply lt_of_lt_of_le hcard
   have hs : S ⊆ (hf N).toFinset := fun a ha => (hf N).mem_toFinset.mpr (hweight a ha)
-  simpa only [← Set.ncard_eq_toFinset_card] using Finset.card_le_card hs
+  simpa only [← Set.ncard_eq_toFinset_card _ (hf N)] using Finset.card_le_card hs
 
 end ContinuousFlexibility.Statements

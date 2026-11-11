@@ -22,8 +22,9 @@ variable {ι κ Ω : Type*}
 theorem n01a_tsum_fiber_eq_sum (σ : ι → κ)
     (hσ : ∀ j, {i | σ i = j}.Finite) (f : ι → ℝ) (j : κ) :
     (∑' i : {i | σ i = j}, f i) = ∑ i ∈ n01aCoarseningFiber σ hσ j, f i := by
-  simpa only [n01aCoarseningFiber, Set.Finite.coe_toFinset] using
-    (Finset.tsum_subtype' (hσ j).toFinset f)
+  have ht := Finset.tsum_subtype' (hσ j).toFinset f
+  rw [(hσ j).coe_toFinset] at ht
+  exact ht
 
 /-- Regrouping a nonnegative real series along finite fibers preserves summability. -/
 theorem n01a_summable_fiber_sum_iff (σ : ι → κ)

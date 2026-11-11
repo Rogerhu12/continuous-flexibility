@@ -80,6 +80,7 @@ theorem radialWeakPairing_cosine_test {D : ReferenceData} {ψ : ℝ → ℝ}
   simp_rw [hsep]
   apply intervalIntegral.integral_congr
   intro r _
+  dsimp only
   rw [show (fun θ => u (r, θ) *
       (Radial.radialJacobi ((j : ℝ) ^ 2) D.w ψ r * Radial.cosineMode j θ)) =
       (fun θ => Radial.radialJacobi ((j : ℝ) ^ 2) D.w ψ r *
@@ -101,6 +102,7 @@ theorem radialTest_cosine {D : ReferenceData} {ψ : ℝ → ℝ}
     unfold Radial.cosineMode
     rw [mul_add, Real.cos_add_nat_mul_two_pi]
   · intro r hr θ
+    dsimp only
     rw [image_eq_zero_of_notMem_tsupport hr, zero_mul]
 
 theorem referenceColumn_cosine_test (D : ReferenceData) (ψ : ℝ → ℝ) :
@@ -110,6 +112,7 @@ theorem referenceColumn_cosine_test (D : ReferenceData) (ψ : ℝ → ℝ) :
       ∫ r in D.a..D.b, referenceColumn D r * ψ r := by
   apply intervalIntegral.integral_congr
   intro r _
+  dsimp only
   rw [show (fun θ => referenceColumn D r * Radial.cosineMode 2 θ *
       (ψ r * Radial.cosineMode 2 θ)) =
       (fun θ => (referenceColumn D r * ψ r) *

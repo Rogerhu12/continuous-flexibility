@@ -67,8 +67,8 @@ theorem n01aJacobiEnergy_backward_component_transfer {D : ReferenceData}
   have hvariation := n01a_totalVariation_le_component_drops_of_cover hD ha hb hab S hcover
   exact (n01aJacobiEnergy_backward_transfer hD hu ha hb hab hJ).trans
     (mul_le_mul_of_nonneg_left
-      (Real.exp_le_exp.mpr (add_le_add_left
-        (mul_le_mul_of_nonneg_left hvariation hκ) (b - a)))
+      (Real.exp_le_exp.mpr (add_le_add le_rfl
+        (mul_le_mul_of_nonneg_left hvariation hκ)))
       (n01aJacobiEnergy_nonneg u b))
 
 /-- A concrete finite cover and pointwise energy decay force enough full
@@ -101,9 +101,8 @@ theorem n01a_component_energy_decay_bound {D : ReferenceData}
         L + 2 * (S.card : ℝ) * M := by
     have hh := add_le_add hlog (mul_le_mul_of_nonneg_left hsum (by norm_num : (0 : ℝ) ≤ 2))
     simpa only [mul_assoc] using hh
-  exact hforced.trans (sub_le_sub_right
-    (add_le_add_right (add_le_add_left (mul_le_mul_of_nonneg_left hupper hκ) (b - a))
-      (Real.log A)) (Real.log (n01aJacobiEnergy u a)))
+  exact hforced.trans (sub_le_sub
+    (add_le_add (add_le_add le_rfl (mul_le_mul_of_nonneg_left hupper hκ)) le_rfl) le_rfl)
 
 /-- Cubic decay and quadratic cost per component give a linear count. -/
 theorem n01a_linear_count_of_cubic_bound {c B x count : ℝ}
@@ -120,7 +119,7 @@ theorem n01a_linear_count_of_cubic_bound {c B x count : ℝ}
       _ ≤ B * (1 + x ^ 2) * (count + 1) := hbound
       _ ≤ B * (2 * x ^ 2) * (count + 1) := hcost
       _ = (2 * B * (count + 1)) * x ^ 2 := by ring
-  have hlinear := (mul_le_mul_right (sq_pos_of_pos hxpos)).mp hcancel
+  have hlinear := (mul_le_mul_iff_left₀ (sq_pos_of_pos hxpos)).mp hcancel
   have hquot : (c / (2 * B)) * x ≤ count + 1 := by
     rw [div_mul_eq_mul_div]
     apply (div_le_iff₀ (mul_pos (by norm_num : (0 : ℝ) < 2) hB)).mpr

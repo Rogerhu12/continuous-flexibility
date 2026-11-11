@@ -106,7 +106,7 @@ theorem referenceMode_memLp_two_and_integral_bound {μ : Measure ℝ} [SFinite �
     apply hmajor.mono'
       (hm.aemeasurable.pow_const 2).aestronglyMeasurable
     filter_upwards [hb] with r hr
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hr
+    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (referenceMode u j r))] using hr
   refine ⟨(memLp_two_iff_integrable_sq hm).mpr hsq, ?_⟩
   calc
     _ ≤ ∫ r, referenceModeL2Constant ^ 2 *

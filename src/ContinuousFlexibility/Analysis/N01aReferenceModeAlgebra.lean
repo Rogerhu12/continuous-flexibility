@@ -67,7 +67,7 @@ theorem referenceMode_congr_ae {D : ReferenceData} {u v : PolarPoint → ℝ}
   rw [intervalIntegral.integral_of_le (by positivity : (0 : ℝ) ≤ 2 * Real.pi),
     intervalIntegral.integral_of_le (by positivity : (0 : ℝ) ≤ 2 * Real.pi)]
   congr 1
-  exact integral_congr_ae (hr.mono fun θ hθ => by rw [hθ])
+  exact integral_congr_ae (hr.mono fun θ hθ => by dsimp only; rw [hθ])
 
 /-- The natural radial Hilbert measure is bounded above by a finite constant
 times ordinary radial measure on the fixed physical core. -/

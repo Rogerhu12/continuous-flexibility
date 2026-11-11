@@ -17,6 +17,8 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ContDiff Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 theorem hasDerivAt_opticalTravel_const_mul_control {w χ : ℝ → ℝ} {l h d : ℝ}
     (hd : HasDerivAt (fun t => opticalTravel (opticalLogPerturbation w χ t) l h) d 0)
     (c : ℝ) :
@@ -24,7 +26,7 @@ theorem hasDerivAt_opticalTravel_const_mul_control {w χ : ℝ → ℝ} {l h d :
       (fun t => opticalTravel (opticalLogPerturbation w (fun r => c * χ r) t) l h)
       (d * c) 0 := by
   have hlin : HasDerivAt (fun t : ℝ => t * c) c 0 := by
-    simpa only [one_mul] using (hasDerivAt_id (0 : ℝ)).mul_const c
+    simpa only [one_mul, id_eq] using (hasDerivAt_id (0 : ℝ)).mul_const c
   have heq :
       (fun t => opticalTravel (opticalLogPerturbation w (fun r => c * χ r) t) l h) =
       (fun t => opticalTravel (opticalLogPerturbation w χ t) l h) ∘ (fun t => t * c) := by
@@ -47,8 +49,11 @@ theorem contDiff_n01aOpticalControl {w : ℝ → ℝ} {l h δ : ℝ}
     (hl : 0 < l) (hδ : 0 < δ) (hw : ContDiff ℝ ∞ w)
     (hpos : ∀ r ∈ Icc l h, 0 < w r)
     (hrootL : deriv w l = 0) (hrootR : deriv w h = 0) :
-    ContDiff ℝ ∞ (n01aOpticalControl w l h δ) :=
-  (contDiff_n01aOpticalRawControl hl hδ hw hpos hrootL hrootR).const_mul _
+    ContDiff ℝ ∞ (n01aOpticalControl w l h δ) := by
+  change ContDiff ℝ ∞ (fun r =>
+    n01aOpticalNormalizer w l h δ * n01aOpticalRawControl w l h δ r)
+  exact contDiff_const.mul
+    (contDiff_n01aOpticalRawControl hl hδ hw hpos hrootL hrootR)
 
 theorem tsupport_n01aOpticalControl_subset {w : ℝ → ℝ} {l h δ : ℝ}
     (hl : 0 < l) (hδ : 0 < δ) (hw : ContDiff ℝ ∞ w)
@@ -83,7 +88,11 @@ theorem hasDerivAt_n01aOpticalControl_travel {w : ℝ → ℝ} {l h δ : ℝ}
     dsimp only [n01aOpticalNormalizer]
     field_simp [hkernel.ne']
     <;> ring
-  simpa only [n01aOpticalControl, hnormalize] using hd
+  change HasDerivAt (fun t => opticalTravel
+    (opticalLogPerturbation w
+      (fun r => n01aOpticalNormalizer w l h δ * n01aOpticalRawControl w l h δ r) t)
+    l h) 1 0
+  simpa only [hnormalize] using hd
 
 /-- Positivity and a reciprocal bound follow from the actual peak interval. -/
 theorem n01aOpticalNormalizer_bound {w : ℝ → ℝ} {l h δ K β p : ℝ}
