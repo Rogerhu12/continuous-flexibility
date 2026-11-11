@@ -215,8 +215,17 @@ theorem exists_innerRadialModelPoissonPiece (ξ : EuclideanSpace ℝ (Fin n)) :
     rw [hm, InnerBufferLocalizedData.physicalFluxMatrix, Matrix.add_mulVec,
       Pi.add_apply, Matrix.mulVec_diagonal]
     simp only [Matrix.mulVec_apply_eq_sum, Fin.sum_univ_two, innerChainBoundaryCLM_apply]
-    dsimp only [z]
-    fin_cases k <;> norm_num <;> ring
+    have hpoly (t d : Fin 2 → ℝ) (e : Matrix (Fin 2) (Fin 2) ℝ) (i : Fin 2) :
+        t 0 * ((if i = 0 then d i else 0) + e i 0) +
+            t 1 * ((if i = 1 then d i else 0) + e i 1) =
+          d i * t i + (e i 0 * t 0 + e i 1 * t 1) := by
+      fin_cases i <;>
+        simp only [eq_self_iff_true, show (0 : Fin 2) ≠ 1 by decide,
+          show (1 : Fin 2) ≠ 0 by decide, ite_true, ite_false, zero_add] <;> ring
+    exact hpoly z
+      (innerLiouvilleBoundaryKappa lam scale (bufferCut B)
+        (fun l => (M.column l).inwardEnergy))
+      (M.physicalFluxError lam (fun l => scale (bufferCut B l))) k
 
 end ModelPoissonPiece
 
