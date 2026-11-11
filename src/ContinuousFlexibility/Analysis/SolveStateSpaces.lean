@@ -132,16 +132,36 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
       · intro m θ
         change (S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m (-θ) =
           -(S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m θ
-        rw [hodd, hodd, neg_neg]
-        ring
+        calc
+          (S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m (-θ) =
+              ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m (-θ) -
+                (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m (-(-θ))) / 2 :=
+            hodd x.2.2.2 m (-θ)
+          _ = ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m (-θ) -
+                (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m θ) / 2 :=
+            congrArg (fun t : ℝ =>
+              ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m (-θ) -
+                (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m t) / 2) (neg_neg θ)
+          _ = -(((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m θ -
+                (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m (-θ)) / 2) := by ring
+          _ = -(S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m θ :=
+            congrArg (fun t : ℝ => -t) (hodd x.2.2.2 m θ).symm
     exact (congrArg (stateSector S) (hP x)).mpr hstate
   have hPid (x : AnnularState S) (hx : x ∈ stateSectorSubmodule S) : P x = x := by
     have hm := hmeanFix x.2.2.1 hx.1
     have ho : odd x.2.2.2 = x.2.2.2 := by
       apply hCM.2.2.2.2.2.1
       funext m θ
-      rw [hodd, hx.2 m θ]
-      ring
+      calc
+        (S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m θ =
+            ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m θ -
+              (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m (-θ)) / 2 :=
+          hodd x.2.2.2 m θ
+        _ = ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m θ -
+              -(S.circle (3 / 4 : ℝ)).decode x.2.2.2 m θ) / 2 :=
+          congrArg (fun t : ℝ =>
+            ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m θ - t) / 2) (hx.2 m θ)
+        _ = (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m θ := by ring
     exact (hP x).trans (Prod.ext rfl (Prod.ext rfl (Prod.ext hm ho)))
   have hpair := solve_isTameLinear_prodMap
     (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)
