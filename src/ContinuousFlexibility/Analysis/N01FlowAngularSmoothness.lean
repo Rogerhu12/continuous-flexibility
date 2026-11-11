@@ -29,6 +29,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1)
 
+include hN01 hS hT hz hsector
+
 theorem N01Properties.characteristicAngularDerivative_angularRegular
     (m : ℕ) (hab : C.left m ≤ C.right m) (n : ℕ) :
     Analysis.AngularRegular n (fun r θ =>

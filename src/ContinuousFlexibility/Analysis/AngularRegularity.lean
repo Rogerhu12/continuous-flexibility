@@ -47,7 +47,7 @@ theorem angularRegular_time (n : ℕ) (k : ℝ → ℝ) (hk : Continuous k) :
   induction n generalizing k with
   | zero => exact hk.comp continuous_fst
   | succ n ih =>
-    refine ⟨hk.comp continuous_fst, fun _ => differentiable_const, ?_⟩
+    refine ⟨hk.comp continuous_fst, fun r => differentiable_const (k r), ?_⟩
     exact (ih (fun _ => 0) continuous_const).congr fun r θ => by simp
 
 theorem AngularRegular.add {n : ℕ} {F G : ℝ → ℝ → ℝ}

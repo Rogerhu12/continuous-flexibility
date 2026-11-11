@@ -33,6 +33,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1)
 
+include hN01 hS hT hz hsector
+
 theorem N01Properties.minusCharacteristicSpeed_continuousAt
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     ContinuousAt (minusCharacteristicSpeed (originalCoefficients D S C z)) p := by
@@ -72,18 +74,23 @@ theorem N01Properties.minusFlow_hasStrictFDerivAt
   have hlin : Continuous (fun c : ℝ => ContinuousLinearMap.toSpanSingleton ℝ c) := by
     simpa only [ContinuousLinearMap.lsmul_flip_apply] using
       (ContinuousLinearMap.lsmul ℝ ℝ : ℝ →L[ℝ] ℝ →L[ℝ] ℝ).flip.continuous
-  apply hasStrictFDerivAt_uncurry_coprod
+  have hpartial := hasStrictFDerivAt_uncurry_coprod
     (f := C.minusFlow z m)
     (f₁ := fun r θ => ContinuousLinearMap.toSpanSingleton ℝ
       (minusCharacteristicSpeed (originalCoefficients D S C z) (r, C.minusFlow z m r θ)))
     (f₂ := fun r θ => ContinuousLinearMap.toSpanSingleton ℝ (deriv (C.minusFlow z m r) θ))
-  · filter_upwards [hopen] with q hq
-    exact ((hflow z hz m q.2).2.2.1 q.1 hq.1).hasFDerivAt
-  · filter_upwards [hopen] with q hq
-    exact ((N01Properties.minusFlow_differentiable S C z m hN01 hz
-      ⟨hq.1.1.le, hq.1.2.le⟩) q.2).hasDerivAt.hasFDerivAt
-  · exact hlin.continuousAt.comp hv
-  · exact hlin.continuousAt.comp hJ
+    (by
+      filter_upwards [hopen] with q hq
+      simpa only [Function.uncurry_def] using
+        ((hflow z hz m q.2).2.2.1 q.1 hq.1).hasFDerivAt)
+    (by
+      filter_upwards [hopen] with q hq
+      simpa only [Function.uncurry_def] using
+        ((N01Properties.minusFlow_differentiable S C z m hN01 hz
+          ⟨hq.1.1.le, hq.1.2.le⟩) q.2).hasDerivAt.hasFDerivAt)
+    (by simpa only [Function.uncurry_def] using hlin.continuousAt.comp hv)
+    (by simpa only [Function.uncurry_def] using hlin.continuousAt.comp hJ)
+  simpa only [Function.uncurry_def] using hpartial
 
 theorem N01Properties.returnCorrectedMinusFlow_hasDerivAt_of_physical
     (χ : ℕ → ℝ → ℝ) (m : ℕ) (r θ : ℝ)
@@ -95,6 +102,7 @@ theorem N01Properties.returnCorrectedMinusFlow_hasDerivAt_of_physical
   apply hN01.returnCorrectedMinusFlow_hasDerivAt χ hz hsector m r θ hr hχ hχrange
   exact (hN01.minusFlow_hasStrictFDerivAt hS hT hz hsector m _ hr).hasFDerivAt.differentiableAt
 
+omit hS hT hsector in
 theorem N01Properties.returnCorrectedMinusFlow_continuousOn_of_physical
     (χ : ℕ → ℝ → ℝ) (m : ℕ) (θ : ℝ) (hχ : Continuous (χ m)) :
     ContinuousOn (fun r => returnCorrectedMinusFlow S C χ z m r θ)

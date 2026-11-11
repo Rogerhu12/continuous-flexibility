@@ -105,8 +105,10 @@ variable (hS : IsCircleModel T γ S) (travel margin : ℕ → ℝ)
 theorem circleReturnInverseLinear_decode (u : S.Space) (m : ℕ) :
     S.decode (circleReturnInverseLinear hS travel margin hmargin hdiv k hA hbound hM hH u) m =
       circleReturnSolution (S.decode u m) (travel m) := by
-  rw [circleReturnInverseLinear, liftCircleLinear_decode]
-  exact circleReturnInverseFieldLinear_apply hS travel margin hmargin hdiv u m
+  have hdecode := liftCircleLinear_decode hS
+    (circleReturnInverseFieldLinear hS travel margin hmargin hdiv)
+    (circleReturnInverseField_member hS travel margin hmargin hdiv k hA hbound hM hH) u
+  exact congrFun hdecode m
 
 theorem circleReturnInverseLinear_tame :
     IsTameLinear S.grading S.grading

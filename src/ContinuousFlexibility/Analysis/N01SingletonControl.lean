@@ -45,9 +45,11 @@ theorem singletonKappaDirection_grading
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ))) (m s : ℕ) :
     stateGrading S s (singletonKappaDirection hS m) =
       (S.circle (3 / 4 : ℝ)).grading s (circleSingletonLinear hS m 1) := by
-  simp only [stateGrading, pairGrading, Seminorm.add_apply, Seminorm.comp_apply,
-    LinearMap.fst_apply, LinearMap.snd_apply, singletonKappaDirection,
-    map_zero, zero_add, add_zero]
+  have hz₁ : heightPairGrading S s (0 : HeightPair S) = 0 := map_zero _
+  have hz₂ : realGrading s (0 : ℝ) = 0 := map_zero _
+  have hz₃ : (S.circle (3 / 4 : ℝ)).grading s (0 : CircleSpace S) = 0 := map_zero _
+  simp only [stateGrading, pairGrading_apply, singletonKappaDirection,
+    hz₁, hz₂, hz₃, zero_add, add_zero]
 
 theorem singletonKappaDirection_grading_le
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ))) (m s : ℕ)
@@ -61,23 +63,24 @@ theorem singletonKappaDirection_grading_le
 theorem singletonKappaLine_control
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (href : referenceStateConditions D S C) (m : ℕ) (t : ℝ) :
-    (C.referenceState + t • singletonKappaDirection hS m).2.2.1 =
+    (C.referenceState + (t • singletonKappaDirection hS m : AnnularState S)).2.2.1 =
       circleSingletonLinear hS m t := by
   change C.referenceState.2.2.1 + t • circleSingletonLinear hS m 1 = _
-  rw [href.2.2.2.1, zero_add, ← map_smul]
-  simp only [smul_eq_mul, mul_one]
+  rw [href.2.2.2.1, zero_add]
+  have hsmul := (circleSingletonLinear hS m).map_smul t (1 : ℝ)
+  simpa only [smul_eq_mul, mul_one] using hsmul.symm
 
 theorem singletonKappaLine_nu
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (href : referenceStateConditions D S C) (m : ℕ) (t : ℝ) :
-    (C.referenceState + t • singletonKappaDirection hS m).2.1 = 0 := by
+    (C.referenceState + (t • singletonKappaDirection hS m : AnnularState S)).2.1 = 0 := by
   change C.referenceState.2.1 + t • (0 : ℝ) = 0
   rw [href.2.2.1, smul_zero, zero_add]
 
 theorem singletonKappaLine_mean
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (href : referenceStateConditions D S C) (m n : ℕ) (t : ℝ) :
-    stateKappa S (C.referenceState + t • singletonKappaDirection hS m) n =
+    stateKappa S (C.referenceState + (t • singletonKappaDirection hS m : AnnularState S)) n =
       if n = m then t else 0 := by
   unfold stateKappa
   rw [singletonKappaLine_control hS href]
@@ -86,7 +89,7 @@ theorem singletonKappaLine_mean
 theorem singletonKappaLine_sector
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (href : referenceStateConditions D S C) (m : ℕ) (t : ℝ) :
-    stateSector S (C.referenceState + t • singletonKappaDirection hS m) := by
+    stateSector S (C.referenceState + (t • singletonKappaDirection hS m : AnnularState S)) := by
   constructor
   · intro n θ φ
     rw [singletonKappaLine_control hS href, circleSingletonLinear_decode]
@@ -100,7 +103,7 @@ theorem singletonKappaLine_sector
 theorem singletonKappaLine_profile
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (href : referenceStateConditions D S C) (m : ℕ) (t : ℝ) :
-    stateProfile D S C (C.referenceState + t • singletonKappaDirection hS m) =
+    stateProfile D S C (C.referenceState + (t • singletonKappaDirection hS m : AnnularState S)) =
       opticalLogPerturbation D.w (C.control m) t := by
   exact stateProfile_of_single_kappa (singletonKappaLine_nu hS href m t)
     (fun n => singletonKappaLine_mean hS href m n t)
@@ -109,7 +112,7 @@ theorem singletonKappaLine_mem
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (m base : ℕ) {ε t : ℝ} (hε : 0 < ε)
     (ht : |t| * stateGrading S base (singletonKappaDirection hS m) < ε) :
-    (C.referenceState + t • singletonKappaDirection hS m, 0) ∈
+    (C.referenceState + (t • singletonKappaDirection hS m : AnnularState S), 0) ∈
       stateNeighborhood S C base ε := by
   constructor
   · simpa only [add_sub_cancel_left, map_smul_eq_mul, Real.norm_eq_abs] using ht
@@ -119,14 +122,14 @@ theorem singletonKappaLine_eventually_mem
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (m base : ℕ) {ε : ℝ} (hε : 0 < ε) :
     ∀ᶠ t in 𝓝 (0 : ℝ),
-      (C.referenceState + t • singletonKappaDirection hS m, 0) ∈
+      (C.referenceState + (t • singletonKappaDirection hS m : AnnularState S), 0) ∈
         stateNeighborhood S C base ε := by
   have hc : Continuous (fun t : ℝ =>
       |t| * stateGrading S base (singletonKappaDirection hS m)) :=
     continuous_abs.mul continuous_const
   have hsmall : ∀ᶠ t in 𝓝 (0 : ℝ),
       |t| * stateGrading S base (singletonKappaDirection hS m) < ε :=
-    (isOpen_lt hc continuous_const).mem_nhds (by simpa only [abs_zero, zero_mul] using hε)
+    (isOpen_lt hc continuous_const).mem_nhds (by simpa only [Set.mem_setOf_eq, abs_zero, zero_mul] using hε)
   exact hsmall.mono (fun _ ht => singletonKappaLine_mem hS m base hε ht)
 
 theorem N01Properties.minusFlow_singletonKappaLine

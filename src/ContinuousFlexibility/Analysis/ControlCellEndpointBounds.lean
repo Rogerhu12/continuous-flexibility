@@ -38,7 +38,7 @@ private theorem lt_endpointX_one_of_distance_lt {d L : ℝ} (hd : 0 < d) (hL : 0
     L = Real.sqrt (L ^ 2) := (Real.sqrt_sq hL).symm
     _ < Real.sqrt (Real.log (1 / d)) := Real.sqrt_lt_sqrt (sq_nonneg _) hlog
 
-private theorem abs_endpointX_scale_sub_le {d0 d : ℝ}
+theorem abs_endpointX_scale_sub_le {d0 d : ℝ}
     (hd0 : 0 < d0) (hd : 0 < d) (hdd0 : d < d0) (hdd1 : d < 1) :
     |endpointX d0 d - endpointX 1 d| ≤ Real.sqrt |Real.log d0| := by
   let a := endpointX d0 d

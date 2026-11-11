@@ -32,10 +32,10 @@ def stateChartLine (S : PhysicalSpacesData) (z : AnnularState S × ℝ)
 
 theorem stateChartLine_eq_add_smul (S : PhysicalSpacesData)
     (z : AnnularState S × ℝ) (w : CircleSpace S) (s : ℝ) :
-    stateChartLine S z w s = (z.1 + s • (0, (0, (0, w))), z.2) := by
+    stateChartLine S z w s = (z.1 + s • ((0, (0, (0, w))) : AnnularState S), z.2) := by
   change ((z.1.1, (z.1.2.1, (z.1.2.2.1, z.1.2.2.2 + s • w))), z.2) =
-    ((z.1.1 + s • 0, (z.1.2.1 + s • 0,
-      (z.1.2.2.1 + s • 0, z.1.2.2.2 + s • w))), z.2)
+    ((z.1.1 + s • (0 : HeightPair S), (z.1.2.1 + s • (0 : ℝ),
+      (z.1.2.2.1 + s • (0 : CircleSpace S), z.1.2.2.2 + s • w))), z.2)
   simp only [smul_zero, add_zero]
 
 theorem stateChartLine_leftChart (S : PhysicalSpacesData)
@@ -94,7 +94,16 @@ theorem chartIncrement_isOdd (S : PhysicalSpacesData)
   have hleft : stateLeftChart S z.1 m (-θ) = -stateLeftChart S z.1 m θ := by
     simp only [stateLeftChart, hz.2 m θ]
     ring
-  rw [hw m (-θ), hw m θ, hleft, hv m (stateLeftChart S z.1 m θ)]
+  change (S.circle (3 / 4 : ℝ)).decode w m (-θ) =
+    -(S.circle (3 / 4 : ℝ)).decode w m θ
+  calc
+    (S.circle (3 / 4 : ℝ)).decode w m (-θ) =
+        (S.circle (3 / 4 : ℝ)).decode v m (stateLeftChart S z.1 m (-θ)) := hw m (-θ)
+    _ = (S.circle (3 / 4 : ℝ)).decode v m (-stateLeftChart S z.1 m θ) :=
+      congrArg ((S.circle (3 / 4 : ℝ)).decode v m) hleft
+    _ = -(S.circle (3 / 4 : ℝ)).decode v m (stateLeftChart S z.1 m θ) :=
+      hv m (stateLeftChart S z.1 m θ)
+    _ = -(S.circle (3 / 4 : ℝ)).decode w m θ := congrArg Neg.neg (hw m θ).symm
 
 section ActualVariation
 
@@ -104,6 +113,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1)
+
+include hN01 hS hT hz hsector
 
 theorem N01Properties.minusReturnInverse_chartLine (w : CircleSpace S)
     (hw : IsOddCircle S w) (s : ℝ)
@@ -184,7 +195,7 @@ theorem N01Properties.hasDerivAt_returnResidual_chartDirection
     (hr : ∀ m θ, (S.circle (3 / 4 : ℝ)).decode r m θ = returnResidualField S C z m θ)
     (m : ℕ) (θ : ℝ) :
     HasDerivAt (fun s => returnResidualField S C
-      (z.1 + s • (0, (0, (0, w))), z.2) m θ)
+      (z.1 + s • ((0, (0, (0, w))) : AnnularState S), z.2) m θ)
       (circleRotationDifference S C v m θ + circleChartError S C z r v m θ) 0 := by
   simpa only [stateChartLine_eq_add_smul] using
     N01Properties.hasDerivAt_returnResidual_chartLine hN01 hS hT hz hsector w v r hv hw hr m θ

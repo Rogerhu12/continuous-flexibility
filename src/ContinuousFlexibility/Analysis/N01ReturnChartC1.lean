@@ -40,6 +40,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1) (m : ℕ)
 
+include hN01 hS hT hz hsector
+
 theorem N01Properties.minusReturnInverse_contDiff_one :
     ContDiff ℝ 1 (C.minusReturnInverse z m) := by
   have hcontrol : controlGeometryConditions D S C := hN01.2.2.2.1

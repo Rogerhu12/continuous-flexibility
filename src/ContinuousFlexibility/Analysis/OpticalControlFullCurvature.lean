@@ -97,7 +97,7 @@ theorem normalized_opticalControl_full_curvature_bound
   calc
     2 * l ≤ ((h - l) ^ 2 * (B / l) * D) * l :=
       mul_le_mul_of_nonneg_right hbound hl.le
-    _ = (h - l) ^ 2 * B * D := by field_simp [hl.ne']; ring
+    _ = (h - l) ^ 2 * B * D := by field_simp [hl.ne'] <;> ring
 
 /-- The N01 hypotheses themselves supply every endpoint and support
 premise of the full-component curvature inequality. -/
@@ -125,7 +125,9 @@ theorem N01Properties.control_curvature_product_lower_bound
     · rw [(control_first_second_deriv_zero_off_interval
         (hcontrols m).1 (hcontrols m).2.2 hri).1, abs_zero]
       exact hB
-  · simpa only [opticalTravel, opticalSpeed, opticalLogPerturbation] using hunit m
+  · have heq (t : ℝ) : opticalLogPerturbation D.w (C.control m) t =
+        (fun s => D.w s * Real.exp (t * C.control m s)) := rfl
+    simpa only [opticalTravel, opticalSpeed, heq] using hunit m
 
 theorem N01Properties.controlTravel_hasDerivAt_second
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

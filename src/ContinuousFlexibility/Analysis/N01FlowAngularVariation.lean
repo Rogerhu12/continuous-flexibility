@@ -48,6 +48,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1)
 
+include hN01 hS hT hz hsector
+
 theorem N01Properties.characteristic_factors_contDiffAt
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     ContDiffAt ℝ ∞ (characteristicDrift D S C z) p ∧
@@ -56,6 +58,7 @@ theorem N01Properties.characteristic_factors_contDiffAt
     N01Properties.characteristic_coefficient_regular hN01 hS hT hz hsector hp
   exact ⟨hB.div hA ha.ne', contDiffAt_const.div (hDreg.mul hA) (mul_ne_zero hD.ne' ha.ne')⟩
 
+omit hz hsector in
 theorem N01Properties.characteristicRadialRoot_continuousAt
     {r : ℝ} (hr : r ∈ Ioo D.a D.b) :
     ContinuousAt (characteristicRadialRoot D S C z) r := by
@@ -118,6 +121,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1) (m : ℕ)
+
+include hN01 hS hT hz hsector
 
 /-- The actual first angular variation, valid at the right return radius
 as well as in the interior. -/
