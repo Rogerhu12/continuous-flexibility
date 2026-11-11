@@ -129,8 +129,8 @@ theorem zeroModeWeak_ae_affine_resistance
     have hvalue : deriv v x = d * (1 / w x) := by
       rw [mul_one_div]
       exact (eq_div_iff (hwn x hx)).mpr (by simpa only [mul_comm] using hd x hx)
-    have hz := hdv.sub ((zeroModeResistance_hasDerivAt hmid hw.continuous hwn hx).const_mul d)
-    simpa only [Pi.sub_apply, hvalue, sub_self] using hz
+    have hz := hdv.fun_sub ((zeroModeResistance_hasDerivAt hmid hw.continuous hwn hx).const_mul d)
+    simpa only [hvalue, sub_self] using hz
   obtain ⟨c, hc⟩ := isOpen_Ioo.exists_is_const_of_deriv_eq_zero isPreconnected_Ioo
     (fun x hx => (hzero x hx).differentiableAt.differentiableWithinAt)
     (fun x hx => by rw [(hzero x hx).deriv]; rfl)

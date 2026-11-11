@@ -39,7 +39,8 @@ theorem zeroModeHeight_eq_integral
     (a b : ℝ) (w f : ℝ → ℝ) (r : ℝ) :
     zeroModeHeight a b w f r =
       ∫ t in b..r, zeroModeFlux a f t / w t := by
-  exact (intervalIntegral.integral_symm b r).symm
+  exact (intervalIntegral.integral_symm
+    (f := fun t => zeroModeFlux a f t / w t) b r).symm
 
 theorem zeroModeHeight_absolutelyContinuousOnInterval
     {a b : ℝ} {w f : ℝ → ℝ}
@@ -79,8 +80,8 @@ theorem zeroModeHeight_hasDerivAt_of_integrable
   have hc := zeroModeQuot_continuousOn_of_integrable hw hwn hf
   have hd := (intervalIntegral.integral_hasDerivAt_left hqr
     (ContinuousOn.stronglyMeasurableAtFilter isOpen_Ioo hc r hr)
-    (hc.continuousAt (isOpen_Ioo.mem_nhds hr))).neg
-  simpa only [zeroModeHeight, Pi.neg_apply, neg_neg] using hd
+    (hc.continuousAt (isOpen_Ioo.mem_nhds hr))).fun_neg
+  simpa only [zeroModeHeight, neg_neg] using hd
 
 theorem zeroModeHeight_flux_of_integrable
     {a b : ℝ} {w f : ℝ → ℝ}

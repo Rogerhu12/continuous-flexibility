@@ -49,7 +49,7 @@ theorem zeroMode_cellIndex_le_add_of_endpointDistance_le
     calc
       (C 0) ^ 2 ≤ exp (C 0) * exp (C 0) := by
         nlinarith only [mul_le_mul hCe hCe hC0.le (exp_pos (C 0)).le]
-      _ = exp (2 * C 0) := by rw [← exp_add]; congr 1; ring
+      _ = exp (2 * C 0) := by rw [← exp_add]; congr 1 <;> ring
   have hexp :
       exp (-((D.cellIndex m : ℝ) + 1) ^ 2) ≤
         exp (2 * C 0 - (D.cellIndex k : ℝ) ^ 2) := by
@@ -57,7 +57,7 @@ theorem zeroMode_cellIndex_le_add_of_endpointDistance_le
       _ ≤ (C 0) ^ 2 * exp (-(D.cellIndex k : ℝ) ^ 2) := he
       _ ≤ exp (2 * C 0) * exp (-(D.cellIndex k : ℝ) ^ 2) :=
         mul_le_mul_of_nonneg_right hCe2 (exp_pos _).le
-      _ = _ := by rw [← exp_add]; congr 1; ring
+      _ = _ := by rw [← exp_add]; congr 1 <;> ring
   have hsq := exp_le_exp.mp hexp
   by_contra hle
   have hk : D.cellIndex m + K + 1 ≤ D.cellIndex k := by omega

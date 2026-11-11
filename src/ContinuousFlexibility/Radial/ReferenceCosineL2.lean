@@ -53,6 +53,8 @@ theorem referenceCircleCosine_periodic (n : ℕ) :
     Function.Periodic
       (fun θ : ℝ => referenceCircleCosine n (θ : AddCircle Real.pi)) Real.pi := by
   intro θ
+  change referenceCircleCosine n ((θ + Real.pi : ℝ) : AddCircle Real.pi) =
+    referenceCircleCosine n (θ : AddCircle Real.pi)
   rw [AddCircle.coe_add_period]
 
 /-- Haar normalization on the period-π circle equals the frozen angular mean. -/
@@ -63,6 +65,7 @@ theorem referenceCircle_integral_eq_angularMean
   have hp : Function.Periodic
       (fun θ : ℝ => f (θ : AddCircle Real.pi)) Real.pi := by
     intro θ
+    change f ((θ + Real.pi : ℝ) : AddCircle Real.pi) = f (θ : AddCircle Real.pi)
     rw [AddCircle.coe_add_period]
   have hi : IntervalIntegrable
       (fun θ : ℝ => f (θ : AddCircle Real.pi)) volume 0 Real.pi :=

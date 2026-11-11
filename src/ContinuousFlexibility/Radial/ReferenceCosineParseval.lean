@@ -50,9 +50,14 @@ theorem referencePiFourierCoeff_re {f : ℝ → ℝ}
   simp only [sub_zero, one_div, Complex.real_smul, smul_eq_mul,
     Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero]
   congr 1
-  change RCLike.re (∫ θ in (0 : ℝ)..Real.pi,
-    fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)) = _
-  rw [← intervalIntegral.intervalIntegral_re hg]
+  have hre :
+      (∫ θ in (0 : ℝ)..Real.pi,
+        fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re =
+      ∫ θ in (0 : ℝ)..Real.pi,
+        (fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re := by
+    simpa only [Complex.reCLM_apply] using
+      (Complex.reCLM.intervalIntegral_comp_comm hg).symm
+  rw [hre]
   apply intervalIntegral.integral_congr_ae
   filter_upwards with θ
   intro hθ

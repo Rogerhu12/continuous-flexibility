@@ -83,6 +83,7 @@ private def densityMultiplierLinear (μ ν : Measure ℝ) (hμν : μ ≪ ν) (c
       densityMultiplierValue_ae μ ν c hmem u,
       Lp.coeFn_smul a (densityMultiplierValue μ ν c hmem u),
       hμν.ae_eq (Lp.coeFn_smul a u)] with r hsmul hu hout hin
+    simp only [RingHom.id_apply]
     rw [hout, Pi.smul_apply, hsmul, hu, hin, Pi.smul_apply]
     simp only [smul_eq_mul]
     ring
@@ -222,6 +223,9 @@ theorem matchedPhysicalSourceFactor_ae {D : ReferenceData}
     (m : ℕ) (f : MatchedPhysicalL2 D) :
     (matchedPhysicalSourceFactor D hD hP m f).1 =ᵐ[radialHilbertMeasure D]
       fun r => -((Function.support (D.localizer m)).indicator f r) / matchingDensity D r := by
+  change (densityMultiplierValue (radialHilbertMeasure D)
+    (volume.restrict (radialCore D)) (physicalCellSourceCoefficient D m)
+    (physicalCellSource_memLp hD hP m) f : ℝ → ℝ) =ᵐ[radialHilbertMeasure D] _
   simpa only [physicalCellSourceCoefficient_mul] using
     densityMultiplierValue_ae (radialHilbertMeasure D) (volume.restrict (radialCore D))
       (physicalCellSourceCoefficient D m) (physicalCellSource_memLp hD hP m) f
@@ -236,6 +240,9 @@ theorem matchedPhysicalFieldFactor_ae {D : ReferenceData}
     (m : ℕ) (U : RadialModePair D) :
     matchedPhysicalFieldFactor D hD hP m U =ᵐ[volume.restrict (radialCore D)]
       (Function.support (D.localizer m)).indicator U.1 := by
+  change (densityMultiplierValue (volume.restrict (radialCore D))
+    (radialHilbertMeasure D) (physicalCellIndicator D m)
+    (physicalCellField_memLp hD hP m) U.1 : ℝ → ℝ) =ᵐ[volume.restrict (radialCore D)] _
   simpa only [physicalCellIndicator_mul] using
     densityMultiplierValue_ae (volume.restrict (radialCore D)) (radialHilbertMeasure D)
       (physicalCellIndicator D m) (physicalCellField_memLp hD hP m) U.1

@@ -57,6 +57,11 @@ theorem referenceCircleReflection_tensor (f : Lp ℝ 2 μ) (n : ℕ) :
       (referenceL2Tensor f (referenceCircleCosineLp n)),
     referenceL2Tensor_ae f (referenceCircleCosineLp n), htneg, hg, hgneg]
     with z href ht htn hg hgn
+  change referenceCircleReflection (referenceL2Tensor f (referenceCircleCosineLp n)) z =
+    referenceL2Tensor f (referenceCircleCosineLp n) (z.1, -z.2) at href
+  change referenceL2Tensor f (referenceCircleCosineLp n) z =
+    f z.1 * referenceCircleCosineLp n z.2 at ht
+  change referenceCircleCosineLp n z.2 = referenceCircleCosine n z.2 at hg
   change referenceL2Tensor f (referenceCircleCosineLp n) (z.1, -z.2) =
     f z.1 * referenceCircleCosineLp n (-z.2) at htn
   change referenceCircleCosineLp n (-z.2) = referenceCircleCosine n (-z.2) at hgn
@@ -67,7 +72,7 @@ theorem referenceCircleReflection_synthesis (f : lp (fun _ : ℕ => Lp ℝ 2 μ)
     referenceCircleReflection (referenceCosineL2Synthesis f) =
       referenceCosineL2Synthesis f := by
   have hs := referenceCosineL2Synthesis_hasSum f
-  have hr := (referenceCircleReflection (μ := μ)).toContinuousLinearMap.hasSum hs
+  have hr := hs.mapL (referenceCircleReflection (μ := μ)).toContinuousLinearMap
   have hr' : HasSum (fun n => referenceL2Tensor (f n) (referenceCircleCosineLp n))
       (referenceCircleReflection (referenceCosineL2Synthesis f)) := by
     simpa only [referenceCircleReflection_tensor] using hr
@@ -86,6 +91,7 @@ theorem referenceCircleEvenRepresentative_ae
   have hr := referenceCircleReflection_ae v
   rw [hv] at hr
   filter_upwards [hr] with z hz
+  change v z = v (z.1, -z.2) at hz
   unfold referenceCircleEvenRepresentative
   rw [← hz]
   ring
@@ -100,7 +106,10 @@ theorem referenceCosineRepresentative_periodic
     (f : lp (fun _ : ℕ => Lp ℝ 2 μ) 2) (r : α) :
     Function.Periodic (fun θ : ℝ => referenceCosineRepresentative f (r, θ)) Real.pi := by
   intro θ
-  unfold referenceCosineRepresentative
+  change referenceCircleEvenRepresentative (referenceCosineL2Synthesis f)
+      (r, ((θ + Real.pi : ℝ) : AddCircle Real.pi)) =
+    referenceCircleEvenRepresentative (referenceCosineL2Synthesis f)
+      (r, (θ : AddCircle Real.pi))
   rw [AddCircle.coe_add_period]
 
 theorem referenceCosineRepresentative_even
