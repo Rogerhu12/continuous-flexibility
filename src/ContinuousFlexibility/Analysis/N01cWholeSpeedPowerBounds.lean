@@ -67,6 +67,71 @@ def endpointPowerControl_neg_add_mul
     (fun m q hq => (hH m q hq).1) hE
   exact ⟨R, (hbsum.neg Rsum).congr Rneg R hΩ heq⟩
 
+
+/-- Restrict two genuine global fields to the physical components, transfer
+their weights to the prescribed samples, and combine them with the optical
+field. The parameter space and both controlled fields stay opaque here. -/
+private def endpointPowerControl_from_sampled_fields
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    {p : ℕ → Seminorm ℝ X} {center : X} {base loss : ℕ} {U : Set X}
+    (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D)
+    (hC : controlGeometryConditions D S C)
+    (hloc : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m))
+    (hE : ∀ r ∈ Ioo D.a D.b, 1 ≤ T.E0 r)
+    (hU : IsOpen U)
+    (F : Fin 2 → PowerControlledField p center base loss U (annularOpen D)
+      (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1))
+    (values : Fin 2 → X → PolarPoint → ℝ)
+    (hF : ∀ i, (F i).value = values i)
+    (g f : X → PolarPoint → ℝ)
+    (G : ∀ m, MixedJetRegularity U
+      (Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) g)
+    (hG : EndpointMixedPowerBounds p center base loss U
+      (fun m => Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ))
+      (fun m q => min (q.1 - C.left m) (C.right m - q.1))
+      (fun m _ => T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ))
+      (fun m _ => T.E0 (T.sample (C.cell m))) (fun _ => g))
+    (hformula : ∀ x ∈ U, ∀ q ∈ annularOpen D,
+      f x q = -values 0 x q - values 1 x q * g x q) :
+    EndpointPowerControl p center base loss U
+      (fun m => Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ))
+      (fun m q => min (q.1 - C.left m) (C.right m - q.1))
+      (fun m _ => T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ))
+      (fun m _ => T.E0 (T.sample (C.cell m))) (fun _ => f) := by
+  let Ω : ℕ → Set PolarPoint := fun m => Ioo (C.left m) (C.right m) ×ˢ univ
+  let δ : ℕ → PolarPoint → ℝ := fun m q => min (q.1 - C.left m) (C.right m - q.1)
+  let H : ℕ → PolarPoint → ℝ := fun m _ => T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ)
+  let E : ℕ → PolarPoint → ℝ := fun m _ => T.E0 (T.sample (C.cell m))
+  have hΩ (m : ℕ) : IsOpen (Ω m) := isOpen_Ioo.prod isOpen_univ
+  have hcore (m : ℕ) {q : PolarPoint} (hq : q ∈ Ω m) : q ∈ annularOpen D :=
+    ⟨⟨(hC.1 m).1.trans hq.1.1, hq.1.2.trans (hC.1 m).2.2⟩, mem_univ _⟩
+  have hs (m : ℕ) := materialSample_mem_radialCore hT hRef.choose_spec.2.1 (C.cell m)
+  have hδ (m : ℕ) (q : PolarPoint) (hq : q ∈ Ω m) : 0 ≤ δ m q :=
+    le_min (sub_nonneg.mpr hq.1.1.le) (sub_nonneg.mpr hq.1.2.le)
+  have hEs (m : ℕ) (q : PolarPoint) (_ : q ∈ Ω m) : 1 ≤ E m q := hE _ (hs m)
+  let hm := materialHeight_E0_weight_bounded hT (γ := (3 / 4 : ℝ)) (by norm_num) 0
+  let RH : ℝ := Classical.choose hm
+  have hRHb := (Classical.choose_spec hm).2
+  have hHs (m : ℕ) (q : PolarPoint) (_ : q ∈ Ω m) : 0 ≤ H m q ∧ H m q ≤ RH := by
+    refine ⟨Real.rpow_nonneg (hT.2.1 _ (hs m)).2.1.le _, ?_⟩
+    simpa only [H, RH, Real.rpow_zero, mul_one] using hRHb _ (hs m)
+  let FR (i : Fin 2) (m : ℕ) : MixedJetRegularity U (Ω m) (F i).value :=
+    ⟨fun x hx => ((F i).regular.spatial x hx).mono (fun q hq => hcore m hq),
+      fun a b q hq => (F i).regular.parameter a b q (hcore m hq)⟩
+  have FB (i : Fin 2) : EndpointMixedPowerBounds p center base loss U Ω δ H E
+      (fun _ => (F i).value) :=
+    mixedPowerBounds_to_componentSamples hT hRef hC hloc hE (F i).bounds
+  exact endpointPowerControl_neg_add_mul
+    (X := X) (I := ℕ) (p := p) (center := center)
+    (base := base) (loss := loss) (U := U) (Ω := Ω) (δ := δ) (H := H) (E := E)
+    (f₀ := fun _ => (F 0).value) (f₁ := fun _ => (F 1).value)
+    (g := fun _ => g) (f := fun _ => f)
+    hU hΩ hδ hEs hHs ⟨FR 0, FB 0⟩ ⟨FR 1, FB 1⟩ ⟨G, hG⟩
+    (fun m x hx q hq => by
+      rw [hF 0, hF 1, hformula x hx q (hcore m hq)]
+      ring)
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -110,47 +175,18 @@ def wholeCharacteristicSpeed_powerControl
       (fun _ z => minusCharacteristicSpeed (originalCoefficients D S C z)) := by
   letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
   letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
-  let U := stateNeighborhood S C base ε
-  let Ω : ℕ → Set PolarPoint := fun m => Ioo (C.left m) (C.right m) ×ˢ univ
-  let δ : ℕ → PolarPoint → ℝ := fun m q => min (q.1 - C.left m) (C.right m - q.1)
-  let H : ℕ → PolarPoint → ℝ := fun m _ => T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ)
-  let E : ℕ → PolarPoint → ℝ := fun m _ => T.E0 (T.sample (C.cell m))
-  let p := pairGrading (stateGrading S) realGrading
-  have hU : IsOpen U := isOpen_stateNeighborhood S C base ε
-  have hΩ (m : ℕ) : IsOpen (Ω m) := isOpen_Ioo.prod isOpen_univ
-  have hcore (m : ℕ) {q : PolarPoint} (hq : q ∈ Ω m) : q ∈ annularOpen D :=
-    ⟨⟨(hA.2.2.1.1 m).1.trans hq.1.1, hq.1.2.trans (hA.2.2.1.1 m).2.2⟩, mem_univ _⟩
-  have hs (m : ℕ) := materialSample_mem_radialCore hT hA.1.1.choose_spec.2.1 (C.cell m)
-  have hδ (m : ℕ) (q : PolarPoint) (hq : q ∈ Ω m) : 0 ≤ δ m q :=
-    le_min (sub_nonneg.mpr hq.1.1.le) (sub_nonneg.mpr hq.1.2.le)
-  have hEs (m : ℕ) (q : PolarPoint) (_ : q ∈ Ω m) : 1 ≤ E m q := hE _ (hs m)
-  let hm := materialHeight_E0_weight_bounded hT (γ := (3 / 4 : ℝ)) (by norm_num) 0
-  let RH : ℝ := Classical.choose hm
-  have hRHb := (Classical.choose_spec hm).2
-  have hHs (m : ℕ) (q : PolarPoint) (_ : q ∈ Ω m) : 0 ≤ H m q ∧ H m q ≤ RH := by
-    refine ⟨Real.rpow_nonneg (hT.2.1 _ (hs m)).2.1.le _, ?_⟩
-    simpa only [H, RH, Real.rpow_zero, mul_one] using hRHb _ (hs m)
-  let F (i : Fin 2) := normalizedSpeedFactor_controlled
-    hS hT hA hε hε1 hB hE hloc hχloc hI i
-  have hF (i : Fin 2) : (F i).value = normalizedSpeedFactor D S C i :=
-    normalizedSpeedFactor_controlled_value hS hT hA hε hε1 hB hE hloc hχloc hI i
-  let FR (i : Fin 2) (m : ℕ) : MixedJetRegularity U (Ω m) (F i).value :=
-    ⟨fun z hz => ((F i).regular.spatial z hz).mono (fun q hq => hcore m hq),
-      fun a b q hq => (F i).regular.parameter a b q (hcore m hq)⟩
-  have FB (i : Fin 2) : EndpointMixedPowerBounds p (C.referenceState, 0) base loss U Ω δ H E
-      (fun _ => (F i).value) :=
-    mixedPowerBounds_to_componentSamples hT hA.1.1 hA.2.2.1 hloc hE (F i).bounds
-  exact endpointPowerControl_neg_add_mul
-    (X := AnnularState S × ℝ) (I := ℕ) (p := p) (center := (C.referenceState, 0))
-    (base := base) (loss := loss) (U := U) (Ω := Ω) (δ := δ) (H := H) (E := E)
-    (f₀ := fun _ => (F 0).value) (f₁ := fun _ => (F 1).value)
-    (g := fun _ => stateOpticalRootField D S C)
-    (f := fun _ z => minusCharacteristicSpeed (originalCoefficients D S C z))
-    hU hΩ hδ hEs hHs ⟨FR 0, FB 0⟩ ⟨FR 1, FB 1⟩ ⟨G, hG⟩
-    (fun m z hz q hq => by
-      rw [hF 0, hF 1,
-        minusCharacteristicSpeed_normalized_factors hS hT hA hB hz (hcore m hq)]
-      dsimp only [stateOpticalRootField]
-      ring)
+  exact endpointPowerControl_from_sampled_fields
+    (X := AnnularState S × ℝ)
+    (p := pairGrading (stateGrading S) realGrading) (center := (C.referenceState, 0))
+    (base := base) (loss := loss) (U := stateNeighborhood S C base ε)
+    hT hA.1.1 hA.2.2.1 hloc hE (isOpen_stateNeighborhood S C base ε)
+    (normalizedSpeedFactor_controlled hS hT hA hε hε1 hB hE hloc hχloc hI)
+    (normalizedSpeedFactor D S C)
+    (normalizedSpeedFactor_controlled_value hS hT hA hε hε1 hB hE hloc hχloc hI)
+    (stateOpticalRootField D S C)
+    (fun z => minusCharacteristicSpeed (originalCoefficients D S C z))
+    G hG
+    (fun z hz q hq =>
+      minusCharacteristicSpeed_normalized_factors hS hT hA hB hz hq)
 
 end ContinuousFlexibility.Statements
