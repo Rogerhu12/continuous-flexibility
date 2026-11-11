@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.CircleCompositionSmoothDirections
+import ContinuousFlexibility.Analysis.CircleCompositionUniformBounds
 import ContinuousFlexibility.Analysis.TameJetLocalBounds
 
 /-!
@@ -46,11 +47,11 @@ theorem locallyTameOn_of_grading_contraction
     (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
     (L : E →L[ℝ] F) (hL : ∀ s x, q s (L x) ≤ p s x) :
     LocallyTameOn p q univ L := by
-  apply locallyTameOn_of_isTameLinear L (loss := 0) (base := 0)
+  refine ⟨L.continuous.continuousOn, fun _ _ => ⟨0, 0, univ, univ_mem, ?_⟩⟩
   intro s hs
-  refine ⟨1, ?_⟩
-  intro x
-  simpa only [Nat.add_zero, NNReal.coe_one, one_mul] using hL s x
+  refine ⟨1, zero_le_one, fun x _ => ?_⟩
+  simpa only [Nat.add_zero, one_mul] using
+    (hL s x).trans (le_add_of_nonneg_left zero_le_one)
 
 theorem locallyTameOn_pair_fst
     (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) :
@@ -112,27 +113,24 @@ theorem locallyTameOn_circleChartComposition
     LocallyTameOn (pairGrading S.grading S.grading) S.grading univ
       (fun x : S.Space × S.Space =>
         circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) := by
-  obtain ⟨J, hJ⟩ := exists_circleChartComposition_smoothDirections hS hT hD hγ hinterp travel
-  apply locallyTameOn_of_uniform_low_growth
+  let smoothData := exists_circleChartComposition_smoothDirections
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp travel
+  let J : SmoothDirections univ (fun x : S.Space × S.Space =>
+      circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) :=
+    smoothData.choose
+  have hzero (x : S.Space × S.Space) :
+      circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2 =
+        circleOuterJetComposeContinuousLinear hS hT hD hγ travel 0 x.1 x.2 := rfl
+  have hg : HasUniformLowGrowth (pairGrading S.grading S.grading) S.grading
+      (fun x : S.Space × S.Space =>
+        circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) :=
+    (uniformLowGrowth_circleOuterJetCompose hS hT hD hγ hinterp travel 0).congr hzero
+  exact locallyTameOn_of_uniform_low_growth
     (pairGrading S.grading S.grading) S.grading
     (withSeminorms_pairGrading
       (withSeminorms_graded (fun j => S.level j) S.bond)
       (withSeminorms_graded (fun j => S.level j) S.bond))
-    (continuousOn_univ.mp J.continuousOn)
-  obtain ⟨base, _, hb⟩ :=
-    circleOuterJetCompose_grading_uniform_low_order hS hT hD hγ hinterp travel 0
-  obtain ⟨loss, hl⟩ := hb 0
-  refine ⟨base, loss, ?_⟩
-  intro K hK s
-  obtain ⟨C, hC, hc⟩ := hl K hK s
-  refine ⟨C, hC, ?_⟩
-  intro x hx
-  have h := hc x.1 x.2
-    ((circleGrading_fst_le_pair le_rfl x).trans hx)
-    ((circleGrading_snd_le_pair le_rfl x).trans hx)
-  simpa only [circleOuterJetComposeContinuousLinear, circleAngularDerivativeIterate,
-    ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply, pairGrading_apply,
-    add_assoc] using h
+    (continuousOn_univ.mp J.continuousOn) hg
 
 theorem locallyTameOn_circleOuterJetCompose
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -166,29 +164,17 @@ theorem locallyTameOn_circleProduct
     (hinterp : HasInterpolation S.grading) :
     LocallyTameOn (pairGrading S.grading S.grading) S.grading univ
       (fun x : S.Space × S.Space => circleProductBilinear hS hT hD hγ x.1 x.2) := by
-  obtain ⟨J, hJ⟩ := smoothTameOn_circleProduct hS hT hD hγ hinterp
-  apply locallyTameOn_of_uniform_low_growth
+  let smoothData := smoothTameOn_circleProduct
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp
+  let J : SmoothDirections univ (fun x : S.Space × S.Space =>
+      circleProductBilinear hS hT hD hγ x.1 x.2) := smoothData.choose
+  exact locallyTameOn_of_uniform_low_growth
     (pairGrading S.grading S.grading) S.grading
     (withSeminorms_pairGrading
       (withSeminorms_graded (fun j => S.level j) S.bond)
       (withSeminorms_graded (fun j => S.level j) S.bond))
     (continuousOn_univ.mp J.continuousOn)
-  obtain ⟨base, loss, hb⟩ := circleFiniteProductWith_local_growth hS hT hD hγ hinterp
-    ({()} : Finset Unit)
-  refine ⟨base, loss, ?_⟩
-  intro K hK s
-  obtain ⟨C, hC, hc⟩ := hb K hK s
-  refine ⟨C, hC, ?_⟩
-  intro x hx
-  have heq : circleFiniteProductWith hS hT hD hγ x.1 (fun _ : Unit => x.2) {()} =
-      circleProductBilinear hS hT hD hγ x.1 x.2 := by
-    apply hS.2.2.2.2.2.1
-    rw [circleFiniteProductWith_decode, circleProductBilinear_decode]
-    simp only [Finset.prod_singleton]
-  have h := hc x.1 (fun _ : Unit => x.2)
-    ((circleGrading_fst_le_pair le_rfl x).trans hx)
-    (fun i hi => (circleGrading_snd_le_pair le_rfl x).trans hx)
-  simpa only [heq, Finset.sum_singleton, pairGrading_apply, add_assoc] using h
+    (uniformLowGrowth_circleProduct hS hT hD hγ hinterp)
 
 theorem locallyTameOn_circleFiniteProductWith
     {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
