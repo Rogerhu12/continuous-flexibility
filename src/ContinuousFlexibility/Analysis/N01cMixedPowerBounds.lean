@@ -173,19 +173,41 @@ def scalarComp (F : MixedJetRegularity U Ω f)
 
 def add (F : MixedJetRegularity U Ω f) (G : MixedJetRegularity U Ω g)
     (hU : IsOpen U) (hΩ : IsOpen Ω) :
-    MixedJetRegularity U Ω (fun x q => f x q + g x q) :=
-  finiteComp (F := Fin.cases f (fun _ : Fin 1 => g))
-    (Fin.cases F (fun _ : Fin 1 => G)) hU hΩ isOpen_univ
-    ((contDiff_apply ℝ ℝ (0 : Fin 2)).add (contDiff_apply ℝ ℝ 1)).contDiffOn
-    (fun _ _ _ _ => mem_univ _)
+    MixedJetRegularity U Ω (fun x q => f x q + g x q) := by
+  let P : Fin 2 → X → PolarPoint → ℝ := Fin.cases f (fun _ : Fin 1 => g)
+  let J : ∀ i : Fin 2, MixedJetRegularity U Ω (P i) :=
+    Fin.cases (motive := fun i => MixedJetRegularity U Ω (P i))
+      (show MixedJetRegularity U Ω (P 0) from F)
+      (fun i : Fin 1 => show MixedJetRegularity U Ω (P i.succ) from G)
+  have h : MixedJetRegularity U Ω (fun x q => P 0 x q + P 1 x q) :=
+    finiteComp (m := 2) (F := P) (G := fun y : Fin 2 → ℝ => y 0 + y 1)
+      J hU hΩ isOpen_univ
+      ((contDiff_apply ℝ ℝ (0 : Fin 2)).add (contDiff_apply ℝ ℝ 1)).contDiffOn
+      (fun _ _ _ _ => mem_univ _)
+  have hP₀ : P 0 = f := by simp only [P, Fin.cases_zero]
+  have hP₁ : P 1 = g := by
+    rw [show (1 : Fin 2) = (0 : Fin 1).succ from by decide]
+    simp only [P, Fin.cases_succ]
+  simpa only [hP₀, hP₁] using h
 
 def mul (F : MixedJetRegularity U Ω f) (G : MixedJetRegularity U Ω g)
     (hU : IsOpen U) (hΩ : IsOpen Ω) :
-    MixedJetRegularity U Ω (fun x q => f x q * g x q) :=
-  finiteComp (F := Fin.cases f (fun _ : Fin 1 => g))
-    (Fin.cases F (fun _ : Fin 1 => G)) hU hΩ isOpen_univ
-    ((contDiff_apply ℝ ℝ (0 : Fin 2)).mul (contDiff_apply ℝ ℝ 1)).contDiffOn
-    (fun _ _ _ _ => mem_univ _)
+    MixedJetRegularity U Ω (fun x q => f x q * g x q) := by
+  let P : Fin 2 → X → PolarPoint → ℝ := Fin.cases f (fun _ : Fin 1 => g)
+  let J : ∀ i : Fin 2, MixedJetRegularity U Ω (P i) :=
+    Fin.cases (motive := fun i => MixedJetRegularity U Ω (P i))
+      (show MixedJetRegularity U Ω (P 0) from F)
+      (fun i : Fin 1 => show MixedJetRegularity U Ω (P i.succ) from G)
+  have h : MixedJetRegularity U Ω (fun x q => P 0 x q * P 1 x q) :=
+    finiteComp (m := 2) (F := P) (G := fun y : Fin 2 → ℝ => y 0 * y 1)
+      J hU hΩ isOpen_univ
+      ((contDiff_apply ℝ ℝ (0 : Fin 2)).mul (contDiff_apply ℝ ℝ 1)).contDiffOn
+      (fun _ _ _ _ => mem_univ _)
+  have hP₀ : P 0 = f := by simp only [P, Fin.cases_zero]
+  have hP₁ : P 1 = g := by
+    rw [show (1 : Fin 2) = (0 : Fin 1).succ from by decide]
+    simp only [P, Fin.cases_succ]
+  simpa only [hP₀, hP₁] using h
 
 def const (hU : IsOpen U) (hΩ : IsOpen Ω) (c : ℝ) :
     MixedJetRegularity U Ω (fun _ _ => c) where
