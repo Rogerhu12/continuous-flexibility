@@ -127,6 +127,8 @@ theorem innerGapEnergyPair_norm_sq (D : ReferenceData) (hw : ContDiff ℝ ∞ D.
   have hq := innerGapPotentialField_continuousOn hw hu hpos j
   unfold innerRadialGapMass innerRadialGapEnergy
   rw [← intervalIntegral.integral_add
+    (f := fun r => (12 * D.w r / r ^ 2) * innerGapGradientField u r ^ 2)
+    (g := fun r => (12 * D.w r / r ^ 2) * innerGapPotentialField D.w j u r ^ 2)
     ((hρ.mul (hd.pow 2)).intervalIntegrable_of_Icc hab)
     ((hρ.mul (hq.pow 2)).intervalIntegrable_of_Icc hab)]
   apply intervalIntegral.integral_congr

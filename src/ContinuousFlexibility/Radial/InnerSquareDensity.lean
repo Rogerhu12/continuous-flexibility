@@ -20,6 +20,8 @@ open scoped ENNReal
 variable {α : Type*} [MeasurableSpace α] (μ : Measure α)
   (A : α → ℝ) (hA : Measurable A) (hne : ∀ᵐ x ∂μ, A x ≠ 0)
 
+include hA hne
+
 theorem innerSquareDensity_base_ac :
     μ ≪ μ.withDensity (fun x => ENNReal.ofReal (A x ^ 2)) := by
   apply withDensity_absolutelyContinuous' (hA.pow_const 2).ennreal_ofReal.aemeasurable

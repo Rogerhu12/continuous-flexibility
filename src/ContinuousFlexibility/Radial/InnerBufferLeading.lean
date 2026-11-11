@@ -73,8 +73,12 @@ theorem innerBuffer_potential_lower_closed {B : BufferData} (hB : BufferHypothes
     have hx' : x ∈ uIcc B.l (bufferInnerWall B 0) := by
       simpa [bufferCut] using hx
     rw [uIcc_of_le hW.1.le] at hx'
+    have hwall : bufferInnerWall B 0 = B.l + (B.action 0 + 6) / B.mass 0 := by
+      simp only [bufferInnerWall, bufferCut, bufferSign, eq_self_iff_true, ite_true,
+        neg_one_mul, neg_div, sub_neg_eq_add]
+    rw [hwall] at hx'
     apply hlo 0
-    simpa [bufferInnerWall, bufferCut, bufferSign] using hx'.2
+    simpa only [eq_self_iff_true, ite_true] using hx'.2
   · have hi' : i = 1 := by omega
     subst i
     have hx' : x ∈ uIcc B.h (bufferInnerWall B 1) := by

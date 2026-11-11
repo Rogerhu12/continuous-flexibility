@@ -21,9 +21,8 @@ open scoped Topology ContDiff
 
 theorem innerBufferPoint_hasDerivAt (B : BufferData) (i : Fin 2) (t : ℝ) :
     HasDerivAt (positiveBufferPoint B i) (-bufferSign i / B.mass i) t := by
-  simpa only [positiveBufferPoint, id_eq, mul_one, neg_div] using
-    (((hasDerivAt_id t).const_mul (bufferSign i)).div_const (B.mass i)).const_sub
-      (bufferCut B i)
+  convert (((hasDerivAt_id t).const_mul (bufferSign i)).div_const (B.mass i)).const_sub
+    (bufferCut B i) using 1 <;> first | rfl | ring
 
 theorem innerBufferPoint_contDiff (B : BufferData) (i : Fin 2) :
     ContDiff ℝ ∞ (positiveBufferPoint B i) := by

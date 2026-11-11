@@ -23,10 +23,14 @@ def innerIntervalAffineLift (a b : ℝ) (z : Fin 2 → ℝ) (x : ℝ) : ℝ :=
 
 theorem innerIntervalAffineLift_contDiff (a b : ℝ) (z : Fin 2 → ℝ) :
     ContDiff ℝ ∞ (innerIntervalAffineLift a b z) := by
-  have hn : ContDiff ℝ ∞ (fun x : ℝ => (b - x) * z 0 + (x - a) * z 1) :=
-    ((contDiff_const.sub contDiff_id).mul contDiff_const).add
-      ((contDiff_id.sub contDiff_const).mul contDiff_const)
-  simpa only [innerIntervalAffineLift, div_eq_mul_inv] using hn.mul contDiff_const
+  have he : innerIntervalAffineLift a b z =
+      (fun x : ℝ => ((z 1 - z 0) / (b - a)) • x +
+        ((b * z 0 - a * z 1) / (b - a))) := by
+    funext x
+    simp only [innerIntervalAffineLift, smul_eq_mul, div_eq_mul_inv]
+    ring
+  rw [he]
+  exact (contDiff_id.const_smul _).add contDiff_const
 
 theorem innerIntervalAffineLift_endpoints {a b : ℝ} (hab : a < b) (z : Fin 2 → ℝ) :
     innerIntervalAffineLift a b z a = z 0 ∧ innerIntervalAffineLift a b z b = z 1 := by

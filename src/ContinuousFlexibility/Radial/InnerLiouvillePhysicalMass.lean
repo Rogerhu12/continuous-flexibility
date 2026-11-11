@@ -71,7 +71,7 @@ theorem innerLiouville_mass_le_of_model_energy {R s w u ψ : ℝ → ℝ} {a b l
     intro x hx
     change ((deriv R x / R x) * ψ x) ^ 2 ≤ U ^ 2 * ψ x ^ 2
     by_cases hz : ψ x = 0
-    · simp only [hz, mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0)]
+    · simp only [hz, mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0), le_refl]
     · have hv := (sq_le_sq₀ (abs_nonneg (deriv R x / R x)) hU).mpr (hvelocity x hx hz)
       rw [sq_abs] at hv
       rw [mul_pow]
