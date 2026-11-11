@@ -65,9 +65,11 @@ theorem n05_referenceOutput_piece_square_bound
     intro p hpj
     by_cases hp : p ∈ physicalPieceOpen S K k
     · have hrj : p.1 ∈ D.cells j := hpart.2.2.1 j hpj
-      rw [a, indicator_of_mem hp, sq_abs, Real.sq_sqrt he.le]
+      dsimp only [a]
+      rw [indicator_of_mem hp, sq_abs, Real.sq_sqrt he.le]
       exact hweight (D.cellIndex j) n (hindex k j p.1 hp.1 hrj)
-    · rw [a, indicator_of_notMem hp, abs_zero, zero_pow (by decide : 2 ≠ 0)]
+    · dsimp only [a]
+      rw [indicator_of_notMem hp, abs_zero, zero_pow (by decide : 2 ≠ 0)]
       dsimp only [weights]
       positivity
   have hterm (j : ℕ) : weights j *
@@ -106,7 +108,8 @@ theorem n05_referenceOutput_piece_square_bound
       (fun p => Real.sqrt e * f p) := by
     filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
     change a p * f p = Real.sqrt e * f p
-    rw [a, indicator_of_mem (show p ∈ physicalPieceOpen S K k from ⟨hp.1, mem_univ _⟩)]
+    dsimp only [a]
+    rw [indicator_of_mem (show p ∈ physicalPieceOpen S K k from ⟨hp.1, mem_univ _⟩)]
   have hscaled : MemLp (fun p => Real.sqrt e * f p) 2 (volume.restrict P) :=
     MemLp.ae_eq heq (haf.mono_measure hmeasure)
   have hlocal : MemLp f 2 (volume.restrict P) := by

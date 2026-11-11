@@ -174,7 +174,11 @@ theorem n05_canonicalSourceBlock_reference_bound
             e (K.chart (C.referenceState, 0) m p) ^ 2) ∂μ :=
           integral_mono_ae hi (hmajor.const_mul B) hdom
         _ = B * ‖e‖ ^ 2 := by
-          rw [integral_const_mul, ← n05_canonicalChart_integral h.2.2.2.2 hz hs m hangle _, heNorm]
+          have hchange : (∫ p, e p ^ 2 ∂canonicalMeasure S K m) =
+              ∫ p, |planeJacobian (K.chart (C.referenceState, 0) m) p| *
+                e (K.chart (C.referenceState, 0) m p) ^ 2 ∂μ :=
+            n05_canonicalChart_integral h.2.2.2.2 hz hs m hangle (fun p => e p ^ 2)
+          rw [integral_const_mul, ← hchange, heNorm]
         _ ≤ B * ‖u‖ ^ 2 := mul_le_mul_of_nonneg_left
           (pow_le_pow_left₀ (norm_nonneg _) (n05CanonicalEvenProjection_bound S K m u) 2) hB.le
     have hperiodic : Function.Periodic g (0, Real.pi) := by
