@@ -99,10 +99,10 @@ theorem innerMorseInnerWeight_on_terminal_gap (right : Bool) {x : ℝ}
   rw [innerMorseInnerWeight_on_gap N K a γ G l r _ hx]
   cases right
   · rw [← innerMorseInnerCutWeight_gap]
-    simp only [innerMorseInnerCutWeight, innerModelChainCuts_gap_left,
-      Fin.val_zero, lt_self_iff_false, dite_false]
-  · simp only [innerMorseInnerCutWeight, innerModelChainCuts_gap_right,
-      Fin.val_last, lt_self_iff_false, dite_false]
+    simp only [Bool.false_eq_true, ite_false, innerMorseInnerCutWeight,
+      innerModelChainCuts_gap_left, Fin.val_zero, lt_self_iff_false, dite_false]
+  · simp only [eq_self_iff_true, ite_true, innerMorseInnerCutWeight,
+      innerModelChainCuts_gap_right, Fin.val_last, lt_self_iff_false, dite_false]
 
 /-- A cap in either closed terminal gap has the correct weight almost
 everywhere for the original radial Hilbert measure. -/

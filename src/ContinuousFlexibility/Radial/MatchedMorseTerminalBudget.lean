@@ -64,11 +64,12 @@ theorem matchedMorse_terminal_cost_bound
     (sqrt_le_left zero_le_one).mpr (by nlinarith only [hδ])
   have hexp : exp (-attenuation) ≤ 1 := by
     simpa only [exp_zero] using exp_le_exp.mpr (neg_nonpos.mpr hatt)
+  have hpower : 0 ≤ radialE n ^ es := rpow_nonneg (exp_pos (radialQ n)).le es
   have hsource : (radialE n ^ es * sqrt δ) * exp (-attenuation) ≤ exp (es * radialQ n) := by
     calc
       _ ≤ (radialE n ^ es * 1) * 1 :=
-        mul_le_mul (mul_le_mul_of_nonneg_left hsqrt (rpow_nonneg (exp_pos _).le _))
-          hexp (exp_pos _).le (by positivity)
+        mul_le_mul (mul_le_mul_of_nonneg_left hsqrt hpower)
+          hexp (exp_pos _).le (mul_nonneg hpower zero_le_one)
       _ = _ := by rw [mul_one, mul_one, radialE, ← exp_mul]; congr 1; ring
   have hq := radialQ_nonneg n
   have hpl : ep ≤ ep + es := le_add_of_nonneg_right hs
@@ -96,7 +97,7 @@ theorem matchedMorse_terminal_cost_bound
         exp ((bcap + ep + es) * radialQ n + σ * radialS n) := by
       rw [show (bcap + ep + es) * radialQ n + σ * radialS n =
         (bcap * radialQ n + σ * radialS n) + (ep + es) * radialQ n by ring,
-        exp_add]
+        exp_add (bcap * radialQ n + σ * radialS n) ((ep + es) * radialQ n)]
       ring
     _ ≤ _ := mul_le_mul_of_nonneg_left
       (exp_le_exp.mpr (add_le_add (mul_le_mul_of_nonneg_right he hq) le_rfl))

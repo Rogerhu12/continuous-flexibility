@@ -35,6 +35,7 @@ theorem matchedRetainedInnerWeightCost_pos (N : ℕ) (T B₀ : ℝ)
   have hD := fixedCentralModelDirichletCost_nonneg T B₀ hC₀
   have hM := innerMorseDirichletConstant_nonneg hCM
   have hR := centralRadiusWeightConstant_pos.le
+  have hE : 0 ≤ radialE N ^ (37 : ℝ) := rpow_nonneg (exp_pos (radialQ N)).le 37
   unfold matchedRetainedInnerWeightCost retainedMorseDirichletCoefficient
     retainedMorseEndpointCoefficient
   positivity
@@ -225,9 +226,11 @@ theorem exists_retainedFamily_innerWeightData
             (innerMorseCutWeight S.chain.index 0 1 side
               (innerMorseInnerTailIndex S.chain.index k side p))
             (model.physicalFluxError height (fun _ => 1)) sign‖ ≤ (1 : ℝ) / 8 := by
+    have hfrequency : 2 * (qf : ℝ) = ((2 * qf : ℕ) : ℝ) := by
+      simp only [Nat.cast_mul, Nat.cast_ofNat]
+    rw [hfrequency]
     have hi := innerMorseInnerTailIndex_bounds S.chain.index k side p
     have hs := hsupplier _ (S.chain.index + k) (2 * qf) hi.1 hi.2 (by omega) hband
-    simp only [Nat.cast_mul, Nat.cast_ofNat] at hs
     obtain ⟨hB, model, hrem, _, herror⟩ := hs
     exact ⟨hB, model, hrem, fun height hh sign =>
       (herror 1 (by norm_num) side height hh sign).le⟩

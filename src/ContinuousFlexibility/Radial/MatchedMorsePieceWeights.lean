@@ -40,7 +40,6 @@ theorem matchedMorse_gap_adjacent_model (N K : ℕ) (hK : 0 < K) (a γ : ℝ)
       omega
     · rw [← innerMorseInnerCutWeight_gap, innerMorseInnerCutWeight,
         innerModelChainCuts_gap_left, dif_pos hgpos]
-      rfl
   · by_cases hlast : g.val < 2 * K + 1
     · let p : Fin (2 * K + 1) := ⟨g.val, hlast⟩
       have hp : ¬p.val < K := by dsimp only [p]; omega
@@ -50,7 +49,6 @@ theorem matchedMorse_gap_adjacent_model (N K : ℕ) (hK : 0 < K) (a γ : ℝ)
       · simp only [innerMorseInnerModelIndex, hp, hp₀, ite_false, innerMorseInnerGapIndex,
           hg, Nat.min_eq_right hmin, p]
       · rw [innerMorseInnerCutWeight, innerModelChainCuts_gap_right, dif_pos hlast]
-        rfl
     · let p : Fin (2 * K + 1) := ⟨g.val - 1, by omega⟩
       have he : g.val = 2 * K + 1 := by omega
       have hp : ¬p.val < K := by dsimp only [p]; omega
@@ -62,7 +60,6 @@ theorem matchedMorse_gap_adjacent_model (N K : ℕ) (hK : 0 < K) (a γ : ℝ)
         omega
       · rw [← innerMorseInnerCutWeight_gap, innerMorseInnerCutWeight,
           innerModelChainCuts_gap_left, dif_pos hgpos]
-        rfl
 
 theorem matchedMorse_modelCut_log_bound (N K : ℕ) {a γ : ℝ}
     (ha : 0 ≤ a) (hγ : |γ| ≤ 1) (hN : 4096 ≤ N) (hNa : 64 * a ≤ (N : ℝ))
@@ -148,7 +145,7 @@ theorem matchedMorse_actual_piece_exp_bounds
   have hW : 0 < W := rpow_pos_of_pos (innerMorseInnerWeight_pos N K 0 1 G l r x) σ
   have hh := matchedMorse_actual_piece_log_bound N K hK
     (by norm_num : (0 : ℝ) ≤ 0) (by norm_num : |(1 : ℝ)| ≤ 1) hσ hN
-    (by positivity : 64 * (0 : ℝ) ≤ (N : ℝ)) G l r p hx
+    (by simpa only [mul_zero] using (Nat.cast_nonneg N : (0 : ℝ) ≤ (N : ℝ))) G l r p hx
   rw [log_div hW.ne' (rpow_pos_of_pos (innerCellWeight_pos N 0 1 m) σ).ne',
     log_rpow (innerCellWeight_pos N 0 1 m), innerCellWeight_log] at hh
   simp only [zero_mul, one_mul, zero_add] at hh
@@ -176,7 +173,6 @@ theorem matchedMorse_actual_piece_exp_bounds
         _ = _ := by
           rw [← exp_add]
           congr 1
-          ring
     rw [he, abs_of_pos (exp_pos _), ← exp_add]
     apply exp_le_exp.mpr
     change 37 * (radialQ m - radialQ N) - log W ≤

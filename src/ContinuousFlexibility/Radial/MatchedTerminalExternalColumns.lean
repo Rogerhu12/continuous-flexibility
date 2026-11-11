@@ -56,6 +56,7 @@ theorem terminalRegional_innerPoisson_eq {D : ReferenceData}
       _ = ∫ _r in D.a..D.b, (0 : ℝ) := by
         apply intervalIntegral.integral_congr
         intro r _
+        change referenceColumn D r * ell i r = 0
         by_cases hr : r ∈ Icc M.innerLeft M.innerRight
         · exact horth i r hr
         · have hz : referenceColumn D r = 0 := by

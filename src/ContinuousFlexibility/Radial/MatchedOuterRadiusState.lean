@@ -138,7 +138,7 @@ def OuterFundamentalStatePair.radiusScale_of_profile
       (s * a) (s * c) (s * b) := by
   let R := H.radiusScale hs
   have hc (x : ℝ) (hmem : x ∈ Ico (s * a) (s * b)) :=
-    matchedOuterRadius_physical_coefficients hs.ne' hh hlam (hx x hmem) (hw x hmem)
+    matchedOuterRadius_physical_coefficients (J := J) hs.ne' hh hlam (hx x hmem) (hw x hmem)
       (hprofile x hmem) (hderiv x hmem)
   refine {
     U := R.U, ZU := R.ZU, V := R.V, ZV := R.ZV

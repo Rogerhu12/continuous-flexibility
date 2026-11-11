@@ -2,6 +2,7 @@ import ContinuousFlexibility.Radial.MatchedOuterCompactLabels
 import ContinuousFlexibility.Radial.MatchedOuterFiniteCoreEnvelope
 import ContinuousFlexibility.Radial.MatchedOuterLocalizerBounds
 import ContinuousFlexibility.Radial.OuterGreenAssembly
+import ContinuousFlexibility.Radial.OuterWholeMeasure
 import ContinuousFlexibility.Radial.MatchedModeLocalization
 
 /-!

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Radial.MatchingInverseFormula
 import ContinuousFlexibility.Radial.MatchedInnerExternalDecomposition
 import ContinuousFlexibility.Radial.MatchedModeWeightedCells
 
@@ -35,7 +36,7 @@ variable {D : ReferenceData}
   (htrace : ∀ k, u (matchingCut D M k) =
     (if i = k then 1 else 0) / Real.sqrt (M.boundaryScale k))
 
-include hD hB hm hscale hEq hrow hu hz hreg htrace
+include hD hB hM hm hscale hEq hrow hu hz hreg htrace
 
 /-- The weighted norm of the actual external column follows from the
 proved leading/residual identity and a bound on the original inverse

@@ -30,8 +30,9 @@ theorem morseRealized_deepEntrance_tendsto
     rcases h with ⟨_, _, _, _, _, _, hh, _, _, _⟩
     exact fun side => (hh side).1
   cases right with
-  | false => simpa only [morseOuterDeepEntrance, tailPhysicalEndpoint,
-      Bool.false_eq_true, ite_false] using hlim false
+  | false =>
+      change Tendsto (fun n => M.radius false n (M.leftX false n)) atTop (𝓝 D.a)
+      exact hlim false
   | true =>
       have hl := (hlim true).comp (tendsto_add_atTop_nat 1)
       apply hl.congr'
@@ -46,7 +47,9 @@ theorem morseRealized_eventually_deep_after_cut
     ∀ᶠ n : ℕ in atTop, outerOutwardRadius right cut <
       outerOutwardRadius right (morseOuterDeepEntrance M right n) := by
   have hc : Continuous (outerOutwardRadius right) := by
-    cases right <;> fun_prop
+    cases right
+    · exact continuous_id.neg
+    · exact continuous_id
   have ht := hc.continuousAt.tendsto.comp (morseRealized_deepEntrance_tendsto h right)
   exact ht.eventually (Ioi_mem_nhds (outerWhole_interval (right := right) hcut))
 

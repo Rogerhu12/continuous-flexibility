@@ -71,7 +71,12 @@ theorem MorsePhysicalTailBasis.exists_matchedWholeGreenOperator
       (μ.restrict (Icc (outerOutwardRadius right cut) (outerOutwardRadius right entrance))ᶜ) := by
     change MemLp F.P 2 ((outerWholeMeasure D right cut).restrict
       (Icc (outerOutwardRadius right cut) (outerOutwardRadius right entrance))ᶜ)
-    rw [outerWholeMeasure_restrict_deep hcut hentry hac, ← her, outerWholeMeasure_tail]
+    have hdeep : outerWholeMeasure D right entrance = outerOutwardTailMeasure D T right := by
+      calc
+        _ = outerWholeMeasure D right (tailPhysicalRadius right T.entrance) :=
+          congrArg (outerWholeMeasure D right) her.symm
+        _ = _ := outerWholeMeasure_tail D T right
+    rw [outerWholeMeasure_restrict_deep hcut hentry hac, hdeep]
     exact morsePhysicalDeepTail_outward_lift_memLp hg hep hT F.P_natural
   let p := hP.toLp F.P
   letI : IsFiniteMeasure μ := outerWholeMeasure_isFinite hD right cut

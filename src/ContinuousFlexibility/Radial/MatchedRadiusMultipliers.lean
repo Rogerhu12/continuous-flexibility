@@ -57,8 +57,10 @@ theorem inverseRadiusOperator_multipliers
   let U := inverseRadiusEquiv hκ hβ hm
   have hleft := inverseRadiusEquiv_multiplier hκ hβ hm hφ hψ hφb hψb hχ
   have hright := inverseRadiusEquiv_multiplier hκ hβ hm hφ' hψ' hφb' hψb' hχ'
-  ext f
+  apply ContinuousLinearMap.ext
+  intro f
   apply U.injective
+  simp only [ContinuousLinearMap.comp_apply, inverseRadiusOperator_apply]
   change U (l2BoundedMultiplier ν hψ hψb
       (U.symm (R (U (l2BoundedMultiplier ν hψ' hψb' f))))) =
     U (U.symm (l2BoundedMultiplier μ hφ hφb

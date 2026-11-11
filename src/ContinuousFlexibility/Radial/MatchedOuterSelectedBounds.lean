@@ -52,7 +52,7 @@ theorem exists_matchedMorse_uniform_selected_whole_bounds
         ∀ R : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ,
           (∀ f : Lp ℝ 2 μ, (R f : ℝ → ℝ) =ᵐ[μ]
             fun x => ∫ y, outerGreenKernel lam H.U H.V x y * f y ∂μ) →
-        ∀ U : Lp ℝ 2 μ, (U : ℝ → ℝ) =ᵐ[μ] fun x => H.V x / sqrt lam →
+        ∀ U : Lp ℝ 2 μ, ((U : ℝ → ℝ) =ᵐ[μ] fun x => H.V x / sqrt lam) →
         ∀ k m : ℕ,
           ‖(matchedOuterCell D hP right μ k).comp
             (R.comp (matchedOuterCell D hP right μ m))‖ ≤

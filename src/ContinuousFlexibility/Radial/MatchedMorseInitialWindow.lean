@@ -42,9 +42,11 @@ theorem matchedMorse_seam_tendsto {T : MorseChainData} {σ : ℕ → ℝ}
   obtain ⟨_, _, _, _, _, _, hlimits, _, _, _⟩ := h
   cases side with
   | false =>
-      simpa only [morseChainSeam, Bool.false_eq_true, ite_false] using (hlimits false).2
+      change Tendsto (fun n => T.radius false n (T.rightX false n)) atTop (𝓝 D.a)
+      exact (hlimits false).2
   | true =>
-      simpa only [morseChainSeam, ite_true] using (hlimits true).1
+      change Tendsto (fun n => T.radius true n (T.leftX true n)) atTop (𝓝 D.b)
+      exact (hlimits true).1
 
 /-- The window is shared by every nonzero actual localizer whose
 original label is at most N. No final cell saturation is involved. -/

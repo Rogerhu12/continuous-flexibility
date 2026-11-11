@@ -64,8 +64,11 @@ theorem SeedRetainedPair.selectedOuter_actual_scaling
   refine ⟨hp, hpE, hlam, P.reference_side_endpoint (matchingProfileGeometry hE) hw right,
     hprofile, hvalue, ?_⟩
   rw [standInBoundaryScale, hvalue]
-  dsimp only [lam, standInBoundaryScale]
-  field_simp [hκ.ne', ((matchingProfileGeometry hD).1.trans hp.1).ne']
+  have hκne : P.sideRadius right ≠ 0 := hκ.ne'
+  have hcutne : S.joinInner right n ≠ 0 :=
+    ((matchingProfileGeometry hD).1.trans hp.1).ne'
+  dsimp only [lam, standInBoundaryScale, D, cut, κ, β]
+  field_simp [hκne, hcutne]
   <;> ring
 
 end ContinuousFlexibility.Radial

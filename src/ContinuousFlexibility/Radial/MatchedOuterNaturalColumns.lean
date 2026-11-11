@@ -45,10 +45,16 @@ theorem matchedOuterNaturalPoisson_ae (D : ReferenceData) (right : Bool)
       =ᵐ[radialHilbertMeasure D]
       (radialTailInterval D right entry).indicator
         (fun r => V (outerOutwardRadius right r) / sqrt lam) := by
-  apply matchedOuterWholeExtend_representative
-  filter_upwards [Lp.coeFn_smul (sqrt lam)⁻¹ (hV.toLp V), hV.coeFn_toLp] with x hs hx
-  rw [hs]
-  simp only [Pi.smul_apply, smul_eq_mul, hx, div_eq_mul_inv, mul_comm]
+  have hscaled : (((sqrt lam)⁻¹ • hV.toLp V : OuterWholeL2 D right entry) : ℝ → ℝ)
+      =ᵐ[outerWholeMeasure D right entry] fun x => V x / sqrt lam := by
+    filter_upwards [Lp.coeFn_smul (sqrt lam)⁻¹ (hV.toLp V), hV.coeFn_toLp] with x hs hx
+    rw [hs]
+    simp only [Pi.smul_apply, smul_eq_mul, hx, div_eq_mul_inv, mul_comm]
+  change (matchedOuterWholeExtend D right entry ((sqrt lam)⁻¹ • hV.toLp V) : ℝ → ℝ)
+    =ᵐ[radialHilbertMeasure D] (radialTailInterval D right entry).indicator
+      (fun r => V (outerOutwardRadius right r) / sqrt lam)
+  exact matchedOuterWholeExtend_representative (D := D) (right := right) (entry := entry)
+    ((sqrt lam)⁻¹ • hV.toLp V) (u := fun x => V x / sqrt lam) hscaled
 
 theorem matchedOuterNaturalPoisson_ae_on (D : ReferenceData) (right : Bool)
     (entry lam : ℝ) (V : ℝ → ℝ)
@@ -57,8 +63,8 @@ theorem matchedOuterNaturalPoisson_ae_on (D : ReferenceData) (right : Bool)
     ((matchedOuterNaturalPoisson D right entry lam V hV).1 : ℝ → ℝ)
       =ᵐ[(radialHilbertMeasure D).restrict s]
         fun r => V (outerOutwardRadius right r) / sqrt lam := by
-  filter_upwards [(matchedOuterNaturalPoisson_ae D right entry lam V hV).filter_mono
-      (Measure.restrict_le_self).ae_le, ae_restrict_mem hs] with r hr hrs
+  filter_upwards [ae_restrict_of_ae (s := s)
+      (matchedOuterNaturalPoisson_ae D right entry lam V hV), ae_restrict_mem hs] with r hr hrs
   exact hr.trans (indicator_of_mem (hsub hrs) _)
 
 theorem matchedOuterNaturalPoisson_ae_zero_on (D : ReferenceData) (right : Bool)
@@ -67,15 +73,16 @@ theorem matchedOuterNaturalPoisson_ae_zero_on (D : ReferenceData) (right : Bool)
     (hs : MeasurableSet s) (hdisjoint : ∀ r ∈ s, r ∉ radialTailInterval D right entry) :
     ((matchedOuterNaturalPoisson D right entry lam V hV).1 : ℝ → ℝ)
       =ᵐ[(radialHilbertMeasure D).restrict s] fun _ => 0 := by
-  filter_upwards [(matchedOuterNaturalPoisson_ae D right entry lam V hV).filter_mono
-      (Measure.restrict_le_self).ae_le, ae_restrict_mem hs] with r hr hrs
+  filter_upwards [ae_restrict_of_ae (s := s)
+      (matchedOuterNaturalPoisson_ae D right entry lam V hV), ae_restrict_mem hs] with r hr hrs
   exact hr.trans (indicator_of_notMem (hdisjoint r hrs) _)
 
 theorem matchedOuterNaturalFunction_inner {D : ReferenceData} (M : RadialMatchingData D)
     (right : Bool) (lam : ℝ) (V : ℝ → ℝ) {r : ℝ}
     (hr : r ∈ Ioo M.innerLeft M.innerRight) :
     matchedOuterNaturalFunction M right lam V r = 0 := by
-  cases right
+  cases right <;>
+    simp only [matchedOuterNaturalFunction, Bool.false_eq_true, ite_false, ite_true]
   · exact matchedOuterSideGlue_inner _ _ hr
   · exact matchedOuterSideGlue_inner _ _ hr
 
@@ -145,7 +152,7 @@ private theorem matchedOuterNatural_flux_scale {lam w z : ℝ}
     w * (lam / w * (z / sqrt lam)) / sqrt lam = z := by
   have hs : sqrt lam ≠ 0 := (sqrt_pos.mpr hlam).ne'
   calc
-    _ = lam * z / (sqrt lam) ^ 2 := by field_simp [hw, hs]; ring
+    _ = lam * z / (sqrt lam) ^ 2 := by field_simp [hw, hs]
     _ = z := by rw [sq_sqrt hlam.le]; field_simp [hlam.ne']
 
 /-- Smoothness, the original weak flux equation and normalized entrance
@@ -206,9 +213,9 @@ theorem matchedOuterNatural_state {D : ReferenceData}
     · filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
       exact (outerFirstOrderSystem_physical_flux hs hwne x (Ioo_subset_Ico_self hx)).symm
     · filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
-      dsimp only
-      field_simp [hlam.ne', hxne x (Ioo_subset_Ico_self hx)]
-      ring
+      change lam * ((j : ℝ) ^ 2 * deriv w x / (lam * x) * u x) =
+        (j : ℝ) ^ 2 * deriv w x / x * u x
+      field_simp [hlam.ne', hxne x (Ioo_subset_Ico_self hx)] <;> ring
   · rw [show H.V a = H.entrance.1 from congrArg Prod.fst H.V_initial]
   · have hwa : w a = D.w entry := by
       cases right <;> simp [w, a, outerTailOutwardWeight, outerTailSign, outerOutwardRadius]
