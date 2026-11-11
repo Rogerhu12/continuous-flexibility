@@ -66,10 +66,14 @@ theorem N01Properties.returnCorrectionResidualErrorField_contDiffOn_of_cutoffs
     (contDiffAt_angularPartial hG (m := ∞) (by simp))
   apply ContDiffAt.contDiffWithinAt
   apply hs.congr_of_eventuallyEq
-  filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
-  simp only [returnCorrectionResidualErrorField, if_pos hq]
-  unfold returnCorrectionRadialErrorFlux returnCorrectionAngularErrorFlux
-  rfl
+  have hmem : ∀ᶠ q : PolarPoint in 𝓝 p, q ∈ annularOpen D :=
+    (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
+  filter_upwards [hmem] with q hq
+  unfold returnCorrectionResidualErrorField
+    returnCorrectionRadialErrorFlux returnCorrectionAngularErrorFlux
+  split_ifs with h
+  · rfl
+  · exact False.elim (h hq)
 
 omit hS hT hz hsector hχ hχrange hdisc in
 theorem N01Properties.returnCorrectionResidualErrorField_eq_zero_outside_of_cutoffs

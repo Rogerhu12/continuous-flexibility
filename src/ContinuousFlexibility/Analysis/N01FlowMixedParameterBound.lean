@@ -37,14 +37,15 @@ theorem oneHighVariationWeight_finTwo_zero
   classical
   have he0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
   have he1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
+  let z : Fin 2 → E := Fin.cons v (fun _ : Fin 1 => w)
   unfold oneHighVariationWeight
   change (1 + p high (0 : E)) *
-      (∏ i : Fin 2, p base (Fin.cons v (fun _ : Fin 1 => w) i)) +
-      (∑ i : Fin 2, p high (Fin.cons v (fun _ : Fin 1 => w) i) *
-        ∏ j ∈ Finset.univ.erase i, p base (Fin.cons v (fun _ : Fin 1 => w) j)) = _
+      (∏ i : Fin 2, p base (z i)) +
+      (∑ i : Fin 2, p high (z i) *
+        ∏ j ∈ (Finset.univ : Finset (Fin 2)).erase i, p base (z j)) = _
   rw [(p high).map_zero', add_zero, one_mul]
   rw [Fin.prod_univ_two, Fin.sum_univ_two]
-  simp only [he0, he1, Finset.prod_singleton, Fin.cons_zero, Fin.cons_one]
+  simp only [he0, he1, Finset.prod_singleton, z, Fin.cons_zero, Fin.cons_one]
 
 theorem oneHighVariationWeight_state_external_zero
     (S : PhysicalSpacesData) (base high : ℕ) (η : AnnularState S) :

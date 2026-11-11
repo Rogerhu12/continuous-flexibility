@@ -45,9 +45,13 @@ theorem N01Properties.returnCorrectionVelocityLinear_contDiffAt
     Function.invFun (returnInterpolation (χ m q.1) (returnCorrectionInitialMap S C z m)) (A q)
   have hA : ContDiffAt ℝ ∞ A p :=
     hN01.minusFlow_invFun_contDiffAt_of_discriminant hS hT hz hsector m p hp hdisc
-  have hB : ContDiffAt ℝ ∞ B p :=
-    (hN01.returnInterpolation_invFun_contDiffAt hS hT hz hsector χ m hχ hχrange
-      (p.1, A p) hp).comp p (contDiffAt_fst.prodMk hA)
+  have hB : ContDiffAt ℝ ∞ B p := by
+    have ho : ContDiffAt ℝ ∞ (fun q : PolarPoint =>
+        Function.invFun (returnInterpolation (χ m q.1)
+          (returnCorrectionInitialMap S C z m)) q.2) (p.1, A p) :=
+      hN01.returnInterpolation_invFun_contDiffAt hS hT hz hsector χ m hχ hχrange
+        (p.1, A p) hp
+    simpa only [B, Function.comp_def] using ho.comp p (contDiffAt_fst.prodMk hA)
   have hclosed : p.1 ∈ Icc (C.left m) (C.right m) := ⟨hp.1.le, hp.2.le⟩
   have hsurj := returnLift_surjective Real.pi_pos
     (N01Properties.minusFlow_differentiable S C z m hN01 hz hclosed).continuous
@@ -63,9 +67,12 @@ theorem N01Properties.returnCorrectionVelocityLinear_contDiffAt
     rw [hpoint]
     exact hdisc
   have hvariation : ContDiffAt ℝ ∞
-      (fun q : PolarPoint => deriv (C.minusFlow z m q.1) (A q)) p :=
-    (hN01.minusFlow_angular_deriv_contDiffAt_of_discriminant hS hT hz hsector m
-      (p.1, A p) hp hdisc').comp p (contDiffAt_fst.prodMk hA)
+      (fun q : PolarPoint => deriv (C.minusFlow z m q.1) (A q)) p := by
+    have ho : ContDiffAt ℝ ∞ (fun q : PolarPoint => deriv (C.minusFlow z m q.1) q.2)
+        (p.1, A p) :=
+      hN01.minusFlow_angular_deriv_contDiffAt_of_discriminant hS hT hz hsector m
+        (p.1, A p) hp hdisc'
+    simpa only [Function.comp_def] using ho.comp p (contDiffAt_fst.prodMk hA)
   have hcutoff : ContDiffAt ℝ ∞ (fun q : PolarPoint => deriv (χ m) q.1) p :=
     ((contDiff_infty_iff_deriv.mp hχ).2.comp contDiff_fst).contDiffAt
   have hdisplacement : ContDiffAt ℝ ∞
@@ -97,10 +104,10 @@ theorem N01Properties.returnCorrectionDriftSpeedLinear_contDiffAt
   constructor
   · exact ((hv.sub hvr).div_const 2).congr_of_eventuallyEq
       (Eventually.of_forall fun q => by
-        simp only [returnCorrectionDriftLinear_apply, Pi.sub_apply])
+        simp only [returnCorrectionDriftLinear_apply, Pi.sub_apply, Function.comp_def])
   · exact ((hvr.neg.sub hv).div_const 2).congr_of_eventuallyEq
       (Eventually.of_forall fun q => by
-        simp only [returnCorrectionSpeedLinear_apply, Pi.neg_apply, Pi.sub_apply])
+        simp only [returnCorrectionSpeedLinear_apply, Pi.neg_apply, Pi.sub_apply, Function.comp_def])
 
 end ActualVelocity
 
@@ -222,10 +229,14 @@ theorem N01Properties.returnCorrectionResidualErrorField_contDiffOn
     (contDiffAt_angularPartial hG (m := ∞) (by simp))
   apply ContDiffAt.contDiffWithinAt
   apply hs.congr_of_eventuallyEq
-  filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hp] with q hq
-  simp only [returnCorrectionResidualErrorField, if_pos hq]
-  unfold returnCorrectionRadialErrorFlux returnCorrectionAngularErrorFlux
-  rfl
+  have hmem : ∀ᶠ q : PolarPoint in 𝓝 p, q ∈ annularOpen D :=
+    (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
+  filter_upwards [hmem] with q hq
+  unfold returnCorrectionResidualErrorField
+    returnCorrectionRadialErrorFlux returnCorrectionAngularErrorFlux
+  split_ifs with h
+  · rfl
+  · exact False.elim (h hq)
 
 theorem N01Properties.returnCorrectionResidualErrorField_materialPullback_contDiff
     (ρ : CircleSpace S) (η : HeightPair S) :

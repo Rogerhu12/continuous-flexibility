@@ -63,7 +63,7 @@ theorem opticalSquaredSpeed_deriv_bound_of_jets
     _ ≤ (|(-deriv (deriv w) r) * r⁻¹ * (w r)⁻¹| +
           |(-deriv w r) * (-(r ^ 2)⁻¹) * (w r)⁻¹|) +
         |(-deriv w r) * r⁻¹ * deriv (fun s => (w s)⁻¹) r| :=
-      add_le_add_right (abs_add_le _ _) _
+      add_le_add (abs_add_le _ _) le_rfl
     _ ≤ (K ^ 2 * A + K ^ 2 * A) + K ^ 2 * A :=
       add_le_add
         (add_le_add (hthree (by simpa only [abs_neg] using hw₂) hr₁ hu)

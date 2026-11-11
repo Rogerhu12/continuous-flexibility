@@ -21,8 +21,17 @@ def heightSectorDirection (S : PhysicalSpacesData) (η : HeightPair S) :
     StateDirections S :=
   ⟨(η, 0), by
     change stateSector S ((η, 0) : AnnularState S)
-    simp only [stateSector, map_zero, Pi.zero_apply, neg_zero]
-    exact ⟨fun _ _ _ => rfl, fun _ _ => rfl⟩⟩
+    have hzero : (S.circle (3 / 4 : ℝ)).decode (0 : CircleSpace S) = 0 :=
+      (S.circle (3 / 4 : ℝ)).decode.map_zero
+    constructor
+    · intro m θ φ
+      change (S.circle (3 / 4 : ℝ)).decode (0 : CircleSpace S) m θ =
+        (S.circle (3 / 4 : ℝ)).decode (0 : CircleSpace S) m φ
+      simp only [hzero, Pi.zero_apply]
+    · intro m θ
+      change (S.circle (3 / 4 : ℝ)).decode (0 : CircleSpace S) m (-θ) =
+        -(S.circle (3 / 4 : ℝ)).decode (0 : CircleSpace S) m θ
+      simp only [hzero, Pi.zero_apply, neg_zero]⟩
 
 def heightParameterDirection (S : PhysicalSpacesData) (η : HeightPair S) :
     StateDirections S × ℝ := (heightSectorDirection S η, 0)
@@ -40,50 +49,62 @@ theorem heightParameterDirection_grading (S : PhysicalSpacesData)
   change heightPairGrading S n η +
     (realGrading n 0 + ((S.circle (3 / 4 : ℝ)).grading n 0 +
       (S.circle (3 / 4 : ℝ)).grading n 0)) + realGrading n 0 = _
-  simp only [map_zero, add_zero]
+  have hr0 : realGrading n (0 : ℝ) = 0 := (realGrading n).map_zero'
+  have hc0 : (S.circle (3 / 4 : ℝ)).grading n (0 : CircleSpace S) = 0 :=
+    ((S.circle (3 / 4 : ℝ)).grading n).map_zero'
+  simp only [hr0, hc0, add_zero]
 
 theorem scalarParameterDirection_grading (S : PhysicalSpacesData) (n : ℕ) :
     pairGrading (sectorGrading S) realGrading n (scalarParameterDirection S) = 1 := by
   change sectorGrading S n 0 + ‖(1 : ℝ)‖ = 1
-  simp only [map_zero, norm_one, zero_add]
+  have hs0 : sectorGrading S n (0 : StateDirections S) = 0 :=
+    (sectorGrading S n).map_zero'
+  simp only [hs0, norm_one, zero_add]
 
 theorem scalarParameter_line (S : PhysicalSpacesData)
     (z : StateDirections S × ℝ) (t : ℝ) :
     z + t • scalarParameterDirection S = (z.1, z.2 + t) := by
-  change (z.1 + t • (0 : StateDirections S), z.2 + t * 1) = _
-  rw [smul_zero, add_zero, mul_one]
+  apply Prod.ext
+  · change z.1 + t • (0 : StateDirections S) = z.1
+    exact (congrArg (fun w : StateDirections S => z.1 + w)
+      (smul_zero t : t • (0 : StateDirections S) = 0)).trans (add_zero z.1)
+  · change z.2 + t * 1 = z.2 + t
+    exact congrArg (fun a : ℝ => z.2 + a) (mul_one t)
 
 theorem scalarParameter_zero_line (S : PhysicalSpacesData)
     (x : StateDirections S) (t : ℝ) :
     (x, (0 : ℝ)) + t • scalarParameterDirection S = (x, t) := by
-  rw [scalarParameter_line, zero_add]
+  exact (scalarParameter_line S (x, 0) t).trans (Prod.ext rfl (zero_add t))
 
 theorem liftSectorParameter_height_line (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : StateDirections S × ℝ)
     (η : HeightPair S) (t : ℝ) :
     liftSectorParameter S C (z + t • heightParameterDirection S η) =
       ((liftSectorParameter S C z).1 + t • ((η, 0) : AnnularState S), z.2) := by
-  change (C.referenceState + (z.1.val + t • ((η, 0) : AnnularState S)),
-    z.2 + t * 0) = ((C.referenceState + z.1.val) + t • ((η, 0) : AnnularState S), z.2)
-  rw [add_assoc, mul_zero, add_zero]
+  apply Prod.ext
+  · change C.referenceState + (z.1.val + t • ((η, 0) : AnnularState S)) =
+      (C.referenceState + z.1.val) + t • ((η, 0) : AnnularState S)
+    exact (add_assoc C.referenceState z.1.val (t • ((η, 0) : AnnularState S))).symm
+  · change z.2 + t * 0 = z.2
+    exact (congrArg (fun a : ℝ => z.2 + a) (mul_zero t)).trans (add_zero z.2)
 
 theorem liftSectorParameter_scalar_line (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : StateDirections S × ℝ) (t : ℝ) :
     liftSectorParameter S C (z + t • scalarParameterDirection S) =
       ((liftSectorParameter S C z).1, z.2 + t) := by
-  change (C.referenceState + (z.1.val + t • (0 : AnnularState S)), z.2 + t * 1) = _
-  rw [smul_zero, add_zero, mul_one]
-  rfl
+  exact congrArg (liftSectorParameter S C) (scalarParameter_line S z t)
 
 theorem liftSectorParameter_height_line_tail (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : StateDirections S × ℝ)
     (η : HeightPair S) (t : ℝ) :
     (liftSectorParameter S C (z + t • heightParameterDirection S η)).1.2 =
       (liftSectorParameter S C z).1.2 := by
-  rw [liftSectorParameter_height_line]
-  change (liftSectorParameter S C z).1.2 +
-    t • (0 : ℝ × (CircleSpace S × CircleSpace S)) = _
-  rw [smul_zero, add_zero]
+  have heq := congrArg (fun p : AnnularState S × ℝ => p.1.2)
+    (liftSectorParameter_height_line S C z η t)
+  have hz : t • (0 : ℝ × (CircleSpace S × CircleSpace S)) = 0 := smul_zero t
+  exact heq.trans ((congrArg
+    (fun w : ℝ × (CircleSpace S × CircleSpace S) => (liftSectorParameter S C z).1.2 + w)
+    hz).trans (add_zero _))
 
 theorem liftSectorParameter_height_line_field (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : StateDirections S × ℝ)
@@ -116,13 +137,8 @@ theorem sectorParameter_scalar_segment_mem
     {z : StateDirections S × ℝ} (hz : z ∈ sectorNeighborhood S base ε ε)
     {t : ℝ} (ht : t ∈ uIcc (0 : ℝ) z.2) :
     (z.1, t) ∈ sectorNeighborhood S base ε ε := by
-  refine ⟨hz.1, lt_of_le_of_lt ?_ hz.2⟩
-  rcases le_total (0 : ℝ) z.2 with hq | hq
-  · rw [uIcc_of_le hq] at ht
-    rw [abs_of_nonneg ht.1, abs_of_nonneg hq]
-    exact ht.2
-  · rw [uIcc_of_ge hq] at ht
-    rw [abs_of_nonpos ht.2, abs_of_nonpos hq]
-    exact neg_le_neg ht.1
+  have habs : |t| ≤ |z.2| := by
+    simpa only [sub_zero] using abs_sub_left_of_mem_uIcc ht
+  exact ⟨hz.1, habs.trans_lt hz.2⟩
 
 end ContinuousFlexibility.Statements

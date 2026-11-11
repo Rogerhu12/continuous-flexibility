@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N01FlowLocalizedDirections
+import ContinuousFlexibility.Analysis.N01FlowConstantDirections
 import ContinuousFlexibility.Analysis.N01EndpointParameterTower
 import ContinuousFlexibility.Analysis.SmoothDirectionsEuler
 import ContinuousFlexibility.Analysis.HeightScalarVariationWeights
@@ -31,7 +31,7 @@ private theorem scalar_segment_mul_mem {t q : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) 
     refine ⟨?_, mul_nonpos_of_nonneg_of_nonpos ht.1 hq⟩
     simpa only [one_mul] using mul_le_mul_of_nonpos_right ht.2 hq
 
-theorem N01Properties.sectorFlow_pure_scalar_height_bound
+theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
@@ -40,8 +40,8 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun y => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C y)),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
-        (∀ t ∈ Ioo (C.left m) (C.right m), ∀ ψ,
-          heightPairField S η (t, ψ) = stateU S (liftSectorParameter S C z).1 (t, ψ)) →
+        (∃ c : ℝ, ∀ t ∈ Ioo (C.left m) (C.right m), ∀ ψ,
+          heightPairField S η (t, ψ) = stateU S (liftSectorParameter S C z).1 (t, ψ) + c) →
         |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
@@ -51,6 +51,7 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
   refine ⟨B, hB, fun m b θ r hb hr => ?_⟩
   obtain ⟨J, hJ⟩ := hclosed m b θ r hb hr
   refine ⟨J, fun z hz η hη => ?_⟩
+  obtain ⟨c, hη⟩ := hη
   let x₀ : StateDirections S × ℝ := (z.1, 0)
   let P : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
     T.E0 (T.sample (C.cell m)) ^ B
@@ -67,11 +68,11 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
     rw [scalarParameter_zero_line] at hq ⊢
     have hηq : ∀ t ∈ Ioo (C.left m) (C.right m), ∀ ψ,
         heightPairField S η (t, ψ) =
-          heightPairField S (liftSectorParameter S C (z.1, q)).1.1 (t, ψ) := by
+          heightPairField S (liftSectorParameter S C (z.1, q)).1.1 (t, ψ) + c := by
       intro t ht ψ
       exact hη t ht ψ
-    exact (hN.ordinaryFlowFamily_first_height_jet_locality hS hT hq η
-      (liftSectorParameter S C (z.1, q)).1.1 m b θ hr hηq J).trans
+    exact (hN.ordinaryFlowFamily_first_height_jet_constant_locality hS hT hq η
+      (liftSectorParameter S C (z.1, q)).1.1 m b θ hr c hηq J).trans
         (hN.ordinaryFlowFamily_height_scalar_jet hS hT hq m b θ hr J)
   have hline (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       x₀ + (t * z.2) • scalarParameterDirection S ∈ sectorNeighborhood S base ε ε := by
@@ -106,5 +107,30 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
   have h := J.abs_pure_scalar_jet_le_of_mixed_euler_bound x₀
     (scalarParameterDirection S) (heightParameterDirection S η) hEuler n z.2 _ hline hbound
   simpa only [x₀, scalarParameter_zero_line, P] using h
+
+
+theorem N01Properties.sectorFlow_pure_scalar_height_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
+    ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
+      ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
+        (fun y => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C y)),
+      ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
+        (∀ t ∈ Ioo (C.left m) (C.right m), ∀ ψ,
+          heightPairField S η (t, ψ) = stateU S (liftSectorParameter S C z).1 (t, ψ)) →
+        |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
+          B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample (C.cell m)) ^ B *
+            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
+              heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
+  obtain ⟨B, hB, htower⟩ :=
+    hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+  refine ⟨B, hB, fun m b θ r hb hr => ?_⟩
+  obtain ⟨J, hJ⟩ := htower m b θ r hb hr
+  refine ⟨J, fun z hz η hη => hJ z hz η ⟨0, ?_⟩⟩
+  intro t ht ψ
+  simpa only [add_zero] using hη t ht ψ
 
 end ContinuousFlexibility.Statements

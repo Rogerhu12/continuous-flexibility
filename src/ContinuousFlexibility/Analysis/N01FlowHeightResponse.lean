@@ -51,8 +51,9 @@ theorem N01Properties.minusFlow_q_zero_partial_height_response_of_physical
   · intro q hq p hp
     have hc := hN.minusCharacteristicSpeed_parameter_continuousAt hS hT
       (hqmem hq) hsector (p := p) ⟨hcore hp.1, mem_univ _⟩
-    exact (hc.comp (g := fun z : PolarPoint => (q, z))
-      (continuousAt_const.prodMk continuousAt_id)).continuousWithinAt
+    have hmap : ContinuousAt (fun z : PolarPoint => (q, z)) p :=
+      continuousAt_const.prodMk continuousAt_id
+    exact (hc.comp_of_eq hmap rfl).continuousWithinAt
   · intro q hq r hr y
     exact hN.minusCharacteristicSpeed_hasFDerivAt_q_angle hS hT
       (hqmem hq) hsector (r := r) (θ := y) (hcore ⟨hr.1.le, hr.2.le⟩)
@@ -61,8 +62,9 @@ theorem N01Properties.minusFlow_q_zero_partial_height_response_of_physical
   · intro p hp
     have hc := hN.characteristicQDerivative_continuousAt hS hT hx hsector
       (p := p) ⟨hcore hp.1, mem_univ _⟩
-    exact (hc.comp (g := fun z : PolarPoint => ((0 : ℝ), z))
-      (continuousAt_const.prodMk continuousAt_id)).continuousWithinAt
+    have hmap : ContinuousAt (fun z : PolarPoint => ((0 : ℝ), z)) p :=
+      continuousAt_const.prodMk continuousAt_id
+    exact (hc.comp_of_eq hmap rfl).continuousWithinAt
   · intro r hr y
     exact hN.characteristicAngularDerivative_q_zero hS hT hx hsector (hcore hr) y
 

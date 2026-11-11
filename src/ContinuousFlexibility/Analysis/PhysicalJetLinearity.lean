@@ -28,7 +28,8 @@ theorem mixedDerivative_add_of_contDiff {f g : PolarPoint → ℝ}
     mixedDerivative a b (fun q => f q + g q) p =
       mixedDerivative a b f p + mixedDerivative a b g p := by
   have h := mixedDerivative_sub_of_contDiffOn isOpen_univ hf.contDiffOn
-    (hg.const_mul (-1)).contDiffOn a b (mem_univ p)
+    ((contDiff_const : ContDiff ℝ ∞ (fun _ : PolarPoint => (-1 : ℝ))).mul hg).contDiffOn
+      a b (mem_univ p)
   have heq : (fun q : PolarPoint => f q - (-1) * g q) = fun q => f q + g q := by
     funext q
     ring

@@ -128,7 +128,7 @@ theorem weightedPhysicalJet_weighted_cutoff_energy_le
       apply Finset.sum_eq_zero
       intro i hi
       rw [hzero p hp i (Nat.le_of_lt_succ (Finset.mem_range.mp hi)), mul_zero, zero_mul]
-    rw [hjet, mul_zero]
+    simp only [Pi.mul_apply, hjet, mul_zero]
   · intro p hp
     exact weightedPhysicalJet_weighted_cutoff_sq_le hT hχ hf.1 hK a b c d w p (hcoeff p hp)
 

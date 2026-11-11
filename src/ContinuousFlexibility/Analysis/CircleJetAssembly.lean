@@ -87,7 +87,7 @@ theorem circleJetLift_hasProjectiveLineDerivAt
     (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (ℕ → ℝ → ℝ))
     (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
     (hbound : CircleJetNormBounds (T := T) (γ := γ) (U := U) A)
-    (hscalar : ∀ n (x w : E) (v : Fin n → E) t, x + t • w ∈ U → ∀ m b θ,
+    (hscalar : ∀ n (x w : E) (v : Fin n → E) (t : ℝ), x + t • w ∈ U → ∀ m b θ,
       HasDerivAt (fun u => iteratedDeriv b (A n (x + u • w) v m) θ)
         (iteratedDeriv b (A (n + 1) (x + t • w) (Fin.cons w v) m) θ) t)
     (henergy : CircleJetSecondEnvelopes (T := T) (γ := γ) (U := U) A)
@@ -134,7 +134,7 @@ theorem exists_circle_smoothDirections_of_scalar_jets
     (hmember : ∀ n x, x ∈ U → ∀ v, CircleMember T γ (A n x v))
     (hbound : CircleJetNormBounds (T := T) (γ := γ) (U := U) A)
     (hzero : ∀ x ∈ U, A 0 x Fin.elim0 = S.decode (f x))
-    (hscalar : ∀ n (x w : E) (v : Fin n → E) t, x + t • w ∈ U → ∀ m b θ,
+    (hscalar : ∀ n (x w : E) (v : Fin n → E) (t : ℝ), x + t • w ∈ U → ∀ m b θ,
       HasDerivAt (fun u => iteratedDeriv b (A n (x + u • w) v m) θ)
         (iteratedDeriv b (A (n + 1) (x + t • w) (Fin.cons w v) m) θ) t)
     (henergy : CircleJetSecondEnvelopes (T := T) (γ := γ) (U := U) A) :

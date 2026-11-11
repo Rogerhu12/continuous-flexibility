@@ -18,6 +18,62 @@ namespace ContinuousFlexibility.Analysis
 open Set
 open scoped ContDiff BigOperators
 
+
+theorem norm_iteratedFDeriv_clm_left_weighted_polynomial_bound
+    {ι E F G : Type*}
+    [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup F] [NormedSpace ℝ F]
+    [NormedAddCommGroup G] [NormedSpace ℝ G]
+    (W H : ι → ℝ) (U : ι → Set E) (hU : ∀ i, IsOpen (U i))
+    (f : ι → E → F) (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (U i))
+    (L : F →L[ℝ] G) (n : ℕ)
+    (hbound : ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i x, x ∈ U i →
+      ‖iteratedFDeriv ℝ n (f i) x‖ ≤ A * H i * W i ^ P) :
+    ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i x, x ∈ U i →
+      ‖iteratedFDeriv ℝ n (fun y => L (f i y)) x‖ ≤ A * H i * W i ^ P := by
+  obtain ⟨A, P, hA, hP, hb⟩ := hbound
+  refine ⟨‖L‖ * A, P, mul_nonneg (ContinuousLinearMap.opNorm_nonneg L) hA,
+    hP, fun i x hx => ?_⟩
+  have h := L.norm_iteratedFDeriv_comp_left
+    ((hf i).contDiffAt ((hU i).mem_nhds hx)) (n := n) (by simp)
+  have h' : ‖iteratedFDeriv ℝ n (fun y => L (f i y)) x‖ ≤
+      ‖L‖ * ‖iteratedFDeriv ℝ n (f i) x‖ := by
+    simpa only [Function.comp_def] using h
+  exact h'.trans ((mul_le_mul_of_nonneg_left (hb i x hx)
+    (ContinuousLinearMap.opNorm_nonneg L)).trans_eq (by ring))
+
+theorem norm_iteratedFDeriv_add_weighted_polynomial_bound
+    {ι E F : Type*}
+    [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup F] [NormedSpace ℝ F]
+    (W H : ι → ℝ) (hW : ∀ i, 1 ≤ W i) (hH : ∀ i, 0 < H i)
+    (U : ι → Set E) (hU : ∀ i, IsOpen (U i))
+    (f g : ι → E → F)
+    (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (U i))
+    (hg : ∀ i, ContDiffOn ℝ ∞ (g i) (U i)) (n : ℕ)
+    (hfb : ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i x, x ∈ U i →
+      ‖iteratedFDeriv ℝ n (f i) x‖ ≤ A * H i * W i ^ P)
+    (hgb : ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i x, x ∈ U i →
+      ‖iteratedFDeriv ℝ n (g i) x‖ ≤ A * H i * W i ^ P) :
+    ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i x, x ∈ U i →
+      ‖iteratedFDeriv ℝ n (fun y => f i y + g i y) x‖ ≤ A * H i * W i ^ P := by
+  obtain ⟨A, P, hA, hP, hb⟩ := hfb
+  obtain ⟨B, Q, hB, hQ, hc⟩ := hgb
+  refine ⟨A + B, P + Q, add_nonneg hA hB, add_nonneg hP hQ, fun i x hx => ?_⟩
+  rw [fun_iteratedFDeriv_add_apply
+    (((hf i).contDiffAt ((hU i).mem_nhds hx)).of_le (by simp))
+    (((hg i).contDiffAt ((hU i).mem_nhds hx)).of_le (by simp))]
+  have ha' : A * H i * W i ^ P ≤ A * H i * W i ^ (P + Q) :=
+    mul_le_mul_of_nonneg_left
+      (Real.rpow_le_rpow_of_exponent_le (hW i) (le_add_of_nonneg_right hQ))
+      (mul_nonneg hA (hH i).le)
+  have hb' : B * H i * W i ^ Q ≤ B * H i * W i ^ (P + Q) :=
+    mul_le_mul_of_nonneg_left
+      (Real.rpow_le_rpow_of_exponent_le (hW i) (le_add_of_nonneg_left hP))
+      (mul_nonneg hB (hH i).le)
+  exact (norm_add_le _ _).trans ((add_le_add (hb i x hx) (hc i x hx)).trans
+    ((add_le_add ha' hb').trans_eq (by ring)))
+
 theorem finite_weighted_polynomial_majorant
     {ι X : Type*} (W H : ι → ℝ) (hW : ∀ i, 1 ≤ W i) (hH : ∀ i, 0 < H i)
     (U : ι → Set X) (u : ℕ → ι → X → ℝ) (n : ℕ)

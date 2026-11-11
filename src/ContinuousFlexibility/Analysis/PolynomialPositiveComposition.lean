@@ -41,7 +41,7 @@ theorem norm_iteratedFDeriv_bilinear_polynomial_bound
     (fun k i x => ‖iteratedFDeriv ℝ k (g i) x‖) n hgb
   let K : ℝ := ∑ k ∈ Finset.range (n + 1), (n.choose k : ℝ) * A * B
   have hK : 0 ≤ K := Finset.sum_nonneg (fun k _ => by positivity)
-  refine ⟨‖L‖ * K, P + Q, mul_nonneg (norm_nonneg _) hK,
+  refine ⟨‖L‖ * K, P + Q, mul_nonneg (ContinuousLinearMap.opNorm_nonneg L) hK,
     add_nonneg hP hQ, fun i x hx => ?_⟩
   have h := L.norm_iteratedFDerivWithin_le_of_bilinear
     (hf i) (hg i) (hU i).uniqueDiffOn hx (n := n) (by simp)
@@ -62,7 +62,7 @@ theorem norm_iteratedFDeriv_bilinear_polynomial_bound
       (mul_nonneg (Nat.cast_nonneg _) (mul_nonneg hA
         (Real.rpow_nonneg (zero_le_one.trans (hW i)) _)))
     exact hterm.trans_eq (by rw [Real.rpow_add (zero_lt_one.trans_le (hW i))]; ring)
-  exact h.trans ((mul_le_mul_of_nonneg_left hsum (norm_nonneg _)).trans_eq
+  exact h.trans ((mul_le_mul_of_nonneg_left hsum (ContinuousLinearMap.opNorm_nonneg L)).trans_eq
     (mul_assoc _ _ _).symm)
 
 theorem norm_iteratedFDeriv_comp_positive_polynomial_bound

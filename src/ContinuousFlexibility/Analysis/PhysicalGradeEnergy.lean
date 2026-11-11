@@ -91,8 +91,13 @@ theorem physicalNorm_le_sqrt_levelEnergy_sum
     Finset.single_le_sum
       (f := fun j : Fin (s + 1) => physicalLevelEnergy T γ j.val f)
       (fun _ _ => by positivity) (Finset.mem_univ k)
-  change Real.sqrt (physicalLevelEnergy T γ i f).toReal ≤ _
-  exact Real.sqrt_le_sqrt (ENNReal.toReal_mono hsum.ne hle)
+  rw [physicalLevelEnergy_eq_ofReal_norm_sq hf i] at hle
+  have hsq : physicalNorm T γ i f ^ 2 ≤
+      (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f).toReal := by
+    simpa only [ENNReal.toReal_ofReal (sq_nonneg _)] using
+      ENNReal.toReal_mono hsum.ne hle
+  have hroot := Real.sqrt_le_sqrt hsq
+  simpa only [Real.sqrt_sq (show 0 ≤ physicalNorm T γ i f from Real.sqrt_nonneg _)] using hroot
 
 theorem sobolevModel_grading_le_iff_physicalNorm
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}

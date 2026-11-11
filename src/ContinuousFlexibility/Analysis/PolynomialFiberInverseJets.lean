@@ -63,7 +63,7 @@ theorem norm_iteratedFDeriv_of_fiber_derivative_polynomial_bound
     (n : ℕ) (hn : 1 ≤ n) :
     ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i p, p ∈ U i →
       ‖iteratedFDeriv ℝ n (g i) p‖ ≤ A * W i ^ P := by
-  induction n using Nat.strong_induction_on generalizing hn with
+  induction n using Nat.strong_induction_on with
   | h n ih =>
     cases n with
     | zero => omega

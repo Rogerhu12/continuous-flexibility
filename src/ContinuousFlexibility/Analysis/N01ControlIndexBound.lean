@@ -148,7 +148,12 @@ theorem N01Properties.control_actual_cell_cubic_exp_constraint
     have hHC : 0 < T.H (T.sample (C.cell m)) := (hpos (C.cell m)).2.1
     have hEC : 0 < T.E0 (T.sample (C.cell m)) := (hpos (C.cell m)).2.2.1
     have hR : 0 < radialE (D.cellIndex j) := Real.exp_pos _
-    gcongr
+    have hRH : 0 < radialH (D.cellIndex j) := Real.exp_pos _
+    apply mul_le_mul _ (hh m) (by positivity) (by positivity)
+    apply mul_le_mul _ hm' (by positivity) (by positivity)
+    apply mul_le_mul _ (hc (C.cell m)) (by positivity) (by positivity)
+    exact mul_le_mul (mul_le_mul_of_nonneg_left (he j) hK.le) (hr j)
+      (by positivity) (by positivity)
   have hcombined := hraw.trans hbound
   have hradial : radialH (D.cellIndex j) ^ ((3 / 8 : ℝ) / 16) =
       Real.exp (-(D.cellIndex j : ℝ) ^ 3 / 64) := by

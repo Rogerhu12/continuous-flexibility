@@ -20,6 +20,8 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ContDiff BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 local instance circleChartCompositionJetsRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 variable {T : MaterialData} {γ : ℝ} {S : CircleModelData}
@@ -56,6 +58,28 @@ theorem prod_single_replacement {ι : Type*} [Fintype ι] [DecidableEq ι]
   congr 1
   exact Finset.prod_congr rfl (fun j hj => if_neg (Finset.ne_of_mem_erase hj))
 
+theorem multilinear_mixed_product_apply
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (n : ℕ) (a : ℝ) (H V : E →ₗ[ℝ] ℝ) (v : Fin n → E) :
+    (a • (MultilinearMap.mkPiAlgebra ℝ (Fin n) ℝ).compLinearMap (fun _ => H) +
+      ∑ i : Fin n, (MultilinearMap.mkPiAlgebra ℝ (Fin n) ℝ).compLinearMap
+        (fun j => if j = i then V else H)) v =
+      a * ∏ i, H (v i) + ∑ i : Fin n, V (v i) * ∏ j ∈ Finset.univ.erase i, H (v j) := by
+  classical
+  simp only [MultilinearMap.add_apply, MultilinearMap.smul_apply,
+    MultilinearMap.sum_apply, MultilinearMap.compLinearMap_apply,
+    MultilinearMap.mkPiAlgebra_apply, smul_eq_mul]
+  congr 1
+  apply Finset.sum_congr rfl
+  intro i hi
+  rw [← prod_single_replacement (fun j => H (v j)) i]
+  apply Finset.prod_congr rfl
+  intro j hj
+  by_cases hji : j = i
+  · subst j
+    simp only [if_pos rfl]
+  · simp only [if_neg hji]
+
 theorem circleChartCompositionJets_apply (hS : IsCircleModel T γ S)
     (travel : ℕ → ℝ) (n : ℕ) (x : S.Space × S.Space)
     (v : Fin n → S.Space × S.Space) (m : ℕ) (θ : ℝ) :
@@ -66,24 +90,11 @@ theorem circleChartCompositionJets_apply (hS : IsCircleModel T γ S)
           (circleCompositionPhase travel x m θ) *
         ∏ j ∈ Finset.univ.erase i, S.decode (v j).1 m θ := by
   classical
-  simp only [circleChartCompositionJets, MultilinearMap.pi_apply,
-    circleCompositionScalarJet, MultilinearMap.add_apply, MultilinearMap.smul_apply,
-    MultilinearMap.sum_apply, MultilinearMap.compLinearMap_apply,
-    MultilinearMap.mkPiAlgebra_apply, LinearMap.comp_apply, LinearMap.fst_apply,
-    LinearMap.snd_apply, circleAngularJetEvaluationLinear_apply, iteratedDeriv_zero,
-    smul_eq_mul]
-  congr 1
-  apply Finset.sum_congr rfl
-  intro i hi
-  rw [← prod_single_replacement (fun j => S.decode (v j).1 m θ) i]
-  apply Finset.prod_congr rfl
-  intro j hj
-  by_cases hji : j = i
-  · subst j
-    simp only [if_pos rfl, LinearMap.comp_apply, LinearMap.snd_apply,
-      circleAngularJetEvaluationLinear_apply]
-  · simp only [if_neg hji, LinearMap.comp_apply, LinearMap.fst_apply,
-      circleAngularJetEvaluationLinear_apply, iteratedDeriv_zero]
+  change circleCompositionScalarJet hS travel n x m θ v = _
+  unfold circleCompositionScalarJet
+  rw [multilinear_mixed_product_apply]
+  simp only [LinearMap.comp_apply, LinearMap.fst_apply, LinearMap.snd_apply,
+    circleAngularJetEvaluationLinear_apply, iteratedDeriv_zero]
 
 theorem circleChartCompositionJets_zero (hS : IsCircleModel T γ S)
     (travel : ℕ → ℝ) (x : S.Space × S.Space) :
@@ -115,7 +126,7 @@ theorem circleCompositionPhase_line_hasDerivAt (travel : ℕ → ℝ)
       (S.decode w.1 m θ) t := by
   have h := ((hasDerivAt_id t).mul_const (S.decode w.1 m θ)).const_add
     (circleCompositionPhase travel x m θ)
-  simpa only [one_mul, circleCompositionPhase_line] using h
+  simpa only [one_mul, id_eq, circleCompositionPhase_line] using h
 
 /-- The coefficient of the all-chart-direction term has its ordinary
 scalar derivative along every actual affine parameter line. -/
@@ -133,8 +144,9 @@ theorem circleComposition_outerJet_line_hasDerivAt
   have hcoef (u : S.Space) :
       HasDerivAt (fun q => iteratedDeriv n (S.decode u m) (φ q))
         (iteratedDeriv (n + 1) (S.decode u m) (φ t) * S.decode w.1 m θ) t := by
-    have h := (((hS.2.2.2.1 u).1 m).1.differentiable_iteratedDeriv n (by simp) (φ t)).hasDerivAt
-    simpa only [iteratedDeriv_succ] using h.comp t hφ
+    have h := (((hS.2.2.2.1 u).1 m).1.differentiable_iteratedDeriv n
+      (by exact_mod_cast (ENat.natCast_lt_top n)) (φ t)).hasDerivAt
+    simpa only [iteratedDeriv_succ, Function.comp_def] using h.comp t hφ
   have h := (hcoef x.2).fun_add ((hasDerivAt_id t).fun_mul (hcoef w.2))
   have heq :
       (fun q : ℝ => iteratedDeriv n (S.decode (x + q • w).2 m) (φ q)) =
@@ -153,7 +165,7 @@ theorem fin_prod_erase_zero {n : ℕ} (h : Fin (n + 1) → ℝ) :
   have heq : (∏ j : Fin (n + 1), if j = 0 then (1 : ℝ) else h j) =
       ∏ i : Fin n, h i.succ := by
     rw [Fin.prod_univ_succ]
-    simp only [if_pos rfl, Fin.succ_ne_zero, if_false, one_mul]
+    simp only [Fin.succ_ne_zero, ite_false, ite_true, one_mul]
   have hprod : (∏ j ∈ Finset.univ.erase (0 : Fin (n + 1)), h j) =
       ∏ j : Fin (n + 1), if j = 0 then (1 : ℝ) else h j := by
     simpa only [one_mul] using (prod_single_replacement h 0 (1 : ℝ)).symm
@@ -228,9 +240,9 @@ theorem circleChartCompositionJets_line_hasDerivAt
           ((iteratedDeriv (n + 1) (S.decode (v i).2 m) (φ t) *
             S.decode w.1 m θ) * Q i) t := by
       have hc := (((hS.2.2.2.1 (v i).2).1 m).1.differentiable_iteratedDeriv
-        n (by simp) (φ t)).hasDerivAt
+        n (by exact_mod_cast (ENat.natCast_lt_top n)) (φ t)).hasDerivAt
       have hd := (hc.comp t hφ).mul_const (Q i)
-      simpa only [iteratedDeriv_succ] using hd
+      simpa only [iteratedDeriv_succ, Function.comp_def] using hd
     have hsum := HasDerivAt.fun_sum (u := Finset.univ) (fun i _ => hterm i)
     have hmain := (circleComposition_outerJet_line_hasDerivAt hS travel x w (n + 1) m θ t).mul_const P
     have h := hmain.fun_add hsum
@@ -278,7 +290,7 @@ theorem circleChartCompositionJets_contDiff (hS : IsCircleModel T γ S)
   apply ContDiff.add
   · exact ((hu x.2 n).comp hφ).mul
       (contDiff_prod (fun i _ => ((hS.2.2.2.1 (v i).1).1 m).1))
-  · exact contDiff_sum (fun i _ => ((hu (v i).2 (n - 1)).comp hφ).mul
+  · exact ContDiff.sum (fun i _ => ((hu (v i).2 (n - 1)).comp hφ).mul
       (contDiff_prod (fun j _ => ((hS.2.2.2.1 (v j).1).1 m).1)))
 
 theorem circleChartCompositionJets_periodic (hS : IsCircleModel T γ S)
@@ -291,7 +303,11 @@ theorem circleChartCompositionJets_periodic (hS : IsCircleModel T γ S)
     circlePeriodic_iteratedDeriv_real ((hS.2.2.2.1 u).1 m).2 b
   have hv (u : S.Space) : Function.Periodic (S.decode u m) Real.pi :=
     ((hS.2.2.2.1 u).1 m).2
+  have hp' (u : S.Space) (b : ℕ) (t : ℝ) :
+      iteratedDeriv b (S.decode u m) (t + Real.pi) = iteratedDeriv b (S.decode u m) t :=
+    hp u b t
+  have hv' (u : S.Space) (t : ℝ) : S.decode u m (t + Real.pi) = S.decode u m t := hv u t
   intro θ
-  simp only [circleChartCompositionJets_apply, circleCompositionPhase_period hS, hp, hv]
+  simp only [circleChartCompositionJets_apply, circleCompositionPhase_period hS, hp', hv']
 
 end ContinuousFlexibility.Statements

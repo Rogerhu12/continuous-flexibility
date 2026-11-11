@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
 import ContinuousFlexibility.Analysis.N01FlowSmallness
+import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
 
 /-!
 # Uniform angular jets of the actual N01 flow and its inverse
@@ -35,13 +36,49 @@ theorem N01Properties.minusFlow_reference_angular_iteratedDeriv_bound
   have heq : C.minusFlow (C.referenceState, 0) m r =
       fun t => t - opticalTravel D.w (C.left m) r :=
     funext (hN.minusFlow_reference_eq hS hT m hr)
-  rw [heq, iteratedDeriv_fun_sub
-    ((contDiff_id : ContDiff ℝ ∞ (fun t : ℝ => t)).of_le (by simp)).contDiffAt
-    (contDiff_const : ContDiff ℝ (n : ℕ∞ω) (fun _ : ℝ =>
-      opticalTravel D.w (C.left m) r)).contDiffAt]
-  simp only [iteratedDeriv_fun_id, iteratedDeriv_const, if_neg (by omega : n ≠ 0),
+  rw [heq]
+  have hsub := iteratedDeriv_fun_sub
+    (contDiffAt_id : ContDiffAt ℝ (n : ℕ∞ω) (fun t : ℝ => t) θ)
+    (contDiffAt_const : ContDiffAt ℝ (n : ℕ∞ω)
+      (fun _ : ℝ => opticalTravel D.w (C.left m) r) θ)
+  simp only [id_eq] at hsub
+  rw [hsub]
+  simp only [iteratedDeriv_id, iteratedDeriv_const, if_neg (by omega : n ≠ 0),
     sub_zero]
   split <;> norm_num
+
+theorem N01Properties.ordinaryFlowFamily_angular_uniform_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε) (n : ℕ) :
+    ∃ K : ℝ, 0 ≤ K ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,
+      |ordinaryFlowFamily S C m 0 n (r, θ) z| ≤ K := by
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 n
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  obtain ⟨A, hA, hweight⟩ :=
+    materialSample_H_E0_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) B
+  let Q := 1 + pairGrading (stateGrading S) realGrading (n + loss)
+    (z - (C.referenceState, 0))
+  have hQ : 0 ≤ Q := add_nonneg zero_le_one (apply_nonneg _ _)
+  have hpoint : ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,
+      |ordinaryFlowFamily S C m 0 n (r, θ) z| ≤ B * A * Q := by
+    intro m r hr θ
+    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m 0 n (r, θ) (by simp) hr
+    have hraw : |J.D 0 z Fin.elim0| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ B * Q := by
+      simpa only [pow_zero, one_mul, oneHighVariationWeight, Fin.prod_univ_zero,
+        Fin.sum_univ_zero, mul_one, add_zero, Q] using hJ z hz Fin.elim0
+    have hzero : J.D 0 z Fin.elim0 = ordinaryFlowFamily S C m 0 n (r, θ) z :=
+      J.zero z hz
+    have hM : B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (C.cell m)) ^ B * Q ≤ B * A * Q := by
+      have h := mul_le_mul_of_nonneg_left (hweight (C.cell m)) (mul_nonneg hB.le hQ)
+      convert h using 1 <;> ring
+    exact (congrArg abs hzero).symm.le.trans (hraw.trans hM)
+  exact ⟨B * A * Q, mul_nonneg (mul_nonneg hB.le hA.le) hQ, hpoint⟩
 
 theorem N01Properties.minusFlow_angular_iteratedDeriv_uniform_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -52,61 +89,46 @@ theorem N01Properties.minusFlow_angular_iteratedDeriv_uniform_bound
     (hsector : stateSector S z.1) (n : ℕ) (hn : 1 ≤ n) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
       |iteratedDeriv n (C.minusFlow z m r) θ| ≤ K := by
-  have hdata := hN
-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩
-  obtain ⟨B, hB, hflow⟩ := hflow 0 n
-  obtain ⟨A, hA, hweight⟩ :=
-    materialSample_H_E0_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) B
-  let Q := 1 + pairGrading (stateGrading S) realGrading (n + loss)
-    (z - (C.referenceState, 0))
-  have hQ : 0 ≤ Q := add_nonneg zero_le_one (apply_nonneg _ _)
-  let K := B * A * Q + 1
-  have hK : 0 ≤ K := add_nonneg (mul_nonneg (mul_nonneg hB.le hA.le) hQ) zero_le_one
-  refine ⟨K, hK, fun m r hr θ => ?_⟩
-  have hC : controlGeometryConditions D S C := hN.2.2.2.1
-  have hi (s : ℝ) (hs : s ∈ Ioo (C.left m) (C.right m)) :
-      |iteratedDeriv n (C.minusFlow z m s) θ| ≤ K := by
-    obtain ⟨J, hJ⟩ := hflow m 0 n (s, θ) (by simp) hs
-    have hraw := hJ z hz Fin.elim0
-    rw [J.zero z hz] at hraw
-    simp only [pow_zero, one_mul, oneHighVariationWeight, Fin.prod_univ_zero,
-      Fin.sum_univ_zero, mul_one, add_zero] at hraw
-    have hclosed : s ∈ Icc (C.left m) (C.right m) := ⟨hs.1.le, hs.2.le⟩
-    have hf := (hN.minusFlow_angular_contDiff hS hT hz hsector m hclosed).of_le
-      (show (n : ℕ∞ω) ≤ ∞ by simp)
-    have hrefeq : C.minusFlow (C.referenceState, 0) m s =
-        fun t => t - opticalTravel D.w (C.left m) s :=
-      funext (hN.minusFlow_reference_eq hS hT m hclosed)
-    have href : ContDiff ℝ (n : ℕ∞ω) (C.minusFlow (C.referenceState, 0) m s) := by
-      rw [hrefeq]
-      exact contDiff_id.sub contDiff_const
-    simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero] at hraw
-    rw [iteratedDeriv_fun_sub hf.contDiffAt href.contDiffAt] at hraw
-    have hM : B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (C.cell m)) ^ B *
-        (1 + pairGrading (stateGrading S) realGrading (n + loss)
-          (z - (C.referenceState, 0))) ≤ B * A * Q := by
-      have h := mul_le_mul_of_nonneg_left (hweight (C.cell m)) (mul_nonneg hB.le hQ)
-      convert h using 1 <;> dsimp only [Q] <;> ring
-    calc
-      |iteratedDeriv n (C.minusFlow z m s) θ| =
-          |(iteratedDeriv n (C.minusFlow z m s) θ -
-              iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ) +
-            iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ| := by rw [sub_add_cancel]
-      _ ≤ |iteratedDeriv n (C.minusFlow z m s) θ -
-              iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ| +
-            |iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ| := abs_add_le _ _
-      _ ≤ B * A * Q + 1 := add_le_add (hraw.trans hM)
-        (hN.minusFlow_reference_angular_iteratedDeriv_bound hS hT m hclosed n hn θ)
-  have hc : ContinuousOn (fun s => |iteratedDeriv n (C.minusFlow z m s) θ|)
-      (Icc (C.left m) (C.right m)) :=
-    ((hN.minusFlow_angular_iteratedDeriv_continuousOn hS hT hz hsector m n).comp
-      (continuous_id.prodMk continuous_const).continuousOn
-      (fun s hs => ⟨hs, mem_univ θ⟩)).abs
-  have hclosure : closure (Ioo (C.left m) (C.right m)) = Icc (C.left m) (C.right m) :=
-    closure_Ioo (hC.1 m).2.1.ne
-  exact le_on_closure hi (by simpa only [hclosure] using hc) continuousOn_const
-    (by simpa only [hclosure] using hr)
+  obtain ⟨M, hM, hbound⟩ := hN.ordinaryFlowFamily_angular_uniform_bound hT hz n
+  have hpoint : ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
+      |iteratedDeriv n (C.minusFlow z m r) θ| ≤ M + 1 := by
+    intro m r hr θ
+    have hC : controlGeometryConditions D S C := hN.2.2.2.1
+    have hi (s : ℝ) (hs : s ∈ Ioo (C.left m) (C.right m)) :
+        |iteratedDeriv n (C.minusFlow z m s) θ| ≤ M + 1 := by
+      have hraw := hbound m s hs θ
+      have hclosed : s ∈ Icc (C.left m) (C.right m) := ⟨hs.1.le, hs.2.le⟩
+      have hf := (hN.minusFlow_angular_contDiff hS hT hz hsector m hclosed).of_le
+        (show (n : ℕ∞ω) ≤ ∞ by simp)
+      have hrefeq : C.minusFlow (C.referenceState, 0) m s =
+          fun t => t - opticalTravel D.w (C.left m) s :=
+        funext (hN.minusFlow_reference_eq hS hT m hclosed)
+      have href : ContDiff ℝ (n : ℕ∞ω) (C.minusFlow (C.referenceState, 0) m s) := by
+        rw [hrefeq]
+        exact contDiff_id.sub contDiff_const
+      simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero] at hraw
+      rw [iteratedDeriv_fun_sub hf.contDiffAt href.contDiffAt] at hraw
+      calc
+        |iteratedDeriv n (C.minusFlow z m s) θ| =
+            |(iteratedDeriv n (C.minusFlow z m s) θ -
+                iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ) +
+              iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ| := by
+                rw [sub_add_cancel]
+        _ ≤ |iteratedDeriv n (C.minusFlow z m s) θ -
+                iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ| +
+              |iteratedDeriv n (C.minusFlow (C.referenceState, 0) m s) θ| := abs_add_le _ _
+        _ ≤ M + 1 := add_le_add hraw
+          (hN.minusFlow_reference_angular_iteratedDeriv_bound hS hT m hclosed n hn θ)
+    have hc : ContinuousOn (fun s => |iteratedDeriv n (C.minusFlow z m s) θ|)
+        (Icc (C.left m) (C.right m)) :=
+      ((hN.minusFlow_angular_iteratedDeriv_continuousOn hS hT hz hsector m n).comp
+        (continuous_id.prodMk continuous_const).continuousOn
+        (fun s hs => ⟨hs, mem_univ θ⟩)).abs
+    have hclosure : closure (Ioo (C.left m) (C.right m)) = Icc (C.left m) (C.right m) :=
+      closure_Ioo (hC.1 m).2.1.ne
+    exact le_on_closure hi (by simpa only [hclosure] using hc) continuousOn_const
+      (by simpa only [hclosure] using hr)
+  exact ⟨M + 1, add_nonneg hM zero_le_one, hpoint⟩
 
 /-- A common neighborhood controls every actual fiberwise inverse.
 The bound at derivative order `n` may depend on the fixed state and

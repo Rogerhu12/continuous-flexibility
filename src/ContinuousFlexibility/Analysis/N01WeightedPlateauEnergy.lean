@@ -84,7 +84,7 @@ theorem N01Properties.controlPlateau_weighted_jet_energy_tsum_le
     _ ≤ ∑' m : ℕ, ENNReal.ofReal P * ∑ i : Fin (a + 1), g m i :=
       ENNReal.tsum_le_tsum hm
     _ = ENNReal.ofReal P * ∑ i : Fin (a + 1), ∑' m : ℕ, g m i := by
-      rw [← ENNReal.tsum_mul_left, hcomm]
+      rw [ENNReal.tsum_mul_left, hcomm]
     _ ≤ ENNReal.ofReal P * ∑ i : Fin (a + 1), ENNReal.ofReal Ko *
         eLpNorm (weightedPhysicalJet T γ (a - i.val) b (c + d + 5) f)
           2 materialCylinderMeasure ^ 2 :=

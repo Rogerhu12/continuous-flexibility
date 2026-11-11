@@ -92,7 +92,7 @@ theorem sourceJetLift_hasProjectiveLineDerivAt
     (hmember : ∀ n x, x ∈ U → ∀ v, HeightMember D T (3 / 4 : ℝ) (A n x v))
     (hcompat : ∀ n x, x ∈ U → ∀ v, physicalSourceIntegral D (A n x v) = 0)
     (hbound : SourceJetNormBounds (T := T) (U := U) A)
-    (hscalar : ∀ n (x w : E) (v : Fin n → E) t, x + t • w ∈ U → ∀ a b c p,
+    (hscalar : ∀ n (x w : E) (v : Fin n → E) (t : ℝ), x + t • w ∈ U → ∀ a b c p,
       HasDerivAt (fun u => weightedPhysicalJet T (3 / 4 : ℝ) a b c
         (A n (x + u • w) v) p)
         (weightedPhysicalJet T (3 / 4 : ℝ) a b c
@@ -142,7 +142,7 @@ theorem exists_source_smoothDirections_of_scalar_jets
     (hcompat : ∀ n x, x ∈ U → ∀ v, physicalSourceIntegral D (A n x v) = 0)
     (hbound : SourceJetNormBounds (T := T) (U := U) A)
     (hzero : ∀ x ∈ U, A 0 x Fin.elim0 = physicalSourceDecode S (f x))
-    (hscalar : ∀ n (x w : E) (v : Fin n → E) t, x + t • w ∈ U → ∀ a b c p,
+    (hscalar : ∀ n (x w : E) (v : Fin n → E) (t : ℝ), x + t • w ∈ U → ∀ a b c p,
       HasDerivAt (fun u => weightedPhysicalJet T (3 / 4 : ℝ) a b c
         (A n (x + u • w) v) p)
         (weightedPhysicalJet T (3 / 4 : ℝ) a b c

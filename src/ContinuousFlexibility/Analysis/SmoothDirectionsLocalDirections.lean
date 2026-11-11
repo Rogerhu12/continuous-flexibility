@@ -29,8 +29,9 @@ theorem SmoothDirections.continuousAt_jet_eval
     (J.continuous n).continuousAt
       ((J.open_domain.prod isOpen_univ).mem_nhds
         (show (x, v) ∈ U ×ˢ univ from ⟨hx, mem_univ v⟩))
-  simpa only [Function.comp_def] using
-    hc.comp (continuousAt_id.prodMk continuousAt_const)
+  have hmap : ContinuousAt (fun y : E => (y, v)) x :=
+    continuousAt_id.prodMk continuousAt_const
+  simpa only [Function.comp_def] using hc.comp_of_eq hmap rfl
 
 theorem SmoothDirections.abs_jet_sub_le_of_next_bound
     (J : SmoothDirections U f) (n : ℕ) (x w : E) (v : Fin n → E)

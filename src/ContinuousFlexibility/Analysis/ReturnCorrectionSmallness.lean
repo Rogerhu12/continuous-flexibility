@@ -52,7 +52,7 @@ theorem evenPart_bound_of_sub_id_bound
     ring
   rw [heq, abs_div, abs_of_pos (by norm_num : (0 : ℝ) < 2)]
   apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).mpr
-  exact (abs_add _ _).trans ((add_le_add (hF θ) (hF (-θ))).trans_eq (by ring))
+  exact (abs_add_le _ _).trans ((add_le_add (hF θ) (hF (-θ))).trans_eq (by ring))
 
 end ContinuousFlexibility.Analysis
 
@@ -85,9 +85,12 @@ theorem N01Properties.stateLeftChart_sub_id_bound
   have href : referenceStateConditions D S C := hN.2.2.1
   have hτ : (z.1 - C.referenceState).2.2.2 = z.1.2.2.2 := by
     change z.1.2.2.2 - C.referenceState.2.2.2 = z.1.2.2.2
-    rw [href.2.2.2.2.1, sub_zero]
-  have hgrade := stateChartGrading_le_stateGrading S 1 (z.1 - C.referenceState)
-  rw [hτ] at hgrade
+    exact (congrArg (fun u : CircleSpace S => z.1.2.2.2 - u)
+      href.2.2.2.2.1).trans (sub_zero _)
+  have hgrade : (S.circle (3 / 4 : ℝ)).grading 1 z.1.2.2.2 ≤
+      stateGrading S 1 (z.1 - C.referenceState) :=
+    (congrArg (fun u : CircleSpace S => (S.circle (3 / 4 : ℝ)).grading 1 u)
+      hτ).symm.le.trans (stateChartGrading_le_stateGrading S 1 (z.1 - C.referenceState))
   have hsmall : (S.circle (3 / 4 : ℝ)).grading 1 z.1.2.2.2 ≤ η :=
     (hgrade.trans ((solve_stateGrading_monotone S hbase _))).trans hz.1.le
   obtain ⟨_, hRef⟩ := hN.1.1
@@ -124,7 +127,7 @@ theorem N01Properties.returnCorrectionInitialMap_and_residual_bound
       dsimp only [G]
       ring
     rw [heq]
-    exact (abs_add _ _).trans (add_le_add (hfinv t) (hL _))
+    exact (abs_add_le _ _).trans (add_le_add (hfinv t) (hL _))
   have hR (t : ℝ) : |rightChartCandidate S C z m t - t| ≤ A + B := by
     exact oddPart_sub_id_bound hG t
   have hRinv (t : ℝ) : |C.rightChartInverse z m t - t| ≤ A + B := by
@@ -146,11 +149,11 @@ theorem N01Properties.returnCorrectionInitialMap_and_residual_bound
       _ ≤ |(C.minusReturnInverse z m (C.rightChartInverse z m y) -
             (C.rightChartInverse z m y + C.travel m)) +
             (C.rightChartInverse z m y - y)| + |stateLeftChart S z.1 m θ - θ| :=
-        abs_add _ _
+        abs_add_le _ _
       _ ≤ (|C.minusReturnInverse z m (C.rightChartInverse z m y) -
             (C.rightChartInverse z m y + C.travel m)| +
             |C.rightChartInverse z m y - y|) + |stateLeftChart S z.1 m θ - θ| :=
-        add_le_add_right (abs_add _ _) _
+        add_le_add (abs_add_le _ _) le_rfl
       _ ≤ (A + (A + B)) + B := add_le_add
         (add_le_add (hfinv _) (hRinv y)) (hL θ)
       _ = _ := by ring

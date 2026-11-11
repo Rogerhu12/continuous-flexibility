@@ -49,7 +49,7 @@ theorem interpolation_le_rpow_scale
       linarith
     have hnum' : 0 ≤ (order : ℝ) - base + loss := by
       have h : (base : ℝ) < order := by exact_mod_cast hbo
-      linarith [Nat.cast_nonneg (R := ℝ) loss]
+      linarith [Nat.cast_nonneg (α := ℝ) loss]
     have hα : 0 ≤ ((high : ℝ) - order - loss) / (high - base) :=
       div_nonneg hnum hden.le
     have hβ : 0 ≤ ((order : ℝ) - base + loss) / (high - base) :=
@@ -141,7 +141,8 @@ theorem finite_product_interpolation_bound
       ((high : ℝ) - base)) Q (fun i => apply_nonneg _ _) hC hQ hsum
   intro i
   have hi : p i high (x i) ≤ ∑ j, p j high (x j) :=
-    Finset.single_le_sum (fun j _ => apply_nonneg _ _) (Finset.mem_univ i)
+    Finset.single_le_sum (f := fun j => p j high (x j))
+      (fun j _ => apply_nonneg (p j high) (x j)) (Finset.mem_univ i)
   exact hbound i (x i) Q (hx i) (hi.trans (by dsimp [Q]; linarith)) hQ
 
 end FiniteProducts
@@ -178,7 +179,9 @@ theorem two_factor_interpolation_bound
   refine ⟨Cp * Cq, mul_nonneg hCp hCq, ?_⟩
   intro x y hx hy
   let Q : ℝ := 1 + p high x + q high y
-  have hQ : 1 ≤ Q := by dsimp [Q]; positivity
+  have hQ : 1 ≤ Q := by
+    dsimp [Q]
+    linarith [apply_nonneg (p high) x, apply_nonneg (q high) y]
   have hpQ : p high x ≤ Q := by dsimp [Q]; linarith [apply_nonneg (q high) y]
   have hqQ : q high y ≤ Q := by dsimp [Q]; linarith [apply_nonneg (p high) x]
   have hden : 0 < (high : ℝ) - base := sub_pos.mpr (by exact_mod_cast hhigh)

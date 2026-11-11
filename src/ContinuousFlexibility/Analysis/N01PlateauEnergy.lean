@@ -77,7 +77,8 @@ theorem N01Properties.controlPlateau_cutoff_coeff_bound
   have hM : 0 ≤ T.M (T.radius x) :=
     zero_le_one.trans (hT.2.1 _ (hT.2.2.2.2.2.2.2.1 x).1).2.2.2
   have hKiK : (a.choose i.val : ℝ) * Ki i ≤ K :=
-    Finset.single_le_sum (fun k _ => mul_nonneg (Nat.cast_nonneg _) (hKi k).le)
+    Finset.single_le_sum (f := fun k : Fin (a + 1) => (a.choose k.val : ℝ) * Ki k)
+      (fun k _ => mul_nonneg (Nat.cast_nonneg _) (hKi k).le)
       (Finset.mem_univ i)
   rw [abs_mul, abs_of_nonneg (Nat.cast_nonneg _)]
   calc
@@ -136,7 +137,7 @@ theorem N01Properties.controlPlateau_cutoff_jet_energy_tsum_le
     _ ≤ ∑' m : ℕ, ENNReal.ofReal P * ∑ i : Fin (a + 1), g m i :=
       ENNReal.tsum_le_tsum hm
     _ = ENNReal.ofReal P * ∑ i : Fin (a + 1), ∑' m : ℕ, g m i := by
-      rw [← ENNReal.tsum_mul_left, hcomm]
+      rw [ENNReal.tsum_mul_left, hcomm]
     _ ≤ ENNReal.ofReal P * ∑ i : Fin (a + 1), ENNReal.ofReal Ko *
         eLpNorm (weightedPhysicalJet T γ (a - i.val) b (c + 2) f)
           2 materialCylinderMeasure ^ 2 :=
