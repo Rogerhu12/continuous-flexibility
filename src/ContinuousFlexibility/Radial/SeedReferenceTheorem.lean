@@ -32,7 +32,8 @@ theorem seedReference_theorem (_hR03 : R03Statement) (hR07 : R07Statement) : R08
   have hfamily := hS.2.2.2.1 S.sigma hσ
   have hreal : MorseChainRealization S.chain S.sigma D₀ S.constants := hfamily.1
   have hmass : MorseMassResistanceBounds S.chain S.sigma D₀ S.constants := hfamily.2
-  have hD : RadialProfileGeometry D₀ := hreal.geometry
+  have hBounds : AccumulatingProfileBounds D₀ S.constants := hreal.2.2.2.2.2.2.2.2.2
+  have hD : RadialProfileGeometry D₀ := hBounds.1
   have hc : c ∈ radialCore D₀ := (hentry false).1
   have hd : d ∈ radialCore D₀ := (hentry true).1
   obtain ⟨CL⟩ := exists_morseSecondMode_coneTail hreal hmass hσ hc
@@ -47,7 +48,7 @@ theorem seedReference_theorem (_hR03 : R03Statement) (hR07 : R07Statement) : R08
   obtain ⟨G⟩ := exists_seedGluedPair hD hc hd TL TR
     (by simpa using hTL)
     (by simpa using hTR) K hq
-  have hAccum₀ : IsAccumulatingProfile D₀ := ⟨S.constants, hreal.accumulating⟩
+  have hAccum₀ : IsAccumulatingProfile D₀ := ⟨S.constants, hBounds⟩
   obtain ⟨D, hDa, hDb, hDw, hDphi, hAccum⟩ :=
     exists_accumulating_reference_of_two_tail_surgery hAccum₀ G.radiusL_pos
       G.radius_order G.heightL_pos G.heightR_pos hc.1 hentries hd.2 G.geometry

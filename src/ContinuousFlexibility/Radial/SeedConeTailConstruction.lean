@@ -20,7 +20,8 @@ theorem exists_morseSecondMode_coneTail
     (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2) (hentry : entry ∈ radialCore D)
     (hu : RadialNaturalTail D right 2 entry u) (hder : 0 < deriv D.w entry) :
     Nonempty (SeedConeTail D right entry u) := by
-  have hne := radialNaturalTail_entry_state_ne_zero hreal.geometry hentry hu
+  have hGeometry : RadialProfileGeometry D := hreal.2.2.2.2.2.2.2.2.2.1
+  have hne := radialNaturalTail_entry_state_ne_zero hGeometry hentry hu
   obtain ⟨V, hVs, hV₀, hVtail, hVzero, hVjets⟩ :=
     morseSecondMode_naturalTail_smoothZeroExtension hreal hmass hσ hentry hu
   have hd : deriv V entry = deriv u entry := by
@@ -28,7 +29,7 @@ theorem exists_morseSecondMode_coneTail
       radialTail_extension_entry_jets hentry hu.1 hVs.contDiffAt hV₀ hVtail 1
   have hVne : (V entry, deriv V entry) ≠ (0, 0) := by
     simpa only [hV₀, hd] using hne
-  exact exists_seedConeTail_of_smoothNatural hreal.geometry hentry hder hVs hVtail hVzero
-    (radialTail_extension_radialJacobi hreal.geometry hentry hu hVs hVtail) hVne
+  exact exists_seedConeTail_of_smoothNatural hGeometry hentry hder hVs hVtail hVzero
+    (radialTail_extension_radialJacobi hGeometry hentry hu hVs hVtail) hVne
 
 end ContinuousFlexibility.Radial
