@@ -139,8 +139,7 @@ theorem RadialTailCauchyUnique.radiusScale
         deriv_radialRadiusScale_apply_mul hκ.ne']
       field_simp [hκ.ne'] <;> ring
     obtain ⟨hd, hdflux⟩ := hsys _ hi
-    have hcoord : HasDerivAt (fun r : ℝ => κ * r) κ r := by
-      simpa only [mul_one] using (hasDerivAt_id r).const_mul κ
+    have hcoord : HasDerivAt (fun r : ℝ => κ * r) κ r := hasDerivAt_const_mul κ
     constructor
     · apply (hd.comp r hcoord).congr_deriv
       dsimp only [P]
