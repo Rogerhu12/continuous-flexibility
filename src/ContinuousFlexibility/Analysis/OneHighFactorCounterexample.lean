@@ -51,9 +51,11 @@ theorem contDiff_oneHighFactorQuadratic (M : ℝ) :
 
 theorem hasDerivAt_oneHighFactorQuadratic (M x : ℝ) :
     HasDerivAt (oneHighFactorQuadratic M) (M * (2 - 2 * x)) x := by
-  have h := (((hasDerivAt_id x).const_mul (2 : ℝ)).fun_sub
-    ((hasDerivAt_id x).fun_pow 2)).const_mul M
-  simpa [oneHighFactorQuadratic] using h
+  unfold oneHighFactorQuadratic
+  have hinner : HasDerivAt (fun y : ℝ => 2 * y - y ^ 2) (2 - 2 * x) x := by
+    convert (((hasDerivAt_id x).const_mul (2 : ℝ)).fun_sub
+      ((hasDerivAt_id x).fun_pow 2)) using 1 <;> simp
+  exact hinner.const_mul M
 
 @[simp] theorem deriv_oneHighFactorQuadratic_one (M : ℝ) :
     deriv (oneHighFactorQuadratic M) 1 = 0 := by

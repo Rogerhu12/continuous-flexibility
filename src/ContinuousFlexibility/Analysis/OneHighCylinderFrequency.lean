@@ -76,7 +76,8 @@ theorem cylinder_inverse_weight_memLp_of_count_integrable {a q : ℝ} (ha : a �
   apply ((integrable_inv_one_add_mul_sq ha).mul_prod hq).mono'
     (hc.pow 2).aestronglyMeasurable
   filter_upwards [] with ζ
-  rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _), cylinderFrequencyWeight_neg_two]
+  rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _), Pi.pow_apply,
+    cylinderFrequencyWeight_neg_two]
   exact mixed_inverse_square_le (a * ζ.1) (q * (ζ.2 : ℝ))
 
 /-- The actual mixed-frequency Cauchy--Schwarz estimate at order two.

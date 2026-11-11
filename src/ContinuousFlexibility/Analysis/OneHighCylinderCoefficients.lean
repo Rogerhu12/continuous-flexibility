@@ -37,14 +37,26 @@ def cylinderAngularCoefficient (f : ℝ × AddCircle P → ℂ) (n : ℤ) (r : �
 /-- Compact angular integration preserves radial continuity. -/
 theorem continuous_cylinderAngularCoefficient {f : ℝ × AddCircle P → ℂ}
     (hf : Continuous f) (n : ℤ) : Continuous (cylinderAngularCoefficient f n) := by
-  have hc : Continuous (fun p : ℝ × AddCircle P => fourier (-n) p.2 • f p) :=
-    ((fourier (-n)).continuous.comp continuous_snd).smul hf
-  have hi : Continuous (fun r : ℝ =>
-      ∫ θ in (univ : Set (AddCircle P)), fourier (-n) θ • f (r, θ)
-        ∂AddCircle.haarAddCircle) :=
+  have hc : Continuous (fun p : ℝ × ℝ =>
+      fourier (-n) (p.2 : AddCircle P) • f (p.1, (p.2 : AddCircle P))) :=
+    (((fourier (-n)).continuous.comp (AddCircle.continuous_mk' P)).comp continuous_snd).smul
+      (hf.comp (continuous_fst.prodMk ((AddCircle.continuous_mk' P).comp continuous_snd)))
+  have hi : Continuous (fun r : ℝ => ∫ θ in Icc (0 : ℝ) P,
+      fourier (-n) (θ : AddCircle P) • f (r, (θ : AddCircle P)) ∂volume) :=
     continuous_parametric_integral_of_continuous
-      (f := fun r θ => fourier (-n) θ • f (r, θ)) hc isCompact_univ
-  simpa only [Measure.restrict_univ] using hi
+      (μ := volume) (f := fun r θ =>
+        fourier (-n) (θ : AddCircle P) • f (r, (θ : AddCircle P))) hc isCompact_Icc
+  have hint : Continuous (fun r : ℝ => ∫ θ in (0 : ℝ)..P,
+      fourier (-n) (θ : AddCircle P) • f (r, (θ : AddCircle P))) := by
+    simpa only [intervalIntegral.integral_of_le (Fact.out : 0 < P).le,
+      integral_Icc_eq_integral_Ioc] using hi
+  have heq : cylinderAngularCoefficient f n = fun r : ℝ =>
+      (1 / P) • ∫ θ in (0 : ℝ)..P,
+        fourier (-n) (θ : AddCircle P) • f (r, (θ : AddCircle P)) := by
+    funext r
+    rw [cylinderAngularCoefficient_apply, fourierCoeff_eq_intervalIntegral _ n 0, zero_add]
+  rw [heq]
+  exact continuous_const.smul hint
 
 /-- A single angular coefficient is bounded by the full angular `L²` energy. -/
 theorem cylinderAngularCoefficient_sq_le {f : ℝ × AddCircle P → ℂ}

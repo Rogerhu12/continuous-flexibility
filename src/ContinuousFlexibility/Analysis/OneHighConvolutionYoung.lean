@@ -78,7 +78,7 @@ theorem lconvolution_rpow_two_le {f g : G → ℝ≥0∞}
       (∫⁻ y, f y ∂μ) * (f ⋆ₗ[μ] (fun y => g y ^ (2 : ℝ))) x := by
   have hgx : AEMeasurable (fun y => g (-y + x)) μ := by
     simpa only [neg_add_eq_sub] using
-      hg.comp_measurePreserving (μ.measurePreserving_sub_left x)
+      hg.comp_quasiMeasurePreserving (μ.measurePreserving_sub_left x).quasiMeasurePreserving
   simpa only [lconvolution_def] using lintegral_mul_rpow_two_le hf hgx
 
 /-- The squared form of Young's inequality, valid also for infinite integrals. -/
@@ -94,7 +94,7 @@ theorem lconvolution_lintegral_rpow_two_le {f g : G → ℝ≥0∞}
         (f ⋆ₗ[μ] (fun y => g y ^ (2 : ℝ))) x ∂μ :=
       lintegral_const_mul'' _ (aemeasurable_lconvolution hf (hg.pow_const (2 : ℝ)))
     _ = (∫⁻ x, f x ∂μ) ^ (2 : ℝ) * ∫⁻ x, g x ^ (2 : ℝ) ∂μ := by
-      rw [lconvolution_lintegral hf (hg.pow_const (2 : ℝ)), ENNReal.rpow_natCast]
+      rw [lconvolution_lintegral hf (hg.pow_const (2 : ℝ)), ENNReal.rpow_two]
       simp only [pow_two, mul_assoc]
 
 private theorem eLpNorm_one_nonneg {f : G → ℝ≥0∞} (hf : AEMeasurable f μ) :
