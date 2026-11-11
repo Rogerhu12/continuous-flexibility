@@ -106,8 +106,9 @@ theorem circleInverse_defect_h0_le (h ι : ℝ → ℝ) (hh : ContDiff ℝ ∞ h
       (Real.sqrt (B⁻¹))⁻¹ *
         circleRealSobolevNorm 0 (circleLiftReciprocalJet h hh hlift hc hlower 0) := by
     rw [circleInverse_defectJet_zero_eq h ι hh hi hι hlift ilift hc hlower]
-    simpa only [circle_real_sobolevNorm_zero_eq_l2] using hcov
+    simpa only [circle_real_sobolevNorm_zero_eq_l2, circleLiftReciprocalJet, R] using hcov
   have hRzero := circleLiftReciprocalJet_sobolev_le h hh hlift hc hM hlower hlow 0
+  simp only [Nat.cast_zero] at hRzero
   have hout := hzero.trans (mul_le_mul_of_nonneg_left hRzero
     (inv_nonneg.mpr (Real.sqrt_nonneg (B⁻¹))))
   simpa only [mul_assoc] using hout

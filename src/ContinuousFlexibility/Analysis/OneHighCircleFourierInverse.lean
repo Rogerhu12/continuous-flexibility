@@ -45,8 +45,11 @@ theorem circleInverse_defect_sobolev_le (s : ℕ) {c M : ℝ} (hc : 0 < c) (hM :
   induction s with
   | zero =>
     intro h ι hh hi hι ιh hlift hlower hlow
-    exact (circleInverse_defect_h0_le h ι hh hi hι ιh hlift hc hM hlower hlow).trans
-      (mul_le_mul_of_nonneg_right (le_max_right _ _) (circle_real_sobolevNorm_nonneg _ _))
+    have hbase := circleInverse_defect_h0_le h ι hh hi hι ιh hlift hc hM hlower hlow
+    have hbound := hbase.trans
+      (mul_le_mul_of_nonneg_right (le_max_right (1 : ℝ) _)
+        (circle_real_sobolevNorm_nonneg 0 (circleLiftDefectJet h hh hlift 0)))
+    simpa only [Nat.cast_zero, circleInverseSobolevConstant] using hbound
   | succ n ih =>
     intro h ι hh hi hι ιh hlift hlower hlow
     let B := circleLiftLowBound P M

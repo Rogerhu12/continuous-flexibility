@@ -99,7 +99,8 @@ theorem circleFlow_composedSpeed_periodic {t : ℝ} (ht : t ∈ Icc a b) :
     Function.Periodic (fun θ => G (t, Θ (t, θ))) P := by
   intro θ
   dsimp only
-  rw [circleFlow_lift_add hG hperiod hΘ hinit hflow ht θ, hperiod t]
+  rw [circleFlow_lift_add hG hperiod hΘ hinit hflow ht θ]
+  exact hperiod t (Θ (t, θ))
 
 theorem circleFlow_contDiff_composedSpeed_angle {t : ℝ} (ht : t ∈ Icc a b) :
     ContDiff ℝ ∞ (fun θ => G (t, Θ (t, θ))) :=

@@ -83,6 +83,6 @@ theorem circleFlowLambda_le_referenceSize (G : PolarPoint → ℝ)
     (circleSubtractConstantJet (circleFlowSpeedJet G hG hperiod t) (c t))
     (circleSubtractConstantJet_hasDerivAt (circleFlowSpeedJet G hG hperiod t)
       (circleFlowSpeedJet_hasDerivAt G hG hperiod t) (c t)) s 1
-  simpa only [circleSubtractConstantJet, if_neg (by decide : (1 : ℕ) ≠ 0), sub_zero] using hh
+  simpa [circleFlowReferenceNorm, circleSubtractConstantJet] using hh
 
 end ContinuousFlexibility.Analysis
