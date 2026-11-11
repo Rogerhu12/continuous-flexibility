@@ -1,0 +1,150 @@
+import ContinuousFlexibility.Analysis.N01cActualFlowCircleData
+import ContinuousFlexibility.Analysis.N01cFlowVariationForcingBounds
+
+/-!
+# Actual ordinary-flow forcing factors and their Sobolev estimate
+
+The factors below come from the compressed finite affine plot of the
+supplied ordinary trajectories. Their speed factor is the original
+cosine speed tower times the fixed time derivative. Every nonconstant
+lower factor is an actual lower state derivative of the same flow.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Statements
+
+open Set Function ContinuousFlexibility.Analysis ContinuousFlexibility.Blueprint
+open scoped Topology ContDiff ENNReal BigOperators
+
+set_option backward.isDefEq.respectTransparency true
+
+local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
+
+variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+  {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+  (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+  (hA : N01PartA D T S C) (hB : N01PartB D S C base ε)
+  (hpos : ∀ z ∈ stateNeighborhood S C base ε, ∀ i r,
+    r ∈ Icc (C.left i) (C.right i) →
+      0 < twoRootDivided (componentOpticalSquare D S C i z) (C.left i) (C.right i) r)
+  (m : ℕ)
+  (J : ContinuousTimeSpeedTower (stateNeighborhood S C base ε)
+    (componentCosineSpeed D S C m))
+  {d : ℕ} (x : AnnularState S × ℝ) (hx : x ∈ stateNeighborhood S C base ε)
+  (L : (Fin d → ℝ) →L[ℝ] (AnnularState S × ℝ))
+
+/-- Canonical circle jets of the actual factors, at the centre of the
+finite affine plot. These use no order-dependent state compression. -/
+def ordinaryFlowForcingFactorJet {N : ℕ} (v : Fin N → (Fin d → ℝ))
+    (t : ℝ) (ω : FlowForcingChoice N) (i : Fin (ω.1.length + 1))
+    (b : ℕ) : C(AddCircle Real.pi, ℝ) :=
+  canonicalFlowForcingFactorJet
+    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
+    (continuousTimeSpeedTowerOfContDiff
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L))
+    (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L)
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L)
+    0 v t ω i b
+
+/-- The first factor is exactly the original actual speed jet, evaluated
+along the supplied trajectory. The only time multiplier is the one
+derivative of the fixed compact time map. -/
+theorem ordinaryFlowForcingFactorJet_head {N : ℕ}
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N)
+    (b : ℕ) (θ : ℝ) :
+    ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω 0 b
+        (θ : AddCircle Real.pi) =
+      iteratedDeriv b (fun η =>
+        deriv (circleFlowCompactTime 0 Real.pi) t *
+          J.D ω.1.length
+            (x, (circleFlowCompactTime 0 Real.pi t,
+              ordinaryFlowInCosineTime C m (x, (circleFlowCompactTime 0 Real.pi t, η))))
+            (fun i => flowStateAngleMap L
+              (if i ∈ ω.2 then
+                ((flowParameterIdentityJet (ω.1.partSize i)
+                  (v ∘ ω.1.emb i)).1, 0) else (0, 1)))) θ := by
+  classical
+  rw [ordinaryFlowForcingFactorJet, canonicalFlowForcingFactorJet,
+    periodicCircleJet_coe_apply]
+  apply congrArg (fun f : ℝ → ℝ => iteratedDeriv b f θ)
+  funext η
+  change (continuousTimeSpeedTowerOfContDiff
+    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)).D ω.1.length
+      (0, (t, ordinaryFlowFiniteTrajectory x hx L m (0, (t, η)))) _ = _
+  rw [ordinaryFlowFiniteSpeedTower_D_apply hS hT hA hB hpos m J x hx L,
+    ordinaryFlowFiniteTrajectory_zero]
+
+/-- Every surviving lower factor is a strict lower-order actual state
+jet; all its angular derivatives identify with the same canonical tower. -/
+theorem ordinaryFlowForcingFactorJet_lower {N : ℕ}
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N)
+    (i : Fin ω.1.length) (hi : i ∉ ω.2) (hk : ω.1.partSize i < N)
+    (b : ℕ) (θ : ℝ) :
+    ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω i.succ b
+        (θ : AddCircle Real.pi) =
+      (ordinaryFlowAngularStateSmoothDirections hS hT hA hB hpos m J
+        (rootCosinePath_mem_Icc (hA.2.2.1.1 m).2.1.le
+          (circleFlowCompactTime 0 Real.pi t)) b θ).D (ω.1.partSize i) x (fun j => L (v (ω.1.emb i j))) := by
+  classical
+  rw [ordinaryFlowForcingFactorJet, canonicalFlowForcingFactorJet,
+    periodicCircleJet_coe_apply]
+  simp only [canonicalFlowForcingFactors, flowForcingFactors, Fin.cons_succ,
+    flowSelectedLowerFactor, if_neg hi, lowerStateVariation, dif_pos hk]
+  change iteratedDeriv b (fun η =>
+    flowParameterField (ordinaryFlowFiniteTrajectory x hx L m)
+      (ω.1.partSize i) 0 (v ∘ ω.1.emb i) (t, η)) θ = _
+  exact ordinaryFlowFiniteTrajectory_parameterAngularJet
+    hS hT hA hB hpos m J x hx L (ω.1.partSize i) b t θ (v ∘ ω.1.emb i)
+
+theorem ordinaryFlowForcingFactorJet_selected {N : ℕ}
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N)
+    (i : Fin ω.1.length) (hi : i ∈ ω.2) (b : ℕ) (θ : ℝ) :
+    ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω i.succ b
+        (θ : AddCircle Real.pi) = iteratedDeriv b (fun _ : ℝ => (1 : ℝ)) θ := by
+  rw [ordinaryFlowForcingFactorJet, canonicalFlowForcingFactorJet,
+    periodicCircleJet_coe_apply]
+  simp only [canonicalFlowForcingFactors, flowForcingFactors, Fin.cons_succ,
+    flowSelectedLowerFactor, if_pos hi]
+
+theorem ordinaryFlowForcingFactorJet_large {N : ℕ}
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N)
+    (i : Fin ω.1.length) (hi : i ∉ ω.2) (hk : N ≤ ω.1.partSize i)
+    (b : ℕ) (θ : ℝ) :
+    ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω i.succ b
+        (θ : AddCircle Real.pi) = 0 := by
+  classical
+  rw [ordinaryFlowForcingFactorJet, canonicalFlowForcingFactorJet,
+    periodicCircleJet_coe_apply]
+  simp only [canonicalFlowForcingFactors, flowForcingFactors, Fin.cons_succ,
+    flowSelectedLowerFactor, if_neg hi, lowerStateVariation,
+    dif_neg (Nat.not_lt.mpr hk), zeroStateVariation, ContinuousMultilinearMap.zero_apply,
+    iteratedDeriv_const, ite_self]
+
+/-- The actual forcing of the actual positive ordinary-flow variation
+has one high factor in every explicitly indexed product. -/
+theorem ordinaryFlowCircleVariationData_forcingNorm_le
+    (n : ℕ) (v : Fin (n + 1) → (Fin d → ℝ)) (t : ℝ) (s : ℕ) :
+    (ordinaryFlowCircleVariationData hS hT hA hB hpos m J x hx L n v).forcingNorm s t ≤
+      (2 : ℝ) ^ (s + 1) *
+        ∑ ω : FlowForcingChoice (n + 1),
+          circleProductSobolevConstant Real.pi ω.1.length s *
+            ∑ j : Fin (ω.1.length + 1),
+              circleRealSobolevNorm (s : ℝ)
+                (ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω j 0) *
+              ∏ i ∈ Finset.univ.erase j,
+                circleRealSobolevNorm 1
+                  (ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω i 0) := by
+  exact flowParameterCircleVariationData_forcingNorm_le
+    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
+    (continuousTimeSpeedTowerOfContDiff
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L))
+    (continuous_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L)
+    (ordinaryFlowFiniteTrajectory_initial hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_hasDerivAt hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L)
+    1 n 0 v t s
+
+end ContinuousFlexibility.Statements
