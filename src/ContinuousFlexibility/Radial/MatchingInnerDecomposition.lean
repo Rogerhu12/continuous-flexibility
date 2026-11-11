@@ -58,7 +58,7 @@ theorem matching_modeRow_finset_sum {D : ReferenceData}
   induction s using Finset.induction_on with
   | empty =>
       intro h
-      simpa only [Finset.sum_empty] using matchingModeRow_zero hD hB j
+      simpa only [Finset.sum_empty, Prod.fst_zero, Prod.snd_zero] using matchingModeRow_zero hD hB j
   | @insert i s hi ih =>
       intro h
       simp only [Finset.sum_insert hi]
@@ -111,7 +111,7 @@ theorem matching_innerInverse_eq_sub_poisson {D : ReferenceData}
         rw [((hdata i).2.2.2.2.2.2.2.2.2.2 k).1]
       _ = x k / Real.sqrt (M.boundaryScale k) := by
         rw [Finset.sum_eq_single k]
-        · simp
+        · simp [div_eq_mul_inv]
         · intro i hi hik
           simp [hik]
         · intro hk
@@ -134,7 +134,7 @@ theorem matching_innerInverse_eq_sub_poisson {D : ReferenceData}
     · simp only [if_pos hj]
       rw [matchingInterval_congr_ae hD
         (hae.mono (fun r hr => congrArg (fun t => referenceColumn D r * t) hr))]
-      simpa only [if_pos hj] using hirow
+      simpa only [if_pos hj, Prod.snd_zero] using hirow
     · simp only [if_neg hj]
       exact ⟨by simpa only [if_neg hj] using hirow, rfl⟩
   have hProw : if M.frequency = 2 then

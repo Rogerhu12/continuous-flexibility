@@ -24,7 +24,7 @@ theorem matchingModeProduct_intervalIntegrable {D : ReferenceData}
     ((Lp.memLp U).integrable_mul (Lp.memLp F))
   apply (intervalIntegrable_iff_integrableOn_Ioo_of_le
     (matchingProfileGeometry hD).2.1.le).mpr
-  simpa only [mul_assoc] using hi
+  simpa only [mul_assoc, radialCore, IntegrableOn] using hi
 
 theorem matchingMode_inner_eq_integral {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (U F : RadialModeL2 D) :
