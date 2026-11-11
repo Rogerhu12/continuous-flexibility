@@ -70,10 +70,12 @@ theorem isAccumulatingProfile_replaceReferenceProfile
     refine ⟨max 1 (max Mw Mi), le_max_left _ _, ?_⟩
     intro r hr
     constructor
-    · exact (by simpa only [Real.norm_eq_abs] using hMw r hr).trans
-        ((le_max_left _ _).trans (le_max_right _ _))
-    · exact (by simpa only [Real.norm_eq_abs] using hMi r hr).trans
-        ((le_max_right _ _).trans (le_max_right _ _))
+    · have hh : |radialJet s w r| ≤ Mw := by
+        simpa only [Real.norm_eq_abs] using hMw r hr
+      exact hh.trans ((le_max_left _ _).trans (le_max_right _ _))
+    · have hh : |radialJet s (fun x => (w x)⁻¹) r| ≤ Mi := by
+        simpa only [Real.norm_eq_abs] using hMi r hr
+      exact hh.trans ((le_max_right _ _).trans (le_max_right _ _))
   choose M hM hMBounds using hBounds
   let F : Finset ℕ := (hLoc K hK hKcore).toFinset
   let N : ℕ := F.sup D.cellIndex
@@ -116,6 +118,8 @@ theorem isAccumulatingProfile_replaceReferenceProfile
       (exp_pos _).le).trans hl,
       hu.trans (mul_le_mul_of_nonneg_right (hCC' 0) (exp_pos _).le)⟩
   · intro m r hr
+    change exp (-((D.cellIndex m : ℝ) ^ (5 / 2 : ℝ)) -
+      C' 0 * (D.cellIndex m : ℝ) ^ 2) ≤ w r
     by_cases hKr : r ∈ K
     · have hwr : 0 < w r := hpos r (hKcore hKr)
       have hInv : (w r)⁻¹ ≤ M 0 := by
@@ -145,6 +149,8 @@ theorem isAccumulatingProfile_replaceReferenceProfile
       have hm := mul_le_mul_of_nonneg_right (hCC' 0) (sq_nonneg (D.cellIndex m : ℝ))
       linarith
   · intro m r hr s
+    change |radialJet s w r| ≤ C' s *
+      exp (-((D.cellIndex m : ℝ) ^ (5 / 2 : ℝ)) + C' s * (D.cellIndex m : ℝ) ^ 2)
     by_cases hKr : r ∈ K
     · have hLabel : (D.cellIndex m : ℝ) ^ (5 / 2 : ℝ) ≤ P :=
         Real.rpow_le_rpow (Nat.cast_nonneg _) (by exact_mod_cast hAffected m r hr hKr)
@@ -167,6 +173,8 @@ theorem isAccumulatingProfile_replaceReferenceProfile
       have hmul := mul_le_mul_of_nonneg_right (hCC' s) (sq_nonneg (D.cellIndex m : ℝ))
       linarith
   · intro m r hr s
+    change |radialJet s (fun x => (w x)⁻¹) r| ≤
+      C' s * radialE (D.cellIndex m) ^ C' s
     by_cases hKr : r ∈ K
     · exact (hMBounds s r hKr).2.trans ((hMC' s).trans
         (le_mul_of_one_le_right (hC' s).le

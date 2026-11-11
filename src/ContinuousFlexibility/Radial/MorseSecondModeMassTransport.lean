@@ -130,7 +130,7 @@ theorem morseSecondMode_tailGapMass {T : MorseChainData} {σ : ℕ → ℝ}
     (hg.1.trans hM.1) (hg.1.trans hE.1)
   have hend := morseSecondMode_resistanceEnd h hi right
   cases right <;>
-    simp only [Bool.false_eq_true, ↓reduceIte] at hend hsub ⊢
+    simp only [Bool.false_eq_true, ↓reduceIte, Nat.add_assoc] at hend hsub ⊢
   · simpa only [tailGapMass, morseSecondModeTail, Bool.false_eq_true, ↓reduceIte,
       morseJoinMass, hend, Nat.add_assoc] using hsub
   · simpa only [tailGapMass, morseSecondModeTail, ↓reduceIte,
@@ -157,7 +157,7 @@ theorem morseSecondMode_tailResistance {T : MorseChainData} {σ : ℕ → ℝ}
     (hg.1.trans hM.1) (hg.1.trans hE.1) hw₀
   have hend := morseSecondMode_resistanceEnd h hi right
   cases right <;>
-    simp only [Bool.false_eq_true, ↓reduceIte] at hend hsub ⊢
+    simp only [Bool.false_eq_true, ↓reduceIte, Nat.add_assoc] at hend hsub ⊢
   · simpa only [tailResistance, morseSecondModeTail, Bool.false_eq_true, ↓reduceIte,
       morseJoinResistance, hend, Nat.add_assoc] using hsub
   · simpa only [tailResistance, morseSecondModeTail, ↓reduceIte,

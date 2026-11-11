@@ -35,6 +35,7 @@ def coordinateReference (D : ReferenceData) (e : ℝ ≃o ℝ) : ReferenceData w
 
 @[simp] theorem coordinateReference_core_iff (D : ReferenceData) (e : ℝ ≃o ℝ)
     (r : ℝ) : r ∈ radialCore (coordinateReference D e) ↔ e r ∈ radialCore D := by
+  change (e.symm D.a < r ∧ r < e.symm D.b) ↔ (D.a < e r ∧ e r < D.b)
   constructor
   · rintro ⟨ha, hb⟩
     exact ⟨by simpa using e.strictMono ha, by simpa using e.strictMono hb⟩
@@ -71,6 +72,7 @@ theorem endpointFlat_coordinateReference {D : ReferenceData} {u : ℝ → ℝ}
     EndpointFlat (coordinateReference D e) (fun r => u (e r)) := by
   refine ⟨hu.1.comp he, ?_⟩
   intro r hr
+  change r ≤ e.symm D.a ∨ e.symm D.b ≤ r at hr
   apply hu.2 (e r)
   rcases hr with hr | hr
   · exact Or.inl (by simpa using e.monotone hr)
@@ -166,6 +168,7 @@ theorem coordinateReference_endpoint_distances (D : ReferenceData) (e : ℝ ≃o
       min (r - e.symm D.a) (e.symm D.b - r) ≤
         L * min (e r - D.a) (D.b - e r) := by
   have hold := (coordinateReference_core_iff D e r).mp hr
+  change e.symm D.a < r ∧ r < e.symm D.b at hr
   have hfa := hforward r (e.symm D.a)
   have hfb := hforward (e.symm D.b) r
   have hba := hbackward r (e.symm D.a)

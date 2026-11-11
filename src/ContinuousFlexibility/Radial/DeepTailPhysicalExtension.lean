@@ -89,7 +89,7 @@ theorem physical_exists_smooth_linearState {a b : ℝ → ℝ}
       (fun t ht' => (ht t ht').differentiableAt.differentiableWithinAt)
       differentiable_id.differentiableOn
     · intro t ht'
-      rw [(ht t ht').deriv, deriv_id'']
+      rw [(ht t ht').deriv, deriv_id]
     · exact ⟨by linarith, by linarith⟩
     · exact congrArg Prod.fst hα₀
   have hsub : Icc (c - ε / 2) (c + ε / 2) ⊆ Ioo (c - ε) (c + ε) := by

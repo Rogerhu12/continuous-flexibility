@@ -143,9 +143,9 @@ theorem exact_cones (K : SeedCentralCutoff) :
     · let y₁ := min (log r) (K.left - 2) - 1
       exact connectorProfile_eq_cone_of_two K.smooth K.below_four
         (fun y hy => K.left_cone y hy.2.le) _ _
-        ⟨by dsimp only [y₁]; linarith [min_le_right (log r) (K.left - 2)],
+        ⟨by linarith [min_le_right (log r) (K.left - 2)],
           by linarith⟩
-        ⟨by dsimp only [y₁]; linarith [min_le_left (log r) (K.left - 2)], hlog⟩
+        ⟨by linarith [min_le_left (log r) (K.left - 2)], hlog⟩
     · exact connectorHeight_eq_power_of_const K.smooth isOpen_Iio
         (convex_Iio (K.left - 1)).isPreconnected
         (fun y hy => K.left_cone y hy.le) _ _ (by change K.left - 2 < K.left - 1; linarith)
@@ -155,8 +155,8 @@ theorem exact_cones (K : SeedCentralCutoff) :
     · let y₂ := max (log r) (K.right + 2) + 1
       exact connectorProfile_eq_cone_of_neg_two K.smooth K.below_four
         (fun y hy => K.right_cone y hy.1.le) _ _
-        ⟨by linarith, by dsimp only [y₂]; linarith [le_max_right (log r) (K.right + 2)]⟩
-        ⟨hlog, by dsimp only [y₂]; linarith [le_max_left (log r) (K.right + 2)]⟩
+        ⟨by linarith, by linarith [le_max_right (log r) (K.right + 2)]⟩
+        ⟨hlog, by linarith [le_max_left (log r) (K.right + 2)]⟩
     · exact connectorHeight_eq_power_of_const K.smooth isOpen_Ioi
         (convex_Ioi (K.right + 1)).isPreconnected
         (fun y hy => K.right_cone y hy.le) _ _ (by change K.right + 1 < K.right + 2; linarith)

@@ -61,7 +61,8 @@ theorem tailPoissonInterpolation_weighted_integrableOn_of_summable {T : DeepTail
       (hF.comp (tailActualEdgeInterpolation_differentiable hT n (a n) (a (n + 1))).continuous).continuousOn
     exact hc.integrableOn_Icc.congr_fun (fun x hx => by
       dsimp only [f]
-      rw [tailPoissonInterpolation_apply_closed hT a hx]) measurableSet_Icc
+      simp only [Pi.mul_apply, Function.comp_apply,
+        tailPoissonInterpolation_apply_closed hT a hx]) measurableSet_Icc
   have heq (n : ℕ) :
       (∫ x in Icc (T.node n) (T.node (n + 1)), ‖f x‖) =
         ∫ x in T.node n..T.node (n + 1),

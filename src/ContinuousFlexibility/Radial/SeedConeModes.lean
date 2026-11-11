@@ -46,7 +46,8 @@ theorem radialJacobi_cone_eq {u : ℝ → ℝ} {c r : ℝ}
       c * (r * deriv (deriv u) r + deriv u r - 4 * u r / r) := by
   have hw : HasDerivAt (fun t : ℝ => c * t) c r := by
     simpa only [mul_one] using (hasDerivAt_id' r).const_mul c
-  have hf := hw.mul hu'.hasDerivAt
+  have hf : HasDerivAt (fun t => c * t * deriv u t)
+      (c * deriv u r + c * r * deriv (deriv u) r) r := hw.mul hu'.hasDerivAt
   unfold radialJacobi
   rw [hf.deriv, hw.deriv]
   ring
@@ -78,7 +79,7 @@ theorem hasDerivAt_coneExponentialCoefficient {v : ℝ → ℝ} {s y : ℝ}
   have h := ((hv'.hasDerivAt.add (hv.hasDerivAt.const_mul s)).div_const (2 * s)).mul
     (((hasDerivAt_id' y).const_mul (-s)).exp)
   apply h.congr_deriv
-  simp only [Function.comp_apply, div_eq_mul_inv]
+  simp only [Function.comp_apply, Pi.add_apply, Pi.mul_apply, div_eq_mul_inv]
   ring
 
 theorem coneExponentialCoefficient_const {v : ℝ → ℝ} {J : Set ℝ} {s y₀ : ℝ}
