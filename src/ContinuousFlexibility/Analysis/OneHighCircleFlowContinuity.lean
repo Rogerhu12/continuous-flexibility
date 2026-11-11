@@ -129,8 +129,8 @@ private theorem continuousOn_of_time_continuous_of_angle_bound
     dist (Θ q) (Θ p) ≤ dist (Θ q) (Θ (q.1, p.2)) +
         dist (Θ (q.1, p.2)) (Θ p) := dist_triangle _ _ _
     _ ≤ K * |q.2 - p.2| + dist (Θ (q.1, p.2)) (Θ p) := by
-      exact add_le_add
-        (by simpa only [Real.dist_eq] using hbound q.1 hq.1 q.2 p.2) le_rfl
+      apply add_le_add <;> try exact le_rfl
+      simpa only [Real.dist_eq] using hbound q.1 hq.1 q.2 p.2
     _ < ε := by linarith
 
 /-- Smooth periodic speed and individual classical time solutions imply

@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter MeasureTheory
 open scoped ContDiff Topology Interval
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {H E : Type} [NormedAddCommGroup H] [NormedSpace ℝ H] [FiniteDimensional ℝ H]
   [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
 
@@ -28,15 +30,15 @@ theorem continuous_parametric_intervalIntegral {F : H × ℝ → E}
     (hF : Continuous F) (a b : ℝ) :
     Continuous (fun x : H => ∫ t in a..b, F (x, t)) := by
   have hc (c d : ℝ) : Continuous (fun x : H => ∫ t in Icc c d, F (x, t)) :=
-    continuous_parametric_integral_of_continuous (f := fun x t => F (x, t))
+    continuous_parametric_integral_of_continuous (μ := volume)
+      (f := fun x t => F (x, t))
       hF isCompact_Icc
   rcases le_total a b with hab | hba
   · simpa only [intervalIntegral.integral_of_le hab, integral_Icc_eq_integral_Ioc]
       using hc a b
-  · have hn : Continuous (fun x : H => -(∫ t in Icc b a, F (x, t))) := by
-      simpa only [Function.comp_def] using continuous_neg.comp (hc b a)
-    simpa only [intervalIntegral.integral_of_ge hba, integral_Icc_eq_integral_Ioc]
-      using hn
+  · have hn : Continuous (fun x : H => -(∫ t in Icc b a, F (x, t))) :=
+      continuous_neg.comp (hc b a)
+    simpa only [intervalIntegral.integral_of_ge hba, integral_Icc_eq_integral_Ioc] using hn
 
 /-- Continuous actual parameter derivatives can be moved under a compact
 interval integral. The local domination is obtained, rather than assumed. -/

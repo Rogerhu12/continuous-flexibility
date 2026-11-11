@@ -72,6 +72,14 @@ def smoothDirections_finiteSum {ι : Type*} [Fintype ι]
       (fun i _ => (J i).derivative n x hx v w)
     simpa only [HasProjectiveLineDerivAt, ContinuousMultilinearMap.sum_apply] using hd
 
+theorem smoothDirections_finiteSum_D_apply {ι : Type*} [Fintype ι]
+    {U : Set X} {f : ι → X → Y} (hU : IsOpen U)
+    (J : ∀ i, SmoothDirections U (f i))
+    (n : ℕ) (x : X) (v : Fin n → X) :
+    (smoothDirections_finiteSum hU J).D n x v = ∑ i, (J i).D n x v := by
+  change (∑ i, (J i).D n x) v = _
+  simp only [sum_apply]
+
 variable [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
 
 def smoothDirections_constant {U : Set X} (hU : IsOpen U) (c : Y) :

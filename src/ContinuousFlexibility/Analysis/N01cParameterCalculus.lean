@@ -71,6 +71,41 @@ theorem smoothDirections_precompCLM_D_apply {U : Set E} {f : E → F}
 
 end LinearPrecomposition
 
+section LinearPostcomposition
+
+variable {E F G : Type*}
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+  [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+
+/-- Linear postcomposition transports the genuine tower term by term. -/
+def smoothDirections_postcompCLM {U : Set E} {f : E → F}
+    (J : SmoothDirections U f) (L : F →L[ℝ] G) :
+    SmoothDirections U (L ∘ f) where
+  open_domain := J.open_domain
+  D := fun n x => L.compContinuousMultilinearMap (J.D n x)
+  zero := by
+    intro x hx
+    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe,
+      Function.comp_apply] using congrArg (fun y : F => L y) (J.zero x hx)
+  continuous := by
+    intro n
+    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe,
+      Function.comp_apply] using L.continuous.comp_continuousOn' (J.continuous n)
+  derivative := by
+    intro n x hx v w
+    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe,
+      Function.comp_apply] using (J.derivative n x hx v w).clm_comp L
+
+theorem smoothDirections_postcompCLM_D_apply {U : Set E} {f : E → F}
+    (J : SmoothDirections U f) (L : F →L[ℝ] G)
+    (n : ℕ) (x : E) (v : Fin n → E) :
+    (smoothDirections_postcompCLM J L).D n x v = L (J.D n x v) := by
+  change L.compContinuousMultilinearMap (J.D n x) v = _
+  simp only [ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply]
+
+end LinearPostcomposition
+
 section ScalarProducts
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
