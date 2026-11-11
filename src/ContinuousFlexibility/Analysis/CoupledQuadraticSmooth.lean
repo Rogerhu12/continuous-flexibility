@@ -262,10 +262,8 @@ private theorem coupled_error_source_smoothTameOn
           L.error (liftSectorParameter S C z.1.1) z.1.2.2.val
             (V.V (liftSectorParameter S C z.1.1) z.2).1) := by
   have hg := coupled_error_grading_facts S
-  letI : IsTopologicalAddGroup (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
-    hg.2.1.isTopologicalAddGroup
-  letI : ContinuousSMul ℝ (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
-    hg.2.1.continuousSMul
+  letI := hg.2.1.isTopologicalAddGroup
+  letI := hg.2.1.continuousSMul
   have hzr := coupled_error_firstInput_smoothTameOn S hU
   have hz := coupled_error_fst_smoothTameOn hzr
   have hs := coupled_error_snd_smoothTameOn hzr
@@ -306,10 +304,8 @@ private theorem coupled_error_even_smoothTameOn
               B.circleColumn (liftSectorParameter S C z.1.1)
                 (V.V (liftSectorParameter S C z.1.1) z.2).2.2.1)))) := by
   have hg := coupled_error_grading_facts S
-  letI : IsTopologicalAddGroup (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
-    hg.2.1.isTopologicalAddGroup
-  letI : ContinuousSMul ℝ (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
-    hg.2.1.continuousSMul
+  letI := hg.2.1.isTopologicalAddGroup
+  letI := hg.2.1.continuousSMul
   have hzr := coupled_error_firstInput_smoothTameOn S hU
   have hz := coupled_error_fst_smoothTameOn hzr
   have hs := coupled_error_snd_smoothTameOn hzr
@@ -357,10 +353,8 @@ theorem coupledQuadraticErrorData_smoothTameOn
         (coupledQuadraticErrorData hD hT hS R L B V typeCoefficient).Q
           (liftSectorParameter S C z.1.1) z.1.2 z.2) := by
   have hg := coupled_error_grading_facts S
-  letI : IsTopologicalAddGroup (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
-    hg.2.1.isTopologicalAddGroup
-  letI : ContinuousSMul ℝ (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
-    hg.2.1.continuousSMul
+  letI := hg.2.1.isTopologicalAddGroup
+  letI := hg.2.1.continuousSMul
   have hscalar := coupled_error_source_smoothTameOn hD hT hS C L V typeCoefficient
     hU htype hheight hLerror
   have heven := coupled_error_even_smoothTameOn hS C R B V hU hinverse hRerror

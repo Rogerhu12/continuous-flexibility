@@ -47,6 +47,27 @@ theorem coupled_fin_cons_head_tail {X : Type*} {k : ℕ} (v : Fin (k + 1) → X)
   funext i
   exact Fin.cases rfl (fun _ => rfl) i
 
+private theorem coupled_kernel_inserted_value_eq {X Y : Type*} {k : ℕ}
+    (F : X → (Fin (k + 1) → X) → Y) (u : X) (v : Fin (k + 1) → X) :
+    F (v 0) (Fin.cons u (Fin.tail v)) =
+      F ((Fin.cons u v : Fin (k + 2) → X) 1)
+        (Fin.cons ((Fin.cons u v : Fin (k + 2) → X) 0)
+          (fun i : Fin k => (Fin.cons u v : Fin (k + 2) → X) i.succ.succ)) := by
+  have htail : (Fin.tail v : Fin k → X) = (fun i : Fin k => v i.succ) := by
+    funext i
+    rfl
+  simpa only [Fin.cons_zero, Fin.cons_one, Fin.cons_succ] using
+    congrArg (fun w : Fin k → X => F (v 0) (Fin.cons u w)) htail
+
+private theorem coupled_kernel_lineDeriv_value_congr {X Y : Type*}
+    [AddCommGroup X] [Module ℝ X]
+    [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    {f : X → Y} {df dg : Y} {x u : X}
+    (hf : HasProjectiveLineDerivAt f df x u) (hdf : df = dg) :
+    HasProjectiveLineDerivAt f dg x u := by
+  cases hdf
+  exact hf
+
 def coupledCircleKernelFieldMultilinear (hM : IsCircleModel T γ M)
     (r k : ℕ) (ψ : M.Space) :
     MultilinearMap ℝ (fun _ : Fin (k + 1) => M.Space) (ℕ → ℝ → ℝ) :=
@@ -115,12 +136,14 @@ theorem coupledCircleKernelMultilinear_continuous (r k : ℕ) :
     (coupledCircleKernelMultilinearDerivative hD hT hγ hM hI r k)
   · intro ψ v u
     change HasProjectiveLineDerivAt
-      (fun x : M.Space => coupledCircleKernelMultilinear hD hT hγ hM hI r k x v)
+      (fun x : M.Space => coupledCircleKernel hD hT hγ hM hI r k x (v 0) (Fin.tail v))
       (coupledCircleKernelMultilinearDerivative hD hT hγ hM hI r k ψ (Fin.cons u v)) ψ u
-    simpa only [coupledCircleKernelMultilinear_apply,
-      coupledCircleKernelMultilinearDerivative, Fin.cons_zero, Fin.cons_one, Fin.cons_succ,
-      Fin.tail] using
+    have hd :=
       coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI r k ψ u (v 0) (Fin.tail v)
+    have hvalue := coupled_kernel_inserted_value_eq
+      (fun (a : M.Space) (w : Fin (k + 1) → M.Space) =>
+        coupledCircleKernel hD hT hγ hM hI (r + 1) (k + 1) ψ a w) u v
+    exact coupled_kernel_lineDeriv_value_congr hd hvalue
   · intro s R hR
     have hdata := hb r k s R hR
     let N : ℕ := hdata.choose

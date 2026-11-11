@@ -20,6 +20,17 @@ namespace ContinuousFlexibility.Statements
 open Set ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem coupled_n09_ordered_bound_mono
+    {X E : Type*} {U V : Set X} {b : ℕ} {P : ℕ → ℝ → X → E → Prop}
+    (h : ∀ s, b ≤ s → ∃ c : ℝ, 0 ≤ c ∧ ∀ z ∈ V, ∀ u, P s c z u)
+    (hsub : U ⊆ V) :
+    ∀ s, b ≤ s → ∃ c : ℝ, 0 ≤ c ∧ ∀ z ∈ U, ∀ u, P s c z u := by
+  intro s hs
+  let hc := h s hs
+  exact ⟨hc.choose, hc.choose_spec.1,
+    fun z hz u => hc.choose_spec.2 z (hsub hz) u⟩
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -41,13 +52,15 @@ private theorem coupled_constantFeedbackInverse_tame_on
         (z.2 • B.heightRow (liftSectorParameter S C z)
           (controlHeightResponse S B G (liftSectorParameter S C z) u)) ≤
         c * (1 + pairGrading (sectorGrading S) realGrading (s + loss') z) * ‖u‖) :
+    let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
     SmoothTameOn
       (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))))
-      (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))) (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle (hS.2.1 (3 / 4 : ℝ)) =>
-        coupledConstantFeedbackInverse (hS.2.1 (3 / 4 : ℝ)) B G
+        (coupledConstantCircleGrading hM))
+      (coupledConstantCircleGrading hM) (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle hM =>
+        coupledConstantFeedbackInverse hM B G
           (liftSectorParameter S C z.1) z.2) := by
+  let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
   have hRef : referenceStateConditions D S C := h1.2.2.1
   have hstate (z : StateDirections S × ℝ) (hz : z ∈ U) :
       liftSectorParameter S C z ∈ stateNeighborhood S C base ε :=
@@ -58,7 +71,7 @@ private theorem coupled_constantFeedbackInverse_tame_on
   have hforward := smoothTameOn_mono
     (coupledConstantFeedbackOperator_smoothTameOn hS hRef hG h8)
     (hU.prod isOpen_univ) (Set.prod_mono hsub (subset_refl _))
-  exact coupledConstantFeedbackInverse_smoothTameOn (hS.2.1 (3 / 4 : ℝ)) B G
+  exact coupledConstantFeedbackInverse_smoothTameOn (S := S) hM B G
     (liftSectorParameter S C) (pairGrading (sectorGrading S) realGrading) U
     (fun z hz => hOp.2.1 _ (hstate z hz) (hRef.liftSectorParameter_sector z))
     (fun z hz => hOp.2.2.2.1 _ (hstate z hz) (hRef.liftSectorParameter_sector z))
@@ -95,29 +108,28 @@ private theorem coupled_n09Properties_on_subdomain
   · intro z _ y
     exact coupledRecoveredInverseData_sectorV hT hS h1 h2 h8 z y
 
-/-- A single stronger finite order and smaller positive strip suffice for
-all clauses of N09, with the original canonical control and state inverses. -/
-theorem coupled_exists_N09Properties
-    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
-    (h1 : N01Properties D T S C base loss ε)
-    (h2 : N02Properties D T S C R base ε)
+private theorem coupled_exists_common_feedback_neighborhood
+    (hS : IsPhysicalSpaces D T S)
+    (hRef : referenceStateConditions D S C)
     (hG : ScalarInverseProperties D S C L G base ε)
-    (h8 : N08Properties D T S C R G P B base loss ε)
-    (hchart : SmoothTameOn
-      (pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading)
-      (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CircleSpace S =>
-        R.chartIncrement (liftSectorParameter S C z.1) z.2)) :
+    (h8 : N08Properties D T S C R G P B base loss ε) (hε : 0 < ε) :
     ∃ base' : ℕ, ∃ ε' q0 : ℝ,
-      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧
-      N09Properties D T S C R G B (coupledControlInverse S B G)
-        (coupledRecoveredInverseData hT hS h1 h2 h8) base' ε' q0 := by
-  have hNex := coupled_exists_sector_feedback_smallness hS h1.2.2.1 hG h8 h1.2.1
+      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < q0 ∧ q0 ≤ ε' ∧
+      sectorNeighborhood S base' ε' q0 ⊆ sectorNeighborhood S base ε ε ∧
+      (∀ z ∈ sectorNeighborhood S base' ε' q0,
+        ‖z.2 • controlFeedback S B G (liftSectorParameter S C z)‖ < (1 / 2 : ℝ)) ∧
+      ∃ ℓ s0 : ℕ, ∀ s, s0 ≤ s → ∃ c : ℝ, 0 ≤ c ∧
+        ∀ z ∈ sectorNeighborhood S base' ε' q0, ∀ u : ControlBanach,
+          (S.circle (3 / 4 : ℝ)).grading s
+            (z.2 • B.heightRow (liftSectorParameter S C z)
+              (controlHeightResponse S B G (liftSectorParameter S C z) u)) ≤
+            c * (1 + pairGrading (sectorGrading S) realGrading (s + ℓ) z) * ‖u‖ := by
+  have hNex := coupled_exists_sector_feedback_smallness hS hRef hG h8 hε
   let bN : ℕ := hNex.choose
   let eN : ℝ := hNex.choose_spec.choose
   let qN : ℝ := hNex.choose_spec.choose_spec.choose
   have hN := hNex.choose_spec.choose_spec.choose_spec
-  have hRex := coupled_exists_feedback_regularizing_neighborhood h1.2.2.1 h8 h1.2.1
+  have hRex := coupled_exists_feedback_regularizing_neighborhood hRef h8 hε
   let bR : ℕ := hRex.choose
   let eR : ℝ := hRex.choose_spec.choose
   have hR := hRex.choose_spec.choose_spec
@@ -140,29 +152,53 @@ theorem coupled_exists_N09Properties
       (min_le_right eN eR) (hqle.trans (min_le_right eN eR))
   have hUold : U ⊆ sectorNeighborhood S base ε ε :=
     fun z hz => hN.2.2.2.2.2.1 (hUN hz)
-  have hU : IsOpen U := coupled_sectorNeighborhood_isOpen S base' ε' q0
   have hsmall : ∀ z ∈ U,
       ‖z.2 • controlFeedback S B G (liftSectorParameter S C z)‖ < (1 / 2 : ℝ) :=
     fun z hz => hN.2.2.2.2.2.2 z (hUN hz)
-  have hregular : ∀ s, s0 ≤ s → ∃ c : ℝ, 0 ≤ c ∧ ∀ z ∈ U, ∀ u : ControlBanach,
-      (S.circle (3 / 4 : ℝ)).grading s
-        (z.2 • B.heightRow (liftSectorParameter S C z)
-          (controlHeightResponse S B G (liftSectorParameter S C z) u)) ≤
-        c * (1 + pairGrading (sectorGrading S) realGrading (s + ℓ) z) * ‖u‖ := by
-    intro s hs
-    obtain ⟨c, hc, h⟩ := hR.2.2.2.choose_spec.choose_spec s hs
-    exact ⟨c, hc, fun z hz u => h z (hUR hz) u⟩
-  have hconstant := coupled_constantFeedbackInverse_tame_on
-    hT hS h1 hG h8 hU hUold hsmall hregular
+  have hregular := coupled_n09_ordered_bound_mono
+    hR.2.2.2.choose_spec.choose_spec hUR
+  exact ⟨base', ε', q0, hb, hε', hεε, hqpos, hqle, hUold, hsmall, ℓ, s0, hregular⟩
+
+/-- A single stronger finite order and smaller positive strip suffice for
+all clauses of N09, with the original canonical control and state inverses. -/
+theorem coupled_exists_N09Properties
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h1 : N01Properties D T S C base loss ε)
+    (h2 : N02Properties D T S C R base ε)
+    (hG : ScalarInverseProperties D S C L G base ε)
+    (h8 : N08Properties D T S C R G P B base loss ε)
+    (hchart : SmoothTameOn
+      (pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading)
+      (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × CircleSpace S =>
+        R.chartIncrement (liftSectorParameter S C z.1) z.2)) :
+    ∃ base' : ℕ, ∃ ε' q0 : ℝ,
+      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      N09Properties D T S C R G B (coupledControlInverse S B G)
+        (coupledRecoveredInverseData hT hS h1 h2 h8) base' ε' q0 := by
+  have hcommon := coupled_exists_common_feedback_neighborhood (S := S)
+    hS h1.2.2.1 hG h8 h1.2.1
+  let base' : ℕ := hcommon.choose
+  let ε' : ℝ := hcommon.choose_spec.choose
+  let q0 : ℝ := hcommon.choose_spec.choose_spec.choose
+  have hbounds := hcommon.choose_spec.choose_spec.choose_spec
+  have hdata := hbounds.2.2.2.2.2
+  let U := sectorNeighborhood S base' ε' q0
+  have hU : IsOpen U := coupled_sectorNeighborhood_isOpen S base' ε' q0
+  have hregular := hdata.2.2.choose_spec.choose_spec
+  have hconstant := coupled_constantFeedbackInverse_tame_on (S := S)
+    hT hS h1 hG h8 hU hdata.1 hdata.2.1 hregular
   have hchart' := smoothTameOn_mono hchart (hU.prod isOpen_univ)
-    (Set.prod_mono hUold (subset_refl _))
-  have hV := coupledRecoveredInverseData_smoothTameOn
-    hT hS h1 h2 hG h8 hU hUold hsmall hconstant hchart'
+    (Set.prod_mono hdata.1 (subset_refl _))
+  have hV := coupledRecoveredInverseData_smoothTameOn (S := S)
+    hT hS h1 h2 hG h8 hU hdata.1 hdata.2.1 hconstant hchart'
   have hstate : coupledNeighborhood S C base' ε' q0 ⊆ stateNeighborhood S C base ε := by
     intro z hz
-    exact coupled_stateNeighborhood_mono hb hεε ⟨hz.1, hz.2.trans_le hqle⟩
-  exact ⟨base', ε', q0, hb, hε', hεε,
-    coupled_n09Properties_on_subdomain hT hS h1 h2 h8 hqpos hqle hstate
-      (coupled_feedback_smallness_of_sector h1.2.2.1 hsmall) hV⟩
+    exact coupled_stateNeighborhood_mono hbounds.1 hbounds.2.2.1
+      ⟨hz.1, hz.2.trans_le hbounds.2.2.2.2.1⟩
+  exact ⟨base', ε', q0, hbounds.1, hbounds.2.1, hbounds.2.2.1,
+    coupled_n09Properties_on_subdomain (S := S) hT hS h1 h2 h8
+      hbounds.2.2.2.1 hbounds.2.2.2.2.1 hstate
+      (coupled_feedback_smallness_of_sector h1.2.2.1 hdata.2.1) hV⟩
 
 end ContinuousFlexibility.Statements
