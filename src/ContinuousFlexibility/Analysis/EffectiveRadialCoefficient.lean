@@ -54,10 +54,12 @@ theorem radialCenteredSquare_partials (r : ℝ) (p : PolarPoint) :
   have hd : DifferentiableAt ℝ (fun q : PolarPoint => q.1 - r) p :=
     differentiableAt_fst.sub (differentiableAt_const r)
   constructor
-  · rw [radialCenteredSquare, radialPartial_sq hd,
+  · change radialPartial (fun q : PolarPoint => (q.1 - r) ^ 2) p = 2 * (p.1 - r)
+    rw [radialPartial_sq hd,
       radialPartial_sub differentiableAt_fst (differentiableAt_const r)]
     simp only [radialPartial_fst, radialPartial_const, sub_zero, mul_one]
-  · rw [radialCenteredSquare, angularPartial_sq hd,
+  · change angularPartial (fun q : PolarPoint => (q.1 - r) ^ 2) p = 0
+    rw [angularPartial_sq hd,
       angularPartial_sub differentiableAt_fst (differentiableAt_const r)]
     simp only [angularPartial_fst, angularPartial_const, sub_zero, mul_zero]
 

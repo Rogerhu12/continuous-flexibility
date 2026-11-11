@@ -74,18 +74,22 @@ theorem ScalarSpatialRegularity.timeOnly {ρ : ℝ → ℝ}
   cases n with
   | zero => exact hρ.comp continuous_snd
   | succ n =>
-      refine ⟨hρ.comp continuous_snd, fun x t => differentiableAt_const _, ?_⟩
-      have he : scalarSpatialDerivative (fun p : PolarPoint => ρ p.2) = fun _ => (0 : ℝ) := by
-        funext p
-        exact (hasDerivAt_const p.1 (ρ p.2)).deriv
-      rw [he]
-      exact scalarSpatialRegularity_of_contDiff contDiff_const n
+      refine ⟨hρ.comp continuous_snd, ?_, ?_⟩
+      · intro x t
+        change DifferentiableAt ℝ (fun _ : ℝ => ρ t) x
+        exact differentiableAt_const (ρ t)
+      ·
+        have he : scalarSpatialDerivative (fun p : PolarPoint => ρ p.2) = fun _ => (0 : ℝ) := by
+          funext p
+          exact (hasDerivAt_const p.1 (ρ p.2)).deriv
+        rw [he]
+        exact scalarSpatialRegularity_of_contDiff contDiff_const n
 
 theorem ScalarSpatialRegularity.add {n : ℕ} {f g : PolarPoint → ℝ}
     (hf : ScalarSpatialRegularity n f) (hg : ScalarSpatialRegularity n g) :
     ScalarSpatialRegularity n (fun p => f p + g p) := by
   induction n generalizing f g with
-  | zero => exact hf.add hg
+  | zero => exact Continuous.add hf hg
   | succ n ih =>
       refine ⟨hf.1.add hg.1, fun x t => (hf.2.1 x t).add (hg.2.1 x t), ?_⟩
       have he : scalarSpatialDerivative (fun p => f p + g p) =
@@ -100,7 +104,7 @@ theorem ScalarSpatialRegularity.mul {n : ℕ} {f g : PolarPoint → ℝ}
     (hf : ScalarSpatialRegularity n f) (hg : ScalarSpatialRegularity n g) :
     ScalarSpatialRegularity n (fun p => f p * g p) := by
   induction n generalizing f g with
-  | zero => exact hf.mul hg
+  | zero => exact Continuous.mul hf hg
   | succ n ih =>
       refine ⟨hf.1.mul hg.1, fun x t => (hf.2.1 x t).mul (hg.2.1 x t), ?_⟩
       have he : scalarSpatialDerivative (fun p => f p * g p) =
@@ -116,7 +120,7 @@ theorem ScalarSpatialRegularity.comp {n : ℕ} {f g : PolarPoint → ℝ}
     (hg : ScalarSpatialRegularity n g) (hf : ScalarSpatialRegularity n f) :
     ScalarSpatialRegularity n (fun p => g (f p, p.2)) := by
   induction n generalizing f g with
-  | zero => exact hg.comp (hf.prodMk continuous_snd)
+  | zero => exact Continuous.comp hg (Continuous.prodMk hf continuous_snd)
   | succ n ih =>
       have hd (x t : ℝ) : HasDerivAt (fun y => g (f (y, t), t))
           (scalarSpatialDerivative g (f (x, t), t) * scalarSpatialDerivative f (x, t)) x := by
@@ -141,7 +145,7 @@ theorem ScalarSpatialRegularity.time_comp {n : ℕ} {f : PolarPoint → ℝ}
     (hf : ScalarSpatialRegularity n f) {τ : ℝ → ℝ} (hτ : Continuous τ) :
     ScalarSpatialRegularity n (fun p : PolarPoint => f (p.1, τ p.2)) := by
   induction n generalizing f with
-  | zero => exact hf.comp (continuous_fst.prodMk (hτ.comp continuous_snd))
+  | zero => exact Continuous.comp hf (continuous_fst.prodMk (hτ.comp continuous_snd))
   | succ n ih =>
       refine ⟨hf.1.comp (continuous_fst.prodMk (hτ.comp continuous_snd)),
         fun x t => hf.2.1 x (τ t), ?_⟩

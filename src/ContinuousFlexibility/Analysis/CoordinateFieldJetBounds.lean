@@ -111,8 +111,10 @@ private theorem rawExpr_mixed_majorant (e : CanonicalRawExpr) (a b : ℕ) :
   | add e d he hd =>
     obtain ⟨P, hP, hbP⟩ := he a b
     obtain ⟨Q, hQ, hbQ⟩ := hd a b
-    have hPm := hP.mono (Nat.add_le_add_left (le_max_left _ _) (a + b))
-    have hQm := hQ.mono (Nat.add_le_add_left (le_max_right _ _) (a + b))
+    have hPm := hP.mono
+      (Nat.add_le_add_left (le_max_left (rawExprWeight e) (rawExprWeight d)) (a + b))
+    have hQm := hQ.mono
+      (Nat.add_le_add_left (le_max_right (rawExprWeight e) (rawExprWeight d)) (a + b))
     refine ⟨P ++ Q, hPm.append hQm, ?_⟩
     intro f hf q X hX hraw
     change |mixedDerivative a b (fun p => rawExprEval e f p + rawExprEval d f p) q| ≤ _
@@ -247,9 +249,12 @@ private def rawPhysicalFieldExpr : Fin 4 → CanonicalRawExpr :=
 
 private theorem rawPhysicalFieldExpr_weight (i : Fin 4) :
     rawExprWeight (rawPhysicalFieldExpr i) ≤ 2 := by
-  fin_cases i <;>
-    simp [rawPhysicalFieldExpr, rawPotentialExpr, rawDensityExpr,
-      rawDensityBilinear, rawExprWeight]
+  refine Fin.cases ?_ ?_ i
+  · change rawExprWeight rawPotentialExpr ≤ 2
+    simp [rawPotentialExpr, rawExprWeight]
+  · intro j
+    change rawExprWeight (rawDensityExpr j) ≤ 2
+    fin_cases j <;> simp [rawDensityExpr, rawDensityBilinear, rawExprWeight]
 
 /-- The four scalar entries of the actual chart derivative, ordered
 as radial/angle derivatives of the first and then second output. -/
@@ -489,8 +494,7 @@ theorem contDiffOn_planeJacobian_of_chartDerivativeFields
       (fun q => coordinateChartDerivativeField F 0 q * coordinateChartDerivativeField F 3 q -
         coordinateChartDerivativeField F 2 q * coordinateChartDerivativeField F 1 q) := by
     funext q
-    simp only [planeJacobian, coordinateChartDerivativeField,
-      Matrix.cons_val_zero, Matrix.cons_val_succ]
+    simp [planeJacobian, coordinateChartDerivativeField]
   rw [he]
   exact ((hfields 0).mul (hfields 3)).sub ((hfields 2).mul (hfields 1))
 
@@ -574,8 +578,8 @@ theorem coordinateJacobianOn_fixed_loss_material_bound
   rw [hright] at hRb
   have hdet : L - R =ᶠ[𝓝 q] planeJacobian F := by
     filter_upwards [he 0, he 1, he 2, he 3] with y h₀ h₁ h₂ h₃
-    simp only [Pi.sub_apply, L, R, h₀, h₁, h₂, h₃, coordinateChartDerivativeField,
-      Matrix.cons_val_zero, Matrix.cons_val_succ, planeJacobian]
+    simp [Pi.sub_apply, L, R, h₀, h₁, h₂, h₃, coordinateChartDerivativeField,
+      planeJacobian]
   have htwice : ‖iteratedFDeriv ℝ n (planeJacobian F) q‖ ≤
       (2 * B n) * W ^ (B n) * (1 + p (n + loss) z) := by
     rw [← (hdet.iteratedFDeriv ℝ n).self_of_nhds,

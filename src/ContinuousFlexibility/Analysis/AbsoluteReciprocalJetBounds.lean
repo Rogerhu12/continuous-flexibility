@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.CoordinateCompositionMaterialBounds
 import Mathlib.Analysis.Calculus.IteratedDeriv.WithinZpow
+import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
 # Actual reciprocal jets from an absolute lower bound
@@ -55,8 +56,9 @@ theorem norm_iteratedFDeriv_one_div_le
       mul_le_mul_of_nonneg_left hinv (Nat.cast_nonneg _)
 
 theorem contDiffAt_absoluteReciprocal {x : ℝ} (hx : x ≠ 0) :
-    ContDiffAt ℝ ∞ (fun t : ℝ => |t|⁻¹) x :=
-  (contDiffAt_id.abs hx).inv (abs_ne_zero.mpr hx)
+    ContDiffAt ℝ ∞ (fun t : ℝ => |t|⁻¹) x := by
+  have ha : ContDiffAt ℝ ∞ (fun t : ℝ => |t|) x := contDiffAt_abs hx
+  exact ha.fun_inv (abs_ne_zero.mpr hx)
 
 /-- Sign is constant on a neighborhood of every nonzero denominator.
 The absolute reciprocal therefore has the same jet norms as 1/t. -/

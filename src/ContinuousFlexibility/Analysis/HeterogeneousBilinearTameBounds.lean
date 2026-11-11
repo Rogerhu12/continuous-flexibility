@@ -118,7 +118,8 @@ theorem heterogeneousBilinear_tame_bounds_on_ball_of_smoothTame
   have hlow' : pairGrading (pairGrading a p) q base
       (((z, 0), 0) - ((z₀, 0), 0)) < ε := by
     change pairGrading (pairGrading a p) q base ((z - z₀, (0 : E) - 0), (0 : F) - 0) < ε
-    simpa only [tamePairGrading_apply, sub_zero, map_zero, add_zero] using hlow
+    simpa only [pairGrading, add_apply, Seminorm.comp_apply,
+      LinearMap.fst_apply, LinearMap.snd_apply, sub_zero, map_zero, add_zero] using hlow
   let v : Fin 2 → (Z × E) × F :=
     Fin.cons ((0, e), 0) (Fin.cons (0, f) Fin.elim0)
   have hv₀ : v 0 = ((0, e), 0) := rfl
@@ -128,7 +129,8 @@ theorem heterogeneousBilinear_tame_bounds_on_ball_of_smoothTame
   have he₀ : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
   have he₁ : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
   simpa only [hjet, Fin.prod_univ_two, Fin.sum_univ_two, he₀, he₁, Finset.prod_singleton,
-    hv₀, hv₁, tamePairGrading_apply, map_zero, zero_add, add_zero,
+    hv₀, hv₁, pairGrading, add_apply, Seminorm.comp_apply,
+    LinearMap.fst_apply, LinearMap.snd_apply, map_zero, zero_add, add_zero,
     mul_comm (q (s + loss) f) (p base e)] using hb
 
 end ContinuousFlexibility.Analysis

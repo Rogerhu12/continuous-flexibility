@@ -59,10 +59,12 @@ theorem periodic_rootParameterScaledFields
   constructor
   · intro r θ
     change δ * d (δ * r, θ + T) = δ * d (δ * r, θ)
-    rw [hd (δ * r) θ]
+    have hd' : d (δ * r, θ + T) = d (δ * r, θ) := hd (δ * r) θ
+    exact congrArg (fun v : ℝ => δ * v) hd'
   · intro r θ
     change (δ * τ) * c (δ * r, θ + T) = (δ * τ) * c (δ * r, θ)
-    rw [hc (δ * r) θ]
+    have hc' : c (δ * r, θ + T) = c (δ * r, θ) := hc (δ * r) θ
+    exact congrArg (fun v : ℝ => (δ * τ) * v) hc'
 
 theorem rootRegularizedField_parameterScale
     (d c : PolarPoint → ℝ) (δ τ t : ℝ) (p : ℝ × ℝ) (θ : ℝ) :
@@ -196,20 +198,20 @@ theorem rootScaledInverseCoordinate_zero_and_odd
 /-- A state-independent positive speed and angular lower bound give a
 state-independent positive root coefficient after the exact rescaling. -/
 theorem rootScaledInverseCoordinate_odd_lower
-    {d c : PolarPoint → ℝ} {δ κ λ : ℝ}
+    {d c : PolarPoint → ℝ} {δ κ ℓ : ℝ}
     {Θ : (ℝ × ℝ) → ℝ → ℝ → ℝ} {h : ℝ → ℝ}
     (hd : ContDiff ℝ ∞ d) (hc : ContDiff ℝ ∞ c)
     (hdperiod : ∀ r, Function.Periodic (fun θ => d (r, θ)) Real.pi)
     (hcperiod : ∀ r, Function.Periodic (fun θ => c (r, θ)) Real.pi)
     (hΘ : N04FlowEquations (rootRescaledField d c δ) Θ)
-    (hh : ContDiff ℝ ∞ h) (hδ : 0 ≤ δ) (hκ : 0 ≤ κ) (hλ : 0 ≤ λ)
-    (θ : ℝ) (hcθ : κ ≤ c (0, θ)) (hhθ : λ ≤ deriv h θ) :
-    ((2 : ℝ) / 3) * δ * Real.sqrt δ * κ * λ ≤
+    (hh : ContDiff ℝ ∞ h) (hδ : 0 ≤ δ) (hκ : 0 ≤ κ) (hℓ : 0 ≤ ℓ)
+    (θ : ℝ) (hcθ : κ ≤ c (0, θ)) (hhθ : ℓ ≤ deriv h θ) :
+    ((2 : ℝ) / 3) * δ * Real.sqrt δ * κ * ℓ ≤
       rootOddCoefficient (rootScaledInverseCoordinate Θ h (Real.sqrt δ)) (0, θ) := by
   rw [(rootScaledInverseCoordinate_zero_and_odd hd hc hdperiod hcperiod hΘ hh
     (Real.sqrt δ) θ).2]
   have hb := mul_le_mul_of_nonneg_left
-    (mul_le_mul hcθ hhθ hλ (hκ.trans hcθ))
+    (mul_le_mul hcθ hhθ hℓ (hκ.trans hcθ))
     (mul_nonneg (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2 / 3) hδ)
       (Real.sqrt_nonneg δ))
   simpa only [mul_assoc] using hb

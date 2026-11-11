@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.RootInverseNormalizedBounds
 import ContinuousFlexibility.Analysis.RootExtensionPhysicalBounds
+import ContinuousFlexibility.Analysis.RootChartSymmetry
 
 /-!
 # Actual extended root jets from the original flow

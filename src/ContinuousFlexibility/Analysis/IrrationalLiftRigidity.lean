@@ -35,7 +35,7 @@ theorem continuous_eq_const_of_irrational_periods
       subst c
       exact hb
   have hgenerated : AddSubgroup.closure ({a, b} : Set ℝ) ≤ periods :=
-    AddSubgroup.closure_le.mpr hpair
+    (AddSubgroup.closure_le periods).mpr hpair
   have hclosed : IsClosed {t : ℝ | f t = f 0} := isClosed_eq hf continuous_const
   have hlevel : (AddSubgroup.closure ({a, b} : Set ℝ) : Set ℝ) ⊆
       {t : ℝ | f t = f 0} := by
@@ -61,17 +61,18 @@ theorem shift_increment_eq_of_bounded_displacement
   by_contra hne
   have hc : 0 < |b - a| := abs_pos.mpr (sub_ne_zero.mpr hne)
   obtain ⟨n, hn⟩ := exists_nat_gt ((M + |f 0|) / |b - a|)
+  have hn0 : (0 : ℝ) ≤ n := Nat.cast_nonneg n
   have hlarge : M + |f 0| < (n : ℝ) * |b - a| := (div_lt_iff₀ hc).mp hn
   have hsmall : (n : ℝ) * |b - a| ≤ M + |f 0| := by
     calc
       (n : ℝ) * |b - a| = |(n : ℝ) * (b - a)| := by
-        rw [abs_mul, abs_of_nonneg (Nat.cast_nonneg n)]
+        rw [abs_mul, abs_of_nonneg hn0]
       _ = |(f ((n : ℝ) * a) - (n : ℝ) * a) - f 0| := by
         rw [hiter]
         congr 1
         ring
       _ ≤ |f ((n : ℝ) * a) - (n : ℝ) * a| + |f 0| := abs_sub _ _
-      _ ≤ M + |f 0| := add_le_add_right (hbound _) _
+      _ ≤ M + |f 0| := add_le_add (hbound _) (le_refl _)
   exact (not_lt_of_ge hsmall) hlarge
 
 theorem periodicLift_shift_increment_eq
@@ -93,16 +94,18 @@ theorem periodicLift_eq_id_of_irrational_shift
   refine ⟨hba, ?_⟩
   have hp : Function.Periodic (fun t => f t - t) P := by
     intro t
+    change f (t + P) - (t + P) = f t - t
     rw [hperiod]
     ring
   have ha : Function.Periodic (fun t => f t - t) a := by
     intro t
+    change f (t + a) - (t + a) = f t - t
     rw [hshift, hba]
     ring
   intro t
-  have hh := continuous_eq_const_of_irrational_periods
+  have hh : f t - t = f 0 - 0 := continuous_eq_const_of_irrational_periods
     (hf.sub continuous_id) ha hp hirr t
   simp only [hzero, sub_zero] at hh
-  linarith
+  linarith only [hh]
 
 end ContinuousFlexibility.Analysis

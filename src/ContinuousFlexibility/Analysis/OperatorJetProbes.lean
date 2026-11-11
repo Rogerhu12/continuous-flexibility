@@ -47,6 +47,14 @@ theorem operatorJetProbe_partials (p q : PolarPoint) (a b c : ℝ) :
   have hd := (((hasFDerivAt_snd (𝕜 := ℝ) (p := q)).add
     ((hx.pow 2).const_mul (a / 2))).add ((hx.mul hy).const_mul b)).add
       ((hy.pow 2).const_mul (c / 2))
+  have he : (((Prod.snd : PolarPoint → ℝ) +
+      (fun y : PolarPoint => a / 2 * (y.1 - p.1) ^ 2)) +
+      (fun y : PolarPoint => b *
+        (((fun z : PolarPoint => z.1 - p.1) * (fun z : PolarPoint => z.2 - p.2)) y))) +
+      (fun y : PolarPoint => c / 2 * (y.2 - p.2) ^ 2) = operatorJetProbe p a b c := by
+    funext y
+    simp only [Pi.add_apply, Pi.mul_apply, operatorJetProbe]
+  rw [he] at hd
   constructor
   · change fderiv ℝ (operatorJetProbe p a b c) q (1, 0) = _
     rw [hd.fderiv]
@@ -74,8 +82,7 @@ theorem hasFDerivAt_operatorJetProbeAngular (p q : PolarPoint) (b c : ℝ) :
     HasFDerivAt (operatorJetProbeAngular p b c)
       (b • ContinuousLinearMap.fst ℝ ℝ ℝ +
         c • ContinuousLinearMap.snd ℝ ℝ ℝ) q := by
-  have hd := (((hasFDerivAt_fst (𝕜 := ℝ) (p := q)).sub_const p.1).const_mul b).const_add 1
-  simpa only [zero_add] using hd.add
+  exact (((hasFDerivAt_fst.sub_const p.1).const_mul b).const_add 1).add
     ((hasFDerivAt_snd.sub_const p.2).const_mul c)
 
 theorem operatorJetProbeRadial_partials (p q : PolarPoint) (a b : ℝ) :
@@ -111,9 +118,16 @@ theorem divergenceOperator_operatorJetProbe
     funext fun q => (operatorJetProbe_partials p q a b c).2
   have hrd := (hasFDerivAt_operatorJetProbeRadial p p a b).differentiableAt
   have htd := (hasFDerivAt_operatorJetProbeAngular p p b c).differentiableAt
+  have har : DifferentiableAt ℝ (fun y => B.a y * operatorJetProbeRadial p a b y) p :=
+    ha.mul hrd
+  have hbr : DifferentiableAt ℝ (fun y => B.b y * operatorJetProbeRadial p a b y) p :=
+    hb.mul hrd
+  have hbt : DifferentiableAt ℝ (fun y => B.b y * operatorJetProbeAngular p b c y) p :=
+    hb.mul htd
+  have hct : DifferentiableAt ℝ (fun y => B.c y * operatorJetProbeAngular p b c y) p :=
+    hc.mul htd
   rw [divergenceOperator, hr, ht,
-    radialPartial_add (ha.mul hrd) (hb.mul htd),
-    angularPartial_add (hb.mul hrd) (hc.mul htd),
+    radialPartial_add har hbt, angularPartial_add hbr hct,
     radialPartial_mul ha hrd, radialPartial_mul hb htd,
     angularPartial_mul hb hrd, angularPartial_mul hc htd,
     (operatorJetProbeRadial_partials p p a b).1,

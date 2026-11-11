@@ -65,7 +65,7 @@ theorem circleModel_iteratedDeriv_abs_le
       T.H (T.sample m) ^ γ * anglePairEvaluationConstant * Q.grading (n + 1) u := by
   have hn : circleNorm T γ (n + 1) (Q.decode u) ≤ Q.grading (n + 1) u := by
     rw [← hQ.2.2.2.2.2.2.2 u (n + 1)]
-    exact norm_coordinate_le_graded Q.level Q.bond le_rfl u
+    exact norm_coordinate_le_graded (fun k => Q.level k) Q.bond le_rfl u
   exact (circleMember_iteratedDeriv_abs_le (hQ.2.2.2.1 u) m hH n θ).trans
     (mul_le_mul_of_nonneg_left hn
       (mul_nonneg (Real.rpow_nonneg hH.le γ) anglePairEvaluationConstant_nonneg))
@@ -108,6 +108,26 @@ theorem stateLeftChart_period_add
   rw [hp]
   ring
 
+private theorem lastCoordinate_sub_reference
+    {E₁ E₂ E₃ E₄ : Type*}
+    [AddCommGroup E₁] [AddCommGroup E₂] [AddCommGroup E₃] [AddCommGroup E₄]
+    (x x₀ : E₁ × E₂ × E₃ × E₄) (hzero : x₀.2.2.2 = 0) :
+    (x - x₀).2.2.2 = x.2.2.2 := by
+  simp only [Prod.snd_sub, hzero, sub_zero]
+
+private theorem decodedLift_jet_bound_of_coordinate_eq
+    {E : Type*} (decode : E → ℕ → ℝ → ℝ) {u v : E}
+    (huv : v = u) {m n : ℕ} {θ A q r : ℝ}
+    (hb : |iteratedDeriv n (decode v m) θ| ≤ A * q)
+    (hqr : q ≤ r) (hA : 0 ≤ A) :
+    |iteratedDeriv n (fun η => η + decode u m η - η) θ| ≤ A * r := by
+  have he : (fun η => η + decode u m η - η) = decode v m := by
+    rw [huv]
+    funext η
+    ring
+  rw [he]
+  exact hb.trans (mul_le_mul_of_nonneg_left hqr hA)
+
 /-- The actual displacement retains the sampled material height factor.
 The derivative loss is exactly one at every angular order. -/
 theorem stateLeftChart_displacement_iteratedDeriv_le
@@ -122,21 +142,55 @@ theorem stateLeftChart_displacement_iteratedDeriv_le
   have hH : 0 < T.H (T.sample m) :=
     (hT.2.1 _ (materialSample_mem_interval hD hT m)).2.1
   have hzero : C.referenceState.2.2.2 = 0 := hC.2.2.2.2.1
-  have hc : (x - C.referenceState).2.2.2 = x.2.2.2 := by
-    simp only [Prod.snd_sub, hzero, sub_zero]
-  have he : (fun η => stateLeftChart S x m η - η) =
-      (S.circle (3 / 4 : ℝ)).decode (x - C.referenceState).2.2.2 m := by
-    funext η
-    change η + (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m η - η =
-      (S.circle (3 / 4 : ℝ)).decode (x - C.referenceState).2.2.2 m η
-    rw [hc]
-    ring
-  rw [he]
-  exact (circleModel_iteratedDeriv_abs_le (hS.2.1 (3 / 4 : ℝ))
-    (x - C.referenceState).2.2.2 m hH n θ).trans
-      (mul_le_mul_of_nonneg_left
-        (leftCircleGrading_le_stateGrading S (n + 1) (x - C.referenceState))
-        (mul_nonneg (Real.rpow_nonneg hH.le _) anglePairEvaluationConstant_nonneg))
+  have hc : (x - C.referenceState).2.2.2 = x.2.2.2 :=
+    lastCoordinate_sub_reference x C.referenceState hzero
+  change |iteratedDeriv n
+      (fun η => η + (S.circle (3 / 4 : ℝ)).decode x.2.2.2 m η - η) θ| ≤ _
+  exact decodedLift_jet_bound_of_coordinate_eq
+    (S.circle (3 / 4 : ℝ)).decode hc
+    (circleModel_iteratedDeriv_abs_le (hS.2.1 (3 / 4 : ℝ))
+      (x - C.referenceState).2.2.2 m hH n θ)
+    (leftCircleGrading_le_stateGrading S (n + 1) (x - C.referenceState))
+    (mul_nonneg (Real.rpow_nonneg hH.le _) anglePairEvaluationConstant_nonneg)
+
+private def ScalarFamilyDisplacementJetBound
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (x₀ : E) (f : E → ℕ → ℝ → ℝ) (B : ℝ) : Prop :=
+  ∀ (n m : ℕ) (x : E) (θ : ℝ),
+    |iteratedDeriv n (f x m) θ| ≤ B * p (n + 1) (x - x₀)
+
+private theorem scalarFamily_bound_of_sample_bound
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (x₀ : E) (f : E → ℕ → ℝ → ℝ)
+    (H : ℕ → ℝ) {c : ℝ} (hc : 0 ≤ c)
+    (hH : ∃ M : ℝ, 0 < M ∧ ∀ m, H m ≤ M)
+    (hf : ∀ (n m : ℕ) (x : E) (θ : ℝ),
+      |iteratedDeriv n (f x m) θ| ≤ H m * c * p (n + 1) (x - x₀)) :
+    ∃ B : ℝ, 0 < B ∧ ScalarFamilyDisplacementJetBound p x₀ f B := by
+  obtain ⟨M, hM, hbound⟩ := hH
+  refine ⟨1 + M * c, add_pos_of_pos_of_nonneg zero_lt_one (mul_nonneg hM.le hc), ?_⟩
+  intro n m x θ
+  exact (hf n m x θ).trans (mul_le_mul_of_nonneg_right
+    ((mul_le_mul_of_nonneg_right (hbound m) hc).trans
+      (le_add_of_nonneg_left zero_le_one)) (apply_nonneg _ _))
+
+private theorem exists_circleSampleHeight_bound
+    {D : ReferenceData} {T : MaterialData}
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) :
+    ∃ M : ℝ, 0 < M ∧ ∀ m, T.H (T.sample m) ^ (3 / 4 : ℝ) ≤ M := by
+  obtain ⟨M, hM, hbound⟩ := material_sample_height_coefficient_power_bounded
+    hD hT id 0 (by norm_num : (0 : ℝ) < 3 / 4)
+  refine ⟨M, hM, ?_⟩
+  intro m
+  simpa only [id_eq, Real.rpow_zero, mul_one] using hbound m
+
+/-- The full uniform displacement conclusion, with the loss-one order
+unchanged, is named to keep the physical state adapter small. -/
+def N01LeftChartDisplacementJetBound (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (B : ℝ) : Prop :=
+  ∀ (n m : ℕ) (x : AnnularState S) (θ : ℝ),
+    |iteratedDeriv n (fun η => stateLeftChart S x m η - η) θ| ≤
+      B * stateGrading S (n + 1) (x - C.referenceState)
 
 /-- Material absorption supplies one constant before every state,
 component, and order. No neighborhood shrink or additional high-jet
@@ -146,22 +200,15 @@ theorem n01_stateLeftChart_displacement_fixed_loss
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (hN : N01Properties D T S C base loss ε) :
-    ∃ B : ℝ, 0 < B ∧ ∀ n m : ℕ, ∀ x : AnnularState S, ∀ θ : ℝ,
-      |iteratedDeriv n (fun η => stateLeftChart S x m η - η) θ| ≤
-        B * stateGrading S (n + 1) (x - C.referenceState) := by
-  obtain ⟨M, hM, hbound⟩ := material_sample_height_coefficient_power_bounded
-    hN.1.1 hT id 0 (by norm_num : (0 : ℝ) < 3 / 4)
-  have hH (m : ℕ) : T.H (T.sample m) ^ (3 / 4 : ℝ) ≤ M := by
-    simpa only [id_eq, Real.rpow_zero, mul_one] using hbound m
-  refine ⟨1 + M * anglePairEvaluationConstant,
-    add_pos_of_pos_of_nonneg zero_lt_one
-      (mul_nonneg hM.le anglePairEvaluationConstant_nonneg), ?_⟩
-  intro n m x θ
-  apply (stateLeftChart_displacement_iteratedDeriv_le
-    hN.1.1 hT hS hN.2.2.1 x m n θ).trans
-  apply mul_le_mul_of_nonneg_right _ (apply_nonneg _ _)
-  exact (mul_le_mul_of_nonneg_right (hH m) anglePairEvaluationConstant_nonneg).trans
-    (le_add_of_nonneg_left zero_le_one)
+    ∃ B : ℝ, 0 < B ∧ N01LeftChartDisplacementJetBound S C B := by
+  exact scalarFamily_bound_of_sample_bound
+    (stateGrading S) C.referenceState
+    (fun x m η => stateLeftChart S x m η - η)
+    (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ))
+    anglePairEvaluationConstant_nonneg
+    (exists_circleSampleHeight_bound hN.1.1 hT)
+    (fun n m x θ => stateLeftChart_displacement_iteratedDeriv_le
+      hN.1.1 hT hS hN.2.2.1 x m n θ)
 
 /-- The actual left lift in the paired state grading used by the flow
 calculus. This named conclusion keeps the concrete state-space adapter

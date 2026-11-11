@@ -76,6 +76,7 @@ theorem hasCompactRadialSupport_mul_left
   obtain ⟨K, hK, hKD, hzero⟩ := hf
   refine ⟨K, hK, hKD, ?_⟩
   intro r hr θ
+  change f (r, θ) * g (r, θ) = 0
   rw [hzero r hr θ, zero_mul]
 
 /-- Four actual height elements suffice for the two product-defect
@@ -111,10 +112,14 @@ theorem exists_heightPair_coefficientProbes
   have hrc_period : Function.Periodic
       (fun p => radialLinearProbe χ p * radialCosineProbe χ p) (0, Real.pi) := by
     intro p
+    change radialLinearProbe χ (p + (0, Real.pi)) * radialCosineProbe χ (p + (0, Real.pi)) =
+      radialLinearProbe χ p * radialCosineProbe χ p
     rw [radialLinearProbe_periodic χ p, radialCosineProbe_periodic χ p]
   have hcc_period : Function.Periodic
       (fun p => radialCosineProbe χ p * radialCosineProbe χ p) (0, Real.pi) := by
     intro p
+    change radialCosineProbe χ (p + (0, Real.pi)) * radialCosineProbe χ (p + (0, Real.pi)) =
+      radialCosineProbe χ p * radialCosineProbe χ p
     rw [radialCosineProbe_periodic χ p]
   obtain ⟨ηrc, hηrc⟩ := exists_heightPair_of_compact_even_periodic hT hS
     (hr.mul hc).contDiffOn hrc_even hrc_period (hasCompactRadialSupport_mul_left hs.1)

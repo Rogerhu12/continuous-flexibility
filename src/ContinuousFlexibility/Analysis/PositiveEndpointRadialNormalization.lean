@@ -47,10 +47,10 @@ theorem radialPartial_positiveEndpointRadialNormalization
   cases root with
   | false =>
     change radialPartial (fun q => v + ξ q) p = radialPartial ξ p
-    rw [radialPartial_add differentiableAt_const hξ, radialPartial_const, zero_add]
+    rw [radialPartial_add (differentiableAt_const v) hξ, radialPartial_const, zero_add]
   | true =>
     change radialPartial (fun q => v - ξ q) p = -radialPartial ξ p
-    rw [radialPartial_sub differentiableAt_const hξ, radialPartial_const, zero_sub]
+    rw [radialPartial_sub (differentiableAt_const v) hξ, radialPartial_const, zero_sub]
 
 /-- No cutoff radius or higher derivative enters this identity. -/
 theorem norm_iteratedFDeriv_positiveEndpointRadialNormalization

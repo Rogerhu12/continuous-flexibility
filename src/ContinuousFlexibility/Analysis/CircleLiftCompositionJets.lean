@@ -96,7 +96,8 @@ theorem circleLiftComposition_displacement_fixed_loss
       rw [he, norm_iteratedFDeriv_zero, Pi.add_apply, Function.comp_apply]
       apply (norm_add_le _ _).trans
       apply (add_le_add hout hin).trans
-      have hg0 := mul_le_mul_of_nonneg_left (hgrade 0) (mul_nonneg (by norm_num) (hA 0).le)
+      have hg0 := mul_le_mul_of_nonneg_left (hgrade 0)
+        (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2) (hA 0).le)
       simpa only [B, Nat.zero_add, two_mul, add_mul] using hg0
   | succ n =>
       have hfb (k : ℕ) (_ : 1 ≤ k) :

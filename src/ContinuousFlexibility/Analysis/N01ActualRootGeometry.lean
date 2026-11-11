@@ -63,8 +63,9 @@ theorem n01_component_root_data
       (eventually_gt_nhds ho.2.1).filter_mono nhdsWithin_le_nhds
     filter_upwards [hnear, self_mem_nhdsWithin] with x hx (hxr : x < C.right m)
     rw [slope_def_field, hz.2.1, sub_zero]
-    exact div_nonneg_of_nonpos_of_nonpos (hnegative x ⟨hx, hxr⟩).le
-      (sub_nonpos.mpr hxr.le)
+    simpa only [neg_div_neg_eq] using
+      div_nonneg (neg_nonneg.mpr (hnegative x ⟨hx, hxr⟩).le)
+        (neg_nonneg.mpr (sub_nonpos.mpr hxr.le))
   have hl' : deriv (deriv D.w) (C.left m) < 0 := lt_of_le_of_ne hl hz.2.2.1
   have hr' : 0 < deriv (deriv D.w) (C.right m) := lt_of_le_of_ne hr hz.2.2.2.symm
   cases rightEnd
