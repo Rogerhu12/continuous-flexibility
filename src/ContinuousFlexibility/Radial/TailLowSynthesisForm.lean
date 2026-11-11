@@ -122,7 +122,13 @@ def tailLowCoefficients (T : DeepTailData) (cut : ℝ) (a : TailLowIndex T cut �
 theorem tailLowCoefficients_apply (T : DeepTailData) (cut : ℝ)
     (a : TailLowIndex T cut →₀ ℝ) (i : TailLowIndex T cut) :
     tailLowCoefficients T cut a i = a i * (Real.sqrt (tailMass T i))⁻¹ := by
-  rw [tailLowCoefficients, Finsupp.embDomain_apply_self, Finsupp.onFinset_apply]
+  have h := Finsupp.embDomain_apply_self
+    (⟨Subtype.val, Subtype.val_injective⟩ : TailLowIndex T cut ↪ ℕ)
+    (Finsupp.onFinset a.support (fun j => a j * (Real.sqrt (tailMass T j))⁻¹)
+      (fun j hj => Finsupp.mem_support_iff.mpr
+        (fun hz => hj (by simp only [hz, zero_mul])))) i
+  simpa only [tailLowCoefficients, Function.Embedding.coeFn_mk,
+    Finsupp.onFinset_apply] using h
 
 theorem tailLowCoefficients_active (T : DeepTailData) (cut : ℝ)
     (a : TailLowIndex T cut →₀ ℝ) :
@@ -146,8 +152,9 @@ theorem tailLowCoefficients_linearCombination {E : Type*} [AddCommGroup E] [Modu
       ∑ i ∈ a.support, (a i * (Real.sqrt (tailMass T i))⁻¹) • v i := by
   rw [Finsupp.linearCombination_apply, tailLowCoefficients, Finsupp.sum_embDomain,
     Finsupp.sum_onFinset]
-  intro i _
-  exact zero_smul ℝ (v i)
+  · simp only [Function.Embedding.coeFn_mk]
+  · intro i _
+    exact zero_smul ℝ (v i)
 
 theorem tailLowCoefficients_mass (T : DeepTailData) (hT : DeepTailHypotheses T)
     (cut : ℝ) (a : TailLowIndex T cut →₀ ℝ) :
@@ -160,8 +167,9 @@ theorem tailLowCoefficients_mass (T : DeepTailData) (hT : DeepTailHypotheses T)
   · apply Finset.sum_congr rfl
     intro i _
     try dsimp only
+    simp only [Function.Embedding.coeFn_mk]
     rw [Real.norm_eq_abs, sq_abs, mul_pow, inv_pow, Real.sq_sqrt (tailMass_pos hT i).le]
-    field_simp [(tailMass_pos hT i).ne']
+    field_simp [(tailMass_pos hT i).ne'] <;> ring
   · intro i _
     simp only [zero_pow (by norm_num : (2 : ℕ) ≠ 0), mul_zero]
 
@@ -257,8 +265,9 @@ theorem tailNormalizedHat_finite_bound (T : DeepTailData) (hT : DeepTailHypothes
     (cut : ℝ) (a : TailLowIndex T cut →₀ ℝ) :
     ‖Finsupp.linearCombination ℝ (tailNormalizedHat T hT cut) a‖ ≤
       tailLowSynthesisNormBound T * ‖tailFiniteEmbedding a‖ := by
+  unfold tailLowSynthesisNormBound
   apply (sq_le_sq₀ (norm_nonneg _) (mul_nonneg (Real.sqrt_nonneg _) (norm_nonneg _))).mp
-  rw [mul_pow, tailLowSynthesisNormBound,
+  rw [mul_pow,
     Real.sq_sqrt (by have := tailLowEnergyCoefficient_nonneg T hT; have := hT.2.2.2.2.1; positivity),
     tailForm_norm_sq]
   have hb := tailNormalizedHat_finite_base_sq T hT cut a
@@ -310,7 +319,7 @@ theorem tailNormalizedHat_analysis (T : DeepTailData) (hT : DeepTailHypotheses T
   rw [hint]
   by_cases hij : i = j
   · subst j
-    simp only [if_pos rfl, mul_one, Pi.single_eq_same]
+    simp only [eq_self_iff_true, ite_true, mul_one, Pi.single_eq_same]
     have hr : Real.sqrt (tailMass T i) ≠ 0 := (Real.sqrt_pos.mpr (tailMass_pos hT i)).ne'
     field_simp [hr]
     nlinarith [Real.sq_sqrt (tailMass_pos hT i).le]
