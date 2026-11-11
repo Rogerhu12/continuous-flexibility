@@ -44,3 +44,4 @@ run_cmd do
 #print axioms ContinuousFlexibility.Analysis.hadamardThreeLinesExtension_spec_unit
 #print axioms ContinuousFlexibility.Blueprint.R07
 #print axioms ContinuousFlexibility.Blueprint.R08
+#print axioms ContinuousFlexibility.Blueprint.R10b
