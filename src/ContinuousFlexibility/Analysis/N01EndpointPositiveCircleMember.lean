@@ -84,8 +84,10 @@ private theorem circleMember_of_scalar_split
     rw [map_sub, map_smul, he, smul_eq_mul, mul_one, sub_self]
   have hdiff : A v - A u ∈ P := by
     have heq : A v - A u = ∑ i : Fin (n + 1), A (multilinearDifferenceTuple u v i) := by
-      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies,
-        multilinearDifferenceTuple] using A.map_sub_map_piecewise v u Finset.univ
+      change A v - A u = ∑ i : Fin (n + 1),
+        A (fun j => if j < i then v j else if i = j then v j - u j else u j)
+      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies] using
+        A.map_sub_map_piecewise v u Finset.univ
     rw [heq]
     exact P.sum_mem (fun i _ => hterm i)
   apply (circleDecode_mem_range_iff hH _).mp

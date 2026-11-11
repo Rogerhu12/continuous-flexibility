@@ -28,8 +28,8 @@ private theorem zero_mem_seminorm_strip
     (0 : E × ℝ) ∈ {z | p z.1 < ε ∧ |z.2| < q0} := by
   constructor
   · change p (0 : E) < ε
-    rw [p.map_zero']
-    exact hε
+    have hzero : p (0 : E) = (0 : ℝ) := p.map_zero'
+    exact hzero.trans_lt hε
   · change |(0 : ℝ)| < q0
     rw [abs_zero]
     exact hq0
@@ -119,9 +119,10 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
         (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) u :
           Fin 1 → (StateDirections S × ℝ)) := by
     funext i
-    have hi : i = 0 := Subsingleton.elim _ _
+    have hi : i = (0 : Fin 1) :=
+      Fin.ext (Nat.eq_zero_of_le_zero (Nat.le_of_lt_succ i.isLt))
     subst i
-    simp
+    simp only [Fin.cons_zero, Fin.snoc_zero]
   have hderiv (m b : ℕ) (θ t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       HasDerivAt (fun a => iteratedDeriv b (F a m) θ) (G t m b θ) t := by
     have hm : (0 : StateDirections S × ℝ) + t • u ∈ sectorNeighborhood S base ε ε := by
