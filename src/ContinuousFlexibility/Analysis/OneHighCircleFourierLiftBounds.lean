@@ -91,9 +91,10 @@ theorem circleLift_iteratedDeriv_norm_le_lowBound (h : ℝ → ℝ)
   | zero => omega
   | succ n =>
     have hn : 1 + n ≤ 3 := by omega
-    have hQnorm : circleRealSobolevNorm 1 (Q n) ≤ M :=
-      (circle_real_sobolevNorm_derivative_le Q hQ 1 n).trans
-        ((circle_real_sobolevNorm_mono_of_derivatives Q hQ hn).trans hlow)
+    have hQnorm : circleRealSobolevNorm 1 (Q n) ≤ M := by
+      simpa only [Nat.cast_one] using
+        (circle_real_sobolevNorm_derivative_le Q hQ 1 n).trans
+          ((circle_real_sobolevNorm_mono_of_derivatives Q hQ hn).trans hlow)
     have hpoint : ‖Q n (x : AddCircle P)‖ ≤ circleSobolevEmbeddingConstant P * M :=
       (circle_real_norm_apply_le_sobolev_one_of_derivatives Q hQ n (x : AddCircle P)).trans
         (mul_le_mul_of_nonneg_left hQnorm hE)
@@ -120,11 +121,15 @@ theorem circleLiftDerivativeJet_fourierL1_le_lowBound (h : ℝ → ℝ)
     (hlow : circleRealSobolevNorm 3 (circleLiftDefectJet h hh hlift 0) ≤ M) :
     circleRealFourierL1Norm (circleLiftDerivativeJet h hh hlift 0) ≤
       circleLiftLowBound P M := by
-  have hq : circleRealSobolevNorm 1 (circleLiftDefectJet h hh hlift 0) ≤ M :=
-    (circle_real_sobolevNorm_mono_of_derivatives (circleLiftDefectJet h hh hlift)
-      (circleLiftDefectJet_hasDerivAt h hh hlift) (show 1 ≤ 3 by omega)).trans hlow
-  have hderiv := (circleLiftDerivativeJet_sobolev_le h hh hlift 1).trans
-    (add_le_add le_rfl hq)
+  have hq : circleRealSobolevNorm 1 (circleLiftDefectJet h hh hlift 0) ≤ M := by
+    simpa only [Nat.cast_one] using
+      (circle_real_sobolevNorm_mono_of_derivatives (circleLiftDefectJet h hh hlift)
+        (circleLiftDefectJet_hasDerivAt h hh hlift) (show 1 ≤ 3 by omega)).trans hlow
+  have hderiv : circleRealSobolevNorm 1 (circleLiftDerivativeJet h hh hlift 0) ≤
+      1 + M := by
+    have hbase := circleLiftDerivativeJet_sobolev_le h hh hlift 1
+    simp only [Nat.cast_one] at hbase
+    exact hbase.trans (add_le_add le_rfl hq)
   exact (circle_real_fourierL1Norm_le_sobolev_one_of_derivatives
     (circleLiftDerivativeJet h hh hlift) (circleLiftDerivativeJet_hasDerivAt h hh hlift) 0).trans
       (mul_le_mul_of_nonneg_left hderiv
@@ -136,9 +141,10 @@ theorem circleLiftDefectJet_fourierL1_le_lowBound (h : ℝ → ℝ)
     (hlow : circleRealSobolevNorm 3 (circleLiftDefectJet h hh hlift 0) ≤ M) :
     circleRealFourierL1Norm (circleLiftDefectJet h hh hlift 0) ≤
       circleLiftLowBound P M := by
-  have hq : circleRealSobolevNorm 1 (circleLiftDefectJet h hh hlift 0) ≤ M :=
-    (circle_real_sobolevNorm_mono_of_derivatives (circleLiftDefectJet h hh hlift)
-      (circleLiftDefectJet_hasDerivAt h hh hlift) (show 1 ≤ 3 by omega)).trans hlow
+  have hq : circleRealSobolevNorm 1 (circleLiftDefectJet h hh hlift 0) ≤ M := by
+    simpa only [Nat.cast_one] using
+      (circle_real_sobolevNorm_mono_of_derivatives (circleLiftDefectJet h hh hlift)
+        (circleLiftDefectJet_hasDerivAt h hh hlift) (show 1 ≤ 3 by omega)).trans hlow
   have hE : 0 ≤ circleSobolevEmbeddingConstant P :=
     (by positivity : (0 : ℝ) ≤ 1).trans (circleSobolevEmbeddingConstant_one_le P)
   exact (circle_real_fourierL1Norm_le_sobolev_one_of_derivatives

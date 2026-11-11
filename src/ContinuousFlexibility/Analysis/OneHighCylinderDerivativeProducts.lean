@@ -17,7 +17,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open MeasureTheory Filter
-open scoped ENNReal BigOperators
+open scoped ENNReal BigOperators Topology
 
 variable {P : ℝ} [Fact (0 < P)]
 

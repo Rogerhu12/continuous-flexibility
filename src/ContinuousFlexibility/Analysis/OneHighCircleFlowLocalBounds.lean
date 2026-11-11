@@ -41,6 +41,8 @@ variable {P : ℝ} [hP : Fact (0 < P)]
   (hflow : ∀ t ∈ Ioo a b, ∀ θ : ℝ,
     HasDerivAt (fun r => Θ (r, θ)) (G (t, Θ (t, θ))) t)
 
+include hε hG hperiod hΘ hinit hflow
+
 /-- Angular smoothness at every closed-time endpoint is derived from the
 local speed and the original classical trajectory equation. -/
 theorem circleFlow_contDiff_angle_local {t : ℝ} (ht : t ∈ Icc a b) :
@@ -56,6 +58,32 @@ theorem circleFlow_lift_add_local {t : ℝ} (ht : t ∈ Icc a b) :
     (contDiff_circleFlowLocalizedSpeed (ht.1.trans ht.2) hε hG)
     (circleFlowLocalizedSpeed_periodic (ht.1.trans ht.2) hε hperiod)
     hΘ hinit (circleFlow_localized_ode (ht.1.trans ht.2) hε hflow) ht
+
+/-- The exact variational formula uses the original speed's ordinary
+angular derivative, under only local time smoothness. -/
+theorem circleFlow_hasDerivAt_angle_local {t : ℝ} (ht : t ∈ Icc a b) (θ : ℝ) :
+    HasDerivAt (fun η => Θ (t, η))
+      (Real.exp (∫ r in a..t, deriv (fun η => G (r, η)) (Θ (r, θ)))) θ := by
+  have hab : a ≤ b := ht.1.trans ht.2
+  let hg := contDiff_circleFlowLocalizedSpeed hab hε hG
+  let hp := circleFlowLocalizedSpeed_periodic hab hε hperiod
+  let hf := circleFlow_localized_ode hab hε hflow
+  have he : (∫ r in a..t,
+      angularPartial (circleFlowLocalizedSpeed G hab hε) (r, Θ (r, θ))) =
+      ∫ r in a..t, deriv (fun η => G (r, η)) (Θ (r, θ)) := by
+    apply intervalIntegral.integral_congr
+    intro r hr
+    have hr' : r ∈ Icc a t := by simpa only [uIcc_of_le ht.1] using hr
+    have hrab : r ∈ Icc a b := ⟨hr'.1, hr'.2.trans ht.2⟩
+    rw [← deriv_cylinder_angular_slice (hg.differentiable (by simp)) r (Θ (r, θ)),
+      circleFlowLocalizedSpeed_slice_eq hab hε hrab]
+  have h := circleFlow_hasDerivAt_angle hg hP.out hp hΘ hinit hf ht θ
+  rwa [he] at h
+
+theorem circleFlow_deriv_eq_exp_local {t : ℝ} (ht : t ∈ Icc a b) (θ : ℝ) :
+    deriv (fun η => Θ (t, η)) θ =
+      Real.exp (∫ r in a..t, deriv (fun η => G (r, η)) (Θ (r, θ))) :=
+  (circleFlow_hasDerivAt_angle_local hε hG hperiod hΘ hinit hflow ht θ).deriv
 
 /-- The genuine Jacobian is controlled by the original local speed's Λ₁. -/
 theorem circleFlow_deriv_bounds_sobolev_local {t : ℝ} (ht : t ∈ Icc a b) (θ : ℝ) :

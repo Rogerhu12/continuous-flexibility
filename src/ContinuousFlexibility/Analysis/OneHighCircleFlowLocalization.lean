@@ -112,8 +112,11 @@ theorem contDiff_circleFlowLocalizedSpeed {G : PolarPoint → ℝ} {a b ε : ℝ
       (circleFlowSmoothTimeClamp a b ε hab hε p.1, p.2) :=
     hG.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds
       ⟨circleFlowSmoothTimeClamp_mem hab hε p.1, mem_univ p.2⟩)
-  simpa only [circleFlowLocalizedSpeed, Function.comp_def] using
-    hg.comp p hm.contDiffAt
+  have he : circleFlowLocalizedSpeed G hab hε =
+      G ∘ (fun q : PolarPoint =>
+        (circleFlowSmoothTimeClamp a b ε hab hε q.1, q.2)) := rfl
+  rw [he]
+  exact hg.comp p hm.contDiffAt
 
 theorem circleFlowLocalizedSpeed_periodic {G : PolarPoint → ℝ} {a b ε P : ℝ}
     (hab : a ≤ b) (hε : 0 < ε)

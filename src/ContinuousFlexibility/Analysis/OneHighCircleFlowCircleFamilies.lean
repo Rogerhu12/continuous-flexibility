@@ -43,6 +43,8 @@ variable {G Θ : PolarPoint → ℝ} {a b : ℝ}
   (hflow : ∀ t ∈ Ioo a b, ∀ θ : ℝ,
     HasDerivAt (fun r => Θ (r, θ)) (G (t, Θ (t, θ))) t)
 
+include hG hperiod hΘ hinit hflow
+
 /-- Actual circle jets of the derivative defect on the original interval. -/
 def circleFlowDefectJet (t : ℝ) (n : ℕ) : C(AddCircle P, ℝ) :=
   if ht : t ∈ Icc a b then

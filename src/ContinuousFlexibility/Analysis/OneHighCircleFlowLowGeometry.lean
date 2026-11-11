@@ -66,7 +66,8 @@ theorem circleFlow_defect_h3_le {G Θ : PolarPoint → ℝ} {a b : ℝ}
     (fun r _ j hj hj4 θ => circleFlow_speedDerivative_le_h4 G hG hperiod r hj hj4 θ)
   have hjetBound (j : ℕ) (hj : 1 ≤ j) (hj4 : j ≤ 4) (θ : ℝ) :
       |iteratedDeriv j (fun η => Θ (t, η)) θ| ≤ K := by
-    simpa only [intervalIntegral.integral_const_mul, circleFlowLambda] using hbound t ht j hj hj4 θ
+    simpa only [K, intervalIntegral.integral_const_mul, circleFlowLambda, Nat.cast_ofNat] using
+      hbound t ht j hj hj4 θ
   have hsup (n : ℕ) (hn : n ≤ 3) : ‖J n‖ ≤ K + 1 := by
     apply ((J n).norm_le (add_nonneg hK zero_le_one)).mpr
     intro x

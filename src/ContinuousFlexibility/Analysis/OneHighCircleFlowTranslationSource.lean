@@ -27,7 +27,7 @@ theorem circleFlowReferenceNorm_eq (G : PolarPoint → ℝ) (hG : ContDiff ℝ �
     circleFlowReferenceNorm G hG hperiod c s t =
       circleRealSobolevNorm (s : ℝ)
         (periodicCircleJet (fun θ => G (t, θ) - c t)
-          (fun θ => congrArg (fun z : ℝ => z - c t) (hperiod t θ))
+          (circle_periodic_sub_const (hperiod t) (c t))
           ((hG.comp (contDiff_const.prodMk contDiff_id)).sub contDiff_const) 0) :=
   congrArg (circleRealSobolevNorm (s : ℝ))
     (periodicCircleJet_sub_const (fun θ => G (t, θ)) (hperiod t)
@@ -46,7 +46,7 @@ theorem circleFlow_reference_source_eq (c : ℝ → ℝ) {t : ℝ} (ht : t ∈ I
         (circleFlowComposedSpeedJet hG hperiod hΘ hinit hflow t) (c t) 0 =
       periodicCircleJet ((fun θ => G (t, θ) - c t) ∘ (fun θ => Θ (t, θ)))
         (periodic_comp_circleLift
-          (fun θ => congrArg (fun z : ℝ => z - c t) (hperiod t θ))
+          (circle_periodic_sub_const (hperiod t) (c t))
           (circleFlow_lift_add hG hperiod hΘ hinit hflow ht))
         (((hG.comp (contDiff_const.prodMk contDiff_id)).sub contDiff_const).comp
           (circleFlow_contDiff_angle hG hP.out hperiod hΘ hinit hflow ht)) 0 := by
@@ -68,7 +68,7 @@ theorem circleFlow_reference_source_zero_le (c : ℝ → ℝ) {t : ℝ} (ht : t 
   rw [circleFlow_reference_source_eq hG hperiod hΘ hinit hflow c ht,
     circleFlowReferenceNorm_eq G hG hperiod c 0 t]
   exact circleLift_sobolev_comp_le_low (fun θ => G (t, θ) - c t)
-    (fun θ => congrArg (fun z : ℝ => z - c t) (hperiod t θ))
+    (circle_periodic_sub_const (hperiod t) (c t))
     ((hG.comp (contDiff_const.prodMk contDiff_id)).sub contDiff_const)
     (fun θ => Θ (t, θ)) (circleFlow_contDiff_angle hG hP.out hperiod hΘ hinit hflow ht)
     (circleFlow_lift_add hG hperiod hΘ hinit hflow ht)
@@ -101,7 +101,7 @@ theorem circleFlow_reference_source_succ_le {c : ℝ → ℝ}
     (circleFlowLowGeometryBound_nonneg P
       (circleFlowLambda_nonneg G hG hperiod 4 (ht.1.trans ht.2)))
     (fun θ => G (t, θ) - c t)
-    (fun θ => congrArg (fun z : ℝ => z - c t) (hperiod t θ))
+    (circle_periodic_sub_const (hperiod t) (c t))
     ((hG.comp (contDiff_const.prodMk contDiff_id)).sub contDiff_const)
     (fun θ => Θ (t, θ)) (circleFlow_contDiff_angle hG hP.out hperiod hΘ hinit hflow ht)
     (circleFlow_lift_add hG hperiod hΘ hinit hflow ht)

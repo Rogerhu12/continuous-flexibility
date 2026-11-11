@@ -90,8 +90,9 @@ theorem circleLift_sobolev_comp_le_step (u : ℝ → ℝ) (hp : Periodic u P)
     exact circle_real_sobolevNorm_derivative_le U hU 3 1
   have hDU1 : circleRealSobolevNorm 1 (DU 0) ≤ Y := by
     rw [hDUzero]
-    exact (circle_real_sobolevNorm_derivative_le U hU 1 1).trans
-      (circle_real_sobolevNorm_mono_of_derivatives U hU (show 2 ≤ 3 by omega))
+    simpa only [Nat.cast_one] using
+      (circle_real_sobolevNorm_derivative_le U hU 1 1).trans
+        (circle_real_sobolevNorm_mono_of_derivatives U hU (show 2 ≤ 3 by omega))
   have hYle : Y ≤ A :=
     circle_real_sobolevNorm_mono_of_derivatives U hU (show 3 ≤ r + 4 by omega)
   have hQ2 : circleRealSobolevNorm 2 (Q 0) ≤ M :=
@@ -120,10 +121,11 @@ theorem circleLift_sobolev_comp_le_step (u : ℝ → ℝ) (hp : Periodic u P)
       dsimp only [T]
       nlinarith only [mul_nonneg hM (mul_nonneg hY hZ)]
     simpa only [mul_assoc] using mul_le_mul_of_nonneg_left hinside hK
-  have hFone : circleRealSobolevNorm 1 (F 0) ≤ K₁ * Y :=
-    (circleLift_sobolev_comp_le_low (deriv u) (periodic_circle_deriv hp)
-      (contDiff_infty_iff_deriv.mp hu).2 h hh hlift hc hM hlower hlow 1 (by omega)).trans
-        (mul_le_mul_of_nonneg_left hDU1 hK₁)
+  have hFone : circleRealSobolevNorm 1 (F 0) ≤ K₁ * Y := by
+    have hcomp := circleLift_sobolev_comp_le_low (deriv u) (periodic_circle_deriv hp)
+      (contDiff_infty_iff_deriv.mp hu).2 h hh hlift hc hM hlower hlow 1 (by omega)
+    simp only [Nat.cast_one] at hcomp
+    exact hcomp.trans (mul_le_mul_of_nonneg_left hDU1 hK₁)
   have hFlow : circleRealFourierL1Norm (F 0) ≤ (E * K₁) * Y := by
     have hf := (circle_real_fourierL1Norm_le_sobolev_one_of_derivatives F hF 0).trans
       (mul_le_mul_of_nonneg_left hFone hE)

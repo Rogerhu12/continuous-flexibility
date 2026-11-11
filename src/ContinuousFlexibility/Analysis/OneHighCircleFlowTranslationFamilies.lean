@@ -26,6 +26,8 @@ variable {P : ℝ} [hP : Fact (0 < P)]
   (hflow : ∀ t ∈ Ioo a b, ∀ θ : ℝ,
     HasDerivAt (fun r => Θ (r, θ)) (G (t, Θ (t, θ))) t)
 
+include hG hperiod hΘ hinit hflow
+
 theorem circleFlow_displacement_periodic {t : ℝ} (ht : t ∈ Icc a b) :
     Function.Periodic (fun θ => Θ (t, θ) - θ) P := by
   intro θ
@@ -77,8 +79,8 @@ theorem circleFlowTranslationJet_eq (c : ℝ → ℝ) {t : ℝ}
     (ht : t ∈ Icc a b) (n : ℕ) :
     circleFlowTranslationJet hG hperiod hΘ hinit hflow c t n =
       periodicCircleJet (fun θ => Θ (t, θ) - θ - ∫ r in a..t, c r)
-        (fun θ => congrArg (fun z : ℝ => z - ∫ r in a..t, c r)
-          (circleFlow_displacement_periodic hG hperiod hΘ hinit hflow ht θ))
+        (circle_periodic_sub_const
+          (circleFlow_displacement_periodic hG hperiod hΘ hinit hflow ht) (∫ r in a..t, c r))
         ((circleFlow_contDiff_displacement_angle hG hperiod hΘ hinit hflow ht).sub contDiff_const) n := by
   have he : circleFlowDisplacementJet hG hperiod hΘ hinit hflow t =
       periodicCircleJet (fun θ => Θ (t, θ) - θ)
