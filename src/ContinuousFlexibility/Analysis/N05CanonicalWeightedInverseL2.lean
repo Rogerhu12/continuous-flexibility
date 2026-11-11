@@ -71,8 +71,10 @@ theorem n05CanonicalGlobalInverse_weighted_l2_bound
     simpa only [one_smul] using
       n05CanonicalWeightedZeroMap_apply S K s (fun _ => 1) 1 zero_le_one hone v m
   have hxn : ‖x‖ ≤ ‖v‖ := by
-    simpa only [one_mul] using
-      n05CanonicalWeightedZeroMap_bound S K s (fun _ => 1) 1 zero_le_one hone v
+    change ‖n05CanonicalWeightedZeroMap S K s (fun _ => 1) 1 zero_le_one hone v‖ ≤
+      ‖(show n05CanonicalClosedSubmodule S K s from v)‖
+    exact (n05CanonicalWeightedZeroMap_bound S K s (fun _ => 1) 1 zero_le_one hone v).trans_eq
+      (one_mul _)
   let y : CanonicalSequence S K := fun k =>
     (n05CanonicalSampleWeight T S K γ (t - 4) k)⁻¹ •
       (n05CanonicalGlobalInverse D S C K G
