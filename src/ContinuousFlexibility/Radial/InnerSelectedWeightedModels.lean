@@ -67,7 +67,7 @@ variable (ha : 0 ≤ a) (hN : 4096 ≤ S.chain.index)
 include ha hN hNa hCM hγ
 
 local notation "A" => P.actualChain hCentralFamily hMorseFamily hX hsupport K q hq hband
-local notation "W" => innerMorseInnerWeight S.chain.index K a γ (P.chain K) (A).leftWall (A).rightWall
+local notation "W" => innerMorseInnerWeight S.chain.index K a γ (P.chain K) (InnerRadialActualChain.leftWall A) (InnerRadialActualChain.rightWall A)
 
 /-- Both signed actual weights satisfy the normalized column estimate
 on every model slot. The bound is uniform in the entire finite chain. -/

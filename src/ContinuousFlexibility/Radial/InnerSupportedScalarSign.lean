@@ -35,11 +35,11 @@ def innerBorderScalarSign : InnerBorderL2 μ ≃ₗᵢ[ℝ] InnerBorderL2 μ :=
 theorem innerBorderScalarSign_involutive :
     Function.Involutive (innerBorderScalarSign μ) := by
   intro F
-  rw [innerBorderScalarSign_apply, innerBorderScalarSign_apply,
-    WithLp.toLp_fst, WithLp.toLp_snd, neg_neg]
-  exact WithLp.toLp_ofLp 2 F
+  simpa only [innerBorderScalarSign_apply, WithLp.toLp_fst,
+    WithLp.toLp_snd, neg_neg] using (WithLp.toLp_ofLp 2 F)
 
-local notation "HSrc" => ↥(innerSupportedAdmissibleSource μ s bordered)
+local notation "S" => innerSupportedAdmissibleSource μ s bordered
+local notation "HSrc" => ↥S
 
 theorem innerSupportedScalarSign_mem (F : HSrc) :
     innerBorderScalarSign μ F.val ∈ innerSupportedAdmissibleSource μ s bordered := by

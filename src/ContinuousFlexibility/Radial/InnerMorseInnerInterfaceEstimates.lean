@@ -30,7 +30,7 @@ variable {D : ReferenceData} (N K : ℕ) (a γ : ℝ)
 
 local notation "A" => innerActualChainOfModelsAndGaps G bordered j
   (innerMorseInnerCenter K) column models gaps
-local notation "W" => innerMorseInnerWeight N K a γ G (A).leftWall (A).rightWall
+local notation "W" => innerMorseInnerWeight N K a γ G (InnerRadialActualChain.leftWall A) (InnerRadialActualChain.rightWall A)
 local notation "w" => innerMorseInnerInterfaceWeight N K a γ
 
 /-- A gap's genuine common cut weight is also its spatial weight.

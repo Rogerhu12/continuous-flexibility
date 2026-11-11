@@ -8,7 +8,7 @@ import ContinuousFlexibility.Radial.PositiveBufferR09
 The proved positive-buffer compression theorem supplies every local
 model. The weight exponent is fixed first, then the frequency threshold,
 then an index floor that permits every later first index. Only afterwards
-are the central cuts and cone lengths chosen.
+are the central cuts and the numerical cone bounds chosen.
 
 For every raw physical realization with these same selected parameters,
 one constant controls all bands and all positive even modes. The inverse
