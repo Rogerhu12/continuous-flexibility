@@ -34,7 +34,11 @@ theorem n05CanonicalPeriodicRepresentative_ae (S : PhysicalSpacesData)
       =ᵐ[canonicalMeasure S K m] (u : PolarPoint → ℝ) := by
   have he := (cylinderPeriodicExtension_ae (n05CanonicalZeroExtension S K m u)).trans
     (n05CanonicalZeroExtension_ae S K m u)
-  rw [← n05CanonicalMeasure_eq_cylinder_restrict]
+  have hfilter : ae (canonicalMeasure S K m) =
+      ae (materialCylinderMeasure.restrict (n05CanonicalRadialWindow S K m)) :=
+    congrArg (fun μ : Measure PolarPoint => ae μ)
+      (n05CanonicalMeasure_eq_cylinder_restrict S K m).symm
+  rw [hfilter]
   filter_upwards [he.filter_mono (ae_mono Measure.restrict_le_self),
     ae_restrict_mem (n05CanonicalRadialWindow_measurable S K m)] with p hp hw
   simpa only [n05CanonicalPeriodicRepresentative, indicator_of_mem hw] using hp

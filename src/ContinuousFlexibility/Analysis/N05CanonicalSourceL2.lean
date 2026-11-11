@@ -59,7 +59,7 @@ theorem n05_volumeSource_finite_weight_bound
       (∫ p, g p ^ 2 ∂volume.restrict (U m)) ≤ B * ‖v.val m 0‖ ^ 2 :=
     hpiece q m (v.val m 0) f (hrepr m)
   have hsum : Summable (fun m => ‖v.val m‖ ^ 2) := by
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using
+    simpa only [ENNReal.toReal_ofNat, Real.rpow_two, Submodule.norm_coe] using
       (lp.memℓp v.val).summable (by norm_num : 0 < (2 : ENNReal).toReal)
   have hzeroBound (m : ℕ) : ‖v.val m 0‖ ^ 2 ≤ ‖v.val m‖ ^ 2 :=
     pow_le_pow_left₀ (norm_nonneg _) (PiLp.norm_apply_le (v.val m) 0) 2
@@ -95,7 +95,7 @@ theorem n05_volumeSource_finite_weight_bound
     rw [← Measure.restrict_congr_set hcover]
     exact integral_iUnion (fun m => measurableSet_Ioo.prod measurableSet_Ioc) hdisjoint hsq
   have hnorm : (∑' m, ‖v.val m‖ ^ 2) = ‖v‖ ^ 2 := by
-    simpa only [ENNReal.toReal_ofNat, Real.rpow_two] using
+    simpa only [ENNReal.toReal_ofNat, Real.rpow_two, Submodule.norm_coe] using
       (lp.norm_rpow_eq_tsum (by norm_num : 0 < (2 : ENNReal).toReal) v.val).symm
   have hsum0Bound : (∑' m, ‖v.val m 0‖ ^ 2) ≤ ‖v‖ ^ 2 :=
     (Summable.tsum_le_tsum hzeroBound hsum0 hsum).trans_eq hnorm
@@ -110,6 +110,7 @@ theorem n05_volumeSource_finite_weight_bound
       _ ≤ B * ‖v‖ ^ 2 := mul_le_mul_of_nonneg_left hsum0Bound hB.le
   refine ⟨n05_piPeriodic_memLp_fullPeriod measurableSet_Ioo hperiodic hhalf, ?_⟩
   change (∫ p, g p ^ 2 ∂volume.restrict (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi))) ≤ _
+  dsimp only [radialCore] at hhalfBound ⊢
   rw [n05_piPeriodic_integral_sq_fullPeriod measurableSet_Ioo hperiodic hhalf]
   nlinarith only [hhalfBound]
 
