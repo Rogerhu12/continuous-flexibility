@@ -101,6 +101,61 @@ private theorem coefficientRadialInput_norm_weight_order
   rw [Real.norm_eq_abs]
   exact h.trans_eq (by ring)
 
+/-- Covering and scalar normalization are transported as one quantified bound. -/
+private theorem coefficientRadialInput_positive_transport
+    {X V : Type*} {I : Set ℝ} {U : Set X}
+    (cells : ℕ → Set ℝ) (H E : ℝ → ℝ) (P : V → ℝ)
+    (hcover : ∀ r ∈ I, ∃ m, r ∈ cells m)
+    (F G : ∀ r, r ∈ I → X → V → ℝ)
+    (hFG : ∀ r hr x v, F r hr x v = G r hr x v)
+    (hraw : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ I), r ∈ cells m → ∀ x ∈ U, ∀ v,
+        |F r hr x v| ≤ (B * H r * E r ^ A) * P v) :
+    ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧
+      ∀ r (hr : r ∈ I), ∀ x ∈ U, ∀ v,
+        ‖G r hr x v‖ ≤ B * E r ^ A * H r * P v := by
+  obtain ⟨B, A, hB, hA, hb⟩ := hraw
+  refine ⟨B, A, hB, hA.le, fun r hr x hx v => ?_⟩
+  obtain ⟨m, hm⟩ := hcover r hr
+  have hh := coefficientRadialInput_norm_weight_order (hb m r hr hm x hx v)
+  rw [hFG] at hh
+  exact hh
+
+/-- Selection among three scalar jet families is independent of their state type. -/
+private theorem coefficientRadialInput_three_positive_transport
+    {X V : Type*} {I : Set ℝ} {U : Set X}
+    (cells : ℕ → Set ℝ) (H E : ℝ → ℝ) (P : V → ℝ)
+    (hcover : ∀ r ∈ I, ∃ m, r ∈ cells m)
+    (F₀ F₁ F₂ : ∀ r, r ∈ I → X → V → ℝ)
+    (G : Fin 3 → ∀ r, r ∈ I → X → V → ℝ)
+    (hG : ∀ i r hr x v, G i r hr x v =
+      Fin.cases (F₀ r hr x v) (Fin.cases (F₁ r hr x v) (fun _ => F₂ r hr x v)) i)
+    (h₀ : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ I), r ∈ cells m → ∀ x ∈ U, ∀ v,
+        |F₀ r hr x v| ≤ (B * H r * E r ^ A) * P v)
+    (h₁ : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ I), r ∈ cells m → ∀ x ∈ U, ∀ v,
+        |F₁ r hr x v| ≤ (B * H r * E r ^ A) * P v)
+    (h₂ : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ I), r ∈ cells m → ∀ x ∈ U, ∀ v,
+        |F₂ r hr x v| ≤ (B * H r * E r ^ A) * P v)
+    (i : Fin 3) :
+    ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧
+      ∀ r (hr : r ∈ I), ∀ x ∈ U, ∀ v,
+        ‖G i r hr x v‖ ≤ B * E r ^ A * H r * P v := by
+  revert i
+  refine Fin.cases ?_ (Fin.cases ?_ (fun j => ?_))
+  · exact coefficientRadialInput_positive_transport cells H E P hcover F₀ (G 0)
+      (fun r hr x v => by
+        simpa only [Fin.cases_zero] using (hG 0 r hr x v).symm) h₀
+  · exact coefficientRadialInput_positive_transport cells H E P hcover F₁ (G (0 : Fin 2).succ)
+      (fun r hr x v => by
+        simpa only [Fin.cases_succ, Fin.cases_zero] using
+          (hG (0 : Fin 2).succ r hr x v).symm) h₁
+  · exact coefficientRadialInput_positive_transport cells H E P hcover F₂ (G j.succ.succ)
+      (fun r hr x v => by
+        simpa only [Fin.cases_succ] using (hG j.succ.succ r hr x v).symm) h₂
+
 private theorem coefficientRadialInput_zero_material_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
@@ -163,41 +218,42 @@ private theorem coefficientRadialInput_positive_material_bound
       ∀ v : Fin k → AnnularState S,
         ‖(coefficientRadialInputJets hS hT hA hD hχ n r hr i).D k z.1 v‖ ≤
           B * T.E0 r ^ A * T.H r ^ (3 / 4 : ℝ) * ∏ j, stateGrading S 0 (v j) := by
-  letI : TopologicalSpace (AnnularState S) := inferInstance
-  letI : AddCommGroup (AnnularState S) := inferInstance
-  letI : Module ℝ (AnnularState S) := inferInstance
-  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
-  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
-  letI : TopologicalSpace (AnnularState S × ℝ) := inferInstance
-  letI : AddCommGroup (AnnularState S × ℝ) := inferInstance
-  letI : Module ℝ (AnnularState S × ℝ) := inferInstance
-  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
-  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
   have hP : RadialPartition D := hA.1.1.choose_spec.2.1
-  revert i
-  refine Fin.cases ?_ (Fin.cases ?_ (fun _ => ?_))
-  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-      stateProfileRadialJetSmoothDirections_material_bound
-        hS hT hA hD hχ hε hB hE hloc hχloc n k hk
-    refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
-    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-    have hh := coefficientRadialInput_norm_weight_order (hb m r hr hm z hz v)
-    simpa only [coefficientRadialInputJets, Fin.cases_zero] using hh
-  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-      stateProfileRadialJetSmoothDirections_material_bound
-        hS hT hA hD hχ hε hB hE hloc hχloc (n + 1) k hk
-    refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
-    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-    have hh := coefficientRadialInput_norm_weight_order (hb m r hr hm z hz v)
-    simpa only [coefficientRadialInputJets, Fin.cases_succ, Fin.cases_zero,
-      SmoothDirections.congr] using hh
-  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-      stateInverseProfileRadialJetSmoothDirections_material_bound
-        hS hT hA hD hχ hε hB hE hloc hχloc n k hk
-    refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
-    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-    have hh := coefficientRadialInput_norm_weight_order (hb m r hr hm z hz v)
-    simpa only [coefficientRadialInputJets, Fin.cases_succ] using hh
+  let F₀ : ∀ r, r ∈ Ioo D.a D.b → (AnnularState S × ℝ) → (Fin k → AnnularState S) → ℝ :=
+    fun r hr z v =>
+      (stateProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ n r hr).D k z.1 v
+  let F₁ : ∀ r, r ∈ Ioo D.a D.b → (AnnularState S × ℝ) → (Fin k → AnnularState S) → ℝ :=
+    fun r hr z v =>
+      (stateProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ (n + 1) r hr).D k z.1 v
+  let F₂ : ∀ r, r ∈ Ioo D.a D.b → (AnnularState S × ℝ) → (Fin k → AnnularState S) → ℝ :=
+    fun r hr z v =>
+      (stateInverseProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ n r hr).D k z.1 v
+  let G : Fin 3 → ∀ r, r ∈ Ioo D.a D.b →
+      (AnnularState S × ℝ) → (Fin k → AnnularState S) → ℝ :=
+    fun j r hr z v => (coefficientRadialInputJets hS hT hA hD hχ n r hr j).D k z.1 v
+  have hG : ∀ j r hr z v, G j r hr z v =
+      Fin.cases (F₀ r hr z v) (Fin.cases (F₁ r hr z v) (fun _ => F₂ r hr z v)) j := by
+    intro j
+    refine Fin.cases ?_ (Fin.cases ?_ (fun _ => ?_)) j
+    · intro r hr z v
+      simp only [G, F₀, coefficientRadialInputJets, Fin.cases_zero]
+    · intro r hr z v
+      simp only [G, F₁, coefficientRadialInputJets, Fin.cases_succ, Fin.cases_zero,
+        SmoothDirections.congr]
+    · intro r hr z v
+      simp only [G, F₂, coefficientRadialInputJets, Fin.cases_succ]
+  exact coefficientRadialInput_three_positive_transport
+    (X := AnnularState S × ℝ) (V := Fin k → AnnularState S)
+    (I := Ioo D.a D.b) (U := stateNeighborhood S C base ε)
+    D.cells (fun r => T.H r ^ (3 / 4 : ℝ)) T.E0
+    (fun v => ∏ j, stateGrading S 0 (v j))
+    (fun r hr => radialPartition_exists_cell hP hr) F₀ F₁ F₂ G hG
+    (stateProfileRadialJetSmoothDirections_material_bound
+      hS hT hA hD hχ hε hB hE hloc hχloc n k hk)
+    (stateProfileRadialJetSmoothDirections_material_bound
+      hS hT hA hD hχ hε hB hE hloc hχloc (n + 1) k hk)
+    (stateInverseProfileRadialJetSmoothDirections_material_bound
+      hS hT hA hD hχ hε hB hE hloc hχloc n k hk) i
 
 /-- The actual profile, profile derivative and inverse profile have the
 same mixed power control, at any fixed interpolation indices. -/
