@@ -60,7 +60,7 @@ forward derivative lower bound. -/
 theorem lipschitzWith_inverse_of_deriv_lower_bound
     {F G : ℝ → ℝ} {A : ℝ} (hA : 0 < A)
     (hF : ∀ x : ℝ, A ≤ deriv F x) (hFG : ∀ y : ℝ, F (G y) = y) :
-    LipschitzWith ⟨A⁻¹, inv_nonneg.mpr hA.le⟩ G := by
+    LipschitzWith (NNReal.mk A⁻¹ (inv_nonneg.mpr hA.le)) G := by
   apply LipschitzWith.of_dist_le_mul
   intro x y
   simpa only [Real.dist_eq, NNReal.coe_mk] using
