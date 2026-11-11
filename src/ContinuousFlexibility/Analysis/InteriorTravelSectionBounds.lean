@@ -90,6 +90,10 @@ theorem interiorTravel_upperBound_of_rightSection
     dsimp only [interiorFlowRadius]
     ring
   have hstart : Θ (1, 0) 0 θ = θ := hΘ.1 (1, 0) θ
+  change (U (interiorFlowRadius r b 0 (1, 0), Θ (1, 0) 0 θ) -
+    V (interiorFlowRadius r b 0 (1, 0), Θ (1, 0) 0 θ)) / 2 ≤
+    (U (interiorFlowRadius r b 1 (1, 0), Θ (1, 0) 1 θ) -
+      V (interiorFlowRadius r b 1 (1, 0), Θ (1, 0) 1 θ)) / 2 at he
   rw [hzero, hone, hstart] at he
   exact he.trans (hright (Θ (1, 0) 1 θ))
 
