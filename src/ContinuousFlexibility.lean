@@ -43,6 +43,7 @@ import ContinuousFlexibility.Analysis.StateControlEndpointClosure
 import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.StateProfileRegularity
 import ContinuousFlexibility.Analysis.TameLinear
+import ContinuousFlexibility.Analysis.TransmissionJetAlgebra
 import ContinuousFlexibility.Analysis.WeakBranchCore
 import ContinuousFlexibility.Analysis.MaterialSampleCofinite
 import ContinuousFlexibility.Analysis.PointSolutionCore
@@ -278,6 +279,7 @@ import ContinuousFlexibility.Analysis.IntervalFirstNormal
 import ContinuousFlexibility.Analysis.NeumannPackage
 import ContinuousFlexibility.Analysis.PhysicalJetBonding
 import ContinuousFlexibility.Analysis.PhysicalJetClosedGraph
+import ContinuousFlexibility.Analysis.PhysicalTransmissionGluing
 import ContinuousFlexibility.Analysis.PhysicalTransmissionOperator
 import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
 import ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain
