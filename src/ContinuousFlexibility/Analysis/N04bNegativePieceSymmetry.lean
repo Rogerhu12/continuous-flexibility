@@ -63,9 +63,10 @@ theorem n04b_actualRootChart_period
         (p + (0, Real.pi)) =
       n04bRootPhysicalChart (n04bActualTravelChart S C L z m)
         (C.travel m) side p + (0, Real.pi) := by
-  have ht := n04b_actualTravelChart_period_add hN hS hT hfield hz hs m hp p.2
+  rcases p with ⟨r, θ⟩
+  have ht := n04b_actualTravelChart_period_add hN hS hT hfield hz hs m hp θ
   simpa only [n04bRootPhysicalChart, n04bRootStripChart,
-    Prod.mk_add_mk, add_zero] using
+    Prod.mk_add_mk, Prod.fst_add, Prod.snd_add, add_zero] using
     congrArg (n04bRootStripChart (C.travel m) side) ht
 
 include hN hS hT hfield hz hs in
@@ -78,16 +79,18 @@ theorem n04b_actualRootHeight_period
       n04bRootPhysicalHeight (L.coefficients z)
         (n04bCharacteristicHalfGap (L.coefficients z))
         (n04bActualTravelChart S C L z m) (C.travel m) side p := by
+  rcases p with ⟨r, θ⟩
   have hC : controlGeometryConditions D S C := hN.1.1.2.2.2.1
-  have hpD : p.1 ∈ Ioo D.a D.b :=
+  have hpD : r ∈ Ioo D.a D.b :=
     ⟨(hC.1 m).1.trans hp.1.1, hp.1.2.trans (hC.1 m).2.2⟩
-  obtain ⟨ha, hb, hc⟩ := hfield.periodic_coefficients z hz hs p.1 hpD
-  have ha' : (L.coefficients z).a (p + (0, Real.pi)) = (L.coefficients z).a p := by
-    simpa only [Prod.mk_add_mk, add_zero] using ha p.2
-  have hv : n04bCharacteristicHalfGap (L.coefficients z) (p + (0, Real.pi)) =
-      n04bCharacteristicHalfGap (L.coefficients z) p := by
+  obtain ⟨ha, hb, hc⟩ := hfield.periodic_coefficients z hz hs r hpD
+  have ha' : (L.coefficients z).a ((r, θ) + (0, Real.pi)) =
+      (L.coefficients z).a (r, θ) := by
+    simpa only [Prod.mk_add_mk, add_zero] using ha θ
+  have hv : n04bCharacteristicHalfGap (L.coefficients z) ((r, θ) + (0, Real.pi)) =
+      n04bCharacteristicHalfGap (L.coefficients z) (r, θ) := by
     simpa only [Prod.mk_add_mk, add_zero] using
-      (n04b_characteristic_periodic (L.coefficients z) p.1 Real.pi ha hb hc).2 p.2
+      (n04b_characteristic_periodic (L.coefficients z) r Real.pi ha hb hc).2 θ
   unfold n04bRootPhysicalHeight
   rw [ha', hv, n04b_actualRootChart_period hN hS hT hfield hz hs m side
     ⟨hp.1.1.le, hp.1.2.le⟩]

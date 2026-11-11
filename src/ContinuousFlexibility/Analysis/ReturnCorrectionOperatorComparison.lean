@@ -126,23 +126,23 @@ theorem N01Properties.divergenceOperator_returnCorrectedCoefficients
   have hF : (fun q => (L.b q - K.b q) * angularPartial u q) =ᶠ[𝓝 p]
       returnCorrectionRadialErrorFlux D S C R χ z (R.residual z) η := by
     filter_upwards [heq] with q hq
-    simp only [returnCorrectionRadialErrorFlux, hq]
+    simp only [returnCorrectionRadialErrorFlux, hq, u]
   have hG : (fun q => (L.b q - K.b q) * radialPartial u q +
       (L.c q - K.c q) * angularPartial u q) =ᶠ[𝓝 p]
       returnCorrectionAngularErrorFlux D S C R χ z (R.residual z) η := by
     filter_upwards [heq] with q hq
-    simp only [returnCorrectionAngularErrorFlux, hq]
+    simp only [returnCorrectionAngularErrorFlux, hq, u]
   have hFr : radialPartial (fun q => (L.b q - K.b q) * angularPartial u q) p =
       radialPartial (returnCorrectionRadialErrorFlux D S C R
         χ z (R.residual z) η) p := by
-    unfold radialPartial
-    rw [hF.fderiv_eq]
+    exact congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (1, 0))
+      (hF.fderiv_eq (𝕜 := ℝ))
   have hGt : angularPartial (fun q => (L.b q - K.b q) * radialPartial u q +
       (L.c q - K.c q) * angularPartial u q) p =
       angularPartial (returnCorrectionAngularErrorFlux D S C R
         χ z (R.residual z) η) p := by
-    unfold angularPartial
-    rw [hG.fderiv_eq]
+    exact congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (0, 1))
+      (hG.fderiv_eq (𝕜 := ℝ))
   rw [hFr, hGt] at hcmp
   change divergenceOperator L u p - divergenceOperator K u p = _
   rw [hcmp]

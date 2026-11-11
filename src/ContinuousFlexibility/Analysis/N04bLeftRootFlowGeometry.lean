@@ -72,6 +72,7 @@ theorem n04b_exists_left_root_symmetric_flow_equations_with_halfGap
   · intro θ
     apply (hflow θ).2.1.comp (continuous_const.add continuous_id).continuousOn
     intro x hx
+    change C.left m + x ∈ Icc (C.left m) (C.right m)
     exact ⟨by linarith [hx.1], by linarith [hx.2]⟩
   · intro θ x hx
     have hxC : C.left m + x ∈ Ioo (C.left m) (C.right m) :=

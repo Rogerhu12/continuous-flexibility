@@ -44,7 +44,8 @@ theorem n04bTypedAtlasData_normalization
     change p.1 ∈ n04bNormalizationRegion D at hn
     cases hi : e m with
     | inl i =>
-      have hp' : p ∈ n04bTypedPhysicalDomain C (n04bActualTravelChart S C L z) (.inl i) := by
+      have hp' : p ∈ n04bTypedPhysicalDomain (D := D) C (n04bActualTravelChart S C L z)
+          (.inl i : N04PieceIndex D) := by
         simpa only [n04bTypedAtlasData_physicalPieceOpen, hi] using hp
       exact (n04b_not_mem_normalizationRegion_of_negative
         (n04b_typed_domain_negative hC (.inl i) rfl hp') hn).elim

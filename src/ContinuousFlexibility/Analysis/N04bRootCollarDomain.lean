@@ -54,7 +54,7 @@ theorem n04b_rootStripInverse_mem_full_of_pos
     mul_pos (by norm_num : (0 : ℝ) < 2 / 3) (Real.rpow_pos_of_pos hq.1 _)
   cases side with
   | false =>
-    exact ⟨⟨htpos, by linarith [ht.2]⟩, mem_univ _⟩
+    exact ⟨⟨htpos, by change n04bRootTravel q.1 < T; linarith [ht.2]⟩, mem_univ _⟩
   | true =>
     exact ⟨⟨by change 0 < T - n04bRootTravel q.1; linarith [ht.2],
       by change T - n04bRootTravel q.1 < T; linarith⟩, mem_univ _⟩
@@ -79,7 +79,7 @@ theorem n04b_closedTravelHalf_root_or_interior
       have hbound : (F p).1 ≤ T / 2 := ht.2
       rw [hpoint, hRight] at hbound
       linarith
-    exact Or.inr ⟨⟨lt_of_le_of_ne hpc.1.1 ha.symm,
+    exact Or.inr ⟨⟨lt_of_le_of_ne hpc.1.1 (fun he => ha he.symm),
       lt_of_le_of_ne hpc.1.2 hb⟩, mem_univ _⟩
   | true =>
     by_cases hb : p.1 = b
@@ -90,7 +90,7 @@ theorem n04b_closedTravelHalf_root_or_interior
       have hbound : T / 2 ≤ (F p).1 := ht.1
       rw [hpoint, hLeft] at hbound
       linarith
-    exact Or.inr ⟨⟨lt_of_le_of_ne hpc.1.1 ha.symm,
+    exact Or.inr ⟨⟨lt_of_le_of_ne hpc.1.1 (fun he => ha he.symm),
       lt_of_le_of_ne hpc.1.2 hb⟩, mem_univ _⟩
 
 end ContinuousFlexibility.Analysis

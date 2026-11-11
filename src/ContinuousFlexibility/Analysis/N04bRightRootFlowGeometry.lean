@@ -98,6 +98,7 @@ theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
     apply (hflow (Function.invFun (L.minusFlow z m (C.right m)) θ)).2.1.comp
       (continuous_const.sub continuous_id).continuousOn
     intro x hx
+    change C.right m - x ∈ Icc (C.left m) (C.right m)
     exact ⟨by linarith [hx.2], by linarith [hx.1]⟩
   · intro θ x hx
     have hxC : C.right m - x ∈ Ioo (C.left m) (C.right m) :=
@@ -105,7 +106,13 @@ theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
     have hactual : HasDerivAt (n04bRightRootFlow C L z m θ)
         (-minusCharacteristicSpeed (L.coefficients z)
           (C.right m - x, n04bRightRootFlow C L z m θ x)) x := by
-      simpa only [n04bRightRootFlow, Function.comp_def, mul_neg_one] using
+      change HasDerivAt
+        (fun y => L.minusFlow z m (C.right m - y)
+          (Function.invFun (L.minusFlow z m (C.right m)) θ))
+        (-minusCharacteristicSpeed (L.coefficients z)
+          (C.right m - x, L.minusFlow z m (C.right m - x)
+            (Function.invFun (L.minusFlow z m (C.right m)) θ))) x
+      simpa only [Function.comp_def, mul_neg_one] using
         ((hflow (Function.invFun (L.minusFlow z m (C.right m)) θ)).2.2.1
           (C.right m - x) hxC).comp x ((hasDerivAt_id x).const_sub (C.right m))
     apply hactual.congr_deriv
@@ -118,7 +125,8 @@ theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
           (C.right m - x, n04bRightRootFlow C L z m θ x) =
         d (x, n04bRightRootFlow C L z m θ x) +
           Real.sqrt x * c₀ (x, n04bRightRootFlow C L z m θ x) := by
-      simpa only [rootProfileShift, neg_one_mul, neg_mul, sub_neg_eq_add, sub_eq_add_neg]
+      simpa only [rootProfileShift, neg_one_mul, neg_mul, one_mul, neg_neg,
+        sub_neg_eq_add, sub_eq_add_neg]
         using heq
     simpa only [rootPhysicalSpeed, one_mul] using hspeed
   · intro x hx θ
@@ -126,7 +134,7 @@ theorem n04b_exists_right_root_symmetric_flow_equations_with_halfGap
       ⟨⟨hx.1, hx.2.trans hρη⟩, mem_univ _⟩
     have hm := (hphysical (x, θ) hp).2.1
     have hp' := (hphysical (x, θ) hp).2.2
-    simp only [rootProfileShift, neg_one_mul, neg_mul, sub_neg_eq_add,
+    simp only [rootProfileShift, neg_one_mul, neg_mul, one_mul, neg_neg, sub_neg_eq_add,
       ← sub_eq_add_neg] at hm hp'
     dsimp only [minusCharacteristicSpeed, plusCharacteristicSpeed,
       n04bCharacteristicHalfGap] at hm hp' ⊢
