@@ -40,7 +40,9 @@ def coefficientRadialInputJets
     (stateProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ n r hr)
     (Fin.cases
       ((stateProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ (n + 1) r hr).congr
-        (fun _ _ => by rw [iteratedDeriv_succ']))
+        (fun _ _ => by
+          rw [iteratedDeriv_succ']
+          simp only [coefficientRadialInput, Fin.cases_succ, Fin.cases_zero]))
       (fun _ => stateInverseProfileRadialJetSmoothDirections
         hS hT hA.1.1 hD hA.2.2.1 hχ n r hr))
 
@@ -82,6 +84,15 @@ def coefficientRadialInput_regular
       (p := (r, 0)) ⟨hr, mem_univ _⟩).1
     exact ((contDiff_stateProfile_of_partA hS hT hA z.1).contDiffAt.inv hw.ne').contDiffWithinAt
 
+/-- The projection estimate is proved before specializing the state module. -/
+private theorem coefficientRadialInput_fst_grading_le
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (base : ℕ) (v : E × ℝ) :
+    p 0 v.1 ≤ pairGrading p realGrading base v := by
+  rw [tamePairGrading_apply]
+  exact (hp (Nat.zero_le base) v.1).trans
+    (le_add_of_nonneg_right (apply_nonneg _ _))
+
 /-- The actual profile, profile derivative and inverse profile have the
 same mixed power control, at any fixed interpolation indices. -/
 theorem coefficientRadialInput_powerBounds
@@ -97,6 +108,14 @@ theorem coefficientRadialInput_powerBounds
       base loss (stateNeighborhood S C base ε) (annularOpen D)
       (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1)
       (fun z q => coefficientRadialInput D S C i z.1 q.1) := by
+  letI : TopologicalSpace (AnnularState S) := inferInstance
+  letI : AddCommGroup (AnnularState S) := inferInstance
+  letI : Module ℝ (AnnularState S) := inferInstance
+  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
+  letI : TopologicalSpace (AnnularState S × ℝ) := inferInstance
+  letI : AddCommGroup (AnnularState S × ℝ) := inferInstance
+  letI : Module ℝ (AnnularState S × ℝ) := inferInstance
   letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
   letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
   have hD : RadialProfileGeometry D := hA.1.1.choose_spec.1
@@ -104,14 +123,18 @@ theorem coefficientRadialInput_powerBounds
   have hP : RadialPartition D := hA.1.1.choose_spec.2.1
   let L : (AnnularState S × ℝ) →L[ℝ] AnnularState S :=
     ContinuousLinearMap.fst ℝ (AnnularState S) ℝ
-  apply projectedRadialJets_powerBounds (Y := AnnularState S)
+  have hL : ∀ v : AnnularState S × ℝ,
+      stateGrading S 0 (L v) ≤ pairGrading (stateGrading S) realGrading base v := by
+    intro v
+    simpa only [L, ContinuousLinearMap.coe_fst'] using
+      coefficientRadialInput_fst_grading_le (stateGrading S) (stateGrading_monotone S) base v
+  apply projectedRadialJets_powerBounds
+    (X := AnnularState S × ℝ) (Y := AnnularState S)
+    (U := stateNeighborhood S C base ε) (I := Ioo D.a D.b)
+    (H := fun r => T.H r ^ (3 / 4 : ℝ)) (E := T.E0)
     (pairGrading (stateGrading S) realGrading) (stateGrading S 0)
     (C.referenceState, 0) base loss
-    (fun r hr => Real.rpow_nonneg (hT.2.1 r hr).2.1.le _) hE L
-    (fun v => by
-      simp only [L, ContinuousLinearMap.coe_fst']
-      exact ((stateGrading_monotone S (Nat.zero_le base)) v.1).trans
-        (by rw [tamePairGrading_apply]; exact le_add_of_nonneg_right (apply_nonneg _ _)))
+    (fun r hr => Real.rpow_nonneg (hT.2.1 r hr).2.1.le _) hE L hL
     (coefficientRadialInput D S C i)
     (fun n r hr => coefficientRadialInputJets hS hT hA hD hχ n r hr i)
   · intro n
