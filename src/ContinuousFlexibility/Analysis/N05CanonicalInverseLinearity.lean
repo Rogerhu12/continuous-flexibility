@@ -29,6 +29,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hcoordinates : N05ControlledReferenceCoordinates D S C K)
   (hγw : 0 < γw) (hG : ReferenceInverseProperties D γw M0 M1 G)
 
+include hD hT hS h hcoordinates hγw hG
+
 /-- Actual source class identities suffice even for canonical sequences
 not presented as members of a particular volume level. -/
 theorem n05CanonicalGlobalInverse_linear_combination_of_source_ae
@@ -114,6 +116,8 @@ theorem n05CanonicalGlobalInverse_linear_combination_of_source_ae
 
 variable {V : VolumeModelData S K} (hV : IsVolumeModel T S K V) (hgap : γw < γ)
 
+include hV hgap
+
 theorem n05CanonicalGlobalInverse_linear_combination {t : ℝ} {s : ℕ}
     (v w : V.level γ t s) (c d : ℝ) :
     n05CanonicalGlobalInverse D S C K G (V.forget γ t s (c • v + d • w)) =
@@ -175,8 +179,7 @@ def n05CanonicalInverseLinear (t : ℝ) (s : ℕ) :
 /-- The bounded restriction on every stronger actual volume level. -/
 def n05CanonicalInverseCLM (t : ℝ) (s : ℕ) :
     V.level γ t s →L[ℝ] CanonicalUnknown S K :=
-  (n05CanonicalInverseLinear hD hT hS h hcoordinates hγw hG hV hgap t s).
-    mkContinuousOfExistsBound (by
+  (n05CanonicalInverseLinear hD hT hS h hcoordinates hγw hG hV hgap t s).mkContinuousOfExistsBound (by
       obtain ⟨B, _, hB⟩ :=
         n05CanonicalGlobalInverse_norm_bound hD hT hS h hcoordinates hγw hG hV hgap t s
       exact ⟨B, hB⟩)
@@ -186,6 +189,8 @@ def n05CanonicalInverseCLM (t : ℝ) (s : ℕ) :
       n05CanonicalGlobalInverse D S C K G (V.forget γ t s v) := by
   rw [n05CanonicalInverseCLM, LinearMap.mkContinuousOfExistsBound_apply,
     n05CanonicalInverseLinear_apply]
+
+omit hgap
 
 /-- The fixed base layer required by the canonical common domain. -/
 def n05CanonicalBaseInverse (hbase : γw < (3 / 4 : ℝ)) :
