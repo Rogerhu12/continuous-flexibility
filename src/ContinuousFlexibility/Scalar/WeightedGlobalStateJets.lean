@@ -73,7 +73,7 @@ theorem scalarStateHeight_radialPartial_heightRadial_global
     contDiff_const.mul hu
   have hwr : radialPartial (fun q : PolarPoint => scalarStateProfile D S x q.1) p =
       deriv (scalarStateProfile D S x) p.1 := by
-    change radialPartial (radialHeightField (scalarStateProfile D S x)) p = _
+    change radialPartial (Radial.radialHeightField (scalarStateProfile D S x)) p = _
     exact Radial.radialPartial_radialHeightField (hw.differentiable (by simp) p.1)
   rw [he, radialPartial_add (hwfield.differentiable (by simp) p)
     (huscaled.differentiable (by simp) p),
@@ -135,8 +135,9 @@ theorem scalarStateCoefficients_eq_zero_outside
       scalarStateCorrectedC D S x p = 0 := by
   have hr : p.1 ≤ D.a ∨ D.b ≤ p.1 := by
     by_contra h
-    push_neg at h
-    exact hp ⟨⟨h.1, h.2⟩, mem_univ _⟩
+    have ha : D.a < p.1 := lt_of_not_ge (fun ha => h (Or.inl ha))
+    have hb : p.1 < D.b := lt_of_not_ge (fun hb => h (Or.inr hb))
+    exact hp ⟨⟨ha, hb⟩, mem_univ _⟩
   have hw := scalarStateProfile_eq_zero_outside (S := S) hD x hr
   have hw' : deriv (scalarStateProfile D S x) p.1 = 0 := by
     simpa only [iteratedDeriv_one] using
@@ -168,7 +169,7 @@ theorem scalarStateCoefficients_eq_zero_outside
   constructor
   · simp only [scalarStateB, polarLinearB, linearMixed, hpr, mul_zero, zero_mul]
   · simp only [scalarStateCorrectedC, polarCorrectedC, correctedAngular, linearAngular,
-      hk, hkr, hpt, heightQ, mul_zero, zero_mul, sub_zero, add_zero, zero_add,
+      hk, hkr, hpt, heightQ, mul_zero, zero_mul, sub_zero, add_zero,
       zero_div, div_zero]
 
 theorem scalarCoefficientComponent_eq_zero_outside
@@ -177,8 +178,9 @@ theorem scalarCoefficientComponent_eq_zero_outside
     scalarCoefficientComponent D S x i p = 0 := by
   have hr : p.1 ≤ D.a ∨ D.b ≤ p.1 := by
     by_contra h
-    push_neg at h
-    exact hp ⟨⟨h.1, h.2⟩, mem_univ _⟩
+    have ha : D.a < p.1 := lt_of_not_ge (fun ha => h (Or.inl ha))
+    have hb : p.1 < D.b := lt_of_not_ge (fun hb => h (Or.inr hb))
+    exact hp ⟨⟨ha, hb⟩, mem_univ _⟩
   obtain ⟨B, hB⟩ := hD
   have hw := hB.1.2.2.1.2 p.1 hr
   have hw' : deriv D.w p.1 = 0 := by

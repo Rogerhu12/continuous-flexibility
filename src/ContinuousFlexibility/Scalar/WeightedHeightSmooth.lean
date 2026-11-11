@@ -52,7 +52,9 @@ theorem smoothTameOn_scalarHeightMul
     SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 scalarBeta) n
   obtain ⟨base, loss, _, hB⟩ := SobolevModelData.decodedProductMap_twoFactor
     hT (hS.1 scalarBeta) (scalarHeightInterpolation hS) scalarBeta_pos.le
-  exact smoothTameOn_bilinear_comp hp ht (weighted_scalarHeightGrading_withSeminorms S)
+  exact smoothTameOn_bilinear_comp
+    (f := f) (g := g) (p := p) (q := scalarHeightGrading S) (r := scalarHeightGrading S)
+    (base := base) (loss := loss) hp ht (weighted_scalarHeightGrading_withSeminorms S)
     hf hg (SobolevModelData.decodedProductMap hT (hS.1 scalarBeta)
       (scalarHeightInterpolation hS) scalarBeta_pos.le 1) hB
 
@@ -67,7 +69,9 @@ theorem smoothTameOn_scalarHeightOddMul
     SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 scalarBeta) n
   obtain ⟨base, loss, _, hB⟩ := SobolevModelData.oddProductPrimitiveMap_oneHigh_pair
     hT (hS.1 scalarBeta) (scalarHeightInterpolation hS) scalarBeta_pos
-  exact smoothTameOn_bilinear_comp hp ht (weighted_scalarHeightGrading_withSeminorms S)
+  exact smoothTameOn_bilinear_comp
+    (f := f) (g := g) (p := p) (q := scalarHeightGrading S) (r := scalarHeightGrading S)
+    (base := base) (loss := loss) hp ht (weighted_scalarHeightGrading_withSeminorms S)
     hf hg (SobolevModelData.oddProductPrimitiveMap hT (hS.1 scalarBeta)
       (scalarHeightInterpolation hS) scalarBeta_pos) (fun s _ => hB s)
 
@@ -82,7 +86,9 @@ theorem smoothTameOn_scalarHeightAngularMul
     SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 scalarBeta) n
   obtain ⟨base, loss, _, hB⟩ := SobolevModelData.angularJetProductMap_oneHigh
     hT (hS.1 scalarBeta) (scalarHeightInterpolation hS) scalarBeta_pos.le
-  exact smoothTameOn_bilinear_comp hp ht (weighted_scalarHeightGrading_withSeminorms S)
+  exact smoothTameOn_bilinear_comp
+    (f := f) (g := g) (p := p) (q := scalarHeightGrading S) (r := scalarHeightGrading S)
+    (base := base) (loss := loss) hp ht (weighted_scalarHeightGrading_withSeminorms S)
     hf hg (SobolevModelData.angularJetProductMap hT (hS.1 scalarBeta)
       (scalarHeightInterpolation hS) scalarBeta_pos.le) (fun s _ => hB s)
 

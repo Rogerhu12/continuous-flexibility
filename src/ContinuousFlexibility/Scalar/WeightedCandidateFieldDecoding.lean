@@ -103,7 +103,7 @@ theorem angularPartial_decode_scalarStateSlopeOddAct
     angularPartial ((S.height scalarBeta).decode (scalarStateSlopeOddAct hD hT hS x u)) p =
       (scalarStateProfile D S x p.1 + x.2 * radialPartial (scalarStateIncrement S x) p) *
         angularPartial ((S.height scalarBeta).decode u) p := by
-  simp only [scalarStateSlopeOddAct, angularPartial_decode_height_add,
+  simp only [scalarStateSlopeOddAct, angularPartial_decode_height_add hT hS,
     angularPartial_decode_scalarStateWOddAct, angularPartial_decode_scalarHeightOddMul,
     decode_scalarStateRadialHeight]
   ring
@@ -164,7 +164,7 @@ theorem angularPartial_decode_scalarCoefficientBPrimitive_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarCoefficientBPrimitive hD hT hS x)) p =
       scalarCoefficientFiniteFormula D S x 1 p := by
-  simp only [scalarCoefficientBPrimitive, angularPartial_decode_height_neg,
+  simp only [scalarCoefficientBPrimitive, angularPartial_decode_height_neg hT hS,
     angularPartial_decode_scalarHeightOddUnitalAct,
     decode_scalarStateDPower_neg_three_halves hD hT hS x hb,
     angularPartial_decode_scalarStateEnergyOddAct,

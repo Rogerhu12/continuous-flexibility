@@ -45,7 +45,7 @@ theorem angularPartial_decode_scalarJetCoframeMixedPrimitive_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarJetCoframeMixedPrimitive hD hT hS x)) p =
       scalarJetFiniteFormula D S x 3 p := by
-  simp only [scalarJetCoframeMixedPrimitive, angularPartial_decode_height_neg,
+  simp only [scalarJetCoframeMixedPrimitive, angularPartial_decode_height_neg hT hS,
     angularPartial_decode_scalarHeightOddUnitalAct,
     decode_scalarStateAngularPower_neg_half hD hT hS x hb,
     angularPartial_decode_scalarStateSlopeOddAct,

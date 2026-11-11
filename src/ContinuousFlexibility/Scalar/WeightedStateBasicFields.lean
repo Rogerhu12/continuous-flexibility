@@ -101,7 +101,7 @@ theorem angularPartial_decode_scalarStateEnergyOddAct
     angularPartial ((S.height scalarBeta).decode (scalarStateEnergyOddAct hD hT hS x u)) p =
       (1 + scalarStateProfile D S x p.1 ^ 2) *
         angularPartial ((S.height scalarBeta).decode u) p := by
-  simp only [scalarStateEnergyOddAct, angularPartial_decode_height_add,
+  simp only [scalarStateEnergyOddAct, angularPartial_decode_height_add hT hS,
     angularPartial_decode_scalarStateWOddAct]
   ring
 
@@ -115,14 +115,14 @@ theorem angularPartial_decode_scalarStateAngularPrimitive
     (x : ScalarWeightedState S) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarStateAngularPrimitive hD hT hS x)) p =
       x.2 * heightAngular (scalarStateIncrement S x) p := by
-  simp only [scalarStateAngularPrimitive, angularPartial_decode_height_smul,
+  simp only [scalarStateAngularPrimitive, angularPartial_decode_height_smul hT hS,
     angularPartial_decode_scalarStateAngularPrimitiveCLM]
 
 theorem angularPartial_decode_scalarStateMixedPrimitive
     (x : ScalarWeightedState S) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarStateMixedPrimitive hD hT hS x)) p =
       x.2 * radialPartial (heightAngular (scalarStateIncrement S x)) p := by
-  simp only [scalarStateMixedPrimitive, angularPartial_decode_height_smul,
+  simp only [scalarStateMixedPrimitive, angularPartial_decode_height_smul hT hS,
     angularPartial_decode_scalarStateAngularRadialPrimitiveCLM]
 
 theorem decode_scalarStateAngularHeight (x : ScalarWeightedState S) (p : PolarPoint) :

@@ -129,7 +129,7 @@ theorem UniformTameGerm.weightedComposition
   letI : ∀ n, CompleteSpace ((S.height γ).level n) :=
     fun n => SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 γ) n
   exact uniformTameGerm_comp_zero
-    (E := (S.height γ).level) (bond := (S.height γ).bond)
+    (E := fun n => (S.height γ).level n) (bond := (S.height γ).bond)
     (g := SobolevModelData.weightedCompositionMap hT (hS.1 γ)
       ((hS.2.2.2.1 γ).2.2) hγ hF hF0)
     hf hf0 (weightedCompositionMap_uniformTameGerm hT hS hγ hF hF0)

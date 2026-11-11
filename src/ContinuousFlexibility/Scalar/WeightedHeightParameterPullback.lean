@@ -41,8 +41,10 @@ theorem scalarHeight_uniformTameGerm_fst
   have hfst := uniformTameGerm_continuousLinear
     (withSeminorms_pairGrading ht hqt) (x0, y0)
     (ContinuousLinearMap.fst ℝ X Y) (scalar_pair_fst_isTame p q)
-  exact hfst.comp hf (tamePairGrading_monotone hp hq)
-    (withSeminorms_pairGrading ht hqt) hp
+  have hc := UniformTameGerm.comp
+    (f := fun z : X × Y => z.1) (g := f) hfst hf
+    (tamePairGrading_monotone hp hq) (withSeminorms_pairGrading ht hqt) hp
+  simpa only [Function.comp_def] using hc
 
 theorem scalarHeight_smoothTameOn_fst
     (hS : IsPhysicalSpaces D T S)
@@ -61,7 +63,10 @@ theorem scalarHeight_smoothTameOn_fst
     SobolevModelData.completeSpace_level_of_isSobolevModel (hS.1 scalarBeta) n
   have hfst := smoothTameOn_continuousLinear_on (hU.prod isOpen_univ)
     (ContinuousLinearMap.fst ℝ X Y) (scalar_pair_fst_isTame p q)
-  exact smoothTameOn_comp_generic (tamePairGrading_monotone hp hq)
-    (withSeminorms_pairGrading ht hqt) ht hfst hf (fun _ hz => hz.1)
+  have hc := smoothTameOn_comp_generic
+    (f := fun z : X × Y => z.1) (g := f)
+    (tamePairGrading_monotone hp hq) (withSeminorms_pairGrading ht hqt)
+    ht hfst hf (fun _ hz => hz.1)
+  simpa only [Function.comp_def] using hc
 
 end ContinuousFlexibility.Statements

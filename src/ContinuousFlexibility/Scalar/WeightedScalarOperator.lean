@@ -87,6 +87,18 @@ theorem scalarCoefficientOperatorCLM_apply
       SobolevModelData.angularSecondCLM hT (hS.1 scalarBeta)
         (scalarCoefficientAngularPrimitiveCLM hD hT hS b c u) := rfl
 
+theorem scalarHeightDecode_add (S : PhysicalSpacesData) (u v : ScalarHeightSpace S) :
+    (S.height scalarBeta).decode (u + v) =
+      fun p => (S.height scalarBeta).decode u p + (S.height scalarBeta).decode v p :=
+  (S.height scalarBeta).decode.map_add u v
+
+theorem scalarHeightDecode_add_three (S : PhysicalSpacesData)
+    (u v w : ScalarHeightSpace S) :
+    (S.height scalarBeta).decode (u + v + w) =
+      fun p => (S.height scalarBeta).decode u p +
+        (S.height scalarBeta).decode v p + (S.height scalarBeta).decode w p := by
+  rw [scalarHeightDecode_add S (u + v) w, scalarHeightDecode_add S u v]
+
 theorem scalarHeightDecode_angularPartial_add
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) (u v : ScalarHeightSpace S) :
     angularPartial ((S.height scalarBeta).decode (u + v)) =
@@ -98,6 +110,16 @@ theorem scalarHeightDecode_angularPartial_add
     ((scalarHeight_decode_contDiff_and_flatJets hT hS u).1.differentiable (by simp) p)
     ((scalarHeight_decode_contDiff_and_flatJets hT hS v).1.differentiable (by simp) p)
 
+theorem scalarHeightDecode_angularPartial_add_three
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (u v w : ScalarHeightSpace S) :
+    angularPartial ((S.height scalarBeta).decode (u + v + w)) =
+      fun p => angularPartial ((S.height scalarBeta).decode u) p +
+        angularPartial ((S.height scalarBeta).decode v) p +
+        angularPartial ((S.height scalarBeta).decode w) p := by
+  rw [scalarHeightDecode_angularPartial_add hT hS (u + v) w,
+    scalarHeightDecode_angularPartial_add hT hS u v]
+
 theorem decode_scalarCoefficientNormalCLM
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (a b : ScalarHeightSpace S) (u : ScalarCommonHeight S) :
@@ -106,14 +128,44 @@ theorem decode_scalarCoefficientNormalCLM
           radialPartial (scalarCommonHeightDecode S u) p +
         angularPartial ((S.height scalarBeta).decode b) p *
           angularPartial (scalarCommonHeightDecode S u) p := by
-  rw [scalarCoefficientNormalCLM_apply, map_add, map_add,
-    SobolevModelData.decode_angularJetProductMap hT (hS.1 scalarBeta)
-      (scalarHeightInterpolation hS) scalarBeta_pos]
+  have hur := decode_scalarCommonRadialCLM hD hT hS u
+  have hup := scalarCommonHeightDecode_angularPartial hT hS u
+  have hO := SobolevModelData.decode_angularJetProductMap hT (hS.1 scalarBeta)
+    (scalarHeightInterpolation hS) scalarBeta_pos ![b, u.1]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one] at hO
+  have hsplit := (congrArg (S.height scalarBeta).decode
+    (scalarCoefficientNormalCLM_apply hD hT hS a b u)).trans
+      (scalarHeightDecode_add_three S
+        (scalarReferenceWCLM hD hT hS (scalarCommonRadialCLM hD hT hS u))
+        (scalarHeightMul hT hS a (scalarCommonRadialCLM hD hT hS u))
+        (SobolevModelData.angularJetProductMap hT (hS.1 scalarBeta)
+          (scalarHeightInterpolation hS) scalarBeta_pos.le ![b, u.1]))
   funext p
-  simp only [Pi.add_apply, Matrix.cons_val_zero, Matrix.cons_val_one,
-    decode_scalarReferenceWCLM, decode_scalarHeightMul, decode_scalarCommonRadialCLM,
-    scalarCommonHeightDecode_angularPartial hT hS u]
-  ring
+  calc
+    _ = (S.height scalarBeta).decode
+          (scalarReferenceWCLM hD hT hS (scalarCommonRadialCLM hD hT hS u)) p +
+        (S.height scalarBeta).decode
+          (scalarHeightMul hT hS a (scalarCommonRadialCLM hD hT hS u)) p +
+        (S.height scalarBeta).decode
+          (SobolevModelData.angularJetProductMap hT (hS.1 scalarBeta)
+            (scalarHeightInterpolation hS) scalarBeta_pos.le ![b, u.1]) p :=
+      congrFun hsplit p
+    _ = D.w p.1 * radialPartial (scalarCommonHeightDecode S u) p +
+        (S.height scalarBeta).decode a p * radialPartial (scalarCommonHeightDecode S u) p +
+        angularPartial ((S.height scalarBeta).decode b) p *
+          angularPartial (scalarCommonHeightDecode S u) p :=
+      congrArg₂ (fun x y : ℝ => x + y)
+        (congrArg₂ (fun x y : ℝ => x + y)
+          ((decode_scalarReferenceWCLM hD hT hS
+            (scalarCommonRadialCLM hD hT hS u) p).trans
+              (congrArg (fun z : ℝ => D.w p.1 * z) (congrFun hur p)))
+          ((decode_scalarHeightMul hT hS a (scalarCommonRadialCLM hD hT hS u) p).trans
+            (congrArg (fun z : ℝ => (S.height scalarBeta).decode a p * z)
+              (congrFun hur p))))
+        ((congrFun hO p).trans
+          (congrArg (fun z : ℝ => angularPartial ((S.height scalarBeta).decode b) p * z)
+            (congrFun hup.symm p)))
+    _ = _ := by ring
 
 theorem angularPartial_decode_scalarCoefficientAngularPrimitiveCLM
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -124,15 +176,43 @@ theorem angularPartial_decode_scalarCoefficientAngularPrimitiveCLM
           radialPartial (scalarCommonHeightDecode S u) p +
         (deriv D.w p.1 / p.1 + (S.height scalarBeta).decode c p) *
           angularPartial (scalarCommonHeightDecode S u) p := by
-  rw [scalarCoefficientAngularPrimitiveCLM_apply,
-    scalarHeightDecode_angularPartial_add hT hS, scalarHeightDecode_angularPartial_add hT hS,
-    SobolevModelData.angularPartial_decode_oddProductPrimitiveMap,
-    SobolevModelData.angularPartial_decode_oddProductPrimitiveMap,
-    angularPartial_decode_scalarReferenceCorrectedCLM]
+  have hur := decode_scalarCommonRadialCLM hD hT hS u
+  have hup := scalarCommonHeightDecode_angularPartial hT hS u
+  have hP₁ := SobolevModelData.angularPartial_decode_oddProductPrimitiveMap hT
+    (hS.1 scalarBeta) (scalarHeightInterpolation hS) scalarBeta_pos
+    ![scalarCommonRadialCLM hD hT hS u, b]
+  have hP₂ := SobolevModelData.angularPartial_decode_oddProductPrimitiveMap hT
+    (hS.1 scalarBeta) (scalarHeightInterpolation hS) scalarBeta_pos ![c, u.1]
+  simp only [Matrix.cons_val_zero, Matrix.cons_val_one] at hP₁ hP₂
+  have hC := angularPartial_decode_scalarReferenceCorrectedCLM hD hT hS u.1
+  have hsplit := (congrArg
+    (fun v : ScalarHeightSpace S => angularPartial ((S.height scalarBeta).decode v))
+    (scalarCoefficientAngularPrimitiveCLM_apply hD hT hS b c u)).trans
+      (scalarHeightDecode_angularPartial_add_three hT hS
+        (SobolevModelData.oddProductPrimitiveMap hT (hS.1 scalarBeta)
+          (scalarHeightInterpolation hS) scalarBeta_pos
+          ![scalarCommonRadialCLM hD hT hS u, b])
+        (SobolevModelData.oddProductPrimitiveMap hT (hS.1 scalarBeta)
+          (scalarHeightInterpolation hS) scalarBeta_pos ![c, u.1])
+        (scalarReferenceCorrectedCLM hD hT hS u.1))
   funext p
-  simp only [Matrix.cons_val_zero, Matrix.cons_val_one, decode_scalarCommonRadialCLM,
-    scalarCommonHeightDecode_angularPartial hT hS u]
-  ring
+  apply (congrFun hsplit p).trans
+  calc
+    _ = radialPartial (scalarCommonHeightDecode S u) p *
+          angularPartial ((S.height scalarBeta).decode b) p +
+        (S.height scalarBeta).decode c p * angularPartial (scalarCommonHeightDecode S u) p +
+        (deriv D.w p.1 / p.1) * angularPartial (scalarCommonHeightDecode S u) p :=
+      congrArg₂ (fun x y : ℝ => x + y)
+        (congrArg₂ (fun x y : ℝ => x + y)
+          ((congrFun hP₁ p).trans
+            (congrArg (fun z : ℝ => z * angularPartial ((S.height scalarBeta).decode b) p)
+              (congrFun hur p)))
+          ((congrFun hP₂ p).trans
+            (congrArg (fun z : ℝ => (S.height scalarBeta).decode c p * z)
+              (congrFun hup.symm p))))
+        ((congrFun hC p).trans
+          (congrArg (fun z : ℝ => (deriv D.w p.1 / p.1) * z) (congrFun hup.symm p)))
+    _ = _ := by ring
 
 /-- Exact divergence decoding before substituting any scalar-state formula. -/
 theorem decode_scalarCoefficientOperatorCLM
@@ -144,9 +224,22 @@ theorem decode_scalarCoefficientOperatorCLM
         (angularPartial ((S.height scalarBeta).decode b))
         (fun p => deriv D.w p.1 / p.1 + (S.height scalarBeta).decode c p)
         (scalarCommonHeightDecode S u) := by
-  rw [scalarCoefficientOperatorCLM_apply, map_add, SobolevModelData.decode_radialCLM,
-    SobolevModelData.decode_angularSecondCLM, decode_scalarCoefficientNormalCLM,
-    angularPartial_decode_scalarCoefficientAngularPrimitiveCLM] <;> rfl
+  have hR := (SobolevModelData.decode_radialCLM hT (hS.1 scalarBeta)
+    (scalarCoefficientNormalCLM hD hT hS a b u)).trans
+      (congrArg radialPartial (decode_scalarCoefficientNormalCLM hD hT hS a b u))
+  have hA := (SobolevModelData.decode_angularSecondCLM hT (hS.1 scalarBeta)
+    (scalarCoefficientAngularPrimitiveCLM hD hT hS b c u)).trans
+      (congrArg angularPartial
+        (angularPartial_decode_scalarCoefficientAngularPrimitiveCLM hD hT hS b c u))
+  have hsplit := (congrArg (S.height scalarBeta).decode
+    (scalarCoefficientOperatorCLM_apply hD hT hS a b c u)).trans
+      (scalarHeightDecode_add S
+        (SobolevModelData.radialCLM hT (hS.1 scalarBeta)
+          (scalarCoefficientNormalCLM hD hT hS a b u))
+        (SobolevModelData.angularSecondCLM hT (hS.1 scalarBeta)
+          (scalarCoefficientAngularPrimitiveCLM hD hT hS b c u)))
+  exact hsplit.trans
+    (congrArg₂ (fun f g : PolarPoint → ℝ => fun p => f p + g p) hR hA)
 
 /-- The original corrected operator follows from the actual coefficient
 decoders; its common-domain endpoint constant is retained. -/
@@ -170,6 +263,6 @@ theorem decode_scalarCoefficientOperatorCLM_of_actual
     funext p
     rw [hc p]
     ring
-  rw [decode_scalarCoefficientOperatorCLM, hA, hB, hC] <;> rfl
+  rw [decode_scalarCoefficientOperatorCLM hD hT hS a b c u, hA, hB, hC] <;> rfl
 
 end ContinuousFlexibility.Statements

@@ -72,8 +72,10 @@ theorem smoothTameOn_postcompose_generic
   letI : IsTopologicalAddGroup Y := hqt.isTopologicalAddGroup
   letI : ContinuousSMul ℝ Y := hqt.continuousSMul
   letI : LocallyConvexSpace ℝ Y := hqt.toLocallyConvexSpace
-  exact smoothTameOn_comp_generic hp ht hqt hf
+  have hc := smoothTameOn_comp_generic
+    (f := f) (g := fun y : Y => L y) hp ht hqt hf
     (smoothTameOn_continuousLinear L hL) (fun _ _ => mem_univ _)
+  simpa only [Function.comp_def] using hc
 
 end Postcomposition
 
