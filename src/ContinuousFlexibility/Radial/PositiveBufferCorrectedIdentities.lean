@@ -76,9 +76,14 @@ theorem corrected_equation (j : Fin 2) {x : ℝ} (hx : x ∈ Ioo B.l B.h) :
       B.potential x * D.correctedRepresentative hB H hH j x +
       positiveBufferBorderedScalar B.potential B.bordered
         (D.correctedColumn hB H hH j) * B.borderFunction x = 0 := by
-  dsimp only [correctedRepresentative]
-  rw [positiveBuffer_schrodinger_smul_sub (D.interiorKernel_smooth j)
-    (D.correction_smooth_equation hB H hH j).1]
+  change -deriv (deriv (fun y : ℝ => sqrt (D.profiles.A j) *
+      (D.profiles.interiorKernel j y - D.correctionRepresentative hB H hH j y))) x +
+      B.potential x * (sqrt (D.profiles.A j) *
+        (D.profiles.interiorKernel j x - D.correctionRepresentative hB H hH j x)) +
+      positiveBufferBorderedScalar B.potential B.bordered
+        (D.correctedColumn hB H hH j) * B.borderFunction x = 0
+  rw [positiveBuffer_schrodinger_smul_sub (V := B.potential) (D.interiorKernel_smooth j)
+    (D.correction_smooth_equation hB H hH j).1 (sqrt (D.profiles.A j)) x]
   rw [D.interiorKernel_equation hB j x hx,
     (D.correction_smooth_equation hB H hH j).2 x]
   simp only [correctedColumn, map_smul, map_sub, zeroScalar_scalar, smul_eq_mul]
@@ -90,17 +95,17 @@ theorem corrected_border_row (j : Fin 2) :
         (D.correctedColumn hB H hH j)).1⟫_ℝ = 0
     else (positiveBufferBorderedState B.potential B.bordered
       (D.correctedColumn hB H hH j)).2 = 0 := by
-  cases hb : B.bordered with
-  | false =>
-    simp only [hb, Bool.false_eq_true, ite_false]
-    exact (D.correctedColumn hB H hH j).property hb
-  | true =>
-    simp only [hb, ite_true]
+  by_cases hb : B.bordered = true
+  · rw [if_pos hb]
     have hg := D.correction_graph hB H hH j
-    simp only [BorderedFullGraph, hb, ite_true] at hg
+    simp only [BorderedFullGraph, if_pos hb] at hg
     simp only [correctedColumn, map_smul, map_sub, Prod.smul_fst, Prod.fst_sub,
       zeroScalar_state, inner_smul_right, inner_sub_right, smul_eq_mul,
       D.border_orthogonal j, hg.2, sub_zero, mul_zero]
+  · rw [if_neg hb]
+    have hf : B.bordered = false := Bool.eq_false_iff.mpr hb
+    simpa only [positiveBufferBorderedState_apply] using
+      (D.correctedColumn hB H hH j).property hf
 
 theorem corrected_delta_form (hV : Continuous B.potential) (j : Fin 2)
     (W : PositiveBufferBorderedEnergy B.potential B.bordered) :
@@ -126,8 +131,10 @@ theorem corrected_delta_form (hV : Continuous B.potential) (j : Fin 2)
   simp only [correctedColumn, map_smul, map_sub, LinearMap.smul_apply, LinearMap.sub_apply,
     smul_eq_mul, positiveBufferBorderedFormLinear_apply]
   rw [hK, hU]
+  simp only [positiveBufferBorderedField_apply]
   ring
 
+include hB in
 theorem alphaIn_normalized (j : Fin 2) :
     D.profiles.alphaIn j = -B.mass j * deriv (D.profiles.normalizedIn j) 0 := by
   change D.profiles.alphaIn j =
