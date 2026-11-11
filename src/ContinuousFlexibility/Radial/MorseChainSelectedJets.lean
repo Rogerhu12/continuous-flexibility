@@ -264,6 +264,50 @@ private theorem morseSelected_logFloor_of_model (M : MorseJoinJetModel)
   rw [hd.deriv]
   exact hSlope t ht rfl
 
+private theorem morseSelected_collar_logFloor {T : Statements.MorseChainData}
+    (G : MorseChainGeometryWitness T) (σ : ℕ → ℝ) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2)
+    (side : Bool) (k : ℕ) {a z : ℝ} {F : ℝ → ℝ} :
+    let M := morseSelectedModel G σ hσ side k
+    0 < a → M.scale / 4 ≤ a → z ∈ M.image → F =ᶠ[𝓝 z] M.logProfile →
+      (z ≤ M.scale * M.radius morseCellLeftCut ∨
+        M.scale * M.radius (morseSelectedXEnd T k) ≤ z) →
+      2 / a ≤ deriv F z := by
+  dsimp only
+  intro ha hsa hz hg hcap
+  let M := morseSelectedModel G σ hσ side k
+  apply morseSelected_logFloor_of_model M hz hg
+  intro t ht htEq
+  have hmono := morseSelected_scaledRadius_strictMonoOn M
+  have hx := morseSelected_cuts_mem G k
+  have hBa := morseChainB_A_bounds T (T.index + k) (by
+    rw [G.d_exact]
+    exact_mod_cast (show 1 ≤ morseChainInteger (T.index + k) from
+      (by decide : 1 ≤ 2).trans (morseChainInteger_ge_two (T.index + k))))
+  have hslope : (100 / (9 : ℝ) ^ 9) / (M.scale * M.A) ≤
+      -morseRho M.A M.B t * M.radius t / (M.scale * (deriv M.radius t) ^ 2) := by
+    rcases hcap with hleft | hright
+    · have htc : t ≤ morseCellLeftCut := by
+        by_contra hbad
+        have hlt := hmono (Ioo_subset_Icc_self hx.1) (Ioo_subset_Icc_self ht)
+          (lt_of_not_ge hbad)
+        rw [htEq] at hlt
+        exact (not_lt_of_ge hleft) hlt
+      obtain ⟨hrlo, hrhi, hvlo, hvhi, hκlo, hκhi⟩ :=
+        (G.model k).left_collar t ⟨ht.1.le, htc⟩
+      exact (morseCollarLogSlope_bounds M.hA (morseSelected_parameters G k).2 M.hScale
+        hBa.1 hBa.2 ⟨hrlo, hrhi⟩ (Or.inl ⟨hvlo, hvhi, hκlo, hκhi⟩)).1
+    · have hte : morseSelectedXEnd T k ≤ t := by
+        by_contra hbad
+        have hlt := hmono (Ioo_subset_Icc_self ht) (Ioo_subset_Icc_self hx.2)
+          (lt_of_not_ge hbad)
+        rw [htEq] at hlt
+        exact (not_lt_of_ge hright) hlt
+      obtain ⟨hrlo, hrhi, hvlo, hvhi, hκlo, hκhi⟩ :=
+        (G.model k).right_collar t ⟨hte, ht.2.le⟩
+      exact (morseCollarLogSlope_bounds M.hA (morseSelected_parameters G k).2 M.hScale
+        hBa.1 hBa.2 ⟨hrlo, hrhi⟩ (Or.inr ⟨hvlo, hvhi, hκlo, hκhi⟩)).1
+  exact (morseSelected_floor_numeric ha M.hScale M.hA hsa (morseSelected_A_small G k)).trans hslope
+
 /-- Pointwise jets of the very connector chosen for the glued profile.
 The reference label is the outward block on both sides. -/
 theorem exists_morseChainChosenJoin_jetBounds {T : Statements.MorseChainData}
@@ -386,39 +430,11 @@ theorem exists_morseChainChosenJoin_jetBounds {T : Statements.MorseChainData}
   have hRg (y : ℝ) (hy : y ∈ Icc (b - h) b) : P.rightLog =ᶠ[𝓝 y] R.logProfile :=
     P.right_germs y (by simpa only [hEnds.2, hCut] using hy)
   have hFloorL (y : ℝ) (hy : y ∈ Icc a (a + h)) : 2 / a ≤ deriv P.leftLog y := by
-    apply morseSelected_logFloor_of_model L (hLsub hy) (hLg y hy)
-    intro t ht htEq
-    have hmono := morseSelected_scaledRadius_strictMonoOn L
-    have hte : e ≤ t := by
-      by_contra hbad
-      have hlt : L.scale * L.radius t < a :=
-        hmono (Ioo_subset_Icc_self ht) (Ioo_subset_Icc_self hxL) (lt_of_not_ge hbad)
-      rw [htEq] at hlt
-      exact (not_lt_of_ge hy.1) hlt
-    have hBa := morseChainB_A_bounds T n (by
-      rw [G.d_exact]
-      exact_mod_cast (show 1 ≤ morseChainInteger n from (by decide : 1 ≤ 2).trans (morseChainInteger_ge_two n)))
-    obtain ⟨hrlo, hrhi, hvlo, hvhi, hκlo, hκhi⟩ := (G.model i).right_collar t ⟨hte, ht.2.le⟩
-    have hslope := morseCollarLogSlope_bounds L.hA (morseSelected_parameters G i).2 L.hScale
-      hBa.1 hBa.2 ⟨hrlo, hrhi⟩ (Or.inr ⟨hvlo, hvhi, hκlo, hκhi⟩)
-    exact (morseSelected_floor_numeric ha L.hScale L.hA (by linarith only [haL₀, L.hScale]) hAL).trans hslope.1
+    exact morseSelected_collar_logFloor G σ hσ side i ha
+      (by linarith only [haL₀, L.hScale]) (hLsub hy) (hLg y hy) (Or.inr hy.1)
   have hFloorR (y : ℝ) (hy : y ∈ Icc (b - h) b) : 2 / a ≤ deriv P.rightLog y := by
-    apply morseSelected_logFloor_of_model R (hRsub hy) (hRg y hy)
-    intro t ht htEq
-    have hmono := morseSelected_scaledRadius_strictMonoOn R
-    have htc : t ≤ morseCellLeftCut := by
-      by_contra hbad
-      have hlt : b < R.scale * R.radius t :=
-        hmono (Ioo_subset_Icc_self hxR) (Ioo_subset_Icc_self ht) (lt_of_not_ge hbad)
-      rw [htEq] at hlt
-      exact (not_lt_of_ge hy.2) hlt
-    have hBa := morseChainB_A_bounds T m (by
-      rw [G.d_exact]
-      exact_mod_cast (show 1 ≤ morseChainInteger m from (by decide : 1 ≤ 2).trans (morseChainInteger_ge_two m)))
-    obtain ⟨hrlo, hrhi, hvlo, hvhi, hκlo, hκhi⟩ := (G.model j).left_collar t ⟨ht.1.le, htc⟩
-    have hslope := morseCollarLogSlope_bounds R.hA (morseSelected_parameters G j).2 R.hScale
-      hBa.1 hBa.2 ⟨hrlo, hrhi⟩ (Or.inl ⟨hvlo, hvhi, hκlo, hκhi⟩)
-    exact (morseSelected_floor_numeric ha R.hScale R.hA haR₀ hAR).trans hslope.1
+    exact morseSelected_collar_logFloor G σ hσ side j ha haR₀
+      (hRsub hy) (hRg y hy) (Or.inl hy.2)
   have hBudget : MorseJoinBudget a b h h (2 / a) P.leftLog P.rightLog := by
     simpa only [hEnds.1, hEnds.2, hCut] using P.budget
   have hvL := (G.model i).right_half e (right_mem_Icc.mpr (morseSelected_turn_le_end G i))
@@ -857,7 +873,9 @@ theorem exists_morsePartitionReference_profile_jetBounds {T : Statements.MorseCh
   have hCT' : CT ≤ C := (by linarith only [hCT] : CT ≤ 11 + 4 * CT).trans hShift
   have hShift₀ : 0 ≤ 11 + 4 * CT := by positivity
   refine ⟨C, hCM.trans_le hCM', ?_⟩
-  intro σ hσ phi chi chiLeft m x hx
+  intro σ hσ phi chi chiLeft m x
+  dsimp only
+  intro hx
   let w := morseChainGluedProfile G σ hσ
   have hn (k : ℕ) : 1 ≤ T.index + k :=
     ((by norm_num : 1 ≤ 100).trans G.start_large).trans (Nat.le_add_right _ _)
