@@ -139,6 +139,9 @@ theorem retainedMorseActualChain_signed_inverse_bound
   have htailP : innerMorsePoissonConstant / j ≤ p / j :=
     div_le_div_of_nonneg_right (le_add_of_nonneg_right hBc) hjpos.le
   have hσ : ∀ sign : Bool, |σ sign| ≤ 1 := by intro sign; cases sign <;> norm_num [retainedMorseWeightSign]
+  have hNa : 64 * (0 : ℝ) ≤ (S.chain.index : ℝ) := by
+    simpa only [mul_zero] using
+      (Nat.cast_nonneg S.chain.index : (0 : ℝ) ≤ (S.chain.index : ℝ))
   obtain ⟨CW, hCWone, hfinite⟩ := innerMorseInnerWeight_finite_bounds
     S.chain.index k 0 1 H (A).matchedWeightLeft (A).matchedWeightRight
   have hCW : ∀ sign x, |W sign x| ≤ CW := by
@@ -170,8 +173,14 @@ theorem retainedMorseActualChain_signed_inverse_bound
           (innerMorseInnerInterfaceWeight S.chain.index k 0 1) 1)
         M.errorMatrix sign‖ ≤ (1 : ℝ) / 8)
     (fun sign => by
-      simpa only [innerMorseInnerInterfaceWeight_model, innerMorseInnerModelWeight_center]
-        using herror₀ sign)
+      have hweight :
+          innerChainScalarRestriction (2 * (2 * k + 1)) center
+            (innerMorseInnerInterfaceWeight S.chain.index k 0 1) 1 =
+          (fun _ : Fin 2 => (1 : ℝ)) := by
+        funext i
+        rw [innerMorseInnerInterfaceWeight_model, innerMorseInnerModelWeight_center]
+      rw [hweight]
+      exact herror₀ sign)
     (fun side r sign => by
       have hh := P.retainedMorseModelChart_weighted_error_bound hw hS G₀ hfirst H
         bordered j center (innerModelChainPiece (innerMorseInnerTailSlot k side r)) column
@@ -179,7 +188,16 @@ theorem retainedMorseActualChain_signed_inverse_bound
         (innerMorseInnerTailIndex_bounds _ _ _ _).1
         (innerMorseInnerTailPiece_ne_center _ _ _) (tails side r).1 (tails side r).2
         (hB side r) (models side r) S.chain.index 0 1 (1 / 8) (herror side r) sign
-      simpa only [innerMorseInnerInterfaceWeight_model, innerMorseInnerModelWeight_tail] using hh)
+      have hweight :
+          innerChainScalarRestriction (2 * (2 * k + 1))
+            (innerModelChainPiece (innerMorseInnerTailSlot k side r))
+            (innerMorseInnerInterfaceWeight S.chain.index k 0 1) 1 =
+          innerMorseCutWeight S.chain.index 0 1 side
+            (innerMorseInnerTailIndex S.chain.index k side r) := by
+        funext i
+        rw [innerMorseInnerInterfaceWeight_model, innerMorseInnerModelWeight_tail]
+      rw [hweight]
+      simpa only [retainedMorseTailModelChart] using hh)
   have hcols (sign : Bool) := modelInduction
     (fun r M => ∀ i,
       ‖(innerChainScalarRestriction (2 * (2 * k + 1)) r (w sign) 1 i *
@@ -197,8 +215,8 @@ theorem retainedMorseActualChain_signed_inverse_bound
         column hB models centralModel side r
       exact (P.retainedMorseModelChart_actual_weighted_column_bound
         hw hS G₀ hfirst k H bordered j column side r (tails side r).1 (tails side r).2
-        (hB side r) (models side r) A hpiece
-        (by norm_num) (by norm_num) (hσ sign) hN (by positivity) hj hCM (hrem side r)
+        (hB side r) (models side r) A hpiece (a := 0) (γ := 1) (σ := σ sign)
+        (by norm_num) (by norm_num) (hσ sign) hN hNa hj hCM (hrem side r)
         CW (hCW sign) i).trans htailP)
   have hends := modelInduction
     (fun p M => ∀ i, Γ.reference.w (if i = 0 then (H).left p else (H).right p) /
@@ -271,12 +289,18 @@ theorem retainedMorseActualChain_signed_inverse_bound
     cases hr : (A).piece r with
     | inl M => simpa only [hr, InnerRadialActualPiece.dirichlet] using hmodelD r M hr
     | inr Q =>
-      have hh := (Q.dirichlet_norm_le_hardy hD.2.2.1.1 (by nlinarith only [hj])).trans
-        (h48.trans (by simpa only [mul_one] using mul_le_mul_of_nonneg_left (hE _) hd))
+      have hscale : d ≤ d *
+          radialE (innerMorseInnerPieceIndex S.chain.index k r) ^ (36 : ℝ) := by
+        simpa only [mul_one] using mul_le_mul_of_nonneg_left
+          (hE (innerMorseInnerPieceIndex S.chain.index k r)) hd
+      have hh : ‖Q.dirichlet hD.2.2.1.1‖ ≤
+          d * radialE (innerMorseInnerPieceIndex S.chain.index k r) ^ (36 : ℝ) :=
+        (Q.dirichlet_norm_le_hardy hD.2.2.1.1 (by nlinarith only [hj])).trans
+          (h48.trans hscale)
       simpa only [hr, InnerRadialActualPiece.dirichlet] using hh
   exact (A).inverse_morse_weighted_fixed_loss S.chain.index k H
     (A).matchedWeightLeft (A).matchedWeightRight 0 1 CW hCW hD.2.2.1.1
-    (by norm_num) (by norm_num) hN (by positivity) hκ
+    (by norm_num) (by norm_num) hN hNa hκ
     (P.retainedMorseActualChain_kappa_separated hD hw hS G₀ hfirst hq hT
       hleft hright hTL hTR k hk hbridge hmodel hwindow bordered j hjpos
       column hB models centralModel)
