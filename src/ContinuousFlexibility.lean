@@ -325,3 +325,7 @@ import ContinuousFlexibility.Analysis.SpacesHeightBounds
 import ContinuousFlexibility.Analysis.SpacesSequenceRetraction
 import ContinuousFlexibility.Analysis.SpacesSmoothEvaluation
 import ContinuousFlexibility.Analysis.SpacesSources
+import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
+import ContinuousFlexibility.Analysis.SpacesReciprocal
+import ContinuousFlexibility.Analysis.SpacesCircleCylinder
+import ContinuousFlexibility.Analysis.SpacesTraceGeometry

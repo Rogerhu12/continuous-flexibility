@@ -23,11 +23,13 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter
 open scoped Topology ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 section EvaluationContinuity
 
 variable {E : Type*} [UniformSpace E] [AddCommGroup E] [Module ℝ E]
   [IsUniformAddGroup E] [ContinuousSMul ℝ E] [BarrelledSpace ℝ E]
-variable {P : Type*} [NormedAddCommGroup P] [NormedSpace ℝ P] [ProperSpace P]
+variable {P : Type*} [NormedAddCommGroup P] [ProperSpace P]
 variable {F : Type*} [NormedAddCommGroup F] [NormedSpace ℝ F]
 
 /-- Pointwise continuous linear evaluation is jointly continuous when the
@@ -52,7 +54,7 @@ theorem spaces_continuous_evaluation (L : P → E →L[ℝ] F)
   intro ε hε
   have hε₂ : 0 < ε / 2 := half_pos hε
   have hu := Metric.equicontinuousAt_iff_right.mp (heq u₀) (ε / 2) hε₂
-  have hp := Metric.tendsto_nhds.mp (hL u₀).continuousAt (ε / 2) hε₂
+  have hp := Metric.tendsto_nhds.mp ((hL u₀).continuousAt (x := p₀)) (ε / 2) hε₂
   have hnear : K ∈ 𝓝 p₀ := Metric.closedBall_mem_nhds p₀ zero_lt_one
   filter_upwards [continuous_snd.continuousAt.eventually hu,
     continuous_fst.continuousAt.eventually hp,
@@ -84,11 +86,11 @@ def spaces_coordinateDerivative (L : (ℝ × ℝ) → E →L[ℝ] F)
       intro u
       have hdu := ((hL u).differentiable (by simp) (p + (0 : ℝ) • v)).hasFDerivAt
       have hv : HasDerivAt (fun t : ℝ => p + t • v) v 0 := by
-        simpa only [one_smul, zero_add] using
-          (hasDerivAt_const (0 : ℝ) p).add ((hasDerivAt_id (0 : ℝ)).smul_const v)
+        simpa only [id_eq, one_smul] using
+          ((hasDerivAt_id (0 : ℝ)).smul_const v).const_add p
       have hd := hdu.comp_hasDerivAt 0 hv
-      simpa only [Function.comp_apply, zero_smul, add_zero, zero_add, ContinuousLinearMap.smul_apply,
-        ContinuousLinearMap.sub_apply] using hasDerivAt_iff_tendsto_slope_zero.mp hd)
+      simpa only [Function.comp_apply, zero_smul, add_zero, zero_add, smul_apply,
+        sub_apply] using hasDerivAt_iff_tendsto_slope_zero.mp hd)
   exact { toFun := fun u => (fderiv ℝ (fun q => L q u) p) v
           map_add' := A.map_add
           map_smul' := A.map_smul
@@ -112,13 +114,14 @@ def spaces_differentialEvaluation (L : (ℝ × ℝ) → E →L[ℝ] F)
     (L : (ℝ × ℝ) → E →L[ℝ] F)
     (hL : ∀ u : E, ContDiff ℝ ∞ (fun p => L p u)) (p : ℝ × ℝ) (u : E) :
     spaces_differentialEvaluation L hL p u = fderiv ℝ (fun q => L q u) p := by
-  ext v
+  apply ContinuousLinearMap.ext
+  intro v
   rcases v with ⟨r, θ⟩
-  simp only [spaces_differentialEvaluation, ContinuousLinearMap.add_apply,
+  simp only [spaces_differentialEvaluation, add_apply,
     ContinuousLinearMap.comp_apply, spaces_coordinateDerivative_apply,
-    ContinuousLinearMap.smulRightL_apply_apply, ContinuousLinearMap.fst_apply,
-    ContinuousLinearMap.snd_apply]
-  have he : (r, θ) = r • (1, 0 : ℝ × ℝ) + θ • (0, 1 : ℝ × ℝ) := by
+    ContinuousLinearMap.smulRightL_apply_apply, ContinuousLinearMap.smulRight_apply,
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
+  have he : (r, θ) = r • ((1, 0) : ℝ × ℝ) + θ • ((0, 1) : ℝ × ℝ) := by
     ext <;> simp
   rw [he, map_add, map_smul, map_smul]
 
@@ -129,6 +132,55 @@ theorem spaces_differentialEvaluation_contDiff
     ContDiff ℝ ∞ (fun p => spaces_differentialEvaluation L hL p u) := by
   simpa only [spaces_differentialEvaluation_apply] using
     (hL u).fderiv_right (by simp : (∞ : ℕ∞ω) + 1 ≤ ∞)
+
+private theorem spaces_hasFDerivAt_evaluation_curve_aux
+    (L : (ℝ × ℝ) → E →L[ℝ] F)
+    (DL : (ℝ × ℝ) → E →L[ℝ] ((ℝ × ℝ) →L[ℝ] F))
+    (hL : ∀ u : E, Continuous (fun p => L p u))
+    (hDL : ∀ u : E, Continuous (fun p => DL p u))
+    (hspatial : ∀ (u : E) (p : ℝ × ℝ), HasFDerivAt (fun q => L q u) (DL p u) p)
+    {U : Set ℝ} (hU : IsOpen U) {c dc : ℝ → E}
+    (hc : ContinuousOn c U) (hdc : ContinuousOn dc U)
+    (hderiv : ∀ t ∈ U, HasProjectiveCurveDerivAt c (dc t) t)
+    {z : (ℝ × ℝ) × ℝ} (hz : z ∈ univ ×ˢ U) :
+    HasFDerivAt (fun y : (ℝ × ℝ) × ℝ => L y.1 (c y.2))
+      ((DL z.1 (c z.2)).comp
+          (ContinuousLinearMap.fst ℝ (ℝ × ℝ) ℝ) +
+        (ContinuousLinearMap.toSpanSingleton ℝ (L z.1 (dc z.2))).comp
+          (ContinuousLinearMap.snd ℝ (ℝ × ℝ) ℝ)) z := by
+  have hV : IsOpen ((univ : Set (ℝ × ℝ)) ×ˢ U) := isOpen_univ.prod hU
+  have hDcont : ContinuousOn
+      (fun y : (ℝ × ℝ) × ℝ => DL y.1 (c y.2)) (univ ×ˢ U) :=
+    (spaces_continuous_evaluation DL hDL).comp_continuousOn
+        (continuousOn_fst.prodMk (hc.comp continuousOn_snd (fun _ hy => hy.2)))
+  have hdcEval : ContinuousOn
+      (fun y : (ℝ × ℝ) × ℝ => L y.1 (dc y.2)) (univ ×ˢ U) :=
+    (spaces_continuous_evaluation L hL).comp_continuousOn
+      (continuousOn_fst.prodMk (hdc.comp continuousOn_snd (fun _ hy => hy.2)))
+  have hsecond : ContinuousOn
+      (fun y : (ℝ × ℝ) × ℝ => ContinuousLinearMap.toSpanSingleton ℝ (L y.1 (dc y.2)))
+      (univ ×ˢ U) := by
+    simpa only [Function.comp_def, ContinuousLinearMap.toSpanSingletonLIE_apply] using
+      (ContinuousLinearMap.toSpanSingletonLIE ℝ F).continuous.comp_continuousOn hdcEval
+  have hx : ∀ᶠ y : (ℝ × ℝ) × ℝ in 𝓝 z,
+      HasFDerivAt (fun p => L p (c y.2)) (DL y.1 (c y.2)) y.1 := by
+    exact Eventually.of_forall (fun y => hspatial (c y.2) y.1)
+  have ht : ∀ᶠ y : (ℝ × ℝ) × ℝ in 𝓝 z,
+      HasFDerivAt (fun t => L y.1 (c t))
+        (ContinuousLinearMap.toSpanSingleton ℝ (L y.1 (dc y.2))) y.2 := by
+    filter_upwards [hV.mem_nhds hz] with y hy
+    have hcurve : HasDerivAt (fun t : ℝ => L y.1 (c t)) (L y.1 (dc y.2)) y.2 :=
+      hasDerivAt_iff_tendsto_slope_zero.mpr ((hderiv y.2 hy.2).clm_comp (L y.1))
+    exact hcurve.hasFDerivAt
+  have hd := hasStrictFDerivAt_uncurry_coprod
+    (𝕜 := ℝ) (u := z)
+    (f := fun p t => L p (c t))
+    (f₁ := fun p t => DL p (c t))
+    (f₂ := fun p t => ContinuousLinearMap.toSpanSingleton ℝ (L p (dc t)))
+    hx ht (hDcont.continuousAt (hV.mem_nhds hz))
+      (hsecond.continuousAt (hV.mem_nhds hz))
+  rw [ContinuousLinearMap.comp_fst_add_comp_snd]
+  exact hd.hasFDerivAt
 
 /-- The first derivative of evaluation along an actual topological curve.
 The two partial derivatives are continuous by Banach--Steinhaus, so the
@@ -145,41 +197,12 @@ theorem spaces_hasFDerivAt_evaluation_curve
           (ContinuousLinearMap.fst ℝ (ℝ × ℝ) ℝ) +
         (ContinuousLinearMap.toSpanSingleton ℝ (L z.1 (dc z.2))).comp
           (ContinuousLinearMap.snd ℝ (ℝ × ℝ) ℝ)) z := by
-  let DL := spaces_differentialEvaluation L hL
-  have hV : IsOpen ((univ : Set (ℝ × ℝ)) ×ˢ U) := isOpen_univ.prod hU
-  have hDcont : ContinuousOn
-      (fun y : (ℝ × ℝ) × ℝ => DL y.1 (c y.2)) (univ ×ˢ U) :=
-    (spaces_continuous_evaluation DL
-      (fun u => (spaces_differentialEvaluation_contDiff L hL u).continuous)).comp_continuousOn
-        (continuousOn_fst.prodMk (hc.comp continuousOn_snd (fun _ hy => hy.2)))
-  have hdcEval : ContinuousOn
-      (fun y : (ℝ × ℝ) × ℝ => L y.1 (dc y.2)) (univ ×ˢ U) :=
-    (spaces_continuous_evaluation L (fun u => (hL u).continuous)).comp_continuousOn
-      (continuousOn_fst.prodMk (hdc.comp continuousOn_snd (fun _ hy => hy.2)))
-  have hsecond : ContinuousOn
-      (fun y : (ℝ × ℝ) × ℝ => ContinuousLinearMap.toSpanSingleton ℝ (L y.1 (dc y.2)))
-      (univ ×ˢ U) := by
-    simpa only [ContinuousLinearMap.toSpanSingletonLIE_apply] using
-      (ContinuousLinearMap.toSpanSingletonLIE ℝ F).continuous.comp_continuousOn hdcEval
-  have hx : ∀ᶠ y : (ℝ × ℝ) × ℝ in 𝓝 z,
-      HasFDerivAt (fun p => L p (c y.2)) (DL y.1 (c y.2)) y.1 := by
-    apply Eventually.of_forall
-    intro y
-    simpa only [DL, spaces_differentialEvaluation_apply] using
-      ((hL (c y.2)).differentiable (by simp) y.1).hasFDerivAt
-  have ht : ∀ᶠ y : (ℝ × ℝ) × ℝ in 𝓝 z,
-      HasFDerivAt (fun t => L y.1 (c t))
-        (ContinuousLinearMap.toSpanSingleton ℝ (L y.1 (dc y.2))) y.2 := by
-    filter_upwards [hV.mem_nhds hz] with y hy
-    exact (hasDerivAt_iff_tendsto_slope_zero.mpr
-      ((hderiv y.2 hy.2).clm_comp (L y.1))).hasFDerivAt
-  have hd := hasStrictFDerivAt_uncurry_coprod
-    (f := fun p t => L p (c t))
-    (f₁ := fun p t => DL p (c t))
-    (f₂ := fun p t => ContinuousLinearMap.toSpanSingleton ℝ (L p (dc t)))
-    hx ht (hDcont.continuousAt (hV.mem_nhds hz))
-      (hsecond.continuousAt (hV.mem_nhds hz))
-  simpa only [ContinuousLinearMap.comp_fst_add_comp_snd, DL] using hd.hasFDerivAt
+  apply spaces_hasFDerivAt_evaluation_curve_aux L (spaces_differentialEvaluation L hL)
+    (fun u => (hL u).continuous)
+    (fun u => (spaces_differentialEvaluation_contDiff L hL u).continuous)
+    (fun u p => ?_) hU hc hdc hderiv hz
+  rw [spaces_differentialEvaluation_apply]
+  exact ((hL u).differentiable (by simp) p).hasFDerivAt
 
 /-- Every finite smoothness order of joint evaluation follows from an
 actual continuous derivative tower for the curve. -/
@@ -212,10 +235,12 @@ theorem spaces_contDiffOn_nat_evaluation_curve (n : ℕ)
           (ContinuousLinearMap.toSpanSingleton ℝ (L z.1 (c 1 z.2))).comp
             (ContinuousLinearMap.snd ℝ (ℝ × ℝ) ℝ)) (univ ×ˢ U) := by
       have hspan := (ContinuousLinearMap.toSpanSingletonLIE ℝ F).contDiff.comp_contDiffOn htail
-      simpa only [ContinuousLinearMap.toSpanSingletonLIE_apply] using
+      simpa only [Function.comp_apply, ContinuousLinearMap.toSpanSingletonLIE_apply] using
         hspan.clm_comp (contDiffOn_const (c := ContinuousLinearMap.snd ℝ (ℝ × ℝ) ℝ))
     have hV : IsOpen ((univ : Set (ℝ × ℝ)) ×ˢ U) := isOpen_univ.prod hU
-    apply (contDiffOn_succ_iff_hasFDerivWithinAt_of_uniqueDiffOn hV.uniqueDiffOn).mpr
+    rw [Nat.cast_add, Nat.cast_one]
+    apply (contDiffOn_succ_iff_hasFDerivWithinAt_of_uniqueDiffOn
+      (hV.uniqueDiffOn (𝕜 := ℝ))).mpr
     refine ⟨by simp, _, hfirst.add hsecond, ?_⟩
     intro z hz
     exact (spaces_hasFDerivAt_evaluation_curve L hL hU (hc 0) (hc 1)

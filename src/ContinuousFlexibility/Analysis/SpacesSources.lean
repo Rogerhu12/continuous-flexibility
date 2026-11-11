@@ -21,10 +21,12 @@ namespace ContinuousFlexibility.Statements
 open Set MeasureTheory
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 theorem spaces_continuous_angularMean {f : PolarPoint → ℝ} (hf : Continuous f) :
     Continuous (fun r => angularMean (fun θ => f (r, θ))) := by
   have h : Continuous (fun r : ℝ => ∫ θ in Icc (0 : ℝ) Real.pi, f (r, θ)) :=
-    continuous_parametric_integral_of_continuous hf isCompact_Icc
+    continuous_parametric_integral_of_continuous (f := fun r θ => f (r, θ)) hf isCompact_Icc
   have he : (fun r : ℝ => angularMean (fun θ => f (r, θ))) =
       fun r => (1 / Real.pi) * ∫ θ in Icc (0 : ℝ) Real.pi, f (r, θ) := by
     funext r
@@ -68,10 +70,12 @@ theorem spaces_physicalSourceIntegral_smul (D : ReferenceData) (c : ℝ)
 /-- The normalized angular integral has norm at most the uniform bound. -/
 theorem spaces_angularMean_abs_le {f : ℝ → ℝ} {C : ℝ}
     (h : ∀ θ, |f θ| ≤ C) : |angularMean f| ≤ C := by
+  have hi' : ‖∫ θ in (0 : ℝ)..Real.pi, f θ‖ ≤ C * |Real.pi - 0| :=
+    intervalIntegral.norm_integral_le_of_norm_le_const (f := f)
+      (fun θ _ => by simpa only [Real.norm_eq_abs] using h θ)
   have hi : |∫ θ in (0 : ℝ)..Real.pi, f θ| ≤ C * Real.pi := by
     simpa only [Real.norm_eq_abs, sub_zero, abs_of_pos Real.pi_pos] using
-      intervalIntegral.norm_integral_le_of_norm_le_const
-        (fun θ _ => (Real.norm_eq_abs _).symm ▸ h θ)
+      hi'
   rw [angularMean, abs_mul, abs_of_pos (div_pos zero_lt_one Real.pi_pos)]
   calc
     (1 / Real.pi) * |∫ θ in (0 : ℝ)..Real.pi, f θ| ≤
@@ -84,14 +88,29 @@ theorem spaces_physicalSourceIntegral_abs_le {D : ReferenceData} {f : PolarPoint
     |physicalSourceIntegral D f| ≤ C * |D.b - D.a| := by
   simpa only [physicalSourceIntegral, Real.norm_eq_abs] using
     (intervalIntegral.norm_integral_le_of_norm_le_const (a := D.a) (b := D.b)
+      (f := fun r => angularMean (fun θ => f (r, θ)))
       (fun r _ => by
         rw [Real.norm_eq_abs]
         exact spaces_angularMean_abs_le (fun θ => h (r, θ))))
+
+private theorem spaces_rankOne_properties {E : Type*} [TopologicalSpace E]
+    [AddCommGroup E] [Module ℝ E] [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    (Q : E →L[ℝ] ℝ) (ψ : E) (hψ : Q ψ = 1) :
+    (∀ f, Q (Analysis.rankOneProjection Q ψ f) = 0) ∧
+      (∀ f, Q f = 0 → Analysis.rankOneProjection Q ψ f = f) := by
+  constructor
+  · intro f
+    rw [Analysis.rankOneProjection_apply, map_sub, map_smul, hψ, smul_eq_mul,
+      mul_one, sub_self]
+  · intro f hf
+    rw [Analysis.rankOneProjection_apply, hf, zero_smul, sub_zero]
 
 section SourceModel
 
 variable {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T)
   {H : SobolevModelData} (hH : IsSobolevModel D T (3 / 4 : ℝ) H)
+
+include hT hH
 
 private theorem spaces_source_decode_continuous (u : H.Space) : Continuous (H.decode u) :=
   (heightMember_contDiff_and_flatJets hT (by norm_num : (0 : ℝ) < 3 / 4)
@@ -119,7 +138,7 @@ theorem spacesSourceLinear_bound :
   obtain ⟨B, hB, hbound⟩ := spaces_height_uniform_bound hT (by norm_num : (0 : ℝ) < 3 / 4)
   refine ⟨B * |D.b - D.a|, mul_nonneg hB (abs_nonneg _), fun u => ?_⟩
   have hu := hH.2.2.2.1 u
-  have h := spaces_physicalSourceIntegral_abs_le (fun p => hbound (H.decode u) hu p)
+  have h := spaces_physicalSourceIntegral_abs_le (D := D) (fun p => hbound (H.decode u) hu p)
   have hn : physicalNorm T (3 / 4 : ℝ) 2 (H.decode u) = ‖u.val 2‖ :=
     (hH.2.2.2.2.2.2.2 u 2).symm
   rw [hn] at h
@@ -148,8 +167,8 @@ def spacesSourceFunctional : H.Space →L[ℝ] ℝ where
     obtain ⟨C, hC, hbound⟩ := spacesSourceLinear_bound hT hH
     apply (Analysis.withSeminorms_graded _ _).continuous_real_rng
     refine ⟨{2}, ⟨C, hC⟩, fun u => ?_⟩
-    simpa only [Finset.sup_singleton, Seminorm.smul_apply, NNReal.smul_def] using
-      (le_abs_self (spacesSourceLinear hT hH u)).trans (hbound u)
+    simp only [Finset.sup_singleton, smul_apply, NNReal.smul_def, smul_eq_mul]
+    exact (le_abs_self (spacesSourceLinear hT hH u)).trans (hbound u)
 
 @[simp] theorem spacesSourceFunctional_apply (u : H.Space) :
     spacesSourceFunctional hT hH u = physicalSourceIntegral D (H.decode u) := rfl
@@ -174,13 +193,10 @@ theorem spaces_source_projection (ψ : H.Space)
   let Q := spacesSourceFunctional hT hH
   let P := Analysis.rankOneProjection Q ψ
   obtain ⟨C, hC, hbound⟩ := spacesSourceLinear_bound hT hH
-  refine ⟨P, fun f => Analysis.rankOneProjection_apply Q ψ f, ?_, ?_, ?_⟩
-  · intro f
-    rw [Analysis.rankOneProjection_apply, map_sub, map_smul, hψ, smul_eq_mul, mul_one, sub_self]
-  · intro f hf
-    rw [Analysis.rankOneProjection_apply, hf, zero_smul, sub_zero]
-  · exact Analysis.rankOneProjection_isTameLinear Q ψ
-      (fun m n hmn u => Analysis.gradedSeminorm_monotone _ _ hmn u) hC hbound
+  have hprops := spaces_rankOne_properties Q ψ hψ
+  refine ⟨P, fun f => Analysis.rankOneProjection_apply Q ψ f, hprops.1, hprops.2, ?_⟩
+  exact Analysis.rankOneProjection_isTameLinear (p := H.grading) Q ψ
+    (fun m n hmn u => Analysis.gradedSeminorm_monotone _ _ hmn u) hC hbound
 
 end SourceModel
 

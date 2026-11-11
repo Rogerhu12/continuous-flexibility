@@ -20,6 +20,8 @@ namespace ContinuousFlexibility.Statements
 open Set ContinuousFlexibility.Analysis
 open scoped Topology ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- Pointwise decoding with the continuity required in the model statement. -/
 def spaces_heightDecode {D : ReferenceData} {T : MaterialData} {γ : ℝ}
     (H : SobolevModelData) (hH : IsSobolevModel D T γ H) :
@@ -43,8 +45,11 @@ theorem spaces_physical_height_family_contDiff
     ContDiffOn ℝ ∞ (fun p : PolarPoint × ℝ =>
       (S.height γ).decode (c p.2).1 p.1 + (c p.2).2 * S.chiLeft p.1.1)
       (univ ×ˢ Ioo (-q₀) q₀) := by
-  letI : ∀ s, CompleteSpace ((S.height γ).level s) :=
+  let : ∀ s, CompleteSpace ((S.height γ).level s) :=
     fun s => ((hS.1 γ).2.1 s).isComplete.completeSpace_coe
+  let : IsUniformAddGroup (S.height γ).Space :=
+    (compatibleSubmodule (fun s => (S.height γ).level s)
+      (S.height γ).bond).toAddSubgroup.isUniformAddGroup
   let E := (S.height γ).Space × ℝ
   let L (p : PolarPoint) : E →L[ℝ] ℝ :=
     ((ContinuousLinearMap.proj p).comp (spaces_heightDecode (S.height γ) (hS.1 γ))).comp
@@ -52,10 +57,17 @@ theorem spaces_physical_height_family_contDiff
       (ContinuousLinearMap.snd ℝ (S.height γ).Space ℝ).smulRight (S.chiLeft p.1)
   have hLapp (p : PolarPoint) (u : E) :
       L p u = (S.height γ).decode u.1 p + u.2 * S.chiLeft p.1 := by
-    simp only [L, ContinuousLinearMap.add_apply, ContinuousLinearMap.comp_apply,
+    have hfst : ContinuousLinearMap.fst ℝ (S.height γ).Space ℝ u = u.1 :=
+      congrFun (ContinuousLinearMap.coe_fst' (R := ℝ)
+        (M₁ := (S.height γ).Space) (M₂ := ℝ)) u
+    have hsnd : ContinuousLinearMap.snd ℝ (S.height γ).Space ℝ u = u.2 :=
+      congrFun (ContinuousLinearMap.coe_snd' (R := ℝ)
+        (M₁ := (S.height γ).Space) (M₂ := ℝ)) u
+    simp only [L, add_apply, ContinuousLinearMap.comp_apply,
       ContinuousLinearMap.proj_apply, spaces_heightDecode_apply,
-      ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply,
       ContinuousLinearMap.smulRight_apply, smul_eq_mul]
+    exact congrArg₂ (fun (v : (S.height γ).Space) (r : ℝ) =>
+      (S.height γ).decode v p + r * S.chiLeft p.1) hfst hsnd
   have hL : ∀ u : E, ContDiff ℝ ∞ (fun p => L p u) := by
     intro u
     simpa only [hLapp] using physical_height_with_cutoff_contDiff hT hS hγ u.1 u.2
@@ -73,7 +85,8 @@ theorem spaces_physical_height_family_contDiff
   have had (k : ℕ) (t : ℝ) (ht : t ∈ Ioo (-q₀) q₀) :
       HasProjectiveCurveDerivAt (a k) (a (k + 1) t) t := by
     have h := J.derivative k t ht (fun _ => 1) 1
-    have hcons : Fin.cons (1 : ℝ) (fun _ : Fin k => 1) = (fun _ : Fin (k + 1) => 1) := by
+    have hcons : Fin.cons (α := fun _ : Fin (k + 1) => ℝ) 1 (fun _ => 1) =
+        (fun _ : Fin (k + 1) => (1 : ℝ)) := by
       funext i
       exact Fin.cases (Fin.cons_zero _ _) (fun j => Fin.cons_succ _ _ j) i
     simpa only [a, HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt, zero_add,

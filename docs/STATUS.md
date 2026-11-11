@@ -4,11 +4,17 @@ Last updated: 2026-11-11.
 
 ## Active lines
 
-- `line/Spaces` (2026-11-11): working on W02 and W03 from `main` at
-  `97f8b35`. The existing `MaterialHeightRegularity` module proves the two
-  fixed-height clauses of W03. The parameter-family clause and the complete
-  W02 space construction are being checked independently. The node remains
-  open until its exact statement, axiom audit and CI all pass.
+- `line/Spaces` (2026-11-11), based on `main` at `97f8b35`: the exact W03
+  statement is proved by `Statements.spaces_W03_statement`, including joint
+  smoothness on the original parameter interval. Both supporting modules
+  compile, and its axiom audit lists only `propext`, `Classical.choice`, and
+  `Quot.sound`. Verified W02 prerequisites now include the exact circle model,
+  even/odd projections, the physical source integral and its compact
+  normalizer, the compatibility projection, height products, a reciprocal
+  reduction to smooth composition, and the sequence-retraction construction.
+  The physical weak-graph reconstruction, concrete retractions, trace and
+  extension maps, and complete nonlinear tame estimates remain in progress.
+  `Spaces` stays open until the full W02/W03 statement and CI pass.
 
 ## Target
 

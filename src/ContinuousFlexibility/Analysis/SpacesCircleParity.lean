@@ -13,6 +13,8 @@ norm identities in `IsCircleModel`.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Statements
 
 open Set MeasureTheory
@@ -79,6 +81,8 @@ section Model
 variable {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 variable (hS : IsCircleModel T γ S)
 
+include hS
+
 private theorem circleModel_reflected_exists (u : S.Space) :
     ∃ v : S.Space, S.decode v = circleReflectFunctions (S.decode u) :=
   hS.2.2.2.2.1 _ (circleMember_reflectFunctions (hS.2.2.2.1 u))
@@ -102,7 +106,8 @@ def circleModelReflectionLinear : S.Space →ₗ[ℝ] S.Space where
     intro c u
     apply hS.2.2.2.2.2.1
     funext m θ
-    simp only [circleModelReflectionFun_decode, map_smul, Pi.smul_apply, circleReflectFunctions]
+    simp only [circleModelReflectionFun_decode, map_smul, Pi.smul_apply, circleReflectFunctions,
+      RingHom.id_apply]
 
 theorem circleModelReflectionLinear_decode (u : S.Space) :
     S.decode (circleModelReflectionLinear hS u) = circleReflectFunctions (S.decode u) :=
@@ -110,9 +115,14 @@ theorem circleModelReflectionLinear_decode (u : S.Space) :
 
 theorem circleModelReflectionLinear_level_norm (u : S.Space) (s : ℕ) :
     ‖(circleModelReflectionLinear hS u).val s‖ = ‖u.val s‖ := by
-  rw [hS.2.2.2.2.2.2.2, hS.2.2.2.2.2.2.2,
-    circleModelReflectionLinear_decode]
-  exact circleNorm_reflectFunctions (hS.2.2.2.1 u) s
+  calc
+    ‖(circleModelReflectionLinear hS u).val s‖ =
+        circleNorm T γ s (S.decode (circleModelReflectionLinear hS u)) :=
+      hS.2.2.2.2.2.2.2 (circleModelReflectionLinear hS u) s
+    _ = circleNorm T γ s (circleReflectFunctions (S.decode u)) :=
+      congrArg (circleNorm T γ s) (circleModelReflectionLinear_decode hS u)
+    _ = circleNorm T γ s (S.decode u) := circleNorm_reflectFunctions (hS.2.2.2.1 u) s
+    _ = ‖u.val s‖ := (hS.2.2.2.2.2.2.2 u s).symm
 
 theorem circleModelReflectionLinear_grading (u : S.Space) (s : ℕ) :
     S.grading s (circleModelReflectionLinear hS u) = S.grading s u :=
@@ -138,18 +148,114 @@ theorem circleModelReflection_apply (u : S.Space) :
 
 theorem circleModelReflection_decode (u : S.Space) (m : ℕ) (θ : ℝ) :
     S.decode (circleModelReflection hS u) m θ = S.decode u m (-θ) := by
-  rw [circleModelReflection_apply, circleModelReflectionLinear_decode]
-  exact circleReflectFunctions_eq_neg (hS.2.2.2.1 u) m θ
+  exact (congrArg (fun v : S.Space => S.decode v m θ) (circleModelReflection_apply hS u)).trans
+    ((congrFun (congrFun (circleModelReflectionLinear_decode hS u) m) θ).trans
+      (circleReflectFunctions_eq_neg (hS.2.2.2.1 u) m θ))
 
 theorem circleModelReflection_involutive (u : S.Space) :
     circleModelReflection hS (circleModelReflection hS u) = u := by
   apply hS.2.2.2.2.2.1
   funext m θ
-  rw [circleModelReflection_decode, circleModelReflection_decode, neg_neg]
+  simpa only [neg_neg] using (circleModelReflection_decode hS (circleModelReflection hS u) m θ).trans
+    (circleModelReflection_decode hS u m (-θ))
 
 theorem circleModelReflection_isTame :
     Analysis.IsTameLinear S.grading S.grading (circleModelReflection hS).toLinearMap 0 0 :=
   circleModelReflectionLinear_isTame hS
+
+/-- Projection onto the even angular functions. -/
+def circleModelEvenProjection : S.Space →L[ℝ] S.Space :=
+  SMul.smul (M := ℝ) (α := S.Space →L[ℝ] S.Space) (1 / 2)
+    (ContinuousLinearMap.id ℝ S.Space + circleModelReflection hS)
+
+/-- Projection onto the odd angular functions. -/
+def circleModelOddProjection : S.Space →L[ℝ] S.Space :=
+  SMul.smul (M := ℝ) (α := S.Space →L[ℝ] S.Space) (1 / 2)
+    (ContinuousLinearMap.id ℝ S.Space - circleModelReflection hS)
+
+theorem circleModelEvenProjection_decode (u : S.Space) (m : ℕ) (θ : ℝ) :
+    S.decode (circleModelEvenProjection hS u) m θ =
+      (S.decode u m θ + S.decode u m (-θ)) / 2 := by
+  have hs := congrFun (congrFun
+    (S.decode.map_smul (1 / 2 : ℝ) (u + circleModelReflection hS u)) m) θ
+  have ha := congrFun (congrFun (S.decode.map_add u (circleModelReflection hS u)) m) θ
+  calc
+    S.decode (circleModelEvenProjection hS u) m θ =
+        (1 / 2 : ℝ) * S.decode (u + circleModelReflection hS u) m θ := hs
+    _ = (1 / 2 : ℝ) * (S.decode u m θ + S.decode (circleModelReflection hS u) m θ) :=
+      congrArg (fun x : ℝ => (1 / 2 : ℝ) * x) ha
+    _ = (1 / 2 : ℝ) * (S.decode u m θ + S.decode u m (-θ)) :=
+      congrArg (fun x : ℝ => (1 / 2 : ℝ) * (S.decode u m θ + x))
+        (circleModelReflection_decode hS u m θ)
+    _ = _ := by ring
+
+theorem circleModelOddProjection_decode (u : S.Space) (m : ℕ) (θ : ℝ) :
+    S.decode (circleModelOddProjection hS u) m θ =
+      (S.decode u m θ - S.decode u m (-θ)) / 2 := by
+  have hs := congrFun (congrFun
+    (S.decode.map_smul (1 / 2 : ℝ) (u - circleModelReflection hS u)) m) θ
+  have ha := congrFun (congrFun (S.decode.map_sub u (circleModelReflection hS u)) m) θ
+  calc
+    S.decode (circleModelOddProjection hS u) m θ =
+        (1 / 2 : ℝ) * S.decode (u - circleModelReflection hS u) m θ := hs
+    _ = (1 / 2 : ℝ) * (S.decode u m θ - S.decode (circleModelReflection hS u) m θ) :=
+      congrArg (fun x : ℝ => (1 / 2 : ℝ) * x) ha
+    _ = (1 / 2 : ℝ) * (S.decode u m θ - S.decode u m (-θ)) :=
+      congrArg (fun x : ℝ => (1 / 2 : ℝ) * (S.decode u m θ - x))
+        (circleModelReflection_decode hS u m θ)
+    _ = _ := by ring
+
+theorem circleModelEvenProjection_idempotent (u : S.Space) :
+    circleModelEvenProjection hS (circleModelEvenProjection hS u) =
+      circleModelEvenProjection hS u := by
+  apply hS.2.2.2.2.2.1
+  funext m θ
+  have he := circleModelEvenProjection_decode hS u m θ
+  have hen : S.decode (circleModelEvenProjection hS u) m (-θ) =
+      (S.decode u m (-θ) + S.decode u m θ) / 2 := by
+    simpa only [neg_neg] using circleModelEvenProjection_decode hS u m (-θ)
+  calc
+    S.decode (circleModelEvenProjection hS (circleModelEvenProjection hS u)) m θ =
+        (S.decode (circleModelEvenProjection hS u) m θ +
+          S.decode (circleModelEvenProjection hS u) m (-θ)) / 2 :=
+      circleModelEvenProjection_decode hS (circleModelEvenProjection hS u) m θ
+    _ = ((S.decode u m θ + S.decode u m (-θ)) / 2 +
+        (S.decode u m (-θ) + S.decode u m θ) / 2) / 2 :=
+      congrArg₂ (fun x y : ℝ => (x + y) / 2) he hen
+    _ = (S.decode u m θ + S.decode u m (-θ)) / 2 := by ring
+    _ = S.decode (circleModelEvenProjection hS u) m θ := he.symm
+
+theorem circleModelOddProjection_idempotent (u : S.Space) :
+    circleModelOddProjection hS (circleModelOddProjection hS u) =
+      circleModelOddProjection hS u := by
+  apply hS.2.2.2.2.2.1
+  funext m θ
+  have ho := circleModelOddProjection_decode hS u m θ
+  have hon : S.decode (circleModelOddProjection hS u) m (-θ) =
+      (S.decode u m (-θ) - S.decode u m θ) / 2 := by
+    simpa only [neg_neg] using circleModelOddProjection_decode hS u m (-θ)
+  calc
+    S.decode (circleModelOddProjection hS (circleModelOddProjection hS u)) m θ =
+        (S.decode (circleModelOddProjection hS u) m θ -
+          S.decode (circleModelOddProjection hS u) m (-θ)) / 2 :=
+      circleModelOddProjection_decode hS (circleModelOddProjection hS u) m θ
+    _ = ((S.decode u m θ - S.decode u m (-θ)) / 2 -
+        (S.decode u m (-θ) - S.decode u m θ) / 2) / 2 :=
+      congrArg₂ (fun x y : ℝ => (x - y) / 2) ho hon
+    _ = (S.decode u m θ - S.decode u m (-θ)) / 2 := by ring
+    _ = S.decode (circleModelOddProjection hS u) m θ := ho.symm
+
+theorem circleModelEvenProjection_isTame :
+    Analysis.IsTameLinear S.grading S.grading
+      (circleModelEvenProjection hS).toLinearMap 0 0 :=
+  ((Analysis.IsTameLinear.id S.grading).add
+    (Analysis.gradedSeminorm_monotone _ _) (circleModelReflection_isTame hS)).smul (1 / 2)
+
+theorem circleModelOddProjection_isTame :
+    Analysis.IsTameLinear S.grading S.grading
+      (circleModelOddProjection hS).toLinearMap 0 0 :=
+  ((Analysis.IsTameLinear.id S.grading).sub
+    (Analysis.gradedSeminorm_monotone _ _) (circleModelReflection_isTame hS)).smul (1 / 2)
 
 /-- Even and odd circle projections, with their exact decoded formulas and
 zero-loss tame estimates. -/
@@ -161,41 +267,11 @@ theorem circleModel_exists_parity_projections :
         (S.decode u m θ - S.decode u m (-θ)) / 2) ∧
       (∀ u, even (even u) = even u ∧ odd (odd u) = odd u) ∧
       Analysis.IsTameLinear S.grading S.grading even.toLinearMap 0 0 ∧
-      Analysis.IsTameLinear S.grading S.grading odd.toLinearMap 0 0 := by
-  let R : S.Space →L[ℝ] S.Space := circleModelReflection hS
-  let E : S.Space →L[ℝ] S.Space := (1 / 2 : ℝ) • (ContinuousLinearMap.id ℝ S.Space + R)
-  let O : S.Space →L[ℝ] S.Space := (1 / 2 : ℝ) • (ContinuousLinearMap.id ℝ S.Space - R)
-  have he (u : S.Space) (m : ℕ) (θ : ℝ) :
-      S.decode (E u) m θ = (S.decode u m θ + S.decode u m (-θ)) / 2 := by
-    dsimp only [E]
-    rw [ContinuousLinearMap.smul_apply, ContinuousLinearMap.add_apply,
-      ContinuousLinearMap.id_apply]
-    simp only [R, map_smul, map_add, Pi.smul_apply, Pi.add_apply, smul_eq_mul,
-      circleModelReflection_decode]
-    ring
-  have ho (u : S.Space) (m : ℕ) (θ : ℝ) :
-      S.decode (O u) m θ = (S.decode u m θ - S.decode u m (-θ)) / 2 := by
-    dsimp only [O]
-    rw [ContinuousLinearMap.smul_apply, ContinuousLinearMap.sub_apply,
-      ContinuousLinearMap.id_apply]
-    simp only [R, map_smul, map_sub, Pi.smul_apply, Pi.sub_apply, smul_eq_mul,
-      circleModelReflection_decode]
-    ring
-  refine ⟨E, O, he, ho, ?_, ?_, ?_⟩
-  · intro u
-    constructor
-    · apply hS.2.2.2.2.2.1
-      funext m θ
-      simp only [he, neg_neg]
-      ring
-    · apply hS.2.2.2.2.2.1
-      funext m θ
-      simp only [ho, neg_neg]
-      ring
-  · exact ((Analysis.IsTameLinear.id S.grading).add
-      (Analysis.gradedSeminorm_monotone _ _) (circleModelReflection_isTame hS)).smul (1 / 2)
-  · exact ((Analysis.IsTameLinear.id S.grading).sub
-      (Analysis.gradedSeminorm_monotone _ _) (circleModelReflection_isTame hS)).smul (1 / 2)
+      Analysis.IsTameLinear S.grading S.grading odd.toLinearMap 0 0 :=
+  ⟨circleModelEvenProjection hS, circleModelOddProjection hS,
+    circleModelEvenProjection_decode hS, circleModelOddProjection_decode hS,
+    fun u => ⟨circleModelEvenProjection_idempotent hS u, circleModelOddProjection_idempotent hS u⟩,
+    circleModelEvenProjection_isTame hS, circleModelOddProjection_isTame hS⟩
 
 end Model
 

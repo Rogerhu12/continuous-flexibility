@@ -22,7 +22,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set Filter
-open scoped Topology ENNReal BigOperators
+open scoped Topology ENNReal NNReal BigOperators
 open ContinuousFlexibility.Statements
 
 /-! ## The concrete model already has smoothing operators -/
@@ -53,9 +53,11 @@ variable {X B : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
 
 variable (p : ℕ → Seminorm ℝ X) (loss : ℕ)
   (A : ℕ → X →ₗ[ℝ] B) (C : ℕ → ℝ≥0)
-  (hA : ∀ s k x,
+  (hA : ∀ (s k : ℕ) (x : X),
     ‖Real.exp ((s : ℝ) * k) • A k x‖ ≤ C s * p (s + loss) x)
 
+omit [TopologicalSpace X] in
+include hA in
 private theorem shellAnalysis_mem (x : X) (s : ℕ) :
     Memℓp (fun k : ℕ => Real.exp ((s : ℝ) * k) • A k x) ∞ := by
   apply memℓp_infty
@@ -86,11 +88,13 @@ def shellAnalysisLinear : X →ₗ[ℝ] ExponentialSequenceSpace B where
       lp.coeFn_smul, map_smul, RingHom.id_apply]
     exact smul_comm _ _ _
 
+omit [TopologicalSpace X] in
 theorem shellAnalysisLinear_raw (x : X) :
     exponentialSequenceRaw B (shellAnalysisLinear p loss A C hA x) =
       fun k => A k x :=
   exponentialSequenceRaw_ofRaw B _ _
 
+omit [TopologicalSpace X] in
 theorem shellAnalysisLinear_bound (s : ℕ) (x : X) :
     exponentialSequenceSeminorm B s (shellAnalysisLinear p loss A C hA x) ≤
       C s * p (s + loss) x := by
@@ -99,6 +103,7 @@ theorem shellAnalysisLinear_bound (s : ℕ) (x : X) :
   intro k
   exact hA s k x
 
+omit [TopologicalSpace X] in
 theorem shellAnalysisLinear_isTame :
     IsTameLinear p (exponentialSequenceSeminorm B)
       (shellAnalysisLinear p loss A C hA) loss 0 := by
@@ -131,7 +136,7 @@ private theorem summable_shellDecay : Summable (fun k : ℕ => Real.exp (-(k : �
 
 /-- The fixed finite constant introduced by summing one extra exponential order. -/
 def shellSummationConstant : ℝ≥0 :=
-  ⟨∑' k : ℕ, Real.exp (-(k : ℝ)), tsum_nonneg (fun k => (Real.exp_pos _).le)⟩
+  ⟨∑' k : ℕ, Real.exp (-(k : ℝ)), tsum_nonneg (fun _ => (Real.exp_pos _).le)⟩
 
 section BanachSynthesis
 
@@ -141,6 +146,8 @@ variable {B F : Type*} [NormedAddCommGroup B] [NormedSpace ℝ B]
 variable (A : ℕ → B →L[ℝ] F) (C : ℝ≥0)
   (hA : ∀ k b, ‖A k b‖ ≤ C * Real.exp (-(k : ℝ)) * ‖b‖)
 
+omit [CompleteSpace F] in
+include hA in
 private theorem decayingSeries_term_bound (u : ExponentialSequenceLevel B) (k : ℕ) :
     ‖A k (u k)‖ ≤ (C * ‖u‖) * Real.exp (-(k : ℝ)) := by
   calc
@@ -150,18 +157,23 @@ private theorem decayingSeries_term_bound (u : ExponentialSequenceLevel B) (k : 
         (mul_nonneg C.property (Real.exp_pos _).le)
     _ = _ := by ring
 
+include hA in
 theorem summable_decayingSeries (u : ExponentialSequenceLevel B) :
     Summable (fun k : ℕ => A k (u k)) :=
   (summable_shellDecay.mul_left (C * ‖u‖)).of_norm_bounded
     (decayingSeries_term_bound A C hA u)
 
+omit [CompleteSpace F] in
+include hA in
 theorem norm_decayingSeries_le (u : ExponentialSequenceLevel B) :
     ‖∑' k : ℕ, A k (u k)‖ ≤ (C * shellSummationConstant : ℝ≥0) * ‖u‖ := by
   have h := tsum_of_norm_bounded
     (summable_shellDecay.hasSum.mul_left (C * ‖u‖))
     (decayingSeries_term_bound A C hA u)
-  simpa only [NNReal.coe_mul, shellSummationConstant,
-    mul_assoc, mul_left_comm, mul_comm] using h
+  change ‖∑' k : ℕ, A k (u k)‖ ≤
+    ((C : ℝ) * ∑' k : ℕ, Real.exp (-(k : ℝ))) * ‖u‖
+  convert h using 1
+  ring
 
 /-- Synthesis on one Banach level is an actual convergent series of operators. -/
 def decayingSeriesMap : ExponentialSequenceLevel B →L[ℝ] F :=
@@ -203,11 +215,14 @@ variable (loss : ℕ) (P : ∀ n, ℕ → B →L[ℝ] E n) (C : ℕ → ℝ≥0)
 private def scaledShell (n k : ℕ) : B →L[ℝ] E n :=
   Real.exp (-(((n + loss + 1 : ℕ) : ℝ) * k)) • P n k
 
+omit [∀ n, CompleteSpace (E n)] in
 private theorem scaledShell_apply (n k : ℕ) (b : B) :
     scaledShell E loss P n k b =
       Real.exp (-(((n + loss + 1 : ℕ) : ℝ) * k)) • P n k b :=
   smul_apply _ _ _
 
+omit [∀ n, CompleteSpace (E n)] in
+include hP in
 private theorem scaledShell_bound (n k : ℕ) (b : B) :
     ‖scaledShell E loss P n k b‖ ≤ C n * Real.exp (-(k : ℝ)) * ‖b‖ := by
   rw [scaledShell_apply, norm_smul, Real.norm_of_nonneg (Real.exp_pos _).le]
@@ -228,6 +243,7 @@ private theorem scaledShell_bound (n k : ℕ) (b : B) :
           Real.exp (((n + loss : ℕ) : ℝ) * k)) * ‖b‖ := by ring
         _ = _ := by rw [he]
 
+omit [∀ n, CompleteSpace (E n)] in
 private theorem scaledShell_level (u : ExponentialSequenceSpace B) (n k : ℕ) :
     scaledShell E loss P n k (u.val (n + loss + 1) k) =
       P n k (exponentialSequenceRaw B u k) := by
@@ -249,6 +265,7 @@ theorem shellSynthesisLevel_apply (u : ExponentialSequenceSpace B) (n : ℕ) :
     projectiveCoordinate_apply]
   exact tsum_congr (scaledShell_level E loss P u n)
 
+include hP in
 theorem summable_shellSynthesis (u : ExponentialSequenceSpace B) (n : ℕ) :
     Summable (fun k : ℕ => P n k (exponentialSequenceRaw B u k)) := by
   have h := summable_decayingSeries (scaledShell E loss P n) (C n)
@@ -264,6 +281,7 @@ theorem shellSynthesisLevel_bound (u : ExponentialSequenceSpace B) (n : ℕ) :
 
 variable (hcompat : ∀ n k b, bond n (P (n + 1) k b) = P n k b)
 
+include hcompat in
 theorem shellSynthesisLevel_compatible (n : ℕ) :
     (bond n).comp (shellSynthesisLevel E loss P C hP (n + 1)) =
       shellSynthesisLevel E loss P C hP n := by
@@ -301,7 +319,11 @@ theorem shellSynthesis_isTame :
           exponentialSequenceSeminorm B (i + loss + 1) u := hb
     _ ≤ ((Finset.Iic s).sum C * shellSummationConstant : ℝ≥0) *
         exponentialSequenceSeminorm B (s + (loss + 1)) u := by
-      exact mul_le_mul (by exact_mod_cast mul_le_mul_right' hCi shellSummationConstant)
+      have hCiR : (C i : ℝ) ≤ ((Finset.Iic s).sum C : ℝ≥0) := by
+        exact_mod_cast hCi
+      exact mul_le_mul
+        (by simpa only [NNReal.coe_mul] using
+          mul_le_mul_of_nonneg_right hCiR (NNReal.coe_nonneg shellSummationConstant))
         hq (apply_nonneg _ _) (NNReal.coe_nonneg _)
 
 end Synthesis
@@ -314,7 +336,7 @@ theorem tameRetraction_of_shells
     [∀ n, CompleteSpace (E n)] (bond : ∀ n, E (n + 1) →L[ℝ] E n)
     (analysisLoss synthesisLoss : ℕ)
     (A : ℕ → ProjectiveLimit E bond →ₗ[ℝ] B) (CA : ℕ → ℝ≥0)
-    (hA : ∀ s k x, ‖Real.exp ((s : ℝ) * k) • A k x‖ ≤
+    (hA : ∀ (s k : ℕ) (x : ProjectiveLimit E bond), ‖Real.exp ((s : ℝ) * k) • A k x‖ ≤
       CA s * gradedSeminorm E bond (s + analysisLoss) x)
     (P : ∀ n, ℕ → B →L[ℝ] E n) (CP : ℕ → ℝ≥0)
     (hP : ∀ n k b, ‖P n k b‖ ≤

@@ -30,6 +30,7 @@ theorem spaces_cylinderTest_weight {D : ReferenceData} {T : MaterialData}
     change T.M (T.radius (p.1 + 0)) ^ c * φ (p + (0, Real.pi)) = _
     rw [add_zero, hφ.2.1 p]
   · intro p hp
+    change T.M (T.radius p.1) ^ c * φ p = 0
     rw [hzero p hp, mul_zero]
 
 /-- Compact radial support remains bounded after the actual material
@@ -45,7 +46,7 @@ theorem spaces_radial_pullback_isCylinderTest {D : ReferenceData} {T : MaterialD
   refine ⟨contDiff_materialPullback hT (hg.comp contDiff_fst).contDiffOn, ?_,
     max B 0 + 1, by positivity, ?_⟩
   · intro p
-    simp only [materialPullback, Prod.fst_add, Prod.snd_add, add_zero]
+    simp only [materialPullback, Prod.fst_add, add_zero]
   · intro p hp
     have hout : T.radius p.1 ∉ K := by
       intro hr
@@ -94,7 +95,8 @@ theorem spaces_exists_compact_normalizer {D : ReferenceData} {T : MaterialData}
   refine ⟨fun p => -deriv χ p.1,
     spaces_heightMember_of_compact_radial hT hg hK hKD hzero' γ,
     ⟨K, hK, hKD, fun r hr _ => hzero' r hr⟩, ?_⟩
-  rw [spaces_physicalSourceIntegral_radial, intervalIntegral.integral_neg]
+  rw [spaces_physicalSourceIntegral_radial D (fun r => -deriv χ r),
+    intervalIntegral.integral_neg]
   rw [intervalIntegral.integral_deriv_eq_sub
     (fun r _ => hsmooth.differentiable (by simp) r)
     ((contDiff_infty_iff_deriv.mp hsmooth).2.continuous.intervalIntegrable D.a D.b)]
