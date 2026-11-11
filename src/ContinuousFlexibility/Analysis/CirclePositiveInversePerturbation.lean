@@ -18,6 +18,11 @@ open Set ContinuousFlexibility.Analysis
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem positiveInversePerturbation_scalar_identity
+    (r t u θ : ℝ) (h : r + t + 1 * u = θ) :
+    -u = r - (θ - t) := by
+  linarith only [h]
+
 def circlePositiveInversePerturbation
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
@@ -30,17 +35,20 @@ theorem circlePositiveInversePerturbation_decode
     (travel : ℕ → ℝ) (e : S.Space) (he : e ∈ circlePositiveLiftDomain S) :
     S.decode (circlePositiveInversePerturbation hS hT hD hγ travel e) =
       fun m θ => circleAffineInverse travel e m θ - (θ - travel m) := by
-  obtain ⟨a, ha, hb⟩ := circlePositiveLiftDomain_uniform_lower hS hT hD hγ he
-  have hlower (m : ℕ) (θ : ℝ) :
-      a ≤ deriv (circleAffineLift travel (S.decode e) 1 m) θ := by
-    rw [circleAffineLift_deriv hS]
-    exact hb m θ
-  have heq : circlePositiveInversePerturbation hS hT hD hγ travel e =
-      circleInversePerturbation hS hT hD hγ travel a ha e := by
-    unfold circlePositiveInversePerturbation circleInversePerturbation
-    rw [circlePositiveInverseComposeLinear_eq_fixed hS hT hD hγ travel a ha e hlower]
-  rw [heq]
-  exact circleInversePerturbation_decode hS hT hD hγ travel a ha e hlower
+  have hdecode := circlePositiveInverseComposeLinear_decode
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel e e he
+  funext m θ
+  have hneg : S.decode (circlePositiveInversePerturbation hS hT hD hγ travel e) m θ =
+      -S.decode e m (circleAffineInverse travel e m θ) :=
+    (congrArg (fun f : ℕ → ℝ → ℝ => f m θ)
+      (S.decode.map_neg (circlePositiveInverseComposeLinear hS hT hD hγ travel e e))).trans
+        (congrArg (fun y : ℝ => -y)
+          (congrArg (fun f : ℕ → ℝ → ℝ => f m θ) hdecode))
+  exact hneg.trans (positiveInversePerturbation_scalar_identity
+    (circleAffineInverse travel e m θ) (travel m)
+    (S.decode e m (circleAffineInverse travel e m θ)) θ
+    (circleAffineInverse_right
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel e m θ))
 
 theorem smoothTameOn_circlePositiveInversePerturbation
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)

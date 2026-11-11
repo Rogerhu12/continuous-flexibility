@@ -52,7 +52,7 @@ private theorem scalar_height_curve_energy_bound
     (hK : 0 ≤ K) (hA : 0 ≤ A) (hB : 2 + B ≤ A)
     (hlo : 0 ≤ lo) (hloE : lo ≤ Real.sqrt E.toReal)
     (hhiE : hi ≤ Real.sqrt E.toReal)
-    (hpoint : p * |y| ≤ K * M ^ (c + 1) * (((0 : ℝ) + 2 + B) * lo + hi)) :
+    (hpoint : p * |y| ≤ K * M ^ (c + 1) * ((((0 : ℕ) : ℝ) + 2 + B) * lo + hi)) :
     p * |q * y| ≤ |q| * K * (A + 1) *
       Real.sqrt (ENNReal.ofReal ((M ^ (s + 1)) ^ 2) * E).toReal := by
   let e : ℝ := Real.sqrt E.toReal
@@ -64,7 +64,7 @@ private theorem scalar_height_curve_energy_bound
       _ ≤ A * e + e := add_le_add (mul_le_mul_of_nonneg_left hloE hA) hhiE
       _ = (A + 1) * e := by ring
   have hp : p * |y| ≤ K * M ^ (c + 1) * ((2 + B) * lo + hi) := by
-    simpa only [zero_add] using hpoint
+    simpa only [Nat.cast_zero, zero_add] using hpoint
   have hc : M ^ (c + 1) ≤ M ^ (s + 1) :=
     pow_le_pow_right₀ hM (by omega)
   have hsqrt : Real.sqrt (ENNReal.ofReal ((M ^ (s + 1)) ^ 2) * E).toReal =

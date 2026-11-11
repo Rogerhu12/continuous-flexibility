@@ -21,6 +21,13 @@ local instance n01EndpointScalarJetGrowthStateSMul (S : PhysicalSpacesData) :
 open Set ContinuousFlexibility.Analysis
 open scoped BigOperators
 
+private theorem finite_weighted_sum_mul_reassociate
+    {ι : Type*} [Fintype ι] (K : ι → ℝ) (I A : ℝ) :
+    (∑ j : ι, K j * (I * A)) = (∑ j : ι, K j) * I * A := by
+  classical
+  rw [← Finset.sum_mul]
+  exact (mul_assoc _ _ _).symm
+
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -41,12 +48,18 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_unifo
   have hp : Monotone p := sectorPairGrading_monotone S
   have hI : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
     (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
-  obtain ⟨B, L, hB, hinterp⟩ := hasInterpolation_quadratic_local_growth p hp hI base loss 6
+  let interpolationData := hasInterpolation_quadratic_local_growth p hp hI base loss 6
+  let B : ℕ := interpolationData.choose
+  let L : ℕ := interpolationData.choose_spec.choose
+  have hB : base ≤ B := interpolationData.choose_spec.choose_spec.1
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  obtain ⟨I, hI0, hi⟩ := hinterp R hR s hs
-  have hraw (j : CircleJetIndex s) :=
+  let orderData := interpolationData.choose_spec.choose_spec.2 R hR s hs
+  let I : ℝ := orderData.choose
+  have hI0 : 0 ≤ I := orderData.choose_spec.1
+  let rawData (j : CircleJetIndex s) :=
     hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n (j.val 0).val (j.val 1).val
-  choose K hK hk using hraw
+  let K : CircleJetIndex s → ℝ := fun j => (rawData j).choose
+  have hK (j : CircleJetIndex s) : 0 ≤ K j := (rawData j).choose_spec.1
   refine ⟨(∑ j : CircleJetIndex s, K j) * I,
     mul_nonneg (Finset.sum_nonneg (fun j _ => hK j)) hI0, ?_⟩
   intro rsel hrsel z hz hzb
@@ -59,12 +72,9 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_unifo
     _ ≤ ∑ j : CircleJetIndex s, K j * (I * (1 + p (s + L) z)) := by
       apply Finset.sum_le_sum
       intro j _
-      exact (hk j rsel hrsel z hz).trans (mul_le_mul_of_nonneg_left
-        (hi _ _ j.property z hzb) (hK j))
-    _ = _ := by
-      rw [← Finset.sum_mul]
-      dsimp only [p]
-      ring
+      exact ((rawData j).choose_spec.2 rsel hrsel z hz).trans (mul_le_mul_of_nonneg_left
+        (orderData.choose_spec.2 _ _ j.property z hzb) (hK j))
+    _ = _ := finite_weighted_sum_mul_reassociate K I (1 + p (s + L) z)
 
 theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -80,9 +90,12 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z) := by
-  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
+  let data := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
+  let B : ℕ := data.choose
+  let L : ℕ := data.choose_spec.choose
+  have hB : base ≤ B := data.choose_spec.choose_spec.1
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
-  exact ⟨K, hK, hk rsel hrsel⟩
+  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

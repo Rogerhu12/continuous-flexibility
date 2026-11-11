@@ -20,6 +20,21 @@ local instance n01EndpointSmoothTameStateSMul (S : PhysicalSpacesData) :
 open Set ContinuousFlexibility.Analysis
 open scoped BigOperators
 
+private theorem endpoint_oneHigh_zero
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (B H : ℕ) (x : E) (v : Fin 0 → E) :
+    oneHighVariationWeight p B H x v = 1 + p H x := by
+  simp only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
+    mul_one, add_zero]
+
+private theorem seminorm_le_center_add_one
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (x x₀ : E) (hnear : p (x - x₀) < 1) :
+    p x ≤ p x₀ + 1 := by
+  have h := map_add_le_add p (x - x₀) x₀
+  rw [sub_add_cancel] at h
+  linarith only [h, hnear]
+
 private theorem endpoint_oneHigh_nonneg
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (B H : ℕ) {k : ℕ} (x : E) (v : Fin k → E) :
@@ -36,7 +51,9 @@ theorem N01Properties.smoothTameOn_endpointFlowCircle
     SmoothTameOn (pairGrading (sectorGrading S) realGrading)
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
       (hN.endpointFlowCircle hS hT rsel hrsel) := by
-  obtain ⟨J, hJ⟩ := hN.exists_endpointFlowCircle_smoothDirections hS hT rsel hrsel
+  let towerData := hN.exists_endpointFlowCircle_smoothDirections hS hT rsel hrsel
+  let J : SmoothDirections (sectorNeighborhood S base ε ε)
+      (hN.endpointFlowCircle hS hT rsel hrsel) := towerData.choose
   let p := pairGrading (sectorGrading S) realGrading
   have hjet (k : ℕ) : ∃ B L : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
@@ -46,37 +63,56 @@ theorem N01Properties.smoothTameOn_endpointFlowCircle
         K * oneHighVariationWeight p B (s + L) x v := by
     cases k with
     | zero =>
-      obtain ⟨B, L, _, hbound⟩ := hN.endpointFlowCircle_circleNorm_local_growth hS hT rsel hrsel
+      let data := hN.endpointFlowCircle_circleNorm_local_growth hS hT rsel hrsel
+      let B : ℕ := data.choose
+      let L : ℕ := data.choose_spec.choose
       refine ⟨B, L, fun R hR s hs => ?_⟩
-      obtain ⟨K, hK, hk⟩ := hbound R hR s hs
+      let orderData := data.choose_spec.choose_spec.2 R hR s hs
+      let K : ℝ := orderData.choose
+      have hK : 0 ≤ K := orderData.choose_spec.1
       refine ⟨K, hK, ?_⟩
       intro x hx hxlow v
-      have hv : v = Fin.elim0 := Subsingleton.elim _ _
-      rw [hv, J.zero x hx]
-      simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-        mul_one, add_zero] using hk x hx hxlow
+      have hv : v = Fin.elim0 := by
+        funext i
+        exact Fin.elim0 i
+      have hzero : J.D 0 x v = hN.endpointFlowCircle hS hT rsel hrsel x :=
+        (congrArg (fun w : Fin 0 → (StateDirections S × ℝ) => J.D 0 x w) hv).trans
+          (J.zero x hx)
+      have hnorm : circleNorm T (3 / 4 : ℝ) s
+          ((S.circle (3 / 4 : ℝ)).decode (J.D 0 x v)) =
+          circleNorm T (3 / 4 : ℝ) s
+            ((S.circle (3 / 4 : ℝ)).decode (hN.endpointFlowCircle hS hT rsel hrsel x)) :=
+        congrArg (fun u : (S.circle (3 / 4 : ℝ)).Space =>
+          circleNorm T (3 / 4 : ℝ) s ((S.circle (3 / 4 : ℝ)).decode u)) hzero
+      exact hnorm.trans_le ((orderData.choose_spec.2 x hx hxlow).trans_eq
+        (congrArg (fun a : ℝ => K * a) (endpoint_oneHigh_zero p B (s + L) x v).symm))
     | succ n =>
-      obtain ⟨B, L, _, hbound⟩ := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
+      let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
+      let B : ℕ := data.choose
+      let L : ℕ := data.choose_spec.choose
       refine ⟨B, L, fun R hR s hs => ?_⟩
-      obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
-      exact ⟨K, hK, fun x hx hxlow v => by
-        rw [hJ (n + 1) x hx v]
-        exact hk x hx hxlow v⟩
+      let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+      let K : ℝ := orderData.choose
+      have hK : 0 ≤ K := orderData.choose_spec.1
+      exact ⟨K, hK, fun x hx hxlow v =>
+        (congrArg (circleNorm T (3 / 4 : ℝ) s)
+          (towerData.choose_spec (n + 1) x hx v)).trans_le
+            (orderData.choose_spec.2 x hx hxlow v)⟩
   refine ⟨J, ?_⟩
   intro k x₀ hx₀
-  obtain ⟨B, L, hbound⟩ := hjet k
+  let jetData := hjet k
+  let B : ℕ := jetData.choose
+  let L : ℕ := jetData.choose_spec.choose
   let R : ℝ := p B x₀ + 1
   have hR : 0 ≤ R := add_nonneg (apply_nonneg _ _) zero_le_one
   refine ⟨L, B, 1, zero_lt_one, fun s hs => ?_⟩
-  obtain ⟨K, hK, hk⟩ := hbound R hR s hs
+  let orderData := jetData.choose_spec.choose_spec R hR s hs
+  let K : ℝ := orderData.choose
+  have hK : 0 ≤ K := orderData.choose_spec.1
   refine ⟨K, hK, ?_⟩
   intro x hx hnear v
-  have hxlow : p B x ≤ R := by
-    have h := map_add_le_add (p B) (x - x₀) x₀
-    rw [sub_add_cancel] at h
-    dsimp only [R]
-    linarith only [h, hnear]
-  have hnorm := hk x hx hxlow v
+  have hxlow : p B x ≤ R := seminorm_le_center_add_one (p B) x x₀ hnear
+  have hnorm := orderData.choose_spec.2 x hx hxlow v
   have hW : 0 ≤ oneHighVariationWeight p B (s + L) x v := endpoint_oneHigh_nonneg p B (s + L) x v
   change (S.circle (3 / 4 : ℝ)).grading s (J.D k x v) ≤
     K * oneHighVariationWeight p B (s + L) x v
