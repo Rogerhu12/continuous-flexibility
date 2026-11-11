@@ -110,7 +110,7 @@ theorem n04CanonicalAtlas_partA {D : ReferenceData} {S : PhysicalSpacesData}
   · intro z hz hsector m p hp hnormal
     exact ⟨rfl, rfl⟩
   · intro m
-    refine ⟨hlr m, by norm_num, ?_⟩
+    refine ⟨hlr m, by change (0 : ℝ) < 1; norm_num, ?_⟩
     intro r hr
     exact ⟨(hbound m).1.trans hr.1, hr.2.trans (hbound m).2.2⟩
   · exact hpositive
@@ -167,7 +167,7 @@ theorem n04CanonicalAtlas_cutPairs {D : ReferenceData} {S : PhysicalSpacesData}
         (n04CanonicalAtlas D S C L P).cutRadius m := by
   intro m
   rcases hP m with ⟨hpos₁, hpos₂, hrev₁, hrev₂, hleft, hright, hcut₁, hcut₂⟩
-  exact ⟨hpos₁, hpos₂, hleft, hright, hcut₁.trans hcut₂.symm, by norm_num,
+  exact ⟨hpos₁, hpos₂, hleft, hright, hcut₁.trans hcut₂.symm, by change (0 : ℝ) < 1; norm_num,
     rfl, rfl, rfl, rfl⟩
 
 end ContinuousFlexibility.Analysis
