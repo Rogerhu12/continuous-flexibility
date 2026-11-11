@@ -58,11 +58,11 @@ theorem exists_seedPreparedSelectedTail_with_seams (hR07 : R07Statement) :
   refine ⟨seedSelectedTailAtBand S n, isSelectedTail_seedSelectedTailAtBand hS hn,
     n, hn.1, ?_, ?_, ?_⟩
   · intro right
-    simpa only [seedSelectedTailAtBand, if_pos rfl] using
+    simpa [seedSelectedTailAtBand, morseChainSeam] using
       (hdata right).2.2.2.2.2.1
   · have hL := (hdata false).2.2.2.2.2.1
     have hR := (hdata true).2.2.2.2.2.1
-    simp only [seedSelectedTailAtBand, if_pos rfl]
+    simp only [seedSelectedTailAtBand, ite_true]
     rw [hL, hR]
     exact morseRealization_seams_order hreal hn.1
   · intro right
