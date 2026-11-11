@@ -45,33 +45,50 @@ theorem innerInterfaceInverseSqrt_normalizes (S₀ : Matrix ι ι ℝ)
 def innerInterfaceWeightedError (S₀ Ω E : Matrix ι ι ℝ) : Matrix ι ι ℝ :=
   innerInterfaceInverseSqrt S₀ * (Ω * E * Ω⁻¹) * innerInterfaceInverseSqrt S₀
 
+theorem innerInterfaceError_norm_lt_one (R : Matrix ι ι ℝ) (hR : ‖R‖ < 1 / 2) :
+    ‖Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ) R‖ < 1 := by
+  rw [Matrix.l2_opNorm_toEuclideanCLM]
+  exact hR.trans (by norm_num)
+
 /-- The Neumann inverse, transported without a norm loss from Euclidean space. -/
 def innerInterfaceNeumann (R : Matrix ι ι ℝ) (hR : ‖R‖ < 1 / 2) : Matrix ι ι ℝ :=
-  Matrix.toEuclideanCLM.symm
-    (neumannInverse (Matrix.toEuclideanCLM R) (by
-      rw [Matrix.l2_opNorm_toEuclideanCLM]
-      exact hR.trans (by norm_num)))
+  (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ)).symm
+    (neumannInverse (E := EuclideanSpace ℝ ι)
+      (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ) R)
+      (innerInterfaceError_norm_lt_one R hR))
+
+theorem innerInterfaceNeumann_toEuclideanCLM (R : Matrix ι ι ℝ)
+    (hR : ‖R‖ < 1 / 2) :
+    Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ) (innerInterfaceNeumann R hR) =
+      neumannInverse (E := EuclideanSpace ℝ ι)
+        (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ) R)
+        (innerInterfaceError_norm_lt_one R hR) :=
+  (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ)).apply_symm_apply _
 
 theorem innerInterfaceNeumann_mul (R : Matrix ι ι ℝ) (hR : ‖R‖ < 1 / 2) :
     innerInterfaceNeumann R hR * (1 + R) = 1 := by
-  apply Matrix.toEuclideanCLM.injective
-  simp only [map_mul, map_add, map_one, innerInterfaceNeumann,
-    StarAlgEquiv.apply_symm_apply]
-  exact neumannInverse_mul _ _
+  apply (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ)).injective
+  rw [map_mul, innerInterfaceNeumann_toEuclideanCLM, map_add, map_one]
+  exact neumannInverse_mul (E := EuclideanSpace ℝ ι) _ _
 
 theorem mul_innerInterfaceNeumann (R : Matrix ι ι ℝ) (hR : ‖R‖ < 1 / 2) :
     (1 + R) * innerInterfaceNeumann R hR = 1 := by
-  apply Matrix.toEuclideanCLM.injective
-  simp only [map_mul, map_add, map_one, innerInterfaceNeumann,
-    StarAlgEquiv.apply_symm_apply]
-  exact mul_neumannInverse _ _
+  apply (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ)).injective
+  rw [map_mul, map_add, map_one, innerInterfaceNeumann_toEuclideanCLM]
+  exact mul_neumannInverse (E := EuclideanSpace ℝ ι) _ _
 
 theorem norm_innerInterfaceNeumann_le_two (R : Matrix ι ι ℝ)
     (hR : ‖R‖ < 1 / 2) : ‖innerInterfaceNeumann R hR‖ ≤ 2 := by
-  rw [← Matrix.l2_opNorm_toEuclideanCLM]
-  simp only [innerInterfaceNeumann, StarAlgEquiv.apply_symm_apply]
-  apply norm_neumannInverse_le_two
-  simpa only [Matrix.l2_opNorm_toEuclideanCLM] using hR.le
+  calc
+    ‖innerInterfaceNeumann R hR‖ =
+        ‖Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ) (innerInterfaceNeumann R hR)‖ :=
+      (Matrix.l2_opNorm_toEuclideanCLM (innerInterfaceNeumann R hR)).symm
+    _ = ‖neumannInverse (E := EuclideanSpace ℝ ι)
+        (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℝ) R)
+        (innerInterfaceError_norm_lt_one R hR)‖ :=
+      congrArg norm (innerInterfaceNeumann_toEuclideanCLM R hR)
+    _ ≤ 2 := norm_neumannInverse_le_two (E := EuclideanSpace ℝ ι) _ _ (by
+      simpa only [Matrix.l2_opNorm_toEuclideanCLM] using hR.le)
 
 /-- Commutation of the cut weights with the positive gap blocks gives the
 identity to which the Neumann construction applies. -/
