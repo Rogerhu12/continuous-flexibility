@@ -46,8 +46,10 @@ variable (hH : ∀ F, (B.bordered = false → F.2 = 0) →
   BorderedFullGraph B.potential B.border B.bordered (H F) F)
 
 theorem corrected_smooth (j : Fin 2) :
-    ContDiff ℝ ∞ (D.correctedRepresentative hB H hH j) :=
-  ((D.interiorKernel_smooth j).sub (D.correction_smooth_equation hB H hH j).1).const_mul _
+    ContDiff ℝ ∞ (D.correctedRepresentative hB H hH j) := by
+  unfold correctedRepresentative
+  exact contDiff_const.mul
+    ((D.interiorKernel_smooth j).sub (D.correction_smooth_equation hB H hH j).1)
 
 theorem corrected_representative_eq (j : Fin 2) :
     EqOn (D.correctedRepresentative hB H hH j)

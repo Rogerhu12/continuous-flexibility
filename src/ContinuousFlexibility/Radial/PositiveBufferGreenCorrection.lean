@@ -106,11 +106,14 @@ theorem correction_smooth_equation (j : Fin 2) :
       with x hsub hsmul hsource hborder
     rw [hsub]
     simp only [Pi.sub_apply, hsource, hsmul, Pi.smul_apply, smul_eq_mul, hborder]
+  have hborderSmooth : ContDiff ℝ ∞ B.borderFunction := hB.2.2.2.2.2.2.1
+  have hsourceSmooth : ContDiff ℝ ∞
+      (fun x : ℝ => D.profiles.sourceFunction j x - s * B.borderFunction x) :=
+    (D.source_smooth j).sub (contDiff_const.mul hborderSmooth)
   exact positiveBufferEnergyRepresentative_global_smooth
     (f := fun x => D.profiles.sourceFunction j x - s * B.borderFunction x)
     (F := D.source j - s • B.border)
-    hB.2.2.2.2.1
-    ((D.source_smooth j).sub (hB.2.2.2.2.2.2.1.const_mul s))
+    hB.2.2.2.2.1 hsourceSmooth
     (positiveBufferBorderedField B.potential B.bordered W) hweak hsource
 
 theorem correction_homogeneous (i j : Fin 2) {t : ℝ} (ht : t < B.action i + 2) :
