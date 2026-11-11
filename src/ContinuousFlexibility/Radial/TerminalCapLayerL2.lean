@@ -36,7 +36,7 @@ theorem terminalCapLayer_measure_le (D : Statements.ReferenceData)
       setLIntegral_const _ _
     _ ≤ ENNReal.ofReal P * volume (Icc a b) :=
       mul_le_mul_of_nonneg_left (Measure.restrict_apply_le (μ := volume)
-        (Statements.radialCore D) (Icc a b)) (zero_le _)
+        (Statements.radialCore D) (Icc a b)) zero_le
     _ = ENNReal.ofReal (P * (b - a)) := by
       rw [Real.volume_Icc, ← ENNReal.ofReal_mul hP]
 
@@ -101,7 +101,7 @@ theorem terminalCapLayer_memLp_eLpNorm (D : Statements.ReferenceData)
         rw [← eLpNorm_indicator_eq_eLpNorm_restrict measurableSet_Icc, hi]
       _ ≤ μ (Icc a b) ^ (1 / 2 : ℝ) * ENNReal.ofReal M := hraw
       _ ≤ ENNReal.ofReal (P * (b - a)) ^ (1 / 2 : ℝ) * ENNReal.ofReal M :=
-        mul_le_mul_of_nonneg_right (ENNReal.rpow_le_rpow hmass (by norm_num)) (zero_le _)
+        mul_le_mul_of_nonneg_right (ENNReal.rpow_le_rpow hmass (by norm_num)) zero_le
       _ = ENNReal.ofReal (sqrt (P * (b - a))) * ENNReal.ofReal M := by
         rw [ENNReal.ofReal_rpow_of_nonneg hmass₀ (by norm_num), ← sqrt_eq_rpow]
       _ = ENNReal.ofReal (M * sqrt (P * (b - a))) := by

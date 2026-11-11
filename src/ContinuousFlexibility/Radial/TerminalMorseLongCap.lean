@@ -88,8 +88,7 @@ theorem terminalMorse_long_cap_layer_bounds {A B j s scale t : ℝ} {r w u : ℝ
       _ = _ := by
         rw [hReq]
         dsimp only [p, q]
-        field_simp [hRx]
-        ring
+        field_simp [hRx] <;> ring
   have hq (x : ℝ) (hx : x ∈ Icc 0 L) : 0 ≤ q x ∧ q x ≤ (j * sqrt B) ^ 2 :=
     ⟨(terminalMorse_long_cap_geometry (j := j) hB hAB hs hr hx).2.2.2.1,
       (terminalMorse_long_cap_geometry (j := j) hB hAB hs hr hx).2.2.2.2.1⟩

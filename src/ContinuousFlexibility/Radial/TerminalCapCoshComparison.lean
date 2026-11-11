@@ -45,7 +45,7 @@ theorem terminalCap_cosh_growth {a b m : ℝ} {p q : ℝ → ℝ}
   have hW (x : ℝ) (hx : x ∈ Icc a b) :
       HasDerivAt W ((q x - m ^ 2) * p x * cosh (m * (x - a))) x := by
     convert ((hdd x hx).mul (hc x)).sub (((hd x).mul (hs x)).const_mul m) using 1 <;>
-      dsimp only [W] <;> ring
+      (try dsimp only [W]) <;> ring
   have hmonoW : MonotoneOn W (Icc a b) := by
     apply monotoneOn_of_deriv_nonneg (convex_Icc a b)
     · exact fun x hx => (hW x hx).continuousAt.continuousWithinAt
@@ -66,7 +66,7 @@ theorem terminalCap_cosh_growth {a b m : ℝ} {p q : ℝ → ℝ}
   have hratio (x : ℝ) :
       HasDerivAt (fun y => p y / cosh (m * (y - a)))
         (W x / cosh (m * (x - a)) ^ 2) x := by
-    convert (hd x).div (hc x) (cosh_pos _).ne' using 1 <;> dsimp only [W] <;> ring
+    convert (hd x).div (hc x) (cosh_pos _).ne' using 1 <;> (try dsimp only [W]) <;> ring
   have hmonoRatio : MonotoneOn (fun y => p y / cosh (m * (y - a))) (Icc a b) := by
     apply monotoneOn_of_deriv_nonneg (convex_Icc a b)
     · exact fun x _ => (hratio x).continuousAt.continuousWithinAt

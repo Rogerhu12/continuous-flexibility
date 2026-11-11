@@ -62,11 +62,12 @@ theorem r10a_actual_entry_outward_le {T : MorseChainData} {σ constants : ℕ �
       simp only [Nat.add_zero]
       cases right <;> exact le_rfl
   | succ k ih =>
+      have ih' := ih (Nat.le_add_right m k)
       have hstep := r10a_actual_entry_succ_outward hreal right
         (hm.trans (Nat.le_add_right m k))
       cases right
-      · exact hstep.le.trans ih
-      · exact ih.trans hstep.le
+      · exact hstep.le.trans ih'
+      · exact ih'.trans hstep.le
 
 theorem r10a_actual_entry_retained {T : MorseChainData} {σ constants : ℕ → ℝ}
     {D : ReferenceData} (hreal : MorseChainRealization T σ D constants)
@@ -96,10 +97,10 @@ theorem r10a_actual_first_band_two {T : MorseChainData} {σ constants : ℕ → 
       sqrt_sq (by norm_num : (0 : ℝ) ≤ 3)] at hs
     exact hs
   have hindex : (1 : ℝ) ≤ (T.index : ℝ) := by exact_mod_cast hstart
-  have hsq := pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1) hindex 2
-  have hQ : 1 ≤ radialQ T.index := by
-    norm_num at hsq
-    exact hsq.trans (radial_nat_sq_le_Q T.index)
+  have hsq : (1 : ℝ) ≤ (T.index : ℝ) ^ 2 := by
+    simpa only [one_pow] using
+      pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1) hindex 2
+  have hQ : 1 ≤ radialQ T.index := hsq.trans (radial_nat_sq_le_Q T.index)
   have hCQ : C ≤ C * radialQ T.index := by
     simpa only [mul_one] using mul_le_mul_of_nonneg_left hQ hCpos.le
   apply (morseTransition_initial_band_iff T C 2).mpr

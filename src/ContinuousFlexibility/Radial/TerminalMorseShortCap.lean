@@ -201,8 +201,7 @@ theorem terminalMorse_short_cap_layer_bounds {A B j s scale t : ℝ} {r w u : �
       _ = _ := by
         rw [hReq]
         dsimp only [p]
-        field_simp [hRx]
-        ring
+        field_simp [hRx] <;> ring
   have hlo (x : ℝ) (hx : x ∈ Icc 0 morseShortLeftCapLength) :
       m ^ 2 ≤ j ^ 2 * (-morseRho A B (morseCellLeftCut + x)) :=
     (terminalMorse_short_cap_geometry (j := j) hB hAB hs hr hx).2.2.2.1

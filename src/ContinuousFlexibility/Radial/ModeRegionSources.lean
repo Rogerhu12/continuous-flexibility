@@ -122,8 +122,8 @@ theorem modeRegionSources_spec (D : ReferenceData) (l h : ℝ)
     filter_upwards [modeRegionVector_coe D (Ioo l h)ᶜ
       measurableSet_Ioo.compl F.1] with r hr
     by_cases hx : r ∈ Ioo l h
-    · simpa only [Set.indicator_of_notMem (not_not.mpr hx), if_pos hx] using hr
-    · simpa only [Set.indicator_of_mem hx, if_neg hx] using hr
+    · simpa only [Set.indicator_of_notMem (show r ∉ (Ioo l h)ᶜ from not_not.mpr hx), if_pos hx] using hr
+    · simpa only [Set.indicator_of_mem (show r ∈ (Ioo l h)ᶜ from hx), if_neg hx] using hr
 
 theorem modeRegionSources_add (D : ReferenceData) (l h : ℝ)
     (F : RadialModePair D) :

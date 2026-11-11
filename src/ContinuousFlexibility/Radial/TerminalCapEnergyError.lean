@@ -56,7 +56,8 @@ theorem terminalCapCutoffEnergy_integral_bound {a b W C A σ : ℝ}
   · apply intervalIntegral.integral_nonneg hab
     intro r hr
     exact mul_nonneg (mul_nonneg (hwBounds r hr).1 (sq_nonneg _)) (sq_nonneg _)
-  · have hi := (terminalCapCutoffEnergy_continuous hw hχ hu).intervalIntegrable a b
+  · have hi : IntervalIntegrable (terminalCapCutoffEnergy w χ u) volume a b :=
+      (terminalCapCutoffEnergy_continuous hw hχ hu).intervalIntegrable a b
     have hc : IntervalIntegrable (fun _ : ℝ => W * C ^ 2 * A ^ 2 * exp (-2 * σ))
         volume a b := intervalIntegrable_const
     have hbound := intervalIntegral.integral_mono_on hab hi hc

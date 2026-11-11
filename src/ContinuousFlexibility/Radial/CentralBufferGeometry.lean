@@ -151,7 +151,12 @@ theorem centralModelBuffer_hypotheses {j T B₀ : ℝ} (bordered : Bool)
   · change ContDiff ℝ ∞ (centralPotential j)
     unfold centralPotential
     fun_prop
-  · simpa [centralModelBuffer_innerWall bordered g f hjpos hTpos, centralModelBuffer] using hsupp
+  · change Function.support f ⊆ Ioo
+      (bufferInnerWall (centralModelBuffer j T B₀ bordered g f) 0)
+      (bufferInnerWall (centralModelBuffer j T B₀ bordered g f) 1)
+    rw [centralModelBuffer_innerWall bordered g f hjpos hTpos 0,
+      centralModelBuffer_innerWall bordered g f hjpos hTpos 1]
+    simpa using hsupp
   · intro i
     exact ⟨hm, centralBufferAction_pos hj hT⟩
   · intro i x hx
