@@ -365,3 +365,7 @@ import ContinuousFlexibility.Scalar.WeightedStateRegularity
 import ContinuousFlexibility.Scalar.WeightedTowerCalculus
 import ContinuousFlexibility.Scalar.WeightedPointwise
 import ContinuousFlexibility.Scalar.WeightedGraph
+import ContinuousFlexibility.Scalar.WeightedNeighborhood
+import ContinuousFlexibility.Scalar.WeightedStateFlatness
+import ContinuousFlexibility.Scalar.WeightedConservation
+import ContinuousFlexibility.Scalar.WeightedGraphSeparation

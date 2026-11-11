@@ -133,7 +133,7 @@ def smoothDirectionsScalarPostcompose (J : SmoothDirections U f) (L : F →L[ℝ
     simp only [ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply]
     rw [J.zero x hx]
   continuous := fun n => by
-    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply] using
+    simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_def] using
       L.continuous.comp_continuousOn (J.continuous n)
   derivative := fun n x hx v w => by
     simpa only [ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply] using
@@ -172,7 +172,7 @@ theorem UniformScalarTowerEstimate.postcompose
     _ ≤ C₁ * (C₂ * tameJetSize p k s (linearLoss + loss)
         (max base linearBase) x v) :=
       mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hsize hC₂) C₁.coe_nonneg
-    _ = _ := by ring
+    _ = _ := by simp only [tameJetSize]; ring
 
 theorem FixedNeighborhoodSmoothTame.postcompose
     (hf : FixedNeighborhoodSmoothTame p q U base loss f) (hp : Monotone p)
@@ -230,5 +230,77 @@ theorem FixedNeighborhoodSmoothTame.add
   exact fixedNeighborhoodSmoothTame_of_uniform (smoothDirectionsAdd J K) (hJ.add hK hp)
 
 end Addition
+
+section FiniteOutputs
+
+variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  {ι : Type*} {F : ι → Type*}
+  [∀ i, TopologicalSpace (F i)] [∀ i, AddCommGroup (F i)] [∀ i, Module ℝ (F i)]
+  {U : Set E} {f : ∀ i, E → F i}
+
+/-- A finite vector of actual towers.  This also treats the empty vector:
+openness is supplied separately instead of choosing one coordinate. -/
+def smoothDirectionsScalarPi (hU : IsOpen U) (J : ∀ i, SmoothDirections U (f i)) :
+    SmoothDirections U (fun x i => f i x) where
+  open_domain := hU
+  D := fun k x => ContinuousMultilinearMap.pi (fun i => (J i).D k x)
+  zero := fun x hx => by
+    funext i
+    rw [ContinuousMultilinearMap.pi_apply, (J i).zero x hx]
+  continuous := fun k => by
+    apply continuousOn_pi.mpr
+    intro i
+    simpa only [ContinuousMultilinearMap.pi_apply] using (J i).continuous k
+  derivative := fun k x hx v w => by
+    unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
+    apply tendsto_pi_nhds.mpr
+    intro i
+    simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,
+      Pi.smul_apply, Pi.sub_apply, ContinuousMultilinearMap.pi_apply] using
+      (J i).derivative k x hx v w
+
+private theorem scalarFiniteSeminorm_apply (I : Finset ι)
+    (q : ∀ i, Seminorm ℝ (F i)) (x : ∀ i, F i) :
+    (∑ i ∈ I, (q i).comp (LinearMap.proj i)) x = ∑ i ∈ I, q i (x i) := by
+  classical
+  induction I using Finset.induction_on with
+  | empty => simp only [Finset.sum_empty, zero_apply]
+  | @insert i I hi ih =>
+      rw [Finset.sum_insert hi, add_apply, ih, Finset.sum_insert hi,
+        Seminorm.comp_apply, LinearMap.proj_apply]
+
+/-- Assemble finitely many components with the sum grading used by the
+seven jet outputs and the three coefficient outputs. -/
+theorem uniformScalarTowerEstimate_pi [Fintype ι]
+    {p : ℕ → Seminorm ℝ E} {q : ∀ i, ℕ → Seminorm ℝ (F i)}
+    {base loss : ℕ} (hU : IsOpen U) (J : ∀ i, SmoothDirections U (f i))
+    (hJ : ∀ i, UniformScalarTowerEstimate p (q i) U base loss (f i) (J i)) :
+    UniformScalarTowerEstimate p
+      (fun s => ∑ i, (q i s).comp (LinearMap.proj i)) U base loss
+      (fun x i => f i x) (smoothDirectionsScalarPi hU J) := by
+  classical
+  intro k s hs
+  choose C hC hbound using fun i => hJ i k s hs
+  refine ⟨∑ i, C i, Finset.sum_nonneg (fun i _ => hC i), ?_⟩
+  intro x hx v
+  rw [scalarFiniteSeminorm_apply]
+  simp only [smoothDirectionsScalarPi, ContinuousMultilinearMap.pi_apply]
+  calc
+    ∑ i, q i s ((J i).D k x v) ≤ ∑ i, C i * tameJetSize p k s loss base x v :=
+      Finset.sum_le_sum (fun i _ => hbound i x hx v)
+    _ = _ := by rw [Finset.sum_mul]; rfl
+
+theorem fixedNeighborhoodSmoothTame_pi [Fintype ι]
+    {p : ℕ → Seminorm ℝ E} {q : ∀ i, ℕ → Seminorm ℝ (F i)}
+    {base loss : ℕ} (hU : IsOpen U)
+    (hf : ∀ i, FixedNeighborhoodSmoothTame p (q i) U base loss (f i)) :
+    FixedNeighborhoodSmoothTame p
+      (fun s => ∑ i, (q i s).comp (LinearMap.proj i)) U base loss
+      (fun x i => f i x) := by
+  choose J hJ using fun i => (hf i).2
+  exact fixedNeighborhoodSmoothTame_of_uniform (smoothDirectionsScalarPi hU J)
+    (uniformScalarTowerEstimate_pi hU J hJ)
+
+end FiniteOutputs
 
 end ContinuousFlexibility.Statements

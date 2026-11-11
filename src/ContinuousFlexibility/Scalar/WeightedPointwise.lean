@@ -30,15 +30,15 @@ theorem weightedPhysicalJet_norm_le_physicalNorm
   let N (i : JetIndex s) : ℝ≥0∞ :=
     eLpNorm (weightedPhysicalJet T γ (i.val 0).val (i.val 1).val (i.val 2).val f)
       2 materialCylinderMeasure
-  have hN (i : JetIndex s) : N i ≠ ∞ :=
+  have hN (i : JetIndex s) : N i ≠ (⊤ : ℝ≥0∞) :=
     (hf.2.2.2.2 (i.val 0).val (i.val 1).val (i.val 2).val).eLpNorm_ne_top
-  have hsum : (∑ i : JetIndex s, N i ^ 2) ≠ ∞ := by
+  have hsum : (∑ i : JetIndex s, N i ^ 2) ≠ (⊤ : ℝ≥0∞) := by
     apply ENNReal.sum_ne_top.mpr
     intro i _
     exact ENNReal.pow_ne_top (hN i)
   apply Real.le_sqrt_of_sq_le
   have hle : N j ^ 2 ≤ ∑ i : JetIndex s, N i ^ 2 :=
-    Finset.single_le_sum (fun _ _ => zero_le _) (Finset.mem_univ j)
+    Finset.single_le_sum (fun _ _ => bot_le) (Finset.mem_univ j)
   have hr := ENNReal.toReal_mono hsum hle
   simpa only [ENNReal.toReal_pow] using hr
 
@@ -76,9 +76,13 @@ theorem materialPullback_mixedDerivative_le_physicalNorm
   have hbound (i j : ℕ) (hij : i + j ≤ a + b + 2) :
       (eLpNorm (mixedDerivative i j F) 2 materialCylinderMeasure).toReal ≤
         physicalNorm T γ (a + b + 2) f := by
-    simpa only [weightedPhysicalJet, pow_zero, one_mul] using
-      weightedPhysicalJet_norm_le_physicalNorm hf (a := i) (b := j) (c := 0)
-        (s := a + b + 2) (by omega)
+    have he : weightedPhysicalJet T γ i j 0 f = mixedDerivative i j F := by
+      funext p
+      simp only [weightedPhysicalJet, pow_zero, one_mul]
+    have h := weightedPhysicalJet_norm_le_physicalNorm hf (a := i) (b := j) (c := 0)
+      (s := a + b + 2) (by omega)
+    rw [he] at h
+    exact h
   have hm1 : MemLp (radialPartial g) 2 materialCylinderMeasure := by
     rw [hx]
     exact hmem (a + 1) b

@@ -169,7 +169,7 @@ theorem scalarStatePrimitive_endpoint_values
       intro t ht
       have ht' : t ∈ Icc D.b r := by simpa only [uIcc_of_le hr] using ht
       exact Or.inr ht'.1
-    have he := intervalIntegral.integral_add_adjacent_intervals
+    have he := intervalIntegral.integral_add_adjacent_intervals (μ := volume)
       (hw.intervalIntegrable D.a D.b) (hw.intervalIntegrable D.b r)
     rw [hz, add_zero] at he
     exact he.symm

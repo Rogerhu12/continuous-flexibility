@@ -31,9 +31,11 @@ theorem scalarAnnularIntegral_add (D : ReferenceData) {f g : PolarPoint → ℝ}
     scalarAnnularIntegral D (fun p => f p + g p) =
       scalarAnnularIntegral D f + scalarAnnularIntegral D g := by
   have hfi : Continuous (fun r => ∫ θ in (0 : ℝ)..Real.pi, f (r, θ)) :=
-    intervalIntegral.continuous_parametric_intervalIntegral_of_continuous' hf 0 Real.pi
+    intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
+      (f := fun r θ => f (r, θ)) hf 0 Real.pi
   have hgi : Continuous (fun r => ∫ θ in (0 : ℝ)..Real.pi, g (r, θ)) :=
-    intervalIntegral.continuous_parametric_intervalIntegral_of_continuous' hg 0 Real.pi
+    intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
+      (f := fun r θ => g (r, θ)) hg 0 Real.pi
   have he (r : ℝ) : (∫ θ in (0 : ℝ)..Real.pi, f (r, θ) + g (r, θ)) =
       (∫ θ in (0 : ℝ)..Real.pi, f (r, θ)) + (∫ θ in (0 : ℝ)..Real.pi, g (r, θ)) :=
     intervalIntegral.integral_add
@@ -48,7 +50,8 @@ theorem scalarAnnularIntegral_sub (D : ReferenceData) {f g : PolarPoint → ℝ}
     (hf : Continuous f) (hg : Continuous g) :
     scalarAnnularIntegral D (fun p => f p - g p) =
       scalarAnnularIntegral D f - scalarAnnularIntegral D g := by
-  simpa only [sub_eq_add_neg, scalarAnnularIntegral, intervalIntegral.integral_neg] using
+  simpa only [sub_eq_add_neg, scalarAnnularIntegral, Pi.neg_apply,
+    intervalIntegral.integral_neg] using
     scalarAnnularIntegral_add D hf hg.neg
 
 theorem IsPhysicalScalarTest.zero_endpoints {D : ReferenceData} {φ : PolarPoint → ℝ}
@@ -100,6 +103,8 @@ theorem scalarAnnularIntegral_divergence_mul_test
         (R p * radialPartial φ p + Θ p * angularPartial φ p)) = 0 := by
     simpa only [scalarAnnularIntegral, hid] using hi
   rw [scalarAnnularIntegral_add D
+    (f := fun p => (radialPartial R p + angularPartial Θ p) * φ p)
+    (g := fun p => R p * radialPartial φ p + Θ p * angularPartial φ p)
     (((weightedGraph_continuous_radialPartial hR).add
       (weightedGraph_continuous_angularPartial hΘ)).mul hφ.1.continuous)
     ((hR.continuous.mul (weightedGraph_continuous_radialPartial hφ.1)).add

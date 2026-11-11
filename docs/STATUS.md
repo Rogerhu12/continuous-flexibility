@@ -2,6 +2,21 @@
 
 Last updated: 2026-11-11.
 
+## Active line: ScalarWeighted
+
+`line/ScalarWeighted` ([PR #20](https://github.com/Rogerhu12/continuous-flexibility/pull/20))
+is implementing the unchanged weighted S03--S05 interfaces. The node remains open.
+The first proof groups cover the actual state regularity and endpoint constants,
+common seminorm balls, quantitative material-cylinder pointwise bounds,
+fixed-loss tower operations, conservation through continuous linear functionals,
+and the physical weak graph. CI is validating these modules incrementally.
+
+The principal remaining construction is one actual `WeightedScalarData` witness:
+the seven jets, normalized residual and three coefficients must be decoded into
+the physical weighted spaces with one base order and one loss for all directional
+orders. The existing local `SmoothTameOn` hypotheses alone are not being treated
+as the stronger `UniformScalarTowerEstimate`. No frozen clause has been weakened.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
