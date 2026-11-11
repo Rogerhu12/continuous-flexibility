@@ -2,6 +2,26 @@
 
 Last updated: 2026-11-11.
 
+## Completed line: Tame
+
+`line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
+H01 includes exponential-sequence smoothing and all six frozen calculus
+clauses. H02 constructs genuine inverse-family derivatives from the resolvent
+identity and proves the required local tame bounds. Ordered-partition
+composition and multilinear normalization supply the higher-order estimates,
+including order zero and seminorms with nontrivial kernels.
+
+All 15 new proof modules are in the root import. At proof commit
+`4e255f2dfff527c143babbdd491762dd8ec8d092`, the default build passed all 3,810 jobs,
+the project axiom audit passed, and `#print axioms ContinuousFlexibility.Blueprint.Tame`
+reported only `propext`, `Classical.choice`, and `Quot.sound`.
+[Verified build](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42982787838).
+No frozen statement or assembly repair was needed.
+
+The [PR integration build](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42982795292)
+also passed with main's completed N12 proof: 3,814 jobs, an axiom audit of
+11,066 project declarations (8,324 theorems), and 9 / 42 blueprint statements proved.
+
 ## Target
 
 `thm:main` of the manuscript. The statement was first taken from the 62-page version
@@ -19,19 +39,23 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 393 / 401 (current source paths, including blueprint) |
-| Modules in the root import | 352 |
-| Lines of Lean under `src/` | 95,246 |
-| Axiom audit (CI, 3825 jobs) | passed for every project declaration in the root import |
-| Blueprint statements proved / total | 9 / 42 (S01, S02, R01, R02, R03, R04, W01, R06a, N12) |
+| Lean modules compiled / total | pending integration CI; current default source graph: 427 / 432 |
+| Modules in the root import | 390 |
+| Lines of Lean under `src/` | 101,191 |
+| Axiom audit | prior R06a proof and main integration passed; combined integration CI pending |
+| Blueprint statements proved / total | 14 / 42 (S01, S02, R01, R02, R03, R04, W01, ScalarCalculus, Tame, R05a, R06a, N04Cubic, N04Transmission, N12); combined CI confirmation pending |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 405 |
+| Modules on the module system | 1 (the Challenge) of 436 |
 
-The compiled-module count matches artifacts to current source paths; the raw CI cache count
-can also include artifacts of removed blueprint modules. The 8 unfinished modules of the earlier workflow are:
+These are current source counts after merging main `3a7853f30c9b6253375cc96d22cede2c34b59358`
+into the completed R06a line. The module count matches the source import closure
+of all four default targets and excludes stale artifacts restored from other
+branches. Five modules remain outside that default build:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
-`Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
-`Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
+`Analysis.ProjectiveNewtonCommonOrbit`, and `Analysis.ProjectiveNewtonParameterGrowth`.
+The three previously excluded Morse-chain modules are now dependencies of main's
+completed R05a proof. The combined integration is being checked by CI; the
+previous R06a proof build and main's merged proof builds are recorded below.
 
 ## What is proved
 
@@ -55,6 +79,9 @@ can also include artifacts of removed blueprint modules. The 8 unfinished module
   exhaustion. All 26 new modules and `Blueprint.R06a` are in the root import.
   The local test class correction is documented below; R06a depends only on
   `propext`, `Classical.choice`, `Quot.sound`.
+- **Tame calculus and inverse families.** `Blueprint.Tame : H01Statement ∧ H02Statement`,
+  assembled from `Analysis.h01Statement` and `Analysis.h02Statement` with the
+  exact frozen hypotheses and conclusions.
 - **Lemmas for §5–§9** (21 modules added on 2026-11-11, listed in `docs/archive/2026-11-11-lemmas.md`).
 
 ## What is not proved
@@ -83,9 +110,7 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (33): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06b, R06c, R07, R08,
-R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
-N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
+Open nodes (28): ScalarWeighted, Spaces, R05b, R06b, R06c, R07, R08, R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04a, N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
 Lean statements follow the manuscript and are not frozen: Tool-OneHighFactor (Lemmas 7.2, 7.3),
@@ -154,7 +179,7 @@ as the kernel on the weighted graph domain.
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook
 ratios rescaled to it (about 100–190 lines of Lean per line of readable TeX): about 900,000 lines in
-total, range 600,000–1,300,000. Current size is about 10% of the central estimate.
+total, range 600,000–1,300,000. Current size is about 11% of the central estimate.
 
 ## Node sizes
 
@@ -173,12 +198,14 @@ already exists in the tree.
 
 ## Pick next
 
-Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
-R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
+Open task branches at the 2026-11-11 integration snapshot: N04Root, R05b,
+R06b, R06c, Solve, Spaces, Tool-OneHighFactor, and Tool-SobolevExtension.
+Branches for completed nodes may remain until their pull requests are merged.
+The current state is always `git ls-remote --heads origin "line/*"`.
 
 A line that has finished takes the first task below whose branch does not exist:
 
-1. Standalone, mathlib only: N04Cubic, N04Transmission, N04Root.
+1. Standalone, mathlib only: N04Root.
 2. Pipelines whose first piece is running: R05b, R06b, R06c.
 3. Tools used by several nodes: Tool-OneHighFactor, Tool-SobolevExtension, Tool-AngularCommutator.
 4. Radial chain: R07, R09, R08, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
@@ -188,6 +215,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 28 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
