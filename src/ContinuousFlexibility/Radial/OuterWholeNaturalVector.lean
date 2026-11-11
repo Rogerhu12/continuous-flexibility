@@ -53,6 +53,7 @@ theorem OuterFundamentalStatePair.naturalVector_ae (hcb : c < b) (hPc : P c = 1)
       ⟨(lt_of_not_ge (fun hxc => hxs ⟨hx.1, hxc⟩)).le, hx.2⟩
     exact (H.V_tail_factor hcb hPc x hdeep).symm
 
+include hac in
 theorem OuterFundamentalStatePair.V_memLp (hcb : c < b) (hPc : P c = 1)
     (hμ : ∀ᵐ x ∂μ, x ∈ Ico a b)
     (p : Lp ℝ 2 (μ.restrict (Icc a c)ᶜ))

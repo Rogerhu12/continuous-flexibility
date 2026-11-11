@@ -23,10 +23,14 @@ def outerWholeDensity (D : ReferenceData) (right : Bool) (x : ℝ) : ℝ :=
 variable {D : ReferenceData} (hD : IsAccumulatingProfile D)
   {right : Bool} {entry : ℝ} (hentry : entry ∈ radialCore D)
 
+include hD
+
 theorem outerWholeDensity_measurable : Measurable (outerWholeDensity D right) := by
   have hw := (matchingProfileGeometry hD).2.2.1.1.continuous.measurable
   have hs := (measurableEmbedding_outerOutwardRadius right).measurable
   exact (measurable_const.mul (hw.comp hs)).div (measurable_id.pow_const 2)
+
+include hentry
 
 theorem outerWholeDensity_pos {x : ℝ}
     (hx : x ∈ Ico (outerOutwardRadius right entry)
@@ -105,6 +109,35 @@ theorem outerWholeDensity_initial_integral (f : ℝ → ℝ) {x : ℝ}
       (Eventually.of_forall (fun _ => ENNReal.ofReal_lt_top)),
     intervalIntegral.integral_of_le hx.1]
   apply integral_congr_ae
+  filter_upwards [ae_restrict_mem measurableSet_Ioc] with y hy
+  simp only [ENNReal.toReal_ofReal
+    (outerWholeDensity_pos hD hentry ⟨hy.1.le, hy.2.trans_lt hx.2⟩).le,
+    smul_eq_mul]
+
+/-- Integrability on an initial weighted interval has the same exact
+density conversion as its integral. -/
+theorem outerWholeDensity_initial_integrable_iff (f : ℝ → ℝ) {x : ℝ}
+    (hx : x ∈ Ico (outerOutwardRadius right entry)
+      (outerOutwardRadius right (tailPhysicalEndpoint D right))) :
+    IntegrableOn f (Iic x) (outerWholeMeasure D right entry) ↔
+      IntervalIntegrable (fun y => outerWholeDensity D right y * f y)
+        volume (outerOutwardRadius right entry) x := by
+  have hs : Iic x ∩ Ioo (outerOutwardRadius right entry)
+      (outerOutwardRadius right (tailPhysicalEndpoint D right)) =
+        Ioc (outerOutwardRadius right entry) x := by
+    ext y
+    constructor
+    · rintro ⟨hyx, hy⟩
+      exact ⟨hy.1, hyx⟩
+    · intro hy
+      exact ⟨hy.2, hy.1, hy.2.trans_lt hx.2⟩
+  rw [IntegrableOn, outerWholeMeasure_eq_density hentry,
+    restrict_withDensity measurableSet_Iic, Measure.restrict_restrict measurableSet_Iic, hs,
+    integrable_withDensity_iff_integrable_smul'
+      (outerWholeDensity_measurable (right := right) hD).ennreal_ofReal
+      (Eventually.of_forall (fun _ => ENNReal.ofReal_lt_top)),
+    intervalIntegrable_iff_integrableOn_Ioc_of_le hx.1]
+  apply integrable_congr
   filter_upwards [ae_restrict_mem measurableSet_Ioc] with y hy
   simp only [ENNReal.toReal_ofReal
     (outerWholeDensity_pos hD hentry ⟨hy.1.le, hy.2.trans_lt hx.2⟩).le,

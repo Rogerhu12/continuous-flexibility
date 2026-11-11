@@ -25,9 +25,9 @@ theorem morseRealized_region_block_same_side {M : MorseChainData} {σ : ℕ → 
   have hblock := (morseRealized_mem_block_iff_outward h right p hp r).mp hb
   have hpast : M.index ≤ i - 1 := by omega
   have hreghead := (morseRealized_outward_seam_strictMonoOn h side).monotoneOn
-    (show M.index ∈ Ici M.index from le_rfl) hpast hpast
+    (show M.index ∈ Ici M.index from by change M.index ≤ M.index; exact le_rfl) hpast hpast
   have hblockhead := (morseRealized_outward_seam_strictMonoOn h right).monotoneOn
-    (show M.index ∈ Ici M.index from le_rfl) hp hp
+    (show M.index ∈ Ici M.index from by change M.index ≤ M.index; exact le_rfl) hp hp
   have hR : outerOutwardRadius side (morseChainSeam M side M.index) <
       outerOutwardRadius side r := hreghead.trans_lt hreg.1
   have hB : outerOutwardRadius right (morseChainSeam M right M.index) ≤

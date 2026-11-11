@@ -71,7 +71,8 @@ theorem MorsePhysicalTailBasis.exists_wholeDeepBlocks
   · change ‖l2OperatorMeasureCongr hm.symm B‖ ≤ 64 / (j : ℝ) ^ 4
     rw [norm_l2OperatorMeasureCongr]
     exact hBn
-  · rw [p, Lp.norm_toLp, Lp.norm_toLp, hm]
+  · change ‖hP'.toLp F.P‖ = ‖hP.toLp F.P‖
+    rw [Lp.norm_toLp, Lp.norm_toLp, hm]
   · intro r hr
     rw [hm]
     apply hBr r
