@@ -95,9 +95,9 @@ theorem continuous_linearODE_endpoint {X E : Type*} [TopologicalSpace X]
     rw [gronwallBound_of_K_ne_0 (hK p).ne'] at h
     exact h
   have hlim : Tendsto majorant (𝓝 q) (𝓝 0) := by
-    simpa only [ContinuousAt, hzero] using (hmajorant.continuousAt : ContinuousAt majorant q)
-  rw [ContinuousAt, tendsto_iff_norm_sub_tendsto_zero]
-  exact squeeze_zero (fun _ => norm_nonneg _) hbound hlim
+    simpa only [hzero] using (hmajorant.continuousAt : ContinuousAt majorant q).tendsto
+  exact tendsto_iff_norm_sub_tendsto_zero.mpr
+    (squeeze_zero (fun _ => norm_nonneg _) hbound hlim)
 
 /-- The same statement with prescribed data at the right endpoint follows
 by reversing the real time coordinate. -/
