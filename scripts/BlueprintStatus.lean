@@ -30,3 +30,5 @@ run_cmd do
   logInfo m!"open: {openNodes}"
   let endpoint ← collectAxioms `FlexibleSphere.exists_closedBending
   logInfo m!"axioms of FlexibleSphere.exists_closedBending: {endpoint}"
+
+#print axioms ContinuousFlexibility.Blueprint.R08

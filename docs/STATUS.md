@@ -2,40 +2,52 @@
 
 Last updated: 2026-11-11.
 
-## Active line: R08
+## Completed line: R08
 
-`line/R08` is constructing the unchanged
+`line/R08` proves the unchanged theorem
 `R08 (hR03 : R03Statement) (hR07 : R07Statement) : R08Statement`.
-The work includes exact logarithmic-slope reconstruction, a two-sided C¹
-cutoff, physical dilation, compact surgery of accumulating profiles, and
-the actual Morse-to-deep-tail coordinate and mass/resistance estimates.
+It constructs the actual smooth global profile and nonzero second-mode field,
+keeps the complete selected natural tails after independent radius and amplitude
+scaling, provides every requested logarithmic cone-head length, and preserves
+each retained negative component and its radial travel exactly.
+
+The proof includes selected-entry normalization, the actual Morse natural-line
+and physical-flatness transport, positive inward cone continuation, a safe
+logarithmic-slope cutoff, a positive bridge between pure modes, full-germ central
+gluing, and construction of the accumulating cells and trace scaffold.
+
+At proof commit `eba49b574fdcaf641f592f7e12cf721693ba650e`,
+[CI passed all 3,938 build jobs](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43003235634).
+The blueprint audit lists R08 among the 14 proved nodes and rejects every
+nonstandard axiom; R08 has no `sorryAx` dependency. The dedicated
+`#print axioms ContinuousFlexibility.Blueprint.R08` is included in the
+unfiltered CI status step so its exact standard-axiom list is visible.
+
+The R08 import closure has 265 project modules: its wrapper,
+`Blueprint.Statements`, and 263 ordinary proof modules. All 263 ordinary
+modules are directly imported by the root. The source audit found no
+`sorry`, `admit`, project axiom, `unsafe`, `native_decide`, `sorryAx`,
+`ofReduceBool`, `trustCompiler`, `implemented_by`, or `extern` in this
+closure, and no missing local import or dependency cycle.
+The complete local definition dependency chain of R03Statement, R07Statement,
+and R08Statement is unchanged from main.
 
 The natural-line and physical-flatness dependency closure is reused from
 `line/R06b` at `eb1f4bd4ed3b73f4112ff2a7c72721c07b0de3aa` and
-`line/R06c` at `8a8c4537f12adbc5b0909b8cc81f320d4ab2f3a8`.
-These are ordinary proof modules; the open R06 blueprint nodes are not used.
-The shared scalar definitions move from `Statements/Radial.lean` to
-`Statements/DeepTailOperator.lean`, retaining their declaration names.
+`line/R06c` at `8a8c4537f12adbc5b0909b8cc81f320d4ab2f3a8`,
+with integration fixes checked by CI. These are ordinary proof modules;
+the open R06 blueprint nodes are not used. Shared scalar definitions move
+from `Statements/Radial.lean` to `Statements/DeepTailOperator.lean`,
+retaining their declaration names.
 
-The reused statement repair is exactly the compact-test clause in
+The shared test-support repair is exactly the compact-test clause in
 `TailEnergyCore`, `TailWeakDerivative`, and `TailDistributionGraph`:
-`Function.support ψ ⊆ Ioo entrance endCut` becomes
-`tsupport ψ ⊆ Ioo entrance endCut`. The ordinary support condition allows
-a compact smooth test to have support closure touching the boundary;
-the Friedrichs test core requires its compact support to lie in the open
-interval. This repair changes no R08 hypothesis or conclusion.
-The R06 assembly composition keeps the same signature and uses the
-corrected common operator definitions.
-
-The complete R08 proof source is now assembled without a local `sorry`:
-selected second-mode entrances, actual inward cone continuation, safe pure-mode
-cutoff, canonical positive bridge, central three-piece gluing, accumulating
-coordinate transport, and exact negative-component/travel preservation.
-The completion gate is still open until the complete source closure compiles
-and the explicit R08 axiom check reports only the three standard axioms.
-CI is the compiler for this line because this session has no shell execution
-environment. No compiled-module count is inferred from stale cross-branch
-cache artifacts.
+`Function.support ψ ⊆ Ioo T.entrance endCut` becomes
+`tsupport ψ ⊆ Ioo T.entrance endCut`. The ordinary support condition allows
+its closure to touch the boundary; the scalar Friedrichs test core requires
+compact support inside the open interval. None of these three changes occurs
+in the frozen R03/R07/R08 definition dependency chain. The assembly theorem
+signatures are unchanged, and `Blueprint/Assembly.lean` documents the repair.
 
 ## Completed line: Tame
 
@@ -74,24 +86,27 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 382 / 390 |
-| Modules in the root import | 340 |
-| Lines of Lean under `src/` | 93,574 |
-| Axiom audit (`lake build`, 3834 jobs) | passed: 11,293 declarations, 8,540 theorems |
-| Blueprint statements proved / total | 13 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus) |
+| Lean modules compiled / total | 505 / 510 |
+| Modules in the root import | 467 |
+| Lines of Lean under `src/` | 114,309 |
+| Axiom audit (`lake build`, 3,938 jobs) | passed; R08 has only standard axioms |
+| Blueprint statements proved / total | 14 / 42 (S01, S02, R01, R02, R03, R04, W01, ScalarCalculus, Tame, R05a, R08, N04Cubic, N04Transmission, N12) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 394 |
+| Modules on the module system | 1 (the Challenge) of 514 |
 
-These counts include main's completed N12 proof. The compiled count is the
-source import closure of the four successful default targets; it excludes
-stale artifacts restored from other branches. The 8 modules outside that
-default build are unfinished files of the earlier workflow:
-`Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
-`Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
-`Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
+These counts describe the successful R08 proof commit above. The compiled count
+is the source import closure of the four successful default targets, restricted
+to `src/ContinuousFlexibility/`. It excludes stale artifacts restored from
+other branches: the raw cache counter reported 525 / 510 and is not a source
+coverage count. Five source files remain outside those default targets, all
+unchanged from main and outside R08's dependency closure:
+`Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`,
+`Analysis.PhysicalJetMollification`, `Analysis.ProjectiveNewtonCommonOrbit`,
+and `Analysis.ProjectiveNewtonParameterGrowth`.
 
 ## What is proved
 
+- **Central–tail connection (R08).** The unchanged conditional milestone is proved with an actual global second-mode solution, arbitrary exact cone-head length, complete selected-tail retention, and exact negative-component/travel transport.
 - **Geometry (paper §2, part of §10).** `mainStatement_of_flatAnnularCore :
   Nonempty FlatAnnularCore → Statements.MainStatement` (`Contracts/SphereClosedBending.lean`).
   The whole remaining problem is `Nonempty FlatAnnularCore`.
