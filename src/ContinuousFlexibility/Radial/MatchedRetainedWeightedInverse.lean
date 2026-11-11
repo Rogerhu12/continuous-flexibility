@@ -215,7 +215,7 @@ theorem retainedMorseActualChain_signed_inverse_bound
         column hB models centralModel side r
       exact (P.retainedMorseModelChart_actual_weighted_column_bound
         hw hS G₀ hfirst k H bordered j column side r (tails side r).1 (tails side r).2
-        (hB side r) (models side r) A hpiece (a := 0) (γ := 1) (σ := σ sign)
+        (hB side r) (models side r) A hpiece (a := 0) (γ := 1)
         (by norm_num) (by norm_num) (hσ sign) hN hNa hj hCM (hrem side r)
         CW (hCW sign) i).trans htailP)
   have hends := modelInduction
