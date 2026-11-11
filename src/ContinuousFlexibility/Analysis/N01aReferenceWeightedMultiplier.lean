@@ -40,15 +40,19 @@ theorem n01a_reference_multiplier_memLp {D : ReferenceData}
         (K * W m) * (D.localizer m p.1 * F p) ^ 2 := by
     intro p
     by_cases hz : D.localizer m p.1 = 0
-    · simp only [hz, zero_mul, zero_pow (by decide : (2 : ℕ) ≠ 0), mul_zero]
+    · simp [hz]
     · have hp : p.1 ∈ D.cells m := hpart.2.2.1 m (Function.mem_support.mpr hz)
       calc
         _ = g p.1 ^ 2 * (D.localizer m p.1 * F p) ^ 2 := by dsimp only [V]; ring
         _ ≤ _ := mul_le_mul_of_nonneg_right (hbound m p.1 hp) (sq_nonneg _)
   have hVcell : RadialCellIntegrable D V := by
     intro m
-    have hm := ((((hpart.1 m).continuous.comp continuous_fst).aestronglyMeasurable.mul hVm)
-      .aemeasurable.pow_const (2 : ℕ)).aestronglyMeasurable
+    have hloc : AEStronglyMeasurable
+        (fun p : PolarPoint => D.localizer m p.1 * V p) (radialPhysicalMeasure D) :=
+      ((hpart.1 m).continuous.comp continuous_fst).aestronglyMeasurable.mul hVm
+    have hm : AEStronglyMeasurable
+        (fun p : PolarPoint => (D.localizer m p.1 * V p) ^ 2) (radialPhysicalMeasure D) :=
+      (hloc.aemeasurable.pow_const (2 : ℕ)).aestronglyMeasurable
     exact ((hcell.integrable_square m).const_mul (K * W m)).mono_nonneg hm
       (Eventually.of_forall fun _ => sq_nonneg _) (Eventually.of_forall (hmajor m))
   have hcells (m : ℕ) : referenceCellSquare D m V ≤ K * outputCellSquare D γ M F m := by

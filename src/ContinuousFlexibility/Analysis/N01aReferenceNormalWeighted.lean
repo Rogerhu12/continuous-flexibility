@@ -20,7 +20,8 @@ private theorem n01a_le_of_sqrt_product {I J : ℝ} (hI : 0 ≤ I) (hJ : 0 ≤ J
     (h : I ≤ Real.sqrt J * Real.sqrt I) : I ≤ J := by
   by_cases hz : I = 0
   · simpa only [hz] using hJ
-  have hp : 0 < Real.sqrt I := Real.sqrt_pos.mpr (lt_of_le_of_ne hI hz.symm)
+  have hp : 0 < Real.sqrt I :=
+    Real.sqrt_pos.mpr (lt_of_le_of_ne hI (fun he => hz he.symm))
   have hs : Real.sqrt I ≤ Real.sqrt J := by
     nlinarith [Real.sq_sqrt hI]
   have hsq := pow_le_pow_left₀ (Real.sqrt_nonneg I) hs 2
