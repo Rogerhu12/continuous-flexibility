@@ -2,6 +2,7 @@ import Mathlib.Analysis.Distribution.AEEqOfIntegralContDiff
 import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 import Mathlib.Analysis.Calculus.BumpFunction.Normed
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.Analysis.Calculus.ContDiff.Deriv
 import Mathlib.Analysis.Calculus.Deriv.Support
 
@@ -169,6 +170,7 @@ theorem interval_ae_constant_of_integral_deriv_zero {a b : ℝ} (hab : a < b)
     rw [integral_sub hφF (hφI.mul_const c), integral_mul_const, heq]
     exact sub_self _
   refine ⟨c, ?_⟩
+  change ∀ᵐ x ∂volume.restrict (Ioo a b), F x = c
   rw [ae_restrict_iff' measurableSet_Ioo]
   filter_upwards [hz] with x hx hxin
   exact sub_eq_zero.mp (hx hxin)
@@ -204,8 +206,8 @@ theorem intervalWeakPrimitive_absolutelyContinuous {a b x₀ l r : ℝ} {g : ℝ
     rw [uIcc_of_le hLR]
     intro x hx
     exact ⟨(min_le_right _ _).trans hx.1, hx.2.trans (le_max_right _ _)⟩
-  exact ((intervalIntegrable_of_locallyIntegrableOn_Ioo hg hL hR).
-    absolutelyContinuousOnInterval_intervalIntegral hx₀LR).mono hsub
+  have hi := intervalIntegrable_of_locallyIntegrableOn_Ioo hg hL hR
+  exact (hi.absolutelyContinuousOnInterval_intervalIntegral hx₀LR).mono hsub
 
 theorem continuousOn_intervalWeakPrimitive {a b x₀ : ℝ} {g : ℝ → ℝ}
     (hg : LocallyIntegrableOn g (Ioo a b)) (hx₀ : x₀ ∈ Ioo a b) :
@@ -263,7 +265,9 @@ theorem intervalWeakPrimitive_weakDerivative {a b x₀ : ℝ} {g : ℝ → ℝ}
       ∫ x in l..r, g x * ψ x := by
     apply intervalIntegral.integral_congr_ae
     filter_upwards [hgi.ae_hasDerivAt_integral] with x hx hxin
-    rw [(hx (uIoc_subset_uIcc hxin) x₀ hx₀cc).deriv]
+    have hd : deriv (intervalWeakPrimitive x₀ g) x = g x :=
+      (hx (uIoc_subset_uIcc hxin) x₀ hx₀cc).deriv
+    rw [hd]
   rw [hder] at hibp
   rw [interval_test_integral_eq hlr.le _ _ (support_deriv_subset.trans hψsmall),
     interval_test_integral_eq hlr.le _ _ ((subset_tsupport ψ).trans hψsmall)]
@@ -276,7 +280,8 @@ theorem exists_intervalWeakPrimitive_rep {a b x₀ : ℝ} {f g : ℝ → ℝ}
     (hx₀ : x₀ ∈ Ioo a b) (hweak : HasIntervalWeakDerivative a b f g) :
     ∃ c : ℝ, f =ᵐ[volume.restrict (Ioo a b)] fun x => c + intervalWeakPrimitive x₀ g x := by
   have hPcont := continuousOn_intervalWeakPrimitive hg hx₀
-  have hPloc := hPcont.locallyIntegrableOn measurableSet_Ioo
+  have hPloc : LocallyIntegrableOn (intervalWeakPrimitive x₀ g) (Ioo a b) volume :=
+    hPcont.locallyIntegrableOn measurableSet_Ioo
   have hPweak := intervalWeakPrimitive_weakDerivative hg hx₀
   let k : ℝ → ℝ := fun x => f x - intervalWeakPrimitive x₀ g x
   have hk : LocallyIntegrableOn k (Ioo a b) := hf.sub hPloc
@@ -336,7 +341,7 @@ theorem exists_interval_classical_rep {a b x₀ : ℝ} {f g : ℝ → ℝ}
     (hg.locallyIntegrableOn measurableSet_Ioo) hx₀ hweak
   refine ⟨c, fun x => c + intervalWeakPrimitive x₀ g x, fun _ => rfl, hc, ?_⟩
   intro x hx
-  simpa only [zero_add] using
+  simpa only [zero_add, Pi.add_apply] using
     (hasDerivAt_const x c).add (hasDerivAt_intervalWeakPrimitive hg hx₀ hx)
 
 end ContinuousFlexibility.Analysis

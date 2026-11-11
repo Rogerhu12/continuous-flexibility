@@ -79,6 +79,7 @@ theorem tailFirstOrderSystem_flux_eq {p u v : ℝ → ℝ} {Λ : ℝ} {s : Set �
     (hp₀ : ∀ x ∈ s, p x ≠ 0) (h : TailFirstOrderSystem p Λ u v s) :
     EqOn (fun x => p x * deriv u x) v s := by
   intro x hx
+  dsimp only
   rw [(h x hx).1.deriv]
   field_simp [hp₀ x hx] <;> ring
 
@@ -161,9 +162,10 @@ theorem tailFirstOrderSystem_wronskian_const
     ∀ x ∈ s, ∀ y ∈ s,
       tailFirstOrderWronskian u v U V x = tailFirstOrderWronskian u v U V y := by
   have hd := tailFirstOrderSystem_hasDerivAt_wronskian h h'
+  intro x hx y hy
   exact hs.is_const_of_deriv_eq_zero hc
     (fun x hx => (hd x hx).differentiableAt.differentiableWithinAt)
-    (fun x hx => (hd x hx).deriv)
+    (fun x hx => (hd x hx).deriv) hx hy
 
 private def tailFirstOrderField (p : ℝ → ℝ) (Λ x : ℝ) (z : ℝ × ℝ) : ℝ × ℝ :=
   ((p x)⁻¹ * z.2, -(Λ * p x) * z.1)
@@ -207,6 +209,7 @@ theorem tailFirstOrderSystem_eqOn_Icc
   have hLip (x : ℝ) (hx : x ∈ Icc a b) :
       LipschitzWith K (tailFirstOrderField p Λ x) := by
     have hmax : max ‖(p x)⁻¹‖ ‖Λ * p x‖ ≤ (K : ℝ) := by
+      change max ‖(p x)⁻¹‖ ‖Λ * p x‖ ≤ max 0 C
       simpa only [Prod.norm_def] using (hC x hx).trans (le_max_right 0 C)
     exact tailFirstOrderField_lipschitz
       ((le_max_left _ _).trans hmax) ((le_max_right _ _).trans hmax)
@@ -276,5 +279,41 @@ theorem tailFirstOrderSystem_zero_of_initial
     intro x _
     constructor <;> simpa only [zero_div, mul_zero] using hasDerivAt_const x (0 : ℝ)
   exact tailFirstOrderSystem_eq_of_initial hx₀ hp hp₀ h hz hu₀ hv₀
+
+/-- Smooth forcing is preserved by the same simultaneous bootstrap. This
+is the regularity interface for an actual Friedrichs resolvent representative. -/
+theorem tailForcedFirstOrderSystem_contDiffOn
+    {p ψ u v : ℝ → ℝ} {Λ : ℝ} {s : Set ℝ}
+    (hs : IsOpen s) (hp : ContDiffOn ℝ ∞ p s)
+    (hp₀ : ∀ x ∈ s, p x ≠ 0) (hψ : ContDiffOn ℝ ∞ ψ s)
+    (hu : ∀ x ∈ s, HasDerivAt u (v x / p x) x)
+    (hv : ∀ x ∈ s, HasDerivAt v (-p x * (ψ x + Λ * u x)) x) :
+    ContDiffOn ℝ ∞ u s ∧ ContDiffOn ℝ ∞ v s := by
+  have hdu : DifferentiableOn ℝ u s :=
+    fun x hx => (hu x hx).differentiableAt.differentiableWithinAt
+  have hdv : DifferentiableOn ℝ v s :=
+    fun x hx => (hv x hx).differentiableAt.differentiableWithinAt
+  have hreg : ∀ n : ℕ, ContDiffOn ℝ n u s ∧ ContDiffOn ℝ n v s := by
+    intro n
+    induction n with
+    | zero =>
+      exact ⟨contDiffOn_zero.mpr hdu.continuousOn, contDiffOn_zero.mpr hdv.continuousOn⟩
+    | succ n ih =>
+      have hpn : ContDiffOn ℝ n p s := (contDiffOn_infty.mp hp) n
+      have hψn : ContDiffOn ℝ n ψ s := (contDiffOn_infty.mp hψ) n
+      have hu' : ContDiffOn ℝ n (deriv u) s :=
+        (ih.2.div hpn hp₀).congr (fun x hx => (hu x hx).deriv)
+      have hv_rhs : ContDiffOn ℝ n (fun x => -p x * (ψ x + Λ * u x)) s :=
+        hpn.neg.mul (hψn.add (contDiffOn_const.mul ih.1))
+      have hv' : ContDiffOn ℝ n (deriv v) s :=
+        hv_rhs.congr (fun x hx => (hv x hx).deriv)
+      have hu_next : ContDiffOn ℝ ((n : ℕ∞ω) + 1) u s :=
+        (contDiffOn_succ_iff_deriv_of_isOpen hs).mpr ⟨hdu, by simp, hu'⟩
+      have hv_next : ContDiffOn ℝ ((n : ℕ∞ω) + 1) v s :=
+        (contDiffOn_succ_iff_deriv_of_isOpen hs).mpr ⟨hdv, by simp, hv'⟩
+      exact ⟨by simpa only [Nat.cast_add, Nat.cast_one] using hu_next,
+        by simpa only [Nat.cast_add, Nat.cast_one] using hv_next⟩
+  exact ⟨contDiffOn_infty.mpr (fun n => (hreg n).1),
+    contDiffOn_infty.mpr (fun n => (hreg n).2)⟩
 
 end ContinuousFlexibility.Radial

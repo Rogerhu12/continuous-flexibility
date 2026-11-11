@@ -17,6 +17,16 @@ namespace ContinuousFlexibility.Radial
 open Set Filter
 open scoped Topology
 
+/-- The existing gluing continues its first piece inward, so it has that
+piece's full germ at the first node. No matching assumption is needed here. -/
+theorem tailOutwardGlue_first_germ {enter : ℕ → ℝ} {piece : ℕ → ℝ → ℝ}
+    (hmono : StrictMono enter) :
+    morseOutwardGlue enter piece =ᶠ[𝓝 (enter 0)] piece 0 := by
+  filter_upwards [Iio_mem_nhds (hmono (Nat.lt_succ_self 0))] with x hx
+  by_cases h : x < enter 0
+  · simp only [morseOutwardGlue, ite_eq_left h]
+  · exact morseOutwardGlue_apply_block hmono ⟨le_of_not_gt h, hx⟩
+
 /-- Matching endpoint values make the half-open gluing equal to each piece
 on its whole closed edge. -/
 theorem tailOutwardGlue_apply_closed {enter : ℕ → ℝ} {piece : ℕ → ℝ → ℝ}
@@ -76,6 +86,25 @@ theorem tailOutwardGlue_hasDerivAt {enter : ℕ → ℝ} {endpoint : ℝ}
       have hU := hL.union hR
       rw [Icc_union_Icc_eq_Icc hn₀.le hn₁.le] at hU
       exact hU.hasDerivAt (Icc_mem_nhds hn₀ hn₁)
+
+/-- The same derivative statement includes the first node, using the
+first piece's full germ there. -/
+theorem tailOutwardGlue_hasDerivAt_Ico {enter : ℕ → ℝ} {endpoint : ℝ}
+    {piece slope : ℕ → ℝ → ℝ} (hmono : StrictMono enter)
+    (hlim : Tendsto enter atTop (𝓝 endpoint))
+    (hmatch : ∀ n, piece n (enter (n + 1)) = piece (n + 1) (enter (n + 1)))
+    (hslope : ∀ n, slope n (enter (n + 1)) = slope (n + 1) (enter (n + 1)))
+    (hderiv : ∀ n, ∀ x ∈ Icc (enter n) (enter (n + 1)),
+      HasDerivAt (piece n) (slope n x) x)
+    {x : ℝ} (hx : x ∈ Ico (enter 0) endpoint) :
+    HasDerivAt (morseOutwardGlue enter piece) (morseOutwardGlue enter slope x) x := by
+  rcases eq_or_lt_of_le hx.1 with rfl | hlt
+  · rw [morseOutwardGlue_apply_block hmono
+      (show enter 0 ∈ Ico (enter 0) (enter (0 + 1)) from
+        ⟨le_rfl, hmono (Nat.lt_succ_self 0)⟩)]
+    exact (hderiv 0 _ ⟨le_rfl, (hmono (Nat.lt_succ_self 0)).le⟩).congr_of_eventuallyEq
+      (tailOutwardGlue_first_germ hmono)
+  · exact tailOutwardGlue_hasDerivAt hmono hlim hmatch hslope hderiv ⟨hlt, hx.2⟩
 
 theorem tailOutwardGlue_continuousOn {enter : ℕ → ℝ} {endpoint : ℝ}
     {piece slope : ℕ → ℝ → ℝ} (hmono : StrictMono enter)

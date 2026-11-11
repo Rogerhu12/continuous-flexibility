@@ -29,8 +29,7 @@ theorem tail_poisson_pairing_integral_bounds {l r low high δ : ℝ}
         (high ^ 2 / (1 - δ)) * (∫ s in l..r, w s) := by
   have hden : 0 < 1 - δ := sub_pos.mpr hδ
   have hint : IntervalIntegrable (fun s => w s * h s * u s) volume l r := by
-    simpa only [Pi.mul_apply] using
-      ((hw.mul hh).mul hu).intervalIntegrable_of_Icc (μ := volume) hlr
+    exact ((hw.fun_mul hh).fun_mul hu).intervalIntegrable_of_Icc (μ := volume) hlr
   constructor
   · rw [← intervalIntegral.integral_const_mul]
     apply intervalIntegral.integral_mono_on hlr

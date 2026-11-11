@@ -341,3 +341,7 @@ import ContinuousFlexibility.Radial.TailEdgeGluing
 import ContinuousFlexibility.Radial.TailActualNodeCoefficients
 import ContinuousFlexibility.Radial.TailClassicalRegularity
 import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+import ContinuousFlexibility.Radial.TailPoissonInterpolationBounds
+import ContinuousFlexibility.Radial.TailActualNaturalNodes
+import ContinuousFlexibility.Radial.TailNaturalInterpolation
+import ContinuousFlexibility.Radial.TailResolventClassical
