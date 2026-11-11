@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.OuterNaturalPhysicalMass
 import ContinuousFlexibility.Radial.OuterNaturalPoisson
+import ContinuousFlexibility.Radial.DeepTailParameterContinuity
 
 /-!
 # The actual physical natural solution normalized at the deep entrance
@@ -18,15 +19,6 @@ open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
-
-theorem tailNaturalEquation_const_mul {T : DeepTailData}
-    (hT : DeepTailHypotheses T) {u : ℝ → ℝ} (hu : TailNaturalEquation T u) (c : ℝ) :
-    TailNaturalEquation T (fun x => c * u x) := by
-  refine ⟨contDiffAt_const.mul hu.1, contDiffOn_const.mul hu.2.1,
-    hu.2.2.1.const_mul c, ?_⟩
-  exact tailFirstOrderSystem_equation isOpen_Ioo
-    (fun x hx => (deepTail_pos hT x ⟨hx.1.le, hx.2⟩).ne')
-    ((tailNaturalEquation_system hT hu).const_mul c)
 
 /-- For the actual radial density the homogeneous source identity uses
 no independent physical-cell localization or recurrence assumption. -/
@@ -110,7 +102,7 @@ theorem exists_morsePhysicalDeepTail_natural_norm_bound
   obtain ⟨P, Q, hP, _, _, _, _, hPe, _, _, hnorm, _⟩ :=
     exists_tailNaturalPoisson_norm_bound hT hη hK
   let u : ℝ → ℝ := fun x => g⁻¹ * P x
-  have hu : TailNaturalEquation T u := tailNaturalEquation_const_mul hT hP g⁻¹
+  have hu : TailNaturalEquation T u := tailNaturalEquation_const_mul hP g⁻¹
   refine ⟨u, hu, ?_, ?_, ?_⟩
   · change g * (g⁻¹ * P (tailPhysicalLog right entrance)) = 1
     change P (tailPhysicalLog right entrance) = 1 at hPe

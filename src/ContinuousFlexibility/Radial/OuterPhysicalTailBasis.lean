@@ -204,7 +204,7 @@ theorem exists_morsePhysicalTailBasis
     logPFlux := fun x => g⁻¹ * ZP x
     logQ := q
     logQFlux := fun x => g * ZQ x
-    P_natural := tailNaturalEquation_const_mul hT hP g⁻¹
+    P_natural := tailNaturalEquation_const_mul hP g⁻¹
     P_smooth := contDiffOn_const.mul hPs
     Q_smooth := contDiffOn_const.mul hQs
     P_log_system := husys
