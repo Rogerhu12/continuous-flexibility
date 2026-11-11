@@ -75,7 +75,8 @@ theorem tail_finsupp_sum_ite (a : ℕ →₀ ℝ) (m : ℕ) (c : ℝ) :
   classical
   calc
     _ = a m * (if m = m then c else 0) :=
-      Finset.sum_eq_single m (fun n _ hnm => by simp only [if_neg hnm, mul_zero])
+      Finset.sum_eq_single (f := fun n => a n * (if n = m then c else 0)) m
+        (fun n _ hnm => by simp only [if_neg hnm, mul_zero])
         (fun hm => by rw [Finsupp.notMem_support_iff.mp hm, zero_mul])
     _ = _ := by rw [if_pos rfl]
 

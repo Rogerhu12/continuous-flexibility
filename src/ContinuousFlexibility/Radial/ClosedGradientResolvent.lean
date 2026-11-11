@@ -161,7 +161,7 @@ theorem closedGradientResolvent_tendsto
         ((congrArg (fun M : Submodule ℝ (GradientHilbert H) => w ∈ M) hclosure).mpr hw)
   rw [hproj] at ht
   have hf := ((WithLp.fstL 2 ℝ H H).continuous.tendsto _).comp ht
-  simpa only [WithLp.fstL_apply, closedGradientResolvent_apply,
+  simpa only [Function.comp_def, WithLp.fstL_apply, closedGradientResolvent_apply,
     closedGradientResolventPair_apply] using hf
 
 end ContinuousFlexibility.Radial

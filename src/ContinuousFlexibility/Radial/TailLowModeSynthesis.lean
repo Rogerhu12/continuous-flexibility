@@ -47,7 +47,8 @@ theorem tailFiniteEmbedding_apply (a : ι →₀ ℝ) (i : ι) :
   simp only [lp.coeFn_sum, Finset.sum_apply, lp.single_apply]
   calc
     _ = (Pi.single i (a i) : ι → ℝ) i :=
-      Finset.sum_eq_single i (fun j _ hji => Pi.single_eq_of_ne hji.symm _)
+      Finset.sum_eq_single (f := fun j => (Pi.single j (a j) : ι → ℝ) i) i
+        (fun j _ hji => Pi.single_eq_of_ne hji.symm _)
         (fun hi => by rw [Pi.single_eq_same, Finsupp.notMem_support_iff.mp hi])
     (Pi.single i (a i) : ι → ℝ) i = a i := Pi.single_eq_same _ _
 

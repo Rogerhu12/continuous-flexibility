@@ -82,7 +82,8 @@ theorem tailGap_poincare_trace {T : DeepTailData} (hT : DeepTailHypotheses T)
     (deepTail_node_lt_endpoint hT (n + 1))
   have htrace := (tailMass_poincare_trace hT hu n hz).1 (T.massEnd n)
     ⟨(deepTail_node_lt_massEnd hT n).le, le_rfl⟩
-  simpa only [mul_assoc] using tail_gap_mass_of_trace
+  simpa only [tailGapNormSq, tailGapMass, tailResistance, tailGapEnergy, mul_assoc] using
+    tail_gap_mass_of_trace
     (deepTail_massEnd_lt_succ_node hT n).le
     ((deepTail_contDiffOn hT).continuousOn.mono hs)
     (fun x hx => deepTail_pos hT x (hs hx)) hu
@@ -235,8 +236,10 @@ theorem tail_finite_high_energy_bound {T : DeepTailData} (hT : DeepTailHypothese
   have hp : ContinuousOn T.p (Icc T.entrance (T.node N)) :=
     (deepTail_contDiffOn hT).continuousOn.mono hs
   have hd : Continuous (deriv u) := (contDiff_one_iff_deriv.mp hu).2
-  rw [tail_integral_partition hT N (hp.mul (hu.continuous.pow 2).continuousOn),
-    tail_integral_partition hT N (hp.mul (hd.pow 2).continuousOn)]
+  rw [tail_integral_partition (f := fun x => T.p x * u x ^ 2) hT N
+      (hp.mul (hu.continuous.pow 2).continuousOn),
+    tail_integral_partition (f := fun x => T.p x * deriv u x ^ 2) hT N
+      (hp.mul (hd.pow 2).continuousOn)]
   change T.Λ * (tailInitialNormSq T u +
       ∑ n ∈ Finset.range N, (tailMassNormSq T u n + tailGapNormSq T u n)) ≤
     5 * T.η * (tailInitialEnergy T u +
