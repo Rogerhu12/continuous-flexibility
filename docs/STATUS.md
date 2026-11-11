@@ -2,6 +2,25 @@
 
 Last updated: 2026-11-11.
 
+## Active line: Tool-SobolevExtension
+
+`line/Tool-SobolevExtension` constructs one linear extension operator for all
+nonnegative integer Sobolev orders and supplies the operator three-lines theorem
+used in the angular inverse estimate. The extension proof is in progress; the
+initial three-lines and reflection-jet modules are being checked by CI.
+
+The appendix's three-lines shorthand reads exactly: "An analytic family of
+operators on a strip, bounded by M₀ and M₁ on its two boundary lines, is bounded
+by M₀^(1−ϑ) M₁^ϑ on the line Re z = ϑ." Boundary bounds alone are insufficient:
+`f(z) = exp(sin(π z))` is entire, has modulus one on Re z = 0 and Re z = 1,
+and has value e at z = 1/2. The Lean statement makes the standard omitted
+conditions explicit: continuity on the closed strip, holomorphy in its
+interior, and boundedness on the strip. For operator families these conditions
+are imposed separately on each vector, so no operator-norm continuity of
+imaginary spectral powers is required. A dense-domain version will supply the
+bounded extension needed when the spectral expression is initially defined
+only on a dense linear domain.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
