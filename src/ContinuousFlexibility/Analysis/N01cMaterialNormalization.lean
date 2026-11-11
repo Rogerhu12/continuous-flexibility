@@ -36,8 +36,9 @@ theorem le_normalizeMaterialE0 (T : MaterialData) (r : ℝ) :
   le_add_of_nonneg_right (Real.smoothTransition.nonneg _)
 
 theorem normalizeMaterialE0_le_add_one (T : MaterialData) (r : ℝ) :
-    (normalizeMaterialE0 T).E0 r ≤ T.E0 r + 1 :=
-  add_le_add_left (Real.smoothTransition.le_one _) _
+    (normalizeMaterialE0 T).E0 r ≤ T.E0 r + 1 := by
+  rw [normalizeMaterialE0_apply]
+  exact add_le_add le_rfl (Real.smoothTransition.le_one (2 - T.E0 r))
 
 theorem normalizeMaterialE0_eq_of_two_le (T : MaterialData) {r : ℝ}
     (hr : 2 ≤ T.E0 r) : (normalizeMaterialE0 T).E0 r = T.E0 r := by

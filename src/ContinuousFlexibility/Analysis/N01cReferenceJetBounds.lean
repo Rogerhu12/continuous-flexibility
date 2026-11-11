@@ -82,7 +82,7 @@ theorem radialE_cell_rpow_endpoint_le_E0
         congr 1
         ring
       _ ≤ |x - endpointX 1 (endpointDistance D r)| +
-          |endpointX 1 (endpointDistance D r) - (D.cellIndex m : ℝ)| := abs_add _ _
+          |endpointX 1 (endpointDistance D r) - (D.cellIndex m : ℝ)| := abs_add_le _ _
       _ ≤ Real.sqrt |Real.log d0| + B₀ := add_le_add hscale hi
       _ = B := rfl
   have hE : T.E0 r = materialE0 x := by

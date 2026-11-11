@@ -35,6 +35,35 @@ theorem SmoothDirections.restrict_D {U V : Set E} {f : E → F}
 
 end RestrictionIdentity
 
+
+section GenericEstimateRestriction
+
+variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+
+/-- Restrict a scalar directional tower and enlarge its one-high-factor bound.
+All algebra in this proof is over an abstract state space.  The scalar map
+`φ` may include a fixed spatial weight, so coefficient and flow restrictions
+use exactly the same proof. -/
+theorem exists_smoothDirections_restrict_oneHighWeight
+    {U V : Set E} {f : E → ℝ} {p : ℕ → Seminorm ℝ E}
+    {base base' high high' k : ℕ} {center : E} {φ : ℝ → ℝ} {K : ℝ}
+    (hV : IsOpen V) (hVU : V ⊆ U) (hp : Monotone p)
+    (hb : base ≤ base') (hh : high ≤ high') (hK : 0 ≤ K)
+    (h : ∃ J : SmoothDirections U f,
+      ∀ z ∈ U, ∀ v : Fin k → E,
+        φ (J.D k z v) ≤ K * oneHighVariationWeight p base high (z - center) v) :
+    ∃ J : SmoothDirections V f,
+      ∀ z ∈ V, ∀ v : Fin k → E,
+        φ (J.D k z v) ≤ K * oneHighVariationWeight p base' high' (z - center) v := by
+  obtain ⟨J, hJ⟩ := h
+  refine ⟨J.restrict hV hVU, ?_⟩
+  intro z hz v
+  change φ (J.D k z v) ≤ K * oneHighVariationWeight p base' high' (z - center) v
+  exact (hJ z (hVU hz) v).trans
+    (mul_le_mul_of_nonneg_left (oneHighVariationWeight_mono hp hb hh (z - center) v) hK)
+
+end GenericEstimateRestriction
+
 /-- The component weight multiplying the one-high-factor expression is
 nonnegative at every actual material sample. -/
 theorem n01_componentWeight_nonneg {D : ReferenceData} {T : MaterialData}
@@ -62,18 +91,17 @@ theorem coefficientFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
   obtain ⟨B, hB, hbound⟩ := h k s
   refine ⟨B, hB, ?_⟩
   intro m i a b p hab hp
-  obtain ⟨J, hJ⟩ := hbound m i a b p hab hp
-  refine ⟨J.restrict (E := AnnularState S × ℝ) (F := ℝ)
-      (isOpen_stateNeighborhood S C base' ε') hsub, ?_⟩
-  intro z hz v
-  rw [SmoothDirections.restrict_D]
-  exact (hJ z (hsub hz) v).trans
-    (mul_le_mul_of_nonneg_left
-      (oneHighVariationWeight_mono (E := AnnularState S × ℝ)
-        (p := pairGrading (stateGrading S) realGrading)
-        (jointStateGrading_monotone S) hb
-        (Nat.add_le_add_left hl s) (z - (C.referenceState, 0)) v)
-      (n01_componentWeight_nonneg hT hsample hB.le m))
+  exact exists_smoothDirections_restrict_oneHighWeight
+    (E := AnnularState S × ℝ)
+    (f := coefficientFamily D S C i a b p)
+    (p := pairGrading (stateGrading S) realGrading)
+    (base := base) (base' := base') (high := s + loss) (high' := s + loss')
+    (k := k) (center := (C.referenceState, 0)) (φ := fun t : ℝ => |t|)
+    (K := B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+    (isOpen_stateNeighborhood S C base' ε') hsub
+    (jointStateGrading_monotone S) hb (Nat.add_le_add_left hl s)
+    (n01_componentWeight_nonneg hT hsample hB.le m)
+    (hbound m i a b p hab hp)
 
 /-- The accumulating profile supplies the sample-membership hypothesis in the
 coefficient restriction theorem. -/
@@ -106,19 +134,21 @@ theorem ordinaryFlowFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
   obtain ⟨B, hB, hbound⟩ := hparameter s
   refine ⟨B, hB, ?_⟩
   intro m a b p hab hp
-  obtain ⟨J, hJ⟩ := hbound m a b p hab hp
-  refine ⟨J.restrict (E := AnnularState S × ℝ) (F := ℝ)
-      (isOpen_stateNeighborhood S C base' ε') hsub, ?_⟩
-  intro z hz v
-  rw [SmoothDirections.restrict_D]
-  exact (hJ z (hsub hz) v).trans
-    (mul_le_mul_of_nonneg_left
-      (oneHighVariationWeight_mono (E := AnnularState S × ℝ)
-        (p := pairGrading (stateGrading S) realGrading)
-        (jointStateGrading_monotone S) hb
-        (Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss)
-        (z - (C.referenceState, 0)) v)
-      (n01_componentWeight_nonneg hT hsample hB.le (C.cell m)))
+  exact exists_smoothDirections_restrict_oneHighWeight
+    (E := AnnularState S × ℝ)
+    (f := ordinaryFlowFamily S C m a b p)
+    (p := pairGrading (stateGrading S) realGrading)
+    (base := base) (base' := base')
+    (high := s + loss + parameterLoss) (high' := s + loss' + parameterLoss)
+    (k := k) (center := (C.referenceState, 0))
+    (φ := fun t : ℝ => min (p.1 - C.left m) (C.right m - p.1) ^ a * |t|)
+    (K := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B)
+    (isOpen_stateNeighborhood S C base' ε') hsub
+    (jointStateGrading_monotone S) hb
+    (Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss)
+    (n01_componentWeight_nonneg hT hsample hB.le (C.cell m))
+    (hbound m a b p hab hp)
 
 theorem ordinaryFlowFamilyTameBounds_mono_of_accumulatingProfile
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

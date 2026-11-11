@@ -86,17 +86,52 @@ def stateUJetCLM
       (statePhysicalHeightCLM S) +
     (if b = 0 then iteratedDeriv a S.chiLeft p.1 else 0) • stateLeftHeightCLM S
 
+private theorem scalarCombination_comp_apply
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (L : F →L[ℝ] ℝ) (P : E →L[ℝ] F) (Q : E →L[ℝ] ℝ) (c : ℝ) (x : E) :
+    (L.comp P + c • Q) x = L (P x) + c * Q x := by
+  simp only [add_apply, ContinuousLinearMap.comp_apply, smul_apply, smul_eq_mul]
+
+private theorem scalarCLM_apply
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (L : E →L[ℝ] ℝ) (c : ℝ) (x : E) :
+    (c • L) x = c * L x := by
+  simp only [smul_apply, smul_eq_mul]
+
+private theorem scalarDifference_apply
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (L M : E →L[ℝ] ℝ) (c d : ℝ) (x : E) :
+    (c • L - d • M) x = c * L x - d * M x := by
+  simp only [sub_apply, smul_apply, smul_eq_mul]
+
 set_option backward.isDefEq.respectTransparency true in
 theorem stateUJetCLM_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (a b : ℕ) (p : PolarPoint) (hp : p ∈ annularOpen D) (x : AnnularState S) :
     stateUJetCLM hT hS a b p hp x = mixedDerivative a b (stateU S x) p := by
-  rw [mixedDerivative_stateU hT hS a b p x]
-  simp only [stateUJetCLM, add_apply, ContinuousLinearMap.comp_apply,
-    statePhysicalHeightCLM_apply, stateLeftHeightCLM_apply, smul_apply, smul_eq_mul,
-    heightPhysicalJetCLM_apply]
-  ring
+  let L : (S.height (3 / 4 : ℝ)).Space →L[ℝ] ℝ :=
+    heightPhysicalJetCLM (D := D) (T := T) (γ := (3 / 4 : ℝ))
+      (M := S.height (3 / 4 : ℝ)) hT (hS.1 (3 / 4 : ℝ)) a b p hp
+  let c : ℝ := if b = 0 then iteratedDeriv a S.chiLeft p.1 else 0
+  have hL : L x.1.1 = mixedDerivative a b ((S.height (3 / 4 : ℝ)).decode x.1.1) p :=
+    heightPhysicalJetCLM_apply (D := D) (T := T) (γ := (3 / 4 : ℝ))
+      (M := S.height (3 / 4 : ℝ)) hT (hS.1 (3 / 4 : ℝ)) a b p hp x.1.1
+  have hphysical :
+      L (statePhysicalHeightCLM S x) =
+        mixedDerivative a b ((S.height (3 / 4 : ℝ)).decode x.1.1) p :=
+    (congrArg (fun u => L u) (statePhysicalHeightCLM_apply S x)).trans hL
+  have hscalar : c * stateLeftHeightCLM S x = x.1.2 * c :=
+    (congrArg (fun t : ℝ => c * t) (stateLeftHeightCLM_apply S x)).trans
+      (mul_comm c x.1.2)
+  calc
+    _ = L (statePhysicalHeightCLM S x) + c * stateLeftHeightCLM S x :=
+      scalarCombination_comp_apply L (statePhysicalHeightCLM S) (stateLeftHeightCLM S) c x
+    _ = mixedDerivative a b ((S.height (3 / 4 : ℝ)).decode x.1.1) p + x.1.2 * c :=
+      congrArg₂ (fun u v : ℝ => u + v) hphysical hscalar
+    _ = mixedDerivative a b (stateU S x) p :=
+      (mixedDerivative_stateU (D := D) (T := T) (S := S) hT hS a b p x).symm
 
 private theorem mixedDerivative_zero_zero (f : PolarPoint → ℝ) :
     mixedDerivative 0 0 f = f := by
@@ -186,8 +221,9 @@ theorem stateUHeightRadialCLM_apply
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (p : PolarPoint) (hp : p ∈ annularOpen D) (x : AnnularState S) :
     stateUHeightRadialCLM hT hS p hp x = heightRadial (stateU S x) p := by
-  rw [heightRadial_eq_firstMixedJet (smooth_actualStateU hT hS x)]
-  exact stateUJetCLM_apply hT hS 1 0 p hp x
+  exact (stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS 1 0 p hp x).trans
+    (heightRadial_eq_firstMixedJet (f := stateU S x)
+      (smooth_actualStateU hT hS x) p).symm
 
 set_option backward.isDefEq.respectTransparency true in
 theorem stateUHeightAngularCLM_apply
@@ -195,9 +231,17 @@ theorem stateUHeightAngularCLM_apply
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (p : PolarPoint) (hp : p ∈ annularOpen D) (x : AnnularState S) :
     stateUHeightAngularCLM hT hS p hp x = heightAngular (stateU S x) p := by
-  rw [heightAngular_eq_firstMixedJet (smooth_actualStateU hT hS x)]
-  simp only [stateUHeightAngularCLM, smul_apply, smul_eq_mul, stateUJetCLM_apply,
-    div_eq_mul_inv, mul_comm]
+  have hjet := stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS 0 1 p hp x
+  calc
+    _ = p.1⁻¹ * stateUJetCLM hT hS 0 1 p hp x :=
+      scalarCLM_apply (stateUJetCLM hT hS 0 1 p hp) p.1⁻¹ x
+    _ = p.1⁻¹ * mixedDerivative 0 1 (stateU S x) p :=
+      congrArg (fun t : ℝ => p.1⁻¹ * t) hjet
+    _ = mixedDerivative 0 1 (stateU S x) p / p.1 :=
+      (mul_comm _ _).trans (div_eq_mul_inv _ _).symm
+    _ = heightAngular (stateU S x) p :=
+      (heightAngular_eq_firstMixedJet (f := stateU S x)
+        (smooth_actualStateU hT hS x) p).symm
 
 set_option backward.isDefEq.respectTransparency true in
 theorem stateURadialHeightRadialCLM_apply
@@ -206,8 +250,9 @@ theorem stateURadialHeightRadialCLM_apply
     (p : PolarPoint) (hp : p ∈ annularOpen D) (x : AnnularState S) :
     stateURadialHeightRadialCLM hT hS p hp x =
       radialPartial (heightRadial (stateU S x)) p := by
-  rw [radialPartial_heightRadial_eq_secondMixedJet (smooth_actualStateU hT hS x)]
-  exact stateUJetCLM_apply hT hS 2 0 p hp x
+  exact (stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS 2 0 p hp x).trans
+    (radialPartial_heightRadial_eq_secondMixedJet (f := stateU S x)
+      (smooth_actualStateU hT hS x) p).symm
 
 set_option backward.isDefEq.respectTransparency true in
 theorem stateURadialHeightAngularCLM_apply
@@ -216,9 +261,24 @@ theorem stateURadialHeightAngularCLM_apply
     (p : PolarPoint) (hp : p ∈ annularOpen D) (hr : p.1 ≠ 0) (x : AnnularState S) :
     stateURadialHeightAngularCLM hT hS p hp x =
       radialPartial (heightAngular (stateU S x)) p := by
-  rw [radialPartial_heightAngular_eq_mixedJets (smooth_actualStateU hT hS x) hr]
-  simp only [stateURadialHeightAngularCLM, sub_apply, smul_apply, smul_eq_mul,
-    stateUJetCLM_apply, div_eq_mul_inv, mul_comm]
+  have hjet₁ := stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS 1 1 p hp x
+  have hjet₀ := stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS 0 1 p hp x
+  calc
+    _ = p.1⁻¹ * stateUJetCLM hT hS 1 1 p hp x -
+        (p.1 ^ 2)⁻¹ * stateUJetCLM hT hS 0 1 p hp x :=
+      scalarDifference_apply (stateUJetCLM hT hS 1 1 p hp)
+        (stateUJetCLM hT hS 0 1 p hp) p.1⁻¹ (p.1 ^ 2)⁻¹ x
+    _ = p.1⁻¹ * mixedDerivative 1 1 (stateU S x) p -
+        (p.1 ^ 2)⁻¹ * mixedDerivative 0 1 (stateU S x) p :=
+      congrArg₂ (fun u v : ℝ => p.1⁻¹ * u - (p.1 ^ 2)⁻¹ * v) hjet₁ hjet₀
+    _ = mixedDerivative 1 1 (stateU S x) p / p.1 -
+        mixedDerivative 0 1 (stateU S x) p / p.1 ^ 2 :=
+      congrArg₂ (fun u v : ℝ => u - v)
+        ((mul_comm _ _).trans (div_eq_mul_inv _ _).symm)
+        ((mul_comm _ _).trans (div_eq_mul_inv _ _).symm)
+    _ = radialPartial (heightAngular (stateU S x)) p :=
+      (radialPartial_heightAngular_eq_mixedJets (f := stateU S x)
+        (smooth_actualStateU hT hS x) hr).symm
 
 set_option backward.isDefEq.respectTransparency true in
 theorem stateUAngularHeightAngularCLM_apply
@@ -227,9 +287,17 @@ theorem stateUAngularHeightAngularCLM_apply
     (p : PolarPoint) (hp : p ∈ annularOpen D) (hr : p.1 ≠ 0) (x : AnnularState S) :
     stateUAngularHeightAngularCLM hT hS p hp x =
       angularPartial (heightAngular (stateU S x)) p := by
-  rw [angularPartial_heightAngular_eq_secondMixedJet (smooth_actualStateU hT hS x) hr]
-  simp only [stateUAngularHeightAngularCLM, smul_apply, smul_eq_mul,
-    stateUJetCLM_apply, div_eq_mul_inv, mul_comm]
+  have hjet := stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS 0 2 p hp x
+  calc
+    _ = p.1⁻¹ * stateUJetCLM hT hS 0 2 p hp x :=
+      scalarCLM_apply (stateUJetCLM hT hS 0 2 p hp) p.1⁻¹ x
+    _ = p.1⁻¹ * mixedDerivative 0 2 (stateU S x) p :=
+      congrArg (fun t : ℝ => p.1⁻¹ * t) hjet
+    _ = mixedDerivative 0 2 (stateU S x) p / p.1 :=
+      (mul_comm _ _).trans (div_eq_mul_inv _ _).symm
+    _ = angularPartial (heightAngular (stateU S x)) p :=
+      (angularPartial_heightAngular_eq_secondMixedJet (f := stateU S x)
+        (smooth_actualStateU hT hS x) hr).symm
 
 private def jointStateFunctionalSmoothDirections {S : PhysicalSpacesData}
     {f : AnnularState S → ℝ} (L : AnnularState S →L[ℝ] ℝ)
