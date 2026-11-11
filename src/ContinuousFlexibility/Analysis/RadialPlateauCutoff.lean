@@ -31,17 +31,18 @@ theorem smoothTransition_iteratedDeriv_bounded (n : ℕ) :
     have hsupp : HasCompactSupport (iteratedDeriv (n + 1) Real.smoothTransition) := by
       apply HasCompactSupport.intro (K := Icc (0 : ℝ) 1) isCompact_Icc
       intro x hx
-      rcases not_mem_Icc.mp hx with hx | hx
+      simp only [mem_Icc, not_and_or, not_le] at hx
+      rcases hx with hx | hx
       · have hn : ∀ᶠ y : ℝ in 𝓝 x, y < 0 := Iio_mem_nhds hx
         have heq : Real.smoothTransition =ᶠ[𝓝 x] (fun _ : ℝ => 0) :=
           hn.mono (fun y hy => Real.smoothTransition.zero_of_nonpos hy.le)
         simpa only [iteratedDeriv_const, Nat.add_eq_zero_iff, one_ne_zero, and_false,
-          ite_eq_right] using heq.iteratedDeriv_eq (n + 1)
+          ite_false] using heq.iteratedDeriv_eq (n + 1)
       · have hn : ∀ᶠ y : ℝ in 𝓝 x, 1 < y := Ioi_mem_nhds hx
         have heq : Real.smoothTransition =ᶠ[𝓝 x] (fun _ : ℝ => 1) :=
           hn.mono (fun y hy => Real.smoothTransition.one_of_one_le hy.le)
         simpa only [iteratedDeriv_const, Nat.add_eq_zero_iff, one_ne_zero, and_false,
-          ite_eq_right] using heq.iteratedDeriv_eq (n + 1)
+          ite_false] using heq.iteratedDeriv_eq (n + 1)
     have hc := hreg.continuous_iteratedDeriv (n + 1) (by simp)
     obtain ⟨K, hK⟩ := hsupp.exists_bound_of_continuous hc
     refine ⟨max K 0, le_max_right _ _, fun x => ?_⟩
@@ -76,7 +77,8 @@ theorem radialPlateauCutoff_one {l r δ : ℝ} (hδ : 0 < δ)
 
 theorem radialPlateauCutoff_zero {l r δ : ℝ} (hδ : 0 < δ)
     {x : ℝ} (hx : x ∉ Ioo (l - δ) (r + δ)) : radialPlateauCutoff l r δ x = 0 := by
-  rcases not_mem_Ioo.mp hx with hx | hx
+  simp only [mem_Ioo, not_and_or, not_lt] at hx
+  rcases hx with hx | hx
   · have harg : (x - l) / δ + 1 ≤ 0 := by
       have hdiv : (x - l) / δ ≤ -1 := (div_le_iff₀ hδ).mpr (by linarith)
       linarith

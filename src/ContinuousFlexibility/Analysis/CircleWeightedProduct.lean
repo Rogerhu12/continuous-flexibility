@@ -18,7 +18,7 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace ContinuousFlexibility.Statements
 
-open Set Filter MeasureTheory
+open Set Filter MeasureTheory ContinuousFlexibility.Analysis
 open scoped ContDiff ENNReal NNReal BigOperators Topology
 
 def circleProductJetConstant (s : ℕ) (B : ℝ) : ℝ :=
@@ -38,6 +38,7 @@ theorem circleProductJetConstant_row_le {b s : ℕ} {B : ℝ}
     (hB : 0 ≤ B) (hb : b ≤ s) :
     (∑ i ∈ Finset.range (b + 1), (b.choose i : ℝ) * (B * (2 * circleSobolevConstant))) ≤
       circleProductJetConstant s B := by
+  unfold circleProductJetConstant
   apply Finset.single_le_sum _ (Finset.mem_range.mpr (by omega))
   intro n hn
   apply Finset.sum_nonneg
@@ -112,6 +113,7 @@ theorem circleMember_mul_of_uniform_jets
   · intro m
     refine ⟨(hv m).1.mul (hu.1 m).1, ?_⟩
     intro θ
+    change v m (θ + Real.pi) * u m (θ + Real.pi) = v m θ * u m θ
     rw [(hv m).2 θ, (hu.1 m).2 θ]
   · exact hM
   · exact hH
@@ -163,12 +165,16 @@ def circleProductFieldBilinear (S : CircleModelData) :
     apply LinearMap.ext
     intro w
     funext m θ
-    simp only [LinearMap.add_apply, map_add, Pi.add_apply, add_mul]
+    change S.decode (u + v) m θ * S.decode w m θ =
+      S.decode u m θ * S.decode w m θ + S.decode v m θ * S.decode w m θ
+    simp only [map_add, Pi.add_apply, add_mul]
   map_smul' c u := by
     apply LinearMap.ext
     intro v
     funext m θ
-    simp only [LinearMap.smul_apply, map_smul, Pi.smul_apply, RingHom.id_apply, smul_eq_mul]
+    change S.decode (c • u) m θ * S.decode v m θ =
+      c • (S.decode u m θ * S.decode v m θ)
+    simp only [map_smul, Pi.smul_apply, RingHom.id_apply, smul_eq_mul]
     ring
 
 def circleProductBilinear

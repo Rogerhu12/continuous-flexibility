@@ -33,34 +33,40 @@ theorem stateExternalParameterLine (S : PhysicalSpacesData)
   change (x + q • (0 : AnnularState S), (0 : ℝ) + q • (1 : ℝ)) = (x, q)
   simp only [smul_zero, add_zero, smul_eq_mul, mul_one, zero_add]
 
+theorem oneHighVariationWeight_finOne
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (base high : ℕ) (z v : E) :
+    oneHighVariationWeight p base high z (fun _ : Fin 1 => v) =
+      (1 + p high z) * p base v + p high v := by
+  classical
+  have hu : (Finset.univ : Finset (Fin 1)) = {0} := by
+    ext i
+    simp [Subsingleton.elim i (0 : Fin 1)]
+  simp only [oneHighVariationWeight, hu, Finset.prod_singleton,
+    Finset.sum_singleton, Finset.erase_singleton, Finset.prod_empty, mul_one]
+
 theorem oneHighVariationWeight_externalParameter
     (S : PhysicalSpacesData) (base high : ℕ) (x : AnnularState S) (q : ℝ) :
     oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
       base high (x, q) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) =
         2 + stateGrading S high x + |q| := by
-  classical
-  have hu : (Finset.univ : Finset (Fin 1)) = {0} := by
-    ext i
-    simp [Subsingleton.elim i (0 : Fin 1)]
   have hunit (n : ℕ) :
       pairGrading (stateGrading S) realGrading n ((0 : AnnularState S), (1 : ℝ)) = 1 := by
     change stateGrading S n (0 : AnnularState S) + realGrading n (1 : ℝ) = 1
-    rw [(stateGrading S n).map_zero']
-    change (0 : ℝ) + |1| = 1
-    norm_num
-  have hfin {E : Type*} [AddCommGroup E] [Module ℝ E]
-      (p : ℕ → Seminorm ℝ E) (z v : E) :
-      oneHighVariationWeight p base high z (fun _ : Fin 1 => v) =
-        (1 + p high z) * p base v + p high v := by
-    simp only [oneHighVariationWeight, hu, Finset.prod_singleton,
-      Finset.sum_singleton, Finset.erase_singleton, Finset.prod_empty, mul_one]
-  have he := hfin (pairGrading (stateGrading S) realGrading)
-    (x, q) ((0 : AnnularState S), (1 : ℝ))
+    have hr : realGrading n (1 : ℝ) = 1 := by change |(1 : ℝ)| = 1; norm_num
+    exact (congrArg₂ (fun a b : ℝ => a + b) (stateGrading S n).map_zero' hr).trans
+      (zero_add 1)
+  have he := oneHighVariationWeight_finOne (pairGrading (stateGrading S) realGrading)
+    base high (x, q) ((0 : AnnularState S), (1 : ℝ))
   apply he.trans
   have hpair : pairGrading (stateGrading S) realGrading high (x, q) =
       stateGrading S high x + |q| := rfl
-  rw [hunit base, hunit high, mul_one, hpair]
-  ring
+  calc
+    _ = (1 + (stateGrading S high x + |q|)) * 1 + 1 :=
+      congrArg₂ (fun a b : ℝ => a + b)
+        (congrArg₂ (fun a b : ℝ => a * b)
+          (congrArg (fun t : ℝ => 1 + t) hpair) (hunit base)) (hunit high)
+    _ = _ := by ring
 
 /-- The two-dimensional chain rule is normalized before any physical
 state data are substituted. -/
@@ -110,6 +116,33 @@ theorem N01Properties.minusFlow_q_hasDerivAt
   obtain ⟨J, _⟩ := hb m 0 0 (r, θ) (by norm_num) hr
   exact (ordinaryFlow_q_hasDerivAt_of_tower J hxq).differentiableAt.hasDerivAt
 
+theorem ordinaryFlow_q_derivative_bound_of_tower
+    {m high : ℕ} {r θ : ℝ}
+    (J : SmoothDirections (stateNeighborhood S C base ε)
+      (ordinaryFlowFamily S C m 0 0 (r, θ)))
+    {x : AnnularState S} {q A : ℝ}
+    (hxq : (x, q) ∈ stateNeighborhood S C base ε)
+    (hbound : |J.D 1 (x, q)
+      (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))| ≤
+      A * oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+        base high ((x, q) - (C.referenceState, 0))
+          (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) :
+    |deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q| ≤
+      A * (2 + stateGrading S high (x - C.referenceState) + |q|) := by
+  have hd := (ordinaryFlow_q_hasDerivAt_of_tower J hxq).deriv
+  have hweight :
+      oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+        base high ((x, q) - (C.referenceState, 0))
+          (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) =
+        2 + stateGrading S high (x - C.referenceState) + |q| := by
+    change oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+      base high (x - C.referenceState, q - 0)
+        (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) = _
+    simpa only [sub_zero] using
+      oneHighVariationWeight_externalParameter S base high (x - C.referenceState) q
+  exact (congrArg abs hd).trans_le
+    (hbound.trans_eq (congrArg (fun t : ℝ => A * t) hweight))
+
 /-- The true external-parameter derivative inherits the exact N01 weight. -/
 theorem N01Properties.minusFlow_q_derivative_weight_bound
     (hN : N01Properties D T S C base loss ε) :
@@ -125,29 +158,9 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
   obtain ⟨B, hB, hb⟩ := hflow 1 0
   refine ⟨B, hB, fun x q hxq m r θ hr => ?_⟩
   obtain ⟨J, hJ⟩ := hb m 0 0 (r, θ) (by norm_num) hr
-  have hd := (ordinaryFlow_q_hasDerivAt_of_tower J hxq).deriv
-  have hbound := hJ (x, q) hxq
-    (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
-  have hweight :
-      oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base (0 + loss) ((x, q) - (C.referenceState, 0))
-          (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) =
-        2 + stateGrading S loss (x - C.referenceState) + |q| := by
-    change oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-      base loss (x - C.referenceState, q - 0)
-        (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) = _
-    simpa only [sub_zero] using
-      oneHighVariationWeight_externalParameter S base loss (x - C.referenceState) q
-  calc
-    _ = |J.D 1 (x, q) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))| :=
-      congrArg abs hd
-    _ ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (C.cell m)) ^ B *
-        oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (0 + loss) ((x, q) - (C.referenceState, 0))
-          (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))) := by
-      simpa only [pow_zero, one_mul] using hbound
-    _ = _ := by rw [hweight]
+  apply ordinaryFlow_q_derivative_bound_of_tower (high := loss) J hxq
+  simpa only [pow_zero, one_mul] using
+    hJ (x, q) hxq (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
 
 /-- For a fixed state and component, the derivative bound is uniform in
 the radial point, the external parameter in the N01 neighborhood, and

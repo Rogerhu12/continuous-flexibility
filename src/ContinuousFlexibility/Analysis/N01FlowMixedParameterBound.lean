@@ -29,6 +29,18 @@ theorem stateMixedExternalParameterLine (S : PhysicalSpacesData)
     ((0 : ℝ) + t • (0 : ℝ)) + q • (1 : ℝ)) = (x + t • η, q)
   simp only [smul_zero, add_zero, smul_eq_mul, mul_one, zero_add]
 
+theorem oneHighVariationWeight_finTwo_zero
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (base high : ℕ) (v w : E) :
+    oneHighVariationWeight p base high 0 (Fin.cons v (fun _ : Fin 1 => w)) =
+      p base v * p base w + (p high v * p base w + p high w * p base v) := by
+  classical
+  have he0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
+  have he1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
+  simp only [oneHighVariationWeight, Fin.prod_univ_two, Fin.sum_univ_two,
+    he0, he1, Finset.prod_singleton, Fin.cons_zero, Fin.cons_one,
+    (p high).map_zero', add_zero, one_mul]
+
 theorem oneHighVariationWeight_state_external_zero
     (S : PhysicalSpacesData) (base high : ℕ) (η : AnnularState S) :
     oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
@@ -36,30 +48,20 @@ theorem oneHighVariationWeight_state_external_zero
       (Fin.cons (η, (0 : ℝ))
         (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) =
       2 * stateGrading S base η + stateGrading S high η := by
-  classical
-  have he0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
-  have he1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
   have hstate (n : ℕ) :
       pairGrading (stateGrading S) realGrading n (η, (0 : ℝ)) =
         stateGrading S n η := by
     change stateGrading S n η + realGrading n (0 : ℝ) = _
-    rw [(realGrading n).map_zero', add_zero]
+    exact (congrArg (fun t : ℝ => stateGrading S n η + t) (realGrading n).map_zero').trans
+      (add_zero _)
   have hparameter (n : ℕ) :
       pairGrading (stateGrading S) realGrading n ((0 : AnnularState S), (1 : ℝ)) = 1 := by
     change stateGrading S n (0 : AnnularState S) + realGrading n (1 : ℝ) = 1
-    rw [(stateGrading S n).map_zero']
-    change (0 : ℝ) + |1| = 1
-    norm_num
-  have hfin {E : Type*} [AddCommGroup E] [Module ℝ E]
-      (p : ℕ → Seminorm ℝ E) (v w : E) :
-      oneHighVariationWeight p base high 0
-        (Fin.cons v (fun _ : Fin 1 => w)) =
-        p base v * p base w + (p high v * p base w + p high w * p base v) := by
-    simp only [oneHighVariationWeight, Fin.prod_univ_two, Fin.sum_univ_two,
-      he0, he1, Finset.prod_singleton, Fin.cons_zero, Fin.cons_one,
-      (p high).map_zero', add_zero, one_mul]
-  apply (hfin (pairGrading (stateGrading S) realGrading)
-    (η, (0 : ℝ)) ((0 : AnnularState S), (1 : ℝ))).trans
+    have hr : realGrading n (1 : ℝ) = 1 := by change |(1 : ℝ)| = 1; norm_num
+    exact (congrArg₂ (fun a b : ℝ => a + b) (stateGrading S n).map_zero' hr).trans
+      (zero_add 1)
+  apply (oneHighVariationWeight_finTwo_zero (pairGrading (stateGrading S) realGrading)
+    base high (η, (0 : ℝ)) ((0 : AnnularState S), (1 : ℝ))).trans
   rw [hstate, hstate, hparameter, hparameter]
   simp only [mul_one, one_mul]
   ring

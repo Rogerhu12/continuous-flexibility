@@ -85,10 +85,12 @@ theorem monotoneOn_materialM : MonotoneOn materialM (Ici 0) := by
 theorem exists_materialM_scale_for_extra_order
     {p σ : ℝ} (hσ : 0 < σ) :
     ∃ C : ℝ, 1 < C ∧ p * materialMScale C ≤ p + σ := by
+  have hpower : ContinuousAt (fun C : ℝ => C ^ (5 / 2 : ℝ)) 1 :=
+    (Real.continuous_rpow_const (by norm_num : (0 : ℝ) ≤ 5 / 2)).continuousAt
+  have hlog : ContinuousAt (fun C : ℝ => (Real.log C + 1) ^ 2) 1 :=
+    ((Real.continuousAt_log one_ne_zero).add continuousAt_const).pow 2
   have hc : ContinuousAt (fun C : ℝ => p * materialMScale C) 1 :=
-    continuousAt_const.mul
-      (((Real.continuous_rpow_const (by norm_num : (0 : ℝ) ≤ 5 / 2)).continuousAt).mul
-        ((Real.continuousAt_log one_ne_zero).add continuousAt_const).pow 2)
+    continuousAt_const.mul (hpower.mul hlog)
   have hn : ∀ᶠ C : ℝ in 𝓝 1, p * materialMScale C < p + σ :=
     hc.eventually (Iio_mem_nhds (by
       simp only [materialMScale, Real.one_rpow, Real.log_one, zero_add,
@@ -122,23 +124,30 @@ theorem materialM_rpow_le_of_scale_or_bound
 
 /-- A bounded coordinate displacement costs an arbitrarily small fixed
 positive extra material order; the constant may depend on the input order. -/
-theorem materialM_rpow_bounded_shift
+theorem materialM_rpow_oneSided_shift
     {p σ L : ℝ} (hp : 0 ≤ p) (hσ : 0 < σ) (hL : 0 ≤ L) :
-    ∃ K : ℝ, 0 < K ∧ ∀ x y : ℝ, 0 ≤ x → 0 ≤ y → |x - y| ≤ L →
+    ∃ K : ℝ, 0 < K ∧ ∀ x y : ℝ, 0 ≤ x → 0 ≤ y → x ≤ y + L →
       materialM x ^ p ≤ K * materialM y ^ (p + σ) := by
   obtain ⟨C, hC, hscale⟩ := exists_materialM_scale_for_extra_order (p := p) hσ
   let R := L / (C - 1) + L
   have hR : 0 ≤ R := add_nonneg (div_nonneg hL (sub_pos.mpr hC).le) hL
-  refine ⟨materialM R ^ p, Real.rpow_pos_of_pos (materialM_pos R) _, fun x y hx hy hdist => ?_⟩
+  refine ⟨materialM R ^ p, Real.rpow_pos_of_pos (materialM_pos R) _, fun x y hx hy hxyL => ?_⟩
   apply materialM_rpow_le_of_scale_or_bound hp hσ hC.le hscale hR hx hy
   by_cases hxy : x ≤ C * y
   · exact Or.inl hxy
   · right
     have hyx : C * y ≤ x := (lt_of_not_ge hxy).le
-    have hxyL : x ≤ y + L := by linarith only [(abs_le.mp hdist).2]
     have hyL : y ≤ L / (C - 1) := by
       apply (le_div_iff₀ (sub_pos.mpr hC)).mpr
       nlinarith only [hyx, hxyL]
-    exact hxyL.trans (add_le_add_right hyL L)
+    exact hxyL.trans (add_le_add hyL le_rfl)
+
+theorem materialM_rpow_bounded_shift
+    {p σ L : ℝ} (hp : 0 ≤ p) (hσ : 0 < σ) (hL : 0 ≤ L) :
+    ∃ K : ℝ, 0 < K ∧ ∀ x y : ℝ, 0 ≤ x → 0 ≤ y → |x - y| ≤ L →
+      materialM x ^ p ≤ K * materialM y ^ (p + σ) := by
+  obtain ⟨K, hK, hb⟩ := materialM_rpow_oneSided_shift hp hσ hL
+  refine ⟨K, hK, fun x y hx hy hxy => hb x y hx hy ?_⟩
+  linarith only [(abs_le.mp hxy).2]
 
 end ContinuousFlexibility.Analysis

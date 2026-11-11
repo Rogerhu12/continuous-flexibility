@@ -212,12 +212,15 @@ theorem returnCorrectionResidualErrorField_sourceIntegral_eq_zero
         returnCorrectionAngularErrorFlux D S C R χ z ρ η (r, 0)) :
     physicalSourceIntegral D (returnCorrectionResidualErrorField D S C R χ z ρ η) = 0 := by
   have hab : D.a ≤ D.b := ((hC.1 0).1.trans ((hC.1 0).2.1.trans (hC.1 0).2.2)).le
-  rw [physicalSourceIntegral_congr_on_annularOpen D hab
-    (returnCorrectionResidualErrorField D S C R χ z ρ η)
-    (fun p => radialPartial (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p +
-      angularPartial (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p)
-    (fun p hp => by simp only [returnCorrectionResidualErrorField, if_pos hp];
-      rfl)]
+  have hfield : ∀ p ∈ annularOpen D,
+      returnCorrectionResidualErrorField D S C R χ z ρ η p =
+        radialPartial (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p +
+          angularPartial (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p := by
+    intro p hp
+    unfold returnCorrectionResidualErrorField
+    rw [if_pos hp]
+    rfl
+  rw [physicalSourceIntegral_congr_on_annularOpen D hab _ _ hfield]
   apply physicalSourceIntegral_divergence_eq_zero D _ _ hF hG hperiod
   intro θ _
   rw [(returnCorrectionErrorFluxes_zero_outside hC R χ z ρ η (D.b, θ)

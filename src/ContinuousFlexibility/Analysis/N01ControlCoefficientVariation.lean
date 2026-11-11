@@ -169,6 +169,34 @@ theorem N01Properties.coefficientFamily_singleton_line_deriv_radial
     (hgeom.1.2.2.1.1.differentiable (by simp) p.1)
     ((hcontrol.2.2.2.2.2.1 m).1.differentiable (by simp) p.1)).deriv
 
+theorem N01Properties.coefficientTower_singleton_zero
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (m : ℕ) (p : PolarPoint)
+    (J : SmoothDirections (stateNeighborhood S C base ε)
+      (coefficientFamily D S C 0 0 0 p))
+    (hx : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε) :
+    J.D 1 (C.referenceState, 0)
+      (fun _ : Fin 1 => (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) =
+      D.w p.1 * C.control m p.1 := by
+  have hline := J.deriv_line (C.referenceState, 0)
+    (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)) hx
+  exact hline.symm.trans (hN.coefficientFamily_singleton_line_deriv_zero hS hT m p)
+
+theorem N01Properties.coefficientTower_singleton_radial
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (m : ℕ) (p : PolarPoint)
+    (J : SmoothDirections (stateNeighborhood S C base ε)
+      (coefficientFamily D S C 0 1 0 p))
+    (hx : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε) :
+    J.D 1 (C.referenceState, 0)
+      (fun _ : Fin 1 => (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) =
+      deriv D.w p.1 * C.control m p.1 + D.w p.1 * deriv (C.control m) p.1 := by
+  have hline := J.deriv_line (C.referenceState, 0)
+    (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)) hx
+  exact hline.symm.trans (hN.coefficientFamily_singleton_line_deriv_radial hS hT m p)
+
 /-- The same constant controls the two product jets at every actual
 reference cell, independently of the control label. -/
 theorem N01Properties.control_product_jets_cell_bound
@@ -184,22 +212,26 @@ theorem N01Properties.control_product_jets_cell_bound
   rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, hcoeff, _⟩
   obtain ⟨B, hB, hbound⟩ := hcoeff 1 1
   refine ⟨B, hB, fun m j r hr => ?_⟩
-  dsimp only
-  let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
+  let v : AnnularState S := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
+  let A : ℝ := B * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
+    (stateGrading S base v + stateGrading S (1 + loss) v)
+  change |D.w r * C.control m r| ≤ A ∧
+    |deriv D.w r * C.control m r + D.w r * deriv (C.control m) r| ≤ A
   have hz0 : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
-    · simpa only [sub_self, map_zero] using hN.2.1
+    · have hz : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
+        (congrArg (fun v : AnnularState S => stateGrading S base v)
+          (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
+      exact hz.trans_lt hN.2.1
     · simpa only [abs_zero] using hN.2.1
   obtain ⟨J0, hJ0⟩ := hbound j 0 0 0 (r, 0) (by norm_num) hr
   obtain ⟨J1, hJ1⟩ := hbound j 0 1 0 (r, 0) (by norm_num) hr
   have hd0 : J0.D 1 (C.referenceState, 0) (fun _ => (v, (0 : ℝ))) =
       D.w r * C.control m r :=
-    (J0.deriv_line (C.referenceState, 0) (v, 0) hz0).symm.trans
-      (hN.coefficientFamily_singleton_line_deriv_zero hS hT m (r, 0))
+    hN.coefficientTower_singleton_zero hS hT m (r, 0) J0 hz0
   have hd1 : J1.D 1 (C.referenceState, 0) (fun _ => (v, (0 : ℝ))) =
       deriv D.w r * C.control m r + D.w r * deriv (C.control m) r :=
-    (J1.deriv_line (C.referenceState, 0) (v, 0) hz0).symm.trans
-      (hN.coefficientFamily_singleton_line_deriv_radial hS hT m (r, 0))
+    hN.coefficientTower_singleton_radial hS hT m (r, 0) J1 hz0
   have hb0 := hJ0 (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
   have hb1 := hJ1 (C.referenceState, 0) hz0 (fun _ => (v, (0 : ℝ)))
   have hw :

@@ -93,7 +93,6 @@ theorem stateNeighborhood_mono (S : PhysicalSpacesData)
   exact ⟨((solve_stateGrading_monotone S hb (z.1 - C.referenceState)).trans_lt hz.1).trans_le hε,
     hz.2.trans_le hε⟩
 
-set_option backward.isDefEq.respectTransparency false in
 theorem N01Properties.restrict_neighborhood
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base base' loss : ℕ} {ε ε' : ℝ}

@@ -41,7 +41,8 @@ theorem referenceProfile_hasCompactSupport {D : ReferenceData}
     (hD : RadialProfileGeometry D) : HasCompactSupport D.w := by
   apply HasCompactSupport.intro (K := Icc D.a D.b) isCompact_Icc
   intro r hr
-  rcases not_mem_Icc.mp hr with hr | hr
+  simp only [mem_Icc, not_and_or, not_le] at hr
+  rcases hr with hr | hr
   · exact hD.2.2.1.2 r (Or.inl hr.le)
   · exact hD.2.2.1.2 r (Or.inr hr.le)
 
