@@ -56,6 +56,26 @@ theorem abs_deriv_control_le_product_weights
   have hnonneg : 0 ≤ B * H * E * G := (abs_nonneg _).trans h0
   exact hb.trans ((mul_le_mul_of_nonneg_right hinverse hnonneg).trans_eq (by ring))
 
+/-- Uniform scalar bounds are packaged before substituting physical
+seminorms. Both constants keep precisely their original exponents. -/
+theorem control_deriv_weight_bound_of_product_bounds
+    (cells : ℕ → Set ℝ) (w : ℝ → ℝ) (χ : ℕ → ℝ → ℝ)
+    (H E W G : ℕ → ℝ)
+    (hw : ∀ j r, r ∈ cells j → DifferentiableAt ℝ w r)
+    (hwr : ∀ j r, r ∈ cells j → w r ≠ 0)
+    (hproduct : ∃ B : ℝ, 0 < B ∧ ∀ m j r, r ∈ cells j →
+      let Q := B * H j * E j ^ B * G m
+      |w r * χ m r| ≤ Q ∧ |deriv w r * χ m r + w r * deriv (χ m) r| ≤ Q)
+    (hinverse : ∃ A : ℝ, 0 < A ∧ ∀ j r, r ∈ cells j →
+      |(w r)⁻¹| + |deriv (fun t => (w t)⁻¹) r| ≤ A * W j ^ A) :
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧ ∀ m j r, r ∈ cells j →
+      |deriv (χ m) r| ≤ (A * B) * H j * E j ^ B * W j ^ A * G m := by
+  obtain ⟨B, hB, hb⟩ := hproduct
+  obtain ⟨A, hA, ha⟩ := hinverse
+  exact ⟨B, A, hB, hA, fun m j r hr =>
+    abs_deriv_control_le_product_weights (hw j r hr) (hwr j r hr)
+      (hb m j r hr).1 (hb m j r hr).2 (ha j r hr)⟩
+
 theorem IsAccumulatingProfile.inverse_first_jets_cell_bound
     {D : ReferenceData} (hRef : IsAccumulatingProfile D) :
     ∃ A : ℝ, 0 < A ∧ ∀ j r, r ∈ D.cells j →
@@ -101,24 +121,17 @@ theorem N01Properties.control_deriv_cell_bound_with_grading
         (A * B) * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
           radialE (D.cellIndex j) ^ A *
           (stateGrading S base v + stateGrading S (1 + loss) v) := by
-  let hdata := hN.control_product_jets_cell_bound hS hT
-  let B : ℝ := hdata.choose
-  have hB : 0 < B := hdata.choose_spec.1
-  obtain ⟨A, hA, hinverse⟩ := hN.1.1.inverse_first_jets_cell_bound
-  obtain ⟨_, hgeom⟩ := hN.1.1
-  have hpoint : ∀ (m j : ℕ) (r : ℝ), r ∈ D.cells j →
-      let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
-      |deriv (C.control m) r| ≤
-        (A * B) * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
-          radialE (D.cellIndex j) ^ A *
-          (stateGrading S base v + stateGrading S (1 + loss) v) := by
-    intro m j r hr
-    have hw : DifferentiableAt ℝ D.w r := hgeom.1.2.2.1.1.differentiable (by simp) r
-    have hwr : D.w r ≠ 0 :=
-      (hgeom.1.2.2.2.2.1 r (hgeom.2.1.2.2.2.1 j hr)).ne'
-    exact abs_deriv_control_le_product_weights hw hwr
-      (hdata.choose_spec.2 m j r hr).1 (hdata.choose_spec.2 m j r hr).2 (hinverse j r hr)
-  exact Exists.intro B (Exists.intro A (And.intro hB (And.intro hA hpoint)))
+  have hgeom : RadialProfileGeometry D := hN.1.1.choose_spec.1
+  have hcell : ∀ j r, r ∈ D.cells j → r ∈ radialCore D :=
+    hN.1.1.choose_spec.2.1.2.2.2.1
+  exact control_deriv_weight_bound_of_product_bounds D.cells D.w C.control
+    (fun j => T.H (T.sample j) ^ (3 / 4 : ℝ)) (fun j => T.E0 (T.sample j))
+    (fun j => radialE (D.cellIndex j))
+    (fun m => stateGrading S base (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m) +
+      stateGrading S (1 + loss) (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m))
+    (fun _ r _ => hgeom.2.2.1.1.differentiable (by simp) r)
+    (fun j r hr => (hgeom.2.2.2.2.1 r (hcell j r hr)).ne')
+    (hN.control_product_jets_cell_bound hS hT) hN.1.1.inverse_first_jets_cell_bound
 
 /-- Uniform normalization of the two singleton direction grades. -/
 theorem singletonKappaDirection_two_grades_le

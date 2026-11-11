@@ -105,7 +105,7 @@ theorem continuousOn_projectiveJets_of_seminorm_bounds
       let M := Q.toLinearMap.compMultilinearMap (A n x).toMultilinearMap
       have hdirs := norm_multilinear_sub_le_of_seminorm_bound M q (C * (1 + q x))
         (hcq x hx.1) v z.2
-      exact (norm_sub_le ((A n z.1 z.2).val s) ((A n x z.2).val s)
+      exact (norm_sub_le_norm_sub_add_norm_sub ((A n z.1 z.2).val s) ((A n x z.2).val s)
         ((A n x v).val s)).trans (add_le_add hbase hdirs)
     exact squeeze_zero' (Eventually.of_forall (fun _ => norm_nonneg _)) hupper
       (by simpa only [herr0] using herr.tendsto (x, v))

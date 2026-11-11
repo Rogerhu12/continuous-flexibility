@@ -47,6 +47,17 @@ theorem scalarParameterDirection_grading (S : PhysicalSpacesData) (n : ℕ) :
   change sectorGrading S n 0 + ‖(1 : ℝ)‖ = 1
   simp only [map_zero, norm_one, zero_add]
 
+theorem scalarParameter_line (S : PhysicalSpacesData)
+    (z : StateDirections S × ℝ) (t : ℝ) :
+    z + t • scalarParameterDirection S = (z.1, z.2 + t) := by
+  change (z.1 + t • (0 : StateDirections S), z.2 + t * 1) = _
+  rw [smul_zero, add_zero, mul_one]
+
+theorem scalarParameter_zero_line (S : PhysicalSpacesData)
+    (x : StateDirections S) (t : ℝ) :
+    (x, (0 : ℝ)) + t • scalarParameterDirection S = (x, t) := by
+  rw [scalarParameter_line, zero_add]
+
 theorem liftSectorParameter_height_line (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : StateDirections S × ℝ)
     (η : HeightPair S) (t : ℝ) :

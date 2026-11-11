@@ -37,9 +37,15 @@ theorem circle_hasProjectiveCurveDerivAt_of_weighted_second_jets
         (T.M (T.sample m) ^ k * T.H (T.sample m) ^ (-γ)) * |J₂ t m b θ| ≤
           B * Real.sqrt (E m).toReal) :
     HasProjectiveCurveDerivAt c dc 0 := by
-  apply circle_hasProjectiveCurveDerivAt_of_energy_envelope hS hM hH
+  refine circle_hasProjectiveCurveDerivAt_of_energy_envelope hS hM hH c dc 0 ?_
   intro s
-  obtain ⟨E, B, hE, hB, hb⟩ := hbound s
+  let E : ℕ → ℝ≥0∞ := (hbound s).choose
+  let B : ℝ := (hbound s).choose_spec.choose
+  have hE : (∑' m, E m) < ⊤ := (hbound s).choose_spec.choose_spec.1
+  have hB : 0 ≤ B := (hbound s).choose_spec.choose_spec.2.1
+  have hb : ∀ t, |t| < δ → ∀ m b k, b + k ≤ s → ∀ θ,
+      (T.M (T.sample m) ^ k * T.H (T.sample m) ^ (-γ)) * |J₂ t m b θ| ≤
+        B * Real.sqrt (E m).toReal := (hbound s).choose_spec.choose_spec.2.2
   have hlim : Tendsto (fun h : ℝ => B * |h|) (𝓝[≠] (0 : ℝ)) (𝓝 0) := by
     have ha : Tendsto (fun h : ℝ => |h|) (𝓝[≠] (0 : ℝ)) (𝓝 0) := by
       simpa only [abs_zero] using (continuous_abs.tendsto (0 : ℝ)).mono_left nhdsWithin_le_nhds

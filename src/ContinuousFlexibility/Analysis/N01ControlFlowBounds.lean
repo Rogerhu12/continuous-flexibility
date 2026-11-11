@@ -19,9 +19,21 @@ namespace ContinuousFlexibility.Statements
 -- Use the canonical product action directly, avoiding a costly search
 -- through the abstract models that make up the state space.
 local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set Filter MeasureTheory
 open scoped Topology ContDiff BigOperators
+
+private theorem drop_zero_power_factor {a b c : ℝ} (h : c ^ (0 : ℕ) * a ≤ b) : a ≤ b := by
+  simpa only [pow_zero, one_mul] using h
+
+private theorem oneHigh_at_zero_offset
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (base loss : ℕ) (x : E) {k : ℕ} (v : Fin k → E) :
+    oneHighVariationWeight p base (0 + loss) (x - x) v =
+      oneHighVariationWeight p base loss 0 v :=
+  congrArg₂ (fun n y => oneHighVariationWeight p base n y v)
+    (Nat.zero_add loss) (sub_self x)
 
 theorem abs_second_deriv_le_of_smoothDirections_germ
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -49,7 +61,9 @@ theorem le_at_right_of_continuousOn_closed_interval
   have : NeBot (𝓝[Ioo a b] b) := mem_closure_iff_nhdsWithin_neBot.mp hclosure
   have hlim : Tendsto f (𝓝[Ioo a b] b) (𝓝 (f b)) :=
     (hc b ⟨hab.le, le_rfl⟩).mono Ioo_subset_Icc_self
-  exact le_of_tendsto hlim (self_mem_nhdsWithin.mono (fun r hr => hb r hr))
+  apply le_of_tendsto hlim
+  filter_upwards [self_mem_nhdsWithin] with r hr
+  exact hb r hr
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -85,9 +99,10 @@ theorem N01Properties.controlTravelPartial_second_bound
       (opticalLogPerturbation D.w (C.control m) t) (C.left m) r
     have hz0 : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
       constructor
-      · change stateGrading S base (C.referenceState - C.referenceState) < ε
-        rw [sub_self, (stateGrading S base).map_zero']
-        exact hN.2.1
+      · have hz : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
+          (congrArg (fun u : AnnularState S => stateGrading S base u)
+            (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
+        exact hz.trans_lt hN.2.1
       · simpa only [abs_zero] using hN.2.1
     let htower := hdata.choose_spec.2 m 0 0 (r, 0) (by norm_num) hr
     have hgerm :
@@ -103,9 +118,14 @@ theorem N01Properties.controlTravelPartial_second_bound
       dsimp only [F]
       ring
     have hb := htower.choose_spec (C.referenceState, 0) hz0 (fun _ : Fin 2 => v)
-    simp only [pow_zero, one_mul, Nat.zero_add, sub_self] at hb
-    exact abs_second_deriv_le_of_smoothDirections_germ htower.choose
-      (C.referenceState, 0) v hz0 F (-C.minusFlow (C.referenceState, 0) m r 0) _ hgerm hb
+    have hderiv := abs_second_deriv_le_of_smoothDirections_germ htower.choose
+      (C.referenceState, 0) v hz0 F (-C.minusFlow (C.referenceState, 0) m r 0) _ hgerm
+      (drop_zero_power_factor hb)
+    exact hderiv.trans_eq (congrArg
+      (fun W : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (C.cell m)) ^ B * W)
+      (oneHigh_at_zero_offset (pairGrading (stateGrading S) realGrading)
+        base loss (C.referenceState, (0 : ℝ)) (fun _ : Fin 2 => v)))
   exact Exists.intro B (And.intro hB hpoint)
 
 /-- The same fixed ratio on the full closed component gives the actual
@@ -195,17 +215,30 @@ theorem N01Properties.controlTravel_second_bound
           base loss 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
     intro m
+    let K : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B *
+      oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+        base loss 0 (fun _ : Fin 2 =>
+          (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))
+    change |deriv (deriv (fun t => opticalTravel
+      (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤ K
     have hlh : C.left m < C.right m := (hN.2.2.2.1.1 m).2.1
     let G (r : ℝ) : ℝ := ∫ s in C.left m..r,
       opticalSpeed D.w s * opticalLogRatio D.w (C.control m) s ^ 2 / 4
     have hc : ContinuousOn (fun r => |G r|) (Icc (C.left m) (C.right m)) :=
       (hN.controlCurvaturePrimitive_continuousOn m).abs
-    rw [(hN.controlTravel_hasDerivAt_second m).deriv, abs_neg]
-    apply le_at_right_of_continuousOn_closed_interval hlh hc
-    intro r hr
-    have hb := hdata.choose_spec.2 m r hr
-    rw [(hN.controlTravelPartial_hasDerivAt_second m hr).deriv, abs_neg] at hb
-    exact hb
+    have hinner : ∀ r ∈ Ioo (C.left m) (C.right m), |G r| ≤ K := by
+      intro r hr
+      have heq : |deriv (deriv (fun t => opticalTravel
+          (opticalLogPerturbation D.w (C.control m) t) (C.left m) r)) 0| = |G r| := by
+        simpa only [G, abs_neg] using
+          congrArg abs (hN.controlTravelPartial_hasDerivAt_second m hr).deriv
+      exact heq.symm.trans_le (hdata.choose_spec.2 m r hr)
+    have hend : |deriv (deriv (fun t => opticalTravel
+        (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| =
+        |G (C.right m)| := by
+      simpa only [G, abs_neg] using congrArg abs (hN.controlTravel_hasDerivAt_second m).deriv
+    exact hend.trans_le (le_at_right_of_continuousOn_closed_interval hlh hc hinner)
   exact Exists.intro B (And.intro hB hpoint)
 
 end ContinuousFlexibility.Statements

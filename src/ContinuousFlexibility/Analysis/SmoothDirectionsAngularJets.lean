@@ -37,6 +37,7 @@ theorem smoothDirections_angular_jet_continuous
     Continuous (fun θ => (J θ).D n x v) := by
   apply continuous_iff_continuousAt.mpr
   intro θ
+  change Tendsto (fun ψ => (J ψ).D n x v) (𝓝 θ) (𝓝 ((J θ).D n x v))
   obtain ⟨K, hK⟩ := exists_smoothDirections_of_uniform_seminorm_bounds
     (l := 𝓝 θ) J hU hc (fun y hy => (hf y hy).tendsto θ) hbound
   have heq : K.D n x = (J θ).D n x := K.unique (J θ) n x hx
@@ -56,7 +57,7 @@ theorem continuousOn_joint_of_equicontinuous_slices
   intro ε hε
   have heqAt : EquicontinuousAt F p.2 := by
     simpa only [EquicontinuousWithinAt, EquicontinuousAt,
-      nhdsWithin_of_mem (hV.mem_nhds hp.2)] using heq p.2 hp.2
+      nhdsWithin_eq_nhds.mpr (hV.mem_nhds hp.2)] using heq p.2 hp.2
   have hX := Metric.equicontinuousAt_iff_right.mp heqAt (ε / 2) (by positivity)
   have hY : ∀ᶠ y in 𝓝 p.1, dist (F y p.2) (F p.1 p.2) < ε / 2 :=
     (hpoint p.2 hp.2).continuousAt.eventually
@@ -280,8 +281,8 @@ theorem smoothDirections_angular_jet_iteratedDeriv
           (fun ψ => (J (b + n) ψ).D k x v) := by
         funext ψ
         exact ih ψ
-      rw [iteratedDeriv_succ, heq,
-        (smoothDirections_angular_jet_hasDerivAt J hU hc hbound hangular k (b + n) θ x hx v).deriv]
-      simp only [Nat.add_assoc]
+      rw [iteratedDeriv_succ, heq]
+      simpa only [Nat.add_succ, Nat.add_zero] using
+        (smoothDirections_angular_jet_hasDerivAt J hU hc hbound hangular k (b + n) θ x hx v).deriv
 
 end ContinuousFlexibility.Analysis

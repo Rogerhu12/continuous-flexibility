@@ -101,7 +101,8 @@ theorem N01Properties.minusFlow_reference_eq
   have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hN.2.1
+      rw [sub_self, (stateGrading S base).map_zero']
+      exact hN.2.1
     · simpa only [abs_zero] using hN.2.1
   simpa only [hprofile] using hN.minusFlow_zero_eq_opticalTravel hS hT hz₀ m θ hr
 
@@ -137,7 +138,8 @@ theorem N01Properties.minusFlow_near_reference_weighted
   have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hN.2.1
+      rw [sub_self, (stateGrading S base).map_zero']
+      exact hN.2.1
     · simpa only [abs_zero] using hN.2.1
   have hC : controlGeometryConditions D S C := hN.2.2.2.1
   have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=

@@ -34,7 +34,8 @@ theorem N01Properties.minusFlow_reference_radial_hasDerivAt
   have hmem : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hN.2.1
+      rw [sub_self, (stateGrading S base).map_zero']
+      exact hN.2.1
     · simpa only [abs_zero] using hN.2.1
   have hcore : r ∈ Ioo D.a D.b :=
     ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩

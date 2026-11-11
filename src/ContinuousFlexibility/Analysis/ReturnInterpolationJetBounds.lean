@@ -55,7 +55,7 @@ theorem returnInterpolation_positive_jets_uniform
   apply (abs_add_le _ _).trans
   rw [abs_mul, abs_of_nonneg ht.1]
   have hsub : |iteratedDeriv n (K i) θ - iteratedDeriv n (fun x : ℝ => x) θ| ≤ A + 1 :=
-    (abs_sub_le _ _).trans (add_le_add (hb i θ) hid)
+    (abs_sub _ _).trans (add_le_add (hb i θ) hid)
   have hmul := mul_le_mul ht.2 hsub (abs_nonneg _) (by norm_num : (0 : ℝ) ≤ 1)
   nlinarith only [hid, hmul]
 

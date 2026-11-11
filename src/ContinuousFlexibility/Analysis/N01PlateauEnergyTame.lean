@@ -61,7 +61,7 @@ theorem N01Properties.physicalPlateauEnergy_tsum_le_grading_sq
           eLpNorm (weightedPhysicalJet T γ (a - i.val) b (c + 2) (H.decode u))
             2 materialCylinderMeasure ^ 2 := hjet ai γ (H.decode u) hu b c
       _ ≤ ENNReal.ofReal (Ka ai) * ENNReal.ofReal (((a + 1 : ℕ) : ℝ) * Q) :=
-        mul_le_mul_left' hsum _
+        mul_le_mul_right hsum _
       _ = ENNReal.ofReal ((Ka ai * ((a + 1 : ℕ) : ℝ)) * Q) := by
         rw [← ENNReal.ofReal_mul (hKa ai)]
         congr 1

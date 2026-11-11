@@ -36,7 +36,8 @@ theorem N01Properties.minusFlow_reference_contDiffAt
   have hmem : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hN.2.1
+      rw [sub_self, (stateGrading S base).map_zero']
+      exact hN.2.1
     · simpa only [abs_zero] using hN.2.1
   have hsector : stateSector S C.referenceState := by
     obtain ⟨_, _, _, hκ, hh, _⟩ := hN.2.2.1

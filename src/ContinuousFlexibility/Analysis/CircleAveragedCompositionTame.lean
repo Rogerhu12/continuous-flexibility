@@ -112,6 +112,8 @@ theorem circleNorm_averageCompose_le
 
 section Model
 
+set_option backward.isDefEq.respectTransparency true
+
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
   (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
   (hD : IsAccumulatingProfile D) (hγ : 0 < γ)

@@ -45,6 +45,11 @@ theorem oneHighVariationWeight_finOne
   simp only [oneHighVariationWeight, hu, Finset.prod_singleton,
     Finset.sum_singleton, Finset.erase_singleton, Finset.prod_empty, mul_one]
 
+/-- Remove a scalar zeroth-order prefactor without rewriting any choice
+of a directional tower occurring inside the measured value. -/
+theorem le_of_zero_power_mul_le {a b c : ℝ} (h : c ^ (0 : ℕ) * a ≤ b) : a ≤ b := by
+  simpa only [pow_zero, one_mul] using h
+
 theorem oneHighVariationWeight_externalParameter
     (S : PhysicalSpacesData) (base high : ℕ) (x : AnnularState S) (q : ℝ) :
     oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
@@ -165,11 +170,14 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
           (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
     intro x q hxq m r θ hr
     let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
-    let J := htower.choose
     have hraw := htower.choose_spec (x, q) hxq
       (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
-    simp only [pow_zero, one_mul, zero_add] at hraw
-    exact ordinaryFlow_q_derivative_bound_of_tower (high := loss) htower.choose hxq hraw
+    have hfinal := ordinaryFlow_q_derivative_bound_of_tower
+      (high := 0 + loss) htower.choose hxq (le_of_zero_power_mul_le hraw)
+    exact hfinal.trans_eq (congrArg
+      (fun n : ℕ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (C.cell m)) ^ B *
+          (2 + stateGrading S n (x - C.referenceState) + |q|)) (Nat.zero_add loss))
   exact Exists.intro B (And.intro hB hpoint)
 
 /-- For a fixed state and component, the derivative bound is uniform in

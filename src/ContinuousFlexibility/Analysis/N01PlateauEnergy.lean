@@ -41,7 +41,8 @@ theorem N01Properties.controlPlateau_material_overlap_bound
       ({m : ℕ | p ∈ controlPlateauMaterialStrip D T C m}.ncard : ℝ) ≤
         K * T.M (T.radius p.1) ^ 2 := by
   obtain ⟨K₀, A, hK₀, _, hover⟩ := hN.controlPlateau_overlap_bound hT
-  obtain ⟨_, _, _, _, _, _, _, hinside, _, _, _, henv, _⟩ := hT
+  have hmaterial := hT
+  obtain ⟨_, _, _, _, _, _, _, hinside, _, _, _, henv, _⟩ := hmaterial
   obtain ⟨Ke, hKe, hE⟩ := henv A
   refine ⟨K₀ * Ke, mul_pos hK₀ hKe, fun p => ?_⟩
   have hp := (hinside p.1).1
@@ -139,7 +140,7 @@ theorem N01Properties.controlPlateau_cutoff_jet_energy_tsum_le
     _ ≤ ENNReal.ofReal P * ∑ i : Fin (a + 1), ENNReal.ofReal Ko *
         eLpNorm (weightedPhysicalJet T γ (a - i.val) b (c + 2) f)
           2 materialCylinderMeasure ^ 2 :=
-      mul_le_mul_left' (Finset.sum_le_sum (fun i _ => hi i)) _
+      mul_le_mul_right (Finset.sum_le_sum (fun i _ => hi i)) _
     _ = _ := by rw [← Finset.mul_sum, ENNReal.ofReal_mul hP, mul_assoc]
 
 theorem N01Properties.controlPlateau_cutoff_jet_energy_tsum_lt_top

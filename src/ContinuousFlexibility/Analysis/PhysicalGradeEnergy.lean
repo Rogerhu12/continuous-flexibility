@@ -75,15 +75,14 @@ theorem sobolevModel_weightedJet_energy_le_grading_sq
   (weightedPhysicalJet_energy_le_level (H.decode u) horder).trans
     (sobolevModel_physicalLevelEnergy_le_grading_sq hH u s)
 
+set_option backward.isDefEq.respectTransparency true in
 theorem sobolevModel_grading_le_sqrt_energy_sum
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
     (hH : IsSobolevModel D T γ H) (u : H.Space) (s : ℕ) :
     H.grading s u ≤
       Real.sqrt (∑ i : Fin (s + 1), physicalLevelEnergy T γ i.val (H.decode u)).toReal := by
   classical
-  obtain ⟨i, hi, hgrade⟩ := gradedSeminorm_exists_norm _ _ s u
-  change gradedSeminorm _ _ s u ≤ _
-  rw [hgrade, hH.2.2.2.2.2.2.2 u i]
+  obtain ⟨i, hi, hgrade⟩ := gradedSeminorm_exists_norm (fun j => H.level j) H.bond s u
   let k : Fin (s + 1) := ⟨i, Nat.lt_succ_of_le hi⟩
   have hsum : (∑ i : Fin (s + 1), physicalLevelEnergy T γ i.val (H.decode u)) < ⊤ := by
     apply ENNReal.sum_lt_top.mpr
@@ -94,6 +93,13 @@ theorem sobolevModel_grading_le_sqrt_energy_sum
     Finset.single_le_sum
       (f := fun j : Fin (s + 1) => physicalLevelEnergy T γ j.val (H.decode u))
       (fun _ _ => by positivity) (Finset.mem_univ k)
-  exact Real.sqrt_le_sqrt (ENNReal.toReal_mono hsum.ne hle)
+  have hlevel : physicalNorm T γ i (H.decode u) ≤
+      Real.sqrt (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val (H.decode u)).toReal := by
+    change Real.sqrt (physicalLevelEnergy T γ i (H.decode u)).toReal ≤ _
+    exact Real.sqrt_le_sqrt (ENNReal.toReal_mono hsum.ne hle)
+  calc
+    H.grading s u = ‖u.val i‖ := hgrade
+    _ = physicalNorm T γ i (H.decode u) := hH.2.2.2.2.2.2.2 u i
+    _ ≤ _ := hlevel
 
 end ContinuousFlexibility.Statements

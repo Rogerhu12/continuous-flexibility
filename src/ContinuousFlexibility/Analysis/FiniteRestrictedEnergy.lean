@@ -55,7 +55,7 @@ theorem eLpNorm_sq_le_finset_restricted_energy
       exact hpoint x hx
     _ = ENNReal.ofReal K * ∑ i ∈ s, ∫⁻ x, ‖g i x‖ₑ ^ 2 ∂μ.restrict A := by
       rw [lintegral_const_mul' _ _ ENNReal.ofReal_ne_top,
-        lintegral_finsetSum' s (fun i hi => ((hg i hi).restrict.enorm).pow 2)]
+        lintegral_finsetSum' s (fun i hi => ((hg i hi).restrict.enorm).pow_const (2 : ℕ))]
     _ = _ := by
       congr 1
       apply Finset.sum_congr rfl

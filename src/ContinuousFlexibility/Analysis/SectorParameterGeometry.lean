@@ -36,7 +36,11 @@ theorem liftSectorParameter_eq_affine (S : PhysicalSpacesData)
 theorem liftSectorParameter_sub_reference (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : StateDirections S × ℝ) :
     liftSectorParameter S C z - (C.referenceState, 0) = sectorParameterInclusion S z := by
-  rw [liftSectorParameter_eq_affine, add_sub_cancel_left]
+  apply Prod.ext
+  · change (C.referenceState + z.1.val) - C.referenceState = z.1.val
+    exact add_sub_cancel_left _ _
+  · change z.2 - 0 = z.2
+    exact sub_zero _
 
 theorem pairGrading_sectorParameterInclusion (S : PhysicalSpacesData)
     (n : ℕ) (z : StateDirections S × ℝ) :
@@ -51,7 +55,11 @@ theorem oneHighVariationWeight_sector_lift (S : PhysicalSpacesData)
       (fun i => sectorParameterInclusion S (v i)) =
     oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
       base high z v := by
-  rw [liftSectorParameter_sub_reference]
+  apply (congrArg
+    (fun y : AnnularState S × ℝ =>
+      oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+        base high y (fun i => sectorParameterInclusion S (v i)))
+    (liftSectorParameter_sub_reference S C z)).trans
   simp only [oneHighVariationWeight, pairGrading_sectorParameterInclusion]
 
 theorem sectorPairGrading_continuous (S : PhysicalSpacesData) (n : ℕ) :
@@ -72,14 +80,18 @@ theorem sectorNeighborhood_isOpen (S : PhysicalSpacesData)
 
 theorem sectorNeighborhood_convex (S : PhysicalSpacesData)
     (base : ℕ) (ε q0 : ℝ) : Convex ℝ (sectorNeighborhood S base ε q0) := by
-  let p : Seminorm ℝ (StateDirections S × ℝ) :=
-    (sectorGrading S base).comp (LinearMap.fst ℝ (StateDirections S) ℝ)
-  let q : Seminorm ℝ (StateDirections S × ℝ) :=
-    (normSeminorm ℝ ℝ).comp (LinearMap.snd ℝ (StateDirections S) ℝ)
-  have hp := p.convex_ball 0 ε
-  have hq := q.convex_ball 0 q0
-  simpa only [Seminorm.ball_zero_eq, p, q, Seminorm.comp_apply, LinearMap.fst_apply,
-    LinearMap.snd_apply, coe_normSeminorm, Real.norm_eq_abs, sectorNeighborhood]
-    using hp.inter hq
+  intro x hx y hy a b ha hb hab
+  have hpx : x.1 ∈ (sectorGrading S base).ball 0 ε := by
+    simpa only [Seminorm.mem_ball_zero] using hx.1
+  have hpy : y.1 ∈ (sectorGrading S base).ball 0 ε := by
+    simpa only [Seminorm.mem_ball_zero] using hy.1
+  have hqx : x.2 ∈ (normSeminorm ℝ ℝ).ball 0 q0 := by
+    simpa only [Seminorm.mem_ball_zero, coe_normSeminorm, Real.norm_eq_abs] using hx.2
+  have hqy : y.2 ∈ (normSeminorm ℝ ℝ).ball 0 q0 := by
+    simpa only [Seminorm.mem_ball_zero, coe_normSeminorm, Real.norm_eq_abs] using hy.2
+  constructor
+  · exact ((sectorGrading S base).convex_ball 0 ε hpx hpy ha hb hab)
+  · simpa only [Seminorm.mem_ball_zero, coe_normSeminorm, Real.norm_eq_abs,
+      smul_eq_mul] using ((normSeminorm ℝ ℝ).convex_ball 0 q0 hqx hqy ha hb hab)
 
 end ContinuousFlexibility.Statements

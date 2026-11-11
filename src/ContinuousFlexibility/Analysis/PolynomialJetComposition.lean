@@ -66,7 +66,8 @@ theorem norm_iteratedFDeriv_comp_polynomial_bound
   have hv (k : ℕ) (hk : k ≤ n) : ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧
       ∀ i x, x ∈ U i → v k i x ≤ A * W i ^ P := by
     by_cases hk0 : k = 0
-    · exact ⟨0, 0, le_rfl, le_rfl, fun i x _ => by simp only [v, hk0, if_pos rfl, zero_mul]⟩
+    · exact ⟨0, 0, le_rfl, le_rfl, fun i x _ => by
+        simp only [v, hk0, if_pos rfl, zero_mul, le_refl]⟩
     · obtain ⟨A, P, hA, hP, hb⟩ := hinner k (by omega) hk
       exact ⟨A, P, hA, hP, fun i x hx => by simpa only [v, if_neg hk0] using hb i x hx⟩
   obtain ⟨D, Q, hD, hQ, hDb⟩ := finite_polynomial_majorant W hW U v n hv
@@ -126,7 +127,8 @@ theorem norm_iteratedFDeriv_mul_polynomial_bound
     (n := n) (by simp)
   rw [iteratedFDerivWithin_of_isOpen n (hU i) hx] at h
   apply h.trans
-  rw [K, Finset.sum_mul]
+  dsimp only [K]
+  rw [Finset.sum_mul]
   apply Finset.sum_le_sum
   intro k hk
   have hkn : k ≤ n := Nat.le_of_lt_succ (Finset.mem_range.mp hk)

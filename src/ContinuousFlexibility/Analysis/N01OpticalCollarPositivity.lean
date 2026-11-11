@@ -230,6 +230,60 @@ theorem N01Properties.opticalCollar_uniform_positive
   nlinarith only [hprod, sq_nonneg ((originalCoefficients D S C z).b p)]
 
 
+/-- Keep every witness of the actual optical collar selection. In particular
+all later estimates use the same cutoff, its actual radial cell and its
+actual center and width. The quantitative positivity holds on the full
+closed collar, including the endpoints of the transition support. -/
+theorem N01Properties.exists_positive_opticalCorrectionCollars
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) :
+    ∃ base' : ℕ, ∃ ε' : ℝ, ∃ χ : ℕ → ℝ → ℝ, ∃ j : ℕ → ℕ,
+      ∃ x δ : ℕ → ℝ, ∃ K A B lam P : ℝ,
+      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧
+      0 < K ∧ 0 < A ∧ 0 < B ∧ 0 < lam ∧ 0 < P ∧
+      N01Properties D T S C base' loss ε' ∧
+      (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m) ∧
+        0 < δ m ∧ C.left m < x m - δ m ∧ x m + δ m < C.right m ∧
+        (δ m)⁻¹ ≤ K * radialE (D.cellIndex (j m)) ^ A ∧
+        ∀ r ∈ Icc (x m - δ m) (x m + δ m),
+          radialE (D.cellIndex (j m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r) ∧
+      (∀ m, χ m = returnOpticalCutoff (x m) (δ m)) ∧
+      (∀ m, ContDiff ℝ ∞ (χ m) ∧ ∀ r, χ m r ∈ Icc (0 : ℝ) 1) ∧
+      (∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧
+        χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1) ∧
+        tsupport (deriv (χ m)) ⊆ Icc (x m - δ m) (x m + δ m)) ∧
+      (∀ n : ℕ, ∃ Kₙ : ℝ, 0 < Kₙ ∧ ∀ m r,
+        |iteratedDeriv n (χ m) r| ≤ Kₙ * radialE (D.cellIndex (j m)) ^ (A * n)) ∧
+      ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
+        p.1 ∈ Icc (x m - δ m) (x m + δ m) →
+        let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2
+        0 < d ∧
+        d ≤ (originalCoefficients D S C z).a p ∧
+        d ≤ -(originalCoefficients D S C z).c p ∧
+        d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -
+          (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p ∧
+        0 < (originalCoefficients D S C z).b p ^ 2 -
+          (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p := by
+  obtain ⟨K, A, B, hK, hA, hB, j, x, δ, χ, hdata, hχeq, hχ, hend, hjets⟩ :=
+    hN.exists_opticalCorrectionCutoffs
+  have hcell (m : ℕ) : Ioo (C.left m) (C.right m) ⊆ D.cells (j m) := (hdata m).1
+  have hinside (m : ℕ) :
+      C.left m < x m - δ m ∧ x m + δ m < C.right m :=
+    ⟨(hdata m).2.2.1, (hdata m).2.2.2.1⟩
+  have hspeed (m : ℕ) (r : ℝ) (hr : r ∈ Icc (x m - δ m) (x m + δ m)) :
+      radialE (D.cellIndex (j m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r :=
+    (hdata m).2.2.2.2.2 r hr
+  obtain ⟨base', ε', lam, P, hb, hε', hεε, hlam, hP, hnew, hpos⟩ :=
+    hN.opticalCollar_uniform_positive hT j x δ hB hcell hinside hspeed
+  refine ⟨base', ε', χ, j, x, δ, K, A, B, lam, P, hb, hε', hεε,
+    hK, hA, hB, hlam, hP, hnew, hdata, hχeq, hχ, hend, hjets, ?_⟩
+  intro z hz m p hp
+  have hb := hpos z hz m p hp
+  have hd : 0 < lam * radialE (D.cellIndex (j m)) ^ (-P) / 2 :=
+    div_pos (mul_pos hlam (Real.rpow_pos_of_pos (Real.exp_pos _) _)) (by norm_num)
+  exact ⟨hd, hb.1, hb.2.1, hb.2.2, (sq_pos_of_pos hd).trans_le hb.2.2⟩
+
 /-- The correction cutoff family and the common neighborhood are both
 constructed from the original N01 data. The actual discriminant is
 positive on the entire closed support of each transition derivative,

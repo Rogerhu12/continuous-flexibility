@@ -78,13 +78,19 @@ theorem N01Properties.returnCorrectionVelocityLinear_contDiffAt_one
     Function.invFun (returnInterpolation (χ m q.1) (returnCorrectionInitialMap S C z m)) (A q)
   have hA : ContDiffAt ℝ 1 A p :=
     hN01.minusFlow_invFun_contDiffAt_one hS hT hz hsector m p hp
-  have hB : ContDiffAt ℝ 1 B p :=
-    ((hN01.returnInterpolation_invFun_contDiffAt hS hT hz hsector χ m hχ hχrange
-      (p.1, A p) hp).of_le (by simp)).comp p (contDiffAt_fst.prodMk hA)
+  have hB : ContDiffAt ℝ 1 B p := by
+    have ho : ContDiffAt ℝ 1 (fun q : PolarPoint =>
+        Function.invFun (returnInterpolation (χ m q.1)
+          (returnCorrectionInitialMap S C z m)) q.2) (p.1, A p) :=
+      (hN01.returnInterpolation_invFun_contDiffAt hS hT hz hsector χ m hχ hχrange
+        (p.1, A p) hp).of_le (by simp)
+    simpa only [B, Function.comp_def] using ho.comp p (contDiffAt_fst.prodMk hA)
   have hvariation : ContDiffAt ℝ 1
-      (fun q : PolarPoint => deriv (C.minusFlow z m q.1) (A q)) p :=
-    (hN01.minusFlow_angular_deriv_contDiffAt_one hS hT hz hsector m
-      (p.1, A p) hp).comp p (contDiffAt_fst.prodMk hA)
+      (fun q : PolarPoint => deriv (C.minusFlow z m q.1) (A q)) p := by
+    have ho : ContDiffAt ℝ 1 (fun q : PolarPoint => deriv (C.minusFlow z m q.1) q.2)
+        (p.1, A p) :=
+      hN01.minusFlow_angular_deriv_contDiffAt_one hS hT hz hsector m (p.1, A p) hp
+    simpa only [Function.comp_def] using ho.comp p (contDiffAt_fst.prodMk hA)
   have hcutoff : ContDiffAt ℝ 1 (fun q : PolarPoint => deriv (χ m) q.1) p :=
     (((contDiff_infty_iff_deriv.mp hχ).2.comp contDiff_fst).contDiffAt).of_le (by simp)
   have hdisplacement : ContDiffAt ℝ 1
@@ -109,10 +115,10 @@ theorem N01Properties.returnCorrectionDriftSpeedLinear_contDiffAt_one
   constructor
   · exact ((hv.sub hvr).div_const 2).congr_of_eventuallyEq
       (Eventually.of_forall fun q => by
-        simp only [returnCorrectionDriftLinear_apply, Pi.sub_apply])
+        simp only [returnCorrectionDriftLinear_apply, Pi.sub_apply, Function.comp_def])
   · exact ((hvr.neg.sub hv).div_const 2).congr_of_eventuallyEq
       (Eventually.of_forall fun q => by
-        simp only [returnCorrectionSpeedLinear_apply, Pi.neg_apply, Pi.sub_apply])
+        simp only [returnCorrectionSpeedLinear_apply, Pi.neg_apply, Pi.sub_apply, Function.comp_def])
 
 end ActualVelocity
 
