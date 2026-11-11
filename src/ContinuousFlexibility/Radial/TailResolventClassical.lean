@@ -167,8 +167,7 @@ theorem exists_tailResolvent_classical_rep_of_regular_density {T : DeepTailData}
   have hQd (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :
       HasDerivAt Q (-(T.p x * (ψ x + T.Λ * U x))) x := by
     have hclass : HasDerivAt (fun y => cQ + intervalWeakPrimitive x₀ Hc y) (Hc x) x := by
-      simpa only [zero_add, Pi.add_apply] using
-        (hasDerivAt_const x cQ).add (hasDerivAt_intervalWeakPrimitive hHccont hx₀ hx)
+      exact (hasDerivAt_intervalWeakPrimitive hHccont hx₀ hx).const_add cQ
     apply hclass.congr_of_eventuallyEq
     filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
     exact hQformula y hy

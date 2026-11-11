@@ -122,7 +122,8 @@ theorem hasDerivAt_tailEdgeClassicalSolve {u₀ u₁ f : ℝ → ℝ}
   convert (hL.add hR).div_const c using 1
   · funext x
     rfl
-  · ring
+  · simp only [Pi.mul_apply]
+    ring
 
 /-- The Wronskian gives exactly the coefficient of the source term. -/
 theorem hasDerivAt_deriv_tailEdgeClassicalSolve {a b c q s : ℝ}
@@ -142,6 +143,7 @@ theorem hasDerivAt_deriv_tailEdgeClassicalSolve {a b c q s : ℝ}
     (tailClassical_hasDerivAt_rightIntegral (h₀.continuous.mul hf) b s)
   apply ((hL.add hR).div_const c).congr_deriv
   dsimp only [tailEdgeClassicalSolve, tailEdgeClassicalWronskian] at hW ⊢
+  simp only [Pi.mul_apply]
   field_simp [hc]
   linear_combination -(f s) * hW
 
@@ -223,8 +225,7 @@ theorem tailEdgeClassicalKernel_bounds {a b c δ : ℝ} {u₀ u₁ : ℝ → ℝ
       mul_le_mul (h₁ _ hmin).2 (h₀ _ hmax).2 hu₀ (div_nonneg hright hd.le)
     _ = (tailEdgeGreen a b s t / (1 - δ) ^ 2) * (1 / (b - a)) := by
       unfold tailEdgeRightHeight tailEdgeLeftHeight tailEdgeGreen
-      field_simp [hL.ne', hd.ne']
-      ring
+      field_simp [hL.ne', hd.ne'] <;> ring
     _ ≤ (tailEdgeGreen a b s t / (1 - δ) ^ 2) * c :=
       mul_le_mul_of_nonneg_left hc
         (div_nonneg (tailEdgeGreen_nonneg hab hs ht) (sq_nonneg _))

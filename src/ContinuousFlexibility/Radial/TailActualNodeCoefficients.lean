@@ -169,10 +169,12 @@ theorem tailActualEdgePairing_gap_bounds {T : DeepTailData}
       tailActualEdgePairing T hT n right (tailInnerResistance T n) (tailActualEdgeLength T n) ≤
         (1 / (1 - T.η)) * tailGapMass T n := by
   have h := tailActualEdgePairing_interval_bounds hT n right (low := 0) (high := 1)
+    (l := tailInnerResistance T n) (r := tailActualEdgeLength T n)
     (le_add_of_nonneg_right (tailResistance_pos hT n).le)
     (tailActualEdge_gap_subset hT n) le_rfl zero_le_one
     (fun s hs => tailActualEdgeAffineHeight_bounds hT n right (tailActualEdge_gap_subset hT n hs))
-  simpa only [zero_pow, zero_mul, one_pow, tailActualEdgeWeight_gapMass] using h
+  simpa only [show (0 : ℝ) ^ 2 = 0 by norm_num, zero_mul, one_pow,
+    tailActualEdgeWeight_gapMass] using h
 
 theorem tailActualEdgePairing_split {T : DeepTailData}
     (hT : DeepTailHypotheses T) (n : ℕ) (right : Bool) :
@@ -222,7 +224,7 @@ theorem tailActualEdgePairing_right_bounds {T : DeepTailData}
         ((T.η + (T.η / T.K) ^ 2) / (1 - T.η)) * tailMass T (n + 1) := by
   have hm := tailActualEdgePairing_mass_bounds hT n true
   have hg := tailActualEdgePairing_gap_bounds hT n true
-  simp only [ite_true, zero_pow, zero_mul] at hm
+  simp only [ite_true, show (0 : ℝ) ^ 2 = 0 by norm_num, zero_mul] at hm
   have hshift : tailMass T n * (tailInnerResistance T n / tailActualEdgeLength T n) ^ 2 ≤
       (T.η / T.K) ^ 2 * tailMass T (n + 1) := deepTail_shifted_inner_edge_sq_le hT n
   constructor

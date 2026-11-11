@@ -341,7 +341,6 @@ theorem exists_interval_classical_rep {a b x₀ : ℝ} {f g : ℝ → ℝ}
     (hg.locallyIntegrableOn measurableSet_Ioo) hx₀ hweak
   refine ⟨c, fun x => c + intervalWeakPrimitive x₀ g x, fun _ => rfl, hc, ?_⟩
   intro x hx
-  simpa only [zero_add, Pi.add_apply] using
-    (hasDerivAt_const x c).add (hasDerivAt_intervalWeakPrimitive hg hx₀ hx)
+  exact (hasDerivAt_intervalWeakPrimitive hg hx₀ hx).const_add c
 
 end ContinuousFlexibility.Analysis

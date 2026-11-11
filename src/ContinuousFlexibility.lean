@@ -346,3 +346,6 @@ import ContinuousFlexibility.Radial.TailActualNaturalNodes
 import ContinuousFlexibility.Radial.TailNaturalInterpolation
 import ContinuousFlexibility.Radial.TailResolventClassical
 import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
+import ContinuousFlexibility.Radial.TailNaturalIntegrability
+import ContinuousFlexibility.Radial.TailRegularIntervalState
+import ContinuousFlexibility.Radial.TailResolventEntranceTrace

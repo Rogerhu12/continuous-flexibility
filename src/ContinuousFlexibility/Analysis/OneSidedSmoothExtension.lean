@@ -51,12 +51,12 @@ theorem iteratedDeriv_oneSidedJetBase_zero (c : ℝ) (n k : ℕ) :
     iteratedDeriv k (oneSidedJetBase c n) 0 = if k = n then c else 0 := by
   have heq : oneSidedJetBase c n =ᶠ[𝓝 0] fun x => (c / (n.factorial : ℝ)) * x ^ n := by
     filter_upwards [oneSidedJetBump.eventuallyEq_one] with x hx
-    simp only [oneSidedJetBase, hx, mul_one]
+    simp only [oneSidedJetBase, hx, Pi.one_apply, mul_one]
   rw [heq.iteratedDeriv_eq k, iteratedDeriv_const_mul_field, iteratedDeriv_fun_pow_zero]
   by_cases hkn : k = n
   · rw [if_pos hkn, if_pos hkn]
     exact div_mul_cancel₀ c (Nat.cast_ne_zero.mpr (Nat.factorial_ne_zero n))
-  · rw [if_neg hkn, if_neg hkn, mul_zero]
+  · rw [if_neg hkn, if_neg hkn, Nat.cast_zero, mul_zero]
 
 /-- Scaling preserves the target jet while suppressing lower derivatives. -/
 def oneSidedScaledJet (n : ℕ) (ε : ℝ) (g : ℝ → ℝ) (x : ℝ) : ℝ :=
@@ -70,7 +70,8 @@ theorem iteratedDeriv_oneSidedScaledJet {g : ℝ → ℝ} (hg : ContDiff ℝ ∞
     (n k : ℕ) (ε x : ℝ) :
     iteratedDeriv k (oneSidedScaledJet n ε g) x =
       (ε ^ n * (ε⁻¹) ^ k) * iteratedDeriv k g (ε⁻¹ * x) := by
-  rw [oneSidedScaledJet, iteratedDeriv_const_mul_field,
+  unfold oneSidedScaledJet
+  rw [iteratedDeriv_const_mul_field,
     iteratedDeriv_comp_const_mul ((contDiff_infty.mp hg) k) (ε⁻¹)]
   ring
 
@@ -163,12 +164,167 @@ theorem exists_contDiff_prescribed_jets (a : ℕ → ℝ) :
     simp only [iteratedDeriv_eq_equiv_comp, Function.comp_apply]
     rw [iteratedFDeriv_tsum (N := ⊤) hf (fun j _ => hv j)
       (fun j n x _ => hboundF j n x) (by simp)]
-    exact (ContinuousMultilinearMap.piFieldEquiv ℝ (Fin k) ℝ).symm
-      .toContinuousLinearEquiv.map_tsum
+    exact ((ContinuousMultilinearMap.piFieldEquiv ℝ (Fin k) ℝ).symm.toContinuousLinearEquiv).map_tsum
   rw [hsum]
   have hjet (n : ℕ) : iteratedDeriv k (f n) 0 = if k = n then a n else 0 :=
     iteratedDeriv_oneSidedScaledJet_zero (hε₀ n) (a n) n k
   simp_rw [hjet]
   simp
+
+/-- The flat-extension derivative argument is local at the left endpoint;
+no assumption at the other endpoint is necessary. -/
+theorem hasDerivAt_extendZeroLeft_Iio
+    {a b : ℝ} {f g : ℝ → ℝ} (hab : a < b)
+    (hderiv : ∀ x ∈ Ioo a b, HasDerivAt f (g x) x)
+    (hf : Tendsto f (𝓝[>] a) (𝓝 0)) (hg : Tendsto g (𝓝[>] a) (𝓝 0))
+    {x : ℝ} (hx : x < b) :
+    HasDerivAt (extendZeroLeft a f) (extendZeroLeft a g x) x := by
+  have hd (y : ℝ) (hy : y ∈ Ioo a b) :
+      HasDerivAt (extendZeroLeft a f) (g y) y :=
+    (hderiv y hy).congr_of_eventuallyEq (extendZeroLeft_eventuallyEq_of_gt f hy.1)
+  by_cases hxa : x = a
+  · subst x
+    have hright : HasDerivWithinAt (extendZeroLeft a f) 0 (Ici a) a := by
+      apply hasDerivWithinAt_Ici_of_tendsto_deriv
+        (fun y hy => (hd y hy).differentiableAt.differentiableWithinAt)
+        (continuousAt_extendZeroLeft hf).continuousWithinAt (Ioo_mem_nhdsGT hab)
+      apply hg.congr'
+      filter_upwards [Ioo_mem_nhdsGT hab] with y hy
+      exact (hd y hy).deriv.symm
+    have hleft : HasDerivWithinAt (extendZeroLeft a f) 0 (Iic a) a := by
+      apply (hasDerivWithinAt_const a (Iic a) (0 : ℝ)).congr_of_mem _ self_mem_Iic
+      intro y hy
+      exact extendZeroLeft_of_le hy
+    simpa only [extendZeroLeft_of_le le_rfl, Iic_union_Ici, hasDerivWithinAt_univ]
+      using hleft.union hright
+  rcases lt_or_gt_of_ne hxa with hxa' | hax
+  · simpa only [extendZeroLeft_of_le hxa'.le] using
+      (hasDerivAt_const x (0 : ℝ)).congr_of_eventuallyEq
+        (extendZeroLeft_eventuallyEq_zero_of_lt f hxa')
+  · simpa only [extendZeroLeft_of_gt hax] using hd x ⟨hax, hx⟩
+
+/-- Iterated derivatives of a flat extension agree on the whole open set
+to the left of the opposite endpoint. -/
+theorem iteratedDeriv_extendZeroLeft_Iio
+    {a b : ℝ} {f : ℝ → ℝ} (hab : a < b) (hf : ContDiffOn ℝ ∞ f (Ioo a b))
+    (hlim : ∀ n : ℕ, Tendsto (iteratedDeriv n f) (𝓝[>] a) (𝓝 0)) (n : ℕ) :
+    EqOn (iteratedDeriv n (extendZeroLeft a f))
+      (extendZeroLeft a (iteratedDeriv n f)) (Iio b) := by
+  induction n with
+  | zero => simp only [iteratedDeriv_zero]; exact Set.eqOn_refl _ _
+  | succ n ih =>
+    intro x hx
+    rw [iteratedDeriv_succ, ih.deriv isOpen_Iio hx]
+    apply HasDerivAt.deriv
+    apply hasDerivAt_extendZeroLeft_Iio hab _ (hlim n) (hlim (n + 1)) hx
+    intro y hy
+    have hd := ((differentiableOn_iteratedDeriv_Ioo hf n y hy).differentiableAt
+      (isOpen_Ioo.mem_nhds hy)).hasDerivAt
+    simpa only [iteratedDeriv_succ] using hd
+
+/-- All right-hand jets vanishing is enough for a smooth zero extension
+across the left endpoint, locally on `(-∞, b)`. -/
+theorem contDiffOn_extendZeroLeft_Iio
+    {a b : ℝ} {f : ℝ → ℝ} (hab : a < b) (hf : ContDiffOn ℝ ∞ f (Ioo a b))
+    (hlim : ∀ n : ℕ, Tendsto (iteratedDeriv n f) (𝓝[>] a) (𝓝 0)) :
+    ContDiffOn ℝ ∞ (extendZeroLeft a f) (Iio b) := by
+  apply contDiffOn_of_differentiableOn_deriv
+  intro n _
+  have hd : DifferentiableOn ℝ (extendZeroLeft a (iteratedDeriv n f)) (Iio b) := by
+    intro x hx
+    apply DifferentiableAt.differentiableWithinAt
+    apply HasDerivAt.differentiableAt
+    apply hasDerivAt_extendZeroLeft_Iio hab _ (hlim n) (hlim (n + 1)) hx
+    intro y hy
+    have hdy := ((differentiableOn_iteratedDeriv_Ioo hf n y hy).differentiableAt
+      (isOpen_Ioo.mem_nhds hy)).hasDerivAt
+    simpa only [iteratedDeriv_succ] using hdy
+  apply hd.congr
+  intro x hx
+  exact (iteratedDerivWithin_of_isOpen isOpen_Iio hx).trans
+    (iteratedDeriv_extendZeroLeft_Iio hab hf hlim n hx)
+
+/-- One-sided smoothness supplies actual right-hand limits of every
+ordinary derivative; the endpoint values are the within-set jets. -/
+theorem tendsto_iteratedDeriv_of_contDiffOn_Ico
+    {a b : ℝ} {f : ℝ → ℝ} (hab : a < b) (hf : ContDiffOn ℝ ∞ f (Ico a b))
+    (k : ℕ) :
+    Tendsto (iteratedDeriv k f) (𝓝[>] a)
+      (𝓝 (iteratedDerivWithin k f (Ico a b) a)) := by
+  have hc := hf.continuousOn_iteratedDerivWithin (m := k) (by simp) (uniqueDiffOn_Ico a b)
+  have hlim := hc a ⟨le_rfl, hab⟩
+  rw [ContinuousWithinAt, nhdsWithin_Ico_eq_nhdsGE hab] at hlim
+  apply (hlim.mono_left (nhdsWithin_mono a Ioi_subset_Ici_self)).congr'
+  filter_upwards [Ioo_mem_nhdsGT hab] with x hx
+  exact iteratedDerivWithin_eq_iteratedDeriv (uniqueDiffOn_Ico a b)
+    ((hf.contDiffAt (Ico_mem_nhds_iff.mpr hx)).of_le (by simp))
+    (Ioo_subset_Ico_self hx)
+
+/-- A function smooth on a half-open real interval has one genuine smooth
+extension across its included endpoint. The extension agrees everywhere
+on the original interval, including the endpoint. -/
+theorem exists_contDiffOn_Iio_extension_of_Ico
+    {a b : ℝ} {f : ℝ → ℝ} (hab : a < b) (hf : ContDiffOn ℝ ∞ f (Ico a b)) :
+    ∃ F : ℝ → ℝ, EqOn F f (Ico a b) ∧ ContDiffOn ℝ ∞ F (Iio b) := by
+  obtain ⟨g₀, hg₀, hjet₀⟩ := exists_contDiff_prescribed_jets
+    (fun k => iteratedDerivWithin k f (Ico a b) a)
+  let g : ℝ → ℝ := fun x => g₀ (x - a)
+  have hg : ContDiff ℝ ∞ g := hg₀.comp (contDiff_id.sub contDiff_const)
+  have hjet (k : ℕ) : iteratedDeriv k g a = iteratedDerivWithin k f (Ico a b) a := by
+    dsimp only [g]
+    rw [iteratedDeriv_comp_sub_const]
+    simpa only [sub_self] using hjet₀ k
+  have hga : g a = f a := by
+    simpa only [iteratedDeriv_zero, iteratedDerivWithin_zero] using hjet 0
+  have hres : ContDiffOn ℝ ∞ (f - g) (Ico a b) := hf.sub hg.contDiffOn
+  have hflat (k : ℕ) : Tendsto (iteratedDeriv k (f - g)) (𝓝[>] a) (𝓝 0) := by
+    have hzero : iteratedDerivWithin k (f - g) (Ico a b) a = 0 := by
+      rw [iteratedDerivWithin_sub ⟨le_rfl, hab⟩ (uniqueDiffOn_Ico a b)
+        ((hf a ⟨le_rfl, hab⟩).of_le (by simp))
+        (hg.contDiffAt.contDiffWithinAt.of_le (by simp)),
+        iteratedDerivWithin_eq_iteratedDeriv (uniqueDiffOn_Ico a b)
+          (hg.contDiffAt.of_le (by simp)) ⟨le_rfl, hab⟩, hjet, sub_self]
+    simpa only [hzero] using tendsto_iteratedDeriv_of_contDiffOn_Ico hab hres k
+  let F : ℝ → ℝ := fun x => g x + extendZeroLeft a (f - g) x
+  refine ⟨F, ?_, hg.contDiffOn.add (contDiffOn_extendZeroLeft_Iio hab
+    (hres.mono Ioo_subset_Ico_self) hflat)⟩
+  intro x hx
+  dsimp only [F]
+  by_cases hax : a < x
+  · rw [extendZeroLeft_of_gt hax]
+    simp only [Pi.sub_apply, add_sub_cancel]
+  · have hxa : x = a := le_antisymm (not_lt.mp hax) hx.1
+    subst x
+    simpa only [extendZeroLeft_of_le le_rfl, add_zero] using hga
+
+/-- The entrance-facing form: equality on `[a,b)`, full smoothness at `a`,
+and smoothness throughout the open interior. -/
+theorem exists_contDiffAt_extension_of_Ico
+    {a b : ℝ} {f : ℝ → ℝ} (hab : a < b) (hf : ContDiffOn ℝ ∞ f (Ico a b)) :
+    ∃ F : ℝ → ℝ, EqOn F f (Ico a b) ∧ ContDiffAt ℝ ∞ F a ∧
+      ContDiffOn ℝ ∞ F (Ioo a b) := by
+  obtain ⟨F, hF, hFsmooth⟩ := exists_contDiffOn_Iio_extension_of_Ico hab hf
+  exact ⟨F, hF, hFsmooth.contDiffAt (isOpen_Iio.mem_nhds hab),
+    hFsmooth.mono (fun _ hx => hx.2)⟩
+
+/-- Every smooth extension has exactly the original one-sided endpoint
+jets, so choosing the exterior does not change entrance data. -/
+theorem iteratedDeriv_eq_within_of_eqOn_Ico
+    {a b : ℝ} {F f : ℝ → ℝ} (hab : a < b)
+    (hF : ContDiffAt ℝ ∞ F a) (heq : EqOn F f (Ico a b)) (k : ℕ) :
+    iteratedDeriv k F a = iteratedDerivWithin k f (Ico a b) a := by
+  exact (iteratedDerivWithin_eq_iteratedDeriv (uniqueDiffOn_Ico a b)
+    (hF.of_le (by simp)) ⟨le_rfl, hab⟩).symm.trans
+      (iteratedDerivWithin_congr heq ⟨le_rfl, hab⟩)
+
+theorem hasDerivAt_of_smooth_extension_Ico
+    {a b d : ℝ} {F f : ℝ → ℝ} (hab : a < b)
+    (hF : ContDiffAt ℝ ∞ F a) (heq : EqOn F f (Ico a b))
+    (hf : HasDerivWithinAt f d (Ico a b) a) : HasDerivAt F d a := by
+  have hd : deriv F a = derivWithin f (Ico a b) a := by
+    simpa only [iteratedDeriv_one, iteratedDerivWithin_one] using
+      iteratedDeriv_eq_within_of_eqOn_Ico hab hF heq 1
+  exact (hF.differentiableAt (by simp)).hasDerivAt.congr_deriv
+    (hd.trans (hf.derivWithin (uniqueDiffOn_Ico a b a ⟨le_rfl, hab⟩)))
 
 end ContinuousFlexibility.Analysis
