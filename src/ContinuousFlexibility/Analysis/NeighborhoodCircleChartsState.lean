@@ -21,6 +21,38 @@ namespace ContinuousFlexibility.Statements
 open Set
 open scoped ContDiff ENNReal
 
+private theorem neighborhood_circle_unweight {d H γ B : ℝ}
+    (hH : 0 < H) (h : |H ^ (-γ) * d| ≤ B) : |d| ≤ B * H ^ γ := by
+  rw [abs_mul, abs_of_pos (Real.rpow_pos_of_pos hH (-γ)),
+    Real.rpow_neg hH.le, ← div_eq_inv_mul] at h
+  exact (div_le_iff₀ (Real.rpow_pos_of_pos hH γ)).mp h
+
+private theorem neighborhood_circle_budget {d w L G K H : ℝ}
+    (hK : 0 ≤ K) (hw : 0 ≤ w) (hG : 0 ≤ G)
+    (hLG : L ≤ G) (hwH : w ≤ H) (hd : |d| ≤ (K * L) * w) :
+    |d| ≤ (K * H) * G := by
+  calc
+    |d| ≤ (K * L) * w := hd
+    _ ≤ (K * G) * w :=
+      mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hLG hK) hw
+    _ ≤ (K * G) * H := mul_le_mul_of_nonneg_left hwH (mul_nonneg hK hG)
+    _ = (K * H) * G := by ring
+
+private theorem neighborhood_circleMember_deriv_le_weight
+    {T : MaterialData} {γ : ℝ} {f : ℕ → ℝ → ℝ}
+    (hf : CircleMember T γ f) (m : ℕ) (θ : ℝ) (hH : 0 < T.H (T.sample m)) :
+    |deriv (f m) θ| ≤
+      (anglePairEvaluationConstant * circleNorm T γ 2 f) * T.H (T.sample m) ^ γ := by
+  have hw : |T.H (T.sample m) ^ (-γ) * deriv (f m) θ| ≤
+      anglePairEvaluationConstant * ‖circleJetEncodeHilbert hf 2 m‖ := by
+    simpa only [pow_zero, one_mul, iteratedDeriv_one] using
+      spaces_circle_weighted_pointwise hf 2 m 1 0 (by norm_num) θ
+  have hrow : ‖circleJetEncodeHilbert hf 2 m‖ ≤ circleNorm T γ 2 f :=
+    (lp.norm_apply_le_norm (by norm_num : (2 : ℝ≥0∞) ≠ 0)
+      (circleJetEncodeHilbert hf 2) m).trans_eq (circleJetEncodeHilbert_norm hf 2)
+  exact neighborhood_circle_unweight hH
+    (hw.trans (mul_le_mul_of_nonneg_left hrow anglePairEvaluationConstant_nonneg))
+
 /-- First derivatives of every decoded circle have one uniform order-two
 bound, with no dependence on the circle index or evaluation point. -/
 theorem circleModel_deriv_le_grading
@@ -29,8 +61,11 @@ theorem circleModel_deriv_le_grading
     (hγ : 0 < γ) (hM : IsCircleModel T γ M) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ u : M.Space, ∀ m θ,
       |deriv (M.decode u m) θ| ≤ K * M.grading 2 u := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hPower, _⟩ := hT
-  obtain ⟨H, hH, hHbound, _, _⟩ := hPower 0 γ hγ
+  have hPower := hT.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hEnvelope := hPower 0 γ hγ
+  let H : ℝ := hEnvelope.choose
+  have hH : 0 < H := hEnvelope.choose_spec.1
+  have hHbound := hEnvelope.choose_spec.2.1
   refine ⟨anglePairEvaluationConstant * H,
     mul_nonneg anglePairEvaluationConstant_nonneg hH.le, ?_⟩
   intro u m θ
@@ -38,30 +73,12 @@ theorem circleModel_deriv_le_grading
   have hpos : 0 < T.H (T.sample m) := (hT.2.1 _ (hsample m)).2.1
   have hweight : T.H (T.sample m) ^ γ ≤ H := by
     simpa only [Real.rpow_zero, mul_one] using hHbound _ (hsample m)
-  have hrow : ‖circleJetEncodeHilbert hu 2 m‖ ≤ M.grading 2 u := by
-    calc
-      ‖circleJetEncodeHilbert hu 2 m‖ ≤ ‖circleJetEncodeHilbert hu 2‖ :=
-        lp.norm_apply_le_norm (by norm_num : (2 : ℝ≥0∞) ≠ 0) _ m
-      _ = circleNorm T γ 2 (M.decode u) := circleJetEncodeHilbert_norm hu 2
-      _ = ‖u.val 2‖ := (hM.2.2.2.2.2.2.2 u 2).symm
-      _ ≤ M.grading 2 u := Analysis.norm_coordinate_le_graded _ _ le_rfl u
-  have hw := spaces_circle_weighted_pointwise hu 2 m 1 0 (by norm_num) θ
-  simp only [pow_zero, one_mul, iteratedDeriv_one, abs_mul,
-    abs_of_pos (Real.rpow_pos_of_pos hpos (-γ))] at hw
-  rw [Real.rpow_neg hpos.le, ← div_eq_inv_mul] at hw
-  have hd := (div_le_iff₀ (Real.rpow_pos_of_pos hpos γ)).mp hw
-  calc
-    |deriv (M.decode u m) θ| ≤
-        (anglePairEvaluationConstant * ‖circleJetEncodeHilbert hu 2 m‖) *
-          T.H (T.sample m) ^ γ := hd
-    _ ≤ (anglePairEvaluationConstant * M.grading 2 u) * T.H (T.sample m) ^ γ :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left hrow anglePairEvaluationConstant_nonneg)
-        (Real.rpow_nonneg hpos.le γ)
-    _ ≤ (anglePairEvaluationConstant * M.grading 2 u) * H :=
-      mul_le_mul_of_nonneg_left hweight
-        (mul_nonneg anglePairEvaluationConstant_nonneg (apply_nonneg _ _))
-    _ = (anglePairEvaluationConstant * H) * M.grading 2 u := by ring
+  have hnorm : circleNorm T γ 2 (M.decode u) ≤ M.grading 2 u :=
+    (hM.2.2.2.2.2.2.2 u 2).symm.trans_le
+      (Analysis.norm_coordinate_le_graded _ _ le_rfl u)
+  exact neighborhood_circle_budget anglePairEvaluationConstant_nonneg
+    (Real.rpow_nonneg hpos.le γ) (apply_nonneg (M.grading 2) u) hnorm hweight
+    (neighborhood_circleMember_deriv_le_weight hu m θ hpos)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
@@ -102,6 +119,11 @@ theorem neighborhoodStateGrading_chart_le (S : PhysicalSpacesData) (s : ℕ)
   exact ((le_add_of_nonneg_left hκ).trans
     (le_add_of_nonneg_left (norm_nonneg x.2.1))).trans htail
 
+private theorem neighborhood_circleChart_defect {a d B : ℝ}
+    (ha : a = 1 + d) (hd : |d| ≤ B) : |a - 1| ≤ B := by
+  have he : a - 1 = d := by linarith only [ha]
+  exact (congrArg abs he).trans_le hd
+
 /-- The derivative defect is controlled by the distance from the actual
 reference state, whose circle chart coordinate vanishes. -/
 theorem stateLeftChart_deriv_sub_one_le
@@ -111,20 +133,23 @@ theorem stateLeftChart_deriv_sub_one_le
     ∃ K : ℝ, 0 ≤ K ∧ ∀ x : AnnularState S, ∀ m θ,
       |deriv (stateLeftChart S x m) θ - 1| ≤
         K * stateGrading S 2 (x - C.referenceState) := by
-  obtain ⟨K, hK, hbound⟩ := circleModel_deriv_le_grading hT
+  have hex := circleModel_deriv_le_grading
+    (D := D) (T := T) (M := S.circle (3 / 4 : ℝ)) (γ := (3 / 4 : ℝ)) hT
     (materialSample_mem_radialCore hT hD.choose_spec.2.1)
     (by norm_num : (0 : ℝ) < 3 / 4) (hS.2.1 (3 / 4 : ℝ))
+  let K : ℝ := hex.choose
+  have hK : 0 ≤ K := hex.choose_spec.1
+  have hbound := hex.choose_spec.2
   refine ⟨K, hK, fun x m θ => ?_⟩
   have hz : C.referenceState.2.2.2 = 0 := href.2.2.2.2.1
+  have hcoord : (x - C.referenceState).2.2.2 = x.2.2.2 := by
+    simp only [Prod.snd_sub, hz, sub_zero]
   have hc : (S.circle (3 / 4 : ℝ)).grading 2 x.2.2.2 ≤
-      stateGrading S 2 (x - C.referenceState) := by
-    simpa only [Prod.snd_sub, hz, sub_zero] using
-      neighborhoodStateGrading_chart_le S 2 (x - C.referenceState)
-  rw [deriv_stateLeftChart hS]
-  have he : 1 + deriv ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m) θ - 1 =
-      deriv ((S.circle (3 / 4 : ℝ)).decode x.2.2.2 m) θ := by ring
-  rw [he]
-  exact (hbound x.2.2.2 m θ).trans (mul_le_mul_of_nonneg_left hc hK)
+      stateGrading S 2 (x - C.referenceState) :=
+    (congrArg ((S.circle (3 / 4 : ℝ)).grading 2) hcoord).symm.trans_le
+      (neighborhoodStateGrading_chart_le S 2 (x - C.referenceState))
+  exact neighborhood_circleChart_defect (deriv_stateLeftChart hS x m θ)
+    ((hbound x.2.2.2 m θ).trans (mul_le_mul_of_nonneg_left hc hK))
 
 theorem stateLeftChart_strictMono_of_deriv_lower
     (x : AnnularState S) (m : ℕ)

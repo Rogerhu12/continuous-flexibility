@@ -58,16 +58,27 @@ theorem exists_common_stateNeighborhood_bounds
       (∀ z ∈ stateNeighborhood S C 4 ε, stateSector S z.1 → ∀ m θ,
         stateLeftChart S z.1 m (θ + Real.pi) = stateLeftChart S z.1 m θ + Real.pi ∧
         stateLeftChart S z.1 m (-θ) = -stateLeftChart S z.1 m θ) := by
-  obtain ⟨hRef, href, hControl, hIndex, hJets⟩ := hPartA
-  have hborder : RadialTrueBorder D := hRef.2.2.2.1
+  have href := hPartA.2.1
+  have hControl := hPartA.2.2.1
+  have hIndex := hPartA.2.2.2.1
+  have hJets := hPartA.2.2.2.2
+  have hborder : RadialTrueBorder D := hPartA.1.2.2.2.1
   have hsmooth (x : AnnularState S) : ContDiff ℝ ∞ (stateProfile D S C x) :=
     contDiff_stateProfile_of_control_bounds hS hT hD hborder.1 hControl hIndex hJets x
-  obtain ⟨εp, hεp, hεpOne, hprofile⟩ :=
+  have hpData :=
     exists_stateNeighborhood_profile_bounds hD hT hS href hborder hControl hIndex hJets
-  obtain ⟨εd, hεd, _, hdenominator⟩ :=
-    exists_stateNeighborhood_denominator_bounds hD hT hS C
-  obtain ⟨εc, hεc, hchart⟩ :=
-    exists_stateNeighborhood_leftChart_deriv_bounds hD hT hS href
+  let εp : ℝ := hpData.choose
+  have hεp : 0 < εp := hpData.choose_spec.1
+  have hεpOne : εp < 1 := hpData.choose_spec.2.1
+  have hprofile := hpData.choose_spec.2.2
+  have hdData := exists_stateNeighborhood_denominator_bounds hD hT hS C
+  let εd : ℝ := hdData.choose
+  have hεd : 0 < εd := hdData.choose_spec.1
+  have hdenominator := hdData.choose_spec.2.2
+  have hcData := exists_stateNeighborhood_leftChart_deriv_bounds hD hT hS href
+  let εc : ℝ := hcData.choose
+  have hεc : 0 < εc := hcData.choose_spec.1
+  have hchart := hcData.choose_spec.2
   let ε : ℝ := min εp (min εd εc)
   have hε : 0 < ε := lt_min hεp (lt_min hεd hεc)
   have hεp' : ε ≤ εp := min_le_left _ _

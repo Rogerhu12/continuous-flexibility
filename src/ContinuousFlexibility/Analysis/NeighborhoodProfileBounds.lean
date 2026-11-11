@@ -112,6 +112,20 @@ theorem stateKappa_grading_weight_bound
   exact hb.trans (mul_le_mul_of_nonneg_right
     (mul_le_mul_of_nonneg_left hstate hconst) (Real.rpow_pos_of_pos (hH m) _).le)
 
+private theorem neighborhood_weighted_control_product_le
+    {k v H E P B L N : ℝ}
+    (hP : 0 ≤ P) (hB : 0 ≤ B) (hN : 0 ≤ N)
+    (hk : |k| ≤ (P * N) * H) (hv : |v| ≤ B * E) (hw : H * E ≤ L) :
+    |k * v| ≤ ((P * B) * L) * N := by
+  calc
+    |k * v| = |k| * |v| := abs_mul _ _
+    _ ≤ ((P * N) * H) * (B * E) :=
+      mul_le_mul hk hv (abs_nonneg v) ((abs_nonneg k).trans hk)
+    _ = ((P * B) * N) * (H * E) := by ring
+    _ ≤ ((P * B) * N) * L :=
+      mul_le_mul_of_nonneg_left hw (mul_nonneg (mul_nonneg hP hB) hN)
+    _ = ((P * B) * L) * N := by ring
+
 /-- The actual disjoint sum has a bound linear in any input grading. -/
 theorem stateControlSum_grading_bound_of_bounds
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -123,9 +137,14 @@ theorem stateControlSum_grading_bound_of_bounds
       |C.control m r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ s : ℕ, ∀ x : AnnularState S, ∀ r ∈ Ioo D.a D.b,
       |stateControlSum C x r| ≤ K * stateGrading S s x := by
-  obtain ⟨B, hB, hcontrol⟩ := hJet
-  obtain ⟨L, hL, hweight⟩ := materialSample_shifted_weight_bounded hT hD C.cell hIndex
+  let B : ℝ := hJet.choose
+  have hB : 0 < B := hJet.choose_spec.1
+  have hcontrol := hJet.choose_spec.2
+  have hweights := materialSample_shifted_weight_bounded hT hD C.cell hIndex
     (show 0 < (3 / 4 : ℝ) by norm_num) B
+  let L : ℝ := hweights.choose
+  have hL : 0 ≤ L := hweights.choose_spec.1
+  have hweight := hweights.choose_spec.2
   let P : ℝ := (1 / Real.pi) * Real.sqrt Real.pi
   have hP : 0 ≤ P := by dsimp [P]; positivity
   refine ⟨(P * B) * L, mul_nonneg (mul_nonneg hP hB.le) hL, ?_⟩
@@ -134,21 +153,47 @@ theorem stateControlSum_grading_bound_of_bounds
   have hterm (m : ℕ) (hm : r ∈ Ioo (C.left m) (C.right m)) :
       |stateKappa S x m * iteratedDeriv 0 (C.control m) r| ≤
         ((P * B) * L) * stateGrading S s x := by
-    rw [iteratedDeriv_zero, abs_mul]
-    have hκ := stateKappa_grading_weight_bound hD hT hS s x m
-    have hκnonneg : 0 ≤ (P * stateGrading S s x) * T.H (T.sample m) ^ (3 / 4 : ℝ) :=
-      (abs_nonneg _).trans hκ
-    calc
-      _ ≤ ((P * stateGrading S s x) * T.H (T.sample m) ^ (3 / 4 : ℝ)) *
-          (B * T.E0 (T.sample (C.cell m)) ^ B) :=
-        mul_le_mul hκ (hcontrol m r hm) (abs_nonneg _) hκnonneg
-      _ = ((P * B) * stateGrading S s x) *
-          (T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B) := by ring
-      _ ≤ ((P * B) * stateGrading S s x) * L :=
-        mul_le_mul_of_nonneg_left (hweight m) (mul_nonneg (mul_nonneg hP hB.le) hsize)
-      _ = _ := by ring
+    simpa only [iteratedDeriv_zero] using neighborhood_weighted_control_product_le hP hB.le hsize
+      (stateKappa_grading_weight_bound hD hT hS s x m) (hcontrol m r hm) (hweight m)
   simpa only [iteratedDeriv_zero] using abs_iteratedDeriv_stateControlSum_le hC x 0 hr
     (mul_nonneg (mul_nonneg (mul_nonneg hP hB.le) hL) hsize) hterm
+
+private theorem neighborhood_stateControlSum_congr
+    {C : NonlinearGeometryData S} {x y : AnnularState S}
+    (hκ : x.2.2.1 = y.2.2.1) (r : ℝ) :
+    stateControlSum C x r = stateControlSum C y r :=
+  congrArg (fun u : CircleSpace S =>
+    ∑' m, angularMean ((S.circle (3 / 4 : ℝ)).decode u m) * C.control m r) hκ
+
+private theorem neighborhood_profile_radius {L : ℝ} (hL : 0 ≤ L) :
+    ∃ ε : ℝ, 0 < ε ∧ ε < 1 ∧ L * ε ≤ Real.log 2 := by
+  have hLone : 0 < L + 1 := by linarith only [hL]
+  have hlog : 0 < Real.log 2 := Real.log_pos (by norm_num)
+  let ε : ℝ := min (1 / 2) (Real.log 2 / (L + 1))
+  have hε : 0 < ε := lt_min (by norm_num) (div_pos hlog hLone)
+  have hεone : ε < 1 := (min_le_left _ _).trans_lt (by norm_num)
+  refine ⟨ε, hε, hεone, ?_⟩
+  have hh := (le_div_iff₀ hLone).mp (min_le_right (1 / 2) (Real.log 2 / (L + 1)))
+  change ε * (L + 1) ≤ Real.log 2 at hh
+  nlinarith only [hh, hε.le]
+
+private theorem neighborhood_profile_exponent_le {ν χ τ N B K : ℝ}
+    (hN : 0 ≤ N) (hν : |ν| ≤ N) (hχ : |χ| ≤ B) (hτ : |τ| ≤ K * N) :
+    |ν * χ + τ| ≤ (B + K) * N := by
+  calc
+    |ν * χ + τ| ≤ |ν * χ| + |τ| := abs_add_le _ _
+    _ = |ν| * |χ| + |τ| := by rw [abs_mul]
+    _ ≤ N * B + K * N :=
+      add_le_add (mul_le_mul hν hχ (abs_nonneg χ) hN) hτ
+    _ = (B + K) * N := by ring
+
+private theorem neighborhood_exp_bounds {f : ℝ} (hf : |f| ≤ Real.log 2) :
+    (1 / 2 : ℝ) ≤ Real.exp f ∧ Real.exp f ≤ 2 := by
+  constructor
+  · have hh := Real.exp_le_exp.mpr (abs_le.mp hf).1
+    simpa only [Real.exp_neg, Real.exp_log (by norm_num : (0 : ℝ) < 2),
+      one_div] using hh
+  · exact (Real.exp_le_exp.mpr (abs_le.mp hf).2).trans_eq (Real.exp_log (by norm_num))
 
 /-- The actual exponential state profile is comparable to the reference on
 one order-four neighbourhood; its radius is independent of later jet orders. -/
@@ -169,58 +214,48 @@ theorem exists_stateNeighborhood_profile_bounds
   have hJet : ∃ B : ℝ, 0 < B ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) →
       |C.control m r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B := by
     simpa only [iteratedDeriv_zero] using hJets 0
-  obtain ⟨K, hK, hcontrol⟩ := stateControlSum_grading_bound_of_bounds hD hT hS hC hIndex hJet
-  obtain ⟨B₀, hB₀⟩ := hborder.1.continuous.bounded_above_of_compact_support hborder.2.1
+  have hcontrols := stateControlSum_grading_bound_of_bounds hD hT hS hC hIndex hJet
+  let K : ℝ := hcontrols.choose
+  have hK : 0 ≤ K := hcontrols.choose_spec.1
+  have hcontrol := hcontrols.choose_spec.2
+  have hcutoff := hborder.1.continuous.bounded_above_of_compact_support hborder.2.1
+  let B₀ : ℝ := hcutoff.choose
+  have hB₀ := hcutoff.choose_spec
   let B : ℝ := max B₀ 0
   have hB : 0 ≤ B := le_max_right _ _
   have hχ (r : ℝ) : |D.chi r| ≤ B := by
-    have hh : |D.chi r| ≤ B₀ := by simpa only [Real.norm_eq_abs] using hB₀ r
+    have hh : |D.chi r| ≤ B₀ := (Real.norm_eq_abs _).symm.trans_le (hB₀ r)
     exact hh.trans (le_max_left _ _)
   let L : ℝ := B + K
   have hL : 0 ≤ L := add_nonneg hB hK
-  have hLone : 0 < L + 1 := by linarith only [hL]
-  have hlog : 0 < Real.log 2 := Real.log_pos (by norm_num)
-  let ε : ℝ := min (1 / 2) (Real.log 2 / (L + 1))
-  have hε : 0 < ε := lt_min (by norm_num) (div_pos hlog hLone)
-  have hεone : ε < 1 := (min_le_left _ _).trans_lt (by norm_num)
-  have hsmall : L * ε ≤ Real.log 2 := by
-    have hh := (le_div_iff₀ hLone).mp (min_le_right (1 / 2) (Real.log 2 / (L + 1)))
-    change ε * (L + 1) ≤ Real.log 2 at hh
-    nlinarith only [hh, hε.le]
+  have hradius := neighborhood_profile_radius hL
+  let ε : ℝ := hradius.choose
+  have hε : 0 < ε := hradius.choose_spec.1
+  have hεone : ε < 1 := hradius.choose_spec.2.1
+  have hsmall : L * ε ≤ Real.log 2 := hradius.choose_spec.2.2
   have hνzero : C.referenceState.2.1 = 0 := href.2.2.1
   have hκzero : C.referenceState.2.2.1 = 0 := href.2.2.2.1
   refine ⟨ε, hε, hεone, ?_⟩
   intro z hz r hr
   let y : AnnularState S := z.1 - C.referenceState
   have hy : stateGrading S 4 y < ε := hz.1
-  have hν : |z.1.2.1| ≤ stateGrading S 4 y := by
-    simpa only [y, Prod.fst_sub, Prod.snd_sub, hνzero, sub_zero] using
-      (neighborhoodStateGrading_controls_le S 4 y).1
-  have heq : stateControlSum C y = stateControlSum C z.1 := by
-    funext t
-    simp only [stateControlSum, stateKappa, y, Prod.fst_sub, Prod.snd_sub, hκzero, sub_zero]
-  have hsum : |stateControlSum C z.1 r| ≤ K * stateGrading S 4 y := by
-    rw [← heq]
-    exact hcontrol 4 y r hr
+  have hνy : y.2.1 = z.1.2.1 :=
+    (congrArg (fun ν : ℝ => z.1.2.1 - ν) hνzero).trans (sub_zero _)
+  have hκy : y.2.2.1 = z.1.2.2.1 :=
+    (congrArg (fun κ : CircleSpace S => z.1.2.2.1 - κ) hκzero).trans (sub_zero _)
+  have hν : |z.1.2.1| ≤ stateGrading S 4 y :=
+    (congrArg abs hνy).symm.trans_le (neighborhoodStateGrading_controls_le S 4 y).1
+  have heq := neighborhood_stateControlSum_congr (C := C) (x := y) (y := z.1) hκy r
+  have hsum : |stateControlSum C z.1 r| ≤ K * stateGrading S 4 y :=
+    (congrArg abs heq).symm.trans_le (hcontrol 4 y r hr)
   let f : ℝ := z.1.2.1 * D.chi r + stateControlSum C z.1 r
-  have hf : |f| ≤ Real.log 2 := by
-    calc
-      |f| ≤ |z.1.2.1 * D.chi r| + |stateControlSum C z.1 r| := abs_add_le _ _
-      _ ≤ stateGrading S 4 y * B + K * stateGrading S 4 y := by
-        rw [abs_mul]
-        exact add_le_add (mul_le_mul hν (hχ r) (abs_nonneg _) (apply_nonneg _ _)) hsum
-      _ = L * stateGrading S 4 y := by dsimp [L]; ring
-      _ ≤ L * ε := mul_le_mul_of_nonneg_left hy.le hL
-      _ ≤ Real.log 2 := hsmall
+  have hf : |f| ≤ Real.log 2 :=
+    (neighborhood_profile_exponent_le (apply_nonneg (stateGrading S 4) y)
+      hν (hχ r) hsum).trans ((mul_le_mul_of_nonneg_left hy.le hL).trans hsmall)
   have hw : 0 < D.w r := hD.choose_spec.1.2.2.2.2.1 r hr
-  have hratio : stateProfile D S C z.1 r / D.w r = Real.exp f := by
-    change D.w r * Real.exp f / D.w r = Real.exp f
-    exact mul_div_cancel_left₀ _ hw.ne'
-  rw [hratio]
-  constructor
-  · have hh := Real.exp_le_exp.mpr (abs_le.mp hf).1
-    simpa only [Real.exp_neg, Real.exp_log (by norm_num : (0 : ℝ) < 2),
-      one_div] using hh
-  · exact (Real.exp_le_exp.mpr (abs_le.mp hf).2).trans_eq (Real.exp_log (by norm_num))
+  have hratio : stateProfile D S C z.1 r / D.w r = Real.exp f :=
+    mul_div_cancel_left₀ _ hw.ne'
+  have hbounds := neighborhood_exp_bounds hf
+  exact ⟨hbounds.1.trans_eq hratio.symm, hratio.trans_le hbounds.2⟩
 
 end ContinuousFlexibility.Statements
