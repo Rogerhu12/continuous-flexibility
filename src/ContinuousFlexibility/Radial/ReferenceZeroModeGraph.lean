@@ -40,8 +40,11 @@ theorem radialWeakPairing_radial_lift (D : ReferenceData)
       ∫ r in D.a..D.b,
         radialAngularMean (fun θ => u (r, θ)) *
           deriv (fun t => D.w t * deriv ψ t) r := by
+  have hd (r : ℝ) : deriv (fun _ : ℝ => ψ r) = (fun _ : ℝ => (0 : ℝ)) := by
+    funext θ
+    exact deriv_const (ψ r)
   unfold radialWeakPairing
-  simp only [Radial.radialPDE, deriv_const, mul_zero, add_zero,
+  simp only [Radial.radialPDE, hd, deriv_const, mul_zero, add_zero,
     radialAngularMean_mul_const]
 
 theorem referenceColumn_radial_lift_mean (D : ReferenceData)
@@ -53,8 +56,9 @@ theorem referenceColumn_radial_lift_mean (D : ReferenceData)
     funext θ
     ring
   rw [heq, radialAngularMean_const_mul]
-  have hz : radialAngularMean (Radial.cosineMode 2) = 0 :=
-    Radial.angularAverage_cosineMode 2 (by norm_num)
+  have hz : radialAngularMean (Radial.cosineMode 2) = 0 := by
+    simpa only [radialAngularMean, Radial.angularAverage] using
+      Radial.angularAverage_cosineMode 2 (by norm_num)
   rw [hz, mul_zero]
 
 /-- Radial tests in the actual graph give the genuine one-dimensional
@@ -87,13 +91,18 @@ theorem ReferenceGraph.zeroModeWeak_local {D : ReferenceData}
         deriv (fun t => D.w t * deriv ψ t) r) ⊆ Ioo l h := by
     intro r hr
     have hd : deriv (fun t => D.w t * deriv ψ t) r ≠ 0 :=
-      fun hz => hr (by rw [hz, mul_zero])
+      fun hz => hr (by
+        change radialAngularMean (fun θ => U.1 (r, θ)) *
+          deriv (fun t => D.w t * deriv ψ t) r = 0
+        rw [hz, mul_zero])
     exact hψs (tsupport_deriv_subset
       (tsupport_mul_subset_right (support_deriv_subset hd)))
   have hright : Function.support (fun r =>
       radialAngularMean (fun θ => F.1 (r, θ)) * ψ r) ⊆ Ioo l h := by
     intro r hr
-    have hne : ψ r ≠ 0 := fun hz => hr (by rw [hz, mul_zero])
+    have hne : ψ r ≠ 0 := fun hz => hr (by
+      change radialAngularMean (fun θ => F.1 (r, θ)) * ψ r = 0
+      rw [hz, mul_zero])
     exact hψs (subset_tsupport ψ hne)
   have heq := hG.zeroModeWeak_global hψ hcψ (hψs.trans hsub)
   rw [Radial.intervalIntegral_eq_integral_of_support_subset hab (hleft.trans hsub),
@@ -123,6 +132,6 @@ theorem ReferenceGraph.zeroMode_ae_affine_resistance {D : ReferenceData}
   · intro l h hal hlh hhb ψ hψ hcψ hψs
     have heq := hG.zeroModeWeak_local hg.2.1.le hal hlh hhb hψ hcψ hψs
     simpa only [Prod.fst_zero, Pi.zero_apply, radialAngularMean,
-      intervalIntegral.integral_zero, mul_zero] using heq
+      intervalIntegral.integral_zero, mul_zero, zero_mul] using heq
 
 end ContinuousFlexibility.Statements

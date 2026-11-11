@@ -45,11 +45,13 @@ theorem referencePiFourierCoeff_re {f : ℝ → ℝ}
     hc.continuousOn_mul
       (((fourier (-n)).continuous.comp
         (AddCircle.continuous_mk' Real.pi)).continuousOn)
-  unfold referencePiFourierCoeff
-  rw [fourierCoeffOn_eq_integral]
-  simp only [sub_zero, one_div, Complex.real_smul, smul_eq_mul,
-    Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero]
-  congr 1
+  have hformula : referencePiFourierCoeff f n =
+      (Real.pi⁻¹ : ℝ) •
+        (∫ θ in (0 : ℝ)..Real.pi,
+          fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)) := by
+    simpa only [referencePiFourierCoeff, sub_zero, one_div, smul_eq_mul,
+      fourier_coe_apply] using
+      (fourierCoeffOn_eq_integral (fun θ => (f θ : ℂ)) n Real.pi_pos)
   have hre :
       (∫ θ in (0 : ℝ)..Real.pi,
         fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re =
@@ -57,16 +59,26 @@ theorem referencePiFourierCoeff_re {f : ℝ → ℝ}
         (fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re := by
     simpa only [Complex.reCLM_apply] using
       (Complex.reCLM.intervalIntegral_comp_comm hg).symm
-  rw [hre]
-  apply intervalIntegral.integral_congr_ae
-  filter_upwards with θ
-  intro hθ
-  change (fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re =
-    f θ * Real.cos (2 * (n : ℝ) * θ)
-  simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
-    mul_zero, sub_zero, referencePiFourier_re, Int.cast_neg, mul_neg,
-    neg_mul, Real.cos_neg]
-  ring
+  calc
+    _ = Real.pi⁻¹ *
+        (∫ θ in (0 : ℝ)..Real.pi,
+          fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re := by
+      rw [hformula]
+      simp only [Complex.real_smul, Complex.mul_re, Complex.ofReal_re,
+        Complex.ofReal_im, zero_mul, sub_zero]
+    _ = Real.pi⁻¹ * ∫ θ in (0 : ℝ)..Real.pi,
+        (fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re := by rw [hre]
+    _ = _ := by
+      apply congrArg (fun x : ℝ => Real.pi⁻¹ * x)
+      apply intervalIntegral.integral_congr_ae
+      filter_upwards with θ
+      intro hθ
+      change (fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re =
+        f θ * Real.cos (2 * (n : ℝ) * θ)
+      simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
+        mul_zero, sub_zero, referencePiFourier_re, Int.cast_neg, mul_neg,
+        neg_mul, Real.cos_neg]
+      ring
 
 theorem referencePiFourierCoeff_zero_re {f : ℝ → ℝ}
     (hp : Function.Periodic f Real.pi)

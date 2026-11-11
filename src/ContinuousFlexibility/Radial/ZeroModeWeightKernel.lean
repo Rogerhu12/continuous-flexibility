@@ -64,7 +64,7 @@ theorem zeroMode_weighted_inverseProfile_bound
         (U * exp (V * radialQ (D.cellIndex m))) :=
       mul_le_mul_of_nonneg_left (hw m t s ht hs hts) (exp_pos _).le
     _ = U * exp ((-M₁ * radialQ (D.cellIndex k) + γ * radialS (D.cellIndex k)) +
-        V * radialQ (D.cellIndex m)) := by rw [exp_add]; ring
+        V * radialQ (D.cellIndex m)) := by simp only [exp_add]; ring
     _ ≤ U * exp (B + (M₀ * radialQ (D.cellIndex m) + γ * radialS (D.cellIndex m))) :=
       mul_le_mul_of_nonneg_left (exp_le_exp.mpr hexp) hU.le
     _ = (U * exp B) *
@@ -116,8 +116,8 @@ theorem zeroMode_weighted_resistance_bound
     hD.1.2.2.1.1.continuous.continuousOn.inv₀
       (fun s hs => (hD.1.2.2.2.2.1 s (hcore s hs)).ne')
   have hi : IntervalIntegrable (fun s => (D.w s)⁻¹) volume (min r t) (max r t) :=
-    hc.intervalIntegrable_of_Icc (min_le_max r t)
-  have hint := intervalIntegral.integral_mono_on (min_le_max r t)
+    hc.intervalIntegrable_of_Icc (min_le_max : min r t ≤ max r t)
+  have hint := intervalIntegral.integral_mono_on (min_le_max : min r t ≤ max r t)
     (hi.const_mul
       (exp (-M₁ * radialQ (D.cellIndex k) + γ * radialS (D.cellIndex k))))
     (intervalIntegrable_const (a := min r t) (b := max r t)
