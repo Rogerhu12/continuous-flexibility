@@ -23,6 +23,12 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {T : MaterialData} {S : PhysicalSpacesData}
 
+private theorem coupled_seminorm_zero_operator
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (L : E →L[ℝ] F) (hL : L = 0) (p : Seminorm ℝ F) (u : E) : p (L u) = 0 := by
+  rw [hL, ContinuousLinearMap.zero_apply, map_zero]
+
 def coupledControlCircleOperator
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (B : ControlColumnData S) (z : AnnularState S × ℝ) :
@@ -75,10 +81,11 @@ theorem coupledControlCircleInverse_grading_le
     exact (congrArg ((S.circle (3 / 4 : ℝ)).grading n)
       (coupledControlCircleInverse_val hS B z hlo u)).trans_le
         (coupledInverseControlLift_grading_le hS (B.diagonal z) hlo n u.val)
-  · simpa only [coupledControlCircleInverse, dite_eq_right hlo,
-      ContinuousLinearMap.zero_apply, map_zero] using
-      mul_nonneg (by norm_num : (0 : ℝ) ≤ 2)
-        (apply_nonneg (coupledConstantCircleGrading hS n) u)
+  · have hzero : coupledControlCircleInverse hS B z = 0 := by
+      simp only [coupledControlCircleInverse, dite_eq_right hlo]
+    exact (coupled_seminorm_zero_operator _ hzero (coupledConstantCircleGrading hS n) u).trans_le
+      (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2)
+        (apply_nonneg (coupledConstantCircleGrading hS n) u))
 
 theorem controlRestriction_angularMeanProjection
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))

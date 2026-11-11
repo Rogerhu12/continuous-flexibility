@@ -41,25 +41,30 @@ private theorem coupled_factor_family_bound
     (∑ i, q (t.factorFamily v ψ w i) *
       ∏ j ∈ Finset.univ.erase i, p (t.factorFamily v ψ w j)) ≤
       ((t.baseFactors : ℝ) + 1) * R ^ t.baseFactors *
-        ((1 + q ψ) * ∏ i, p (Fin.cons v w i) +
-          ∑ i, q (Fin.cons v w i) * ∏ j ∈ Finset.univ.erase i, p (Fin.cons v w j)) := by
+        ((1 + q ψ) * ∏ i : Fin (k + 1), p ((Fin.cons v w : Fin (k + 1) → E) i) +
+          ∑ i : Fin (k + 1), q ((Fin.cons v w : Fin (k + 1) → E) i) *
+            ∏ j ∈ Finset.univ.erase i, p ((Fin.cons v w : Fin (k + 1) → E) j)) := by
   have hmap (f : E → ℝ) (i : Fin t.baseFactors ⊕ Fin (k + 1)) :
       f (t.factorFamily v ψ w i) =
-        Sum.elim (fun _ : Fin t.baseFactors => f ψ) (fun j => f (Fin.cons v w j)) i := by
+        Sum.elim (fun _ : Fin t.baseFactors => f ψ)
+          (fun j => f ((Fin.cons v w : Fin (k + 1) → E) j)) i := by
     cases i <;> rfl
   have he : (∑ i, q (t.factorFamily v ψ w i) *
       ∏ j ∈ Finset.univ.erase i, p (t.factorFamily v ψ w j)) =
       ∑ i : Fin t.baseFactors ⊕ Fin (k + 1),
-        Sum.elim (fun _ : Fin t.baseFactors => q ψ) (fun j => q (Fin.cons v w j)) i *
+        Sum.elim (fun _ : Fin t.baseFactors => q ψ)
+          (fun j => q ((Fin.cons v w : Fin (k + 1) → E) j)) i *
           ∏ j ∈ Finset.univ.erase i,
-            Sum.elim (fun _ : Fin t.baseFactors => p ψ) (fun j => p (Fin.cons v w j)) j := by
+            Sum.elim (fun _ : Fin t.baseFactors => p ψ)
+              (fun j => p ((Fin.cons v w : Fin (k + 1) → E) j)) j := by
     apply Finset.sum_congr rfl
     intro i _
     rw [hmap q i]
     congr 1
     exact Finset.prod_congr rfl (fun j _ => hmap p j)
   exact he.trans_le (spaces_repeated_low_factors_bound t.baseFactors (k + 1)
-    (p ψ) (q ψ) R (fun i => p (Fin.cons v w i)) (fun i => q (Fin.cons v w i))
+    (p ψ) (q ψ) R (fun i => p ((Fin.cons v w : Fin (k + 1) → E) i))
+    (fun i => q ((Fin.cons v w : Fin (k + 1) → E) i))
     hR (hp ψ) hψ (hq ψ) (fun _ => hp _) (fun _ => hq _))
 
 private theorem coupled_circle_composition_term_local_bound

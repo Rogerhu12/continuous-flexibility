@@ -40,6 +40,7 @@ theorem coupled_lineDeriv_linear_family
     simpa only [zero_smul, add_zero] using
       (hc.tendsto (0 : ℝ)).mono_left nhdsWithin_le_nhds
   unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
+  simp only [zero_add, zero_smul, add_zero]
   apply (hpartial.add hfixed).congr'
   filter_upwards [self_mem_nhdsWithin] with t ht
   have ht0 : t ≠ 0 := by simpa using ht

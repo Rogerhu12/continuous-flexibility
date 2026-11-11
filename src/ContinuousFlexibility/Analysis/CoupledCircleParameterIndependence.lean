@@ -270,10 +270,12 @@ private theorem coupled_sector_nu_line_coordinates
     (liftSectorParameter S C
       (z + coupledScalarAction (E := StateDirections S × ℝ) t
         (coupledSectorNuDirection S μ, 0))).2 = (liftSectorParameter S C z).2 := by
+  have hzero : coupledScalarAction t ((0 : CircleSpace S), (0 : CircleSpace S)) =
+      (0 : CircleSpace S × CircleSpace S) := coupledScalarAction_zero t
   simp only [coupled_liftSectorParameter_add, coupledSectorNuDirection_val,
     Prod.fst_add, Prod.snd_add,
     coupledScalarAction_fst, coupledScalarAction_snd, coupledScalarAction_zero,
-    coupled_liftSectorParameter_snd, add_zero, and_self]
+    hzero, coupled_liftSectorParameter_snd, add_zero, and_self]
 
 private theorem coupled_returnResidual_sector_nu_line
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -374,7 +376,7 @@ theorem coupled_circle_nu_hasLineDerivAt_zero
   have hd := coupled_circle_first_derivative J hz (coupledSectorNuDirection S μ)
   have he := congrArg Subtype.val
     (coupled_circle_nu_firstJet_eq_zero hT hS h1 h2 hcircle J hz μ)
-  simpa only [he, coupledSectorNuDirection_val] using hd
+  simpa only [he, Submodule.coe_zero, coupledSectorNuDirection_val] using hd
 
 /-- N08 already identifies the actual height derivative with `q` times
 the height row. Its zero-parameter specialization gives zero immediately. -/

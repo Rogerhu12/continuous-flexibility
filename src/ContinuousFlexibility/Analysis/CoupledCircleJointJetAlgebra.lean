@@ -21,7 +21,8 @@ variable {X Y : Type*}
 
 private theorem coupled_cons_update {n : ℕ} (x : X) (v : Fin n → X)
     (i : Fin n) (a : X) :
-    Fin.cons x (Function.update v i a) = Function.update (Fin.cons x v) i.succ a := by
+    (Fin.cons x (Function.update v i a) : Fin (n + 1) → X) =
+      Function.update (Fin.cons x v : Fin (n + 1) → X) i.succ a := by
   funext j
   refine Fin.cases ?_ (fun j => ?_) j
   · simp
@@ -76,8 +77,8 @@ theorem coupledKernelDirectionJet_apply {n : ℕ} (A : X [×(n + 1)]→L[ℝ] Y)
     (i : Fin (n + 1)) (w : Fin (n + 1) → X × X) :
     coupledKernelDirectionJet A i w =
       A (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1)) := by
-  change A (fun j => (Fin.cons (ContinuousLinearMap.snd ℝ X X)
-    (fun _ : Fin n => ContinuousLinearMap.fst ℝ X X) j)
+  change A (fun j : Fin (n + 1) => ((Fin.cons (ContinuousLinearMap.snd ℝ X X)
+    (fun _ : Fin n => ContinuousLinearMap.fst ℝ X X) : Fin (n + 1) → (X × X →L[ℝ] X)) j)
       (w (coupledKernelSlotPermutation i j))) = _
   congr 1
   funext j

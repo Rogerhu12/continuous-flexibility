@@ -48,7 +48,7 @@ theorem coupled_eLpNorm_translate {f : ℝ → ℝ}
     (hf : Continuous f) (hp : Function.Periodic f Real.pi) (t : ℝ) :
     eLpNorm (fun x => f (x + t)) 2 angleMeasure = eLpNorm f 2 angleMeasure := by
   have hm := memLp_angleMeasure_of_continuous hf
-  have hmt := memLp_angleMeasure_of_continuous
+  have hmt : MemLp (fun x => f (x + t)) 2 angleMeasure := memLp_angleMeasure_of_continuous
     (hf.comp (continuous_id.add continuous_const) : Continuous (fun x => f (x + t)))
   have hint : (∫ x, ‖f (x + t)‖ ^ 2 ∂angleMeasure) =
       ∫ x, ‖f x‖ ^ 2 ∂angleMeasure := by
@@ -135,13 +135,15 @@ def coupledCircleTranslationLinear (hM : IsCircleModel T γ M) (τ : ℕ → ℝ
   map_add' := by
     intro u v
     apply hM.2.2.2.2.2.1
+    funext m θ
     simp only [coupledCircleTranslationValue_decode, map_add,
       coupledCircleTranslationField, Pi.add_apply]
   map_smul' := by
     intro c u
     apply hM.2.2.2.2.2.1
+    funext m θ
     simp only [coupledCircleTranslationValue_decode, map_smul,
-      coupledCircleTranslationField, Pi.smul_apply]
+      coupledCircleTranslationField, Pi.smul_apply, RingHom.id_apply]
 
 theorem coupledCircleTranslationLinear_decode (hM : IsCircleModel T γ M)
     (τ : ℕ → ℝ) (u : M.Space) (m : ℕ) (θ : ℝ) :
