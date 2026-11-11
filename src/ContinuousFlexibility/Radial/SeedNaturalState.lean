@@ -21,6 +21,7 @@ theorem radialNaturalTail_entry_state_ne_zero {D : ReferenceData} {right : Bool}
   have hu₀ : u entry = 0 := congrArg Prod.fst hz
   have hu₁ : deriv u entry = 0 := congrArg Prod.snd hz
   obtain ⟨x, hx, hux⟩ := hu.2.2.2
+  have hentryODE := radialNaturalTail_entry_radialJacobi hD hentry hu
   obtain ⟨ha, hab, hwFlat, hphiFlat, hwpos, hphine, hwcrit⟩ := hD
   have hepos : 0 < entry := ha.trans hentry.1
   have hxcore : x ∈ radialCore D := by
@@ -72,7 +73,6 @@ theorem radialNaturalTail_entry_state_ne_zero {D : ReferenceData} {right : Bool}
           exact ⟨lt_of_not_ge (fun h => he (le_antisymm h her)), hc.2⟩
   have htailopen : IsOpen (radialTailInterval D right entry) := by
     cases right <;> exact isOpen_Ioo
-  have hentryODE := radialNaturalTail_entry_radialJacobi hD hentry hu
   have hpoint (r : ℝ) (hr : r ∈ Icc a b) :
       ContDiffAt ℝ ∞ u r ∧ radialJacobi 4 D.w u r = 0 := by
     rcases hspan r hr with he | ht
@@ -86,6 +86,7 @@ theorem radialNaturalTail_entry_state_ne_zero {D : ReferenceData} {right : Bool}
     have hp := hwpos (exp y) (hspanCore _ (hExpMap y hy))
     filter_upwards [(hHg y hy).comp_tendsto ht, Ioi_mem_nhds (exp_pos y),
       hwFlat.1.continuous.continuousAt.eventually (Ioi_mem_nhds hp)] with r hH hr hwr
+    simp only [Function.comp_apply] at hH
     rw [seedRadialProfile, hH, exp_log hr, exp_log hwr]
   have heI : log entry ∈ Icc (log a) (log b) :=
     ⟨log_le_log hap (min_le_left _ _), log_le_log hepos (le_max_left _ _)⟩

@@ -28,6 +28,7 @@ theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} 
       ∀ r ∈ radialTailInterval D right entry, radialJacobi 4 D.w V r = 0)
     (hne : (V entry, deriv V entry) ≠ (0, 0)) :
     Nonempty (SeedConeTail D right entry u) := by
+  have hGeometry : RadialProfileGeometry D := hD
   obtain ⟨ha, hab, hwFlat, hphiFlat, hwpos, hphine, hwcrit⟩ := hD
   have hepos : 0 < entry := ha.trans hentry.1
   obtain ⟨E⟩ := exists_seedConeProfileExtension ha hentry hwFlat.1 hwpos hder
@@ -54,7 +55,7 @@ theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} 
   have hWg : E.radialProfile =ᶠ[𝓝 entry] D.w :=
     E.radialProfile_germ hepos hwFlat.1.continuous.continuousAt (hwpos entry hentry)
   obtain ⟨c, hc, hWc, hUc, hcollar⟩ :=
-    exists_seedOutwardMatchingCut hD hentry E.smooth hUs hV hUg hODE hWg hU₀ hU₁
+    exists_seedOutwardMatchingCut hGeometry hentry E.smooth hUs hV hUg hODE hWg hU₀ hU₁
   let W := seedOrientedGlue right c E.radialProfile D.w
   let P := seedOrientedGlue right c U V
   have hWi (r : ℝ) (hr : if right then r ≤ c else c ≤ r) :
@@ -86,9 +87,11 @@ theorem exists_seedConeTail_of_smoothNatural {D : ReferenceData} {right : Bool} 
   have hcutorder : if right then cut < entry else entry < cut := by
     cases right with
     | false =>
+        change entry < exp (E.right + 1)
         have h := exp_lt_exp.mpr (show log entry < E.right + 1 by linarith only [E.right_gt])
         simpa only [exp_log hepos] using h
     | true =>
+        change exp (E.left - 1) < entry
         have h := exp_lt_exp.mpr (show E.left - 1 < log entry by linarith only [E.left_lt])
         simpa only [exp_log hepos] using h
   have hconeinner (r : ℝ) (hr : if right then r < cut else cut < r) :
