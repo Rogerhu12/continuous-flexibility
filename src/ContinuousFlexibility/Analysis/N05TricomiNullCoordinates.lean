@@ -37,8 +37,8 @@ theorem n05TricomiTime_hasDerivAt {t : ℝ} (ht : 0 < t) :
       ((2 / 3 : ℝ) * t) * (1 / (2 * Real.sqrt t)) = Real.sqrt t := by
     field_simp [hs0]
     nlinarith only [Real.sq_sqrt ht.le]
-  simpa only [n05TricomiTime, Pi.mul_def, id_eq, mul_one, hvalue] using
-    (((hasDerivAt_id t).const_mul (2 / 3 : ℝ)).mul hs)
+  convert (((hasDerivAt_id t).const_mul (2 / 3 : ℝ)).mul hs) using 1 <;>
+    simp only [n05TricomiTime, Pi.mul_def, id_eq, mul_one, hvalue]
 
 def n05NullCoordinate (Ψ : PolarPoint → PolarPoint) (σ : ℝ) : PolarPoint → ℝ :=
   fun p => (Ψ p).2 + σ * n05TricomiTime (Ψ p).1

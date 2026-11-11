@@ -105,8 +105,9 @@ theorem n05_volumeMember_canonicalHeight_endpoint_memLp
     have hsmul : (n05CanonicalSampleWeight T S K γ t m • v.val m 0
         : CanonicalL2 S K m) =ᵐ[canonicalMeasure S K m]
         (fun p => n05CanonicalSampleWeight T S K γ t m * v.val m 0 p) := by
-      simpa only [Pi.smul_apply, smul_eq_mul] using
-        Lp.coeFn_smul (n05CanonicalSampleWeight T S K γ t m) (v.val m 0)
+      filter_upwards [Lp.coeFn_smul
+        (n05CanonicalSampleWeight T S K γ t m) (v.val m 0)] with p hp
+      simpa only [Pi.smul_apply, smul_eq_mul] using hp
     exact hsmul.symm.trans hm
   let q : PolarPoint → ℝ := fun p => Real.sqrt ((D.w p.1)⁻¹) * f p
   let U : ℕ → Set PolarPoint := fun m =>
