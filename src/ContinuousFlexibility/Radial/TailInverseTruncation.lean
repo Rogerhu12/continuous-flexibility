@@ -84,9 +84,9 @@ theorem tailIndicator_inner_form {T : DeepTailData} {c : ℝ}
     (tailFormLift_ae_zero_outside hp).1] with x hx hz
   rw [hx]
   by_cases hxc : x < c
-  · rw [indicator_of_mem hxc]
+  · rw [indicator_of_mem (s := Iio c) hxc]
   · have hv : p.1 x = 0 := hz (fun h => hxc h.2)
-    rw [indicator_of_notMem hxc, hv, inner_zero_right, inner_zero_right]
+    rw [indicator_of_notMem (s := Iio c) hxc, hv, inner_zero_right, inner_zero_right]
 
 /-- Source restriction affects no test pairing in the closed Dirichlet form. -/
 theorem tailFriedrichsGraph_restrict_source (T : DeepTailData) (c : ℝ)

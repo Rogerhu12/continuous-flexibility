@@ -81,8 +81,8 @@ theorem deepTail_operator :
       with x hx
     rw [hx]
     by_cases hxn : x < T.node (n + 1)
-    · rw [indicator_of_mem hxn, if_pos hxn]
-    · rw [indicator_of_notMem hxn, if_neg hxn]
+    · rw [indicator_of_mem (s := Iio (T.node (n + 1))) hxn, if_pos hxn]
+    · rw [indicator_of_notMem (s := Iio (T.node (n + 1))) hxn, if_neg hxn]
   · intro n f
     exact hGne n _
   · exact tailInverse_restricted_truncation_tendsto hT G Gₙ hGe hGne hGnu hGnb

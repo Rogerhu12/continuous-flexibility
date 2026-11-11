@@ -75,10 +75,14 @@ theorem tail_step_difference_support {p : ℝ → ℝ} {a c b d : ℝ}
     constructor
     · by_contra hn
       have hxa := (lt_of_not_ge hn).le
-      exact hx (by rw [F.left x hxa, G.left x (hxa.trans hab.le), sub_self])
+      exact hx (by
+        change F.fn x - G.fn x = 0
+        rw [F.left x hxa, G.left x (hxa.trans hab.le), sub_self])
     · by_contra hn
       have hdx := (lt_of_not_ge hn).le
-      exact hx (by rw [F.right x (hcd.le.trans hdx), G.right x hdx, sub_self])
+      exact hx (by
+        change F.fn x - G.fn x = 0
+        rw [F.right x (hcd.le.trans hdx), G.right x hdx, sub_self])
   have ht := closure_minimal hs isClosed_Icc
   intro x hx
   have hax := (ht hx).1
@@ -176,7 +180,7 @@ theorem tailEntryStep_deriv_support (T : DeepTailData) (hT : DeepTailHypotheses 
   unfold tailEntryStep
   split_ifs with h
   · exact (tailEntrySmoothStep T hT h).deriv_support
-  · simp only [deriv_const', tsupport_zero, empty_subset]
+  · simp only [deriv_zero, tsupport_zero, empty_subset]
 
 theorem tailEntryStep_smooth (T : DeepTailData) (hT : DeepTailHypotheses T) :
     ContDiff ℝ ∞ (tailEntryStep T hT) := by
@@ -252,7 +256,7 @@ theorem tailLowHat_compact (T : DeepTailData) (hT : DeepTailHypotheses T) (n : �
     exact tail_step_difference_compact F (tailGapSmoothStep T hT n) han
       (deepTail_node_lt_massEnd hT n).le (deepTail_massEnd_lt_succ_node hT n)
   · simpa only [tailLowHat, if_neg hn] using
-      (hasCompactSupport_zero : HasCompactSupport (0 : ℝ → ℝ))
+      (HasCompactSupport.zero : HasCompactSupport (0 : ℝ → ℝ))
 
 theorem tail_massEnd_strictMono {T : DeepTailData} (hT : DeepTailHypotheses T) :
     StrictMono T.massEnd :=
@@ -328,7 +332,7 @@ theorem tailLowHat_gap (T : DeepTailData) (hT : DeepTailHypotheses T) (n : ℕ)
         ((((deepTail_node_strictMono hT).monotone (Nat.zero_le m)).trans
           (deepTail_node_lt_massEnd hT m).le).trans hx.1)
     rw [hentry, tailGapStep_gap T hT 0 m hx]
-    split_ifs <;> first | omega | ring
+    split_ifs <;> first | contradiction | omega | ring
   | succ n =>
     change tailGapStep T hT n x - tailGapStep T hT (n + 1) x = _
     rw [tailGapStep_gap T hT n m hx, tailGapStep_gap T hT (n + 1) m hx]
@@ -370,9 +374,7 @@ theorem tailLowHat_deriv_gap (T : DeepTailData) (hT : DeepTailHypotheses T) (n :
   · have hnnext : n ≠ m + 1 := by omega
     simp only [if_pos hnm, if_neg hnnext, add_zero] at he ⊢
     rw [he.deriv_eq]
-    have hD := ((hasDerivAt_const x (1 : ℝ)).sub
-      (((tailGapStep_smooth T hT m).differentiable (by simp) x).hasDerivAt)).deriv
-    simpa only [zero_sub] using hD
+    exact deriv_const_sub (f := tailGapStep T hT m) (1 : ℝ)
   · by_cases hnnext : n = m + 1
     · simp only [if_neg hnm, if_pos hnnext, zero_add] at he ⊢
       exact he.deriv_eq

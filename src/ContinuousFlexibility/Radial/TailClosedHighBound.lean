@@ -97,7 +97,6 @@ theorem tailGradientCore_dense (T : DeepTailData) (endCut : ℝ) :
       have hmem : q ∈ tailGradientSpace T endCut :=
         (mem_tailGradientSpace T endCut q).mpr (subset_closure hq)
       exact ⟨⟨q, hmem⟩, (mem_tailGradientCore_iff T endCut ⟨q, hmem⟩).mpr hq, rfl⟩
-  rw [hi]
   have hc : closure (WithLp.ofLp ⁻¹' TailEnergyCore T endCut :
       Set (GradientHilbert (DeepTailL2 T))) = WithLp.ofLp ⁻¹' TailFormLift T endCut := by
     have h := (WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T)
@@ -110,8 +109,15 @@ theorem tailGradientCore_dense (T : DeepTailData) (endCut : ℝ) :
         WithLp.prodContinuousLinearEquiv_apply]
     rw [hfun] at h
     simpa only [TailFormLift] using h.symm
-  rw [hc]
-  exact fun q hq => (mem_tailGradientSpace T endCut q).mp hq
+  have hclosure :
+      closure (Subtype.val '' tailGradientCore T endCut :
+        Set (GradientHilbert (DeepTailL2 T))) =
+          WithLp.ofLp ⁻¹' TailFormLift T endCut :=
+    (congrArg (closure : Set (GradientHilbert (DeepTailL2 T)) →
+      Set (GradientHilbert (DeepTailL2 T))) hi).trans hc
+  intro q hq
+  exact (congrArg (fun s : Set (GradientHilbert (DeepTailL2 T)) => q ∈ s)
+    hclosure).mpr ((mem_tailGradientSpace T endCut q).mp hq)
 
 theorem tail_core_high_norm_bound_of_set_means {T : DeepTailData}
     (hT : DeepTailHypotheses T) {endCut : ℝ} (hcut : endCut ≤ T.endpoint)
@@ -127,7 +133,7 @@ theorem tail_core_high_norm_bound_of_set_means {T : DeepTailData}
   calc
     (∫ x in T.node n..T.massEnd n, T.p x * φ x) =
         ∫ x in tailMassCell T n, T.p x * φ x := by
-      rw [intervalIntegral.integral_of_le (deepTail_node_lt_massEnd hT n).le,
+      rw [tailMassCell, intervalIntegral.integral_of_le (deepTail_node_lt_massEnd hT n).le,
         integral_Ioc_eq_integral_Ioo]
     _ = ∫ x in tailMassCell T n, φ x ∂deepTailMeasure T :=
       (tail_setIntegral_density hT (tailMassCell_measurable T n)
