@@ -28,7 +28,7 @@ theorem physicalNorm_angularPartial_le
   have hpull : materialPullback T γ (angularPartial u) =
       angularPartial (materialPullback T γ u) :=
     funext (materialPullback_angularPartial hT hu)
-  have hG := contDiff_materialPullback hT hu
+  have hG := contDiff_materialPullback (γ := γ) hT hu
   apply physicalNorm_le_of_common_jet_bound (Real.sqrt_nonneg _)
   intro J
   have heq : weightedPhysicalJet T γ (J.val 0).val (J.val 1).val (J.val 2).val
@@ -140,6 +140,7 @@ theorem exists_physicalNorm_radialPartial_bound
       funext p
       change W p ^ c * mixedDerivative a b (fun q => radialPartial G q + L q * G q) p = _
       rw [mixedDerivative_add_of_contDiff hR (hL.mul hG), mul_add]
+      rfl
     rw [heq]
     have hb := (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)).trans
       (add_le_add hRb (hLG a b c habc))

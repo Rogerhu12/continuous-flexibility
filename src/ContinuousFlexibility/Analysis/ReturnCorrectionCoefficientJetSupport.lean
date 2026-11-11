@@ -37,7 +37,9 @@ theorem SmoothDirections.jets_zero_of_eqOn_zero
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
     J.D n x v = 0 := by
   have hh := J.jets_eq_of_postcomp J (0 : F →L[ℝ] F)
-    (fun y hy => by rw [ContinuousLinearMap.zero_apply]; exact (hf hy).symm) n x hx v
+    (fun y hy => by
+      change (0 : F) = f y
+      exact (hf hy).symm) n x hx v
   simpa only [ContinuousLinearMap.zero_apply] using hh
 
 theorem SmoothDirections.jets_eventuallyEq_of_spatial_eqOn
@@ -91,7 +93,10 @@ theorem returnCorrectionCoefficientError_jets_eq_local
     (J p).D n x v = K.D n x v := by
   apply (J p).jets_eq_of_eqOn K _ n x hx v
   intro y hy
-  rw [returnCorrectionCoefficientError_eq_local hdisj R χ (z y) m p hp]
+  change returnCorrectionCoefficientError D S C R χ (z y) p (ρ y) =
+    returnCorrectionLocalCoefficientError D S C R χ (z y) m p (ρ y)
+  exact congrArg (fun L : CircleSpace S →ₗ[ℝ] (ℝ × ℝ) => L (ρ y))
+    (returnCorrectionCoefficientError_eq_local hdisj R χ (z y) m p hp)
 
 theorem N01Properties.returnCorrectionCoefficientError_jets_eventually_zero_of_nonnegative
     {base loss : ℕ} {ε : ℝ} (hN : N01Properties D T S C base loss ε)

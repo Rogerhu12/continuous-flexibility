@@ -24,7 +24,8 @@ private theorem pairGrading_left_zero
     (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (s : ℕ) (x : E) :
     pairGrading p q s (x, 0) = p s x := by
   change p s x + q s (0 : F) = p s x
-  rw [(q s).map_zero', add_zero]
+  have hzero : q s (0 : F) = 0 := (q s).map_zero'
+  exact (congrArg (fun t : ℝ => p s x + t) hzero).trans (add_zero _)
 
 theorem stateGrading_heightOnlyDirection (S : PhysicalSpacesData)
     (s : ℕ) (η : HeightPair S) :

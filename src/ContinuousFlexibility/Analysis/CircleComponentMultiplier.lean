@@ -29,7 +29,7 @@ theorem circle_component_multiplier_eLpNorm
     funext θ
     exact iteratedDeriv_const_mul_field (c m) (u m)
   rw [heq, eLpNorm_const_smul, ← ofReal_norm, Real.norm_eq_abs]
-  exact mul_le_mul_right' (ENNReal.ofReal_le_ofReal (hc m)) _
+  exact mul_le_mul_left (ENNReal.ofReal_le_ofReal (hc m)) _
 
 theorem circleMember_component_multiplier
     {T : MaterialData} {γ : ℝ} {u : ℕ → ℝ → ℝ}

@@ -136,11 +136,13 @@ theorem localScalarJet_hasDerivAt_on_Ioo
     (hJ.reindex c) (hK.reindex c) hderiv n θ hθ x hx v
   have hvalue : (Kc θ).D n x v = localScalarJet K n x v θ := by
     rw [localScalarJet_of_mem K n x v (hsub ⟨hθ.1.le, hθ.2.le⟩)]
-    simp only [Kc, c, projIcc_of_mem hlh.le (show θ ∈ Icc l h from ⟨hθ.1.le, hθ.2.le⟩)]
+    dsimp only [Kc]
+    rw [hceq θ ⟨hθ.1.le, hθ.2.le⟩]
   apply (hd.congr_deriv hvalue).congr_of_eventuallyEq
   filter_upwards [isOpen_Ioo.mem_nhds hθ] with ψ hψ
   rw [localScalarJet_of_mem J n x v (hsub ⟨hψ.1.le, hψ.2.le⟩)]
-  simp only [Jc, c, projIcc_of_mem hlh.le (show ψ ∈ Icc l h from ⟨hψ.1.le, hψ.2.le⟩)]
+  dsimp only [Jc]
+  rw [hceq ψ ⟨hψ.1.le, hψ.2.le⟩]
 
 /-- Local bounds in an arbitrary spatial label suffice along every
 continuous spatial curve for which the zeroth derivative is known. -/
@@ -192,6 +194,12 @@ theorem localScalarJet_hasDerivAt_along
     (fun z hz => (hg z hz).comp hσ.continuousOn hsub) hjb hkb
     (fun r hr z hz => hderiv r (hsub ⟨hr.1.le, hr.2.le⟩) z hz)
     n htI x hx v
-  simpa only [localScalarJet, Jσ, Kσ, Vσ, mem_preimage] using hd
+  have hvalue : localScalarJet Kσ n x v t = localScalarJet K n x v (σ t) := by
+    rw [localScalarJet_of_mem Kσ n x v ht, localScalarJet_of_mem K n x v ht]
+  apply (hd.congr_deriv hvalue).congr_of_eventuallyEq
+  have hnearV : ∀ᶠ r in 𝓝 t, r ∈ Vσ :=
+    (isOpen_Ioo.mem_nhds htI).mono (fun r hr => hsub ⟨hr.1.le, hr.2.le⟩)
+  filter_upwards [hnearV] with r hr
+  rw [localScalarJet_of_mem J n x v hr, localScalarJet_of_mem Jσ n x v hr]
 
 end ContinuousFlexibility.Analysis

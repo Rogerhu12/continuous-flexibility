@@ -92,10 +92,10 @@ theorem LocalCoefficientMaterialTameBounds.adjacent
 private theorem seminorm_affine_abs_le_one
     (p : Seminorm ℝ E) (x w : E) {t : ℝ} (ht : |t| ≤ 1) :
     p (x + t • w) ≤ p x + p w := by
-  have h := p.add_le x (t • w)
+  have h := map_add_le_add p x (t • w)
   rw [map_smul_eq_mul, Real.norm_eq_abs] at h
-  exact h.trans (add_le_add_left
-    ((mul_le_mul_of_nonneg_right ht (apply_nonneg p w)).trans_eq (one_mul _)) _)
+  exact h.trans (add_le_add (le_refl (p x))
+    ((mul_le_mul_of_nonneg_right ht (apply_nonneg p w)).trans_eq (one_mul _)))
 
 theorem LocalCoefficientMaterialTameBounds.lineBounds
     (hT : IsMaterialData D T)

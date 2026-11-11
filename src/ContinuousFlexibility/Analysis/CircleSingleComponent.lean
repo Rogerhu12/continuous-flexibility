@@ -81,16 +81,19 @@ theorem circleSingleComponentField_member
       exact ⟨hf, hper⟩
     · rw [circleSingleComponentField_ne m i f hi]
       exact ⟨contDiff_const, fun _ => rfl⟩
-  refine ⟨hreg, fun i b => memLp_angleMeasure_iteratedDeriv_of_contDiff (hreg i).1 b, ?_⟩
-  intro s
-  rw [circleSingleComponentField_energy]
-  unfold circleComponentEnergy
-  apply ENNReal.sum_lt_top.mpr
-  intro b hb
-  apply ENNReal.mul_lt_top ENNReal.ofReal_lt_top
-  rw [pow_two]
-  have h := (memLp_angleMeasure_iteratedDeriv_of_contDiff (hreg m).1 (b.val 0).val).eLpNorm_lt_top
-  exact ENNReal.mul_lt_top h h
+  have hfinite (s : ℕ) :
+      (∑' i, circleComponentEnergy T γ s (circleSingleComponentField m f) i) < ⊤ := by
+    rw [circleSingleComponentField_energy]
+    unfold circleComponentEnergy
+    apply ENNReal.sum_lt_top.mpr
+    intro b hb
+    apply ENNReal.mul_lt_top ENNReal.ofReal_lt_top
+    rw [pow_two]
+    have h := (memLp_angleMeasure_iteratedDeriv_of_contDiff
+      (hreg m).1 (b.val 0).val).eLpNorm_lt_top
+    exact ENNReal.mul_lt_top h h
+  exact ⟨hreg, fun i b => memLp_angleMeasure_iteratedDeriv_of_contDiff (hreg i).1 b,
+    hfinite⟩
 
 theorem circleSingleComponentField_norm_le
     {T : MaterialData} {γ : ℝ}
@@ -131,6 +134,7 @@ theorem circleSingleComponentField_norm_le
         (hbound b (by omega) θ) (abs_nonneg _) hW
     · simp only [circleSingleComponentField_iteratedDeriv, if_neg hi, abs_zero,
         mul_zero, E, ENNReal.toReal_zero, Real.sqrt_zero]
+      exact le_refl 0
   have h := circleNorm_le_of_envelope
     (show (∑' i, E i) < ⊤ by rw [hE]; exact ENNReal.one_lt_top)
     hreg hM hH s (mul_nonneg hW hA) hb

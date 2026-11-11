@@ -19,8 +19,8 @@ namespace ContinuousFlexibility.Statements
 open ContinuousFlexibility.Analysis
 open scoped BigOperators
 
-variable {E F : Type*} [AddCommGroup E] [Module ℝ E]
-  [AddCommGroup F] [Module ℝ F]
+variable {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
 
 private theorem seminorm_product_bound_on_larger_balls
     (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
@@ -138,7 +138,8 @@ theorem hasInterpolation_oneHigh_height_local_growth
     have hisum : p (s + L) (v i).1 ≤
         ∑ j : Fin n, pairGrading p q (s + L) (v j) :=
       (le_add_of_nonneg_right (apply_nonneg (q (s + L)) (v i).2)).trans
-        (Finset.single_le_sum (fun j _ => apply_nonneg _ _) (Finset.mem_univ i))
+        (Finset.single_le_sum (f := fun j : Fin n => pairGrading p q (s + L) (v j))
+          (fun j _ => apply_nonneg (pairGrading p q (s + L)) (v j)) (Finset.mem_univ i))
     dsimp only [Q]
     rw [pairGrading_apply]
     linarith only [hhvi, hhη, hisum, hx0]

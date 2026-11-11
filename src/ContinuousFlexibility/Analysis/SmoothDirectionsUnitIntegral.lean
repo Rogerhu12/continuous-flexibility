@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
 import ContinuousFlexibility.Analysis.SolveNewtonBridge
+import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Actual directional towers under compact parameter integration
@@ -44,6 +45,7 @@ variable {f : ℝ → E → ProjectiveLimit F bond}
   (hJ : ∀ n, Continuous (fun p : ℝ × (E × (Fin n → E)) =>
     (J p.1).D n p.2.1 p.2.2))
 
+include hJ in
 theorem continuous_smoothDirectionsFamily :
     Continuous (fun p : ℝ × E => f p.1 p.2) := by
   have hm : Continuous (fun p : ℝ × E =>
@@ -55,17 +57,21 @@ theorem continuous_smoothDirectionsFamily :
 def smoothDirectionsUnitIntegral :
     SmoothDirections univ
       (fun x => projectiveUnitIntegral (fun a => f a x)
-        ((continuous_smoothDirectionsFamily J hJ).comp
-          (continuous_id.prodMk continuous_const))) where
+        (by simpa only [Function.comp_def] using
+          (continuous_smoothDirectionsFamily J hJ).comp
+            (continuous_id.prodMk (continuous_const (y := x))))) where
   open_domain := isOpen_univ
   D n x := projectiveUnitIntegralMultilinear (fun a => (J a).D n x)
-    ((hJ n).comp (continuous_fst.prodMk (continuous_const.prodMk continuous_snd)))
+    (by simpa only [Function.comp_def] using
+      (hJ n).comp (continuous_fst.prodMk
+        ((continuous_const (y := x)).prodMk continuous_snd)))
   zero x hx := projectiveUnitIntegral_congr _ _
     (fun a _ => (J a).zero x (mem_univ _))
   continuous n := by
     have hc : Continuous (fun z : E × (Fin n → E) =>
         projectiveUnitIntegral (fun a => (J a).D n z.1 z.2)
-          ((hJ n).comp (continuous_id.prodMk continuous_const))) :=
+          (by simpa only [Function.comp_def] using
+            (hJ n).comp (continuous_id.prodMk (continuous_const (y := z))))) :=
       continuous_projectiveUnitIntegral
         ((hJ n).comp (continuous_snd.prodMk continuous_fst))
     exact hc.continuousOn
@@ -91,7 +97,8 @@ theorem smoothDirectionsUnitIntegral_jet
     (n : ℕ) (x : E) (v : Fin n → E) :
     (smoothDirectionsUnitIntegral J hJ).D n x v =
       projectiveUnitIntegral (fun a => (J a).D n x v)
-        ((hJ n).comp (continuous_id.prodMk continuous_const)) := rfl
+        (by simpa only [Function.comp_def] using
+          (hJ n).comp (continuous_id.prodMk (continuous_const (y := (x, v))))) := rfl
 
 end Family
 
@@ -101,6 +108,7 @@ variable {f : E → ProjectiveLimit F bond} (J : SmoothDirections univ f)
   (L : ℝ → E →L[ℝ] E)
   (hL : Continuous (fun p : ℝ × E => L p.1 p.2))
 
+include hL in
 theorem continuous_linearFamily_precomp_jets (n : ℕ) :
     Continuous (fun p : ℝ × (E × (Fin n → E)) =>
       (solveSmoothDirectionsPrecomp J (L p.1)).D n p.2.1 p.2.2) := by
@@ -112,13 +120,16 @@ theorem continuous_linearFamily_precomp_jets (n : ℕ) :
       (continuous_fst.prodMk ((continuous_apply i).comp continuous_snd.snd))
   have hc : Continuous (fun z : E × (Fin n → E) => J.D n z.1 z.2) := by
     simpa only [univ_prod_univ, continuousOn_univ] using J.continuous n
-  exact hc.comp (hbase.prodMk hdirs)
+  change Continuous (fun p : ℝ × (E × (Fin n → E)) =>
+    J.D n (L p.1 p.2.1) (fun i => L p.1 (p.2.2 i)))
+  simpa only [Function.comp_def] using hc.comp (hbase.prodMk hdirs)
 
 def smoothDirectionsUnitIntegralLinearFamily :
     SmoothDirections univ
       (fun x => projectiveUnitIntegral (fun a => f (L a x))
-        ((continuous_smoothDirections_univ J).comp
-          (hL.comp (continuous_id.prodMk continuous_const)))) :=
+        (by simpa only [Function.comp_def] using
+          (continuous_smoothDirections_univ J).comp
+            (hL.comp (continuous_id.prodMk (continuous_const (y := x)))))) :=
   smoothDirectionsUnitIntegral (fun a => solveSmoothDirectionsPrecomp J (L a))
     (continuous_linearFamily_precomp_jets J L hL)
 
@@ -126,8 +137,10 @@ theorem smoothDirectionsUnitIntegralLinearFamily_jet
     (n : ℕ) (x : E) (v : Fin n → E) :
     (smoothDirectionsUnitIntegralLinearFamily J L hL).D n x v =
       projectiveUnitIntegral (fun a => J.D n (L a x) (fun i => L a (v i)))
-        ((continuous_linearFamily_precomp_jets J L hL n).comp
-          (continuous_id.prodMk continuous_const)) := rfl
+        (by simpa only [Function.comp_def, solveSmoothDirectionsPrecomp,
+            ContinuousMultilinearMap.compContinuousLinearMap_apply] using
+          (continuous_linearFamily_precomp_jets J L hL n).comp
+            (continuous_id.prodMk (continuous_const (y := (x, v))))) := rfl
 
 end LinearFamily
 

@@ -122,7 +122,7 @@ theorem N01Properties.returnCorrectionVelocityLinear_global_weighted_bound
   · have heq := returnCorrectionVelocityLinear_eventually_zero_of_radial_support
       D S C χ z m ρ (hsupp m) p hp
     rw [(heq.iteratedFDeriv ℝ n).eq_of_nhds, iteratedFDeriv_fun_zero]
-    change (0 : ℝ) ≤ _
+    simp only [Pi.zero_apply, norm_zero]
     exact mul_nonneg
       (mul_nonneg hA (Real.rpow_nonneg
         ((material_circle_sample_weights_pos hT hN.1.1).2 m).le _))

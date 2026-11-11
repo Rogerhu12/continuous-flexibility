@@ -54,9 +54,10 @@ theorem hasDerivAt_contDiffOnJet_fixed {g : F → G} {V : Set F}
     HasDerivAt (fun s => contDiffOnJetFamily g V n (c s) v)
       (contDiffOnJetFamily g V (n + 1) (c t) (Fin.cons dc v)) t := by
   have hs := hg.ftaylorSeriesWithin hV.uniqueDiffOn
+  have hn : (n : ℕ∞ω) < ∞ := WithTop.coe_lt_coe.mpr (ENat.natCast_lt_top n)
   have hd : HasFDerivAt (fun y => ftaylorSeriesWithin ℝ g V y n)
       (ftaylorSeriesWithin ℝ g V (c t) (n + 1)).curryLeft (c t) :=
-    (hs.fderivWithin n (by simp) (c t) ht).hasFDerivAt (hV.mem_nhds ht)
+    (hs.fderivWithin n hn (c t) ht).hasFDerivAt (hV.mem_nhds ht)
   have hcurve := hd.comp_hasDerivAt t hc
   have heval := (normedMultilinearEvalLinear (G := G) v).hasFDerivAt.comp_hasDerivAt t hcurve
   simpa only [contDiffOnJetFamily, Function.comp_def,
@@ -72,12 +73,12 @@ theorem hasProjectiveJetsOn_contDiffOn {g : F → G} {V : Set F}
     exact (hg.ftaylorSeriesWithin hV.uniqueDiffOn).zero_eq y hy
   · intro n y hy w v
     have hline : HasDerivAt (fun t : ℝ => y + t • w) w 0 := by
-      simpa only [zero_add, one_smul] using
+      simpa only [zero_add, one_smul, Pi.add_apply] using
         (hasDerivAt_const (0 : ℝ) y).add ((hasDerivAt_id' (0 : ℝ)).smul_const w)
     have hd := hasDerivAt_contDiffOnJet_fixed hV hg hline
       (by simpa only [zero_smul, add_zero] using hy) n v
-    apply hasDerivAt_iff_tendsto_slope_zero.mp
-    simpa only [zero_smul, add_zero] using hd
+    simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,
+      zero_add, zero_smul, add_zero] using hasDerivAt_iff_tendsto_slope_zero.mp hd
 
 def smoothDirectionsOfContDiffOn {g : F → G} {V : Set F}
     (hV : IsOpen V) (hg : ContDiffOn ℝ ∞ g V) : SmoothDirections V g :=
@@ -102,8 +103,9 @@ theorem hasProjectiveCurveDerivAt_contDiffOnJet_eval
       (hasDerivAt_contDiffOnJet_fixed hV hg hcd ht n (v t))
   have hB (w : Fin n → F) : ContinuousAt
       (fun p : ℝ × (Fin n → F) => contDiffOnJetFamily g V n (c p.1) p.2) (t, w) := by
-    have hj := (contDiffOnJetFamily_continuousOn hV hg n).continuousAt
-      ((hV.prod isOpen_univ).mem_nhds ⟨ht, mem_univ w⟩)
+    have hj : ContinuousAt (fun p : F × (Fin n → F) => contDiffOnJetFamily g V n p.1 p.2)
+        (c t, w) := (contDiffOnJetFamily_continuousOn hV hg n).continuousAt
+      ((hV.prod isOpen_univ).mem_nhds (show (c t, w) ∈ V ×ˢ univ from ⟨ht, mem_univ w⟩))
     exact ContinuousAt.comp
       (f := fun p : ℝ × (Fin n → F) => (c p.1, p.2))
       (g := fun p : F × (Fin n → F) => contDiffOnJetFamily g V n p.1 p.2)

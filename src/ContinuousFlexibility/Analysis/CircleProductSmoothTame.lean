@@ -158,7 +158,7 @@ theorem circleProduct_grading_unit_growth
   exact bilinear_unit_growth_of_finite_norms S.grading S.grading
     (gradedSeminorm_monotone (fun j => S.level j) S.bond)
     (fun s y => circleNorm T γ s (S.decode y))
-    (circleProductBilinear hS hT hD hγ)
+    (fun u v => circleProductBilinear hS hT hD hγ u v)
     (fun s u v => circleNorm T γ s (fun m θ => S.decode u m θ * S.decode v m θ))
     (fun s y C hC => circleGrading_le_iff_circleNorm hS s y hC)
     (fun s u v => congrArg (circleNorm T γ s) (circleProductBilinear_decode hS hT hD hγ u v))
@@ -323,7 +323,7 @@ theorem circleProduct_oneHigh_bound
   exact bilinear_function_oneHigh_of_unit_growth S.grading S.grading
     (gradedSeminorm_monotone (fun j => S.level j) S.bond)
     (circleProductContinuousMultilinear hS hT hD hγ)
-    (circleProductBilinear hS hT hD hγ)
+    (fun u v => circleProductBilinear hS hT hD hγ u v)
     (circleProductContinuousMultilinear_eq hS hT hD hγ)
     (circleProduct_grading_unit_growth hS hT hD hγ hinterp)
 
@@ -352,7 +352,7 @@ theorem smoothTameOn_circleProduct
       (fun z : S.Space × S.Space => circleProductBilinear hS hT hD hγ z.1 z.2) := by
   exact smoothTameOn_bilinear_function_of_bound S.grading S.grading
     (circleProductContinuousMultilinear hS hT hD hγ)
-    (circleProductBilinear hS hT hD hγ)
+    (fun u v => circleProductBilinear hS hT hD hγ u v)
     (circleProductContinuousMultilinear_eq hS hT hD hγ)
     (circleProduct_oneHigh_bound hS hT hD hγ hinterp)
 

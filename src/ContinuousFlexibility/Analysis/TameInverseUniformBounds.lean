@@ -39,9 +39,10 @@ theorem inverseFamilyContinuousLinearMap_uniformLowGrowth
   intro s z
   by_cases hz : z.1 ∈ U
   · rw [inverseFamilyContinuousLinearMap_apply V hV hz]
-  · simp only [inverseFamilyContinuousLinearMap, dif_neg hz,
-      ContinuousLinearMap.zero_apply, (q s).map_zero']
-    exact apply_nonneg _ _
+  · have hzero : inverseFamilyContinuousLinearMap V hV z.1 z.2 = 0 := by
+      simp only [inverseFamilyContinuousLinearMap, dif_neg hz, ContinuousLinearMap.zero_apply]
+    rw [hzero, map_zero]
+    exact (apply_nonneg (q s) (V z.1 z.2))
 
 theorem TameInverseExpression.uniformLowGrowth_eval
     {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y} {r : ℕ → Seminorm ℝ Z}
@@ -83,7 +84,7 @@ theorem TameInverseExpression.uniformLowGrowth_eval
             (fun j => (v j z.2, (0 : Y)))
             ((0 : X), (e.eval J V z.1 z.2).1) i) := by
         refine Fin.lastCases ?_ (fun j => ?_) i
-        · simpa only [Fin.snoc_last] using
+        · simpa only [Fin.snoc_last, Function.comp_def] using
             (uniformLowGrowth_const d p (0 : X)).prodMk hd heval
         · simpa only [Fin.snoc_castSucc] using
             (hdirs j).prodMk hd (uniformLowGrowth_const d q (0 : Y))

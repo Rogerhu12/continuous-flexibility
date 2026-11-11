@@ -24,6 +24,20 @@ open scoped Topology ContDiff BigOperators
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem weighted_abs_bound_of_prefactor
+    {M u v e B K W a : ℝ} (c : ℕ)
+    (hM : 0 ≤ M) (hu : 0 ≤ u) (hB : 0 ≤ B) (hW : 0 ≤ W)
+    (hjet : |a| ≤ B * v * e * W) (hpref : u * v * e ≤ K * M) :
+    (M ^ c * u) * |a| ≤ (B * K) * M ^ (c + 1) * W := by
+  calc
+    _ ≤ (M ^ c * u) * (B * v * e * W) :=
+      mul_le_mul_of_nonneg_left hjet (mul_nonneg (pow_nonneg hM c) hu)
+    _ = (B * M ^ c) * (u * v * e) * W := by ring
+    _ ≤ (B * M ^ c) * (K * M) * W :=
+      mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left hpref (mul_nonneg hB (pow_nonneg hM c))) hW
+    _ = _ := by rw [pow_succ]; ring
+
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
     (hN : N01Properties D T S C base loss ε)
@@ -37,38 +51,31 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) z v := by
-  obtain ⟨B, hB, hbound⟩ := hN.sectorFlow_closed_angularTower_bound hS hT k s
-  obtain ⟨K, hK, hpref⟩ := hN.flow_sample_prefactor_le_M hT hB.le
+  let hdata := hN.sectorFlow_closed_angularTower_bound hS hT k s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  let hprefData := hN.flow_sample_prefactor_le_M hT hB.le
+  let K : ℝ := hprefData.choose
+  have hK : 0 < K := hprefData.choose_spec.1
   refine ⟨B * K, mul_pos hB hK, fun rsel hrsel m b c θ hb z hz v => ?_⟩
   have hs := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ hs).2.2.2
   have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
-  let W : ℝ := oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-    base (s + loss) z v
-  have hW : 0 ≤ W := by
-    dsimp only [W, oneHighVariationWeight]
-    exact add_nonneg
-      (mul_nonneg (add_nonneg zero_le_one (apply_nonneg _ _))
-        (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)))
-      (Finset.sum_nonneg (fun _ _ => mul_nonneg (apply_nonneg _ _)
-        (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))))
-  have hj := hbound m (rsel m) (hrsel m)
-    b θ hb z hz v
-  rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel k z hz]
-  calc
-    _ ≤ (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-        (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B * W) :=
-      mul_le_mul_of_nonneg_left hj
-        (mul_nonneg (pow_nonneg hM c) (Real.rpow_nonneg hH _))
-    _ = (B * T.M (T.sample m) ^ c) *
-        (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
-          T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ B) * W := by ring
-    _ ≤ (B * T.M (T.sample m) ^ c) * (K * T.M (T.sample m)) * W :=
-      mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (hpref m) (mul_nonneg hB.le (pow_nonneg hM c))) hW
-    _ = _ := by rw [pow_succ]; dsimp only [W]; ring
+  have hW : 0 ≤ oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+      base (s + loss) z v :=
+    multilinearTameSize_nonneg _ _ _
+      (add_nonneg zero_le_one (apply_nonneg _ _)) v
+  have hj : |iteratedDeriv b
+        (hN.endpointFlowScalarJets hS hT rsel hrsel k z v m) θ| ≤
+      B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (C.cell m)) ^ B *
+        oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
+          base (s + loss) z v :=
+    (congrArg abs (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel
+      k z hz v m b θ)).trans_le
+        (hdata.choose_spec.2 m (rsel m) (hrsel m) b θ hb z hz v)
+  exact weighted_abs_bound_of_prefactor c hM (Real.rpow_nonneg hH _) hB.le hW hj
+    (hprefData.choose_spec.2 m)
 
 theorem N01Properties.endpointFlowScalarJets_weighted_bound
     (hN : N01Properties D T S C base loss ε)
@@ -82,7 +89,7 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss) z v := by
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT k s
-  exact ⟨K, hK, hbound rsel hrsel⟩
+  let hdata := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT k s
+  exact ⟨hdata.choose, hdata.choose_spec.1, hdata.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

@@ -214,11 +214,10 @@ def localAngularTowerJointDirections
       simp only [B, map_add, map_smul, MultilinearMap.add_apply,
         MultilinearMap.smul_apply, Fin.cons_zero, Fin.tail_cons, smul_eq_mul]
     rw [he] at hd
-    have hfst_smul (t : ℝ) : ((t • w : E × ℝ)).1 = t • w.1 := rfl
-    have hsnd_smul (t : ℝ) : ((t • w : E × ℝ)).2 = t * w.2 := rfl
-    simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,
-      scalarAngularContinuousExpansion_apply, C, A, Prod.fst_add, Prod.snd_add,
-      hfst_smul, hsnd_smul, zero_add, zero_mul, zero_smul, add_zero, smul_eq_mul] using
+    change HasProjectiveCurveDerivAt
+      (fun t : ℝ => scalarAngularExpansion n (C t) v)
+      (scalarAngularExpansion (n + 1) A (Fin.cons w v)) 0
+    simpa only [HasProjectiveCurveDerivAt, smul_eq_mul] using
       hasDerivAt_iff_tendsto_slope_zero.mp hd
 
 theorem localAngularTowerJointDirections_apply

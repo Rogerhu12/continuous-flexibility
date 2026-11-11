@@ -31,6 +31,53 @@ private theorem scalar_segment_mul_mem {t q : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) 
     refine ⟨?_, mul_nonpos_of_nonneg_of_nonpos ht.1 hq⟩
     simpa only [one_mul] using mul_le_mul_of_nonpos_right ht.2 hq
 
+private theorem scalar_height_bound_of_line
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : E → ℝ} (J : SmoothDirections U f)
+    (p : ℕ → Seminorm ℝ E) (base high n : ℕ)
+    (x₀ w u : E) (φ : ℝ → E) (q : ℝ)
+    (hφ : ∀ t : ℝ, x₀ + t • w = φ t)
+    {P low highHeight : ℝ} (hP : 0 ≤ P) (hlow : 0 ≤ low)
+    (hJ : ∀ y ∈ U, ∀ v : Fin (n + 2) → E,
+      |J.D (n + 2) y v| ≤ P * oneHighVariationWeight p base high y v)
+    (heuler : ∀ t : ℝ, φ t ∈ U →
+      J.D 1 (φ t) (fun _ => u) = t * J.D 1 (φ t) (fun _ => w))
+    (hsegment : ∀ t ∈ Icc (0 : ℝ) 1, φ (t * q) ∈ U)
+    (hgrade : ∀ t ∈ Icc (0 : ℝ) 1, p high (φ (t * q)) ≤ p high (φ q))
+    (hweight : ∀ y : E,
+      oneHighVariationWeight p base high y
+        (Fin.snoc (fun _ : Fin (n + 1) => w) u) =
+        (((n + 1 : ℕ) : ℝ) + 1 + p high y) * low + highHeight) :
+    |J.D (n + 1) (φ q) (fun _ => w)| ≤
+      P * (((n : ℝ) + 2 + p high (φ q)) * low + highHeight) := by
+  have hEuler (t : ℝ) (ht : x₀ + t • w ∈ U) :
+      J.D 1 (x₀ + t • w) (fun _ => u) =
+        t * J.D 1 (x₀ + t • w) (fun _ => w) := by
+    have ht' : φ t ∈ U := Eq.mp (congrArg (fun y : E => y ∈ U) (hφ t)) ht
+    exact (congrArg (fun y : E => J.D 1 y (fun _ => u)) (hφ t)).trans
+      ((heuler t ht').trans
+        (congrArg (fun y : E => t * J.D 1 y (fun _ => w)) (hφ t)).symm)
+  have hline (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) : x₀ + (t * q) • w ∈ U :=
+    Eq.mpr (congrArg (fun y : E => y ∈ U) (hφ (t * q))) (hsegment t ht)
+  have hbound (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
+      |J.D (n + 2) (x₀ + (t * q) • w)
+        (Fin.snoc (fun _ : Fin (n + 1) => w) u)| ≤
+        P * (((n : ℝ) + 2 + p high (φ q)) * low + highHeight) := by
+    have hb := hJ _ (hline t ht) (Fin.snoc (fun _ : Fin (n + 1) => w) u)
+    have hw := congrArg (fun a : ℝ => P * a) (hweight (x₀ + (t * q) • w))
+    have hg := (congrArg (p high) (hφ (t * q))).trans_le (hgrade t ht)
+    have hadd : ((n + 1 : ℕ) : ℝ) + 1 + p high (x₀ + (t * q) • w) ≤
+        (n : ℝ) + 2 + p high (φ q) := by
+      simp only [Nat.cast_add, Nat.cast_one]
+      linarith only [hg]
+    exact (hb.trans_eq hw).trans (mul_le_mul_of_nonneg_left
+      (add_le_add_right (mul_le_mul_of_nonneg_right hadd hlow) highHeight) hP)
+  have hb := J.abs_pure_scalar_jet_le_of_mixed_euler_bound x₀ w u hEuler n q _
+    hline hbound
+  have heq := congrArg (fun y : E => |J.D (n + 1) y (fun _ => w)|) (hφ q)
+  exact heq.symm.trans_le hb
+
 private theorem scalar_height_bound_of_tower
     {S : PhysicalSpacesData} {base : ℕ} {ε : ℝ}
     {f : StateDirections S × ℝ → ℝ}
@@ -48,50 +95,13 @@ private theorem scalar_height_bound_of_tower
     |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
       P * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading high z) *
         heightPairGrading S base η + heightPairGrading S high η) := by
-  let x₀ : StateDirections S × ℝ := (z.1, 0)
-  have hpoint (q : ℝ) : x₀ + q • scalarParameterDirection S = (z.1, q) :=
-    scalarParameter_zero_line S z.1 q
-  have hEuler (q : ℝ) (hq : x₀ + q • scalarParameterDirection S ∈
-      sectorNeighborhood S base ε ε) :
-      J.D 1 (x₀ + q • scalarParameterDirection S) (fun _ => heightParameterDirection S η) =
-        q * J.D 1 (x₀ + q • scalarParameterDirection S) (fun _ => scalarParameterDirection S) := by
-    have hq' : (z.1, q) ∈ sectorNeighborhood S base ε ε := (hpoint q) ▸ hq
-    exact (congrArg (fun y => J.D 1 y (fun _ => heightParameterDirection S η)) (hpoint q)).trans
-      ((heuler q hq').trans (congrArg (fun y =>
-        q * J.D 1 y (fun _ => scalarParameterDirection S)) (hpoint q)).symm)
-  have hline (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-      x₀ + (t * z.2) • scalarParameterDirection S ∈ sectorNeighborhood S base ε ε :=
-    (hpoint (t * z.2)).symm ▸ sectorParameter_scalar_segment_mem hz (scalar_segment_mul_mem ht)
-  have hbound (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-      |J.D (n + 2) (x₀ + (t * z.2) • scalarParameterDirection S)
-        (Fin.snoc (fun _ : Fin (n + 1) => scalarParameterDirection S)
-          (heightParameterDirection S η))| ≤
-        P * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading high z) *
-          heightPairGrading S base η + heightPairGrading S high η) := by
-    have h := hJ _ (hline t ht)
-      (Fin.snoc (fun _ : Fin (n + 1) => scalarParameterDirection S)
-        (heightParameterDirection S η))
-    have hw := congrArg (fun a : ℝ => P * a)
-      (oneHighVariationWeight_scalar_height S base high (n + 1)
-        (x₀ + (t * z.2) • scalarParameterDirection S) η)
-    have hgrade := (congrArg (pairGrading (sectorGrading S) realGrading high)
-      (hpoint (t * z.2))).trans_le
-        (sectorPairGrading_scalar_segment_le S high z.1 (scalar_segment_mul_mem ht))
-    have hadd : ((n + 1 : ℕ) : ℝ) + 1 +
-        pairGrading (sectorGrading S) realGrading high
-          (x₀ + (t * z.2) • scalarParameterDirection S) ≤
-        (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading high z := by
-      simp only [Nat.cast_add, Nat.cast_one]
-      linarith only [hgrade]
-    exact (h.trans_eq hw).trans (mul_le_mul_of_nonneg_left
-      (add_le_add_right (mul_le_mul_of_nonneg_right hadd (apply_nonneg _ _)) _) hP)
-  have h := J.abs_pure_scalar_jet_le_of_mixed_euler_bound x₀
-    (scalarParameterDirection S) (heightParameterDirection S η) hEuler n z.2 _ hline hbound
-  have heq : |J.D (n + 1) (x₀ + z.2 • scalarParameterDirection S)
-      (fun _ => scalarParameterDirection S)| =
-      |J.D (n + 1) z (fun _ => scalarParameterDirection S)| :=
-    congrArg (fun y => |J.D (n + 1) y (fun _ => scalarParameterDirection S)|) (hpoint z.2)
-  exact heq.symm.trans_le h
+  exact scalar_height_bound_of_line J (pairGrading (sectorGrading S) realGrading)
+    base high n (z.1, 0) (scalarParameterDirection S) (heightParameterDirection S η)
+    (fun t => (z.1, t)) z.2 (scalarParameter_zero_line S z.1) hP
+    (apply_nonneg (heightPairGrading S base) η) hJ heuler
+    (fun t ht => sectorParameter_scalar_segment_mem hz (scalar_segment_mul_mem ht))
+    (fun t ht => sectorPairGrading_scalar_segment_le S high z.1 (scalar_segment_mul_mem ht))
+    (fun y => oneHighVariationWeight_scalar_height S base high (n + 1) y η)
 
 theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

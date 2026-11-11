@@ -171,4 +171,6 @@ theorem anglePairEvaluation_norm_le (y : ℝ) (z : AngleL2 × AngleL2) :
         (Real.pi⁻¹ * (a + b) + a) * ‖z‖
       ring
 
+end
+
 end ContinuousFlexibility.Statements

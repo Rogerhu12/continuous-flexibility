@@ -29,12 +29,13 @@ private theorem seminorm_add_smul_bound {E : Type*}
     (hx : p x = A) (hy : p y ≤ B) :
     p (x + c • y) ≤ A + |c| * B := by
   have ht : p (x + c • y) ≤ p x + |c| * p y := by
-    simpa only [map_smul_eq_mul, Real.norm_eq_abs] using p.add_le x (c • y)
+    simpa only [map_smul_eq_mul, Real.norm_eq_abs] using map_add_le_add p x (c • y)
   rw [hx] at ht
-  exact ht.trans (add_le_add_left (mul_le_mul_of_nonneg_left hy (abs_nonneg c)) A)
+  exact ht.trans (add_le_add le_rfl (mul_le_mul_of_nonneg_left hy (abs_nonneg c)))
 
 private theorem pairGrading_at_real_zero {E : Type*}
-    [AddCommGroup E] [Module ℝ E] (p : ℕ → Seminorm ℝ E) (s : ℕ) (x : E) :
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (s : ℕ) (x : E) :
     pairGrading p realGrading s (x, 0) = p s x := by
   rw [pairGrading_apply, map_zero, add_zero]
 
@@ -141,6 +142,43 @@ theorem localizedStateParameterDirection_weighted_grading_le
         (circleSingletonGradingConstant_nonneg s))
     _ = _ := by ring
 
+private theorem localizedStateParameterDirection_flow_jet
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (v : StateDirections S × ℝ) (hvq : v.2 = 0)
+    (m n b : ℕ) (θ r : ℝ) (hr : r ∈ Icc (C.left m) (C.right m))
+    (η : HeightPair S) (c : ℝ)
+    (hheight : ∀ t ∈ Ioo (C.left m) (C.right m), ∀ ψ,
+      heightPairField S η (t, ψ) = heightPairField S v.1.val.1 (t, ψ) + c)
+    (J : SmoothDirections (sectorNeighborhood S base ε ε)
+      (fun y => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C y)))
+    (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε)
+    (vs : Fin n → (StateDirections S × ℝ)) :
+    J.D (n + 1) z (Fin.snoc vs v) = J.D (n + 1) z (Fin.snoc vs
+      (localizedStateParameterDirection (hS.2.1 (3 / 4 : ℝ)) m η
+        ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1 m 0))) := by
+  let c₀ : ℝ := (S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1 m 0
+  let w : StateDirections S × ℝ :=
+    localizedStateParameterDirection (hS.2.1 (3 / 4 : ℝ)) m η c₀
+  have hwq : w.2 = 0 :=
+    localizedStateParameterDirection_scalar (hS.2.1 (3 / 4 : ℝ)) m η c₀
+  have hκ : (S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1 m 0 =
+      (S.circle (3 / 4 : ℝ)).decode w.1.val.2.2.1 m 0 := by
+    have heq := localizedStateParameterDirection_control
+      (hS.2.1 (3 / 4 : ℝ)) m η c₀ m 0
+    simpa only [if_pos rfl] using heq.symm
+  have hh : ∀ t ∈ Ioo (C.left m) (C.right m), ∀ ψ,
+      heightPairField S v.1.val.1 (t, ψ) = heightPairField S w.1.val.1 (t, ψ) + -c := by
+    intro t ht ψ
+    have hw : w.1.val.1 = η :=
+      localizedStateParameterDirection_height (hS.2.1 (3 / 4 : ℝ)) m η c₀
+    rw [hw, hheight t ht ψ]
+    ring
+  exact hN.ordinaryFlowFamily_state_jet_locality hS hT hz v w hvq hwq
+    m b θ hr hκ (-c) hh J n vs
+
 theorem N01Properties.exists_localized_state_directions
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -165,8 +203,12 @@ theorem N01Properties.exists_localized_state_directions
   have hex := hN.exists_height_pair_plateau_directions hS hT v.1.val.1
   let η : ℕ → HeightPair S := Classical.choose hex
   have hη := Classical.choose_spec hex
-  have hlocal := hη.2.2.1
-  have henergy := hη.2.2.2
+  have hlocal (m : ℕ) : ∃ c : ℝ, ∀ t ∈ Ioo (C.left m) (C.right m), ∀ θ : ℝ,
+      heightPairField S (η m) (t, θ) = heightPairField S v.1.val.1 (t, θ) + c :=
+    hη.2.2.1 m
+  have henergy (s m : ℕ) : heightPairGrading S s (η m) ≤
+      Real.sqrt (physicalPlateauEnergy D T C (3 / 4 : ℝ) s
+        ((S.height (3 / 4 : ℝ)).decode v.1.val.1.1) m).toReal := (hη.2.2.2 s).2 m
   let w : ℕ → (StateDirections S × ℝ) := fun m =>
     localizedStateParameterDirection (hS.2.1 (3 / 4 : ℝ)) m (η m)
       ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1 m 0)
@@ -175,21 +217,15 @@ theorem N01Properties.exists_localized_state_directions
   refine ⟨w, hwq, ?_, ?_⟩
   · intro m n b θ r hr J z hz vs
     obtain ⟨c, hc⟩ := hlocal m
-    apply hN.ordinaryFlowFamily_state_jet_locality hS hT hz v (w m) hvq (hwq m)
-      m b θ hr ?_ (-c) ?_ J n vs
-    · simp only [w, localizedStateParameterDirection_control, ite_true]
-    · intro t ht ψ
-      rw [show (w m).1.val.1 = η m from
-        localizedStateParameterDirection_height (hS.2.1 (3 / 4 : ℝ)) m (η m) _]
-      rw [hc t ht ψ]
-      ring
+    exact localizedStateParameterDirection_flow_jet hN hS hT v hvq
+      m n b θ r hr (η m) c hc J z hz vs
   · intro m s d
     have hs := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
     have hM : 1 ≤ T.M (T.sample m) := (hT.2.1 _ hs).2.2.2
     have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
     exact (localizedStateParameterDirection_weighted_grading_le (hS.2.1 (3 / 4 : ℝ))
       v.1.val.2.2.1 m s d (η m) hM hH).trans
-      (add_le_add (mul_le_mul_of_nonneg_left ((henergy s).2 m)
+      (add_le_add (mul_le_mul_of_nonneg_left (henergy s m)
         (pow_nonneg (zero_le_one.trans hM) d)) (le_refl _))
 
 end ContinuousFlexibility.Statements

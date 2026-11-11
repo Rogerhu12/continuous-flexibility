@@ -75,7 +75,11 @@ theorem N01Properties.transportedLeftChart_sectorLine_contDiffOn
     (show (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) ⊆
       {p : PolarPoint | x + p.1 • w ∈ sectorNeighborhood S base ε ε} from fun _ hp => hp.1)
   have h := (scalarParameter_comp_contDiffOn
-    (stateLeftChart_sectorLine_contDiff C hS m x w).contDiffOn hi).sub contDiffOn_const
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => stateLeftChart S (liftSectorParameter S C (x + t • w)).1 m θ)
+    (G := fun t θ => C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m θ)
+    (stateLeftChart_sectorLine_contDiff C hS m x w).contDiffOn hi).sub
+      (contDiffOn_const (c := C.travel m))
   apply h.congr
   intro p _
   rfl
@@ -86,7 +90,11 @@ theorem N01Properties.rightChartCandidate_sectorLine_contDiffOn
       rightChartCandidate S C (liftSectorParameter S C (x + p.1 • w)) m p.2)
       (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) := by
   have hf := hN.transportedLeftChart_sectorLine_contDiffOn hS hT m x w
-  have hn := scalarParameter_comp_contDiffOn hf (contDiffOn_snd.neg)
+  have hn := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => stateLeftChart S (liftSectorParameter S C (x + t • w)).1 m
+      (C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m θ) - C.travel m)
+    (G := fun _ θ => -θ) hf contDiffOn_snd.neg
   apply ((hf.sub hn).div_const 2).congr
   intro p _
   simp only [rightChartCandidate, oddPart, Pi.sub_apply, Pi.div_apply,
@@ -98,8 +106,12 @@ theorem N01Properties.rightChartInverse_sectorLine_contDiffOn
       C.rightChartInverse (liftSectorParameter S C (x + p.1 • w)) m p.2)
       (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) := by
   apply scalarParameterInverse_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => rightChartCandidate S C (liftSectorParameter S C (x + t • w)) m θ)
+    (G := fun t θ => C.rightChartInverse (liftSectorParameter S C (x + t • w)) m θ)
     ((sectorNeighborhood_isOpen S base ε ε).preimage
-      (continuous_const.add (continuous_id.smul continuous_const)))
+      (show Continuous (fun t : ℝ => x + t • w) from
+        continuous_const.add (continuous_id.smul continuous_const)))
     (hN.rightChartCandidate_sectorLine_contDiffOn hS hT m x w)
   · intro t ht θ
     exact N01Properties.rightChart_deriv_pos S C _ m hN
@@ -120,8 +132,12 @@ theorem N01Properties.rightChartInverse_sectorLine_hasDerivAt
         deriv (rightChartCandidate S C (liftSectorParameter S C (x + t • w)) m)
           (C.rightChartInverse (liftSectorParameter S C (x + t • w)) m θ)) t := by
   apply scalarParameterInverse_hasDerivAt
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => rightChartCandidate S C (liftSectorParameter S C (x + t • w)) m θ)
+    (G := fun t θ => C.rightChartInverse (liftSectorParameter S C (x + t • w)) m θ)
     ((sectorNeighborhood_isOpen S base ε ε).preimage
-      (continuous_const.add (continuous_id.smul continuous_const)))
+      (show Continuous (fun t : ℝ => x + t • w) from
+        continuous_const.add (continuous_id.smul continuous_const)))
     (hN.rightChartCandidate_sectorLine_contDiffOn hS hT m x w)
     (fun s hs y => N01Properties.rightChart_deriv_pos S C _ m hN
       (liftSectorParameter_mem_stateNeighborhood hs (le_refl ε))
@@ -136,9 +152,16 @@ theorem N01Properties.returnTransportInverse_sectorLine_contDiffOn
       C.minusReturnInverse (liftSectorParameter S C (x + p.1 • w)) m
         (C.rightChartInverse (liftSectorParameter S C (x + p.1 • w)) m p.2))
       (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) := by
+  have hi : ContDiffOn ℝ ∞ (fun p : PolarPoint =>
+      C.minusReturnInverse (liftSectorParameter S C (x + p.1 • w)) m p.2)
+      (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) :=
+    (hN.minusReturnInverse_sectorLine_contDiffOn hS hT m x w).mono
+      (fun _ hp => hp.1)
   exact scalarParameter_comp_contDiffOn
-    ((hN.minusReturnInverse_sectorLine_contDiffOn hS hT m x w).mono (fun _ hp => hp.1))
-    (hN.rightChartInverse_sectorLine_contDiffOn hS hT m x w)
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m θ)
+    (G := fun t θ => C.rightChartInverse (liftSectorParameter S C (x + t • w)) m θ)
+    hi (hN.rightChartInverse_sectorLine_contDiffOn hS hT m x w)
 
 theorem N01Properties.returnCorrectionInitialMap_sectorLine_contDiffOn
     (m : ℕ) (x w : StateDirections S × ℝ) :
@@ -146,9 +169,16 @@ theorem N01Properties.returnCorrectionInitialMap_sectorLine_contDiffOn
       returnCorrectionInitialMap S C (liftSectorParameter S C (x + p.1 • w)) m p.2)
       (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) := by
   have hg := hN.returnTransportInverse_sectorLine_contDiffOn hS hT m x w
-  have hy := (stateLeftChart_sectorLine_contDiff C hS m x w).contDiffOn.sub
-    (contDiffOn_const (c := C.travel m))
-  apply (scalarParameter_comp_contDiffOn hg hy).congr
+  have hy : ContDiffOn ℝ ∞ (fun p : PolarPoint =>
+      stateLeftChart S (liftSectorParameter S C (x + p.1 • w)).1 m p.2 - C.travel m)
+      (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) :=
+    (stateLeftChart_sectorLine_contDiff C hS m x w).contDiffOn.sub contDiffOn_const
+  apply (scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m
+      (C.rightChartInverse (liftSectorParameter S C (x + t • w)) m θ))
+    (G := fun t θ => stateLeftChart S (liftSectorParameter S C (x + t • w)).1 m θ - C.travel m)
+    hg hy).congr
   intro p _
   rfl
 
@@ -158,10 +188,21 @@ theorem N01Properties.returnResidualField_sectorLine_contDiffOn
       returnResidualField S C (liftSectorParameter S C (x + p.1 • w)) m p.2)
       (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) := by
   have hf := hN.transportedLeftChart_sectorLine_contDiffOn hS hT m x w
-  have hn := scalarParameter_comp_contDiffOn hf contDiffOn_snd.neg
+  have hn := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => stateLeftChart S (liftSectorParameter S C (x + t • w)).1 m
+      (C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m θ) - C.travel m)
+    (G := fun _ θ => -θ) hf contDiffOn_snd.neg
   have he := (hf.add hn).div_const 2
-  have h := scalarParameter_comp_contDiffOn he
-    (hN.rightChartInverse_sectorLine_contDiffOn hS hT m x w)
+  have h := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ =>
+      ((stateLeftChart S (liftSectorParameter S C (x + t • w)).1 m
+        (C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m θ) - C.travel m) +
+      (stateLeftChart S (liftSectorParameter S C (x + t • w)).1 m
+        (C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m (-θ)) - C.travel m)) / 2)
+    (G := fun t θ => C.rightChartInverse (liftSectorParameter S C (x + t • w)) m θ)
+    he (hN.rightChartInverse_sectorLine_contDiffOn hS hT m x w)
   apply h.congr
   intro p _
   simp only [returnResidualField, evenPart, Pi.add_apply, Pi.div_apply,

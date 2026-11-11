@@ -44,6 +44,7 @@ theorem MixedJetHasDerivAt.add
   apply ((h a b p).add (h' a b p)).congr_of_eventuallyEq
   filter_upwards [hF, hH] with s hs hs'
   rw [mixedDerivative_add_of_contDiff hs hs']
+  rfl
 
 theorem MixedJetHasDerivAt.mul_const
     {F : ℝ → PolarPoint → ℝ} {G u : PolarPoint → ℝ} {t : ℝ}
