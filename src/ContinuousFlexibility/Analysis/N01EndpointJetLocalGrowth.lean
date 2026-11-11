@@ -44,6 +44,31 @@ theorem sectorParameter_statePart_grading_le
   rw [norm_zero, add_zero]
   exact le_add_of_nonneg_right (norm_nonneg _)
 
+private theorem endpointJet_mixed_norm_bound
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [SeminormedAddCommGroup F] [NormedSpace ℝ F] {k : ℕ}
+    (A : MultilinearMap ℝ (fun _ : Fin k => E) F) (v q : Fin k → E)
+    (Kq Ks Q : ℝ) (hq : ‖A q‖ ≤ Kq * Q)
+    (hterm : ∀ i : Fin k, ‖A (multilinearDifferenceTuple q v i)‖ ≤ Ks * Q) :
+    ‖A v‖ ≤ (Kq + (k : ℝ) * Ks) * Q := by
+  classical
+  have hidentity : A v = A q + ∑ i : Fin k, A (multilinearDifferenceTuple q v i) := by
+    have heq : A v - A q = ∑ i : Fin k, A (multilinearDifferenceTuple q v i) := by
+      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies,
+        multilinearDifferenceTuple] using A.map_sub_map_piecewise v q Finset.univ
+    calc
+      A v = A q + (A v - A q) := by abel
+      _ = _ := congrArg (fun y : F => A q + y) heq
+  calc
+    ‖A v‖ ≤ ‖A q‖ + ∑ i : Fin k, ‖A (multilinearDifferenceTuple q v i)‖ := by
+      rw [hidentity]
+      exact (norm_add_le _ _).trans (add_le_add (le_refl _) (norm_sum_le _ _))
+    _ ≤ Kq * Q + ∑ _i : Fin k, Ks * Q :=
+      add_le_add hq (Finset.sum_le_sum (fun i _ => hterm i))
+    _ = _ := by
+      rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
+      ring
+
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -62,9 +87,13 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
   classical
-  obtain ⟨Bₛ, Lₛ, hBₛ, hstate⟩ :=
-    hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT
-  obtain ⟨Bq, Lq, _, hscalar⟩ := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
+  let stateData := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT
+  let Bₛ : ℕ := stateData.choose
+  let Lₛ : ℕ := stateData.choose_spec.choose
+  have hBₛ : base ≤ Bₛ := stateData.choose_spec.choose_spec.1
+  let scalarData := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
+  let Bq : ℕ := scalarData.choose
+  let Lq : ℕ := scalarData.choose_spec.choose
   let B : ℕ := max Bₛ Bq
   let L : ℕ := max Lₛ Lq
   have hBs : Bₛ ≤ B := le_max_left _ _
@@ -75,8 +104,12 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
   have hp : Monotone p := sectorPairGrading_monotone S
   refine ⟨B, L, hBₛ.trans hBs, ?_⟩
   intro n R hR s hs
-  obtain ⟨Ks, hKs, hsbound⟩ := hstate n R hR s (hBs.trans hs)
-  obtain ⟨Kq, hKq, hqbound⟩ := hscalar n R hR s (hBq.trans hs)
+  let stateOrder := stateData.choose_spec.choose_spec.2 n R hR s (hBs.trans hs)
+  let Ks : ℝ := stateOrder.choose
+  have hKs : 0 ≤ Ks := stateOrder.choose_spec.1
+  let scalarOrder := scalarData.choose_spec.choose_spec.2 n R hR s (hBq.trans hs)
+  let Kq : ℝ := scalarOrder.choose
+  have hKq : 0 ≤ Kq := scalarOrder.choose_spec.1
   refine ⟨Kq + ((n + 1 : ℕ) : ℝ) * Ks,
     add_nonneg hKq (mul_nonneg (Nat.cast_nonneg _) hKs), ?_⟩
   intro rsel hrsel z hz hzb v hv
@@ -90,8 +123,14 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
   let F := coordinate.toLinearMap.compMultilinearMap M
   have hnorm (w : Fin (n + 1) → (StateDirections S × ℝ)) :
       ‖F w‖ = circleNorm T (3 / 4 : ℝ) s (A w) := by
-    change ‖(M w).val s‖ = _
-    rw [(hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.2.2, liftCircleMultilinear_decode]
+    have hlevel : ‖(M w).val s‖ =
+        circleNorm T (3 / 4 : ℝ) s ((S.circle (3 / 4 : ℝ)).decode (M w)) :=
+      (hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.2.2 (M w) s
+    have hdecode : (S.circle (3 / 4 : ℝ)).decode (M w) = A w :=
+      liftCircleMultilinear_decode (hS.2.1 (3 / 4 : ℝ)) A
+        (hN.endpointFlowScalarJets_positive_circleMember hS hT rsel hrsel n z hz) w
+    exact (show ‖F w‖ = ‖(M w).val s‖ from rfl).trans
+      (hlevel.trans (congrArg (circleNorm T (3 / 4 : ℝ) s) hdecode))
   let Q : ℝ := 1 + p (s + L) z + ∑ i : Fin (n + 1), p (s + L) (v i)
   have hsum0 : 0 ≤ ∑ i : Fin (n + 1), p (s + L) (v i) :=
     Finset.sum_nonneg (fun _ _ => apply_nonneg _ _)
@@ -108,13 +147,15 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
       exact Finset.prod_le_one₀ (fun _ _ => abs_nonneg _) (fun i _ => hcoeff i)
     have hhigh : p (s + Lq) z ≤ p (s + L) z := hp (by omega) z
     calc
-      ‖F q‖ = |∏ i : Fin (n + 1), (v i).2| * ‖F (fun _ => scalarParameterDirection S)‖ := by
-        rw [heq, norm_smul, Real.norm_eq_abs]
+      ‖F q‖ = |∏ i : Fin (n + 1), (v i).2| * ‖F (fun _ => scalarParameterDirection S)‖ :=
+        (congrArg (fun y : (S.circle (3 / 4 : ℝ)).level s => ‖y‖) heq).trans
+          (by simpa only [Real.norm_eq_abs] using
+            norm_smul (∏ i : Fin (n + 1), (v i).2) (F (fun _ => scalarParameterDirection S)))
       _ ≤ ‖F (fun _ => scalarParameterDirection S)‖ :=
         mul_le_of_le_one_left (norm_nonneg _) hprod
-      _ ≤ Kq * (1 + p (s + Lq) z) := by
-        rw [hnorm]
-        exact hqbound rsel hrsel z hz ((hp hBq z).trans hzb)
+      _ ≤ Kq * (1 + p (s + Lq) z) :=
+        (hnorm (fun _ => scalarParameterDirection S)).trans_le
+          (scalarOrder.choose_spec.2 rsel hrsel z hz ((hp hBq z).trans hzb))
       _ ≤ Kq * Q := mul_le_mul_of_nonneg_left
         (by dsimp only [Q]; linarith only [hhigh, hsum0]) hKq
   have hterm (i : Fin (n + 1)) :
@@ -138,28 +179,11 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
     have hsum : (∑ a : Fin (n + 1), p (s + Lₛ) (w a)) ≤
         ∑ a : Fin (n + 1), p (s + L) (v a) :=
       Finset.sum_le_sum (fun a _ => (hwgrade (s + Lₛ) a).trans (hp (by omega) (v a)))
-    rw [hnorm]
-    exact (hsbound rsel hrsel z hz ((hp hBs z).trans hzb) w hwlow ⟨i, hwi⟩).trans
-      (mul_le_mul_of_nonneg_left
-        (by dsimp only [Q]; linarith only [hhigh, hsum]) hKs)
-  have hidentity : F v = F q + ∑ i : Fin (n + 1), F (multilinearDifferenceTuple q v i) := by
-    have heq : F v - F q = ∑ i : Fin (n + 1), F (multilinearDifferenceTuple q v i) := by
-      simpa only [Finset.piecewise_univ, Finset.mem_univ, true_implies,
-        multilinearDifferenceTuple] using F.map_sub_map_piecewise v q Finset.univ
-    calc
-      F v = F q + (F v - F q) := by abel
-      _ = _ := congrArg (fun y => F q + y) heq
-  rw [← hnorm]
-  calc
-    ‖F v‖ ≤ ‖F q‖ + ∑ i : Fin (n + 1), ‖F (multilinearDifferenceTuple q v i)‖ := by
-      rw [hidentity]
-      exact (norm_add_le _ _).trans (add_le_add (le_refl _) (norm_sum_le _ _))
-    _ ≤ Kq * Q + ∑ _i : Fin (n + 1), Ks * Q :=
-      add_le_add hqp (Finset.sum_le_sum (fun i _ => hterm i))
-    _ = _ := by
-      rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
-      dsimp only [Q, p]
-      ring
+    exact (hnorm w).trans_le
+      ((stateOrder.choose_spec.2 rsel hrsel z hz ((hp hBs z).trans hzb) w hwlow ⟨i, hwi⟩).trans
+        (mul_le_mul_of_nonneg_left
+          (by dsimp only [Q]; linarith only [hhigh, hsum]) hKs))
+  exact (hnorm v).symm.trans_le (endpointJet_mixed_norm_bound F v q Kq Ks Q hqp hterm)
 
 theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -177,9 +201,12 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
-  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
+  let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
+  let B : ℕ := data.choose
+  let L : ℕ := data.choose_spec.choose
+  have hB : base ≤ B := data.choose_spec.choose_spec.1
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
-  exact ⟨K, hK, hk rsel hrsel⟩
+  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

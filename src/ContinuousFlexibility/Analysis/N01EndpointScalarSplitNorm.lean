@@ -139,9 +139,48 @@ theorem liftSectorParameter_physical_height_grading_le
         pairGrading (sectorGrading S) realGrading s z := by
   have heq : (liftSectorParameter S C z).1.1.1 =
       C.referenceState.1.1 + z.1.val.1.1 := rfl
-  rw [heq]
-  exact (map_add_le_add ((S.height (3 / 4 : ℝ)).grading s) _ _).trans
-    (add_le_add (le_refl _) (sectorParameter_height_grading_le S s z))
+  exact (congrArg ((S.height (3 / 4 : ℝ)).grading s) heq).trans_le
+    ((map_add_le_add ((S.height (3 / 4 : ℝ)).grading s) _ _).trans
+      (add_le_add (le_refl _) (sectorParameter_height_grading_le S s z)))
+
+private theorem real_reference_budget_bounds
+    {a b : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b) :
+    1 ≤ 1 + a + b ∧ a ≤ 1 + a + b ∧ b ≤ 1 + a + b := by
+  refine ⟨?_, ?_, ?_⟩
+  · linarith only [ha, hb]
+  · linarith only [hb]
+  · linarith only [ha]
+
+private theorem scalar_height_budget_transfer
+    {K N J a b u v x y z r : ℝ}
+    (hK : 0 ≤ K) (hN : 1 ≤ N) (hJ : 1 ≤ J) (ha : a ≤ J) (hb : b ≤ J)
+    (hu : 0 ≤ u) (hx : 0 ≤ x) (hy : 0 ≤ y) (hz : 0 ≤ z)
+    (hu_bound : u ≤ a + y) (hv_bound : v ≤ b + z)
+    (hpoint : r ≤ K * ((N + x) * u + v)) :
+    r ≤ K * (N * J) * ((1 + x) * (1 + y) + (1 + z)) := by
+  have hu' : u ≤ J * (1 + y) := hu_bound.trans (by
+    calc
+      a + y ≤ J + J * y := add_le_add ha (le_mul_of_one_le_left hy hJ)
+      _ = J * (1 + y) := by ring)
+  have hv' : v ≤ J * (1 + z) := hv_bound.trans (by
+    calc
+      b + z ≤ J + J * z := add_le_add hb (le_mul_of_one_le_left hz hJ)
+      _ = J * (1 + z) := by ring)
+  have hcoefficient : N + x ≤ N * (1 + x) := by
+    calc
+      N + x ≤ N + N * x := add_le_add (le_refl _) (le_mul_of_one_le_left hx hN)
+      _ = N * (1 + x) := by ring
+  have hlast : J * (1 + z) ≤ N * (J * (1 + z)) :=
+    le_mul_of_one_le_left
+      (mul_nonneg (zero_le_one.trans hJ) (add_nonneg zero_le_one hz)) hN
+  calc
+    r ≤ K * ((N + x) * u + v) := hpoint
+    _ ≤ K * (N * (1 + x) * (J * (1 + y)) + N * (J * (1 + z))) :=
+      mul_le_mul_of_nonneg_left
+        (add_le_add (mul_le_mul hcoefficient hu' hu
+          (mul_nonneg (zero_le_one.trans hN) (add_nonneg zero_le_one hx)))
+          (hv'.trans hlast)) hK
+    _ = K * (N * J) * ((1 + x) * (1 + y) + (1 + z)) := by ring
 
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius
@@ -161,11 +200,10 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_unif
   let J : ℝ := 1 + (S.height (3 / 4 : ℝ)).grading (base + c + 6) C.referenceState.1.1 +
     (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) C.referenceState.1.1
   let N : ℝ := (n : ℝ) + 2
-  have hJ : 1 ≤ J := by
-    have h₀ := apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6)) C.referenceState.1.1
-    have h₁ := apply_nonneg ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)) C.referenceState.1.1
-    dsimp only [J]
-    linarith only [h₀, h₁]
+  have hrefs := real_reference_budget_bounds
+    (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6)) C.referenceState.1.1)
+    (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)) C.referenceState.1.1)
+  have hJ : 1 ≤ J := hrefs.1
   have hN₀ : 1 ≤ N := by
     have hn : 0 ≤ (n : ℝ) := Nat.cast_nonneg n
     dsimp only [N]
@@ -174,45 +212,15 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_unif
     (zero_le_one.trans hJ)), ?_⟩
   intro rsel hrsel z hz
   let p := pairGrading (sectorGrading S) realGrading
-  have href₀ : (S.height (3 / 4 : ℝ)).grading (base + c + 6) C.referenceState.1.1 ≤ J := by
-    have h := apply_nonneg ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)) C.referenceState.1.1
-    dsimp only [J]
-    linarith only [h]
-  have href₁ : (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) C.referenceState.1.1 ≤ J := by
-    have h := apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6)) C.referenceState.1.1
-    dsimp only [J]
-    linarith only [h]
-  have hheight₀ : (S.height (3 / 4 : ℝ)).grading (base + c + 6)
-      (liftSectorParameter S C z).1.1.1 ≤ J * (1 + p (base + c + 6) z) := by
-    apply (liftSectorParameter_physical_height_grading_le S C z _).trans
-    have hp : p (base + c + 6) z ≤ J * p (base + c + 6) z :=
-      le_mul_of_one_le_left (apply_nonneg _ _) hJ
-    nlinarith only [href₀, hp]
-  have hheight₁ : (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
-      (liftSectorParameter S C z).1.1.1 ≤ J * (1 + p (b + loss + c + 6) z) := by
-    apply (liftSectorParameter_physical_height_grading_le S C z _).trans
-    have hp : p (b + loss + c + 6) z ≤ J * p (b + loss + c + 6) z :=
-      le_mul_of_one_le_left (apply_nonneg _ _) hJ
-    nlinarith only [href₁, hp]
-  have hcoefficient : N + p (b + loss) z ≤ N * (1 + p (b + loss) z) := by
-    have hp := le_mul_of_one_le_left (apply_nonneg (p (b + loss)) z) hN₀
-    nlinarith only [hp]
-  have hlast : J * (1 + p (b + loss + c + 6) z) ≤
-      N * (J * (1 + p (b + loss + c + 6) z)) :=
-    le_mul_of_one_le_left (mul_nonneg (zero_le_one.trans hJ)
-      (add_nonneg zero_le_one (apply_nonneg _ _))) hN₀
-  calc
-    _ ≤ K * ((N + p (b + loss) z) *
-        (S.height (3 / 4 : ℝ)).grading (base + c + 6) (liftSectorParameter S C z).1.1.1 +
-        (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) (liftSectorParameter S C z).1.1.1) :=
-      normData.choose_spec.2 rsel hrsel z hz
-    _ ≤ K * (N * (1 + p (b + loss) z) * (J * (1 + p (base + c + 6) z)) +
-        N * (J * (1 + p (b + loss + c + 6) z))) :=
-      mul_le_mul_of_nonneg_left
-        (add_le_add (mul_le_mul hcoefficient hheight₀ (apply_nonneg _ _)
-          (mul_nonneg (zero_le_one.trans hN₀) (add_nonneg zero_le_one (apply_nonneg _ _))))
-          (hheight₁.trans hlast)) hK
-    _ = _ := by dsimp only [p]; ring
+  exact scalar_height_budget_transfer hK hN₀ hJ hrefs.2.1 hrefs.2.2
+    (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6))
+      (liftSectorParameter S C z).1.1.1)
+    (apply_nonneg (p (b + loss)) z)
+    (apply_nonneg (p (base + c + 6)) z)
+    (apply_nonneg (p (b + loss + c + 6)) z)
+    (liftSectorParameter_physical_height_grading_le S C z (base + c + 6))
+    (liftSectorParameter_physical_height_grading_le S C z (b + loss + c + 6))
+    (normData.choose_spec.2 rsel hrsel z hz)
 
 theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound
     (hN : N01Properties D T S C base loss ε)
