@@ -52,7 +52,7 @@ theorem nonnegative_compact_deriv_sq_bound {w : ℝ → ℝ}
     have hu := (hw.differentiable (by simp) (x + t * h)).hasDerivAt.comp t ht
     have hv : HasDerivAt (fun s : ℝ => s * h * q) (h * q) t := by
       simpa using ((hasDerivAt_id t).mul_const h).mul_const q
-    convert (hu.sub_const (w x)).sub hv using 1 <;> dsimp [rem] <;> ring
+    convert (hu.sub_const (w x)).fun_sub hv using 1 <;> ring
   have hrem : |w (x + h) - w x - h * q| ≤ M * h ^ 2 := by
     have hb (t : ℝ) (ht : t ∈ Ico (0 : ℝ) 1) :
         ‖h * (deriv w (x + t * h) - q)‖ ≤ M * h ^ 2 := by
@@ -93,20 +93,21 @@ theorem matchingProfile_nonneg {D : ReferenceData} (hD : IsAccumulatingProfile D
   by_cases hr : r ∈ radialCore D
   · exact (hg.2.2.2.2.1 r hr).le
   · have hz : D.w r = 0 := hg.2.2.1.2 r (by
-      rcases le_or_lt r D.a with h | h
-      · exact Or.inl h
-      · exact Or.inr (le_of_not_gt (fun h' => hr ⟨h, h'⟩)))
+      by_cases ha : r ≤ D.a
+      · exact Or.inl ha
+      · exact Or.inr (le_of_not_gt (fun h' => hr ⟨lt_of_not_ge ha, h'⟩)))
     simp only [hz, le_refl]
 
 theorem matchingProfile_hasCompactSupport {D : ReferenceData} (hD : IsAccumulatingProfile D) :
     HasCompactSupport D.w := by
-  apply HasCompactSupport.of_support_subset_isCompact isCompact_Icc
+  apply HasCompactSupport.of_support_subset_isCompact
+    (show IsCompact (Icc D.a D.b) from isCompact_Icc)
   intro r hr
   by_contra hn
   have hz : D.w r = 0 := (matchingProfileGeometry hD).2.2.1.2 r (by
-    rcases le_or_lt r D.a with h | h
-    · exact Or.inl h
-    · exact Or.inr (le_of_not_gt (fun h' => hn ⟨h.le, h'.le⟩)))
+    by_cases ha : r ≤ D.a
+    · exact Or.inl ha
+    · exact Or.inr (le_of_not_gt (fun h' => hn ⟨(lt_of_not_ge ha).le, h'.le⟩)))
   exact hr hz
 
 theorem matchingProfile_deriv_sq_bound {D : ReferenceData} (hD : IsAccumulatingProfile D) :

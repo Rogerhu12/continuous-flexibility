@@ -110,7 +110,7 @@ theorem exists_weakDeriv_of_integrated_divergence
       by_cases hx : φ x = 0
       · simp only [hx, zero_div, mul_zero]
       · have hn := hwn' x (hφs (subset_tsupport φ hx))
-        field_simp [hn]
+        field_simp [hn] <;> ring
     have hh := hweak ψ hψ hcψ hψs
     rw [hcancel, hdψ] at hh
     dsimp only [J]
@@ -144,7 +144,7 @@ theorem exists_weakDeriv_of_integrated_divergence
     · simp only [η₀, hx, mul_zero, zero_div]
     · have hn := hwn' x (hηs (subset_tsupport η hx))
       dsimp only [η₀]
-      field_simp [hn]
+      field_simp [hn] <;> ring
   have hη₀qI : Integrable (fun x => η₀ x / w x) volume := by
     rw [hη₀q]
     exact hη.continuous.integrable_of_hasCompactSupport hcη

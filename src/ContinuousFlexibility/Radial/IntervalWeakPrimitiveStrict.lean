@@ -256,10 +256,10 @@ theorem eq_add_intervalIntegral_of_weakDeriv_tsupport
   rw [restrict_Ioo_eq_restrict_Icc] at hc
   have hpoint :=
     Measure.eqOn_Icc_of_ae_eq volume hab.ne hc hF hrep
-  have ha := hpoint a ⟨le_rfl, hab.le⟩
+  have ha := hpoint ⟨le_rfl, hab.le⟩
   simp only [intervalIntegral.integral_same, add_zero] at ha
   intro x hx
-  rw [hpoint x hx, ha]
+  rw [hpoint hx, ha]
 
 /-- Endpoint form of the weak fundamental theorem of calculus. -/
 theorem intervalIntegral_eq_sub_of_weakDeriv_tsupport

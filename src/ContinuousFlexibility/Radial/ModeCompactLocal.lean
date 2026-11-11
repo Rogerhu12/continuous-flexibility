@@ -149,7 +149,7 @@ theorem matchingPrincipal_support_subset {D : ReferenceData} (hD : IsAccumulatin
   have h₂ : deriv (deriv ψ) r = 0 :=
     deriv_of_notMem_tsupport (fun hh => h (tsupport_deriv_subset hh))
   exact hr (by
-    rw [deriv_mul (hw.differentiable (by simp) r) (hdψ.differentiable (by simp) r),
+    rw [deriv_fun_mul (hw.differentiable (by simp) r) (hdψ.differentiable (by simp) r),
       h₁, h₂]
     ring)
 

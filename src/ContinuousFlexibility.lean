@@ -378,3 +378,9 @@ import ContinuousFlexibility.Radial.WeakDivergenceRegularity
 import ContinuousFlexibility.Radial.MatchingWeakGluing
 import ContinuousFlexibility.Radial.ModeCompactLocal
 import ContinuousFlexibility.Radial.ModeWeakRegularity
+import ContinuousFlexibility.Radial.BorderedCoreInverse
+import ContinuousFlexibility.Radial.MatchingSourcePairing
+import ContinuousFlexibility.Radial.ModeCoreSource
+import ContinuousFlexibility.Radial.MatchingGraphRestrictions
+import ContinuousFlexibility.Radial.ModeCoreGraph
+import ContinuousFlexibility.Radial.MatchingInactiveScalar

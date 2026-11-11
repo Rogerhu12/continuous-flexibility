@@ -77,7 +77,7 @@ theorem modeLocalEquation_smul {D : ReferenceData} (hD : IsAccumulatingProfile D
   apply (modeLocalEquation_iff_inner hD j J _ _).mpr
   intro ψ hψ hc hs
   have hu := (modeLocalEquation_iff_inner hD j J U F).mp hU ψ hψ hc hs
-  simp only [Prod.fst_smul, Prod.snd_smul, real_inner_smul_left, smul_eq_mul]
+  simp only [Prod.smul_fst, Prod.smul_snd, real_inner_smul_left, smul_eq_mul]
   have huc := congrArg (fun z : ℝ => c * z) hu
   nlinarith only [huc]
 

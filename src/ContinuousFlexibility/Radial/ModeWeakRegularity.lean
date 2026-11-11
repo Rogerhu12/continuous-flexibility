@@ -48,7 +48,7 @@ theorem exists_contDiffOn_representative_of_locally
     have hp : EqOn (f x) (f z) (V x ∩ V z) :=
       Measure.eqOn_open_of_ae_eq hxy ((hVo x).inter (hVo z))
         (hf x).continuous.continuousOn (hf z).continuous.continuousOn
-    have hyrep := hp y ⟨hy, hVx z⟩
+    have hyrep := hp ⟨hy, hVx z⟩
     dsimp only [v]
     rw [dif_pos hyU]
     exact hyrep.symm
@@ -130,5 +130,60 @@ theorem modeLocalEquation_contDiffOn_representative
   obtain ⟨v, hv, huv⟩ := exists_contDiffOn_representative_of_locally hlocal
   refine ⟨v, hv, huv, ?_⟩
   exact (withDensity_absolutelyContinuous _ _).ae_eq huv
+
+
+/-- The single global representative has absolutely continuous flux on
+every compact subinterval, and that flux has the principal source as its
+almost everywhere derivative. -/
+theorem modeLocalEquation_representative_flux_on_compact
+    {D : ReferenceData} (hD : IsAccumulatingProfile D) (hB : RadialTrueBorder D)
+    {j : ℕ} {U F : RadialModePair D}
+    (hEq : ModeLocalEquation D j (radialCore D) U F)
+    {v : ℝ → ℝ} (hv : ContDiffOn ℝ 1 v (radialCore D))
+    (huv : (U.1 : ℝ → ℝ) =ᵐ[volume.restrict (radialCore D)] v)
+    {l h : ℝ} (hlh : l < h) (hsub : Icc l h ⊆ radialCore D) :
+    AbsolutelyContinuousOnInterval (fun x => D.w x * deriv v x) l h ∧
+      (deriv (fun x => D.w x * deriv v x) =ᵐ[volume.restrict (Ioo l h)]
+        matchingPrincipalSource D j U F) := by
+  have hg := matchingProfileGeometry hD
+  obtain ⟨c, d, hac, hcd, hdb, hcover⟩ :=
+    compact_subset_Ioo_enclosure hg.2.1 isCompact_Icc hsub
+  have hcdsub : Icc c d ⊆ radialCore D := by
+    intro x hx
+    exact ⟨hac.trans_le hx.1, hx.2.trans_lt hdb⟩
+  have hcdsubo : Ioo c d ⊆ radialCore D :=
+    Ioo_subset_Icc_self.trans hcdsub
+  obtain ⟨r, C, hr, hur, hflux, hfluxac, hfluxd⟩ :=
+    modeLocalEquation_contDiff_representative_on_compact hD hB hEq
+      hcd hcdsub hcdsubo
+  have hvr : v =ᵐ[volume.restrict (Ioo c d)] r :=
+    (ae_restrict_of_ae_restrict_of_subset hcdsubo huv).symm.trans hur
+  have hpoint : EqOn v r (Ioo c d) :=
+    Measure.eqOn_open_of_ae_eq hvr isOpen_Ioo
+      (hv.continuousOn.mono hcdsubo) hr.continuous.continuousOn
+  have hdpoint (x : ℝ) (hx : x ∈ Ioo c d) : deriv v x = deriv r x := by
+    apply Filter.EventuallyEq.deriv_eq
+    filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
+    exact hpoint hy
+  have hdflux (x : ℝ) (hx : x ∈ Ioo c d) :
+      deriv (fun y => D.w y * deriv v y) x =
+        deriv (fun y => D.w y * deriv r y) x := by
+    apply Filter.EventuallyEq.deriv_eq
+    filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
+    rw [hdpoint y hy]
+  have hsubu : uIcc l h ⊆ uIcc c d := by
+    rw [uIcc_of_le hlh.le, uIcc_of_le hcd.le]
+    intro x hx
+    exact mem_Icc_of_Ioo (hcover hx)
+  constructor
+  · apply (hfluxac.mono hsubu).congr
+    intro x hx
+    rw [uIcc_of_le hlh.le] at hx
+    rw [hdpoint x (hcover hx)]
+  · have hsubo : Ioo l h ⊆ Ioo c d :=
+      Ioo_subset_Icc_self.trans hcover
+    filter_upwards [ae_restrict_of_ae_restrict_of_subset hsubo hfluxd,
+      self_mem_ae_restrict measurableSet_Ioo] with x hx hxi
+    exact (hdflux x (hsubo hxi)).trans hx
 
 end ContinuousFlexibility.Radial

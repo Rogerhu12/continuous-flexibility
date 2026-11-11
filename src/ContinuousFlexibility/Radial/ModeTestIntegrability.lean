@@ -77,7 +77,7 @@ theorem matchingJacobi_expansion {D : ReferenceData} (hD : IsAccumulatingProfile
   have hw : ContDiff ℝ ∞ D.w := (matchingProfileGeometry hD).2.2.1.1
   have hdψ : ContDiff ℝ ∞ (deriv ψ) := (contDiff_infty_iff_deriv.mp hψ).2
   unfold radialJacobi
-  rw [deriv_mul (hw.differentiable (by simp) r) (hdψ.differentiable (by simp) r)]
+  rw [deriv_fun_mul (hw.differentiable (by simp) r) (hdψ.differentiable (by simp) r)]
   ring
 
 def matchingJacobiTest (D : ReferenceData) (j : ℕ) (ψ : ℝ → ℝ) (r : ℝ) : ℝ :=
