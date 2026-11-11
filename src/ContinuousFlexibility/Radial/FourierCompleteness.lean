@@ -34,8 +34,8 @@ theorem fourier_two_pi_neg_apply (n : ℤ) (θ : ℝ) :
   push_cast
   ring
 
-/-- Vanishing real moments give the corresponding actual complex Fourier coefficient. -/
 set_option backward.isDefEq.respectTransparency false in
+/-- Vanishing real moments give the corresponding actual complex Fourier coefficient. -/
 theorem angular_fourierCoeffOn_eq_zero_of_moments {f : ℝ → ℝ}
     (hf : MemLp f 2 (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))))
     (n : ℤ)
@@ -86,11 +86,9 @@ theorem angular_fourierCoeffOn_eq_zero_of_moments {f : ℝ → ℝ}
       _ = 0 := by
         rw [intervalIntegral.integral_ofReal, intervalIntegral.integral_ofReal, hcos, hsin]
         simp
+  simp only [fourier_coe_apply] at hint
   rw [fourierCoeffOn_eq_integral]
-  simp only [sub_zero, smul_eq_mul]
-  change (1 / (2 * Real.pi) : ℝ) •
-    (∫ θ in (0 : ℝ)..2 * Real.pi,
-      @fourier (2 * Real.pi) (-n) (θ : AddCircle (2 * Real.pi)) * (f θ : ℂ)) = 0
+  simp only [fourier_coe_apply, sub_zero, smul_eq_mul]
   rw [hint]
   simp
 

@@ -119,7 +119,7 @@ theorem interval_cutoff_energy_identity {a b : ℝ} (hab : a < b)
         change χ y ^ 2 * u y = χ y ^ 2 * u y
         rfl
       rw [heq]
-      simpa only [Nat.cast_ofNat, Nat.reduceSub, pow_one] using hr.deriv
+      simpa only [Nat.cast_ofNat, Nat.reduceSub, pow_one, Pi.pow_apply] using hr.deriv
     · have hdx : deriv ψ x = 0 :=
         deriv_of_notMem_tsupport (fun hh' => hx (hψs hh'))
       have hχx : χ x = 0 :=
