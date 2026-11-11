@@ -40,10 +40,12 @@ theorem referenceMode_add_of_continuous {u v : PolarPoint → ℝ}
     (hu : Continuous u) (hv : Continuous v) (j : ℕ) (r : ℝ) :
     referenceMode (fun p => u p + v p) j r =
       referenceMode u j r + referenceMode v j r := by
-  have hui := ((hu.comp ((continuous_const (y := r)).prodMk continuous_id)).mul
-    (continuous_cosineMode j)).intervalIntegrable (μ := volume) 0 (2 * Real.pi)
-  have hvi := ((hv.comp ((continuous_const (y := r)).prodMk continuous_id)).mul
-    (continuous_cosineMode j)).intervalIntegrable (μ := volume) 0 (2 * Real.pi)
+  have huc : Continuous (fun θ : ℝ => u (r, θ) * Radial.cosineMode j θ) :=
+    (hu.comp ((continuous_const (y := r)).prodMk continuous_id)).mul (continuous_cosineMode j)
+  have hvc : Continuous (fun θ : ℝ => v (r, θ) * Radial.cosineMode j θ) :=
+    (hv.comp ((continuous_const (y := r)).prodMk continuous_id)).mul (continuous_cosineMode j)
+  have hui := huc.intervalIntegrable (μ := volume) 0 (2 * Real.pi)
+  have hvi := hvc.intervalIntegrable (μ := volume) 0 (2 * Real.pi)
   simp only [referenceMode, radialAngularMean, add_mul]
   rw [intervalIntegral.integral_add hui hvi, mul_add]
 

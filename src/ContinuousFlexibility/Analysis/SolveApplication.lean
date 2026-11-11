@@ -65,13 +65,17 @@ theorem solve_exists_nonzero_zero
       map_smul' := by intro c r; ext y; simp [map_smul] }
   have hSYPull : HasSmoothing (fun n => (qP n).comp Φ.toLinearMap) :=
     solve_hasSmoothing_of_comparable (by norm_num : (0 : ℝ) ≤ 2) zero_le_one
-      hleΦ (fun n y => by simpa only [one_mul, Seminorm.comp_apply] using hΦle n y) hSY
+      hleΦ (fun n y => by
+        simpa only [one_mul, Seminorm.comp_apply, LinearEquiv.coe_toLinearMap,
+          ContinuousLinearEquiv.coe_toLinearEquiv, qP] using hΦle n y) hSY
   have hSYP : HasSmoothing qP :=
     hasSmoothing_transport Φ
       (fun n y => (Seminorm.comp_apply (qP n) Φ.toLinearMap y).symm) hSYPull
   have hRP : SmoothTameOn a qP U RP := by
-    simpa only [RP] using solve_smoothTameOn_postcomp hR Φ.toContinuousLinearMap
-      zero_le_one (fun n y => by simpa only [one_mul] using hΦle n y)
+    simpa only [RP, ContinuousLinearEquiv.coe_coe] using
+      solve_smoothTameOn_postcomp hR Φ.toContinuousLinearMap zero_le_one
+        (fun n y => by
+          simpa only [one_mul, ContinuousLinearEquiv.coe_coe, qP] using hΦle n y)
   let Lv : ((X × ℝ) × ProjectiveLimit F f) →L[ℝ] ((X × ℝ) × Y) :=
     (ContinuousLinearMap.id ℝ (X × ℝ)).prodMap Φ.symm.toContinuousLinearMap
   have hLv : ∀ n z, pairGrading a q n (Lv z) ≤ 2 * pairGrading a qP n z := by
@@ -107,15 +111,16 @@ theorem solve_exists_nonzero_zero
       simp [Lq, Lv]
     rw [hdom] at h
     exact solve_smoothTameOn_postcomp h Φ.toContinuousLinearMap zero_le_one
-      (fun n y => by simpa only [one_mul] using hΦle n y)
+      (fun n y => by
+        simpa only [one_mul, ContinuousLinearEquiv.coe_coe, qP] using hΦle n y)
   have hzeroP : RP (0, 0) = 0 := by simp only [RP, hzero, map_zero]
   have hRightP : ∀ z ∈ U, ∀ y, HasProjectiveLineDerivAt (fun x => RP (x, z.2))
       (y + QP z (RP z) y) z.1 (VP z y) := by
     intro z hz y
     have h := (hRight z hz (Φ.symm y)).clm_comp Φ.toContinuousLinearMap
-    simpa only [RP, VP, QP, LinearMap.coe_comp, Function.comp_apply,
-      ContinuousLinearEquiv.coe_coe, map_add, Φ.apply_symm_apply,
-      Φ.symm_apply_apply] using h
+    simpa only [RP, VP, QP, LinearMap.coe_mk, AddHom.coe_mk, LinearMap.comp_apply,
+      LinearEquiv.coe_toLinearMap, ContinuousLinearEquiv.coe_toLinearEquiv,
+      ContinuousLinearEquiv.coe_coe, map_add, Φ.apply_symm_apply, Φ.symm_apply_apply] using h
   obtain ⟨SX, N, ρ, hρ, x, _, hx⟩ :=
     solve_exists_fixed_branch p hp hwp (0 : X) base ε hε
       (U := U) (by ext z; simp only [U, sub_zero]) RP VP QP hzeroP hRightP

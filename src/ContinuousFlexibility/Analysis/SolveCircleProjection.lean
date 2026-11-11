@@ -13,6 +13,23 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
+/-- The supplied parity maps, isolated from the full physical-space contract
+so their uses only elaborate this projection data. -/
+theorem solve_parityProjection_data
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    (hS : IsPhysicalSpaces D T S) (γ : ℝ) :
+    ∃ even odd : (S.circle γ).Space →L[ℝ] (S.circle γ).Space,
+      (∀ u m θ, (S.circle γ).decode (even u) m θ =
+        ((S.circle γ).decode u m θ + (S.circle γ).decode u m (-θ)) / 2) ∧
+      (∀ u m θ, (S.circle γ).decode (odd u) m θ =
+        ((S.circle γ).decode u m θ - (S.circle γ).decode u m (-θ)) / 2) ∧
+      (∀ u, even (even u) = even u ∧ odd (odd u) = odd u) ∧
+      (∃ loss base, ContinuousFlexibility.Analysis.IsTameLinear
+        (S.circle γ).grading (S.circle γ).grading even.toLinearMap loss base) ∧
+      (∃ loss base, ContinuousFlexibility.Analysis.IsTameLinear
+        (S.circle γ).grading (S.circle γ).grading odd.toLinearMap loss base) :=
+  hS.2.2.2.2.2.2.2.2.2.2.2.2.2.2 γ
+
 open Set MeasureTheory
 open scoped ENNReal BigOperators NNReal
 

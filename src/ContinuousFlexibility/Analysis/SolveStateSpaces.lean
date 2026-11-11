@@ -43,10 +43,12 @@ theorem solve_isTameLinear_prodMap
   refine ⟨C + D, fun x => ?_⟩
   change r n (L x.1) + s n (M x.2) ≤
     ((C + D : ℝ≥0) : ℝ) * (p (n + max l₁ l₂) x.1 + q (n + max l₁ l₂) x.2)
-  have hc := (hC x.1).trans (mul_le_mul_of_nonneg_left
-    (hp (Nat.add_le_add_left (le_max_left _ _) _) x.1) C.coe_nonneg)
-  have hd := (hD x.2).trans (mul_le_mul_of_nonneg_left
-    (hq (Nat.add_le_add_left (le_max_right _ _) _) x.2) D.coe_nonneg)
+  have hc : r n (L x.1) ≤ (C : ℝ) * p (n + max l₁ l₂) x.1 :=
+    (hC x.1).trans (mul_le_mul_of_nonneg_left
+      (hp (Nat.add_le_add_left (le_max_left l₁ l₂) n) x.1) C.coe_nonneg)
+  have hd : s n (M x.2) ≤ (D : ℝ) * q (n + max l₁ l₂) x.2 :=
+    (hD x.2).trans (mul_le_mul_of_nonneg_left
+      (hq (Nat.add_le_add_left (le_max_right l₁ l₂) n) x.2) D.coe_nonneg)
   have hpc := apply_nonneg (p (n + max l₁ l₂)) x.1
   have hqc := apply_nonneg (q (n + max l₁ l₂)) x.2
   rw [NNReal.coe_add]
@@ -98,32 +100,49 @@ constant control mode and odd chart mode. -/
 theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S) :
     HasSmoothing (sectorGrading S) := by
-  obtain ⟨even, odd, _, hodd, _, _, r, b, hoddTame⟩ :=
-    hS.2.2.2.2.2.2.2.2.2.2.2.2.2.2 (3 / 4 : ℝ)
-  let mean := circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ))
+  obtain ⟨even, odd, heven, hodd, hidem, hevenTame, hoddTame⟩ :=
+    solve_parityProjection_data hS (3 / 4 : ℝ)
+  obtain ⟨r, b, hoddTame⟩ := hoddTame
+  obtain ⟨mean, hmean, hmeanFix, hmeanTame⟩ :
+      ∃ mean : CircleSpace S →L[ℝ] CircleSpace S,
+        (∀ u m θ φ, (S.circle (3 / 4 : ℝ)).decode (mean u) m θ =
+          (S.circle (3 / 4 : ℝ)).decode (mean u) m φ) ∧
+        (∀ u, (∀ m θ φ, (S.circle (3 / 4 : ℝ)).decode u m θ =
+          (S.circle (3 / 4 : ℝ)).decode u m φ) → mean u = u) ∧
+        IsTameLinear (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading
+          mean.toLinearMap 0 0 :=
+    ⟨circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ)),
+      circleAngularMeanProjection_constant (hS.2.1 (3 / 4 : ℝ)),
+      circleAngularMeanProjection_eq_self (hS.2.1 (3 / 4 : ℝ)),
+      circleAngularMeanProjection_isTame (hS.2.1 (3 / 4 : ℝ))⟩
   let P : AnnularState S →L[ℝ] AnnularState S :=
     (ContinuousLinearMap.id ℝ (HeightPair S)).prodMap
       ((ContinuousLinearMap.id ℝ ℝ).prodMap (mean.prodMap odd))
+  have hP (x : AnnularState S) : P x = (x.1, x.2.1, mean x.2.2.1, odd x.2.2.2) := by
+    simp only [P, ContinuousLinearMap.coe_prodMap', Prod.map_apply,
+      ContinuousLinearMap.id_apply]
   have hPmem (x : AnnularState S) : P x ∈ stateSectorSubmodule S := by
+    rw [hP]
     constructor
     · intro m θ φ
-      exact circleAngularMeanProjection_constant (hS.2.1 (3 / 4 : ℝ)) x.2.2.1 m θ φ
+      exact hmean x.2.2.1 m θ φ
     · intro m θ
       change (S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m (-θ) =
         -(S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m θ
       rw [hodd, hodd, neg_neg]
       ring
   have hPid (x : AnnularState S) (hx : x ∈ stateSectorSubmodule S) : P x = x := by
-    have hm := circleAngularMeanProjection_eq_self (hS.2.1 (3 / 4 : ℝ)) x.2.2.1 hx.1
+    have hm := hmeanFix x.2.2.1 hx.1
     have ho : odd x.2.2.2 = x.2.2.2 := by
       apply (hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.1
       funext m θ
       rw [hodd, hx.2 m θ]
       ring
+    rw [hP]
     exact Prod.ext rfl (Prod.ext rfl (Prod.ext hm ho))
   have hpair := solve_isTameLinear_prodMap
     (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)
-    (circleAngularMeanProjection_isTame (hS.2.1 (3 / 4 : ℝ))) hoddTame
+    hmeanTame hoddTame
   have hrest := solve_isTameLinear_prodMap solve_realGrading_monotone
     (pairGrading_monotone (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _))
     (IsTameLinear.id realGrading) hpair
@@ -132,7 +151,10 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
     (pairGrading_monotone solve_realGrading_monotone
       (pairGrading_monotone (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)))
     (IsTameLinear.id (heightPairGrading S)) hrest
+  have hPt : IsTameLinear (stateGrading S) (stateGrading S) P.toLinearMap r b := by
+    simpa only [P, ContinuousLinearMap.coe_prodMap, ContinuousLinearMap.coe_id,
+      Nat.zero_max] using hfull
   exact hasSmoothing_submodule_of_tame_projection (solve_stateGrading_monotone S)
-    (stateSectorSubmodule S) P hPmem hPid hfull (solve_state_hasSmoothing hS)
+    (stateSectorSubmodule S) P hPmem hPid hPt (solve_state_hasSmoothing hS)
 
 end ContinuousFlexibility.Analysis
