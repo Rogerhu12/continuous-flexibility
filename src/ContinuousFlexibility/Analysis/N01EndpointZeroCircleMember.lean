@@ -95,7 +95,7 @@ private theorem scalar_rescale_hasDerivAt
   have hd' : HasDerivAt f d' (t * q) :=
     (congrArg (fun u : ℝ => HasDerivAt f u (t * q)) heq).mp hd
   have h := hd'.comp t ((hasDerivAt_id t).mul_const q)
-  simpa only [Function.comp_def, mul_comm] using h
+  simpa only [Function.comp_def, one_mul, mul_comm] using h
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
