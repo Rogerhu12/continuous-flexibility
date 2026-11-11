@@ -43,7 +43,9 @@ private theorem physicalDecay_exponent_step {A B : ℝ} (hA : 0 < A) (hB : 0 ≤
   let H : ℝ := (n : ℝ) ^ (3 / 2 : ℝ) + n + 1
   let K : ℝ := max 0 (log A) + B + 3
   have hP : 0 ≤ (n : ℝ) ^ (3 / 2 : ℝ) := rpow_nonneg (Nat.cast_nonneg n) _
-  have hH : 1 ≤ H := by dsimp [H]; linarith [Nat.cast_nonneg (R := ℝ) n]
+  have hH : 1 ≤ H := by
+    dsimp [H]
+    linarith [show (0 : ℝ) ≤ n from Nat.cast_nonneg n]
   have hK : 0 ≤ K := by dsimp [K]; positivity
   have hlog : log A ≤ max 0 (log A) := le_max_right _ _
   have hlogH : max 0 (log A) ≤ max 0 (log A) * H :=
@@ -54,7 +56,6 @@ private theorem physicalDecay_exponent_step {A B : ℝ} (hA : 0 < A) (hB : 0 ≤
   have herr : log A + B * ((n : ℝ) ^ (3 / 2 : ℝ) + n) + 2 * n + 2 / 3 ≤ K * H := by
     dsimp [K, H] at *
     nlinarith
-  dsimp only [H] at hstep
   linarith
 
 /-- Any sequence with the physical one-step attenuation has the exact
@@ -78,7 +79,7 @@ theorem physical_nodes_decay_of_step (a : ℕ → ℝ) (start : ℕ)
     calc
       _ = exp (log A + (-2 * (n : ℝ) ^ 2 + B * ((n : ℝ) ^ (3 / 2 : ℝ) + n)) +
           (K * (n : ℝ) ^ (5 / 2 : ℝ) - radialS n)) := by
-        rw [exp_add, exp_add, exp_log hA]
+        simp only [exp_add, exp_log hA, mul_assoc]
       _ ≤ _ := exp_le_exp.mpr (by
         have hh := physicalDecay_exponent_step hA hB n
         change log A - 2 * (n : ℝ) ^ 2 + B * ((n : ℝ) ^ (3 / 2 : ℝ) + n) ≤
@@ -114,7 +115,6 @@ theorem physical_nodes_decay_of_step (a : ℕ → ℝ) (start : ℕ)
     apply exp_le_exp.mpr
     have hKQ := mul_le_mul_of_nonneg_left hQ hK
     have hCQ := mul_le_mul_of_nonneg_right hKC (radialQ_nonneg (start + n))
-    dsimp only [e]
     linarith
   calc
     _ ≤ C * (radialE (start + n) ^ C * exp (-radialS (start + n))) :=

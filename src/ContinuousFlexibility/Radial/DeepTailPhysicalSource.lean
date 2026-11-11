@@ -39,7 +39,7 @@ theorem radialJacobi_signed_gauge_source {a s c x : ℝ} {w V : ℝ → ℝ}
   let W : ℝ → ℝ := fun y => c * V (s * y)
   have hsx : s * (s * x) = x := by rw [← mul_assoc, hs, one_mul]
   have hW : ContDiff ℝ ∞ W :=
-    (hV.comp (contDiff_const.mul contDiff_id)).const_mul c
+    contDiff_const.mul (hV.comp (contDiff_const.mul contDiff_id))
   have hV₁ : Differentiable ℝ (deriv V) :=
     (contDiff_infty_iff_deriv.mp hV).2.differentiable (by simp)
   have hW₁ : Differentiable ℝ (deriv W) :=
@@ -88,7 +88,7 @@ theorem normalizedPhysicalWeight_eq {R : ℝ} (hR : 0 < R)
   unfold logGaugeWeight
   rw [Real.div_rpow (exp_pos _).le hR.le, hRpow,
     Real.rpow_def_of_pos (exp_pos _), Real.log_exp, he]
-  field_simp [(Real.rpow_pos_of_pos hR a).ne', Real.exp_ne_zero] <;> ring
+  field_simp [(Real.rpow_pos_of_pos hR a).ne', Real.exp_ne_zero]
 
 private theorem gaugeLift_germ_of_signed_relation {a s R l h x : ℝ}
     {u V : ℝ → ℝ} (hs : s * s = 1) (hR : 0 < R) (hx : x ∈ Ioo l h)
@@ -134,7 +134,8 @@ theorem radialJacobi_signed_physical_source {a s R l h x : ℝ}
     hp'.eq_of_nhds, hpderiv.deriv_eq]
   have hsource := radialJacobi_signed_gauge_source (a := a) hs
     (inv_ne_zero (Real.rpow_pos_of_pos hR a).ne') hw hw₀ hV
-  simpa only [Real.div_rpow (exp_pos _).le hR.le, div_eq_mul_inv,
+  rw [Real.div_rpow (exp_pos (s * x)).le hR.le a]
+  simpa only [div_eq_mul_inv,
     mul_assoc, mul_comm, mul_left_comm] using hsource
 
 end ContinuousFlexibility.Radial

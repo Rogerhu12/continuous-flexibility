@@ -12,6 +12,36 @@ to the physical jet bounds and proves continuous dependence of the normalized
 natural line. R06c remains open until its exact theorem, root import, and axiom
 audit all pass CI; the numbers below are the last verified main baseline.
 
+### Shared R06 endpoint test-class repair
+
+This line uses the same scalar operator definitions and correction as
+`line/R06a` (first correction: `5eecf16eebbf1fac9091b641dc6dcfae5bc61d6d`)
+and `line/R06b`. The exact old clause
+`∀ u d, (u, d) ∈ TailFormLift T endCut → TailWeakDerivative T endCut u d`
+is false with the test condition
+`HasCompactSupport ψ ∧ Function.support ψ ⊆ Ioo T.entrance endCut`.
+The closure of that support may meet the singular endpoint, where weighted
+energy does not ensure integrability of the unweighted test pairing.
+
+A counterexample uses successive mass/gap lengths `ℓ_n ≍ ε · 2⁻ⁿ`,
+density `1/ℓ_n` on mass intervals and `g_n = exp (−4 n⁴)` on gap
+plateaux, with short smooth collars. Then `μ_n ≍ 1`, `Rᴵ_n ≍ ℓ_n²`,
+`ν_n ≤ 2 g_n ℓ_n`, and `R_n ≍ ℓ_n/g_n`, so any required deep-tail
+thresholds hold after decreasing ε and discarding finitely many cells.
+Gap bumps of heights `exp (n⁴)` give finite weighted energy. Smooth test
+bumps of heights `exp (−n⁴)`, constant on those bump supports, form a
+test flat at the endpoint, while `u ψ′ = 0` and `∫ |u′ ψ| = ∞`.
+Adding the compact test `q = u_m′` makes the left pairing
+`−∫ (u_m′)² < 0`; the right integrand remains nonintegrable and its
+total integral in Lean is zero. This contradicts the old equality.
+
+`Statements/DeepTailOperator.lean` now requires
+`tsupport ψ ⊆ Ioo T.entrance endCut` for the energy core, weak-derivative
+tests and distribution tests. `Blueprint/Assembly.lean` records the shared
+correction. The natural-line, physical, parameter-continuity and Green-kernel
+conclusions retain their original definitions. The common form-core,
+mass-resistance and clamped-chart modules are reused from `line/R06b`.
+
 ## Target
 
 `thm:main` of the manuscript. The statement was first taken from the 62-page version
