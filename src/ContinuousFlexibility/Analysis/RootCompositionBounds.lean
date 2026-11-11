@@ -103,7 +103,8 @@ private theorem csBound_rootOdd_of_integral
     have heq : EqOn (rootEven (rootOddIntegral G)) (rootOdd G)
         (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) := by
       intro q hq
-      exact rootEven_rootOddIntegral_eqOn hG ⟨hq.1.le, hq.2⟩
+      exact rootEven_rootOddIntegral_eqOn hG
+        ⟨mem_Ici.mpr (le_of_lt (mem_Ioi.mp hq.1)), hq.2⟩
     have hjet := iteratedFDeriv_eqOn_of_isOpen
       (isOpen_Ioi.prod isOpen_univ) heq n
       (show p ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hxpos, mem_univ _⟩)
