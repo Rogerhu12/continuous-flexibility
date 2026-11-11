@@ -57,8 +57,8 @@ theorem divergenceOperator_sq_of_zero
     divergenceOperator A (fun y => f y ^ 2) x =
       2 * coefficientQuadratic A x (radialPartial f x, angularPartial f x) := by
   simpa only [one_mul, mul_one] using
-    divergenceOperator_mul_sq_of_zero ha hb hc
-      (contDiffAt_const (c := (1 : ℝ))) hf hf0
+    divergenceOperator_mul_sq_of_zero (h := fun _ => (1 : ℝ))
+      ha hb hc contDiffAt_const hf hf0
 
 /-- Any genuine operator identity determines its quadratic principal form.
 The scalar potential is eliminated by the zero value of the test function. -/

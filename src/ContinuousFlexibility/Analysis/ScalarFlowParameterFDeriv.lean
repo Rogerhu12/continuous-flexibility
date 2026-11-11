@@ -55,8 +55,8 @@ theorem hasFDerivAt_of_continuous_secantCLM
     HasFDerivAt f (E p) p := by
   apply hasFDerivAt_iff_tendsto.mpr
   have hlim : Tendsto (fun q => ‖E q - E p‖) (𝓝 p) (𝓝 (0 : ℝ)) := by
-    simpa only [Pi.sub_apply, sub_self, norm_zero] using
-      (hE.sub (continuousAt_const (c := E p))).norm.tendsto
+    have hc : ContinuousAt (fun _ : P => E p) p := continuousAt_const
+    simpa only [Pi.sub_apply, sub_self, norm_zero] using (hE.sub hc).norm.tendsto
   apply squeeze_zero (fun q => mul_nonneg (inv_nonneg.mpr (norm_nonneg _)) (norm_nonneg _))
     (fun q => ?_) hlim
   change ‖q - p‖⁻¹ * ‖f q - f p - E p (q - p)‖ ≤ ‖E q - E p‖
@@ -201,9 +201,11 @@ theorem scalarFlow_hasFDerivAt_parameter
     have hsol := scalar_forced_linearODE_eq hAq hBq ((htime q).sub (htime p)) hd
     have hJapply : J q (q - p) =
         ∫ t in a..b, Real.exp (-I (q, t)) * B (q, t) (q - p) := by
+      have hJq : Continuous (fun t : ℝ => Real.exp (-I (q, t)) • B (q, t)) :=
+        hJI.comp (continuous_const.prodMk continuous_id)
       dsimp only [J]
       rw [ContinuousLinearMap.intervalIntegral_apply
-        ((hJI.comp (continuous_const.prodMk continuous_id)).intervalIntegrable a b)]
+        (μ := volume) (hJq.intervalIntegrable a b) (q - p)]
       simp only [ContinuousLinearMap.smul_apply, smul_eq_mul]
     have hEapply : E q (q - p) =
         Real.exp (I (q, b)) * (V q (q - p) + J q (q - p)) := by

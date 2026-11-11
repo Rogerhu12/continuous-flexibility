@@ -51,10 +51,10 @@ theorem polar_second_directional_mul {f g : PolarPoint → ℝ} {x : PolarPoint}
     filter_upwards [hf.eventually (by norm_num), hg.eventually (by norm_num)] with y hfy hgy
     exact polar_directional_mul (hfy.differentiableAt (by norm_num))
       (hgy.differentiableAt (by norm_num)) u
-  have hleft : DifferentiableAt ℝ (fun y => fderiv ℝ f y u * g y) x := by
-    simpa only [Pi.mul_apply] using hdf.mul hgx
-  have hright : DifferentiableAt ℝ (fun y => f y * fderiv ℝ g y u) x := by
-    simpa only [Pi.mul_apply] using hfx.mul hdg
+  have hleft : DifferentiableAt ℝ (fun y => fderiv ℝ f y u * g y) x :=
+    hdf.fun_mul hgx
+  have hright : DifferentiableAt ℝ (fun y => f y * fderiv ℝ g y u) x :=
+    hfx.fun_mul hdg
   rw [he.fderiv_eq, fderiv_fun_add hleft hright]
   simp only [ContinuousLinearMap.add_apply]
   rw [polar_directional_mul hdf hgx, polar_directional_mul hfx hdg]
@@ -68,8 +68,8 @@ theorem polar_directional_mul_sq_of_zero
     (hzero : f x = 0) (u : PolarPoint) :
     fderiv ℝ (fun y => h y * f y ^ 2) x u = 0 := by
   simp only [pow_two]
-  have hff : DifferentiableAt ℝ (fun y => f y * f y) x := by
-    simpa only [Pi.mul_apply] using hf.mul hf
+  have hff : DifferentiableAt ℝ (fun y => f y * f y) x :=
+    hf.fun_mul hf
   rw [polar_directional_mul hh hff, polar_directional_mul hf hf, hzero]
   ring
 
