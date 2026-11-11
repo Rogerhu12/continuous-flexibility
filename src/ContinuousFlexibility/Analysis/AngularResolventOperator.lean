@@ -38,8 +38,8 @@ theorem angularResolventOperator_apply (B : H →L[𝕜] H)
     angularResolventOperator B hInjective y =
       (LinearEquiv.ofInjective B.toLinearMap hInjective).symm y - (y : H) := by
   rw [← LinearPMap.toFun_eq_coe (angularResolventOperator B hInjective) y]
-  simp only [angularResolventOperator, _root_.sub_apply, LinearMap.sub_apply, Pi.sub_apply,
-    LinearEquiv.coe_toLinearMap, Submodule.subtype_apply]
+  exact LinearMap.sub_apply
+    (LinearEquiv.ofInjective B.toLinearMap hInjective).symm.toLinearMap B.range.subtype y
 
 /-- The defining formula on the range of the bounded resolvent. -/
 theorem angularResolventOperator_apply_image (B : H →L[𝕜] H)

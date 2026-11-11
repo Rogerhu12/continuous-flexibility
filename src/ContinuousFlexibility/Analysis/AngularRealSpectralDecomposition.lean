@@ -26,7 +26,17 @@ real algebra structures used by the two spectrum interfaces. -/
 private theorem complexification_real_normedSpace_eq :
     (instRealInnerProductSpace (H := H)).toNormedSpace =
       (NormedSpace.complexToReal : NormedSpace ℝ (AngularComplexification H)) := by
-  ext r u <;> simp only [ofReal_smul]
+  have hmodule : (instRealInnerProductSpace (H := H)).toNormedSpace.toModule =
+      (NormedSpace.complexToReal : NormedSpace ℝ (AngularComplexification H)).toModule :=
+    Module.ext' _ _ (fun r u => (ofReal_smul r u).symm)
+  have hinjective : Function.Injective
+      (fun P : NormedSpace ℝ (AngularComplexification H) => P.toModule) := by
+    intro P Q h
+    cases P
+    cases Q
+    cases h
+    rfl
+  exact hinjective hmodule
 
 /-- The real part of a complexified real eigenvector is a real eigenvector. -/
 theorem re_mem_angularResolventEigenspace {B : H →L[ℝ] H} {n : ℕ}
@@ -46,7 +56,7 @@ theorem angularResolventPartial_re_mem_iSup {B : H →L[ℝ] H} (hB : IsSelfAdjo
   have hBC : IsSelfAdjoint (extend B) := (isSelfAdjoint_extend_iff B).mpr hB
   have hSpectrumC : spectrum ℝ (extend B) ⊆ angularReciprocalSpectrum := by
     simpa only [spectrum_real_extend] using hSpectrum
-  rw [complexification_real_normedSpace_eq] at hSpectrumC
+  simp only [complexification_real_normedSpace_eq] at hSpectrumC
   let S : Submodule ℝ H := ⨆ n, angularResolventEigenspace B n
   have hterm (n : ℕ) :
       angularResolventEigenvalue n • (angularResolventProjection (extend B) n (ofReal x)).re ∈ S := by
@@ -73,7 +83,7 @@ theorem angularRealResolvent_range_le {B : H →L[ℝ] H} (hB : IsSelfAdjoint B)
   have hBC : IsSelfAdjoint (extend B) := (isSelfAdjoint_extend_iff B).mpr hB
   have hSpectrumC : spectrum ℝ (extend B) ⊆ angularReciprocalSpectrum := by
     simpa only [spectrum_real_extend] using hSpectrum
-  rw [complexification_real_normedSpace_eq] at hSpectrumC
+  simp only [complexification_real_normedSpace_eq] at hSpectrumC
   rintro _ ⟨x, rfl⟩
   have hlimC : Tendsto (fun N => angularResolventPartial (extend B) N (ofReal x))
       atTop (𝓝 (extend B (ofReal x))) :=
