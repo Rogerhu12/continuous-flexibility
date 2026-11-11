@@ -128,8 +128,8 @@ theorem exists_morseOuterGreenData_of_deep
       Co * ((j : ℝ) * sqrt (morseChainA M n))) ≤ A * Kn := by
     dsimp only [A, Kn]
     rw [← exp_add]
-    exact exp_le_exp.mpr (add_le_add_right
-      (mul_le_mul_of_nonneg_right hQeQ (sq_nonneg _)) _)
+    exact exp_le_exp.mpr (add_le_add
+      (mul_le_mul_of_nonneg_right hQeQ (sq_nonneg (n : ℝ))) le_rfl)
   have hcore : ∀ x ∈ Icc
       (outerOutwardRadius right (morseTransitionPhysicalEntry M entry right n))
       (outerOutwardRadius right (morseOuterDeepEntrance M right n)),
@@ -161,7 +161,8 @@ theorem exists_morseOuterGreenData_of_deep
     hlam hT hphysical hj hη hK hKinv
   have hPA' : ‖G.poisson_memLp.toLp F.P‖ ≤ sqrt lam * A := hPA
   have hquadratic : A ≤ exp ((12 + 4 * Q) * (n : ℝ) ^ 2) :=
-    exp_le_exp.mpr (mul_le_mul_of_nonneg_right (by linarith only [hQ]) (sq_nonneg _))
+    exp_le_exp.mpr (mul_le_mul_of_nonneg_right
+      (show Q ≤ 12 + 4 * Q by linarith only [hQ]) (sq_nonneg (n : ℝ)))
   obtain ⟨I⟩ := exists_morseOuterCoreInputs_of_quantitative_data h hσ hcell hlam hL
     he right hn hj hupper hhi hlo hD hT hphysical hη hKinv F hP
     (show Qe + 2 ≤ 12 + 4 * Q by linarith only [hQeQ, hQ])

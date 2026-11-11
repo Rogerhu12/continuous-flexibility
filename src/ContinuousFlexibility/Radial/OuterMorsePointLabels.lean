@@ -93,8 +93,9 @@ theorem morseOuterPoint_localizer_labels
     (hp : MorseOuterPoint M D entry right j N η K p r)
     (hθ : D.localizer m (outerOutwardRadius right r) ≠ 0) :
     p ≤ D.cellIndex m + 2 ∧ D.cellIndex m ≤ p + 2 := by
-  rcases hp with ⟨rfl, hr⟩ | ⟨k, x, rfl, hx, rfl⟩
-  · have hne : N ≠ M.index := ne_of_gt hN
+  rcases hp with ⟨hpp, hr⟩ | ⟨k, x, rfl, hx, rfl⟩
+  · subst p
+    have hne : N ≠ M.index := ne_of_gt hN
     have hrad : outerOutwardRadius right r ∈
         Icc (morseOuterCoreLeft M right N) (morseOuterFullCoreRight M right N) := by
       apply (outerOutwardRadius_mem_core_interval right _ _ r).mpr

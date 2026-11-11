@@ -103,7 +103,7 @@ theorem outerPhysicalGreenValue_graph_and_trace
     (outerWholeSource_integrable hD hentry f).locallyIntegrableOn
   have hUi := outerWholeSource_initial_integrable hD hentry f hUc
   have hVi := outerWholeSource_initial_integrable hD hentry f hVc
-  have hreg := outerSolution_oneSided_regular (cA := 0) (cB := cb) hab
+  have hreg := outerSolution_oneSided_regular (lam := lam) (cA := 0) (cB := cb) hab
     hw.continuous.continuousOn hU₁ hV₁ hUc hVc hDU hDV hf hUi hVi
   have hUeq : ∀ x ∈ Ioo a b, radialJacobi J w H.U x = 0 :=
     outerFirstOrderSystem_radialJacobi isOpen_Ioo hlam

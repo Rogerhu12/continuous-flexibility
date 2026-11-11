@@ -151,8 +151,11 @@ theorem exists_morseOuterCoreInputs_of_quantitative_data
     coreTransfer := Tcore
     coreTransfer_actual := fun u z hstate => outerStateTransfer_actual
       hac halpha hbeta (left_mem_Icc.mpr hac) (right_mem_Icc.mpr hac) hstate
-    transfer_bound := hnorm.trans (exp_le_exp.mpr
-      (add_le_add_right (mul_le_mul_of_nonneg_right hQe (sq_nonneg _)) _))
+    transfer_bound := by
+      apply hnorm.trans
+      apply exp_le_exp.mpr
+      change (Qe + 2) * (n : ℝ) ^ 2 + τ ≤ Cbound * (n : ℝ) ^ 2 + τ
+      exact add_le_add (mul_le_mul_of_nonneg_right hQe (sq_nonneg (n : ℝ))) le_rfl
     core_mass_bound := hmass
     poisson_memLp := hP
     poisson_bound := hPnorm
