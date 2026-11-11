@@ -27,6 +27,14 @@ private theorem n01c_plot_seminorm_zero
   rw [L.map_zero]
   exact p.map_zero'
 
+private theorem n01c_zero_direction_sum_le
+    {N : ℕ} (a z : ℝ) (q : Fin N → ℝ)
+    (hz : z = 0) (hq : ∀ i, 0 ≤ q i) :
+    a + (∑ _i : Fin 1, z) ≤ a + ∑ i, q i := by
+  rw [hz]
+  simp only [Finset.sum_const_zero, add_zero]
+  exact le_add_of_nonneg_right (Finset.sum_nonneg (fun i _ => hq i))
+
 /-- The original data of a finite affine plot, with its low unit-ball
 condition. No flow estimate is part of this index. -/
 structure OrdinaryFlowVariationInput
@@ -95,12 +103,13 @@ def angleInput (u : OrdinaryFlowVariationInput D S C base ε N) :
 theorem angleInput_aggregate_le
     (u : OrdinaryFlowVariationInput D S C base ε N) (n : ℕ) :
     u.angleInput.aggregate n ≤ u.aggregate n := by
-  change (1 + pairGrading (stateGrading S) realGrading n
-    (u.state - (C.referenceState, 0))) +
-      (∑ _i : Fin 1, pairGrading (stateGrading S) realGrading n (u.plot 0)) ≤ _
-  rw [n01c_plot_seminorm_zero (pairGrading (stateGrading S) realGrading n) u.plot]
-  simp only [Finset.sum_const_zero, add_zero]
-  exact le_add_of_nonneg_right (Finset.sum_nonneg (fun i _ => apply_nonneg _ _))
+  exact n01c_zero_direction_sum_le
+    (1 + pairGrading (stateGrading S) realGrading n
+      (u.state - (C.referenceState, 0)))
+    (pairGrading (stateGrading S) realGrading n (u.plot 0))
+    (fun i => pairGrading (stateGrading S) realGrading n (u.plot (u.directions i)))
+    (n01c_plot_seminorm_zero (pairGrading (stateGrading S) realGrading n) u.plot)
+    (fun _ => apply_nonneg _ _)
 
 variable {T : MaterialData}
   (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)

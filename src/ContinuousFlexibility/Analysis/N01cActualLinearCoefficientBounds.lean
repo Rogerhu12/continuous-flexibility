@@ -36,14 +36,15 @@ private theorem n01c_coefficientNorm_one_le_of_head
         circleRealSobolevNorm 3 (O 0) * circleRealSobolevNorm 0 (Q 0)))
     (hcoefficient : V.coefficient t 0 = head) :
     V.coefficientNorm 1 t ≤ K * (B + B * M) := by
-  have hO₁ : circleRealSobolevNorm 1 (O 0) ≤ circleRealSobolevNorm 3 (O 0) :=
-    circle_sobolevNorm_mono_of_derivatives
-      (fun b => circleComplexify (O b)) (circleComplexify_hasDerivAt O hO)
-      (by decide : (1 : ℕ) ≤ 3)
-  have hQ₀ : circleRealSobolevNorm 0 (Q 0) ≤ M :=
-    (circle_sobolevNorm_mono_of_derivatives
-      (fun b => circleComplexify (Q b)) (circleComplexify_hasDerivAt Q hQ)
-      (by decide : (0 : ℕ) ≤ 3)).trans hlow
+  have hO₁ : circleRealSobolevNorm 1 (O 0) ≤ circleRealSobolevNorm 3 (O 0) := by
+    simpa only [Nat.cast_one, Nat.cast_ofNat] using
+      circle_real_sobolevNorm_mono_of_derivatives (P := Real.pi) O hO
+        (a := 1) (b := 3) (by decide : (1 : ℕ) ≤ 3)
+  have hQ₀ : circleRealSobolevNorm 0 (Q 0) ≤ M := by
+    apply le_trans ?_ hlow
+    simpa only [Nat.cast_zero, Nat.cast_ofNat] using
+      circle_real_sobolevNorm_mono_of_derivatives (P := Real.pi) Q hQ
+        (a := 0) (b := 3) (by decide : (0 : ℕ) ≤ 3)
   have hproduct : circleRealSobolevNorm 3 (O 0) *
       circleRealSobolevNorm 0 (Q 0) ≤ B * M :=
     mul_le_mul houter hQ₀ (circle_real_sobolevNorm_nonneg _ _) hB
@@ -92,8 +93,10 @@ theorem ordinaryFlowCircleVariationData_coefficientNorm_one_le
       (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 0 0) t hO hQ
     (zero_le_one.trans (circleLiftCompositionConstant_one_le Real.pi c M 1))
     hB₀ hlow houter
-    (ordinaryFlowForcingFactorJet_head_sobolev_le hS hT hA hB hpos m J x hx L
-      (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 1 hc hM hlower hlow)
+    (by
+      simpa only [O, Q, Nat.cast_one, Nat.sub_self, Nat.cast_zero] using
+        ordinaryFlowForcingFactorJet_head_sobolev_le hS hT hA hB hpos m J x hx L
+          (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 1 hc hM hlower hlow)
     (ordinaryFlowCircleVariationData_coefficient_eq_head hS hT hA hB hpos m J x hx L n v t)
 
 theorem ordinaryFlowCircleVariationData_coefficientSize_one_le
