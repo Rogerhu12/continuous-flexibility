@@ -73,7 +73,7 @@ theorem outerRadialRegionOperator_test_pairing
         (matchingJacobiVector D hD j ψ hψ)⟫_ℝ =
       -⟪f, l2Restrict (radialHilbertMeasure D) (radialTailInterval D right cut)
         (matchingSmoothVector D hD ψ hψ)⟫_ℝ := by
-  let E := outerRegionEquiv hcut
+  let E := outerRegionEquiv (right := right) hcut
   let φ : ℝ → ℝ := fun x => ψ (outerOutwardRadius right x)
   have hφ : ContDiff ℝ ∞ φ := hψ.comp (contDiff_outerOutwardRadius right)
   have hsφ : Function.support φ ⊆ Ioo (outerTailSign right * cut)
@@ -82,8 +82,8 @@ theorem outerRadialRegionOperator_test_pairing
     have hi : x ∈ outerOutwardRadius right '' radialTailInterval D right cut :=
       ⟨outerOutwardRadius right x, hs hx, outerOutwardRadius_twice right x⟩
     simpa only [outerOutward_tail_image, outerOutwardRadius_eq_sign] using hi
-  have hφLp := selectedOutwardSmooth_memLp hD hcut hφ
-  have hJLp := selectedOutwardJacobiTest_memLp hD hcut hφ j
+  have hφLp := selectedOutwardSmooth_memLp (right := right) hD hcut hφ
+  have hJLp := selectedOutwardJacobiTest_memLp (right := right) hD hcut hφ j
   let p := hφLp.toLp φ
   let q := hJLp.toLp (selectedOutwardJacobiTest D right j φ)
   have hep : E p = l2Restrict (radialHilbertMeasure D) (radialTailInterval D right cut)
@@ -135,8 +135,8 @@ theorem outerRadialRegionOperator_test_pairing
       simpa only [outerOutwardRadius_eq_sign] using
         (outerOutwardRegion_ae_iff hD hcut (p := q))
     · intro x hx
-      apply (selectedOutwardDensity_pos hD hcut _).ne'
-      simpa only [outerOutwardRadius_eq_sign] using Ioo_subset_Ico_self hx
+      exact (selectedOutwardDensity_pos (right := right) hD hcut x (by
+        simpa only [outerOutwardRadius_eq_sign] using Ioo_subset_Ico_self hx)).ne'
     · exact hφ
     · exact hsφ
   rw [outerRadialRegionOperator_apply, ← heq, E.inner_map_map, hpair,
