@@ -46,10 +46,10 @@ theorem matchedModeScalarGate_channel_pairing (D : ReferenceData)
           simp only [ContinuousLinearMap.comp_apply, matchedModeChannel,
             matchedModeScalarGate_apply, matchedModeBorder_apply, Bool.false_eq_true,
             ↓reduceIte, modePairing, inner_zero_right, inner_zero_left,
-            mul_zero, zero_mul, add_zero, zero_add]
+            mul_zero, zero_mul, add_zero]
       | true =>
           simpa only [ContinuousLinearMap.comp_apply, matchedModeChannel,
-            matchedModeScalarGate_apply, Bool.true_eq_true, ↓reduceIte] using
+            matchedModeScalarGate_apply, ↓reduceIte] using
               matchedModeBorder_pairing D U F
   | succ m =>
       have h (V : RadialModePair D) :
