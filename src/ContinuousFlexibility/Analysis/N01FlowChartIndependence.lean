@@ -136,8 +136,8 @@ theorem N01Properties.characteristic_coefficient_regular
     mul_pos hQpos (one_div_pos.mpr (mul_pos hDpos (Real.sqrt_pos.mpr hDpos)))
   obtain ⟨hA, hB, _⟩ := contDiffAt_heightLinearCoefficients hw.contDiffAt hh.contDiffAt
     hr hDpos hQpos.ne'
-  have hk := contDiffAt_heightRadial hh.contDiffAt (m := ∞) (by simp)
-  have ht := contDiffAt_heightAngular hh.contDiffAt (m := ∞) (by simp) hr
+  have hk := contDiffAt_heightRadial (x := p) hh.contDiffAt (m := ∞) (by simp)
+  have ht := contDiffAt_heightAngular (x := p) hh.contDiffAt (m := ∞) (by simp) hr
   have hE : ContDiffAt ℝ ∞ (profileEnergy (stateProfile D S C z.1)) p :=
     contDiffAt_const.add ((hw.contDiffAt.comp p contDiffAt_fst).pow 2)
   have hDreg : ContDiffAt ℝ ∞
@@ -236,7 +236,10 @@ theorem N01Properties.minusReturnInverse_eq_of_physical_coordinates
       rw [(hInv z' hz' hsector' m θ).1]
     _ = C.minusReturnInverse z m
         (C.minusFlow z m (C.right m) (C.minusReturnInverse z' m θ)) := by
-      rw [hfloweq (C.minusReturnInverse z' m θ) hr]
+      have heq := hfloweq (C.minusReturnInverse z' m θ) hr
+      change C.minusFlow z m (C.right m) (C.minusReturnInverse z' m θ) =
+        C.minusFlow z' m (C.right m) (C.minusReturnInverse z' m θ) at heq
+      exact congrArg (C.minusReturnInverse z m) heq.symm
     _ = C.minusReturnInverse z' m θ :=
       (hInv z hz hsector m (C.minusReturnInverse z' m θ)).2.1
 

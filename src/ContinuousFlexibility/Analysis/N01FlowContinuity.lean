@@ -31,8 +31,10 @@ theorem continuous_uncurry_of_monotone_sections
   · intro l hl
     have hnear : ∀ᶠ t in 𝓝[<] θ, l < F x t :=
       ((hθ x).continuousAt.eventually (Ioi_mem_nhds hl)).filter_mono nhdsWithin_le_nhds
-    obtain ⟨t, ht, hlt⟩ :=
-      ((self_mem_nhdsWithin : ∀ᶠ t in 𝓝[<] θ, t < θ).and hnear).exists
+    have hboth : ∀ᶠ t in 𝓝[<] θ, t < θ ∧ l < F x t := by
+      filter_upwards [self_mem_nhdsWithin, hnear] with t ht hlt
+      exact ⟨ht, hlt⟩
+    obtain ⟨t, ht, hlt⟩ := Filter.Eventually.exists hboth
     have hparam : ∀ᶠ p : X × ℝ in 𝓝 (x, θ), l < F p.1 t :=
       ((hX t).continuousAt.comp continuousAt_fst).eventually (Ioi_mem_nhds hlt)
     have hangle : ∀ᶠ p : X × ℝ in 𝓝 (x, θ), t < p.2 :=
@@ -42,8 +44,10 @@ theorem continuous_uncurry_of_monotone_sections
   · intro u hu
     have hnear : ∀ᶠ t in 𝓝[>] θ, F x t < u :=
       ((hθ x).continuousAt.eventually (Iio_mem_nhds hu)).filter_mono nhdsWithin_le_nhds
-    obtain ⟨t, ht, hlt⟩ :=
-      ((self_mem_nhdsWithin : ∀ᶠ t in 𝓝[>] θ, θ < t).and hnear).exists
+    have hboth : ∀ᶠ t in 𝓝[>] θ, θ < t ∧ F x t < u := by
+      filter_upwards [self_mem_nhdsWithin, hnear] with t ht hlt
+      exact ⟨ht, hlt⟩
+    obtain ⟨t, ht, hlt⟩ := Filter.Eventually.exists hboth
     have hparam : ∀ᶠ p : X × ℝ in 𝓝 (x, θ), F p.1 t < u :=
       ((hX t).continuousAt.comp continuousAt_fst).eventually (Iio_mem_nhds hlt)
     have hangle : ∀ᶠ p : X × ℝ in 𝓝 (x, θ), p.2 < t :=
@@ -67,6 +71,7 @@ theorem N01Properties.minusFlow_continuousOn
   have hjoint : Continuous (fun p : Icc (C.left m) (C.right m) × ℝ =>
       C.minusFlow z m p.1 p.2) := by
     apply Analysis.continuous_uncurry_of_monotone_sections
+      (fun (r : Icc (C.left m) (C.right m)) θ => C.minusFlow z m r θ)
     · intro θ
       exact (hflow z hz m θ).2.1.domRestrict
     · intro r

@@ -76,7 +76,7 @@ theorem scalar_flow_hasDerivAt_exp_integral
     (hvd : ∀ t θ, HasDerivAt (v t) (d t θ) θ)
     (hF : Continuous (fun p : PolarPoint => F p.1 p.2))
     (hinit : ∀ θ, F a θ = θ)
-    (hode : ∀ θ t, t ∈ Ioo a b, HasDerivAt (fun s => F s θ) (v t (F t θ)) t)
+    (hode : ∀ θ t, t ∈ Ioo a b → HasDerivAt (fun s => F s θ) (v t (F t θ)) t)
     {t : ℝ} (ht : t ∈ Icc a b) (θ : ℝ) :
     HasDerivAt (F t) (Real.exp (∫ s in a..t, d s (F s θ))) θ := by
   let A : ℝ → ℝ → ℝ := fun h s =>
@@ -154,7 +154,7 @@ theorem scalar_flow_hasDerivAt_exp_integral_on
     (hvd : ∀ t ∈ Icc a b, ∀ θ, HasDerivAt (v t) (d t θ) θ)
     (hF : ContinuousOn (fun p : PolarPoint => F p.1 p.2) (Icc a b ×ˢ univ))
     (hinit : ∀ θ, F a θ = θ)
-    (hode : ∀ θ t, t ∈ Ioo a b, HasDerivAt (fun s => F s θ) (v t (F t θ)) t)
+    (hode : ∀ θ t, t ∈ Ioo a b → HasDerivAt (fun s => F s θ) (v t (F t θ)) t)
     {t : ℝ} (ht : t ∈ Icc a b) (θ : ℝ) :
     HasDerivAt (F t) (Real.exp (∫ s in a..t, d s (F s θ))) θ := by
   let ve : ℝ → ℝ → ℝ := fun r x => closedStripExtend hab.le (fun p => v p.1 p.2) (r, x)
@@ -169,7 +169,7 @@ theorem scalar_flow_hasDerivAt_exp_integral_on
   have hFeinit (x : ℝ) : Fe a x = x := by
     rw [show Fe a x = F a x from closedStripExtend_eq hab.le _ (left_mem_Icc.mpr hab.le)]
     exact hinit x
-  have hFeode : ∀ x r, r ∈ Ioo a b,
+  have hFeode : ∀ x r, r ∈ Ioo a b →
       HasDerivAt (fun s => Fe s x) (ve r (Fe r x)) r := by
     intro x r hr
     have hpoint : ve r (Fe r x) = v r (F r x) := by
@@ -196,7 +196,7 @@ theorem scalar_flow_angular_deriv_continuousOn
     (hvd : ∀ t ∈ Icc a b, ∀ θ, HasDerivAt (v t) (d t θ) θ)
     (hF : ContinuousOn (fun p : PolarPoint => F p.1 p.2) (Icc a b ×ˢ univ))
     (hinit : ∀ θ, F a θ = θ)
-    (hode : ∀ θ t, t ∈ Ioo a b, HasDerivAt (fun s => F s θ) (v t (F t θ)) t) :
+    (hode : ∀ θ t, t ∈ Ioo a b → HasDerivAt (fun s => F s θ) (v t (F t θ)) t) :
     ContinuousOn (fun p : PolarPoint => deriv (F p.1) p.2) (Icc a b ×ˢ univ) := by
   let de := closedStripExtend hab.le (fun p : PolarPoint => d p.1 p.2)
   let Fe := closedStripExtend hab.le (fun p : PolarPoint => F p.1 p.2)
@@ -226,7 +226,7 @@ theorem scalar_flow_angular_contDiff_one
     (hvd : ∀ t ∈ Icc a b, ∀ θ, HasDerivAt (v t) (d t θ) θ)
     (hF : ContinuousOn (fun p : PolarPoint => F p.1 p.2) (Icc a b ×ˢ univ))
     (hinit : ∀ θ, F a θ = θ)
-    (hode : ∀ θ t, t ∈ Ioo a b, HasDerivAt (fun s => F s θ) (v t (F t θ)) t)
+    (hode : ∀ θ t, t ∈ Ioo a b → HasDerivAt (fun s => F s θ) (v t (F t θ)) t)
     {t : ℝ} (ht : t ∈ Icc a b) : ContDiff ℝ 1 (F t) := by
   apply contDiff_one_iff_deriv.mpr
   refine ⟨fun θ => (scalar_flow_hasDerivAt_exp_integral_on hab hd hvd hF hinit hode ht θ).differentiableAt, ?_⟩

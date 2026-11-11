@@ -393,3 +393,6 @@ import ContinuousFlexibility.Analysis.OpticalControlCurvature
 import ContinuousFlexibility.Analysis.N01FlowContinuity
 import ContinuousFlexibility.Analysis.ScalarFlowVariation
 import ContinuousFlexibility.Analysis.N01FlowAngularVariation
+import ContinuousFlexibility.Analysis.ReturnCorrectionResidualLinear
+import ContinuousFlexibility.Analysis.N01ReturnChartC1
+import ContinuousFlexibility.Analysis.CircleSingletonControl

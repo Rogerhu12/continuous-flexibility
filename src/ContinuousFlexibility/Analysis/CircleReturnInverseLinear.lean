@@ -25,10 +25,16 @@ theorem circleFourierCoeff_add {f g : ℝ → ℂ} (hf : Continuous f) (hg : Con
   have hphase : Continuous (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi))) := by
     simp_rw [circleFourier_phase]
     fun_prop
+  have hfi : IntervalIntegrable
+      (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • f x)
+      volume 0 (2 * Real.pi) := by
+    simpa only [Pi.smul_apply] using (hphase.smul hf).intervalIntegrable 0 (2 * Real.pi)
+  have hgi : IntervalIntegrable
+      (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • g x)
+      volume 0 (2 * Real.pi) := by
+    simpa only [Pi.smul_apply] using (hphase.smul hg).intervalIntegrable 0 (2 * Real.pi)
   simp only [circleFourierCoeff_eq_integral, Pi.add_apply, smul_add]
-  rw [intervalIntegral.integral_add
-    ((hphase.smul hf).intervalIntegrable _ _) ((hphase.smul hg).intervalIntegrable _ _),
-    smul_add]
+  rw [intervalIntegral.integral_add hfi hgi, smul_add]
 
 theorem circleFourierCoeff_const_mul (f : ℝ → ℂ) (c : ℂ) (n : ℤ) :
     circleFourierCoeff (fun x => c * f x) n = c * circleFourierCoeff f n :=
@@ -37,10 +43,16 @@ theorem circleFourierCoeff_const_mul (f : ℝ → ℂ) (c : ℂ) (n : ℤ) :
 theorem circleCosineCoeff_add {f g : ℝ → ℝ} (hf : Continuous f) (hg : Continuous g)
     (j : ℕ) :
     circleCosineCoeff (f + g) j = circleCosineCoeff f j + circleCosineCoeff g j := by
-  have hfc := Complex.continuous_ofReal.comp hf
-  have hgc := Complex.continuous_ofReal.comp hg
-  simp only [circleCosineCoeff, Pi.add_apply, Complex.ofReal_add,
-    circleFourierCoeff_add hfc hgc, Complex.add_re]
+  have hfc : Continuous (fun x => Complex.ofReal (f x)) := by
+    simpa only [Function.comp_def] using Complex.continuous_ofReal.comp hf
+  have hgc : Continuous (fun x => Complex.ofReal (g x)) := by
+    simpa only [Function.comp_def] using Complex.continuous_ofReal.comp hg
+  have ha (n : ℤ) :
+      circleFourierCoeff (fun x => Complex.ofReal (f x) + Complex.ofReal (g x)) n =
+        circleFourierCoeff (fun x => Complex.ofReal (f x)) n +
+          circleFourierCoeff (fun x => Complex.ofReal (g x)) n := by
+    simpa only [Pi.add_apply] using circleFourierCoeff_add hfc hgc n
+  simp only [circleCosineCoeff, Pi.add_apply, Complex.ofReal_add, ha, Complex.add_re]
   ring
 
 theorem circleCosineCoeff_smul (f : ℝ → ℝ) (c : ℝ) (j : ℕ) :

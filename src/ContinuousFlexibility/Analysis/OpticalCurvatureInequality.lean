@@ -19,8 +19,9 @@ open Set MeasureTheory
 
 private theorem abs_cube_tangent (x c : ℝ) (hc : 0 ≤ c) :
     3 * c ^ 2 * x - 2 * c ^ 3 ≤ |x| ^ 3 := by
-  have hpoly := mul_nonneg (sq_nonneg (|x| - c))
-    (add_nonneg (abs_nonneg x) (mul_nonneg (by norm_num) hc))
+  have hpoly : 0 ≤ (|x| - c) ^ 2 * (|x| + 2 * c) :=
+    mul_nonneg (sq_nonneg (|x| - c))
+      (add_nonneg (abs_nonneg x) (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2) hc))
   have hlin := mul_nonneg (sq_nonneg c) (sub_nonneg.mpr (le_abs_self x))
   nlinarith only [hpoly, hlin]
 

@@ -48,7 +48,9 @@ theorem exists_opticalSpeed_quantitative_collar
       (a := l) (b := h) (f := opticalSpeed w) (C := opticalSpeed w x) (fun r hr => by
         rw [uIoc_of_le hlh.le] at hr
         have hm := hxmax (show r ∈ Icc l h from ⟨hr.1.le, hr.2⟩)
-        simpa only [Real.norm_eq_abs, abs_of_nonneg (Real.sqrt_nonneg _)] using hm)
+        rw [Real.norm_eq_abs,
+          abs_of_nonneg (show 0 ≤ opticalSpeed w r from Real.sqrt_nonneg _)]
+        exact hm)
     simpa only [opticalTravel, Real.norm_eq_abs, abs_of_pos hlength] using hb
   let s := τ / (h - l)
   have hs : 0 < s := div_pos hτ hlength

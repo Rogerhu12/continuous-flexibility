@@ -34,11 +34,14 @@ theorem circle_angleL2_sq_eq_integral {f : ℝ → ℝ} (hf : Continuous f) :
 theorem circle_angleL2_shift {f : ℝ → ℝ} (hf : Continuous f)
     (hp : Function.Periodic f Real.pi) (t : ℝ) :
     eLpNorm (fun θ => f (θ + t)) 2 angleMeasure = eLpNorm f 2 angleMeasure := by
-  have hs := hf.comp (continuous_id.add continuous_const)
+  have hs : Continuous (fun θ : ℝ => f (θ + t)) := by
+    simpa only [Function.comp_def, Pi.add_apply, id_eq] using
+      hf.comp (show Continuous (fun θ : ℝ => θ + t) from continuous_id.add continuous_const)
   apply (ENNReal.toReal_eq_toReal_iff'
     (memLp_angleMeasure_of_continuous hs).eLpNorm_ne_top
     (memLp_angleMeasure_of_continuous hf).eLpNorm_ne_top).mp
-  have hp2 : Function.Periodic (fun θ => f θ ^ 2) Real.pi := fun θ => by rw [hp θ]
+  have hp2 : Function.Periodic (fun θ => f θ ^ 2) Real.pi :=
+    fun θ => congrArg (fun x : ℝ => x ^ 2) (hp θ)
   have heq : (eLpNorm (fun θ => f (θ + t)) 2 angleMeasure).toReal ^ 2 =
       (eLpNorm f 2 angleMeasure).toReal ^ 2 := by
     rw [circle_angleL2_sq_eq_integral hs, circle_angleL2_sq_eq_integral hf]
@@ -49,11 +52,13 @@ theorem circle_angleL2_shift {f : ℝ → ℝ} (hf : Continuous f)
 theorem circle_angleL2_reflect {f : ℝ → ℝ} (hf : Continuous f)
     (hp : Function.Periodic f Real.pi) :
     eLpNorm (fun θ => f (-θ)) 2 angleMeasure = eLpNorm f 2 angleMeasure := by
-  have hs := hf.comp continuous_neg
+  have hs : Continuous (fun θ : ℝ => f (-θ)) := by
+    simpa only [Function.comp_def] using hf.comp continuous_neg
   apply (ENNReal.toReal_eq_toReal_iff'
     (memLp_angleMeasure_of_continuous hs).eLpNorm_ne_top
     (memLp_angleMeasure_of_continuous hf).eLpNorm_ne_top).mp
-  have hp2 : Function.Periodic (fun θ => f θ ^ 2) Real.pi := fun θ => by rw [hp θ]
+  have hp2 : Function.Periodic (fun θ => f θ ^ 2) Real.pi :=
+    fun θ => congrArg (fun x : ℝ => x ^ 2) (hp θ)
   have heq : (eLpNorm (fun θ => f (-θ)) 2 angleMeasure).toReal ^ 2 =
       (eLpNorm f 2 angleMeasure).toReal ^ 2 := by
     rw [circle_angleL2_sq_eq_integral hs, circle_angleL2_sq_eq_integral hf,
@@ -66,7 +71,9 @@ theorem circle_angleL2_reflect {f : ℝ → ℝ} (hf : Continuous f)
 theorem circle_angleL2_reflected_shift {f : ℝ → ℝ} (hf : Continuous f)
     (hp : Function.Periodic f Real.pi) (t : ℝ) :
     eLpNorm (fun θ => f (t - θ)) 2 angleMeasure = eLpNorm f 2 angleMeasure := by
-  have hs := hf.comp (continuous_id.add continuous_const)
+  have hs : Continuous (fun θ : ℝ => f (θ + t)) := by
+    simpa only [Function.comp_def, Pi.add_apply, id_eq] using
+      hf.comp (show Continuous (fun θ : ℝ => θ + t) from continuous_id.add continuous_const)
   have hps : Function.Periodic (fun θ => f (θ + t)) Real.pi := by
     intro θ
     have h := hp (θ + t)
@@ -93,9 +100,14 @@ theorem iteratedDeriv_circleReturnShift {f : ℝ → ℝ}
     congr 1
     ring
   rw [heq, iteratedDeriv_div_const]
+  have hplus : ContDiff ℝ ∞ (fun x : ℝ => f (x + t)) := by
+    simpa only [Function.comp_def, Pi.add_apply, id_eq] using
+      hf.comp (show ContDiff ℝ ∞ (fun x : ℝ => x + t) from contDiff_id.add contDiff_const)
+  have hminus : ContDiff ℝ ∞ (fun x : ℝ => f (t - x)) := by
+    simpa only [Function.comp_def, Pi.sub_apply, id_eq] using
+      hf.comp (show ContDiff ℝ ∞ (fun x : ℝ => t - x) from contDiff_const.sub contDiff_id)
   rw [iteratedDeriv_fun_add
-    ((hf.comp (contDiff_id.add contDiff_const)).contDiffAt.of_le (by simp))
-    ((hf.comp (contDiff_const.sub contDiff_id)).contDiffAt.of_le (by simp))]
+    (hplus.contDiffAt.of_le (by simp)) (hminus.contDiffAt.of_le (by simp))]
   rw [iteratedDeriv_comp_add_const, iteratedDeriv_comp_const_sub]
   simp only [smul_eq_mul]
 
@@ -104,7 +116,11 @@ theorem circle_angleL2_return_deriv_le {f : ℝ → ℝ}
     eLpNorm (iteratedDeriv s (circleReturnShift t f)) 2 angleMeasure ≤
       eLpNorm (iteratedDeriv s f) 2 angleMeasure := by
   have hd := hf.continuous_iteratedDeriv s (by simp)
-  have hpd := circlePeriodic_iteratedDeriv hp s
+  have hpd : Function.Periodic (iteratedDeriv s f) Real.pi := by
+    have heq : (fun x : ℝ => f (x + Real.pi)) = f := funext hp
+    intro x
+    have h := congrArg (fun g : ℝ → ℝ => iteratedDeriv s g x) heq
+    simpa only [iteratedDeriv_comp_add_const] using h
   have heq : iteratedDeriv s (circleReturnShift t f) =
       (2 : ℝ)⁻¹ • ((fun θ => iteratedDeriv s f (θ + t)) +
         (-1 : ℝ) ^ s • (fun θ => iteratedDeriv s f (t - θ))) := by
@@ -136,6 +152,7 @@ theorem periodic_circleReturnShift_of_periodic {f : ℝ → ℝ}
     convert hp (θ + t) using 1 <;> congr 1 <;> ring
   have hneg : f (-(θ + Real.pi) + t) = f (-θ + t) := by
     convert hp.neg (-θ + t) using 1 <;> congr 1 <;> ring
+  dsimp only
   rw [hpos, hneg]
 
 theorem circleMember_circleReturnShift
@@ -163,7 +180,8 @@ theorem circleNorm_circleReturnShift_le
     (hu : CircleMember T γ u) (travel : ℕ → ℝ) (s : ℕ) :
     circleNorm T γ s (fun m => circleReturnShift (travel m) (u m)) ≤
       circleNorm T γ s u := by
-  have h := circleNorm_le_of_jet_bound hu s 0 0 (C := 1) zero_le_one
+  have h := circleNorm_le_of_jet_bound
+    (v := fun m => circleReturnShift (travel m) (u m)) hu s 0 0 (C := 1) zero_le_one
   simp only [Nat.add_zero, one_mul] at h
   apply h
   intro m j
@@ -207,8 +225,12 @@ theorem circleReturnLinear_decode {T : MaterialData} {γ : ℝ} {S : CircleModel
     (hS : IsCircleModel T γ S) (travel : ℕ → ℝ) (u : S.Space) (m : ℕ) (θ : ℝ) :
     S.decode (circleReturnLinear hS travel u) m θ =
       circleReturnShift (travel m) (S.decode u m) θ := by
-  rw [circleReturnLinear, liftCircleLinear_decode]
-  exact circleReturnFieldLinear_apply S travel u m θ
+  have h : S.decode (liftCircleLinear hS (circleReturnFieldLinear S travel)
+      (fun v => circleMember_circleReturnShift (hS.2.2.2.1 v) travel) u) =
+      circleReturnFieldLinear S travel u :=
+    liftCircleLinear_decode hS (circleReturnFieldLinear S travel)
+      (fun v => circleMember_circleReturnShift (hS.2.2.2.1 v) travel) u
+  exact congrFun (congrFun h m) θ
 
 theorem circleReturnLinear_tame {T : MaterialData} {γ : ℝ} {S : CircleModelData}
     (hS : IsCircleModel T γ S) (travel : ℕ → ℝ) :
@@ -237,7 +259,12 @@ theorem circleReturnContinuousLinear_decode
     (hS : IsCircleModel T γ S) (travel : ℕ → ℝ) (u : S.Space) (m : ℕ) (θ : ℝ) :
     S.decode (circleReturnContinuousLinear hS travel u) m θ =
       circleReturnShift (travel m) (S.decode u m) θ := by
-  rw [circleReturnContinuousLinear, IsTameLinear.toContinuousLinearMap_apply]
+  have heq : circleReturnContinuousLinear hS travel u = circleReturnLinear hS travel u :=
+    IsTameLinear.toContinuousLinearMap_apply (circleReturnLinear_tame hS travel)
+      (withSeminorms_graded (fun i => S.level i) S.bond)
+      (withSeminorms_graded (fun i => S.level i) S.bond)
+      (gradedSeminorm_monotone (fun i => S.level i) S.bond) u
+  rw [heq]
   exact circleReturnLinear_decode hS travel u m θ
 
 end ContinuousFlexibility.Statements
