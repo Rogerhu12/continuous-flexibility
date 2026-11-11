@@ -94,13 +94,13 @@ theorem finite_controlJetMajorant_le
       have hnot : r ∉ Ioo (C.left i) (C.right i) := fun hir =>
         Set.disjoint_left.mp (hdisjoint i m hi) hir hmr
       rw [iteratedDeriv_zero_off_open_interval (hcontrol i).1
-        (hcontrol i).2.2 n hnot, abs_zero, zero_mul]
+        ((subset_tsupport (C.control i)).trans (hcontrol i).2.2) n hnot, abs_zero, zero_mul]
   · have hz : (∑ m ∈ I, |iteratedDeriv n (C.control m) r| * w m) = 0 := by
       apply Finset.sum_eq_zero
       intro m hm
       have hnot : r ∉ Ioo (C.left m) (C.right m) := fun hmr => h ⟨m, hm, hmr⟩
       rw [iteratedDeriv_zero_off_open_interval (hcontrol m).1
-        (hcontrol m).2.2 n hnot, abs_zero, zero_mul]
+        ((subset_tsupport (C.control m)).trans (hcontrol m).2.2) n hnot, abs_zero, zero_mul]
     rwa [hz]
 
 /-- An original control derivative times its original decoded-mean
@@ -140,8 +140,8 @@ theorem controlJet_stateKappaWeight_material_bound
     _ = ((J * c) * B₁) * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ K := by ring
 
 /-- The actual finite exponent-jet majorant has a uniform material bound.
-The closed support of the border is also explicitly placed inside the
-core; the current Part A only specifies its ordinary support. -/
+The closed support of the border is explicitly placed inside the core,
+as retained by the shared strict-support geometry. -/
 theorem stateProfileExponentJetMajorant_material_bound
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S}

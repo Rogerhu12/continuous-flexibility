@@ -72,7 +72,7 @@ theorem n01_exists_common_opticalBounds_of_referenceLower
   obtain ⟨K, hK, hQ⟩ := hlower
   obtain ⟨A, hApos, hcontrol⟩ := n01_controlFirstJet_le_endpointDistance hT hA
   obtain ⟨B, hB, hindex⟩ := hA.2.2.2.1
-  obtain ⟨M, hM, hweight⟩ := materialSample_shifted_weight_bounded hT hA.1.1
+  obtain ⟨M, hM, hweight⟩ := n01c_materialSample_shifted_weight_bounded hT hA.1.1
     (γ := (3 / 4 : ℝ)) (by norm_num) (A + K) hB.le
   let c : ℝ := (1 / Real.pi) * Real.sqrt Real.pi
   have hc : 0 < c :=

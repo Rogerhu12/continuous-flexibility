@@ -35,7 +35,7 @@ theorem stateControlSum_eq_single_on_component
   intro n hnm
   have hn : C.control n r = 0 := by
     by_contra hne
-    exact Set.disjoint_left.mp (hdisjoint n m hnm) ((hcontrols n).2.2 hne) hr
+    exact Set.disjoint_left.mp (hdisjoint n m hnm) ((hcontrols n).2.2 (subset_tsupport (C.control n) hne)) hr
   rw [hn, mul_zero]
 
 /-- The compact positive-side border vanishes at every reference negative
@@ -44,7 +44,7 @@ theorem referenceBorder_zero_on_negative
     {D : ReferenceData} (hborder : RadialTrueBorder D)
     {r : ℝ} (hr : deriv D.w r < 0) : D.chi r = 0 := by
   by_contra hne
-  have hpos : 0 < deriv D.w r := (hborder.2.2.1 hne).2
+  have hpos : 0 < deriv D.w r := (hborder.support_subset hne).2
   exact lt_asymm hr hpos
 
 theorem stateProfile_eq_component_exponential

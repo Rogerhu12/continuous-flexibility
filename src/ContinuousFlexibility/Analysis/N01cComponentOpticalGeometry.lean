@@ -68,7 +68,7 @@ theorem componentOpticalSquare_boundary_zero
     · exact fun h => lt_irrefl _ h.2
   have hc : deriv (C.control m) r = 0 := by
     simpa only [iteratedDeriv_one] using iteratedDeriv_zero_off_open_interval
-      (hC.2.2.2.2.2.1 m).1 (hC.2.2.2.2.2.1 m).2.2 1 hnot
+      (hC.2.2.2.2.2.1 m).1 (hC.support_subset m) 1 hnot
   simp only [componentOpticalSquare, referenceOpticalSquare, controlOpticalFactor,
     hw, hc, neg_zero, zero_div, mul_zero, sub_zero]
 

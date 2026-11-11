@@ -25,7 +25,7 @@ open scoped ContDiff Topology
 
 /-- Every ordinary control jet, including its actual state amplitude, is
 uniformly small on its entire interval outside a finite set of indices. -/
-theorem stateKappa_controlJet_eventually_small_of_controlData
+theorem stateKappa_controlJet_eventually_small_of_bounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S}
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -86,8 +86,7 @@ theorem stateKappa_controlJet_eventually_small_of_controlData
       (mul_assoc _ _ _).symm
     _ ≤ η := hmsmall.le
 
-/-- The original N01 interface is retained for downstream callers. The
-proof above needs only the control data, before the tame conclusions. -/
+/-- Compatibility wrapper for the already assembled nonlinear hypotheses. -/
 theorem stateKappa_controlJet_eventually_small
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -98,10 +97,58 @@ theorem stateKappa_controlJet_eventually_small
       |stateKappa S x m * iteratedDeriv n (C.control m) r| ≤ η := by
   have hRef : IsAccumulatingProfile D := hN.1.1
   obtain ⟨_, _, _, _, hIndex, hJets, _⟩ := hN
-  exact stateKappa_controlJet_eventually_small_of_controlData hS hT hRef hIndex hJets x n η hη
+  exact stateKappa_controlJet_eventually_small_of_bounds hS hT hRef hIndex hJets x n η hη
 
-/-- The globally smooth profile follows from reference and control data
-alone, independently of the nonlinear parameter estimates. -/
+/-- Profile smoothness uses only the control geometry and its quantitative
+jets, before any ordinary flow or denominator neighbourhood is constructed. -/
+theorem contDiff_stateProfile_of_control_bounds
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hRef : IsAccumulatingProfile D) (hχ : ContDiff ℝ ∞ D.chi)
+    (hC : controlGeometryConditions D S C)
+    (hIndex : ∃ B : ℝ, 0 < B ∧ ∀ m,
+      |(D.cellIndex (C.cell m) : ℝ) - D.cellIndex m| ≤ B)
+    (hJets : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r,
+      r ∈ Ioo (C.left m) (C.right m) →
+        |iteratedDeriv s (C.control m) r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B)
+    (x : AnnularState S) : ContDiff ℝ ∞ (stateProfile D S C x) := by
+  obtain ⟨hleft, hright⟩ := stateControlSum_flatJets_of_eventually_small hC x
+    (stateKappa_controlJet_eventually_small_of_bounds hS hT hRef hIndex hJets x)
+  exact contDiff_stateProfile_of_flat_control_sum hRef.choose_spec.1 hχ hC x hleft hright
+
+/-- The original nonlinear hypotheses already give a globally smooth actual
+profile. No placement hypothesis for the control intervals is needed. -/
+theorem contDiff_stateProfile_of_n01
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε) (x : AnnularState S) :
+    ContDiff ℝ ∞ (stateProfile D S C x) := by
+  have hRef : IsAccumulatingProfile D := hN.1.1
+  have hχ : ContDiff ℝ ∞ D.chi := hN.1.2.2.2.1.1
+  obtain ⟨_, _, _, hC, hIndex, hJets, _⟩ := hN
+  exact contDiff_stateProfile_of_control_bounds hS hT hRef hχ hC hIndex hJets x
+
+
+/-- Preserve the control-data API through the common upstream bound. -/
+theorem stateKappa_controlJet_eventually_small_of_controlData
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hRef : IsAccumulatingProfile D)
+    (hIndex : ∃ B : ℝ, 0 < B ∧ ∀ m,
+      |(D.cellIndex (C.cell m) : ℝ) - D.cellIndex m| ≤ B)
+    (hJets : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r,
+      r ∈ Ioo (C.left m) (C.right m) →
+        |iteratedDeriv s (C.control m) r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B)
+    (x : AnnularState S)
+    (n : ℕ) (η : ℝ) (hη : 0 < η) :
+    ∀ᶠ m in cofinite, ∀ r ∈ Ioo (C.left m) (C.right m),
+      |stateKappa S x m * iteratedDeriv n (C.control m) r| ≤ η := by
+  exact stateKappa_controlJet_eventually_small_of_bounds hS hT hRef hIndex hJets x n η hη
+
+/-- Preserve the radial-reference specialization of the upstream profile theorem. -/
 theorem contDiff_stateProfile_of_controlData
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S}
@@ -113,21 +160,7 @@ theorem contDiff_stateProfile_of_controlData
       r ∈ Ioo (C.left m) (C.right m) →
         |iteratedDeriv s (C.control m) r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B)
     (x : AnnularState S) : ContDiff ℝ ∞ (stateProfile D S C x) := by
-  obtain ⟨hleft, hright⟩ := stateControlSum_flatJets_of_eventually_small hC x
-    (stateKappa_controlJet_eventually_small_of_controlData hS hT hRef.1 hIndex hJets x)
-  obtain ⟨_, hbounds⟩ := hRef.1
-  have hborder : RadialTrueBorder D := hRef.2.2.2.1
-  exact contDiff_stateProfile_of_flat_control_sum hbounds.1 hborder.1 hC x hleft hright
-
-/-- The original nonlinear hypotheses already give a globally smooth actual
-profile. No placement hypothesis for the control intervals is needed. -/
-theorem contDiff_stateProfile_of_n01
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (hN : N01Properties D T S C base loss ε) (x : AnnularState S) :
-    ContDiff ℝ ∞ (stateProfile D S C x) := by
-  obtain ⟨hRef, _, _, hC, hIndex, hJets, _⟩ := hN
-  exact contDiff_stateProfile_of_controlData hS hT hRef hC hIndex hJets x
+  exact contDiff_stateProfile_of_control_bounds hS hT hRef.1 hRef.2.2.2.1.1
+    hC hIndex hJets x
 
 end ContinuousFlexibility.Statements

@@ -81,7 +81,7 @@ theorem n01_controlFirstJet_le_endpointDistance
     mul_nonneg hB.le (Real.rpow_nonneg (hT.2.1 _ hsample).2.2.1.le B)
   obtain ⟨_, _, _, _, _, hcontrol, _⟩ := hC
   exact supported_deriv_le_endpointDistance (hA.2.2.1.1 m).2.1.le
-    (hcontrol m).1 (hcontrol m).2.2 hweight
+    (hcontrol m).1 ((subset_tsupport (C.control m)).trans (hcontrol m).2.2) hweight
     (hbound m) ⟨hr.1.le, hr.2.le⟩
 
 end ContinuousFlexibility.Statements

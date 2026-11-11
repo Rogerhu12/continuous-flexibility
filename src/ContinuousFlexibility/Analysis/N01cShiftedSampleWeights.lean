@@ -118,7 +118,7 @@ theorem materialSample_weight_bound_sameExponent
 
 /-- A positive height exponent absorbs every fixed coefficient power,
 also when the two sample indices differ by a bounded amount. -/
-theorem materialSample_shifted_weight_bounded
+theorem n01c_materialSample_shifted_weight_bounded
     {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D)
     {γ : ℝ} (hγ : 0 < γ) (α : ℝ) {B : ℝ} (hB : 0 ≤ B) :
