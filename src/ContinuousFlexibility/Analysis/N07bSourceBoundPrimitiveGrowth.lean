@@ -101,6 +101,33 @@ private theorem primitiveRadius_power (b d : ℕ) (C₀ M Q : ℝ) (hM : 0 ≤ M
   simp only [mul_pow, hroot, ← pow_mul]
   ring
 
+set_option backward.isDefEq.respectTransparency true
+
+/-- Material-coordinate equality and radius algebra are handled before
+the abstract predicate is instantiated with actual finite jets. -/
+private theorem primitive_polynomial_bound
+    (b d : ℕ) {C₀ M M' Q value : ℝ} {P : ℝ → Prop}
+    (hMM : M' = M) (hC : 1 ≤ C₀) (hM : 1 ≤ M) (hQ : 1 ≤ Q)
+    (hP : P (C₀ * M' ^ (1 / ((b + 1 : ℕ) : ℝ)) * Q ^ d))
+    (hbound : ∀ R : ℝ, 1 ≤ R → P R →
+      value ≤ (n07bSourceChainJetConstant b ^ b * R ^ (b + 1)) ^ 2) :
+    value ≤ (n07bSourceChainJetConstant b ^ b * C₀ ^ (b + 1)) ^ 2 * M ^ 2 *
+      Q ^ (d * (b + 1) * 2) := by
+  have hP' : P (C₀ * M ^ (1 / ((b + 1 : ℕ) : ℝ)) * Q ^ d) := by
+    simpa only [hMM] using hP
+  exact (hbound _ (primitiveRadius_one_le b d hC hM hQ) hP').trans_eq
+    (primitiveRadius_power b d C₀ M Q (zero_le_one.trans hM))
+
+private theorem primitive_polynomial_absorb
+    {A M Q value : ℝ} {d : ℕ} (hA : 0 ≤ A)
+    (hvalue : value ≤ A * M ^ 2 * Q ^ d) (hQ : Q ^ d ≤ (2 : ℝ) ^ d) :
+    value ≤ (A * (2 : ℝ) ^ d) * M ^ 2 := by
+  calc
+    _ ≤ A * M ^ 2 * Q ^ d := hvalue
+    _ ≤ A * M ^ 2 * (2 : ℝ) ^ d :=
+      mul_le_mul_of_nonneg_left hQ (mul_nonneg hA (sq_nonneg M))
+    _ = _ := by ring
+
 /-- Only primitive jet bounds are assumed. The actual recursion supplies
 the weighted estimate for every retained source coefficient. -/
 theorem n07b_sourceCoefficient_M_polynomial_of_primitive_growth
@@ -124,18 +151,19 @@ theorem n07b_sourceCoefficient_M_polynomial_of_primitive_growth
     change n07bMaterialRadiusChart T (n07bMaterialChart T x) ∈ physicalPieceOpen S K z m
     rw [n07bMaterialRadiusChart_materialChart hT hxcore]
     exact hx
-  have hradius : T.radius (n07bMaterialChart T x).1 = x.1 := by
+  have hMchart : T.M (T.radius (n07bMaterialChart T x).1) = T.M x.1 := by
+    apply congrArg T.M
     change T.radius (T.rho x.1) = x.1
     exact hT.2.2.2.2.2.2.2.2.1 x.1 hxcore
-  have hjets := hbound z hz hs m (n07bMaterialChart T x) hy
-  rw [hradius] at hjets
   have hM : 1 ≤ T.M x.1 := (hT.2.1 x.1 hxcore).2.2.2
-  have hQ : 1 ≤ 1 + stateGrading S r (z.1 - C.referenceState) + |z.2| := by
-    linarith [apply_nonneg (stateGrading S r) (z.1 - C.referenceState), abs_nonneg z.2]
-  have hsquare := n07b_sourcePrimitive_weighted_square_le hD hT hK hz hs m b hx
-    (primitiveRadius_one_le b d hC₀ hM hQ) hjets (Nat.le_of_lt_succ j.isLt) i
-  exact hsquare.trans_eq (primitiveRadius_power b d C₀ (T.M x.1)
-    (1 + stateGrading S r (z.1 - C.referenceState) + |z.2|) (zero_le_one.trans hM))
+  have hQ : 1 ≤ 1 + stateGrading S r (z.1 - C.referenceState) + |z.2| :=
+    (le_add_of_nonneg_right (apply_nonneg (stateGrading S r)
+      (z.1 - C.referenceState))).trans (le_add_of_nonneg_right (abs_nonneg z.2))
+  exact primitive_polynomial_bound b d
+    (P := fun R => N07bSourcePrimitiveJetBound T K z m b R (n07bMaterialChart T x))
+    hMchart hC₀ hM hQ (hbound z hz hs m (n07bMaterialChart T x) hy)
+    (fun R hR hp => n07b_sourcePrimitive_weighted_square_le
+      hD hT hK hz hs m b hx hR hp (Nat.le_of_lt_succ j.isLt) i)
 
 /-- All state growth in a fixed primitive jet bound is absorbed on one
 common smaller neighborhood. The charts themselves are unchanged. -/
@@ -157,16 +185,11 @@ theorem n07b_exists_uniform_sourceCoefficient_M_bound_of_primitive
     le_max_left _ _, lt_min hε (by norm_num), min_le_left _ _, min_le_right _ _,
     mul_nonneg hA (pow_nonneg (by norm_num) _), ?_⟩
   intro z hz hs m x hx j i
-  have hzold := n06_stateNeighborhood_mono (C := C)
+  have hzold : z ∈ stateNeighborhood S C base ε := n06_stateNeighborhood_mono (C := C)
     (le_max_left base r) (min_le_left ε (1 / 2)) hz
-  have hQ := n07b_stateWeight_pow_le_two_pow (d := d)
+  have hQ : (1 + stateGrading S r (z.1 - C.referenceState) + |z.2|) ^ d ≤
+      (2 : ℝ) ^ d := n07b_stateWeight_pow_le_two_pow (S := S) (C := C) (d := d)
     (le_max_right base r) (min_le_right ε (1 / 2)) hz
-  calc
-    _ ≤ A * T.M x.1 ^ 2 *
-        (1 + stateGrading S r (z.1 - C.referenceState) + |z.2|) ^ d :=
-      hcoeff z hzold hs m x hx j i
-    _ ≤ A * T.M x.1 ^ 2 * (2 : ℝ) ^ d :=
-      mul_le_mul_of_nonneg_left hQ (mul_nonneg hA (sq_nonneg _))
-    _ = _ := by ring
+  exact primitive_polynomial_absorb hA (hcoeff z hzold hs m x hx j i) hQ
 
 end ContinuousFlexibility.Analysis

@@ -26,6 +26,21 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {B : CanonicalDomainData S K V b} {P : RelativeInverseData S K V b B}
   {G : ScalarInverseData S}
 
+private theorem n07b_scalarInverse_weak_of_primitive
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hG : ScalarInverseProperties D S C L G base ε)
+    (hgeom : CanonicalPrimitiveGeometry D T S C L K base ε)
+    (hab : D.a < D.b) {z : AnnularState S × ℝ}
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (f : S.Source) {U : CanonicalUnknown S K} {Fseq : CanonicalSequence S K}
+    (hrep : HasCanonicalRepresentation D S C K z U Fseq
+      (heightPairField S (G.G z f).1) ((S.height (3 / 4 : ℝ)).decode f.val))
+    (hμ : U.2.2.1 = (G.G z f).2) (hcompat : U.2.2.2 = 0) :
+    PerturbedCanonicalRelation D S C K L z U Fseq := by
+  have hphys := hgeom.physicalCoefficients z hz hs
+  exact n07b_scalarInverse_perturbedCanonicalRelation hT hS hG hab hz hs f
+    hphys.1 hphys.2.1 hphys.2.2.1 hphys.2.2.2.1 hphys.2.2.2.2 hrep hμ hcompat
+
 local instance n07bFixedGraphLevelNormedAddCommGroup :
     NormedAddCommGroup (V.level (3 / 4 : ℝ) 0 b) :=
   Submodule.normedAddCommGroup _
@@ -92,11 +107,10 @@ theorem n07b_fixedGraph_scalarInverse_identification
       HasCanonicalRepresentation D S C K z d.val.1
         (V.forget (3 / 4 : ℝ) 0 b F)
         (heightPairField S (G.G z f).1) ((S.height (3 / 4 : ℝ)).decode f.val) := by
-  obtain ⟨hA, hB, hC, hBp, hCp⟩ := hgeom.physicalCoefficients z hz hs
   have hweak : PerturbedCanonicalRelation D S C K L z U
       (V.forget (3 / 4 : ℝ) 0 b F) :=
-    n07b_scalarInverse_perturbedCanonicalRelation hT hS hG hab hz hs f
-      hA hB hC hBp hCp hrep hμ hcompat
+    n07b_scalarInverse_weak_of_primitive (Fseq := V.forget (3 / 4 : ℝ) 0 b F)
+      hT hS hG hgeom hab hz hs f hrep hμ hcompat
   have hU : (B.inverse (P.inverse z F)).val.1 = U :=
     n07b_fixedGraph_unknown_eq_of_physical_relation hK h05 h06 hz hs hab.le U F Fref
       href hweak
