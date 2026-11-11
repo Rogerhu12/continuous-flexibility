@@ -58,7 +58,7 @@ theorem circleFlowGeometry_inverse_identities {S : PhysicalSpacesData}
   constructor
   · intro θ
     exact ⟨hretRight θ, hretLeft θ⟩
-  · intro θ
+  · intro hR θ
     exact ⟨hchartRight θ, hchartLeft θ⟩
 
 end ContinuousFlexibility.Statements
