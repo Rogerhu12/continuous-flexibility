@@ -64,7 +64,7 @@ theorem referenceSolution_of_radial_modes {D : ReferenceData}
     linarith only [hzbound, hIz, hi]
   have hν : ν ^ 2 ≤ K * sourceNormSquare D γ M₀ F := by
     have hb := hubound 0
-    simp only [if_pos rfl] at hb
+    simp only [if_pos rfl, ite_true, Nat.zero_add] at hb
     have hi := mul_le_mul_of_nonneg_left
       (referenceSourceCosineAnalysis_coordinate_scalar_le hab hP hF 1) hK
     linarith only [hb, hi, sq_nonneg ‖u 0‖]
@@ -103,7 +103,7 @@ theorem referenceSolution_of_radial_modes {D : ReferenceData}
   · intro n φ hφ hcφ hsφ
     cases n with
     | zero =>
-        simp only [if_pos rfl, if_neg (by decide : (0 : ℕ) ≠ 1),
+        simp only [if_pos rfl, ite_true, if_neg (by decide : (0 : ℕ) ≠ 1), ite_false,
           Nat.mul_zero, Nat.cast_zero, zero_pow (by decide : (2 : ℕ) ≠ 0),
           zero_mul, add_zero]
         calc
@@ -119,7 +119,7 @@ theorem referenceSolution_of_radial_modes {D : ReferenceData}
             ring
           _ = _ := hzero φ hφ hcφ hsφ
     | succ n =>
-        rw [if_neg (Nat.succ_ne_zero n), zero_add, has n]
+        simp only [if_neg (show n + 1 ≠ 0 by omega), ite_false, zero_add, has n]
         have he : (if n + 1 = 1 then ν else 0) = (if n = 0 then ν else 0) := by
           by_cases hn : n = 0
           · subst n; rfl
