@@ -143,8 +143,11 @@ theorem morseTransitionCoreTransfer_actual {T : MorseChainData} {σ : ℕ → �
     morseTransitionCoreTransfer h hscale he side n hn j
         (if side then (u l, z l) else outerFluxReflection (u r, z r)) =
       if side then (u r, z r) else outerFluxReflection (u l, z l) := by
+  have hi := morseTransitionCore_interval h he side n hn
+  have hc := outerPhysical_coefficients_continuous h.geometry hscale hi.2 j
   apply outerOutwardTransfer_actual side
-  exact outerStateTransfer_actual _ _ _ _ _ hstate
+  exact outerStateTransfer_actual hi.1.le hc.1 hc.2
+    (left_mem_Icc.mpr hi.1.le) (right_mem_Icc.mpr hi.1.le) hstate
 
 theorem morseTransitionCoreTransfer_norms_le
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}

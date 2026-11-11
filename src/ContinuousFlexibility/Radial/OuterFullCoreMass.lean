@@ -106,6 +106,7 @@ theorem morseOuterFullCore_mass_le_height_exp {T : MorseChainData} {σ : ℕ →
         _ = radialHilbertIntervalMass D (morseOuterCoreLeft T true n) (morseOuterCoreRight T true n) +
             radialHilbertIntervalMass D (T.joinLeft true n) (T.joinRight true n) := by
           rw [hsplit, hseam]
+          simp only [morseOuterFullCoreRight, ite_true]
         _ ≤ B + B := add_le_add hold hjoin
         _ = _ := by dsimp only [B, M, lam, N]; ring
 

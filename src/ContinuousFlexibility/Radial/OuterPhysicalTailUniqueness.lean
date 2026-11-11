@@ -159,7 +159,7 @@ theorem MorsePhysicalTailBasis.natural_line
     dsimp only [V]
     field_simp [(outerLogGauge_pos hend j x).ne'] <;> ring
   have hVlp : MemLp V 2 (deepTailMeasure T) := by
-    apply hinverse.congr
+    apply (memLp_congr_ae ?_).mp hinverse
     apply (withDensity_absolutelyContinuous (volume.restrict (Ioo T.entrance T.endpoint))
       (fun x => ENNReal.ofReal (T.p x))).ae_eq
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx

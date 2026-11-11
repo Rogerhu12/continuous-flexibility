@@ -35,6 +35,7 @@ theorem coordinateGauge_kernel_integral (f : ℝ → ℝ) (x : ℝ)
         (ha.pow_const 2).ennreal_ofReal (by simp)]
     apply integral_congr_ae
     exact Eventually.of_forall (fun y => by
+      change (ENNReal.ofReal (a y ^ 2)).toReal • (H (R x) (R y) * f (R y)) = _
       rw [ENNReal.toReal_ofReal (sq_nonneg _), smul_eq_mul])
   rw [hi, ← integral_const_mul]
   apply integral_congr_ae
@@ -52,12 +53,12 @@ theorem coordinateGauge_kernel_row_memLp (x : ℝ)
   rw [← hmeasure]
   apply hR.memLp_map_measure_iff.mpr
   apply (squareDensity_memLp_iff μ ha hpos _).mpr
-  refine (hrow.const_mul (s / a x)).congr ?_
+  refine (memLp_congr_ae ?_).mp (hrow.const_mul (s / a x))
   filter_upwards [hK] with y hy
-  dsimp only [Function.comp_apply]
+  change (s / a x) * K x y = a y * H (R x) (R y)
   apply mul_left_cancel₀ (hpos x).ne'
   calc
-    a x * ((s / a x) * K x y) = s * K x y := by field_simp [(hpos x).ne']
+    a x * ((s / a x) * K x y) = s * K x y := by field_simp [(hpos x).ne'] <;> ring
     _ = a x * (a y * H (R x) (R y)) := by rw [← hy]; ring
 
 include hR ha hpos hmeasure in
@@ -92,7 +93,6 @@ theorem coordinateGauge_operator_kernel
         rw [hgx]
         apply integral_congr_ae
         filter_upwards [hin] with y hy
-        dsimp only
         rw [hy]
       _ = a x * (∫ t, H (R x) t * f t ∂ν) :=
         (coordinateGauge_kernel_integral hR ha hmeasure f x hKx).symm

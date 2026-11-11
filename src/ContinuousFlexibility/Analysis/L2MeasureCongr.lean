@@ -78,5 +78,22 @@ theorem l2Equiv_trans_mul_ae {μ ν κ : Measure ℝ}
   filter_upwards [hE, hF] with x hx hy
   exact hy.trans (congrArg (fun t => a x * t) hx)
 
+/-- Explicit function fields keep compositions of measure-cast isometries
+from unfolding their equality proofs during representative calculations. -/
+def l2EquivCompose {μ ν κ : Measure ℝ}
+    (E : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν) (F : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 κ) :
+    Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 κ where
+  toFun := fun f => F (E f)
+  invFun := fun f => E.symm (F.symm f)
+  left_inv := by intro f; rw [F.symm_apply_apply, E.symm_apply_apply]
+  right_inv := by intro f; rw [E.apply_symm_apply, F.apply_symm_apply]
+  map_add' := by intro f g; rw [map_add, map_add]
+  map_smul' := by intro c f; rw [map_smul, map_smul]
+  norm_map' := fun f => (F.norm_map (E f)).trans (E.norm_map f)
+
+theorem l2EquivCompose_apply {μ ν κ : Measure ℝ}
+    (E : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν) (F : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 κ)
+    (f : Lp ℝ 2 μ) : l2EquivCompose E F f = F (E f) := rfl
+
 end ContinuousFlexibility.Analysis
 

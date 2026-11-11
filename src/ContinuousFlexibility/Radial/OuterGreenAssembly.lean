@@ -78,8 +78,9 @@ private theorem outer_poisson_source_integrable
     (p : Lp ℝ 2 (μ.restrict (Icc a c)ᶜ))
     (hp : (p : ℝ → ℝ) =ᵐ[μ.restrict (Icc a c)ᶜ] P) (f : Lp ℝ 2 μ) :
     Integrable (fun y => P y * f y) (μ.restrict (Icc a c)ᶜ) := by
-  have hP : MemLp P 2 (μ.restrict (Icc a c)ᶜ) := (Lp.memLp p).congr hp
-  simpa only [Pi.mul_apply] using hP.integrable_mul ((Lp.memLp f).restrict (Icc a c)ᶜ)
+  have hP : MemLp P 2 (μ.restrict (Icc a c)ᶜ) := (memLp_congr_ae hp).mp (Lp.memLp p)
+  change Integrable (P * (f : ℝ → ℝ)) (μ.restrict (Icc a c)ᶜ)
+  exact hP.integrable_mul ((Lp.memLp f).restrict (Icc a c)ᶜ)
 
 private theorem outer_integrable_of_core_tail {g : ℝ → ℝ}
     (hc : Integrable g (μ.restrict (Icc a c)))
@@ -96,13 +97,12 @@ theorem OuterFundamentalStatePair.integrable_kernel_core
     (hp : (p : ℝ → ℝ) =ᵐ[μ.restrict (Icc a c)ᶜ] P)
     (f : Lp ℝ 2 μ) (hx : x ∈ Icc a c) :
     Integrable (fun y => outerGreenKernel lam F.U F.V x y * f y) μ := by
-  apply outer_integrable_of_core_tail μ
+  apply outer_integrable_of_core_tail μ (a := a) (c := c)
   · exact integrable_outer_compact_kernel_row μ hac lam F.U F.V
       (F.continuousOn_core hcb).1 (F.continuousOn_core hcb).2 f ⟨x, hx⟩
   · refine ((outer_poisson_source_integrable μ p hp f).const_mul
       ((F.V c / lam) * F.U x)).congr ?_
     filter_upwards [outer_ae_deep_interval μ hμ] with y hy
-    dsimp only
     rw [F.kernel_core_tail hcb hPc hx hy]
     ring
 
@@ -124,7 +124,6 @@ theorem OuterFundamentalStatePair.kernel_integral_core
     _ = ∫ y in (Icc a c)ᶜ, ((F.V c / lam) * F.U x) * (P y * f y) ∂μ := by
       apply integral_congr_ae
       filter_upwards [outer_ae_deep_interval μ hμ] with y hy
-      dsimp only
       rw [F.kernel_core_tail hcb hPc hx hy]
       ring
     _ = _ := integral_const_mul _ _
@@ -142,17 +141,16 @@ theorem OuterFundamentalStatePair.integrable_kernel_deep
   have hPf := outer_poisson_source_integrable μ p hp f
   have hD : Integrable (fun y => (Q (min x y) * P (max x y)) * f y)
       (μ.restrict (Icc a c)ᶜ) := by
-    simpa only [Pi.mul_apply] using hrow.integrable_mul ((Lp.memLp f).restrict (Icc a c)ᶜ)
-  apply outer_integrable_of_core_tail μ
+    change Integrable ((fun y => Q (min x y) * P (max x y)) * (f : ℝ → ℝ)) _
+    exact hrow.integrable_mul ((Lp.memLp f).restrict (Icc a c)ᶜ)
+  apply outer_integrable_of_core_tail μ (a := a) (c := c)
   · refine ((integrable_outer_core_product μ hac F.U
       (F.continuousOn_core hcb).1 f).const_mul ((F.V c / lam) * P x)).congr ?_
     filter_upwards [ae_restrict_mem measurableSet_Icc] with y hy
-    dsimp only
     rw [F.kernel_tail_core hcb hPc hx hy]
     ring
   · refine (hD.add (hPf.const_mul (outerGreenKernel lam F.U F.V c c * P x))).congr ?_
     filter_upwards [outer_ae_deep_interval μ hμ] with y hy
-    dsimp only
     rw [F.green_tail_decomposition_unit_flux hlam hac hcb hPc hQc hflux hx hy]
     ring
 
@@ -172,7 +170,8 @@ theorem OuterFundamentalStatePair.kernel_integral_deep
   have hPf := outer_poisson_source_integrable μ p hp f
   have hD : Integrable (fun y => (Q (min x y) * P (max x y)) * f y)
       (μ.restrict (Icc a c)ᶜ) := by
-    simpa only [Pi.mul_apply] using hrow.integrable_mul ((Lp.memLp f).restrict (Icc a c)ᶜ)
+    change Integrable ((fun y => Q (min x y) * P (max x y)) * (f : ℝ → ℝ)) _
+    exact hrow.integrable_mul ((Lp.memLp f).restrict (Icc a c)ᶜ)
   rw [← integral_add_compl measurableSet_Icc
     (F.integrable_kernel_deep μ hac hlam hcb hPc hQc hflux hμ p hp f hx hrow)]
   have hcore : (∫ y in Icc a c, outerGreenKernel lam F.U F.V x y * f y ∂μ) =
@@ -181,7 +180,6 @@ theorem OuterFundamentalStatePair.kernel_integral_deep
       _ = ∫ y in Icc a c, ((F.V c / lam) * P x) * (F.U y * f y) ∂μ := by
         apply integral_congr_ae
         filter_upwards [ae_restrict_mem measurableSet_Icc] with y hy
-        dsimp only
         rw [F.kernel_tail_core hcb hPc hx hy]
         ring
       _ = _ := integral_const_mul _ _
@@ -193,7 +191,6 @@ theorem OuterFundamentalStatePair.kernel_integral_deep
           ((F.U c * F.V c / lam) * P x) * (P y * f y) ∂μ := by
         apply integral_congr_ae
         filter_upwards [outer_ae_deep_interval μ hμ] with y hy
-        dsimp only
         rw [F.green_tail_decomposition_unit_flux hlam hac hcb hPc hQc hflux hx hy,
           outerGreenKernel_self]
         ring
@@ -229,7 +226,6 @@ theorem OuterFundamentalStatePair.greenOperator_ae_eq_integral
       filter_upwards [hD (l2Restrict μ (Icc a c)ᶜ f)] with x hx
       refine hx.trans (integral_congr_ae ?_)
       filter_upwards [l2Restrict_coeFn μ (Icc a c)ᶜ f] with y hy
-      dsimp only
       rw [hy]
     filter_upwards [outerIntervalGreenOperator_tail_rep μ hac lam F.U F.V P
       (F.continuousOn_core hcb).1 (F.continuousOn_core hcb).2 D p hp f,

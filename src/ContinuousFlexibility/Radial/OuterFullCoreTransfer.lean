@@ -50,7 +50,10 @@ theorem morseOuterFullCoreTransfer_actual {T : MorseChainData} {σ : ℕ → ℝ
     morseOuterFullCoreTransfer h hscale side n hn j
         (u (morseOuterCoreLeft T side n), z (morseOuterCoreLeft T side n)) =
       (u (morseOuterFullCoreRight T side n), z (morseOuterFullCoreRight T side n)) := by
-  exact outerStateTransfer_actual _ _ _ _ _ hstate
+  have hi := morseOuterFullCore_interval h side n hn
+  have hc := outerPhysical_coefficients_continuous h.geometry hscale hi.2 j
+  exact outerStateTransfer_actual hi.1.le hc.1 hc.2
+    (left_mem_Icc.mpr hi.1.le) (right_mem_Icc.mpr hi.1.le) hstate
 
 /-- The sum of the norms of the genuine core solution operator and its
 genuine inverse has the manuscript's quadratic/action exponential form. -/
