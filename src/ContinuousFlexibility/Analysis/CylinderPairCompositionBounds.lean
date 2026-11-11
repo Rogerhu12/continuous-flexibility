@@ -127,7 +127,12 @@ theorem cylinderPairComposition_fixed_loss_bound
     have hc := hbound z hz 1 le_rfl Φ g q hΦ.contDiffAt hgq hout hin (a + b - 1)
     have hc' : ‖iteratedFDeriv ℝ (a + b) (Φ ∘ g) q‖ ≤
         C (a + b - 1) * (1 + p (a + b + loss) z) := by
-      simpa only [Real.one_rpow, mul_one, horder] using hc
+      calc
+        ‖iteratedFDeriv ℝ (a + b) (Φ ∘ g) q‖ =
+            ‖iteratedFDeriv ℝ (a + b - 1 + 1) (Φ ∘ g) q‖ :=
+          congrArg (fun n : ℕ => ‖iteratedFDeriv ℝ n (Φ ∘ g) q‖) horder.symm
+        _ ≤ _ := by
+          simpa only [Real.one_rpow, mul_one, horder] using hc
     have hCB : C (a + b - 1) ≤ B (a + b) := by
       dsimp only [B]
       linarith [abs_nonneg (D 0)]

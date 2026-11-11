@@ -42,11 +42,11 @@ theorem root_radial_coefficient_relative_bounds
     constructor
     · apply (le_div_iff₀ hden).mpr
       have hm := mul_le_mul_of_nonneg_left hdenu hw.le
-      nlinarith only [hm, hQl']
+      nlinarith only [hm, hQl', hw]
     · apply (div_le_iff₀ hden).mpr
       have hm := mul_le_mul_of_nonneg_left hdenl hw.le
-      nlinarith only [hm, hQu']
-  simpa only [inverseDThreeHalves, one_div, div_eq_mul_inv] using hbounds
+      nlinarith only [hm, hQu', hw]
+  simpa only [inverseDThreeHalves, one_div, div_eq_mul_inv, one_mul] using hbounds
 
 theorem root_positive_square_denominator_bounds
     {H D : ℝ} (hH : 0 ≤ H)
@@ -55,7 +55,9 @@ theorem root_positive_square_denominator_bounds
   have hD : 0 < D := (by norm_num : (0 : ℝ) < 1 / 2).trans_le hDl
   have hden : 0 < D ^ 2 := sq_pos_of_pos hD
   have hdenl : (1 / 4 : ℝ) ≤ D ^ 2 := by
-    simpa using (sq_le_sq₀ (by norm_num : (0 : ℝ) ≤ 1 / 2) hD.le).mpr hDl
+    have hh := (sq_le_sq₀ (by norm_num : (0 : ℝ) ≤ 1 / 2) hD.le).mpr hDl
+    norm_num at hh
+    exact hh
   have hdenu : D ^ 2 ≤ 4 :=
     ((sq_le_sq₀ hD.le (by norm_num : (0 : ℝ) ≤ 3 / 2)).mpr hDu).trans (by norm_num)
   constructor

@@ -15,7 +15,6 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
-open ContinuousFlexibility.Statements
 open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency false
@@ -74,7 +73,8 @@ theorem norm_fderiv_parameterizedCircleInverse_le
         (1 + M) * ‖v‖ := by
     calc
       _ ≤ |v.2| + |radialPartial φ (p.1, parameterizedCircleInverse φ p) * v.1| :=
-        abs_sub_le _ _
+        by simpa only [Real.norm_eq_abs] using
+          norm_sub_le v.2 (radialPartial φ (p.1, parameterizedCircleInverse φ p) * v.1)
       _ = |v.2| + |radialPartial φ (p.1, parameterizedCircleInverse φ p)| * |v.1| := by
         rw [abs_mul]
       _ ≤ ‖v‖ + M * ‖v‖ :=

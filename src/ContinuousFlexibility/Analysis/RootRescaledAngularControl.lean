@@ -93,9 +93,13 @@ theorem rootRescaledField_angular_deriv_le
   calc
     _ ≤ |2 * (δ * v.1) * t| * |deriv (fun η => d (δ * v.1 * t ^ 2, η)) θ| +
         |2 * (δ * v.2) * t ^ 2| * |deriv (fun η => c (δ * v.1 * t ^ 2, η)) θ| := by
-      simpa only [abs_mul] using abs_add_le
-        ((2 * (δ * v.1) * t) * deriv (fun η => d (δ * v.1 * t ^ 2, η)) θ)
-        ((2 * (δ * v.2) * t ^ 2) * deriv (fun η => c (δ * v.1 * t ^ 2, η)) θ)
+      calc
+        _ ≤ |(2 * (δ * v.1) * t) * deriv (fun η => d (δ * v.1 * t ^ 2, η)) θ| +
+            |(2 * (δ * v.2) * t ^ 2) * deriv (fun η => c (δ * v.1 * t ^ 2, η)) θ| :=
+          abs_add_le _ _
+        _ = _ := congrArg₂ (fun x y : ℝ => x + y)
+          (abs_mul (2 * (δ * v.1) * t) (deriv (fun η => d (δ * v.1 * t ^ 2, η)) θ))
+          (abs_mul (2 * (δ * v.2) * t ^ 2) (deriv (fun η => c (δ * v.1 * t ^ 2, η)) θ))
     _ ≤ 2 * δ * M + 2 * δ * M :=
       add_le_add
         (mul_le_mul hA (hdb _ hr θ) (abs_nonneg _) (mul_nonneg (by norm_num) hδ))

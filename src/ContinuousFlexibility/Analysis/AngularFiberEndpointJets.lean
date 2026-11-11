@@ -127,9 +127,11 @@ theorem radialBoundaryJets_angularFiber_composition
     contDiff_angularFiberPullback hT hφ hξ hpositive hperiod
   have hD : ContDiff ℝ ∞ D := hY.sub hσ
   have hzero (j : ℕ) (hj : j ≤ n) (η : ℝ) : radialBoundaryJet D c j η = 0 := by
-    have hYs := hY.comp (contDiff_id.prodMk (contDiff_const (c := η)))
-    have hσs := hσ.comp (contDiff_id.prodMk (contDiff_const (c := η)))
-    unfold radialBoundaryJet
+    have hYs : ContDiff ℝ ∞ (fun r : ℝ => Y (r, η)) :=
+      hY.comp (contDiff_id.prodMk contDiff_const)
+    have hσs : ContDiff ℝ ∞ (fun r : ℝ => σ (r, η)) :=
+      hσ.comp (contDiff_id.prodMk contDiff_const)
+    change iteratedDeriv j (fun r : ℝ => Y (r, η) - σ (r, η)) c = 0
     rw [iteratedDeriv_fun_sub
       ((hYs.of_le (show (j : ℕ∞ω) ≤ ∞ by simp)).contDiffAt)
       ((hσs.of_le (show (j : ℕ∞ω) ≤ ∞ by simp)).contDiffAt)]

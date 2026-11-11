@@ -23,6 +23,23 @@ open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
+/-- Eliminate the zeroth-variation tower over an abstract source space.
+This avoids expanding the projective state-space instances when the
+same elementary identity is used for the actual N01 coefficients. -/
+theorem abs_le_of_exists_oneHigh_zero_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : E → ℝ} (p : ℕ → Seminorm ℝ E) (base high : ℕ)
+    {x y : E} (hy : y ∈ U) {A : ℝ}
+    (hJ : ∃ J : SmoothDirections U f, ∀ z ∈ U, ∀ v : Fin 0 → E,
+      |J.D 0 z v| ≤ A * oneHighVariationWeight p base high (z - x) v) :
+    |f y| ≤ A * (1 + p high (y - x)) := by
+  obtain ⟨J, hD⟩ := hJ
+  have hj := hD y hy (Fin.elim0 : Fin 0 → E)
+  rw [J.zero y hy] at hj
+  simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
+    mul_one, add_zero] using hj
+
 def N01CoefficientValueBoundAtOrder (D : ReferenceData) (T : MaterialData)
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (base loss : ℕ) (ε : ℝ) (s : ℕ) (B : ℝ) : Prop :=
@@ -33,6 +50,16 @@ def N01CoefficientValueBoundAtOrder (D : ReferenceData) (T : MaterialData)
           (1 + pairGrading (stateGrading S) realGrading (s + loss)
             (z - (C.referenceState, 0)))
 
+private theorem n01CoefficientValueBoundAtOrder_of_zero_jet_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ} {s : ℕ} {B : ℝ}
+    (h : N01CoefficientJetBoundAtOrder D T S C base loss ε 0 s B) :
+    N01CoefficientValueBoundAtOrder D T S C base loss ε s B := by
+  intro m i a b q hab hq z hz
+  exact abs_le_of_exists_oneHigh_zero_bound
+    (pairGrading (stateGrading S) realGrading) base (s + loss) hz
+    (h m i a b q hab hq)
+
 /-- No first-variation integration or state-dependent choice of the loss
 is needed for the zeroth variation of the actual coefficient family. -/
 theorem coefficientFamily_value_bound_of_n01
@@ -41,13 +68,7 @@ theorem coefficientFamily_value_bound_of_n01
     (hN : N01Properties D T S C base loss ε) (s : ℕ) :
     ∃ B : ℝ, 0 < B ∧ N01CoefficientValueBoundAtOrder D T S C base loss ε s B := by
   obtain ⟨B, hB, hbound⟩ := (n01CoefficientJetBounds_of_properties hN) 0 s
-  refine ⟨B, hB, ?_⟩
-  intro m i a b q hab hq z hz
-  obtain ⟨J, hJ⟩ := hbound m i a b q hab hq
-  have hj := hJ z hz Fin.elim0
-  rw [J.zero z hz] at hj
-  simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-    mul_one, add_zero] using hj
+  exact ⟨B, hB, n01CoefficientValueBoundAtOrder_of_zero_jet_bound hbound⟩
 
 /-- Every selected original coefficient is genuinely smooth in physical
 coordinates on the original common sector neighborhood. -/

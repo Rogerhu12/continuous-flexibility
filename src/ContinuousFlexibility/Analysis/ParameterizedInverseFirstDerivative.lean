@@ -67,7 +67,8 @@ theorem scalarRightInverse_fderiv_norm_le
       _ ≤ M * ‖v‖ := mul_le_mul hbound hparam (norm_nonneg _) hM
   have hnum : |v.2 - D (v.1, 0)| ≤ (1 + M) * ‖v‖ := by
     calc
-      _ ≤ |v.2| + |D (v.1, 0)| := abs_sub_le _ _
+      _ ≤ |v.2| + |D (v.1, 0)| := by
+        simpa only [Real.norm_eq_abs] using norm_sub_le v.2 (D (v.1, 0))
       _ ≤ ‖v‖ + M * ‖v‖ := add_le_add
         (by simpa only [Real.norm_eq_abs] using norm_snd_le v) hlinear
       _ = _ := by ring

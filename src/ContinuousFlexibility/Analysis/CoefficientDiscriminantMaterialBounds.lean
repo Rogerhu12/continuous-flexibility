@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.FlowJetMaterialClosure
 import ContinuousFlexibility.Analysis.FlowJetPartitionPolynomial
 import ContinuousFlexibility.Analysis.SpacesHeightAlgebra
 import ContinuousFlexibility.Analysis.SpacesCylinderEvenJets
+import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Material one-high bounds for the actual coefficient discriminant
@@ -26,15 +27,16 @@ private theorem exists_mixedProduct_majorant (a b : ℕ) :
       ∀ X : ℕ → ℝ, flowJetPolynomialEval P X =
         ∑ j : Fin (b + 1), ∑ i : Fin (a + 1),
           (b.choose j : ℝ) * (a.choose i : ℝ) *
-            X (i + j) * X ((a - i) + (b - j)) := by
+            X ((i : ℕ) + (j : ℕ)) * X ((a - i) + (b - j)) := by
   classical
   let Q : Fin (b + 1) → Fin (a + 1) → FlowJetPolynomial := fun j i =>
-    [((b.choose j : ℝ) * (a.choose i : ℝ), [i + j, (a - i) + (b - j)])]
+    [((b.choose j : ℝ) * (a.choose i : ℝ),
+      [(i : ℕ) + (j : ℕ), (a - i) + (b - j)])]
   have hQ (j : Fin (b + 1)) (i : Fin (a + 1)) :
       FlowJetPolynomialDegreeLE (Q j i) (a + b) := by
     intro m hm
     have he : m = ((b.choose j : ℝ) * (a.choose i : ℝ),
-        [i + j, (a - i) + (b - j)]) := List.mem_singleton.mp hm
+        [(i : ℕ) + (j : ℕ), (a - i) + (b - j)]) := List.mem_singleton.mp hm
     rw [he]
     refine ⟨by positivity, ?_⟩
     simp only [List.sum_cons, List.sum_nil, Nat.add_zero]
@@ -65,12 +67,15 @@ private theorem abs_mixedDerivative_mul_le
     |mixedDerivative a b (fun p => f p * g p) q| ≤
       ∑ j : Fin (b + 1), ∑ i : Fin (a + 1),
         (b.choose j : ℝ) * (a.choose i : ℝ) *
-          X (i + j) * X ((a - i) + (b - j)) := by
+          X ((i : ℕ) + (j : ℕ)) * X ((a - i) + (b - j)) := by
   have he : mixedDerivative a b (fun p => f p * g p) q =
       ∑ j : Fin (b + 1), ∑ i : Fin (a + 1),
         (b.choose j : ℝ) * (a.choose i : ℝ) *
           mixedDerivative i j f q * mixedDerivative (a - i) (b - j) g q := by
-    simpa only [Fin.sum_univ_eq_sum_range] using spaces_mixedDerivative_mul hf hg a b q
+    rw [spaces_mixedDerivative_mul hf hg a b q, Finset.sum_range]
+    apply Finset.sum_congr rfl
+    intro j _
+    exact Finset.sum_range _
   rw [he]
   apply (Finset.abs_sum_le_sum_abs _ _).trans
   apply Finset.sum_le_sum

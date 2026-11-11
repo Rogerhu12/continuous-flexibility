@@ -39,8 +39,8 @@ theorem csBound_closedRadialStrip_of_open
   exact closure_minimal hsub hclosed hclosure
 
 local notation "sourceBox" =>
-  Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi
-local notation "targetBox" => Icc (0 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi
+  Set.prod (Icc (0 : ℝ) 1) (Set.prod (Icc (-1 : ℝ) 1) (Icc (-Real.pi) Real.pi))
+local notation "targetBox" => Set.prod (Icc (0 : ℝ) 1) (Icc (-Real.pi) Real.pi)
 
 /-- The actual smooth angular extension preserves the finite input order,
 including its genuine ordinary derivatives at the root. -/

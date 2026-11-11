@@ -29,8 +29,10 @@ theorem hasDerivAt_boundaryTaylorPolynomial_angle
   unfold boundaryTaylorPolynomial
   apply HasDerivAt.fun_sum
   intro j hj
+  change HasDerivAt (fun η : ℝ => A j η / (j.factorial : ℝ) * (r - c) ^ j)
+    (deriv (A j) θ / (j.factorial : ℝ) * (r - c) ^ j) θ
   exact (((hA j (Nat.le_of_lt_succ (Finset.mem_range.mp hj))).differentiable
-    (by simp) θ).hasDerivAt.div_const _).mul_const _
+    (by simp) θ).hasDerivAt.div_const (j.factorial : ℝ)).mul_const ((r - c) ^ j)
 
 /-- Higher radial orders are small on a small collar, uniformly in the
 angle and without any bound on the zeroth boundary coefficient. -/

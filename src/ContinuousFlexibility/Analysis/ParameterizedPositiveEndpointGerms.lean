@@ -43,11 +43,11 @@ theorem parameterizedPositiveReferenceCoordinate_endpoint_germ
   have hcd : δ ≤ |c - d| := by
     cases side with
     | false =>
-        dsimp only [c, d]
+        change δ ≤ |l - r|
         rw [abs_sub_comm, abs_of_nonneg hsep]
         linarith
     | true =>
-        dsimp only [c, d]
+        change δ ≤ |r - l|
         rw [abs_of_nonneg hsep]
         linarith
   have hone : ∀ᶠ x in 𝓝 c, positiveEndpointCutoff c δ x = 1 :=
@@ -69,7 +69,8 @@ theorem parameterizedPositiveReferenceCoordinate_endpoint_germ
     have hxzero : positiveEndpointCutoff d δ x = 0 := (hball hx).2
     rw [(hasDerivAt_parameterizedPositiveReferenceCoordinate hA hδ v m x η).deriv,
       deriv_cylinder_radial_slice ((hF side).differentiable (by simp)) x η]
-    cases side <;> dsimp only [c, d] at hxone hxzero ⊢
+    cases side <;>
+      simp only [c, d, Bool.false_eq_true, ite_false, ite_true] at hxone hxzero ⊢
     <;> simp only [positiveReferenceSlope, hxone, hxzero, one_mul, zero_mul,
       zero_add, add_zero, sub_self, sub_zero, mul_zero, A]
     <;> field_simp [hm]

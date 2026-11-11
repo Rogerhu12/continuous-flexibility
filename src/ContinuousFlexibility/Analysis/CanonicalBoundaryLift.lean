@@ -50,8 +50,10 @@ theorem periodic_lift_at_closure
     (hperiod : ∀ q ∈ U, F (q + v) = F q + v) :
     F (p + v) = F p + v := by
   haveI : NeBot (𝓝[U] p) := mem_closure_iff_nhdsWithin_neBot.mp hp
+  have hadd : ContinuousAt (fun q : PolarPoint => q + v) p :=
+    continuousAt_id.add continuousAt_const
   have hl : ContinuousAt (fun q : PolarPoint => F (q + v)) p :=
-    hFv.comp (continuousAt_id.add continuousAt_const)
+    hFv.comp hadd
   have hr : ContinuousAt (fun q : PolarPoint => F q + v) p :=
     hF.add continuousAt_const
   have he : (fun q : PolarPoint => F (q + v)) =ᶠ[𝓝[U] p]
@@ -99,15 +101,25 @@ theorem boundaryAngular_deriv_ne_zero
       (fderiv ℝ F (c, θ) (0, 1)) θ := by
     simpa only [Function.comp_def] using
       (hF θ).hasFDerivAt.comp_hasDerivAt θ hline
+  have hcurve₁ : HasDerivAt (fun η : ℝ => (F (c, η)).1)
+      (fderiv ℝ F (c, θ) (0, 1)).1 θ := by
+    simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.toSpanSingleton_apply, one_smul] using
+      HasFDerivAt.hasDerivAt (HasFDerivAt.fst hcurve.hasFDerivAt)
+  have hcurve₂ : HasDerivAt (fun η : ℝ => (F (c, η)).2)
+      (fderiv ℝ F (c, θ) (0, 1)).2 θ := by
+    simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_snd',
+      ContinuousLinearMap.toSpanSingleton_apply, one_smul] using
+      HasFDerivAt.hasDerivAt (HasFDerivAt.snd hcurve.hasFDerivAt)
   have he : (fun η : ℝ => (F (c, η)).1) = (fun _ : ℝ => α) :=
     funext hradial
   have hξ : (fderiv ℝ F (c, θ) (0, 1)).1 = 0 := by
     have hd : deriv (fun η : ℝ => (F (c, η)).1) θ =
-        (fderiv ℝ F (c, θ) (0, 1)).1 := hcurve.fst.deriv
+        (fderiv ℝ F (c, θ) (0, 1)).1 := hcurve₁.deriv
     rw [he, deriv_const] at hd
     exact hd.symm
   have hη : (fderiv ℝ F (c, θ) (0, 1)).2 = 0 :=
-    hcurve.snd.deriv.symm.trans hzero
+    hcurve₂.deriv.symm.trans hzero
   apply hJ θ
   simp only [planeJacobian, hξ, hη, mul_zero, zero_mul, sub_zero]
 
@@ -147,3 +159,4 @@ theorem canonicalBoundaryAngular_bijective
     surjective_of_continuous_periodic_lift Real.pi_ne_zero hf.continuous hperiod⟩, hperiod⟩
 
 end ContinuousFlexibility.Analysis
+

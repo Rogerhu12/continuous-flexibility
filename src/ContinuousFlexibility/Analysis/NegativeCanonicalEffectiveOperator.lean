@@ -37,8 +37,12 @@ theorem divergenceOperator_eq_of_coefficient_germs
         (fun y => B.b y * radialPartial u y + B.c y * angularPartial u y) := by
     filter_upwards [hb, hc] with y hyb hyc
     rw [hyb, hyc]
-  simp only [divergenceOperator, radialPartial, angularPartial]
-  rw [hr.fderiv_eq, ht.fderiv_eq]
+  change
+    (fderiv ℝ (fun y => A.a y * radialPartial u y + A.b y * angularPartial u y) x) (1, 0) +
+      (fderiv ℝ (fun y => A.b y * radialPartial u y + A.c y * angularPartial u y) x) (0, 1) =
+    (fderiv ℝ (fun y => B.a y * radialPartial u y + B.b y * angularPartial u y) x) (1, 0) +
+      (fderiv ℝ (fun y => B.b y * radialPartial u y + B.c y * angularPartial u y) x) (0, 1)
+  rw [hr.fderiv_eq (𝕜 := ℝ), ht.fderiv_eq (𝕜 := ℝ)]
 
 /-- The global smooth principal field of the negative Airy normal form. -/
 def canonicalAiryPrincipalCoefficients : SymmetricCoefficients where
@@ -125,3 +129,4 @@ theorem negativeCanonicalEffectiveOperator_of_parts
   exact he
 
 end ContinuousFlexibility.Analysis
+

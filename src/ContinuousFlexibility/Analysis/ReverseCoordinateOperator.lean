@@ -82,8 +82,12 @@ theorem divergenceOperator_eq_of_germ
         (fun y => A.b y * radialPartial v y + A.c y * angularPartial v y) := by
     filter_upwards [hr, ht] with y hyr hyt
     rw [hyr, hyt]
-  simp only [divergenceOperator, radialPartial, angularPartial]
-  rw [hradial.fderiv_eq, hangular.fderiv_eq]
+  change
+    (fderiv ℝ (fun y => A.a y * radialPartial u y + A.b y * angularPartial u y) x) (1, 0) +
+      (fderiv ℝ (fun y => A.b y * radialPartial u y + A.c y * angularPartial u y) x) (0, 1) =
+    (fderiv ℝ (fun y => A.a y * radialPartial v y + A.b y * angularPartial v y) x) (1, 0) +
+      (fderiv ℝ (fun y => A.b y * radialPartial v y + A.c y * angularPartial v y) x) (0, 1)
+  rw [hradial.fderiv_eq (𝕜 := ℝ), hangular.fderiv_eq (𝕜 := ℝ)]
 
 /-- The effective physical coefficients use the actual inverse chart as
 the reverse coordinate change and the reciprocal transported height. -/
@@ -100,13 +104,11 @@ private theorem reverse_operator_scalar
   have hJi : Ji = 1 / J := (eq_div_iff hJ).mpr hprod
   have hscale : J / h * (h * P / J) = P := by
     field_simp [hh, hJ]
-    <;> ring
   have hrev : J / h * C = D + Q * u := by
     calc
       J / h * C = (1 / h) * C / Ji := by
         rw [hJi]
         field_simp [hh, hJ]
-        <;> ring
       _ = D + Q * u := hreverse
   calc
     P = J / h * (h * P / J) := hscale.symm
@@ -218,6 +220,7 @@ theorem reverseCoordinateOperator_action
       (haction (fun _ : PolarPoint => (1 : ℝ)) contDiff_const).symm
   refine ⟨hBa, hBb, hBc, ?_⟩
   intro u hu
+  change divergenceOperator L u x = divergenceOperator B u x
   simpa only [hzero, zero_mul, add_zero] using haction u hu
 
 end ContinuousFlexibility.Analysis

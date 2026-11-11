@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.PositiveEndpointCutoff
-import Mathlib.Analysis.Calculus.IteratedFDeriv.Lemmas
+import Mathlib.Analysis.Calculus.ContDiff.Operations
 
 /-!
 # Globalizing a genuinely smooth cylinder collar

@@ -23,11 +23,17 @@ theorem abs_mixedDerivative_rootProfileShift
       |mixedDerivative a b F (rootProfileShift r σ p)| := by
   rcases hσ with hσ | hσ
   · subst σ
-    simpa only [rootProfileShift, one_mul, translateRadialField] using
-      congrArg abs (mixedDerivative_translateRadialField r F a b p)
+    have he : (fun q => F (rootProfileShift r 1 q)) = translateRadialField r F := by
+      funext q
+      simp only [rootProfileShift, one_mul, translateRadialField]
+    rw [he, mixedDerivative_translateRadialField]
+    simp only [rootProfileShift, one_mul]
   · subst σ
-    simpa only [rootProfileShift, neg_one_mul, sub_eq_add_neg, reflectRadialField] using
-      abs_mixedDerivative_reflectRadialField r F a b p
+    have he : (fun q => F (rootProfileShift r (-1) q)) = reflectRadialField r F := by
+      funext q
+      simp only [rootProfileShift, neg_one_mul, sub_eq_add_neg, reflectRadialField]
+    rw [he, abs_mixedDerivative_reflectRadialField]
+    simp only [rootProfileShift, neg_one_mul, sub_eq_add_neg]
 
 theorem rootProfileShift_mem_symmetric_interval {r σ R : ℝ} {p : PolarPoint}
     (hσ : σ = 1 ∨ σ = -1) (hp : p.1 ∈ Ioo (-R) R) :
