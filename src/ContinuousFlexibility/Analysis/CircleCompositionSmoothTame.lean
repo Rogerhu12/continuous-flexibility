@@ -49,7 +49,7 @@ private theorem smoothTameOn_of_uniform_jet_bounds
         congrArg (p base) (sub_add_cancel x x₀).symm
       _ ≤ p base (x - x₀) + p base x₀ :=
         map_add_le_add (p base) (x - x₀) x₀
-      _ ≤ 1 + p base x₀ := add_le_add_right hnear.le _
+      _ ≤ 1 + p base x₀ := add_le_add hnear.le (le_refl (p base x₀))
   exact hc x hxbound v
 
 theorem smoothTameOn_circleChartComposition
