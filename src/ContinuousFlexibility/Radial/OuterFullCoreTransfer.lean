@@ -57,12 +57,12 @@ theorem morseOuterFullCoreTransfer_actual {T : MorseChainData} {σ : ℕ → ℝ
 
 /-- The sum of the norms of the genuine core solution operator and its
 genuine inverse has the manuscript's quadratic/action exponential form. -/
-theorem morseOuterFullCoreTransfer_norms_le
+theorem morseOuterFullCoreTransfer_norms_le_of_upper
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
     {K Cstar L scale : ℝ} {n j : ℕ}
     (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
     (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
-    (side : Bool) (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (side : Bool) (hn : T.index < n) (hupper : (j : ℝ) < radialFrequencyThreshold T Cstar n)
     (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
     (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
     ‖(morseOuterFullCoreTransfer h hscale side n hn (j : ℝ)).toContinuousLinearMap‖ +
@@ -86,10 +86,24 @@ theorem morseOuterFullCoreTransfer_norms_le
   intro u z hstate
   constructor
   · simpa only [outerStateEnergy, mul_comm] using
-      morseOuterFullCore_energy_on_exp h hσ hcell hscale hL side hn hband hhi hlo hstate
+      morseOuterFullCore_energy_on_exp_of_upper h hσ hcell hscale hL side hn hupper hhi hlo hstate
         (left_mem_Icc.mpr hi.1.le) (right_mem_Icc.mpr hi.1.le)
   · simpa only [outerStateEnergy, mul_comm] using
-      morseOuterFullCore_energy_on_exp h hσ hcell hscale hL side hn hband hhi hlo hstate
+      morseOuterFullCore_energy_on_exp_of_upper h hσ hcell hscale hL side hn hupper hhi hlo hstate
         (right_mem_Icc.mpr hi.1.le) (left_mem_Icc.mpr hi.1.le)
+
+theorem morseOuterFullCoreTransfer_norms_le
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
+    {K Cstar L scale : ℝ} {n j : ℕ}
+    (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
+    (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
+    (side : Bool) (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
+    (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
+    ‖(morseOuterFullCoreTransfer h hscale side n hn (j : ℝ)).toContinuousLinearMap‖ +
+        ‖(morseOuterFullCoreTransfer h hscale side n hn (j : ℝ)).symm.toContinuousLinearMap‖ ≤
+      exp ((outerFullCoreQuadraticExponent C K D.a Cstar L + 2) * (n : ℝ) ^ 2 +
+        outerFullCoreActionExponent C K D.a * ((j : ℝ) * sqrt (morseChainA T n))) :=
+  morseOuterFullCoreTransfer_norms_le_of_upper h hσ hcell hscale hL side hn hband.2.2 hhi hlo
 
 end ContinuousFlexibility.Radial

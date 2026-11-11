@@ -45,12 +45,12 @@ theorem outer_next_coefficient_sqrt_le (T : MorseChainData) (n : ℕ)
         rw [show (36 : ℝ) = (6 : ℝ) ^ 2 by norm_num, sqrt_sq (by norm_num : (0 : ℝ) ≤ 6)]
       rw [sqrt_mul (by norm_num : (0 : ℝ) ≤ 36), hsqrt]
 
-theorem morse_outgoing_join_factor_le_frequency_exp
+theorem morse_outgoing_join_factor_le_frequency_exp_of_upper
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
     {K Cstar L scale : ℝ} {n j : ℕ}
     (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
     (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
-    (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (hn : T.index < n) (hupper : (j : ℝ) < radialFrequencyThreshold T Cstar n)
     (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
     (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
     outerPositivePhysicalFactor D (j : ℝ) scale (T.joinLeft true n) (T.joinRight true n) ≤
@@ -97,7 +97,7 @@ theorem morse_outgoing_join_factor_le_frequency_exp
         mul_le_mul hr he (div_pos hlam hscale).le (exp_pos _).le
       _ = _ := by rw [← exp_add]; congr 1; ring
   have hj : (j : ℝ) ^ 2 ≤ exp (F * N') :=
-    (outer_frequency_sq_le_exp hn1 (h.d_eq n hn.le) hband).trans
+    (outer_frequency_sq_le_exp_of_upper hn1 (h.d_eq n hn.le) hupper).trans
       (exp_le_exp.mpr (mul_le_mul_of_nonneg_left hNN hF))
   have hbound := morse_preceding_join_factor_le_sq_exp h hσ hcell hscale
     (by linarith only [hL] : 0 ≤ L + 27) hF true (by omega : T.index < n + 1) hj hhi' hlo'
@@ -115,5 +115,18 @@ theorem morse_outgoing_join_factor_le_frequency_exp
   apply exp_le_exp.mpr
   dsimp only [outerOutgoingQuadraticExponent, outerOutgoingActionExponent, Q, F, N, N'] at *
   nlinarith only [hquad, haction]
+
+theorem morse_outgoing_join_factor_le_frequency_exp
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
+    {K Cstar L scale : ℝ} {n j : ℕ}
+    (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
+    (hcell : MorseRealizedCellEstimates T K) (hscale : 0 < scale) (hL : 0 ≤ L)
+    (hn : T.index < n) (hband : radialFrequencyBand T Cstar n j)
+    (hhi : scale / morseChainAmplitude T σ n ≤ exp (L * (n : ℝ) ^ 2))
+    (hlo : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
+    outerPositivePhysicalFactor D (j : ℝ) scale (T.joinLeft true n) (T.joinRight true n) ≤
+      exp (outerOutgoingQuadraticExponent C K D.a Cstar L * (n : ℝ) ^ 2 +
+        outerOutgoingActionExponent C K D.a * ((j : ℝ) * sqrt (morseChainA T n))) :=
+  morse_outgoing_join_factor_le_frequency_exp_of_upper h hσ hcell hscale hL hn hband.2.2 hhi hlo
 
 end ContinuousFlexibility.Radial

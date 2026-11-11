@@ -52,16 +52,16 @@ theorem outer_radialQ_exp_bound {n : ℕ} (hn : 1 ≤ n) :
       congr 2
       ring
 
-theorem outer_frequency_sq_le_exp {T : MorseChainData} {C : ℝ} {n j : ℕ}
+theorem outer_frequency_sq_le_exp_of_upper {T : MorseChainData} {C : ℝ} {n j : ℕ}
     (hn : 1 ≤ n) (hd : T.d n = morseChainInteger n)
-    (hband : radialFrequencyBand T C n j) :
+    (hupper : (j : ℝ) < radialFrequencyThreshold T C n) :
     (j : ℝ) ^ 2 ≤ exp (outerFrequencyExponent C * (n : ℝ) ^ 2) := by
   let A := morseChainA T n
   let F := 3 * C ^ 2 * (exp 1 + 1) ^ 2
   have hA : 0 < A := (by positivity : 0 < exp (-(n : ℝ) ^ 2) / 3).trans_le
     (morseChainA_exp_bounds T n hd).1
   have hband' : (j : ℝ) * sqrt A < C * radialQ n :=
-    (lt_div_iff₀ (sqrt_pos.mpr hA)).mp hband.2.2
+    (lt_div_iff₀ (sqrt_pos.mpr hA)).mp hupper
   have hsq : (j : ℝ) ^ 2 * A ≤ C ^ 2 * radialQ n ^ 2 := by
     simpa only [mul_pow, sq_sqrt hA.le] using
       pow_le_pow_left₀ (mul_nonneg (Nat.cast_nonneg j) (sqrt_nonneg A)) hband'.le 2
@@ -100,6 +100,12 @@ theorem outer_frequency_sq_le_exp {T : MorseChainData} {C : ℝ} {n j : ℕ}
       congr 1
       dsimp only [F, outerFrequencyExponent]
       ring
+
+theorem outer_frequency_sq_le_exp {T : MorseChainData} {C : ℝ} {n j : ℕ}
+    (hn : 1 ≤ n) (hd : T.d n = morseChainInteger n)
+    (hband : radialFrequencyBand T C n j) :
+    (j : ℝ) ^ 2 ≤ exp (outerFrequencyExponent C * (n : ℝ) ^ 2) :=
+  outer_frequency_sq_le_exp_of_upper hn hd hband.2.2
 
 /-- The length of the negative model component is only quadratic in the
 cell index. -/

@@ -68,6 +68,28 @@ theorem outer_tail_initial_resistance_le
   rw [outer_radialE_rpow, outer_radialE_rpow]
   exact exp_le_exp.mpr (mul_le_mul_of_nonneg_left (radialQ_monotone hi) hC0.le)
 
+theorem exists_outer_tail_initialResistance_envelope_uniform
+    {C : ℕ → ℝ} (hC0 : 0 < C 0) {b : ℝ} (hb : 0 < b) :
+    ∃ L : ℝ, 0 < L ∧ ∀ (D : ReferenceData), AccumulatingProfileBounds D C → D.b = b →
+      ∀ (T : DeepTailData), DeepTailHypotheses T →
+      ∀ (right : Bool) (j start : ℕ), 2 ≤ j → 1 ≤ start →
+      TailPhysicalRelation D T right j start →
+      T.endpoint - T.entrance ≤ (2 * (j : ℝ) ^ 2)⁻¹ →
+        tailInitialResistance T ≤ radialE start ^ L := by
+  let B := exp 1 * b * C 0
+  have hB : 0 < B := by dsimp only [B]; positivity
+  refine ⟨B + C 0, add_pos hB hC0, ?_⟩
+  intro D hC hDb T hT right j start hj hstart hphysical hclose
+  have hR := outer_tail_initial_resistance_le hC hT hj hphysical hclose
+  rw [hDb] at hR
+  calc
+    _ ≤ exp 1 * b * (C 0 * radialE start ^ (C 0)) := hR
+    _ = B * radialE start ^ (C 0) := by dsimp only [B]; ring
+    _ ≤ radialE start ^ B * radialE start ^ (C 0) :=
+      mul_le_mul_of_nonneg_right (outer_prefactor_le_envelope hstart hB.le)
+        (rpow_nonneg (show 0 ≤ radialE start from (exp_pos _).le) _)
+    _ = _ := (rpow_add (show 0 < radialE start from exp_pos _) B (C 0)).symm
+
 theorem exists_outer_tail_initialResistance_envelope
     {D : ReferenceData} {C : ℕ → ℝ} (hC : AccumulatingProfileBounds D C) :
     ∃ L : ℝ, 0 < L ∧ ∀ (T : DeepTailData), DeepTailHypotheses T →
@@ -75,19 +97,8 @@ theorem exists_outer_tail_initialResistance_envelope
       TailPhysicalRelation D T right j start →
       T.endpoint - T.entrance ≤ (2 * (j : ℝ) ^ 2)⁻¹ →
         tailInitialResistance T ≤ radialE start ^ L := by
-  have hC0 : 0 < C 0 := hC.2.2.1 0
-  have hb : 0 < D.b := hC.1.1.trans hC.1.2.1
-  let B := exp 1 * D.b * C 0
-  have hB : 0 < B := by dsimp only [B]; positivity
-  refine ⟨B + C 0, add_pos hB hC0, ?_⟩
-  intro T hT right j start hj hstart hphysical hclose
-  calc
-    _ ≤ exp 1 * D.b * (C 0 * radialE start ^ (C 0)) :=
-      outer_tail_initial_resistance_le hC hT hj hphysical hclose
-    _ = B * radialE start ^ (C 0) := by dsimp only [B]; ring
-    _ ≤ radialE start ^ B * radialE start ^ (C 0) :=
-      mul_le_mul_of_nonneg_right (outer_prefactor_le_envelope hstart hB.le)
-        (rpow_nonneg (show 0 ≤ radialE start from (exp_pos _).le) _)
-    _ = _ := (rpow_add (show 0 < radialE start from exp_pos _) B (C 0)).symm
+  obtain ⟨L, hL, hbound⟩ := exists_outer_tail_initialResistance_envelope_uniform
+    (hC.2.2.1 0) (hC.1.1.trans hC.1.2.1)
+  exact ⟨L, hL, hbound D hC rfl⟩
 
 end ContinuousFlexibility.Radial

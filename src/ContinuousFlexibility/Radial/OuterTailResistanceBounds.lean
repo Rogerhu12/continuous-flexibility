@@ -111,6 +111,45 @@ theorem outer_tail_inverse_mass_le_resistance {T : DeepTailData}
     _ ≤ T.Λ * tailMass T n * tailResistance T n := hlarge
     _ = tailResistance T n * (T.Λ * tailMass T n) := by ring
 
+/-- The coefficient exponent is chosen before the profile in a family
+with common coefficient constants and right endpoint. -/
+theorem exists_outer_tail_blockWeight_envelope_uniform
+    {C : ℕ → ℝ} (hC0 : 0 < C 0) {b : ℝ} (hb : 0 < b) :
+    ∃ L : ℝ, 0 < L ∧ ∀ (D : ReferenceData), AccumulatingProfileBounds D C → D.b = b →
+      ∀ (T : DeepTailData), DeepTailHypotheses T →
+      ∀ (right : Bool) (j start : ℕ), 2 ≤ j →
+      TailPhysicalRelation D T right j start →
+      T.endpoint - T.entrance ≤ (2 * (j : ℝ) ^ 2)⁻¹ →
+      ∀ n : ℕ, 1 ≤ start + n →
+        tailFundamentalGreenBlockWeight T n ≤ radialE (start + n) ^ L := by
+  obtain ⟨A, hA, hshift⟩ := outer_coefficient_weight_nearby hC0.le
+  let B := 1 + 3 * (exp 1 * b * C 0)
+  have hB : 0 < B := by dsimp only [B]; positivity
+  refine ⟨B + A, add_pos hB hA, ?_⟩
+  intro D hC hDb T hT right j start hj hphysical hclose n hn
+  obtain ⟨hI, hR⟩ := outer_tail_resistances_le hC hT hj hphysical hclose n
+  change tailInnerResistance T n ≤
+    exp 1 * D.b * (C 0 * radialE (start + n + 1) ^ (C 0)) at hI
+  change tailResistance T n ≤
+    exp 1 * D.b * (C 0 * radialE (start + n + 1) ^ (C 0)) at hR
+  rw [hDb] at hI hR
+  have hmass := outer_tail_inverse_mass_le_resistance hT n
+  have hs := hshift (start + n + 1) (start + n) hn (by omega)
+  have hE : 1 ≤ radialE (start + n) ^ A := by
+    rw [outer_radialE_rpow]
+    exact one_le_exp_iff.mpr (mul_nonneg hA.le (radialQ_nonneg _))
+  have hfactor : 0 ≤ exp 1 * b * C 0 := by positivity
+  have hshifted := mul_le_mul_of_nonneg_left hs hfactor
+  have hblock : tailFundamentalGreenBlockWeight T n ≤ B * radialE (start + n) ^ A := by
+    dsimp only [tailFundamentalGreenBlockWeight, B]
+    nlinarith only [hI, hR, hmass, hshifted, hE]
+  calc
+    _ ≤ B * radialE (start + n) ^ A := hblock
+    _ ≤ radialE (start + n) ^ B * radialE (start + n) ^ A :=
+      mul_le_mul_of_nonneg_right (outer_prefactor_le_envelope hn hB.le)
+        (rpow_nonneg (exp_pos _).le _)
+    _ = _ := (rpow_add (exp_pos _) B A).symm
+
 /-- The block weight is a coefficient power, uniformly in frequency and entrance. -/
 theorem exists_outer_tail_blockWeight_envelope
     {D : ReferenceData} {C : ℕ → ℝ} (hC : AccumulatingProfileBounds D C) :
@@ -120,33 +159,8 @@ theorem exists_outer_tail_blockWeight_envelope
       T.endpoint - T.entrance ≤ (2 * (j : ℝ) ^ 2)⁻¹ →
       ∀ n : ℕ, 1 ≤ start + n →
         tailFundamentalGreenBlockWeight T n ≤ radialE (start + n) ^ L := by
-  have hC0 : 0 < C 0 := hC.2.2.1 0
-  have hb : 0 < D.b := hC.1.1.trans hC.1.2.1
-  obtain ⟨A, hA, hshift⟩ := outer_coefficient_weight_nearby hC0.le
-  let B := 1 + 3 * (exp 1 * D.b * C 0)
-  have hB : 0 < B := by dsimp only [B]; positivity
-  refine ⟨B + A, add_pos hB hA, ?_⟩
-  intro T hT right j start hj hphysical hclose n hn
-  obtain ⟨hI, hR⟩ := outer_tail_resistances_le hC hT hj hphysical hclose n
-  have hmass := outer_tail_inverse_mass_le_resistance hT n
-  have hs := hshift (start + n + 1) (start + n) hn (by omega)
-  have hE : 1 ≤ radialE (start + n) ^ A := by
-    rw [outer_radialE_rpow]
-    exact one_le_exp_iff.mpr (mul_nonneg hA.le (radialQ_nonneg _))
-  have hfactor : 0 ≤ exp 1 * D.b * C 0 := by positivity
-  have hshifted := mul_le_mul_of_nonneg_left hs hfactor
-  have hblock : tailFundamentalGreenBlockWeight T n ≤ B * radialE (start + n) ^ A := by
-    dsimp only [tailFundamentalGreenBlockWeight, B]
-    change tailInnerResistance T n ≤
-      exp 1 * D.b * (C 0 * radialE (start + n + 1) ^ (C 0)) at hI
-    change tailResistance T n ≤
-      exp 1 * D.b * (C 0 * radialE (start + n + 1) ^ (C 0)) at hR
-    nlinarith only [hI, hR, hmass, hshifted, hE]
-  calc
-    _ ≤ B * radialE (start + n) ^ A := hblock
-    _ ≤ radialE (start + n) ^ B * radialE (start + n) ^ A :=
-      mul_le_mul_of_nonneg_right (outer_prefactor_le_envelope hn hB.le)
-        (rpow_nonneg (exp_pos _).le _)
-    _ = _ := (rpow_add (exp_pos _) B A).symm
+  obtain ⟨L, hL, hbound⟩ := exists_outer_tail_blockWeight_envelope_uniform
+    (hC.2.2.1 0) (hC.1.1.trans hC.1.2.1)
+  exact ⟨L, hL, hbound D hC rfl⟩
 
 end ContinuousFlexibility.Radial

@@ -120,9 +120,9 @@ theorem morse_cell_energy_on {A B j c s t : ℝ} (hB : 0 < B)
     _ ≤ E s * ((Kl * Kn) * Kr) := hh
     _ = _ := by dsimp only [E, Kl, Kn, Kr, a, l, r, e, morseCellEnergyFactor]; ring
 
-theorem outer_morse_peak_factor_le {T : MorseChainData} {C : ℝ} {n j : ℕ}
+theorem outer_morse_peak_factor_le_of_upper {T : MorseChainData} {C : ℝ} {n j : ℕ}
     (hn : 1 ≤ n) (hd : T.d n = morseChainInteger n)
-    (hband : radialFrequencyBand T C n j) :
+    (hupper : (j : ℝ) < radialFrequencyThreshold T C n) :
     1 + (j : ℝ) ^ 2 * (morseChainA T n / 4 - morseChainB T n) ≤
       exp ((outerFrequencyExponent C + 10) * (n : ℝ) ^ 2) := by
   let F := outerFrequencyExponent C
@@ -133,7 +133,7 @@ theorem outer_morse_peak_factor_le {T : MorseChainData} {C : ℝ} {n j : ℕ}
   have hA := morseChainA_le_nine T n hd
   have hB : 0 ≤ morseChainB T n := by unfold morseChainB; positivity
   have hpeak : morseChainA T n / 4 - morseChainB T n ≤ 9 := by linarith only [hA, hB]
-  have hj2 := outer_frequency_sq_le_exp hn hd hband
+  have hj2 := outer_frequency_sq_le_exp_of_upper hn hd hupper
   have hp := mul_le_mul_of_nonneg_left hpeak (sq_nonneg (j : ℝ))
   have hj := mul_le_mul_of_nonneg_right hj2 (by norm_num : (0 : ℝ) ≤ 9)
   have he : 1 ≤ exp (F * N) := one_le_exp_iff.mpr (mul_nonneg hF (zero_le_one.trans hN))
@@ -144,6 +144,13 @@ theorem outer_morse_peak_factor_le {T : MorseChainData} {C : ℝ} {n j : ℕ}
     _ ≤ 10 * exp (F * N) := by nlinarith only [hp, hj, he]
     _ ≤ exp (10 * N) * exp (F * N) := mul_le_mul_of_nonneg_right h10 (exp_pos _).le
     _ = _ := by rw [← exp_add]; congr 1; dsimp only [F, N]; ring
+
+theorem outer_morse_peak_factor_le {T : MorseChainData} {C : ℝ} {n j : ℕ}
+    (hn : 1 ≤ n) (hd : T.d n = morseChainInteger n)
+    (hband : radialFrequencyBand T C n j) :
+    1 + (j : ℝ) ^ 2 * (morseChainA T n / 4 - morseChainB T n) ≤
+      exp ((outerFrequencyExponent C + 10) * (n : ℝ) ^ 2) :=
+  outer_morse_peak_factor_le_of_upper hn hd hband.2.2
 
 theorem morseRealized_cell_energy_on {T : MorseChainData} {σ : ℕ → ℝ}
     {D : ReferenceData} {C : ℕ → ℝ} {j scale M s t : ℝ} {u z : ℝ → ℝ}
