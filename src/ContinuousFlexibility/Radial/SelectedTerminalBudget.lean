@@ -60,7 +60,8 @@ theorem exists_selectedTerminalBudgetStart {Cstar : ℝ}
       (1 / 100000000 : ℝ) * Cstar := by linarith only [hscaled]
   obtain ⟨N, hN, hbudget⟩ := terminalMatching_uniform_start_of_threshold
     selectedTerminalCoefficientExponent_pos.le (by norm_num : (0 : ℝ) < 1 / 100000000)
-    hCstar hscale hlarge (div_pos (r07UniformTolerance_pos hCstar.le) (by norm_num))
+    hCstar hscale hlarge
+    (div_pos (r07UniformTolerance_pos hCstar.le) (by norm_num : (0 : ℝ) < 8))
   refine ⟨N, hN, ?_⟩
   intro T hT hNT n j hn hband
   have hm : T.index ≤ n - 1 := by omega

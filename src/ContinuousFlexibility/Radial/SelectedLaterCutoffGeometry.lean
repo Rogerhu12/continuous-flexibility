@@ -145,7 +145,10 @@ theorem SeedRetainedPair.later_cutoff_geometry {S : SelectedTailData}
       hmono ⟨by linarith only [hL], by linarith only [hL]⟩ ⟨hL.le, le_rfl⟩
       (by linarith only [hL])⟩
   have hbL : b false < wall false := (hinside false).2.trans_eq (hends false).2
-  have haR : wall true < a true := (hends true).1 ▸ (hinside true).1
+  have haR : wall true < a true := by
+    have he : R true 0 = wall true := (hends true).1
+    rw [← he]
+    exact (hinside true).1
   have hsep : b false < a true := hbL.trans (hwall.trans haR)
   have hcolumn : tsupport (referenceColumn Γ.reference) ⊆ Ioo (b false) (a true) := by
     intro x hx

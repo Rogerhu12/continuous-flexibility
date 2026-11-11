@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.SelectedBoundaryRadiusScale
 import ContinuousFlexibility.Radial.ModeRegionSources
+import ContinuousFlexibility.Radial.R07DeepTailChange
 
 /-!
 # Matching data at the actual two selected cuts

@@ -81,13 +81,11 @@ private theorem zero_trace_of_transposed {D : ReferenceData}
   have hlen : b - a ≠ 0 := (sub_pos.mpr hab).ne'
   fin_cases i
   · norm_num [innerEndpointValues] at hg ⊢
-    have hz : (u a * D.w a) * (b - a) = 0 := by nlinarith only [hg]
-    exact (mul_eq_zero.mp ((mul_eq_zero.mp hz).resolve_right hlen)).resolve_right
-      (hwpos a (hsub (left_mem_Icc.mpr hab.le))).ne'
+    exact hg.resolve_right (not_or.mpr
+      ⟨(hwpos a (hsub (left_mem_Icc.mpr hab.le))).ne', hlen⟩)
   · norm_num [innerEndpointValues] at hg ⊢
-    have hz : (u b * D.w b) * (b - a) = 0 := by nlinarith only [hg]
-    exact (mul_eq_zero.mp ((mul_eq_zero.mp hz).resolve_right hlen)).resolve_right
-      (hwpos b (hsub (right_mem_Icc.mpr hab.le))).ne'
+    exact hg.resolve_right (not_or.mpr
+      ⟨(hwpos b (hsub (right_mem_Icc.mpr hab.le))).ne', sub_ne_zero.mpr hab.ne⟩)
 
 /-- The actual matched weak graph supplies a C¹ representative and the
 two ordinary zero boundary values. Neither the frozen equation nor
