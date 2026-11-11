@@ -69,7 +69,8 @@ theorem deepTail_physical_frequency_bound {j : ℕ} (hj : 2 ≤ j) :
     48 / ((j : ℝ) ^ 2 * ((j : ℝ) ^ 2 - 1)) ≤ 64 / (j : ℝ) ^ 4 := by
   have hjR : 2 ≤ (j : ℝ) := by exact_mod_cast hj
   have hj2 : 4 ≤ (j : ℝ) ^ 2 := by nlinarith
-  have hΛ : 0 < (j : ℝ) ^ 2 * ((j : ℝ) ^ 2 - 1) := by positivity
+  have hΛ : 0 < (j : ℝ) ^ 2 * ((j : ℝ) ^ 2 - 1) :=
+    mul_pos (by linarith) (by linarith)
   have hj4 : 0 < (j : ℝ) ^ 4 := by positivity
   apply (div_le_div_iff₀ hΛ hj4).2
   have hprod : 0 ≤ (j : ℝ) ^ 2 * ((j : ℝ) ^ 2 - 4) := mul_nonneg (sq_nonneg _) (by linarith)

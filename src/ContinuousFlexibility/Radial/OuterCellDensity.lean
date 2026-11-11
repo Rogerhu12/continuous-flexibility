@@ -23,8 +23,9 @@ set_option backward.isDefEq.respectTransparency false
 
 def outerRadialDensity (D : ReferenceData) (r : ℝ) : ℝ := 12 * D.w r / r ^ 2
 
-def outerRadialSqrtDensity (D : ReferenceData) (r : ℝ) : ℝ :=
-  if r ∈ radialCore D then sqrt (outerRadialDensity D r) else 1
+def outerRadialSqrtDensity (D : ReferenceData) (r : ℝ) : ℝ := by
+  classical
+  exact if r ∈ radialCore D then sqrt (outerRadialDensity D r) else 1
 
 theorem outerRadialDensity_pos {D : ReferenceData} (hD : IsAccumulatingProfile D)
     {r : ℝ} (hr : r ∈ radialCore D) : 0 < outerRadialDensity D r := by
@@ -34,11 +35,13 @@ theorem outerRadialDensity_pos {D : ReferenceData} (hD : IsAccumulatingProfile D
 
 theorem measurable_outerRadialSqrtDensity {D : ReferenceData} (hD : IsAccumulatingProfile D) :
     Measurable (outerRadialSqrtDensity D) := by
+  classical
   obtain ⟨C, hC⟩ := hD
   have hρ : Measurable (outerRadialDensity D) :=
     (measurable_const.mul hC.1.2.2.1.1.continuous.measurable).div
       (measurable_id.pow_const 2)
-  exact (continuous_sqrt.measurable.comp hρ).piecewise measurableSet_Ioo measurable_const
+  exact (continuous_sqrt.measurable.comp hρ).piecewise
+    (s := radialCore D) measurableSet_Ioo measurable_const
 
 theorem outerRadialSqrtDensity_pos {D : ReferenceData} (hD : IsAccumulatingProfile D)
     (r : ℝ) : 0 < outerRadialSqrtDensity D r := by
@@ -85,7 +88,7 @@ theorem outerCell_inverse_sqrt_density_bound {D : ReferenceData} (hD : IsAccumul
   have hwpos : 0 < D.w r := hgeom.2.2.2.2.1 r hrCore
   have ha := outerRadialSqrtDensity_pos hD' r
   have hs : (outerRadialSqrtDensity D r)⁻¹ ^ 2 = r ^ 2 / (12 * D.w r) := by
-    rw [← inv_pow, outerRadialSqrtDensity_sq hD' hrCore, outerRadialDensity, inv_div]
+    rw [inv_pow, outerRadialSqrtDensity_sq hD' hrCore, outerRadialDensity, inv_div]
   have hwi : (D.w r)⁻¹ ≤ C₀ 0 * radialE (D.cellIndex m) ^ (C₀ 0) := by
     simpa only [radialJet, abs_of_pos (inv_pos.mpr hwpos)] using hinv m r hr 0
   have hQ : 1 ≤ radialQ (D.cellIndex m) := by
@@ -104,7 +107,7 @@ theorem outerCell_inverse_sqrt_density_bound {D : ReferenceData} (hD : IsAccumul
         nlinarith [sq_nonneg ((outerRadialSqrtDensity D r)⁻¹ - 1)]
       _ = 1 + (r ^ 2 / 12) * (D.w r)⁻¹ := by rw [hs]; ring
       _ ≤ 1 + (D.b ^ 2 / 12) * (C₀ 0 * radialE (D.cellIndex m) ^ (C₀ 0)) := by
-        apply add_le_add_left
+        apply add_le_add le_rfl
         exact mul_le_mul (by nlinarith : r ^ 2 / 12 ≤ D.b ^ 2 / 12) hwi
           (inv_nonneg.mpr hwpos.le) (by positivity)
       _ ≤ L * radialE (D.cellIndex m) ^ (C₀ 0) := by
