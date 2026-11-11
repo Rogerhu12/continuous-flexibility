@@ -61,7 +61,13 @@ theorem n05CanonicalClosedSubmodule_carrier (S : PhysicalSpacesData) (K : Canoni
     (s : ℕ) :
     (n05CanonicalClosedSubmodule S K s : Set (CanonicalVolumeJets S K s)) =
       canonicalVolumeGraph S K s := by
-  ext v
+  apply Set.ext
+  intro v
+  change (v ∈ n05CanonicalClosedSubmodule S K s) ↔
+    ((∀ m : ℕ, (fun p : PolarPoint => v m 0 (p.1, Real.pi - p.2))
+      =ᵐ[canonicalMeasure S K m] (v m 0 : PolarPoint → ℝ)) ∧
+      ∀ (m : ℕ) (j : Fin (s + 1)),
+        WeakCanonicalAngularDerivative S K m (v m 0) (v m j) j.val)
   simp only [n05CanonicalClosedSubmodule, Submodule.mem_inf, Submodule.mem_iInf,
     LinearMap.mem_ker, ContinuousLinearMap.coe_coe,
     n05CanonicalReflectionResidual_apply, n05CanonicalWeakTest_apply, sub_eq_zero]
