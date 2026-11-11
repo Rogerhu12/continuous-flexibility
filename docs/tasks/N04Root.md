@@ -2,7 +2,7 @@
 
 ## Problem
 
-Even and odd parts of a smooth function under the substitution λ = x^(3/2), with fixed loss.
+Even and odd parts of a smooth function under the substitution at a root, with fixed loss.
 
 Prove `ContinuousFlexibility.Blueprint.N04Root` in `src/ContinuousFlexibility/Blueprint/N04Root.lean`:
 
@@ -18,4 +18,4 @@ theorem N04Root : RootCompositionTarget
 
 ## Source
 
-`paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 496–549.
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1046–1211.

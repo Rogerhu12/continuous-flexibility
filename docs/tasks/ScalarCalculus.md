@@ -18,4 +18,4 @@ theorem ScalarCalculus : S03CalculusStatement ∧ S04CalculusStatement ∧ S05Ca
 
 ## Source
 
-`paper/flexible-surface-rewrite/03-height-equation.tex` lines 11–106; `paper/flexible-surface-rewrite/03-height-equation.tex` lines 287–376.
+`paper/flexible-surface-readable/03-height-equation.tex` lines 23–189; `paper/flexible-surface-readable/03-height-equation.tex` lines 406–543.

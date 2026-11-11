@@ -1,7 +1,8 @@
 # ContinuousFlexibility
 
-Lean 4 formalization of `thm:main` of the 62-page manuscript in
-`paper/flexible-surface-rewrite/` (statement: `01-introduction.tex`, lines 18–31).
+Lean 4 formalization of `thm:main` of the manuscript. Read the 104-page readable version in
+`paper/flexible-surface-readable/`; the 62-page version in `paper/flexible-surface-rewrite/` has the
+same theorems, constants and labels and is the one the earlier Lean files cite.
 The endpoint is the unconditional theorem, with zero `sorry` and only the axioms
 `propext`, `Classical.choice`, `Quot.sound`.
 

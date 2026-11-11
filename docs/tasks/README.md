@@ -1,6 +1,9 @@
 # Working on a blueprint node
 
 Each file `docs/tasks/<Node>.md` is one line of work: problem, completion standard, source.
+A `Tool-*` task has no blueprint node: its Lean statement follows the manuscript lemma it cites.
+Line numbers refer to the readable manuscript in `paper/flexible-surface-readable/`; older Lean files
+cite the 62-page version in `paper/flexible-surface-rewrite/`, which has the same labels.
 One line works on one branch `line/<Node>` and opens one pull request into `main`.
 The rules below are the same for every line.
 

@@ -1,0 +1,132 @@
+\section{External results and the order of choices}
+\label{app:dependencies}
+
+The proof is self-contained except for the results listed in
+Table~\ref{tab:external}. The table records each of them in the form
+in which it is used, so that the reader can see exactly what is taken
+from the literature. The rigidity and flexibility theorems quoted in
+the introduction give context only; none of their conclusions is used.
+
+\renewcommand{\arraystretch}{1.12}\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}p{.21\linewidth}p{.47\linewidth}p{.25\linewidth}@{}}
+\caption{External results in the form used.}\label{tab:external}\\
+\toprule
+Result & Statement used & Where\\
+\midrule
+\endfirsthead
+\toprule
+Result & Statement used & Where\\
+\midrule
+\endhead
+Gauss equation and structure equations &
+ For a surface with metric $g$ and second fundamental form
+ $\mathrm{II}$ in a three-manifold, $K_g=\overline K+\det_g\mathrm{II}$,
+ with $\overline K$ the sectional curvature of the tangent plane. For
+ an oriented orthonormal coframe with
+ $d\eta_1=\alpha\wedge\eta_2$, $d\eta_2=-\alpha\wedge\eta_1$:
+ $d\alpha=-K\,\eta_1\wedge\eta_2$. &
+ Lemma~\ref{lem:darboux-invariant},
+ Proposition~\ref{prop:scalar-core}\\
+Primitives and coverings &
+ A closed one-form on a simply connected domain is exact. A proper
+ local diffeomorphism of the plane which is the identity outside a
+ compact set is a diffeomorphism. &
+ Lemma~\ref{lem:disk-development}\\
+Ordinary differential equations &
+ Existence, uniqueness and smooth dependence on data and parameters;
+ Gronwall's inequality. &
+ radial models, flows, Proposition~\ref{prop:obs-monotone-tail}\\
+Quadratic forms \cite[Theorems~2.12, 2.13]{Teschl2009} &
+ A closed quadratic form which is bounded below is the form of a
+ unique self-adjoint operator. &
+ the models of Section~\ref{sec:radial-models};
+ Lemma~\ref{lem:radial-deep-inverse}\\
+Spectral theorem \cite[Chapter~3]{Teschl2009} &
+ For a self-adjoint operator $A$ and $z$ outside its spectrum,
+ $\|(A-z)^{-1}\|=\dist(z,\sigma(A))^{-1}$. &
+ Lemmas~\ref{lem:central-gap}, \ref{lem:morse-arithmetic}\\
+Weyl's theorem \cite[Theorem~6.19]{Teschl2009} &
+ If the difference of the resolvents of two self-adjoint operators
+ is compact, their essential spectra coincide. &
+ Section~\ref{subsec:morse}\\
+Harmonic oscillator \cite[Section~8.3]{Teschl2009} &
+ The operator $-\partial_x^2+\omega^2x^2$ on the line has the simple
+ eigenvalues $(2n+1)\omega$, $n\ge0$, and no other spectrum. &
+ Section~\ref{sec:worked-example},
+ Lemma~\ref{lem:central-gap}\\
+Countable products &
+ A sequence in a countable product of compact intervals has a
+ subsequence which converges in every coordinate. &
+ Lemma~\ref{lem:radial-product-selection}\\
+Three-lines lemma &
+ An analytic family of operators on a strip, bounded by $M_0$ and
+ $M_1$ on its two boundary lines, is bounded by
+ $M_0^{1-\vartheta}M_1^{\vartheta}$ on the line
+ $\operatorname{Re}z=\vartheta$. &
+ Lemma~\ref{lem:ang-base-inverse-regularity}\\
+Extension operator &
+ On a half-line or an interval there is a linear extension operator
+ to the line which is bounded in every Sobolev norm. &
+ after Lemma~\ref{lem:one-high-factor}\\
+Hamilton's theorem on families of inverses &
+ Theorem~\ref{thm:hamilton-inverse}. &
+ Propositions~\ref{prop:rewrite-volume-inverse},
+ \ref{prop:approx-inverse}\\
+Hamilton's theorem with quadratic error &
+ Theorem~\ref{thm:hamilton-quadratic}. &
+ Theorem~\ref{thm:weak-branch}\\
+\bottomrule
+\end{longtable}
+
+The Airy asymptotics \cite{DLMFAiry} quoted in
+Section~\ref{sec:worked-example} serve as a heuristic only.
+
+\paragraph{Two elementary facts used repeatedly.}
+\emph{Schur's test.} If the blocks $K_{nm}$ of an operator matrix
+satisfy $\sup_n\sum_m\|K_{nm}\|\le A$ and
+$\sup_m\sum_n\|K_{nm}\|\le B$, then the operator is bounded on the
+$\ell^2$ sum with norm at most $\sqrt{AB}$: apply the Cauchy--Schwarz
+inequality with the weights $\|K_{nm}\|$ in each row, and then the
+bound for the columns. \emph{Neumann series.} If $\|R\|<1$ on a
+Banach space, then $\sum_{k\ge0}(-R)^k$ converges in norm to a
+two-sided inverse of $I+R$. Whenever a Neumann series is used in this
+paper, the space is one fixed Banach space and the bound $\|R\|<1$ is
+established before any derivative of higher order is taken.
+
+\paragraph{The order of the choices.}
+The constants of the construction are chosen in the following order;
+no later choice changes an earlier one.
+\begin{enumerate}[label=\textup{\arabic*.}]
+\item \emph{The models.} The parameters of the central oscillator and
+ of the Morse models, the exponent $12$ of the joins and the
+ constant $c_0$ of the matching angle
+ (Sections~\ref{sec:radial-models}, \ref{sec:radial-tails}).
+\item \emph{The profile.} The exponent $\ea$ of the source weight,
+ then $C_*$, then the initial index $N$, then the cuts of the central
+ model and the lengths of the cone heads; then the height ratios
+ $\sigma_n$, by Lemma~\ref{lem:radial-product-selection}; then the
+ connectors. These choices use only $|\gamma|\le1$ and are therefore
+ the same for all endpoint exponents
+ (Lemma~\ref{lem:radial-uniform-exponents}).
+\item \emph{The reference inverse.} A compact interval of endpoint
+ exponents $\gamma\in(0,1)$ changes the constants of the estimates,
+ not the profile. The final border $(g_*,\ell_*)$ is fixed after the
+ geometry (Section~\ref{subsec:final-border}).
+\item \emph{The spaces.} The exponent $\beta=\tfrac34$, the collars
+ $\delta_n^{\rm root}$, the controls $\chi_n$ and the cutoffs
+ (Section~\ref{subsec:root-geometry}).
+\item \emph{The neighbourhood.} The finite order $b_0$, then
+ $\epsilon_0$, so that the comparisons of
+ Lemma~\ref{lem:common-geometric-neighborhood} hold and the relative
+ operator has norm less than $\tfrac12$ on one space
+ (Lemma~\ref{lem:relative}).
+\item \emph{The parameter.} The range of $q$, so that the control
+ equation of Proposition~\ref{prop:approx-inverse} is solvable.
+\end{enumerate}
+Estimates of higher order change constants and use a fixed shift of
+the order; they never require a new choice of the profile, of the
+neighbourhood or of the range of $q$. The two inequalities
+$\tfrac12<\beta<1$ serve different purposes: $\beta<1$ leaves room for
+two neighbouring exponents at which the reference inverse is
+available, and $\beta>\tfrac12$ makes the product of two decaying
+factors decay faster than $H$.

@@ -1,0 +1,69 @@
+\input{preamble}
+\begin{document}
+\begin{titlepage}
+\centering
+\vspace*{.22\textheight}
+{\LARGE\bfseries Smooth isometric bending\\[.35em]of a closed sphere\par}
+\vspace{2.5em}
+{\large Boyang Hu\par}
+\vspace{1em}
+10 November 2026
+\end{titlepage}
+\begin{abstract}
+We construct a smooth embedded sphere $\Sigma\subset\R^3$ together
+with a smooth one-parameter family of isometric embeddings of $\Sigma$
+whose images are not all congruent. The family is periodic; an inner
+disk and a complementary cap stay fixed pointwise; and the area, the
+enclosed volume and the total mean curvature do not change. This gives
+a flexible closed surface in the smooth category.
+
+The mechanism is elementary. A disk whose metric is rotationally
+symmetric, but whose embedding is not, can be turned inside a fixed
+shell provided it is exactly planar near its rim. The whole difficulty
+is to produce such a disk. This reduces to a scalar equation of
+Monge--Amp\`ere type on an annulus, the Darboux equation, for a height
+function which must be nonradial and yet constant to infinite order at
+both boundary circles.
+
+We solve this equation by a Nash--Moser argument around an
+infinitesimal bending of a radial profile. The profile is forced to
+change the sign of its curvature infinitely often near each boundary
+circle, so the linearized equation changes type on infinitely many
+circles accumulating at both ends. We build the profile from explicitly
+solvable one-dimensional models, describe its accumulating ends by an
+exact three-term recurrence, and invert the linearized operator on the
+whole annulus. Two modifications of the linearization, each
+proportional to an unsolved equation, keep the type-change circles and
+the characteristic return maps fixed during the iteration, so that all
+linearized operators act on one domain.
+\end{abstract}
+\tableofcontents
+\clearpage
+\input{01-introduction}
+
+\part{The mechanism and the equation}
+\label{part:geometry}
+\input{02-geometry}
+\input{03-height-equation}
+
+\part{The reference profile}
+\label{part:reference}
+\input{04-reference-overview}
+\input{05-flat-end-chain}
+\input{06-global-reference-inverse}
+
+\part{The nonlinear problem}
+\label{part:nonlinear}
+\input{07-fixed-geometry}
+\input{08-stable-inverse}
+\input{09-solving-the-equation}
+\input{10-endpoint-and-sphere}
+
+\appendix
+\input{appendix-finite-ansatz}
+\input{appendix-external-inputs}
+\input{appendix-notation}
+\input{ai-statement}
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

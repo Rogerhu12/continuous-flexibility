@@ -2,12 +2,12 @@
 
 ## Problem
 
-Canonical coordinates on the negative and positive pieces, the Airy form, the cut condition and the source conversion.
+The uniform bounds of the potential and of the divided differences, and the conversion of sources (rest of Proposition 7.8).
 
 Prove `ContinuousFlexibility.Blueprint.N04Coordinates` in `src/ContinuousFlexibility/Blueprint/N04Coordinates.lean`:
 
 ```lean
-theorem N04Coordinates (hN03 : N03Statement) : N04cStatement
+theorem N04Coordinates (hN04b : N04bStatement) : N04cStatement
 ```
 
 ## Completion standard
@@ -18,4 +18,4 @@ theorem N04Coordinates (hN03 : N03Statement) : N04cStatement
 
 ## Source
 
-`paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 462–494; `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 551–704.
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1497–1725.

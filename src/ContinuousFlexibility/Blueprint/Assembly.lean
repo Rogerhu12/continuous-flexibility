@@ -22,17 +22,22 @@ import ContinuousFlexibility.Blueprint.R10b
 import ContinuousFlexibility.Blueprint.R11a
 import ContinuousFlexibility.Blueprint.R11b
 import ContinuousFlexibility.Blueprint.R12
-import ContinuousFlexibility.Blueprint.N01
+import ContinuousFlexibility.Blueprint.N01a
+import ContinuousFlexibility.Blueprint.N01b
+import ContinuousFlexibility.Blueprint.N01c
 import ContinuousFlexibility.Blueprint.N02N03
 import ContinuousFlexibility.Blueprint.N04Root
 import ContinuousFlexibility.Blueprint.N04Cubic
 import ContinuousFlexibility.Blueprint.N04Transmission
+import ContinuousFlexibility.Blueprint.N04a
+import ContinuousFlexibility.Blueprint.N04b
 import ContinuousFlexibility.Blueprint.N04Coordinates
 import ContinuousFlexibility.Blueprint.N05
 import ContinuousFlexibility.Blueprint.N06
 import ContinuousFlexibility.Blueprint.N07a
 import ContinuousFlexibility.Blueprint.N07b
 import ContinuousFlexibility.Blueprint.N08
+import ContinuousFlexibility.Blueprint.N09N10
 import ContinuousFlexibility.Blueprint.Solve
 import ContinuousFlexibility.Blueprint.N12
 
@@ -93,14 +98,15 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
-  have hN01 : N01Statement := N01 hR12 hW01 hSpaces.1 hS05
+  have hN01 : N01Statement := N01c (N01b (N01a hR12 hW01 hSpaces.1) hS05)
   have hN03 : N03Statement := N02N03 hN01 hS05
-  have hN04 : N04Statement := N04_of_nodes (N04Coordinates hN03) N04Root N04Cubic N04Transmission
+  have hN04 : N04Statement := N04_of_nodes (N04Coordinates (N04b (N04a hN03))) N04Root N04Cubic N04Transmission
   have hN05 : N05Statement := N05 hN04
   have hN06 : N06Statement := N06 hN05
   have hN07 : N07Statement := N07b (N07a hN06 hTame)
   have hN08 : N08Statement := N08 hN07 hS04
-  have hBranch : PointBranchStatement := Solve hN08 hTame
+  have hN10 : N10Statement := N09N10 hN08 hTame
+  have hBranch : PointBranchStatement := Solve hN10 hTame
   exact N12 hBranch hSpaces.2 hS03
 
 end ContinuousFlexibility.Blueprint

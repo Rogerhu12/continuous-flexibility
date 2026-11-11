@@ -18,4 +18,4 @@ theorem ScalarWeighted : S03WeightedStatement ∧ S04WeightedStatement ∧ S05We
 
 ## Source
 
-`paper/flexible-surface-rewrite/03-height-equation.tex` lines 287–376; `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 72–157.
+`paper/flexible-surface-readable/03-height-equation.tex` lines 406–543; `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–506.

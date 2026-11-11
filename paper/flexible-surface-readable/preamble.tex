@@ -1,0 +1,77 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=28mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{microtype}
+\usepackage{booktabs,longtable,tabularx,array}
+\usepackage{enumitem}
+\usepackage{graphicx,xcolor,tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,decorations.pathreplacing,patterns}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,
+ urlcolor=blue!45!black,hypertexnames=false]{hyperref}
+\usepackage{bookmark}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{3em}
+\setlength{\parskip}{3pt}
+\setcounter{tocdepth}{1}
+\setlist{itemsep=2pt,topsep=4pt,parsep=0pt}
+\setlist[enumerate,1]{label=\textup{(\roman*)}}
+
+% ---------------------------------------------------------------- theorems
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{maintheorem}{Theorem}
+\renewcommand{\themaintheorem}{\Alph{maintheorem}}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{setup}[theorem]{Standing assumptions}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% A visible but light marker for the steps of a long proof.
+\newcommand{\step}[1]{\par\smallskip\noindent\textit{Step #1.}\ }
+
+% ---------------------------------------------------------------- general
+\newcommand{\R}{\mathbb R}
+\newcommand{\T}{\mathbb T}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\av}[1]{\langle #1\rangle}
+\newcommand{\dd}{\,d}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Ai}{\operatorname{Ai}}
+\newcommand{\Bi}{\operatorname{Bi}}
+
+% ---------------------------------------------------------------- notation
+% Symbols whose letters would otherwise collide are given macros, so
+% that each has one meaning throughout the paper.
+\newcommand{\jn}{\mathsf j}             % band edges  j_n = C_* q_n A_n^{-1/2}
+\newcommand{\ea}{\mathsf a}             % coefficient exponent of sources
+\newcommand{\eb}{\mathsf b}             % coefficient exponent of outputs
+\newcommand{\el}{\mathsf l}             % intermediate loss exponent (Section 6)
+\newcommand{\bd}{\mathsf d}             % boundary-defining function y(1-y)
+\newcommand{\Dr}{\mathsf D}             % unit-scale radial derivative
+\newcommand{\Qint}{\mathsf Q}           % integral functional on sources
+\newcommand{\Odd}{\mathsf O}            % odd projection on the circle
+\newcommand{\Even}{\mathsf E}           % even projection on the circle
+\newcommand{\refl}{\mathsf s}           % reflection theta -> -theta
+\newcommand{\Ev}{\mathsf{Ev}}           % even substitution at a root
+\newcommand{\Od}{\mathsf{Od}}           % odd divided substitution at a root
+\newcommand{\mA}{\mathsf A}             % matching matrices of Section 6
+\newcommand{\mB}{\mathsf B}
+\newcommand{\mK}{\mathsf K}
+\newcommand{\mS}{\mathsf S}
+\newcommand{\bx}{\mathbf x}             % the state (u,nu,kappa,h_L)
+\newcommand{\bW}{\mathbf W}             % augmented canonical unknown
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\hypersetup{pdftitle={Smooth isometric bending of a closed sphere},
+ pdfauthor={Boyang Hu}}

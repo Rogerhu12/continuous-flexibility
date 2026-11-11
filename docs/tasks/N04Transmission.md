@@ -18,4 +18,4 @@ theorem N04Transmission : PhysicalTransmissionTarget
 
 ## Source
 
-`paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 706–715.
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1725–1755.

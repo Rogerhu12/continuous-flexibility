@@ -1,0 +1,403 @@
+\section{From an annular height to a flexible sphere}
+\label{sec:geometric-closure}
+
+This section proves that Theorem~\ref{thm:annulus-intro} implies
+Theorem~\ref{thm:main}. It uses no analysis beyond the classical
+theory of surfaces, and it fixes exactly what the remaining sections
+have to construct. The steps are as follows.
+\begin{itemize}
+\item An isometric embedding with prescribed height $z$ exists locally
+ if and only if the remainder metric $g-dz\otimes dz$ is positive and
+ flat (Lemma~\ref{lem:darboux-invariant}).
+\item On a disk whose rim is planar, a positive flat remainder metric
+ develops onto a round disk, and the development is the identity near
+ the rim (Proposition~\ref{lem:disk-development}).
+\item The resulting graph is closed by a cap which carries a marker
+ (Lemma~\ref{lem:fixed-cap}).
+\item Turning the graph inside the cap gives the family of
+ Theorem~\ref{thm:main} (Theorem~\ref{thm:geometric-closure}).
+\end{itemize}
+
+\subsection{Setting}
+
+Throughout the section $0<r_-<r_+$, and on the annulus
+$(r_-,r_+)\times\T$ with coordinates $(r,\theta)$ we consider a metric
+\begin{equation}\label{eq:intro-metric}
+ g=E(r)\,dr^2+r^2\,d\theta^2,\qquad E=1+w^2,
+\end{equation}
+where $w$ is a smooth function of $r$. This is the metric induced on
+the graph $(r\cos\theta,r\sin\theta,h(r))$ of a radial function with
+$h'=w$. We identify $(r,\theta)$ with the point
+$x=(r\cos\theta,r\sin\theta)$ of the plane, and write $D_\rho$ for the
+closed disk of radius $\rho$ centred at the origin.
+
+\begin{definition}\label{def:flat-endpoint}
+A smooth function $f$ on $(r_-,r_+)$, or on $(r_-,r_+)\times\T$, is
+\emph{flat} at an endpoint if it extends smoothly by zero across that
+endpoint; equivalently, every derivative of $f$ tends to zero there. A
+function $z$ has a \emph{constant extension} at an endpoint if $z$ has
+a limit $c$ there, independent of $\theta$, and $z-c$ is flat.
+\end{definition}
+
+If $w$ is flat and $z$ has constant extensions at both endpoints, we
+may extend $w$ by zero and $z$ by its limits, and regard them as
+defined on a slightly larger annulus. On the added collars $w=0$ and
+$z$ is constant. All statements of this section are therefore
+formulated for functions which are constant on open collars of the two
+ends.
+
+\subsection{Removing one coordinate from the metric}
+
+A map $F=(P,z)$ into $\R^2\times\R$ is isometric for $g$ exactly when
+\[
+ P^*g_{\R^2}=\bar g,\qquad \bar g:=g-dz\otimes dz .
+\]
+Thus $\bar g$ must be a positive definite flat metric, and for an
+embedding its planar development $P$ must be injective. Flatness is a
+scalar equation for $z$. For a symmetric $2$-tensor $B$ we write
+$\det_gB=\det(B_{ij})/\det(g_{ij})$, and $\nabla_g^2z$ is the Hessian
+of $z$ for the metric $g$.
+
+\begin{lemma}[Darboux equation]\label{lem:darboux-invariant}
+Let $z$ be a smooth function on a surface with metric $g$, and assume
+$\sigma:=|dz|_g^2<1$. Then $\bar g=g-dz\otimes dz$ is positive
+definite, and its curvature is
+\begin{equation}\label{eq:darboux-curvature}
+ K_{\bar g}=
+ \frac{K_g(1-\sigma)-\det_g\nabla_g^2z}{(1-\sigma)^2}.
+\end{equation}
+In particular $\bar g$ is flat if and only if
+\begin{equation}\label{eq:intro-darboux}
+ \det\nolimits_g\nabla_g^2z=K_g\,(1-|dz|_g^2).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+In a $g$-orthonormal coframe $(e^1,e^2)$ with $dz=\sqrt\sigma\,e^1$ we
+have $\bar g=(1-\sigma)\,e^1\otimes e^1+e^2\otimes e^2$. This is
+positive definite, and $|dz|_{\bar g}^2=\sigma/(1-\sigma)$.
+
+Consider the product $(\Sigma,\bar g)\times\R$ and in it the graph
+$x\mapsto(x,z(x))$. The metric induced on the graph is
+$\bar g+dz\otimes dz=g$. Its upward unit normal has vertical component
+$(1+|dz|_{\bar g}^2)^{-1/2}=\sqrt{1-\sigma}$. The vertical coordinate
+is a function on the product with vanishing Hessian, and its restriction
+to the graph is $z$; hence the intrinsic Hessian of $z$ is the second
+fundamental form $\mathrm{II}$ of the graph times the vertical
+component of the normal,
+\[
+ \nabla_g^2z=\sqrt{1-\sigma}\;\mathrm{II}.
+\]
+The sectional curvature of the product on the tangent plane of the
+graph is $K_{\bar g}$ times the squared area distortion of the
+horizontal projection, which is $1-\sigma$. The Gauss equation for the
+graph therefore reads
+\[
+ K_g=(1-\sigma)K_{\bar g}+\det\nolimits_g\mathrm{II}
+    =(1-\sigma)K_{\bar g}+(1-\sigma)^{-1}\det\nolimits_g\nabla_g^2z ,
+\]
+and solving for $K_{\bar g}$ gives \eqref{eq:darboux-curvature}.
+\end{proof}
+
+Equation~\eqref{eq:intro-darboux} is thus exactly the compatibility
+condition for the two horizontal coordinates once the vertical
+coordinate has been chosen. It guarantees local developments. The
+global reconstruction, including injectivity, is the subject of the
+next proposition; no local embedding theorem is used to bypass it.
+
+\subsection{Development onto a round disk}
+
+A flat metric on an annulus may have nontrivial holonomy around the
+hole. Filling the inner collar by a flat disk removes the holonomy,
+and the half-turn symmetry of $z$ forces the inner disk to stay
+centred.
+
+\begin{proposition}[Planar reconstruction]\label{lem:disk-development}
+Suppose that $w$ vanishes on open collars of both ends of
+$(r_-,r_+)$, that $z$ equals a constant $c_L$ on the inner collar and
+a constant $c_R$ on the outer one, and that
+$z(r,\theta+\pi)=z(r,\theta)$. Suppose that $\bar g=g-dz\otimes dz$ is
+positive definite and flat. Extend $w$ by $0$ and $z$ by $c_L$ to
+$r\le r_-$. Then there is an orientation-preserving diffeomorphism
+$P:D_{r_+}\to D_{r_+}$ such that
+\[
+ P^*g_{\R^2}=\bar g,
+ \qquad P=\id\ \text{on the outer collar},
+ \qquad P=R_\gamma\ \text{on the inner disk }D_{r_-}
+\]
+for some angle $\gamma$. Consequently $F=(P,z):D_{r_+}\to\R^3$ is an
+isometric embedding of $(D_{r_+},g)$, and its image is a graph over
+$D_{r_+}$.
+\end{proposition}
+
+\begin{proof}
+\step{1: a normalized development}
+On the inner disk and on the outer collar we have $w=0$ and $dz=0$, so
+there $\bar g=g=dr^2+r^2d\theta^2$ is the Euclidean metric in the
+coordinate $x$. In particular $\bar g$ is a smooth flat metric on the
+whole disk $D_{r_+}$, including its centre. Choose a global oriented
+$\bar g$-orthonormal coframe $\eta_1,\eta_2$ which equals $dx_1,dx_2$
+on the outer collar, and let $\alpha$ be its connection form:
+$d\eta_1=\alpha\wedge\eta_2$, $d\eta_2=-\alpha\wedge\eta_1$. Flatness
+means $d\alpha=0$, and since the disk is simply connected,
+$\alpha=d\psi$ with $\psi=0$ on the outer collar. The complex form
+$e^{i\psi}(\eta_1+i\eta_2)$ is then closed. Its primitive $P$,
+normalized to be the identity on the outer collar, is an
+orientation-preserving local isometry from $(D_{r_+},\bar g)$ to the
+plane.
+
+\step{2: the inner disk is rotated about its centre}
+Two orientation-preserving local isometries from a connected flat
+surface to the plane differ by a fixed Euclidean motion; this follows
+by differentiating their relative rotation. Let $I(x)=-x$ be the
+half-turn. It preserves $\bar g$ because $g$ is rotationally symmetric
+and $z\circ I=z$. Both $P$ and $-P\circ I$ are orientation-preserving
+local isometries equal to the identity on the outer collar, so they
+coincide: $P$ is odd. On the inner disk $\bar g$ is Euclidean, hence
+$P$ is a Euclidean motion there, and an odd Euclidean motion is a
+rotation $R_\gamma$ about the origin.
+
+\step{3: $P$ is a diffeomorphism of the disk}
+Extend $P$ by the identity outside $D_{r_+}$. The extension is a local
+diffeomorphism of $\R^2$ which is the identity outside a compact set;
+it is proper, hence a covering map, and it has one sheet because it is
+injective near infinity. So it is a diffeomorphism of $\R^2$, and
+since it fixes the exterior of the disk it maps $D_{r_+}$ onto itself.
+
+\step{4: conclusion}
+The map $F=(P,z)$ is injective because $P$ is, and its induced metric
+is $P^*g_{\R^2}+dz\otimes dz=\bar g+dz\otimes dz=g$. Its image is the
+graph of $z\circ P^{-1}$ over $D_{r_+}$.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.87,>=Stealth,font=\small]
+\begin{scope}
+\filldraw[fill=blue!6,draw=black] (0,0) circle (1.65);
+\filldraw[fill=green!12,draw=green!45!black] (0,0) circle (.58);
+\draw[dashed] (0,0) circle (1.42);
+\draw[->] (0,0)--(1.25,.55) node[right] {$r$};
+\node[below,align=center] at (0,-1.9) {intrinsic disk\\metric $g-dz\otimes dz$};
+\end{scope}
+\draw[->,thick] (2.1,0)--(3.9,0) node[midway,above] {$P$};
+\node[align=center] at (3,-.65) {flat,\\no holonomy};
+\begin{scope}[xshift=6cm]
+\filldraw[fill=blue!6,draw=black] (0,0) circle (1.65);
+\filldraw[fill=green!12,draw=green!45!black] (0,0) circle (.58);
+\draw[dashed] (0,0) circle (1.42);
+\draw[->] (.1,.1) arc[start angle=45,end angle=210,radius=.25];
+\node at (0,.95) {$P=\id$ near the rim};
+\node[below,align=center] at (0,-1.9) {planar image:\\the same round disk};
+\end{scope}
+\end{tikzpicture}
+\caption{The development $P$. Filling the inner collar removes the
+holonomy of the annulus; the normalization fixes the outer collar; the
+half-turn symmetry keeps the inner disk centred, so that $P$ only
+rotates it. Properness upgrades the local development to a
+diffeomorphism. The sketch records these constraints, not the
+pointwise distortion of $P$.}
+\label{fig:development}
+\end{figure}
+
+\subsection{A stationary cap which distinguishes shapes}
+
+The graph of Proposition~\ref{lem:disk-development} is horizontal near
+its boundary, so it can be closed by a cap. A rotationally symmetric
+cap would hide the relative rotation: the closed surfaces obtained for
+different $\tau$ would be congruent. We therefore put on the cap a
+marker which is recognized by every congruence.
+
+\begin{lemma}[The marked cap]\label{lem:fixed-cap}
+Let $S_0$ be a smooth graph over $D_{r_+}$ which is horizontal near its
+boundary. Then $S_0$ extends to a smooth embedded sphere $S_0\cup S_1$.
+The complementary cap $S_1$ can be chosen so that, for any given
+constant $K_{\max}$, it contains a point $p$ with
+\[
+ K(p)>K_{\max},\qquad K(p)>K(p')\ \text{ for every other point }p'
+ \text{ of }S_1,
+\]
+and with distinct principal curvatures at $p$.
+\end{lemma}
+
+We shall take $K_{\max}$ to be the maximum of the Gaussian curvature
+of $S_0$. Then $p$ is the unique point of the closed surface at which
+the Gaussian curvature is largest.
+
+\begin{proof}
+\step{1: the unmarked cap}
+Translate so that the boundary height is zero, and extend the
+horizontal collar to a radius $R>r_+$. Choose a smooth nondecreasing
+function $\chi:[0,1]\to[0,1]$ which is $0$ near $0$, is $1$ near $1$,
+and satisfies $\chi(1-t)=1-\chi(t)$. For $L>0$ consider the unit-speed
+meridian curve $s\mapsto(r(s),z(s))$, $0\le s\le L$, which starts at
+$(R,0)$ and satisfies
+\[
+ r'(s)=\cos(\pi\chi(s/L)),\qquad
+ z'(s)=-\sin(\pi\chi(s/L)).
+\]
+Its tangent turns from the outward horizontal direction to the inward
+one. By the symmetry of $\chi$ the curve stays at radius at least $R$
+and returns to radius $R$, and its height decreases by a positive
+constant times $L$. Take $L$ so large that the curve ends below the
+minimum of the graph $S_0$, and complete it by the horizontal segment
+from its endpoint to the axis. Rotating this meridian gives a smooth
+embedded surface which meets $S_0$ only along the attaching collar.
+
+\step{2: the marker}
+Place a bump in the horizontal annulus $r_+<r<R$. In Cartesian
+coordinates $(x,y)$ centred at a point of that annulus, choose
+constants $A,B>0$ with $A\ne B$, and $k,\rho>0$; put $\xi=Ax^2+By^2$
+and
+\[
+ u(x,y)=\frac{k}{2}\int_\xi^{\rho^2}
+       e^{-s/(\rho^2-s)}\,ds\quad(\xi<\rho^2),
+ \qquad u=0\quad(\xi\ge\rho^2).
+\]
+This function is smooth. With $\Xi=\xi/(\rho^2-\xi)$ one computes
+$u_x=-kAx\,e^{-\Xi}$ and $u_y=-kBy\,e^{-\Xi}$, and the Gaussian
+curvature of the graph of $u$ is
+\begin{equation}\label{eq:marker-curvature}
+ K=\frac{ABk^2e^{-2\Xi}\,(1-2\xi\,\Xi')}
+ {\bigl[1+k^2e^{-2\Xi}(A^2x^2+B^2y^2)\bigr]^2},
+ \qquad \Xi'=\frac{d\Xi}{d\xi}>0 .
+\end{equation}
+At the centre $K=ABk^2$. At every other point of the support the
+numerator is either nonpositive or strictly smaller than $ABk^2$, and
+the denominator is at least one. So the centre $p$ is the unique
+maximum of $K$ on the bump, with value $ABk^2$. First choose $k$ so
+that $ABk^2$ exceeds both $K_{\max}$ and the curvature of the unmarked
+cap. Then choose $\rho$ so small that the support $\{\xi<\rho^2\}$
+fits inside the horizontal annulus; the bump has height at most
+$k\rho^2/2$ and does not meet the rest of the surface. At $p$ the
+gradient of $u$ vanishes and its Hessian is $\diag(-kA,-kB)$, so the
+principal curvatures are $-kA$ and $-kB$ for the upward normal. They
+are distinct.
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=.8cm,y=.8cm,>=Stealth,font=\small]
+\draw[thick,blue!70!black]
+ (-3.3,0)--(-2.8,0) .. controls (-2.5,.1) and (-2.5,.9) .. (-1.5,.75)
+ .. controls (-1,.65) and (-.8,.65) .. (-.5,.65)--(.5,.65)
+ .. controls (.8,.65) and (1,.65) .. (1.5,.75)
+ .. controls (2.5,.9) and (2.5,.1) .. (2.8,0)--(3.3,0);
+\draw[thick,gray!75] (3.3,0)--(4,0)
+ .. controls (5.5,0) and (5.5,-2) .. (4,-2)--(-4,-2)
+ .. controls (-5.5,-2) and (-5.5,0) .. (-4,0)--(-3.3,0);
+\fill[red!75!black] (3.7,0) circle (2.5pt);
+\draw[dashed,gray] (-2.8,0)--(-2.8,-2);
+\draw[dashed,gray] (2.8,0)--(2.8,-2);
+\node[above] at (0,1.4) {constant inner disk};
+\draw[->] (0,1.3)--(0,.7);
+\node[above] at (-3.3,.3) {flat collar};
+\node[above] at (3.8,.65) {marker};
+\draw[->,red!75!black] (3.8,.6)--(3.7,.1);
+\node[below] at (0,-2.1) {fixed cap, below the entire moving graph};
+\end{tikzpicture}
+\caption{A meridional sketch of the closed surface. The blue graph
+depends on the angle; all its rotated copies stay inside the central
+cylinder and above the bottom of the cap. The marker lies in the
+stationary horizontal extension of the collar.}
+\label{fig:geometric-closure}
+\end{figure}
+
+\subsection{The annulus implies the theorem}
+
+\begin{theorem}[Geometric closure]\label{thm:geometric-closure}
+Let $g$ be a metric of the form \eqref{eq:intro-metric} and let $z$ be
+a smooth function on the annulus. Suppose that
+\begin{enumerate}
+\item $w=0$ on open collars of both ends, and $z$ is constant on each
+ of these collars;
+\item $z(r,\theta+\pi)=z(r,\theta)$, and $z$ is not independent of
+ $\theta$;
+\item $g-dz\otimes dz$ is positive definite and flat.
+\end{enumerate}
+Then all the conclusions of Theorem~\ref{thm:main} hold.
+\end{theorem}
+
+\begin{proof}
+\step{1: the family}
+Let $P$ and $F=(P,z)$ be given by
+Proposition~\ref{lem:disk-development}, and attach to the graph
+$F(D_{r_+})$ the marked cap of Lemma~\ref{lem:fixed-cap}, with
+$K_{\max}$ the maximum of the Gaussian curvature of $F(D_{r_+})$. Let
+$\Sigma$ be the resulting sphere, with its induced metric $g_\Sigma$.
+On the disk put
+\[
+ F_\tau=R_{-2\pi\tau}\circ F\circ\varrho_{2\pi\tau},\qquad
+ \varrho_\vartheta(r,\theta)=(r,\theta+\vartheta),
+\]
+and let $F_\tau$ be the inclusion on the cap. The intrinsic rotation
+$\varrho_\vartheta$ preserves $g$, so each $F_\tau$ is isometric on
+the disk. On the outer collar $F(x)=(x,c_R)$, and on the inner disk
+$F(x)=(R_\gamma x,c_L)$; in both cases the two rotations cancel and
+$F_\tau=F$. Hence $F_\tau$ agrees with the inclusion near the rim and
+is smooth on $\Sigma$, jointly in the point and in $\tau$, and
+$F_{\tau+1}=F_\tau$. The image $F_\tau(D_{r_+})=R_{-2\pi\tau}F(D_{r_+})$
+is a graph over the same round disk with the same range of heights, so
+it meets the cap only along the collar: $F_\tau$ is an embedding. The
+inner disk and the cap are fixed pointwise.
+
+\step{2: the disk images are not all equal}
+Suppose $R_\vartheta F(D_{r_+})=F(D_{r_+})$ for every $\vartheta$. Then
+$F^{-1}\circ R_\vartheta\circ F$ is an isometry of $(D_{r_+},g)$, and
+on the outer collar it equals $\varrho_\vartheta$. An isometry of a
+connected Riemannian manifold is determined by its value and
+differential at one point, so $F^{-1}R_\vartheta F=\varrho_\vartheta$
+on the whole disk. Comparing the vertical components of
+$R_\vartheta F=F\varrho_\vartheta$ gives
+$z(r,\theta+\vartheta)=z(r,\theta)$ for all $\vartheta$, contrary to
+assumption~(ii).
+
+\step{3: the closed images are not all congruent}
+The Gaussian curvature of $F_\tau(\Sigma)$ is determined by
+$g_\Sigma$, so by the choice of the marker the point $p$ is, for every
+$\tau$, the unique point of $F_\tau(\Sigma)$ of largest Gaussian
+curvature; it lies on the cap and is the same point of $\R^3$ for all
+$\tau$. Let $\Phi$ be a Euclidean isometry mapping $F_0(\Sigma)$ onto
+$F_\tau(\Sigma)$. It preserves the Gaussian curvature, so
+$\Phi(p)=p$. It maps the bounded component of the complement to the
+bounded component, so it preserves the outward normal at $p$, and then
+it preserves each of the two principal directions at $p$, which are
+well defined because the principal curvatures are distinct and which
+are the same for all $\tau$ because the cap is fixed. There are at
+most four such isometries. Thus, if all the images were congruent, the
+family $\tau\mapsto F_\tau(\Sigma)$ would be a continuous family of
+compact sets taking values in a finite set, hence constant. The part
+of $F_\tau(\Sigma)$ inside the closed cylinder over $D_{r_+}$ and above
+the bottom of the cap is $F_\tau(D_{r_+})$, so the disk images would
+all be equal, which Step~2 excludes.
+
+\step{4: the invariants}
+The area is constant because the metric is. The moving part
+$F_\tau(D_{r_+})$ is a rotated copy of $F(D_{r_+})$ and the rest of
+the surface is stationary, so the integral of the oriented mean
+curvature is constant. Finally let $Z_\tau$ be the height of
+$F_\tau(D_{r_+})$ as a graph over $D_{r_+}$, and let $c_B$ be the
+height of the bottom of the cap. The part of the enclosed volume
+inside the cylinder over $D_{r_+}$ is
+\[
+ \int_{D_{r_+}}(Z_\tau(y)-c_B)\,dy
+ =\int_{D_{r_+}}(Z_0(R_{2\pi\tau}y)-c_B)\,dy
+ =\int_{D_{r_+}}(Z_0(y)-c_B)\,dy,
+\]
+and the remaining volume is bounded by the stationary part of the
+surface.
+\end{proof}
+
+\begin{proof}[Proof that Theorem~\ref{thm:annulus-intro} implies
+Theorem~\ref{thm:main}]
+Let $w$ and $z$ be as in Theorem~\ref{thm:annulus-intro}. Extend $w$
+by zero and $z$ by its two limiting constants to a slightly larger
+annulus. The extended functions are smooth, and on the added collars
+$g-dz\otimes dz=g$ is Euclidean, hence positive and flat. All the
+hypotheses of Theorem~\ref{thm:geometric-closure} hold.
+\end{proof}
+
+What remains is therefore precise: construct one nonradial height on
+an annulus with a positive flat remainder metric and with constant
+extensions at both ends. The family of embeddings then follows without
+any further existence argument.

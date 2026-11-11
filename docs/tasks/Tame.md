@@ -2,7 +2,7 @@
 
 ## Problem
 
-Tame calculus on projective limits of Banach scales and Hamilton's theorem on families of inverses.
+Tame calculus on projective limits of Banach scales and Hamilton's theorem on families of inverses (Theorem 9.3).
 
 Prove `ContinuousFlexibility.Blueprint.Tame` in `src/ContinuousFlexibility/Blueprint/Tame.lean`:
 
@@ -18,4 +18,4 @@ theorem Tame : H01Statement ∧ H02Statement
 
 ## Source
 
-`paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 102–150; `paper/flexible-surface-rewrite/08-stable-inverse.tex` lines 523–550.
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–354; `paper/flexible-surface-readable/09-solving-the-equation.tex` lines 251–273.

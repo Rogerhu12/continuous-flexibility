@@ -1,0 +1,1754 @@
+\section{A geometry that stays fixed during the iteration}
+\label{sec:fixed-geometry}
+\label{sec:rosen-physical-grading}
+\label{sec:optical-graph-height}
+\label{sec:pp-positive-exact-poisson}
+
+\subsection{Overview of Part~\ref{part:nonlinear}}
+\label{subsec:part3-overview}
+
+We now solve the nonlinear equation $\mathcal F_q(w,u)=0$ near the
+reference pair $(w_*,\Phi_*)$, where
+\[
+ \Phi_*=\phi_*\,e_2=\phi_*\sqrt2\cos2\theta,\qquad
+ \mathscr L_{w_*}\Phi_*=0,\qquad \ell_*\Phi_*=1 .
+\]
+The inverse of $\mathscr L_{w_*}$ constructed in
+Part~\ref{part:reference} is useful only if the linearization at a
+nearby state can be compared with it. Two features of the
+linearization would normally move with the state: the circles on which
+it changes type, and the angular positions at which characteristics
+arrive after crossing a negative component. The first was fixed in
+Lemma~\ref{lem:type-completion} by a correction proportional to the
+residual. The second is fixed in the same spirit, at the price of
+enlarging the problem.
+
+\paragraph{Unknowns.}
+The profile is allowed to vary in a controlled family,
+\begin{equation}\label{eq:full-height-metric-controls}
+ w=w_*\exp\Bigl(\nu\chi_*+\sum_m\kappa_m\chi_m\Bigr),
+\end{equation}
+where $\chi_*$ is the function of
+Proposition~\ref{prop:rad-fixed-theorem}(iii) and, for every negative
+component $m$, $\chi_m$ is a bump supported inside that component
+(Lemma~\ref{lem:quantitative-optical-controls}). In addition every
+negative component carries a circle diffeomorphism $h_{L,m}$, a
+\emph{chart} of its left boundary circle. The \emph{state} is
+$\bx=(u,\nu,\kappa,h_L)$ with $\kappa=(\kappa_m)_m$ and
+$h_L=(h_{L,m})_m$; see Table~\ref{tab:unknowns}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabularx}{\linewidth}{@{}l l Y@{}}
+\toprule
+Unknown & Lives in & Role\\
+\midrule
+$u$ & $\Phi_*+\ker\ell_*\subset\mathcal X_\beta$ &
+ The height is $z=h+qu$ with $h'=w$.\\
+$\nu$ & $\R$ &
+ Amplitude of the metric control $\chi_*$; removes the obstruction in
+ the second angular mode.\\
+$\kappa=(\kappa_m)$ & $\mathcal K_\beta$ &
+ Amplitudes of the metric controls $\chi_m$; adjust the mean travel
+ angle of each negative component.\\
+$h_L=(h_{L,m})$ & $\id+\mathcal Z_{\beta,\mathrm{odd}}$ &
+ Charts of the left boundary circles; straighten the return maps.\\
+\bottomrule
+\end{tabularx}
+\caption{The unknowns of the nonlinear problem. The spaces are defined
+in Definition~\ref{def:readable-physical-grading}; $q$ is a parameter.}
+\label{tab:unknowns}
+\end{table}
+
+\paragraph{Equations.}
+There are two. The first is the height equation
+$\mathcal A:=\mathcal F_q(w,u)=0$. The second, $\mathfrak e=0$, is
+imposed by us: it says that on every negative component the two
+characteristic return maps of the linearization, read in the charts,
+are the rotations by $\pm T_m$, where $T_m$ is the travel angle of the
+reference profile. The \emph{return residual} $\mathfrak e_m$ is an
+even function on the circle. Its mean is controlled by the number
+$\kappa_m$, and its oscillating part by the odd function
+$h_{L,m}-\id$; solving for the latter involves the small divisors
+$\sin(jT_m)$ of Proposition~\ref{prop:rad-fixed-theorem}(ii).
+
+\paragraph{The corrected linearization.}
+The derivative of $\mathcal A$ with respect to $u$ will be written as
+\[
+ D_u\mathcal A=\widehat L_{\bx}
+ +(\text{a term proportional to }\mathcal A)
+ +(\text{a term proportional to }\mathfrak e),
+\]
+where $\widehat L_{\bx}$ changes type exactly at the turning circles of
+$w_*$ and has exactly the return maps $R_{\pm T_m}$ in the charts.
+After a change of coordinates all operators $\widehat L_{\bx}$ act on
+one set of cylinders with one set of transmission conditions,
+independent of $\bx$. This makes the comparison with the reference
+operator possible.
+
+\paragraph{Plan.}
+This section introduces the weighted spaces
+(Section~\ref{subsec:spaces}), the controls and the neighbourhood of
+the reference state on which everything is defined
+(Sections~\ref{subsec:root-geometry}--\ref{subsec:neighbourhood}), the
+return residual and the operator $\widehat L$
+(Section~\ref{subsec:return-correction}), and the coordinates
+(Sections~\ref{subsec:root-coordinate}--\ref{subsec:positive-crossing}).
+Section~\ref{sec:stable-inverse} inverts $\widehat L_{\bx}$,
+Section~\ref{sec:solving-the-equation} solves the coupled system by the
+Nash--Moser method, and Section~\ref{sec:final-proof} concludes.
+
+The construction involves infinitely many components, and one
+smallness condition has to serve for all of them. The room for this
+comes from a simple fact, used again and again: the deformation
+decays like $H^\beta$, which is far smaller than any power of the
+coefficient allowance, while the reference profile decays only like
+$e^{-n^{5/2}}$.
+
+\subsection{Weights and function spaces}
+\label{subsec:spaces}
+
+\paragraph{Continuous weights.}
+Let $d_\partial$ be the distance to the nearer endpoint. Near that
+endpoint put, with the constant $d_0$ of
+Lemma~\ref{lem:tail-flat},
+\begin{equation}\label{eq:readable-physical-weights}
+ x_\partial=\sqrt{\log\frac{d_0}{d_\partial}},\quad
+ H=e^{-2x_\partial^3/3},\quad
+ E_0=e^{1+x_\partial^{5/2}\log(e+x_\partial)},\quad
+ M=e^{1+x_\partial^{5/2}\log^2(e+x_\partial)},
+\end{equation}
+and extend these functions smoothly and positively through the middle
+of the annulus. By \eqref{eq:geometry-endpoint-distance},
+$x_\partial=n+O(1)$ on cell $n$. Hence $H$ agrees with $H_n$, and
+$E_0$ with $\mathcal E_n$, up to coefficient powers, and $M$ is the
+weight \eqref{eq:M-weight}. For every fixed $A$ and $\epsilon>0$,
+\begin{equation}\label{eq:full-material-envelope}
+ E_0^A\le C_A\,M,\qquad H^\epsilon M^A\le C_{A,\epsilon}.
+\end{equation}
+The extra logarithm in $M$ is deliberate. However many coefficients
+appear after differentiating a fixed expression, their \emph{whole
+product} is bounded by a power of $E_0$ and thus costs one power of
+$M$, a cost that does not grow with the number of derivatives. And
+the cubic exponent of $H$ still dominates every power of $M$.
+
+\paragraph{A unit-scale derivative.}
+Near the ends put
+\[
+ \ell=\frac{d_\partial}{1+x_\partial},\qquad
+ d\varrho=\frac{dr}{\ell},\qquad \Dr=\partial_\varrho=\ell\,\partial_r ,
+\]
+with a positive extension in between. The variable $\varrho$ ranges
+over $\R$, and
+\[
+ |\Dr x_\partial|=\frac1{2x_\partial(1+x_\partial)},\qquad
+ |\Dr\log H|=\frac{x_\partial}{1+x_\partial}.
+\]
+All $\Dr$-derivatives of positive order of $\log H$, $\log M$ and
+$\log\ell$ are bounded: in the variable $\varrho$ the weights vary on
+the unit scale. An ordinary radial derivative $\partial_r$ costs a
+factor bounded by a power of $E_0$.
+
+\paragraph{The exponent $\beta$.}
+We fix $\beta=\tfrac34$. What matters is
+\begin{equation}\label{eq:beta-choice}
+ \tfrac12<\beta<1 .
+\end{equation}
+The upper inequality leaves room for two neighbouring exponents
+$\beta\pm\epsilon$ in $(0,1)$, at which the reference inverse is
+available. The lower inequality makes a product of two quantities of
+size $H^\beta$ smaller than $H$; this gives the improved estimate for
+the metric in Theorem~\ref{thm:new-annular-height}.
+
+\begin{definition}[Spaces of heights, sources and circle data]
+\label{def:readable-physical-grading}
+All functions are real, even in $\theta$ and $\pi$-periodic. For
+$\gamma>0$ and integers $s\ge0$ put
+\begin{equation}\label{eq:full-physical-norm}
+ \|u\|_{\gamma,s}^2
+ =\sum_{a+b+c\le s}\bigl\|M^c\,\Dr^a\partial_\theta^b
+                  (H^{-\gamma}u)\bigr\|_{L^2(d\varrho\,d\theta)}^2 .
+\end{equation}
+\begin{itemize}
+\item $\mathcal X^0_\gamma$ is the space of functions with all these
+ norms finite.
+\item $\mathcal X_\gamma=\mathcal X^0_\gamma\oplus\R\chi_L$, where
+ $\chi_L$ is a fixed function of $r$, equal to one near the left
+ endpoint and to zero near the right one, whose derivative is
+ supported in a compact subset of a positive component. The
+ coefficient of $\chi_L$ is the difference of the two endpoint values
+ of a height.
+\item $\mathcal Y_\beta=\{f\in\mathcal X^0_\beta:\Qint f=0\}$ is the
+ space of compatible sources, where
+ $\Qint f=\int_{r_-}^{r_+}\av f\,dr$.
+\item For a sequence $a=(a_m)$ of functions on the circle, one for
+ each negative component,
+ \begin{equation}\label{eq:weak-circle-spaces}
+  \|a\|_{\mathcal Z_{\gamma,s}}^2
+  =\sum_m\sum_{b+c\le s}M_m^{2c}H_m^{-2\gamma}
+                    \|\partial_\theta^b a_m\|_{L^2(\T)}^2 ,
+ \end{equation}
+ and $\mathcal Z_\gamma$ is the space with all these norms finite.
+ Its subspace of sequences of constants is $\mathcal K_\gamma$, and
+ $\mathcal Z_{\gamma,\mathrm{odd}}$, $\mathcal Z_{\gamma,\mathrm{even}}$
+ are its subspaces of odd and of even functions.
+\end{itemize}
+When no exponent is displayed, a norm of a height or of a source is
+the one with $\gamma=\beta$.
+\end{definition}
+
+Note that the index $s$ counts derivatives and powers of $M$
+together. All these spaces consist of smooth functions which are flat
+at the endpoints; the exponent $\gamma$ only measures how fast they
+decay.
+
+\paragraph{Tame spaces and tame maps.}
+We use the terminology of \cite[Part~II]{Hamilton1982}. A
+\emph{graded} Fr\'echet space is one whose topology is defined by an
+increasing sequence of norms $\|\cdot\|_0\le\|\cdot\|_1\le\cdots$. A
+linear map $L$ between graded spaces is \emph{tame} if there is a
+number $d$, its \emph{loss}, with $\|Lf\|_s\le C_s\|f\|_{s+d}$ for
+all $s$. For a Banach space $B$, let $\Sigma(B)$ be the space of
+sequences $(f_k)_{k\ge0}$ in $B$ for which all the norms
+$\|f\|_s=\sum_ke^{sk}\|f_k\|_B$ are finite. A graded space $F$ is
+\emph{tame} if there are tame linear maps $J:F\to\Sigma(B)$ and
+$P:\Sigma(B)\to F$ with $PJ=I$. A map $\mathcal P$ on an open subset
+of a graded space is \emph{tame} if it is continuous and every point
+has a neighbourhood on which
+$\|\mathcal P(f)\|_s\le C_s(1+\|f\|_{s+d})$ for all $s$; it is
+\emph{smooth tame} if it is smooth and all its derivatives are tame.
+Since a derivative of order $k$ is linear in its $k$ increments, this
+amounts to estimates of the form
+\begin{equation}\label{eq:tame-derivative-shape}
+ \bigl\|D^k\mathcal P(f)[h_1,\ldots,h_k]\bigr\|_s
+ \le C_{s,k}\Bigl[\,\sum_{i}\|h_i\|_{s+d_k}\prod_{j\ne i}\|h_j\|_{b}
+       +(1+\|f\|_{s+d_k})\prod_{j}\|h_j\|_{b}\Bigr]
+\end{equation}
+with a fixed low order $b$. \emph{In every term only one factor
+carries the high order.} All estimates of this part have this shape.
+Two features will be checked each time: the loss does not depend on
+$s$, and the neighbourhood is defined by norms of one fixed order.
+
+The following elementary lemma produces estimates of this shape. It
+replaces the usual interpolation inequalities for sup norms by
+inequalities for the Fourier transform, which can be verified in a
+few lines.
+
+\begin{lemma}[Estimates with one high factor]\label{lem:one-high-factor}
+Let $\mathsf C$ be the circle $\T$ or the cylinder $\R\times\T$, let
+$\|\cdot\|_{H^s}$ denote the Sobolev norms on $\mathsf C$, and let
+$|v|_{\mathcal F}=\|\widehat v\|_{L^1}$ be the $L^1$ norm of the
+Fourier transform. Then
+$\sup|v|\le|v|_{\mathcal F}\le C\,\|v\|_{H^b}$, where $b=1$ on the
+circle and $b=2$ on the cylinder.
+\begin{enumerate}
+\item \textup{(Interpolation.)} If $k\le i\le m$ and the point $(i,j)$
+ lies on the segment from $(k,l)$ to $(m,n)$, then
+ \[
+  \|f\|_{H^i}\,\|g\|_{H^j}
+  \le\|f\|_{H^k}\,\|g\|_{H^l}+\|f\|_{H^m}\,\|g\|_{H^n}.
+ \]
+\item \textup{(Products.)} If $\alpha_1,\ldots,\alpha_k$ are
+ multi-indices with $|\alpha_1|+\cdots+|\alpha_k|\le s$, then
+ \[
+  \Bigl\|\prod_{i=1}^k\partial^{\alpha_i}v_i\Bigr\|_{L^2}
+  \le C_k\sum_{i=1}^k\|v_i\|_{H^s}\prod_{j\ne i}|v_j|_{\mathcal F}.
+ \]
+ In particular
+ $\|v_1v_2\|_{H^s}\le C_s\bigl(\|v_1\|_{H^s}|v_2|_{\mathcal F}
+ +|v_1|_{\mathcal F}\|v_2\|_{H^s}\bigr)$.
+\item \textup{(Functions.)} Let $\Phi$ be smooth on an interval which
+ contains the closure of the range of a real function $v$. Then
+ $\|\Phi(v)-\Phi(0)\|_{H^s}\le C_s\,\|v\|_{H^s}$ for every $s$,
+ where $C_s$ depends only on $|v|_{\mathcal F}$ and on the suprema of
+ $|\Phi'|,\ldots,|\Phi^{(s)}|$ over the range of $v$. The same holds
+ for a smooth function of several real functions.
+\item \textup{(Composition and inversion on the circle.)} Let $h$ be
+ the lift of a diffeomorphism of the circle with $h'\ge c_0>0$. Then,
+ for $s\ge1$,
+ \[
+  \|u\circ h\|_{H^s}
+  \le C_s\bigl(\|u\|_{H^s}+\|u\|_{H^3}\,\|h'-1\|_{H^{s-1}}\bigr),
+  \qquad
+  \|(h^{-1})'-1\|_{H^{s-1}}\le C_s\,\|h'-1\|_{H^{s-1}},
+ \]
+ where $C_s$ depends only on $c_0$ and $\|h'-1\|_{H^3}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The first assertion is the Cauchy--Schwarz inequality for
+$\widehat v=\langle\zeta\rangle^{-b}\cdot\langle\zeta\rangle^b\widehat v$,
+since $\langle\zeta\rangle^{-2b}$ is summable over the frequencies of
+$\mathsf C$ exactly when $2b$ exceeds its dimension.
+
+(i) Let $i=\vartheta k+(1-\vartheta)m$; then
+$j=\vartheta l+(1-\vartheta)n$. By H\"older's inequality for the
+Fourier transform,
+$\|f\|_{H^i}\le\|f\|_{H^k}^{\vartheta}\|f\|_{H^m}^{1-\vartheta}$, and
+likewise for $g$. The product of the two right sides is
+$X^\vartheta Y^{1-\vartheta}\le X+Y$ with
+$X=\|f\|_{H^k}\|g\|_{H^l}$ and $Y=\|f\|_{H^m}\|g\|_{H^n}$.
+
+(ii) The Fourier transform of the product at the frequency $\zeta$ is
+bounded by the integral of
+$\prod_i|\zeta_i|^{|\alpha_i|}|\widehat v_i(\zeta_i)|$ over
+$\zeta_1+\cdots+\zeta_k=\zeta$. Since
+$\langle\zeta_i\rangle\ge1$ and the exponents add up to at most $s$,
+\[
+ \prod_i|\zeta_i|^{|\alpha_i|}
+ \le\max_i\langle\zeta_i\rangle^{s}
+ \le\sum_i\langle\zeta_i\rangle^{s}.
+\]
+So the Fourier transform of the product is bounded by a sum of $k$
+convolutions, in each of which one factor is
+$\langle\zeta\rangle^s|\widehat v_i|\in L^2$ and the others are
+$|\widehat v_j|\in L^1$. Young's inequality and Plancherel's theorem
+give the claim.
+
+(iii) A derivative $\partial^\alpha$ of order between $1$ and $s$ of
+$\Phi(v)$ is a sum of terms
+$\Phi^{(m)}(v)\prod_{i=1}^m\partial^{\alpha_i}v$ with
+$\alpha_1+\cdots+\alpha_m=\alpha$; bound $\Phi^{(m)}(v)$ by its
+supremum and apply (ii). In $L^2$,
+$|\Phi(v)-\Phi(0)|\le\sup|\Phi'|\,|v|$.
+
+(iv) Change of variables gives
+$\|f\circ h\|_{L^2}\le c_0^{-1/2}\|f\|_{L^2}$. For $s\le3$ the chain
+rule expresses the derivatives of $u\circ h$ through
+$u^{(m)}\circ h$, $m\le s$, and bounded functions, which proves the
+first estimate without its second term. Let $s\ge4$ and assume the
+estimate for $s-1$. Since $(u\circ h)'=(u'\circ h)\,h'$, part~(ii) on
+the circle gives
+\[
+ \|u\circ h\|_{H^s}
+ \le C\bigl(\|u\|_{L^2}+\|u'\circ h\|_{H^{s-1}}\,\|h'\|_{H^1}
+ +\|u'\circ h\|_{H^1}\,(1+\|h'-1\|_{H^{s-1}})\bigr).
+\]
+By the induction hypothesis
+$\|u'\circ h\|_{H^{s-1}}\le C(\|u\|_{H^s}+\|u\|_{H^4}\|h'-1\|_{H^{s-2}})$,
+and by (i), applied to the points $(3,s-1)$, $(4,s-2)$ and $(s,2)$,
+\[
+ \|u\|_{H^4}\,\|h'-1\|_{H^{s-2}}
+ \le\|u\|_{H^3}\,\|h'-1\|_{H^{s-1}}+\|u\|_{H^s}\,\|h'-1\|_{H^{2}} .
+\]
+This proves the first estimate. For the inverse $\iota=h^{-1}$ we
+have $\iota'-1=G\circ\iota$ with $G=-(h'-1)/h'$, a smooth function of
+$h'-1$. By the chain rule $\iota'$ is bounded below by $1/\sup h'$
+and $\|\iota'-1\|_{H^3}$ is bounded in terms of $c_0$ and
+$\|h'-1\|_{H^3}$; and
+$\|G\|_{H^k}\le C\|h'-1\|_{H^k}$ by (iii). The first estimate, with
+$\iota$ in the place of $h$, gives
+\[
+ \|\iota'-1\|_{H^{s-1}}
+ \le C\bigl(\|G\|_{H^{s-1}}+\|G\|_{H^3}\,\|\iota'-1\|_{H^{s-2}}\bigr),
+\]
+and induction on $s$ proves the second estimate.
+\end{proof}
+
+Functions on a cylinder with boundary, such as the pieces of
+Section~\ref{sec:stable-inverse}, are first extended to
+$\R\times\T$ by a fixed extension operator which is bounded in all
+Sobolev norms; parts (i)--(iii) then apply to them as well.
+
+\begin{lemma}[Flows on the circle]\label{lem:circle-flow}
+Let $G(t,\theta)$ be smooth and periodic in $\theta$, and let
+$\Theta$ solve $\partial_t\Theta=G(t,\Theta)$ for $0\le t\le1$ with
+$\Theta(0,\theta)=\theta$. Put
+$\Lambda_s=\int_0^1\|G_\theta(t,\cdot)\|_{H^s}\,dt$. Then
+\[
+ \Theta_\theta=\exp\int_0^tG_\theta(\tau,\Theta(\tau,\theta))\,d\tau
+ \in\bigl[e^{-C\Lambda_1},e^{C\Lambda_1}\bigr],
+ \qquad
+ \sup_t\|\Theta_\theta(t,\cdot)-1\|_{H^s}\le C_s\,\Lambda_s ,
+\]
+where $C_s$ depends only on $\Lambda_4$. If $G_*$ does not depend on
+$\theta$ and $\Theta_*=\theta+\int_0^tG_*$ is its flow, then
+$\sup_t\|\Theta-\Theta_*\|_{H^s}
+\le C_s\int_0^1\|(G-G_*)(t,\cdot)\|_{H^s}\,dt$, with $C_s$ depending
+only on $\Lambda_4$ and on $\int_0^1\|(G-G_*)(t,\cdot)\|_{H^3}\,dt$.
+\end{lemma}
+
+\begin{proof}
+The formula for $\Theta_\theta$ follows from
+$\partial_t\Theta_\theta=(G_\theta\circ\Theta)\,\Theta_\theta$, and
+the bounds from $|G_\theta|\le C\|G_\theta\|_{H^1}$. The derivatives
+$\partial_\theta^k\Theta$, $2\le k\le4$, solve linear equations with
+the same integrating factor, whose sources are polynomials in the
+lower derivatives and in $(\partial_\theta^mG)\circ\Theta$,
+$2\le m\le4$; hence they are bounded in terms of $\Lambda_4$. Now let
+$y=\Theta_\theta-1$, so that
+$\partial_ty=(G_\theta\circ\Theta)(1+y)$. By
+Lemma~\ref{lem:one-high-factor}(ii) and~(iv), with the low norms just
+bounded,
+\[
+ \|\partial_ty\|_{H^s}
+ \le C_s\bigl(\|G_\theta(t,\cdot)\|_{H^s}
+ +\|G_\theta(t,\cdot)\|_{H^3}\,\|y\|_{H^s}\bigr),
+\]
+and Gronwall's inequality gives the second assertion. For the last
+one, $\partial_t(\Theta-\Theta_*)=(G-G_*)(t,\Theta)$; apply
+Lemma~\ref{lem:one-high-factor}(iv) and integrate.
+\end{proof}
+
+The point of the last statement is that a flow with a large speed
+which does not depend on the angle, as for the reference profile, does
+not enter the constants: only the angular derivative of the speed
+does.
+
+\begin{lemma}[Calculus and flat extension]
+\label{prop:full-physical-tame}
+The spaces of Definition~\ref{def:readable-physical-grading}, graded by
+$s$, are tame Fr\'echet spaces in the sense of
+\cite{Hamilton1982}. Products, differential expressions of fixed
+order, and reciprocals of coefficients, after their reference factors
+have been separated, are smooth tame maps on neighbourhoods on which
+the remaining denominators are bounded below; the loss of derivatives
+does not depend on the order $s$ of the output. Every element of
+$\mathcal X^0_\gamma$, $\gamma>0$, extends smoothly by zero across
+both endpoints, and so do its derivatives with respect to parameters.
+\end{lemma}
+
+\begin{proof}
+\step{1: tameness}
+Write $v=H^{-\gamma}u$. Choose functions $\phi_i(\varrho)$, $i\in\Z$,
+with bounded derivatives, finite overlap and $\sum_i\phi_i^2=1$,
+supported on intervals of unit length. Since $\log M$ has bounded
+derivatives, $M\asymp M_i:=M(i)$ on the support of $\phi_i$, and the
+norm of $v$ is equivalent to
+\[
+ \sum_{i,j}\int(M_i^2+\xi^2+j^2)^s\,
+                    |\widehat{\phi_iv}(\xi,j)|^2\,d\xi .
+\]
+Let $\omega_i=(M_i^2+\xi^2+j^2)^{1/2}$. A smooth partition
+$\zeta_k$ in the variable $\log\omega_i$ gives maps $J$ and $P$ with
+$PJ=I$ to and from the space of exponentially decreasing sequences in
+$\ell^2_iL^2_\xi\ell^2_j$: namely
+$(Jv)_{k,i}=\zeta_k(\omega_i)\,\widehat{\phi_iv}$ and
+$Pb=\sum_i\phi_i\,\mathcal F^{-1}\sum_k\widetilde\zeta_k(\omega_i)\,b_{k,i}$,
+where $\widetilde\zeta_k$ equals one on the support of $\zeta_k$. By
+the Cauchy--Schwarz inequality in $k$,
+$\|Jv\|_s\le C_s\|v\|_{s+1}$, and by finite overlap
+$\|Pb\|_s\le C_s\|b\|_s$. This exhibits the space as a tame direct
+summand of a model space, and provides smoothing operators. Parity
+projections preserve the construction, and the scalar multiple of
+$\chi_L$ is a finite-dimensional summand. If $\psi$ is compactly
+supported with $\Qint\psi=1$, then $f\mapsto f-\psi\,\Qint f$ is a
+projection onto $\mathcal Y_\beta$; the functional $\Qint$ is
+continuous because it is the pairing of $H^{-\beta}f$ with the square
+integrable function $H^\beta\ell$. The same Fourier construction
+applies to the spaces of circle data.
+
+\step{2: products}
+Let $v_k=H^{-\gamma_k}u_k$, $k=1,2$, so that
+$H^{-\gamma_1-\gamma_2}u_1u_2=v_1v_2$. On the support of $\phi_i$ the
+norm of order $s$ of $v$ is equivalent to
+$\sum_{c\le s}M_i^c\,\|\phi_iv\|_{H^{s-c}}$. Write
+$\phi_iv_1v_2=(\phi_iv_1)(\widetilde\phi_iv_2)$ with a cutoff
+$\widetilde\phi_i$ equal to one on the support of $\phi_i$, apply
+Lemma~\ref{lem:one-high-factor}(ii) on the cylinder, and attach the
+power $M_i^c$ to the factor of high order. Summing the squares over
+$i$, with the low factor estimated uniformly in $i$, gives
+\begin{equation}\label{eq:weighted-product}
+ \|u_1u_2\|_{\gamma_1+\gamma_2,s}
+ \le C_s\bigl(\|u_1\|_{\gamma_1,s}\,\|u_2\|_{\gamma_2,2}
+ +\|u_1\|_{\gamma_1,2}\,\|u_2\|_{\gamma_2,s}\bigr) .
+\end{equation}
+Weights add under multiplication, and only one factor carries the
+high order. Products of several factors, and products of derivatives
+of total order at most $s$, are estimated in the same way.
+
+\step{3: coefficients}
+Every coefficient that occurs below is a product of a \emph{reference
+function}, which depends only on $r$ and whose derivatives are
+bounded by coefficient powers, and a function
+$\Phi(\varepsilon_1,\ldots,\varepsilon_p)$, where $\Phi$ is smooth
+near the origin and each $\varepsilon_k$ is a reference function
+times a derivative of positive order of a height, a control term, or
+a displacement of a chart. Examples are
+\[
+ \frac w{w_*}=e^{\nu\chi_*+\sum\kappa_m\chi_m},\qquad
+ \frac Qw=1+\frac{Z_r+EZ_{\theta\theta}/r}{w},\qquad
+ D=1-2wZ_r-Z_r^2-E\Bigl(\frac{Z_\theta}r\Bigr)^2,
+\]
+and the reciprocals and powers of these quantities that enter
+\eqref{eq:linear-coefficients}. On a neighbourhood of low order the
+$\varepsilon_k$ are small in the sup norm, so $\Phi$ is evaluated
+where it is smooth. By Lemma~\ref{lem:one-high-factor}(iii), applied
+on the supports of the $\phi_i$, the norm of order $s$ of
+$\Phi(\varepsilon)-\Phi(0)$ is bounded by the norms of order $s$ of
+the $\varepsilon_k$, with a constant that depends on their low norms
+only. Moreover
+$\Phi(\varepsilon)-\Phi(0)=\sum_k\varepsilon_k\Phi_k(\varepsilon)$
+with smooth $\Phi_k$, so this difference carries the weight
+$H^\gamma$ of the $\varepsilon_k$. The same holds for the derivatives
+with respect to the state, which are of the same form. In
+particular, reciprocals of the denominators $Q$, $D$ and $1-p^2$ are
+smooth tame after the reference factor $w_*$ has been separated.
+
+After a complete expression has been expanded, all its reference
+functions together are bounded by $E_0^{C_s}$, which costs one order
+by \eqref{eq:full-material-envelope}. The expressions have fixed
+differential order, so the total loss is fixed. Restriction to a
+circle $r=\text{const}$ costs one radial derivative, and a fixed
+cutoff provides a right inverse.
+
+\step{4: flat extension}
+The operator $\partial_r^a$ is a combination of $\Dr$-derivatives of
+order at most $a$ with coefficients bounded by $E_0^{C_a}$. By the
+Sobolev embedding on unit intervals,
+$d_\partial^{-k}\,|\partial_r^a\partial_\theta^bu|$ is bounded by a
+seminorm of $u$ times $H^\gamma E_0^{C_{a,b,k}}$, which tends to zero
+at the endpoints. The same holds after differentiation with respect to
+parameters.
+\end{proof}
+
+\subsection{The geometry at the roots, and the travel-angle controls}
+\label{subsec:root-geometry}
+
+\paragraph{Scales in a cell.}
+Recall from Section~\ref{sec:radial-tails} that on cell $n$
+\[
+ A_n\asymp e^{-n^2},\quad B_n\asymp A_n^9,\quad
+ c\,\mathfrak r_nA_n^5\le r_X\le C\,\mathfrak r_nA_n,\quad
+ w_*=\lambda_n\,r_X,\quad \log\lambda_n=-n^{5/2}+O(n),
+\]
+with $\mathfrak r_n$ bounded above and below, that
+$r_X=\partial r/\partial X$ satisfies $r_{XX}=-\rho\,r$ with
+$\rho=A_n(e^{-X}-e^{-2X})-B_n$, that $cA_{n+1}\le d_\partial\le CA_n$,
+and that every fixed derivative of $w_*^{\pm1}$ costs a coefficient
+power (Lemma~\ref{lem:tail-flat}). These comparisons persist on a
+bounded enlargement of a cell.
+
+\paragraph{The characteristic speed near a root.}
+Let $x$ be the distance from a root of a negative component, counted
+positively into the component and negatively on the positive side. On
+a cell, $w_*=\lambda_nr_X$ and $r_{XX}=-\rho\,r$ give
+$w_*'=-\lambda_n\rho\,r/r_X$, so the reference characteristic speed
+\eqref{eq:completed-characteristics} is
+\[
+ v_0=\sqrt{-\frac{w_*'}{rw_*}}=\frac{\sqrt\rho}{r_X}
+ =\sqrt x\;c_i(x),\qquad i\in\{L,R\},
+\]
+where $c_i$ is smooth and positive on a neighbourhood of the root,
+on both sides.
+
+\begin{lemma}[Root collars]\label{lem:quantitative-root-collars}
+At the left and right roots of the negative component of cell $n$,
+\begin{equation}\label{eq:geometry-root-scales}
+ c_L(0)\asymp\mathfrak r_n^{-3/2}A_n^{-1},\qquad
+ c_R(0)\asymp\mathfrak r_n^{-3/2}A_n^{-3},
+\end{equation}
+and for every $k$, on the interval $|x|\le c\,\mathfrak r_nA_n^5$,
+\begin{equation}\label{eq:geometry-normalized-root-jets}
+ \Bigl|\partial_r^k\Bigl(\frac{c_i}{c_i(0)}\Bigr)^{\pm1}\Bigr|
+ \le C_k\,(\mathfrak r_nA_n^5)^{-k}.
+\end{equation}
+Fix a sufficiently small $\epsilon_{\rm root}>0$ and put
+\begin{equation}\label{eq:geometry-root-collar-width}
+ \delta_n^{\rm root}=\epsilon_{\rm root}\,\mathfrak r_n\,A_n^{20}.
+\end{equation}
+Then the collars $|x|<8\delta_n^{\rm root}$ of the two roots are
+disjoint and lie inside the cell, and on them
+$c_i(x)/c_i(0)\in[\tfrac12,2]$. The finitely many roots of the central
+model have collars with the same properties and fixed constants.
+\end{lemma}
+
+\begin{proof}
+\step{1: the value at the root}
+Let $X_i$ be the value of the model coordinate at the root. Since
+$v_0^2=\rho/r_X^2$ and $x=|r-r(X_i)|$, division by $x$ and passage to
+the limit give
+\[
+ c_i(0)^2=\frac{|\rho_X(X_i)|}{r_X(X_i)^3}.
+\]
+With $t=e^{-X}$ the roots solve $A_n(t-t^2)=B_n$; hence
+$e^{-X_L}=1+O(A_n^8)$ and $e^{-X_R}\asymp A_n^8$, and
+$|\rho_X(X_L)|\asymp A_n$, $|\rho_X(X_R)|\asymp A_n^9$. By
+Lemma~\ref{lem:cell} and the choice of the solution in
+Section~\ref{subsec:one-cell}, $r_X(X_L)\asymp\mathfrak r_nA_n$ and
+$r_X(X_R)=\epsilon_R\,\mathfrak r_nA_n^5$. This gives
+\eqref{eq:geometry-root-scales}.
+
+\step{2: derivatives}
+Division of a function with a simple zero by the distance to the zero
+is the operation $f(s)/s=\int_0^1f'(ts)\,dt$; it costs one derivative
+and preserves bounds. On $|X-X_i|\le c$ the quotient
+$\rho/(X_i-X)$, with the sign which makes it positive, is comparable
+to $|\rho_X(X_i)|$, and its derivatives in $X$ are bounded by
+multiples of it; this is read off from the explicit function $\rho$.
+At a root $r_{XX}=0$ and $r_{XXX}=-\rho_Xr$, and the differential
+equation shows that $r_X$ is comparable to $r_X(X_i)$ on
+$|X-X_i|\le c$, with derivatives in $X$ bounded by multiples of it.
+The same then holds for the quotient $(r-r(X_i))/(X-X_i)$. Since
+\[
+ c_i^2=\frac{\rho}{X_i-X}\cdot\frac{X_i-X}{r(X_i)-r}\cdot\frac1{r_X^2},
+\]
+with the signs chosen as above, and
+$\partial_r=r_X^{-1}\partial_X$ with $r_X\ge c\,\mathfrak r_nA_n^5$,
+we obtain \eqref{eq:geometry-normalized-root-jets} on the image of
+$|X-X_i|\le c$, an interval of radial length at least
+$c\,\mathfrak r_nA_n^5$ on either side of the root. At the left root
+the same argument gives the better scale $\mathfrak r_nA_n$.
+
+\step{3: collars}
+The width $8\delta_n^{\rm root}$ divided by $\mathfrak r_nA_n^5$ is
+$8\epsilon_{\rm root}A_n^{15}$. So for small $\epsilon_{\rm root}$ the
+case $k=1$ of \eqref{eq:geometry-normalized-root-jets} keeps
+$c_i(x)/c_i(0)$ in $[\tfrac12,2]$ on the collar. The collars lie in
+the cell and are disjoint because each part of the cell has radial
+length comparable to $A_n$. The central model has finitely many
+roots, at which $c_i(0)>0$, and fixed collars are chosen there. Note
+that the collar was chosen before any order of differentiation; its
+width, its reciprocal, and the derivatives of cutoffs adapted to it
+are coefficient powers.
+\end{proof}
+
+\begin{lemma}[Travel-angle controls]
+\label{lem:quantitative-optical-controls}
+For a profile $w$ let
+$T_n(w)=\int\sqrt{-w'/(rw)}\,dr$ be the travel angle of its $n$th
+negative component. There are functions $\chi_n$, supported in
+$\delta_n^{\rm root}<x<2\delta_n^{\rm root}$ near the left root of
+that component, such that
+\[
+ \frac{d}{dt}\Big|_{t=0}T_n\bigl(w_*e^{t\chi_n}\bigr)=1,
+ \qquad \|\partial_r^k\chi_n\|_\infty
+       \le C_k\,\mathfrak r_n^{-k}A_n^{9-20k}.
+\]
+There is also a cutoff function of $r$ which rises from $0$ to $1$ on
+$3\delta_n^{\rm root}<x<4\delta_n^{\rm root}$, with the corresponding
+bounds. On the supports of $\chi_n$ and of the derivative of this
+cutoff,
+\[
+ v_0\asymp\mathfrak r_n^{-1}A_n^9,\qquad
+ \Bigl|\frac{w_*'}{w_*}\Bigr|\asymp\mathfrak r_n^{-1}A_n^{18}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\phi\ge0$ be a nonzero smooth function supported in $(1,2)$ and
+put $f_n=\phi(x/\delta_n^{\rm root})$. For the variation
+$w_*e^{tf_n}$ the speed changes by $\delta v_0=-f_n'/(2rv_0)$, so
+\[
+ \frac{d}{dt}\Big|_{t=0}T_n
+ =\frac12\int\Bigl(\frac1{rv_0}\Bigr)'f_n\,dr
+ =-\frac{(\delta_n^{\rm root})^{-1/2}}{4\,r_{n,L}\,c_L(0)}
+       \int_1^2t^{-3/2}\phi(t)\,dt\;\bigl(1+O(A_n^{19})\bigr),
+\]
+where $r_{n,L}$ is the radius of the root. This is nonzero and
+comparable to $-A_n^{-9}$. Let $\chi_n$ be $f_n$ divided by this
+number; the bounds follow by scaling. The bounds for $v_0$ follow
+from \eqref{eq:geometry-root-scales}, and $|w_*'/w_*|=rv_0^2$. The
+cutoff is the integral of a rescaled bump.
+\end{proof}
+
+\subsection{The state and one neighbourhood for all components}
+\label{subsec:neighbourhood}
+
+The state space is
+\begin{equation}\label{eq:rewrite-state}
+ \bx=(u,\nu,\kappa,h_L),\qquad
+ u\in\Phi_*+\ker\ell_*\subset\mathcal X_\beta,\quad
+ \nu\in\R,\quad
+ \kappa\in\mathcal K_\beta,\quad
+ h_L-\id\in\mathcal Z_{\beta,\mathrm{odd}} .
+\end{equation}
+Each $h_{L,m}$ is an increasing map of $\R$ which commutes with the
+translation by $\pi$, that is, the lift of a diffeomorphism of the
+circle $\R/\pi\Z$. The normalization $\ell_*u=1$ removes the freedom
+of adding a multiple of the kernel $\Phi_*$. The size of a state,
+together with the parameter, is measured by the seminorms
+\begin{equation}\label{def:joint-displacement-seminorms}
+ \mathfrak n_s=|q|+\|u-\Phi_*\|_s+|\nu|
+           +\|\kappa\|_{\mathcal K_{\beta,s}}
+           +\|h_L-\id\|_{\mathcal Z_{\beta,s}} .
+\end{equation}
+The unscaled $u$ appears here, and not only $qu$, because the
+derivative of $\mathcal F_0(w,u)=\mathscr L_wu$ with respect to the
+metric depends on $u$ even at $q=0$.
+
+We shall also need localized versions. For a component $m$, positive
+or negative, consider the component together with the neighbouring
+components that enter the construction of its coordinates; for a
+positive component these are the two adjacent negative ones. These
+neighbourhoods have bounded overlap. Let $\mathfrak g_{s,m}$ be the
+norm of order $s$ of $(qu,\nu,\kappa,h_L-\id)$ restricted to this
+neighbourhood, where only derivatives of positive order of the height
+are used, and compact scalars are counted only where their supports
+meet the neighbourhood. Then
+$(\sum_m\mathfrak g_{s,m}^2)^{1/2}\le C_s\,\mathfrak n_s$.
+
+For the joint problem we also use the localized seminorm
+$\mathfrak n_{s,m}$ of
+$(q\,\Phi_*,\,u-\Phi_*,\,\nu,\,\kappa,\,h_L-\id)$, defined in the
+same way. For $|q|\le1$ the identity $qu=q\Phi_*+q(u-\Phi_*)$ gives
+$\mathfrak g_{s,m}\le C_s\,\mathfrak n_{s,m}$, and
+$(\sum_m\mathfrak n_{s,m}^2)^{1/2}\le C_s\,\mathfrak n_s$.
+
+\begin{lemma}[One neighbourhood for the type and the denominators]
+\label{lem:common-geometric-neighborhood}
+There are a finite order $b_0$ and an $\epsilon_0>0$ such that on the
+neighbourhood $\mathfrak n_{b_0}<\epsilon_0$ the profile $w$ has the
+same positive and negative components and the same germs at the roots
+as $w_*$, and, with $Z=qu$ and $E=1+w^2$,
+\[
+ \frac{w}{w_*}\in\bigl[\tfrac12,2\bigr],\qquad
+ \frac Qw\in\bigl[\tfrac78,\tfrac98\bigr],\qquad
+ D\in\bigl[\tfrac12,\tfrac32\bigr],\qquad
+ 1-\Bigl(\frac{Z_\theta}{r}\Bigr)^2\ge\tfrac34
+\]
+on the whole annulus. Here
+\begin{equation}\label{eq:geometry-low-QD}
+ Q=w+Z_r+\frac{E\,Z_{\theta\theta}}r,\qquad
+ D=1-2wZ_r-Z_r^2-E\Bigl(\frac{Z_\theta}r\Bigr)^2
+\end{equation}
+are the quantities \eqref{eq:height-jet-notation} for $z=h+Z$. The
+neighbourhood does not depend on any order of differentiation.
+\end{lemma}
+
+\begin{proof}
+Only finitely many derivatives of low order enter these conditions.
+
+\step{1: low-order bounds on all components}
+On the neighbourhood, $\|u\|_{b_0}\le\|\Phi_*\|_{b_0}+\epsilon_0$ and
+$|q|<\epsilon_0$, so the geometric displacement
+$(Z,\nu,\kappa,h_L-\id)$ is of size $C\epsilon_0$ in the norms of
+order $b_0$. Let $K$ be the largest order of a derivative that occurs
+in the conditions, and take $b_0\ge K+2$. The Sobolev embedding on
+unit intervals of the variable $\varrho$, and the conversion of
+$\Dr$ into $\partial_r$ at the cost of coefficient powers, give on
+component $m$
+\begin{equation}\label{eq:geometry-low-jets}
+ \max_{1\le a+b\le K}|\partial_r^a\partial_\theta^bZ|
+ +|\kappa_m|\,\|\chi_m\|_{C^K}+\|h_{L,m}-\id\|_{C^K}
+ \le C\,\epsilon_0\,H_m^\beta\,\mathcal E_m^{C}.
+\end{equation}
+Only derivatives of positive order of $Z$ occur: the endpoint constant
+of a height does not decay, but it does not enter any coefficient.
+The compact control $\nu\chi_*$ obeys the same bound on the finitely
+many components it meets. Now
+\begin{equation}\label{eq:geometry-smallness-absorption}
+ \sup_mH_m^\beta\,\mathcal E_m^{A}<\infty
+ \qquad\text{and}\qquad
+ H_m^\beta\,\mathcal E_m^{A}\longrightarrow0
+ \qquad\text{for every fixed }A,
+\end{equation}
+because $\log\mathcal E_m=o(S_m)$. Hence one $\epsilon_0$ makes the
+right side of \eqref{eq:geometry-low-jets}, multiplied by any fixed
+coefficient power, as small as we wish on all components at once.
+
+\step{2: the type}
+Write $w=w_*e^f$ with $f=\nu\chi_*+\sum_m\kappa_m\chi_m$. The controls
+vanish near every root, so the germs of $w$ at the roots are those of
+$w_*$. On the support of $\chi_n$,
+Lemma~\ref{lem:quantitative-optical-controls} gives
+\[
+ \frac{|\kappa_n\chi_n'|}{|w_*'/w_*|}\le C\,|\kappa_n|\,A_n^{-29},
+\]
+which is small by Step~1. On the support of $\chi_*$ the function
+$w_*'/w_*$ has a positive minimum. So $w'/w=w_*'/w_*+f'$ has the sign
+of $w_*'/w_*$ away from the roots, and $|f|\le\log2$.
+
+\step{3: the denominators}
+By \eqref{eq:geometry-profile-jets}, $w^{-1}=w_*^{-1}e^{-f}$ is
+bounded by a coefficient power. So \eqref{eq:geometry-low-QD},
+\eqref{eq:geometry-low-jets} and
+\eqref{eq:geometry-smallness-absorption} make $(Q-w)/w$, $D-1$ and
+$Z_\theta/r$ uniformly small.
+\end{proof}
+
+\begin{proposition}[Uniform geometric calculus]
+\label{prop:uniform-physical-geometry}
+After $b_0$ is increased and $\epsilon_0$ decreased, the following
+hold on the neighbourhood $\mathfrak n_{b_0}<\epsilon_0$.
+\begin{enumerate}
+\item \textup{(Reference.)} The coordinates, inverse coordinates,
+ Jacobians, height factors, source factors and potentials constructed
+ in
+ Sections~\ref{subsec:return-correction}--\ref{subsec:positive-crossing}
+ are defined. At the reference state their derivatives of order $s$
+ on component $m$, and those of the reciprocals that occur, are
+ bounded by $C_s\mathcal E_m^{C_s}$.
+\item \textup{(Differences.)} For a general state the difference
+ $\Delta c_m$ of any of these quantities from its reference value
+ satisfies
+ \begin{equation}\label{eq:geometry-current-jet-bound}
+  \|\Delta c_m\|_{C^s}
+  \le C_s\,\mathcal E_m^{C_s}\,H_m^\beta\;\mathfrak g_{s+d_*,m}
+ \end{equation}
+ with a fixed $d_*$. In particular the differentials of the
+ coordinates and the height factors remain comparable to their
+ reference values.
+\item \textup{(Divided coefficients and parameters.)} The same bounds
+ hold for the differences of the principal coefficients on positive
+ components divided by $y^3(1-y)^3$
+ (Section~\ref{subsec:positive-crossing}), and for any fixed number
+ of derivatives with respect to the state, with estimates of the
+ shape \eqref{eq:tame-derivative-shape} in the seminorms
+ $\mathfrak n_{s,m}$.
+\end{enumerate}
+In all these estimates the complete product of reference functions is
+bounded by a power of $E_0$ and is absorbed into one power of the
+weight $M$.
+\end{proposition}
+
+The objects in the proposition are constructed in the next three
+subsections; the proof is given in
+Section~\ref{subsec:geometry-proofs}. The mechanism is simple. Every
+coordinate is built from a characteristic flow. At the reference
+state the speed of the flow does not depend on the angle, so by
+Lemma~\ref{lem:circle-flow} only the deformation enters the
+estimates for the flow, and the deformation carries the factor
+$H_m^\beta$, which by \eqref{eq:geometry-smallness-absorption}
+dominates every coefficient power.
+
+\subsection{Fixing the return maps by their own residual}
+\label{subsec:return-correction}
+
+\paragraph{Characteristics of $\bar L$.}
+Start from the operator $\bar L$ of
+Lemma~\ref{lem:type-completion}, with coefficients $(a,b,\bar c)$, on
+a negative component. By \eqref{eq:completed-characteristics} its
+characteristic slopes are
+\[
+ c_\pm=d\pm v,\qquad d=\frac ba,\qquad
+ v=\frac{\sqrt{b^2-a\bar c}}{a}.
+\]
+Because the height is even in $\theta$, the reflection
+$\refl\theta=-\theta$ exchanges the two families:
+$c_+=-c_-\circ\refl$. Let $f$ be the \emph{minus return map}: the map
+from the left boundary circle of the component to the right one along
+the characteristics of slope $c_-$. Let $T$ be the travel angle of
+the reference profile on this component. At the reference state
+$f=R_{-T}$.
+
+\paragraph{Charts and the return residual.}
+Given the chart $h_L$ of the left circle, define
+\begin{equation}\label{eq:full-height-one-chart}
+ \widetilde h_R=R_{-T}\circ h_L\circ f^{-1},\qquad
+ h_R=\Odd\,\widetilde h_R,\qquad
+ \mathfrak e=(\Even\,\widetilde h_R)\circ h_R^{-1},
+\end{equation}
+where $\Odd$ and $\Even$ denote the odd and even parts of a function
+of $\theta$. The derivative of $h_R$ is an average of two positive
+derivatives, so $h_R$ is increasing; it is the chart of the right
+circle. By construction
+$\widetilde h_R=(\id+\mathfrak e)\circ h_R$, hence
+\begin{equation}\label{eq:return-identity}
+ (\id+\mathfrak e)\circ h_R\circ f\circ h_L^{-1}=R_{-T}.
+\end{equation}
+So $\mathfrak e=0$ means that the minus return map is the rotation
+$R_{-T}$ when read in the charts $h_L$ and $h_R$. Since the charts
+are odd and the plus return map is $\refl\circ f\circ\refl$, the plus
+return map is then $R_{T}$. Thus the single even equation $\mathfrak e=0$
+imposes both return conditions. Its mean concerns the travel angle,
+its oscillating part the parametrization of the boundary circles.
+
+\paragraph{The derivative with respect to the chart.}
+Vary the chart by $\delta h_L=\psi\circ h_L$ with $\psi$ odd, keeping
+$f$ fixed. Then
+\begin{equation}\label{eq:full-height-chart-derivative}
+ \begin{split}
+ D_h\mathfrak e[\psi]&=\mathcal M_T\psi+\mathcal Q_h(\mathfrak e,\psi),\qquad
+ \mathcal M_T\psi=\Even\bigl[\psi(\theta+T)\bigr],\\
+ \mathcal Q_h(\mathfrak e,\psi)&=
+ \Even\Bigl[\mathfrak e\int_0^1
+       \psi'(\theta+T+t\mathfrak e)\,dt\Bigr]
+ -\mathfrak e'\;\Odd\bigl[\psi(\theta+T+\mathfrak e)\bigr].
+ \end{split}
+\end{equation}
+Indeed, the variation of $\widetilde h_R$, composed with $h_R^{-1}$,
+is $\psi(\theta+T+\mathfrak e)$; its odd part is the variation of
+$h_R$ in the same coordinates, and the formula follows by
+differentiating $\mathfrak e\circ h_R=\Even\,\widetilde h_R$. The
+term $\mathcal Q_h$ is bilinear in $(\mathfrak e,\psi)$ in the sense
+needed later and vanishes when $\mathfrak e=0$. The leading term is
+explicit:
+\begin{equation}\label{eq:rewrite-circle-inverse}
+ \mathcal M_T\bigl(\sin j\theta\bigr)=\sin(jT)\cos j\theta,
+ \qquad\text{so}\qquad
+ \mathcal M_T^{-1}\bigl(g_j\cos j\theta\bigr)
+       =\frac{g_j}{\sin(jT)}\,\sin j\theta
+ \quad(j>0\ \text{even}).
+\end{equation}
+By Proposition~\ref{prop:rad-fixed-theorem}(ii) the inverse loses one
+angular derivative and a coefficient power. It does not exist on
+constants: the mean of $\mathfrak e$ cannot be corrected by a chart.
+This is the reason for the radial controls $\kappa_m$.
+
+\begin{proposition}[The return correction]
+\label{prop:optical-residual-completion}
+On the neighbourhood of
+Proposition~\ref{prop:uniform-physical-geometry}, the operator
+$\bar L$ can be replaced by a symmetric operator in divergence form
+\[
+ \widehat L=\partial_r(a\,\partial_r+\widehat b\,\partial_\theta)
+           +\partial_\theta(\widehat b\,\partial_r
+                            +\widehat c\,\partial_\theta)
+\]
+which has the same coefficient $a$, coincides with $\bar L$ on the
+positive components and near the roots, and whose two return maps
+$\widehat f_\pm$ on every negative component satisfy
+\[
+ h_R\circ\widehat f_\pm\circ h_L^{-1}=R_{\pm T}
+\]
+exactly. The difference has the form
+\begin{equation}\label{eq:optical-residual-completion}
+ \bar L-\widehat L=\mathscr E_{\bx}(\mathfrak e),
+\end{equation}
+where $(e,\eta)\mapsto\mathscr E_{\bx}(e)\eta$ is bilinear, smooth
+tame in all its arguments, and takes values in $\mathcal Y_\beta$.
+\end{proposition}
+
+\begin{proof}
+\step{1: deforming the flow}
+Let $\Phi_r$ be the flow of the minus characteristics from the left
+boundary to the radius $r$, so that $f$ is its value at the right
+boundary. The return map we want is
+$f_*=h_R^{-1}\circ R_{-T}\circ h_L$. With $\mathsf g=h_R\circ f$,
+\eqref{eq:return-identity} gives
+\[
+ K:=f^{-1}\circ f_*=\mathsf g^{-1}\circ(\id+\mathfrak e)\circ\mathsf g,
+ \qquad \Delta:=K-\id .
+\]
+Let $\chi(r)$ be the cutoff of
+Lemma~\ref{lem:quantitative-optical-controls}, rising from $0$ to $1$
+inside the component, and put
+\[
+ J_r=\id+\chi(r)\,\Delta,\qquad \widehat\Phi_r=\Phi_r\circ J_r .
+\]
+Each $J_r$ is increasing, being a convex combination of increasing
+maps, and $\widehat\Phi_r$ runs from the identity to $f\circ K=f_*$.
+The curves $r\mapsto\widehat\Phi_r(\theta_0)$ have the slope
+\begin{equation}\label{eq:readable-optical-velocity}
+ \widehat c_-(r,\theta)=c_-(r,\theta)+
+ \Phi_r'(\Phi_r^{-1}\theta)\;\chi'(r)\;
+                   \Delta\bigl(J_r^{-1}\Phi_r^{-1}\theta\bigr).
+\end{equation}
+
+\step{2: the new coefficients}
+Define $\widehat c_+=-\widehat c_-\circ\refl$ and
+\[
+ \widehat d=\frac{\widehat c_++\widehat c_-}2,\quad
+ \widehat v=\frac{\widehat c_+-\widehat c_-}2,\qquad
+ \widehat b=a\,\widehat d,\quad
+ \widehat c=a\,(\widehat d^{\,2}-\widehat v^{\,2}).
+\]
+Then $\widehat L$ has the characteristic slopes $\widehat c_\pm$, its
+minus return map is $f_*$, and its plus return map is the reflection
+of $f_*$; these are the asserted returns. On the support of $\chi'$
+the speed $v$ is bounded below by
+Lemma~\ref{lem:quantitative-optical-controls}, while the correction
+in \eqref{eq:readable-optical-velocity} carries the factor
+$H_m^\beta\mathcal E_m^C$. So on one low-order neighbourhood the
+correction is less than $v/2$ and $\widehat v>0$. Near the roots and
+on positive components nothing is changed.
+
+\step{3: the error is bilinear}
+From the definition of $K$,
+\[
+ \Delta(\theta)=\mathfrak e(\mathsf g\theta)
+ \int_0^1(\mathsf g^{-1})'\bigl(\mathsf g\theta
+          +t\,\mathfrak e(\mathsf g\theta)\bigr)\,dt .
+\]
+Keep the state and the points at which the functions in this formula
+are evaluated, and replace only the leading factor $\mathfrak e$ by an
+independent function $e$. This defines increments $d_1[e]$ and
+$v_1[e]$ of $d$ and $v$ which are linear in $e$ and equal the actual
+increments $d_1=\widehat d-d$, $v_1=\widehat v-v$ when
+$e=\mathfrak e$. The coefficients of $\bar L-\widehat L$ are then
+$\delta b[\mathfrak e]$ and $\delta c[\mathfrak e]$, where
+\[
+ \delta b[e]=-a\,d_1[e],\qquad
+ \delta c[e]=-a\,(2d+d_1)\,d_1[e]+a\,(2v+v_1)\,v_1[e] ,
+\]
+and $\mathscr E_{\bx}(e)\eta$ is the corresponding expression in
+divergence form applied to $\eta$. It is bilinear in $(e,\eta)$. It
+is supported in the interior of the component, so it is flat at the
+endpoints and has integral zero. Each of its terms contains the
+factor $e$ and a derivative of positive order of $\eta$, both of
+weight $H_m^\beta$; after division by the weight of the source space,
+a factor $H_m^\beta$ is left, which absorbs every coefficient power.
+Lemmas~\ref{lem:one-high-factor} and~\ref{lem:circle-flow}, with
+the bounds of
+Lemma~\ref{lem:uniform-characteristic-flow-constants}, give the tame
+estimates.
+\end{proof}
+
+Combining Lemma~\ref{lem:type-completion} with
+Proposition~\ref{prop:optical-residual-completion} we obtain the exact
+identity
+\begin{equation}\label{eq:readable-completed-height-derivative}
+ D_u\mathcal F_q(w,u)\,\eta=\widehat L\eta
+       +q\,\partial_\theta\bigl(B\,\mathcal A\,\eta_\theta\bigr)
+       +\mathscr E_{\bx}(\mathfrak e)\,\eta,
+ \qquad \mathcal A=\mathcal F_q(w,u),\quad B=\frac{E}{rQ}.
+\end{equation}
+Both additional terms vanish at a solution of
+$(\mathcal A,\mathfrak e)=0$. We shall invert $\widehat L$ and carry
+these terms as errors in the nonlinear theorem.
+
+\subsection{Coordinates on a negative component}
+\label{subsec:root-coordinate}
+
+\paragraph{Travel coordinates.}
+Let $S_\pm(r,\theta)$ be the angle at which the plus or minus
+characteristic of $\widehat L$ through $(r,\theta)$ meets the left
+boundary circle. Put
+\begin{equation}\label{eq:fixed-strip-coordinates}
+ U=h_L\circ S_+,\qquad V=h_L\circ S_-,\qquad
+ \sigma=\frac{V-U}2,\qquad\varphi=\frac{U+V}2 .
+\end{equation}
+On the left boundary $(\sigma,\varphi)=(0,h_L)$, and by the exact
+returns of $\widehat L$, on the right boundary
+$(\sigma,\varphi)=(T,h_R)$. Moreover $U_\theta,V_\theta>0$ and
+\[
+ \det\frac{\partial(\sigma,\varphi)}{\partial(r,\theta)}
+ =\widehat v\,U_\theta V_\theta>0 .
+\]
+For fixed $\varphi$ the function $\sigma$ increases strictly from $0$
+to $T$, so $(\sigma,\varphi)$ is a diffeomorphism of the interior of
+the component onto the fixed cylinder $(0,T)\times\T$. In these
+coordinates the principal part of $\widehat L$, as a divergence
+expression, has the density $\delta\,\diag(1,-1)$ with
+$\delta=a\widehat v$: it is a wave operator, degenerate at the two
+ends, where $\delta$ vanishes.
+
+\paragraph{The root coordinate.}
+At a root the speed is $\widehat v=\sqrt x\,c_0(x,\theta)$ with $c_0$
+smooth and positive, so $\sigma$ is of order $x^{3/2}$. The
+coordinates which are smooth at the two roots are
+\[
+ \xi_L=\bigl(\tfrac32\sigma\bigr)^{2/3},\qquad
+ \xi_R=\bigl(\tfrac32(T-\sigma)\bigr)^{2/3},
+\]
+used on the halves $\sigma\le T/2$ and $\sigma\ge T/2$ of the
+component (Figure~\ref{fig:root-regularization}). When the
+coefficients depend on the angle, smoothness of $\xi_L$ at the root
+is not obvious. To prove it, with estimates, we solve the
+characteristic equation in a form in which $x^{3/2}$ is replaced by an
+independent variable $\zeta$:
+\begin{equation}\label{eq:fixed-strip-root-flow}
+ \Theta_t=2xt\;d(xt^2,\Theta)+2\zeta t^2\,c_0(xt^2,\Theta),
+ \qquad 0\le t\le1 .
+\end{equation}
+For $\zeta=\pm x^{3/2}$ this is the equation of the plus and minus
+characteristics, parametrized by $x'=xt^2$. The inverse of the
+time-one map of \eqref{eq:fixed-strip-root-flow}, followed by the
+boundary chart, is one smooth function $G(x,\zeta,\theta)$, and
+\[
+ U=G(x,x^{3/2},\theta),\qquad V=G(x,-x^{3/2},\theta).
+\]
+That both families come from one function, with one boundary chart,
+is essential for the cancellation in the following lemma.
+
+\begin{lemma}[Substitution at a root]
+\label{lem:rewrite-root-composition}
+Let $G(x,\zeta,\theta)$ be smooth on the rectangle $0\le x\le1$,
+$|\zeta|\le1$, and define
+\[
+ \Ev\,G=\frac{G(x,x^{3/2},\theta)+G(x,-x^{3/2},\theta)}2,\qquad
+ \Od\,G=\frac{G(x,x^{3/2},\theta)-G(x,-x^{3/2},\theta)}
+                         {2x^{3/2}} .
+\]
+Both functions extend smoothly to $x=0$, with
+$\Od\,G=\partial_\zeta G(0,0,\theta)$ there, and for every integer
+$s\ge0$
+\begin{equation}\label{eq:rewrite-root-composition-bound}
+ \|\Ev\,G\|_{C^s_{x,\theta}}\le C_s\|G\|_{C^s_{x,\zeta,\theta}},
+ \qquad
+ \|\Od\,G\|_{C^s_{x,\theta}}
+                       \le C_s\|G\|_{C^{s+1}_{x,\zeta,\theta}} .
+\end{equation}
+The estimates hold also after any fixed number of differentiations
+with respect to parameters.
+\end{lemma}
+
+The point of the lemma is that the half-integer power $x^{3/2}$ does
+not cost half-integer many derivatives: an even function of $\zeta$
+is a function of $\zeta^2=x^3$.
+
+\begin{proof}
+\step{1: $G$ even in $\zeta$}
+Fix $0<x_0\le1$ and let $G_s$ be the Taylor polynomial of degree $s$
+of $G$ at $(x_0,0)$ in the variables $(x,\zeta)$. Its monomials
+$(x-x_0)^i\zeta^{2k}$ become $(x-x_0)^ix^{3k}$ after the
+substitution. Their derivative of order $a\le s$ in $x$ at $x_0$
+either vanishes or carries a factor $x_0^{3k-a+i}$ with nonnegative
+exponent, and their coefficients involve at most $s$ derivatives of
+$G$. For the remainder $G-G_s$, a term of the chain rule with $i$
+derivatives falling on the first argument and $k$ on the second is
+bounded by
+\[
+ C_s\|G\|_{C^s}\;
+ x_0^{3(s-i-k)/2}\;x_0^{3k/2-(a-i)}
+ =C_s\|G\|_{C^s}\;x_0^{3s/2-a-i/2},
+\]
+again with a nonnegative exponent. When the exponent is zero the
+remainder still tends to zero as $x_0\to0$, by the continuity of the
+derivatives of order $s$. The polynomial terms converge to the
+appropriate Taylor coefficients at $x=0$. So the derivatives of the
+substituted function up to order $s$ are continuous up to $x=0$ and
+bounded as claimed. Derivatives in $\theta$ commute with the
+construction and reduce the remaining order.
+
+\step{2: the general case}
+For a general $G$ apply Step~1 to its even part to obtain the first
+bound. For the second, the function
+\[
+ K(x,\zeta,\theta)
+ =\frac12\int_{-1}^1\partial_\zeta G(x,t\zeta,\theta)\,dt
+\]
+is smooth and even in $\zeta$, satisfies
+$\|K\|_{C^s}\le C_s\|G\|_{C^{s+1}}$, and
+$\Od\,G=K(x,x^{3/2},\theta)$; apply Step~1 to $K$. Both operations
+are linear in $G$, so they commute with differentiation with respect
+to parameters.
+\end{proof}
+
+Applied to the function $G$ of the flow
+\eqref{eq:fixed-strip-root-flow}, the lemma gives
+\[
+ \varphi=\Ev\,G,\qquad
+ \sigma=x^{3/2}\chi_0(x,\theta),\quad
+ \chi_0(0,\theta)=\tfrac23\,c_0(0,\theta)\,h_L'(\theta)>0,\qquad
+ \xi_L=x\,\bigl(\tfrac32\chi_0\bigr)^{2/3} .
+\]
+So $\xi_L$ is a smooth function with nonvanishing radial derivative
+up to the root, and $(\xi_L,\varphi)$ are smooth coordinates there.
+The right root is treated in the same way with the chart $h_R$.
+Rescaling from the unit rectangle of the lemma to a collar of a root
+introduces powers of the collar width and its reciprocal, which are
+coefficient powers; their complete product costs one power of $M$.
+The substitution $\Ev$ uses $s$ derivatives of its argument and
+$\Od$ uses $s+1$, and these counts do not grow with the output order.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=2.5cm,y=2.0cm,font=\small,>=Stealth]
+\draw[->] (0,0)--(1.45,0) node[right] {$x$};
+\draw[->] (0,0)--(0,1.45);
+\draw[thick,blue!65!black] plot[domain=0:1.2,samples=50] (\x,{pow(\x,1.5)});
+\draw[thick,orange!85!black] (0,0)--(1.2,1.2);
+\node[blue!65!black,anchor=west] at (.74,.48) {$\sigma\sim x^{3/2}$};
+\node[orange!85!black,anchor=east] at (.72,1.1) {$\xi\sim x$};
+\draw[dashed] (1,0)--(1,1);
+\node[align=left,anchor=west] at (1.65,.85)
+ {The travel coordinate $\sigma$ has zero\\derivative at the root;
+  its $2/3$ power\\has a nonzero derivative.};
+\end{tikzpicture}
+\caption{Regularization at a turning circle; $x$ is the distance to
+the root. The graph shows the leading powers with unit coefficients.
+The positive coefficient of $x$ in $\xi$ is controlled uniformly at
+all turning circles.}
+\label{fig:root-regularization}
+\end{figure}
+
+\paragraph{The canonical form.}
+Let $i\in\{L,R\}$, let $\Psi_i=(\xi_i,\varphi)$ be the coordinate map
+on the corresponding half of the component, and put
+\[
+ \alpha_i=\frac{\delta\circ\Psi_i^{-1}}{\sqrt{\xi_i}}
+ =\frac{a\,|\det D\Psi_i|}{U_\theta V_\theta}\circ\Psi_i^{-1},
+ \qquad h_i=\alpha_i^{-1/2} .
+\]
+The second expression shows that $\alpha_i$ is smooth and positive up
+to the root. In the coordinates $\Psi_i$ the principal density of
+$\widehat L$ is $\alpha_i\,\diag(1,-\xi_i)$, and conjugation by
+$h_i$ removes its first-order terms: for
+$u=(h_iW_i)\circ\Psi_i$, the equation $\widehat Lu=f$ becomes
+\begin{equation}\label{eq:fixed-strip-airy-equation}
+ \begin{split}
+ \bigl(\partial_{\xi_i}^2-\xi_i\,\partial_\varphi^2+V_i\bigr)W_i&=F_i,\\
+ V_i&=-\alpha_i^{-1/2}\,
+       \bigl(\partial_{\xi_i}^2-\xi_i\,\partial_\varphi^2\bigr)\,
+       \alpha_i^{1/2},\\
+ F_i&=h_i\,\Bigl(\frac{f}{|\det D\Psi_i|}\circ\Psi_i^{-1}\Bigr).
+ \end{split}
+\end{equation}
+The principal part is the Tricomi operator
+$\partial_\xi^2-\xi\,\partial_\varphi^2$, the same for all states;
+only the potential $V_i$ depends on the state. The transformation of
+the source preserves the pairing:
+$\int uf\,dr\,d\theta=\int W_iF_i\,d\xi_i\,d\varphi$. We call
+$W_i$ the \emph{canonical unknown}, $h_i$ the \emph{height factor}
+and $F_i$ the \emph{canonical source}.
+
+\paragraph{Transmission in the middle.}
+The two halves meet at $\sigma=T/2$, where
+$\xi_L=\xi_R=\xi_c:=(3T/4)^{2/3}$. There $\alpha_L=\alpha_R$ and
+$\partial_\sigma\log\alpha_R-\partial_\sigma\log\alpha_L=\xi_c^{-3/2}$.
+Continuity of $u$ and of its derivative therefore reads
+\begin{equation}\label{eq:fixed-strip-cut}
+ \binom{W_R}{\partial_{\xi_R}W_R}
+ =\begin{pmatrix}1&0\\-1/(2\xi_c)&-1\end{pmatrix}
+       \binom{W_L}{\partial_{\xi_L}W_L}
+ \qquad\text{at }\xi_L=\xi_R=\xi_c .
+\end{equation}
+This matrix does not depend on the state.
+
+\paragraph{Boundary data at a root.}
+At a root, where the boundary chart is $h_{\rm bd}$ ($=h_L$ or $h_R$),
+the value of $u$ and its inward normal flux $p_{\rm in}$ are
+\begin{equation}\label{eq:fixed-strip-root-pair}
+ u=(h_iW_i)(0,h_{\rm bd}),\qquad
+ p_{\rm in}=\frac{h_{\rm bd}'}{h_i(0,h_{\rm bd})}\,
+       \bigl(\partial_{\xi_i}W_i+(\partial_{\xi_i}\log h_i)\,W_i\bigr)
+                                             (0,h_{\rm bd}) .
+\end{equation}
+No tangential derivative of $W_i$ appears, because
+$a\varphi_r+\widehat b\varphi_\theta=0$ at the root. The identity is
+exact; it retains the zero mode and the full Green pairing, not only
+the principal part.
+
+\paragraph{Bounds.}
+At the reference state all these objects are explicit functions of
+$r$; their bounds by coefficient powers are proved in
+Lemma~\ref{lem:reference-regularized-charts}. For a general state
+they are estimated in Lemma~\ref{lem:current-geometric-jets}.
+
+\subsection{Coordinates on a positive component}
+\label{subsec:positive-crossing}
+
+\paragraph{The reference coordinate.}
+On a positive component, continue the root coordinates of the two
+adjacent roots across them and put $y_i=-\xi_i$, which is positive on
+the positive side; here $i=L$ at the left end of the positive
+component and $i=R$ at its right end. Choose a coordinate
+$y\in[0,1]$, a function of $r$, equal to $y_L$ near the left end and
+to $1-y_R$ near the right end, by prescribing its derivative: the
+given derivatives on disjoint collars of the two ends and a positive
+constant in between, interpolated with cutoffs. Similarly
+interpolate the logarithms of the two height factors $h_i$, taking the
+height factor equal to one in the middle. The explicit formulas are
+\eqref{eq:geometry-positive-coordinate} and
+\eqref{eq:geometry-positive-height}; that all these reference
+quantities have coefficient bounds is
+Lemma~\ref{lem:positive-reference-charts}.
+
+\paragraph{The coordinate of a general state.}
+For a general state the coordinates and height factors of the
+adjacent negative components differ from the reference ones. Extend
+these \emph{differences} into the positive component: the jets of the
+coordinates up to order four and the jets of the logarithms of the
+height factors up to order three, by Taylor polynomials multiplied
+with cutoffs. The cutoffs are chosen so that the reference
+coordinate is unchanged on a fixed compact interval $J_*$ of radii
+which contains the support of $g_*$ in the normalization $\ell_*$ and
+the support of the metric control $\chi_*$. Since the differential is
+close to the reference one, the resulting map $\Psi_{\bx}$ is a
+diffeomorphism onto $[0,1]\times\T$: it is proper, locally invertible,
+and of degree one on the boundary. It obeys the estimates of
+Proposition~\ref{prop:uniform-physical-geometry}.
+
+\paragraph{The canonical operator.}
+Let $h_{\bx}$ be the height factor in the original variables,
+$\Psi_{\bx}$ the coordinate map and $J_{\bx}$ its Jacobian
+determinant. For the equation $-\widehat Lu=F_{\rm ph}$ on a positive
+component, the canonical operator and source are
+\begin{equation}\label{eq:pp-fixed-canonical-source}
+ P_{\bx}U
+ =-\Bigl(\frac{h_{\bx}}{|J_{\bx}|}\,
+       \widehat L\bigl[h_{\bx}\,(U\circ\Psi_{\bx})\bigr]\Bigr)
+             \circ\Psi_{\bx}^{-1},\qquad
+ F=\Bigl(\frac{h_{\bx}F_{\rm ph}}{|J_{\bx}|}\Bigr)
+             \circ\Psi_{\bx}^{-1} .
+\end{equation}
+These formulas again preserve the pairing. At the reference state
+\[
+ P_*=-\partial_y(a\,\partial_y)-c\,\partial_\varphi^2+V,
+ \qquad a=h_*^2\,w_*\,y_r,\quad c=\frac{h_*^2\,w_*'}{r\,y_r},
+\]
+where in this formula $a$ and $c$ denote the coefficients of $P_*$.
+Near a root $a=1$ and $c=y_i$ exactly: $P_*$ is the continuation
+$-\partial_{y_i}^2-y_i\,\partial_\varphi^2$ of the Tricomi operator.
+On the whole component, with
+\[
+ \bd=y\,(1-y),
+\]
+we have
+\begin{equation}\label{eq:positive-coefficients}
+ a\ge\mathcal E_m^{-C},\qquad c\ge\mathcal E_m^{-C}\,\bd ,
+\end{equation}
+and all derivatives of the coefficients of fixed order are bounded by
+coefficient powers
+(Lemma~\ref{lem:positive-reference-charts}); away from the roots
+this comes from the lower bounds for $w_*'/w_*$ on the positive parts
+of the models and on the joins.
+
+\paragraph{The difference vanishes to third order at the roots.}
+Since the jets specified above match the principal densities of
+$P_{\bx}$ and $P_*$ to second order at both roots,
+\begin{equation}\label{eq:readable-positive-difference}
+ P_{\bx}-P_*=-\partial_a\bigl(\bd^{\,3}\,e_{\bx}^{ab}\,\partial_b\bigr)
+                           +\delta V_{\bx} ,
+\end{equation}
+with smooth coefficients $e^{ab}_{\bx}$, where $a,b$ are indices
+running over $y,\varphi$, and a potential $\delta V_{\bx}$ on which no
+boundary condition is imposed. Division by $\bd^3$ has a fixed cost:
+if $F$, $F'$ and $F''$ vanish at $0$, then
+\[
+ \frac{F(y)}{y^3}=\frac12\int_0^1(1-t)^2\,F'''(ty)\,dt ,
+\]
+each further derivative differentiates the integrand, and the factor
+$t^{-1/2}$ produced by rescaling in $L^2$ is integrable. This is the
+content of part~(iii) of
+Proposition~\ref{prop:uniform-physical-geometry}
+(Lemma~\ref{lem:current-geometric-jets}, Step~4). The
+cubic vanishing is what will allow a second-order perturbation to be
+controlled without boundary conditions
+(Section~\ref{subsec:cubic-estimate}).
+
+\subsection{Proof of the uniform geometric calculus}
+\label{subsec:geometry-proofs}
+
+We prove Proposition~\ref{prop:uniform-physical-geometry}. The bounds
+at the reference state come first; they involve functions of $r$ only
+(Lemmas~\ref{lem:reference-regularized-charts}--\ref{lem:geometric-weight-conversion}).
+The bounds for a general state follow from them and from the lemmas
+on flows
+(Lemmas~\ref{lem:uniform-characteristic-flow-constants}
+and~\ref{lem:current-geometric-jets}). Positivity of a function is
+never used as a bound for its reciprocal: every reciprocal that
+occurs is bounded explicitly.
+
+\begin{lemma}[Root charts of the reference profile]
+\label{lem:reference-regularized-charts}
+\label{lem:reference-height-source-factors}
+On each half of the negative component of cell $n$, the root
+coordinate of the reference profile is the function of $r$
+\begin{equation}\label{eq:geometry-regular-root-coordinate}
+ \xi=x\,\Bigl[\tfrac32\int_0^1\sqrt t\;c_i(xt)\,dt\Bigr]^{2/3},
+\end{equation}
+where $x$ is the distance from the root of that half, and
+\begin{equation}\label{eq:geometry-root-inverse}
+ \mathcal E_n^{-C}\le|\xi_r|\le\mathcal E_n^{C},\qquad
+ \|\xi\|_{C^s}+\|r(\xi)\|_{C^s}\le C_s\,\mathcal E_n^{C_s}.
+\end{equation}
+Moreover
+\begin{equation}\label{eq:geometry-root-density}
+ \alpha_i=w_*\,|\xi_r|,\qquad h_i=\alpha_i^{-1/2},
+\end{equation}
+and the functions $\alpha_i^{\pm1}$, $h_i^{\pm1}$, $|\xi_r|^{\pm1}$,
+the potential $V_i=-\alpha_i^{-1/2}\partial_\xi^2\alpha_i^{1/2}$, the
+source factors $h_i/|\xi_r|$ and $|\xi_r|/h_i$, and
+$\partial_\xi\log h_i$ have derivatives of order $s$ bounded by
+$C_s\mathcal E_n^{C_s}$. These bounds persist when the half is
+rescaled to unit length.
+\end{lemma}
+
+\begin{proof}
+At the reference state the charts are the identity, so
+$\varphi=\theta$ and, on each half, $\xi=(\tfrac32\sigma_i)^{2/3}$,
+where $\sigma_i=\int v_0\,dr$ is the travel angle from the root of
+that half.
+
+\step{1: near the root}
+Since $v_0=\sqrt x\,c_i(x)$, the substitution $x'=xt$ gives
+$\sigma_i=x^{3/2}\int_0^1\sqrt t\,c_i(xt)\,dt$, which is
+\eqref{eq:geometry-regular-root-coordinate}. The bracket is smooth
+and positive, and equals $c_i(0)$ at $x=0$; so
+$|\xi_r|=c_i(0)^{2/3}$ at the root. On the collar
+$|x|<8\delta_n^{\rm root}$ the bracket lies between
+$\tfrac12c_i(0)$ and $2c_i(0)$, and by
+\eqref{eq:geometry-normalized-root-jets} its logarithmic derivative
+times $|x|$ is at most $C\epsilon_{\rm root}A_n^{15}$. Hence
+$|\xi_r|$ is comparable to $c_i(0)^{2/3}$ on the collar, and the
+derivatives of $\xi$ have coefficient bounds there.
+
+\step{2: away from the collars}
+Differentiating $\xi^{3/2}=\tfrac32\sigma_i$ gives
+$|\xi_r|=v_0/\sqrt\xi$, so we need upper and lower bounds for $v_0$
+and $\xi$. In the model coordinate the collar of the left root ends
+at a distance comparable to $A_n^{19}$ from $X_L$, and that of the
+right root at a distance comparable to $A_n^{15}$ from $X_R$, because
+$r_X$ is comparable to $\mathfrak r_nA_n$ and $\mathfrak r_nA_n^5$
+there. The function $\rho$ has one maximum on the component and
+vanishes only at its two ends, where $|\rho_X|$ is comparable to
+$A_n$ and $A_n^9$. Hence $\rho\ge cA_n^{24}$ outside the collars, and
+\[
+ c\,\mathfrak r_n^{-1}A_n^{11}\le v_0=\frac{\sqrt\rho}{r_X}
+ \le C\,\mathfrak r_n^{-1}A_n^{-9/2}.
+\]
+By Step~1, $\xi\ge cA_n^{20}$ at the end of its collar, hence beyond
+it, and $\xi\le\xi_c=(3T_n/4)^{2/3}\asymp A_n^{1/3}$. So $|\xi_r|$ is
+bounded above and below by powers of $A_n$. The higher derivatives
+follow by differentiating $\xi_r=\pm v_0\,\xi^{-1/2}$, using the lower
+bounds for $r_X$, $\rho$ and $\xi$ on this region.
+
+\step{3: the inverse}
+From $r(\xi(r))=r$ we get $r_\xi=1/\xi_r$, and every higher
+derivative of $r(\xi)$ is a polynomial in lower ones and in
+derivatives of $\xi$, divided by $\xi_r$. This proves
+\eqref{eq:geometry-root-inverse}. The length $\xi_c$ of a half and
+its reciprocal are powers of $A_n$, so rescaling to unit length costs
+a fixed power of $A_n$ for each derivative.
+
+\step{4: the factors}
+For the reference operator $a=w_*$, $\widehat b=0$,
+$\delta=w_*v_0$, $U_\theta=V_\theta=1$ and
+$|\det D\Psi_i|=|\xi_r|$. Hence
+$\alpha_i=\delta/\sqrt\xi=w_*|\xi_r|$, which is
+\eqref{eq:geometry-root-density}. By
+\eqref{eq:geometry-profile-jets} and \eqref{eq:geometry-root-inverse}
+the functions $\alpha_i^{\pm1}$ have coefficient bounds, and the
+remaining quantities are obtained from $\alpha_i$ and $\xi_r$ by
+products, powers and differentiation in $\xi$. All of them are
+functions of $r$, so no angular frequency is involved.
+\end{proof}
+
+\begin{lemma}[The reference coordinate on a positive component]
+\label{lem:positive-reference-charts}
+\label{lem:positive-reference-coefficient-bounds}
+Let $(r_1,r_2)$ be a positive component with index $n$, let
+$y_L,y_R$ be the continued root coordinates at its two ends, and let
+$\eta_L,\eta_R$ be cutoffs with disjoint supports in the collars of
+the two ends, equal to one on smaller collars. Define
+\begin{equation}\label{eq:geometry-positive-coordinate}
+ \begin{split}
+ y_r&=\eta_L\,(y_L)_r-\eta_R\,(y_R)_r+\mu_0\,(1-\eta_L-\eta_R),
+ \qquad y(r)=\int_{r_1}^ry_r\,dr,\\
+ \mu_0&=\frac{1-\int\eta_L\,(y_L)_r\,dr+\int\eta_R\,(y_R)_r\,dr}
+            {\int(1-\eta_L-\eta_R)\,dr},
+ \end{split}
+\end{equation}
+and
+\begin{equation}\label{eq:geometry-positive-height}
+ \log h_*=\eta_L\log h_L+\eta_R\log h_R,
+ \qquad h_i=\bigl(w_*\,|(y_i)_r|\bigr)^{-1/2}.
+\end{equation}
+Then $y$ is a diffeomorphism of $[r_1,r_2]$ onto $[0,1]$ with
+$y=y_L$ near $r_1$ and $y=1-y_R$ near $r_2$, and $y_r^{\pm1}$,
+$h_*^{\pm1}$, the inverse function $r(y)$ and the source factors
+$h_*/y_r$, $y_r/h_*$ have derivatives of order $s$ bounded by
+$C_s\mathcal E_n^{C_s}$. The coefficients of the reference operator
+$P_*=-\partial_y(a\,\partial_y)-c\,\partial_\varphi^2+V$ are
+\begin{equation}\label{eq:geometry-positive-coefficients}
+ a=h_*^2\,w_*\,y_r,\qquad
+ c=\frac{h_*^2\,w_*'}{r\,y_r},\qquad
+ V=-\frac{h_*}{y_r}\,\bigl(w_*\,h_{*,r}\bigr)_r .
+\end{equation}
+Near the ends $a=1$ and $c=y_i$; on the whole component
+\eqref{eq:positive-coefficients} holds, and the derivatives of order
+$s$ of $a$, $c$, $V$ and $a^{-1}$ are bounded by
+$C_s\mathcal E_n^{C_s}$. On the component which contains the interval
+$J_*$, the collars can be chosen disjoint from $J_*$.
+\end{lemma}
+
+\begin{proof}
+\step{1: the collars}
+The continued coordinates $y_i=-\xi_i$ have positive inward
+derivatives with the bounds of
+Lemma~\ref{lem:reference-regularized-charts}, since
+\eqref{eq:geometry-normalized-root-jets} holds on both sides of the
+root. The increment of $y_i$ over its collar is at most
+$8\delta^{\rm root}\sup|\xi_r|=O(A_n^{18})$. So, after
+$\epsilon_{\rm root}$ is decreased if necessary and finitely many
+central collars are chosen by hand, the two collars together account
+for less than $\tfrac14$ of the total increment $1$. The interval
+$J_*$ has positive distance from the roots.
+
+\step{2: the coordinate}
+Note that $(y_R)_r<0$, since $y_R$ increases inwards from the right
+end. The numerator of $\mu_0$ lies between $\tfrac34$ and $1$, and its
+denominator is comparable to $r_2-r_1$; so $\mu_0$ and $\mu_0^{-1}$
+are coefficient powers. The function $y_r$ is a convex combination of
+positive functions with coefficient bounds above and below, and its
+integral over the component is $1$ by the choice of $\mu_0$. Hence
+$y=y_L$ near $r_1$ and $y=1-y_R$ near $r_2$, and the inverse function
+is estimated as in Step~3 of the preceding proof.
+
+\step{3: the height factor}
+The logarithms $\log h_i$ are bounded by $C(n^{5/2}+n^2)$ by
+\eqref{eq:geometry-profile-jets}, and their derivatives of positive
+order have coefficient bounds. Differentiating
+\eqref{eq:geometry-positive-height} and exponentiating gives the
+bounds for $h_*^{\pm1}$.
+
+\step{4: the coefficients}
+The formulas \eqref{eq:geometry-positive-coefficients} follow by
+inserting $u=h_*\,U(y(r))\cos(j\theta)$ into
+$-(h_*/y_r)\,\mathscr L_{w_*}u$; the terms with $U_y$ which do not
+belong to $(aU_y)_y$ cancel. In a collar
+$h_*=(w_*\,|(y_i)_r|)^{-1/2}$ gives $a=1$. Differentiating
+\eqref{eq:geometry-regular-root-coordinate} gives
+$\xi\,\xi_r^2=x\,c_i(x)^2=-w_*'/(rw_*)$ on both sides of the root, so
+$w_*'/(rw_*)=y_i\,(y_i)_r^2$ and $c=y_i$. The upper bounds and the
+lower bound for $a$ follow from Steps~2 and~3.
+
+\step{5: the lower bound for $c$}
+It suffices to show
+\begin{equation}\label{eq:geometry-wprime-distance}
+ w_*'(r)\ge\mathcal E_n^{-C}\,\min(r-r_1,\,r_2-r),
+\end{equation}
+because $y(1-y)\le\mathcal E_n^{C}\min(r-r_1,r_2-r)$ by the bounds
+for $y_r$. On a short positive cap
+$-\rho\ge cA_n\min(|X-X_L|,1)$, and on a long positive cap
+$-\rho\ge cA_n^9\min(|X-X_R|,1)$; since
+$w_*'=-\lambda_n\rho\,r/r_X$, the bounds of Lemma~\ref{lem:cell} give
+\eqref{eq:geometry-wprime-distance} on the caps. On a join
+$w_*'/w_*\ge2/r$ by \eqref{eq:join-slope}, and on the connectors of
+Lemma~\ref{lem:connector} $w_*'/w_*\ge3/(4r)$; with the lower bound
+for $w_*$ this gives \eqref{eq:geometry-wprime-distance} there, since
+the distance to the ends is bounded.
+\end{proof}
+
+\begin{lemma}[Conversion of weights and derivatives]
+\label{lem:geometric-weight-conversion}
+On cell $n$ and its neighbours, the continuous weights $H$, $E_0$,
+$M$ and the discrete weights $H_n$, $\mathcal E_n$, $M_n$ differ by
+factors bounded by $\mathcal E_n^{C}$. Changes between the variables
+$r$, $\varrho$, the root coordinates and the coordinates $y$ transfer
+derivatives of total order $s$ to derivatives of total order at most
+$s$, with coefficients bounded by $E_0^{C_s}$; so do the source
+factors and cutoffs. A restriction to a circle costs one radial
+derivative.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:geometry-endpoint-distance},
+$x_\partial=n+O(1)$ on cell $n$, so
+\[
+ \log\frac H{H_n}=O(n^2),\qquad
+ \log\frac{E_0}{\mathcal E_n}=O\bigl(n^{3/2}\log(e+n)\bigr),\qquad
+ \log\frac M{M_n}=O\bigl(n^{3/2}\log^2(e+n)\bigr),
+\]
+and the same bounds hold for the ratios of the weights of
+neighbouring cells; all of them are $O(\log\mathcal E_n)$. In the
+variable $\varrho$,
+\[
+ |\Dr\log M|\le C\,(1+x_\partial)^{-1/2}\log^2(e+x_\partial),
+\]
+which is bounded together with its derivatives, and the same is true
+of $\log H$, $\log E_0$ and $\log\ell$; so the weights are uniformly
+comparable on unit intervals of $\varrho$, and $\ell^{\pm1}$ is
+bounded by a power of $E_0$. The chain rule expresses derivatives of
+total order $s$ in one set of variables through derivatives of order
+at most $s$ in another, with coefficients which are polynomials in the
+derivatives of the coordinate functions and in reciprocals of their
+first derivatives; these are bounded by
+Lemmas~\ref{lem:reference-regularized-charts}
+and~\ref{lem:positive-reference-charts}. The inequality
+$E_0^{C_s}\le C_sM$ is applied to the complete product. The trace
+inequality on an interval of unit length costs one derivative, and
+the rescaling to unit length costs coefficient powers.
+\end{proof}
+
+\begin{lemma}[Flows at a general state]
+\label{lem:uniform-characteristic-flow-constants}
+On the neighbourhood of
+Lemma~\ref{lem:common-geometric-neighborhood}, after $b_0$ is
+increased and $\epsilon_0$ decreased, the characteristic speeds
+$c_\pm=d\pm v$ of $\bar L$ on a negative component $m$ satisfy, away
+from the collars of the roots,
+\begin{equation}\label{eq:geometry-flow-low-bound}
+ \int\|\partial_\theta c_\pm(r,\cdot)\|_{H^s_\theta}\,dr
+ \le C_s\,\mathcal E_m^{C_s}\,H_m^\beta\;\mathfrak g_{s+d_*,m},
+\end{equation}
+and the right sides of the regularized equation
+\eqref{eq:fixed-strip-root-flow} in the collars, and the corrected
+speeds $\widehat c_\pm$ of
+Proposition~\ref{prop:optical-residual-completion}, satisfy the same
+bound. Consequently the angular derivatives of all characteristic
+flows and of their inverses lie in $[\tfrac12,2]$, and the constants
+of Lemma~\ref{lem:circle-flow} for these flows are uniform in $m$.
+\end{lemma}
+
+\begin{proof}
+\step{1: the speeds}
+By \eqref{eq:completed-characteristics},
+\[
+ d=\frac{E\,(p-k_\theta)}{rQ},\qquad
+ v=\sqrt{-\frac{w'}{rw}}\;\frac{w\sqrt D}{Q},
+ \qquad -\frac{w'}{rw}=v_0^2-\frac{f'}r,
+\]
+where $w=w_*e^f$. At the reference state $d=0$ and $v=v_0$. The
+quantities $d$ and $w\sqrt D/Q-1$ are coefficients in the sense of
+Step~3 of the proof of Lemma~\ref{prop:full-physical-tame}, and they
+vanish at the reference state. Outside the supports of the controls
+$f'=0$; on the support of $\chi_n$ the ratio $f'/(rv_0^2)$ is bounded
+by $C|\kappa_n|A_n^{-29}$, with derivatives bounded by coefficient
+powers times $|\kappa_n|$
+(Lemma~\ref{lem:quantitative-optical-controls}). So $v/v_0-1$ is of
+the same kind. Only the deformation depends on $\theta$, and the
+length of the component is bounded; this proves
+\eqref{eq:geometry-flow-low-bound}. In a collar write
+$v=\sqrt x\,c_0(x,\theta)$ with
+$c_0=c_i(x)\cdot(v/v_0)$; by Lemma~\ref{lem:quantitative-root-collars}
+the function $c_0$ and its reciprocal have coefficient bounds, and
+$c_0-c_i$ and $d$ are bounded as in
+\eqref{eq:geometry-flow-low-bound}. The equation
+\eqref{eq:fixed-strip-root-flow} involves $d$ and $c_0$ at the point
+$xt^2$ and the bounded factors $x$ and $\zeta$, so its right side has
+the same bounds.
+
+\step{2: the Jacobians}
+Rescale the radial variable on each part of the component to the unit
+interval; this multiplies the speeds by lengths, which are coefficient
+powers. By \eqref{eq:geometry-smallness-absorption}, the right side of
+\eqref{eq:geometry-flow-low-bound} for $s\le4$ is as small as we wish
+on the neighbourhood, uniformly in $m$. Lemma~\ref{lem:circle-flow}
+then gives the bounds for the angular derivatives of the flows; the
+derivative of an inverse flow is the reciprocal of that of the flow.
+The large speed $v_0$ of the reference profile does not enter,
+because it does not depend on $\theta$.
+
+\step{3: the corrected flow}
+The corrected minus flow is $\widehat\Phi_r=\Phi_r\circ J_r$ with
+$J_r=\id+\chi(r)\Delta$, and its speed is
+\eqref{eq:readable-optical-velocity}. At the reference state
+$\Delta=0$. By the definition of $\Delta$ in the proof of
+Proposition~\ref{prop:optical-residual-completion} and
+Lemma~\ref{lem:one-high-factor}(iv), $\Delta$ is estimated by the
+return residual, hence by the right side of
+\eqref{eq:geometry-flow-low-bound}; the cutoff $\chi$ has
+coefficient bounds, and on the support of $\chi'$ the speed $v$ is
+bounded below by a coefficient power, so the correction is smaller
+than $v/2$. It vanishes near both roots, so the functions $c_0$ are
+unchanged. Thus Steps~1 and~2 apply to the corrected flows.
+\end{proof}
+
+\begin{lemma}[Coordinates and factors at a general state]
+\label{lem:current-geometric-jets}
+On the same neighbourhood, with a fixed $d_*$, every coordinate,
+inverse coordinate, Jacobian, height factor, source factor, potential
+and divided coefficient of
+Sections~\ref{subsec:return-correction}--\ref{subsec:positive-crossing}
+satisfies \eqref{eq:geometry-current-jet-bound}, and its derivatives
+with respect to the state satisfy the corresponding estimates of the
+shape \eqref{eq:tame-derivative-shape}.
+\end{lemma}
+
+\begin{proof}
+We follow the order in which the objects were constructed. No norm of
+high order is assumed small.
+
+\step{1: flows and root coordinates}
+Away from the collars, the last statement of
+Lemma~\ref{lem:circle-flow} bounds the difference between the flows
+of a general state and of the reference state by the difference of
+the speeds, that is, by the right side of
+\eqref{eq:geometry-flow-low-bound}. In a collar the same lemma
+applies to \eqref{eq:fixed-strip-root-flow}, whose right side is
+smooth in the independent variables $(x,\zeta,\theta)$; so the
+function $G(x,\zeta,\theta)$ of Section~\ref{subsec:root-coordinate},
+minus its reference value, satisfies
+\eqref{eq:geometry-current-jet-bound} in all three variables.
+Lemma~\ref{lem:rewrite-root-composition} then gives the bound for
+$\varphi=\Ev\,G$, and for $\chi_0=\Od\,G$ with one additional
+derivative; and $\xi_L=x\,(\tfrac32\chi_0)^{2/3}$ is a smooth function
+of $\chi_0$, which is bounded below. The charts $h_R$ and the residual
+$\mathfrak e$ are obtained from $h_L$ and the return map by
+compositions, inversions and parity projections, to which
+Lemma~\ref{lem:one-high-factor}(iv) applies. The corrected flows were
+treated in Lemma~\ref{lem:uniform-characteristic-flow-constants}.
+
+\step{2: inverse coordinates, height factors and sources}
+At low order, Step~1 and \eqref{eq:geometry-root-inverse} give, for
+the coordinate maps rescaled to unit size,
+\[
+ \bigl\|(D\Psi-D\Psi_*)\,(D\Psi_*)^{-1}\bigr\|_{C^0}
+ \le C\,\epsilon_0\,H_m^\beta\,\mathcal E_m^{C}<\tfrac14
+\]
+on the neighbourhood, by \eqref{eq:geometry-smallness-absorption}. So
+$D\Psi$ is invertible with bounds comparable to the reference. The
+higher derivatives of $\Psi^{-1}$ follow by differentiating
+$\Psi^{-1}\circ\Psi=\id$; subtracting the reference identity and
+using the product estimate keeps the factor of the difference. For
+the density use the identity
+\[
+ \alpha_i=\frac{a\,|\det D\Psi_i|}{U_\theta V_\theta}\circ\Psi_i^{-1}
+\]
+of Section~\ref{subsec:root-coordinate}: the Jacobian of the
+regularized coordinates does not vanish, and $U_\theta V_\theta$ is
+bounded below by
+Lemma~\ref{lem:uniform-characteristic-flow-constants}. Powers,
+derivatives and the formulas \eqref{eq:fixed-strip-airy-equation}
+then give the height factor, the potential and the source factor. The
+reciprocal of the Jacobian of the unregularized coordinates
+$(\sigma,\varphi)$, which vanishes at the roots, is never used.
+
+\step{3: positive components}
+The coordinate and the height factor of a general state on a positive
+component are the reference ones plus Taylor polynomials, of degree
+four and three, of the differences at the two ends, multiplied by
+fixed cutoffs. Restriction to the boundary, the polynomials and the
+cutoffs preserve the bounds of Steps~1 and~2. The differential stays
+close to the reference one as in Step~2, so the Jacobian is positive,
+and the inverse coordinate and the source factor are estimated in the
+same way.
+
+\step{4: division by $\bd^3$}
+The differences $F$ of the principal densities vanish with their
+first two inward derivatives at both ends. Near the left end
+\[
+ \frac{F(y)}{y^3}=\frac12\int_0^1(1-t)^2\,F'''(ty)\,dt,
+\]
+which costs three derivatives and keeps the factor $H_m^\beta$; near
+the right end divide by $(1-y)^3$ in the same way; in the middle
+$\bd^{-1}$ has coefficient bounds. This gives the bound for
+$e^{ab}_{\bx}=F^{ab}/\bd^3$.
+
+\step{5: the loss and the parameters}
+The characteristic speeds involve two derivatives of the height; the
+divided difference at a root one more; the boundary polynomials four;
+the principal density one derivative of the coordinates; the potential
+two more; the division three; and the Sobolev embedding and the
+traces a fixed number. Their total is $d_*$, which does not depend on
+$s$. Derivatives with respect to the state are estimated by
+differentiating the same finite formulas and the equations of the
+flows: every variation of a flow solves a linear equation with the
+same integrating factor, which is bounded by Step~2 of the preceding
+proof. The height enters through $Z=qu$, whose first derivative is
+$\dot q\,u+q\,\dot u$, whose second derivative is $q_1u_2+q_2u_1$, and
+whose higher derivatives vanish. Hence the seminorms
+\eqref{def:joint-displacement-seminorms}, which contain the unscaled
+$u$, control all derivatives, also at $q=0$. Finally
+Lemma~\ref{lem:geometric-weight-conversion} absorbs each complete
+product of reference functions into one power of $M$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:uniform-physical-geometry}]
+Part~(i) is Lemmas~\ref{lem:reference-regularized-charts}
+and~\ref{lem:positive-reference-charts}, with
+Lemmas~\ref{lem:quantitative-root-collars}
+and~\ref{lem:quantitative-optical-controls} for the collars, the
+controls and the cutoffs. Parts~(ii) and~(iii) are
+Lemmas~\ref{lem:uniform-characteristic-flow-constants}
+and~\ref{lem:current-geometric-jets}; the comparability of the
+differentials was shown in Step~2 of the last proof. All collars and
+cutoffs were chosen before any order of differentiation; only the
+constants depend on the order.
+\end{proof}
+
+\subsection{The fixed transmission domain}
+\label{subsec:transmission-domain}
+
+We have represented a height on the annulus by canonical unknowns on a
+collection of cylinders: two half-cylinders
+$[0,\xi_c]\times\T$ for each negative component and one cylinder
+$[0,1]\times\T$ for each positive component. The cylinders do not
+depend on the state. Neither do the conditions that link them:
+\begin{itemize}
+\item at the middle of a negative component, the condition
+ \eqref{eq:fixed-strip-cut};
+\item at a root, equality of the canonical values and of the inward
+ derivatives with opposite signs. Indeed, the coordinates and the
+ height factors of the two adjacent components have the same value
+ and the same first derivative at the root, so
+ \eqref{eq:fixed-strip-root-pair} takes this form.
+\end{itemize}
+We call the set of canonical unknowns satisfying these conditions the
+\emph{transmission domain}. A smooth element of it which solves the
+equation corresponds to a function which is smooth in the original
+variables across the roots: equality of the values gives equality of
+all tangential derivatives; equality of the fluxes gives equality of
+the first normal derivative; and the equation can be solved for
+$a\,u_{rr}$, because $a>0$, so that repeated differentiation matches
+all higher normal derivatives.
+
+This is the result of the section: all the operators
+$\widehat L_{\bx}$ act, in canonical form, on one domain. It is what
+makes it possible to regard them as perturbations of the reference
+operator in the next section.

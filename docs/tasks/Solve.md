@@ -2,12 +2,12 @@
 
 ## Problem
 
-The coupled inverse, the exact quadratic error, the Nash–Moser iteration, and one solution at a nonzero parameter.
+The Nash–Moser iteration with quadratic error (Theorem 9.4) applied to the coupled system: one solution at a nonzero parameter.
 
 Prove `ContinuousFlexibility.Blueprint.Solve` in `src/ContinuousFlexibility/Blueprint/Solve.lean`:
 
 ```lean
-theorem Solve (hN08 : N08Statement) (hTame : H01Statement ∧ H02Statement) : PointBranchStatement
+theorem Solve (hN10 : N10Statement) (hTame : H01Statement ∧ H02Statement) : PointBranchStatement
 ```
 
 ## Completion standard
@@ -18,4 +18,4 @@ theorem Solve (hN08 : N08Statement) (hTame : H01Statement ∧ H02Statement) : Po
 
 ## Source
 
-`paper/flexible-surface-rewrite/09-solving-the-equation.tex` lines 139–242.
+`paper/flexible-surface-readable/09-solving-the-equation.tex` lines 251–413.

@@ -1,0 +1,429 @@
+\section{Introduction}
+\label{sec:introduction}
+
+\subsection{The result}
+
+A \emph{bending} of a closed surface is a continuous family of
+isometric embeddings of one fixed Riemannian metric into $\R^3$. It is
+nontrivial when the shape of the surface changes, that is, when the
+images are not all congruent. Connelly's flexible sphere
+\cite{Connelly1977} shows that nontrivial bendings exist for embedded
+polyhedra. Problem~1.1 of Ghomi's list \cite{Ghomi2019}, which is
+attributed there to Euler and Maxwell, asks whether a closed $C^2$
+surface in $\R^3$ can be flexible. We construct a $C^\infty$ example.
+
+\begin{maintheorem}\label{thm:main}
+There are a smooth surface $\Sigma$ diffeomorphic to $S^2$, a smooth
+Riemannian metric $g_\Sigma$ on it, and a jointly smooth map
+$\mathcal F:\Sigma\times\R\to\R^3$ such that the maps
+$F_\tau=\mathcal F(\,\cdot\,,\tau)$ satisfy
+\[
+ F_\tau\text{ is an embedding},\qquad
+ F_\tau^*g_{\mathrm E}=g_\Sigma,\qquad F_{\tau+1}=F_\tau
+ \qquad\text{for all }\tau\in\R,
+\]
+where $g_{\mathrm E}$ is the Euclidean metric. At least two of the
+images $F_\tau(\Sigma)$ are not congruent under the Euclidean isometry
+group. An inner disk and a complementary cap of $\Sigma$ are fixed
+pointwise throughout the family. The area, the enclosed volume and the
+total oriented mean curvature of $F_\tau(\Sigma)$ do not depend on
+$\tau$.
+\end{maintheorem}
+
+Three conventions are implicit in this statement. A \emph{closed}
+surface is compact and without boundary. \emph{Nontrivial} always
+refers to noncongruence of the images: relabelling the points of a
+fixed surface by a family of intrinsic isometries moves material
+points but does not change the shape, and is not a bending in our
+sense. The mean curvature is $(k_1+k_2)/2$ for the outward normal.
+
+\subsection{The mechanism}
+\label{subsec:mechanism}
+
+The family in Theorem~\ref{thm:main} is completely explicit once one
+particular disk is available. Let $D$ be a disk with a rotationally
+symmetric metric $g$, and write $\varrho_\vartheta$ for its intrinsic
+rotation by the angle $\vartheta$. Suppose $F:D\to\R^3$ is an isometric
+embedding. If $R_\vartheta$ denotes the rotation of $\R^3$ about the
+vertical axis, then
+\begin{equation}\label{eq:phase-family}
+ F_\tau=R_{-2\pi\tau}\circ F\circ\varrho_{2\pi\tau}
+\end{equation}
+is again an isometric embedding of $(D,g)$ for every $\tau$, and its
+image is the rotated copy $R_{-2\pi\tau}F(D)$ of the original image.
+Two cases are uninteresting. If $F(D)$ is a surface of revolution,
+the image does not move at all. If $F(D)$ is not a surface of
+revolution, the image does move, but in general so does its boundary
+curve, and nothing can be attached to it.
+
+There is a third possibility. Suppose that $F(D)$ is not a surface of
+revolution, but that near the boundary of $D$ the embedding is the
+inclusion of a flat horizontal annulus, $F(x)=(x,c)$. There the two
+rotations in \eqref{eq:phase-family} cancel, so $F_\tau=F$ near the
+boundary for every $\tau$. All the maps $F_\tau$ can then be glued to
+one and the same complementary cap. The result is a closed surface in
+which a wavy annulus turns relative to a stationary shell
+(Figure~\ref{fig:surface-motion}). If the shell carries a mark which
+breaks its rotational symmetry, no rigid motion can account for the
+relative rotation, and the shape of the closed surface changes.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=.91,>=Stealth,font=\small]
+\foreach \shift/\phase/\word in {0/0/initial,6.6/55/later}{
+ \begin{scope}[xshift=\shift cm]
+ \fill[gray!15] (0,0) circle (2.05);
+ \fill[blue!6] (0,0) circle (1.65);
+ \draw[gray!65,thick] (0,0) circle (2.05);
+ \draw[dashed] (0,0) circle (1.65);
+ \foreach \radius in {.85,1.12,1.38}{
+  \draw[blue!70!black,thick,rotate=\phase]
+   plot[domain=0:360,samples=65,variable=\t]
+   ({(\radius+.10*cos(2*\t))*cos(\t)},
+    {(\radius+.10*cos(2*\t))*sin(\t)});}
+ \filldraw[fill=green!15,draw=green!45!black] (0,0) circle (.52);
+ \fill[red!75!black] (1.30,1.33) circle (2.4pt);
+ \node at (0,-2.36) {\word\ position};
+ \end{scope}}
+\draw[->,thick] (2.65,0)--(3.95,0);
+\node[above] at (3.3,0) {phase $\tau$};
+\node[below,align=center] at (3.3,-.1) {same\\metric};
+\node[above] at (0,2.15) {fixed inner disk};
+\draw[->,green!45!black] (-.5,2.0)--(-.18,.45);
+\node[above] at (6.6,2.15) {fixed marker on the cap};
+\draw[->,red!75!black] (7.4,2.0)--(7.90,1.36);
+\end{tikzpicture}
+\caption{The relative rotation, seen from above. The blue curves are
+schematic height contours of the moving annulus; they are not numerical
+data for the constructed surface. The dashed circle bounds the planar
+collar, which stays fixed pointwise, as does the green inner disk. The
+red marker on the cap also stays fixed while the nonradial part turns,
+so no ambient rotation accounts for the whole motion.}
+\label{fig:surface-motion}
+\end{figure}
+
+The motion itself therefore requires no analysis; in particular, no
+infinitesimal bending has to be integrated in the variable $\tau$.
+Everything rests on the existence of the disk, and the difficulty lies
+in the requirement that it be \emph{exactly} planar on a collar of its
+boundary while being nonradial inside.
+
+\subsection{The analytic core}
+
+Such a disk is produced as follows. Fill the middle of the disk by a
+flat piece, so that only an annulus $(r_-,r_+)\times\T$ remains, where
+$\T=\R/2\pi\Z$. On the annulus take the metric of a radial graph with
+slope $w$,
+\begin{equation}\label{eq:intro-metric-form}
+ g=(1+w(r)^2)\,dr^2+r^2\,d\theta^2,
+\end{equation}
+and look for an isometric embedding of the form $(P,z)$, where $z$ is
+a height function and $P$ takes values in the horizontal plane. Such
+an embedding exists locally exactly when the \emph{remainder metric}
+$g-dz\otimes dz$ is positive definite and flat, and flatness is a
+single scalar equation for $z$, the Darboux equation. The disk of
+Section~\ref{subsec:mechanism} is then obtained from the following
+statement, which is the main analytic result of the paper.
+
+\begin{maintheorem}\label{thm:annulus-intro}
+There exist radii $0<r_-<r_+$, a smooth function $w>0$ on $(r_-,r_+)$
+and a smooth function $z$ on $(r_-,r_+)\times\T$ with the following
+properties, where $g$ is the metric \eqref{eq:intro-metric-form}.
+\begin{enumerate}
+\item $|dz|_g<1$, and the metric $g-dz\otimes dz$ is flat.
+\item $z(r,\theta+\pi)=z(r,\theta)$, and $z$ is not independent of
+ $\theta$.
+\item $w$ extends smoothly by zero across $r_-$ and $r_+$, and $z$
+ extends smoothly by a constant across each of them.
+\end{enumerate}
+\end{maintheorem}
+
+Condition~(iii) says that $w$, and $z$ minus its boundary value, vanish
+to infinite order at both boundary circles. After a slight enlargement
+of the annulus this gives open collars on which $w=0$ and $z$ is
+constant, which is the exact planarity needed for the mechanism. A
+small error at the boundary would be useless; this is why flatness to
+infinite order is the right target. The precise form of
+Theorem~\ref{thm:annulus-intro}, with quantitative information on $w$
+and $z$, is Theorem~\ref{thm:new-annular-height}.
+
+The passage from Theorem~\ref{thm:annulus-intro} to
+Theorem~\ref{thm:main} is carried out in
+Section~\ref{sec:geometric-closure} and uses only classical
+differential geometry. The rest of the paper proves
+Theorem~\ref{thm:annulus-intro}.
+
+\subsection{Three difficulties, and how they are met}
+\label{subsec:difficulties}
+
+We look for the height in the form $z=h+qu$, where $h'=w$ is the radial
+height whose graph has the metric $g$, and $q$ is a small parameter. To
+first order in $q$ the Darboux equation is
+\begin{equation}\label{eq:intro-linear}
+ \mathscr L_wu=(wu_r)_r+\frac{w'}{r}\,u_{\theta\theta}=0 .
+\end{equation}
+A nonzero solution of this equation which is constant to infinite order
+at both ends is an infinitesimal version of what we want, and the plan
+is to choose $w$ so that one exists and then to correct it to a
+solution of the nonlinear equation. Three features of the problem shape
+everything that follows.
+
+\paragraph{Flat ends force infinitely many changes of type.}
+For $w>0$ the operator \eqref{eq:intro-linear} is elliptic where $w'>0$
+and hyperbolic where $w'<0$. At a flat end $w$ tends to zero. If $w$
+were monotone near that end, no nonzero angular mode of
+\eqref{eq:intro-linear} could vanish there together with its flux
+(Proposition~\ref{prop:obs-monotone-tail}). So $w$ must oscillate: near
+each end there are infinitely many circles on which the equation
+changes type, and they accumulate at the boundary. We build such a
+profile from infinitely many copies of one explicitly solvable cell,
+with lengths and amplitudes decaying fast enough for smoothness
+(Sections~\ref{sec:rosen-reference-packet} and~\ref{sec:radial-tails}).
+
+\paragraph{Two unrelated resonance conditions.}
+On each hyperbolic annulus, characteristics turn by a fixed
+\emph{travel angle} $T$, and solving along them involves dividing by
+$\sin(jT)$ at the angular frequency $j$. Independently, the solutions
+on neighbouring annuli must be matched, and the matching fails at
+eigenvalue-like resonances. A finite model in which both sets of
+resonances can be computed exactly (Section~\ref{sec:worked-example})
+shows that neither condition implies the other. In the actual profile
+the travel angles are quadratic irrationals fixed by the choice of the
+cells, while matching resonances are avoided by adjusting the relative
+heights of consecutive cells. The outcome is a two-sided inverse of
+$\mathscr L_w$ on the whole annulus, in spaces weighted towards the
+flat ends (Section~\ref{sec:radial-reference-inverse}).
+
+\paragraph{The inverse has to survive perturbation.}
+The Nash--Moser method needs an inverse of the linearization at every
+state near the reference one, not only at the reference. For a nearby
+state both the type-change circles and the characteristic return maps
+move, so its linearization does not even act on the same space. We
+remove this problem by subtracting from the linearization two terms,
+each proportional to an equation that is not yet solved: one fixes the
+type-change circles, the other fixes the return maps. Both terms vanish
+at a solution, and they produce exactly the quadratic error allowed by
+Hamilton's form of the implicit function theorem \cite{Hamilton1982}
+(Sections~\ref{sec:fixed-geometry}--\ref{sec:solving-the-equation}).
+
+\subsection{Organization of the proof}
+\label{subsec:organization}
+
+Figure~\ref{fig:proof-map} shows the logical structure, and
+Table~\ref{tab:sections} lists what each section contributes. The
+paper has three parts.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\small,>=Stealth,
+ box/.style={draw,rounded corners=2pt,align=center,inner sep=5pt,
+             minimum height=9mm}]
+\node[box,fill=blue!7] (A) at (0,0)
+ {Theorem~\ref{thm:main}: flexible sphere};
+\node[box] (C) at (0,-1.45)
+ {Theorem~\ref{thm:geometric-closure}: geometric closure\quad
+  (\S\ref{sec:geometric-closure})};
+\node[box,fill=blue!7] (B) at (0,-2.9)
+ {Theorem~\ref{thm:annulus-intro} $=$
+  Theorem~\ref{thm:new-annular-height}: annular height with flat ends};
+\node[box] (N) at (0,-4.35)
+ {Nash--Moser branch $q\mapsto\bx(q)$\quad
+  (\S\ref{sec:solving-the-equation})\quad and endpoint gain\quad
+  (\S\ref{sec:final-proof})};
+\node[box] (I) at (0,-5.8)
+ {Proposition~\ref{prop:rewrite-volume-inverse}: inverse of the
+  corrected linearization near the reference\quad
+  (\S\ref{sec:stable-inverse})};
+\node[box] (R) at (-4.1,-7.5)
+ {Proposition~\ref{prop:rad-fixed-theorem}:\\
+  reference profile $w_*$, seed $\phi_*$,\\
+  inverse of $\mathscr L_{w_*}$\quad
+  (\S\S\ref{sec:rosen-reference-packet}--\ref{sec:radial-reference-inverse})};
+\node[box] (F) at (4.1,-7.5)
+ {Corrected linearization\\
+  on a state-independent domain\\
+  (\S\ref{sec:scalar-core}, \S\ref{sec:fixed-geometry})};
+\draw[->] (C)--(A);
+\draw[->] (B)--(C);
+\draw[->] (N)--(B);
+\draw[->] (I)--(N);
+\draw[->] (R)--(I);
+\draw[->] (F)--(I);
+\end{tikzpicture}
+\caption{The structure of the proof. An arrow means ``is used to
+prove''.}
+\label{fig:proof-map}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\begin{tabularx}{\linewidth}{@{}l Y@{}}
+\toprule
+Section & What it provides\\
+\midrule
+\S\ref{sec:geometric-closure} &
+ Theorem~\ref{thm:annulus-intro} implies Theorem~\ref{thm:main}:
+ planar development, the marked cap, noncongruence, invariants.\\
+\S\ref{sec:scalar-core} &
+ The Darboux equation as the curvature of a connection form; its
+ linearization and conservation law; why the ends must oscillate; the
+ two resonances in a finite model; the first residual correction.\\
+\S\ref{sec:rosen-reference-packet} &
+ Statement of what the reference profile must provide
+ (Proposition~\ref{prop:rad-fixed-theorem}); the two solvable models
+ from which it is built.\\
+\S\ref{sec:radial-tails} &
+ The infinite chain of cells at each end; the mass--resistance
+ recurrence and the decaying solution; choice of the cell heights.\\
+\S\ref{sec:radial-reference-inverse} &
+ The inverse of $\mathscr L_{w_*}$ on the whole annulus; proof of
+ Proposition~\ref{prop:rad-fixed-theorem}.\\
+\S\ref{sec:fixed-geometry} &
+ Weighted spaces; the unknowns of the nonlinear problem; the second
+ residual correction; coordinates in which every nearby linearization
+ has the same transmission conditions.\\
+\S\ref{sec:stable-inverse} &
+ The inverse of the corrected linearization at nearby states, with tame
+ estimates (Proposition~\ref{prop:rewrite-volume-inverse}).\\
+\S\ref{sec:solving-the-equation} &
+ The coupled linear system and Hamilton's theorem: a smooth branch of
+ solutions.\\
+\S\ref{sec:final-proof} &
+ Improved decay of the metric corrections; the precise annular theorem
+ (Theorem~\ref{thm:new-annular-height}); proof of
+ Theorem~\ref{thm:main}.\\
+Appendix~\ref{app:app-obstructions} &
+ A side remark: no finite angular ansatz can solve the nonlinear
+ equation.\\
+Appendix~\ref{app:dependencies} &
+ The external results in the form used, and the order in which the
+ constants are chosen.\\
+Appendix~\ref{app:notation} & Index of notation.\\
+\bottomrule
+\end{tabularx}
+\caption{Contents by section.}
+\label{tab:sections}
+\end{table}
+
+\emph{Part~\ref{part:geometry}} (Sections~\ref{sec:geometric-closure}
+and~\ref{sec:scalar-core}) contains the geometry and the derivation of
+the scalar equation. It is self-contained and elementary.
+
+\emph{Part~\ref{part:reference}}
+(Sections~\ref{sec:rosen-reference-packet}--\ref{sec:radial-reference-inverse})
+is one-dimensional. After separation of angular modes, the linear
+equation \eqref{eq:intro-linear} becomes a family of ordinary
+differential equations, and the whole part is devoted to the
+construction of one profile $w_*$ for which these equations have the
+right kernel and a controlled inverse. Its only output is
+Proposition~\ref{prop:rad-fixed-theorem}; a reader willing to accept
+that proposition can go directly from Section~\ref{sec:radial-what}
+to Part~\ref{part:nonlinear}.
+
+\emph{Part~\ref{part:nonlinear}}
+(Sections~\ref{sec:fixed-geometry}--\ref{sec:final-proof}) solves the
+nonlinear equation near the reference and proves the two theorems.
+
+The estimates are arranged so that precision is spent where the
+decisions above are implemented: the matching of infinitely many
+intervals, the common domain of the perturbed operators, and the decay
+at the endpoints are proved in detail, while the spectra of the models
+and the elementary operator theory are quoted. The specific numbers
+that appear in the construction, such as the exponents $2n^3/3$ and
+$n^{5/2}$, the power $12$ and the weight exponent $3/4$, are each
+introduced together with the inequalities they have to satisfy; none
+of them is optimal, and Table~\ref{tab:endpoint-budget} collects them.
+
+\subsection{Context}
+
+\paragraph{Continuous families versus pairs.}
+Ghomi's problem \cite[Problem~1.1]{Ghomi2019} asks for a continuous
+family. Replacing a dimple by its reflection across a flat rim gives
+two different isometric realizations of one metric, but no path between
+them. Theorem~\ref{thm:main} provides such a path in the smooth
+category.
+
+\paragraph{Infinitesimal versus finite bendings.}
+A normal vector field supported inside a planar patch has zero first
+variation of the metric. This observation already appears in
+Cohn-Vossen's discussion of closed infinitesimally nonrigid surfaces
+\cite[footnote~2]{CohnVossen1930}; it does not solve the nonlinear
+isometry equations. Efimov's survey \cite{Efimov1948Survey} and his
+work on deformations at points of zero curvature
+\cite{Efimov1948Zero} belong to the historical setting of this
+distinction, and the later survey
+\cite[Sections~1.1--1.4]{IvanovaSabitov1991} treats finite bendings,
+their infinitesimal equations and higher-order extension. Our starting
+point is also an infinitesimal bending, the solution of
+\eqref{eq:intro-linear}; the analysis of
+Parts~\ref{part:reference} and~\ref{part:nonlinear} is what turns it
+into an actual height.
+
+\paragraph{Rigidity.}
+On the rigid side, hypotheses on curvature and on boundary data are
+decisive. For example, Ghomi and Spruck
+\cite[Theorem~1.1]{GhomiSpruck2020} prove that two properly oriented
+$C^{2,1}$ positively curved isometric immersions which agree on a curve
+segment agree everywhere on their connected domain. The annulus of
+Theorem~\ref{thm:annulus-intro} has curvature of both signs, with
+infinitely many transitions at each flat end, so neither strict
+positivity nor a finite collection of nondegenerate interfaces
+describes its geometry.
+
+\paragraph{Other categories.}
+Connelly's flexible embedded polyhedral sphere \cite{Connelly1977}
+establishes flexibility for polyhedra. Rounding its edges would change
+the metric, so it does not furnish a smooth bending. The $C^1$ theorems
+of Nash and Kuiper \cite{Nash1954,Kuiper1955} concern another
+regularity regime; in the smooth problem the second fundamental form
+and the type of the Darboux equation must be controlled at every scale.
+
+\paragraph{Smooth isometric embedding.}
+Our analytic method is closest to the theory of smooth isometric
+embedding. Smoothing already compensates for the loss of derivatives in
+Nash's argument \cite{Nash1956}. Han, Hong and Lin
+\cite[Theorem~1.1]{HanHongLin2003} use a Nash--Moser--H\"ormander
+scheme for nonpositive curvature under a specified degeneracy
+condition, and Han and Khuri treat local problems of mixed type with
+finite-order changes of type \cite{HanKhuri2010,HanKhuri2013}. In
+particular, the modification of the linearization by a multiple of the
+residual in \cite[pp.~650--653]{HanKhuri2010} is a precedent for our
+residual corrections. The new issue here is the simultaneous control of
+infinitely many interfaces and of both flat ends on a single closed
+domain.
+
+\paragraph{The invariants.}
+The three invariants in Theorem~\ref{thm:main} follow directly from the
+form \eqref{eq:phase-family} of the motion. They should be compared
+with general results of different scope: Sabitov's volume theorem
+\cite{Sabitov1996} is polyhedral, and Almgren and Rivin
+\cite{AlmgrenRivin1998} prove the invariance of the mean-curvature
+integral under smooth bendings. Motions in which curvature precesses
+around a shell also arise in the mechanical model of Hamouche, Maurini,
+Vidoli and Vincenti \cite{Hamouche2017}; that comparison supplies
+neither the flat collars nor the closed embedded surface.
+
+\subsection{Conventions}
+\label{subsec:conventions}
+
+Throughout, $\T=\R/2\pi\Z$, the angular average of a function is
+\[
+ \av f=\frac1{2\pi}\int_0^{2\pi}f\,d\theta ,
+\]
+and $R_\vartheta$ denotes a rotation by the angle $\vartheta$, of the
+plane, of $\R^3$ about the vertical axis, or of the circle
+($R_\vartheta\theta=\theta+\vartheta$), as the context requires. A
+prime denotes a derivative with respect to the radius $r$ unless
+another variable is indicated by a subscript.
+
+The letters $C$ and $c$ denote positive constants, large and small
+respectively, whose values may change from line to line; a subscript
+indicates dependence, as in $C_s$. We write $a\asymp b$ when
+$cb\le a\le Cb$. Constants that are fixed once and referred to later
+carry a distinguishing mark, as in $C_*$, $c_0$ or $N$.
+
+The paper uses a fairly large number of symbols. Each of
+Parts~\ref{part:reference} and~\ref{part:nonlinear} begins by fixing
+its vocabulary, and Appendix~\ref{app:notation} is an index of
+notation. Some letters have a local meaning inside a single proof;
+this is always said where it happens.

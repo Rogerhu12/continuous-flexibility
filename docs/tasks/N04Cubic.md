@@ -18,4 +18,4 @@ theorem N04Cubic : CubicDivisionTarget
 
 ## Source
 
-`paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 676–690.
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1211–1303.

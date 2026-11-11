@@ -2,7 +2,7 @@
 
 ## Problem
 
-The weighted height, source and circle spaces with their tame structure, and smooth flat extension of their elements.
+The weighted height, source and circle spaces with their tame structure, and smooth flat extension of their elements (Lemma 7.4).
 
 Prove `ContinuousFlexibility.Blueprint.Spaces` in `src/ContinuousFlexibility/Blueprint/Spaces.lean`:
 
@@ -18,4 +18,4 @@ theorem Spaces (hW01 : W01Statement) (hTame : H01Statement ∧ H02Statement) : W
 
 ## Source
 
-`paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 72–157.
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–237; `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 399–506.
