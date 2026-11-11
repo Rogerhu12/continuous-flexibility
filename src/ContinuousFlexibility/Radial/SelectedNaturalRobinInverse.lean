@@ -98,7 +98,7 @@ theorem radialNatural_robin_iff
       have hi : outerOutwardRadius right x ∈ radialTailInterval D right cut := by
         apply (radialTailInterval_outward D right cut _).mpr
         simpa only [outerOutwardRadius_twice] using hx
-      have he := radialJacobi_outward ((j : ℝ) ^ 2) D.w V right x
+      have he := radialJacobi_outward D right ((j : ℝ) ^ 2) V x
       simpa only [w, y, outerTailOutwardWeight, outerOutwardRadius_eq_sign,
         hN.2.1.2 _ hi] using he
   have hyLp : MemLp y 2
