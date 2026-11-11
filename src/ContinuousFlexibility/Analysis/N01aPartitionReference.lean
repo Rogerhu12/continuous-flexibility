@@ -20,6 +20,8 @@ namespace N01aReferenceCoarsening
 
 variable {D E : ReferenceData} {σ : ℕ → ℕ} (h : N01aReferenceCoarsening D E σ)
 
+include h
+
 theorem natural_kernels_iff : RadialNaturalKernels E ↔ RadialNaturalKernels D := by
   simp only [RadialNaturalKernels, NaturalRadialNull, radialHilbertMeasure,
     h.core_eq, h.w_eq, h.phi_eq, h.a_eq, h.b_eq]

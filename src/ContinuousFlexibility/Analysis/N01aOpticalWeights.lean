@@ -86,9 +86,9 @@ theorem n01aOpticalScale_sqrt {E A L : ℝ} (hE : 0 < E) (hL : 0 < L) :
 theorem n01aOpticalScale_inv {E A L : ℝ} (hE : 0 < E) :
     (n01aOpticalScale E A L)⁻¹ = (4 * L) ^ 2 * E ^ (2 * A) := by
   rw [n01aOpticalScale, div_pow, inv_div, Real.rpow_neg hE.le,
-    ← inv_pow, div_inv_eq_mul]
+    inv_pow, div_inv_eq_mul]
   congr 1
-  rw [show 2 * A = A * (2 : ℝ) by ring, Real.rpow_mul_natCast hE.le A 2]
+  simpa only [Nat.cast_ofNat, mul_comm] using (Real.rpow_mul_natCast hE.le A 2).symm
 
 theorem n01aOptical_quadratic_scale_bound {β A B : ℝ}
     (hβ : 0 ≤ β) (hA : 0 < A) (hB : 0 < B) :
@@ -98,10 +98,11 @@ theorem n01aOptical_quadratic_scale_bound {β A B : ℝ}
     (mul_nonneg (mul_nonneg hβ (sq_nonneg A)) hB.le)
   refine ⟨C, hC, fun E δ hE hδ hinv => ?_⟩
   have hEpos : 0 < E := zero_lt_one.trans_le hE
+  have htwice : E ^ (2 * A) = (E ^ A) ^ 2 := by
+    simpa only [Nat.cast_ofNat, mul_comm] using Real.rpow_mul_natCast hEpos.le A 2
   have hproduct : β * (A * E ^ A) ^ 2 * (B * E ^ B) =
       (β * A ^ 2 * B) * E ^ (2 * A + B) := by
-    rw [mul_pow, Real.rpow_add hEpos,
-      show 2 * A = A * (2 : ℝ) by ring, Real.rpow_mul_natCast hEpos.le A 2]
+    rw [mul_pow, Real.rpow_add hEpos, htwice]
     ring
   calc
     β * (A * E ^ A) ^ 2 / δ = β * (A * E ^ A) ^ 2 * δ⁻¹ := div_eq_mul_inv _ _
@@ -130,8 +131,8 @@ theorem n01aOptical_polynomial_scale_bound (s : ℕ) {F β A B : ℝ}
   have hone : 1 ≤ E ^ (A + B) := Real.one_le_rpow hE (add_nonneg hA.le hB.le)
   have hplus : 1 + (A * E ^ A) / δ ≤ (1 + A * B) * E ^ (A + B) := by
     calc
-      1 + (A * E ^ A) / δ ≤ 1 + (A * B) * E ^ (A + B) := add_le_add_left hproduct 1
-      _ ≤ E ^ (A + B) + (A * B) * E ^ (A + B) := add_le_add_right hone _
+      1 + (A * E ^ A) / δ ≤ 1 + (A * B) * E ^ (A + B) := add_le_add le_rfl hproduct
+      _ ≤ E ^ (A + B) + (A * B) * E ^ (A + B) := add_le_add hone le_rfl
       _ = (1 + A * B) * E ^ (A + B) := by ring
   have hbase : 0 ≤ 1 + (A * E ^ A) / δ := by positivity
   have hp := pow_le_pow_left₀ hbase hplus s

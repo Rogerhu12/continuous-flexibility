@@ -96,7 +96,9 @@ theorem tendsto_radialWeakPairing_referencePhiCutoff {D : ReferenceData}
     have hsep : radialWeakPairing D U.1 (referencePhiCosineCutoff D n) =
         ∫ r in D.a..D.b, referenceMode U.1 2 r *
           Radial.radialJacobi 4 D.w (referencePhiCutoff D n) r := by
-      simpa only [referencePhiCosineCutoff, Nat.cast_ofNat,
+      change radialWeakPairing D U.1
+        (fun p : PolarPoint => referencePhiCutoff D n p.1 * Radial.cosineMode 2 p.2) = _
+      simpa only [Nat.cast_ofNat,
         show (2 : ℝ) ^ 2 = 4 by norm_num] using
         radialWeakPairing_cosine_test hw (contDiff_referencePhiCutoff hphi.1 n) U.1 2
     rw [hsep, integral_radialJacobi_symm hw hq (contDiff_referencePhiCutoff hphi.1 n)

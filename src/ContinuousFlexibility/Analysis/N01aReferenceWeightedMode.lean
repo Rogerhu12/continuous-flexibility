@@ -40,6 +40,30 @@ theorem radialCellIntegrable_cosine_lift {D : ReferenceData}
     fun_prop
   exact (continuous_memLp_radialPhysicalMeasure hc).integrable_sq
 
+theorem outputRealization_cosine_lift_of_summable {D : ReferenceData}
+    (hpart : RadialPartition D) {γ M : ℝ} {f : ℝ → ℝ} (hf : Continuous f)
+    (hs : Summable (outputCellSquare D γ M
+      (fun p => f p.1 * Radial.cosineMode 2 p.2))) :
+    OutputRealization D γ M 0 ((fun p => f p.1 * Radial.cosineMode 2 p.2), 0) := by
+  have hrem : outputRemainder D 0
+      ((fun p => f p.1 * Radial.cosineMode 2 p.2), 0) =
+      (fun p => f p.1 * Radial.cosineMode 2 p.2) := by
+    funext p
+    simp only [outputRemainder, zero_mul, sub_zero]
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · rw [hrem]
+    exact radialCellIntegrable_cosine_lift hpart hf 2
+  · rw [hrem]
+    exact hs
+  · intro p
+    change f (p.1 + 0) * Radial.cosineMode 2 (p.2 + Real.pi) =
+      f p.1 * Radial.cosineMode 2 p.2
+    rw [add_zero]
+    congr 1
+    simpa only [Nat.mul_one] using Radial.cosineMode_even_frequency_periodic 1 p.2
+  · intro r θ
+    exact congrArg (fun x => f r * x) (Radial.cosineMode_even 2 θ)
+
 theorem outputRealization_cosine_of_mode_eq {D : ReferenceData}
     (hab : D.a ≤ D.b) (hpart : RadialPartition D) (hchi : Continuous D.chiLeft)
     {γ M aL : ℝ} {U : RadialUnknown} {f : ℝ → ℝ}
@@ -85,22 +109,7 @@ theorem outputRealization_cosine_of_mode_eq {D : ReferenceData}
   have hs : Summable (outputCellSquare D γ M g) :=
     Summable.of_nonneg_of_le (fun m => outputCellSquare_nonneg hab γ M g m) hweighted
       (hreal.2.1.mul_left K)
-  have hrem : outputRemainder D 0 (g, 0) = g := by
-    funext p
-    simp only [outputRemainder, zero_mul, sub_zero]
-  refine ⟨?_, ?_, ?_, ?_⟩
-  · rw [hrem]
-    exact radialCellIntegrable_cosine_lift hpart hf 2
-  · rw [hrem]
-    exact hs
-  · intro p
-    change f (p.1 + 0) * Radial.cosineMode 2 (p.2 + Real.pi) =
-      f p.1 * Radial.cosineMode 2 p.2
-    rw [add_zero]
-    congr 1
-    simpa only [Nat.mul_one] using Radial.cosineMode_even_frequency_periodic 1 p.2
-  · intro r θ
-    exact congrArg (fun x => f r * x) (Radial.cosineMode_even 2 θ)
+  exact outputRealization_cosine_lift_of_summable hpart hf hs
 
 theorem referenceGraph_pure_row_eigenfield_output {D : ReferenceData}
     (hgeo : RadialProfileGeometry D) (hpart : RadialPartition D)

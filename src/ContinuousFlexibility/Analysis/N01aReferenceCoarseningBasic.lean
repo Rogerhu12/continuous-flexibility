@@ -31,6 +31,8 @@ namespace N01aReferenceCoarsening
 
 variable {D E : ReferenceData} {σ : ℕ → ℕ} (h : N01aReferenceCoarsening D E σ)
 
+include h
+
 theorem core_eq : radialCore E = radialCore D := by
   simp only [radialCore, h.a_eq, h.b_eq]
 

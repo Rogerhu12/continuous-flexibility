@@ -18,6 +18,8 @@ open scoped Topology
 
 variable {D E : ReferenceData} {σ : ℕ → ℕ} (h : N01aReferenceCoarsening D E σ)
 
+include h
+
 theorem smooth_core_closure_of_source_aemeasurable
     (hD : RadialPartition D) (hE : RadialPartition E) (hab : D.a ≤ D.b)
     {γ M₀ M₁ : ℝ}

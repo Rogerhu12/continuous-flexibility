@@ -23,6 +23,8 @@ namespace N01aReferenceCoarsening
 
 variable {D E : ReferenceData} {σ : ℕ → ℕ} (h : N01aReferenceCoarsening D E σ)
 
+include h
+
 theorem inverse_properties (hD : RadialPartition D) (hE : RadialPartition E)
     (hab : D.a ≤ D.b) {γ M₀ M₁ : ℝ} {G : RadialSource → RadialUnknown}
     (hG : ReferenceInverseProperties D γ M₀ M₁ G) :

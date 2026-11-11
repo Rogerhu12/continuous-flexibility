@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01aReferenceGreen
+import ContinuousFlexibility.Analysis.N01aReferencePureRow
 import ContinuousFlexibility.Scalar.NormalizedConservation
 
 /-!
@@ -135,7 +136,7 @@ theorem referenceGraph_reference_eigenfield {D : ReferenceData}
   intro ψ hψ
   dsimp only
   rw [radialWeakPairing_reference_eigenfield hD hN hψ]
-  simp only [zero_mul, add_zero, Pi.zero_apply, radialAngularMean,
+  simp only [zero_mul, mul_zero, add_zero, Pi.zero_apply, radialAngularMean,
     intervalIntegral.integral_zero]
 
 end ContinuousFlexibility.Statements

@@ -98,16 +98,18 @@ theorem n01aCellGroupIndex_lower (D : ReferenceData) (p : ℕ → ℝ)
     j ≤ 2 * n01aCellGroupIndex D p hproper j + 1 := by
   have hm : StrictMono (fun k => ((n01aCellOrder D p hproper) k : ℕ)) :=
     (Subtype.strictMono_coe _).comp (n01aCellOrder D p hproper).strictMono
-  have hj := hm.id_le j
   unfold n01aCellGroupIndex
-  omega
+  calc
+    j ≤ ((n01aCellOrder D p hproper) j : ℕ) := hm.id_le j
+    _ ≤ 2 * (((n01aCellOrder D p hproper) j : ℕ) / 2) + 1 := by omega
 
 theorem n01aCellGroupIndex_proper (D : ReferenceData) (p : ℕ → ℝ)
     (hproper : ∀ N : ℕ, {i | D.cellIndex i ≤ N}.Finite) (N : ℕ) :
     {j | n01aCellGroupIndex D p hproper j ≤ N}.Finite := by
   apply (Set.finite_le_nat (2 * N + 1)).subset
   intro j hj
-  exact (n01aCellGroupIndex_lower D p hproper j).trans (by omega)
+  exact (n01aCellGroupIndex_lower D p hproper j).trans
+    (Nat.add_le_add_right (Nat.mul_le_mul_left 2 hj) 1)
 
 /-- One original cell in each nonempty group, used for the trace scaffold. -/
 def n01aCellRepresentative (D : ReferenceData) (p : ℕ → ℝ)
@@ -140,7 +142,7 @@ theorem n01aCoarseReference_mem_cell (D : ReferenceData) (p : ℕ → ℝ)
     (hproper : ∀ N : ℕ, {i | D.cellIndex i ≤ N}.Finite) (j : ℕ) (r : ℝ) :
     r ∈ (n01aCoarseReference D p hproper).cells j ↔
       ∃ i, n01aCellGrouping D p hproper i = j ∧ r ∈ D.cells i := by
-  simp only [n01aCoarseReference, Set.mem_iUnion, mem_n01aCoarseningFiber]
+  simp only [n01aCoarseReference, Set.mem_iUnion, mem_n01aCoarseningFiber, exists_prop]
 
 theorem n01aCoarseReference_cell_subset (D : ReferenceData) (p : ℕ → ℝ)
     (hproper : ∀ N : ℕ, {i | D.cellIndex i ≤ N}.Finite) (i : ℕ) :

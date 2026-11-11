@@ -40,7 +40,7 @@ theorem exists_n01a_component_drop_constant {D : ReferenceData} (hD : IsAccumula
   have hsq : (D.cellIndex m : ℝ) ^ 2 ≤ N ^ 2 :=
     (sq_le_sq₀ (Nat.cast_nonneg _) hN).mpr hm
   rw [← J.integral_abs_logDerivative hprofile.1]
-  exact (hk J m hcell).trans (mul_le_mul_of_nonneg_left (add_le_add_left hsq 1) hK.le)
+  exact (hk J m hcell).trans (mul_le_mul_of_nonneg_left (add_le_add le_rfl hsq) hK.le)
 
 /-- The count uses the actual finite set of components meeting `[p,r]`.
 The energy estimate and the host-index estimate are intermediate inputs;

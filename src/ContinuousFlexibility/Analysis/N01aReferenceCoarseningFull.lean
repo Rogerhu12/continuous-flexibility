@@ -16,6 +16,8 @@ namespace ContinuousFlexibility.Statements.N01aReferenceCoarsening
 
 variable {D E : ReferenceData} {σ : ℕ → ℕ} (h : N01aReferenceCoarsening D E σ)
 
+include h
+
 theorem reference_properties_of_phi_graph
     (hGeom : RadialProfileGeometry D) (hNatural : RadialNaturalKernels D)
     (hD : RadialPartition D) (hE : RadialPartition E)

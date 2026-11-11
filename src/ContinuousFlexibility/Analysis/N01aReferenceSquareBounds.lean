@@ -18,8 +18,8 @@ theorem sourceNormSquare_scalar_le {D : ReferenceData} (hab : D.a ≤ D.b)
 
 theorem outputNormSquare_scalar_le {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M aL : ℝ) (U : RadialUnknown) : U.2 ^ 2 ≤ outputNormSquare D γ M aL U := by
-  have hs := tsum_nonneg fun m =>
-    outputCellSquare_nonneg hab γ M (outputRemainder D aL U) m
+  have hs : 0 ≤ ∑' m : ℕ, outputCellSquare D γ M (outputRemainder D aL U) m :=
+    tsum_nonneg fun m => outputCellSquare_nonneg hab γ M (outputRemainder D aL U) m
   unfold outputNormSquare
   linarith only [sq_nonneg aL, hs]
 
@@ -75,7 +75,7 @@ private theorem n01a_tendsto_zero_of_square_bound {f g : ℕ → ℝ}
   have hsq : Tendsto (fun n => f n ^ 2) atTop (𝓝 0) :=
     squeeze_zero' (Eventually.of_forall fun n => sq_nonneg (f n))
       (Eventually.of_forall hfg) hg
-  apply tendsto_zero_iff_abs_tendsto_zero.mpr
+  apply (tendsto_zero_iff_abs_tendsto_zero _).mpr
   simpa only [Real.sqrt_sq_eq_abs, Real.sqrt_zero] using hsq.sqrt
 
 theorem tendsto_source_scalar_of_normSquare {D : ReferenceData} (hab : D.a ≤ D.b)

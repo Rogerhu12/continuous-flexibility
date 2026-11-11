@@ -27,7 +27,7 @@ theorem n01a_reference_phi_energy_pos {D : ReferenceData}
   have hright : max r r₀ < D.b := max_lt hr.2 hr₀.2
   have hcore : Icc (min r r₀) (max r r₀) ⊆ radialCore D :=
     fun _ hx => ⟨hleft.trans_le hx.1, hx.2.trans_lt hright⟩
-  have htransfer := n01aJacobiEnergy_transfer hD.1 hleft.le (min_le_max r r₀)
+  have htransfer := n01aJacobiEnergy_transfer hD.1 hleft.le min_le_max
     hD.2.2.1.1 hD.2.2.2.1.1
     (fun x hx => hD.2.2.2.2.1 x (hcore hx)) (fun x hx => hN.1 x (hcore hx))
     (s := r) (t := r₀) ⟨min_le_left _ _, le_max_left _ _⟩
