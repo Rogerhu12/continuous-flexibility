@@ -91,7 +91,7 @@ private theorem transmission_normal_add {g h : PolarPoint → ℝ}
     mixedDerivative n 0 (fun q => g q + h q) p =
       mixedDerivative n 0 g p + mixedDerivative n 0 h p := by
   simpa only [mixedDerivative, iteratedDeriv_zero] using
-    iteratedDeriv_add (n := n) (x := p.1)
+    iteratedDeriv_fun_add (n := n) (x := p.1)
       ((transmission_slice_smooth hg p.2).contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
       ((transmission_slice_smooth hh p.2).contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
 
