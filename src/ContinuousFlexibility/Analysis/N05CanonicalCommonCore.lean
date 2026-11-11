@@ -72,9 +72,10 @@ theorem n05CanonicalFiniteReweight_apply (T : MaterialData) (S : PhysicalSpacesD
     (n05CanonicalFiniteScalarBound_nonneg q _)
     (n05CanonicalFiniteScalar_bound q _)
     (show n05CanonicalClosedSubmodule S K s from v) m j
+  refine he.trans ?_
   by_cases hm : m ∈ q
-  · simpa only [n05CanonicalFiniteScalar, if_pos hm] using he
-  · simpa only [n05CanonicalFiniteScalar, if_neg hm, zero_smul] using he
+  · simp only [n05CanonicalFiniteScalar, if_pos hm]
+  · simp only [n05CanonicalFiniteScalar, if_neg hm, zero_smul]
 
 theorem n05CanonicalFiniteReweight_bound (T : MaterialData) (S : PhysicalSpacesData)
     (K : CanonicalData S) (γfrom tfrom γto tto : ℝ) (s : ℕ) (q : Finset ℕ)
