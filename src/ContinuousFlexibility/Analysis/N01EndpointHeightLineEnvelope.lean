@@ -96,9 +96,8 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
     hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT (hS.1 (3 / 4 : ℝ)) ξ₀.1 j (s + 1)
   have hE₁ : (∑' m, E₁ m) < ⊤ :=
     hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT (hS.1 (3 / 4 : ℝ)) ξ₁.1 j (s + 1)
-  have hE : (∑' m, E m) < ⊤ := by
-    change (∑' m, E₀ m + E₁ m) < ⊤
-    exact (ENNReal.tsum_add (f := E₀) (g := E₁)).trans_lt
+  have hE : (∑' m, E m) < ⊤ :=
+    (ENNReal.tsum_add (f := E₀) (g := E₁)).trans_lt
       (ENNReal.add_lt_top.mpr ⟨hE₀, hE₁⟩)
   let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n s
   let K : ℝ := pointData.choose
@@ -113,12 +112,15 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
   let η : HeightPair S := η₀ m + t • η₁ m
   have hlocal : ∃ a : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
       heightPairField S η (r, ψ) = stateU S (liftSectorParameter S C (x + t • w)).1 (r, ψ) + a := by
-    obtain ⟨a₀, ha₀⟩ := hlocal₀ m
-    obtain ⟨a₁, ha₁⟩ := hlocal₁ m
+    let localData₀ := hlocal₀ m
+    let a₀ : ℝ := localData₀.choose
+    let localData₁ := hlocal₁ m
+    let a₁ : ℝ := localData₁.choose
     refine ⟨a₀ + t * a₁, ?_⟩
     intro r hr ψ
     have heq := heightPairField_affine_apply S (η₀ m) (η₁ m) t (r, ψ)
-    have hsum := congrArg₂ (fun a b : ℝ => a + t * b) (ha₀ r hr ψ) (ha₁ r hr ψ)
+    have hsum := congrArg₂ (fun a b : ℝ => a + t * b)
+      (localData₀.choose_spec r hr ψ) (localData₁.choose_spec r hr ψ)
     have halg := affine_additive_constants
       (heightPairField S ξ₀ (r, ψ)) (heightPairField S ξ₁ (r, ψ)) a₀ a₁ t
     exact heq.trans (hsum.trans (halg.trans
@@ -169,7 +171,8 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
         mul_le_mul_of_nonneg_left hnorm (pow_nonneg hM0 _)
       _ = Real.sqrt (E₀ m).toReal + Real.sqrt (E₁ m).toReal :=
         (mul_add _ _ _).trans (congrArg₂ (fun u v : ℝ => u + v) hsqrt₀.symm hsqrt₁.symm)
-      _ ≤ 2 * Real.sqrt (E m).toReal := by linarith only [he₀, he₁]
+      _ ≤ 2 * Real.sqrt (E m).toReal :=
+        (add_le_add he₀ he₁).trans_eq (two_mul (Real.sqrt (E m).toReal)).symm
   have hbase := hheight base (le_max_left _ _)
   have hhigh := hheight (s + loss) (le_max_right _ _)
   have hgrade : p (s + loss) (x + t • w) ≤ p j x + p j w :=

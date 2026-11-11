@@ -51,7 +51,7 @@ private theorem scalar_height_curve_energy_bound
     (hK : 0 ≤ K) (hA : 0 ≤ A) (hB : 2 + B ≤ A)
     (hlo : 0 ≤ lo) (hloE : lo ≤ Real.sqrt E.toReal)
     (hhiE : hi ≤ Real.sqrt E.toReal)
-    (hpoint : p * |y| ≤ K * M ^ (c + 1) * (((0 : ℝ) + 2 + B) * lo + hi)) :
+    (hpoint : p * |y| ≤ K * M ^ (c + 1) * ((((0 : ℕ) : ℝ) + 2 + B) * lo + hi)) :
     p * |q * y| ≤ |q| * K * (A + 1) *
       Real.sqrt (ENNReal.ofReal ((M ^ (s + 1)) ^ 2) * E).toReal := by
   let e : ℝ := Real.sqrt E.toReal
@@ -63,7 +63,7 @@ private theorem scalar_height_curve_energy_bound
       _ ≤ A * e + e := add_le_add (mul_le_mul_of_nonneg_left hloE hA) hhiE
       _ = (A + 1) * e := by ring
   have hp : p * |y| ≤ K * M ^ (c + 1) * ((2 + B) * lo + hi) := by
-    simpa only [zero_add] using hpoint
+    simpa only [Nat.cast_zero, zero_add] using hpoint
   have hc : M ^ (c + 1) ≤ M ^ (s + 1) :=
     pow_le_pow_right₀ hM (by omega)
   have hsqrt : Real.sqrt (ENNReal.ofReal ((M ^ (s + 1)) ^ 2) * E).toReal =
@@ -95,7 +95,7 @@ private theorem scalar_rescale_hasDerivAt
   have hd' : HasDerivAt f d' (t * q) :=
     (congrArg (fun u : ℝ => HasDerivAt f u (t * q)) heq).mp hd
   have h := hd'.comp t ((hasDerivAt_id t).mul_const q)
-  simpa only [Function.comp_def, one_mul, mul_comm] using h
+  simpa only [Function.comp_def, id_eq, one_mul, mul_one, mul_comm] using h
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
