@@ -57,7 +57,9 @@ theorem UniformScalarTowerEstimate.prodMk
   refine ⟨C + D, add_nonneg hC hD, ?_⟩
   intro x hx v
   change pairGrading q r s ((J.D k x).prod (K.D k x) v) ≤ _
-  rw [ContinuousMultilinearMap.prod_apply, tamePairGrading_apply]
+  rw [ContinuousMultilinearMap.prod_apply]
+  change q s (J.D k x v) + r s (K.D k x v) ≤
+    (C + D) * tameJetSize p k s (max ell m) (max b c) x v
   exact (add_le_add (hCx x hx v) (hDx x hx v)).trans_eq (by ring)
 
 theorem FixedNeighborhoodSmoothTame.prodMk
@@ -105,7 +107,8 @@ theorem uniformScalarTowerEstimate_const (a : F) (hU : IsOpen U) :
       change q s a ≤ q s a * tameJetSize p 0 s loss base x v
       rw [tameJetSize_zero]
       simpa only [mul_one] using mul_le_mul_of_nonneg_left
-        (le_add_of_nonneg_right (apply_nonneg (p (s + loss)) x)) (apply_nonneg (q s) a)
+        (show (1 : ℝ) ≤ 1 + p (s + loss) x from
+          le_add_of_nonneg_right (apply_nonneg (p (s + loss)) x)) (apply_nonneg (q s) a)
   | succ k =>
       change q s 0 ≤ q s a * tameJetSize p (k + 1) s loss base x v
       rw [map_zero]

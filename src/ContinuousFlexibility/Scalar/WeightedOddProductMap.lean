@@ -137,8 +137,12 @@ private theorem oddProductPrimitiveField_productBound
   refine ⟨max base (s + loss), C * 2, mul_nonneg hC (by norm_num), ?_⟩
   intro u
   rw [oddProductPrimitiveFieldMultilinear_apply]
-  have hsum := oneHigh_le_card_product
-    (gradedSeminorm_monotone (fun n => A.level n) A.bond) base (s + loss) u
+  have hsum :
+      (∑ i, A.grading (s + loss) (u i) *
+        ∏ j ∈ Finset.univ.erase i, A.grading base (u j)) ≤
+      (Fintype.card (Fin 2) : ℝ) * ∏ i, A.grading (max base (s + loss)) (u i) :=
+    oneHigh_le_card_product (p := A.grading)
+      (gradedSeminorm_monotone (fun n => A.level n) A.bond) base (s + loss) u
   exact ((hCu u).trans (mul_le_mul_of_nonneg_left hsum hC)).trans_eq (by
     simp only [Fintype.card_fin, Nat.cast_ofNat]
     ring)
@@ -151,16 +155,19 @@ def oddProductPrimitiveMap
     ContinuousMultilinearMap ℝ (fun _ : Fin 2 => A.Space) A.Space :=
   liftContinuousMultilinear hA (oddProductPrimitiveFieldMultilinear hT hA hγ)
     (oddProductPrimitiveField_heightMember hT hA hinterp hγ)
-    (withSeminorms_graded (fun n => A.level n) A.bond)
+    (p := A.grading) (withSeminorms_graded (fun n => A.level n) A.bond)
     (oddProductPrimitiveField_productBound hT hA hinterp hγ)
 
 theorem decode_oddProductPrimitiveMap
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
     (hinterp : HasInterpolation A.grading) (hγ : 0 < γ) (u : Fin 2 → A.Space) :
     A.decode (oddProductPrimitiveMap hT hA hinterp hγ u) =
-      scalarOddProductPrimitive (A.decode (u 0)) (A.decode (u 1)) := by
-  rw [oddProductPrimitiveMap, decode_liftContinuousMultilinear,
-    oddProductPrimitiveFieldMultilinear_apply]
+      scalarOddProductPrimitive (A.decode (u 0)) (A.decode (u 1)) :=
+  (decode_liftContinuousMultilinear hA (oddProductPrimitiveFieldMultilinear hT hA hγ)
+    (oddProductPrimitiveField_heightMember hT hA hinterp hγ)
+    (p := A.grading) (withSeminorms_graded (fun n => A.level n) A.bond)
+    (oddProductPrimitiveField_productBound hT hA hinterp hγ) u).trans
+      (oddProductPrimitiveFieldMultilinear_apply hT hA hγ u)
 
 theorem angularPartial_decode_oddProductPrimitiveMap
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)

@@ -79,7 +79,7 @@ theorem normalizedCompositionMonomial_bound
       simp only [normalizedCompositionMonomial, materialFamilyMonomial,
         normalizedMaterialJetFamily, normalizedMaterialJet, mixedDerivative,
         iteratedDeriv_zero, Fin.prod_univ_zero, Finset.prod_const, Finset.card_univ,
-        Fintype.card_fin, pow_one, mul_one]
+        Fintype.card_fin, Nat.zero_add, pow_one, mul_one]
       change g p * T.M (T.radius p.1) ^ c * T.H (T.radius p.1) ^ (-γ) * F (U p) =
         (g p * (F (U p) / U p)) * T.M (T.radius p.1) ^ c *
           (T.H (T.radius p.1) ^ (-γ) * U p)

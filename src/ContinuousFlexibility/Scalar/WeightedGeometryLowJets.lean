@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Statements
 open Set
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem referenceProfile_uniform_upper_bound (hD : IsAccumulatingProfile D) :
@@ -196,6 +198,17 @@ theorem scalarHeight_angularSecond_low_jet_bound
   simpa only [mul_assoc] using
     scalar_div_radius_bound hD hp.1 hCtt (mul_nonneg (apply_nonneg _ _) hw) hb
 
+private theorem combine_four_nonnegative_choices
+    {P Q R V : ℝ → Prop}
+    (hP : ∃ C : ℝ, 0 ≤ C ∧ P C) (hQ : ∃ C : ℝ, 0 ≤ C ∧ Q C)
+    (hR : ∃ C : ℝ, 0 ≤ C ∧ R C) (hV : ∃ C : ℝ, 0 ≤ C ∧ V C) :
+    ∃ a b c d : ℝ, 0 ≤ a ∧ 0 ≤ b ∧ 0 ≤ c ∧ 0 ≤ d ∧ P a ∧ Q b ∧ R c ∧ V d := by
+  obtain ⟨a, ha, hPa⟩ := hP
+  obtain ⟨b, hb, hQb⟩ := hQ
+  obtain ⟨c, hc, hRc⟩ := hR
+  obtain ⟨d, hd, hVd⟩ := hV
+  exact ⟨a, b, c, d, ha, hb, hc, hd, hPa, hQb, hRc, hVd⟩
+
 /-- The four quantitative decoder bounds used by the geometry ball all hold
 at the same actual input grading, namely order four. -/
 theorem scalarHeight_low_jet_bounds
@@ -214,10 +227,10 @@ theorem scalarHeight_low_jet_bounds
       (∀ v : ScalarHeightSpace S, ∀ p ∈ annularOpen D,
         |angularPartial (heightAngular ((S.height scalarBeta).decode v)) p| ≤
           Ctt * scalarHeightGrading S 4 v * D.w p.1) := by
-  obtain ⟨Cm, hCm, hm⟩ := scalarHeight_mean_low_jet_bound hD hT hS
-  obtain ⟨Cr, hCr, hr⟩ := scalarHeight_radial_low_jet_bound hD hT hS
-  obtain ⟨Ct, hCt, ht⟩ := scalarHeight_angular_low_jet_bound hD hT hS
-  obtain ⟨Ctt, hCtt, htt⟩ := scalarHeight_angularSecond_low_jet_bound hD hT hS
-  exact ⟨Cm, Cr, Ct, Ctt, hCm, hCr, hCt, hCtt, hm, hr, ht, htt⟩
+  exact combine_four_nonnegative_choices
+    (scalarHeight_mean_low_jet_bound hD hT hS)
+    (scalarHeight_radial_low_jet_bound hD hT hS)
+    (scalarHeight_angular_low_jet_bound hD hT hS)
+    (scalarHeight_angularSecond_low_jet_bound hD hT hS)
 
 end ContinuousFlexibility.Statements

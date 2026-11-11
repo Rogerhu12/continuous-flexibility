@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Scalar.WeightedAngularDifferentiation
-import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
+import ContinuousFlexibility.Scalar.WeightedBinaryProduct
 import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 
 /-!
@@ -40,6 +40,54 @@ theorem angularPartial_product_twice
     angularPartial_mul (hf.differentiable (by simp) p) (hg'.differentiable (by simp) p)]
   ring
 
+section BilinearLeibniz
+
+variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+
+/-- Algebraic polarization of a second derivative and an actual product. -/
+def scalarBilinearLeibnizMap (L : E →L[ℝ] E) (M : E [×2]→L[ℝ] E) :
+    E [×2]→L[ℝ] E :=
+  (1 / 2 : ℝ) •
+    (L.compContinuousMultilinearMap M -
+      M.compContinuousLinearMap ![L, ContinuousLinearMap.id ℝ E] -
+      M.compContinuousLinearMap ![ContinuousLinearMap.id ℝ E, L])
+
+theorem scalarBilinearLeibnizMap_apply (L : E →L[ℝ] E) (M : E [×2]→L[ℝ] E)
+    (u : Fin 2 → E) :
+    scalarBilinearLeibnizMap L M u =
+      (1 / 2 : ℝ) • (L (M u) - M ![L (u 0), u 1] - M ![u 0, L (u 1)]) := by
+  have hs₁ : (fun i : Fin 2 => (![L, ContinuousLinearMap.id ℝ E] i) (u i)) =
+      ![L (u 0), u 1] := by
+    funext i
+    fin_cases i <;> simp
+  have hs₂ : (fun i : Fin 2 => (![ContinuousLinearMap.id ℝ E, L] i) (u i)) =
+      ![u 0, L (u 1)] := by
+    funext i
+    fin_cases i <;> simp
+  simp only [scalarBilinearLeibnizMap, smul_apply, sub_apply,
+    ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
+    ContinuousMultilinearMap.compContinuousLinearMap_apply]
+  rw [hs₁, hs₂]
+
+theorem decode_scalarBilinearLeibnizMap
+    (Λ : E →ₗ[ℝ] (PolarPoint → ℝ)) (L : E →L[ℝ] E) (M : E [×2]→L[ℝ] E)
+    (hL : ∀ u, Λ (L u) = angularPartial (angularPartial (Λ u)))
+    (hM : ∀ u : Fin 2 → E, Λ (M u) = fun p => Λ (u 0) p * Λ (u 1) p)
+    (hsmooth : ∀ u, ContDiff ℝ ∞ (Λ u)) (u : Fin 2 → E) :
+    Λ (scalarBilinearLeibnizMap L M u) =
+      fun p => angularPartial (Λ (u 0)) p * angularPartial (Λ (u 1)) p := by
+  rw [scalarBilinearLeibnizMap_apply]
+  simp only [map_smul, map_sub]
+  rw [hL, hM, hM, hM]
+  funext p
+  simp only [Pi.smul_apply, Pi.sub_apply, smul_eq_mul,
+    Matrix.cons_val_zero, Matrix.cons_val_one, hL]
+  rw [angularPartial_product_twice (hsmooth (u 0)) (hsmooth (u 1))]
+  ring
+
+end BilinearLeibniz
+
 namespace SobolevModelData
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {A : SobolevModelData}
@@ -50,12 +98,8 @@ def angularJetProductMap
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
     (hinterp : HasInterpolation A.grading) (hγ : 0 ≤ γ) :
     ContinuousMultilinearMap ℝ (fun _ : Fin 2 => A.Space) A.Space :=
-  let L := angularSecondCLM hT hA
-  let M := decodedProductMap hT hA hinterp hγ 1
-  (1 / 2 : ℝ) •
-    (L.compContinuousMultilinearMap M -
-      M.compContinuousLinearMap ![L, ContinuousLinearMap.id ℝ A.Space] -
-      M.compContinuousLinearMap ![ContinuousLinearMap.id ℝ A.Space, L])
+  scalarBilinearLeibnizMap (angularSecondCLM hT hA)
+    (decodedProductMap hT hA hinterp hγ 1)
 
 theorem angularJetProductMap_apply
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
@@ -64,38 +108,20 @@ theorem angularJetProductMap_apply
       (1 / 2 : ℝ) •
         (angularSecondCLM hT hA (decodedProductMap hT hA hinterp hγ 1 u) -
           decodedProductMap hT hA hinterp hγ 1 ![angularSecondCLM hT hA (u 0), u 1] -
-          decodedProductMap hT hA hinterp hγ 1 ![u 0, angularSecondCLM hT hA (u 1)]) := by
-  let L := angularSecondCLM hT hA
-  have hs₁ : (fun i : Fin 2 => (![L, ContinuousLinearMap.id ℝ A.Space] i) (u i)) =
-      ![L (u 0), u 1] := by
-    funext i
-    fin_cases i <;> simp
-  have hs₂ : (fun i : Fin 2 => (![ContinuousLinearMap.id ℝ A.Space, L] i) (u i)) =
-      ![u 0, L (u 1)] := by
-    funext i
-    fin_cases i <;> simp
-  simp only [angularJetProductMap, smul_apply, sub_apply,
-    ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
-    ContinuousMultilinearMap.compContinuousLinearMap_apply]
-  rw [hs₁, hs₂]
+          decodedProductMap hT hA hinterp hγ 1 ![u 0, angularSecondCLM hT hA (u 1)]) :=
+  scalarBilinearLeibnizMap_apply (angularSecondCLM hT hA)
+    (decodedProductMap hT hA hinterp hγ 1) u
 
 theorem decode_angularJetProductMap
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
     (hinterp : HasInterpolation A.grading) (hγ : 0 < γ) (u : Fin 2 → A.Space) :
     A.decode (angularJetProductMap hT hA hinterp hγ.le u) =
-      fun p => angularPartial (A.decode (u 0)) p * angularPartial (A.decode (u 1)) p := by
-  have hu₀ := (heightMember_contDiff_and_flatJets hT hγ (hA.2.2.2.1 (u 0))).1
-  have hu₁ := (heightMember_contDiff_and_flatJets hT hγ (hA.2.2.2.1 (u 1))).1
-  rw [angularJetProductMap_apply]
-  simp only [map_smul, map_sub]
-  funext p
-  simp only [Pi.smul_apply, Pi.sub_apply, smul_eq_mul]
-  rw [decode_angularSecondCLM, decode_decodedProductMap,
-    decode_decodedProductMap, decode_decodedProductMap]
-  simp only [Fin.prod_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
-    decode_angularSecondCLM]
-  rw [angularPartial_product_twice hu₀ hu₁]
-  ring
+      fun p => angularPartial (A.decode (u 0)) p * angularPartial (A.decode (u 1)) p :=
+  decode_scalarBilinearLeibnizMap A.decode (angularSecondCLM hT hA)
+    (decodedProductMap hT hA hinterp hγ.le 1)
+    (decode_angularSecondCLM hT hA)
+    (decode_decodedProductMap_two hT hA hinterp hγ.le)
+    (fun v => (heightMember_contDiff_and_flatJets hT hγ (hA.2.2.2.1 v)).1) u
 
 end SobolevModelData
 

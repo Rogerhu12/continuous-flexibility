@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Scalar.WeightedDecodedProductMap
+import ContinuousFlexibility.Scalar.WeightedBinaryProduct
 import ContinuousFlexibility.Scalar.WeightedPhysicalMultiplier
 import ContinuousFlexibility.Scalar.WeightedReferenceMaterialJets
 import ContinuousFlexibility.Scalar.WeightedNeighborhood
@@ -36,11 +36,9 @@ theorem decode_scalarHeightMul
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (u v : ScalarHeightSpace S) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarHeightMul hT hS u v) p =
-      (S.height scalarBeta).decode u p * (S.height scalarBeta).decode v p := by
-  simpa only [scalarHeightMul, Fin.prod_univ_two, Matrix.cons_val_zero,
-    Matrix.cons_val_one] using congrFun
-      (SobolevModelData.decode_decodedProductMap hT (hS.1 scalarBeta)
-        (scalarHeightInterpolation hS) scalarBeta_pos.le 1 ![u, v]) p
+      (S.height scalarBeta).decode u p * (S.height scalarBeta).decode v p :=
+  congrFun (SobolevModelData.decode_decodedProductMap_two hT (hS.1 scalarBeta)
+    (scalarHeightInterpolation hS) scalarBeta_pos.le ![u, v]) p
 
 /-- The decaying part of the product of two fields with background one. -/
 def scalarHeightUnitalMul (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

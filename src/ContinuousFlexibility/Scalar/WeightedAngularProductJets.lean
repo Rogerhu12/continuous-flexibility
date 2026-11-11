@@ -33,11 +33,13 @@ theorem materialPullback_scalarAngularProduct
   calc
     _ = fun p => materialPullback T γ f p *
         materialPullback T γ (angularPartial g) p := by
-      change materialPullback T (2 * γ) (fun p => f p * angularPartial g p) =
-        fun p => materialPullback T γ f p * materialPullback T γ (angularPartial g) p
-      simpa only [Fin.prod_univ_two, Matrix.cons_val_zero, Matrix.cons_val_one,
-        Nat.cast_ofNat] using
-        materialPullback_prod hT γ (![f, angularPartial g] : Fin 2 → PolarPoint → ℝ)
+      funext p
+      have hinside := hT.2.2.2.2.2.2.2.1
+      have hH : 0 < T.H (T.radius p.1) := (hT.2.1 _ (hinside p.1).1).2.1
+      have he : -(2 * γ) = (-γ) + (-γ) := by ring
+      unfold scalarAngularProduct materialPullback
+      rw [he, Real.rpow_add hH]
+      ring
     _ = _ := by rw [materialPullback_angularPartial hT hg]
 
 /-- Every weighted jet of the actual odd product has a one-high-factor

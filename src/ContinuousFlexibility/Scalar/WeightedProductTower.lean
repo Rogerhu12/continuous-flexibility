@@ -12,6 +12,35 @@ orders and the original model topology.
 
 noncomputable section
 
+namespace ContinuousFlexibility.Analysis
+
+open scoped BigOperators
+
+/-- The two-input one-high sum, proved without exposing a represented
+multilinear map or its decoder construction. -/
+theorem oneHigh_fin_two {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (low high : Seminorm ℝ E) (x y : E) :
+    (∑ i : Fin 2, high (![x, y] i) *
+      ∏ j ∈ Finset.univ.erase i, low (![x, y] j)) =
+      high x * low y + low x * high y := by
+  have h0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
+  have h1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
+  simp only [Fin.sum_univ_two, h0, h1, Finset.prod_singleton,
+    Matrix.cons_val_zero, Matrix.cons_val_one]
+  ring
+
+/-- The triangle inequality on a translated seminorm ball, independently
+of any concrete projective representation. -/
+theorem seminorm_le_radius_add_center {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) {x x0 : E} {ε : ℝ} (hx : p (x - x0) < ε) :
+    p x ≤ ε + p x0 := by
+  calc
+    p x = p ((x - x0) + x0) := by rw [sub_add_cancel]
+    _ ≤ p (x - x0) + p x0 := map_add_le_add _ _ _
+    _ ≤ ε + p x0 := add_le_add hx.le (le_refl _)
+
+end ContinuousFlexibility.Analysis
+
 namespace ContinuousFlexibility.Statements.SobolevModelData
 
 open Set ContinuousFlexibility.Analysis
@@ -36,9 +65,9 @@ theorem decodedProductMap_twoFactor
   intro s _
   obtain ⟨C, hC, hCu⟩ := hprod 1 s
   refine ⟨C, hC, fun x y => ?_⟩
-  have h0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
-  have h1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
-  simpa [bilinearJetValue, Fin.sum_univ_two, h0, h1, mul_comm] using hCu ![x, y]
+  change A.grading s (decodedProductMap hT hA hinterp hγ 1 ![x, y]) ≤ _
+  rw [← oneHigh_fin_two (A.grading base) (A.grading (s + loss)) x y]
+  exact hCu ![x, y]
 
 /-- Actual weighted multiplication admits one uniform tower on each open
 domain where the same fixed low pair seminorm is bounded. -/
@@ -68,20 +97,17 @@ theorem decodedProductMap_on_lowBall
   obtain ⟨base, loss, hbase, hB⟩ := decodedProductMap_fixedNeighborhoodSmoothTame hT hA hinterp hγ
   refine ⟨base, loss, hbase, ?_⟩
   intro x0 ε hε
-  let P := pairGrading A.grading A.grading base
+  let P : Seminorm ℝ (A.Space × A.Space) := pairGrading A.grading A.grading base
   have hp : Continuous (A.grading base) :=
     (withSeminorms_graded (fun n => A.level n) A.bond).continuous_seminorm base
   have hP : Continuous P := by
-    simpa only [P, tamePairGrading_apply] using
-      (hp.comp continuous_fst).add (hp.comp continuous_snd)
+    change Continuous (fun z : A.Space × A.Space => A.grading base z.1 + A.grading base z.2)
+    exact (hp.comp continuous_fst).add (hp.comp continuous_snd)
   have hU : IsOpen {x | P (x - x0) < ε} :=
     isOpen_lt (hP.comp (continuous_id.sub continuous_const)) continuous_const
   have hR : 0 ≤ ε + P x0 := add_nonneg hε.le (apply_nonneg _ _)
   apply hB {x | P (x - x0) < ε} hU (ε + P x0) hR
   intro x hx
-  calc
-    P x = P ((x - x0) + x0) := by rw [sub_add_cancel]
-    _ ≤ P (x - x0) + P x0 := map_add_le_add _ _ _
-    _ ≤ ε + P x0 := add_le_add hx.le (le_refl _)
+  exact seminorm_le_radius_add_center P hx
 
 end ContinuousFlexibility.Statements.SobolevModelData

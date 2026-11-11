@@ -45,7 +45,8 @@ theorem oddProductPrimitiveMap_uniformTameGerm
     UniformTameGerm (pairGrading A.grading A.grading) A.grading z0
       (fun z : A.Space × A.Space => oddProductPrimitiveMap hT hA hinterp hγ ![z.1, z.2]) := by
   obtain ⟨base, loss, _, hbound⟩ := oddProductPrimitiveMap_oneHigh_pair hT hA hinterp hγ
-  exact uniformTameGerm_bilinearMultilinear (oddProductPrimitiveMap hT hA hinterp hγ)
+  exact uniformTameGerm_bilinearMultilinear
+    (p := A.grading) (q := A.grading) (base := base) (loss := loss) (oddProductPrimitiveMap hT hA hinterp hγ)
     (fun s _ => hbound s)
     (withSeminorms_graded (fun n => A.level n) A.bond) z0
 
@@ -55,7 +56,8 @@ theorem angularJetProductMap_uniformTameGerm
     UniformTameGerm (pairGrading A.grading A.grading) A.grading z0
       (fun z : A.Space × A.Space => angularJetProductMap hT hA hinterp hγ ![z.1, z.2]) := by
   obtain ⟨base, loss, _, hbound⟩ := angularJetProductMap_oneHigh hT hA hinterp hγ
-  exact uniformTameGerm_bilinearMultilinear (angularJetProductMap hT hA hinterp hγ)
+  exact uniformTameGerm_bilinearMultilinear
+    (p := A.grading) (q := A.grading) (base := base) (loss := loss) (angularJetProductMap hT hA hinterp hγ)
     (fun s _ => hbound s)
     (withSeminorms_graded (fun n => A.level n) A.bond) z0
 

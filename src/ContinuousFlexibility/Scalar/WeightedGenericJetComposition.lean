@@ -25,12 +25,12 @@ variable {Y : Type*} [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
   [∀ n, CompleteSpace (F n)]
   {fbond : ∀ n, F (n + 1) →L[ℝ] F n}
 
-local notation "Z" => ProjectiveLimit F fbond
+local notation "WeightedJetTarget" => ProjectiveLimit F fbond
 
 /-- The genuine curve chain rule with an arbitrary topological-module
 source and a projective output, using the actual continuity of the curve. -/
 theorem HasProjectiveCurveDerivAt.bastiani_comp_generic
-    {U : Set Y} {g : Y → Z} {D : Y → Y →L[ℝ] Z}
+    {U : Set Y} {g : Y → WeightedJetTarget} {D : Y → Y →L[ℝ] WeightedJetTarget}
     (hU : IsOpen U) (hUc : Convex ℝ U)
     (hD : ContinuousOn (fun p : Y × Y => D p.1 p.2) (U ×ˢ univ))
     (hg : ∀ x ∈ U, ∀ v, HasProjectiveLineDerivAt g (D x v) x v)
@@ -52,7 +52,7 @@ theorem HasProjectiveCurveDerivAt.bastiani_comp_generic
 /-- The actual variable-input jet rule on an arbitrary topological module.
 Its input curves are differentiated in their original topology. -/
 theorem HasProjectiveCurveDerivAt.jet_eval_generic
-    {g : Y → Z} {J : ProjectiveJetFamily Y Z} {U : Set Y}
+    {g : Y → WeightedJetTarget} {J : ProjectiveJetFamily Y WeightedJetTarget} {U : Set Y}
     (hU : IsOpen U) (hUc : Convex ℝ U) (hJ : HasProjectiveJetsOn g J U)
     {c : ℝ → Y} {dc : Y} {t : ℝ}
     (hc : HasProjectiveCurveDerivAt c dc t) (hcc : ContinuousAt c t) (hct : c t ∈ U)
@@ -89,8 +89,8 @@ section Composition
 variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
   [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
   [LocallyConvexSpace ℝ Y]
-  {u : X → Y} {v : Y → Z}
-  {J : ProjectiveJetFamily X Y} {K : ProjectiveJetFamily Y Z}
+  {u : X → Y} {v : Y → WeightedJetTarget}
+  {J : ProjectiveJetFamily X Y} {K : ProjectiveJetFamily Y WeightedJetTarget}
   {U : Set X} {V : Set Y}
 
 /-- Differentiate one genuine partition term with arbitrary source and
@@ -100,10 +100,10 @@ theorem HasProjectiveJetsOn.compositionTerm_hasLineDerivAt_generic
     (hu : HasProjectiveJetsOn u J U) (hv : HasProjectiveJetsOn v K V)
     (hmap : MapsTo u U V) {n : ℕ} (part : OrderedFinpartition n)
     {x : X} (hx : x ∈ U) (w : X) (vs : Fin n → X) :
-    HasProjectiveLineDerivAt (fun y : X => projectiveCompositionTerm (X := X) (Y := Y) (Z := Z) u J K part y vs)
-      (projectiveCompositionTerm (X := X) (Y := Y) (Z := Z) u J K (part.extend none) x (Fin.cons w vs) +
+    HasProjectiveLineDerivAt (fun y : X => projectiveCompositionTerm (X := X) (Y := Y) (Z := WeightedJetTarget) u J K part y vs)
+      (projectiveCompositionTerm (X := X) (Y := Y) (Z := WeightedJetTarget) u J K (part.extend none) x (Fin.cons w vs) +
         ∑ i : Fin part.length,
-          projectiveCompositionTerm (X := X) (Y := Y) (Z := Z) u J K (part.extend (some i)) x (Fin.cons w vs)) x w := by
+          projectiveCompositionTerm (X := X) (Y := Y) (Z := WeightedJetTarget) u J K (part.extend (some i)) x (Fin.cons w vs)) x w := by
   obtain ⟨W, ⟨hW, hWc⟩, hWV⟩ :=
     (LocallyConvexSpace.convex_basis (𝕜 := ℝ) (u x)).mem_iff.mp (hV.mem_nhds (hmap hx))
   have hsub : interior W ⊆ V := interior_subset.trans hWV
@@ -141,17 +141,17 @@ theorem HasProjectiveJetsOn.comp_generic
     (hU : IsOpen U) (hV : IsOpen V)
     (hu : HasProjectiveJetsOn u J U) (hv : HasProjectiveJetsOn v K V)
     (hmap : MapsTo u U V) :
-    HasProjectiveJetsOn (v ∘ u) (projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K) U := by
+    HasProjectiveJetsOn (v ∘ u) (projectiveCompositionJets (X := X) (Y := Y) (Z := WeightedJetTarget) u J K) U := by
   classical
   have hzero : ∀ x ∈ U,
-      projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K 0 x Fin.elim0 = v (u x) := by
+      projectiveCompositionJets (X := X) (Y := Y) (Z := WeightedJetTarget) u J K 0 x Fin.elim0 = v (u x) := by
     intro x hx
     rw [projectiveCompositionJets_apply, Fintype.sum_unique]
     change K 0 (u x) (fun i : Fin 0 => J 1 x (fun _ => Fin.elim0 i)) = v (u x)
     convert hv.1 (u x) (hmap hx) using 2
   have hcont : ∀ n, ContinuousOn
       (fun z : X × (Fin n → X) =>
-        projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K n z.1 z.2)
+        projectiveCompositionJets (X := X) (Y := Y) (Z := WeightedJetTarget) u J K n z.1 z.2)
       (U ×ˢ univ) := by
     intro n
     simp only [projectiveCompositionJets_apply]
@@ -159,8 +159,8 @@ theorem HasProjectiveJetsOn.comp_generic
       (fun part _ => hu.continuousOn_compositionTerm hv hmap part)
   have hderiv : ∀ n (x : X), x ∈ U → ∀ w vs,
       HasProjectiveLineDerivAt
-        (fun y : X => projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K n y vs)
-        (projectiveCompositionJets (X := X) (Y := Y) (Z := Z) u J K (n + 1) x
+        (fun y : X => projectiveCompositionJets (X := X) (Y := Y) (Z := WeightedJetTarget) u J K n y vs)
+        (projectiveCompositionJets (X := X) (Y := Y) (Z := WeightedJetTarget) u J K (n + 1) x
           (Fin.cons w vs)) x w := by
     intro n x hx w vs
     rw [projectiveCompositionJets_succ]
