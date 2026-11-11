@@ -63,7 +63,7 @@ theorem innerChainAggregateKappa_restriction_of_separated (n : ℕ)
     (hκ : ∀ i, 0 < κ p i) :
     innerChainScalarRestriction n p (innerChainAggregateKappa n κ) 1 = κ p := by
   funext i
-  fin_cases i
+  rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
   · let k : Fin n := ⟨p.val - 1, by omega⟩
     have hk : k.succ = p := by
       apply Fin.ext

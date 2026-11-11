@@ -64,7 +64,7 @@ theorem innerChainBoundary_weight_constant (n : ℕ) (p : Fin (n + 1))
   apply PiLp.ext
   intro i
   simp only [PiLp.toLp_apply, PiLp.smul_apply, smul_eq_mul]
-  fin_cases i
+  rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
   · by_cases hp : 0 < p.val
     · rw [hleft hp]
     · have hz : innerChainBoundaryCLM n p ξ 0 = 0 := by
