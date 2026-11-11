@@ -28,10 +28,14 @@ theorem tailFiniteLowHat_smooth (T : DeepTailData) (hT : DeepTailHypotheses T)
 
 theorem tailFiniteLowHat_compact (T : DeepTailData) (hT : DeepTailHypotheses T)
     (a : ℕ →₀ ℝ) : HasCompactSupport (tailFiniteLowHat T hT a) := by
-  simpa only [tailFiniteLowHat, Finset.sum_apply] using
-    (HasCompactSupport.finset_sum (s := a.support)
-      (f := fun n x => a n * tailLowHat T hT n x)
-      (fun n _ => (tailLowHat_compact T hT n).mul_left))
+  have he : (∑ n ∈ a.support, fun x => a n * tailLowHat T hT n x) =
+      tailFiniteLowHat T hT a := by
+    funext x
+    simp only [Finset.sum_apply, tailFiniteLowHat]
+  rw [← he]
+  exact HasCompactSupport.finset_sum (s := a.support)
+    (f := fun n x => a n * tailLowHat T hT n x)
+    (fun n _ => (tailLowHat_compact T hT n).mul_left)
 
 theorem tailFiniteLowHat_support (T : DeepTailData) (hT : DeepTailHypotheses T)
     (a : ℕ →₀ ℝ) :
@@ -41,7 +45,11 @@ theorem tailFiniteLowHat_support (T : DeepTailData) (hT : DeepTailHypotheses T)
         Ioo T.entrance T.endpoint := by
     intro s
     induction s using Finset.induction_on with
-    | empty => simp only [Finset.sum_empty, tsupport_zero, empty_subset]
+    | empty =>
+      have hzero : (fun _ : ℝ => (0 : ℝ)) = (0 : ℝ → ℝ) := by
+        funext x
+        rw [Pi.zero_apply]
+      simp only [Finset.sum_empty, hzero, tsupport_zero, empty_subset]
     | @insert n s hn ih =>
       simp only [Finset.sum_insert hn]
       exact (tsupport_add _ _).trans (union_subset
@@ -56,7 +64,12 @@ theorem tailFiniteLowHat_support_cut (T : DeepTailData) (hT : DeepTailHypotheses
         Ioo T.entrance (T.node N) := by
     intro s
     induction s using Finset.induction_on with
-    | empty => intro _; simp only [Finset.sum_empty, tsupport_zero, empty_subset]
+    | empty =>
+      intro _
+      have hzero : (fun _ : ℝ => (0 : ℝ)) = (0 : ℝ → ℝ) := by
+        funext x
+        rw [Pi.zero_apply]
+      simp only [Finset.sum_empty, hzero, tsupport_zero, empty_subset]
     | @insert n s hn ih =>
       intro hs
       have hnN : n < N := Finset.mem_range.mp (hs (Finset.mem_insert_self n s))
@@ -127,8 +140,8 @@ theorem tailFiniteLowHat_deriv (T : DeepTailData) (hT : DeepTailHypotheses T)
     deriv (tailFiniteLowHat T hT a) x =
       ∑ n ∈ a.support, a n * deriv (tailLowHat T hT n) x := by
   unfold tailFiniteLowHat
-  rw [deriv_sum (fun n _ => differentiableAt_const.mul
-    (((tailLowHat_smooth T hT n).differentiable (by simp)) x))]
+  rw [deriv_sum (fun n _ =>
+    (((tailLowHat_smooth T hT n).differentiable (by simp)) x).const_mul (a n))]
   apply Finset.sum_congr rfl
   intro n _
   exact deriv_const_mul _ (((tailLowHat_smooth T hT n).differentiable (by simp)) x)
@@ -216,7 +229,9 @@ theorem tailFiniteLowHat_gap_norm (T : DeepTailData) (hT : DeepTailHypotheses T)
     ((deepTail_entrance_le_node hT m).trans (deepTail_node_lt_massEnd hT m).le)
     (deepTail_node_lt_endpoint hT (m + 1))
   have hp := (deepTail_contDiffOn hT).continuousOn.mono hs
-  have hu := (tailFiniteLowHat_smooth T hT a).continuous.continuousOn
+  have hu : ContinuousOn (tailFiniteLowHat T hT a)
+      (Icc (T.massEnd m) (T.node (m + 1))) :=
+    (tailFiniteLowHat_smooth T hT a).continuous.continuousOn
   unfold tailGapNormSq
   calc
     _ ≤ ∫ x in T.massEnd m..T.node (m + 1),
@@ -266,7 +281,8 @@ theorem tailFiniteLowHat_initial_norm (T : DeepTailData) (hT : DeepTailHypothese
     exact mul_nonneg hT.2.2.2.2.1.le (tailCoefficientMass_nonneg hT a)
   · have hs := deepTail_Icc_subset hT le_rfl (deepTail_node_lt_endpoint hT 0)
     have hp := (deepTail_contDiffOn hT).continuousOn.mono hs
-    have hu := (tailFiniteLowHat_smooth T hT a).continuous.continuousOn
+    have hu : ContinuousOn (tailFiniteLowHat T hT a) (Icc T.entrance (T.node 0)) :=
+      (tailFiniteLowHat_smooth T hT a).continuous.continuousOn
     have hbound : tailInitialNormSq T (tailFiniteLowHat T hT a) ≤
         tailInitialGapMass T * a 0 ^ 2 := by
       unfold tailInitialNormSq
@@ -358,14 +374,17 @@ theorem tailFiniteLowHat_bounds (T : DeepTailData) (hT : DeepTailHypotheses T)
   have hp : ContinuousOn T.p (Icc T.entrance (T.node N)) :=
     (deepTail_contDiffOn hT).continuousOn.mono
       (deepTail_Icc_subset hT le_rfl (deepTail_node_lt_endpoint hT N))
-  have hu := (tailFiniteLowHat_smooth T hT a).continuous.continuousOn
-  have hd := ((tailFiniteLowHat_smooth T hT a).continuous_deriv (by simp)).continuousOn
+  have hu : ContinuousOn (tailFiniteLowHat T hT a) (Icc T.entrance (T.node N)) :=
+    (tailFiniteLowHat_smooth T hT a).continuous.continuousOn
+  have hd : ContinuousOn (deriv (tailFiniteLowHat T hT a)) (Icc T.entrance (T.node N)) :=
+    ((tailFiniteLowHat_smooth T hT a).continuous_deriv (by simp)).continuousOn
   have hnorm : (∫ x, tailFiniteLowHat T hT a x ^ 2 ∂deepTailMeasure T) =
       tailInitialNormSq T (tailFiniteLowHat T hT a) + tailCoefficientMass T a +
         ∑ n ∈ Finset.range N, tailGapNormSq T (tailFiniteLowHat T hT a) n := by
     rw [tail_integral_eq_interval_of_support hT (deepTail_entrance_le_node hT N)
       (deepTail_node_lt_endpoint hT N).le hsq,
-      tail_integral_partition hT N (hp.mul (hu.pow 2))]
+      tail_integral_partition (f := fun x => T.p x * tailFiniteLowHat T hT a x ^ 2)
+        hT N (hp.mul (hu.pow 2))]
     change tailInitialNormSq T (tailFiniteLowHat T hT a) +
       (∑ n ∈ Finset.range N, (tailMassNormSq T (tailFiniteLowHat T hT a) n +
         tailGapNormSq T (tailFiniteLowHat T hT a) n)) = _
@@ -376,7 +395,8 @@ theorem tailFiniteLowHat_bounds (T : DeepTailData) (hT : DeepTailHypotheses T)
         ∑ n ∈ Finset.range N, tailGapEnergy T (tailFiniteLowHat T hT a) n := by
     rw [tail_integral_eq_interval_of_support hT (deepTail_entrance_le_node hT N)
       (deepTail_node_lt_endpoint hT N).le hdsq,
-      tail_integral_partition hT N (hp.mul (hd.pow 2))]
+      tail_integral_partition (f := fun x => T.p x * deriv (tailFiniteLowHat T hT a) x ^ 2)
+        hT N (hp.mul (hd.pow 2))]
     change tailInitialEnergy T (tailFiniteLowHat T hT a) +
       (∑ n ∈ Finset.range N, (tailMassEnergy T (tailFiniteLowHat T hT a) n +
         tailGapEnergy T (tailFiniteLowHat T hT a) n)) = _
