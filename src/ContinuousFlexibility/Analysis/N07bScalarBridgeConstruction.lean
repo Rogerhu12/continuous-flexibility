@@ -130,10 +130,46 @@ private theorem n07b_exists_referenceRelation_of_height
     exact hp.trans (hheight m ⟨hpmem.1, mem_univ _⟩).symm
   · simpa only [zero_mul, sub_zero] using hgraph
 
+/-- Combine actual height and source representatives using only raw
+physical fields and canonical sequences. -/
+private theorem n07b_hasCanonicalRepresentation_of_remainder
+    {z : AnnularState S × ℝ} (U₀ : CanonicalL2Sequence S K)
+    (Fseq : CanonicalSequence S K) (u η f : PolarPoint → ℝ) (a μ : ℝ)
+    (hη : η = fun p : PolarPoint => u p + a * S.chiLeft p.1)
+    (hu : ∀ m, (U₀ m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
+      canonicalHeight S K z m u)
+    (hf : ∀ m, (Fseq m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
+      canonicalSource S K z m f) :
+    HasCanonicalRepresentation D S C K z (U₀, (a, μ, 0)) Fseq η f := by
+  have hrem : (fun p : PolarPoint => η p - a * S.chiLeft p.1) = u := by
+    funext p
+    exact (congrArg (fun v : ℝ => v - a * S.chiLeft p.1) (congrFun hη p)).trans
+      (add_sub_cancel_right (u p) (a * S.chiLeft p.1))
+  refine ⟨?_, hf⟩
+  intro m
+  exact (hu m).trans (Filter.Eventually.of_forall (fun p =>
+    congrFun (congrArg (canonicalHeight S K z m) hrem.symm) p))
+
 variable
   {B : CanonicalDomainData S K V b} {P : RelativeInverseData S K V b B}
   {G : ScalarInverseData S}
 
+local instance n07bScalarBridgeLevelNormedAddCommGroup :
+    NormedAddCommGroup (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedAddCommGroup _
+local instance n07bScalarBridgeLevelNormedSpace :
+    NormedSpace ℝ (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedSpace _
+local instance n07bScalarBridgeUnknownNormedAddCommGroup :
+    NormedAddCommGroup (CanonicalUnknown S K) := inferInstance
+local instance n07bScalarBridgeUnknownNormedSpace :
+    NormedSpace ℝ (CanonicalUnknown S K) := inferInstance
+local instance n07bScalarBridgeDomainNormedAddCommGroup :
+    NormedAddCommGroup B.Space := Submodule.normedAddCommGroup _
+local instance n07bScalarBridgeDomainNormedSpace :
+    NormedSpace ℝ B.Space := Submodule.normedSpace _
+
+set_option diagnostics true in
 /-- At each state the represented physical scalar solution is the actual
 chosen Banach solution, with all scalar coordinates retained. The only
 quantitative premise concerns genuine geometric finite-expansion fields. -/
@@ -182,19 +218,12 @@ theorem n07b_scalarInverse_banach_identification
       href hsref hz hs hu h05.2.2.1 h05.2.2.2.1 B.lossMaterial h05.2.2.2.2.1
       a μ B.sourceMaterial B.outputMaterial hrow hsource hA hcoeff
   let U : CanonicalUnknown S K := (U₀, (a, μ, 0))
-  have hrem : (fun p => heightPairField S (G.G z f).1 p - a * S.chiLeft p.1) = u := by
-    funext p
-    change u p + a * S.chiLeft p.1 - a * S.chiLeft p.1 = u p
-    exact add_sub_cancel_right (u p) (a * S.chiLeft p.1)
   have hrep : HasCanonicalRepresentation D S C K z U
       (V.forget (3 / 4 : ℝ) 0 b F)
-      (heightPairField S (G.G z f).1) ((S.height (3 / 4 : ℝ)).decode f.val) := by
-    refine ⟨?_, hF⟩
-    intro m
-    change (U₀ m : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m]
-      canonicalHeight S K z m (fun p => heightPairField S (G.G z f).1 p - a * S.chiLeft p.1)
-    rw [hrem]
-    exact hUheight m
+      (heightPairField S (G.G z f).1) ((S.height (3 / 4 : ℝ)).decode f.val) :=
+    n07b_hasCanonicalRepresentation_of_remainder (D := D) (C := C) (z := z)
+      U₀ (V.forget (3 / 4 : ℝ) 0 b F) u (heightPairField S (G.G z f).1)
+      ((S.height (3 / 4 : ℝ)).decode f.val) a μ rfl hUheight hF
   exact n07b_fixedGraph_scalarInverse_identification hT hS hK h05 h06 hG hgeom
     hprofile.2.1 hz hs f F Fref U hreference hrep rfl rfl rfl
 
