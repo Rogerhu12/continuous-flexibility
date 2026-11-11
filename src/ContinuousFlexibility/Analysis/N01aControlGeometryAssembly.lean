@@ -60,7 +60,7 @@ theorem n01aGeometryOfControls_controlGeometry {D : ReferenceData} {S : Physical
     rw [Equiv.apply_symm_apply]
     exact hrcomp
   · intro m
-    exact ⟨(hχ m).1, (hχ m).2.1, hsupp m⟩
+    exact hχ m
   · exact n01aNegativeComponent_supports_locallyFinite hD e χ hsupp
   · intro m
     rfl
