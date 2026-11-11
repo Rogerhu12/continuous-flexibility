@@ -14,6 +14,8 @@ the only coordinate restriction is that the radius be nonzero.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility
 
 open Filter
@@ -29,7 +31,7 @@ theorem contDiffAt_parameter_radialPartial
       (fun s : P × PolarPoint => radialPartial (fun y => Z (s.1, y)) s.2) (p, x) := by
   have hf : ContDiffAt ℝ ∞
       (fun s : (P × PolarPoint) × PolarPoint => Z (s.1.1, s.2)) ((p, x), x) :=
-    hZ.comp _ (contDiffAt_fst.fst.prodMk contDiffAt_snd)
+    hZ.comp ((p, x), x) (contDiffAt_fst.fst.prodMk contDiffAt_snd)
   exact (hf.fderiv contDiffAt_snd (by simp)).clm_apply contDiffAt_const
 
 /-- Taking a physical angular partial preserves joint smoothness. -/
@@ -40,7 +42,7 @@ theorem contDiffAt_parameter_angularPartial
       (fun s : P × PolarPoint => angularPartial (fun y => Z (s.1, y)) s.2) (p, x) := by
   have hf : ContDiffAt ℝ ∞
       (fun s : (P × PolarPoint) × PolarPoint => Z (s.1.1, s.2)) ((p, x), x) :=
-    hZ.comp _ (contDiffAt_fst.fst.prodMk contDiffAt_snd)
+    hZ.comp ((p, x), x) (contDiffAt_fst.fst.prodMk contDiffAt_snd)
   exact (hf.fderiv contDiffAt_snd (by simp)).clm_apply contDiffAt_const
 
 theorem contDiffAt_parameter_heightRadial
@@ -62,7 +64,7 @@ theorem contDiffAt_parameter_profileEnergy
     (hW : ContDiffAt ℝ ∞ W (p, x.1)) :
     ContDiffAt ℝ ∞
       (fun s : P × PolarPoint => profileEnergy (fun r => W (s.1, r)) s.2) (p, x) := by
-  exact contDiffAt_const.add ((hW.comp _
+  exact contDiffAt_const.add ((hW.comp (p, x)
     (contDiffAt_fst.prodMk contDiffAt_snd.fst)).pow 2)
 
 theorem contDiffAt_parameter_polarDiscriminant
@@ -230,7 +232,7 @@ height family.  The zero-parameter case uses its genuine derivative; no
 division by the construction parameter is made at zero.
 -/
 
-noncomputable section
+
 
 namespace ContinuousFlexibility
 
@@ -332,7 +334,7 @@ one lemma applied to each boundary, with no identification of the two
 endpoint height values.
 -/
 
-noncomputable section
+
 
 namespace ContinuousFlexibility.Statements
 
@@ -483,6 +485,6 @@ theorem s04CalculusStatement : S04CalculusStatement := by
       _ = (iteratedFDeriv ℝ s (fun p' => normalizedSourceIntegral
           (fun r => W (p', r)) (fun r => H (p', r)) (fun x => U (p', x))
             (q p') a b) p) directions := hdiff.symm
-      _ = 0 := by simp only [hz, ContinuousMultilinearMap.zero_apply]
+      _ = 0 := by simp only [hz, zero_apply]
 
 end ContinuousFlexibility.Statements

@@ -18,6 +18,8 @@ namespace ContinuousFlexibility
 
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The first variation is linear along an affine family of directions. -/
 theorem polarResidualVariation_heightFamily_direction
     (w : ℝ → ℝ) (z : PolarPoint → ℝ) {u η : PolarPoint → ℝ}
@@ -117,8 +119,8 @@ theorem hasDerivAt_normalizedResidual_corrected
   · have hz := contDiff_heightFamily hh' hu q
     obtain ⟨_, hB, _, hC, hType, hR⟩ :=
       contDiffAt_heightLinearCoefficients hw.contDiffAt hz.contDiffAt hr hD hQ
-    have hηr := contDiffAt_radialPartial hη.contDiffAt (m := ∞) (by simp)
-    have hηθ := contDiffAt_angularPartial hη.contDiffAt (m := ∞) (by simp)
+    have hηr := contDiffAt_radialPartial (x := x) hη.contDiffAt (m := ∞) (by simp)
+    have hηθ := contDiffAt_angularPartial (x := x) hη.contDiffAt (m := ∞) (by simp)
     have hflux : DifferentiableAt ℝ (fun y =>
         polarLinearB w (heightFamily (Radial.radialHeightField h) u q) y * radialPartial η y +
           polarCorrectedC w (heightFamily (Radial.radialHeightField h) u q) y *

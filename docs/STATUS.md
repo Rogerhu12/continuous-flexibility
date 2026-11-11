@@ -118,7 +118,9 @@ already exists in the tree.
 
 `line/ScalarCalculus` starts from main at `97f8b35b389637d89fa3d09b160acc46e2a12fba`.
 The unchanged S03, S04 and S05 calculus statements have source-level proofs under
-`Scalar/`; local kernel checks are in progress. The new compact-integral theorem
+`Scalar/`; local kernel checks and CI are in progress. CI run `42976793683` kernel-checked
+`Scalar/S03CalculusProof.lean`; it identified elaboration errors in the new integral
+and state-derivative modules, whose fixes are being checked. The new compact-integral theorem
 supplies arbitrary mixed parameter derivatives on a finite physical rectangle.
 The characteristic construction treats both turning directions with one signed
 coordinate. No additional blueprint statement is counted as proved until the

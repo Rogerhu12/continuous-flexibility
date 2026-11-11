@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ContDiff Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 private theorem smooth_angularPartial {f : PolarPoint → ℝ}
     (hf : ContDiff ℝ ∞ f) : ContDiff ℝ ∞ (angularPartial f) :=
   (hf.fderiv_right (by simp)).clm_apply contDiff_const

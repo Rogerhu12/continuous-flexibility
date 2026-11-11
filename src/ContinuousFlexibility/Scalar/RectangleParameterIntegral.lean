@@ -1,5 +1,6 @@
 import Mathlib.Analysis.Calculus.ParametricIntegral
 import Mathlib.Analysis.Calculus.ContDiff.Comp
+import Mathlib.Analysis.Calculus.ContDiff.Operations
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.MeasureTheory.Integral.Prod
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic
@@ -20,6 +21,8 @@ namespace ContinuousFlexibility
 open Set Filter MeasureTheory Metric
 open scoped Topology ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {P X F : Type} [NormedAddCommGroup P] [NormedSpace ℝ P]
   [FiniteDimensional ℝ P] [NormedAddCommGroup X] [NormedSpace ℝ X]
   [MeasurableSpace X] [BorelSpace X] [SecondCountableTopology X]
@@ -35,7 +38,7 @@ theorem contDiffAt_parameter_fderiv
       (fun z : P × X => fderiv ℝ (fun q : P => f (q, z.2)) z.1) (p, x) := by
   have h : ContDiffAt ℝ ∞
       (fun z : (P × X) × P => f (z.2, z.1.2)) ((p, x), p) :=
-    hf.comp _ (contDiffAt_snd.prodMk contDiffAt_fst.snd)
+    hf.comp ((p, x), p) (contDiffAt_snd.prodMk contDiffAt_fst.snd)
   exact h.fderiv contDiffAt_fst (by simp)
 
 /-- All parameter jets remain jointly smooth. -/
@@ -113,8 +116,11 @@ private theorem contDiffAt_compactIntegral_parameter_nat (s : ℕ)
     ContDiffAt ℝ s (fun q => ∫ x in K, f (q, x) ∂μ) p := by
   induction s generalizing F with
   | zero =>
-      exact contDiffAt_zero.mpr
-        (hasFDerivAt_compactIntegral_parameter hO hK hf hp).continuousAt
+      apply contDiffAt_zero.mpr
+      refine ⟨O, hO.mem_nhds hp, ?_⟩
+      intro q hq
+      have hd := hasFDerivAt_compactIntegral_parameter (μ := μ) hO hK hf hq
+      exact hd.continuousAt.continuousWithinAt
   | succ s hs =>
       rw [show ((s + 1 : ℕ) : ℕ∞ω) = (s : ℕ∞ω) + 1 by simp]
       apply contDiffAt_succ_iff_hasFDerivAt.mpr
@@ -122,7 +128,7 @@ private theorem contDiffAt_compactIntegral_parameter_nat (s : ℕ)
         ⟨O, hO.mem_nhds hp, fun q hq => hasFDerivAt_compactIntegral_parameter hO hK hf hq⟩,
         ?_⟩
       exact hs
-        (fun q hq x hx => contDiffAt_parameter_fderiv (hf q hq x hx)) hp
+        (fun q hq x hx => contDiffAt_parameter_fderiv (hf q hq x hx))
 
 /-- Smoothness of compact physical integrals in all finite-dimensional parameters. -/
 theorem contDiffAt_compactIntegral_parameter
@@ -157,8 +163,7 @@ theorem iteratedFDeriv_compactIntegral_parameter
       rw [heq.fderiv_eq]
       rw [(hasFDerivAt_compactIntegral_parameter hO hK
         (fun q hq x hx => contDiffAt_parameter_iteratedFDeriv (hf q hq x hx) s) hp).fderiv]
-      exact ((continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (s + 1) => P) F).symm.
-        toContinuousLinearEquiv.integral_comp_comm
+      exact ((continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (s + 1) => P) F).symm.toContinuousLinearEquiv.integral_comp_comm
           (fun x => fderiv ℝ (iteratedFDeriv ℝ s (fun q => f (q, x))) p)).symm
 
 /-- Evaluating the mixed derivative in arbitrary directions also commutes
@@ -173,8 +178,7 @@ theorem iteratedFDeriv_compactIntegral_parameter_apply
   rw [iteratedFDeriv_compactIntegral_parameter hO hK hf s hp]
   apply ContinuousMultilinearMap.integral_apply
   exact (continuousOn_parameter_slice
-    (fun q hq x hx => contDiffAt_parameter_iteratedFDeriv (hf q hq x hx) s) hp).
-      integrableOn_compact hK
+    (fun q hq x hx => contDiffAt_parameter_iteratedFDeriv (hf q hq x hx) s) hp).integrableOn_compact hK
 
 /-- The fixed-interval form of the compact integration theorem. -/
 theorem contDiffAt_intervalIntegral_parameter
