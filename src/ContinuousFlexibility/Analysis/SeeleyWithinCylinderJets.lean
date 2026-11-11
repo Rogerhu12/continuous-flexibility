@@ -43,6 +43,10 @@ def seeleyWithinPartial (v : ℝ × ℝ) (f : ℝ × ℝ → ℝ) (p : ℝ × �
 def seeleyWithinMixedJet (f : ℝ × ℝ → ℝ) (a b : ℕ) : ℝ × ℝ → ℝ :=
   (seeleyWithinPartial (1, 0))^[a] ((seeleyWithinPartial (0, 1))^[b] f)
 
+@[simp] theorem seeleyWithinMixedJet_zero_zero (f : ℝ × ℝ → ℝ) :
+    seeleyWithinMixedJet f 0 0 = f := by
+  simp only [seeleyWithinMixedJet, Function.iterate_zero_apply]
+
 theorem contDiffOn_seeleyWithinPartial
     {f : ℝ × ℝ → ℝ} (hf : ContDiffOn ℝ ∞ f seeleyHalfPlane) (v : ℝ × ℝ) :
     ContDiffOn ℝ ∞ (seeleyWithinPartial v f) seeleyHalfPlane :=
@@ -135,7 +139,8 @@ theorem isBoundedCylinderHalfLineJet_of_contDiffOn
       (hasDerivAt_id' r).prodMk (hasDerivAt_const r θ)
     have hmem : ∀ᶠ x in 𝓝 r, (x, θ) ∈ seeleyHalfPlane := by
       filter_upwards [isOpen_Ioi.mem_nhds hr] with x hx
-      exact ⟨hx.le, mem_univ _⟩
+      simpa only [seeleyHalfPlane, Set.mem_prod, Set.mem_Ici, Set.mem_univ, and_true]
+        using (le_of_lt hx : (0 : ℝ) ≤ x)
     rw [seeleyWithinMixedJet_succ_radial]
     exact hd.comp_hasDerivAt r hline hmem
   angular a b r θ hr := by
@@ -167,8 +172,9 @@ theorem iteratedDeriv_seeleyCylinderExtend_eq_withinJet (S : SeeleyData ι)
     iteratedDeriv a
       (fun r => iteratedDeriv b (fun θ => seeleyCylinderExtend S f (r, θ)) p.2) p.1 =
       seeleyWithinMixedJet f a b p := by
-  rw [iteratedDeriv_seeleyCylinderExtend S
-    (isBoundedCylinderHalfLineJet_of_contDiffOn hf hbound)]
-  exact seeleyCylinderJet_of_nonneg S (seeleyWithinMixedJet f) a b hp
+  simpa only [seeleyWithinMixedJet_zero_zero,
+    seeleyCylinderJet_of_nonneg S (seeleyWithinMixedJet f) a b hp] using
+      iteratedDeriv_seeleyCylinderExtend S
+        (isBoundedCylinderHalfLineJet_of_contDiffOn hf hbound) a b p
 
 end ContinuousFlexibility.Analysis
