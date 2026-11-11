@@ -39,11 +39,11 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | pending integration CI; current default source graph: 427 / 432 |
+| Lean modules compiled / total | 427 / 432 (current source paths in the default build) |
 | Modules in the root import | 390 |
 | Lines of Lean under `src/` | 101,191 |
-| Axiom audit | prior R06a proof and main integration passed; combined integration CI pending |
-| Blueprint statements proved / total | 14 / 42 (S01, S02, R01, R02, R03, R04, W01, ScalarCalculus, Tame, R05a, R06a, N04Cubic, N04Transmission, N12); combined CI confirmation pending |
+| Axiom audit (integrated CI, 3860 jobs) | passed for every project declaration in the root import |
+| Blueprint statements proved / total | 14 / 42 (S01, S02, R01, R02, R03, R04, W01, ScalarCalculus, Tame, R05a, R06a, N04Cubic, N04Transmission, N12) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
 | Modules on the module system | 1 (the Challenge) of 436 |
 
@@ -54,8 +54,11 @@ branches. Five modules remain outside that default build:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
 `Analysis.ProjectiveNewtonCommonOrbit`, and `Analysis.ProjectiveNewtonParameterGrowth`.
 The three previously excluded Morse-chain modules are now dependencies of main's
-completed R05a proof. The combined integration is being checked by CI; the
-previous R06a proof build and main's merged proof builds are recorded below.
+completed R05a proof. The workflow's raw artifact count includes restored cache
+remnants; this ledger counts only modules corresponding to the current source
+graph. [Combined integration CI](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42988251035)
+passed all four default targets (3860 jobs), confirmed the 14 closed nodes listed
+above, and printed only `propext`, `Classical.choice`, and `Quot.sound` for R06a.
 
 ## What is proved
 
