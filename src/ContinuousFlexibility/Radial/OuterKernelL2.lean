@@ -108,30 +108,52 @@ theorem norm_outerKernelToContinuous_le (K : C(X, C(X, ℝ))) :
   exact LinearMap.mkContinuous_norm_le _ (by positivity)
     (norm_outerKernelRepresentative_le μ K)
 
-private theorem outer_toLp_norm_le_sqrt :
+theorem norm_outerCoreEmbedding_le_sqrt :
     ‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ ≤
       Real.sqrt (measureUnivNNReal μ : ℝ) := by
   have h := ContinuousMap.toLp_norm_le (p := 2) (𝕜 := ℝ) (E := ℝ) μ
-  rw [NNReal.coe_rpow] at h
-  convert h using 1 <;> simp [Real.sqrt_eq_rpow]
+  simpa only [Real.sqrt_eq_rpow, ENNReal.toReal_ofNat, one_div] using h
+
+/-- The actual core function has the expected mass-weighted norm bound. -/
+theorem norm_outerCoreFunction_le_of_bound (f : C(X, ℝ)) {K : ℝ}
+    (hK : 0 ≤ K) (hf : ∀ x, |f x| ≤ K) :
+    ‖ContinuousMap.toLp 2 μ ℝ f‖ ≤ Real.sqrt (measureUnivNNReal μ : ℝ) * K := by
+  have hfnorm : ‖f‖ ≤ K := (ContinuousMap.norm_le f hK).mpr fun x => by
+    simpa only [Real.norm_eq_abs] using hf x
+  calc
+    ‖ContinuousMap.toLp 2 μ ℝ f‖ ≤
+        ‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ * ‖f‖ :=
+      (ContinuousMap.toLp 2 μ ℝ).le_opNorm f
+    _ ≤ Real.sqrt (measureUnivNNReal μ : ℝ) * K :=
+      mul_le_mul (norm_outerCoreEmbedding_le_sqrt μ) hfnorm
+        (norm_nonneg f) (Real.sqrt_nonneg _)
+
+private theorem norm_outerKernelL2_le_product (K : C(X, C(X, ℝ))) :
+    ‖outerKernelL2 μ K‖ ≤
+      ‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ *
+        ‖outerKernelToContinuous μ K‖ := by
+  rw [outerKernelL2]
+  exact (ContinuousMap.toLp 2 μ ℝ).opNorm_comp_le (outerKernelToContinuous μ K)
 
 /-- Core mass times the uniform kernel bound controls the actual operator norm. -/
 theorem norm_outerKernelL2_le (K : C(X, C(X, ℝ))) :
     ‖outerKernelL2 μ K‖ ≤ (measureUnivNNReal μ : ℝ) * ‖K‖ := by
-  have hnorm := outer_toLp_norm_le_sqrt μ
-  calc
-    ‖outerKernelL2 μ K‖
-        ≤ ‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ *
-          ‖outerKernelToContinuous μ K‖ := (ContinuousMap.toLp 2 μ ℝ).opNorm_comp_le _
-    _ ≤ ‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ *
-          (‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ * ‖K‖) :=
-      mul_le_mul_of_nonneg_left (norm_outerKernelToContinuous_le μ K) (norm_nonneg _)
-    _ ≤ Real.sqrt (measureUnivNNReal μ : ℝ) *
-          (Real.sqrt (measureUnivNNReal μ : ℝ) * ‖K‖) :=
-      mul_le_mul hnorm (mul_le_mul_of_nonneg_right hnorm (norm_nonneg K))
-        (mul_nonneg (norm_nonneg _) (norm_nonneg K)) (Real.sqrt_nonneg _)
-    _ = (measureUnivNNReal μ : ℝ) * ‖K‖ := by
-      rw [← mul_assoc, Real.mul_self_sqrt (measureUnivNNReal μ).coe_nonneg]
+  let T : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ := ContinuousMap.toLp 2 μ ℝ
+  have hT : ‖T‖ ≤ Real.sqrt (measureUnivNNReal μ : ℝ) :=
+    norm_outerCoreEmbedding_le_sqrt μ
+  have hsq : ‖T‖ ^ 2 ≤ (measureUnivNNReal μ : ℝ) := by
+    calc
+      ‖T‖ ^ 2 ≤ Real.sqrt (measureUnivNNReal μ : ℝ) ^ 2 :=
+        pow_le_pow_left₀ (norm_nonneg T) hT 2
+      _ = (measureUnivNNReal μ : ℝ) := Real.sq_sqrt (measureUnivNNReal μ).coe_nonneg
+  have hbound : ‖outerKernelL2 μ K‖ ≤ ‖T‖ ^ 2 * ‖K‖ := by
+    calc
+      ‖outerKernelL2 μ K‖ ≤ ‖T‖ * ‖outerKernelToContinuous μ K‖ :=
+        norm_outerKernelL2_le_product μ K
+      _ ≤ ‖T‖ * (‖T‖ * ‖K‖) :=
+        mul_le_mul_of_nonneg_left (norm_outerKernelToContinuous_le μ K) (norm_nonneg T)
+      _ = ‖T‖ ^ 2 * ‖K‖ := by ring
+  exact hbound.trans (mul_le_mul_of_nonneg_right hsq (norm_nonneg K))
 
 /-- A bound stated directly for the pointwise kernel. -/
 theorem norm_outerKernelL2_le_of_bound (K : C(X, C(X, ℝ))) {B : ℝ}

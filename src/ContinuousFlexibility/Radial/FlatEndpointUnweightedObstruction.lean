@@ -296,7 +296,7 @@ theorem radialJacobi_flatEndpointTest_abs_le {w : ℝ → ℝ}
     _ ≤ (|w x * deriv (deriv (flatEndpointTest b h)) x| +
         |deriv w x * deriv (flatEndpointTest b h) x|) +
         |α * deriv w x / x * flatEndpointTest b h x| :=
-      add_le_add_right (abs_add_le _ _) _
+      add_le_add (abs_add_le _ _) le_rfl
     _ ≤ (125 * M * C * h + 25 * M * C * h) + (25 * |α| * M / a) * h :=
       add_le_add (add_le_add hsecond hfirst) hpotential
     _ = _ := by ring

@@ -17,7 +17,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set Metric
-open scoped Topology
+open scoped NNReal Topology
 
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
 
@@ -161,8 +161,8 @@ theorem exists_bounded_linear_ode (A : ℝ → E →L[ℝ] E) (hA : Continuous A
       HasDerivAt g₀ (A t (g₀ t)) t := by
     have hm : -t ∈ Icc (-c) (-c + (N : ℝ) * δ) := by
       constructor <;> linarith [ht.1, ht.2]
-    simpa only [B, neg_neg, ContinuousLinearMap.neg_apply, neg_smul, one_smul, g₀] using
-      (hg (-t) hm).comp t (hasDerivAt_neg t)
+    simpa only [B, neg_neg, ContinuousLinearMap.neg_apply, neg_smul, one_smul, g₀, Function.comp_apply] using
+      (hg (-t) hm).scomp t (hasDerivAt_neg t)
   have hnδ : 0 ≤ (N : ℝ) * δ := mul_nonneg (Nat.cast_nonneg N) hδ.le
   obtain ⟨u, hug, _, hu⟩ := exists_ode_join
     (by linarith : c - (N : ℝ) * δ ≤ c)

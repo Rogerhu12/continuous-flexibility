@@ -153,38 +153,38 @@ theorem nonneg_le_exp_mul_nat_sq {M : ℝ} (hM : 0 ≤ M) {n : ℕ} (hn : 1 ≤ 
     _ ≤ M * (n : ℝ) ^ 2 + 1 := le_add_of_nonneg_right zero_le_one
     _ ≤ _ := add_one_le_exp _
 
-/-- The manuscript's Hilbert-mass bound with the chosen state scale `λ`.
+/-- The manuscript's Hilbert-mass bound with the chosen state scale `scale`.
 The only scale hypothesis is the permitted comparison with the actual
 cell amplitude; the core-mass estimate is derived above. -/
 theorem morseOuterCore_mass_le_state_scale {T : MorseChainData} {σ : ℕ → ℝ}
-    {D₀ D : ReferenceData} {C : ℕ → ℝ} {K λ L : ℝ}
+    {D₀ D : ReferenceData} {C : ℕ → ℝ} {K scale L : ℝ}
     (h₀ : MorseChainRealization T (fun _ => 1) D₀ C)
     (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
     (hcell : MorseRealizedCellEstimates T K)
-    (side : Bool) (n : ℕ) (hn : T.index < n) (hλ : 0 < λ)
-    (hscale : morseChainAmplitude T σ n / λ ≤ exp (L * (n : ℝ) ^ 2)) :
+    (side : Bool) (n : ℕ) (hn : T.index < n) (hλ : 0 < scale)
+    (hscale : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
     let M := (12 / D.a ^ 8) *
       (K * (9 ^ 2 + 9 ^ 6) + (C 0 * K * D₀.b ^ 6 * exp 300) * 9 ^ 6)
     radialHilbertIntervalMass D (morseOuterCoreLeft T side n) (morseOuterCoreRight T side n) ≤
-      λ * exp ((L + 27 + M) * (n : ℝ) ^ 2) := by
+      scale * exp ((L + 27 + M) * (n : ℝ) ^ 2) := by
   let M := (12 / D.a ^ 8) *
     (K * (9 ^ 2 + 9 ^ 6) + (C 0 * K * D₀.b ^ 6 * exp 300) * 9 ^ 6)
   have hK : 0 ≤ K := hcell.pos.le
   have hC : 0 ≤ C 0 := (h.constants_pos 0).le
   have hM : 0 ≤ M := by dsimp only [M]; positivity
   have hpref : M ≤ exp (M * (n : ℝ) ^ 2) := nonneg_le_exp_mul_nat_sq hM (by omega)
-  have hlam : morseChainAmplitude T σ n ≤ λ * exp (L * (n : ℝ) ^ 2) := by
+  have hlam : morseChainAmplitude T σ n ≤ scale * exp (L * (n : ℝ) ^ 2) := by
     exact ((div_le_iff₀ hλ).mp hscale).trans_eq (mul_comm _ _)
   calc
     _ ≤ M * morseChainAmplitude T σ n * exp (27 * (n : ℝ) ^ 2) :=
       morseOuterCore_mass_le_height_exp h₀ h hσ hcell side n hn
-    _ ≤ (exp (M * (n : ℝ) ^ 2) * (λ * exp (L * (n : ℝ) ^ 2))) *
+    _ ≤ (exp (M * (n : ℝ) ^ 2) * (scale * exp (L * (n : ℝ) ^ 2))) *
         exp (27 * (n : ℝ) ^ 2) :=
       mul_le_mul_of_nonneg_right
         (mul_le_mul hpref hlam (morseChainAmplitude_pos T σ hσ n).le (exp_pos _).le)
         (exp_pos _).le
-    _ = λ * exp ((L + 27 + M) * (n : ℝ) ^ 2) := by
-      rw [mul_left_comm (exp (M * (n : ℝ) ^ 2)) λ,
+    _ = scale * exp ((L + 27 + M) * (n : ℝ) ^ 2) := by
+      rw [mul_left_comm (exp (M * (n : ℝ) ^ 2)) scale,
         mul_assoc, ← exp_add, ← exp_add]
       congr 2
       ring

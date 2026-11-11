@@ -60,15 +60,19 @@ theorem morseAdjacentScale_transfer_factor_le
     linarith only [hBm.2, hsq.1]
   have hHhigh : log H ≤ -(n : ℝ) ^ 2 + 2 * (n : ℝ) + 8 := by
     rcases le_total A B with hab | hba
-    · rw [H, max_eq_right hab]
+    · change log (max A B) ≤ _
+      rw [max_eq_right hab]
       exact hBhigh
-    · rw [H, max_eq_left hba]
+    · change log (max A B) ≤ _
+      rw [max_eq_left hba]
       exact hAhigh
   have hLlow : -(n : ℝ) ^ 2 - 2 * (n : ℝ) - 9 ≤ log L := by
     rcases le_total A B with hab | hba
-    · rw [L, min_eq_left hab]
+    · change _ ≤ log (min A B)
+      rw [min_eq_left hab]
       linarith only [hAlow, (Nat.cast_nonneg n : (0 : ℝ) ≤ n)]
-    · rw [L, min_eq_right hba]
+    · change _ ≤ log (min A B)
+      rw [min_eq_right hba]
       exact hBlow
   have hQhigh := morseAdjacentScale_amplitude_log_bound T σ hσ hNn hNm hadj
   have hlogs : log Q + log B + 12 * log H - 5 * log A - log L ≤ 400 := by
