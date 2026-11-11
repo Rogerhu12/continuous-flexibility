@@ -32,7 +32,8 @@ def coupledCircleAngularIndex (s : ℕ) : CircleJetIndex s ↪ CircleJetIndex (s
     fin_cases i
     · have h := congrArg (fun q : CircleJetIndex (s + 1) => (q.val 0).val) hjk
       change (j.val 0).val + 1 = (k.val 0).val + 1 at h
-      omega
+      change (j.val 0).val = (k.val 0).val
+      exact Nat.add_right_cancel h
     · exact congrArg (fun q : CircleJetIndex (s + 1) => (q.val 1).val) hjk
 
 theorem coupledCircleAngularIndex_order (s : ℕ) (j : CircleJetIndex s) :

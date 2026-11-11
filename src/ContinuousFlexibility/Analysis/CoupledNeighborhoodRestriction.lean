@@ -77,8 +77,18 @@ theorem coupled_N01Properties_restrict (hT : IsMaterialData D T)
     (h : N01Properties D T S C base loss ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) (hε' : 0 < ε') :
     N01Properties D T S C base' loss ε' := by
-  rcases h with ⟨hD, _, hRef, hCtrl, hIdx, hJets, hFlow, hChart, hInv,
-    hBounds, hZero, hCoef, hFlowJet⟩
+  have hD := h.1
+  have hRef := h.2.2.1
+  have hCtrl := h.2.2.2.1
+  have hIdx := h.2.2.2.2.1
+  have hJets := h.2.2.2.2.2.1
+  have hFlow := h.2.2.2.2.2.2.1
+  have hChart := h.2.2.2.2.2.2.2.1
+  have hInv := h.2.2.2.2.2.2.2.2.1
+  have hBounds := h.2.2.2.2.2.2.2.2.2.1
+  have hZero := h.2.2.2.2.2.2.2.2.2.2.1
+  have hCoef := h.2.2.2.2.2.2.2.2.2.2.2.1
+  have hFlowJet := h.2.2.2.2.2.2.2.2.2.2.2.2
   have hsub := coupled_stateNeighborhood_mono (S := S) (C := C) hb hε
   have hopen := coupled_stateNeighborhood_isOpen S C base' ε'
   have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
@@ -134,8 +144,24 @@ theorem coupled_N03Properties_restrict (h : N03Properties D T S C R L base ε)
 
 theorem coupled_N04Properties_restrict (h : N04Properties D T S C L K base loss ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) : N04Properties D T S C L K base' loss ε' := by
-  rcases h with ⟨h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈, h₉, h₁₀, h₁₁,
-    h₁₂, h₁₃, h₁₄, h₁₅, h₁₆, h₁₇, h₁₈⟩
+  have h₁ := h.1
+  have h₂ := h.2.1
+  have h₃ := h.2.2.1
+  have h₄ := h.2.2.2.1
+  have h₅ := h.2.2.2.2.1
+  have h₆ := h.2.2.2.2.2.1
+  have h₇ := h.2.2.2.2.2.2.1
+  have h₈ := h.2.2.2.2.2.2.2.1
+  have h₉ := h.2.2.2.2.2.2.2.2.1
+  have h₁₀ := h.2.2.2.2.2.2.2.2.2.1
+  have h₁₁ := h.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₂ := h.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₃ := h.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₄ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₅ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₆ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₇ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₈ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2
   have hsub := coupled_stateNeighborhood_mono (S := S) (C := C) hb hε
   refine ⟨h₁, h₂, (fun z hz => h₃ z (hsub hz)), h₄, h₅, h₆, h₇,
     (fun z hz => h₈ z (hsub hz)), (fun z hz => h₉ z (hsub hz)),
@@ -181,8 +207,24 @@ theorem coupled_N08Properties_restrict
     (h : N08Properties D T S C R G P B base loss ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) :
     N08Properties D T S C R G P B base' loss ε' := by
-  rcases h with ⟨h₁, _, h₃, h₄, h₅, h₆, h₇, h₈, h₉, h₁₀, h₁₁,
-    h₁₂, h₁₃, h₁₄, h₁₅, h₁₆, h₁₇, h₁₈, h₁₉⟩
+  have h₁ := h.1
+  have h₃ := h.2.2.1
+  have h₄ := h.2.2.2.1
+  have h₅ := h.2.2.2.2.1
+  have h₆ := h.2.2.2.2.2.1
+  have h₇ := h.2.2.2.2.2.2.1
+  have h₈ := h.2.2.2.2.2.2.2.1
+  have h₉ := h.2.2.2.2.2.2.2.2.1
+  have h₁₀ := h.2.2.2.2.2.2.2.2.2.1
+  have h₁₁ := h.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₂ := h.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₃ := h.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₄ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₅ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₆ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₇ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₈ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have h₁₉ := h.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2
   have hsub := coupled_stateNeighborhood_mono (S := S) (C := C) hb hε
   have hss := coupled_sectorNeighborhood_mono (S := S) hb hε hε
   have hopen := coupled_sectorNeighborhood_isOpen S base' ε' ε'

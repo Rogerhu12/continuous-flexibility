@@ -57,7 +57,8 @@ theorem coupled_exists_uniform_fiber_bound
   apply ContinuousLinearMap.opNorm_le_bound _ (by positivity)
   apply coupled_linear_bound_of_ball (L z).toLinearMap hδ
   intro u hu
-  exact hWV ⟨hz, hball (by simpa only [Metric.mem_ball, dist_zero_right] using hu)⟩
+  exact hWV (show (z, u) ∈ W ×ˢ V from
+    ⟨hz, hball (by simpa only [Metric.mem_ball, dist_zero_right] using hu)⟩)
 
 end FiberBound
 

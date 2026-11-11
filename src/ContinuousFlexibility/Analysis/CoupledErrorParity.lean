@@ -40,6 +40,16 @@ theorem coupled_deriv_odd_of_even {f : ℝ → ℝ}
   have h := congrArg Neg.neg (hm.unique (hf θ).hasDerivAt)
   simpa only [neg_neg] using h
 
+private theorem coupled_even_sub_odd_product (f g h : ℝ → ℝ)
+    (hg : Function.Odd g) :
+    Function.Even (fun θ => evenPart f θ - g θ * oddPart h θ) := by
+  intro θ
+  rw [coupled_evenPart_even f θ, hg θ, coupled_oddPart_odd h θ, neg_mul_neg]
+
+private theorem coupled_even_average (f : ℝ → ℝ) (θ : ℝ) :
+    (f (-θ) + f (- -θ)) / 2 = (f θ + f (-θ)) / 2 := by
+  rw [neg_neg, add_comm]
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
 
@@ -50,10 +60,14 @@ theorem coupled_circleChartError_even
     (hr : Function.Even ((S.circle (3 / 4 : ℝ)).decode r m))
     (hdr : Differentiable ℝ ((S.circle (3 / 4 : ℝ)).decode r m)) :
     Function.Even (circleChartError S C z r v m) := by
-  intro θ
-  dsimp only [circleChartError]
-  rw [coupled_evenPart_even _ θ, coupled_deriv_odd_of_even hdr hr θ,
-    coupled_oddPart_odd _ θ, neg_mul_neg]
+  exact coupled_even_sub_odd_product
+    (fun t => (S.circle (3 / 4 : ℝ)).decode r m t *
+      ∫ a in (0 : ℝ)..1, deriv ((S.circle (3 / 4 : ℝ)).decode v m)
+        (t + C.travel m + a * returnResidualField S C z m t))
+    (deriv ((S.circle (3 / 4 : ℝ)).decode r m))
+    (fun t => (S.circle (3 / 4 : ℝ)).decode v m
+      (t + C.travel m + returnResidualField S C z m t))
+    (coupled_deriv_odd_of_even hdr hr)
 
 /-- The actual N02 error belongs to the original even circle subspace. -/
 theorem coupled_returnError_mem_even
@@ -64,18 +78,19 @@ theorem coupled_returnError_mem_even
     (hr : r ∈ evenCircleSubmodule S) (v : CircleSpace S) :
     R.error z r v ∈ evenCircleSubmodule S := by
   intro m θ
-  rw [h2.2.2.2.2.1 z hz hs r v m (-θ), h2.2.2.2.2.1 z hz hs r v m θ]
   have hdr : Differentiable ℝ ((S.circle (3 / 4 : ℝ)).decode r m) :=
     (((hS.2.1 (3 / 4 : ℝ)).2.2.2.1 r).1 m).1.differentiable (by simp)
-  exact coupled_circleChartError_even z r v m (fun θ => hr m θ) hdr θ
+  exact (h2.2.2.2.2.1 z hz hs r v m (-θ)).trans
+    ((coupled_circleChartError_even (S := S) (C := C) z r v m
+      (fun t => hr m t) hdr θ).trans (h2.2.2.2.2.1 z hz hs r v m θ).symm)
 
 theorem coupled_evenProjection_mem
     (hS : IsPhysicalSpaces D T S) (u : CircleSpace S) :
     circleModelEvenProjection (hS.2.1 (3 / 4 : ℝ)) u ∈ evenCircleSubmodule S := by
   intro m θ
-  rw [circleModelEvenProjection_decode, circleModelEvenProjection_decode]
-  simp only [neg_neg]
-  ring
+  exact (circleModelEvenProjection_decode (hS.2.1 (3 / 4 : ℝ)) u m (-θ)).trans
+    ((coupled_even_average ((S.circle (3 / 4 : ℝ)).decode u m) θ).trans
+      (circleModelEvenProjection_decode (hS.2.1 (3 / 4 : ℝ)) u m θ).symm)
 
 theorem coupled_evenProjection_eq_of_even
     (hS : IsPhysicalSpaces D T S) {u : CircleSpace S}
@@ -116,8 +131,9 @@ theorem coupled_projected_returnError_eq
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (r : EvenCircle S) (v : CircleSpace S) :
     (coupledEvenProjectionCLM hS (R.error z r.val v)).val = R.error z r.val v := by
-  rw [coupledEvenProjectionCLM_val]
-  exact coupled_evenProjection_eq_of_even hS
-    (coupled_returnError_mem_even hS h2 hz hs r.val r.property v)
+  exact (coupledEvenProjectionCLM_val hS (R.error z r.val v)).trans
+    (coupled_evenProjection_eq_of_even hS
+      (coupled_returnError_mem_even (D := D) (T := T) (S := S) (C := C) (R := R)
+        hS h2 hz hs r.val r.property v))
 
 end ContinuousFlexibility.Statements

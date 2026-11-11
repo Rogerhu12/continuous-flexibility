@@ -143,6 +143,28 @@ theorem coupled_scalar_recovery_algebra
   rw [hvalue, map_sub] at hsolve
   linarith only [hsolve]
 
+private theorem coupled_scalar_completion_algebra
+    {original corrected error correction nu control source totalError : ℝ}
+    (hsolve : corrected + nu + control = source)
+    (hcompletion : original - corrected = correction)
+    (herror : totalError = error + correction) :
+    original + error + nu + control = source + totalError := by
+  linarith only [hsolve, hcompletion, herror]
+
+private theorem coupled_fill_circle_row {E : Type*} [AddCommGroup E]
+    (height control source inverse : E)
+    (hinverse : inverse = source - height - control) :
+    height + control + inverse = source := by
+  rw [hinverse]
+  abel
+
+private theorem coupled_lineDerivAt_replace
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {f : E → F} {df dg : F} {x v w : E}
+    (h : HasProjectiveLineDerivAt f df x v) (hd : df = dg) (hv : v = w) :
+    HasProjectiveLineDerivAt f dg x w := hd ▸ hv ▸ h
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
@@ -211,15 +233,20 @@ theorem coupled_scalar_equation_with_return_error
         (B.heightColumn z (controlSolution S B G N z y)).val p =
       (S.height (3 / 4 : ℝ)).decode (y.1 + e).val p := by
   have hnear : z ∈ stateNeighborhood S C base ε := ⟨hz.1, hz.2.trans_le h9.2.1⟩
-  have hsolve := coupled_corrected_scalar_equation hG h9 hz hs y hp
-  have hcompletion := h3.2.2.2.2.2.1 z hnear hs (V.V z y).1 p hp
+  have hsolve := coupled_corrected_scalar_equation
+    (D := D) (T := T) (S := S) (C := C) (R := R) (L := L) (G := G)
+    (B := B) (N := N) (V := V) hG h9 hz hs y hp
+  have hcompletion :
+      divergenceOperator (originalCoefficients D S C z) (heightPairField S (V.V z y).1) p -
+        divergenceOperator (L.coefficients z) (heightPairField S (V.V z y).1) p =
+          (S.height (3 / 4 : ℝ)).decode ((L.error z (R.residual z) (V.V z y).1).val) p :=
+    h3.2.2.2.2.2.1 z hnear hs (V.V z y).1 p hp
   have herror := he p hp
   have hadd : (S.height (3 / 4 : ℝ)).decode (y.1 + e).val p =
       (S.height (3 / 4 : ℝ)).decode y.1.val p +
         (S.height (3 / 4 : ℝ)).decode e.val p :=
     (coupledSourceEvaluation S p).map_add y.1 e
-  rw [hadd]
-  linarith only [hsolve, hcompletion, herror]
+  exact (coupled_scalar_completion_algebra hsolve hcompletion herror).trans hadd.symm
 
 /-- The inverse of the zero-mean circle row exactly fills the remaining
 source after the height and control columns have been removed. -/
@@ -242,9 +269,8 @@ theorem coupled_corrected_circle_equation
   have hi : R.linearPart (R.inverse f) = f := (h2.2.2.2.2.2.2.2.1 f hf).1
   change z.2 • B.heightRow z w.1 + B.circleColumn z w.2.2.1 +
     R.linearPart (R.inverse f) = y.2.val
-  rw [hi]
-  dsimp only [f]
-  abel
+  exact coupled_fill_circle_row (z.2 • B.heightRow z w.1)
+    (B.circleColumn z w.2.2.1) y.2.val (R.linearPart (R.inverse f)) hi
 
 /-- The chart direction in the recovered state is precisely the one to
 which the true N02 return-derivative formula applies. -/
@@ -270,7 +296,13 @@ theorem coupled_recovered_chart_derivative
   have hnear : z ∈ stateNeighborhood S C base ε := ⟨hz.1, hz.2.trans_le h9.2.1⟩
   have hd := h2.2.2.2.2.2.2.1 z hnear hs (R.inverse f) hinv.2
   have hchart : w.2.2.2 = R.chartIncrement z (R.inverse f) := hr.2.2.2.2.1
-  rw [hinv.1, ← hchart] at hd
-  exact hd
+  have hvalue : R.linearPart (R.inverse f) + R.error z (R.residual z) (R.inverse f) =
+      f + R.error z (R.residual z) (R.inverse f) :=
+    congrArg (fun a : CircleSpace S => a + R.error z (R.residual z) (R.inverse f)) hinv.1
+  have hdirection : ((0, (0, (0, R.chartIncrement z (R.inverse f)))) : AnnularState S) =
+      (0, (0, (0, w.2.2.2))) :=
+    congrArg (fun a : CircleSpace S => (0, (0, (0, a))) : CircleSpace S → AnnularState S)
+      hchart.symm
+  exact coupled_lineDerivAt_replace hd hvalue hdirection
 
 end ContinuousFlexibility.Statements

@@ -178,10 +178,12 @@ theorem controlSolution_mean_equation
       ((G.G z y.1).1 - controlHeightResponse S B G z (controlSolution S B G N z y)) =
         B.restriction y.2.val := by
   have hξ := controlSolution_sub_feedback B G N z hN y
-  rw [controlFeedback_apply] at hξ
+  have hξ' := (congrArg
+    (fun v : ControlBanach => controlSolution S B G N z y - z.2 • v)
+    (controlFeedback_apply B G z (controlSolution S B G N z y))).symm.trans hξ
   exact coupledControl_elimination (B.J z).toLinearMap (B.JInverse z).toLinearMap
     (controlMeanRow S B z).toLinearMap (controlHeightResponse S B G z).toLinearMap
-    hJ z.2 (controlSolution S B G N z y) (B.restriction y.2.val) (G.G z y.1).1 hξ
+    hJ z.2 (controlSolution S B G N z y) (B.restriction y.2.val) (G.G z y.1).1 hξ'
 
 theorem controlSolution_restriction_remainder
     (B : ControlColumnData S) (G : ScalarInverseData S) (N : ControlInverseData S)
@@ -199,10 +201,12 @@ theorem controlSolution_restriction_remainder
     (congrArg (fun h => B.J z (controlSolution S B G N z y) +
       z.2 • controlMeanRow S B z h) hη).trans
         (controlSolution_mean_equation B G N z hN hJ y)
-  rw [controlMeanRow_apply] at hmean
+  have hmean' := (congrArg
+    (fun v : ControlBanach => B.J z (controlSolution S B G N z y) + z.2 • v)
+    (controlMeanRow_apply B z η)).symm.trans hmean
   exact coupledControl_remainder_zero B.restriction.toLinearMap
     (B.heightRow z).toLinearMap (B.circleColumn z).toLinearMap (B.J z).toLinearMap
-    hcolumn z.2 y.2.val κ η (controlSolution S B G N z y) hκ hmean
+    hcolumn z.2 y.2.val κ η (controlSolution S B G N z y) hκ hmean'
 
 /-- The stored inverse has the reciprocal coordinates of the stored
 diagonal operator; this follows from the actual right inverse identity. -/

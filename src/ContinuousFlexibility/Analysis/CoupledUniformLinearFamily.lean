@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.TameInverseExpressions
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
+import ContinuousFlexibility.Analysis.TameLocalCalculus
 
 /-!
 # Uniform estimates for an actual smooth linear family
@@ -51,9 +52,6 @@ theorem coupled_uniformLinearFamilyTame_near
     convert hi using 1
     unfold inverseForwardJet
     congr 1
-    funext i
-    fin_cases i
-    rfl
   change r s (J.D 1 (x, 0) (fun _ : Fin 1 => ((0 : X), y))) ≤
     c * tameJetSize (pairGrading p q) 1 s loss b (x, 0)
       (fun _ : Fin 1 => ((0 : X), y)) at h

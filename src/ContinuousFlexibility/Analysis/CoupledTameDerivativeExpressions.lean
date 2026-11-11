@@ -54,7 +54,7 @@ def coupledOrderedJetHead (J : SmoothDirections U f)
     (n : ℕ) (x : E) (v : Fin n → E) (y h : E) :
     coupledOrderedJetHead J n x v y h =
       coupledOrderedJet J (n + 1) x (Fin.cons h v) y := by
-  simp only [coupledOrderedJetHead, ContinuousMultilinearMap.toContinuousLinearMap_apply,
+  rw [coupledOrderedJetHead, ContinuousMultilinearMap.toContinuousLinearMap_apply,
     Fin.update_cons_zero, coupledOrderedJet, Fin.cons_snoc_eq_snoc_cons]
 
 theorem hasProjectiveLineDerivAt_coupledOrderedJet (J : SmoothDirections U f)
@@ -69,7 +69,8 @@ theorem continuousOn_coupledOrderedJet (J : SmoothDirections U f) (n : ℕ) :
       (fun z : E × ((Fin n → E) × E) => coupledOrderedJet J n z.1 z.2.1 z.2.2)
       (U ×ˢ univ) := by
   have hinput : Continuous
-      (fun z : E × ((Fin n → E) × E) => Fin.snoc z.2.1 z.2.2) := by
+      (fun z : E × ((Fin n → E) × E) =>
+        Fin.snoc (α := fun _ : Fin (n + 1) => E) z.2.1 z.2.2) := by
     apply continuous_pi
     intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
@@ -259,7 +260,8 @@ theorem CoupledDerivativeExpression.IsZeroLoss.diff
   have hcons (n : ℕ) (v : Fin n → A →L[ℝ] E)
       (hv : ∀ i, IsTameLinear a p (v i).toLinearMap 0 0) :
       ∀ i, IsTameLinear a' p
-        ((Fin.cons ((ContinuousLinearMap.fst ℝ E E).comp h)
+        ((Fin.cons (α := fun _ : Fin (n + 1) => A' →L[ℝ] E)
+          ((ContinuousLinearMap.fst ℝ E E).comp h)
           (fun j => (v j).comp g)) i).toLinearMap 0 0 := by
     intro i
     refine Fin.cases ?_ (fun j => ?_) i
@@ -307,7 +309,8 @@ theorem CoupledDerivativeExpression.locallyTameOn_eval
       LocallyTameOn d q S
         (fun z => coupledOrderedJet J n z.1.1 (fun i => v i z.2) (u z)) := by
     have hinput (i : Fin (n + 1)) : LocallyTameOn d p S
-        (fun z => Fin.snoc (fun j => v j z.2) (u z) i) := by
+        (fun z => Fin.snoc (α := fun _ : Fin (n + 1) => E)
+          (fun j => v j z.2) (u z) i) := by
       refine Fin.lastCases ?_ (fun j => ?_) i
       · simpa only [Fin.snoc_last] using hu
       · simpa only [Fin.snoc_castSucc] using hcoordinate (v j) (hv j)
