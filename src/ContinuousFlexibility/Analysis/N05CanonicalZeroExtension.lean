@@ -29,6 +29,7 @@ theorem n05CanonicalMeasure_eq_cylinder_restrict (S : PhysicalSpacesData)
     (K : CanonicalData S) (m : ℕ) :
     materialCylinderMeasure.restrict (n05CanonicalRadialWindow S K m) =
       canonicalMeasure S K m := by
+  let : SFinite angleMeasure := by unfold angleMeasure; infer_instance
   rw [materialCylinderMeasure_eq_prod, n05CanonicalRadialWindow,
     ← Measure.prod_restrict, Measure.restrict_univ]
   exact (n05CanonicalMeasure_eq_prod S K m).symm
