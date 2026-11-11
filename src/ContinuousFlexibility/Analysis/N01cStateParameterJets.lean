@@ -28,7 +28,7 @@ open Set
 open ContinuousFlexibility.Statements
 open scoped ContDiff Topology BigOperators
 
-set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency false
 
 section ExponentialJets
 
@@ -77,7 +77,7 @@ def smoothDirections_scaledExpLinear (a : ℝ) (L : E →L[ℝ] ℝ) :
   derivative := by
     intro n x _ v w
     have hL : HasDerivAt (fun t : ℝ => L (x + t • w)) (L w) (0 : ℝ) := by
-      simpa only [map_add, map_smul, smul_eq_mul, one_mul] using
+      simpa only [map_add, map_smul, smul_eq_mul, one_mul, id_eq] using
         ((hasDerivAt_id (0 : ℝ)).mul_const (L w)).const_add (L x)
     have hcurve : HasDerivAt
         (fun t : ℝ => a * Real.exp (L (x + t • w)) * ∏ i, L (v i))
@@ -90,7 +90,7 @@ def smoothDirections_scaledExpLinear (a : ℝ) (L : E →L[ℝ] ℝ) :
       simp only [Fin.cons_zero, Fin.cons_succ]
       ring
     rw [hvalue] at hcurve
-    unfold HasProjectiveLineDerivAt
+    unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
     apply hasDerivAt_iff_tendsto_slope_zero.mp
     simpa only [scaledExpLinearJets_apply] using hcurve
 
@@ -131,6 +131,90 @@ open scoped ContDiff Topology BigOperators
 
 set_option backward.isDefEq.respectTransparency true
 
+/- Cache the actual product instances before elaborating state operations. -/
+private abbrev n01cStateTopology (S : PhysicalSpacesData) :
+    TopologicalSpace (AnnularState S) := inferInstance
+attribute [local instance] n01cStateTopology
+
+private abbrev n01cStateGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S) := inferInstance
+attribute [local instance] n01cStateGroup
+
+private abbrev n01cStateModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S) := inferInstance
+attribute [local instance] n01cStateModule
+
+private abbrev n01cStateSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S) := inferInstance
+attribute [local instance] n01cStateSMul
+
+private theorem scalarMean_add {f g : ℝ → ℝ}
+    (hf : IntervalIntegrable f MeasureTheory.volume 0 Real.pi)
+    (hg : IntervalIntegrable g MeasureTheory.volume 0 Real.pi) :
+    angularMean (fun t => f t + g t) = angularMean f + angularMean g := by
+  unfold angularMean
+  rw [intervalIntegral.integral_add hf hg]
+  ring
+
+private theorem scalarMean_const_mul (c : ℝ) (f : ℝ → ℝ) :
+    angularMean (fun t => c * f t) = c * angularMean f := by
+  unfold angularMean
+  rw [intervalIntegral.integral_const_mul]
+  ring
+
+private theorem scalarLinearMean_add {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (L : E →ₗ[ℝ] (ℝ → ℝ)) (x y : E)
+    (hx : IntervalIntegrable (L x) MeasureTheory.volume 0 Real.pi)
+    (hy : IntervalIntegrable (L y) MeasureTheory.volume 0 Real.pi) :
+    angularMean (L (x + y)) = angularMean (L x) + angularMean (L y) := by
+  have heq : L (x + y) = (fun t => L x t + L y t) := by
+    funext t
+    simpa only [Pi.add_apply] using congrFun (map_add L x y) t
+  exact (congrArg angularMean heq).trans (scalarMean_add hx hy)
+
+private theorem scalarLinearMean_smul {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (L : E →ₗ[ℝ] (ℝ → ℝ)) (c : ℝ) (x : E) :
+    angularMean (L (c • x)) = c * angularMean (L x) := by
+  have heq : L (c • x) = (fun t => c * L x t) := by
+    funext t
+    simpa only [Pi.smul_apply, smul_eq_mul] using congrFun (map_smul L c x) t
+  exact (congrArg angularMean heq).trans (scalarMean_const_mul c (L x))
+
+private theorem scalarCLMSum_apply {E : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (I : Finset ℕ) (a : ℕ → ℝ) (L : ℕ → E →L[ℝ] ℝ) (x : E) :
+    (∑ m ∈ I, a m • L m) x = ∑ m ∈ I, a m * L m x := by
+  simp only [sum_apply, smul_apply, smul_eq_mul]
+
+private theorem scalarCLMSmulAdd_apply {E : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (a : ℝ) (L M : E →L[ℝ] ℝ) (x : E) :
+    (a • L + M) x = a * L x + M x := by
+  simp only [add_apply, smul_apply, smul_eq_mul]
+
+private theorem profile_derivative_reassociate (e a b c : ℝ) :
+    a * Real.exp e + b * (Real.exp e * c) = Real.exp e * (a + b * c) := by
+  ring
+
+private def stateControlDecodeLinear (S : PhysicalSpacesData) (m : ℕ) :
+    AnnularState S →ₗ[ℝ] (ℝ → ℝ) :=
+  (LinearMap.proj m).comp ((S.circle (3 / 4 : ℝ)).decode.comp
+    ((LinearMap.fst ℝ (CircleSpace S) (CircleSpace S)).comp
+      ((LinearMap.snd ℝ ℝ (CircleSpace S × CircleSpace S)).comp
+        (LinearMap.snd ℝ (HeightPair S) (ℝ × (CircleSpace S × CircleSpace S))))))
+
+private theorem stateControlDecodeLinear_apply (S : PhysicalSpacesData) (m : ℕ)
+    (x : AnnularState S) :
+    stateControlDecodeLinear S m x = (S.circle (3 / 4 : ℝ)).decode x.2.2.1 m := by
+  simp only [stateControlDecodeLinear, LinearMap.comp_apply, LinearMap.proj_apply,
+    LinearMap.fst_apply, LinearMap.snd_apply]
+
+private theorem stateKappa_eq_scalarMean (S : PhysicalSpacesData)
+    (x : AnnularState S) (m : ℕ) :
+    stateKappa S x m = angularMean (stateControlDecodeLinear S m x) :=
+  congrArg angularMean (stateControlDecodeLinear_apply S m x).symm
+
+
 private theorem decodedControl_intervalIntegrable {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S)
     (x : AnnularState S) (m : ℕ) :
@@ -141,17 +225,23 @@ private theorem decodedControl_intervalIntegrable {D : ReferenceData} {T : Mater
 theorem stateKappa_add {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) (x y : AnnularState S) (m : ℕ) :
     stateKappa S (x + y : AnnularState S) m = stateKappa S x m + stateKappa S y m := by
-  simp only [stateKappa, angularMean, Prod.fst_add, Prod.snd_add, map_add, Pi.add_apply]
-  rw [intervalIntegral.integral_add (decodedControl_intervalIntegrable hS x m)
-    (decodedControl_intervalIntegrable hS y m), mul_add]
+  have hx : IntervalIntegrable (stateControlDecodeLinear S m x)
+      MeasureTheory.volume 0 Real.pi :=
+    (stateControlDecodeLinear_apply S m x).symm ▸ decodedControl_intervalIntegrable hS x m
+  have hy : IntervalIntegrable (stateControlDecodeLinear S m y)
+      MeasureTheory.volume 0 Real.pi :=
+    (stateControlDecodeLinear_apply S m y).symm ▸ decodedControl_intervalIntegrable hS y m
+  exact (stateKappa_eq_scalarMean S (x + y) m).trans
+    ((scalarLinearMean_add (stateControlDecodeLinear S m) x y hx hy).trans
+      (congrArg₂ (· + ·) (stateKappa_eq_scalarMean S x m).symm
+        (stateKappa_eq_scalarMean S y m).symm))
 
 theorem stateKappa_smul (S : PhysicalSpacesData) (c : ℝ)
     (x : AnnularState S) (m : ℕ) :
     stateKappa S (c • x : AnnularState S) m = c * stateKappa S x m := by
-  simp only [stateKappa, angularMean, Prod.smul_fst, Prod.smul_snd, map_smul,
-    Pi.smul_apply, smul_eq_mul]
-  rw [intervalIntegral.integral_const_mul]
-  ring
+  exact (stateKappa_eq_scalarMean S (c • x) m).trans
+    ((scalarLinearMean_smul (stateControlDecodeLinear S m) c x).trans
+      (congrArg (fun t : ℝ => c * t) (stateKappa_eq_scalarMean S x m).symm))
 
 /-- The actual decoded control mean, bundled as a linear functional. -/
 def stateKappaLinear {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -230,9 +320,13 @@ theorem stateControlEvalCLM_apply {D : ReferenceData} {T : MaterialData}
       by_contra hne
       exact hm ((finite_activeControls hC hr).mem_toFinset.mpr hne)
     rw [hz, mul_zero]
-  rw [hsum]
-  simp only [stateControlEvalCLM, sum_apply, smul_apply, stateKappaCLM_apply, smul_eq_mul]
-  exact Finset.sum_congr rfl (fun m _ => mul_comm _ _)
+  have heval : stateControlEvalCLM hS hT hRef hC r hr x =
+      ∑ m ∈ (finite_activeControls hC hr).toFinset, C.control m r * stateKappa S x m := by
+    exact (scalarCLMSum_apply (finite_activeControls hC hr).toFinset
+      (fun m => C.control m r) (stateKappaCLM hS hT hRef) x).trans
+        (Finset.sum_congr rfl (fun m _ =>
+          congrArg (fun t : ℝ => C.control m r * t) (stateKappaCLM_apply hS hT hRef m x)))
+  exact heval.trans ((Finset.sum_congr rfl (fun m _ => mul_comm _ _)).trans hsum.symm)
 
 /-- The compact scalar component of the actual annular state. -/
 def stateNuCLM (S : PhysicalSpacesData) : AnnularState S →L[ℝ] ℝ :=
@@ -376,11 +470,22 @@ theorem stateControlJetEvalCLM_apply {D : ReferenceData} {T : MaterialData}
   have hd (m : ℕ) : ContDiffAt ℝ n
       (fun s => stateKappa S x m * C.control m s) r :=
     (contDiffAt_const.mul (hcontrol m).1.contDiffAt).of_le (by simp)
-  rw [(stateControlLocalIndices_eventuallyEq hC r hr x).iteratedDeriv_eq n,
-    iteratedDeriv_fun_sum (fun m _ => hd m)]
-  simp_rw [iteratedDeriv_const_mul_field]
-  simp only [stateControlJetEvalCLM, sum_apply, smul_apply, stateKappaCLM_apply, smul_eq_mul]
-  exact Finset.sum_congr rfl (fun m _ => mul_comm _ _)
+  have hsum : iteratedDeriv n (stateControlSum C x) r =
+      ∑ m ∈ stateControlLocalIndices hC r hr,
+        stateKappa S x m * iteratedDeriv n (C.control m) r := by
+    exact ((stateControlLocalIndices_eventuallyEq hC r hr x).iteratedDeriv_eq n).trans
+      ((iteratedDeriv_fun_sum (fun m _ => hd m)).trans
+        (Finset.sum_congr rfl (fun m _ =>
+          iteratedDeriv_const_mul_field (n := n) (x := r) (stateKappa S x m) (C.control m))))
+  have heval : stateControlJetEvalCLM hS hT hRef hC n r hr x =
+      ∑ m ∈ stateControlLocalIndices hC r hr,
+        iteratedDeriv n (C.control m) r * stateKappa S x m := by
+    exact (scalarCLMSum_apply (stateControlLocalIndices hC r hr)
+      (fun m => iteratedDeriv n (C.control m) r) (stateKappaCLM hS hT hRef) x).trans
+        (Finset.sum_congr rfl (fun m _ =>
+          congrArg (fun t : ℝ => iteratedDeriv n (C.control m) r * t)
+            (stateKappaCLM_apply hS hT hRef m x)))
+  exact heval.trans ((Finset.sum_congr rfl (fun m _ => mul_comm _ _)).trans hsum.symm)
 
 /-- Evaluation of any radial jet of the actual profile exponent. -/
 def stateProfileExponentJetCLM {D : ReferenceData} {T : MaterialData}
@@ -403,10 +508,21 @@ theorem stateProfileExponentJetCLM_apply {D : ReferenceData} {T : MaterialData}
   have hright : ContDiffAt ℝ n (stateControlSum C x) r :=
     ((contDiffOn_stateControlSum hC x).contDiffAt (isOpen_Ioo.mem_nhds hr)).of_le
       (by simp)
-  rw [iteratedDeriv_fun_add hleft hright, iteratedDeriv_const_mul_field]
-  simp only [stateProfileExponentJetCLM, add_apply, smul_apply, smul_eq_mul,
-    stateNuCLM_apply, stateControlJetEvalCLM_apply]
-  rw [mul_comm (iteratedDeriv n D.chi r)]
+  have hderiv :
+      iteratedDeriv n (fun s => x.2.1 * D.chi s + stateControlSum C x s) r =
+        x.2.1 * iteratedDeriv n D.chi r + iteratedDeriv n (stateControlSum C x) r := by
+    exact (iteratedDeriv_fun_add hleft hright).trans
+      (congrArg (fun t : ℝ => t + iteratedDeriv n (stateControlSum C x) r)
+        (iteratedDeriv_const_mul_field (n := n) (x := r) x.2.1 D.chi))
+  have heval : stateProfileExponentJetCLM hS hT hRef hC n r hr x =
+      iteratedDeriv n D.chi r * x.2.1 + iteratedDeriv n (stateControlSum C x) r := by
+    exact (scalarCLMSmulAdd_apply (iteratedDeriv n D.chi r) (stateNuCLM S)
+      (stateControlJetEvalCLM hS hT hRef hC n r hr) x).trans
+        (congrArg₂ (· + ·)
+          (congrArg (fun t : ℝ => iteratedDeriv n D.chi r * t) (stateNuCLM_apply S x))
+          (stateControlJetEvalCLM_apply hS hT hRef hC n r hr x))
+  exact heval.trans ((congrArg (fun t : ℝ =>
+    t + iteratedDeriv n (stateControlSum C x) r) (mul_comm _ _)).trans hderiv.symm)
 
 /-- The radial jets of the exponent have their genuine linear parameter
 towers, in the original topology of the state space. -/
@@ -433,19 +549,32 @@ theorem deriv_stateProfile_eq_exp_exponentJets
         (deriv D.w r + D.w r * stateProfileExponentJetCLM hS hT hRef hC 1 r hr x) := by
   have hW : HasDerivAt D.w (deriv D.w r) r :=
     (hD.2.2.1.1.contDiffAt.differentiableAt (by simp)).hasDerivAt
-  have hE : ContDiffAt ℝ ∞
-      (fun s => x.2.1 * D.chi s + stateControlSum C x s) r :=
+  let e : ℝ → ℝ := fun s => x.2.1 * D.chi s + stateControlSum C x s
+  have hE : ContDiffAt ℝ ∞ e r :=
     (contDiffAt_const.mul hχ.contDiffAt).add
       ((contDiffOn_stateControlSum hC x).contDiffAt (isOpen_Ioo.mem_nhds hr))
-  have hE' : HasDerivAt (fun s => x.2.1 * D.chi s + stateControlSum C x s)
-      (stateProfileExponentJetCLM hS hT hRef hC 1 r hr x) r := by
-    rw [stateProfileExponentJetCLM_apply hS hT hRef hC hχ, iteratedDeriv_one]
-    exact (hE.differentiableAt (by simp)).hasDerivAt
-  have hd := (hW.mul hE'.exp).deriv
-  change deriv (stateProfile D S C x) r = _ at hd
-  rw [stateProfileExponentCLM_apply]
-  rw [hd]
-  ring
+  have hE' : HasDerivAt e (deriv e r) r :=
+    (hE.differentiableAt (by simp)).hasDerivAt
+  have hjet : stateProfileExponentJetCLM hS hT hRef hC 1 r hr x = deriv e r := by
+    simpa only [iteratedDeriv_one] using
+      stateProfileExponentJetCLM_apply hS hT hRef hC hχ 1 r hr x
+  have hd : deriv (stateProfile D S C x) r =
+      deriv D.w r * Real.exp (e r) + D.w r * (Real.exp (e r) * deriv e r) :=
+    (hW.mul hE'.exp).deriv
+  have hreplace :
+      deriv D.w r * Real.exp (e r) + D.w r * (Real.exp (e r) * deriv e r) =
+      deriv D.w r * Real.exp (e r) +
+        D.w r * (Real.exp (e r) * stateProfileExponentJetCLM hS hT hRef hC 1 r hr x) :=
+    congrArg (fun t : ℝ =>
+      deriv D.w r * Real.exp (e r) + D.w r * (Real.exp (e r) * t)) hjet.symm
+  have hbase : e r = stateProfileExponentCLM hS hT hRef hC r hr x :=
+    (stateProfileExponentCLM_apply hS hT hRef hC r hr x).symm
+  exact hd.trans (hreplace.trans
+    ((profile_derivative_reassociate (e r) (deriv D.w r) (D.w r)
+      (stateProfileExponentJetCLM hS hT hRef hC 1 r hr x)).trans
+        (congrArg (fun t : ℝ => Real.exp t *
+          (deriv D.w r + D.w r * stateProfileExponentJetCLM hS hT hRef hC 1 r hr x))
+          hbase)))
 
 /-- All parameter derivatives of the actual first radial profile jet. The
 construction uses a smooth scalar function on the two actual exponent jets. -/
@@ -529,9 +658,16 @@ theorem stateProfile_eventuallyEq_finiteControlProfile
       finiteControlProfile D C (stateControlLocalIndices hC r hr)
         (stateFiniteControlCLM hS hT hRef (stateControlLocalIndices hC r hr) x) := by
   filter_upwards [stateControlLocalIndices_eventuallyEq hC r hr x] with s hs
-  change D.w s * Real.exp (x.2.1 * D.chi s + stateControlSum C x s) = _
-  rw [hs]
-  simp only [finiteControlProfile, stateFiniteControlCLM_apply, Finset.sum_coe_sort]
+  let I := stateControlLocalIndices hC r hr
+  have hleft : stateProfile D S C x s =
+      D.w s * Real.exp (x.2.1 * D.chi s + ∑ m ∈ I, stateKappa S x m * C.control m s) :=
+    congrArg (fun t : ℝ => D.w s * Real.exp (x.2.1 * D.chi s + t)) hs
+  have hright : finiteControlProfile D C I (stateFiniteControlCLM hS hT hRef I x) s =
+      D.w s * Real.exp (x.2.1 * D.chi s + ∑ m ∈ I, stateKappa S x m * C.control m s) := by
+    exact (congrArg (fun y : ℝ × (I → ℝ) => finiteControlProfile D C I y s)
+      (stateFiniteControlCLM_apply hS hT hRef I x)).trans (by
+        simp only [finiteControlProfile, Finset.sum_coe_sort])
+  exact hleft.trans hright.symm
 
 /-- Genuine parameter towers for every radial jet of the actual profile.
 Local finiteness supplies a single finite formula before any spatial or
