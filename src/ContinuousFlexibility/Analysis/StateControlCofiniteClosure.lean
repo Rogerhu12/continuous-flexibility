@@ -50,6 +50,7 @@ theorem stateKappa_controlJet_eventually_small
   have hweight : Tendsto (fun m => T.H (T.sample m) ^ ((3 / 4 : ℝ) / 16))
       cofinite (𝓝 0) := by
     apply materialSample_tendsto_zero_of_endpoint_limits hT hRef
+      (f := fun r => T.H r ^ ((3 / 4 : ℝ) / 16))
     · simpa only [Real.rpow_zero, mul_one] using hleft
     · simpa only [Real.rpow_zero, mul_one] using hright
   have hsmall : ∀ᶠ m in cofinite,
