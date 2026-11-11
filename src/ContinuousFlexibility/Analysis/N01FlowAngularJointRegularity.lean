@@ -136,7 +136,7 @@ theorem N01Properties.minusFlow_angular_deriv_hasStrictFDerivAt
         Function.hasUncurryInduction, id_eq, Function.comp_def] using
         (hreg.differentiable_deriv_two q.2).hasDerivAt.hasFDerivAt)
     (by simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
-        Function.hasUncurryInduction, id_eq, Function.comp_def] using
+        Function.hasUncurryInduction, id_eq, Function.comp_def, Pi.mul_apply] using
       hlin.continuousAt.comp ((hH.mul hJ).continuousAt hclosed))
     (by simpa only [Function.HasUncurry.uncurry, Function.hasUncurryBase,
         Function.hasUncurryInduction, id_eq, Function.comp_def] using hlin.continuousAt.comp (hJJ.continuousAt hclosed))

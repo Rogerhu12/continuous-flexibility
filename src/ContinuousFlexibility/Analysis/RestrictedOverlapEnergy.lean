@@ -45,7 +45,8 @@ theorem tsum_indicator_eq_overlap_count
     _ = ∑ _m ∈ hB.toFinset, g x := by
       apply Finset.sum_congr rfl
       intro m hm
-      exact Set.indicator_of_mem (hB.mem_toFinset.mp hm) g
+      have hx : x ∈ A m := hB.mem_toFinset.mp hm
+      exact Set.indicator_of_mem hx g
     _ = (hB.toFinset.card : ℝ≥0∞) * g x := by
       simp only [Finset.sum_const, nsmul_eq_mul]
     _ = _ := by
@@ -60,7 +61,7 @@ theorem restricted_L2_energy_tsum_eq_lintegral_overlap
     (∑' m : ℕ, eLpNorm f 2 (μ.restrict (A m)) ^ 2) =
       ∫⁻ x, ENNReal.ofReal ({m : ℕ | x ∈ A m}.ncard : ℝ) * ‖f x‖ₑ ^ 2 ∂μ := by
   have hm (m : ℕ) : AEMeasurable ((A m).indicator (fun x => ‖f x‖ₑ ^ 2)) μ :=
-    (hf.enorm.pow 2).indicator (hA m)
+    (hf.enorm.pow_const (2 : ℕ)).indicator (hA m)
   simp_rw [eLpNorm_two_sq_eq_lintegral_of_aestronglyMeasurable hf.restrict,
     ← lintegral_indicator (hA _)]
   rw [← lintegral_tsum hm]
@@ -120,7 +121,7 @@ theorem weightedPhysicalJet_restricted_energy_tsum_le
   calc
     _ ≤ ENNReal.ofReal (K * T.M (T.radius p.1) ^ 2) *
         ‖weightedPhysicalJet T γ a b c f p‖ₑ ^ 2 :=
-      mul_le_mul_right' (ENNReal.ofReal_le_ofReal (hcount p)) _
+      mul_le_mul_left (ENNReal.ofReal_le_ofReal (hcount p)) _
     _ = _ := by rw [ENNReal.ofReal_mul hK, hnorm, mul_assoc]
 
 end ContinuousFlexibility.Statements

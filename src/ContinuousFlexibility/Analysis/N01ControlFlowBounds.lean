@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
 import ContinuousFlexibility.Analysis.OpticalControlFullCurvature
 import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
 /-!
 # Optical curvature bounds from the actual N01 flow tower
@@ -21,6 +22,34 @@ local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.inst
 
 open Set Filter MeasureTheory
 open scoped Topology ContDiff BigOperators
+
+theorem abs_second_deriv_le_of_smoothDirections_germ
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {f : E → ℝ} (J : SmoothDirections U f)
+    (x w : E) (hx : x ∈ U) (F : ℝ → ℝ) (c K : ℝ)
+    (hgerm : (fun t : ℝ => f (x + t • w)) =ᶠ[𝓝 (0 : ℝ)] (fun t => c - F t))
+    (hbound : |J.D 2 x (fun _ => w)| ≤ K) :
+    |deriv (deriv F) 0| ≤ K := by
+  have hd := Filter.EventuallyEq.iteratedDeriv_eq 2 hgerm
+  rw [iteratedDeriv_const_sub (by norm_num : 0 < (2 : ℕ)) c,
+    iteratedDeriv_neg] at hd
+  simp only [iteratedDeriv_succ, iteratedDeriv_zero] at hd
+  have hj : J.D 2 x (fun _ => w) = -deriv (deriv F) 0 :=
+    (J.deriv_twice_line x w hx).symm.trans hd
+  simpa only [hj, abs_neg] using hbound
+
+theorem le_at_right_of_continuousOn_closed_interval
+    {f : ℝ → ℝ} {a b K : ℝ} (hab : a < b)
+    (hc : ContinuousOn f (Icc a b)) (hb : ∀ r ∈ Ioo a b, f r ≤ K) :
+    f b ≤ K := by
+  have hclosure : b ∈ closure (Ioo a b) := by
+    rw [closure_Ioo hab.ne]
+    exact ⟨hab.le, le_rfl⟩
+  have : NeBot (𝓝[Ioo a b] b) := mem_closure_iff_nhdsWithin_neBot.mp hclosure
+  have hlim : Tendsto f (𝓝[Ioo a b] b) (𝓝 (f b)) :=
+    (hc b ⟨hab.le, le_rfl⟩).mono Ioo_subset_Icc_self
+  exact le_of_tendsto hlim (self_mem_nhdsWithin.mono (fun r hr => hb r hr))
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -56,10 +85,11 @@ theorem N01Properties.controlTravelPartial_second_bound
       (opticalLogPerturbation D.w (C.control m) t) (C.left m) r
     have hz0 : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
       constructor
-      · simpa only [sub_self, map_zero] using hN.2.1
+      · change stateGrading S base (C.referenceState - C.referenceState) < ε
+        rw [sub_self, (stateGrading S base).map_zero']
+        exact hN.2.1
       · simpa only [abs_zero] using hN.2.1
     let htower := hdata.choose_spec.2 m 0 0 (r, 0) (by norm_num) hr
-    let J := htower.choose
     have hgerm :
         (fun t : ℝ => ordinaryFlowFamily S C m 0 0 (r, 0)
           ((C.referenceState, 0) + t • v)) =ᶠ[𝓝 (0 : ℝ)]
@@ -72,16 +102,10 @@ theorem N01Properties.controlTravelPartial_second_bound
       rw [ht]
       dsimp only [F]
       ring
-    have hd := Filter.EventuallyEq.iteratedDeriv_eq 2 hgerm
-    rw [iteratedDeriv_const_sub (by norm_num : 0 < (2 : ℕ))
-        (-C.minusFlow (C.referenceState, 0) m r 0), iteratedDeriv_neg] at hd
-    simp only [iteratedDeriv_succ, iteratedDeriv_zero] at hd
-    have hj : J.D 2 (C.referenceState, 0) (fun _ => v) =
-        -deriv (deriv F) 0 :=
-      (J.deriv_twice_line (C.referenceState, 0) v hz0).symm.trans hd
     have hb := htower.choose_spec (C.referenceState, 0) hz0 (fun _ : Fin 2 => v)
-    rw [hj, abs_neg, sub_self] at hb
-    simpa only [pow_zero, one_mul, Nat.zero_add, v, F] using hb
+    simp only [pow_zero, one_mul, Nat.zero_add, sub_self] at hb
+    exact abs_second_deriv_le_of_smoothDirections_germ htower.choose
+      (C.referenceState, 0) v hz0 F (-C.minusFlow (C.referenceState, 0) m r 0) _ hgerm hb
   exact Exists.intro B (And.intro hB hpoint)
 
 /-- The same fixed ratio on the full closed component gives the actual
@@ -144,7 +168,7 @@ theorem N01Properties.controlCurvaturePrimitive_continuousOn
       opticalLogRatio D.w (C.control m) s ^ 2 / 4) volume (C.left m) (C.right m) :=
     hc.intervalIntegrable_of_Icc (hinterval m).2.1.le
   simpa only [uIcc_of_le (hinterval m).2.1.le] using
-    continuousOn_primitive_interval' hi left_mem_uIcc
+    intervalIntegral.continuousOn_primitive_interval' hi left_mem_uIcc
 
 /-- The full optical second variation inherits the same uniform bound.
 The passage to the endpoint is a limit of the actual curvature primitive. -/
@@ -176,17 +200,9 @@ theorem N01Properties.controlTravel_second_bound
       opticalSpeed D.w s * opticalLogRatio D.w (C.control m) s ^ 2 / 4
     have hc : ContinuousOn (fun r => |G r|) (Icc (C.left m) (C.right m)) :=
       (hN.controlCurvaturePrimitive_continuousOn m).abs
-    have hclosure : C.right m ∈ closure (Ioo (C.left m) (C.right m)) := by
-      rw [closure_Ioo hlh.ne]
-      exact ⟨hlh.le, le_rfl⟩
-    haveI : NeBot (𝓝[Ioo (C.left m) (C.right m)] (C.right m)) :=
-      mem_closure_iff_nhdsWithin_neBot.mp hclosure
-    have hlim : Tendsto (fun r => |G r|)
-        (𝓝[Ioo (C.left m) (C.right m)] (C.right m)) (𝓝 |G (C.right m)|) :=
-      (hc (C.right m) ⟨hlh.le, le_rfl⟩).mono Ioo_subset_Icc_self
     rw [(hN.controlTravel_hasDerivAt_second m).deriv, abs_neg]
-    apply le_of_tendsto hlim
-    filter_upwards [self_mem_nhdsWithin] with r hr
+    apply le_at_right_of_continuousOn_closed_interval hlh hc
+    intro r hr
     have hb := hdata.choose_spec.2 m r hr
     rw [(hN.controlTravelPartial_hasDerivAt_second m hr).deriv, abs_neg] at hb
     exact hb

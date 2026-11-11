@@ -30,7 +30,7 @@ theorem ordinaryFlowFamily_reference_zero
     (m a b : ℕ) (p : PolarPoint) :
     ordinaryFlowFamily S C m a b p (C.referenceState, 0) = 0 := by
   simp only [ordinaryFlowFamily, sub_self, mixedDerivative,
-    iteratedDeriv_const_zero, Pi.zero_apply]
+    iteratedDeriv_const, ite_self]
 
 theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -43,51 +43,48 @@ theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood
         |ordinaryFlowFamily S C m 0 b p z| ≤
           6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B * η := by
-  have hdata := hN
-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩
-  obtain ⟨B, hB, hflow⟩ := hflow 1 s
-  refine ⟨B, hB, fun base' hb hh η hηε hη₁ z hz m b p hbs hp => ?_⟩
-  have hzold := stateNeighborhood_mono S C hb hηε hz
-  obtain ⟨J, hJ⟩ := hflow m 0 b p (by simpa only [zero_add] using hbs) hp
-  obtain ⟨_, hRef⟩ := hN.1.1
-  have hsample := materialSample_mem_radialCore hT hRef.2.1 (C.cell m)
-  have hH : 0 < T.H (T.sample (C.cell m)) := (hT.2.1 _ hsample).2.1
-  have hE : 0 < T.E0 (T.sample (C.cell m)) := (hT.2.1 _ hsample).2.2.1
-  let A := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-    T.E0 (T.sample (C.cell m)) ^ B
-  have hA : 0 ≤ A := mul_nonneg
-    (mul_nonneg hB.le (Real.rpow_nonneg hH.le _)) (Real.rpow_nonneg hE.le _)
-  have hline (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-      (C.referenceState, (0 : ℝ)) + t • (z - (C.referenceState, 0)) ∈
-        stateNeighborhood S C base ε := stateNeighborhood_segment S C hzold ht
-  have hbound (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-      |J.D 1 ((C.referenceState, 0) + t • (z - (C.referenceState, 0)))
-        (fun _ => z - (C.referenceState, 0))| ≤
-        A * oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base (s + loss)
-          (((C.referenceState, 0) + t • (z - (C.referenceState, 0))) -
-            (C.referenceState, 0)) (fun _ : Fin 1 => z - (C.referenceState, 0)) := by
-    simpa only [pow_zero, one_mul] using
-      hJ _ (hline t ht) (fun _ : Fin 1 => z - (C.referenceState, 0))
-  have h := J.sub_le_of_first_variation (pairGrading (stateGrading S) realGrading)
-    base (s + loss) (C.referenceState, 0) z hline hA hbound
-  rw [ordinaryFlowFamily_reference_zero, sub_zero] at h
-  have hl := (stateNeighborhood_pairGrading_lt S C hb hz).le
-  have hh' := (stateNeighborhood_pairGrading_lt S C hh hz).le
-  have hh₁ : pairGrading (stateGrading S) realGrading (s + loss)
-      (z - (C.referenceState, 0)) ≤ 1 := hh'.trans (by linarith only [hη₁])
-  have hweight :
-      (1 + pairGrading (stateGrading S) realGrading (s + loss)
-        (z - (C.referenceState, 0))) *
-        pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0)) +
-        pairGrading (stateGrading S) realGrading (s + loss)
-          (z - (C.referenceState, 0)) ≤ 6 * η := by
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  have hpoint : ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
+      ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
+      ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,
+        b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+        |ordinaryFlowFamily S C m 0 b p z| ≤
+          6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+            T.E0 (T.sample (C.cell m)) ^ B * η := by
+    intro base' hb hh η hηε hη₁ z hz m b p hbs hp
+    have hzold := stateNeighborhood_mono S C hb hηε hz
+    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m 0 b p (by simpa only [zero_add] using hbs) hp
+    obtain ⟨_, hRef⟩ := hN.1.1
+    have hsample := materialSample_mem_radialCore hT hRef.2.1 (C.cell m)
+    have hH : 0 < T.H (T.sample (C.cell m)) := (hT.2.1 _ hsample).2.1
+    have hE : 0 < T.E0 (T.sample (C.cell m)) := (hT.2.1 _ hsample).2.2.1
+    let A := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+      T.E0 (T.sample (C.cell m)) ^ B
+    have hA : 0 ≤ A := mul_nonneg
+      (mul_nonneg hB.le (Real.rpow_nonneg hH.le _)) (Real.rpow_nonneg hE.le _)
+    have hline (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
+        (C.referenceState, (0 : ℝ)) + t • (z - (C.referenceState, 0)) ∈
+          stateNeighborhood S C base ε := stateNeighborhood_segment S C hzold ht
+    have hbound (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
+        |J.D 1 ((C.referenceState, 0) + t • (z - (C.referenceState, 0)))
+          (fun _ => z - (C.referenceState, 0))| ≤
+          A * oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+            base (s + loss)
+            (((C.referenceState, 0) + t • (z - (C.referenceState, 0))) -
+              (C.referenceState, 0)) (fun _ : Fin 1 => z - (C.referenceState, 0)) := by
+      simpa only [pow_zero, one_mul] using
+        hJ _ (hline t ht) (fun _ : Fin 1 => z - (C.referenceState, 0))
+    have hsmall := J.abs_le_of_first_variation_small
+      (pairGrading (stateGrading S) realGrading) base (s + loss)
+      (C.referenceState, 0) z hline (ordinaryFlowFamily_reference_zero S C m 0 b p)
+      hA hη₁ (stateNeighborhood_pairGrading_lt S C hb hz).le
+      (stateNeighborhood_pairGrading_lt S C hh hz).le hbound
     calc
-      _ ≤ (1 + 1) * (2 * η) + 2 * η :=
-        add_le_add (mul_le_mul (add_le_add_left hh₁ 1) hl
-          (apply_nonneg _ _) (by norm_num)) hh'
-      _ = _ := by ring
-  exact h.trans ((mul_le_mul_of_nonneg_left hweight hA).trans_eq (by dsimp only [A]; ring))
+      _ ≤ 6 * A * η := hsmall
+      _ = _ := by dsimp only [A]; ring
+  exact Exists.intro B (And.intro hB hpoint)
 
 theorem N01Properties.minusFlow_reference_eq
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -102,8 +99,10 @@ theorem N01Properties.minusFlow_reference_eq
     funext s
     simp [stateProfile, stateKappa, href.2.2.1, href.2.2.2.1, angularMean]
   have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
-    exact ⟨by simpa only [sub_self, map_zero] using hN.2.1,
-      by simpa only [abs_zero] using hN.2.1⟩
+    constructor
+    · change stateGrading S base (C.referenceState - C.referenceState) < ε
+      simpa only [sub_self, map_zero] using hN.2.1
+    · simpa only [abs_zero] using hN.2.1
   simpa only [hprofile] using hN.minusFlow_zero_eq_opticalTravel hS hT hz₀ m θ hr
 
 theorem N01Properties.minusFlow_reference_angular_deriv
@@ -136,8 +135,10 @@ theorem N01Properties.minusFlow_near_reference_weighted
   refine ⟨B, hB, fun base' hbase hhigh η hηε hη₁ z hz hsector m r hr θ => ?_⟩
   have hzold := stateNeighborhood_mono S C hbase hηε hz
   have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
-    exact ⟨by simpa only [sub_self, map_zero] using hN.2.1,
-      by simpa only [abs_zero] using hN.2.1⟩
+    constructor
+    · change stateGrading S base (C.referenceState - C.referenceState) < ε
+      simpa only [sub_self, map_zero] using hN.2.1
+    · simpa only [abs_zero] using hN.2.1
   have hC : controlGeometryConditions D S C := hN.2.2.2.1
   have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=
     hN.2.2.2.2.2.2.1
@@ -152,7 +153,8 @@ theorem N01Properties.minusFlow_near_reference_weighted
       hS hT hzold hsector m 1).comp
       (continuous_id.prodMk continuous_const).continuousOn
       (fun s hs => ⟨hs, mem_univ θ⟩)
-    simpa only [iteratedDeriv_one] using (hj.sub continuousOn_const).abs
+    simpa only [iteratedDeriv_one, Function.comp_def, Pi.sub_apply, id_eq] using
+      (hj.sub continuousOn_const).abs
   have hv₀ (s : ℝ) (hs : s ∈ Ioo (C.left m) (C.right m)) :
       |C.minusFlow z m s θ - C.minusFlow (C.referenceState, 0) m s θ| ≤
         6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *

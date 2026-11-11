@@ -239,7 +239,7 @@ theorem N01Properties.exists_opticalCorrection_error_compatible
           (HeightMember D T (3 / 4 : ℝ) (E ρ η) ↔
             ∀ a b c : ℕ, MemLp (weightedPhysicalJet T (3 / 4 : ℝ) a b c
               (E ρ η)) 2 materialCylinderMeasure) := by
-  obtain ⟨base', ε', χ, j, A, λ, P, hbase, hε', hεε, hA, hλ, hP,
+  obtain ⟨base', ε', χ, j, A, lam, P, hbase, hε', hεε, hA, hlam, hP,
     hnew, hcell, hχ, hend, hjets, hpositive⟩ :=
     hN.exists_positive_opticalCorrectionCutoffs hT
   refine ⟨base', ε', χ, hbase, hε', hεε, hnew, hχ, hend, ?_⟩

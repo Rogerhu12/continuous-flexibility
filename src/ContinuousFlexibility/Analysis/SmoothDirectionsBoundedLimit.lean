@@ -53,7 +53,8 @@ theorem equicontinuous_jets_of_uniform_seminorm_bounds
     continuous_fst.continuousAt.eventually (hU.mem_nhds hx.1)
   filter_upwards [hsmall, hmem] with z hz hzu
   intro i
-  have hbase := (J i).base_variation_le hc p hB (hb i) hx.1 hzu z.2
+  have hbase := ContinuousFlexibility.Analysis.SmoothDirections.base_variation_le
+    (J i) hc p hB (hb i) hx.1 hzu z.2
   have hdirs := abs_multilinear_sub_le_of_seminorm_bound ((J i).D n x) q
     (A * (1 + q x)) (ha i x hx.1) v z.2
   have htotal : |(J i).D n z.1 z.2 - (J i).D n x v| ≤ err z :=

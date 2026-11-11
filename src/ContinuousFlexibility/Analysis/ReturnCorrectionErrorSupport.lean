@@ -159,11 +159,11 @@ theorem returnCorrectionResidualErrorField_eq_zero_of_eventually_zero
       Prod.fst_zero, Prod.snd_zero, zero_mul, zero_add]
   have hr : radialPartial (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p = 0 := by
     change (fderiv ℝ (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p) (1, 0) = 0
-    simpa only [fderiv_const, ContinuousLinearMap.zero_apply] using
+    simpa only [fderiv_const_apply, ContinuousLinearMap.zero_apply] using
       congrArg (fun L : PolarPoint →L[ℝ] ℝ => L (1, 0)) (hF.fderiv_eq (𝕜 := ℝ))
   have ht : angularPartial (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p = 0 := by
     change (fderiv ℝ (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p) (0, 1) = 0
-    simpa only [fderiv_const, ContinuousLinearMap.zero_apply] using
+    simpa only [fderiv_const_apply, ContinuousLinearMap.zero_apply] using
       congrArg (fun L : PolarPoint →L[ℝ] ℝ => L (0, 1)) (hG.fderiv_eq (𝕜 := ℝ))
   by_cases hp : p ∈ annularOpen D
   · change (if p ∈ annularOpen D then

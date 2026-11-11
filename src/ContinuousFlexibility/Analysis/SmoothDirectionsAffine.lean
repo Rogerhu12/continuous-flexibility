@@ -54,7 +54,7 @@ def SmoothDirections.compAffine (J : SmoothDirections U f)
     have he : (fun i : Fin (n + 1) => L ((Fin.cons w v : Fin (n + 1) → E) i)) =
         Fin.cons (L w) (fun i => L (v i)) := by
       funext i
-      refine Fin.cases ?_ ?_ i <;> simp only [Fin.cons_zero, Fin.cons_succ]
+      exact Fin.cases rfl (fun j => rfl) i
     unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt at hd ⊢
     simp only [ContinuousMultilinearMap.compContinuousLinearMap_apply, he,
       map_add, map_smul, ← add_assoc]

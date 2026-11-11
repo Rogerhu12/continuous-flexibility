@@ -114,7 +114,7 @@ theorem iteratedDeriv_oddPart_abs_le
     iteratedDeriv_fun_sub (hf.contDiffAt.of_le (by simp))
       (hr.contDiffAt.of_le (by simp)),
     iteratedDeriv_comp_neg]
-  simp only [smul_eq_mul, abs_div, abs_ofNat]
+  simp only [smul_eq_mul, abs_div, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
   apply (div_le_div_of_nonneg_right (abs_sub_le _ _) (by norm_num : (0 : ℝ) ≤ 2)).trans
   have hneg : |(-1 : ℝ) ^ n * iteratedDeriv n f (-x)| ≤ A := by
     simpa only [abs_mul, abs_pow, abs_neg, abs_one, one_pow, one_mul] using hA (-x)
@@ -133,7 +133,7 @@ theorem iteratedDeriv_evenPart_abs_le
     iteratedDeriv_fun_add (hf.contDiffAt.of_le (by simp))
       (hr.contDiffAt.of_le (by simp)),
     iteratedDeriv_comp_neg]
-  simp only [smul_eq_mul, abs_div, abs_ofNat]
+  simp only [smul_eq_mul, abs_div, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
   apply (div_le_div_of_nonneg_right (abs_add_le _ _) (by norm_num : (0 : ℝ) ≤ 2)).trans
   have hneg : |(-1 : ℝ) ^ n * iteratedDeriv n f (-x)| ≤ A := by
     simpa only [abs_mul, abs_pow, abs_neg, abs_one, one_pow, one_mul] using hA (-x)

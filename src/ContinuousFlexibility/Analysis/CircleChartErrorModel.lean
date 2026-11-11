@@ -12,8 +12,6 @@ projections then realize the frozen chart-error formula bilinearly.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
@@ -66,7 +64,11 @@ theorem circleFixedErrorBilinear_decode
           (t + travel m + a * S.decode e m t)) θ -
       deriv (S.decode r m) θ *
         oddPart (fun t => S.decode v m (t + travel m + S.decode e m t)) θ := by
-  rw [circleFixedErrorBilinear, circleErrorAlgebraBilinear_apply]
+  change S.decode
+    (Pe (circleProductBilinear hS hT hD hγ r
+      (circleAverageComposeLinear hS hT hD hγ travel e (circleDerivativeLinear hS v))) -
+      circleProductBilinear hS hT hD hγ (circleDerivativeLinear hS r)
+        (Po (circleShiftedChartComposeLinear hS hT hD hγ travel e v))) m θ = _
   simp only [ContinuousLinearMap.coe_coe, map_sub, Pi.sub_apply,
     heven, circleProductBilinear_decode, circleAverageComposeLinear_decode,
     circleDerivativeLinear_decode, hodd, circleShiftedChartComposeLinear_decode,
@@ -86,22 +88,27 @@ theorem exists_circleChartErrorBilinear_of_residual
     ∃ B : CircleSpace S →ₗ[ℝ] CircleSpace S →ₗ[ℝ] CircleSpace S,
       ∀ r v m θ, (S.circle (3 / 4 : ℝ)).decode (B r v) m θ =
         circleChartError S C z r v m θ := by
-  have hphysical := hS
-  rcases hphysical with ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, hparity⟩
-  obtain ⟨Pe, Po, heven, hodd, _, _, _⟩ := hparity (3 / 4 : ℝ)
-  refine ⟨circleFixedErrorBilinear (hS.2.1 (3 / 4 : ℝ)) hT hD
-    (by norm_num : (0 : ℝ) < 3 / 4) C.travel e Pe Po, ?_⟩
-  intro r v m θ
+  let hparity := hS.2.2.2.2.2.2.2.2.2.2.2.2.2.2 (3 / 4 : ℝ)
+  let Pe : CircleSpace S →L[ℝ] CircleSpace S := hparity.choose
+  let Po : CircleSpace S →L[ℝ] CircleSpace S := hparity.choose_spec.choose
   have heven' (u : CircleSpace S) (n : ℕ) (t : ℝ) :
       (S.circle (3 / 4 : ℝ)).decode (Pe u) n t =
         evenPart ((S.circle (3 / 4 : ℝ)).decode u n) t := by
-    simpa only [evenPart] using heven u n t
+    simpa only [evenPart] using hparity.choose_spec.choose_spec.1 u n t
   have hodd' (u : CircleSpace S) (n : ℕ) (t : ℝ) :
       (S.circle (3 / 4 : ℝ)).decode (Po u) n t =
         oddPart ((S.circle (3 / 4 : ℝ)).decode u n) t := by
-    simpa only [oddPart] using hodd u n t
-  have hd := circleFixedErrorBilinear_decode (hS.2.1 (3 / 4 : ℝ)) hT hD
-    (by norm_num : (0 : ℝ) < 3 / 4) C.travel e Pe Po heven' hodd' r v m θ
-  simpa only [he, circleChartError] using hd
+    simpa only [oddPart] using hparity.choose_spec.choose_spec.2.1 u n t
+  let B : CircleSpace S →ₗ[ℝ] CircleSpace S →ₗ[ℝ] CircleSpace S :=
+    circleFixedErrorBilinear (hS.2.1 (3 / 4 : ℝ)) hT hD
+      (by norm_num : (0 : ℝ) < 3 / 4) C.travel e Pe Po
+  have hpoint : ∀ (r v : CircleSpace S) (m : ℕ) (θ : ℝ),
+      (S.circle (3 / 4 : ℝ)).decode (B r v) m θ =
+        circleChartError S C z r v m θ := by
+    intro r v m θ
+    have hd := circleFixedErrorBilinear_decode (hS.2.1 (3 / 4 : ℝ)) hT hD
+      (by norm_num : (0 : ℝ) < 3 / 4) C.travel e Pe Po heven' hodd' r v m θ
+    simpa only [he, circleChartError] using hd
+  exact Exists.intro B hpoint
 
 end ContinuousFlexibility.Statements

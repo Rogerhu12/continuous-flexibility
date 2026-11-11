@@ -65,7 +65,9 @@ theorem N01Properties.controlTravel_second_weight_bound
           T.E0 (T.sample (C.cell m)) ^ B *
           (T.M (T.sample m) ^ max base loss *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
-  obtain ⟨B, hB, hbound⟩ := hN.controlTravel_second_bound hS hT
+  let hdata := hN.controlTravel_second_bound hS hT
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
   obtain ⟨_, hgeom⟩ := hN.1.1
   let G := circleSingletonGradingConstant base + circleSingletonGradingConstant loss + 1
   have hG : 0 < G := by
@@ -81,7 +83,8 @@ theorem N01Properties.controlTravel_second_weight_bound
   let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
   have hgrade := singletonKappaDirection_two_grades_le
     (hS.2.1 (3 / 4 : ℝ)) m base loss hpM.2.2.2 hpM.2.1.le
-  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S loss v := by positivity
+  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S loss v :=
+    add_nonneg (apply_nonneg _ _) (apply_nonneg _ _)
   have hweight :
       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
         base loss 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
@@ -95,7 +98,7 @@ theorem N01Properties.controlTravel_second_weight_bound
       T.E0 (T.sample (C.cell m)) ^ B :=
     mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg hpC.2.1.le _))
       (Real.rpow_nonneg hpC.2.2.1.le _)
-  exact (hbound m).trans
+  exact (hdata.choose_spec.2 m).trans
     ((mul_le_mul_of_nonneg_left hweight hfactor).trans_eq (by ring))
 
 /-- This is the quantitative constraint from which the reference-cell

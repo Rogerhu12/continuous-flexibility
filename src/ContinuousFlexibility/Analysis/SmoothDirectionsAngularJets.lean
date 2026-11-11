@@ -52,7 +52,7 @@ theorem continuousOn_joint_of_equicontinuous_slices
     ContinuousOn (fun p : Y × X => F p.1 p.2) (univ ×ˢ V) := by
   intro p hp
   apply ContinuousAt.continuousWithinAt
-  apply Metric.continuousAt_iff.mpr
+  apply Metric.continuousAt_iff'.mpr
   intro ε hε
   have heqAt : EquicontinuousAt F p.2 := by
     simpa only [EquicontinuousWithinAt, EquicontinuousAt,
@@ -231,9 +231,7 @@ theorem smoothDirections_angular_jet_hasDerivAt
             (hbound (b + 1)) (hcont (b + 1)) (ih b)
               x hx (Fin.tail v) (v 0) θ ψ
       have hcontinuous := hcont (b + 1) (k + 1) x hx v
-      have hI := intervalIntegral.integral_hasDerivAt_right
-        (hcontinuous.intervalIntegrable θ θ)
-        hcontinuous.stronglyMeasurable.stronglyMeasurableAtFilter hcontinuous.continuousAt
+      have hI := (hcontinuous.integral_hasStrictDerivAt θ θ).hasDerivAt
       have heq : (fun ψ => (J b ψ).D (k + 1) x v) =ᶠ[𝓝 θ]
           (fun ψ => (J b θ).D (k + 1) x v +
             ∫ t in θ..ψ, (J (b + 1) t).D (k + 1) x v) :=
@@ -275,13 +273,13 @@ theorem smoothDirections_angular_jet_iteratedDeriv
       HasDerivAt (fun ψ => f b ψ x) (f (b + 1) θ x) θ)
     (k b n : ℕ) (x : E) (hx : x ∈ U) (v : Fin k → E) (θ : ℝ) :
     iteratedDeriv n (fun ψ => (J b ψ).D k x v) θ = (J (b + n) θ).D k x v := by
-  induction n with
+  induction n generalizing θ with
   | zero => simp only [iteratedDeriv_zero, Nat.add_zero]
   | succ n ih =>
       have heq : iteratedDeriv n (fun ψ => (J b ψ).D k x v) =
           (fun ψ => (J (b + n) ψ).D k x v) := by
         funext ψ
-        exact smoothDirections_angular_jet_iteratedDeriv J hU hc hbound hangular k b n x hx v ψ
+        exact ih ψ
       rw [iteratedDeriv_succ, heq,
         (smoothDirections_angular_jet_hasDerivAt J hU hc hbound hangular k (b + n) θ x hx v).deriv]
       simp only [Nat.add_assoc]

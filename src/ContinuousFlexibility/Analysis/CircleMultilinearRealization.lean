@@ -49,8 +49,9 @@ theorem continuous_multilinear_of_seminorm_bound
   intro v
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
   have hlim : Tendsto (fun w => B * seminormMultilinearDifference p v w) (𝓝 v) (𝓝 0) := by
-    simpa only [seminormMultilinearDifference_self, mul_zero] using
-      (continuous_const.mul (continuous_seminormMultilinearDifference p hp v)).tendsto v
+    have hc : Continuous (fun w => B * seminormMultilinearDifference p v w) :=
+      (continuous_seminormMultilinearDifference p hp v).const_mul B
+    simpa only [seminormMultilinearDifference_self, mul_zero] using hc.tendsto v
   exact squeeze_zero (fun w => norm_nonneg _)
     (fun w => norm_multilinear_sub_le_of_seminorm_bound A p B hbound v w) hlim
 

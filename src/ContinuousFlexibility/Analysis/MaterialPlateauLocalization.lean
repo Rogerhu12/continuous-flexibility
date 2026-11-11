@@ -77,7 +77,8 @@ theorem materialPlateauCutoff_iteratedDeriv_bound_by_M
   obtain ⟨Kd, hKd, hwidth⟩ := materialCell_plateau_inverse_width_bound hD
   obtain ⟨Kr, A, hKr, hA, hradial⟩ := materialCell_plateau_radial_weight_bound hD hT
     (Nat.cast_nonneg (α := ℝ) (2 * n))
-  obtain ⟨_, _, _, _, _, _, _, hinside, _, _, _, henvelope, _⟩ := hT
+  have hmaterial := hT
+  obtain ⟨_, _, _, _, _, _, _, hinside, _, _, _, henvelope, _⟩ := hmaterial
   obtain ⟨Ke, hKe, hE⟩ := henvelope A
   let K : ℝ := K₀ * Kd ^ n * Kr * Ke + 1
   have hK : 0 < K := by dsimp only [K]; positivity

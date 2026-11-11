@@ -30,15 +30,15 @@ theorem optical_reference_two_lower_bounds
     (hR : 0 < R) (hw : 0 < w)
     (hi : w⁻¹ ≤ A * E ^ A)
     (hv : E ^ (-B) / (2 * R) ≤ v) :
-    let λ := (A * (max (2 * R) 1) ^ 2)⁻¹
-    λ * E ^ (-(A + 2 * B)) ≤ w ∧
-      λ * E ^ (-(A + 2 * B)) ≤ w * v ^ 2 := by
+    let lam := (A * (max (2 * R) 1) ^ 2)⁻¹
+    lam * E ^ (-(A + 2 * B)) ≤ w ∧
+      lam * E ^ (-(A + 2 * B)) ≤ w * v ^ 2 := by
   let T := max (2 * R) 1
-  let λ := (A * T ^ 2)⁻¹
+  let lam := (A * T ^ 2)⁻¹
   have hE₀ : 0 < E := zero_lt_one.trans_le hE
   have hT : 0 < T := zero_lt_one.trans_le (le_max_right _ _)
   have hT₁ : 1 ≤ T := le_max_right _ _
-  have hλ : 0 < λ := inv_pos.mpr (mul_pos hA (sq_pos_of_pos hT))
+  have hlam : 0 < lam := inv_pos.mpr (mul_pos hA (sq_pos_of_pos hT))
   have hwlow : A⁻¹ * E ^ (-A) ≤ w := by
     have hi' : (A * E ^ A)⁻¹ ≤ w := by
       apply (inv_le_iff₀ (mul_pos hA (Real.rpow_pos_of_pos hE₀ _))).mpr
@@ -51,23 +51,23 @@ theorem optical_reference_two_lower_bounds
     rw [pow_two, ← Real.rpow_add hE₀, ← Real.rpow_add hE₀]
     congr 1
     ring
-  have hλA : λ ≤ A⁻¹ := by
+  have hlamA : lam ≤ A⁻¹ := by
     apply (inv_le_inv₀ (mul_pos hA (sq_pos_of_pos hT)) hA).mpr
     have hT₂ : (1 : ℝ) ≤ T ^ 2 := by nlinarith only [hT₁]
     simpa only [mul_one] using mul_le_mul_of_nonneg_left hT₂ hA.le
   have hEP : E ^ (-(A + 2 * B)) ≤ E ^ (-A) :=
     Real.rpow_le_rpow_of_exponent_le hE (by linarith only [hB])
   constructor
-  · exact (mul_le_mul hλA hEP (Real.rpow_nonneg hE₀.le _)
+  · exact (mul_le_mul hlamA hEP (Real.rpow_nonneg hE₀.le _)
       (inv_nonneg.mpr hA.le)).trans hwlow
   · have hs : 0 ≤ E ^ (-B) / T := div_nonneg (Real.rpow_nonneg hE₀.le _) hT.le
     have hprod := mul_le_mul hwlow
       (pow_le_pow_left₀ hs hvlow 2) (sq_nonneg _) hw.le
     calc
-      λ * E ^ (-(A + 2 * B)) =
+      lam * E ^ (-(A + 2 * B)) =
           (A⁻¹ * E ^ (-A)) * (E ^ (-B) / T) ^ 2 := by
         rw [← hp, div_pow]
-        dsimp only [λ]
+        dsimp only [lam]
         rw [mul_inv]
         ring
       _ ≤ w * v ^ 2 := hprod
@@ -108,20 +108,20 @@ theorem N01Properties.opticalCollar_reference_coefficient_lower
     (hinside : ∀ m, C.left m < x m - δ m ∧ x m + δ m < C.right m)
     (hspeed : ∀ m r, r ∈ Icc (x m - δ m) (x m + δ m) →
       radialE (D.cellIndex (j m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r) :
-    ∃ λ P : ℝ, 0 < λ ∧ 0 < P ∧ ∀ m p,
+    ∃ lam P : ℝ, 0 < lam ∧ 0 < P ∧ ∀ m p,
       p.1 ∈ Icc (x m - δ m) (x m + δ m) →
-      λ * radialE (D.cellIndex (j m)) ^ (-P) ≤
+      lam * radialE (D.cellIndex (j m)) ^ (-P) ≤
         (originalCoefficients D S C (C.referenceState, 0)).a p ∧
-      λ * radialE (D.cellIndex (j m)) ^ (-P) ≤
+      lam * radialE (D.cellIndex (j m)) ^ (-P) ≤
         -(originalCoefficients D S C (C.referenceState, 0)).c p := by
   obtain ⟨A, hA, hi⟩ := hN.1.1.inverse_first_jets_cell_bound
   obtain ⟨_, hdata⟩ := hN.1.1
   have hg : RadialProfileGeometry D := hdata.1
   have hC : controlGeometryConditions D S C := hN.2.2.2.1
-  let λ := (A * (max (2 * (D.b - D.a)) 1) ^ 2)⁻¹
-  have hλ : 0 < λ := inv_pos.mpr (mul_pos hA
+  let lam := (A * (max (2 * (D.b - D.a)) 1) ^ 2)⁻¹
+  have hlam : 0 < lam := inv_pos.mpr (mul_pos hA
     (sq_pos_of_pos (zero_lt_one.trans_le (le_max_right _ _))))
-  refine ⟨λ, A + 2 * B, hλ, by linarith only [hA, hB], fun m p hp => ?_⟩
+  refine ⟨lam, A + 2 * B, hlam, by linarith only [hA, hB], fun m p hp => ?_⟩
   have hm : p.1 ∈ Ioo (C.left m) (C.right m) :=
     ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
   have hr : p.1 ∈ Ioo D.a D.b :=
@@ -160,30 +160,30 @@ theorem N01Properties.opticalCollar_uniform_positive
     (hinside : ∀ m, C.left m < x m - δ m ∧ x m + δ m < C.right m)
     (hspeed : ∀ m r, r ∈ Icc (x m - δ m) (x m + δ m) →
       radialE (D.cellIndex (j m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r) :
-    ∃ base' : ℕ, ∃ ε' λ P : ℝ,
-      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < λ ∧ 0 < P ∧
+    ∃ base' : ℕ, ∃ ε' lam P : ℝ,
+      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < lam ∧ 0 < P ∧
       N01Properties D T S C base' loss ε' ∧
       ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
         p.1 ∈ Icc (x m - δ m) (x m + δ m) →
-        let d := λ * radialE (D.cellIndex (j m)) ^ (-P) / 2
+        let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2
         d ≤ (originalCoefficients D S C z).a p ∧
         d ≤ -(originalCoefficients D S C z).c p ∧
         d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -
           (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p := by
-  obtain ⟨λ, P, hλ, hP, href⟩ :=
+  obtain ⟨lam, P, hlam, hP, href⟩ :=
     hN.opticalCollar_reference_coefficient_lower j x δ hB hcell hinside hspeed
   obtain ⟨K, hK, hsmall⟩ := hN.coefficientFamily_radial_small hT 0 hP.le
   let base' := max base loss
-  let ε' := min ε (min (1 / 2) (λ / (4 * K)))
-  have hε' : 0 < ε' := lt_min hN.2.1 (lt_min (by norm_num) (div_pos hλ (by positivity)))
+  let ε' := min ε (min (1 / 2) (lam / (4 * K)))
+  have hε' : 0 < ε' := lt_min hN.2.1 (lt_min (by norm_num) (div_pos hlam (by positivity)))
   have hεε : ε' ≤ ε := min_le_left _ _
   have hεhalf : ε' ≤ 1 / 2 := (min_le_right _ _).trans (min_le_left _ _)
-  have hεK : K * ε' ≤ λ / 4 := by
-    have hεl : ε' ≤ λ / (4 * K) := (min_le_right _ _).trans (min_le_right _ _)
+  have hεK : K * ε' ≤ lam / 4 := by
+    have hεl : ε' ≤ lam / (4 * K) := (min_le_right _ _).trans (min_le_right _ _)
     calc
-      _ ≤ K * (λ / (4 * K)) := mul_le_mul_of_nonneg_left hεl hK.le
-      _ = λ / 4 := by field_simp [hK.ne']; ring
-  refine ⟨base', ε', λ, P, le_max_left _ _, hε', hεε, hλ, hP,
+      _ ≤ K * (lam / (4 * K)) := mul_le_mul_of_nonneg_left hεl hK.le
+      _ = lam / 4 := by field_simp [hK.ne']; ring
+  refine ⟨base', ε', lam, P, le_max_left _ _, hε', hεε, hlam, hP,
     hN.restrict_neighborhood hT (le_max_left _ _) hε' hεε,
     fun z hz m p hp => ?_⟩
   have hm : p.1 ∈ Ioo (C.left m) (C.right m) :=
@@ -212,20 +212,20 @@ theorem N01Properties.opticalCollar_uniform_positive
     (originalCoefficients D S C (C.referenceState, 0)).a p| ≤ K * ε' * e at ha₀
   change |(originalCoefficients D S C z).c p -
     (originalCoefficients D S C (C.referenceState, 0)).c p| ≤ K * ε' * e at hc₀
-  have her : K * ε' * e ≤ λ * e / 4 := by
+  have her : K * ε' * e ≤ lam * e / 4 := by
     have h := mul_le_mul_of_nonneg_right hεK he.le
     linarith only [h]
   have ha := (abs_le.mp ha₀).1
   have hc := (abs_le.mp hc₀).2
   obtain ⟨har, hcr⟩ := href m p hp
-  change λ * e ≤ (originalCoefficients D S C (C.referenceState, 0)).a p at har
-  change λ * e ≤ -(originalCoefficients D S C (C.referenceState, 0)).c p at hcr
-  have hapos : λ * e / 2 ≤ (originalCoefficients D S C z).a p := by
-    linarith only [ha, har, her, mul_pos hλ he]
-  have hcneg : λ * e / 2 ≤ -(originalCoefficients D S C z).c p := by
-    linarith only [hc, hcr, her, mul_pos hλ he]
+  change lam * e ≤ (originalCoefficients D S C (C.referenceState, 0)).a p at har
+  change lam * e ≤ -(originalCoefficients D S C (C.referenceState, 0)).c p at hcr
+  have hapos : lam * e / 2 ≤ (originalCoefficients D S C z).a p := by
+    linarith only [ha, har, her, mul_pos hlam he]
+  have hcneg : lam * e / 2 ≤ -(originalCoefficients D S C z).c p := by
+    linarith only [hc, hcr, her, mul_pos hlam he]
   refine ⟨hapos, hcneg, ?_⟩
-  have hd : 0 ≤ λ * e / 2 := div_nonneg (mul_nonneg hλ.le he.le) (by norm_num)
+  have hd : 0 ≤ lam * e / 2 := div_nonneg (mul_nonneg hlam.le he.le) (by norm_num)
   have hprod := mul_le_mul hapos hcneg hd (hd.trans hapos)
   nlinarith only [hprod, sq_nonneg ((originalCoefficients D S C z).b p)]
 
@@ -239,8 +239,8 @@ theorem N01Properties.exists_positive_opticalCorrectionCutoffs
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) :
     ∃ base' : ℕ, ∃ ε' : ℝ, ∃ χ : ℕ → ℝ → ℝ, ∃ j : ℕ → ℕ,
-      ∃ A λ P : ℝ,
-      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < A ∧ 0 < λ ∧ 0 < P ∧
+      ∃ A lam P : ℝ,
+      base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧ 0 < A ∧ 0 < lam ∧ 0 < P ∧
       N01Properties D T S C base' loss ε' ∧
       (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m)) ∧
       (∀ m, ContDiff ℝ ∞ (χ m) ∧ ∀ r, χ m r ∈ Icc (0 : ℝ) 1) ∧
@@ -251,7 +251,7 @@ theorem N01Properties.exists_positive_opticalCorrectionCutoffs
         |iteratedDeriv n (χ m) r| ≤ Kₙ * radialE (D.cellIndex (j m)) ^ (A * n)) ∧
       ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
         p.1 ∈ tsupport (deriv (χ m)) →
-        let d := λ * radialE (D.cellIndex (j m)) ^ (-P) / 2
+        let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2
         0 < d ∧
         d ≤ (originalCoefficients D S C z).a p ∧
         d ≤ -(originalCoefficients D S C z).c p ∧
@@ -268,9 +268,9 @@ theorem N01Properties.exists_positive_opticalCorrectionCutoffs
   have hspeed (m : ℕ) (r : ℝ) (hr : r ∈ Icc (x m - δ m) (x m + δ m)) :
       radialE (D.cellIndex (j m)) ^ (-B) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r :=
     (hdata m).2.2.2.2.2 r hr
-  obtain ⟨base', ε', λ, P, hbase, hε', hεε, hλ, hP, hnew, hpos⟩ :=
+  obtain ⟨base', ε', lam, P, hbase, hε', hεε, hlam, hP, hnew, hpos⟩ :=
     hN.opticalCollar_uniform_positive hT j x δ hB hcell hinside hspeed
-  refine ⟨base', ε', χ, j, A, λ, P, hbase, hε', hεε, hA, hλ, hP,
+  refine ⟨base', ε', χ, j, A, lam, P, hbase, hε', hεε, hA, hlam, hP,
     hnew, hcell, hχ, ?_, hjets, ?_⟩
   · intro m
     refine ⟨(hend m).1, (hend m).2.1, fun r hr => ?_⟩
@@ -278,8 +278,8 @@ theorem N01Properties.exists_positive_opticalCorrectionCutoffs
     exact ⟨(hinside m).1.trans_le hr'.1, hr'.2.trans_lt (hinside m).2⟩
   · intro z hz m p hp
     have hb := hpos z hz m p ((hend m).2.2 hp)
-    have hd : 0 < λ * radialE (D.cellIndex (j m)) ^ (-P) / 2 :=
-      div_pos (mul_pos hλ (Real.rpow_pos_of_pos (Real.exp_pos _) _)) (by norm_num)
+    have hd : 0 < lam * radialE (D.cellIndex (j m)) ^ (-P) / 2 :=
+      div_pos (mul_pos hlam (Real.rpow_pos_of_pos (Real.exp_pos _) _)) (by norm_num)
     exact ⟨hd, hb.1, hb.2.1, hb.2.2, (sq_pos_of_pos hd).trans_le hb.2.2⟩
 
 

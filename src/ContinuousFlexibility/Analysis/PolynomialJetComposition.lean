@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Calculus.ContDiff.Bounds
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Fixed component powers under finite jet operations

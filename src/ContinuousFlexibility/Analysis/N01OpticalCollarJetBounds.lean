@@ -16,9 +16,25 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace ContinuousFlexibility.Statements
 
+local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+
 open Set
 open ContinuousFlexibility.Analysis
 open scoped ContDiff
+
+theorem abs_le_of_power_weight_bound
+    {d K E A C y : ℝ} (n : ℕ) (hd : 0 < d) (hE : 0 < E)
+    (hdist : d⁻¹ ≤ K * E ^ A) (hraw : d ^ n * |y| ≤ C) :
+    |y| ≤ K ^ n * E ^ (A * n) * C := by
+  have hC : 0 ≤ C := (mul_nonneg (pow_nonneg hd.le _) (abs_nonneg _)).trans hraw
+  have h := mul_le_mul_of_nonneg_left hraw (pow_nonneg (inv_nonneg.mpr hd.le) n)
+  have heq : d⁻¹ ^ n * (d ^ n * |y|) = |y| := by
+    rw [← mul_assoc, ← mul_pow, inv_mul_cancel₀ hd.ne', one_pow, one_mul]
+  rw [heq] at h
+  have hpow := pow_le_pow_left₀ (inv_nonneg.mpr hd.le) hdist n
+  have hb := h.trans (mul_le_mul_of_nonneg_right hpow hC)
+  rw [mul_pow, ← Real.rpow_mul_natCast hE.le] at hb
+  exact hb
 
 theorem opticalSpeed_lower_boundaryDistance
     {w : ℝ → ℝ} {l h r τ M : ℝ}
@@ -175,6 +191,52 @@ theorem N01Properties.ordinaryFlowFamily_collar_bound
   have hE : 0 < radialE (D.cellIndex (j m)) := Real.exp_pos _
   rw [mul_pow, ← Real.rpow_mul_natCast hE.le] at h
   exact h
+
+/-- The same two geometric constants precede every parameter and spatial
+order. The actual N01 directional tower, its neighborhood and its
+one-high-factor input weight are retained without specialization to a
+fixed state. -/
+theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (j : ℕ → ℕ) (x δ : ℕ → ℝ) {B₀ : ℝ} (hB₀ : 0 < B₀)
+    (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (hinside : ∀ m, C.left m < x m - δ m ∧ x m + δ m < C.right m)
+    (hspeed : ∀ m r, r ∈ Icc (x m - δ m) (x m + δ m) →
+      radialE (D.cellIndex (j m)) ^ (-B₀) / (2 * (D.b - D.a)) ≤ opticalSpeed D.w r) :
+    ∃ K A : ℝ, 0 < K ∧ 0 < A ∧ ∀ k s : ℕ,
+      ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
+      a + b ≤ s → p.1 ∈ Icc (x m - δ m) (x m + δ m) →
+      ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
+        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+        |J.D k z v| ≤ K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
+          (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+              base (s + loss) (z - (C.referenceState, 0)) v) := by
+  obtain ⟨K, A, hK, hA, hdist⟩ :=
+    hN.opticalCollar_inverse_boundaryDistance_bound j x δ hB₀ hcell hinside hspeed
+  refine ⟨K, A, hK, hA, fun k s => ?_⟩
+  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
+  have hpoint : ∀ m a b p,
+      a + b ≤ s → p.1 ∈ Icc (x m - δ m) (x m + δ m) →
+      ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
+        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+        |J.D k z v| ≤ K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
+          (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
+            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+              base (s + loss) (z - (C.referenceState, 0)) v) := by
+    intro m a b p hab hp
+    have hm : p.1 ∈ Ioo (C.left m) (C.right m) :=
+      ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
+    have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
+      lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
+    obtain ⟨J, hJ⟩ := hdata.choose_spec.2 m a b p hab hm
+    exact ⟨J, fun z hz v => abs_le_of_power_weight_bound a hd (Real.exp_pos _)
+      (hdist m p.1 hp) (hJ z hz v)⟩
+  exact Exists.intro B (And.intro hB hpoint)
 
 
 end ContinuousFlexibility.Statements

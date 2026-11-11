@@ -43,6 +43,19 @@ theorem abs_deriv_control_le_inverse_jets
         (mul_le_mul_of_nonneg_left h0 (abs_nonneg _))
     _ = _ := by ring
 
+/-- Keep the scalar estimate separate from the physical seminorm terms.
+This avoids reducing the supplied physical models during ring arithmetic. -/
+theorem abs_deriv_control_le_product_weights
+    {w χ : ℝ → ℝ} {r A B H E W G : ℝ}
+    (hw : DifferentiableAt ℝ w r) (hwr : w r ≠ 0)
+    (h0 : |w r * χ r| ≤ B * H * E * G)
+    (h1 : |deriv w r * χ r + w r * deriv χ r| ≤ B * H * E * G)
+    (hinverse : |(w r)⁻¹| + |deriv (fun s => (w s)⁻¹) r| ≤ A * W) :
+    |deriv χ r| ≤ (A * B) * H * E * W * G := by
+  have hb := abs_deriv_control_le_inverse_jets hw hwr h0 h1
+  have hnonneg : 0 ≤ B * H * E * G := (abs_nonneg _).trans h0
+  exact hb.trans ((mul_le_mul_of_nonneg_right hinverse hnonneg).trans_eq (by ring))
+
 theorem IsAccumulatingProfile.inverse_first_jets_cell_bound
     {D : ReferenceData} (hRef : IsAccumulatingProfile D) :
     ∃ A : ℝ, 0 < A ∧ ∀ j r, r ∈ D.cells j →
@@ -100,16 +113,11 @@ theorem N01Properties.control_deriv_cell_bound_with_grading
           radialE (D.cellIndex j) ^ A *
           (stateGrading S base v + stateGrading S (1 + loss) v) := by
     intro m j r hr
-    dsimp only
-    have h0 := (hdata.choose_spec.2 m j r hr).1
-    have h1 := (hdata.choose_spec.2 m j r hr).2
     have hw : DifferentiableAt ℝ D.w r := hgeom.1.2.2.1.1.differentiable (by simp) r
     have hwr : D.w r ≠ 0 :=
       (hgeom.1.2.2.2.2.1 r (hgeom.2.1.2.2.2.1 j hr)).ne'
-    have hbound := abs_deriv_control_le_inverse_jets hw hwr h0 h1
-    have hnonneg := (abs_nonneg (D.w r * C.control m r)).trans h0
-    exact hbound.trans
-      ((mul_le_mul_of_nonneg_right (hinverse j r hr) hnonneg).trans_eq (by ring))
+    exact abs_deriv_control_le_product_weights hw hwr
+      (hdata.choose_spec.2 m j r hr).1 (hdata.choose_spec.2 m j r hr).2 (hinverse j r hr)
   exact Exists.intro B (Exists.intro A (And.intro hB (And.intro hA hpoint)))
 
 /-- Uniform normalization of the two singleton direction grades. -/

@@ -117,17 +117,11 @@ variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
   (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
   (travel : ℕ → ℝ) (e : S.Space)
 
-theorem circleAverageComposeLinear_isTame :
-    IsTameLinear S.grading S.grading
-      (circleAverageComposeLinear hS hT hD hγ travel e) 1 0 := by
-  apply liftCircleLinear_isTame hS
-    (circleAverageComposeFieldLinear hS travel (S.decode e))
-    (fun u => circleMember_averageCompose (hS.2.2.2.1 u) (hS.2.2.2.1 e).1
-      (material_circle_sample_weights_pos hT hD).1
-      (material_circle_sample_weights_pos hT hD).2
-      (circleModel_uniform_jets_of_material hS hT hD hγ e) travel)
-    S.grading (gradedSeminorm_monotone (fun i => S.level i) S.bond) 1
-  intro n
+include hS hT hD hγ in
+theorem circleAverageComposeField_grading_bound (n : ℕ) :
+    ∃ K : ℝ≥0, ∀ u : S.Space,
+      circleNorm T γ n (circleAverageComposeField (S.decode u) travel (S.decode e)) ≤
+        (K : ℝ) * S.grading (n + 1) u := by
   obtain ⟨B, hB, hb⟩ := circleModel_uniform_jets_of_material hS hT hD hγ e n
   refine ⟨⟨circleCompositionNormConstant n (1 + B),
     circleCompositionNormConstant_nonneg n (1 + B)⟩, fun u => ?_⟩
@@ -139,6 +133,20 @@ theorem circleAverageComposeLinear_isTame :
     (le_refl (S.grading (n + 1) u))) (n + 1) le_rfl
   exact hn.trans (mul_le_mul_of_nonneg_left hg
     (circleCompositionNormConstant_nonneg n (1 + B)))
+
+theorem circleAverageComposeLinear_isTame :
+    IsTameLinear S.grading S.grading
+      (circleAverageComposeLinear hS hT hD hγ travel e) 1 0 := by
+  unfold circleAverageComposeLinear
+  apply liftCircleLinear_isTame hS
+    (circleAverageComposeFieldLinear hS travel (S.decode e))
+    (fun u => circleMember_averageCompose (hS.2.2.2.1 u) (hS.2.2.2.1 e).1
+      (material_circle_sample_weights_pos hT hD).1
+      (material_circle_sample_weights_pos hT hD).2
+      (circleModel_uniform_jets_of_material hS hT hD hγ e) travel)
+    S.grading (gradedSeminorm_monotone (fun i => S.level i) S.bond) 1
+  intro n
+  exact circleAverageComposeField_grading_bound hS hT hD hγ travel e n
 
 def circleAverageComposeContinuousLinear : S.Space →L[ℝ] S.Space :=
   (circleAverageComposeLinear_isTame hS hT hD hγ travel e).toContinuousLinearMap
@@ -158,8 +166,8 @@ theorem circleAverageComposeContinuousLinear_decode
       (withSeminorms_graded (fun i => S.level i) S.bond)
       (withSeminorms_graded (fun i => S.level i) S.bond)
       (gradedSeminorm_monotone (fun i => S.level i) S.bond) u
-  rw [heq]
-  exact circleAverageComposeLinear_decode hS hT hD hγ travel e u m θ
+  exact (congrArg (fun v : S.Space => S.decode v m θ) heq).trans
+    (circleAverageComposeLinear_decode hS hT hD hγ travel e u m θ)
 
 end Model
 

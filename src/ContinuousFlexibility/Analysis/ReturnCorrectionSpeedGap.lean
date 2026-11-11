@@ -182,7 +182,7 @@ theorem N01Properties.exists_opticalCorrection_characteristic_gap
             returnCorrectedMinusSpeed D S C χ z m (r, θ)) / 2) ∧
         returnCorrectedMinusSpeed D S C χ z m (r, θ) ≤
           -returnCorrectedMinusSpeed D S C χ z m (r, -θ) := by
-  obtain ⟨b₀, ε₀, χ, j, A, λ, P, hbase₀, hε₀, hε₀ε, hA, hλ, hP,
+  obtain ⟨b₀, ε₀, χ, j, A, lam, P, hbase₀, hε₀, hε₀ε, hA, hlam, hP,
     hN₀, hcell, hχ, hend, hjets, hpositive⟩ :=
     hN.exists_positive_opticalCorrectionCutoffs hT
   obtain ⟨J, hJ, hjet⟩ := hjets 1
@@ -193,17 +193,17 @@ theorem N01Properties.exists_opticalCorrection_characteristic_gap
     hS hT χ j hJ hA.le hP.le hcell hcutoff
   obtain ⟨U, hU, hupper⟩ := hN₀.originalRadialCoefficient_uniform_upper
   let base' := max b₀ (1 + loss)
-  let ε' := min ε₀ (min (1 / 2) (min K⁻¹ (λ / (4 * U * V))))
+  let ε' := min ε₀ (min (1 / 2) (min K⁻¹ (lam / (4 * U * V))))
   have hε' : 0 < ε' := lt_min hε₀
-    (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hλ (by positivity))))
+    (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hlam (by positivity))))
   have hε'₀ : ε' ≤ ε₀ := min_le_left _ _
   have hεhalf : ε' ≤ 1 / 2 := (min_le_right _ _).trans (min_le_left _ _)
   have hεK : K * ε' ≤ 1 := by
     have hεi : ε' ≤ K⁻¹ := (min_le_right _ _).trans
       ((min_le_right _ _).trans (min_le_left _ _))
     exact (mul_le_mul_of_nonneg_left hεi hK.le).trans_eq (mul_inv_cancel₀ hK.ne')
-  have hεV : V * ε' ≤ λ / (4 * U) := by
-    have hεi : ε' ≤ λ / (4 * U * V) := (min_le_right _ _).trans
+  have hεV : V * ε' ≤ lam / (4 * U) := by
+    have hεi : ε' ≤ lam / (4 * U * V) := (min_le_right _ _).trans
       ((min_le_right _ _).trans (min_le_right _ _))
     refine (mul_le_mul_of_nonneg_left hεi hV.le).trans_eq ?_
     field_simp [hU.ne', hV.ne']
@@ -257,9 +257,9 @@ theorem N01Properties.exists_opticalCorrection_characteristic_gap
             (originalCoefficients D S C z).c (r, θ)) /
           (originalCoefficients D S C z).a (r, θ)) / 2 := by
       calc
-        _ ≤ (λ / (4 * U)) * radialE (D.cellIndex (j m)) ^ (-P) :=
+        _ ≤ (lam / (4 * U)) * radialE (D.cellIndex (j m)) ^ (-P) :=
           mul_le_mul_of_nonneg_right hεV (Real.rpow_nonneg (Real.exp_pos _).le _)
-        _ = ((λ * radialE (D.cellIndex (j m)) ^ (-P) / 2) / U) / 2 := by
+        _ = ((lam * radialE (D.cellIndex (j m)) ^ (-P) / 2) / U) / 2 := by
           field_simp [hU.ne']
           <;> ring
         _ ≤ _ := div_le_div_of_nonneg_right hgaplower (by norm_num)
