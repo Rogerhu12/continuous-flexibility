@@ -68,6 +68,7 @@ theorem zeroMode_weighted_solution
           ((hHmem.integrable_sq.const_mul 2).add
             (hβmem.integrable_sq.const_mul (2 * aL ^ 2)))
         exact ae_of_all _ (fun r => by
+          change (R r) ^ 2 ≤ 2 * (H r) ^ 2 + (2 * aL ^ 2) * (β r) ^ 2
           rw [← hR r]
           nlinarith only [sq_nonneg (H r - aL * β r)])
       _ = _ := by

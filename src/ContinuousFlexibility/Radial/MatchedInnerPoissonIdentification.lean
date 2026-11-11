@@ -50,7 +50,7 @@ theorem matchedInnerPoisson_eq_of_candidate {D : ReferenceData}
         (hp.mono (fun r hr => congrArg (fun z => referenceColumn D r * z) hr))]
       simpa only [if_pos hj] using hrow
     · simp only [if_neg hj, Prod.snd_zero]
-      exact ⟨by simpa only [if_neg hj] using hrow, rfl⟩
+      exact ⟨by simpa only [if_neg hj] using hrow, True.intro⟩
   have hcoef (k : Fin 2) :
       Real.sqrt (M.boundaryScale k) * p (matchingCut D M k) =
         if i = k then 1 else 0 := by

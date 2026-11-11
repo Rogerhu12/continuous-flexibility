@@ -25,6 +25,9 @@ theorem referenceColumn_test_eq_first_coefficient (D : ReferenceData)
       ∫ r in D.a..D.b, referenceColumn D r * referenceCosineCoefficient ψ 1 r := by
   apply intervalIntegral.integral_congr
   intro r _
+  change radialAngularMean (fun θ =>
+    referenceColumn D r * Radial.cosineMode 2 θ * ψ (r, θ)) =
+      referenceColumn D r * referenceCosineCoefficient ψ 1 r
   rw [referenceCosineCoefficient_eq_angularMean]
   have hk (θ : ℝ) :
       referenceCircleCosine 1 (θ : AddCircle Real.pi) = Radial.cosineMode 2 θ := by

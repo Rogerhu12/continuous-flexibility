@@ -85,4 +85,45 @@ theorem matchedMode_scalarGate_apply_inverse (D : ReferenceData)
     (G ∘L matchedModeScalarGate D active) F = G F := by
   rw [ContinuousLinearMap.comp_apply, matchedModeScalarGate_eq_self D active F hF]
 
+/-- The actual inverse has no output scalar on an admissible nonbordered
+input. This is the scalar clause of its genuine graph, not an estimate. -/
+theorem matchedMode_inverse_scalar_zero {D : ReferenceData} {j : ℕ}
+    {G : RadialModePair D →L[ℝ] RadialModePair D}
+    (hG : ModeInverseProperties D j G) (hj : j ≠ 2)
+    (F : RadialModePair D) (hF : F.2 = 0) :
+    (G F).2 = 0 := by
+  have hrow := (hG.1 F (fun _ => hF)).2
+  simp only [if_neg hj] at hrow
+  exact hrow.1
+
+theorem matchedMode_inverse_scalarGate_false_zero {D : ReferenceData} {j : ℕ}
+    {G : RadialModePair D →L[ℝ] RadialModePair D}
+    (hG : ModeInverseProperties D j G) (hj : j ≠ 2)
+    (F : RadialModePair D) :
+    ((G ∘L matchedModeScalarGate D false) F).2 = 0 := by
+  apply matchedMode_inverse_scalar_zero hG hj
+  rw [matchedModeScalarGate_apply]
+  rfl
+
+/-- The whole scalar output row of the actual gated raw kernel vanishes
+outside frequency two, including all physical source cells. -/
+theorem matchedPhysicalRawKernel_scalarGate_false_row_zero {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) (hP : RadialPartition D) {j : ℕ}
+    {G : RadialModePair D →L[ℝ] RadialModePair D}
+    (hG : ModeInverseProperties D j G) (hj : j ≠ 2) (m : ℕ) :
+    matchedPhysicalRawKernel D hD hP (G ∘L matchedModeScalarGate D false) 0 m = 0 := by
+  cases m with
+  | zero =>
+      change ‖((G ∘L matchedModeScalarGate D false) (0, 1)).2‖ = 0
+      rw [matchedMode_inverse_scalarGate_false_zero hG hj, norm_zero]
+  | succ m =>
+      change ‖(ContinuousLinearMap.snd ℝ (RadialModeL2 D) ℝ) ∘L
+        (G ∘L matchedModeScalarGate D false) ∘L matchedPhysicalSourceCell D hD hP m‖ = 0
+      have he : (ContinuousLinearMap.snd ℝ (RadialModeL2 D) ℝ) ∘L
+          (G ∘L matchedModeScalarGate D false) ∘L matchedPhysicalSourceCell D hD hP m = 0 := by
+        apply ContinuousLinearMap.ext
+        intro f
+        exact matchedMode_inverse_scalarGate_false_zero hG hj _
+      rw [he, norm_zero]
+
 end ContinuousFlexibility.Radial

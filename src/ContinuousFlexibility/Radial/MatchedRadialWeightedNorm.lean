@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.ReferenceWeightedProduct
 import ContinuousFlexibility.Radial.ReferenceRadialMeasureComparison
 import ContinuousFlexibility.Radial.MatchedPhysicalPartition
+import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!
 # Actual radial weighted norms and physical partition inputs
@@ -129,6 +130,8 @@ theorem matchedRadial_localized_memLp_of_weighted {D : ReferenceData}
     (referenceRadialCellDensity_measurable hP γ M m)
     (ae_of_all _ (fun _ => ENNReal.ofReal_lt_top))).mp hi
   have hs := hh.const_mul (matchedRadialWeight D γ M m ^ 2)⁻¹
+  change Integrable (fun r => (D.localizer m r * f r) ^ 2)
+    (volume.restrict (radialCore D))
   simpa only [smul_eq_mul, matchedRadialCellDensity_mul_sq, ← mul_assoc,
     inv_mul_cancel₀ (pow_ne_zero 2 (matchedRadialWeight_pos D γ M m).ne'), one_mul] using hs
 
@@ -173,7 +176,10 @@ theorem matchedPhysical_memLp_of_weighted {D : ReferenceData}
       have hq := radialQ_nonneg (D.cellIndex m)
       have hS : 0 ≤ radialS (D.cellIndex m) := by unfold radialS; positivity
       positivity)
-  simp only [ENNReal.ofReal_one, withDensity_one, one_mul] at hc
+  simp only [ENNReal.ofReal_one, one_mul] at hc
+  change (volume.restrict (radialCore D)).withDensity (1 : ℝ → ℝ≥0∞) ≤
+    ENNReal.ofReal B • referenceRadialWeightedMeasure D γ M at hc
+  rw [withDensity_one] at hc
   exact hf.of_measure_le_smul (by simp) hc
 
 theorem matchedPhysicalPartition_weighted_sq {D : ReferenceData}
