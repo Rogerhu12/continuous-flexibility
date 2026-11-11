@@ -45,10 +45,17 @@ def innerRadialGapChartOfPositiveDerivative (D : ReferenceData)
       (fun r hr' => hD.2.2.2.2.1 r
         ⟨by linarith only [hl.1, hr'.1], by linarith only [hr.2, hr'.2]⟩)
       (fun r hr' => hs.le.trans (hslope r hr')) j
-    exact ⟨{ away_center := haway, frequency_pos := hj
-      slope := s, slope_pos := hs, slope_lower := hslope
-      columns := p, columns_smooth := hp, columns_boundary := hb
-      columns_homogeneous := heq }⟩)
+    exact ⟨{
+      away_center := haway
+      frequency_pos := hj
+      slope := s
+      slope_pos := hs
+      slope_lower := hslope
+      columns := p
+      columns_smooth := hp
+      columns_boundary := hb
+      columns_homogeneous := heq
+    }⟩)
 
 namespace SeedRetainedPair
 
