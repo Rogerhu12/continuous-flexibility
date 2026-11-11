@@ -51,9 +51,9 @@ theorem weighted_height_bounds_of_scaled_jets {w a b c K : ℝ}
   have haw : w * |a| ≤ (1 / 16 : ℝ) := by
     apply (mul_le_mul_iff_left₀ hK).mp
     calc
-      K * (w * |a|) = w * (K * |a|) := by ring
+      (w * |a|) * K = w * (K * |a|) := by ring
       _ ≤ w * (w / 16) := mul_le_mul_of_nonneg_left ha hw
-      _ ≤ K * (1 / 16) := by nlinarith only [hE]
+      _ ≤ (1 / 16) * K := by nlinarith only [hE]
   have hbSmall : |b| ≤ (1 / 4 : ℝ) := by
     have hbK : |b| ≤ K * |b| := by
       nlinarith [mul_nonneg (sub_nonneg.mpr hKone) (abs_nonneg b)]

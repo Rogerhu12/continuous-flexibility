@@ -61,13 +61,13 @@ theorem multilinear_continuous_of_seminorm_product_bound
     | empty => simp
     | @insert i I hi ih =>
         rw [Finset.sum_insert hi, Finset.sum_insert hi]
-        exact (map_add_le_add _ _ _).trans (add_le_add_left ih _)
+        exact (map_add_le_add _ _ _).trans (add_le_add (le_refl _) ih)
   calc
     q s (L u - L x) = q s (∑ i, L (v i u)) := by rw [heq]
     _ ≤ ∑ i, q s (L (v i u)) := hsum Finset.univ
     _ ≤ ∑ i, C * ∏ j, p t (v i u j) :=
       Finset.sum_le_sum (fun i _ => hbound (v i u))
-    _ = g u := by rw [← Finset.mul_sum]; rfl
+    _ = g u := by rw [← Finset.mul_sum]
     _ < ε := hu
 
 end ContinuousFlexibility.Analysis
@@ -123,6 +123,7 @@ def liftContinuousMultilinear (hA : IsSobolevModel D T γ A)
     intro s
     obtain ⟨t, C, hC, hCu⟩ := hbound s
     refine ⟨t, C, hC, fun u => ?_⟩
+    change A.grading s (liftMultilinear hA L hL u) ≤ C * ∏ i, p t (u i)
     rw [grading_liftMultilinear]
     exact hCu u
 

@@ -24,7 +24,7 @@ set_option backward.isDefEq.respectTransparency false
 theorem MaterialSubpower.const_mul {T : MaterialData} {g : ℝ → ℝ}
     (hg : MaterialSubpower T g) (c : ℝ) :
     MaterialSubpower T (fun x => c * g x) := by
-  refine ⟨hg.1.const_mul c, fun n ε hε => ?_⟩
+  refine ⟨contDiff_const.mul hg.1, fun n ε hε => ?_⟩
   obtain ⟨K, hK, hKb⟩ := hg.2 n ε hε
   refine ⟨|c| * K, mul_nonneg (abs_nonneg c) hK, fun x => ?_⟩
   rw [iteratedDeriv_const_mul_field, abs_mul]

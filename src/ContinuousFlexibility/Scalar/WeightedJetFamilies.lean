@@ -140,6 +140,46 @@ private theorem family_input_product_le
     _ ≤ _ := mul_le_mul_of_nonneg_left hprod
       (mul_nonneg hK (mul_nonneg hQ₀ (Finset.prod_nonneg (fun i _ => hQ i))))
 
+/-- A fixed finite allocation first gives the direct product of input
+seminorms. This step contains no interpolation or directional-order choice. -/
+theorem MaterialJetFamily.inputProduct
+    {D : ReferenceData} {T : MaterialData} {A : SobolevModelData}
+    (hT : IsMaterialData D T) (J : MaterialJetFamily T A)
+    {k : ℕ} (a b : Fin (k + 1) → ℕ) (c : ℕ) :
+    ∃ P : ℝ, 0 ≤ P ∧ ∀ (coefficient : PolarPoint → ℝ) (K : ℝ), 0 ≤ K →
+      AEStronglyMeasurable coefficient materialCylinderMeasure →
+      (∀ p, |coefficient p| ≤ K * T.M (T.radius p.1)) →
+      ∀ u : Fin (k + 1) → A.Space,
+        MemLp (materialFamilyMonomial J coefficient a b c u) 2 materialCylinderMeasure ∧
+        (eLpNorm (materialFamilyMonomial J coefficient a b c u)
+          2 materialCylinderMeasure).toReal ≤
+          (K * P) * ∏ i, A.grading
+            (a i + b i + (if i = 0 then c + 1 else 0) + 2) (u i) := by
+  classical
+  have hp : Monotone A.grading := gradedSeminorm_monotone (fun n => A.level n) A.bond
+  choose Q hQ hQbound using fun i : Fin (k + 1) => J.pointwise (a i) (b i)
+  obtain ⟨Q₀, hQ₀, hQnorm⟩ := J.weightedL2 (a 0) (b 0) (c + 1)
+  let P : ℝ := Q₀ * ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), Q i
+  have hP : 0 ≤ P := mul_nonneg hQ₀ (Finset.prod_nonneg (fun i _ => hQ i))
+  refine ⟨P, hP, ?_⟩
+  intro coefficient K hK hc hcBound u
+  have hN (i : Fin (k + 1)) :
+      0 ≤ Q i * A.grading (a i + b i + 2) (u i) := mul_nonneg (hQ i) (apply_nonneg _ _)
+  obtain ⟨hm, hn⟩ := materialWeightedProduct_memLp_and_norm_le hT
+    (fun i => J.jet (a i) (b i) (u i)) c
+    (fun i => Q i * A.grading (a i + b i + 2) (u i)) hN
+    (fun i => J.continuous (a i) (b i) (u i)) (fun i p => hQbound i (u i) p)
+    hK hc hcBound (hQnorm (u 0)).1
+  refine ⟨hm, ?_⟩
+  have hn' := hn.trans (mul_le_mul_of_nonneg_left (hQnorm (u 0)).2
+    (mul_nonneg hK (Finset.prod_nonneg (fun i _ => hN i))))
+  let d : Fin (k + 1) → ℕ := fun i => a i + b i + if i = 0 then c + 1 else 0
+  have hd0 : a 0 + b 0 + (c + 1) ≤ d 0 + 2 := by simp [d]
+  have hdi (i : Fin (k + 1)) : a i + b i + 2 ≤ d i + 2 := by
+    dsimp [d]
+    split_ifs <;> omega
+  exact hn'.trans (family_input_product_le hp a b d c Q hK hQ₀ hQ hd0 hdi u)
+
 /-- One interpolation base and loss control every positive-arity monomial
 of any material jet family, before any spatial or directional order is chosen. -/
 theorem MaterialJetFamily.oneHigh
@@ -170,40 +210,16 @@ theorem MaterialJetFamily.oneHigh
     rw [heq]
     omega
   obtain ⟨C, hC, hCx⟩ := hproduct k (s + 1) d hd
-  choose Q hQ hQbound using fun i : Fin (k + 1) => J.pointwise (a i) (b i)
-  obtain ⟨Q₀, hQ₀, hQnorm⟩ := J.weightedL2 (a 0) (b 0) (c + 1)
-  let P : ℝ := Q₀ * ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), Q i
-  have hP : 0 ≤ P := mul_nonneg hQ₀ (Finset.prod_nonneg (fun i _ => hQ i))
+  obtain ⟨P, hP, hPu⟩ := J.inputProduct hT a b c
   refine ⟨P * C, mul_nonneg hP hC, ?_⟩
   intro coefficient K hK hc hcBound u
-  have hN (i : Fin (k + 1)) :
-      0 ≤ Q i * A.grading (a i + b i + 2) (u i) := mul_nonneg (hQ i) (apply_nonneg _ _)
-  obtain ⟨hm, hn⟩ := materialWeightedProduct_memLp_and_norm_le hT
-    (fun i => J.jet (a i) (b i) (u i)) c
-    (fun i => Q i * A.grading (a i + b i + 2) (u i)) hN
-    (fun i => J.continuous (a i) (b i) (u i)) (fun i p => hQbound i (u i) p)
-    hK hc hcBound (hQnorm (u 0)).1
+  obtain ⟨hm, hn⟩ := hPu coefficient K hK hc hcBound u
   refine ⟨hm, ?_⟩
-  have hn' := hn.trans (mul_le_mul_of_nonneg_left (hQnorm (u 0)).2
-    (mul_nonneg hK (Finset.prod_nonneg (fun i _ => hN i))))
-  have hd0 : a 0 + b 0 + (c + 1) ≤ d 0 + 2 := by simp [d]
-  have hdi (i : Fin (k + 1)) : a i + b i + 2 ≤ d i + 2 := by
-    dsimp [d]
-    split_ifs <;> omega
   have hindex : s + 1 + loss = s + (loss + 1) := by omega
   have hi := hCx u
   rw [hindex] at hi
-  calc
-    (eLpNorm (materialFamilyMonomial J coefficient a b c u)
-        2 materialCylinderMeasure).toReal ≤
-        (K * ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)),
-          Q i * A.grading (a i + b i + 2) (u i)) *
-          (Q₀ * A.grading (a 0 + b 0 + (c + 1)) (u 0)) := hn'
-    _ ≤ (K * P) * ∏ i, A.grading (d i + 2) (u i) :=
-      family_input_product_le hp a b d c Q hK hQ₀ hQ hd0 hdi u
-    _ ≤ (K * P) * (C * ∑ i, A.grading (s + (loss + 1)) (u i) *
-        ∏ j ∈ Finset.univ.erase i, A.grading base (u j)) :=
-      mul_le_mul_of_nonneg_left hi (mul_nonneg hK hP)
-    _ = _ := by ring
+  have hn' : (eLpNorm (materialFamilyMonomial J coefficient a b c u)
+      2 materialCylinderMeasure).toReal ≤ (K * P) * ∏ i, A.grading (d i + 2) (u i) := hn
+  exact (hn'.trans (mul_le_mul_of_nonneg_left hi (mul_nonneg hK hP))).trans_eq (by ring)
 
 end ContinuousFlexibility.Statements

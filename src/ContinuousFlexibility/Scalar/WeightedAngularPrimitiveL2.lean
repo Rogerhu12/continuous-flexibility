@@ -17,10 +17,10 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ContDiff Topology ENNReal
 
-private theorem scalar_angleMeasure_mass : angleMeasure univ = ENNReal.ofReal Real.pi := by
+theorem scalar_angleMeasure_mass : angleMeasure univ = ENNReal.ofReal Real.pi := by
   rw [angleMeasure, Measure.restrict_apply_univ, Real.volume_Ioc, sub_zero]
 
-private theorem scalar_integral_angle_const (c : ℝ) :
+theorem scalar_integral_angle_const (c : ℝ) :
     (∫ _ : ℝ, c ∂angleMeasure) = Real.pi * c := by
   simp only [integral_const, measureReal_def, scalar_angleMeasure_mass,
     ENNReal.toReal_ofReal Real.pi_pos.le, smul_eq_mul]
@@ -71,7 +71,7 @@ theorem scalarAngularPrimitive_sq_le {f : PolarPoint → ℝ} (hf : Continuous f
       rw [mul_pow, Real.sq_sqrt Real.pi_pos.le,
         Real.sq_sqrt (integral_nonneg fun t => sq_nonneg _)]
 
-private theorem scalar_eLpNorm_two_sq {α : Type*} [MeasurableSpace α]
+theorem scalar_eLpNorm_two_sq {α : Type*} [MeasurableSpace α]
     {μ : Measure α} {f : α → ℝ} (hf : MemLp f 2 μ) :
     (eLpNorm f 2 μ).toReal ^ 2 = ∫ t, f t ^ 2 ∂μ := by
   have he := hf.eLpNorm_eq_integral_rpow_norm (by norm_num) (by simp)
@@ -102,7 +102,7 @@ theorem scalarAngularPrimitive_memLp_and_norm_le {f : PolarPoint → ℝ}
     exact hG.comp_fst angleMeasure
   have hbound : ∀ᵐ p ∂materialCylinderMeasure,
       scalarAngularPrimitive f p ^ 2 ≤ G p.1 := by
-    filter_upwards [ae_restrict_mem (MeasurableSet.prod measurableSet_univ measurableSet_Ioc)] with p hp
+    filter_upwards [ae_restrict_mem (MeasurableSet.prod MeasurableSet.univ measurableSet_Ioc)] with p hp
     exact scalarAngularPrimitive_sq_le hf.continuous p.1 ⟨hp.2.1.le, hp.2.2⟩
   have hFint : Integrable (fun p => scalarAngularPrimitive f p ^ 2)
       materialCylinderMeasure := by

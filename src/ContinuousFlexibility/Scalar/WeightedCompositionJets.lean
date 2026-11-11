@@ -47,7 +47,7 @@ private theorem mixedComposition_fderiv_term
   have hp : ContDiff ℝ ∞ (fun q => ∏ i, g i q) :=
     contDiff_prod (fun i _ => hg i)
   rw [fderiv_fun_mul (hc.differentiable (by simp) p) (hp.differentiable (by simp) p)]
-  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply, smul_eq_mul]
+  simp only [add_apply, smul_apply, smul_eq_mul]
   rw [mixedComposition_fderiv_chain hF hu,
     mixedProduct_fderiv_prod g (fun i => (hg i).differentiable (by simp) p),
     Finset.mul_sum]
@@ -138,8 +138,10 @@ def MixedCompositionLeibniz.step {a b : ℕ} (e : MixedCompositionLeibniz a b)
     · simp only [Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ]
       have hfirst : fderiv ℝ u p (if radial then (1, 0) else (0, 1)) =
           mixedDerivative (if radial then 1 else 0) (if radial then 0 else 1) u p := by
-        simpa only [mixedDerivative, iteratedDeriv_zero, Nat.zero_add] using
-          mixedProduct_axis_jet hu 0 0 radial p
+        have hzero : mixedDerivative 0 0 u = u := by
+          funext q
+          simp only [mixedDerivative, iteratedDeriv_zero]
+        simpa only [hzero, Nat.zero_add] using mixedProduct_axis_jet hu 0 0 radial p
       rw [hfirst]
       simp only [g]
       ring

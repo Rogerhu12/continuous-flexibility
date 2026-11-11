@@ -32,8 +32,8 @@ theorem materialH_nonnegative_power_bounded
     {δ : ℝ} (hδ : 0 ≤ δ) :
     ∃ C : ℝ, 0 ≤ C ∧ ∀ x, T.H (T.radius x) ^ δ ≤ C := by
   by_cases hz : δ = 0
-  · exact ⟨1, zero_le_one, fun x => by simp only [hz, Real.rpow_zero]⟩
-  · have hp : 0 < δ := lt_of_le_of_ne hδ hz.symm
+  · exact ⟨1, zero_le_one, fun x => by simp [hz]⟩
+  · have hp : 0 < δ := lt_of_le_of_ne hδ (Ne.symm hz)
     obtain ⟨_, _, _, _, _, _, _, hInv, _, _, _, _, hPower, _⟩ := hT
     obtain ⟨C, hC, hbound, _, _⟩ := hPower 0 δ hp
     refine ⟨C, hC.le, fun x => ?_⟩
@@ -85,7 +85,9 @@ theorem weightedPhysicalJet_weight_shift_bound
   have heq : weightedPhysicalJet T γ' a b c f =
       fun p => T.M (T.radius p.1) ^ c * mixedDerivative a b
         (fun q => T.H (T.radius q.1) ^ (γ - γ') * materialPullback T γ f q) p := by
-    simp only [weightedPhysicalJet, materialPullback_weight_shift hT γ γ' f]
+    exact congrArg
+      (fun G : PolarPoint → ℝ => fun p => T.M (T.radius p.1) ^ c * mixedDerivative a b G p)
+      (materialPullback_weight_shift hT γ γ' f)
   have h := hCf f hf
   rw [← heq] at h
   simpa only [Nat.add_zero] using h
