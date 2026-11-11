@@ -20,9 +20,15 @@ theorem terminalPhysicalCutoff_tsupport (rising : Bool) {a b : ℝ} (hab : a < b
       if rising then Ici a else Iic b := by
   cases rising
   · apply closure_minimal _ isClosed_Iic
-    exact (terminalPhysicalCutoff_support false hab).trans (fun _ hx => hx.le)
+    intro x hx
+    change x ≤ b
+    have hx' : x < b := terminalPhysicalCutoff_support false hab hx
+    exact hx'.le
   · apply closure_minimal _ isClosed_Ici
-    exact (terminalPhysicalCutoff_support true hab).trans (fun _ hx => hx.le)
+    intro x hx
+    change a ≤ x
+    have hx' : a < x := terminalPhysicalCutoff_support true hab hx
+    exact hx'.le
 
 theorem terminalPhysicalCutoffs_disjoint {a b c d : ℝ}
     (hab : a < b) (hbc : b < c) (hcd : c < d) :

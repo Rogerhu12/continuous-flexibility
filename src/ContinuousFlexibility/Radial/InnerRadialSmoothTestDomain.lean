@@ -37,9 +37,7 @@ theorem innerRadialAffineLift_representatives (z : Fin 2 → ℝ) :
   have hf : innerIntervalAffineLift a b z =
       fun r => z 0 * φ 0 r + z 1 * φ 1 r := by
     funext r
-    simp only [φ, innerIntervalAffineLift, innerEndpointValues]
-    norm_num only
-    ring
+    norm_num [φ, innerIntervalAffineLift, innerEndpointValues] <;> ring
   have hd (r : ℝ) : deriv (innerIntervalAffineLift a b z) r =
       z 0 * deriv (φ 0) r + z 1 * deriv (φ 1) r := by
     rw [hf]
@@ -103,11 +101,13 @@ theorem innerRadialH1Pair_smooth_domain_trace {u : ℝ → ℝ}
       hQd, hA.2] with r hsub hQ hA
     rw [hsub, Pi.sub_apply, hQ, hA]
     by_cases hr : r ∈ Ioo a b
-    · have hd : deriv (u - φ) r = deriv u r - deriv φ r :=
+    · have hd : deriv (fun x => u x - φ x) r = deriv u r - deriv φ r :=
         (((hu r (Ioo_subset_Icc_self hr)).differentiableAt (by simp)).hasDerivAt.sub
           (hφ.differentiable (by simp) r).hasDerivAt).deriv
-      simp only [indicator_of_mem hr, innerGapGradientField, hd]
-      dsimp only [φ]
+      simp only [indicator_of_mem hr, innerGapGradientField]
+      change (r / sqrt 12) * deriv u r - (r / sqrt 12) * deriv φ r =
+        (r / sqrt 12) * deriv (fun x => u x - φ x) r
+      rw [hd]
       ring
     · simp only [indicator_of_notMem hr, sub_self]
 
@@ -148,7 +148,7 @@ theorem innerRadialChain_smooth_test_mem (D : ReferenceData) (hw : Continuous D.
       simp only [Fin.val_castSucc, Fin.val_succ]
       omega
     · rw [dif_neg hp]
-      have hp0 : p = 0 := Fin.ext (by omega)
+      have hp0 : p = 0 := Fin.ext (by simp only [Fin.val_zero]; omega)
       simpa only [hp0] using hleft
   · rw [if_neg hi, if_neg hi]
     by_cases hp : p.val < n

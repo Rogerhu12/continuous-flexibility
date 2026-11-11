@@ -102,6 +102,6 @@ theorem SeedRetainedPair.reference_first_boundaryScale {S : SelectedTailData}
     mul_pos (P.sideRadius_pos right) (hD₀.1.trans hp.1)
   have hg := P.reference_first_cone_germ hw hS hband right hcone right_mem_uIcc
   rw [standInBoundaryScale, hg.eq_of_nhds]
-  field_simp [hpos.ne'] <;> ring
+  field_simp [(P.sideRadius_pos right).ne', (hD₀.1.trans hp.1).ne'] <;> ring
 
 end ContinuousFlexibility.Radial

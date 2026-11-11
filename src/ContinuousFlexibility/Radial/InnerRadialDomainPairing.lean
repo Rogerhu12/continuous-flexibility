@@ -55,6 +55,10 @@ theorem innerRadialH1Zero_firstOrder_pairing {q : InnerRadialH1Pair D}
     image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl b) (hs h).2)
   have h := innerRadialH1_smooth_trace_pairing D hw hab ha hcore hpos
     (fun _ _ => hφ.contDiffAt) (fun _ _ => hp.contDiffAt) hu hd
+  change ⟪r.2, innerRadialTraceGradientTest D hw ha hcore hpos p
+      hp.continuous.continuousOn⟫_ℝ +
+    ⟪r.1, innerRadialTraceValueTest D hw ha hcore hpos p
+      (innerDirichlet_deriv_continuousOn (fun _ _ => hp.contDiffAt))⟫_ℝ = 0
   simpa only [hφa, hφb, mul_zero, sub_self] using h
 
 include hab in
@@ -77,7 +81,7 @@ theorem innerRadialAffineLift_firstOrder_pairing (z : Fin 2 → ℝ) :
   have he1 := innerIntervalAffineLift_endpoints hab (innerEndpointValues 1)
   rw [he0.1, he0.2] at h0
   rw [he1.1, he1.2] at h1
-  norm_num only [innerEndpointValues] at h0 h1
+  norm_num [innerEndpointValues] at h0 h1
   simp only [innerRadialAffineLift_apply, Prod.snd_add, Prod.fst_add,
     Prod.smul_snd, Prod.smul_fst, inner_add_left, real_inner_smul_left]
   linear_combination z 0 * h0 + z 1 * h1
@@ -107,8 +111,8 @@ remain; those are zero in the genuine matched-chain domain. -/
 theorem innerRadialChainBoundary_pairing_sum {D : ReferenceData} {n : ℕ}
     (G : InnerRadialChainGeometry D n) (ξ : EuclideanSpace ℝ (Fin n)) (p : ℝ → ℝ) :
     (∑ k : Fin (n + 1),
-      p (G.right k) * innerChainBoundaryRestriction n k ξ 1 -
-        p (G.left k) * innerChainBoundaryRestriction n k ξ 0) = 0 := by
+      (p (G.right k) * innerChainBoundaryRestriction n k ξ 1 -
+        p (G.left k) * innerChainBoundaryRestriction n k ξ 0)) = 0 := by
   rw [Finset.sum_sub_distrib,
     Fin.sum_univ_castSucc (fun k : Fin (n + 1) =>
       p (G.right k) * innerChainBoundaryRestriction n k ξ 1),
@@ -132,16 +136,16 @@ theorem innerRadialChainDomain_firstOrder_pairing
     (hq : q ∈ innerRadialChainDomain D hw G)
     {p : ℝ → ℝ} (hp : ContDiff ℝ ∞ p) :
     (∑ k : Fin (n + 1),
-      ⟪(q k).2, innerRadialTraceGradientTest D hw (G.left_pos k) (G.in_core k)
+      (⟪(q k).2, innerRadialTraceGradientTest D hw (G.left_pos k) (G.in_core k)
         (G.weight_pos k) p hp.continuous.continuousOn⟫_ℝ +
       ⟪(q k).1, innerRadialTraceValueTest D hw (G.left_pos k) (G.in_core k)
         (G.weight_pos k) p
-        (innerDirichlet_deriv_continuousOn (fun _ _ => hp.contDiffAt))⟫_ℝ) = 0 := by
+        (innerDirichlet_deriv_continuousOn (fun _ _ => hp.contDiffAt))⟫_ℝ)) = 0 := by
   obtain ⟨ξ, hξ⟩ := (innerRadialChainDomain_trace_iff D hw G q).mp hq
   calc
     _ = ∑ k : Fin (n + 1),
-        p (G.right k) * innerChainBoundaryRestriction n k ξ 1 -
-          p (G.left k) * innerChainBoundaryRestriction n k ξ 0 := by
+        (p (G.right k) * innerChainBoundaryRestriction n k ξ 1 -
+          p (G.left k) * innerChainBoundaryRestriction n k ξ 0) := by
       apply Finset.sum_congr rfl
       intro k _
       rw [innerRadialH1Domain_firstOrder_pairing D hw (G.left_lt_right k)
