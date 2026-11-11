@@ -100,8 +100,8 @@ Tool-R10a-Inner (Lemma 6.3), Tool-R10a-Outer (Lemmas 6.4, 6.5).
 
 One task file each in `docs/tasks/` (40 in total).
 
-Whether each node can be derived from its hypotheses is tested by its line. `N12` has
-passed this test with its original statement; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
+Whether each node can be derived from its hypotheses is tested by its line. `R05b` and `N12` have
+passed this test with their original statements; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
@@ -138,7 +138,7 @@ R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
 A line that has finished takes the first task below whose branch does not exist:
 
 1. Standalone, mathlib only: N04Cubic, N04Transmission, N04Root.
-2. Pipelines whose first piece is running: R05b, R06b, R06c.
+2. Pipelines whose first piece is running: R06b, R06c.
 3. Tools used by several nodes: Tool-OneHighFactor, Tool-SobolevExtension, Tool-AngularCommutator.
 4. Radial chain: R07, R09, R08, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
 5. Scalar and geometry of the iteration: ScalarWeighted, N01a, N01b, N01c, N02N03.
@@ -147,6 +147,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 34 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
