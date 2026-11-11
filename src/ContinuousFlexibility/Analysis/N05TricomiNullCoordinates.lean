@@ -38,7 +38,8 @@ theorem n05TricomiTime_hasDerivAt {t : ℝ} (ht : 0 < t) :
     field_simp [hs0]
     nlinarith only [Real.sq_sqrt ht.le]
   convert (((hasDerivAt_id t).const_mul (2 / 3 : ℝ)).mul hs) using 1 <;>
-    simp only [n05TricomiTime, Pi.mul_def, id_eq, mul_one, hvalue]
+    simp only [Pi.mul_def, id_eq, mul_one, hvalue]
+  rfl
 
 def n05NullCoordinate (Ψ : PolarPoint → PolarPoint) (σ : ℝ) : PolarPoint → ℝ :=
   fun p => (Ψ p).2 + σ * n05TricomiTime (Ψ p).1
