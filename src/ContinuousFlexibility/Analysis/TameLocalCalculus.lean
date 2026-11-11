@@ -100,7 +100,7 @@ theorem LocallyTameOn.comp {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm �
   calc
     r s ((g ∘ f) x) ≤ Cg * (1 + q (s + lg) (f x)) := hgb (f x) hx.2
     _ ≤ Cg * (1 + Cf * (1 + p (s + (lf + lg)) x)) :=
-      mul_le_mul_of_nonneg_left (add_le_add_left hinner 1) hCg
+      mul_le_mul_of_nonneg_left (add_le_add (le_refl 1) hinner) hCg
     _ ≤ Cg * (1 + Cf) * (1 + p (s + (lf + lg)) x) := by nlinarith
 
 variable [IsTopologicalAddGroup F]
@@ -120,10 +120,10 @@ theorem LocallyTameOn.add {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ
   refine ⟨Cf + Cg, add_nonneg hCf hCg, fun x hx => ?_⟩
   have hf' : q s (f x) ≤ Cf * (1 + p (s + max lf lg) x) :=
     (hfb x hx.1).trans (mul_le_mul_of_nonneg_left
-      (add_le_add_left (hp (Nat.add_le_add_left (le_max_left lf lg) s) x) 1) hCf)
+      (add_le_add (le_refl 1) (hp (Nat.add_le_add_left (le_max_left lf lg) s) x)) hCf)
   have hg' : q s (g x) ≤ Cg * (1 + p (s + max lf lg) x) :=
     (hgb x hx.2).trans (mul_le_mul_of_nonneg_left
-      (add_le_add_left (hp (Nat.add_le_add_left (le_max_right lf lg) s) x) 1) hCg)
+      (add_le_add (le_refl 1) (hp (Nat.add_le_add_left (le_max_right lf lg) s) x)) hCg)
   exact (map_add_le_add (q s) (f x) (g x)).trans
     ((add_le_add hf' hg').trans_eq (by ring))
 
@@ -166,7 +166,7 @@ variable {E F G : Type*}
 
 theorem pairGrading_apply (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
     (n : ℕ) (x : E × F) : pairGrading p q n x = p n x.1 + q n x.2 := by
-  simp only [pairGrading, Seminorm.add_apply, Seminorm.comp_apply,
+  simp only [pairGrading, add_apply, Seminorm.comp_apply,
     LinearMap.fst_apply, LinearMap.snd_apply]
 
 theorem pairGrading_monotone {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
@@ -192,10 +192,10 @@ theorem LocallyTameOn.prodMk {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm 
   rw [pairGrading_apply]
   have hf' : q s (f x) ≤ Cf * (1 + p (s + max lf lg) x) :=
     (hfb x hx.1).trans (mul_le_mul_of_nonneg_left
-      (add_le_add_left (hp (Nat.add_le_add_left (le_max_left lf lg) s) x) 1) hCf)
+      (add_le_add (le_refl 1) (hp (Nat.add_le_add_left (le_max_left lf lg) s) x)) hCf)
   have hg' : r s (g x) ≤ Cg * (1 + p (s + max lf lg) x) :=
     (hgb x hx.2).trans (mul_le_mul_of_nonneg_left
-      (add_le_add_left (hp (Nat.add_le_add_left (le_max_right lf lg) s) x) 1) hCg)
+      (add_le_add (le_refl 1) (hp (Nat.add_le_add_left (le_max_right lf lg) s) x)) hCg)
   exact (add_le_add hf' hg').trans_eq (by ring)
 
 variable {ι : Type*} [Fintype ι] {Y : ι → Type*}
@@ -207,7 +207,15 @@ def tupleGrading (q : ∀ i, ℕ → Seminorm ℝ (Y i)) (n : ℕ) : Seminorm �
 
 theorem tupleGrading_apply (q : ∀ i, ℕ → Seminorm ℝ (Y i)) (n : ℕ) (x : ∀ i, Y i) :
     tupleGrading q n x = ∑ i, q i n (x i) := by
-  simp only [tupleGrading, Seminorm.sum_apply, Seminorm.comp_apply, LinearMap.proj_apply]
+  classical
+  have hsum (S : Finset ι) :
+      (∑ i ∈ S, (q i n).comp (LinearMap.proj i)) x = ∑ i ∈ S, q i n (x i) := by
+    induction S using Finset.induction_on with
+    | empty => simp only [Finset.sum_empty, zero_apply]
+    | @insert i S hi ih =>
+        simp only [Finset.sum_insert hi, add_apply, Seminorm.comp_apply,
+          LinearMap.proj_apply, ih]
+  exact hsum Finset.univ
 
 theorem tupleGrading_monotone (q : ∀ i, ℕ → Seminorm ℝ (Y i))
     (hq : ∀ i, Monotone (q i)) : Monotone (tupleGrading q) := by
@@ -234,8 +242,8 @@ theorem LocallyTameOn.pi {p : ℕ → Seminorm ℝ E}
   intro i _
   exact (hbound i x (mem_iInter.mp hx i)).trans
     (mul_le_mul_of_nonneg_left
-      (add_le_add_left
-        (hp (Nat.add_le_add_left (Finset.le_sup (Finset.mem_univ i)) s) x) 1) (hC i))
+      (add_le_add (le_refl 1)
+        (hp (Nat.add_le_add_left (Finset.le_sup (Finset.mem_univ i)) s) x)) (hC i))
 
 end Products
 

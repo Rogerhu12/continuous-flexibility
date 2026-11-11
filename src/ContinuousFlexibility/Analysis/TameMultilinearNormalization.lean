@@ -168,7 +168,7 @@ theorem multilinear_oneHighFactor_of_local {k : ℕ}
       simpa only [one_mul] using mul_le_mul_of_nonneg_right hα1 (apply_nonneg _ _)
     rw [hscale]
     exact (hlocal _ hsmall).trans (mul_le_mul_of_nonneg_left
-      (add_le_add_left (Finset.sum_le_sum (fun i _ => hh i)) a) hC)
+      (add_le_add (le_refl a) (Finset.sum_le_sum (fun i _ => hh i))) hC)
   have hglobal := multilinear_bound_of_unitBall A' q low high hC hunit
   intro v
   have hpow : 0 < α ^ k := pow_pos hα _

@@ -166,8 +166,9 @@ def inverseExpressionJetMultilinear (n : ℕ) (z : X × Z) (hz : z.1 ∈ U) :
 
 /-- The global family of multilinear maps is set to zero outside the open
 domain; this does not change any germ at a point in the domain. -/
-def inverseExpressionJets : ProjectiveJetFamily (X × Z) (Y × Z) :=
-  fun n z => if hz : z.1 ∈ U then
+def inverseExpressionJets : ProjectiveJetFamily (X × Z) (Y × Z) := by
+  classical
+  exact fun n z => if hz : z.1 ∈ U then
     inverseExpressionJetMultilinear J hU V hleft hright hV n z hz else 0
 
 @[simp] theorem inverseExpressionJets_apply

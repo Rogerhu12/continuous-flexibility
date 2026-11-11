@@ -43,7 +43,7 @@ theorem tameJetSize_mono {p : ℕ → Seminorm ℝ E} (hp : Monotone p)
   unfold tameJetSize
   apply add_le_add
   · apply mul_le_mul
-    · exact add_le_add_left (hp (Nat.add_le_add_left hl s) x) 1
+    · exact add_le_add (le_refl 1) (hp (Nat.add_le_add_left hl s) x)
     · exact Finset.prod_le_prod₀ (fun _ _ => apply_nonneg _ _)
         (fun i _ => hp hb (v i))
     · positivity
@@ -66,7 +66,7 @@ theorem tameJetSize_one (p : ℕ → Seminorm ℝ E) (s loss base : ℕ)
     (x : E) (v : Fin 1 → E) :
     tameJetSize p 1 s loss base x v =
       (1 + p (s + loss) x) * p base (v 0) + p (s + loss) (v 0) := by
-  simp [tameJetSize, Fin.prod_univ_one, Fin.sum_univ_one]
+  simp [tameJetSize]
 
 end Estimates
 
@@ -131,7 +131,7 @@ def smoothDirectionsAdd {U : Set E} {f g : E → F}
   open_domain := J.open_domain
   D := fun n x => J.D n x + K.D n x
   zero := fun x hx => by
-    rw [ContinuousMultilinearMap.add_apply, J.zero x hx, K.zero x hx]
+    rw [add_apply, J.zero x hx, K.zero x hx]
   continuous := fun n => (J.continuous n).add (K.continuous n)
   derivative := fun n x hx v w => (J.derivative n x hx v w).add (K.derivative n x hx v w)
 
@@ -157,9 +157,9 @@ theorem smoothTameOn_add {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ 
   have hn2 : p b2 (x - x0) < ε2 :=
     (hp (le_max_right _ _) _).trans_lt (hnear.trans_le (min_le_right _ _))
   have hb1 := (h1' x hx hn1 v).trans (mul_le_mul_of_nonneg_left
-    (tameJetSize_mono hp (le_max_left _ _) (le_max_left _ _) k s x v) hC1)
+    (tameJetSize_mono hp (le_max_left l1 l2) (le_max_left b1 b2) k s x v) hC1)
   have hb2 := (h2' x hx hn2 v).trans (mul_le_mul_of_nonneg_left
-    (tameJetSize_mono hp (le_max_right _ _) (le_max_right _ _) k s x v) hC2)
+    (tameJetSize_mono hp (le_max_right l1 l2) (le_max_right b1 b2) k s x v) hC2)
   change q s (J.D k x v + K.D k x v) ≤
     (C1 + C2) * tameJetSize p k s (max l1 l2) (max b1 b2) x v
   calc
@@ -209,7 +209,7 @@ theorem smoothTameOn_quadratic {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminor
     calc
       p base x = p base ((x - x0) + x0) := by rw [sub_add_cancel]
       _ ≤ p base (x - x0) + p base x0 := map_add_le_add _ _ _
-      _ ≤ 1 + p base x0 := add_le_add_right hnear.le _
+      _ ≤ 1 + p base x0 := add_le_add hnear.le (le_refl (p base x0))
       _ = M := rfl
   have ha : 0 ≤ p (s + loss) x := apply_nonneg _ _
   change q s (quadraticJets B k x v) ≤ 2 * C * M * tameJetSize p k s loss base x v
@@ -292,6 +292,7 @@ variable {E F G : Type*}
   [TopologicalSpace E] [AddCommGroup E] [Module ℝ E] [IsTopologicalAddGroup E]
   [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [IsTopologicalAddGroup F]
   [TopologicalSpace G] [AddCommGroup G] [Module ℝ G] [IsTopologicalAddGroup G]
+  [ContinuousSMul ℝ G]
 
 /-- A bilinear tame estimate proves joint continuity in seminorm topologies.
 This does not rely on an operator-space topology for the curried map. -/
@@ -328,7 +329,7 @@ theorem continuous_bilinear_of_tame {p : ℕ → Seminorm ℝ E}
   filter_upwards [ht.eventually (gt_mem_nhds hε)] with z hsmall
   have hid : B z.1 z.2 - B z0.1 z0.2 =
       B (z.1 - z0.1) z.2 + B z0.1 (z.2 - z0.2) := by
-    simp only [map_sub, ContinuousLinearMap.sub_apply]
+    simp only [map_sub, sub_apply]
     abel
   have hb : r s (B z.1 z.2 - B z0.1 z0.2) ≤ A z := by
     calc
@@ -345,11 +346,11 @@ def bilinearPairMultilinear (B : E →L[ℝ] F →L[ℝ] G)
     (E × F) [×2]→L[ℝ] G where
   toFun := fun v => B (v 0).1 (v 1).2
   map_update_add' := by
-    intro v i x y
-    fin_cases i <;> simp [map_add, ContinuousLinearMap.add_apply]
+    intro _ v i x y
+    fin_cases i <;> simp [map_add, add_apply]
   map_update_smul' := by
-    intro v i c x
-    fin_cases i <;> simp [map_smul, ContinuousLinearMap.smul_apply]
+    intro _ v i c x
+    fin_cases i <;> simp [map_smul, smul_apply]
   cont := hB.comp (((continuous_apply 0).fst).prodMk ((continuous_apply 1).snd))
 
 theorem bilinearPairMultilinear_apply (B : E →L[ℝ] F →L[ℝ] G)
@@ -360,8 +361,6 @@ theorem tamePairGrading_apply (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm
     (s : ℕ) (z : E × F) : pairGrading p q s z = p s z.1 + q s z.2 := by
   simp only [pairGrading, add_apply, Seminorm.comp_apply, LinearMap.fst_apply,
     LinearMap.snd_apply]
-
-variable [ContinuousSMul ℝ G]
 
 /-- The bilinear clause of tame calculus, with its exact fixed-loss hypothesis. -/
 theorem smoothTameOn_bilinear {p : ℕ → Seminorm ℝ E}
@@ -448,7 +447,8 @@ theorem tameJetSize_sameOrder (p : ℕ → Seminorm ℝ E) (k s loss : ℕ)
   have hterm (i : Fin k) : p (s + loss) (v i) *
       (∏ j ∈ Finset.univ.erase i, p (s + loss) (v j)) =
       ∏ j, p (s + loss) (v j) :=
-    Finset.mul_prod_erase _ _ (Finset.mem_univ i)
+    Finset.mul_prod_erase Finset.univ (fun j : Fin k => p (s + loss) (v j))
+      (Finset.mem_univ i)
   unfold tameJetSize
   simp_rw [hterm]
   simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
@@ -485,7 +485,7 @@ theorem tameJet_bound_fixedOrder {p : ℕ → Seminorm ℝ E} {q : ℕ → Semin
     calc
       p b x = p b ((x - x0) + x0) := by rw [sub_add_cancel]
       _ ≤ p b (x - x0) + p b x0 := map_add_le_add _ _ _
-      _ ≤ 1 + p b x0 := add_le_add_right hnear1.le _
+      _ ≤ 1 + p b x0 := add_le_add hnear1.le (le_refl (p b x0))
   have hprod : 0 ≤ ∏ i, p b (v i) := Finset.prod_nonneg (fun i _ => apply_nonneg _ _)
   have hsize : tameJetSize p k s loss base x v ≤ K * ∏ i, p b (v i) := by
     calc

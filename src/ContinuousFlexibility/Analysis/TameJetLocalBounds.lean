@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.TameLocalCalculus
+import ContinuousFlexibility.Analysis.TamePairTopology
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 

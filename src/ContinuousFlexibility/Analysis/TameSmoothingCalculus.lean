@@ -141,7 +141,7 @@ theorem hasSmoothing_of_tameRetraction {p : ℕ → Seminorm ℝ E}
             Real.exp (-((n : ℝ) - m - loss) * N) * p n x := add_le_add (hp hmn x) htx
         _ ≤ Real.exp (-((n : ℝ) - m - loss) * N) * p n x +
             (CP : ℝ) * CS * CJ * Real.exp (-((n : ℝ) - m - loss) * N) * p n x := by
-          apply add_le_add_right
+          apply add_le_add _ le_rfl
           simpa only [one_mul] using mul_le_mul_of_nonneg_right hExp (apply_nonneg (p n) x)
         _ = _ := by ring
   · intro x

@@ -131,17 +131,20 @@ theorem projectiveCompositionTerm_extend_none (f : X → Y)
   refine Fin.cases ?_ (fun j => ?_) i
   · change J 1 x (fun _ => w) = J 1 x (Fin.cons w Fin.elim0)
     congr 1
-    exact Subsingleton.elim _ _
+    funext j
+    rw [show j = 0 from Subsingleton.elim _ _]
+    rfl
   · rfl
 
 /-- Changing the arity by an equality preserves evaluation of a jet. -/
 theorem projectiveJetFamily_congr (J : ProjectiveJetFamily X Y)
     {m n : ℕ} (h : m = n) (x : X) (v : Fin m → X) (w : Fin n → X)
-    (hv : ∀ i, v i = w (Fin.cast h i)) : J m x v = J n x w := by
+    (hv : ∀ i (hi : i < m) (hi' : i < n), v ⟨i, hi⟩ = w ⟨i, hi'⟩) :
+    J m x v = J n x w := by
   subst n
   congr 1
   funext i
-  exact hv i
+  exact hv i i.isLt i.isLt
 
 theorem projectiveCompositionTerm_extend_some (f : X → Y)
     (J : ProjectiveJetFamily X Y) (K : ProjectiveJetFamily Y Z)
@@ -157,15 +160,15 @@ theorem projectiveCompositionTerm_extend_some (f : X → Y)
   congr 1
   ext j
   rcases eq_or_ne j i with rfl | hji
-  · simp only [dif_pos, Function.update_self]
+  · simp only [dite_eq_left, Function.update_self]
     apply projectiveJetFamily_congr J (by simp)
-    intro a
-    refine Fin.cases ?_ (fun k => ?_) a
-    · simp
-    · simp [Function.comp_def]
-  · simp only [hji, dif_neg, Function.update_of_ne hji]
+    intro a ha ha'
+    cases a with
+    | zero => simp
+    | succ a => simp [Function.comp_def, Fin.cons]
+  · simp only [hji, dite_eq_right, Function.update_of_ne hji]
     apply projectiveJetFamily_congr J (by simp [hji])
-    intro a
+    intro a ha ha'
     simp [Function.comp_def]
 
 theorem projectiveCompositionJets_succ (f : X → Y) (J : ProjectiveJetFamily X Y)
@@ -193,9 +196,11 @@ theorem HasProjectiveJetsOn.continuousOn_compositionTerm
       (U ×ˢ univ) := by
     apply continuousOn_pi.mpr
     intro i
+    have hselect : Continuous (fun z : X × (Fin n → X) => (z.1, z.2 ∘ c.emb i)) :=
+      continuous_fst.prodMk (continuous_pi (fun j =>
+        (continuous_apply (c.emb i j)).comp continuous_snd))
     exact (hf.2.1 (c.partSize i)).comp
-      (continuous_fst.prodMk (continuous_pi (fun j =>
-        (continuous_apply (c.emb i j)).comp continuous_snd))).continuousOn
+      hselect.continuousOn
       (fun _ hp => ⟨hp.1, mem_univ _⟩)
   exact (hg.2.1 c.length).comp (hbase.prodMk hslots)
     (fun _ hp => ⟨hmap hp.1, mem_univ _⟩)
@@ -233,7 +238,10 @@ theorem HasProjectiveJetsOn.compositionTerm_hasLineDerivAt
     (LocallyConvexSpace.convex_basis (𝕜 := ℝ) (u x)).mem_iff.mp (hV.mem_nhds (hmap hx))
   have hsub : interior W ⊆ V := interior_subset.trans hWV
   have hux : u x ∈ interior W := mem_interior_iff_mem_nhds.mpr hW
-  have hv' := hasProjectiveJetsOn_mono hv hsub
+  have hv' : HasProjectiveJetsOn v K (interior W) :=
+    ⟨fun y hy => hv.1 y (hsub hy),
+      fun n => (hv.2.1 n).mono (fun _ hy => ⟨hsub hy.1, hy.2⟩),
+      fun n y hy w vs => hv.2.2 n y (hsub hy) w vs⟩
   have hcurve : HasProjectiveCurveDerivAt (fun t : ℝ => u (x + t • w))
       (projectiveFirstJetValue J x w) 0 := hu.hasLineDerivAt hU hx w
   have hcurve_mem : (fun t : ℝ => u (x + t • w)) 0 ∈ interior W := by
@@ -263,15 +271,15 @@ theorem HasProjectiveJetsOn.comp
     rw [projectiveCompositionJets_apply, Fintype.sum_unique]
     change K 0 (u x) (fun i : Fin 0 => J 1 x (fun _ => Fin.elim0 i)) = v (u x)
     convert hv.1 (u x) (hmap hx) using 2
-    exact Subsingleton.elim _ _
   · intro n
     simp only [projectiveCompositionJets_apply]
-    exact continuousOn_finset_sum Finset.univ
+    exact continuousOn_finsetSum Finset.univ
       (fun c _ => hu.continuousOn_compositionTerm hv hmap c)
   · intro n x hx w vs
     rw [projectiveCompositionJets_succ]
     have h := HasProjectiveCurveDerivAt.finset_sum Finset.univ
-      (fun c _ => hu.compositionTerm_hasLineDerivAt hU hV hv hmap c hx w vs)
+      (fun c _ => HasProjectiveJetsOn.compositionTerm_hasLineDerivAt
+        hU hV hu hv hmap c hx w vs)
     simpa only [HasProjectiveLineDerivAt, projectiveCompositionJets_apply] using h
 
 end GenuineComposition

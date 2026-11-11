@@ -17,6 +17,8 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter
 open scoped Topology BigOperators
 
+set_option backward.isDefEq.respectTransparency false
+
 section Resolvent
 
 variable {X Y Z : Type*}
@@ -49,8 +51,9 @@ proof.  Outside the open parameter set we choose the zero map. -/
 def inverseFamilyContinuousLinearMap
     {U : Set X} (V : X → Z →ₗ[ℝ] Y)
     (hV : ContinuousOn (fun z : X × Z => V z.1 z.2) (U ×ˢ univ))
-    (x : X) : Z →L[ℝ] Y :=
-  if hx : x ∈ U then
+    (x : X) : Z →L[ℝ] Y := by
+  classical
+  exact if hx : x ∈ U then
     { toLinearMap := V x
       cont := continuousOn_univ.mp
         (hV.comp (continuous_const.prodMk continuous_id).continuousOn
@@ -62,7 +65,8 @@ def inverseFamilyContinuousLinearMap
     (hV : ContinuousOn (fun z : X × Z => V z.1 z.2) (U ×ˢ univ))
     {x : X} (hx : x ∈ U) (y : Z) :
     inverseFamilyContinuousLinearMap V hV x y = V x y := by
-  simp only [inverseFamilyContinuousLinearMap, dif_pos hx, ContinuousLinearMap.coe_mk']
+  simp only [inverseFamilyContinuousLinearMap, dite_eq_left hx,
+    ContinuousLinearMap.coe_mk']
 
 /-- Packaging the fibers does not change joint continuity on the domain. -/
 theorem continuousOn_inverseFamilyContinuousLinearMap
@@ -109,8 +113,15 @@ theorem hasProjectiveCurveDerivAt_inverseFamily
       (h⁻¹ • (y (t + h) - y t) -
         h⁻¹ • (L (x (t + h)) (V (x t) (y t)) - L (x t) (V (x t) (y t)))) =
     h⁻¹ • (V (x (t + h)) (y (t + h)) - V (x t) (y t))
-  rw [inverseFamily_resolvent L V (hleft _ hh) (hright _ hxt),
-    ← smul_sub, map_smul]
+  have hres := inverseFamily_resolvent L V
+    (x := x t) (x' := x (t + h))
+    (hleft (x (t + h)) hh) (hright (x t) hxt) (y t) (y (t + h))
+  calc
+    _ = h⁻¹ • V (x (t + h))
+        ((y (t + h) - y t) -
+          (L (x (t + h)) (V (x t) (y t)) - L (x t) (V (x t) (y t)))) := by
+      rw [← smul_sub, map_smul]
+    _ = _ := congrArg (fun w : Y => h⁻¹ • w) hres.symm
 
 variable [AddCommGroup X] [Module ℝ X]
   [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
@@ -129,7 +140,8 @@ theorem hasProjectiveLineDerivAt_inverseFamily
       (x, y) (h, k) := by
   have hJ : HasProjectiveJetsOn (fun z : X × Y => L z.1 z.2) J.D (U ×ˢ univ) :=
     ⟨J.zero, J.continuous, fun n z hz w v => J.derivative n z hz v w⟩
-  have hL := hJ.hasLineDerivAt J.open_domain ⟨hx, mem_univ (V x y)⟩ (h, 0)
+  have hL := hJ.hasLineDerivAt J.open_domain
+    (x := (x, V x y)) ⟨hx, mem_univ (V x y)⟩ (h, 0)
   have hL' : HasProjectiveCurveDerivAt
       (fun t : ℝ => L (x + t • h) (V x y))
       (J.D 1 (x, V x y) (Fin.cons (h, 0) Fin.elim0)) 0 := by
