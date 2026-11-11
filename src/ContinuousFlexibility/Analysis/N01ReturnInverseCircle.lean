@@ -46,6 +46,21 @@ theorem smoothTameOn_circleShiftedChartCompose_maps
 local instance n01ReturnInverseCircleStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
+private theorem returnInverseCircle_insert_sub (θ r : ℝ) :
+    θ + 0 + (r - θ) = r := by ring
+
+private theorem returnInverseCircle_compose_displacement (θ r t y : ℝ) :
+    (r - θ) + (y - (r + t)) = y - (θ + t) := by ring
+
+private theorem returnInverseCircle_initial_argument (θ t d : ℝ) :
+    θ + -t + d = (θ + d) - t := by ring
+
+private theorem returnInverseCircle_initial_displacement (θ t d l y : ℝ)
+    (hl : l = θ + d) :
+    d + (y - ((l - t) + t)) = y - θ := by
+  rw [hl]
+  ring
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -128,15 +143,22 @@ theorem N01Properties.selectorInverseCircle_right_decode
     intro j t
     exact (congrArg (C.minusReturnInverse (liftSectorParameter S C z) j)
       (congrFun (hN.returnFlowCircle_lift hS hT z hz j) t)).trans (hi j t).2.1
-  have hinv := circleAffineInverse_eq_of_leftInverse
-    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
-    (fun i => -C.travel i) (hN.returnFlowCircle hS hT z)
-    (C.minusReturnInverse (liftSectorParameter S C z)) hleft m θ
-  change Function.invFun (circleAffineLift (fun i => -C.travel i)
-    ((S.circle (3 / 4 : ℝ)).decode (hN.returnFlowCircle hS hT z)) 1 m) θ = _ at hinv
-  rw [hN.returnFlowCircle_lift hS hT z hz m] at hinv
-  rw [hN.selectorInverseCircle_decode hS hT C.right hN.right_radius_mem z hz,
-    hinv, ← controlGeometry_travel_eq_radialTravel hN.2.2.2.1 m]
+  have hinv : Function.invFun (circleAffineLift (fun i => -C.travel i)
+      ((S.circle (3 / 4 : ℝ)).decode (hN.returnFlowCircle hS hT z)) 1 m) θ =
+        C.minusReturnInverse (liftSectorParameter S C z) m θ :=
+    circleAffineInverse_eq_of_leftInverse
+      (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
+      (fun i => -C.travel i) (hN.returnFlowCircle hS hT z)
+      (C.minusReturnInverse (liftSectorParameter S C z)) hleft m θ
+  have hflow : Function.invFun (C.minusFlow (liftSectorParameter S C z) m (C.right m)) θ =
+      C.minusReturnInverse (liftSectorParameter S C z) m θ :=
+    (congrArg (fun f : ℝ → ℝ => Function.invFun f θ)
+      (hN.returnFlowCircle_lift hS hT z hz m)).symm.trans hinv
+  have htravel : opticalTravel D.w (C.left m) (C.right m) = C.travel m :=
+    (controlGeometry_travel_eq_radialTravel hN.2.2.2.1 m).symm
+  have hdecode := congrArg (fun f : ℕ → ℝ → ℝ => f m θ)
+    (hN.selectorInverseCircle_decode hS hT C.right hN.right_radius_mem z hz)
+  exact hdecode.trans (congrArg₂ (fun y t : ℝ => y - (θ + t)) hflow htravel)
 
 /-- The displacement of the exact inverse coordinate in the correction's
 divided difference, relative to its fixed optical translation. -/
@@ -157,18 +179,27 @@ theorem N01Properties.returnTransportInverseCircle_decode
     (S.circle (3 / 4 : ℝ)).decode (hN.returnTransportInverseCircle hS hT z) m θ =
       C.minusReturnInverse (liftSectorParameter S C z) m
         (C.rightChartInverse (liftSectorParameter S C z) m θ) - (θ + C.travel m) := by
-  have heval : θ + 0 + (S.circle (3 / 4 : ℝ)).decode
-      (hN.rightChartInverseCircle hS hT z) m θ =
-        C.rightChartInverse (liftSectorParameter S C z) m θ := by
-    rw [hN.rightChartInverseCircle_decode hS hT z hz m θ]
-    ring
-  unfold N01Properties.returnTransportInverseCircle
-  rw [map_add]
-  simp only [Pi.add_apply]
-  rw [circleShiftedChartComposeLinear_decode, heval,
-    hN.selectorInverseCircle_right_decode hS hT z hz,
-    hN.rightChartInverseCircle_decode hS hT z hz]
-  ring
+  let e : CircleSpace S := hN.rightChartInverseCircle hS hT z
+  let u : CircleSpace S := hN.selectorInverseCircle hS hT C.right hN.right_radius_mem z
+  let q : CircleSpace S := circleShiftedChartComposeLinear
+    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0) e u
+  let r : ℝ := C.rightChartInverse (liftSectorParameter S C z) m θ
+  have he : (S.circle (3 / 4 : ℝ)).decode e m θ = r - θ :=
+    hN.rightChartInverseCircle_decode hS hT z hz m θ
+  have heval : θ + 0 + (S.circle (3 / 4 : ℝ)).decode e m θ = r :=
+    (congrArg (fun d : ℝ => θ + 0 + d) he).trans (returnInverseCircle_insert_sub θ r)
+  have hq : (S.circle (3 / 4 : ℝ)).decode q m θ =
+      C.minusReturnInverse (liftSectorParameter S C z) m r - (r + C.travel m) :=
+    (circleShiftedChartComposeLinear_decode
+      (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0) e u m θ).trans
+        ((congrArg (fun a : ℝ => (S.circle (3 / 4 : ℝ)).decode u m a) heval).trans
+          (hN.selectorInverseCircle_right_decode hS hT z hz m r))
+  have hadd : (S.circle (3 / 4 : ℝ)).decode (hN.returnTransportInverseCircle hS hT z) m θ =
+      (S.circle (3 / 4 : ℝ)).decode e m θ + (S.circle (3 / 4 : ℝ)).decode q m θ :=
+    congrArg (fun f : ℕ → ℝ → ℝ => f m θ) ((S.circle (3 / 4 : ℝ)).decode.map_add e q)
+  exact hadd.trans ((congrArg₂ (fun a b : ℝ => a + b) he hq).trans
+    (returnInverseCircle_compose_displacement θ r (C.travel m)
+      (C.minusReturnInverse (liftSectorParameter S C z) m r)))
 
 theorem N01Properties.smoothTameOn_returnTransportInverseCircle
     (hN : N01Properties D T S C base loss ε)
@@ -202,19 +233,35 @@ theorem N01Properties.returnCorrectionInitialCircle_decode
     (m : ℕ) (θ : ℝ) :
     (S.circle (3 / 4 : ℝ)).decode (hN.returnCorrectionInitialCircle hS hT z) m θ =
       returnCorrectionInitialMap S C (liftSectorParameter S C z) m θ - θ := by
-  have hl := hN.2.2.1.sector_leftChart z m θ
-  have heval : θ + -C.travel m + (S.circle (3 / 4 : ℝ)).decode z.1.val.2.2.2 m θ =
-      stateLeftChart S (liftSectorParameter S C z).1 m θ - C.travel m := by
-    rw [hl]
-    ring
-  unfold N01Properties.returnCorrectionInitialCircle
-  rw [map_add]
-  simp only [Pi.add_apply]
-  rw [circleShiftedChartComposeLinear_decode, heval,
-    hN.returnTransportInverseCircle_decode hS hT z hz,
-    returnCorrectionInitialMap_apply]
-  rw [hl]
-  ring
+  let e : CircleSpace S := z.1.val.2.2.2
+  let u : CircleSpace S := hN.returnTransportInverseCircle hS hT z
+  let q : CircleSpace S := circleShiftedChartComposeLinear
+    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun j => -C.travel j) e u
+  let l : ℝ := stateLeftChart S (liftSectorParameter S C z).1 m θ
+  let a : ℝ := l - C.travel m
+  have hl : l = θ + (S.circle (3 / 4 : ℝ)).decode e m θ :=
+    hN.2.2.1.sector_leftChart z m θ
+  have heval : θ + -C.travel m + (S.circle (3 / 4 : ℝ)).decode e m θ = a :=
+    (returnInverseCircle_initial_argument θ (C.travel m)
+      ((S.circle (3 / 4 : ℝ)).decode e m θ)).trans
+        (congrArg (fun y : ℝ => y - C.travel m) hl.symm)
+  have hu : (S.circle (3 / 4 : ℝ)).decode u m a =
+      returnCorrectionInitialMap S C (liftSectorParameter S C z) m θ - (a + C.travel m) :=
+    (hN.returnTransportInverseCircle_decode hS hT z hz m a).trans
+      (congrArg (fun y : ℝ => y - (a + C.travel m))
+        (returnCorrectionInitialMap_apply S C (liftSectorParameter S C z) m θ).symm)
+  have hq : (S.circle (3 / 4 : ℝ)).decode q m θ =
+      returnCorrectionInitialMap S C (liftSectorParameter S C z) m θ - (a + C.travel m) :=
+    (circleShiftedChartComposeLinear_decode
+      (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun j => -C.travel j) e u m θ).trans
+        ((congrArg (fun y : ℝ => (S.circle (3 / 4 : ℝ)).decode u m y) heval).trans hu)
+  have hadd : (S.circle (3 / 4 : ℝ)).decode (hN.returnCorrectionInitialCircle hS hT z) m θ =
+      (S.circle (3 / 4 : ℝ)).decode e m θ + (S.circle (3 / 4 : ℝ)).decode q m θ :=
+    congrArg (fun f : ℕ → ℝ → ℝ => f m θ) ((S.circle (3 / 4 : ℝ)).decode.map_add e q)
+  exact hadd.trans ((congrArg (fun y : ℝ => (S.circle (3 / 4 : ℝ)).decode e m θ + y) hq).trans
+    (returnInverseCircle_initial_displacement θ (C.travel m)
+      ((S.circle (3 / 4 : ℝ)).decode e m θ) l
+      (returnCorrectionInitialMap S C (liftSectorParameter S C z) m θ) hl))
 
 theorem N01Properties.returnCorrectionInitialCircle_lift
     (hN : N01Properties D T S C base loss ε)
@@ -235,10 +282,11 @@ theorem N01Properties.returnCorrectionInitialCircle_positive
     hN.returnCorrectionInitialCircle hS hT z ∈ circlePositiveLiftDomain (S.circle (3 / 4 : ℝ)) := by
   apply (circlePositiveLiftDomain_iff (hS.2.1 (3 / 4 : ℝ)) (fun _ => 0) _).mpr
   intro m θ
-  rw [hN.returnCorrectionInitialCircle_lift hS hT z hz m]
-  exact hN.returnCorrectionInitialMap_deriv_pos
+  exact (hN.returnCorrectionInitialMap_deriv_pos
     (liftSectorParameter_mem_stateNeighborhood hz (le_refl ε))
-    (hN.2.2.1.liftSectorParameter_sector z) m θ
+    (hN.2.2.1.liftSectorParameter_sector z) m θ).trans_eq
+      (congrArg (fun f : ℝ → ℝ => deriv f θ)
+        (hN.returnCorrectionInitialCircle_lift hS hT z hz m)).symm
 
 theorem N01Properties.smoothTameOn_returnCorrectionInitialCircle
     (hN : N01Properties D T S C base loss ε)
