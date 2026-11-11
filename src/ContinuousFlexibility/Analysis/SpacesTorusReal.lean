@@ -18,10 +18,10 @@ open scoped ENNReal BigOperators ComplexConjugate Topology
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
-local instance : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
+local instance spacesTorusRealMeasureSpace : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance spacesTorusRealProbabilityMeasure : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
   inferInstanceAs (IsProbabilityMeasure AddCircle.haarAddCircle)
-local instance : DecidableEq SpacesTorusFrequency := Classical.decEq _
+local instance spacesTorusRealDecidableFrequency : DecidableEq SpacesTorusFrequency := Classical.decEq _
 
 theorem spacesTorusFourier_neg_of_real (u : SpacesTorusL2)
     (hu : (fun t => conj (u t)) =ᵐ[volume] u) (j : SpacesTorusFrequency) :

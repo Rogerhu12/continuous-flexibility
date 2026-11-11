@@ -17,8 +17,8 @@ open scoped ENNReal BigOperators ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
-local instance : DecidableEq SpacesTorusFrequency := Classical.decEq _
+local instance spacesPhysicalCellPolynomialsMeasureSpace : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance spacesPhysicalCellPolynomialsDecidableFrequency : DecidableEq SpacesTorusFrequency := Classical.decEq _
 
 theorem spaces_mixedDerivative_sum {ι : Type*} {S : Finset ι} {f : ι → PolarPoint → ℝ}
     (hf : ∀ i ∈ S, ContDiff ℝ ∞ (f i)) (a b : ℕ) (p : PolarPoint) :

@@ -19,7 +19,7 @@ open scoped ENNReal
 variable {ι : Type*} {B : Type*}
 variable [NormedAddCommGroup B]
 
-local instance : DecidableEq ι := Classical.decEq ι
+local instance spacesCircleSpectralDecidable : DecidableEq ι := Classical.decEq ι
 
 private def lpSpectralMaskFun (s : Set ι) (u : lp (fun _ : ι => B) 2) : lp (fun _ : ι => B) 2 :=
   ⟨s.indicator u, (lp.memℓp u).mono' (by

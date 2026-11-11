@@ -27,9 +27,13 @@ Last updated: 2026-11-11.
   gluing exactly reconstructs the localized function. Every smooth-composition
   kernel has its actual weighted jets, multilinearity and fixed-base tame
   estimates; affine L² majorants and spatial/parameter differentiation are
-  proved. The W02 assembly is verified with the concrete retraction and smooth
-  composition as its remaining inputs. The physical shell reconstruction
-  and the complete projective smooth-composition tower remain in progress.
+  proved. The complete physical band reconstruction is now proved, as are the
+  closed-graph synthesis maps and their level compatibility. Full proof bodies
+  for the physical retraction, projective smooth-composition tower, W02 and
+  the original `Blueprint.Spaces` statement are now in place and undergoing
+  compilation and CI verification. The `931888f` check compiled all new
+  modules individually, then exposed an anonymous local-instance name
+  collision in the root import; the relevant instances now have unique names.
   `Spaces` stays open until the full W02/W03 statement and CI pass.
 
 ## Target
@@ -49,17 +53,18 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 454 / 459 |
-| Modules in the root import | 410 |
-| Lines of Lean under `src/` | 103,257 |
+| Lean modules compiled / total | 457 / 467 |
+| Modules in the root import | 418 |
+| Lines of Lean under `src/` | 104,297 |
 | Axiom audit (`lake build`, `e8bd075`) | passed |
 | Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 461 |
+| Modules on the module system | 1 (the Challenge) of 469 |
 
 The compilation count intersects the source files in this checkpoint with their
 compiled artifacts; stale artifacts from the restored cache are not counted.
-The 5 modules without a verified build are unfinished files of the earlier workflow:
+The new final proof-chain modules and `Blueprint.Spaces` are awaiting verification.
+The other 5 modules without a verified build are unfinished files of the earlier workflow:
 `Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
 `Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
 

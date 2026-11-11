@@ -17,7 +17,7 @@ open scoped ENNReal ContDiff ComplexConjugate
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance spacesPhysicalBandEstimatesCircleMeasure : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
 
 theorem spacesTorusPhysicalBand_analysis_bound (M : ℝ) (hM : 1 ≤ M) (k s : ℕ)
     (f dr dθ : SpacesTorusRealL2)

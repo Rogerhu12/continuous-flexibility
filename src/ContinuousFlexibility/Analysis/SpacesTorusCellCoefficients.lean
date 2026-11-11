@@ -18,7 +18,8 @@ open scoped ContDiff Topology ComplexConjugate
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance spacesTorusCellCoefficientsCircleMeasure : MeasureSpace UnitAddCircle :=
+  ⟨AddCircle.haarAddCircle⟩
 
 theorem spacesPhysicalFourierWave_quotient (n : ℤ) (j : SpacesTorusFrequency)
     (p : PolarPoint) :

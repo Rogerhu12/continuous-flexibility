@@ -20,8 +20,8 @@ open scoped ENNReal BigOperators ComplexConjugate ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
-local instance : DecidableEq SpacesTorusFrequency := Classical.decEq _
+local instance spacesPhysicalCellBandsMeasureSpace : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance spacesPhysicalCellBandsDecidableFrequency : DecidableEq SpacesTorusFrequency := Classical.decEq _
 
 def spacesPhysicalFourierSymbol (a b : ℕ) (j : SpacesTorusFrequency) : ℂ :=
   spacesUnitFourierSymbol (j 0) (1 / 6) ^ a *

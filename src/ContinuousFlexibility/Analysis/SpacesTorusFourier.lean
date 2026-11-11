@@ -20,8 +20,8 @@ open scoped ENNReal BigOperators ComplexConjugate Topology
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
-local instance : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
+local instance spacesTorusFourierMeasureSpace : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance spacesTorusFourierProbabilityMeasure : IsProbabilityMeasure (volume : Measure UnitAddCircle) :=
   inferInstanceAs (IsProbabilityMeasure AddCircle.haarAddCircle)
 
 abbrev SpacesTorus := UnitAddTorus (Fin 2)
@@ -29,7 +29,7 @@ abbrev SpacesTorusFrequency := Fin 2 → ℤ
 abbrev SpacesTorusL2 := Lp ℂ 2 (volume : Measure SpacesTorus)
 abbrev SpacesTorusCoefficients := lp (fun _ : SpacesTorusFrequency => ℂ) 2
 
-local instance : DecidableEq SpacesTorusFrequency := Classical.decEq _
+local instance spacesTorusFourierDecidableFrequency : DecidableEq SpacesTorusFrequency := Classical.decEq _
 
 /-- The actual two-variable Fourier isometry. -/
 def spacesTorusFourierEquiv : SpacesTorusL2 ≃ₗᵢ[ℂ] SpacesTorusCoefficients :=

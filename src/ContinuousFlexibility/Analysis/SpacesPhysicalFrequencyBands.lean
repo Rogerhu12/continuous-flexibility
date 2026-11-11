@@ -17,7 +17,7 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
-local instance : DecidableEq SpacesTorusFrequency := Classical.decEq _
+local instance spacesPhysicalFrequencyBandsDecidableFrequency : DecidableEq SpacesTorusFrequency := Classical.decEq _
 
 def spacesPhysicalFrequencySize (M : ℝ) (j : SpacesTorusFrequency) : ℝ :=
   max M (max (Real.pi / 3 * |(j 0 : ℝ)|) (2 * |(j 1 : ℝ)|))

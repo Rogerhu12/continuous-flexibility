@@ -19,7 +19,8 @@ open scoped ContDiff Topology ComplexConjugate
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : MeasureSpace UnitAddCircle := ⟨AddCircle.haarAddCircle⟩
+local instance spacesTorusCellDerivativesCircleMeasure : MeasureSpace UnitAddCircle :=
+  ⟨AddCircle.haarAddCircle⟩
 
 theorem spacesPhysicalFourierWave_periodic (n : ℤ) (j : SpacesTorusFrequency) :
     Function.Periodic (spacesPhysicalFourierWave n j) (0, Real.pi) := by
