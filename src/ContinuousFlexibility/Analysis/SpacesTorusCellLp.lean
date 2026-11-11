@@ -130,6 +130,22 @@ theorem spacesPhysicalCellToCylinder_ae (n : ℤ) (u : SpacesCellL2 E n) :
     exact hr hmem
   · simp only [indicator_of_notMem hmem]
 
+theorem spacesPhysicalCellToCylinder_ae_of_ae (n : ℤ) (u : SpacesCellL2 E n)
+    (f : PolarPoint → E) (hf : (u : PolarPoint → E) =ᵐ[spacesPhysicalCellMeasure n] f) :
+    (spacesPhysicalCellToCylinder E n u : PolarPoint → E) =ᵐ[materialCylinderMeasure]
+      (spacesPhysicalCellRadialSet n).indicator f := by
+  have hr : (u : PolarPoint → E) =ᵐ[
+      materialCylinderMeasure.restrict (spacesPhysicalCellRadialSet n)] f := by
+    rw [spacesPhysicalCellRadialSet, ← spacesPhysicalCellMeasure_scale n]
+    exact hf.filter_mono (Measure.ae_smul_measure_le _)
+  have hc := (ae_restrict_iff' (spacesPhysicalCellRadialSet_measurable n)).mp hr
+  filter_upwards [spacesPhysicalCellToCylinder_ae E n u, hc] with p hp hc
+  rw [hp]
+  by_cases hmem : p ∈ spacesPhysicalCellRadialSet n
+  · simp only [indicator_of_mem hmem]
+    exact hc hmem
+  · simp only [indicator_of_notMem hmem]
+
 theorem spacesPhysicalCellToCylinder_norm_le (n : ℤ) (u : SpacesCellL2 E n) :
     ‖spacesPhysicalCellToCylinder E n u‖ ≤ (6 * Real.pi) ^ (1 / 2 : ℝ) * ‖u‖ := by
   change ‖spacesLpZeroExtension materialCylinderMeasure _

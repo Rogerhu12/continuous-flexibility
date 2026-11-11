@@ -12,20 +12,19 @@ Last updated: 2026-11-11.
   even/odd projections, the physical source integral and its compact
   normalizer, the compatibility projection, height products, a reciprocal
   reduction to smooth composition, and the sequence-retraction construction.
-  The `de8fab3`, `4657b00`, and `c843e67` checkpoints passed the complete
-  CI build, including the project axiom audit. The exact physical Sobolev
-  model is proved by `isSobolevModel_canonicalSobolevModelData`: all weak
-  mixed jets have one smooth representative, the decoder is continuous
-  and linear, encoding is inverse to decoding, and every prescribed norm
-  is exact. The complete trace and right-inverse extension clause is proved
-  by `spaces_trace_split_tame`, with fixed loss 3 for both operators and a
-  standard-axiom audit. Actual physical multiplication now satisfies its
-  smooth tame clause using the given H01 calculus and interpolation.
-  Further compiled results include actual circle Fourier band analysis
-  and closed-level synthesis, normalized physical torus cell transport,
-  and finite-factor interpolation and weighted product estimates with
-  a base and loss independent of the number of factors. Concrete
-  retractions and the complete smooth composition clause remain in progress.
+  The checkpoints through `8f17342` passed the complete CI build,
+  including the project axiom audit. The exact physical Sobolev model,
+  actual smooth tame multiplication, and complete split trace with fixed
+  loss 3 are proved. The concrete circle retraction is now proved by
+  `canonicalCircleModel_tameRetraction`: its actual band series reconstructs
+  every weighted closed-graph coordinate, with analysis loss 0 and synthesis
+  loss 1. Its axiom audit lists only the three standard axioms. Further
+  compiled results include the exact physical cell Fourier coefficient
+  identities, weighted bounded-overlap localization and gluing, physical
+  frequency-band operators, and the complete finite spatial-jet expansion
+  for smooth composition. The local dominated L² curve derivative and the
+  repeated low-factor estimate are also proved. The physical retraction
+  and complete projective smooth-composition tower remain in progress.
   `Spaces` stays open until the full W02/W03 statement and CI pass.
 
 ## Target
@@ -45,13 +44,13 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 420 / 425 |
-| Modules in the root import | 376 |
-| Lines of Lean under `src/` | 98,595 |
-| Axiom audit (`lake build`, `c843e67`) | passed |
+| Lean modules compiled / total | 439 / 444 |
+| Modules in the root import | 395 |
+| Lines of Lean under `src/` | 101,090 |
+| Axiom audit (`lake build`, `8f17342`) | passed |
 | Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 427 |
+| Modules on the module system | 1 (the Challenge) of 446 |
 
 The compilation count intersects the source files in this checkpoint with their
 compiled artifacts; stale artifacts from the restored cache are not counted.
