@@ -27,7 +27,9 @@ theorem abs_radial_pairing_le_sqrt_squares {D : ReferenceData} (hab : D.a ≤ D.
   have hf2 := n01a_memLp_abs_of_integrable_sq hf
   have hg2 := n01a_memLp_abs_of_integrable_sq hg
   have hprod : Integrable (fun p => |f p * g p|) (radialPhysicalMeasure D) := by
-    simpa only [Pi.mul_apply, abs_mul] using hf2.integrable_mul hg2
+    have hmul := hf2.integrable_mul hg2
+    change Integrable (fun p => |f p| * |g p|) (radialPhysicalMeasure D) at hmul
+    simpa only [abs_mul] using hmul
   have hraw := abs_radial_pairing_le_integral_abs hab hprod
     (ψ := fun _ => 1) (B := 1) zero_le_one (fun _ => by norm_num)
   have hholder := n01a_abs_integral_mul_le_sqrt_sq hf2 hg2

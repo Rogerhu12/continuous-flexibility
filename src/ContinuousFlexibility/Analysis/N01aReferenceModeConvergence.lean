@@ -32,14 +32,13 @@ theorem n01a_tendsto_integral_mul_of_integral_sq {α : Type*} [MeasurableSpace �
   have heq (n : ℕ) :
       (∫ x, f n x * κ x ∂μ) - (∫ x, g x * κ x ∂μ) =
         ∫ x, (f n x - g x) * κ x ∂μ := by
-    rw [← integral_sub ((hf n).integrable_mul hκ) (hg.integrable_mul hκ)]
-    apply integral_congr_ae
-    exact Eventually.of_forall fun x => (sub_mul _ _ _).symm
+    simpa only [Pi.mul_apply, sub_mul] using
+      (integral_sub ((hf n).integrable_mul hκ) (hg.integrable_mul hκ)).symm
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
   simp only [Real.norm_eq_abs, heq]
   apply squeeze_zero' (Eventually.of_forall fun n => abs_nonneg _)
     (Eventually.of_forall fun n => n01a_abs_integral_mul_le_sqrt_sq ((hf n).sub hg) hκ)
-  simpa only [Real.sqrt_zero, zero_mul] using
+  simpa only [Pi.sub_apply, Real.sqrt_zero, zero_mul] using
     hlim.sqrt.mul_const (Real.sqrt (∫ x, κ x ^ 2 ∂μ))
 
 theorem continuousOn_memLp_two_radialCore {D : ReferenceData} {f : ℝ → ℝ}
