@@ -68,22 +68,39 @@ private theorem solveSubspaceProductEquiv_apply (z : W × V) :
         (fun n => subLevel V n) (subBond V)
         (subspaceEquiv (E := E) (e := e) W hW z.1,
           subspaceEquiv (E := F) (e := f) V hV z.2) := by
-  dsimp +instances only [solveSubspaceProductEquiv, SolveSubspaceProductLevel,
+  dsimp +instances +unfoldPartialApp only [solveSubspaceProductEquiv, SolveSubspaceProductLevel,
     solveSubspaceProductBond, solveSubspaceProductNormedAddCommGroup,
     solveSubspaceProductNormedSpace]
-  rw [ContinuousLinearEquiv.trans_apply, ContinuousLinearEquiv.prodCongr_apply]
+  exact (ContinuousLinearEquiv.trans_apply
+    ((subspaceEquiv (E := E) (e := e) W hW).prodCongr
+      (subspaceEquiv (E := F) (e := f) V hV))
+    (prodEquiv (fun k => subLevel W k) (subBond W)
+      (fun k => subLevel V k) (subBond V)) z).trans
+    (congrArg (prodEquiv (fun k => subLevel W k) (subBond W)
+      (fun k => subLevel V k) (subBond V))
+      (ContinuousLinearEquiv.prodCongr_apply
+        (subspaceEquiv (E := E) (e := e) W hW)
+        (subspaceEquiv (E := F) (e := f) V hV) z))
 
 set_option diagnostics true in
 private theorem solveSubspaceProductEquiv_grading (n : ℕ) (z : W × V) :
     gradedSeminorm (SolveSubspaceProductLevel W V) (solveSubspaceProductBond W V) n
         (solveSubspaceProductEquiv (E := E) (F := F) (e := e) (f := f) W V hW hV z) =
       max (gradedSeminorm E e n z.1.val) (gradedSeminorm F f n z.2.val) := by
-  dsimp +instances only [solveSubspaceProductEquiv, SolveSubspaceProductLevel,
+  dsimp +instances +unfoldPartialApp only [solveSubspaceProductEquiv, SolveSubspaceProductLevel,
     solveSubspaceProductBond, solveSubspaceProductNormedAddCommGroup,
     solveSubspaceProductNormedSpace]
-  rw [ContinuousLinearEquiv.trans_apply, ContinuousLinearEquiv.prodCongr_apply,
-    gradedSeminorm_prodEquiv,
-    gradedSeminorm_subspaceEquiv, gradedSeminorm_subspaceEquiv]
+  have hsource := gradedSeminorm_subspaceEquiv (E := E) (e := e) W hW z.1 n
+  have hcircle := gradedSeminorm_subspaceEquiv (E := F) (e := f) V hV z.2 n
+  have hprod := gradedSeminorm_prodEquiv
+    (fun k => subLevel W k) (subBond W) (fun k => subLevel V k) (subBond V) n
+    (subspaceEquiv (E := E) (e := e) W hW z.1)
+    (subspaceEquiv (E := F) (e := f) V hV z.2)
+  exact (congrArg (fun v => gradedSeminorm
+      (SolveSubspaceProductLevel W V) (solveSubspaceProductBond W V) n v)
+      (solveSubspaceProductEquiv_apply (E := E) (F := F) (e := e) (f := f)
+        W V hW hV z)).trans
+    (hprod.trans (congrArg₂ max hsource hcircle))
 
 attribute [irreducible] solveSubspaceProductEquiv
 
@@ -158,7 +175,7 @@ theorem solveResidualEquiv_grading (hS : IsPhysicalSpaces D T S)
     (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
     S.Q.toLinearMap.ker (evenCircleSubmodule S) S.Q.isClosed_ker
     (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) n y
-  dsimp +instances only [solveResidualEquiv, SolveResidualLevel, solveResidualBond,
+  dsimp +instances +unfoldPartialApp only [solveResidualEquiv, SolveResidualLevel, solveResidualBond,
     solveResidualLevelNormedAddCommGroup, solveResidualLevelNormedSpace,
     PhysicalSpacesData.sourceGrading, SobolevModelData.grading, CircleModelData.grading]
   simpa only [Seminorm.comp_apply, Submodule.subtype_apply] using h
