@@ -33,6 +33,8 @@ run_cmd do
   let endpoint ← collectAxioms `FlexibleSphere.exists_closedBending
   logInfo m!"axioms of FlexibleSphere.exists_closedBending: {endpoint}"
 
+#print axioms ContinuousFlexibility.Blueprint.R06a
+
 -- The external-input tool has no blueprint node: audit its actual endpoints.
 #print axioms ContinuousFlexibility.Analysis.exists_halfLineSobolevExtension
 #print axioms ContinuousFlexibility.Analysis.exists_intervalSobolevExtension
