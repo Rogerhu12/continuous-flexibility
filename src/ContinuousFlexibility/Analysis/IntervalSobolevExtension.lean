@@ -83,12 +83,18 @@ def intervalRightCutoffCore (L : ℝ) (hL : 0 < L) :
 @[simp] theorem intervalLeftCutoffCore_apply (L : ℝ) (hL : 0 < L)
     (f : IntervalSobolevCore F L hL) (x : ℝ) :
     intervalLeftCutoffCore L hL f x = intervalSobolevCutoff L hL x • f x :=
-  cutoffHalfLineCoreLinear_apply _ _ _ _ _ f x
+  cutoffHalfLineCoreLinear_apply hL (show 2 * L / 3 < L by linarith)
+    (contDiff_intervalSobolevCutoff L hL)
+    (fun y hy => intervalSobolevCutoff_zero L hL hy)
+    (intervalSobolevCutoff_deriv_bounded L hL) f x
 
 @[simp] theorem intervalRightCutoffCore_apply (L : ℝ) (hL : 0 < L)
     (f : IntervalSobolevCore F L hL) (x : ℝ) :
     intervalRightCutoffCore L hL f x = intervalSobolevRightCutoff L hL x • f x :=
-  cutoffHalfLineCoreLinear_apply _ _ _ _ _ f x
+  cutoffHalfLineCoreLinear_apply hL (show 2 * L / 3 < L by linarith)
+    (contDiff_intervalSobolevRightCutoff L hL)
+    (fun y hy => intervalSobolevRightCutoff_zero L hL hy)
+    (intervalSobolevRightCutoff_deriv_bounded L hL) f x
 
 /-- A single interval extension, assembled from the same half-line
 operator in the two orientations. -/
@@ -131,13 +137,20 @@ theorem intervalSeeleyCoreExtension_bound (S : SeeleyData ι)
           (intervalLeftCutoffCore L hL f)‖ ≤
         cutoffSobolevBound (intervalSobolevCutoff_deriv_bounded L hL) k *
           ‖sobolevCoreJet F (Icc 0 L) measurableSet_Icc (uniqueDiffOn_Icc hL) k f‖ :=
-    cutoffHalfLineCoreLinear_bound hL _ _ _ _ k f
+    cutoffHalfLineCoreLinear_bound hL (show 2 * L / 3 < L by linarith)
+      (contDiff_intervalSobolevCutoff L hL)
+      (fun y hy => intervalSobolevCutoff_zero L hL hy)
+      (intervalSobolevCutoff_deriv_bounded L hL) k f
   have hright :
       ‖sobolevCoreJet F (Ici 0) measurableSet_Ici (uniqueDiffOn_Ici 0) k
           (intervalRightCutoffCore L hL (intervalSobolevReflect L hL f))‖ ≤
         cutoffSobolevBound (intervalSobolevRightCutoff_deriv_bounded L hL) k *
           ‖sobolevCoreJet F (Icc 0 L) measurableSet_Icc (uniqueDiffOn_Icc hL) k f‖ := by
-    exact (cutoffHalfLineCoreLinear_bound hL _ _ _ _ k (intervalSobolevReflect L hL f)).trans_eq
+    exact (cutoffHalfLineCoreLinear_bound hL (show 2 * L / 3 < L by linarith)
+      (contDiff_intervalSobolevRightCutoff L hL)
+      (fun y hy => intervalSobolevRightCutoff_zero L hL hy)
+      (intervalSobolevRightCutoff_deriv_bounded L hL) k
+      (intervalSobolevReflect L hL f)).trans_eq
       (congrArg (fun r => cutoffSobolevBound
         (intervalSobolevRightCutoff_deriv_bounded L hL) k * r)
         (norm_intervalSobolevReflect_jet L hL k f))

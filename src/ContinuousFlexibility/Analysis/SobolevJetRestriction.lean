@@ -85,10 +85,9 @@ def sobolevRestriction (s : Set ℝ) (hs : MeasurableSet s) (hu : UniqueDiffOn �
     sobolevRestriction F s hs hu k
         (coreToSobolevJet F univ MeasurableSet.univ uniqueDiffOn_univ k f) =
       coreToSobolevJet F s hs hu k (sobolevCoreRestriction F s hs hu f) := by
-  apply sobolevJetExtension_apply
-    (C := 1)
-  intro g
-  simpa only [one_mul] using norm_sobolevCoreJet_restrict_le F s hs hu k g
+  unfold sobolevRestriction
+  exact sobolevJetExtension_apply F (sobolevCoreRestriction F s hs hu) k (C := 1)
+    (fun g ↦ by simpa only [one_mul] using norm_sobolevCoreJet_restrict_le F s hs hu k g) f
 
 theorem norm_sobolevRestriction_le (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (k : ℕ) : ‖sobolevRestriction F s hs hu k‖ ≤ 1 := by
@@ -107,9 +106,10 @@ theorem coreToSobolevJet_congr (s : Set ℝ) (hs : MeasurableSet s)
   apply PiLp.ext
   intro j
   rw [sobolevCoreJet_apply, sobolevCoreJet_apply]
-  apply MemLp.toLp_congr
-  filter_upwards [ae_restrict_mem hs] with x hx
-  exact iteratedDerivWithin_congr hfg hx
+  unfold sobolevCoreDerivative
+  exact MemLp.toLp_congr (f.property.2 j.val) (g.property.2 j.val) (by
+    filter_upwards [ae_restrict_mem hs] with x hx
+    exact iteratedDerivWithin_congr hfg hx)
 
 /-- A bounded extension of the smooth core that retains values on the domain
 is a genuine right inverse of completed Sobolev restriction. -/
