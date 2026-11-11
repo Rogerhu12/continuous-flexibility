@@ -134,7 +134,7 @@ theorem inverse_morse_weighted_fixed_loss
   have hcenterLoss : lossCost (innerModelChainPiece (innerMorseInnerCenter K)) = 1 := by
     dsimp only [lossCost]
     rw [innerMorseInnerPieceIndex_model, innerMorseInnerModelIndex_center,
-      innerCoefficientLoss, div_self (exp_pos (radialQ N)).ne', one_rpow]
+      innerCoefficientLoss, radialE, div_self (exp_pos (radialQ N)).ne', one_rpow]
   have hcenterW : ∀ sign, 1 ≤
       lossCost (innerModelChainPiece (innerMorseInnerCenter K)) *
         ratio sign (innerModelChainPiece (innerMorseInnerCenter K)) *

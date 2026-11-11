@@ -237,7 +237,7 @@ theorem retainedMorseActualChain_signed_inverse_bound
 
   have hE (m : ℕ) : 1 ≤ radialE m ^ (36 : ℝ) := by
     rw [rpow_ofNat]
-    exact one_le_pow₀ (one_le_exp.mpr (radialQ_nonneg m))
+    exact one_le_pow₀ (one_le_exp (radialQ_nonneg m))
   have hDcentral : Dc ≤ d := by
     dsimp only [d, retainedMorseDirichletCoefficient]
     linarith only [hDM]

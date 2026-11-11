@@ -118,7 +118,7 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
   have he : 1 ≤ e := by
     dsimp only [e]
     rw [rpow_ofNat]
-    exact one_le_pow₀ (one_le_exp.mpr (radialQ_nonneg _))
+    exact one_le_pow₀ (one_le_exp (radialQ_nonneg _))
   have hcoeff : 0 ≤ retainedMorseDirichletCoefficient Dc CM := by
     unfold retainedMorseDirichletCoefficient
     positivity
