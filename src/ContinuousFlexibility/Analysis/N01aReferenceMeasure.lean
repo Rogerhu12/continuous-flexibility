@@ -22,7 +22,7 @@ theorem radialPhysicalMeasure_eq_prod_Ioc (D : ReferenceData) :
     radialPhysicalMeasure D =
       (volume.restrict (Ioc D.a D.b)).prod
         (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := by
-  rw [radialPhysicalMeasure_eq_prod, radialCore, Measure.restrict_Ioo_eq_restrict_Ioc]
+  rw [radialPhysicalMeasure_eq_prod, radialCore, restrict_Ioo_eq_restrict_Ioc]
 
 instance radialPhysicalMeasure_isFiniteMeasure (D : ReferenceData) :
     IsFiniteMeasure (radialPhysicalMeasure D) := by

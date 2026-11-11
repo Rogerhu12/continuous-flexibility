@@ -46,13 +46,15 @@ theorem n01a_sum_localizer_squares_le (s : Finset ι) (χ : ι → ℝ)
     (∑ i ∈ s, (χ i * a) ^ 2) ≤ ((∑ i ∈ s, χ i) * a) ^ 2 := by
   have h := mul_le_mul_of_nonneg_right
     (Finset.sum_sq_le_sq_sum_of_nonneg (s := s) (fun i _ => hχ i)) (sq_nonneg a)
-  simpa only [Finset.sum_mul, mul_pow] using h
+  simp only [mul_pow]
+  simpa only [Finset.sum_mul] using h
 
 theorem n01a_square_sum_localizer_le_card (s : Finset ι) (χ : ι → ℝ) (a : ℝ) :
     ((∑ i ∈ s, χ i) * a) ^ 2 ≤ (s.card : ℝ) * ∑ i ∈ s, (χ i * a) ^ 2 := by
   have h := mul_le_mul_of_nonneg_right
     (sq_sum_le_card_mul_sum_sq (s := s) (f := χ)) (sq_nonneg a)
-  simpa only [Finset.sum_mul, mul_pow, mul_assoc] using h
+  simp only [mul_pow]
+  simpa only [mul_assoc, Finset.sum_mul] using h
 
 /-- The number of active fine localizers, rather than the fiber size, is the
 constant in the square estimate. -/
@@ -109,7 +111,13 @@ theorem n01aLocalSquare_nonneg (χ : ι → Ω → ℝ) (F : Ω → ℝ) (i : ι
 theorem n01a_localized_square_aemeasurable {χ F : Ω → ℝ}
     (hχ : AEMeasurable χ μ) (hF : AEMeasurable (fun x => F x ^ 2) μ) :
     AEMeasurable (fun x => (χ x * F x) ^ 2) μ := by
-  simpa only [mul_pow] using (hχ.pow_const (2 : ℕ)).mul hF
+  have he : ((fun x => χ x ^ 2) * (fun x => F x ^ 2) : Ω → ℝ) =
+      (fun x => χ x ^ 2 * F x ^ 2) := by
+    funext x
+    simp only [Pi.mul_apply]
+  have hm := (hχ.pow_const (2 : ℕ)).mul hF
+  rw [he] at hm
+  simpa only [mul_pow] using hm
 
 theorem n01aCoarseLocalizer_aemeasurable (σ : ι → κ)
     (hσ : ∀ j, {i | σ i = j}.Finite) {χ : ι → Ω → ℝ}

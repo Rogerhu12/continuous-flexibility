@@ -25,7 +25,7 @@ theorem n01aOpticalRadicand_lipschitz {q : ℝ → ℝ} {l h K : ℝ}
   simpa only [Real.norm_eq_abs] using
     Convex.norm_image_sub_le_of_norm_deriv_le hq
       (fun r hr => by simpa only [Real.norm_eq_abs] using hbound r hr)
-      convex_Icc hx hy
+      (convex_Icc l h) hx hy
 
 /-- A radicand peak yields an interval strictly inside both turning points.
 Only its actual first derivative and its endpoint values enter the estimate. -/
@@ -79,7 +79,9 @@ theorem exists_n01aOpticalPeak {q : ℝ → ℝ} {l h L δ : ℝ}
     (fun r hr => Real.sqrt_le_sqrt (hex r hr).le)
   have hsqrt : Real.sqrt (4 * δ) = 2 * Real.sqrt δ := by
     rw [Real.sqrt_mul (by norm_num : (0 : ℝ) ≤ 4)]
-    norm_num
+    rw [show Real.sqrt (4 : ℝ) = 2 from by
+      rw [show (4 : ℝ) = (2 : ℝ) ^ 2 by norm_num,
+        Real.sqrt_sq (by norm_num : (0 : ℝ) ≤ 2)]]
   rw [intervalIntegral.integral_const, smul_eq_mul, hsqrt] at hupper
   have hupperL := mul_le_mul_of_nonneg_right hwidth
     (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2) (Real.sqrt_nonneg δ))

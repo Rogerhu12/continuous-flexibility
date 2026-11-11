@@ -46,8 +46,8 @@ private theorem n01a_hasDerivAt_fixed_intervalIntegral
     (Eventually.of_forall fun θ _ y _ => hd y θ)
   exact h.2
 
-/-- Every radial jet can be differentiated through its actual angular mode. -/
 set_option backward.isDefEq.respectTransparency false in
+/-- Every radial jet can be differentiated through its actual angular mode. -/
 theorem hasDerivAt_referenceMode_mixedDerivative {u : PolarPoint → ℝ}
     (hu : ContDiff ℝ ∞ u) (n j : ℕ) (r : ℝ) :
     HasDerivAt (referenceMode (mixedDerivative n 0 u) j)

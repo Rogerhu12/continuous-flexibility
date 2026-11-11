@@ -30,7 +30,7 @@ def n01aNegativeComponentsMeeting {D : ReferenceData} (hD : RadialProfileGeometr
     (hD : RadialProfileGeometry D) {a b : ℝ}
     (ha : a ∈ radialCore D) (hb : b ∈ radialCore D) (J : N01aNegativeComponent D) :
     J ∈ n01aNegativeComponentsMeeting hD ha hb ↔ (J.interval ∩ Icc a b).Nonempty := by
-  simp only [n01aNegativeComponentsMeeting, Set.Finite.mem_toFinset, Set.mem_setOf_eq]
+  simp only [n01aNegativeComponentsMeeting, Set.Finite.mem_toFinset, Set.mem_ofPred_eq]
 
 private theorem logDerivative_continuousOn {D : ReferenceData}
     (hD : RadialProfileGeometry D) {a b : ℝ}
@@ -167,9 +167,9 @@ theorem n01a_totalVariation_le_component_drops_of_cover {D : ReferenceData}
       Real.log (D.w b) - Real.log (D.w a) +
         2 * ∑ J ∈ S, (Real.log (D.w J.left) - Real.log (D.w J.right)) := by
   rw [n01a_totalVariation_eq_log_difference_add_negativePart hD ha hb hab]
-  exact add_le_add_left (mul_le_mul_of_nonneg_left
+  exact add_le_add le_rfl (mul_le_mul_of_nonneg_left
     (n01a_negativePart_integral_le_component_drops hD ha hb hab S hcover)
-      (show (0 : ℝ) ≤ 2 by norm_num)) _
+      (show (0 : ℝ) ≤ 2 by norm_num))
 
 /-- The finite family of all intersecting components gives the canonical total-variation bound. -/
 theorem n01a_totalVariation_le_component_drops {D : ReferenceData}
