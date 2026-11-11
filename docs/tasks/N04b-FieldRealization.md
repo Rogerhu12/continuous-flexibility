@@ -5,7 +5,8 @@
 Realize a single cumulative N01--N03 construction whose actual corrected
 coefficient fields are smooth on the physical annulus, periodic in the
 angle, have positive radial coefficient, and are strictly hyperbolic on
-every entire negative component.
+every entire negative component. At the reference state, its actual stored
+minus flow must equal the radial optical flow on each closed component.
 
 Prove `ContinuousFlexibility.Blueprint.N04bFieldRealization` in
 `src/ContinuousFlexibility/Blueprint/N04b/FieldRealization.lean`:
@@ -36,6 +37,10 @@ for regularity of an arbitrary stored coefficient field.
   representative theorem does not close the task.
 - Strict hyperbolicity is proved throughout each negative component,
   including outside the optical correction collars.
+- The retained reference flow is proved equal to
+  `θ - ∫ s in C.left m..r, Real.sqrt (-deriv D.w s / (s * D.w s))`
+  throughout the closed component. This is a property of the explicitly
+  constructed correction, before canonical coordinates are introduced.
 - All modules compile and full CI is green after merging current main.
 
 ## Source

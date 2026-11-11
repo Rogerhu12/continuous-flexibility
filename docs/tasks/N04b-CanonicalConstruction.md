@@ -3,7 +3,8 @@
 ## Problem
 
 Construct the actual canonical atlas of a corrected field satisfying the
-cumulative N01--N03 properties and `N04bFieldRegularity`.
+cumulative N01--N03 properties and `N04bFieldRegularity`, including the
+explicit correction's radial optical flow at the reference state.
 
 Prove `ContinuousFlexibility.Blueprint.N04bCanonicalConstruction` in
 `src/ContinuousFlexibility/Blueprint/N04b/CanonicalConstruction.lean`.
@@ -19,7 +20,9 @@ Construct travel coordinates from the actual corrected characteristic
 flows, split each negative component at the actual travel level
 `σ = T/2`, regularize the root coordinates, and choose the actual density
 height gauge. Keep the canonical intervals and their common radius
-independent of the state. The physical negative halves may move.
+independent of the state. The physical negative halves may move. Derive their reference radial
+metadata from the actual optical half-travel cut; the arithmetic midpoint
+is not used as a travel identity.
 
 Prove the current planar partition, the actual smooth closed inverse
 identities, normalization, periodicity and reflection identities, the

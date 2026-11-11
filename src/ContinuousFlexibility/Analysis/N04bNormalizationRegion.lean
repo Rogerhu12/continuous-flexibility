@@ -39,13 +39,9 @@ theorem n04b_referenceColumn_support_normalizationRegion
     {D : ReferenceData} (hgeom : RadialProfileGeometry D)
     (hborder : RadialTrueBorder D) :
     Function.support (referenceColumn D) ⊆ n04bNormalizationRegion D := by
-  have hdw : Continuous (deriv D.w) :=
-    ((contDiff_infty_iff_deriv.mp hgeom.2.2.1.1).2).continuous
   have hχ : tsupport D.chi ⊆ {r : ℝ | 0 ≤ deriv D.w r} := by
-    apply closure_minimal
-    · intro r hr
-      exact (hborder.2.2.1 hr).2.le
-    · exact isClosed_le continuous_const hdw
+    intro r hr
+    exact (hborder.2.2.1 hr).2.le
   have hzero : {r : ℝ | deriv D.w r < 0} ⊆
       {r : ℝ | referenceColumn D r = 0} := by
     intro r hr

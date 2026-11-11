@@ -39,6 +39,13 @@ structure N04bFieldRegularity (D : ReferenceData) (S : PhysicalSpacesData)
   positive_a :
     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       ∀ p ∈ annularOpen D, 0 < (L.coefficients z).a p
+  /-- The explicitly constructed correction is the actual radial optical flow
+  at the reference state. This is a raw construction property, proved before
+  introducing any canonical chart. -/
+  reference_flow :
+    ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
+      L.minusFlow (C.referenceState, 0) m r θ =
+        θ - ∫ s in C.left m..r, Real.sqrt (-deriv D.w s / (s * D.w s))
   negative_discriminant :
     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       ∀ m, ∀ p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ),

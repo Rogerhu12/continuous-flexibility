@@ -7,6 +7,8 @@ import ContinuousFlexibility.Analysis.N04bFieldRegularity
 Retain one complete N01--N03 construction and realize its actual corrected
 coefficients with spatial smoothness, angular periodicity, a positive radial
 coefficient and strict hyperbolicity on each entire negative component.
+The explicit correction also retains the actual radial optical flow at
+the reference state on every closed component.
 The output does not contain canonical coordinates or assume their existence.
 
 The existential witnesses may be chosen again. A proof cannot silently

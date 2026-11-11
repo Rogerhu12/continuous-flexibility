@@ -11,7 +11,8 @@ The resulting domains may depend on the state; the canonical intervals
 and the cut radius remain fixed.
 
 The input consists only of the cumulative N01--N03 construction and raw
-coefficient regularity and type. Every chart, closed inverse, partition,
+coefficient regularity, type, and its actual radial reference flow.
+Every chart, closed inverse, partition,
 operator identity, cut transmission identity and positive divided
 difference is a conclusion.
 Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 992--1303.

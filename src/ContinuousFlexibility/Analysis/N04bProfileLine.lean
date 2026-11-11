@@ -97,7 +97,7 @@ private theorem n04b_control_zero_other
     (hC : controlGeometryConditions D S C) {m n : ℕ} (hmn : n ≠ m)
     {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) : C.control n r = 0 := by
   by_contra hn
-  have hnr : r ∈ Ioo (C.left n) (C.right n) := (hC.2.2.2.2.2.1 n).2.2 hn
+  have hnr : r ∈ Ioo (C.left n) (C.right n) := hC.support_subset n hn
   exact Set.disjoint_left.mp (hC.2.2.1 n m hmn) hnr hr
 
 theorem n04b_stateProfile_on_component
@@ -108,7 +108,7 @@ theorem n04b_stateProfile_on_component
     stateProfile D S C x r = D.w r * Real.exp (stateKappa S x m * C.control m r) := by
   have hborder : D.chi r = 0 := by
     by_contra hχ
-    have hp : 0 < deriv D.w r := (hN.1.2.2.2.1.2.2.1 hχ).2
+    have hp : 0 < deriv D.w r := (RadialTrueBorder.support_subset hN.1.2.2.2.1 hχ).2
     have hn := hN.2.2.2.1.2.2.2.1 m r hr
     exact (not_lt_of_ge hp.le) hn
   have hsum : (∑' n, stateKappa S x n * C.control n r) =
