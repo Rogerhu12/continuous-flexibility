@@ -159,6 +159,12 @@ theorem coupledRecoveryLinear_apply
   simp only [coupledRecoveryLinear, LinearMap.prod_apply, Function.prod_apply,
     LinearMap.comp_apply, LinearMap.fst_apply, LinearMap.snd_apply]
 
+private theorem linear_restriction_of_mean
+    {E F : Type*} [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
+    (L : E →ₗ[ℝ] F) (q : ℝ) (g h : E) (a : F)
+    (he : a + q • L h = L g) : L (g - q • h) = a := by
+  rw [L.map_sub, L.map_smul, ← he, add_sub_cancel_right]
+
 /-- The control is recovered from its mean equation, rather than from an
 unjustified extension of every base-space vector to the smooth circle space. -/
 theorem coupledRecoveredKappaLinear_restriction
@@ -183,12 +189,22 @@ theorem coupledRecoveredKappaLinear_restriction
         (controlSolution_mean_equation B G N z hN (fun u => (hJ u).2) y)
   have hinput : B.restriction (coupledRecoveryInputLinear B G N z y) =
       B.J z (controlSolution S B G N z y) := by
-    rw [coupledRecoveryInputLinear_apply, map_sub, map_smul, ← controlMeanRow_apply,
-      ← hmean, add_sub_cancel_right]
-  rw [coupledRecoveredKappaLinear_apply,
-    coupledInverseControlLift_restriction hS B z hrestriction hdiag
-      (fun u => (hJ u).2) hlo, hinput]
-  exact (hJ _).1
+    have hm : B.J z (controlSolution S B G N z y) +
+        z.2 • B.restriction (B.heightRow z (coupledRecoveredHeightLinear B G N z y).1) =
+          B.restriction y.2.val :=
+      (congrArg (fun a : ControlBanach => B.J z (controlSolution S B G N z y) + z.2 • a)
+        (controlMeanRow_apply B z (coupledRecoveredHeightLinear B G N z y).1)).symm.trans hmean
+    exact (congrArg (fun u : CircleSpace S => B.restriction u)
+      (coupledRecoveryInputLinear_apply B G N z y)).trans
+        (linear_restriction_of_mean B.restriction.toLinearMap z.2 y.2.val
+          (B.heightRow z (coupledRecoveredHeightLinear B G N z y).1)
+          (B.J z (controlSolution S B G N z y)) hm)
+  have hlift := coupledInverseControlLift_restriction hS B z hrestriction hdiag
+    (fun u => (hJ u).2) hlo (coupledRecoveryInputLinear B G N z y)
+  exact (congrArg (fun u : CircleSpace S => B.restriction u)
+    (coupledRecoveredKappaLinear_apply hS B G N z hlo y)).trans
+      (hlift.trans ((congrArg (fun u : ControlBanach => B.JInverse z u) hinput).trans
+        (hJ (controlSolution S B G N z y)).1))
 
 /-- The pointwise equations of N09, written once for the recovered linear
 map and for its total guarded representative. -/
@@ -228,6 +244,7 @@ theorem coupledRecoveryLinear_equations
   have hJ := h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
   let hM := hS.2.1 (3 / 4 : ℝ)
   let η := (coupledRecoveredHeightLinear B G N z y).1
+  let μ : ℝ := (coupledRecoveredHeightLinear B G N z y).2
   let κ := coupledRecoveredKappaLinear hM B G N z hlo y
   let f := y.2.val - z.2 • B.heightRow z η - B.circleColumn z κ
   have hκ : B.restriction κ = controlSolution S B G N z y :=
@@ -254,11 +271,16 @@ theorem coupledRecoveryLinear_equations
       ((coupledInverseControlLift_constant hM (B.diagonal z) hlo
         (coupledRecoveryInputLinear B G N z y) m θ φ).trans
           (congrArg (fun q => (S.circle (3 / 4 : ℝ)).decode q m φ) he).symm)
-  rw [CoupledRecoveryEquations, coupledRecoveryLinear_apply,
-    coupledRecoveryRemainderLinear_apply]
-  refine ⟨⟨hκconstant, hchart⟩, hκ, ?_, hf, rfl, ?_⟩
-  · exact coupledRecoveredHeightLinear_apply B G N z y
-  · exact congrArg (S.circle (3 / 4 : ℝ)).decode hinverse.1
+  have hpoint : CoupledRecoveryEquations S R B G N z y
+      (η, (μ, (κ, R.chartIncrement z (R.inverse f)))) :=
+    ⟨⟨hκconstant, hchart⟩, hκ, coupledRecoveredHeightLinear_apply B G N z y,
+      hf, rfl, congrArg (S.circle (3 / 4 : ℝ)).decode hinverse.1⟩
+  have he : coupledRecoveryLinear hM R B G N z hlo y =
+      (η, (μ, (κ, R.chartIncrement z (R.inverse f)))) :=
+    (coupledRecoveryLinear_apply hM R B G N z hlo y).trans
+      (congrArg (fun u : CircleSpace S => (η, (μ, (κ, R.chartIncrement z (R.inverse u)))))
+        (coupledRecoveryRemainderLinear_apply hM B G N z hlo y))
+  exact he.symm ▸ hpoint
 
 section TotalRepresentative
 

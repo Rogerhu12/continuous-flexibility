@@ -81,6 +81,12 @@ theorem coupledConstantCircleGrading_withSeminorms (hM : IsCircleModel T γ M) :
   (Topology.IsInducing.subtypeVal).withSeminorms
     (f := (coupledConstantCircleSubmodule hM).subtype) (withSeminorms_graded _ _)
 
+theorem coupled_circleAngularMeanProjection_grading_le
+    (hM : IsCircleModel T γ M) (n : ℕ) (u : M.Space) :
+    M.grading n (circleAngularMeanProjection hM u) ≤ M.grading n u := by
+  change M.grading n (circleAngularMeanLinear hM u) ≤ M.grading n u
+  exact circleAngularMeanLinear_grading_le hM n u
+
 theorem coupledConstantCircleProjection_isTame (hM : IsCircleModel T γ M) :
     IsTameLinear M.grading (coupledConstantCircleGrading hM)
       (coupledConstantCircleProjection hM).toLinearMap 0 0 := by
@@ -89,7 +95,7 @@ theorem coupledConstantCircleProjection_isTame (hM : IsCircleModel T γ M) :
   simpa only [Nat.add_zero, NNReal.coe_one, one_mul, coupledConstantCircleGrading,
     Seminorm.comp_apply, Submodule.subtype_apply, ContinuousLinearMap.coe_coe,
     coupledConstantCircleProjection_val] using
-    circleAngularMeanLinear_grading_le hM n u
+    coupled_circleAngularMeanProjection_grading_le hM n u
 
 theorem coupledConstantCircleSubtype_isTame (hM : IsCircleModel T γ M) :
     IsTameLinear (coupledConstantCircleGrading hM) M.grading

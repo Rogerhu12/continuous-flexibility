@@ -104,9 +104,20 @@ theorem coupled_scalarResidualField_add_chartDirection
     (x : AnnularState S) (ψ : CircleSpace S) (q t : ℝ) :
     scalarResidualField D S C (x + (coupledScalarAction (E := AnnularState S) t (0, (0, (0, ψ)))), q) =
       scalarResidualField D S C (x, q) := by
-  simp only [scalarResidualField, stateRadialHeight, stateProfile, stateKappa,
-    stateU, Prod.fst_add, Prod.snd_add, coupledScalarAction_fst, coupledScalarAction_snd,
-    coupledScalarAction_zero, add_zero]
+  have hprofile :
+      stateProfile D S C (x + coupledScalarAction (E := AnnularState S) t (0, (0, (0, ψ)))) =
+        stateProfile D S C x := by
+    funext r
+    simp only [stateProfile, stateKappa, Prod.fst_add, Prod.snd_add,
+      coupledScalarAction_fst, coupledScalarAction_snd, coupledScalarAction_zero, add_zero]
+  have hheight :
+      stateRadialHeight D S C
+        (x + coupledScalarAction (E := AnnularState S) t (0, (0, (0, ψ)))) =
+      stateRadialHeight D S C x := by
+    funext r
+    simp only [stateRadialHeight, hprofile]
+  simp only [scalarResidualField, hprofile, hheight, stateU, Prod.fst_add,
+    coupledScalarAction_fst, coupledScalarAction_zero, add_zero]
 
 private theorem coupled_scalarResidualField_sector_chart_line
     (z : StateDirections S × ℝ) (ψ : CircleSpace S) (hψ : IsOddCircle S ψ) (t : ℝ) :

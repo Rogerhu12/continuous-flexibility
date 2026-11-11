@@ -45,8 +45,19 @@ private theorem coupled_circle_composition_term_local_bound
             t.evaluate (M.decode v m) (M.decode ψ m) (fun i => M.decode (w i) m) θ| ≤
           C * (T.M (T.sample m))⁻¹ *
             coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) := by
-  obtain ⟨base, loss, hterm⟩ :=
-    coupled_circle_composition_term_one_high hT hsample hγ hM hI
+  classical
+  have hexists := coupled_circle_composition_term_one_high hT hsample hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hterm : ∀ (k : ℕ) (t : CoupledCircleCompositionTerm k) (c s : ℕ),
+      t.order + c ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ (v ψ : M.Space) (w : Fin k → M.Space) (m : ℕ) (θ : ℝ),
+        |(T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+            t.evaluate (M.decode v m) (M.decode ψ m) (fun i => M.decode (w i) m) θ| ≤
+          C * (T.M (T.sample m))⁻¹ *
+            ∑ i, M.grading (s + loss) (t.factorFamily v ψ w i) *
+              ∏ j ∈ Finset.univ.erase i, M.grading base (t.factorFamily v ψ w j) :=
+    hexists.choose_spec.choose_spec
   refine ⟨base, loss, fun k t c s ht R hR => ?_⟩
   obtain ⟨A, hA, hbound⟩ := hterm k t c s ht
   let B : ℝ := ((t.baseFactors : ℝ) + 1) * R ^ t.baseFactors
@@ -85,8 +96,19 @@ theorem coupled_circle_composition_jet_tame
               (θ + M.decode ψ m θ) * ∏ i, M.decode (w i) m θ) θ| ≤
           C * (T.M (T.sample m))⁻¹ *
             coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) := by
-  obtain ⟨base, loss, hterm⟩ :=
-    coupled_circle_composition_term_local_bound hT hsample hγ hM hI
+  classical
+  have hexists := coupled_circle_composition_term_local_bound hT hsample hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hterm : ∀ (k : ℕ) (t : CoupledCircleCompositionTerm k) (c s : ℕ),
+      t.order + c ≤ s → ∀ R : ℝ, 1 ≤ R → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ (ψ : M.Space), M.grading base ψ ≤ R →
+      ∀ (v : M.Space) (w : Fin k → M.Space) (m : ℕ) (θ : ℝ),
+        |(T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+            t.evaluate (M.decode v m) (M.decode ψ m) (fun i => M.decode (w i) m) θ| ≤
+          C * (T.M (T.sample m))⁻¹ *
+            coupledCircleKernelMajorant M base (s + loss) ψ (Fin.cons v w) :=
+    hexists.choose_spec.choose_spec
   refine ⟨base, loss, fun r k b c s hs R hR => ?_⟩
   have hlist (L : List (CoupledCircleCompositionTerm k))
       (hL : ∀ t ∈ L, t.order + c ≤ s) :
