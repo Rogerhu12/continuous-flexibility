@@ -33,6 +33,7 @@ theorem n05_radialCellIntegrable_of_finiteSourceWeights
   have hs := (hf {j}).const_mul (Real.sqrt e)⁻¹
   apply MemLp.ae_eq _ hs
   exact Eventually.of_forall fun p => by
+    dsimp only
     rw [n05ReferenceFiniteSourceWeight_singleton,
       Real.sqrt_mul he.le, Real.sqrt_sq (hD.2.1 j p.1)]
     change (Real.sqrt e)⁻¹ * ((Real.sqrt e * D.localizer j p.1) * f p) =
@@ -68,6 +69,7 @@ theorem n05_finiteSourceNormSquare_eq {D : ReferenceData} (hab : D.a ≤ D.b)
         symm
         calc
           _ = n05ReferenceFiniteSourceWeight D γ M q p.1 * f p ^ 2 := by
+            dsimp only
             rw [mul_pow, Real.sq_sqrt (n05ReferenceFiniteSourceWeight_nonneg D γ M q p.1)]
           _ = _ := by
             rw [n05ReferenceFiniteSourceWeight, Finset.sum_mul]
