@@ -133,9 +133,11 @@ theorem exists_tailNatural_normalized_of_Poisson_edge_candidate
         ∫ x in T.node n..T.node (n + 1),
           T.p x * (B n).interpolate (A n) (A (n + 1)) x ^ 2 := by
       apply intervalIntegral.integral_congr
-      rw [uIcc_of_le (deepTail_node_strictMono hT (Nat.lt_succ_self n)).le]
       intro x hx
-      rw [hedge n x hx]
+      have hx' : x ∈ Icc (T.node n) (T.node (n + 1)) := by
+        simpa only [uIcc_of_le (deepTail_node_strictMono hT (Nat.lt_succ_self n)).le]
+          using hx
+      exact congrArg (fun z : ℝ => T.p x * z ^ 2) (hedge n x hx')
     rw [heq]
     exact deepTail_Poisson_interpolate_square_bound hT hη hK B n (A n) (A (n + 1))
   have hvm := deepTail_memLp_shift_of_edge_square_bound hT 1 hc hce
@@ -304,9 +306,11 @@ theorem exists_tailNatural_normalized_initial
     | succ n => exact (B n).interpolate_equation (A n) (A (n + 1)) hx
   have hmatch (n : ℕ) : piece n (node (n + 1)) = piece (n + 1) (node (n + 1)) := by
     cases n with
-    | zero => exact (BI.interpolate_right e (A 0)).trans
+    | zero =>
+      exact (BI.interpolate_right e (A 0)).trans
         ((B 0).interpolate_left (A 0) (A 1)).symm
-    | succ n => exact ((B n).interpolate_right (A n) (A (n + 1))).trans
+    | succ n =>
+      exact ((B n).interpolate_right (A n) (A (n + 1))).trans
         ((B (n + 1)).interpolate_left (A (n + 1)) (A (n + 1 + 1))).symm
   have hflux (n : ℕ) : T.p (node (n + 1)) * deriv (piece n) (node (n + 1)) =
       T.p (node (n + 1)) * deriv (piece (n + 1)) (node (n + 1)) := by

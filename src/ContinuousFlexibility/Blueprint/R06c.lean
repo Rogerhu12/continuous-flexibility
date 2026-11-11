@@ -7,7 +7,7 @@ import ContinuousFlexibility.Radial.DeepTailParameterPipeline
 
 Deep tail: flatness in the original radius, the source identity, and continuity in the height ratios.
 
-Source: `paper/flexible-surface-rewrite/05-flat-end-chain.tex` lines 443–505.
+Source: `paper/flexible-surface-readable/05-flat-end-chain.tex` lines 513–790.
 
 Task file: `docs/tasks/R06c.md`. The exact statement is preserved.
 -/
