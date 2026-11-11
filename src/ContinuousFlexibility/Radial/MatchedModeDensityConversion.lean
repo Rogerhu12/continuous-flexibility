@@ -36,81 +36,69 @@ theorem matchedDensity_integral_restrict {D : ReferenceData}
   simpa only [intervalIntegral.integral_of_le (matchingProfileGeometry hD).2.1.le,
     integral_Ioc_eq_integral_Ioo, radialCore] using matchingDensity_integral hD f
 
-/-- Returning a localized Hilbert field to ordinary dr costs the reciprocal
-density, including genuine local L² membership. -/
-theorem matchedMode_output_cell {D : ReferenceData}
-    (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
-    (m : ℕ) {B : ℝ} (hB : 0 ≤ B)
-    (hbound : ∀ r ∈ D.cells m, (matchingDensity D r)⁻¹ ≤ B)
-    (f : ℝ → ℝ)
-    (hf : MemLp (fun r => D.localizer m r * f r) 2 (radialHilbertMeasure D)) :
-    MemLp (fun r => D.localizer m r * f r) 2 (volume.restrict (radialCore D)) ∧
-      (∫ r, (D.localizer m r * f r) ^ 2 ∂volume.restrict (radialCore D)) ≤
-        B * ∫ r, (D.localizer m r * f r) ^ 2 ∂radialHilbertMeasure D := by
-  let g : ℝ → ℝ := fun r => D.localizer m r * f r
-  have hg : AEStronglyMeasurable g (volume.restrict (radialCore D)) :=
+/-- A local reciprocal-density bound suffices on the support of the
+actual field; no measurability of a prescribed containing cell is needed. -/
+theorem matchedMode_output_of_support {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) {B : ℝ} (hB : 0 ≤ B)
+    (f : ℝ → ℝ) (hf : MemLp f 2 (radialHilbertMeasure D))
+    (hbound : ∀ r ∈ radialCore D, f r ≠ 0 → (matchingDensity D r)⁻¹ ≤ B) :
+    MemLp f 2 (volume.restrict (radialCore D)) ∧
+      (∫ r, f r ^ 2 ∂volume.restrict (radialCore D)) ≤
+        B * ∫ r, f r ^ 2 ∂radialHilbertMeasure D := by
+  have hg : AEStronglyMeasurable f (volume.restrict (radialCore D)) :=
     hf.aestronglyMeasurable.mono_ac (matchedModeLebesgue_absolutelyContinuous hD)
-  have hweighted : Integrable (fun r => matchingDensity D r * g r ^ 2)
+  have hweighted : Integrable (fun r => matchingDensity D r * f r ^ 2)
       (volume.restrict (radialCore D)) :=
-    (matchingDensity_integrable_iff hD (fun r => g r ^ 2)).mp hf.integrable_sq
+    (matchingDensity_integrable_iff hD (fun r => f r ^ 2)).mp hf.integrable_sq
   have hpoint : ∀ᵐ r ∂volume.restrict (radialCore D),
-      g r ^ 2 ≤ B * (matchingDensity D r * g r ^ 2) := by
+      f r ^ 2 ≤ B * (matchingDensity D r * f r ^ 2) := by
     filter_upwards [ae_restrict_mem (show MeasurableSet (radialCore D) from measurableSet_Ioo)]
       with r hr
-    by_cases hz : D.localizer m r = 0
-    · simp only [g, hz, zero_mul, zero_pow (by decide : (2 : ℕ) ≠ 0), mul_zero]
-    · have hc : r ∈ D.cells m := hP.2.2.1 m hz
-      have hρ : 0 < matchingDensity D r := matchingDensity_pos hD hr
+    by_cases hz : f r = 0
+    · simp only [hz, zero_pow (by decide : (2 : ℕ) ≠ 0), mul_zero, le_refl]
+    · have hρ : 0 < matchingDensity D r := matchingDensity_pos hD hr
       have hone : 1 ≤ B * matchingDensity D r := by
-        have hb := mul_le_mul_of_nonneg_right (hbound r hc) hρ.le
+        have hb := mul_le_mul_of_nonneg_right (hbound r hr hz) hρ.le
         rwa [inv_mul_cancel₀ hρ.ne'] at hb
-      have hb := mul_le_mul_of_nonneg_right hone (sq_nonneg (g r))
+      have hb := mul_le_mul_of_nonneg_right hone (sq_nonneg (f r))
       simpa only [one_mul, mul_assoc] using hb
-  have hsq : Integrable (fun r => g r ^ 2) (volume.restrict (radialCore D)) := by
+  have hsq : Integrable (fun r => f r ^ 2) (volume.restrict (radialCore D)) := by
     apply (hweighted.const_mul B).mono' (hg.pow 2)
     filter_upwards [hpoint] with r hr
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (g r))] using hr
+    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (f r))] using hr
   refine ⟨(memLp_two_iff_integrable_sq hg).mpr hsq, ?_⟩
   have hle := integral_mono_ae hsq (hweighted.const_mul B) hpoint
-  rw [integral_const_mul, ← matchedDensity_integral_restrict hD (fun r => g r ^ 2)] at hle
+  rw [integral_const_mul, ← matchedDensity_integral_restrict hD (fun r => f r ^ 2)] at hle
   exact hle
 
-/-- The physical source enters the Hilbert inverse with its actual sign and
-reciprocal density. Its local square norm has the same coefficient cost. -/
-theorem matchedMode_source_cell {D : ReferenceData}
-    (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
-    (m : ℕ) {B : ℝ} (hB : 0 ≤ B)
-    (hbound : ∀ r ∈ D.cells m, (matchingDensity D r)⁻¹ ≤ B)
-    (f : ℝ → ℝ)
-    (hf : MemLp (fun r => D.localizer m r * f r) 2
-      (volume.restrict (radialCore D))) :
-    MemLp (fun r => -(D.localizer m r * f r) / matchingDensity D r) 2
-        (radialHilbertMeasure D) ∧
-      (∫ r, (-(D.localizer m r * f r) / matchingDensity D r) ^ 2
-        ∂radialHilbertMeasure D) ≤
-        B * ∫ r, (D.localizer m r * f r) ^ 2
-          ∂volume.restrict (radialCore D) := by
-  let g : ℝ → ℝ := fun r => D.localizer m r * f r
-  let q : ℝ → ℝ := fun r => -g r / matchingDensity D r
+/-- The actual negative source conversion under a supportwise density
+bound. This also applies to indicators of the open support of a localizer. -/
+theorem matchedMode_source_of_support {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) {B : ℝ} (hB : 0 ≤ B)
+    (f : ℝ → ℝ) (hf : MemLp f 2 (volume.restrict (radialCore D)))
+    (hbound : ∀ r ∈ radialCore D, f r ≠ 0 → (matchingDensity D r)⁻¹ ≤ B) :
+    MemLp (fun r => -f r / matchingDensity D r) 2 (radialHilbertMeasure D) ∧
+      (∫ r, (-f r / matchingDensity D r) ^ 2 ∂radialHilbertMeasure D) ≤
+        B * ∫ r, f r ^ 2 ∂volume.restrict (radialCore D) := by
+  let q : ℝ → ℝ := fun r => -f r / matchingDensity D r
   have hq : AEStronglyMeasurable q (volume.restrict (radialCore D)) :=
-    hf.aestronglyMeasurable.neg.div (matchingDensity_measurable hD).aestronglyMeasurable
+    hf.aestronglyMeasurable.neg.div₀ (matchingDensity_measurable hD).aestronglyMeasurable
   have hqμ : AEStronglyMeasurable q (radialHilbertMeasure D) :=
     hq.mono_ac (withDensity_absolutelyContinuous _ _)
   have hpoint : ∀ᵐ r ∂volume.restrict (radialCore D),
-      matchingDensity D r * q r ^ 2 ≤ B * g r ^ 2 := by
+      matchingDensity D r * q r ^ 2 ≤ B * f r ^ 2 := by
     filter_upwards [ae_restrict_mem (show MeasurableSet (radialCore D) from measurableSet_Ioo)]
       with r hr
-    by_cases hz : D.localizer m r = 0
-    · simp only [q, g, hz, zero_mul, neg_zero, zero_div,
-        zero_pow (by decide : (2 : ℕ) ≠ 0), mul_zero]
-    · have hc : r ∈ D.cells m := hP.2.2.1 m hz
-      have hρ : 0 < matchingDensity D r := matchingDensity_pos hD hr
+    by_cases hz : f r = 0
+    · simp only [q, hz, neg_zero, zero_div,
+        zero_pow (by decide : (2 : ℕ) ≠ 0), mul_zero, le_refl]
+    · have hρ : 0 < matchingDensity D r := matchingDensity_pos hD hr
       calc
-        matchingDensity D r * q r ^ 2 = (matchingDensity D r)⁻¹ * g r ^ 2 := by
+        matchingDensity D r * q r ^ 2 = (matchingDensity D r)⁻¹ * f r ^ 2 := by
           dsimp only [q]
           field_simp [hρ.ne']
           <;> ring
-        _ ≤ B * g r ^ 2 := mul_le_mul_of_nonneg_right (hbound r hc) (sq_nonneg _)
+        _ ≤ B * f r ^ 2 := mul_le_mul_of_nonneg_right (hbound r hr hz) (sq_nonneg _)
   have hweighted : Integrable (fun r => matchingDensity D r * q r ^ 2)
       (volume.restrict (radialCore D)) := by
     apply (hf.integrable_sq.const_mul B).mono'
@@ -126,6 +114,40 @@ theorem matchedMode_source_cell {D : ReferenceData}
   have hle := integral_mono_ae hweighted (hf.integrable_sq.const_mul B) hpoint
   rw [integral_const_mul, ← matchedDensity_integral_restrict hD (fun r => q r ^ 2)] at hle
   exact hle
+
+/-- Returning a localized Hilbert field to ordinary dr costs the reciprocal
+density, including genuine local L² membership. -/
+theorem matchedMode_output_cell {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
+    (m : ℕ) {B : ℝ} (hB : 0 ≤ B)
+    (hbound : ∀ r ∈ D.cells m, (matchingDensity D r)⁻¹ ≤ B)
+    (f : ℝ → ℝ)
+    (hf : MemLp (fun r => D.localizer m r * f r) 2 (radialHilbertMeasure D)) :
+    MemLp (fun r => D.localizer m r * f r) 2 (volume.restrict (radialCore D)) ∧
+      (∫ r, (D.localizer m r * f r) ^ 2 ∂volume.restrict (radialCore D)) ≤
+        B * ∫ r, (D.localizer m r * f r) ^ 2 ∂radialHilbertMeasure D := by
+  apply matchedMode_output_of_support hD hB _ hf
+  intro r _ hne
+  exact hbound r (hP.2.2.1 m (fun hz => hne (by rw [hz, zero_mul])))
+
+/-- The physical source enters the Hilbert inverse with its actual sign
+and reciprocal density. Its local square norm has the same coefficient cost. -/
+theorem matchedMode_source_cell {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
+    (m : ℕ) {B : ℝ} (hB : 0 ≤ B)
+    (hbound : ∀ r ∈ D.cells m, (matchingDensity D r)⁻¹ ≤ B)
+    (f : ℝ → ℝ)
+    (hf : MemLp (fun r => D.localizer m r * f r) 2
+      (volume.restrict (radialCore D))) :
+    MemLp (fun r => -(D.localizer m r * f r) / matchingDensity D r) 2
+        (radialHilbertMeasure D) ∧
+      (∫ r, (-(D.localizer m r * f r) / matchingDensity D r) ^ 2
+        ∂radialHilbertMeasure D) ≤
+        B * ∫ r, (D.localizer m r * f r) ^ 2
+          ∂volume.restrict (radialCore D) := by
+  apply matchedMode_source_of_support hD hB _ hf
+  intro r _ hne
+  exact hbound r (hP.2.2.1 m (fun hz => hne (by rw [hz, zero_mul])))
 
 /-- The preceding output estimate, for the actual localized modal L² class. -/
 theorem matchedModeCell_physical_square_le {D : ReferenceData}

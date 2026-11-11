@@ -88,8 +88,10 @@ theorem referenceWeightedCellMeasure_eq_prod {D : ReferenceData}
       (referenceRadialWeightedCellMeasure D γ M m).prod referenceAngularMeasure := by
   unfold referenceWeightedCellMeasure referenceRadialWeightedCellMeasure referenceAngularMeasure
   rw [Measure.prod_smul_right, prod_withDensity_left (referenceRadialCellDensity_measurable hD γ M m),
-    ← radialPhysicalMeasure_eq_prod, referenceCellMeasureDensity_eq_radial,
-    withDensity_smul _ ((referenceRadialCellDensity_measurable hD γ M m).comp measurable_fst)]
+    ← radialPhysicalMeasure_eq_prod, referenceCellMeasureDensity_eq_radial]
+  simpa only [Function.comp_def] using
+    withDensity_smul (μ := radialPhysicalMeasure D) (ENNReal.ofReal ((2 * Real.pi)⁻¹))
+      ((referenceRadialCellDensity_measurable hD γ M m).comp measurable_fst)
 
 theorem referenceWeightedMeasure_eq_prod {D : ReferenceData}
     (hD : RadialPartition D) (γ M : ℝ) :

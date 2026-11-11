@@ -32,8 +32,9 @@ theorem referenceAngularFourierCoeff_const_mul (c : ℝ) (f : ℝ → ℝ) (n : 
 theorem referenceAngularFourierCoeff_congr_ae {f g : ℝ → ℝ}
     (hfg : f =ᵐ[volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))] g) :
     referenceAngularFourierCoeff f = referenceAngularFourierCoeff g := by
-  apply fourierCoeffOn_congr_ae
-  exact hfg.fun_comp (fun x : ℝ => (x : ℂ))
+  exact fourierCoeffOn_congr_ae
+    (show (0 : ℝ) < 2 * Real.pi by positivity)
+    (hfg.fun_comp (fun x : ℝ => (x : ℂ)))
 
 /-- Parseval with the exact angular normalization used in the reference norm. -/
 theorem hasSum_sq_referenceAngularFourierCoeff {f : ℝ → ℝ}
