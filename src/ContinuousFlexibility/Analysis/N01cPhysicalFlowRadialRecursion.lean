@@ -102,7 +102,7 @@ theorem radialPartial_along_physicalFlow
   have hf : DifferentiableAt ℝ F (p.1, Θ p) :=
     (hF.contDiffAt (hΩ.mem_nhds
       (show (p.1, Θ p) ∈ I ×ˢ (univ : Set ℝ) from ⟨hp.1, mem_univ _⟩))).differentiableAt (by simp)
-  have hg := (hasFDerivAt_fst p).prodMk ht.hasFDerivAt
+  have hg := (hasFDerivAt_fst (𝕜 := ℝ) (p := p)).prodMk ht.hasFDerivAt
   have hd := hf.hasFDerivAt.comp p hg
   have he : (fun q => F (q.1, Θ q)) = F ∘ (fun q => (q.1, Θ q)) := by
     simp only [Function.comp_def]

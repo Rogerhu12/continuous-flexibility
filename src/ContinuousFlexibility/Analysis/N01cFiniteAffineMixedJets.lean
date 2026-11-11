@@ -325,7 +325,7 @@ private theorem hasDerivAt_diagonal_of_partials
       (hH.hasFDerivAt.comp_hasDerivAt (f := fun s : ℝ => (s, s)) (0 : ℝ)
         ((hasDerivAt_id (0 : ℝ)).prodMk (hasDerivAt_id (0 : ℝ))))
   have hvalue : fderiv ℝ H (0, 0) ((1 : ℝ), 1) = A + B := by
-    have hsum : ((1 : ℝ), 0) + ((0 : ℝ), 1) = ((1 : ℝ), 1) := by
+    have hsum : ((1 : ℝ), (0 : ℝ)) + ((0 : ℝ), (1 : ℝ)) = ((1 : ℝ), (1 : ℝ)) := by
       ext <;> simp
     calc
       _ = fderiv ℝ H (0, 0) ((1 : ℝ), 0) + fderiv ℝ H (0, 0) ((0 : ℝ), 1) := by
@@ -377,7 +377,8 @@ theorem hasProjectiveLineDerivAt_stateAngleEvaluation
         ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v)) (0 : ℝ) :=
       finiteAffine_stateJet_line_deriv (J b (t, θ)) k hx v w.1
     dsimp only [H]
-    simpa only [zero_mul, add_zero] using hd
+    simp only [zero_mul, add_zero]
+    exact hd
   have hangle : HasDerivAt (fun s => H (0, s))
       (w.2 * (J (b + 1) (t, θ)).D k x v) 0 := by
     have hinner : HasDerivAt (fun s : ℝ => θ + s * w.2) w.2 0 := by

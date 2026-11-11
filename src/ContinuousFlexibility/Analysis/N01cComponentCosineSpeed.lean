@@ -111,7 +111,7 @@ private theorem n01c_componentCosine_contDiff_zero_slice
   let L : (Fin 0 → ℝ) →L[ℝ] X := 0
   have hp : ContDiffOn ℝ ∞ (fun p : PolarPoint => F (x + L 0, p)) univ :=
     (hf L).comp (contDiff_const.prodMk contDiff_id).contDiffOn
-      (fun p _ => ⟨by simpa only [L, ContinuousLinearMap.zero_apply, add_zero] using hx,
+      (fun p _ => ⟨by simpa only [Set.mem_preimage, L, ContinuousLinearMap.zero_apply, add_zero] using hx,
         mem_univ p⟩)
   simpa only [L, ContinuousLinearMap.zero_apply, add_zero] using contDiffOn_univ.mp hp
 

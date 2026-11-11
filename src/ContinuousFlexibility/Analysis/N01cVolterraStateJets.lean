@@ -116,8 +116,16 @@ private theorem continuousOn_flowGraphVariationSlot_reindex {U : Set E} {n N : �
   have hg : Continuous g :=
     continuous_fst.prodMk
       (continuous_pi (fun j => (continuous_apply (σ j)).comp continuous_snd))
-  exact B.continuous_graphSlot.comp hg.continuousOn
-    (fun p hp => ⟨hp.1, mem_univ _⟩)
+  let F : ((E × ℝ) × (Fin n → E)) → E × ℝ :=
+    fun p => flowGraphVariationSlot n (B.value p.1) p.2
+  have hF : ContinuousOn F ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) :=
+    B.continuous_graphSlot
+  have hc : ContinuousOn (F ∘ g) ((U ×ˢ (univ : Set ℝ)) ×ˢ univ) :=
+    ContinuousOn.comp (f := g) (g := F)
+      (s := (U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set (Fin N → E)))
+      (t := (U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set (Fin n → E)))
+      hF hg.continuousOn (fun p hp => ⟨hp.1, mem_univ _⟩)
+  simpa only [F, g, Function.comp_def] using hc
 
 /-- Extension by zero at the current and all higher orders. -/
 def lowerStateVariation {U : Set E} {N : ℕ}
