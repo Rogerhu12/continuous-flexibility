@@ -46,14 +46,14 @@ theorem exists_r07_selected_later_of_outgoing {T : MorseChainData}
     {C : ℝ} (hC : 1000 ≤ C)
     (hsmall : R07JoinActionSmall T C (r07UniformTolerance C))
     (v : R07LaterCondition T C → (ℕ → ℝ) → ℝ → ℝ)
-    (hnatural : ∀ q, ∀ σ ∈ heightCube,
+    (hnatural : ∀ q : R07LaterCondition T C, ∀ σ ∈ heightCube,
       RadialNaturalTail (morseChainReferenceFamily G phi σ) q.1.1 q.1.2.1.2
         (r07CellEntry T q.1.1 q.1.2.1.1) (v q σ))
-    (hB : ∀ q, ∀ σ ∈ heightCube,
+    (hB : ∀ q : R07LaterCondition T C, ∀ σ ∈ heightCube,
       r07OutgoingState q.1.2.1.2 (r07CellEntry T q.1.1 q.1.2.1.1) (v q σ) ≠ (0, 0))
-    (hBcont : ∀ q, ContinuousOn
+    (hBcont : ∀ q : R07LaterCondition T C, ContinuousOn
       (fun σ => r07OutgoingState q.1.2.1.2 (r07CellEntry T q.1.1 q.1.2.1.1) (v q σ)) heightCube)
-    (hBindep : ∀ q, ∀ σ ∈ heightCube, ∀ t ∈ Icc (1 : ℝ) 2,
+    (hBindep : ∀ q : R07LaterCondition T C, ∀ σ ∈ heightCube, ∀ t ∈ Icc (1 : ℝ) 2,
       r07OutgoingState q.1.2.1.2 (r07CellEntry T q.1.1 q.1.2.1.1)
           (v q (Function.update σ q.1.2.1.1 t)) =
         r07OutgoingState q.1.2.1.2 (r07CellEntry T q.1.1 q.1.2.1.1) (v q σ)) :
@@ -117,7 +117,7 @@ theorem exists_r07_selected_later_of_outgoing {T : MorseChainData}
       ((F σ).w (r07PreviousCellJoin T q.1.1 (q.1.2.1.1 - 1))) (U q σ)
   let B (q : R07LaterCondition T C) (σ : ℕ → ℝ) : ℝ × ℝ :=
     r07OutgoingState q.1.2.1.2 (r07CellEntry T q.1.1 q.1.2.1.1) (v q σ)
-  have hY : ∀ q, ∀ σ ∈ heightCube,
+  have hY : ∀ q : R07LaterCondition T C, ∀ σ ∈ heightCube,
       |(Y q σ).1 - 1| ≤ (c₀ * exp (-(q.1.2.1.1 : ℝ) ^ 2)) / 4 ∧
       |(Y q σ).2 - a q| ≤ (c₀ * exp (-(q.1.2.1.1 : ℝ) ^ 2)) / 4 := by
     intro q σ hσ
