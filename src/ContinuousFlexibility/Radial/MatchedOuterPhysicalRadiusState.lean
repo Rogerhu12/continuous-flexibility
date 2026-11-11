@@ -58,7 +58,8 @@ theorem outerWhole_profile_radiusScale
   have hmem := matchedOuter_scaled_mem hκ hx
   have hr : outerOutwardRadius right (x / κ) ∈ radialTailHalf D right cut := by
     apply (radialTailHalf_outward D right cut _).mpr
-    simpa only [outerOutwardRadius_twice, outerOutwardRadius_eq_sign] using hmem
+    rw [outerOutwardRadius_twice]
+    simpa only [outerOutwardRadius_eq_sign] using hmem
   have h := referenceProfile_radiusScale_half hprofile hprofileCut _ hr
   have hc : κ * outerOutwardRadius right (x / κ) = outerOutwardRadius right x := by
     rw [outerOutwardRadius_eq_sign, outerOutwardRadius_eq_sign]
@@ -96,7 +97,7 @@ theorem outerWhole_profile_deriv_radiusScale
     hd.hasDerivWithinAt.derivWithin (uniqueDiffOn_Ico _ _ x hx)] at he
   calc
     _ = (β * κ) * (deriv (outerTailOutwardWeight D right) (x / κ) * (1 / κ)) := he
-    _ = _ := by field_simp [hκ.ne']; ring
+    _ = _ := by field_simp [hκ.ne']
 
 /-- The supplied pair, with the target's actual physical coefficients and
 endpoints. This definition does not assert that the target is a Morse

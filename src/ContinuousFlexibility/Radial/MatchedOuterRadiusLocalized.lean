@@ -22,7 +22,11 @@ theorem matchedOuter_radius_localizer_measurable {E : ReferenceData}
     AEStronglyMeasurable
       (fun x => E.localizer m (outerOutwardRadius right (κ * x))) μ := by
   have hc : Continuous (fun x => outerOutwardRadius right (κ * x)) := by
-    cases right <;> fun_prop
+    cases right
+    · change Continuous (fun x : ℝ => -(κ * x))
+      exact (continuous_const.mul continuous_id).neg
+    · change Continuous (fun x : ℝ => κ * x)
+      exact continuous_const.mul continuous_id
   exact ((hE.1 m).continuous.comp hc).measurable.aestronglyMeasurable
 
 theorem norm_inverseRadiusOperator_outerCells_le_of_kernel

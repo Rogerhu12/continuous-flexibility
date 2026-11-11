@@ -34,11 +34,14 @@ theorem matchedInner_source_gate_idempotent {D : ReferenceData}
         (M.sourceInner (matchedModeScalarGate D active F)).1 x
     simp only [hr]
     split_ifs <;> rfl
-  · rw [(hM.2.2.2.1 _).1]
+  · have hs : (M.sourceInner (matchedModeScalarGate D active F)).2 =
+        (if active then F.2 else 0) := by
+      rw [(hM.2.2.2.1 (matchedModeScalarGate D active F)).1,
+        matchedModeScalarGate_apply]
+    rw [(hM.2.2.2.1 _).1, matchedModeScalarGate_apply]
     change (if active then (M.sourceInner (matchedModeScalarGate D active F)).2 else 0) =
       (M.sourceInner (matchedModeScalarGate D active F)).2
-    simp only [(hM.2.2.2.1 (matchedModeScalarGate D active F)).1,
-      matchedModeScalarGate_apply]
+    rw [hs]
     cases active <;> rfl
 
 /-- The actual inner inverse has the original finite inner support. -/
@@ -71,6 +74,8 @@ theorem matchedInner_sourceCell_weighted_norm_le {D : ReferenceData}
   | zero =>
       rw [← matchedInner_sourceInner_weight_commute M hM E weight hE]
       apply (matchedInner_sourceInner_norm_le M hM _).trans
+      simp only [matchedModeChannel, matchedModeBorder_apply, matchedModeScalarGate_apply,
+        ContinuousLinearEquiv.prodCongr_apply, ContinuousLinearEquiv.refl_apply]
       change ‖(E 0, if active then F.2 else (0 : ℝ))‖ ≤ B 0 * ‖F‖
       rw [map_zero, Prod.norm_def, norm_zero]
       have hs : ‖(if active then F.2 else (0 : ℝ))‖ ≤ ‖F‖ := by

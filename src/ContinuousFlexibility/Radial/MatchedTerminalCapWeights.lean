@@ -101,6 +101,7 @@ theorem innerMorseInnerWeight_on_terminal_gap (right : Bool) {x : ℝ}
   · rw [← innerMorseInnerCutWeight_gap]
     simp only [Bool.false_eq_true, ite_false, innerMorseInnerCutWeight,
       innerModelChainCuts_gap_left, Fin.val_zero, lt_self_iff_false, dite_false]
+    exact dif_neg (Nat.lt_irrefl 0)
   · simp only [eq_self_iff_true, ite_true, innerMorseInnerCutWeight,
       innerModelChainCuts_gap_right, Fin.val_last, lt_self_iff_false, dite_false]
 

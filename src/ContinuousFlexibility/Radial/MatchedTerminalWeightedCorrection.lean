@@ -175,10 +175,13 @@ theorem terminalRegional_innerPoisson_sameC_cap_bound
   have hsub : Icc R.matching.innerLeft R.matching.innerRight ⊆ radialCore D := by
     intro x hx
     exact ⟨R.cut_order.1.trans_le hx.1, hx.2.trans_lt R.cut_order.2.2⟩
+  have hK : (0 : ℝ) ≤ K :=
+    norm_nonneg ((EH : Hsrc →L[ℝ] Hsrc) ∘L C.inverse hw hS ∘L
+      ((EH).symm : Hsrc →L[ℝ] Hsrc))
   have hT := matchedInnerActualInverse_weighted_opNorm_le hD hB hw G R.matching hM
     hleft hright hsub central column hcolumn hcolfix C hS
     weight weight hweight hweight hpos hpos B Binv B Binv
-    hweightB hweightInv hweightB hweightInv (norm_nonneg _) (le_refl K)
+    hweightB hweightInv hweightB hweightInv hK (le_refl K)
   have hE : ∀ f, E f =ᵐ[radialHilbertMeasure D] fun x => weight x * f x :=
     innerWeightEquiv_ae (radialHilbertMeasure D)
       weight hweight hpos B Binv hweightB hweightInv

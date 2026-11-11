@@ -64,7 +64,10 @@ theorem terminalMorseCap_value_bound (long : Bool)
     have he : j ^ 2 *
         (-morseRho A B (terminalMorseLayerOrigin long A B + x) * R x) / R x =
         j ^ 2 * (-morseRho A B (terminalMorseLayerOrigin long A B + x)) := by
-      field_simp [hpos.ne'] <;> ring
+      simpa only [mul_assoc] using
+        mul_div_cancel_right₀
+          (j ^ 2 * (-morseRho A B (terminalMorseLayerOrigin long A B + x)))
+          (show R x ≠ 0 from hpos.ne')
     rw [he]
     exact mul_nonneg (sq_nonneg _) hq
   have hends := terminalMorseCap_endpoints long A B s r
@@ -72,17 +75,21 @@ theorem terminalMorseCap_value_bound (long : Bool)
     rw [show R 0 = s * r (if long then morseRightTurn A B else morseCellLeftCut)
       from hends.1]
     cases long
-    · rw [hjoin]
+    · simp only [Bool.false_eq_true, ite_false] at hjoin ⊢
+      rw [hjoin]
       norm_num
-    · rw [hzero]
+    · simp only [eq_self_iff_true, ite_true] at hzero ⊢
+      rw [hzero]
       norm_num
   have hb : |u (R L)| ≤ 1 := by
     rw [show R L = s * r (if long then morseRightCapEnd A B (1 / 100)
       else morseShortLeftCapCut) from hends.2]
     cases long
-    · rw [hzero]
+    · simp only [Bool.false_eq_true, ite_false] at hzero ⊢
+      rw [hzero]
       norm_num
-    · rw [hjoin]
+    · simp only [eq_self_iff_true, ite_true] at hjoin ⊢
+      rw [hjoin]
       norm_num
   have hvalue := terminalCap_physical_amplitude_bound hL hscale (by norm_num : (0 : ℝ) ≤ 1)
     hR hw hu hweightR hodeR hpotential ha hb

@@ -75,7 +75,7 @@ theorem matchedOuterNatural_side_realization {D : ReferenceData}
       (u := fun x => H.V x / sqrt lam) (f := fun _ => 0) rfl
     · exact matchedOuterNaturalPoisson_ae_on D right entry lam H.V hV
         (by cases right <;> exact measurableSet_Ioo) (Subset.refl _)
-    · exact hzero.filter_mono (Measure.restrict_le_self).ae_le
+    · exact ae_restrict_of_ae hzero
     · exact hstate.1.of_le (by simp)
     · simpa only [mul_zero, sub_zero] using hstate.2.1
   have hother : ModeLocalEquation D M.frequency
@@ -83,10 +83,10 @@ theorem matchedOuterNatural_side_realization {D : ReferenceData}
     apply matchedOuterWhole_modeLocalEquation hD hB hotherEntry (U := U) (F := 0)
       (u := fun _ => 0) (f := fun _ => 0) rfl
     · exact matchedOuterNaturalPoisson_other_zero hm right lam H.V hV
-    · exact hzero.filter_mono (Measure.restrict_le_self).ae_le
+    · exact ae_restrict_of_ae hzero
     · exact contDiffOn_const
     · intro ψ hψ hc hs
-      simp only [deriv_const, mul_zero, sub_zero, integral_zero, neg_zero]
+      simp only [deriv_const, mul_zero, zero_mul, sub_zero, integral_zero, neg_zero]
   refine ⟨matchedOuterNaturalPoisson_representative hD hm right lam H.V hV,
     matchedOuterNaturalPoisson_inner_zero M right lam H.V hV,
     matchedOuterNaturalFunction_contDiffOn hm right lam H.V (hstate.1.of_le (by simp)),
@@ -122,11 +122,12 @@ theorem matchedOuterNatural_side_realization {D : ReferenceData}
             (fun r => H.V (outerOutwardRadius false r) / sqrt (M.boundaryScale 0))
             (fun _ => 0) M.innerRight = 0 / sqrt (M.boundaryScale 1)
           rw [matchedOuterSideGlue_of_ge hm _ _ le_rfl, zero_div]
-        · have hflux := matchedOuterSideGlue_flux_right ha hm hb
+        · change matchingOuterFlux D M u 1 = 0
+          have hflux := matchedOuterSideGlue_flux_right ha hm hb
             (fun r => H.V (outerOutwardRadius false r) / sqrt (M.boundaryScale 0))
             (fun _ => 0)
           simpa only [u, lam, matchedOuterNaturalFunction, Bool.false_eq_true,
-            ite_false, derivWithin_const, mul_zero, zero_div] using hflux
+            ite_false, derivWithin_fun_const, Pi.zero_apply, mul_zero, zero_div] using hflux
     · intro k
       fin_cases k
       · constructor
@@ -134,11 +135,12 @@ theorem matchedOuterNatural_side_realization {D : ReferenceData}
             (fun r => H.V (outerOutwardRadius true r) / sqrt (M.boundaryScale 1))
             M.innerLeft = 0 / sqrt (M.boundaryScale 0)
           rw [matchedOuterSideGlue_of_le _ _ le_rfl, zero_div]
-        · have hflux := matchedOuterSideGlue_flux_left ha hm hb
+        · change matchingOuterFlux D M u 0 = 0
+          have hflux := matchedOuterSideGlue_flux_left ha hm hb
             (fun _ => 0)
             (fun r => H.V (outerOutwardRadius true r) / sqrt (M.boundaryScale 1))
           simpa only [u, lam, matchedOuterNaturalFunction, ite_true,
-            derivWithin_const, mul_zero, zero_div] using hflux
+            derivWithin_fun_const, Pi.zero_apply, mul_zero, zero_div] using hflux
       · constructor
         · change matchedOuterSideGlue M.innerLeft M.innerRight (fun _ => 0)
             (fun r => H.V (outerOutwardRadius true r) / sqrt (M.boundaryScale 1))

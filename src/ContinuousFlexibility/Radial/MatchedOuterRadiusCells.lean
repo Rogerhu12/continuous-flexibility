@@ -39,7 +39,9 @@ theorem matchedOuter_localizer_radius_ae
     cases right <;> simp [outerOutwardRadius]
   change E.localizer m (outerOutwardRadius right (κ * outerOutwardRadius right r)) =
     D.localizer m (outerOutwardRadius right (outerOutwardRadius right r))
-  rw [hreflect, outerOutwardRadius_twice, hlocal, ← he r hr, e.apply_symm_apply]
+  rw [hreflect, outerOutwardRadius_twice, hlocal, ← he r hr]
+  change D.localizer m (e (e.symm r)) = D.localizer m r
+  rw [e.apply_symm_apply]
 
 theorem inverseRadiusEquiv_matchedOuterCell
     (hD : RadialPartition D) (hE : RadialPartition E) (right : Bool)
@@ -79,8 +81,10 @@ theorem inverseRadiusOperator_matchedOuterCells
   let U := inverseRadiusEquiv hκ hβ hm
   have hcommk := inverseRadiusEquiv_matchedOuterCell hD hE right hκ hβ hm k hk
   have hcommm := inverseRadiusEquiv_matchedOuterCell hD hE right hκ hβ hm m hmχ
-  ext f
+  apply ContinuousLinearMap.ext
+  intro f
   apply U.injective
+  simp only [ContinuousLinearMap.comp_apply, inverseRadiusOperator_apply]
   change U (matchedOuterCell E hE right ν k
       (U.symm (R (U (matchedOuterCell E hE right ν m f))))) =
     U (U.symm (matchedOuterCell D hD right μ k

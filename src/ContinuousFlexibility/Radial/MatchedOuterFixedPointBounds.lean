@@ -173,8 +173,10 @@ theorem exists_matchedMorse_fixed_whole_point_bounds
       · have hxt : x ∈ Ico c b := ⟨(lt_of_not_ge hxc).le, hx.2⟩
         rw [H.V_tail_factor hcb hPc x hxt, abs_mul]
         have hVc := hV c (right_mem_Icc.mpr hac)
-        have hPt := (hP m x hxt hθ).trans
-          (mul_le_mul_of_nonneg_right (le_max_left _ _) (exp_pos _).le)
+        have hPt : |F.P x| ≤
+            L * exp (A * radialQ (D.cellIndex m) - radialS (D.cellIndex m)) :=
+          (hP m x hxt hθ).trans
+            (mul_le_mul_of_nonneg_right (le_max_left Bn (exp T)) (exp_pos _).le)
         exact (mul_le_mul hVc hPt (abs_nonneg _) hKc.le).trans_eq (by ring)
     have hdist : |radialS (D.cellIndex m) - radialS transition| ≤
         radialS (D.cellIndex m) + radialS transition := by
