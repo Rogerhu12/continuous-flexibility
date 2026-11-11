@@ -96,24 +96,27 @@ theorem n05_referenceSource_normalized_member
     n05_referenceMean_intervalIntegrable hab hcorrectedLp, ?_⟩
   · intro p
     change f (p + (0, Real.pi)) - a * ψ (p + (0, Real.pi)) = f p - a * ψ p
-    rw [hperiodic p, hψheight.2.2.1 p]
+    rw [hperiodic p, show ψ (p + (0, Real.pi)) = ψ p from hψheight.2.2.1 p]
   · intro r θ
     change f (r, -θ) - a * ψ (r, -θ) = f (r, θ) - a * ψ (r, θ)
-    rw [heven r θ, hψheight.2.1 r θ]
+    rw [heven r θ, show ψ (r, -θ) = ψ (r, θ) from hψheight.2.1 r θ]
   · letI : IsFiniteMeasure (radialPhysicalMeasure D) :=
       ⟨r11b_radialPhysicalMeasure_finite D⟩
     have hi := (r11b_sourceDerivative_memLp hD hγ hf).integrable (by norm_num)
-    have hψi := (r11b_sourceDerivative_memLp hD hγ hψ).integrable (by norm_num)
+    have hψi : Integrable ψ (radialPhysicalMeasure D) :=
+      (r11b_sourceDerivative_memLp hD hγ hψ).integrable (by norm_num)
     have ha : a = (2 * Real.pi)⁻¹ * ∫ p, f p ∂radialPhysicalMeasure D :=
       r11b_integral_angularMean_eq hab hi
     have hψiNorm : (2 * Real.pi)⁻¹ * ∫ p, ψ p ∂radialPhysicalMeasure D = 1 :=
       (r11b_integral_angularMean_eq hab hψi).symm.trans hψnorm
     calc
       _ = (2 * Real.pi)⁻¹ *
+          ∫ p, (f p - a * ψ p) ∂radialPhysicalMeasure D :=
+        r11b_integral_angularMean_eq hab (hi.sub (hψi.const_mul a))
+      _ = (2 * Real.pi)⁻¹ *
           ((∫ p, f p ∂radialPhysicalMeasure D) -
             a * ∫ p, ψ p ∂radialPhysicalMeasure D) := by
-        rw [r11b_integral_angularMean_eq hab (hi.sub (hψi.const_mul a)),
-          integral_sub hi (hψi.const_mul a), integral_const_mul]
+        rw [integral_sub hi (hψi.const_mul a), integral_const_mul]
       _ = a - a * 1 := by
         rw [mul_sub, show (2 * Real.pi)⁻¹ *
             (a * ∫ p, ψ p ∂radialPhysicalMeasure D) =

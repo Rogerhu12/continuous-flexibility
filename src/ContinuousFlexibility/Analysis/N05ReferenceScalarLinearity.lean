@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N05ReferenceLeftChoice
 import ContinuousFlexibility.Radial.ReferenceCommonInverse
+import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Linearity of the single physical endpoint scalar

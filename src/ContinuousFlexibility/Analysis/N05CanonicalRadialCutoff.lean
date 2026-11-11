@@ -105,6 +105,7 @@ theorem n05CanonicalTest_cutoff_cylinder {S : PhysicalSpacesData} {K : Canonical
   · intro p
     simp only [Prod.fst_add, add_zero, hφ.2.1 p]
   · intro r hr θ
+    change χ r * φ (r, θ) = 0
     rw [image_eq_zero_of_notMem_tsupport hr, zero_mul]
 
 end ContinuousFlexibility.Statements

@@ -38,9 +38,9 @@ theorem n05_leftCutoff_difference_compact {D : ReferenceData}
       · exact Or.inl (lt_of_not_ge hl)
     rcases hcases with hl | hr'
     · have hε' : r < D.a + ε :=
-        hl.trans_le (add_le_add_left (min_le_left ε δ) D.a)
+        hl.trans_le (add_le_add le_rfl (min_le_left ε δ))
       have hδ' : r ≤ D.a + δ :=
-        hl.le.trans (add_le_add_left (min_le_right ε δ) D.a)
+        hl.le.trans (add_le_add le_rfl (min_le_right ε δ))
       rw [hleft r ⟨hr.1, hε'⟩, hχleft r hδ', sub_self]
     · have hε' : D.b - ε < r :=
         (sub_le_sub_left (min_le_left ε δ) D.b).trans_lt hr'
