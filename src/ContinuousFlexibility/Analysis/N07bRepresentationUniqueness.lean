@@ -87,7 +87,7 @@ theorem n07b_rows_eq_of_representation {z : AnnularState S × ℝ}
     (hW : HasCanonicalRepresentation D S C K z W G η g)
     (hleft : U.2.1 = W.2.1) : U.1 = W.1 := by
   apply lp.ext
-  intro m
+  funext m
   apply Lp.ext
   have hrow := hU.1 m
   rw [hleft] at hrow

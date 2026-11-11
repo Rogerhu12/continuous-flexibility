@@ -163,6 +163,22 @@ theorem n07bCanonicalSourceJets_mem_graph (γ t : ℝ)
     simpa only [n07bCanonicalSourceJets_apply] using
       n07bCanonicalWeightedJet_weak hg γ t m j (hweak m j)
 
+/-- Lift the actual weighted jets into the already chosen model level. -/
+def n07bCanonicalSourceLift
+    (hV : IsVolumeModel T S K V)
+    (href : ∀ m, (fun p : PolarPoint => g m 0 (p.1, Real.pi - p.2))
+      =ᵐ[canonicalMeasure S K m] g m 0)
+    (hweak : ∀ m j φ, CanonicalTest S K m φ →
+      (∫ p, g m j p * φ p ∂canonicalMeasure S K m) =
+        (-1 : ℝ) ^ j.val *
+          ∫ p, g m 0 p * mixedDerivative 0 j.val φ p ∂canonicalMeasure S K m)
+    (hsum : Summable (n07bCanonicalJetEnergy (T := T) hg γ t)) : V.level γ t s :=
+  ⟨n07bCanonicalSourceJets (T := T) hg γ t hsum, by
+    change n07bCanonicalSourceJets (T := T) hg γ t hsum ∈
+      (V.level γ t s : Set (CanonicalVolumeJets S K s))
+    rw [hV.1 γ t s]
+    exact n07bCanonicalSourceJets_mem_graph hg γ t href hweak hsum⟩
+
 variable (hV : IsVolumeModel T S K V)
   (href : ∀ m, (fun p : PolarPoint => g m 0 (p.1, Real.pi - p.2))
     =ᵐ[canonicalMeasure S K m] g m 0)
@@ -171,12 +187,6 @@ variable (hV : IsVolumeModel T S K V)
       (-1 : ℝ) ^ j.val *
         ∫ p, g m 0 p * mixedDerivative 0 j.val φ p ∂canonicalMeasure S K m)
   (hsum : Summable (n07bCanonicalJetEnergy (T := T) hg γ t))
-
-/-- Lift the actual weighted jets into the already chosen model level. -/
-def n07bCanonicalSourceLift : V.level γ t s :=
-  ⟨n07bCanonicalSourceJets (T := T) hg γ t hsum, by
-    rw [hV.1 γ t s]
-    exact n07bCanonicalSourceJets_mem_graph hg γ t href hweak hsum⟩
 
 theorem n07bCanonicalSourceLift_coordinate (m : ℕ) (j : Fin (s + 1)) :
     (n07bCanonicalSourceLift hg hV href hweak hsum).val m j =
@@ -214,6 +224,8 @@ theorem n07bCanonicalSourceLift_norm_le {R : ℝ} (hR : 0 ≤ R)
   apply (sq_le_sq₀ (norm_nonneg _) hR).mp
   rw [n07bCanonicalSourceLift_norm_sq hg hV href hweak hsum]
   exact hbound
+
+include hV href hweak hsum
 
 /-- The source and norm portion of the N07b bridge for actual geometric jets.
 The remaining proof obligation is to establish `hg`, `href`, `hweak`, `hsum`

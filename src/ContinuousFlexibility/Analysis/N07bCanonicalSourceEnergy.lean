@@ -38,6 +38,8 @@ variable {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData
   {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
   (hsector : stateSector S z.1)
 
+include hK hz hsector
+
 /-- The height conversion of the density-weighted field is exactly the
 source conversion, at every point of the actual canonical piece. -/
 theorem n07b_canonicalHeight_density_mul (m : ℕ) (f : PolarPoint → ℝ)
