@@ -29,4 +29,10 @@ theorem N12 (hBranch : PointBranchStatement) (hW03 : W03Statement) (hS03 : S03St
     (contDiff_stateProfile_of_n01 hS hT hN x)
     (((hW03 A.val T S hN.1.1 hT hS).1 (3 / 4 : ℝ) (by norm_num) x.1.1).1)
 
+/--
+info: 'ContinuousFlexibility.Blueprint.N12' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms N12
+
 end ContinuousFlexibility.Blueprint
