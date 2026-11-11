@@ -385,3 +385,6 @@ import ContinuousFlexibility.Scalar.S04CalculusProof
 import ContinuousFlexibility.Scalar.S05StateDerivative
 import ContinuousFlexibility.Scalar.S05CalculusProof
 import ContinuousFlexibility.Blueprint.ScalarCalculus
+import ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds
+import ContinuousFlexibility.Analysis.CanonicalReturnJacobianBounds
+import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
