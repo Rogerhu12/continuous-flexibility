@@ -5,7 +5,7 @@ import ContinuousFlexibility.Blueprint.Statements
 
 The weighted bound of the matched inverse at the three exponents on the same geometry.
 
-Source: `paper/flexible-surface-rewrite/06-global-reference-inverse.tex` lines 599–742.
+Source: `paper/flexible-surface-readable/06-global-reference-inverse.tex` lines 850–1017.
 
 Task file: `docs/tasks/R11a.md`. The statement is frozen; replace the `sorry`.
 -/

@@ -405,9 +405,11 @@ def outputCellSquare (D : ReferenceData) (γ M : ℝ)
   exp (-2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
     referenceCellSquare D m f
 
+/-- Actual local `L²` membership, including almost-everywhere strong measurability.
+This is the source and output domain used by the maximal weak graph. -/
 def RadialCellIntegrable (D : ReferenceData) (f : PolarPoint → ℝ) : Prop :=
-  ∀ m, IntegrableOn (fun x : PolarPoint => (D.localizer m x.1 * f x) ^ 2)
-    (radialCore D ×ˢ Ioc (0 : ℝ) (2 * Real.pi)) volume
+  ∀ m, MemLp (fun x : PolarPoint => D.localizer m x.1 * f x) 2
+    (radialPhysicalMeasure D)
 
 def SourceMember (D : ReferenceData) (γ M : ℝ) (F : RadialSource) : Prop :=
   RadialCellIntegrable D F.1 ∧ Summable (sourceCellSquare D γ M F.1) ∧

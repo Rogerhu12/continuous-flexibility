@@ -97,6 +97,8 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR08 : R08Statement := R08 hR03 hR07
   have hR09 : R09Statement := R09
   have hR10 : R10Statement := R10_of_nodes (R10a hR06 hR07 hR08 hR09) R10b
+  -- The common source/output domain is actual local L² (`MemLp`), so the
+  -- maximal weak graph and its inverse use measurable representatives.
   have hR11 : R11Statement := R11b (R11a hR05 hR10)
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
