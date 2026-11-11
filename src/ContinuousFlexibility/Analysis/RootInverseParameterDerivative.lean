@@ -80,15 +80,16 @@ theorem parameterizedCircleInverse_hasDerivAt_sndParameter_zero
   let a : ℝ := deriv (fun ζ : ℝ => I ((0, ζ), θ)) 0
   have hg : HasDerivAt (fun ζ : ℝ => I ((0, ζ), θ)) a 0 :=
     (hcurve.differentiable (by simp) 0).hasDerivAt
-  have hp : HasDerivAt (fun ζ : ℝ => ((0, ζ), I ((0, ζ), θ))) ((0, 1), a) 0 :=
+  have hp : HasDerivAt
+      (fun ζ : ℝ => (((0 : ℝ), ζ), I ((0, ζ), θ))) (((0, 1) : ℝ × ℝ), a) 0 :=
     ((hasDerivAt_const 0 (0 : ℝ)).prodMk (hasDerivAt_id 0)).prodMk hg
   have hcomp : HasDerivAt
-      (F ∘ (fun ζ : ℝ => ((0, ζ), I ((0, ζ), θ))))
+      (F ∘ (fun ζ : ℝ => (((0 : ℝ), ζ), I ((0, ζ), θ))))
       (D ((0, 1), a)) 0 := by
     have hD' : HasFDerivAt F D ((0, 0), I ((0, 0), θ)) := by
       simpa only [hI0] using hD
     exact hD'.comp_hasDerivAt 0 hp
-  have he : F ∘ (fun ζ : ℝ => ((0, ζ), I ((0, ζ), θ))) =
+  have he : F ∘ (fun ζ : ℝ => (((0 : ℝ), ζ), I ((0, ζ), θ))) =
       (fun _ : ℝ => θ) := by
     funext ζ
     simpa only [Function.comp_apply, I] using
