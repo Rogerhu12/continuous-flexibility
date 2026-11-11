@@ -17,9 +17,12 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 | | |
 |---|---|
 | Lean modules compiled / total | 319 / 327 |
+| Modules in the root import | 319 |
 | Lines of Lean under `src/` | 87,633 |
+| Axiom audit (`lake build`, 3751 jobs) | passed: 10,671 declarations, 8,043 theorems |
 | Blueprint statements proved / total | blueprint v2 not written yet |
-| Main theorem | not proved |
+| Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
+| Modules on the module system | 1 (the Challenge) of 329 |
 
 The 8 modules that do not compile are unfinished files of the earlier workflow:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
@@ -50,10 +53,34 @@ Paper §2–§10 is 4,460 lines of TeX. With the playbook ratios (105–320 line
 of TeX; hard analysis at the high end) and the measured 110 for §2: about 900,000 lines in
 total, range 600,000–1,300,000. Current size is about 10% of the central estimate.
 
+## Challenge and comparator
+
+- `src/Challenge/FlexibleSphereChallenge.lean` states the theorem with mathlib only (198 lines, a module).
+- `src/Solution/FlexibleSphereSolution.lean` copies its definitions and proves
+  `FlexibleSphere.exists_closedBending_of_core : Nonempty FlatAnnularCore → Nonempty ClosedBending`
+  (standard axioms only). The project's `Statements.ClosedBending` transports to the Challenge
+  structure field by field, so no bridging layer is owed at the end.
+- `src/Challenge/comparator.json` names `FlexibleSphere.exists_closedBending`; the Solution does not
+  contain that theorem yet, so the comparator cannot pass.
+- `formalization.yaml` and `LICENSE` are not written.
+
+## Module system
+
+`scripts/to_module.py` converts a file mechanically (`module`, `public import`,
+`@[expose] public section`). Pilot on copies of the 23 modules that import only mathlib:
+23 of 23 compile as modules. The other 304 files have not been tried; they must be converted
+bottom-up, and the full rebuild belongs in CI.
+
+## CI
+
+`.github/workflows/build.yml` is written and has never run: there is no GitHub remote yet.
+
 ## Next
 
-1. Challenge file (mathlib-only statement of the theorem) and comparator configuration.
-2. CI with cache on GitHub.
-3. Module-system migration of the 327 existing files, bottom-up.
-4. Blueprint v2: necessary intermediate statements in paper order, proofs `sorry`, assembly theorem proved first.
+1. Create the GitHub repository, push, get the first green CI run with cache.
+2. Module-system migration of the existing files on a branch, verified by CI.
+3. Blueprint v2: necessary intermediate statements in paper order as
+   "for all inputs of the previous step there is the output of this step", proofs `sorry`,
+   assembly theorem to the Challenge proved first.
+4. `formalization.yaml`, `LICENSE`.
 5. One task file per statement; start the lines.
