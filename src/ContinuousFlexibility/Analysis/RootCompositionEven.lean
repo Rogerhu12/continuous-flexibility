@@ -55,10 +55,11 @@ theorem hasDerivAt_rootLastDerivative {G : E × ℝ → F}
     (hG : ContDiff ℝ ∞ G) (p : E) (z : ℝ) :
     HasDerivAt (fun t : ℝ => G (p, t)) (rootLastDerivative G (p, z)) z := by
   exact ((hG.differentiable (by simp)) (p, z)).hasFDerivAt.comp_hasDerivAt z
-    ((hasDerivAt_const p z).prodMk (hasDerivAt_id' z))
+    ((hasDerivAt_const z p).prodMk (hasDerivAt_id' z))
 
 theorem contDiff_rootDivideLast [ProperSpace E] {G : E × ℝ → F}
     (hG : ContDiff ℝ ∞ G) : ContDiff ℝ ∞ (rootDivideLast G) := by
+  dsimp only [rootDivideLast]
   apply contDiff_intervalIntegral_of_contDiff
   exact (contDiff_rootLastDerivative hG).comp
     (contDiff_fst.fst.prodMk (contDiff_snd.mul contDiff_fst.snd))
@@ -68,8 +69,9 @@ theorem rootDivideLast_factor {G : E × ℝ → F} (hG : ContDiff ℝ ∞ G)
     (p : E) (z : ℝ) :
     z • rootDivideLast G (p, z) = G (p, z) - G (p, 0) := by
   have hd (t : ℝ) : HasDerivAt (fun t : ℝ => G (p, t * z))
-      (z • rootLastDerivative G (p, t * z)) t :=
-    (hasDerivAt_rootLastDerivative hG p (t * z)).scomp t (hasDerivAt_mul_const z)
+      (z • rootLastDerivative G (p, t * z)) t := by
+    simpa only [Function.comp_def] using
+      (hasDerivAt_rootLastDerivative hG p (t * z)).scomp t (hasDerivAt_mul_const z)
   have hc : Continuous (fun t : ℝ => z • rootLastDerivative G (p, t * z)) :=
     continuous_const.smul ((contDiff_rootLastDerivative hG).continuous.comp
       (continuous_const.prodMk (continuous_id.mul continuous_const)))
@@ -99,7 +101,7 @@ theorem rootLastDerivative_odd {G : E × ℝ → F} (hG : ContDiff ℝ ∞ G)
   intro p z
   have hm : HasDerivAt (fun t : ℝ => G (p, -t))
       (-rootLastDerivative G (p, -z)) z := by
-    simpa only [Function.comp_apply, neg_one_smul] using
+    simpa only [Function.comp_def, neg_one_smul] using
       (hasDerivAt_rootLastDerivative hG p (-z)).scomp z (hasDerivAt_neg' (x := z))
   have hfun : (fun t : ℝ => G (p, -t)) = (fun t : ℝ => G (p, t)) :=
     funext fun t => he p t
@@ -111,13 +113,15 @@ theorem rootLastDerivative_odd {G : E × ℝ → F} (hG : ContDiff ℝ ∞ G)
 theorem rootDivideLast_even {G : E × ℝ → F} (hG : ContDiff ℝ ∞ G)
     (ho : ∀ p : E, Function.Odd (fun z : ℝ => G (p, z))) :
     ∀ p : E, Function.Even (fun z : ℝ => rootDivideLast G (p, z)) := by
+  letI : IsAddTorsionFree F := .of_isTorsionFree ℝ F
   intro p z
   by_cases hz : z = 0
   · simp only [hz, neg_zero]
   have hzero : G (p, 0) = 0 := (ho p).map_zero
+  have hodd : G (p, -z) = -G (p, z) := ho p z
   have heq : (-z) • rootDivideLast G (p, -z) =
       (-z) • rootDivideLast G (p, z) := by
-    rw [rootDivideLast_factor hG, ho p z, hzero, sub_zero, neg_smul,
+    rw [rootDivideLast_factor hG, hodd, hzero, sub_zero, neg_smul,
       rootDivideLast_factor hG, hzero, sub_zero]
   have h := congrArg (fun v : F => (-z)⁻¹ • v) heq
   simpa only [smul_smul, inv_mul_cancel₀ (neg_ne_zero.mpr hz), one_smul] using h
