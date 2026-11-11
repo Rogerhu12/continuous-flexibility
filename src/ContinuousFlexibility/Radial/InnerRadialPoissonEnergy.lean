@@ -130,7 +130,8 @@ theorem poisson_norm_sq_le (hw : ContDiff ℝ ∞ D.w) {s : ℝ} (hs : 0 < s)
   have hn : ‖A.fieldPoisson hw.continuous ξ‖ ≤
       (Real.sqrt (12 / s) / j) *
         Real.sqrt ⟪ξ, Matrix.toEuclideanCLM (n := Fin 2) (𝕜 := ℝ) A.fluxMatrix ξ⟫_ℝ := by
-    simpa only [fieldPoisson, fluxMatrix, innerGapFluxOperator] using
+    simpa only [fieldPoisson, fluxMatrix, innerGapFluxOperator,
+      InnerRadialChainGeometry.left, InnerRadialChainGeometry.right] using
       innerGapPoissonL2_norm_le D hw (G.left_lt_right piece).le (G.left_pos piece)
         A.frequency_pos hs (G.in_core piece)
         (fun r hr => (G.weight_pos piece r (Ioo_subset_Icc_self hr)).le)
