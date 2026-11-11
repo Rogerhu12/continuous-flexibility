@@ -148,10 +148,10 @@ theorem n04NegativeHalf_existsUnique
       r ∈ Ioo (n04NegativeLeft C i) (n04NegativeRight C i) := by
     rcases lt_or_gt_of_ne hrne with hleft | hright
     · refine ⟨(m, false), ?_⟩
-      simpa only [n04NegativeLeft_false, n04NegativeRight_false] using
+      simpa only [n04NegativeLeft_false, n04NegativeRight_false, Set.mem_Ioo] using
         And.intro hrm.1 hleft
     · refine ⟨(m, true), ?_⟩
-      simpa only [n04NegativeLeft_true, n04NegativeRight_true] using
+      simpa only [n04NegativeLeft_true, n04NegativeRight_true, Set.mem_Ioo] using
         And.intro hright hrm.2
   obtain ⟨i, hi⟩ := hex
   exact ⟨i, hi, fun j hj => n04NegativeHalf_index_unique hC hj hi⟩

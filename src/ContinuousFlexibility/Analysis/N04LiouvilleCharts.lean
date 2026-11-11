@@ -169,12 +169,16 @@ theorem hasDerivAt_n04UnitCoordinate (l r : ℝ) (reversed : Bool) (x : ℝ) :
   cases reversed with
   | false =>
     change HasDerivAt (fun y : ℝ => (y - l) / (r - l)) (r - l)⁻¹ x
-    simpa only [one_div] using
-      ((hasDerivAt_id x).sub_const l).div_const (r - l)
+    have hd : HasDerivAt (fun y : ℝ => (y - l) • (r - l)⁻¹)
+        ((1 : ℝ) • (r - l)⁻¹) x :=
+      ((hasDerivAt_id x).sub_const l).smul_const ((r - l)⁻¹)
+    simpa only [smul_eq_mul, one_mul, div_eq_mul_inv] using hd
   | true =>
     change HasDerivAt (fun y : ℝ => (r - y) / (r - l)) (-(r - l)⁻¹) x
-    simpa only [zero_sub, neg_div, one_div] using
-      ((hasDerivAt_const x r).sub (hasDerivAt_id x)).div_const (r - l)
+    have hd : HasDerivAt (fun y : ℝ => (r - y) • (r - l)⁻¹)
+        ((0 - 1 : ℝ) • (r - l)⁻¹) x :=
+      ((hasDerivAt_const x r).sub (hasDerivAt_id x)).smul_const ((r - l)⁻¹)
+    simpa only [zero_sub, smul_eq_mul, neg_mul, one_mul, div_eq_mul_inv] using hd
 
 /-- The actual derivative, in a form whose coordinate evaluations are explicit. -/
 def n04UnitChartDerivative (l r : ℝ) (reversed : Bool) :
@@ -200,7 +204,7 @@ theorem hasFDerivAt_n04UnitChart (l r : ℝ) (reversed : Bool) (p : PolarPoint) 
 theorem n04UnitChart_planeJacobian (l r : ℝ) (reversed : Bool) (p : PolarPoint) :
     planeJacobian (n04UnitChart l r reversed) p = n04UnitSlope l r reversed := by
   simp only [planeJacobian, (hasFDerivAt_n04UnitChart l r reversed p).fderiv,
-    n04UnitChartDerivative_apply, Prod.fst_mk, Prod.snd_mk,
+    n04UnitChartDerivative_apply,
     mul_one, mul_zero, zero_mul, sub_zero]
 
 theorem n04UnitChart_abs_planeJacobian {l r : ℝ} (hlr : l < r)
@@ -220,19 +224,19 @@ theorem n04UnitChart_planeJacobian_ne_zero {l r : ℝ} (hlr : l < r)
 theorem n04UnitChart_lift (l r : ℝ) (reversed : Bool) (P : ℝ) (p : PolarPoint) :
     n04UnitChart l r reversed (p + (0, P)) =
       n04UnitChart l r reversed p + (0, P) := by
-  simp only [n04UnitChart, Prod.fst_add, Prod.snd_add, Prod.fst_mk, Prod.snd_mk,
+  simp only [n04UnitChart, Prod.fst_add, Prod.snd_add,
     Prod.mk_add_mk, add_zero]
 
 theorem n04UnitInverseChart_lift (l r : ℝ) (reversed : Bool)
     (P : ℝ) (p : PolarPoint) :
     n04UnitInverseChart l r reversed (p + (0, P)) =
       n04UnitInverseChart l r reversed p + (0, P) := by
-  simp only [n04UnitInverseChart, Prod.fst_add, Prod.snd_add, Prod.fst_mk, Prod.snd_mk,
+  simp only [n04UnitInverseChart, Prod.fst_add, Prod.snd_add,
     Prod.mk_add_mk, add_zero]
 
 theorem n04LiouvilleHeight_lift (w : ℝ → ℝ) (l r P : ℝ) (p : PolarPoint) :
     n04LiouvilleHeight w l r (p + (0, P)) = n04LiouvilleHeight w l r p := by
-  simp only [n04LiouvilleHeight, Prod.fst_add, Prod.fst_mk, add_zero]
+  simp only [n04LiouvilleHeight, Prod.fst_add, add_zero]
 
 theorem n04UnitChart_reflection (l r : ℝ) (reversed : Bool) (p : PolarPoint) :
     n04UnitChart l r reversed (p.1, -p.2) =
