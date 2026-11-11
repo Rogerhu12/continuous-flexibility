@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.OneHighCircleFlowVariational
 import Mathlib.Algebra.Field.Periodic
 import Mathlib.Analysis.Calculus.Deriv.Shift
+import Mathlib.Analysis.Calculus.Deriv.MeanValue
 
 /-!
 # Continuity and the angular Jacobian of classical periodic flows
@@ -128,8 +129,8 @@ private theorem continuousOn_of_time_continuous_of_angle_bound
     dist (Θ q) (Θ p) ≤ dist (Θ q) (Θ (q.1, p.2)) +
         dist (Θ (q.1, p.2)) (Θ p) := dist_triangle _ _ _
     _ ≤ K * |q.2 - p.2| + dist (Θ (q.1, p.2)) (Θ p) := by
-      apply add_le_add_right
-      simpa only [Real.dist_eq] using hbound q.1 hq.1 q.2 p.2
+      exact add_le_add
+        (by simpa only [Real.dist_eq] using hbound q.1 hq.1 q.2 p.2) le_rfl
     _ < ε := by linarith
 
 /-- Smooth periodic speed and individual classical time solutions imply

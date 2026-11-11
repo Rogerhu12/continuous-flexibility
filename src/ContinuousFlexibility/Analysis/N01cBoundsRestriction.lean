@@ -122,7 +122,10 @@ theorem ordinaryFlowBounds_restrict
   obtain ⟨B, hB, hbound⟩ := hparameter s
   refine ⟨B, hB, ?_⟩
   intro m a b point hab hpnt
-  exact exists_smoothDirections_restrict_oneHighWeight hV hVU hp hb
+  exact exists_smoothDirections_restrict_oneHighWeight
+    (k := k) (center := center)
+    (φ := fun t : ℝ => min (point.1 - left m) (right m - point.1) ^ a * |t|)
+    hV hVU hp hb
     (Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss)
     (hw B hB m) (hbound m a b point hab hpnt)
 
@@ -139,7 +142,6 @@ theorem n01_componentWeight_nonneg {D : ReferenceData} {T : MaterialData}
   exact mul_nonneg (mul_nonneg hB (Real.rpow_nonneg hH.le _))
     (Real.rpow_nonneg hE.le _)
 
-set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
 /-- Coefficient estimates persist on a stronger low-order ball with a larger
 spatial loss.  No constant or directional derivative is replaced. -/
@@ -175,7 +177,6 @@ theorem coefficientFamilyTameBounds_mono_of_accumulatingProfile
   exact coefficientFamilyTameBounds_mono hT
     (materialSample_mem_radialCore hT hbounds.2.1) h hb hl hε
 
-set_option diagnostics true in
 set_option backward.isDefEq.respectTransparency true in
 /-- Ordinary-flow estimates restrict with exactly the same state-derivative
 loss at each parameter order. -/

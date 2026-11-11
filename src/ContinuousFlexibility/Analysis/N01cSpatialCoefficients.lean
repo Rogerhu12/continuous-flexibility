@@ -34,7 +34,10 @@ theorem deriv_logPerturbation_neg_of_relative_bound
     (hw : HasDerivAt w wr r) (hf : HasDerivAt f fr r)
     (hwr : wr < 0) (hsmall : |w r * fr| ≤ -wr / 2) :
     deriv (fun s => w s * Real.exp (f s)) r < 0 := by
-  rw [(hw.mul hf.exp).deriv]
+  have hd : HasDerivAt (fun s => w s * Real.exp (f s))
+      (wr * Real.exp (f r) + w r * (Real.exp (f r) * fr)) r := by
+    simpa only [Pi.mul_apply] using hw.mul hf.exp
+  rw [hd.deriv]
   have hsum : wr + w r * fr < 0 := by
     have hu := le_abs_self (w r * fr)
     linarith

@@ -57,22 +57,29 @@ theorem jointStateGrading_hasInterpolation {D : ReferenceData} {T : MaterialData
   hasInterpolation_of_hasSmoothing (jointStateGrading_monotone S)
     (jointStateGrading_hasSmoothing hS)
 
+private theorem pairGrading_displacement_apply {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (p : ℕ → Seminorm ℝ E)
+    (base : ℕ) (z : E × ℝ) (reference : E) :
+    pairGrading p realGrading base (z - (reference, (0 : ℝ))) =
+      p base (z.1 - reference) + |z.2| := by
+  rw [pairGrading_apply]
+  simp only [Prod.fst_sub, Prod.snd_sub, Prod.fst_mk, Prod.snd_mk,
+    sub_zero, realGrading, coe_normSeminorm, Real.norm_eq_abs]
+
 /-- The displacement grading is exactly the sum of the two quantities
 already controlled by the original state neighbourhood. -/
 theorem jointStateGrading_displacement_apply (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (base : ℕ) (z : AnnularState S × ℝ) :
-    pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0)) =
-      stateGrading S base (z.1 - C.referenceState) + |z.2| := by
-  rw [pairGrading_apply]
-  simp only [Prod.fst_sub, Prod.snd_sub, Prod.fst_mk, Prod.snd_mk,
-    sub_zero, realGrading, coe_normSeminorm, Real.norm_eq_abs]
+    pairGrading (stateGrading S) realGrading base (z - (C.referenceState, (0 : ℝ))) =
+      stateGrading S base (z.1 - C.referenceState) + |z.2| :=
+  pairGrading_displacement_apply (stateGrading S) base z C.referenceState
 
 /-- Halving the common radius puts the actual joint displacement in
 the unit low-seminorm ball used for multilinear normalization. -/
 theorem jointStateGrading_displacement_lt_one {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ} {z : AnnularState S × ℝ}
     (hε : ε ≤ 1 / 2) (hz : z ∈ stateNeighborhood S C base ε) :
-    pairGrading (stateGrading S) realGrading base (z - (C.referenceState, 0)) < 1 := by
+    pairGrading (stateGrading S) realGrading base (z - (C.referenceState, (0 : ℝ))) < 1 := by
   rw [jointStateGrading_displacement_apply]
   have hsum :
       stateGrading S base (z.1 - C.referenceState) + |z.2| < ε + ε :=
@@ -98,10 +105,11 @@ theorem exists_stateNeighborhood_oneHighProductBounds
         ∀ A : (AnnularState S × ℝ) [×k]→L[ℝ] ℝ, ∀ K : ℝ, 0 ≤ K →
           (∀ v : Fin k → AnnularState S × ℝ, |A v| ≤
             K * ∏ i, pairGrading (stateGrading S) realGrading (a i + offset)
-              (Fin.cons (z - (C.referenceState, 0)) v (select i))) →
+              ((Fin.cons (z - (C.referenceState, (0 : ℝ))) v :
+                Fin (k + 1) → AnnularState S × ℝ) (select i))) →
           ∀ v : Fin k → AnnularState S × ℝ, |A v| ≤ K * B *
             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, 0)) v := by
+              base (s + loss) (z - (C.referenceState, (0 : ℝ))) v := by
   obtain ⟨b, loss, hbounds⟩ := exists_oneHighMultilinearProductBounds (F := ℝ)
     (pairGrading (stateGrading S) realGrading) (jointStateGrading_monotone S)
     (jointStateGrading_hasInterpolation hS) offset
@@ -113,24 +121,25 @@ theorem exists_stateNeighborhood_oneHighProductBounds
     refine ⟨B, hB, ?_⟩
     intro a ha select z hz A K hK hraw v
     have hsmall : pairGrading (stateGrading S) realGrading b
-        (z - (C.referenceState, 0)) ≤ 1 :=
+        (z - (C.referenceState, (0 : ℝ))) ≤ 1 :=
       ((jointStateGrading_monotone S (le_max_right originalBase b) _).trans_lt
         (jointStateGrading_displacement_lt_one (min_le_right ε (1 / 2)) hz)).le
     have hraw' : ∀ w : Fin k → AnnularState S × ℝ, realGrading 0 (A w) ≤
         K * ∏ i, pairGrading (stateGrading S) realGrading (a i + offset)
-          (Fin.cons (z - (C.referenceState, 0)) w (select i)) := by
+          ((Fin.cons (z - (C.referenceState, (0 : ℝ))) w :
+            Fin (k + 1) → AnnularState S × ℝ) (select i)) := by
       intro w
       simpa only [realGrading, coe_normSeminorm, Real.norm_eq_abs] using hraw w
-    have h := hBb a ha select (z - (C.referenceState, 0)) hsmall A
+    have h := hBb a ha select (z - (C.referenceState, (0 : ℝ))) hsmall A
       (realGrading 0) K hK hraw' v
     have hbound : |A v| ≤ K * B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          b (s + loss) (z - (C.referenceState, 0)) v := by
+          b (s + loss) (z - (C.referenceState, (0 : ℝ))) v := by
       simpa only [realGrading, coe_normSeminorm, Real.norm_eq_abs,
         multilinearTameSize, oneHighVariationWeight] using h
     exact hbound.trans (mul_le_mul_of_nonneg_left
       (oneHighVariationWeight_mono (jointStateGrading_monotone S)
-        (le_max_right originalBase b) le_rfl (z - (C.referenceState, 0)) v)
+        (le_max_right originalBase b) le_rfl (z - (C.referenceState, (0 : ℝ))) v)
       (mul_nonneg hK hB))
 
 end ContinuousFlexibility.Statements

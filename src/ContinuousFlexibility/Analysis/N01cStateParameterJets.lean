@@ -268,7 +268,7 @@ def stateKappaLinear {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesD
   toFun x := stateKappa S x m
   map_add' x y := stateKappa_add hS x y m
   map_smul' c x := by
-    simpa only [smul_eq_mul] using stateKappa_smul S c x m
+    simpa only [smul_eq_mul, RingHom.id_apply] using stateKappa_smul S c x m
 
 theorem stateKappaLinear_apply {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S) (m : ℕ)

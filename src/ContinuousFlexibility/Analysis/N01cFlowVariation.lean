@@ -57,6 +57,7 @@ theorem scalar_inhomogeneousODE_eq_exp_mul
         (Real.exp (-∫ r in a..t, K r) * F t) t := by
     have hd := (hdy t ht).mul (hprimitive t).neg.exp
     apply hd.congr_deriv
+    simp only [Pi.neg_apply]
     rw [hKeq t (Ioo_subset_Icc_self ht)]
     ring
   have hfund := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hab
@@ -75,6 +76,8 @@ theorem scalar_inhomogeneousODE_eq_exp_mul
       ∫ t in a..b, Real.exp (-∫ r in a..t, κ r) * F t := by
     apply intervalIntegral.integral_congr
     intro t ht
+    change Real.exp (-∫ r in a..t, K r) * F t =
+      Real.exp (-∫ r in a..t, κ r) * F t
     rw [hint t (by simpa only [uIcc_of_le hab] using ht)]
   calc
     y b = (y b * Real.exp (-∫ r in a..b, K r)) *
@@ -107,6 +110,7 @@ theorem circleTrajectory_twoSpeeds_difference_eq
   apply scalar_inhomogeneousODE_eq_exp_mul hab hκ hforcing (hu.sub hv)
   intro t ht
   apply ((hdu t ht).sub (hdv t ht)).congr_deriv
+  simp only [Pi.sub_apply]
   have hsec := circleSpeed_sub_eq_secant hH t (v t) (u t)
   linarith
 
@@ -253,6 +257,11 @@ theorem continuousCircleTrajectory_hasDerivAt_parameter
       (hA.comp (continuous_const.prodMk continuous_id)).continuousOn
       (continuous_const.mul (hB.comp (continuous_const.prodMk continuous_id))).continuousOn
       ((htime q).sub (htime q₀)) hdy
+    change Θ (q, b) - Θ (q₀, b) =
+      Real.exp (∫ r in a..b, A (q, r)) *
+        (Θ (q, a) - Θ (q₀, a) +
+          ∫ t in a..b, Real.exp (-∫ r in a..t, A (q, r)) *
+            ((q - q₀) * B (q, t))) at he
     simp only [hinit, sub_self, zero_add, hfactor] at he
     dsimp only [R]
     rw [he]
@@ -278,6 +287,7 @@ theorem continuousCircleTrajectory_hasDerivAt_parameter
     apply intervalIntegral.integral_congr
     intro r hr
     have hr' : r ∈ Icc a t := by simpa only [uIcc_of_le ht.1] using hr
+    change A (q₀, r) = angularPartial (fun p => G (q₀, p)) (r, Θ (q₀, r))
     rw [hAeq q₀ r ⟨hr'.1, hr'.2.trans ht.2⟩, circleSpeedSecant_diagonal]
   apply hd.congr_deriv
   dsimp only [R]
@@ -286,6 +296,10 @@ theorem continuousCircleTrajectory_hasDerivAt_parameter
   apply intervalIntegral.integral_congr
   intro t ht
   have ht' : t ∈ Icc a b := by simpa only [uIcc_of_le hab] using ht
+  change Real.exp (-∫ r in a..t, A (q₀, r)) * B (q₀, t) =
+    Real.exp (-∫ r in a..t,
+      angularPartial (fun p => G (q₀, p)) (r, Θ (q₀, r))) *
+        circleSpeedParameterDeriv G (q₀, (t, Θ (q₀, t)))
   rw [hAI t ht', hBeq q₀ t ht', circleParameterSpeedSecant_diagonal]
 
 end ContinuousFlexibility.Analysis
