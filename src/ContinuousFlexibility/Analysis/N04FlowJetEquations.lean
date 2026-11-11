@@ -77,10 +77,16 @@ theorem n04Flow_integral_eq (hF : ContDiff ℝ ∞ F)
     {t : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) :
     Θ q.1 t q.2 = q.2 + ∫ r in (0 : ℝ)..t, n04FlowComposedField F Θ (q, r) := by
   have hu := n04Flow_time_continuousOn hΘ q.1 q.2
+  have hconstant : ContinuousOn (fun _r : ℝ => q.1) (Icc (0 : ℝ) 1) :=
+    continuousOn_const
+  have hpath : ContinuousOn (fun r : ℝ => (r, (q.1, Θ q.1 r q.2)))
+      (Icc (0 : ℝ) 1) :=
+    continuousOn_id.prodMk (hconstant.prodMk hu)
   have hc : ContinuousOn
-      (fun r : ℝ => n04FlowComposedField F Θ (q, r)) (Icc (0 : ℝ) 1) :=
-    hF.continuous.comp_continuousOn
-      (continuousOn_id.prodMk (continuousOn_const.prodMk hu))
+      (fun r : ℝ => n04FlowComposedField F Θ (q, r)) (Icc (0 : ℝ) 1) := by
+    change ContinuousOn (fun r : ℝ => F (r, (q.1, Θ q.1 r q.2)))
+      (Icc (0 : ℝ) 1)
+    exact hF.continuous.comp_continuousOn hpath
   have hFTC := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le ht.1
     (hu.mono (Icc_subset_Icc le_rfl ht.2))
     (fun r hr => n04Flow_time_hasDerivAt hΘ q.1 q.2 ⟨hr.1, hr.2.trans_le ht.2⟩)
