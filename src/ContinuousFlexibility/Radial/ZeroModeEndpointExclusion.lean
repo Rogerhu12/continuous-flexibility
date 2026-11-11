@@ -61,7 +61,9 @@ theorem zeroMode_right_lower_bound_impossible
   have hi : IntervalIntegrable (fun r => (D.b - r)⁻¹) volume l D.b :=
     (intervalIntegrable_iff_integrableOn_Ioo_of_le hlb.le).mpr hinv
   have hbad : IntervalIntegrable (fun r => (r - D.b)⁻¹) volume l D.b := by
-    simpa only [Pi.neg_apply, ← inv_neg, neg_sub] using hi.neg
+    have hn := hi.neg
+    change IntervalIntegrable (fun r : ℝ => -((D.b - r)⁻¹)) volume l D.b at hn
+    simpa only [← inv_neg, neg_sub] using hn
   rcases intervalIntegrable_sub_inv_iff.mp hbad with heq | hnot
   · exact hlb.ne heq
   · exact hnot right_mem_uIcc

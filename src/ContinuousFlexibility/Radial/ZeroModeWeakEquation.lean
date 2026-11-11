@@ -68,7 +68,7 @@ theorem zeroModeHeight_weak_of_integrable
       (∫ r in a..b, (zeroModeFlux a f r / w r) * (w r * deriv ψ r)) =
         ∫ r in a..b, zeroModeFlux a f r * deriv ψ r := by
     apply intervalIntegral.integral_congr_ae
-    filter_upwards [ae_neq b] with r hrb hr
+    filter_upwards [Measure.ae_ne volume b] with r hrb hr
     rw [uIoc_of_le hab.le] at hr
     have hri : r ∈ Ioo a b := ⟨hr.1, lt_of_le_of_ne hr.2 hrb⟩
     calc

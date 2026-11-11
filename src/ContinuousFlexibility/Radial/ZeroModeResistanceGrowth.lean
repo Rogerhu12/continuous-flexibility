@@ -20,6 +20,7 @@ open Set Real Filter MeasureTheory
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency false in
 theorem zeroMode_resistance_tendsto_atTop
     {D : ReferenceData} (hD : RadialProfileGeometry D)
     {c : ℝ} (hc : c ∈ radialCore D) :
@@ -60,7 +61,7 @@ theorem zeroMode_resistance_tendsto_atTop
           HasDerivAt (fun t => -log (D.b - t)) ((D.b - s)⁻¹) s := by
         rw [uIcc_of_le hr.1.le] at hs
         have hne : D.b - s ≠ 0 := (sub_pos.mpr (hs.2.trans_lt hr.2)).ne'
-        simpa only [neg_div, neg_neg, one_div] using
+        simpa only [id_eq, neg_div, neg_neg, one_div] using
           (((hasDerivAt_id s).const_sub D.b).log hne).fun_neg
       calc
         (∫ s in c..r, (D.b - s)⁻¹) =
@@ -81,9 +82,11 @@ theorem zeroMode_resistance_tendsto_atTop
   have hpos : Tendsto (fun r : ℝ => D.b - r) (𝓝[<] D.b) (𝓟 (Ioi (0 : ℝ))) := by
     apply tendsto_principal.mpr
     filter_upwards [eventually_mem_nhdsWithin] with r hr
-    exact sub_pos.mpr hr
+    exact sub_pos.mpr (show r < D.b from hr)
+  have hright : Tendsto (fun r : ℝ => D.b - r) (𝓝[<] D.b) (𝓝[>] (0 : ℝ)) := by
+    simpa only [inf_idem] using hzero.inf hpos
   have hlog : Tendsto (fun r : ℝ => log (D.b - r)) (𝓝[<] D.b) atBot :=
-    Real.tendsto_log_nhdsGT_zero.comp (hzero.inf hpos)
+    Real.tendsto_log_nhdsGT_zero.comp hright
   apply tendsto_atTop.mpr
   intro A
   have hsmall := hlog.eventually (eventually_le_atBot (log (D.b - c) - L * A))

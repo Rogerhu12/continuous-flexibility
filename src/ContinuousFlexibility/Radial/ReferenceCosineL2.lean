@@ -111,7 +111,8 @@ theorem referenceCircleCosineLp_orthonormal :
   | zero =>
     cases j with
     | zero =>
-      simp [radialAngularMean, Real.pi_ne_zero]
+      simp [radialAngularMean, Real.pi_ne_zero] <;>
+        field_simp [Real.pi_ne_zero]
     | succ j =>
       simp only [referenceCircleCosine_zero, referenceCircleCosine_succ_coe, one_mul]
       change radialAngularMean (Radial.cosineMode (2 * (j + 1))) = 0

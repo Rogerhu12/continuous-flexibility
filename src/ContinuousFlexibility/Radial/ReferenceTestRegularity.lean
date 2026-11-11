@@ -38,8 +38,9 @@ theorem radialPDE_zero_of_radial_support
     funext (fun φ => hs r hr φ)
   have hz : deriv (fun _ : ℝ => (0 : ℝ)) = (fun _ : ℝ => (0 : ℝ)) := by
     funext φ
-    exact deriv_const 0
-  unfold Radial.radialPDE
+    exact deriv_const φ (0 : ℝ)
+  change deriv (fun t => w t * deriv (fun z => ψ (z, θ)) t) r +
+    deriv w r / r * deriv (deriv (fun φ => ψ (r, φ))) θ = 0
   rw [hfd, hθ, hz]
   simp only [deriv_const, mul_zero, add_zero]
 

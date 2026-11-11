@@ -42,7 +42,7 @@ theorem radialWeakPairing_radial_lift (D : ReferenceData)
           deriv (fun t => D.w t * deriv ψ t) r := by
   have hd (r : ℝ) : deriv (fun _ : ℝ => ψ r) = (fun _ : ℝ => (0 : ℝ)) := by
     funext θ
-    exact deriv_const (ψ r)
+    exact deriv_const θ (ψ r)
   unfold radialWeakPairing
   simp only [Radial.radialPDE, hd, deriv_const, mul_zero, add_zero,
     radialAngularMean_mul_const]
@@ -57,7 +57,7 @@ theorem referenceColumn_radial_lift_mean (D : ReferenceData)
     ring
   rw [heq, radialAngularMean_const_mul]
   have hz : radialAngularMean (Radial.cosineMode 2) = 0 := by
-    simpa only [radialAngularMean, Radial.angularAverage] using
+    simpa only [radialAngularMean, Radial.angularAverage, one_div] using
       Radial.angularAverage_cosineMode 2 (by norm_num)
   rw [hz, mul_zero]
 

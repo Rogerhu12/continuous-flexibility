@@ -27,7 +27,8 @@ theorem matchedTestScale_one_lt (n : ℕ) : 1 < matchedTestScale n := by
 
 theorem matchedTestScale_tendsto :
     Tendsto matchedTestScale atTop (𝓝 (1 : ℝ)) := by
-  simpa only [matchedTestScale, add_zero] using
+  change Tendsto (fun n : ℕ => 1 + 1 / ((n : ℝ) + 1)) atTop (𝓝 (1 : ℝ))
+  simpa only [add_zero] using
     (tendsto_const_nhds (x := (1 : ℝ))).add
       (tendsto_one_div_add_atTop_nhds_zero_nat : Tendsto
         (fun n : ℕ => 1 / ((n : ℝ) + 1)) atTop (𝓝 (0 : ℝ)))
