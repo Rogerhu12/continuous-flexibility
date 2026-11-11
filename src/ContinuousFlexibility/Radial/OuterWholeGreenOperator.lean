@@ -40,11 +40,12 @@ theorem outerCoreCoordinates_apply (f : Lp ℝ 2 μ) :
 def outerCoreAssemble :
     (Lp ℝ 2 ν × Lp ℝ 2 (μ.restrict sᶜ)) →L[ℝ] Lp ℝ 2 μ :=
   (l2Glue μ s hs).comp
-    (e.symm.toContinuousLinearEquiv.toContinuousLinearMap.prodMap (id ℝ _))
+    ((e.symm.toContinuousLinearEquiv.toContinuousLinearMap.comp (fst ℝ _ _)).prod
+      (snd ℝ _ _))
 
 theorem outerCoreAssemble_apply (f : Lp ℝ 2 ν × Lp ℝ 2 (μ.restrict sᶜ)) :
     outerCoreAssemble μ s hs ν e f = l2Glue μ s hs (e.symm f.1, f.2) := by
-  simp only [outerCoreAssemble, comp_apply, prodMap_apply, id_apply,
+  simp only [outerCoreAssemble, comp_apply, prod_apply, coe_fst', coe_snd',
     LinearIsometryEquiv.coe_toContinuousLinearEquiv, ContinuousLinearEquiv.coe_coe]
 
 theorem outerCoreAssemble_coordinates (f : Lp ℝ 2 μ) :
@@ -57,9 +58,14 @@ theorem outerCoreCoordinates_assemble (f : Lp ℝ 2 ν × Lp ℝ 2 (μ.restrict 
   rw [outerCoreAssemble_apply, outerCoreCoordinates_apply]
   have h := l2Split_glue μ s hs (e.symm f.1, f.2)
   rw [l2Split_apply] at h
+  have hleft : l2Restrict μ s (l2Glue μ s hs (e.symm f.1, f.2)) = e.symm f.1 :=
+    congrArg Prod.fst h
+  have hright : l2Restrict μ sᶜ (l2Glue μ s hs (e.symm f.1, f.2)) = f.2 :=
+    congrArg Prod.snd h
   apply Prod.ext
-  · rw [congrArg Prod.fst h, e.apply_symm_apply]
-  · exact congrArg Prod.snd h
+  · change e (l2Restrict μ s (l2Glue μ s hs (e.symm f.1, f.2))) = f.1
+    rw [hleft, e.apply_symm_apply]
+  · exact hright
 
 theorem norm_outerCoreCoordinates_apply_le (f : Lp ℝ 2 μ) :
     ‖outerCoreCoordinates μ s ν e f‖ ≤ ‖f‖ := by

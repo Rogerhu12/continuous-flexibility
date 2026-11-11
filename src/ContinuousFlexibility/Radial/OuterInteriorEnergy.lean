@@ -20,7 +20,7 @@ theorem outer_abs_integral_le_whole {f : ℝ → ℝ} {l r s t : ℝ}
   have hae : 0 ≤ᵐ[volume.restrict (Ioc l r)] f :=
     (ae_restrict_iff' measurableSet_Ioc).mpr
       (Filter.Eventually.of_forall (fun x hx => hf₀ x ⟨hx.1.le, hx.2⟩))
-  have hi := hf.intervalIntegrable_of_Icc hlr
+  have hi : IntervalIntegrable f volume l r := hf.intervalIntegrable_of_Icc hlr
   rcases le_total s t with hst | hts
   · have hpos : 0 ≤ ∫ x in s..t, f x :=
       intervalIntegral.integral_nonneg hst (fun x hx => hf₀ x ⟨hs.1.trans hx.1, hx.2.trans ht.2⟩)
@@ -154,7 +154,9 @@ theorem morse_negative_energy_on {A B j s t : ℝ} (hB : 0 < B)
     _ ≤ ((u s ^ 2 + v s ^ 2) * (1 + j ^ 2 * (A / 4 - B))) *
         exp (r - l + 2 * log (1 + j ^ 2 * (A / 4 - B))) :=
       mul_le_mul hupp (exp_le_exp.mpr (hsub.trans hI)) (exp_pos _).le
-        (by have hp : 0 ≤ A / 4 - B := by linarith only [hAB]; positivity)
+        (by
+          have hp : 0 ≤ A / 4 - B := by linarith only [hAB]
+          positivity)
     _ = _ := by dsimp only [morseNegativeEnergyFactor, l, r]; ring
 
 end ContinuousFlexibility.Radial

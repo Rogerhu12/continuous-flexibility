@@ -106,6 +106,9 @@ theorem normalizedRadialGaugeMass_div {D : ReferenceData} (j : ℕ)
   intro x _
   have hratio : x / endpoint = (x / entrance) * (entrance / endpoint) := by
     field_simp [hentry.ne', hend.ne']
+  change (x / endpoint) ^ (2 * j ^ 2) * D.w x / x ^ 2 /
+      (entrance / endpoint) ^ (2 * j ^ 2) =
+    (x / entrance) ^ (2 * j ^ 2) * D.w x / x ^ 2
   rw [hratio, mul_pow]
   calc
     _ = ((entrance / endpoint) ^ (2 * j ^ 2) /
@@ -158,7 +161,7 @@ theorem morsePhysicalDeepTail_first_mass {M : MorseChainData} {σ : ℕ → ℝ}
   have hh := outerMassLogDensity_integral h.geometry.2.2.1.1.continuous
     j (tailPhysicalEndpoint D right) right hl hls
   cases right <;>
-    simpa only [tailMass, morsePhysicalDeepTail, tailPhysicalLog, Nat.add_zero] using hh
+    simpa [tailMass, morsePhysicalDeepTail, tailPhysicalLog] using hh
 
 /-- Exact conversion to the entrance normalization used by Lemma 6.4,
 including the square of the real-power gauge from the manuscript. -/

@@ -65,6 +65,7 @@ theorem outerStateEquiv_norms_le {A : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ)} {L : 
   have hf := outerStateOperator_norm_le (A := A.toContinuousLinearMap) hL (fun v => (h v).1)
   have hi := outerStateOperator_norm_le (A := A.symm.toContinuousLinearMap) hL (by
     intro v
+    change outerStateEnergy (A.symm v) ≤ L * outerStateEnergy v
     simpa only [ContinuousLinearEquiv.apply_symm_apply] using (h (A.symm v)).2)
   linarith
 

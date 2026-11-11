@@ -181,7 +181,8 @@ theorem morse_cell_factor_le_frequency_exp {T : MorseChainData} {C : ℝ} {n j :
       (by linarith only [hleft.1.1, hb₀] : 0 ≤ 1 + aL + bL) hleftSize hleftProd
     have hsqrt : sqrt (16 : ℝ) = 4 := by
       rw [show (16 : ℝ) = (4 : ℝ) ^ 2 by norm_num, sqrt_sq (by norm_num : (0 : ℝ) ≤ 4)]
-    simpa only [hsqrt, show (2 : ℝ) * 4 = 8 by norm_num] using hh
+    simpa only [hsqrt, show (2 : ℝ) * 4 = 8 by norm_num,
+      morsePositiveEnergyFactor, aL, bL, tau] using hh
   have hright := morse_right_cap_coefficient_bounds hB hAB hBA
   let aR := morseRightCapEnd A B (1 / 100) - morseRightTurn A B
   let bR := (j : ℝ) ^ 2 * (∫ x in morseRightTurn A B..morseRightCapEnd A B (1 / 100), -morseRho A B x)
@@ -228,7 +229,7 @@ theorem morse_cell_factor_le_frequency_exp {T : MorseChainData} {C : ℝ} {n j :
     have hh := outer_positive_factor_le_exp hN (by norm_num : (0 : ℝ) ≤ 60000)
       (by norm_num : (0 : ℝ) ≤ 1) hA.le hj
       (by linarith only [haR₀, hb₀] : 0 ≤ 1 + aR + bR) hrightSize hrightProd
-    simpa only [sqrt_one, mul_one] using hh
+    simpa only [sqrt_one, mul_one, morsePositiveEnergyFactor, aR, bR, tau] using hh
   have hpeak : 0 ≤ A / 4 - B := by linarith only [hAB]
   have hpeak9 : A / 4 - B ≤ 9 := by linarith only [hA9, hB, hA]
   have hlog : log (1 + (j : ℝ) ^ 2 * (A / 4 - B)) ≤ (F + 10) * N := by

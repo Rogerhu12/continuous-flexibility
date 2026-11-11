@@ -120,7 +120,7 @@ theorem tailPhysicalRadius_image {D : ReferenceData} {T : DeepTailData}
     change (Real.exp ∘ Neg.neg) '' Ioo T.entrance T.endpoint =
       Ioo D.a (Real.exp (-T.entrance))
     calc
-      _ = Real.exp '' (Neg.neg '' Ioo T.entrance T.endpoint) := by rw [Set.image_image]
+      _ = Real.exp '' (Neg.neg '' Ioo T.entrance T.endpoint) := by rw [Set.image_image]; rfl
       _ = _ := by rw [hn, Real.image_exp_Ioo, he, neg_neg, Real.exp_log ha]
   · have he : T.endpoint = Real.log D.b := hphysical.2.1
     change Real.exp '' Ioo T.entrance T.endpoint = Ioo (Real.exp T.entrance) D.b

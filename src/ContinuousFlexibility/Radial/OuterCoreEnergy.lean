@@ -143,11 +143,13 @@ theorem morseOuterCore_endpoint_energy {T : MorseChainData} {σ : ℕ → ℝ}
       rw [hs] at hjoin
       constructor
       · exact hjoin.1.trans (by
-          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, mul_assoc] using
+          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, E, morseOuterCoreLeft, morseOuterCoreRight,
+            Bool.false_eq_true, ite_false, ite_true, mul_assoc] using
             mul_le_mul_of_nonneg_right hcell.1 hKj)
       · exact hcell.2.trans (by
           have hb := mul_le_mul_of_nonneg_right hjoin.2 hKc
-          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, mul_assoc, mul_comm, mul_left_comm] using hb)
+          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, E, morseOuterCoreLeft, morseOuterCoreRight,
+            Bool.false_eq_true, ite_false, ite_true, mul_assoc, mul_comm, mul_left_comm] using hb)
   | true =>
       have hs : T.joinRight true (n - 1) = T.radius true n (T.leftX true n) := by
         simpa only [ite_true, hn₁] using hj.2.2.1
@@ -155,9 +157,11 @@ theorem morseOuterCore_endpoint_energy {T : MorseChainData} {σ : ℕ → ℝ}
       constructor
       · exact hcell.1.trans (by
           have hb := mul_le_mul_of_nonneg_right hjoin.1 hKc
-          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, mul_assoc, mul_comm, mul_left_comm] using hb)
+          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, E, morseOuterCoreLeft, morseOuterCoreRight,
+            Bool.false_eq_true, ite_false, ite_true, mul_assoc, mul_comm, mul_left_comm] using hb)
       · exact hjoin.2.trans (by
-          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, mul_assoc] using
+          simpa only [morseOuterCoreEnergyFactor, Kc, Kj, E, morseOuterCoreLeft, morseOuterCoreRight,
+            Bool.false_eq_true, ite_false, ite_true, mul_assoc] using
             mul_le_mul_of_nonneg_right hcell.2 hKj)
 
 end ContinuousFlexibility.Radial
