@@ -24,13 +24,14 @@ theorem iteratedDeriv_succ_linearFactor {u : ℝ → ℝ} (hu : ContDiff ℝ ∞
   have hd (n : ℕ) (x : ℝ) :
       HasDerivAt (iteratedDeriv n u) (iteratedDeriv (n + 1) u x) x := by
     have hn : Differentiable ℝ (iteratedDeriv n u) :=
-      hu.differentiable_iteratedDeriv n (by simp)
+      hu.differentiable_iteratedDeriv n
+        (ENat.natCast_lt_of_coe_top_le_withTop le_rfl n)
     simpa only [iteratedDeriv_succ] using (hn x).hasDerivAt
   induction s generalizing y with
   | zero =>
       simpa only [Nat.zero_add, Nat.cast_one, iteratedDeriv_zero, iteratedDeriv_one,
         one_mul, add_comm]
-        using ((hasDerivAt_id y).mul (hd 0 y)).deriv
+        using ((hasDerivAt_id' y).fun_mul (hd 0 y)).deriv
   | succ s ih =>
       have hfun : iteratedDeriv (s + 1) (fun x : ℝ => x * u x) =
           fun x : ℝ => x * iteratedDeriv (s + 1) u x +

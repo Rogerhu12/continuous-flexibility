@@ -1,4 +1,6 @@
 import Mathlib.Analysis.Calculus.ContDiff.Deriv
+import Mathlib.Analysis.Calculus.Deriv.Mul
+import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.MeasureTheory.Function.L2Space
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.Tactic.FunProp
@@ -60,7 +62,8 @@ theorem integral_sq_le_four_euler {u : ℝ → ℝ} (hu : ContDiff ℝ ∞ u)
   have hVInt : IntervalIntegrable V' volume 0 1 := hV'.intervalIntegrable 0 1
   have hVderiv (y : ℝ) : HasDerivAt (fun t => t * u t ^ 2) (V' y) y := by
     have hd := (hu.differentiable (by simp) y).hasDerivAt
-    convert (hasDerivAt_id y).mul (hd.pow 2) using 1 <;> dsimp only [V', id] <;> ring
+    convert (hasDerivAt_id y).fun_mul (hd.fun_pow 2) using 1 <;>
+      dsimp only [V', id] <;> ring
   have hFTC : (∫ y in (0 : ℝ)..1, V' y) = u 1 ^ 2 := by
     simpa only [one_mul, zero_mul, sub_zero] using
       (intervalIntegral.integral_eq_sub_of_hasDerivAt
@@ -95,7 +98,9 @@ theorem eLpNorm_le_two_euler {u : ℝ → ℝ} (hu : ContDiff ℝ ∞ u)
     eLpNorm_two_eq_ofReal_sqrt_intervalIntegral hH]
   have hroot := Real.sqrt_le_sqrt (integral_sq_le_four_euler hu ha)
   rw [Real.sqrt_mul (by norm_num : (0 : ℝ) ≤ 4)] at hroot
-  have hfour : Real.sqrt (4 : ℝ) = 2 := by norm_num
+  have hfour : Real.sqrt (4 : ℝ) = 2 := by
+    rw [show (4 : ℝ) = 2 ^ 2 by norm_num,
+      Real.sqrt_sq (by norm_num : (0 : ℝ) ≤ 2)]
   rw [hfour] at hroot
   exact (ENNReal.ofReal_le_ofReal hroot).trans_eq (ENNReal.ofReal_mul (by norm_num))
 
