@@ -54,7 +54,6 @@ theorem interpolate_equation (A Z : ℝ) {x : ℝ} (hx : x ∈ Ioo a b) :
   convert ((B.equation false x hx).const_mul A).add
     ((B.equation true x hx).const_mul Z) using 1
   · funext y
-    dsimp only
     rw [B.interpolate_deriv]
     ring
   · dsimp only [interpolate]
@@ -102,8 +101,12 @@ theorem basis_bounds (hlt : a < b) (hp : ContinuousOn p (Icc a b))
     (tailClampedDensity_continuous hab hp) (tailClampedDensity_pos hab hpos) a
   let S := tailResistanceChart (tailClampedDensity p a b hab) a
   have h0 : S a = 0 := intervalIntegral.integral_same
-  have hL : 0 < S b := by simpa only [h0] using hS hlt
-  have hxl : 0 ≤ S x := by simpa only [h0] using hS.monotone hx.1
+  have hL : 0 < S b := by
+    have hh : S a < S b := hS hlt
+    simpa only [h0] using hh
+  have hxl : 0 ≤ S x := by
+    have hh : S a ≤ S x := hS.monotone hx.1
+    simpa only [h0] using hh
   have hxr : S x ≤ S b := hS.monotone hx.2
   have hh : 0 ≤ tailPhysicalHeight p a b hab right x ∧
       tailPhysicalHeight p a b hab right x ≤ 1 := by

@@ -63,7 +63,7 @@ theorem morseOutwardGlue_eventually_first {node : ℕ → ℝ} {piece : ℕ → 
     morseOutwardGlue node piece =ᶠ[𝓝 (node 0)] piece 0 := by
   filter_upwards [Iio_mem_nhds (hmono (Nat.lt_succ_self 0))] with x hx
   by_cases h : x < node 0
-  · simp only [morseOutwardGlue, ite_eq_left h]
+  · simp only [morseOutwardGlue, if_pos h]
   · exact morseOutwardGlue_apply_block hmono ⟨le_of_not_gt h, hx⟩
 
 /-- The actual entrance is `C¹` when the first Poisson piece is globally

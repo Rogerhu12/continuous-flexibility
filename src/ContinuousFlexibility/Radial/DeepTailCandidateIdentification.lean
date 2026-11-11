@@ -178,7 +178,7 @@ theorem tailNatural_entrance_of_shift_candidate
   have ha : u T.entrance = c * v T.entrance := heq ⟨le_rfl, hT.1⟩
   refine ⟨by rw [ha]; exact mul_ne_zero hc hv₀, ?_⟩
   rw [hder, ha]
-  field_simp [hc, hv₀]
+  field_simp [hc, hv₀] <;> ring
 
 /-- Normalize the original smooth natural representative; the candidate
 itself need not have an all-order smooth extension at the old entrance. -/

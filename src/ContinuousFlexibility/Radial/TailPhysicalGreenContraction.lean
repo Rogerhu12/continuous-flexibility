@@ -62,6 +62,7 @@ theorem norm_tailContinuousKernelAction_sub_le (σ : P) (w : ℝ → ℝ)
       have huvt : |IccExtend hab (u - v) t| ≤ ‖u - v‖ := by
         rw [IccExtend_of_mem hab (u - v) ht]
         simpa only [Real.norm_eq_abs] using (u - v).norm_coe_le_norm ⟨t, ht⟩
+      change ‖κ σ x t * IccExtend hab (u - v) t‖ ≤ w t * ‖u - v‖
       rw [Real.norm_eq_abs, abs_mul]
       exact mul_le_mul (hbound x x.property t ht) huvt (abs_nonneg _) (hw₀ t ht)
     _ = (∫ t in a..b, w t) * ‖u - v‖ := intervalIntegral.integral_mul_const _ _

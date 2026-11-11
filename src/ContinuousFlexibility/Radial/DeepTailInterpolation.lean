@@ -46,7 +46,7 @@ theorem tailEdge_interpolant_square_bound {a b : ℝ} (hab : a ≤ b)
           2 * (c₀ * v₀ x) ^ 2 + 2 * (c₁ * v₁ x) ^ 2 := by
         nlinarith only [sq_nonneg (c₀ * v₀ x - c₁ * v₁ x)]
       have hh := mul_le_mul_of_nonneg_left hs (hp₀ x hx)
-      convert hh using 1 <;> simp only [Pi.mul_apply, Pi.pow_apply] <;> ring
+      convert hh using 1 <;> ring
     _ = (2 * c₀ ^ 2) * (∫ x in a..b, p x * v₀ x ^ 2) +
         (2 * c₁ ^ 2) * (∫ x in a..b, p x * v₁ x ^ 2) := by
       rw [intervalIntegral.integral_add
