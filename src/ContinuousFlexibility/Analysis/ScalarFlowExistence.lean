@@ -18,6 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set Metric
+open scoped NNReal
 
 /-- Global scalar speed bounds allow the actual solution to be constructed
 on any prescribed closed time interval containing the initial time. -/

@@ -39,6 +39,7 @@ theorem scalar_forced_linearODE_eq {κ f u : ℝ → ℝ} {a b : ℝ}
       HasDerivAt (fun t => u t * Real.exp (-A t))
         (Real.exp (-A t) * f t) t := by
     apply ((hdu t ht).mul (hA t).neg.exp).congr_deriv
+    simp only [Pi.neg_apply]
     ring
   have hFTC := intervalIntegral.integral_eq_sub_of_hasDeriv_right
     hfactor_cont (fun t ht => (hfactor_deriv t ht).hasDerivWithinAt)
@@ -83,7 +84,7 @@ theorem scalar_forced_linearODE_eq_on {κ f u : ℝ → ℝ} {a b : ℝ}
   have hc : Continuous clamp :=
     continuous_const.max (continuous_id.min continuous_const)
   have hmem (t : ℝ) : clamp t ∈ uIcc a b :=
-    ⟨le_max_left _ _, max_le (min_le_max a b) (min_le_right _ _)⟩
+    ⟨le_max_left _ _, max_le min_le_max (min_le_right _ _)⟩
   have heq (t : ℝ) (ht : t ∈ uIcc a b) : clamp t = t := by
     dsimp only [clamp]
     rw [min_eq_left ht.2, max_eq_right ht.1]
@@ -100,13 +101,14 @@ theorem scalar_forced_linearODE_eq_on {κ f u : ℝ → ℝ} {a b : ℝ}
       (∫ r in a..t, κ (clamp r)) = ∫ r in a..t, κ r := by
     apply intervalIntegral.integral_congr
     intro r hr
-    rw [heq r (uIcc_subset_uIcc_left ht hr)]
+    exact congrArg κ (heq r (uIcc_subset_uIcc_left ht hr))
   have hJ :
       (∫ t in a..b, Real.exp (-(∫ r in a..t, κ (clamp r))) * f (clamp t)) =
         ∫ t in a..b, Real.exp (-(∫ r in a..t, κ r)) * f t := by
     apply intervalIntegral.integral_congr
     intro t ht
-    rw [hI t ht, heq t ht]
+    exact congrArg₂ (fun x y : ℝ => Real.exp (-x) * y)
+      (hI t ht) (congrArg f (heq t ht))
   rw [hI b right_mem_uIcc, hJ] at hsol
   exact hsol
 

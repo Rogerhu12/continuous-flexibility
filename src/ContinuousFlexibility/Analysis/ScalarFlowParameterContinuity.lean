@@ -20,6 +20,7 @@ Lipschitz bound and joint continuity on the parameter-time domain.
 noncomputable section
 
 open Set Filter
+open scoped NNReal Topology
 
 namespace ContinuousFlexibility.Analysis
 
@@ -43,7 +44,7 @@ theorem dist_scalarFlow_parameters_le
       LipschitzOnWith K
         (fun x : P × ℝ => ((0 : P), F x.1 r x.2)) (S ×ˢ univ) := by
     intro r hr
-    simpa only [max_eq_right (zero_le K)] using
+    simpa only [max_eq_right (show (0 : ℝ≥0) ≤ K from zero_le)] using
       (LipschitzWith.const (0 : P)).lipschitzOnWith.prodMk (hF r hr)
   have hc (x : P) (hx : x ∈ S) :
       ContinuousOn (fun r => (x, u x r)) (Icc a b) :=

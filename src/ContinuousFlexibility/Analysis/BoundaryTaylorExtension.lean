@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.CylinderMixedJets
 import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
+import Mathlib.Tactic.FunProp
 
 /-!
 # Boundary Taylor extensions on a cylinder
@@ -59,8 +60,10 @@ theorem iteratedDeriv_boundaryTaylorPolynomial (n : ℕ) (c : ℝ)
     iteratedDeriv k (fun x => boundaryTaylorPolynomial n c a (x, θ)) c =
       a k θ := by
   unfold boundaryTaylorPolynomial
-  rw [iteratedDeriv_fun_sum (fun j _ =>
-    (contDiff_const.mul ((contDiff_id.sub contDiff_const).pow j)).contDiffAt)]
+  have hmono (j : ℕ) : ContDiff ℝ (k : ℕ∞ω)
+      (fun x : ℝ => a j θ / (j.factorial : ℝ) * (x - c) ^ j) := by
+    fun_prop
+  rw [iteratedDeriv_fun_sum (fun j _ => (hmono j).contDiffAt)]
   simp only [iteratedDeriv_const_mul_field]
   have hshift (j : ℕ) :
       iteratedDeriv k (fun x : ℝ => (x - c) ^ j) c =
@@ -78,9 +81,10 @@ theorem iteratedDeriv_boundaryTaylorPolynomial (n : ℕ) (c : ℝ)
 
 private theorem boundaryTaylorCutoff_one_germ (c w : ℝ) :
     (fun x : ℝ => boundaryTaylorCutoff ((x - c) / w)) =ᶠ[𝓝 c] 1 := by
+  have hcont : Continuous (fun x : ℝ => (x - c) / w) :=
+    (continuous_id.sub continuous_const).div_const w
   have hlim : Tendsto (fun x : ℝ => (x - c) / w) (𝓝 c) (𝓝 0) := by
-    simpa only [sub_self, zero_div] using
-      (((continuous_id.sub continuous_const).div_const w).tendsto c)
+    simpa only [sub_self, zero_div] using hcont.tendsto c
   exact boundaryTaylorCutoff.eventuallyEq_one.comp_tendsto hlim
 
 private theorem boundaryTaylorCutoff_zero_germ {t : ℝ} (ht : 1 / 3 < |t|) :
@@ -125,13 +129,14 @@ private theorem iteratedDeriv_boundaryTaylorExtension_first
     {k : ℕ} (hk : k ≤ n) (θ : ℝ) :
     iteratedDeriv k (fun x => boundaryTaylorExtension n c d a b (x, θ)) c =
       a k θ := by
-  have hratio : |(c - d) / |d - c|| = 1 := by
+  have hratio : |(c - d) / (|d - c|)| = 1 := by
     rw [abs_div, abs_abs, abs_sub_comm c d,
       div_self (abs_ne_zero.mpr (sub_ne_zero.mpr hcd.symm))]
+  have hcont : Continuous (fun x : ℝ => (x - d) / |d - c|) :=
+    (continuous_id.sub continuous_const).div_const |d - c|
   have hother : (fun x : ℝ => boundaryTaylorCutoff ((x - d) / |d - c|)) =ᶠ[𝓝 c] 0 :=
     (boundaryTaylorCutoff_zero_germ (t := (c - d) / |d - c|)
-      (by rw [hratio]; norm_num)).comp_tendsto
-      (((continuous_id.sub continuous_const).div_const |d - c|).tendsto c)
+      (by rw [hratio]; norm_num)).comp_tendsto (hcont.tendsto c)
   have hgerm :
       (fun x => boundaryTaylorExtension n c d a b (x, θ)) =ᶠ[𝓝 c]
         (fun x => boundaryTaylorPolynomial n c a (x, θ)) := by
@@ -156,8 +161,8 @@ theorem iteratedDeriv_boundaryTaylorExtension (n : ℕ) {c d : ℝ}
 /-- Away from both scaled endpoint neighborhoods, the correction vanishes. -/
 theorem boundaryTaylorExtension_eq_zero (n : ℕ) (c d : ℝ)
     (a b : ℕ → ℝ → ℝ) {p : ℝ × ℝ}
-    (hc : 1 / 3 ≤ |(p.1 - c) / |d - c||)
-    (hd : 1 / 3 ≤ |(p.1 - d) / |d - c||) :
+    (hc : 1 / 3 ≤ |(p.1 - c) / (|d - c|)|)
+    (hd : 1 / 3 ≤ |(p.1 - d) / (|d - c|)|) :
     boundaryTaylorExtension n c d a b p = 0 := by
   have hcut {t : ℝ} (ht : 1 / 3 ≤ |t|) : boundaryTaylorCutoff t = 0 :=
     boundaryTaylorCutoff.zero_of_le_dist (by
@@ -174,8 +179,11 @@ theorem contDiff_radialBoundaryJet {F : ℝ × ℝ → ℝ}
     ContDiff ℝ ∞ (radialBoundaryJet F c j) := by
   have hjet : ContDiff ℝ ∞ (mixedDerivative j 0 F) :=
     contDiffOn_univ.mp (contDiffOn_mixedDerivative isOpen_univ hF.contDiffOn j 0)
-  simpa only [radialBoundaryJet, mixedDerivative, iteratedDeriv_zero] using
-    hjet.comp (contDiff_const.prodMk contDiff_id)
+  have heq : radialBoundaryJet F c j = fun θ => mixedDerivative j 0 F (c, θ) := by
+    funext θ
+    simp only [radialBoundaryJet, mixedDerivative, iteratedDeriv_zero]
+  rw [heq]
+  exact hjet.comp (contDiff_const.prodMk contDiff_id)
 
 /-- The extension of the actual boundary jets of a smooth field is smooth. -/
 theorem contDiff_boundaryTaylorExtension_of_field {F : ℝ × ℝ → ℝ}
