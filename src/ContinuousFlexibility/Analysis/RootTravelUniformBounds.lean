@@ -33,7 +33,7 @@ theorem abs_rootOddCoefficient_le_of_csBound_one
   rw [he]
   have ht' : t ∈ Icc (-Real.pi) Real.pi :=
     ⟨(neg_nonpos.mpr Real.pi_pos.le).trans ht.1, ht.2.le⟩
-  have hb := (csBound_rootOdd_zero hG hB).norm_le ⟨hx, ht'⟩
+  have hb := (csBound_rootOdd_zero hG hB).norm_le (x := (x, t)) ⟨hx, ht'⟩
   simpa only [rootOddCoefficient, abs_neg, Real.norm_eq_abs] using hb
 
 theorem abs_rootTravel_le_linear_of_csBound_one

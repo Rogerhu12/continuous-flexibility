@@ -71,7 +71,7 @@ theorem morseTransition_eventually_deepTail_close {M : MorseChainData} {σ : ℕ
   have hroot : κ ≤ sqrt (log (morseChainA M (n + 1) / morseChainB M (n + 1))) :=
     sqrt_le_sqrt (morseTransition_log_ratio_lower M (n + 1) (h.d_eq (n + 1) hn'))
   have hJA : (j : ℝ) ^ 2 * morseChainA M (n + 1) < (2 * L)⁻¹ := by
-    apply (mul_lt_mul_right hκ).mp
+    apply (mul_lt_mul_iff_left₀ hκ).mp
     calc
       ((j : ℝ) ^ 2 * morseChainA M (n + 1)) * κ ≤
           (j : ℝ) ^ 2 * morseChainA M (n + 1) *
