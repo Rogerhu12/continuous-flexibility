@@ -35,6 +35,8 @@ theorem PhysicalJetEnvelopes.finset_sum
       intro a b c
       have heq : weightedPhysicalJet T γ a b c (0 : PolarPoint → ℝ) = 0 :=
         (annularWeightedJetLinear hT γ a b c).map_zero
+      change MemLp (weightedPhysicalJet T γ a b c (0 : PolarPoint → ℝ))
+        2 materialCylinderMeasure
       rw [heq]
       exact memLp_zero
   | @insert j I hj ih =>
@@ -153,8 +155,9 @@ theorem symmetricSourceScalarJets_secondEnvelopes
       (fun t : I => symmetricSourceScalarJets hS hT A (n + 2) (z + t.val • w) vs) := by
     apply hall.congr_on_annularOpen hT
     intro t p hp
-    exact (congrFun (symmetricSourceScalarJets_eq_sum hS hT A (n + 1)
-      (z + t.val • w) vs) p).symm
+    simpa only [Pi.add_apply, Finset.sum_apply] using
+      (congrFun (symmetricSourceScalarJets_eq_sum hS hT A (n + 1)
+        (z + t.val • w) vs) p).symm
   refine ⟨δ, hδ, fun t ht => ⟨hmem₁ t (ht₁ ht), mem_univ _⟩, ?_⟩
   intro a b c
   obtain ⟨G, hG, hGpos, hb⟩ := hjet a b c

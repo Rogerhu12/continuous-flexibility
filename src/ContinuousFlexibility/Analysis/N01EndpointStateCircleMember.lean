@@ -35,7 +35,7 @@ private theorem oneHigh_snoc_le_product
       ((n : ℝ) + 2) * ((1 + p t z) * ∏ i : Fin n, p t (vs i)) * p t w := by
   have h := oneHighVariationWeight_le_seminorm_product p (p t) base high
     (hp hbase) (hp hhigh) z (Fin.snoc vs w)
-  have hprod : (∏ i : Fin (n + 1), p t (Fin.snoc vs w i)) =
+  have hprod : (∏ i : Fin (n + 1), p t ((Fin.snoc vs w : Fin (n + 1) → E) i)) =
       (∏ i : Fin n, p t (vs i)) * p t w := by
     rw [Fin.prod_univ_castSucc]
     simp only [Fin.snoc_castSucc, Fin.snoc_last]

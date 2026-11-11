@@ -74,38 +74,40 @@ private theorem parameterDiagonalMap_apply (n : ℕ) (A : symmetricParameterForm
 private theorem parameterDiagonalMap_injective (n : ℕ) :
     Function.Injective (parameterDiagonalMap n) := by
   classical
-  apply (LinearMap.ker_eq_bot (f := parameterDiagonalMap n)).mp
-  apply (LinearMap.ker_eq_bot' (f := parameterDiagonalMap n)).mpr
-  intro A hA
-  have hunit (x : DiagonalParameterSpace n) (hx : ‖x‖ ≤ 1) :
-      A.val (fun _ => x) = 0 := by
-    exact congrArg (fun g : BoundedContinuousFunction (DiagonalUnitBall n) ℝ => g ⟨x, hx⟩) hA
-  have hdiag (x : DiagonalParameterSpace n) : A.val (fun _ => x) = 0 := by
-    let c : ℝ := (1 + ‖x‖)⁻¹
-    have hcpos : 0 < c := inv_pos.mpr (by positivity)
-    have hc : c * (1 + ‖x‖) = 1 := inv_mul_cancel₀ (by positivity)
-    have hnorm : ‖c • x‖ ≤ 1 := by
-      rw [norm_smul, Real.norm_eq_abs, abs_of_pos hcpos]
-      nlinarith only [hc, hcpos]
-    have hscale : A.val (fun _ => c • x) = c ^ n * A.val (fun _ => x) := by
-      simpa only [Finset.prod_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul] using
-        A.val.map_smul_univ (fun _ => c) (fun _ => x)
-    have hz : c ^ n * A.val (fun _ => x) = 0 := hscale.symm.trans (hunit (c • x) hnorm)
-    exact (mul_eq_zero.mp hz).resolve_left (pow_ne_zero n hcpos.ne')
-  apply Subtype.ext
-  ext v
-  have h := A.val.iteratedFDeriv_comp_diagonal (0 : DiagonalParameterSpace n) v
-  have hf : (fun x : DiagonalParameterSpace n => A.val (fun _ => x)) =
-      fun _ => (0 : ℝ) := funext hdiag
-  rw [hf] at h
-  have hsym (σ : Equiv.Perm (Fin n)) : A.val (fun i => v (σ i)) = A.val v :=
-    A.property v σ
-  simp only [iteratedFDeriv_fun_zero, Pi.zero_apply,
-    ContinuousMultilinearMap.zero_apply, hsym, Finset.sum_const,
-    Finset.card_univ, nsmul_eq_mul] at h
-  have hcard : (Fintype.card (Equiv.Perm (Fin n)) : ℝ) ≠ 0 := by
-    exact_mod_cast Fintype.card_ne_zero
-  exact (mul_eq_zero.mp h.symm).resolve_left hcard
+  have hzero : ∀ A : symmetricParameterForms n,
+      parameterDiagonalMap n A = 0 → A = 0 := by
+    intro A hA
+    have hunit (x : DiagonalParameterSpace n) (hx : ‖x‖ ≤ 1) :
+        A.val (fun _ => x) = 0 := by
+      exact congrArg (fun g : BoundedContinuousFunction (DiagonalUnitBall n) ℝ => g ⟨x, hx⟩) hA
+    have hdiag (x : DiagonalParameterSpace n) : A.val (fun _ => x) = 0 := by
+      let c : ℝ := (1 + ‖x‖)⁻¹
+      have hcpos : 0 < c := inv_pos.mpr (by positivity)
+      have hc : c * (1 + ‖x‖) = 1 := inv_mul_cancel₀ (by positivity)
+      have hnorm : ‖c • x‖ ≤ 1 := by
+        rw [norm_smul, Real.norm_eq_abs, abs_of_pos hcpos]
+        nlinarith only [hc, hcpos]
+      have hscale : A.val (fun _ => c • x) = c ^ n * A.val (fun _ => x) := by
+        simpa only [Finset.prod_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul] using
+          A.val.map_smul_univ (fun _ => c) (fun _ => x)
+      have hz : c ^ n * A.val (fun _ => x) = 0 := hscale.symm.trans (hunit (c • x) hnorm)
+      exact (mul_eq_zero.mp hz).resolve_left (pow_ne_zero n hcpos.ne')
+    apply Subtype.ext
+    ext v
+    have h := A.val.iteratedFDeriv_comp_diagonal (0 : DiagonalParameterSpace n) v
+    have hf : (fun x : DiagonalParameterSpace n => A.val (fun _ => x)) =
+        fun _ => (0 : ℝ) := funext hdiag
+    rw [hf] at h
+    have hsym (σ : Equiv.Perm (Fin n)) : A.val (fun i => v (σ i)) = A.val v :=
+      A.property v σ
+    simp only [iteratedFDeriv_fun_zero, Pi.zero_apply,
+      ContinuousMultilinearMap.zero_apply, hsym, Finset.sum_const,
+      Finset.card_univ, nsmul_eq_mul] at h
+    have hcard : (Fintype.card (Equiv.Perm (Fin n)) : ℝ) ≠ 0 := by
+      exact_mod_cast (Fintype.card_ne_zero (α := Equiv.Perm (Fin n)))
+    exact (mul_eq_zero.mp h.symm).resolve_left hcard
+  intro A B hAB
+  exact sub_eq_zero.mp (hzero (A - B) (by rw [map_sub, hAB, sub_self]))
 
 /-- The diagonal unit-ball estimate controls every unit tuple in the
 fixed finite-dimensional model, with a constant chosen before the form. -/

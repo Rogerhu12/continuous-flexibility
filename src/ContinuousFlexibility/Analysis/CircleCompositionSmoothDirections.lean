@@ -39,8 +39,13 @@ theorem exists_circleChartComposition_smoothDirections
   have htop := withSeminorms_pairGrading
     (withSeminorms_graded (fun j => S.level j) S.bond)
     (withSeminorms_graded (fun j => S.level j) S.bond)
-  obtain ⟨base, hbounds⟩ := circleChartCompositionJets_uniform_normBounds
-    hS hT hD hγ hinterp travel
+  let boundsData := circleChartCompositionJets_uniform_normBounds
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp travel
+  let base : ℕ := boundsData.choose
+  have hbounds : ∀ K : ℝ, 0 ≤ K →
+      CircleJetNormBounds (T := T) (γ := γ)
+        (U := {x : S.Space × S.Space | p base x < K})
+        (circleChartCompositionJets hS travel) := boundsData.choose_spec
   let V : (S.Space × S.Space) → Set (S.Space × S.Space) :=
     fun x₀ => {x | p base x < 1 + p base x₀}
   have hVopen (x₀ : S.Space × S.Space) : IsOpen (V x₀) :=

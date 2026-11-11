@@ -54,9 +54,10 @@ theorem UniformSmoothFamilyOn.realized_strip_angular_interpolation
   have hid := jointMixedDiagonal_eq_circleAngularJet (J m) hH (K i) m hr
     (heq i m hr) n b x w hx y.2
   have hpoint := hc i x hx w hxlow hwlow m y.2
-  have hyeta : (rsel i m, y.2) = y := by rw [hi]
-  rw [hyeta] at hid
-  exact (congrArg abs hid).trans_le hpoint
+  have hyeta : (rsel i m, y.2) = y := Prod.ext hi rfl
+  have hid' := (congrArg
+    (fun q : PolarPoint => jointMixedDiagonal (J m) n 0 b x w q) hyeta).symm.trans hid
+  exact (congrArg (fun t : ℝ => |t|) hid').trans_le hpoint
 
 /-- A fixed affine offset and a bounded sample-height factor can be
 absorbed into the numerical constant. This applies to the old-flow
@@ -90,8 +91,9 @@ theorem UniformSmoothFamilyOn.realized_strip_angular_interpolation_add_const
   have hr : rsel i m ∈ Ioo (l m) (h m) := hi.symm ▸ hy
   have hid := jointMixedDiagonal_eq_circleAngularJet_add_const (J m) hH (K i) m hr c
     (heq i m hr) n b x w hx y.2
-  have hyeta : (rsel i m, y.2) = y := by rw [hi]
-  rw [hyeta] at hid
+  have hyeta : (rsel i m, y.2) = y := Prod.ext hi rfl
+  have hid' := (congrArg
+    (fun q : PolarPoint => jointMixedDiagonal (J m) n 0 b x w q) hyeta).symm.trans hid
   let q := (1 + p (N + B + 1) x + p (N + B + 1) w) ^
     ((b : ℝ) / ((N : ℝ) + 1))
   have hq : 1 ≤ q := by
@@ -105,8 +107,7 @@ theorem UniformSmoothFamilyOn.realized_strip_angular_interpolation_add_const
   calc
     _ ≤ |(if n = 0 ∧ b = 0 then c else 0)| +
         |iteratedDeriv b (H.decode ((K i).D n x (fun _ => w)) m) y.2| := by
-          rw [hid]
-          exact abs_add_le _ _
+          exact (congrArg (fun t : ℝ => |t|) hid').trans_le (abs_add_le _ _)
     _ ≤ |c| * q + (C * KH) * q := add_le_add
       (hc0.trans (by nlinarith only [hq, abs_nonneg c]))
       (hbnd.trans (mul_le_mul_of_nonneg_right

@@ -102,7 +102,8 @@ theorem exists_symmetricSourceScalarJets_norm_budget
     change physicalNorm T (3 / 4 : ℝ) s F +
       ∑ i : Fin (n + 1), physicalNorm T (3 / 4 : ℝ) s (G i) ≤ _
     exact (add_le_add hFn (Finset.sum_le_sum (fun i _ => hGn i))).trans_eq
-      (by rw [mul_add, Finset.mul_sum])
+      ((congrArg (fun y : ℝ => C * N + y)
+        (Finset.mul_sum Finset.univ N' C).symm).trans (mul_add C N _).symm)
   rw [heq]
   exact hn.trans ((mul_le_mul_of_nonneg_left hs (Real.sqrt_nonneg _)).trans_eq
     (mul_assoc H C _).symm)
