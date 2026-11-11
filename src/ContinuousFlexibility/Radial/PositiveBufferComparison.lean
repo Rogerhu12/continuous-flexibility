@@ -286,10 +286,10 @@ theorem positiveBuffer_two_boundary_exponential_bound {a b A B m : ℝ}
     m * (B * exp (m * (x - b)))
   have hv (x : ℝ) : HasDerivAt v (dv x) x := by
     simpa only [v, dv, neg_neg] using
-      (positiveBuffer_hasDerivAt_exponential A m a x).add
+      (positiveBuffer_hasDerivAt_exponential A m a x).fun_add
         (positiveBuffer_hasDerivAt_exponential B (-m) b x)
   have hdv (x : ℝ) : HasDerivAt dv (m ^ 2 * v x) x := by
-    have hd := (positiveBuffer_hasDerivAt_exponential_deriv A m a x).add
+    have hd := (positiveBuffer_hasDerivAt_exponential_deriv A m a x).fun_add
       (positiveBuffer_hasDerivAt_exponential_deriv B (-m) b x)
     simp only [neg_neg, neg_sq] at hd
     convert hd using 1 <;> dsimp [v, dv] <;> ring
@@ -357,7 +357,7 @@ theorem positiveBuffer_halfline_abs_exponential_bound {a M m : ℝ}
     (u := fun x => -u x) (du := fun x => -du x) (q := q)
     hm (abs_nonneg (u a)) hM hc.neg
     (fun x hx => (hu x hx).neg)
-    (fun x hx => by simpa only [mul_neg] using (hdu x hx).neg)
+    (fun x hx => by simpa only [mul_neg] using (hdu x hx).fun_neg)
     hq (neg_le_abs (u a))
     (fun x hx => (neg_le_abs (u x)).trans (hbound x hx))
   intro x hx
@@ -376,7 +376,7 @@ theorem positiveBuffer_halfline_solution_nonneg {a M m : ℝ}
   have h := positiveBuffer_halfline_exponential_bound
     (u := fun x => -u x) (du := fun x => -du x) (q := q) (A := 0)
     hm le_rfl hM hc.neg (fun x hx => (hu x hx).neg)
-    (fun x hx => by simpa only [mul_neg] using (hdu x hx).neg)
+    (fun x hx => by simpa only [mul_neg] using (hdu x hx).fun_neg)
     hq (neg_nonpos.mpr ha)
     (fun x hx => (neg_le_abs (u x)).trans (hbound x hx))
   intro x hx
@@ -408,7 +408,7 @@ theorem positiveBuffer_halfline_conormal_lower {a M m d : ℝ}
       (d + m * u a) a := by
     convert hda.sub (positiveBuffer_hasDerivAt_exponential (u a) m a a) using 1 <;> simp <;> ring
   have hnonpos := positiveBuffer_right_derivative_nonpos hd (by simp)
-    (fun x hx => sub_nonpos.mpr (h x hx.le))
+    (fun x hx => sub_nonpos.mpr (h x (Ioi_subset_Ici_self hx)))
   linarith
 
 /-- A nonnegative homogeneous solution is convex on the whole positive
@@ -462,7 +462,8 @@ theorem positiveBuffer_halfline_derivative_bounds {a M : ℝ} {u du q : ℝ → 
     (hbound : ∀ x ∈ Ici a, u x ≤ M) :
     MonotoneOn du (Ici a) ∧ ∀ x ∈ Ici a, du x ≤ 0 ∧ |du x| ≤ |du a| := by
   have hconv := positiveBuffer_halfline_solution_convex hc
-    (fun x hx => hu x hx.le) hdu hq (fun x hx => hnn x hx.le)
+    (fun x hx => hu x (Ioi_subset_Ici_self hx)) hdu hq
+    (fun x hx => hnn x (Ioi_subset_Ici_self hx))
   have hmono : MonotoneOn du (Ici a) := by
     apply monotoneOn_of_deriv_nonneg (convex_Ici a) hdc
     · intro x hx
@@ -495,7 +496,7 @@ theorem positiveBuffer_halfline_flux_tendsto_zero {a M m : ℝ}
     rw [abs_of_nonneg (hnn x hx)]
     exact hbound x hx
   have he := positiveBuffer_halfline_abs_exponential_bound hm hM hc
-    (fun x hx => hu x hx.le) hdu hq habs
+    (fun x hx => hu x (Ioi_subset_Ici_self hx)) hdu hq habs
   have harg : Tendsto (fun x : ℝ => -m * (x - a)) atTop atBot := by
     apply tendsto_atBot.mpr
     intro y
@@ -512,30 +513,30 @@ theorem positiveBuffer_halfline_flux_tendsto_zero {a M m : ℝ}
   · simpa using (he0.const_mul |u a|).mul_const |du a|
 
 /-- On the inner cutoff layer of a unit-mass buffer of length
-`Σ + 6`, both the normalized Dirichlet minimizer and its first
-derivative are bounded by `exp (-Σ)`.  This is the attenuation used
+`σ + 6`, both the normalized Dirichlet minimizer and its first
+derivative are bounded by `exp (-σ)`.  This is the attenuation used
 for the cutoff commutator; no upper potential bound is needed here. -/
-theorem positiveBuffer_normalized_inner_decay {Σ : ℝ} {u du q : ℝ → ℝ}
-    (hΣ : 0 < Σ) (hc : ContinuousOn u (Icc 0 (Σ + 6)))
-    (hu : ∀ x ∈ Ioo 0 (Σ + 6), HasDerivAt u (du x) x)
-    (hdu : ∀ x ∈ Ioo 0 (Σ + 6), HasDerivAt du (q x * u x) x)
-    (hq : ∀ x ∈ Ioo 0 (Σ + 6), 1 ≤ q x)
-    (h0 : u 0 = 1) (hwall : u (Σ + 6) = 0) :
-    ∀ s ∈ Icc (Σ + 2) (Σ + 4),
-      |u s| ≤ exp (-Σ) ∧ |du s| ≤ exp (-Σ) := by
-  have hq1 : ∀ x ∈ Ioo 0 (Σ + 6), (1 : ℝ) ^ 2 ≤ q x := by
+theorem positiveBuffer_normalized_inner_decay {σ : ℝ} {u du q : ℝ → ℝ}
+    (hσ : 0 < σ) (hc : ContinuousOn u (Icc 0 (σ + 6)))
+    (hu : ∀ x ∈ Ioo 0 (σ + 6), HasDerivAt u (du x) x)
+    (hdu : ∀ x ∈ Ioo 0 (σ + 6), HasDerivAt du (q x * u x) x)
+    (hq : ∀ x ∈ Ioo 0 (σ + 6), 1 ≤ q x)
+    (h0 : u 0 = 1) (hwall : u (σ + 6) = 0) :
+    ∀ s ∈ Icc (σ + 2) (σ + 4),
+      |u s| ≤ exp (-σ) ∧ |du s| ≤ exp (-σ) := by
+  have hq1 : ∀ x ∈ Ioo 0 (σ + 6), (1 : ℝ) ^ 2 ≤ q x := by
     simpa only [one_pow] using hq
   have hnn := positiveBuffer_solution_nonneg hc hu hdu
     (fun x hx => lt_of_lt_of_le zero_lt_one (hq x hx))
     (by rw [h0]; norm_num) (by rw [hwall])
   intro s hs
-  have hsI : s ∈ Ioo 0 (Σ + 6) := by constructor <;> linarith [hs.1, hs.2]
+  have hsI : s ∈ Ioo 0 (σ + 6) := by constructor <;> linarith [hs.1, hs.2]
   have hv := positiveBuffer_dirichlet_exponential_bound (m := 1) (A := 1)
     (by norm_num) (by norm_num) hc hu hdu hq1
     (le_of_eq h0) (le_of_eq hwall) s (Ioo_subset_Icc_self hsI)
   have hv' : u s ≤ exp (-s) := by simpa using hv
   have hd := positiveBuffer_derivative_exponential_bound
-    (a := 0) (b := Σ + 6) (x := s - 1) (s := s) (A := 1) (m := 1)
+    (a := 0) (b := σ + 6) (x := s - 1) (s := s) (A := 1) (m := 1)
     (d := du s) (by norm_num) (by norm_num)
     (by linarith [hs.1]) (by linarith) hsI.2.le hc hu hdu hq1
     (by rw [h0]; norm_num) (le_of_eq h0) hwall (hu s hsI)

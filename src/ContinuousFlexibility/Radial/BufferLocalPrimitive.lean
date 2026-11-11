@@ -145,13 +145,11 @@ theorem buffer_ae_constant_of_local_weak_deriv_zero {F : ℝ → ℝ} {a b : ℝ
     rw [hsplit] at hPg
     exact sub_eq_zero.mp hPg
   refine ⟨c, ?_⟩
+  change ∀ᵐ x : ℝ ∂volume.restrict (Ioo a b), F x = c
   rw [ae_restrict_iff' measurableSet_Ioo]
-  have hz := isOpen_Ioo.ae_eq_zero_of_integral_contDiff_smul_eq_zero
-    ((hF.sub continuous_const.locallyIntegrable).locallyIntegrableOn (Ioo a b)) (f := fun x => F x - c)
-  apply (hz ?_).mono
-  · intro x hx hxin
-    exact sub_eq_zero.mp (hx hxin)
-  · intro φ hφ hcφ hsφ
+  have htest : ∀ φ : ℝ → ℝ, ContDiff ℝ ∞ φ → HasCompactSupport φ →
+      tsupport φ ⊆ Ioo a b → (∫ x : ℝ, φ x • (F x - c)) = 0 := by
+    intro φ hφ hcφ hsφ
     have hFφ : Integrable (fun x => F x * φ x) volume := by
       simpa only [smul_eq_mul] using
         hF.integrable_smul_right_of_hasCompactSupport hφ.continuous hcφ
@@ -165,6 +163,11 @@ theorem buffer_ae_constant_of_local_weak_deriv_zero {F : ℝ → ℝ} {a b : ℝ
         simp only [smul_eq_mul]
         ring
       _ = 0 := by rw [hpair φ hφ hcφ hsφ]; exact sub_self _
+  have hz := isOpen_Ioo.ae_eq_zero_of_integral_contDiff_smul_eq_zero
+    ((hF.sub continuous_const.locallyIntegrable).locallyIntegrableOn (Ioo a b)) htest
+  filter_upwards [hz] with x hx
+  intro hxin
+  exact sub_eq_zero.mp (hx hxin)
 
 /-- The local test equation gives a continuous representative on the interval.
 The derivative data are allowed to be merely locally integrable. -/
@@ -211,7 +214,7 @@ theorem buffer_localWeakDerivative_continuousRepresentative {u d : ℝ → ℝ} 
       (buffer_locallyIntegrable_intervalIntegrable hd x y)
     dsimp [U, P]
     linarith
-  · filter_upwards [hd.ae_hasDerivAt_integral] with x hx
+  · filter_upwards [_root_.LocallyIntegrable.ae_hasDerivAt_integral hd] with x hx
     exact (hx 0).const_add c
 
 /-- Once the weak derivative is continuous at a point, the continuous

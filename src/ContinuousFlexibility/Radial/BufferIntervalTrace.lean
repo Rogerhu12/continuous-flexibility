@@ -1,6 +1,8 @@
 import ContinuousFlexibility.Radial.BufferIntervalForm
 import Mathlib.Analysis.Calculus.BumpFunction.Normed
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.AbsolutelyContinuousFun
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.LebesgueDifferentiationThm
+import Mathlib.MeasureTheory.Measure.OpenPos
 
 /-!
 # Continuous representatives of the actual weak energy domain
@@ -149,7 +151,7 @@ theorem bufferPrimitive_weak_derivative {f : ℝ → ℝ} (hf : LocallyIntegrabl
   rw [hφa, hφb, mul_zero, mul_zero, sub_self, zero_sub] at hibp
   have hderiv : (∫ x in a..b, deriv P x * φ x) = ∫ x in a..b, f x * φ x := by
     apply intervalIntegral.integral_congr_ae
-    filter_upwards [hf.ae_hasDerivAt_integral] with x hx _
+    filter_upwards [_root_.LocallyIntegrable.ae_hasDerivAt_integral hf] with x hx _
     rw [(hx 0).deriv]
   have hleft : (∫ x : ℝ, P x * deriv φ x) = ∫ x in a..b, P x * deriv φ x := by
     rw [intervalIntegral.integral_of_le hab.le]
@@ -212,8 +214,21 @@ theorem buffer_weakDerivative_continuousRepresentative {u d : RadialL2}
       (buffer_locallyIntegrable_intervalIntegrable hd a b)
     dsimp [U, P]
     linarith
-  · filter_upwards [hd.ae_hasDerivAt_integral] with x hx
+  · filter_upwards [_root_.LocallyIntegrable.ae_hasDerivAt_integral hd] with x hx
     exact (hx 0).const_add c
+
+theorem bufferPrimitiveRepresentative_absolutelyContinuous {U d : ℝ → ℝ}
+    (hd : LocallyIntegrable d volume)
+    (hprim : ∀ x y : ℝ, U y - U x = ∫ t in x..y, d t) (a b : ℝ) :
+    AbsolutelyContinuousOnInterval U a b := by
+  have hp := (buffer_locallyIntegrable_intervalIntegrable hd a b).absolutelyContinuousOnInterval_intervalIntegral
+    (c := a) left_mem_uIcc
+  have hc : AbsolutelyContinuousOnInterval (fun _ : ℝ => U a) a b :=
+    (contDiff_const : ContDiff ℝ 1 (fun _ : ℝ => U a)).contDiffOn.absolutelyContinuousOnInterval
+  apply (hc.fun_add hp).congr
+  intro x _
+  have hax := hprim a x
+  linarith
 
 /-- Weak differentiation is local on open sets. This is useful for supported
 variations on an interval or a half-line, and needs no trace hypothesis. -/
@@ -221,6 +236,7 @@ theorem buffer_weakDerivative_zero_on_open {u d : RadialL2}
     (hud : WeakRadialDerivative u d) {O : Set ℝ} (hO : IsOpen O)
     (hu : (u : ℝ → ℝ) =ᵐ[volume.restrict O] (fun _ => 0)) :
     (d : ℝ → ℝ) =ᵐ[volume.restrict O] (fun _ => 0) := by
+  change ∀ᵐ x : ℝ ∂volume.restrict O, d x = 0
   rw [ae_restrict_iff' hO.measurableSet]
   apply hO.ae_eq_zero_of_integral_contDiff_smul_eq_zero
     (((Lp.memLp d).locallyIntegrable (by norm_num)).locallyIntegrableOn O)
@@ -240,7 +256,7 @@ theorem buffer_weakDerivative_zero_on_open {u d : RadialL2}
 theorem buffer_continuousRepresentative_unique {u : RadialL2} {U W : ℝ → ℝ}
     (hU : Continuous U) (hW : Continuous W)
     (hu : (u : ℝ → ℝ) =ᵐ[volume] U) (hw : (u : ℝ → ℝ) =ᵐ[volume] W) : U = W :=
-  MeasureTheory.eq_of_ae_eq (hu.symm.trans hw) hU hW
+  MeasureTheory.Measure.eq_of_ae_eq (μ := volume) (hu.symm.trans hw) hU hW
 
 /-- A supported continuous representative vanishes also at boundary points
 approached through the exterior. Thus Dirichlet traces are true point values. -/
@@ -249,8 +265,9 @@ theorem buffer_continuousRepresentative_zero_on_closure {u : RadialL2} {U : ℝ 
     {O : Set ℝ} (hO : IsOpen O)
     (hz : (u : ℝ → ℝ) =ᵐ[volume.restrict O] (fun _ => 0)) :
     EqOn U (fun _ => 0) (closure O) := by
-  have he : U =ᵐ[volume.restrict O] (fun _ => 0) := (ae_restrict_of_ae hu).symm.trans hz
-  exact (MeasureTheory.eqOn_open_of_ae_eq he hO hU.continuousOn
+  have huO : (u : ℝ → ℝ) =ᵐ[volume.restrict O] U := ae_restrict_of_ae hu
+  have he : U =ᵐ[volume.restrict O] (fun _ => 0) := huO.symm.trans hz
+  exact (MeasureTheory.Measure.eqOn_open_of_ae_eq (μ := volume) he hO hU.continuousOn
     continuous_const.continuousOn).closure hU continuous_const
 
 theorem intervalEnergyClosure_zero_traces {V : ℝ → ℝ} {l h : ℝ}
@@ -266,9 +283,9 @@ theorem intervalEnergyClosure_zero_traces {V : ℝ → ℝ} {l h : ℝ}
     ae_restrict_of_ae_restrict_of_subset (by
       intro x hx hx'
       exact (not_lt_of_ge hx.le) hx'.2) hs
-  exact ⟨buffer_continuousRepresentative_zero_on_closure hU hu isOpen_Iio hleft l
-      (by rw [closure_Iio]; exact le_rfl),
-    buffer_continuousRepresentative_zero_on_closure hU hu isOpen_Ioi hright h
-      (by rw [closure_Ioi]; exact le_rfl)⟩
+  have hzl := buffer_continuousRepresentative_zero_on_closure hU hu isOpen_Iio hleft
+  have hzh := buffer_continuousRepresentative_zero_on_closure hU hu isOpen_Ioi hright
+  exact ⟨hzl (show l ∈ closure (Iio l) by rw [closure_Iio]; exact le_rfl),
+    hzh (show h ∈ closure (Ioi h) by rw [closure_Ioi]; exact le_rfl)⟩
 
 end ContinuousFlexibility.Radial

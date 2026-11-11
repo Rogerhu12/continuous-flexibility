@@ -37,8 +37,10 @@ theorem positiveBufferMatrix_inverse_sub_one (E : Matrix n n ℝ)
   rw [add_mul, one_mul] at hmul
   calc
     (1 + E)⁻¹ - 1 = -(E * (1 + E)⁻¹) := by
-      rw [← hmul]
-      abel
+      calc
+        (1 + E)⁻¹ - 1 = (1 + E)⁻¹ - ((1 + E)⁻¹ + E * (1 + E)⁻¹) :=
+          congrArg (fun X : Matrix n n ℝ => (1 + E)⁻¹ - X) hmul.symm
+        _ = -(E * (1 + E)⁻¹) := by abel
     _ = -E * (1 + E)⁻¹ := by rw [neg_mul]
 
 /-- The second-order identity retains attenuation at both ends of a

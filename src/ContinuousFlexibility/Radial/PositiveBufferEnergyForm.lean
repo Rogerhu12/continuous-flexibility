@@ -17,6 +17,10 @@ open Real Set Filter MeasureTheory
 open ContinuousFlexibility.Statements
 open scoped Topology ContDiff RealInnerProductSpace InnerProductSpace
 
+local instance (V : ℝ → ℝ) (s : Set ℝ) (hs : MeasurableSet s) :
+    NormedSpace ℝ (positiveBufferSupportedEnergyGraph V s hs) :=
+  Submodule.normedSpace (positiveBufferSupportedEnergyGraph V s hs)
+
 theorem positiveBufferL2_inner_integral (u v : RadialL2) :
     ⟪u, v⟫_ℝ = ∫ x : ℝ, u x * v x := by
   rw [L2.inner_def]
@@ -35,7 +39,9 @@ theorem positiveBufferL2_norm_sq_integral (u : RadialL2) :
 theorem positiveBufferPotentialMultiplier_ae (V : ℝ → ℝ) (hV : Continuous V) (u : RadialL2) :
     (positiveBufferPotentialMultiplier V hV u : ℝ → ℝ) =ᵐ[volume]
       (fun x => positiveBufferPotentialCoefficient V x * u x) :=
-  morseL2Mul_coeFn _ _ _ _ _
+  morseL2Mul_coeFn (positiveBufferPotentialCoefficient V)
+    (continuous_positiveBufferPotentialCoefficient hV) 1
+    (positiveBufferPotentialCoefficient_abs_le_one V) u
 
 theorem positiveBufferPotentialCoefficient_weight (V : ℝ → ℝ) (x : ℝ) :
     positiveBufferPotentialCoefficient V x * sqrt (1 + |V x|) ^ 2 = V x := by
@@ -108,7 +114,7 @@ theorem positiveBufferEnergy_weight_lower_bound {V : ℝ → ℝ} {m : ℝ}
     by_cases hxs : x ∈ s
     · have hv : 0 ≤ V x := (sq_nonneg m).trans (hVm x hxs)
       rw [abs_of_nonneg hv]
-      exact mul_le_mul_of_nonneg_right (add_le_add_left (hVm x hxs) 1) (sq_nonneg _)
+      exact mul_le_mul_of_nonneg_right (by linarith [hVm x hxs]) (sq_nonneg _)
     · rw [ho hxs]
       simp
   have h := integral_mono_ae

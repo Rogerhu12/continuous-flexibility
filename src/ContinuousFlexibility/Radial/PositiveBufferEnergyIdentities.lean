@@ -120,6 +120,6 @@ theorem positiveBuffer_halfline_energy_eq_flux {a : ℝ}
   have h := integral_Ioi_of_hasDerivAt_of_tendsto ((hu.mul hd) a (le_refl a))
     (f' := fun x => d x ^ 2 + V x * u x ^ 2)
     (fun x hx => by convert (hu' x hx).mul (hd' x hx) using 1 <;> ring) hE hzero
-  simpa only [zero_sub] using h
+  simpa only [zero_sub, Pi.mul_apply] using h
 
 end ContinuousFlexibility.Radial

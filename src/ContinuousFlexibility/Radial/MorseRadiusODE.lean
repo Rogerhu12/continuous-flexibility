@@ -245,6 +245,57 @@ theorem contDiff_morseRho (A B : ℝ) : ContDiff ℝ ∞ (morseRho A B) := by
   exact (contDiff_const.mul (contDiff_id.neg.exp.sub (contDiff_const.mul contDiff_id).exp)).sub
     contDiff_const
 
+/-- A smooth scalar linear equation admits arbitrary initial data on a
+neighborhood of any finite closed interval. The compact extension outside
+that neighborhood imposes no equation there. -/
+theorem exists_smoothScalarSystem {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
+    {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
+    ∃ r v : ℝ → ℝ, ContDiff ℝ ∞ r ∧ ContDiff ℝ ∞ v ∧ r t₀ = r₀ ∧ v t₀ = v₀ ∧
+      ∀ x ∈ Ioo (a - 1) (b + 1), HasDerivAt r (v x) x ∧
+        HasDerivAt v (-q x * r x) x := by
+  have hstart : t₀ ∈ Icc (a - 3) (b + 3) :=
+    ⟨by linarith only [ht₀.1], by linarith only [ht₀.2]⟩
+  obtain ⟨z, hz₀, hzs, hzd⟩ := exists_radiusState_on_Icc hq hstart (r₀, v₀)
+  obtain ⟨u, hus, hu⟩ := smooth_radiusState_extension (ht₀.1.trans ht₀.2) hzs hzd
+  have hstart' : t₀ ∈ Ioo (a - 1) (b + 1) :=
+    ⟨by linarith only [ht₀.1], by linarith only [ht₀.2]⟩
+  have hu₀ : u t₀ = (r₀, v₀) := (hu t₀ hstart').1.eq_of_nhds.trans hz₀
+  refine ⟨fun x => (u x).1, fun x => (u x).2, contDiff_fst.comp hus, contDiff_snd.comp hus,
+    congrArg Prod.fst hu₀, congrArg Prod.snd hu₀, ?_⟩
+  intro x hx
+  have h := (hu x hx).2
+  rw [← (hu x hx).1.eq_of_nhds] at h
+  exact ⟨(ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h,
+    (ContinuousLinearMap.snd ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h⟩
+
+/-- Continuous scalar states with the same interior initial data agree
+through both endpoints. Only interior derivatives are required. -/
+theorem smoothScalarSystem_eqOn {q U D r v : ℝ → ℝ} {a b t₀ : ℝ}
+    (hq : Continuous q) (ht₀ : t₀ ∈ Ioo a b)
+    (hU : ContinuousOn U (Icc a b)) (hD : ContinuousOn D (Icc a b))
+    (hr : ContinuousOn r (Icc a b)) (hv : ContinuousOn v (Icc a b))
+    (hUd : ∀ x ∈ Ioo a b, HasDerivAt U (D x) x)
+    (hDd : ∀ x ∈ Ioo a b, HasDerivAt D (-q x * U x) x)
+    (hrd : ∀ x ∈ Ioo a b, HasDerivAt r (v x) x)
+    (hvd : ∀ x ∈ Ioo a b, HasDerivAt v (-q x * r x) x)
+    (h₀ : U t₀ = r t₀) (h₁ : D t₀ = v t₀) :
+    EqOn U r (Icc a b) ∧ EqOn D v (Icc a b) := by
+  obtain ⟨C, hC⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn
+    hq.continuousOn
+  let K : ℝ≥0 := ⟨max 1 C, zero_le_one.trans (le_max_left _ _)⟩
+  have hLip (x : ℝ) (hx : x ∈ Ioo a b) : LipschitzWith K (radiusField q x) :=
+    radiusField_lipschitz (le_max_left _ _) ((hC x (Ioo_subset_Icc_self hx)).trans
+      (le_max_right _ _))
+  have hpair : EqOn (fun x => (U x, D x)) (fun x => (r x, v x)) (Icc a b) :=
+    ODE_solution_unique_of_mem_Icc (v := radiusField q) (s := fun _ => univ)
+      (fun x hx => (hLip x hx).lipschitzOnWith) ht₀
+      (hU.prodMk hD) (fun x hx => (hUd x hx).prodMk (hDd x hx))
+      (fun _ _ => mem_univ _) (hr.prodMk hv)
+      (fun x hx => (hrd x hx).prodMk (hvd x hx)) (fun _ _ => mem_univ _)
+      (Prod.ext h₀ h₁)
+  exact ⟨fun x hx => congrArg Prod.fst (hpair hx),
+    fun x hx => congrArg Prod.snd (hpair hx)⟩
+
 /-- Arbitrary initial data at a point of the retained interval give a smooth
 radius and velocity satisfying the actual system on a neighborhood of it. -/
 theorem exists_morseRadiusSystem (A B : ℝ) {a b t₀ : ℝ} (ht₀ : t₀ ∈ Icc a b) (r₀ v₀ : ℝ) :
