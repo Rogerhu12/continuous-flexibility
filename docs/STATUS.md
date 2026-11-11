@@ -19,15 +19,16 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 319 / 327 |
-| Modules in the root import | 319 |
-| Lines of Lean under `src/` | 87,633 |
-| Axiom audit (`lake build`, 3751 jobs) | passed: 10,671 declarations, 8,043 theorems |
-| Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
+| Lean modules compiled / total | 372 / 380 (current source paths, including blueprint) |
+| Modules in the root import | 331 |
+| Lines of Lean under `src/` | 91,594 |
+| Axiom audit (CI) | passed for every project declaration in the root import; only `propext`, `Classical.choice`, `Quot.sound` |
+| Blueprint statements proved / total | 9 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, ScalarCalculus) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 329 |
+| Modules on the module system | 2 (the Challenge and `Analysis.ProjectiveJets`) of 384 |
 
-The 8 modules that do not compile are unfinished files of the earlier workflow:
+The compiled-module count matches artifacts to current source paths; the raw CI cache count
+can also include artifacts of removed blueprint modules. The 8 unfinished modules of the earlier workflow are:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
 `Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
 `Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
@@ -37,15 +38,29 @@ The 8 modules that do not compile are unfinished files of the earlier workflow:
 - **Geometry (paper §2, part of §10).** `mainStatement_of_flatAnnularCore :
   Nonempty FlatAnnularCore → Statements.MainStatement` (`Contracts/SphereClosedBending.lean`).
   The whole remaining problem is `Nonempty FlatAnnularCore`.
+- **Endpoint closure (N12).** The unchanged theorem
+  `PointBranchStatement → W03Statement → S03Statement → N12Statement` is proved.
+  `Analysis/MaterialSampleCofinite.lean`, `Analysis/StateControlCofiniteJets.lean` and
+  `Analysis/StateControlCofiniteClosure.lean` prove smooth endpoint extension of the actual
+  controlled profile from the existing bounded index shift and weighted control bounds.
+  `Analysis/PointSolutionCore.lean` constructs the core from the same normalized nonzero
+  solution point. No control-interval placement hypothesis is added. All proof dependencies
+  are in the root import; N12 depends only on `propext`, `Classical.choice`, `Quot.sound`.
 - **Abstract Nash–Moser, fixed parameter.** `exists_projectiveNewton_fixed_branch`
   (`Analysis/ProjectiveNewtonFixedBranch.lean`).
+- **Scalar calculus (S03–S05 calculus).** The unchanged conjunction
+  `S03CalculusStatement ∧ S04CalculusStatement ∧ S05CalculusStatement` is proved by
+  `Blueprint.ScalarCalculus`. This includes the actual connection and residual,
+  local smooth development, normalization through parameter zero, boundary periods,
+  arbitrary mixed parameter derivatives of the conserved rectangle source, the
+  corrected state derivative and Green identity, and both signed turning germs.
 - **Lemmas for §5–§9** (21 modules added on 2026-11-11, listed in `docs/archive/2026-11-11-lemmas.md`).
 
 ## What is not proved
 
 `Nonempty FlatAnnularCore`, i.e. paper §3–§10: the accumulating radial reference (§4–§6),
-the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9) and its
-endpoint regularity (§10).
+the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9). The passage from a point solution to the endpoint-regular
+annular core (§10) is now proved conditionally in N12; existence of that point solution remains open.
 
 ## Blueprint v4
 
@@ -67,9 +82,9 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (35): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
+Open nodes (33): ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
 R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
-N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve, N12.
+N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
 Lean statements follow the manuscript and are not frozen: Tool-OneHighFactor (Lemmas 7.2, 7.3),
@@ -78,8 +93,8 @@ Tool-R10a-Inner (Lemma 6.3), Tool-R10a-Outer (Lemmas 6.4, 6.5).
 
 One task file each in `docs/tasks/` (40 in total).
 
-Whether each node can be derived from its hypotheses is tested by its line; `N12` and `Solve`
-are the first real tests of the chain. `R10a` has one frozen statement for the inner and the outer
+Whether each node can be derived from its hypotheses is tested by its line. `N12` has
+passed this test with its original statement; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
@@ -108,20 +123,47 @@ already exists in the tree.
 - Below 30,000: ScalarWeighted, Tame, Spaces, R05b, R06b, R06c, R08, R10b, R11b, R12, N01a, N01b,
   N04Root, N04Cubic, N04Transmission, N07b, N09N10, N12, and the five tool tasks.
 
+## Pick next
+
+Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
+R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
+
+A line that has finished takes the first task below whose branch does not exist:
+
+1. Standalone, mathlib only: N04Cubic, N04Transmission, N04Root.
+2. Pipelines whose first piece is running: R05b, R06b, R06c.
+3. Tools used by several nodes: Tool-OneHighFactor, Tool-SobolevExtension, Tool-AngularCommutator.
+4. Radial chain: R07, R09, R08, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
+5. Scalar and geometry of the iteration: ScalarWeighted, N01a, N01b, N01c, N02N03.
+6. Coordinates and inverse: N04a, N04b, N04Coordinates, N05, N06, N07a, N07b.
+7. Nonlinear: N08, N09N10.
+
 ## Next
 
-1. Lines on the 35 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
 
 ## ScalarCalculus line (2026-11-11)
 
-`line/ScalarCalculus` starts from main at `97f8b35b389637d89fa3d09b160acc46e2a12fba`.
-The unchanged S03, S04 and S05 calculus statements have source-level proofs under
-`Scalar/`; local kernel checks and CI are in progress. CI run `42976793683` kernel-checked
-`Scalar/S03CalculusProof.lean`; it identified elaboration errors in the new integral
-and state-derivative modules, whose fixes are being checked. The new compact-integral theorem
-supplies arbitrary mixed parameter derivatives on a finite physical rectangle.
-The characteristic construction treats both turning directions with one signed
-coordinate. No additional blueprint statement is counted as proved until the
-node, its root imports, its axiom audit and CI have all been checked.
+`line/ScalarCalculus` started from main at `97f8b35b389637d89fa3d09b160acc46e2a12fba`
+and incorporates main's N12 completion at `109dec6f46f6cffe6070bb12d6926d9c413dec54`.
+The frozen statement and `Blueprint/Assembly.lean` are unchanged. No clause was
+found false or underivable, and no sub-blueprint or additional hypothesis was needed.
+
+The five new modules under `Scalar/` are `RectangleParameterIntegral`,
+`S03CalculusProof`, `S04CalculusProof`, `S05StateDerivative` and `S05CalculusProof`.
+All five and the completed blueprint node are in the root import. Compact parameter
+balls provide domination for every mixed derivative of the physical rectangle integral.
+The primitive identity for parameter families is used only on the prescribed open
+parameter set. One signed-coordinate construction handles both turning directions.
+
+At commit `5fdb5251feeb137ae57eca0de6b5727a0bd3471c`,
+[CI run 42980698367](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42980698367)
+completed all 3800 build jobs. The target-specific output was
+`ContinuousFlexibility.Blueprint.ScalarCalculus` depends on axioms
+`[propext, Classical.choice, Quot.sound]`; the root audit passed for 10,782 project
+declarations (8,131 theorems). This verified the unchanged node before synchronization
+with the independently completed N12 line. The module count above uses current
+source paths in the default-target closure, excluding the eight legacy files,
+rather than stale artifacts from the restored cache.
