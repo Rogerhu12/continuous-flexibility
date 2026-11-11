@@ -63,6 +63,7 @@ theorem solve_exists_nonzero_zero_in_ker
   let Uε : Set (X × ℝ) := {z | p base z.1 < ε ∧ |z.2| < ε}
   let a := pairGrading p realGrading
   let W : Submodule ℝ X := row.toLinearMap.ker
+  let _ : IsUniformAddGroup W := W.toAddSubgroup.isUniformAddGroup
   let _ : CompleteSpace W := row.isClosed_ker.completeSpace_coe
   let pK : ℕ → Seminorm ℝ W := fun n => (p n).comp W.subtype
   have hpK : Monotone pK := by

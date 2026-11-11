@@ -52,6 +52,14 @@ theorem solve_coupled_exists_normalized_zero
     ((hS.1 (3 / 4 : ℝ)).2.1 n).completeSpace_coe
   let _ : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
     ((hS.2.1 (3 / 4 : ℝ)).2.1 n).completeSpace_coe
+  let _ : IsUniformAddGroup ((S.height (3 / 4 : ℝ)).Space) :=
+    (compatibleSubmodule (fun n => (S.height (3 / 4 : ℝ)).level n)
+      (S.height (3 / 4 : ℝ)).bond).toAddSubgroup.isUniformAddGroup
+  let _ : IsUniformAddGroup ((S.circle (3 / 4 : ℝ)).Space) :=
+    (compatibleSubmodule (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond).toAddSubgroup.isUniformAddGroup
+  let _ : IsUniformAddGroup (StateDirections S) :=
+    (stateSectorSubmodule S).toAddSubgroup.isUniformAddGroup
   let _ : CompleteSpace (StateDirections S) := hclosed.completeSpace_coe
   let row : StateDirections S →L[ℝ] ℝ :=
     sectorReferenceRowCLM (D := D) (T := T) (S := S) h1.1 hT hS
