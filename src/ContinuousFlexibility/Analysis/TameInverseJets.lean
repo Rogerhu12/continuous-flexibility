@@ -163,15 +163,19 @@ def inverseExpressionJetMultilinear (n : ℕ) (z : X × Z) (hz : z.1 ∈ U) :
     have hc := (inverseExpressionJet n).continuousOn_eval J V hV
     have hm : Continuous (fun v : Fin n → X × Z => (z, v)) :=
       continuous_const.prodMk continuous_id
-    simpa only [Function.comp_def, inverseExpressionJetValue,
-      MultilinearMap.toFun_eq_coe, MultilinearMap.mk'_apply] using
-      continuousOn_univ.mp (hc.comp hm.continuousOn
-        (fun v _ => ⟨⟨hz, mem_univ z.2⟩, mem_univ v⟩))
+    have hcont : Continuous (inverseExpressionJetValue J V n z) := by
+      simpa only [Function.comp_def, inverseExpressionJetValue] using
+        continuousOn_univ.mp (hc.comp hm.continuousOn
+          (fun v _ => ⟨⟨hz, mem_univ z.2⟩, mem_univ v⟩))
+    apply hcont.congr
+    intro v
+    simp only [MultilinearMap.toFun_eq_coe, MultilinearMap.mk'_apply]
 
 @[simp] theorem inverseExpressionJetMultilinear_apply
     (n : ℕ) (z : X × Z) (hz : z.1 ∈ U) (v : Fin n → X × Z) :
     inverseExpressionJetMultilinear J hU V hleft hright hV n z hz v =
       inverseExpressionJetValue J V n z v := by
+  rw [← ContinuousMultilinearMap.coe_coe]
   simp only [inverseExpressionJetMultilinear, MultilinearMap.mk'_apply]
 
 /-- The global family of multilinear maps is set to zero outside the open

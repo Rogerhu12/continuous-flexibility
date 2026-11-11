@@ -59,7 +59,11 @@ theorem locallyTameOn_inverse_of_linearFamilyTame
   have hW : W ∈ 𝓝[U ×ˢ univ] z0 := by
     refine inter_mem self_mem_nhdsWithin ?_
     apply mem_nhdsWithin_of_mem_nhds
-    exact ((hr.continuous_seminorm base).comp continuous_snd).continuousAt
+    have hc : Continuous (fun z : X × Z => r base z.2) := by
+      simpa only [Function.comp_def] using
+        (hr.continuous_seminorm base).comp
+          (continuous_snd : Continuous (fun z : X × Z => z.2))
+    exact hc.continuousAt
       (Iio_mem_nhds (by dsimp [R]; linarith))
   refine ⟨loss, base, W, hW, ?_⟩
   intro s hs
