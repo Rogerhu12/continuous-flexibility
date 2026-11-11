@@ -124,20 +124,26 @@ theorem matchedOuterTailEnvelope_of_radius_data
   · intro u hu hN z
     have hjn : (j : ℝ) ≠ 0 := by exact_mod_cast (by omega : j ≠ 0)
     have hsign : r07OutwardSign right = outerTailSign right := by cases right <;> rfl
-    have hne := selectedBoundaryState_ne_zero_of_natural (matchingProfileGeometry hE)
-      hjn hcutE (by cases right <;> norm_num [r07OutwardSign]) hu hN
+    have hne := selectedBoundaryState_ne_zero_of_natural (ε := r07OutwardSign right)
+      (matchingProfileGeometry hE) hjn hcutE
+      (by cases right <;> norm_num [r07OutwardSign]) hu hN
     have hi := F.scaledNatural_robin_iff hD hcut hdeep
       (by simpa only [outerOutwardRadius_eq_sign] using hac) hlam.ne' hT hphysical hη hK H
       hκ hβ hcutE hend hprofile hprofileCut hu hN
       (by simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hne) z
     simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hi
-  · apply hcolumn
-    have hVeq : H'.V = fun x => H.V (x / κ) :=
+  · have hVeq : H'.V = fun x => H.V (x / κ) :=
       (H.physicalRadiusScale_fields hD hE hκ hβ hlam.ne' hcut hend
         hprofile hprofileCut).2.2.1
-    filter_upwards [Lp.coeFn_smul (sqrt (β * lam))⁻¹ (hV'.toLp H'.V), hV'.coeFn_toLp]
-      with x hs hx
-    rw [hs]
-    simp only [Pi.smul_apply, smul_eq_mul, hx, hVeq, div_eq_mul_inv, mul_comm]
+    have hnormalized :
+        (((sqrt (β * lam))⁻¹ • hV'.toLp H'.V : OuterWholeL2 E right (κ * cut)) : ℝ → ℝ)
+          =ᵐ[outerWholeMeasure E right (κ * cut)]
+            fun x => H.V (x / κ) / sqrt (β * lam) := by
+      filter_upwards [Lp.coeFn_smul (sqrt (β * lam))⁻¹ (hV'.toLp H'.V), hV'.coeFn_toLp]
+        with x hs hx
+      rw [hs]
+      change (sqrt (β * lam))⁻¹ * (hV'.toLp H'.V) x = H.V (x / κ) / sqrt (β * lam)
+      rw [hx, congrFun hVeq x, div_eq_mul_inv, mul_comm]
+    exact hcolumn ((sqrt (β * lam))⁻¹ • hV'.toLp H'.V) hnormalized
 
 end ContinuousFlexibility.Radial

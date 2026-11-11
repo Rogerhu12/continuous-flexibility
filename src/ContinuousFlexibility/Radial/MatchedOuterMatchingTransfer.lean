@@ -83,18 +83,27 @@ theorem matchedOuter_actual_channels_of_whole_bounds
   have hremove (active : Bool) :
       M.outerInverse ∘L matchingSourceOuterCLM D M hM ∘L
         matchedModeScalarGate D active = M.outerInverse := by
-    ext F
+    apply ContinuousLinearMap.ext
+    intro F
     simp only [ContinuousLinearMap.comp_apply, matchingSourceOuterCLM_apply, hsource, hG]
-    rw [matchedOuterSeparatedInverse_sourceOuter D cut hm R]
-    simp only [G, matchedOuterSeparatedInverse_apply, matchedModeScalarGate_apply]
+    change matchedOuterSeparatedInverse D cut R
+        (modeOuterSource D (cut false) (cut true) (matchedModeScalarGate D active F)) =
+      matchedOuterSeparatedInverse D cut R F
+    calc
+      _ = matchedOuterSeparatedInverse D cut R (matchedModeScalarGate D active F) :=
+        matchedOuterSeparatedInverse_sourceOuter D cut hm R (matchedModeScalarGate D active F)
+      _ = _ := by
+        simp only [matchedOuterSeparatedInverse_apply, matchedModeScalarGate_apply]
   have hborderLeft :
       (matchedModeBorder D).comp M.outerInverse = 0 := by
-    ext F
+    apply ContinuousLinearMap.ext
+    intro F
     simp only [ContinuousLinearMap.comp_apply, hG, G, matchedModeBorder_apply,
       matchedOuterSeparatedInverse_scalar, ContinuousLinearMap.zero_apply]
   have hborderRight :
       M.outerInverse.comp (matchedModeBorder D) = 0 := by
-    ext F
+    apply ContinuousLinearMap.ext
+    intro F
     simp only [ContinuousLinearMap.comp_apply, hG, G, matchedModeBorder_apply,
       matchedOuterSeparatedInverse_apply, map_zero, add_zero,
       ContinuousLinearMap.zero_apply]
@@ -105,7 +114,8 @@ theorem matchedOuter_actual_channels_of_whole_bounds
           matchingSourceOuterCLM D M hM ∘L
           (matchedModeScalarGate D active ∘L matchedModeChannel D hP m) =
         matchedModeChannel D hP k ∘L M.outerInverse ∘L matchedModeChannel D hP m := by
-      ext F
+      apply ContinuousLinearMap.ext
+      intro F
       have hr := congrArg
         (fun T : RadialModePair D →L[ℝ] RadialModePair D =>
           T (matchedModeChannel D hP m F)) (hremove active)
