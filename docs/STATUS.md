@@ -12,7 +12,7 @@ Last updated: 2026-11-11.
   even/odd projections, the physical source integral and its compact
   normalizer, the compatibility projection, height products, a reciprocal
   reduction to smooth composition, and the sequence-retraction construction.
-  The checkpoints through `8f17342` passed the complete CI build,
+  The checkpoints through `e8bd075` passed the complete CI build,
   including the project axiom audit. The exact physical Sobolev model,
   actual smooth tame multiplication, and complete split trace with fixed
   loss 3 are proved. The concrete circle retraction is now proved by
@@ -23,8 +23,13 @@ Last updated: 2026-11-11.
   identities, weighted bounded-overlap localization and gluing, physical
   frequency-band operators, and the complete finite spatial-jet expansion
   for smooth composition. The local dominated L² curve derivative and the
-  repeated low-factor estimate are also proved. The physical retraction
-  and complete projective smooth-composition tower remain in progress.
+  repeated low-factor estimate are also proved. The complete physical analysis family now has loss 0, and envelope
+  gluing exactly reconstructs the localized function. Every smooth-composition
+  kernel has its actual weighted jets, multilinearity and fixed-base tame
+  estimates; affine L² majorants and spatial/parameter differentiation are
+  proved. The W02 assembly is verified with the concrete retraction and smooth
+  composition as its remaining inputs. The physical shell reconstruction
+  and the complete projective smooth-composition tower remain in progress.
   `Spaces` stays open until the full W02/W03 statement and CI pass.
 
 ## Target
@@ -44,13 +49,13 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 439 / 444 |
-| Modules in the root import | 395 |
-| Lines of Lean under `src/` | 101,090 |
-| Axiom audit (`lake build`, `8f17342`) | passed |
+| Lean modules compiled / total | 454 / 459 |
+| Modules in the root import | 410 |
+| Lines of Lean under `src/` | 103,257 |
+| Axiom audit (`lake build`, `e8bd075`) | passed |
 | Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 446 |
+| Modules on the module system | 1 (the Challenge) of 461 |
 
 The compilation count intersects the source files in this checkpoint with their
 compiled artifacts; stale artifacts from the restored cache are not counted.
