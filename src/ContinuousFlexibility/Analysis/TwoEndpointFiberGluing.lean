@@ -30,6 +30,8 @@ private theorem twoEndpointFiberCoordinate_left_match
     (θ : ℝ) :
     Y false =ᶠ[𝓝 (c, θ)] radialGermGlue d Ref (Y true) := by
   have he := radialGermGlue_eventuallyEq (fun η => (hmatch true η).symm) (c, θ)
+  change radialGermGlue d Ref (Y true) =ᶠ[𝓝 (c, θ)]
+    (if c < d then Ref else Y true) at he
   rw [if_pos hcd] at he
   exact (hmatch false θ).trans he.symm
 
@@ -94,13 +96,17 @@ theorem twoEndpointFiberCoordinate_endpoint_germ
   have hleft := twoEndpointFiberCoordinate_left_match hcd hmatch
   cases side with
   | false =>
+      change twoEndpointFiberCoordinate c d Y Ref =ᶠ[𝓝 (l, η)] Y false
       have he := radialGermGlue_eventuallyEq hleft (l, η)
       simpa only [twoEndpointFiberCoordinate, if_pos hl] using he
   | true =>
+      change twoEndpointFiberCoordinate c d Y Ref =ᶠ[𝓝 (r, η)] Y true
       have hcr : ¬r < c := not_lt_of_ge (hcd.trans hr).le
       have hdr : ¬r < d := not_lt_of_ge hr.le
       have he := radialGermGlue_eventuallyEq hleft (r, η)
       have hi := radialGermGlue_eventuallyEq hright (r, η)
+      change radialGermGlue d Ref (Y true) =ᶠ[𝓝 (r, η)]
+        (if r < d then Ref else Y true) at hi
       rw [if_neg hcr] at he
       rw [if_neg hdr] at hi
       exact he.trans hi

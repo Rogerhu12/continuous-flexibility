@@ -38,6 +38,13 @@ def positiveConformalBoundaryData (D E : ℕ → ℝ → ℝ) (v : ℝ) :
 termination_by n _ _ => n
 decreasing_by all_goals omega
 
+private theorem positiveConformalBoundaryData_zero_fun
+    (D E : ℕ → ℝ → ℝ) (v : ℝ) (side : Bool) :
+    positiveConformalBoundaryData D E v 0 side =
+      (fun θ => if side then θ else v) := by
+  funext θ
+  rw [positiveConformalBoundaryData]
+
 theorem contDiff_positiveConformalBoundaryData
     {D E : ℕ → ℝ → ℝ} (hD : ∀ j, ContDiff ℝ ∞ (D j))
     (hE : ∀ j, ContDiff ℝ ∞ (E j)) (v : ℝ) (n : ℕ) (side : Bool) :
@@ -46,23 +53,30 @@ theorem contDiff_positiveConformalBoundaryData
   | h n ih =>
       cases n with
       | zero =>
+          rw [positiveConformalBoundaryData_zero_fun]
           cases side
-          · simpa only [positiveConformalBoundaryData] using
-              (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => v))
-          · simpa only [positiveConformalBoundaryData] using
-              (contDiff_id : ContDiff ℝ ∞ (fun θ : ℝ => θ))
+          · exact contDiff_const
+          · exact contDiff_id
       | succ n =>
           have hprev (j : ℕ) (s : Bool) :
               ContDiff ℝ ∞ (deriv (positiveConformalBoundaryData D E v (n - j) s)) :=
             (contDiff_infty_iff_deriv.mp (ih (n - j) (by omega) s)).2
+          have hstep : positiveConformalBoundaryData D E v (n + 1) side =
+              (fun θ => ∑ j ∈ Finset.range (n + 1), (n.choose j : ℝ) *
+                (E j θ * deriv (positiveConformalBoundaryData D E v (n - j) side) θ +
+                  (if side then -D j θ else D j θ) *
+                    deriv (positiveConformalBoundaryData D E v (n - j) (!side)) θ)) := by
+            funext θ
+            rw [positiveConformalBoundaryData]
+          rw [hstep]
           cases side
-          · simp only [positiveConformalBoundaryData, Bool.not_false, Bool.false_eq_true,
+          · simp only [Bool.not_false, Bool.false_eq_true,
               ↓reduceIte]
             apply ContDiff.sum
             intro j _
             exact contDiff_const.mul (((hE j).mul (hprev j false)).add
               ((hD j).mul (hprev j true)))
-          · simp only [positiveConformalBoundaryData, Bool.not_true, ↓reduceIte]
+          · simp only [Bool.not_true, ↓reduceIte]
             apply ContDiff.sum
             intro j _
             exact contDiff_const.mul (((hE j).mul (hprev j true)).add
@@ -211,7 +225,9 @@ theorem positiveConformalBoundaryPolynomial_first_jets
       Bool.false_eq_true, ↓reduceIte] using hzero false
   · simpa only [radialBoundaryJet, iteratedDeriv_zero, positiveConformalBoundaryData,
       ↓reduceIte] using hzero true
-  · simpa [positiveConformalBoundaryData, radialBoundaryJet] using hfirst' false
-  · simpa [positiveConformalBoundaryData, radialBoundaryJet] using hfirst' true
+  · simpa [positiveConformalBoundaryData, positiveConformalBoundaryData_zero_fun,
+      radialBoundaryJet] using hfirst' false
+  · simpa [positiveConformalBoundaryData, positiveConformalBoundaryData_zero_fun,
+      radialBoundaryJet] using hfirst' true
 
 end ContinuousFlexibility.Analysis

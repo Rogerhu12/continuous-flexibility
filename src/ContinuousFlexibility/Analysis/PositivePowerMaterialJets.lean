@@ -45,7 +45,7 @@ private theorem exists_smooth_positivePower_extension
   have heq (x : ℝ) (hx : x ∈ Icc l u) : Φ =ᶠ[𝓝 x] (fun y : ℝ => y ^ a) := by
     have hxin : x ∈ Ioo (l / 2) (u + 1) := ⟨by linarith [hx.1], by linarith [hx.2]⟩
     filter_upwards [isOpen_Ioo.mem_nhds hxin] with y hy
-    change C y ^ a = y ^ a
+    change circleFlowSmoothTimeClamp (l / 2) (u + 1) (l / 4) hw he y ^ a = y ^ a
     rw [circleFlowSmoothTimeClamp_eq hw he ⟨hy.1.le, hy.2.le⟩]
   have hbound (n : ℕ) : ∃ M : ℝ, ∀ x ∈ Icc l u,
       ‖iteratedFDeriv ℝ n Φ x‖ ≤ M :=

@@ -129,7 +129,8 @@ theorem scalarInverse_displacement_fixed_loss
     have hid : ‖iteratedFDeriv ℝ n (id : ℝ → ℝ) θ‖ ≤ 1 :=
       (flowJet_norm_iteratedFDeriv_clm_le (ContinuousLinearMap.id ℝ ℝ) hnpos θ).trans
         (ContinuousLinearMap.norm_id_le (𝕜 := ℝ) (E := ℝ))
-    rw [iteratedFDeriv_sub_apply
+    have he : (fun η : ℝ => g η - η) = g - id := by funext η; rfl
+    rw [he, iteratedFDeriv_sub_apply
       (hg.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
       (contDiffAt_id.of_le (by simp : (n : ℕ∞ω) ≤ ∞))]
     apply (norm_sub_le _ _).trans

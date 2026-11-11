@@ -62,7 +62,7 @@ theorem rootRescaledFlow_eq_storedFlow
           (rootParameterScaledSpeed c δ (Real.sqrt δ)) σ (r, Ψ θ r)) r := by
     intro θ r hr
     have hlin : HasDerivAt (fun y : ℝ => δ * y) δ r := by
-      simpa only [mul_one] using (hasDerivAt_id r).const_mul δ
+      simpa only [mul_one, id_eq] using (hasDerivAt_id r).const_mul δ
     have hh := (hΦflow θ (δ * r)
       ⟨mul_pos hδ hr.1, mul_lt_mul_of_pos_left hr.2 hδ⟩).comp r hlin
     have he : (Φ θ) ∘ (fun y : ℝ => δ * y) = Ψ θ := by

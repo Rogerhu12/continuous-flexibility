@@ -27,7 +27,12 @@ theorem mixedDerivative_angularTranslate (F : PolarPoint → ℝ) (c : ℝ)
     (a b : ℕ) (p : PolarPoint) :
     mixedDerivative a b (fun q => F (q.1, q.2 + c)) p =
       mixedDerivative a b F (p.1, p.2 + c) := by
-  simp only [mixedDerivative, iteratedDeriv_comp_add_const]
+  have he :
+      (fun r => iteratedDeriv b (fun θ => F (r, θ + c)) p.2) =
+        (fun r => iteratedDeriv b (fun θ => F (r, θ)) (p.2 + c)) := by
+    funext r
+    exact congrFun (iteratedDeriv_comp_add_const b (fun θ => F (r, θ)) c) p.2
+  exact congrArg (fun f : ℝ → ℝ => iteratedDeriv a f p.1) he
 
 /-- A genuine simple angular factor loses exactly one angular derivative.
 Both signs of the angle are covered by the same segment hypothesis. -/

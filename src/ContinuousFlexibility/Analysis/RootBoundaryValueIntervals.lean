@@ -78,7 +78,8 @@ theorem rootBoundary_positive_value_intervals
       Function.Periodic (fun η => rootOddCoefficient G (r, η)) Real.pi :=
     fun r _ => rootOddCoefficient_periodic hperiod r
   have hχraw : rootOddCoefficient G (0, θ) ∈ Icc χl χu := by
-    simpa only [extendedRootOddCoefficient_of_nonneg G (le_refl (0 : ℝ))] using hχvalue
+    simpa only [extendedRootOddCoefficient_of_nonneg G
+      (p := (0, θ)) (le_refl (0 : ℝ))] using hχvalue
   have hk0 : 0 < k := (by norm_num : (0 : ℝ) < 1 / 4).trans_le hk.1
   have hχ0 : 0 < rootOddCoefficient G (0, θ) := hχl.trans_le hχraw.1
   have hαeq := (rootSmoothHeight_boundary hG Real.pi_ne_zero hχperiod hφperiod

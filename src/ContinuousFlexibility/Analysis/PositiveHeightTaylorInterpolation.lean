@@ -120,7 +120,7 @@ theorem positiveHeightTaylorInterpolation_smooth_positive
     (n : ℕ) (δ : ℝ) :
     ContDiff ℝ ∞ (positiveHeightTaylorInterpolation n l r δ href h) ∧
       ∀ p, 0 < positiveHeightTaylorInterpolation n l r δ href h p := by
-  have hE := contDiff_endpointTaylorCorrection
+  have hE := contDiff_endpointTaylorCorrection (n := n)
     (fun side j _ => contDiff_positiveHeightTaylorData hRef hRefPos hRaw hRawPos side j)
     l r δ
   exact ⟨hRef.mul (Real.contDiff_exp.comp hE), fun p => mul_pos (hRefPos p) (Real.exp_pos _)⟩

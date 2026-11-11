@@ -33,6 +33,7 @@ private theorem mem_Ioo_of_injective_scalar_equation
     · exact h
     · exact False.elim (hb.ne' (by rw [← h]; exact hvalue))
   have heq : v = u := hinj (hvalue.trans hu.symm)
+  apply Set.mem_Ioo.mpr
   simpa only [heq] using And.intro hleft hright
 
 /-- Fixed-angle value limits and injectivity of the true interior slices

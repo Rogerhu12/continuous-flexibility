@@ -34,8 +34,8 @@ theorem norm_iteratedFDeriv_mul_le_at
         ‖iteratedFDeriv ℝ i f x‖ * ‖iteratedFDeriv ℝ (n - i) g x‖ := by
   obtain ⟨U, hU, hxU, hfU⟩ := hf.contDiffOn' (m := (n : ℕ∞ω)) (by simp) (by simp)
   obtain ⟨V, hV, hxV, hgV⟩ := hg.contDiffOn' (m := (n : ℕ∞ω)) (by simp) (by simp)
-  have hf' : ContDiffOn ℝ n f U := by simpa only [insert_univ, univ_inter] using hfU
-  have hg' : ContDiffOn ℝ n g V := by simpa only [insert_univ, univ_inter] using hgV
+  have hf' : ContDiffOn ℝ n f U := by simpa using hfU
+  have hg' : ContDiffOn ℝ n g V := by simpa using hgV
   have hUV := hU.inter hV
   have hx : x ∈ U ∩ V := ⟨hxU, hxV⟩
   have hfjet (j : ℕ) : iteratedFDerivWithin ℝ j f (U ∩ V) x = iteratedFDeriv ℝ j f x :=
@@ -112,7 +112,7 @@ theorem pointwiseProduct_fixed_loss_material_bound
             (C n i * (1 + p (n + loss) z)) :=
           mul_le_mul_of_nonneg_left (hpair n i z hz) hcoeff
         _ = K n i * (1 + p (n + loss) z) := by dsimp only [K]; ring
-    _ = (∑ i : Fin (n + 1), K n i) * (1 + p (n + loss) z) := (Finset.sum_mul).symm
+    _ = (∑ i : Fin (n + 1), K n i) * (1 + p (n + loss) z) := by rw [Finset.sum_mul]
     _ ≤ B n * (1 + p (n + loss) z) :=
       mul_le_mul_of_nonneg_right (le_add_of_nonneg_left zero_le_one) hn
 
