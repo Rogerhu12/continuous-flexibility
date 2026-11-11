@@ -18,6 +18,8 @@ open Set Filter
 open scoped Topology
 open ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency false
+
 section ProductTopology
 
 variable {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -39,7 +41,7 @@ theorem withSeminorms_pairGrading {p : ℕ → Seminorm ℝ E} {q : ℕ → Semi
     · exact (LinearMap.snd ℝ E F).withSeminorms_induced hq
   have hraw : WithSeminorms (SeminormFamily.sigma r) := by
     have h := withSeminorms_iInf (𝕜 := ℝ) (E := E × F) (p := r) (t := t) ht
-    simpa [t, iInf_bool_eq, inf_comm] using h
+    simpa +instances [t, iInf_bool_eq, inf_comm] using h
   apply hraw.congr
   · intro n
     refine ⟨{⟨false, n⟩, ⟨true, n⟩}, 2, ?_⟩
@@ -84,8 +86,12 @@ theorem hasSmoothing_submodule_of_tame_projection
   let T : ℕ → W →L[ℝ] W := fun N =>
     ((P.comp (S N)).comp W.subtypeL).codRestrict W (fun x => hPW _)
   have hT (N : ℕ) (w : W) : ((T N w : W) : E) = P (S N w) := by
-    simp only [T, ContinuousLinearMap.coe_codRestrict_apply,
-      ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply]
+    calc
+      _ = ((P.comp (S N)).comp W.subtypeL) w :=
+        ContinuousLinearMap.coe_codRestrict_apply _ W _ w
+      _ = P (S N w) := by
+        rw [ContinuousLinearMap.comp_apply, ContinuousLinearMap.comp_apply,
+          Submodule.subtypeL_apply]
   refine ⟨max base b, loss + r, T, ?_, ?_, ?_⟩
   · intro m n hm hmn
     obtain ⟨CP, hCP⟩ := hPt n ((le_of_max_le_right hm).trans hmn)

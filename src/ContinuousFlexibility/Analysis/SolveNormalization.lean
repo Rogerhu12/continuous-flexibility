@@ -40,9 +40,9 @@ theorem referenceMode_add_of_continuous {u v : PolarPoint → ℝ}
     (hu : Continuous u) (hv : Continuous v) (j : ℕ) (r : ℝ) :
     referenceMode (fun p => u p + v p) j r =
       referenceMode u j r + referenceMode v j r := by
-  have hui := ((hu.comp (continuous_const.prodMk continuous_id)).mul
+  have hui := ((hu.comp ((continuous_const (y := r)).prodMk continuous_id)).mul
     (continuous_cosineMode j)).intervalIntegrable (μ := volume) 0 (2 * Real.pi)
-  have hvi := ((hv.comp (continuous_const.prodMk continuous_id)).mul
+  have hvi := ((hv.comp ((continuous_const (y := r)).prodMk continuous_id)).mul
     (continuous_cosineMode j)).intervalIntegrable (μ := volume) 0 (2 * Real.pi)
   simp only [referenceMode, radialAngularMean, add_mul]
   rw [intervalIntegral.integral_add hui hvi, mul_add]
@@ -197,12 +197,14 @@ theorem continuous_referenceRowLinear (hL : Continuous L) :
     exact (hB₀ (mem_image_of_mem (fun r => ‖referenceColumn D r‖) hr)).trans (le_max_left _ _)
   let c : ℝ := B * (|(2 * Real.pi)⁻¹| * (Real.sqrt 2 * |2 * Real.pi - 0|)) * |D.b - D.a|
   have hc : 0 ≤ c := by positivity
+  let cNN : NNReal := NNReal.mk c hc
   let q : Seminorm ℝ E := (normSeminorm ℝ ℝ).comp (referenceRowLinear D hab hcol L hfield)
-  have hq : q ≤ (⟨c, hc⟩ : ℝ≥0) • p := by
+  have hq : q ≤ cNN • p := by
     intro x
+    simp only [smul_apply, NNReal.smul_def, smul_eq_mul, cNN, NNReal.coe_mk]
     exact referenceRow_bound_of_field_bound hab hB (apply_nonneg _ _) hcb (L x)
       (fun r hr θ hθ => hpx x (r, θ) ⟨hr, hθ⟩)
-  have hcont : Continuous q := Seminorm.continuous_of_le (hp.const_smul (⟨c, hc⟩ : ℝ≥0)) hq
+  have hcont : Continuous q := Seminorm.continuous_of_le (hp.const_smul cNN) hq
   exact (WithSeminorms.continuous_iff_continuous_comp (norm_withSeminorms ℝ ℝ)
     (referenceRowLinear D hab hcol L hfield)).2 (fun _ => hcont)
 
@@ -325,33 +327,31 @@ theorem hasSmoothing_ker_of_continuous
   exact hasSmoothing_ker_rankOne row ψ hψ
     (fun _ _ h x => hmono h x) hC hb hsmooth
 
-/-- The normalization hyperplane inherits smoothing without a derivative
-loss from the rank-one normalization projection. -/
-theorem hasSmoothing_normalizedSector
+theorem referenceRow_affine_of_zero
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
     (hD : IsRadialReference D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
-    (hmono : Monotone (sectorGrading S)) (hp : WithSeminorms (sectorGrading S))
-    (hsmooth : HasSmoothing (sectorGrading S)) (ψ : StateDirections S)
-    (hψ : referenceRow D (stateU S ψ.val) = 1) :
-    HasSmoothing (fun n => (sectorGrading S n).comp
-      (sectorReferenceRowCLM hD hT hS).toLinearMap.ker.subtype) :=
-  hasSmoothing_ker_of_continuous (sectorGrading S) hp hmono hsmooth
-    (sectorReferenceRowCLM hD hT hS) ψ
-    ((sectorReferenceRowCLM_apply hD hT hS ψ).trans hψ)
+    (href : referenceStateConditions D S C) (x : AnnularState S)
+    (hx : referenceRow D (stateU S x) = 0) :
+    referenceRow D (stateU S (C.referenceState + x)) = 1 := by
+  calc
+    _ = stateReferenceRowCLM hD hT hS (C.referenceState + x) :=
+      (stateReferenceRowCLM_apply hD hT hS _).symm
+    _ = stateReferenceRowCLM hD hT hS C.referenceState + stateReferenceRowCLM hD hT hS x :=
+      map_add (stateReferenceRowCLM hD hT hS) C.referenceState x
+    _ = referenceRow D (stateU S C.referenceState) + referenceRow D (stateU S x) :=
+      congrArg₂ (· + ·) (stateReferenceRowCLM_apply hD hT hS C.referenceState)
+        (stateReferenceRowCLM_apply hD hT hS x)
+    _ = 1 := by rw [href.2.2.2.2.2, hx, add_zero]
 
 theorem referenceRow_affine_of_mem_kernel
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S}
     (hD : IsRadialReference D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (href : referenceStateConditions D S C)
-    (x : (sectorReferenceRowCLM hD hT hS).toLinearMap.ker) :
-    referenceRow D (stateU S (C.referenceState + x.val.val)) = 1 := by
-  rw [← stateReferenceRowCLM_apply hD hT hS, map_add,
-    stateReferenceRowCLM_apply hD hT hS]
-  have hx : stateReferenceRowCLM hD hT hS x.val.val = 0 := by
-    rw [stateReferenceRowCLM_apply, ← sectorReferenceRowCLM_apply hD hT hS x.val]
-    exact x.property
-  rw [hx, add_zero]
-  exact href.2.2.2.2.2
+    (x : StateDirections S) (hx : sectorReferenceRowCLM hD hT hS x = 0) :
+    referenceRow D (stateU S (C.referenceState + x.val)) = 1 :=
+  referenceRow_affine_of_zero hD hT hS href x.val
+    ((sectorReferenceRowCLM_apply hD hT hS x).symm.trans hx)
 
 end ContinuousFlexibility.Statements

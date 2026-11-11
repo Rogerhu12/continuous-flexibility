@@ -63,9 +63,10 @@ theorem solve_coupled_exists_normalized_zero
       (solve_sectorGrading_withSeminorms S)
   let ψ : StateDirections S := ⟨C.referenceState, href.stateSector⟩
   have hψ : referenceRow D (stateU S ψ.val) = 1 := href.2.2.2.2.2
-  have hSX : HasSmoothing p := hasSmoothing_normalizedSector h1.1 hT hS
-    (solve_sectorGrading_monotone S) (solve_sectorGrading_withSeminorms S)
-    (solve_sector_hasSmoothing hS) ψ hψ
+  have hψrow : row ψ = 1 := (sectorReferenceRowCLM_apply h1.1 hT hS ψ).trans hψ
+  have hSX : HasSmoothing p := hasSmoothing_ker_of_continuous (sectorGrading S)
+    (solve_sectorGrading_withSeminorms S) (solve_sectorGrading_monotone S)
+    (solve_sector_hasSmoothing hS) row ψ hψrow
   let ρ : ℝ := min ε q0
   have hρ : 0 < ρ := lt_min h1.2.1 hq0
   let U : Set (W × ℝ) := {z | p base z.1 < ρ ∧ |z.2| < ρ}
@@ -159,6 +160,7 @@ theorem solve_coupled_exists_normalized_zero
   refine ⟨C.referenceState + x.val.val, τ, hτ, ?_, ?_, ?_, hz⟩
   · exact liftSectorParameter_mem_stateNeighborhood (hnear (x, τ) hmem) hqε
   · exact href.liftSectorParameter_sector (Lz (x, τ))
-  · exact referenceRow_affine_of_mem_kernel h1.1 hT hS href x
+  · exact referenceRow_affine_of_mem_kernel h1.1 hT hS href x.val
+      (LinearMap.mem_ker.mp x.property)
 
 end ContinuousFlexibility.Analysis

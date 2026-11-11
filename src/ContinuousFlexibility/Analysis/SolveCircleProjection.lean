@@ -90,7 +90,7 @@ private theorem circleAngularMean_energy_le
   apply Finset.sum_le_sum
   intro j _
   exact mul_le_mul_right
-    (pow_le_pow_left₀ (zero_le _) (eLpNorm_iteratedDeriv_circleAngularMeanField_le hu m _) 2) _
+    (pow_le_pow_left₀ zero_le (eLpNorm_iteratedDeriv_circleAngularMeanField_le hu m _) 2) _
 
 /-- Angular averaging preserves all weighted circle membership conditions. -/
 theorem CircleMember.angularMeanField

@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
 import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
 import Mathlib.Analysis.LocallyConvex.WithSeminorms
+import Mathlib.Analysis.Normed.Order.Hom.Basic
 
 /-!
 # Newton convergence on a complete space defined by seminorms
