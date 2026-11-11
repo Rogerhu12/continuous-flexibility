@@ -23,10 +23,22 @@ theorem radialJacobi_outward (D : ReferenceData) (right : Bool)
       (fun t => u (outerOutwardRadius right t)) x =
       radialJacobi J D.w u (outerOutwardRadius right x) := by
   cases right
-  · simpa [radialRadiusScale, outerTailOutwardWeight, outerTailSign, outerOutwardRadius]
+  · have hweight : radialRadiusScale (-1) 1 D.w = outerTailOutwardWeight D false := by
+      funext t
+      simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign]
+    have hfield : radialRadiusScale (-1) 1 u = fun t => u (-t) := by
+      funext t
+      simp [radialRadiusScale]
+    simpa [hweight, hfield, outerTailSign, outerOutwardRadius]
       using radialJacobi_radialRadiusScale (by norm_num : (-1 : ℝ) ≠ 0)
         J 1 (-1) D.w u (-x)
-  · simpa [radialRadiusScale, outerTailOutwardWeight, outerTailSign, outerOutwardRadius]
+  · have hweight : radialRadiusScale 1 1 D.w = outerTailOutwardWeight D true := by
+      funext t
+      simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign]
+    have hfield : radialRadiusScale 1 1 u = u := by
+      funext t
+      simp [radialRadiusScale]
+    simpa [hweight, hfield, outerTailSign, outerOutwardRadius]
       using radialJacobi_radialRadiusScale one_ne_zero J 1 1 D.w u x
 
 theorem radialJacobi_outward_pullback (D : ReferenceData) (right : Bool)

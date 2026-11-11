@@ -62,7 +62,7 @@ theorem matchedModeCell_eq_zero_of_compact_support {D : ReferenceData}
     apply Lp.ext
     filter_upwards [matchedModeCellL2_ae D hP m U.1, hU,
       Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D)] with r hcell hu hzero
-    rw [hcell, hzero]
+    rw [hcell, hzero, Pi.zero_apply]
     by_cases hr : r ∈ K
     · rw [hlocal r hr, zero_mul]
     · rw [hu hr, mul_zero]
@@ -86,7 +86,7 @@ theorem matchedInnerSource_cell_eq_zero {D : ReferenceData}
       matchedModeCellL2_ae D hP m F.1, Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D)]
       with r hsource hcell hzero
     change (M.sourceInner (matchedModeCell D hP m F)).1 r = (0 : RadialModeL2 D) r
-    rw [hsource, hzero]
+    rw [hsource, hzero, Pi.zero_apply]
     by_cases hr : r ∈ Ioo M.innerLeft M.innerRight
     · rw [if_pos hr]
       change (matchedModeCellL2 D hP m F.1) r = 0

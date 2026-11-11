@@ -47,6 +47,8 @@ local notation "B" => centralModelBuffer (2 * (q : ℝ)) T B₀ bordered g f
 variable (hB : BufferHypotheses (centralModelBuffer (2 * (q : ℝ)) T B₀ bordered g f))
   (M : InnerBufferLocalizedData (centralModelBuffer (2 * (q : ℝ)) T B₀ bordered g f) C K)
 
+include hB
+
 /-- The same true model remainder is bounded before selecting any
 physical reference containing the central patch. -/
 theorem matchedCentralTrueRemainder_le_envelope (hq : 1 ≤ q) (hT : 8 ≤ T)

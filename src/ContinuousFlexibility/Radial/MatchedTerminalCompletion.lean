@@ -31,6 +31,7 @@ theorem TerminalRegionalData.exists_completed_actual
   obtain ⟨Kinv, G, hactual⟩ := MatchedPieces.exists_actualMatchedRepresentation_with_Kinv
     D { W.matching with innerPoisson := P, innerFunction := p, Db := Db } hpieces
   refine ⟨P, p, Db, Kinv, G, hactual, ?_⟩
-  exact actualMatchedRepresentation_modeInverseProperties hD hB hactual
+  have hmode := actualMatchedRepresentation_modeInverseProperties hD hB hactual
+  exact hmode
 
 end ContinuousFlexibility.Radial

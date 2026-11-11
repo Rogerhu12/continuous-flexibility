@@ -22,7 +22,12 @@ def SelectedTerminalOuterSupply {D : ReferenceData} (M : RadialMatchingData D) :
       (v : RadialModePair D → ℝ → ℝ)
       (Q : Fin 2 → RadialModePair D) (p : Fin 2 → ℝ → ℝ),
       MatchingOuterRealizations D
-        { M with innerInverse := A, innerRepresentative := u,
-          outerInverse := R, outerRepresentative := v, outerPoisson := Q, outerFunction := p }
+        { M with
+          innerInverse := A
+          innerRepresentative := u
+          outerInverse := R
+          outerRepresentative := v
+          outerPoisson := Q
+          outerFunction := p }
 
 end ContinuousFlexibility.Radial

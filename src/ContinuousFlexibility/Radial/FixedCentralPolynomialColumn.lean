@@ -64,7 +64,9 @@ theorem fixedCentralModelColumnEnvelope_polynomial_bound
   have hmass (k : Fin 2) : 1 ≤ (B.modelBuffer q T B₀).mass k := hm1
   have hinv (k : Fin 2) : ((B.modelBuffer q T B₀).mass k)⁻¹ ≤ coeff := by
     have h := one_div_le_one_div_of_le zero_lt_one (hmass k)
-    exact (by simpa only [one_div, inv_one] using h).trans hc.1
+    have hinvOne : ((B.modelBuffer q T B₀).mass k)⁻¹ ≤ 1 := by
+      simpa only [one_div, inv_one] using h
+    exact hinvOne.trans hc.1
   have hupper (k : Fin 2) : (B.modelBuffer q T B₀).mass k ≤ coeff * (1 + j) := by
     change j * T / 4 ≤ coeff * (1 + j)
     have hprod := mul_le_mul_of_nonneg_left hc.2.2.2.1 hj0
@@ -73,6 +75,7 @@ theorem fixedCentralModelColumnEnvelope_polynomial_bound
   have hk := he i
   have hmk : centralBufferMass j T / (2 * C) ≤ fixedCentralModelCutEnergy M i := by
     have h := (div_le_iff₀ hC).mp (M.column i).inward_lower
+    change centralBufferMass j T ≤ (M.column i).inwardEnergy * C at h
     have h' := mul_le_mul_of_nonneg_right hk.2 hC.le
     apply (div_le_iff₀ (mul_pos (by norm_num) hC)).mpr
     nlinarith only [h, h']
@@ -94,7 +97,7 @@ theorem fixedCentralModelColumnEnvelope_polynomial_bound
         ⟨add_nonneg zero_le_one (inv_nonneg.mpr hk.1.le), by
           nlinarith only [inv_nonneg.mpr hk.1.le,
             sq_nonneg ((fixedCentralModelCutEnergy M i)⁻¹)]⟩
-    exact hs.trans ((add_le_add_left hki 1).trans hc.2.2.2.2.2)
+    exact hs.trans ((add_le_add (le_refl 1) hki).trans hc.2.2.2.2.2)
   have hrem := innerBuffer_normalized_remainder_coefficient_envelope hB
     hC.le hK hc.1 hj0 hc.2.1 hc.2.2.1 hinv hupper
     (fun k => (buffer_action_pos hB k).le)

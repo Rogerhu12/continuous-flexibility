@@ -40,9 +40,9 @@ theorem morseTwoTailAt_sublevel_fiber_bound (base N : ℕ) :
         apply Finset.mem_insert_of_mem
         cases hs : p.1
         · apply Finset.mem_union_left
-          exact Finset.mem_image.mpr ⟨p.2, hp, by rw [hs]⟩
+          exact Finset.mem_image.mpr ⟨p.2, hp, rfl⟩
         · apply Finset.mem_union_right
-          exact Finset.mem_image.mpr ⟨p.2, hp, by rw [hs]⟩
+          exact Finset.mem_image.mpr ⟨p.2, hp, rfl⟩
   have hL : L.card ≤ N + 1 := by
     calc
       L.card ≤ (Finset.range (N + 1)).card := Finset.card_image_le

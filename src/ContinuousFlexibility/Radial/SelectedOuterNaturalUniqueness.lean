@@ -144,8 +144,8 @@ theorem whole_robin_unique
     · simpa [outerTailSign, tailPhysicalEndpoint] using hcut.2
   have hka := hk a ⟨le_rfl, hab⟩
   have hzero : k = 0 := by
-    have hv := congrArg Prod.fst H.V_initial
-    have hz := congrArg Prod.snd H.V_initial
+    have hv : H.V a = H.entrance.1 := congrArg Prod.fst H.V_initial
+    have hz : H.ZV a = H.entrance.2 := congrArg Prod.snd H.V_initial
     change H.entrance.1 * u a + H.entrance.2 * z a = 0 at hRobin
     rw [hka.1, hka.2, hv, hz] at hRobin
     have hh : k * (H.entrance.1 ^ 2 + H.entrance.2 ^ 2) = 0 := by

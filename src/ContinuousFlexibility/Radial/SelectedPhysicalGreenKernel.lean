@@ -59,7 +59,8 @@ theorem physical_kernel_memLp_row (hD : IsAccumulatingProfile D)
     morsePhysicalDeepTail_outward_lift_memLp (matchingProfileGeometry hD) hentry hT F.P_natural
   have hleft := (memLp_indicator_iff_restrict measurableSet_Icc).mpr
     (hQLp.const_mul (F.P x))
-  have hright := (hP.const_mul (F.Q x)).indicator measurableSet_Ioi
+  have hright : MemLp ((Ioi x).indicator (fun y => F.Q x * F.P y)) 2 μ :=
+    (hP.const_mul (F.Q x)).indicator measurableSet_Ioi
   have hfull : ∀ᵐ y ∂μ, y ∈ Ioo c b := by
     rw [outerOutwardTailMeasure_eq_density hD hphysical]
     have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hentry
