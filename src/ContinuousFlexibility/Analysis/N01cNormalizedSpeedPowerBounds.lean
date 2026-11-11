@@ -128,7 +128,7 @@ private def normalizedSpeedPowerControl_of_inputs
   let G : MixedJetRegularity U Ω (f i) :=
     F.regular.congr hΩ
       (fun x hx => (F.regular.spatial x hx).congr
-        (fun q hq => (heq x hx q hq).symm)) heq
+        (fun q hq => (heq x hx hq).symm)) heq
   exact ⟨f i, G, F.bounds.congr F.regular G hΩ heq⟩
 
 end AbstractInputs

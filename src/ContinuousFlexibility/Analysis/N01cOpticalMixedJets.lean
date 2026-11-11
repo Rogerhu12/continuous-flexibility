@@ -311,6 +311,6 @@ theorem stateOpticalRadialJetSmoothDirections_D_apply
     (stateJointKappaCLM hS hT hA.1.1 m) isOpen_Ioo hq hg n r hr hU hp).D k z v = _
   rw [affineOpticalRadialJetSmoothDirections_D_apply
     (stateJointKappaCLM hS hT hA.1.1 m) isOpen_Ioo hq hg n k r hr hU hp hz v]
-  simp only [stateJointKappaCLM_apply, mul_neg, add_neg_eq_sub, neg_mul]
+  simp only [stateJointKappaCLM_apply, mul_neg, ← sub_eq_add_neg, neg_mul]
 
 end ContinuousFlexibility.Statements
