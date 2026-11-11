@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01cOpticalMaterialBounds
 import ContinuousFlexibility.Analysis.N01cEndpointMixedPowerAlgebra
+import ContinuousFlexibility.Analysis.N01cStateHeightJets
 
 /-!
 # The actual optical root in the endpoint-weighted coefficient algebra
@@ -60,8 +61,9 @@ theorem endpointRadialLowJets_powerBounds
   by_cases hb0 : b = 0
   · subst b
     let i : Fin (s + 1) × Fin (K + 1) := (⟨a, by omega⟩, ⟨k, by omega⟩)
-    let Jrad := J.congr (fun y _ => by
-      simp only [mixedDerivative_radialFunction, ite_true])
+    let Jrad : SmoothDirections U (fun y => iteratedDeriv a (f m y) t.1) :=
+      J.congr (fun y _ => by
+        simp only [mixedDerivative_radialFunction, ite_true])
     have hprod : (∏ j, q (v j)) ≤ 1 := Finset.prod_le_one₀
       (fun j _ => apply_nonneg _ _) (fun j _ => (hqp _).trans (hv j))
     have hcoef : 0 ≤ c i * E m ^ A i * parameterHeightWeight (H m) k :=
@@ -75,8 +77,9 @@ theorem endpointRadialLowJets_powerBounds
       (le_mul_of_one_le_right
         (mul_nonneg (mul_nonneg (zero_le_one.trans hC)
           (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)) hW) hRpow)
-  · let Jzero := J.congr (fun y _ => by
-      simp only [mixedDerivative_radialFunction, if_neg hb0])
+  · let Jzero : SmoothDirections U (fun _ : X => (0 : ℝ)) :=
+      J.congr (fun y _ => by
+        simp only [mixedDerivative_radialFunction, if_neg hb0])
     have hz : J.D k x v = 0 := by
       by_cases hk0 : k = 0
       · subst k
@@ -86,6 +89,29 @@ theorem endpointRadialLowJets_powerBounds
     exact mul_nonneg (mul_nonneg (mul_nonneg (zero_le_one.trans hC)
       (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)) hW)
       (Real.rpow_nonneg (zero_le_one.trans hR) _)
+
+/-- Convert the complete absolute-value material envelope to the norm
+envelope before specializing the endpoint algebra to a concrete state. -/
+private theorem endpointRadialLowJets_powerBounds_of_abs
+    (p : ℕ → Seminorm ℝ X) (q : Seminorm ℝ X)
+    (center : X) (base loss : ℕ) (hqp : ∀ v, q v ≤ p base v)
+    {U : Set X} (I : ι → Set ℝ) (δ : ι → ℝ → ℝ) (H E : ι → ℝ)
+    (hH : ∀ m, 0 ≤ H m) (hE : ∀ m, 1 ≤ E m)
+    (f : ι → X → ℝ → ℝ)
+    (hraw : ∀ n k : ℕ, ∃ C A : ℝ, 0 < C ∧ 0 < A ∧
+      ∀ m r, r ∈ I m →
+      ∀ J : SmoothDirections U (fun x => iteratedDeriv n (f m x) r),
+      ∀ x ∈ U, ∀ v : Fin k → X,
+        δ m r ^ n * |J.D k x v| ≤
+          C * E m ^ A * parameterHeightWeight (H m) k * ∏ i, q (v i)) :
+    EndpointMixedPowerBounds p center base loss U (fun m => I m ×ˢ univ)
+      (fun m t => δ m t.1) (fun m _ => H m) (fun m _ => E m)
+      (fun m x t => f m x t.1) := by
+  apply endpointRadialLowJets_powerBounds p q center base loss hqp I δ H E hH hE f
+  intro n k
+  obtain ⟨C, A, hC, hA, hb⟩ := hraw n k
+  exact ⟨C, A, hC, hA.le, fun m r hr J x hx v => by
+    simpa only [Real.norm_eq_abs] using hb m r hr J x hx v⟩
 
 /-- Radial towers need exist only on the same original parameter domain. -/
 def radialMixedRegularityOn
@@ -185,23 +211,21 @@ theorem n01_stateOpticalRoot_endpoint_powerBounds
       (fun m _ => T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ))
       (fun m _ => T.E0 (T.sample (C.cell m)))
       (fun _ => stateOpticalRootField D S C) := by
-  have hs (m) := materialSample_mem_radialCore hT hA.1.1.choose_spec.2.1 (C.cell m)
-  apply endpointRadialLowJets_powerBounds
+  exact endpointRadialLowJets_powerBounds_of_abs
     (pairGrading (stateGrading S) realGrading) (pairGrading (stateGrading S) realGrading 0)
-    (C.referenceState, 0) base loss (fun v => jointStateGrading_monotone S (Nat.zero_le base) v)
+    (C.referenceState, 0) base loss
+    (fun v => jointStateGrading_monotone S (Nat.zero_le base) v)
     (fun m => Ioo (C.left m) (C.right m))
     (fun m r => min (r - C.left m) (C.right m - r))
     (fun m => T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ))
     (fun m => T.E0 (T.sample (C.cell m)))
-    (fun m => Real.rpow_nonneg (hT.2.1 _ (hs m)).2.1.le _)
-    (fun m => hE _ (hs m))
+    (fun m => Real.rpow_nonneg
+      (hT.2.1 _ (materialSample_mem_radialCore hT hA.1.1.choose_spec.2.1 (C.cell m))).2.1.le _)
+    (fun m => hE _
+      (materialSample_mem_radialCore hT hA.1.1.choose_spec.2.1 (C.cell m)))
     (fun _ z r => Real.sqrt (-deriv (stateProfile D S C z.1) r /
       (r * stateProfile D S C z.1 r)))
-  intro n k
-  obtain ⟨B, A, hB, hA₀, hb⟩ := n01_stateOpticalRadialJet_material_bounds
-    hS hT hA hE hloc hε hc₀ hK hlower n k
-  exact ⟨B, A, hB, hA₀.le, fun m r hr J z hz v => by
-    simpa only [Real.norm_eq_abs] using hb m r hr J z hz v⟩
+    (n01_stateOpticalRadialJet_material_bounds hS hT hA hE hloc hε hc₀ hK hlower)
 
 /-- The original reference lower bound produces both the true mixed
 towers and their endpoint power bounds on one common neighbourhood. -/
