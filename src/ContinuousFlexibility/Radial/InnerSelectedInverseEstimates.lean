@@ -50,6 +50,7 @@ theorem inverse_localized_bound
     (by norm_num : (0 : ℝ) ≤ 37)
   have hD₀ := P.dirichlet_localized_bound hCentralFamily hMorseFamily hX hsupport
     K q hq hband hCC hCM.le ha hN hNa γ hγ
+  dsimp only at hD₀
   rw [innerMorseInnerSupportedLocalizedWeight_eq_loss_comp] at hD₀
   have hD :
       ‖L ∘L ((innerHilbertWeight W true : H →L[ℝ] H) ∘L
