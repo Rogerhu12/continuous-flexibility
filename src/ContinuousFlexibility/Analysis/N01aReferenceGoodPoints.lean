@@ -36,6 +36,7 @@ theorem n01aLocalizedDensity_energy_eq {D : ReferenceData} (hD : RadialPartition
     n01aLocalizedDensity D (n01aJacobiEnergy D.phi) m =
         ∫ r in D.a..D.b, (D.localizer m r * D.phi r) ^ 2 +
           (D.localizer m r * deriv D.phi r) ^ 2 := by
+      unfold n01aLocalizedDensity
       apply intervalIntegral.integral_congr
       intro r _
       unfold n01aJacobiEnergy
@@ -51,12 +52,15 @@ theorem n01a_energy_weighted_summable {D : ReferenceData} (hD : RadialPartition 
     (hderiv : OutputRealization D γ M 0
       ((fun p => deriv D.phi p.1 * Radial.cosineMode 2 p.2), 0)) :
     Summable (n01aWeightedDensity D γ M (n01aJacobiEnergy D.phi)) := by
+  have hrem (f : PolarPoint → ℝ) : outputRemainder D 0 (f, 0) = f := by
+    funext p
+    simp only [outputRemainder, zero_mul, sub_zero]
   have hv : Summable (outputCellSquare D γ M
       (fun p => D.phi p.1 * Radial.cosineMode 2 p.2)) := by
-    simpa only [outputRemainder, zero_mul, sub_zero] using hvalue.2.1
+    simpa only [hrem] using hvalue.2.1
   have hd : Summable (outputCellSquare D γ M
       (fun p => deriv D.phi p.1 * Radial.cosineMode 2 p.2)) := by
-    simpa only [outputRemainder, zero_mul, sub_zero] using hderiv.2.1
+    simpa only [hrem] using hderiv.2.1
   apply (hv.add hd).congr
   intro m
   simp only [Pi.add_apply, n01aWeightedDensity,

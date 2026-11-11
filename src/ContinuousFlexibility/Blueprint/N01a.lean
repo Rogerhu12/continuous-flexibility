@@ -30,4 +30,8 @@ theorem N01a (hR12 : R12Statement) (hW01 : W01Statement) (hW02 : W02Statement) :
 
 end ContinuousFlexibility.Blueprint
 
+/--
+info: 'ContinuousFlexibility.Blueprint.N01a' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
 #print axioms ContinuousFlexibility.Blueprint.N01a

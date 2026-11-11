@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01aPartitionBounds
 import ContinuousFlexibility.Analysis.N01aReferenceCoarseningClosure
+import ContinuousFlexibility.Analysis.N01aReferenceCoarseningInverse
 
 /-!
 # Retaining the full radial reference under cell grouping

@@ -55,7 +55,9 @@ theorem abs_radial_pairing_le_integral_abs {D : ReferenceData} (hab : D.a ≤ D.
         rw [Real.norm_eq_abs, abs_mul, mul_comm B]
         exact mul_le_mul_of_nonneg_left (hψ (r, θ)) (abs_nonneg _))
     simpa only [Real.norm_eq_abs, integral_const_mul] using h
-  have houter := norm_integral_le_of_norm_le (hf.integral_prod_left.const_mul B)
+  have houter := norm_integral_le_of_norm_le
+    (f := fun r => ∫ θ in Ioc (0 : ℝ) (2 * Real.pi), f (r, θ) * ψ (r, θ))
+    (hf.integral_prod_left.const_mul B)
     (hinner.mono fun r hr => by simpa only [Real.norm_eq_abs] using hr)
   have houter' :
       |∫ r in Ioc D.a D.b, ∫ θ in Ioc (0 : ℝ) (2 * Real.pi),

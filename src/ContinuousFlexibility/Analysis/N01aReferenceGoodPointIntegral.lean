@@ -144,6 +144,7 @@ theorem n01a_weighted_density_right_band_integral {D : ReferenceData} {C : ℕ �
     obtain ⟨r, hrm, hr⟩ := hfinite.mem_toFinset.mp hm
     exact hw N (D.cellIndex m) hNpos
       (n01a_cell_index_ge_half_depth hD hidx hrm hr.1)
+  change Summable (fun m => W m * n01aLocalizedDensity D e m) at hs
   have hi := n01a_partition_finite_band_integral_bound hD.2.1 hD.1.2.1.le
     hlu hcore he he0 B hB' S hS W (fun _ => (Real.exp_pos _).le) hs L
     (mul_nonneg hK.le (Real.exp_pos _).le) hweight

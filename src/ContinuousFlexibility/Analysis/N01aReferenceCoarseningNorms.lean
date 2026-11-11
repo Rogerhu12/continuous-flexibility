@@ -89,10 +89,15 @@ theorem source_iff (hD : RadialPartition D) (hE : RadialPartition E) (hab : D.a 
   obtain ⟨B, hB⟩ := hD.2.2.2.2.2
   have hs (hf : RadialCellIntegrable D F.1) :
       Summable (sourceCellSquare E γ M F.1) ↔ Summable (sourceCellSquare D γ M F.1) := by
-    simpa only [sourceCellSquare] using
-      (h.weighted_comparison hD hE hab B hB
-        (fun n => Real.exp (2 * M * radialQ n + 2 * γ * radialS n))
-        (fun _ => (Real.exp_pos _).le) F.1 hf).1
+    change (Summable (fun j =>
+      Real.exp (2 * M * radialQ (E.cellIndex j) + 2 * γ * radialS (E.cellIndex j)) *
+        referenceCellSquare E j F.1)) ↔
+      Summable (fun i =>
+        Real.exp (2 * M * radialQ (D.cellIndex i) + 2 * γ * radialS (D.cellIndex i)) *
+          referenceCellSquare D i F.1)
+    exact (h.weighted_comparison hD hE hab B hB
+      (fun n => Real.exp (2 * M * radialQ n + 2 * γ * radialS n))
+      (fun _ => (Real.exp_pos _).le) F.1 hf).1
   constructor
   · rintro ⟨hi, hsum, hp, he, hint, hzero⟩
     have hiD := (h.cell_integrable_iff hD hE F.1).mp hi
@@ -111,10 +116,15 @@ theorem output_realization_iff (hD : RadialPartition D) (hE : RadialPartition E)
   have hs (hf : RadialCellIntegrable D (outputRemainder D aL U)) :
       Summable (outputCellSquare E γ M (outputRemainder D aL U)) ↔
         Summable (outputCellSquare D γ M (outputRemainder D aL U)) := by
-    simpa only [outputCellSquare] using
-      (h.weighted_comparison hD hE hab B hB
-        (fun n => Real.exp (-2 * M * radialQ n + 2 * γ * radialS n))
-        (fun _ => (Real.exp_pos _).le) (outputRemainder D aL U) hf).1
+    change (Summable (fun j =>
+      Real.exp (-2 * M * radialQ (E.cellIndex j) + 2 * γ * radialS (E.cellIndex j)) *
+        referenceCellSquare E j (outputRemainder D aL U))) ↔
+      Summable (fun i =>
+        Real.exp (-2 * M * radialQ (D.cellIndex i) + 2 * γ * radialS (D.cellIndex i)) *
+          referenceCellSquare D i (outputRemainder D aL U))
+    exact (h.weighted_comparison hD hE hab B hB
+      (fun n => Real.exp (-2 * M * radialQ n + 2 * γ * radialS n))
+      (fun _ => (Real.exp_pos _).le) (outputRemainder D aL U) hf).1
   simp only [OutputRealization, h.remainder_eq]
   constructor
   · rintro ⟨hi, hsum, hp, he⟩
@@ -152,6 +162,9 @@ theorem exists_norm_comparison (hD : RadialPartition D) (hE : RadialPartition E)
   · have hB0 : (0 : ℝ) ≤ B := Nat.cast_nonneg B
     linarith
   · intro γ M F hi hsum
+    change Summable (fun i =>
+      Real.exp (2 * M * radialQ (D.cellIndex i) + 2 * γ * radialS (D.cellIndex i)) *
+        referenceCellSquare D i F.1) at hsum
     have hb : (∑' i, sourceCellSquare D γ M F.1 i) ≤
         (∑' j, sourceCellSquare E γ M F.1 j) ∧
         (∑' j, sourceCellSquare E γ M F.1 j) ≤
@@ -163,6 +176,10 @@ theorem exists_norm_comparison (hD : RadialPartition D) (hE : RadialPartition E)
     exact n01a_add_weighted_sum_bounds
       (tsum_nonneg fun i => sourceCellSquare_nonneg hab γ M F.1 i) (sq_nonneg F.2) B hb
   · intro γ M aL U hU
+    have hsum := hU.2.1
+    change Summable (fun i =>
+      Real.exp (-2 * M * radialQ (D.cellIndex i) + 2 * γ * radialS (D.cellIndex i)) *
+        referenceCellSquare D i (outputRemainder D aL U)) at hsum
     have hb : (∑' i, outputCellSquare D γ M (outputRemainder D aL U) i) ≤
         (∑' j, outputCellSquare E γ M (outputRemainder D aL U) j) ∧
         (∑' j, outputCellSquare E γ M (outputRemainder D aL U) j) ≤
@@ -170,7 +187,7 @@ theorem exists_norm_comparison (hD : RadialPartition D) (hE : RadialPartition E)
       simpa only [outputCellSquare] using
         (h.weighted_comparison hD hE hab B hB
           (fun n => Real.exp (-2 * M * radialQ n + 2 * γ * radialS n))
-          (fun _ => (Real.exp_pos _).le) (outputRemainder D aL U) hU.1).2 hU.2.1
+          (fun _ => (Real.exp_pos _).le) (outputRemainder D aL U) hU.1).2 hsum
     simpa only [outputNormSquare, h.remainder_eq] using n01a_add_weighted_sum_bounds
       (tsum_nonneg fun i => outputCellSquare_nonneg hab γ M (outputRemainder D aL U) i)
       (add_nonneg (sq_nonneg aL) (sq_nonneg U.2)) B hb

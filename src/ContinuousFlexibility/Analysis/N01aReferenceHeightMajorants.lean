@@ -200,7 +200,7 @@ theorem n01aPointwiseJets_of_secondOrder {U : Set ℝ} (hU : IsOpen U)
           | zero =>
               apply n01aPointwiseBound_of_le
               intro x hx
-              change |deriv f x| ≤ |f x| + |deriv f x|
+              rw [iteratedDeriv_succ', iteratedDeriv_zero]
               exact le_add_of_nonneg_left (abs_nonneg (f x))
           | succ k =>
               have hfa := n01aPointwiseBound_iteratedDeriv_mul k hE hW

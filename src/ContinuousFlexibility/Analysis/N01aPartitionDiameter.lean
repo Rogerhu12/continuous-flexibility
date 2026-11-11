@@ -57,7 +57,11 @@ theorem n01aCellTag_same_side (D : ReferenceData) (p : ℕ → ℝ) {i j : ℕ}
   rw [hindex] at hij
   have hside := Nat.add_left_cancel hij
   by_cases hi : p i ≤ (D.a + D.b) / 2 <;>
-    by_cases hj : p j ≤ (D.a + D.b) / 2 <;> simp_all
+    by_cases hj : p j ≤ (D.a + D.b) / 2
+  · exact iff_of_true hi hj
+  · norm_num [hi, hj] at hside
+  · norm_num [hi, hj] at hside
+  · exact iff_of_false hi hj
 
 theorem n01a_cell_endpoint_bound (D : ReferenceData) (C : ℕ → ℝ)
     (hC : AccumulatingProfileBounds D C) (p : ℕ → ℝ)
