@@ -144,8 +144,20 @@ theorem SeedRetainedPair.exists_selectedOuterRegionalInverse {S : SelectedTailDa
     refine ⟨R, hpE, ?_, hweak, ?_, ?_⟩
     · rw [hscale]
       exact mul_pos hβ hlam
-    · simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hregular
-    · simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hunique
+    · change RadialTailRegularResponse E right (κ * p)
+        (standInBoundaryScale ((j : ℝ) ^ 2) (E.w (κ * p)) (κ * p))
+        (outerUnitState (selectedBoundaryState E j (r07OutwardSign right) (κ * p)
+          (V right))) R
+      simp only [selectedBoundaryState, outerFluxState, hsign]
+      rw [hscale]
+      exact hregular
+    · change RadialTailCauchyUnique E right (κ * p) ((j : ℝ) ^ 2)
+        (standInBoundaryScale ((j : ℝ) ^ 2) (E.w (κ * p)) (κ * p))
+        (outerUnitState (selectedBoundaryState E j (r07OutwardSign right) (κ * p)
+          (V right)))
+      simp only [selectedBoundaryState, outerFluxState, hsign]
+      rw [hscale]
+      exact hunique
   choose R hR using hside
   exact ⟨R, hR⟩
 

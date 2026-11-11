@@ -57,7 +57,7 @@ theorem modeLocalEquation_homogeneous_flux_hasDerivAt
     have hrI : r ∈ Icc a b := by
       simpa only [uIcc_of_le hab.le] using uIoc_subset_uIcc hri
     rw [hr hrI]
-  have hgi := hg.intervalIntegrable_of_Icc hab.le
+  have hgi : IntervalIntegrable g volume a b := hg.intervalIntegrable_of_Icc hab.le
   obtain ⟨hp, _, _⟩ := weakPrincipal_withinFlux_regular hab hu hgi
     (matchingProfileGeometry hD).2.2.1.1 hweak
   have hgax : IntervalIntegrable g volume a x :=
