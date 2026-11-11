@@ -25,11 +25,12 @@ Push often.
 
 ## If the node is large
 
-If the node is expected to exceed 10,000 lines of Lean, write a sub-blueprint first:
+A line normally carries a whole node; 20,000–30,000 lines of Lean in one line is expected.
+Only if the node will clearly go well beyond 30,000 lines, write a sub-blueprint first:
 
 - the necessary intermediate statements in manuscript order, each a `theorem ... := by sorry`
-  with real definitions, in its own file under `Blueprint/<ID>/`, each small enough for one
-  line (under 10,000 lines), each with a task file `docs/tasks/<ID>-<name>.md`;
+  with real definitions, in its own file under `Blueprint/<ID>/`, each of a size one line can
+  carry (up to about 30,000 lines), each with a task file `docs/tasks/<ID>-<name>.md`;
 - replace the `sorry` in your node file by a sorry-free proof that assembles the node from those
   statements and the node's hypotheses, and push that first so other lines can take the pieces;
 - then prove the sub-statements.

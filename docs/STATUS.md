@@ -87,6 +87,17 @@ bottom-up, and the full rebuild belongs in CI.
 Repository: https://github.com/Rogerhu12/continuous-flexibility. `.github/workflows/build.yml` runs on
 `main`, on `line/**` branches and on pull requests; no run has finished yet.
 
+## Node sizes
+
+Estimated from the manuscript line range of each node at 168–320 lines of Lean per line of TeX.
+One line carries about 20,000–30,000 lines.
+
+- Clearly above 30,000, sub-blueprint first: R05 (41–79k), R06 (39–75k), R10 (60–115k), R11 (32–62k),
+  N04 (42–81k), N07 (35–66k).
+- Above 30,000 only at the high ratio: R07 (27–51k), R09 (21–41k), R12 (29–56k), N01 (22–41k),
+  N05 (26–50k), N06 (24–47k), N08 (21–40k).
+- One line: S03, S04, S05, R08, W01, W02, W03, H01, H02, H03, N02, N03, N09, N10, N11, N12.
+
 ## Next
 
 1. First green CI run on `main`; it publishes the compiled build to the `lake-cache` release.

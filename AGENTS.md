@@ -27,7 +27,7 @@ The endpoint is the unconditional theorem, with zero `sorry` and only the axioms
 - Toolchain `leanprover/lean4:v4.35.0-rc3` and the mathlib revision in `lake-manifest.json` are fixed.
 - Do not raise heartbeat limits. Find the slow declaration and fix it.
 - Symmetric cases (left/right, the two endpoints) are one general lemma, not two copies. One object has one representation.
-- A task expected to exceed 10,000 lines gets its own sub-blueprint first.
+- One line normally carries a node of 20,000–30,000 lines. A node expected to go well beyond 30,000 lines gets its own sub-blueprint first.
 
 ## Reporting
 
