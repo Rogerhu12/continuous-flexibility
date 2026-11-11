@@ -104,7 +104,11 @@ theorem n07b_ae_eq_of_halfPeriod_pairing {D : ReferenceData}
         g (r, θ) * n07bFullPeriodTest φ (r, θ))) :
     f =ᵐ[volume.restrict A] g := by
   have hlocal : LocallyIntegrableOn (fun p => f p - g p) A volume := by
-    simpa only [Pi.sub_apply] using hf.sub hg
+    have heq : f - g = (fun p => f p - g p) := by
+      funext p
+      rfl
+    rw [← heq]
+    exact hf.sub hg
   have hzero : ∀ᵐ p ∂volume, p ∈ A → f p - g p = 0 := by
     apply hopen.ae_eq_zero_of_integral_contDiff_smul_eq_zero hlocal
     intro φ hφ hc hs
