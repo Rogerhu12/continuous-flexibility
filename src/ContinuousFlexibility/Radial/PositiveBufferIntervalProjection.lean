@@ -25,13 +25,15 @@ def positiveBufferRetainedProjection (l h : ℝ) :
     positiveBufferRetainedProjection l h F =
       (bufferL2Indicator (Ioo l h) measurableSet_Ioo F.1, F.2) := by
   simp only [positiveBufferRetainedProjection, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.comp_apply, ContinuousLinearMap.fst_apply,
-    ContinuousLinearMap.snd_apply, bufferL2IndicatorCLM_apply]
+    ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
+    ContinuousLinearMap.coe_snd', bufferL2IndicatorCLM_apply]
 
 theorem positiveBufferRetainedProjection_norm_le (l h : ℝ) (F : RadialL2 × ℝ) :
     ‖positiveBufferRetainedProjection l h F‖ ≤ ‖F‖ := by
   rw [positiveBufferRetainedProjection_apply, Prod.norm_def, Prod.norm_def]
-  exact max_le_max (bufferL2Indicator_norm_le _ _ _) le_rfl
+  change max ‖bufferL2Indicator (Ioo l h) measurableSet_Ioo F.1‖ ‖F.2‖ ≤
+    max ‖F.1‖ ‖F.2‖
+  exact max_le_max (bufferL2Indicator_norm_le (Ioo l h) measurableSet_Ioo F.1) le_rfl
 
 theorem bufferL2Indicator_eq_self_of_supported (s : Set ℝ) (hs : MeasurableSet s)
     (u : RadialL2) (hu : (u : ℝ → ℝ) =ᵐ[volume.restrict sᶜ] (fun _ => 0)) :

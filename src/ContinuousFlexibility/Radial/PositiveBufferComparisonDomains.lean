@@ -24,7 +24,9 @@ theorem positiveBufferPoint_preimage_exterior {B : BufferData}
       simp only [positiveBufferPoint, bufferExterior, bufferCut, bufferSign, hi,
         ite_true, ite_false, neg_mul, one_mul, neg_div, sub_neg_eq_add, mem_Iio, mem_Ioi] <;>
       constructor <;> intro h <;> linarith
-  exact he.trans (by simpa only [zero_mul] using (div_lt_iff₀ hm))
+  exact he.trans (by
+    simpa only [mem_Iio, zero_mul] using
+      (div_lt_iff₀ hm : t / B.mass i < 0 ↔ t < 0 * B.mass i))
 
 theorem positiveBufferPoint_preimage_exterior_closure {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) :
@@ -38,7 +40,9 @@ theorem positiveBufferPoint_preimage_exterior_closure {B : BufferData}
         ite_true, ite_false, neg_mul, one_mul, neg_div, sub_neg_eq_add,
         closure_Iio, closure_Ioi, mem_Iic, mem_Ici] <;>
       constructor <;> intro h <;> linarith
-  exact he.trans (by simpa only [zero_mul] using (div_le_iff₀ hm))
+  exact he.trans (by
+    simpa only [mem_Iic, zero_mul] using
+      (div_le_iff₀ hm : t / B.mass i ≤ 0 ↔ t ≤ 0 * B.mass i))
 
 theorem positiveBufferPoint_outward_preimage_exterior {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) :
@@ -91,9 +95,13 @@ theorem positiveBufferPoint_preimage_span {B : BufferData}
   have hw : bufferInnerWall B i =
       bufferCut B i + (-bufferSign i / B.mass i) * (B.action i + 6) := by
     rw [← positiveBufferPoint_innerWall, positiveBufferPoint_affine]
-  simp only [positiveBufferPoint_affine, hw]
-  exact positiveBuffer_affine_preimage_uIcc (positiveBufferPoint_slope_ne_zero hB i)
-    (by linarith)
+  have hp : positiveBufferPoint B i =
+      fun t : ℝ => bufferCut B i + (-bufferSign i / B.mass i) * t :=
+    funext (positiveBufferPoint_affine B i)
+  rw [hp, hw]
+  exact positiveBuffer_affine_preimage_uIcc (a := bufferCut B i)
+    (b := -bufferSign i / B.mass i) (L := B.action i + 6)
+    (positiveBufferPoint_slope_ne_zero hB i) (by linarith)
 
 theorem positiveBufferPoint_before_innerWall {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) {t : ℝ} (ht : t ≤ B.action i + 6) :
@@ -121,10 +129,12 @@ theorem positiveBufferPoint_end_regions_disjoint {B : BufferData}
   · exact (hij rfl).elim
   · norm_num at hi hj
     intro heq
+    change positiveBufferPoint B 0 s = positiveBufferPoint B 1 t at heq
     rw [heq] at hi
     linarith
   · norm_num at hi hj
     intro heq
+    change positiveBufferPoint B 1 s = positiveBufferPoint B 0 t at heq
     rw [heq] at hi
     linarith
   · exact (hij rfl).elim

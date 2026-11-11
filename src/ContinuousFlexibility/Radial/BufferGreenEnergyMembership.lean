@@ -50,7 +50,10 @@ theorem positiveBufferGreenProfileDerivative_memLp {σ : ℝ} {pin pout : ℝ �
       funext t
       exact positiveBuffer_reflection_deriv (hpout.differentiable (by simp) (-t))
     rw [hd]
-    exact hreflect.neg
+    apply hreflect.neg.congr
+    filter_upwards [] with t
+    change -(deriv pout (-t)) = -(deriv pout (-t))
+    rfl
   have hsm : ContDiff ℝ ∞ (fun t => positiveBufferCutoff σ t * pin t) :=
     (positiveBufferCutoff_contDiff σ).mul hpin
   have hright : MemLp (deriv (fun t => positiveBufferCutoff σ t * pin t)) 2

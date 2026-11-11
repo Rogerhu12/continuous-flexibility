@@ -120,7 +120,9 @@ def positiveBufferLiftedInverse {V : ℝ → ℝ}
     (F : RadialL2 × ℝ) :
     positiveBufferBorderedState V bordered (positiveBufferLiftedInverse hreal g bordered H hH F) =
       H (positiveBufferSourceProjection bordered F) :=
-  positiveBufferFullGraphEnergyLift_state hreal g bordered _ _ _
+  positiveBufferFullGraphEnergyLift_state hreal g bordered
+    (H (positiveBufferSourceProjection bordered F)) (positiveBufferSourceProjection bordered F)
+    (hH _ (positiveBufferSourceProjection_admissible bordered F))
 
 theorem positiveBufferLiftedInverse_form {V : ℝ → ℝ}
     (hreal : ActualClosedFormRealization V) (hV : Continuous V) (g : RadialL2) (bordered : Bool)

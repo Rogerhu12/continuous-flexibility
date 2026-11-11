@@ -84,7 +84,9 @@ theorem positiveBufferGreenProfile_jump {σ : ℝ} (hσ : 0 < σ) {pin pout : �
   have hχ0 := positiveBufferCutoff_one (σ := σ) (x := 0) (by linarith)
   have hχ'0 := (positiveBufferCutoff_derivatives_zero
     (show (0 : ℝ) ∉ Icc (σ + 2) (σ + 4) by intro h; linarith [h.1])).1
-  rw [positiveBuffer_reflection_deriv (hpout.differentiable (by simp) 0), neg_zero,
+  have href0 := positiveBuffer_reflection_deriv (u := pout) (x := 0)
+    (by simpa only [neg_zero] using hpout.differentiable (by simp) 0)
+  rw [href0, neg_zero,
     deriv_mul ((positiveBufferCutoff_contDiff σ).differentiable (by simp) 0)
       (hpin.differentiable (by simp) 0), hχ0, hχ'0, zero_mul, one_mul, zero_add]
 

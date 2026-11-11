@@ -83,7 +83,7 @@ theorem positiveBuffer_toLp_norm_le_of_support {a b K : ℝ} {f : ℝ → ℝ}
     · have hzero : f x = 0 := by
         by_contra hn
         exact hx (hsupport hn)
-      rw [indicator_of_notMem hx, hzero, norm_zero, norm_zero]
+      simp only [indicator_of_notMem hx, hzero, norm_zero]
   have hgnorm : ‖g‖ = K * sqrt (b - a) := by
     dsimp [g]
     rw [norm_indicatorConstLp (by norm_num) (by norm_num), Real.norm_eq_abs,
