@@ -23,19 +23,16 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 theorem neighborhoodStateGrading_apply (S : PhysicalSpacesData) (s : ℕ)
     (x : AnnularState S) :
-    stateGrading S s x = scalarHeightGrading S s x.1.1 + ‖x.1.2‖ +
+    stateGrading S s x = (S.height (3 / 4 : ℝ)).grading s x.1.1 + ‖x.1.2‖ +
       (‖x.2.1‖ + ((S.circle (3 / 4 : ℝ)).grading s x.2.2.1 +
-        (S.circle (3 / 4 : ℝ)).grading s x.2.2.2)) := by
-  simp only [stateGrading, heightPairGrading, scalarHeightGrading, scalarBeta,
-    pairGrading, realGrading, add_apply, Seminorm.comp_apply,
-    LinearMap.fst_apply, LinearMap.snd_apply, coe_normSeminorm]
+        (S.circle (3 / 4 : ℝ)).grading s x.2.2.2)) := rfl
 
 theorem neighborhoodStateGrading_height_le (S : PhysicalSpacesData) (s : ℕ)
     (x : AnnularState S) :
-    scalarHeightGrading S s x.1.1 ≤ stateGrading S s x ∧
+    (S.height (3 / 4 : ℝ)).grading s x.1.1 ≤ stateGrading S s x ∧
       |x.1.2| ≤ stateGrading S s x := by
   rw [neighborhoodStateGrading_apply]
-  have h₁ := apply_nonneg (scalarHeightGrading S s) x.1.1
+  have h₁ := apply_nonneg ((S.height (3 / 4 : ℝ)).grading s) x.1.1
   have h₂ := norm_nonneg x.1.2
   have h₃ := norm_nonneg x.2.1
   have h₄ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1
@@ -47,11 +44,14 @@ theorem neighborhoodStateGrading_bound {C : NonlinearGeometryData S}
     {base : ℕ} {ε : ℝ} (hε : ε ≤ 1) {z : AnnularState S × ℝ}
     (hz : z ∈ stateNeighborhood S C base ε) :
     stateGrading S base z.1 ≤ stateGrading S base C.referenceState + 1 := by
-  have hb := hz.1
-  have ht := map_add_le_add (stateGrading S base)
-    (z.1 - C.referenceState) C.referenceState
-  rw [sub_add_cancel] at ht
-  linarith only [hb, ht, hε]
+  have hb : stateGrading S base (z.1 - C.referenceState) < ε := hz.1
+  calc
+    stateGrading S base z.1 =
+        stateGrading S base ((z.1 - C.referenceState) + C.referenceState) := by
+      rw [sub_add_cancel]
+    _ ≤ stateGrading S base (z.1 - C.referenceState) + stateGrading S base C.referenceState :=
+      map_add_le_add (stateGrading S base) (z.1 - C.referenceState) C.referenceState
+    _ ≤ stateGrading S base C.referenceState + 1 := by linarith only [hb, hε]
 
 /-- The scalar common-height decoder is exactly the nonlinear height pair. -/
 theorem neighborhood_stateU_contDiff
@@ -70,8 +70,12 @@ theorem stateU_low_jet_bounds
         |heightAngular (stateU S x) p| ≤ Ct * stateGrading S 4 x ∧
         |angularPartial (heightAngular (stateU S x)) p| ≤
           Ctt * stateGrading S 4 x * D.w p.1 := by
-  obtain ⟨Cm, Cr, Ct, Ctt, _, hCr, hCt, hCtt, _, hr, ht, htt⟩ :=
-    scalarHeight_low_jet_bounds hD hT hS
+  obtain ⟨Cr, hCr, hr⟩ := scalarHeight_radial_low_jet_bound
+    (D := D) (T := T) (S := S) hD hT hS
+  obtain ⟨Ct, hCt, ht⟩ := scalarHeight_angular_low_jet_bound
+    (D := D) (T := T) (S := S) hD hT hS
+  obtain ⟨Ctt, hCtt, htt⟩ := scalarHeight_angularSecond_low_jet_bound
+    (D := D) (T := T) (S := S) hD hT hS
   obtain ⟨Cχ, hCχ, hχ⟩ := scalarCutoff_deriv_le_reference hD hS
   refine ⟨Cr + Cχ, Ct, Ctt, add_nonneg hCr hCχ, hCt, hCtt, ?_⟩
   intro x p hp
@@ -184,7 +188,8 @@ theorem stateHeight_heightRadial_of_contDiff_profile
       stateProfile D S C z.1 p.1 + z.2 * radialPartial (stateU S z.1) p := by
   have hh := Radial.contDiff_radialHeightField (stateRadialHeight_contDiff_of_contDiff hw)
   have hu := neighborhood_stateU_contDiff hT hS z.1
-  change heightRadial (heightFamily _ _ z.2) p = _
+  change heightRadial (heightFamily
+    (Radial.radialHeightField (stateRadialHeight D S C z.1)) (stateU S z.1) z.2) p = _
   rw [heightRadial_heightFamily (hh.differentiable (by simp)) (hu.differentiable (by simp)),
     Radial.heightRadial_radialHeightField (stateRadialHeight_hasDerivAt_of_contDiff hw)]
   rfl
@@ -196,7 +201,8 @@ theorem stateHeight_heightAngular_of_contDiff_profile
     heightAngular (stateHeight D S C z) p = z.2 * heightAngular (stateU S z.1) p := by
   have hh := Radial.contDiff_radialHeightField (stateRadialHeight_contDiff_of_contDiff hw)
   have hu := neighborhood_stateU_contDiff hT hS z.1
-  change heightAngular (heightFamily _ _ z.2) p = _
+  change heightAngular (heightFamily
+    (Radial.radialHeightField (stateRadialHeight D S C z.1)) (stateU S z.1) z.2) p = _
   rw [heightAngular_heightFamily (hh.differentiable (by simp)) (hu.differentiable (by simp)),
     Radial.heightAngular_radialHeightField (stateRadialHeight_hasDerivAt_of_contDiff hw)]
   simp only [heightFamily, zero_add]
@@ -209,7 +215,8 @@ theorem stateHeight_angularPartial_heightAngular_of_contDiff_profile
       z.2 * angularPartial (heightAngular (stateU S z.1)) p := by
   have hh := Radial.contDiff_radialHeightField (stateRadialHeight_contDiff_of_contDiff hw)
   have hu := neighborhood_stateU_contDiff hT hS z.1
-  change angularPartial (heightAngular (heightFamily _ _ z.2)) p = _
+  change angularPartial (heightAngular (heightFamily
+    (Radial.radialHeightField (stateRadialHeight D S C z.1)) (stateU S z.1) z.2)) p = _
   rw [angularPartial_heightAngular_heightFamily hh hu hr,
     Radial.heightAngular_radialHeightField (stateRadialHeight_hasDerivAt_of_contDiff hw),
     angularPartial_const, zero_add]
