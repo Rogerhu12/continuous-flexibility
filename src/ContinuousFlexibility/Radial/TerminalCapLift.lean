@@ -23,59 +23,59 @@ namespace ContinuousFlexibility.Radial
 open Set Filter MeasureTheory Real
 open scoped Topology ContDiff
 
-def terminalCapLift (λ : ℝ) (χ u : ℝ → ℝ) (r : ℝ) : ℝ :=
-  χ r * u r / sqrt λ
+def terminalCapLift (lam : ℝ) (χ u : ℝ → ℝ) (r : ℝ) : ℝ :=
+  χ r * u r / sqrt lam
 
-theorem terminalCapLift_eq (λ : ℝ) (χ u : ℝ → ℝ) :
-    terminalCapLift λ χ u = fun r => (sqrt λ)⁻¹ * (χ r * u r) := by
+theorem terminalCapLift_eq (lam : ℝ) (χ u : ℝ → ℝ) :
+    terminalCapLift lam χ u = fun r => (sqrt lam)⁻¹ * (χ r * u r) := by
   funext r
   dsimp only [terminalCapLift]
   ring
 
-theorem terminalCapLift_smooth (λ : ℝ) {χ u : ℝ → ℝ}
+theorem terminalCapLift_smooth (lam : ℝ) {χ u : ℝ → ℝ}
     (hχ : ContDiff ℝ ∞ χ) (hu : ContDiff ℝ ∞ u) :
-    ContDiff ℝ ∞ (terminalCapLift λ χ u) := by
+    ContDiff ℝ ∞ (terminalCapLift lam χ u) := by
   rw [terminalCapLift_eq]
   exact contDiff_const.mul (hχ.mul hu)
 
-theorem terminalCapLift_support (λ : ℝ) (χ u : ℝ → ℝ) :
-    Function.support (terminalCapLift λ χ u) ⊆ Function.support χ := by
+theorem terminalCapLift_support (lam : ℝ) (χ u : ℝ → ℝ) :
+    Function.support (terminalCapLift lam χ u) ⊆ Function.support χ := by
   intro r hr hzero
   exact hr (by simp only [terminalCapLift, hzero, zero_mul, zero_div])
 
-theorem terminalCapLift_tsupport (λ : ℝ) (χ u : ℝ → ℝ) :
-    tsupport (terminalCapLift λ χ u) ⊆ tsupport χ :=
-  closure_mono (terminalCapLift_support λ χ u)
+theorem terminalCapLift_tsupport (lam : ℝ) (χ u : ℝ → ℝ) :
+    tsupport (terminalCapLift lam χ u) ⊆ tsupport χ :=
+  closure_mono (terminalCapLift_support lam χ u)
 
-theorem terminalCapLift_value {λ r : ℝ} {χ u : ℝ → ℝ} (hχ : χ r = 1) :
-    terminalCapLift λ χ u r = u r / sqrt λ := by
+theorem terminalCapLift_value {lam r : ℝ} {χ u : ℝ → ℝ} (hχ : χ r = 1) :
+    terminalCapLift lam χ u r = u r / sqrt lam := by
   simp only [terminalCapLift, hχ, one_mul]
 
-theorem terminalCapLift_normalized_trace {λ r : ℝ} (hλ : 0 < λ)
+theorem terminalCapLift_normalized_trace {lam r : ℝ} (hlam : 0 < lam)
     {χ u : ℝ → ℝ} (hχ : χ r = 1) (hu : u r = 1) :
-    sqrt λ * terminalCapLift λ χ u r = 1 := by
+    sqrt lam * terminalCapLift lam χ u r = 1 := by
   rw [terminalCapLift_value hχ, hu]
-  field_simp [(sqrt_pos.mpr hλ).ne'] <;> ring
+  field_simp [(sqrt_pos.mpr hlam).ne'] <;> ring
 
 /-- A cutoff equal to one near the cut preserves the actual normal derivative. -/
-theorem terminalCapLift_deriv_eq {λ r : ℝ} {χ u : ℝ → ℝ}
+theorem terminalCapLift_deriv_eq {lam r : ℝ} {χ u : ℝ → ℝ}
     (hχ : χ =ᶠ[𝓝 r] fun _ => (1 : ℝ)) :
-    deriv (terminalCapLift λ χ u) r = deriv u r / sqrt λ := by
-  have hnear : terminalCapLift λ χ u =ᶠ[𝓝 r] fun x => (sqrt λ)⁻¹ * u x := by
+    deriv (terminalCapLift lam χ u) r = deriv u r / sqrt lam := by
+  have hnear : terminalCapLift lam χ u =ᶠ[𝓝 r] fun x => (sqrt lam)⁻¹ * u x := by
     filter_upwards [hχ] with x hx
     simp only [terminalCapLift, hx, one_mul]
     ring
   rw [hnear.deriv_eq, deriv_const_mul_field]
   ring
 
-theorem terminalCapLift_normalized_flux {λ r : ℝ} (hλ : 0 < λ)
+theorem terminalCapLift_normalized_flux {lam r : ℝ} (hlam : 0 < lam)
     {w χ u : ℝ → ℝ} (hχ : χ =ᶠ[𝓝 r] fun _ => (1 : ℝ)) :
-    w r * deriv (terminalCapLift λ χ u) r / sqrt λ = w r * deriv u r / λ := by
+    w r * deriv (terminalCapLift lam χ u) r / sqrt lam = w r * deriv u r / lam := by
   rw [terminalCapLift_deriv_eq hχ]
   calc
-    _ = w r * deriv u r / (sqrt λ * sqrt λ) := by
-      field_simp [(sqrt_pos.mpr hλ).ne'] <;> ring
-    _ = _ := by rw [mul_self_sqrt hλ.le]
+    _ = w r * deriv u r / (sqrt lam * sqrt lam) := by
+      field_simp [(sqrt_pos.mpr hlam).ne'] <;> ring
+    _ = _ := by rw [mul_self_sqrt hlam.le]
 
 /-- Constant normalization commutes with the actual differential expression,
 including at points where a derivative is defined by its total convention. -/
@@ -125,39 +125,39 @@ theorem terminalCap_radialJacobi_mul (a r : ℝ) {w χ u : ℝ → ℝ}
   rw [hf, hflux, hbase]
   ring
 
-def terminalCapResidual (λ : ℝ) (w χ u : ℝ → ℝ) (r : ℝ) : ℝ :=
+def terminalCapResidual (lam : ℝ) (w χ u : ℝ → ℝ) (r : ℝ) : ℝ :=
   -(2 * w r * deriv χ r * deriv u r +
-    (deriv w r * deriv χ r + w r * deriv (deriv χ) r) * u r) / sqrt λ
+    (deriv w r * deriv χ r + w r * deriv (deriv χ) r) * u r) / sqrt lam
 
 /-- This is the commutator in the paper, with the negative Jacobi sign. -/
-theorem terminalCapResidual_eq (λ r : ℝ) {w χ u : ℝ → ℝ}
+theorem terminalCapResidual_eq (lam r : ℝ) {w χ u : ℝ → ℝ}
     (hw : ContDiff ℝ ∞ w) (hχ : ContDiff ℝ ∞ χ) :
-    terminalCapResidual λ w χ u r =
+    terminalCapResidual lam w χ u r =
       (-2 * w r * deriv χ r * deriv u r -
-        deriv (fun x => w x * deriv χ x) r * u r) / sqrt λ := by
+        deriv (fun x => w x * deriv χ x) r * u r) / sqrt lam := by
   have hwd := hw.differentiable (by simp) r
   have hχd := (contDiff_infty_iff_deriv.mp hχ).2.differentiable (by simp) r
   rw [deriv_fun_mul hwd hχd]
   dsimp only [terminalCapResidual]
   ring
 
-theorem terminalCapLift_jacobi (a λ r : ℝ) {w χ u : ℝ → ℝ}
+theorem terminalCapLift_jacobi (a lam r : ℝ) {w χ u : ℝ → ℝ}
     (hw : ContDiff ℝ ∞ w) (hχ : ContDiff ℝ ∞ χ) (hu : ContDiff ℝ ∞ u) :
-    radialJacobi a w (terminalCapLift λ χ u) r =
-      χ r * radialJacobi a w u r / sqrt λ - terminalCapResidual λ w χ u r := by
+    radialJacobi a w (terminalCapLift lam χ u) r =
+      χ r * radialJacobi a w u r / sqrt lam - terminalCapResidual lam w χ u r := by
   rw [terminalCapLift_eq, terminalCap_radialJacobi_const_mul,
     terminalCap_radialJacobi_mul a r hw hχ hu]
   dsimp only [terminalCapResidual]
   ring
 
-theorem terminalCapLift_homogeneous_residual {a λ r : ℝ} {w χ u : ℝ → ℝ}
+theorem terminalCapLift_homogeneous_residual {a lam r : ℝ} {w χ u : ℝ → ℝ}
     (hw : ContDiff ℝ ∞ w) (hχ : ContDiff ℝ ∞ χ) (hu : ContDiff ℝ ∞ u)
     (heq : radialJacobi a w u r = 0) :
-    -radialJacobi a w (terminalCapLift λ χ u) r = terminalCapResidual λ w χ u r := by
-  rw [terminalCapLift_jacobi a λ r hw hχ hu, heq, mul_zero, zero_div, zero_sub, neg_neg]
+    -radialJacobi a w (terminalCapLift lam χ u) r = terminalCapResidual lam w χ u r := by
+  rw [terminalCapLift_jacobi a lam r hw hχ hu, heq, mul_zero, zero_div, zero_sub, neg_neg]
 
-theorem terminalCapResidual_zero_of_not_mem {λ r : ℝ} {w χ u : ℝ → ℝ}
-    (hr : r ∉ tsupport (deriv χ)) : terminalCapResidual λ w χ u r = 0 := by
+theorem terminalCapResidual_zero_of_not_mem {lam r : ℝ} {w χ u : ℝ → ℝ}
+    (hr : r ∉ tsupport (deriv χ)) : terminalCapResidual lam w χ u r = 0 := by
   have h₁ : deriv χ r = 0 := image_eq_zero_of_notMem_tsupport hr
   have h₂ : deriv (deriv χ) r = 0 := deriv_of_notMem_tsupport hr
   simp only [terminalCapResidual, h₁, h₂, mul_zero, zero_mul, zero_add, add_zero,
@@ -165,20 +165,20 @@ theorem terminalCapResidual_zero_of_not_mem {λ r : ℝ} {w χ u : ℝ → ℝ}
 
 /-- The forcing lives only in the transition layer, even where the lift
 itself is nonzero and the cutoff is constant one. -/
-theorem terminalCapResidual_support (λ : ℝ) (w χ u : ℝ → ℝ) :
-    Function.support (terminalCapResidual λ w χ u) ⊆ tsupport (deriv χ) := by
+theorem terminalCapResidual_support (lam : ℝ) (w χ u : ℝ → ℝ) :
+    Function.support (terminalCapResidual lam w χ u) ⊆ tsupport (deriv χ) := by
   intro r hr
   by_contra hout
   exact hr (terminalCapResidual_zero_of_not_mem hout)
 
 /-- Raw coefficient and jet bounds imply the attenuated residual bound. -/
-theorem terminalCapResidual_abs_le {λ r W W₁ C₁ C₂ A B σ : ℝ}
-    {w χ u : ℝ → ℝ} (hλ : 0 < λ)
+theorem terminalCapResidual_abs_le {lam r W W₁ C₁ C₂ A B σ : ℝ}
+    {w χ u : ℝ → ℝ} (hlam : 0 < lam)
     (hw : |w r| ≤ W) (hw₁ : |deriv w r| ≤ W₁)
     (hχ₁ : |deriv χ r| ≤ C₁) (hχ₂ : |deriv (deriv χ) r| ≤ C₂)
     (hu : |u r| ≤ A * exp (-σ)) (hu₁ : |deriv u r| ≤ B * exp (-σ)) :
-    |terminalCapResidual λ w χ u r| ≤
-      ((2 * W * C₁ * B + (W₁ * C₁ + W * C₂) * A) / sqrt λ) * exp (-σ) := by
+    |terminalCapResidual lam w χ u r| ≤
+      ((2 * W * C₁ * B + (W₁ * C₁ + W * C₂) * A) / sqrt lam) * exp (-σ) := by
   have hW : 0 ≤ W := (abs_nonneg _).trans hw
   have hW₁ : 0 ≤ W₁ := (abs_nonneg _).trans hw₁
   have hC₁ : 0 ≤ C₁ := (abs_nonneg _).trans hχ₁
@@ -200,63 +200,63 @@ theorem terminalCapResidual_abs_le {λ r W W₁ C₁ C₂ A B σ : ℝ}
       (W₁ * C₁ + W * C₂) * (A * exp (-σ)) := by
     rw [abs_mul]
     exact mul_le_mul hb hu (abs_nonneg _) (by positivity)
-  rw [terminalCapResidual, abs_div, abs_neg, abs_of_pos (sqrt_pos.mpr hλ)]
+  rw [terminalCapResidual, abs_div, abs_neg, abs_of_pos (sqrt_pos.mpr hlam)]
   calc
     _ ≤ ((2 * W * C₁) * (B * exp (-σ)) +
-        (W₁ * C₁ + W * C₂) * (A * exp (-σ))) / sqrt λ :=
+        (W₁ * C₁ + W * C₂) * (A * exp (-σ))) / sqrt lam :=
       div_le_div_of_nonneg_right
         ((abs_add_le _ _).trans (add_le_add hfirst hsecond)) (sqrt_nonneg _)
     _ = _ := by ring
 
 /-- Conversion to the source convention of the radial weighted Hilbert
 space: its density is 12 w / r². -/
-def terminalCapHilbertSource (λ : ℝ) (w χ u : ℝ → ℝ) (r : ℝ) : ℝ :=
-  r ^ 2 / (12 * w r) * terminalCapResidual λ w χ u r
+def terminalCapHilbertSource (lam : ℝ) (w χ u : ℝ → ℝ) (r : ℝ) : ℝ :=
+  r ^ 2 / (12 * w r) * terminalCapResidual lam w χ u r
 
-theorem terminalCapHilbertSource_density {λ r : ℝ} {w χ u : ℝ → ℝ}
+theorem terminalCapHilbertSource_density {lam r : ℝ} {w χ u : ℝ → ℝ}
     (hr : r ≠ 0) (hw : w r ≠ 0) :
-    (12 * w r / r ^ 2) * terminalCapHilbertSource λ w χ u r =
-      terminalCapResidual λ w χ u r := by
+    (12 * w r / r ^ 2) * terminalCapHilbertSource lam w χ u r =
+      terminalCapResidual lam w χ u r := by
   dsimp only [terminalCapHilbertSource]
   field_simp [hr, hw] <;> ring
 
-theorem terminalCapHilbertSource_support (λ : ℝ) (w χ u : ℝ → ℝ) :
-    Function.support (terminalCapHilbertSource λ w χ u) ⊆ tsupport (deriv χ) := by
+theorem terminalCapHilbertSource_support (lam : ℝ) (w χ u : ℝ → ℝ) :
+    Function.support (terminalCapHilbertSource lam w χ u) ⊆ tsupport (deriv χ) := by
   intro r hr
   by_contra hout
   exact hr (by simp only [terminalCapHilbertSource,
     terminalCapResidual_zero_of_not_mem hout, mul_zero])
 
-theorem terminalCapHilbertSource_abs_le {λ r R W W₁ C₁ C₂ A B σ : ℝ}
-    {w χ u : ℝ → ℝ} (hλ : 0 < λ) (hρ : |r ^ 2 / (12 * w r)| ≤ R)
+theorem terminalCapHilbertSource_abs_le {lam r R W W₁ C₁ C₂ A B σ : ℝ}
+    {w χ u : ℝ → ℝ} (hlam : 0 < lam) (hρ : |r ^ 2 / (12 * w r)| ≤ R)
     (hw : |w r| ≤ W) (hw₁ : |deriv w r| ≤ W₁)
     (hχ₁ : |deriv χ r| ≤ C₁) (hχ₂ : |deriv (deriv χ) r| ≤ C₂)
     (hu : |u r| ≤ A * exp (-σ)) (hu₁ : |deriv u r| ≤ B * exp (-σ)) :
-    |terminalCapHilbertSource λ w χ u r| ≤
-      R * ((2 * W * C₁ * B + (W₁ * C₁ + W * C₂) * A) / sqrt λ) * exp (-σ) := by
+    |terminalCapHilbertSource lam w χ u r| ≤
+      R * ((2 * W * C₁ * B + (W₁ * C₁ + W * C₂) * A) / sqrt lam) * exp (-σ) := by
   rw [terminalCapHilbertSource, abs_mul]
   calc
-    _ ≤ R * (((2 * W * C₁ * B + (W₁ * C₁ + W * C₂) * A) / sqrt λ) * exp (-σ)) :=
-      mul_le_mul hρ (terminalCapResidual_abs_le hλ hw hw₁ hχ₁ hχ₂ hu hu₁)
+    _ ≤ R * (((2 * W * C₁ * B + (W₁ * C₁ + W * C₂) * A) / sqrt lam) * exp (-σ)) :=
+      mul_le_mul hρ (terminalCapResidual_abs_le hlam hw hw₁ hχ₁ hχ₂ hu hu₁)
         (abs_nonneg _) ((abs_nonneg _).trans hρ)
     _ = _ := by ring
 
-theorem terminalCapLift_weighted_equation {a λ r : ℝ} {w χ u : ℝ → ℝ}
+theorem terminalCapLift_weighted_equation {a lam r : ℝ} {w χ u : ℝ → ℝ}
     (hw : ContDiff ℝ ∞ w) (hχ : ContDiff ℝ ∞ χ) (hu : ContDiff ℝ ∞ u)
     (hr : r ≠ 0) (hw₀ : w r ≠ 0) (heq : radialJacobi a w u r = 0) :
-    radialJacobi a w (terminalCapLift λ χ u) r =
-      -(12 * w r / r ^ 2) * terminalCapHilbertSource λ w χ u r := by
+    radialJacobi a w (terminalCapLift lam χ u) r =
+      -(12 * w r / r ^ 2) * terminalCapHilbertSource lam w χ u r := by
   have h := terminalCapLift_homogeneous_residual hw hχ hu heq
-  have hρ := terminalCapHilbertSource_density (λ := λ) (χ := χ) (u := u) hr hw₀
+  have hρ := terminalCapHilbertSource_density (lam := lam) (χ := χ) (u := u) hr hw₀
   linarith only [h, hρ]
 
 /-- Separation from the actual true border gives its scalar row exactly,
 without assuming any orthogonality or bounded-inverse identity. -/
 theorem terminalCapLift_scalar_pairing_zero (D : Statements.ReferenceData)
-    (λ : ℝ) (χ u : ℝ → ℝ)
+    (lam : ℝ) (χ u : ℝ → ℝ)
     (hsep : Disjoint (Function.support (Statements.referenceColumn D)) (Function.support χ)) :
-    (∫ r in D.a..D.b, Statements.referenceColumn D r * terminalCapLift λ χ u r) = 0 := by
-  have hz : (fun r => Statements.referenceColumn D r * terminalCapLift λ χ u r) =
+    (∫ r in D.a..D.b, Statements.referenceColumn D r * terminalCapLift lam χ u r) = 0 := by
+  have hz : (fun r => Statements.referenceColumn D r * terminalCapLift lam χ u r) =
       fun _ => (0 : ℝ) := by
     funext r
     by_cases hc : Statements.referenceColumn D r = 0
@@ -268,10 +268,10 @@ theorem terminalCapLift_scalar_pairing_zero (D : Statements.ReferenceData)
   rw [hz, intervalIntegral.integral_zero]
 
 /-- The two terminal lifts inherit the disjoint supports of their cutoffs. -/
-theorem terminalCapLift_disjoint {λ μ : ℝ} {χ η u v : ℝ → ℝ}
+theorem terminalCapLift_disjoint {lam μ : ℝ} {χ η u v : ℝ → ℝ}
     (hsep : Disjoint (Function.support χ) (Function.support η)) :
-    Disjoint (Function.support (terminalCapLift λ χ u))
+    Disjoint (Function.support (terminalCapLift lam χ u))
       (Function.support (terminalCapLift μ η v)) :=
-  hsep.mono (terminalCapLift_support λ χ u) (terminalCapLift_support μ η v)
+  hsep.mono (terminalCapLift_support lam χ u) (terminalCapLift_support μ η v)
 
 end ContinuousFlexibility.Radial

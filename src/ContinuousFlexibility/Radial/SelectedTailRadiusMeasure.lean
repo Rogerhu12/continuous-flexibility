@@ -157,7 +157,7 @@ theorem memLp_radialRadiusScale_restrict_image {D E : ReferenceData}
       funext r
       simp only [radialRadiusScale, zero_mul, Pi.zero_apply]
     rw [hz]
-    exact memLp_zero
+    exact MemLp.zero
   · exact (memLp_radialRadiusScale_restrict_image_iff
       hκ hβ hα hJ hD hE hprofile).mpr hu
 
@@ -232,7 +232,7 @@ theorem radialHilbertMeasure_restrict_tail_radiusScale {D E : ReferenceData}
     (radialHilbertMeasure E).restrict (radialTailInterval E right (κ * entry)) =
       ENNReal.ofReal β • ((radialHilbertMeasure D).restrict
         (radialTailInterval D right entry)).map (fun r => κ * r) := by
-  have himage := radialTailInterval_radius_image hκ right hend
+  have himage := radialTailInterval_radius_image (entry := entry) hκ right hend
   have hmeas : MeasurableSet (radialTailInterval D right entry) := by
     cases right <;> exact measurableSet_Ioo
   rw [← himage]

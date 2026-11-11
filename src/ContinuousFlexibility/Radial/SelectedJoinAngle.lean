@@ -56,7 +56,7 @@ private theorem selected_angle_left_ne_zero {u v : ℝ × ℝ} {δ : ℝ}
   intro hzero
   rw [hzero] at hsep
   have hsep' : δ ≤ 0 := by simpa [radialAngleSine] using hsep
-  exact hδ.not_le hsep'
+  exact (not_le_of_gt hδ) hsep'
 
 private theorem selected_angle_right_ne_zero {u v : ℝ × ℝ} {δ : ℝ}
     (hδ : 0 < δ) (hsep : δ ≤ radialAngleSine u v) : v ≠ (0, 0) :=
