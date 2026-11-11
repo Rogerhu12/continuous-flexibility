@@ -30,14 +30,10 @@ def RootControlledFlowAtState
       N04FlowEquations (rootRescaledField d c δ) Θ ∧
       N04FlowJetBounds p loss B x 1 Λ Θ
 
-/-- Select the common low order before the family and its collar. The
-arithmetic never unfolds a concrete projective state space. -/
-private theorem exists_controlledRootFlow_of_frechet_family
-    (hFlow : N04FlowJetsTarget)
+private def RootControlledFlowFamily
     {E : Type} [AddCommGroup E] [Module ℝ E]
-    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hI : HasInterpolation p)
-    (inputLoss : ℕ) :
-    ∃ low outLoss : ℕ, ∀ A₀ : ℕ → ℝ, (∀ n, 0 < A₀ n) →
+    (p : ℕ → Seminorm ℝ E) (inputLoss low outLoss : ℕ) : Prop :=
+    ∀ A₀ : ℕ → ℝ, (∀ n, 0 < A₀ n) →
       ∀ Λ : ℝ, 0 < Λ → ∀ ρ : ℝ, 0 < ρ →
       ∀ (ι : Type) (V : Set ι) (w : ι → E) (d c : ι → PolarPoint → ℝ),
       (∀ i ∈ V, ContDiff ℝ ∞ (d i) ∧ ContDiff ℝ ∞ (c i)) →
@@ -50,7 +46,16 @@ private theorem exists_controlledRootFlow_of_frechet_family
           A₀ n * (1 + p (n + inputLoss) (w i))) →
       ∃ δ : ℝ, ∃ B : ℕ → ℝ, 0 < δ ∧ δ ≤ ρ ∧ δ ≤ 1 ∧
         (∀ n, 0 < B n) ∧
-        ∀ i ∈ V, RootControlledFlowAtState p outLoss B (w i) δ Λ (d i) (c i) := by
+        ∀ i ∈ V, RootControlledFlowAtState p outLoss B (w i) δ Λ (d i) (c i)
+
+/-- Select the common low order before the family and its collar. The
+arithmetic never unfolds a concrete projective state space. -/
+private theorem exists_controlledRootFlow_of_frechet_family
+    (hFlow : N04FlowJetsTarget)
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hI : HasInterpolation p)
+    (inputLoss : ℕ) :
+    ∃ low outLoss : ℕ, RootControlledFlowFamily p inputLoss low outLoss := by
   obtain ⟨lowFlow, outLoss, hflow⟩ := exists_rootRescaledFlow_fixed_loss hFlow hp hI inputLoss
   refine ⟨max (1 + inputLoss) lowFlow, outLoss, ?_⟩
   intro A₀ hA₀ Λ hΛ ρ hρ ι V w d c hregular hperiod hlow hraw
@@ -113,35 +118,47 @@ def N01ControlledRootFlowBound
       (z - (C.referenceState, 0)) δ Λ
       (localizedRootDrift D S C r σ hR z) (localizedRootSpeed D S C g r σ hR z)
 
-theorem n01_exists_controlled_root_flow
-    (hFlow : N04FlowJetsTarget)
+/-- Localizing preserves the actual ordinary Fréchet jets on the quarter
+strip. Keep this concrete conversion separate from choosing the flow. -/
+private theorem n01_localizedRootFields_bound
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {base low loss : ℕ} {ε r σ R : ℝ} {g : ℝ → ℝ} {A : ℕ → ℝ}
+    (hR : 0 < R)
+    (hraw : N01RootCharacteristicFieldFDerivBound D S C base low loss ε r σ g R A)
+    (z : AnnularState S × ℝ) (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1)
+    (hlow : pairGrading (stateGrading S) realGrading low (z - (C.referenceState, 0)) ≤ 1)
+    (n : ℕ) (t : ℝ) (ht : |t| ≤ R / 4) (θ : ℝ) :
+    ‖iteratedFDeriv ℝ n (localizedRootDrift D S C r σ hR z) (t, θ)‖ +
+      ‖iteratedFDeriv ℝ n (localizedRootSpeed D S C g r σ hR z) (t, θ)‖ ≤
+        A n * (1 + pairGrading (stateGrading S) realGrading (n + loss)
+          (z - (C.referenceState, 0))) := by
+  have hq : (t, θ) ∈ Ioo (-R) R ×ˢ (univ : Set ℝ) := by
+    refine ⟨⟨?_, ?_⟩, mem_univ _⟩ <;> linarith [(abs_le.mp ht).1, (abs_le.mp ht).2]
+  have he := iteratedFDeriv_localizedRootFields_eq D S C g r σ hR z n (q := (t, θ)) ht
+  rw [he.1, he.2]
+  exact hraw z hz hs hlow n (t, θ) hq
+
+private theorem n01_controlledRootFlow_of_frechet_family
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    {C : NonlinearGeometryData S} {base loss lowF lowG lossF outLoss : ℕ} {ε : ℝ}
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (hN : N01Properties D T S C base loss ε) :
-    ∃ low outLoss : ℕ, ∀ r σ : ℝ, ∀ g : ℝ → ℝ, ∀ R : ℝ,
-      (σ = 1 ∨ σ = -1) → ∀ hR : 0 < R, ContDiff ℝ ∞ g →
-      Ioo ((r - R) - R) ((r + R) + R) ⊆ Ioo D.a D.b →
-      ∀ m : ℕ, Ioo (r - R) (r + R) ⊆ D.cells m →
-      (∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
-        RootCoefficientStripConditions D.w g (stateProfile D S C z.1)
-          (stateHeight D S C z) r σ R) →
-      ∀ Λ : ℝ, 0 < Λ →
-      ∃ δ : ℝ, ∃ B : ℕ → ℝ,
-        0 < δ ∧ δ ≤ R / 4 ∧ δ ≤ 1 ∧ (∀ n, 0 < B n) ∧
-        N01ControlledRootFlowBound D S C base low outLoss ε r σ g hR δ Λ B := by
+    (hN : N01Properties D T S C base loss ε)
+    (hfamily : RootControlledFlowFamily (pairGrading (stateGrading S) realGrading)
+      lossF lowG outLoss)
+    {r σ R : ℝ} {g : ℝ → ℝ} (hR : 0 < R) (hg : ContDiff ℝ ∞ g)
+    (hstrip : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+      RootCoefficientStripConditions D.w g (stateProfile D S C z.1)
+        (stateHeight D S C z) r σ R)
+    (A : ℕ → ℝ) (hA : ∀ n, 0 < A n)
+    (hraw : N01RootCharacteristicFieldFDerivBound D S C base lowF lossF ε r σ g R A)
+    (Λ : ℝ) (hΛ : 0 < Λ) :
+    ∃ δ : ℝ, ∃ B : ℕ → ℝ,
+      0 < δ ∧ δ ≤ R / 4 ∧ δ ≤ 1 ∧ (∀ n, 0 < B n) ∧
+      N01ControlledRootFlowBound D S C base (max lowF lowG) outLoss ε r σ g hR δ Λ B := by
   let p := pairGrading (stateGrading S) realGrading
   have hp : Monotone p :=
     tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
-  have hI : HasInterpolation p :=
-    coordinate_hasInterpolation_pair (stateGrading_monotone S)
-      (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
-      coordinate_hasInterpolation_realGrading
-  obtain ⟨lowF, lossF, hfield⟩ := n01_rootCharacteristicField_fixed_loss_bound hS hT hN
-  obtain ⟨lowG, outLoss, hfamily⟩ := exists_controlledRootFlow_of_frechet_family hFlow hp hI lossF
-  refine ⟨max lowF lowG, outLoss, ?_⟩
-  intro r σ g R hσ hR hg hphysical m hcell hstrip Λ hΛ
-  obtain ⟨A, hA, hraw⟩ := hfield r σ g R hσ hR hg hphysical m hcell hstrip
   let V : Set (AnnularState S × ℝ) :=
     {z | z ∈ stateNeighborhood S C base ε ∧ stateSector S z.1 ∧
       p (max lowF lowG) (z - (C.referenceState, 0)) ≤ 1}
@@ -159,16 +176,41 @@ theorem n01_exists_controlled_root_flow
   have hlocalized (z : AnnularState S × ℝ) (hz : z ∈ V) (n : ℕ)
       (t : ℝ) (ht : |t| ≤ R / 4) (θ : ℝ) :
       ‖iteratedFDeriv ℝ n (d z) (t, θ)‖ + ‖iteratedFDeriv ℝ n (c z) (t, θ)‖ ≤
-        A n * (1 + p (n + lossF) (w z)) := by
-    have he := iteratedFDeriv_localizedRootFields_eq D S C g r σ hR z n (q := (t, θ)) ht
-    change ‖iteratedFDeriv ℝ n (localizedRootDrift D S C r σ hR z) (t, θ)‖ +
-      ‖iteratedFDeriv ℝ n (localizedRootSpeed D S C g r σ hR z) (t, θ)‖ ≤ _
-    rw [he.1, he.2]
-    apply hraw z hz.1 hz.2.1 (hlowF z hz) n (t, θ)
-    refine ⟨⟨?_, ?_⟩, mem_univ _⟩ <;> linarith [(abs_le.mp ht).1, (abs_le.mp ht).2]
+        A n * (1 + p (n + lossF) (w z)) :=
+    n01_localizedRootFields_bound hR hraw z hz.1 hz.2.1 (hlowF z hz) n t ht θ
   obtain ⟨δ, B, hδ, hδR, hδone, hB, hresult⟩ := hfamily A hA Λ hΛ
     (R / 4) (div_pos hR (by norm_num)) (AnnularState S × ℝ) V w d c hregular
     (fun z _ => periodic_localizedRootFields hS C g r σ hR z) hlowG hlocalized
   exact ⟨δ, B, hδ, hδR, hδone, hB, fun z hz hs hlow => hresult z ⟨hz, hs, hlow⟩⟩
+
+theorem n01_exists_controlled_root_flow
+    (hFlow : N04FlowJetsTarget)
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε) :
+    ∃ low outLoss : ℕ, ∀ r σ : ℝ, ∀ g : ℝ → ℝ, ∀ R : ℝ,
+      (σ = 1 ∨ σ = -1) → ∀ hR : 0 < R, ContDiff ℝ ∞ g →
+      Ioo ((r - R) - R) ((r + R) + R) ⊆ Ioo D.a D.b →
+      ∀ m : ℕ, Ioo (r - R) (r + R) ⊆ D.cells m →
+      (∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+        RootCoefficientStripConditions D.w g (stateProfile D S C z.1)
+          (stateHeight D S C z) r σ R) →
+      ∀ Λ : ℝ, 0 < Λ →
+      ∃ δ : ℝ, ∃ B : ℕ → ℝ,
+        0 < δ ∧ δ ≤ R / 4 ∧ δ ≤ 1 ∧ (∀ n, 0 < B n) ∧
+        N01ControlledRootFlowBound D S C base low outLoss ε r σ g hR δ Λ B := by
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
+  have hI : HasInterpolation (pairGrading (stateGrading S) realGrading) :=
+    coordinate_hasInterpolation_pair (stateGrading_monotone S)
+      (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
+      coordinate_hasInterpolation_realGrading
+  obtain ⟨lowF, lossF, hfield⟩ := n01_rootCharacteristicField_fixed_loss_bound hS hT hN
+  obtain ⟨lowG, outLoss, hfamily⟩ := exists_controlledRootFlow_of_frechet_family hFlow hp hI lossF
+  refine ⟨max lowF lowG, outLoss, ?_⟩
+  intro r σ g R hσ hR hg hphysical m hcell hstrip Λ hΛ
+  obtain ⟨A, hA, hraw⟩ := hfield r σ g R hσ hR hg hphysical m hcell hstrip
+  exact n01_controlledRootFlow_of_frechet_family hS hT hN hfamily hR hg hstrip A hA hraw Λ hΛ
 
 end ContinuousFlexibility.Analysis
