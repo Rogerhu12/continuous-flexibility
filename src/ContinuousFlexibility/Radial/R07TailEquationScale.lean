@@ -93,6 +93,6 @@ theorem tailNatural_normalized_deriv_scale {T S : Statements.DeepTailData}
     deriv v S.entrance = deriv u T.entrance := by
   have hv' := (tailNaturalEquation_scale_iff he hb hΛ hs hp v).mp hv
   have hv₀' : v T.entrance = 1 := by simpa only [he] using hv₀
-  simpa only [he] using (tailNaturalLine_normalized_unique hgap hline hu hu₀ hv' hv₀').2
+  simpa only [he] using (tailNaturalLine_normalized_eqOn_deriv hgap hline hu hu₀ hv' hv₀').2
 
 end ContinuousFlexibility.Radial
