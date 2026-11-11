@@ -30,7 +30,12 @@ theorem matchedOuterWhole_weakFlux_physical {D : ReferenceData}
       (fun r => matchingPotential D j r * u (outerOutwardRadius right r) -
         matchingDensity D r * f (outerOutwardRadius right r)) := by
   cases right
-  · simp only [outerOutwardRadius, tailPhysicalEndpoint, Bool.false_eq_true, ite_false,
+  · have hw : outerTailOutwardWeight D false = fun x => D.w (-x) := by
+      funext x
+      simp only [outerTailOutwardWeight, outerTailSign, Bool.false_eq_true, ite_false,
+        neg_one_mul]
+    rw [hw] at h
+    simp only [outerOutwardRadius, tailPhysicalEndpoint, Bool.false_eq_true, ite_false,
       outerTailOutwardWeight, outerTailSign, neg_one_mul] at h ⊢
     have hr := h.reflect
     simp only [neg_neg] at hr
@@ -45,7 +50,11 @@ theorem matchedOuterWhole_weakFlux_physical {D : ReferenceData}
         simp only [Bool.false_eq_true, ite_false, deriv_comp_neg, neg_neg, neg_sq,
           div_neg, neg_div]
         ring)
-  · simpa only [outerOutwardRadius, tailPhysicalEndpoint, ite_true,
+  · have hw : outerTailOutwardWeight D true = D.w := by
+      funext x
+      simp only [outerTailOutwardWeight, outerTailSign, ite_true, one_mul]
+    rw [hw] at h
+    simpa only [outerOutwardRadius, tailPhysicalEndpoint, ite_true,
       outerTailOutwardWeight, outerTailSign, one_mul, outerWholeDensity,
       matchingPotential, matchingDensity] using h
 

@@ -137,7 +137,7 @@ theorem exists_matchedMorse_uniform_actual_natural_column_bound
     rw [(hends σ σ₀).1, (hends σ σ₀).2] at hh
     exact hh
   have hμmem : ∀ᵐ x ∂μ, x ∈ Ico a b := by
-    have hh := outerWholeMeasure_ae_mem hphys
+    have hh := outerWholeMeasure_ae_mem (right := right) hphys
     rw [← morseTransitionOutwardLeft_eq] at hh
     exact hh.mono fun _ hx => Ioo_subset_Ico_self hx
   have hnorm := matchedOuter_stateScale_sqrt_inv_le M σ hσ (by omega : 1 ≤ N)
@@ -175,7 +175,7 @@ theorem exists_matchedMorse_uniform_actual_natural_column_bound
         (rpow_nonneg (show 0 ≤ radialE N from (exp_pos _).le) B)
         (outer_envelope_one_le N hB)
       have hs := hshift N N (D.cellIndex m) N
-        (by omega) (by omega) (by omega) (by omega)
+        (by omega) (by omega) (by change 1 ≤ (family σ).cellIndex m; omega) (by omega)
         hnear.1 hnear.2 (by omega) (by omega)
       simp only [sub_self, abs_zero, neg_zero, exp_zero, mul_one] at hs
       have hs' : radialE N ^ B * radialE N ^ B ≤
@@ -209,7 +209,6 @@ theorem exists_matchedMorse_uniform_actual_natural_column_bound
           apply exp_le_exp.mpr
           have h₁ := mul_le_mul_of_nonneg_right hAnA (radialQ_nonneg (D.cellIndex m))
           have h₂ := mul_le_mul_of_nonneg_right hAnBA (radialQ_nonneg N)
-          dsimp only [E]
           nlinarith only [h₁, h₂]
   have hbound := matchedOuterCell_norm_le_of_value h.accumulating.2.1 right μ U
     (fun x => H.V x / sqrt lam) hU m (exp_pos _).le hpoint

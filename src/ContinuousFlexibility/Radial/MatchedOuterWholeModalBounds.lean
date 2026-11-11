@@ -20,7 +20,7 @@ namespace ContinuousFlexibility.Radial
 
 open Real Set Filter MeasureTheory
 open ContinuousFlexibility.Statements
-open scoped Topology
+open scoped Topology ENNReal
 
 /-- Row measurability is a consequence of the actual value/flux ODE. -/
 theorem matchedOuter_actual_whole_row_measurable
@@ -184,6 +184,7 @@ theorem exists_matchedMorse_uniform_actual_whole_modal_bounds
     have hh := hlabel.tail_point right j η K p m _ hp (by
       rw [tailPhysicalRadius_log right hc.1]
       exact hθ)
+    change N ≤ (family σ).cellIndex m + 2
     omega
   have hlevel (m : ℕ) (x : ℝ) (hx : x ∈ Ico a b)
       (hθ : D.localizer m (outerOutwardRadius right x) ≠ 0) :
@@ -272,7 +273,7 @@ theorem exists_matchedMorse_uniform_actual_whole_modal_bounds
             _ = exp (B₀ * radialQ N) * En k * En m := by ring
             _ ≤ E k m := hnum.2.2.1 (htailLabel k x hxt hθk)
         rw [H.green_tail_decomposition_unit_flux hlam.ne' hac hcb hPc hQc hflux hxt hyt]
-        exact (abs_add _ _).trans ((add_le_add hd' hr).trans_eq (by ring))
+        exact (abs_add_le _ _).trans ((add_le_add hd' hr).trans_eq (by ring))
   refine ⟨hpoint, ?_⟩
   intro R hR k m
   letI : IsFiniteMeasure μ :=
@@ -285,7 +286,7 @@ theorem exists_matchedMorse_uniform_actual_whole_modal_bounds
     rw [(hends σ σ₀).1, (hends σ σ₀).2] at hh
     exact hh
   have hμmem : ∀ᵐ x ∂μ, x ∈ Ico a b := by
-    have hh := outerWholeMeasure_ae_mem hphys
+    have hh := outerWholeMeasure_ae_mem (right := right) hphys
     rw [← morseTransitionOutwardLeft_eq] at hh
     exact hh.mono fun _ hx => Ioo_subset_Ico_self hx
   have hrow : ∀ᵐ x ∂μ, AEStronglyMeasurable (outerGreenKernel lam H.U H.V x) μ := by
