@@ -48,6 +48,7 @@ theorem r11b_memLp_mul_of_localized_square_bound
       Integrable (fun x => (χ m x * (a x * f x)) ^ 2) μ := by
     apply (hmajor m).mono ((hm m).pow 2)
     filter_upwards [hb m] with x hx
+    change ‖(χ m x * (a x * f x)) ^ 2‖ ≤ ‖A m * (χ m x * f x) ^ 2‖
     rw [Real.norm_of_nonneg (sq_nonneg _),
       Real.norm_of_nonneg (mul_nonneg (hA m) (sq_nonneg _))]
     exact hx

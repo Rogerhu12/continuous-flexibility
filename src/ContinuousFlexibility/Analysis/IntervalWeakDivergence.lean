@@ -50,8 +50,11 @@ theorem contDiff_div_of_tsupport_subset {s : Set ℝ} (hs : IsOpen s)
 
 private theorem weakDivergence_compact_div {f w : ℝ → ℝ}
     (hf : HasCompactSupport f) : HasCompactSupport (fun x => f x / w x) := by
-  simpa only [div_eq_mul_inv] using
-    (hf.mul_right : HasCompactSupport (fun x => f x * (w x)⁻¹))
+  apply hf.mono'
+  intro x hx
+  change f x / w x ≠ 0 at hx
+  by_contra hxf
+  exact hx (by rw [image_eq_zero_of_notMem_tsupport hxf, zero_div])
 
 private theorem weakDivergence_tsupport_div {f w : ℝ → ℝ} :
     tsupport (fun x => f x / w x) ⊆ tsupport f := by
@@ -179,7 +182,9 @@ theorem integral_mul_deriv_eq_neg_of_hasDerivAt_Ioo {a b : ℝ} (hab : a < b)
     intro x hx
     have hdx : deriv ψ x ≠ 0 := by
       intro hz
-      exact hx (by rw [hz, mul_zero])
+      apply hx
+      change P x * deriv ψ x = 0
+      rw [hz, mul_zero]
     have hxψ := hs (support_deriv_subset hdx)
     exact ⟨hxψ.1, hxψ.2.le⟩
   have hsright : Function.support (fun x => d x * ψ x) ⊆ Ioc l r := by
