@@ -69,7 +69,7 @@ private theorem zero_trace_of_transposed {D : ReferenceData}
   have hda : deriv ψ a = (b - a) * innerEndpointValues i 0 := by
     simpa only [sub_self, zero_mul, mul_zero, one_mul, add_zero, H, hends.1] using (hd a).deriv
   have hdb : deriv ψ b = -(b - a) * innerEndpointValues i 1 := by
-    simpa only [sub_self, zero_mul, mul_zero, zero_add, sub_zero, zero_sub,
+    simpa only [sub_self, zero_mul, mul_zero, zero_add, add_zero, sub_zero, zero_sub,
       mul_neg_one, H, hends.2] using (hd b).deriv
   have hg := modeLocalEquation_green_on_compact hD hB heq hrep hab hsub
     (fun _ hx => hx) hu (hψ.of_le (by simp)).contDiffOn
@@ -80,13 +80,11 @@ private theorem zero_trace_of_transposed {D : ReferenceData}
   have hwpos := (matchingProfileGeometry hD).2.2.2.2.1
   have hlen : b - a ≠ 0 := (sub_pos.mpr hab).ne'
   fin_cases i
-  · norm_num only [innerEndpointValues, ite_true, ite_false, mul_one, mul_zero,
-      zero_mul, sub_zero, zero_sub] at hg ⊢
+  · norm_num [innerEndpointValues] at hg ⊢
     have hz : (u a * D.w a) * (b - a) = 0 := by nlinarith only [hg]
     exact (mul_eq_zero.mp ((mul_eq_zero.mp hz).resolve_right hlen)).resolve_right
       (hwpos a (hsub (left_mem_Icc.mpr hab.le))).ne'
-  · norm_num only [innerEndpointValues, ite_true, ite_false, mul_one, mul_zero,
-      zero_mul, sub_zero, zero_sub] at hg ⊢
+  · norm_num [innerEndpointValues] at hg ⊢
     have hz : (u b * D.w b) * (b - a) = 0 := by nlinarith only [hg]
     exact (mul_eq_zero.mp ((mul_eq_zero.mp hz).resolve_right hlen)).resolve_right
       (hwpos b (hsub (right_mem_Icc.mpr hab.le))).ne'
@@ -176,9 +174,11 @@ theorem innerRadialChainWeakGraph_dirichlet_representative {D : ReferenceData}
       -(∫ x in D.a..D.b, matchingDensity D x * F.1 x * ψ x) at he
     rw [hIU, hIF, hIC] at he
     have hsub' : Icc a b ⊆ Icc D.a D.b := hsub.trans Ioo_subset_Icc_self
-    have hiU := (hu.continuousOn.mul
+    have hiU : IntervalIntegrable
+        (fun x => u x * radialJacobi ((j : ℝ) ^ 2) D.w ψ x) volume a b := (hu.continuousOn.mul
       ((matchingJacobi_continuousOn hD hψ j).mono hsub')).intervalIntegrable_of_Icc hab.le
-    have hiC := (((matchingColumn_continuousOn hD hB).mono hsub').mul
+    have hiC : IntervalIntegrable (fun x => referenceColumn D x * ψ x) volume a b :=
+      (((matchingColumn_continuousOn hD hB).mono hsub').mul
       hψ.continuous.continuousOn).intervalIntegrable_of_Icc hab.le
     have hdens : ContinuousOn (matchingDensity D) (uIcc a b) := by
       rw [uIcc_of_le hab.le]
@@ -251,6 +251,7 @@ theorem innerRadialChainWeakGraph_frozen {D : ReferenceData}
         apply integral_eq_zero_of_ae
         filter_upwards [hcs, innerRadialH1Domain_supported D hw.continuous
           (G.left_pos k) (G.in_core k) (G.weight_pos k) (hξ k).1] with r hcol hq
+        change ⟪column r, (q k).1 r⟫_ℝ = (0 : ℝ)
         by_cases hr : r ∈ Ioo (G.left central) (G.right central)
         · have hkr : r ∉ Ioo (G.left k) (G.right k) :=
             fun h => (Set.disjoint_left.mp (hdis hk)) h hr

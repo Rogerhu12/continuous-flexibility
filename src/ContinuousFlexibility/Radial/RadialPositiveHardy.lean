@@ -54,9 +54,9 @@ theorem radialPositiveHardy_boundary {a b J : ℝ} {w dw u du : ℝ → ℝ}
       (((dw r * r - w r * 1) / r ^ 2) * u r ^ 2 +
         (w r / r) * ((2 : ℝ) * u r ^ (2 - 1) * du r)) r at h
     simpa only [dboundary, mul_one, Nat.reduceSub, pow_one] using h
-  have hbint := hdbc.intervalIntegrable_of_Icc hab
-  have heint := hec.intervalIntegrable_of_Icc hab
-  have hmint := hmc.intervalIntegrable_of_Icc hab
+  have hbint : IntervalIntegrable dboundary volume a b := hdbc.intervalIntegrable_of_Icc hab
+  have heint : IntervalIntegrable energy volume a b := hec.intervalIntegrable_of_Icc hab
+  have hmint : IntervalIntegrable mass volume a b := hmc.intervalIntegrable_of_Icc hab
   have hftc := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hab hbc hbd hbint
   have hpoint (r : ℝ) (hr : r ∈ Icc a b) : mass r ≤ 48 * energy r - 24 * dboundary r := by
     have hrp := hrpos r hr

@@ -91,10 +91,20 @@ theorem SeedRetainedPair.reference_later_cutoff_source_energy {S : SelectedTailD
     (P.reference_later_incoming_data hw hS G hentry hfirst hC side
       hn hj heven hband hcut hjoin hu).2.2.2.2.2.1
   refine ⟨hsource.1, ?_, ?_⟩
-  · simpa only [hp, r07OutwardSign] using hsource.2
+  · have hb := hsource.2
+    change eLpNorm (terminalCapHilbertSource lam D.w (P.laterTerminalCutoff G n side) U)
+        2 (radialHilbertMeasure D) ≤
+      ENNReal.ofReal (sqrt (standInBoundarySlope (r07OutwardSign side) ((j : ℝ) ^ 2)
+        (s * r (if side then morseRightCapEnd A B (1 / 100) else morseCellLeftCut)) U) *
+        radialE n ^ terminalMorseRelativeSourceExponent *
+        exp (-((j : ℝ) * sqrt A / 100000000))) at hb
+    rw [hp] at hb
+    exact hb
   · intro lo hi hlo hhi
     change 0 ≤ (∫ z in lo..hi,
-        terminalCapCutoffEnergy D.w (terminalMorsePhysicalCutoff side A B s r) U z) / lam ∧ _
+        terminalCapCutoffEnergy D.w (terminalMorsePhysicalCutoff side A B s r) U z) / lam ∧
+      (∫ z in lo..hi,
+        terminalCapCutoffEnergy D.w (terminalMorsePhysicalCutoff side A B s r) U z) / lam ≤ _
     rw [terminalMorse_cutoffEnergy_integral_cap side hB hAB hs hr hD.2.2.1.1 hU hlo hhi]
     refine ⟨henergy.1, ?_⟩
     have he : (∫ z in (terminalMorseLayerRadius side A B s r 0)..
@@ -102,7 +112,16 @@ theorem SeedRetainedPair.reference_later_cutoff_source_energy {S : SelectedTailD
         terminalCapCutoffEnergy D.w (terminalMorsePhysicalCutoff side A B s r) U z) / lam ≤
         d * radialE n ^ terminalMorseEnergyErrorExponent *
           exp (-2 * ((j : ℝ) * sqrt A / 50000000)) := by
-      simpa only [hp, r07OutwardSign] using henergy.2.1
+      have hb := henergy.2.1
+      change (∫ z in (terminalMorseLayerRadius side A B s r 0)..
+          (terminalMorseLayerRadius side A B s r (terminalMorseLayerLength side A)),
+          terminalCapCutoffEnergy D.w (terminalMorsePhysicalCutoff side A B s r) U z) / lam ≤
+        standInBoundarySlope (r07OutwardSign side) ((j : ℝ) ^ 2)
+          (s * r (if side then morseRightCapEnd A B (1 / 100) else morseCellLeftCut)) U *
+          radialE n ^ terminalMorseEnergyErrorExponent *
+          exp (-2 * ((j : ℝ) * sqrt A / 50000000)) at hb
+      rw [hp] at hb
+      exact hb
     apply he.trans
     apply mul_le_mul_of_nonneg_left _
       (mul_nonneg hd.le (Real.rpow_nonneg (show 0 ≤ radialE n from (exp_pos _).le) _))
