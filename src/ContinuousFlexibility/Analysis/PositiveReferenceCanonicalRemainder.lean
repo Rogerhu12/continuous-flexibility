@@ -113,7 +113,7 @@ theorem positiveReferenceCanonicalRemainder_smooth_zeroJets
     hG.contDiffAt.comp (Y c) hline
   have hz := iteratedDeriv_comp_eq_zero_of_radialBoundaryJets_zero
     hU hR c hc hzero hcurve hbase hk
-  simpa only [he] using hz
+  simpa only [he, Function.comp_def] using hz
 
 end ContinuousFlexibility.Analysis
 

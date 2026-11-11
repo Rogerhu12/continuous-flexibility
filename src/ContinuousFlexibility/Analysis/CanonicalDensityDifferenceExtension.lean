@@ -43,6 +43,7 @@ theorem canonicalDensityDifference_extension
     Metric.ball_subset_ball (min_le_right _ _)
   refine ⟨lt_min hδ hδref, (hE.mono hball).sub (hEref.mono hballref), ?_, ?_⟩
   · intro p hp
+    change E p - Eref p = ρ p - ρref p
     rw [heq ⟨hball hp.1, hp.2⟩, heqref ⟨hballref hp.1, hp.2⟩]
     ring
   · intro k hk

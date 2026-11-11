@@ -43,14 +43,12 @@ theorem rootAngularProduct_eq_one_of_reference_radial
   have hχder : angularPartial (extendedRootOddCoefficient G) p = 0 := by
     have hline : HasDerivAt (fun η : ℝ => (p.1, η)) (0, 1) p.2 :=
       (hasDerivAt_const p.2 p.1).prodMk (hasDerivAt_id p.2)
-    have hd : HasDerivAt (fun η => extendedRootOddCoefficient G (p.1, η))
-        (angularPartial (extendedRootOddCoefficient G) p) p.2 := by
-      simpa only [Function.comp_def] using hχdiff.hasFDerivAt.comp_hasDerivAt p.2 hline
-    have he : (fun η => extendedRootOddCoefficient G (p.1, η)) =
+    have hd := hχdiff.hasFDerivAt.comp_hasDerivAt p.2 hline
+    have he : extendedRootOddCoefficient G ∘ (fun η : ℝ => (p.1, η)) =
         (fun _ : ℝ => extendedRootOddCoefficient G (p.1, 0)) :=
       funext (fun η => seeleyPeriodicExtension_angle_independent hχ p.1 η)
     rw [he] at hd
-    exact hd.unique (hasDerivAt_const p.2 _)
+    simpa only [angularPartial] using hd.unique (hasDerivAt_const p.2 _)
   rw [rootAngularProduct, hφder, hχder]
   norm_num
 
