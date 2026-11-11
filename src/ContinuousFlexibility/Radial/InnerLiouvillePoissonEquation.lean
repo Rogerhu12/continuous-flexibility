@@ -63,7 +63,7 @@ theorem innerLiouvilleUnitPoisson_radialJacobi
     ⟨hm (left_mem_Icc.mpr hab) hy hy.1, hm hy (right_mem_Icc.mpr hab) hy.2⟩
   have hψreg (y : ℝ) (hy : y ∈ Icc a b) : ContDiffAt ℝ ∞ ψ y :=
     contDiffAt_const.mul (hpp y hy)
-  have hψd : ∀ᶠ y in 𝓝 x, deriv ψ y = s t * deriv p y := by
+  have hψd : deriv ψ =ᶠ[𝓝 x] (fun y => s t * deriv p y) := by
     filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
     exact (((hpp y (Ioo_subset_Icc_self hy)).differentiableAt (by simp)).hasDerivAt.const_mul
       (s t)).deriv
@@ -125,7 +125,8 @@ theorem innerLiouvilleUnitPoisson_effectiveSource_ae
   have hE : (E : ℝ → ℝ) =ᵐ[radialHilbertMeasure D] (fun r => -(c * G r)) := by
     filter_upwards [Lp.coeFn_sub (0 : RadialModeL2 D) (c • G),
       Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D), Lp.coeFn_smul c G] with r hsub hz hsm
-    simp only [E, hsub, Pi.sub_apply, hz, Pi.zero_apply, hsm,
+    dsimp only [E]
+    rw [hsub, Pi.sub_apply, hz, Pi.zero_apply, hsm,
       Pi.smul_apply, smul_eq_mul, zero_sub]
   have hpos := innerLiouville_radial_weight_pos_closed D hab hlam hR hp hw
   have hleft : 0 < R a := (hp a (left_mem_Icc.mpr hab)).1

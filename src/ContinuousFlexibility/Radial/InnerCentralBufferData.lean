@@ -114,7 +114,7 @@ theorem innerCentralBuffer_layer_abs {n : ℕ} (hn : 1 ≤ n) {X₀ : ℝ} (hX :
     · exact ⟨bufferInnerWall (innerCentralBufferData n X₀) i, hx, hwall⟩
   calc
     |x| = |(x - c) + c| := by rw [sub_add_cancel]
-    _ ≤ |x - c| + |c| := abs_add _ _
+    _ ≤ |x - c| + |c| := abs_add_le _ _
     _ ≤ 1 + X₀ := add_le_add (hxc.trans hstep) hc
     _ ≤ 2 * X₀ := by linarith only [hX]
 
@@ -143,7 +143,10 @@ theorem innerCentralBufferData_hypotheses {n : ℕ} (hn : 1 ≤ n)
     · simpa only [innerCentralBufferData, if_pos hn1] using
         And.intro contDiff_innerCentralModelBorderFunction
           innerCentralModelBorderFunction_hasCompactSupport
-    · simpa only [innerCentralBufferData, if_neg hn1] using
+    · have hzero : (fun _ : ℝ => (0 : ℝ)) = (0 : ℝ → ℝ) := by
+        funext x
+        simp only [Pi.zero_apply]
+      simpa only [innerCentralBufferData, if_neg hn1, hzero] using
         (And.intro (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => (0 : ℝ)))
           (HasCompactSupport.zero : HasCompactSupport (fun _ : ℝ => (0 : ℝ))))
   refine ⟨(by dsimp only [innerCentralBufferData]; linarith only [hX0]), hwalls,
@@ -215,6 +218,6 @@ theorem innerCentralBuffer_velocity {X₀ : ℝ}
   exact (show |deriv centralRadius x / centralRadius x| ≤
     centralRadiusWeightConstant * (1 + |x|) by
       simpa only [centralRadiusLogDerivative, Real.norm_eq_abs] using h).trans
-    (mul_le_mul_of_nonneg_left (add_le_add_left habs 1) centralRadiusWeightConstant_pos.le)
+    (mul_le_mul_of_nonneg_left (add_le_add (le_refl 1) habs) centralRadiusWeightConstant_pos.le)
 
 end ContinuousFlexibility.Radial

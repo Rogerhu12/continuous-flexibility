@@ -37,7 +37,8 @@ def innerTwoColumnMap (p : Fin 2 → H) : EuclideanSpace ℝ (Fin 2) →L[ℝ] H
 
 theorem innerTwoColumnMap_apply (p : Fin 2 → H) (ξ : EuclideanSpace ℝ (Fin 2)) :
     innerTwoColumnMap p ξ = ∑ i, ξ i • p i := by
-  simp only [innerTwoColumnMap, LinearMap.coe_toContinuousLinearMap']
+  simp only [innerTwoColumnMap, LinearMap.coe_toContinuousLinearMap',
+    LinearMap.coe_mk, AddHom.coe_mk]
 
 /-- Only the fixed two-endpoint dimension enters this estimate. -/
 theorem innerTwoColumnMap_norm_le (p : Fin 2 → H) {K : ℝ}

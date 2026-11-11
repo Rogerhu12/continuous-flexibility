@@ -22,6 +22,7 @@ variable (D : ReferenceData) (hw : Continuous D.w)
   {a b : ℝ} (hab : a < b) (ha : 0 < a)
   (hcore : Ioo a b ⊆ radialCore D) (hpos : ∀ r ∈ Icc a b, 0 < D.w r)
 
+include hab in
 theorem innerRadialH1Pair_sub_affineUnit {u : ℝ → ℝ}
     (hu : ∀ r ∈ Icc a b, ContDiffAt ℝ ∞ u r) (i : Fin 2)
     (hua : u a = innerEndpointValues i 0) (hub : u b = innerEndpointValues i 1)
@@ -64,6 +65,7 @@ theorem innerRadialH1Pair_sub_affineUnit {u : ℝ → ℝ}
       ring
     · simp only [indicator_of_notMem hr, sub_self]
 
+include hab in
 theorem innerRadialH1Pair_unit_domain_trace {u : ℝ → ℝ}
     (hu : ∀ r ∈ Icc a b, ContDiffAt ℝ ∞ u r) (i : Fin 2)
     (hua : u a = innerEndpointValues i 0) (hub : u b = innerEndpointValues i 1)

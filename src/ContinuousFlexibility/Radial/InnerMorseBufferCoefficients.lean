@@ -67,7 +67,7 @@ theorem innerMorseChain_buffer_mass_bounds (T : MorseChainData) (m : ℕ)
   calc
     (innerMorseBufferMass (morseChainA T m) (morseChainB T m) j i)⁻¹ ≤
         (morseChainB T m / 2)⁻¹ := by
-      simpa only [one_div] using one_div_le_one_div_of_le
+      simpa only [one_div, innerMorseBufferMass] using one_div_le_one_div_of_le
         (div_pos hp.2 (by norm_num)) hm.1
     _ = 2 * (T.d m : ℝ) ^ 9 := by
       rw [morseChainB_inv_pow T m hd0.le, inv_pow, inv_div, div_eq_mul_inv, inv_inv]
@@ -152,7 +152,7 @@ theorem innerMorseBufferCoefficient_le_weight (T : MorseChainData) (m : ℕ)
     innerMorseBufferCoefficient T m ≤ 16 * (3 * radialE m) ^ 9 :=
       mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (Nat.cast_nonneg _) hdq 9) (by norm_num)
     _ = (16 * (3 : ℝ) ^ 9) * radialE m ^ (9 : ℝ) := by
-      rw [rpow_natCast, mul_pow]
+      rw [rpow_ofNat, mul_pow]
       ring
 
 /-- This version accepts precisely the comparison exported by R09.
@@ -168,7 +168,9 @@ theorem innerMorseChain_inverse_sqrt_energy_le_scaled (T : MorseChainData) (m : 
   have hk0 : 0 < k := (div_pos hm hC).trans_le hk
   have hi : k⁻¹ ≤ C * mass⁻¹ := by
     have h := one_div_le_one_div_of_le (div_pos hm hC) hk
-    simpa only [one_div, inv_div, div_eq_mul_inv] using h
+    calc
+      k⁻¹ ≤ (mass / C)⁻¹ := by simpa only [one_div] using h
+      _ = C * mass⁻¹ := by rw [inv_div, div_eq_mul_inv]
   have hi' : k⁻¹ ≤ C * (2 * (T.d m : ℝ) ^ 9) :=
     hi.trans (mul_le_mul_of_nonneg_left
       (innerMorseChain_buffer_mass_bounds T m hd hj i).1 hC.le)

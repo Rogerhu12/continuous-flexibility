@@ -49,7 +49,7 @@ theorem poisson_norm_sq_le (hw : ContDiff ℝ ∞ D.w) (hj : 0 < j) (hs : 0 < s)
     div_nonneg (Real.sqrt_nonneg _) hj.le
   have hsq := (sq_le_sq₀ (norm_nonneg _) (mul_nonneg hK
     (Real.sqrt_nonneg ⟪ξ, F.flux c ξ⟫_ℝ))).mpr hnorm
-  simpa only [mul_pow, Real.sq_sqrt hnonneg] using hsq
+  simpa only [poisson, mul_pow, Real.sq_sqrt hnonneg] using hsq
 
 variable [Fintype γ] [Fintype ι]
 

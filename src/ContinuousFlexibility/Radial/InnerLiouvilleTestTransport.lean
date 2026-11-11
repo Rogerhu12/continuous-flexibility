@@ -31,9 +31,11 @@ theorem innerLiouvilleTestPullback_closed {R s φ : ℝ → ℝ} {a b lam x : �
       apply image_eq_zero_of_notMem_tsupport
       intro h
       have hRx := hφs h
-      rcases he with rfl | rfl
-      · exact (lt_irrefl (R a)) hRx.1
-      · exact (lt_irrefl (R b)) hRx.2
+      rcases he with he | he
+      · rw [he] at hRx
+        exact (lt_irrefl (R a)) hRx.1
+      · rw [he] at hRx
+        exact (lt_irrefl (R b)) hRx.2
     rw [innerLiouvilleTestPullback, indicator_of_notMem hi, hz, mul_zero]
 
 variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}

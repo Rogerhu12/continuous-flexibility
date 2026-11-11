@@ -95,7 +95,8 @@ theorem innerBuffer_remainder_coefficient_envelope {B : BufferData}
   have hbase := innerBuffer_dirichlet_envelope_le hB hC hcoeff hB0 hinv
   have hforce0 : 0 ≤ K * (1 + B.layerBound) * B.mass i ^ (3 / 2 : ℝ) := by
     have hlayer0 : 0 ≤ B.layerBound := hB.2.2.2.1.le
-    positivity
+    exact mul_nonneg (mul_nonneg hK (by linarith only [hlayer0]))
+      (rpow_nonneg (buffer_mass_pos hB i).le _)
   unfold innerBufferRemainderEnvelope
   calc
     _ ≤ ((1 + 2 * C) * coeff ^ 2) *
@@ -161,6 +162,7 @@ theorem inner_morse_polynomial_envelope (T : MorseChainData) {m : ℕ}
     (inner_morse_frequency_log_bound T hd hm hj) hb
   rw [radialE, ← exp_mul, rpow_def_of_pos (by linarith : 0 < 1 + j)]
   rw [← exp_log hApos, ← exp_add, ← exp_add, ← exp_add]
+  rw [log_exp]
   apply exp_le_exp.mpr
   nlinarith only [hlogA, hfreq]
 

@@ -115,7 +115,7 @@ theorem innerCentralBuffer_inverse_sqrt_energy_le {n : ℕ} (hn : 1 ≤ n)
     rw [← sqrt_inv k]
     exact sqrt_le_iff.mpr ⟨add_nonneg zero_le_one (inv_nonneg.mpr hd.1.le),
       by nlinarith only [inv_nonneg.mpr hd.1.le, sq_nonneg (k⁻¹)]⟩
-  exact hs.trans ((add_le_add_left hi 1).trans
+  exact hs.trans ((add_le_add (le_refl 1) hi).trans
     (innerCentralBufferCoefficient_base (by linarith only [hX]) hC.le).1)
 
 theorem innerCentralBufferCoefficientLinearConstant_pos {C : ℝ} (hC : 0 ≤ C) :
@@ -143,7 +143,7 @@ theorem innerCentralBufferCoefficient_le_linear {X₀ C : ℝ} (hX : 1 ≤ X₀)
       dsimp only [innerCentralBufferCoefficient, K]
       ring
     _ ≤ K * X₀ + (1 + centralRadiusWeightConstant) * X₀ :=
-      add_le_add_right hKX _
+      add_le_add hKX (le_refl _)
     _ = innerCentralBufferCoefficientLinearConstant C * X₀ := by
       dsimp only [innerCentralBufferCoefficientLinearConstant, K]
       ring

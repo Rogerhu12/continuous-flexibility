@@ -56,7 +56,7 @@ def innerRadialBrokenSource : InnerRadialBrokenData D n H →ₗ[ℝ] H :=
 
 @[simp] theorem innerRadialBrokenSource_apply (x : InnerRadialBrokenData D n H) :
     innerRadialBrokenSource D x = x.2 :=
-  LinearMap.snd_apply ℝ _ _ x
+  LinearMap.snd_apply x
 
 def innerRadialBrokenRow (central : Fin (n + 1)) (column : RadialModeL2 D) :
     InnerRadialBrokenData D n H →ₗ[ℝ] ℝ where

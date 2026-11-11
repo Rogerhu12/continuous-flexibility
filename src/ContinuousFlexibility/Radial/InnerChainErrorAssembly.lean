@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Radial
 
-open scoped BigOperators InnerProductSpace MatrixOrder Matrix.Norms.L2Operator
+open scoped BigOperators InnerProductSpace Matrix MatrixOrder Matrix.Norms.L2Operator
 
 theorem innerBoundaryDiagonal_adjoint {ι : Type*} [Fintype ι] [DecidableEq ι]
     (a : ι → ℝ) : (innerBoundaryDiagonal a).adjoint = innerBoundaryDiagonal a := by
@@ -266,5 +266,55 @@ theorem innerChainErrorMatrix_normalized_lt_half (n : ℕ)
           hAstar (norm_nonneg _) (by positivity)
       _ = 2 * η := by ring
   exact hnorm.trans_lt (by linarith only [hηsmall])
+
+theorem innerTwoCutWeightedError_signed (κ w : Fin 2 → ℝ)
+    (E : Matrix (Fin 2) (Fin 2) ℝ) (hw : ∀ i, 0 < w i) (sign : Bool) :
+    innerTwoCutWeightedError κ (fun i => if sign then w i else (w i)⁻¹) E true =
+      innerTwoCutWeightedError κ w E sign := by
+  ext i k
+  cases sign with
+  | true => simp only [innerTwoCutWeightedError, ite_true]
+  | false =>
+    simp only [innerTwoCutWeightedError, ite_true, Bool.false_eq_true, ite_false]
+    congr 1
+    field_simp [(hw i).ne', (hw k).ne']
+
+/-- Both estimates concern the same physical error and the canonical
+inverse of the same positive diagonal cut weight. -/
+theorem innerChainErrorMatrix_normalized_both (n : ℕ)
+    (S₀ : Matrix (Fin n) (Fin n) ℝ) (κ w : Fin n → ℝ)
+    (hS₀ : S₀.PosDef) (hκ : ∀ i, 0 < κ i) (hw : ∀ i, 0 < w i)
+    (hdom : Matrix.diagonal κ ≤ S₀)
+    (E : Fin (n + 1) → Matrix (Fin 2) (Fin 2) ℝ) {η : ℝ}
+    (hη : 0 ≤ η) (hηsmall : η < 1 / 4)
+    (hE : ∀ p sign, ‖innerTwoCutWeightedError (innerChainScalarRestriction n p κ 1)
+      (innerChainScalarRestriction n p w 1) (E p) sign‖ ≤ η) (sign : Bool) :
+    ‖innerInterfaceWeightedError S₀ (innerInterfaceWeight (Matrix.diagonal w) sign)
+      (innerChainErrorMatrix n E)‖ < 1 / 2 := by
+  let v : Fin n → ℝ := fun i => if sign then w i else (w i)⁻¹
+  have hv : ∀ i, 0 < v i := by
+    intro i
+    dsimp only [v]
+    split_ifs
+    · exact hw i
+    · exact inv_pos.mpr (hw i)
+  have hweight : innerInterfaceWeight (Matrix.diagonal w) sign = Matrix.diagonal v := by
+    cases sign with
+    | true => simp only [innerInterfaceWeight, ite_true, v]
+    | false =>
+      simpa only [innerInterfaceWeight, Bool.false_eq_true, ite_false, v] using
+        innerBoundaryWeightMatrix_inv w (fun i => (hw i).ne')
+  rw [hweight]
+  apply innerChainErrorMatrix_normalized_lt_half n S₀ κ v hS₀ hκ hv hdom E hη hηsmall
+  intro p
+  have hlocal : innerChainScalarRestriction n p v 1 =
+      fun i => if sign then innerChainScalarRestriction n p w 1 i
+        else (innerChainScalarRestriction n p w 1 i)⁻¹ := by
+    funext i
+    simpa only [v, inv_one, ite_self] using
+      innerChainScalarRestriction_map n p w 1 (fun x => if sign then x else x⁻¹) i
+  rw [hlocal, innerTwoCutWeightedError_signed _ _ _
+    (innerChainScalarRestriction_pos n p w hw (by norm_num)) sign]
+  exact hE p sign
 
 end ContinuousFlexibility.Radial

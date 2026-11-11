@@ -72,6 +72,7 @@ theorem innerIsometricRestriction_selfAdjoint
   apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
   intro F K
   have h := hA0.isSymmetric (i F) (i K)
+  simp only [ContinuousLinearMap.coe_coe] at h ⊢
   rw [← hA F, ← hA K, i.inner_map_map, i.inner_map_map] at h
   exact h
 

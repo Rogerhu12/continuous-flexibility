@@ -198,7 +198,8 @@ theorem innerGapFormSpace_green_test (D : ReferenceData) (hw : ContDiff ℝ ∞ 
     image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl a) (hsu h).1)
   have hub : u b = 0 :=
     image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl b) (hsu h).2)
-  dsimp only [Set.mem_setOf_eq, Eφ, Aφ]
+  rw [Set.mem_ofPred_eq]
+  dsimp only [Eφ, Aφ]
   rw [hvalue, henergy, innerGapEnergyPair_inner D hw hab ha hcore hpos hslope,
     innerGapEnergyBilinear_green hab ha hw hu hφ hua hub,
     innerGapTestSource_pairing D hw hab ha hcore hpos]

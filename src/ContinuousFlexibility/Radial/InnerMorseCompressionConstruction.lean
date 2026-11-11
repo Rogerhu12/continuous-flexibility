@@ -50,8 +50,8 @@ theorem innerMorse_compression_envelope_le {T : MorseChainData} {σ : ℕ → �
   have hcube : innerMorseBufferCoefficient T m ^ 3 ≤
       innerMorseCompressionAmplitude * radialE m ^ (27 : ℝ) := by
     have h := pow_le_pow_left₀ (zero_le_one.trans hc.1) hcE 3
-    rw [rpow_natCast, mul_pow, ← pow_mul] at h
-    simpa only [innerMorseCompressionAmplitude, rpow_natCast] using h
+    rw [rpow_ofNat, mul_pow, ← pow_mul] at h
+    simpa only [innerMorseCompressionAmplitude, rpow_ofNat, Nat.reduceMul] using h
   have hE1 : 1 ≤ radialE m := one_le_exp_iff.mpr (radialQ_nonneg m)
   have hpower : radialE m ^ (27 : ℝ) ≤ radialE m ^ (80 : ℝ) :=
     rpow_le_rpow_of_exponent_le hE1 (by norm_num)
