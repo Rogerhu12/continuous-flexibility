@@ -143,7 +143,8 @@ theorem inverseChartFieldsOn_fixed_loss_material_bound
   · have hb := hcomposed
       (fun q => h q * divergenceOperator A h q / |planeJacobian F q|)
       (hsmooth.1.contDiffAt (hU.mem_nhds hx)) (fun k => (hphysicalJets k).1) n
-    simpa only [Function.comp_def, inverseChartPotential] using hb
+    unfold inverseChartPotential
+    simpa only [Function.comp_def] using hb
   · intro i
     rw [inverseChartCoefficient_component_comp A F G h i]
     exact hcomposed (canonicalCoefficientComponent i (coordinatePrincipalDensity A F h))
@@ -216,7 +217,8 @@ theorem inverseChartFields_mixed_fixed_loss_material_bound
   intro z hz W hW A F G h U V hU hV hfields hG hmaps hraw hGjets a b x hx
   have hsmooth := contDiffOn_coordinatePhysicalFields hU A F h hfields
   have hpotential : ContDiffOn ℝ ∞ (inverseChartPotential A F G h) V := by
-    simpa only [Function.comp_def, inverseChartPotential] using
+    unfold inverseChartPotential
+    simpa only [Function.comp_def] using
       hsmooth.1.comp hG hmaps
   have hcoefficient (i : Fin 3) : ContDiffOn ℝ ∞
       (canonicalCoefficientComponent i (inverseChartPrincipalCoefficients A F G h)) V := by

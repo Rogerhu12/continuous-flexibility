@@ -64,11 +64,11 @@ theorem differentiableAt_mixedCoefficient_of_operator_action
     intro hd
     have hs := hd.sub
       (hLa.mul ((differentiableAt_fst.sub (differentiableAt_const p.1)).const_mul t))
-    have he :
-        (fun q : PolarPoint =>
-          (L.a q * (t * (q.1 - p.1)) + L.b q) - L.a q * (t * (q.1 - p.1))) =
-        L.b := by
+    have he : ((fun q : PolarPoint => L.a q * (t * (q.1 - p.1)) + L.b q) -
+        L.a * (fun y : PolarPoint =>
+          t * ((Prod.fst : PolarPoint → ℝ) - (fun _ : PolarPoint => p.1)) y)) = L.b := by
       funext q
+      simp only [Pi.sub_apply, Pi.mul_apply]
       ring
     rw [he] at hs
     exact hLb hs

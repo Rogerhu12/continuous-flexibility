@@ -89,6 +89,8 @@ theorem scalarFlow_angularSmooth_of_variationalFormula
       ((hregular n).continuous_iteratedDeriv n le_rfl).continuousOn
     apply hc.congr
     intro p hp
+    change iteratedDeriv n (fun x => Θ (x, p.2)) p.1 =
+      iteratedDeriv n (fun x => Ψ (x, p.2)) p.1
     rw [hslice p.2 hp.2]
 
 end ContinuousFlexibility.Analysis

@@ -74,7 +74,7 @@ theorem exists_positiveActualEndpointCollar_family
       ∀ i : ι, ∃ Y : PolarPoint → ℝ,
         ContDiff ℝ ∞ Y ∧
         (∀ x θ, B ≤ deriv (fun t => Y (t, θ)) x) ∧
-        (∀ side θ, Y (if side then r else l, θ) = if side then v + m else v) ∧
+        (∀ (side : Bool) θ, Y (if side then r else l, θ) = if side then v + m else v) ∧
         (∀ k ≤ n + 1, ∀ θ,
           radialBoundaryJet (fun p => Y (p.1, φ i p)) (if root then r else l) k θ =
             radialBoundaryJet
@@ -188,7 +188,7 @@ theorem exists_positiveActualEndpointCollar_family
     have hs := (hXgerm i θ).comp_tendsto
       ((continuous_id.prodMk (continuous_const (y := θ))).tendsto c)
     have hj : radialBoundaryJet (X i) c k θ = radialBoundaryJet (N i) c k θ := by
-      simpa only [radialBoundaryJet, Function.comp_def] using
+      simpa only [radialBoundaryJet, Function.comp_def, id_eq] using
         (hs.iteratedDeriv k).eq_of_nhds
     exact (hphysical k hk θ).trans hj
   · intro side hs θ

@@ -130,7 +130,8 @@ theorem heterogeneousBilinear_tame_bounds_on_ball_of_smoothTame
   have he₁ : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
   simpa only [hjet, Fin.prod_univ_two, Fin.sum_univ_two, he₀, he₁, Finset.prod_singleton,
     hv₀, hv₁, pairGrading, add_apply, Seminorm.comp_apply,
-    LinearMap.fst_apply, LinearMap.snd_apply, map_zero, zero_add, add_zero,
+    LinearMap.fst_apply, LinearMap.snd_apply, Prod.fst_zero, Prod.snd_zero,
+    map_zero, zero_add, add_zero,
     mul_comm (q (s + loss) f) (p base e)] using hb
 
 end ContinuousFlexibility.Analysis
