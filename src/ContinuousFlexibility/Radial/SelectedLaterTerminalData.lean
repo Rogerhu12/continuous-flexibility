@@ -138,8 +138,11 @@ theorem SeedRetainedPair.exists_later_terminalData_of_supplies
         energyCost * slope side * exp (-2 * attenuation) := by
     obtain ⟨hnonneg, hbound⟩ := (hcap side).2.2 (cut false) (cut true)
       (hLayer side).1 (hLayer side).2
+    change (∫ r in (cut false)..(cut true), terminalCapCutoffEnergy D.w (χ side) (U side) r) /
+        standInBoundaryScale ((j : ℝ) ^ 2) (D.w (cut side)) (cut side) ≤
+      slope side * energyCost * exp (-2 * attenuation) at hbound
     rw [abs_of_nonneg hnonneg]
-    convert hbound using 1 <;> ring
+    simpa only [mul_comm (slope side) energyCost] using hbound
   refine ⟨{
     matching := M
     cut_order := horder
@@ -204,6 +207,5 @@ theorem SeedRetainedPair.exists_later_terminalData_of_supplies
     change standInBoundarySlope (bufferSign i) ((j : ℝ) ^ 2)
       (matchingCut D M i) (U (selectedTerminalSide i)) = slope (selectedTerminalSide i)
     rw [hMcut i, selectedTerminalSide_sign i]
-    rfl
 
 end ContinuousFlexibility.Radial
