@@ -112,7 +112,7 @@ theorem referenceZeroModeBorderCorrection_uniform_bound {D : ReferenceData}
           Real.exp (2 * (-M) * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) ≤
           Real.exp (2 * radialS (D.cellIndex m)) := by
         apply Real.exp_le_exp.mpr
-        have hq := mul_nonneg hM (radialQ_nonneg (D.cellIndex m))
+        have hq := mul_nonneg hM (Radial.radialQ_nonneg (D.cellIndex m))
         have hs := mul_nonneg (sub_nonneg.mpr hγ.2) (radialS_nonneg (D.cellIndex m))
         nlinarith only [hq, hs]
       have hsq : referenceZeroModeBorderCorrection D r ^ 2 ≤ B₀ ^ 2 := by

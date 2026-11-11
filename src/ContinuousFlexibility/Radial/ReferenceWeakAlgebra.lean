@@ -22,8 +22,8 @@ theorem integral_angularMean_add {D : ReferenceData} (hab : D.a ≤ D.b)
     (∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ) + g (r, θ))) =
       (∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ))) +
         ∫ r in D.a..D.b, radialAngularMean (fun θ => g (r, θ)) := by
-  have hfg : Integrable (fun x => f x + g x) (radialPhysicalMeasure D) := by
-    simpa only [Pi.add_apply] using hf.add hg
+  have hfg : Integrable (fun x => f x + g x) (radialPhysicalMeasure D) :=
+    hf.fun_add hg
   rw [integral_angularMean_eq_physical hab hfg,
     integral_angularMean_eq_physical hab hf,
     integral_angularMean_eq_physical hab hg,

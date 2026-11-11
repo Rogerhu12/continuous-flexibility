@@ -45,7 +45,7 @@ theorem zeroMode_indicator_interval_integral
     _ = ∫ t in radialCore D, (Ioo u v).indicator (fun t => c * f t) t := by
       apply integral_congr_ae
       exact ae_of_all _ (fun t => by
-        by_cases ht : t ∈ Ioo u v <;> simp only [Set.indicator, ht, if_pos, if_neg, zero_mul])
+        by_cases ht : t ∈ Ioo u v <;> simp [Set.indicator, ht])
     _ = ∫ t in Ioo u v, c * f t := by
       rw [integral_indicator measurableSet_Ioo,
         Measure.restrict_restrict measurableSet_Ioo, inter_eq_left.mpr hI]

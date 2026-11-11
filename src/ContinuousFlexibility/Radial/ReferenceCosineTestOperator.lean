@@ -32,9 +32,16 @@ theorem referenceCircleCosine_full_periodic (n : ℕ) :
   intro θ
   change referenceCircleCosine n ((θ + 2 * Real.pi : ℝ) : AddCircle Real.pi) =
     referenceCircleCosine n (θ : AddCircle Real.pi)
-  rw [show θ + 2 * Real.pi = (θ + Real.pi) + Real.pi by ring,
-    referenceCircleCosine_periodic n (θ + Real.pi),
-    referenceCircleCosine_periodic n θ]
+  have h₁ :
+      referenceCircleCosine n (((θ + Real.pi) + Real.pi : ℝ) : AddCircle Real.pi) =
+        referenceCircleCosine n ((θ + Real.pi : ℝ) : AddCircle Real.pi) :=
+    referenceCircleCosine_periodic n (θ + Real.pi)
+  have h₂ :
+      referenceCircleCosine n ((θ + Real.pi : ℝ) : AddCircle Real.pi) =
+        referenceCircleCosine n (θ : AddCircle Real.pi) :=
+    referenceCircleCosine_periodic n θ
+  rw [show θ + 2 * Real.pi = (θ + Real.pi) + Real.pi by ring]
+  exact h₁.trans h₂
 
 theorem referenceCircleCosine_deriv_deriv (n : ℕ) (θ : ℝ) :
     deriv (deriv (fun t : ℝ => referenceCircleCosine n (t : AddCircle Real.pi))) θ =
@@ -183,13 +190,25 @@ theorem referenceCosineCoefficient_radialPDE {w : ℝ → ℝ}
           deriv w r / r * (angularPartial (angularPartial ψ) (r, θ) *
             referenceCircleCosine n (θ : AddCircle Real.pi))) := by
       funext θ
-      rw [Radial.radialPDE_eq_polar_jets (hw.differentiable (by simp) r) hψ]
+      rw [Radial.radialPDE_eq_polar_jets (x := (r, θ))
+        (hw.differentiable (by simp) r) hψ]
       ring
     rw [heq,
       radialAngularMean_add_of_continuous
+        (f := fun θ => deriv w r *
+          (radialPartial ψ (r, θ) * referenceCircleCosine n (θ : AddCircle Real.pi)) +
+          w r * (radialPartial (radialPartial ψ) (r, θ) *
+            referenceCircleCosine n (θ : AddCircle Real.pi)))
+        (g := fun θ => deriv w r / r *
+          (angularPartial (angularPartial ψ) (r, θ) *
+            referenceCircleCosine n (θ : AddCircle Real.pi)))
         ((continuous_const.mul hc₁).add (continuous_const.mul hc₂))
         (continuous_const.mul hc₃),
       radialAngularMean_add_of_continuous
+        (f := fun θ => deriv w r *
+          (radialPartial ψ (r, θ) * referenceCircleCosine n (θ : AddCircle Real.pi)))
+        (g := fun θ => w r * (radialPartial (radialPartial ψ) (r, θ) *
+          referenceCircleCosine n (θ : AddCircle Real.pi)))
         (continuous_const.mul hc₁) (continuous_const.mul hc₂)]
     simp only [radialAngularMean_const_mul]
   have hφ := contDiff_referenceCosineCoefficient hψ n

@@ -38,6 +38,7 @@ theorem matchedModePartitionPiece_memLp {D : ReferenceData}
   have hc : matchedPartitionCoefficient D m r ≤ 1 := by
     simpa only [Finset.sum_singleton] using
       (matchedPartitionCoefficient_partial hP {m} hr).2
+  simp only [Pi.mul_apply]
   rw [norm_mul, Real.norm_eq_abs,
     abs_of_nonneg (matchedPartitionCoefficient_nonneg D m r)]
   exact (mul_le_mul_of_nonneg_right hc (norm_nonneg (u r))).trans_eq (one_mul _)
@@ -58,7 +59,7 @@ theorem matchedModePartitionPiece_ae (D : ReferenceData)
 theorem matchedModePartition_sum_ae (D : ReferenceData)
     (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
     (s : Finset ℕ) (u : RadialModeL2 D) :
-    ((∑ m ∈ s, matchedModePartitionPiece D hD hP m u) : ℝ → ℝ)
+    (((∑ m ∈ s, matchedModePartitionPiece D hD hP m u) : RadialModeL2 D) : ℝ → ℝ)
       =ᵐ[radialHilbertMeasure D]
         (fun r => (∑ m ∈ s, matchedPartitionCoefficient D m r) * u r) := by
   have hall : ∀ᵐ r ∂radialHilbertMeasure D, ∀ m : ℕ,

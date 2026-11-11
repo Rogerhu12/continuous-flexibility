@@ -46,7 +46,9 @@ theorem exists_referenceGraph_homogeneous_unique {D : ReferenceData}
     obtain ⟨G, hG⟩ := hmode (2 * (n + 1)) (by omega) ⟨n + 1, by omega⟩
     have hsource : (f, if 2 * (n + 1) = 2 then (0 : RadialSource).2 else 0) =
         (0 : RadialModePair D) := by
-      simp only [hf0, Prod.snd_zero, ite_self]
+      apply Prod.ext
+      · exact hf0
+      · simp only [Prod.snd_zero, ite_self]
     have heq := hG.2
       (u, -(if 2 * (n + 1) = 2 then U.2 else 0))
       (f, if 2 * (n + 1) = 2 then (0 : RadialSource).2 else 0) hgraph
@@ -78,8 +80,12 @@ theorem exists_referenceGraph_homogeneous_unique {D : ReferenceData}
     rw [hz]
     cases n with
     | zero =>
-        simpa only [referenceCosineCoefficient, referenceCosineCoeff_zero] using
-          hU.zeroMode_eq_zero hD hB hγ
+        have hcoef : referenceCosineCoefficient U.1 0 =
+            (fun r => radialAngularMean (fun θ => U.1 (r, θ))) := by
+          funext r
+          exact referenceCosineCoeff_zero (fun θ => U.1 (r, θ))
+        rw [hcoef]
+        exact hU.zeroMode_eq_zero hD hB hγ
     | succ n =>
         simpa only [referenceCosineCoefficient_succ_eq_referenceMode] using (hmodal n).1
 

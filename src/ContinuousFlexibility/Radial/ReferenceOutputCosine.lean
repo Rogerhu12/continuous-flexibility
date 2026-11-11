@@ -39,7 +39,9 @@ theorem referenceOutputCosine_periodic (D : ReferenceData) (γ M aL ν : ℝ)
   rintro ⟨r, θ⟩
   change aL * D.chiLeft (r + 0) + referenceCosineRepresentative a (r + 0, θ + Real.pi) =
     aL * D.chiLeft r + referenceCosineRepresentative a (r, θ)
-  rw [add_zero, referenceCosineRepresentative_periodic a r θ]
+  rw [add_zero]
+  exact congrArg (fun t : ℝ => aL * D.chiLeft r + t)
+    (referenceCosineRepresentative_periodic a r θ)
 
 theorem referenceOutputCosine_even (D : ReferenceData) (γ M aL ν : ℝ)
     (a : lp (fun _ : ℕ => Lp ℝ 2 (referenceRadialWeightedMeasure D γ (-M))) 2)
