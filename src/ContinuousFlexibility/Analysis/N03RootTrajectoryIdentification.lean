@@ -120,7 +120,7 @@ theorem n03_exists_local_rootTrajectory_equation
       σ * minusCharacteristicSpeed (originalCoefficients D S C z) (r + σ * t, f t) :=
     hraw
   have hlin : HasDerivAt (fun s : ℝ => r + σ * s) σ t := by
-    simpa only [mul_one] using ((hasDerivAt_id t).const_mul σ).const_add r
+    simpa only [mul_one, id_eq] using ((hasDerivAt_id t).const_mul σ).const_add r
   have hd := (hstored.2.2.1 (r + σ * t) htphysical).comp t hlin
   have he : (fun u => L.minusFlow z m u ι) ∘ (fun s : ℝ => r + σ * s) = f := by
     funext s
@@ -191,7 +191,8 @@ theorem n03_controlledRootFlow_eq_storedFlow_germ
   have hperiod := periodic_localizedRootFields hS C g r σ hR z
   refine ⟨η, hη, hηone, ?_⟩
   intro x hx
-  exact rootRescaledFlow_eq_storedTrajectory hη hδ Real.pi_ne_zero hregular.1 hregular.2
-    hperiod.1 hperiod.2 hΘ (by simp only [f, mul_zero, add_zero]) hcont hode hx
+  have hinit : f 0 = L.minusFlow z m r ι := by simp only [f, mul_zero, add_zero]
+  exact rootRescaledFlow_eq_storedTrajectory (f := f) hη hδ Real.pi_ne_zero
+    hregular.1 hregular.2 hperiod.1 hperiod.2 hΘ hinit hcont hode hx
 
 end ContinuousFlexibility.Analysis

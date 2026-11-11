@@ -86,11 +86,11 @@ theorem rootAngularProduct_fixed_loss_material_bound
     hχjet.directionalPartial hχ (0, 1) (by simp)
   have hφsq : PointwiseMaterialJetBound p squareLoss D z
       (fun y => angularPartial (extendedRootEven G) y ^ 2) (0, θ) := by
-    simpa only [pow_two] using
+    simpa only [PointwiseMaterialJetBound, pow_two] using
       hsquares z hzSquare _ _ (0, θ) hdφ hdφ hdφjet hdφjet
   have hχsq : PointwiseMaterialJetBound p squareLoss D z
       (fun y => angularPartial (extendedRootOddCoefficient G) y ^ 2) (0, θ) := by
-    simpa only [pow_two] using
+    simpa only [PointwiseMaterialJetBound, pow_two] using
       hsquares z hzSquare _ _ (0, θ) hdχ hdχ hdχjet hdχjet
   have hχsqP := hχsq.mono hp le_rfl (fun n => (hD n).le)
     (fun n => le_add_of_nonneg_right (rootRadialCubeJetConstant_pos n).le)

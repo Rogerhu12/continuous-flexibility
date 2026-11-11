@@ -26,7 +26,7 @@ theorem norm_iteratedFDeriv_comp_linear_le_at
     (hf : ContDiffAt ℝ ∞ f (L x)) (n : ℕ) :
     ‖iteratedFDeriv ℝ n (f ∘ L) x‖ ≤ ‖iteratedFDeriv ℝ n f (L x)‖ * ‖L‖ ^ n := by
   obtain ⟨U, hU, hxU, hfU⟩ := hf.contDiffOn' (m := (n : ℕ∞ω)) (by simp) (by simp)
-  have hf' : ContDiffOn ℝ n f U := by simpa only [insert_univ, univ_inter] using hfU
+  have hf' : ContDiffOn ℝ n f U := by simpa using hfU
   have hpre : IsOpen (L ⁻¹' U) := hU.preimage L.continuous
   have he := L.iteratedFDerivWithin_comp_right hf' hU.uniqueDiffOn hpre.uniqueDiffOn hxU le_rfl
   rw [iteratedFDerivWithin_of_isOpen n hpre hxU,

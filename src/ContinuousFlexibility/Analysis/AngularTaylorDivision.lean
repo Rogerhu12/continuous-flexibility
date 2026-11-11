@@ -33,7 +33,9 @@ theorem contDiff_angularTaylorQuotient
       ((contDiff_snd.mul (contDiff_fst.snd.sub contDiff_const)).add contDiff_const)
   have h := contDiff_compact_parameterIntegral (w := fun _ : ℝ => (1 : ℝ))
     continuous_const ((contDiff_mixedDerivative hF 0 1).comp hmap)
-  simpa only [angularTaylorQuotient, one_smul, Function.comp_def] using h
+  change ContDiff ℝ ∞ (fun p : PolarPoint =>
+    ∫ t in (0 : ℝ)..1, mixedDerivative 0 1 F (p.1, t * (p.2 - c) + c))
+  simpa only [one_smul, Function.comp_def] using h
 
 theorem angularTaylorQuotient_at_center (F : PolarPoint → ℝ) (c r : ℝ) :
     angularTaylorQuotient F c (r, c) = mixedDerivative 0 1 F (r, c) := by

@@ -28,6 +28,7 @@ private theorem conformal_periodic_deriv
   have h₁ := ((hf.differentiable (by simp) (θ + T)).hasDerivAt).comp θ
     ((hasDerivAt_id θ).add_const T)
   have he : (f ∘ fun t : ℝ => t + T) = f := funext hp
+  simp only [id_eq] at h₁
   rw [he, mul_one] at h₁
   exact h₁.deriv.symm
 
@@ -64,7 +65,12 @@ theorem positiveConformalBoundaryData_periodic
       | zero =>
           refine ⟨?_, by omega⟩
           intro θ
-          cases side <;> simp [positiveConformalBoundaryData]
+          have he : positiveConformalBoundaryData D E v 0 side =
+              (fun η => if side then η else v) := by
+            funext η
+            rw [positiveConformalBoundaryData]
+          rw [he]
+          cases side <;> simp
       | succ n =>
           have hp : Periodic (positiveConformalBoundaryData D E v (n + 1) side) T := by
             intro θ
@@ -88,7 +94,8 @@ theorem positiveConformalBoundaryData_reflect
   induction n using Nat.strong_induction_on generalizing side θ with
   | h n ih =>
       cases n with
-      | zero => cases side <;> simp only [positiveConformalBoundaryData, ↓reduceIte]
+      | zero => cases side <;> simp only [positiveConformalBoundaryData,
+          Bool.false_eq_true, ↓reduceIte]
       | succ n =>
           have hd (j : ℕ) (s : Bool) :
               deriv (positiveConformalBoundaryData D E v (n - j) s) (-θ) =

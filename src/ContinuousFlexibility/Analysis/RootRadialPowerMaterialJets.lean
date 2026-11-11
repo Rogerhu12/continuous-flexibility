@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.PositivePowerMaterialJets
 import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
+import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual radial power jets at a root

@@ -43,7 +43,9 @@ theorem positiveConformal_values
     field_simp [ha.ne'] <;> ring
   · unfold positiveConformalSpeed positiveConformalShear
     have hsquare := Real.sq_sqrt hdet.le
-    field_simp [ha.ne'] <;> nlinarith [hsquare]
+    field_simp [ha.ne']
+    simp only [mul_comm (A.c p) (A.a p)]
+    nlinarith [hsquare]
   · rw [positiveConformalHeight, inv_pow, Real.sq_sqrt hs.le]
     unfold positiveConformalSpeed
     field_simp [ha.ne', hs.ne'] <;> ring

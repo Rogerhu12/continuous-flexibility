@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.PointwiseMaterialJetOperations
 import ContinuousFlexibility.Geometry.EuclideanRigidity
+import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
 # Actual planar Jacobian jets from actual chart jets
