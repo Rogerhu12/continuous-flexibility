@@ -103,7 +103,7 @@ structure InnerSelectedPhysicalGeometry (S : SelectedTailData)
   centralHeight_pos : 0 < centralHeight
   central_profile : ∀ x ∈ Icc (-X₀) X₀,
     D.w (centralRadius x) = centralHeight * centralDensityRoot x ^ 2 * deriv centralRadius x
-  middle_deriv_pos : ∀ side r,
+  middle_deriv_pos : ∀ (side : Bool) r,
     r ∈ Icc
       (if side then centralRadius X₀ else
         radiusScale false * innerMorseChainCut S.chain false S.chain.index 1)

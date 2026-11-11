@@ -15,14 +15,14 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 private theorem innerMorseInnerCenterMap_injective (K : ℕ) :
-    Function.Injective (fun _ : PUnit => innerMorseInnerCenter K) :=
+    Function.Injective (fun _ : Unit => innerMorseInnerCenter K) :=
   fun a b _ => Subsingleton.elim a b
 
 private theorem innerMorseInnerCenterTail_cover (K : ℕ) (p : Fin (2 * K + 1)) :
-    (∃ _ : PUnit, p = innerMorseInnerCenter K) ∨
+    (∃ _ : Unit, p = innerMorseInnerCenter K) ∨
       ∃ sp : Bool × Fin K, p = innerMorseInnerTailSlot K sp.1 sp.2 := by
   rcases innerMorseInnerModel_cases K p with h | ⟨side, q, h⟩
-  · exact Or.inl ⟨PUnit.unit, h⟩
+  · exact Or.inl ⟨Unit.unit, h⟩
   · exact Or.inr ⟨(side, q), h⟩
 
 section DependentModels
@@ -33,7 +33,7 @@ variable {K : ℕ} {β : Fin (2 * K + 1) → Type*}
 
 def innerMorseInnerModelElim (p : Fin (2 * K + 1)) : β p :=
   innerDisjointCoverElim
-    (fun _ : PUnit => innerMorseInnerCenter K)
+    (fun _ : Unit => innerMorseInnerCenter K)
     (fun sp : Bool × Fin K => innerMorseInnerTailSlot K sp.1 sp.2)
     (innerMorseInnerCenterMap_injective K) (innerMorseInnerTailSlot_injective K)
     (fun _ sp => (innerMorseInnerTailSlot_ne_center K sp.1 sp.2).symm)
@@ -43,17 +43,17 @@ def innerMorseInnerModelElim (p : Fin (2 * K + 1)) : β p :=
 theorem innerMorseInnerModelElim_center :
     innerMorseInnerModelElim center tails (innerMorseInnerCenter K) = center :=
   innerDisjointCoverElim_left (β := β)
-    (fun _ : PUnit => innerMorseInnerCenter K)
+    (fun _ : Unit => innerMorseInnerCenter K)
     (fun sp : Bool × Fin K => innerMorseInnerTailSlot K sp.1 sp.2)
     (innerMorseInnerCenterMap_injective K) (innerMorseInnerTailSlot_injective K)
     (fun _ sp => (innerMorseInnerTailSlot_ne_center K sp.1 sp.2).symm)
     (innerMorseInnerCenterTail_cover K)
-    (fun _ => center) (fun sp => tails sp.1 sp.2) PUnit.unit
+    (fun _ => center) (fun sp => tails sp.1 sp.2) Unit.unit
 
 theorem innerMorseInnerModelElim_tail (side : Bool) (p : Fin K) :
     innerMorseInnerModelElim center tails (innerMorseInnerTailSlot K side p) = tails side p :=
   innerDisjointCoverElim_right (β := β)
-    (fun _ : PUnit => innerMorseInnerCenter K)
+    (fun _ : Unit => innerMorseInnerCenter K)
     (fun sp : Bool × Fin K => innerMorseInnerTailSlot K sp.1 sp.2)
     (innerMorseInnerCenterMap_injective K) (innerMorseInnerTailSlot_injective K)
     (fun _ sp => (innerMorseInnerTailSlot_ne_center K sp.1 sp.2).symm)
