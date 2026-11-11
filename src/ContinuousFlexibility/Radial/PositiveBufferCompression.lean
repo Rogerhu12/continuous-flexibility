@@ -69,10 +69,10 @@ theorem positiveBuffer_compression_of_corrected_data {B : BufferData}
     calc
       ‖G‖ ≤ B.B₀ + 8 * ∑ i, ‖g i‖ ^ 2 := hGnorm
       _ ≤ B.B₀ + 8 * (K ^ 2 * ∑ i, (B.mass i)⁻¹ ^ 2) :=
-        add_le_add_left (mul_le_mul_of_nonneg_left hs (by norm_num)) _
+        add_le_add le_rfl (mul_le_mul_of_nonneg_left hs (show (0 : ℝ) ≤ 8 by norm_num))
       _ = B.B₀ + (8 * K ^ 2) * ∑ i, (B.mass i)⁻¹ ^ 2 := by ring
       _ ≤ B.B₀ + C * ∑ i, (B.mass i)⁻¹ ^ 2 :=
-        add_le_add_left (mul_le_mul_of_nonneg_right hKsqC hmass) _
+        add_le_add le_rfl (mul_le_mul_of_nonneg_right hKsqC hmass)
   · intro i
     have hm0 := (hm i).1
     have hdiv : B.mass i / C ≤ B.mass i := by

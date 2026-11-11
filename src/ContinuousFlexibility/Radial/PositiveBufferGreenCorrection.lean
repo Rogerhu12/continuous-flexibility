@@ -90,13 +90,15 @@ theorem correction_smooth_equation (j : Fin 2) :
         D.profiles.sourceFunction j x -
           positiveBufferBorderedScalar B.potential B.bordered
             (D.correction hB H hH j) * B.borderFunction x := by
-  let W := D.correction hB H hH j
+  have hgraph := D.correction_graph hB H hH j
+  unfold correctionRepresentative
+  generalize hW : D.correction hB H hH j = W at hgraph ⊢
   let s := positiveBufferBorderedScalar B.potential B.bordered W
-  have hweak : WeakSchrodingerGraph B.potential
+  have hweak := positiveBufferFullGraph_field_weak hgraph
+  change WeakSchrodingerGraph B.potential
       (positiveBufferEnergyCoordinate B.potential 0
         (positiveBufferBorderedField B.potential B.bordered W))
-      (D.source j - s • B.border) :=
-    positiveBufferFullGraph_field_weak (D.correction_graph hB H hH j)
+      (D.source j - s • B.border) at hweak
   have hsource : ((D.source j - s • B.border : RadialL2) : ℝ → ℝ) =ᵐ[volume]
       (fun x => D.profiles.sourceFunction j x - s * B.borderFunction x) := by
     filter_upwards [Lp.coeFn_sub (D.source j) (s • B.border),
@@ -104,7 +106,10 @@ theorem correction_smooth_equation (j : Fin 2) :
       with x hsub hsmul hsource hborder
     rw [hsub]
     simp only [Pi.sub_apply, hsource, hsmul, Pi.smul_apply, smul_eq_mul, hborder]
-  exact positiveBufferEnergyRepresentative_global_smooth hB.2.2.2.2.1
+  exact positiveBufferEnergyRepresentative_global_smooth
+    (f := fun x => D.profiles.sourceFunction j x - s * B.borderFunction x)
+    (F := D.source j - s • B.border)
+    hB.2.2.2.2.1
     ((D.source_smooth j).sub (hB.2.2.2.2.2.2.1.const_mul s))
     (positiveBufferBorderedField B.potential B.bordered W) hweak hsource
 
@@ -129,7 +134,7 @@ theorem correction_exterior_equation (i j : Fin 2) {x : ℝ} (hx : x ∈ bufferE
   have hσ := buffer_action_pos hB i
   have he := D.correction_homogeneous hB H hH i j (t := positiveBufferCoordinate B i x)
     (by linarith)
-  simpa only [positiveBufferPoint_coordinate] using he
+  simpa only [positiveBufferPoint_coordinate hB i x] using he
 
 theorem correction_state_bound (hHnorm : ‖H‖ ≤ B.B₀) (j : Fin 2) :
     ‖positiveBufferBorderedState B.potential B.bordered (D.correction hB H hH j)‖ ≤
