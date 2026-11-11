@@ -44,7 +44,11 @@ theorem n05CanonicalSourcePieceLift_even (S : PhysicalSpacesData)
     Function.Even (fun θ => n05CanonicalSourcePieceLift S C K m u (r, θ)) := by
   intro θ
   dsimp only [n05CanonicalSourcePieceLift]
-  rw [n05CanonicalEvenPeriodicRepresentative_even S K m u _ θ]
+  exact congrArg (fun x : ℝ =>
+    |deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) r| /
+      K.height (C.referenceState, 0) m (r, 0) * x)
+    (n05CanonicalEvenPeriodicRepresentative_even S K m u
+      ((K.chart (C.referenceState, 0) m (r, 0)).1) θ)
 
 /-- A single physical source selection on all canonical sequences. Its
 definition is independent of the volume level witnessing membership. -/
@@ -61,10 +65,12 @@ theorem n05CanonicalSourceLift_periodic (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S) (F : CanonicalSequence S K) :
     Function.Periodic (n05CanonicalSourceLift S C K F) (0, Real.pi) := by
   classical
-  intro p
-  simp only [n05CanonicalSourceLift, Prod.fst_add, add_zero]
+  rintro ⟨r, θ⟩
+  simp only [Prod.mk_add_mk, add_zero, n05CanonicalSourceLift]
   split_ifs
-  · exact n05CanonicalSourcePieceLift_periodic S C K _ _ p
+  · simpa only [Prod.mk_add_mk, add_zero] using
+      (n05CanonicalSourcePieceLift_periodic S C K (n05PhysicalPieceIndex S K r)
+        (F (n05PhysicalPieceIndex S K r)) (r, θ))
   · rfl
 
 theorem n05CanonicalSourceLift_even (S : PhysicalSpacesData)
@@ -85,9 +91,10 @@ theorem n05CanonicalSourceLift_eq_piece
     (m : ℕ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
     n05CanonicalSourceLift S C K F p = n05CanonicalSourcePieceLift S C K m (F m) p := by
   classical
+  have hi : n05PhysicalPieceIndex S K p.1 = m := n05PhysicalPieceIndex_eq h04 hp.1
   simp only [n05CanonicalSourceLift, if_pos (show ∃ n,
-    p.1 ∈ Ioo (K.physicalLeft n) (K.physicalRight n) from ⟨m, hp.1⟩),
-    n05PhysicalPieceIndex_eq h04 hp.1]
+    p.1 ∈ Ioo (K.physicalLeft n) (K.physicalRight n) from ⟨m, hp.1⟩)]
+  rw [hi]
 
 /-- The local selection is exactly the inverse of the frozen source
 multiplier, using the actual Jacobian of the actual controlled chart. -/
