@@ -31,6 +31,12 @@ theorem coupled_liftSectorParameter_mem_coupledNeighborhood
   simpa only [liftSectorParameter, add_sub_cancel_left, sectorGrading,
     Seminorm.comp_apply, Submodule.subtype_apply] using hz.1
 
+private theorem coupled_firstJet_map_four
+    {X E : Type*} [AddCommGroup X] [Module ℝ X] [AddCommGroup E] [Module ℝ E]
+    (Φ : X →ₗ[ℝ] E) {v a b c d : X} (hv : v = a + b + c + d) :
+    Φ v = Φ a + Φ b + Φ c + Φ d := by
+  rw [hv, map_add, map_add, map_add]
+
 private theorem coupled_firstJet_four_evaluations
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     {U : Set (StateDirections S × ℝ)}
@@ -49,9 +55,7 @@ private theorem coupled_firstJet_four_evaluations
   let Φ : StateDirections S →ₗ[ℝ] E := out.comp
     ((projectiveJetHeadLinear J.D 0 z Fin.elim0).toLinearMap.comp
       (LinearMap.inl ℝ (StateDirections S) ℝ))
-  have hv := congrArg Φ (coupled_sector_direction_decomposition v)
-  rw [map_add, map_add, map_add] at hv
-  exact hv
+  exact coupled_firstJet_map_four Φ (coupled_sector_direction_decomposition v)
 
 private theorem coupled_scalar_numeric_recovery {a e n k rhs : ℝ}
     (h : a + e + n + k = rhs) : a + e + n + k + 0 = rhs := by

@@ -110,9 +110,10 @@ theorem coupledRecoveryRegularFormula_eq (R : ReturnEquationData S) :
     (congrArg₂ (fun (η : HeightPair S × ℝ) (κ : CircleSpace S) =>
       y.2.val - z.2 • B.heightRow z η.1 - B.circleColumn z κ) hheight hκ).trans
       (coupledRecoveryRemainderLinear_apply hM B G (coupledControlInverse S B G) z hlo y).symm
-  exact (Prod.ext (congrArg Prod.fst hheight)
-    (Prod.ext (congrArg Prod.snd hheight)
-      (Prod.ext hκ (congrArg (fun u : CircleSpace S => R.chartIncrement z (R.inverse u)) hrem)))).trans
+  exact (congrArg₂ (fun (η : HeightPair S × ℝ) (κψ : CircleSpace S × CircleSpace S) =>
+      (η.1, (η.2, κψ))) hheight
+    (congrArg₂ Prod.mk hκ
+      (congrArg (fun u : CircleSpace S => R.chartIncrement z (R.inverse u)) hrem))).trans
     (coupledRecoveryLinear_apply hM R B G (coupledControlInverse S B G) z hlo y).symm
 
 end ContinuousFlexibility.Statements

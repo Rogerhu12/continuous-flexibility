@@ -27,6 +27,15 @@ private theorem coupled_regularizing_middle_le
     {a b c d : ℝ} (h : a + b + c ≤ d) (ha : 0 ≤ a) (hc : 0 ≤ c) : b ≤ d := by
   linarith only [h, ha, hc]
 
+private theorem coupled_regularizing_near_size
+    {a b ε δ : ℝ} (ha : a < ε) (hb : b < ε) (he : ε ≤ δ / 4)
+    (hd : 0 < δ) : a + b < δ := by
+  linarith only [ha, hb, he, hd]
+
+private theorem coupled_regularizing_small_size_le_two
+    {a b ε : ℝ} (ha : a < ε) (hb : b < ε) (he : ε ≤ 1) : a + b ≤ 2 := by
+  linarith only [ha, hb, he]
+
 section ParameterAlgebra
 
 variable {E : Type*} [AddCommGroup E] [Module ℝ E]
@@ -39,7 +48,8 @@ private theorem coupled_regularizing_zero_small
 private theorem coupled_regularizing_pair_value
     (q : ℕ → Seminorm ℝ E) (n : ℕ) (z : E × ℝ) :
     pairGrading q realGrading n z = q n z.1 + |z.2| := by
-  simp only [pairGrading_apply, realGrading, coe_normSeminorm, Real.norm_eq_abs]
+  exact (ContinuousFlexibility.Analysis.pairGrading_apply q realGrading n z).trans
+    (congrArg (fun x : ℝ => q n z.1 + x) (Real.norm_eq_abs z.2))
 
 private theorem coupled_regularizing_pair_sub_zero
     (q : ℕ → Seminorm ℝ E) (n : ℕ) (z : E × ℝ) :
@@ -65,7 +75,7 @@ private theorem coupled_regularizing_scaledRow_apply
     [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [ContinuousSMul ℝ F]
     (a : ℝ) (L : E →L[ℝ] F) (v : E) :
     coupled_regularizing_scaledRow a L v = a • L v :=
-  ContinuousLinearMap.smul_apply a L v
+  _root_.smul_apply L a v
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -135,7 +145,7 @@ theorem coupled_exists_feedback_regularizing_neighborhood
     refine ⟨coupled_sectorNeighborhood_mono hb hεε hεε hz, ?_⟩
     have hd := (solve_sectorGrading_monotone S hbNear z.1).trans_lt hz.1
     exact (coupled_regularizing_pair_sub_zero (sectorGrading S) bNear z).trans_lt
-      (by linarith only [hd, hz.2, hεδ, hδ])
+      (coupled_regularizing_near_size hd hz.2 hεδ hδ)
   have hrow : ∀ s, bA ≤ s → ∃ c : ℝ, 0 ≤ c ∧
       ∀ z ∈ sectorNeighborhood S base' ε' ε', ∀ η,
       (S.circle (3 / 4 : ℝ)).grading s (A z η) ≤
@@ -163,7 +173,7 @@ theorem coupled_exists_feedback_regularizing_neighborhood
     intro z hz
     have hd := (solve_sectorGrading_monotone S hbLow z.1).trans_lt hz.1
     exact (coupled_regularizing_pair_value (sectorGrading S) (bA + loss) z).trans_le
-      (by linarith only [hd, hz.2, hεone])
+      (coupled_regularizing_small_size_le_two hd hz.2 hεone)
   refine ⟨base', ε', hb, hε', hεε, lA + loss, bA, ?_⟩
   exact coupled_regularizing_composition_bound hp
     (A := fun z => (A z).toLinearMap)

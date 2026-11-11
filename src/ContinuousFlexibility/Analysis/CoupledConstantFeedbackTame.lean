@@ -55,7 +55,7 @@ theorem coupledConstantFeedbackInverse_linearFamilyTame :
       (fun x => (coupledConstantFeedbackInverse hS B G (z x)).toLinearMap) := by
   let hbound := controlRestriction_grading_bound B
   let b0 : ℕ := hbound.choose
-  let c0 : ℝ≥0 := hbound.choose_spec.choose
+  let c0 : NNReal := hbound.choose_spec.choose
   have hc0 : ∀ u : CircleSpace S,
       ‖B.restriction u‖ ≤ (c0 : ℝ) * (S.circle (3 / 4 : ℝ)).grading b0 u :=
     hbound.choose_spec.choose_spec

@@ -76,9 +76,10 @@ theorem coupledKernelBaseJoint_hasLineDerivAt (n : ℕ) (z h : X × X) (w : Fin 
         K n z.1 (Fin.cons h.2 w)) z h := by
   let A (ψ : X) : X →L[ℝ] Y := coupledKernelOuterLinear (K n ψ) w
   have hc : Continuous (fun y : X × X => (A y.1).toLinearMap y.2) := by
-    have hm : Continuous (fun y : X × X => (y.1, Fin.cons y.2 w)) :=
-      continuous_fst.prodMk (continuous_pi (fun i =>
-        Fin.cases continuous_snd (fun _ => continuous_const) i))
+    have hm : Continuous (fun y : X × X =>
+        (y.1, (Fin.cons y.2 w : Fin (n + 1) → X))) :=
+      continuous_fst.prodMk
+        (continuous_snd.finCons (A := fun _ : Fin (n + 1) => X) continuous_const)
     simpa only [A, ContinuousLinearMap.coe_coe, coupledKernelOuterLinear_apply] using
       (hK n).comp hm
   have hd : HasProjectiveLineDerivAt (fun ψ => (A ψ).toLinearMap z.2)
@@ -95,10 +96,14 @@ theorem coupledKernelJointJet_continuous (n : ℕ) :
       coupledKernelJointJet K n z.1 z.2) := by
   have hbase (k : ℕ) : Continuous (fun z : (X × X) × (Fin k → X × X) =>
       K k z.1.1 (Fin.cons z.1.2 (fun i => (z.2 i).1))) := by
-    apply (hK k).comp
-    refine continuous_fst.fst.prodMk (continuous_pi (fun i => ?_))
-    refine Fin.cases continuous_fst.snd (fun j => ?_) i
-    exact ((continuous_apply j).comp continuous_snd).fst
+    have htail : Continuous (fun z : (X × X) × (Fin k → X × X) =>
+        fun i : Fin k => (z.2 i).1) :=
+      continuous_pi (fun i => ((continuous_apply i).comp continuous_snd).fst)
+    have hm : Continuous (fun z : (X × X) × (Fin k → X × X) =>
+        (z.1.1, (Fin.cons z.1.2 (fun i => (z.2 i).1) : Fin (k + 1) → X))) :=
+      continuous_fst.fst.prodMk
+        (continuous_fst.snd.finCons (A := fun _ : Fin (k + 1) => X) htail)
+    exact (hK k).comp hm
   cases n with
   | zero =>
     have he : (fun z : (X × X) × (Fin 0 → X × X) =>
@@ -111,19 +116,27 @@ theorem coupledKernelJointJet_continuous (n : ℕ) :
     apply (hbase (n + 1)).add
     apply continuous_finsetSum
     intro i _
-    apply (hK n).comp
-    refine continuous_fst.fst.prodMk (continuous_pi (fun j => ?_))
-    refine Fin.cases (((continuous_apply i).comp continuous_snd).snd) (fun j => ?_) j
-    exact ((continuous_apply (i.succAbove j)).comp continuous_snd).fst
+    have htail : Continuous (fun z : (X × X) × (Fin (n + 1) → X × X) =>
+        fun j : Fin n => (z.2 (i.succAbove j)).1) :=
+      continuous_pi (fun j => ((continuous_apply (i.succAbove j)).comp continuous_snd).fst)
+    have hm : Continuous (fun z : (X × X) × (Fin (n + 1) → X × X) =>
+        (z.1.1, (Fin.cons (z.2 i).2 (fun j => (z.2 (i.succAbove j)).1) :
+          Fin (n + 1) → X))) :=
+      continuous_fst.fst.prodMk
+        ((((continuous_apply i).comp continuous_snd).snd).finCons
+          (A := fun _ : Fin (n + 1) => X) htail)
+    exact (hK n).comp hm
 
 private theorem coupled_cons_fst {n : ℕ} (u : X × X) (v : Fin n → X × X) :
-    (fun i => (Fin.cons u v i).1) = Fin.cons u.1 (fun i => (v i).1) := by
+    (fun i : Fin (n + 1) => ((Fin.cons u v : Fin (n + 1) → X × X) i).1) =
+      Fin.cons u.1 (fun i => (v i).1) := by
   funext i
   exact Fin.cases rfl (fun _ => rfl) i
 
 private theorem coupled_cons_omit {n : ℕ} (u : X × X)
     (v : Fin (n + 1) → X × X) (i : Fin (n + 1)) :
-    (fun j => (Fin.cons u v (i.succ.succAbove j)).1) =
+    (fun j : Fin (n + 1) =>
+      ((Fin.cons u v : Fin (n + 2) → X × X) (i.succ.succAbove j)).1) =
       Fin.cons u.1 (fun j => (v (i.succAbove j)).1) := by
   funext j
   refine Fin.cases ?_ (fun j => ?_) j
@@ -140,9 +153,11 @@ theorem coupledKernelJointJet_hasLineDerivAt (n : ℕ) (z h : X × X)
     have hd := coupledKernelBaseJoint_hasLineDerivAt K hK hline 0 z h Fin.elim0
     have hw : w = Fin.elim0 := Subsingleton.elim _ _
     subst w
+    have hnil : (fun i : Fin 0 => (Fin.elim0 i : X × X).1) =
+        (Fin.elim0 : Fin 0 → X) := Subsingleton.elim _ _
     simpa only [coupledKernelJointJet_zero_apply, coupledKernelJointJet_succ_apply,
       coupled_cons_fst, Fin.sum_univ_succ, Fin.sum_univ_zero, Fin.cons_zero,
-      Fin.cons_succ, Fin.zero_succAbove, add_zero] using hd
+      Fin.cons_succ, Fin.zero_succAbove, hnil, add_zero] using hd
   | succ n =>
     have hbase := coupledKernelBaseJoint_hasLineDerivAt K hK hline (n + 1) z h
       (fun i => (w i).1)

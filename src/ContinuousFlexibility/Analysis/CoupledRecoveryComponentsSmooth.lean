@@ -66,6 +66,55 @@ private theorem coupled_recovery_constant_projection_smoothTameOn
 
 end GenericProjections
 
+section GenericRecoveryComposition
+
+variable {X Y E : Type*}
+  [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+  [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  {F : ℕ → Type*} [∀ n, NormedAddCommGroup (F n)] [∀ n, NormedSpace ℝ (F n)]
+  [∀ n, CompleteSpace (F n)] {bond : ∀ n, F (n + 1) →L[ℝ] F n}
+
+private theorem coupled_recovery_parameterApply_smoothTameOn
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y} {r : ℕ → Seminorm ℝ E}
+    {s : ℕ → Seminorm ℝ (ProjectiveLimit F bond)}
+    (hp : Monotone p) (htp : WithSeminorms p)
+    (htq : WithSeminorms q) (htr : WithSeminorms r)
+    {U : Set X} {V : Set Y} {parameter : X → Y} {value : X → E}
+    {f : Y × E → ProjectiveLimit F bond}
+    (hz : SmoothTameOn p q U parameter) (hv : SmoothTameOn p r U value)
+    (hf : SmoothTameOn (pairGrading q r) s (V ×ˢ univ) f)
+    (hmap : MapsTo parameter U V) :
+    SmoothTameOn p s U (fun x => f (parameter x, value x)) := by
+  letI : IsTopologicalAddGroup X := htp.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ X := htp.continuousSMul
+  letI : IsTopologicalAddGroup Y := htq.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ Y := htq.continuousSMul
+  letI : IsTopologicalAddGroup E := htr.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ E := htr.continuousSMul
+  have htqr := withSeminorms_pairGrading htq htr
+  letI : LocallyConvexSpace ℝ (Y × E) := htqr.toLocallyConvexSpace
+  exact smoothTameOn_comp_generic hp htp htqr
+    (smoothTameOn_prodMk_generic hp htp hz hv) hf
+    (fun x hx => ⟨hmap hx, mem_univ _⟩)
+
+private theorem coupled_recovery_inverse_remainder_smoothTameOn
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ (ProjectiveLimit F bond)}
+    (hp : Monotone p) (htp : WithSeminorms p) (htq : WithSeminorms q) (hq : Monotone q)
+    {U : Set X} {f g h : X → ProjectiveLimit F bond}
+    (hf : SmoothTameOn p q U f) (hg : SmoothTameOn p q U g) (hh : SmoothTameOn p q U h)
+    (L : ProjectiveLimit F bond →ₗ[ℝ] ProjectiveLimit F bond)
+    {loss base : ℕ} (hL : IsTameLinear q q L loss base) :
+    SmoothTameOn p q U (fun x => L (f x - g x - h x)) := by
+  have hrem := coupled_smoothTameOn_sub hp (coupled_smoothTameOn_sub hp hf hg) hh
+  let LC : ProjectiveLimit F bond →L[ℝ] ProjectiveLimit F bond :=
+    hL.toContinuousLinearMap htq htq hq
+  have hmain := smoothTameOn_postcompose_generic hp htp htq hrem LC hL
+  exact smoothTameOn_congr hmain
+    (fun x _ => IsTameLinear.toContinuousLinearMap_apply hL htq htq hq _)
+
+end GenericRecoveryComposition
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {G : ScalarInverseData S} {P : ResidualData S} {B : ControlColumnData S}
@@ -165,12 +214,6 @@ theorem coupled_recoveredCircleSolution_smoothTameOn
   have ha := tamePairGrading_monotone hp hr
   have hta := withSeminorms_pairGrading htp htr
   have htc : WithSeminorms c := withSeminorms_graded _ _
-  have htph := withSeminorms_pairGrading htp (coupled_heightPairGrading_withSeminorms S)
-  have htpk := withSeminorms_pairGrading htp (coupledConstantCircleGrading_withSeminorms hM)
-  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × HeightPair S) :=
-    htph.toLocallyConvexSpace
-  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × CoupledConstantCircle hM) :=
-    htpk.toLocallyConvexSpace
   letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
     (hM.2.1 n).isComplete.completeSpace_coe
   have hU : IsOpen U := coupled_sectorNeighborhood_isOpen S base ε q0
@@ -192,15 +235,14 @@ theorem coupled_recoveredCircleSolution_smoothTameOn
       (coupled_recovery_snd_smoothTameOn hy)
   have hrow := smoothTameOn_mono (coupled_scaledHeightRow_smoothTameOn hRef h8)
     (hU.prod isOpen_univ) (Set.prod_mono hsub (subset_refl _))
-  have hrowη := smoothTameOn_comp_generic ha hta htph
-    (smoothTameOn_prodMk_generic ha hta hz (coupled_recoveredHeight_smoothTameOn h9)) hrow
-    (fun z hz => ⟨hz.1, mem_univ _⟩)
+  have hrowη := coupled_recovery_parameterApply_smoothTameOn ha hta htp
+    (coupled_heightPairGrading_withSeminorms S) hz
+    (coupled_recoveredHeight_smoothTameOn h9) hrow (fun z hz => hz.1)
   have hcolumn := smoothTameOn_mono (coupled_constantCircleColumn_smoothTameOn hM hRef h8)
     (hU.prod isOpen_univ) (Set.prod_mono hsub (subset_refl _))
-  have hcolumnκ := smoothTameOn_comp_generic ha hta htpk
-    (smoothTameOn_prodMk_generic ha hta hz
-      (coupled_recoveredConstantControl_smoothTameOn hM h9)) hcolumn
-    (fun z hz => ⟨hz.1, mem_univ _⟩)
+  have hcolumnκ := coupled_recovery_parameterApply_smoothTameOn ha hta htp
+    (coupledConstantCircleGrading_withSeminorms hM) hz
+    (coupled_recoveredConstantControl_smoothTameOn hM h9) hcolumn (fun z hz => hz.1)
   have hcolumnActual : SmoothTameOn a c (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         B.circleColumn (liftSectorParameter S C z.1)
@@ -209,19 +251,12 @@ theorem coupled_recoveredCircleSolution_smoothTameOn
     intro z hz
     exact congrArg (B.circleColumn (liftSectorParameter S C z.1))
       (coupledRecoveredConstantComponent_val hM h9 hz.1 z.2)
-  have hrem := coupled_smoothTameOn_sub ha (coupled_smoothTameOn_sub ha hyCircle hrowη) hcolumnActual
   let hinverse := h2.2.2.2.2.2.2.2.2.2.1
   let li : ℕ := hinverse.choose
   let hbase := hinverse.choose_spec
   let bi : ℕ := hbase.choose
   have hi : IsTameLinear c c R.inverse li bi := hbase.choose_spec
-  let Inv : CircleSpace S →L[ℝ] CircleSpace S :=
-    hi.toContinuousLinearMap htc htc (gradedSeminorm_monotone _ _)
-  have hInv := smoothTameOn_comp_generic ha hta htc hrem
-    (smoothTameOn_continuousLinear Inv hi) (fun _ _ => mem_univ _)
-  apply smoothTameOn_congr hInv
-  intro z hz
-  exact IsTameLinear.toContinuousLinearMap_apply hi htc htc
-    (gradedSeminorm_monotone _ _) _
+  exact coupled_recovery_inverse_remainder_smoothTameOn ha hta htc
+    (gradedSeminorm_monotone _ _) hyCircle hrowη hcolumnActual R.inverse hi
 
 end ContinuousFlexibility.Statements

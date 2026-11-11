@@ -77,6 +77,29 @@ private theorem coupled_feedback_control_input
       (ContinuousLinearMap.fst ℝ X E) (scalar_pair_fst_isTame p q)
   exact smoothTameOn_prodMk_generic hpq htpq hfst hρ
 
+private theorem coupled_feedback_forward_difference
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ E}
+    (hp : Monotone p) (htp : WithSeminorms p)
+    (hq : Monotone q) (htq : WithSeminorms q)
+    (e : E ≃L[ℝ] ProjectiveLimit F bond)
+    {U : Set X} (hU : IsOpen U) (ρ : E →L[ℝ] ControlBanach)
+    {operator : X → E → E} {response : X → ControlBanach → E}
+    (hoperator : SmoothTameOn (pairGrading p q) q (U ×ˢ univ)
+      (fun z : X × E => operator z.1 z.2))
+    (hresponse : SmoothTameOn (pairGrading p controlGrading) q (U ×ˢ univ)
+      (fun z : X × ControlBanach => response z.1 z.2)) :
+    SmoothTameOn (pairGrading p q) q (U ×ˢ univ)
+      (fun z : X × E => operator z.1 z.2 - response z.1 (ρ z.2)) := by
+  have hpq : Monotone (pairGrading p q) := tamePairGrading_monotone hp hq
+  have htpq : WithSeminorms (pairGrading p q) := withSeminorms_pairGrading htp htq
+  have htpc : WithSeminorms (pairGrading p controlGrading) :=
+    withSeminorms_pairGrading htp coupled_controlGrading_withSeminorms
+  letI : LocallyConvexSpace ℝ (X × ControlBanach) := htpc.toLocallyConvexSpace
+  have hin := coupled_feedback_control_input hp htp hq htq hU ρ
+  have hr := coupled_smoothTameOn_comp_equiv hpq htpq htpc e hin hresponse
+    (fun z hz => ⟨hz.1, mem_univ _⟩)
+  exact coupled_smoothTameOn_sub hpq hoperator hr
+
 end AbstractFeedback
 
 private theorem coupled_feedback_mean_bound
@@ -158,23 +181,24 @@ theorem coupledConstantFeedbackOperator_smoothTameOn
         coupledConstantFeedbackOperator hM B G
           (liftSectorParameter S C z.1) z.2) := by
   let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
-  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) := pairGrading (sectorGrading S) realGrading
-  let k : ℕ → Seminorm ℝ (CoupledConstantCircle hM) := coupledConstantCircleGrading hM
-  have hp : Monotone p := tamePairGrading_monotone
-    (solve_sectorGrading_monotone S) weighted_realGrading_monotone
-  have htp : WithSeminorms p := withSeminorms_pairGrading
-    (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
-  have hpk := tamePairGrading_monotone hp (coupledConstantCircleGrading_monotone hM)
-  have htpk := withSeminorms_pairGrading htp (coupledConstantCircleGrading_withSeminorms hM)
-  have hin := coupled_feedback_control_input hp htp
+  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
+    (hM.2.1 n).isComplete.completeSpace_coe
+  letI : ∀ n, CompleteSpace ↥(subLevel (coupledConstantCircleSubmodule hM) n) := fun n =>
+    subLevel_completeSpace (coupledConstantCircleSubmodule hM) n
+  have h := coupled_feedback_forward_difference
+    (p := pairGrading (sectorGrading S) realGrading)
+    (q := coupledConstantCircleGrading hM)
+    (operator := fun z u => coupledControlCircleOperator hM B (liftSectorParameter S C z) u)
+    (response := fun z u => coupledConstantHeightResponse hM B G (liftSectorParameter S C z) u)
+    (tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone)
+    (withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S)
+      weighted_realGrading_withSeminorms)
     (coupledConstantCircleGrading_monotone hM) (coupledConstantCircleGrading_withSeminorms hM)
+    (subspaceEquiv (coupledConstantCircleSubmodule hM) (coupledConstantCircle_isClosed hM))
     h8.2.1 (coupledConstantControlRestriction hM B)
-  have hr := coupled_smoothTameOn_comp_constantCircle hM hpk htpk
-    (withSeminorms_pairGrading htp coupled_controlGrading_withSeminorms) hin
+    (coupledControlCircleOperator_smoothTameOn_of_n08 hM hRef h8)
     (coupledConstantHeightResponse_smoothTameOn hS hRef hG h8)
-    (fun z hz => ⟨hz.1, mem_univ _⟩)
-  have hJ := coupledControlCircleOperator_smoothTameOn_of_n08 hM hRef h8
-  apply smoothTameOn_congr (coupled_smoothTameOn_sub hpk hJ hr)
+  apply smoothTameOn_congr h
   intro z hz
   exact (coupledConstantFeedbackOperator_apply hM B G
     (liftSectorParameter S C z.1) z.2).symm

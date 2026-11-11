@@ -37,7 +37,9 @@ private theorem coupled_logProfile_sample_majorant
     _ ≤ (2 * B) * (K * H ^ ((3 / 4 : ℝ) / 16)) * P :=
       mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left hweight (mul_nonneg (by norm_num) hB)) hP
-    _ = _ := by norm_num; ring
+    _ = _ := by
+      rw [show ((3 / 4 : ℝ) / 16) = 3 / 64 by norm_num]
+      ring
 
 theorem coupled_weightedLogProfile_point_jet_bound
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -93,8 +95,13 @@ theorem coupled_logProfile_point_jet_bound
     let K : ℝ := hinverse.choose
     have hK : 0 < K := hinverse.choose_spec.1
     let hKb := hinverse.choose_spec.2
-    exact ⟨K, hK.le, fun r hr => by
-      simpa only [coupled_logProfile_radialJet_eq_iteratedDeriv] using hKb r hr⟩
+    refine ⟨K, hK.le, fun r hr => ?_⟩
+    calc
+      |iteratedDeriv j (fun t => (D.w t)⁻¹) r| =
+          |radialJet j (fun t => (D.w t)⁻¹) r| :=
+        congrArg (fun f : ℝ → ℝ => |f r|)
+          (coupled_logProfile_radialJet_eq_iteratedDeriv j (fun t => (D.w t)⁻¹)).symm
+      _ ≤ K * T.M r := hKb r hr
   have hbG (j : ℕ) (hj : j ≤ s) : ∃ K : ℝ, 0 ≤ K ∧
       ∀ v r, r ∈ Ioo D.a D.b →
       |iteratedDeriv j (fun t => D.w t * coupled_stateLogProfile D S C v t) r| ≤
@@ -167,7 +174,10 @@ theorem coupled_logProfile_decay_jet_bound
   have hH := (hT.2.1 r hr).2.1
   have hM : 0 ≤ T.M r := zero_le_one.trans (hT.2.1 r hr).2.2.2
   have hb : T.H r ^ (3 / 128 : ℝ) ≤ A := by
-    simpa only [Real.rpow_zero, mul_one] using hAb r hr
+    calc
+      T.H r ^ (3 / 128 : ℝ) = T.H r ^ (3 / 128 : ℝ) * T.M r ^ (0 : ℝ) := by
+        rw [Real.rpow_zero, mul_one]
+      _ ≤ A := hAb r hr
   exact coupled_logProfile_decay_majorant hK hM
     (apply_nonneg (stateGrading S (s + (base + loss))) v) hH (hKb v r hr) hb
 
