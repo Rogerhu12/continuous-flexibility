@@ -73,9 +73,16 @@ theorem r11b_product_orthogonal_partialSums_tendsto
     simpa only [r11bTensorL2_norm_sq, hunit, mul_one] using hsq
   have hv := (r11b_orthogonal_series_norm_sq
     (fun n => r11bTensorL2 (hc n) (he n)) hvortho hvsq).1
-  simp_rw [r11b_tensor_finset_sum_toLp]
-  change Tendsto (fun N => ∑ n ∈ Finset.range N, r11bTensorL2 (hc n) (he n))
-    atTop (𝓝 (∑' n, r11bTensorL2 (hc n) (he n)))
-  exact hv.hasSum.tendsto_sum_nat
+  have hlim : Tendsto (fun N => r11bTensorFinsetVector c e hc he (Finset.range N))
+      atTop (𝓝 (∑' n, r11bTensorL2 (hc n) (he n))) :=
+    hv.hasSum.tendsto_sum_nat
+  have hfun : (fun N =>
+      MemLp.toLp (α := α × β) (E := ℝ) (p := 2) (μ := μ.prod ν)
+        (r11bTensorFinsetSum c e (Finset.range N))
+        (r11b_tensor_finset_sum_memLp c e hc he (Finset.range N))) =
+      (fun N => r11bTensorFinsetVector c e hc he (Finset.range N)) := by
+    funext N
+    exact r11b_tensor_finset_sum_toLp c e hc he (Finset.range N)
+  exact hfun.symm ▸ hlim
 
 end ContinuousFlexibility.Radial

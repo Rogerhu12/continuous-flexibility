@@ -106,6 +106,8 @@ theorem r11b_weakNormalDerivative_tensor {D : ReferenceData} (hab : D.a < D.b)
     rw [integral_prod_symm _ hleft, integral_prod_symm _ hright, ← integral_neg]
     apply integral_congr_ae
     exact Eventually.of_forall fun θ => by
+      change (∫ r in radialCore D, (c r * e θ) * radialPartial ψ (r, θ)) =
+        -(∫ r in radialCore D, (d r * e θ) * ψ (r, θ))
       have hu : (fun r => (c r * e θ) * radialPartial ψ (r, θ)) =
           (fun r => (c r * radialPartial ψ (r, θ)) * e θ) := by
         funext r
