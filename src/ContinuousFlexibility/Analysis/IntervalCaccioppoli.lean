@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.IntervalFluxEnergy
 import Mathlib.Tactic.Positivity
+import Mathlib.MeasureTheory.Function.L2Space
 
 /-!
 # Caccioppoli estimates from the conormal energy identity
@@ -110,9 +111,9 @@ theorem cutoff_caccioppoli_of_energy_identity {α : Type*} [MeasurableSpace α]
       hx.2.2.1 hx.2.2.2.1 hx.2.2.2.2
   have hmono := integral_mono_ae (hHi.neg.sub (hXi.const_mul 2))
     (((hEi.const_mul (1 / 2)).add (hfi.const_mul (1 / 2))).add (hui.const_mul S)) hp
-  rw [integral_sub hHi.neg (hXi.const_mul 2), integral_neg,
-    integral_add ((hEi.const_mul (1 / 2)).add (hfi.const_mul (1 / 2))) (hui.const_mul S),
-    integral_add (hEi.const_mul (1 / 2)) (hfi.const_mul (1 / 2))] at hmono
+  rw [integral_sub' hHi.neg (hXi.const_mul 2), integral_neg',
+    integral_add' ((hEi.const_mul (1 / 2)).add (hfi.const_mul (1 / 2))) (hui.const_mul S),
+    integral_add' (hEi.const_mul (1 / 2)) (hfi.const_mul (1 / 2))] at hmono
   simp only [integral_const_mul] at hmono
   rw [← heq] at hmono
   have hA : (∫ x, w x * χ x ^ 2 * d x ^ 2 ∂μ) ≤
@@ -207,10 +208,8 @@ theorem interval_cutoff_caccioppoli {a b : ℝ} (hab : a < b)
         2 * (∫ x in Ioo a b, w x * χ x * deriv χ x * u x * deriv u x) := by
     rw [hEeq, hHeq, hXeq]
     exact interval_cutoff_energy_identity hab hu hw hloc hχ hχc hχs x₀ hx₀ q hflux
-  have hf₂ : Integrable (fun x => f x ^ 2) (volume.restrict (Ioo a b)) := by
-    simpa only [pow_two] using hf.integrable_mul hf
-  have hu₂' : Integrable (fun x => u x ^ 2) (volume.restrict (Ioo a b)) := by
-    simpa only [pow_two] using hu₂.integrable_mul hu₂
+  have hf₂ : Integrable (fun x => f x ^ 2) (volume.restrict (Ioo a b)) := hf.integrable_sq
+  have hu₂' : Integrable (fun x => u x ^ 2) (volume.restrict (Ioo a b)) := hu₂.integrable_sq
   exact cutoff_caccioppoli_of_energy_identity (volume.restrict (Ioo a b)) hK hL
     ((ae_restrict_mem measurableSet_Ioo).mono fun x hx => hcoef x hx)
     hEi.integrableOn hDi.integrableOn hXi.integrableOn hHi.integrableOn hf₂ hu₂' heq
