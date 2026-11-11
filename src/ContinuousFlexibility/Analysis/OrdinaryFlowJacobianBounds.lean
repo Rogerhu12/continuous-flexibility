@@ -41,7 +41,7 @@ theorem ordinaryFlowFamily_angular_eq_deriv_sub_one
   have href := hasDerivAt_ordinaryFlow_zeroParameter hflow
     (reference_mem_stateNeighborhood S C base hε) m hp p.2
   simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero, iteratedDeriv_one]
-  rw [deriv_sub hcurrent href.differentiableAt, href.deriv]
+  exact (hcurrent.hasDerivAt.sub href).deriv
 
 /-- N01 implies the actual uniform angular Jacobian bounds on a single
 smaller neighborhood, including the two radial endpoints of every component. -/
