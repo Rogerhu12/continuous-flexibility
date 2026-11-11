@@ -28,21 +28,27 @@ theorem hasDerivAt_intervalIntegral_of_compact_rectangle
     HasDerivAt (fun s => ∫ r in a..b, F s r) (∫ r in a..b, G t r) t := by
   obtain ⟨N, hN⟩ := (isCompact_Icc.prod isCompact_Icc).exists_bound_of_continuousOn hG
   have hFi (s : ℝ) (hs : s ∈ Icc l h) : IntervalIntegrable (F s) volume a b := by
-    apply ContinuousOn.intervalIntegrable_of_Icc _ hab.le
-    exact hF.comp (continuous_const.prodMk continuous_id).continuousOn
-      (fun r hr => ⟨hs, hr⟩)
+    have hc : ContinuousOn (F s) (Icc a b) := by
+      simpa only [Function.comp_def, id_eq] using
+        hF.comp (continuous_const.prodMk continuous_id).continuousOn
+          (fun r hr => ⟨hs, hr⟩)
+    exact hc.intervalIntegrable_of_Icc hab.le
   have hGi (s : ℝ) (hs : s ∈ Icc l h) : IntervalIntegrable (G s) volume a b := by
-    apply ContinuousOn.intervalIntegrable_of_Icc _ hab.le
-    exact hG.comp (continuous_const.prodMk continuous_id).continuousOn
-      (fun r hr => ⟨hs, hr⟩)
+    have hc : ContinuousOn (G s) (Icc a b) := by
+      simpa only [Function.comp_def, id_eq] using
+        hG.comp (continuous_const.prodMk continuous_id).continuousOn
+          (fun r hr => ⟨hs, hr⟩)
+    exact hc.intervalIntegrable_of_Icc hab.le
   let μ := volume.restrict (Ioc a b)
   let : IsFiniteMeasure μ := ⟨by simp [μ, Real.volume_Ioc]⟩
   have hmem : ∀ᵐ r ∂μ, r ∈ Icc a b :=
     (ae_restrict_mem measurableSet_Ioc).mono fun r hr => Ioc_subset_Icc_self hr
   have hU : Ioo l h ∈ 𝓝 t := Ioo_mem_nhds ht.1 ht.2
+  have hmeas : ∀ᶠ s in 𝓝 t, AEStronglyMeasurable (F s) μ := by
+    filter_upwards [hU] with s hs
+    exact (hFi s (Ioo_subset_Icc_self hs)).1.aestronglyMeasurable
   have hInt := (hasDerivAt_integral_of_dominated_loc_of_deriv_le
-    (μ := μ) (F := F) (F' := G) (bound := fun _ => N) hU
-    (hU.mono fun s hs => (hFi s (Ioo_subset_Icc_self hs)).1.aestronglyMeasurable)
+    (μ := μ) (F := F) (F' := G) (bound := fun _ => N) hU hmeas
     (hFi t (Ioo_subset_Icc_self ht)).1
     (hGi t (Ioo_subset_Icc_self ht)).1.aestronglyMeasurable
     (hmem.mono fun r hr s hs => hN (s, r) ⟨Ioo_subset_Icc_self hs, hr⟩)

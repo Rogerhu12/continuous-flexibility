@@ -62,7 +62,7 @@ theorem circle_angleL2_reflect {f : ℝ → ℝ} (hf : Continuous f)
   have heq : (eLpNorm (fun θ => f (-θ)) 2 angleMeasure).toReal ^ 2 =
       (eLpNorm f 2 angleMeasure).toReal ^ 2 := by
     rw [circle_angleL2_sq_eq_integral hs, circle_angleL2_sq_eq_integral hf,
-      intervalIntegral.integral_comp_neg]
+      intervalIntegral.integral_comp_neg (f := fun θ : ℝ => f θ ^ 2)]
     simpa only [neg_zero, neg_add_cancel, zero_add] using hp2.intervalIntegral_add_eq (-Real.pi) 0
   nlinarith [ENNReal.toReal_nonneg (a := eLpNorm f 2 angleMeasure),
     ENNReal.toReal_nonneg (a := eLpNorm (fun θ => f (-θ)) 2 angleMeasure)]
@@ -132,6 +132,10 @@ theorem circle_angleL2_return_deriv_le {f : ℝ → ℝ}
   have hsign : ‖(-1 : ℝ) ^ s‖ₑ = 1 := by
     rw [Real.enorm_eq_ofReal_abs, abs_pow]
     norm_num
+  have hhalf : ENNReal.ofReal |(2 : ℝ)⁻¹| * (2 : ℝ≥0∞) = 1 := by
+    rw [show (2 : ℝ≥0∞) = ENNReal.ofReal (2 : ℝ) from by norm_num,
+      ← ENNReal.ofReal_mul (abs_nonneg _)]
+    norm_num
   calc
     _ ≤ ENNReal.ofReal |(2 : ℝ)⁻¹| *
         (eLpNorm (fun θ => iteratedDeriv s f (θ + t)) 2 angleMeasure +
@@ -140,8 +144,7 @@ theorem circle_angleL2_return_deriv_le {f : ℝ → ℝ}
     _ = _ := by
       rw [eLpNorm_const_smul, hsign, one_mul,
         circle_angleL2_shift hd hpd t, circle_angleL2_reflected_shift hd hpd t,
-        ← two_mul]
-      norm_num
+        ← two_mul, ← mul_assoc, hhalf, one_mul]
 
 theorem periodic_circleReturnShift_of_periodic {f : ℝ → ℝ}
     (hp : Function.Periodic f Real.pi) (t : ℝ) :

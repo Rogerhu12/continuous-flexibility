@@ -88,12 +88,14 @@ theorem scalar_flow_hasDerivAt_exp_integral
     have hs : Continuous (fun p : PolarPoint × ℝ => p.1.2) := continuous_fst.snd
     have hh : Continuous (fun p : PolarPoint × ℝ => p.1.1) := continuous_fst.fst
     have hu : Continuous (fun p : PolarPoint × ℝ => p.2) := continuous_snd
-    apply hd.comp
-    exact hs.prodMk
-      ((hF.comp (hs.prodMk continuous_const)).add
-        (hu.mul
-          ((hF.comp (hs.prodMk (continuous_const.add hh))).sub
-            (hF.comp (hs.prodMk continuous_const)))))
+    have hmap : Continuous (fun p : PolarPoint × ℝ =>
+        (p.1.2, F p.1.2 θ + p.2 * (F p.1.2 (θ + p.1.1) - F p.1.2 θ))) :=
+      hs.prodMk
+        ((hF.comp (hs.prodMk continuous_const)).add
+          (hu.mul
+            ((hF.comp (hs.prodMk (continuous_const.add hh))).sub
+              (hF.comp (hs.prodMk continuous_const)))))
+    simpa only [Function.uncurry, Function.comp_def] using hd.comp hmap
   have hA0 (s : ℝ) : A 0 s = d s (F s θ) := by
     simp only [A, add_zero, sub_self, mul_zero, add_zero, intervalIntegral.integral_const,
       sub_zero, one_smul]
@@ -119,8 +121,10 @@ theorem scalar_flow_hasDerivAt_exp_integral
     simpa only [hinit, add_sub_cancel_left] using he
   have hlim : Tendsto (fun h => Real.exp (∫ s in a..t, A h s)) (𝓝[≠] (0 : ℝ))
       (𝓝 (Real.exp (∫ s in a..t, d s (F s θ)))) := by
-    have hc := (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
-      hA a t).exp
+    have hc : Continuous (fun h => Real.exp (∫ s in a..t, A h s)) :=
+      Real.continuous_exp.comp
+        (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
+          (f := A) (by simpa only [Function.uncurry] using hA) a t)
     simpa only [hA0] using (hc.continuousAt (x := 0)).tendsto.mono_left nhdsWithin_le_nhds
   rw [hasDerivAt_iff_tendsto_slope_zero]
   apply hlim.congr'
@@ -186,7 +190,10 @@ theorem scalar_flow_hasDerivAt_exp_integral_on
     have hs' : s ∈ Icc a b := ⟨hs.1, hs.2.trans ht.2⟩
     simp only [de, Fe, closedStripExtend, projIcc_of_mem hab.le hs']
   exact (h.congr_deriv (congrArg Real.exp hint)).congr_of_eventuallyEq
-    (Eventually.of_forall fun x => (closedStripExtend_eq hab.le _ ht).symm)
+    (Eventually.of_forall fun x => by
+      change F t x = closedStripExtend hab.le (fun p : PolarPoint => F p.1 p.2) (t, x)
+      exact (closedStripExtend_eq hab.le (fun p : PolarPoint => F p.1 p.2)
+        (p := (t, x)) ht).symm)
 
 /-- The first angular derivative furnished by the variational equation is
 jointly continuous, including at the initial and terminal radii. -/
@@ -206,8 +213,10 @@ theorem scalar_flow_angular_deriv_continuousOn
     hde.comp (continuous_snd.prodMk (hFe.comp (continuous_snd.prodMk continuous_fst.snd)))
   have hc : Continuous (fun p : PolarPoint =>
       Real.exp (∫ s in a..p.1, de (s, Fe (s, p.2)))) :=
-    (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous
-      (f := fun p : PolarPoint => fun s => de (s, Fe (s, p.2))) hi continuous_fst).exp
+    Real.continuous_exp.comp
+      (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous
+        (f := fun p : PolarPoint => fun s => de (s, Fe (s, p.2)))
+        (by simpa only [Function.uncurry] using hi) continuous_fst)
   apply hc.continuousOn.congr
   intro p hp
   have h := (scalar_flow_hasDerivAt_exp_integral_on hab hd hvd hF hinit hode hp.1 p.2).deriv

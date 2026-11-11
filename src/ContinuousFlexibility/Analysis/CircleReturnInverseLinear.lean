@@ -28,11 +28,23 @@ theorem circleFourierCoeff_add {f g : ℝ → ℂ} (hf : Continuous f) (hg : Con
   have hfi : IntervalIntegrable
       (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • f x)
       volume 0 (2 * Real.pi) := by
-    simpa only [Pi.smul_apply] using (hphase.smul hf).intervalIntegrable 0 (2 * Real.pi)
+    have heq : ((fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi))) • f) =
+        (fun x => fourier (-n) (x : AddCircle (2 * Real.pi)) • f x) := by
+      funext x
+      rfl
+    have hi := (hphase.smul hf).intervalIntegrable 0 (2 * Real.pi)
+    rw [heq] at hi
+    exact hi
   have hgi : IntervalIntegrable
       (fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi)) • g x)
       volume 0 (2 * Real.pi) := by
-    simpa only [Pi.smul_apply] using (hphase.smul hg).intervalIntegrable 0 (2 * Real.pi)
+    have heq : ((fun x : ℝ => fourier (-n) (x : AddCircle (2 * Real.pi))) • g) =
+        (fun x => fourier (-n) (x : AddCircle (2 * Real.pi)) • g x) := by
+      funext x
+      rfl
+    have hi := (hphase.smul hg).intervalIntegrable 0 (2 * Real.pi)
+    rw [heq] at hi
+    exact hi
   simp only [circleFourierCoeff_eq_integral, Pi.add_apply, smul_add]
   rw [intervalIntegral.integral_add hfi hgi, smul_add]
 
@@ -51,7 +63,13 @@ theorem circleCosineCoeff_add {f g : ℝ → ℝ} (hf : Continuous f) (hg : Cont
       circleFourierCoeff (fun x => Complex.ofReal (f x) + Complex.ofReal (g x)) n =
         circleFourierCoeff (fun x => Complex.ofReal (f x)) n +
           circleFourierCoeff (fun x => Complex.ofReal (g x)) n := by
-    simpa only [Pi.add_apply] using circleFourierCoeff_add hfc hgc n
+    have heq : ((fun x => Complex.ofReal (f x)) + (fun x => Complex.ofReal (g x))) =
+        (fun x => Complex.ofReal (f x) + Complex.ofReal (g x)) := by
+      funext x
+      rfl
+    have hadd := circleFourierCoeff_add hfc hgc n
+    rw [heq] at hadd
+    exact hadd
   simp only [circleCosineCoeff, Pi.add_apply, Complex.ofReal_add, ha, Complex.add_re]
   ring
 

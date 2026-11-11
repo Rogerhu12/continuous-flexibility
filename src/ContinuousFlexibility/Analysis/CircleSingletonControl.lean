@@ -40,20 +40,32 @@ theorem circleSingletonField_energy (T : MaterialData) (γ : ℝ) (s m : ℕ) (c
           eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => c))
             2 angleMeasure ^ 2 := by
   classical
-  rw [tsum_eq_single m]
-  · simp only [circleSingletonField, if_pos rfl]
-  · intro n hn
-    have hf : circleSingletonField m c n = fun _ : ℝ => 0 := by
+  let term (n : ℕ) : ℝ≥0∞ :=
+    ∑ j : CircleJetIndex s,
+      ENNReal.ofReal ((T.M (T.sample n) ^ (j.val 1).val *
+        T.H (T.sample n) ^ (-γ)) ^ 2) *
+        eLpNorm (iteratedDeriv (j.val 0).val (circleSingletonField m c n))
+          2 angleMeasure ^ 2
+  have hzero : ∀ n : ℕ, n ≠ m → term n = 0 := by
+    intro n hn
+    have hf : circleSingletonField m c n = fun _ : ℝ => (0 : ℝ) := by
       funext θ
       exact if_neg hn
+    unfold term
     rw [hf]
     apply Finset.sum_eq_zero
     intro j _
-    have hd : iteratedDeriv (j.val 0).val (fun _ : ℝ => 0) = fun _ => 0 := by
+    have hd : iteratedDeriv (j.val 0).val (fun _ : ℝ => (0 : ℝ)) =
+        fun _ : ℝ => (0 : ℝ) := by
       funext θ
       exact iteratedDeriv_fun_const_zero
     rw [hd, eLpNorm_zero]
     simp
+  have hmain : circleSingletonField m c m = fun _ : ℝ => c := by
+    funext θ
+    exact if_pos rfl
+  have hs : (∑' n : ℕ, term n) = term m := tsum_eq_single m hzero
+  simpa only [term, hmain] using hs
 
 theorem circleSingletonField_member (T : MaterialData) (γ : ℝ) (m : ℕ) (c : ℝ) :
     CircleMember T γ (circleSingletonField m c) := by
@@ -69,7 +81,7 @@ theorem circleSingletonField_member (T : MaterialData) (γ : ℝ) (m : ℕ) (c :
     apply ENNReal.mul_lt_top ENNReal.ofReal_lt_top
     rw [pow_two]
     have h := (memLp_angleMeasure_iteratedDeriv_of_contDiff
-      (show ContDiff ℝ ∞ (fun _ : ℝ => c) from contDiff_const) (j.val 0).val).2
+      (show ContDiff ℝ ∞ (fun _ : ℝ => c) from contDiff_const) (j.val 0).val)
     exact ENNReal.mul_lt_top h h
 
 def circleSingletonFieldLinear (m : ℕ) : ℝ →ₗ[ℝ] (ℕ → ℝ → ℝ) where
@@ -104,11 +116,11 @@ theorem circleSingletonLinear_mean {T : MaterialData} {γ : ℝ} {S : CircleMode
   field_simp
 
 private theorem constant_iteratedDeriv_L2_le (b : ℕ) :
-    (eLpNorm (iteratedDeriv b (fun _ : ℝ => 1)) 2 angleMeasure).toReal ≤
-      (eLpNorm (fun _ : ℝ => 1) 2 angleMeasure).toReal := by
+    (eLpNorm (iteratedDeriv b (fun _ : ℝ => (1 : ℝ))) 2 angleMeasure).toReal ≤
+      (eLpNorm (fun _ : ℝ => (1 : ℝ)) 2 angleMeasure).toReal := by
   by_cases hb : b = 0
   · simp only [hb, iteratedDeriv_zero, le_refl]
-  · have hd : iteratedDeriv b (fun _ : ℝ => 1) = fun _ => 0 := by
+  · have hd : iteratedDeriv b (fun _ : ℝ => (1 : ℝ)) = fun _ : ℝ => (0 : ℝ) := by
       funext θ
       simp only [iteratedDeriv_const, if_neg hb]
     rw [hd, eLpNorm_zero, ENNReal.toReal_zero]
@@ -117,7 +129,7 @@ private theorem constant_iteratedDeriv_L2_le (b : ℕ) :
 /-- The constant depends only on the output order, not on the sample. -/
 def circleSingletonNormConstant (s : ℕ) : ℝ :=
   Real.sqrt (Fintype.card (CircleJetIndex s) : ℝ) *
-    (eLpNorm (fun _ : ℝ => 1) 2 angleMeasure).toReal
+    (eLpNorm (fun _ : ℝ => (1 : ℝ)) 2 angleMeasure).toReal
 
 theorem circleSingletonNormConstant_nonneg (s : ℕ) :
     0 ≤ circleSingletonNormConstant s :=
@@ -129,7 +141,7 @@ theorem circleSingletonField_norm_le (T : MaterialData) (γ : ℝ) (s m : ℕ)
       circleSingletonNormConstant s *
         (T.M (T.sample m) ^ s * T.H (T.sample m) ^ (-γ)) := by
   classical
-  let R : ℝ := (eLpNorm (fun _ : ℝ => 1) 2 angleMeasure).toReal
+  let R : ℝ := (eLpNorm (fun _ : ℝ => (1 : ℝ)) 2 angleMeasure).toReal
   let W : ℝ := T.M (T.sample m) ^ s * T.H (T.sample m) ^ (-γ)
   have hM0 : 0 ≤ T.M (T.sample m) := le_trans zero_le_one hM
   have hHp : 0 ≤ T.H (T.sample m) ^ (-γ) := Real.rpow_nonneg hH _
@@ -138,17 +150,17 @@ theorem circleSingletonField_norm_le (T : MaterialData) (γ : ℝ) (s m : ℕ)
   have hfinite (j : CircleJetIndex s) :
       ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
         T.H (T.sample m) ^ (-γ)) ^ 2) *
-        eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => 1))
+        eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => (1 : ℝ)))
           2 angleMeasure ^ 2 ≠ ⊤ := by
     apply ne_of_lt
     apply ENNReal.mul_lt_top ENNReal.ofReal_lt_top
     rw [pow_two]
     have h := (memLp_angleMeasure_iteratedDeriv_of_contDiff
-      (show ContDiff ℝ ∞ (fun _ : ℝ => 1) from contDiff_const) (j.val 0).val).2
+      (show ContDiff ℝ ∞ (fun _ : ℝ => (1 : ℝ)) from contDiff_const) (j.val 0).val)
     exact ENNReal.mul_lt_top h h
   have hterm (j : CircleJetIndex s) :
       (T.M (T.sample m) ^ (j.val 1).val * T.H (T.sample m) ^ (-γ)) ^ 2 *
-        (eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => 1))
+        (eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => (1 : ℝ)))
           2 angleMeasure).toReal ^ 2 ≤ (W * R) ^ 2 := by
     have hj : (j.val 1).val ≤ s := by have := j.property; omega
     have hw := mul_le_mul_of_nonneg_right (pow_le_pow_right₀ hM hj) hHp
@@ -157,10 +169,10 @@ theorem circleSingletonField_norm_le (T : MaterialData) (γ : ℝ) (s m : ℕ)
       mul_nonneg (pow_nonneg hM0 _) hHp
     have hv := constant_iteratedDeriv_L2_le (j.val 0).val
     have hv0 := ENNReal.toReal_nonneg
-      (a := eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => 1)) 2 angleMeasure)
+      (a := eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => (1 : ℝ))) 2 angleMeasure)
     have hp : (T.M (T.sample m) ^ (j.val 1).val *
         T.H (T.sample m) ^ (-γ)) *
-        (eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => 1))
+        (eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => (1 : ℝ)))
           2 angleMeasure).toReal ≤ W * R :=
       mul_le_mul hw hv hv0 hW
     have hp0 := mul_nonneg hw0 hv0
@@ -169,7 +181,7 @@ theorem circleSingletonField_norm_le (T : MaterialData) (γ : ℝ) (s m : ℕ)
       ((∑ j : CircleJetIndex s,
         ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
           T.H (T.sample m) ^ (-γ)) ^ 2) *
-          eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => 1))
+          eLpNorm (iteratedDeriv (j.val 0).val (fun _ : ℝ => (1 : ℝ)))
             2 angleMeasure ^ 2).toReal) ≤
         (Fintype.card (CircleJetIndex s) : ℝ) * (W * R) ^ 2 := by
     rw [ENNReal.toReal_sum (fun j _ => hfinite j)]
