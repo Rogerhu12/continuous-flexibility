@@ -1,7 +1,13 @@
 import Mathlib.Analysis.Calculus.ContDiff.Deriv
+import Mathlib.Analysis.Calculus.ContDiff.Operations
+import Mathlib.Analysis.Calculus.Deriv.Inverse
+import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Analysis.Calculus.Deriv.Prod
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+import Mathlib.Order.Hom.Set
+import Mathlib.Topology.Order.IntermediateValue
+import Mathlib.Topology.Order.MonotoneContinuity
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.NormNum
 import Mathlib.Tactic.Ring
@@ -60,7 +66,7 @@ theorem returnInterpolation_strictMono {χ : ℝ} {K : ℝ → ℝ}
   by_cases hχ : χ = 1
   · simpa only [hχ, sub_self, zero_mul, one_mul, zero_add] using hK hxy
   · have hpositive : 0 < (1 - χ) * (y - x) :=
-      mul_pos (by linarith) (sub_pos.mpr hxy)
+      mul_pos (sub_pos.mpr (lt_of_le_of_ne hχ1 hχ)) (sub_pos.mpr hxy)
     have hnonnegative : 0 ≤ χ * (K y - K x) :=
       mul_nonneg hχ0 (sub_nonneg.mpr (hK hxy).le)
     nlinarith
@@ -77,6 +83,7 @@ theorem returnInterpolation_deriv_pos {χ k' : ℝ}
   · subst χ
     linarith
   · have hnonnegative : 0 ≤ χ * k' := mul_nonneg hχ0 hk'.le
+    have hχlt : χ < 1 := lt_of_le_of_ne hχ1 hχ
     nlinarith
 
 /-- Interpolation preserves the chosen lift period. -/
@@ -85,6 +92,85 @@ theorem returnInterpolation_periodic_lift {K : ℝ → ℝ} {P : ℝ}
     returnInterpolation χ K (θ + P) = returnInterpolation χ K θ + P := by
   rw [returnInterpolation_apply, returnInterpolation_apply, hK]
   ring
+
+/-- Surjectivity of the interpolation follows from a direct
+intermediate-value argument. For a target `y` and `K z = y`, the two
+points `min y z` and `max y z` bracket `y` under the interpolation. -/
+theorem returnInterpolation_surjective {χ : ℝ} {K : ℝ → ℝ}
+    (hχ0 : 0 ≤ χ) (hχ1 : χ ≤ 1) (hKcont : Continuous K)
+    (hKmono : Monotone K) (hKsurj : Function.Surjective K) :
+    Function.Surjective (returnInterpolation χ K) := by
+  have hJcont : Continuous (returnInterpolation χ K) :=
+    continuous_id.add (continuous_const.mul (hKcont.sub continuous_id))
+  intro y
+  obtain ⟨z, hz⟩ := hKsurj y
+  apply mem_range_of_exists_le_of_exists_ge hJcont
+  · refine ⟨min y z, ?_⟩
+    rw [returnInterpolation_eq_convexCombination]
+    have h₁ := mul_le_mul_of_nonneg_left (min_le_left y z) (sub_nonneg.mpr hχ1)
+    have h₂ := mul_le_mul_of_nonneg_left (hKmono (min_le_right y z)) hχ0
+    rw [hz] at h₂
+    nlinarith
+  · refine ⟨max y z, ?_⟩
+    rw [returnInterpolation_eq_convexCombination]
+    have h₁ := mul_le_mul_of_nonneg_left (le_max_left y z) (sub_nonneg.mpr hχ1)
+    have h₂ := mul_le_mul_of_nonneg_left (hKmono (le_max_right y z)) hχ0
+    rw [hz] at h₂
+    nlinarith
+
+/-- The interpolation is an actual homeomorphism of the real line. -/
+def returnInterpolationHomeomorph {χ : ℝ} {K : ℝ → ℝ}
+    (hχ0 : 0 ≤ χ) (hχ1 : χ ≤ 1) (hKcont : Continuous K)
+    (hKmono : StrictMono K) (hKsurj : Function.Surjective K) : ℝ ≃ₜ ℝ :=
+  (StrictMono.orderIsoOfSurjective (returnInterpolation χ K)
+    (returnInterpolation_strictMono hχ0 hχ1 hKmono)
+    (returnInterpolation_surjective hχ0 hχ1 hKcont hKmono.monotone hKsurj)).toHomeomorph
+
+theorem returnInterpolationHomeomorph_apply {χ : ℝ} {K : ℝ → ℝ}
+    (hχ0 : 0 ≤ χ) (hχ1 : χ ≤ 1) (hKcont : Continuous K)
+    (hKmono : StrictMono K) (hKsurj : Function.Surjective K) (θ : ℝ) :
+    returnInterpolationHomeomorph hχ0 hχ1 hKcont hKmono hKsurj θ =
+      returnInterpolation χ K θ := by
+  simp only [returnInterpolationHomeomorph, OrderIso.coe_toHomeomorph,
+    StrictMono.coe_orderIsoOfSurjective]
+
+/-- The inverse has the expected reciprocal derivative. -/
+theorem returnInterpolationHomeomorph_symm_hasDerivAt {χ : ℝ} {K : ℝ → ℝ}
+    (hχ0 : 0 ≤ χ) (hχ1 : χ ≤ 1) (hKcont : Continuous K)
+    (hKmono : StrictMono K) (hKsurj : Function.Surjective K) (y k' : ℝ)
+    (hK : HasDerivAt K k'
+      ((returnInterpolationHomeomorph hχ0 hχ1 hKcont hKmono hKsurj).symm y))
+    (hk' : 0 < k') :
+    HasDerivAt (returnInterpolationHomeomorph hχ0 hχ1 hKcont hKmono hKsurj).symm
+      (1 + χ * (k' - 1))⁻¹ y := by
+  apply HasDerivAt.of_local_left_inverse
+    (returnInterpolationHomeomorph hχ0 hχ1 hKcont hKmono hKsurj).symm.continuous.continuousAt
+    (returnInterpolation_hasDerivAt hK) (returnInterpolation_deriv_pos hχ0 hχ1 hk').ne'
+  exact Filter.Eventually.of_forall fun t => by
+    simpa only [returnInterpolationHomeomorph_apply] using
+      (returnInterpolationHomeomorph hχ0 hχ1 hKcont hKmono hKsurj).apply_symm_apply t
+
+/-- Smoothness of `K` and positivity of its derivative give a smooth
+inverse of the interpolated map at every interpolation parameter. -/
+theorem returnInterpolationHomeomorph_symm_contDiff {χ : ℝ} {K : ℝ → ℝ}
+    (hχ0 : 0 ≤ χ) (hχ1 : χ ≤ 1) (hK : ContDiff ℝ ∞ K)
+    (hKmono : StrictMono K) (hKsurj : Function.Surjective K)
+    (hKpositive : ∀ θ, 0 < deriv K θ) :
+    ContDiff ℝ ∞
+      ((returnInterpolationHomeomorph hχ0 hχ1 hK.continuous hKmono hKsurj).symm : ℝ → ℝ) := by
+  let J : ℝ ≃ₜ ℝ := returnInterpolationHomeomorph hχ0 hχ1 hK.continuous hKmono hKsurj
+  have hJ : (J : ℝ → ℝ) = returnInterpolation χ K := by
+    funext θ
+    exact returnInterpolationHomeomorph_apply hχ0 hχ1 hK.continuous hKmono hKsurj θ
+  apply J.contDiff_symm_deriv
+    (f' := fun θ => 1 + χ * (deriv K θ - 1))
+  · intro θ
+    exact (returnInterpolation_deriv_pos hχ0 hχ1 (hKpositive θ)).ne'
+  · intro θ
+    rw [hJ]
+    exact returnInterpolation_hasDerivAt ((hK.differentiable (by simp) θ).hasDerivAt)
+  · rw [hJ]
+    exact contDiff_id.add (contDiff_const.mul (hK.sub contDiff_id))
 
 /-! ## Conjugation and the two endpoint returns -/
 
@@ -152,7 +238,7 @@ theorem returnCorrection_flow_hasDerivAt
   have hpath := (hasDerivAt_id r).prodMk hJ
   convert hΦ.comp_hasDerivAt r hpath using 1
   simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
-    ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply, smul_eq_mul, mul_one]
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_eq_mul, mul_one]
   ring
 
 /-- Evaluate the velocity correction along the corrected curve. The
@@ -180,8 +266,8 @@ theorem returnCorrection_difference_integral
     convert (hdF (x + t * d)).hasDerivAt.comp t
       ((hasDerivAt_const t x).add ((hasDerivAt_id t).mul_const d)) using 1 <;> ring
   have hcontinuous : Continuous (fun t : ℝ => d * deriv F (x + t * d)) :=
-    continuous_const.mul (hF.continuous_deriv (by norm_num)).comp
-      (continuous_const.add (continuous_id.mul continuous_const))
+    continuous_const.mul ((hF.continuous_deriv_one).comp
+      (continuous_const.add (continuous_id.mul continuous_const)))
   have hFTC := intervalIntegral.integral_eq_sub_of_hasDerivAt
     (fun t _ => hderiv t) (hcontinuous.intervalIntegrable 0 1)
   rw [intervalIntegral.integral_const_mul] at hFTC
@@ -214,13 +300,23 @@ theorem returnCorrection_characteristic_slopes {a v : ℝ} (d : ℝ)
     (a * d) / a - Real.sqrt ((a * d) ^ 2 - a * (a * (d ^ 2 - v ^ 2))) / a = d - v ∧
     (a * d) / a + Real.sqrt ((a * d) ^ 2 - a * (a * (d ^ 2 - v ^ 2))) / a = d + v := by
   rw [returnCorrection_discriminant, Real.sqrt_sq (mul_nonneg ha.le hv)]
-  simp only [mul_div_cancel_left₀ _ ha.ne']
-  exact ⟨rfl, rfl⟩
+  constructor <;> simp only [mul_div_cancel_left₀ _ ha.ne']
 
 theorem returnCorrection_drift_speed (minus plus : ℝ) :
     (plus + minus) / 2 - (plus - minus) / 2 = minus ∧
     (plus + minus) / 2 + (plus - minus) / 2 = plus := by
   constructor <;> ring
+
+/-- A correction smaller than half of the old speed in each
+characteristic family preserves the positive speed gap. -/
+theorem returnCorrection_speed_positive {v minusIncrement plusIncrement : ℝ}
+    (hv : 0 < v) (hminus : |minusIncrement| ≤ v / 2)
+    (hplus : |plusIncrement| ≤ v / 2) :
+    v / 2 ≤ v + (plusIncrement - minusIncrement) / 2 ∧
+    0 < v + (plusIncrement - minusIncrement) / 2 := by
+  have h₁ := (abs_le.mp hminus).2
+  have h₂ := (abs_le.mp hplus).1
+  constructor <;> linarith
 
 /-- Reflection gives odd drift and even speed. -/
 theorem returnCorrection_reflected_parity (minus : ℝ → ℝ) (θ : ℝ) :
@@ -257,8 +353,8 @@ def returnCoefficientError (a d v : ℝ) (D V : E →ₗ[ℝ] ℝ) (e : E) :
 theorem returnCoefficientError_apply (a d v : ℝ) (D V : E →ₗ[ℝ] ℝ) (e r : E) :
     returnCoefficientError a d v D V e r =
       (-a * D r, -a * (2 * d + D e) * D r + a * (2 * v + V e) * V r) := by
-  simp only [returnCoefficientError, LinearMap.prod_apply, LinearMap.smul_apply,
-    LinearMap.add_apply, smul_eq_mul]
+  simp only [returnCoefficientError, LinearMap.coe_prod, Function.prod_apply,
+    LinearMap.smul_apply, LinearMap.add_apply, smul_eq_mul]
 
 /-- Substituting the actual residual produces the exact difference
 between the old and corrected coefficients. -/

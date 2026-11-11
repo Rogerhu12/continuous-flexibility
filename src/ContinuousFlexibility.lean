@@ -364,3 +364,5 @@ import ContinuousFlexibility.Blueprint.ScalarCalculus
 import ContinuousFlexibility.Analysis.N01ReturnMargins
 import ContinuousFlexibility.Analysis.ReturnChartIdentities
 import ContinuousFlexibility.Analysis.ReturnCorrectionAlgebra
+import ContinuousFlexibility.Analysis.ReturnChartDifferentiation
+import ContinuousFlexibility.Analysis.CircleReturnSeries
