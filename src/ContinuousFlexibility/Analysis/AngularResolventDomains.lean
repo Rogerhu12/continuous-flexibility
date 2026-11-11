@@ -68,9 +68,9 @@ theorem frequency_selfAdjoint (A : AngularResolventData 𝕜 H) : IsSelfAdjoint 
 theorem sobolev_one_operator (A : AngularResolventData 𝕜 H) (x : H) :
     A.Sobolev 1 (A.operator x) := by
   apply (memAngularSobolev_one_iff_frequency (𝕜 := 𝕜) (A.coordinates (A.operator x))).mpr
-  change Memℓp (fun n => ((n : ℝ) : 𝕜) • A.coordinates (A.operator x) n) 2
-  have hfun : (fun n => ((n : ℝ) : 𝕜) • A.coordinates (A.operator x) n) =
-      (fun n => (A.coordinates x - A.coordinates (A.operator x)) n) := by
+  change Memℓp (fun n : ℕ => ((n : ℝ) : 𝕜) • A.coordinates (A.operator x) n) 2
+  have hfun : (fun n : ℕ => ((n : ℝ) : 𝕜) • A.coordinates (A.operator x) n) =
+      (fun n : ℕ => (A.coordinates x - A.coordinates (A.operator x)) n) := by
     funext n
     rw [lp.coeFn_sub, Pi.sub_apply, A.coordinates_operator,
       angular_frequency_reciprocal_smul]
