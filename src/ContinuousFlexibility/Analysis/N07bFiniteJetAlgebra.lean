@@ -79,7 +79,9 @@ theorem n07b_norm_jet_add_le
     ((hg x hx).contDiffAt (hU.mem_nhds hx)).of_le (by simp)
   have h := norm_add_le (iteratedFDeriv ℝ n f x) (iteratedFDeriv ℝ n g x)
   rw [← iteratedFDeriv_add_apply hfAt hgAt] at h
-  simpa only [Pi.add_apply] using h
+  have hfg : f + g = (fun y => f y + g y) := rfl
+  rw [hfg] at h
+  exact h
 
 /-- Evaluation of the genuine derivative in a fixed direction loses
 exactly one derivative and its vector norm. -/
@@ -98,16 +100,20 @@ theorem n07b_norm_jet_radialPartial_le
     {U : Set PolarPoint} {f : PolarPoint → ℝ} (hU : IsOpen U)
     (hf : ContDiffOn ℝ ∞ f U) {x : PolarPoint} (hx : x ∈ U) (n : ℕ) :
     ‖iteratedFDeriv ℝ n (radialPartial f) x‖ ≤ ‖iteratedFDeriv ℝ (n + 1) f x‖ := by
+  change ‖iteratedFDeriv ℝ n (fun y => fderiv ℝ f y (1, 0)) x‖ ≤
+    ‖iteratedFDeriv ℝ (n + 1) f x‖
   have hv : ‖((1, 0) : PolarPoint)‖ = 1 := by norm_num [Prod.norm_mk]
-  simpa only [radialPartial, hv, one_mul] using
+  simpa only [hv, one_mul] using
     n07b_norm_jet_directional_le hU hf hx n ((1, 0) : PolarPoint)
 
 theorem n07b_norm_jet_angularPartial_le
     {U : Set PolarPoint} {f : PolarPoint → ℝ} (hU : IsOpen U)
     (hf : ContDiffOn ℝ ∞ f U) {x : PolarPoint} (hx : x ∈ U) (n : ℕ) :
     ‖iteratedFDeriv ℝ n (angularPartial f) x‖ ≤ ‖iteratedFDeriv ℝ (n + 1) f x‖ := by
+  change ‖iteratedFDeriv ℝ n (fun y => fderiv ℝ f y (0, 1)) x‖ ≤
+    ‖iteratedFDeriv ℝ (n + 1) f x‖
   have hv : ‖((0, 1) : PolarPoint)‖ = 1 := by norm_num [Prod.norm_mk]
-  simpa only [angularPartial, hv, one_mul] using
+  simpa only [hv, one_mul] using
     n07b_norm_jet_directional_le hU hf hx n ((0, 1) : PolarPoint)
 
 end ContinuousFlexibility.Analysis

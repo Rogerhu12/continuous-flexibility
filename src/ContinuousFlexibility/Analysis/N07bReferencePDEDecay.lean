@@ -52,17 +52,19 @@ theorem n07b_referencePDE_abs_le_frechet_jets
     simpa only [radialPartial, hv₁, mul_one] using
       n07b_first_direction_abs_le u x (1, 0)
   have hrr : |radialPartial (radialPartial u) x| ≤ ‖iteratedFDeriv ℝ 2 u x‖ := by
-    simpa only [radialPartial, hv₁, one_mul, mul_one] using
+    change |fderiv ℝ (fun y => fderiv ℝ u y (1, 0)) x (1, 0)| ≤ _
+    simpa only [hv₁, one_mul, mul_one] using
       n07b_second_direction_abs_le hu (1, 0) (1, 0)
   have hθθ : |angularPartial (angularPartial u) x| ≤ ‖iteratedFDeriv ℝ 2 u x‖ := by
-    simpa only [angularPartial, hv₂, one_mul, mul_one] using
+    change |fderiv ℝ (fun y => fderiv ℝ u y (0, 1)) x (0, 1)| ≤ _
+    simpa only [hv₂, one_mul, mul_one] using
       n07b_second_direction_abs_le hu (0, 1) (0, 1)
   rw [n07b_c2_radialPDE_eq_polar_jets hw hu]
   calc
     _ ≤ |deriv w x.1 * radialPartial u x| +
         |w x.1 * radialPartial (radialPartial u) x| +
         |deriv w x.1 / x.1 * angularPartial (angularPartial u) x| :=
-      (abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)
+      (abs_add_le _ _).trans (add_le_add (abs_add_le _ _) le_rfl)
     _ = |deriv w x.1| * |radialPartial u x| +
         |w x.1| * |radialPartial (radialPartial u) x| +
         |deriv w x.1 / x.1| * |angularPartial (angularPartial u) x| := by
@@ -90,7 +92,7 @@ theorem n07b_reference_coefficients_bounded {D : ReferenceData}
   obtain ⟨B, hB⟩ := (isCompact_Icc : IsCompact (Icc D.a D.b)).exists_bound_of_continuousOn
     hc.continuousOn
   refine ⟨max B 0, le_max_right _ _, fun r hr => ?_⟩
-  have hb : | |deriv D.w r| + |D.w r| + |deriv D.w r / r| | ≤ B := by
+  have hb : |(|deriv D.w r| + |D.w r| + |deriv D.w r / r|)| ≤ B := by
     simpa only [Real.norm_eq_abs] using hB r hr
   exact (le_abs_self _).trans (hb.trans (le_max_left _ _))
 

@@ -301,7 +301,7 @@ theorem n07b_referenceBulk_energy_sum
     have hg (j : Fin (b + 1)) : MemLp (mixedDerivative 0 j.val (g m)) 2
         (canonicalMeasure S K m) :=
       n07b_canonical_mixedDerivative_memLp_of_extension m (heq m) (he m) 0 j.val
-    have hrow := n07b_piecewiseCanonicalEnergy_physical hK hz hs g β 0 b m hg
+    have hrow := n07b_piecewiseCanonicalEnergy_physical (T := T) hK hz hs g β 0 b m hg
     rw [hrow.2]
     have hsub : physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) ⊆
         Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi := by

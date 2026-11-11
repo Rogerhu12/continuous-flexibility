@@ -87,7 +87,7 @@ theorem canonicalChart_endpoint_radial_eq_boundary
   have hclosed := hK.boundary z hz hsector m
   have hfront : p ∈ closure (physicalPieceOpen S K z m) ∧
       p ∉ physicalPieceOpen S K z m := by
-    simpa only [(hK.domains z hz hsector m).1.frontier_eq] using hp
+    simpa only [(hK.domains z hz hsector m).1.frontier_eq, Set.mem_diff] using hp
   have hpclosed : p ∈ physicalPieceClosed S K z m := hfront.1
   have himage := hclosed.1 hpclosed
   have hnot : K.chart z m p ∉ canonicalOpen S K m := by

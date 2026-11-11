@@ -40,7 +40,8 @@ theorem n07b_compact_pullback_isCylinderTest
     max B 0 + 1, by positivity, ?_⟩
   · intro p
     change T.H (T.radius (p.1 + 0)) ^ (-γ) *
-      f (T.radius (p.1 + 0), p.2 + Real.pi) = _
+      f (T.radius (p.1 + 0), p.2 + Real.pi) =
+        T.H (T.radius p.1) ^ (-γ) * f (T.radius p.1, p.2)
     rw [add_zero]
     have h := hp (T.radius p.1, p.2)
     change f (T.radius p.1 + 0, p.2 + Real.pi) = f (T.radius p.1, p.2) at h

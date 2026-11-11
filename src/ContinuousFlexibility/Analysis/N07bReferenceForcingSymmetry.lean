@@ -51,7 +51,8 @@ theorem n07b_radialPDE_even (w : ℝ → ℝ) {u : PolarPoint → ℝ}
   intro r θ
   have hslice : (fun t => u (t, -θ)) = fun t => u (t, θ) :=
     funext (fun t => hu t θ)
-  simp only [radialPDE, hslice, n07b_second_deriv_even (hu r) θ]
+  simp only [radialPDE, hslice,
+    n07b_second_deriv_even (f := fun η : ℝ => u (r, η)) (hu r) θ]
 
 /-- The actual reference forcing, including the retained finite-dimensional
 column, is determined by the reference field and its scalar coefficient. -/
@@ -67,7 +68,11 @@ theorem n07bReferenceForcing_periodic (D : ReferenceData) (μ : ℝ)
     simpa only [mul_one] using cosineMode_even_frequency_periodic 1
   intro p
   have hpde := n07b_radialPDE_periodic D.w hu p
-  simp only [n07bReferenceForcing, hpde, Prod.fst_add, Prod.snd_add, add_zero, hcos]
+  change radialPDE D.w (fun r θ => u (r, θ)) (p.1 + 0) (p.2 + Real.pi) =
+    radialPDE D.w (fun r θ => u (r, θ)) p.1 p.2 at hpde
+  simp only [add_zero] at hpde
+  simp only [n07bReferenceForcing, Prod.fst_add, Prod.snd_add, add_zero]
+  rw [hpde, hcos p.2]
 
 theorem n07bReferenceForcing_even (D : ReferenceData) (μ : ℝ)
     {u : PolarPoint → ℝ} (hu : ∀ r θ, u (r, -θ) = u (r, θ)) :

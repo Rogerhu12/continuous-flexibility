@@ -85,7 +85,8 @@ theorem n07b_exists_piecewiseCanonicalLift_of_density_bound
     n07b_canonical_mixedDerivative_memLp_of_extension m (heq m) (he m) 0 j.val
   have hpiece (m : ℕ) : n07bPiecewiseCanonicalJetEnergy T K g γ t s m ≤
       ∫ x in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), E x := by
-    have hrow := n07b_piecewiseCanonicalEnergy_physical hK hz hs g γ t s m (hg m)
+    have hrow := n07b_piecewiseCanonicalEnergy_physical
+      (T := T) hK hz hs g γ t s m (hg m)
     rw [hrow.2]
     have hsub : physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) ⊆
         Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi := by

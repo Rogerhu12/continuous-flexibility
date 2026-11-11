@@ -193,9 +193,7 @@ theorem n07b_canonicalPrimitiveField_reference_multiplier (k : Fin 3) :
     canonicalPrimitiveField D T C K z m (.inr (.inr k)) =
       n07bReferenceSeedMultiplier D.w (canonicalReferencePoint C K z m)
         (canonicalReferenceSourceFactor C K z m) k := by
-  funext x
-  unfold canonicalPrimitiveField n07bReferenceSeedMultiplier
-  split_ifs <;> rfl
+  fin_cases k <;> rfl
 
 end PrimitiveIdentities
 

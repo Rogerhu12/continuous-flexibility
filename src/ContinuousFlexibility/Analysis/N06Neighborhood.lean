@@ -272,8 +272,18 @@ theorem n06_N04Properties_mono {D : ReferenceData} {T : MaterialData}
       n06_forall_mem_mono hU hnegative, n06_forall_mem_mono hU hpositive⟩,
     n06_uniform_bound_mono hU hbounds, n06_forall_mem_mono hU hpairing⟩
 
-/-- Raising the low order and reducing the radius retains the complete
-construction through N05, on the very same source space and reference graph. -/
+private theorem n06_parameter_bound_mono {α : Type*} {U V : Set α}
+    (hVU : V ⊆ U) {P : ℕ → ℕ → ℝ → ℝ → α → Prop}
+    (h : ∃ r d : ℕ, ∃ C₀ A : ℝ, 0 < C₀ ∧ 0 ≤ A ∧
+      ∀ z ∈ U, P r d C₀ A z) :
+    ∃ r d : ℕ, ∃ C₀ A : ℝ, 0 < C₀ ∧ 0 ≤ A ∧
+      ∀ z ∈ V, P r d C₀ A z := by
+  obtain ⟨r, d, C₀, A, hC₀, hA, hbound⟩ := h
+  exact ⟨r, d, C₀, A, hC₀, hA, n06_forall_mem_mono hVU hbound⟩
+
+set_option backward.isDefEq.respectTransparency true in
+/-- Restriction retains the primitive bounds with their original constants
+and the same geometric fields. -/
 theorem n06_CanonicalPrimitiveGeometry_mono {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -281,12 +291,15 @@ theorem n06_CanonicalPrimitiveGeometry_mono {D : ReferenceData} {T : MaterialDat
     (h : CanonicalPrimitiveGeometry D T S C L K base ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) :
     CanonicalPrimitiveGeometry D T S C L K base' ε' := by
-  have hU := n06_stateNeighborhood_mono (C := C) hb hε
-  refine ⟨?_, fun z hz => h.transport z (hU hz),
-    fun z hz => h.physicalCoefficients z (hU hz)⟩
-  intro N
-  obtain ⟨r, d, C₀, A, hC₀, hA, hbound⟩ := h.materialJets N
-  exact ⟨r, d, C₀, A, hC₀, hA, fun z hz => hbound z (hU hz)⟩
+  have hU : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε :=
+    n06_stateNeighborhood_mono (S := S) (C := C) hb hε
+  exact {
+    materialJets := fun N => n06_parameter_bound_mono
+      (α := AnnularState S × ℝ) hU (h.materialJets N)
+    transport := n06_forall_mem_mono
+      (α := AnnularState S × ℝ) hU h.transport
+    physicalCoefficients := n06_forall_mem_mono
+      (α := AnnularState S × ℝ) hU h.physicalCoefficients }
 
 /-- Every geometric jet and transition certificate is retained on the
 same smaller neighborhood as the original nonlinear construction. -/

@@ -51,7 +51,7 @@ theorem n07b_fixedGraph_scalarInverse_identification
       (V.forget (3 / 4 : ℝ) 0 b F)
       (heightPairField S (G.G z f).1) ((S.height (3 / 4 : ℝ)).decode f.val))
     (ha : U.2.1 = (G.G z f).1.2)
-    (hμ : U.2.2.1 = (G.G z f).2) (hλ : U.2.2.2 = 0) :
+    (hμ : U.2.2.1 = (G.G z f).2) (hcompat : U.2.2.2 = 0) :
     let d := B.inverse (P.inverse z F)
     d.val.1.2.2.2 = 0 ∧
       d.val.1.2.1 = (G.G z f).1.2 ∧ d.val.1.2.2.1 = (G.G z f).2 ∧
@@ -64,13 +64,13 @@ theorem n07b_fixedGraph_scalarInverse_identification
   have hweak : PerturbedCanonicalRelation D S C K L z d₀.val.1
       (V.forget (3 / 4 : ℝ) 0 b F) :=
     n07b_scalarInverse_perturbedCanonicalRelation hT hS hG hab hz hs f
-      hA hB hC hBp hCp hrep hμ hλ
+      hA hB hC hBp hCp hrep hμ hcompat
   have hop : P.operator z d₀ = F :=
     n07b_relativeOperator_eq_of_physical_relation hK h05.2.1 h06 hz hs hab.le d₀ F hweak
   have hid : B.inverse (P.inverse z F) = d₀ := by
     simpa only [n07aBaseInverse_apply] using n07aBaseInverse_eq_of_operator h05 h06 hz hs hop
   dsimp only
   rw [hid]
-  exact ⟨hλ, ha, hμ, hrep⟩
+  exact ⟨hcompat, ha, hμ, hrep⟩
 
 end ContinuousFlexibility.Analysis
