@@ -50,6 +50,7 @@ theorem exists_jointMixedDiagonal_oneHigh_constant (n : ℕ) :
   have hb := multilinearMap_bound_of_unitBall A (normSeminorm ℝ ℝ)
     (p base) (p high) (mul_nonneg hK hC) hunit v
   simpa only [A, SmoothDirections.mixedParameterMultilinearMap_apply,
-    coe_normSeminorm, Real.norm_eq_abs] using hb
+    coe_normSeminorm, Real.norm_eq_abs, multilinearTameSize,
+    oneHighVariationWeight] using hb
 
 end ContinuousFlexibility.Analysis

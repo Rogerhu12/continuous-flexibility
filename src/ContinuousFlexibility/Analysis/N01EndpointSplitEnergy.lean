@@ -25,6 +25,21 @@ open scoped Topology ENNReal BigOperators ContDiff
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem split_energy_transfer
+    {K M A L q₀ q₁ e₀ e₁ W X : ℝ}
+    (hK : 0 ≤ K) (hM : 0 ≤ M) (hA : 0 ≤ A)
+    (hX : X ≤ K * M * W) (hW : W ≤ A * q₀ + q₁)
+    (h₀ : M * q₀ ≤ L * e₀) (h₁ : M * q₁ ≤ L * e₁) :
+    X ≤ (K * L) * (A * e₀ + e₁) := by
+  calc
+    X ≤ K * M * (A * q₀ + q₁) :=
+      hX.trans (mul_le_mul_of_nonneg_left hW (mul_nonneg hK hM))
+    _ = K * (A * (M * q₀) + M * q₁) := by ring
+    _ ≤ K * (A * (L * e₀) + L * e₁) :=
+      mul_le_mul_of_nonneg_left
+        (add_le_add (mul_le_mul_of_nonneg_left h₀ hA) h₁) hK
+    _ = (K * L) * (A * e₀ + e₁) := by ring
+
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
     (hN : N01Properties D T S C base loss ε)
@@ -40,7 +55,9 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_ra
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
           Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT (n + 1) b
+  let pointData := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT (n + 1) b
+  let K : ℝ := pointData.choose
+  have hK : 0 < K := pointData.choose_spec.1
   let L₀ : ℝ := 1 + circleSingletonGradingConstant base * (2 * circleSobolevConstant)
   let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss) * (2 * circleSobolevConstant)
   have hL₀ : 0 < L₀ := by
@@ -57,8 +74,8 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_ra
   have hL : 0 < L := add_pos hL₀ hL₁
   refine ⟨K * L, mul_pos hK hL, ?_⟩
   intro rsel hrsel z hz vs hvs v hvq
-  obtain ⟨w, _, hlocal, henergy⟩ :=
-    hN.exists_localized_state_energy_directions hS hT v hvq
+  let localData := hN.exists_localized_state_energy_directions hS hT v hvq
+  let w : ℕ → (StateDirections S × ℝ) := localData.choose
   intro m θ
   let p := pairGrading (sectorGrading S) realGrading
   let A : ℝ := 1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)
@@ -69,36 +86,30 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_ra
   have heq :
       iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ =
       iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs (w m)) m) θ := by
-    rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz,
-      hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz]
-    exact hlocal m n b θ (rsel m) (hrsel m)
-      (hN.sectorFlow_closed_angularTower hS hT m (rsel m)
-        (hrsel m) b θ) z hz vs
+    exact (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel
+      (n + 1) z hz (Fin.snoc vs v) m b θ).trans
+        ((localData.choose_spec.2.1 m n b θ (rsel m) (hrsel m)
+          (hN.sectorFlow_closed_angularTower hS hT m (rsel m)
+            (hrsel m) b θ) z hz vs).trans
+          (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel
+            (n + 1) z hz (Fin.snoc vs (w m)) m b θ).symm)
   have hlow : T.M (T.sample m) ^ (c + 1) * p base (w m) ≤
       L * Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal :=
-    (henergy m base (c + 1)).trans
+    (localData.choose_spec.2.2 m base (c + 1)).trans
       (mul_le_mul_of_nonneg_right (le_add_of_nonneg_right hL₁.le) (Real.sqrt_nonneg _))
   have hhigh : T.M (T.sample m) ^ (c + 1) * p (b + loss) (w m) ≤
       L * Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal :=
-    (henergy m (b + loss) (c + 1)).trans
+    (localData.choose_spec.2.2 m (b + loss) (c + 1)).trans
       (mul_le_mul_of_nonneg_right (le_add_of_nonneg_left hL₀.le) (Real.sqrt_nonneg _))
-  have hW := oneHighVariationWeight_snoc_le_of_low_le_one p base (b + loss) z vs (w m) hvs
-  rw [heq]
-  calc
-    _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-        oneHighVariationWeight p base (b + loss) z (Fin.snoc vs (w m)) :=
-      hpoint rsel hrsel m b c θ le_rfl z hz (Fin.snoc vs (w m))
-    _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-        (A * p base (w m) + p (b + loss) (w m)) :=
-      mul_le_mul_of_nonneg_left hW (mul_nonneg hK.le (pow_nonneg hM _))
-    _ = K * (A * (T.M (T.sample m) ^ (c + 1) * p base (w m)) +
-        T.M (T.sample m) ^ (c + 1) * p (b + loss) (w m)) := by ring
-    _ ≤ K * (A * (L *
-        Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal) +
-      L * Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) :=
-      mul_le_mul_of_nonneg_left
-        (add_le_add (mul_le_mul_of_nonneg_left hlow hA) hhigh) hK.le
-    _ = _ := by dsimp only [A, p]; ring
+  have hW : oneHighVariationWeight p base (b + loss) z (Fin.snoc vs (w m)) ≤
+      A * p base (w m) + p (b + loss) (w m) :=
+    oneHighVariationWeight_snoc_le_of_low_le_one p base (b + loss) z vs (w m) hvs
+  have hlocalized := split_energy_transfer hK.le (pow_nonneg hM (c + 1)) hA
+    (pointData.choose_spec.2 rsel hrsel m b c θ le_rfl z hz (Fin.snoc vs (w m)))
+    hW hlow hhigh
+  have hweighted := congrArg (fun x : ℝ =>
+    (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) * |x|) heq
+  exact hweighted.trans_le hlocalized
 
 theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
     (hN : N01Properties D T S C base loss ε)
@@ -114,7 +125,7 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
           Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n b c
-  exact ⟨K, hK, hbound rsel hrsel⟩
+  let data := hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n b c
+  exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

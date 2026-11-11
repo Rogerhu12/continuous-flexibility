@@ -23,6 +23,24 @@ local instance circleCompositionSmoothDirectionsPairSMul (S : CircleModelData) :
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem circleChartCompositionJets_zero_decode
+    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
+    (travel : ℕ → ℝ) (x : S.Space × S.Space) :
+    circleChartCompositionJets hS travel 0 x Fin.elim0 =
+      S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) := by
+  have hdecode :
+      S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) =
+        fun m θ => S.decode x.2 m (circleCompositionPhase travel x m θ) := by
+    funext m θ
+    exact (congrArg (fun u : S.Space => S.decode u m θ)
+      (circleShiftedChartComposeContinuousLinear_apply
+        (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel x.1 x.2)).trans
+      (circleShiftedChartComposeLinear_decode
+        (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel x.1 x.2 m θ)
+  exact (circleChartCompositionJets_zero
+    (T := T) (γ := γ) (S := S) hS travel x).trans hdecode.symm
+
 theorem exists_circleChartComposition_smoothDirections
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
@@ -64,25 +82,31 @@ theorem exists_circleChartComposition_smoothDirections
       exact circleChartCompositionJets_member hS hT hD hγ travel n x v
     · exact hbounds (1 + p base x₀) (by positivity)
     · intro x hx
-      rw [circleChartCompositionJets_zero]
-      funext m θ
-      rw [show f x = circleShiftedChartComposeLinear hS hT hD hγ travel x.1 x.2 from
-        circleShiftedChartComposeContinuousLinear_apply hS hT hD hγ travel x.1 x.2,
-        circleShiftedChartComposeLinear_decode]
-      rfl
+      exact circleChartCompositionJets_zero_decode
+        (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel x
     · intro n x w v t ht m b θ
       exact circleChartCompositionJets_angular_line_hasDerivAt hS travel n x w v t m b θ
     · exact circleChartCompositionJets_secondEnvelopes hS hT hD hγ travel (hVopen x₀)
-  choose J hJ using hlocal
+  let J : ∀ x₀ : S.Space × S.Space, SmoothDirections (V x₀) f :=
+    fun x₀ => (hlocal x₀).choose
+  have hJ (x₀ : S.Space × S.Space) (n : ℕ) (x : S.Space × S.Space)
+      (hx : x ∈ V x₀) (v : Fin n → S.Space × S.Space) :
+      S.decode ((J x₀).D n x v) = circleChartCompositionJets hS travel n x v :=
+    (hlocal x₀).choose_spec n x hx v
   have hself (x : S.Space × S.Space) : x ∈ V x := by
     change p base x < 1 + p base x
     linarith
-  obtain ⟨K, hK⟩ := exists_smoothDirections_of_open_cover
+  let coverData := exists_smoothDirections_of_open_cover
+    (E := S.Space × S.Space) (F := S.Space) (f := f)
     (U := (univ : Set (S.Space × S.Space))) isOpen_univ V J
     (fun i x hx => mem_univ x) (fun x hx => ⟨x, hself x⟩)
+  let K : SmoothDirections (univ : Set (S.Space × S.Space)) f := coverData.choose
+  have hK (x₀ : S.Space × S.Space) (n : ℕ) (x : S.Space × S.Space)
+      (hx : x ∈ V x₀) : K.D n x = (J x₀).D n x :=
+    coverData.choose_spec x₀ n x hx
   refine ⟨K, ?_⟩
   intro n x v
-  rw [hK x n x (hself x)]
-  exact hJ x n x (hself x) v
+  exact (congrArg (fun L : (S.Space × S.Space) [×n]→L[ℝ] S.Space => S.decode (L v))
+    (hK x n x (hself x))).trans (hJ x n x (hself x) v)
 
 end ContinuousFlexibility.Statements

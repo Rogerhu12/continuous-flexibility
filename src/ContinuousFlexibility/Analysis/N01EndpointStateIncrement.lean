@@ -25,16 +25,16 @@ open scoped Topology ENNReal BigOperators ContDiff
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem pair_seminorm_origin_mem
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) {δ : ℝ} (hδ : 0 < δ) :
+    (0 : E × ℝ) ∈ {z | p z.1 < δ ∧ |z.2| < δ} :=
+  ⟨p.map_zero'.trans_lt hδ, (abs_zero : |(0 : ℝ)| = 0).trans_lt hδ⟩
+
 private theorem endpoint_origin_mem
     (hN : N01Properties D T S C base loss ε) :
-    (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε := by
-  constructor
-  · change sectorGrading S base (0 : StateDirections S) < ε
-    rw [(sectorGrading S base).map_zero']
-    exact hN.2.1
-  · change |(0 : ℝ)| < ε
-    rw [abs_zero]
-    exact hN.2.1
+    (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε :=
+  pair_seminorm_origin_mem (sectorGrading S base) hN.2.1
 
 theorem N01Properties.endpointFlowScalarJets_zero_at_origin
     (hN : N01Properties D T S C base loss ε)
@@ -60,7 +60,7 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
       (hN.endpointFlowScalarJets hS hT rsel hrsel 0 (z.1, 0) Fin.elim0) := by
   let u : StateDirections S × ℝ := (z.1, 0)
   have hu : u ∈ sectorNeighborhood S base ε ε := by
-    exact ⟨hz.1, by simpa only [abs_zero] using hN.2.1⟩
+    exact ⟨hz.1, (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1⟩
   have hpath (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       t • u ∈ sectorNeighborhood S base ε ε := by
     have hm := sectorNeighborhood_convex S base ε ε (endpoint_origin_mem hN) hu
@@ -71,12 +71,15 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
   let G : ℝ → ℕ → ℕ → ℝ → ℝ := fun t m b θ =>
     iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (t • u)
       (Fin.snoc Fin.elim0 u) m) θ
-  have htuple : (Fin.cons u (Fin.elim0 : Fin 0 → (StateDirections S × ℝ))) =
-      Fin.snoc Fin.elim0 u := by
+  have htuple :
+      (Fin.cons u (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) :
+        Fin 1 → (StateDirections S × ℝ)) =
+      (Fin.snoc (Fin.elim0 : Fin 0 → (StateDirections S × ℝ)) u :
+        Fin 1 → (StateDirections S × ℝ)) := by
     funext i
     have hi : i = 0 := Subsingleton.elim _ _
     subst i
-    simp
+    simp only [Fin.cons_zero, Fin.snoc_zero]
   have hderiv (m b : ℕ) (θ t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       HasDerivAt (fun a => iteratedDeriv b (F a m) θ) (G t m b θ) t := by
     have hm : (0 : StateDirections S × ℝ) + t • u ∈ sectorNeighborhood S base ε ε := by
@@ -92,7 +95,9 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
       (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (1 • u) (hpath 1 (by simp)) Fin.elim0)
       hM hH hderiv
     intro s
-    obtain ⟨K, hK, hbound⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel 0 s
+    let energyData := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel 0 s
+    let K : ℝ := energyData.choose
+    have hK : 0 < K := energyData.choose_spec.1
     let j : ℕ := max base (s + loss)
     let p := pairGrading (sectorGrading S) realGrading
     refine ⟨stateLocalizationEnergy D T C j (s + 1) u, K * (1 + p j u),
@@ -102,7 +107,7 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
     have hgrade : p j (t • u) ≤ p j u := by
       rw [map_smul_eq_mul, Real.norm_eq_abs, abs_of_nonneg ht.1]
       exact mul_le_of_le_one_left (apply_nonneg _ _) ht.2
-    have hb := hbound (t • u) (hpath t ht) Fin.elim0 u rfl m b c hbc θ
+    have hb := energyData.choose_spec.2 (t • u) (hpath t ht) Fin.elim0 u rfl m b c hbc θ
     simp only [Fin.prod_univ_zero, mul_one] at hb
     exact hb.trans (mul_le_mul_of_nonneg_right
       (mul_le_mul_of_nonneg_left (add_le_add (le_refl 1) hgrade) hK.le)
