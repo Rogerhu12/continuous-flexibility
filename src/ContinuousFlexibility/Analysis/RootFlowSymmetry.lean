@@ -18,7 +18,7 @@ namespace ContinuousFlexibility.Analysis
 open Set
 open scoped ContDiff NNReal Topology
 
-private theorem exists_uniform_angle_lipschitz
+theorem exists_uniform_angle_lipschitz_of_contDiff
     {F : ℝ × ℝ → ℝ} {a b T : ℝ}
     (hF : ContDiff ℝ ∞ F) (hT : T ≠ 0)
     (hperiod : ∀ t : ℝ, Function.Periodic (fun θ => F (t, θ)) T) :
@@ -102,7 +102,7 @@ theorem rootRegularizedFlow_reflect
   have hminus : ContDiff ℝ ∞
       (fun q : ℝ × ℝ => rootRegularizedField d c₀ (q.1, ((x, -ζ), q.2))) :=
     (contDiff_rootRegularizedField hd hc₀).comp hpmap
-  obtain ⟨K, hK⟩ := exists_uniform_angle_lipschitz
+  obtain ⟨K, hK⟩ := exists_uniform_angle_lipschitz_of_contDiff
     (a := 0) (b := 1) hminus hT
     (fun r => rootRegularizedField_periodic hdperiod hc₀period r (x, -ζ))
   apply eqOn_scalarFlow_of_same_initial
