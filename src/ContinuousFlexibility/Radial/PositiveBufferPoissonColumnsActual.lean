@@ -55,7 +55,7 @@ theorem positiveBufferPoissonColumns_map_column (B : BufferData) (A : Fin 2 → 
 
 theorem positiveBufferPoisson_matrix_single (A : Fin 2 → ℝ)
     (Q : Matrix (Fin 2) (Fin 2) ℝ) (j : Fin 2) :
-    Q *ᵥ (fun i => sqrt (A i) * (Pi.single j (1 : ℝ)) i) =
+    Q *ᵥ (fun i => sqrt (A i) * (Pi.single j (1 : ℝ) : Fin 2 → ℝ) i) =
       fun k => sqrt (A j) * Q k j := by
   ext k
   simp only [Matrix.mulVec, dotProduct, Fin.sum_univ_two]
@@ -195,6 +195,8 @@ theorem positiveBufferPoissonColumn_border_row {B : BufferData}
     have hk := D.border_row k
     rw [if_neg hb] at hk
     change positiveBufferBorderedScalar B.potential B.bordered (D.column k) = 0 at hk
+    change (sqrt (A j) * Q k j) *
+      positiveBufferBorderedScalar B.potential B.bordered (D.column k) = 0
     rw [hk, mul_zero]
 
 /-- Exactly the Poisson regularity, representative, support, border-row,

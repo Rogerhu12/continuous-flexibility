@@ -129,9 +129,12 @@ theorem positiveBufferGreenProfile_toLp_norm_sq_le {σ : ℝ} {pin pout : ℝ �
     simp only [indicator_apply, mem_Ici, mem_Iic, neg_nonneg]
   have hright : Integrable ((Icc 0 (σ + 6)).indicator (fun t => pin t ^ 2)) volume :=
     (integrable_indicator_iff measurableSet_Icc).2 (hpin.pow 2).integrableOn_Icc
+  have hreflect : (∫ t in Iic (0 : ℝ), pout (-t) ^ 2) =
+      ∫ t in Ici (0 : ℝ), pout t ^ 2 := by
+    simpa only [neg_zero, integral_Ici_eq_integral_Ioi] using
+      (integral_comp_neg_Iic (0 : ℝ) (fun t : ℝ => pout t ^ 2))
   rw [integral_add hleft hright, integral_indicator measurableSet_Iic,
-    integral_indicator measurableSet_Icc, integral_comp_neg_Iic, neg_zero,
-    ← integral_Ici_eq_integral_Ioi] at hle
+    integral_indicator measurableSet_Icc, hreflect] at hle
   simpa only [add_comm] using hle
 
 /-- The actual Green kernel in the physical variable, with point-source

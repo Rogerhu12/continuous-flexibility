@@ -65,7 +65,7 @@ theorem positiveBuffer_exterior_unit_energy {V p : ℝ → ℝ} {O : Set ℝ} {c
       hpd.continuous.continuousOn (fun x _ => hp' x) hp''
       (fun x hx => hVm x (subset_closure hx)) hcut
       (by simpa only [closure_Ioi] using hbound) hE
-    refine ⟨by simpa only [if_pos rfl] using h.1, ?_⟩
+    refine ⟨by simpa only [if_pos rfl, ite_true] using h.1, ?_⟩
     rw [h.1]
     exact h.2
   · have hne : Iio c ≠ Ioi c := by
@@ -103,10 +103,11 @@ theorem positiveBuffer_exterior_unit_energy {V p : ℝ → ℝ} {O : Set ℝ} {c
     have h := positiveBuffer_right_unit_energy hm hM
       (hp.continuous.comp continuous_neg).continuousOn
       (hpd.continuous.comp continuous_neg).neg.continuousOn
-      (fun x _ => huR x) hdR hVR (by simpa only [neg_neg] using hcut) hMR hER
+      (fun x _ => huR x) hdR hVR
+      (by simpa only [Function.comp_apply, neg_neg] using hcut) hMR hER
+    simp only [Function.comp_apply, Pi.neg_apply, neg_neg] at h
     rw [positiveBuffer_reflection_energy] at h
-    simp only [neg_neg] at h
-    refine ⟨by simpa only [if_neg hne] using h.1, ?_⟩
+    refine ⟨by simpa only [if_neg hne, ite_false] using h.1, ?_⟩
     rw [h.1]
     exact h.2
 

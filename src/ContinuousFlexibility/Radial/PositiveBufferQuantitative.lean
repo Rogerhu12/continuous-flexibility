@@ -107,7 +107,7 @@ theorem positiveBufferPhysicalConormal_normalized_error
   rw [Real.sqrt_mul (hA i).le]
   by_cases hij : i = j
   · subst j
-    simp only [positiveBufferPhysicalConormal, Matrix.sub_apply, Matrix.one_apply, if_pos rfl]
+    simp only [positiveBufferPhysicalConormal, Matrix.sub_apply, Matrix.one_apply, if_pos rfl, ite_true]
     have hs := Real.sq_sqrt (hA i).le
     field_simp [hi]
     nlinarith [hAsum i]
@@ -147,7 +147,7 @@ theorem positiveBufferPhysicalConormal_positive
             field_simp [(hA i).ne']
             nlinarith [hAsum i]
       simp only [M, d, Matrix.add_apply, Matrix.diagonal_apply, Matrix.sub_apply,
-        Matrix.one_apply, if_pos rfl, positiveBufferPhysicalConormal]
+        Matrix.one_apply, if_pos rfl, ite_true, positiveBufferPhysicalConormal]
       calc
         _ = sqrt (A i) * J i i * sqrt (A i) +
             sqrt (A i) * (αin i / A i - 1) * sqrt (A i) := by ring

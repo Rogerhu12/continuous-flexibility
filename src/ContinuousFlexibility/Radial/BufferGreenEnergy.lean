@@ -69,7 +69,7 @@ theorem positiveBufferGreenProfile_curvature {B : BufferData} (hB : BufferHypoth
         filter_upwards [eventually_gt_nhds htcut] with x hx
         rw [positiveBufferCutoff_zero hx.le, zero_mul]
       have hsecond : deriv (deriv (fun x => positiveBufferCutoff (B.action i) x * pin x)) t = 0 := by
-        simpa only [deriv_const] using hlocal.deriv.deriv_eq
+        simpa only [deriv_const', deriv_const] using hlocal.deriv.deriv_eq
       have he : positiveBufferCutoffError (B.action i) pin (deriv pin) t = 0 := by
         apply Function.notMem_support.mp
         intro hm
