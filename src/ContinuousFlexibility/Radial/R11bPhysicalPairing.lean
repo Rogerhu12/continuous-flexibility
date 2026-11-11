@@ -58,4 +58,13 @@ theorem r11b_integral_angularMean_congr_ae {D : ReferenceData} (hab : D.a ≤ D.
   rw [r11b_integral_angularMean_eq hab hf, r11b_integral_angularMean_eq hab hg,
     integral_congr_ae hfg]
 
+
+/-- The physical pairing formula with its original pointwise product. -/
+theorem r11b_integral_angularMean_mul_eq {D : ReferenceData} (hab : D.a ≤ D.b)
+    {f g : PolarPoint → ℝ} (hf : MemLp f 2 (radialPhysicalMeasure D))
+    (hg : MemLp g 2 (radialPhysicalMeasure D)) :
+    (∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ) * g (r, θ))) =
+      (2 * Real.pi)⁻¹ * ∫ x, f x * g x ∂radialPhysicalMeasure D :=
+  r11b_integral_angularMean_eq hab (hf.integrable_mul hg)
+
 end ContinuousFlexibility.Radial
