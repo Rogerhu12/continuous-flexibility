@@ -44,15 +44,18 @@ theorem matchingBorderTest_memLp {D : ReferenceData}
   have hφ : ContDiff ℝ ∞ D.phi := hg.2.2.2.1.1
   have hdφ : ContDiff ℝ ∞ (deriv D.phi) := (contDiff_infty_iff_deriv.mp hφ).2
   have hdχ : ContDiff ℝ ∞ (deriv D.chi) := (contDiff_infty_iff_deriv.mp hB.1).2
-  have hχ : MemLp D.chi ∞ (radialHilbertMeasure D) :=
+  have hχ : MemLp D.chi ⊤ (radialHilbertMeasure D) :=
     matching_memLp_of_continuousOn hD hB.1.continuous.measurable
-      hB.1.continuous.continuousOn ∞
+      hB.1.continuous.continuousOn ⊤
   have hmain : MemLp (fun r => D.chi r * matchingJacobiTest D 2 D.phi r) 2
       (radialHilbertMeasure D) :=
     hχ.fun_mul (matchingJacobiTest_memLp hD hφ 2)
   let q : ℝ → ℝ := fun r =>
     r ^ 2 / 12 * deriv D.chi r * (deriv D.phi r - 4 / r * D.phi r)
   have hqm : Measurable q := by
+    have hφm : Measurable D.phi := hφ.continuous.measurable
+    have hdφm : Measurable (deriv D.phi) := hdφ.continuous.measurable
+    have hdχm : Measurable (deriv D.chi) := hdχ.continuous.measurable
     dsimp only [q]
     fun_prop
   have hratio : ContinuousOn (fun r : ℝ => 4 / r) (Icc D.a D.b) := by

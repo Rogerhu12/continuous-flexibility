@@ -156,7 +156,7 @@ theorem matchingInnerPoisson_testSource_pairing {D : ReferenceData}
         M.innerFunction i r * radialJacobi ((M.frequency : ℝ) ^ 2) D.w ψ r -
           (M.innerPoisson i).2 * (referenceColumn D r * ψ r) := by
     apply matchingSubinterval_congr_ae hD hlh.le hsub
-    filter_upwards [(Lp.coeFn_zero :
+    filter_upwards [(Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D) :
       ⇑(0 : RadialModeL2 D) =ᵐ[radialHilbertMeasure D] 0)] with r hr
     simp only [Prod.fst_zero, hr, Pi.zero_apply, mul_zero, sub_zero]
     ring

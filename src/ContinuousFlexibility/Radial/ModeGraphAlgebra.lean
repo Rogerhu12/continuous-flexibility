@@ -96,7 +96,7 @@ theorem modeInnerDirichletGraph_zero {D : ReferenceData} (hD : IsAccumulatingPro
   · simpa only [Prod.fst_zero, Prod.snd_zero] using
       matchingModeRow_zero hD hB M.frequency
   · simpa only [Prod.fst_zero] using
-      (Lp.coeFn_zero : ⇑(0 : RadialModeL2 D) =ᵐ[radialHilbertMeasure D] 0)
+      (Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D) : ⇑(0 : RadialModeL2 D) =ᵐ[radialHilbertMeasure D] 0)
   · intro r hr
     rfl
   · rfl

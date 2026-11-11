@@ -53,9 +53,8 @@ theorem matchingOuter_smooth_green_boundary {D : ReferenceData}
         M.B 1 i * matchingSmoothBoundaryValue D M ψ 1) := by
     rw [hpL, hpR, ← hflux 0, ← hflux 1]
     simp [matchingSmoothBoundaryValue, matchingSmoothBoundaryFlux,
-      matchingOuterFlux, matchingCut, bufferSign]
-    field_simp [hn0, hn1]
-    <;> ring
+      matchingOuterFlux, matchingCut, bufferSign] <;>
+      field_simp [hn0, hn1] <;> ring
   rw [he]
   fin_cases i
   · rw [(hdiag 1 0 (by decide)).1, (hdiag 1 0 (by decide)).2]

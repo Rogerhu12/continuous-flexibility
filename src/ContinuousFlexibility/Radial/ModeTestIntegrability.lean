@@ -20,7 +20,7 @@ open ContinuousFlexibility.Statements
 
 theorem matching_memLp_of_continuousOn {D : ReferenceData} (hD : IsAccumulatingProfile D)
     {g : ℝ → ℝ} (hg : Measurable g) (hc : ContinuousOn g (Icc D.a D.b))
-    (p : ℝ≥0∞) : MemLp g p (radialHilbertMeasure D) := by
+    (p : ENNReal) : MemLp g p (radialHilbertMeasure D) := by
   letI : IsFiniteMeasure (radialHilbertMeasure D) := radialHilbertMeasure_isFinite hD
   obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image hc.norm
   refine MemLp.of_bound hg.aestronglyMeasurable C ?_
@@ -46,7 +46,9 @@ theorem matchingLogDerivative_memLp {D : ReferenceData} (hD : IsAccumulatingProf
     infer_instance
   letI := hfinite
   apply (integrable_const (12 * C / D.a ^ 2)).mono'
-    (by fun_prop)
+    (by
+      simpa only [pow_two] using
+        ((matchingDensity_measurable hD).mul (hm.mul hm)).aestronglyMeasurable)
   filter_upwards [ae_restrict_mem (show MeasurableSet (radialCore D) from measurableSet_Ioo)]
     with r hr
   have hw0 : 0 < D.w r := hg.2.2.2.2.1 r hr
@@ -101,6 +103,8 @@ theorem matchingJacobiTest_memLp {D : ReferenceData} (hD : IsAccumulatingProfile
   have hq₁ : MemLp q₁ 2 (radialHilbertMeasure D) :=
     matching_memLp_of_continuousOn hD hq₁m hq₁c.continuousOn 2
   have hq₂m : Measurable q₂ := by
+    have hψm : Measurable ψ := hψ.continuous.measurable
+    have hdψm : Measurable (deriv ψ) := hdψ.continuous.measurable
     dsimp [q₂]
     fun_prop
   have hratio : ContinuousOn (fun r : ℝ => (j : ℝ) ^ 2 / r) (Icc D.a D.b) := by
@@ -110,8 +114,8 @@ theorem matchingJacobiTest_memLp {D : ReferenceData} (hD : IsAccumulatingProfile
   have hq₂c : ContinuousOn q₂ (Icc D.a D.b) :=
     ((continuous_id.pow 2).div_const 12).continuousOn.mul
       (hdψ.continuous.continuousOn.sub (hratio.mul hψ.continuous.continuousOn))
-  have hq₂ : MemLp q₂ ∞ (radialHilbertMeasure D) :=
-    matching_memLp_of_continuousOn hD hq₂m hq₂c ∞
+  have hq₂ : MemLp q₂ ⊤ (radialHilbertMeasure D) :=
+    matching_memLp_of_continuousOn hD hq₂m hq₂c ⊤
   have hmul : MemLp (fun r => q₂ r * (deriv D.w r / D.w r)) 2
       (radialHilbertMeasure D) := hq₂.fun_mul (matchingLogDerivative_memLp hD)
   have hsum : MemLp (fun r => q₁ r + q₂ r * (deriv D.w r / D.w r)) 2

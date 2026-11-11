@@ -38,7 +38,7 @@ theorem matchingJacobiVector_zero (D : ReferenceData) (hD : IsAccumulatingProfil
   apply Lp.ext
   filter_upwards [(matchingJacobiTest_memLp hD
     (show ContDiff ℝ ∞ (0 : ℝ → ℝ) from contDiff_const) j).coeFn_toLp,
-      (Lp.coeFn_zero : ⇑(0 : RadialModeL2 D) =ᵐ[radialHilbertMeasure D] 0)]
+      (Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D) : ⇑(0 : RadialModeL2 D) =ᵐ[radialHilbertMeasure D] 0)]
     with r h₁ h₂
   change ((matchingJacobiTest_memLp hD contDiff_const j).toLp
     (matchingJacobiTest D j (0 : ℝ → ℝ)) : ℝ → ℝ) r = _
