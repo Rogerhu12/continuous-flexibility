@@ -43,12 +43,12 @@ theorem divergenceOperator_operatorJetProbe_of_not_differentiable_angular
     intro hd
     have hprod := hd.sub (hb.mul hrd)
     have he :
-        (fun q =>
-          (L.b q * operatorJetProbeRadial p a b q +
-            L.c q * operatorJetProbeAngular p b c q) -
-              L.b q * operatorJetProbeRadial p a b q) =
+        ((fun q => L.b q * operatorJetProbeRadial p a b q +
+          L.c q * operatorJetProbeAngular p b c q) -
+            L.b * operatorJetProbeRadial p a b) =
         (fun q => L.c q * operatorJetProbeAngular p b c q) := by
       funext q
+      simp only [Pi.sub_apply, Pi.mul_apply]
       ring
     rw [he] at hprod
     have hback := hprod.mul (htd.inv ht0)
@@ -63,8 +63,12 @@ theorem divergenceOperator_operatorJetProbe_of_not_differentiable_angular
         L.c q * operatorJetProbeAngular p b c q) p = 0 := by
     simp only [angularPartial, fderiv_zero_of_not_differentiableAt hflux,
       ContinuousLinearMap.zero_apply]
+  have har : DifferentiableAt ℝ
+      (fun q => L.a q * operatorJetProbeRadial p a b q) p := ha.mul hrd
+  have hbt : DifferentiableAt ℝ
+      (fun q => L.b q * operatorJetProbeAngular p b c q) p := hb.mul htd
   rw [divergenceOperator, hr, ht, hzero, add_zero,
-    radialPartial_add (ha.mul hrd) (hb.mul htd),
+    radialPartial_add har hbt,
     radialPartial_mul ha hrd, radialPartial_mul hb htd,
     (operatorJetProbeRadial_partials p p a b).1,
     (operatorJetProbeAngular_partials p p b c).1]
