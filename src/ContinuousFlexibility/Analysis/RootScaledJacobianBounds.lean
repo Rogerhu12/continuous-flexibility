@@ -70,11 +70,15 @@ theorem rootScaledJacobian_eq
       ((δ * τ) * c (δ * x, θ)) * rootAngularProduct G (x, θ) /
         Real.sqrt (extendedRootRadialFactor G (x, θ)) := by
   let G := rootScaledInverseCoordinate Θ h τ
+  change planeJacobian (extendedRootEvenOddChart G) (x, θ) =
+    ((δ * τ) * c (δ * x, θ)) * rootAngularProduct G (x, θ) /
+      Real.sqrt (extendedRootRadialFactor G (x, θ))
   have hG := rootScaledInverseCoordinate_regular hd hc hdperiod hcperiod hΘ hh hhperiod τ
   have hχperiod := fun (r : ℝ) (_ : 0 ≤ r) => rootOddCoefficient_periodic hG.2 r
   have hφperiod := fun (r : ℝ) (_ : 0 ≤ r) η => rootEven_period_add hG.2 r η
   have hχraw : 0 < rootOddCoefficient G (x, θ) := by
-    simpa only [extendedRootOddCoefficient_of_nonneg G hx.1.le] using hχ
+    rw [← extendedRootOddCoefficient_of_nonneg G (p := (x, θ)) hx.1.le]
+    exact hχ
   have hU := rootScaledCharacteristic_angularPartial_bounds hd hc hdperiod hcperiod
     hΘ hcontrol hh hhperiod hhbounds hτ (Or.inl rfl : (1 : ℝ) = 1 ∨ (1 : ℝ) = -1) hx θ
   have hV := rootScaledCharacteristic_angularPartial_bounds hd hc hdperiod hcperiod
@@ -91,7 +95,7 @@ theorem rootScaledJacobian_eq
   have hVr' : radialPartial (rootCharacteristicCoordinate G (-1)) (x, θ) =
       -(δ * d (δ * x, θ) - Real.sqrt x * ((δ * τ) * c (δ * x, θ))) *
         angularPartial (rootCharacteristicCoordinate G (-1)) (x, θ) := by
-    simpa only [neg_one_mul, neg_mul, sub_eq_add_neg] using hVr
+    simpa only [one_mul, neg_one_mul, neg_mul, sub_eq_add_neg] using hVr
   have he := rootHeightFactor_eq_characteristicFactor (fun _ => (1 : ℝ))
     hG.1 Real.pi_ne_zero hχperiod hφperiod (p := (x, θ)) hx.1 hχraw hUr' hVr' hU0 hV0
   have hB0 : rootAngularProduct G (x, θ) ≠ 0 := by
