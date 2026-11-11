@@ -12,14 +12,18 @@ Last updated: 2026-11-11.
   even/odd projections, the physical source integral and its compact
   normalizer, the compatibility projection, height products, a reciprocal
   reduction to smooth composition, and the sequence-retraction construction.
-  The `de8fab3` checkpoint passed the complete CI build (3810 jobs), including
-  the project axiom audit. Further compiled prerequisites include uniqueness
-  of physical weak derivatives and their compatible pure jet tower, local
-  mollifier convergence, uniform weighted point evaluation, the actual
-  locally finite extension packets, radial partitions, circle Parseval, and
-  general logarithmic spectral bands. The physical weak-graph reconstruction,
-  concrete retractions, trace and extension estimates, and complete nonlinear
-  tame estimates remain in progress.
+  The `de8fab3` and `4657b00` checkpoints passed the complete CI build,
+  including the project axiom audit. The exact physical Sobolev model is now
+  proved by `isSobolevModel_canonicalSobolevModelData`: all weak mixed jets
+  have one smooth representative, the decoder is continuous and linear,
+  encoding is inverse to decoding, and every prescribed norm is exact.
+  This theorem, the actual trace with fixed loss 3, and the finite-factor
+  interpolation estimate have each passed a standard-axiom audit. Further
+  compiled prerequisites include the actual locally finite extension packets,
+  weighted circle row estimates, radial partitions, circle Parseval and
+  derivative symbols, and general logarithmic spectral bands. Concrete
+  retractions, extension bounds, and complete nonlinear tame estimates
+  remain in progress.
   `Spaces` stays open until the full W02/W03 statement and CI pass.
 
 ## Target
@@ -39,13 +43,13 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 385 / 390 |
-| Modules in the root import | 341 |
-| Lines of Lean under `src/` | 93,224 |
-| Axiom audit (`lake build`, 3810 jobs, `de8fab3`) | passed |
+| Lean modules compiled / total | 395 / 400 |
+| Modules in the root import | 351 |
+| Lines of Lean under `src/` | 95,136 |
+| Axiom audit (`lake build`, `4657b00`) | passed |
 | Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 392 |
+| Modules on the module system | 1 (the Challenge) of 402 |
 
 The compilation count intersects the source files in this checkpoint with their
 compiled artifacts; stale artifacts from the restored cache are not counted.
