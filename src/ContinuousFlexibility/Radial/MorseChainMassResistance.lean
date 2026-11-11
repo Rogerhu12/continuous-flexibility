@@ -72,7 +72,7 @@ theorem exists_morseChainMassResistanceConstants
         mul_le_mul_of_nonneg_left (hcell.resistance_upper side n hn) hlamI
       _ ≤ (morseChainAmplitude T σ n)⁻¹ * (C' 0 * log (morseChainA T n / morseChainB T n)) :=
         mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_right hK hlog) hlamI
-      _ = _ := by rw [div_eq_mul_inv]; ring
+      _ = _ := by rw [div_eq_mul_inv (C' 0) (morseChainAmplitude T σ n)]; ring
   · rw [hJM, hMC]
     calc
       _ ≤ morseChainAmplitude T σ n * (K * morseChainA T n ^ 6) +

@@ -138,16 +138,16 @@ private theorem exists_realizedCellAt {T : MorseChainData} {D : ReferenceData} {
     (A ^ 4)⁻¹ / K ≤ RC ∧ RC ≤ K * (A ^ 4)⁻¹ ∧ vl ≤ K * A ∧ A ^ 5 / K ≤ vr
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · apply (div_le_iff₀ hKp).mpr
-    simpa only [mul_comm] using (div_le_iff₀ hM).mp (hmem _ (by simp [S]))
-  · exact (div_le_iff₀ (pow_pos hA 2)).mp (hmem _ (by simp [S]))
-  · exact (div_le_iff₀ hlog).mp (hmem _ (by simp [S]))
-  · exact (div_le_iff₀ (pow_pos hA 6)).mp (hmem _ (by simp [S]))
+    simpa only [mul_comm] using (div_le_iff₀ hM).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
+  · exact (div_le_iff₀ (pow_pos hA 2)).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
+  · exact (div_le_iff₀ hlog).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
+  · exact (div_le_iff₀ (pow_pos hA 6)).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
   · apply (div_le_iff₀ hKp).mpr
-    simpa only [mul_comm] using (div_le_iff₀ hRC).mp (hmem _ (by simp [S]))
-  · exact (div_le_iff₀ (inv_pos.mpr (pow_pos hA 4))).mp (hmem _ (by simp [S]))
-  · exact (div_le_iff₀ hA).mp (hmem _ (by simp [S]))
+    simpa only [mul_comm] using (div_le_iff₀ hRC).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
+  · exact (div_le_iff₀ (inv_pos.mpr (pow_pos hA 4))).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
+  · exact (div_le_iff₀ hA).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
   · apply (div_le_iff₀ hKp).mpr
-    simpa only [mul_comm] using (div_le_iff₀ hV).mp (hmem _ (by simp [S]))
+    simpa only [mul_comm] using (div_le_iff₀ hV).mp (hmem _ (by simp [S, A, M, R, MC, RC, L, vl, vr]))
 
 private theorem realizedCell_tail_model {T : MorseChainData} {D : ReferenceData} {C : ℕ → ℝ}
     (h : MorseChainRealization T (fun _ => 1) D C) (side : Bool) (n : ℕ)
@@ -192,7 +192,7 @@ private theorem realizedCell_tail_model {T : MorseChainData} {D : ReferenceData}
     (fun x hx => h.radius_positive side n hn x (hsub x hx))
     (fun x hx => h.derivative_positive side n hn x (hsub x hx))
   simpa only [morseRealizedMassModel, morseRealizedResistanceModel,
-    morseRealizedCapMassModel, morseRealizedCapResistanceModel, ha, hb, he] using hmodel
+    morseRealizedCapMassModel, morseRealizedCapResistanceModel, ha, hb, he, A, B, s] using hmodel
 
 private theorem realized_div_le_of_lower {a c M K : ℝ} (ha : 0 ≤ a) (hc : 0 < c)
     (hK : 0 < K) (hInv : c⁻¹ ≤ K) (hLower : c * a ≤ M) : a / K ≤ M := by

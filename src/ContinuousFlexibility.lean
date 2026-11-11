@@ -50,6 +50,7 @@ import ContinuousFlexibility.Analysis.StateControlCofiniteJets
 import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
 import ContinuousFlexibility.Blueprint.Statements
 import ContinuousFlexibility.Blueprint.N12
+import ContinuousFlexibility.Blueprint.R05b
 import ContinuousFlexibility.Contracts.Annular
 import ContinuousFlexibility.Contracts.CapInteriorClosure
 import ContinuousFlexibility.Contracts.CapInteriorFrontier
