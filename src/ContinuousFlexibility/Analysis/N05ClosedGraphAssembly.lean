@@ -60,8 +60,14 @@ def n05RelationInverse : E →L[ℝ] n05RelationGraph R G hR :=
 
 @[simp] theorem n05RelationInverse_val (f : E) :
     (n05RelationInverse R G hR f).val = (G f, f) := by
-  simp only [n05RelationInverse, ContinuousLinearMap.coe_codRestrict_apply,
-    ContinuousLinearMap.prod_apply, ContinuousLinearMap.id_apply]
+  calc
+    (n05RelationInverse R G hR f).val =
+        (G.prod (ContinuousLinearMap.id ℝ E)) f :=
+      ContinuousLinearMap.coe_codRestrict_apply
+        (G.prod (ContinuousLinearMap.id ℝ E)) (n05RelationGraph R G hR)
+          (fun g => (hR (G g) g).mpr rfl) f
+    _ = (G f, f) := by
+      rw [ContinuousLinearMap.prod_apply, ContinuousLinearMap.id_apply]
 
 theorem n05RelationInverse_right (f : E) :
     (n05RelationInverse R G hR f).val.2 = f := by

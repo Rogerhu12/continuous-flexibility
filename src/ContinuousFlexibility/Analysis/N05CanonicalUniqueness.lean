@@ -24,7 +24,7 @@ theorem n05CanonicalMeasure_eq_open_rectangle (S : PhysicalSpacesData)
   rw [n05CanonicalMeasure_eq_prod]
   have ha : angleMeasure = (volume : Measure ℝ).restrict (Ioo (0 : ℝ) Real.pi) :=
     (Measure.restrict_congr_set Ioo_ae_eq_Ioc).symm
-  rw [ha, ← Measure.prod_restrict]
+  rw [ha, Measure.prod_restrict]
 
 theorem n05CanonicalTest_of_periodization {S : PhysicalSpacesData} {K : CanonicalData S}
     {m : ℕ} {φ : PolarPoint → ℝ} (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ)
@@ -36,10 +36,10 @@ theorem n05CanonicalTest_of_periodization {S : PhysicalSpacesData} {K : Canonica
     exact (hs hp).1
   · intro r hr θ
     unfold cylinderTestPeriodization
-    apply tsum_eq_zero
-    intro k
-    by_contra hk
-    exact hr ⟨cylinderAngularShift k (r, θ), subset_tsupport φ hk, rfl⟩
+    have hz (k : ℤ) : φ (cylinderAngularShift k (r, θ)) = 0 := by
+      by_contra hk
+      exact hr ⟨cylinderAngularShift k (r, θ), subset_tsupport φ hk, rfl⟩
+    simp only [hz, tsum_zero]
 
 theorem n05CanonicalPeriodization_eq {S : PhysicalSpacesData} {K : CanonicalData S}
     {m : ℕ} {φ : PolarPoint → ℝ}
@@ -61,7 +61,9 @@ theorem n05CanonicalPeriodization_eq {S : PhysicalSpacesData} {K : CanonicalData
       linarith only [hθ.2, hp.1, hm]
   calc
     cylinderTestPeriodization φ p = φ (cylinderAngularShift 0 p) := tsum_eq_single 0 hz
-    _ = φ p := by simp only [cylinderAngularShift, zero_zsmul, add_zero]
+    _ = φ p := by
+      change φ (p.1, p.2 + (0 : ℤ) • Real.pi) = φ p
+      simp only [zero_zsmul, add_zero, Prod.mk.eta]
 
 theorem n05CanonicalL2_eq_zero_of_test (S : PhysicalSpacesData) (K : CanonicalData S)
     (m : ℕ) (u : CanonicalL2 S K m)
