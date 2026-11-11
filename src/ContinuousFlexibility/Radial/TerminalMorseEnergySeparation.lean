@@ -20,10 +20,16 @@ theorem terminalPhysicalCutoff_closed_support (rising : Bool) {a b : ℝ} (hab :
   cases rising
   · apply closure_minimal ?_ isClosed_Iic
     intro x hx
-    exact (terminalPhysicalCutoff_support false hab hx).le
+    have hxb : x < b := by
+      simpa only [Bool.false_eq_true, ite_false, mem_Iio] using
+        terminalPhysicalCutoff_support false hab hx
+    exact hxb.le
   · apply closure_minimal ?_ isClosed_Ici
     intro x hx
-    exact (terminalPhysicalCutoff_support true hab hx).le
+    have hax : a < x := by
+      simpa only [eq_self_iff_true, ite_true, mem_Ioi] using
+        terminalPhysicalCutoff_support true hab hx
+    exact hax.le
 
 theorem terminalPhysicalCutoff_opposite_disjoint {aₗ bₗ aᵣ bᵣ : ℝ}
     (hleft : aₗ < bₗ) (hright : aᵣ < bᵣ) (hsep : bₗ < aᵣ) :

@@ -184,6 +184,7 @@ theorem SeedRetainedPair.exists_physical_firstIncoming {S : SelectedTailData}
       P.reference_side_old_value hw hS right hp hcp
     have heq := radialState_radiusScale_angle_of_scaled_germ
       (D := S.family S.sigma) (E := D) j (A := 1) (B := 1)
+      (v := S.outgoing right j)
       (scale := (S.family S.sigma).w p) hκ.ne' hβ.ne' one_ne_zero one_ne_zero hα.ne'
       hprofileE (hu.differentiable (by simp) e) (huret e hpe)
     rw [← hprofileP] at heq
