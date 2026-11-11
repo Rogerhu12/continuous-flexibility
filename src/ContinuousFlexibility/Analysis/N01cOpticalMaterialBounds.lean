@@ -74,9 +74,11 @@ theorem affineOpticalRadialJet_material_bounds
   have hci : HasPositiveEnvelope E (fun m => (c m)⁻¹) :=
     hasPositiveEnvelope_inv_of_lower hE hc₀ hK (fun _ => le_rfl)
   have hupper (m r) (hr : r ∈ I m) (x) (hx : x ∈ U) :
-      q₀ m r + L m x * g m r ≤ A 0 m * δ m r :=
-    (le_abs_self _).trans (by simpa only [pow_zero, one_mul, iteratedDeriv_zero]
-      using hbq 0 m r hr x hx)
+      q₀ m r + L m x * g m r ≤ A 0 m * δ m r := by
+    have hh := hbq 0 m r hr x hx
+    have habs : |q₀ m r + L m x * g m r| ≤ A 0 m * δ m r := by
+      simpa only [A, pow_zero, one_mul, iteratedDeriv_zero] using hh
+    exact (le_abs_self _).trans habs
   have hpos (m r) (hr : r ∈ I m) (x) (hx : x ∈ U) :
       0 < q₀ m r + L m x * g m r :=
     (mul_pos (hc m) (hδ m r hr).1).trans_le (hlower m r hr x hx)
@@ -159,6 +161,115 @@ theorem affineOpticalRadialJet_material_bounds
       _ ≤ _ := mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_right hsqrt (hH m))
           (Finset.prod_nonneg (fun i _ => apply_nonneg p _))
+
+/-- Restrict a scalar input envelope to a set with a uniformly bounded
+low size. All existential arithmetic is over opaque scalar families. -/
+private theorem opticalSquare_inputBounds_on_set
+    {X Y ι : Type*} (U : Set X) (I : ι → Set ℝ)
+    (δ : ι → ℝ → ℝ) (E : ι → ℝ)
+    (F : ℕ → ι → ℝ → Y → ℝ) (G : ℕ → ι → ℝ → X → ℝ)
+    (project : X → Y) (size : Y → ℝ)
+    (hE : ∀ m, 1 ≤ E m)
+    (hδ : ∀ m r, r ∈ I m → 0 ≤ δ m r)
+    {Q : ℝ} (hQ : 0 < Q)
+    (hsize : ∀ x ∈ U, 1 + size (project x) ≤ Q)
+    (heq : ∀ j m r, r ∈ I m → ∀ x ∈ U,
+      G j m r x = F j m r (project x))
+    (hraw : ∀ j : ℕ, ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r, r ∈ I m → ∀ y,
+        δ m r ^ j * |F j m r y| ≤
+          B * E m ^ A * δ m r * (1 + size y)) :
+    ∀ j : ℕ, ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r, r ∈ I m → ∀ x ∈ U,
+        δ m r ^ j * |G j m r x| ≤ B * E m ^ A * δ m r := by
+  intro j
+  obtain ⟨B, A, hB, hA, hb⟩ := hraw j
+  refine ⟨B * Q, A, mul_pos hB hQ, hA, fun m r hr x hx => ?_⟩
+  rw [heq j m r hr x hx]
+  exact (hb m r hr (project x)).trans
+    ((mul_le_mul_of_nonneg_left (hsize x hx)
+      (mul_nonneg (mul_nonneg hB.le
+        (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)) (hδ m r hr))).trans_eq (by ring))
+
+/-- A scalar direction envelope pulls back along the actual projection
+without unpacking its existential at a concrete topological state type. -/
+private theorem opticalDirection_inputBounds_pullback
+    {X Y ι : Type*} (I : ι → Set ℝ) (δ : ι → ℝ → ℝ) (E H : ι → ℝ)
+    (F : ℕ → ι → ℝ → Y → ℝ) (G : ℕ → ι → ℝ → X → ℝ)
+    (project : X → Y) (size : Y → ℝ) (p : X → ℝ)
+    (hE : ∀ m, 1 ≤ E m) (hH : ∀ m, 0 ≤ H m)
+    (hδ : ∀ m r, r ∈ I m → 0 ≤ δ m r)
+    (hp : ∀ v, size (project v) ≤ p v)
+    (heq : ∀ j m r, r ∈ I m → ∀ v,
+      |G j m r v| = |F j m r (project v)|)
+    (hraw : ∀ j : ℕ, ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r, r ∈ I m → ∀ v,
+        δ m r ^ j * |F j m r v| ≤
+          B * H m * E m ^ A * δ m r * size v) :
+    ∀ j : ℕ, ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r, r ∈ I m → ∀ v,
+        δ m r ^ j * |G j m r v| ≤
+          B * E m ^ A * δ m r * H m * p v := by
+  intro j
+  obtain ⟨B, A, hB, hA, hb⟩ := hraw j
+  refine ⟨B, A, hB, hA, fun m r hr v => ?_⟩
+  rw [heq j m r hr v]
+  have hcoefficient : 0 ≤ B * H m * E m ^ A * δ m r :=
+    mul_nonneg (mul_nonneg (mul_nonneg hB.le (hH m))
+      (Real.rpow_nonneg (zero_le_one.trans (hE m)) _)) (hδ m r hr)
+  exact (hb m r hr (project v)).trans
+    ((mul_le_mul_of_nonneg_left (hp v) hcoefficient).trans_eq (by ring))
+
+/-- Change the scalar family in the complete jet-bound existential.
+The genuine directional maps are unchanged by value congruence. -/
+private theorem opticalMaterialBounds_family_congr
+    {X ι : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    (p : Seminorm ℝ X) (U : Set X) (I : ι → Set ℝ)
+    (δ : ι → ℝ → ℝ) (E H : ι → ℝ)
+    (F G : ι → ℝ → X → ℝ) (n k : ℕ)
+    (heq : ∀ m r, r ∈ I m → ∀ x ∈ U, F m r x = G m r x)
+    (hbound : ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ I m), ∀ J : SmoothDirections U (F m r),
+      ∀ x ∈ U, ∀ v : Fin k → X,
+        δ m r ^ n * |J.D k x v| ≤
+          B * E m ^ A * parameterHeightWeight (H m) k * ∏ i, p (v i)) :
+    ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
+      ∀ m r (hr : r ∈ I m), ∀ J : SmoothDirections U (G m r),
+      ∀ x ∈ U, ∀ v : Fin k → X,
+        δ m r ^ n * |J.D k x v| ≤
+          B * E m ^ A * parameterHeightWeight (H m) k * ∏ i, p (v i) := by
+  obtain ⟨B, A, hB, hA, hb⟩ := hbound
+  refine ⟨B, A, hB, hA, fun m r hr J x hx v => ?_⟩
+  exact hb m r hr (J.congr (fun y hy => (heq m r hr y hy).symm)) x hx v
+
+/-- The half-reference lower bound selects one radius before any bound
+order; the output analytic proposition remains opaque. -/
+private theorem opticalMaterialBounds_radius_continuation
+    {X ι : Type*} (U : ℕ → ℝ → Set X) (I : ι → Set ℝ)
+    (δ : ι → ℝ → ℝ) (E : ι → ℝ)
+    (qref : ι → ℝ → ℝ) (q : X → ι → ℝ → ℝ)
+    (P : ℝ → Prop) (B : ℝ → ℕ → ℕ → ℕ → Prop)
+    (hcommon : ∃ ε : ℝ, 0 < ε ∧ P ε)
+    (hhalf : ∀ ε, P ε → ∀ base x, x ∈ U base ε →
+      ∀ m r, r ∈ I m → qref m r / 2 ≤ q x m r)
+    (href : ∃ K : ℝ, 0 < K ∧ ∀ m r, r ∈ I m →
+      K⁻¹ * E m ^ (-K) * δ m r ≤ qref m r)
+    (hcontinue : ∀ ε : ℝ, ∀ base : ℕ, ∀ c₀ K : ℝ,
+      0 < ε → 0 < c₀ → 0 < K →
+      (∀ x ∈ U base ε, ∀ m r, r ∈ I m →
+        c₀ * E m ^ (-K) * δ m r ≤ q x m r) →
+      ∀ n k : ℕ, B ε base n k) :
+    ∃ ε : ℝ, 0 < ε ∧ ∀ base n k : ℕ, B ε base n k := by
+  obtain ⟨ε, hε, hp⟩ := hcommon
+  obtain ⟨K, hK, hq⟩ := href
+  refine ⟨ε, hε, fun base n k => ?_⟩
+  exact hcontinue ε base (K⁻¹ / 2) K hε
+    (div_pos (inv_pos.mpr hK) (by norm_num)) hK
+    (fun x hx m r hr => by
+      calc
+        _ = (K⁻¹ * E m ^ (-K) * δ m r) / 2 := by ring
+        _ ≤ qref m r / 2 := div_le_div_of_nonneg_right (hq m r hr) (by norm_num)
+        _ ≤ q x m r := hhalf ε hp base x hx m r hr) n k
 
 end ContinuousFlexibility.Analysis
 
@@ -248,56 +359,65 @@ theorem n01_stateOpticalRadialJet_material_bounds
       c₀ * E m ^ (-K) * δ m r ≤ q₀ m r + L m z * g m r := by
     rw [heq m r hr z]
     exact hlower z hz m r hr
+  let Q : ℝ := 1 + stateGrading S 0 C.referenceState + ε
+  have hQ : 0 < Q := by
+    have hh := apply_nonneg (stateGrading S 0) C.referenceState
+    dsimp only [Q]
+    linarith
   have hqraw : ∀ j : ℕ, ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
       ∀ m r, r ∈ I m → ∀ z ∈ U,
         δ m r ^ j * |iteratedDeriv j (fun s => q₀ m s + L m z * g m s) r| ≤
-          B * E m ^ A * δ m r := by
-    intro j
-    obtain ⟨B, A, hB, hA₀, hb⟩ := stateOpticalSquare_weighted_sample_bound hS hT hA hE hloc j
-    let Q : ℝ := 1 + stateGrading S 0 C.referenceState + ε
-    have hQ : 0 < Q := by
-      have hh := apply_nonneg (stateGrading S 0) C.referenceState
-      dsimp only [Q]
-      linarith
-    refine ⟨B * Q, A, mul_pos hB hQ, hA₀, fun m r hr z hz => ?_⟩
-    have he : (fun s => q₀ m s + L m z * g m s) =ᶠ[𝓝 r]
-        (fun s => -deriv (stateProfile D S C z.1) s / (s * stateProfile D S C z.1 s)) := by
-      filter_upwards [(hI m).mem_nhds hr] with s hs'
-      exact heq m s hs' z
-    rw [he.iteratedDeriv_eq j]
-    have hp : 1 + stateGrading S 0 z.1 ≤ Q := by
-      dsimp only [Q]
-      linarith [stateGrading_zero_le_reference_add_radius hz]
-    exact (hb m r hr z.1).trans ((mul_le_mul_of_nonneg_left hp
-      (mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (zero_le_one.trans (hEn m)) _))
-        (hδ m r hr).1.le)).trans_eq (by dsimp only [Q]; ring))
+          B * E m ^ A * δ m r :=
+    opticalSquare_inputBounds_on_set U I δ E
+      (fun j _ r (x : AnnularState S) => iteratedDeriv j
+        (fun s => -deriv (stateProfile D S C x) s / (s * stateProfile D S C x s)) r)
+      (fun j m r z => iteratedDeriv j (fun s => q₀ m s + L m z * g m s) r)
+      (fun z : AnnularState S × ℝ => z.1) (stateGrading S 0)
+      hEn (fun m r hr => (hδ m r hr).1.le) hQ
+      (fun z hz => by
+        dsimp only [Q]
+        linarith [stateGrading_zero_le_reference_add_radius hz])
+      (fun j m r hr z _ => by
+        have he : (fun s => q₀ m s + L m z * g m s) =ᶠ[𝓝 r]
+            (fun s => -deriv (stateProfile D S C z.1) s /
+              (s * stateProfile D S C z.1 s)) := by
+          filter_upwards [(hI m).mem_nhds hr] with s hs'
+          exact heq m s hs' z
+        exact he.iteratedDeriv_eq j)
+      (fun j => stateOpticalSquare_weighted_sample_bound hS hT hA hE hloc j)
   have hgraw : ∀ j : ℕ, ∃ B A : ℝ, 0 < B ∧ 0 < A ∧
       ∀ m r, r ∈ I m → ∀ v : AnnularState S × ℝ,
         δ m r ^ j * |iteratedDeriv j (fun s => L m v * g m s) r| ≤
           B * E m ^ A * δ m r * H m *
-            pairGrading (stateGrading S) realGrading 0 v := by
-    intro j
-    obtain ⟨B, A, hB, hA₀, hb⟩ := stateOpticalDirection_weighted_sample_bound hS hT hA hE j
-    refine ⟨B, A, hB, hA₀, fun m r hr v => ?_⟩
-    have he : iteratedDeriv j (fun s => L m v * g m s) r =
-        -(stateKappa S v.1 m * iteratedDeriv j (controlOpticalFactor C m) r) := by
-      rw [iteratedDeriv_const_mul_field]
-      simp only [g, iteratedDeriv_fun_neg, L, stateJointKappaCLM_apply, mul_neg]
-    rw [he, abs_neg]
-    have hcoeff : 0 ≤ B * H m * E m ^ A * δ m r :=
-      mul_nonneg (mul_nonneg (mul_nonneg hB.le (hHn m))
-        (Real.rpow_nonneg (zero_le_one.trans (hEn m)) _)) (hδ m r hr).1.le
-    exact (hb m r hr v.1).trans ((mul_le_mul_of_nonneg_left
-      (stateGrading_fst_le_jointStateGrading S 0 v) hcoeff).trans_eq (by ring))
-  obtain ⟨B, A, hB, hA₀, hb⟩ := affineOpticalRadialJet_material_bounds
-    (pairGrading (stateGrading S) realGrading 0) (isOpen_stateNeighborhood S C base ε)
-    I hI q₀ g L hq hg δ E H hEn hHn (sub_pos.mpr hD.2.1) hR hHR hc₀ hK hδ hlow hqraw hgraw n k
-  refine ⟨B, A, hB, hA₀, fun m r hr J z hz v => ?_⟩
-  let Jaff := J.congr (fun x _ => by
-    apply Filter.EventuallyEq.iteratedDeriv_eq
-    filter_upwards [(hI m).mem_nhds hr] with s hs'
-    exact congrArg Real.sqrt (heq m s hs' x).symm)
-  exact hb m r hr Jaff z hz v
+            pairGrading (stateGrading S) realGrading 0 v :=
+    opticalDirection_inputBounds_pullback I δ E H
+      (fun j m r (v : AnnularState S) =>
+        stateKappa S v m * iteratedDeriv j (controlOpticalFactor C m) r)
+      (fun j m r v => iteratedDeriv j (fun s => L m v * g m s) r)
+      (fun v : AnnularState S × ℝ => v.1) (stateGrading S 0)
+      (pairGrading (stateGrading S) realGrading 0)
+      hEn hHn (fun m r hr => (hδ m r hr).1.le)
+      (stateGrading_fst_le_jointStateGrading S 0)
+      (fun j m r _ v => by
+        have he : iteratedDeriv j (fun s => L m v * g m s) r =
+            -(stateKappa S v.1 m * iteratedDeriv j (controlOpticalFactor C m) r) := by
+          rw [iteratedDeriv_const_mul_field]
+          simp only [g, iteratedDeriv_fun_neg, L, stateJointKappaCLM_apply, mul_neg]
+        rw [he, abs_neg])
+      (fun j => stateOpticalDirection_weighted_sample_bound hS hT hA hE j)
+  exact opticalMaterialBounds_family_congr
+    (pairGrading (stateGrading S) realGrading 0) U I δ E H
+    (fun m r x => iteratedDeriv n (fun s => Real.sqrt (q₀ m s + L m x * g m s)) r)
+    (fun _ r z => iteratedDeriv n (fun s => Real.sqrt
+      (-deriv (stateProfile D S C z.1) s / (s * stateProfile D S C z.1 s))) r) n k
+    (fun m r hr x _ => by
+      apply Filter.EventuallyEq.iteratedDeriv_eq
+      filter_upwards [(hI m).mem_nhds hr] with s hs'
+      exact congrArg Real.sqrt (heq m s hs' x))
+    (affineOpticalRadialJet_material_bounds
+      (pairGrading (stateGrading S) realGrading 0) (isOpen_stateNeighborhood S C base ε)
+      I hI q₀ g L hq hg δ E H hEn hHn (sub_pos.mpr hD.2.1) hR hHR hc₀ hK
+      hδ hlow hqraw hgraw n k)
 
 /-- A single optical neighbourhood suffices at every spatial and
 parameter order, starting only from the quantitative reference lower
@@ -324,16 +444,18 @@ theorem n01_exists_stateOpticalRadialJet_material_bounds
           B * T.E0 (T.sample (C.cell m)) ^ A *
             parameterHeightWeight (T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ)) k *
               ∏ i, pairGrading (stateGrading S) realGrading 0 (v i) := by
-  obtain ⟨ε, hε, hb⟩ := n01_exists_common_opticalBounds_of_referenceLower hS hT hA hlower
-  obtain ⟨K, hK, hQ⟩ := hlower
-  refine ⟨ε, hε, fun base n k => n01_stateOpticalRadialJet_material_bounds
-    hS hT hA hE hloc hε (div_pos (inv_pos.mpr hK) (by norm_num : (0 : ℝ) < 2)) hK
-      (fun z hz m r hr => ?_) n k⟩
-  calc
-    _ = (K⁻¹ * T.E0 (T.sample (C.cell m)) ^ (-K) *
-        min (r - C.left m) (C.right m - r)) / 2 := by ring
-    _ ≤ (-deriv D.w r / (r * D.w r)) / 2 :=
-      div_le_div_of_nonneg_right (hQ m r hr) (by norm_num)
-    _ ≤ _ := (hb base z hz m r hr).2.1
+  exact opticalMaterialBounds_radius_continuation
+    (stateNeighborhood S C) (fun m => Ioo (C.left m) (C.right m))
+    (fun m r => min (r - C.left m) (C.right m - r))
+    (fun m => T.E0 (T.sample (C.cell m)))
+    (fun _ r => -deriv D.w r / (r * D.w r))
+    (fun z _ r => -deriv (stateProfile D S C z.1) r /
+      (r * stateProfile D S C z.1 r)) _ _
+    (n01_exists_common_opticalBounds_of_referenceLower hS hT hA hlower)
+    (fun ε hb base z hz m r hr => (hb base z hz m r hr).2.1)
+    hlower
+    (fun ε base c₀ K hε hc₀ hK hlow n k =>
+      n01_stateOpticalRadialJet_material_bounds hS hT hA hE hloc
+        hε hc₀ hK hlow n k)
 
 end ContinuousFlexibility.Statements
