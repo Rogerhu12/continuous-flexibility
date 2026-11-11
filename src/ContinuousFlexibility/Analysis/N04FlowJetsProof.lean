@@ -96,7 +96,9 @@ theorem n04FlowJetsTarget_proof : N04FlowJetsTarget := by
             (fun y : N04FlowPoint => Θ y.1 t y.2 - y.2) =
               (fun y : N04FlowPoint => Θ y.1 t y.2) - (fun y : N04FlowPoint => y.2) := by
           funext y
-          exact (Pi.sub_apply _ _ y).symm
+          exact (Pi.sub_apply
+            (fun z : N04FlowPoint => Θ z.1 t z.2)
+            (fun z : N04FlowPoint => z.2) y).symm
         rw [he, iteratedFDeriv_sub_apply
           (hΦ.contDiffAt.of_le (by simp : ((n + 1 : ℕ) : ℕ∞ω) ≤ ∞)) contDiffAt_snd]
         exact (norm_sub_le _ _).trans (add_le_add hjet hc)
