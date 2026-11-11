@@ -73,7 +73,7 @@ theorem deriv_deriv_referenceAngularBasis (n : ℕ) (θ : ℝ) :
     deriv (deriv (referenceAngularBasis n)) θ =
       -(((2 * n : ℕ) : ℝ) ^ 2) * referenceAngularBasis n θ := by
   cases n with
-  | zero => simp only [referenceAngularBasis, deriv_const, Nat.mul_zero,
+  | zero => simp only [referenceAngularBasis, deriv_const', deriv_const, Nat.mul_zero,
       Nat.cast_zero, zero_pow (by decide : 2 ≠ 0), neg_zero, zero_mul]
   | succ n => exact deriv_deriv_cosineMode (2 * (n + 1)) θ
 

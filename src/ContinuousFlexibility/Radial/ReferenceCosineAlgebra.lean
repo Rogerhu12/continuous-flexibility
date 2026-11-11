@@ -26,7 +26,7 @@ theorem referenceAngularCoefficient_add {f g : ℝ → ℝ}
   let hG := memLp_referenceAngularProbability hg
   have he : ((hF.add hG).toLp (fun θ => f θ + g θ)) = hF.toLp f + hG.toLp g :=
     hF.toLp_add hG
-  rw [referenceAngularCoefficient_eq_inner (hF.add hG), he, inner_add_right,
+  rw [referenceAngularCoefficient_eq_inner (f := fun θ => f θ + g θ) (hF.add hG), he, inner_add_right,
     ← referenceAngularCoefficient_eq_inner hF, ← referenceAngularCoefficient_eq_inner hG]
 
 theorem referenceAngularCoefficient_sub {f g : ℝ → ℝ}
@@ -38,7 +38,7 @@ theorem referenceAngularCoefficient_sub {f g : ℝ → ℝ}
   let hG := memLp_referenceAngularProbability hg
   have he : ((hF.sub hG).toLp (fun θ => f θ - g θ)) = hF.toLp f - hG.toLp g :=
     hF.toLp_sub hG
-  rw [referenceAngularCoefficient_eq_inner (hF.sub hG), he, inner_sub_right,
+  rw [referenceAngularCoefficient_eq_inner (f := fun θ => f θ - g θ) (hF.sub hG), he, inner_sub_right,
     ← referenceAngularCoefficient_eq_inner hF, ← referenceAngularCoefficient_eq_inner hG]
 
 theorem continuous_sum_referenceAngularBasis (I : Finset ℕ) (c : ℕ → ℝ) :
