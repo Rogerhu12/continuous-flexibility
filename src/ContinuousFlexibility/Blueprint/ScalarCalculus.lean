@@ -1,4 +1,7 @@
 import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Scalar.S03CalculusProof
+import ContinuousFlexibility.Scalar.S04CalculusProof
+import ContinuousFlexibility.Scalar.S05CalculusProof
 
 /-!
 # Blueprint node ScalarCalculus
@@ -15,6 +18,6 @@ namespace ContinuousFlexibility.Blueprint
 open ContinuousFlexibility.Statements
 
 theorem ScalarCalculus : S03CalculusStatement ∧ S04CalculusStatement ∧ S05CalculusStatement := by
-  sorry
+  exact ⟨s03CalculusStatement, s04CalculusStatement, s05CalculusStatement⟩
 
 end ContinuousFlexibility.Blueprint

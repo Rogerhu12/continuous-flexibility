@@ -113,3 +113,13 @@ already exists in the tree.
 1. Lines on the 35 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
+
+## ScalarCalculus line (2026-11-11)
+
+`line/ScalarCalculus` starts from main at `97f8b35b389637d89fa3d09b160acc46e2a12fba`.
+The unchanged S03, S04 and S05 calculus statements have source-level proofs under
+`Scalar/`; local kernel checks are in progress. The new compact-integral theorem
+supplies arbitrary mixed parameter derivatives on a finite physical rectangle.
+The characteristic construction treats both turning directions with one signed
+coordinate. No additional blueprint statement is counted as proved until the
+node, its root imports, its axiom audit and CI have all been checked.

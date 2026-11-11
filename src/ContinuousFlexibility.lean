@@ -317,3 +317,10 @@ import ContinuousFlexibility.Radial.TridiagonalDominance
 import ContinuousFlexibility.Radial.WeightKernelBounds
 import ContinuousFlexibility.Radial.WeightedSchurTest
 import ContinuousFlexibility.Radial.ZeroModePrimitive
+import ContinuousFlexibility.Scalar.RectangleParameterIntegral
+import ContinuousFlexibility.Scalar.S03CalculusProof
+import ContinuousFlexibility.Scalar.S04CalculusProof
+import ContinuousFlexibility.Scalar.S05StateDerivative
+import ContinuousFlexibility.Scalar.S05CalculusProof
+import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Blueprint.ScalarCalculus
