@@ -17,6 +17,7 @@ namespace ContinuousFlexibility.Blueprint
 open ContinuousFlexibility.Statements
 
 theorem Solve (hN10 : N10Statement) (hTame : H01Statement ∧ H02Statement) : PointBranchStatement := by
+  -- The cumulative N10 data already contain the concrete tame estimates used below.
   clear hTame
   obtain ⟨A, T, S, C, R, base, loss, ε, q0, hT, hS,
     L, K, Vol, b, Domain, Relative, G, P, B, N, V, Q, h09, h10⟩ := hN10

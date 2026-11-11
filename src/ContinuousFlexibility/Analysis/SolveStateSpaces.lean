@@ -175,8 +175,8 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
       (pairGrading_monotone (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)))
     (IsTameLinear.id (heightPairGrading S)) hrest
   have hPt : IsTameLinear (stateGrading S) (stateGrading S) P.toLinearMap r b := by
-    simpa only [P, ContinuousLinearMap.coe_prodMap, ContinuousLinearMap.coe_id,
-      Nat.zero_max] using hfull
+    simpa only [P, stateGrading, heightPairGrading, pairGrading,
+      ContinuousLinearMap.coe_prodMap, ContinuousLinearMap.coe_id, Nat.zero_max] using hfull
   exact hasSmoothing_submodule_of_tame_projection (solve_stateGrading_monotone S)
     (stateSectorSubmodule S) P hPmem hPid hPt
     (solve_state_hasSmoothing (D := D) (T := T) (S := S) hS)

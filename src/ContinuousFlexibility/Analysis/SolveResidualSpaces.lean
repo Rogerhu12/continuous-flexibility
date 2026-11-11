@@ -37,10 +37,23 @@ variable {E F : ℕ → Type u}
   (hW : IsClosed (W : Set (ProjectiveLimit E e)))
   (hV : IsClosed (V : Set (ProjectiveLimit F f)))
 
+/-- Cache the product-level structures before any concrete graph is substituted. -/
+private def SolveSubspaceProductLevel (n : ℕ) : Type u :=
+  subLevel W n × subLevel V n
+
+private instance (n : ℕ) : NormedAddCommGroup (SolveSubspaceProductLevel W V n) :=
+  inferInstanceAs (NormedAddCommGroup (subLevel W n × subLevel V n))
+
+private instance (n : ℕ) : NormedSpace ℝ (SolveSubspaceProductLevel W V n) :=
+  inferInstanceAs (NormedSpace ℝ (subLevel W n × subLevel V n))
+
+private def solveSubspaceProductBond (n : ℕ) :
+    SolveSubspaceProductLevel W V (n + 1) →L[ℝ] SolveSubspaceProductLevel W V n :=
+  (subBond W n).prodMap (subBond V n)
+
 /-- Assemble the product representation while its Banach levels remain abstract. -/
 private def solveSubspaceProductEquiv : (W × V) ≃L[ℝ]
-    ProjectiveLimit (fun n => subLevel W n × subLevel V n)
-      (fun n => (subBond W n).prodMap (subBond V n)) :=
+    ProjectiveLimit (SolveSubspaceProductLevel W V) (solveSubspaceProductBond W V) :=
   ((subspaceEquiv (E := E) (e := e) W hW).prodCongr
     (subspaceEquiv (E := F) (e := f) V hV)).trans
     (prodEquiv (fun n => subLevel W n) (subBond W)
@@ -58,8 +71,7 @@ private theorem solveSubspaceProductEquiv_apply (z : W × V) :
 
 set_option diagnostics true in
 private theorem solveSubspaceProductEquiv_grading (n : ℕ) (z : W × V) :
-    gradedSeminorm (fun k => subLevel W k × subLevel V k)
-        (fun k => (subBond W k).prodMap (subBond V k)) n
+    gradedSeminorm (SolveSubspaceProductLevel W V) (solveSubspaceProductBond W V) n
         (solveSubspaceProductEquiv (E := E) (F := F) (e := e) (f := f) W V hW hV z) =
       max (gradedSeminorm E e n z.1.val) (gradedSeminorm F f n z.2.val) := by
   rw [solveSubspaceProductEquiv_apply (E := E) (F := F) (e := e) (f := f) W V hW hV z,
@@ -84,20 +96,20 @@ theorem solve_isClosed_evenCircle (hS : IsPhysicalSpaces D T S) :
     ((continuous_apply θ).comp ((continuous_apply m).comp hd))
 
 /-- Levels for the actual two-component residual. -/
-def SolveResidualLevel (S : PhysicalSpacesData) (n : ℕ) : Type :=
-  subLevel (S.Q.toLinearMap.ker) n × subLevel (evenCircleSubmodule S) n
+abbrev SolveResidualLevel (S : PhysicalSpacesData) (n : ℕ) : Type :=
+  SolveSubspaceProductLevel
+    (E := fun k => (S.height (3 / 4 : ℝ)).level k)
+    (F := fun k => (S.circle (3 / 4 : ℝ)).level k)
+    (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
+    S.Q.toLinearMap.ker (evenCircleSubmodule S) n
 
-instance (S : PhysicalSpacesData) (n : ℕ) : NormedAddCommGroup (SolveResidualLevel S n) :=
-  inferInstanceAs (NormedAddCommGroup
-    (subLevel S.Q.toLinearMap.ker n × subLevel (evenCircleSubmodule S) n))
-
-instance (S : PhysicalSpacesData) (n : ℕ) : NormedSpace ℝ (SolveResidualLevel S n) :=
-  inferInstanceAs (NormedSpace ℝ
-    (subLevel S.Q.toLinearMap.ker n × subLevel (evenCircleSubmodule S) n))
-
-def solveResidualBond (S : PhysicalSpacesData) (n : ℕ) :
+abbrev solveResidualBond (S : PhysicalSpacesData) (n : ℕ) :
     SolveResidualLevel S (n + 1) →L[ℝ] SolveResidualLevel S n :=
-  (subBond S.Q.toLinearMap.ker n).prodMap (subBond (evenCircleSubmodule S) n)
+  solveSubspaceProductBond
+    (E := fun k => (S.height (3 / 4 : ℝ)).level k)
+    (F := fun k => (S.circle (3 / 4 : ℝ)).level k)
+    (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
+    S.Q.toLinearMap.ker (evenCircleSubmodule S) n
 
 /-- The residual product is represented by the same actual weak graph
 levels, followed by their closed scalar and parity subspaces. -/
@@ -117,12 +129,15 @@ theorem solveResidualEquiv_grading (hS : IsPhysicalSpaces D T S)
         (solveResidualEquiv (D := D) (T := T) (S := S) hS y) =
       max (S.sourceGrading n y.1)
         (((S.circle (3 / 4 : ℝ)).grading n) y.2.val) := by
-  exact solveSubspaceProductEquiv_grading
+  have h := solveSubspaceProductEquiv_grading
     (E := fun k => (S.height (3 / 4 : ℝ)).level k)
     (F := fun k => (S.circle (3 / 4 : ℝ)).level k)
     (e := (S.height (3 / 4 : ℝ)).bond) (f := (S.circle (3 / 4 : ℝ)).bond)
     S.Q.toLinearMap.ker (evenCircleSubmodule S) S.Q.isClosed_ker
     (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) n y
+  simpa only [solveResidualEquiv, SolveResidualLevel, solveResidualBond,
+    PhysicalSpacesData.sourceGrading, SobolevModelData.grading, CircleModelData.grading,
+    Seminorm.comp_apply, Submodule.subtype_apply] using h
 
 -- Later comparisons only need the specialized grading theorem.
 attribute [irreducible] solveResidualEquiv
