@@ -111,7 +111,8 @@ theorem SeedRetainedPair.first_cutoff_source_energy {S : SelectedTailData}
     rw [hlam]
     exact hsource.2
   · intro lo high hlo hhi
-    change 0 ≤ (∫ r in lo..high, terminalCapCutoffEnergy D.w χ U.solution r) / lam ∧ _
+    change 0 ≤ (∫ r in lo..high, terminalCapCutoffEnergy D.w χ U.solution r) / lam ∧
+      (∫ r in lo..high, terminalCapCutoffEnergy D.w χ U.solution r) / lam ≤ _
     simp only [hlam]
     have hjet := terminalConeLayer_actual_jets right hc hp hi hjpos.le hH hH' hL
       hlen hcp U.smooth U.cone_power

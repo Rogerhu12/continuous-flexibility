@@ -146,15 +146,17 @@ theorem innerRadialChainWeakGraph_transpose {D : ReferenceData}
       (∑ k, ⟪(q k).1, J⟫_ℝ) = 0 := by
     rw [← Finset.sum_add_distrib]
     calc
-      _ = ∑ k, (D.w (G.right k) * deriv ψ (G.right k)) *
+      _ = ∑ k, ((D.w (G.right k) * deriv ψ (G.right k)) *
           innerChainBoundaryRestriction n k ξ 1 -
           (D.w (G.left k) * deriv ψ (G.left k)) *
-            innerChainBoundaryRestriction n k ξ 0 := by
+            innerChainBoundaryRestriction n k ξ 0) := by
         apply Finset.sum_congr rfl
         intro k _
-        rw [innerRadialH1Domain_jacobi_test hD hw (G.left_lt_right k)
+        exact (innerRadialH1Domain_jacobi_test hD hw (G.left_lt_right k)
           (G.left_pos k) (G.in_core k) (G.weight_pos k) (hξ k).1
-          (hgraph.2.1 k) hψ (hTu k) (hTd k), (hξ k).2]
+          (hgraph.2.1 k) hψ (hTu k) (hTd k)).trans
+          (congrArg (fun z : Fin 2 → ℝ => (D.w (G.right k) * deriv ψ (G.right k)) * z 1 -
+            (D.w (G.left k) * deriv ψ (G.left k)) * z 0) (hξ k).2)
       _ = 0 := innerRadialChainBoundary_pairing_sum G ξ (fun r => D.w r * deriv ψ r)
   have hc : (∑ k : Fin (n + 1), c * ⟪if k = central then column else 0, (T k).1⟫_ℝ) =
       c * ⟪column, P⟫_ℝ := by
@@ -221,10 +223,14 @@ theorem innerRadialChainWeakGraph_jacobi_integral {D : ReferenceData}
       (innerGapGradientField ψ) (innerGapGradientField_continuous hψ).continuousOn)
   have hTu (k) : ((T k).1 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D]
       (Ioo (G.left k) (G.right k)).indicator ψ :=
-    innerRadialIntervalToLp_ae D hw.continuous (G.left_pos k) (G.in_core k) _ _ _
+    innerRadialIntervalToLp_ae D hw.continuous (G.left_pos k) (G.in_core k)
+      (fun r hr => (G.weight_pos k r (Ioo_subset_Icc_self hr)).le) ψ
+      hψ.continuous.continuousOn
   have hTd (k) : ((T k).2 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D]
       (Ioo (G.left k) (G.right k)).indicator (innerGapGradientField ψ) :=
-    innerRadialIntervalToLp_ae D hw.continuous (G.left_pos k) (G.in_core k) _ _ _
+    innerRadialIntervalToLp_ae D hw.continuous (G.left_pos k) (G.in_core k)
+      (fun r hr => (G.weight_pos k r (Ioo_subset_Icc_self hr)).le)
+      (innerGapGradientField ψ) (innerGapGradientField_continuous hψ).continuousOn
   have he := innerRadialChainWeakGraph_transpose hD hw G hgraph hf hcs hψ hleft hright hTu hTd
   let hP := matching_memLp_of_continuousOn hD hψ.continuous.measurable
     hψ.continuous.continuousOn 2

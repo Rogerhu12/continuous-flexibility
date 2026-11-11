@@ -59,7 +59,7 @@ theorem SeedRetainedPair.selected_later_pair_boundary {S : SelectedTailData}
   obtain ⟨v, hvs, hNv, _, _, hEq, _, _, _, hangle⟩ :=
     selected_later_natural_join_angle hS G hc hc₁ hsmall side hn hj heven hband hjoin hu hv hsep
   have hstand := selected_later_standIn_bounds hS G hC side hn hj heven hband hcut hjoin hu
-  have hp := (hS.2.2.2.2.2 side n j hj heven hband).2.2.1.1
+  have hp := (hS.2.2.2.2.2 side n j hj heven hband).2.2.1
   have hret := (selected_later_cut_join_entry_retained hS G hentry side
     hn hj heven hband hcut).2.1
   have ho := (hS.2.2.2.2.2 side S.chain.index 2 le_rfl (by decide) hfirst).2.2.2.2.1

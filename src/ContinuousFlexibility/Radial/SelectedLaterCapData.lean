@@ -60,8 +60,8 @@ theorem MorseChainGeometryWitness.scaled_previousCap_endpoints {T : MorseChainDa
       (morseChainB T m) (1 / 100) := by
     simpa only [hk] using G.rightX_eq side k
   constructor
-  · simp only [r07PreviousCellCut, r07CapCut, hR, mul_assoc]
-  · simp only [r07PreviousCellJoin, hl, hr, hR, mul_assoc]
+  · simp only [r07PreviousCellCut, r07CapCut, hR, mul_assoc, k]
+  · simp only [r07PreviousCellJoin, hl, hr, hR, mul_assoc, k]
 
 /-- The entire normalized cap maps into the two actual cap endpoints. -/
 theorem terminalMorse_cap_radius_mem (side : Bool) {A B s x : ℝ} {r : ℝ → ℝ}
@@ -90,9 +90,11 @@ theorem terminalMorse_cap_radius_mem (side : Bool) {A B s x : ℝ} {r : ℝ → 
   have hhi := mul_le_mul_of_nonneg_left
     (hm (hsub hx) (hsub ⟨hx.1.trans hx.2, le_rfl⟩) hx.2) hs.le
   cases side
-  · rw [uIcc_of_ge (hlo.trans hhi)]
+  · simp only [Bool.false_eq_true, ite_false] at hlo hhi ⊢
+    rw [uIcc_of_ge (hlo.trans hhi)]
     exact ⟨hlo, hhi⟩
-  · rw [uIcc_of_le (hlo.trans hhi)]
+  · simp only [ite_true] at hlo hhi ⊢
+    rw [uIcc_of_le (hlo.trans hhi)]
     exact ⟨hlo, hhi⟩
 
 theorem SeedRetainedPair.reference_later_cap_data {S : SelectedTailData}
@@ -162,6 +164,7 @@ theorem SeedRetainedPair.reference_later_cap_data {S : SelectedTailData}
     exact hdata.2.2.1
   · intro hside
     subst side
+    simp only [ite_true] at hends
     rw [hends.1]
     exact hdata.2.2.2.1
 
