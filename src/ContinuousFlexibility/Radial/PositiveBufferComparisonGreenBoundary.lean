@@ -38,8 +38,10 @@ theorem positiveBufferGreenInterior_deriv_own_cut {B : BufferData}
     (positiveBufferCutoff_derivatives_zero
       (σ := B.action j) (x := 0) (by intro h; linarith [h.1])).1
   have hχd : HasDerivAt (positiveBufferCutoff (B.action j)) 0 0 := by
-    rw [← hχ'0]
-    exact ((positiveBufferCutoff_contDiff (B.action j)).differentiable (by simp) 0).hasDerivAt
+    have hd : HasDerivAt (positiveBufferCutoff (B.action j))
+        (deriv (positiveBufferCutoff (B.action j)) 0) 0 :=
+      ((positiveBufferCutoff_contDiff (B.action j)).differentiable (by simp) 0).hasDerivAt
+    simpa only [hχ'0] using hd
   have hprod : HasDerivAt (fun t => positiveBufferCutoff (B.action j) t * pin t)
       (deriv pin 0) 0 := by
     convert hχd.fun_mul ((hpin.differentiable (by simp) 0).hasDerivAt) using 1
@@ -78,9 +80,12 @@ theorem positiveBufferGreenInterior_opposite_cut {B : BufferData}
     apply hne
     rw [positiveBufferPoint_coordinate hB j (bufferCut B i), positiveBufferPoint_zero]
   have hnear : ∀ᶠ x in 𝓝 (bufferCut B i),
-      B.action j + 4 < positiveBufferCoordinate B j x :=
-    (isOpen_lt continuous_const (positiveBufferCoordinate_contDiff B j).continuous).mem_nhds
-      (by linarith)
+      B.action j + 4 < positiveBufferCoordinate B j x := by
+    have hopen : IsOpen {x : ℝ | B.action j + 4 < positiveBufferCoordinate B j x} :=
+      isOpen_lt continuous_const (positiveBufferCoordinate_contDiff B j).continuous
+    apply hopen.mem_nhds
+    change B.action j + 4 < positiveBufferCoordinate B j (bufferCut B i)
+    linarith
   have he : positiveBufferGreenInterior B j A pin =ᶠ[𝓝 (bufferCut B i)] fun _ => (0 : ℝ) := by
     filter_upwards [hnear] with x hx
     unfold positiveBufferGreenInterior

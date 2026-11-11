@@ -70,7 +70,8 @@ theorem positiveBuffer_potential_lower_cutLayer {B : BufferData} (hB : BufferHyp
   rcases hB with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hlo, _, _⟩
   apply hlo i x
   by_cases hi : i = 0
-  · simp only [bufferCut, hi, ite_true] at hx'
+  · simp only [hi] at hlen
+    simp only [bufferCut, hi, ite_true] at hx'
     simp only [hi, ite_true]
     linarith [hx'.2]
   · simp only [bufferCut, hi, ite_false] at hx'
@@ -86,7 +87,8 @@ theorem positiveBuffer_potential_lower_exterior {B : BufferData} (hB : BufferHyp
   rcases hB with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hlo, _, _⟩
   apply hlo i x
   by_cases hi : i = 0
-  · simp only [bufferExterior, hi, ite_true, closure_Iio, mem_Iic] at hx
+  · simp only [hi] at hlen
+    simp only [bufferExterior, hi, ite_true, closure_Iio, mem_Iic] at hx
     simp only [hi, ite_true]
     linarith
   · simp only [bufferExterior, hi, ite_false, closure_Ioi, mem_Ici] at hx
@@ -162,10 +164,12 @@ theorem positiveBuffer_exists_buffer_profiles {B : BufferData} (hB : BufferHypot
     have hord := positiveBuffer_innerWall_order hB i
     by_cases hi : i = 0
     · have hc : bufferCut B i < bufferInnerWall B i := by simpa only [hi, ite_true] using hord
-      simp only [αin, bufferSign, hi, ite_true, if_pos hc, neg_mul, one_mul]
+      rw [if_pos hc]
+      simp only [αin, bufferSign, hi, ite_true, neg_mul, one_mul]
     · have hlt : bufferInnerWall B i < bufferCut B i := by simpa only [hi, ite_false] using hord
       have hc : ¬bufferCut B i < bufferInnerWall B i := hlt.not_gt
-      simp only [αin, bufferSign, hi, ite_false, if_neg hc, one_mul]
+      rw [if_neg hc]
+      simp only [αin, bufferSign, hi, ite_false, one_mul]
   have hout (i : Fin 2) : αout i =
       ∫ x in bufferExterior B i, deriv (pout i) x ^ 2 + B.potential x * pout i x ^ 2 := by
     rw [hpout_flux i]
@@ -175,10 +179,12 @@ theorem positiveBuffer_exists_buffer_profiles {B : BufferData} (hB : BufferHypot
         intro heq
         have hx : B.l - 1 ∈ Ioi B.l := heq ▸ (show B.l - 1 ∈ Iio B.l by simp)
         linarith [mem_Ioi.mp hx]
-      simp only [αout, bufferSign, hi, ite_true, if_neg hne, neg_neg, one_mul]
+      rw [if_neg hne]
+      simp only [αout, bufferSign, hi, ite_true, neg_neg, one_mul]
     · have heq : bufferExterior B i = Ioi (bufferCut B i) := by
         simp only [bufferExterior, bufferCut, hi, ite_false]
-      simp only [αout, bufferSign, hi, ite_false, if_pos heq, neg_mul, one_mul]
+      rw [if_pos heq]
+      simp only [αout, bufferSign, hi, ite_false, neg_mul, one_mul]
   refine ⟨pin, pout, αin, αout, ?_⟩
   intro i
   have hpd := (contDiff_infty_iff_deriv.mp (hpin_sm i)).2

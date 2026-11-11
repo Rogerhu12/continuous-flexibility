@@ -77,7 +77,7 @@ theorem positiveBuffer_compression_of_corrected_data {B : BufferData}
     have hm0 := (hm i).1
     have hdiv : B.mass i / C ≤ B.mass i := by
       apply (div_le_iff₀ hC).mpr
-      nlinarith
+      simpa only [mul_one] using mul_le_mul_of_nonneg_left hC1 hm0.le
     refine ⟨(D.pin_smooth i).contDiffOn.of_le (by simp),
       (D.pout_smooth i).contDiffOn.of_le (by simp),
       D.inner_energy_integrable i, D.outer_energy_integrable i,

@@ -63,7 +63,7 @@ theorem positiveBufferGreenProfileDerivative_memLp {σ : ℝ} {pin pout : ℝ �
     have hχ := positiveBufferCutoff_zero (by linarith : σ + 4 ≤ t)
     have hχ' := (positiveBufferCutoff_derivatives_zero
       (show t ∉ Icc (σ + 2) (σ + 4) by intro h; linarith [h.2])).1
-    rw [deriv_mul ((positiveBufferCutoff_contDiff σ).differentiable (by simp) t)
+    rw [deriv_fun_mul ((positiveBufferCutoff_contDiff σ).differentiable (by simp) t)
       (hpin.differentiable (by simp) t), hχ, hχ']
     ring
   exact positiveBuffer_cutGlue_memLp 0 hleft hright

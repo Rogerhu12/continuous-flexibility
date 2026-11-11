@@ -100,10 +100,10 @@ theorem positiveBuffer_oriented_cut_trace_bound {B : BufferData}
     (a := a) (m := 1) (r := a) (c := 0) (σ := B.action i)
     (by norm_num) hM hv.continuousOn hvderiv hdvderiv hq
     (fun r _ => hbound (bufferCut B i + b * r)) g hgrep le_rfl
-    (by dsimp [a]; norm_num; linarith)
-    (by dsimp [a]; norm_num; linarith)
+    (by dsimp [a]; norm_num <;> linarith)
+    (by dsimp [a]; norm_num <;> linarith)
   rw [hgnorm] at htrace
-  simpa only [v, mul_zero, add_zero, sqrt_one, one_mul, mul_assoc, mul_comm, mul_left_comm] using htrace
+  simpa only [v, mul_zero, zero_mul, add_zero, sqrt_one, one_mul, mul_assoc, mul_comm, mul_left_comm] using htrace
 
 /-- The inverse norm supplies the source size independently of the observation cut. -/
 theorem positiveBuffer_oriented_correction_trace_bound {B : BufferData}

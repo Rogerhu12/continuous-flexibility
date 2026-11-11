@@ -72,12 +72,6 @@ theorem positiveBufferPoissonColumnState_retained (B : BufferData) (A : Fin 2 �
   rw [positiveBufferPoissonMap_apply, positiveBufferPoisson_matrix_single,
     positiveBufferStateSynthesis_apply]
   congr 1
-  unfold positiveBufferPoissonColumnEnergy
-  rw [map_sum]
-  apply Finset.sum_congr rfl
-  intro k _
-  exact (map_smul (positiveBufferBorderedState B.potential B.bordered)
-    (sqrt (A j) * Q k j) (column k)).symm
 
 theorem positiveBufferPoissonColumnField_eq (B : BufferData) (A : Fin 2 → ℝ)
     (Q : Matrix (Fin 2) (Fin 2) ℝ)
