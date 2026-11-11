@@ -189,7 +189,8 @@ theorem exists_csBound_rootOddIntegral (s : ℕ) :
       (contDiff_infty_iff_fderiv.mp hG).2.contDiffAt (by simp)
     have hnext : ‖iteratedFDeriv ℝ i (rootMiddleDerivative G) y‖ ≤
         ‖iteratedFDeriv ℝ (i + 1) G y‖ := by
-      simpa only [rootMiddleDerivative, hv, one_mul, norm_iteratedFDeriv_fderiv] using h
+      unfold rootMiddleDerivative
+      simpa only [hv, one_mul, norm_iteratedFDeriv_fderiv] using h
     exact hnext.trans (hB (i + 1) (Nat.add_le_add_right hi 1) y hy)
   have hIntegrand : ContDiff ℝ ∞ (rootMiddleDerivative G ∘ A) := hMiddle.comp hA
   have hI : ContDiff ℝ ∞ (fun q : ℝ × ℝ × ℝ =>
@@ -224,7 +225,8 @@ theorem exists_csBound_rootOddIntegral (s : ℕ) :
       (1 / 2 : ℝ) • iteratedFDeriv ℝ n
         (fun q : ℝ × ℝ × ℝ => ∫ t in (-1 : ℝ)..1,
           (rootMiddleDerivative G ∘ A) (q, t)) q := by
-    simpa only [rootOddIntegral, Function.comp_def, A, smul_eq_mul] using
+    unfold rootOddIntegral
+    simpa only [Function.comp_def, A, smul_eq_mul] using
       (iteratedFDeriv_const_smul_apply' (a := (1 / 2 : ℝ))
         (hI.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)))
   rw [hscale, norm_smul, Real.norm_of_nonneg (by norm_num : 0 ≤ (1 / 2 : ℝ))]

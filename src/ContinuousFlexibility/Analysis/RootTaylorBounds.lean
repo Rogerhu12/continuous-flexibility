@@ -62,7 +62,8 @@ theorem exists_rootEven_finiteTaylor_jet_bound (n : ℕ) :
       exact_mod_cast (Nat.succ_le_of_lt (Nat.factorial_pos k))
     calc
       ‖A k‖ = (k.factorial : ℝ)⁻¹ * ‖iteratedFDeriv ℝ k G (x₀, 0, θ₀)‖ := by
-        rw [A, norm_smul, Real.norm_of_nonneg (inv_nonneg.mpr (Nat.cast_nonneg _))]
+        dsimp only [A]
+        rw [norm_smul, Real.norm_of_nonneg (inv_nonneg.mpr (Nat.cast_nonneg _))]
       _ ≤ 1 * ‖iteratedFDeriv ℝ k G (x₀, 0, θ₀)‖ :=
         mul_le_mul_of_nonneg_right (inv_le_one_of_one_le₀ hfac) (norm_nonneg _)
       _ = ‖iteratedFDeriv ℝ k G (x₀, 0, θ₀)‖ := one_mul _

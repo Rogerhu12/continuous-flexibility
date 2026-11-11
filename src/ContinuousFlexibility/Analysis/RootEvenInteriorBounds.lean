@@ -55,7 +55,8 @@ theorem contDiffAt_rootEven_pos {G : ℝ × ℝ × ℝ → ℝ}
     hG.contDiffAt.comp p (contDiffAt_rootCoordinate 1 hp)
   have hminus : ContDiffAt ℝ ∞ (G ∘ rootCoordinate (-1)) p :=
     hG.contDiffAt.comp p (contDiffAt_rootCoordinate (-1) hp)
-  simpa only [Function.comp_apply, rootCoordinate, one_mul, neg_one_mul, Statements.rootEven]
+  unfold Statements.rootEven
+  simpa only [Function.comp_apply, rootCoordinate, one_mul, neg_one_mul]
     using (hplus.add hminus).div_const 2
 
 /-- Averaging the two root-coordinate jets preserves a common bound. -/
