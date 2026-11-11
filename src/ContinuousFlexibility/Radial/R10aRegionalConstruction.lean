@@ -24,6 +24,7 @@ open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 theorem r10aRegionalConstruction (hR09 : R09Statement)
     (hgeometry : R10aGeometrySupply) :
     ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+      RadialConstructionGeometry D ∧
       ∀ j : ℕ, 2 ≤ j → Even j →
         ∃ W : TerminalRegionalData D, W.matching.frequency = j := by
   classical
@@ -72,9 +73,9 @@ theorem r10aRegionalConstruction (hR09 : R09Statement)
   obtain ⟨ε, H, hε, hH, hHpos, hfirstBudget, hfirstBounds⟩ :=
     exists_terminalCone_matching_budget hJ hη hKfirst
   obtain ⟨K, P, Γ, hselected, hhead, hΓ, hw, hheight, hleft, hright,
-      hTL, hTR, hcolumn, hprofile, hcentralHeight⟩ :=
+      hTL, hTR, hcolumn, hprofile, hcentralHeight, hconstruction⟩ :=
     hrealize T 1 (H + 1) hcap (by norm_num) (by linarith only [hHpos])
-  refine ⟨Γ.reference, hΓ.2.1, hΓ.2.2.1, ?_⟩
+  refine ⟨Γ.reference, hΓ.2.1, hΓ.2.2.1, hconstruction, ?_⟩
   intro j hj heven
   obtain ⟨n, hband, _⟩ := metadata.selected.2.2.2.2.1 j hj heven
   have hq : 1 ≤ j / 2 := (even_frequency_half hj heven).1

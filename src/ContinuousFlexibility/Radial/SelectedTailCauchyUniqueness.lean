@@ -66,7 +66,7 @@ theorem OuterWeightedHomogeneousUnique.radial
     have hxold : outerOutwardRadius right x ∈ radialTailInterval D right cut := by
       apply (radialTailInterval_outward D right cut _).mpr
       simpa only [outerOutwardRadius_twice] using hx
-    have hcore := selected_tail_subset_core hcut right hxold
+    have hcore := selectedTailInterval_subset_core hcut right hxold
     have hwn := ((matchingProfileGeometry hD).2.2.2.2.1 _ hcore).ne'
     have hxp : 0 < outerOutwardRadius right x := (matchingProfileGeometry hD).1.trans hcore.1
     have hx0 : x ≠ 0 := by
@@ -130,7 +130,7 @@ theorem RadialTailCauchyUnique.radiusScale
     have hi : κ * r ∈ radialTailInterval E right (κ * cut) := by
       rw [← radialTailInterval_radius_image (entry := cut) hκ right hend]
       exact ⟨r, hr, rfl⟩
-    have hrCore := selected_tail_subset_core hcut right hr
+    have hrCore := selectedTailInterval_subset_core hcut right hr
     have hr0 := ((matchingProfileGeometry hD).1.trans hrCore.1).ne'
     have hwn := ((matchingProfileGeometry hD).2.2.2.2.1 _ hrCore).ne'
     have hwderiv : deriv E.w (κ * r) = β * deriv D.w r := by

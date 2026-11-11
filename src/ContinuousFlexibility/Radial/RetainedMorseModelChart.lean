@@ -38,6 +38,7 @@ variable {S : SelectedTailData} {K : SeedCentralCutoff} {q length : ℝ}
     (innerMorseBufferData (morseChainA S.chain m) (morseChainB S.chain m)
       j (8 * (S.chain.d m : ℝ) ^ 9)) Cmodel Kmodel)
 
+include hS hm in
 private theorem retainedMorse_radius_potential
     (x : ℝ) (hx : x ∈ Ioo innerMorseBufferLeftCut
       (innerMorseBufferRightCut (morseChainA S.chain m) (morseChainB S.chain m))) :
@@ -121,7 +122,8 @@ theorem retainedMorseModelChart_kappa (i : Fin 2) :
       (P.sideHeight side * morseChainAmplitude S.chain S.sigma m) *
         (M.column i).inwardEnergy := by
   simp only [retainedMorseModelChart, InnerRadialModelChart.kappa,
-    innerLiouvilleBoundaryKappa, one_pow, mul_one]
+    innerLiouvilleBoundaryKappa, innerLiouvilleBoundaryDrift, deriv_const,
+    zero_div, mul_zero, zero_mul, add_zero, sub_zero, one_pow, mul_one]
 
 theorem retainedMorseModelChart_errorMatrix :
     (P.retainedMorseModelChart hw hS G₀ hband H bordered j central piece column

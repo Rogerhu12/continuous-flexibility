@@ -116,7 +116,7 @@ theorem SeedRetainedPair.exists_selectedOuterRegionalInverse {S : SelectedTailDa
       exact mul_pos (mul_pos hβ hκ) ((matchingProfileGeometry hD).2.2.2.2.1 _ hp)
     have hprofile (r : ℝ) (hr : r ∈ radialTailInterval D right p) :
         E.w (κ * r) = (β * κ) * D.w r := by
-      apply P.reference_side_old_value hw hS right (selected_tail_subset_core hp right hr)
+      apply P.reference_side_old_value hw hS right (selectedTailInterval_subset_core hp right hr)
       cases right
       · exact hr.2.le.trans hout
       · exact hout.trans hr.1.le

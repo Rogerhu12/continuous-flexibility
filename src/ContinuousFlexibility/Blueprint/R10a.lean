@@ -10,7 +10,7 @@ Source: `paper/flexible-surface-rewrite/06-global-reference-inverse.tex` lines 2
 
 Task file: `docs/tasks/R10a.md`. The frozen statement is assembled from
 the parameterized geometry, actual regional data, and Poisson correction.
-The regional construction remains an open sub-blueprint task.
+The regional construction uses the same reference and retained models at every frequency.
 -/
 
 namespace ContinuousFlexibility.Blueprint
@@ -27,4 +27,8 @@ theorem R10a (hR06 : R06Statement) (hR07 : R07Statement) (hR08 : R08Statement) (
 
 end ContinuousFlexibility.Blueprint
 
+/--
+info: 'ContinuousFlexibility.Blueprint.R10a' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
 #print axioms ContinuousFlexibility.Blueprint.R10a

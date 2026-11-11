@@ -143,7 +143,7 @@ theorem FixedCentralBorder.exists_small_error_model_buffers
     ((hsmall 0).trans_le (min_le_right ε δ)).le
   have hFδ : F * δ ≤ (1 : ℝ) / 8 := by
     dsimp only [δ]
-    rw [mul_div_assoc]
+    rw [← mul_div_assoc]
     apply (div_le_iff₀ (by linarith only [hF] : 0 < 1 + F)).mpr
     nlinarith only [hF]
   exact (mul_le_mul_of_nonneg_left hs hF).trans hFδ

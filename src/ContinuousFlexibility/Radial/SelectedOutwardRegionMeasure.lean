@@ -47,6 +47,16 @@ theorem outerOutwardRegionMeasure_eq_density (D : ReferenceData) (right : Bool) 
   rw [outerOutwardIntervalMeasure, outerOutward_tail_image]
   rfl
 
+/-- Either selected open tail lies in the same radial core. -/
+theorem selectedTailInterval_subset_core {D : ReferenceData} {cut : ℝ}
+    (hcut : cut ∈ radialCore D) (right : Bool) :
+    radialTailInterval D right cut ⊆ radialCore D := by
+  cases right
+  · intro r hr
+    exact ⟨hr.1, hr.2.trans hcut.2⟩
+  · intro r hr
+    exact ⟨hcut.1.trans hr.1, hr.2⟩
+
 theorem outerOutwardRegionMeasure_eq_map {D : ReferenceData} {right : Bool} {cut : ℝ}
     (hcut : cut ∈ radialCore D) :
     outerOutwardIntervalMeasure D right (radialTailInterval D right cut) =
@@ -54,12 +64,8 @@ theorem outerOutwardRegionMeasure_eq_map {D : ReferenceData} {right : Bool} {cut
         ((radialHilbertMeasure D).restrict (radialTailInterval D right cut)) := by
   have hs : MeasurableSet (radialTailInterval D right cut) := by
     cases right <;> exact measurableSet_Ioo
-  have hsub : radialTailInterval D right cut ⊆ radialCore D := by
-    cases right
-    · intro r hr
-      exact ⟨hr.1, hr.2.trans hcut.2⟩
-    · intro r hr
-      exact ⟨hcut.1.trans hr.1, hr.2⟩
+  have hsub : radialTailInterval D right cut ⊆ radialCore D :=
+    selectedTailInterval_subset_core hcut right
   rw [← outerOutwardIntervalMeasure_map D right hs, radialHilbertMeasure,
     restrict_withDensity hs, Measure.restrict_restrict hs, inter_eq_left.mpr hsub]
   rfl
