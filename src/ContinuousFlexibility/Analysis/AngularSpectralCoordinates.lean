@@ -23,7 +23,7 @@ frequency with integer spectrum. The corresponding maximal unbounded
 operator has domain `operator.range` and sends `operator x` to
 `x - operator x`. -/
 structure AngularResolventData (𝕜 H : Type*) [RCLike 𝕜]
-    [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] where
+    [NormedAddCommGroup H] [InnerProductSpace 𝕜 H] [CompleteSpace H] where
   operator : H →L[𝕜] H
   selfAdjoint : IsSelfAdjoint operator
   injective : Function.Injective operator

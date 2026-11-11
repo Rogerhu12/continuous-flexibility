@@ -106,7 +106,8 @@ theorem angularFrequency_isSelfAdjoint :
   · apply Submodule.ext
     intro x
     constructor
-    · exact angularFrequency_adjoint_domain_le (𝕜 := 𝕜) (E := E)
+    · intro hx
+      exact angularFrequency_adjoint_domain_le (𝕜 := 𝕜) (E := E) hx
     · intro hx
       apply LinearPMap.mem_adjoint_domain_of_exists
         (T := angularFrequency (𝕜 := 𝕜) (E := E))

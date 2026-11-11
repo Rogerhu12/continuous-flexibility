@@ -42,8 +42,12 @@ private theorem angularWeight_pow_le_frequency (p n : ℕ) :
     have htwo : 1 ≤ (2 : ℝ) ^ p := by
       simpa only [pow_zero] using pow_le_pow_right₀ (by norm_num : (1 : ℝ) ≤ 2) (Nat.zero_le p)
     rw [hw, one_pow]
-    exact htwo.trans (by nlinarith only [mul_nonneg
-      (pow_nonneg (by norm_num : (0 : ℝ) ≤ 2) p) (pow_nonneg (by norm_num : (0 : ℝ) ≤ 0) p)])
+    have hle : (1 : ℝ) ≤ 1 + (0 : ℝ) ^ p :=
+      le_add_of_nonneg_right (pow_nonneg (by norm_num) p)
+    have hmul : (2 : ℝ) ^ p ≤ (2 : ℝ) ^ p * (1 + (0 : ℝ) ^ p) := by
+      simpa only [mul_one] using
+        mul_le_mul_of_nonneg_left hle (pow_nonneg (by norm_num : (0 : ℝ) ≤ 2) p)
+    simpa only [Nat.cast_zero] using htwo.trans hmul
   · have hn1 : (1 : ℝ) ≤ n := by exact_mod_cast Nat.one_le_iff_ne_zero.mpr hn
     have hw : angularWeight n ≤ 2 * (n : ℝ) :=
       (angularWeight_le_one_add n).trans (by linarith)
@@ -91,7 +95,7 @@ theorem angularSobolevNorm_le_base_derivativePower {p : ℕ} {v : lp E 2}
   rw [angularWeightNorm_const, angularWeightNorm_const_mul hfreq,
     abs_of_nonneg (pow_nonneg (by norm_num : (0 : ℝ) ≤ 2) p),
     angularWeightNorm_frequencyPower_eq hv] at h
-  simpa only [mul_add] using h
+  simpa only [angularSobolevNorm, mul_add] using h
 
 end GeneralField
 
@@ -235,7 +239,7 @@ theorem angular_inverse_tame_complex (R K B : lp E 2 →L[ℂ] lp E 2)
   have hum : MemAngularSobolev (𝕜 := ℂ) m u := hu.of_le (Nat.sub_le _ _)
   have ha0 : (a 0 : ℝ) ≤ (a m : ℝ) := by exact_mod_cast ha (Nat.zero_le m)
   have hzero : ‖K‖ ≤ (a m : ℝ) + (c 0 : ℝ) :=
-    hKzero.trans (add_le_add_right ha0 _)
+    hKzero.trans (add_le_add ha0 le_rfl)
   let T : lp E 2 := ∑ k ∈ Finset.range p,
     angularDerivativePower (𝕜 := ℂ) k (K (angularDerivativePower (𝕜 := ℂ) (m - k) u))
   have hterm (k : ℕ) (hk : k ∈ Finset.range p) :

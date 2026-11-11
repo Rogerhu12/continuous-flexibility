@@ -109,7 +109,7 @@ theorem angularResolventPartial_tendsto {B : H →L[ℂ] H} (hB : IsSelfAdjoint 
 theorem angularResolventPartial_apply_tendsto {B : H →L[ℂ] H} (hB : IsSelfAdjoint B)
     (hSpectrum : spectrum ℝ B ⊆ angularReciprocalSpectrum) (x : H) :
     Tendsto (fun N => angularResolventPartial B N x) atTop (𝓝 (B x)) := by
-  simpa only [ContinuousLinearMap.apply_apply] using
+  simpa only [Function.comp_def, ContinuousLinearMap.apply_apply] using
     ((ContinuousLinearMap.apply ℂ H x).continuous.tendsto B).comp
       (angularResolventPartial_tendsto hB hSpectrum)
 

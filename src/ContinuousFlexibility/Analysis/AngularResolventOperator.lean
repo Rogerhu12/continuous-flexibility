@@ -37,7 +37,8 @@ theorem angularResolventOperator_apply (B : H →L[𝕜] H)
     (hInjective : Function.Injective B) (y : (angularResolventOperator B hInjective).domain) :
     angularResolventOperator B hInjective y =
       (LinearEquiv.ofInjective B.toLinearMap hInjective).symm y - (y : H) := by
-  simp only [angularResolventOperator, LinearPMap.mk_apply, LinearMap.sub_apply,
+  rw [← LinearPMap.toFun_eq_coe (angularResolventOperator B hInjective) y]
+  simp only [angularResolventOperator, LinearMap.sub_apply,
     LinearEquiv.coe_toLinearMap, Submodule.subtype_apply]
 
 /-- The defining formula on the range of the bounded resolvent. -/
@@ -45,12 +46,14 @@ theorem angularResolventOperator_apply_image (B : H →L[𝕜] H)
     (hInjective : Function.Injective B) (x : H) :
     angularResolventOperator B hInjective
       ⟨B x, LinearMap.mem_range_self B.toLinearMap x⟩ = x - B x := by
+  have harg : (⟨B x, LinearMap.mem_range_self B.toLinearMap x⟩ : B.range) =
+      LinearEquiv.ofInjective B.toLinearMap hInjective x := by
+    apply Subtype.ext
+    simpa only [ContinuousLinearMap.coe_coe] using
+      (LinearEquiv.ofInjective_apply B.toLinearMap (h := hInjective) x).symm
   rw [angularResolventOperator_apply]
-  congr 1
-  apply hInjective
-  simpa only [ContinuousLinearMap.coe_coe] using
-    LinearEquiv.ofInjective_symm_apply B.toLinearMap (h := hInjective)
-      ⟨B x, LinearMap.mem_range_self B.toLinearMap x⟩
+  simp only [harg, LinearEquiv.symm_apply_apply, LinearEquiv.ofInjective_apply,
+    ContinuousLinearMap.coe_coe]
 
 /-- Applying `I + Λ` after `B` gives the identity. -/
 theorem angularResolventOperator_left_inverse (B : H →L[𝕜] H)

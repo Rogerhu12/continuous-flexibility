@@ -66,7 +66,7 @@ theorem frequency_selfAdjoint (A : AngularResolventData 𝕜 H) : IsSelfAdjoint 
 
 theorem sobolev_one_operator (A : AngularResolventData 𝕜 H) (x : H) :
     A.Sobolev 1 (A.operator x) := by
-  apply (memAngularSobolev_one_iff_frequency _).mpr
+  apply (memAngularSobolev_one_iff_frequency (𝕜 := 𝕜) (A.coordinates (A.operator x))).mpr
   change Memℓp (fun n => ((n : ℝ) : 𝕜) • A.coordinates (A.operator x) n) 2
   have hfun : (fun n => ((n : ℝ) : 𝕜) • A.coordinates (A.operator x) n) =
       (fun n => (A.coordinates x - A.coordinates (A.operator x)) n) := by
@@ -79,7 +79,7 @@ theorem sobolev_one_operator (A : AngularResolventData 𝕜 H) (x : H) :
 /-- The shifted spectral frequency action has the given bounded resolvent. -/
 theorem operator_add_derivative (A : AngularResolventData 𝕜 H) {v : H}
     (hv : A.Sobolev 1 v) : A.operator (v + A.derivative v) = v := by
-  have hdom := mem_angularFrequencyDomain_of_sobolev hv
+  have hdom := mem_angularFrequencyDomain_of_sobolev (𝕜 := 𝕜) hv
   apply A.coordinates.injective
   ext n
   rw [A.coordinates_operator, map_add, lp.coeFn_add, Pi.add_apply,
