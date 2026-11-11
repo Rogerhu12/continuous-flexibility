@@ -31,8 +31,12 @@ theorem n05_canonicalChart_aestronglyMeasurable_comp
     AEStronglyMeasurable (fun p => g (K.chart z m p))
       (volume.restrict
         (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) := by
-  have hpull := (n05_canonicalChart_ae_iff h04 hz hs m hangle
-    (fun p => g p = hg.mk g p)).mp hg.ae_eq_mk
+  have hpullAE : (fun p => g (K.chart z m p))
+      =ᵐ[volume.restrict
+        (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)]
+          (fun p => hg.mk g (K.chart z m p)) :=
+    (n05_canonicalChart_ae_iff h04 hz hs m hangle
+      (fun p => g p = hg.mk g p)).mp hg.ae_eq_mk
   rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
   have hc := (hcharts z hz hs m).2.2.2.2.1.continuousOn
   have hmap : AEMeasurable (K.chart z m)
@@ -40,7 +44,8 @@ theorem n05_canonicalChart_aestronglyMeasurable_comp
         (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) :=
     (hc.mono (fun _ hp => ⟨hp.1, mem_univ _⟩)).aemeasurable
       (measurableSet_Ioo.prod measurableSet_Ioc)
-  exact (hg.measurable_mk.comp_aemeasurable hmap).aestronglyMeasurable.congr hpull.symm
+  exact (hg.measurable_mk.comp_aemeasurable hmap).aestronglyMeasurable.congr
+    (Filter.EventuallyEq.symm hpullAE)
 
 /-- The constant is selected before the piece, its L² representative, and
 the physical field. All coefficient and Jacobian estimates are derived from
@@ -134,7 +139,10 @@ theorem n05_canonicalHeight_endpoint_piece_bound
   have hint : Integrable (fun p => (Real.sqrt ((D.w p.1)⁻¹) * f p) ^ 2) μ := by
     apply (hmajor.const_mul B).mono' (hweighted.pow 2)
     filter_upwards [hdom] with p hp
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hp
+    change ‖(Real.sqrt ((D.w p.1)⁻¹) * f p) ^ 2‖ ≤ _
+    rw [Real.norm_eq_abs,
+      abs_of_nonneg (sq_nonneg (Real.sqrt ((D.w p.1)⁻¹) * f p))]
+    exact hp
   refine ⟨(memLp_two_iff_integrable_sq hweighted).mpr hint, ?_⟩
   have hnorm : (∫ p, u p ^ 2 ∂canonicalMeasure S K m) = ‖u‖ ^ 2 := by
     simpa only [Lp.toLp_coeFn] using

@@ -124,7 +124,7 @@ theorem n05_volumeMember_canonicalHeight_endpoint_memLp
     Summable.of_nonneg_of_le (fun _ => integral_nonneg (fun _ => sq_nonneg _))
       (fun m => (hlocal m).2) (hsum0.mul_left B)
   have hsumNorm : Summable (fun m => ∫ p in U m, ‖q p ^ 2‖) := by
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)] using hsumI
+    simpa only [Real.norm_eq_abs, abs_sq] using hsumI
   have hsq : IntegrableOn (fun p => q p ^ 2) (⋃ m, U m) volume :=
     integrableOn_iUnion_of_summable_integral_norm
       (fun m => (hlocal m).1.integrable_sq) hsumNorm

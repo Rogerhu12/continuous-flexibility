@@ -37,7 +37,7 @@ theorem n05TricomiTime_hasDerivAt {t : ℝ} (ht : 0 < t) :
       ((2 / 3 : ℝ) * t) * (1 / (2 * Real.sqrt t)) = Real.sqrt t := by
     field_simp [hs0]
     nlinarith only [Real.sq_sqrt ht.le]
-  simpa only [n05TricomiTime, Pi.mul_def, mul_one, hvalue] using
+  simpa only [n05TricomiTime, Pi.mul_def, id_eq, mul_one, hvalue] using
     (((hasDerivAt_id t).const_mul (2 / 3 : ℝ)).mul hs)
 
 def n05NullCoordinate (Ψ : PolarPoint → PolarPoint) (σ : ℝ) : PolarPoint → ℝ :=
@@ -47,8 +47,8 @@ theorem n05NullCoordinate_contDiffAt
     {Ψ : PolarPoint → PolarPoint} {x : PolarPoint}
     (hΨ : ContDiffAt ℝ ∞ Ψ x) (hx : 0 < (Ψ x).1) (σ : ℝ) :
     ContDiffAt ℝ ∞ (n05NullCoordinate Ψ σ) x := by
-  exact hΨ.snd.add (((contDiffAt_const.mul hΨ.fst).mul
-    (hΨ.fst.sqrt hx.ne')).const_mul σ)
+  exact hΨ.snd.add (contDiffAt_const.mul
+    ((contDiffAt_const.mul hΨ.fst).mul (hΨ.fst.sqrt hx.ne')))
 
 theorem n05NullCoordinate_partials
     {Ψ : PolarPoint → PolarPoint} {x : PolarPoint}
@@ -60,8 +60,10 @@ theorem n05NullCoordinate_partials
         angularPartial (fun p => (Ψ p).2) x +
           σ * (Real.sqrt (Ψ x).1 * angularPartial (fun p => (Ψ p).1) x) := by
   have ht : HasFDerivAt (fun p => n05TricomiTime (Ψ p).1)
-      (Real.sqrt (Ψ x).1 • fderiv ℝ (fun p => (Ψ p).1) x) x :=
-    (n05TricomiTime_hasDerivAt hx).comp_hasFDerivAt x hΨ.fst.hasFDerivAt
+      (Real.sqrt (Ψ x).1 • fderiv ℝ (fun p => (Ψ p).1) x) x := by
+    simpa only [Function.comp_def] using
+      (n05TricomiTime_hasDerivAt hx).comp_hasFDerivAt
+        (f := fun p : PolarPoint => (Ψ p).1) x hΨ.fst.hasFDerivAt
   have hn : HasFDerivAt (n05NullCoordinate Ψ σ)
       (fderiv ℝ (fun p => (Ψ p).2) x +
         σ • (Real.sqrt (Ψ x).1 • fderiv ℝ (fun p => (Ψ p).1) x)) x :=

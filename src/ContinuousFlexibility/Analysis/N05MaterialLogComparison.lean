@@ -23,13 +23,19 @@ theorem n05_materialMExponent_mono {x y : ℝ} (hx : 0 ≤ x) (hxy : x ≤ y) :
     apply Real.log_nonneg
     exact (Real.one_le_exp (by norm_num : (0 : ℝ) ≤ 1)).trans
       (le_add_of_nonneg_right hx)
+  have hxy' : Real.exp 1 + x ≤ Real.exp 1 + y := by
+    linarith only [hxy]
   have hlog : materialLogFactor x ≤ materialLogFactor y :=
     Real.log_le_log (add_pos_of_pos_of_nonneg (Real.exp_pos _) hx)
-      (add_le_add_left hxy _)
-  exact add_le_add_left
-    (mul_le_mul (Real.rpow_le_rpow hx hxy (by norm_num : (0 : ℝ) ≤ 5 / 2))
+      hxy'
+  have hmon : x ^ ((5 : ℝ) / 2) * materialLogFactor x ^ 2 ≤
+      y ^ ((5 : ℝ) / 2) * materialLogFactor y ^ 2 :=
+    mul_le_mul (Real.rpow_le_rpow hx hxy (by norm_num : (0 : ℝ) ≤ 5 / 2))
       (pow_le_pow_left₀ hlogx hlog 2) (sq_nonneg _)
-      (Real.rpow_nonneg hy _)) 1
+      (Real.rpow_nonneg hy _)
+  change 1 + x ^ ((5 : ℝ) / 2) * materialLogFactor x ^ 2 ≤
+    1 + y ^ ((5 : ℝ) / 2) * materialLogFactor y ^ 2
+  linarith only [hmon]
 
 /-- A bounded additive shift of the endpoint coordinate contributes only
 a coefficient-sized logarithmic error, uniformly over all indices. -/
@@ -74,9 +80,12 @@ theorem n05_materialM_log_shift {A : ℝ} (hA : 0 ≤ A) :
     calc
       _ ≤ |radialS j - radialS n| + B := by simpa only [one_mul] using hB j n
       _ ≤ C1 * ((n : ℝ) ^ 2 + 1) + |B| := add_le_add hs (le_abs_self B)
-      _ ≤ C1 * (radialQ n + 1) + |B| :=
-        add_le_add_right (mul_le_mul_of_nonneg_left
-          (add_le_add_right (n05_radialIndexSquare_le_Q n) 1) hC1) _
+      _ ≤ C1 * (radialQ n + 1) + |B| := by
+        have hq : (n : ℝ) ^ 2 + 1 ≤ radialQ n + 1 := by
+          linarith only [n05_radialIndexSquare_le_Q n]
+        have hmon : C1 * ((n : ℝ) ^ 2 + 1) ≤ C1 * (radialQ n + 1) :=
+          mul_le_mul_of_nonneg_left hq hC1
+        linarith only [hmon]
       _ ≤ C * (radialQ n + 1) := by
         dsimp only [C]
         nlinarith only [mul_nonneg (abs_nonneg B) hQ, hQ]
