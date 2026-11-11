@@ -48,7 +48,9 @@ theorem n04b_referenceTravel_continuousOn
   have hc := n04b_referenceOpticalSpeed_continuousOn hD hC m
   have hi : IntervalIntegrable (opticalSpeed D.w) volume (C.left m) (C.right m) :=
     hc.intervalIntegrable_of_Icc (hC.1 m).2.1.le
-  simpa only [opticalTravel, uIcc_of_le (hC.1 m).2.1.le] using
+  change ContinuousOn (fun b => ∫ x in C.left m..b, opticalSpeed D.w x)
+    (Icc (C.left m) (C.right m))
+  simpa only [uIcc_of_le (hC.1 m).2.1.le] using
     (intervalIntegral.continuousOn_primitive_interval' hi
       (left_mem_uIcc : C.left m ∈ Set.uIcc (C.left m) (C.right m)))
 

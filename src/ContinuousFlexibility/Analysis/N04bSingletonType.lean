@@ -136,8 +136,42 @@ theorem N01Properties.n04b_ordinaryFlowFamily_radial_zero
   have hxderiv := hN.n04b_minusFlow_zero_hasDerivAt hS hT hx m θ hr
   have hrefderiv := hN.n04b_minusFlow_zero_hasDerivAt hS hT href m θ hr
   simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero, iteratedDeriv_one]
-  rw [(hxderiv.sub hrefderiv).deriv]
+  have hd := (hxderiv.sub hrefderiv).deriv
+  change deriv (fun s => C.minusFlow (x, 0) m s θ -
+    C.minusFlow (C.referenceState, 0) m s θ) r = _ at hd
+  rw [hd]
   ring
+
+private theorem n04b_affine_zero_parameter {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (x v : E) :
+    x + (0 : ℝ) • v = x := by
+  rw [zero_smul, add_zero]
+
+private theorem n04b_singleton_reference_profile
+    (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
+    (m : ℕ) : stateProfile D S C C.referenceState = D.w := by
+  have hprofile := singletonKappaLine_profile (hS.2.1 (3 / 4 : ℝ)) href m 0
+  have hzero := n04b_affine_zero_parameter C.referenceState
+    (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m)
+  have hperturbation : opticalLogPerturbation D.w (C.control m) 0 = D.w := by
+    funext r
+    simp only [opticalLogPerturbation, zero_mul, Real.exp_zero, mul_one]
+  exact (congrArg (stateProfile D S C) hzero).symm.trans
+    (hprofile.trans hperturbation)
+
+private theorem n04b_control_opticalSpeed_affine
+    (hN : N01Properties D T S C base loss ε) (m : ℕ)
+    {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) (t : ℝ) :
+    opticalSpeed (opticalLogPerturbation D.w (C.control m) t) r =
+      Real.sqrt (-deriv D.w r / (r * D.w r) + (-deriv (C.control m) r / r) * t) := by
+  obtain ⟨_, hgeom⟩ := hN.1.1
+  have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
+  have hrD : r ∈ Ioo D.a D.b :=
+    ⟨(hcontrol.1 m).1.trans hr.1, hr.2.trans (hcontrol.1 m).2.2⟩
+  exact n04b_opticalSpeed_logPerturbation_affine
+    (hgeom.1.2.2.1.1.differentiable (by simp) r)
+    ((hcontrol.2.2.2.2.2.1 m).1.differentiable (by simp) r)
+    (hgeom.1.1.trans hrD.1).ne' (hgeom.1.2.2.2.2.1 r hrD).ne'
 
 theorem N01Properties.n04b_ordinaryFlowFamily_singletonKappa_radial
     (hN : N01Properties D T S C base loss ε)
@@ -151,20 +185,14 @@ theorem N01Properties.n04b_ordinaryFlowFamily_singletonKappa_radial
       (C.referenceState + t • singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, 0) =
       opticalSpeed D.w r -
         Real.sqrt (-deriv D.w r / (r * D.w r) + (-deriv (C.control m) r / r) * t) := by
-  obtain ⟨_, hgeom⟩ := hN.1.1
-  have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
-  have hrD : r ∈ Ioo D.a D.b :=
-    ⟨(hcontrol.1 m).1.trans hr.1, hr.2.trans (hcontrol.1 m).2.2⟩
-  have href : stateProfile D S C C.referenceState = D.w := by
-    simpa only [zero_smul, add_zero, opticalLogPerturbation, zero_mul,
-      Real.exp_zero, mul_one] using
-      singletonKappaLine_profile (hS.2.1 (3 / 4 : ℝ)) hN.2.2.1 m 0
-  rw [hN.n04b_ordinaryFlowFamily_radial_zero hS hT ht m θ hr,
-    singletonKappaLine_profile (hS.2.1 (3 / 4 : ℝ)) hN.2.2.1, href,
-    n04b_opticalSpeed_logPerturbation_affine
-      (hgeom.1.2.2.1.1.differentiable (by simp) r)
-      ((hcontrol.2.2.2.2.2.1 m).1.differentiable (by simp) r)
-      (hgeom.1.1.trans hrD.1).ne' (hgeom.1.2.2.2.2.1 r hrD).ne']
+  have href := n04b_singleton_reference_profile hS hN.2.2.1 m
+  have hprofile := singletonKappaLine_profile
+    (hS.2.1 (3 / 4 : ℝ)) hN.2.2.1 m t
+  exact (hN.n04b_ordinaryFlowFamily_radial_zero hS hT ht m θ hr).trans
+    (congrArg₂ (fun a b : ℝ => a - b)
+      (congrArg (fun w : ℝ → ℝ => opticalSpeed w r) href)
+      ((congrArg (fun w : ℝ → ℝ => opticalSpeed w r) hprofile).trans
+        (n04b_control_opticalSpeed_affine hN m hr t)))
 
 private theorem n04b_singleton_joint_line
     (hS : IsPhysicalSpaces D T S) (m : ℕ) (t : ℝ) :
@@ -248,7 +276,7 @@ theorem N01Properties.n04b_singletonKappa_radicand_pos
     div_pos (neg_pos.mpr (hcontrol.2.2.2.1 m r hr))
       (mul_pos (hgeom.1.1.trans hrD.1) (hgeom.1.2.2.2.2.1 r hrD))
   exact Analysis.n04b_affine_pos_of_sqrt_differentiableAt_weighted_ball
-    hbase ((stateGrading S base).nonneg _)
+    hbase (apply_nonneg (stateGrading S base) _)
     (fun s hs => hN.n04b_sqrt_singletonKappa_differentiableAt hS hT m hr hs) ht
 
 end ContinuousFlexibility.Statements

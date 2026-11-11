@@ -156,7 +156,8 @@ theorem n04b_minusFirstIntegral_angularPartial
   have hslice : HasDerivAt (fun θ => n04bMinusFirstIntegral Φ hL (p.1, θ))
       (deriv hL (parameterizedCircleInverse Φ p) *
         (deriv (fun η => Φ (p.1, η)) (parameterizedCircleInverse Φ p))⁻¹) p.2 := by
-    simpa only [n04bMinusFirstIntegral, Function.comp_def] using hc
+    simpa only [n04bMinusFirstIntegral, parameterizedCircleInverse,
+      Function.comp_def, Prod.mk.eta] using hc
   simpa only [div_eq_mul_inv] using (hasDerivAt_angular_slice hd).unique hslice
 
 theorem n04b_minusFirstIntegral_angularPartial_pos

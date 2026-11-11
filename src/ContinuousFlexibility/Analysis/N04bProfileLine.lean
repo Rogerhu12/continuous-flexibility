@@ -63,6 +63,21 @@ theorem n04bStateLine_mem_stateNeighborhood
         (x - C.referenceState)) ht').trans_lt hx)
   · simpa only [abs_zero] using hε
 
+private theorem n04b_module_affine_zero {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (x₀ x : E) (h₀ : x₀ = 0) (t : ℝ) :
+    x₀ + t • (x - x₀) = t • x := by
+  rw [h₀, sub_zero, zero_add]
+
+private theorem n04b_circle_decode_mean_smul
+    {S : PhysicalSpacesData} (x : CircleSpace S) (m : ℕ) (t : ℝ) :
+    angularMean ((S.circle (3 / 4 : ℝ)).decode (t • x) m) =
+      t * angularMean ((S.circle (3 / 4 : ℝ)).decode x m) := by
+  have hdecode : (S.circle (3 / 4 : ℝ)).decode (t • x) m =
+      fun θ => t * (S.circle (3 / 4 : ℝ)).decode x m θ :=
+    congrFun ((S.circle (3 / 4 : ℝ)).decode.map_smul t x) m
+  exact (congrArg angularMean hdecode).trans
+    (spaces_angularMean_const_mul t ((S.circle (3 / 4 : ℝ)).decode x m))
+
 theorem n04b_stateKappa_stateLine
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     (href : referenceStateConditions D S C) (x : AnnularState S) (m : ℕ) (t : ℝ) :
@@ -71,15 +86,11 @@ theorem n04b_stateKappa_stateLine
   have hcoord : (n04bStateLine C x t).2.2.1 = t • x.2.2.1 := by
     change C.referenceState.2.2.1 +
       t • (x.2.2.1 - C.referenceState.2.2.1) = t • x.2.2.1
-    rw [hzero, sub_zero, zero_add]
-  have hdecode : (S.circle (3 / 4 : ℝ)).decode (n04bStateLine C x t).2.2.1 m =
-      fun θ => t * (S.circle (3 / 4 : ℝ)).decode x.2.2.1 m θ := by
-    rw [hcoord]
-    exact congrFun ((S.circle (3 / 4 : ℝ)).decode.map_smul t x.2.2.1) m
-  change angularMean ((S.circle (3 / 4 : ℝ)).decode (n04bStateLine C x t).2.2.1 m) =
-    t * angularMean ((S.circle (3 / 4 : ℝ)).decode x.2.2.1 m)
-  rw [hdecode]
-  exact spaces_angularMean_const_mul t ((S.circle (3 / 4 : ℝ)).decode x.2.2.1 m)
+    exact n04b_module_affine_zero _ _ hzero t
+  unfold stateKappa
+  exact (congrArg
+    (fun a : CircleSpace S => angularMean ((S.circle (3 / 4 : ℝ)).decode a m))
+      hcoord).trans (n04b_circle_decode_mean_smul x.2.2.1 m t)
 
 private theorem n04b_control_zero_other
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
@@ -129,7 +140,7 @@ theorem n04b_stateProfile_radicand_on_component
     exact n04b_stateProfile_on_component hN x m hs
   have hd := (hw.hasDerivAt.mul
     ((hc.hasDerivAt.const_mul (stateKappa S x m)).exp)).deriv
-  simp only [Pi.mul_apply] at hd
+  change deriv (fun s => D.w s * Real.exp (stateKappa S x m * C.control m s)) r = _ at hd
   rw [heq.deriv_eq, hd, heq.eq_of_nhds]
   field_simp [hr0, hw0, (Real.exp_pos (stateKappa S x m * C.control m r)).ne']
   <;> ring
