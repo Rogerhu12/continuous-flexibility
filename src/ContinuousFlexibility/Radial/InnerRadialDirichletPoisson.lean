@@ -130,7 +130,7 @@ theorem innerRadialAssemblePieces_residual
   by_cases hp : p = central
   · subst p
     rfl
-  · simp only [innerRadialChainResidual, innerRadialWeakResidual, if_neg hp,
+  · simp only [innerRadialChainResidual, innerRadialWeakResidual_apply, if_neg hp,
       inner_zero_left, mul_zero, add_zero]
 
 /-- The true total flux is the finite sum of the actual local outgoing

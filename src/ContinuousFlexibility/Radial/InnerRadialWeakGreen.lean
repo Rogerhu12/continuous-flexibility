@@ -89,7 +89,7 @@ theorem innerRadialChainResidual_sum
       simp only [if_neg hp, inner_zero_left, mul_zero]
     · intro hc
       exact (hc (Finset.mem_univ central)).elim
-  simp only [innerRadialChainResidual, innerRadialWeakResidual,
+  simp only [innerRadialChainResidual, innerRadialWeakResidual_apply,
     Finset.sum_sub_distrib, Finset.sum_add_distrib]
   rw [hc]
 

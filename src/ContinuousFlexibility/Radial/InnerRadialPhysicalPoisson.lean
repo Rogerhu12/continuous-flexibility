@@ -80,7 +80,7 @@ variable
 /-- The actual Dirichlet field map. Its quantitative continuity is
 supplied by the local Dirichlet bounds when the finite inverse is estimated. -/
 def innerRadialPhysicalDirichlet : H →ₗ[ℝ] H :=
-  realize.comp
+  (realize).comp
     (innerRadialDirichletRealization D hw G forcing rowSource bordered j central column
       hunique hex)
 
@@ -88,7 +88,7 @@ def innerRadialPhysicalDirichlet : H →ₗ[ℝ] H :=
 cut data to the physical supported Hilbert source. -/
 def innerRadialPhysicalPoisson : B →L[ℝ] H :=
   LinearMap.toContinuousLinearMap
-    (realize.comp
+    ((realize).comp
       (innerRadialPoissonRealization D hw G forcing rowSource bordered j central column
         hunique hex))
 

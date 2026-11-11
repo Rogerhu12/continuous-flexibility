@@ -128,7 +128,7 @@ def innerRadialPhysicalDirichletCLM (K : ℝ) (hK : 0 ≤ K)
       K ^ 2 * ‖innerBorderPieceProjection (radialHilbertMeasure D)
         (fun k => Ioo (G.left k) (G.right k)) central p F.val‖ ^ 2) :
     H →L[ℝ] H :=
-  Dphys.mkContinuous K
+  (Dphys).mkContinuous K
     (innerRadialPhysicalDirichlet_norm_le D hw G bordered j central column
       hunique hex K hK hlocal)
 
@@ -179,7 +179,7 @@ def innerRadialPhysicalDirichletCLMOfAmbient
     (A : InnerBorderL2 (radialHilbertMeasure D) →L[ℝ]
       InnerBorderL2 (radialHilbertMeasure D))
     (hA : ∀ F : H, A F.val = (Dphys F).val) : H →L[ℝ] H :=
-  Dphys.mkContinuous ‖A‖
+  (Dphys).mkContinuous ‖A‖
     (innerRadialPhysicalDirichlet_norm_le_ambient D hw G bordered j central column
       hunique hex A hA)
 

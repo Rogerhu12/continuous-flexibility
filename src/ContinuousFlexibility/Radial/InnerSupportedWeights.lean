@@ -27,7 +27,7 @@ variable {α : Type*} [MeasurableSpace α] (μ : Measure α)
 local notation "S" => innerSupportedAdmissibleSource μ s bordered
 local notation "H" => ↥S
 
-include hs
+include μ s hs bordered
 
 theorem innerSupportedAdmissibleSource_supported (F : H) :
     ∀ᵐ x ∂μ, x ∉ s → F.val.fst x = 0 := by
@@ -52,7 +52,7 @@ scalar coordinate is the identity, including in the bordered case. -/
 def innerSupportedWeightMultiplier (W : α → ℝ) (hW : Measurable W)
     (C : ℝ) (hWC : ∀ x, |W x| ≤ C) : H →L[ℝ] H :=
   ((innerBorderFieldMap μ (innerWeightMultiplier μ W hW C hWC)).comp
-    S.toSubmodule.subtypeL).codRestrict S.toSubmodule (fun F => by
+    (S).toSubmodule.subtypeL).codRestrict (S).toSubmodule (fun F => by
       apply (ClosedSubmodule.mem_toSubmodule_iff _ S).mpr
       simpa only [ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply] using
         innerSupportedWeightMultiplier_mem μ s hs bordered W hW C hWC F)
@@ -80,7 +80,7 @@ theorem norm_innerSupportedWeightMultiplier_le_ambient
     (W : α → ℝ) (hW : Measurable W) (C : ℝ) (hWC : ∀ x, |W x| ≤ C) :
     ‖innerSupportedWeightMultiplier μ s hs bordered W hW C hWC‖ ≤
       ‖innerBorderFieldMap μ (innerWeightMultiplier μ W hW C hWC)‖ := by
-  apply innerIsometricOperator_norm_le S.toSubmodule.subtypeₗᵢ S.toSubmodule.subtypeₗᵢ
+  apply innerIsometricOperator_norm_le (S).toSubmodule.subtypeₗᵢ (S).toSubmodule.subtypeₗᵢ
   intro F
   simpa only [Submodule.coe_subtypeₗᵢ, Submodule.subtype_apply] using
     innerSupportedWeightMultiplier_apply μ s hs bordered W hW C hWC F
@@ -103,7 +103,7 @@ theorem norm_innerSupportedCoefficientLoss_le_one
 theorem innerSupportedWeightMultiplier_selfAdjoint
     (W : α → ℝ) (hW : Measurable W) (C : ℝ) (hWC : ∀ x, |W x| ≤ C) :
     IsSelfAdjoint (innerSupportedWeightMultiplier μ s hs bordered W hW C hWC) := by
-  apply innerIsometricRestriction_selfAdjoint S.toSubmodule.subtypeₗᵢ
+  apply innerIsometricRestriction_selfAdjoint (S).toSubmodule.subtypeₗᵢ
     (innerSupportedWeightMultiplier μ s hs bordered W hW C hWC)
     (innerBorderFieldMap μ (innerWeightMultiplier μ W hW C hWC))
   · intro F

@@ -45,15 +45,13 @@ theorem innerRadialH1Pair_sub_affineUnit {u : ℝ → ℝ}
     rw [hub, hends.2, sub_self]
   apply innerRadialH1Zero_of_smooth_zero_endpoints D hw hab ha hcore
     (fun r hr => (hpos r (Ioo_subset_Icc_self hr)).le) hφ hφa hφb
-  · simp only [Prod.fst_sub]
-    filter_upwards [Lp.coeFn_sub Q.1 (innerRadialAffineUnitPair D hw ha hcore hpos i).1,
+  · filter_upwards [Lp.coeFn_sub Q.1 (innerRadialAffineUnitPair D hw ha hcore hpos i).1,
       hQu, innerRadialAffineUnitPair_value_ae D hw ha hcore hpos i] with r hsub hQ hA
     rw [hsub, Pi.sub_apply, hQ, hA]
     by_cases hr : r ∈ Ioo a b
     · simp only [indicator_of_mem hr, φ, h]
     · simp only [indicator_of_notMem hr, sub_self]
-  · simp only [Prod.snd_sub]
-    filter_upwards [Lp.coeFn_sub Q.2 (innerRadialAffineUnitPair D hw ha hcore hpos i).2,
+  · filter_upwards [Lp.coeFn_sub Q.2 (innerRadialAffineUnitPair D hw ha hcore hpos i).2,
       hQd, innerRadialAffineUnitPair_gradient_ae D hw ha hcore hpos i] with r hsub hQ hA
     rw [hsub, Pi.sub_apply, hQ, hA]
     by_cases hr : r ∈ Ioo a b

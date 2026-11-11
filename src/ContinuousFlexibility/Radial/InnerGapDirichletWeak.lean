@@ -200,9 +200,9 @@ theorem innerGapFormSpace_green_test (D : ReferenceData) (hw : ContDiff ℝ ∞ 
     image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl b) (hsu h).2)
   rw [Set.mem_ofPred_eq]
   dsimp only [Eφ, Aφ]
-  rw [hvalue, henergy, innerGapEnergyPair_inner D hw hab ha hcore hpos hslope,
+  rw [hvalue, henergy, innerGapEnergyPair_inner D hw hab ha hcore hpos hslope j u φ hu hφ,
     innerGapEnergyBilinear_green hab ha hw hu hφ hua hub,
-    innerGapTestSource_pairing D hw hab ha hcore hpos]
+    innerGapTestSource_pairing D hw hab ha hcore hpos j u φ hu hφ]
 
 theorem innerGapFormGraph_weak_pairing (D : ReferenceData) (hw : ContDiff ℝ ∞ D.w)
     {a b j : ℝ} (hab : a ≤ b) (ha : 0 < a) (hcore : Ioo a b ⊆ radialCore D)

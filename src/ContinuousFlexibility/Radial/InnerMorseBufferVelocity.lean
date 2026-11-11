@@ -92,7 +92,8 @@ theorem innerMorseChain_buffer_velocity {T : MorseChainData} {σ : ℕ → ℝ}
   have hl' : T.leftX side m = morseCellLeftCut := hl
   have hr' : T.rightX side m =
       morseRightCapEnd (morseChainA T m) (morseChainB T m) (1 / 100) := by
-    simpa only [morseChainRightTurn, morseRightCapEnd, morseRightCapLength] using hr
+    simpa only [morseChainRightTurn, morseRightTurn, morseRightRootT,
+      morseRightCapEnd, morseRightCapLength] using hr
   have hs : 0 < T.radius side m (morseChainRightTurn T m) :=
     h.radius_positive side m hm _ ⟨hlt.le, hgt.le⟩
   have hd1 : (1 : ℝ) ≤ T.d m := by

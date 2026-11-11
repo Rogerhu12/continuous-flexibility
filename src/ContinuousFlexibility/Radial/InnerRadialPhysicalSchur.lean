@@ -137,12 +137,12 @@ theorem innerRadialPhysicalInterface_identification
 /-- The same physical Schur formula. The Dirichlet CLM is identified
 with the already constructed canonical local Dirichlet realization. -/
 def innerRadialPhysicalSchur (D0 : H →L[ℝ] H) (S : B ≃ₗ[ℝ] B) : H →L[ℝ] H :=
-  D0 + P.comp ((LinearMap.toContinuousLinearMap S.symm.toLinearMap).comp P.adjoint)
+  D0 + (P).comp ((LinearMap.toContinuousLinearMap S.symm.toLinearMap).comp (P).adjoint)
 
 @[simp] theorem innerRadialPhysicalSchur_apply (D0 : H →L[ℝ] H)
     (S : B ≃ₗ[ℝ] B) (F : H) :
     innerRadialPhysicalSchur D hw G bordered j central column hunique hex D0 S F =
-      D0 F + P (S.symm (P.adjoint F)) := by
+      D0 F + P (S.symm ((P).adjoint F)) := by
   simp only [innerRadialPhysicalSchur, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.comp_apply, LinearMap.coe_toContinuousLinearMap',
     LinearEquiv.coe_coe]
@@ -156,18 +156,18 @@ theorem innerRadialPhysicalSchur_eq_realization (D0 : H →L[ℝ] H)
     innerRadialPhysicalSchur D hw G bordered j central column hunique hex D0 S F =
       realize (innerRadialSchurInverse D hw G forcing rowSource bordered j central column
         hunique hex (S.trans Riesz) F) := by
-  have hf : Flux (Dir F) = -(Riesz (P.adjoint F)) := by
+  have hf : Flux (Dir F) = -(Riesz ((P).adjoint F)) := by
     apply LinearMap.ext
     intro η
     rw [LinearMap.neg_apply, innerRadialBoundaryRiesz_apply]
     exact innerRadialPhysicalDirichlet_forced_adjoint D hw G bordered j central column
       hunique hex F η
-  have hb : (S.trans Riesz).symm (Riesz (P.adjoint F)) = S.symm (P.adjoint F) := by
+  have hb : (S.trans Riesz).symm (Riesz ((P).adjoint F)) = S.symm ((P).adjoint F) := by
     apply (S.trans Riesz).injective
     rw [LinearEquiv.apply_symm_apply, LinearEquiv.trans_apply, S.apply_symm_apply]
   have hc : innerRadialSchurInverse D hw G forcing rowSource bordered j central column
       hunique hex (S.trans Riesz) F =
-      Dir F + Pois (S.symm (P.adjoint F)) := by
+      Dir F + Pois (S.symm ((P).adjoint F)) := by
     rw [innerRadialSchurInverse, innerWeakSchurSolution_apply, hf, neg_neg, hb]
   rw [hc, map_add, innerRadialPhysicalSchur_apply, hD0,
     innerRadialPhysicalPoisson_apply, innerRadialPhysicalDirichlet, LinearMap.comp_apply]

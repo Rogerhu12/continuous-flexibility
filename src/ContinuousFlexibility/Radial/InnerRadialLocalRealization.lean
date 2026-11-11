@@ -93,7 +93,7 @@ def innerRadialAssemblePieces (F : H) (ξ : B)
     by_cases hp : p = central
     · subst p
       simpa only [innerRadialChainResidual] using he
-    · simpa only [innerRadialChainResidual, if_neg hp, innerRadialWeakResidual,
+    · simpa only [innerRadialChainResidual, if_neg hp, innerRadialWeakResidual_apply,
         inner_zero_left, mul_zero, add_zero] using he
 
 theorem innerRadialAssemblePieces_source (F : H) (ξ : B)

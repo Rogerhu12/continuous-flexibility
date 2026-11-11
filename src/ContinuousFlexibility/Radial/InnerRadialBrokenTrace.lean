@@ -119,7 +119,7 @@ theorem innerRadialPieceKernelUnique_of_value_unique
   have hv0 : v = 0 := hv.eq_zero_of_value_eq_zero hval
   have hg : ⟪q.2, q.2⟫_ℝ = 0 := by
     have he := heq q hq
-    simpa only [innerRadialWeakResidual, hval, hv0, inner_zero_left,
+    simpa only [innerRadialWeakResidual_apply, hval, hv0, inner_zero_left,
       inner_zero_right, mul_zero, add_zero, sub_zero] using he
   have hd : q.2 = 0 := inner_self_eq_zero.mp hg
   exact ⟨Prod.ext hval hd, hv0, hs⟩

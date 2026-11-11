@@ -76,6 +76,10 @@ theorem innerCentral_compression_envelope_le {n : ℕ} (hn : 1 ≤ n)
     (exp_pos (-((X₀ ^ 2 / 16) * (2 * n)))).le
   simpa only [innerCentralCompressionEnvelope, neg_mul] using hcompression.trans hbound
 
+private theorem positive_pow_eq_exp {x : ℝ} (hx : 0 < x) (n : ℕ) :
+    x ^ n = exp ((n : ℝ) * log x) :=
+  (congrArg (fun y : ℝ => y ^ n) (exp_log hx)).symm.trans (exp_nat_mul (log x) n).symm
+
 /-- The polynomial envelope has exactly the logarithmic form used in
 the uniform product-frequency suppression theorem. -/
 theorem innerCentralCompressionEnvelope_eq_exp {A X₀ j : ℝ}
@@ -86,9 +90,9 @@ theorem innerCentralCompressionEnvelope_eq_exp {A X₀ j : ℝ}
   have hL : 0 < 1 + X₀ ^ 2 := by positivity
   have hj1 : 0 < 1 + j := by linarith only [hj]
   have hLexp : (1 + X₀ ^ 2) ^ 8 = exp (8 * log (1 + X₀ ^ 2)) := by
-    simpa only [exp_log hL] using (exp_nat_mul (log (1 + X₀ ^ 2)) 8).symm
+    simpa only [Nat.cast_ofNat] using positive_pow_eq_exp hL 8
   have hjexp : (1 + j) ^ 2 = exp (2 * log (1 + j)) := by
-    simpa only [exp_log hj1] using (exp_nat_mul (log (1 + j)) 2).symm
+    simpa only [Nat.cast_ofNat] using positive_pow_eq_exp hj1 2
   calc
     innerCentralCompressionEnvelope A X₀ j =
         exp (log A) * exp (8 * log (1 + X₀ ^ 2)) * exp (2 * log (1 + j)) *

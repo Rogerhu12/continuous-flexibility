@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Real Set Filter MeasureTheory ContinuousFlexibility.Statements
-open scoped ContDiff
+open scoped ContDiff Topology
 
 theorem continuous_centralAuxiliaryColumnFunction {height : ℝ} (hh : 0 < height) :
     Continuous (centralAuxiliaryColumnFunction height) := by
@@ -111,6 +111,7 @@ theorem innerCentralPhysicalTemporaryColumn_ae :
       innerCentralModelBorder r = _
     rw [ho hr, innerCentralAuxiliaryColumnFunction_outside hh hX hr]
 
+include hh hX hcore hw in
 theorem innerCentralAuxiliaryColumnFunction_memLp_actual :
     MemLp (centralAuxiliaryColumnFunction height) 2 (radialHilbertMeasure D) :=
   (Lp.memLp (innerCentralPhysicalTemporaryColumn D hh hX hcore hw)).congr

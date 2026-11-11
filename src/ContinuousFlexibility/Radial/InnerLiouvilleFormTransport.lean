@@ -82,7 +82,7 @@ theorem innerLiouville_energy_form {V p : ℝ → ℝ}
     simp only [Pi.sub_apply] at hsub ht
     rw [hadd, hsub, hqd, hmt, ht, hpd, hqp, hn, hpv, hpx]
     by_cases hx : x ∈ Ioo a b
-    · simp only [innerLiouvilleModelVelocity, indicator_of_mem hx]
+    · simp only [innerLiouvilleModelVelocity, indicator_of_mem hx, hpx]
       have hdw := innerLiouville_densityDrift_prod_deriv
         (hs.differentiable (by simp) x)
         ((contDiff_infty_iff_deriv.mp hs).2.differentiable (by simp) x)
