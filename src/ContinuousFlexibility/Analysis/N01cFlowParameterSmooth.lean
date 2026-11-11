@@ -73,18 +73,14 @@ theorem contDiff_circleSpeedAngleDeriv {G : ℝ × PolarPoint → ℝ}
 theorem circleSpeedAngleDeriv_eq_angularPartial {G : ℝ × PolarPoint → ℝ}
     (hG : ContDiff ℝ ∞ G) (q : ℝ) (p : PolarPoint) :
     circleSpeedAngleDeriv G (q, p) = angularPartial (fun x => G (q, x)) p := by
-  have hs : ContDiff ℝ ∞ (fun x : PolarPoint => G (q, x)) :=
-    hG.comp (contDiff_const.prodMk contDiff_id)
-  have hd : HasDerivAt (fun θ : ℝ => G (q, (p.1, θ)))
-      (circleSpeedAngleDeriv G (q, p)) p.2 :=
-    (hG.differentiable (by simp) (q, p)).hasFDerivAt.comp_hasDerivAt p.2
-      ((hasDerivAt_const p.2 q).prodMk
-        ((hasDerivAt_const p.2 p.1).prodMk (hasDerivAt_id p.2)))
-  have hd' : HasDerivAt (fun θ : ℝ => G (q, (p.1, θ)))
-      (angularPartial (fun x => G (q, x)) p) p.2 :=
-    (hs.differentiable (by simp) p).hasFDerivAt.comp_hasDerivAt p.2
-      ((hasDerivAt_const p.2 p.1).prodMk (hasDerivAt_id p.2))
-  exact hd.unique hd'
+  have hs : HasFDerivAt (fun x : PolarPoint => G (q, x))
+      ((fderiv ℝ G (q, p)).comp (ContinuousLinearMap.inr ℝ ℝ PolarPoint)) p :=
+    (hG.differentiable (by simp) (q, p)).hasFDerivAt.comp p
+      (hasFDerivAt_prodMk_right q p)
+  change fderiv ℝ G (q, p) (0, (0, 1)) =
+    fderiv ℝ (fun x : PolarPoint => G (q, x)) p (0, 1)
+  rw [hs.fderiv]
+  rfl
 
 /-- The genuine first-variation expression, constructed from the actual
 speed derivatives and the actual trajectory values. -/

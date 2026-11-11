@@ -170,6 +170,35 @@ theorem stateProfileExponentJetMajorant_material_bound
       add_le_add (hborderBound r hr) hsum
     _ = (B₁ + B₀) * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ K := by ring
 
+private theorem exists_bound_mul_nonneg
+    {X : Type*} (U : Set ℝ)
+    (f : ∀ r, r ∈ U → X → ℝ) (p : X → ℝ)
+    (P : ∀ r, r ∈ U → ℝ) (W : ℝ → ℝ → ℝ → ℝ)
+    (hp : ∀ x, 0 ≤ p x)
+    (hf : ∀ r hr x, |f r hr x| ≤ P r hr * p x)
+    (hP : ∃ B K : ℝ, 0 < B ∧ 0 < K ∧ ∀ r hr, P r hr ≤ W B K r) :
+    ∃ B K : ℝ, 0 < B ∧ 0 < K ∧
+      ∀ r hr x, |f r hr x| ≤ W B K r * p x := by
+  obtain ⟨B, K, hB, hK, hbound⟩ := hP
+  exact ⟨B, K, hB, hK, fun r hr x =>
+    (hf r hr x).trans (mul_le_mul_of_nonneg_right (hbound r hr) (hp x))⟩
+
+private abbrev controlWeightStateTopology (S : PhysicalSpacesData) :
+    TopologicalSpace (AnnularState S) := inferInstance
+attribute [local instance] controlWeightStateTopology
+
+private abbrev controlWeightStateGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S) := inferInstance
+attribute [local instance] controlWeightStateGroup
+
+private abbrev controlWeightStateModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S) := inferInstance
+attribute [local instance] controlWeightStateModule
+
+private abbrev controlWeightStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) :=
+  (controlWeightStateModule S).toDistribMulAction.toDistribSMul.toSMul
+attribute [local instance] controlWeightStateSMul
+
 /-- The bound is an estimate for the actual continuous linear exponent
 jet at the original level-zero grading, uniformly over all states. -/
 theorem stateProfileExponentJetCLM_material_bound
@@ -182,11 +211,14 @@ theorem stateProfileExponentJetCLM_material_bound
     ∃ B K : ℝ, 0 < B ∧ 0 < K ∧ ∀ r (hr : r ∈ Ioo D.a D.b)
       (x : AnnularState S),
       |stateProfileExponentJetCLM hS hT hA.1.1 hA.2.2.1 n r hr x| ≤
-        (B * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ K) * stateGrading S 0 x := by
-  obtain ⟨B, K, hB, hK, hbound⟩ :=
-    stateProfileExponentJetMajorant_material_bound hT hA hloc hχloc n
-  refine ⟨B, K, hB, hK, fun r hr x => ?_⟩
-  exact (abs_stateProfileExponentJetCLM_le hS hT hA.1.1 hA.2.2.1 n r hr x).trans
-    (mul_le_mul_of_nonneg_right (hbound r hr) (apply_nonneg (stateGrading S 0) x))
+        (B * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ K) * stateGrading S 0 x :=
+  exists_bound_mul_nonneg (X := AnnularState S) (Ioo D.a D.b)
+    (fun r hr x => stateProfileExponentJetCLM hS hT hA.1.1 hA.2.2.1 n r hr x)
+    (fun x => stateGrading S 0 x)
+    (fun r hr => stateProfileExponentJetMajorant D T C hA.2.2.1 n r hr)
+    (fun B K r => B * T.H r ^ (3 / 4 : ℝ) * T.E0 r ^ K)
+    (fun x => apply_nonneg (stateGrading S 0) x)
+    (fun r hr x => abs_stateProfileExponentJetCLM_le hS hT hA.1.1 hA.2.2.1 n r hr x)
+    (stateProfileExponentJetMajorant_material_bound hT hA hloc hχloc n)
 
 end ContinuousFlexibility.Statements

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01cParameterCalculus
+import ContinuousFlexibility.Analysis.N01cStateSeminorms
 import ContinuousFlexibility.Analysis.CylinderMixedJets
 import Mathlib.Analysis.Calculus.ContDiff.CPolynomial
 
@@ -190,14 +191,14 @@ theorem cylinderMixedWord_radial_count (a b : ℕ) :
   rw [Fin.sum_univ_add]
   simp only [cylinderMixedWord, Fin.append_left, Fin.append_right, ite_true,
     one_ne_zero, ite_false, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
-    nsmul_eq_mul, mul_one, Finset.sum_const_zero, add_zero]
+    nsmul_eq_mul, Nat.cast_id, mul_one, mul_zero, add_zero]
 
 theorem cylinderMixedWord_angular_count (a b : ℕ) :
     (∑ i, if cylinderMixedWord a b i = 0 then 0 else 1) = b := by
   rw [Fin.sum_univ_add]
   simp only [cylinderMixedWord, Fin.append_left, Fin.append_right, ite_true,
     one_ne_zero, ite_false, Finset.sum_const_zero, Finset.sum_const, Finset.card_univ,
-    Fintype.card_fin, nsmul_eq_mul, mul_one, zero_add]
+    Fintype.card_fin, nsmul_eq_mul, Nat.cast_id, mul_one, zero_add]
 
 theorem mixedDerivative_eq_iteratedFDeriv_word
     {Ω : Set PolarPoint} {f : PolarPoint → ℝ}
@@ -317,8 +318,14 @@ theorem mixedDerivative_sub_of_contDiffOn
     (hg.contDiffAt (hΩ.mem_nhds hp)).of_le (by simp)
   rw [mixedDerivative_eq_iteratedFDeriv_word hΩ (hf.sub hg) a b hp,
     mixedDerivative_eq_iteratedFDeriv_word hΩ hf a b hp,
-    mixedDerivative_eq_iteratedFDeriv_word hΩ hg a b hp,
-    iteratedFDeriv_sub_apply hdf hdg, ContinuousMultilinearMap.sub_apply]
+    mixedDerivative_eq_iteratedFDeriv_word hΩ hg a b hp]
+  have hsub : iteratedFDeriv ℝ (a + b) (fun q => f q - g q) p =
+      iteratedFDeriv ℝ (a + b) f p - iteratedFDeriv ℝ (a + b) g p := by
+    simpa only [Pi.sub_def] using
+      (iteratedFDeriv_sub_apply (i := a + b) hdf hdg)
+  have hvalue := congrArg (fun A : PolarPoint [×(a + b)]→L[ℝ] ℝ =>
+    A (fun i => cylinderBasisVector (cylinderMixedWord a b i))) hsub
+  simpa only [ContinuousMultilinearMap.sub_apply] using hvalue
 
 /-- Subtracting a fixed spatial reference field preserves the genuine
 parameter tower for every actual mixed derivative. -/

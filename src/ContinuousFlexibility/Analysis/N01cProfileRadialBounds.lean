@@ -18,7 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set
-open ContinuousFlexibility.Analysis
+open ContinuousFlexibility.Analysis ContinuousFlexibility.Blueprint
 open scoped ContDiff Topology BigOperators
 
 set_option backward.isDefEq.respectTransparency true
@@ -137,7 +137,7 @@ theorem n01PartB_stateProfileExponent_exp_le_two
   have hb : D.w r * Real.exp (z.1.2.1 * D.chi r + stateControlSum C z.1 r) ≤ D.w r * 2 :=
     ((le_abs_self (stateProfile D S C z.1 r)).trans
       (n01PartB_abs_stateProfile_le hD hS href hB hz r hr)).trans_eq (mul_comm 2 (D.w r))
-  exact (mul_le_mul_left hw).mp hb
+  exact le_of_mul_le_mul_left hb hw
 
 /-- All parameter orders and radial orders share the exact original
 neighbourhood.  The finite coefficient is independent of z and v there

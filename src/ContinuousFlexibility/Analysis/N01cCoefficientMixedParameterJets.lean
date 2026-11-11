@@ -177,6 +177,8 @@ def n01_coefficientPrimitiveMixedSmoothDirections
     (a b : ℕ) :
     ∀ j : Fin 8, SmoothDirections univ (fun z : AnnularState S × ℝ =>
       mixedDerivative a b (fun q => coefficientPrimitiveVector D S C z q j) p) := by
+  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
   have hD : RadialProfileGeometry D := by
     obtain ⟨K, hK⟩ := hA.1.1
     exact hK.1
@@ -343,6 +345,8 @@ def n01_originalCoefficientMixedSmoothDirections
     (i : Fin 3) (a b : ℕ) (p : PolarPoint) (hp : p ∈ annularOpen D) :
     SmoothDirections (stateNeighborhood S C base ε)
       (fun z => mixedDerivative a b (coefficientOriginalField D S C i z) p) := by
+  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
   have hD : RadialProfileGeometry D := by
     obtain ⟨K, hK⟩ := hA.1.1
     exact hK.1
@@ -381,6 +385,8 @@ def n01_coefficientFamilySmoothDirections
     (hA : N01PartA D T S C) (hB : N01PartB D S C base ε) (hε : 0 < ε)
     (i : Fin 3) (a b : ℕ) (p : PolarPoint) (hp : p ∈ annularOpen D) :
     SmoothDirections (stateNeighborhood S C base ε) (coefficientFamily D S C i a b p) := by
+  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
   have href : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
     · simpa only [sub_self, map_zero] using hε

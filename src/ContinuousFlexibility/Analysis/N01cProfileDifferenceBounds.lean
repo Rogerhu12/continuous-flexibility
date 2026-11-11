@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set
-open ContinuousFlexibility.Analysis
+open ContinuousFlexibility.Analysis ContinuousFlexibility.Blueprint
 open scoped ContDiff Topology BigOperators
 
 set_option backward.isDefEq.respectTransparency true
