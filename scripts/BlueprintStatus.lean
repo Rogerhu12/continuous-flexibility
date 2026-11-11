@@ -57,3 +57,9 @@ run_cmd do
 #print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.assertions
 #print axioms ContinuousFlexibility.Radial.OuterPhysicalRobinInverse.ordinary_jacobi_source
 #print axioms ContinuousFlexibility.Radial.accumulatingProfile_no_unweighted_outer_inverse
+
+-- N07a: audit the exact three subnodes and their original assembly.
+#print axioms ContinuousFlexibility.Blueprint.N07aAngular
+#print axioms ContinuousFlexibility.Blueprint.N07aLinear
+#print axioms ContinuousFlexibility.Blueprint.N07aSmooth
+#print axioms ContinuousFlexibility.Blueprint.N07a

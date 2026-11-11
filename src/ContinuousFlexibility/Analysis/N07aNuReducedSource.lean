@@ -141,7 +141,9 @@ theorem n07a_exists_nuReducedSource
   have hv : (Fin.cons w Fin.elim0 : Fin 1 → N07aNuParameter S) =
       Fin.snoc (α := fun _ : Fin 1 => N07aNuParameter S) Fin.elim0 w := by
     funext i
-    have hi : i = 0 := Subsingleton.elim i 0
+    have hi : i = 0 := by
+      apply Fin.ext
+      omega
     subst i
     simp only [Fin.cons_zero, Fin.snoc_zero]
   rw [hv] at hd

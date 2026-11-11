@@ -90,7 +90,7 @@ theorem n07a_actualRelativeMain_mode_bound
       N07aSampleSubpower T K e₁ ∧ N07aSampleSubpower T K e₂ ∧
       (∀ m, 0 ≤ e₁ m) ∧ (∀ m, 0 ≤ e₂ m) ∧
       ∀ z (hz : z ∈ sectorNeighborhood S base ε ε),
-      ∀ F : V.level (3 / 4 : ℝ) 0 b, ∀ m j l,
+      ∀ F : V.level (3 / 4 : ℝ) 0 b, ∀ m j l : ℕ,
       n07aAngularBand m (hI m) j (n07aReferenceInverseField (B := B) F m) =
         n07aReferenceInverseField (B := B) F m → ∀ commute : Bool,
       Real.sqrt (Real.pi * (K.right m - K.left m)) *
@@ -108,7 +108,7 @@ theorem n07a_actualRelativeMain_mode_bound
     (hT.2.1 _ (materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m))).2.2.1
   have hH (m : ℕ) : 0 < T.H (T.sample (K.cell m)) :=
     (hT.2.1 _ (materialSample_mem_radialCore hT hD.choose_spec.2.1 (K.cell m))).2.1
-  have hab : D.a ≤ D.b := hD.choose_spec.2.1.le
+  have hab : D.a ≤ D.b := hD.choose_spec.1.2.1.le
   obtain ⟨A, A₁, A₂, _, _, _, henergy⟩ :=
     n07a_reference_actualMode_root_bound href hprincipal hE hI
   let principal := n07a_actualPrincipal_block_bound h01 h04 href hcur

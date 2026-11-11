@@ -59,8 +59,80 @@ theorem n07aNormalizedForwardCLM_apply
     ContinuousLinearMap.add_apply, ContinuousLinearMap.smulRight_apply,
     ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', Submodule.subtypeL_apply]
 
+private theorem n07aNormalizedForward_source_grading (n : ℕ) (u : S.Source) :
+    (S.height (3 / 4 : ℝ)).grading n (S.Q.toLinearMap.ker.subtypeL u) =
+      S.sourceGrading n u := by
+  simp only [Submodule.subtypeL_apply, PhysicalSpacesData.sourceGrading,
+    Seminorm.comp_apply, Submodule.subtype_apply]
+
+private def n07aNormalizedForwardHeightProjectionCLM :
+    ((StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS) →L[ℝ]
+      ((StateDirections S × ℝ) × HeightPair S) :=
+  (ContinuousLinearMap.id ℝ (StateDirections S × ℝ)).prodMap
+    ((ContinuousLinearMap.fst ℝ (HeightPair S) ℝ).comp
+      (n07aNormalizationSubmodule hD hT hS).subtypeL)
+
+private theorem n07aNormalizedForwardHeightProjectionCLM_apply
+    (z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS) :
+    n07aNormalizedForwardHeightProjectionCLM hD hT hS z = (z.1, z.2.val.1) := by
+  simp only [n07aNormalizedForwardHeightProjectionCLM,
+    ContinuousLinearMap.coe_prodMap', Prod.map_apply', ContinuousLinearMap.id_apply,
+    ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst']
+  exact congrArg (fun u : HeightPair S × ℝ => (z.1, u.1))
+    (n07aNormalizedForward_subtype_apply hD hT hS z.2)
+
+private theorem n07aNormalizedForwardHeightProjectionCLM_bound (n : ℕ)
+    (z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS) :
+    n07aParameterHeightGrading S n (n07aNormalizedForwardHeightProjectionCLM hD hT hS z) ≤
+      n07aParameterNormalizedGrading hD hT hS n z := by
+  have he : n07aParameterHeightGrading S n
+      (n07aNormalizedForwardHeightProjectionCLM hD hT hS z) =
+      n07aParameterGrading S n z.1 + heightPairGrading S n z.2.val.1 :=
+    (congrArg (fun v => n07aParameterHeightGrading S n v)
+      (n07aNormalizedForwardHeightProjectionCLM_apply hD hT hS z)).trans
+      (pairGrading_apply (n07aParameterGrading S) (heightPairGrading S)
+        n (z.1, z.2.val.1))
+  have hg : n07aParameterNormalizedGrading hD hT hS n z =
+      n07aParameterGrading S n z.1 +
+        (heightPairGrading S n z.2.val.1 + |z.2.val.2|) :=
+    (pairGrading_apply (n07aParameterGrading S) (n07aNormalizedGrading hD hT hS) n z).trans
+      (congrArg (fun t : ℝ => n07aParameterGrading S n z.1 + t)
+        (n07aNormalizedForward_grading_apply hD hT hS n z.2))
+  have hnum : n07aParameterGrading S n z.1 + heightPairGrading S n z.2.val.1 ≤
+      n07aParameterGrading S n z.1 + (heightPairGrading S n z.2.val.1 + |z.2.val.2|) := by
+    linarith only [abs_nonneg z.2.val.2]
+  exact he.le.trans (hnum.trans_eq hg.symm)
+
+private theorem n07aNormalizedForward_height_source_smoothTame
+    {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
+    (F : (StateDirections S × ℝ) → HeightPair S →L[ℝ] S.Source)
+    (hF : SmoothTameOn (n07aParameterHeightGrading S) S.sourceGrading (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × HeightPair S => F z.1 z.2)) :
+    SmoothTameOn (n07aParameterNormalizedGrading hD hT hS) S.sourceGrading
+      (U ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS =>
+        F z.1 z.2.val.1) := by
+  let I := n07aNormalizedForwardHeightProjectionCLM hD hT hS
+  have hI (z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS) :
+      I z = (z.1, z.2.val.1) :=
+    n07aNormalizedForwardHeightProjectionCLM_apply hD hT hS z
+  have hFp := solve_smoothTameOn_precomp (p := n07aParameterNormalizedGrading hD hT hS)
+    hF I (A := 1) le_rfl
+    (fun n z => by simpa only [one_mul] using
+      n07aNormalizedForwardHeightProjectionCLM_bound hD hT hS n z)
+  have hsub : U ×ˢ univ ⊆ I ⁻¹' (U ×ˢ univ) := by
+    intro z hz
+    have he : (I z).1 = z.1 :=
+      congrArg (fun v : (StateDirections S × ℝ) × HeightPair S => v.1) (hI z)
+    exact ⟨Eq.mpr (congrArg (fun v : StateDirections S × ℝ => v ∈ U) he) hz.1,
+      mem_univ _⟩
+  have hFp' := smoothTameOn_mono hFp (hU.prod isOpen_univ) hsub
+  apply smoothTameOn_congr hFp'
+  intro z _
+  exact congrArg (fun v : (StateDirections S × ℝ) × HeightPair S => F v.1 v.2) (hI z)
+
 private theorem n07aNormalizedForward_height_smoothTame
-    {U : Set (StateDirections S × ℝ)}
+    {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
     (F : (StateDirections S × ℝ) → HeightPair S →L[ℝ] S.Source)
     (hF : SmoothTameOn (n07aParameterHeightGrading S) S.sourceGrading (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × HeightPair S => F z.1 z.2)) :
@@ -68,49 +140,14 @@ private theorem n07aNormalizedForward_height_smoothTame
       (S.height (3 / 4 : ℝ)).grading (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS =>
         (F z.1 z.2.val.1).val) := by
-  let Y := N07aNormalizedUnknown hD hT hS
-  let p := n07aParameterGrading S
-  let q := n07aNormalizedGrading hD hT hS
-  let i : Y →L[ℝ] HeightPair S :=
-    (ContinuousLinearMap.fst ℝ (HeightPair S) ℝ).comp
-      (n07aNormalizationSubmodule hD hT hS).subtypeL
-  let I : ((StateDirections S × ℝ) × Y) →L[ℝ] ((StateDirections S × ℝ) × HeightPair S) :=
-    (ContinuousLinearMap.id ℝ (StateDirections S × ℝ)).prodMap i
-  have hI (z : (StateDirections S × ℝ) × Y) : I z = (z.1, z.2.val.1) := by
-    simp only [I, i, ContinuousLinearMap.coe_prodMap', Prod.map_apply',
-      ContinuousLinearMap.id_apply, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.coe_fst']
-    exact congrArg (fun u : HeightPair S × ℝ => (z.1, u.1))
-      (n07aNormalizedForward_subtype_apply hD hT hS z.2)
-  have hgrading (n : ℕ) (z : (StateDirections S × ℝ) × Y) :
-      pairGrading p q n z = p n z.1 +
-        (heightPairGrading S n z.2.val.1 + |z.2.val.2|) :=
-    (pairGrading_apply p q n z).trans (congrArg (fun t : ℝ => p n z.1 + t)
-      (n07aNormalizedForward_grading_apply hD hT hS n z.2))
-  have hi (n : ℕ) (z : (StateDirections S × ℝ) × Y) :
-      n07aParameterHeightGrading S n (I z) ≤ 1 * pairGrading p q n z := by
-    have he : n07aParameterHeightGrading S n (I z) =
-        p n z.1 + heightPairGrading S n z.2.val.1 :=
-      (congrArg (fun v => n07aParameterHeightGrading S n v) (hI z)).trans
-        (pairGrading_apply (n07aParameterGrading S) (heightPairGrading S)
-          n (z.1, z.2.val.1))
-    have hnum : p n z.1 + heightPairGrading S n z.2.val.1 ≤
-        1 * (p n z.1 + (heightPairGrading S n z.2.val.1 + |z.2.val.2|)) := by
-      linarith only [abs_nonneg z.2.val.2]
-    exact he.le.trans (hnum.trans_eq
-      (congrArg (fun t : ℝ => 1 * t) (hgrading n z).symm))
-  have hdom : I ⁻¹' (U ×ˢ univ) = U ×ˢ univ := by
-    ext z
-    simp only [mem_preimage, hI, mem_prod, mem_univ, and_true]
-  have hFp := solve_smoothTameOn_precomp hF I (A := 1) le_rfl hi
-  rw [hdom] at hFp
+  have hFp := n07aNormalizedForward_height_source_smoothTame hD hT hS hU F hF
   have hFh := solve_smoothTameOn_postcomp (r := (S.height (3 / 4 : ℝ)).grading)
     hFp S.Q.toLinearMap.ker.subtypeL
     (B := 1) zero_le_one (fun n u => by
-      simp only [Submodule.subtypeL_apply, one_mul, le_refl])
+      simpa only [one_mul] using (n07aNormalizedForward_source_grading (S := S) n u).le)
   apply smoothTameOn_congr hFh
   intro z _
-  simp only [hI, Submodule.subtypeL_apply]
+  exact Submodule.subtypeL_apply S.Q.toLinearMap.ker _
 
 private theorem n07aNormalizedForward_scalar_smoothTame
     {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
@@ -131,7 +168,7 @@ private theorem n07aNormalizedForward_scalar_smoothTame
   have hNh := solve_smoothTameOn_postcomp (r := (S.height (3 / 4 : ℝ)).grading)
     hN S.Q.toLinearMap.ker.subtypeL
     (B := 1) zero_le_one (fun n u => by
-      simp only [Submodule.subtypeL_apply, one_mul, le_refl])
+      simpa only [one_mul] using (n07aNormalizedForward_source_grading (S := S) n u).le)
   have hNf := n07a_height_smoothTame_fst hS
     (n07aParameterGrading_monotone S) (n07aParameterGrading_withSeminorms S)
     (n07aNormalizedGrading_monotone hD hT hS)
@@ -179,7 +216,7 @@ theorem n07aNormalizedForwardCLM_smoothTame
       (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × N07aNormalizedUnknown hD hT hS =>
         n07aNormalizedForwardCLM hD hT hS F N z.1 z.2) := by
-  have hheight := n07aNormalizedForward_height_smoothTame hD hT hS F hF
+  have hheight := n07aNormalizedForward_height_smoothTame hD hT hS hU F hF
   have hscalar := n07aNormalizedForward_scalar_smoothTame hD hT hS hU N hN
   have hp : Monotone (n07aParameterNormalizedGrading hD hT hS) :=
     tamePairGrading_monotone (n07aParameterGrading_monotone S)

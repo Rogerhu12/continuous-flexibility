@@ -40,8 +40,12 @@ theorem n07a_radialCutoff_divergence_zero_outside
       A.c q * angularPartial (fun p => χ p.1) q) =ᶠ[𝓝 p] (fun _ => (0 : ℝ)) := by
     filter_upwards [he] with q hq
     simp only [hr, ht, hq, mul_zero, add_zero]
-  unfold divergenceOperator radialPartial angularPartial
-  rw [hrad.fderiv_eq, hang.fderiv_eq, fderiv_const, ContinuousLinearMap.zero_apply, add_zero]
+  have hdr := congrArg (fun B : PolarPoint →L[ℝ] ℝ => B (1, 0))
+    (hrad.fderiv_eq (𝕜 := ℝ))
+  have hdt := congrArg (fun B : PolarPoint →L[ℝ] ℝ => B (0, 1))
+    (hang.fderiv_eq (𝕜 := ℝ))
+  simpa only [divergenceOperator, radialPartial, angularPartial, fderiv_const_apply,
+    zero_apply, add_zero] using congrArg₂ (fun x y : ℝ => x + y) hdr hdt
 
 def n07aPhysicalScalarColumn (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (L : ReturnCorrectionData S)
