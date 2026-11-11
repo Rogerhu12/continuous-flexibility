@@ -783,7 +783,7 @@ def DeepTailHypotheses (T : DeepTailData) : Prop :=
 def TailEnergyCore (T : DeepTailData) (endCut : ℝ) :
     Set (DeepTailL2 T × DeepTailL2 T) :=
   {p | ∃ φ : ℝ → ℝ, ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧
-    Function.support φ ⊆ Ioo T.entrance endCut ∧
+    tsupport φ ⊆ Ioo T.entrance endCut ∧
     (p.1 : ℝ → ℝ) =ᵐ[deepTailMeasure T] φ ∧
     (p.2 : ℝ → ℝ) =ᵐ[deepTailMeasure T] deriv φ}
 
@@ -799,13 +799,13 @@ def TailFriedrichsGraph (T : DeepTailData) (endCut : ℝ)
 def TailWeakDerivative (T : DeepTailData) (endCut : ℝ)
     (u d : DeepTailL2 T) : Prop :=
   ∀ ψ : ℝ → ℝ, ContDiff ℝ ∞ ψ → HasCompactSupport ψ →
-    Function.support ψ ⊆ Ioo T.entrance endCut →
+    tsupport ψ ⊆ Ioo T.entrance endCut →
     (∫ x : ℝ, u x * deriv ψ x) = -(∫ x : ℝ, d x * ψ x)
 
 def TailDistributionGraph (T : DeepTailData) (endCut : ℝ)
     (u f : DeepTailL2 T) : Prop :=
   ∀ ψ : ℝ → ℝ, ContDiff ℝ ∞ ψ → HasCompactSupport ψ →
-    Function.support ψ ⊆ Ioo T.entrance endCut →
+    tsupport ψ ⊆ Ioo T.entrance endCut →
     (∫ x, f x * ψ x ∂deepTailMeasure T) =
       ∫ x, u x * (-(T.p x)⁻¹ * deriv (fun y => T.p y * deriv ψ y) x) ∂deepTailMeasure T
 

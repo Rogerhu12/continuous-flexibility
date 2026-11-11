@@ -83,6 +83,44 @@ are the first real tests of the chain. `R10a` has one frozen statement for the i
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
+### R06a: correction of the local test class (line/R06a, 2026-11-11)
+
+The frozen clause
+`∀ u d, (u, d) ∈ TailFormLift T endCut → TailWeakDerivative T endCut u d`
+used the test condition `Function.support ψ ⊆ Ioo T.entrance endCut`.
+Together with `HasCompactSupport ψ` this does **not** say that the support is
+compactly contained in the open interval: its closure may meet the singular
+endpoint. The resulting weak-derivative clause is false for the allowed weights.
+
+Here is the counterexample mechanism, including why the deep-tail inequalities
+do not prevent it. Choose mass and gap intervals of length `l_n ≍ ε 2^(-n)`,
+with density `1/l_n` on each mass interval and a plateau of height
+`g_n = exp(-4 n^4)` on most of each gap. Smooth the transitions in arbitrarily
+short collars. Then the mass intervals have mass `1` and resistance `l_n^2`;
+the gaps have mass at most `2 g_n l_n` and resistance between
+`l_n/(2 g_n)` and `2 l_n/g_n`. Starting sufficiently far out and taking ε
+small makes the smallness conditions arbitrarily small and the two mass times
+resistance conditions arbitrarily large. The density is smooth and positive
+at every interior point, as required.
+
+In the plateau of gap n place a smooth bump `u_n` of height `exp(n^4)`, and a
+smooth cutoff `ψ_n` of height `exp(-n^4)` which is constant on the support of
+`u_n`. The disjoint sums `u = Σ u_n`, `d = Σ u_n'` have finite weighted energy;
+their finite partial sums prove `(u,d)` is in the stated form closure. The sum
+`ψ = Σ ψ_n` extends smoothly and flatly across the endpoint and has ordinary
+support in the open interval. However, `u ψ' = 0`, whereas
+`∫ |d ψ| = ∞`, since every gap contributes the same positive variation.
+Adding the compactly supported test `q = u_m'` for one fixed gap gives
+`∫ u (ψ+q)' = -∫ (u_m')^2 < 0`, while `d (ψ+q)` is still nonintegrable.
+Lean's total integral of that nonintegrable function is zero. Thus this is
+an actual failure of the frozen equality, not just a missing integrability lemma.
+
+The local tests and the Friedrichs core now require
+`tsupport ψ ⊆ Ioo T.entrance endCut`. The same corrected definitions feed
+`R06Operator`, `R06Full`, `R06Statement`, and `R06_of_nodes`; no inverse or
+convergence conclusion has been removed. R06a remains open pending the proof
+of the corrected statement.
+
 Not yet checked against the readable manuscript: the kernel clause of the radial reference
 (`R12`). The 62-page version left "endpoint-flat kernel" undefined; the readable version defines it
 as the kernel on the weighted graph domain.
