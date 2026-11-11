@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Analysis
 
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- Signed travel coordinate centered at the common travel value. -/
 def n04bSignedTravel (T s : ℝ) (τ : ℝ → ℝ) (p : PolarPoint) : PolarPoint :=
   (T / 2 + s * (τ p.1 - T / 2), p.2)

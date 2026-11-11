@@ -104,7 +104,7 @@ theorem n04bCanonicalOperatorData_partA
     (L : ReturnCorrectionData S) {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hA : N04PartA D S C K base ε) :
     N04PartA D S C (n04bCanonicalOperatorData S L K) base ε := by
-  simpa only [N04PartA, n04bCanonicalOperatorData] using hA
+  exact hA
 
 /-- Both signs in the frozen operator clause follow from the same actual
 coordinate identity. -/
