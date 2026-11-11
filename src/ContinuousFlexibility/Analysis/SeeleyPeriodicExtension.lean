@@ -31,15 +31,20 @@ theorem seeleyCylinderExtend_periodic_of_halfPlane
     (hperiod : ∀ r, 0 ≤ r → Function.Periodic (fun θ => f (r, θ)) T) (r : ℝ) :
     Function.Periodic (fun θ => seeleyCylinderExtend S f (r, θ)) T := by
   intro θ
+  change seeleyCylinderExtend S f (r, θ + T) = seeleyCylinderExtend S f (r, θ)
   by_cases hr : 0 ≤ r
-  · rw [seeleyCylinderExtend_of_nonneg S f hr, seeleyCylinderExtend_of_nonneg S f hr]
+  · rw [seeleyCylinderExtend_of_nonneg S f (p := (r, θ + T)) hr,
+      seeleyCylinderExtend_of_nonneg S f (p := (r, θ)) hr]
     exact hperiod r hr θ
-  · simp only [seeleyCylinderExtend, seeleyExtend, if_neg hr, seeleyReflection]
+  · dsimp only [seeleyCylinderExtend]
+    simp only [seeleyExtend, if_neg hr, seeleyReflection]
     apply tsum_congr
     intro i
-    rw [hperiod (-S.b i * r)
-      (mul_nonneg_of_nonpos_of_nonpos (neg_nonpos.mpr (S.b_nonneg i))
-        (lt_of_not_ge hr).le) θ]
+    have hp : f (-S.b i * r, θ + T) = f (-S.b i * r, θ) :=
+      hperiod (-S.b i * r)
+        (mul_nonneg_of_nonpos_of_nonpos (neg_nonpos.mpr (S.b_nonneg i))
+          (lt_of_not_ge hr).le) θ
+    exact congrArg (fun u : ℝ => (S.a i * (-S.b i) ^ 0) • u) hp
 
 private theorem seeleyCutoffField_periodic
     {f : ℝ × ℝ → ℝ} {T : ℝ}
@@ -48,7 +53,8 @@ private theorem seeleyCutoffField_periodic
     Function.Periodic (fun θ => seeleyCutoffField f (r, θ)) T := by
   intro θ
   change boundaryTaylorCutoff r * f (r, θ + T) = boundaryTaylorCutoff r * f (r, θ)
-  rw [hperiod r hr θ]
+  have hp : f (r, θ + T) = f (r, θ) := hperiod r hr θ
+  exact congrArg (fun u : ℝ => boundaryTaylorCutoff r * u) hp
 
 private theorem contDiff_seeleyCutoffExtension
     {f : ℝ × ℝ → ℝ} (hf : ContDiffOn ℝ ∞ f seeleyHalfPlane)
@@ -92,8 +98,9 @@ private theorem seeleyPeriodicExtension_boundary_germ
   · rw [seeleyPeriodicExtension_of_nonneg f hr,
       seeleyCylinderExtend_of_nonneg seeleyData (seeleyCutoffField f) hr]
     change f q = boundaryTaylorCutoff q.1 * f q
-    rw [hq]
-    simp only [Pi.one_apply, one_mul]
+    have hq' : boundaryTaylorCutoff q.1 = 1 := by
+      simpa only [Function.comp_apply, Pi.one_apply] using hq
+    rw [hq', one_mul]
   · simp only [seeleyPeriodicExtension, if_neg hr]
 
 /-- A one-sided jointly smooth periodic field has one global jointly
@@ -124,10 +131,13 @@ theorem seeleyPeriodicExtension_periodic
     (hperiod : ∀ r, 0 ≤ r → Function.Periodic (fun θ => f (r, θ)) T) (r : ℝ) :
     Function.Periodic (fun θ => seeleyPeriodicExtension f (r, θ)) T := by
   intro θ
+  change seeleyPeriodicExtension f (r, θ + T) = seeleyPeriodicExtension f (r, θ)
   by_cases hr : 0 ≤ r
-  · rw [seeleyPeriodicExtension_of_nonneg f hr, seeleyPeriodicExtension_of_nonneg f hr]
+  · rw [seeleyPeriodicExtension_of_nonneg f (p := (r, θ + T)) hr,
+      seeleyPeriodicExtension_of_nonneg f (p := (r, θ)) hr]
     exact hperiod r hr θ
-  · simp only [seeleyPeriodicExtension, if_neg hr]
+  · dsimp only [seeleyPeriodicExtension]
+    simp only [if_neg hr]
     exact seeleyCylinderExtend_periodic_of_halfPlane seeleyData
       (seeleyCutoffField_periodic hperiod) r θ
 

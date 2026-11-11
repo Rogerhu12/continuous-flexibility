@@ -126,7 +126,7 @@ theorem coordinate_hasInterpolation_realGrading : HasInterpolation realGrading :
   intro a b c _ hab hbc
   refine ⟨1, zero_le_one, ?_⟩
   intro x
-  simp only [realGrading, coe_normSeminorm, sub_zero, add_zero, one_mul]
+  simp only [realGrading, coe_normSeminorm, Nat.cast_zero, sub_zero, add_zero, one_mul]
   by_cases hx : ‖x‖ = 0
   · rw [hx]
     positivity
