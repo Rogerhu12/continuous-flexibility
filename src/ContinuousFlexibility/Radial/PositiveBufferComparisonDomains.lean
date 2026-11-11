@@ -70,7 +70,7 @@ theorem positiveBuffer_affine_preimage_uIcc {a b L : ℝ} (hb : b ≠ 0) (hL : 0
         have hp := mul_lt_mul_of_neg_left (lt_of_not_ge ht) hbneg
         linarith
     · rintro ⟨hlo, hhi⟩
-      exact ⟨add_le_add_left (mul_le_mul_of_nonpos_left hhi hbneg.le) _,
+      exact ⟨by linarith [mul_le_mul_of_nonpos_left hhi hbneg.le],
         by nlinarith [mul_nonpos_of_nonpos_of_nonneg hbneg.le hlo]⟩
   · have hend : a ≤ a + b * L := by nlinarith [mul_nonneg hbpos.le hL]
     simp only [mem_preimage, uIcc_of_le hend, mem_Icc]
@@ -81,7 +81,7 @@ theorem positiveBuffer_affine_preimage_uIcc {a b L : ℝ} (hb : b ≠ 0) (hL : 0
       · exact (mul_le_mul_iff_right₀ hbpos).mp (by linarith)
     · rintro ⟨hlo, hhi⟩
       exact ⟨by nlinarith [mul_nonneg hbpos.le hlo],
-        add_le_add_left (mul_le_mul_of_nonneg_left hhi hbpos.le) _⟩
+        by linarith [mul_le_mul_of_nonneg_left hhi hbpos.le]⟩
 
 theorem positiveBufferPoint_preimage_span {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) :
@@ -104,7 +104,7 @@ theorem positiveBufferPoint_before_innerWall {B : BufferData}
   by_cases hi : i = 0
   · simp only [hi, ite_true, positiveBufferPoint, bufferInnerWall, bufferCut, bufferSign,
       neg_mul, one_mul, neg_div, sub_neg_eq_add]
-    simpa only [hi] using add_le_add_left hdiv B.l
+    simpa only [hi, add_comm] using add_le_add_left hdiv B.l
   · simp only [hi, ite_false, positiveBufferPoint, bufferInnerWall, bufferCut, bufferSign, one_mul]
     exact sub_le_sub_left hdiv B.h
 

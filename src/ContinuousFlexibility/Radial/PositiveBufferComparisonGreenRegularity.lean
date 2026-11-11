@@ -113,4 +113,38 @@ theorem positiveBufferGreenKernel_border_zero {B : BufferData}
     (t := positiveBufferCoordinate B i x) (by linarith)
   rwa [positiveBufferPoint_coordinate hB i x] at hz
 
+theorem positiveBufferGreenKernel_continuous {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) (A : ℝ) {pin pout : ℝ → ℝ}
+    (hpin : Continuous pin) (hpout : Continuous pout)
+    (hpin0 : pin 0 = 1) (hpout0 : pout 0 = 1) :
+    Continuous (positiveBufferGreenKernel B i A pin pout) := by
+  change Continuous (fun x => A⁻¹ *
+    positiveBufferGreenProfile (B.action i) pin pout (positiveBufferCoordinate B i x))
+  exact continuous_const.mul
+    ((positiveBufferGreenProfile_continuous (buffer_action_pos hB i) hpin hpout hpin0 hpout0).comp
+      (positiveBufferCoordinate_contDiff B i).continuous)
+
+theorem positiveBufferGreenKernel_outward_value {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) (A : ℝ) (pin pout : ℝ → ℝ)
+    {t : ℝ} (ht : 0 ≤ t) :
+    positiveBufferGreenKernel B i A pin pout (positiveBufferPoint B i (-t)) = A⁻¹ * pout t := by
+  unfold positiveBufferGreenKernel positiveBufferGreenProfile
+  rw [positiveBufferCoordinate_point hB i (-t),
+    bufferCutGlue_of_le 0 _ _ (neg_nonpos.mpr ht), neg_neg]
+
+theorem positiveBufferGreenKernel_outward_bound {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) {A M : ℝ} (hA : A ≠ 0)
+    (pin pout : ℝ → ℝ)
+    (hbound : ∀ x : ℝ, |positiveBufferGreenKernel B i A pin pout x| ≤ M) :
+    ∀ t ∈ Ici (0 : ℝ), |pout t| ≤ |A| * M := by
+  intro t ht
+  have heq : A * positiveBufferGreenKernel B i A pin pout (positiveBufferPoint B i (-t)) = pout t := by
+    rw [positiveBufferGreenKernel_outward_value hB i A pin pout ht,
+      ← mul_assoc, mul_inv_cancel₀ hA, one_mul]
+  calc
+    _ = |A * positiveBufferGreenKernel B i A pin pout (positiveBufferPoint B i (-t))| :=
+      congrArg abs heq.symm
+    _ = |A| * |positiveBufferGreenKernel B i A pin pout (positiveBufferPoint B i (-t))| := abs_mul _ _
+    _ ≤ |A| * M := mul_le_mul_of_nonneg_left (hbound _) (abs_nonneg _)
+
 end ContinuousFlexibility.Radial

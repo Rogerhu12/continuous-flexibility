@@ -41,7 +41,7 @@ theorem positiveBuffer_affine_toLp_norm_sq {f : ℝ → ℝ}
       |b|⁻¹ * ‖hf.toLp f‖ ^ 2 := by
   rw [positiveBuffer_toLp_norm_sq, positiveBuffer_toLp_norm_sq]
   simpa only [preimage_univ, Measure.restrict_univ] using
-    positiveBuffer_affine_setIntegral (fun x => f x ^ 2) measurableSet_univ a b
+    positiveBuffer_affine_setIntegral (fun x => f x ^ 2) MeasurableSet.univ a b
 
 theorem positiveBuffer_affine_toLp_norm {f : ℝ → ℝ}
     (hc : Continuous f) (hf : MemLp f 2 volume) (a : ℝ) {b : ℝ} (hb : b ≠ 0) :
@@ -63,6 +63,7 @@ theorem positiveBuffer_affine_scaled_toLp_norm {f : ℝ → ℝ}
     ‖((positiveBuffer_affine_memLp_two hc hf a hb).const_mul k).toLp
       (fun x => k * f (a + b * x))‖ =
       |k| * sqrt (|b|⁻¹) * ‖hf.toLp f‖ := by
-  rw [positiveBuffer_const_mul_toLp_norm, positiveBuffer_affine_toLp_norm, mul_assoc]
+  rw [positiveBuffer_const_mul_toLp_norm (positiveBuffer_affine_memLp_two hc hf a hb) k,
+    positiveBuffer_affine_toLp_norm hc hf a hb, mul_assoc]
 
 end ContinuousFlexibility.Radial

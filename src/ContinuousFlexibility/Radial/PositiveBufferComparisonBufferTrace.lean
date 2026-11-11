@@ -94,7 +94,8 @@ theorem positiveBuffer_oriented_cut_trace_bound {B : BufferData}
   have hgnorm : ‖g‖ = sqrt (B.mass i) * ‖F‖ := by
     change ‖(positiveBuffer_affine_memLp_two hU.continuous hfU
       (bufferCut B i) hb).toLp (fun r => U (bufferCut B i + b * r))‖ = _
-    rw [positiveBuffer_affine_toLp_norm, hbabs, one_div, inv_inv, hUto]
+    rw [positiveBuffer_affine_toLp_norm hU.continuous hfU (bufferCut B i) hb,
+      hbabs, one_div, inv_inv, hUto]
   have htrace := positiveBuffer_halfline_l2_trace_bound
     (a := a) (m := 1) (r := a) (c := 0) (σ := B.action i)
     (by norm_num) hM hv.continuousOn hvderiv hdvderiv hq

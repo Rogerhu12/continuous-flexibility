@@ -34,8 +34,12 @@ theorem positiveBufferEnergyForm_self_eq_integral (V : ℝ → ℝ) (hV : Contin
     positiveBufferEnergyForm V hV u u = ∫ x : ℝ, positiveBufferEnergyDensity V u x := by
   rw [positiveBufferEnergyForm_eq_integral, positiveBufferL2_inner_integral]
   have hpot := positiveBufferPotential_pairing_integrable V hV u u
-  have hd := (Lp.memLp (positiveBufferEnergyCoordinate V 1 u)).integrable_mul
-    (Lp.memLp (positiveBufferEnergyCoordinate V 1 u))
+  have hd : Integrable (fun x : ℝ =>
+      positiveBufferEnergyCoordinate V 1 u x * positiveBufferEnergyCoordinate V 1 u x)
+      volume := by
+    simpa only [Pi.mul_apply] using
+      (Lp.memLp (positiveBufferEnergyCoordinate V 1 u)).integrable_mul
+        (Lp.memLp (positiveBufferEnergyCoordinate V 1 u))
   rw [← integral_add hd hpot]
   apply integral_congr_ae
   filter_upwards [] with x

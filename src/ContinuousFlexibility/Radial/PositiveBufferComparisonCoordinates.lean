@@ -115,8 +115,10 @@ theorem positiveBufferPoint_homogeneous {B : BufferData} {i : Fin 2}
   have h := positiveBuffer_affine_homogeneous hu hdu
     (bufferCut B i) (-bufferSign i / B.mass i)
     (by simpa only [← positiveBufferPoint_affine] using ht)
-  simpa only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq,
-    one_div, div_eq_mul_inv, mul_comm (B.potential (positiveBufferPoint B i t))] using h
+  simp only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq] at h
+  have hcoeff (x : ℝ) : (1 / B.mass i ^ 2) * B.potential x =
+      B.potential x / B.mass i ^ 2 := by ring
+  simpa only [hcoeff] using h
 
 theorem positiveBufferPoint_mem_openSpan {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) {t : ℝ}
@@ -136,14 +138,14 @@ theorem positiveBufferPoint_mem_openSpan {B : BufferData}
       nlinarith [mul_neg_of_neg_of_pos hbneg ht.1]
     have hgt : bufferInnerWall B i < positiveBufferPoint B i t := by
       rw [hpoint, hwall]
-      exact add_lt_add_left (mul_lt_mul_of_neg_left ht.2 hbneg) _
+      linarith [mul_lt_mul_of_neg_left ht.2 hbneg]
     exact ⟨(min_le_right _ _).trans_lt hgt, hlt.trans_le (le_max_left _ _)⟩
   · have hgt : bufferCut B i < positiveBufferPoint B i t := by
       rw [hpoint]
       exact lt_add_of_pos_right _ (mul_pos hbpos ht.1)
     have hlt : positiveBufferPoint B i t < bufferInnerWall B i := by
       rw [hpoint, hwall]
-      exact add_lt_add_left (mul_lt_mul_of_pos_left ht.2 hbpos) _
+      linarith [mul_lt_mul_of_pos_left ht.2 hbpos]
     exact ⟨(min_le_left _ _).trans_lt hgt, hlt.trans_le (le_max_right _ _)⟩
 
 theorem positiveBufferPoint_normalized_potential_lower {B : BufferData}
@@ -180,7 +182,10 @@ theorem positiveBufferPoint_energy_change {B : BufferData}
       (1 / B.mass i) * ∫ x in s, du x ^ 2 + B.potential x * u x ^ 2 := by
   have h := positiveBuffer_affine_energy_change hs u du B.potential
     (bufferCut B i) (positiveBufferPoint_slope_ne_zero hB i)
-  simpa only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq,
-    positiveBufferPoint_abs_slope hB i, one_div, div_eq_mul_inv, mul_comm] using h
+  simp only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq,
+    positiveBufferPoint_abs_slope hB i] at h
+  have hcoeff (x : ℝ) : (1 / B.mass i ^ 2) * B.potential x =
+      B.potential x / B.mass i ^ 2 := by ring
+  simpa only [hcoeff] using h
 
 end ContinuousFlexibility.Radial

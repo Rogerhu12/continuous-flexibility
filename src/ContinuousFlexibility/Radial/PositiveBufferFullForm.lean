@@ -118,13 +118,17 @@ def positiveBufferStatePairing : (RadialL2 × ℝ) →ₗ[ℝ] (RadialL2 × ℝ)
     intro U W
     apply LinearMap.ext
     intro F
-    simp only [LinearMap.add_apply, Prod.fst_add, Prod.snd_add, inner_add_left]
+    change inner ℝ (U + W).1 F.1 + (U + W).2 * F.2 =
+      (inner ℝ U.1 F.1 + U.2 * F.2) + (inner ℝ W.1 F.1 + W.2 * F.2)
+    simp only [Prod.fst_add, Prod.snd_add, inner_add_left]
     ring
   map_smul' := by
     intro a U
     apply LinearMap.ext
     intro F
-    simp only [LinearMap.smul_apply, Prod.smul_fst, Prod.smul_snd,
+    change inner ℝ (a • U).1 F.1 + (a • U).2 * F.2 =
+      a * (inner ℝ U.1 F.1 + U.2 * F.2)
+    simp only [Prod.smul_fst, Prod.smul_snd,
       inner_smul_left, conj_trivial, smul_eq_mul, RingHom.id_apply]
     ring
 

@@ -133,4 +133,26 @@ theorem positiveBuffer_green_inverse_trace {V : ℝ → ℝ}
   rw [← hg, positiveBufferBorderedForm_symm, positiveBufferLiftedInverse_form,
     positiveBufferStatePairing_symm]
 
+theorem positiveBufferNormalizedTrace_zero_iff (B : BufferData)
+    (A : Fin 2 → ℝ) (hA : ∀ i, 0 < A i)
+    (U : PositiveBufferBorderedEnergy B.potential B.bordered) :
+    positiveBufferNormalizedTrace B.potential B.bordered (bufferCut B) A U = 0 ↔
+      positiveBufferTraceAt B.potential B.l U.val.1 = 0 ∧
+        positiveBufferTraceAt B.potential B.h U.val.1 = 0 := by
+  constructor
+  · intro ht
+    have hzero (i : Fin 2) : positiveBufferTraceAt B.potential (bufferCut B i) U.val.1 = 0 := by
+      have hi := congrFun ht i
+      rw [positiveBufferNormalizedTrace_apply] at hi
+      exact (mul_eq_zero.mp hi).resolve_left (Real.sqrt_pos.mpr (hA i)).ne'
+    constructor
+    · simpa only [bufferCut, if_pos rfl] using hzero 0
+    · simpa only [bufferCut, (show (1 : Fin 2) ≠ 0 by decide), if_false] using hzero 1
+  · rintro ⟨hl, hh⟩
+    ext i
+    rw [positiveBufferNormalizedTrace_apply]
+    by_cases hi : i = 0
+    · simp only [bufferCut, hi, if_true, hl, mul_zero, Pi.zero_apply]
+    · simp only [bufferCut, if_neg hi, hh, mul_zero, Pi.zero_apply]
+
 end ContinuousFlexibility.Radial

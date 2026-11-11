@@ -22,12 +22,23 @@ def bufferIntervalCoreSubmodule (V : ℝ → ℝ) (l h : ℝ) :
     Submodule ℝ (RadialL2 × RadialL2 × RadialL2) where
   carrier := IntervalEnergyCore V l h
   zero_mem' := by
-    refine ⟨⟨fun _ => 0, contDiff_const, by simp, ?_, ?_, ?_⟩, ?_⟩
-    · exact Lp.coeFn_zero ℝ 2 (volume : Measure ℝ)
+    refine ⟨⟨fun _ => 0, contDiff_const, ?_, ?_, ?_, ?_⟩, ?_⟩
+    · exact HasCompactSupport.intro (isCompact_empty : IsCompact (∅ : Set ℝ))
+        (fun _ _ => rfl)
     · filter_upwards [Lp.coeFn_zero ℝ 2 (volume : Measure ℝ)] with x hx
-      simpa only [deriv_const] using hx
+      change (0 : RadialL2) x = (0 : ℝ)
+      change (0 : RadialL2) x = (0 : ℝ) at hx
+      exact hx
     · filter_upwards [Lp.coeFn_zero ℝ 2 (volume : Measure ℝ)] with x hx
-      simpa only [mul_zero] using hx
+      change (0 : RadialL2) x = deriv (fun _ : ℝ => (0 : ℝ)) x
+      rw [deriv_const]
+      change (0 : RadialL2) x = (0 : ℝ) at hx
+      exact hx
+    · filter_upwards [Lp.coeFn_zero ℝ 2 (volume : Measure ℝ)] with x hx
+      change (0 : RadialL2) x = sqrt (1 + |V x|) * 0
+      rw [mul_zero]
+      change (0 : RadialL2) x = (0 : ℝ) at hx
+      exact hx
     · exact ae_restrict_of_ae (Lp.coeFn_zero ℝ 2 (volume : Measure ℝ))
   add_mem' := by
     intro p q hp hq
@@ -97,7 +108,13 @@ theorem bufferHilbertIntervalCore_closure_maps (V : ℝ → ℝ) (l h : ℝ)
   have hclosed : IsClosed {z : PositiveBufferEnergyTriple |
       bufferEnergyTripleMap z ∈ closure (IntervalEnergyCore V l h)} :=
     isClosed_closure.preimage bufferEnergyTripleMap.continuous
-  exact closure_minimal (fun _ hp => subset_closure hp) hclosed hz
+  have hsub : (bufferHilbertIntervalCore V l h : Set PositiveBufferEnergyTriple) ⊆
+      {w : PositiveBufferEnergyTriple |
+        bufferEnergyTripleMap w ∈ closure (IntervalEnergyCore V l h)} := by
+    intro w hw
+    exact subset_closure ((bufferHilbertIntervalCore_mem_iff V l h w).mp hw)
+  change z ∈ closure (bufferHilbertIntervalCore V l h : Set PositiveBufferEnergyTriple) at hz
+  exact (closure_minimal hsub hclosed) hz
 
 theorem bufferCompactEnergyLift_mem_intervalCore (V : ℝ → ℝ) (hV : Continuous V)
     (l h : ℝ) (φ : ℝ → ℝ) (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ)
@@ -150,6 +167,8 @@ theorem bufferIntervalCore_orthogonal_weak_derivative {V : ℝ → ℝ} (hV : Co
     have hI := (Lp.memLp (z 2)).integrable_mul (positiveBufferCompact_weight_memLp hV hφ hc)
     convert hI using 1
     funext x
+    change sqrt (1 + |V x|) * z 2 x * φ x =
+      z 2 x * (sqrt (1 + |V x|) * φ x)
     ring
   have hsplit : (∫ x : ℝ, (z 0 x + sqrt (1 + |V x|) * z 2 x) * φ x) =
       (∫ x : ℝ, z 0 x * φ x) + ∫ x : ℝ, (sqrt (1 + |V x|) * z 2 x) * φ x := by

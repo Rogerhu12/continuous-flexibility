@@ -126,4 +126,62 @@ theorem positiveBufferGreenKernel_weight_memLp {B : BufferData}
   dsimp [W, positiveBufferGreenKernel]
   rw [positiveBufferPoint_coordinate hB i x]
   ring
+
+/-- Actual physical exterior energy supplies all normalized exterior L² data
+needed by the Green-column construction. -/
+theorem positiveBuffer_outward_profile_memLp {B : BufferData}
+    (hB : BufferHypotheses B) (i : Fin 2) {p : ℝ → ℝ}
+    (hp : ContDiff ℝ ∞ p)
+    (hpLp : MemLp p 2 (volume.restrict (bufferExterior B i)))
+    (hE : IntegrableOn (fun x => deriv p x ^ 2 + B.potential x * p x ^ 2)
+      (bufferExterior B i) volume) :
+    MemLp (fun t => p (positiveBufferPoint B i (-t))) 2 (volume.restrict (Ici 0)) ∧
+      MemLp (deriv (fun t => p (positiveBufferPoint B i (-t)))) 2
+        (volume.restrict (Ici 0)) ∧
+      MemLp (fun t => sqrt (1 + |B.potential (positiveBufferPoint B i (-t))|) *
+        p (positiveBufferPoint B i (-t))) 2 (volume.restrict (Ici 0)) := by
+  have hV := hB.2.2.2.2.1.continuous
+  have hs : MeasurableSet (bufferExterior B i) := by
+    unfold bufferExterior
+    split_ifs
+    · exact measurableSet_Iio
+    · exact measurableSet_Ioi
+  have hpos : ∀ x ∈ bufferExterior B i, 0 ≤ B.potential x :=
+    fun x hx => (sq_nonneg (B.mass i)).trans
+      (positiveBuffer_potential_lower_exterior hB i (subset_closure hx))
+  have hdw := positiveBuffer_energy_memLp hV hp.continuous
+    (contDiff_infty_iff_deriv.mp hp).2.continuous (bufferExterior B i) hs hpos hpLp hE
+  have hb : bufferSign i / B.mass i ≠ 0 := by
+    intro hz
+    apply positiveBufferPoint_slope_ne_zero hB i
+    rw [neg_div, hz, neg_zero]
+  have haff (t : ℝ) : positiveBufferPoint B i (-t) =
+      bufferCut B i + (bufferSign i / B.mass i) * t := by
+    rw [positiveBufferPoint_affine]
+    ring
+  have hpre : (fun t : ℝ => bufferCut B i + (bufferSign i / B.mass i) * t) ⁻¹'
+      bufferExterior B i = Ioi 0 := by
+    have hfun : (fun t : ℝ => bufferCut B i + (bufferSign i / B.mass i) * t) =
+        fun t => positiveBufferPoint B i (-t) := funext (fun t => (haff t).symm)
+    rw [hfun, positiveBufferPoint_outward_preimage_exterior hB i]
+  have htransfer (g : ℝ → ℝ) (hg : MemLp g 2 (volume.restrict (bufferExterior B i))) :
+      MemLp (fun t => g (positiveBufferPoint B i (-t))) 2 (volume.restrict (Ici 0)) := by
+    have h := positiveBuffer_affine_memLp_two_restrict hs hg (bufferCut B i) hb
+    rw [hpre] at h
+    have h' : MemLp (fun t => g (positiveBufferPoint B i (-t))) 2
+        (volume.restrict (Ioi 0)) := by
+      simpa only [← haff] using h
+    rwa [restrict_Ioi_eq_restrict_Ici] at h'
+  have hderiv : deriv (fun t => p (positiveBufferPoint B i (-t))) =
+      fun t => (bufferSign i / B.mass i) * deriv p (positiveBufferPoint B i (-t)) := by
+    funext t
+    have hd := positiveBuffer_affine_hasDerivAt
+      (a := bufferCut B i) (b := bufferSign i / B.mass i) (x := t)
+      (by simpa only [haff] using
+        (hp.differentiable (by simp) (positiveBufferPoint B i (-t))).hasDerivAt)
+    simpa only [← haff] using hd.deriv
+  refine ⟨htransfer p hpLp, ?_, htransfer _ hdw.2⟩
+  rw [hderiv]
+  exact (htransfer (deriv p) hdw.1).const_mul (bufferSign i / B.mass i)
+
 end ContinuousFlexibility.Radial

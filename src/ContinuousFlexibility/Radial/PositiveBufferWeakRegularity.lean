@@ -54,7 +54,12 @@ theorem positiveBuffer_second_weak_derivative {V f U : ℝ → ℝ}
         filter_upwards [hue] with x hx
         rw [hx]
         ring
-      _ = _ := by rw [integral_add huφ''.neg hVUφ, integral_neg]
+      _ = _ := by
+        have hn : Integrable (fun x : ℝ => -(u x * deriv (deriv φ) x)) volume := by
+          apply huφ''.neg.congr
+          filter_upwards [] with x
+          exact Pi.neg_apply (fun y : ℝ => u y * deriv (deriv φ) y) x
+        rw [integral_add hn hVUφ, integral_neg]
   have hsource : (∫ x : ℝ, (V x * U x - f x) * φ x) =
       (∫ x : ℝ, V x * U x * φ x) - ∫ x : ℝ, f x * φ x := by
     simp_rw [sub_mul]

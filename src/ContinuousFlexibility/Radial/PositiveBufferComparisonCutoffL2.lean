@@ -65,16 +65,17 @@ theorem positiveBuffer_toLp_norm_le_of_support {a b K : ℝ} {f : ℝ → ℝ}
     (hsupport : Function.support f ⊆ Icc a b)
     (hbound : ∀ x, |f x| ≤ K) :
     ‖hf.toLp f‖ ≤ K * sqrt (b - a) := by
-  let g : Lp ℝ 2 volume :=
-    indicatorConstLp 2 measurableSet_Icc isCompact_Icc.measure_lt_top.ne K
+  let g : Lp ℝ 2 (volume : Measure ℝ) :=
+    indicatorConstLp (μ := volume) (s := Icc a b) 2 measurableSet_Icc
+      (isCompact_Icc : IsCompact (Icc a b)).measure_lt_top.ne K
   have hle : ‖hf.toLp f‖ ≤ ‖g‖ := by
     apply Lp.norm_le_norm_of_ae_le
     filter_upwards [MemLp.coeFn_toLp hf,
       (indicatorConstLp_coeFn (p := 2) (μ := volume) (s := Icc a b)
-        (hs := measurableSet_Icc) (hμs := isCompact_Icc.measure_lt_top.ne) (c := K))]
+        (hs := measurableSet_Icc) (hμs := (isCompact_Icc : IsCompact (Icc a b)).measure_lt_top.ne) (c := K))]
       with x hfx hgx
-    change ‖hf.toLp f x‖ ≤ ‖indicatorConstLp 2 measurableSet_Icc
-      isCompact_Icc.measure_lt_top.ne K x‖
+    change ‖hf.toLp f x‖ ≤ ‖indicatorConstLp (μ := volume) (s := Icc a b) 2 measurableSet_Icc
+      (isCompact_Icc : IsCompact (Icc a b)).measure_lt_top.ne K x‖
     rw [hfx, hgx]
     by_cases hx : x ∈ Icc a b
     · rw [indicator_of_mem hx, Real.norm_eq_abs, Real.norm_eq_abs, abs_of_nonneg hK]

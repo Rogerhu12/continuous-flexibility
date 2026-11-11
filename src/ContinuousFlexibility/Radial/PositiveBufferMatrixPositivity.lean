@@ -80,7 +80,7 @@ theorem positiveBufferMatrix_positive_perturbation
   have heq : (∑ i, ∑ j, z i * (Matrix.diagonal d + E) i j * z j) =
       (∑ i, d i * z i ^ 2) + ∑ i, ∑ j, z i * E i j * z j := by
     simp only [Fin.sum_univ_two, Matrix.add_apply, Matrix.diagonal_apply,
-      Fin.zero_ne_one, Fin.one_ne_zero, if_true, if_false]
+      Fin.zero_ne_one, (show (1 : Fin 2) ≠ 0 by decide), if_true, if_false]
     ring
   rw [heq]
   have hleft := (abs_le.mp hbound).1
