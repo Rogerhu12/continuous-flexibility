@@ -33,6 +33,17 @@ run_cmd do
   logInfo m!"open: {openNodes}"
   let endpoint ← collectAxioms `FlexibleSphere.exists_closedBending
   logInfo m!"axioms of FlexibleSphere.exists_closedBending: {endpoint}"
+  -- Strictly close all four N01c declarations; other nodes retain the status audit above.
+  let strictNodes := #["N01cCoefficients", "N01cSpeeds", "N01cFlows", "N01c"]
+  for n in strictNodes do
+    let name := (`ContinuousFlexibility.Blueprint).str n
+    unless env.contains name do
+      throwError "missing required N01c declaration {name}"
+    let axioms ← collectAxioms name
+    for ax in axioms do
+      unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
+        throwError "N01c axiom gate failed: {name} depends on {ax}"
+  logInfo m!"N01c axiom gate passed: {strictNodes}"
 
 #print axioms ContinuousFlexibility.Blueprint.R06a
 #print axioms ContinuousFlexibility.Blueprint.N01cCoefficients
