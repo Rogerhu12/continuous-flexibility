@@ -189,7 +189,7 @@ theorem n07b_representation_physical_ae
         (fun p => ξ p - U.2.1 * S.chiLeft p.1)).mp
       ((hη.1 m).symm.trans (hξ.1 m))
     filter_upwards [h] with p hp
-    exact sub_right_cancel hp
+    exact (sub_left_inj).mp hp
   · exact (n07b_canonicalSource_ae_iff hK hz hsector m f g).mp
       ((hη.2 m).symm.trans (hξ.2 m))
 

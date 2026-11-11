@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
 import ContinuousFlexibility.Analysis.N05CanonicalTests
+import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # Actual square integrability of each canonical source piece
@@ -23,16 +24,6 @@ open Set Filter MeasureTheory
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 open scoped ContDiff
 
-/-- Smoothness of the actual Jacobian follows from the actual derivative. -/
-theorem n07b_contDiffAt_planeJacobian
-    {F : PolarPoint → PolarPoint} {p : PolarPoint}
-    (hF : ContDiffAt ℝ ∞ F p) : ContDiffAt ℝ ∞ (planeJacobian F) p := by
-  have hr : ContDiffAt ℝ ∞ (fun x => fderiv ℝ F x (1, 0)) p :=
-    (hF.fderiv_right (by simp)).clm_apply contDiffAt_const
-  have ht : ContDiffAt ℝ ∞ (fun x => fderiv ℝ F x (0, 1)) p :=
-    (hF.fderiv_right (by simp)).clm_apply contDiffAt_const
-  exact (hr.fst.mul ht.snd).sub (hr.snd.mul ht.fst)
-
 variable {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
   {K : CanonicalData S} {base : ℕ} {ε : ℝ}
   (hK : N04PartA D S C K base ε)
@@ -49,7 +40,7 @@ theorem n07b_continuousOn_physicalSourceFactor (m : ℕ) {f : PolarPoint → ℝ
       (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ) := by
   intro p hp
   have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hsector m p hp.1
-  have hJ := n07b_contDiffAt_planeJacobian hclosed.1
+  have hJ := ContinuousFlexibility.contDiffAt_planeJacobian hclosed.1
   exact (hclosed.2.1.continuousAt.continuousWithinAt.mul (hf p hp)).div
     hJ.continuousAt.abs.continuousWithinAt (abs_ne_zero.mpr hclosed.2.2.1)
 

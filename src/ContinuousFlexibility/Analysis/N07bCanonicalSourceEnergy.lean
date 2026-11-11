@@ -72,6 +72,9 @@ theorem n07b_canonicalSource_square_integral (m : ℕ) (f : PolarPoint → ℝ) 
     simp only [canonicalOpen, canonicalMeasure, prod_inter_prod, inter_univ, univ_inter]
     apply setIntegral_congr_fun (measurableSet_Ioo.prod measurableSet_Ioc)
     intro p hp
+    change canonicalHeight S K z m
+        (fun x => n07bCanonicalSourceDensity S K z m x * f x) p *
+          canonicalSource S K z m f p = canonicalSource S K z m f p ^ 2
     rw [n07b_canonicalHeight_density_mul hK hz hsector m f
       (show p ∈ canonicalOpen S K m from ⟨hp.1, mem_univ _⟩), pow_two]
   calc
