@@ -4,13 +4,144 @@ import ContinuousFlexibility.Analysis.N01cNormalizedCoefficients
 /-!
 # Actual coefficient fields with one common distributed spatial bound
 
-All inputs below are the actual state profile, inverse profile, and
-q-dependent physical polar jets. The normalized denominators lie in the
-fixed compact interval supplied by N01b. No coefficient estimate is an
-input to the construction.
+The controlled-field algebra is performed with an abstract parameter
+space. Its scalar value identities are definitionally the original
+normalized formulas. The final specialization retains the actual state
+profile and physical polar inputs on the same neighbourhood.
 -/
 
 noncomputable section
+
+namespace ContinuousFlexibility.Analysis
+
+open Set
+open ContinuousFlexibility.Statements
+open scoped ContDiff BigOperators
+
+def normalizedPowerDiscriminantValue (w k p : ℝ) : ℝ :=
+  1 + ((-2) * (w * k) + (-1) * (k * k + (1 + w * w) * (p * p)))
+
+def normalizedPowerQuotientValue (w wi k pt : ℝ) : ℝ :=
+  1 + (k + (1 + w * w) * pt) * wi
+
+private def coefficientPowerFormula
+    (i : Fin 3) (w wr wi k p pr pt ri : ℝ) : ℝ :=
+  let E := 1 + w * w
+  let d := normalizedPowerDiscriminantValue w k p
+  let Q := normalizedPowerQuotientValue w wi k pt
+  if i = 0 then (w * Q) * inverseDThreeHalves d
+  else if i = 1 then ((-1) * E) * (pr * inverseDThreeHalves d)
+  else ((E * E * wi * pr * pr) * inverseDThreeHalves d +
+    (wr * ri) * (1 / Real.sqrt d)) * Q⁻¹
+
+section ControlledAlgebra
+
+variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+  [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+  {p : ℕ → Seminorm ℝ X} {center : X} {base loss : ℕ}
+  {U : Set X} {Ω : Set PolarPoint} {H E : PolarPoint → ℝ}
+  (hU : IsOpen U) (hΩ : IsOpen Ω) (hE : ∀ q ∈ Ω, 1 ≤ E q)
+  {RH : ℝ} (hH : ∀ q ∈ Ω, 0 ≤ H q ∧ H q ≤ RH)
+
+def normalizedPowerEnergy
+    (w : PowerControlledField p center base loss U Ω H E) :
+    PowerControlledField p center base loss U Ω H E :=
+  (PowerControlledField.const hU hΩ (fun q hq => (hH q hq).1) hE 1).add
+    (w.mul w hU hΩ hE hH) hU hΩ (fun q hq => (hH q hq).1) hE
+
+theorem normalizedPowerEnergy_value
+    (w : PowerControlledField p center base loss U Ω H E) (x : X) (q : PolarPoint) :
+    (normalizedPowerEnergy hU hΩ hE hH w).value x q =
+      1 + w.value x q * w.value x q := rfl
+
+def normalizedPowerQuotient
+    (w wi k pt : PowerControlledField p center base loss U Ω H E) :
+    PowerControlledField p center base loss U Ω H E :=
+  (PowerControlledField.const hU hΩ (fun q hq => (hH q hq).1) hE 1).add
+    ((k.add ((normalizedPowerEnergy hU hΩ hE hH w).mul pt hU hΩ hE hH)
+      hU hΩ (fun q hq => (hH q hq).1) hE).mul wi hU hΩ hE hH)
+    hU hΩ (fun q hq => (hH q hq).1) hE
+
+theorem normalizedPowerQuotient_value
+    (w wi k pt : PowerControlledField p center base loss U Ω H E)
+    (x : X) (q : PolarPoint) :
+    (normalizedPowerQuotient hU hΩ hE hH w wi k pt).value x q =
+      normalizedPowerQuotientValue (w.value x q) (wi.value x q) (k.value x q) (pt.value x q) :=
+  rfl
+
+def normalizedPowerDiscriminant
+    (w k pp : PowerControlledField p center base loss U Ω H E) :
+    PowerControlledField p center base loss U Ω H E := by
+  let cn : ℝ → PowerControlledField p center base loss U Ω H E :=
+    PowerControlledField.const hU hΩ (fun q hq => (hH q hq).1) hE
+  let plus := fun F G : PowerControlledField p center base loss U Ω H E =>
+    F.add G hU hΩ (fun q hq => (hH q hq).1) hE
+  let times := fun F G : PowerControlledField p center base loss U Ω H E =>
+    F.mul G hU hΩ hE hH
+  exact plus (cn 1) (plus (times (cn (-2)) (times w k))
+    (times (cn (-1)) (plus (times k k)
+      (times (normalizedPowerEnergy hU hΩ hE hH w) (times pp pp)))))
+
+theorem normalizedPowerDiscriminant_value
+    (w k pp : PowerControlledField p center base loss U Ω H E) (x : X) (q : PolarPoint) :
+    (normalizedPowerDiscriminant hU hΩ hE hH w k pp).value x q =
+      normalizedPowerDiscriminantValue (w.value x q) (k.value x q) (pp.value x q) := rfl
+
+variable (w wr wi k pp pr pt ri : PowerControlledField p center base loss U Ω H E)
+  (hDmap : ∀ x ∈ U, MapsTo (fun q => normalizedPowerDiscriminantValue
+    (w.value x q) (k.value x q) (pp.value x q)) Ω (Icc (1 / 2 : ℝ) (3 / 2)))
+  (hQmap : ∀ x ∈ U, MapsTo (fun q => normalizedPowerQuotientValue
+    (w.value x q) (wi.value x q) (k.value x q) (pt.value x q)) Ω (Icc (1 / 2 : ℝ) (3 / 2)))
+
+private def normalizedCoefficientPowerField (i : Fin 3) :
+    PowerControlledField p center base loss U Ω H E := by
+  let cn : ℝ → PowerControlledField p center base loss U Ω H E :=
+    PowerControlledField.const hU hΩ (fun q hq => (hH q hq).1) hE
+  let plus := fun F G : PowerControlledField p center base loss U Ω H E =>
+    F.add G hU hΩ (fun q hq => (hH q hq).1) hE
+  let times := fun F G : PowerControlledField p center base loss U Ω H E =>
+    F.mul G hU hΩ hE hH
+  let en := normalizedPowerEnergy hU hΩ hE hH w
+  let qn := normalizedPowerQuotient hU hΩ hE hH w wi k pt
+  let dd := normalizedPowerDiscriminant hU hΩ hE hH w k pp
+  let K : Set ℝ := Icc (1 / 2) (3 / 2)
+  have hKV : K ⊆ Ioi (0 : ℝ) := fun y hy => lt_of_lt_of_le (by norm_num) hy.1
+  have hinv : ContDiffOn ℝ ∞ (fun y : ℝ => y⁻¹) (Ioi 0) :=
+    fun y hy => (contDiffAt_id.inv hy.ne').contDiffWithinAt
+  have hsqrt : ContDiffOn ℝ ∞ (fun y : ℝ => 1 / Real.sqrt y) (Ioi 0) :=
+    fun y hy => (contDiffAt_const.div (contDiffAt_id.sqrt hy.ne')
+      (Real.sqrt_pos.mpr hy).ne').contDiffWithinAt
+  have hthree : ContDiffOn ℝ ∞ inverseDThreeHalves (Ioi 0) :=
+    fun y hy => (contDiffAt_const.div
+      (contDiffAt_id.mul (contDiffAt_id.sqrt hy.ne'))
+      (mul_ne_zero hy.ne' (Real.sqrt_pos.mpr hy).ne')).contDiffWithinAt
+  let ti := dd.scalarComp hU hΩ hE hH isOpen_Ioi isCompact_Icc hKV
+    inverseDThreeHalves hthree hDmap
+  let si := dd.scalarComp hU hΩ hE hH isOpen_Ioi isCompact_Icc hKV
+    (fun y => 1 / Real.sqrt y) hsqrt hDmap
+  let qi := qn.scalarComp hU hΩ hE hH isOpen_Ioi isCompact_Icc hKV
+    (fun y => y⁻¹) hinv hQmap
+  let ca := times (times w qn) ti
+  let cb := times (times (cn (-1)) en) (times pr ti)
+  let cc := times (plus
+    (times (times (times (times (times en en) wi) pr) pr) ti)
+    (times (times wr ri) si)) qi
+  exact if i = 0 then ca else if i = 1 then cb else cc
+
+private theorem normalizedCoefficientPowerField_value
+    (i : Fin 3) (x : X) (q : PolarPoint) :
+    (normalizedCoefficientPowerField hU hΩ hE hH w wr wi k pp pr pt ri hDmap hQmap i).value x q =
+      coefficientPowerFormula i (w.value x q) (wr.value x q) (wi.value x q)
+        (k.value x q) (pp.value x q) (pr.value x q) (pt.value x q) (ri.value x q) := by
+  by_cases h0 : i = 0
+  · simp only [normalizedCoefficientPowerField, coefficientPowerFormula, if_pos h0] <;> rfl
+  · by_cases h1 : i = 1
+    · simp only [normalizedCoefficientPowerField, coefficientPowerFormula, if_neg h0, if_pos h1] <;> rfl
+    · simp only [normalizedCoefficientPowerField, coefficientPowerFormula, if_neg h0, if_neg h1] <;> rfl
+
+end ControlledAlgebra
+
+end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
 
@@ -19,6 +150,76 @@ open ContinuousFlexibility.Analysis ContinuousFlexibility.Blueprint
 open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency true
+
+theorem stateNormalizedPowerDiscriminant_eq
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (hA : N01PartA D T S C)
+    (z : AnnularState S × ℝ) (q : PolarPoint) :
+    normalizedPowerDiscriminantValue (stateProfile D S C z.1 q.1)
+      (z.2 * heightRadial (stateU S z.1) q) (z.2 * heightAngular (stateU S z.1) q) =
+      polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z) q := by
+  rw [n01_polarDiscriminant_stateHeight hS hT hA]
+  simp only [normalizedPowerDiscriminantValue, profileEnergy, radialEnergy, pow_two]
+  ring
+
+theorem stateNormalizedPowerQuotient_eq
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (hA : N01PartA D T S C)
+    (hB : N01PartB D S C base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    {q : PolarPoint} (hq : q ∈ annularOpen D) :
+    normalizedPowerQuotientValue (stateProfile D S C z.1 q.1)
+      (stateProfile D S C z.1 q.1)⁻¹ (z.2 * heightRadial (stateU S z.1) q)
+      (z.2 * angularPartial (heightAngular (stateU S z.1)) q) =
+      heightQ (profileEnergy (stateProfile D S C z.1) q)
+        (heightRadial (stateHeight D S C z) q)
+        (angularPartial (heightAngular (stateHeight D S C z)) q) /
+          stateProfile D S C z.1 q.1 := by
+  rw [n01_heightQ_div_profile hS hT hA hB hz hq]
+  simp only [normalizedPowerQuotientValue, profileEnergy, radialEnergy, pow_two, div_eq_mul_inv]
+  ring
+
+private theorem stateCoefficientPowerFormula_eq
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (hA : N01PartA D T S C)
+    (hB : N01PartB D S C base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    {q : PolarPoint} (hq : q ∈ annularOpen D) (i : Fin 3) :
+    coefficientPowerFormula i (stateProfile D S C z.1 q.1)
+      (deriv (stateProfile D S C z.1) q.1) (stateProfile D S C z.1 q.1)⁻¹
+      (z.2 * heightRadial (stateU S z.1) q) (z.2 * heightAngular (stateU S z.1) q)
+      (z.2 * radialPartial (heightAngular (stateU S z.1)) q)
+      (z.2 * angularPartial (heightAngular (stateU S z.1)) q) q.1⁻¹ =
+      coefficientOriginalField D S C i z q := by
+  have hD : RadialProfileGeometry D := hA.1.1.choose_spec.1
+  have hd := stateNormalizedPowerDiscriminant_eq hS hT hA z q
+  have hqn := stateNormalizedPowerQuotient_eq hS hT hA hB hz hq
+  have he : 1 + stateProfile D S C z.1 q.1 * stateProfile D S C z.1 q.1 =
+      profileEnergy (stateProfile D S C z.1) q := by
+    simp only [profileEnergy, radialEnergy, pow_two]
+  by_cases h0 : i = 0
+  · simp only [coefficientPowerFormula, if_pos h0, coefficientOriginalField, hd, hqn]
+    have hw := (n01PartB_denominators_pos hD hS hA.2.1 hB hz hq).1.ne'
+    change (stateProfile D S C z.1 q.1 * (_ / stateProfile D S C z.1 q.1)) *
+      inverseDThreeHalves _ = heightQ _ _ _ * inverseDThreeHalves _
+    field_simp [hw] <;> ring
+  · by_cases h1 : i = 1
+    · simp only [coefficientPowerFormula, if_neg h0, if_pos h1,
+        coefficientOriginalField, hd, hqn, he]
+      change _ = -profileEnergy (stateProfile D S C z.1) q *
+        radialPartial (heightAngular (stateHeight D S C z)) q *
+          inverseDThreeHalves (polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z) q)
+      rw [radialPartial_heightAngular_stateHeight hS hT hA z (hD.1.trans hq.1.1).ne']
+      ring
+    · simp only [coefficientPowerFormula, if_neg h0, if_neg h1,
+        coefficientOriginalField, hd, hqn, he]
+      rw [n01_originalCoefficientC_normalized hS hT hA hB hz hq,
+        radialPartial_heightAngular_stateHeight hS hT hA z (hD.1.trans hq.1.1).ne']
+      simp only [div_eq_mul_inv, pow_two]
+      ring
 
 theorem originalCoefficient_mixedPowerBounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -64,124 +265,34 @@ theorem originalCoefficient_mixedPowerBounds
     ⟨fun z q => z.2 * stateUPolarInput S j z.1 q,
       coefficientPolarInput_regular hS hT hD.1 C base ε j,
       coefficientPolarInput_powerBounds hS hT hD.1 C base loss hε1 hE hI j⟩
-  let cn : ℝ → PC := PowerControlledField.const hU hΩ (fun q hq => (hH q hq).1) hEq
-  let plus : PC → PC → PC := fun F G => F.add G hU hΩ (fun q hq => (hH q hq).1) hEq
-  let times : PC → PC → PC := fun F G => F.mul G hU hΩ hEq hH
-  let en := plus (cn 1) (times (rd 0) (rd 0))
-  let qn := plus (cn 1) (times (plus (pl 0) (times en (pl 4))) (rd 2))
-  let dd := plus (cn 1) (plus
-    (times (cn (-2)) (times (rd 0) (pl 0)))
-    (times (cn (-1)) (plus (times (pl 0) (pl 0)) (times en (times (pl 1) (pl 1))))))
-  have h0 (z : AnnularState S × ℝ) (q : PolarPoint) :
-      (pl 0).value z q = z.2 * heightRadial (stateU S z.1) q := rfl
-  have h1 (z : AnnularState S × ℝ) (q : PolarPoint) :
-      (pl 1).value z q = z.2 * heightAngular (stateU S z.1) q := rfl
-  have h3 (z : AnnularState S × ℝ) (q : PolarPoint) :
-      (pl 3).value z q = z.2 * radialPartial (heightAngular (stateU S z.1)) q := by
-    have hi : (0 : Fin 2).succ.succ.succ = (3 : Fin 5) := by decide
-    change z.2 * stateUPolarInput S 3 z.1 q = _
-    rw [← hi]
-    simp only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero]
-  have h4 (z : AnnularState S × ℝ) (q : PolarPoint) :
-      (pl 4).value z q = z.2 * angularPartial (heightAngular (stateU S z.1)) q := by
-    have hi : (0 : Fin 1).succ.succ.succ.succ = (4 : Fin 5) := by decide
-    change z.2 * stateUPolarInput S 4 z.1 q = _
-    rw [← hi]
-    simp only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero]
-  have he (z : AnnularState S × ℝ) (q : PolarPoint) :
-      en.value z q = profileEnergy (stateProfile D S C z.1) q := by
-    change 1 + stateProfile D S C z.1 q.1 * stateProfile D S C z.1 q.1 = _
-    rw [profileEnergy, radialEnergy, pow_two]
-  have hdd (z : AnnularState S × ℝ) (q : PolarPoint) :
-      dd.value z q = polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z) q := by
-    rw [n01_polarDiscriminant_stateHeight hS hT hA]
-    change 1 + ((-2) * (stateProfile D S C z.1 q.1 * (pl 0).value z q) +
-      (-1) * ((pl 0).value z q * (pl 0).value z q +
-        en.value z q * ((pl 1).value z q * (pl 1).value z q))) = _
-    rw [h0, h1, he]
-    ring
-  have hqn (z : AnnularState S × ℝ) (hz : z ∈ U) (q : PolarPoint) (hq : q ∈ Ω) :
-      qn.value z q =
-        heightQ (profileEnergy (stateProfile D S C z.1) q)
-          (heightRadial (stateHeight D S C z) q)
-          (angularPartial (heightAngular (stateHeight D S C z)) q) /
-            stateProfile D S C z.1 q.1 := by
-    rw [n01_heightQ_div_profile hS hT hA hB hz hq]
-    change 1 + ((pl 0).value z q + en.value z q * (pl 4).value z q) *
-      (stateProfile D S C z.1 q.1)⁻¹ = _
-    rw [h0, h4, he, div_eq_mul_inv]
-    ring
-  let K : Set ℝ := Icc (1 / 2) (3 / 2)
-  have hKV : K ⊆ Ioi (0 : ℝ) := fun y hy => lt_of_lt_of_le (by norm_num) hy.1
-  have hdmap : ∀ z ∈ U, MapsTo (dd.value z) Ω K := by
+  let ri : PC := coefficientRadiusInverse_controlled hT hD C base loss ε hE
+  have hdmap : ∀ z ∈ U, MapsTo (fun q => normalizedPowerDiscriminantValue
+      ((rd 0).value z q) ((pl 0).value z q) ((pl 1).value z q)) Ω
+        (Icc (1 / 2 : ℝ) (3 / 2)) := by
     intro z hz q hq
-    rw [hdd]
+    change normalizedPowerDiscriminantValue (stateProfile D S C z.1 q.1)
+      (z.2 * heightRadial (stateU S z.1) q) (z.2 * heightAngular (stateU S z.1) q) ∈ _
+    rw [stateNormalizedPowerDiscriminant_eq hS hT hA z q]
     exact (n01PartB_denominator_bounds hS hA.2.1 hB hz hq).2.2.2.2
-  have hqmap : ∀ z ∈ U, MapsTo (qn.value z) Ω K := by
+  have hqmap : ∀ z ∈ U, MapsTo (fun q => normalizedPowerQuotientValue
+      ((rd 0).value z q) ((rd 2).value z q) ((pl 0).value z q) ((pl 4).value z q)) Ω
+        (Icc (1 / 2 : ℝ) (3 / 2)) := by
     intro z hz q hq
-    rw [hqn z hz q hq]
+    change normalizedPowerQuotientValue (stateProfile D S C z.1 q.1)
+      (stateProfile D S C z.1 q.1)⁻¹ (z.2 * heightRadial (stateU S z.1) q)
+      (z.2 * angularPartial (heightAngular (stateU S z.1)) q) ∈ _
+    rw [stateNormalizedPowerQuotient_eq hS hT hA hB hz hq]
     have hb := n01PartB_denominator_bounds hS hA.2.1 hB hz hq
     constructor <;> linarith [hb.2.2.1, hb.2.2.2.1]
-  have hinv : ContDiffOn ℝ ∞ (fun y : ℝ => y⁻¹) (Ioi 0) :=
-    fun y hy => (contDiffAt_id.inv hy.ne').contDiffWithinAt
-  have hsqrt : ContDiffOn ℝ ∞ (fun y : ℝ => 1 / Real.sqrt y) (Ioi 0) :=
-    fun y hy => (contDiffAt_const.div (contDiffAt_id.sqrt hy.ne')
-      (Real.sqrt_pos.mpr hy).ne').contDiffWithinAt
-  have hthree : ContDiffOn ℝ ∞ inverseDThreeHalves (Ioi 0) :=
-    fun y hy => (contDiffAt_const.div
-      (contDiffAt_id.mul (contDiffAt_id.sqrt hy.ne'))
-      (mul_ne_zero hy.ne' (Real.sqrt_pos.mpr hy).ne')).contDiffWithinAt
-  let ti := dd.scalarComp hU hΩ hEq hH isOpen_Ioi isCompact_Icc hKV
-    inverseDThreeHalves hthree hdmap
-  let si := dd.scalarComp hU hΩ hEq hH isOpen_Ioi isCompact_Icc hKV
-    (fun y => 1 / Real.sqrt y) hsqrt hdmap
-  let qi := qn.scalarComp hU hΩ hEq hH isOpen_Ioi isCompact_Icc hKV
-    (fun y => y⁻¹) hinv hqmap
-  let ri : PC := coefficientRadiusInverse_controlled hT hD C base loss ε hE
-  let ca := times (times (rd 0) qn) ti
-  let cb := times (times (cn (-1)) en) (times (pl 3) ti)
-  let cc := times (plus
-    (times (times (times (times (times en en) (rd 2)) (pl 3)) (pl 3)) ti)
-    (times (times (rd 1) ri) si)) qi
-  have ha (z : AnnularState S × ℝ) (hz : z ∈ U) (q : PolarPoint) (hq : q ∈ Ω) :
-      ca.value z q = (originalCoefficients D S C z).a q := by
-    have hw := (n01PartB_denominators_pos hD hS hA.2.1 hB hz hq).1.ne'
-    change (stateProfile D S C z.1 q.1 * qn.value z q) *
-      inverseDThreeHalves (dd.value z q) = _
-    rw [hqn z hz q hq, hdd]
-    change _ = heightQ _ _ _ * inverseDThreeHalves _
-    field_simp [hw]
-  have hb (z : AnnularState S × ℝ) (hz : z ∈ U) (q : PolarPoint) (hq : q ∈ Ω) :
-      cb.value z q = (originalCoefficients D S C z).b q := by
-    change ((-1) * en.value z q) * ((pl 3).value z q *
-      inverseDThreeHalves (dd.value z q)) = _
-    rw [he, h3, hdd]
-    change _ = -profileEnergy (stateProfile D S C z.1) q *
-      radialPartial (heightAngular (stateHeight D S C z)) q *
-        inverseDThreeHalves (polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z) q)
-    rw [radialPartial_heightAngular_stateHeight hS hT hA z (hD.1.trans hq.1.1).ne']
-    ring
-  have hc (z : AnnularState S × ℝ) (hz : z ∈ U) (q : PolarPoint) (hq : q ∈ Ω) :
-      cc.value z q = (originalCoefficients D S C z).c q := by
-    rw [n01_originalCoefficientC_normalized hS hT hA hB hz hq]
-    change ((en.value z q * en.value z q * (stateProfile D S C z.1 q.1)⁻¹ *
-        (pl 3).value z q * (pl 3).value z q * inverseDThreeHalves (dd.value z q) +
-      deriv (stateProfile D S C z.1) q.1 * q.1⁻¹ * (1 / Real.sqrt (dd.value z q))) *
-        (qn.value z q)⁻¹) = _
-    rw [he, h3, hdd, hqn z hz q hq,
-      radialPartial_heightAngular_stateHeight hS hT hA z (hD.1.trans hq.1.1).ne']
-    simp only [div_eq_mul_inv, pow_two]
-    ring
-  let F : MixedJetRegularity U Ω (coefficientOriginalField D S C i) :=
+  let F := normalizedCoefficientPowerField hU hΩ hEq hH
+    (rd 0) (rd 1) (rd 2) (pl 0) (pl 1) (pl 3) (pl 4) ri hdmap hqmap i
+  let J : MixedJetRegularity U Ω (coefficientOriginalField D S C i) :=
     ⟨fun z hz => contDiffOn_coefficientOriginalField hS hT hA hB i hz,
       n01_originalCoefficientMixedSmoothDirections hS hT hA hB i⟩
-  fin_cases i
-  · exact ca.bounds.congr ca.regular F hΩ (fun z hz q hq => by
-      simpa only [coefficientOriginalField, if_pos rfl] using ha z hz q hq)
-  · exact cb.bounds.congr cb.regular F hΩ (fun z hz q hq => by
-      simpa only [coefficientOriginalField, if_neg one_ne_zero, if_pos rfl] using hb z hz q hq)
-  · exact cc.bounds.congr cc.regular F hΩ (fun z hz q hq => by
-      simpa only [coefficientOriginalField,
-        if_neg (by decide : (2 : Fin 3) ≠ 0), if_neg (by decide : (2 : Fin 3) ≠ 1)] using hc z hz q hq)
+  apply F.bounds.congr F.regular J hΩ
+  intro z hz q hq
+  exact (normalizedCoefficientPowerField_value hU hΩ hEq hH
+    (rd 0) (rd 1) (rd 2) (pl 0) (pl 1) (pl 3) (pl 4) ri hdmap hqmap i z q).trans
+      (stateCoefficientPowerFormula_eq hS hT hA hB hz hq i)
 
 end ContinuousFlexibility.Statements
