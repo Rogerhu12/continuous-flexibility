@@ -62,8 +62,10 @@ theorem innerRadialInterval_integral (D : ReferenceData) (hw : Continuous D.w)
       (by simp)]
   apply setIntegral_congr_fun measurableSet_Ioo
   intro r hr
-  rw [ENNReal.toReal_ofReal
-    (div_nonneg (mul_nonneg (by norm_num) (hpos r hr)) (sq_nonneg _)), smul_eq_mul]
+  dsimp only
+  have hn : 0 ≤ 12 * D.w r / r ^ 2 :=
+    div_nonneg (mul_nonneg (by norm_num) (hpos r hr)) (sq_nonneg _)
+  rw [ENNReal.toReal_ofReal hn, smul_eq_mul]
 
 theorem innerRadialInterval_sq_integral (D : ReferenceData) (hw : Continuous D.w)
     {a b : ℝ} (hab : a ≤ b) (hcore : Ioo a b ⊆ radialCore D)

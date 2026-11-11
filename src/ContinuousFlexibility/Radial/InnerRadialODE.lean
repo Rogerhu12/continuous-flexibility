@@ -74,9 +74,8 @@ theorem innerRadialJacobi_linear_combination {w u v : ℝ → ℝ}
   have hdv := (contDiff_infty_iff_deriv.mp hv).2
   have hcomb (y : ℝ) :
       HasDerivAt (fun t => c * u t + d * v t) (c * deriv u y + d * deriv v y) y := by
-    simpa only [Pi.add_apply] using
-      (((hu.differentiable (by simp) y).hasDerivAt.const_mul c).add
-        ((hv.differentiable (by simp) y).hasDerivAt.const_mul d))
+    exact (((hu.differentiable (by simp) y).hasDerivAt.const_mul c).fun_add
+      ((hv.differentiable (by simp) y).hasDerivAt.const_mul d))
   have hflux : (fun y => w y * deriv (fun t => c * u t + d * v t) y) =
       (fun y => c * (w y * deriv u y) + d * (w y * deriv v y)) := by
     funext y
@@ -86,9 +85,8 @@ theorem innerRadialJacobi_linear_combination {w u v : ℝ → ℝ}
       HasDerivAt (fun y => c * (w y * deriv u y) + d * (w y * deriv v y))
         (c * deriv (fun y => w y * deriv u y) x +
           d * deriv (fun y => w y * deriv v y) x) x := by
-    simpa only [Pi.add_apply] using
-      ((((hw.mul hdu).differentiable (by simp) x).hasDerivAt.const_mul c).add
-        (((hw.mul hdv).differentiable (by simp) x).hasDerivAt.const_mul d))
+    exact ((((hw.mul hdu).differentiable (by simp) x).hasDerivAt.const_mul c).fun_add
+      (((hw.mul hdv).differentiable (by simp) x).hasDerivAt.const_mul d))
   unfold radialJacobi
   rw [hflux, hfluxDeriv.deriv]
   ring

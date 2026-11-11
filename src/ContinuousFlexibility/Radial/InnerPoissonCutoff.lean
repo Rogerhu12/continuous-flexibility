@@ -134,12 +134,13 @@ theorem innerPoisson_cutoff_expression {a b : ℝ} {V χ pin : ℝ → ℝ}
       rw [hy, zero_mul]
     have hz₀ : χ x = 0 := hz.eq_of_nhds
     have hz₁ : deriv χ x = 0 := hz.deriv_eq.trans (deriv_const x 0)
-    have hz₂ : deriv (deriv χ) x = 0 := by
-      rw [hz.deriv.deriv_eq]
-      simp only [deriv_const, deriv_zero, Pi.zero_apply]
-    have hp₂ : deriv (deriv (fun y => χ y * pin y)) x = 0 := by
-      rw [hprod.deriv.deriv_eq]
-      simp only [deriv_const, deriv_zero, Pi.zero_apply]
+    have hconst : deriv (fun _ : ℝ => (0 : ℝ)) = (fun _ => 0) :=
+      funext (fun y => deriv_const y 0)
+    have hzero₂ : deriv (deriv (fun _ : ℝ => (0 : ℝ))) x = 0 :=
+      (congrArg (fun f : ℝ → ℝ => deriv f x) hconst).trans (deriv_const x 0)
+    have hz₂ : deriv (deriv χ) x = 0 := hz.deriv.deriv_eq.trans hzero₂
+    have hp₂ : deriv (deriv (fun y => χ y * pin y)) x = 0 :=
+      hprod.deriv.deriv_eq.trans hzero₂
     rw [hz₀, hz₁, hz₂, hp₂]
     ring
 
@@ -166,6 +167,7 @@ private theorem innerPoisson_lift_border_pairing_zero {a b : ℝ}
   rw [L2.inner_def]
   apply integral_eq_zero_of_ae
   filter_upwards [hg, hL] with x hgx hLx
+  simp only [Pi.zero_apply]
   rw [hgx, hLx]
   by_cases hx : x ∈ Ioo a b
   · simp only [Set.indicator_of_mem hx, RCLike.inner_apply, conj_trivial]
@@ -241,7 +243,7 @@ theorem innerPoisson_lift_sub_dirichlet {a b : ℝ}
     | false =>
       simp only [Bool.false_eq_true, ite_false] at hrow
       simp only [BorderedIntervalGraph, Bool.false_eq_true, ite_false, Prod.mk_sub_mk, zero_sub]
-      refine ⟨?_, by rw [hrow, neg_zero], rfl⟩
+      refine ⟨?_, by rw [hrow, neg_zero], True.intro⟩
       simpa only [hrow, zero_smul, add_zero] using hgraph
     | true =>
       simp only [ite_true] at hrow

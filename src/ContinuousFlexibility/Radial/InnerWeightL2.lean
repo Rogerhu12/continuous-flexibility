@@ -116,7 +116,7 @@ variable (W : α → ℝ) (hW : Measurable W) (hpos : ∀ x, 0 < W x)
 /-- The inverse of multiplication by a positive bounded weight is
 multiplication by its actual reciprocal. -/
 def innerWeightEquiv : Lp ℝ 2 μ ≃L[ℝ] Lp ℝ 2 μ :=
-  ContinuousLinearMap.equivOfInverse
+  ContinuousLinearEquiv.equivOfInverse
     (innerWeightMultiplier μ W hW C hWC)
     (innerWeightMultiplier μ (fun x => (W x)⁻¹) hW.inv D hWD)
     (innerWeightMultiplier_comp_apply μ W (fun x => (W x)⁻¹) hW hW.inv C D hWC hWD
@@ -127,26 +127,26 @@ def innerWeightEquiv : Lp ℝ 2 μ ≃L[ℝ] Lp ℝ 2 μ :=
 theorem innerWeightEquiv_apply (f : Lp ℝ 2 μ) :
     innerWeightEquiv μ W hW hpos C D hWC hWD f = innerWeightMultiplier μ W hW C hWC f := by
   unfold innerWeightEquiv
-  exact ContinuousLinearMap.equivOfInverse_apply _ _ _ _ _
+  exact ContinuousLinearEquiv.equivOfInverse_apply _ _ _ _ _
 
 theorem innerWeightEquiv_symm_apply (f : Lp ℝ 2 μ) :
     (innerWeightEquiv μ W hW hpos C D hWC hWD).symm f =
       innerWeightMultiplier μ (fun x => (W x)⁻¹) hW.inv D hWD f := by
   unfold innerWeightEquiv
-  rw [ContinuousLinearMap.symm_equivOfInverse, ContinuousLinearMap.equivOfInverse_apply]
+  rw [ContinuousLinearEquiv.symm_equivOfInverse, ContinuousLinearEquiv.equivOfInverse_apply]
 
 theorem innerWeightEquiv_toContinuousLinearMap :
     (innerWeightEquiv μ W hW hpos C D hWC hWD : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) =
       innerWeightMultiplier μ W hW C hWC := by
   unfold innerWeightEquiv
-  exact ContinuousLinearMap.toContinuousLinearMap_equivOfInverse _ _ _ _
+  exact ContinuousLinearEquiv.toContinuousLinearMap_equivOfInverse _ _ _ _
 
 theorem innerWeightEquiv_symm_toContinuousLinearMap :
     ((innerWeightEquiv μ W hW hpos C D hWC hWD).symm : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) =
       innerWeightMultiplier μ (fun x => (W x)⁻¹) hW.inv D hWD := by
   unfold innerWeightEquiv
-  rw [ContinuousLinearMap.symm_equivOfInverse,
-    ContinuousLinearMap.toContinuousLinearMap_equivOfInverse]
+  rw [ContinuousLinearEquiv.symm_equivOfInverse,
+    ContinuousLinearEquiv.toContinuousLinearMap_equivOfInverse]
 
 theorem innerWeightEquiv_ae (f : Lp ℝ 2 μ) :
     innerWeightEquiv μ W hW hpos C D hWC hWD f =ᵐ[μ] fun x => W x * f x := by

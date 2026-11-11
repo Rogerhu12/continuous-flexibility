@@ -53,6 +53,7 @@ theorem innerRadialGap_lagrange {a b j : ℝ} (hab : a ≤ b) (ha : 0 < a)
     ((hu.differentiable (by simp) r).hasDerivAt.mul
       (hfluxv.differentiable (by simp) r).hasDerivAt)) using 1
   unfold radialJacobi
+  simp only [Pi.sub_apply, Pi.mul_apply]
   ring
 
 /-- The source is measured with `dμ = (12 w / r²) dr`. At zero Dirichlet

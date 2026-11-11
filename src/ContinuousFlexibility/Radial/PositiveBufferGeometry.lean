@@ -102,11 +102,15 @@ theorem positiveBufferPoint_border_eq_zero {B : BufferData}
   · have hleft := hx.1
     simp only [positiveBufferPoint, bufferInnerWall, bufferCut, bufferSign,
       Fin.zero_eta, if_true, neg_mul, one_mul, neg_div, sub_neg_eq_add] at hleft
-    have hd : t / B.mass 0 ≤ (B.action 0 + 6) / B.mass 0 := by simpa only [] using hdiv
+    have hd : t / B.mass 0 ≤ (B.action 0 + 6) / B.mass 0 := by
+      dsimp +instances only at hdiv ⊢
+      exact hdiv
     linarith only [hleft, hd]
   · have hright := hx.2
     norm_num [positiveBufferPoint, bufferInnerWall, bufferCut, bufferSign] at hright
-    have hd : t / B.mass 1 ≤ (B.action 1 + 6) / B.mass 1 := by simpa only [] using hdiv
+    have hd : t / B.mass 1 ≤ (B.action 1 + 6) / B.mass 1 := by
+      dsimp +instances only at hdiv ⊢
+      exact hdiv
     linarith only [hright, hd]
 
 /-- A nonempty positive buffer necessarily has layer constant at least one. -/
