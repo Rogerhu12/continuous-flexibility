@@ -137,7 +137,7 @@ theorem referenceRadialWeightedMeasure_absolutelyContinuous
       _ = 0 := by simp only [Measure.smul_apply, hs0, smul_eq_mul, mul_zero]
   rw [referenceRadialWeightedMeasure, Measure.map_apply measurable_fst hs,
     referenceWeightedMeasure, Measure.sum_apply _ (measurable_fst hs)]
-  apply tsum_eq_zero
+  apply ENNReal.tsum_eq_zero.mpr
   intro m
   exact (withDensity_absolutelyContinuous (radialPhysicalMeasure D)
     (referenceCellMeasureDensity D γ M m)) hpre
