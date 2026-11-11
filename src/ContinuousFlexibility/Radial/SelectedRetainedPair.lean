@@ -134,7 +134,7 @@ private theorem seedRetainedPair_increasing_from_entry {S : SelectedTailData}
         r / κ ∈ uIcc (S.cut side S.chain.index) (S.entry side S.chain.index) := by
       cases side
       · have hle : S.entry false S.chain.index ≤ r / κ :=
-          (le_div_iff₀ hκ).mpr (by simpa only [κ, mul_comm] using hr.1)
+          (le_div_iff₀ hκ).mpr (by simpa [κ, mul_comm] using hr.1)
         have hlt : r / κ < S.cut false S.chain.index :=
           (div_lt_iff₀ hκ).mpr (by simpa only [mul_comm] using lt_of_not_ge hi)
         refine ⟨⟨he.1.trans_le hle, hlt⟩, ?_⟩
@@ -143,7 +143,7 @@ private theorem seedRetainedPair_increasing_from_entry {S : SelectedTailData}
       · have hlt : S.cut true S.chain.index < r / κ :=
           (lt_div_iff₀ hκ).mpr (by simpa only [mul_comm] using lt_of_not_ge hi)
         have hle : r / κ ≤ S.entry true S.chain.index :=
-          (div_le_iff₀ hκ).mpr (by simpa only [κ, mul_comm] using hr.2)
+          (div_le_iff₀ hκ).mpr (by simpa [κ, mul_comm] using hr.2)
         refine ⟨⟨hlt, hle.trans_lt he.2⟩, ?_⟩
         rw [uIcc_of_le ho.le]
         exact ⟨hlt.le, hle⟩

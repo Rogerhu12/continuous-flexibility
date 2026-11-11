@@ -94,7 +94,7 @@ theorem exists_connectedReferenceGeometry (hR08 : R08Statement)
     exists_reference_true_border_controls hacc hpatch
   refine ⟨⟨S, referenceWithTrueBorderControls D χ, l, h, requiredHead⟩, rfl,
     hS, hacc', hborder, ?_, hpatch', ?_, ?_, hgsmooth, hgcompact, hgcap⟩
-  · exact hkernel
+  · exact hkernel.1
   · exact (connectedPositiveHeads_update_controls D χ l h requiredHead).mpr hheads
   · exact (connectedSelectedTails_update_controls S D χ l h).mpr htails
 
