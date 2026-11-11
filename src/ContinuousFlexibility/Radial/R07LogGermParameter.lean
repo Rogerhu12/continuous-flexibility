@@ -36,7 +36,8 @@ theorem eventually_ne_zero_of_two_log_germs {s : Set ℝ} (hs : IsPreconnected s
   let g : ℝ → ℝ := fun x => F₁ x - F₀ x
   have hg : Continuous g := hF₁.sub hF₀
   have hcases (x : ℝ) (hx : x ∈ s) : g x = 0 ∨ g x = d := by
-    rw [g, (hg₁ x hx).eq_of_nhds, (hg₀ x hx).eq_of_nhds]
+    dsimp only [g]
+    rw [(hg₁ x hx).eq_of_nhds, (hg₀ x hx).eq_of_nhds]
     by_cases hf : f x = 0
     · exact Or.inl (by rw [hf, mul_zero, mul_zero, sub_self])
     · apply Or.inr
@@ -47,12 +48,13 @@ theorem eventually_ne_zero_of_two_log_germs {s : Set ℝ} (hs : IsPreconnected s
     intro x hx
     simpa only [Set.mem_insert_iff, Set.mem_singleton_iff] using hcases x hx
   have hbase : g x₀ = d := by
-    rw [g, (hg₁ x₀ hx₀).eq_of_nhds, (hg₀ x₀ hx₀).eq_of_nhds,
+    dsimp only [g]
+    rw [(hg₁ x₀ hx₀).eq_of_nhds, (hg₀ x₀ hx₀).eq_of_nhds,
       log_mul hA₁.ne' hf₀, log_mul hA₀.ne' hf₀]
     dsimp only [d]
     ring
   have hconst (x : ℝ) (hx : x ∈ s) : g x = d :=
-    (hs.constant_of_mapsTo (Set.finite_insert 0 (Set.finite_singleton d)).isDiscrete
+    (hs.constant_of_mapsTo ((Set.finite_singleton d).insert 0).isDiscrete
       hg.continuousOn hmap hx hx₀).trans hbase
   intro x hx
   have hgn : g x ≠ 0 := by rw [hconst x hx]; exact hlog

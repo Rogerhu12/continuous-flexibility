@@ -71,20 +71,20 @@ theorem radialJacobi_densityRoot {s ψ w : ℝ → ℝ} {r J : ℝ}
   have hu' := (contDiff_infty_iff_deriv.mp hu).2
   have hweight : (fun x : ℝ => w (id x)) =ᶠ[𝓝 r]
       fun x => (1 : ℝ) * s x ^ 2 * deriv (id : ℝ → ℝ) x := by
-    simpa only [id_eq, deriv_id'', one_mul, mul_one] using hroot
+    simpa only [id_eq, deriv_id', one_mul, mul_one] using hroot
   have h := radialJacobi_liouville (a := J) (c := 1) (x := r)
     (R := id) (s := s) (ψ := ψ) (w := w) (u := fun x => ψ x / s x)
     (Eventually.of_forall (fun _ => differentiableAt_id))
     (Eventually.of_forall (hs.differentiable (by simp)))
     (Eventually.of_forall (hψ.differentiable (by simp)))
     (Eventually.of_forall (hu.differentiable (by simp)))
-    (by simpa only [deriv_id''] using
-      (differentiableAt_const : DifferentiableAt ℝ (fun _ : ℝ => (1 : ℝ)) r))
+    (by simpa only [deriv_id'] using
+      (differentiableAt_const (1 : ℝ) : DifferentiableAt ℝ (fun _ : ℝ => (1 : ℝ)) r))
     (hs'.differentiable (by simp) r) (hψ'.differentiable (by simp) r)
     (hw.differentiable (by simp) r)
     ((hw.differentiable (by simp) r).mul (hu'.differentiable (by simp) r))
     hr.ne' (by simp) (hsp r).ne' hweight (Eventually.of_forall (fun _ => rfl))
-  simp only [id_eq, deriv_id'', deriv_const, one_mul, div_one, zero_add,
+  simp only [id_eq, deriv_id', deriv_const, one_mul, div_one, zero_add,
     liouvilleSchrodinger, liouvilleV0, liouvilleRho] at h
   convert h using 1 <;> unfold radialDensityPotential <;> ring
 
@@ -99,7 +99,7 @@ theorem exists_radialSolution_on_Icc {D : Statements.ReferenceData}
   have hw : ContDiff ℝ ∞ D.w := hD.2.2.1.1
   have hp : ∀ r ∈ Ioo D.a D.b, 0 < D.w r := hD.2.2.2.2.1
   obtain ⟨s, hs, hsp, hroot⟩ := exists_radialDensityRoot hl hlh hh hw hp
-  have hV := contDiffOn_radialDensityPotential hs hsp J hD.1
+  have hV := contDiffOn_radialDensityPotential (b := D.b) hs hsp J hD.1
   obtain ⟨q, hq, _, hqg⟩ := exists_contDiff_joinGerm_extension hl hlh hh hV.neg
   obtain ⟨ψ, hψ, hψ₀, hψ₁, hψeq⟩ := exists_smoothSecondOrderSolution hq ht
     (s t₀ * u₀) (deriv s t₀ * u₀ + s t₀ * v₀)

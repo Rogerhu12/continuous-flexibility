@@ -72,7 +72,7 @@ theorem r07_isFinite_radialHilbertMeasure {D : ReferenceData}
   have hi : Integrable (fun r : ℝ => 12 * D.w r / r ^ 2)
       (volume.restrict (radialCore D)) :=
     hc.integrableOn_Icc.mono_set Ioo_subset_Icc_self
-  exact isFiniteMeasure_withDensity_ofReal hi
+  exact isFiniteMeasure_withDensity_ofReal hi.hasFiniteIntegral
 
 /-- Global continuity is enough for square integrability in the radial
 Hilbert measure, whose support is contained in the bounded radial core. -/

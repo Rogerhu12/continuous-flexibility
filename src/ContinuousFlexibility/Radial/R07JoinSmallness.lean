@@ -205,7 +205,8 @@ theorem r07_joinState_close {J W contrast r₀ r₁ s t a margin : ℝ}
       |(joinState J W w u t).2 - a| ≤ margin / 4 := by
   have hnorm : ‖joinState J W w u s‖ ≤ (3 / 2 : ℝ) := by
     rw [hstart, norm_prod_le_iff, Real.norm_eq_abs, Real.norm_eq_abs]
-    exact ⟨by norm_num, abs_le.mpr ⟨ha.1, ha.2.trans (by norm_num)⟩⟩
+    exact ⟨by norm_num, abs_le.mpr
+      ⟨by dsimp; linarith only [ha.1], ha.2.trans (by norm_num)⟩⟩
   have haction : 0 ≤ 2 * J * contrast / r₀ * |t - s| := by
     have hJ₀ : 0 ≤ J := zero_le_one.trans hJ
     have hcontrast₀ : 0 ≤ contrast := zero_le_one.trans hcontrast

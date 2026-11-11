@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.TailEdgePerturbedGreen
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 import Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv
+import Mathlib.Analysis.Calculus.ContDiff.RCLike
 
 /-!
 # Resistance coordinate on a positive edge
