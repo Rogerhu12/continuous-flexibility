@@ -173,7 +173,7 @@ theorem matchedPhysical_memLp_of_weighted {D : ReferenceData}
       have hq := radialQ_nonneg (D.cellIndex m)
       have hS : 0 ≤ radialS (D.cellIndex m) := by unfold radialS; positivity
       positivity)
-  simp only [ENNReal.ofReal_one, Measure.withDensity_one, one_mul] at hc
+  simp only [ENNReal.ofReal_one, withDensity_one, one_mul] at hc
   exact hf.of_measure_le_smul (by simp) hc
 
 theorem matchedPhysicalPartition_weighted_sq {D : ReferenceData}

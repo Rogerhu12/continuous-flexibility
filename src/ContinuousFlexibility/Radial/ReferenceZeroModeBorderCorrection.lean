@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.ReferenceRadialCellBound
+import ContinuousFlexibility.Radial.ScaleSlowVariation
 import Mathlib.Analysis.Normed.Group.Bounded
 
 /-!

@@ -31,6 +31,7 @@ theorem ReferenceGraph.smul {D : ReferenceData}
     simp only [radialWeakPairing_const_mul, mul_assoc, radialAngularMean_const_mul,
       intervalIntegral.integral_const_mul]
     have he := congrArg (fun z : ℝ => c * z) (hG.2.2.2 ψ hψ)
+    simp only [mul_assoc, radialAngularMean_const_mul] at he
     nlinarith only [he]
 
 theorem ReferenceGraph.add {D : ReferenceData}

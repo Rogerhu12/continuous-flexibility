@@ -25,6 +25,7 @@ theorem matchedPhysical_localized_memLp {D : ReferenceData}
   apply (Lp.memLp f).of_le
     ((hP.1 m).continuous.aestronglyMeasurable.mul (Lp.aestronglyMeasurable f))
   filter_upwards with r
+  simp only [Pi.mul_apply]
   rw [norm_mul, Real.norm_eq_abs]
   exact (mul_le_mul_of_nonneg_right (matchedRadialLocalizer_abs_le_one hP m r)
     (norm_nonneg (f r))).trans_eq (one_mul _)
@@ -38,6 +39,7 @@ theorem matchedPartitionReciprocal_memLp_top {D : ReferenceData}
     (matchedPartitionSquare_measurable hP).inv.aestronglyMeasurable B
   filter_upwards [ae_restrict_mem (show MeasurableSet (radialCore D) from measurableSet_Ioo)]
     with r hr
+  simp only [Pi.inv_apply]
   rw [Real.norm_eq_abs, abs_of_nonneg
     (inv_nonneg.mpr (matchedPartitionSquare_nonneg D r))]
   exact hB r hr
@@ -46,8 +48,11 @@ theorem matchedPhysicalPartitionInput_memLp {D : ReferenceData}
     (hP : RadialPartition D) (m : ℕ) (f : MatchedPhysicalL2 D) :
     MemLp (fun r => D.localizer m r * f r / matchedPartitionSquare D r) 2
       (volume.restrict (radialCore D)) := by
-  have hh := (matchedPartitionReciprocal_memLp_top hP).fun_mul
-    (matchedPhysical_localized_memLp hP m f)
+  have hh : MemLp (fun r =>
+      (matchedPartitionSquare D r)⁻¹ * (D.localizer m r * f r)) 2
+      (volume.restrict (radialCore D)) :=
+    (matchedPartitionReciprocal_memLp_top hP).fun_mul
+      (matchedPhysical_localized_memLp hP m f)
   apply (memLp_congr_ae ?_).mp hh
   filter_upwards with r
   change (matchedPartitionSquare D r)⁻¹ * (D.localizer m r * f r) =
@@ -108,7 +113,9 @@ theorem matchedPhysicalCellBlock_eq (D : ReferenceData)
     (G : RadialModePair D →L[ℝ] RadialModePair D) (k m : ℕ) :
     matchedPhysicalCellBlock D hD hP G k m =
       matchedPhysicalOutputCell D hD hP k ∘L G ∘L
-        matchedPhysicalSourceCell D hD hP m := rfl
+        matchedPhysicalSourceCell D hD hP m := by
+  simp only [matchedPhysicalCellBlock, matchedPhysicalOutputCell,
+    matchedPhysicalSourceCell, ContinuousLinearMap.comp_assoc]
 
 theorem matchedPhysicalPartitionInput_source {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
@@ -162,8 +169,11 @@ theorem matchedPhysicalPartition_apply_tendsto {D : ReferenceData}
       _ = R ((∑ m ∈ Finset.range N, (matchedModePartitionPiece D hD hP m u, 0)) +
           t • (0, 1)) := (map_add R _ _).symm
       _ = _ := by
-        congr 1
-        ext <;> simp
+        apply congrArg R
+        apply Prod.ext
+        · simp only [Prod.fst_add, Prod.fst_sum, Prod.smul_fst, smul_zero, add_zero]
+        · simp only [Prod.snd_add, Prod.snd_sum, Prod.smul_snd, smul_eq_mul,
+            mul_one, Finset.sum_const_zero, zero_add]
   have he :
       (fun N =>
         (∑ m ∈ Finset.range N,

@@ -215,6 +215,8 @@ theorem referenceCosineCoefficient_radialPDE {w : ℝ → ℝ}
   have hφ' := (contDiff_infty_iff_deriv.mp hφ).2
   have hflux := (hw.differentiable (by simp) r).hasDerivAt.mul
     (hφ'.differentiable (by simp) r).hasDerivAt
+  change HasDerivAt
+    (fun t : ℝ => w t * deriv (referenceCosineCoefficient ψ n) t) _ r at hflux
   rw [hcoef, referenceCosineCoefficient_angularPartial_two hψ hp n r]
   unfold Radial.radialJacobi
   rw [hflux.deriv, deriv_deriv_referenceCosineCoefficient hψ n,

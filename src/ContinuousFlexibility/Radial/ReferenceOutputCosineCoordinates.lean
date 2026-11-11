@@ -87,7 +87,8 @@ theorem referenceOutputCosine_mean_ae
       =ᵐ[referenceRadialWeightedMeasure D γ (-M)]
         fun r => aL * D.chiLeft r + a 0 r := by
   filter_upwards [referenceOutputCosine_coefficient_ae D γ M aL ν a 0] with r hr
-  simpa only [referenceCosineCoefficient, referenceCosineCoeff_zero, if_pos rfl] using hr
+  simpa only [referenceCosineCoefficient, referenceCosineCoeff_zero, if_pos rfl,
+    ite_true] using hr
 
 theorem referenceOutputCosine_referenceMode_ae
     (D : ReferenceData) (γ M aL ν : ℝ)
@@ -98,6 +99,6 @@ theorem referenceOutputCosine_referenceMode_ae
   have hh := referenceOutputCosine_coefficient_ae D γ M aL ν a (n + 1)
   rw [referenceCosineCoefficient_succ_eq_referenceMode] at hh
   filter_upwards [hh] with r hr
-  simpa only [if_neg (Nat.succ_ne_zero n), zero_add] using hr
+  simpa only [if_neg (Nat.succ_ne_zero n), ite_false, zero_add] using hr
 
 end ContinuousFlexibility.Statements
