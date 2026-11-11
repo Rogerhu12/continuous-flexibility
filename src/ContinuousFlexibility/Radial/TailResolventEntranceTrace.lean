@@ -367,28 +367,28 @@ theorem exists_tailResolvent_classical_rep_with_entrance {T : DeepTailData}
     intro x hx
     rw [uIoc_of_le hac.le] at hx
     change E x / T.p x = Q x / T.p x
-    rw [hEQ x ⟨hx.1, hx.2.trans_lt hcb⟩]
+    rw [hEQ ⟨hx.1, hx.2.trans_lt hcb⟩]
   obtain ⟨F, hFU, hFcont⟩ := exists_interval_left_continuous_extension hac hcb hU hUd hDInt
   have hUnew : (u : ℝ → ℝ) =ᵐ[deepTailMeasure T] F := huAE.trans
     ((tail_ae_eq_iff_volume hpOpen hposOpen).mpr (by
       filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
-      exact (hFU x hx).symm))
+      exact (hFU hx).symm))
   have hQnew : (fun x => T.p x * d x) =ᵐ[deepTailMeasure T] E := hQAE.trans
     ((tail_ae_eq_iff_volume hpOpen hposOpen).mpr (by
       filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
-      exact (hEQ x hx).symm))
+      exact (hEQ hx).symm))
   have hFd (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :
       HasDerivAt F (E x / T.p x) x := by
-    rw [hEQ x hx]
+    rw [hEQ hx]
     apply (hUd x hx).congr_of_eventuallyEq
     filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
-    exact hFU y hy
+    exact hFU hy
   have hEd (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :
       HasDerivAt E (-(T.p x * (ψ x + T.Λ * F x))) x := by
-    rw [hFU x hx]
+    rw [hFU hx]
     apply (hQd x hx).congr_of_eventuallyEq
     filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
-    exact hEQ y hy
+    exact hEQ hy
   have hFa : F T.entrance = 0 :=
     tailResolvent_classical_entrance_eq_zero hT hac hcb hud
       (hFcont.mono hsub) (hEcont.mono hsub) hUnew hQnew

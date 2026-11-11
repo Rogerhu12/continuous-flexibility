@@ -60,9 +60,10 @@ theorem measurable_tailFundamentalGreenKernel {a b W : ℝ} {w u : ℝ → ℝ}
       (Ioo a b ×ˢ Ioo a b) :=
     ((hw.comp (continuous_fst.min continuous_snd).continuousOn hmin).mul
       (hu.comp (continuous_fst.max continuous_snd).continuousOn hmax)).div_const W
-  simpa only [tailFundamentalGreenKernel, Set.piecewise, Set.mem_prod] using
-    hc.measurable_piecewise (g := fun _ => (0 : ℝ)) continuousOn_const
-      (measurableSet_Ioo.prod measurableSet_Ioo)
+  convert hc.measurable_piecewise (g := fun _ => (0 : ℝ)) continuousOn_const
+    (measurableSet_Ioo.prod measurableSet_Ioo) using 1
+  funext z
+  simp only [tailFundamentalGreenKernel, Set.piecewise, Set.mem_prod]
 
 /-- Exact row decomposition. The right interval includes the diagonal,
 so this identity holds pointwise even for measures with atoms. -/
@@ -97,9 +98,10 @@ theorem tailFundamentalGreenKernel_integrable_row
     {μ : Measure ℝ} {a b W x : ℝ} {w u : ℝ → ℝ}
     (hx : x ∈ Ioo a b) (hw : IntegrableOn w (Ioo a x) μ) (hu : Integrable u μ) :
     Integrable (fun y => tailFundamentalGreenKernel a b w u W x y) μ := by
-  have hleft := (hw.const_mul (u x / W)).integrable_indicator measurableSet_Ioo
-  have hright := ((hu.integrableOn (s := Ico x b)).const_mul (w x / W)).integrable_indicator
-    measurableSet_Ico
+  have hleft := IntegrableOn.integrable_indicator
+    (hw.const_mul (u x / W)) measurableSet_Ioo
+  have hright := IntegrableOn.integrable_indicator
+    ((hu.integrableOn (s := Ico x b)).const_mul (w x / W)) measurableSet_Ico
   apply (hleft.add hright).congr
   exact Eventually.of_forall fun y => (tailFundamentalGreenKernel_row_split hx y).symm
 
@@ -118,7 +120,9 @@ theorem tail_left_solution_integrableOn {T : DeepTailData} {w : ℝ → ℝ} {x 
   have hpc := hp.mono hsub
   have hwc := hw.mono hsub
   have hcont : ContinuousOn (fun y => T.p y * w y) (Icc T.entrance x) := by
-    simpa only [Pi.mul_apply] using hpc.mul hwc
+    convert hpc.mul hwc using 1
+    funext y
+    simp only [Pi.mul_apply]
   have hi : IntegrableOn (fun y => T.p y * w y) (Ioo T.entrance x) :=
     hcont.integrableOn_Icc.mono_set Ioo_subset_Icc_self
   have hpa : AEMeasurable (fun y => ENNReal.ofReal (T.p y))
@@ -183,10 +187,20 @@ theorem tail_continuous_source_product {a b : ℝ} {g ψ : ℝ → ℝ}
   intro x
   by_cases hx : x ∈ tsupport ψ
   · exact (hg.continuousAt (isOpen_Ioo.mem_nhds (hs hx))).mul hψ.continuousAt
-  · apply continuousAt_const.congr_of_eventuallyEq
+  · apply (show ContinuousAt (fun _ : ℝ => (0 : ℝ)) x from
+      continuousAt_const).congr_of_eventuallyEq
     filter_upwards [notMem_tsupport_iff_eventuallyEq.mp hx] with y hy
     simp only [Pi.zero_apply] at hy
     simp only [hy, mul_zero]
+
+theorem tail_integrable_source_product {a b : ℝ} {g ψ : ℝ → ℝ}
+    (hg : ContinuousOn g (Ioo a b)) (hψ : Continuous ψ) (hc : HasCompactSupport ψ)
+    (hs : tsupport ψ ⊆ Ioo a b) : Integrable (fun x => g x * ψ x) := by
+  have hcompact : HasCompactSupport (fun x => g x * ψ x) := by
+    convert hc.mul_left (f := g) using 1
+    funext x
+    simp only [Pi.mul_apply]
+  exact (tail_continuous_source_product hg hψ hs).integrable_of_hasCompactSupport hcompact
 
 def tailFundamentalGreenSolve (a b W : ℝ) (p w u ψ : ℝ → ℝ) (x : ℝ) : ℝ :=
   (u x * (∫ t in a..x, p t * w t * ψ t) +
@@ -264,20 +278,188 @@ theorem tailFundamentalGreenSolve_firstOrder
   constructor
   · have h := (((hu.mul hA).add (hw.mul hB)).div_const W)
     apply HasDerivAt.congr_deriv (by
-      simpa only [tailFundamentalGreenSolve, Pi.mul_apply, Pi.add_apply] using h)
+      convert h using 1
+      funext y
+      simp only [tailFundamentalGreenSolve, Pi.mul_apply, Pi.add_apply])
     dsimp only [tailFundamentalGreenFlux]
     field_simp [hp₀, hW₀]
     ring
   · have h := (((hq.mul hA).add (hz.mul hB)).div_const W)
     apply HasDerivAt.congr_deriv (by
-      simpa only [tailFundamentalGreenFlux, Pi.mul_apply, Pi.add_apply] using h)
+      convert h using 1
+      funext y
+      simp only [tailFundamentalGreenFlux, Pi.mul_apply, Pi.add_apply])
     dsimp only [tailFundamentalGreenSolve]
     field_simp [hW₀]
-    linear_combination -(p x * ψ x) * hW
+    linear_combination -(ψ x) * hW
 
 theorem tailFundamentalGreenSolve_entrance {a b W : ℝ} {p w u ψ : ℝ → ℝ}
     (hw : w a = 0) : tailFundamentalGreenSolve a b W p w u ψ a = 0 := by
   simp only [tailFundamentalGreenSolve, intervalIntegral.integral_same, hw,
     mul_zero, zero_mul, zero_add, zero_div]
+
+theorem continuousOn_tailFundamentalGreenSolve
+    {a b W : ℝ} {p w u ψ : ℝ → ℝ}
+    (hw : ContinuousOn w (Ico a b)) (hu : ContinuousOn u (Ico a b))
+    (hwψ : Continuous (fun y => p y * w y * ψ y))
+    (huψ : Continuous (fun y => p y * u y * ψ y)) :
+    ContinuousOn (tailFundamentalGreenSolve a b W p w u ψ) (Ico a b) := by
+  have hA : Continuous (fun x => ∫ t in a..x, p t * w t * ψ t) :=
+    continuous_iff_continuousAt.mpr (fun x =>
+      (hwψ.integral_hasStrictDerivAt a x).hasDerivAt.continuousAt)
+  have hB : Continuous (fun x => ∫ t in x..b, p t * u t * ψ t) := by
+    apply continuous_iff_continuousAt.mpr
+    intro x
+    exact (intervalIntegral.integral_hasDerivAt_left (huψ.intervalIntegrable x b)
+      huψ.aestronglyMeasurable.stronglyMeasurableAtFilter huψ.continuousAt).continuousAt
+  convert ((hu.mul hA.continuousOn).add (hw.mul hB.continuousOn)).div_const W using 1
+  funext x
+  simp only [tailFundamentalGreenSolve, Pi.mul_apply, Pi.add_apply]
+
+/-- Beyond the source, the Green solution is exactly a multiple of the
+natural solution, with no asymptotic error term. -/
+theorem tailFundamentalGreenSolve_eq_mul_on_tail
+    {a b c W : ℝ} {p w u ψ : ℝ → ℝ}
+    (hwψ : Continuous (fun y => p y * w y * ψ y))
+    (hψzero : ∀ y ∈ Icc c b, ψ y = 0) :
+    EqOn (tailFundamentalGreenSolve a b W p w u ψ)
+      (fun x => ((∫ y in a..c, p y * w y * ψ y) / W) * u x) (Ico c b) := by
+  intro x hx
+  have hleft : (∫ y in c..x, p y * w y * ψ y) = 0 := by
+    calc
+      _ = ∫ _y in c..x, (0 : ℝ) := by
+        apply intervalIntegral.integral_congr
+        intro y hy
+        rw [uIcc_of_le hx.1] at hy
+        rw [hψzero y ⟨hy.1, hy.2.trans hx.2.le⟩, mul_zero]
+      _ = 0 := by simp
+  have hright : (∫ y in x..b, p y * u y * ψ y) = 0 := by
+    calc
+      _ = ∫ _y in x..b, (0 : ℝ) := by
+        apply intervalIntegral.integral_congr
+        intro y hy
+        rw [uIcc_of_le hx.2.le] at hy
+        rw [hψzero y ⟨hx.1.trans hy.1, hy.2⟩, mul_zero]
+      _ = 0 := by simp
+  have hprimitive : (∫ y in a..x, p y * w y * ψ y) =
+      ∫ y in a..c, p y * w y * ψ y := by
+    simpa only [hleft, add_zero] using
+      (intervalIntegral.integral_add_adjacent_intervals
+        (hwψ.intervalIntegrable a c) (hwψ.intervalIntegrable c x)).symm
+  rw [tailFundamentalGreenSolve, hprimitive, hright, mul_zero, add_zero]
+  ring
+
+/-- Compact regularity at the entrance and agreement with an `L²` tail
+preserve weighted `L²` membership. The weighted measure need not be finite. -/
+theorem tail_memLp_of_continuousOn_eq_mul_tail
+    {T : DeepTailData} {U u : ℝ → ℝ} {c C : ℝ}
+    (hp : ContDiffOn ℝ ∞ T.p (Ico T.entrance T.endpoint))
+    (hp₀ : ∀ x ∈ Ico T.entrance T.endpoint, 0 < T.p x)
+    (hU : ContinuousOn U (Ico T.entrance T.endpoint))
+    (hc : c ∈ Ioo T.entrance T.endpoint)
+    (hu : MemLp u 2 (deepTailMeasure T))
+    (heq : EqOn U (fun x => C * u x) (Ico c T.endpoint)) :
+    MemLp U 2 (deepTailMeasure T) := by
+  have hp' := hp.mono Ioo_subset_Ico_self
+  have hp₀' (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :=
+    hp₀ x (Ioo_subset_Ico_self hx)
+  have hmeas : AEStronglyMeasurable U (deepTailMeasure T) :=
+    AEStronglyMeasurable.mono_ac (withDensity_absolutelyContinuous _ _)
+      ((hU.mono Ioo_subset_Ico_self).aestronglyMeasurable measurableSet_Ioo)
+  apply (memLp_two_iff_integrable_sq hmeas).mpr
+  apply (tail_integrable_density_iff hp' hp₀' _).mpr
+  have hsub : Icc T.entrance c ⊆ Ico T.entrance T.endpoint :=
+    fun _ hx => ⟨hx.1, hx.2.trans_lt hc.2⟩
+  have hcont : ContinuousOn (fun x => T.p x * U x ^ 2) (Icc T.entrance c) := by
+    convert (hp.continuousOn.mono hsub).mul ((hU.mono hsub).pow 2) using 1
+    funext x
+    simp only [Pi.mul_apply]
+  have hleft := hcont.integrableOn_Icc
+  have hCu := hu.const_mul C
+  have hright₀ := (tail_integrable_density_iff hp' hp₀' _).mp
+    ((memLp_two_iff_integrable_sq hCu.aestronglyMeasurable).mp hCu)
+  have hright : IntegrableOn (fun x => T.p x * U x ^ 2) (Ico c T.endpoint) := by
+    apply (hright₀.mono_set (fun x hx => ⟨hc.1.trans_le hx.1, hx.2⟩)).congr_fun
+      _ measurableSet_Ico
+    intro x hx
+    dsimp only
+    rw [heq hx]
+  apply (hleft.union hright).mono_set
+  intro x hx
+  by_cases hxc : x ≤ c
+  · exact Or.inl ⟨hx.1.le, hxc⟩
+  · exact Or.inr ⟨(not_le.mp hxc).le, hx.2⟩
+
+theorem tail_test_vanishes_on_final_interval {a b : ℝ} {ψ : ℝ → ℝ}
+    (hab : a < b) (hs : tsupport ψ ⊆ Ioo a b) :
+    ∃ c ∈ Ioo a b, ∀ y ∈ Icc c b, ψ y = 0 := by
+  have hb : b ∉ tsupport ψ := fun h => (lt_irrefl b) (hs h).2
+  have hzero : ∀ᶠ y in 𝓝[<] b, ψ y = 0 := by
+    simpa only [Pi.zero_apply] using
+      (notMem_tsupport_iff_eventuallyEq.mp hb).filter_mono nhdsWithin_le_nhds
+  obtain ⟨l, ⟨hal, hlb⟩, hz⟩ :=
+    (mem_nhdsLT_iff_exists_mem_Ico_Ioo_subset hab).mp hzero
+  obtain ⟨c, hlc, hcb⟩ := exists_between hlb
+  refine ⟨c, ⟨hal.trans_lt hlc, hcb⟩, ?_⟩
+  intro y hy
+  rcases lt_or_eq_of_le hy.2 with hyb | hyb
+  · exact hz ⟨hlc.trans_le hy.1, hyb⟩
+  · subst y
+    exact Function.notMem_support.mp (fun h => hb ((subset_tsupport ψ) h))
+
+/-- For a compact interior source the actual kernel gives a classical
+weighted `L²` solution with zero entrance value. Only the right fundamental
+solution is required to lie in the weighted Hilbert space. -/
+theorem exists_tailFundamentalGreen_compact_solution
+    {T : DeepTailData} {w u z q ψ : ℝ → ℝ} {W : ℝ}
+    (hab : T.entrance < T.endpoint)
+    (hp : ContDiffOn ℝ ∞ T.p (Ico T.entrance T.endpoint))
+    (hp₀ : ∀ x ∈ Ico T.entrance T.endpoint, 0 < T.p x)
+    (hwc : ContinuousOn w (Ico T.entrance T.endpoint))
+    (huc : ContinuousOn u (Ico T.entrance T.endpoint))
+    (hw : TailFirstOrderSystem T.p T.Λ w z (Ioo T.entrance T.endpoint))
+    (hu : TailFirstOrderSystem T.p T.Λ u q (Ioo T.entrance T.endpoint))
+    (hw₀ : w T.entrance = 0) (hW₀ : W ≠ 0)
+    (hW : ∀ x ∈ Ioo T.entrance T.endpoint, z x * u x - w x * q x = W)
+    (huL2 : MemLp u 2 (deepTailMeasure T))
+    (hψ : Continuous ψ) (hcψ : HasCompactSupport ψ)
+    (hsψ : tsupport ψ ⊆ Ioo T.entrance T.endpoint) :
+    ∃ U Q : ℝ → ℝ,
+      EqOn U (fun x => ∫ y,
+        tailFundamentalGreenKernel T.entrance T.endpoint w u W x y * ψ y
+          ∂deepTailMeasure T) (Ioo T.entrance T.endpoint) ∧
+      MemLp U 2 (deepTailMeasure T) ∧
+      ContinuousOn U (Ico T.entrance T.endpoint) ∧ U T.entrance = 0 ∧
+      ∀ x ∈ Ioo T.entrance T.endpoint,
+        HasDerivAt U (Q x / T.p x) x ∧
+        HasDerivAt Q (-T.p x * (ψ x + T.Λ * U x)) x := by
+  have hp' := hp.mono Ioo_subset_Ico_self
+  have hp₀' (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :=
+    hp₀ x (Ioo_subset_Ico_self hx)
+  have hpw : ContinuousOn (fun x => T.p x * w x) (Ioo T.entrance T.endpoint) := by
+    convert hp'.continuousOn.mul (hwc.mono Ioo_subset_Ico_self) using 1
+    funext x
+    simp only [Pi.mul_apply]
+  have hpu : ContinuousOn (fun x => T.p x * u x) (Ioo T.entrance T.endpoint) := by
+    convert hp'.continuousOn.mul (huc.mono Ioo_subset_Ico_self) using 1
+    funext x
+    simp only [Pi.mul_apply]
+  have hwψ := tail_continuous_source_product hpw hψ hsψ
+  have huψ := tail_continuous_source_product hpu hψ hsψ
+  have hwψi := tail_integrable_source_product hpw hψ hcψ hsψ
+  have huψi := tail_integrable_source_product hpu hψ hcψ hsψ
+  have hcont := continuousOn_tailFundamentalGreenSolve (W := W) hwc huc hwψ huψ
+  obtain ⟨c, hc, hψzero⟩ := tail_test_vanishes_on_final_interval hab hsψ
+  have htail := tailFundamentalGreenSolve_eq_mul_on_tail (a := T.entrance) (W := W)
+    (u := u) hwψ hψzero
+  refine ⟨tailFundamentalGreenSolve T.entrance T.endpoint W T.p w u ψ,
+    tailFundamentalGreenFlux T.entrance T.endpoint W T.p w u z q ψ, ?_,
+    tail_memLp_of_continuousOn_eq_mul_tail hp hp₀ hcont hc huL2 htail,
+    hcont, tailFundamentalGreenSolve_entrance hw₀, ?_⟩
+  · intro x hx
+    exact (tailFundamentalGreenKernel_integral_eq_solve hp' hp₀' hwψi huψi hx).symm
+  · intro x hx
+    exact tailFundamentalGreenSolve_firstOrder (hp₀' x hx).ne' hW₀
+      (hw x hx).1 (hu x hx).1 (hw x hx).2 (hu x hx).2 (hW x hx) hwψ huψ
 
 end ContinuousFlexibility.Radial

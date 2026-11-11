@@ -221,10 +221,12 @@ theorem tailActualEdgePoisson_integral_le {T : DeepTailData}
   have hc := (tailActualEdgeWeight_continuousOn hT n).mul
     ((tailActualEdgePoisson_spec hT n).differentiable right).continuous.continuousOn
   have hsplit := intervalIntegral.integral_add_adjacent_intervals
+    (a := 0) (b := tailInnerResistance T n) (c := tailActualEdgeLength T n)
     ((hc.mono (tailActualEdge_mass_subset hT n)).intervalIntegrable_of_Icc (μ := volume)
       (tailInnerResistance_pos hT n).le)
     ((hc.mono (tailActualEdge_gap_subset hT n)).intervalIntegrable_of_Icc (μ := volume)
       (le_add_of_nonneg_right (tailResistance_pos hT n).le))
+  simp only [Pi.mul_apply] at hsplit
   rw [← hsplit]
   cases right
   · simp only [Bool.false_eq_true, ite_false, mul_one] at hm ⊢

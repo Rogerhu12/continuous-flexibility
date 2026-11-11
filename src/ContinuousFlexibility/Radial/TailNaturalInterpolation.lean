@@ -125,6 +125,17 @@ def tailPoissonInterpolationFlux (T : DeepTailData) (hT : DeepTailHypotheses T)
     (a : ℕ → ℝ) : ℝ → ℝ :=
   morseOutwardGlue T.node (fun n => tailActualEdgeInterpolationFlux T hT n (a n) (a (n + 1)))
 
+theorem tailPoissonInterpolationFlux_first_node {T : DeepTailData}
+    (hT : DeepTailHypotheses T) (a : ℕ → ℝ) :
+    tailPoissonInterpolationFlux T hT a (T.node 0) =
+      -tailActualEdgeDiagonal T hT 0 (tailActualEdgePoisson T hT 0) false * a 0 +
+        tailActualNodeCoupling T hT 0 * a 1 := by
+  unfold tailPoissonInterpolationFlux
+  rw [morseOutwardGlue_apply_block (deepTail_node_strictMono hT)
+    (show T.node 0 ∈ Ico (T.node 0) (T.node (0 + 1)) from
+      ⟨le_rfl, tailActualEdge_order hT 0⟩)]
+  exact (tailActualEdgeInterpolationFlux_endpoints hT 0 (a 0) (a 1)).1
+
 theorem tailPoissonInterpolation_apply_closed {T : DeepTailData}
     (hT : DeepTailHypotheses T) (a : ℕ → ℝ) {n : ℕ} {x : ℝ}
     (hx : x ∈ Icc (T.node n) (T.node (n + 1))) :
