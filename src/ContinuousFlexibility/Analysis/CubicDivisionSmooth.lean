@@ -72,10 +72,10 @@ theorem cubicQuotient_eq_integral {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f)
       ∫ t in (0 : ℝ)..1, (1 - t) ^ 2 * iteratedDeriv 3 f (t * y) := by
   by_cases hy : y = 0
   · subst y
-    simp only [cubicQuotient, if_pos rfl, mul_zero]
+    simp only [cubicQuotient, ↓reduceIte, mul_zero]
     rw [intervalIntegral.integral_mul_const, integral_one_sub_sq]
     ring
-  · rw [cubicQuotient, if_neg hy]
+  · rw [cubicQuotient, ite_eq_right hy]
     apply (div_eq_iff (pow_ne_zero 3 hy)).mpr
     exact (cubic_taylor_integral hf hf0 hf1 hf2 y).trans (mul_comm _ _)
 
@@ -86,7 +86,7 @@ theorem cube_mul_cubicQuotient {f : ℝ → ℝ} (hf0 : f 0 = 0) (y : ℝ) :
   by_cases hy : y = 0
   · subst y
     simp only [zero_pow (by decide : 3 ≠ 0), zero_mul, hf0]
-  · rw [cubicQuotient, if_neg hy, mul_comm]
+  · rw [cubicQuotient, ite_eq_right hy, mul_comm]
     exact div_mul_cancel₀ (f y) (pow_ne_zero 3 hy)
 
 /-- A smooth function vanishing with its first two derivatives at zero

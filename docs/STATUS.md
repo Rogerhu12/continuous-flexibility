@@ -19,15 +19,16 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 319 / 327 |
-| Modules in the root import | 319 |
-| Lines of Lean under `src/` | 87,633 |
-| Axiom audit (`lake build`, 3751 jobs) | passed: 10,671 declarations, 8,043 theorems |
-| Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
+| Lean modules compiled / total | 367 / 375 (current source paths, including blueprint) |
+| Modules in the root import | 325 |
+| Lines of Lean under `src/` | 90,233 |
+| Axiom audit (CI, 3799 jobs) | passed for every project declaration in the root import |
+| Blueprint statements proved / total | 8 / 42 (S01, S02, R01, R02, R03, R04, W01, N12) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 329 |
+| Modules on the module system | 1 (the Challenge) of 379 |
 
-The 8 modules that do not compile are unfinished files of the earlier workflow:
+The compiled-module count matches artifacts to current source paths; the raw CI cache count
+can also include artifacts of removed blueprint modules. The 8 unfinished modules of the earlier workflow are:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
 `Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
 `Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
@@ -37,6 +38,14 @@ The 8 modules that do not compile are unfinished files of the earlier workflow:
 - **Geometry (paper §2, part of §10).** `mainStatement_of_flatAnnularCore :
   Nonempty FlatAnnularCore → Statements.MainStatement` (`Contracts/SphereClosedBending.lean`).
   The whole remaining problem is `Nonempty FlatAnnularCore`.
+- **Endpoint closure (N12).** The unchanged theorem
+  `PointBranchStatement → W03Statement → S03Statement → N12Statement` is proved.
+  `Analysis/MaterialSampleCofinite.lean`, `Analysis/StateControlCofiniteJets.lean` and
+  `Analysis/StateControlCofiniteClosure.lean` prove smooth endpoint extension of the actual
+  controlled profile from the existing bounded index shift and weighted control bounds.
+  `Analysis/PointSolutionCore.lean` constructs the core from the same normalized nonzero
+  solution point. No control-interval placement hypothesis is added. All proof dependencies
+  are in the root import; N12 depends only on `propext`, `Classical.choice`, `Quot.sound`.
 - **Abstract Nash–Moser, fixed parameter.** `exists_projectiveNewton_fixed_branch`
   (`Analysis/ProjectiveNewtonFixedBranch.lean`).
 - **Lemmas for §5–§9** (21 modules added on 2026-11-11, listed in `docs/archive/2026-11-11-lemmas.md`).
@@ -44,8 +53,8 @@ The 8 modules that do not compile are unfinished files of the earlier workflow:
 ## What is not proved
 
 `Nonempty FlatAnnularCore`, i.e. paper §3–§10: the accumulating radial reference (§4–§6),
-the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9) and its
-endpoint regularity (§10).
+the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9). The passage from a point solution to the endpoint-regular
+annular core (§10) is now proved conditionally in N12; existence of that point solution remains open.
 
 ## Blueprint v4
 
@@ -67,9 +76,9 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (35): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
+Open nodes (34): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
 R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
-N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve, N12.
+N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
 Lean statements follow the manuscript and are not frozen: Tool-OneHighFactor (Lemmas 7.2, 7.3),
@@ -78,8 +87,8 @@ Tool-R10a-Inner (Lemma 6.3), Tool-R10a-Outer (Lemmas 6.4, 6.5).
 
 One task file each in `docs/tasks/` (40 in total).
 
-Whether each node can be derived from its hypotheses is tested by its line; `N12` and `Solve`
-are the first real tests of the chain. `R10a` has one frozen statement for the inner and the outer
+Whether each node can be derived from its hypotheses is tested by its line. `N12` has
+passed this test with its original statement; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
@@ -125,6 +134,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 35 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 34 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
