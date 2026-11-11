@@ -169,6 +169,33 @@ local instance n07bScalarBridgeDomainNormedAddCommGroup :
 local instance n07bScalarBridgeDomainNormedSpace :
     NormedSpace ℝ B.Space := Submodule.normedSpace _
 
+-- The physical inverse uses projective-limit spaces, not normed spaces.
+-- Cache their inherited algebra and topology before elaborating its value.
+local instance n07bScalarBridgePhysicalHeightAddCommGroup :
+    AddCommGroup (S.height (3 / 4 : ℝ)).Space := inferInstance
+local instance n07bScalarBridgePhysicalHeightModule :
+    Module ℝ (S.height (3 / 4 : ℝ)).Space := inferInstance
+local instance n07bScalarBridgePhysicalHeightTopology :
+    TopologicalSpace (S.height (3 / 4 : ℝ)).Space := inferInstance
+local instance n07bScalarBridgeSourceAddCommGroup :
+    AddCommGroup S.Source := Submodule.addCommGroup S.Q.toLinearMap.ker
+local instance n07bScalarBridgeSourceModule :
+    Module ℝ S.Source := Submodule.module S.Q.toLinearMap.ker
+local instance n07bScalarBridgeSourceTopology :
+    TopologicalSpace S.Source := inferInstance
+local instance n07bScalarBridgeHeightPairAddCommGroup :
+    AddCommGroup (HeightPair S) := inferInstance
+local instance n07bScalarBridgeHeightPairModule :
+    Module ℝ (HeightPair S) := inferInstance
+local instance n07bScalarBridgeHeightPairTopology :
+    TopologicalSpace (HeightPair S) := inferInstance
+local instance n07bScalarBridgeScalarValueAddCommGroup :
+    AddCommGroup (HeightPair S × ℝ) := inferInstance
+local instance n07bScalarBridgeScalarValueModule :
+    Module ℝ (HeightPair S × ℝ) := inferInstance
+local instance n07bScalarBridgeScalarValueTopology :
+    TopologicalSpace (HeightPair S × ℝ) := inferInstance
+
 set_option diagnostics true in
 /-- At each state the represented physical scalar solution is the actual
 chosen Banach solution, with all scalar coordinates retained. The only
