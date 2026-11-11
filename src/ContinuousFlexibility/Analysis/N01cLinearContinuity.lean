@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Normed.Module.Seminorm.Basic
+import Mathlib.Analysis.Normed.Module.Basic
 import Mathlib.Analysis.Normed.Group.Continuity
 import Mathlib.Topology.Algebra.Group.Neighborhood
 

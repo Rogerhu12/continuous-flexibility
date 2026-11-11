@@ -72,7 +72,8 @@ theorem hasProjectiveJetsOn_of_contDiffOn {V : Set Y} {g : Y → Z}
       continuous_snd.continuousOn
   · intro n x hx w v
     have hc : HasDerivAt (fun t : ℝ => x + t • w) w 0 := by
-      simpa only [id_eq, one_smul] using ((hasDerivAt_id 0).smul_const w).const_add x
+      simpa only [id_eq, one_smul] using
+        ((hasDerivAt_id (0 : ℝ)).smul_const w).const_add x
     have hgx : ContDiffAt ℝ ∞ g (x + (0 : ℝ) • w) := by
       simpa only [zero_smul, add_zero] using hg.contDiffAt (hV.mem_nhds hx)
     simpa only [HasProjectiveLineDerivAt, zero_smul, add_zero] using
@@ -102,11 +103,14 @@ private theorem compositionTerm_hasLineDerivAt_normed
     simpa only [zero_smul, add_zero] using hg.contDiffAt (hV.mem_nhds (hmap hx))
   have hcoeff : ContinuousAt
       (fun t : ℝ => iteratedFDeriv ℝ c.length g (u (x + t • w))) 0 :=
-    (houter.continuousAt_iteratedFDeriv (by simp)).comp hcurve.continuousAt
+    ContinuousAt.comp (f := fun t : ℝ => u (x + t • w)) (x := (0 : ℝ))
+      (houter.continuousAt_iteratedFDeriv (by simp)) hcurve.continuousAt
   have hB (vs : Fin c.length → Y) :
       ContinuousAt (fun p : ℝ × (Fin c.length → Y) =>
         iteratedFDeriv ℝ c.length g (u (x + p.1 • w)) p.2) (0, vs) :=
-    (hcoeff.comp continuousAt_fst).eval continuousAt_snd
+    (ContinuousAt.comp
+      (f := fun p : ℝ × (Fin c.length → Y) => p.1) (x := ((0 : ℝ), vs))
+      hcoeff continuousAt_fst).eval continuousAt_snd
   have hslots (i : Fin c.length) :
       HasProjectiveCurveDerivAt
         (fun t : ℝ => J (c.partSize i) (x + t • w) (v ∘ c.emb i))
@@ -327,15 +331,14 @@ def smoothDirections_polarCoefficients {U : Set X}
       fun x => radialPartial (heightAngular (z x)) p,
       fun x => angularPartial (heightAngular (z x)) p]
   have J : ∀ i, SmoothDirections U (f i) := by
-    intro i
-    fin_cases i
-    · exact JE
-    · exact JEr
-    · exact Jk
-    · exact Jp
-    · exact Jkr
-    · exact Jpr
-    · exact Jpθ
+    refine Fin.cases JE ?_
+    refine Fin.cases JEr ?_
+    refine Fin.cases Jk ?_
+    refine Fin.cases Jp ?_
+    refine Fin.cases Jkr ?_
+    refine Fin.cases Jpr ?_
+    refine Fin.cases Jpθ ?_
+    exact Fin.elim0
   exact smoothDirections_scalarCoefficients p.1 f J hD hQ
 
 end ScalarCoefficientCalculus
@@ -346,6 +349,7 @@ namespace ContinuousFlexibility.Statements
 
 open ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency true in
 /-- Direct specialization to the actual N01 coefficient families, at one
 fixed spatial point and on the supplied common parameter domain. -/
 def originalCoefficientsSmoothDirections
@@ -369,8 +373,20 @@ def originalCoefficientsSmoothDirections
       (angularPartial (heightAngular (stateHeight D S C z)) p) ≠ 0) :
     SmoothDirections U (fun z => (originalCoefficients D S C z).a p) ×
     SmoothDirections U (fun z => (originalCoefficients D S C z).b p) ×
-    SmoothDirections U (fun z => (originalCoefficients D S C z).c p) :=
-  smoothDirections_polarCoefficients (fun z => stateProfile D S C z.1)
-    (stateHeight D S C) p JE JEr Jk Jp Jkr Jpr Jpθ hD hQ
+    SmoothDirections U (fun z => (originalCoefficients D S C z).c p) := by
+  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
+  let w : (AnnularState S × ℝ) → ℝ → ℝ :=
+    fun z : AnnularState S × ℝ => stateProfile D S C z.1
+  let h : (AnnularState S × ℝ) → PolarPoint → ℝ := stateHeight D S C
+  let J : SmoothDirections U (fun z => polarLinearA (w z) (h z) p) ×
+      SmoothDirections U (fun z => polarLinearB (w z) (h z) p) ×
+      SmoothDirections U (fun z => polarCorrectedC (w z) (h z) p) :=
+    smoothDirections_polarCoefficients (X := AnnularState S × ℝ) (U := U)
+      w h p JE JEr Jk Jp Jkr Jpr Jpθ hD hQ
+  refine ⟨J.1.congr ?_, J.2.1.congr ?_, J.2.2.congr ?_⟩
+  all_goals
+    intro z _
+    rfl
 
 end ContinuousFlexibility.Statements

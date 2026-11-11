@@ -86,21 +86,28 @@ private theorem continuous_projective_sub_const
   simp only [map_sub]
   exact ((projectiveCoordinate E bond n).continuous.sub continuous_const).tendsto x
 
+set_option backward.isDefEq.respectTransparency true in
 /-- Product continuity uses only scalar and projective-coordinate translations. -/
 private theorem continuous_annularState_sub_const (S : PhysicalSpacesData)
     (y : AnnularState S) : Continuous (fun x : AnnularState S => x - y) := by
   have hheight : Continuous (fun x : AnnularState S => x.1.1 - y.1.1) :=
-    (continuous_projective_sub_const (S.height (3 / 4 : ℝ)).bond y.1.1).comp
+    (continuous_projective_sub_const
+      (E := fun n => (S.height (3 / 4 : ℝ)).level n)
+      (S.height (3 / 4 : ℝ)).bond y.1.1).comp
       (continuous_fst.comp continuous_fst)
   have hc : Continuous (fun x : AnnularState S => x.1.2 - y.1.2) :=
     (continuous_snd.comp continuous_fst).sub continuous_const
   have hν : Continuous (fun x : AnnularState S => x.2.1 - y.2.1) :=
     (continuous_fst.comp continuous_snd).sub continuous_const
   have hκ : Continuous (fun x : AnnularState S => x.2.2.1 - y.2.2.1) :=
-    (continuous_projective_sub_const (S.circle (3 / 4 : ℝ)).bond y.2.2.1).comp
+    (continuous_projective_sub_const
+      (E := fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond y.2.2.1).comp
       (continuous_fst.comp (continuous_snd.comp continuous_snd))
   have hchart : Continuous (fun x : AnnularState S => x.2.2.2 - y.2.2.2) :=
-    (continuous_projective_sub_const (S.circle (3 / 4 : ℝ)).bond y.2.2.2).comp
+    (continuous_projective_sub_const
+      (E := fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond y.2.2.2).comp
       (continuous_snd.comp (continuous_snd.comp continuous_snd))
   exact (hheight.prodMk hc).prodMk (hν.prodMk (hκ.prodMk hchart))
 
@@ -119,12 +126,18 @@ theorem isOpen_stateNeighborhood (S : PhysicalSpacesData) (C : NonlinearGeometry
   have hradius : Continuous (fun _ : AnnularState S × ℝ => ε) := continuous_const
   exact (isOpen_lt hstate hradius).inter (isOpen_lt hparameter hradius)
 
+set_option backward.isDefEq.respectTransparency true in
 /-- The same reference belongs to every positive-radius state neighbourhood. -/
 theorem reference_mem_stateNeighborhood (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (base : ℕ) {ε : ℝ} (hε : 0 < ε) :
     (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
   constructor
-  · simpa only [sub_self, map_zero] using hε
+  · have hzero : C.referenceState - C.referenceState = (0 : AnnularState S) :=
+      sub_self C.referenceState
+    have hgrade : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
+      (congrArg (fun x : AnnularState S => stateGrading S base x) hzero).trans
+        (map_zero (stateGrading S base))
+    exact hgrade.trans_lt hε
   · simpa only [abs_zero] using hε
 
 /-- Increasing the controlling order and decreasing the radius preserves
@@ -215,6 +228,7 @@ private theorem nestedProd_control_sub {A B C D E : Type*}
     (x - y).2.2.1 = x.2.2.1 - y.2.2.1 := by
   rw [Prod.snd_sub, Prod.snd_sub, Prod.fst_sub]
 
+set_option backward.isDefEq.respectTransparency true in
 /-- The displacement has the same control component because the reference
 control sequence is zero. -/
 theorem stateKappa_sub_reference {D : ReferenceData} {S : PhysicalSpacesData}
@@ -223,10 +237,14 @@ theorem stateKappa_sub_reference {D : ReferenceData} {S : PhysicalSpacesData}
     stateKappa S (x - C.referenceState) m = stateKappa S x m := by
   have hkappa : C.referenceState.2.2.1 = 0 := href.2.2.2.1
   have hcomponent : (x - C.referenceState).2.2.1 = x.2.2.1 :=
-    (nestedProd_control_sub x C.referenceState).trans (by rw [hkappa, sub_zero])
+    (nestedProd_control_sub
+      (A := (S.height (3 / 4 : ℝ)).Space) (B := ℝ) (C := ℝ)
+      (D := CircleSpace S) (E := CircleSpace S) x C.referenceState).trans
+      ((congrArg (fun u : CircleSpace S => x.2.2.1 - u) hkappa).trans (sub_zero x.2.2.1))
   exact stateKappa_eq_of_controlComponent_eq
     (x := x - C.referenceState) (y := x) hcomponent m
 
+set_option backward.isDefEq.respectTransparency true in
 /-- A common low-order state ball gives one uniform smallness bound for
 every actual control mean. -/
 theorem abs_stateKappa_le_radius {D : ReferenceData} {T : MaterialData}
@@ -240,14 +258,15 @@ theorem abs_stateKappa_le_radius {D : ReferenceData} {T : MaterialData}
         T.H (T.sample m) ^ (3 / 4 : ℝ) := by
   have h := abs_stateKappa_le_stateGrading_of_accumulatingProfile hS hT hRef
     (z.1 - C.referenceState) base m
-  rw [stateKappa_sub_reference href] at h
+  have hmean : |stateKappa S z.1 m| = |stateKappa S (z.1 - C.referenceState) m| :=
+    congrArg abs (stateKappa_sub_reference href z.1 m).symm
   have hconstant : 0 ≤ (1 / Real.pi) * Real.sqrt Real.pi :=
     mul_nonneg (div_nonneg zero_le_one Real.pi_pos.le) (Real.sqrt_nonneg _)
   obtain ⟨_, hbounds⟩ := hRef
   have hH : 0 < T.H (T.sample m) :=
     (hT.2.1 _ (materialSample_mem_radialCore hT hbounds.2.1 m)).2.1
-  exact h.trans (mul_le_mul_of_nonneg_right
-    (mul_le_mul_of_nonneg_left hz.1.le hconstant) (Real.rpow_nonneg hH.le _))
+  exact hmean.trans_le (h.trans (mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_left hz.1.le hconstant) (Real.rpow_nonneg hH.le _)))
 
 section Restriction
 
