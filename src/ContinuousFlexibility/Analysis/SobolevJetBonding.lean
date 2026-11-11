@@ -122,7 +122,8 @@ theorem sobolevJetBonding_coe (s : Set ℝ) (hs : MeasurableSet s)
       sobolevJetTruncate F s hkm (v : SobolevJetAmbient F s m) := by
   have he : (fun u : SobolevJetCompletion F s hs hu m ↦
         (sobolevJetBonding F s hs hu hkm u : SobolevJetAmbient F s k)) =
-      (fun u ↦ sobolevJetTruncate F s hkm (u : SobolevJetAmbient F s m)) :=
+      (fun u : SobolevJetCompletion F s hs hu m ↦
+        sobolevJetTruncate F s hkm (u : SobolevJetAmbient F s m)) :=
     (coreToSobolevJet_denseRange F s hs hu m).equalizer
       (continuous_subtype_val.comp (sobolevJetBonding F s hs hu hkm).continuous)
       ((sobolevJetTruncate F s hkm).continuous.comp continuous_subtype_val) (by
