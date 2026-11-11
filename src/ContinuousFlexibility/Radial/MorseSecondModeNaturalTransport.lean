@@ -38,9 +38,11 @@ theorem hasDerivAt_tailPhysicalRadius (right : Bool) (x : ℝ) :
     HasDerivAt (tailPhysicalRadius right)
       ((if right then 1 else -1 : ℝ) * tailPhysicalRadius right x) x := by
   cases right
-  · simpa only [tailPhysicalRadius, Bool.false_eq_true, ↓reduceIte,
-      mul_neg, mul_one, neg_one_mul] using ((hasDerivAt_id x).neg).exp
-  · simpa only [tailPhysicalRadius, ↓reduceIte, one_mul] using hasDerivAt_exp x
+  · change HasDerivAt (fun y : ℝ => exp (-y)) ((-1 : ℝ) * exp (-x)) x
+    simpa only [Pi.neg_apply, id_eq, mul_neg, mul_one, neg_one_mul] using
+      ((hasDerivAt_id x).neg).exp
+  · change HasDerivAt exp ((1 : ℝ) * exp x) x
+    simpa only [one_mul] using hasDerivAt_exp x
 
 theorem tailPhysicalRadius_injective (right : Bool) :
     Function.Injective (tailPhysicalRadius right) := by
@@ -127,7 +129,7 @@ theorem morseSecondModePullback_memLp {T : MorseChainData} {σ : ℕ → ℝ}
       (sq_nonneg r)
   have hρmeas : Measurable (fun r => ENNReal.ofReal (ρ r)) :=
     ((measurable_const.mul hD.2.2.1.1.continuous.measurable).div
-      (measurable_id.pow 2)).ennreal_ofReal
+      (measurable_id.pow_const 2)).ennreal_ofReal
   have hmeasure : (radialHilbertMeasure D).restrict J =
       (volume.restrict J).withDensity (fun r => ENNReal.ofReal (ρ r)) := by
     rw [radialHilbertMeasure, restrict_withDensity hJ,
@@ -137,7 +139,7 @@ theorem morseSecondModePullback_memLp {T : MorseChainData} {σ : ℕ → ℝ}
   have hweighted := (integrable_withDensity_iff_integrable_smul'
     hρmeas (by simp)).mp hu₂
   have hweighted' : IntegrableOn (fun r => ρ r * u r ^ 2) J := by
-    simpa only [ENNReal.toReal_ofReal (hρ _), smul_eq_mul] using hweighted
+    simpa only [IntegrableOn, ENNReal.toReal_ofReal (hρ _), smul_eq_mul] using hweighted
   have hchange := integrableOn_image_iff_integrableOn_abs_deriv_smul
     (f := tailPhysicalRadius right)
     (f' := fun x => (if right then 1 else -1 : ℝ) * tailPhysicalRadius right x)
@@ -170,7 +172,7 @@ theorem morseSecondModePullback_memLp {T : MorseChainData} {σ : ℕ → ℝ}
   change Integrable (fun x => morseSecondModePullback D right u x ^ 2)
     ((volume.restrict I).withDensity (fun x => ENNReal.ofReal (t.p x)))
   apply (integrable_withDensity_iff_integrable_smul' hpmeas (by simp)).mpr
-  simpa only [ENNReal.toReal_ofReal (hpnonneg _), smul_eq_mul] using hpull'
+  simpa only [IntegrableOn, ENNReal.toReal_ofReal (hpnonneg _), smul_eq_mul] using hpull'
 
 theorem morseSecondMode_radius_mem_naturalTail {T : MorseChainData} {σ : ℕ → ℝ}
     {D : ReferenceData} {C : ℕ → ℝ} {N : ℕ} {right : Bool} {entry x : ℝ}
@@ -248,7 +250,12 @@ theorem morseSecondModePullback_naturalEquation {T : MorseChainData} {σ : ℕ �
     have hz := (mul_eq_zero.mp hzero).resolve_left (neg_ne_zero.mpr hfactor.ne')
     have hp : t.p x ≠ 0 :=
       (morseSecondMode_density_pos hreal hN right ⟨hx.1.le, hx.2⟩).ne'
-    field_simp [hp] at hz
-    nlinarith only [hz]
+    change -(t.p x)⁻¹ * deriv (fun y => t.p y * deriv V y) x - t.Λ * V x = 0 at hz
+    change deriv (fun y => t.p y * deriv V y) x + t.Λ * t.p x * V x = 0
+    have hdiv : deriv (fun y => t.p y * deriv V y) x / t.p x = -(t.Λ * V x) := by
+      rw [div_eq_mul_inv]
+      nlinarith only [hz]
+    have hmul := (div_eq_iff hp).mp hdiv
+    nlinarith only [hmul]
 
 end ContinuousFlexibility.Radial

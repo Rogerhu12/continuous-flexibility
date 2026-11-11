@@ -53,7 +53,7 @@ theorem exists_seedPreparedSelectedTail (hR07 : R07Statement) :
   refine ⟨seedSelectedTailAtBand S n, isSelectedTail_seedSelectedTailAtBand hS hn, ?_, ?_⟩
   · have hL := (hdata false).2.2.2.2.2.1
     have hR := (hdata true).2.2.2.2.2.1
-    change S.entry false n < S.entry true n
+    simp only [seedSelectedTailAtBand, if_pos rfl]
     rw [hL, hR]
     exact morseRealization_seams_order hreal hn.1
   · intro right

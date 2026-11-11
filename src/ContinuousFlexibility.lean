@@ -464,3 +464,5 @@ import ContinuousFlexibility.Radial.OpenComponentTransport
 import ContinuousFlexibility.Radial.SeedGluedPairConstruction
 import ContinuousFlexibility.Radial.SeedPureTailCanonical
 import ContinuousFlexibility.Radial.SeedReferenceTheorem
+import ContinuousFlexibility.Radial.RadialTailSmoothExtension
+import ContinuousFlexibility.Radial.SeedConeTailGluing
