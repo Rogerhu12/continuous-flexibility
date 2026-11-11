@@ -22,11 +22,6 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base loss : ℕ} {ε : ℝ}
 
-/-- The actual reconstructed height, including its left constant tail. -/
-def n06PhysicalHeight (K : CanonicalData S) (z : AnnularState S × ℝ)
-    (W : ℕ → PolarPoint → ℝ) (aL : ℝ) (p : PolarPoint) : ℝ :=
-  n06PhysicalReconstruct K z W (K.height z) p + aL * S.chiLeft p.1
-
 theorem n06PhysicalHeight_periodic
     (hN04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)

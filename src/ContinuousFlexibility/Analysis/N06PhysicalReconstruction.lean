@@ -145,14 +145,29 @@ theorem n06PhysicalReconstruct_periodic
       (hchart p hp).2.2.1, n06CanonicalPeriodize_periodic]
   · simp only [n06PhysicalReconstruct, Prod.fst_add, add_zero, ite_eq_right hex]
 
-/-- These are genuine physical representatives of every canonical unknown
-and source. The separate weak-equation and transmission obligations remain. -/
-theorem n06_exists_physical_representation
+/-- The actual reconstructed height, including its left constant tail. -/
+def n06PhysicalHeight (K : CanonicalData S) (z : AnnularState S × ℝ)
+    (W : ℕ → PolarPoint → ℝ) (aL : ℝ) (p : PolarPoint) : ℝ :=
+  n06PhysicalReconstruct K z W (K.height z) p + aL * S.chiLeft p.1
+
+/-- The actual inverse source transform on the physical piece cover. -/
+def n06PhysicalSource (K : CanonicalData S) (z : AnnularState S × ℝ)
+    (F : ℕ → PolarPoint → ℝ) : PolarPoint → ℝ :=
+  n06PhysicalReconstruct K z F
+    (fun m p => |planeJacobian (K.chart z m) p| / K.height z m p)
+
+/-- The named reconstruction satisfies both actual canonical identities.
+The separate weak-equation and transmission obligations remain. -/
+theorem n06_physical_representation
     (hN04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (U : CanonicalUnknown S K) (F : CanonicalSequence S K) :
-    ∃ η f : PolarPoint → ℝ, HasCanonicalRepresentation D S C K z U F η f ∧
-      Function.Periodic η (0, Real.pi) := by
+    HasCanonicalRepresentation D S C K z U F
+      (n06PhysicalHeight K z (fun m => (U.1 m : PolarPoint → ℝ)) U.2.1)
+      (n06PhysicalSource K z (fun m => (F m : PolarPoint → ℝ))) ∧
+      Function.Periodic
+        (n06PhysicalHeight K z (fun m => (U.1 m : PolarPoint → ℝ)) U.2.1)
+        (0, Real.pi) := by
   let W : ℕ → PolarPoint → ℝ := fun m => (U.1 m : PolarPoint → ℝ)
   let G : ℕ → PolarPoint → ℝ := fun m => (F m : PolarPoint → ℝ)
   let η : PolarPoint → ℝ := fun p =>
@@ -168,7 +183,7 @@ theorem n06_exists_physical_representation
     change n06PhysicalReconstruct K z W (K.height z) (p + (0, Real.pi)) +
       U.2.1 * S.chiLeft (p + (0, Real.pi)).1 = _
     rw [hWperiod p, Prod.fst_add, add_zero]
-  refine ⟨η, f, ⟨?_, ?_⟩, hηperiod⟩
+  refine ⟨⟨?_, ?_⟩, hηperiod⟩
   · intro m
     filter_upwards [ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp
     have hpc : p ∈ canonicalOpen S K m := ⟨hp.1, mem_univ _⟩
@@ -199,5 +214,15 @@ theorem n06_exists_physical_representation
     rw [hrec]
     dsimp only [G]
     field_simp
+
+/-- Every canonical unknown and source have actual physical representatives. -/
+theorem n06_exists_physical_representation
+    (hN04 : N04Properties D T S C L K base loss ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (U : CanonicalUnknown S K) (F : CanonicalSequence S K) :
+    ∃ η f : PolarPoint → ℝ, HasCanonicalRepresentation D S C K z U F η f ∧
+      Function.Periodic η (0, Real.pi) :=
+  ⟨_, _, (n06_physical_representation hN04 hz hs U F).1,
+    (n06_physical_representation hN04 hz hs U F).2⟩
 
 end ContinuousFlexibility.Statements
