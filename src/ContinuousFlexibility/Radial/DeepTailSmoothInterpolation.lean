@@ -56,6 +56,25 @@ theorem morseOutwardGlue_apply_closed {node : ℕ → ℝ} {piece : ℕ → ℝ 
         ⟨le_rfl, hmono (Nat.lt_succ_self (n + 1))⟩)]
     exact (hmatch n).symm
 
+/-- Near the first node, the inward convention and the first outward edge
+select the same piece. No regularity of later pieces is needed. -/
+theorem morseOutwardGlue_eventually_first {node : ℕ → ℝ} {piece : ℕ → ℝ → ℝ}
+    (hmono : StrictMono node) :
+    morseOutwardGlue node piece =ᶠ[𝓝 (node 0)] piece 0 := by
+  filter_upwards [Iio_mem_nhds (hmono (Nat.lt_succ_self 0))] with x hx
+  by_cases h : x < node 0
+  · simp only [morseOutwardGlue, ite_eq_left h]
+  · exact morseOutwardGlue_apply_block hmono ⟨le_of_not_gt h, hx⟩
+
+/-- The actual entrance is `C¹` when the first Poisson piece is globally
+`C¹`; no all-order extension of the density through the entrance is used. -/
+theorem contDiffAt_one_morseOutwardGlue_first {node : ℕ → ℝ} {piece : ℕ → ℝ → ℝ}
+    (hmono : StrictMono node) (hpiece : Differentiable ℝ (piece 0))
+    (hdpiece : Continuous (deriv (piece 0))) :
+    ContDiffAt ℝ 1 (morseOutwardGlue node piece) (node 0) :=
+  (contDiff_one_iff_deriv.mpr ⟨hpiece, hdpiece⟩).contDiffAt.congr_of_eventuallyEq
+    (morseOutwardGlue_eventually_first hmono)
+
 /-- Piecewise differentiation across all nodes, using only derivatives
 within each closed edge and matching first derivative values. -/
 theorem hasDerivAt_morseOutwardGlue {node : ℕ → ℝ} {endpoint : ℝ}

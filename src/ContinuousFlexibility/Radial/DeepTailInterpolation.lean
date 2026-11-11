@@ -29,8 +29,10 @@ theorem tailEdge_interpolant_square_bound {a b : ℝ} (hab : a ≤ b)
     (h₁ : (∫ x in a..b, p x * v₁ x ^ 2) ≤ M₁) (c₀ c₁ : ℝ) :
     (∫ x in a..b, p x * (c₀ * v₀ x + c₁ * v₁ x) ^ 2) ≤
       2 * (M₀ * c₀ ^ 2 + M₁ * c₁ ^ 2) := by
-  have hi₀ := (hp.mul (hv₀.pow 2)).intervalIntegrable_of_Icc (μ := volume) hab
-  have hi₁ := (hp.mul (hv₁.pow 2)).intervalIntegrable_of_Icc (μ := volume) hab
+  have hi₀ : IntervalIntegrable (fun x => p x * v₀ x ^ 2) volume a b :=
+    (hp.mul (hv₀.pow 2)).intervalIntegrable_of_Icc hab
+  have hi₁ : IntervalIntegrable (fun x => p x * v₁ x ^ 2) volume a b :=
+    (hp.mul (hv₁.pow 2)).intervalIntegrable_of_Icc hab
   have hi : IntervalIntegrable (fun x => p x * (c₀ * v₀ x + c₁ * v₁ x) ^ 2)
       volume a b :=
     (hp.mul (((hv₀.const_mul c₀).add (hv₁.const_mul c₁)).pow 2)).intervalIntegrable_of_Icc hab
@@ -44,10 +46,13 @@ theorem tailEdge_interpolant_square_bound {a b : ℝ} (hab : a ≤ b)
           2 * (c₀ * v₀ x) ^ 2 + 2 * (c₁ * v₁ x) ^ 2 := by
         nlinarith only [sq_nonneg (c₀ * v₀ x - c₁ * v₁ x)]
       have hh := mul_le_mul_of_nonneg_left hs (hp₀ x hx)
-      convert hh using 1 <;> ring
+      convert hh using 1 <;> simp only [Pi.mul_apply, Pi.pow_apply] <;> ring
     _ = (2 * c₀ ^ 2) * (∫ x in a..b, p x * v₀ x ^ 2) +
         (2 * c₁ ^ 2) * (∫ x in a..b, p x * v₁ x ^ 2) := by
-      rw [intervalIntegral.integral_add (hi₀.const_mul _) (hi₁.const_mul _),
+      rw [intervalIntegral.integral_add
+        (f := fun x => (2 * c₀ ^ 2) * (p x * v₀ x ^ 2))
+        (g := fun x => (2 * c₁ ^ 2) * (p x * v₁ x ^ 2))
+        (hi₀.const_mul _) (hi₁.const_mul _),
         intervalIntegral.integral_const_mul, intervalIntegral.integral_const_mul]
     _ ≤ (2 * c₀ ^ 2) * M₀ + (2 * c₁ ^ 2) * M₁ :=
       add_le_add (mul_le_mul_of_nonneg_left h₀ (by positivity))

@@ -77,16 +77,15 @@ theorem physical_exists_smooth_linearState {a b : ℝ → ℝ}
     contDiff_const.prodMk
       (((ha.comp contDiff_fst).mul (contDiff_snd.comp contDiff_snd)).prodMk
         ((hb.comp contDiff_fst).mul (contDiff_fst.comp contDiff_snd)))
+  have hF₁ : ContDiffAt ℝ 1 F (c, z₀) := hF.contDiffAt.of_le (by simp)
   obtain ⟨α, hα₀, ε, hε, hα⟩ :=
-    (hF.contDiffAt.of_le (show (1 : WithTop ℕ∞) ≤ ∞ by simp)).
-      exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀ c
-        (x₀ := (c, z₀))
+    hF₁.exists_forall_mem_closedBall_exists_eq_forall_mem_Ioo_hasDerivAt₀ c
   have ht : ∀ t ∈ Ioo (c - ε) (c + ε),
       HasDerivAt (fun x => (α x).1) 1 t := by
     intro t ht
     exact (ContinuousLinearMap.fst ℝ ℝ (ℝ × ℝ)).hasFDerivAt.comp_hasDerivAt t (hα t ht)
   have htime : EqOn (fun t => (α t).1) id (Ioo (c - ε) (c + ε)) := by
-    apply isOpen_Ioo.eqOn_of_deriv_eq isPreconnected_Ioo
+    apply isOpen_Ioo.eqOn_of_deriv_eq (x := c) isPreconnected_Ioo
       (fun t ht' => (ht t ht').differentiableAt.differentiableWithinAt)
       differentiable_id.differentiableOn
     · intro t ht'
@@ -165,7 +164,7 @@ theorem physical_extend_inward {f g a b : ℝ → ℝ} {U : Set ℝ} {c d : ℝ}
     filter_upwards [haeq, hbeq, Ioo_mem_nhds (show c - ε < c by linarith)
       (show c < c + ε by linarith), eventually_lt_nhds hcd] with x ha' hb' hx hd
     exact ⟨ha', hb', hx, hd⟩
-  obtain ⟨l, r, hl, hr, hsub⟩ := hnear.exists_Ioo_subset
+  obtain ⟨l, r, ⟨hl, hr⟩, hsub⟩ := hnear.exists_Ioo_subset
   let e := (c + r) / 2
   have hce : c < e := by dsimp [e]; linarith
   have her : e < r := by dsimp [e]; linarith
@@ -292,7 +291,7 @@ theorem physical_flat_extension_from_right {f g a b : ℝ → ℝ} {U : Set ℝ}
         (continuous_neg.continuousAt (x := -c)).tendsto.mono_left nhdsWithin_le_nhds
     · filter_upwards [self_mem_nhdsWithin] with t ht
       change c < -t
-      linarith
+      simpa only [neg_neg] using neg_lt_neg (show t < -c from ht)
   have hlim' (k : ℕ) : Tendsto (iteratedDeriv k (fun t => f (-t)))
       (𝓝[<] (-c)) (𝓝 0) := by
     have heq : iteratedDeriv k (fun t => f (-t)) =

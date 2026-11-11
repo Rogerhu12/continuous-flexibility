@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.TailClampedResistance
 import ContinuousFlexibility.Radial.TailMassResistanceData
 import ContinuousFlexibility.Radial.TailEdgeFluxMatrix
+import ContinuousFlexibility.Radial.TailPhysicalGreenContinuity
 
 /-!
 # The actual potential on a compact deep-tail edge
@@ -36,6 +37,55 @@ theorem tailClampedEdgePotential_apply {p : ℝ → ℝ} {a b : ℝ}
       (tailResistanceChart (tailClampedDensity p a b hab) a b)) :
     tailClampedEdgePotential hab hp hpos Λ s =
       Λ * tailResistanceDensity (tailClampedDensity p a b hab) a s := rfl
+
+/-- The integral-operator contraction size in the fixed physical interval
+is exactly the contraction size in the moving resistance interval. -/
+theorem tailPhysicalGreenWeight_diagonal_eq {p : ℝ → ℝ} {a b Λ : ℝ}
+    (hab : a < b) (hp : ContinuousOn p (Icc a b))
+    (hpos : ∀ x ∈ Icc a b, 0 < p x) :
+    (∫ t in a..b, tailPhysicalGreenWeight p a b hab.le Λ t t) =
+      tailEdgeDiagonalSize
+        ((tailResistanceChart_strictMono (tailClampedDensity_continuous hab.le hp)
+          (tailClampedDensity_pos hab.le hpos) a) hab)
+        (tailClampedEdgePotential hab.le hp hpos Λ) := by
+  let P := tailClampedDensity p a b hab.le
+  let S := tailResistanceChart P a
+  let ρ := tailResistanceDensity P a
+  let q := tailClampedEdgePotential hab.le hp hpos Λ
+  have hS := tailResistanceChart_strictMono (tailClampedDensity_continuous hab.le hp)
+    (tailClampedDensity_pos hab.le hpos) a
+  have hS0 : S a = 0 := intervalIntegral.integral_same
+  have hG : Continuous (fun s => tailEdgeGreen (S a) (S b) s s) := by
+    simp only [tailEdgeGreen_self]
+    exact ((continuous_id.sub continuous_const).mul
+      (continuous_const.sub continuous_id)).div_const _
+  symm
+  change tailEdgeDiagonalSize (hS hab) q = _
+  calc
+    _ = Λ * ∫ s in S a..S b, ρ s * tailEdgeGreen (S a) (S b) s s := by
+      rw [tailEdgeDiagonalSize, ← intervalIntegral.integral_const_mul]
+      apply intervalIntegral.integral_congr
+      rw [uIcc_of_le (hS hab).le]
+      intro s hs
+      dsimp only
+      rw [IccExtend_of_mem (hS hab).le q hs]
+      change tailEdgeGreen (S a) (S b) s s * (Λ * ρ s) = _
+      ring
+    _ = Λ * ∫ x in a..b, p x * tailEdgeGreen (S a) (S b) (S x) (S x) := by
+      exact congrArg (fun z : ℝ => Λ * z)
+        (tailClampedResistance_mass_change hab.le hp hpos hG
+          ⟨le_rfl, hab.le⟩ ⟨hab.le, le_rfl⟩)
+    _ = _ := by
+      rw [← intervalIntegral.integral_const_mul]
+      apply intervalIntegral.integral_congr
+      rw [uIcc_of_le hab.le]
+      intro x hx
+      dsimp only [tailPhysicalGreenWeight, tailPhysicalGreenKernel]
+      rw [tailClampedDensity_eq_of_mem hab.le hx]
+      change Λ * (p x * tailEdgeGreen (S a) (S b) (S x) (S x)) =
+        tailEdgeGreen 0 (S b) (S x) (S x) * (Λ * p x)
+      rw [hS0]
+      ring
 
 /-- The contraction size is controlled by the original, untransformed
 mass and resistance integrals on the two parts of the edge. -/

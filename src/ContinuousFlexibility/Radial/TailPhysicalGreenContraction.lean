@@ -39,8 +39,11 @@ theorem norm_tailContinuousKernelAction_sub_le (σ : P) (w : ℝ → ℝ)
     hκ.comp ((continuous_const.prodMk continuous_const).prodMk continuous_id)
   have hu : Continuous (IccExtend hab u) := u.continuous.Icc_extend'
   have hv : Continuous (IccExtend hab v) := v.continuous.Icc_extend'
-  rw [← intervalIntegral.integral_sub ((hk.mul hu).intervalIntegrable a b)
-    ((hk.mul hv).intervalIntegrable a b)]
+  have hiu : IntervalIntegrable (fun t => κ σ x t * IccExtend hab u t) volume a b :=
+    (hk.mul hu).intervalIntegrable a b
+  have hiv : IntervalIntegrable (fun t => κ σ x t * IccExtend hab v t) volume a b :=
+    (hk.mul hv).intervalIntegrable a b
+  rw [← intervalIntegral.integral_sub hiu hiv]
   have heq : (fun t => κ σ x t * IccExtend hab u t - κ σ x t * IccExtend hab v t) =
       (fun t => κ σ x t * IccExtend hab (u - v) t) := by
     funext t
@@ -123,13 +126,13 @@ theorem tailPhysicalGreenStep_contracting {P : Type*} [TopologicalSpace P]
       tailPhysicalGreenWeight (p σ) a b hab.le (Λ σ) t t) ≤ K)
     (σ : P) (base : C(Icc a b, ℝ)) :
     let κ := fun σ x t => tailPhysicalGreenWeight (p σ) a b hab.le (Λ σ) x t
-    let hκ := continuous_tailPhysicalGreenWeight_family p hab hp hpos hΛcont
+    let hκ := continuous_tailPhysicalGreenWeight_family p hab Λ hp hpos hΛcont
     ContractingWith K (fun u => base + tailContinuousKernelAction hab.le κ hκ σ u) := by
   dsimp only
   let κ := fun σ x t => tailPhysicalGreenWeight (p σ) a b hab.le (Λ σ) x t
-  have hκ := continuous_tailPhysicalGreenWeight_family p hab hp hpos hΛcont
+  have hκ := continuous_tailPhysicalGreenWeight_family p hab Λ hp hpos hΛcont
   have hpσ : ContinuousOn (p σ) (Icc a b) := by
-    apply continuousOn_iff_continuous_restrict.mpr
+    apply continuousOn_iff_continuous_domRestrict.mpr
     exact hp.comp (continuous_const.prodMk continuous_id)
   apply tailContinuousKernelStep_contracting hab.le κ hκ K hK σ
     (fun t => κ σ t t)

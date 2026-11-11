@@ -159,7 +159,9 @@ theorem tailNaturalLift_firstOrder {D : ReferenceData} {T : DeepTailData}
   · have hd := hasDerivAt_flux_of_radialJacobi_eq_zero hw
       ((hv.derivWithin (m := ∞) (by simp)).differentiableAt (by simp))
       (tailNaturalLift_radialJacobi ⟨C, hC⟩ hT hphysical hu hx)
-    simpa only [tailPhysicalFlux, div_eq_mul_inv, mul_assoc] using hd.deriv
+    change deriv (fun r => D.w r * deriv (tailPhysicalLift D right j u) r)
+      (tailPhysicalRadius right x) = _
+    simpa only [div_eq_mul_inv, mul_assoc] using hd.deriv
 
 /-- The derivative of the normalized gauge, with the orientation sign
 kept explicit in the logarithmic derivative. -/
@@ -182,7 +184,12 @@ theorem hasDerivAt_tailPhysicalLift {D : ReferenceData} {right : Bool} {j : ℕ}
   have hg := ((hasDerivAt_id r).div_const (tailPhysicalEndpoint D right)).rpow_const
     (p := (j : ℝ) ^ 2) (Or.inl hratio.ne')
   apply (hg.mul (hu.hasDerivAt.comp r hc)).congr_deriv
-  try simp only [rpow_sub hratio, rpow_one]
+  change (1 / tailPhysicalEndpoint D right * (j : ℝ) ^ 2 *
+      (r / tailPhysicalEndpoint D right) ^ ((j : ℝ) ^ 2 - 1)) *
+        u (tailPhysicalLog right r) +
+      (r / tailPhysicalEndpoint D right) ^ ((j : ℝ) ^ 2) *
+        (deriv u (tailPhysicalLog right r) * ((if right then 1 else -1 : ℝ) / r)) = _
+  rw [rpow_sub hratio, rpow_one]
   field_simp [hr.ne', hR.ne'] <;> ring
 
 /-- In the flux formula the singular factor from differentiating the
@@ -205,7 +212,7 @@ theorem tailPhysicalFlux_radius {D : ReferenceData} {T : DeepTailData}
   have hu' : DifferentiableAt ℝ u (tailPhysicalLog right (tailPhysicalRadius right x)) := by
     simpa only [tailPhysicalLog_radius] using (tailNatural_contDiffAt hu hx).differentiableAt
       (by simp)
-  have hd := (hasDerivAt_tailPhysicalLift hR hr hu').deriv
+  have hd := (hasDerivAt_tailPhysicalLift (j := j) hR hr hu').deriv
   simp only [tailPhysicalLog_radius] at hd
   have hp : T.p x =
       ((tailPhysicalRadius right x / tailPhysicalEndpoint D right) ^ ((j : ℝ) ^ 2)) ^ 2 *

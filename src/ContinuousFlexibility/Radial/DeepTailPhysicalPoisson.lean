@@ -71,8 +71,8 @@ theorem exists_tailPhysicalPoissonData {p : ℝ → ℝ} {a b Λ η : ℝ}
   choose U hU hDU hUa hUb hODE hBound hFA hFB hIntegral using
     (fun right : Bool => exists_tailEdgePoisson_classical_integral (hS hab) hq hδ right)
   have hheight (right : Bool) (x : ℝ) :
-      (if right then tailEdgeRightHeight (S a) (S b) (S x)
-        else tailEdgeLeftHeight (S a) (S b) (S x)) =
+      (if right then tailEdgeRightHeight (S a) (S b)
+        else tailEdgeLeftHeight (S a) (S b)) (S x) =
       tailPhysicalHeight p a b hab.le right x := by
     cases right <;>
       simp only [Bool.false_eq_true, ite_false, ite_true, tailEdgeLeftHeight,
@@ -97,8 +97,10 @@ theorem exists_tailPhysicalPoissonData {p : ℝ → ℝ} {a b Λ η : ℝ}
         change e s * (Λ * ρ s) * U right s = _
         ring
       _ = Λ * ∫ x in a..b, p x * (e (S x) * U right (S x)) := by
-        rw [tailClampedResistance_mass_change hab.le hp hpos
-          (he.mul (hU right).continuous) ⟨le_rfl, hab.le⟩ ⟨hab.le, le_rfl⟩]
+        exact congrArg (fun z : ℝ => Λ * z)
+          (tailClampedResistance_mass_change (V := fun s => e s * U right s)
+            hab.le hp hpos (he.mul (hU right).continuous)
+            ⟨le_rfl, hab.le⟩ ⟨hab.le, le_rfl⟩)
       _ = _ := by
         congr 1
         apply intervalIntegral.integral_congr
@@ -147,12 +149,12 @@ theorem exists_tailPhysicalPoissonData {p : ℝ → ℝ} {a b Λ η : ℝ}
       (hasDerivAt_tailClampedResistanceChart hab.le hp hpos hxx)
     have hqx : q ⟨S x, hs x hxx⟩ = Λ * p x ^ 2 := by
       change Λ * ρ (S x) = _
-      rw [tailClampedResistanceDensity_chart hab.le hp hpos hxx]
+      exact congrArg (fun z : ℝ => Λ * z)
+        (tailClampedResistanceDensity_chart hab.le hp hpos hxx)
     apply (hd.congr_of_eventuallyEq heq).congr_deriv
     rw [hqx]
     change -(Λ * p x ^ 2 * U right (S x)) * (p x)⁻¹ = -(Λ * p x * U right (S x))
-    field_simp [(hpos x hxx).ne']
-    <;> ring
+    field_simp [(hpos x hxx).ne'] <;> ring
   · intro right x hx
     have hb := hBound right (S x) (hs x hx)
     rw [hheight right x] at hb
@@ -191,7 +193,7 @@ theorem exists_tailPhysicalPoissonData {p : ℝ → ℝ} {a b Λ η : ℝ}
       rfl
     rw [hint]
     cases right <;> simp only [Bool.false_eq_true, ite_false, ite_true, hS0, sub_zero,
-      neg_div, one_div]
+      neg_div, one_div] <;> rfl
   · intro right
     rw [tailClampedResistance_flux hab.le hp hpos (hU right) ⟨hab.le, le_rfl⟩,
       hFB right, hpair right _ hright]
@@ -204,6 +206,6 @@ theorem exists_tailPhysicalPoissonData {p : ℝ → ℝ} {a b Λ η : ℝ}
       rfl
     rw [hint]
     cases right <;> simp only [Bool.false_eq_true, ite_false, ite_true, hS0, sub_zero,
-      neg_div, one_div]
+      neg_div, one_div] <;> rfl
 
 end ContinuousFlexibility.Radial

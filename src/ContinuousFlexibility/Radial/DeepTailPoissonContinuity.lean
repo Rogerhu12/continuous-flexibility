@@ -86,6 +86,38 @@ theorem right_flux_false (B : TailPhysicalPoissonData p a b Λ η hab)
 
 end TailPhysicalPoissonData
 
+/-- The exact Jacobi diagonal obtained by matching adjacent outward fluxes.
+The entrance coefficient is supplied separately because there may be an
+initial resistance edge before the first mass interval. -/
+def tailPoissonJacobiDiagonal {p : ℝ → ℝ} {node : ℕ → ℝ} {Λ η : ℝ}
+    {hn : ∀ n, node n ≤ node (n + 1)}
+    (B : ∀ n, TailPhysicalPoissonData p (node n) (node (n + 1)) Λ η (hn n))
+    (b₀ : ℝ) : ℕ → ℝ
+  | 0 => b₀
+  | n + 1 => -(B n).rightDiagonal - (B (n + 1)).leftDiagonal
+
+@[simp] theorem tailPoissonJacobiDiagonal_zero {p : ℝ → ℝ} {node : ℕ → ℝ}
+    {Λ η : ℝ} {hn : ∀ n, node n ≤ node (n + 1)}
+    (B : ∀ n, TailPhysicalPoissonData p (node n) (node (n + 1)) Λ η (hn n)) (b₀ : ℝ) :
+    tailPoissonJacobiDiagonal B b₀ 0 = b₀ := rfl
+
+@[simp] theorem tailPoissonJacobiDiagonal_succ {p : ℝ → ℝ} {node : ℕ → ℝ}
+    {Λ η : ℝ} {hn : ∀ n, node n ≤ node (n + 1)}
+    (B : ∀ n, TailPhysicalPoissonData p (node n) (node (n + 1)) Λ η (hn n))
+    (b₀ : ℝ) (n : ℕ) :
+    tailPoissonJacobiDiagonal B b₀ (n + 1) =
+      -(B n).rightDiagonal - (B (n + 1)).leftDiagonal := rfl
+
+def tailPoissonJacobiOffDiagonal {p : ℝ → ℝ} {node : ℕ → ℝ} {Λ η : ℝ}
+    {hn : ∀ n, node n ≤ node (n + 1)}
+    (B : ∀ n, TailPhysicalPoissonData p (node n) (node (n + 1)) Λ η (hn n))
+    (n : ℕ) : ℝ := (B n).offDiagonal
+
+@[simp] theorem tailPoissonJacobiOffDiagonal_apply {p : ℝ → ℝ} {node : ℕ → ℝ}
+    {Λ η : ℝ} {hn : ∀ n, node n ≤ node (n + 1)}
+    (B : ∀ n, TailPhysicalPoissonData p (node n) (node (n + 1)) Λ η (hn n)) (n : ℕ) :
+    tailPoissonJacobiOffDiagonal B n = (B n).offDiagonal := rfl
+
 section Families
 
 variable {P : Type*} [TopologicalSpace P] {a b : ℝ}
@@ -104,7 +136,7 @@ theorem continuous_tailPhysicalPoissonOn (K : ℝ≥0) (hK : K < 1)
       tailPhysicalGreenWeight (p σ) a b hab.le (Λ σ) t t) ≤ K)
     (right : Bool) : Continuous (fun σ => (B σ).onEdge right) := by
   let κ := fun σ x t => tailPhysicalGreenWeight (p σ) a b hab.le (Λ σ) x t
-  have hκ := continuous_tailPhysicalGreenWeight_family p hab hp hpos hΛcont
+  have hκ := continuous_tailPhysicalGreenWeight_family p hab Λ hp hpos hΛcont
   let base := tailPhysicalHeightFamily p hab hp hpos right
   apply continuous_tailPhysicalIntegralSolution hab.le κ hκ K base _
     (continuous_tailPhysicalHeightFamily p hab hp hpos right)
