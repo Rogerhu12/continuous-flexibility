@@ -55,6 +55,7 @@ theorem OuterWeightedGreenResponse.recover_test
       fun x => -(radialJacobi J w ψ x / ρ x) := by
     apply (hμ _).mp
     filter_upwards [Lp.coeFn_neg q, htest.coeFn_toLp] with x hx hqx
+    change q x = radialJacobi J w ψ x / ρ x at hqx
     simpa only [Pi.neg_apply, hqx] using hx
   have hweak' : HasIntervalWeakDerivative a b p
       (fun x => J * deriv w x / x * u x + radialJacobi J w ψ x) := by
