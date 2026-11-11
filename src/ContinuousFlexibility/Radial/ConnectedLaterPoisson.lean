@@ -136,9 +136,9 @@ theorem ConnectedReferenceGeometry.selected_later_outerPoisson_data
   have hN (right : Bool) : RadialNaturalTail D right j (cut right) (V right) := by
     rcases hv right with ⟨_, _, _, _, _, _, _, _, hN, _⟩
     exact hN
-  have hλ (right : Bool) : 0 < lam right := by
-    rcases hv right with ⟨_, _, _, _, _, _, _, _, _, _, hλ, _⟩
-    exact hλ
+  have hlam (right : Bool) : 0 < lam right := by
+    rcases hv right with ⟨_, _, _, _, _, _, _, _, _, _, hl, _⟩
+    exact hl
   have hne (right : Bool) :
       selectedBoundaryState D j (r07OutwardSign right) (cut right) (V right) ≠ 0 := by
     rcases hv right with ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, hne, _⟩
@@ -168,7 +168,7 @@ theorem ConnectedReferenceGeometry.selected_later_outerPoisson_data
     have hpoisson (i : Fin 2) := exists_selectedOuterPoisson hΓ.2.1 M ha hm hb
       (if i = 0 then false else true) (hV _)
       (by rw [hindex, hfreq, hcutM]; exact hN _)
-      (by rw [hindex, hscale]; exact hλ _)
+      (by rw [hindex, hscale]; exact hlam _)
       (by rw [hindex, hscale, hfreq, hcutM])
       (by rw [hindex, hfreq, hcutM, hsign]; exact hne _)
     choose P p hp using hpoisson

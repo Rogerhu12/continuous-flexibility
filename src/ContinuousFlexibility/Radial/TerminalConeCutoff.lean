@@ -172,7 +172,7 @@ theorem terminalCone_source_L2 (D : Statements.ReferenceData) (right : Bool)
     apply terminalCone_source_bound right ha hs hlam hr hν (hcone r hr).eq_of_nhds _
       (hud r hr) (huval r hr)
     rw [(hcone r hr).deriv_eq]
-    simpa only [mul_one] using ((hasDerivAt_id r).const_mul scale).deriv
+    simpa only [mul_one, id_eq] using ((hasDerivAt_id r).const_mul scale).deriv
   obtain ⟨hmem, hnorm⟩ := terminalCapLayer_memLp_eLpNorm D hab.le (by positivity) hM f
     (terminalCapHilbertSource_continuousOn lam hw (terminalPhysicalCutoff_smooth right a (2 * a))
       hu (fun r hr => (hwpos r hr).ne'))

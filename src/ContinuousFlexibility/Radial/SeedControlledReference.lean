@@ -6,6 +6,7 @@ import ContinuousFlexibility.Radial.SeedPureTailCanonical
 import ContinuousFlexibility.Radial.SeedGluedPairConstruction
 import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
 import ContinuousFlexibility.Radial.OpenComponentTransport
+import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Building the connected reference with prescribed central data

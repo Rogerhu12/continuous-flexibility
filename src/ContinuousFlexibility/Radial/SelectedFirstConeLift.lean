@@ -137,7 +137,8 @@ theorem SeedRetainedFirstCone.exists_normalized_growingIncoming {S : SelectedTai
     contDiff_const.mul hVs, inv_mul_cancel₀ hVp.ne', ?_, ?_, ?_⟩
   · intro r hr
     change (V p)⁻¹ * V r = r ^ ν / p ^ ν
-    rw [hVpower hr, hVpEq]
+    have hVr : V r = r ^ ν / c ^ ν := hVpower hr
+    rw [hVr, hVpEq]
     field_simp [(rpow_pos_of_pos hcpos ν).ne', (rpow_pos_of_pos hppos ν).ne']
     <;> ring
   · intro r hr

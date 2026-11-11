@@ -134,7 +134,7 @@ theorem radialRadiusScale_cone_germ {w : ℝ → ℝ} {κ β C r : ℝ}
     radialRadiusScale κ (β * κ) w =ᶠ[𝓝 (κ * r)] (fun t => (β * C) * t) := by
   have he : κ * r / κ = r := by field_simp [hκ] <;> ring
   have ht : Tendsto (fun t : ℝ => t / κ) (𝓝 (κ * r)) (𝓝 r) := by
-    simpa only [he] using (continuous_id.div_const κ).tendsto (κ * r)
+    simpa only [id_eq, he] using (continuous_id.div_const κ).tendsto (κ * r)
   filter_upwards [hw.comp_tendsto ht] with t h
   change (β * κ) * w (t / κ) = (β * C) * t
   change w (t / κ) = C * (t / κ) at h

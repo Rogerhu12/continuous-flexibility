@@ -175,19 +175,30 @@ theorem exists_selectedOuterPoisson {D : ReferenceData}
     modeOuterSideFunction_contDiffOn hm right hu, rfl,
     modeOuterPoissonVector_weak hD hm right hu hODE,
     outerUnitState_unit hstate, ?_⟩
-  · change modeOuterSideFunction M.innerLeft M.innerRight right
-      (outerPoissonNormalized lam w v c) = _
-    simp only [outerPoissonNormalized, hstate_eq]
+  · exact congrArg (modeOuterSideFunction M.innerLeft M.innerRight right)
+      (funext (fun r => congrArg
+        (fun state : ℝ × ℝ => v r /
+          (sqrt (state.1 ^ 2 + state.2 ^ 2) * sqrt lam)) hstate_eq))
   · intro k
-    have ht := modeOuterSideFunction_matching_traces ha hm hb right hu k
+    change p (matchingCut D M k) =
+        (if k = i then (outerUnitState
+          (selectedBoundaryState D M.frequency (bufferSign i) c v)).1 else 0) /
+          sqrt (M.boundaryScale k) ∧
+      matchingOuterFlux D M p k =
+        (if k = i then (outerUnitState
+          (selectedBoundaryState D M.frequency (bufferSign i) c v)).2 else 0)
+    have ht : p (matchingCut D M k) =
+        (if k = i then u (matchingCut D M k) else 0) ∧
+        matchingOuterFlux D M p k =
+          (if k = i then bufferSign k * D.w (matchingCut D M k) *
+            deriv u (matchingCut D M k) / sqrt (M.boundaryScale k) else 0) :=
+      modeOuterSideFunction_matching_traces ha hm hb right hu k
     have hn := outerPoissonNormalized_traces hlam hne
     rw [hstate_eq] at hn
     by_cases hk : k = i
     · subst k
-      simp only [if_pos rfl, ite_true] at ht
-      constructor
-      · simpa only [if_pos rfl, ite_true] using ht.1.trans hn.1
-      · simpa only [if_pos rfl, ite_true] using ht.2.trans hn.2
+      simp only [if_pos rfl] at ht ⊢
+      exact ⟨ht.1.trans hn.1, ht.2.trans hn.2⟩
     · simpa only [if_neg hk, zero_div] using ht
 
 end ContinuousFlexibility.Radial

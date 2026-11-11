@@ -46,7 +46,8 @@ theorem terminalCap_endpoint_slope_lower (right : Bool) {L : ℝ} {p q : ℝ →
       (hp.differentiable (by simp) 0)
     simp only [slope_def_field, hzero, hend, sub_zero, sub_self, zero_sub, zero_div,
       Bool.false_eq_true, if_false] at h
-    linarith only [h]
+    change 1 / L ≤ -deriv p 0
+    simpa only [neg_div, neg_neg] using neg_le_neg h
   · have h := hconv.slope_le_deriv ⟨le_rfl, hL.le⟩ ⟨hL.le, le_rfl⟩ hL
       (hp.differentiable (by simp) L)
     simpa only [slope_def_field, hzero, hend, sub_zero, if_true] using h

@@ -139,10 +139,10 @@ theorem ConnectedReferenceGeometry.selected_later_boundary_data_retained
   have hnormalized := selectedBoundaryRadiusScale_data (D := D) (E := E)
     hκ.ne' hβ.ne' hjpos.ne' (hgeomE.1.trans hpoint.1.1)
     (hgeomE.2.2.2.2.1 _ hpoint.1) hε hpoint.2.1 hstand.1 hstand.2 hδ hsep
-  rcases hnormalized with ⟨hU, hλ, hd₀, hd₁, hne, hunit, hmargin⟩
+  rcases hnormalized with ⟨hU, hlam, hd₀, hd₁, hne, hunit, hmargin⟩
   refine ⟨v, hvs, hNv, hEq, hvalue, hderiv, hpoint.1, hpoint.2.1,
     radialHomogeneousOn_reference_scaled_uIcc hκ hopen hsub hprofile hODE 1,
-    hNscaled, hU, hλ, hd₀, hd₁, hne, hunit, ?_⟩
+    hNscaled, hU, hlam, hd₀, hd₁, hne, hunit, ?_⟩
   convert hmargin using 1 <;> ring
 
 /-- The original interface retains its complete boundary bundle. -/
