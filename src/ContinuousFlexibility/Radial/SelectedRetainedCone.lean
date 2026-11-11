@@ -50,6 +50,9 @@ structure SeedRetainedFirstCone (S : SelectedTailData) (right : Bool) (length : 
   increasing_inward : ∀ r, 0 < r →
     (if right then r ≤ S.cut right S.chain.index else S.cut right S.chain.index ≤ r) →
     0 < deriv tail.profile r
+  logSlope_inward : ∀ r, 0 < r →
+    (if right then r ≤ S.cut right S.chain.index else S.cut right S.chain.index ≤ r) →
+    (3 / 4 : ℝ) * tail.profile r ≤ r * deriv tail.profile r
 
 /-- This is a construction from the actual selected data. In particular
 neither the selected sequence nor either original incoming state is reselected. -/
@@ -132,7 +135,8 @@ theorem exists_seedRetainedFirstCone {S : SelectedTailData}
       linarith
   have haTle : if right then a ≤ T.cut else T.cut ≤ a := by
     cases right <;> exact haT.le
-  obtain ⟨P, hPmode, hPa, hPret, hPd⟩ := T.toCanonical_retaining_at hD hc ha haTle
+  obtain ⟨P, hPmode, hPa, hPret, hPd, hPlower⟩ :=
+    T.toCanonical_retaining_at_logSlope hD hc ha haTle
   refine ⟨{
     natural := v
     natural_smooth := hvs
@@ -151,7 +155,8 @@ theorem exists_seedRetainedFirstCone {S : SelectedTailData}
     cone_length := halength
     pure_cut := hPa
     cone_germ := ?_
-    increasing_inward := ?_ }⟩
+    increasing_inward := ?_
+    logSlope_inward := ?_ }⟩
   · intro r hr
     have hrc : (0 < r) ∧ (if right then a ≤ r else r ≤ a) ∧
         (if right then r ≤ c else c ≤ r) := by
@@ -168,5 +173,13 @@ theorem exists_seedRetainedFirstCone {S : SelectedTailData}
       simpa only [mul_one] using (hasDerivAt_id' r).const_mul C
     rw [hd.deriv]
     exact hC
+  · intro r hr hi
+    apply hPlower r hr
+    have hg := hTcone r hr hi
+    rw [hg.eq_of_nhds, hg.deriv_eq]
+    have hd : HasDerivAt (fun t : ℝ => C * t) C r := by
+      simpa only [mul_one] using (hasDerivAt_id' r).const_mul C
+    rw [hd.deriv]
+    nlinarith [mul_pos hC hr]
 
 end ContinuousFlexibility.Radial

@@ -157,8 +157,12 @@ theorem ConnectedReferenceGeometry.selected_later_outerPoisson_data
       rw [hleft, hright]
       exact hgeometry.2.2.2.2
     have hb : M.innerRight < D.b := by rw [hright]; exact hgeometry.2.2.2.1
-    have hcutM (i : Fin 2) : matchingCut D M i = cut (if i = 0 then false else true) := by
-      fin_cases i <;> simp [matchingCut, hleft, hright]
+    have hcutM (i : Fin 2) : matchingCut Γ.reference M i =
+        κ (if i = 0 then false else true) *
+          Γ.selected.joinInner (if i = 0 then false else true) n := by
+      fin_cases i
+      · exact hleft
+      · exact hright
     have hindex (i : Fin 2) :
         (if (if i = 0 then false else true) then (1 : Fin 2) else 0) = i := by
       fin_cases i <;> norm_num

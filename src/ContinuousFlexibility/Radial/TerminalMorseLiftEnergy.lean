@@ -155,7 +155,10 @@ theorem terminalMorseCapLift_energy_identity (long : Bool)
   have hlam : 0 < lam := by
     rw [hlamdef]
     exact standInBoundaryScale_pos (sq_pos_of_pos hj) hpcoeff.2.2.1 hpcoeff.1
-  have hχ := terminalMorseCap_cutoff_endpoints long hB hAB hs hr
+  have hχ : χ (R 0) = (if long then 0 else 1) ∧
+      χ (R L) = (if long then 1 else 0) ∧
+      deriv χ (R 0) = 0 ∧ deriv χ (R L) = 0 :=
+    terminalMorseCap_cutoff_endpoints long hB hAB hs hr
   have hflux : (terminalCapBoundaryFlux w χ u (R L) - terminalCapBoundaryFlux w χ u (R 0)) / lam =
       standInBoundarySlope (if long then 1 else -1) (j ^ 2) p u := by
     rw [standInBoundarySlope_eq_impedance (sq_pos_of_pos hj).ne' hpcoeff.2.2.1.ne'

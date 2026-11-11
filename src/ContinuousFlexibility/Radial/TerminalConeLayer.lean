@@ -153,6 +153,9 @@ theorem terminalConeLayer_actual_jets (right : Bool) {c p inner length H j : ℝ
       intro he
       rw [he] at hinside
       linarith only [hinside.1, hinside.2, hcp, ha0]
+  change ∀ r ∈ Icc a (2 * a),
+    deriv u r = (if right then j else -j) / r * u r ∧
+      |u r| ≤ exp (-(j * H / 2))
   intro r hr
   refine ⟨radialConePower_deriv_of_eqOn hi hp hne hu hpower (hsub hr), ?_⟩
   rw [hpower (hsub hr)]

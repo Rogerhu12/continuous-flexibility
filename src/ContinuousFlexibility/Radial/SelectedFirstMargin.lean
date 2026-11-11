@@ -156,7 +156,8 @@ theorem exists_selected_first_natural_margin {S : SelectedTailData}
   have hcpos : 0 < c := hD.1.trans hc.1
   have hppos : 0 < p := hD.1.trans hp.1
   have hup : 0 < u p := by
-    rw [hpower right_mem_uIcc]
+    have hvaluep : u p = p ^ ν / c ^ ν := hpower right_mem_uIcc
+    rw [hvaluep]
     exact div_pos (rpow_pos_of_pos hppos ν) (rpow_pos_of_pos hcpos ν)
   have hdu := radialConePower_deriv_of_eqOn hcpos hppos hcp hu hpower right_mem_uIcc
   have hjn : (j : ℝ) ≠ 0 := by exact_mod_cast (by omega : j ≠ 0)

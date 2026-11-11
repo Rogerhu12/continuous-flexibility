@@ -26,6 +26,10 @@ structure SeedRetainedPair (S : SelectedTailData) (K : SeedCentralCutoff)
     pair.height =ᶠ[𝓝 r] seedRescale pair.radiusR pair.amplitudeR right.tail.height
   left_before : pair.radiusL * left.tail.cut < exp (K.left - q - 4)
   right_after : exp (K.right + q + 4) < pair.radiusR * right.tail.cut
+  left_logSlope_lower : ∀ r ∈ Icc (pair.radiusL * S.cut false S.chain.index) (exp K.left),
+    (3 / 4 : ℝ) * pair.profile r ≤ r * deriv pair.profile r
+  right_logSlope_lower : ∀ r ∈ Icc (exp K.right) (pair.radiusR * S.cut true S.chain.index),
+    (3 / 4 : ℝ) * pair.profile r ≤ r * deriv pair.profile r
 
 theorem exists_seedRetainedPair {S : SelectedTailData} (hS : IsSelectedTail S)
     (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
@@ -37,9 +41,21 @@ theorem exists_seedRetainedPair {S : SelectedTailData} (hS : IsSelectedTail S)
     MorseChainRealization.geometry (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hL := hS.2.2.2.2.2 false S.chain.index 2 le_rfl (by decide) hband
   have hR := hS.2.2.2.2.2 true S.chain.index 2 le_rfl (by decide) hband
-  obtain ⟨G, hGL, hGR, hbefore, hafter, _, _⟩ := exists_seedGluedPair_retaining hD hL.1 hR.1
+  obtain ⟨G, hGL, hGR, hbefore, hafter, _, _, hLLower, hRLower⟩ :=
+    exists_seedGluedPair_retaining_logSlope hD hL.1 hR.1
     L.tail R.tail (by simpa using L.canonical) (by simpa using R.canonical) K hq
-  exact ⟨⟨L, R, G, hGL, hGR, hbefore, hafter⟩⟩
+  exact ⟨⟨L, R, G, hGL, hGR, hbefore, hafter,
+    hLLower L.logSlope_inward, hRLower R.logSlope_inward⟩⟩
+
+/-- Both physical connecting gaps have the same lower bound, independent
+of the retained logarithmic length and all radius and height rescalings. -/
+theorem SeedRetainedPair.gap_logSlope_lower {S : SelectedTailData}
+    {K : SeedCentralCutoff} {q length : ℝ} (P : SeedRetainedPair S K q length)
+    {r : ℝ}
+    (hr : r ∈ Icc (P.pair.radiusL * S.cut false S.chain.index) (exp K.left) ∪
+      Icc (exp K.right) (P.pair.radiusR * S.cut true S.chain.index)) :
+    (3 / 4 : ℝ) * P.pair.profile r ≤ r * deriv P.pair.profile r :=
+  hr.elim (P.left_logSlope_lower r) (P.right_logSlope_lower r)
 
 private theorem seed_selected_first_cut_entry_order {S : SelectedTailData}
     (hS : IsSelectedTail S)

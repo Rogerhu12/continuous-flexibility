@@ -108,7 +108,7 @@ def SeedConeTail.withCut {D : ReferenceData} {right : Bool} {entry : ℝ} {u : �
 
 /-- Canonicalize strictly inward of any prescribed cone cutoff. The
 old profile and height germs, and each positive profile derivative, survive. -/
-theorem SeedConeTail.toCanonical_retaining_at {D : ReferenceData} {right : Bool}
+theorem SeedConeTail.toCanonical_retaining_at_logSlope {D : ReferenceData} {right : Bool}
     {entry : ℝ} {u : ℝ → ℝ} (T : SeedConeTail D right entry u)
     (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
     {cut : ℝ} (hp : 0 < cut) (ho : if right then cut ≤ T.cut else T.cut ≤ cut) :
@@ -117,12 +117,14 @@ theorem SeedConeTail.toCanonical_retaining_at {D : ReferenceData} {right : Bool}
       (if right then P.cut < cut else cut < P.cut) ∧
       (∀ r, (if right then cut ≤ r else r ≤ cut) →
         P.profile =ᶠ[𝓝 r] T.profile ∧ P.height =ᶠ[𝓝 r] T.height) ∧
-      ∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv P.profile r := by
+      (∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv P.profile r) ∧
+      ∀ r, 0 < r → (3 / 4 : ℝ) * T.profile r ≤ r * deriv T.profile r →
+        (3 / 4 : ℝ) * P.profile r ≤ r * deriv P.profile r := by
   let T₀ := T.withCut cut hp ho
-  obtain ⟨P, hPcut, hP, hPd⟩ := T₀.toPureTail_retaining hentry
+  obtain ⟨P, hPcut, hP, hPd, hPlower⟩ := T₀.toPureTail_retaining_logSlope hentry
   have hc : if right then P.cut < cut else cut < P.cut := hPcut
-  obtain ⟨Q, hQmode, hQcut, hQ, hQd⟩ := P.toCanonical_retaining hD hentry
-  refine ⟨Q, hQmode, ?_, ?_, ?_⟩
+  obtain ⟨Q, hQmode, hQcut, hQ, hQd, hQlower⟩ := P.toCanonical_retaining_logSlope hD hentry
+  refine ⟨Q, hQmode, ?_, ?_, ?_, ?_⟩
   · cases right
     · exact hc.trans_le hQcut
     · exact hQcut.trans_lt hc
@@ -136,5 +138,21 @@ theorem SeedConeTail.toCanonical_retaining_at {D : ReferenceData} {right : Bool}
     exact ⟨h₂.1.trans h₁.1, h₂.2.trans h₁.2⟩
   · intro r hr hd
     exact hQd r hr (hPd r hr hd)
+  · intro r hr hd
+    exact hQlower r hr (hPlower r hr hd)
+
+/-- The original retained-cut interface. -/
+theorem SeedConeTail.toCanonical_retaining_at {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ} (T : SeedConeTail D right entry u)
+    (hD : RadialProfileGeometry D) (hentry : entry ∈ radialCore D)
+    {cut : ℝ} (hp : 0 < cut) (ho : if right then cut ≤ T.cut else T.cut ≤ cut) :
+    ∃ P : SeedPureTail D right entry u,
+      P.mode = (if right then (-2 : ℝ) else 2) ∧
+      (if right then P.cut < cut else cut < P.cut) ∧
+      (∀ r, (if right then cut ≤ r else r ≤ cut) →
+        P.profile =ᶠ[𝓝 r] T.profile ∧ P.height =ᶠ[𝓝 r] T.height) ∧
+      ∀ r, 0 < r → 0 < deriv T.profile r → 0 < deriv P.profile r := by
+  obtain ⟨P, hm, hc, hg, hd, _⟩ := T.toCanonical_retaining_at_logSlope hD hentry hp ho
+  exact ⟨P, hm, hc, hg, hd⟩
 
 end ContinuousFlexibility.Radial

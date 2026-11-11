@@ -44,7 +44,7 @@ theorem radialRadiusScale_germ {u v : ℝ → ℝ} {κ α r : ℝ}
     radialRadiusScale κ α u =ᶠ[𝓝 (κ * r)] radialRadiusScale κ α v := by
   have he : κ * r / κ = r := by field_simp [hκ] <;> ring
   have ht : Tendsto (fun t : ℝ => t / κ) (𝓝 (κ * r)) (𝓝 r) := by
-    simpa only [he] using (continuous_id.div_const κ).tendsto (κ * r)
+    simpa only [id_eq, he] using (continuous_id.div_const κ).tendsto (κ * r)
   filter_upwards [hu.comp_tendsto ht] with t h
   simp only [Function.comp_apply] at h
   change α * u (t / κ) = α * v (t / κ)
