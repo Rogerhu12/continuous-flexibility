@@ -42,7 +42,7 @@ theorem referenceMode_sub_ae {D : ReferenceData} {u v : PolarPoint → ℝ}
 
 theorem referenceMode_radial_zero (a : ℝ → ℝ) (j : ℕ) (hj : 0 < j) (r : ℝ) :
     referenceMode (fun p : PolarPoint => a p.1) j r = 0 :=
-  referenceMode_eq_zero_of_angle_constant (fun _ => rfl) j hj
+  referenceMode_eq_zero_of_angle_constant (c := a r) (fun _ => rfl) j hj
 
 theorem referenceMode_outputRemainder_ae {D : ReferenceData}
     (hchi : Continuous D.chiLeft) {U : RadialUnknown}
@@ -55,6 +55,8 @@ theorem referenceMode_outputRemainder_ae {D : ReferenceData}
       (continuous_const.mul (hchi.comp continuous_fst))
   have h := referenceMode_sub_ae hU hleft j
   filter_upwards [h] with r hr
+  change referenceMode (fun p => U.1 p - aL * D.chiLeft p.1) j r =
+    referenceMode U.1 j r
   simpa only [referenceMode_radial_zero (fun x => aL * D.chiLeft x) j hj r,
     sub_zero] using hr
 
@@ -62,12 +64,12 @@ theorem referenceMode_congr_ae {D : ReferenceData} {u v : PolarPoint → ℝ}
     (h : u =ᵐ[radialPhysicalMeasure D] v) (j : ℕ) :
     referenceMode u j =ᵐ[volume.restrict (radialCore D)] referenceMode v j := by
   rw [radialPhysicalMeasure_eq_prod] at h
-  filter_upwards [ae_ae_of_ae_prod h] with r hr
+  filter_upwards [Measure.ae_ae_of_ae_prod h] with r hr
   unfold referenceMode radialAngularMean
   rw [intervalIntegral.integral_of_le (by positivity : (0 : ℝ) ≤ 2 * Real.pi),
     intervalIntegral.integral_of_le (by positivity : (0 : ℝ) ≤ 2 * Real.pi)]
-  congr 1
-  exact integral_congr_ae (hr.mono fun θ hθ => by dsimp only; rw [hθ])
+  exact congrArg (fun x : ℝ => (2 * Real.pi)⁻¹ * x)
+    (integral_congr_ae (hr.mono fun θ hθ => by dsimp only; rw [hθ]))
 
 /-- The natural radial Hilbert measure is bounded above by a finite constant
 times ordinary radial measure on the fixed physical core. -/
@@ -83,8 +85,8 @@ theorem memLp_radialHilbertMeasure_of_memLp {D : ReferenceData}
   have hmeasure : radialHilbertMeasure D ≤ ENNReal.ofReal B •
       volume.restrict (radialCore D) := by
     unfold radialHilbertMeasure
-    rw [← Measure.withDensity_const]
-    apply Measure.withDensity_mono
+    rw [← withDensity_const]
+    apply withDensity_mono
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with r hr
     apply ENNReal.ofReal_le_ofReal
     exact (le_abs_self _).trans (hB r ⟨hr.1.le, hr.2.le⟩)
