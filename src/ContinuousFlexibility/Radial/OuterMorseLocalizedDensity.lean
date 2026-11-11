@@ -62,8 +62,8 @@ private theorem morseOuter_zero_localized_ordinary_kernel
   have hI : (∫ y, outerWholeLocalizedKernel D right k m kernel x y * f y ∂μ) = 0 := by
     apply integral_eq_zero_of_ae
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with y hy
-    rw [hkernel x hx y hy, zero_mul]
-  rw [hI, neg_zero]
+    rw [hkernel x hx y hy, zero_mul, Pi.zero_apply]
+  rw [hI, neg_zero, Pi.zero_apply]
 
 /-- For every actual pair of localizers, the same whole Green kernel
 defines a bounded ordinary operator with the full physical-index decay. -/
