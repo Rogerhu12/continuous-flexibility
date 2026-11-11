@@ -15,6 +15,8 @@ namespace ContinuousFlexibility.Analysis
 
 open Set
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
 
 /-- The actual solution through a prescribed state, with the coefficient

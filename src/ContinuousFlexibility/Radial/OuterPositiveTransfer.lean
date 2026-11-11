@@ -53,7 +53,7 @@ theorem exists_regularized_positive_weight {a b : ℝ} (ha : 0 ≤ a) (hb : 0 �
       _ ≤ M / ε := div_le_div_of_nonneg_left hM.le hε hεb
       _ = M ^ 2 := by dsimp only [ε]; field_simp [hM.ne']
   have hlower : 1 ≤ M ^ 2 * μ ^ 2 := by
-    rw [hμsq, mul_div_assoc]
+    rw [hμsq, ← mul_div_assoc]
     apply (le_div_iff₀ hbε).mpr
     calc
       1 * (b + ε) = b + ε := one_mul _
@@ -118,11 +118,13 @@ theorem transfer_positive_piece_regularized {u z α β : ℝ → ℝ} {l r : ℝ
   have hb : 0 ≤ b := intervalIntegral.integral_nonneg hlr hβ₀
   have hM : 1 ≤ M := by dsimp only [M]; linarith only [ha, hb]
   obtain ⟨μ, hμ, hμhi, hμlo, hbound⟩ := exists_regularized_positive_weight ha hb
+  have hαi : IntervalIntegrable (fun x => α x / μ) volume l r :=
+    (hα.div_const μ).intervalIntegrable_of_Icc hlr
+  have hβi : IntervalIntegrable (fun x => μ * β x) volume l r :=
+    (continuousOn_const.mul hβ).intervalIntegrable_of_Icc hlr
   have hI : (∫ x in l..r, α x / μ + μ * β x) = a / μ + μ * b := by
-    rw [intervalIntegral.integral_add
-      ((hα.div_const μ).intervalIntegrable_of_Icc hlr)
-      ((continuousOn_const.mul hβ).intervalIntegrable_of_Icc hlr),
-      intervalIntegral.integral_div_const, intervalIntegral.integral_const_mul]
+    rw [intervalIntegral.integral_add hαi hβi, intervalIntegral.integral_div,
+      intervalIntegral.integral_const_mul]
   have hκ : 0 ≤ a / μ + μ * b := add_nonneg (div_nonneg ha hμ.le) (mul_nonneg hμ.le hb)
   have hforward := transfer_positive_piece hlr hμ hα hβ hα₀ hβ₀ hd
     (s := l) (t := r) ⟨le_rfl, hlr⟩ ⟨hlr, le_rfl⟩

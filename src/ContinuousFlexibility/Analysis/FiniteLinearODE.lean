@@ -19,6 +19,8 @@ namespace ContinuousFlexibility.Analysis
 open Set Metric
 open scoped NNReal Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]
 
 /-- Join two solutions with the same state at their common endpoint. -/
@@ -86,8 +88,10 @@ theorem exists_bounded_linear_ode_local (A : ℝ → E →L[ℝ] E) (hA : Contin
       have hdist : ‖y - x‖ ≤ (r : ℝ) := by
         simpa only [mem_closedBall, dist_eq_norm] using hy
       have hyn : ‖y‖ ≤ ‖y - x‖ + ‖x‖ := by
-        simpa only [sub_add_cancel] using norm_add (y - x) x
-      have hxr : ‖x‖ ≤ (r : ℝ) := by dsimp [r]; linarith
+        simpa only [sub_add_cancel] using norm_add_le (y - x) x
+      have hxr : ‖x‖ ≤ (r : ℝ) := by
+        change ‖x‖ ≤ ‖x‖ + 1
+        linarith
       calc
         ‖A t y‖ ≤ (K : ℝ) * ‖y‖ :=
           ((A t).le_opNorm y).trans (mul_le_mul_of_nonneg_right (hK t) (norm_nonneg y))
@@ -101,7 +105,10 @@ theorem exists_bounded_linear_ode_local (A : ℝ → E →L[ℝ] E) (hA : Contin
         max (c + 2 * δ - c) (c - (c - 2 * δ)) ≤ (r : ℝ) - (0 : ℝ≥0)
       rw [hmax]
       simp only [NNReal.coe_mul, NNReal.coe_ofNat, NNReal.coe_zero, sub_zero]
-      nlinarith [mul_le_mul_of_nonneg_right hsmall r.2]
+      calc
+        2 * (K : ℝ) * (r : ℝ) * (2 * δ) = (4 * (K : ℝ) * δ) * (r : ℝ) := by ring
+        _ ≤ 1 * (r : ℝ) := mul_le_mul_of_nonneg_right hsmall r.2
+        _ = (r : ℝ) := one_mul _
   obtain ⟨f, hfc, hf⟩ := hPL.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
   refine ⟨f, hfc, fun t ht => ?_⟩
   have ht' : t ∈ Icc (c - 2 * δ) (c + 2 * δ) := by
@@ -161,7 +168,8 @@ theorem exists_bounded_linear_ode (A : ℝ → E →L[ℝ] E) (hA : Continuous A
       HasDerivAt g₀ (A t (g₀ t)) t := by
     have hm : -t ∈ Icc (-c) (-c + (N : ℝ) * δ) := by
       constructor <;> linarith [ht.1, ht.2]
-    simpa only [B, neg_neg, ContinuousLinearMap.neg_apply, neg_smul, one_smul, g₀, Function.comp_apply] using
+    change HasDerivAt (g ∘ Neg.neg) (A t (g (-t))) t
+    simpa only [B, neg_neg, ContinuousLinearMap.neg_apply, neg_smul, one_smul] using
       (hg (-t) hm).scomp t (hasDerivAt_neg t)
   have hnδ : 0 ≤ (N : ℝ) * δ := mul_nonneg (Nat.cast_nonneg N) hδ.le
   obtain ⟨u, hug, _, hu⟩ := exists_ode_join

@@ -158,9 +158,9 @@ theorem tailPoissonInterpolation_sq_integral_le_node_sum {T : DeepTailData}
         ∑' n, ∫ x in Ico (T.node n) (T.node (n + 1)), f x := by
       rw [← deepTail_iUnion_halfOpen_edges hT]
       exact hedge.tsum_eq.symm
-    _ ≤ ∑' n, 8 * (v n + v (n + 1)) := tsum_le_tsum hlocal hedge.summable hsum
+    _ ≤ ∑' n, 8 * (v n + v (n + 1)) := Summable.tsum_le_tsum hlocal hedge.summable hsum
     _ = 8 * ((∑' n, v n) + ∑' n, v (n + 1)) := by
-      rw [tsum_mul_left, tsum_add ha hshift]
+      rw [tsum_mul_left, ha.tsum_add hshift]
     _ ≤ 16 * (∑' n, v n) := by linarith only [hshiftle]
 
 theorem tailPoissonInterpolation_sq_integral_le_first_mass {T : DeepTailData}
@@ -205,6 +205,7 @@ theorem tailNaturalEquation_outward_sq_integral_le {T : DeepTailData}
         T.p x * tailPoissonInterpolation T hT a x ^ 2 := by
       apply setIntegral_congr_fun measurableSet_Ico
       intro x hx
+      change T.p x * u x ^ 2 = T.p x * tailPoissonInterpolation T hT a x ^ 2
       rw [heq hx]
     _ ≤ _ := tailPoissonInterpolation_sq_integral_le_first_mass hT hη hK hstep
 

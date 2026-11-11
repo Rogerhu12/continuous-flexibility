@@ -50,7 +50,7 @@ theorem morseConnector_balanced_product_le {w : ℝ → ℝ} {a l r : ℝ}
       div_le_div_of_nonneg_left (hderiv₀ x hx) ha (hal.trans hx.1)
     have h := intervalIntegral.integral_mono_on hlr.le hJ
       ((hdc.div_const a).intervalIntegrable l r) hpoint
-    rw [intervalIntegral.integral_div_const, hFTC] at h
+    rw [intervalIntegral.integral_div, hFTC] at h
     exact h.trans (div_le_div_of_nonneg_right (sub_le_self _ (hwp l hl).le) ha.le)
   have hj₀ : 0 ≤ ∫ x in l..r, deriv w x / x :=
     intervalIntegral.integral_nonneg hlr.le
@@ -90,8 +90,14 @@ theorem morseRealizedJoin_balanced_product_le {T : MorseChainData} {σ : ℕ →
     right_mem_Icc.mpr (horder n hn)
   have hml : T.leftX side m ∈ Icc (T.leftX side m) (T.rightX side m) :=
     left_mem_Icc.mpr (horder m hm)
-  have hlD : l ∈ radialCore D := by rw [hjl]; exact h.radius_mem_core side n hn _ hnr
-  have hrD : r ∈ radialCore D := by rw [hjr]; exact h.radius_mem_core side m hm _ hml
+  have hlD : l ∈ radialCore D := by
+    change T.joinLeft side k ∈ radialCore D
+    rw [hjl]
+    exact h.radius_mem_core side n hn _ hnr
+  have hrD : r ∈ radialCore D := by
+    change T.joinRight side k ∈ radialCore D
+    rw [hjr]
+    exact h.radius_mem_core side m hm _ hml
   have ha : 0 < D.a := h.geometry.1
   have hwp (x : ℝ) (hx : x ∈ Icc l r) : 0 < D.w x :=
     h.geometry.2.2.2.2.1 x ⟨hlD.1.trans_le hx.1, hx.2.trans_lt hrD.2⟩
@@ -112,10 +118,12 @@ theorem morseRealizedJoin_balanced_product_le {T : MorseChainData} {σ : ℕ →
   have hK : 0 < K := hcell.pos
   have hC : 0 < C 0 := h.constants_pos 0
   have harrival : D.w r ≤ eta * K * B := by
+    change D.w (T.joinRight side k) ≤ eta * K * B
     rw [hjr, h.profile_eq side m hm _ hml]
     simpa only [mul_assoc] using
       mul_le_mul_of_nonneg_left (hcell.left_speed_upper side m hm) heta.le
   have hdeparture : lam * A ^ 5 / K ≤ D.w l := by
+    change lam * A ^ 5 / K ≤ D.w (T.joinLeft side k)
     rw [hjl, h.profile_eq side n hn _ hnr]
     simpa only [mul_div_assoc] using
       mul_le_mul_of_nonneg_left (hcell.right_speed_lower side n hn) hlam.le

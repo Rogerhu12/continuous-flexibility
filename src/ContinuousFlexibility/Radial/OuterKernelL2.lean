@@ -128,12 +128,18 @@ theorem norm_outerCoreFunction_le_of_bound (f : C(X, ℝ)) {K : ℝ}
       mul_le_mul (norm_outerCoreEmbedding_le_sqrt μ) hfnorm
         (norm_nonneg f) (Real.sqrt_nonneg _)
 
-private theorem norm_outerKernelL2_le_product (K : C(X, C(X, ℝ))) :
-    ‖outerKernelL2 μ K‖ ≤
-      ‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ *
-        ‖outerKernelToContinuous μ K‖ := by
-  rw [outerKernelL2]
-  exact (ContinuousMap.toLp 2 μ ℝ).opNorm_comp_le (outerKernelToContinuous μ K)
+private theorem norm_outerKernelL2_apply_le_embedding (K : C(X, C(X, ℝ))) (f : Lp ℝ 2 μ) :
+    ‖outerKernelL2 μ K f‖ ≤
+      ‖(ContinuousMap.toLp 2 μ ℝ : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ)‖ ^ 2 * ‖K‖ * ‖f‖ := by
+  let T : C(X, ℝ) →L[ℝ] Lp ℝ 2 μ := ContinuousMap.toLp 2 μ ℝ
+  rw [outerKernelL2_apply]
+  calc
+    ‖ContinuousMap.toLp 2 μ ℝ (outerKernelRepresentative μ K f)‖
+        ≤ ‖T‖ * ‖outerKernelRepresentative μ K f‖ :=
+      T.le_opNorm (outerKernelRepresentative μ K f)
+    _ ≤ ‖T‖ * ((‖T‖ * ‖K‖) * ‖f‖) :=
+      mul_le_mul_of_nonneg_left (norm_outerKernelRepresentative_le μ K f) (norm_nonneg T)
+    _ = ‖T‖ ^ 2 * ‖K‖ * ‖f‖ := by ring
 
 /-- Core mass times the uniform kernel bound controls the actual operator norm. -/
 theorem norm_outerKernelL2_le (K : C(X, C(X, ℝ))) :
@@ -146,14 +152,11 @@ theorem norm_outerKernelL2_le (K : C(X, C(X, ℝ))) :
       ‖T‖ ^ 2 ≤ Real.sqrt (measureUnivNNReal μ : ℝ) ^ 2 :=
         pow_le_pow_left₀ (norm_nonneg T) hT 2
       _ = (measureUnivNNReal μ : ℝ) := Real.sq_sqrt (measureUnivNNReal μ).coe_nonneg
-  have hbound : ‖outerKernelL2 μ K‖ ≤ ‖T‖ ^ 2 * ‖K‖ := by
-    calc
-      ‖outerKernelL2 μ K‖ ≤ ‖T‖ * ‖outerKernelToContinuous μ K‖ :=
-        norm_outerKernelL2_le_product μ K
-      _ ≤ ‖T‖ * (‖T‖ * ‖K‖) :=
-        mul_le_mul_of_nonneg_left (norm_outerKernelToContinuous_le μ K) (norm_nonneg T)
-      _ = ‖T‖ ^ 2 * ‖K‖ := by ring
-  exact hbound.trans (mul_le_mul_of_nonneg_right hsq (norm_nonneg K))
+  apply ContinuousLinearMap.opNorm_le_bound _ (mul_nonneg (measureUnivNNReal μ).coe_nonneg
+    (norm_nonneg K))
+  intro f
+  exact (norm_outerKernelL2_apply_le_embedding μ K f).trans
+    (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hsq (norm_nonneg K)) (norm_nonneg f))
 
 /-- A bound stated directly for the pointwise kernel. -/
 theorem norm_outerKernelL2_le_of_bound (K : C(X, C(X, ℝ))) {B : ℝ}

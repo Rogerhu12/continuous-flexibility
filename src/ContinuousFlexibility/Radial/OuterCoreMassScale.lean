@@ -161,7 +161,7 @@ theorem morseOuterCore_mass_le_state_scale {T : MorseChainData} {σ : ℕ → �
     (h₀ : MorseChainRealization T (fun _ => 1) D₀ C)
     (h : MorseChainRealization T σ D C) (hσ : ∀ k, 1 ≤ σ k ∧ σ k ≤ 2)
     (hcell : MorseRealizedCellEstimates T K)
-    (side : Bool) (n : ℕ) (hn : T.index < n) (hλ : 0 < scale)
+    (side : Bool) (n : ℕ) (hn : T.index < n) (hScalePos : 0 < scale)
     (hscale : morseChainAmplitude T σ n / scale ≤ exp (L * (n : ℝ) ^ 2)) :
     let M := (12 / D.a ^ 8) *
       (K * (9 ^ 2 + 9 ^ 6) + (C 0 * K * D₀.b ^ 6 * exp 300) * 9 ^ 6)
@@ -174,7 +174,7 @@ theorem morseOuterCore_mass_le_state_scale {T : MorseChainData} {σ : ℕ → �
   have hM : 0 ≤ M := by dsimp only [M]; positivity
   have hpref : M ≤ exp (M * (n : ℝ) ^ 2) := nonneg_le_exp_mul_nat_sq hM (by omega)
   have hlam : morseChainAmplitude T σ n ≤ scale * exp (L * (n : ℝ) ^ 2) := by
-    exact ((div_le_iff₀ hλ).mp hscale).trans_eq (mul_comm _ _)
+    exact ((div_le_iff₀ hScalePos).mp hscale).trans_eq (mul_comm _ _)
   calc
     _ ≤ M * morseChainAmplitude T σ n * exp (27 * (n : ℝ) ^ 2) :=
       morseOuterCore_mass_le_height_exp h₀ h hσ hcell side n hn
