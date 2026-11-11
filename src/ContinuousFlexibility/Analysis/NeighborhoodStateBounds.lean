@@ -51,8 +51,8 @@ private theorem neighborhood_seminorm_center_bound
   calc
     p x = p ((x - c) + c) := congrArg p (sub_add_cancel x c).symm
     _ ≤ p (x - c) + p c := map_add_le_add p (x - c) c
-    _ ≤ ε + p c := add_le_add_right hx.le _
-    _ ≤ 1 + p c := add_le_add_right hε _
+    _ ≤ ε + p c := add_le_add hx.le le_rfl
+    _ ≤ 1 + p c := add_le_add hε le_rfl
     _ = p c + 1 := add_comm _ _
 
 theorem neighborhoodStateGrading_bound {C : NonlinearGeometryData S}
@@ -68,6 +68,59 @@ theorem neighborhood_stateU_contDiff
   change ContDiff ℝ ∞ (scalarCommonHeightDecode S x.1)
   exact scalarCommonHeightDecode_contDiff hT hS x.1
 
+private theorem neighborhood_radial_sum_bound
+    {u v c g N w A B : ℝ}
+    (hA : 0 ≤ A) (hB : 0 ≤ B) (hw : 0 ≤ w)
+    (hg : g ≤ N) (hc : |c| ≤ N)
+    (hu : |u| ≤ A * g * w) (hv : |v| ≤ B * w) :
+    |u + c * v| ≤ (A + B) * N * w := by
+  calc
+    |u + c * v| ≤ |u| + |c * v| := abs_add_le _ _
+    _ = |u| + |c| * |v| := by rw [abs_mul]
+    _ ≤ A * g * w + |c| * (B * w) :=
+      add_le_add hu (mul_le_mul_of_nonneg_left hv (abs_nonneg c))
+    _ ≤ A * N * w + N * (B * w) :=
+      add_le_add
+        (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hg hA) hw)
+        (mul_le_mul_of_nonneg_right hc (mul_nonneg hB hw))
+    _ = (A + B) * N * w := by ring
+
+/-- Work with the common height and a real budget before introducing the full
+state space. The left constant contributes only through the radial cutoff. -/
+private theorem neighborhood_commonHeight_low_jet_bounds
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (hS : IsPhysicalSpaces D T S) :
+    ∃ Cr Ct Ctt : ℝ, 0 ≤ Cr ∧ 0 ≤ Ct ∧ 0 ≤ Ctt ∧
+      ∀ (u : ScalarCommonHeight S) (N : ℝ),
+        scalarHeightGrading S 4 u.1 ≤ N → |u.2| ≤ N →
+        ∀ p ∈ annularOpen D,
+          |radialPartial (scalarCommonHeightDecode S u) p| ≤ Cr * N * D.w p.1 ∧
+          |heightAngular (scalarCommonHeightDecode S u) p| ≤ Ct * N ∧
+          |angularPartial (heightAngular (scalarCommonHeightDecode S u)) p| ≤
+            Ctt * N * D.w p.1 := by
+  obtain ⟨Cr, hCr, hr⟩ :=
+    scalarHeight_radial_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
+  obtain ⟨Ct, hCt, ht⟩ :=
+    scalarHeight_angular_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
+  obtain ⟨Ctt, hCtt, htt⟩ :=
+    scalarHeight_angularSecond_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
+  obtain ⟨Cχ, hCχ, hχ⟩ := scalarCutoff_deriv_le_reference hD hS
+  refine ⟨Cr + Cχ, Ct, Ctt, add_nonneg hCr hCχ, hCt, hCtt, ?_⟩
+  intro u N hu hc p hp
+  have hw : 0 ≤ D.w p.1 := (hD.choose_spec.1.2.2.2.2.1 p.1 hp.1).le
+  have hradial := scalarCommonHeightDecode_radialPartial
+    (D := D) (T := T) (S := S) hT hS u p
+  have hangular := scalarCommonHeightDecode_heightAngular_eq
+    (D := D) (T := T) (S := S) hT hS u
+  refine ⟨?_, ?_, ?_⟩
+  · exact (congrArg abs hradial).trans_le
+      (neighborhood_radial_sum_bound hCr hCχ hw hu hc (hr u.1 p hp) (hχ p.1 hp.1))
+  · exact (congrArg (fun f : PolarPoint → ℝ => |f p|) hangular).trans_le
+      ((ht u.1 p hp).trans (mul_le_mul_of_nonneg_left hu hCt))
+  · exact (congrArg (fun f : PolarPoint → ℝ => |angularPartial f p|) hangular).trans_le
+      ((htt u.1 p hp).trans
+        (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hu hCtt) hw))
+
 /-- The three actual height jets have one fixed order-four bound. -/
 theorem stateU_low_jet_bounds
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -78,50 +131,11 @@ theorem stateU_low_jet_bounds
         |heightAngular (stateU S x) p| ≤ Ct * stateGrading S 4 x ∧
         |angularPartial (heightAngular (stateU S x)) p| ≤
           Ctt * stateGrading S 4 x * D.w p.1 := by
-  have pr := scalarHeight_radial_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
-  have pt := scalarHeight_angular_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
-  have ptt := scalarHeight_angularSecond_low_jet_bound (D := D) (T := T) (S := S) hD hT hS
-  have pχ := scalarCutoff_deriv_le_reference hD hS
-  let Cr : ℝ := pr.choose
-  let Ct : ℝ := pt.choose
-  let Ctt : ℝ := ptt.choose
-  let Cχ : ℝ := pχ.choose
-  have hCr : 0 ≤ Cr := pr.choose_spec.1
-  have hCt : 0 ≤ Ct := pt.choose_spec.1
-  have hCtt : 0 ≤ Ctt := ptt.choose_spec.1
-  have hCχ : 0 ≤ Cχ := pχ.choose_spec.1
-  have hr := pr.choose_spec.2
-  have ht := pt.choose_spec.2
-  have htt := ptt.choose_spec.2
-  have hχ := pχ.choose_spec.2
-  refine ⟨Cr + Cχ, Ct, Ctt, add_nonneg hCr hCχ, hCt, hCtt, ?_⟩
-  intro x p hp
+  obtain ⟨Cr, Ct, Ctt, hCr, hCt, hCtt, hjet⟩ :=
+    neighborhood_commonHeight_low_jet_bounds hD hT hS
+  refine ⟨Cr, Ct, Ctt, hCr, hCt, hCtt, fun x p hp => ?_⟩
   have hc := neighborhoodStateGrading_height_le S 4 x
-  have hw : 0 ≤ D.w p.1 := (hD.choose_spec.1.2.2.2.2.1 p.1 hp.1).le
-  refine ⟨?_, ?_, ?_⟩
-  · change |radialPartial (scalarCommonHeightDecode S x.1) p| ≤ _
-    rw [scalarCommonHeightDecode_radialPartial hT hS]
-    calc
-      _ ≤ |radialPartial ((S.height scalarBeta).decode x.1.1) p| +
-          |x.1.2 * deriv S.chiLeft p.1| := abs_add_le _ _
-      _ ≤ Cr * scalarHeightGrading S 4 x.1.1 * D.w p.1 +
-          |x.1.2| * (Cχ * D.w p.1) := by
-        rw [abs_mul]
-        exact add_le_add (hr _ _ hp)
-          (mul_le_mul_of_nonneg_left (hχ _ hp.1) (abs_nonneg _))
-      _ ≤ Cr * stateGrading S 4 x * D.w p.1 +
-          stateGrading S 4 x * (Cχ * D.w p.1) :=
-        add_le_add
-          (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hc.1 hCr) hw)
-          (mul_le_mul_of_nonneg_right hc.2 (mul_nonneg hCχ hw))
-      _ = _ := by ring
-  · change |heightAngular (scalarCommonHeightDecode S x.1) p| ≤ _
-    rw [scalarCommonHeightDecode_heightAngular_eq hT hS]
-    exact (ht _ _ hp).trans (mul_le_mul_of_nonneg_left hc.1 hCt)
-  · change |angularPartial (heightAngular (scalarCommonHeightDecode S x.1)) p| ≤ _
-    rw [scalarCommonHeightDecode_heightAngular_eq hT hS]
-    exact (htt _ _ hp).trans
-      (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hc.1 hCtt) hw)
+  exact hjet x.1 (stateGrading S 4 x) hc.1 hc.2 p hp
 
 /-- The lower-bound calculation also bounds the opposite perturbation, giving
 both sides of each denominator on the same numerical scale. -/

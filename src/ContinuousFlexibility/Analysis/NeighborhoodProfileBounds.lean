@@ -78,14 +78,18 @@ theorem neighborhoodStateGrading_controls_le (S : PhysicalSpacesData) (s : ℕ)
     (x : AnnularState S) :
     |x.2.1| ≤ stateGrading S s x ∧
       (S.circle (3 / 4 : ℝ)).grading s x.2.2.1 ≤ stateGrading S s x := by
-  rw [neighborhoodStateGrading_apply]
-  have h₁ := apply_nonneg ((S.height (3 / 4 : ℝ)).grading s) x.1.1
-  have h₂ := norm_nonneg x.1.2
-  have h₃ := norm_nonneg x.2.1
-  have h₄ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1
-  have h₅ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.2
-  rw [← Real.norm_eq_abs]
-  constructor <;> linarith only [h₁, h₂, h₃, h₄, h₅]
+  have hheight : 0 ≤ (S.height (3 / 4 : ℝ)).grading s x.1.1 + ‖x.1.2‖ :=
+    add_nonneg (apply_nonneg ((S.height (3 / 4 : ℝ)).grading s) x.1.1)
+      (norm_nonneg x.1.2)
+  have hκ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1
+  have hη := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.2
+  have htail : ‖x.2.1‖ + ((S.circle (3 / 4 : ℝ)).grading s x.2.2.1 +
+      (S.circle (3 / 4 : ℝ)).grading s x.2.2.2) ≤ stateGrading S s x :=
+    (le_add_of_nonneg_left hheight).trans_eq (neighborhoodStateGrading_apply S s x).symm
+  exact ⟨(Real.norm_eq_abs x.2.1).symm.trans_le
+      ((le_add_of_nonneg_right (add_nonneg hκ hη)).trans htail),
+    ((le_add_of_nonneg_right hη).trans
+      (le_add_of_nonneg_left (norm_nonneg x.2.1))).trans htail⟩
 
 /-- The mean estimate retains its explicit dependence on the input grading. -/
 theorem stateKappa_grading_weight_bound

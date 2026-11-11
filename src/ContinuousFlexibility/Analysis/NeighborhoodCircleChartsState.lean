@@ -92,12 +92,15 @@ theorem stateLeftChart_odd {x : AnnularState S} (hx : stateSector S x)
 theorem neighborhoodStateGrading_chart_le (S : PhysicalSpacesData) (s : ℕ)
     (x : AnnularState S) :
     (S.circle (3 / 4 : ℝ)).grading s x.2.2.2 ≤ stateGrading S s x := by
-  rw [neighborhoodStateGrading_apply]
-  have h₁ := apply_nonneg ((S.height (3 / 4 : ℝ)).grading s) x.1.1
-  have h₂ := norm_nonneg x.1.2
-  have h₃ := norm_nonneg x.2.1
-  have h₄ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1
-  linarith only [h₁, h₂, h₃, h₄]
+  have hheight : 0 ≤ (S.height (3 / 4 : ℝ)).grading s x.1.1 + ‖x.1.2‖ :=
+    add_nonneg (apply_nonneg ((S.height (3 / 4 : ℝ)).grading s) x.1.1)
+      (norm_nonneg x.1.2)
+  have hκ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading s) x.2.2.1
+  have htail : ‖x.2.1‖ + ((S.circle (3 / 4 : ℝ)).grading s x.2.2.1 +
+      (S.circle (3 / 4 : ℝ)).grading s x.2.2.2) ≤ stateGrading S s x :=
+    (le_add_of_nonneg_left hheight).trans_eq (neighborhoodStateGrading_apply S s x).symm
+  exact ((le_add_of_nonneg_left hκ).trans
+    (le_add_of_nonneg_left (norm_nonneg x.2.1))).trans htail
 
 /-- The derivative defect is controlled by the distance from the actual
 reference state, whose circle chart coordinate vanishes. -/
