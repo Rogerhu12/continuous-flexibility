@@ -43,9 +43,16 @@ theorem innerRadialPieceSolution_projection_fixed {F : H}
       (fun p => Ioo (G.left p) (G.right p)) central p
         (WithLp.toLp 2 (s.q.1, s.borderScalar)) =
       WithLp.toLp 2 (s.q.1, s.borderScalar) := by
-  have hfield := innerRadialH1Domain_piece_projection D hw
-    (G.left_pos p) (G.in_core p) (G.weight_pos p) s.domain
-  rw [innerBorderPieceProjection_apply, WithLp.toLp_fst, WithLp.toLp_snd, hfield]
+  have hfield :
+      innerL2PieceProjection (radialHilbertMeasure D) (Ioo (G.left p) (G.right p)) s.q.1 =
+        s.q.1 :=
+    innerRadialH1Domain_piece_projection D hw
+      (G.left_pos p) (G.in_core p) (G.weight_pos p) s.domain
+  rw [innerBorderPieceProjection_apply, WithLp.toLp_fst, WithLp.toLp_snd]
+  change WithLp.toLp 2
+    (innerL2PieceProjection (radialHilbertMeasure D) (Ioo (G.left p) (G.right p)) s.q.1,
+      if p = central then s.borderScalar else 0) = WithLp.toLp 2 (s.q.1, s.borderScalar)
+  rw [hfield]
   apply congrArg (fun c : ℝ => (WithLp.toLp 2 (s.q.1, c) :
     InnerBorderL2 (radialHilbertMeasure D)))
   by_cases hp : p = central
@@ -171,7 +178,9 @@ def dirichlet (hw : ContDiff ℝ ∞ D.w) : H →L[ℝ] H :=
 
 @[simp] theorem dirichlet_apply (hw : ContDiff ℝ ∞ D.w) (F : H) :
     C.dirichlet hw F = C.dirichletLinear hw F := by
-  simp only [dirichlet, innerRadialPhysicalDirichletCLMOfAmbient_apply, dirichletLinear]
+  exact innerRadialPhysicalDirichletCLMOfAmbient_apply D hw.continuous G bordered j
+    central column (C.kernelUnique hw) (C.solution_nonempty hw) (C.ambientDirichlet hw)
+    (fun F => (C.dirichletLinear_ambient hw F).symm) F
 
 theorem dirichlet_ambient (hw : ContDiff ℝ ∞ D.w) (F : H) :
     (C.dirichlet hw F).val = C.ambientDirichlet hw F.val := by

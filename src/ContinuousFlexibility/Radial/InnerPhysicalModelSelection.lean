@@ -74,8 +74,10 @@ theorem innerMorsePhysicalFamily_even :
           (innerMorseCutWeight N a γ side m)
           (M.physicalFluxError height (fun _ => 1)) sign‖ < η := by
   have hj : 2 ≤ 2 * q := by omega
-  simpa only [Nat.cast_mul, Nat.cast_ofNat] using
-    hfamily T σ D cost hreal hindex m n (2 * q) hm hmn hj hband
+  have hcast : ((2 * q : ℕ) : ℝ) = (2 : ℝ) * q := by
+    simp only [Nat.cast_mul, Nat.cast_ofNat]
+  rw [← hcast]
+  exact hfamily T σ D cost hreal hindex m n (2 * q) hm hmn hj hband
 
 def innerSelectedMorseModel : InnerBufferLocalizedData
     (innerMorseBufferData (morseChainA T m) (morseChainB T m) ((2 : ℝ) * q)
