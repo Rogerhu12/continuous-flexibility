@@ -62,8 +62,7 @@ theorem isSelectedTail_seedSelectedTailAtBand {S : SelectedTailData}
     intro hm
     subst m
     exact hno j hj hb
-  dsimp only [seedSelectedTailAtBand]
-  simpa only [if_neg hm] using hdata right m j hj he hb
+  simpa [seedSelectedTailAtBand, hm] using hdata right m j hj he hb
 
 /-- The same selected family, with its advertised innermost entry carrying
 the actual natural second-mode solution. -/

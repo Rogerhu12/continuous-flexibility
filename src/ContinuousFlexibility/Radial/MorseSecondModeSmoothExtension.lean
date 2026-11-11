@@ -131,6 +131,34 @@ theorem morseSecondMode_radialJacobi_continuousAt {w v : ℝ → ℝ} {a r : ℝ
   have hw' := (hw.derivWithin (m := ∞) (by simp)).continuousAt
   exact hflux'.sub (((continuousAt_const.mul hw').div continuousAt_id hr).mul hv.continuousAt)
 
+/-- Continuity of the actual Jacobi expression carries a homogeneous
+equation from an open tail to its regular entrance. -/
+theorem radialJacobi_zero_at_tail_entry {D : ReferenceData} {right : Bool}
+    {entry a : ℝ} {v : ℝ → ℝ} (hD : RadialProfileGeometry D)
+    (hentry : entry ∈ radialCore D) (hv : ContDiffAt ℝ ∞ v entry)
+    (hode : ∀ r ∈ radialTailInterval D right entry, radialJacobi a D.w v r = 0) :
+    radialJacobi a D.w v entry = 0 := by
+  have hcont : ContinuousAt (radialJacobi a D.w v) entry :=
+    morseSecondMode_radialJacobi_continuousAt hD.2.2.1.1.contDiffAt hv
+      (hD.1.trans hentry.1).ne'
+  cases right
+  · have he : radialJacobi a D.w v =ᶠ[𝓝[<] entry] (fun _ : ℝ => (0 : ℝ)) :=
+      Filter.mem_of_superset (Ioo_mem_nhdsLT hentry.1) (fun r hr => hode r hr)
+    exact tendsto_nhds_unique (hcont.tendsto.mono_left nhdsWithin_le_nhds)
+      (tendsto_const_nhds.congr' he.symm)
+  · have he : radialJacobi a D.w v =ᶠ[𝓝[>] entry] (fun _ : ℝ => (0 : ℝ)) :=
+      Filter.mem_of_superset (Ioo_mem_nhdsGT hentry.2) (fun r hr => hode r hr)
+    exact tendsto_nhds_unique (hcont.tendsto.mono_left nhdsWithin_le_nhds)
+      (tendsto_const_nhds.congr' he.symm)
+
+theorem radialNaturalTail_entry_radialJacobi {D : ReferenceData} {right : Bool}
+    {entry : ℝ} {u : ℝ → ℝ} (hD : RadialProfileGeometry D)
+    (hentry : entry ∈ radialCore D) (hu : RadialNaturalTail D right 2 entry u) :
+    radialJacobi 4 D.w u entry = 0 := by
+  apply radialJacobi_zero_at_tail_entry hD hentry hu.1
+  intro r hr
+  simpa only [Nat.cast_ofNat, show (2 : ℝ) ^ 2 = 4 by norm_num] using hu.2.1.2 r hr
+
 /-- A smooth extension satisfying the original equation on the open
 tail also satisfies it at the regular entrance. -/
 theorem radialTail_extension_radialJacobi {D : ReferenceData} {right : Bool}
@@ -148,19 +176,7 @@ theorem radialTail_extension_radialJacobi {D : ReferenceData} {right : Bool}
       Filter.mem_of_superset (hopen.mem_nhds hr) (fun t ht => heq t ht)
     rw [radialJacobi_congr_germ hgerm]
     simpa only [Nat.cast_ofNat, show (2 : ℝ) ^ 2 = 4 by norm_num] using hu.2.1.2 r hr
-  have hcont : ContinuousAt (radialJacobi 4 D.w v) entry :=
-    morseSecondMode_radialJacobi_continuousAt hD.2.2.1.1.contDiffAt hv.contDiffAt
-      (hD.1.trans hentry.1).ne'
-  refine ⟨?_, hode⟩
-  cases right
-  · have he : radialJacobi 4 D.w v =ᶠ[𝓝[<] entry] (fun _ : ℝ => (0 : ℝ)) :=
-      Filter.mem_of_superset (Ioo_mem_nhdsLT hentry.1) (fun r hr => hode r hr)
-    exact tendsto_nhds_unique (hcont.tendsto.mono_left nhdsWithin_le_nhds)
-      (tendsto_const_nhds.congr' he.symm)
-  · have he : radialJacobi 4 D.w v =ᶠ[𝓝[>] entry] (fun _ : ℝ => (0 : ℝ)) :=
-      Filter.mem_of_superset (Ioo_mem_nhdsGT hentry.2) (fun r hr => hode r hr)
-    exact tendsto_nhds_unique (hcont.tendsto.mono_left nhdsWithin_le_nhds)
-      (tendsto_const_nhds.congr' he.symm)
+  exact ⟨radialJacobi_zero_at_tail_entry hD hentry hv.contDiffAt hode, hode⟩
 
 /-- Full smooth extension of the specified natural tail, preserving the
 entry value and the entire original open tail, and vanishing outward. -/

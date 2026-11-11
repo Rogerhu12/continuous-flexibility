@@ -43,7 +43,6 @@ theorem hasDerivAt_coneModePair (s A B y : ℝ) :
   have h := ((((hasDerivAt_id' y).const_mul s).exp).const_mul A).add
     ((((hasDerivAt_id' y).const_mul (-s)).exp).const_mul B)
   apply h.congr_deriv
-  simp only [Function.comp_apply]
   ring
 
 private theorem coneModePair_tail_term {s A B : ℝ} (hA : A ≠ 0) (y : ℝ) :
@@ -57,7 +56,6 @@ private theorem coneModePair_tail_term {s A B : ℝ} (hA : A ≠ 0) (y : ℝ) :
     _ = B * (exp (s * y) * exp (-2 * (s * y))) := by
       dsimp only [coneModeRatio]
       field_simp [hA]
-      ring
     _ = _ := by rw [he]
 
 theorem coneModePair_factor {s A B : ℝ} (hA : A ≠ 0) (y : ℝ) :
@@ -81,6 +79,7 @@ theorem hasDerivAt_coneModeSlope {s q y : ℝ}
   have h := (((hasDerivAt_const y (1 : ℝ)).sub hz).const_mul s).div
     (hz.const_add 1) hd
   apply h.congr_deriv
+  simp only [Pi.sub_apply]
   ring
 
 theorem coneModeSlope_eq_logDerivative {s A B y : ℝ}
@@ -97,6 +96,11 @@ theorem coneModePair_neg_swap (s A B : ℝ) :
     coneModePair (-s) B A = coneModePair s A B := by
   funext y
   simp only [coneModePair, neg_neg, add_comm]
+
+private theorem conePointwise_div (f g : ℝ → ℝ) :
+    (f / g) = fun t => f t / g t := by
+  funext t
+  exact Pi.div_apply f g t
 
 /-- A far enough signed half-line has no zero and gives arbitrary C1
 control of the actual logarithmic slope. -/
@@ -120,12 +124,12 @@ theorem exists_coneModeSlope_tail_control {s A B ε : ℝ}
     have h := ((tendsto_const_nhds (x := s)).mul
       ((tendsto_const_nhds (x := (1 : ℝ))).sub hz)).div
         ((tendsto_const_nhds (x := (1 : ℝ))).add hz) (by norm_num)
-    simpa only [sub_zero, add_zero, mul_one, div_one] using h
+    simpa only [conePointwise_div, sub_zero, add_zero, mul_one, div_one] using h
   have hd : Tendsto (fun t => 4 * s ^ 2 * z t / (1 + z t) ^ 2)
       atTop (𝓝 0) := by
     have h := ((tendsto_const_nhds (x := 4 * s ^ 2)).mul hz).div
       (((tendsto_const_nhds (x := (1 : ℝ))).add hz).pow 2) (by norm_num)
-    simpa only [mul_zero, add_zero, one_pow, zero_div] using h
+    simpa only [conePointwise_div, mul_zero, add_zero, one_pow, zero_div] using h
   have hevent : ∀ᶠ t in atTop,
       |z t| < 1 / 2 ∧ |s * (1 - z t) / (1 + z t) - s| ≤ ε ∧
       |4 * s ^ 2 * z t / (1 + z t) ^ 2| ≤ ε := by

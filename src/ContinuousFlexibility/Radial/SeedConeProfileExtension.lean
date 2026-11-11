@@ -64,6 +64,7 @@ theorem radialProfile_germ {w : ℝ → ℝ} {e : ℝ}
   have hg := E.germ.comp_tendsto ht
   filter_upwards [hg, Ioi_mem_nhds he, hw.eventually (Ioi_mem_nhds hwe)]
     with r hr hrpos hwpos
+  change E.logProfile (log r) = log (w (exp (log r))) at hr
   rw [radialProfile, hr, exp_log hrpos, exp_log hwpos]
 
 end SeedPositiveLogExtension
@@ -86,10 +87,10 @@ theorem exists_seedConeProfileExtension {w : ℝ → ℝ} {a b e : ℝ}
     (hw.comp contDiff_exp).contDiffOn.log (fun y hy => (hpos _ (hmap hy)).ne')
   apply exists_seedPositiveLogExtension hf hymem
   have hd := (((hw.differentiable (by simp) (exp (log e))).hasDerivAt).comp (log e)
-    (hasDerivAt_exp (log e))).log (by simpa only [exp_log hepos] using (hpos e he).ne')
+    (hasDerivAt_exp (log e))).log (by simpa only [Function.comp_apply, exp_log hepos] using (hpos e he).ne')
   have hd' : HasDerivAt (fun y => log (w (exp y)))
       (deriv w e * e / w e) (log e) := by
-    simpa only [exp_log hepos] using hd
+    simpa only [Function.comp_apply, exp_log hepos] using hd
   rw [hd'.deriv]
   exact div_pos (mul_pos hder hepos) (hpos e he)
 

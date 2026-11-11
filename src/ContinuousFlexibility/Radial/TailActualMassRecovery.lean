@@ -169,9 +169,12 @@ theorem tailActualEdgeInterpolation_mass_recovery {T : DeepTailData}
     (deepTail_massEnd_lt_endpoint hT (n + 1))
   have hp := (deepTail_contDiffOn hT).continuousOn.mono hsub
   have hpi := hp.intervalIntegrable_of_Icc (μ := volume) hab
-  have hui := (hp.mul
-    ((tailActualEdgeInterpolation_differentiable hT (n + 1) b e).continuous.pow 2).continuousOn).intervalIntegrable_of_Icc
-      (μ := volume) hab
+  have hui : IntervalIntegrable
+      (fun x => T.p x * tailActualEdgeInterpolation T hT (n + 1) b e x ^ 2)
+      volume (T.node (n + 1)) (T.massEnd (n + 1)) :=
+    (hp.mul
+      ((tailActualEdgeInterpolation_differentiable hT (n + 1) b e).continuous.pow 2).continuousOn).intervalIntegrable_of_Icc
+        (μ := volume) hab
   have hi := intervalIntegral.integral_mono_on hab (hpi.mul_const (b ^ 2))
     ((hui.const_mul 8).add (hpi.const_mul E)) (fun x hx => calc
       T.p x * b ^ 2 ≤ T.p x *
@@ -208,7 +211,7 @@ theorem tailActualEdgeInterpolation_mass_recovery {T : DeepTailData}
       _ = (128 * (T.η / T.K) ^ 2) * (tailMass T n * a ^ 2) := by ring
       _ ≤ (1 / 2 : ℝ) * (tailMass T n * a ^ 2) :=
         mul_le_mul_of_nonneg_right hfactor (mul_nonneg (tailMass_pos hT n).le (sq_nonneg a))
-  exact hi.trans (add_le_add_left herr _)
+  exact hi.trans (add_le_add le_rfl herr)
 
 theorem tailActualSolution_mass_recovery {T : DeepTailData}
     (hT : DeepTailHypotheses T) (hη : T.η ≤ 1 / 16) (hK : 32 ≤ T.K)

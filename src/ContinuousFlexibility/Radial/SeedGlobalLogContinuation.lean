@@ -30,7 +30,7 @@ theorem hasDerivAt_seedConeLogHeight (A B y : ℝ) :
   have h := (((hasDerivAt_id y).const_mul 2).exp.const_mul A).add
     (((hasDerivAt_id y).const_mul (-2)).exp.const_mul B)
   apply h.congr_deriv
-  simp only [seedConeLogVelocity, Pi.add_apply, Pi.mul_apply, Function.comp_apply]
+  simp only [seedConeLogVelocity, id_eq]
   ring
 
 theorem hasDerivAt_seedConeLogVelocity (A B y : ℝ) :
@@ -38,7 +38,7 @@ theorem hasDerivAt_seedConeLogVelocity (A B y : ℝ) :
   have h := (((hasDerivAt_id y).const_mul 2).exp.const_mul (2 * A)).sub
     (((hasDerivAt_id y).const_mul (-2)).exp.const_mul (2 * B))
   apply h.congr_deriv
-  simp only [seedConeLogHeight, Pi.add_apply, Pi.mul_apply, Function.comp_apply]
+  simp only [seedConeLogHeight, id_eq]
   ring
 
 theorem seedConeLogHeight_secondDeriv (A B y : ℝ) :
@@ -116,14 +116,14 @@ theorem exists_seedGlobalLogContinuation {f : ℝ → ℝ} {y₀ : ℝ}
   let BR := coneExponentialCoefficient v (-2) R
   have hLe : EqOn v (seedConeLogHeight AL BL) (Ioo (E.left - 2) E.left) := by
     intro y hy
-    exact eq_coneExponential_modes (by norm_num) isOpen_Ioo (convex_Ioo _ _).isPreconnected
+    exact eq_coneExponential_modes (s := (2 : ℝ)) (by norm_num) isOpen_Ioo (convex_Ioo _ _).isPreconnected
       (show L ∈ Ioo (E.left - 2) E.left by dsimp only [L]; constructor <;> linarith)
       (fun t _ => hvs.differentiable (by simp) t)
       (fun t _ => (contDiff_infty_iff_deriv.mp hvs).2.differentiable (by simp) t)
       hLs y hy
   have hRe : EqOn v (seedConeLogHeight AR BR) (Ioo E.right (E.right + 2)) := by
     intro y hy
-    exact eq_coneExponential_modes (by norm_num) isOpen_Ioo (convex_Ioo _ _).isPreconnected
+    exact eq_coneExponential_modes (s := (2 : ℝ)) (by norm_num) isOpen_Ioo (convex_Ioo _ _).isPreconnected
       (show R ∈ Ioo E.right (E.right + 2) by dsimp only [R]; constructor <;> linarith)
       (fun t _ => hvs.differentiable (by simp) t)
       (fun t _ => (contDiff_infty_iff_deriv.mp hvs).2.differentiable (by simp) t)
@@ -186,15 +186,19 @@ theorem exists_seedGlobalLogContinuation {f : ℝ → ℝ} {y₀ : ℝ}
     apply hFn L
     rw [(hleft L le_rfl).eq_of_nhds, (hleft L le_rfl).deriv_eq,
       (hasDerivAt_seedConeLogHeight AL BL L).deriv]
-    simp only [seedConeLogHeight, seedConeLogVelocity, congrArg Prod.fst hz,
-      congrArg Prod.snd hz, mul_zero, zero_mul, add_zero, sub_zero]
+    have hA : AL = 0 := congrArg Prod.fst hz
+    have hB : BL = 0 := congrArg Prod.snd hz
+    simp only [seedConeLogHeight, seedConeLogVelocity, hA, hB,
+      mul_zero, zero_mul, add_zero, sub_zero]
   have hAR : (AR, BR) ≠ (0, 0) := by
     intro hz
     apply hFn R
     rw [(hright R le_rfl).eq_of_nhds, (hright R le_rfl).deriv_eq,
       (hasDerivAt_seedConeLogHeight AR BR R).deriv]
-    simp only [seedConeLogHeight, seedConeLogVelocity, congrArg Prod.fst hz,
-      congrArg Prod.snd hz, mul_zero, zero_mul, add_zero, sub_zero]
+    have hA : AR = 0 := congrArg Prod.fst hz
+    have hB : BR = 0 := congrArg Prod.snd hz
+    simp only [seedConeLogHeight, seedConeLogVelocity, hA, hB,
+      mul_zero, zero_mul, add_zero, sub_zero]
   exact ⟨⟨F, hFs, hF₀, hd₀, hFeq, hFn, AL, BL, AR, BR, hAL, hAR,
     fun y hy => (hleft y hy).eq_of_nhds,
     fun y hy => (hright y hy).eq_of_nhds⟩⟩

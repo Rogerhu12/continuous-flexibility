@@ -62,7 +62,7 @@ theorem isAccumulatingProfile_coordinateSurgery
     (hNew : RadialProfileGeometry (replaceReferenceProfile (coordinateReference D e) w phi))
     (hK : IsCompact K) (hKcore : K ⊆ radialCore (coordinateReference D e))
     (hM : 1 ≤ M)
-    (hTail : ∀ r ∈ radialCore (coordinateReference D e), r ∉ K, ∃ A c : ℝ, 0 < A ∧ |A| ≤ M ∧ A⁻¹ ≤ M ∧ |c| ≤ M ∧
+    (hTail : ∀ r ∈ radialCore (coordinateReference D e), r ∉ K → ∃ A c : ℝ, 0 < A ∧ |A| ≤ M ∧ A⁻¹ ≤ M ∧ |c| ≤ M ∧
       e r = c * r ∧ w =ᶠ[𝓝 r] fun x => A * D.w (c * x)) :
     IsAccumulatingProfile (replaceReferenceProfile (coordinateReference D e) w phi) := by
   classical

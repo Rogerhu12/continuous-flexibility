@@ -59,8 +59,8 @@ theorem morseSecondMode_physicalLocalization {T : MorseChainData} {σ : ℕ → 
       (∀ n, ∃ capStart : ℝ,
         (morseSecondModeTail D T N false).massEnd n < capStart ∧
         capStart < (morseSecondModeTail D T N false).node (n + 1) ∧
-        ∀ x ∈ Ioo (morseSecondModeTail D T N false).node n
-          (morseSecondModeTail D T N false).node (n + 1),
+        ∀ x ∈ Ioo ((morseSecondModeTail D T N false).node n)
+          ((morseSecondModeTail D T N false).node (n + 1)),
           TailPhysicalCellAt D false
             (if x < capStart then N + n else N + n + 1) x) ∧ _
     constructor

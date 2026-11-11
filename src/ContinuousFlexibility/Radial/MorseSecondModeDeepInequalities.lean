@@ -52,7 +52,6 @@ theorem morseSecondMode_logRatio_bounds {T : MorseChainData} {σ : ℕ → ℝ}
   have hlogB : log (morseChainB T n) = -9 * log (T.d n : ℝ) := by
     unfold morseChainB
     rw [log_rpow hdpos]
-    ring
   refine ⟨log_nonneg ((le_div_iff₀ hB).mpr (by nlinarith)), ?_⟩
   rw [log_div hA.ne' hB.ne', hlogB]
   nlinarith only [hlogd, hlog3, hlogA, sq_nonneg (n : ℝ)]
@@ -69,8 +68,9 @@ theorem morseSecondMode_coefficient_lower {T : MorseChainData} {σ : ℕ → ℝ
         (10 * (n : ℝ) ^ (3 / 2 : ℝ) + 4 * (n : ℝ) + 75)) ≤
       (morseChainAmplitude T σ m / morseChainAmplitude T σ n) *
         (morseChainA T m ^ 2 / morseChainA T n ^ 4) := by
-  rcases hnear with rfl | hadj
-  · have hAlog := (abs_le.mp (morseChainA_log_error T n
+  rcases hnear with hsame | hadj
+  · subst m
+    have hAlog := (abs_le.mp (morseChainA_log_error T n
       (morseSecondMode_chainInteger hreal hn))).2
     have hA := morseSecondMode_A_pos hreal hn
     have hlam := morseChainAmplitude_pos T σ hσ n
@@ -96,7 +96,8 @@ theorem morseSecondMode_quadratic_error {n : ℕ} (hn : 400 ≤ n) :
   have hn0 : 0 < (n : ℝ) := by linarith
   have hs : (20 : ℝ) ≤ sqrt n := by
     calc
-      _ = sqrt (400 : ℝ) := by norm_num
+      _ = sqrt (400 : ℝ) := by
+        rw [show (400 : ℝ) = 20 ^ 2 by norm_num, sqrt_sq (by norm_num : (0 : ℝ) ≤ 20)]
       _ ≤ _ := sqrt_le_sqrt hnR
   have hp : (n : ℝ) ^ (3 / 2 : ℝ) * sqrt n = (n : ℝ) ^ 2 := by
     rw [sqrt_eq_rpow, ← Real.rpow_add hn0,
@@ -118,7 +119,7 @@ theorem morseSecondModeEnvelope_tendsto (C : ℝ) :
       atTop (𝓝 0) :=
     (tendsto_pow_mul_exp_neg_atTop_nhds_zero 2).comp tendsto_natCast_atTop_atTop
   have h₀ : Tendsto (fun n : ℕ => exp (-(n : ℝ))) atTop (𝓝 0) := by
-    simpa only [pow_zero, one_mul] using
+    simpa only [pow_zero, one_mul, Function.comp_apply] using
       (tendsto_pow_mul_exp_neg_atTop_nhds_zero 0).comp
         (show Tendsto (fun n : ℕ => (n : ℝ)) atTop atTop from tendsto_natCast_atTop_atTop)
   have heq : morseSecondModeEnvelope C =

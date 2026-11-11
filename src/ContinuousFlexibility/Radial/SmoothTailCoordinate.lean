@@ -36,7 +36,7 @@ theorem radialTailRamp_contDiff (c d : ℝ) :
 theorem radialTailStretch_contDiff (A B c d : ℝ) :
     ContDiff ℝ ∞ (radialTailStretch A B c d) :=
   (contDiff_const.mul contDiff_id).add
-    ((radialTailRamp_contDiff c d).const_mul (B - A))
+    (contDiff_const.mul (radialTailRamp_contDiff c d))
 
 theorem radialTailRamp_left {c d r : ℝ} (hcd : c < d) (hr : r ≤ c) :
     radialTailRamp c d r = 0 := by

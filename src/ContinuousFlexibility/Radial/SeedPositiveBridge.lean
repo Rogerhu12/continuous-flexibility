@@ -76,6 +76,7 @@ theorem positiveConeBridgeSlope_reciprocal (y : ℝ) :
 
 theorem positiveConeBridgeSlope_left_tendsto :
     Tendsto positiveConeBridgeSlope atBot (𝓝 (-2)) := by
+  change Tendsto (fun y : ℝ => 2 - 4 / (1 + exp (4 * y))) atBot (𝓝 (-2))
   have ht : Tendsto (fun y : ℝ => exp (4 * y)) atBot (𝓝 0) :=
     tendsto_exp_atBot.comp (Tendsto.const_mul_atBot (by norm_num) tendsto_id)
   have h := (tendsto_const_nhds (x := (2 : ℝ))).sub

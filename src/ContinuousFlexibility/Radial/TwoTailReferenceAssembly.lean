@@ -98,7 +98,7 @@ theorem exists_accumulating_reference_of_two_tail_surgery
     scalar_bounds_of_sum_le hTLM
   have hrightBounds : |HR * B| ≤ M ∧ (HR * B)⁻¹ ≤ M ∧ |B⁻¹| ≤ M :=
     scalar_bounds_of_sum_le hTRM
-  have hTail : ∀ r ∈ radialCore (coordinateReference D₁ e), r ∉ K,
+  have hTail : ∀ r ∈ radialCore (coordinateReference D₁ e), r ∉ K →
       ∃ F q : ℝ, 0 < F ∧ |F| ≤ M ∧ F⁻¹ ≤ M ∧ |q| ≤ M ∧
         e r = q * r ∧ W =ᶠ[𝓝 r] fun x => F * D₁.w (q * x) := by
     intro r hr hKr

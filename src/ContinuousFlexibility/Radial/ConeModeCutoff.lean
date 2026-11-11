@@ -125,7 +125,10 @@ private theorem exists_coneModeCutoff_dominant {s A B Q : ℝ}
         hs h4C (hχBounds y).1 (hχBounds y).2 (hχd y) hd.2.2.2.1 hd.2.2.2.2
   have hwindow : s * y₀ ∈ Ioo (L - 1 / 2) (H + 1 / 2) := by
     rw [hsy]
-    constructor <;> dsimp only [H] <;> linarith
+    constructor
+    · linarith
+    · change L < L + 2 + 1 / 2
+      linarith
   have hone : χ =ᶠ[𝓝 y₀] fun _ => 1 := by
     filter_upwards [(isOpen_Ioo.preimage hcoord).mem_nhds hwindow] with y hy
     dsimp only [χ, χ₀]
