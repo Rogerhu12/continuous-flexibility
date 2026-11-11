@@ -42,8 +42,8 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 | Lean modules compiled / total | 382 / 390 |
 | Modules in the root import | 340 |
 | Lines of Lean under `src/` | 93,574 |
-| Axiom audit (integration build, 3,814 jobs) | passed: 11,066 declarations, 8,324 theorems |
-| Blueprint statements proved / total | 9 / 42 (S01, S02, R01, R02, R03, R04, W01, Tame, N12) |
+| Axiom audit (`lake build`, 3834 jobs) | passed: 11,293 declarations, 8,540 theorems |
+| Blueprint statements proved / total | 13 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
 | Modules on the module system | 1 (the Challenge) of 394 |
 
