@@ -61,7 +61,7 @@ theorem r11b_source_coefficient_mono {D : ReferenceData} (hab : D.a ≤ D.b)
       (r11b_sourceCellSquare_nonneg hab γ Mlo F.1) hmono hF.2.1
   refine ⟨⟨hF.1, hs, hF.2.2⟩, ?_⟩
   unfold sourceNormSquare
-  exact add_le_add_left (Summable.tsum_le_tsum hmono hs hF.2.1) _
+  exact add_le_add le_rfl (Summable.tsum_le_tsum hmono hs hF.2.1)
 
 theorem r11b_sourceMember_of_le {D : ReferenceData} (hab : D.a ≤ D.b)
     {γ Mlo Mhi : ℝ} (hM : Mlo ≤ Mhi) {F : RadialSource}
@@ -88,7 +88,7 @@ theorem r11b_output_coefficient_mono {D : ReferenceData} (hab : D.a ≤ D.b)
       (r11b_outputCellSquare_nonneg hab γ Mhi (outputRemainder D aL U)) hmono hU.2.1
   refine ⟨⟨hU.1, hs, hU.2.2⟩, ?_⟩
   unfold outputNormSquare
-  exact add_le_add_left (Summable.tsum_le_tsum hmono hs hU.2.1) _
+  exact add_le_add le_rfl (Summable.tsum_le_tsum hmono hs hU.2.1)
 
 theorem r11b_outputRealization_of_le {D : ReferenceData} (hab : D.a ≤ D.b)
     {γ Mlo Mhi aL : ℝ} (hM : Mlo ≤ Mhi) {U : RadialUnknown}
