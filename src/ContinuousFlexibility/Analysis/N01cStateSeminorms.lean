@@ -72,14 +72,43 @@ theorem continuous_stateGrading (S : PhysicalSpacesData) (n : ℕ) :
       ((hcircle.comp (continuous_fst.comp (continuous_snd.comp continuous_snd))).add
         (hcircle.comp (continuous_snd.comp (continuous_snd.comp continuous_snd)))))
 
+/-- Translation is checked separately in the normed projective coordinates. -/
+private theorem continuous_projective_sub_const
+    {E : ℕ → Type*} [∀ n, NormedAddCommGroup (E n)] [∀ n, NormedSpace ℝ (E n)]
+    (bond : ∀ n, E (n + 1) →L[ℝ] E n) (y : ProjectiveLimit E bond) :
+    Continuous (fun x : ProjectiveLimit E bond => x - y) := by
+  apply continuous_iff_continuousAt.mpr
+  intro x
+  apply (tendsto_projectiveLimit_iff E bond).mpr
+  intro n
+  change Filter.Tendsto (fun z => projectiveCoordinate E bond n (z - y)) (𝓝 x)
+    (𝓝 (projectiveCoordinate E bond n (x - y)))
+  simp only [map_sub]
+  exact ((projectiveCoordinate E bond n).continuous.sub continuous_const).tendsto x
+
+/-- Product continuity uses only scalar and projective-coordinate translations. -/
+private theorem continuous_annularState_sub_const (S : PhysicalSpacesData)
+    (y : AnnularState S) : Continuous (fun x : AnnularState S => x - y) := by
+  have hheight : Continuous (fun x : AnnularState S => x.1.1 - y.1.1) :=
+    (continuous_projective_sub_const (S.height (3 / 4 : ℝ)).bond y.1.1).comp
+      (continuous_fst.comp continuous_fst)
+  have hc : Continuous (fun x : AnnularState S => x.1.2 - y.1.2) :=
+    (continuous_snd.comp continuous_fst).sub continuous_const
+  have hν : Continuous (fun x : AnnularState S => x.2.1 - y.2.1) :=
+    (continuous_fst.comp continuous_snd).sub continuous_const
+  have hκ : Continuous (fun x : AnnularState S => x.2.2.1 - y.2.2.1) :=
+    (continuous_projective_sub_const (S.circle (3 / 4 : ℝ)).bond y.2.2.1).comp
+      (continuous_fst.comp (continuous_snd.comp continuous_snd))
+  have hchart : Continuous (fun x : AnnularState S => x.2.2.2 - y.2.2.2) :=
+    (continuous_projective_sub_const (S.circle (3 / 4 : ℝ)).bond y.2.2.2).comp
+      (continuous_snd.comp (continuous_snd.comp continuous_snd))
+  exact (hheight.prodMk hc).prodMk (hν.prodMk (hκ.prodMk hchart))
+
 theorem isOpen_stateNeighborhood (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (base : ℕ) (ε : ℝ) : IsOpen (stateNeighborhood S C base ε) := by
-  have hprojection : Continuous (fun z : AnnularState S × ℝ => z.1) :=
-    continuous_fst
-  have hreference : Continuous (fun _ : AnnularState S × ℝ => C.referenceState) :=
-    continuous_const
   have hsubtract : Continuous (fun z : AnnularState S × ℝ =>
-      z.1 - C.referenceState) := hprojection.sub hreference
+      z.1 - C.referenceState) :=
+    (continuous_annularState_sub_const S C.referenceState).comp continuous_fst
   have hstate : Continuous (fun z : AnnularState S × ℝ =>
       stateGrading S base (z.1 - C.referenceState)) :=
     (continuous_stateGrading S base).comp hsubtract
@@ -180,15 +209,23 @@ theorem stateKappa_eq_of_controlComponent_eq {S : PhysicalSpacesData}
   exact congrArg (fun u : CircleSpace S =>
     angularMean ((S.circle (3 / 4 : ℝ)).decode u m)) h
 
+private theorem nestedProd_control_sub {A B C D E : Type*}
+    [Sub A] [Sub B] [Sub C] [Sub D] [Sub E]
+    (x y : (A × B) × (C × (D × E))) :
+    (x - y).2.2.1 = x.2.2.1 - y.2.2.1 := by
+  rw [Prod.snd_sub, Prod.snd_sub, Prod.fst_sub]
+
 /-- The displacement has the same control component because the reference
 control sequence is zero. -/
 theorem stateKappa_sub_reference {D : ReferenceData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} (href : referenceStateConditions D S C)
     (x : AnnularState S) (m : ℕ) :
     stateKappa S (x - C.referenceState) m = stateKappa S x m := by
-  apply stateKappa_eq_of_controlComponent_eq (m := m)
   have hkappa : C.referenceState.2.2.1 = 0 := href.2.2.2.1
-  simp only [Prod.fst_sub, Prod.snd_sub, hkappa, sub_zero]
+  have hcomponent : (x - C.referenceState).2.2.1 = x.2.2.1 :=
+    (nestedProd_control_sub x C.referenceState).trans (by rw [hkappa, sub_zero])
+  exact stateKappa_eq_of_controlComponent_eq
+    (x := x - C.referenceState) (y := x) hcomponent m
 
 /-- A common low-order state ball gives one uniform smallness bound for
 every actual control mean. -/
