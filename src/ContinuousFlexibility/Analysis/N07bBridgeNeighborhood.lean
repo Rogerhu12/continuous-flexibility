@@ -28,7 +28,7 @@ theorem n07b_reference_mem_stateNeighborhood
     (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
   change stateGrading S base (C.referenceState - C.referenceState) < ε ∧ |(0 : ℝ)| < ε
   have hzero : stateGrading S base (0 : AnnularState S) = (0 : ℝ) :=
-    map_zero (stateGrading S base)
+    (stateGrading S base).toAddGroupSeminorm.map_zero'
   simpa only [sub_self, hzero, abs_zero] using And.intro hε hε
 
 /-- The scalar norm enlargement does not inspect any state or volume model. -/
@@ -121,15 +121,33 @@ private theorem n07b_common_lifts_on_smaller
   · exact fun z hz hs f => hsourceNamed z (hUs hz) hs f
   · exact fun z hz hs => hcoeff z (hUr hz) hs
 
+section UniformAssembly
+
+variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+  {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+  {V : VolumeModelData S K} {b base base' : ℕ} {ε ε' : ℝ}
+  {B : CanonicalDomainData S K V b} {P : RelativeInverseData S K V b B}
+  {G : ScalarInverseData S}
+
+local instance n07bNeighborhoodLevelNormedAddCommGroup :
+    NormedAddCommGroup (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedAddCommGroup _
+local instance n07bNeighborhoodLevelNormedSpace :
+    NormedSpace ℝ (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedSpace _
+local instance n07bNeighborhoodUnknownNormedAddCommGroup :
+    NormedAddCommGroup (CanonicalUnknown S K) := inferInstance
+local instance n07bNeighborhoodUnknownNormedSpace :
+    NormedSpace ℝ (CanonicalUnknown S K) := inferInstance
+local instance n07bNeighborhoodDomainNormedAddCommGroup :
+    NormedAddCommGroup B.Space := Submodule.normedAddCommGroup _
+local instance n07bNeighborhoodDomainNormedSpace :
+    NormedSpace ℝ B.Space := Submodule.normedSpace _
+
 set_option diagnostics true in
 /-- Assemble the bridge from common actual source lifts and coefficient
 bounds. All representation and identification goals keep their named forms. -/
 private theorem n07b_scalarBanachBridge_of_uniform_lifts
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
-    {V : VolumeModelData S K} {b base base' : ℕ} {ε ε' : ℝ}
-    {B : CanonicalDomainData S K V b} {P : RelativeInverseData S K V b B}
-    {G : ScalarInverseData S}
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hborder : RadialTrueBorder D)
     (hK : N04PartA D S C K base ε)
@@ -169,6 +187,8 @@ private theorem n07b_scalarBanachBridge_of_uniform_lifts
       hgeom href hsref hreferenceSource (hU hz) hs hAr (hcoeff z hz hs) f F hF
   run_tac Lean.logInfo "N07b bridge assembly: identification obtained"
   exact ⟨F, hnorm, hF, hid⟩
+
+end UniformAssembly
 
 set_option diagnostics true in
 theorem n07b_exists_scalarBanachBridge_on_smaller
