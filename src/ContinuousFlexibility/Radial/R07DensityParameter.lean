@@ -118,6 +118,8 @@ theorem continuousOn_r07PhysicalDensity_iteratedDeriv {X : Type*} [TopologicalSp
     rw [hfixed z.1]
     dsimp only [weight]
     ring
+  change iteratedDeriv n (r07PhysicalDensity (D z.1) side j) z.2 =
+    iteratedDeriv n (fun x => weight x * (D z.1).w (Statements.tailPhysicalRadius side x)) z.2
   rw [heq]
 
 theorem r07_radialJet_eq_iteratedDeriv (n : ℕ) (f : ℝ → ℝ) :

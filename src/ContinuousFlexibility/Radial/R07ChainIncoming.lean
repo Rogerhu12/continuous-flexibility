@@ -163,7 +163,7 @@ theorem exists_r07_incoming_on_preceding_cell {T : Statements.MorseChainData}
     r07_cap_action_of_later_band T hC (by have := G.start_large; omega)
       (fun n _ => G.d_exact n) hband hm (by omega)
   have hsol := exists_r07_normalized_morse_incoming right hreal.geometry hB hAB hBA hs hlam hj hr
-    (lt_min hcCore.1 heCore.1) (min_le_max c e) (max_lt hcCore.2 heCore.2) hmap
+    (lt_min hcCore.1 heCore.1) (min_le_max : min c e ≤ max c e) (max_lt hcCore.2 heCore.2) hmap
     (r07_realized_normalized_cell_profile G hreal right k) haction
   have hc' : s * r (r07CapCut right A B) = c := by
     rw [← hc]

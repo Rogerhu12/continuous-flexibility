@@ -27,15 +27,15 @@ theorem r07_unitCompare_mul {a b c d : ℝ} (hab : R07UnitCompare a b)
   have hc : 0 ≤ c := (mul_nonneg (exp_pos _).le hd).trans hcd.1
   have hlo := mul_le_mul hab.1 hcd.1 (mul_nonneg (exp_pos _).le hd) ha
   have hhi := mul_le_mul hab.2 hcd.2 hc (mul_nonneg (exp_pos _).le hb)
-  have he₋ : exp (-1 : ℝ) * exp (-1) = exp (-2) := by rw [← exp_add]; norm_num
-  have he₊ : exp (1 : ℝ) * exp 1 = exp 2 := by rw [← exp_add]; norm_num
+  have heNeg : exp (-1 : ℝ) * exp (-1) = exp (-2) := by rw [← exp_add]; norm_num
+  have hePos : exp (1 : ℝ) * exp 1 = exp 2 := by rw [← exp_add]; norm_num
   constructor
   · calc
-      _ = (exp (-1) * b) * (exp (-1) * d) := by rw [← he₋]; ring
+      _ = (exp (-1) * b) * (exp (-1) * d) := by rw [← heNeg]; ring
       _ ≤ _ := hlo
   · calc
       _ ≤ (exp 1 * b) * (exp 1 * d) := hhi
-      _ = _ := by rw [← he₊]; ring
+      _ = _ := by rw [← hePos]; ring
 
 theorem r07_unitCompare_domination {a b c d L : ℝ}
     (hab : R07UnitCompare a b) (hcd : R07UnitCompare c d)
@@ -96,7 +96,7 @@ theorem r07_physical_compare_near_endpoint {D : ReferenceData} {right : Bool}
       rw [r07_log_radius_ratio_abs right hep,
         abs_of_nonpos (sub_nonpos.mpr (hx.2.trans hbe.le))]
       linarith only [hclose, hea, hx.1])
-  simpa only [hprod] using hc
+  simpa only [R07UnitCompare, hprod] using hc
 
 theorem r07_deepTail_node_bounds {T : MorseChainData} {D : ReferenceData}
     {σ C : ℕ → ℝ} (h : MorseChainRealization T σ D C)

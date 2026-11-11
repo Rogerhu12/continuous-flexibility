@@ -135,11 +135,11 @@ theorem exists_r07_original_incoming_family {T : MorseChainData}
       RadialHomogeneousOn (D σ) j (uIcc c e) u ∧
       (∀ r ∈ radialOpenSpan c p, 0 < deriv (D σ).w r) := by
     obtain ⟨u, hu, hup, hud, hode⟩ := exists_radialSolution_on_Icc (hreal σ).geometry
-      (lt_min (hcσ σ).1 (heσ σ).1) (min_le_max c e)
+      (lt_min (hcσ σ).1 (heσ σ).1) (min_le_max : min c e ≤ max c e)
       (max_lt (hcσ σ).2 (heσ σ).2) hpce ((j : ℝ) ^ 2) 1 (deriv u₀ p)
     have heq : EqOn u u₀ (uIcc c p) := by
       apply radialHomogeneous_eqOn_Icc (hreal σ).geometry
-        (lt_min (hcσ σ).1 (hpσ σ).1) (min_le_max c p)
+        (lt_min (hcσ σ).1 (hpσ σ).1) (min_le_max : min c p ≤ max c p)
         (max_lt (hcσ σ).2 (hpσ σ).2) right_mem_uIcc hu hu₀smooth
         (fun r hr => hode r (hcap hr))
       · intro r hr

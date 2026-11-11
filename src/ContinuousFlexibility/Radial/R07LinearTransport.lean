@@ -57,8 +57,11 @@ theorem continuous_linearODE_endpoint {X E : Type*} [TopologicalSpace X]
     Real.continuous_exp.comp (hKc.mul_const (b - a))
   have hmajorant : Continuous majorant :=
     (hδc.mul hexp).add ((hεc.div hKc (fun p => (hK p).ne')).mul (hexp.sub continuous_const))
+  have hnorm0 : ‖(0 : C(Icc a b, E →L[ℝ] E))‖ = 0 := by
+    change dist (0 : C(Icc a b, E →L[ℝ] E)) 0 = 0
+    exact dist_self _
   have hzero : majorant q = 0 := by
-    simp only [majorant, δ, ε, sub_self, norm_zero, zero_mul, zero_div, zero_add]
+    simp only [majorant, δ, ε, sub_self, norm_zero, hnorm0, zero_mul, zero_div, zero_add]
   have hbound (p : X) : ‖u p b - u q b‖ ≤ majorant p := by
     have hd : ∀ t ∈ Ico a b, HasDerivWithinAt (fun t => u p t - u q t)
         (A p t (u p t) - A q t (u q t)) (Ici t) t := by
@@ -84,13 +87,15 @@ theorem continuous_linearODE_endpoint {X E : Type*} [TopologicalSpace X]
           add_le_add ((A p t).le_opNorm _) ((A p t - A q t).le_opNorm _)
         _ ≤ K p * ‖u p t - u q t‖ + ε p :=
           add_le_add (mul_le_mul_of_nonneg_right hB (norm_nonneg _))
-            (mul_le_mul hdiff hV (norm_nonneg _) (norm_nonneg _))
+            (mul_le_mul hdiff hV (norm_nonneg _) (by
+              change 0 ≤ dist (B p - B q) 0
+              exact dist_nonneg))
     have h := norm_le_gronwallBound_of_norm_deriv_right_le
       ((hu p).sub (hu q)) hd (show ‖u p a - u q a‖ ≤ δ p from le_rfl) hnorm b ⟨hab, le_rfl⟩
     rw [gronwallBound_of_K_ne_0 (hK p).ne'] at h
     exact h
   have hlim : Tendsto majorant (𝓝 q) (𝓝 0) := by
-    simpa only [hzero] using (hmajorant.continuousAt : ContinuousAt majorant q)
+    simpa only [ContinuousAt, hzero] using (hmajorant.continuousAt : ContinuousAt majorant q)
   rw [ContinuousAt, tendsto_iff_norm_sub_tendsto_zero]
   exact squeeze_zero (fun _ => norm_nonneg _) hbound hlim
 

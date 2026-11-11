@@ -55,7 +55,7 @@ theorem r07OutgoingState_eq_of_scaled_profile {D E : ReferenceData}
     have hz : scale * radialJacobi ((j : ℝ) ^ 2) D.w v r = 0 := h.symm.trans (hvEqE r hr)
     exact (mul_eq_zero.mp hz).resolve_left hs.ne'
   have heq : EqOn v u (uIcc e f) := radialHomogeneous_eqOn_Icc hD
-    (lt_min heD.1 hfD.1) (min_le_max e f) (max_lt heD.2 hfD.2)
+    (lt_min heD.1 hfD.1) (min_le_max : min e f ≤ max e f) (max_lt heD.2 hfD.2)
     (show f ∈ Icc (min e f) (max e f) from right_mem_uIcc) hv hu hvEq huEq hvalue hslope
   obtain ⟨h₀, h₁⟩ := cauchyData_eq_of_eqOn_uIcc hne
     (hv.differentiable (by simp) e) (hu.differentiable (by simp) e) heq
