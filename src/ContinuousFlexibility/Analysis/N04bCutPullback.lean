@@ -58,12 +58,10 @@ theorem n04b_radialPartial_gaugedTravel
     rw [he]
     exact hG
   have hc := hG'.hasFDerivAt.comp (r, θ) hs
-  have hw : HasFDerivAt (n04bGaugedTravel T s τ β G)
-      (β r • ((fderiv ℝ G (n04bSignedTravel T s τ (r, θ))).comp
-          ((s • (τ' • fstL)).prod sndL)) +
-        G (n04bSignedTravel T s τ (r, θ)) • (β' • fstL)) (r, θ) := by
-    simpa only [n04bGaugedTravel, Function.comp_def] using hb.fun_mul hc
-  rw [radialPartial, hw.fderiv]
+  have hw := hb.fun_mul hc
+  change fderiv ℝ (fun p : PolarPoint => β p.1 * G (n04bSignedTravel T s τ p))
+    (r, θ) (1, 0) = _
+  rw [hw.fderiv]
   simp only [he, fstL, sndL, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
