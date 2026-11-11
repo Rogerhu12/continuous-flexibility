@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Radial.TailResistanceTransport
+import ContinuousFlexibility.Radial.TailSmoothResistanceStep
 import ContinuousFlexibility.Statements.DeepTailOperator
 import Mathlib.Topology.Order.ProjIcc
 import Mathlib.Topology.Order.IntermediateValue
@@ -10,7 +10,8 @@ The original density is only smooth on the open tail. On each compact edge,
 its constant extension at the two endpoints is globally continuous and positive.
 This extension supplies the hypotheses of `TailResistanceTransport`, while its
 mass integrals, resistance integrals and interior differential equation remain
-those of the original density.
+those of the original density. The density is the same `tailClampedDensity`
+used by the smooth resistance steps.
 -/
 
 noncomputable section
@@ -19,17 +20,13 @@ namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory
 
-/-- Constant extension of the actual density from one closed edge. -/
-def tailClampedDensity (p : ℝ → ℝ) (a b : ℝ) (hab : a ≤ b) : ℝ → ℝ :=
-  IccExtend hab (fun x : Icc a b => p x)
-
 theorem tailClampedDensity_apply (p : ℝ → ℝ) (a b : ℝ) (hab : a ≤ b) (x : ℝ) :
     tailClampedDensity p a b hab x = p (max a (min b x)) :=
   IccExtend_apply hab (fun y : Icc a b => p y) x
 
 theorem tailClampedDensity_eq_of_mem {p : ℝ → ℝ} {a b x : ℝ}
     (hab : a ≤ b) (hx : x ∈ Icc a b) : tailClampedDensity p a b hab x = p x :=
-  IccExtend_of_mem hab (fun y : Icc a b => p y) hx
+  tailClampedDensity_eq hab hx
 
 theorem tailClampedDensity_continuous {p : ℝ → ℝ} {a b : ℝ}
     (hab : a ≤ b) (hp : ContinuousOn p (Icc a b)) :
