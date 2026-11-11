@@ -63,8 +63,10 @@ theorem MorsePhysicalTailBasis.whole_robin_graph_unique
       (contDiff_infty_iff_deriv.mp hw).2.continuous.continuousOn).div continuousOn_id
         (fun x hx => hxne x (Ioo_subset_Ico_self hx))
   have hf : LocallyIntegrableOn (fun x => outerWholeDensity D right x * f x) (Ioo a b) := by
-    simpa only [Pi.neg_apply, neg_neg] using
+    have hsource : LocallyIntegrableOn
+        (fun x => -(-(outerWholeDensity D right x * f x))) (Ioo a b) :=
       (outerWholeSource_integrable hD hentry f).neg.locallyIntegrableOn
+    simpa only [neg_neg] using hsource
   obtain ⟨u, z, hae, hu, hz, hstate, hRobin⟩ :=
     OuterRobinWeakGraph.homogeneous_difference hab hlam hwne hκ hf h₀ h₁
   have hum : MemLp u 2 μ := (memLp_congr_ae hae).mp (Lp.memLp (U₀ - U₁))

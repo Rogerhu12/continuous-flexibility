@@ -93,7 +93,7 @@ theorem MorseOuterGreenData.manuscript_bounds
           exp (Co * ((j : ℝ) * sqrt (morseChainA M n))) ^ 2 *
             exp (-|radialS p - radialS q|)) :
     MorseOuterInverseBounds G hpart Cenv := by
-  have hKn := morseOuter_action_le_coreFactor M n j hCb
+  have hKn := morseOuter_action_le_coreFactor (Co := Co) M n j hCb
   have hKn2 := pow_le_pow_left₀ (exp_pos _).le hKn 2
   have hweight := outer_envelope_exponent_mono n hCenv
   have hweight0 : 0 ≤ radialE n ^ Cenv :=

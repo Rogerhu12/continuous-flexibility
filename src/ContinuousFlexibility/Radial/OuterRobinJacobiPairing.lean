@@ -47,6 +47,7 @@ theorem outer_flux_weak_jacobi_pairing
     apply integral_congr_ae
     apply Eventually.of_forall
     intro x
+    change deriv u x * φ x = q x * deriv ψ x
     by_cases hx : x ∈ Ioo a b
     · rw [hq x hx]
       dsimp only [φ]
@@ -108,8 +109,10 @@ theorem OuterRobinWeakGraph.physical_jacobi_pairing
         (fun x hx => outerWhole_coordinate_ne_zero (matchingProfileGeometry hD)
           hentry (Ioo_subset_Ico_self hx))
   have hf : LocallyIntegrableOn (fun x => outerWholeDensity D right x * f x) (Ioo a b) := by
-    simpa only [Pi.neg_apply, neg_neg] using
+    have hsource : LocallyIntegrableOn
+        (fun x => -(-(outerWholeDensity D right x * f x))) (Ioo a b) :=
       (outerWholeSource_integrable hD hentry f).neg.locallyIntegrableOn
+    simpa only [neg_neg] using hsource
   have hqo : ∀ x ∈ Ioo a b, q x = w x * deriv u x := by
     intro x hx
     rw [hq x (Ioo_subset_Ico_self hx), derivWithin_of_mem_nhds
