@@ -65,7 +65,7 @@ theorem planeJacobian_preserve_second
   unfold planeJacobian radialPartial
   rw [hh.fderiv]
   simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_snd',
-    mul_one, mul_zero, sub_zero]
+    mul_one, zero_mul, sub_zero]
 
 /-- The radial derivative at fixed angular coordinate is the actual
 Jacobian quotient J/φθ, without an assumed inverse derivative formula. -/
@@ -158,8 +158,9 @@ theorem strictMono_travelStrip_angle
   apply strictMono_of_deriv_pos
   intro θ
   have hp : (r, θ) ∈ Ioo a b ×ˢ (univ : Set ℝ) := ⟨hri, mem_univ _⟩
-  have hd := ((hΓ.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp))
-    .differentiableAt (by simp)).hasFDerivAt.snd
+  have hDiff : DifferentiableAt ℝ Γ (r, θ) :=
+    (hΓ.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)
+  have hd := hDiff.hasFDerivAt.snd
   have hc := hd.comp_hasDerivAt θ
     ((hasDerivAt_const θ r).prodMk (hasDerivAt_id θ))
   have he : (fun q : PolarPoint => (Γ q).2) ∘ (fun η : ℝ => (r, η)) =
@@ -198,8 +199,9 @@ theorem strictMonoOn_angleNormalizedTravel
   intro r hr
   have hri : r ∈ Ioo a b := by simpa only [interior_Icc] using hr
   have hp : (r, η) ∈ Ioo a b ×ˢ (univ : Set ℝ) := ⟨hri, mem_univ _⟩
-  have hd := ((hs.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp))
-    .differentiableAt (by simp)).hasFDerivAt
+  have hDiff : DifferentiableAt ℝ (angleNormalizedTravel Γ) (r, η) :=
+    (hs.contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)).differentiableAt (by simp)
+  have hd := hDiff.hasFDerivAt
   have hc := hd.comp_hasDerivAt r
     ((hasDerivAt_id r).prodMk (hasDerivAt_const r η))
   have he : (angleNormalizedTravel Γ) ∘ (fun s : ℝ => (s, η)) =

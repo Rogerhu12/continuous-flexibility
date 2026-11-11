@@ -80,7 +80,7 @@ theorem flowJetPolynomial_le_material_one_high
       refine ⟨C, hC, fun z hz => ?_⟩
       calc
         ((k :: ks).map (fun j => 1 + p (j + offset) z)).prod =
-            ∏ i : Fin (k :: ks).length, 1 + p ((k :: ks).get i + offset) z :=
+            ∏ i : Fin (k :: ks).length, (1 + p ((k :: ks).get i + offset) z) :=
           (flow_list_prod_get (k :: ks) (fun j => 1 + p (j + offset) z)).symm
         _ ≤ C * (1 + p (s + loss) z) := hbound z hz
   refine ⟨base, loss, ?_⟩

@@ -60,8 +60,10 @@ theorem positiveReferenceEndMass_le
   rw [intervalIntegral.integral_symm, abs_neg] at hright
   unfold positiveReferenceEndMass
   rw [intervalIntegral.integral_add
-    ((contDiff_positiveEndpointCutoff_mul hδ hL).continuous.intervalIntegrable l r)
-    ((contDiff_positiveEndpointCutoff_mul hδ hR).continuous.intervalIntegrable l r)]
+    ((contDiff_positiveEndpointCutoff_mul hδ hL).continuous.intervalIntegrable
+      (μ := MeasureTheory.volume) l r)
+    ((contDiff_positiveEndpointCutoff_mul hδ hR).continuous.intervalIntegrable
+      (μ := MeasureTheory.volume) l r)]
   have hleft' := (le_abs_self _).trans hleft
   have hright' := (le_abs_self _).trans hright
   linarith
@@ -112,8 +114,9 @@ theorem integral_positiveReferenceSlope
   have hmass : positiveReferenceMiddleMass l r δ ≠ 0 :=
     (integral_positiveEndpointCutoff_complement_pos hδ hgap).ne'
   unfold positiveReferenceSlope
-  rw [intervalIntegral.integral_add ((hcL.add hcR).intervalIntegrable l r)
-    ((continuous_const.mul hcM).intervalIntegrable l r),
+  rw [intervalIntegral.integral_add
+    ((hcL.add hcR).intervalIntegrable (μ := MeasureTheory.volume) l r)
+    ((continuous_const.mul hcM).intervalIntegrable (μ := MeasureTheory.volume) l r),
     intervalIntegral.integral_const_mul]
   change positiveReferenceEndMass l r δ aL aR +
     positiveReferenceScale l r δ aL aR * positiveReferenceMiddleMass l r δ = 1

@@ -49,10 +49,10 @@ theorem flowJet_norm_iteratedFDeriv_clm_le (L : E →L[ℝ] F)
 
 /-- Subtracting the true linearization removes exactly the one-block
 partitions. No candidate derivative tower is used. -/
-theorem flowJet_linearization_remainder_bound
-    {g : F → K} {h : E → F}
-    (hg : ContDiff ℝ ∞ g) (hh : ContDiff ℝ ∞ h)
-    {n : ℕ} (hn : 0 < n) (x : E) :
+theorem flowJet_linearization_remainder_bound_at
+    {g : F → K} {h : E → F} {x : E}
+    (hg : ContDiffAt ℝ ∞ g (h x)) (hh : ContDiffAt ℝ ∞ h x)
+    {n : ℕ} (hn : 0 < n) :
     ‖iteratedFDeriv ℝ n
         ((g - (fderiv ℝ g (h x) : F → K)) ∘ h) x‖ ≤
       ∑ c : OrderedFinpartition n,
@@ -63,18 +63,18 @@ theorem flowJet_linearization_remainder_bound
   classical
   let L : F →L[ℝ] K := fderiv ℝ g (h x)
   let R : F → K := g - (L : F → K)
-  have hR : ContDiff ℝ ∞ R := hg.sub L.contDiff
+  have hR : ContDiffAt ℝ ∞ R (h x) := hg.sub L.contDiff.contDiffAt
   have hdR : HasFDerivAt R (L - L) (h x) :=
-    (hg.differentiable (by simp) (h x)).hasFDerivAt.sub L.hasFDerivAt
+    (hg.differentiableAt (by simp)).hasFDerivAt.sub L.hasFDerivAt
   have hRone : ‖iteratedFDeriv ℝ 1 R (h x)‖ = 0 := by
     rw [norm_iteratedFDeriv_one, hdR.fderiv, sub_self, norm_zero]
   have hRhigher (k : ℕ) (hk : 2 ≤ k) :
       iteratedFDeriv ℝ k R (h x) = iteratedFDeriv ℝ k g (h x) := by
     change iteratedFDeriv ℝ k (g - (L : F → K)) (h x) = _
     rw [iteratedFDeriv_sub_apply
-      (hg.contDiffAt.of_le (by simp : (k : ℕ∞ω) ≤ ∞))
+      (hg.of_le (by simp : (k : ℕ∞ω) ≤ ∞))
       L.contDiff.contDiffAt, flowJet_iteratedFDeriv_clm_eq_zero L hk, sub_zero]
-  apply (norm_iteratedFDeriv_comp_le_partition_sum hR.contDiffAt hh.contDiffAt n).trans
+  apply (norm_iteratedFDeriv_comp_le_partition_sum hR hh n).trans
   apply Finset.sum_le_sum
   intro c _
   by_cases hc : 2 ≤ c.length
@@ -86,6 +86,20 @@ theorem flowJet_linearization_remainder_bound
       rw [he]
       exact hRone
     rw [if_neg hc, hzero, zero_mul]
+
+/-- Global smoothness supplies the pointwise linearization estimate. -/
+theorem flowJet_linearization_remainder_bound
+    {g : F → K} {h : E → F}
+    (hg : ContDiff ℝ ∞ g) (hh : ContDiff ℝ ∞ h)
+    {n : ℕ} (hn : 0 < n) (x : E) :
+    ‖iteratedFDeriv ℝ n
+        ((g - (fderiv ℝ g (h x) : F → K)) ∘ h) x‖ ≤
+      ∑ c : OrderedFinpartition n,
+        if 2 ≤ c.length then
+          ‖iteratedFDeriv ℝ c.length g (h x)‖ *
+            ∏ j, ‖iteratedFDeriv ℝ (c.partSize j) h x‖
+        else 0 :=
+  flowJet_linearization_remainder_bound_at hg.contDiffAt hh.contDiffAt hn
 
 /-- Every block of a nonlinear chain-rule term has lower order. -/
 theorem flowJet_partition_partSize_lt {n : ℕ} (c : OrderedFinpartition n)

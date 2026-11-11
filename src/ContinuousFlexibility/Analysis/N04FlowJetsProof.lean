@@ -115,3 +115,5 @@ theorem n04FlowJetsTarget_proof : N04FlowJetsTarget := by
           (mul_nonneg (hC n).le (Real.rpow_nonneg hW0 _))
 
 end ContinuousFlexibility.Analysis
+
+#print axioms ContinuousFlexibility.Analysis.n04FlowJetsTarget_proof

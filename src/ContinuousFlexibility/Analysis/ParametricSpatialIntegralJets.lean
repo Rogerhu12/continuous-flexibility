@@ -96,8 +96,13 @@ theorem parametricIntervalIntegral_contDiff_and_iteratedFDeriv
         L (∫ t in a..b, parametricSpatialJet f (n + 1) (q, t)) := by
       have hc : Continuous (fun t : ℝ => parametricSpatialJet f (n + 1) (q, t)) :=
         (hj (n + 1)).comp (continuous_const.prodMk continuous_id)
-      exact L.toContinuousLinearEquiv.toContinuousLinearMap.intervalIntegral_comp_comm
-        (𝕜 := ℝ) (hc.intervalIntegrable a b)
+      let Lc : (Q [×(n + 1)]→L[ℝ] E) →L[ℝ] (Q →L[ℝ] Q [×n]→L[ℝ] E) :=
+        { toFun := fun X => L X
+          map_add' := fun X Y => L.map_add X Y
+          map_smul' := fun c X => L.map_smul c X
+          cont := L.continuous }
+      exact ContinuousLinearMap.intervalIntegral_comp_comm
+        (𝕜 := ℝ) (F := Q →L[ℝ] Q [×n]→L[ℝ] E) Lc (hc.intervalIntegrable a b)
     rw [hI] at hh
     exact hh
   have hjet : ∀ n : ℕ, ∀ q : Q,

@@ -69,7 +69,8 @@ theorem abs_integral_positiveEndpointCutoff_mul
           rw [positiveEndpointCutoff_eq_zero_of_not_mem_ball hδ hxout, zero_mul]
         _ = 0 := by simp
     have hsplit := intervalIntegral.integral_add_adjacent_intervals
-      (hc.intervalIntegrable c k) (hc.intervalIntegrable k d)
+      (hc.intervalIntegrable (μ := MeasureTheory.volume) c k)
+      (hc.intervalIntegrable (μ := MeasureTheory.volume) k d)
     rw [htail, add_zero] at hsplit
     rw [← hsplit]
     have hnorm := intervalIntegral.norm_integral_le_of_norm_le_const
