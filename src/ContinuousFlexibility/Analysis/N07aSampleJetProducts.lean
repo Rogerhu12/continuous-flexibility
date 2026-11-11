@@ -58,21 +58,21 @@ variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   {K : CanonicalData S}
 
 /-- One fixed low-order ball handles every coefficient product derivative. -/
-theorem n07a_sampleJetBounds_mul
+theorem n07a_sampleJetBounds_mul_uniform
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hIp : HasSmoothing p)
     (U : Set E) (W : ℕ → Set PolarPoint) (hW : ∀ m, IsOpen (W m))
-    (d : ℕ) (f g : E → ℕ → PolarPoint → ℝ)
-    (hf : N07aSampleJetBounds T K p U W d f)
-    (hg : N07aSampleJetBounds T K p U W d g)
-    (hfs : ∀ z ∈ U, ∀ m, ContDiffOn ℝ ∞ (f z m) (W m))
-    (hgs : ∀ z ∈ U, ∀ m, ContDiffOn ℝ ∞ (g z m) (W m)) :
-    ∃ low loss : ℕ,
+    (d : ℕ) :
+    ∃ low loss : ℕ, ∀ f g : E → ℕ → PolarPoint → ℝ,
+      N07aSampleJetBounds T K p U W d f →
+      N07aSampleJetBounds T K p U W d g →
+      (∀ z ∈ U, ∀ m, ContDiffOn ℝ ∞ (f z m) (W m)) →
+      (∀ z ∈ U, ∀ m, ContDiffOn ℝ ∞ (g z m) (W m)) →
       N07aSampleJetBounds T K p {z | z ∈ U ∧ p low z ≤ 1} W loss
         (fun z m x => f z m x * g z m x) := by
   classical
   obtain ⟨low, loss, hprod⟩ := n07a_finite_state_product p hp hIp d
-  refine ⟨low, loss, fun i j => ?_⟩
+  refine ⟨low, loss, fun f g hf hg hfs hgs i j => ?_⟩
   let I := Fin (j + 1) × Fin (i + 1)
   choose e he he0 heb using fun k : I => hf k.2.val k.1.val
   choose a ha ha0 hab using fun k : I => hg (i - k.2.val) (j - k.1.val)
@@ -107,5 +107,23 @@ theorem n07a_sampleJetBounds_mul
   exact n07a_twoJetProduct_bound (hfactor k) (he0 k m) (ha0 k m)
     (add_nonneg zero_le_one (apply_nonneg _ _))
     (heb k z hz.1 m x hx) (hab k z hz.1 m x hx) hpair
+
+
+/-- A selected pair inherits the same product estimate. -/
+theorem n07a_sampleJetBounds_mul
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (hIp : HasSmoothing p)
+    (U : Set E) (W : ℕ → Set PolarPoint) (hW : ∀ m, IsOpen (W m))
+    (d : ℕ) (f g : E → ℕ → PolarPoint → ℝ)
+    (hf : N07aSampleJetBounds T K p U W d f)
+    (hg : N07aSampleJetBounds T K p U W d g)
+    (hfs : ∀ z ∈ U, ∀ m, ContDiffOn ℝ ∞ (f z m) (W m))
+    (hgs : ∀ z ∈ U, ∀ m, ContDiffOn ℝ ∞ (g z m) (W m)) :
+    ∃ low loss : ℕ,
+      N07aSampleJetBounds T K p {z | z ∈ U ∧ p low z ≤ 1} W loss
+        (fun z m x => f z m x * g z m x) := by
+  obtain ⟨low, loss, hb⟩ :=
+    n07a_sampleJetBounds_mul_uniform hD hT p hp hIp U W hW d
+  exact ⟨low, loss, hb f g hf hg hfs hgs⟩
 
 end ContinuousFlexibility.Analysis

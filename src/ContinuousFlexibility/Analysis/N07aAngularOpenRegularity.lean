@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.N07aAngularDivergencePrimitive
 import ContinuousFlexibility.Analysis.N07aAngularPhysicalCoefficients
 import ContinuousFlexibility.Analysis.N07aOpenNormalBootstrap
 import ContinuousFlexibility.Analysis.N07aOpenDistributionFlux
+import ContinuousFlexibility.Analysis.N07aCanonicalRepresentationPairing
 
 /-!
 # The actual interior distribution equation supplies every weak jet
@@ -60,21 +61,18 @@ theorem n07aCanonicalOne_normalRegular (n : ℕ) :
   exact ⟨_, n07a_smoothCanonical_weakMixed (f := fun _ : PolarPoint => (1 : ℝ))
     contDiff_const (fun _ => rfl) a b⟩
 
-/-- A bounded open coefficient represents an actual source class with
+/-- The existing genuine source class of a bounded open coefficient has
 every mixed weak derivative. No global smooth extension is used. -/
-def N07aCanonicalOpenCoefficient.toLp (χ : N07aCanonicalOpenCoefficient S K m) :
-    CanonicalL2 S K m := χ.mul n07aCanonicalOne
-
-theorem N07aCanonicalOpenCoefficient.toLp_ae (χ : N07aCanonicalOpenCoefficient S K m) :
-    (χ.toLp : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] χ.value := by
-  filter_upwards [χ.mul_ae n07aCanonicalOne,
-    n07aCanonicalOne_ae (S := S) (K := K) (m := m)] with p hp h1
-  simpa only [N07aCanonicalOpenCoefficient.toLp, h1, mul_one] using hp
-
 theorem N07aCanonicalOpenCoefficient.toLp_normalRegular
     (χ : N07aCanonicalOpenCoefficient S K m) (n : ℕ) :
-    N07aCanonicalNormalRegular S K m χ.toLp n :=
-  χ.normalRegular n _ (n07aCanonicalOne_normalRegular n)
+    N07aCanonicalNormalRegular S K m χ.toLp n := by
+  have he : χ.mul n07aCanonicalOne = χ.toLp := by
+    apply Lp.ext
+    filter_upwards [χ.mul_ae n07aCanonicalOne, χ.toLp_ae,
+      n07aCanonicalOne_ae (S := S) (K := K) (m := m)] with p hp hχ h1
+    simpa only [h1, mul_one, hχ] using hp
+  rw [← he]
+  exact χ.normalRegular n _ (n07aCanonicalOne_normalRegular n)
 
 /-- The true distribution equation, its first normal graph, and the
 actual source jets yield every weak mixed order of the same solution. -/
