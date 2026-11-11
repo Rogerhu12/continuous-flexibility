@@ -105,9 +105,6 @@ theorem innerRadialModelPieceKernelUnique :
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
 local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
-local notation "ModelD" =>
-  innerLiouvillePhysicalDirichlet D hB.1.le hlam hR hscale hp hcore hweight
-    U hU hv M.dirichlet
 
 /-- The same transported model inverse and normalized Poisson columns
 supply an actual finite-chain source/trace solution. -/
@@ -117,7 +114,8 @@ theorem exists_innerRadialModelPieceSolution (F : H)
     let z := innerChainBoundaryRestriction n piece ξ
     let P := fun i => innerLiouvilleUnitPoissonPair D hB.1.le hlam hR hscale hp hcore hweight
       U hU hv (bufferCut B i) (M.column i).field (M.column i).scalar
-    let out := ModelD localSource + (z 0 • P 0 + z 1 • P 1)
+    let out := innerLiouvillePhysicalDirichlet D hB.1.le hlam hR hscale hp hcore hweight
+      U hU hv M.dirichlet localSource + (z 0 • P 0 + z 1 • P 1)
     ∃ solution : InnerRadialPieceSolution D hDw.continuous G forcing rowSource
         bordered j central column F ξ piece,
       solution.q.1 = out.1 ∧ solution.borderScalar = out.2 := by
@@ -127,7 +125,8 @@ theorem exists_innerRadialModelPieceSolution (F : H)
   let P : Fin 2 → RadialModeL2 D × ℝ := fun i =>
     innerLiouvilleUnitPoissonPair D hB.1.le hlam hR hscale hp hcore hweight
       U hU hv (bufferCut B i) (M.column i).field (M.column i).scalar
-  let out := ModelD localSource + (z 0 • P 0 + z 1 • P 1)
+  let out := innerLiouvillePhysicalDirichlet D hB.1.le hlam hR hscale hp hcore hweight
+    U hU hv M.dirichlet localSource + (z 0 • P 0 + z 1 • P 1)
   let hpos := innerLiouville_radial_weight_pos_closed D hB.1.le hlam hR hp hweight
   have hscalar : B.bordered = false → localSource.2 = 0 := by
     intro hb
@@ -144,6 +143,14 @@ theorem exists_innerRadialModelPieceSolution (F : H)
   obtain ⟨q, potential, hvalue, hdomain, htrace, hpotential, hrow, hweak⟩ :=
     innerLiouvilleLocalizedSolution D hB M hlam hR hscale hp hcore hweight U hU hv
       hDw j hcoeff localSource hscalar z
+  change q.1 = out.1 at hvalue
+  change (if B.bordered then
+    ⟪innerLiouvilleColumnLift D hB.1.le hlam hR hscale hp hcore hweight B.border, q.1⟫_ℝ =
+      localSource.2 else out.2 = 0 ∧ localSource.2 = 0) at hrow
+  change (∀ T ∈ innerRadialH1Zero D (R B.l) (R B.h),
+    innerRadialWeakResidual D q potential localSource.1
+      (innerLiouvilleColumnLift D hB.1.le hlam hR hscale hp hcore hweight B.border)
+      out.2 T = 0) at hweak
   have hfull : q ∈ innerRadialH1Domain D hDw.continuous
       (G.left_pos piece) (G.in_core piece) (G.weight_pos piece) ∧
       innerRadialH1Trace D hDw.continuous (G.left_pos piece) (G.in_core piece)
@@ -179,9 +186,16 @@ theorem exists_innerRadialModelPieceSolution (F : H)
         simpa only [if_neg hc] using hrow'
       simpa only [if_neg hc, localSource, hc0, innerRadialWeakResidual_apply,
         zero_mul, add_zero] using hweak T hT'
-  refine ⟨{ q := q, potential := potential, borderScalar := out.2,
-      domain := hfull.1, trace := hfull.2, potential_relation := hpotential',
-      row := hrow', weak := hweak' }, hvalue, rfl⟩
+  refine ⟨
+    { q := q
+      potential := potential
+      borderScalar := out.2
+      domain := hfull.1
+      trace := hfull.2
+      potential_relation := hpotential'
+      row := hrow'
+      weak := hweak' },
+    hvalue, rfl⟩
 
 theorem innerRadialModelPieceSolution_nonempty (F : H)
     (ξ : EuclideanSpace ℝ (Fin n)) :

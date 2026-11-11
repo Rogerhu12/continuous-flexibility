@@ -85,7 +85,7 @@ theorem exists_innerRadialGapPieceSolution (F : H)
             (G.in_core piece) (G.weight_pos piece) i) =
           (innerGapFluxOperator D.w (G.left piece) (G.right piece) columns
               (innerChainBoundaryCLM n piece ξ) -
-            GapP.adjoint (forcing F piece)) i := by
+            (GapP).adjoint (forcing F piece)) i := by
   obtain ⟨d, v, hdomain, htrace, hpotential, hweak, hflux⟩ :=
     exists_innerGapDirichletPoisson_physical D hw (G.left_lt_right piece)
       (G.left_pos piece) hj hs (G.in_core piece) (G.weight_pos piece) hslope
@@ -104,10 +104,11 @@ theorem exists_innerRadialGapPieceSolution (F : H)
       row := by simp only [if_neg hpiece]
       weak := by
         intro r hr
-        simpa only [if_neg hpiece] using hweak r hr }
+        rw [if_neg hpiece]
+        exact hweak r hr }
   refine ⟨solution, rfl, rfl, ?_⟩
   intro i
-  simpa only [solution, if_neg hpiece] using hflux i
+  simpa only [solution, if_neg hpiece] using! hflux i
 
 /-- The homogeneous witness uses exactly the actual Poisson field and
 the full gap DtN block, with no forced or scalar remainder. -/

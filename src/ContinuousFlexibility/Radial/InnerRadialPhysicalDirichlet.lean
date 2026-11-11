@@ -28,10 +28,14 @@ theorem innerRadialChainPieces_disjoint (D : ReferenceData) {n : ℕ}
   intro r hp hk
   rcases lt_or_gt_of_ne hpk with hlt | hgt
   · have hsep : G.right p ≤ G.left k :=
-      G.increasing.monotone (show p.succ ≤ k.castSucc by omega)
+      G.increasing.monotone (show p.succ ≤ k.castSucc by
+        simpa only [Fin.le_iff_val_le_val, Fin.val_succ, Fin.val_castSucc] using
+          Nat.succ_le_of_lt (Fin.lt_iff_val_lt_val.mp hlt))
     exact (not_lt_of_ge hsep) (hk.1.trans hp.2)
   · have hsep : G.right k ≤ G.left p :=
-      G.increasing.monotone (show k.succ ≤ p.castSucc by omega)
+      G.increasing.monotone (show k.succ ≤ p.castSucc by
+        simpa only [Fin.le_iff_val_le_val, Fin.val_succ, Fin.val_castSucc] using
+          Nat.succ_le_of_lt (Fin.lt_iff_val_lt_val.mp hgt))
     exact (not_lt_of_ge hsep) (hp.1.trans hk.2)
 
 section ActualNorm

@@ -30,7 +30,8 @@ theorem innerMorseInnerTailSlot_injective (K : ℕ) :
   · change K + 1 + p.val = q.val at hv
     omega
   · change K + 1 + p.val = K + 1 + q.val at hv
-    exact Prod.ext rfl (Fin.ext (by omega))
+    have hpq : p.val = q.val := Nat.add_left_cancel hv
+    exact Prod.ext rfl (Fin.ext hpq)
 
 /-- The actual finite model array consists exactly of the central model
 and the two tail arrays. No tail element exists when K is zero. -/
