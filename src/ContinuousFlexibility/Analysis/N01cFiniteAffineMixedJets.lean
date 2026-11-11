@@ -376,8 +376,12 @@ theorem hasProjectiveLineDerivAt_stateAngleEvaluation
     have hd : HasDerivAt (fun s : ℝ => (J b (t, θ)).D k (x + s • w.1) v)
         ((J b (t, θ)).D (k + 1) x (Fin.cons w.1 v)) (0 : ℝ) :=
       finiteAffine_stateJet_line_deriv (J b (t, θ)) k hx v w.1
-    dsimp only [H]
-    simp only [zero_mul, add_zero]
+    have hzero : θ + (0 : ℝ) * w.2 = θ := by ring
+    have he : (fun s : ℝ => H (s, 0)) =
+        (fun s : ℝ => (J b (t, θ)).D k (x + s • w.1) v) :=
+      congrArg (fun η : ℝ => fun s : ℝ =>
+        (J b (t, η)).D k (x + s • w.1) v) hzero
+    rw [he]
     exact hd
   have hangle : HasDerivAt (fun s => H (0, s))
       (w.2 * (J (b + 1) (t, θ)).D k x v) 0 := by

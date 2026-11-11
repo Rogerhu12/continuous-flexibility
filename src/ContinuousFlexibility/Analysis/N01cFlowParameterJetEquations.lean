@@ -43,7 +43,13 @@ theorem constantDirectionalPartial_commute {f : X → Y}
     fderiv ℝ (fun y => fderiv ℝ f y d) x e
   rw [fderiv_clm_apply hd (differentiableAt_const e),
     fderiv_clm_apply hd (differentiableAt_const d)]
-  exact (hf.contDiffAt.isSymmSndFDerivAt (by simp)).eq d e
+  rw [fderiv_const_apply e, fderiv_const_apply d]
+  have hsymm : ((fderiv ℝ (fderiv ℝ f) x) d) e =
+      ((fderiv ℝ (fderiv ℝ f) x) e) d :=
+    ((hf.contDiffAt (x := x)).isSymmSndFDerivAt (by simp)).eq d e
+  simpa only [ContinuousLinearMap.add_apply, ContinuousLinearMap.comp_apply,
+    ContinuousLinearMap.zero_apply, map_zero, zero_add,
+    ContinuousLinearMap.flip_apply] using hsymm
 
 /-- An actual word of constant-direction differential operators. -/
 def directionalWord : {n : ℕ} → (Fin n → X) → (X → Y) → X → Y
