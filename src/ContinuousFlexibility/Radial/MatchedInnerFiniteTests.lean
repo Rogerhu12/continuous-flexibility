@@ -159,7 +159,8 @@ theorem matchedInnerChainSmoothTest_mem (D : ReferenceData) (hw : Continuous D.w
   refine hp.2.trans ?_
   funext i
   fin_cases i
-  · simp only [innerChainBoundaryRestriction_apply, if_pos rfl]
+  · change ψ (G.left p) = innerChainBoundaryRestriction n p ξ (0 : Fin 2)
+    rw [innerChainBoundaryRestriction_apply, if_pos rfl]
     by_cases hp₀ : 0 < p.val
     · rw [dif_pos hp₀]
       change ψ (G.left p) = ψ (G.right (⟨p.val - 1, by omega⟩ : Fin n).castSucc)
@@ -170,17 +171,23 @@ theorem matchedInnerChainSmoothTest_mem (D : ReferenceData) (hw : Continuous D.w
       simp only [Fin.val_castSucc, Fin.val_succ]
       omega
     · rw [dif_neg hp₀]
-      have hpz : p = 0 := Fin.ext (by omega)
+      have hpz : p = 0 := by
+        apply Fin.ext
+        simp only [Fin.val_zero]
+        omega
       simpa only [hpz] using hl
-  · simp only [innerChainBoundaryRestriction_apply,
-      show (1 : Fin 2) ≠ 0 by decide, if_false]
+  · change ψ (G.right p) = innerChainBoundaryRestriction n p ξ (1 : Fin 2)
+    rw [innerChainBoundaryRestriction_apply, if_neg (show (1 : Fin 2) ≠ 0 by decide)]
     by_cases hpn : p.val < n
     · rw [dif_pos hpn]
       change ψ (G.right p) = ψ (G.right (⟨p.val, hpn⟩ : Fin n).castSucc)
-      congr 2
-      exact Fin.ext rfl
+      exact congrArg (fun k : Fin (n + 1) => ψ (G.right k))
+        (show p = (⟨p.val, hpn⟩ : Fin n).castSucc from Fin.ext rfl)
     · rw [dif_neg hpn]
-      have hplast : p = Fin.last n := Fin.ext (by omega)
+      have hplast : p = Fin.last n := by
+        apply Fin.ext
+        simp only [Fin.val_last]
+        omega
       simpa only [hplast] using hr
 
 /-- The finite common trace vector cancels all internal boundary terms;

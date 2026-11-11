@@ -57,7 +57,7 @@ theorem modeLocalEquation_disjointIntervals {D : ReferenceData}
     have hxe : x < e := by
       by_contra h
       apply hx
-      exact Set.indicator_of_notMem h ψ
+      exact Set.indicator_of_notMem (show x ∉ Iio e from h) ψ
     rcases hsψ (hLsub hx) with hxl | hxr
     · exact hxl
     · exact False.elim ((not_lt_of_ge hec.le) (hxr.1.trans hxe))
