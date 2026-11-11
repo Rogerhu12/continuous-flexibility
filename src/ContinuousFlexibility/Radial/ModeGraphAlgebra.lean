@@ -38,10 +38,10 @@ theorem matchingModeRow_add {D : ReferenceData} (hD : IsAccumulatingProfile D)
       (∫ r in D.a..D.b, referenceColumn D r * (U + V).1 r) = (F + H).2
       else (U + V).2 = 0 ∧ (F + H).2 = 0 := by
   by_cases hj : j = 2
-  · simp only [hj, if_pos, Prod.fst_add, Prod.snd_add,
+  · simp only [hj, if_pos, ite_true, Prod.fst_add, Prod.snd_add,
       matchingColumn_integral_eq_inner hD hB, inner_add_left] at hU hV ⊢
     exact congrArg₂ (fun a b : ℝ => a + b) hU hV
-  · simp only [hj, if_neg, Prod.snd_add] at hU hV ⊢
+  · simp only [hj, if_neg, ite_false, Prod.snd_add] at hU hV ⊢
     simp only [hU.1, hU.2, hV.1, hV.2, add_zero, and_self]
 
 theorem matchingModeRow_smul {D : ReferenceData} (hD : IsAccumulatingProfile D)
@@ -53,10 +53,10 @@ theorem matchingModeRow_smul {D : ReferenceData} (hD : IsAccumulatingProfile D)
       (∫ r in D.a..D.b, referenceColumn D r * (c • U).1 r) = (c • F).2
       else (c • U).2 = 0 ∧ (c • F).2 = 0 := by
   by_cases hj : j = 2
-  · simp only [hj, if_pos, Prod.smul_fst, Prod.smul_snd,
+  · simp only [hj, if_pos, ite_true, Prod.smul_fst, Prod.smul_snd,
       matchingColumn_integral_eq_inner hD hB, real_inner_smul_left, smul_eq_mul] at hU ⊢
     exact congrArg (fun a : ℝ => c * a) hU
-  · simp only [hj, if_neg, Prod.smul_snd, smul_eq_mul] at hU ⊢
+  · simp only [hj, if_neg, ite_false, Prod.smul_snd, smul_eq_mul] at hU ⊢
     simp only [hU.1, hU.2, mul_zero, and_self]
 
 theorem modeFullGraph_zero {D : ReferenceData} (hD : IsAccumulatingProfile D)

@@ -150,7 +150,7 @@ theorem actualMatchedRepresentation_core_leftInverse {D : ReferenceData}
           (matchingTestSource D hD hB M.frequency ψ hψ s) =
           G (matchingTestSource D hD hB M.frequency ψ hψ s) + (0, s) := by
         rw [matchingExtendedOperator_apply]
-        simp only [hj, if_neg, matchingTestSource]
+        simp only [hj, if_neg, ite_false, matchingTestSource]
       _ = G (matchingTestSource D hD hB M.frequency ψ hψ 0) + (0, s) := by
         rw [hsource, map_add, hpure, add_zero]
       _ = matchingTestInput D hD ψ hψ 0 + (0, s) := by rw [hbase]

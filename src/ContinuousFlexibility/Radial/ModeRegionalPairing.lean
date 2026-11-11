@@ -82,7 +82,7 @@ theorem matchingInner_integral_eq_of_fixed {D : ReferenceData}
     filter_upwards [hs, hu] with r hsr hur
     by_cases hr : r ∈ Ioo M.innerLeft M.innerRight
     · simp only [f, Set.indicator_of_mem hr, hur]
-    · simp only [hr, if_neg] at hsr
+    · simp only [hr, if_neg, ite_false] at hsr
       simp only [f, Set.indicator_of_notMem hr, hsr, zero_mul]
   have hf : Function.support f ⊆ Ioo M.innerLeft M.innerRight := by
     intro r hr

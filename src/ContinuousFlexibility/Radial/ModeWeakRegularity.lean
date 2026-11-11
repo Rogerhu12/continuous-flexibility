@@ -42,15 +42,18 @@ theorem exists_contDiffOn_representative_of_locally
     intro y hy
     have hyU : y ∈ U := hVU x hy
     let z : U := ⟨y, hyU⟩
+    have hxU : u =ᵐ[volume.restrict (V x ∩ V z)] f x :=
+      ae_restrict_of_ae_restrict_of_subset inter_subset_left (huf x)
+    have hzU : u =ᵐ[volume.restrict (V x ∩ V z)] f z :=
+      ae_restrict_of_ae_restrict_of_subset inter_subset_right (huf z)
     have hxy : f x =ᵐ[volume.restrict (V x ∩ V z)] f z :=
-      (ae_restrict_of_ae_restrict_of_subset inter_subset_left (huf x)).symm.trans
-        (ae_restrict_of_ae_restrict_of_subset inter_subset_right (huf z))
+      Filter.EventuallyEq.trans (Filter.EventuallyEq.symm hxU) hzU
     have hp : EqOn (f x) (f z) (V x ∩ V z) :=
       Measure.eqOn_open_of_ae_eq hxy ((hVo x).inter (hVo z))
         (hf x).continuous.continuousOn (hf z).continuous.continuousOn
     have hyrep := hp ⟨hy, hVx z⟩
     dsimp only [v]
-    rw [dif_pos hyU]
+    rw [dite_eq_left hyU]
     exact hyrep.symm
   refine ⟨v, ?_, ?_⟩
   · intro x hx
@@ -156,8 +159,10 @@ theorem modeLocalEquation_representative_flux_on_compact
   obtain ⟨r, C, hr, hur, hflux, hfluxac, hfluxd⟩ :=
     modeLocalEquation_contDiff_representative_on_compact hD hB hEq
       hcd hcdsub hcdsubo
+  have huv' : (U.1 : ℝ → ℝ) =ᵐ[volume.restrict (Ioo c d)] v :=
+    ae_restrict_of_ae_restrict_of_subset hcdsubo huv
   have hvr : v =ᵐ[volume.restrict (Ioo c d)] r :=
-    (ae_restrict_of_ae_restrict_of_subset hcdsubo huv).symm.trans hur
+    Filter.EventuallyEq.trans (Filter.EventuallyEq.symm huv') hur
   have hpoint : EqOn v r (Ioo c d) :=
     Measure.eqOn_open_of_ae_eq hvr isOpen_Ioo
       (hv.continuousOn.mono hcdsubo) hr.continuous.continuousOn
@@ -179,6 +184,7 @@ theorem modeLocalEquation_representative_flux_on_compact
   · apply (hfluxac.mono hsubu).congr
     intro x hx
     rw [uIcc_of_le hlh.le] at hx
+    dsimp only
     rw [hdpoint x (hcover hx)]
   · have hsubo : Ioo l h ⊆ Ioo c d :=
       Ioo_subset_Icc_self.trans hcover

@@ -73,6 +73,7 @@ theorem matchingBorderTest_memLp {D : ReferenceData}
     with r hr
   have hw0 : D.w r ≠ 0 := (hg.2.2.2.2.1 r hr).ne'
   have hr0 : r ≠ 0 := (lt_trans hg.1 hr.1).ne'
+  simp only [Pi.add_apply]
   dsimp only [matchingBorderTest, matchingJacobiTest, q]
   norm_num only [Nat.cast_ofNat, show (2 : ℝ) ^ 2 = 4 by norm_num]
   rw [matchingColumn_expansion hD hB]
@@ -171,10 +172,10 @@ theorem matchingTestSource_pairing {D : ReferenceData}
             s * ⟪U.1, matchingBorderVector D hD hB⟫_ℝ
         else U.2 * s) := by
   by_cases hj : j = 2
-  · simp only [modePairing, matchingTestSource, hj, if_pos, inner_add_right,
+  · simp only [modePairing, matchingTestSource, hj, if_pos, ite_true, inner_add_right,
       inner_neg_right, real_inner_smul_right]
     ring
-  · simp only [modePairing, matchingTestSource, hj, if_neg, zero_smul, add_zero,
+  · simp only [modePairing, matchingTestSource, hj, if_neg, ite_false, zero_smul, add_zero,
       inner_neg_right]
 
 end ContinuousFlexibility.Radial

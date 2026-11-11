@@ -155,7 +155,7 @@ theorem matching_innerInverse_eq_sub_poisson {D : ReferenceData}
   have hRzero : (((U - P).1 : RadialModeL2 D) : ℝ → ℝ) =ᵐ[(radialHilbertMeasure D).restrict (matchingOuterRegion D M)] fun _ => 0 := by
     simpa only [sub_self] using matching_pair_sub_ae_restrict hz hPzero
   have hleft : (fun r => u r - p r) M.innerLeft = 0 := by
-    simpa only [matchingCut, if_pos rfl] using sub_eq_zero.mpr (hpvalue 0).symm
+    simpa [matchingCut] using sub_eq_zero.mpr (hpvalue 0).symm
   have hright : (fun r => u r - p r) M.innerRight = 0 := by
     simpa [matchingCut] using sub_eq_zero.mpr (hpvalue 1).symm
   have hgraph := matching_innerGraph_of_representative hD hm hReq hRrow hRa hRzero

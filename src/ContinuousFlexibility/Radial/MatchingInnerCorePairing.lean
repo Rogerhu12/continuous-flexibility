@@ -59,7 +59,7 @@ theorem matchingInner_smooth_green_boundary {D : ReferenceData}
     (hψ.differentiable (by simp) M.innerRight).derivWithin
       (uniqueDiffOn_Icc hlh _ ⟨hlh.le, le_rfl⟩)
   have hpL : p M.innerLeft = (if i = 0 then 1 else 0) / sqrt (M.boundaryScale 0) := by
-    simpa only [matchingCut, if_pos rfl] using hp 0
+    simpa [matchingCut] using hp 0
   have hpR : p M.innerRight = (if i = 1 then 1 else 0) / sqrt (M.boundaryScale 1) := by
     simpa [matchingCut] using hp 1
   have hn0 : sqrt (M.boundaryScale 0) ≠ 0 := (sqrt_pos.mpr (hscale 0)).ne'
@@ -127,10 +127,10 @@ theorem matchingInnerPoisson_testSource_pairing {D : ReferenceData}
     by_cases hj : M.frequency = 2
     · have hr : ⟪(M.innerPoisson i).1, matchingBorderVector D hD hB⟫_ℝ = 0 := by
         rw [hrowrep]
-        simpa only [hj, if_pos] using hrow
-      simp only [hj, if_pos, hr, mul_zero, add_zero]
-    · have hs : (M.innerPoisson i).2 = 0 := by simpa only [hj, if_neg] using hrow
-      simp only [hj, if_neg, hs, zero_mul, add_zero]
+        simpa only [hj, if_pos, ite_true] using hrow
+      simp only [hj, if_pos, ite_true, hr, mul_zero, add_zero]
+    · have hs : (M.innerPoisson i).2 = 0 := by simpa only [hj, if_neg, ite_false] using hrow
+      simp only [hj, if_neg, ite_false, hs, zero_mul, add_zero]
   have hp₁ : ContDiffOn ℝ 1 (M.innerFunction i) (Icc M.innerLeft M.innerRight) :=
     hp.of_le (by norm_num)
   have hψ₂ : ContDiffOn ℝ 2 ψ (Icc M.innerLeft M.innerRight) :=

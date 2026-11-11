@@ -66,12 +66,12 @@ theorem modeExtendedGraph_iff_core_pairings {D : ReferenceData}
     by_cases hj : j = 2
     · have hr : ⟪U.1, matchingBorderVector D hD hB⟫_ℝ = F.2 := by
         rw [← matchingColumn_integral_eq_inner hD hB]
-        simpa only [hj, if_pos] using h.2
-      simp only [hj, if_pos] at he ⊢
+        simpa only [hj, if_pos, ite_true] using h.2
+      simp only [hj, if_pos, ite_true] at he ⊢
       rw [hr]
       nlinarith only [he]
-    · have hr : U.2 = F.2 := by simpa only [hj, if_neg] using h.2
-      simp only [hj, if_neg, zero_mul, sub_zero] at he ⊢
+    · have hr : U.2 = F.2 := by simpa only [hj, if_neg, ite_false] using h.2
+      simp only [hj, if_neg, ite_false, zero_mul, sub_zero] at he ⊢
       rw [hr]
       nlinarith only [he]
   · intro h
@@ -85,9 +85,9 @@ theorem modeExtendedGraph_iff_core_pairings {D : ReferenceData}
           0 * ⟪U.1, matchingBorderVector D hD hB⟫_ℝ else U.2 * 0) =
         ⟪F.1, matchingSmoothVector D hD ψ hψ⟫_ℝ + F.2 * 0 at he
       by_cases hj : j = 2
-      · simp only [hj, if_pos, zero_mul, mul_zero, add_zero] at he ⊢
+      · simp only [hj, if_pos, ite_true, zero_mul, mul_zero, add_zero] at he ⊢
         linarith only [he]
-      · simp only [hj, if_neg, zero_mul, mul_zero, add_zero, sub_zero] at he ⊢
+      · simp only [hj, if_neg, ite_false, zero_mul, mul_zero, add_zero, sub_zero] at he ⊢
         linarith only [he]
     · have hz := h 0 contDiff_const hasCompactSupport_zero (by simp) 1
       rw [matchingTestSource_pairing] at hz
@@ -96,10 +96,10 @@ theorem modeExtendedGraph_iff_core_pairings {D : ReferenceData}
         Pi.zero_apply, mul_zero, intervalIntegral.integral_zero, one_mul, mul_one,
         add_zero] at hz
       by_cases hj : j = 2
-      · simp only [hj, if_pos] at hz ⊢
+      · simp only [hj, if_pos, ite_true] at hz ⊢
         rw [matchingColumn_integral_eq_inner hD hB]
         exact hz
-      · simpa only [hj, if_neg] using hz
+      · simpa only [hj, if_neg, ite_false] using hz
 
 theorem modeFullGraph_iff_extended {D : ReferenceData} (j : ℕ)
     (U F : RadialModePair D) :
@@ -109,7 +109,7 @@ theorem modeFullGraph_iff_extended {D : ReferenceData} (j : ℕ)
   · simp [ModeFullGraph, ModeExtendedGraph, hj]
   · constructor
     · intro h
-      have hzero : U.2 = 0 ∧ F.2 = 0 := by simpa only [hj, if_neg] using h.2
+      have hzero : U.2 = 0 ∧ F.2 = 0 := by simpa only [hj, if_neg, ite_false] using h.2
       have hu : U.2 = 0 := hzero.1
       have hf : F.2 = 0 := hzero.2
       have hpair : (U.1, (0 : ℝ)) = U := by
@@ -117,20 +117,20 @@ theorem modeFullGraph_iff_extended {D : ReferenceData} (j : ℕ)
         · rfl
         · exact hu.symm
       refine ⟨⟨?_, ?_⟩, fun _ => hf⟩
-      · simpa only [hj, if_neg, hpair] using h.1
-      · simp only [hj, if_neg]
+      · simpa only [hj, if_neg, ite_false, hpair] using h.1
+      · simp only [hj, if_neg, ite_false]
         exact hu.trans hf.symm
     · rintro ⟨h, hf⟩
       have hF : F.2 = 0 := hf hj
-      have hrow : U.2 = F.2 := by simpa only [hj, if_neg] using h.2
+      have hrow : U.2 = F.2 := by simpa only [hj, if_neg, ite_false] using h.2
       have hU : U.2 = 0 := hrow.trans hF
       have hpair : (U.1, (0 : ℝ)) = U := by
         apply Prod.ext
         · rfl
         · exact hU.symm
       refine ⟨?_, ?_⟩
-      · simpa only [hj, if_neg, hpair] using h.1
-      · simpa only [hj, if_neg] using And.intro hU hF
+      · simpa only [hj, if_neg, ite_false, hpair] using h.1
+      · simpa only [hj, if_neg, ite_false] using And.intro hU hF
 
 theorem matchingJacobi_continuousOn {D : ReferenceData}
     (hD : IsAccumulatingProfile D) {ψ : ℝ → ℝ}
@@ -215,10 +215,10 @@ theorem matchingTestPairs_symmetric {D : ReferenceData}
   dsimp only [matchingTestInput]
   rw [matchingSmoothVector_jacobi_symm hD j hψ hη]
   by_cases hj : j = 2
-  · simp only [hj, if_pos, matchingSmoothVector_border_pairing hD hB hψ,
+  · simp only [hj, if_pos, ite_true, matchingSmoothVector_border_pairing hD hB hψ,
       matchingSmoothVector_border_pairing hD hB hη]
     ring
-  · simp only [hj, if_neg]
+  · simp only [hj, if_neg, ite_false]
     ring
 
 /-- The concrete source of every smooth core input satisfies the actual

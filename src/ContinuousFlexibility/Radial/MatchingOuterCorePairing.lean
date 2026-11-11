@@ -35,7 +35,7 @@ theorem matchingOuter_smooth_green_boundary {D : ReferenceData}
       M.A i i * matchingSmoothBoundaryFlux D M ψ i -
         M.B i i * matchingSmoothBoundaryValue D M ψ i := by
   have hpL : p M.innerLeft = M.A 0 i / sqrt (M.boundaryScale 0) := by
-    simpa only [matchingCut, if_pos rfl] using hp 0
+    simpa [matchingCut] using hp 0
   have hpR : p M.innerRight = M.A 1 i / sqrt (M.boundaryScale 1) := by
     simpa [matchingCut] using hp 1
   have hn0 : sqrt (M.boundaryScale 0) ≠ 0 := (sqrt_pos.mpr (hscale 0)).ne'
