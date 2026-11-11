@@ -91,7 +91,7 @@ theorem referenceMode_memLp_two_and_integral_bound {μ : Measure ℝ} [SFinite �
     have h := (hu.aestronglyMeasurable.mul hc.aestronglyMeasurable).integral_prod_right'
     change AEStronglyMeasurable (fun r => (2 * Real.pi)⁻¹ *
       ∫ θ in 0..2 * Real.pi, u (r, θ) * Radial.cosineMode j θ) μ
-    simpa only [
+    simpa only [Pi.mul_apply,
       intervalIntegral.integral_of_le (by positivity : (0 : ℝ) ≤ 2 * Real.pi)] using
       h.const_mul (2 * Real.pi)⁻¹
   have hi := hu.integrable_sq
