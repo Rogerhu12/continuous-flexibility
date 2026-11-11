@@ -80,7 +80,7 @@ theorem n08CircleDiagonal_reference
   have hzero : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hN.2.1
+      exact n08_seminorm_center_lt (stateGrading S base) C.referenceState hN.2.1
     · exact (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1
   have hs (t : ℝ) : stateSector S (x t) :=
     (stateSectorSubmodule S).add_mem href.stateSector

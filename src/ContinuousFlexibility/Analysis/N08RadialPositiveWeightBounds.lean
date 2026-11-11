@@ -80,7 +80,8 @@ theorem n08_radialPositive_weightedJet_bound
   have hH : 0 < T.H (T.radius p.1) := hp.2.1
   change |T.M (T.radius p.1) ^ c * mixedDerivative a b
     (fun q => T.H (T.radius q.1) ^ (-γ) * F i (T.radius q.1)) p| ≤ _
-  rw [n08_mixedDerivative_radial]
+  rw [n08_mixedDerivative_radial
+    (fun t => T.H (T.radius t) ^ (-γ) * F i (T.radius t)) a b p]
   by_cases hb : b = 0
   · rw [if_pos hb, abs_mul, abs_of_nonneg (pow_nonneg hM _)]
     have hpay : T.H (T.radius p.1) ^ (γ / 2) * T.M (T.radius p.1) ^ c ≤ A := by

@@ -58,7 +58,7 @@ theorem n08CircleDiagonal_continuousAt_reference
     rw [n08_stateProjection_reference hS hN.2.2.1]
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self, map_zero] using hN.2.1
+      exact n08_seminorm_center_lt (stateGrading S base) C.referenceState hN.2.1
     · exact (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1
   exact (n08CircleDiagonal_continuousOn hS hN.2.2.1 hR m).continuousAt
     (((n08_isOpen_stateNeighborhood S C base ε).preimage hc).mem_nhds href)

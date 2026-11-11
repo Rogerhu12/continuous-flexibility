@@ -105,10 +105,8 @@ theorem n08ActualScalarResidual_reference
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) :
     n08ActualScalarResidual hT hS hN (C.referenceState, 0) = 0 := by
-  have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
-    constructor
-    · simpa only [sub_self, map_zero] using hN.2.1
-    · simpa only [abs_zero] using hN.2.1
+  have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+    n08_reference_mem_stateNeighborhood hN.2.1
   have hs : stateSector S C.referenceState := by
     have h := n08_stateProjection_mem hS C.referenceState
     rwa [n08_stateProjection_reference hS hN.2.2.1] at h

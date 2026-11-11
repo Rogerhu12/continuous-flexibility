@@ -57,7 +57,7 @@ theorem n08CircleDiagonal_zero_uniform
   have hrefsmall : (C.referenceState, 0) ∈ stateNeighborhood S C b δ := by
     constructor
     · change stateGrading S b (C.referenceState - C.referenceState) < δ
-      simpa only [sub_self, map_zero] using hδ
+      exact n08_seminorm_center_lt (stateGrading S b) C.referenceState hδ
     · exact (abs_zero : |(0 : ℝ)| = 0).trans_lt hδ
   have hmono : stateNeighborhood S C b δ ⊆ stateNeighborhood S C base ε :=
     n08_stateNeighborhood_mono hbase hδε

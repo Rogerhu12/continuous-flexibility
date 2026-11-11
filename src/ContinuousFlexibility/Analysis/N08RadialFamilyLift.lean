@@ -39,10 +39,12 @@ variable (hT : IsMaterialData D T) (hA : IsSobolevModel D T n08WeakControlWeight
   (hbound : ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧ ∀ u : E, ∀ r ∈ Ioo D.a D.b,
     |iteratedDeriv s (L u) r| ≤ K * ‖u‖ * T.H r ^ (3 / 128 : ℝ) * T.M r)
 
+include hT hL hzero hbound in
 private theorem n08_radialLift_member (u : E) :
     HeightMember D T n08WeakControlWeight (n08RadialFieldCLM L u) :=
   n08RadialFamilyField_heightMember hT hL hbound hzero u
 
+include hT hL hbound in
 private theorem n08_radialLift_bound :
     ∀ s : ℕ, 0 ≤ s → ∃ K : ℝ, 0 ≤ K ∧ ∀ u : E,
       physicalNorm T n08WeakControlWeight s (n08RadialFieldCLM L u) ≤
