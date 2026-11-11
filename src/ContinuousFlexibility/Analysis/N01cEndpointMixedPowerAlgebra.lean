@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01cMixedPowerAlgebra
+import ContinuousFlexibility.Analysis.N01cHeightParameterJets
 
 /-!
 # Endpoint weights in the actual spatial-parameter product formula
@@ -236,7 +237,7 @@ theorem EndpointMixedPowerBounds.mul
     calc
       δ m q ^ a * ‖(JT t).D k x v‖ ≤ c ⟨k, Nat.lt_succ_of_le hk⟩ *
           parameterHeightWeight (H m q) k * ∏ i, BB i := by
-        simpa only [hJP] using hBP
+        simpa only [hJP, parameterHeightWeight] using hBP
       _ ≤ Cp * parameterHeightWeight (H m q) k * ∏ i, BB i :=
         mul_le_mul_of_nonneg_right
           (mul_le_mul_of_nonneg_right (hcCp _) (parameterHeightWeight_nonneg (hH m q hq).1 k))

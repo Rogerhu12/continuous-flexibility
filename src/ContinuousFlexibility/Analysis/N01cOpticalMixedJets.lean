@@ -125,8 +125,13 @@ theorem affineOpticalRadialJet_contDiffOn {I : Set ℝ} (hI : IsOpen I)
   intro t ht
   have hjet := (contDiffOn_mixedDerivative hΩ hF 0 n).contDiffAt
     (hΩ.mem_nhds (show (t, r) ∈ affineOpticalDomain I q₀ g from ⟨hr, ht⟩))
-  have hs := hjet.comp t (contDiffAt_id.prodMk contDiffAt_const)
-  simpa only [mixedDerivative, iteratedDeriv_zero] using hs.contDiffWithinAt
+  have hs : ContDiffAt ℝ ∞
+      (fun u : ℝ => mixedDerivative 0 n (affineOpticalRoot q₀ g) (u, r)) t :=
+    hjet.comp t (contDiffAt_id.prodMk contDiffAt_const)
+  have hs' : ContDiffAt ℝ ∞
+      (fun u : ℝ => iteratedDeriv n (fun s => affineOpticalRoot q₀ g (u, s)) r) t := by
+    simpa only [mixedDerivative, iteratedDeriv_zero] using hs
+  exact hs'.contDiffWithinAt
 
 /-- An exact formula before multiplication by the control-mean directions. -/
 theorem affineOpticalRoot_mixedDerivative
@@ -144,8 +149,9 @@ theorem affineOpticalRoot_mixedDerivative
     funext s
     have he : (fun u => affineOpticalRoot q₀ g (u, s)) =
         fun u => Real.sqrt (q₀ s + g s * u) := by funext u; simp only [affineOpticalRoot, mul_comm]
-    rw [he, iteratedDeriv_affine_comp, iteratedDeriv_sqrt_eq]
-    rw [mul_comm (g s) t]
+    rw [he, iteratedDeriv_affine_comp]
+    dsimp only
+    rw [iteratedDeriv_sqrt_eq, mul_comm (g s) t]
     ring
   rw [hf, iteratedDeriv_const_mul_field]
 
@@ -290,9 +296,21 @@ theorem stateOpticalRadialJetSmoothDirections_D_apply
           (referenceOpticalSquare D s - stateKappa S z.1 m * controlOpticalFactor C m s) ^
               ((1 / 2 : ℝ) - (k : ℝ)) *
             ∏ i, -stateKappa S (v i).1 m * controlOpticalFactor C m s) r := by
+  have hD := hA.1.1.choose_spec.1
+  have hC := hA.2.2.1
+  have hq : ContDiffOn ℝ ∞ (referenceOpticalSquare D) (Ioo (C.left m) (C.right m)) :=
+    fun s hs => (referenceOpticalSquare_contDiffAt hD
+      ⟨(hC.1 m).1.trans hs.1, hs.2.trans (hC.1 m).2.2⟩).contDiffWithinAt
+  have hg : ContDiffOn ℝ ∞ (fun s => -controlOpticalFactor C m s)
+      (Ioo (C.left m) (C.right m)) :=
+    fun s hs => (controlOpticalFactor_contDiffAt hD hC m hs).neg.contDiffWithinAt
+  have hp : ∀ y ∈ U, 0 < referenceOpticalSquare D r +
+      stateJointKappaCLM hS hT hA.1.1 m y * (-controlOpticalFactor C m r) :=
+    fun y hy => (opticalAffine_value_eq hS hT hA m hr y).symm ▸ hpos y hy
   change (affineOpticalRadialJetSmoothDirections
-    (stateJointKappaCLM hS hT hA.1.1 m) isOpen_Ioo _ _ n r hr hU _).D k z v = _
-  rw [affineOpticalRadialJetSmoothDirections_D_apply _ _ _ _ n k r hr hU _ hz v]
+    (stateJointKappaCLM hS hT hA.1.1 m) isOpen_Ioo hq hg n r hr hU hp).D k z v = _
+  rw [affineOpticalRadialJetSmoothDirections_D_apply
+    (stateJointKappaCLM hS hT hA.1.1 m) isOpen_Ioo hq hg n k r hr hU hp hz v]
   simp only [stateJointKappaCLM_apply, mul_neg, add_neg_eq_sub, neg_mul]
 
 end ContinuousFlexibility.Statements
