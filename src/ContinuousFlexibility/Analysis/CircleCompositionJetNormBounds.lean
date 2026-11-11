@@ -47,14 +47,14 @@ private theorem composition_seminorm_sum_le
       exact (map_add_le_add q (v i) _).trans (add_le_add le_rfl ih)
 
 private theorem grading_fst_le_pair
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     (q : ℕ → Seminorm ℝ E) (hq : Monotone q) {a b : ℕ} (hab : a ≤ b) (x : E × E) :
     q a x.1 ≤ pairGrading q q b x := by
   rw [pairGrading_apply]
   exact (hq hab x.1).trans (le_add_of_nonneg_right (apply_nonneg _ _))
 
 private theorem grading_snd_le_pair
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     (q : ℕ → Seminorm ℝ E) (hq : Monotone q) {a b : ℕ} (hab : a ≤ b) (x : E × E) :
     q a x.2 ≤ pairGrading q q b x := by
   rw [pairGrading_apply]
@@ -158,7 +158,8 @@ private theorem composition_jet_uniform_normBounds
           (add_le_add le_rfl (grading_fst_le_pair q hmono (hRi i) x)) (hDi i)
       · exact grading_snd_le_pair q hmono (hRi i) (v i)
       · exact apply_nonneg _ _
-      · positivity
+      · exact mul_nonneg (hDi i)
+          (add_nonneg zero_le_one (apply_nonneg (p R) x))
     have hprod :
         (∏ j ∈ Finset.univ.erase i, q (s + li i) (v j).1) ≤
           ∏ j ∈ Finset.univ.erase i, p R (v j) := by
@@ -173,10 +174,15 @@ private theorem composition_jet_uniform_normBounds
       _ ≤ Ci i * (Di i * (1 + p R x) * p R (v i)) *
           ∏ j ∈ Finset.univ.erase i, p R (v j) :=
         mul_le_mul (mul_le_mul_of_nonneg_left hou (hCi i)) hprod
-          (Finset.prod_nonneg (fun j _ => apply_nonneg _ _)) (by positivity)
+          (Finset.prod_nonneg (fun j _ => apply_nonneg _ _))
+          (mul_nonneg (hCi i) (mul_nonneg
+            (mul_nonneg (hDi i) (add_nonneg zero_le_one (apply_nonneg (p R) x)))
+            (apply_nonneg (p R) (v i))))
       _ = (Ci i * Di i) * (1 + p R x) *
           (p R (v i) * ∏ j ∈ Finset.univ.erase i, p R (v j)) := by ring
-      _ = _ := by rw [Finset.mul_prod_erase _ _ (Finset.mem_univ i)]
+      _ = _ := congrArg (fun y : ℝ => (Ci i * Di i) * (1 + p R x) * y)
+        (Finset.mul_prod_erase (Finset.univ : Finset (Fin n))
+          (fun j : Fin n => p R (v j)) (Finset.mem_univ i))
   have hvalue :
       q s (value n x v) ≤
         B * (1 + p R x) * ∏ i, p R (v i) := by

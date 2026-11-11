@@ -26,6 +26,56 @@ open scoped Topology ENNReal BigOperators ContDiff
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem oneHigh_snoc_le_product
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p)
+    {n base high t : ℕ} (hbase : base ≤ t) (hhigh : high ≤ t)
+    (z : E) (vs : Fin n → E) (w : E) :
+    oneHighVariationWeight p base high z (Fin.snoc vs w) ≤
+      ((n : ℝ) + 2) * ((1 + p t z) * ∏ i : Fin n, p t (vs i)) * p t w := by
+  have h := oneHighVariationWeight_le_seminorm_product p (p t) base high
+    (hp hbase) (hp hhigh) z (Fin.snoc vs w)
+  have hprod : (∏ i : Fin (n + 1), p t (Fin.snoc vs w i)) =
+      (∏ i : Fin n, p t (vs i)) * p t w := by
+    rw [Fin.prod_univ_castSucc]
+    simp only [Fin.snoc_castSucc, Fin.snoc_last]
+  rw [hprod] at h
+  convert h using 1 <;> simp only [Nat.cast_add, Nat.cast_one] <;> ring
+
+private theorem localized_energy_transfer
+    {K M G R W q L e X : ℝ}
+    (hK : 0 ≤ K) (hM : 0 ≤ M) (hG : 0 ≤ G) (hR : 0 ≤ R)
+    (hX : X ≤ K * M * W) (hW : W ≤ G * R * q)
+    (henergy : M * q ≤ L * e) :
+    X ≤ (K * G * L) * R * e := by
+  calc
+    X ≤ K * M * (G * R * q) :=
+      hX.trans (mul_le_mul_of_nonneg_left hW (mul_nonneg hK hM))
+    _ = K * G * R * (M * q) := by ring
+    _ ≤ K * G * R * (L * e) :=
+      mul_le_mul_of_nonneg_left henergy (mul_nonneg (mul_nonneg hK hG) hR)
+    _ = _ := by ring
+
+private theorem circleMember_of_seminorm_energy_envelope
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {T : MaterialData} {γ : ℝ} {u : ℕ → ℝ → ℝ} {n : ℕ}
+    (hu : ∀ m, ContDiff ℝ ∞ (u m) ∧ Function.Periodic (u m) Real.pi)
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (p : ℕ → Seminorm ℝ E) (order : ℕ → ℕ) (z : E) (vs : Fin n → E)
+    (energy : ℕ → ℕ → ℝ≥0∞) (henergy : ∀ s, (∑' m, energy s m) < ⊤)
+    (hpoint : ∀ s, ∃ K : ℝ, 0 ≤ K ∧ ∀ m b c, b + c ≤ s → ∀ θ,
+      (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) *
+        |iteratedDeriv b (u m) θ| ≤ K * (1 + p (order s) z) *
+          (∏ i : Fin n, p (order s) (vs i)) * Real.sqrt (energy s m).toReal) :
+    CircleMember T γ u := by
+  apply circleMember_of_energy_envelope hu hM hH
+  intro s
+  obtain ⟨K, hK, hb⟩ := hpoint s
+  refine ⟨energy s, K * (1 + p (order s) z) * ∏ i : Fin n, p (order s) (vs i),
+    henergy s, ?_, hb⟩
+  exact mul_nonneg (mul_nonneg hK (add_nonneg zero_le_one (apply_nonneg _ _)))
+    (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
+
 theorem N01Properties.endpointFlowScalarJets_state_energy_bound
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -40,7 +90,9 @@ theorem N01Properties.endpointFlowScalarJets_state_energy_bound
           (∏ i : Fin n, pairGrading (sectorGrading S) realGrading
             (max base (s + loss)) (vs i)) *
           Real.sqrt (stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) v m).toReal := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1) s
+  let pointData := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1) s
+  let K : ℝ := pointData.choose
+  have hK : 0 < K := pointData.choose_spec.1
   let t : ℕ := max base (s + loss)
   let p := pairGrading (sectorGrading S) realGrading
   let L : ℝ := 1 + circleSingletonGradingConstant t * (2 * circleSobolevConstant)
@@ -52,8 +104,8 @@ theorem N01Properties.endpointFlowScalarJets_state_energy_bound
   have hn : 0 < (n : ℝ) + 2 := by positivity
   refine ⟨K * ((n : ℝ) + 2) * L, mul_pos (mul_pos hK hn) hL, ?_⟩
   intro z hz vs v hvq
-  obtain ⟨w, _, hlocal, henergy⟩ :=
-    hN.exists_localized_state_energy_directions hS hT v hvq
+  let localData := hN.exists_localized_state_energy_directions hS hT v hvq
+  let w : ℕ → (StateDirections S × ℝ) := localData.choose
   intro m b c horder θ
   have hsample := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM : 1 ≤ T.M (T.sample m) := (hT.2.1 _ hsample).2.2.2
@@ -61,43 +113,31 @@ theorem N01Properties.endpointFlowScalarJets_state_energy_bound
   have heq :
       iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ =
       iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs (w m)) m) θ := by
-    rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz,
-      hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) z hz]
-    exact hlocal m n b θ (rsel m) (hrsel m)
-      (hN.sectorFlow_closed_angularTower hS hT m (rsel m)
-        (hrsel m) b θ) z hz vs
-  let A : ℝ := ((n : ℝ) + 2) * (1 + p t z) * ∏ i : Fin n, p t (vs i)
-  have hA : 0 ≤ A := mul_nonneg
-    (mul_nonneg hn.le (add_nonneg zero_le_one (apply_nonneg _ _)))
+    exact (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel
+      (n + 1) z hz (Fin.snoc vs v) m b θ).trans
+        ((localData.choose_spec.2.1 m n b θ (rsel m) (hrsel m)
+          (hN.sectorFlow_closed_angularTower hS hT m (rsel m)
+            (hrsel m) b θ) z hz vs).trans
+          (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel
+            (n + 1) z hz (Fin.snoc vs (w m)) m b θ).symm)
+  let A : ℝ := (1 + p t z) * ∏ i : Fin n, p t (vs i)
+  have hA : 0 ≤ A := mul_nonneg (add_nonneg zero_le_one (apply_nonneg _ _))
     (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
-  have hprod : (∏ i : Fin (n + 1), p t (Fin.snoc vs (w m) i)) =
-      (∏ i : Fin n, p t (vs i)) * p t (w m) := by
-    rw [Fin.prod_univ_castSucc]
-    simp only [Fin.snoc_castSucc, Fin.snoc_last]
   have hW : oneHighVariationWeight p base (s + loss) z (Fin.snoc vs (w m)) ≤
-      A * p t (w m) := by
-    have h := oneHighVariationWeight_le_seminorm_product p (p t) base (s + loss)
-      (sectorPairGrading_monotone S (le_max_left _ _))
-      (sectorPairGrading_monotone S (le_max_right _ _)) z (Fin.snoc vs (w m))
-    rw [hprod] at h
-    convert h using 1 <;> simp only [A, Nat.cast_add, Nat.cast_one] <;> ring
+      ((n : ℝ) + 2) * A * p t (w m) :=
+    oneHigh_snoc_le_product p (sectorPairGrading_monotone S)
+      (le_max_left _ _) (le_max_right _ _) z vs (w m)
   have hc : T.M (T.sample m) ^ (c + 1) ≤ T.M (T.sample m) ^ (s + 1) :=
     pow_le_pow_right₀ hM (by omega)
   have hlocalweight : T.M (T.sample m) ^ (c + 1) * p t (w m) ≤
       L * Real.sqrt (stateLocalizationEnergy D T C t (s + 1) v m).toReal :=
-    (mul_le_mul_of_nonneg_right hc (apply_nonneg _ _)).trans (henergy m t (s + 1))
-  rw [heq]
-  calc
-    _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-        oneHighVariationWeight p base (s + loss) z (Fin.snoc vs (w m)) :=
-      hpoint m b c θ (by omega) z hz (Fin.snoc vs (w m))
-    _ ≤ K * T.M (T.sample m) ^ (c + 1) * (A * p t (w m)) :=
-      mul_le_mul_of_nonneg_left hW (mul_nonneg hK.le (pow_nonneg hM0 _))
-    _ = K * A * (T.M (T.sample m) ^ (c + 1) * p t (w m)) := by ring
-    _ ≤ K * A * (L *
-        Real.sqrt (stateLocalizationEnergy D T C t (s + 1) v m).toReal) :=
-      mul_le_mul_of_nonneg_left hlocalweight (mul_nonneg hK.le hA)
-    _ = _ := by dsimp only [A, L, t, p]; ring
+    (mul_le_mul_of_nonneg_right hc (apply_nonneg _ _)).trans
+      (localData.choose_spec.2.2 m t (s + 1))
+  have hlocalized := localized_energy_transfer hK.le (pow_nonneg hM0 (c + 1)) hn.le hA
+    (pointData.choose_spec.2 m b c θ (by omega) z hz (Fin.snoc vs (w m))) hW hlocalweight
+  have hweighted := congrArg (fun x : ℝ =>
+    (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) * |x|) heq
+  exact hweighted.trans_le (by simpa only [A, mul_assoc] using hlocalized)
 
 theorem N01Properties.endpointFlowScalarJets_state_circleMember
     (hN : N01Properties D T S C base loss ε)
@@ -111,17 +151,13 @@ theorem N01Properties.endpointFlowScalarJets_state_circleMember
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
-  apply circleMember_of_energy_envelope
+  apply circleMember_of_seminorm_energy_envelope
     (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz (Fin.snoc vs v)) hM hH
+    (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + loss)) z vs
+    (fun s => stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) v)
+    (fun s => hN.stateLocalizationEnergy_tsum_lt_top hS hT (max base (s + loss)) (s + 1) v)
   intro s
-  obtain ⟨K, hK, hbound⟩ := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
-  let t : ℕ := max base (s + loss)
-  let p := pairGrading (sectorGrading S) realGrading
-  refine ⟨stateLocalizationEnergy D T C t (s + 1) v,
-    K * (1 + p t z) * ∏ i : Fin n, p t (vs i),
-    hN.stateLocalizationEnergy_tsum_lt_top hS hT t (s + 1) v, ?_, ?_⟩
-  · exact mul_nonneg (mul_nonneg hK.le (add_nonneg zero_le_one (apply_nonneg _ _)))
-      (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
-  · exact hbound z hz vs v hvq
+  let data := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
+  exact ⟨data.choose, data.choose_spec.1.le, data.choose_spec.2 z hz vs v hvq⟩
 
 end ContinuousFlexibility.Statements

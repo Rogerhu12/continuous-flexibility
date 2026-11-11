@@ -59,7 +59,7 @@ theorem jointMixedDiagonal_eq_circleAngularJet
     funext φ
     exact J.jointJet_eq_circleDecoded hH K m hr heq n x hx (fun _ => w) φ
   simp only [jointMixedDiagonal, mixedDerivative, iteratedDeriv_zero]
-  rw [hfun]
+  exact congrArg (fun u : ℝ → ℝ => iteratedDeriv b u θ) hfun
 
 /-- A fixed scalar offset contributes only to the zeroth parameter jet. -/
 theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_eq_circleDecoded_add_const
@@ -76,8 +76,16 @@ theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_eq_cir
       have hv : v = Fin.elim0 := Subsingleton.elim _ _
       have hv' : (fun i : Fin 0 => (v i, (0 : PolarPoint))) = Fin.elim0 :=
         Subsingleton.elim _ _
-      rw [hv', J.zero (x, (r, θ)) ⟨hx, hp⟩, hv, K.zero x hx, if_pos rfl]
-      exact heq x hx θ
+      have hJ : J.D 0 (x, (r, θ)) (fun i : Fin 0 => (v i, (0 : PolarPoint))) =
+          f (x, (r, θ)) :=
+        (congrArg (fun u : Fin 0 → E × PolarPoint => J.D 0 (x, (r, θ)) u) hv').trans
+          (J.zero (x, (r, θ)) ⟨hx, hp⟩)
+      have hK : K.D 0 x v = g x :=
+        (congrArg (fun u : Fin 0 → E => K.D 0 x u) hv).trans (K.zero x hx)
+      change J.D 0 (x, (r, θ)) (fun i : Fin 0 => (v i, (0 : PolarPoint))) =
+        c + H.decode (K.D 0 x v) m θ
+      exact hJ.trans ((heq x hx θ).trans
+        (congrArg (fun u : H.Space => c + H.decode u m θ) hK.symm))
   | succ n =>
       let P := J.freezeSpatial K.open_domain (r, θ) hp
       let Q := circleDecodedAngularDirections hH K 0 m θ
@@ -92,8 +100,19 @@ theorem _root_.ContinuousFlexibility.Statements.SmoothDirections.jointJet_eq_cir
           (J.freezeSpatial_apply K.open_domain (r, θ) hp (n + 1) x v).symm
         _ = Q.D (n + 1) x v := hsame
         _ = _ := by
-          simpa only [Q, iteratedDeriv_zero] using
+          change (circleDecodedAngularDirections hH K 0 m θ).D (n + 1) x v = _
+          simpa only [iteratedDeriv_zero] using
             circleDecodedAngularDirections_jet hH K 0 m θ (n + 1) x v
+
+private theorem iteratedDeriv_masked_constant_add
+    (u : ℝ → ℝ) (c θ : ℝ) (n b : ℕ) :
+    iteratedDeriv b (fun φ => (if n = 0 then c else 0) + u φ) θ =
+      (if n = 0 ∧ b = 0 then c else 0) + iteratedDeriv b u θ := by
+  cases b with
+  | zero => simp only [iteratedDeriv_zero, eq_self_iff_true, and_true]
+  | succ b =>
+      rw [iteratedDeriv_const_add (Nat.succ_pos b) (if n = 0 then c else 0)]
+      simp only [Nat.succ_ne_zero, and_false, if_false, zero_add]
 
 /-- For an affine decoder, the constant survives exactly at parameter
 order zero and angular order zero. All positive jets are the genuine
@@ -113,11 +132,7 @@ theorem jointMixedDiagonal_eq_circleAngularJet_add_const
     funext φ
     exact J.jointJet_eq_circleDecoded_add_const hH K m hr c heq n x hx (fun _ => w) φ
   simp only [jointMixedDiagonal, mixedDerivative, iteratedDeriv_zero]
-  rw [hfun]
-  cases b with
-  | zero => simp only [iteratedDeriv_zero, eq_self_iff_true, and_true]
-  | succ b =>
-      rw [iteratedDeriv_const_add (Nat.succ_pos b) (if n = 0 then c else 0)]
-      simp only [Nat.succ_ne_zero, and_false, if_false, zero_add]
+  exact (congrArg (fun u : ℝ → ℝ => iteratedDeriv b u θ) hfun).trans
+    (iteratedDeriv_masked_constant_add (H.decode (K.D n x (fun _ => w)) m) c θ n b)
 
 end ContinuousFlexibility.Analysis

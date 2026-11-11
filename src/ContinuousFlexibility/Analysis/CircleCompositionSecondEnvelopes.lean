@@ -35,7 +35,10 @@ private theorem linear_eval_affine_sum
     (L : E →ₗ[ℝ] ℝ) (eval : E → ℝ) (heval : ∀ u, L u = eval u)
     (x w : E) (v : Fin n → E) (t : ℝ) :
     L (x + t • w + ∑ i, v i) = eval x + t * eval w + ∑ i, eval (v i) := by
-  simp only [map_add, map_smul, map_sum, RingHom.id_apply, smul_eq_mul, heval]
+  calc
+    L (x + t • w + ∑ i, v i) = L x + t * L w + ∑ i, L (v i) := by
+      simp only [map_add, map_smul, map_sum, RingHom.id_apply, smul_eq_mul]
+    _ = _ := by simp only [heval]
 
 private theorem scalar_finite_line_envelope
     (n s : ℕ)
@@ -82,7 +85,7 @@ private theorem scalar_finite_line_envelope
         (add_le_add (abs_add_le _ _) (Finset.abs_sum_le_sum_abs _ _)) hw
     _ = weight * |P none t m b θ| + |t| * (weight * |P (some none) t m b θ|) +
         ∑ i : Fin n, weight * |P (some (some i)) t m b θ| := by
-      rw [abs_mul, Finset.mul_sum]
+      rw [abs_mul, mul_add, Finset.mul_sum]
       ring
     _ ≤ R + 1 * R + ∑ _i : Fin n, R :=
       add_le_add

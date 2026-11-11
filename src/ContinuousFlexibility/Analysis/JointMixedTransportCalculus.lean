@@ -55,9 +55,10 @@ theorem jointMixedDiagonal_const_mul
     (n a b : ℕ) (x w : E) (hx : x ∈ U) {p : PolarPoint} (hp : p ∈ V) :
     jointMixedDiagonal K n a b x w p = c * jointMixedDiagonal J n a b x w p := by
   have hz : x + (0 : ℝ) • w ∈ U := by simpa only [zero_smul, add_zero] using hx
+  have hline : Continuous (fun t : ℝ => x + t • w) :=
+    continuous_const.add (continuous_id.smul continuous_const)
   have hnear : ∀ᶠ t : ℝ in 𝓝 0, x + t • w ∈ U :=
-    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
-      (by simpa only [zero_smul, add_zero] using hU.mem_nhds hx)
+    hline.continuousAt.eventually (hU.mem_nhds hz)
   have he : (fun t : ℝ => mixedDerivative a b (fun q => g (x + t • w, q)) p) =ᶠ[𝓝 0]
       (fun t : ℝ => c * mixedDerivative a b (fun q => f (x + t • w, q)) p) := by
     filter_upwards [hnear] with t ht

@@ -74,8 +74,8 @@ private theorem parameterDiagonalMap_apply (n : ℕ) (A : symmetricParameterForm
 private theorem parameterDiagonalMap_injective (n : ℕ) :
     Function.Injective (parameterDiagonalMap n) := by
   classical
-  apply (LinearMap.ker_eq_bot).mp
-  apply LinearMap.ker_eq_bot'.mpr
+  apply (LinearMap.ker_eq_bot (f := parameterDiagonalMap n)).mp
+  apply (LinearMap.ker_eq_bot' (f := parameterDiagonalMap n)).mpr
   intro A hA
   have hunit (x : DiagonalParameterSpace n) (hx : ‖x‖ ≤ 1) :
       A.val (fun _ => x) = 0 := by
@@ -116,7 +116,10 @@ theorem exists_symmetric_diagonal_unit_bound (n : ℕ) :
       ∀ C : ℝ, 0 ≤ C → (∀ x, ‖x‖ ≤ 1 → |A (fun _ => x)| ≤ C) →
       ∀ v : Fin n → (Fin n → ℝ), (∀ i, ‖v i‖ ≤ 1) → |A v| ≤ K * C := by
   obtain ⟨K, hK, hanti⟩ :=
-    (parameterDiagonalMap n).injective_iff_antilipschitz.mp
+    (LinearMap.injective_iff_antilipschitz (𝕜 := ℝ)
+      (E := symmetricParameterForms n)
+      (F := BoundedContinuousFunction (DiagonalUnitBall n) ℝ)
+      (parameterDiagonalMap n)).mp
       (parameterDiagonalMap_injective n)
   refine ⟨K, K.coe_nonneg, fun A hsym C hC hdiag v hv => ?_⟩
   let B : symmetricParameterForms n := ⟨A, hsym⟩

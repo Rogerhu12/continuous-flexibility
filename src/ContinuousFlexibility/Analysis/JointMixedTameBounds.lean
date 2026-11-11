@@ -34,11 +34,13 @@ private theorem fixedSpatial_unit_bound
   have hl0 : low (0 : E) = 0 := low.map_zero'
   have hh0 : high (0 : E) = 0 := high.map_zero'
   have hs (i : Fin (n + 1)) :
-      low (Fin.snoc v (0, e) i).1 + ‖(Fin.snoc v (0, e) i).2‖ ≤ 1 := by
+      low (Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e) i).1 +
+        ‖(Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e) i).2‖ ≤ 1 := by
     refine Fin.lastCases ?_ (fun j => ?_) i
     · simpa only [Fin.snoc_last, hl0, zero_add] using he
     · simpa only [Fin.snoc_castSucc] using hv j
-  have hb := hbound (Fin.snoc v (0, e)) hs
+  have hb := hbound
+    (Fin.snoc (α := fun _ : Fin (n + 1) => E × PolarPoint) v ((0 : E), e)) hs
   rw [J.fixedLast_apply]
   simpa only [Fin.sum_univ_castSucc, Fin.snoc_castSucc, Fin.snoc_last,
     hh0, add_zero] using hb
@@ -83,7 +85,8 @@ private theorem mixedJet_unit_bound_aux
           have horder : n + (a + 1) + b = (n + a + b) + 1 := by omega
           rw [horder] at hbound
           have hfixed := fixedSpatial_unit_bound J low high x p (1, 0)
-            (by simp only [Prod.norm_def, norm_one, norm_zero, max_eq_left zero_le_one])
+            (by simp only [Prod.norm_def, norm_one, norm_zero,
+              max_eq_left zero_le_one, le_refl])
             (n + a + b) C H hbound
           rw [J.jointJet_mixed_radial_step hV hc a b n x hx
             (fun i => (u i, 0)) hp]
@@ -95,7 +98,8 @@ private theorem mixedJet_unit_bound_aux
               have horder : n + 0 + (b + 1) = (n + 0 + b) + 1 := by omega
               rw [horder] at hbound
               have hfixed := fixedSpatial_unit_bound J low high x p (0, 1)
-                (by simp only [Prod.norm_def, norm_one, norm_zero, max_eq_right zero_le_one])
+                (by simp only [Prod.norm_def, norm_one, norm_zero,
+                  max_eq_right zero_le_one, le_refl])
                 (n + 0 + b) C H hbound
               rw [J.jointJet_mixed_angular_step hV hc 0 b n x hx
                 (fun i => (u i, 0)) hp]
@@ -236,6 +240,7 @@ theorem UniformWeightedJointGrowth.mixed_parameter_oneHigh
   have h := multilinearMap_bound_of_unitBall L (normSeminorm ℝ ℝ)
     (p base) (p high) hscale hunit v
   simpa only [L, ContinuousFlexibility.Statements.SmoothDirections.mixedParameterMultilinearMap_apply,
-    coe_normSeminorm, Real.norm_eq_abs, high] using h
+    coe_normSeminorm, Real.norm_eq_abs, high, multilinearTameSize,
+    oneHighVariationWeight] using h
 
 end ContinuousFlexibility.Analysis

@@ -76,8 +76,7 @@ theorem symmetricDivergenceBilinear_periodic
   have hd := (periodic_radialPartial hF).add (periodic_angularPartial hG)
   intro p
   have hmem : p + (0, Real.pi) ∈ annularOpen D ↔ p ∈ annularOpen D := by
-    simp only [annularOpen, mem_prod, mem_univ, and_true, Prod.fst_add,
-      Prod.fst_mk, add_zero]
+    simp only [annularOpen, mem_prod, mem_univ, and_true, Prod.fst_add, add_zero]
   by_cases hp : p ∈ annularOpen D
   · rw [symmetricDivergenceBilinear_apply, symmetricDivergenceBilinear_apply,
       if_pos (hmem.mpr hp), if_pos hp]

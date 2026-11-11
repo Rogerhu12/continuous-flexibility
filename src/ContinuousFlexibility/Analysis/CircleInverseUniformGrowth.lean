@@ -53,7 +53,9 @@ private theorem uniformLowGrowth_of_linear_unit_bounds
         apply_nonneg (p (s + loss)) x.2, mul_nonneg hK (apply_nonneg (p (s + loss)) x.2)]
     exact hnorm.trans ((mul_le_mul_of_nonneg_left hsize hC).trans_eq
       (by rw [pairGrading_apply]; ring))
-  · rw [hzero x.1 hpos, LinearMap.zero_apply, map_zero]
+  · change p s (V x.1 x.2) ≤
+      C * (1 + K) * (1 + pairGrading p p (s + loss) x)
+    rw [hzero x.1 hpos, LinearMap.zero_apply, map_zero]
     exact mul_nonneg (mul_nonneg hC (add_nonneg zero_le_one hK))
       (add_nonneg zero_le_one (apply_nonneg _ _))
 
