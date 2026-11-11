@@ -62,12 +62,11 @@ theorem R05_of_nodes (hA : R05aStatement) (hB : R05bStatement) : R05Statement :=
   obtain ⟨C', hC'⟩ := hB T C family hreal
   exact ⟨T, hT, C', family, hC', hind⟩
 
-/-- The R06 stages share the compact-interior test core in
-`Statements.DeepTailOperator`: its test-support condition uses `tsupport`.
-The scalar definition extraction and support repair preserve this assembly
-signature and all R08 statements. -/
 theorem R06_of_nodes (hA : R06aStatement) (hB : R06bStatement) (hC : R06cStatement) :
     R06Statement := by
+  -- All stages use the same corrected Friedrichs core and distribution tests:
+  -- their closed support is compactly contained in the open tail interval.
+  -- Ordinary support does not suffice at the degenerate endpoint.
   obtain ⟨C, η, K, h1, h2, h3, h4, hop⟩ := hA
   obtain ⟨C₁, η₁, K₁, h1', h2', h3', h4', hfull⟩ := hB C η K h1 h2 h3 h4 hop
   obtain ⟨C₂, η₂, K₂, g1, g2, g3, g4, hfull', hphys, hcont⟩ := hC C₁ η₁ K₁ h1' h2' h3' h4' hfull

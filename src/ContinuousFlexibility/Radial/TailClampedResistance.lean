@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Radial.TailResistanceTransport
+import ContinuousFlexibility.Radial.TailSmoothResistanceStep
 import ContinuousFlexibility.Statements.DeepTailOperator
 import Mathlib.Topology.Order.ProjIcc
 import Mathlib.Topology.Order.IntermediateValue
@@ -18,10 +18,6 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory
-
-/-- Constant extension of the actual density from one closed edge. -/
-def tailClampedDensity (p : ℝ → ℝ) (a b : ℝ) (hab : a ≤ b) : ℝ → ℝ :=
-  IccExtend hab (fun x : Icc a b => p x)
 
 theorem tailClampedDensity_apply (p : ℝ → ℝ) (a b : ℝ) (hab : a ≤ b) (x : ℝ) :
     tailClampedDensity p a b hab x = p (max a (min b x)) :=

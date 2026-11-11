@@ -23,8 +23,13 @@ Push often.
 - Your node file.
 - New files you create. Proofs go in new modules under `src/ContinuousFlexibility/<Area>/`
   with distinctive names; sub-blueprint statements go in `src/ContinuousFlexibility/Blueprint/<Node>/`.
-- The root import `src/ContinuousFlexibility.lean`: add your finished, sorry-free modules.
 - Existing files of other areas only when the proof needs a change there; say so in the pull request.
+- **Not** `src/ContinuousFlexibility.lean` and **not** `docs/STATUS.md`. The root import is generated
+  by `scripts/gen_root.py` from every `.lean` file under `src/ContinuousFlexibility/` (outside
+  `Blueprint/`), in CI and before local builds; the ledger is kept by the lead. Report your numbers
+  in the pull request instead. Editing these two files only causes merge conflicts.
+- Because every file is built, every `.lean` file you push must compile. Keep unfinished drafts out
+  of `src/` (for example in a `drafts/` directory at the repository root, which nothing builds).
 
 ## If the node is large
 
@@ -51,6 +56,12 @@ bash scripts/get_build_cache.sh
 ```
 
 The second command restores the compiled project modules of `main`, so only your files compile.
+Before building the root library locally, generate the root import:
+
+```bash
+python3 scripts/gen_root.py
+```
+
 Build single targets, never a bare `lake build` in a small sandbox:
 
 ```bash
@@ -80,7 +91,18 @@ gh run view <run-id> --log-failed
 - The step "Build every library" prints every `error:` line with the following 60 lines; the full
   log is the artifact `build-log`.
 - Push small, complete steps (one file or one lemma group at a time), so that one CI round tells
-  you about one change. Do not pile up thousands of unchecked lines before the first push.
+  you about one change.
+- **Hard limit: your branch may be at most 20,000 added lines of Lean ahead of its last commit that
+  passed CI.** A line can repair a few tens of thousands of uncompiled lines; beyond that the errors
+  pile up faster than they are fixed. When you reach the limit, stop writing new material and make
+  CI green first. Check the distance with:
+
+```bash
+git diff --shortstat $(gh run list --branch line/<Task> --status success --limit 1 --json headSha --jq '.[0].headSha') HEAD -- '*.lean'
+```
+
+  Code that does not compile is not progress: the further a branch runs ahead of a green build,
+  the more layered its errors become.
 
 ## Lean
 
