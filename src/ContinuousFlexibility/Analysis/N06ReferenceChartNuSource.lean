@@ -101,7 +101,7 @@ def N06ReferenceChartNuDifferenceBound
 
 set_option backward.isDefEq.respectTransparency true
 
-private theorem n06_source_family_norm_bound
+theorem n06_source_family_norm_bound
     {X A Y : Type*} [Norm Y]
     (P₁ P₂ P₃ P₄ : A → Prop) (Jets : ℝ → A → Prop) (Source : A → Y → Prop)
     (field : X → A) (size : X → ℝ) (Ad₁ Ad₂ : X → Prop)
