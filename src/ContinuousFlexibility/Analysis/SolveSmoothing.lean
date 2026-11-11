@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.TameTransfer
+import ContinuousFlexibility.Analysis.TamePairTopology
 
 /-!
 # Smoothing on a tame complemented subspace
@@ -19,55 +20,6 @@ open scoped Topology
 open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
-
-section ProductTopology
-
-variable {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
-
-/-- The sum grading generates the ordinary product topology. -/
-theorem withSeminorms_pairGrading {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}
-    (hp : WithSeminorms p) (hq : WithSeminorms q) :
-    WithSeminorms (pairGrading p q) := by
-  let r : Bool → ℕ → Seminorm ℝ (E × F) := fun b =>
-    if b then (fun n => (q n).comp (LinearMap.snd ℝ E F))
-    else (fun n => (p n).comp (LinearMap.fst ℝ E F))
-  let t : Bool → TopologicalSpace (E × F) := fun b =>
-    if b then TopologicalSpace.induced Prod.snd inferInstance
-    else TopologicalSpace.induced Prod.fst inferInstance
-  have ht (b : Bool) : WithSeminorms (topology := t b) (r b) := by
-    cases b
-    · exact (LinearMap.fst ℝ E F).withSeminorms_induced hp
-    · exact (LinearMap.snd ℝ E F).withSeminorms_induced hq
-  have hraw : WithSeminorms (SeminormFamily.sigma r) := by
-    have h := withSeminorms_iInf (𝕜 := ℝ) (E := E × F) (p := r) (t := t) ht
-    simpa +instances [t, iInf_bool_eq, inf_comm] using h
-  apply hraw.congr
-  · intro n
-    refine ⟨{⟨false, n⟩, ⟨true, n⟩}, 2, ?_⟩
-    intro x
-    simp only [Seminorm.comp_id, smul_apply, NNReal.smul_def, smul_eq_mul]
-    change p n x.1 + q n x.2 ≤ (2 : ℝ) * _
-    have h1 : p n x.1 ≤ ({⟨false, n⟩, ⟨true, n⟩} : Finset (Sigma fun _ : Bool => ℕ)).sup
-        (SeminormFamily.sigma r) x :=
-      Seminorm.le_finset_sup_apply (p := SeminormFamily.sigma r)
-        (i := ⟨false, n⟩) (by simp)
-    have h2 : q n x.2 ≤ ({⟨false, n⟩, ⟨true, n⟩} : Finset (Sigma fun _ : Bool => ℕ)).sup
-        (SeminormFamily.sigma r) x :=
-      Seminorm.le_finset_sup_apply (p := SeminormFamily.sigma r)
-        (i := ⟨true, n⟩) (by simp)
-    linarith only [h1, h2]
-  · intro z
-    refine ⟨{z.2}, 1, ?_⟩
-    rw [Finset.sup_singleton, one_smul, Seminorm.comp_id]
-    intro x
-    cases z with
-    | mk b n =>
-      cases b
-      · exact le_add_of_nonneg_right (apply_nonneg (q n) x.2)
-      · exact le_add_of_nonneg_left (apply_nonneg (p n) x.1)
-
-end ProductTopology
 
 section Projection
 

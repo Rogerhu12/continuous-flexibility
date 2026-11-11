@@ -125,8 +125,17 @@ theorem solve_coupled_exists_normalized_zero
       Submodule.subtype_apply, one_mul] using
       (le_refl (sectorGrading S n z.1.val + realGrading n z.2))
   have hRN : SmoothTameOn a (residualGrading S) U RN := by
-    have h := solve_smoothTameOn_precomp hRTame Lz le_rfl hLz
-    exact smoothTameOn_mono h hUopen (fun z hz => hnearε z hz)
+    have hpre : SmoothTameOn a (residualGrading S)
+        (Lz ⁻¹' sectorNeighborhood S base ε ε) RN :=
+      solve_smoothTameOn_precomp
+        (X := W × ℝ) (Y := StateDirections S × ℝ) (Z := ResidualSpace S)
+        (p := a) (q := pairGrading (sectorGrading S) realGrading)
+        (r := residualGrading S) (U := sectorNeighborhood S base ε ε)
+        (f := sectorJointResidual S C P) hRTame Lz (A := 1) le_rfl hLz
+    exact smoothTameOn_mono
+      (E := W × ℝ) (F := ResidualSpace S) (p := a) (q := residualGrading S)
+      (U := Lz ⁻¹' sectorNeighborhood S base ε ε) (V := U) (f := RN)
+      hpre hUopen (fun z hz => hnearε z hz)
   let Lv : ((W × ℝ) × ResidualSpace S) →L[ℝ]
       ((StateDirections S × ℝ) × ResidualSpace S) :=
     Lz.prodMap (ContinuousLinearMap.id ℝ (ResidualSpace S))
@@ -142,9 +151,30 @@ theorem solve_coupled_exists_normalized_zero
         residualGrading S n z.2))
   have hVpre : SmoothTameOn (pairGrading a (residualGrading S)) (sectorGrading S)
       (U ×ˢ univ) (fun z : (W × ℝ) × ResidualSpace S => V.sectorV (Lz z.1) z.2) := by
-    have h := solve_smoothTameOn_precomp hVTame Lv le_rfl hLv
-    exact smoothTameOn_mono h (hUopen.prod isOpen_univ)
-      (fun z hz => ⟨hnear z.1 hz.1, mem_univ _⟩)
+    have hpre : SmoothTameOn (pairGrading a (residualGrading S)) (sectorGrading S)
+        (Lv ⁻¹' (sectorNeighborhood S base ε q0 ×ˢ univ))
+        (fun z : (W × ℝ) × ResidualSpace S => V.sectorV (Lz z.1) z.2) := by
+      simpa only [Lv, ContinuousLinearMap.coe_prodMap', Prod.map_apply',
+        ContinuousLinearMap.id_apply] using
+        (solve_smoothTameOn_precomp
+          (X := (W × ℝ) × ResidualSpace S)
+          (Y := (StateDirections S × ℝ) × ResidualSpace S) (Z := StateDirections S)
+          (p := pairGrading a (residualGrading S))
+          (q := pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+          (r := sectorGrading S) (U := sectorNeighborhood S base ε q0 ×ˢ univ)
+          (f := fun z : (StateDirections S × ℝ) × ResidualSpace S => V.sectorV z.1 z.2)
+          hVTame Lv (A := 1) le_rfl hLv)
+    refine smoothTameOn_mono
+      (E := (W × ℝ) × ResidualSpace S) (F := StateDirections S)
+      (p := pairGrading a (residualGrading S)) (q := sectorGrading S)
+      (U := Lv ⁻¹' (sectorNeighborhood S base ε q0 ×ˢ univ)) (V := U ×ˢ univ)
+      (f := fun z : (W × ℝ) × ResidualSpace S => V.sectorV (Lz z.1) z.2)
+      hpre (hUopen.prod isOpen_univ) ?_
+    intro z hz
+    simpa only [Set.mem_preimage, Lv, ContinuousLinearMap.coe_prodMap', Prod.map_apply',
+      ContinuousLinearMap.id_apply, Set.mem_prod] using
+      (show (Lz z.1, z.2) ∈ sectorNeighborhood S base ε q0 ×ˢ univ from
+        ⟨hnear z.1 hz.1, mem_univ _⟩)
   have hVN_tame : SmoothTameOn (pairGrading a (residualGrading S)) p
       (U ×ˢ univ) (fun z : (W × ℝ) × ResidualSpace S => VN z.1 z.2) :=
     solve_smoothTameOn_codRestrict W row.isClosed_ker hVpre
@@ -166,9 +196,38 @@ theorem solve_coupled_exists_normalized_zero
   have hQN : SmoothTameOn (pairGrading (pairGrading a (residualGrading S)) (residualGrading S))
       (residualGrading S) ((U ×ˢ univ) ×ˢ univ)
       (fun z : ((W × ℝ) × ResidualSpace S) × ResidualSpace S => QN z.1.1 z.1.2 z.2) := by
-    have h := solve_smoothTameOn_precomp hQTame Lq le_rfl hLq
-    exact smoothTameOn_mono h ((hUopen.prod isOpen_univ).prod isOpen_univ)
-      (fun z hz => ⟨⟨hnear z.1.1 hz.1.1, mem_univ _⟩, mem_univ _⟩)
+    have hpre : SmoothTameOn
+        (pairGrading (pairGrading a (residualGrading S)) (residualGrading S))
+        (residualGrading S) (Lq ⁻¹' ((sectorNeighborhood S base ε q0 ×ˢ univ) ×ˢ univ))
+        (fun z : ((W × ℝ) × ResidualSpace S) × ResidualSpace S => QN z.1.1 z.1.2 z.2) := by
+      simpa only [QN, Lq, Lv, ContinuousLinearMap.coe_prodMap', Prod.map_apply',
+        ContinuousLinearMap.id_apply] using
+        (solve_smoothTameOn_precomp
+          (X := ((W × ℝ) × ResidualSpace S) × ResidualSpace S)
+          (Y := ((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S)
+          (Z := ResidualSpace S)
+          (p := pairGrading (pairGrading a (residualGrading S)) (residualGrading S))
+          (q := pairGrading
+            (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+            (residualGrading S))
+          (r := residualGrading S) (U := (sectorNeighborhood S base ε q0 ×ˢ univ) ×ˢ univ)
+          (f := fun z : ((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S =>
+            Q.Q (liftSectorParameter S C z.1.1) z.1.2 z.2)
+          hQTame Lq (A := 1) le_rfl hLq)
+    refine smoothTameOn_mono
+      (E := ((W × ℝ) × ResidualSpace S) × ResidualSpace S) (F := ResidualSpace S)
+      (p := pairGrading (pairGrading a (residualGrading S)) (residualGrading S))
+      (q := residualGrading S)
+      (U := Lq ⁻¹' ((sectorNeighborhood S base ε q0 ×ˢ univ) ×ˢ univ))
+      (V := (U ×ˢ univ) ×ˢ univ)
+      (f := fun z : ((W × ℝ) × ResidualSpace S) × ResidualSpace S => QN z.1.1 z.1.2 z.2)
+      hpre ((hUopen.prod isOpen_univ).prod isOpen_univ) ?_
+    intro z hz
+    simpa only [Set.mem_preimage, Lq, Lv, ContinuousLinearMap.coe_prodMap', Prod.map_apply',
+      ContinuousLinearMap.id_apply, Set.mem_prod] using
+      (show ((Lz z.1.1, z.1.2), z.2) ∈
+          (sectorNeighborhood S base ε q0 ×ˢ univ) ×ˢ univ from
+        ⟨⟨hnear z.1.1 hz.1.1, mem_univ _⟩, mem_univ _⟩)
   have hzeroN : RN (0, 0) = 0 := by
     simpa only [RN, Lz, ContinuousLinearMap.coe_prodMap', Prod.map_apply, ContinuousLinearMap.id_apply,
       Submodule.subtypeL_apply, ZeroMemClass.coe_zero, sectorJointResidual,
