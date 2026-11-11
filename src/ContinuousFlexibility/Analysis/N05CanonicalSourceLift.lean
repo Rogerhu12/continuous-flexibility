@@ -66,7 +66,10 @@ theorem n05CanonicalSourceLift_periodic (S : PhysicalSpacesData)
     Function.Periodic (n05CanonicalSourceLift S C K F) (0, Real.pi) := by
   classical
   rintro ⟨r, θ⟩
-  simp only [Prod.mk_add_mk, add_zero, n05CanonicalSourceLift]
+  change n05CanonicalSourceLift S C K F (r + 0, θ + Real.pi) =
+    n05CanonicalSourceLift S C K F (r, θ)
+  rw [add_zero]
+  unfold n05CanonicalSourceLift
   split_ifs
   · simpa only [Prod.mk_add_mk, add_zero] using
       (n05CanonicalSourcePieceLift_periodic S C K (n05PhysicalPieceIndex S K r)
