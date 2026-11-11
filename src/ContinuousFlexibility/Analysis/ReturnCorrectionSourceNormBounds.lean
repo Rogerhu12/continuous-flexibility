@@ -99,14 +99,14 @@ private theorem local_oneHigh_of_unit_growth
   have hpx : p B z.1 ≤ p B z₀.1 + 1 := by
     calc
       p B z.1 = p B ((z.1 - z₀.1) + z₀.1) := by rw [sub_add_cancel]
-      _ ≤ p B (z.1 - z₀.1) + p B z₀.1 := (p B).add_le _ _
+      _ ≤ p B (z.1 - z₀.1) + p B z₀.1 := map_add_le_add (p B) _ _
       _ ≤ 1 + p B z₀.1 := add_le_add_right
         ((hpdiff.trans_lt hnear).le.trans (min_le_right _ _)) _
       _ = _ := add_comm _ _
   have hqη : q B z.2 ≤ q B z₀.2 + 1 := by
     calc
       q B z.2 = q B ((z.2 - z₀.2) + z₀.2) := by rw [sub_add_cancel]
-      _ ≤ q B (z.2 - z₀.2) + q B z₀.2 := (q B).add_le _ _
+      _ ≤ q B (z.2 - z₀.2) + q B z₀.2 := map_add_le_add (q B) _ _
       _ ≤ 1 + q B z₀.2 := add_le_add_right
         ((hqdiff.trans_lt hnear).le.trans (min_le_right _ _)) _
       _ = _ := add_comm _ _

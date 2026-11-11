@@ -32,7 +32,7 @@ private theorem scalar_jet_bound_mono
   have hprod : (∏ i, p (v i)) ≤ ∏ i, q (v i) :=
     Finset.prod_le_prod₀ (fun _ _ => apply_nonneg _ _) (fun i _ => hpq (v i))
   exact mul_le_mul
-    (mul_le_mul hAB (add_le_add_left (hpq x) 1)
+    (mul_le_mul hAB (add_le_add (le_refl (1 : ℝ)) (hpq x))
       (add_nonneg zero_le_one (apply_nonneg _ _)) (hA.trans hAB))
     hprod (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
     (mul_nonneg (hA.trans hAB) (add_nonneg zero_le_one (apply_nonneg _ _)))
@@ -98,6 +98,8 @@ theorem singleComponentScalarJets_apply (n : ℕ) (x : E) (v : Fin n → E) :
     singleComponentScalarJets J m n x v =
       circleSingleComponentField m (fun θ => (J 0 θ).D n x v) := rfl
 
+include hU hc hbound hangular
+
 theorem singleComponentScalarJets_iteratedDeriv
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) (i b : ℕ) (θ : ℝ) :
     iteratedDeriv b (singleComponentScalarJets J m n x v i) θ =
@@ -106,6 +108,7 @@ theorem singleComponentScalarJets_iteratedDeriv
   have hd := smoothDirections_angular_jet_iteratedDeriv J hU hc hbound hangular n 0 b x hx v θ
   simpa only [zero_add] using congrArg (fun t : ℝ => if i = m then t else 0) hd
 
+include hperiod in
 theorem singleComponentScalarJets_member
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
     CircleMember T γ (singleComponentScalarJets J m n x v) := by
@@ -208,7 +211,8 @@ theorem singleComponentScalarJets_secondEnvelopes
         calc
           p (x + t • w) ≤ p x + p (t • w) := map_add_le_add _ _ _
           _ = p x + |t| * p w := by rw [map_smul_eq_mul, Real.norm_eq_abs]
-          _ ≤ p x + p w := add_le_add_left (mul_le_of_le_one_left (apply_nonneg _ _) hts) _
+          _ ≤ p x + p w := add_le_add le_rfl
+            (mul_le_of_le_one_left (apply_nonneg _ _) hts)
       have hjet : |(J b θ).D (n + 2) (x + t • w) vs| ≤ A :=
         (hb b (by omega) θ _ (hmem t ht) vs).trans
           (mul_le_mul_of_nonneg_right
@@ -219,6 +223,7 @@ theorem singleComponentScalarJets_secondEnvelopes
         hjet (abs_nonneg _) hW
     · simp only [if_neg hi, abs_zero, mul_zero, energy, ENNReal.toReal_zero, Real.sqrt_zero]
 
+include hperiod in
 theorem exists_singleComponent_circle_smoothDirections
     (hS : IsCircleModel T γ S)
     (hM : ∀ i, 0 ≤ T.M (T.sample i)) (hH : ∀ i, 0 ≤ T.H (T.sample i))

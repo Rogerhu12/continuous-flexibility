@@ -69,7 +69,40 @@ theorem norm_iteratedFDeriv_reflected_linear_weighted_bound
   rw [heq]
   exact hb i p (mem_univ _)
 
+private theorem reflected_drift_speed_weighted_bounds
+    {ι : Type*} (W H : ι → ℝ) (hW : ∀ i, 1 ≤ W i) (hH : ∀ i, 0 < H i)
+    (f d e : ι → (ℝ × ℝ) → ℝ) (hf : ∀ i, ContDiff ℝ ∞ (f i))
+    (hbound : ∀ k : ℕ, ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i p,
+      ‖iteratedFDeriv ℝ k (f i) p‖ ≤ A * H i * W i ^ P)
+    (hd : ∀ i p, d i p = (f i p - f i (p.1, -p.2)) / 2)
+    (he : ∀ i p, e i p = (-f i (p.1, -p.2) - f i p) / 2) (n : ℕ) :
+    (∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i p,
+      ‖iteratedFDeriv ℝ n (d i) p‖ ≤ A * H i * W i ^ P) ∧
+    (∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ i p,
+      ‖iteratedFDeriv ℝ n (e i) p‖ ≤ A * H i * W i ^ P) := by
+  constructor
+  · obtain ⟨A, P, hA, hP, hb⟩ := norm_iteratedFDeriv_reflected_linear_weighted_bound
+      W H hW hH f hf hbound (1 / 2) (-1 / 2) n
+    refine ⟨A, P, hA, hP, fun i p => ?_⟩
+    have heq : d i = fun q => (1 / 2) * f i q + (-1 / 2) * f i (q.1, -q.2) := by
+      funext q
+      rw [hd i q]
+      ring
+    exact (congrArg (fun g : (ℝ × ℝ) → ℝ => ‖iteratedFDeriv ℝ n g p‖) heq).trans_le
+      (hb i p)
+  · obtain ⟨A, P, hA, hP, hb⟩ := norm_iteratedFDeriv_reflected_linear_weighted_bound
+      W H hW hH f hf hbound (-1 / 2) (-1 / 2) n
+    refine ⟨A, P, hA, hP, fun i p => ?_⟩
+    have heq : e i = fun q => (-1 / 2) * f i q + (-1 / 2) * f i (q.1, -q.2) := by
+      funext q
+      rw [he i q]
+      ring
+    exact (congrArg (fun g : (ℝ × ℝ) → ℝ => ‖iteratedFDeriv ℝ n g p‖) heq).trans_le
+      (hb i p)
+
 end ContinuousFlexibility.Analysis
+
+set_option backward.isDefEq.respectTransparency true
 
 namespace ContinuousFlexibility.Statements
 
@@ -86,7 +119,7 @@ theorem returnCorrectionDriftSpeedLinear_contDiff_of_velocity
   have hr : ContDiff ℝ ∞ (fun p : PolarPoint => (p.1, -p.2)) :=
     contDiff_fst.prodMk contDiff_snd.neg
   have hvr : ContDiff ℝ ∞
-      (fun p => returnCorrectionVelocityLinear D S C χ z m (p.1, -p.2) ρ) := by
+      (fun p : PolarPoint => returnCorrectionVelocityLinear D S C χ z m (p.1, -p.2) ρ) := by
     simpa only [Function.comp_def] using (hV m).comp hr
   constructor
   · have h := ((hV m).sub hvr).div_const 2
@@ -109,31 +142,13 @@ theorem returnCorrectionDriftSpeedLinear_weighted_bound_of_velocity
         A * H m * W m ^ P) ∧
     (∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ m p,
       ‖iteratedFDeriv ℝ n (fun q => returnCorrectionSpeedLinear D S C χ z m q ρ) p‖ ≤
-        A * H m * W m ^ P) := by
-  constructor
-  · obtain ⟨A, P, hA, hP, hb⟩ := norm_iteratedFDeriv_reflected_linear_weighted_bound
-      W H hW hH (fun m p => returnCorrectionVelocityLinear D S C χ z m p ρ)
-      hV hbound (1 / 2) (-1 / 2) n
-    refine ⟨A, P, hA, hP, fun m p => ?_⟩
-    have heq : (fun q => returnCorrectionDriftLinear D S C χ z m q ρ) =
-        (fun q => (1 / 2) * returnCorrectionVelocityLinear D S C χ z m q ρ +
-          (-1 / 2) * returnCorrectionVelocityLinear D S C χ z m (q.1, -q.2) ρ) := by
-      funext q
-      rw [returnCorrectionDriftLinear_apply]
-      ring
-    rw [heq]
-    exact hb m p
-  · obtain ⟨A, P, hA, hP, hb⟩ := norm_iteratedFDeriv_reflected_linear_weighted_bound
-      W H hW hH (fun m p => returnCorrectionVelocityLinear D S C χ z m p ρ)
-      hV hbound (-1 / 2) (-1 / 2) n
-    refine ⟨A, P, hA, hP, fun m p => ?_⟩
-    have heq : (fun q => returnCorrectionSpeedLinear D S C χ z m q ρ) =
-        (fun q => (-1 / 2) * returnCorrectionVelocityLinear D S C χ z m q ρ +
-          (-1 / 2) * returnCorrectionVelocityLinear D S C χ z m (q.1, -q.2) ρ) := by
-      funext q
-      rw [returnCorrectionSpeedLinear_apply]
-      ring
-    rw [heq]
-    exact hb m p
+        A * H m * W m ^ P) :=
+  reflected_drift_speed_weighted_bounds W H hW hH
+    (fun m p => returnCorrectionVelocityLinear D S C χ z m p ρ)
+    (fun m p => returnCorrectionDriftLinear D S C χ z m p ρ)
+    (fun m p => returnCorrectionSpeedLinear D S C χ z m p ρ)
+    hV hbound
+    (fun m p => returnCorrectionDriftLinear_apply D S C χ z m p ρ)
+    (fun m p => returnCorrectionSpeedLinear_apply D S C χ z m p ρ) n
 
 end ContinuousFlexibility.Statements

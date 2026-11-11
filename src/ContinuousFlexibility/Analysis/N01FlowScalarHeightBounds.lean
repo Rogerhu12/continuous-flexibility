@@ -72,7 +72,7 @@ private theorem scalar_height_bound_of_line
       simp only [Nat.cast_add, Nat.cast_one]
       linarith only [hg]
     exact (hb.trans_eq hw).trans (mul_le_mul_of_nonneg_left
-      (add_le_add_right (mul_le_mul_of_nonneg_right hadd hlow) highHeight) hP)
+      (add_le_add (mul_le_mul_of_nonneg_right hadd hlow) (le_refl highHeight)) hP)
   have hb := J.abs_pure_scalar_jet_le_of_mixed_euler_bound x₀ w u hEuler n q _
     hline hbound
   have heq := congrArg (fun y : E => |J.D (n + 1) y (fun _ => w)|) (hφ q)

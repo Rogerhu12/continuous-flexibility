@@ -40,6 +40,7 @@ theorem physicalNorm_angularPartial_le
         (materialPullback T γ (angularPartial u)) p = _
     rw [hpull, mixedDerivative_angularPartial isOpen_univ hG.contDiffOn
       (J.val 0).val (J.val 1).val (mem_univ p)]
+    rfl
   rw [heq]
   exact weightedPhysicalJet_eLpNorm_le_physicalNorm_of_memLp huLp
     (by have h := J.property; omega)

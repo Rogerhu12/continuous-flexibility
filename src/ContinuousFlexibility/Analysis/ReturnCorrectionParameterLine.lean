@@ -66,12 +66,25 @@ theorem N01Properties.returnCorrectionDisplacementLinear_sectorLine_contDiffOn
     (show (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) ⊆
       {p : PolarPoint | x + p.1 • w ∈ sectorNeighborhood S base ε ε} from fun _ hp => hp.1)
   have hy := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => rightChartCandidate S C (liftSectorParameter S C (x + t • w)) m θ)
+    (G := fun t θ => C.minusFlow (liftSectorParameter S C (x + t • w)) m (C.right m) θ)
     (hN.rightChartCandidate_sectorLine_contDiffOn hS hT m x w) hflow
   have he := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => returnResidualField S C (liftSectorParameter S C (x + t • w)) m θ)
+    (G := fun t θ => rightChartCandidate S C (liftSectorParameter S C (x + t • w)) m
+      (C.minusFlow (liftSectorParameter S C (x + t • w)) m (C.right m) θ))
     (hN.returnResidualField_sectorLine_contDiffOn hS hT m x w) hy
-  have hquot := scalarParameter_dslope_comp_contDiffOn hI
+  have hquot := scalarParameter_dslope_comp_contDiffOn
+    (G := fun t θ => C.minusReturnInverse (liftSectorParameter S C (x + t • w)) m
+      (C.rightChartInverse (liftSectorParameter S C (x + t • w)) m θ)) hI
     (hN.returnTransportInverse_sectorLine_contDiffOn hS hT m x w) hy he
   have hρ := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => (S.circle (3 / 4 : ℝ)).decode (ρ + t • σ) m θ)
+    (G := fun t θ => rightChartCandidate S C (liftSectorParameter S C (x + t • w)) m
+      (C.minusFlow (liftSectorParameter S C (x + t • w)) m (C.right m) θ))
     (circleDecode_affineLine_contDiff hS m ρ σ).contDiffOn hy
   apply (hquot.mul hρ).congr
   intro p _
@@ -95,8 +108,14 @@ theorem N01Properties.returnInterpolation_invFun_sectorLine_contDiffOn
         (returnCorrectionInitialMap S C (liftSectorParameter S C (x + p.1 • w)) m)) p.2)
       (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) := by
   apply scalarParameterInverse_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => returnInterpolation c
+      (returnCorrectionInitialMap S C (liftSectorParameter S C (x + t • w)) m) θ)
+    (G := fun t θ => Function.invFun (returnInterpolation c
+      (returnCorrectionInitialMap S C (liftSectorParameter S C (x + t • w)) m)) θ)
     ((sectorNeighborhood_isOpen S base ε ε).preimage
-      (continuous_const.add (continuous_id.smul continuous_const)))
+      (show Continuous (fun t : ℝ => x + t • w) from
+        continuous_const.add (continuous_id.smul continuous_const)))
     (hN.returnInterpolation_sectorLine_contDiffOn hS hT m c x w)
   · intro t ht θ
     have hz := liftSectorParameter_mem_stateNeighborhood ht (le_refl ε)
@@ -136,10 +155,27 @@ theorem N01Properties.returnCorrectionVelocityLinear_sectorLine_contDiffOn
     (show (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) ⊆
       {p : PolarPoint | x + p.1 • w ∈ sectorNeighborhood S base ε ε} from fun _ hp => hp.1)
   have hB := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => Function.invFun (returnInterpolation (χ m r)
+      (returnCorrectionInitialMap S C (liftSectorParameter S C (x + t • w)) m)) θ)
+    (G := fun t θ => Function.invFun (C.minusFlow
+      (liftSectorParameter S C (x + t • w)) m r) θ)
     (hN.returnInterpolation_invFun_sectorLine_contDiffOn hS hT m (χ m r) hχ x w) hA
   have hvariation := scalarParameter_comp_contDiffOn
-    (scalarParameterAngularDerivative_contDiffOn hI hflow) hA
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => deriv (C.minusFlow (liftSectorParameter S C (x + t • w)) m r) θ)
+    (G := fun t θ => Function.invFun (C.minusFlow
+      (liftSectorParameter S C (x + t • w)) m r) θ)
+    (scalarParameterAngularDerivative_contDiffOn
+      (F := fun t θ => C.minusFlow (liftSectorParameter S C (x + t • w)) m r θ)
+      hI hflow) hA
   have hd := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => returnCorrectionDisplacementLinear S C
+      (liftSectorParameter S C (x + t • w)) m θ (ρ + t • σ))
+    (G := fun t θ => Function.invFun (returnInterpolation (χ m r)
+      (returnCorrectionInitialMap S C (liftSectorParameter S C (x + t • w)) m))
+        (Function.invFun (C.minusFlow (liftSectorParameter S C (x + t • w)) m r) θ))
     (hN.returnCorrectionDisplacementLinear_sectorLine_contDiffOn hS hT m x w ρ σ) hB
   apply ((hvariation.mul (contDiffOn_const (c := deriv (χ m) r))).mul hd).congr
   intro p _
@@ -159,7 +195,11 @@ theorem N01Properties.returnCorrectionDriftSpeedLinear_sectorLine_contDiffOn
       (((fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε) ×ˢ univ) := by
   have hv := hN.returnCorrectionVelocityLinear_sectorLine_contDiffOn
     hS hT χ m r hr hχ x w ρ σ
-  have hn := scalarParameter_comp_contDiffOn hv contDiffOn_snd.neg
+  have hn := scalarParameter_comp_contDiffOn
+    (I := (fun t : ℝ => x + t • w) ⁻¹' sectorNeighborhood S base ε ε)
+    (F := fun t θ => returnCorrectionVelocityLinear D S C χ
+      (liftSectorParameter S C (x + t • w)) m (r, θ) (ρ + t • σ))
+    (G := fun _ θ => -θ) hv contDiffOn_snd.neg
   constructor
   · apply ((hv.sub hn).div_const 2).congr
     intro p _

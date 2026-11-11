@@ -142,6 +142,8 @@ theorem localizedStateParameterDirection_weighted_grading_le
         (circleSingletonGradingConstant_nonneg s))
     _ = _ := by ring
 
+attribute [local irreducible] localizedStateParameterDirection
+
 private theorem localizedStateParameterDirection_flow_jet
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -168,14 +170,17 @@ private theorem localizedStateParameterDirection_flow_jet
       (S.circle (3 / 4 : ℝ)).decode w.1.val.2.2.1 m 0 := by
     have heq := localizedStateParameterDirection_control
       (hS.2.1 (3 / 4 : ℝ)) m η c₀ m 0
-    simpa only [if_pos rfl] using heq.symm
+    change c₀ = (S.circle (3 / 4 : ℝ)).decode
+      (localizedStateParameterDirection (hS.2.1 (3 / 4 : ℝ)) m η c₀).1.val.2.2.1 m 0
+    simpa only [if_pos rfl, ite_true] using heq.symm
   have hh : ∀ t ∈ Ioo (C.left m) (C.right m), ∀ ψ,
       heightPairField S v.1.val.1 (t, ψ) = heightPairField S w.1.val.1 (t, ψ) + -c := by
     intro t ht ψ
     have hw : w.1.val.1 = η :=
       localizedStateParameterDirection_height (hS.2.1 (3 / 4 : ℝ)) m η c₀
-    rw [hw, hheight t ht ψ]
-    ring
+    have heq : heightPairField S w.1.val.1 (t, ψ) = heightPairField S η (t, ψ) :=
+      congrArg (fun ξ : HeightPair S => heightPairField S ξ (t, ψ)) hw
+    linarith only [heq, hheight t ht ψ]
   exact hN.ordinaryFlowFamily_state_jet_locality hS hT hz v w hvq hwq
     m b θ hr hκ (-c) hh J n vs
 
@@ -200,9 +205,7 @@ theorem N01Properties.exists_localized_state_directions
           (circleSingletonGradingConstant s * (2 * circleSobolevConstant)) *
             Real.sqrt (circleComponentEnergy T (3 / 4 : ℝ) (s + d + 1)
               ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1) m).toReal) := by
-  have hex := hN.exists_height_pair_plateau_directions hS hT v.1.val.1
-  let η : ℕ → HeightPair S := Classical.choose hex
-  have hη := Classical.choose_spec hex
+  obtain ⟨η, hη⟩ := hN.exists_height_pair_plateau_directions hS hT v.1.val.1
   have hlocal (m : ℕ) : ∃ c : ℝ, ∀ t ∈ Ioo (C.left m) (C.right m), ∀ θ : ℝ,
       heightPairField S (η m) (t, θ) = heightPairField S v.1.val.1 (t, θ) + c :=
     hη.2.2.1 m

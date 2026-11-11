@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01EndpointCircleJets
 import ContinuousFlexibility.Analysis.N01FlowSamplePrefactor
+import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # The chosen endpoint jets with their exact circle weights
@@ -63,7 +64,7 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
   have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
   have hW : 0 ≤ oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
       base (s + loss) z v :=
-    multilinearTameSize_nonneg _ _ _
+    ContinuousFlexibility.Analysis.multilinearTameSize_nonneg _ _ _
       (add_nonneg zero_le_one (apply_nonneg _ _)) v
   have hj : |iteratedDeriv b
         (hN.endpointFlowScalarJets hS hT rsel hrsel k z v m) θ| ≤

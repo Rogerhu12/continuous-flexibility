@@ -20,6 +20,10 @@ namespace ContinuousFlexibility.Statements
 
 local instance n01FlowMixedParameterTowerStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01FlowMixedParameterTowerParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
+local instance n01FlowMixedParameterTowerRealNormedSpace : NormedSpace ℝ ℝ :=
+  NormedField.toNormedSpace
 
 open Set ContinuousFlexibility.Analysis
 open scoped Topology BigOperators
@@ -69,11 +73,12 @@ theorem N01Properties.sectorFlow_mixed_tower
   have hraw := pointData.choose_spec (liftSectorParameter S C z)
     (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
     (fun i => sectorParameterInclusion S (v i))
-  rw [heq]
-  exact hraw.trans_eq (congrArg (fun W : ℝ =>
+  have hvalue := congrArg (fun y : ℝ =>
+    min (p.1 - C.left m) (C.right m - p.1) ^ a * |y|) heq
+  have hweight := oneHighVariationWeight_sector_lift S C base (s + loss) z v
+  exact hvalue.trans_le (hraw.trans_eq (congrArg (fun W : ℝ =>
     B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-      T.E0 (T.sample (C.cell m)) ^ B * W)
-    (oneHighVariationWeight_sector_lift S C base (s + loss) z v))
+      T.E0 (T.sample (C.cell m)) ^ B * W) hweight))
 
 def N01Properties.sectorFlowMixedTower
     (hN : N01Properties D T S C base loss ε)
@@ -99,10 +104,9 @@ theorem N01Properties.sectorFlowMixedTower_bound
   let pointData := data.choose_spec.2 m a b p hab hp
   let K := pointData.choose
   have heq := (hN.sectorFlowMixedTower m a b p hp).unique K k z hz
-  have hvalue : (hN.sectorFlowMixedTower m a b p hp).D k z v = K.D k z v :=
-    congrArg (fun A : (StateDirections S × ℝ) [×k]→L[ℝ] ℝ => A v) heq
-  rw [hvalue]
-  exact pointData.choose_spec z hz v
+  have hvalue := congrArg (fun A : (StateDirections S × ℝ) [×k]→L[ℝ] ℝ =>
+    min (p.1 - C.left m) (C.right m - p.1) ^ a * |A v|) heq
+  exact hvalue.trans_le (pointData.choose_spec z hz v)
 
 theorem N01Properties.sectorFlowMixedTower_uniform_on_radial_interval
     (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T)
@@ -153,6 +157,12 @@ theorem N01Properties.sectorFlowMixedTower_uniform_on_radial_interval
   apply hbound'.trans
   have hmul := mul_le_mul_of_nonneg_left hw
     (mul_nonneg (pow_nonneg (inv_nonneg.mpr hd.le) a) hW)
-  convert hmul using 1 <;> dsimp only [A] <;> ring
+  calc
+    d⁻¹ ^ a * (W * oneHighVariationWeight
+        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v) =
+      (d⁻¹ ^ a * W) * oneHighVariationWeight
+        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v := by ring
+    _ ≤ (d⁻¹ ^ a * W) * (((n : ℝ) + 1) * (1 + q z) * ∏ i, q (v i)) := hmul
+    _ = A * (1 + q z) * ∏ i, q (v i) := by dsimp only [A]; ring
 
 end ContinuousFlexibility.Statements

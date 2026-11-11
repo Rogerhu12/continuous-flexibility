@@ -20,6 +20,8 @@ namespace ContinuousFlexibility.Statements
 
 local instance n01FlowJointParameterTowerStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01FlowJointParameterTowerRealNormedSpace : NormedSpace ℝ ℝ :=
+  NormedField.toNormedSpace
 
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology
@@ -58,7 +60,10 @@ def N01Properties.minusFlow_jointTower
   let J := hN.sectorFlow_closed_jointTower hS hT m r hr
   let L : ((StateDirections S × ℝ) × ℝ) →L[ℝ] ℝ :=
     ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) ℝ
-  let K := (smoothDirectionsLinear (ContinuousLinearMap.id ℝ ℝ)).compAffine L
+  let K : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ℝ =>
+        -opticalTravel D.w (C.left m) r + z.2) :=
+    (smoothDirectionsLinear (ContinuousLinearMap.id ℝ ℝ)).compAffine L
     (-opticalTravel D.w (C.left m) r)
     ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
     (fun _ _ => mem_univ _)

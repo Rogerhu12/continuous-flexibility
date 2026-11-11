@@ -22,6 +22,53 @@ set_option backward.isDefEq.respectTransparency false
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem grading_map_shift_le
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (N : ℕ → F → ℝ) (decode : E → F) (A : E → E)
+    (hgrade : ∀ s u C, 0 ≤ C → (p s u ≤ C ↔ ∀ i ≤ s, N i (decode u) ≤ C))
+    (hbound : ∀ i u, N i (decode (A u)) ≤ N (i + 1) (decode u))
+    (s : ℕ) (u : E) : p s (A u) ≤ p (s + 1) u := by
+  apply (hgrade s (A u) (p (s + 1) u) (apply_nonneg _ _)).mpr
+  intro i hi
+  exact (hbound i u).trans
+    (((hgrade (s + 1) u (p (s + 1) u) (apply_nonneg _ _)).mp le_rfl)
+      (i + 1) (Nat.add_le_add_right hi 1))
+
+private theorem circleAngularDerivative_grading_le (hS : IsCircleModel T γ S)
+    (s : ℕ) (u : S.Space) :
+    S.grading s (circleDerivativeContinuousLinear hS u) ≤ S.grading (s + 1) u := by
+  have hb (i : ℕ) (v : S.Space) :
+      circleNorm T γ i (S.decode (circleDerivativeContinuousLinear hS v)) ≤
+        circleNorm T γ (i + 1) (S.decode v) :=
+    (congrArg (circleNorm T γ i) (circleDerivativeContinuousLinear_decode hS v)).trans_le
+      (circleNorm_angularDerivative_le (hS.2.2.2.1 v) i)
+  exact grading_map_shift_le S.grading (circleNorm T γ) (fun v => S.decode v)
+    (fun v => circleDerivativeContinuousLinear hS v)
+    (fun k v C hC => circleGrading_le_iff_circleNorm hS k v hC) hb s u
+
+private theorem circleField_finiteProduct_insert
+    {ι : Type*} [DecidableEq ι] (u : ℕ → ℝ → ℝ) (v : ι → ℕ → ℝ → ℝ)
+    (I : Finset ι) (i : ι) (hi : i ∉ I) :
+    (fun m θ => u m θ * ∏ j ∈ insert i I, v j m θ) =
+      (fun m θ => v i m θ * (u m θ * ∏ j ∈ I, v j m θ)) := by
+  funext m θ
+  rw [Finset.prod_insert hi]
+  ring
+
+private theorem circleMember_field_finiteProductWith
+    {ι : Type*} [DecidableEq ι] {u : ℕ → ℝ → ℝ} {v : ι → ℕ → ℝ → ℝ}
+    (hu : CircleMember T γ u)
+    (hv : ∀ i m, ContDiff ℝ ∞ (v i m) ∧ Function.Periodic (v i m) Real.pi)
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (hjets : ∀ i s, ∃ B : ℝ, 0 ≤ B ∧
+      ∀ m k θ, k ≤ s → |iteratedDeriv k (v i m) θ| ≤ B)
+    (I : Finset ι) : CircleMember T γ (fun m θ => u m θ * ∏ i ∈ I, v i m θ) := by
+  induction I using Finset.induction_on with
+  | empty => simpa only [Finset.prod_empty, mul_one] using hu
+  | @insert i I hi ih =>
+      exact (circleField_finiteProduct_insert u v I i hi).symm ▸
+        circleMember_mul_of_uniform_jets ih (hv i) hM hH (hjets i)
+
 def circleAngularDerivativeIterate (hS : IsCircleModel T γ S) :
     ℕ → S.Space →L[ℝ] S.Space
   | 0 => ContinuousLinearMap.id ℝ S.Space
@@ -45,18 +92,9 @@ theorem circleAngularDerivativeIterate_grading (hS : IsCircleModel T γ S)
   | zero => simp only [circleAngularDerivativeIterate, ContinuousLinearMap.id_apply,
       Nat.add_zero, le_refl]
   | succ n ih =>
-      have hd : S.grading s (circleDerivativeContinuousLinear hS
-          (circleAngularDerivativeIterate hS n u)) ≤
-          S.grading (s + 1) (circleAngularDerivativeIterate hS n u) := by
-        apply (circleGrading_le_iff_circleNorm hS s _ (apply_nonneg _ _)).mpr
-        intro i hi
-        rw [circleDerivativeContinuousLinear_decode]
-        exact (circleNorm_angularDerivative_le
-          (hS.2.2.2.1 (circleAngularDerivativeIterate hS n u)) i).trans
-          (((circleGrading_le_iff_circleNorm hS (s + 1)
-            (circleAngularDerivativeIterate hS n u) (apply_nonneg _ _)).mp
-              (le_refl _)) (i + 1) (by omega))
-      exact hd.trans ((ih (s + 1)).trans_eq (by congr 1; omega))
+      have hd := circleAngularDerivative_grading_le hS s (circleAngularDerivativeIterate hS n u)
+      simpa only [circleAngularDerivativeIterate, ContinuousLinearMap.comp_apply,
+        Nat.add_assoc, Nat.add_comm 1 n] using hd.trans (ih (s + 1))
 
 theorem circleShiftedChartComposeLinear_isTame
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -116,23 +154,12 @@ theorem circleMember_finiteProductWith
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
     (u : S.Space) (v : ι → S.Space) (I : Finset ι) :
-    CircleMember T γ (fun m θ => S.decode u m θ * ∏ i ∈ I, S.decode (v i) m θ) := by
-  induction I using Finset.induction_on with
-  | empty => simpa only [Finset.prod_empty, mul_one] using hS.2.2.2.1 u
-  | @insert i I hi ih =>
-      have hm := circleMember_mul_of_uniform_jets ih (hS.2.2.2.1 (v i)).1
-        (fun m => ((material_circle_sample_weights_pos hT hD).1 m).le)
-        (fun m => ((material_circle_sample_weights_pos hT hD).2 m).le)
-        (circleModel_uniform_jets_of_material hS hT hD hγ (v i))
-      have heq :
-          (fun m θ => S.decode u m θ * ∏ j ∈ insert i I, S.decode (v j) m θ) =
-          (fun m θ => S.decode (v i) m θ *
-            (S.decode u m θ * ∏ j ∈ I, S.decode (v j) m θ)) := by
-        funext m θ
-        rw [Finset.prod_insert hi]
-        ring
-      rw [heq]
-      exact hm
+    CircleMember T γ (fun m θ => S.decode u m θ * ∏ i ∈ I, S.decode (v i) m θ) :=
+  circleMember_field_finiteProductWith (hS.2.2.2.1 u)
+    (fun i => (hS.2.2.2.1 (v i)).1)
+    (fun m => ((material_circle_sample_weights_pos hT hD).1 m).le)
+    (fun m => ((material_circle_sample_weights_pos hT hD).2 m).le)
+    (fun i => circleModel_uniform_jets_of_material hS hT hD hγ (v i)) I
 
 def circleFiniteProductWith
     {ι : Type*} [DecidableEq ι]
@@ -167,12 +194,14 @@ theorem circleFiniteProductWith_insert
     (u : S.Space) (v : ι → S.Space) (I : Finset ι) (i : ι) (hi : i ∉ I) :
     circleFiniteProductWith hS hT hD hγ u v (insert i I) =
       circleProductBilinear hS hT hD hγ (v i) (circleFiniteProductWith hS hT hD hγ u v I) := by
-  apply hS.2.2.2.2.2.1
-  rw [circleFiniteProductWith_decode, circleProductBilinear_decode,
-    circleFiniteProductWith_decode]
-  funext m θ
-  rw [Finset.prod_insert hi]
-  ring
+  have hleft := circleFiniteProductWith_decode hS hT hD hγ u v (insert i I)
+  have hright := circleProductBilinear_decode hS hT hD hγ (v i)
+    (circleFiniteProductWith hS hT hD hγ u v I)
+  have hinner := congrArg (fun f : ℕ → ℝ → ℝ =>
+    fun m θ => S.decode (v i) m θ * f m θ) (circleFiniteProductWith_decode hS hT hD hγ u v I)
+  exact hS.2.2.2.2.2.1 (hleft.trans
+    ((circleField_finiteProduct_insert (S.decode u) (fun j => S.decode (v j)) I i hi).trans
+      (hinner.symm.trans hright.symm)))
 
 def circleChartCompositionJetValue
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)

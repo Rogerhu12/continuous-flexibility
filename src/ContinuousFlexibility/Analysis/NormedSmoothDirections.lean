@@ -74,7 +74,7 @@ theorem hasProjectiveJetsOn_contDiffOn {g : F → G} {V : Set F}
   · intro n y hy w v
     have hline : HasDerivAt (fun t : ℝ => y + t • w) w 0 := by
       simpa only [zero_add, one_smul, Pi.add_apply] using
-        (hasDerivAt_const (0 : ℝ) y).add ((hasDerivAt_id' (0 : ℝ)).smul_const w)
+        (hasDerivAt_const (0 : ℝ) y).fun_add ((hasDerivAt_id' (0 : ℝ)).smul_const w)
     have hd := hasDerivAt_contDiffOnJet_fixed hV hg hline
       (by simpa only [zero_smul, add_zero] using hy) n v
     simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,

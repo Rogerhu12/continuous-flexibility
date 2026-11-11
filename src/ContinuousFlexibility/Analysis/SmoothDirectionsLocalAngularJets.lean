@@ -135,14 +135,16 @@ theorem localScalarJet_hasDerivAt_on_Ioo
   have hd := smoothDirections_local_angular_jet_hasDerivAt Jc Kc hU hc hfc hgc
     (hJ.reindex c) (hK.reindex c) hderiv n θ hθ x hx v
   have hvalue : (Kc θ).D n x v = localScalarJet K n x v θ := by
-    rw [localScalarJet_of_mem K n x v (hsub ⟨hθ.1.le, hθ.2.le⟩)]
-    dsimp only [Kc]
-    rw [hceq θ ⟨hθ.1.le, hθ.2.le⟩]
+    calc
+      _ = localScalarJet K n x v (c θ) :=
+        (localScalarJet_of_mem K n x v (hsub (c θ).property)).symm
+      _ = _ := congrArg (localScalarJet K n x v) (hceq θ ⟨hθ.1.le, hθ.2.le⟩)
   apply (hd.congr_deriv hvalue).congr_of_eventuallyEq
   filter_upwards [isOpen_Ioo.mem_nhds hθ] with ψ hψ
-  rw [localScalarJet_of_mem J n x v (hsub ⟨hψ.1.le, hψ.2.le⟩)]
-  dsimp only [Jc]
-  rw [hceq ψ ⟨hψ.1.le, hψ.2.le⟩]
+  calc
+    _ = localScalarJet J n x v (c ψ) :=
+      congrArg (localScalarJet J n x v) (hceq ψ ⟨hψ.1.le, hψ.2.le⟩).symm
+    _ = _ := localScalarJet_of_mem J n x v (hsub (c ψ).property)
 
 /-- Local bounds in an arbitrary spatial label suffice along every
 continuous spatial curve for which the zeroth derivative is known. -/
@@ -197,8 +199,9 @@ theorem localScalarJet_hasDerivAt_along
   have hvalue : localScalarJet Kσ n x v t = localScalarJet K n x v (σ t) := by
     rw [localScalarJet_of_mem Kσ n x v ht, localScalarJet_of_mem K n x v ht]
   apply (hd.congr_deriv hvalue).congr_of_eventuallyEq
-  have hnearV : ∀ᶠ r in 𝓝 t, r ∈ Vσ :=
-    (isOpen_Ioo.mem_nhds htI).mono (fun r hr => hsub ⟨hr.1.le, hr.2.le⟩)
+  have hnearV : ∀ᶠ r in 𝓝 t, r ∈ Vσ := by
+    filter_upwards [isOpen_Ioo.mem_nhds htI] with r hr
+    exact hsub ⟨hr.1.le, hr.2.le⟩
   filter_upwards [hnearV] with r hr
   rw [localScalarJet_of_mem J n x v hr, localScalarJet_of_mem Jσ n x v hr]
 

@@ -82,9 +82,9 @@ theorem physicalJetHasDerivAt_coefficient_mul
     ⟨(hT.2.2.2.2.2.2.2.1 p.1).1, mem_univ _⟩
   have hcoord : ContDiff ℝ ∞ (fun p : PolarPoint => (T.radius p.1, p.2)) :=
     (hr.comp contDiff_fst).prodMk contDiff_snd
-  have hAm : ∀ᶠ s in 𝓝 t, ContDiff ℝ ∞ (fun p => A s (T.radius p.1, p.2)) :=
+  have hAm : ∀ᶠ s in 𝓝 t, ContDiff ℝ ∞ (fun p : PolarPoint => A s (T.radius p.1, p.2)) :=
     hA.mono fun s hs => hs.comp_contDiff hcoord hinside
-  have hBm : ContDiff ℝ ∞ (fun p => B (T.radius p.1, p.2)) :=
+  have hBm : ContDiff ℝ ∞ (fun p : PolarPoint => B (T.radius p.1, p.2)) :=
     hB.comp_contDiff hcoord hinside
   have hd := MixedJetHasDerivAt.mul_const hAm hBm (contDiff_materialPullback hT hu) h
   apply hd.congr
@@ -172,12 +172,12 @@ theorem physicalJetHasDerivAt_symmetric_divergence
   have hU : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
   have hur := contDiffOn_radialPartial_of_isOpen hU hu
   have hut := contDiffOn_angularPartial_of_isOpen hU hu
-  have hF := physicalJetHasDerivAt_coefficient_mul hT hA hA' hut hAd
+  have hF := physicalJetHasDerivAt_coefficient_mul (γ := γ) hT hA hA' hut hAd
   have hG := PhysicalJetHasDerivAt.add hT
     (hA.mono fun s hs => hs.mul hur) (hB.mono fun s hs => hs.mul hut)
     (hA'.mul hur) (hB'.mul hut)
-    (physicalJetHasDerivAt_coefficient_mul hT hA hA' hur hAd)
-    (physicalJetHasDerivAt_coefficient_mul hT hB hB' hut hBd)
+    (physicalJetHasDerivAt_coefficient_mul (γ := γ) hT hA hA' hur hAd)
+    (physicalJetHasDerivAt_coefficient_mul (γ := γ) hT hB hB' hut hBd)
   have hFs : ∀ᶠ s in 𝓝 t,
       ContDiffOn ℝ ∞ (fun p => A s p * ContinuousFlexibility.angularPartial u p) (annularOpen D) :=
     hA.mono fun s hs => hs.mul hut

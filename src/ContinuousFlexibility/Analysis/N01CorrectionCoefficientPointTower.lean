@@ -43,7 +43,7 @@ def SmoothDirections.fstProduct (J : SmoothDirections U f) :
   intro x hx
   simp only [zero_add, L, ContinuousLinearMap.fst_apply]
 
-private def reflectedVelocityDirections {f g : E → ℝ}
+def reflectedVelocityDirections {f g : E → ℝ}
     (J : SmoothDirections U f) (K : SmoothDirections U g) :
     SmoothDirections U (fun x => ((f x - g x) / 2, (-g x - f x) / 2)) := by
   let P : (ℝ × ℝ) → ℝ × ℝ := fun q => ((q.1 - q.2) / 2, (-q.2 - q.1) / 2)
@@ -53,7 +53,7 @@ private def reflectedVelocityDirections {f g : E → ℝ}
   exact (smoothDirectionsProd J K).comp_contDiff isOpen_univ hP.contDiffOn
     (fun _ _ => mem_univ _)
 
-private def coefficientPolynomialDirections
+def coefficientPolynomialDirections
     {a b q : E → ℝ} {e ρ : E → ℝ × ℝ}
     (Ja : SmoothDirections U a) (Jb : SmoothDirections U b) (Jq : SmoothDirections U q)
     (Je : SmoothDirections U e) (Jρ : SmoothDirections U ρ) :
