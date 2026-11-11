@@ -51,15 +51,13 @@ theorem SeedGluedPair.central_model_return
     (G : SeedGluedPair D c d uL uR K q) (hq : 0 < q)
     (hc : c ∈ radialCore D) (hd : d ∈ radialCore D) :
     let E : ReferenceData :=
-      { D with a := G.radiusL * D.a, b := G.radiusR * D.b,
-        w := G.profile, phi := G.height }
+      { D with a := G.radiusL * D.a, b := G.radiusR * D.b, w := G.profile, phi := G.height }
     let l := centralRadius (-sqrt centralOscillatorA)
     let h := centralRadius (sqrt centralOscillatorA)
     NegativeRadialComponent E l h ∧
       radialTravel E l h = Real.pi / (2 * sqrt 2) := by
   let E : ReferenceData :=
-    { D with a := G.radiusL * D.a, b := G.radiusR * D.b,
-      w := G.profile, phi := G.height }
+    { D with a := G.radiusL * D.a, b := G.radiusR * D.b, w := G.profile, phi := G.height }
   let l := centralRadius (-sqrt centralOscillatorA)
   let h := centralRadius (sqrt centralOscillatorA)
   change NegativeRadialComponent E l h ∧ radialTravel E l h = _

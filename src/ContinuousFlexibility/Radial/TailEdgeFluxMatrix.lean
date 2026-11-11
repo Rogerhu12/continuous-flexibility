@@ -17,7 +17,7 @@ open Set MeasureTheory
 
 /-- The bounded Poisson height has a classical representative on the full
 closed edge, with endpoint derivative formulas in resistance coordinates. -/
-theorem exists_tailEdgePoisson_classical {a b : ℝ} (hab : a < b)
+theorem exists_tailEdgePoisson_classical_integral {a b : ℝ} (hab : a < b)
     {q : TailEdgeContinuous a b} (hq : ∀ s, 0 ≤ q s) (hδ : tailEdgeDiagonalSize hab q < 1)
     (right : Bool) :
     let l : ℝ → ℝ := if right then tailEdgeRightHeight a b else tailEdgeLeftHeight a b
@@ -28,7 +28,9 @@ theorem exists_tailEdgePoisson_classical {a b : ℝ} (hab : a < b)
       (∀ s (hs : s ∈ Icc a b), HasDerivAt (deriv u) (-(q ⟨s, hs⟩ * u s)) s) ∧
       (∀ s ∈ Icc a b, l s ≤ u s ∧ u s ≤ l s / (1 - tailEdgeDiagonalSize hab q)) ∧
       deriv u a = slope + (∫ s in a..b, tailEdgeLeftHeight a b s * IccExtend hab.le q s * u s) ∧
-      deriv u b = slope - (∫ s in a..b, tailEdgeRightHeight a b s * IccExtend hab.le q s * u s) := by
+      deriv u b = slope - (∫ s in a..b, tailEdgeRightHeight a b s * IccExtend hab.le q s * u s) ∧
+      (∀ s ∈ Icc a b, u s = l s +
+        ∫ t in a..b, tailEdgeGreen a b s t * IccExtend hab.le q t * u t) := by
   dsimp only
   let l : ℝ → ℝ := if right then tailEdgeRightHeight a b else tailEdgeLeftHeight a b
   let slope : ℝ := if right then 1 / (b - a) else -(1 / (b - a))
@@ -75,7 +77,7 @@ theorem exists_tailEdgePoisson_classical {a b : ℝ} (hab : a < b)
   have hends := tailEdgeZeroSolve_endpoints a b g
   have hflux := tailEdgeZeroSolve_endpoint_deriv hg a b
   refine ⟨u, fun s => (hD s).differentiableAt, fun s => (hDD s).differentiableAt,
-    ?_, ?_, ?_, ?_, ?_, ?_⟩
+    ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · change l a + tailEdgeZeroSolve a b g a = l a
     rw [hends.1, add_zero]
   · change l b + tailEdgeZeroSolve a b g b = l b
@@ -95,6 +97,33 @@ theorem exists_tailEdgePoisson_classical {a b : ℝ} (hab : a < b)
     dsimp only
     rw [hflux.2, neg_div, ← sub_eq_add_neg]
     exact congrArg (slope - ·) (hIntegral (fun s => s - a))
+  · intro s hs
+    change l s + tailEdgeZeroSolve a b g s = _
+    rw [tailEdgeZeroSolve_eq_integral hg hs]
+    congr 1
+    apply intervalIntegral.integral_congr
+    rw [uIcc_of_le hab.le]
+    intro t ht
+    dsimp only
+    rw [hg_eq t ht]
+    ring
+
+/-- The classical Poisson height, retaining the endpoint-flux interface. -/
+theorem exists_tailEdgePoisson_classical {a b : ℝ} (hab : a < b)
+    {q : TailEdgeContinuous a b} (hq : ∀ s, 0 ≤ q s) (hδ : tailEdgeDiagonalSize hab q < 1)
+    (right : Bool) :
+    let l : ℝ → ℝ := if right then tailEdgeRightHeight a b else tailEdgeLeftHeight a b
+    let slope : ℝ := if right then 1 / (b - a) else -(1 / (b - a))
+    ∃ u : ℝ → ℝ,
+      Differentiable ℝ u ∧ Differentiable ℝ (deriv u) ∧
+      u a = l a ∧ u b = l b ∧
+      (∀ s (hs : s ∈ Icc a b), HasDerivAt (deriv u) (-(q ⟨s, hs⟩ * u s)) s) ∧
+      (∀ s ∈ Icc a b, l s ≤ u s ∧ u s ≤ l s / (1 - tailEdgeDiagonalSize hab q)) ∧
+      deriv u a = slope + (∫ s in a..b, tailEdgeLeftHeight a b s * IccExtend hab.le q s * u s) ∧
+      deriv u b = slope - (∫ s in a..b, tailEdgeRightHeight a b s * IccExtend hab.le q s * u s) := by
+  obtain ⟨u, hu, hdu, ha, hb, hode, hbound, hleft, hright, _⟩ :=
+    exists_tailEdgePoisson_classical_integral hab hq hδ right
+  exact ⟨u, hu, hdu, ha, hb, hode, hbound, hleft, hright⟩
 
 /-- The actual endpoint Poisson basis has the symmetric outward flux matrix
 with the diagonal and off-diagonal integral formulas of the edge problem. -/

@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology
+open scoped Topology ENNReal
 open ContinuousFlexibility.Statements
 
 instance referenceWeightedMeasure_sFinite (D : ReferenceData) (γ M : ℝ) :

@@ -47,6 +47,7 @@ private theorem halfPeriodFourierCoefficient_eq (f : ℝ → ℝ) (n : ℤ) :
         fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ) := by
   simp only [halfPeriodFourierCoefficient, fourierCoeffOn_eq_integral,
     sub_zero, one_div, smul_eq_mul, Complex.real_smul, Complex.ofReal_inv]
+  rfl
 
 private theorem halfPeriodFourierCoefficient_conj {f : ℝ → ℝ}
     (hp : Function.Periodic f Real.pi) (he : Function.Even f) (n : ℤ) :
@@ -95,7 +96,13 @@ private theorem halfPeriodFourierCoefficient_re {f : ℝ → ℝ}
         (AddCircle.continuous_mk' Real.pi)).continuousOn)
   rw [halfPeriodFourierCoefficient_eq]
   simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero]
-  rw [← intervalIntegral.intervalIntegral_re hg]
+  have hre :
+      (∫ θ in (0 : ℝ)..Real.pi,
+        fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re =
+      ∫ θ in (0 : ℝ)..Real.pi,
+        (fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)).re :=
+    (intervalIntegral.intervalIntegral_re hg).symm
+  rw [hre]
   congr 1
   apply intervalIntegral.integral_congr
   intro θ _
@@ -153,9 +160,12 @@ theorem hasSum_sq_referenceAngularCoefficient {f : ℝ → ℝ}
   have hParse : HasSum (fun n : ℤ => ‖halfPeriodFourierCoefficient f n‖ ^ 2)
       (radialAngularMean (fun θ => f θ ^ 2)) := by
     have h := hasSum_sq_fourierCoeffOn Real.pi_pos hhalfC
+    have hpsq : Function.Periodic (fun θ => f θ ^ 2) Real.pi := by
+      intro θ
+      rw [hp θ]
+    rw [radialAngularMean_eq_halfPeriod hpsq hisq]
     simpa only [halfPeriodFourierCoefficient, sub_zero, Complex.norm_real,
-      Real.norm_eq_abs, sq_abs, smul_eq_mul,
-      ← radialAngularMean_eq_halfPeriod (hp.pow 2) hisq] using h
+      Real.norm_eq_abs, sq_abs, smul_eq_mul] using h
   have hzero : referenceAngularCoefficient f 0 =
       (halfPeriodFourierCoefficient f 0).re := by
     rw [referenceAngularCoefficient_zero, radialAngularMean_eq_halfPeriod hp hi,
@@ -169,7 +179,10 @@ theorem hasSum_sq_referenceAngularCoefficient {f : ℝ → ℝ}
         volume 0 (2 * Real.pi) :=
       hi.mul_continuousOn
         (Real.continuous_cos.comp (continuous_const.mul continuous_id)).continuousOn
-    have hper := hp.mul (periodic_cos_even_int ((n + 1 : ℕ) : ℤ))
+    have hper : Function.Periodic
+        (fun θ => f θ * Real.cos (2 * ((n + 1 : ℕ) : ℝ) * θ)) Real.pi := by
+      simpa only [Function.Periodic, Pi.mul_apply, Int.cast_natCast] using
+        hp.mul (periodic_cos_even_int ((n + 1 : ℕ) : ℤ))
     have hmean := radialAngularMean_eq_halfPeriod hper hcos
     have hscale : referenceAngularCoefficient f (n + 1) =
         Real.sqrt 2 * radialAngularMean

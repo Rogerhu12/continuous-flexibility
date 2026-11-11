@@ -62,6 +62,7 @@ theorem reference_smooth_graph_test {D : ReferenceData}
     have hw := hUF.2.2.2 ψ hψ
     rw [reference_smooth_pairing_symm hgeom hU hψ.1 hup hψ.2.1] at hw
     simpa only [ψ, radialWeakPairing, mul_assoc, mul_left_comm, mul_comm] using hw
+  simp only [Pi.mul_apply] at hLUconv hcolconv hfconv
   have hidentity :
       (∫ r in D.a..D.b, radialAngularMean (fun θ =>
         v (r, θ) * radialPDE D.w (fun s φ => U.1 (s, φ)) r θ)) +
@@ -73,8 +74,9 @@ theorem reference_smooth_graph_test {D : ReferenceData}
   have hrow :
       (∫ r in D.a..D.b, radialAngularMean (fun θ =>
         (referenceColumn D r * cosineMode 2 θ) * v (r, θ))) = referenceRow D v := by
-    rw [r11b_integral_angularMean_eq hgeom.2.1.le hcol,
-      referenceRow_eq_physical_pairing hgeom hborder hv₂]
+    have hcolEq := r11b_integral_angularMean_eq hgeom.2.1.le hcol
+    simp only [Pi.mul_apply] at hcolEq
+    rw [hcolEq, referenceRow_eq_physical_pairing hgeom hborder hv₂]
     congr 1
     apply integral_congr_ae
     exact ae_of_all _ (fun x => mul_comm _ _)

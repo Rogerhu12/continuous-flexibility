@@ -27,7 +27,7 @@ theorem exists_reference_unitIntegral_bump {D : ReferenceData} (hab : D.a < D.b)
       (∫ r in D.a..D.b, η r) = 1 := by
   let c : ℝ := (D.a + D.b) / 2
   let b : ContDiffBump c :=
-    ⟨(D.b - D.a) / 8, (D.b - D.a) / 4, by dsimp; linarith, by dsimp; linarith⟩
+    ⟨(D.b - D.a) / 8, (D.b - D.a) / 4, by linarith, by linarith⟩
   let η : ℝ → ℝ := b.normed volume
   have hsupp : tsupport η ⊆ radialCore D := by
     rw [show tsupport η = Metric.closedBall c b.rOut from b.tsupport_normed_eq]
@@ -93,8 +93,11 @@ theorem exists_referenceRadial_zeroMean_approximation {D : ReferenceData}
     simpa only [hzeroν, sub_zero] using hint
   have hu : ContDiff ℝ ∞ u := hg.sub (contDiff_const.mul hη)
   have huc : HasCompactSupport u := by
-    simpa only [u, sub_eq_add_neg, Pi.add_apply, Pi.neg_apply] using
-      hgc.add ((hηc.mul_left (f := fun _ => c)).neg)
+    have heq : u = g + -((fun _ => c) * η) := by
+      funext r
+      simp only [u, sub_eq_add_neg, Pi.add_apply, Pi.neg_apply, Pi.mul_apply]
+    rw [heq]
+    exact hgc.add ((hηc.mul_left (f := fun _ => c)).neg)
   have hus : tsupport u ⊆ radialCore D := by
     exact (tsupport_sub g (fun r => c * η r)).trans
       (union_subset hgs (tsupport_mul_subset_right.trans hηs))

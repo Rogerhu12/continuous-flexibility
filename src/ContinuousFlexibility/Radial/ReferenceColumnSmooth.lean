@@ -59,11 +59,11 @@ theorem referenceColumn_contDiff {D : ReferenceData}
 
 theorem referenceColumn_tsupport_subset {D : ReferenceData} :
     tsupport (referenceColumn D) ⊆ tsupport D.chi := by
-  apply closure_minimal _ isClosed_tsupport
+  apply closure_minimal _ (isClosed_tsupport D.chi)
   intro r hr
   by_contra hnot
   have heA : (fun t => D.w t * D.chi t) =ᶠ[𝓝 r] (fun _ => (0 : ℝ)) := by
-    filter_upwards [isClosed_tsupport.isOpen_compl.mem_nhds hnot] with t ht
+    filter_upwards [(isClosed_tsupport D.chi).isOpen_compl.mem_nhds hnot] with t ht
     rw [image_eq_zero_of_notMem_tsupport ht, mul_zero]
   have heF : (fun t => (D.w t * D.chi t) * deriv D.phi t) =ᶠ[𝓝 r]
       (fun _ => (0 : ℝ)) := heA.mono fun t ht => by rw [ht, zero_mul]
@@ -81,6 +81,7 @@ theorem referenceColumn_tsupport_subset {D : ReferenceData} :
 
 theorem referenceColumn_hasCompactSupport {D : ReferenceData} (hborder : RadialTrueBorder D) :
     HasCompactSupport (referenceColumn D) :=
-  hborder.2.1.of_isClosed_subset isClosed_tsupport referenceColumn_tsupport_subset
+  hborder.2.1.of_isClosed_subset (isClosed_tsupport (referenceColumn D))
+    referenceColumn_tsupport_subset
 
 end ContinuousFlexibility.Radial

@@ -46,8 +46,10 @@ theorem aestronglyMeasurable_referenceRadialCoefficient {μ : Measure ℝ} [SFin
     hu.mul (((contDiff_referenceAngularBasis n).continuous.comp continuous_snd).aestronglyMeasurable)
   have hi := hm.integral_prod_right'
   have hscaled := hi.const_mul ((2 * Real.pi)⁻¹)
-  simpa only [referenceRadialCoefficient, referenceAngularCoefficient, radialAngularMean,
-    intervalIntegral.integral_of_le (show (0 : ℝ) ≤ 2 * Real.pi by positivity)] using hscaled
+  change AEStronglyMeasurable (fun r => (2 * Real.pi)⁻¹ *
+    ∫ θ in (0 : ℝ)..2 * Real.pi, u (r, θ) * referenceAngularBasis n θ) μ
+  simpa only [intervalIntegral.integral_of_le
+    (show (0 : ℝ) ≤ 2 * Real.pi by positivity)] using hscaled
 
 theorem integrable_radialAngularMean_sq {μ : Measure ℝ} [SFinite μ]
     {u : PolarPoint → ℝ}
@@ -63,7 +65,7 @@ theorem memLp_referenceRadialCoefficient_prod {μ : Measure ℝ} [SFinite μ]
     MemLp (referenceRadialCoefficient u n) 2 μ := by
   have hm := aestronglyMeasurable_referenceRadialCoefficient hu.aestronglyMeasurable n
   apply (memLp_two_iff_integrable_sq hm).mpr
-  apply (integrable_radialAngularMean_sq hu).mono' (hm.pow_const 2)
+  apply (integrable_radialAngularMean_sq hu).mono' (hm.pow 2)
   filter_upwards [memLp_two_prod_sections hu] with r hr
   simpa only [Real.norm_of_nonneg (sq_nonneg _), referenceRadialCoefficient] using
     referenceAngularCoefficient_sq_le hr n

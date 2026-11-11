@@ -144,7 +144,7 @@ theorem referenceModerate_reciprocal_profile_jet {D : ReferenceData}
   obtain ⟨C, hgeom, _, hC, _, _, _, _, _, _, hjet, _⟩ := hD
   have hinv : ContDiffOn ℝ ∞ (fun r => (D.w r)⁻¹) (radialCore D) := by
     have h := (contDiffOn_const (c := (1 : ℝ)) :
-      ContDiffOn ℝ ∞ (fun _ : ℝ => 1) (radialCore D)).div
+      ContDiffOn ℝ ∞ (fun _ : ℝ => (1 : ℝ)) (radialCore D)).div
         hgeom.2.2.1.1.contDiffOn (fun r hr => (hgeom.2.2.2.2.1 r hr).ne')
     change ContDiffOn ℝ ∞ (fun r => 1 / D.w r) (radialCore D) at h
     simpa only [one_div] using h
@@ -159,7 +159,7 @@ theorem referenceModerate_reciprocal_radius_jet {D : ReferenceData}
   have hgeom : RadialProfileGeometry D := hD.choose_spec.1
   have hinv : ContDiffOn ℝ ∞ (fun r : ℝ => r⁻¹) (Ioi (0 : ℝ)) := by
     have h := (contDiffOn_const (c := (1 : ℝ)) :
-      ContDiffOn ℝ ∞ (fun _ : ℝ => 1) (Ioi (0 : ℝ))).div
+      ContDiffOn ℝ ∞ (fun _ : ℝ => (1 : ℝ)) (Ioi (0 : ℝ))).div
         (contDiffOn_id : ContDiffOn ℝ ∞ (fun r : ℝ => r) (Ioi (0 : ℝ)))
         (fun r hr => (show 0 < r from hr).ne')
     change ContDiffOn ℝ ∞ (fun r : ℝ => 1 / r) (Ioi (0 : ℝ)) at h
@@ -194,7 +194,7 @@ theorem ReferenceRapid.zero (D : ReferenceData) :
   constructor
   · intro m
     simpa only [mul_zero] using
-      (memLp_zero : MemLp (fun _ : ℝ => (0 : ℝ)) 2 (volume.restrict (radialCore D)))
+      (MemLp.zero' : MemLp (fun _ : ℝ => (0 : ℝ)) 2 (volume.restrict (radialCore D)))
   · simpa only [mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0), integral_zero] using
       (summable_zero : Summable (fun _ : ℕ => (0 : ℝ)))
 

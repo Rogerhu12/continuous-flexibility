@@ -62,7 +62,15 @@ theorem morseRealization_negative_at_radius_iff
   have hamp := morseChainAmplitude_pos T σ hσ n
   have hg := hreal.retained_data side n hn
   have heq := morseRealization_profile_deriv_scaled hreal side hn hx
-  rw [← mul_neg_iff_of_pos_right hv, heq]
+  have hsign : deriv D.w (T.radius side n x) < 0 ↔
+      deriv D.w (T.radius side n x) * deriv (T.radius side n) x < 0 := by
+    constructor
+    · intro h
+      exact mul_neg_of_neg_of_pos h hv
+    · intro h
+      by_contra hn
+      exact (not_lt_of_ge (mul_nonneg (le_of_not_gt hn) hv.le)) h
+  rw [hsign, heq]
   apply Iff.trans _ (morseRho_pos_iff_between_turns hg.1 hg.2.1)
   constructor
   · intro hneg
@@ -141,6 +149,7 @@ theorem morseRealization_model_return
   change NegativeRadialComponent D (R a) (R b) ∧
     radialTravel D (R a) (R b) = Real.pi / (2 * sqrt (T.d n : ℝ)) ∧ _
   obtain ⟨hleft, hab, hright⟩ := morseRealization_turns_retained hreal side hn
+  have huIcc : uIcc a b = Icc a b := uIcc_of_le (show a ≤ b from hab.le)
   have hsub : Icc a b ⊆ Icc (T.leftX side n) (T.rightX side n) :=
     Icc_subset_Icc hleft.le hright.le
   have ha := hsub (left_mem_Icc.mpr hab.le)
@@ -174,7 +183,7 @@ theorem morseRealization_model_return
       -(deriv D.w (R x)) / (R x * D.w (R x)) =
         morseRho A B x / (deriv R x) ^ 2 := by
     have hx' : x ∈ Icc (T.leftX side n) (T.rightX side n) :=
-      hsub (by simpa only [uIcc_of_le hab.le] using hx)
+      hsub (by simpa only [huIcc] using hx)
     have hr : R x ≠ 0 := (hreal.radius_positive side n hn x hx').ne'
     have hv : deriv R x ≠ 0 := (hreal.derivative_positive side n hn x hx').ne'
     have hw : D.w (R x) = morseChainAmplitude T σ n * deriv R x :=
@@ -192,7 +201,7 @@ theorem morseRealization_model_return
     intro r hr
     obtain ⟨x, hx, rfl⟩ := hr
     have hx' : x ∈ Icc (T.leftX side n) (T.rightX side n) :=
-      hsub (by simpa only [uIcc_of_le hab.le] using hx)
+      hsub (by simpa only [huIcc] using hx)
     have hrp := hreal.radius_positive side n hn x hx'
     have hwp := hreal.geometry.2.2.2.2.1 _ (hreal.radius_mem_core side n hn x hx')
     exact ((hwd.continuousAt.neg.div (continuousAt_id.mul hw.continuous.continuousAt)
@@ -202,7 +211,7 @@ theorem morseRealization_model_return
       (fun x _ => (hR.differentiable (by simp) x).hasDerivAt)
       ((contDiff_infty_iff_deriv.mp hR).2.continuous.continuousOn)
       (fun x hx => hreal.derivative_positive side n hn x
-        (hsub (by simpa only [uIcc_of_le hab.le] using hx)))
+        (hsub (by simpa only [huIcc] using hx)))
       hDensity hcontinuity
   have hd : 1 < T.d n := by
     rw [hreal.d_eq n hn]
