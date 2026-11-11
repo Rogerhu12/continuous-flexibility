@@ -184,4 +184,13 @@ theorem cylinderCutoffJet_memSobolev_all {F : ℝ × ℤ → ℂ} (hF : Measurab
   exact congrArg (fun z : ℂ => (cylinderFrequencyWeight
     (2 * Real.pi) (2 * Real.pi / P) ζ ^ (s : ℝ) : ℝ) • z) hζ
 
+theorem cylinderCutoffJet_fourier_memLp_one {F : ℝ × ℤ → ℂ} (hF : Measurable F)
+    (hF1 : Integrable F cylinderFrequencyMeasure)
+    (hF2 : MemLp F 2 cylinderFrequencyMeasure) (N i j : ℕ) :
+    MemLp (cylinderFourier ((cylinderCutoffJet F hF hF1 N).jet i j)
+      ((cylinderCutoffJet F hF hF1 N).continuous i j)
+      (cylinderCutoffJet_memLp_two hF hF1 hF2 N i j)) 1 cylinderFrequencyMeasure :=
+  (memLp_congr_ae (cylinderCutoffJet_fourier_ae hF hF1 hF2 N i j)).mpr
+    (memLp_one_iff_integrable.mpr (integrable_cylinderFrequencyCutoffJet hF hF1 N i j))
+
 end ContinuousFlexibility.Analysis

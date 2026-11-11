@@ -23,6 +23,7 @@ theorem circle_l2_le_supNorm {E : Type*} [NormedAddCommGroup E]
     [NormedSpace ℝ E] (f : C(AddCircle P, E)) :
     (eLpNorm f 2 AddCircle.haarAddCircle).toReal ≤ ‖f‖ := by
   have he := eLpNorm_le_of_ae_bound (p := (2 : ℝ≥0∞))
+    (μ := AddCircle.haarAddCircle)
     f.continuous.aestronglyMeasurable
     (Eventually.of_forall (fun x => f.norm_coe_le_norm x))
   simp only [measure_univ, ENNReal.one_rpow, one_mul] at he

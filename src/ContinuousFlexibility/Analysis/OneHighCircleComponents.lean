@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+import ContinuousFlexibility.Analysis.OneHighL2Domination
 import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-!
@@ -47,19 +48,17 @@ theorem circle_l2_pi_le_sum (f : C(AddCircle P, Fin m → ℝ)) :
     (eLpNorm f 2 AddCircle.haarAddCircle).toReal ≤
       ∑ i, (eLpNorm (circleComponent f i) 2 AddCircle.haarAddCircle).toReal := by
   classical
-  let N (i : Fin m) := circleNormMap (circleComponent f i)
-  have hpoint (θ : AddCircle P) : ‖f θ‖ ≤ ‖(∑ i, N i) θ‖ := by
-    have hn : 0 ≤ (∑ i, N i) θ := by
-      simp only [ContinuousMap.sum_apply, N, circleNormMap_apply]
-      exact Finset.sum_nonneg fun _ _ => norm_nonneg _
-    rw [Real.norm_of_nonneg hn]
-    simpa only [ContinuousMap.sum_apply, N, circleNormMap_apply, circleComponent_apply] using
-      norm_pi_le_sum_norm (f θ)
-  calc
-    _ ≤ (eLpNorm (∑ i, N i) 2 AddCircle.haarAddCircle).toReal :=
-      circle_l2_le_of_norm_le f (∑ i, N i) hpoint
-    _ ≤ ∑ i, (eLpNorm (N i) 2 AddCircle.haarAddCircle).toReal := circle_l2_sum_le N
-    _ = _ := Finset.sum_congr rfl fun i _ => circle_l2_norm_map (circleComponent f i)
+  have hp (θ : AddCircle P) :
+      ‖f θ‖ ≤ ∑ i : Fin m, 1 * ‖circleComponent f i θ‖ := by
+    simpa only [one_mul, circleComponent_apply] using norm_pi_le_sum_norm (f θ)
+  have h := oneHigh_l2_finite_domination
+    (μ := AddCircle.haarAddCircle) (g := (f : AddCircle P → Fin m → ℝ))
+    f.continuous.aestronglyMeasurable
+    (fun i : Fin m => (circleComponent f i : AddCircle P → ℝ))
+    (fun i => ContinuousMap.memLp (p := 2) (μ := AddCircle.haarAddCircle) ℝ
+      (circleComponent f i))
+    (fun _ => (1 : ℝ)) (fun _ => zero_le_one) (Eventually.of_forall hp)
+  simpa only [one_mul] using h.2
 
 /-- An arbitrary selection of input components in the derivative product.
 The high norm is the sum of the actual component Sobolev norms. -/

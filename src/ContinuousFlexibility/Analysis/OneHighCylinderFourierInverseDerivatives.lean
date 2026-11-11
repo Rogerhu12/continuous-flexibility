@@ -20,11 +20,12 @@ open scoped ENNReal FourierTransform
 
 variable {P : ℝ} [Fact (0 < P)]
 
+set_option backward.isDefEq.respectTransparency false in
 theorem cylinderInverseCharacter_hasDerivAt_radial (ζ : ℝ × ℤ) (r : ℝ) (θ : AddCircle P) :
     HasDerivAt (fun x : ℝ => cylinderInverseCharacter (x, θ) ζ)
       (cylinderDerivativeMultiplier P 1 0 ζ * cylinderInverseCharacter (r, θ) ζ) r := by
   have hlin : HasDerivAt (fun x : ℝ => ζ.1 * x) ζ.1 r := by
-    simpa only [mul_one] using (hasDerivAt_id r).const_mul ζ.1
+    simpa only [id_eq, mul_one] using (hasDerivAt_id r).const_mul ζ.1
   have hchar := (Real.hasDerivAt_fourierChar (ζ.1 * r)).scomp r hlin
   have hmul := hchar.mul_const (fourier ζ.2 θ)
   convert hmul using 1 <;>

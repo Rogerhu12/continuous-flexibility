@@ -28,8 +28,13 @@ theorem cylinderAngularCoefficient_sub (f g : ℝ × AddCircle P → ℂ)
     ⟨fun θ => f (r, θ), hf.comp (continuous_const.prodMk continuous_id)⟩
   let gr : C(AddCircle P, ℂ) :=
     ⟨fun θ => g (r, θ), hg.comp (continuous_const.prodMk continuous_id)⟩
-  simpa only [circleFourierCoeffCLM_apply, ContinuousMap.coe_sub, Pi.sub_apply] using
+  have hraw : fourierCoeff (fr - gr : C(AddCircle P, ℂ)) n =
+      fourierCoeff fr n - fourierCoeff gr n :=
     (circleFourierCoeffCLM (P := P) n).map_sub fr gr
+  have he : ((fr - gr : C(AddCircle P, ℂ)) : AddCircle P → ℂ) =
+      fun θ => f (r, θ) - g (r, θ) := rfl
+  rw [he] at hraw
+  exact hraw
 
 theorem cylinderFourierMode_sub (f g : ℝ × AddCircle P → ℂ)
     (hf : Continuous f) (hg : Continuous g)
@@ -37,7 +42,9 @@ theorem cylinderFourierMode_sub (f g : ℝ × AddCircle P → ℂ)
     (hg2 : MemLp g 2 (cylinderPhysicalMeasure P)) (n : ℤ) :
     cylinderFourierMode (fun p => f p - g p) (hf.sub hg) (hf2.sub hg2) n =
       cylinderFourierMode f hf hf2 n - cylinderFourierMode g hg hg2 n := by
-  have hsub := cylinderAngularCoefficient_memLp (hf.sub hg) (hf2.sub hg2) n
+  have hsub : MemLp (cylinderAngularCoefficient (fun p => f p - g p) n)
+      2 (volume : Measure ℝ) :=
+    cylinderAngularCoefficient_memLp (f := fun p => f p - g p) (hf.sub hg) (hf2.sub hg2) n
   have hfc := cylinderAngularCoefficient_memLp hf hf2 n
   have hgc := cylinderAngularCoefficient_memLp hg hg2 n
   have hl : hsub.toLp (cylinderAngularCoefficient (fun p => f p - g p) n) =
@@ -83,7 +90,8 @@ theorem cylinderFourier_sub_eLpNorm_two (f g : ℝ × AddCircle P → ℂ)
     eLpNorm (fun p => f p - g p) 2 (cylinderPhysicalMeasure P) =
       eLpNorm (fun ζ => cylinderFourier f hf hf2 ζ - cylinderFourier g hg hg2 ζ)
         2 cylinderFrequencyMeasure := by
-  rw [← cylinderFourier_eLpNorm_two _ (hf.sub hg) (hf2.sub hg2)]
-  exact eLpNorm_congr_ae (cylinderFourier_sub_ae f g hf hg hf2 hg2)
+  exact (cylinderFourier_eLpNorm_two (fun p => f p - g p)
+    (hf.sub hg) (hf2.sub hg2)).symm.trans
+      (eLpNorm_congr_ae (cylinderFourier_sub_ae f g hf hg hf2 hg2))
 
 end ContinuousFlexibility.Analysis

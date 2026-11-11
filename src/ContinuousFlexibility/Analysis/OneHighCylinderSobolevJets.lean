@@ -52,7 +52,7 @@ private theorem CylinderSmoothJet.exists_memLp_fourier_derivative
           fun ζ => cylinderDerivativeMultiplier P 0 (j + 1) ζ * F ζ := by
         filter_upwards [hje] with ζ hζ
         rw [hζ, cylinderDerivativeMultiplier_angular_succ]
-        simp only [circlePhysicalFrequency, mul_assoc]
+        simp only [circlePhysicalFrequency, mul_assoc, F]
       have hM2 := (memLp_congr_ae hMeq).mpr hnext
       have hnew : MemLp (u.jet 0 (j + 1)) 2 (cylinderPhysicalMeasure P) :=
         cylinder_memLp_angularDerivative_of_frequency (u.jet 0 j) (u.jet 0 (j + 1))

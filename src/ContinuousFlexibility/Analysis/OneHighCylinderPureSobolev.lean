@@ -49,10 +49,12 @@ theorem cylinder_sobolev_of_pure_derivatives
   have hA2 : MemLp A 2 cylinderFrequencyMeasure :=
     cylinderFourier_memLp_two (a s) (ha s) (ha2 s le_rfl)
   have hr0F : cylinderFourier (r 0) (hr 0) (hr2 0 (Nat.zero_le s)) = F := by
-    subst f
+    dsimp only [F]
+    cases hr0
     rfl
   have ha0F : cylinderFourier (a 0) (ha 0) (ha2 0 (Nat.zero_le s)) = F := by
-    subst f
+    dsimp only [F]
+    cases ha0
     rfl
   have hR : R =ᵐ[cylinderFrequencyMeasure] fun ζ => cylinderDerivativeMultiplier P s 0 ζ * F ζ := by
     have h := cylinderFourier_radialTower_ae r hr hdr s hr2 s le_rfl
