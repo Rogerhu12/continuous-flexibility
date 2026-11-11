@@ -200,11 +200,13 @@ theorem n07bReferencePieceCanonicalSource_currentPullback (m : ℕ) (f : PolarPo
     (fun y hy => n07bReferencePieceRemainder_eq_transition hK href hsref hz hs m f hy)
   intro x hx
   have hy := n07b_canonicalReferencePoint_mapsTo hK href hsref hz hs m hx
+  have hpdePoint := hpde hy
+  dsimp only at hpdePoint
   change K.height (C.referenceState, 0) m (canonicalReferencePoint C K z m x) *
       radialPDE D.w (fun r θ => n07bReferencePieceRemainder C K z m f (r, θ))
         (canonicalReferencePoint C K z m x).1 (canonicalReferencePoint C K z m x).2 /
       |planeJacobian (K.chart (C.referenceState, 0) m) (canonicalReferencePoint C K z m x)| = _
-  rw [hpde hy]
+  rw [hpdePoint]
   unfold canonicalReferenceSourceFactor
   ring
 

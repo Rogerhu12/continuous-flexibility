@@ -41,6 +41,32 @@ local instance n07bFixedGraphDomainNormedAddCommGroup :
 local instance n07bFixedGraphDomainNormedSpace :
     NormedSpace ℝ B.Space := Submodule.normedSpace _
 
+/-- The fixed-domain algebra identifies the whole canonical unknown before
+any physical scalar coordinates or representative are projected. -/
+theorem n07b_fixedGraph_unknown_eq_of_physical_relation
+    (hK : N04PartA D S C K base ε)
+    (h05 : N05Properties D T S C K V b B)
+    (h06 : N06Properties D S C K L V b B P base ε)
+    {z : AnnularState S × ℝ}
+    (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
+    (hab : D.a ≤ D.b) (U : CanonicalUnknown S K)
+    (F Fref : V.level (3 / 4 : ℝ) 0 b)
+    (href : ReferenceCanonicalRelation D T S C K V B.weakExponent
+      B.sourceMaterial B.outputMaterial B.lossMaterial U
+        (V.forget (3 / 4 : ℝ) 0 b Fref))
+    (hweak : PerturbedCanonicalRelation D S C K L z U
+      (V.forget (3 / 4 : ℝ) 0 b F)) :
+    (B.inverse (P.inverse z F)).val.1 = U := by
+  have hmem : (U, Fref) ∈ B.graph := (h05.2.2.2.2.2.2.1 (U, Fref)).mpr href
+  let d₀ : B.Space := ⟨(U, Fref), hmem⟩
+  have hop : P.operator z d₀ = F :=
+    n07b_relativeOperator_eq_of_physical_relation hK h05.2.1 h06 hz hs hab d₀ F hweak
+  have hid : n07aBaseInverse B P z F = d₀ :=
+    n07aBaseInverse_eq_of_operator h05 h06 hz hs hop
+  have hactual : B.inverse (P.inverse z F) = d₀ :=
+    (n07aBaseInverse_apply B P z F).symm.trans hid
+  exact congrArg (fun d : B.Space => d.val.1) hactual
+
 theorem n07b_fixedGraph_scalarInverse_identification
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hK : N04PartA D S C K base ε)
@@ -66,19 +92,16 @@ theorem n07b_fixedGraph_scalarInverse_identification
       HasCanonicalRepresentation D S C K z d.val.1
         (V.forget (3 / 4 : ℝ) 0 b F)
         (heightPairField S (G.G z f).1) ((S.height (3 / 4 : ℝ)).decode f.val) := by
-  have hmem : (U, Fref) ∈ B.graph := (h05.2.2.2.2.2.2.1 (U, Fref)).mpr href
-  let d₀ : B.Space := ⟨(U, Fref), hmem⟩
   obtain ⟨hA, hB, hC, hBp, hCp⟩ := hgeom.physicalCoefficients z hz hs
-  have hweak : PerturbedCanonicalRelation D S C K L z d₀.val.1
+  have hweak : PerturbedCanonicalRelation D S C K L z U
       (V.forget (3 / 4 : ℝ) 0 b F) :=
     n07b_scalarInverse_perturbedCanonicalRelation hT hS hG hab hz hs f
       hA hB hC hBp hCp hrep hμ hcompat
-  have hop : P.operator z d₀ = F :=
-    n07b_relativeOperator_eq_of_physical_relation hK h05.2.1 h06 hz hs hab.le d₀ F hweak
-  have hid : B.inverse (P.inverse z F) = d₀ :=
-    n07aBaseInverse_eq_of_operator h05 h06 hz hs hop
+  have hU : (B.inverse (P.inverse z F)).val.1 = U :=
+    n07b_fixedGraph_unknown_eq_of_physical_relation hK h05 h06 hz hs hab.le U F Fref
+      href hweak
   dsimp only
-  rw [hid]
+  rw [hU]
   exact ⟨hcompat, ha, hμ, hrep⟩
 
 end ContinuousFlexibility.Analysis

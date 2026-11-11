@@ -95,10 +95,15 @@ theorem n07bNormalizedSourceCoefficient_sq_eq_weight
         (n07bCanonicalSourceFactor_pos_of_material (K := K) hD hT 1 0 m)
   have hW := n07bSourceNormalizer_eq_product T K z m (3 / 4 : ℝ) x
     (hT.2.1 x.1 hxcore).2.1 hm
+  have hsq : Real.sqrt (T.ell x.1 * |planeJacobian (K.chart z m) x|) ^ 2 =
+      T.ell x.1 * |planeJacobian (K.chart z m) x| := by
+    apply Real.sq_sqrt
+    change 0 ≤ n07bSourceMaterialJacobian T K z m x
+    exact (n07bSourceMaterialJacobian_pos hT hK hz hs m hx).le
   simp only [n07bNormalizedSourceCoefficient, hW, mul_pow,
-    Real.sq_sqrt (n07bSourceMaterialJacobian_pos hT hK hz hs m hx).le,
     n07bSourceGeometricWeight, n07bCanonicalSourceFactor, neg_zero,
     Real.rpow_zero, one_mul, n07bSourceMaterialJacobian, canonicalMaterialJacobian]
+  rw [hsq]
   ring
 
 /-- This is the actual weighted path estimate obtained from the four

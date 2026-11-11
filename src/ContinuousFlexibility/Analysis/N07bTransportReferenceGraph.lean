@@ -57,8 +57,10 @@ theorem n07b_referencePDE_add_radial_cutoff
         a * deriv (fun t => D.w t * deriv χ t) x.1 := by
   have hχ' : ContDiff ℝ 2 (fun p : PolarPoint => a * χ p.1) :=
     contDiff_const.mul ((hχ.comp contDiff_fst).of_le (by simp))
-  rw [n07b_c2_radialPDE_add (hgeom.2.2.1.1.differentiable (by simp)) hR hχ' x,
-    r11b_radialPDE_radial]
+  rw [n07b_c2_radialPDE_add (hgeom.2.2.1.1.differentiable (by simp)) hR hχ' x]
+  change radialPDE D.w (fun r θ => R (r, θ)) x.1 x.2 +
+    radialPDE D.w (fun r _ => a * χ r) x.1 x.2 = _
+  rw [r11b_radialPDE_radial D.w (fun r => a * χ r) x.1 x.2]
   have hflux : (fun t => D.w t * deriv (fun r => a * χ r) t) =
       fun t => a * (D.w t * deriv χ t) := by
     funext t
@@ -130,8 +132,15 @@ theorem n07b_referenceGraph_of_remainder_jets
       _ ≤ |radialPDE D.w (fun r θ => R (r, θ)) x.1 x.2| +
           |a| * |deriv (fun t => D.w t * deriv S.chiLeft t) x.1| +
           |μ| * |referenceColumn D x.1 * cosineMode 2 x.2| := by
-        simpa only [abs_mul] using
-          (abs_add_le _ _).trans (add_le_add (abs_add_le _ _) le_rfl)
+        calc
+          _ ≤ |radialPDE D.w (fun r θ => R (r, θ)) x.1 x.2 +
+              a * deriv (fun t => D.w t * deriv S.chiLeft t) x.1| +
+              |μ * (referenceColumn D x.1 * cosineMode 2 x.2)| := abs_add_le _ _
+          _ ≤ (|radialPDE D.w (fun r θ => R (r, θ)) x.1 x.2| +
+              |a * deriv (fun t => D.w t * deriv S.chiLeft t) x.1|) +
+              |μ * (referenceColumn D x.1 * cosineMode 2 x.2)| :=
+            add_le_add (abs_add_le _ _) le_rfl
+          _ = _ := by simp only [abs_mul]
       _ ≤ CP * T.H x.1 ^ δ' + |a| * (CF * T.H x.1 ^ δ') +
           |μ| * (CQ * T.H x.1 ^ δ') :=
         add_le_add (add_le_add (hP x hx)
