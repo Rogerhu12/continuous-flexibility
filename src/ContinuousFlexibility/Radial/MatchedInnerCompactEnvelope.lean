@@ -109,7 +109,8 @@ theorem matchedInner_compact_spatial_envelope {D : ReferenceData}
                 simp only [A, ContinuousLinearMap.comp_apply, matchingSourceInnerCLM_apply,
                   matchedModeChannel]
                 rw [matchedInnerSource_cell_eq_zero hP M hM active m
-                  (hvanish m (lt_of_not_ge hm)) F, map_zero, map_zero]
+                  (hvanish m (lt_of_not_ge hm)) F, map_zero, map_zero,
+                  ContinuousLinearMap.zero_apply]
               rw [hmap, norm_zero]
               exact mul_nonneg hC.le (exp_pos _).le
       · cases k with

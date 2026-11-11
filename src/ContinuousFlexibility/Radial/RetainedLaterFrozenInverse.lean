@@ -202,9 +202,8 @@ theorem SeedRetainedPair.exists_later_inner_inverse {S : SelectedTailData}
     hHL hHR hab hsub hcolAE hgs
   refine ⟨A, u, hnorm', ?_, ?_, ?_, ?_⟩
   · intro F
-    rw [hsource]
-    simpa only [hHL, hHR] using
-      InnerRadialPhysicalInverse.pairInverse_innerSource inverse hAcc F
+    rw [hsource, ← hHL, ← hHR]
+    exact InnerRadialPhysicalInverse.pairInverse_innerSource inverse hAcc F
   · intro F hF
     rw [hsource]
     exact InnerRadialPhysicalInverse.pairInverse_right_frozen inverse hAcc hb hD.2.2.1.1

@@ -111,6 +111,7 @@ theorem outerWeakSolution_recovers_test
       rw [hflux x hx]
       field_simp [hlam, hwn x hx'] <;> ring
     · apply (((hpder x hx).sub (hfψ.differentiable (by simp) x).hasDerivAt).div_const lam).congr_deriv
+      simp only [Pi.add_apply, Pi.mul_apply]
       dsimp only [y, radialJacobi]
       field_simp [hlam, hr x hx'] <;> ring
   obtain ⟨hψa, hdψa⟩ := selected_test_left_jet_zero hψ hs

@@ -23,6 +23,10 @@ private theorem inverseRadius_embedding {κ : ℝ} (hκ : κ ≠ 0) :
     MeasurableEmbedding (fun r : ℝ => κ * r) :=
   (Homeomorph.mulLeft₀ κ hκ).toMeasurableEquiv.measurableEmbedding
 
+private theorem inverseRadius_leftInverse {κ : ℝ} (hκ : κ ≠ 0) :
+    Function.LeftInverse (fun r : ℝ => r / κ) (fun r => κ * r) :=
+  fun r => mul_div_cancel_left₀ r hκ
+
 private theorem inverseRadius_square_measure {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) :
@@ -38,6 +42,16 @@ theorem inverseRadius_ae_iff {μ ν : Measure ℝ} {κ β : ℝ}
   rw [hm, Measure.ae_ennreal_smul_measure_iff (ne_of_gt (ENNReal.ofReal_pos.mpr hβ))]
   exact (inverseRadius_embedding hκ).ae_map_iff
 
+/-- Eliminate the measure equality before substituting physical data. -/
+private theorem inverseRadius_coordinate_cast_ae {μ ν : Measure ℝ}
+    (R X : ℝ → ℝ) (hR : MeasurableEmbedding R) (hX : Function.LeftInverse X R)
+    (h : ν = Measure.map R μ) (f : Lp ℝ 2 ν) :
+    (l2EquivSeal ((l2MeasureCongr h).trans (coordinateL2Equiv μ R X hR hX)) f
+      : ℝ → ℝ) =ᵐ[μ] fun x => f (R x) := by
+  subst ν
+  rw [l2EquivSeal_eq]
+  exact coordinateL2Equiv_ae μ R X hR hX f
+
 /-- The original coordinate factor, sealed with its exact equality
 certificate so later kernel checks do not reduce its measure cast. -/
 private def inverseRadiusCoordinateEquiv {μ ν : Measure ℝ} {κ β : ℝ}
@@ -48,20 +62,17 @@ private def inverseRadiusCoordinateEquiv {μ ν : Measure ℝ} {κ β : ℝ}
     ((l2MeasureCongr (inverseRadius_square_measure hκ hβ hm).symm).trans
       (coordinateL2Equiv (squareDensityMeasure μ (fun _ => sqrt β))
         (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
-        (fun r => by field_simp [hκ] <;> ring)))
+        (inverseRadius_leftInverse hκ)))
 
 private theorem inverseRadiusCoordinateEquiv_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) (f : Lp ℝ 2 ν) :
     (inverseRadiusCoordinateEquiv hκ hβ hm f : ℝ → ℝ)
-      =ᵐ[squareDensityMeasure μ (fun _ => sqrt β)] fun r => f (κ * r) := by
-  rw [inverseRadiusCoordinateEquiv, l2EquivSeal_eq]
-  have hc := l2MeasureCongr_ae (inverseRadius_square_measure hκ hβ hm).symm f
-  have hp := coordinateL2Equiv_ae (squareDensityMeasure μ (fun _ => sqrt β))
+      =ᵐ[squareDensityMeasure μ (fun _ => sqrt β)] fun r => f (κ * r) :=
+  inverseRadius_coordinate_cast_ae
+    (μ := squareDensityMeasure μ (fun _ => sqrt β)) (ν := ν)
     (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
-    (fun r => by field_simp [hκ] <;> ring)
-    (l2MeasureCongr (inverseRadius_square_measure hκ hβ hm).symm f)
-  exact hp.trans (ae_eq_comp (inverseRadius_embedding hκ).measurable.aemeasurable hc)
+    (inverseRadius_leftInverse hκ) (inverseRadius_square_measure hκ hβ hm).symm f
 
 /-- The original positive square-density factor with the same equality
 certificate used by the physical tail gauge isometry. -/
