@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set Filter MeasureTheory ContinuousFlexibility.Statements
-open scoped BigOperators
+open scoped BigOperators ENNReal
 
 variable {S : PhysicalSpacesData} {K : CanonicalData S} {m : ℕ}
 
