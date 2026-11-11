@@ -31,8 +31,8 @@ theorem coupledCircleMultiplierField_iteratedDeriv (a : ℕ → ℝ)
     iteratedDeriv b (coupledCircleMultiplierField a u m) =
       a m • iteratedDeriv b (u m) := by
   funext θ
-  simp only [coupledCircleMultiplierField, iteratedDeriv_const_mul_field,
-    Pi.smul_apply, smul_eq_mul]
+  change iteratedDeriv b (fun t => a m * u m t) θ = a m * iteratedDeriv b (u m) θ
+  exact iteratedDeriv_const_mul_field (a m) (u m)
 
 private theorem coupledCircleMultiplierField_eLpNorm_le
     (a : ℕ → ℝ) (u : ℕ → ℝ → ℝ) (c : ℝ)
@@ -141,6 +141,11 @@ theorem coupledCircleMultiplierLinear_decode
     S.decode (coupledCircleMultiplierLinear hS a C ha u) m θ = a m * S.decode u m θ :=
   congrFun (congrFun (coupledCircleMultiplierValue_decode hS a C ha u) m) θ
 
+private theorem coupled_seminorm_smul_nonneg
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (C : ℝ≥0) (u : E) : p ((C : ℝ) • u) = C * p u := by
+  rw [map_smul_eq_mul, Real.norm_eq_abs, abs_of_nonneg C.coe_nonneg]
+
 /-- One bound works simultaneously for every projective seminorm. -/
 theorem coupledCircleMultiplierLinear_grading_le
     {T : MaterialData} {γ : ℝ} {S : CircleModelData}
@@ -167,8 +172,7 @@ theorem coupledCircleMultiplierLinear_grading_le
     _ = ‖((C : ℝ) • u).val i‖ := (hS.2.2.2.2.2.2.2 _ _).symm
     _ ≤ S.grading n ((C : ℝ) • u) :=
       ContinuousFlexibility.Analysis.norm_coordinate_le_graded _ _ hi _
-    _ = C * S.grading n u := by
-      rw [map_smul_eq_mul, Real.norm_eq_abs, abs_of_nonneg C.coe_nonneg]
+    _ = C * S.grading n u := coupled_seminorm_smul_nonneg (S.grading n) C u
 
 theorem coupledCircleMultiplierLinear_isTame
     {T : MaterialData} {γ : ℝ} {S : CircleModelData}
