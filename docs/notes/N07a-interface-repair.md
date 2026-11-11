@@ -3,8 +3,8 @@
 ## Scope
 
 This change follows the audit in N07a, branch `line/N07a`, PR #37. It preserves
-the exact public theorem signatures of N04Coordinates, N04, N05, N06, and
-N07a. It strengthens the construction-stage proposition carried through N04
+the exact public theorem signatures of N02N03, N04Coordinates, N04, N05, N06,
+and N07a. It strengthens the construction-stage propositions carried through N03 and N04
 and repairs the actual weak physical representation in N06. N07a remains
 open; these interface changes do not prove its analytic estimates.
 
@@ -98,6 +98,38 @@ these named primitive facts explicitly; they do not manufacture them from
 the former qualitative clauses.
 
 ## Manuscript correspondence
+
+### Spatial regularity of the actual return correction
+
+The previous last clause of `N03Properties` was the smooth-tame assertion
+for `L.error`. The other clauses fixed the leading coefficient, germs at
+roots and on positive pieces, reflection, characteristic returns, and the
+action of the corrected divergence on actual `HeightPair` fields. They did
+not retain open-annulus smoothness and π-periodicity of the actual corrected
+`b` and `c` functions. Qualitative N04 conjugation on the open pieces does
+not itself provide a proved function-level recovery of those coefficients
+across the artificial cuts; Lean's totalized `fderiv` cannot be treated as
+an implicit differentiability hypothesis.
+
+The final N03 payload now conjoins
+`ReturnCorrectionSpatialProperties D S C L base ε`. It asserts exactly
+`ContDiffOn ℝ ∞` of these two actual coefficients on `annularOpen D` and
+their π-shift identity on that open set. There is no endpoint extension,
+inverse bound, solution regularity, trace, or matching-jet premise. The
+leading coefficient remains fixed to the original one and its smoothness
+and positivity are proved separately from N01.
+
+These are raw outputs of the corrected-speed formula and
+`b̂ = a d̂`, `ĉ = a (d̂² − v̂²)` in
+`paper/flexible-surface-readable/07-fixed-geometry.tex`, lines 930–953.
+The correction is supported strictly inside each negative component
+(lines 974–976), so those formulas are smooth through the artificial cut
+and retain the original germs at its component endpoints. N02N03 must
+prove this added construction obligation. The assembly continues to carry
+the same cumulative N03 construction into N04–N06, and neighborhood
+restriction explicitly preserves the new clause. This records an absent
+primitive output used by the intended proof, not a proof that the former
+existential N07a proposition was false.
 
 The geometric obligations are the actual uniform physical geometry,
 regularized reference charts, geometric weight conversion, and current

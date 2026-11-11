@@ -113,6 +113,9 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hN01a : N01aStatement := N01a hR12 hW01 hSpaces.1
   have hN01b : N01bStatement := N01b hN01a hS05
   have hN01 : N01Statement := N01c hN01b
+  -- N02N03 retains the actual corrected b/c coefficients' open smoothness
+  -- and angular periodicity, including the artificial negative-piece cuts.
+  -- These construction facts pass through N04--N06 to the physical inverse.
   have hN03 : N03Statement := N02N03 hN01 hS05
   have hN04 : N04Statement := N04_of_nodes (N04Coordinates (N04b (N04a hN03))) N04Root N04Cubic N04Transmission
   have hN05 : N05Statement := N05 hN04

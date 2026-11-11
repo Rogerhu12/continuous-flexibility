@@ -473,6 +473,20 @@ structure ReturnCorrectionData (S : PhysicalSpacesData) where
   minusFlow : AnnularState S × ℝ → ℕ → ℝ → ℝ → ℝ
   error : AnnularState S × ℝ → CircleSpace S →ₗ[ℝ] HeightPair S →ₗ[ℝ] S.Source
 
+/-- The return-correction formulas produce actual smooth periodic coefficients
+on the open annulus, including across the artificial negative-piece cuts.
+This is a property of the constructed coefficients, not of an inverse or of
+any weak solution. The leading coefficient is already fixed to the original. -/
+def ReturnCorrectionSpatialProperties (D : ReferenceData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S)
+    (base : ℕ) (ε : ℝ) : Prop :=
+  ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+    ContDiffOn ℝ ∞ (L.coefficients z).b (annularOpen D) ∧
+    ContDiffOn ℝ ∞ (L.coefficients z).c (annularOpen D) ∧
+    ∀ p ∈ annularOpen D,
+      (L.coefficients z).b (p + (0, Real.pi)) = (L.coefficients z).b p ∧
+      (L.coefficients z).c (p + (0, Real.pi)) = (L.coefficients z).c p
+
 def N03Properties (D : ReferenceData) (_T : MaterialData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (base : ℕ) (ε : ℝ) : Prop :=
@@ -508,7 +522,8 @@ def N03Properties (D : ReferenceData) (_T : MaterialData) (S : PhysicalSpacesDat
       (S.circle (3 / 4 : ℝ)).grading) (heightPairGrading S))
     S.sourceGrading ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ univ)
     (fun z : ((StateDirections S × ℝ) × CircleSpace S) × HeightPair S =>
-      L.error (liftSectorParameter S C z.1.1) z.1.2 z.2)
+      L.error (liftSectorParameter S C z.1.1) z.1.2 z.2) ∧
+  ReturnCorrectionSpatialProperties D S C L base ε
 
 /-- Return correction is attached to the same profile, spaces and returns. -/
 def NonlinearPropertiesThrough03 (D : ReferenceData) (T : MaterialData)

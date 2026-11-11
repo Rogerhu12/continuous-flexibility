@@ -146,7 +146,7 @@ theorem n07a_N03_restrict (h : N03Properties D T S C R L base ε)
     (hb : base ≤ base') (he : ε' ≤ ε) :
     N03Properties D T S C R L base' ε' := by
   have hU := n07a_stateNeighborhood_mono (S := S) (C := C) hb he
-  obtain ⟨ha, hpos, hcrit, hsym, hflow, herror, hint, hsmooth⟩ := h
+  obtain ⟨ha, hpos, hcrit, hsym, hflow, herror, hint, hsmooth, hspatial⟩ := h
   exact ⟨fun z hz => ha z (hU hz), fun z hz => hpos z (hU hz),
     fun z hz => hcrit z (hU hz), fun z hz => hsym z (hU hz),
     fun z hz => hflow z (hU hz), fun z hz => herror z (hU hz),
@@ -154,7 +154,8 @@ theorem n07a_N03_restrict (h : N03Properties D T S C R L base ε)
     smoothTameOn_mono hsmooth
       (((n07a_sectorNeighborhood_isOpen S base' ε' ε').prod isOpen_univ).prod isOpen_univ)
       (Set.prod_mono (Set.prod_mono (n07a_sectorNeighborhood_mono hb he)
-        (subset_refl _)) (subset_refl _))⟩
+        (subset_refl _)) (subset_refl _)),
+    fun z hz => hspatial z (hU hz)⟩
 
 theorem n07a_N04_restrict (h : N04Properties D T S C L K base loss ε)
     (hb : base ≤ base') (he : ε' ≤ ε) :

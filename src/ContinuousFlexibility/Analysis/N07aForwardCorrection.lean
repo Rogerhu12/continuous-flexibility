@@ -155,7 +155,7 @@ theorem n07aReturnCorrection_smoothTame
     (n07aParameterGrading_withSeminorms S) (withSeminorms_graded _ _)
     (withSeminorms_pairGrading (withSeminorms_graded _ _)
       weighted_realGrading_withSeminorms)
-    h02.2.2.2.2.2.2.2.2.2.2 h03.2.2.2.2.2.2.2
+    h02.2.2.2.2.2.2.2.2.2.2 h03.2.2.2.2.2.2.2.1
 
 theorem n07aReturnCorrection_continuousOn
     (hS : IsPhysicalSpaces D T S)
