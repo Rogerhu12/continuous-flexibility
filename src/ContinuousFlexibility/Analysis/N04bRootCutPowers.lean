@@ -34,7 +34,10 @@ theorem n04b_hasDerivAt_rootTravel {r : ℝ} (hr : 0 < r) :
     HasDerivAt n04bRootTravel (Real.sqrt r) r := by
   have h := (Real.hasDerivAt_rpow_const
     (x := r) (p := (3 / 2 : ℝ)) (Or.inl (ne_of_gt hr))).const_mul (2 / 3 : ℝ)
-  convert h using 1 <;> norm_num [n04bRootTravel, Real.sqrt_eq_rpow] <;> ring
+  change HasDerivAt (fun y : ℝ => (2 / 3 : ℝ) * y ^ (3 / 2 : ℝ))
+    (Real.sqrt r) r
+  apply h.congr_deriv
+  norm_num [Real.sqrt_eq_rpow] <;> ring
 
 theorem n04b_hasDerivAt_rootGauge {r : ℝ} (hr : 0 < r) :
     HasDerivAt n04bRootGauge (-n04bRootGauge r / (4 * r)) r := by

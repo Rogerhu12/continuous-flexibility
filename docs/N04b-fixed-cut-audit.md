@@ -152,7 +152,11 @@ compact supports proves this assertion from the nonvanishing of `ω'`
 somewhere in each half. Then `f=f_L/I_L−f_R/I_R` has (1).
 
 The physical-space realization in `IsSobolevModel` represents this compact
-radial function by an actual height-space element. Choose a nonzero real
+radial function by an actual height-space element. The existing theorem
+`spaces_heightMember_of_compact_radial` in
+`Analysis/SpacesCompactHeights.lean` already proves its `HeightMember`
+property from smoothness and compact support in the radial annulus; decoder
+surjectivity supplies the element. Choose a nonzero real
 `δ` sufficiently small and replace the height entry of the reference state by
 
 \[
@@ -315,12 +319,27 @@ being added.
 To use this on characteristics one needs a local Sobolev estimate: for a
 compact radial subinterval of the annulus and every finite `j`, a sufficiently
 high physical source seminorm bounds the decoded `C^j` norm on that interval
-times the angular circle. The concrete norm contains all the required
-material-coordinate derivatives. On such a compact interval the material
-coordinate change and the positive weights have bounded derivatives and
-bounded inverses, so the usual compact Sobolev estimate supplies the bound.
-This is a proof obligation, not a consequence of pointwise decode continuity
-alone. With it,
+times the angular circle. Much of this bridge already exists:
+
+- `spaces_weighted_mixed_pointwise` in `Analysis/SpacesTracePointwise.lean`
+  bounds every mixed derivative of `materialPullback T γ f` by
+  `4 * sqrt π * exp(c*K) * physicalNorm T γ s f` whenever
+  `a+b+c+2≤s`, with the displayed material weight of order `c` on the left.
+  Taking `c=0` gives the needed uniform material-coordinate jets.
+- The norm identity in `IsSobolevModel`, followed by
+  `Analysis.norm_coordinate_le_graded`, transfers this estimate to any
+  stipulated model's actual projective grading and hence to the source
+  subspace. This does not require that the witness be one particular
+  concrete construction of the physical space.
+- `spaces_model_uniform_bound` in `Analysis/SpacesHeightBounds.lean`
+  already performs that transfer for the physical zeroth-order bound.
+
+The remaining higher-order step is the fixed compact chain rule from
+material to physical coordinates, using the inverse radius identities and
+the smooth positive factors `ell,H`. On a compact radial subinterval these
+factors and the necessary reciprocals have bounded derivatives. This step
+and its application to the N03 family still require integration; pointwise
+decode continuity alone does not replace them. With that integration,
 
 \[
  e_q(u)=o(q)\quad\text{uniformly in every compact spatial }C^j\text{ norm}.
@@ -367,6 +386,13 @@ establishes
 
 This includes the reflection axes; dense-set equality followed by continuity
 would not, on its own, justify the needed uniform estimates there.
+
+Only a finite part of (7) is needed for this obstruction. Effective-symbol
+`C¹` control requires the probe outputs through `C³` (the angular square
+division loses two derivatives). The existing material pointwise estimate
+therefore needs order five, followed by the fixed compact coordinate-change
+bound. All-order control is available from the smooth projective family,
+but it is not a prerequisite for the first holonomy variation below.
 
 Part A extends (4) smoothly to each closed physical half. The probe estimates
 extend to its endpoints by continuity, with their derivative versions using
@@ -420,6 +446,14 @@ determinant in (4) simplifies to
 
 Consequently each true physical root is mapped to `ξ=0`; its paired
 artificial cut is mapped to `ξ=R`.
+
+The new candidate module `N04bPrincipalDeterminant` isolates the algebraic
+forward-density identity `det(coordinatePrincipalDensity A F h)=h⁴ det A`
+and its consequences `n04b_radialCoordinate_of_normalForm` and
+`n04b_radialCoordinate_zero_of_determinant_zero`. At the time of this audit
+update that module still awaits its CI check. Applying those formulas at the
+physical boundary also requires the operator identification and continuity
+steps above; the scalar algebra is not the entire endpoint argument.
 
 On a physical boundary `F_{1,θ}=0`, and nonzero Jacobian gives
 `F_{1,r} F_{2,θ}≠0`. The angular derivative has constant sign, and
@@ -488,11 +522,34 @@ from the endpoints ordinary smooth coefficient calculus applies.
 
 Together with `d=b/a`, this gives the uniform coefficient first variations
 needed in the integral form of the characteristic ODE, including at the
-roots. Periodicity and bounded angular derivatives give a uniform angular
-Lipschitz bound. The usual integral-equation comparison and Gronwall estimate
-then justify differentiation of the endpoint flows and their compositions.
-This establishes the required uniform remainder in the next section; a
-pointwise speed derivative alone would not establish it.
+roots. There is a useful elementary simplification at this radial base point.
+For either characteristic speed write
+
+\[
+ \lambda_q(r,\theta)=\lambda_0(r)+q\lambda_1(r,\theta)
+                         +e_q(r,\theta),\qquad
+ \|e_q\|_\infty=o(|q|).
+\]
+
+The baseline speed is independent of angle. Subtracting the two actual
+integral equations therefore gives `||θ_q−θ_0||∞=O(|q|)` directly from
+the uniform bound for `λ_q−λ_0`. If `λ_1` has angular Lipschitz constant
+`M` on the closed half-component, subtracting
+`q ∫ λ_1(r,θ_0(r)) dr` gives the bound
+
+\[
+ |q|M\,(c-a)\,\|\theta_q-\theta_0\|_\infty
+       +(c-a)\|e_q\|_\infty=O(q^2)+o(|q|).
+\]
+
+The explicit first variation (2) has this Lipschitz bound, including its
+square-root endpoint factor. Thus no general parameter-smooth flow theorem,
+Gronwall estimate, or uniform angular derivative bound for the remainder is
+needed. Effective-symbol `C¹` error and the shared determinant root suffice.
+Applying this estimate to the actual endpoint trajectories and their
+compositions supplies the uniform remainder required below. The integral
+equations and their connection to the chosen genuine flows must still be
+proved; pointwise speed derivatives alone do not supply them.
 
 ## 7. A fixed cut contradicts the first loop variation
 
@@ -661,13 +718,13 @@ task's completion status.
 | Obligation | Precise content | Current role |
 | --- | --- | --- |
 | Actual coefficient derivatives | Derive (2) for `b/a` and `sqrt(b²−ac)/a`, with real neighborhood admissibility. | Isolated in new optical-variation helper sources; CI must validate them. |
-| Balanced physical perturbation | Construct compact radial `f` satisfying (1), represent it in the actual height space, and place `x_δ` in the common neighborhood. | Balanced-test and height helper sources cover the scalar construction; representation and neighborhood transport still need integration. |
+| Balanced physical perturbation | Construct compact radial `f` satisfying (1), represent it in the actual height space, and place `x_δ` in the common neighborhood. | Balanced-test helper sources cover the scalar construction; `spaces_heightMember_of_compact_radial` already supplies membership. Decoder realization and neighborhood transport still need integration. |
 | Actual return derivative | Differentiate the N01 flow and N02 inverse/right-chart formula, identify all components of `ρ`, and prove evenness and zero mean. | Mathematical flow calculation described above; not a completed Lean theorem here. |
 | Joint path derivative | Apply the actual N02 derivative and odd inverse on the affine sector path to obtain (3) in the projective topology. | Requires explicit state/sector and `chartIncrement` transport. |
-| Uniform source-to-jet control | Bound decoded compact `C^j` norms by actual physical source seminorms; use error linearity to prove (5). | Essential analytic bridge; pointwise continuity is insufficient. |
+| Uniform source-to-jet control | Bound decoded compact `C^j` norms by actual physical source seminorms; use error linearity to prove (5). | Material mixed-jet estimates and the zeroth-order model bound already exist. Fixed compact material-to-physical higher-jet conversion and application to the error family remain. |
 | Effective principal extraction | Localize canonical tests, derive (4), and apply the finite even probes and fixed-factor division in (6). | Avoids any unstated raw-coefficient smoothness; requires formal local operator calculus and division estimates. |
 | Boundary topology | Prove boundary values of the forward chart, determinant identity (8), the genuine root identification, and boundary angular diffeomorphisms. | Must use closed forward-chart regularity, not unconstrained inverse boundary values. |
-| Closed-interval flow variation | Factor the shared determinant zero, establish uniform angular Lipschitz estimates, and obtain endpoint variation with a uniform remainder. | Necessary to pass from pointwise formulas to (11). |
+| Closed-interval flow variation | Factor the shared determinant zero using effective-symbol `C¹` control, prove the actual integral equations, and use the angle-independent base speed and Lipschitz explicit first variation. | Source `C³` / material order five suffices for coefficient extraction. The elementary integral estimate gives the uniform remainder needed in (11), without differentiating the remainder in angle. |
 | Holonomy conjugacy | Transport the actual two characteristic families to the Tricomi strip and prove (9) and (10) as lift identities/invariants. | Does not follow just from naming a normal-form coefficient tuple. |
 | Fourier/telescoping bound | Remove the one nonconstant mode and bound the average displacement from (11). | Isolated in `N04bRotationBounds`; its application still needs the actual holonomy and uniform remainder. |
 | Universal witness conclusion | Quantify the above over every cumulative witness of `N04bStatement`. | Required because disproving one atlas construction does not refute the existential endpoint. |

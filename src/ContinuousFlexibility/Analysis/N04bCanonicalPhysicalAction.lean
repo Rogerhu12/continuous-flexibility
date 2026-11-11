@@ -60,8 +60,13 @@ theorem n04b_physicalOperator_of_parts
     dsimp only [canonicalOperator, canonicalSource] at he
     rw [hcharts.2.2.1 x hx] at he
     cases hsign : K.positive m <;> simp [hsign] at he ⊢ <;> linarith
-  simpa only [canonicalHeight] using
-    (n04b_physicalOperator_of_intertwining
+  have hheight : canonicalHeight S K z m u =
+      (fun p => u (K.inverseChart z m p) /
+        K.height z m (K.inverseChart z m p)) := by
+    funext p
+    rfl
+  rw [hheight]
+  exact n04b_physicalOperator_of_intertwining
       (A := L.coefficients z) (B := K.coefficients z m)
       (F := K.chart z m) (G := K.inverseChart z m)
       (h := K.height z m) (u := u)
@@ -71,6 +76,6 @@ theorem n04b_physicalOperator_of_parts
       (hcharts.2.2.2.2.1.continuousOn.continuousAt (hU.mem_nhds hx))
       hcharts.2.2.2.2.2.1 hcharts.2.2.2.2.2.2.1
       (fun y hy => (hcharts.2.2.2.2.2.2.2 y hy).1) hu
-      (hcharts.2.2.2.2.2.2.2 x hx).2.1 hact)
+      (hcharts.2.2.2.2.2.2.2 x hx).2.1 hact
 
 end ContinuousFlexibility.Analysis

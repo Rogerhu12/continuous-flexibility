@@ -28,7 +28,7 @@ theorem n04bPhysicalTranslationNumber_of_translation
     calc
       f x = (Real.pi * x + T) / Real.pi :=
         (eq_div_iff Real.pi_ne_zero).mpr (by simpa only [mul_comm] using hx)
-      _ = _ := by field_simp [Real.pi_ne_zero]; ring
+      _ = _ := by field_simp [Real.pi_ne_zero]
   have ht : f.translationNumber = T / Real.pi :=
     le_antisymm
       (f.translationNumber_le_of_le_add (fun x => (hf x).le))
