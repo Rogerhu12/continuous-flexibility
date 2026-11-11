@@ -153,23 +153,26 @@ theorem decode_scalarCoefficientAHeight_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientAHeight hD hT hS x) p =
       scalarCoefficientFiniteFormula D S x 0 p := by
+  have hindex : ((0 : Fin 3) : ℕ) = 0 := rfl
+  simp only [scalarCoefficientFiniteFormula, hindex]
   simp only [scalarCoefficientAHeight, decode_scalarReferenceWCLM,
     decode_scalarHeightUnitalMul, decode_scalarStateMeanCLM,
     decode_scalarStateQuotientHeight hD hT hS x p (hb.1 p),
-    decode_scalarStateDPower_neg_three_halves hD hT hS x hb,
-    scalarCoefficientFiniteFormula]
+    decode_scalarStateDPower_neg_three_halves hD hT hS x hb]
   ring
 
 theorem angularPartial_decode_scalarCoefficientBPrimitive_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     angularPartial ((S.height scalarBeta).decode (scalarCoefficientBPrimitive hD hT hS x)) p =
       scalarCoefficientFiniteFormula D S x 1 p := by
+  have hindex : ((1 : Fin 3) : ℕ) = 1 := rfl
+  simp only [scalarCoefficientFiniteFormula, hindex]
   simp only [scalarCoefficientBPrimitive, angularPartial_decode_height_neg hT hS,
     angularPartial_decode_scalarHeightOddUnitalAct,
     decode_scalarStateDPower_neg_three_halves hD hT hS x hb,
     angularPartial_decode_scalarStateEnergyOddAct,
     angularPartial_decode_scalarStateMixedPrimitive,
-    scalarCoefficientFiniteFormula, scalarStateProfile_eq_mean]
+    scalarStateProfile_eq_mean]
   ring
 
 theorem decode_scalarCoefficientQuadraticHeight (p : PolarPoint) :
@@ -187,6 +190,8 @@ theorem decode_scalarCoefficientCHeight_finite
     (hb : ScalarCandidatePowerBounds hD hT hS x) (p : PolarPoint) :
     (S.height scalarBeta).decode (scalarCoefficientCHeight hD hT hS x) p =
       scalarCoefficientFiniteFormula D S x 2 p := by
+  have hindex : ((2 : Fin 3) : ℕ) = 2 := rfl
+  simp only [scalarCoefficientFiniteFormula, hindex]
   simp only [scalarCoefficientCHeight, map_add, Pi.add_apply,
     decode_scalarReferenceInvRadiusCLM, decode_scalarReferenceWDerivCLM,
     decode_scalarReferenceWCLM, decode_scalarHeightUnitalMul, decode_scalarHeightUnitalAct,
@@ -194,7 +199,8 @@ theorem decode_scalarCoefficientCHeight_finite
     decode_scalarStateSigma hD hT hS x hb, decode_scalarStateInverseMeanHeight hD hT hS x hb,
     decode_scalarStateQPower_neg_one hD hT hS x hb,
     decode_scalarStateDPower_neg_three_halves hD hT hS x hb,
-    decode_scalarCoefficientQuadraticHeight, scalarCoefficientFiniteFormula, div_eq_mul_inv]
+    decode_scalarCoefficientQuadraticHeight]
+  simp only [div_eq_mul_inv]
   ring
 
 theorem decode_scalarCandidateResidual_finite
