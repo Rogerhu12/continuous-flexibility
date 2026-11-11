@@ -155,8 +155,9 @@ theorem contDiffOn_rootEven {G : ℝ × ℝ × ℝ → ℝ} (hG : ContDiff ℝ �
     rw [neg_neg, add_comm]
   have h := contDiffOn_even_rootSubstitution (ContinuousLinearMap.fst ℝ ℝ ℝ)
     ((uniqueDiffOn_Ici (0 : ℝ)).prod uniqueDiffOn_univ)
-    (fun p hp => by simpa only [ContinuousLinearMap.coe_fst'] using hp.1) hK heK
-  simpa only [ContinuousLinearMap.coe_fst', K, H, rootEven] using h
+    (fun p hp => by simpa only [ContinuousLinearMap.coe_fst', mem_Ici] using hp.1) hK heK
+  unfold rootEven
+  simpa only [ContinuousLinearMap.coe_fst', K, H] using h
 
 /-- The prescribed odd quotient has a smooth extension within the
 nonnegative halfspace, including its derivative value on the zero section. -/
@@ -182,7 +183,7 @@ theorem contDiffOn_rootOdd {G : ℝ × ℝ × ℝ → ℝ} (hG : ContDiff ℝ �
     simpa only [ContinuousLinearMap.coe_fst'] using
       contDiffOn_even_rootSubstitution (ContinuousLinearMap.fst ℝ ℝ ℝ)
         ((uniqueDiffOn_Ici (0 : ℝ)).prod uniqueDiffOn_univ)
-        (fun p hp => by simpa only [ContinuousLinearMap.coe_fst'] using hp.1) hQ heQ
+        (fun p hp => by simpa only [ContinuousLinearMap.coe_fst', mem_Ici] using hp.1) hQ heQ
   apply hsmooth.congr
   intro p hp
   by_cases hx : p.1 = 0
@@ -196,8 +197,8 @@ theorem contDiffOn_rootOdd {G : ℝ × ℝ × ℝ → ℝ} (hG : ContDiff ℝ �
     have hOd : HasDerivAt (fun t : ℝ => O (p, t)) d 0 :=
       ((hd.fun_sub hdm).div_const 2).congr_deriv (by ring)
     have hQzero : Q (p, 0) = d := by
-      rw [Q, rootDivideLast_zero]
-      exact (hasDerivAt_rootLastDerivative hO p 0).unique hOd
+      exact (rootDivideLast_zero O p).trans
+        ((hasDerivAt_rootLastDerivative hO p 0).unique hOd)
     have horiginal : deriv (fun t : ℝ => G (0, t, p.2)) 0 = d := by
       simpa only [H, hx] using hd.deriv
     have hrzero : p.1 ^ (3 / 2 : ℝ) = 0 := by

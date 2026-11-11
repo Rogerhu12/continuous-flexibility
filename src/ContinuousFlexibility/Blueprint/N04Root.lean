@@ -7,7 +7,7 @@ import ContinuousFlexibility.Analysis.RootCompositionSmooth
 
 Even and odd parts of a smooth function under the substitution λ = x^(3/2), with fixed loss.
 
-Source: `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 496–549.
+Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 1046–1211.
 
 Task file: `docs/tasks/N04Root.md`.
 

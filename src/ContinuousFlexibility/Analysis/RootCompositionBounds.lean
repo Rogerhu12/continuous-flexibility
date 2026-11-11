@@ -21,9 +21,9 @@ open Set ContinuousFlexibility.Analysis
 open scoped ContDiff
 
 local notation "sourceBox" =>
-  (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi)
+  (Set.prod (Icc (0 : ℝ) 1) (Set.prod (Icc (-1 : ℝ) 1) (Icc (-Real.pi) Real.pi)))
 local notation "targetBox" =>
-  (Icc (0 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi)
+  (Set.prod (Icc (0 : ℝ) 1) (Icc (-Real.pi) Real.pi))
 
 /-- A bound through one order also bounds every smaller order. -/
 theorem CSBound.mono_order {E : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -105,7 +105,8 @@ private theorem csBound_rootOdd_of_integral
       intro q hq
       exact rootEven_rootOddIntegral_eqOn hG ⟨hq.1.le, hq.2⟩
     have hjet := iteratedFDeriv_eqOn_of_isOpen
-      (isOpen_Ioi.prod isOpen_univ) heq n ⟨hxpos, mem_univ _⟩
+      (isOpen_Ioi.prod isOpen_univ) heq n
+      (show p ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hxpos, mem_univ _⟩)
     rw [← hjet]
     exact hI n hn p hp
 
@@ -121,10 +122,11 @@ theorem exists_rootComposition_csBound (s : ℕ) :
   have hCE0 : 0 ≤ CE := zero_le_one.trans hCE
   have hCE_C : CE ≤ C := by
     dsimp only [C]
-    nlinarith
+    simpa only [mul_one] using
+      mul_le_mul_of_nonneg_left (show (1 : ℝ) ≤ 1 + CO by linarith) hCE0
   have hCEO_C : CE * CO ≤ C := by
     dsimp only [C]
-    nlinarith
+    exact mul_le_mul_of_nonneg_left (show CO ≤ 1 + CO by linarith) hCE0
   have hC : 1 ≤ C := hCE.trans hCE_C
   refine ⟨C, lt_of_lt_of_le zero_lt_one hC, ?_⟩
   intro G hG M

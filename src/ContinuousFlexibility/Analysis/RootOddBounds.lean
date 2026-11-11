@@ -43,7 +43,7 @@ theorem hasDerivAt_rootMiddleDerivative {G : ℝ × ℝ × ℝ → ℝ}
     HasDerivAt (fun t : ℝ => G (x, t, θ)) (rootMiddleDerivative G (x, z, θ)) z := by
   have hc : HasDerivAt (fun t : ℝ => (x, t, θ)) (0, 1, 0) z :=
     (hasDerivAt_const z x).prodMk ((hasDerivAt_id' z).prodMk (hasDerivAt_const z θ))
-  simpa only [Function.comp_def] using
+  simpa only [Function.comp_def, rootMiddleDerivative] using
     ((hG.differentiable (by simp)) (x, z, θ)).hasFDerivAt.comp_hasDerivAt z hc
 
 theorem contDiff_rootOddIntegral {G : ℝ × ℝ × ℝ → ℝ}
@@ -119,7 +119,7 @@ theorem rootEven_rootOddIntegral_eqOn {G : ℝ × ℝ × ℝ → ℝ}
       rootOddIntegral G (p.1, p.1 ^ (3 / 2 : ℝ), p.2) * (2 * p.1 ^ (3 / 2 : ℝ)) =
           (2 * p.1 ^ (3 / 2 : ℝ)) *
             rootOddIntegral G (p.1, p.1 ^ (3 / 2 : ℝ), p.2) := mul_comm _ _
-      _ = _ := rootOddIntegral_factor hG _
+      _ = _ := rootOddIntegral_factor hG (p.1, p.1 ^ (3 / 2 : ℝ), p.2)
 
 private theorem exists_compact_jet_power_bound
     {E F : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -133,17 +133,20 @@ private theorem exists_compact_jet_power_bound
   obtain ⟨B, hB⟩ := hK.exists_bound_of_continuousOn hJ.continuousOn
   refine ⟨max 1 B, le_max_left _ _, ?_⟩
   intro i hi his q hq
-  have hJnonneg : 0 ≤ J q := Finset.sum_nonneg (fun j _ => norm_nonneg _)
+  have hJnonneg : 0 ≤ J q :=
+    Finset.sum_nonneg (fun j _ => norm_nonneg (iteratedFDeriv ℝ j A q))
   have hb := hB q hq
   rw [Real.norm_of_nonneg hJnonneg] at hb
   have hiJ : ‖iteratedFDeriv ℝ i A q‖ ≤ J q :=
-    Finset.single_le_sum (fun j _ => norm_nonneg _)
+    Finset.single_le_sum (f := fun j => ‖iteratedFDeriv ℝ j A q‖)
+      (fun j _ => norm_nonneg (iteratedFDeriv ℝ j A q))
       (Finset.mem_range.mpr (Nat.lt_succ_of_le his))
   exact (hiJ.trans hb).trans ((le_max_right 1 B).trans
     (le_self_pow₀ (le_max_left 1 B) (Nat.ne_of_gt (lt_of_lt_of_le Nat.zero_lt_one hi))))
 
 local notation "rootSourceBox" =>
-  (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi)
+  Set.prod (Icc (0 : ℝ) 1)
+    (Set.prod (Icc (-1 : ℝ) 1) (Icc (-Real.pi) Real.pi))
 
 /-- The integral model of the odd quotient loses precisely one input
 derivative in a uniform finite-jet estimate. -/

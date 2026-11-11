@@ -68,8 +68,8 @@ theorem iteratedFDeriv_finiteTaylorPolynomial_at {f : E → F}
     (hf : ContDiff ℝ ∞ f) {s i : ℕ} (hi : i ≤ s) (q : E) :
     iteratedFDeriv ℝ i (finiteTaylorPolynomial s f q) q = iteratedFDeriv ℝ i f q := by
   ext v
-  rw [(finiteTaylorPolynomial_hasFiniteFPowerSeriesOnBall s f q).toHasFPowerSeriesOnBall
-    .iteratedFDeriv_eq_sum (analyticOn_finiteTaylorPolynomial s f q) v]
+  rw [((finiteTaylorPolynomial_hasFiniteFPowerSeriesOnBall s f q).toHasFPowerSeriesOnBall).iteratedFDeriv_eq_sum
+    (analyticOn_finiteTaylorPolynomial s f q) v]
   simp only [finiteTaylorSeries, ite_eq_left hi, ContinuousMultilinearMap.smul_apply]
   have hsym (σ : Perm (Fin i)) :
       iteratedFDeriv ℝ i f q (fun j => v (σ j)) = iteratedFDeriv ℝ i f q v :=
@@ -104,7 +104,8 @@ theorem iteratedFDeriv_finiteTaylorPolynomial_top {f : E → F}
   have hzero : ∀ y, fderiv ℝ (iteratedFDeriv ℝ s (finiteTaylorPolynomial s f q)) y = 0 := by
     intro y
     rw [fderiv_iteratedFDeriv, Function.comp_apply,
-      iteratedFDeriv_finiteTaylorPolynomial_eq_zero s f q (Nat.lt_succ_self s) y, map_zero]
+      iteratedFDeriv_finiteTaylorPolynomial_eq_zero s f q (Nat.lt_succ_self s) y,
+      LinearIsometryEquiv.map_zero]
   calc
     iteratedFDeriv ℝ s (finiteTaylorPolynomial s f q) z =
         iteratedFDeriv ℝ s (finiteTaylorPolynomial s f q) q :=
