@@ -57,8 +57,11 @@ private theorem radial_modes_at_exp (A B y : ℝ) :
     rw [pow_two, ← exp_add]
     congr 1
     ring
-  rw [hp, coneModePair, div_eq_mul_inv, ← exp_neg]
-  congr 2 <;> ring
+  have hn : (exp (2 * y))⁻¹ = exp (-2 * y) := by
+    rw [← exp_neg]
+    congr 1
+    ring
+  simp only [coneModePair, hp, div_eq_mul_inv, hn]
 
 private theorem radialJacobi_height_mul (a A r : ℝ) (w u : ℝ → ℝ) :
     radialJacobi a w (fun x => A * u x) r = A * radialJacobi a w u r := by
@@ -160,7 +163,7 @@ theorem SeedConeTail.toPureTail {D : ReferenceData} {right : Bool} {entry : ℝ}
       (hasDerivAt_coneLogPullback ((hHeightAt y).differentiableAt (by simp))).deriv]
     rfl
   have hSlopeGerm : P.slope =ᶠ[𝓝 P.base] seedLogSlope T.height :=
-    P.matches.trans hactualSlope
+    P.slope_germ.trans hactualSlope
   have hModeSmooth : ContDiff ℝ ∞ (coneModePair s A B) := by
     unfold coneModePair
     fun_prop

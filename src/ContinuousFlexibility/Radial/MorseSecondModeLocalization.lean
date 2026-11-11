@@ -82,7 +82,7 @@ theorem morseSecondMode_physicalLocalization {T : MorseChainData} {σ : ℕ → 
       have hmodel₁ := morseSecondMode_modelOrder h false hk₁
       have hjoin₁ : T.radius false (k + 2) (T.rightX false (k + 2)) <
           morseSecondModeMassLeft T false (k + 1) := by
-        simpa only [Nat.add_assoc] using morseSecondMode_joinOrder h hk₁ false
+        simpa [Nat.add_assoc] using morseSecondMode_joinOrder h hk₁ false
       refine ⟨-log R₁, ?_, ?_, ?_⟩
       · change -log (morseSecondModeMassLeft T false k) < -log R₁
         exact neg_lt_neg (log_lt_log hR₁ hjoin)
@@ -130,7 +130,7 @@ theorem morseSecondMode_physicalLocalization {T : MorseChainData} {σ : ℕ → 
       have hM : 0 < morseChainMassEnd T false N :=
         hg.1.trans (morseSecondMode_massEndpoints h false hN.le).2.1
       have hjoin : R₀ < morseSecondModeMassLeft T false (N - 1) := by
-        simpa only [heq] using morseSecondMode_joinOrder h hp false
+        simpa [R₀, heq] using morseSecondMode_joinOrder h hp false
       have hmodel := morseSecondMode_modelOrder h false hN.le
       have hmodelp := morseSecondMode_modelOrder h false hp
       have hjoinnext := morseSecondMode_joinOrder h hN.le false

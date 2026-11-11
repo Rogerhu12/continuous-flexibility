@@ -224,7 +224,8 @@ theorem isAccumulatingProfile_coordinateSurgery
     · obtain ⟨A, c, hA, hAM, hAI, hc, her, hg⟩ := hTail r (hPart'.2.2.2.1 m hr) hKr
       have hj : radialJet s w r =
           A * c ^ s * radialJet s D.w (e r) := by
-        rw [coordinateJet_germ hg s, radialJet_scalar_coordinate, ← her]
+        rw [coordinateJet_germ hg s]
+        simpa only [← her] using congrFun (radialJet_scalar_coordinate s D.w A c) r
       rw [hj, abs_mul]
       have hf := coordinate_scalar_factor hMpos.le hAM hc s
       have hexp : exp (-((D.cellIndex m : ℝ) ^ (5 / 2 : ℝ)) +
@@ -260,7 +261,9 @@ theorem isAccumulatingProfile_coordinateSurgery
         ring
       have hj : radialJet s (fun x => (w x)⁻¹) r =
           A⁻¹ * c ^ s * radialJet s (fun x => (D.w x)⁻¹) (e r) := by
-        rw [coordinateJet_germ hgi s, radialJet_scalar_coordinate, ← her]
+        rw [coordinateJet_germ hgi s]
+        simpa only [← her] using congrFun
+          (radialJet_scalar_coordinate s (fun x => (D.w x)⁻¹) A⁻¹ c) r
       rw [hj, abs_mul]
       have hAIM : |A⁻¹| ≤ M := by
         simpa only [abs_of_pos (inv_pos.mpr hA)] using hAI

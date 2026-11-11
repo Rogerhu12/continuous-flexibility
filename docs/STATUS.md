@@ -27,11 +27,15 @@ interval. This repair changes no R08 hypothesis or conclusion.
 The R06 assembly composition keeps the same signature and uses the
 corrected common operator definitions.
 
-The R08 main theorem remains open while its concrete pieces are integrated.
-The latest completed CI at `3067353b8b556748107721b048946343f9b68d79`
-reported elaboration errors in three new helper modules; those are being
-fixed and the next source import closure is being compiled.
-No compiled-module count is inferred from stale cross-branch cache artifacts.
+The complete R08 proof source is now assembled without a local `sorry`:
+selected second-mode entrances, actual inward cone continuation, safe pure-mode
+cutoff, canonical positive bridge, central three-piece gluing, accumulating
+coordinate transport, and exact negative-component/travel preservation.
+The completion gate is still open until the complete source closure compiles
+and the explicit R08 axiom check reports only the three standard axioms.
+CI is the compiler for this line because this session has no shell execution
+environment. No compiled-module count is inferred from stale cross-branch
+cache artifacts.
 
 ## Completed line: Tame
 

@@ -6,7 +6,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Radial
 
-open Set Filter
+open Real Set Filter
 open scoped Topology ContDiff
 
 def seedThreeGlue (l h : ℝ) (fL fM fR : ℝ → ℝ) : ℝ → ℝ :=

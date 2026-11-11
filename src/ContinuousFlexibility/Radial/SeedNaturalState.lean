@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Statements.RadialTargets
 import ContinuousFlexibility.Radial.SeedRadialContinuation
 import ContinuousFlexibility.Radial.MorseJoinActualGerms
 import ContinuousFlexibility.Radial.MorseSecondModeSmoothExtension

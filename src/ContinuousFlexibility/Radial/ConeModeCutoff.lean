@@ -30,7 +30,7 @@ structure ConeModeCutoff (s A B Q : ℝ) where
   below_four : ∀ y, slope y < 4
   positive : ∀ y, (3 / 4 : ℝ) ≤
     (slope y ^ 2 - slope y + deriv slope y) / (4 - slope y)
-  matches : slope =ᶠ[𝓝 base]
+  slope_germ : slope =ᶠ[𝓝 base]
     fun y => deriv (coneModePair s A B) y / coneModePair s A B y
   pure : ∀ y, stop ≤ s * y → slope y = mode
 

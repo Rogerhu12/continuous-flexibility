@@ -18,29 +18,29 @@ open Real Set Filter
 open Statements
 open scoped Topology ContDiff
 
-theorem profile_deriv_of_cell_identity {w R : ℝ → ℝ} {a b λ A B : ℝ}
+theorem profile_deriv_of_cell_identity {w R : ℝ → ℝ} {a b amp A B : ℝ}
     (hw : ContDiff ℝ ∞ w) (hR : ContDiff ℝ ∞ R) (hab : a < b)
     (hcell : ∀ x ∈ Icc a b,
       deriv (deriv R) x = -morseRho A B x * R x ∧
-      w (R x) = λ * deriv R x) :
+      w (R x) = amp * deriv R x) :
     ∀ x ∈ Icc a b,
-      deriv w (R x) * deriv R x = λ * (-morseRho A B x * R x) := by
+      deriv w (R x) * deriv R x = amp * (-morseRho A B x * R x) := by
   have hws : ContDiff ℝ ∞ (deriv w) := (contDiff_infty_iff_deriv.mp hw).2
   have hRs : ContDiff ℝ ∞ (deriv R) := (contDiff_infty_iff_deriv.mp hR).2
   have hclosed : IsClosed {x | deriv w (R x) * deriv R x =
-      λ * (-morseRho A B x * R x)} :=
+      amp * (-morseRho A B x * R x)} :=
     isClosed_eq ((hws.continuous.comp hR.continuous).mul hRs.continuous)
       (continuous_const.mul ((contDiff_morseRho A B).continuous.neg.mul hR.continuous))
   have hopen : Ioo a b ⊆ {x | deriv w (R x) * deriv R x =
-      λ * (-morseRho A B x * R x)} := by
+      amp * (-morseRho A B x * R x)} := by
     intro x hx
-    have hg : (fun t => w (R t)) =ᶠ[𝓝 x] fun t => λ * deriv R t := by
+    have hg : (fun t => w (R t)) =ᶠ[𝓝 x] fun t => amp * deriv R t := by
       filter_upwards [Ioo_mem_nhds hx.1 hx.2] with t ht
       exact (hcell t (Ioo_subset_Icc_self ht)).2
-    have hd : deriv w (R x) * deriv R x = λ * deriv (deriv R) x :=
+    have hd : deriv w (R x) * deriv R x = amp * deriv (deriv R) x :=
       (((hw.differentiable (by simp) (R x)).hasDerivAt).comp x
         (hR.differentiable (by simp) x).hasDerivAt).unique
-        (((hRs.differentiable (by simp) x).hasDerivAt.const_mul λ).congr_of_eventuallyEq hg)
+        (((hRs.differentiable (by simp) x).hasDerivAt.const_mul amp).congr_of_eventuallyEq hg)
     rw [hd, (hcell x (Ioo_subset_Icc_self hx)).1]
   have hclosure := closure_minimal hopen hclosed
   rw [closure_Ioo hab.ne] at hclosure
@@ -55,7 +55,7 @@ theorem morseRealization_seam_deriv_pos {T : MorseChainData} {σ : ℕ → ℝ}
   have hw := hacc.1.2.2.1.1
   obtain ⟨hRs, hab, hcell⟩ := hreal.2.2.1 right n hn
   have hg := hreal.2.1 right n hn
-  have hλ := morseChainAmplitude_pos T σ hσ n
+  have hamp := morseChainAmplitude_pos T σ hσ n
   let x := if right then T.leftX right n else T.rightX right n
   have hx : x ∈ Icc (T.leftX right n) (T.rightX right n) := by
     cases right with
@@ -83,7 +83,7 @@ theorem morseRealization_seam_deriv_pos {T : MorseChainData} {σ : ℕ → ℝ}
       nlinarith
   have hprod : 0 < deriv D.w (T.radius right n x) * deriv (T.radius right n) x := by
     rw [he]
-    exact mul_pos hλ (mul_pos (neg_pos.mpr hρ) hr)
+    exact mul_pos hamp (mul_pos (neg_pos.mpr hρ) hr)
   exact (mul_pos_iff_of_pos_right (hcell x hx).1).mp hprod
 
 theorem exists_seedSelectedTail_regular_entrance (hR07 : R07Statement) :

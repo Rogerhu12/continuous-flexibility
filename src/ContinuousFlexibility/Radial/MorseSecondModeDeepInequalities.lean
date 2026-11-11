@@ -119,7 +119,7 @@ theorem morseSecondModeEnvelope_tendsto (C : ℝ) :
       atTop (𝓝 0) :=
     (tendsto_pow_mul_exp_neg_atTop_nhds_zero 2).comp tendsto_natCast_atTop_atTop
   have h₀ : Tendsto (fun n : ℕ => exp (-(n : ℝ))) atTop (𝓝 0) := by
-    simpa only [pow_zero, one_mul, Function.comp_apply] using
+    simpa only [Function.comp_def, pow_zero, one_mul] using
       (tendsto_pow_mul_exp_neg_atTop_nhds_zero 0).comp
         (show Tendsto (fun n : ℕ => (n : ℝ)) atTop atTop from tendsto_natCast_atTop_atTop)
   have heq : morseSecondModeEnvelope C =
