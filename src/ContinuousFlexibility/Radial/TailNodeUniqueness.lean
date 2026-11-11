@@ -65,7 +65,8 @@ theorem tendsto_tailNodeCasoratian_zero {c y z w : ℕ → ℝ} {B : ℝ}
   have hmajorant : Tendsto
       (fun n => B * |Y n * Z (n + 1) - Y (n + 1) * Z n|) atTop (𝓝 0) := by
     simpa only [abs_zero, mul_zero] using hdet.abs.const_mul B
-  apply tendsto_zero_iff_abs_tendsto_zero.mpr
+  rw [tendsto_zero_iff_norm_tendsto_zero]
+  simp only [Real.norm_eq_abs]
   refine squeeze_zero (fun n => abs_nonneg _) (fun n => ?_) hmajorant
   have hfactor : Y n * Z (n + 1) - Y (n + 1) * Z n =
       (w n * w (n + 1)) * (y n * z (n + 1) - y (n + 1) * z n) := by
@@ -157,7 +158,8 @@ theorem tendsto_tailWeightedNode_zero {μ u : ℕ → ℝ}
     convert hu.tendsto_atTop_zero using 1
     funext n
     rw [mul_pow, Real.sq_sqrt (hμ n)]
-  apply tendsto_zero_iff_abs_tendsto_zero.mpr
+  rw [tendsto_zero_iff_norm_tendsto_zero]
+  simp only [Real.norm_eq_abs]
   simpa only [Real.sqrt_zero, Real.sqrt_sq_eq_abs] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hsq
 
