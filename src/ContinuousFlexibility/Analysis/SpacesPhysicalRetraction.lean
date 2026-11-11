@@ -87,7 +87,8 @@ theorem spacesPhysicalShellSynthesis_analysis_summable (u : PhysicalJetProjectiv
     simpa only [Nat.add_zero] using spacesPhysicalShellSynthesis_norm_le hT n k b
   have hs := summable_shellSynthesis E 0 (spacesPhysicalShellSynthesis hT)
     (spacesPhysicalShellSynthesisConstant hT) hP v s
-  simpa only [v, shellAnalysisMap_raw, A] using hs
+  simp only [v, shellAnalysisMap_raw, A] at hs
+  exact hs
 
 /-- The zeroth jet is recovered by the actual cell Fourier series and the
 identity `sum κₙ χₙ = 1`. -/
@@ -177,8 +178,8 @@ theorem spacesPhysical_tameRetraction : TameRetraction (spacesPhysicalGrading hT
     simpa only [Nat.add_zero] using spacesPhysicalModelShellSynthesis_bound hT s k v
   · exact spacesPhysicalModelShellSynthesis_compatible hT
   · intro u s
-    simpa only [spacesPhysicalModelShellSynthesis_analysis] using
-      spacesPhysicalShellSynthesis_analysis_hasSum hT u s
+    exact (spacesPhysicalShellSynthesis_analysis_hasSum hT u s).congr_fun
+      (fun k => spacesPhysicalModelShellSynthesis_analysis hT s k u)
 
 theorem canonicalSobolevModel_tameRetraction (γ : ℝ) :
     TameRetraction (canonicalSobolevModelData hT γ).grading modelGrading :=

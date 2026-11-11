@@ -119,11 +119,13 @@ private theorem spaces_coarse_segment_bound {V : Type*} [AddCommGroup V] [Module
     (spaces_seminorm_segment_le high u w t ht).trans (add_le_add le_rfl hw)
   calc
     F (u + t • w) (Fin.cons w v) ≤
-        C * (1 + high (u + t • w)) * ∏ i, high ((Fin.cons w v) i) :=
+        C * (1 + high (u + t • w)) *
+          ∏ i : Fin (k + 1), high ((Fin.cons w v : Fin (k + 1) → V) i) :=
       hF (u + t • w) (Fin.cons w v) hlo
     _ = C * (1 + high (u + t • w)) * (high w * ∏ i, high (v i)) := by
       exact congrArg (fun z : ℝ => C * (1 + high (u + t • w)) * z)
-        (Fin.prod_univ_succ (fun i : Fin (k + 1) => high (Fin.cons w v i)))
+        (Fin.prod_univ_succ
+          (fun i : Fin (k + 1) => high ((Fin.cons w v : Fin (k + 1) → V) i)))
     _ ≤ C * (2 + high u) * (high w * ∏ i, high (v i)) :=
       mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left (by linarith) hC)

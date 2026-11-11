@@ -27,11 +27,14 @@ Last updated: 2026-11-11.
   gluing exactly reconstructs the localized function. Every smooth-composition
   kernel has its actual weighted jets, multilinearity and fixed-base tame
   estimates; affine L² majorants and spatial/parameter differentiation are
-  proved. The complete physical band reconstruction is now proved, as are the
-  closed-graph synthesis maps and their level compatibility. Full proof bodies
+  proved. The complete physical retraction is now compiled and audited: it has
+  analysis loss 0 and synthesis loss 1 in the prescribed fixed model. The
+  projective multilinear joint-continuity bridge and actual composition
+  direction derivatives are also compiled and audited. Full proof bodies
   for the physical retraction, projective smooth-composition tower, W02 and
-  the original `Blueprint.Spaces` statement are now in place and undergoing
-  compilation and CI verification. The `931888f` check compiled all new
+  the original `Blueprint.Spaces` statement are now in place. The final
+  smooth-composition packaging and exact node are undergoing compilation
+  and CI verification; the node is also explicitly in the root import. The `931888f` check compiled all new
   modules individually, then exposed an anonymous local-instance name
   collision in the root import; the relevant instances now have unique names.
   `Spaces` stays open until the full W02/W03 statement and CI pass.
@@ -53,9 +56,9 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 457 / 467 |
-| Modules in the root import | 418 |
-| Lines of Lean under `src/` | 104,297 |
+| Lean modules compiled / total | 459 / 467 |
+| Modules in the root import | 420 |
+| Lines of Lean under `src/` | 104,363 |
 | Axiom audit (`lake build`, `e8bd075`) | passed |
 | Blueprint statements proved / total | 7 / 42 (S01, S02, R01, R02, R03, R04, W01) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
