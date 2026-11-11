@@ -36,3 +36,13 @@ The positive-piece cubic clause is an interior identity; its quotient field can 
 The main remaining construction is a legitimate choice of the cumulative data and canonical atlas, including the negative-piece charts and genuine cut transmission. The manuscript cuts at the level `σ = T/2`; the frozen physical pieces are fixed radial strips. A full-strip inverse by itself does not identify those two cuts. This is an issue to resolve, not a claimed counterexample to the existential endpoint.
 
 No statement repair is asserted at this checkpoint.
+
+## New proof interfaces
+
+- `N04bPositiveDivision` constructs the actual interior divided coefficients and proves the exact positive-piece clause, preserving the other canonical data.
+- `N04bCanonicalOperator` applies the coordinate calculus to the exact frozen canonical operator, from PartA and actual local physical-coefficient smoothness.
+- `N04bCutPullback` proves one signed chain rule and the genuine first-derivative transmission matrix for a shared travel pullback with the reciprocal fourth-root gauge.
+
+These are complete helper proofs. They do not assert the outstanding global atlas existence.
+
+The first reuse checkpoint `8f742e1` passed [full CI run 43043096297](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43043096297): 5,226 jobs; 1,259 / 1,261 modules compiled; 26 / 42 blueprint statements proved and 16 open.
