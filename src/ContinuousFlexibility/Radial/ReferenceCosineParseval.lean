@@ -46,8 +46,8 @@ private theorem halfPeriodFourierCoefficient_eq (f : ℝ → ℝ) (n : ℤ) :
       ((Real.pi⁻¹ : ℝ) : ℂ) * ∫ θ in (0 : ℝ)..Real.pi,
         fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ) := by
   simp only [halfPeriodFourierCoefficient, fourierCoeffOn_eq_integral,
-    sub_zero, one_div, smul_eq_mul, Complex.real_smul, Complex.ofReal_inv]
-  rfl
+    fourier_coe_apply, sub_zero, one_div, smul_eq_mul, Complex.real_smul,
+    Complex.ofReal_inv]
 
 private theorem halfPeriodFourierCoefficient_conj {f : ℝ → ℝ}
     (hp : Function.Periodic f Real.pi) (he : Function.Even f) (n : ℤ) :
@@ -162,6 +162,7 @@ theorem hasSum_sq_referenceAngularCoefficient {f : ℝ → ℝ}
     have h := hasSum_sq_fourierCoeffOn Real.pi_pos hhalfC
     have hpsq : Function.Periodic (fun θ => f θ ^ 2) Real.pi := by
       intro θ
+      change f (θ + Real.pi) ^ 2 = f θ ^ 2
       rw [hp θ]
     rw [radialAngularMean_eq_halfPeriod hpsq hisq]
     simpa only [halfPeriodFourierCoefficient, sub_zero, Complex.norm_real,

@@ -59,7 +59,8 @@ theorem memLp_referenceBasisProjection_prod {μ : Measure ℝ} [SFinite μ]
     MemLp (referenceBasisProjection I u) 2
       (μ.prod (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))) := by
   have hm := aestronglyMeasurable_referenceBasisProjection hu.aestronglyMeasurable I
-  have hms := hm.pow 2
+  have hms : AEStronglyMeasurable (fun x : PolarPoint => referenceBasisProjection I u x ^ 2)
+      (μ.prod (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))) := hm.pow 2
   have hinner : Integrable
       (fun r => ∫ θ, referenceBasisProjection I u (r, θ) ^ 2
         ∂volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) μ := by

@@ -103,6 +103,8 @@ theorem reference_radial_second_derivative {D : ReferenceData}
   have hdu' := ((hdu.differentiableOn (by simp) r hr).differentiableAt
     (isOpen_Ioo.mem_nhds hr)).hasDerivAt
   have hflux := hw.mul hdu'
+  change HasDerivAt (fun t => D.w t * deriv u t)
+    (deriv D.w r * deriv u r + D.w r * deriv (deriv u) r) r at hflux
   have hEq := he r hr
   rw [radialJacobi, hflux.deriv] at hEq
   have hwr : D.w r ≠ 0 := (hgeom.2.2.2.2.1 r hr).ne'
@@ -163,9 +165,9 @@ theorem ReferenceSolutionExpr.hasDerivAt_eval {D : ReferenceData}
       (contDiffOn_infty_iff_deriv_of_isOpen isOpen_Ioo).mp hu |>.2
     have hd := ((hdu.differentiableOn (by simp) r hr).differentiableAt
       (isOpen_Ioo.mem_nhds hr)).hasDerivAt
-    convert hd using 1
+    apply hd.congr_deriv
     simpa only [formalDeriv, eval, ReferenceCoefficientExpr.eval, iteratedDeriv_zero] using
-      (reference_radial_second_derivative hD hu he hr).symm
+      reference_radial_second_derivative hD hu he hr
   | forcingJet n =>
     have hfn := reference_contDiffOn_iteratedDeriv isOpen_Ioo hf n
     have hd := ((hfn.differentiableOn (by simp) r hr).differentiableAt

@@ -35,7 +35,7 @@ theorem reference_contDiff_flat_deriv_div {D : ReferenceData} (ha : 0 < D.a)
     have he : (fun t : ℝ => deriv w t / t) =ᶠ[𝓝 (0 : ℝ)] (fun _ => 0) := by
       filter_upwards [Iio_mem_nhds ha] with t ht
       rw [hz t ht, zero_div]
-    exact contDiffAt_const.congr_of_eventuallyEq he.symm
+    exact contDiffAt_const.congr_of_eventuallyEq he
   · exact hdw.contDiffAt.div contDiffAt_id hr
 
 theorem referenceColumn_contDiff {D : ReferenceData}
@@ -66,7 +66,10 @@ theorem referenceColumn_tsupport_subset {D : ReferenceData} :
     filter_upwards [(isClosed_tsupport D.chi).isOpen_compl.mem_nhds hnot] with t ht
     rw [image_eq_zero_of_notMem_tsupport ht, mul_zero]
   have heF : (fun t => (D.w t * D.chi t) * deriv D.phi t) =ᶠ[𝓝 r]
-      (fun _ => (0 : ℝ)) := heA.mono fun t ht => by rw [ht, zero_mul]
+      (fun _ => (0 : ℝ)) := heA.mono fun t ht => by
+        change D.w t * D.chi t = 0 at ht
+        change (D.w t * D.chi t) * deriv D.phi t = 0
+        rw [ht, zero_mul]
   have hzA : deriv (fun t => D.w t * D.chi t) r = 0 := by
     rw [heA.deriv_eq]
     exact deriv_const r 0

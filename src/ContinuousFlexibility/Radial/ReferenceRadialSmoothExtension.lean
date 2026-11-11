@@ -17,36 +17,54 @@ open Set Filter MeasureTheory Real
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
-theorem referenceRadialWeighted_of_compact_support {D : ReferenceData}
+/-- Core-supported continuous radial fields belong to every weighted
+space. Values outside the physical core play no role in the norm. -/
+theorem referenceRadialWeighted_of_compact_core {D : ReferenceData}
     (hD : IsAccumulatingProfile D) {f : ℝ → ℝ}
-    (hf : Continuous f) (hfc : HasCompactSupport f) (hfs : tsupport f ⊆ radialCore D)
+    (hf : Continuous f) {K : Set ℝ} (hK : IsCompact K)
+    (hKs : K ⊆ radialCore D)
+    (hz : ∀ r ∈ radialCore D, r ∉ K → f r = 0)
     (γ A : ℝ) : ReferenceRadialWeighted D γ A f := by
   obtain ⟨C, _, hp, _, _, _, hcompact, _⟩ := hD
   let μ : Measure ℝ := volume.restrict (radialCore D)
   letI : IsFiniteMeasure μ := by dsimp only [μ, radialCore]; infer_instance
   have hlocal (m : ℕ) : MemLp (fun r => D.localizer m r * f r) 2 μ := by
     have hc : Continuous (fun r => D.localizer m r * f r) := (hp.1 m).continuous.mul hf
-    obtain ⟨K, hK⟩ := isCompact_Icc.bddAbove_image
+    obtain ⟨B, hB⟩ := isCompact_Icc.bddAbove_image
       (hc.norm.continuousOn (s := Icc D.a D.b))
-    apply MemLp.of_bound hc.aestronglyMeasurable K
+    apply MemLp.of_bound hc.aestronglyMeasurable B
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with r hr
-    exact hK ⟨r, Ioo_subset_Icc_self hr, rfl⟩
+    exact hB ⟨r, Ioo_subset_Icc_self hr, rfl⟩
   refine ⟨hlocal, ?_⟩
-  have hfinite := hcompact (tsupport f) hfc hfs
+  have hfinite := hcompact K hK hKs
   apply summable_of_hasFiniteSupport
   apply hfinite.subset
   intro m hm
   by_contra hnot
-  have hz (r : ℝ) : D.localizer m r * f r = 0 := by
+  change ¬(D.cells m ∩ K).Nonempty at hnot
+  have hzero :
+      (fun r => (D.localizer m r * f r) ^ 2) =ᵐ[volume.restrict (radialCore D)]
+        fun _ => (0 : ℝ) := by
+    filter_upwards [ae_restrict_mem measurableSet_Ioo] with r hr
     by_cases hχ : D.localizer m r = 0
-    · simp only [hχ, zero_mul]
-    · have hr : r ∈ D.cells m := hp.2.2.1 m hχ
-      have hfzero : f r = 0 := by
-        by_contra hfr
-        exact hnot ⟨r, hr, subset_closure hfr⟩
-      rw [hfzero, mul_zero]
+    · simp only [hχ, zero_mul, zero_pow (by decide : (2 : ℕ) ≠ 0)]
+    · have hrCell : r ∈ D.cells m := hp.2.2.1 m hχ
+      have hrK : r ∉ K := fun hrK => hnot ⟨r, hrCell, hrK⟩
+      rw [hz r hr hrK, mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0)]
+  have hi : (∫ r, (D.localizer m r * f r) ^ 2
+      ∂volume.restrict (radialCore D)) = 0 := by
+    rw [integral_congr_ae hzero, integral_zero]
   apply hm
-  simp only [hz, zero_pow (by decide : (2 : ℕ) ≠ 0), integral_zero, mul_zero]
+  change exp (A * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
+    (∫ r, (D.localizer m r * f r) ^ 2 ∂volume.restrict (radialCore D)) = 0
+  rw [hi, mul_zero]
+
+theorem referenceRadialWeighted_of_compact_support {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) {f : ℝ → ℝ}
+    (hf : Continuous f) (hfc : HasCompactSupport f) (hfs : tsupport f ⊆ radialCore D)
+    (γ A : ℝ) : ReferenceRadialWeighted D γ A f :=
+  referenceRadialWeighted_of_compact_core hD hf hfc hfs
+    (fun _ _ hr => image_eq_zero_of_notMem_tsupport hr) γ A
 
 theorem referenceRapid_compact_jets {D : ReferenceData}
     (hD : IsAccumulatingProfile D) {f : ℝ → ℝ}

@@ -53,17 +53,19 @@ theorem referenceSqueezedTest_compact {D : ReferenceData} (hab : D.a < D.b)
   have ham : D.a < m := by dsimp only [m]; linarith
   have hmb : m < D.b := by dsimp only [m]; linarith
   have hal : D.a < l := by
-    change D.a < m + (D.a - m) / c
-    rw [lt_add_iff_sub_lt]
-    apply (lt_div_iff₀ hcpos).mpr
-    have hp := mul_neg_of_neg_of_pos (sub_neg.mpr ham) (sub_pos.mpr hc)
-    nlinarith only [hp]
+    have hfrac : D.a - m < (D.a - m) / c := by
+      apply (lt_div_iff₀ hcpos).mpr
+      have hp := mul_neg_of_neg_of_pos (sub_neg.mpr ham) (sub_pos.mpr hc)
+      nlinarith only [hp]
+    dsimp only [l]
+    linarith only [hfrac]
   have hhb : h < D.b := by
-    change m + (D.b - m) / c < D.b
-    rw [add_lt_iff_lt_sub_left]
-    apply (div_lt_iff₀ hcpos).mpr
-    have hp := mul_pos (sub_pos.mpr hmb) (sub_pos.mpr hc)
-    nlinarith only [hp]
+    have hfrac : (D.b - m) / c < D.b - m := by
+      apply (div_lt_iff₀ hcpos).mpr
+      have hp := mul_pos (sub_pos.mpr hmb) (sub_pos.mpr hc)
+      nlinarith only [hp]
+    dsimp only [h]
+    linarith only [hfrac]
   have hs' : Function.support (referenceSqueezedTest D c ψ) ⊆ Icc l h := by
     intro r hr
     have harg : referenceSqueezeArg D c r ∈ radialCore D :=
@@ -84,7 +86,8 @@ private theorem hasDerivAt_referenceSqueezeArg (D : ReferenceData) (c r : ℝ) :
     HasDerivAt (referenceSqueezeArg D c) c r := by
   have h := (((hasDerivAt_id r).sub_const ((D.a + D.b) / 2)).const_mul c).const_add
     ((D.a + D.b) / 2)
-  simpa only [referenceSqueezeArg, mul_one] using h
+  unfold referenceSqueezeArg
+  simpa only [id_eq, mul_one] using h
 
 theorem deriv_referenceSqueezedTest (D : ReferenceData) (c : ℝ)
     {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ) (r : ℝ) :
@@ -198,7 +201,7 @@ theorem radialJacobi_weak_extend_support_tests {D : ReferenceData}
     have hn : (0 : ℝ) < (n : ℝ) + 1 := by positivity
     have hp : (0 : ℝ) < 1 / ((n : ℝ) + 1) := one_div_pos.mpr hn
     have hb : (1 : ℝ) / ((n : ℝ) + 1) ≤ 1 :=
-      (div_le_iff₀ hn).mpr (by linarith only [Nat.cast_nonneg n])
+      (div_le_iff₀ hn).mpr (by linarith only [(Nat.cast_nonneg n : (0 : ℝ) ≤ (n : ℝ))])
     dsimp only [c]
     constructor <;> linarith only [hp, hb]
   have hc₁ : Tendsto c atTop (𝓝 1) := by
@@ -236,7 +239,7 @@ theorem radialJacobi_weak_extend_support_tests {D : ReferenceData}
   have hargone (r : ℝ) : referenceSqueezeArg D 1 r = r := by
     unfold referenceSqueezeArg
     ring
-  simpa only [hone, hargone, intervalIntegral.integral_of_le hgeom.2.1.le,
+  simpa only [Function.comp_def, hone, hargone, intervalIntegral.integral_of_le hgeom.2.1.le,
     integral_Ioc_eq_integral_Ioo, radialCore] using hlimit
 
 end ContinuousFlexibility.Radial

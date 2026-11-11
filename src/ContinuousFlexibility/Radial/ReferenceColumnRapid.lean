@@ -39,16 +39,21 @@ theorem referenceColumn_eqOn_expr {D : ReferenceData}
   have hw := (hgeom.2.2.1.1.differentiable (by simp) r).hasDerivAt
   have hchi := (hχ.differentiable (by simp) r).hasDerivAt
   have hphip := (hφ'c.differentiable (by simp) r).hasDerivAt
-  have hA := hw.mul hchi
-  have hF := (hw.mul hchi).mul hphip
-  have hF0 := hw.mul hphip
+  have hA : deriv (fun t => D.w t * D.chi t) r =
+      deriv D.w r * D.chi r + D.w r * deriv D.chi r := (hw.mul hchi).deriv
+  have hF : deriv (fun t => (D.w t * D.chi t) * deriv D.phi t) r =
+      (deriv D.w r * D.chi r + D.w r * deriv D.chi r) * deriv D.phi r +
+        (D.w r * D.chi r) * deriv (deriv D.phi) r := ((hw.mul hchi).mul hphip).deriv
+  have hF0 : deriv (fun t => D.w t * deriv D.phi t) r =
+      deriv D.w r * deriv D.phi r + D.w r * deriv (deriv D.phi) r :=
+    (hw.mul hphip).deriv
   calc
     referenceColumn D r =
         D.chi r * radialJacobi 4 D.w D.phi r +
           (D.w r * deriv D.chi r) * deriv D.phi r +
           (-4 * (D.w r * (deriv D.chi r * r⁻¹))) * D.phi r := by
       unfold referenceColumn radialJacobi
-      rw [hF.deriv, hA.deriv, hF0.deriv]
+      rw [hF, hA, hF0]
       simp only [div_eq_mul_inv]
       ring
     _ = _ := by

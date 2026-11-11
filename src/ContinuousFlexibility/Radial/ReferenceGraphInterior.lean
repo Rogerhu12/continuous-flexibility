@@ -139,11 +139,12 @@ theorem referenceCoefficientForcing_contDiff {D : ReferenceData}
     (hgeom : RadialProfileGeometry D) (hborder : RadialTrueBorder D)
     {U : RadialUnknown} {F : RadialSource} (hF : ContDiff ℝ ∞ F.1) (n : ℕ) :
     ContDiff ℝ ∞ (referenceCoefficientForcing D U F n) := by
+  unfold referenceCoefficientForcing
   by_cases hn : n = 1
-  · simp only [referenceCoefficientForcing, if_pos hn]
+  · simp only [if_pos hn]
     exact (contDiff_referenceRadialCoefficient hF n).sub
       (contDiff_const.mul (referenceColumn_contDiff hgeom hborder))
-  · simpa only [referenceCoefficientForcing, if_neg hn, sub_zero] using
+  · simpa only [if_neg hn, sub_zero] using
       contDiff_referenceRadialCoefficient hF n
 
 /-- Every angular coefficient of a graph with a smooth source has a

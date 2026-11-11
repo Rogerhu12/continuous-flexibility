@@ -68,7 +68,7 @@ private theorem modelReturnAt_scaled_tail
     rw [hreal.d_eq n hn]
     have hcast : (n : ℝ) ≤ (max n N : ℕ) := by exact_mod_cast Nat.le_max_left n N
     have hsq : (n : ℝ) ^ 2 ≤ ((max n N : ℕ) : ℝ) ^ 2 := by
-      nlinarith only [hcast, Nat.cast_nonneg n]
+      exact pow_le_pow_left₀ (Nat.cast_nonneg n : (0 : ℝ) ≤ (n : ℝ)) hcast 2
     exact (morseChainInteger_lt n).le.trans
       (add_le_add (exp_le_exp.mpr hsq) (le_refl 2))
   refine ⟨R * l, R * h, max n N, T.d n, htransport.1, ?_,
@@ -89,7 +89,7 @@ private theorem modelReturnAt_scaled_tail
 private theorem two_is_not_nat_square : ¬ ∃ k : ℕ, k ^ 2 = 2 := by
   rintro ⟨k, hk⟩
   by_cases hk0 : k = 0
-  · simp only [hk0, zero_pow (by decide)] at hk
+  · simp only [hk0, zero_pow (by decide : (2 : ℕ) ≠ 0)] at hk
     omega
   by_cases hk1 : k = 1
   · simp only [hk1, one_pow] at hk
@@ -172,13 +172,13 @@ theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry
       ModelReturnAt F r := by
     have hrG : r ∈ Ioo (G.radiusL * D.a) (G.radiusR * D.b) := by
       change E₀.a < r ∧ r < E₀.b at hr
-      simpa only [hEa, hEb] using hr
+      simpa only [Set.mem_Ioo, hEa, hEb] using hr
     have hnegG : deriv G.profile r < 0 := by
       change deriv E₀.w r < 0 at hneg
       simpa only [hEw] using hneg
     rcases G.negative_deriv_cases hq hrG hnegG with hleft | hmiddle | hright
     · obtain ⟨s, hs, rfl, hsneg⟩ := hleft
-      apply modelReturnAt_scaled_tail hreal hσ false hstart hN
+      apply modelReturnAt_scaled_tail (E := F) hreal hσ false hstart hN
         G.radiusL_pos G.heightL_pos hGeo₀.2.2.1.1
         (by simpa only [radialTailInterval, Bool.false_eq_true, ↓reduceIte, ← hcseam]
           using hleftCore)
@@ -211,7 +211,7 @@ theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry
       · intro t ht
         exact hcentralCover t (Ioo_subset_Icc_self ht)
     · obtain ⟨s, hs, rfl, hsneg⟩ := hright
-      apply modelReturnAt_scaled_tail hreal hσ true hstart hN
+      apply modelReturnAt_scaled_tail (E := F) hreal hσ true hstart hN
         hRR G.heightR_pos hGeo₀.2.2.1.1
         (by simpa only [radialTailInterval, ↓reduceIte, ← hdseam] using hrightCore)
         (by
@@ -229,7 +229,7 @@ theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry
     rw [hEw, hEphi]
     apply G.equation r
     change E₀.a < r ∧ r < E₀.b at hr
-    simpa only [hEa, hEb] using hr
+    simpa only [Set.mem_Ioo, hEa, hEb] using hr
   · exact radialReturnMargins_saturate_of_model_components hmodels
 
 end ContinuousFlexibility.Radial

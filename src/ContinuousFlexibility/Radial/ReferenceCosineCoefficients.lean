@@ -67,8 +67,10 @@ theorem memLp_referenceRadialCoefficient_prod {μ : Measure ℝ} [SFinite μ]
   apply (memLp_two_iff_integrable_sq hm).mpr
   apply (integrable_radialAngularMean_sq hu).mono' (hm.pow 2)
   filter_upwards [memLp_two_prod_sections hu] with r hr
-  simpa only [Real.norm_of_nonneg (sq_nonneg _), referenceRadialCoefficient] using
-    referenceAngularCoefficient_sq_le hr n
+  change ‖referenceRadialCoefficient u n r ^ 2‖ ≤
+    radialAngularMean (fun θ => u (r, θ) ^ 2)
+  rw [Real.norm_of_nonneg (sq_nonneg _)]
+  exact referenceAngularCoefficient_sq_le hr n
 
 theorem integral_referenceRadialCoefficient_sq_le_prod {μ : Measure ℝ} [SFinite μ]
     {u : PolarPoint → ℝ}
