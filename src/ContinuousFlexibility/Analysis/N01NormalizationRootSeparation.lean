@@ -96,7 +96,7 @@ theorem n01_chi_eventuallyEq_zero_at_critical
   filter_upwards [hroot, isOpen_Ioo.mem_nhds hr] with x hx hxi
   have he : Real.exp (t * D.chi x) = 1 :=
     mul_left_cancel₀ (hwpos x hxi).ne' (hx.trans (mul_one (D.w x)).symm)
-  have hzero : t * D.chi x = 0 := Real.exp_eq_one_iff.mp he
+  have hzero : t * D.chi x = 0 := Real.exp_injective (he.trans Real.exp_zero.symm)
   exact (mul_eq_zero.mp hzero).resolve_left ht.ne'
 
 theorem n01_critical_not_mem_tsupport_chi

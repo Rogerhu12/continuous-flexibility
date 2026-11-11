@@ -59,7 +59,11 @@ theorem exists_rootPhysicalFlow_on_Icc
     simp only [rootPhysicalSpeed, hdperiod r θ, hc₀period r θ]
   · intro r _ θ
     dsimp only [D]
-    rw [fderiv_periodic_snd hdperiod r θ, fderiv_periodic_snd hc₀period r θ]
+    have hdper : fderiv ℝ d (r, θ + T) = fderiv ℝ d (r, θ) :=
+      fderiv_periodic_snd hdperiod r θ
+    have hcper : fderiv ℝ c₀ (r, θ + T) = fderiv ℝ c₀ (r, θ) :=
+      fderiv_periodic_snd hc₀period r θ
+    rw [hdper, hcper]
   · intro r _ θ
     have hp : HasDerivAt (fun η : ℝ => (r, η)) (0, 1) θ :=
       (hasDerivAt_const θ r).prodMk (hasDerivAt_id θ)
@@ -101,7 +105,9 @@ theorem rootPhysicalFlow_squareTime_hasDerivWithinAt
         (t, ((x, σ * x ^ (3 / 2 : ℝ)), Φ θ (x * t ^ 2))))
       (Icc (0 : ℝ) 1) t := by
   have hg : HasDerivAt (fun s : ℝ => x * s ^ 2) (2 * x * t) t := by
-    convert ((hasDerivAt_id t).pow 2).const_mul x using 1 <;> ring
+    have hpow := ((hasDerivAt_id t).pow 2).const_mul x
+    simp only [Pi.pow_apply, id_eq] at hpow
+    exact hpow.congr_deriv (by norm_num <;> ring)
   have hc := (hΦ θ _ (root_squareTime_mem hx ht)).comp t hg.hasDerivWithinAt
     (fun s hs => root_squareTime_mem hx hs)
   have he : (Φ θ) ∘ (fun s : ℝ => x * s ^ 2) =

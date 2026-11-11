@@ -34,7 +34,10 @@ def circleFlowClampedVariationKernel (A Θ : PolarPoint → ℝ)
 theorem circleFlowClampedVariationKernel_eq {A Θ : PolarPoint → ℝ} {a b t : ℝ}
     (ht : t ∈ Icc a b) :
     circleFlowClampedVariationKernel A Θ a b t = circleFlowVariationKernel A Θ t := by
-  simp only [circleFlowClampedVariationKernel, min_eq_left ht.2, max_eq_right ht.1]
+  funext θ
+  change circleFlowVariationKernel A Θ (max a (min t b)) θ =
+    circleFlowVariationKernel A Θ t θ
+  rw [min_eq_left ht.2, max_eq_right ht.1]
 
 variable {P : ℝ} [hP : Fact (0 < P)] {G Θ A : PolarPoint → ℝ} {a b : ℝ}
   (hG : ContDiff ℝ ∞ G)
@@ -75,9 +78,16 @@ theorem circleFlowVariationKernel_continuousOn_angularJet
       (circleFlowCompactTime_mem hab)
     have hJ : ContDiff ℝ ∞ (fun p : PolarPoint =>
         deriv (fun η => Θ (circleFlowCompactTime a b p.1, η)) p.2) := by
-      simpa only [Statements.mixedDerivative, iteratedDeriv_zero, iteratedDeriv_one] using
-        contDiffOn_univ.mp
-          (Statements.contDiffOn_mixedDerivative isOpen_univ hΨ.contDiffOn 0 1)
+      have he : Statements.mixedDerivative 0 1
+          (fun p : PolarPoint => Θ (circleFlowCompactTime a b p.1, p.2)) =
+          (fun p : PolarPoint =>
+            deriv (fun η => Θ (circleFlowCompactTime a b p.1, η)) p.2) := by
+        funext p
+        simp only [Statements.mixedDerivative, iteratedDeriv_zero, iteratedDeriv_one]
+      have hc := contDiffOn_univ.mp
+        (Statements.contDiffOn_mixedDerivative isOpen_univ hΨ.contDiffOn 0 1)
+      rw [he] at hc
+      exact hc
     have hJn (p : PolarPoint) :
         deriv (fun η => Θ (circleFlowCompactTime a b p.1, η)) p.2 ≠ 0 :=
       ne_of_gt ((Real.exp_pos _).trans_le
@@ -129,8 +139,8 @@ theorem circleFlowClampedVariationKernel_continuous_angularJet
       iteratedDeriv n (circleFlowClampedVariationKernel A Θ a b p.1) p.2) := by
   have hc : Continuous (fun t : ℝ => max a (min t b)) :=
     continuous_const.max (continuous_id.min continuous_const)
-  exact (circleFlowVariationKernel_continuousOn_angularJet hG hperiod hΘ hinit hflow hA n).
-    comp_continuous ((hc.comp continuous_fst).prodMk continuous_snd)
+  exact (circleFlowVariationKernel_continuousOn_angularJet hG hperiod hΘ hinit hflow hA n).comp_continuous
+    ((hc.comp continuous_fst).prodMk continuous_snd)
       (fun p => ⟨⟨le_max_left _ _, max_le hab (min_le_right _ _)⟩, mem_univ p.2⟩)
 
 end ContinuousFlexibility.Analysis
