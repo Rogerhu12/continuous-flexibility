@@ -49,7 +49,9 @@ def bufferL2IndicatorCLM (s : Set ℝ) (hs : MeasurableSet s) : RadialL2 →L[�
           Lp.coeFn_add u v,
           Lp.coeFn_add (bufferL2Indicator s hs u) (bufferL2Indicator s hs v)]
           with x hsum hu hv h0 h1
-        rw [hsum, h1, hu, hv]
+        rw [hsum, h1]
+        simp only [Pi.add_apply]
+        rw [hu, hv]
         by_cases hxs : x ∈ s
         · simp only [Set.indicator_of_mem hxs]
           exact h0
@@ -68,7 +70,9 @@ def bufferL2IndicatorCLM (s : Set ℝ) (hs : MeasurableSet s) : RadialL2 →L[�
         · simp only [Set.indicator_of_mem hxs]
           exact h0
         · simp only [Set.indicator_of_notMem hxs, smul_zero] }
-  exact L.mkContinuous 1 (fun u => by simpa only [one_mul] using bufferL2Indicator_norm_le s hs u)
+  exact L.mkContinuous 1 (fun u => by
+    change ‖bufferL2Indicator s hs u‖ ≤ 1 * ‖u‖
+    simpa only [one_mul] using bufferL2Indicator_norm_le s hs u)
 
 @[simp] theorem bufferL2IndicatorCLM_apply (s : Set ℝ) (hs : MeasurableSet s) (u : RadialL2) :
     bufferL2IndicatorCLM s hs u = bufferL2Indicator s hs u := rfl
@@ -127,8 +131,8 @@ theorem weakRadialDerivative_unique {u d e : RadialL2}
   intro φ hφ hc
   have hdφ := hd φ hφ hc
   have heφ := he φ hφ hc
-  simp only [smul_eq_mul, mul_comm]
-  linarith
+  have hde : (∫ x : ℝ, d x * φ x) = ∫ x : ℝ, e x * φ x := by linarith
+  simpa only [smul_eq_mul, mul_comm] using hde
 
 theorem schrodingerEnergyLift_coordinates_unique {V : ℝ → ℝ}
     {u d e q r : RadialL2} (hu : (u, d, q) ∈ SchrodingerEnergyLift V)

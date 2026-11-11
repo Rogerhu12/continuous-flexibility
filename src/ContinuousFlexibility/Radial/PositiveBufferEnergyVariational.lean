@@ -42,19 +42,19 @@ theorem positiveBuffer_eq_zero_of_energy_eq_zero
   obtain ⟨c, hc, hco⟩ := hB
   have h := hco u
   rw [hu] at h
-  have hn : ‖u‖ = 0 := by
-    nlinarith [norm_nonneg u]
-  exact norm_eq_zero.mp hn
+  by_contra hne
+  have hn : 0 < ‖u‖ := norm_pos_iff.mpr hne
+  exact (not_le_of_gt (mul_pos (mul_pos hc hn) hn)) h
 
 /-- The variational Dirichlet problem on an affine translate of a closed
 zero-boundary subspace has exactly one solution. -/
-theorem positiveBuffer_exists_unique_stationary [CompleteSpace E]
-    (B : E →L[ℝ] E →L[ℝ] ℝ) (hB : IsCoercive B)
-    (K : Submodule ℝ E) (hK : IsClosed (K : Set E)) (lift : E) :
+theorem positiveBuffer_exists_unique_stationary_of_restrict [CompleteSpace E]
+    (B : E →L[ℝ] E →L[ℝ] ℝ)
+    (K : Submodule ℝ E) (hK : IsClosed (K : Set E))
+    (hBK : IsCoercive (B.bilinearComp K.subtypeL K.subtypeL)) (lift : E) :
     ∃! u : E, u - lift ∈ K ∧ ∀ v : E, v ∈ K → B u v = 0 := by
   letI : CompleteSpace K := hK.completeSpace_coe
   let BK : K →L[ℝ] K →L[ℝ] ℝ := B.bilinearComp K.subtypeL K.subtypeL
-  have hBK : IsCoercive BK := positiveBuffer_restrict_isCoercive B hB K
   let ell : K →L[ℝ] ℝ := (B lift).comp K.subtypeL
   let z : K := hBK.continuousLinearEquivOfBilin.symm ((toDual ℝ K).symm ell)
   have hz (v : K) : B (z : E) (v : E) = B lift (v : E) := by
@@ -75,7 +75,7 @@ theorem positiveBuffer_exists_unique_stationary [CompleteSpace E]
     exact K.neg_mem z.property
   have hu (v : E) (hv : v ∈ K) : B u v = 0 := by
     dsimp [u]
-    rw [map_sub, ContinuousLinearMap.sub_apply]
+    rw [map_sub B lift (z : E), ContinuousLinearMap.sub_apply]
     exact sub_eq_zero.mpr (hz ⟨v, hv⟩).symm
   refine ⟨u, ⟨huK, hu⟩, ?_⟩
   rintro w ⟨hwK, hw⟩
@@ -84,8 +84,20 @@ theorem positiveBuffer_exists_unique_stationary [CompleteSpace E]
     rw [he]
     exact K.sub_mem hwK huK
   have hd : B (w - u) (w - u) = 0 := by
-    rw [map_sub, ContinuousLinearMap.sub_apply, hw _ hdK, hu _ hdK, sub_self]
-  exact sub_eq_zero.mp (positiveBuffer_eq_zero_of_energy_eq_zero B hB hd)
+    rw [map_sub B w u, ContinuousLinearMap.sub_apply, hw _ hdK, hu _ hdK, sub_self]
+  have hzero : (⟨w - u, hdK⟩ : K) = 0 :=
+    positiveBuffer_eq_zero_of_energy_eq_zero BK hBK
+      (by simpa only [BK, ContinuousLinearMap.bilinearComp_apply,
+        Submodule.subtypeL_apply] using hd)
+  exact sub_eq_zero.mp (congrArg (fun z : K => (z : E)) hzero)
+
+/-- Global coercivity is a sufficient condition for the preceding result. -/
+theorem positiveBuffer_exists_unique_stationary [CompleteSpace E]
+    (B : E →L[ℝ] E →L[ℝ] ℝ) (hB : IsCoercive B)
+    (K : Submodule ℝ E) (hK : IsClosed (K : Set E)) (lift : E) :
+    ∃! u : E, u - lift ∈ K ∧ ∀ v : E, v ∈ K → B u v = 0 :=
+  positiveBuffer_exists_unique_stationary_of_restrict B K hK
+    (positiveBuffer_restrict_isCoercive B hB K) lift
 
 /-- Exact energy decomposition around a stationary field. This is the
 variational identity used for both the finite buffer and the exterior. -/
@@ -98,7 +110,8 @@ theorem positiveBuffer_stationary_energy_identity
   have hcross' : B (v - u) u = 0 := (hBsymm _ _).trans hcross
   have he : v = u + (v - u) := by abel
   conv_lhs => rw [he]
-  rw [map_add, ContinuousLinearMap.add_apply, map_add, map_add, hcross, hcross']
+  rw [map_add B u (v - u), ContinuousLinearMap.add_apply,
+    map_add (B u) u (v - u), map_add (B (v - u)) u (v - u), hcross, hcross']
   ring
 
 /-- A stationary field minimizes every symmetric coercive energy, with
