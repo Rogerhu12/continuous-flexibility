@@ -90,7 +90,6 @@ private theorem n07b_uniform_referenceBulkBound_on_smaller
   simpa only [n07bReferenceBulkCoefficient, n07b_canonicalPrimitiveDirection_one,
     n07b_canonicalPrimitiveDirection_two] using h
 
-set_option diagnostics true in
 /-- Choose the common source and coefficient neighborhood without a Banach
 graph or scalar inverse in the elaboration context. -/
 private theorem n07b_common_lifts_on_smaller
@@ -107,11 +106,9 @@ private theorem n07b_common_lifts_on_smaller
       N07bReferenceSourceLiftProperty S C K V b ∧
       N07bUniformSourceLift S C K V b base' ε' Cs ∧
       N07bUniformReferenceBulkBound D T S C K b base' ε' Ar := by
-  run_tac Lean.logInfo "N07b common lifts: entered"
   obtain ⟨bs, εs, Cs, hbs, hεs, hεsle, _, hCs, hsource⟩ :=
     n07b_sourceLift_of_geometric_contract hD hT hS hV hK hε hgeom b
   have hsourceNamed : N07bUniformSourceLift S C K V b bs εs Cs := hsource
-  run_tac Lean.logInfo "N07b common lifts: source constants obtained"
   obtain ⟨br, εr, Ar, hbr, hεr, hεrle, hAr, hcoeff⟩ :=
     n07b_uniform_referenceBulkBound_on_smaller hD hT hK hε hgeom hsref b
   let base' : ℕ := max bs br
@@ -123,7 +120,6 @@ private theorem n07b_common_lifts_on_smaller
     n06_stateNeighborhood_mono (le_max_left _ _) (min_le_left _ _)
   have hUr : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C br εr :=
     n06_stateNeighborhood_mono (le_max_right _ _) (min_le_right _ _)
-  run_tac Lean.logInfo "N07b common lifts: neighborhoods intersected"
   refine ⟨base', ε', Cs, Ar, hbase', hε', hε'le, hCs, hAr, ?_, ?_, ?_⟩
   · intro f
     obtain ⟨F, _, hF⟩ := hsourceNamed (C.referenceState, 0)
@@ -181,7 +177,6 @@ private def N07bUniformIdentification
       N07bScalarBridgeConclusion D S C K V b B P z F
         ((G.G z).toLinearMap.toFun f) ((S.height (3 / 4 : ℝ)).decode.toFun f.val)
 
-set_option diagnostics true in
 /-- Perform the physical identification before assembling any uniform
 norm estimate or unfolding the bridge's existential conclusion. -/
 private theorem n07b_uniformIdentification_of_geometric_lifts
@@ -198,11 +193,8 @@ private theorem n07b_uniformIdentification_of_geometric_lifts
     (hreferenceSource : N07bReferenceSourceLiftProperty S C K V b)
     (hcoeff : N07bUniformReferenceBulkBound D T S C K b base' ε' Ar) :
     N07bUniformIdentification D S C K V b B P G base' ε' := by
-  run_tac Lean.logInfo "N07b uniform identification: entered"
   have href := n07b_reference_mem_stateNeighborhood S C base h06.1
-  run_tac Lean.logInfo "N07b uniform identification: reference state obtained"
   intro z hz hs f F hF
-  run_tac Lean.logInfo "N07b uniform identification: pointwise data introduced"
   exact n07b_scalarInverse_banach_identification hD hT hS hborder hK h05 h06 hG
     hgeom href hsref hreferenceSource (hU hz) hs hAr (hcoeff z hz hs) f F hF
 
@@ -220,7 +212,12 @@ private theorem n07b_scalarBanachBridge_of_source_and_identification
   run_tac Lean.logInfo "N07b bridge packaging: constants supplied"
   intro z hz hs f
   run_tac Lean.logInfo "N07b bridge packaging: state and source introduced"
-  obtain ⟨F, hFnorm, hF⟩ := hsource z hz hs f
+  let hactual := hsource z hz hs f
+  run_tac Lean.logInfo "N07b bridge packaging: source existence instantiated"
+  let F : V.level (3 / 4 : ℝ) 0 b := Classical.choose hactual
+  run_tac Lean.logInfo "N07b bridge packaging: source witness chosen"
+  have hFnorm := (Classical.choose_spec hactual).1
+  have hF := (Classical.choose_spec hactual).2
   run_tac Lean.logInfo "N07b bridge packaging: actual source obtained"
   have hnorm := n07b_source_bound_with_gradings S (b + 1)
     (z.1 - C.referenceState) f (N := ‖F‖) (C₀ := Cs) (q := z.2) hFnorm hCs.le
@@ -256,7 +253,6 @@ private theorem n07b_scalarBanachBridge_of_uniform_lifts
 
 end UniformAssembly
 
-set_option diagnostics true in
 theorem n07b_exists_scalarBanachBridge_on_smaller
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -273,14 +269,11 @@ theorem n07b_exists_scalarBanachBridge_on_smaller
     (hsref : stateSector S C.referenceState) :
     ∃ base' : ℕ, ∃ ε' : ℝ, base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧
       ScalarBanachBridgeProperties D S C K V b B P G base' ε' := by
-  run_tac Lean.logInfo "N07b final neighborhood: entered"
   obtain ⟨base', ε', Cs, Ar, hb, hε', hεle, hCs, hAr, hreferenceSource, hsource, hcoeff⟩ :=
     n07b_common_lifts_on_smaller hD hT hS h05.2.1 hK h06.1 hgeom hsref b
-  run_tac Lean.logInfo "N07b final neighborhood: common data obtained"
   have hbridge : ScalarBanachBridgeProperties D S C K V b B P G base' ε' :=
     n07b_scalarBanachBridge_of_uniform_lifts hD hT hS hborder hK h05 h06 hG hgeom
       hsref (n06_stateNeighborhood_mono hb hεle) hCs hAr hreferenceSource hsource hcoeff
-  run_tac Lean.logInfo "N07b final neighborhood: bridge obtained"
   exact ⟨base', ε', hb, hε', hεle, hbridge⟩
 
 end ContinuousFlexibility.Analysis
