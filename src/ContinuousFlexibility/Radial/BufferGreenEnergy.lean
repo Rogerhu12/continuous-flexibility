@@ -135,13 +135,20 @@ theorem positiveBufferGreenKernel_exists_energy {B : BufferData} (hB : BufferHyp
     rw [neg_zero, hpout0, positiveBufferCutoff_one (by linarith [buffer_action_pos hB i]), hpin0, mul_one]
   have hu' : (u : ℝ → ℝ) =ᵐ[volume]
       (fun x => A⁻¹ * bufferCutGlue 0 pL pR ((-bufferSign i * B.mass i) * (x - bufferCut B i))) := by
+    filter_upwards [hu] with x hx
+    change u x = A⁻¹ * bufferCutGlue 0 pL pR
+      ((-bufferSign i * B.mass i) * (x - bufferCut B i))
     simpa only [pL, pR, positiveBufferGreenKernel, positiveBufferGreenProfile,
-      positiveBufferCoordinate] using hu
+      positiveBufferCoordinate] using hx
   have hd' : (d : ℝ → ℝ) =ᵐ[volume]
       (fun x => A⁻¹ * (-bufferSign i * B.mass i) *
         bufferCutGlue 0 (deriv pL) (deriv pR) ((-bufferSign i * B.mass i) * (x - bufferCut B i))) := by
+    filter_upwards [hd] with x hx
+    change d x = A⁻¹ * (-bufferSign i * B.mass i) *
+      bufferCutGlue 0 (deriv pL) (deriv pR)
+        ((-bufferSign i * B.mass i) * (x - bufferCut B i))
     simpa only [pL, pR, positiveBufferGreenKernelDerivative, positiveBufferGreenProfileDerivative,
-      positiveBufferCoordinate] using hd
+      positiveBufferCoordinate] using hx
   have hr : (fun x => A⁻¹ * (-bufferSign i * B.mass i) ^ 2 *
       bufferCutGlue 0 (deriv (deriv pL)) (deriv (deriv pR))
         ((-bufferSign i * B.mass i) * (x - bufferCut B i))) =ᵐ[volume]
@@ -183,6 +190,9 @@ theorem positiveBufferGreenKernel_exists_energy {B : BufferData} (hB : BufferHyp
     (fun φ hφ hcφ => by
       have h := hidentity φ hφ hcφ
       rw [hjump, one_mul] at h
-      exact h) v
+      change (∫ x : ℝ, d x * deriv φ x) +
+        (∫ x : ℝ, B.potential x * u x * φ x) =
+          (∫ x : ℝ, f x * φ x) + 1 * φ (bufferCut B i)
+      simpa only [one_mul] using h) v
   simpa only [one_mul] using h
 end ContinuousFlexibility.Radial
