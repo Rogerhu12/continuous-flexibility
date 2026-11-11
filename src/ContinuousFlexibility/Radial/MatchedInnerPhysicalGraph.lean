@@ -41,15 +41,23 @@ theorem matchedInnerChain_piece_Icc_subset {D : ReferenceData} {n : ℕ}
     (G : InnerRadialChainGeometry D n) (p : Fin (n + 1)) :
     Icc (G.left p) (G.right p) ⊆ Icc (G.left 0) (G.right (Fin.last n)) := by
   intro r hr
-  exact ⟨(G.increasing.monotone (show (0 : Fin (n + 1)).castSucc ≤ p.castSucc by omega)).trans hr.1,
-    hr.2.trans (G.increasing.monotone (show p.succ ≤ (Fin.last n).succ by omega))⟩
+  exact ⟨(G.increasing.monotone (show (0 : Fin (n + 1)).castSucc ≤ p.castSucc by
+      change (0 : ℕ) ≤ p.val
+      exact Nat.zero_le _)).trans hr.1,
+    hr.2.trans (G.increasing.monotone (show p.succ ≤ (Fin.last n).succ by
+      change p.val + 1 ≤ n + 1
+      omega))⟩
 
 theorem matchedInnerChain_piece_Ioo_subset {D : ReferenceData} {n : ℕ}
     (G : InnerRadialChainGeometry D n) (p : Fin (n + 1)) :
     Ioo (G.left p) (G.right p) ⊆ Ioo (G.left 0) (G.right (Fin.last n)) := by
   intro r hr
-  exact ⟨(G.increasing.monotone (show (0 : Fin (n + 1)).castSucc ≤ p.castSucc by omega)).trans_lt hr.1,
-    hr.2.trans_le (G.increasing.monotone (show p.succ ≤ (Fin.last n).succ by omega))⟩
+  exact ⟨(G.increasing.monotone (show (0 : Fin (n + 1)).castSucc ≤ p.castSucc by
+      change (0 : ℕ) ≤ p.val
+      exact Nat.zero_le _)).trans_lt hr.1,
+    hr.2.trans_le (G.increasing.monotone (show p.succ ≤ (Fin.last n).succ by
+      change p.val + 1 ≤ n + 1
+      omega))⟩
 
 theorem matchedInnerPhysicalSource_supported (D : ReferenceData) {n : ℕ}
     (G : InnerRadialChainGeometry D n) (bordered : Bool)
@@ -87,8 +95,8 @@ theorem matchedInnerChain_sum_ae_piece {D : ReferenceData} {n : ℕ}
       (Lp.coeFn_fun_finsetSum Finset.univ (fun k => (q k).1)),
     ae_restrict_of_ae (ae_all_iff.mpr hz), ae_restrict_mem measurableSet_Ioo]
       with r hsum hr hrp
-  rw [hsum, Finset.sum_eq_single p]
-  · rfl
+  rw [hsum]
+  apply Finset.sum_eq_single p
   · intro k _ hkp
     exact hr k (fun hrk =>
       Set.disjoint_left.mp (innerRadialChainPieces_disjoint D G hkp) hrk hrp)
@@ -151,7 +159,9 @@ theorem matchedInnerPhysicalWeakGraph_to_modeGraph {D : ReferenceData}
     simpa only [← hUval, ← hUscalar] using hrow₀
   have hm : M.innerLeft < M.innerRight := by
     rw [hleft, hright]
-    exact G.increasing (show (0 : Fin (n + 1)).castSucc < (Fin.last n).succ by omega)
+    exact G.increasing (show (0 : Fin (n + 1)).castSucc < (Fin.last n).succ by
+      change (0 : ℕ) < n + 1
+      exact Nat.zero_lt_succ n)
   obtain ⟨u, c, hu, hrep, _, _, _⟩ :=
     modeLocalEquation_contDiff_representative_on_compact hD hB hEq hm hsub (fun _ hr => hr)
   have hrep' : (((∑ p, (q p).1) : RadialModeL2 D) : ℝ → ℝ)
@@ -175,7 +185,7 @@ theorem matchedInnerPhysicalWeakGraph_to_modeGraph {D : ReferenceData}
     have h := matchedInnerH1Domain_trace_of_representative hD hw.continuous
       (G.left_lt_right p) (G.left_pos p) (hpcore p) (G.weight_pos p)
       (hξ p).1 hu.continuous.continuousOn hrepP
-    simpa only [(hξ p).2] using h
+    exact ⟨h.1.trans (congrFun (hξ p).2 0), h.2.trans (congrFun (hξ p).2 1)⟩
   have hua : u M.innerLeft = 0 := by
     rw [hleft, (hptrace 0).1, (innerChainBoundaryRestriction_outer n ξ).1]
   have hub : u M.innerRight = 0 := by

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.IntervalWeakPrimitive
+import Mathlib.Analysis.Calculus.Deriv.Shift
 import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
 
 /-!
@@ -50,14 +51,12 @@ theorem HasIntervalWeakDerivative.reflect {a b : ℝ} {p g : ℝ → ℝ}
     change -b < -x ∧ -x < -a at hxψ
     constructor <;> linarith only [hxψ.1, hxψ.2]
   have hdφ (x : ℝ) : deriv φ x = -(deriv ψ (-x)) := by
-    have hd := ((hψ.differentiable (by simp) (-x)).hasDerivAt.comp x
-      (hasDerivAt_neg x)).deriv
-    simpa only [Function.comp_apply, mul_neg_one] using hd
+    exact deriv_comp_neg ψ x
   have hleft : (∫ x, p x * deriv φ x) = ∫ x, -p (-x) * deriv ψ x := by
     calc
       _ = ∫ x, -p x * deriv ψ (-x) := by
         apply integral_congr_ae
-        exact ae_of_all _ (fun x => by rw [hdφ]; ring)
+        exact ae_of_all _ (fun x => by dsimp only; rw [hdφ]; ring)
       _ = _ := by
         simpa only [neg_neg] using
           (integral_neg_eq_self (fun x : ℝ => -p (-x) * deriv ψ x) volume)
