@@ -90,7 +90,9 @@ theorem r11b_physical_square_integral_le_of_angular {D : ReferenceData}
           ∂volume.restrict (radialCore D) :=
     integral_mono_ae hgi hfi hpoint
   rw [hgeq, hfeq] at h
-  exact (mul_le_mul_left (by positivity : 0 < 1 / (2 * Real.pi))).mp h
+  exact le_of_not_gt fun hgt =>
+    (not_lt_of_ge h) (mul_lt_mul_of_pos_left hgt
+      (by positivity : 0 < 1 / (2 * Real.pi)))
 
 theorem r11b_finiteProjection_angular_square_le {D : ReferenceData}
     {ι : Type*} [DecidableEq ι] (s : Finset ι) (e : ι → ℝ → ℝ)

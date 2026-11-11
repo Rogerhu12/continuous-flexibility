@@ -35,10 +35,11 @@ theorem interval_cutoff_caccioppoli_on_set {a b : ℝ} (hab : a < b)
       7 * K ^ 2 * L ^ 2 * ((∫ x in s, f x ^ 2) +
         (1 + j ^ 2) * (∫ x in s, u x ^ 2)) := by
   have hχI : tsupport χ ⊆ Ioo a b := hχs.trans hsI
+  have hpot : ContinuousOn (fun x => j ^ 2 * c x * u x) (Ioo a b) :=
+    (continuousOn_const.mul hc).mul hu.continuousOn
   have hloc : LocallyIntegrableOn
       (fun x => f x + j ^ 2 * c x * u x) (Ioo a b) volume :=
-    hfloc.add (((continuousOn_const.mul hc).mul hu.continuousOn)
-      .locallyIntegrableOn measurableSet_Ioo)
+    hfloc.add (hpot.locallyIntegrableOn (μ := volume) measurableSet_Ioo)
   have hud : ContinuousOn (deriv u) (Ioo a b) :=
     continuousOn_deriv_of_contDiffOn_one_Ioo hu
   have hχd : Continuous (deriv χ) := (contDiff_infty_iff_deriv.mp hχ).2.continuous

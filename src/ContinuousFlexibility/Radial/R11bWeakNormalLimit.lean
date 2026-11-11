@@ -41,8 +41,8 @@ theorem r11b_tendsto_angularMean_pairing_of_L2_tendsto
   have hfun : (fun n => ∫ r in D.a..D.b,
       radialAngularMean (fun θ => f n (r, θ) * p (r, θ))) =
         (fun n => (2 * Real.pi)⁻¹ * ∫ x, f n x * p x ∂radialPhysicalMeasure D) :=
-    funext fun n => r11b_integral_angularMean_eq hab ((hf n).integrable_mul hp)
-  rw [hfun, r11b_integral_angularMean_eq hab (hu.integrable_mul hp)]
+    funext fun n => r11b_integral_angularMean_mul_eq hab (hf n) hp
+  rw [hfun, r11b_integral_angularMean_mul_eq hab hu hp]
   exact tendsto_const_nhds.mul (r11b_tendsto_integral_mul_of_L2_tendsto hf hu hp hlim)
 
 theorem r11b_weakNormalDerivative_of_L2_tendsto

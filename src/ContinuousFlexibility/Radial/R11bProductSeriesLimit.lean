@@ -14,6 +14,13 @@ namespace ContinuousFlexibility.Radial
 open Filter MeasureTheory
 open scoped BigOperators Topology
 
+theorem r11b_toLp_eq_of_coeFn_ae
+    {α : Type*} [MeasurableSpace α] {μ : Measure α}
+    {f : α → ℝ} (hf : MemLp f 2 μ) (u : Lp ℝ 2 μ)
+    (huf : (u : α → ℝ) =ᵐ[μ] f) : hf.toLp f = u := by
+  apply Lp.ext
+  exact hf.coeFn_toLp.trans huf.symm
+
 variable {α β : Type*} [MeasurableSpace α] [MeasurableSpace β]
 variable {μ : Measure α} {ν : Measure β} [SFinite μ] [SFinite ν]
 
@@ -28,10 +35,10 @@ theorem r11b_tensor_finset_sum_toLp
     (hc : ∀ n, MemLp (c n) 2 μ) (he : ∀ n, MemLp (e n) 2 ν) (s : Finset ℕ) :
     (r11b_tensor_finset_sum_memLp c e hc he s).toLp
       (fun z => ∑ i ∈ s, c i z.1 * e i z.2) =
-        ∑ i ∈ s, r11bTensorL2 (hc i) (he i) := by
-  apply Lp.ext
-  exact (r11b_tensor_finset_sum_memLp c e hc he s).coeFn_toLp.trans
-    (r11b_tensor_finset_sum_coeFn c e hc he s).symm
+        ∑ i ∈ s, r11bTensorL2 (hc i) (he i) :=
+  r11b_toLp_eq_of_coeFn_ae (r11b_tensor_finset_sum_memLp c e hc he s)
+    (∑ i ∈ s, r11bTensorL2 (hc i) (he i))
+    (r11b_tensor_finset_sum_coeFn c e hc he s)
 
 theorem r11b_product_orthogonal_partialSums_tendsto
     (c : ℕ → α → ℝ) (e : ℕ → β → ℝ)

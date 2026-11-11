@@ -71,7 +71,8 @@ theorem interval_weak_forcing_expand {a b : ℝ} (hab : a ≤ b)
         (∫ x in a..b, u x * (V x * φ x)) -
           κ * (∫ x in a..b, g x * φ x) := by
   have hfφ := intervalIntegrable_mul_continuous hab hf hφ
-  have huVφ := intervalIntegrable_mul_continuous hab hu (hV.mul hφ)
+  have huVφ : IntervalIntegrable (fun x => u x * (V x * φ x)) volume a b :=
+    intervalIntegrable_mul_continuous hab hu (hV.mul hφ)
   have hgφ : IntervalIntegrable (fun x => g x * φ x) volume a b :=
     (hg.mul hφ).intervalIntegrable _ _
   have heq : (fun x => (f x + u x * V x - κ * g x) * φ x) =

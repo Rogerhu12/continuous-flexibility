@@ -64,8 +64,9 @@ theorem r11b_scalar_normal_pairing {D : ReferenceData} (hab : D.a < D.b)
       ∫ r, d r * ψ (r, θ) := by
     apply setIntegral_eq_integral_of_forall_compl_eq_zero
     intro r hr
-    have hz : ψ (r, θ) = 0 :=
-      image_eq_zero_of_notMem_tsupport (fun hs => hr (hφs hs))
+    have hz : ψ (r, θ) = 0 := by
+      by_contra hne
+      exact hr (hφs (subset_tsupport (fun t => ψ (t, θ)) hne))
     rw [hz, mul_zero]
   rw [hleft, hright]
   exact hip
@@ -93,8 +94,8 @@ theorem r11b_weakNormalDerivative_tensor {D : ReferenceData} (hab : D.a < D.b)
     r11b_continuous_memLp (r11b_radialTest_radialPartial hψ).1.continuous
   have hleft := hU.integrable_mul hψrLp
   have hright := hV.integrable_mul hψLp
-  rw [r11b_integral_angularMean_eq hab.le hleft,
-    r11b_integral_angularMean_eq hab.le hright]
+  rw [r11b_integral_angularMean_mul_eq hab.le hU hψrLp,
+    r11b_integral_angularMean_mul_eq hab.le hV hψLp]
   have heq : (∫ x, (c x.1 * e x.2) * radialPartial ψ x ∂radialPhysicalMeasure D) =
       -(∫ x, (d x.1 * e x.2) * ψ x ∂radialPhysicalMeasure D) := by
     rw [r11b_radialPhysicalMeasure_eq_prod] at hleft hright ⊢

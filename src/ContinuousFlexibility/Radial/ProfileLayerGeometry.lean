@@ -111,7 +111,7 @@ theorem profileEndpointLayer_index_bound {D : ReferenceData} {C : ℕ → ℝ}
       2 + sqrt |log (2 * C 0)| + sqrt |log (C 0)| := by
   rcases h with ⟨_, _, hC, _, _, _, hdist, _⟩
   let d : ℝ := intervalEndpointDistance D.a D.b r
-  have hC₂ : 0 < 2 * C 0 := by positivity
+  have hC₂ : 0 < 2 * C 0 := mul_pos (by norm_num) (hC 0)
   have hdcell := hdist m r hm
   have hd : 0 < d := (profileLayerLower_pos (hC 0) (D.cellIndex m)).trans_le hdcell.1
   have hnlo : (2 * C 0)⁻¹ * exp (-((n : ℝ) + 1) ^ 2) ≤ d := by

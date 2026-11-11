@@ -68,6 +68,7 @@ private theorem layer_threshold_deriv_le {g : ℝ → ℝ} {x δ B : ℝ}
     (Real.smoothTransition.contDiff : ContDiff ℝ ∞ _).differentiable (by simp)
   have harg := (hg.hasDerivAt.div_const δ).sub_const 1
   have hd := ((hS (g x / δ - 1)).hasDerivAt.comp x harg).deriv
+  simp only [Function.comp_def] at hd
   change |deriv (fun y => Real.smoothTransition (g y / δ - 1)) x| ≤ _
   rw [hd, abs_mul, abs_div, abs_of_pos hδ]
   calc
@@ -101,10 +102,14 @@ theorem intervalLayerCutoff_deriv_le {B a b δ Δ x : ℝ}
   have hk : ContDiff ℝ ∞ k := (contDiff_intervalLayerThreshold Δ).comp
     (contDiff_const.sub contDiff_id)
   have hleft : |deriv (fun y : ℝ => y - a) x| ≤ 1 := by
-    rw [((hasDerivAt_id x).sub_const a).deriv]
+    have hd : deriv (fun y : ℝ => y - a) x = 1 := by
+      simpa only [id_eq] using ((hasDerivAt_id x).sub_const a).deriv
+    rw [hd]
     norm_num
   have hright : |deriv (fun y : ℝ => b - y) x| ≤ 1 := by
-    rw [((hasDerivAt_id x).const_sub b).deriv]
+    have hd : deriv (fun y : ℝ => b - y) x = -1 := by
+      simpa only [id_eq] using ((hasDerivAt_id x).const_sub b).deriv
+    rw [hd]
     norm_num
   have hf₁ : |deriv f x| ≤ B / (δ / 2) :=
     layer_threshold_deriv_le hδh hB hbound
@@ -151,7 +156,7 @@ theorem intervalLayerCutoff_deriv_le {B a b δ Δ x : ℝ}
   calc
     _ ≤ (B / (δ / 2) + B / (δ / 2)) + (B / Δ + B / Δ) := hfinal
     _ ≤ (B / (δ / 2) + B / (δ / 2)) + (B / δ + B / δ) :=
-      add_le_add_left (add_le_add hdiv hdiv) _
+      add_le_add le_rfl (add_le_add hdiv hdiv)
     _ = 6 * B / δ := by ring
 
 /-- A single derivative constant works for every interval and every layer. -/

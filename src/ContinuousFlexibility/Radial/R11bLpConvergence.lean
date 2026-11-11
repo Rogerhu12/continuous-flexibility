@@ -21,7 +21,19 @@ theorem r11b_norm_toLp_sub_sq
     {α : Type*} [MeasurableSpace α] {μ : Measure α}
     {f g : α → ℝ} (hf : MemLp f 2 μ) (hg : MemLp g 2 μ) :
     ‖hf.toLp f - hg.toLp g‖ ^ 2 = ∫ x, (f x - g x) ^ 2 ∂μ := by
-  simpa only [MemLp.toLp_sub, Pi.sub_apply] using r11b_norm_toLp_sq (hf.sub hg)
+  let u : Lp ℝ 2 μ := hf.toLp f - hg.toLp g
+  have hn : ‖u‖ ^ 2 = ∫ x, u x ^ 2 ∂μ := by
+    simpa only [Lp.toLp_coeFn] using r11b_norm_toLp_sq (Lp.memLp u)
+  calc
+    ‖hf.toLp f - hg.toLp g‖ ^ 2 = ∫ x, u x ^ 2 ∂μ := hn
+    _ = ∫ x, (f x - g x) ^ 2 ∂μ := by
+      apply integral_congr_ae
+      filter_upwards [Lp.coeFn_sub (hf.toLp f) (hg.toLp g),
+        hf.coeFn_toLp, hg.coeFn_toLp] with x hx hfx hgx
+      change ((hf.toLp f - hg.toLp g) x) ^ 2 = (f x - g x) ^ 2
+      rw [hx]
+      change ((hf.toLp f) x - (hg.toLp g) x) ^ 2 = (f x - g x) ^ 2
+      rw [hfx, hgx]
 
 /-- Strong convergence of actual L² representatives is equivalent to
 convergence of their squared residual integrals to zero. -/
