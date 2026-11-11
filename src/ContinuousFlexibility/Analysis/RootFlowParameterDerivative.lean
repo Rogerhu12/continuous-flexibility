@@ -94,10 +94,11 @@ theorem rootRegularizedFlow_hasDerivAt_rootParameter_zero
         intro t ht
         have ht' : t ∈ Icc (0 : ℝ) 1 := by
           simpa only [uIcc_of_le zero_le_one] using ht
+        dsimp only
         rw [rootRegularizedFlow_zero_parameters hinit hflow θ ht']
       _ = ((2 : ℝ) / 3) * c₀ (0, θ) := by
         rw [intervalIntegral.integral_mul_const, intervalIntegral.integral_const_mul,
-          intervalIntegral.integral_pow]
+          integral_pow]
         norm_num
   apply hz.congr_deriv
   simpa only [Dθ, Dp, mul_zero, zero_mul, intervalIntegral.integral_zero,

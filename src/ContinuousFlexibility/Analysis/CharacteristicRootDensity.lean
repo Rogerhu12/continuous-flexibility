@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Analysis.CharacteristicPrincipalDensity
 import ContinuousFlexibility.Analysis.ScaledRadialPrincipalDensity
-import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
 
 /-!
 # The explicit height that normalizes a characteristic root chart
@@ -35,6 +35,21 @@ theorem characteristicRootHeight_normalization
   have hp : 0 < A.a x * v x * s x := mul_pos (mul_pos ha hv) hs
   rw [characteristicRootHeight, inv_pow, Real.sq_sqrt hp.le]
   exact inv_mul_cancel₀ (ne_of_gt hp)
+
+/-- The displayed height is smooth wherever its three actual factors
+are smooth and positive. -/
+theorem contDiffAt_characteristicRootHeight
+    {A : SymmetricCoefficients} {v s : PolarPoint → ℝ} {x : PolarPoint}
+    (hA : ContDiffAt ℝ ∞ A.a x) (hv : ContDiffAt ℝ ∞ v x)
+    (hs : ContDiffAt ℝ ∞ s x)
+    (ha0 : 0 < A.a x) (hv0 : 0 < v x) (hs0 : 0 < s x) :
+    ContDiffAt ℝ ∞ (characteristicRootHeight A v s) x := by
+  have hp : 0 < A.a x * v x * s x := mul_pos (mul_pos ha0 hv0) hs0
+  have hprod := (hA.mul hv).mul hs
+  have hroot : ContDiffAt ℝ ∞ (fun y => Real.sqrt (A.a y * v y * s y)) x := by
+    simpa only [Real.sqrt_eq_rpow] using
+      hprod.rpow_const_of_ne (p := (1 / 2 : ℝ)) (ne_of_gt hp)
+  exact hroot.fun_inv (ne_of_gt (Real.sqrt_pos.2 hp))
 
 /-- The diagonal canonical form follows from actual characteristic
 equations, the actual root differential, and the explicit height. -/

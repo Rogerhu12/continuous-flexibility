@@ -93,7 +93,11 @@ theorem parameterizedCircleInverse_period_add
   have hr := parameterizedCircleInverse_right_inverse hT hF hperiod
   apply (strictMono_of_deriv_pos (f := fun φ : ℝ => F (p, φ))
     (fun φ => hpositive (p, φ))).injective
-  rw [hr (p, θ + T), hperiod p (parameterizedCircleInverse F (p, θ)), hr (p, θ)]
+  change F (p, parameterizedCircleInverse F (p, θ + T)) =
+    F (p, parameterizedCircleInverse F (p, θ) + T)
+  exact (hr (p, θ + T)).trans
+    ((hperiod p (parameterizedCircleInverse F (p, θ))).trans
+      (congrArg (fun x : ℝ => x + T) (hr (p, θ)))).symm
 
 /-- Reflection covariance of the forward lifts passes to their actual inverses. -/
 theorem parameterizedCircleInverse_reflect
@@ -107,7 +111,11 @@ theorem parameterizedCircleInverse_reflect
   have hr := parameterizedCircleInverse_right_inverse hT hF hperiod
   apply (strictMono_of_deriv_pos (f := fun φ : ℝ => F (σ p, φ))
     (fun φ => hpositive (σ p, φ))).injective
-  rw [hr (σ p, -θ), hreflect p (parameterizedCircleInverse F (p, θ)), hr (p, θ)]
+  change F (σ p, parameterizedCircleInverse F (σ p, -θ)) =
+    F (σ p, -parameterizedCircleInverse F (p, θ))
+  exact (hr (σ p, -θ)).trans
+    ((hreflect p (parameterizedCircleInverse F (p, θ))).trans
+      (congrArg (fun x : ℝ => -x) (hr (p, θ)))).symm
 
 /-- Its actual angular derivative is the reciprocal forward Jacobian. -/
 theorem hasDerivAt_parameterizedCircleInverse
