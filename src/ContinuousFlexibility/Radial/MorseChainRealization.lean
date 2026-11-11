@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.MorseChainSelectedJets
 import ContinuousFlexibility.Radial.MorseChainPartitionTrace
 import ContinuousFlexibility.Radial.MorseCellCriticalPoints
+import ContinuousFlexibility.Radial.MorseCellMassTravel
 
 /-!
 # Realization of the accumulating Morse chain
@@ -335,6 +336,7 @@ theorem morseChainReference_realization {T : Statements.MorseChainData}
       h - l ≤ C 0 * exp (-(D.cellIndex j : ℝ) ^ 2)) →
     (∀ j r, r ∈ D.cells j → ∀ s, MorseChainJetBounds (D.cellIndex j) s (C s) w r) →
     Statements.MorseChainRealization T σ D C := by
+  dsimp only
   let w := morseChainGluedProfile G σ hσ
   let D := morsePartitionReference G w phi chi chiLeft
   intro hDist hWidths hJets

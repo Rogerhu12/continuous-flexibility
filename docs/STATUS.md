@@ -2,6 +2,26 @@
 
 Last updated: 2026-11-11.
 
+## Completed line: Tame
+
+`line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
+H01 includes exponential-sequence smoothing and all six frozen calculus
+clauses. H02 constructs genuine inverse-family derivatives from the resolvent
+identity and proves the required local tame bounds. Ordered-partition
+composition and multilinear normalization supply the higher-order estimates,
+including order zero and seminorms with nontrivial kernels.
+
+All 15 new proof modules are in the root import. At proof commit
+`4e255f2dfff527c143babbdd491762dd8ec8d092`, the default build passed all 3,810 jobs,
+the project axiom audit passed, and `#print axioms ContinuousFlexibility.Blueprint.Tame`
+reported only `propext`, `Classical.choice`, and `Quot.sound`.
+[Verified build](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42982787838).
+No frozen statement or assembly repair was needed.
+
+The [PR integration build](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42982795292)
+also passed with main's completed N12 proof: 3,814 jobs, an axiom audit of
+11,066 project declarations (8,324 theorems), and 9 / 42 blueprint statements proved.
+
 ## Target
 
 `thm:main` of the manuscript. The statement was first taken from the 62-page version
@@ -19,16 +39,18 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 367 / 375 (current source paths, including blueprint) |
-| Modules in the root import | 325 |
-| Lines of Lean under `src/` | 90,233 |
-| Axiom audit (CI, 3799 jobs) | passed for every project declaration in the root import |
-| Blueprint statements proved / total | 8 / 42 (S01, S02, R01, R02, R03, R04, W01, N12) |
+| Lean modules compiled / total | 382 / 390 |
+| Modules in the root import | 340 |
+| Lines of Lean under `src/` | 93,574 |
+| Axiom audit (`lake build`, 3834 jobs) | passed: 11,293 declarations, 8,540 theorems |
+| Blueprint statements proved / total | 13 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 379 |
+| Modules on the module system | 1 (the Challenge) of 394 |
 
-The compiled-module count matches artifacts to current source paths; the raw CI cache count
-can also include artifacts of removed blueprint modules. The 8 unfinished modules of the earlier workflow are:
+These counts include main's completed N12 proof. The compiled count is the
+source import closure of the four successful default targets; it excludes
+stale artifacts restored from other branches. The 8 modules outside that
+default build are unfinished files of the earlier workflow:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
 `Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
 `Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
@@ -48,6 +70,9 @@ can also include artifacts of removed blueprint modules. The 8 unfinished module
   are in the root import; N12 depends only on `propext`, `Classical.choice`, `Quot.sound`.
 - **Abstract Nash–Moser, fixed parameter.** `exists_projectiveNewton_fixed_branch`
   (`Analysis/ProjectiveNewtonFixedBranch.lean`).
+- **Tame calculus and inverse families.** `Blueprint.Tame : H01Statement ∧ H02Statement`,
+  assembled from `Analysis.h01Statement` and `Analysis.h02Statement` with the
+  exact frozen hypotheses and conclusions.
 - **Lemmas for §5–§9** (21 modules added on 2026-11-11, listed in `docs/archive/2026-11-11-lemmas.md`).
 
 ## What is not proved
@@ -76,7 +101,7 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (34): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
+Open nodes (33): ScalarCalculus, ScalarWeighted, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
 R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
 N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
@@ -169,6 +194,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 34 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
