@@ -48,7 +48,11 @@ theorem radialTailHalf_outward (D : ReferenceData) (right : Bool) (cut r : ℝ) 
 
 theorem hasDerivAt_outerOutwardRadius (right : Bool) (r : ℝ) :
     HasDerivAt (outerOutwardRadius right) (outerTailSign right) r := by
-  simpa only [outerOutwardRadius_eq_sign, mul_one] using
+  have hfun : outerOutwardRadius right = (fun y : ℝ => outerTailSign right * y) := by
+    funext y
+    exact outerOutwardRadius_eq_sign right y
+  rw [hfun]
+  simpa only [id_eq, mul_one] using
     (hasDerivAt_id r).const_mul (outerTailSign right)
 
 def RadialTailRegularResponse (D : ReferenceData) (right : Bool)
@@ -99,8 +103,10 @@ theorem OuterWeightedGreenResponse.radial_regular
         have hp := hflux _ hc
         simpa only [outerTailOutwardWeight, outerOutwardRadius_eq_sign,
           ← mul_assoc, outerTailSign_mul_self, one_mul] using hp.symm
+  have hrad : ContDiff ℝ 1 (outerOutwardRadius right) :=
+    (contDiff_outerOutwardRadius right).of_le (by simp)
   refine ⟨U, outerRegionEquiv_ae_of_ae hcut he,
-    hu.comp (contDiff_outerOutwardRadius right).contDiffOn hmap, ?_⟩
+    hu.comp hrad.contDiffOn hmap, ?_⟩
   rw [hflux']
   simpa only [U, outerOutwardRadius_eq_sign] using hRobin
 
@@ -135,7 +141,9 @@ theorem derivWithin_radialRadiusScale {s t : Set ℝ} {u : ℝ → ℝ}
     simpa only [hcancel] using hu.hasDerivWithinAt
   have hd := ((hu'.comp (κ * r)
     ((hasDerivAt_id (κ * r)).div_const κ).hasDerivWithinAt hmap).const_mul α).derivWithin ht
-  simpa only [radialRadiusScale, Function.comp_def, div_eq_mul_inv, mul_one,
+  change derivWithin (fun x : ℝ => α * u (x / κ)) t (κ * r) =
+    α / κ * derivWithin u s r
+  simpa only [Function.comp_def, id_eq, div_eq_mul_inv, mul_one,
     mul_assoc, mul_comm, mul_left_comm] using hd
 
 theorem RadialTailRegularResponse.radiusScale
