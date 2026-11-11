@@ -198,7 +198,6 @@ private theorem n07b_uniformIdentification_of_geometric_lifts
   exact n07b_scalarInverse_banach_identification hD hT hS hborder hK h05 h06 hG
     hgeom href hsref hreferenceSource (hU hz) hs hAr (hcoeff z hz hs) f F hF
 
-set_option diagnostics true in
 /-- Package source existence and pointwise identification. Each
 representation component is converted separately; the analytic proof
 assumptions are absent from this logical assembly. -/
@@ -207,23 +206,15 @@ private theorem n07b_scalarBanachBridge_of_source_and_identification
     (hsource : N07bUniformSourceLift S C K V b base' ε' Cs)
     (hident : N07bUniformIdentification D S C K V b B P G base' ε') :
     ScalarBanachBridgeProperties D S C K V b B P G base' ε' := by
-  run_tac Lean.logInfo "N07b bridge packaging: entered"
   refine ⟨b + 1, Nat.le_succ b, Cs, hCs, ?_⟩
-  run_tac Lean.logInfo "N07b bridge packaging: constants supplied"
   intro z hz hs f
-  run_tac Lean.logInfo "N07b bridge packaging: state and source introduced"
   let hactual := hsource z hz hs f
-  run_tac Lean.logInfo "N07b bridge packaging: source existence instantiated"
   let F : V.level (3 / 4 : ℝ) 0 b := Classical.choose hactual
-  run_tac Lean.logInfo "N07b bridge packaging: source witness chosen"
   have hFnorm := (Classical.choose_spec hactual).1
   have hF := (Classical.choose_spec hactual).2
-  run_tac Lean.logInfo "N07b bridge packaging: actual source obtained"
   have hnorm := n07b_source_bound_with_gradings S (b + 1)
     (z.1 - C.referenceState) f (N := ‖F‖) (C₀ := Cs) (q := z.2) hFnorm hCs.le
-  run_tac Lean.logInfo "N07b bridge packaging: norm bound obtained"
   have hid := hident z hz hs f F hF
-  run_tac Lean.logInfo "N07b bridge packaging: named identification obtained"
   refine ⟨F, ?_, ?_, ?_⟩
   · exact hnorm
   · exact hF
