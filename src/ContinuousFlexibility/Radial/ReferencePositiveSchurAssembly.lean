@@ -138,7 +138,7 @@ theorem exists_referencePositiveSchurAssembly {D : ReferenceData}
         filter_upwards [hu 0] with r hr
         rw [hr]
       _ = F.2 := by
-        simpa [W, t] using (hsol 0).2
+        simpa [W, X, t] using (hsol 0).2
   · intro n φ hφ hcφ hsφ
     have hw := (hsol n).1 φ hφ hcφ ((subset_tsupport φ).trans hsφ)
     have hi :
