@@ -314,6 +314,7 @@ import ContinuousFlexibility.Radial.HeightSelectionPrinciple
 import ContinuousFlexibility.Radial.HeightSimultaneousSelection
 import ContinuousFlexibility.Radial.LogSlopeConnector
 import ContinuousFlexibility.Radial.MatchingMatrixAlgebra
+import ContinuousFlexibility.Radial.MatchedMatrixInverse
 import ContinuousFlexibility.Radial.MorseAdjacentJoin
 import ContinuousFlexibility.Radial.MorseCellCriticalPoints
 import ContinuousFlexibility.Radial.MorseCellMassResistanceBounds
