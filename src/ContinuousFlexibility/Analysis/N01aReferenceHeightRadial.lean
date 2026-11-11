@@ -84,7 +84,7 @@ theorem n01a_reference_weighted_radial_jets_memLp {D : ReferenceData} {sample : 
       (T.M (T.radius x) ^ (c + k) * T.H (T.radius x) ^ (-β)) * |deriv D.phi (T.radius x)| := by
     change |(T.M (T.radius x) ^ (c + k) * T.H (T.radius x) ^ (-β)) * deriv D.phi (T.radius x)| = _
     rw [abs_mul, abs_of_nonneg hweight]
-  rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg (pow_nonneg (hM x) c)]
+  rw [Real.norm_eq_abs, Pi.mul_apply, abs_mul, abs_of_nonneg (pow_nonneg (hM x) c)]
   calc
     _ ≤ T.M (T.radius x) ^ c *
         (C * T.M (T.radius x) ^ k *
