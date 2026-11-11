@@ -267,6 +267,38 @@ theorem exists_smoothSecondOrderSystem {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ 
   exact ⟨(ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h,
     (ContinuousLinearMap.snd ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h⟩
 
+/-- Local uniqueness for the arbitrary smooth second-order system.
+Only a continuous coefficient and actual local solution germs are used. -/
+theorem smoothSecondOrderSystem_germ {q r v s z : ℝ → ℝ} {t₀ : ℝ}
+    (hq : ContinuousAt q t₀)
+    (hr : ∀ᶠ t in 𝓝 t₀, HasDerivAt r (v t) t ∧ HasDerivAt v (-q t * r t) t)
+    (hs : ∀ᶠ t in 𝓝 t₀, HasDerivAt s (z t) t ∧ HasDerivAt z (-q t * s t) t)
+    (h₀ : r t₀ = s t₀) (h₁ : v t₀ = z t₀) :
+    (r =ᶠ[𝓝 t₀] s) ∧ (v =ᶠ[𝓝 t₀] z) := by
+  let K : ℝ≥0 := ⟨max 1 (‖q t₀‖ + 1), zero_le_one.trans (le_max_left _ _)⟩
+  have hb : ∀ᶠ t in 𝓝 t₀, ‖q t‖ ≤ ‖q t₀‖ + 1 := by
+    have h := hq.norm.tendsto.eventually
+      (Iio_mem_nhds (show ‖q t₀‖ < ‖q t₀‖ + 1 by linarith))
+    exact h.mono (fun _ ht => ht.le)
+  have hLip : ∀ᶠ t in 𝓝 t₀, LipschitzOnWith K (radiusField q t) univ := by
+    filter_upwards [hb] with t ht
+    exact (radiusField_lipschitz (le_max_left _ _)
+      (ht.trans (le_max_right _ _))).lipschitzOnWith
+  have hr' : ∀ᶠ t in 𝓝 t₀,
+      HasDerivAt (fun x => (r x, v x))
+        (radiusField q t (r t, v t)) t ∧ (r t, v t) ∈ (univ : Set RadiusState) := by
+    filter_upwards [hr] with t ht
+    exact ⟨ht.1.prodMk ht.2, mem_univ _⟩
+  have hs' : ∀ᶠ t in 𝓝 t₀,
+      HasDerivAt (fun x => (s x, z x))
+        (radiusField q t (s t, z t)) t ∧ (s t, z t) ∈ (univ : Set RadiusState) := by
+    filter_upwards [hs] with t ht
+    exact ⟨ht.1.prodMk ht.2, mem_univ _⟩
+  have heq := ODE_solution_unique_of_eventually
+    (v := radiusField q) (s := fun _ => univ) hLip hr' hs' (Prod.ext h₀ h₁)
+  exact ⟨heq.mono (fun _ ht => congrArg Prod.fst ht),
+    heq.mono (fun _ ht => congrArg Prod.snd ht)⟩
+
 /-- The scalar solution with prescribed value and derivative, including at
 the two endpoints of the retained interval. -/
 theorem exists_smoothSecondOrderSolution {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ q)
