@@ -27,8 +27,9 @@ theorem n07b_planeJacobian_add_of_equivariantOn
     {v c : PolarPoint} (hF : ∀ x ∈ U, F (x + v) = F x + c)
     {p : PolarPoint} (hp : p ∈ U) :
     planeJacobian F (p + v) = planeJacobian F p := by
+  have hmem : ∀ᶠ x in 𝓝 p, x ∈ U := hU.mem_nhds hp
   have he : (fun x => F (x + v)) =ᶠ[𝓝 p] (fun x => F x + c) :=
-    (hU.mem_nhds hp).mono fun x hx => hF x hx
+    hmem.mono fun x hx => hF x hx
   have hd := he.fderiv_eq (𝕜 := ℝ)
   rw [fderiv_comp_add_right, fderiv_add_const] at hd
   simp only [planeJacobian, hd]

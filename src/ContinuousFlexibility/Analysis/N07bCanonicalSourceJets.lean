@@ -66,8 +66,10 @@ theorem n07b_contDiffOn_canonicalSource (m : ℕ) {f : PolarPoint → ℝ}
   have hinv : ContDiffAt ℝ ∞ (K.inverseChart z m) p :=
     hcharts.2.2.2.2.2.1.contDiffAt
       ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)
-  simpa only [canonicalSource, Function.comp_def] using
-    (hraw.comp p hinv).contDiffWithinAt (s := canonicalOpen S K m)
+  change ContDiffWithinAt ℝ ∞
+    ((fun x => K.height z m x * f x / |planeJacobian (K.chart z m) x|) ∘
+      K.inverseChart z m) (canonicalOpen S K m) p
+  exact (hraw.comp p hinv).contDiffWithinAt
 
 /-- Every finite actual mixed jet has an interior bound near each physical
 closed-piece point. This statement never evaluates the prescribed inverse
@@ -156,8 +158,10 @@ theorem n07b_canonicalSource_mixedDerivative_memLp
     (a b : ℕ) :
     MemLp (mixedDerivative a b (canonicalSource S K z m f))
       2 (canonicalMeasure S K m) := by
-  have hcont := (contDiffOn_mixedDerivative (isOpen_Ioo.prod isOpen_univ)
-    (n07b_contDiffOn_canonicalSource hK hz hsector m hf) a b).continuousOn
+  have hcont : ContinuousOn (mixedDerivative a b (canonicalSource S K z m f))
+      (canonicalOpen S K m) :=
+    (contDiffOn_mixedDerivative (isOpen_Ioo.prod isOpen_univ)
+      (n07b_contDiffOn_canonicalSource hK hz hsector m hf) a b).continuousOn
   have hmeas : AEStronglyMeasurable
       (mixedDerivative a b (canonicalSource S K z m f)) (canonicalMeasure S K m) := by
     apply (hcont.mono

@@ -56,7 +56,9 @@ theorem n07bFullPeriodTest_periodic (φ : PolarPoint → ℝ) :
       rfl
     · change (p.2 + 2 * Real.pi) / 2 = p.2 / 2 + Real.pi
       ring
-  change cylinderTestPeriodization _ (n07bDoubleAngle.symm (p + (0, 2 * Real.pi))) = _
+  change cylinderTestPeriodization (fun q => φ (n07bDoubleAngle q))
+      (n07bDoubleAngle.symm (p + (0, 2 * Real.pi))) =
+    cylinderTestPeriodization (fun q => φ (n07bDoubleAngle q)) (n07bDoubleAngle.symm p)
   rw [he, cylinderTestPeriodization_periodic]
 
 theorem n07bFullPeriodTest_contDiff {φ : PolarPoint → ℝ}
@@ -113,13 +115,15 @@ theorem n07bFullPeriodTest_radialTest {D : ReferenceData} {φ : PolarPoint → �
   · rintro r ⟨p, hp, rfl⟩
     exact (hs hp).1
   · intro r hr θ
-    unfold n07bFullPeriodTest cylinderTestPeriodization
-    apply tsum_eq_zero
-    intro k
-    apply image_eq_zero_of_notMem_tsupport
-    intro hp
-    apply hr
-    exact ⟨n07bDoubleAngle
-      (cylinderAngularShift k (n07bDoubleAngle.symm (r, θ))), hp, rfl⟩
+    change (∑' k : ℤ,
+      φ (n07bDoubleAngle (cylinderAngularShift k (n07bDoubleAngle.symm (r, θ))))) = 0
+    have hz (k : ℤ) :
+        φ (n07bDoubleAngle (cylinderAngularShift k (n07bDoubleAngle.symm (r, θ)))) = 0 := by
+      apply image_eq_zero_of_notMem_tsupport
+      intro hp
+      apply hr
+      exact ⟨n07bDoubleAngle
+        (cylinderAngularShift k (n07bDoubleAngle.symm (r, θ))), hp, rfl⟩
+    simp only [hz, tsum_zero]
 
 end ContinuousFlexibility.Analysis

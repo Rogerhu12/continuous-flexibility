@@ -171,7 +171,13 @@ theorem n07b_representation_locallyIntegrable
     have hl : LocallyIntegrableOn (fun p : PolarPoint => U.2.1 * S.chiLeft p.1)
         (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume :=
       hleft.continuousOn.locallyIntegrableOn hopen.measurableSet
-    simpa only [Pi.add_apply, sub_add_cancel] using hrem.add hl
+    have heq : (fun p => η p - U.2.1 * S.chiLeft p.1) +
+        (fun p => U.2.1 * S.chiLeft p.1) = η := by
+      funext p
+      change (η p - U.2.1 * S.chiLeft p.1) + U.2.1 * S.chiLeft p.1 = η p
+      exact sub_add_cancel _ _
+    rw [← heq]
+    exact hrem.add hl
   · exact n07b_locallyIntegrable_of_canonicalSource_memLp hK hz hsector m
       (MemLp.ae_eq (hrep.2 m) (Lp.memLp (F m)))
 
