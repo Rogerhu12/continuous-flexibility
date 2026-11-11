@@ -16,9 +16,69 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
+open Set Function
+open ContinuousFlexibility.Statements
+open scoped ContDiff
+
 /-- The all-angle singleton choice represents the linear flow coefficient. -/
 def flowAngleForcingChoice : FlowForcingChoice 1 :=
   ⟨_root_.OrderedFinpartition.atomic 1, ∅⟩
+
+section CanonicalAccess
+
+variable {E : Type} [NormedAddCommGroup E] [NormedSpace ℝ E]
+  [FiniteDimensional ℝ E] {G Θ : E × PolarPoint → ℝ}
+  {P : ℝ} [Fact (0 < P)]
+  (hG : ContDiff ℝ ∞ G) (J : ContinuousTimeSpeedTower (univ : Set E) G)
+  (hΘ : ContDiff ℝ ∞ Θ)
+  (hGp : ∀ q t, Function.Periodic (fun α => G (q, (t, α))) P)
+  (hΘp : ∀ q t α, Θ (q, (t, α + P)) = Θ (q, (t, α)) + P)
+
+private theorem n01c_canonicalForcingHead_eq_comp {N : ℕ}
+    (q : E) (v : Fin N → E) (t : ℝ) (choice : FlowForcingChoice N) (b : ℕ) :
+    let slots : Fin choice.1.length → E × ℝ := fun i => if i ∈ choice.2 then
+      ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0)
+      else (0, 1)
+    canonicalFlowForcingFactorJet hG J hΘ hGp hΘp q v t choice 0 b =
+      periodicCircleJet
+        ((fun η => flowSpeedJointField J choice.1.length q slots (t, η)) ∘
+          (fun η => Θ (q, (t, η))))
+        (periodic_comp_circleLift
+          (flowSpeedJointField_periodic J hGp choice.1.length q slots t) (hΘp q t))
+        (((contDiff_flowSpeedJointField J hG choice.1.length q slots).comp
+          (contDiff_const.prodMk contDiff_id)).comp
+          (hΘ.comp (contDiff_const.prodMk (contDiff_const.prodMk contDiff_id)))) b := by
+  dsimp only
+  ext θ
+  induction θ using QuotientAddGroup.induction_on
+  simp only [canonicalFlowForcingFactorJet, periodicCircleJet_coe_apply,
+    canonicalFlowForcingFactors, flowForcingFactors, Fin.cons_zero,
+    flowSelectedSpeedCoefficient, flowSpeedJointField, flowTrajectoryGraph,
+    flowInitialSlice, Function.comp_apply]
+
+private theorem n01c_flowCircleCoefficient_eq_head
+    (hinit : ∀ q α, Θ (q, (0, α)) = α)
+    (hflow : ∀ q t α, HasDerivAt (fun r => Θ (q, (r, α)))
+      (G (q, (t, Θ (q, (t, α))))) t)
+    (stop : ℝ) (n : ℕ) (q : E) (v : Fin (n + 1) → E) (t : ℝ) :
+    (flowParameterCircleVariationData hG J hΘ.continuous hinit hflow hGp hΘp
+      stop n q v).coefficient t 0 =
+      canonicalFlowForcingFactorJet hG J hΘ hGp hΘp q
+        (fun _ : Fin 1 => (0 : E)) t flowAngleForcingChoice 0 0 := by
+  ext θ
+  induction θ using QuotientAddGroup.induction_on
+  rename_i α
+  let hs : ContDiff ℝ ∞ Θ :=
+    contDiff_globalCircleVectorFlow hG hΘ.continuous hinit hflow
+  change circleFlowSpeedJet (flowVariationCoefficient G Θ q)
+    (contDiff_flowVariationCoefficient hG hs q)
+    (flowVariationCoefficient_periodic hG hGp hΘp q) t 0
+      (α : AddCircle P) = _
+  simp only [circleFlowSpeedJet_coe_apply, canonicalFlowForcingFactorJet,
+    periodicCircleJet_coe_apply, iteratedDeriv_zero]
+  exact (speedAlongFlowAngularJet_eq_coefficient (Θ := Θ) hG J q (t, α)).symm
+
+end CanonicalAccess
 
 end ContinuousFlexibility.Analysis
 
@@ -74,11 +134,14 @@ theorem ordinaryFlowForcingFactorJet_head_eq_comp {N : ℕ}
           (ordinaryFlowFiniteAngle_lift hS hT hA hB hpos m x hx L t))
         ((contDiff_ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice).comp
           (contDiff_ordinaryFlowFiniteAngle hS hT hA hB hpos m J x hx L t)) b := by
-  ext θ
-  induction θ using QuotientAddGroup.induction_on
-  simp only [ordinaryFlowForcingFactorJet, canonicalFlowForcingFactorJet,
-    periodicCircleJet_coe_apply]
-  rfl
+  exact n01c_canonicalForcingHead_eq_comp
+    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
+    (continuousTimeSpeedTowerOfContDiff
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L))
+    (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L)
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L)
+    0 v t choice b
 
 /-- The only high flow factor in tame composition is its actual
 derivative defect at order s-1. The low geometry is fixed separately. -/
@@ -114,26 +177,15 @@ theorem ordinaryFlowCircleVariationData_coefficient_eq_head
     (ordinaryFlowCircleVariationData hS hT hA hB hpos m J x hx L n v).coefficient t 0 =
       ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L
         (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 0 0 := by
-  ext θ
-  induction θ using QuotientAddGroup.induction_on
-  rename_i α
-  change circleFlowSpeedJet
-    (flowVariationCoefficient (ordinaryFlowFiniteSpeed x hx L D m)
-      (ordinaryFlowFiniteTrajectory x hx L m) 0)
-    (contDiff_flowVariationCoefficient
-      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
-      (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L) 0)
-    (flowVariationCoefficient_periodic
-      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
-      (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
-      (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L) 0) t 0
-        (α : AddCircle Real.pi) = _
-  simp only [circleFlowSpeedJet_coe_apply, ordinaryFlowForcingFactorJet,
-    canonicalFlowForcingFactorJet, periodicCircleJet_coe_apply, iteratedDeriv_zero]
-  exact (speedAlongFlowAngularJet_eq_coefficient
-    (Θ := ordinaryFlowFiniteTrajectory x hx L m)
+  exact n01c_flowCircleCoefficient_eq_head
     (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
     (continuousTimeSpeedTowerOfContDiff
-      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)) 0 (t, α)).symm
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L))
+    (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L)
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_initial hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_hasDerivAt hS hT hA hB hpos m x hx L)
+    1 n 0 v t
 
 end ContinuousFlexibility.Statements

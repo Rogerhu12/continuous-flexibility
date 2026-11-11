@@ -156,9 +156,10 @@ theorem stateFlow_composition_raw_bound
   calc
     _ ≤ δ * ∑ c : OrderedFinpartition N, |∑ w : StateAngleWord c.length, term c w| :=
       mul_le_mul_of_nonneg_left
-        (by simpa only [Real.norm_eq_abs] using
-          norm_sum_le (Finset.univ : Finset (OrderedFinpartition N))
-            (fun c => ∑ w : StateAngleWord c.length, term c w)) hδ
+        (by
+          simpa only [Real.norm_eq_abs] using
+            (norm_sum_le (Finset.univ : Finset (OrderedFinpartition N))
+              (fun c => ∑ w : StateAngleWord c.length, term c w))) hδ
     _ ≤ δ * ∑ c : OrderedFinpartition N, ∑ w : StateAngleWord c.length, |term c w| :=
       mul_le_mul_of_nonneg_left (Finset.sum_le_sum (fun c _ => by
         simpa only [Real.norm_eq_abs] using

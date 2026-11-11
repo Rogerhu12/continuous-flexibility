@@ -12,6 +12,63 @@ lower factor is an actual lower state derivative of the same flow.
 
 noncomputable section
 
+namespace ContinuousFlexibility.Analysis
+
+open Set Function
+open scoped ContDiff
+
+section CanonicalFactorEvaluation
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+  [FiniteDimensional ℝ E]
+  {G Θ : E × PolarPoint → ℝ} {P : ℝ} [Fact (0 < P)]
+
+private theorem n01c_canonicalForcingFactor_head_eq
+    (hG : ContDiff ℝ ∞ G) (J : ContinuousTimeSpeedTower (univ : Set E) G)
+    (hΘ : ContDiff ℝ ∞ Θ)
+    (hGp : ∀ q t, Function.Periodic (fun α => G (q, (t, α))) P)
+    (hΘp : ∀ q t α, Θ (q, (t, α + P)) = Θ (q, (t, α)) + P)
+    {N : ℕ} (q : E) (v : Fin N → E) (t : ℝ) (choice : FlowForcingChoice N)
+    (A Ψ : ℝ → ℝ)
+    (hspeed : ∀ α, J.D choice.1.length (q, (t, α))
+      (fun i => if i ∈ choice.2 then
+        ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0)
+        else (0, 1)) = A α)
+    (htrajectory : ∀ α, Θ (q, (t, α)) = Ψ α)
+    (b : ℕ) (θ : ℝ) :
+    canonicalFlowForcingFactorJet hG J hΘ hGp hΘp q v t choice 0 b
+        (θ : AddCircle P) =
+      iteratedDeriv b (fun α => A (Ψ α)) θ := by
+  classical
+  rw [canonicalFlowForcingFactorJet, periodicCircleJet_coe_apply]
+  apply congrArg (fun f : ℝ → ℝ => iteratedDeriv b f θ)
+  funext α
+  change J.D choice.1.length (q, (t, Θ (q, (t, α)))) _ = A (Ψ α)
+  rw [hspeed, htrajectory]
+
+private theorem n01c_canonicalForcingFactor_lower_eq
+    (hG : ContDiff ℝ ∞ G) (J : ContinuousTimeSpeedTower (univ : Set E) G)
+    (hΘ : ContDiff ℝ ∞ Θ)
+    (hGp : ∀ q t, Function.Periodic (fun α => G (q, (t, α))) P)
+    (hΘp : ∀ q t α, Θ (q, (t, α + P)) = Θ (q, (t, α)) + P)
+    {N : ℕ} (q : E) (v : Fin N → E) (t : ℝ) (choice : FlowForcingChoice N)
+    (i : Fin choice.1.length) (hi : i ∉ choice.2) (hk : choice.1.partSize i < N)
+    (b : ℕ) (θ : ℝ) {value : ℝ}
+    (hvalue : iteratedDeriv b (fun α =>
+      flowParameterField Θ (choice.1.partSize i) q (v ∘ choice.1.emb i) (t, α)) θ =
+        value) :
+    canonicalFlowForcingFactorJet hG J hΘ hGp hΘp q v t choice i.succ b
+      (θ : AddCircle P) = value := by
+  classical
+  rw [canonicalFlowForcingFactorJet, periodicCircleJet_coe_apply]
+  simp only [canonicalFlowForcingFactors, flowForcingFactors, Fin.cons_succ,
+    flowSelectedLowerFactor, if_neg hi, lowerStateVariation, dif_pos hk]
+  exact hvalue
+
+end CanonicalFactorEvaluation
+
+end ContinuousFlexibility.Analysis
+
 namespace ContinuousFlexibility.Statements
 
 open Set Function ContinuousFlexibility.Analysis ContinuousFlexibility.Blueprint
@@ -65,16 +122,25 @@ theorem ordinaryFlowForcingFactorJet_head {N : ℕ}
               (if i ∈ choice.2 then
                 ((flowParameterIdentityJet (choice.1.partSize i)
                   (v ∘ choice.1.emb i)).1, 0) else (0, 1)))) θ := by
-  classical
-  rw [ordinaryFlowForcingFactorJet, canonicalFlowForcingFactorJet,
-    periodicCircleJet_coe_apply]
-  apply congrArg (fun f : ℝ → ℝ => iteratedDeriv b f θ)
-  funext η
-  change (continuousTimeSpeedTowerOfContDiff
-    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)).D choice.1.length
-      (0, (t, ordinaryFlowFiniteTrajectory x hx L m (0, (t, η)))) _ = _
-  rw [ordinaryFlowFiniteSpeedTower_D_apply hS hT hA hB hpos m J x hx L,
-    ordinaryFlowFiniteTrajectory_zero]
+  exact n01c_canonicalForcingFactor_head_eq
+    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
+    (continuousTimeSpeedTowerOfContDiff
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L))
+    (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L)
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L)
+    (0 : Fin d → ℝ) v t choice
+    (fun α => deriv (circleFlowCompactTime 0 Real.pi) t *
+      J.D choice.1.length (x, (circleFlowCompactTime 0 Real.pi t, α))
+        (fun i => flowStateAngleMap L (if i ∈ choice.2 then
+          ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0)
+          else (0, 1))))
+    (fun α => ordinaryFlowInCosineTime C m (x, (circleFlowCompactTime 0 Real.pi t, α)))
+    (fun α => ordinaryFlowFiniteSpeedTower_D_apply hS hT hA hB hpos m J x hx L
+      choice.1.length t α (fun i => if i ∈ choice.2 then
+        ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0)
+        else (0, 1)))
+    (fun α => ordinaryFlowFiniteTrajectory_zero x hx L m (t, α)) b θ
 
 /-- Every surviving lower factor is a strict lower-order actual state
 jet; all its angular derivatives identify with the same canonical tower. -/
@@ -87,16 +153,16 @@ theorem ordinaryFlowForcingFactorJet_lower {N : ℕ}
       (ordinaryFlowAngularStateSmoothDirections hS hT hA hB hpos m J
         (rootCosinePath_mem_Icc (hA.2.2.1.1 m).2.1.le
           (circleFlowCompactTime 0 Real.pi t)) b θ).D (choice.1.partSize i) x (fun j => L (v (choice.1.emb i j))) := by
-  classical
-  rw [ordinaryFlowForcingFactorJet, canonicalFlowForcingFactorJet,
-    periodicCircleJet_coe_apply]
-  simp only [canonicalFlowForcingFactors, flowForcingFactors, Fin.cons_succ,
-    flowSelectedLowerFactor, if_neg hi, lowerStateVariation, dif_pos hk]
-  change iteratedDeriv b (fun η =>
-    flowParameterField (ordinaryFlowFiniteTrajectory x hx L m)
-      (choice.1.partSize i) 0 (v ∘ choice.1.emb i) (t, η)) θ = _
-  exact ordinaryFlowFiniteTrajectory_parameterAngularJet
-    hS hT hA hB hpos m J x hx L (choice.1.partSize i) b t θ (v ∘ choice.1.emb i)
+  exact n01c_canonicalForcingFactor_lower_eq
+    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
+    (continuousTimeSpeedTowerOfContDiff
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L))
+    (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L)
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
+    (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L)
+    (0 : Fin d → ℝ) v t choice i hi hk b θ
+    (ordinaryFlowFiniteTrajectory_parameterAngularJet
+      hS hT hA hB hpos m J x hx L (choice.1.partSize i) b t θ (v ∘ choice.1.emb i))
 
 theorem ordinaryFlowForcingFactorJet_selected {N : ℕ}
     (v : Fin N → (Fin d → ℝ)) (t : ℝ) (choice : FlowForcingChoice N)
