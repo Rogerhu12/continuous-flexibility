@@ -6,9 +6,10 @@ import ContinuousFlexibility.Radial.TailDeepInverse
 
 Deep tail: identification of the Friedrichs form, the inverse with norm C/Λ, and convergence of the Dirichlet truncations.
 
-Source: `paper/flexible-surface-rewrite/05-flat-end-chain.tex` lines 271–417.
+Source: `paper/flexible-surface-readable/05-flat-end-chain.tex` lines 472–725.
 
-Task file: `docs/tasks/R06a.md`. The statement is frozen; replace the `sorry`.
+Task file: `docs/tasks/R06a.md`. The full operator construction is in
+`Radial.TailDeepInverse`; the compact-test correction is recorded in `docs/STATUS.md`.
 -/
 
 namespace ContinuousFlexibility.Blueprint

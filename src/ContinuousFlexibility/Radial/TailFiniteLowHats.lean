@@ -184,6 +184,7 @@ theorem tailFiniteLowHat_mass_norm (T : DeepTailData) (hT : DeepTailHypotheses T
     _ = ∫ x in T.node m..T.massEnd m, T.p x * a m ^ 2 := by
       apply intervalIntegral.integral_congr_Ioo_of_le (deepTail_node_lt_massEnd hT m).le
       intro x hx
+      dsimp only
       rw [tailFiniteLowHat_mass T hT a ha m ⟨hx.1.le, hx.2.le⟩]
     _ = _ := intervalIntegral.integral_mul_const _ _
 
@@ -195,6 +196,7 @@ theorem tailFiniteLowHat_mass_energy (T : DeepTailData) (hT : DeepTailHypotheses
     _ = ∫ x in T.node m..T.massEnd m, (0 : ℝ) := by
       apply intervalIntegral.integral_congr_Ioo_of_le (deepTail_node_lt_massEnd hT m).le
       intro x hx
+      dsimp only
       rw [tailFiniteLowHat_deriv_mass T hT a ha m hx]
       ring
     _ = 0 := intervalIntegral.integral_zero
@@ -217,6 +219,7 @@ theorem tailFiniteLowHat_gap_norm (T : DeepTailData) (hT : DeepTailHypotheses T)
         ((hp.mul (hu.pow 2)).intervalIntegrable_of_Icc hab)
         ((hp.mul continuousOn_const).intervalIntegrable_of_Icc hab)
       intro x hx
+      dsimp only
       apply mul_le_mul_of_nonneg_left _ (deepTail_pos hT x (hs hx)).le
       rw [tailFiniteLowHat_gap T hT a ha m hx]
       exact tail_interpolation_sq_le (tailGapStep_range T hT m x).1
@@ -235,6 +238,7 @@ theorem tailFiniteLowHat_gap_energy (T : DeepTailData) (hT : DeepTailHypotheses 
     rw [← intervalIntegral.integral_const_mul]
     apply intervalIntegral.integral_congr_Ioo_of_le (deepTail_massEnd_lt_succ_node hT m).le
     intro x hx
+    dsimp only
     rw [tailFiniteLowHat_deriv_gap T hT a ha m hx]
     ring
   rw [heq]
@@ -266,6 +270,7 @@ theorem tailFiniteLowHat_initial_norm (T : DeepTailData) (hT : DeepTailHypothese
             ((hp.mul (hu.pow 2)).intervalIntegrable_of_Icc he.le)
             ((hp.mul continuousOn_const).intervalIntegrable_of_Icc he.le)
           intro x hx
+          dsimp only
           apply mul_le_mul_of_nonneg_left _ (deepTail_pos hT x (hs hx)).le
           rw [tailFiniteLowHat_initial T hT a ha hx, mul_pow]
           have ht := tailEntryStep_range T hT x
@@ -300,6 +305,7 @@ theorem tailFiniteLowHat_initial_energy (T : DeepTailData) (hT : DeepTailHypothe
       rw [← intervalIntegral.integral_const_mul]
       apply intervalIntegral.integral_congr_Ioo_of_le he.le
       intro x hx
+      dsimp only
       rw [tailFiniteLowHat_deriv_initial T hT a ha hx]
       ring
     rw [heq]
@@ -335,14 +341,14 @@ theorem tailFiniteLowHat_bounds (T : DeepTailData) (hT : DeepTailHypotheses T)
     apply hs
     apply subset_tsupport (tailFiniteLowHat T hT a)
     intro hz
-    exact hx (by rw [hz]; norm_num)
+    exact hx (by simp only [hz, zero_pow (by norm_num : (2 : ℕ) ≠ 0)])
   have hdsq : Function.support (fun x => deriv (tailFiniteLowHat T hT a) x ^ 2) ⊆
       Ioo T.entrance (T.node N) := by
     intro x hx
     apply hs
     apply support_deriv_subset
     intro hz
-    exact hx (by rw [hz]; norm_num)
+    exact hx (by simp only [hz, zero_pow (by norm_num : (2 : ℕ) ≠ 0)])
   have hp : ContinuousOn T.p (Icc T.entrance (T.node N)) :=
     (deepTail_contDiffOn hT).continuousOn.mono
       (deepTail_Icc_subset hT le_rfl (deepTail_node_lt_endpoint hT N))

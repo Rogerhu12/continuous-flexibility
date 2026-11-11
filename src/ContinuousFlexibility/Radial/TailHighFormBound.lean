@@ -55,14 +55,14 @@ theorem tail_compact_high_energy_bound {T : DeepTailData} (hT : DeepTailHypothes
     apply hn
     apply subset_tsupport u
     intro hzero
-    exact hx (by rw [hzero]; norm_num)
+    exact hx (by simp [hzero])
   have hdsq : Function.support (fun x => deriv u x ^ 2) ⊆
       Ioo T.entrance (T.node (n + 1)) := by
     intro x hx
     apply hn
     apply support_deriv_subset
     intro hzero
-    exact hx (by rw [hzero]; norm_num)
+    exact hx (by simp [hzero])
   rw [tail_integral_eq_interval_of_support hT (deepTail_entrance_le_node hT (n + 1))
       (deepTail_node_lt_endpoint hT (n + 1)).le hsq,
     tail_integral_eq_interval_of_support hT (deepTail_entrance_le_node hT (n + 1))

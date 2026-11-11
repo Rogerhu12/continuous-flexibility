@@ -43,7 +43,7 @@ theorem tailFormGradient_apply (T : DeepTailData) (endCut : ℝ)
 theorem tailForm_norm_sq (T : DeepTailData) (endCut : ℝ)
     (u : tailGradientSpace T endCut) :
     ‖u‖ ^ 2 = ‖tailFormBase T endCut u‖ ^ 2 + ‖tailFormGradient T endCut u‖ ^ 2 := by
-  simpa only [tailFormBase_apply, tailFormGradient_apply, Submodule.coe_norm] using
+  simpa only [tailFormBase_apply, tailFormGradient_apply, ClosedSubmodule.norm_coe] using
     WithLp.prod_norm_sq_eq_of_L2 (u : GradientHilbert (DeepTailL2 T))
 
 /-- No inverse is hidden in these hypotheses: a projection and the two energy
@@ -64,19 +64,19 @@ theorem exists_tailInverse_of_lowModeProjection (T : DeepTailData) (endCut : ℝ
     (tailFormBase T endCut) (tailFormGradient T endCut) hΛ P hP
     (tailForm_norm_sq T endCut) hlow hhigh
   let G : DeepTailL2 T →L[ℝ] DeepTailL2 T := tailFormBase T endCut ∘L X
+  have hG (f : DeepTailL2 T) : G f = (X f : GradientHilbert (DeepTailL2 T)).fst := by
+    simp only [G, ContinuousLinearMap.comp_apply, tailFormBase_apply]
   refine ⟨G, hbound, ?_, ?_⟩
   · intro f
     apply (tailFriedrichsGraph_iff_closedGradientGraph T endCut _ _).mpr
     refine ⟨(X f : GradientHilbert (DeepTailL2 T)), (X f).property, ?_, ?_⟩
-    · exact (tailFormBase_apply T endCut (X f)).symm
+    · exact (hG f).symm
     · intro r hr
       have h := hX f (⟨r, hr⟩ : tailGradientSpace T endCut)
       rw [shiftedEnergyForm_apply, tailFormGradient_apply, tailFormGradient_apply,
         tailFormBase_apply, tailFormBase_apply] at h
       simp only [inner_add_left, real_inner_smul_left]
-      have hG : G f = (X f : GradientHilbert (DeepTailL2 T)).fst := by
-        rw [ContinuousLinearMap.comp_apply, tailFormBase_apply]
-      rw [hG]
+      rw [hG f]
       linarith
   · intro u f hu
     obtain ⟨q, hq, hqu, hform⟩ :=

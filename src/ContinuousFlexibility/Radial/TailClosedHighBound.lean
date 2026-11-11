@@ -102,8 +102,14 @@ theorem tailGradientCore_dense (T : DeepTailData) (endCut : ℝ) :
       Set (GradientHilbert (DeepTailL2 T))) = WithLp.ofLp ⁻¹' TailFormLift T endCut := by
     have h := (WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T)
       (DeepTailL2 T)).toHomeomorph.preimage_closure (TailEnergyCore T endCut)
-    simpa only [ContinuousLinearEquiv.toHomeomorph_apply,
-      WithLp.prodContinuousLinearEquiv_apply] using h.symm
+    have hfun :
+        ⇑(WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T) (DeepTailL2 T)).toHomeomorph =
+          WithLp.ofLp := by
+      funext q
+      simp only [ContinuousLinearEquiv.coe_toHomeomorph,
+        WithLp.prodContinuousLinearEquiv_apply]
+    rw [hfun] at h
+    simpa only [TailFormLift] using h.symm
   rw [hc]
   exact fun q hq => (mem_tailGradientSpace T endCut q).mp hq
 

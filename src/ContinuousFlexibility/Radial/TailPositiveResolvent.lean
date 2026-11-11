@@ -22,7 +22,7 @@ open ContinuousFlexibility.Statements
 def tailGradientSpace (T : DeepTailData) (endCut : ℝ) :
     ClosedSubmodule ℝ (GradientHilbert (DeepTailL2 T)) :=
   (⟨tailFormSubmodule T endCut, by
-      rw [coe_tailFormSubmodule]
+      rw [Submodule.carrier_eq_coe, coe_tailFormSubmodule]
       exact tailFormLift_isClosed T endCut⟩ :
     ClosedSubmodule ℝ (DeepTailL2 T × DeepTailL2 T)).comap
       (WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T) (DeepTailL2 T)).toContinuousLinearMap
@@ -30,7 +30,7 @@ def tailGradientSpace (T : DeepTailData) (endCut : ℝ) :
 theorem mem_tailGradientSpace (T : DeepTailData) (endCut : ℝ)
     (q : GradientHilbert (DeepTailL2 T)) :
     q ∈ tailGradientSpace T endCut ↔ WithLp.ofLp q ∈ TailFormLift T endCut := by
-  simp only [tailGradientSpace, ClosedSubmodule.mem_comap,
+  simp only [tailGradientSpace, ClosedSubmodule.mem_comap, ClosedSubmodule.mem_mk,
     ContinuousLinearEquiv.coe_coe, WithLp.prodContinuousLinearEquiv_apply,
     ← mem_tailFormSubmodule]
 
@@ -110,8 +110,14 @@ theorem tailGradientSpace_eq_closure_iSup {T : DeepTailData} (hT : DeepTailHypot
   rw [tailFormLift_eq_closure_iUnion hT]
   have he := (WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T) (DeepTailL2 T)).toHomeomorph.preimage_closure
     (⋃ n : ℕ, TailFormLift T (T.node (n + 1)))
-  simpa only [ContinuousLinearEquiv.coe_toHomeomorph,
-    WithLp.prodContinuousLinearEquiv_apply, preimage_iUnion] using he
+  have hefun :
+      ⇑(WithLp.prodContinuousLinearEquiv 2 ℝ (DeepTailL2 T) (DeepTailL2 T)).toHomeomorph =
+        WithLp.ofLp := by
+    funext q
+    simp only [ContinuousLinearEquiv.coe_toHomeomorph,
+      WithLp.prodContinuousLinearEquiv_apply]
+  rw [hefun] at he
+  simpa only [preimage_iUnion] using he
 
 /-- The positive resolvents of finite Dirichlet intervals converge strongly
 to the positive Friedrichs resolvent of the full tail. -/

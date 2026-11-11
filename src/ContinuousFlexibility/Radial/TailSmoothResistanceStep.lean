@@ -148,8 +148,11 @@ theorem tailSmoothResistanceStep_spec {p : ℝ → ℝ} {a b M : ℝ}
           (inv_nonneg.mpr (hpos x).le))
       _ = _ := by ring
   have hE : (∫ x in a..b, p x * deriv θ x ^ 2) ≤ 4 * (M + 1) ^ 2 / R := by
-    have hi₁ := (hp.mul (((contDiff_infty_iff_deriv.mp hθ).2.continuous).pow 2)).intervalIntegrable a b
-    have hi₂ := (continuous_const.mul (hp.inv₀ (fun x => (hpos x).ne'))).intervalIntegrable a b
+    have hi₁ : IntervalIntegrable (fun x => p x * deriv θ x ^ 2) volume a b :=
+      (hp.mul (((contDiff_infty_iff_deriv.mp hθ).2.continuous).pow 2)).intervalIntegrable a b
+    have hi₂ : IntervalIntegrable (fun x => (4 * (M + 1) ^ 2 / R ^ 2) * (p x)⁻¹)
+        volume a b :=
+      (continuous_const.mul (hp.inv₀ (fun x => (hpos x).ne'))).intervalIntegrable a b
     calc
       _ ≤ ∫ x in a..b, (4 * (M + 1) ^ 2 / R ^ 2) * (p x)⁻¹ :=
         intervalIntegral.integral_mono_on hab.le hi₁ hi₂ (fun x _ => henergy x)
@@ -201,12 +204,14 @@ theorem exists_tailSmoothResistanceStep :
   have hμ : (∫ x in a..b, (q x)⁻¹) = ∫ x in a..b, (p x)⁻¹ := by
     apply intervalIntegral.integral_congr
     intro x hx
-    rw [hqeq x (by simpa only [uIcc_of_le hab.le] using hx)]
+    exact congrArg (fun r : ℝ => r⁻¹)
+      (hqeq x (by simpa only [uIcc_of_le hab.le] using hx))
   have he : (∫ x in a..b, p x * deriv (tailSmoothResistanceStep q a b) x ^ 2) =
       ∫ x in a..b, q x * deriv (tailSmoothResistanceStep q a b) x ^ 2 := by
     apply intervalIntegral.integral_congr
     intro x hx
-    rw [hqeq x (by simpa only [uIcc_of_le hab.le] using hx)]
+    exact congrArg (fun r : ℝ => r * deriv (tailSmoothResistanceStep q a b) x ^ 2)
+      (hqeq x (by simpa only [uIcc_of_le hab.le] using hx)).symm
   rw [he, ← hμ]
   exact hE
 

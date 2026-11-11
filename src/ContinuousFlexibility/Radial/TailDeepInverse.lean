@@ -79,6 +79,7 @@ theorem deepTail_operator :
   · intro n f
     filter_upwards [tailIndicator_coeFn T (Iio (T.node (n + 1))) measurableSet_Iio f]
       with x hx
+    dsimp only
     rw [hx]
     by_cases hxn : x < T.node (n + 1)
     · rw [indicator_of_mem hxn, if_pos hxn]

@@ -116,7 +116,7 @@ theorem tailNormalizedHat_gradient_coeFn (T : DeepTailData) (hT : DeepTailHypoth
 /-- Normalized subtype coefficients, extended by zero to all mass indices. -/
 def tailLowCoefficients (T : DeepTailData) (cut : ℝ) (a : TailLowIndex T cut →₀ ℝ) : ℕ →₀ ℝ :=
   (Finsupp.onFinset a.support (fun i => a i * (Real.sqrt (tailMass T i))⁻¹)
-    (fun i hi => Finsupp.mem_support_iff.mpr (fun hz => hi (by rw [hz, zero_mul])))).embDomain
+    (fun i hi => Finsupp.mem_support_iff.mpr (fun hz => hi (by simp only [hz, zero_mul])))).embDomain
       ⟨Subtype.val, Subtype.val_injective⟩
 
 theorem tailLowCoefficients_apply (T : DeepTailData) (cut : ℝ)
@@ -303,6 +303,7 @@ theorem tailNormalizedHat_analysis (T : DeepTailData) (hT : DeepTailHypotheses T
         apply integral_congr_ae
         filter_upwards [ae_restrict_of_ae (tailNormalizedHat_base_coeFn T hT cut j),
           ae_restrict_mem (tailMassCell_measurable T i)] with x hx hxi
+        dsimp only
         rw [hx, tailLowHat_mass T hT j j.property.1 i ⟨hxi.1.le, hxi.2.le⟩]
       _ = _ := by rw [setIntegral_const, smul_eq_mul, tailMassCell_real hT]
   rw [hint]

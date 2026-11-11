@@ -42,7 +42,7 @@ theorem tail_setIntegral_density {T : DeepTailData} (hT : DeepTailHypotheses T)
     (deepTail_contDiffOn hT).mono (fun _ hx => ⟨hx.1.le, hx.2⟩)
   have hmeas : AEMeasurable (fun x => ENNReal.ofReal (T.p x)) (volume.restrict s) :=
     ((hp.continuousOn.mono hsub).aemeasurable hs).ennreal_ofReal
-  rw [deepTailMeasure, Measure.restrict_withDensity hs,
+  rw [deepTailMeasure, restrict_withDensity hs,
     Measure.restrict_restrict_of_subset hsub,
     integral_withDensity_eq_integral_toReal_smul₀ hmeas (by simp)]
   apply integral_congr_ae
@@ -64,7 +64,7 @@ theorem tail_interval_measure {T : DeepTailData} (hT : DeepTailHypotheses T)
   have hnonneg : 0 ≤ᵐ[volume.restrict (Ioo a b)] T.p := by
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
     exact (deepTail_pos hT x ⟨ha.trans hx.1.le, hx.2.trans hb⟩).le
-  rw [deepTailMeasure, Measure.withDensity_apply _ measurableSet_Ioo,
+  rw [deepTailMeasure, withDensity_apply _ measurableSet_Ioo,
     Measure.restrict_restrict_of_subset hsub,
     ← ofReal_integral_eq_lintegral_ofReal hi hnonneg,
     intervalIntegral.integral_of_le hab, integral_Ioc_eq_integral_Ioo]
@@ -75,7 +75,7 @@ theorem tailMassCell_measure {T : DeepTailData} (hT : DeepTailHypotheses T) (n :
     (deepTail_node_lt_massEnd hT n).le (deepTail_massEnd_lt_endpoint hT n)
 
 theorem tailMassCell_measure_ne_top {T : DeepTailData} (hT : DeepTailHypotheses T) (n : ℕ) :
-    deepTailMeasure T (tailMassCell T n) ≠ ∞ := by
+    deepTailMeasure T (tailMassCell T n) ≠ (⊤ : ℝ≥0∞) := by
   rw [tailMassCell_measure hT n]
   exact ENNReal.ofReal_ne_top
 
