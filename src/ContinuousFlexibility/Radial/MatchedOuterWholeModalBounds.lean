@@ -291,7 +291,7 @@ theorem exists_matchedMorse_uniform_actual_whole_modal_bounds
     exact hh.mono fun _ hx => Ioo_subset_Ico_self hx
   have hrow : ∀ᵐ x ∂μ, AEStronglyMeasurable (outerGreenKernel lam H.U H.V x) μ := by
     filter_upwards [hμmem] with x hx
-    have hh := matchedOuter_actual_whole_row_measurable H
+    have hh := matchedOuter_actual_whole_row_measurable (lam := lam) H
       (fun y => ENNReal.ofReal (12 * D.w (outerOutwardRadius right y) / y ^ 2)) hx
     dsimp only [μ]
     rw [outerWholeMeasure_eq_density hphys, ← morseTransitionOutwardLeft_eq]
