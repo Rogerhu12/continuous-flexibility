@@ -84,11 +84,13 @@ theorem n06_radialAngularMean_pairing {u φ : ℝ → ℝ}
     exact Icc_subset_Icc Real.pi_pos.le le_rfl
   have hshiftInt : IntervalIntegrable (fun θ => u θ * φ (θ + Real.pi))
       volume 0 Real.pi := by
-    simpa only [sub_self, show 2 * Real.pi - Real.pi = Real.pi by ring, hu] using
+    have hu' : ∀ θ, u (θ + Real.pi) = u θ := hu
+    simpa only [sub_self, show 2 * Real.pi - Real.pi = Real.pi by ring, hu'] using
       hsecond.comp_add_right Real.pi
   have hshift : (∫ θ in (0 : ℝ)..Real.pi, u θ * φ (θ + Real.pi)) =
       ∫ θ in Real.pi..2 * Real.pi, u θ * φ θ := by
-    simpa only [zero_add, show Real.pi + Real.pi = 2 * Real.pi by ring, hu] using
+    have hu' : ∀ θ, u (θ + Real.pi) = u θ := hu
+    simpa only [zero_add, show Real.pi + Real.pi = 2 * Real.pi by ring, hu'] using
       (intervalIntegral.integral_comp_add_right (fun θ => u θ * φ θ) Real.pi
         (a := (0 : ℝ)) (b := Real.pi))
   have haverage : (∫ θ in (0 : ℝ)..Real.pi, u θ * n06_halfPeriodAverage φ θ) =
@@ -143,7 +145,10 @@ theorem n06_radialTestAverage_test {D : ReferenceData} {φ : PolarPoint → ℝ}
     exact (hφ.1.add (hφ.1.comp (contDiff_id.add contDiff_const))).div_const 2
   have hp := n06_radialTestAverage_periodic hφ.2.1
   have hp₂ : Function.Periodic (n06_radialTestAverage φ) (0, 2 * Real.pi) := by
-    simpa only [Prod.mk_add_mk, zero_add, ← two_mul] using hp.add_period hp
+    have hperiod : ((0 : ℝ), Real.pi) + (0, Real.pi) = (0, 2 * Real.pi) := by
+      apply Prod.ext <;> simp only [Prod.fst_add, Prod.snd_add, zero_add] <;> ring
+    rw [← hperiod]
+    exact hp.add_period hp
   refine ⟨hs, hp₂, ?_⟩
   obtain ⟨K, hK, hKD, hz⟩ := hφ.2.2
   refine ⟨K, hK, hKD, ?_⟩

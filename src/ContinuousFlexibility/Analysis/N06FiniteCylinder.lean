@@ -13,8 +13,10 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set MeasureTheory
-open scoped BigOperators
+open scoped BigOperators ContDiff
 open ContinuousFlexibility.Radial
+
+set_option backward.isDefEq.respectTransparency false
 
 /-- The five weighted graph quantities, expanded into actual angular
 derivatives instead of formal frequency multipliers. -/

@@ -15,8 +15,10 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set MeasureTheory
-open scoped BigOperators
+open scoped BigOperators ContDiff
 open ContinuousFlexibility.Radial ContinuousFlexibility.Statements
+
+set_option backward.isDefEq.respectTransparency false
 
 /-- The derivative partner of the existing normalized mean/cosine basis. -/
 def n06AngularPartner : ℕ → ℝ → ℝ

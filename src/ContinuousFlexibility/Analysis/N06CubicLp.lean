@@ -33,7 +33,7 @@ theorem n06_memLp_of_square_le_finiteSum
   have hsq : Integrable (fun x => f x ^ 2) μ := by
     apply hmajor.mono' (hf.pow 2)
     filter_upwards [hpoint] with x hx
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (f x))] using hx
+    simpa only [Pi.pow_apply, Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (f x))] using hx
   let h : MemLp f 2 μ := (memLp_two_iff_integrable_sq hf).mpr hsq
   have hnorm : ‖h.toLp f‖ ^ 2 ≤ K * ∑ i, ‖(hg i).toLp (g i)‖ ^ 2 := by
     rw [r11b_norm_toLp_sq h]

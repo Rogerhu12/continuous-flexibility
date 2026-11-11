@@ -125,10 +125,15 @@ theorem n06OperatorFromDense_physical
   have hc : IsClosed {p : B.Space × V.level (3 / 4 : ℝ) 0 b | Rel p.1 p.2} := hclosed
   have hi : ∀ f : Core, Rel (B.inverse (i f)) (i f + R₀ f) := hcore
   have hall (F : V.level (3 / 4 : ℝ) 0 b) :
-      Rel (B.inverse F) (F + n06DenseExtension i R₀ F) :=
-    n06DenseExtension_closedRelation
-      (Core := Core) (E := V.level (3 / 4 : ℝ) 0 b) (X := B.Space)
-      i R₀ hdense hbound B.inverse Rel hc hi F
+      Rel (B.inverse F) (F + n06DenseExtension i R₀ F) := by
+    refine hdense.induction_on
+      (p := fun G => Rel (B.inverse G) (G + n06DenseExtension i R₀ G)) F ?_ ?_
+    · exact hc.preimage
+        (B.inverse.continuous.prodMk
+          (continuous_id.add (n06DenseExtension i R₀).continuous))
+    · intro f
+      rw [n06DenseExtension_on_core i R₀ hdense hbound]
+      exact hi f
   intro u
   change Rel u (n06OperatorFromRelative B (n06DenseExtension i R₀) u)
   rw [n06OperatorFromRelative_apply]
@@ -157,7 +162,8 @@ theorem n06_exists_relativeData_of_denseCore
         (V.forget (3 / 4 : ℝ) 0 b (i f + R₀ z f))) :
     ∃ Relative : RelativeInverseData S K V b B,
       N06Properties D S C K L V b B Relative base ε := by
-  obtain ⟨_, hV, _, _, _, _, _, hright, hleft, _⟩ := hN05
+  have hN05copy := hN05
+  obtain ⟨_, hV, _, _, _, _, _, hright, hleft, _⟩ := hN05copy
   let : CompleteSpace (V.level (3 / 4 : ℝ) 0 b) :=
     (hV.2.1 (3 / 4 : ℝ) 0 b).completeSpace_coe
   let R : AnnularState S × ℝ →

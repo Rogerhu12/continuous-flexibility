@@ -14,8 +14,10 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set MeasureTheory
-open scoped BigOperators
+open scoped BigOperators ContDiff
 open ContinuousFlexibility.Radial ContinuousFlexibility.Statements
+
+set_option backward.isDefEq.respectTransparency false
 
 private theorem n06_angularPairing_const_mul (a b : ℝ) (f g : ℝ → ℝ) :
     angularPairing (fun θ => a * f θ) (fun θ => b * g θ) =
@@ -49,13 +51,18 @@ theorem n06_angularAverage_sq_finite_orthogonal {ι : Type*} [DecidableEq ι]
     rw [pow_two, Finset.sum_mul]
     exact Finset.sum_congr rfl (fun i _ => Finset.mul_sum _ _ _)
   have heq := funext hpoint
-  rw [heq, n06_angularAverage_finsetSum s _
-    (fun i hi => continuous_finsetSum s (fun j hj =>
-      (continuous_const.mul (he i hi)).mul (continuous_const.mul (he j hj))))]
+  have hterm (i : ι) (hi : i ∈ s) (j : ι) (hj : j ∈ s) :
+      Continuous (fun θ => (c i * e i θ) * (c j * e j θ)) :=
+    (continuous_const.mul (he i hi)).mul (continuous_const.mul (he j hj))
+  have hsum (i : ι) (hi : i ∈ s) :
+      Continuous (fun θ => ∑ j ∈ s, (c i * e i θ) * (c j * e j θ)) :=
+    continuous_finsetSum s (fun j hj => hterm i hi j hj)
+  rw [heq, n06_angularAverage_finsetSum s
+    (fun i θ => ∑ j ∈ s, (c i * e i θ) * (c j * e j θ)) hsum]
   apply Finset.sum_congr rfl
   intro i hi
-  rw [n06_angularAverage_finsetSum s _
-    (fun j hj => (continuous_const.mul (he i hi)).mul (continuous_const.mul (he j hj)))]
+  rw [n06_angularAverage_finsetSum s (fun j θ => (c i * e i θ) * (c j * e j θ))
+    (hterm i hi)]
   change (∑ j ∈ s, angularPairing (fun θ => c i * e i θ)
       (fun θ => c j * e j θ)) = w i * c i ^ 2
   rw [Finset.sum_eq_single i]
@@ -128,7 +135,7 @@ theorem n06_mixedAngularDerivative_finiteSynthesis {ι : Type*}
   simp only [mixedDerivative, iteratedDeriv_zero, r11bFiniteSynthesis]
   rw [iteratedDeriv_fun_sum (fun i hi =>
     (contDiff_const.mul (he i hi)).contDiffAt.of_le (by simp))]
-  exact Finset.sum_congr rfl (fun i _ => iteratedDeriv_const_mul_field _ _ _ _)
+  exact Finset.sum_congr rfl (fun i _ => iteratedDeriv_const_mul_field _ _)
 
 /-- The k-th actual angular derivative has the exact frequency-square
 weight ν^(2k), with any radial endpoint weight. -/
@@ -156,16 +163,20 @@ theorem n06CylinderSquare_angularJet_finite {ι : Type*} [DecidableEq ι]
         angularAverage (fun θ =>
           r11bFiniteSynthesis s u (fun i => iteratedDeriv k (e i)) (y, θ) ^ 2) =
       ∑ i ∈ s, ν i ^ (2 * k) * (cylinderWeight y ^ a * u i y ^ 2) := by
-    rw [r11bFiniteSynthesis,
-      n06_angularAverage_sq_finite_orthogonal s _ _ (fun i => u i y) hj hgram,
+    unfold r11bFiniteSynthesis
+    rw [n06_angularAverage_sq_finite_orthogonal s _ _ (fun i => u i y) hj hgram,
       Finset.mul_sum]
     apply Finset.sum_congr rfl
     intro i _
     ring
   simp_rw [hpoint]
-  rw [intervalIntegral.integral_finsetSum
-    (fun i hi => (continuous_const.mul
-      ((cylinderWeight_continuous.pow a).mul ((hu i hi).pow 2))).intervalIntegrable _ _)]
+  have hterm (i : ι) (hi : i ∈ s) :
+      Continuous (fun y => ν i ^ (2 * k) * (cylinderWeight y ^ a * u i y ^ 2)) :=
+    continuous_const.mul ((cylinderWeight_continuous.pow a).mul ((hu i hi).pow 2))
+  have hint (i : ι) (hi : i ∈ s) :
+      IntervalIntegrable (fun y => ν i ^ (2 * k) * (cylinderWeight y ^ a * u i y ^ 2))
+        volume 0 1 := (hterm i hi).intervalIntegrable _ _
+  rw [intervalIntegral.integral_finsetSum hint]
   exact Finset.sum_congr rfl (fun i _ => intervalIntegral.integral_const_mul _ _)
 
 /-- The genuine finite angular-jet square norm. -/

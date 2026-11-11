@@ -57,7 +57,7 @@ private theorem n06_cubic_firstOrder_abs {d e A Ar At δ : ℝ}
     |3 * e * A + d * Ar + d * At| ≤ |3 * e * A + d * Ar| + |d * At| :=
       abs_add_le _ _
     _ ≤ (|3 * e * A| + |d * Ar|) + |d * At| :=
-      add_le_add_right (abs_add_le _ _) _
+      add_le_add (abs_add_le _ _) le_rfl
     _ ≤ (3 * δ + δ) + δ := add_le_add (add_le_add h₁ h₂) h₃
     _ = 5 * δ := by ring
 
@@ -168,15 +168,18 @@ theorem n06CubicCoefficients_divergence
       3 * d p ^ 2 * radialPartial d p := n06_fderiv_cube_apply hd (1, 0)
   have ht : angularPartial (fun q => d q ^ 3) p =
       3 * d p ^ 2 * angularPartial d p := n06_fderiv_cube_apply hd (0, 1)
+  have hd₃ : DifferentiableAt ℝ (fun q => d q ^ 3) p := hd.pow 3
+  have hca : DifferentiableAt ℝ (fun q => d q ^ 3 * A q) p := hd₃.mul hA
+  have hcb : DifferentiableAt ℝ (fun q => d q ^ 3 * B q) p := hd₃.mul hB
+  have hcc : DifferentiableAt ℝ (fun q => d q ^ 3 * C q) p := hd₃.mul hC
   change
     radialPartial (fun q => d q ^ 3 * A q * radialPartial u q +
       d q ^ 3 * B q * angularPartial u q) p +
     angularPartial (fun q => d q ^ 3 * B q * radialPartial u q +
       d q ^ 3 * C q * angularPartial u q) p = _
-  rw [divergence_expansion_of_coefficients ((hd.pow 3).mul hA)
-    ((hd.pow 3).mul hB) ((hd.pow 3).mul hC) hu]
-  rw [radialPartial_mul (hd.pow 3) hA, angularPartial_mul (hd.pow 3) hB,
-    radialPartial_mul (hd.pow 3) hB, angularPartial_mul (hd.pow 3) hC]
+  rw [divergence_expansion_of_coefficients hca hcb hcc hu]
+  rw [radialPartial_mul hd₃ hA, angularPartial_mul hd₃ hB,
+    radialPartial_mul hd₃ hB, angularPartial_mul hd₃ hC]
   simp only [hr, ht, hdθ, zero_mul, mul_zero, zero_add]
   unfold n06CubicExpression
   ring
@@ -212,10 +215,13 @@ theorem n06_divergenceOperator_sub {L L₀ : SymmetricCoefficients}
         { a := fun q => L.a q - L₀.a q
           b := fun q => L.b q - L₀.b q
           c := fun q => L.c q - L₀.c q } u p := by
+  have hda : DifferentiableAt ℝ (fun q => L.a q - L₀.a q) p := ha.sub ha₀
+  have hdb : DifferentiableAt ℝ (fun q => L.b q - L₀.b q) p := hb.sub hb₀
+  have hdc : DifferentiableAt ℝ (fun q => L.c q - L₀.c q) p := hc.sub hc₀
   simp only [divergenceOperator]
   rw [divergence_expansion_of_coefficients ha hb hc hu,
     divergence_expansion_of_coefficients ha₀ hb₀ hc₀ hu,
-    divergence_expansion_of_coefficients (ha.sub ha₀) (hb.sub hb₀) (hc.sub hc₀) hu]
+    divergence_expansion_of_coefficients hda hdb hdc hu]
   rw [radialPartial_sub ha ha₀, angularPartial_sub hb hb₀,
     radialPartial_sub hb hb₀, angularPartial_sub hc hc₀]
   ring

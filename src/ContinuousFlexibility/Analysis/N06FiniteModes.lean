@@ -16,8 +16,10 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set MeasureTheory
-open scoped BigOperators
+open scoped BigOperators ContDiff
 open ContinuousFlexibility.Radial
+
+set_option backward.isDefEq.respectTransparency false
 
 /-- The normalized angular square integral on the unit radial cylinder,
 with an integral power of the vanishing endpoint weight. -/
@@ -40,7 +42,8 @@ theorem n06CylinderSquare_finiteSynthesis {ι : Type*} [DecidableEq ι]
       cylinderWeight y ^ k *
         angularAverage (fun θ => r11bFiniteSynthesis s u e (y, θ) ^ 2) =
       ∑ i ∈ s, cylinderWeight y ^ k * u i y ^ 2 := by
-    rw [r11bFiniteSynthesis, angularAverage_sq_finite_sum s e he horth (fun i => u i y),
+    unfold r11bFiniteSynthesis
+    rw [angularAverage_sq_finite_sum s e he horth (fun i => u i y),
       Finset.mul_sum]
   simp_rw [hpoint]
   apply intervalIntegral.integral_finsetSum
@@ -57,7 +60,7 @@ theorem n06CylinderSquare_finite_multiplier {ι : Type*} [DecidableEq ι]
       angularPairing (e i) (e j) = if i = j then 1 else 0) :
     n06CylinderSquare k (r11bFiniteSynthesis s (fun i y => a i * u i y) e) =
       ∑ i ∈ s, a i ^ 2 * (∫ y in (0 : ℝ)..1, cylinderWeight y ^ k * u i y ^ 2) := by
-  rw [n06CylinderSquare_finiteSynthesis s _ e k
+  rw [n06CylinderSquare_finiteSynthesis s (fun i y => a i * u i y) e k
     (fun i hi => continuous_const.mul (hu i hi)) he horth]
   apply Finset.sum_congr rfl
   intro i hi

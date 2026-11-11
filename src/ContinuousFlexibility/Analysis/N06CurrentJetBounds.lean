@@ -86,7 +86,10 @@ theorem n06_oneHighVariationWeight_segment_le
   have hproduct : p N h * p base h ≤ p N h := by
     simpa only [mul_one] using mul_le_mul_of_nonneg_left hlow hNnonneg
   rw [n06_oneHighVariationWeight_one]
-  have hfirst := mul_le_mul_of_nonneg_right (add_le_add le_rfl hradial) hnonneg
+  have hfirst :
+      (1 + p high (x₀ + t • (x - x₀) - x₀)) * p base h ≤
+        (1 + p N h) * p base h :=
+    mul_le_mul_of_nonneg_right (add_le_add (le_refl (1 : ℝ)) hradial) hnonneg
   change (1 + p high (x₀ + t • (x - x₀) - x₀)) * p base h + p high h ≤ 3 * p N h
   nlinarith only [hfirst, hproduct, hbase, hhigh]
 
@@ -107,7 +110,9 @@ theorem n06_smoothDirections_oneHigh_difference_le
 
 private theorem n06_currentCoefficientFamily_bound
     (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (base loss : ℕ)
-    (x₀ : E) (H E₀ : ℕ → ℝ) (cells : ℕ → Set ℝ)
+    (x₀ : E) (q : ℕ → E → ℝ)
+    (hgrade : ∀ s z, p s (z - x₀) = q s z)
+    (H E₀ : ℕ → ℝ) (cells : ℕ → Set ℝ)
     (family : Fin 3 → ℕ → ℕ → PolarPoint → E → ℝ)
     (hH : ∀ m, 0 < H m) (hE : ∀ m, 0 < E₀ m)
     (hzero : ∀ i a b y, family i a b y x₀ = 0)
@@ -119,9 +124,9 @@ private theorem n06_currentCoefficientFamily_bound
           |J.D 1 z v| ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
             oneHighVariationWeight p base (s + loss) (z - x₀) v) :
     ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b y,
-      a + b ≤ s → y.1 ∈ cells m → ∀ z ∈ U, p base (z - x₀) ≤ 1 →
+      a + b ≤ s → y.1 ∈ cells m → ∀ z ∈ U, q base z ≤ 1 →
       |family i a b y z| ≤
-        3 * (B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B) * p (max base (s + loss)) (z - x₀) := by
+        3 * (B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B) * q (max base (s + loss)) z := by
   intro s
   obtain ⟨B, hB, hJ⟩ := hfamily s
   refine ⟨B, hB, ?_⟩
@@ -130,11 +135,69 @@ private theorem n06_currentCoefficientFamily_bound
   have hK : 0 ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B :=
     mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
       (Real.rpow_pos_of_pos (hE m) _).le
+  have hlow' : p base (z - x₀) ≤ 1 := (hgrade base z).trans_le hlow
   have hm := n06_smoothDirections_oneHigh_difference_le J p hp base (s + loss)
-    x₀ z hK (hsegment z hz) hlow hbound
-  simpa only [hzero i a b y, sub_zero] using hm
+    x₀ z hK (hsegment z hz) hlow' hbound
+  simpa only [hzero i a b y, sub_zero, hgrade] using hm
+
+private theorem n06_seminormPair_segment (p : Seminorm ℝ E) (x₀ : E)
+    {ε : ℝ} {z : E × ℝ} (hz : p (z.1 - x₀) < ε ∧ |z.2| < ε)
+    (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
+    p (((x₀, (0 : ℝ)) + t • (z - (x₀, 0))).1 - x₀) < ε ∧
+      |((x₀, (0 : ℝ)) + t • (z - (x₀, 0))).2| < ε := by
+  constructor
+  · have he : ((x₀, (0 : ℝ)) + t • (z - (x₀, 0))).1 - x₀ =
+        t • (z.1 - x₀) := by
+      simp only [Prod.fst_add, Prod.smul_fst, Prod.fst_sub]
+      abel
+    rw [he, map_smul_eq_mul, Real.norm_of_nonneg ht.1]
+    have hscale : t * p (z.1 - x₀) ≤ p (z.1 - x₀) := by
+      simpa only [one_mul] using
+        (mul_le_mul_of_nonneg_right ht.2 (apply_nonneg p (z.1 - x₀)))
+    exact hscale.trans_lt hz.1
+  · have he : ((x₀, (0 : ℝ)) + t • (z - (x₀, 0))).2 = t * z.2 := by
+      simp only [Prod.snd_add, Prod.smul_snd, Prod.snd_sub, sub_zero, zero_add,
+        smul_eq_mul]
+    rw [he, abs_mul, abs_of_nonneg ht.1]
+    have hscale : t * |z.2| ≤ |z.2| := by
+      simpa only [one_mul] using mul_le_mul_of_nonneg_right ht.2 (abs_nonneg z.2)
+    exact hscale.trans_lt hz.2
 
 end ScalarDifference
+
+private theorem n06_low_sum_le_one {a b c δ : ℝ}
+    (hab : a ≤ b) (hb : b < δ) (hc : c < δ) (hδ : δ ≤ (1 / 2 : ℝ)) :
+    a + c ≤ 1 := by linarith
+
+private theorem n06_sum_le_twice_radius {a b δ : ℝ} (ha : a < δ) (hb : b < δ) :
+    a + b ≤ 2 * δ := by linarith
+
+private theorem n06_currentFamily_bound_small
+    {E : Type*} (q : ℕ → E → ℝ) (base loss : ℕ) (ε : ℝ)
+    (U : Set E) (V : ℕ → ℝ → Set E)
+    (H E₀ : ℕ → ℝ) (cells : ℕ → Set ℝ)
+    (family : Fin 3 → ℕ → ℕ → PolarPoint → E → ℝ)
+    (hH : ∀ m, 0 < H m) (hE : ∀ m, 0 < E₀ m)
+    (hVU : ∀ s δ, δ ≤ ε → V s δ ⊆ U)
+    (hlow : ∀ s δ, δ ≤ (1 / 2 : ℝ) → ∀ z ∈ V s δ, q base z ≤ 1)
+    (hhigh : ∀ s δ, ∀ z ∈ V s δ, q (max base (s + loss)) z ≤ 2 * δ)
+    (hbound : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b y,
+      a + b ≤ s → y.1 ∈ cells m → ∀ z ∈ U, q base z ≤ 1 →
+      |family i a b y z| ≤
+        3 * (B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B) * q (max base (s + loss)) z) :
+    ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ δ : ℝ, δ ≤ ε → δ ≤ (1 / 2 : ℝ) →
+      ∀ m i a b y, a + b ≤ s → y.1 ∈ cells m → ∀ z ∈ V s δ,
+        |family i a b y z| ≤ 6 * (B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B) * δ := by
+  intro s
+  obtain ⟨B, hB, hb⟩ := hbound s
+  refine ⟨B, hB, ?_⟩
+  intro δ hδε hδ m i a b y hab hy z hz
+  have hm := hb m i a b y hab hy z (hVU s δ hδε hz) (hlow s δ hδ z hz)
+  have hK : 0 ≤ 3 * (B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B) :=
+    mul_nonneg (by norm_num) (mul_nonneg
+      (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
+      (Real.rpow_pos_of_pos (hE m) _).le)
+  exact hm.trans ((mul_le_mul_of_nonneg_left (hhigh s δ z hz) hK).trans_eq (by ring))
 
 theorem n06_stateParameterGrading_sub_reference (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (s : ℕ) (z : AnnularState S × ℝ) :
@@ -144,40 +207,51 @@ theorem n06_stateParameterGrading_sub_reference (S : PhysicalSpacesData)
     LinearMap.fst_apply, LinearMap.snd_apply, Prod.fst_sub, Prod.snd_sub,
     sub_zero, coe_normSeminorm, Real.norm_eq_abs]
 
-/-- The actual common state neighborhood contains the full affine segment
-from the reference state to any of its points. -/
-theorem n06_stateNeighborhood_segment {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
-    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
-    (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-    (C.referenceState, 0) + t • (z - (C.referenceState, 0)) ∈
-      stateNeighborhood S C base ε := by
-  constructor
-  · have he : ((C.referenceState, (0 : ℝ)) +
-        t • (z - (C.referenceState, 0))).1 - C.referenceState =
-        t • (z.1 - C.referenceState) := by
-      simp only [Prod.fst_add, Prod.smul_fst, Prod.fst_sub]
-      abel
-    rw [he, map_smul_eq_mul, Real.norm_of_nonneg ht.1]
-    have hscale : t * stateGrading S base (z.1 - C.referenceState) ≤
-        stateGrading S base (z.1 - C.referenceState) := by
-      simpa only [one_mul] using
-        (mul_le_mul_of_nonneg_right ht.2
-          (apply_nonneg (stateGrading S base) (z.1 - C.referenceState)))
-    exact hscale.trans_lt hz.1
-  · have he : ((C.referenceState, (0 : ℝ)) +
-        t • (z - (C.referenceState, 0))).2 = t * z.2 := by
-      simp only [Prod.snd_add, Prod.smul_snd, Prod.snd_sub, sub_zero, zero_add,
-        smul_eq_mul]
-    rw [he, abs_mul, abs_of_nonneg ht.1]
-    have hscale : t * |z.2| ≤ |z.2| := by
-      simpa only [one_mul] using mul_le_mul_of_nonneg_right ht.2 (abs_nonneg z.2)
-    exact hscale.trans_lt hz.2
-
 theorem n06_coefficientFamily_reference (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (i : Fin 3) (a b : ℕ) (p : PolarPoint) :
     coefficientFamily D S C i a b p (C.referenceState, 0) = 0 := by
-  simp only [coefficientFamily, sub_self, mixedDerivative, iteratedDeriv_const_zero]
+  simp only [coefficientFamily, sub_self, mixedDerivative, iteratedDeriv_fun_const_zero]
+
+private def N06CoefficientJetBoundAtOrder (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (base loss : ℕ) (ε : ℝ) (k s : ℕ) (B : ℝ) : Prop :=
+  ∀ m i a b y, a + b ≤ s → y.1 ∈ D.cells m →
+    ∃ J : SmoothDirections (stateNeighborhood S C base ε)
+        (coefficientFamily D S C i a b y),
+      ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+        |J.D k z v| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
+          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+            base (s + loss) (z - (C.referenceState, 0)) v
+
+private theorem n06_N01_coefficientJetBounds {D : ReferenceData} {T : MaterialData}
+    {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {base loss : ℕ} {ε : ℝ} (h : N01Properties D T S C base loss ε) :
+    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ N06CoefficientJetBoundAtOrder D T S C base loss ε k s B := by
+  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, hcoefficient, _⟩ := h
+  exact hcoefficient
+
+/-- A named scalar bound keeps existential elimination independent of the
+large concrete projective-state representation. -/
+def N06CurrentCoefficientBoundAtOrder (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (base loss : ℕ) (ε : ℝ) (s : ℕ) (B : ℝ) : Prop :=
+  ∀ m (i : Fin 3) a b p,
+    a + b ≤ s → p.1 ∈ D.cells m → ∀ z ∈ stateNeighborhood S C base ε,
+    stateGrading S base (z.1 - C.referenceState) + |z.2| ≤ 1 →
+    |coefficientFamily D S C i a b p z| ≤
+      3 * (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B) *
+        (stateGrading S (max base (s + loss)) (z.1 - C.referenceState) + |z.2|)
+
+/-- The same family after choosing the common low order for one fixed
+spatial jet order. -/
+def N06SmallCoefficientBoundAtOrder (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (base loss : ℕ) (ε : ℝ) (s : ℕ) (B : ℝ) : Prop :=
+  ∀ δ : ℝ, δ ≤ ε → δ ≤ (1 / 2 : ℝ) →
+    ∀ m (i : Fin 3) a b p, a + b ≤ s → p.1 ∈ D.cells m →
+    ∀ z ∈ stateNeighborhood S C (max base (s + loss)) δ,
+    |coefficientFamily D S C i a b p z| ≤
+      6 * (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B) * δ
 
 /-- The N01 first variation estimate yields a genuinely small coefficient
 difference, including all spatial mixed derivatives up to the fixed order. -/
@@ -185,27 +259,24 @@ theorem n06_N01_currentCoefficient_bound {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {base loss : ℕ} {ε : ℝ}
     (hT : IsMaterialData D T) (h : N01Properties D T S C base loss ε) :
-    ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m (i : Fin 3) a b p,
-      a + b ≤ s → p.1 ∈ D.cells m → ∀ z ∈ stateNeighborhood S C base ε,
-      stateGrading S base (z.1 - C.referenceState) + |z.2| ≤ 1 →
-      |coefficientFamily D S C i a b p z| ≤
-        3 * (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B) *
-          (stateGrading S (max base (s + loss)) (z.1 - C.referenceState) + |z.2|) := by
-  rcases h with ⟨hRef, _, _, _, _, _, _, _, _, _, _, hcoefficient, _⟩
-  obtain ⟨_, hprofile⟩ := hRef.1
+    ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      N06CurrentCoefficientBoundAtOrder D T S C base loss ε s B := by
+  obtain ⟨_, hprofile⟩ := h.1.1
   have hsample (m : ℕ) : T.sample m ∈ Ioo D.a D.b :=
     materialSample_mem_radialCore hT hprofile.2.1 m
   have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
     pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
   have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsample m)).2.1
   have hE (m : ℕ) : 0 < T.E0 (T.sample m) := (hT.2.1 _ (hsample m)).2.2.1
-  have hresult := n06_currentCoefficientFamily_bound
+  exact n06_currentCoefficientFamily_bound
     (E := AnnularState S × ℝ) (U := stateNeighborhood S C base ε)
     (pairGrading (stateGrading S) realGrading) hpair base loss (C.referenceState, 0)
+    (fun s z => stateGrading S s (z.1 - C.referenceState) + |z.2|)
+    (n06_stateParameterGrading_sub_reference S C)
     (fun m => T.H (T.sample m)) (fun m => T.E0 (T.sample m)) D.cells
     (coefficientFamily D S C) hH hE (n06_coefficientFamily_reference D S C)
-    (fun z hz => n06_stateNeighborhood_segment hz) (fun s => hcoefficient 1 s)
-  simpa only [n06_stateParameterGrading_sub_reference] using hresult
+    (fun z hz => n06_seminormPair_segment (E := AnnularState S)
+      (stateGrading S base) C.referenceState hz) (fun s => n06_N01_coefficientJetBounds h 1 s)
 
 /-- At any fixed jet order, a sufficiently high common low order makes
 the coefficient difference linear in the final neighborhood radius. -/
@@ -213,37 +284,25 @@ theorem n06_N01_currentCoefficient_small {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {base loss : ℕ} {ε : ℝ}
     (hT : IsMaterialData D T) (h : N01Properties D T S C base loss ε) :
-    ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ δ : ℝ, δ ≤ ε → δ ≤ (1 / 2 : ℝ) →
-      ∀ m (i : Fin 3) a b p, a + b ≤ s → p.1 ∈ D.cells m →
-      ∀ z ∈ stateNeighborhood S C (max base (s + loss)) δ,
-      |coefficientFamily D S C i a b p z| ≤
-        6 * (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B) * δ := by
+    ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      N06SmallCoefficientBoundAtOrder D T S C base loss ε s B := by
   obtain ⟨_, hprofile⟩ := h.1.1
   have hsample (m : ℕ) : T.sample m ∈ Ioo D.a D.b :=
     materialSample_mem_radialCore hT hprofile.2.1 m
-  intro s
-  obtain ⟨B, hB, hbound⟩ := n06_N01_currentCoefficient_bound hT h s
-  refine ⟨B, hB, ?_⟩
-  intro δ hδε hδ m i a b p hab hp z hz
-  have hzold := n06_stateNeighborhood_mono (C := C) (le_max_left base (s + loss)) hδε hz
-  have hlow : stateGrading S base (z.1 - C.referenceState) + |z.2| ≤ 1 := by
-    have hb := solve_stateGrading_monotone S (le_max_left base (s + loss))
-      (z.1 - C.referenceState)
-    have h₁ := hz.1
-    have h₂ := hz.2
-    linarith only [hb, h₁, h₂, hδ]
-  have hm := hbound m i a b p hab hp z hzold hlow
-  have hsum : stateGrading S (max base (s + loss)) (z.1 - C.referenceState) +
-      |z.2| ≤ 2 * δ := by
-    have h₁ := hz.1
-    have h₂ := hz.2
-    linarith only [h₁, h₂]
-  have hH := (hT.2.1 _ (hsample m)).2.1
-  have hE := (hT.2.1 _ (hsample m)).2.2.1
-  have hK : 0 ≤ 3 * (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B) :=
-    mul_nonneg (by norm_num) (mul_nonneg
-      (mul_nonneg hB.le (Real.rpow_pos_of_pos hH _).le)
-      (Real.rpow_pos_of_pos hE _).le)
-  exact hm.trans ((mul_le_mul_of_nonneg_left hsum hK).trans_eq (by ring))
+  exact n06_currentFamily_bound_small (E := AnnularState S × ℝ)
+    (fun s z => stateGrading S s (z.1 - C.referenceState) + |z.2|) base loss ε
+    (stateNeighborhood S C base ε)
+    (fun s δ => stateNeighborhood S C (max base (s + loss)) δ)
+    (fun m => T.H (T.sample m)) (fun m => T.E0 (T.sample m)) D.cells
+    (coefficientFamily D S C)
+    (fun m => (hT.2.1 _ (hsample m)).2.1)
+    (fun m => (hT.2.1 _ (hsample m)).2.2.1)
+    (fun s δ hδε => n06_stateNeighborhood_mono (C := C)
+      (le_max_left base (s + loss)) hδε)
+    (fun s δ hδ z hz => n06_low_sum_le_one
+      (solve_stateGrading_monotone S (le_max_left base (s + loss))
+        (z.1 - C.referenceState)) hz.1 hz.2 hδ)
+    (fun s δ z hz => n06_sum_le_twice_radius hz.1 hz.2)
+    (n06_N01_currentCoefficient_bound hT h)
 
 end ContinuousFlexibility.Statements

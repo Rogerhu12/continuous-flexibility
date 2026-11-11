@@ -183,6 +183,17 @@ theorem morseTransition_earlier_cap_action (T : Statements.MorseChainData) {C : 
     (hMono.monotoneOn hm (hm.trans hmPrev) hmPrev).trans hlo
   exact (div_le_iff₀ (sqrt_pos.mpr (morseTransition_A_pos T m (hd m hm)))).mp ht
 
+/-- The retained Morse parameters have a fixed positive logarithmic gap. -/
+theorem morseTransition_log_ratio_lower (T : Statements.MorseChainData) (n : ℕ)
+    (hd : T.d n = morseChainInteger n) :
+    log 4 ≤ log (Statements.morseChainA T n / Statements.morseChainB T n) := by
+  have hd2 : (2 : ℝ) ≤ T.d n := by
+    rw [hd]
+    exact_mod_cast morseChainInteger_ge_two n
+  have hpar := morseChainParameters_pos T n hd2
+  exact log_le_log (by norm_num : (0 : ℝ) < 4)
+    ((le_div_iff₀ hpar.2).mpr hpar.1.le)
+
 private theorem morseTransition_sqrt_log_ratio_le (T : Statements.MorseChainData) (n : ℕ)
     (hd : T.d n = morseChainInteger n) :
     sqrt (log (Statements.morseChainA T n / Statements.morseChainB T n)) ≤ 5 * ((n : ℝ) + 1) := by
@@ -247,22 +258,23 @@ private theorem morseTransition_A_ratio_le (T : Statements.MorseChainData) (n m 
 
 private theorem morseTransition_deep_ratio_bound (T : Statements.MorseChainData) {C : ℝ} (hC : 0 < C)
     (hd : ∀ n, T.index ≤ n → T.d n = morseChainInteger n) {n j m : ℕ}
-    (hband : Statements.radialFrequencyBand T C n j) (hm : n < m) :
+    (hn : T.index ≤ n) (hupper : (j : ℝ) < Statements.radialFrequencyThreshold T C n)
+    (hm : n < m) :
     (j : ℝ) ^ 2 * Statements.morseChainA T m *
         sqrt (log (Statements.morseChainA T m / Statements.morseChainB T m)) ≤
       5 * C ^ 2 * Statements.radialQ n ^ 2 * (Statements.morseChainA T m / Statements.morseChainA T n) *
         ((m : ℝ) + 1) := by
   let A := Statements.morseChainA T
   let B := Statements.morseChainB T
-  have hAn := morseTransition_A_pos T n (hd n hband.1)
-  have hAm := morseTransition_A_pos T m (hd m (hband.1.trans hm.le))
+  have hAn := morseTransition_A_pos T n (hd n hn)
+  have hAm := morseTransition_A_pos T m (hd m (hn.trans hm.le))
   have hQ : 0 ≤ Statements.radialQ n := (sq_nonneg _).trans (radial_nat_sq_le_Q n)
   have hj : (j : ℝ) ^ 2 ≤ (C * Statements.radialQ n) ^ 2 / A n := by
-    have hjlt : (j : ℝ) < C * Statements.radialQ n / sqrt (A n) := hband.2.2
+    have hjlt : (j : ℝ) < C * Statements.radialQ n / sqrt (A n) := hupper
     have h := (sq_le_sq₀ (Nat.cast_nonneg (α := ℝ) j)
       (div_nonneg (mul_nonneg hC.le hQ) (sqrt_nonneg _))).2 hjlt.le
     rwa [div_pow, sq_sqrt hAn.le] at h
-  have hL := morseTransition_sqrt_log_ratio_le T m (hd m (hband.1.trans hm.le))
+  have hL := morseTransition_sqrt_log_ratio_le T m (hd m (hn.trans hm.le))
   calc
     _ ≤ ((C * Statements.radialQ n) ^ 2 / A n) * A m * sqrt (log (A m / B m)) :=
       mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hj hAm.le) (sqrt_nonneg _)
@@ -284,7 +296,7 @@ theorem morseTransition_next_deep_bound (T : Statements.MorseChainData) {C : ℝ
   have hAs := morseTransition_A_pos T (n + 1) (hd (n + 1) (hband.1.trans hn.le))
   have hcoef : 0 ≤ 5 * C ^ 2 * Statements.radialQ n ^ 2 *
       (Statements.morseChainA T (n + 1) / Statements.morseChainA T n) := by positivity
-  refine (morseTransition_deep_ratio_bound T hC hd hband hn).trans ?_
+  refine (morseTransition_deep_ratio_bound T hC hd hband.1 hband.2.2 hn).trans ?_
   push_cast
   calc
     _ ≤ 5 * C ^ 2 * Statements.radialQ n ^ 2 *
@@ -303,16 +315,17 @@ private theorem morseTransition_deeper_exp_bound {n m : ℕ} (hnm : n < m) :
     _ = exp ((n : ℝ) ^ 2 - (m : ℝ) ^ 2 + (m : ℝ)) := by rw [← exp_add]; congr 1; ring
     _ ≤ _ := exp_le_exp.mpr (by nlinarith only [hp])
 
-/-- One decaying bound applies simultaneously to all cells strictly deeper
-than the transition cell. -/
-theorem morseTransition_deeper_bound (T : Statements.MorseChainData) {C : ℝ} (hC : 0 < C)
+/-- Every frequency below the cutoff has the same bound on all deeper cells.
+No lower endpoint of a transition band is needed. -/
+theorem morseTransition_deeper_bound_of_upper (T : Statements.MorseChainData) {C : ℝ} (hC : 0 < C)
     (hd : ∀ n, T.index ≤ n → T.d n = morseChainInteger n) {n j m : ℕ}
-    (hband : Statements.radialFrequencyBand T C n j) (hm : n < m) :
+    (hn : T.index ≤ n) (hupper : (j : ℝ) < Statements.radialFrequencyThreshold T C n)
+    (hm : n < m) :
     (j : ℝ) ^ 2 * Statements.morseChainA T m *
         sqrt (log (Statements.morseChainA T m / Statements.morseChainB T m)) ≤
       135 * C ^ 2 * Statements.radialQ n ^ 2 * exp (-(n : ℝ)) := by
-  have hratio := morseTransition_A_ratio_le T n m (hd n hband.1) (hd m (hband.1.trans hm.le))
-  refine (morseTransition_deep_ratio_bound T hC hd hband hm).trans ?_
+  have hratio := morseTransition_A_ratio_le T n m (hd n hn) (hd m (hn.trans hm.le))
+  refine (morseTransition_deep_ratio_bound T hC hd hn hupper hm).trans ?_
   calc
     _ ≤ 5 * C ^ 2 * Statements.radialQ n ^ 2 *
         (27 * exp ((n : ℝ) ^ 2 - (m : ℝ) ^ 2)) * ((m : ℝ) + 1) :=
@@ -320,6 +333,15 @@ theorem morseTransition_deeper_bound (T : Statements.MorseChainData) {C : ℝ} (
     _ = 135 * C ^ 2 * Statements.radialQ n ^ 2 *
         (((m : ℝ) + 1) * exp ((n : ℝ) ^ 2 - (m : ℝ) ^ 2)) := by ring
     _ ≤ _ := mul_le_mul_of_nonneg_left (morseTransition_deeper_exp_bound hm) (by positivity)
+
+/-- The original transition-band estimate is the upper-cutoff estimate. -/
+theorem morseTransition_deeper_bound (T : Statements.MorseChainData) {C : ℝ} (hC : 0 < C)
+    (hd : ∀ n, T.index ≤ n → T.d n = morseChainInteger n) {n j m : ℕ}
+    (hband : Statements.radialFrequencyBand T C n j) (hm : n < m) :
+    (j : ℝ) ^ 2 * Statements.morseChainA T m *
+        sqrt (log (Statements.morseChainA T m / Statements.morseChainB T m)) ≤
+      135 * C ^ 2 * Statements.radialQ n ^ 2 * exp (-(n : ℝ)) :=
+  morseTransition_deeper_bound_of_upper T hC hd hband.1 hband.2.2 hm
 
 private theorem morseTransition_q_polynomial_bound (n : ℕ) :
     Statements.radialQ n ≤ (exp 1 + 1) * ((n : ℝ) + 1) ^ 4 := by
@@ -392,14 +414,28 @@ theorem morseTransition_next_ratio_tendsto (T : Statements.MorseChainData)
         have h := mul_nonneg (sq_nonneg (Statements.radialQ n)) (exp_pos (-(n : ℝ))).le
         nlinarith only [h]
 
+/-- A single sufficiently deep cutoff controls every frequency below it,
+including frequencies below the lower endpoint of its old transition band. -/
+theorem morseTransition_eventually_deep_of_upper (T : Statements.MorseChainData)
+    {C : ℝ} (hC : 0 < C)
+    (hd : ∀ n, T.index ≤ n → T.d n = morseChainInteger n) {ε : ℝ} (hε : 0 < ε) :
+    ∀ᶠ n : ℕ in atTop, ∀ j : ℕ, T.index ≤ n →
+      (j : ℝ) < Statements.radialFrequencyThreshold T C n → ∀ m, n < m →
+        (j : ℝ) ^ 2 * Statements.morseChainA T m *
+          sqrt (log (Statements.morseChainA T m / Statements.morseChainB T m)) < ε := by
+  filter_upwards [(morseTransition_deeper_bound_tendsto C).eventually (eventually_lt_nhds hε)]
+    with n hn
+  intro j hidx hj m hm
+  exact (morseTransition_deeper_bound_of_upper T hC hd hidx hj hm).trans_lt hn
+
 theorem morseTransition_eventually_deep (T : Statements.MorseChainData) {C : ℝ} (hC : 0 < C)
     (hd : ∀ n, T.index ≤ n → T.d n = morseChainInteger n) {ε : ℝ} (hε : 0 < ε) :
     ∀ᶠ n : ℕ in atTop, ∀ j, Statements.radialFrequencyBand T C n j → ∀ m, n < m →
       (j : ℝ) ^ 2 * Statements.morseChainA T m *
         sqrt (log (Statements.morseChainA T m / Statements.morseChainB T m)) < ε := by
-  filter_upwards [(morseTransition_deeper_bound_tendsto C).eventually (eventually_lt_nhds hε)]
+  filter_upwards [morseTransition_eventually_deep_of_upper T hC hd hε]
     with n hn
   intro j hj m hm
-  exact (morseTransition_deeper_bound T hC hd hj hm).trans_lt hn
+  exact hn j hj.1 hj.2.2 m hm
 
 end ContinuousFlexibility.Radial

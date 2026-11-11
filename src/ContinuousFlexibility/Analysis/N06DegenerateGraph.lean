@@ -139,7 +139,7 @@ theorem n06_conjugated_forcing_square {K a a₁ V d e F w u G : ℝ}
           (a * (4 * d - 2 * e ^ 2) - V * d ^ 2) * u| ≤
           |d ^ 2 * F| + |(a₁ * d - 4 * a * e) * w| +
             |(a * (4 * d - 2 * e ^ 2) - V * d ^ 2) * u| :=
-        (abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)
+        (abs_add_le _ _).trans (add_le_add (abs_add_le _ _) le_rfl)
       _ ≤ |F| + 5 * K * |w| + 7 * K * |u| := by
         have hx : |d ^ 2 * F| ≤ |F| := by
           rw [abs_mul, abs_of_nonneg (sq_nonneg d)]
