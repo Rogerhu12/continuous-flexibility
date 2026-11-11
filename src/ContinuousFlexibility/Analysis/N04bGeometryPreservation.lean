@@ -26,7 +26,9 @@ theorem N04PartA.withOperatorFields
     (potential : (AnnularState S × ℝ) → ℕ → PolarPoint → ℝ)
     (dividedDifference : (AnnularState S × ℝ) → ℕ → SymmetricCoefficients) :
     N04PartA D S C
-      { K with coefficients := coefficients, potential := potential,
+      { K with
+        coefficients := coefficients
+        potential := potential
         dividedDifference := dividedDifference } base ε :=
   { normalizationOpen := h.normalizationOpen
     normalizationSupport := h.normalizationSupport
