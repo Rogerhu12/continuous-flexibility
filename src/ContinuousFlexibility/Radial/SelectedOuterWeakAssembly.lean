@@ -106,7 +106,7 @@ private theorem outerTest_decomposition {a l h b : ℝ} (hlh : l < h)
     intro r hr
     have hrc : r < c := by
       by_contra hn
-      exact hr (indicator_of_notMem hn ψ)
+      exact hr (indicator_of_notMem (show r ∉ Iio c from hn) ψ)
     rcases hsψ (hLsub hr) with hL | hR
     · exact hL
     · exact False.elim ((not_lt_of_ge hR.1.le) (hrc.trans hch))
@@ -122,7 +122,7 @@ private theorem outerTest_decomposition {a l h b : ℝ} (hlh : l < h)
       by_contra hn
       have hlt : r < c := lt_of_not_ge hn
       apply hr
-      simp only [ψR, ψL, indicator_of_mem hlt, sub_self]
+      simp only [ψR, ψL, indicator_of_mem (show r ∈ Iio c from hlt), sub_self]
     rcases hsψ hrψ with hL | hR
     · exact False.elim ((not_lt_of_ge hrc) (hL.2.trans hlc))
     · exact hR
@@ -133,7 +133,9 @@ private theorem outerTest_decomposition {a l h b : ℝ} (hlh : l < h)
   · intro r hr
     filter_upwards [isOpen_Ioi.mem_nhds (hch.trans hr.1)] with t ht
     change ψ t = ψ t - (Iio c).indicator ψ t
-    rw [indicator_of_notMem (not_lt.mpr ht.le), sub_zero]
+    have htc : c < t := ht
+    have hn : t ∉ Iio c := not_lt.mpr htc.le
+    rw [indicator_of_notMem hn, sub_zero]
   · funext r
     dsimp only [ψR]
     ring
@@ -162,24 +164,26 @@ theorem radialOuterPairOperator_weak {D : ReferenceData}
   simp only [Prod.fst, Prod.snd, zero_mul, sub_zero] at hleft hright
   have hJL : ⟪zL, matchingJacobiVector D hD j ψ hψ⟫_ℝ =
       ⟪zL, matchingJacobiVector D hD j ψL hLs⟫_ℝ := by
-    change ⟪l2ZeroExtend (radialHilbertMeasure D) (Ioo D.a l) measurableSet_Ioo
-        (RL (l2Restrict (radialHilbertMeasure D) (Ioo D.a l) F.1)),
-        matchingJacobiVector D hD j ψ hψ⟫_ℝ =
-      ⟪l2ZeroExtend (radialHilbertMeasure D) (Ioo D.a l) measurableSet_Ioo
-        (RL (l2Restrict (radialHilbertMeasure D) (Ioo D.a l) F.1)),
-        matchingJacobiVector D hD j ψL hLs⟫_ℝ
-    rw [outer_l2ZeroExtend_inner, outer_l2ZeroExtend_inner,
-      outerJacobiVector_restrict_congr hD j measurableSet_Ioo hψ hLs hLg]
+    let v : Lp ℝ 2 ((radialHilbertMeasure D).restrict (radialTailInterval D false l)) :=
+      RL (l2Restrict (radialHilbertMeasure D) (radialTailInterval D false l) F.1)
+    have hs : MeasurableSet (radialTailInterval D false l) := measurableSet_Ioo
+    have h₁ := outer_l2ZeroExtend_inner (radialHilbertMeasure D) hs v
+      (matchingJacobiVector D hD j ψ hψ)
+    have h₂ := outer_l2ZeroExtend_inner (radialHilbertMeasure D) hs v
+      (matchingJacobiVector D hD j ψL hLs)
+    exact h₁.trans ((congrArg (fun g => ⟪v, g⟫_ℝ)
+      (outerJacobiVector_restrict_congr hD j hs hψ hLs hLg)).trans h₂.symm)
   have hJR : ⟪zR, matchingJacobiVector D hD j ψ hψ⟫_ℝ =
       ⟪zR, matchingJacobiVector D hD j ψR hRs⟫_ℝ := by
-    change ⟪l2ZeroExtend (radialHilbertMeasure D) (Ioo h D.b) measurableSet_Ioo
-        (RR (l2Restrict (radialHilbertMeasure D) (Ioo h D.b) F.1)),
-        matchingJacobiVector D hD j ψ hψ⟫_ℝ =
-      ⟪l2ZeroExtend (radialHilbertMeasure D) (Ioo h D.b) measurableSet_Ioo
-        (RR (l2Restrict (radialHilbertMeasure D) (Ioo h D.b) F.1)),
-        matchingJacobiVector D hD j ψR hRs⟫_ℝ
-    rw [outer_l2ZeroExtend_inner, outer_l2ZeroExtend_inner,
-      outerJacobiVector_restrict_congr hD j measurableSet_Ioo hψ hRs hRg]
+    let v : Lp ℝ 2 ((radialHilbertMeasure D).restrict (radialTailInterval D true h)) :=
+      RR (l2Restrict (radialHilbertMeasure D) (radialTailInterval D true h) F.1)
+    have hs : MeasurableSet (radialTailInterval D true h) := measurableSet_Ioo
+    have h₁ := outer_l2ZeroExtend_inner (radialHilbertMeasure D) hs v
+      (matchingJacobiVector D hD j ψ hψ)
+    have h₂ := outer_l2ZeroExtend_inner (radialHilbertMeasure D) hs v
+      (matchingJacobiVector D hD j ψR hRs)
+    exact h₁.trans ((congrArg (fun g => ⟪v, g⟫_ℝ)
+      (outerJacobiVector_restrict_congr hD j hs hψ hRs hRg)).trans h₂.symm)
   have htest : matchingSmoothVector D hD ψ hψ =
       matchingSmoothVector D hD ψL hLs + matchingSmoothVector D hD ψR hRs := by
     apply Lp.ext

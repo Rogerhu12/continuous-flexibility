@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.MatchedInnerCompactSupport
+import ContinuousFlexibility.Radial.MatchingInverseFormula
 import ContinuousFlexibility.Radial.WeightKernelBounds
 
 /-!

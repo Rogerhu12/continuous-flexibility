@@ -62,16 +62,14 @@ theorem physical_kernel_memLp_row (hD : IsAccumulatingProfile D)
   have hright : MemLp ((Ioi x).indicator (fun y => F.Q x * F.P y)) 2 μ :=
     (hP.const_mul (F.Q x)).indicator measurableSet_Ioi
   have hfull : ∀ᵐ y ∂μ, y ∈ Ioo c b := by
-    rw [outerOutwardTailMeasure_eq_density hD hphysical]
     have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hentry
-    simpa only [her, outerOutwardRadius_eq_sign] using
-      (withDensity_absolutelyContinuous
-        (volume.restrict (Ioo (outerOutwardRadius right (tailPhysicalRadius right (T).entrance))
-          (outerOutwardRadius right (tailPhysicalEndpoint D right))))
-        (fun y => ENNReal.ofReal (12 * D.w (outerOutwardRadius right y) / y ^ 2))).ae_le
-          (ae_restrict_mem measurableSet_Ioo)
+    rw [outerOutwardTailMeasure_eq_density hD hphysical, her]
+    simp only [outerOutwardRadius_eq_sign]
+    exact (withDensity_absolutelyContinuous _ _).ae_le
+      (ae_restrict_mem measurableSet_Ioo)
   apply (memLp_congr_ae ?_).mp (hleft.add hright)
   filter_upwards [hfull] with y hy
+  simp only [Pi.add_apply]
   by_cases hyx : y ≤ x
   · have hyL : y ∈ Icc c x := ⟨hy.1.le, hyx⟩
     have hyR : y ∉ Ioi x := not_lt.mpr hyx
@@ -80,7 +78,8 @@ theorem physical_kernel_memLp_row (hD : IsAccumulatingProfile D)
     exact mul_comm _ _
   · have hxy : x < y := lt_of_not_ge hyx
     have hyL : y ∉ Icc c x := fun h => hyx h.2
-    rw [indicator_of_notMem hyL, indicator_of_mem hxy,
+    have hyR : y ∈ Ioi x := hxy
+    rw [indicator_of_notMem hyL, indicator_of_mem hyR,
       min_eq_left hxy.le, max_eq_right hxy.le, zero_add]
 
 /-- The deep physical inverse is constructed, with an actual kernel

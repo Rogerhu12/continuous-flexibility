@@ -25,10 +25,10 @@ theorem radialJacobi_outward (D : ReferenceData) (right : Bool)
   cases right
   · have hweight : radialRadiusScale (-1) 1 D.w = outerTailOutwardWeight D false := by
       funext t
-      simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign]
+      simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign, div_neg]
     have hfield : radialRadiusScale (-1) 1 u = fun t => u (-t) := by
       funext t
-      simp [radialRadiusScale]
+      simp [radialRadiusScale, div_neg]
     simpa [hweight, hfield, outerTailSign, outerOutwardRadius]
       using radialJacobi_radialRadiusScale (by norm_num : (-1 : ℝ) ≠ 0)
         J 1 (-1) D.w u (-x)

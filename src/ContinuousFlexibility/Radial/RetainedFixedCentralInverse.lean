@@ -128,6 +128,7 @@ theorem exists_retainedFixedCentralInverse
     intro r hr
     apply radialCore_mem_of_profile_pos hD
     apply H.weight_pos center r
+    change r ∈ Icc (H.left center) (H.right center)
     rw [hends.1, hends.2]
     exact Ioo_subset_Icc_self hr
   have hweight := retainedMorse_central_weight_identity hTL hTR hmodel

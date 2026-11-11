@@ -38,50 +38,74 @@ theorem inverseRadius_ae_iff {μ ν : Measure ℝ} {κ β : ℝ}
   rw [hm, Measure.ae_ennreal_smul_measure_iff (ne_of_gt (ENNReal.ofReal_pos.mpr hβ))]
   exact (inverseRadius_embedding hκ).ae_map_iff
 
+/-- The original coordinate factor, sealed with its exact equality
+certificate so later kernel checks do not reduce its measure cast. -/
+private def inverseRadiusCoordinateEquiv {μ ν : Measure ℝ} {κ β : ℝ}
+    (hκ : κ ≠ 0) (hβ : 0 < β)
+    (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) :
+    Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 (squareDensityMeasure μ (fun _ => sqrt β)) :=
+  l2EquivSeal
+    ((l2MeasureCongr (inverseRadius_square_measure hκ hβ hm).symm).trans
+      (coordinateL2Equiv (squareDensityMeasure μ (fun _ => sqrt β))
+        (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
+        (fun r => by field_simp [hκ] <;> ring)))
+
+private theorem inverseRadiusCoordinateEquiv_ae {μ ν : Measure ℝ} {κ β : ℝ}
+    (hκ : κ ≠ 0) (hβ : 0 < β)
+    (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) (f : Lp ℝ 2 ν) :
+    (inverseRadiusCoordinateEquiv hκ hβ hm f : ℝ → ℝ)
+      =ᵐ[squareDensityMeasure μ (fun _ => sqrt β)] fun r => f (κ * r) := by
+  rw [inverseRadiusCoordinateEquiv, l2EquivSeal_eq]
+  have hc := l2MeasureCongr_ae (inverseRadius_square_measure hκ hβ hm).symm f
+  have hp := coordinateL2Equiv_ae (squareDensityMeasure μ (fun _ => sqrt β))
+    (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
+    (fun r => by field_simp [hκ] <;> ring)
+    (l2MeasureCongr (inverseRadius_square_measure hκ hβ hm).symm f)
+  exact hp.trans (ae_eq_comp (inverseRadius_embedding hκ).measurable.aemeasurable hc)
+
+/-- The original positive square-density factor with the same equality
+certificate used by the physical tail gauge isometry. -/
+private def inverseRadiusDensityEquiv (μ : Measure ℝ) {β : ℝ} (hβ : 0 < β) :
+    Lp ℝ 2 (squareDensityMeasure μ (fun _ => sqrt β)) ≃ₗᵢ[ℝ] Lp ℝ 2 μ :=
+  l2EquivSeal (squareDensityEquiv μ measurable_const (fun _ => sqrt_pos.mpr hβ))
+
+private theorem inverseRadiusDensityEquiv_ae (μ : Measure ℝ) {β : ℝ} (hβ : 0 < β)
+    (f : Lp ℝ 2 (squareDensityMeasure μ (fun _ => sqrt β))) :
+    (inverseRadiusDensityEquiv μ hβ f : ℝ → ℝ) =ᵐ[μ] fun r => sqrt β * f r := by
+  rw [inverseRadiusDensityEquiv, l2EquivSeal_eq]
+  exact squareDensityEquiv_ae μ measurable_const (fun _ => sqrt_pos.mpr hβ) f
+
 /-- The coordinate and square-density maps are genuine isometries on the
-actual L² classes; neither a source representative nor an inverse is assumed. -/
+actual L² classes. Their exact composition certificate keeps the concrete
+measure casts out of subsequent application and inverse calculations. -/
 def inverseRadiusEquiv {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) :
     Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 μ :=
-  l2EquivCompose
-    (l2EquivCompose (l2MeasureCongr (inverseRadius_square_measure hκ hβ hm).symm)
-      (coordinateL2Equiv (squareDensityMeasure μ (fun _ => sqrt β))
-        (fun r => κ * r) (fun r => r / κ) (inverseRadius_embedding hκ)
-        (fun r => by field_simp [hκ] <;> ring)))
-    (squareDensityEquiv μ measurable_const (fun _ => sqrt_pos.mpr hβ))
+  Classical.choose (exists_l2EquivCompose_apply
+    (μ := ν) (ν := squareDensityMeasure μ (fun _ => sqrt β)) (κ := μ)
+    (inverseRadiusCoordinateEquiv hκ hβ hm) (inverseRadiusDensityEquiv μ hβ))
 
-private theorem inverseRadius_compose_mul_ae {μ ν ρ τ : Measure ℝ}
-    (E : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 ρ)
-    (C : Lp ℝ 2 ρ ≃ₗᵢ[ℝ] Lp ℝ 2 τ)
-    (G : Lp ℝ 2 τ ≃ₗᵢ[ℝ] Lp ℝ 2 μ)
-    (f : Lp ℝ 2 ν) (a u : ℝ → ℝ)
-    (hC : (C (E f) : ℝ → ℝ) =ᵐ[μ] u)
-    (hG : (G (C (E f)) : ℝ → ℝ) =ᵐ[μ] fun r => a r * C (E f) r) :
-    (l2EquivCompose (l2EquivCompose E C) G f : ℝ → ℝ) =ᵐ[μ]
-      fun r => a r * u r := by
-  filter_upwards [hG, hC] with r hr hc
-  exact hr.trans (congrArg (fun t => a r * t) hc)
+private theorem inverseRadiusEquiv_apply {μ ν : Measure ℝ} {κ β : ℝ}
+    (hκ : κ ≠ 0) (hβ : 0 < β)
+    (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) (f : Lp ℝ 2 ν) :
+    inverseRadiusEquiv hκ hβ hm f =
+      inverseRadiusDensityEquiv μ hβ (inverseRadiusCoordinateEquiv hκ hβ hm f) :=
+  Classical.choose_spec (exists_l2EquivCompose_apply
+    (μ := ν) (ν := squareDensityMeasure μ (fun _ => sqrt β)) (κ := μ)
+    (inverseRadiusCoordinateEquiv hκ hβ hm) (inverseRadiusDensityEquiv μ hβ)) f
 
 theorem inverseRadiusEquiv_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
     (hm : ν = ENNReal.ofReal β • μ.map (fun r => κ * r)) (f : Lp ℝ 2 ν) :
     (inverseRadiusEquiv hκ hβ hm f : ℝ → ℝ) =ᵐ[μ]
       fun r => sqrt β * f (κ * r) := by
-  let σ := squareDensityMeasure μ (fun _ => sqrt β)
-  let M := l2MeasureCongr (inverseRadius_square_measure hκ hβ hm).symm
-  let C := coordinateL2Equiv σ (fun r => κ * r) (fun r => r / κ)
-    (inverseRadius_embedding hκ) (fun r => by field_simp [hκ] <;> ring)
-  have hC : (C (M f) : ℝ → ℝ) =ᵐ[σ] fun r => f (κ * r) :=
-    (coordinateL2Equiv_ae σ (fun r => κ * r) (fun r => r / κ)
-      (inverseRadius_embedding hκ) (fun r => by field_simp [hκ] <;> ring) (M f)).trans
-      (ae_eq_comp (inverseRadius_embedding hκ).measurable.aemeasurable
-        (l2MeasureCongr_ae (inverseRadius_square_measure hκ hβ hm).symm f))
-  have hC' := squareDensity_ae_eq μ measurable_const (fun _ => sqrt_pos.mpr hβ) hC
-  have hG := squareDensityEquiv_ae μ measurable_const (fun _ => sqrt_pos.mpr hβ) (C (M f))
-  exact inverseRadius_compose_mul_ae M C
-    (squareDensityEquiv μ measurable_const (fun _ => sqrt_pos.mpr hβ))
-    f (fun _ => sqrt β) (fun r => f (κ * r)) hC' hG
+  rw [inverseRadiusEquiv_apply]
+  have hc := squareDensity_ae_eq μ measurable_const (fun _ => sqrt_pos.mpr hβ)
+    (inverseRadiusCoordinateEquiv_ae hκ hβ hm f)
+  have hg := inverseRadiusDensityEquiv_ae μ hβ (inverseRadiusCoordinateEquiv hκ hβ hm f)
+  filter_upwards [hc, hg] with r hr hs
+  exact hs.trans (congrArg (fun t => sqrt β * t) hr)
 
 theorem inverseRadiusEquiv_ae_of_ae {μ ν : Measure ℝ} {κ β : ℝ}
     (hκ : κ ≠ 0) (hβ : 0 < β)
