@@ -20,6 +20,8 @@ namespace ContinuousFlexibility.Statements
 open Filter MeasureTheory
 open scoped Topology ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 theorem evenPart_affine (F V : ℝ → ℝ) (s θ : ℝ) :
     evenPart (fun x => F x + s * V x) θ = evenPart F θ + s * evenPart V θ := by
   unfold evenPart
@@ -43,7 +45,10 @@ theorem evenPart_hasDerivAt {F : ℝ → ℝ} {θ dpos dneg : ℝ}
     HasDerivAt (evenPart F) ((dpos - dneg) / 2) θ := by
   have hreflect : HasDerivAt (fun t => F (-t)) (-dneg) θ := by
     simpa only [mul_neg_one, Function.comp_def] using hneg.comp θ (hasDerivAt_neg (x := θ))
-  simpa only [evenPart, sub_eq_add_neg, Pi.add_apply] using (hpos.add hreflect).div_const 2
+  have h := ((hpos.add hreflect).div_const 2).congr_deriv
+    (g' := (dpos - dneg) / 2) (by ring)
+  exact h.congr_of_eventuallyEq
+    (Filter.Eventually.of_forall fun t => by simp only [evenPart, Pi.add_apply])
 
 /-- At zero the factor `s` removes any need to differentiate its continuous
 coefficient.  This avoids assuming differentiability of the inverse curve

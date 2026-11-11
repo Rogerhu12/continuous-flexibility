@@ -17,6 +17,8 @@ expansion in advance.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open Set
@@ -31,7 +33,7 @@ theorem circleReturn_eq_zero_value_of_two_periods {f : ℝ → ℝ} {a b : ℝ}
       add_mem' := fun hu hv => hu.add_period hv
       neg_mem' := fun hu => hu.neg }
   have hgen : AddSubgroup.closure ({a, b} : Set ℝ) ≤ P := by
-    apply AddSubgroup.closure_le.mpr
+    apply (AddSubgroup.closure_le P).mpr
     intro t ht
     rcases Set.mem_insert_iff.mp ht with hta | htb
     · subst t
@@ -93,6 +95,7 @@ theorem circleReturnShift_injective_on_odd {f g : ℝ → ℝ} {T : ℝ}
     (heq : ∀ θ, circleReturnShift T f θ = circleReturnShift T g θ) : f = g := by
   have hp : Function.Periodic (fun θ => f θ - g θ) Real.pi := by
     intro θ
+    dsimp only
     rw [hfp θ, hgp θ]
   have ho : ∀ θ, (f (-θ) - g (-θ)) = -(f θ - g θ) := by
     intro θ

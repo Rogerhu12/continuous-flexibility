@@ -26,8 +26,7 @@ theorem circleFourierCoeff_eq_integral (f : ℝ → ℂ) (n : ℤ) :
     circleFourierCoeff f n = (1 / (2 * Real.pi)) •
       ∫ x in (0 : ℝ)..2 * Real.pi,
         fourier (-n) (x : AddCircle (2 * Real.pi)) • f x := by
-  simpa only [circleFourierCoeff, sub_zero] using
-    fourierCoeffOn_eq_integral f n (by positivity : (0 : ℝ) < 2 * Real.pi)
+  rw [circleFourierCoeff, fourierCoeffOn_eq_integral, sub_zero]
 
 /-- Every ordinary derivative of a periodic function has the same period.
 The translation identity also applies when a total derivative is zero. -/
@@ -76,16 +75,16 @@ theorem norm_circleFourierCoeff_deriv {f : ℝ → ℂ}
       (1 / (-2 * (Real.pi : ℂ) * Complex.I * n)) *
         (-(2 * (Real.pi : ℂ)) * circleFourierCoeff (deriv f) n) := by
     simpa only [circleFourierCoeff, hp0, sub_self, mul_zero, zero_sub,
-      sub_zero, Complex.ofReal_mul, Complex.ofReal_ofNat, neg_mul] using hi
+      sub_zero, Complex.ofReal_mul, Complex.ofReal_ofNat, Complex.ofReal_zero, neg_mul] using hi
   have hnC : (n : ℂ) ≠ 0 := by exact_mod_cast hn
   have hnNorm : ‖(n : ℂ)‖ ≠ 0 := norm_ne_zero_iff.mpr hnC
   have heq : ‖circleFourierCoeff f n‖ =
       ‖circleFourierCoeff (deriv f) n‖ / ‖(n : ℂ)‖ := by
     rw [hformula]
     simp only [norm_mul, norm_div, norm_one, norm_neg, Complex.norm_I, mul_one]
-    norm_num only [norm_mul, norm_neg, norm_ofNat, Complex.norm_real,
+    norm_num only [norm_mul, norm_neg, Complex.norm_ofNat, Complex.norm_real,
       Real.norm_eq_abs, abs_of_pos Real.pi_pos]
-    field_simp [Real.pi_ne_zero, hnNorm]
+    field_simp [Real.pi_ne_zero, hnNorm] <;> ring
   exact ((eq_div_iff hnNorm).mp heq).symm
 
 /-- Iterating the integration-by-parts identity on an actual smooth
@@ -103,7 +102,8 @@ theorem norm_circleFourierCoeff_iteratedDeriv {f : ℝ → ℂ}
         exact hf.continuous_iteratedDeriv (k + 1) (by simp)
       rw [iteratedDeriv_succ,
         norm_circleFourierCoeff_deriv
-          (hf.differentiable_iteratedDeriv k (by simp)) hd
+          (hf.differentiable_iteratedDeriv k
+            (ENat.natCast_lt_of_coe_top_le_withTop le_rfl k)) hd
           (circlePeriodic_iteratedDeriv hp k) hn,
         ih, pow_succ, mul_assoc]
 
@@ -138,8 +138,9 @@ theorem summable_circleFourierCoeff_moment {f : ℝ → ℂ}
       if n = 0 then ‖circleFourierCoeff f 0‖ else 0) :=
     (hasSum_ite_eq (0 : ℤ) ‖circleFourierCoeff f 0‖).summable
   apply Summable.of_nonneg_of_le
+    (g := fun n : ℤ => ‖circleFourierCoeff f n‖ * ‖(n : ℂ)‖ ^ s)
     (fun n => mul_nonneg (norm_nonneg _) (pow_nonneg (norm_nonneg _) s))
-    (g := fun n : ℤ => B * (1 / ‖(n : ℂ)‖ ^ 2) +
+    (f := fun n : ℤ => B * (1 / ‖(n : ℂ)‖ ^ 2) +
       if n = 0 then ‖circleFourierCoeff f 0‖ else 0) ?_
     ((hseries.mul_left B).add hzero)
   intro n
@@ -162,9 +163,7 @@ theorem circleFourier_phase (n : ℤ) (θ : ℝ) :
       Complex.exp (((n : ℝ) * θ : ℝ) * Complex.I) := by
   rw [fourier_coe_apply]
   congr 1
-  push_cast
-  field_simp
-  ring
+  push_cast <;> field_simp <;> ring
 
 /-- Pointwise reconstruction of a smooth periodic complex function from
 its integral Fourier coefficients. -/
@@ -240,16 +239,18 @@ theorem summable_circleCosineCoeff_moment {f : ℝ → ℝ}
   have hsum := summable_circleFourierCoeff_moment hg hgp s
   have hpos : Summable (fun j : ℕ =>
       ‖circleFourierCoeff (fun x => (f x : ℂ)) (j : ℤ)‖ * (j : ℝ) ^ s) := by
-    simpa only [Int.cast_natCast, Complex.norm_natCast] using
+    simpa only [Function.comp_def, Int.cast_natCast, Complex.norm_natCast] using
       hsum.comp_injective (Nat.cast_injective : Function.Injective (fun j : ℕ => (j : ℤ)))
   have hneg : Summable (fun j : ℕ =>
       ‖circleFourierCoeff (fun x => (f x : ℂ)) (-(j : ℤ))‖ * (j : ℝ) ^ s) := by
-    simpa only [Int.cast_neg, Int.cast_natCast, norm_neg, Complex.norm_natCast] using
+    simpa only [Function.comp_def, Int.cast_neg, Int.cast_natCast, norm_neg,
+      Complex.norm_natCast] using
       hsum.comp_injective (neg_injective.comp
         (Nat.cast_injective : Function.Injective (fun j : ℕ => (j : ℤ))))
   apply Summable.of_nonneg_of_le
+    (g := fun j : ℕ => |circleCosineCoeff f j| * (j : ℝ) ^ s)
     (fun j => mul_nonneg (abs_nonneg _) (pow_nonneg (Nat.cast_nonneg j) s))
-    (g := fun j : ℕ =>
+    (f := fun j : ℕ =>
       ‖circleFourierCoeff (fun x => (f x : ℂ)) (j : ℤ)‖ * (j : ℝ) ^ s +
       ‖circleFourierCoeff (fun x => (f x : ℂ)) (-(j : ℤ))‖ * (j : ℝ) ^ s) ?_
     (hpos.add hneg)
@@ -335,8 +336,9 @@ theorem exists_rapid_circleCosine_expansion_pi {f : ℝ → ℝ}
   · simp only [circleCosineCoeff_zero hm2, ite_self]
   · intro s
     apply Summable.of_nonneg_of_le
+      (g := fun j : ℕ => |if Even j then circleCosineCoeff f j else 0| * (j : ℝ) ^ s)
       (fun j => mul_nonneg (abs_nonneg _) (pow_nonneg (Nat.cast_nonneg j) s))
-      (g := fun j : ℕ => |circleCosineCoeff f j| * (j : ℝ) ^ s) ?_
+      (f := fun j : ℕ => |circleCosineCoeff f j| * (j : ℝ) ^ s) ?_
       (summable_circleCosineCoeff_moment hf hp2 s)
     intro j
     by_cases hj : Even j
@@ -345,7 +347,7 @@ theorem exists_rapid_circleCosine_expansion_pi {f : ℝ → ℝ}
       positivity
   · intro j hj
     by_contra hodd
-    simp only [hodd, if_false, ne_eq, not_true_eq_false] at hj
+    exact hj (if_neg hodd)
   · intro θ
     have hs := ((hasSum_circleCosineCoeff hf hp2 he hm2 θ).add
       (hasSum_circleCosineCoeff hf hp2 he hm2 (θ + Real.pi))).div_const 2

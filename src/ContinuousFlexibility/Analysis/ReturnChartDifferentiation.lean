@@ -17,6 +17,8 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The derivative of an already specified inverse of an increasing map.
 No differentiability or continuity of the inverse is assumed. -/
 theorem returnChart_hasDerivAt_inverse (f g : ℝ → ℝ)
@@ -47,7 +49,10 @@ theorem oddPart_hasDerivAt {f : ℝ → ℝ} {θ dpos dneg : ℝ}
     HasDerivAt (oddPart f) ((dpos + dneg) / 2) θ := by
   have hreflect : HasDerivAt (fun t => f (-t)) (-dneg) θ := by
     simpa only [mul_neg_one, Function.comp_def] using hneg.comp θ (hasDerivAt_neg (x := θ))
-  simpa only [oddPart, sub_neg_eq_add, Pi.sub_apply] using (hpos.sub hreflect).div_const 2
+  have h := ((hpos.sub hreflect).div_const 2).congr_deriv
+    (g' := (dpos + dneg) / 2) (by ring)
+  exact h.congr_of_eventuallyEq
+    (Filter.Eventually.of_forall fun t => by simp only [oddPart, Pi.sub_apply])
 
 theorem deriv_oddPart_pos (f : ℝ → ℝ) (hfpos : ∀ θ, 0 < deriv f θ) (θ : ℝ) :
     0 < deriv (oddPart f) θ := by

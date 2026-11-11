@@ -20,6 +20,8 @@ open Filter
 open scoped Topology
 open ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- Reconstruct the actual symmetric coefficients from the unchanged
 radial coefficient, the drift, and the characteristic speed. -/
 def returnCorrectionCoefficients (a d v : PolarPoint → ℝ) : SymmetricCoefficients where

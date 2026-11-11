@@ -18,6 +18,8 @@ steps in the construction of `ReturnEquationData`.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open scoped ContDiff
@@ -87,11 +89,12 @@ theorem summable_circleReturn_divided_moment {c : ℕ → ℝ} {T γ : ℝ}
 theorem circleSineTerm_iteratedFDeriv_bound (a : ℝ) (j s : ℕ) (θ : ℝ) :
     ‖iteratedFDeriv ℝ s (fun x : ℝ => a * Real.sin (j * x)) θ‖ ≤
       |a| * (j : ℝ) ^ s := by
+  have hjnonneg : (0 : ℝ) ≤ (j : ℝ) := Nat.cast_nonneg j
   rw [norm_iteratedFDeriv_eq_norm_iteratedDeriv,
     iteratedDeriv_const_mul_field,
     iteratedDeriv_comp_const_mul (Real.contDiff_sin : ContDiff ℝ s Real.sin)]
   simp only [Real.norm_eq_abs, abs_mul, abs_pow,
-    abs_of_nonneg (Nat.cast_nonneg j)]
+    abs_of_nonneg hjnonneg]
   calc
     |a| * ((j : ℝ) ^ s * |iteratedDeriv s Real.sin (j * θ)|) ≤
         |a| * ((j : ℝ) ^ s * 1) :=

@@ -33,6 +33,8 @@ namespace ContinuousFlexibility.Analysis
 open MeasureTheory
 open scoped ContDiff
 
+set_option backward.isDefEq.respectTransparency false
+
 /-! ## Interpolation of the initial point -/
 
 /-- The interpolation `J = id + χ (K - id)` used to correct a return. -/
@@ -263,7 +265,7 @@ theorem returnCorrection_difference_integral
   have hderiv : ∀ t : ℝ, HasDerivAt (fun s => F (x + s * d))
       (d * deriv F (x + t * d)) t := by
     intro t
-    simpa only [Function.comp_def, Pi.add_apply, id_eq, zero_add, one_mul, mul_comm] using
+    simpa only [Function.comp_def, Pi.add_apply, id_eq, zero_add, one_mul, mul_one, mul_comm] using
       (hdF (x + t * d)).hasDerivAt.comp t
         ((hasDerivAt_const t x).add ((hasDerivAt_id t).mul_const d))
   have hcontinuous : Continuous (fun t : ℝ => d * deriv F (x + t * d)) :=

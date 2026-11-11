@@ -22,6 +22,8 @@ namespace ContinuousFlexibility.Statements
 
 open ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The existing height decoder restricted to the existing source
 kernel. -/
 def physicalSourceDecode (S : PhysicalSpacesData) : S.Source →ₗ[ℝ] (PolarPoint → ℝ) :=
