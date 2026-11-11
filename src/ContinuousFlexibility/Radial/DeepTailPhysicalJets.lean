@@ -65,7 +65,7 @@ theorem PhysicalCellBound.add (hf : PhysicalCellBound cells E H f)
     (hgb n x hx).trans (mul_le_mul_of_nonneg_right
       (mul_le_mul_of_nonneg_left (rpow_le_rpow_of_exponent_le (hE n) hBC) hB.le) (hH n))
   calc
-    _ ≤ |f x| + |g x| := abs_add _ _
+    _ ≤ |f x| + |g x| := abs_add_le _ _
     _ ≤ A * E n ^ C * H n + B * E n ^ C * H n := add_le_add ha hb
     _ = (A + B) * E n ^ C * H n := by ring
     _ ≤ C * E n ^ C * H n := mul_le_mul_of_nonneg_right

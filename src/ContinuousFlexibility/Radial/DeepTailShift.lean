@@ -76,7 +76,7 @@ theorem deepTailMeasure_shift {T : DeepTailData} (hT : DeepTailHypotheses T)
       (fun x => ENNReal.ofReal (T.p x)) =
     ((volume.restrict (Ioo T.entrance T.endpoint)).withDensity
       (fun x => ENNReal.ofReal (T.p x))).restrict (Ioo (T.node k) T.endpoint)
-  rw [Measure.restrict_withDensity measurableSet_Ioo,
+  rw [restrict_withDensity measurableSet_Ioo,
     Measure.restrict_restrict_of_subset (deepTailShift_interval_subset hT k)]
 
 theorem deepTailMeasure_shift_le {T : DeepTailData} (hT : DeepTailHypotheses T)

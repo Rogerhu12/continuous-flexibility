@@ -129,7 +129,7 @@ theorem tailNaturalNodes_signed_recurrence {b c y : ℕ → ℝ}
     -b (n + 1) * ((-1 : ℝ) ^ (n + 1) * y (n + 1)) =
       c n * ((-1 : ℝ) ^ n * y n) + c (n + 1) * ((-1 : ℝ) ^ (n + 2) * y (n + 2)) := by
   have hh := congrArg (fun x : ℝ => (-1 : ℝ) ^ n * x) (hy n)
-  rw [show n + 2 = (n + 1) + 1 from rfl, pow_succ, pow_succ]
+  simp only [pow_add, pow_one, neg_one_sq, mul_one]
   nlinarith only [hh]
 
 theorem tailNaturalNodes_signed_summable {μ y : ℕ → ℝ}
@@ -165,8 +165,7 @@ theorem tailNaturalInitialValue_neg {b c : ℕ → ℝ} {cinit : ℝ}
     exact hh
   have heq : c 0 * tailNaturalNodeRatio b c hε 0 = b 0 * (ε 0 * t 0) := by
     dsimp only [tailNaturalNodeRatio, ε, t]
-    field_simp [(hb 0).ne', (hb 1).ne']
-    ring
+    field_simp [(hb 0).ne', (hb 1).ne'] <;> ring
   have hbound := mul_le_mul_of_nonneg_left hprod (hb 0).le
   unfold tailNaturalInitialValue
   apply div_neg_of_neg_of_pos _ hci

@@ -66,7 +66,7 @@ theorem tailJacobi_epsilon_small {Λ μ ν R K b₀ b₁ c : ℝ}
   apply (div_le_iff₀ (mul_pos hb₀pos hb₁pos)).mpr
   have hh : c ^ 2 * R ^ 2 ≤ ((1 / 8 : ℝ) * (b₀ * b₁)) * R ^ 2 := by
     nlinarith only [hden, hcsq]
-  exact (mul_le_mul_iff_right₀ (sq_pos_of_pos hR)).mp hh
+  exact (mul_le_mul_iff_left₀ (sq_pos_of_pos hR)).mp hh
 
 /-- The same hypotheses give the mass-weighted ratio bound needed for
 square summability of the natural node sequence. -/
@@ -89,7 +89,7 @@ theorem tailJacobi_weightedRatio_small {Λ μ ν R K b c : ℝ}
   have hbR := mul_le_mul_of_nonneg_right hb hR.le
   rw [← mul_div_assoc]
   apply (div_le_iff₀ hbpos).mpr
-  apply (mul_le_mul_iff_right₀ hR).mp
+  apply (mul_le_mul_iff_left₀ hR).mp
   calc
     (sqrt ν * c) * R = sqrt ν * (c * R) := by ring
     _ ≤ 2 * sqrt ν := by

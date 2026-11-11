@@ -17,6 +17,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory
+open scoped NNReal
 
 section DensityFamily
 
@@ -28,7 +29,8 @@ constant extensions, with no assumptions outside that edge. -/
 theorem continuous_tailClampedDensity_family
     (hp : Continuous (fun z : P × Icc a b => p z.1 z.2)) :
     Continuous (fun z : P × ℝ => tailClampedDensity (p z.1) a b hab z.2) := by
-  exact hp.comp (continuous_fst.prodMk (continuous_projIcc.comp continuous_snd))
+  exact hp.comp (continuous_fst.prodMk
+    ((continuous_projIcc (h := hab)).comp continuous_snd))
 
 /-- The forward resistance chart is jointly continuous in the density
 parameter and the physical coordinate. -/
@@ -41,7 +43,9 @@ theorem continuous_tailClampedResistance_family
       (tailClampedDensity (p z.1) a b hab z.2)⁻¹) :=
     (continuous_tailClampedDensity_family p hab hp).inv₀
       (fun z => (tailClampedDensity_pos hab (hpos z.1) z.2).ne')
-  exact intervalIntegral.continuous_parametric_primitive_of_continuous hi
+  exact intervalIntegral.continuous_parametric_primitive_of_continuous
+    (f := fun σ t => (tailClampedDensity (p σ) a b hab t)⁻¹)
+    (by simpa only [Function.uncurry] using hi)
 
 end DensityFamily
 
@@ -76,7 +80,7 @@ theorem continuous_tailPhysicalGreenKernel_family {P : Type*} [TopologicalSpace 
     hR.comp (continuous_fst.fst.prodMk continuous_snd)
   have hLpos (σ : P) : 0 < R σ b := by
     have hpσ : ContinuousOn (p σ) (Icc a b) := by
-      apply continuousOn_iff_continuous_restrict.mpr
+      apply continuousOn_iff_continuous_domRestrict.mpr
       exact hp.comp (continuous_const.prodMk continuous_id)
     exact tailClampedResistanceLength_pos hab hpσ (hpos σ)
   change Continuous (fun z : (P × ℝ) × ℝ =>
@@ -119,7 +123,7 @@ theorem continuous_tailPhysicalHeight_family {P : Type*} [TopologicalSpace P]
     hR.comp (continuous_fst.prodMk continuous_const)
   have hLne (z : P × ℝ) : R z.1 b ≠ 0 := by
     apply (tailClampedResistanceLength_pos hab _ (hpos z.1)).ne'
-    apply continuousOn_iff_continuous_restrict.mpr
+    apply continuousOn_iff_continuous_domRestrict.mpr
     exact hp.comp (continuous_const.prodMk continuous_id)
   cases right
   · exact (hL.sub hR).div hL hLne
@@ -162,9 +166,12 @@ theorem continuous_tailPhysicalMassPairing {P : Type*} [TopologicalSpace P] {a b
   have hext (f : P → C(Icc a b, ℝ)) (hf : Continuous f) :
       Continuous (fun z : P × ℝ => IccExtend hab (f z.1) z.2) :=
     continuous_eval.comp ((hf.comp continuous_fst).prodMk
-      (continuous_projIcc.comp continuous_snd))
+      ((continuous_projIcc (h := hab)).comp continuous_snd))
   exact intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
-    (((continuous_tailClampedDensity_family p hab hp).mul (hext u hu)).mul (hext v hv)) a b
+    (f := fun σ t => tailClampedDensity (p σ) a b hab t *
+      IccExtend hab (u σ) t * IccExtend hab (v σ) t)
+    (by simpa only [Function.uncurry] using
+      (((continuous_tailClampedDensity_family p hab hp).mul (hext u hu)).mul (hext v hv))) a b
 
 section IntegralOperator
 
@@ -182,7 +189,8 @@ def tailContinuousKernelAction (σ : P) (u : C(Icc a b, ℝ)) : C(Icc a b, ℝ) 
     have hi : Continuous (fun z : ℝ × ℝ => κ σ z.1 z.2 * IccExtend hab u z.2) :=
       hk.mul (u.continuous.Icc_extend'.comp continuous_snd)
     exact (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
-      hi a b).comp continuous_subtype_val
+      (f := fun x t => κ σ x t * IccExtend hab u t)
+      (by simpa only [Function.uncurry] using hi) a b).comp continuous_subtype_val
 
 theorem tailContinuousKernelAction_apply (σ : P) (u : C(Icc a b, ℝ)) (x : Icc a b) :
     tailContinuousKernelAction hab κ hκ σ u x =
@@ -200,9 +208,13 @@ theorem continuous_tailContinuousKernelAction :
   have hu : Continuous (fun z : ((P × C(Icc a b, ℝ)) × Icc a b) × ℝ =>
       IccExtend hab z.1.1.2 z.2) :=
     continuous_eval.comp
-      (continuous_fst.fst.snd.prodMk (continuous_projIcc.comp continuous_snd))
+      (continuous_fst.fst.snd.prodMk
+        ((continuous_projIcc (h := hab)).comp continuous_snd))
+  change Continuous (fun z : (P × C(Icc a b, ℝ)) × Icc a b =>
+    ∫ t in a..b, κ z.1.1 z.2 t * IccExtend hab z.1.2 t)
   exact intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
-    (hk.mul hu) a b
+    (f := fun z t => κ z.1.1 z.2 t * IccExtend hab z.1.2 t)
+    (by simpa only [Function.uncurry] using hk.mul hu) a b
 
 /-- A uniformly contracting Green equation with continuous boundary data
 has a continuous solution on the fixed physical edge. -/

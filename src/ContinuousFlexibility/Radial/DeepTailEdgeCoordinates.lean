@@ -64,6 +64,7 @@ theorem tailClampedEdge_diagonal_le {p : ℝ → ℝ} {a b c Λ : ℝ}
     apply intervalIntegral.integral_congr
     rw [uIcc_of_le (hS hab).le]
     intro s hs
+    dsimp only
     rw [IccExtend_of_mem (hS hab).le q hs]
     dsimp only [q]
     rw [tailClampedEdgePotential_apply]

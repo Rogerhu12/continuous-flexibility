@@ -18,6 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set
+open scoped NNReal
 
 private theorem eq_endpoints_of_hasDerivAt_zero {a b : ℝ} {f : ℝ → ℝ}
     (hab : a < b) (hc : ContinuousOn f (Icc a b))

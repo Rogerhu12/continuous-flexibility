@@ -92,6 +92,7 @@ theorem tailNaturalLine_span_of_nonzero {T : DeepTailData}
     exact hux (by rw [hcu x hx, hc, zero_mul])
   refine ⟨cv / cu, ?_⟩
   intro y hy
+  change v y = (cv / cu) * u y
   rw [hcv y hy, hcu y hy]
   field_simp [hcu₀] <;> ring
 
@@ -105,7 +106,8 @@ theorem tailNaturalLine_span_nonzero {T : DeepTailData}
   refine ⟨c, ?_, hc⟩
   intro hc₀
   obtain ⟨x, hx, hxne⟩ := hvne
-  exact hxne (by rw [hc hx, hc₀, zero_mul])
+  apply hxne
+  simpa only [hc₀, zero_mul] using hc hx
 
 /-- Two natural solutions with entrance value one agree throughout the
 closed-at-entrance tail.  The scalar in the abstract natural-line property

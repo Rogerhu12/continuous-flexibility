@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Radial.DeepTailPhysicalCoefficients
 import ContinuousFlexibility.Radial.DeepTailPhysicalDecay
-import ContinuousFlexibility.Radial.DeepTailPhysicalSource
+import ContinuousFlexibility.Radial.DeepTailPhysicalLift
 import ContinuousFlexibility.Radial.TailMassResistanceData
 import ContinuousFlexibility.Radial.MorseChainFlatExtension
 import Mathlib.Algebra.Order.Group.Pointwise.Interval
@@ -118,7 +118,8 @@ theorem tail_bound_at_nodes {node : ℕ → ℝ} {f g : ℝ → ℝ}
   have hg' : Tendsto g (𝓝[>] (node n)) (𝓝 (g (node n))) :=
     (hg n).tendsto.mono_left nhdsWithin_le_nhds
   exact le_of_tendsto_of_tendsto hf' hg'
-    ((Ioo_mem_nhdsGT (hnode (Nat.lt_succ_self n))).mono (fun x hx => hb n x hx))
+    (Filter.mem_of_superset (Ioo_mem_nhdsGT (hnode (Nat.lt_succ_self n)))
+      (fun x hx => hb n x hx))
 
 /-- Together the open edges and the continuity-filled nodes cover the
 entire tail after its first mass entrance. -/
@@ -134,5 +135,178 @@ theorem tail_bound_on_Ico_of_edge_bound {node : ℕ → ℝ} {endpoint : ℝ}
   · rw [← heq]
     exact tail_bound_at_nodes hnode hf hg hb n
   · exact hb n x ⟨hlt, hn.2⟩
+
+/-- Repeated actual derivatives preserve smoothness at a point. -/
+theorem physical_contDiffAt_iteratedDeriv {f : ℝ → ℝ} {x : ℝ}
+    (hf : ContDiffAt ℝ ∞ f x) (k : ℕ) : ContDiffAt ℝ ∞ (iteratedDeriv k f) x := by
+  induction k with
+  | zero => simpa only [iteratedDeriv_zero] using hf
+  | succ k ih =>
+      rw [iteratedDeriv_succ]
+      exact ih.derivWithin (by simp)
+
+theorem tailNaturalLift_contDiffAt_node {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hT : DeepTailHypotheses T) (hu : TailNaturalEquation T u) (n : ℕ) :
+    ContDiffAt ℝ ∞ (tailPhysicalLift D right j u) (tailPhysicalRadius right (T.node n)) := by
+  apply contDiffAt_tailPhysicalLift (tailPhysicalEndpoint_pos hD right).ne'
+    (tailPhysicalRadius_pos right (T.node n))
+  rw [tailPhysicalLog_radius]
+  rcases eq_or_lt_of_le (deepTail_entrance_le_node hT n) with heq | hlt
+  · rw [← heq]
+    exact hu.1
+  · exact tailNatural_contDiffAt hu ⟨hlt, deepTail_node_lt_endpoint hT n⟩
+
+/-- Once the height and flux have the node envelope on whole edges, the
+actual physical flux system propagates it to every radial derivative. -/
+theorem tailNaturalLift_jet_bounds {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j start : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hT : DeepTailHypotheses T) (hphysical : TailPhysicalRelation D T right j start)
+    (hu : TailNaturalEquation T u)
+    (hv : PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n))) (tailPhysicalLift D right j u))
+    (hq : PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n))) (tailPhysicalFlux D right j u)) :
+    ∀ k, PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n)))
+        (iteratedDeriv k (tailPhysicalLift D right j u)) := by
+  have hlabel : ∀ n r, r ∈ tailPhysicalEdge T right n → ∃ m : ℕ,
+      r ∈ D.cells m ∧ D.cellIndex m ≤ start + n + 1 := by
+    intro n r hr
+    obtain ⟨m, hm, hlo, hhi⟩ := tailPhysicalEdge_label hphysical n hr
+    exact ⟨m, hm, hhi⟩
+  have hc := physical_flux_coefficient_jets hD hlabel ((j : ℝ) ^ 2)
+  have hx (n : ℕ) {x : ℝ} (h : x ∈ Ioo (T.node n) (T.node (n + 1))) :
+      x ∈ Ioo T.entrance T.endpoint :=
+    ⟨(deepTail_entrance_le_node hT n).trans_lt h.1,
+      h.2.trans (deepTail_node_lt_endpoint hT (n + 1))⟩
+  obtain ⟨C, hC⟩ := hD
+  have hw : ContDiff ℝ ∞ D.w := hC.1.2.2.1.1
+  have hw' : ContDiff ℝ ∞ (deriv D.w) := (contDiff_infty_iff_deriv.mp hw).2
+  have hjets := physicalJets_of_firstOrderSystem
+    (isOpen_tailPhysicalEdge T right)
+    (fun n => one_le_exp_iff.mpr (radialQ_nonneg (start + n)))
+    (fun n => (exp_pos _).le)
+    (f := tailPhysicalLift D right j u) (g := tailPhysicalFlux D right j u)
+    (a := fun r => (D.w r)⁻¹)
+    (b := fun r => (j : ℝ) ^ 2 * (deriv D.w r * r⁻¹))
+    (fun n r hr => by
+      obtain ⟨x, hxe, rfl⟩ := hr
+      exact tailNaturalLift_contDiffAt ⟨C, hC⟩ hu (hx n hxe))
+    (fun n r hr => by
+      obtain ⟨x, hxe, rfl⟩ := hr
+      exact tailNaturalFlux_contDiffAt ⟨C, hC⟩ hu (hx n hxe))
+    (fun n r hr => hw.contDiffAt.inv
+      (hC.1.2.2.2.2.1 r (tailPhysicalEdge_subset_core hT hphysical n hr)).ne')
+    (fun n r hr => contDiffAt_const.mul (hw'.contDiffAt.mul
+      (contDiffAt_id.inv (ne_of_gt (hC.1.1.trans
+        (tailPhysicalEdge_subset_core hT hphysical n hr).1)))))
+    hc.1 hc.2 hv hq
+    (fun n r hr => by
+      obtain ⟨x, hxe, rfl⟩ := hr
+      exact (tailNaturalLift_firstOrder ⟨C, hC⟩ hT hphysical hu (hx n hxe)).1)
+    (fun n r hr => by
+      obtain ⟨x, hxe, rfl⟩ := hr
+      exact (tailNaturalLift_firstOrder ⟨C, hC⟩ hT hphysical hu (hx n hxe)).2)
+  exact fun k => (hjets k).1
+
+theorem tailPhysicalRadius_endpoint {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j start : ℕ} (hD : IsAccumulatingProfile D)
+    (hphysical : TailPhysicalRelation D T right j start) :
+    tailPhysicalRadius right T.endpoint = tailPhysicalEndpoint D right := by
+  have hp := tailPhysicalEndpoint_pos hD right
+  rw [hphysical.2.1]
+  cases right <;> simpa [tailPhysicalRadius, tailPhysicalEndpoint] using exp_log hp
+
+/-- The decay estimate remains valid at every omitted node and therefore
+forces every physical jet to tend to zero along the outward coordinate. -/
+theorem tailNaturalLift_jet_log_limit {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j start : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hT : DeepTailHypotheses T) (hphysical : TailPhysicalRelation D T right j start)
+    (hu : TailNaturalEquation T u) (k : ℕ)
+    (hk : PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n)))
+        (iteratedDeriv k (tailPhysicalLift D right j u))) :
+    Tendsto (fun x => iteratedDeriv k (tailPhysicalLift D right j u)
+      (tailPhysicalRadius right x)) (𝓝[<] T.endpoint) (𝓝 0) := by
+  have hlabel : ∀ n r, r ∈ tailPhysicalEdge T right n → ∃ m : ℕ,
+      r ∈ D.cells m ∧ D.cellIndex m ≤ start + n + 1 := by
+    intro n r hr
+    obtain ⟨m, hm, hlo, hhi⟩ := tailPhysicalEdge_label hphysical n hr
+    exact ⟨m, hm, hhi⟩
+  obtain ⟨K, hK, hbound⟩ := physicalCellBound_quadratic hD hlabel hk
+  let B : ℝ → ℝ := fun x => K *
+    min (tailPhysicalRadius right x - D.a) (D.b - tailPhysicalRadius right x) ^ 2
+  have hB : Continuous B := continuous_const.mul
+    ((((continuous_tailPhysicalRadius right).sub continuous_const).min
+      (continuous_const.sub (continuous_tailPhysicalRadius right))).pow 2)
+  have hnodes : ∀ n, ContinuousAt
+      (fun x => |iteratedDeriv k (tailPhysicalLift D right j u)
+        (tailPhysicalRadius right x)|) (T.node n) := by
+    intro n
+    exact ((physical_contDiffAt_iteratedDeriv
+      (tailNaturalLift_contDiffAt_node hD hT hu n) k).continuousAt.comp
+        (continuous_tailPhysicalRadius right).continuousAt).abs
+  have hwhole := tail_bound_on_Ico_of_edge_bound (deepTail_node_strictMono hT)
+    hT.2.2.2.2.2.2.2.2.2.1 hnodes (fun _ => hB.continuousAt)
+    (fun n x hx => hbound n _ ⟨x, hx, rfl⟩)
+  have hnear : ∀ᶠ x in 𝓝[<] T.endpoint, T.node 0 < x :=
+    nhdsWithin_le_nhds (eventually_gt_nhds (deepTail_node_lt_endpoint hT 0))
+  apply squeeze_zero_norm'
+  · filter_upwards [hnear, self_mem_nhdsWithin] with x hx₁ hx₂
+    simpa only [Real.norm_eq_abs] using hwhole x ⟨hx₁.le, hx₂⟩
+  · have hBe : B T.endpoint = 0 := by
+      dsimp only [B]
+      rw [tailPhysicalRadius_endpoint hD hphysical]
+      obtain ⟨C, hC⟩ := hD
+      have hab : 0 ≤ D.b - D.a := (sub_pos.mpr hC.1.2.1).le
+      cases right
+      · simp [tailPhysicalEndpoint, min_eq_left hab]
+      · simp [tailPhysicalEndpoint, min_eq_right hab]
+    simpa only [hBe] using hB.continuousAt.tendsto.mono_left nhdsWithin_le_nhds
+
+/-- The preceding limit is a limit in the original physical radius,
+with the orientation selecting the correct one-sided neighborhood. -/
+theorem tailNaturalLift_jet_limit {D : ReferenceData} {T : DeepTailData}
+    {right : Bool} {j start : ℕ} {u : ℝ → ℝ} (hD : IsAccumulatingProfile D)
+    (hT : DeepTailHypotheses T) (hphysical : TailPhysicalRelation D T right j start)
+    (hu : TailNaturalEquation T u) (k : ℕ)
+    (hk : PhysicalCellBound (tailPhysicalEdge T right) (fun n => radialE (start + n))
+      (fun n => exp (-radialS (start + n)))
+        (iteratedDeriv k (tailPhysicalLift D right j u))) :
+    Tendsto (iteratedDeriv k (tailPhysicalLift D right j u))
+      (if right then 𝓝[<] D.b else 𝓝[>] D.a) (𝓝 0) := by
+  have hl := tailNaturalLift_jet_log_limit hD hT hphysical hu k hk
+  have hR := tailPhysicalEndpoint_pos hD right
+  have he := hphysical.2.1
+  cases right
+  · simp only [Bool.false_eq_true, ↓reduceIte] at he ⊢
+    have ha : 0 < D.a := hR
+    have hc : Tendsto (tailPhysicalLog false) (𝓝[>] D.a) (𝓝[<] T.endpoint) := by
+      apply tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within
+      · simpa only [tailPhysicalLog, Bool.false_eq_true, ↓reduceIte, ← he] using
+          ((continuousAt_log ha.ne').neg.tendsto.mono_left nhdsWithin_le_nhds)
+      · filter_upwards [self_mem_nhdsWithin] with r hr
+        change -log r < T.endpoint
+        rw [he]
+        exact neg_lt_neg (log_lt_log ha hr)
+    apply (hl.comp hc).congr'
+    filter_upwards [self_mem_nhdsWithin] with r hr
+    simp only [Function.comp_apply, tailPhysicalRadius_log false (ha.trans hr)]
+  · simp only [↓reduceIte] at he ⊢
+    have hb : 0 < D.b := hR
+    have hpos : ∀ᶠ r in 𝓝[<] D.b, 0 < r :=
+      nhdsWithin_le_nhds (eventually_gt_nhds hb)
+    have hc : Tendsto (tailPhysicalLog true) (𝓝[<] D.b) (𝓝[<] T.endpoint) := by
+      apply tendsto_nhdsWithin_of_tendsto_nhds_of_eventually_within
+      · simpa only [tailPhysicalLog, ↓reduceIte, ← he] using
+          ((continuousAt_log hb.ne').tendsto.mono_left nhdsWithin_le_nhds)
+      · filter_upwards [hpos, self_mem_nhdsWithin] with r hr hrb
+        change log r < T.endpoint
+        rw [he]
+        exact log_lt_log hr hrb
+    apply (hl.comp hc).congr'
+    filter_upwards [hpos] with r hr
+    simp only [Function.comp_apply, tailPhysicalRadius_log true hr]
 
 end ContinuousFlexibility.Radial
