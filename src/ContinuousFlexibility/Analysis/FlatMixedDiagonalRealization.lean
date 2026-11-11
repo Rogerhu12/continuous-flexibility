@@ -90,8 +90,12 @@ theorem HasFlatMixedTameGrowth.of_mixed_oneHigh
   obtain ⟨C, Q, hC, hQ, hc⟩ := hb R hR s
   refine ⟨C * ((n : ℝ) + 1), Q, by positivity, hQ,
     fun i x hx hxB w hw y hy a b hab => ?_⟩
-  have hunit := multilinearTameSize_le_affine (p B) (p (s + L)) n
-    (add_nonneg zero_le_one (apply_nonneg _ _)) (fun _ : Fin n => w) (fun _ => hw)
+  have hunit : oneHighVariationWeight p B (s + L) x (fun _ : Fin n => w) ≤
+      1 + p (s + L) x + ∑ _i : Fin n, p (s + L) w :=
+    multilinearTameSize_le_affine (p B) (p (s + L)) n
+      (a := 1 + p (s + L) x)
+      (add_nonneg zero_le_one (apply_nonneg (p (s + L)) x))
+      (fun _ : Fin n => w) (fun _ => hw)
   have hunit' : oneHighVariationWeight p B (s + L) x (fun _ : Fin n => w) ≤
       1 + p (s + L) x + (n : ℝ) * p (s + L) w := by
     simpa only [Finset.sum_const, Finset.card_univ, Fintype.card_fin,
@@ -175,7 +179,8 @@ theorem FlatMixedDiagonalGrowth.mixed_oneHigh
         hall u (fun t => (hu t).le)) v
   have hnorm' : |A v| ≤ (K * (C * F i * W i ^ Q)) *
       oneHighVariationWeight p B (s + L) x v := by
-    simpa only [coe_normSeminorm, Real.norm_eq_abs] using hnorm
+    simpa only [coe_normSeminorm, Real.norm_eq_abs, multilinearTameSize,
+      oneHighVariationWeight] using hnorm
   exact hnorm'.trans_eq (by ring)
 
 end ContinuousFlexibility.Analysis

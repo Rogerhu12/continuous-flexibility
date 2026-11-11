@@ -33,8 +33,10 @@ theorem LocalCoefficientMaterialTameBounds.divergence_heightMember
     (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) (η : HeightPair S) :
     HeightMember D T (3 / 4 : ℝ) (symmetricDivergenceBilinear hS hT (A n x v) η) := by
   obtain ⟨base, loss, d, δ, hδ, hb⟩ := h n x hx
+  have hself : p base (x - x) = 0 :=
+    (congrArg (p base) (sub_self x)).trans (map_zero (p base))
   have hx' : x ∈ U ∩ {y | p base (y - x) < δ} :=
-    ⟨hx, by simpa only [sub_self, map_zero] using hδ⟩
+    ⟨hx, hself.trans_lt hδ⟩
   apply symmetricDivergenceBilinear_heightMember hS hT (A n x v) (hsym n x hx v) d
   intro a b
   obtain ⟨C, hC, hCbound⟩ := hb (a + b)
@@ -100,15 +102,16 @@ private theorem local_oneHigh_of_unit_growth
     calc
       p B z.1 = p B ((z.1 - z₀.1) + z₀.1) := by rw [sub_add_cancel]
       _ ≤ p B (z.1 - z₀.1) + p B z₀.1 := map_add_le_add (p B) _ _
-      _ ≤ 1 + p B z₀.1 := add_le_add_right
-        ((hpdiff.trans_lt hnear).le.trans (min_le_right _ _)) _
+      _ ≤ 1 + p B z₀.1 := add_le_add
+        ((hpdiff.trans_lt hnear).le.trans (min_le_right _ _)) (le_refl _)
       _ = _ := add_comm _ _
   have hqη : q B z.2 ≤ q B z₀.2 + 1 := by
     calc
-      q B z.2 = q B ((z.2 - z₀.2) + z₀.2) := by rw [sub_add_cancel]
+      q B z.2 = q B ((z.2 - z₀.2) + z₀.2) :=
+        (congrArg (q B) (sub_add_cancel z.2 z₀.2)).symm
       _ ≤ q B (z.2 - z₀.2) + q B z₀.2 := map_add_le_add (q B) _ _
-      _ ≤ 1 + q B z₀.2 := add_le_add_right
-        ((hqdiff.trans_lt hnear).le.trans (min_le_right _ _)) _
+      _ ≤ 1 + q B z₀.2 := add_le_add
+        ((hqdiff.trans_lt hnear).le.trans (min_le_right _ _)) (le_refl _)
       _ = _ := add_comm _ _
   exact physicalNorm_multilinear_bound_of_unitBall (hS.1 (3 / 4 : ℝ)) (F z)
     (hmember z hz) s (pairGrading p q B) (pairGrading p q (s + L)) hC
@@ -137,9 +140,17 @@ theorem symmetricSourceScalarJets_local_oneHigh_norm_bound
   intro k z₀ hz₀
   cases k with
   | zero =>
-      obtain ⟨b, l, d, δ₀, hδ₀, hb⟩ := hcoeff 0 z₀.1 hz₀.1
-      obtain ⟨B, L, hB, hgrowth⟩ := exists_symmetricDivergence_unit_growth
+      let coeffData := hcoeff 0 z₀.1 hz₀.1
+      let b : ℕ := coeffData.choose
+      let l : ℕ := coeffData.choose_spec.choose
+      let d : ℕ := coeffData.choose_spec.choose_spec.choose
+      let δ₀ : ℝ := coeffData.choose_spec.choose_spec.choose_spec.choose
+      have hδ₀ : 0 < δ₀ := coeffData.choose_spec.choose_spec.choose_spec.choose_spec.1
+      let growthData := exists_symmetricDivergence_unit_growth
         hS hT p q hp hq hIp hIq hheight b l d b
+      let B : ℕ := growthData.choose
+      let L : ℕ := growthData.choose_spec.choose
+      have hB : max b b ≤ B := growthData.choose_spec.choose_spec.1
       let V : Set E := U ∩ {x | p b (x - z₀.1) < δ₀}
       have hunit : ∀ Kp Kq : ℝ, 0 ≤ Kp → 0 ≤ Kq →
           ∀ s : ℕ, B ≤ s → ∃ C : ℝ, 0 ≤ C ∧
@@ -150,24 +161,36 @@ theorem symmetricSourceScalarJets_local_oneHigh_norm_bound
               C * (1 + pairGrading p q (s + L) z +
                 ∑ i : Fin 0, pairGrading p q (s + L) (v i)) := by
         intro Kp Kq hKp hKq s hs
-        obtain ⟨C, hC, hc⟩ := hgrowth 0 A V hb Kp Kq hKp hKq s hs
-        refine ⟨C, hC, fun z hz v hpx hqη hv => ?_⟩
-        rw [symmetricSourceScalarJets_zero_apply]
-        exact hc z.1 hz z.2 v hpx hqη hv
-      obtain ⟨δ, hδ, hbound⟩ := local_oneHigh_of_unit_growth hS p q hp 0
+        let orderData := growthData.choose_spec.choose_spec.2 0 A V
+          coeffData.choose_spec.choose_spec.choose_spec.choose_spec.2 Kp Kq hKp hKq s hs
+        refine ⟨orderData.choose, orderData.choose_spec.1, fun z hz v hpx hqη hv => ?_⟩
+        exact (congrArg (physicalNorm T (3 / 4 : ℝ) s)
+          (symmetricSourceScalarJets_zero_apply hS hT A z v)).trans_le
+            (orderData.choose_spec.2 z.1 hz z.2 v hpx hqη hv)
+      let localData := local_oneHigh_of_unit_growth hS p q hp 0
         (symmetricSourceScalarJets hS hT A 0) (hmember 0) z₀ b B L
         ((le_max_left b b).trans hB) δ₀ hδ₀ hunit
-      exact ⟨L, B, δ, hδ, hbound⟩
+      exact ⟨L, B, localData.choose, localData.choose_spec.1, localData.choose_spec.2⟩
   | succ n =>
-      obtain ⟨b, l, d, δ₀, hδ₀, hlow, hhigh⟩ := hcoeff.adjacent hT hp n z₀.1 hz₀.1
-      obtain ⟨B, L, hB, hgrowth⟩ := exists_symmetricSourceScalarJets_unit_growth
+      let coeffData := hcoeff.adjacent hT hp n z₀.1 hz₀.1
+      let b : ℕ := coeffData.choose
+      let l : ℕ := coeffData.choose_spec.choose
+      let d : ℕ := coeffData.choose_spec.choose_spec.choose
+      let δ₀ : ℝ := coeffData.choose_spec.choose_spec.choose_spec.choose
+      have hδ₀ : 0 < δ₀ := coeffData.choose_spec.choose_spec.choose_spec.choose_spec.1
+      let growthData := exists_symmetricSourceScalarJets_unit_growth
         hS hT p q hp hq hIp hIq hheight b l d b
+      let B : ℕ := growthData.choose
+      let L : ℕ := growthData.choose_spec.choose
+      have hB : max b b ≤ B := growthData.choose_spec.choose_spec.1
       let V : Set E := U ∩ {x | p b (x - z₀.1) < δ₀}
-      have hunit := hgrowth n A V hlow hhigh
+      have hunit := growthData.choose_spec.choose_spec.2 n A V
+        coeffData.choose_spec.choose_spec.choose_spec.choose_spec.2.1
+        coeffData.choose_spec.choose_spec.choose_spec.choose_spec.2.2
         (fun x hx k vs η => hcoeff.divergence_heightMember hS hT hsym k x hx.1 vs η)
-      obtain ⟨δ, hδ, hbound⟩ := local_oneHigh_of_unit_growth hS p q hp (n + 1)
+      let localData := local_oneHigh_of_unit_growth hS p q hp (n + 1)
         (symmetricSourceScalarJets hS hT A (n + 1)) (hmember (n + 1)) z₀ b B L
         ((le_max_left b b).trans hB) δ₀ hδ₀ hunit
-      exact ⟨L, B, δ, hδ, hbound⟩
+      exact ⟨L, B, localData.choose, localData.choose_spec.1, localData.choose_spec.2⟩
 
 end ContinuousFlexibility.Statements

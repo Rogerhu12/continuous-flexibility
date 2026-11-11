@@ -20,6 +20,71 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+private theorem positiveInverse_uniform_oneHigh_of_local_inverse
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E] [T2Space E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p)
+    {U W : Set E} (hU : IsOpen U) (hsub : U ⊆ W)
+    (A : E → Prop) (hAU : ∀ e, A e → e ∈ U)
+    (L : E → E →L[ℝ] E) (P V : E → E →ₗ[ℝ] E)
+    (JP : SmoothDirections (W ×ˢ univ) (fun x : E × E => P x.1 x.2))
+    (J₀ : SmoothDirections univ (fun x : E × E => L x.1 x.2))
+    (hJ₀ : ∀ n, HasUniformLowGrowth (jetGrading (pairGrading p p) n) p
+      (fun z => J₀.D n z.1 z.2))
+    (heq : ∀ e ∈ U, P e = V e)
+    (hleft₀ : ∀ e ∈ U, ∀ u, V e (L e u) = u)
+    (hright₀ : ∀ e ∈ U, ∀ u, L e (V e u) = u)
+    (hVbound : HasUniformLowGrowth (pairGrading p p) p
+      (fun x : E × E => V x.1 x.2)) :
+    ∀ n, ∃ base loss : ℕ, ∀ K : ℝ, 0 ≤ K → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x : E × E, A x.1 → pairGrading p p base x ≤ K → ∀ v : Fin n → E × E,
+        p s (JP.D n x v) ≤ C * tameJetSize (pairGrading p p) n s loss base x v := by
+  let J : SmoothDirections (U ×ˢ univ) (fun x : E × E => L x.1 x.2) :=
+    J₀.restrict (hU.prod isOpen_univ) (subset_univ _)
+  have hJbound (n : ℕ) : HasUniformLowGrowth (jetGrading (pairGrading p p) n) p
+      (fun z => J.D n z.1 z.2) := hJ₀ n
+  have hV : ContinuousOn (fun x : E × E => V x.1 x.2) (U ×ˢ univ) := by
+    apply (JP.continuousOn.mono (fun x hx => ⟨hsub hx.1, hx.2⟩)).congr
+    intro x hx
+    exact (congrArg (fun M : E →ₗ[ℝ] E => M x.2) (heq x.1 hx.1)).symm
+  let VC : E → E →L[ℝ] E := inverseFamilyContinuousLinearMap V hV
+  have hVC (e : E) (he : e ∈ U) (u : E) : VC e u = V e u :=
+    inverseFamilyContinuousLinearMap_apply V hV he u
+  have hVCcont : ContinuousOn (fun x : E × E => VC x.1 x.2) (U ×ˢ univ) :=
+    continuousOn_inverseFamilyContinuousLinearMap V hV
+  have hleft (e : E) (he : e ∈ U) (u : E) : VC e (L e u) = u :=
+    (hVC e he (L e u)).trans (hleft₀ e he u)
+  have hright (e : E) (he : e ∈ U) (u : E) : L e (VC e u) = u :=
+    (congrArg (fun y : E => L e y) (hVC e he u)).trans (hright₀ e he u)
+  have hVCbound : HasUniformLowGrowth (pairGrading p p) p
+      (fun x : E × E => VC x.1 x.2) :=
+    inverseFamilyContinuousLinearMap_uniformLowGrowth V hV hVbound
+  let JV : SmoothDirections (U ×ˢ univ) (fun x : E × E => VC x.1 x.2) :=
+    inverseFamilySmoothDirections J hU VC hleft hright hVCcont
+  have hvalue (x : E × E) (hx : x ∈ U ×ˢ univ) : VC x.1 x.2 = P x.1 x.2 :=
+    (hVC x.1 hx.1 x.2).trans
+      (congrArg (fun M : E →ₗ[ℝ] E => M x.2) (heq x.1 hx.1)).symm
+  let Jactual : SmoothDirections (U ×ˢ univ) (fun x : E × E => P x.1 x.2) :=
+    JV.congr hvalue
+  let data := inverseFamilySmoothDirections_uniform_oneHigh hp hp hp
+    J hU VC hleft hright hVCcont hVCbound hJbound
+  intro n
+  let hn := data n
+  let base : ℕ := hn.choose
+  let loss : ℕ := hn.choose_spec.choose
+  have hbound := hn.choose_spec.choose_spec
+  refine ⟨base, loss, fun K hK s => ?_⟩
+  let hC := hbound K hK s
+  refine ⟨hC.choose, hC.choose_spec.1, fun x hpos hx v => ?_⟩
+  have hxU : x ∈ U ×ˢ univ := ⟨hAU x.1 hpos, mem_univ _⟩
+  have hjet : JP.D n x = Jactual.D n x :=
+    (JP.restrict (hU.prod isOpen_univ) (fun z hz => ⟨hsub hz.1, hz.2⟩)).unique
+      Jactual n x hxU
+  have hjetValue : JP.D n x v = JV.D n x v :=
+    congrArg (fun M : ContinuousMultilinearMap ℝ (fun _ : Fin n => E × E) E => M v) hjet
+  exact (congrArg (fun y : E => p s y) hjetValue).trans_le
+    (hC.choose_spec.2 x hxU hx v)
+
 local instance circlePositiveInverseUniformBoundsPairSMul (S : CircleModelData) :
     SMul ℝ (S.Space × S.Space) := Prod.instSMul
 
@@ -54,67 +119,38 @@ theorem circlePositiveInverseComposeLinear_uniform_oneHigh
     circleShiftedChartComposeContinuousLinear hS hT hD hγ travel
   let hforward := exists_circleChartComposition_uniform_oneHigh hS hT hD hγ hinterp travel
   let J₀ : SmoothDirections univ (fun x : S.Space × S.Space => L x.1 x.2) := hforward.choose
-  let J : SmoothDirections (U ×ˢ univ) (fun x : S.Space × S.Space => L x.1 x.2) :=
-    J₀.restrict (hU.prod isOpen_univ) (subset_univ _)
   have hJbound (n : ℕ) :
       HasUniformLowGrowth (jetGrading (pairGrading S.grading S.grading) n) S.grading
-        (fun z => J.D n z.1 z.2) := by
-    apply (uniformLowGrowth_circleChartCompositionJetValue hS hT hD hγ hinterp travel n).congr
-    intro z
-    apply hS.2.2.2.2.2.1
-    exact (hforward.choose_spec.1 n z.1 z.2).trans
-      (circleChartCompositionJetValue_decode hS hT hD hγ travel n z.1 z.2).symm
+        (fun z => J₀.D n z.1 z.2) := by
+    have hactual (z : (S.Space × S.Space) × (Fin n → S.Space × S.Space)) :
+        J₀.D n z.1 z.2 = circleChartCompositionJetValue hS hT hD hγ travel n z.1 z.2 :=
+      hS.2.2.2.2.2.1 ((hforward.choose_spec.1 n z.1 z.2).trans
+        (circleChartCompositionJetValue_decode
+          (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel n z.1 z.2).symm)
+    exact (uniformLowGrowth_circleChartCompositionJetValue
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp travel n).congr hactual
   let V : S.Space → S.Space →ₗ[ℝ] S.Space :=
     circleInverseComposeLinear hS hT hD hγ travel (a / 2) ha'
   have heq (e : S.Space) (he : e ∈ U) :
       circlePositiveInverseComposeLinear hS hT hD hγ travel e = V e :=
     circlePositiveInverseComposeLinear_eq_fixed hS hT hD hγ travel (a / 2) ha' e
       (hlower e he)
-  have hV : ContinuousOn (fun x : S.Space × S.Space => V x.1 x.2) (U ×ˢ univ) := by
-    apply (JP.continuousOn.mono (fun x hx => ⟨hsub hx.1, hx.2⟩)).congr
-    intro x hx
-    exact (congrArg (fun M : S.Space →ₗ[ℝ] S.Space => M x.2) (heq x.1 hx.1)).symm
-  let VC : S.Space → S.Space →L[ℝ] S.Space := inverseFamilyContinuousLinearMap V hV
-  have hVC (e : S.Space) (he : e ∈ U) (u : S.Space) : VC e u = V e u :=
-    inverseFamilyContinuousLinearMap_apply V hV he u
-  have hVCcont : ContinuousOn (fun x : S.Space × S.Space => VC x.1 x.2) (U ×ˢ univ) :=
-    continuousOn_inverseFamilyContinuousLinearMap V hV
-  have hleft (e : S.Space) (he : e ∈ U) (u : S.Space) : VC e (L e u) = u :=
-    (hVC e he (L e u)).trans
-      (circleInverseComposeLinear_left_inverse hS hT hD hγ travel (a / 2) ha' e u
-        (hlower e he))
-  have hright (e : S.Space) (he : e ∈ U) (u : S.Space) : L e (VC e u) = u :=
-    (congrArg (L e) (hVC e he u)).trans
-      (circleInverseComposeLinear_right_inverse hS hT hD hγ travel (a / 2) ha' e u
-        (hlower e he))
-  have hVCbound : HasUniformLowGrowth (pairGrading S.grading S.grading) S.grading
-      (fun x : S.Space × S.Space => VC x.1 x.2) :=
-    inverseFamilyContinuousLinearMap_uniformLowGrowth V hV
-      (uniformLowGrowth_circleInverseComposeLinear hS hT hD hγ hinterp travel (a / 2) ha')
-  let JV := inverseFamilySmoothDirections J hU VC hleft hright hVCcont
-  have hvalue (x : S.Space × S.Space) (hx : x ∈ U ×ˢ univ) :
-      VC x.1 x.2 = circlePositiveInverseComposeLinear hS hT hD hγ travel x.1 x.2 :=
-    (hVC x.1 hx.1 x.2).trans
-      (congrArg (fun M : S.Space →ₗ[ℝ] S.Space => M x.2) (heq x.1 hx.1)).symm
-  let Jactual := JV.congr hvalue
-  have hm := gradedSeminorm_monotone (fun j => S.level j) S.bond
-  have hb := inverseFamilySmoothDirections_uniform_oneHigh hm hm hm
-    J hU VC hleft hright hVCcont hVCbound hJbound
-  intro n
-  let hn := hb n
-  let base : ℕ := hn.choose
-  let loss : ℕ := hn.choose_spec.choose
-  have hbound := hn.choose_spec.choose_spec
-  refine ⟨base, loss, fun K hK s => ?_⟩
-  let hC := hbound K hK s
-  refine ⟨hC.choose, hC.choose_spec.1, fun x hpos hx v => ?_⟩
-  have hxU : x ∈ U ×ˢ univ :=
-    ⟨circleAffineLift_mem_interior_half_lower hS hT hD hγ travel a ha x.1 hpos, mem_univ _⟩
-  have hjet : JP.D n x = Jactual.D n x :=
-    (JP.restrict (hU.prod isOpen_univ) (fun z hz => ⟨hsub hz.1, hz.2⟩)).unique
-      Jactual n x hxU
-  have hjetValue : JP.D n x v = JV.D n x v := congrArg (fun A => A v) hjet
-  exact hjetValue.symm ▸ hC.choose_spec.2 x hxU hx v
+  have hleft (e : S.Space) (he : e ∈ U) (u : S.Space) : V e (L e u) = u :=
+    circleInverseComposeLinear_left_inverse hS hT hD hγ travel (a / 2) ha' e u
+      (hlower e he)
+  have hright (e : S.Space) (he : e ∈ U) (u : S.Space) : L e (V e u) = u :=
+    circleInverseComposeLinear_right_inverse hS hT hD hγ travel (a / 2) ha' e u
+      (hlower e he)
+  have hVbound : HasUniformLowGrowth (pairGrading S.grading S.grading) S.grading
+      (fun x : S.Space × S.Space => V x.1 x.2) :=
+    uniformLowGrowth_circleInverseComposeLinear
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp travel (a / 2) ha'
+  exact positiveInverse_uniform_oneHigh_of_local_inverse S.grading
+    (gradedSeminorm_monotone (fun j => S.level j) S.bond) hU hsub
+    (fun e => ∀ m θ, a ≤ deriv (circleAffineLift travel (S.decode e) 1 m) θ)
+    (fun e he => circleAffineLift_mem_interior_half_lower hS hT hD hγ travel a ha e he)
+    L (circlePositiveInverseComposeLinear hS hT hD hγ travel) V JP J₀ hJbound
+    heq hleft hright hVbound
 
 /-- One canonical tower works for every specified common positive
 derivative bound. Each bound then supplies constants before any point,

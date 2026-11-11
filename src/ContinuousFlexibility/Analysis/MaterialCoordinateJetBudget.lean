@@ -60,7 +60,11 @@ theorem materialCoordinate_fderiv_pointwise_budget
     have hsum : B i ≤ ∑ j : Fin n, B j :=
       Finset.single_le_sum (fun j _ => hB j) (Finset.mem_univ i)
     have hj : ‖iteratedFDeriv ℝ k g p‖ ≤ B i := by
-      simpa only [hi] using hBb i p
+      have hraw : ‖iteratedFDeriv ℝ (i.val + 1) g p‖ ≤ B i := hBb i p
+      have horder : ‖iteratedFDeriv ℝ (i.val + 1) g p‖ =
+          ‖iteratedFDeriv ℝ k g p‖ :=
+        congrArg (fun j : ℕ => ‖iteratedFDeriv ℝ j g p‖) hi
+      exact horder.symm.trans_le hraw
     have hbound : ‖iteratedFDeriv ℝ k g p‖ ≤ Q :=
       hj.trans (hsum.trans (by dsimp only [Q]; linarith))
     exact hbound.trans (by simpa only [pow_one] using pow_le_pow_right₀ hQ hk)

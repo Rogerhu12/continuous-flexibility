@@ -34,6 +34,24 @@ private theorem finite_sum_bound_by_card
       rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
       exact (mul_assoc _ _ _).symm
 
+private theorem nonneg_array_entry_le_square_sum
+    (K : ℕ → ℕ → ℝ) (hK : ∀ b c, 0 ≤ K b c) (s b c : ℕ) (hbc : b + c ≤ s) :
+    K b c ≤ ∑ i : Fin (s + 1), ∑ j : Fin (s + 1), K i.val j.val := by
+  classical
+  let bi : Fin (s + 1) := ⟨b, by omega⟩
+  let ci : Fin (s + 1) := ⟨c, by omega⟩
+  have hc : K bi.val ci.val ≤ ∑ j : Fin (s + 1), K bi.val j.val :=
+    Finset.single_le_sum (f := fun j : Fin (s + 1) => K bi.val j.val)
+      (fun j _ => hK bi.val j.val) (Finset.mem_univ ci)
+  have hb : (∑ j : Fin (s + 1), K bi.val j.val) ≤
+      ∑ i : Fin (s + 1), ∑ j : Fin (s + 1), K i.val j.val :=
+    Finset.single_le_sum (f := fun i : Fin (s + 1) =>
+      ∑ j : Fin (s + 1), K i.val j.val)
+      (fun i _ => Finset.sum_nonneg (fun j _ => hK i.val j.val))
+      (Finset.mem_univ bi)
+  have heq : K b c = K bi.val ci.val := rfl
+  exact heq.trans_le (hc.trans hb)
+
 private theorem cyclic_slot_sum_bound
     {V : Type*} (n : ℕ) (A : (Fin (n + 1) → V) → ℝ)
     (low P : V → ℝ) (Q : V → Prop) (K c : ℝ)
@@ -76,7 +94,7 @@ private theorem cyclic_slot_sum_bound
       have hwlow' (l : Fin (n + 1)) : low (w' l) ≤ 1 := by
         refine Fin.lastCases ?_ (fun a => ?_) l
         · simpa only [w', Fin.snoc_last] using hwlow 0
-        · simpa only [w', Fin.snoc_castSucc] using hwlow a.succ
+        · simpa only [w', Fin.snoc_castSucc, Fin.tail_def] using hwlow a.succ
       have hsum : (∑ l : Fin (n + 1), P (w' l)) =
           ∑ l : Fin (n + 1), P (w l) := by
         have hleft : (∑ l : Fin (n + 1), P (w' l)) =
@@ -138,18 +156,7 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
   intro rsel hrsel b c hbc z hz hzb vs hvs v hv hvq
   have hvs0 (i : Fin n) : p base (vs i) ≤ 1 :=
     (hp hB (vs i)).trans (hvs i)
-  have hKs : K b c ≤ K₀ := by
-    let bi : Fin (s + 1) := ⟨b, by omega⟩
-    let ci : Fin (s + 1) := ⟨c, by omega⟩
-    have hc : K b c ≤ ∑ j : Fin (s + 1), K bi.val j.val :=
-      Finset.single_le_sum (f := fun j : Fin (s + 1) => K bi.val j.val)
-        (fun j _ => hK bi.val j.val) (Finset.mem_univ ci)
-    have hb : (∑ j : Fin (s + 1), K bi.val j.val) ≤ K₀ :=
-      Finset.single_le_sum (f := fun i : Fin (s + 1) =>
-        ∑ j : Fin (s + 1), K i.val j.val)
-        (fun i _ => Finset.sum_nonneg (fun j _ => hK i.val j.val))
-        (Finset.mem_univ bi)
-    exact hc.trans hb
+  have hKs : K b c ≤ K₀ := nonneg_array_entry_le_square_sum K hK s b c hbc
   let Q : ℝ := (1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)) *
     p (base + c + 6) v + p (b + loss + c + 6) v
   have hQ : 0 ≤ Q := by
@@ -256,8 +263,8 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 /-- The state slot may occur anywhere in the actual derivative tuple.
-The right hand side is symmetric in all direction seminorms. -/
-/-- The constants are fixed before every choice of closed flow radii. -/
+The right hand side is symmetric in all direction seminorms.
+The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
