@@ -161,8 +161,8 @@ theorem decode_scalarStateQuotientHeight (x : ScalarWeightedState S) (p : PolarP
 
 theorem scalarStateWAct_zero (x : ScalarWeightedState S) :
     scalarStateWAct hD hT hS x 0 = 0 := by
-  simp only [scalarStateWAct, scalarHeightUnitalAct, scalarHeightMul_zero_right,
-    zero_add, map_zero]
+  simpa only [scalarStateWAct, scalarHeightUnitalAct, scalarHeightMul_zero_right,
+    zero_add] using (scalarReferenceWCLM hD hT hS).map_zero
 
 theorem scalarStateEnergyAct_zero (x : ScalarWeightedState S) :
     scalarStateEnergyAct hD hT hS x 0 = 0 := by
@@ -171,7 +171,7 @@ theorem scalarStateEnergyAct_zero (x : ScalarWeightedState S) :
 theorem scalarStateMeanCLM_center (v0 : ScalarHeightSpace S) :
     scalarStateMeanCLM hD hT hS (scalarStateCenter S v0) = 0 := by
   change SobolevModelData.angularMeanCLM hT (hS.1 scalarBeta) 0 = 0
-  exact map_zero _
+  exact (SobolevModelData.angularMeanCLM hT (hS.1 scalarBeta)).map_zero
 
 theorem scalarStateRadialHeight_center (v0 : ScalarHeightSpace S) :
     scalarStateRadialHeight hD hT hS (scalarStateCenter S v0) = 0 := by
@@ -198,9 +198,10 @@ theorem scalarStateDiscriminantHeight_center (v0 : ScalarHeightSpace S) :
 
 theorem scalarStateQuotientHeight_center (v0 : ScalarHeightSpace S) :
     scalarStateQuotientHeight hD hT hS (scalarStateCenter S v0) = 0 := by
-  simp only [scalarStateQuotientHeight, scalarStateRadialHeight_center,
+  simpa only [scalarStateQuotientHeight, scalarStateRadialHeight_center,
     scalarStateAngularHeight_center, scalarStateEnergyAct_zero, add_zero,
-    scalarHeightUnitalAct, scalarHeightMul_zero_right, zero_add, map_zero]
+    scalarHeightUnitalAct, scalarHeightMul_zero_right, zero_add] using
+      (scalarReferenceInvWCLM hD hT hS).map_zero
 
 /-- Four actual height ranges suffice for all scalar power identities.
 They will be made small simultaneously on one state neighborhood. -/

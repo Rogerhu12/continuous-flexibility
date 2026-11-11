@@ -147,7 +147,8 @@ def scalarTypeErrorLinear
   toFun R := (scalarTypeErrorCLM hD hT hS t R).toLinearMap
   map_add' := by
     intro R₁ R₂
-    ext u
+    apply LinearMap.ext
+    intro u
     change scalarTypeErrorCLM hD hT hS t (R₁ + R₂) u =
       scalarTypeErrorCLM hD hT hS t R₁ u + scalarTypeErrorCLM hD hT hS t R₂ u
     simp only [scalarTypeErrorCLM_apply, map_add]
@@ -159,7 +160,8 @@ def scalarTypeErrorLinear
     rw [he, map_add]
   map_smul' := by
     intro c R
-    ext u
+    apply LinearMap.ext
+    intro u
     change scalarTypeErrorCLM hD hT hS t (c • R) u =
       c • scalarTypeErrorCLM hD hT hS t R u
     simp only [scalarTypeErrorCLM_apply, map_smul]
