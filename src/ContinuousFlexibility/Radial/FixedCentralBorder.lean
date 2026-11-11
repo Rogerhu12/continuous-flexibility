@@ -77,6 +77,7 @@ theorem exists_fixedCentralBorder : Nonempty FixedCentralBorder := by
       _ = ∫ r : ℝ, g r * φ r := by
         apply integral_congr_ae
         exact Eventually.of_forall fun r => by
+          change fixedCentralColumn χ r * centralKernelHeight r = g r * φ r
           rw [← congrFun hcol r]
           by_cases hr : r ∈ Ioo fixedCentralCapLeft fixedCentralCapRight
           · rw [hφmodel hr]

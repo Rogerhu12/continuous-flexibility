@@ -81,7 +81,7 @@ theorem terminalMorse_physical_layer_coefficients (long : Bool) {A B s weightSca
   have hRp : 0 < R t := terminalMorseLayerRadius_pos long hB hAB hs hr htfull
   have hRupper : R t ≤ 2 * s := by
     have h := mul_le_mul_of_nonneg_left (terminalMorse_retained_radius_bounds hr hx).2 hs.le
-    simpa only [R, terminalMorseLayerRadius, terminalMorseCapRadius, one_mul, mul_comm] using h
+    simpa only [R, terminalMorseLayerRadius, terminalMorseCapRadius, one_mul, mul_one, mul_comm] using h
   have hspeed : s * A ^ 5 / 100 ≤ deriv R t :=
     terminalMorseLayerRadius_speed_lower long hB hAB hs hr htfull
   have hspeedpos : 0 < deriv R t := (by positivity : 0 < s * A ^ 5 / 100).trans_le hspeed
