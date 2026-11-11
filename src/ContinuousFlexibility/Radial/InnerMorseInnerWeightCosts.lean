@@ -33,11 +33,17 @@ def innerMorseInnerPieceIndex (N K : ℕ) : Fin (2 * (2 * K + 1) + 1) → ℕ :=
 
 theorem innerMorseInnerPieceIndex_model (N K : ℕ) (p : Fin (2 * K + 1)) :
     innerMorseInnerPieceIndex N K (innerModelChainPiece p) = innerMorseInnerModelIndex N K p :=
-  innerDisjointCoverElim_left _ _ _ _ _ _ _ _ p
+  innerDisjointCoverElim_left innerModelChainPiece innerModelChainGap
+    innerModelChainPiece_injective innerModelChainGap_injective
+    (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
+    (innerMorseInnerModelIndex N K) (innerMorseInnerGapIndex N K) p
 
 theorem innerMorseInnerPieceIndex_gap (N K : ℕ) (g : Fin (2 * K + 2)) :
     innerMorseInnerPieceIndex N K (innerModelChainGap g) = innerMorseInnerGapIndex N K g :=
-  innerDisjointCoverElim_right _ _ _ _ _ _ _ _ g
+  innerDisjointCoverElim_right innerModelChainPiece innerModelChainGap
+    innerModelChainPiece_injective innerModelChainGap_injective
+    (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
+    (innerMorseInnerModelIndex N K) (innerMorseInnerGapIndex N K) g
 
 theorem innerMorseInnerModelIndex_center (N K : ℕ) :
     innerMorseInnerModelIndex N K (innerMorseInnerCenter K) = N := by
@@ -89,12 +95,20 @@ def innerMorseInnerPieceBase (N K : ℕ) (a γ σ : ℝ) : Fin (2 * (2 * K + 1) 
 theorem innerMorseInnerPieceBase_model (N K : ℕ) (a γ σ : ℝ) (p : Fin (2 * K + 1)) :
     innerMorseInnerPieceBase N K a γ σ (innerModelChainPiece p) =
       (innerCellWeight N a γ (innerMorseInnerModelIndex N K p)) ^ σ :=
-  innerDisjointCoverElim_left _ _ _ _ _ _ _ _ p
+  innerDisjointCoverElim_left innerModelChainPiece innerModelChainGap
+    innerModelChainPiece_injective innerModelChainGap_injective
+    (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
+    (fun p => (innerCellWeight N a γ (innerMorseInnerModelIndex N K p)) ^ σ)
+    (fun g => (innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ) ^ σ) p
 
 theorem innerMorseInnerPieceBase_gap (N K : ℕ) (a γ σ : ℝ) (g : Fin (2 * K + 2)) :
     innerMorseInnerPieceBase N K a γ σ (innerModelChainGap g) =
       (innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ) ^ σ :=
-  innerDisjointCoverElim_right _ _ _ _ _ _ _ _ g
+  innerDisjointCoverElim_right innerModelChainPiece innerModelChainGap
+    innerModelChainPiece_injective innerModelChainGap_injective
+    (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
+    (fun p => (innerCellWeight N a γ (innerMorseInnerModelIndex N K p)) ^ σ)
+    (fun g => (innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ) ^ σ) g
 
 theorem innerMorseInnerPieceBase_pos (N K : ℕ) (a γ σ : ℝ)
     (p : Fin (2 * (2 * K + 1) + 1)) : 0 < innerMorseInnerPieceBase N K a γ σ p := by

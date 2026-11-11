@@ -82,12 +82,18 @@ def innerActualChainOfModelsAndGaps :
 theorem innerActualChainOfModelsAndGaps_model (p : Fin m) :
     (innerActualChainOfModelsAndGaps G bordered j center column models gaps).piece
         (innerModelChainPiece p) = Sum.inl (models p) :=
-  innerDisjointCoverElim_left _ _ _ _ _ _ _ _ p
+  innerDisjointCoverElim_left innerModelChainPiece innerModelChainGap
+    innerModelChainPiece_injective innerModelChainGap_injective
+    (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
+    (fun p => Sum.inl (models p)) (fun g => Sum.inr (gaps g)) p
 
 theorem innerActualChainOfModelsAndGaps_gap (g : Fin (m + 1)) :
     (innerActualChainOfModelsAndGaps G bordered j center column models gaps).piece
         (innerModelChainGap g) = Sum.inr (gaps g) :=
-  innerDisjointCoverElim_right _ _ _ _ _ _ _ _ g
+  innerDisjointCoverElim_right innerModelChainPiece innerModelChainGap
+    innerModelChainPiece_injective innerModelChainGap_injective
+    (fun p g => (innerModelChainGap_ne_model g p).symm) innerModelChainPiece_or_gap
+    (fun p => Sum.inl (models p)) (fun g => Sum.inr (gaps g)) g
 
 /-- Every internal cut lies between one model and one gap, with the
 original two endpoint conventions. -/
@@ -127,10 +133,10 @@ theorem innerActualChainOfModelsAndGaps_kappa_pos
   obtain ⟨p, h | h⟩ := innerModelChain_cut_incidence i
   · rw [h.1, h.2, innerActualChainOfModelsAndGaps_gap,
       innerActualChainOfModelsAndGaps_model]
-    simpa only [InnerRadialActualPiece.kappa, zero_add] using hκ p 0
+    simpa only [InnerRadialActualPiece.kappa, Pi.zero_apply, zero_add] using hκ p 0
   · rw [h.1, h.2, innerActualChainOfModelsAndGaps_model,
       innerActualChainOfModelsAndGaps_gap]
-    simpa only [InnerRadialActualPiece.kappa, add_zero] using hκ p 1
+    simpa only [InnerRadialActualPiece.kappa, Pi.zero_apply, add_zero] using hκ p 1
 
 theorem innerActualChainOfModelsAndGaps_model_internal
     (hκ : ∀ p i, 0 < (models p).kappa i) (p : Fin (2 * m + 1))

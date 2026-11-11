@@ -337,6 +337,34 @@ theorem exists_smoothSecondOrderSystem {q : ℝ → ℝ} (hq : ContDiff ℝ ∞ 
   exact ⟨(ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h,
     (ContinuousLinearMap.snd ℝ ℝ ℝ).hasFDerivAt.comp_hasDerivAt x h⟩
 
+/-- Continuous scalar states with the same interior initial data agree
+through both endpoints. Only interior derivatives are required. -/
+theorem smoothScalarSystem_eqOn {q U D r v : ℝ → ℝ} {a b t₀ : ℝ}
+    (hq : Continuous q) (ht₀ : t₀ ∈ Ioo a b)
+    (hU : ContinuousOn U (Icc a b)) (hD : ContinuousOn D (Icc a b))
+    (hr : ContinuousOn r (Icc a b)) (hv : ContinuousOn v (Icc a b))
+    (hUd : ∀ x ∈ Ioo a b, HasDerivAt U (D x) x)
+    (hDd : ∀ x ∈ Ioo a b, HasDerivAt D (-q x * U x) x)
+    (hrd : ∀ x ∈ Ioo a b, HasDerivAt r (v x) x)
+    (hvd : ∀ x ∈ Ioo a b, HasDerivAt v (-q x * r x) x)
+    (h₀ : U t₀ = r t₀) (h₁ : D t₀ = v t₀) :
+    EqOn U r (Icc a b) ∧ EqOn D v (Icc a b) := by
+  obtain ⟨C, hC⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn
+    hq.continuousOn
+  let K : ℝ≥0 := ⟨max 1 C, zero_le_one.trans (le_max_left _ _)⟩
+  have hLip (x : ℝ) (hx : x ∈ Ioo a b) : LipschitzWith K (radiusField q x) :=
+    radiusField_lipschitz (le_max_left _ _) ((hC x (Ioo_subset_Icc_self hx)).trans
+      (le_max_right _ _))
+  have hpair : EqOn (fun x => (U x, D x)) (fun x => (r x, v x)) (Icc a b) :=
+    ODE_solution_unique_of_mem_Icc (v := radiusField q) (s := fun _ => univ)
+      (fun x hx => (hLip x hx).lipschitzOnWith) ht₀
+      (hU.prodMk hD) (fun x hx => (hUd x hx).prodMk (hDd x hx))
+      (fun _ _ => mem_univ _) (hr.prodMk hv)
+      (fun x hx => (hrd x hx).prodMk (hvd x hx)) (fun _ _ => mem_univ _)
+      (Prod.ext h₀ h₁)
+  exact ⟨fun x hx => congrArg Prod.fst (hpair hx),
+    fun x hx => congrArg Prod.snd (hpair hx)⟩
+
 /-- Local uniqueness for the arbitrary smooth second-order system.
 Only a continuous coefficient and actual local solution germs are used. -/
 theorem smoothSecondOrderSystem_germ {q r v s z : ℝ → ℝ} {t₀ : ℝ}

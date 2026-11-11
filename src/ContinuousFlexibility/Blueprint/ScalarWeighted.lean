@@ -1,20 +1,22 @@
-import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Scalar.WeightedRealization
 
 /-!
 # Blueprint node ScalarWeighted
 
-The same three statements on the weighted function spaces, up to the flat endpoints.
+The three weighted scalar milestones on the actual physical spaces,
+including one common low-order neighborhood and the flat endpoints.
 
-Source: `paper/flexible-surface-rewrite/03-height-equation.tex` lines 287–376; `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 72–157.
+Source: `paper/flexible-surface-readable/03-height-equation.tex` lines 406–543;
+`paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–506.
 
-Task file: `docs/tasks/ScalarWeighted.md`. The statement is frozen; replace the `sorry`.
+Task file: `docs/tasks/ScalarWeighted.md`.
 -/
 
 namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Statements
 
-theorem ScalarWeighted : S03WeightedStatement ∧ S04WeightedStatement ∧ S05WeightedStatement := by
-  sorry
+theorem ScalarWeighted : S03WeightedStatement ∧ S04WeightedStatement ∧ S05WeightedStatement :=
+  ContinuousFlexibility.Statements.scalarWeighted
 
 end ContinuousFlexibility.Blueprint
