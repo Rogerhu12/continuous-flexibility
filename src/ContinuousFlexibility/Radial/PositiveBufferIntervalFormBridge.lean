@@ -105,7 +105,7 @@ theorem positiveBufferEnergyForm_restrict_right {V : ℝ → ℝ} (hV : Continuo
     by_cases hx : x ∈ Ioo l h
     · rw [indicator_of_mem hx]
     · rw [indicator_of_notMem hx, hux hx]
-      simp only [mul_zero]
+      simp only [mul_zero, zero_mul]
 
 /-- The frozen Dirichlet graph equals the physical form equation on all
 global energy tests having zero endpoint traces. -/

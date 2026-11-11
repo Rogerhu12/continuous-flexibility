@@ -169,11 +169,15 @@ theorem positiveBuffer_normalized_profile_square_mass {B : BufferData}
   rw [positiveBufferPoint_preimage_exterior hB i] at hPointI
   have hOutI : IntegrableOn (fun t => pout (positiveBufferPoint B i (-t)) ^ 2)
       (Ici 0) volume := by
-    apply integrableOn_Ici_iff_integrableOn_Ioi.mpr
     have hcomp := positiveBuffer_affine_integrableOn measurableSet_Iio hPointI
       (0 : ℝ) (by norm_num : (-1 : ℝ) ≠ 0)
     have hpre : (fun x : ℝ => 0 + -1 * x) ⁻¹' Iio 0 = Ioi 0 := by ext x; simp
-    simpa only [hpre, zero_add, neg_one_mul] using hcomp
+    have hio : IntegrableOn (fun t => pout (positiveBufferPoint B i (-t)) ^ 2)
+        (Ioi 0) volume := by
+      simpa only [hpre, zero_add, neg_one_mul] using hcomp
+    change Integrable _ (volume.restrict (Ioi (0 : ℝ))) at hio
+    change Integrable _ (volume.restrict (Ici (0 : ℝ)))
+    rwa [restrict_Ioi_eq_restrict_Ici] at hio
   refine ⟨hOutI, ?_⟩
   rw [hFinChange, hOutEq]
   apply (le_div_iff₀ hm).mpr

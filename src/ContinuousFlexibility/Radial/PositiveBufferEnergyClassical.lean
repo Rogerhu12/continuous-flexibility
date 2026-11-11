@@ -51,7 +51,13 @@ theorem positiveBuffer_stationary_localWeakEquation {V : ℝ → ℝ} (hV : Cont
         apply integral_congr_ae
         filter_upwards [] with x
         ring
-      _ = _ := by rw [integral_add htest.neg hpot, integral_neg]
+      _ = _ := by
+        have hneg : Integrable (fun x : ℝ =>
+            -(positiveBufferEnergyCoordinate V 0 u x * deriv (deriv φ) x)) volume := by
+          apply htest.neg.congr
+          filter_upwards [] with x
+          rfl
+        rw [integral_add hneg hpot, integral_neg]
   rw [hsplit, hweak]
   simp
 
@@ -109,8 +115,10 @@ theorem positiveBuffer_stationary_smooth_on_open {V U : ℝ → ℝ}
       positiveBuffer_local_smooth_representative (hxab.1.trans hxab.2) hV contDiff_const
         (positiveBufferEnergy_derivative_weak V u)
         (positiveBuffer_stationary_localWeakEquation hV.continuous s hs u hu (hsub.trans hOs))
+    have hue' : (positiveBufferEnergyCoordinate V 0 u : ℝ → ℝ) =ᵐ[volume.restrict (Ioo a b)] U :=
+      ae_restrict_of_ae hue
     have heq : EqOn U p (Ioo a b) := MeasureTheory.Measure.eqOn_open_of_ae_eq
-      ((ae_restrict_of_ae hue).symm.trans hup) isOpen_Ioo hU.continuousOn hp.continuousOn
+      (hue'.symm.trans hup) isOpen_Ioo hU.continuousOn hp.continuousOn
     have hev : U =ᶠ[𝓝 x] p := by
       filter_upwards [Ioo_mem_nhds hxab.1 hxab.2] with y hy
       exact heq hy

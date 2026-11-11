@@ -84,6 +84,7 @@ theorem positiveBuffer_toLp_norm_le_of_support {a b K : ℝ} {f : ℝ → ℝ}
         by_contra hn
         exact hx (hsupport hn)
       simp only [indicator_of_notMem hx, hzero, norm_zero]
+      exact le_rfl
   have hgnorm : ‖g‖ = K * sqrt (b - a) := by
     dsimp [g]
     rw [norm_indicatorConstLp (by norm_num) (by norm_num), Real.norm_eq_abs,

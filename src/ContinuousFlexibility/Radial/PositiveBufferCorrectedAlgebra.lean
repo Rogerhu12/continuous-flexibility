@@ -26,7 +26,11 @@ theorem positiveBufferCorrected_cutMatrix_eq {B : BufferData}
     (hlh : B.l ≤ B.h) (i j : Fin 2) :
     positiveBufferCutMatrix (bufferCut B) A D.column i j =
       sqrt (A i) * D.representative j (bufferCut B i) := by
-  have he := D.representative_eq j (positiveBufferCut_mem_Icc hlh i)
+  have he : D.representative j (bufferCut B i) =
+      positiveBufferEnergyRepresentative B.potential
+        (positiveBufferBorderedField B.potential B.bordered (D.column j)) (bufferCut B i) := by
+    apply D.representative_eq j
+    exact positiveBufferCut_mem_Icc hlh i
   change sqrt (A i) * positiveBufferTraceAt B.potential (bufferCut B i)
     (D.column j).val.1 = _
   rw [positiveBufferTraceAt_apply]

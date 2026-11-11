@@ -146,7 +146,7 @@ theorem positiveBufferNormalizedTrace_zero_iff (B : BufferData)
       rw [positiveBufferNormalizedTrace_apply] at hi
       exact (mul_eq_zero.mp hi).resolve_left (Real.sqrt_pos.mpr (hA i)).ne'
     constructor
-    · simpa only [bufferCut, if_pos rfl] using hzero 0
+    · simpa only [bufferCut, if_true] using hzero 0
     · simpa only [bufferCut, (show (1 : Fin 2) ≠ 0 by decide), if_false] using hzero 1
   · rintro ⟨hl, hh⟩
     ext i
