@@ -20,6 +20,8 @@ open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+
 theorem materialRho_endpoint_formulas {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) :
     ∃ d₀ δ cL cR : ℝ, 0 < d₀ ∧ 0 < δ ∧ δ < min d₀ ((D.b - D.a) / 2) ∧
@@ -39,7 +41,7 @@ theorem materialRho_endpoint_formulas {D : ReferenceData} {T : MaterialData}
       (by linarith [hr.2] : r - D.a < d₀)).comp r ((hasDerivAt_id r).sub_const D.a)
     have h' : HasDerivAt (fun t => endpointRhoOfDistance d₀ (t - D.a))
         ((1 / endpointEll d₀ (r - D.a)) * 1) r := by
-      simpa only [Function.comp_def] using h
+      simpa only [Function.comp_def, id_eq] using h
     exact h'.congr_deriv (by simp only [mul_one, (hleft r hr).1, endpointEll])
   have hrightD (r : ℝ) (hr : r ∈ Ioo (D.b - δ) D.b) :
       HasDerivAt (fun t => -endpointRhoOfDistance d₀ (D.b - t)) (1 / T.ell r) r := by
@@ -91,7 +93,9 @@ theorem materialRho_endpoint_polynomial_bound {D : ReferenceData} {T : MaterialD
     linarith [abs_nonneg cL, abs_nonneg cR]
   have habs (x : ℝ) (hx : 0 ≤ x) : |endpointRho x| = x ^ 2 + (2 / 3 : ℝ) * x ^ 3 := by
     unfold endpointRho
-    rw [abs_of_nonpos (by positivity : -x ^ 2 - (2 / 3 : ℝ) * x ^ 3 ≤ 0)]
+    rw [abs_of_nonpos (by
+      nlinarith only [sq_nonneg x, pow_nonneg hx 3] :
+        -x ^ 2 - (2 / 3 : ℝ) * x ^ 3 ≤ 0)]
     ring
   refine ⟨d₀, K, hd₀, hK, fun r hr => ?_⟩
   by_cases hl : r < D.a + δ
@@ -102,7 +106,8 @@ theorem materialRho_endpoint_polynomial_bound {D : ReferenceData} {T : MaterialD
     calc
       _ ≤ |endpointRhoOfDistance d₀ (r - D.a)| + |cL| := abs_add_le _ _
       _ = endpointX d₀ (r - D.a) ^ 2 + (2 / 3 : ℝ) * endpointX d₀ (r - D.a) ^ 3 + |cL| := by
-        rw [endpointRhoOfDistance, habs _ (Real.sqrt_nonneg _)]
+        rw [endpointRhoOfDistance,
+          habs (endpointX d₀ (r - D.a)) (Real.sqrt_nonneg _)]
       _ ≤ _ := by linarith only [hLc]
   · by_cases hr' : D.b - δ < r
     · have hd : endpointDistance D r = D.b - r := by
@@ -112,7 +117,8 @@ theorem materialRho_endpoint_polynomial_bound {D : ReferenceData} {T : MaterialD
       calc
         _ ≤ |-endpointRhoOfDistance d₀ (D.b - r)| + |cR| := abs_add_le _ _
         _ = endpointX d₀ (D.b - r) ^ 2 + (2 / 3 : ℝ) * endpointX d₀ (D.b - r) ^ 3 + |cR| := by
-          rw [abs_neg, endpointRhoOfDistance, habs _ (Real.sqrt_nonneg _)]
+          rw [abs_neg, endpointRhoOfDistance,
+            habs (endpointX d₀ (D.b - r)) (Real.sqrt_nonneg _)]
         _ ≤ _ := by linarith only [hRc]
     · have hb : |T.rho r| ≤ A := by
         simpa only [Real.norm_eq_abs] using hA r ⟨le_of_not_gt hl, le_of_not_gt hr'⟩

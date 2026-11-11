@@ -39,7 +39,10 @@ theorem circleProductJetConstant_row_le {b s : ℕ} {B : ℝ}
     (∑ i ∈ Finset.range (b + 1), (b.choose i : ℝ) * (B * (2 * circleSobolevConstant))) ≤
       circleProductJetConstant s B := by
   unfold circleProductJetConstant
-  apply Finset.single_le_sum _ (Finset.mem_range.mpr (by omega))
+  apply Finset.single_le_sum
+    (f := fun n : ℕ => ∑ i ∈ Finset.range (n + 1),
+      (n.choose i : ℝ) * (B * (2 * circleSobolevConstant)))
+    (a := b) _ (Finset.mem_range.mpr (by omega))
   intro n hn
   apply Finset.sum_nonneg
   intro i hi

@@ -171,6 +171,10 @@ theorem N01Properties.exists_opticalCorrection_characteristic_gap
       (∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧
         χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1) ∧
         tsupport (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m)) ∧
+      (∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
+        p.1 ∈ tsupport (deriv (χ m)) →
+        0 < (originalCoefficients D S C z).b p ^ 2 -
+          (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) ∧
       ∀ z ∈ stateNeighborhood S C base' ε', stateSector S z.1 →
       ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,
         (deriv (χ m) r ≠ 0 →
@@ -207,8 +211,14 @@ theorem N01Properties.exists_opticalCorrection_characteristic_gap
   have hb : b₀ ≤ base' := le_max_left _ _
   have hh : 1 + loss ≤ base' := le_max_right _ _
   have hnew := hN₀.restrict_neighborhood hT hb hε' hε'₀
+  have hdisc : ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
+      p.1 ∈ tsupport (deriv (χ m)) →
+      0 < (originalCoefficients D S C z).b p ^ 2 -
+        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p :=
+    fun z hz m p hp =>
+      (hpositive z (stateNeighborhood_mono S C hb hε'₀ hz) m p hp).2.2.2.2
   refine ⟨base', ε', χ, hbase₀.trans hb, hε', hε'₀.trans hε₀ε,
-    hnew, hχ, hend, fun z hz hsector m r hr θ => ?_⟩
+    hnew, hχ, hend, hdisc, fun z hz hsector m r hr θ => ?_⟩
   have hz₀ := stateNeighborhood_mono S C hb hε'₀ hz
   have hC : controlGeometryConditions D S C := hN₀.2.2.2.1
   have hp : (r, θ) ∈ annularOpen D :=
@@ -277,6 +287,10 @@ theorem N01Properties.exists_opticalCorrection_flow
       (∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧
         χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1) ∧
         tsupport (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m)) ∧
+      (∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
+        p.1 ∈ tsupport (deriv (χ m)) →
+        0 < (originalCoefficients D S C z).b p ^ 2 -
+          (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) ∧
       ∀ z ∈ stateNeighborhood S C base' ε', stateSector S z.1 → ∀ m θ,
         returnCorrectedMinusFlow S C χ z m (C.left m) θ = θ ∧
         ContinuousOn (fun r => returnCorrectedMinusFlow S C χ z m r θ)
@@ -289,9 +303,9 @@ theorem N01Properties.exists_opticalCorrection_flow
           stateLeftChart S z.1 m θ - C.travel m ∧
         rightChartCandidate S C z m (-returnCorrectedMinusFlow S C χ z m (C.right m) (-θ)) =
           stateLeftChart S z.1 m θ + C.travel m := by
-  obtain ⟨base', ε', χ, hb, hε', hεε, hnew, hχ, hend, hgap⟩ :=
+  obtain ⟨base', ε', χ, hb, hε', hεε, hnew, hχ, hend, hdisc, hgap⟩ :=
     hN.exists_opticalCorrection_characteristic_gap hS hT
-  refine ⟨base', ε', χ, hb, hε', hεε, hnew, hχ, hend,
+  refine ⟨base', ε', χ, hb, hε', hεε, hnew, hχ, hend, hdisc,
     fun z hz hsector m θ => ?_⟩
   exact hnew.returnCorrectedFlow_properties_of_physical hS hT hz hsector χ m
     (hχ m).1 (fun r _ => (hχ m).2 r) (hend m).1.eq_of_nhds (hend m).2.1.eq_of_nhds

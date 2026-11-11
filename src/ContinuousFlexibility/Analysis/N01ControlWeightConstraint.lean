@@ -18,6 +18,7 @@ namespace ContinuousFlexibility.Statements
 -- Use the canonical product action directly, avoiding a costly search
 -- through the abstract models that make up the state space.
 local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set
 open scoped ContDiff BigOperators
@@ -39,10 +40,15 @@ theorem oneHighVariationWeight_state_pair_two_zero_le
     oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
       base high 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
         (stateGrading S base v + stateGrading S high v) ^ 2 := by
-  rw [oneHighVariationWeight_two_zero]
-  simp only [pairGrading, Seminorm.add_apply, Seminorm.comp_apply,
-    LinearMap.fst_apply, LinearMap.snd_apply, map_zero, add_zero]
-  nlinarith only [sq_nonneg (stateGrading S high v)]
+  have hpair (n : ℕ) :
+      pairGrading (stateGrading S) realGrading n (v, (0 : ℝ)) = stateGrading S n v := by
+    change stateGrading S n v + realGrading n (0 : ℝ) = _
+    exact (congrArg (fun t : ℝ => stateGrading S n v + t) (realGrading n).map_zero').trans
+      (add_zero _)
+  have hw := oneHighVariationWeight_two_zero
+    (pairGrading (stateGrading S) realGrading) base high (v, (0 : ℝ))
+  have he := congrArg₂ (fun a b : ℝ => a ^ 2 + 2 * (b * a)) (hpair base) (hpair high)
+  exact (hw.trans he).le.trans (by nlinarith only [sq_nonneg (stateGrading S high v)])
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}

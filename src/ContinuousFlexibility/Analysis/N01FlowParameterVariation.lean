@@ -153,14 +153,20 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
-  have hdata := hN
-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩
-  obtain ⟨B, hB, hb⟩ := hflow 1 0
-  refine ⟨B, hB, fun x q hxq m r θ hr => ?_⟩
-  obtain ⟨J, hJ⟩ := hb m 0 0 (r, θ) (by norm_num) hr
-  apply ordinaryFlow_q_derivative_bound_of_tower (high := loss) J hxq
-  simpa only [pow_zero, one_mul] using
-    hJ (x, q) hxq (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
+  obtain ⟨B, hB, hb⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 0
+  have hpoint : ∀ (x : AnnularState S) (q : ℝ),
+      (x, q) ∈ stateNeighborhood S C base ε → ∀ (m : ℕ) (r θ : ℝ),
+      r ∈ Ioo (C.left m) (C.right m) →
+      |deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q| ≤
+        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+          T.E0 (T.sample (C.cell m)) ^ B *
+          (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
+    intro x q hxq m r θ hr
+    obtain ⟨J, hJ⟩ := hb m 0 0 (r, θ) (by norm_num) hr
+    apply ordinaryFlow_q_derivative_bound_of_tower (high := loss) J hxq
+    simpa only [pow_zero, one_mul] using
+      hJ (x, q) hxq (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
+  exact Exists.intro B (And.intro hB hpoint)
 
 /-- For a fixed state and component, the derivative bound is uniform in
 the radial point, the external parameter in the N01 neighborhood, and

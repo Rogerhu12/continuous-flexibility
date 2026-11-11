@@ -80,6 +80,35 @@ theorem returnLift_invFun_add_period {f : ℝ → ℝ} {P : ℝ}
   returnChart_inverse_add_period f (Function.invFun f) P hlift
     (Function.leftInverse_invFun hinj) (Function.rightInverse_invFun hsurj) x
 
+/-- The velocity factor is a scalar periodic expression. Keeping this
+calculation outside the physical-model types avoids unfolding their
+linear maps during the periodicity proof. -/
+theorem returnVelocityFactor_periodic
+    (f J d : ℝ → ℝ) (c P : ℝ)
+    (hfi : Function.Injective f) (hfs : Function.Surjective f)
+    (hJi : Function.Injective J) (hJs : Function.Surjective J)
+    (hf : ∀ x, f (x + P) = f x + P)
+    (hJ : ∀ x, J (x + P) = J x + P) (hd : Function.Periodic d P) :
+    Function.Periodic (fun x => deriv f (Function.invFun f x) * c *
+      d (Function.invFun J (Function.invFun f x))) P := by
+  intro x
+  dsimp only
+  rw [returnLift_invFun_add_period hfi hfs hf,
+    returnLift_invFun_add_period hJi hJs hJ,
+    returnLift_deriv_periodic hf, hd]
+
+theorem periodic_reflected_drift_speed
+    (v : ℝ → ℝ) {P : ℝ} (hv : Function.Periodic v P) (θ : ℝ) :
+    (v (θ + P) - v (-(θ + P))) / 2 = (v θ - v (-θ)) / 2 ∧
+      (-v (-(θ + P)) - v (θ + P)) / 2 = (-v (-θ) - v θ) / 2 := by
+  have hn := hv (-θ - P)
+  rw [show -θ - P + P = -θ by ring] at hn
+  have hneg : v (-(θ + P)) = v (-θ) := by
+    rw [show -(θ + P) = -θ - P by ring]
+    exact hn.symm
+  rw [hv θ, hneg]
+  exact ⟨rfl, rfl⟩
+
 section ActualCharts
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -112,7 +141,7 @@ theorem N01Properties.rightChartCandidate_add_period (m : ℕ) (θ : ℝ) :
     rightChartCandidate S C z m (θ + Real.pi) =
       rightChartCandidate S C z m θ + Real.pi := by
   have hleft := hN01.2.2.2.2.2.2.2.1 z hz hsector m
-  exact rightChartCandidate_add_period S C z m Real.pi
+  exact ContinuousFlexibility.Statements.rightChartCandidate_add_period S C z m Real.pi
     (fun t => (hleft t).2.2.1)
     (hN01.minusReturnInverse_add_period hz hsector m) θ
 
@@ -166,6 +195,8 @@ theorem N01Properties.returnCorrectionDisplacementLinear_periodic
     rw [hN01.rightChartInverse_add_period hz hsector m,
       hN01.minusReturnInverse_add_period hz hsector m]
   intro θ
+  change returnCorrectionDisplacementLinear S C z m (θ + Real.pi) ρ =
+    returnCorrectionDisplacementLinear S C z m θ ρ
   rw [returnCorrectionDisplacementLinear_apply, returnCorrectionDisplacementLinear_apply,
     hf, hh, he, hρ]
   rw [show rightChartCandidate S C z m (C.minusFlow z m (C.right m) θ) + Real.pi +
@@ -200,13 +231,14 @@ theorem N01Properties.returnCorrectionVelocityLinear_periodic
     continuous_id.add (continuous_const.mul
       ((hN01.returnCorrectionInitialMap_continuous hz hsector hS m).sub continuous_id))
   have hJsurj := returnLift_surjective Real.pi_pos hJcont hJ
-  have hfi := returnLift_invFun_add_period hfinj hfsurj hf
-  have hJi := returnLift_invFun_add_period hJinj hJsurj hJ
-  have hfd := returnLift_deriv_periodic hf
   have hdisp := hN01.returnCorrectionDisplacementLinear_periodic hz hsector hS m ρ
+  have hscalar := returnVelocityFactor_periodic (C.minusFlow z m r)
+    (returnInterpolation (χ m r) (returnCorrectionInitialMap S C z m))
+    (fun θ => returnCorrectionDisplacementLinear S C z m θ ρ)
+    (deriv (χ m) r) Real.pi hfinj hfsurj hJinj hJsurj hf hJ hdisp
   intro θ
-  simp only [returnCorrectionVelocityLinear, LinearMap.smul_apply, smul_eq_mul]
-  rw [hfi, hJi, hfd, hdisp]
+  exact (returnCorrectionVelocityLinear_apply D S C χ z m (r, θ + Real.pi) ρ).trans
+    ((hscalar θ).trans (returnCorrectionVelocityLinear_apply D S C χ z m (r, θ) ρ).symm)
 
 theorem N01Properties.returnCorrectionDriftSpeedLinear_periodic
     (hS : IsPhysicalSpaces D T S) (χ : ℕ → ℝ → ℝ) (m : ℕ) {r : ℝ}
@@ -217,14 +249,12 @@ theorem N01Properties.returnCorrectionDriftSpeedLinear_periodic
     returnCorrectionSpeedLinear D S C χ z m (r, θ + Real.pi) ρ =
         returnCorrectionSpeedLinear D S C χ z m (r, θ) ρ := by
   have hv := hN01.returnCorrectionVelocityLinear_periodic hz hsector hS χ m hr hχ ρ
-  have hn := hv (-θ - Real.pi)
-  rw [show -θ - Real.pi + Real.pi = -θ by ring] at hn
-  have hneg : returnCorrectionVelocityLinear D S C χ z m (r, -(θ + Real.pi)) ρ =
-      returnCorrectionVelocityLinear D S C χ z m (r, -θ) ρ := by
-    rw [show -(θ + Real.pi) = -θ - Real.pi by ring]
-    exact hn.symm
-  simp only [returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply, hv, hneg,
-    and_self]
+  have h := periodic_reflected_drift_speed
+    (fun t => returnCorrectionVelocityLinear D S C χ z m (r, t) ρ) hv θ
+  exact ⟨(returnCorrectionDriftLinear_apply D S C χ z m (r, θ + Real.pi) ρ).trans
+      (h.1.trans (returnCorrectionDriftLinear_apply D S C χ z m (r, θ) ρ).symm),
+    (returnCorrectionSpeedLinear_apply D S C χ z m (r, θ + Real.pi) ρ).trans
+      (h.2.trans (returnCorrectionSpeedLinear_apply D S C χ z m (r, θ) ρ).symm)⟩
 
 end ActualCharts
 
@@ -234,7 +264,8 @@ theorem heightPairField_periodic_of_physical
     Function.Periodic (heightPairField S η) (0, Real.pi) := by
   have hu := ((hS.1 (3 / 4 : ℝ)).2.2.2.1 η.1).2.2.1
   intro p
-  simp only [heightPairField, hu, Prod.fst_add, add_zero]
+  simp only [heightPairField, Prod.fst_add, add_zero]
+  rw [hu p]
 
 theorem originalCoefficients_periodic_of_physical
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -245,7 +276,8 @@ theorem originalCoefficients_periodic_of_physical
   have hu := heightPairField_periodic_of_physical hS z.1.1
   have hz : Function.Periodic (stateHeight D S C z) (0, Real.pi) := by
     intro p
-    simp only [stateHeight, stateU, hu, Prod.fst_add, add_zero]
+    simp only [stateHeight, stateU, Prod.fst_add, add_zero]
+    rw [hu p]
   exact periodic_heightCorrectedCoefficients (stateProfile D S C z.1) hz
 
 section ActualError

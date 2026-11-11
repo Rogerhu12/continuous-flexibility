@@ -40,8 +40,11 @@ theorem radialPlateauHeight_member {D : ReferenceData} {T : MaterialData}
     (hcore : Icc (l - δ) (r + δ) ⊆ Ioo D.a D.b) :
     HeightMember D T γ (radialPlateauHeight h l r δ) := by
   have hsupp := radialPlateauHeight_compactRadialSupport h hδ hcore
-  apply heightMember_of_compactRadialSupport hT
-    ((radialPlateauProduct_contDiff hh l r δ).comp contDiff_fst).contDiffOn
+  have hF : ContDiff ℝ ∞ (radialPlateauHeight h l r δ) := by
+    simpa only [radialPlateauHeight, Function.comp_def] using
+      (radialPlateauProduct_contDiff hh l r δ).comp contDiff_fst
+  apply heightMember_of_compactRadialSupport (f := radialPlateauHeight h l r δ) hT
+    hF.contDiffOn
     (fun _ _ => rfl)
   · intro p
     simp only [radialPlateauHeight, Prod.fst_add, add_zero]
@@ -92,7 +95,11 @@ theorem weightedPhysicalJet_radialPlateauHeight_zero_angle
     weightedPhysicalJet T γ a 0 c (radialPlateauHeight h l r δ) p =
       T.M (T.radius p.1) ^ c * iteratedDeriv a (materialPlateauPullback T γ h l r δ) p.1 := by
   simp only [weightedPhysicalJet, mixedDerivative, materialPullback, radialPlateauHeight,
-    materialPlateauPullback, iteratedDeriv_zero]
+    iteratedDeriv_zero]
+  have heq : (fun x : ℝ =>
+      T.H (T.radius x) ^ (-γ) * radialPlateauProduct h l r δ (T.radius x)) =
+      materialPlateauPullback T γ h l r δ := rfl
+  rw [heq]
 
 theorem weightedPhysicalJet_radialPlateauHeight_positive_angle
     (T : MaterialData) (γ : ℝ) (h : ℝ → ℝ) (l r δ : ℝ)

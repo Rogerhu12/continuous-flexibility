@@ -132,6 +132,19 @@ def returnCorrectionVelocityLinear (D : ReferenceData) (S : PhysicalSpacesData)
   (deriv (C.minusFlow z m p.1) α * deriv (χ m) p.1) •
     returnCorrectionDisplacementLinear S C z m θ
 
+theorem returnCorrectionVelocityLinear_apply
+    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (χ : ℕ → ℝ → ℝ) (z : AnnularState S × ℝ) (m : ℕ) (p : PolarPoint)
+    (ρ : CircleSpace S) :
+    returnCorrectionVelocityLinear D S C χ z m p ρ =
+      deriv (C.minusFlow z m p.1) (Function.invFun (C.minusFlow z m p.1) p.2) *
+        deriv (χ m) p.1 *
+        returnCorrectionDisplacementLinear S C z m
+          (Function.invFun
+            (returnInterpolation (χ m p.1) (returnCorrectionInitialMap S C z m))
+            (Function.invFun (C.minusFlow z m p.1) p.2)) ρ := by
+  simp only [returnCorrectionVelocityLinear, LinearMap.smul_apply, smul_eq_mul]
+
 theorem returnCorrectionVelocityLinear_at_actual
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}

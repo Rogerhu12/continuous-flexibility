@@ -42,7 +42,7 @@ theorem materialPlateau_sample_weight_bound {D : ReferenceData} {T : MaterialDat
     obtain ⟨_, hbounds⟩ := hD
     obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, hsamp, _⟩ := hT
     exact fun j => hbounds.2.1.2.2.2.1 j (hsamp j)
-  refine ⟨K₁ * Km * K₂, mul_pos (mul_pos hK₁ hKm) hK₂, hA, ?_⟩
+  refine ⟨K₁ * Km * K₂, A, mul_pos (mul_pos hK₁ hKm) hK₂, hA, ?_⟩
   intro j l r hl hlr hr hcell t ht
   let X : ℝ := endpointX d₀ (endpointDistance D t)
   let Y : ℝ := endpointX d₀ (endpointDistance D (T.sample j))

@@ -25,6 +25,13 @@ open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
 
+local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+
+theorem characteristicRadialRoot_q_eq (D : ReferenceData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (x : AnnularState S) (q r : ℝ) :
+    characteristicRadialRoot D S C (x, q) r =
+      characteristicRadialRoot D S C (x, 0) r := rfl
+
 /-- The genuine parameter derivative of the separated smooth factors. -/
 def characteristicQDerivative (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (x : AnnularState S) (s : ℝ × PolarPoint) : ℝ :=
@@ -44,10 +51,10 @@ theorem hasFDerivAt_coprod_of_hasDerivAt_slices
     HasFDerivAt f ((ContinuousLinearMap.toSpanSingleton ℝ a).coprod
       (ContinuousLinearMap.toSpanSingleton ℝ b)) (q, θ) := by
   have hq' : HasDerivAt (fun t => f (t, θ)) (L (1, 0)) q := by
-    simpa only [Function.comp_def] using
+    simpa only [Function.comp_def, id_eq] using
       hf.comp_hasDerivAt q ((hasDerivAt_id q).prodMk (hasDerivAt_const q θ))
   have hθ' : HasDerivAt (fun t => f (q, t)) (L (0, 1)) θ := by
-    simpa only [Function.comp_def] using
+    simpa only [Function.comp_def, id_eq] using
       hf.comp_hasDerivAt θ ((hasDerivAt_const θ q).prodMk (hasDerivAt_id θ))
   have hLq : L (1, 0) = a := hq'.unique hq
   have hLθ : L (0, 1) = b := hθ'.unique hθ
@@ -76,7 +83,8 @@ theorem minusCharacteristicSpeed_angular_periodic_of_physical
   have hu := ((hS.1 (3 / 4 : ℝ)).2.2.2.1 z.1.1.1).2.2.1
   have hh : Function.Periodic (stateHeight D S C z) (0, Real.pi) := by
     intro p
-    simp only [stateHeight, stateU, heightPairField, hu, Prod.fst_add, add_zero]
+    simp only [stateHeight, stateU, heightPairField, Prod.fst_add, add_zero]
+    rw [hu p]
   obtain ⟨ha, hb, hc⟩ := periodic_heightCorrectedCoefficients (stateProfile D S C z.1) hh
   intro θ
   have ha' := ha (r, θ)
@@ -145,16 +153,19 @@ theorem N01Properties.minusCharacteristicSpeed_parameter_continuousAt
   obtain ⟨hA, hB⟩ :=
     hN01.characteristic_factors_parameter_contDiffAt hS hT hxq hsector hp
   have hK : ContinuousAt (fun s : ℝ × PolarPoint =>
-      characteristicRadialRoot D S C (x, 0) s.2.1) (q, p) :=
-    (hN01.characteristicRadialRoot_continuousAt hS hT (z := (x, 0)) hp.1).comp
+      characteristicRadialRoot D S C (x, 0) s.2.1) (q, p) := by
+    have hmap : ContinuousAt (fun s : ℝ × PolarPoint => s.2.1) (q, p) :=
       continuousAt_snd.fst
+    have hk := hN01.characteristicRadialRoot_continuousAt hS hT
+      (z := (x, 0)) (r := p.1) hp.1
+    simpa only [Function.comp_def] using hk.comp_of_eq hmap rfl
   have hqnear : ∀ᶠ s : ℝ × PolarPoint in 𝓝 (q, p), |s.1| < ε :=
     continuousAt_fst.abs.eventually_lt continuousAt_const hxq.2
   have hpnear : ∀ᶠ s : ℝ × PolarPoint in 𝓝 (q, p), s.2 ∈ annularOpen D :=
     continuousAt_snd.eventually ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)
   apply (hA.continuousAt.sub (hK.mul hB.continuousAt)).congr_of_eventuallyEq
   filter_upwards [hqnear, hpnear] with s hs hp'
-  simpa only [Pi.sub_apply, Pi.mul_apply] using
+  simpa only [Pi.sub_apply, Pi.mul_apply, characteristicRadialRoot_q_eq] using
     hN01.minusCharacteristicSpeed_eq_separated hS hT
       (z := (x, s.1)) ⟨hxq.1, hs⟩ hsector hp'
 
@@ -172,9 +183,12 @@ theorem N01Properties.characteristicQDerivative_continuousAt
         s (1, (0, 0))) (q, p) :=
     (hB.fderiv_right (m := 0) (by simp)).continuousAt.clm_apply continuousAt_const
   have hK : ContinuousAt (fun s : ℝ × PolarPoint =>
-      characteristicRadialRoot D S C (x, 0) s.2.1) (q, p) :=
-    (hN01.characteristicRadialRoot_continuousAt hS hT (z := (x, 0)) hp.1).comp
+      characteristicRadialRoot D S C (x, 0) s.2.1) (q, p) := by
+    have hmap : ContinuousAt (fun s : ℝ × PolarPoint => s.2.1) (q, p) :=
       continuousAt_snd.fst
+    have hk := hN01.characteristicRadialRoot_continuousAt hS hT
+      (z := (x, 0)) (r := p.1) hp.1
+    simpa only [Function.comp_def] using hk.comp_of_eq hmap rfl
   exact hAq.sub (hK.mul hBq)
 
 theorem N01Properties.characteristicAngularDerivative_parameter_continuousAt
@@ -186,9 +200,12 @@ theorem N01Properties.characteristicAngularDerivative_parameter_continuousAt
   have hAθ := (contDiffAt_parameter_angularPartial hA).continuousAt
   have hBθ := (contDiffAt_parameter_angularPartial hB).continuousAt
   have hK : ContinuousAt (fun s : ℝ × PolarPoint =>
-      characteristicRadialRoot D S C (x, 0) s.2.1) (q, p) :=
-    (hN01.characteristicRadialRoot_continuousAt hS hT (z := (x, 0)) hp.1).comp
+      characteristicRadialRoot D S C (x, 0) s.2.1) (q, p) := by
+    have hmap : ContinuousAt (fun s : ℝ × PolarPoint => s.2.1) (q, p) :=
       continuousAt_snd.fst
+    have hk := hN01.characteristicRadialRoot_continuousAt hS hT
+      (z := (x, 0)) (r := p.1) hp.1
+    simpa only [Function.comp_def] using hk.comp_of_eq hmap rfl
   exact hAθ.sub (hK.mul hBθ)
 
 /-- A true parameter derivative, including at radial turning points. -/
@@ -215,9 +232,49 @@ theorem N01Properties.minusCharacteristicSpeed_hasDerivAt_q
     continuousAt_id.abs.eventually_lt continuousAt_const hxq.2
   apply (hAq.sub (hBq.const_mul (characteristicRadialRoot D S C (x, 0) p.1))).congr_of_eventuallyEq
   filter_upwards [hqnear] with t ht
-  simpa only [Pi.sub_apply, Pi.mul_apply] using
+  simpa only [Pi.sub_apply, Pi.mul_apply, characteristicRadialRoot_q_eq] using
     hN01.minusCharacteristicSpeed_eq_separated hS hT
       (z := (x, t)) ⟨hxq.1, ht⟩ hsector hp
+
+theorem N01Properties.characteristic_factors_q_angle_contDiffAt
+    {r θ : ℝ} (hr : r ∈ Ioo D.a D.b) :
+    ContDiffAt ℝ ∞ (fun v : PolarPoint =>
+      stateCharacteristicDrift D S C (x, v.1) (r, v.2)) (q, θ) ∧
+    ContDiffAt ℝ ∞ (fun v : PolarPoint =>
+      characteristicAngularFactor D S C (x, v.1) (r, v.2)) (q, θ) := by
+  obtain ⟨hA, hB⟩ := hN01.characteristic_factors_parameter_contDiffAt hS hT hxq hsector
+    (p := (r, θ)) ⟨hr, mem_univ _⟩
+  have hmap : ContDiffAt ℝ ∞ (fun v : PolarPoint => (v.1, (r, v.2))) (q, θ) :=
+    contDiffAt_fst.prodMk (contDiffAt_const.prodMk contDiffAt_snd)
+  constructor
+  · simpa only [Function.comp_def] using ContDiffAt.comp
+      (f := fun v : PolarPoint => (v.1, (r, v.2)))
+      (g := fun s : ℝ × PolarPoint => stateCharacteristicDrift D S C (x, s.1) s.2)
+      (q, θ) hA hmap
+  · simpa only [Function.comp_def] using ContDiffAt.comp
+      (f := fun v : PolarPoint => (v.1, (r, v.2)))
+      (g := fun s : ℝ × PolarPoint => characteristicAngularFactor D S C (x, s.1) s.2)
+      (q, θ) hB hmap
+
+/-- The actual speed is smooth jointly in the height parameter and angle
+at every annular radius, including the turning radii. -/
+theorem N01Properties.minusCharacteristicSpeed_q_angle_contDiffAt
+    {r θ : ℝ} (hr : r ∈ Ioo D.a D.b) :
+    ContDiffAt ℝ ∞ (fun v : PolarPoint =>
+      minusCharacteristicSpeed (originalCoefficients D S C (x, v.1)) (r, v.2)) (q, θ) := by
+  obtain ⟨hAs, hBs⟩ :=
+    hN01.characteristic_factors_q_angle_contDiffAt hS hT hxq hsector (θ := θ) hr
+  have hnear : ∀ᶠ v : PolarPoint in 𝓝 (q, θ), |v.1| < ε :=
+    continuousAt_fst.abs.eventually_lt continuousAt_const hxq.2
+  have hmul : ContDiffAt ℝ ∞ (fun v : PolarPoint =>
+      characteristicRadialRoot D S C (x, 0) r *
+        characteristicAngularFactor D S C (x, v.1) (r, v.2)) (q, θ) :=
+    contDiffAt_const.mul hBs
+  apply (hAs.sub hmul).congr_of_eventuallyEq
+  filter_upwards [hnear] with v hv
+  simpa only [Pi.sub_apply, Pi.mul_apply, characteristicRadialRoot_q_eq] using
+    hN01.minusCharacteristicSpeed_eq_separated hS hT
+      (z := (x, v.1)) ⟨hxq.1, hv⟩ hsector (p := (r, v.2)) ⟨hr, mem_univ _⟩
 
 /-- Joint differentiation in the construction parameter and the angle
 uses only smooth factors; the radial square root is constant on this slice. -/
@@ -229,28 +286,11 @@ theorem N01Properties.minusCharacteristicSpeed_hasFDerivAt_q_angle
         (characteristicQDerivative D S C x (q, (r, θ)))).coprod
         (ContinuousLinearMap.toSpanSingleton ℝ
           (characteristicAngularDerivative D S C (x, q) (r, θ)))) (q, θ) := by
-  have hp : (r, θ) ∈ annularOpen D := ⟨hr, mem_univ _⟩
-  obtain ⟨hA, hB⟩ :=
-    hN01.characteristic_factors_parameter_contDiffAt hS hT hxq hsector hp
-  have hAs : ContDiffAt ℝ ∞ (fun v : PolarPoint =>
-      stateCharacteristicDrift D S C (x, v.1) (r, v.2)) (q, θ) :=
-    hA.comp (q, θ) (contDiffAt_fst.prodMk (contDiffAt_const.prodMk contDiffAt_snd))
-  have hBs : ContDiffAt ℝ ∞ (fun v : PolarPoint =>
-      characteristicAngularFactor D S C (x, v.1) (r, v.2)) (q, θ) :=
-    hB.comp (q, θ) (contDiffAt_fst.prodMk (contDiffAt_const.prodMk contDiffAt_snd))
-  have hnear : ∀ᶠ v : PolarPoint in 𝓝 (q, θ), |v.1| < ε :=
-    continuousAt_fst.abs.eventually_lt continuousAt_const hxq.2
-  have hv : DifferentiableAt ℝ (fun v : PolarPoint =>
-      minusCharacteristicSpeed (originalCoefficients D S C (x, v.1)) (r, v.2)) (q, θ) := by
-    apply ((hAs.differentiableAt (by simp)).sub
-      ((hBs.differentiableAt (by simp)).const_mul
-        (characteristicRadialRoot D S C (x, 0) r))).congr_of_eventuallyEq
-    filter_upwards [hnear] with v hv
-    simpa only [Pi.sub_apply, Pi.mul_apply] using
-      hN01.minusCharacteristicSpeed_eq_separated hS hT
-        (z := (x, v.1)) ⟨hxq.1, hv⟩ hsector (p := (r, v.2)) ⟨hr, mem_univ _⟩
+  have hv := (hN01.minusCharacteristicSpeed_q_angle_contDiffAt hS hT hxq hsector
+    (θ := θ) hr).differentiableAt (by simp)
   exact hasFDerivAt_coprod_of_hasDerivAt_slices hv.hasFDerivAt
-    (hN01.minusCharacteristicSpeed_hasDerivAt_q hS hT hxq hsector hp)
+    (hN01.minusCharacteristicSpeed_hasDerivAt_q hS hT hxq hsector
+      (p := (r, θ)) ⟨hr, mem_univ _⟩)
     (hN01.minusCharacteristicSpeed_hasDerivAt_angular hS hT hxq hsector hr θ)
 
 theorem N01Properties.characteristicQDerivative_angular_periodic
