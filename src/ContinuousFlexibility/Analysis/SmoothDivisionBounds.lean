@@ -26,7 +26,7 @@ theorem smoothDivisionFactor_eq_integral {f g : ℝ → ℝ}
   have hf0 : f 0 = 0 := by simpa only [zero_mul] using hfactor 0
   have he : f = fun y => y * g y := funext hfactor
   have hdf0 : deriv f 0 = g 0 := by
-    have h := ((hasDerivAt_id (0 : ℝ)).mul
+    have h := ((hasDerivAt_id (0 : ℝ)).fun_mul
       (hg.differentiable (by simp) 0).hasDerivAt).deriv
     rw [he]
     simpa only [id_eq, zero_mul, one_mul, add_zero] using h
@@ -80,8 +80,10 @@ theorem norm_iteratedDeriv_smoothDivisionFactor_le {f g : ℝ → ℝ}
         mul_le_mul_of_nonneg_left (hbound _ ⟨htx0, htx⟩) hp0
       _ ≤ 1 * M := mul_le_mul_of_nonneg_right hp1 hM
       _ = M := one_mul M
+  have hweight : IntervalIntegrable (fun _ : ℝ => M) volume 0 1 :=
+    intervalIntegrable_const
   have h := intervalIntegral.norm_integral_le_of_norm_le zero_le_one
-    (Eventually.of_forall hpoint) intervalIntegrable_const
+    (Eventually.of_forall hpoint) hweight
   simpa only [Real.norm_eq_abs, intervalIntegral.integral_const, sub_zero, one_smul] using h
 
 /-- S05's actual construction carries the additional all-order bounds;

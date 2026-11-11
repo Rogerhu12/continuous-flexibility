@@ -21,6 +21,8 @@ open Set Filter
 open ContinuousFlexibility.Statements
 open scoped ContDiff Topology
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The physical side of a root boundary. -/
 abbrev rootChartHalfPlane : Set (ℝ × ℝ) := Ici (0 : ℝ) ×ˢ univ
 
@@ -99,8 +101,8 @@ theorem hasFDerivWithinAt_rootRadialCoordinate_zero
       (ContinuousLinearMap.fst ℝ ℝ ℝ : (ℝ × ℝ) → ℝ)
       (ContinuousLinearMap.fst ℝ ℝ ℝ) rootChartHalfPlane (0, θ) :=
     (ContinuousLinearMap.fst ℝ ℝ ℝ).hasFDerivAt.hasFDerivWithinAt
-  simpa only [rootRadialCoordinate, ContinuousLinearMap.coe_fst', zero_smul, zero_add] using
-    hx.fun_mul hd
+  unfold rootRadialCoordinate
+  simpa only [ContinuousLinearMap.coe_fst', zero_smul, zero_add] using hx.fun_mul hd
 
 theorem fderivWithin_rootRadialCoordinate_zero
     {G : ℝ × ℝ × ℝ → ℝ} (hG : ContDiff ℝ ∞ G) (θ : ℝ)

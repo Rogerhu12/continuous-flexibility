@@ -87,7 +87,10 @@ theorem continuous_seeleyCylinderJet (S : SeeleyData ι)
         (hJ.continuous a b).comp hm.continuousOn
           (fun p (hp : p.1 ≤ 0) => mul_nonneg_of_nonpos_of_nonpos
             (neg_nonpos.mpr (S.b_nonneg i)) hp)
-      exact continuousOn_const.smul hc
+      have hconst : ContinuousOn
+          (fun _ : ℝ × ℝ => (S.a i * (-S.b i) ^ a : ℝ))
+          {p : ℝ × ℝ | p.1 ≤ 0} := continuousOn_const
+      exact hconst.smul hc
     · intro i p hp
       rw [norm_smul, norm_seeley_coefficient]
       exact mul_le_mul_of_nonneg_left
