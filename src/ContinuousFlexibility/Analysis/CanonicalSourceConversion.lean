@@ -48,7 +48,7 @@ theorem canonicalSource_pairing_of_partA
   obtain ⟨_, _, hinv, _, hsmooth, _, _, hnonzero⟩ := hcharts z hz hsector m
   have hmeas : MeasurableSet
       (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
-    hphysicalOpen.measurableSet.inter (measurableSet_univ.prod measurableSet_Ioo)
+    (hphysicalOpen.inter (isOpen_univ.prod isOpen_Ioo)).measurableSet
   have hdiff : ∀ p ∈ physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
       DifferentiableAt ℝ (K.chart z m) p := by
     intro p hp

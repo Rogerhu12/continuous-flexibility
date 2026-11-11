@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Blueprint.CanonicalParts
 import Mathlib.Topology.Order.IntermediateValue
 
 /-!
@@ -32,7 +32,7 @@ private theorem mapsTo_openInterval_of_boundary_fibers
     obtain ⟨s, hs, hfs⟩ := intermediate_value_Icc ht.2.le hcont
       (show (0 : ℝ) ∈ Icc (f t) (f P) from ⟨hft, by rw [hfP]; exact hP.le⟩)
     have hs0 := hzero s ⟨ht.1.le.trans hs.1, hs.2⟩ hfs
-    linarith [hs.1]
+    linarith [hs.1, ht.1]
   · by_contra h
     have hft : P ≤ f t := le_of_not_gt h
     have hcont : ContinuousOn f (Icc 0 t) :=
@@ -40,7 +40,7 @@ private theorem mapsTo_openInterval_of_boundary_fibers
     obtain ⟨s, hs, hfs⟩ := intermediate_value_Icc ht.1.le hcont
       (show P ∈ Icc (f 0) (f t) from ⟨by rw [hf0]; exact hP.le, hft⟩)
     have hsP := hperiod s ⟨hs.1, hs.2.trans ht.2.le⟩ hfs
-    linarith [hs.2]
+    linarith [hs.2, ht.2]
 
 /-- Reflection and injectivity identify the preimage of the angular axis. -/
 theorem chart_angle_eq_zero_of_reflection
@@ -55,7 +55,7 @@ theorem chart_angle_eq_zero_of_reflection
     rw [hreflect p hp]
     apply Prod.ext
     · rfl
-    · simpa only [hangle, neg_zero]
+    · simp only [hangle, neg_zero]
   have h := congrArg Prod.snd (hinj hp' hp hF)
   change -p.2 = p.2 at h
   linarith

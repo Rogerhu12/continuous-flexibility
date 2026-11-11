@@ -2,6 +2,9 @@ import ContinuousFlexibility.Analysis.AffineMaterialData
 import ContinuousFlexibility.Analysis.AffineMaterialFull
 import ContinuousFlexibility.Analysis.AffineMaterialSampling
 import ContinuousFlexibility.Analysis.BastianiCurveChain
+import ContinuousFlexibility.Analysis.CanonicalCoordinateCompletion
+import ContinuousFlexibility.Analysis.CanonicalJetNormalization
+import ContinuousFlexibility.Analysis.CanonicalJetObstruction
 import ContinuousFlexibility.Analysis.CanonicalSourceConversion
 import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
 import ContinuousFlexibility.Analysis.CanonicalStripGeometry
@@ -71,6 +74,7 @@ import ContinuousFlexibility.Analysis.MaterialSampleCofinite
 import ContinuousFlexibility.Analysis.PointSolutionCore
 import ContinuousFlexibility.Analysis.StateControlCofiniteJets
 import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
+import ContinuousFlexibility.Blueprint.CanonicalParts
 import ContinuousFlexibility.Blueprint.Statements
 import ContinuousFlexibility.Blueprint.N12
 import ContinuousFlexibility.Blueprint.N04Cubic

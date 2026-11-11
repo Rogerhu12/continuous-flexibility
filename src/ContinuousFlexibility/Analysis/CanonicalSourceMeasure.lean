@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Scalar.FormPullback
 import Mathlib.LinearAlgebra.Basis.Fin
 import Mathlib.MeasureTheory.Function.Jacobian
+import Mathlib.MeasureTheory.Measure.Haar.OfBasis
 
 /-!
 # Measure conversion for canonical sources
@@ -23,18 +24,23 @@ open Set MeasureTheory
 derivative, in the ordered basis `(1, 0), (0, 1)`. -/
 theorem planeJacobian_eq_fderiv_det (F : PolarPoint → PolarPoint) (x : PolarPoint) :
     planeJacobian F x = (fderiv ℝ F x).det := by
-  rw [← LinearMap.det_toMatrix (Basis.finTwoProd ℝ)]
-  simp only [Matrix.det_fin_two, LinearMap.toMatrix_apply,
-    Basis.finTwoProd_zero, Basis.finTwoProd_one, Basis.coe_finTwoProd_repr,
-    Matrix.cons_val_zero, Matrix.cons_val_one]
-  unfold planeJacobian
-  ring
+  calc
+    planeJacobian F x = Matrix.det (LinearMap.toMatrix
+        (Module.Basis.finTwoProd ℝ) (Module.Basis.finTwoProd ℝ)
+        (fderiv ℝ F x).toLinearMap) := by
+      simp only [Matrix.det_fin_two, LinearMap.toMatrix_apply,
+        Module.Basis.finTwoProd_zero, Module.Basis.finTwoProd_one,
+        Module.Basis.coe_finTwoProd_repr,
+        Matrix.cons_val_zero, Matrix.cons_val_one, ContinuousLinearMap.coe_coe]
+      unfold planeJacobian
+      ring
+    _ = _ := LinearMap.det_toMatrix (Module.Basis.finTwoProd ℝ) _
 
 /-- Replacing the half-open angular period by the open period only removes
 a null boundary line. -/
 theorem polarStrip_Ioc_ae_eq_Ioo (a b c d : ℝ) :
     (Ioo a b ×ˢ Ioc c d : Set PolarPoint) =ᵐ[volume] (Ioo a b ×ˢ Ioo c d) := by
-  exact set_prod_ae_eq Filter.EventuallyEq.rfl Ioo_ae_eq_Ioc.symm
+  exact Measure.set_prod_ae_eq Filter.EventuallyEq.rfl Ioo_ae_eq_Ioc.symm
 
 /-- Source and unknown factors cancel under a genuine coordinate change.
 Only the geometric data on the integration domain are used. -/
@@ -49,6 +55,9 @@ theorem integral_pairing_eq_canonical_of_image
     (∫ x in U, u x * f x) =
       ∫ y in V, (u (G y) / h (G y)) *
         (h (G y) * f (G y) / |planeJacobian F (G y)|) := by
+  let : (volume : Measure PolarPoint).IsAddHaarMeasure := by
+    rw [Measure.volume_eq_prod]
+    infer_instance
   have hi : InjOn F U := by
     intro x hx y hy hxy
     calc
@@ -65,8 +74,9 @@ theorem integral_pairing_eq_canonical_of_image
   rw [hc]
   apply setIntegral_congr_fun hU
   intro x hx
+  dsimp only
   rw [hinv x hx, ← planeJacobian_eq_fderiv_det]
   simp only [smul_eq_mul]
-  field_simp [hh x hx, abs_ne_zero.mpr (hJ x hx)] <;> ring
+  field_simp [hh x hx, abs_ne_zero.mpr (hJ x hx)]
 
 end ContinuousFlexibility.Analysis
