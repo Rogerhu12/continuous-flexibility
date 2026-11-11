@@ -47,7 +47,9 @@ theorem n06_halfPeriod_weak_pairing_counterexample :
       angularMean (fun θ : ℝ => deriv (deriv (fun _ : ℝ => (1 : ℝ))) θ * Real.sin θ) := by
   refine ⟨fun _ => rfl, fun θ => Real.sin_add_two_pi θ, ?_⟩
   have hs : deriv (deriv Real.sin) = fun θ : ℝ => -Real.sin θ := by
-    rw [Real.deriv_sin, Real.deriv_cos]
+    rw [Real.deriv_sin]
+    funext θ
+    exact Real.deriv_cos θ
   have hc : deriv (deriv (fun _ : ℝ => (1 : ℝ))) = fun _ : ℝ => 0 := by
     simp
   rw [hs, hc]
@@ -63,7 +65,9 @@ theorem n06_fullPeriod_weak_pairing_restored :
       radialAngularMean
         (fun θ : ℝ => deriv (deriv (fun _ : ℝ => (1 : ℝ))) θ * Real.sin θ) := by
   have hs : deriv (deriv Real.sin) = fun θ : ℝ => -Real.sin θ := by
-    rw [Real.deriv_sin, Real.deriv_cos]
+    rw [Real.deriv_sin]
+    funext θ
+    exact Real.deriv_cos θ
   have hc : deriv (deriv (fun _ : ℝ => (1 : ℝ))) = fun _ : ℝ => 0 := by simp
   rw [hs, hc]
   simp only [one_mul, zero_mul]

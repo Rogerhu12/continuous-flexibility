@@ -88,77 +88,75 @@ private theorem n06_directional_bound_mono
     (n06_oneHighVariationWeight_mono hp hb le_rfl (x - x₀) v) hK)
 
 private theorem n06_coefficientJet_bounds_mono
-    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
-    {C : NonlinearGeometryData S} {base base' loss : ℕ} {ε ε' : ℝ}
-    (hH : ∀ m, 0 < T.H (T.sample m)) (hE : ∀ m, 0 < T.E0 (T.sample m))
-    (hb : base ≤ base') (hε : ε' ≤ ε)
-    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b p,
-      a + b ≤ s → p.1 ∈ D.cells m →
-      ∃ J : SmoothDirections (stateNeighborhood S C base ε) (coefficientFamily D S C i a b p),
-        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
-          |J.D k z v| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
-            T.E0 (T.sample m) ^ B *
-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, 0)) v) :
-    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b p,
-      a + b ≤ s → p.1 ∈ D.cells m →
-      ∃ J : SmoothDirections (stateNeighborhood S C base' ε') (coefficientFamily D S C i a b p),
-        ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
-          |J.D k z v| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
-            T.E0 (T.sample m) ^ B *
-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base' (s + loss) (z - (C.referenceState, 0)) v := by
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U V : Set E} {p : ℕ → Seminorm ℝ E} {x₀ : E}
+    {H E₀ : ℕ → ℝ} {cells : ℕ → Set ℝ}
+    {family : Fin 3 → ℕ → ℕ → PolarPoint → E → ℝ}
+    {base base' loss : ℕ}
+    (hH : ∀ m, 0 < H m) (hE : ∀ m, 0 < E₀ m)
+    (hp : Monotone p) (hV : IsOpen V) (hVU : V ⊆ U) (hb : base ≤ base')
+    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b y,
+      a + b ≤ s → y.1 ∈ cells m →
+      ∃ J : SmoothDirections U (family i a b y),
+        ∀ z ∈ U, ∀ v : Fin k → E,
+          |J.D k z v| ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
+            oneHighVariationWeight p base (s + loss) (z - x₀) v) :
+    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b y,
+      a + b ≤ s → y.1 ∈ cells m →
+      ∃ J : SmoothDirections V (family i a b y),
+        ∀ z ∈ V, ∀ v : Fin k → E,
+          |J.D k z v| ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
+            oneHighVariationWeight p base' (s + loss) (z - x₀) v := by
   intro k s
   obtain ⟨B, hB, hJ⟩ := h k s
   refine ⟨B, hB, ?_⟩
-  intro m i a b p hab hp
-  have hK : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B :=
+  intro m i a b y hab hy
+  have hK : 0 ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B :=
     mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
       (Real.rpow_pos_of_pos (hE m) _).le
-  have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
-    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
-  have hj := hJ m i a b p hab hp
-  have hresult := n06_directional_bound_mono (w := 1) hpair hb hK
-    (n06_isOpen_stateNeighborhood S C base' ε')
-    (n06_stateNeighborhood_mono (C := C) hb hε) (by simpa only [one_mul] using hj)
+  have hj := hJ m i a b y hab hy
+  have hresult := n06_directional_bound_mono
+    (E := E) (U := U) (V := V) (f := family i a b y) (p := p)
+    (k := k) (base := base) (base' := base') (high := s + loss)
+    (K := B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B) (w := 1) (x₀ := x₀)
+    hp hb hK hV hVU (by simpa only [one_mul] using hj)
   simpa only [one_mul] using hresult
 
 private theorem n06_flowJet_bounds_mono
-    {T : MaterialData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
-    {base base' loss : ℕ} {ε ε' : ℝ}
-    (hH : ∀ m, 0 < T.H (T.sample m)) (hE : ∀ m, 0 < T.E0 (T.sample m))
-    (hb : base ≤ base') (hε : ε' ≤ ε)
-    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
-      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
-      ∃ J : SmoothDirections (stateNeighborhood S C base ε) (ordinaryFlowFamily S C m a b p),
-        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
-          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
-            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-            T.E0 (T.sample (C.cell m)) ^ B *
-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, 0)) v) :
-    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
-      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
-      ∃ J : SmoothDirections (stateNeighborhood S C base' ε') (ordinaryFlowFamily S C m a b p),
-        ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
-          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
-            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-            T.E0 (T.sample (C.cell m)) ^ B *
-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base' (s + loss) (z - (C.referenceState, 0)) v := by
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U V : Set E} {p : ℕ → Seminorm ℝ E} {x₀ : E}
+    {H E₀ left right : ℕ → ℝ}
+    {family : ℕ → ℕ → ℕ → PolarPoint → E → ℝ}
+    {base base' loss : ℕ}
+    (hH : ∀ m, 0 < H m) (hE : ∀ m, 0 < E₀ m)
+    (hp : Monotone p) (hV : IsOpen V) (hVU : V ⊆ U) (hb : base ≤ base')
+    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+      a + b ≤ s → y.1 ∈ Ioo (left m) (right m) →
+      ∃ J : SmoothDirections U (family m a b y),
+        ∀ z ∈ U, ∀ v : Fin k → E,
+          min (y.1 - left m) (right m - y.1) ^ a * |J.D k z v| ≤
+            B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
+            oneHighVariationWeight p base (s + loss) (z - x₀) v) :
+    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+      a + b ≤ s → y.1 ∈ Ioo (left m) (right m) →
+      ∃ J : SmoothDirections V (family m a b y),
+        ∀ z ∈ V, ∀ v : Fin k → E,
+          min (y.1 - left m) (right m - y.1) ^ a * |J.D k z v| ≤
+            B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
+            oneHighVariationWeight p base' (s + loss) (z - x₀) v := by
   intro k s
   obtain ⟨B, hB, hJ⟩ := h k s
   refine ⟨B, hB, ?_⟩
-  intro m a b p hab hp
-  have hK : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-      T.E0 (T.sample (C.cell m)) ^ B :=
-    mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH (C.cell m)) _).le)
-      (Real.rpow_pos_of_pos (hE (C.cell m)) _).le
-  have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
-    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
-  exact n06_directional_bound_mono hpair hb hK
-    (n06_isOpen_stateNeighborhood S C base' ε')
-    (n06_stateNeighborhood_mono (C := C) hb hε) (hJ m a b p hab hp)
+  intro m a b y hab hy
+  have hK : 0 ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B :=
+    mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
+      (Real.rpow_pos_of_pos (hE m) _).le
+  exact n06_directional_bound_mono
+    (E := E) (U := U) (V := V) (f := family m a b y) (p := p)
+    (k := k) (base := base) (base' := base') (high := s + loss)
+    (K := B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B)
+    (w := min (y.1 - left m) (right m - y.1) ^ a) (x₀ := x₀)
+    hp hb hK hV hVU (hJ m a b y hab hy)
 
 theorem n06_N01Properties_mono {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
@@ -174,8 +172,26 @@ theorem n06_N01Properties_mono {D : ReferenceData} {T : MaterialData}
     materialSample_mem_radialCore hT hprofile.2.1 m
   have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsample m)).2.1
   have hE (m : ℕ) : 0 < T.E0 (T.sample m) := (hT.2.1 _ (hsample m)).2.2.1
-  have hcoefficient' := n06_coefficientJet_bounds_mono hH hE hb hε hcoefficient
-  have hflowJet' := n06_flowJet_bounds_mono hH hE hb hε hflowJet
+  have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
+    pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
+  have hopen := n06_isOpen_stateNeighborhood S C base' ε'
+  have hcoefficient' := n06_coefficientJet_bounds_mono
+    (E := AnnularState S × ℝ) (U := stateNeighborhood S C base ε)
+    (V := stateNeighborhood S C base' ε')
+    (p := pairGrading (stateGrading S) realGrading) (x₀ := (C.referenceState, 0))
+    (H := fun m => T.H (T.sample m)) (E₀ := fun m => T.E0 (T.sample m))
+    (cells := D.cells) (family := coefficientFamily D S C)
+    (base := base) (base' := base') (loss := loss)
+    hH hE hpair hopen hU hb hcoefficient
+  have hflowJet' := n06_flowJet_bounds_mono
+    (E := AnnularState S × ℝ) (U := stateNeighborhood S C base ε)
+    (V := stateNeighborhood S C base' ε')
+    (p := pairGrading (stateGrading S) realGrading) (x₀ := (C.referenceState, 0))
+    (H := fun m => T.H (T.sample (C.cell m)))
+    (E₀ := fun m => T.E0 (T.sample (C.cell m)))
+    (left := C.left) (right := C.right) (family := ordinaryFlowFamily S C)
+    (base := base) (base' := base') (loss := loss)
+    (fun m => hH (C.cell m)) (fun m => hE (C.cell m)) hpair hopen hU hb hflowJet
   exact ⟨hRef, hε', hstate, hcontrol, hshift, hcontrolBounds,
     n06_forall_mem_mono hU hflow, n06_forall_mem_mono hU hleft,
     n06_forall_mem_mono hU hreturn, n06_forall_mem_mono hU hgeometry,

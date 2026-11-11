@@ -28,8 +28,8 @@ def n06FinitePieceResidual (μ : ι → Measure α) (I : Finset ι)
     (U F : ∀ m, E →L[ℝ] Lp ℝ 2 (μ m))
     (heightTest sourceTest : ∀ m, Lp ℝ 2 (μ m)) (scalar : E →L[ℝ] ℝ) :
     E →L[ℝ] ℝ :=
-  (∑ m ∈ I, (innerSL ℝ (heightTest m)).comp (U m) -
-    (innerSL ℝ (sourceTest m)).comp (F m)) + scalar
+  (∑ m ∈ I, ((innerSL ℝ (heightTest m)).comp (U m) -
+    (innerSL ℝ (sourceTest m)).comp (F m))) + scalar
 
 theorem n06FinitePieceResidual_apply (μ : ι → Measure α) (I : Finset ι)
     (U F : ∀ m, E →L[ℝ] Lp ℝ 2 (μ m))
@@ -37,8 +37,7 @@ theorem n06FinitePieceResidual_apply (μ : ι → Measure α) (I : Finset ι)
     n06FinitePieceResidual μ I U F heightTest sourceTest scalar u =
       (∑ m ∈ I, ((∫ p, U m u p * heightTest m p ∂μ m) -
         ∫ p, F m u p * sourceTest m p ∂μ m)) + scalar u := by
-  simp only [n06FinitePieceResidual, ContinuousLinearMap.add_apply,
-    sum_apply, ContinuousLinearMap.sub_apply,
+  simp only [n06FinitePieceResidual, add_apply, sum_apply, sub_apply,
     ContinuousLinearMap.comp_apply, innerSL_apply_apply, L2.inner_def,
     RCLike.inner_apply, conj_trivial]
 
@@ -62,7 +61,7 @@ theorem isClosed_n06FinitePieceDistributionRelation {Test : Type*}
     IsClosed {u : E | ∀ t : Test,
       (∑ m ∈ I t, ((∫ p, U m u p * heightTest t m p ∂μ m) -
         ∫ p, F m u p * sourceTest t m p ∂μ m)) + scalar t u = 0} := by
-  simpa only [Set.setOf_forall] using
+  simpa only [Set.ofPred_forall] using
     (isClosed_iInter fun t : Test =>
       isClosed_n06FinitePieceTest μ (I t) U F (heightTest t) (sourceTest t) (scalar t))
 

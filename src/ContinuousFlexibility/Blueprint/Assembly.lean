@@ -111,6 +111,9 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hN03 : N03Statement := N02N03 hN01 hS05
   have hN04 : N04Statement := N04_of_nodes (N04Coordinates (N04b (N04a hN03))) N04Root N04Cubic N04Transmission
   have hN05 : N05Statement := N05 hN04
+  -- N05 and N06 use the same full-period physical distribution tests.
+  -- The current relation uses radialAngularMean to match RadialTest's
+  -- period 2*pi; half-period averaging would add an angular boundary.
   have hN06 : N06Statement := N06 hN05
   have hN07 : N07Statement := N07b (N07a hN06 hTame)
   have hN08 : N08Statement := N08 hN07 hS04

@@ -86,18 +86,55 @@ theorem n06OperatorFromRelative_apply (B : CanonicalDomainData S K V b)
     (R : V.level (3 / 4 : ℝ) 0 b →L[ℝ] V.level (3 / 4 : ℝ) 0 b) (u : B.Space) :
     n06OperatorFromRelative B R u = u.val.2 + R u.val.2 := by
   simp only [n06OperatorFromRelative, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.add_apply, ContinuousLinearMap.id_apply, n06SourceProjection_apply]
+    add_apply, ContinuousLinearMap.id_apply, n06SourceProjection_apply]
 
 theorem n06RelativeOperator_fromRelative (B : CanonicalDomainData S K V b)
     (R : AnnularState S × ℝ →
       V.level (3 / 4 : ℝ) 0 b →L[ℝ] V.level (3 / 4 : ℝ) 0 b)
     (hright : ∀ F, (B.inverse F).val.2 = F) (z : AnnularState S × ℝ) :
     n06RelativeOperator (fun z => n06OperatorFromRelative B (R z)) z = R z := by
-  ext F
-  simp only [n06RelativeOperator, ContinuousLinearMap.sub_apply,
+  apply ContinuousLinearMap.ext
+  intro F
+  simp only [n06RelativeOperator, sub_apply,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.id_apply,
     n06OperatorFromRelative_apply, hright]
   abel
+
+/-- The physical specialization of the dense closed-relation argument, separated from the
+neighborhood assembly so that the relation remains a fixed local predicate. -/
+theorem n06OperatorFromDense_physical
+    [CompleteSpace (V.level (3 / 4 : ℝ) 0 b)]
+    (D : ReferenceData) (C : NonlinearGeometryData S) (L : ReturnCorrectionData S)
+    (B : CanonicalDomainData S K V b) (z : AnnularState S × ℝ)
+    {Core : Type*} [AddCommGroup Core] [Module ℝ Core]
+    (i : Core →ₗ[ℝ] V.level (3 / 4 : ℝ) 0 b)
+    (R₀ : Core →ₗ[ℝ] V.level (3 / 4 : ℝ) 0 b) (hdense : DenseRange i)
+    {q : ℝ} (hbound : ∀ f : Core, ‖R₀ f‖ ≤ q * ‖i f‖)
+    (hleft : ∀ u : B.Space, B.inverse u.val.2 = u)
+    (hclosed : IsClosed {p : B.Space × V.level (3 / 4 : ℝ) 0 b |
+      PerturbedCanonicalRelation D S C K L z p.1.val.1
+        (V.forget (3 / 4 : ℝ) 0 b p.2)})
+    (hcore : ∀ f : Core, PerturbedCanonicalRelation D S C K L z (B.inverse (i f)).val.1
+      (V.forget (3 / 4 : ℝ) 0 b (i f + R₀ f))) :
+    ∀ u : B.Space, PerturbedCanonicalRelation D S C K L z u.val.1
+      (V.forget (3 / 4 : ℝ) 0 b
+        (n06OperatorFromRelative B (n06DenseExtension i R₀) u)) := by
+  let Rel : B.Space → V.level (3 / 4 : ℝ) 0 b → Prop :=
+    fun u F => PerturbedCanonicalRelation D S C K L z u.val.1
+      (V.forget (3 / 4 : ℝ) 0 b F)
+  have hc : IsClosed {p : B.Space × V.level (3 / 4 : ℝ) 0 b | Rel p.1 p.2} := hclosed
+  have hi : ∀ f : Core, Rel (B.inverse (i f)) (i f + R₀ f) := hcore
+  have hall (F : V.level (3 / 4 : ℝ) 0 b) :
+      Rel (B.inverse F) (F + n06DenseExtension i R₀ F) :=
+    n06DenseExtension_closedRelation
+      (Core := Core) (E := V.level (3 / 4 : ℝ) 0 b) (X := B.Space)
+      i R₀ hdense hbound B.inverse Rel hc hi F
+  intro u
+  change Rel u (n06OperatorFromRelative B (n06DenseExtension i R₀) u)
+  rw [n06OperatorFromRelative_apply]
+  have h := hall u.val.2
+  rw [hleft] at h
+  exact h
 
 /-- A bounded core perturbation satisfying a closed physical relation constructs N06's
 operator and relative inverse on the source and graph already selected by N05. -/
@@ -121,7 +158,7 @@ theorem n06_exists_relativeData_of_denseCore
     ∃ Relative : RelativeInverseData S K V b B,
       N06Properties D S C K L V b B Relative base ε := by
   obtain ⟨_, hV, _, _, _, _, _, hright, hleft, _⟩ := hN05
-  letI : CompleteSpace (V.level (3 / 4 : ℝ) 0 b) :=
+  let : CompleteSpace (V.level (3 / 4 : ℝ) 0 b) :=
     (hV.2.1 (3 / 4 : ℝ) 0 b).completeSpace_coe
   let R : AnnularState S × ℝ →
       V.level (3 / 4 : ℝ) 0 b →L[ℝ] V.level (3 / 4 : ℝ) 0 b :=
@@ -131,14 +168,9 @@ theorem n06_exists_relativeData_of_denseCore
   have hphysical : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       ∀ u : B.Space, PerturbedCanonicalRelation D S C K L z u.val.1
         (V.forget (3 / 4 : ℝ) 0 b (P z u)) := by
-    intro z hz hsector u
-    have h := n06DenseExtension_closedRelation i (R₀ z) hdense
-      (hbound z hz hsector) B.inverse
-      (fun u F => PerturbedCanonicalRelation D S C K L z u.val.1
-        (V.forget (3 / 4 : ℝ) 0 b F))
-      (hclosed z hz hsector) (hcore z hz hsector) u.val.2
-    rw [hleft] at h
-    simpa only [P, n06OperatorFromRelative_apply, R] using h
+    intro z hz hsector
+    exact n06OperatorFromDense_physical D C L B z i (R₀ z) hdense
+      (hbound z hz hsector) hleft (hclosed z hz hsector) (hcore z hz hsector)
   have hsmall : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       ‖n06RelativeOperator P z‖ < (1 / 2 : ℝ) := by
     intro z hz hsector

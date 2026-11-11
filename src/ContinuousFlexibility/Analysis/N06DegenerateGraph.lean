@@ -139,7 +139,7 @@ theorem n06_conjugated_forcing_square {K a a₁ V d e F w u G : ℝ}
           (a * (4 * d - 2 * e ^ 2) - V * d ^ 2) * u| ≤
           |d ^ 2 * F| + |(a₁ * d - 4 * a * e) * w| +
             |(a * (4 * d - 2 * e ^ 2) - V * d ^ 2) * u| :=
-        (abs_add _ _).trans (add_le_add_right (abs_add _ _) _)
+        (abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)
       _ ≤ |F| + 5 * K * |w| + 7 * K * |u| := by
         have hx : |d ^ 2 * F| ≤ |F| := by
           rw [abs_mul, abs_of_nonneg (sq_nonneg d)]
@@ -327,7 +327,7 @@ theorem n06_conjugate_energy_bound {a u c V q F : ℝ → ℝ} {j K : ℝ}
     (F₁ := F₁) (fun _ => rfl) hK ha₁ ha₂ ha₃ hc₁ hV₁ hqa
   have henergy := n06_dirichlet_weighted_square_bound hv hv0 hv1 hq
     (show 0 ≤ 1 / K ^ 2 by positivity) hKpos.le
-    (fun y hy => by simpa only [one_div, div_eq_mul_inv, mul_comm] using hq₁ y hy)
+    (fun y hy => by simpa only [one_div, div_eq_mul_inv, mul_comm, mul_one] using hq₁ y hy)
     hq₂ (F₁ := F₁) (fun _ => rfl)
   have hsmall := mul_le_mul_of_nonneg_left hvlow
     (show 0 ≤ j ^ 2 * K by positivity)
@@ -385,7 +385,7 @@ theorem n06_second_derivative_transfer {u : ℝ → ℝ} (hu : ContDiff ℝ 2 u)
       (-(2 * (1 - 2 * y) ^ 2 - 4 * cylinderWeight y) * u y)
     rw [n06_cylinder_conjugate_second_deriv hu y] at hthree ⊢
     nlinarith only [hterm₁, hterm₂, hthree]
-  have hint := intervalIntegral.integral_mono_on zero_le_one
+  have hint := intervalIntegral.integral_mono_on (μ := MeasureTheory.volume) zero_le_one
     (Continuous.intervalIntegrable (show Continuous (fun y =>
       (cylinderWeight y ^ 2 * deriv (deriv u) y) ^ 2) by fun_prop) 0 1)
     (Continuous.intervalIntegrable (show Continuous (fun y =>
@@ -437,7 +437,7 @@ theorem n06_mixed_derivative_transfer {u : ℝ → ℝ} (hu : ContDiff ℝ 2 u) 
       (show 0 ≤ 8 * cylinderWeight y ^ 3 * u y ^ 2 by positivity)
     rw [(hasDerivAt_cw_sq_mul hu y).deriv]
     nlinarith only [hs', he']
-  have hint := intervalIntegral.integral_mono_on zero_le_one
+  have hint := intervalIntegral.integral_mono_on (μ := MeasureTheory.volume) zero_le_one
     (Continuous.intervalIntegrable (show Continuous (fun y =>
       cylinderWeight y ^ 5 * deriv u y ^ 2) by fun_prop) 0 1)
     (Continuous.intervalIntegrable (show Continuous (fun y =>
@@ -613,7 +613,9 @@ theorem n06_smooth_cubic_graph_bound {a u c V q F : ℝ → ℝ} {j K : ℝ}
       ring
     exact h.trans_eq heq
   change G + (1 + j ^ 2) * L + D + (1 + j ^ 2) ^ 2 * B +
-      (1 + j ^ 2) * J ≤ 16384 * R
+      (1 + j ^ 2) * J ≤ 16384 * K ^ 10 * E
+  have hR : 16384 * K ^ 10 * E = 16384 * R := by dsimp [R]; ring
+  rw [hR]
   nlinarith only [hRn, hUR, hGR, hLR, hDR, hJR, hB, hLU, hBL, hBLmul, hJG]
 
 end ContinuousFlexibility.Analysis

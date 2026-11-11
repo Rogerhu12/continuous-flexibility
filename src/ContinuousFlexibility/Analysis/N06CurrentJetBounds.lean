@@ -105,6 +105,35 @@ theorem n06_smoothDirections_oneHigh_difference_le
       (n06_oneHighVariationWeight_segment_le p hp base high x₀ x hlow t ht) hK).trans_eq
         (by ring))
 
+private theorem n06_currentCoefficientFamily_bound
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (base loss : ℕ)
+    (x₀ : E) (H E₀ : ℕ → ℝ) (cells : ℕ → Set ℝ)
+    (family : Fin 3 → ℕ → ℕ → PolarPoint → E → ℝ)
+    (hH : ∀ m, 0 < H m) (hE : ∀ m, 0 < E₀ m)
+    (hzero : ∀ i a b y, family i a b y x₀ = 0)
+    (hsegment : ∀ x ∈ U, ∀ t ∈ Icc (0 : ℝ) 1, x₀ + t • (x - x₀) ∈ U)
+    (hfamily : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b y,
+      a + b ≤ s → y.1 ∈ cells m →
+      ∃ J : SmoothDirections U (family i a b y),
+        ∀ z ∈ U, ∀ v : Fin 1 → E,
+          |J.D 1 z v| ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
+            oneHighVariationWeight p base (s + loss) (z - x₀) v) :
+    ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m i a b y,
+      a + b ≤ s → y.1 ∈ cells m → ∀ z ∈ U, p base (z - x₀) ≤ 1 →
+      |family i a b y z| ≤
+        3 * (B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B) * p (max base (s + loss)) (z - x₀) := by
+  intro s
+  obtain ⟨B, hB, hJ⟩ := hfamily s
+  refine ⟨B, hB, ?_⟩
+  intro m i a b y hab hy z hz hlow
+  obtain ⟨J, hbound⟩ := hJ m i a b y hab hy
+  have hK : 0 ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B :=
+    mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
+      (Real.rpow_pos_of_pos (hE m) _).le
+  have hm := n06_smoothDirections_oneHigh_difference_le J p hp base (s + loss)
+    x₀ z hK (hsegment z hz) hlow hbound
+  simpa only [hzero i a b y, sub_zero] using hm
+
 end ScalarDifference
 
 theorem n06_stateParameterGrading_sub_reference (S : PhysicalSpacesData)
@@ -168,24 +197,15 @@ theorem n06_N01_currentCoefficient_bound {D : ReferenceData} {T : MaterialData}
     materialSample_mem_radialCore hT hprofile.2.1 m
   have hpair : Monotone (pairGrading (stateGrading S) realGrading) :=
     pairGrading_monotone (solve_stateGrading_monotone S) (fun _ _ _ _ => le_rfl)
-  intro s
-  obtain ⟨B, hB, hJ⟩ := hcoefficient 1 s
-  refine ⟨B, hB, ?_⟩
-  intro m i a b p hab hp z hz hlow
-  obtain ⟨J, hbound⟩ := hJ m i a b p hab hp
-  have hH := (hT.2.1 _ (hsample m)).2.1
-  have hE := (hT.2.1 _ (hsample m)).2.2.1
-  have hK : 0 ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B :=
-    mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos hH _).le)
-      (Real.rpow_pos_of_pos hE _).le
-  have hlo : pairGrading (stateGrading S) realGrading base
-      (z - (C.referenceState, 0)) ≤ 1 := by
-    rwa [n06_stateParameterGrading_sub_reference]
-  have hm := n06_smoothDirections_oneHigh_difference_le J
-    (pairGrading (stateGrading S) realGrading) hpair base (s + loss)
-    (C.referenceState, 0) z hK (n06_stateNeighborhood_segment hz) hlo hbound
-  simpa only [n06_coefficientFamily_reference, sub_zero,
-    n06_stateParameterGrading_sub_reference] using hm
+  have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsample m)).2.1
+  have hE (m : ℕ) : 0 < T.E0 (T.sample m) := (hT.2.1 _ (hsample m)).2.2.1
+  have hresult := n06_currentCoefficientFamily_bound
+    (E := AnnularState S × ℝ) (U := stateNeighborhood S C base ε)
+    (pairGrading (stateGrading S) realGrading) hpair base loss (C.referenceState, 0)
+    (fun m => T.H (T.sample m)) (fun m => T.E0 (T.sample m)) D.cells
+    (coefficientFamily D S C) hH hE (n06_coefficientFamily_reference D S C)
+    (fun z hz => n06_stateNeighborhood_segment hz) (fun s => hcoefficient 1 s)
+  simpa only [n06_stateParameterGrading_sub_reference] using hresult
 
 /-- At any fixed jet order, a sufficiently high common low order makes
 the coefficient difference linear in the final neighborhood radius. -/

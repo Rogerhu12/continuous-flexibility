@@ -175,6 +175,42 @@ Not yet checked against the readable manuscript: the kernel clause of the radial
 (`R12`). The 62-page version left "endpoint-flat kernel" undefined; the readable version defines it
 as the kernel on the weighted graph domain.
 
+### N06: angular period of physical weak tests (line/N06, 2026-11-11)
+
+The frozen `PerturbedCanonicalRelation` clause was:
+
+```lean
+    ∀ φ, RadialTest D φ →
+      (∫ r in D.a..D.b, angularMean (fun θ =>
+        η (r, θ) * divergenceOperator (L.coefficients z) φ (r, θ))) +
+        U.2.2.1 * (∫ r in D.a..D.b, angularMean (fun θ =>
+          nuColumnField D S C z (r, θ) * φ (r, θ))) +
+        U.2.2.2 * (∫ r in D.a..D.b, angularMean (fun θ =>
+          (S.height (3 / 4 : ℝ)).decode S.psi (r, θ) * φ (r, θ))) =
+      ∫ r in D.a..D.b, angularMean (fun θ => f (r, θ) * φ (r, θ))
+```
+
+`RadialTest` permits smooth tests of period `2 * Real.pi`, whereas
+`angularMean` integrates only from zero to `Real.pi`. The unknown and source
+are half-periodic, but the product with an arbitrary allowed test need not
+be. Already for the angular second derivative, the constant unknown `u = 1`
+and the allowed angular test `sin theta` give
+`angularMean (u * phi'') = -2 / Real.pi`, while
+`angularMean (u'' * phi) = 0`. Multiplying the test by a smooth radial cutoff
+retains its required compact radial support. The half-period pairing thus
+adds an artificial angular boundary and cannot represent the intended
+physical distributional equation.
+
+`Analysis/N06AngularPeriodAudit.lean` gives the explicit scalar counterexample
+and proves that the full-period weak pairing restores equality for the same
+unknown and test. The proposed repair replaces the four `angularMean`
+occurrences above by `radialAngularMean`, exactly as in `ReferenceGraph`.
+`Blueprint/Assembly.lean` records the common test convention across N05 and
+N06. The test class, canonical half-period source measures, graph domain,
+relative norm bound, and two-sided inverse conclusions are unchanged.
+This is a statement-layer repair proposed in PR #36; its merge is subject
+to the approval rule below. This entry does not declare N06 proved.
+
 ## Size estimate
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook

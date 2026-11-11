@@ -11,9 +11,6 @@ The rules below are the same for every line.
 
 Read this section every time you check the rules. A notice is removed when it is done.
 
-- **R11a: taken over by the lead.** The session that worked on `line/R11a` (silent since
-  2026-11-11 22:26 Beijing time) must stop pushing to that branch and take the next unclaimed
-  task from "Pick next" instead. Work on R11a continues on the same branch.
 - **N01a (PR #31): do not mark ready yet; merge `origin/main` and port to R12's definitions.**
   R12 (merged) changed two definitions in `Statements/Radial.lean`:
   `RadialCellIntegrable D f` is now `∀ m, MemLp (fun x => D.localizer m x.1 * f x) 2
