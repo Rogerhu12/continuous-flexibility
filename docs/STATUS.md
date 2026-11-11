@@ -96,6 +96,41 @@ Not yet checked against the readable manuscript: the kernel clause of the radial
 (`R12`). The 62-page version left "endpoint-flat kernel" undefined; the readable version defines it
 as the kernel on the weighted graph domain.
 
+## R06b: common endpoint test-class correction
+
+The R06b line shares the correction first established on `line/R06a`
+(commit `5eecf16eebbf1fac9091b641dc6dcfae5bc61d6d`). The original clause
+`∀ u d, (u, d) ∈ TailFormLift T endCut → TailWeakDerivative T endCut u d`
+is false when the test hypothesis is merely
+`HasCompactSupport ψ ∧ Function.support ψ ⊆ Ioo T.entrance endCut`.
+The closure of that support can meet the singular outer endpoint.
+
+For a counterexample, choose successive mass/gap lengths
+`ℓ_n ≍ ε · 2⁻ⁿ`, with density `1/ℓ_n` on mass intervals and
+`g_n = exp (−4 n⁴)` on most of each gap, joined by sufficiently short
+smooth collars. Then `μ_n ≍ 1`, `Rᴵ_n ≍ ℓ_n²`,
+`ν_n ≤ 2 g_n ℓ_n` and `R_n ≍ ℓ_n/g_n`. Starting sufficiently far
+out and taking `ε` small meets any required deep-tail thresholds.
+In the gap plateaux, smooth bumps `u_n` of height `exp (n⁴)` have a
+sum with finite weighted energy. Smooth test bumps `ψ_n` of height
+`exp (−n⁴)`, constant on the supports of the corresponding `u_n`,
+sum to a test flat at the endpoint. Finite partial sums put
+`(u, u′)` in the energy-core closure, while `u ψ′ = 0` and
+`∫ |u′ ψ| = ∞`. Adding one compact test `q = u_m′` makes
+`∫ u (ψ + q)′ = −∫ (u_m′)² < 0`; the other integrand remains
+nonintegrable, so Lean's total integral on the right is zero.
+Thus the old weak-derivative equality itself fails.
+
+The shared scalar definitions now live in
+`Statements/DeepTailOperator.lean`, exactly as on `line/R06a`.
+`TailEnergyCore`, `TailWeakDerivative` and `TailDistributionGraph`
+require `tsupport ψ ⊆ Ioo ...`, the compact-interior test class.
+`Blueprint/Assembly.lean` explicitly records the common correction.
+The natural-line and Green-kernel conclusions retain their original strength,
+including the ordinary-support tests in `TailGreenKernel`; the weak-test
+counterexample does not refute those kernel clauses. R06b remains open
+while the actual-edge, node-line and kernel bridges are being proved.
+
 ## Size estimate
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook

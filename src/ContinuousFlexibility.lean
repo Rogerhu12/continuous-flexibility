@@ -262,6 +262,7 @@ import ContinuousFlexibility.Statements.MainGeometryAudit
 import ContinuousFlexibility.Statements.Milestones
 import ContinuousFlexibility.Statements.Nonlinear
 import ContinuousFlexibility.Statements.NonlinearCompletion
+import ContinuousFlexibility.Statements.DeepTailOperator
 import ContinuousFlexibility.Statements.Radial
 import ContinuousFlexibility.Statements.RadialTargets
 import ContinuousFlexibility.Statements.Scalar
