@@ -1,4 +1,5 @@
 import Mathlib.Analysis.Calculus.ContDiff.Operations
+import Mathlib.Analysis.Calculus.Deriv.Add
 import Mathlib.Analysis.Calculus.Deriv.Mul
 import Mathlib.Analysis.Calculus.Deriv.Pow
 import Mathlib.Analysis.Real.Sqrt
@@ -89,7 +90,7 @@ theorem oneHighFactor_no_range_only_circle_constant_l2_bound {P : ℝ} (hP : 0 <
   simp only [oneHighFactorQuadratic_one, oneHighFactorQuadratic_zero, sub_zero] at h
   rw [oneHighFactor_constant_interval_l2, oneHighFactor_constant_interval_l2] at h
   simp only [abs_one, one_mul] at h
-  have hbound : |C + 1| ≤ C := (mul_le_mul_right (sqrt_pos.mpr hP)).mp h
+  have hbound : |C + 1| ≤ C := (mul_le_mul_iff_left₀ (sqrt_pos.mpr hP)).mp h
   linarith only [hbound, le_abs_self (C + 1)]
 
 /-- A linear family isolates the missing derivative control at order zero. -/
@@ -127,7 +128,7 @@ theorem oneHighFactor_no_derivative_free_circle_l2_bound {P : ℝ} (hP : 0 < P) 
   simp only [oneHighFactorLinear_one, oneHighFactorLinear_zero, sub_zero] at h
   rw [oneHighFactor_constant_interval_l2, oneHighFactor_constant_interval_l2] at h
   simp only [abs_one, one_mul] at h
-  have hbound : |C + 1| ≤ C := (mul_le_mul_right (sqrt_pos.mpr hP)).mp h
+  have hbound : |C + 1| ≤ C := (mul_le_mul_iff_left₀ (sqrt_pos.mpr hP)).mp h
   linarith only [hbound, le_abs_self (C + 1)]
 
 end ContinuousFlexibility.Analysis

@@ -38,7 +38,7 @@ theorem scalar_linearODE_eq_mul_exp {κ y : ℝ → ℝ} {a b : ℝ} (hab : a �
     continuous_iff_continuousAt.mpr (fun t => (hprimitive t).continuousAt)
   have hfactor_cont :
       ContinuousOn (fun t => y t * Real.exp (-∫ r in a..t, K r)) (Icc a b) :=
-    hy.mul hprimitive_cont.neg.exp.continuousOn
+    hy.mul (Real.continuous_exp.comp hprimitive_cont.neg).continuousOn
   have hfactor_deriv (t : ℝ) (ht : t ∈ Ioo a b) :
       HasDerivAt (fun t => y t * Real.exp (-∫ r in a..t, K r)) 0 t := by
     have hd := (hdy t ht).mul (hprimitive t).neg.exp
@@ -96,8 +96,11 @@ theorem smoothCircleFlow_angular_variational {G Θ : PolarPoint → ℝ} {a b : 
     _ = deriv (fun η => radialPartial Θ (t, η)) θ :=
       (deriv_cylinder_angular_slice (hΘr.differentiable (by simp)) t θ).symm
     _ = deriv (fun η => G (t, Θ (t, η))) θ := by rw [heq]
-    _ = angularPartial G (t, Θ (t, θ)) * angularPartial Θ (t, θ) :=
-      ((hGangle t (Θ (t, θ))).comp θ (hangle t θ)).deriv
+    _ = angularPartial G (t, Θ (t, θ)) * angularPartial Θ (t, θ) := by
+      have hcomp : HasDerivAt (fun η : ℝ => G (t, Θ (t, η)))
+          (angularPartial G (t, Θ (t, θ)) * angularPartial Θ (t, θ)) θ :=
+        (hGangle t (Θ (t, θ))).comp θ (hangle t θ)
+      exact hcomp.deriv
 
 /-- The actual angular Jacobian of a smooth flow is the exponential of
 the integrated angular derivative of its speed. -/
@@ -177,7 +180,7 @@ theorem smoothCircleFlow_angular_bounds {G Θ : PolarPoint → ℝ} {a b : ℝ}
   have htotal : |∫ r in a..t, angularPartial G (r, Θ (r, θ))| ≤
       ∫ r in a..b, B r := by
     have habs := intervalIntegral.abs_integral_le_integral_abs
-      (f := fun r => angularPartial G (r, Θ (r, θ))) ht.1
+      (μ := volume) (f := fun r => angularPartial G (r, Θ (r, θ))) ht.1
     linarith
   rw [smoothCircleFlow_angular_eq_exp hG hΘ hinit hflow ht θ]
   exact ⟨Real.exp_le_exp.mpr (abs_le.mp htotal).1,
