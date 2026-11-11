@@ -13,6 +13,7 @@ the Bochner integral.
 namespace ContinuousFlexibility.Statements
 
 open Set MeasureTheory Filter
+open scoped ENNReal
 
 theorem radialAngularMean_const_mul (c : ℝ) (f : ℝ → ℝ) :
     radialAngularMean (fun θ => c * f θ) = c * radialAngularMean f := by
