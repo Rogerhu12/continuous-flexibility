@@ -65,7 +65,9 @@ theorem matchedMode_output_of_support {D : ReferenceData}
   have hsq : Integrable (fun r => f r ^ 2) (volume.restrict (radialCore D)) := by
     apply (hweighted.const_mul B).mono' (hg.pow 2)
     filter_upwards [hpoint] with r hr
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (f r))] using hr
+    change ‖f r ^ 2‖ ≤ B * (matchingDensity D r * f r ^ 2)
+    rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (f r))]
+    exact hr
   refine ⟨(memLp_two_iff_integrable_sq hg).mpr hsq, ?_⟩
   have hle := integral_mono_ae hsq (hweighted.const_mul B) hpoint
   rw [integral_const_mul, ← matchedDensity_integral_restrict hD (fun r => f r ^ 2)] at hle
@@ -106,8 +108,10 @@ theorem matchedMode_source_of_support {D : ReferenceData}
     filter_upwards [hpoint,
       ae_restrict_mem (show MeasurableSet (radialCore D) from measurableSet_Ioo)]
       with r hr hcore
-    simpa only [Real.norm_eq_abs,
-      abs_of_nonneg (mul_nonneg (matchingDensity_pos hD hcore).le (sq_nonneg (q r)))] using hr
+    change ‖matchingDensity D r * q r ^ 2‖ ≤ B * f r ^ 2
+    rw [Real.norm_eq_abs,
+      abs_of_nonneg (mul_nonneg (matchingDensity_pos hD hcore).le (sq_nonneg (q r)))]
+    exact hr
   have hsq : Integrable (fun r => q r ^ 2) (radialHilbertMeasure D) :=
     (matchingDensity_integrable_iff hD (fun r => q r ^ 2)).mpr hweighted
   refine ⟨(memLp_two_iff_integrable_sq hqμ).mpr hsq, ?_⟩

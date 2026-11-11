@@ -39,7 +39,7 @@ theorem zeroModeHeight_eq_integral
     (a b : ℝ) (w f : ℝ → ℝ) (r : ℝ) :
     zeroModeHeight a b w f r =
       ∫ t in b..r, zeroModeFlux a f t / w t := by
-  rw [zeroModeHeight, intervalIntegral.integral_symm r b, neg_neg]
+  exact (intervalIntegral.integral_symm b r).symm
 
 theorem zeroModeHeight_absolutelyContinuousOnInterval
     {a b : ℝ} {w f : ℝ → ℝ}
@@ -80,7 +80,7 @@ theorem zeroModeHeight_hasDerivAt_of_integrable
   have hd := (intervalIntegral.integral_hasDerivAt_left hqr
     (ContinuousOn.stronglyMeasurableAtFilter isOpen_Ioo hc r hr)
     (hc.continuousAt (isOpen_Ioo.mem_nhds hr))).neg
-  simpa only [zeroModeHeight, neg_neg] using hd
+  simpa only [zeroModeHeight, Pi.neg_apply, neg_neg] using hd
 
 theorem zeroModeHeight_flux_of_integrable
     {a b : ℝ} {w f : ℝ → ℝ}
@@ -118,15 +118,21 @@ theorem zeroModeHeight_integral_mul_deriv
     (∫ r in a..b, zeroModeHeight a b w f r * deriv φ r) =
       -(zeroModeHeight a b w f a * φ a) -
         ∫ r in a..b, (zeroModeFlux a f r / w r) * φ r := by
-  have hφ' : ContDiffOn ℝ 1 φ (uIcc b a) := by
-    simpa only [uIcc_comm b a] using hφ
-  have h := intervalPrimitive_integral_mul_deriv hq.symm hφ'
-  have he :
-      -(∫ r in a..b, zeroModeHeight a b w f r * deriv φ r) =
-        zeroModeHeight a b w f a * φ a +
-          ∫ r in a..b, (zeroModeFlux a f r / w r) * φ r := by
-    simpa only [← zeroModeHeight_eq_integral,
-      intervalIntegral.integral_symm b a, sub_neg_eq_add] using h
-  linarith
+  have hU := zeroModeHeight_absolutelyContinuousOnInterval hq
+  have h := hU.integral_mul_deriv_eq_deriv_mul hφ.absolutelyContinuousOnInterval
+  have hfun : (fun r => ∫ t in b..r, zeroModeFlux a f t / w t) =
+      zeroModeHeight a b w f :=
+    funext (fun r => (zeroModeHeight_eq_integral a b w f r).symm)
+  have hderiv :
+      (∫ r in a..b, deriv (zeroModeHeight a b w f) r * φ r) =
+        ∫ r in a..b, (zeroModeFlux a f r / w r) * φ r := by
+    apply intervalIntegral.integral_congr_ae
+    filter_upwards [hq.ae_hasDerivAt_integral] with r hr hri
+    have hd := hr (uIoc_subset_uIcc hri) b (by simp)
+    rw [hfun] at hd
+    rw [hd.deriv]
+  have hb : zeroModeHeight a b w f b = 0 := by
+    simp only [zeroModeHeight, intervalIntegral.integral_same, neg_zero]
+  simpa only [hb, zero_mul, zero_sub, hderiv] using h
 
 end ContinuousFlexibility.Radial

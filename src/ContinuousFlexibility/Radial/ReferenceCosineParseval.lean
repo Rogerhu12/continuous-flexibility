@@ -50,6 +50,8 @@ theorem referencePiFourierCoeff_re {f : ℝ → ℝ}
   simp only [sub_zero, one_div, Complex.real_smul, smul_eq_mul,
     Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero]
   congr 1
+  change RCLike.re (∫ θ in (0 : ℝ)..Real.pi,
+    fourier (-n) (θ : AddCircle Real.pi) * (f θ : ℂ)) = _
   rw [← intervalIntegral.intervalIntegral_re hg]
   apply intervalIntegral.integral_congr_ae
   filter_upwards with θ
@@ -93,6 +95,8 @@ theorem referenceCosineCoeff_eq_sqrt_two_mul_piFourier_re {f : ℝ → ℝ}
   have hper : Function.Periodic
       (fun θ => f θ * Radial.cosineMode (2 * n) θ) Real.pi := by
     intro θ
+    change f (θ + Real.pi) * Radial.cosineMode (2 * n) (θ + Real.pi) =
+      f θ * Radial.cosineMode (2 * n) θ
     rw [hp θ, Radial.cosineMode_even_frequency_periodic n θ]
   rw [radialAngularMean_eq_pi_mean hper hip, referencePiFourierCoeff_re hf]
   simp only [Int.cast_natCast]
@@ -128,7 +132,7 @@ theorem summable_sq_referenceCosineCoeff {f : ℝ → ℝ}
       (radialAngularMean (fun θ => f θ * Radial.cosineMode (2 * (n + 1)) θ)) ^ 2) := by
   have hinj : Function.Injective (fun n : ℕ => ((n + 1 : ℕ) : ℤ)) := by
     intro i j hij
-    exact Nat.add_right_cancel (Int.natCast_injective hij)
+    exact Nat.add_right_cancel (Int.ofNat_injective hij)
   have hs := (hasSum_sq_referencePiFourierCoeff hp hf).summable.comp_injective hinj
   refine (Summable.mul_left 2 hs).congr ?_
   intro n
@@ -147,6 +151,7 @@ theorem reference_cosine_parseval {f : ℝ → ℝ}
   have hs := hasSum_sq_referencePiFourierCoeff hp hf
   have heven : Function.Even (fun n : ℤ => ‖referencePiFourierCoeff f n‖ ^ 2) := by
     intro n
+    change ‖referencePiFourierCoeff f (-n)‖ ^ 2 = ‖referencePiFourierCoeff f n‖ ^ 2
     rw [referencePiFourierCoeff_neg hp he n]
   have hsplit := tsum_int_eq_zero_add_two_mul_tsum_pnat heven hs.summable
   have hpNat :
@@ -157,7 +162,8 @@ theorem reference_cosine_parseval {f : ℝ → ℝ}
   calc
     _ = ∑' n : ℤ, ‖referencePiFourierCoeff f n‖ ^ 2 := hs.tsum_eq.symm
     _ = ‖referencePiFourierCoeff f 0‖ ^ 2 +
-        2 * ∑' n : ℕ+, ‖referencePiFourierCoeff f (n : ℤ)‖ ^ 2 := hsplit
+        2 * ∑' n : ℕ+, ‖referencePiFourierCoeff f (n : ℤ)‖ ^ 2 := by
+      simpa only [nsmul_eq_mul, Nat.cast_ofNat] using hsplit
     _ = _ := by
       rw [referencePiFourierCoeff_norm_sq hp he 0,
         referencePiFourierCoeff_zero_re hp hf, hpNat, ← tsum_mul_left]

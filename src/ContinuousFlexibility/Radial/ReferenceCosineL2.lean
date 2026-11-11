@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open MeasureTheory Filter
-open scoped ENNReal RealInnerProductSpace
+open scoped ENNReal InnerProductSpace
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 

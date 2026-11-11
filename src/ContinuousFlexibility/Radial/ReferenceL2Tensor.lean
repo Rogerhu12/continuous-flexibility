@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open MeasureTheory Filter
-open scoped ENNReal RealInnerProductSpace
+open scoped ENNReal InnerProductSpace
 
 variable {α β : Type*} [MeasurableSpace α] [MeasurableSpace β]
   {μ : Measure α} {ν : Measure β} [SFinite μ] [SFinite ν]
@@ -28,6 +28,7 @@ theorem referenceL2Tensor_memLp (f : Lp ℝ 2 μ) (g : Lp ℝ 2 ν) :
   have hg : AEStronglyMeasurable (fun z : α × β => g z.2) (μ.prod ν) :=
     (Lp.aestronglyMeasurable g).comp_snd
   apply (memLp_two_iff_integrable_sq (hf.mul hg)).2
+  change Integrable (fun z : α × β => (f z.1 * g z.2) ^ 2) (μ.prod ν)
   simpa only [mul_pow] using
     (Lp.memLp f).integrable_sq.mul_prod (Lp.memLp g).integrable_sq
 
@@ -96,6 +97,7 @@ def referenceL2TensorIsometry (g : Lp ℝ 2 ν) (hg : ‖g‖ = 1) :
   map_add' f₁ f₂ := referenceL2Tensor_add_left f₁ f₂ g
   map_smul' c f := referenceL2Tensor_smul_left c f g
   norm_map' f := by
+    change ‖referenceL2Tensor f g‖ = ‖f‖
     apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
     simpa only [hg, one_pow, mul_one] using referenceL2Tensor_norm_sq f g
 
