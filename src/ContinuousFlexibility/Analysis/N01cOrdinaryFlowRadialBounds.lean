@@ -22,6 +22,66 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true
 
+private theorem n01c_radialPrefix_commonNeighborhood
+    {base loss : ℕ} {ε : ℝ}
+    {Angular B Smooth Pos Target : ℕ → ℝ → Prop}
+    {Zero : ∀ b e, B b e → Smooth b e → ℕ → Prop}
+    {Whole : ℕ → ℕ → ℝ → Type*}
+    {TimeTowers RadialTowers : ℕ → ℝ → Type*}
+    {Interpolation : ℕ → ℕ → ℕ → Prop}
+    (hangular : ∃ b e, base ≤ b ∧ 0 < e ∧ e ≤ min ε (1 / 2) ∧
+      ∀ b', b ≤ b' → ∀ e', 0 < e' → e' ≤ e → Angular b' e')
+    (hzero : ∃ b e, base ≤ b ∧ 0 < e ∧ e ≤ min ε (1 / 2) ∧
+      ∃ hB : B b e, ∃ hG : Smooth b e, ∃ d : ℕ, Zero b e hB hG d)
+    (hwhole : ∃ b e l, base ≤ b ∧ 0 < e ∧ e ≤ min ε (1 / 2) ∧
+      ∀ b', b ≤ b' → ∀ e', 0 < e' → e' ≤ e → Nonempty (Whole b' l e'))
+    (htower : ∃ b e, base ≤ b ∧ 0 < e ∧ e ≤ ε ∧
+      ∀ b', b ≤ b' → ∀ e', 0 < e' → e' ≤ e →
+        B b' e' ∧ Pos b' e' ∧ Nonempty (TimeTowers b' e') ∧
+          Nonempty (RadialTowers b' e'))
+    (hinterp : ∀ o : ℕ, ∃ b l : ℕ, Interpolation b l o)
+    (hinterp_mono : ∀ b b' l o, b ≤ b' → Interpolation b l o →
+      Interpolation b' l o)
+    (hfinish : ∀ bq eq (hBq : B bq eq) (hGq : Smooth bq eq) d₀,
+      Zero bq eq hBq hGq d₀ →
+      ∀ lossRaw lossIz lossIp base' ε', bq ≤ base' → ε' ≤ eq →
+      0 < ε' → ε' ≤ 1 / 2 → Angular base' ε' →
+      ∀ hB' : B base' ε', Pos base' ε' →
+      Whole base' lossRaw ε' → TimeTowers base' ε' → RadialTowers base' ε' →
+      Interpolation base' lossIz (loss + d₀ + 2) →
+      Interpolation base' lossIp 0 → Target base' ε') :
+    ∃ base₀ : ℕ, ∃ ε₀ : ℝ,
+      base ≤ base₀ ∧ 0 < ε₀ ∧ ε₀ ≤ min ε (1 / 2) ∧
+      ∀ base', base₀ ≤ base' → ∀ ε', 0 < ε' → ε' ≤ ε₀ → Target base' ε' := by
+  obtain ⟨ba, ea, hba, hea, heae, ha⟩ := hangular
+  obtain ⟨bq, eq, _, heq, _, hBq, hGq, d₀, hQ⟩ := hzero
+  obtain ⟨bw, ew, lossRaw, _, hew, _, hw⟩ := hwhole
+  obtain ⟨bt, et, _, het, _, ht⟩ := htower
+  obtain ⟨bz, lossIz, hiz⟩ := hinterp (loss + d₀ + 2)
+  obtain ⟨bp, lossIp, hip⟩ := hinterp 0
+  let base₀ : ℕ := max ba (max bq (max bw (max bt (max bz bp))))
+  let ε₀ : ℝ := min ea (min eq (min ew et))
+  have hbase₀ : base ≤ base₀ := hba.trans (le_max_left _ _)
+  have hε₀ : 0 < ε₀ := lt_min hea (lt_min heq (lt_min hew het))
+  have hε₀e : ε₀ ≤ min ε (1 / 2) := (min_le_left _ _).trans heae
+  refine ⟨base₀, ε₀, hbase₀, hε₀, hε₀e, ?_⟩
+  intro base' hbase' ε' hε' he'
+  rcases max_le_iff.mp hbase' with ⟨hba', hbrest⟩
+  rcases max_le_iff.mp hbrest with ⟨hbq', hbrest⟩
+  rcases max_le_iff.mp hbrest with ⟨hbw', hbrest⟩
+  rcases max_le_iff.mp hbrest with ⟨hbt', hbrest⟩
+  rcases max_le_iff.mp hbrest with ⟨hbz', hbp'⟩
+  rcases le_min_iff.mp he' with ⟨hea', herest⟩
+  rcases le_min_iff.mp herest with ⟨heq', herest⟩
+  rcases le_min_iff.mp herest with ⟨hew', het'⟩
+  have he2 : ε' ≤ 1 / 2 := (hea'.trans heae).trans (min_le_right _ _)
+  obtain ⟨hB', hpos, ⟨JT⟩, ⟨JR⟩⟩ := ht base' hbt' ε' hε' het'
+  obtain ⟨W⟩ := hw base' hbw' ε' hε' hew'
+  exact hfinish bq eq hBq hGq d₀ hQ lossRaw lossIz lossIp base' ε'
+    hbq' heq' hε' he2 (ha base' hba' ε' hε' hea') hB' hpos W JT JR
+    (hinterp_mono bz base' lossIz (loss + d₀ + 2) hbz' hiz)
+    (hinterp_mono bp base' lossIp 0 hbp' hip)
+
 theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -48,41 +108,23 @@ theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
                 base' (s + loss + dK) (z - (C.referenceState, 0)) v := by
   let p := pairGrading (stateGrading S) realGrading
   have hp : Monotone p := jointStateGrading_monotone S
-  obtain ⟨ba, ea, hba, hea, heae, ha⟩ :=
-    n01_exists_ordinaryFlowAngularPositivePrefixBounds hS hT hA hε hB hG hE hSpeed
-  obtain ⟨bq, eq, hbq, heq, heqe, hBq, hGq, d₀, hQ⟩ :=
-    n01_exists_ordinaryFlowZeroAngularGrowth hS hT hA hε hB hG hSpeed
-  obtain ⟨bw, ew, lossRaw, hbw, hew, hewe, hw⟩ :=
-    n01_exists_stable_commonWholeSpeed_powerControl hS hT hA hε hB hG hE
-  obtain ⟨bt, et, hbt, het, hete, htowers⟩ :=
-    n01_exists_stable_commonSpeed_towers hS hT hA hε hB hG hE
+  refine n01c_radialPrefix_commonNeighborhood
+    (loss := loss)
+    (B := fun b e => N01PartB D S C b e)
+    (Smooth := fun b e => ∀ z ∈ stateNeighborhood S C b e, ∀ m,
+      ContDiff ℝ ∞ (fun q : PolarPoint => componentCosineSpeed D S C m (z, q)))
+    (Zero := fun b e hBq hGq d₀ =>
+      OrdinaryFlowZeroAngularGrowth hS hT hA hBq hGq loss d₀)
+    (Interpolation := SpatialPowerInterpolation p)
+    (n01_exists_ordinaryFlowAngularPositivePrefixBounds hS hT hA hε hB hG hE hSpeed)
+    (n01_exists_ordinaryFlowZeroAngularGrowth hS hT hA hε hB hG hSpeed)
+    (n01_exists_stable_commonWholeSpeed_powerControl hS hT hA hε hB hG hE)
+    (n01_exists_stable_commonSpeed_towers hS hT hA hε hB hG hE)
+    (fun o => exists_seminorm_spatialPower_bound p hp (jointStateGrading_hasInterpolation hS) o)
+    (fun b b' l o hb hI => SpatialPowerInterpolation.mono_base hI hp hb) ?_
+  intro bq eq hBq hGq d₀ hQ lossRaw lossIz lossIp base' ε'
+    hbq' heq' hε' he2 ha hB' hpos W JT JR hIz hIp
   let o₀ : ℕ := loss + d₀ + 2
-  obtain ⟨bz, lossIz, hiz⟩ :=
-    exists_seminorm_spatialPower_bound p hp (jointStateGrading_hasInterpolation hS) o₀
-  obtain ⟨bp, lossIp, hip⟩ :=
-    exists_seminorm_spatialPower_bound p hp (jointStateGrading_hasInterpolation hS) 0
-  let base₀ : ℕ := max ba (max bq (max bw (max bt (max bz bp))))
-  let ε₀ : ℝ := min ea (min eq (min ew et))
-  have hbase₀ : base ≤ base₀ := hba.trans (le_max_left _ _)
-  have hε₀ : 0 < ε₀ := lt_min hea (lt_min heq (lt_min hew het))
-  have hε₀e : ε₀ ≤ min ε (1 / 2) := (min_le_left _ _).trans heae
-  refine ⟨base₀, ε₀, hbase₀, hε₀, hε₀e, ?_⟩
-  intro base' hbase' ε' hε' he'
-  rcases max_le_iff.mp hbase' with ⟨hba', hbrest⟩
-  rcases max_le_iff.mp hbrest with ⟨hbq', hbrest⟩
-  rcases max_le_iff.mp hbrest with ⟨hbw', hbrest⟩
-  rcases max_le_iff.mp hbrest with ⟨hbt', hbrest⟩
-  rcases max_le_iff.mp hbrest with ⟨hbz', hbp'⟩
-  rcases le_min_iff.mp he' with ⟨hea', herest⟩
-  rcases le_min_iff.mp herest with ⟨heq', herest⟩
-  rcases le_min_iff.mp herest with ⟨hew', het'⟩
-  have he2 : ε' ≤ 1 / 2 := (hea'.trans heae).trans (min_le_right _ _)
-  obtain ⟨hB', hpos, ⟨JT⟩, ⟨JR⟩⟩ := htowers base' hbt' ε' hε' het'
-  obtain ⟨W⟩ := hw base' hbw' ε' hε' hew'
-  have hIz : SpatialPowerInterpolation p base' lossIz o₀ :=
-    SpatialPowerInterpolation.mono_base hiz hp hbz'
-  have hIp : SpatialPowerInterpolation p base' lossIp 0 :=
-    SpatialPowerInterpolation.mono_base hip hp hbp'
   have hsubq : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C bq eq :=
     stateNeighborhood_subset hbq' heq'
   have hzero : ∀ β : ℕ, 1 ≤ β → ∃ M : ℝ, 0 < M ∧
@@ -105,8 +147,7 @@ theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
       (contDiff_componentCosineSpeed hS hT hA hB' hpos hz m)
   intro K
   obtain ⟨offset, hpositive⟩ :=
-    ordinaryFlowAngularPositivePrefix_to_fixedBounds
-      (ha base' hba' ε' hε' hea' K)
+    ordinaryFlowAngularPositivePrefix_to_fixedBounds (ha K)
   let L : ℕ := max lossRaw (max lossIz lossIp)
   let P : ℕ → ℕ → ℕ → ℕ → ℝ → ℝ → Prop := fun n b k s M A =>
     ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ : ℝ,

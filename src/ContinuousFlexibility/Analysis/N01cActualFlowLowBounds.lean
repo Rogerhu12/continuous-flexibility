@@ -53,6 +53,42 @@ set_option backward.isDefEq.respectTransparency true
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
+private theorem n01c_stableLowBounds_of_uniformInputs
+    {base : ℕ} {ε : ℝ} {Geometry : ℕ → ℝ → ℝ → ℝ → Prop}
+    {Speed : ℕ → ℝ → Prop} {Result : ℕ → ℝ → ℝ → ℝ → ℝ → Prop}
+    (width : ℝ) (hwidth : 0 < width)
+    (hgeometry : ∃ bg : ℕ, ∃ eg : ℝ, base ≤ bg ∧ 0 < eg ∧
+      eg ≤ min ε (1 / 2) ∧ ∃ c M : ℝ, 0 < c ∧ 0 < M ∧
+        ∀ b : ℕ, bg ≤ b → ∀ e : ℝ, 0 < e → e ≤ eg → Geometry b e c M)
+    (hspeed : ∃ bs : ℕ, base ≤ bs ∧ ∃ Ms : ℝ, 0 < Ms ∧ Speed bs Ms)
+    (hresult : ∀ (b : ℕ) (e c M : ℝ) (bs : ℕ) (Ms Mt : ℝ),
+      bs ≤ b → 0 < e → e ≤ min ε (1 / 2) →
+      0 < c → 0 < M → 0 < Ms → 0 < Mt → Geometry b e c M → Speed bs Ms →
+      (∀ t ∈ Icc (0 : ℝ) 1, |deriv (circleFlowCompactTime 0 Real.pi) t| ≤ Mt) →
+      let W : ℝ := width / 2 * Ms
+      let B : ℝ := (2 : ℝ) ^ (3 : ℕ) * (Mt * W + Mt * W)
+      0 < W → 0 < B →
+        Result b e c M (circleLiftCompositionConstant Real.pi c M 1 * (B + B * M))) :
+    ∃ b : ℕ, ∃ e : ℝ, base ≤ b ∧ 0 < e ∧ e ≤ min ε (1 / 2) ∧
+      ∃ c M Mlin : ℝ, 0 < c ∧ 0 < M ∧ 0 < Mlin ∧
+        ∀ b' : ℕ, b ≤ b' → ∀ e' : ℝ, 0 < e' → e' ≤ e → Result b' e' c M Mlin := by
+  obtain ⟨bg, eg, hbg, heg, hege, c, M, hc, hM, hgeom⟩ := hgeometry
+  obtain ⟨bs, _, Ms, hMs, hs⟩ := hspeed
+  obtain ⟨Mt, hMt, htime⟩ := exists_circleFlowCompactTime_deriv_bound 0 Real.pi
+  let W : ℝ := width / 2 * Ms
+  have hW : 0 < W := mul_pos (div_pos hwidth (by norm_num)) hMs
+  let B : ℝ := (2 : ℝ) ^ (3 : ℕ) * (Mt * W + Mt * W)
+  have hBpos : 0 < B := by dsimp only [B]; positivity
+  let Mlin : ℝ := circleLiftCompositionConstant Real.pi c M 1 * (B + B * M)
+  have hMlin : 0 < Mlin := mul_pos
+    (zero_lt_one.trans_le (circleLiftCompositionConstant_one_le Real.pi c M 1))
+    (add_pos hBpos (mul_pos hBpos hM))
+  refine ⟨max bg bs, eg, hbg.trans (le_max_left _ _), heg, hege,
+    c, M, Mlin, hc, hM, hMlin, ?_⟩
+  intro b hb e he heeg
+  exact hresult b e c M bs Ms Mt ((le_max_right bg bs).trans hb) he (heeg.trans hege)
+    hc hM hMs hMt (hgeom b ((le_max_left bg bs).trans hb) e he heeg) hs htime hW hBpos
+
 /-- All low data are uniform before every parameter prefix. This includes
 the actual integrated coefficient of every finite-plot variational equation. -/
 theorem n01_exists_stable_actualFlow_lowBounds
@@ -80,52 +116,50 @@ theorem n01_exists_stable_actualFlow_lowBounds
           (ordinaryFlowFiniteDefectJet hS hT hA hB' hpos m J x hx L t 0) ≤ M) ∧
         ∀ n : ℕ, ∀ v : Fin (n + 1) → (Fin d → ℝ),
           (ordinaryFlowCircleVariationData hS hT hA hB' hpos m J x hx L n v).coefficientSize 1 ≤ Mlin := by
-  obtain ⟨bg, eg, hbg, heg, hege, c, M, hc, hM, hgeom⟩ :=
-    n01_exists_stable_actualFlow_lowGeometry hS hT hA hε hB hG hSpeed
-  obtain ⟨bs, hbs, Ms, hMs, hspeed⟩ :=
-    n01_speedDifference_fixedOrder_uniform hT hA.1.1 hSpeed 4
-  obtain ⟨Mt, hMt, htime⟩ := exists_circleFlowCompactTime_deriv_bound 0 Real.pi
-  have hwidth : 0 < D.b - D.a := sub_pos.mpr
-    ((hA.2.2.1.1 0).1.trans ((hA.2.2.1.1 0).2.1.trans (hA.2.2.1.1 0).2.2))
-  let W : ℝ := (D.b - D.a) / 2 * Ms
-  have hW : 0 < W := mul_pos (div_pos hwidth (by norm_num)) hMs
-  let B : ℝ := (2 : ℝ) ^ (3 : ℕ) * (Mt * W + Mt * W)
-  have hBpos : 0 < B := by dsimp only [B]; positivity
-  let Mlin : ℝ := circleLiftCompositionConstant Real.pi c M 1 * (B + B * M)
-  have hMlin : 0 < Mlin := mul_pos
-    (zero_lt_one.trans_le (circleLiftCompositionConstant_one_le Real.pi c M 1))
-    (add_pos hBpos (mul_pos hBpos hM))
-  refine ⟨max bg bs, eg, hbg.trans (le_max_left _ _), heg, hege,
-    c, M, Mlin, hc, hM, hMlin, ?_⟩
-  intro base' hb ε' hε' he hB' hpos m J d x hx L
-  have hlow := hgeom base' ((le_max_left bg bs).trans hb) ε' hε' he
-    hB' hpos m J d x hx L
-  have hxs : x ∈ stateNeighborhood S C bs (min ε (1 / 2)) :=
-    stateNeighborhood_subset ((le_max_right bg bs).trans hb) (he.trans hege) hx
-  have hphysical := hspeed x hxs
-  have houter (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
-      circleRealSobolevNorm 3
-        (ordinaryFlowSpeedOuterJet hS hT hA hB' hpos m x hx L
-          (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 0) ≤ B := by
-    let O : ℕ → C(AddCircle Real.pi, ℝ) :=
-      ordinaryFlowSpeedOuterJet hS hT hA hB' hpos m x hx L
-        (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice
-    have hpoint (b : ℕ) (hb : b ≤ 3) (θ : ℝ) :
-        |O b (θ : AddCircle Real.pi)| ≤ Mt * W := by
-      rw [ordinaryFlowSpeedOuterJet_angle_coe_apply hS hT hA hB' hpos m x hx L J,
-        abs_mul]
-      exact mul_le_mul (htime t ht)
-        (componentCosineSpeed_positive_jet_le hS hT hA hε' hB' hx hMs.le
-          hphysical m (b + 1) (by omega) (by omega)
-          (circleFlowCompactTime_mem Real.pi_pos.le t) θ)
-        (abs_nonneg _) hMt.le
-    exact circle_sobolevNorm_le_pointwiseJetBounds O
-      (periodicCircleJet_hasDerivAt _ _ _) 3 (mul_pos hMt hW).le (mul_pos hMt hW).le
-      (hpoint 0 (by decide)) (hpoint 3 le_rfl)
-  refine ⟨fun t => (hlow t).1, fun t => (hlow t).2, ?_⟩
-  intro n v
-  exact ordinaryFlowCircleVariationData_coefficientSize_one_le
-    hS hT hA hB' hpos m J x hx L n v hc hM.le hBpos.le
-    (fun t _ => (hlow t).1) (fun t _ => (hlow t).2) houter
+  exact n01c_stableLowBounds_of_uniformInputs (D.b - D.a)
+    (sub_pos.mpr
+      ((hA.2.2.1.1 0).1.trans ((hA.2.2.1.1 0).2.1.trans (hA.2.2.1.1 0).2.2)))
+    (n01_exists_stable_actualFlow_lowGeometry hS hT hA hε hB hG hSpeed)
+    (n01_speedDifference_fixedOrder_uniform hT hA.1.1 hSpeed 4)
+    (fun base' ε' c M bs Ms Mt hbs hε' he hc hM hMs hMt hgeom hspeed htime hW hBpos => by
+      intro hB' hpos m J d x hx L
+      let W : ℝ := (D.b - D.a) / 2 * Ms
+      let B : ℝ := (2 : ℝ) ^ (3 : ℕ) * (Mt * W + Mt * W)
+      have hlow := hgeom hB' hpos m J d x hx L
+      have hxs : x ∈ stateNeighborhood S C bs (min ε (1 / 2)) :=
+        stateNeighborhood_subset hbs he hx
+      have hphysical := hspeed x hxs
+      have houter (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
+          circleRealSobolevNorm 3
+            (ordinaryFlowSpeedOuterJet hS hT hA hB' hpos m x hx L
+              (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice 0) ≤ B := by
+        let O : ℕ → C(AddCircle Real.pi, ℝ) :=
+          ordinaryFlowSpeedOuterJet hS hT hA hB' hpos m x hx L
+            (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice
+        have hpoint (b : ℕ) (hb : b ≤ 3) (θ : ℝ) :
+            |O b (θ : AddCircle Real.pi)| ≤ Mt * W := by
+          rw [ordinaryFlowSpeedOuterJet_angle_coe_apply hS hT hA hB' hpos m x hx L J,
+            abs_mul]
+          exact mul_le_mul (htime t ht)
+            (componentCosineSpeed_positive_jet_le hS hT hA hε' hB' hx hMs.le
+              hphysical m (b + 1) (by omega) (by omega)
+              (circleFlowCompactTime_mem Real.pi_pos.le t) θ)
+            (abs_nonneg _) hMt.le
+        simpa only [Nat.cast_ofNat] using
+          circle_sobolevNorm_le_pointwiseJetBounds O
+            (periodicCircleJet_hasDerivAt
+              (ordinaryFlowSpeedOuterField hS hT hA hB' hpos m x hx L
+                (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice)
+              (ordinaryFlowSpeedOuterField_periodic hS hT hA hB' hpos m x hx L
+                (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice)
+              (contDiff_ordinaryFlowSpeedOuterField hS hT hA hB' hpos m x hx L
+                (fun _ : Fin 1 => (0 : Fin d → ℝ)) t flowAngleForcingChoice))
+            3 (mul_pos hMt hW).le (mul_pos hMt hW).le
+            (hpoint 0 (by decide)) (hpoint 3 le_rfl)
+      refine ⟨fun t => (hlow t).1, fun t => (hlow t).2, ?_⟩
+      intro n v
+      exact ordinaryFlowCircleVariationData_coefficientSize_one_le
+        hS hT hA hB' hpos m J x hx L n v hc hM.le hBpos.le
+        (fun t _ => (hlow t).1) (fun t _ => (hlow t).2) houter)
 
 end ContinuousFlexibility.Blueprint

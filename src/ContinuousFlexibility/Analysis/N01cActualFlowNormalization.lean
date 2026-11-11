@@ -23,6 +23,13 @@ set_option backward.isDefEq.respectTransparency true
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
+private theorem n01c_normalization_at_compact_preimage
+    {path : ℝ → ℝ} {r : ℝ} {Result : Prop}
+    (hpreimage : ∃ t ∈ Icc (0 : ℝ) 1, path t = r)
+    (close : ∀ t ∈ Icc (0 : ℝ) 1, path t = r → Result) : Result := by
+  obtain ⟨t, ht, htr⟩ := hpreimage
+  exact close t ht htr
+
 theorem n01_ordinaryFlowAngularOrderBound_of_unitPolynomial
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss normLoss n degree : ℕ} {ε : ℝ}
@@ -70,7 +77,10 @@ theorem n01_ordinaryFlowAngularOrderBound_of_unitPolynomial
       exists_sameConstant_materialWeight_bound (B * C₀) B (3 / 4 : ℝ)
     refine ⟨B', hB', ?_⟩
     intro m J r hr θ x hx v
-    obtain ⟨t, ht, htr⟩ := exists_ordinaryFlowCompactTime_of_radius hA m hr
+    refine n01c_normalization_at_compact_preimage
+      (exists_ordinaryFlowCompactTime_of_radius
+        (D := D) (T := T) (S := S) (C := C) (r := r) hA m hr) ?_
+    intro t ht htr
     let A := (ordinaryFlowAngularStateSmoothDirections hS hT hA hB hpos m J hr b θ).D (n + 1) x
     let M : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B

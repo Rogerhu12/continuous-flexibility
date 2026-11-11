@@ -128,10 +128,25 @@ theorem n01_ordinaryFlowLowerFactors_bounds
           u.component u.tower u.state u.mem u.plot u.directions t choice i hi
           (Nat.le_of_not_gt hk), abs_zero]
         exact mul_nonneg hM.le (zero_le_one.trans hR)
+  let hGplot := contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos
+    u.component u.state u.mem u.plot
+  let hΘplot := contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos
+    u.component u.tower u.state u.mem u.plot
+  let Jplot := continuousTimeSpeedTowerOfContDiff hGplot
+  have hperiod := canonicalFlowForcingFactors_periodic Jplot hΘplot
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos
+      u.component u.state u.mem u.plot)
+    (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos
+      u.component u.state u.mem u.plot)
+    (0 : Fin u.dimension → ℝ) u.directions t choice i.succ
+  have hsmooth := contDiff_canonicalFlowForcingFactors Jplot hΘplot hGplot
+    (0 : Fin u.dimension → ℝ) u.directions t choice i.succ
   have hs := circle_sobolevNorm_le_pointwiseJetBounds
     (ordinaryFlowForcingFactorJet hS hT hA hB hpos u.component u.tower
       u.state u.mem u.plot u.directions t choice i.succ)
-    (periodicCircleJet_hasDerivAt _ _ _) s
+    (periodicCircleJet_hasDerivAt
+      (canonicalFlowForcingFactors Jplot hΘplot (0 : Fin u.dimension → ℝ)
+        u.directions t choice i.succ) hperiod hsmooth) s
     (mul_nonneg hM.le (zero_le_one.trans hR))
     (mul_nonneg hM.le (zero_le_one.trans hR))
     (hpoint 0 (Nat.zero_le s)) (hpoint s le_rfl)
