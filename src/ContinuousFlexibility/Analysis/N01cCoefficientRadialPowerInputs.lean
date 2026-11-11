@@ -236,12 +236,11 @@ private theorem coefficientRadialInput_positive_material_bound
     intro j
     refine Fin.cases ?_ (Fin.cases ?_ (fun _ => ?_)) j
     · intro r hr z v
-      simp only [G, F₀, coefficientRadialInputJets, Fin.cases_zero]
+      rfl
     · intro r hr z v
-      simp only [G, F₁, coefficientRadialInputJets, Fin.cases_succ, Fin.cases_zero,
-        SmoothDirections.congr]
+      rfl
     · intro r hr z v
-      simp only [G, F₂, coefficientRadialInputJets, Fin.cases_succ]
+      rfl
   exact coefficientRadialInput_three_positive_transport
     (X := AnnularState S × ℝ) (V := Fin k → AnnularState S)
     (I := Ioo D.a D.b) (U := stateNeighborhood S C base ε)
