@@ -146,3 +146,192 @@ or transported. The valid next step is to recover the manuscript's actual
 coordinate and weight estimates, or construct a controlled set of witnesses,
 not to assume the desired source norm or graph inclusion as a new final-node
 premise.
+
+## The witness-selection interface does not retain the construction
+
+The exact `N07aStatement` in `Blueprint/Statements.lean` chooses
+`A, T, S, C, R, L, K, Vol, b, Domain, Relative, G` together and retains
+`NonlinearPropertiesThrough06` and `ScalarInverseProperties` for these same
+witnesses. It contains no further predicate identifying `K` with a particular
+coordinate construction. The definitions of `Vol`, `Domain`, and `Relative`
+depend on `K`; the scalar inverse `G` depends on the chosen physical spaces and
+is asserted to solve the operator belonging to the chosen `L`.
+
+The existing N04 interfaces do not supply a replacement theorem for these
+dependent witnesses:
+
+- `N04aStatement`, `N04bStatement`, and `N04cStatement` are existential
+  statements. A new witness returned by one of their producers need not share
+  the old `A`, `S`, `L`, or `K`.
+- `N04_of_nodes` in `Blueprint/Assembly.lean` retains the witnesses of
+  `N04cStatement` and adds `RootCompositionTarget`, `CubicDivisionTarget`, and
+  `PhysicalTransmissionTarget`. These are independent calculus propositions;
+  they do not assert that the stored charts or neighboring pieces satisfy
+  their hypotheses. There is no separate `N04dStatement` in this interface.
+- The proved N04a construction is a reference Liouville atlas establishing
+  Part A. It does not identify its charts with the characteristic coordinates
+  required by Part B, or transport an already chosen Banach graph to them.
+
+Consequently one cannot destruct `hN07a`, call N04a again, and combine the new
+`K` with the old `Vol`, `Domain`, `Relative`, and `G`. Reconstructing all of
+these objects is a mathematical alternative, but it requires the corresponding
+construction and identification proofs. Calling an open blueprint node does
+not discharge those obligations with the permitted axioms.
+
+This is an interface diagnosis, not a proof that the existential implication
+is false. In particular, the local gauge example above is not a completed
+counterexample to all of Through06, and a bad witness would not rule out a
+different good witness.
+
+## Moving physical cuts and the upstream candidate repair
+
+The actual midpoint of a negative component is the level
+`sigma_z = T_m / 2` of the current travel coordinate. The canonical cut radius
+is fixed, but its inverse image in physical coordinates can depend on the
+state and the angle. A state-independent pair of radial intervals does not
+describe these current halves in general.
+
+The inspected `line/N04b` snapshot
+`419153a8b28df1142bfd0982f60c9d4c0cd99989` already addresses this distinction:
+`CanonicalData.physicalDomain z m` stores the current domain;
+`referencePhysicalPieceOpen` retains the radial reference interval;
+`CanonicalGeometry` states the current partition and boundary properties;
+and `CanonicalCurrentCutPair` identifies the common cut by the actual inverse
+charts. It also supplies `CanonicalBoundaryInverseGerm`, which prevents
+unconstrained values of a stored inverse from determining spurious boundary
+derivatives. This is a relevant candidate definition repair, not yet a proved
+canonical construction: `N04bFieldRealization` and
+`N04bCanonicalConstruction` in that snapshot are open blueprint statements.
+
+The inspected `line/N04Coordinates` snapshot
+`442c7c56f82502094bc920ed0746eb54eddd9613` exposes the independent raw ODE target
+`N04FlowJetsTarget`. Its coordinate realization subnode is also open, and its
+conclusion is still exactly `N04cStatement`. The internal flow theorem alone
+does not retain quantitative bounds for every actual stored chart and height
+in the later existential witnesses.
+
+## A primitive geometric contract that would support the missing proof
+
+The following describes a proposed upstream output, to be proved for the
+actual atlas. It is not an added assumption in an N07b proof. Set
+`z_* = (C.referenceState, 0)`, `Omega_z,m = physicalDomain z m`, and
+`E_m = T.E0 (T.sample (K.cell m))`. The contract should concern the following
+three groups of actual geometric quantities.
+
+### Actual fields and compatible transition jets
+
+Retain raw spatial regularity and angular symmetry of the corrected physical
+coefficients, rather than infer them from regularity of a source error.
+`N04bFieldRegularity` on the candidate branch is an existing interface for
+this purpose. For the Green identity, C1 coefficients suffice; the actual
+construction supplies stronger piecewise smoothness.
+
+On the open annulus, construct maps `tau_z` and positive functions `q_z` with
+the following exact identities for every current state, every piece, and
+every `p` in its reference physical interior:
+
+    tau_z(p) = inverseChart_z,m(chart_*,m(p)),
+    q_z(p) = height_*,m(p) / height_z,m(tau_z(p)).
+
+Require these to have a common C2 representative on the open annulus,
+preserving the annulus, periodicity and reflection. Their values on the
+normalization region are respectively `p` and `1`. These requirements refer
+only to coordinate functions and height factors, not to the transformed
+unknown or its graph membership. Equivalently one can retain the actual
+adjacent-piece jet identities from which this representative is constructed.
+Values on the omitted interfaces must be the matching traces, not arbitrary
+defaults inherited from a piecewise function definition.
+
+There is a concrete reason for this finite regularity in the manuscript.
+At a negative midpoint, write the two charts as `A_i o F_z`, where
+`F_z = (sigma_z, varphi_z)` and the scalar root regularizations `A_i` are
+state independent. Both transition maps then equal `F_z^{-1} o F_*`.
+Writing the physical height as `delta_z^(-1/2) * xi_i,z^(1/4)`, the root
+factors cancel in the ratio and give
+`q_z = sqrt((delta_z o tau_z) / delta_*)`. Thus the apparent midpoint seam
+does not limit regularity. At an actual root, the positive interpolation
+matches coordinate jets through order four and logarithmic height jets
+through order three. It supports C4 transition coordinates and C3 height
+ratios locally across that root, and hence the C2 conclusion needed here.
+It does not justify a global C-infinity claim or regularity at the two
+natural endpoints. See `positive-crossing`, `current-geometric-jets`, and
+`transmission-domain` in the readable geometry chapter.
+
+### Material position and coefficient bounds
+
+The piece label must be linked to its actual physical location. One useful
+primitive form is a uniform comparison, on every current piece, of the ratios
+of `H`, `E0`, and `M` at the physical radius and at `T.sample (K.cell m)` by
+fixed powers of `E_m`. The corresponding comparison at the reference point
+and its image under `tau_z` follows because both belong to the same labelled
+piece. This is the geometric weight-conversion assertion in the manuscript,
+not a new weighted-space membership premise.
+
+The quantitative jet statement needs its constants in the right order.
+After choosing one common smaller neighborhood and a fixed loss `d`, it has
+the form
+
+    for every order s, there are C_s > 0 and A_s >= 0,
+    for every state z in that neighborhood, every piece m,
+    and every point in the corresponding domain,
+      each specified actual geometric jet of order at most s
+        is bounded by C_s * E_m^A_s
+          * (1 + stateGrading (s+d) (z.1-referenceState) + |z.2|).
+
+The specified finite list comprises the chart and inverse-chart components,
+Jacobians and the reciprocals actually used, heights and reciprocal heights,
+and the source factor `h / |J|`. For angle coordinates use their periodic
+displacements or restrict values to one fundamental interval; an absolute
+bound on a lifted angle over all real angles would be false. Low-order
+comparability is uniform on the chosen neighborhood. Higher products must
+use this low-order control and the one-high-factor estimate, not multiply
+high-order bounds and silently replace a power of the state norm by a
+linear expression. No norm of the source field or graph element appears
+in this contract.
+
+These bounds are piecewise bounds. Arbitrarily high normal jets need not
+match across a positive transition. The global C2 conclusion above and
+piecewise higher angular jets are the relevant distinct requirements.
+
+### Consequences that remain theorems, not contract fields
+
+From the actual change of variables, the coefficient bounds, material weight
+comparison, and the a.e. disjoint physical partition, one must prove the
+canonical source lift and its tame norm bound. Summing the physical integrals
+over the partition avoids assuming a uniform number of pieces per material
+index. From the same primitive data, the current smooth physical solution
+has a C2 reference representative
+`aL chiLeft + q_z * ((eta-aL chiLeft) o tau_z)` with the correct endpoint
+decay. The finite-regularity Green formula gives its reference weak equation;
+the strict exponent gap gives the natural source and output classes; and
+reference uniqueness then gives the actual closed-graph inclusion. These
+last conclusions are precisely what must be derived, not stored as fields
+of an upstream geometric certificate.
+
+## Effect on the blueprint assembly
+
+There are two distinct ways forward. With all current definitions frozen,
+one must either derive the primitive facts for the already chosen witnesses
+from their existing properties, or prove an independent controlled
+construction and carry its witnesses through N05, N06, and N07a. The existing
+existential N04 results alone implement neither route.
+
+If the upstream contract is repaired to retain these primitive facts, the
+repair must be explicit. `N04PartA` and `N04Properties` must share the current
+domain predicate; the N04b producer must establish actual interface matching;
+and the coordinate realization must retain actual material and jet bounds.
+`N04_of_nodes` must pass this strengthened data, and N05/N06/N07a must retain
+it when they shrink the common neighborhood or rechoose witnesses. A
+witness-preserving internal realization lemma is preferable to an unrelated
+existential choice at each stage. The calls in `flatAnnularCore_nonempty`
+must then be checked against these outputs. Existing projection/forgetful
+lemmas should expose the old properties needed elsewhere.
+
+The displayed theorem type `N07b (hN07a : N07aStatement) : N07Statement` can
+remain syntactically the same under such a cumulative repair, but changing
+the definition of its input changes its mathematical assumptions. That must
+be documented as a statement repair and checked together with the assembly;
+it must not be reported as a proof from the old frozen hypotheses. In
+particular, merely appending the desired source norm bound or fixed-graph
+membership to `N07aStatement` would move the task into its premise and is
+not the proposed repair.

@@ -105,10 +105,18 @@ theorem n07b_material_cell_logH_upper_bound {D : ReferenceData} {T : MaterialDat
     have hupper :
         Real.log (T.H r) + radialS (D.cellIndex m) ≤
           K0 * (1 + (D.cellIndex m : ℝ) ^ 2) := by
-      rw [hheight]
-      dsimp only [K0]
-      unfold radialS
-      linarith only [(abs_le.mp hcubic).2]
+      have hcubic' :
+          Real.log (materialH (endpointX d0 (endpointDistance D r))) -
+              (-2 * (D.cellIndex m : ℝ) ^ 3 / 3) ≤
+            K0 * (1 + (D.cellIndex m : ℝ) ^ 2) :=
+        (abs_le.mp hcubic).2
+      calc
+        _ = Real.log (materialH (endpointX d0 (endpointDistance D r))) -
+            (-2 * (D.cellIndex m : ℝ) ^ 3 / 3) := by
+          rw [hheight]
+          unfold radialS
+          ring
+        _ ≤ _ := hcubic'
     exact hupper.trans (mul_le_mul_of_nonneg_right (le_max_left _ _)
       (by positivity))
   · have hd : δ ≤ endpointDistance D r := le_of_not_gt hnear

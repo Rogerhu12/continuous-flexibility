@@ -64,7 +64,8 @@ theorem n07bMaterialChart_injOn {D : ReferenceData} {T : MaterialData}
   intro p hp q hq hpq
   apply Prod.ext
   · exact hT.2.2.2.1.injOn hp.1 hq.1 (congrArg Prod.fst hpq)
-  · exact congrArg Prod.snd hpq
+  · change (n07bMaterialChart T p).2 = (n07bMaterialChart T q).2
+    exact congrArg Prod.snd hpq
 
 theorem n07bMaterialChart_image {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (s : Set ℝ) :
@@ -102,6 +103,8 @@ theorem n07b_integrableOn_materialChart_iff {D : ReferenceData} {T : MaterialDat
   apply hc.trans
   apply integrableOn_congr_fun _ hU
   intro p hp
+  change |(fderiv ℝ (n07bMaterialChart T) p).det| • g (n07bMaterialChart T p) =
+    g (n07bMaterialChart T p) / T.ell p.1
   rw [n07bMaterialChart_abs_det hT hp.1, smul_eq_mul]
   ring
 
@@ -127,6 +130,8 @@ theorem n07b_integral_materialChart {D : ReferenceData} {T : MaterialData}
   rw [hc]
   apply setIntegral_congr_fun hU
   intro p hp
+  change |(fderiv ℝ (n07bMaterialChart T) p).det| • g (n07bMaterialChart T p) =
+    g (n07bMaterialChart T p) / T.ell p.1
   rw [n07bMaterialChart_abs_det hT hp.1, smul_eq_mul]
   ring
 
