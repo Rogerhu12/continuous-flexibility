@@ -51,7 +51,8 @@ theorem positiveBuffer_corrected_scalar_norm_bound {A m P F B₀ σ : ℝ}
       add_le_add_left (mul_le_mul_of_nonneg_right hmass (by positivity)) _
     _ = 1 / m + (2 * P * F) * (B₀ * m * exp (-σ)) := by ring
     _ ≤ 1 / m + (2 * P * F) * (1 / m) :=
-      add_le_add_left (mul_le_mul_of_nonneg_left hsmall' (by positivity)) _
+      add_le_add le_rfl
+        (mul_le_mul_of_nonneg_left hsmall' (show 0 ≤ 2 * P * F from mul_nonneg hQ hF))
     _ = (1 + 2 * P * F) / m := by ring
     _ ≤ (2 * P * (1 + F)) / m := by
       apply (div_le_div_iff_of_pos_right hm).mpr
@@ -92,6 +93,7 @@ variable {P F : ℝ} (hP : 1 ≤ P) (hF : 0 ≤ F)
 variable (hAupper : ∀ i, D.profiles.A i ≤ 2 * P * B.mass i)
 variable (hsource : ∀ j, ‖D.source j‖ ≤ F * sqrt (B.mass j) * exp (-B.action j))
 
+include hHnorm hP hF hAupper hsource in
 theorem corrected_norm_bound
     (hsmall : ∀ i, B.B₀ * B.mass i ^ 2 * exp (-B.action i) ≤ 1) (j : Fin 2) :
     ‖positiveBufferBorderedState B.potential B.bordered (D.correctedColumn hB H hH j)‖ ≤
@@ -119,6 +121,7 @@ theorem corrected_norm_bound
     _ ≤ _ := positiveBuffer_corrected_scalar_norm_bound (D.profiles.A_pos hB j)
       (buffer_mass_pos hB j) hP hF hB₀ (hAupper j) (hsmall j)
 
+include hHnorm hP hF hAupper hsource in
 theorem corrected_trace_error (i j : Fin 2) :
     |sqrt (D.profiles.A i) * D.correctedRepresentative hB H hH j (bufferCut B i) -
         (if i = j then 1 else 0)| ≤
@@ -145,6 +148,7 @@ theorem corrected_trace_error (i j : Fin 2) :
 
 /-- All corrected data are supplied by the actual Green columns and the
 given full inverse. -/
+include hB H hH hHnorm hP hF hAupper hsource in
 theorem correctedData_nonempty
     (hsmall : ∀ i, B.B₀ * B.mass i ^ 2 * exp (-B.action i) ≤ 1) :
     Nonempty (PositiveBufferCorrectedData B D.profiles.A D.profiles.alphaOut
@@ -161,6 +165,7 @@ theorem correctedData_nonempty
       norm_bound := D.corrected_norm_bound hB H hH hHnorm hP hF hAupper hsource hsmall
       trace_error := D.corrected_trace_error hB H hH hHnorm hP hF hAupper hsource }⟩
 
+include hB H hH hHnorm in
 theorem correctedData_nonempty_of_layerBound
     (hCcut : 0 ≤ Ccut) {C₀ : ℝ} (hC₀ : 0 < C₀) (hLayer : B.layerBound ≤ C₀)
     (hsmall : ∀ i, B.B₀ * B.mass i ^ 2 * exp (-B.action i) ≤ 1) :
