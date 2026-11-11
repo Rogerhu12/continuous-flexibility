@@ -43,12 +43,8 @@ theorem matchedOuterRobin_scale {lam A B x z : ℝ} (hlam : 0 < lam) :
     A * sqrt lam * x + B * (z / sqrt lam) =
       sqrt lam * (A * x + B * (z / lam)) := by
   let s : ℝ := sqrt lam
-  have hs : s ≠ 0 := (sqrt_pos.mpr hlam).ne'
-  have hls : lam = s ^ 2 := (sq_sqrt hlam.le).symm
   have hratio : s / lam = s⁻¹ := by
-    rw [hls]
-    field_simp [hs]
-    ring
+    simpa only [s] using (Real.sqrt_div_self (x := lam))
   change A * s * x + B * (z / s) = s * (A * x + B * (z / lam))
   calc
     A * s * x + B * (z / s) = s * (A * x) + s⁻¹ * (B * z) := by ring

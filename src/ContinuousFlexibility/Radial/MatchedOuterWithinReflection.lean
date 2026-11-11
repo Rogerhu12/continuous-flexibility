@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.MatchedOuterSideGlue
 import ContinuousFlexibility.Radial.OuterOutwardHilbert
+import ContinuousFlexibility.Radial.OuterPhysicalTailOutward
 import Mathlib.Analysis.Calculus.Deriv.Shift
 
 /-!

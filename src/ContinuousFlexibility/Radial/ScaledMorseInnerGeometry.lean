@@ -173,32 +173,32 @@ def scaledMorseInnerChainGeometry : InnerRadialChainGeometry D (2 * (2 * K + 1))
 local notation "G" => scaledMorseInnerChainGeometry h κ hκ hN hc hcl hcr D hD hK hLcore hRcore
 
 theorem scaledMorseInnerChainGeometry_left (p : Fin (2 * K + 1)) :
-    G.left (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 0 :=
+    (G).left (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 0 :=
   innerModelChainCuts_model_left (scaledMorseInnerModelCuts T κ N K center)
     (scaledMorseInnerOuterPoint T κ N K false) (scaledMorseInnerOuterPoint T κ N K true) p
 
 theorem scaledMorseInnerChainGeometry_right (p : Fin (2 * K + 1)) :
-    G.right (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 1 :=
+    (G).right (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 1 :=
   innerModelChainCuts_model_right (scaledMorseInnerModelCuts T κ N K center)
     (scaledMorseInnerOuterPoint T κ N K false) (scaledMorseInnerOuterPoint T κ N K true) p
 
 theorem scaledMorseInnerChainGeometry_model (p : Fin (2 * K + 1)) :
-    G.left (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 0 ∧
-      G.right (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 1 :=
+    (G).left (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 0 ∧
+      (G).right (innerModelChainPiece p) = scaledMorseInnerModelCuts T κ N K center p 1 :=
   ⟨scaledMorseInnerChainGeometry_left h κ hκ hN hc hcl hcr D hD hK hLcore hRcore p,
     scaledMorseInnerChainGeometry_right h κ hκ hN hc hcl hcr D hD hK hLcore hRcore p⟩
 
 theorem scaledMorseInnerChainGeometry_center :
-    G.left (innerModelChainPiece (innerMorseInnerCenter K)) = center 0 ∧
-      G.right (innerModelChainPiece (innerMorseInnerCenter K)) = center 1 := by
+    (G).left (innerModelChainPiece (innerMorseInnerCenter K)) = center 0 ∧
+      (G).right (innerModelChainPiece (innerMorseInnerCenter K)) = center 1 := by
   rw [scaledMorseInnerChainGeometry_left, scaledMorseInnerChainGeometry_right,
     scaledMorseInnerModelCuts_center, scaledMorseInnerModelCuts_center]
   exact ⟨rfl, rfl⟩
 
 theorem scaledMorseInnerChainGeometry_tail (side : Bool) (p : Fin K) :
-    G.left (innerModelChainPiece (innerMorseInnerTailSlot K side p)) =
+    (G).left (innerModelChainPiece (innerMorseInnerTailSlot K side p)) =
         κ side * innerMorseChainCut T side (innerMorseInnerTailIndex N K side p) 0 ∧
-      G.right (innerModelChainPiece (innerMorseInnerTailSlot K side p)) =
+      (G).right (innerModelChainPiece (innerMorseInnerTailSlot K side p)) =
         κ side * innerMorseChainCut T side (innerMorseInnerTailIndex N K side p) 1 := by
   rw [scaledMorseInnerChainGeometry_left, scaledMorseInnerChainGeometry_right,
     scaledMorseInnerModelCuts_tail, scaledMorseInnerModelCuts_tail]

@@ -43,7 +43,6 @@ variable {α : Type*} [MeasurableSpace α] [Nonempty α]
   (BW BV R : ℝ) (hWBound : ∀ x, |W x| ≤ BW) (hVBound : ∀ x, |V x| ≤ BV)
   (hR : 1 ≤ R) (hinv : ∀ x, |(loss x)⁻¹| ≤ R)
 
-local notation "H" => ↥(innerSupportedAdmissibleSource μ s bordered)
 local notation "MW" => innerSupportedWeightMultiplier μ s hs bordered W hW BW hWBound
 local notation "MV" => innerSupportedWeightMultiplier μ s hs bordered V hV BV hVBound
 local notation "ML" => innerSupportedWeightMultiplier μ s hs bordered
@@ -69,7 +68,8 @@ theorem matchedInner_remove_loss_identity :
 
 /-- The same operator has its coarse bound after the reciprocal loss
 is restored; this is a composition estimate on the original space. -/
-theorem matchedInner_remove_loss_norm_le (T : H →L[ℝ] H) :
+theorem matchedInner_remove_loss_norm_le (T : ↥(innerSupportedAdmissibleSource μ s bordered) →L[ℝ]
+    ↥(innerSupportedAdmissibleSource μ s bordered)) :
     ‖MW ∘L T ∘L MV‖ ≤ R * ‖ML ∘L T ∘L MV‖ := by
   have hfactor : MW ∘L T ∘L MV = MI ∘L (ML ∘L T ∘L MV) := by
     calc

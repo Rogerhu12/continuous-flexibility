@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.RetainedMorseModelChart
 import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
+import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
 
 /-!
 # The original normalized Morse Poisson estimate on the retained profile
@@ -86,7 +87,8 @@ theorem retainedMorseModelChart_column_bound (hj : 1 ≤ j) (hC : 0 < Cmodel)
     (by intro x hx; simpa only [abs_one, mul_one] using hE)
     (by linarith only [hk]) hvelocity
     (by simpa only [innerMorseModelNormalizedRemainder] using hrem i)
-  simpa only [A, retainedMorseModelChart_kappa, retainedMorseModelChart,
+  rw [retainedMorseModelChart_kappa]
+  simpa only [A, retainedMorseModelChart,
     InnerRadialModelChart.column, one_pow, mul_one, one_mul,
     innerBorderFieldMap_weight_one, ContinuousLinearMap.id_apply,
     innerMorsePoissonConstant] using hnorm

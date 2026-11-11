@@ -39,7 +39,7 @@ theorem dirichlet_norm_le_hardy (hw : ContDiff ℝ ∞ D.w)
     (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp hsquare
   rw [hnorm]
   exact ((Q.fieldDirichlet hw).le_opNorm F.fst).trans
-    (mul_le_mul hfield (WithLp.norm_fst_le F) (norm_nonneg _) (by norm_num))
+    (mul_le_mul hfield (WithLp.norm_fst_le (RadialModeL2 D) F) (norm_nonneg _) (by norm_num))
 
 theorem poisson_norm_sq_hardy (hw : ContDiff ℝ ∞ D.w)
     (hjhalf : (1 / 2 : ℝ) ≤ j ^ 2) (z : EuclideanSpace ℝ (Fin 2)) :
@@ -53,8 +53,9 @@ theorem poisson_norm_sq_hardy (hw : ContDiff ℝ ∞ D.w)
     (fun r hr => (G.weight_pos piece r hr).le) hwp hjhalf
     Q.columns Q.columns_smooth Q.columns_boundary Q.columns_homogeneous z
   rw [Q.poisson_apply, innerBorderL2_norm_sq]
-  simpa only [fieldPoisson, fluxMatrix, innerGapFluxOperator,
-    norm_zero, zero_pow (by decide : (2 : ℕ) ≠ 0), add_zero] using h
+  simp only [fieldPoisson, fluxMatrix, innerGapFluxOperator,
+    norm_zero, zero_pow (by decide : (2 : ℕ) ≠ 0), add_zero]
+  convert h using 1 <;> rfl
 
 end InnerRadialGapChart
 

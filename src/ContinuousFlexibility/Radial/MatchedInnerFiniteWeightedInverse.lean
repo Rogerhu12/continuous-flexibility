@@ -37,7 +37,7 @@ local notation "loss" => innerMorseInnerLoss N K G 37
 local notation "hW" => fun sign =>
   (innerMorseInnerWeight_measurable N K a γ G l r).pow_const (σ sign)
 local notation "hloss" => innerMorseInnerLoss_measurable N K G 37
-local notation "hlossBound" => innerMorseInnerLoss_le_one N K G (by norm_num : (0 : ℝ) ≤ 37)
+local notation "hlossBound" => innerMorseInnerLoss_le_one N K G (Nat.cast_nonneg 37)
 
 variable (hCW : ∀ sign x, |W sign x| ≤ CW)
 

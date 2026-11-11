@@ -50,7 +50,7 @@ theorem matchedOuterSeparatedInverse_apply (D : ReferenceData) (cut : Bool â†’ â
         matchedOuterWholeExtend D true (cut true)
           (R true (matchedOuterWholeRestrict D true (cut true) F.1)), 0) := by
   simp only [matchedOuterSeparatedInverse, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.comp_apply, ContinuousLinearMap.fst_apply,
+    ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
     ContinuousLinearMap.add_apply, ContinuousLinearMap.zero_apply,
     matchedOuterSideInverse_apply]
 

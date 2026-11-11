@@ -50,7 +50,7 @@ theorem matchedColumn_support_ae (i : Fin 2) :
   let c : ℝ := sqrt M.height * M.scale (bufferCut M.buffer i)
   have he : (M.column i).fst = c • F := by
     simp only [InnerRadialModelChart.column, innerModelPhysicalPoissonColumn,
-      WithLp.toLp_fst, innerLiouvilleUnitPoissonPair_apply]
+      WithLp.toLp_fst, innerLiouvilleUnitPoissonPair_apply, c, F]
   have hs := innerLiouvilleFieldLift_support_ae D M.buffer_hypotheses.1.le M.height_pos
     M.radius_smooth M.scale_smooth M.chart_pos M.in_core M.weight_identity
     M.U M.U_nonneg M.log_deriv_bound (M.localized.column i).field

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.MatchedInnerActualWeights
+import ContinuousFlexibility.Radial.MatchedInnerUnitWeights
 import ContinuousFlexibility.Radial.InnerRadialDirichletWeights
 import ContinuousFlexibility.Radial.InnerRadialWeightedPoisson
 import ContinuousFlexibility.Radial.InnerRadialInterfaceWeights
@@ -29,29 +30,9 @@ variable {α : Type*} [MeasurableSpace α]
     (B : Bool → ℝ) (hB : ∀ sign x, |W sign x| ≤ B sign)
     (hInv : ∀ x, W false x = (W true x)⁻¹)
 
-local notation "H" => ↥(innerSupportedAdmissibleSource μ s bordered)
 local notation "E" => innerSupportedWeightEquiv μ s hs bordered
   (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-  (fun x => by rw [← hInv x]; exact hB false x)
-
-/-- The constant physical weight is exactly the identity on the original
-supported space, including its scalar coordinate. -/
-theorem innerSupportedWeightMultiplier_one :
-    innerSupportedWeightMultiplier μ s hs bordered (fun _ => (1 : ℝ))
-      measurable_const 1 (fun _ => by norm_num) = ContinuousLinearMap.id ℝ H := by
-  apply ContinuousLinearMap.ext
-  intro F
-  apply Subtype.ext
-  rw [ContinuousLinearMap.id_apply, innerSupportedWeightMultiplier_apply,
-    innerBorderFieldMap_apply]
-  have hfield : innerWeightMultiplier μ (fun _ => (1 : ℝ))
-      measurable_const 1 (fun _ => by norm_num) F.val.fst = F.val.fst := by
-    apply Lp.ext
-    filter_upwards [innerWeightMultiplier_ae μ (fun _ => (1 : ℝ))
-      measurable_const 1 (fun _ => by norm_num) F.val.fst] with x hx
-    simpa only [one_mul] using hx
-  rw [hfield]
-  exact WithLp.toLp_ofLp 2 F.val
+  (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
 
 /-- Its continuous equivalence is the same identity, so the first band
 uses the unweighted inverse without any new operator representation. -/
@@ -59,19 +40,19 @@ theorem innerSupportedWeightEquiv_one :
     innerSupportedWeightEquiv μ s hs bordered (fun _ => (1 : ℝ))
       measurable_const (fun _ => zero_lt_one) 1 1
       (fun _ => by norm_num) (fun _ => by norm_num) =
-        ContinuousLinearEquiv.refl ℝ H := by
+        ContinuousLinearEquiv.refl ℝ (↥(innerSupportedAdmissibleSource μ s bordered)) := by
   have hh := (innerSupportedWeightEquiv_toCLM μ s hs bordered (fun _ => (1 : ℝ))
     measurable_const (fun _ => zero_lt_one) 1 1
     (fun _ => by norm_num) (fun _ => by norm_num)).trans
       (innerSupportedWeightMultiplier_one μ s hs bordered)
   apply ContinuousLinearEquiv.ext
-  intro F
-  exact congrArg (fun T : H →L[ℝ] H => T F) hh
+  funext F
+  exact congrArg (fun T : (↥(innerSupportedAdmissibleSource μ s bordered)) →L[ℝ] (↥(innerSupportedAdmissibleSource μ s bordered)) => T F) hh
 
 /-- Both given physical weight functions are the two signs of the
 one original supported continuous equivalence. -/
 theorem innerSupportedWeightEquiv_pair_sign (sign : Bool) :
-    (innerHilbertWeight E sign : H →L[ℝ] H) =
+    (innerHilbertWeight E sign : (↥(innerSupportedAdmissibleSource μ s bordered)) →L[ℝ] (↥(innerSupportedAdmissibleSource μ s bordered))) =
       innerSupportedWeightMultiplier μ s hs bordered
         (W sign) (hW sign) (B sign) (hB sign) := by
   have hfun : (fun x => (W true x)⁻¹) = W false :=
@@ -80,10 +61,10 @@ theorem innerSupportedWeightEquiv_pair_sign (sign : Bool) :
   · simpa only [innerHilbertWeight, hfun] using
       innerSupportedWeightEquiv_symm_toCLM μ s hs bordered
         (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-        (fun x => by rw [← hInv x]; exact hB false x)
+        (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
   · exact innerSupportedWeightEquiv_toCLM μ s hs bordered
       (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-      (fun x => by rw [← hInv x]; exact hB false x)
+      (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
 
 end SupportedSigns
 
@@ -137,7 +118,7 @@ local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "E" => innerSupportedWeightEquiv (radialHilbertMeasure D)
   (innerRadialChainRegion D G) (innerRadialChainRegion_measurable D G) bordered
   (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-  (fun x => by rw [← hInv x]; exact hB false x)
+  (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
 local notation "sets" => (fun p : Fin (n + 1) => Ioo (G.left p) (G.right p))
 
 /-- Actual local data imply both weighted estimates for the original

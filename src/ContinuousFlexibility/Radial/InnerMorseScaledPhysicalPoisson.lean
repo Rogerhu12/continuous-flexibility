@@ -157,7 +157,8 @@ theorem innerMorseScaledPhysicalModelChart_poisson_bound
     innerMorseScaledPhysicalModelChart_kappa hreal hindex D G bordered j central piece
       column side m hm rs hs hrs hhs hprofile haway hleft hright hB M i
   rw [hkappa]
-  simpa only [InnerRadialModelChart.column, innerPhysicalCutKappa, innerMorsePoissonConstant]
+  simpa only [A, w, innerMorseScaledPhysicalModelChart, InnerRadialModelChart.column,
+    innerPhysicalCutKappa, innerMorsePoissonConstant, one_pow, mul_one]
     using hnorm
 
 end CommonChain
