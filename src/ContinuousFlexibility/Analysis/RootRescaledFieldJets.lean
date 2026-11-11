@@ -118,7 +118,8 @@ theorem rootRescaledField_jet_le
   have hlb : ‖l‖ ≤ 2 ∧ ‖l q‖ ≤ 2 := rootWeightedParameter_bounds false hl hq
   have hrb : ‖r‖ ≤ 2 ∧ ‖r q‖ ≤ 2 := rootWeightedParameter_bounds true hr hq
   have hAx : A q = (δ * q.1.1 * t ^ 2, q.2) := by
-    rw [A, rootArgumentLinear_apply]
+    change rootArgumentLinear (δ * t ^ 2) q = (δ * q.1.1 * t ^ 2, q.2)
+    rw [rootArgumentLinear_apply]
     congr 1
     ring
   have hdl := norm_iteratedFDeriv_linearWeightedComposition_le hd A l q

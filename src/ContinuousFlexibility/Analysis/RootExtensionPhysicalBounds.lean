@@ -81,8 +81,11 @@ theorem exists_csBound_extendedRootOddCoefficient (s : ℕ) :
       (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) :=
     fun q hq => extendedRootOddCoefficient_of_nonneg G hq.1.le
   rw [iteratedFDeriv_eqOn_of_isOpen (isOpen_Ioi.prod isOpen_univ)
-    he n (show p ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hp.1.1, mem_univ _⟩),
-    iteratedFDeriv_neg_apply, norm_neg]
+    he n (show p ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hp.1.1, mem_univ _⟩)]
+  have hneg : (fun q : PolarPoint => -rootOdd G q) = -rootOdd G := by
+    funext q
+    exact (Pi.neg_apply (rootOdd G) q).symm
+  rw [hneg, iteratedFDeriv_neg_apply, norm_neg]
   exact (hraw G hG M).2 hbound n hn p ⟨⟨hp.1.1.le, hp.1.2.le⟩, hp.2⟩
 
 /-- Comparing two genuine smooth extensions retains the input difference.
@@ -116,6 +119,8 @@ theorem exists_csBound_extendedRoot_differences (s : ℕ) :
         (rootEven (fun q => G q - G₀ q))
         (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) := by
       intro q hq
+      change extendedRootEven G q - extendedRootEven G₀ q =
+        rootEven (fun q => G q - G₀ q) q
       rw [extendedRootEven_of_nonneg G hq.1.le,
         extendedRootEven_of_nonneg G₀ hq.1.le]
       unfold rootEven
@@ -134,13 +139,19 @@ theorem exists_csBound_extendedRoot_differences (s : ℕ) :
         (fun q => -rootOdd (fun y => G y - G₀ y) q)
         (Ioi (0 : ℝ) ×ˢ (univ : Set ℝ)) := by
       intro q hq
+      change extendedRootOddCoefficient G q - extendedRootOddCoefficient G₀ q =
+        -rootOdd (fun y => G y - G₀ y) q
       rw [extendedRootOddCoefficient_of_nonneg G hq.1.le,
         extendedRootOddCoefficient_of_nonneg G₀ hq.1.le]
       simp only [rootOddCoefficient, rootOdd, if_neg hq.1.ne']
       ring
     rw [iteratedFDeriv_eqOn_of_isOpen (isOpen_Ioi.prod isOpen_univ)
-      he n (show p ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hp.1.1, mem_univ _⟩),
-      iteratedFDeriv_neg_apply, norm_neg]
+      he n (show p ∈ Ioi (0 : ℝ) ×ˢ (univ : Set ℝ) from ⟨hp.1.1, mem_univ _⟩)]
+    have hneg : (fun q : PolarPoint => -rootOdd (fun y => G y - G₀ y) q) =
+        -rootOdd (fun y => G y - G₀ y) := by
+      funext q
+      exact (Pi.neg_apply (rootOdd (fun y => G y - G₀ y)) q).symm
+    rw [hneg, iteratedFDeriv_neg_apply, norm_neg]
     exact (hraw _ (hG.sub hG₀) M).2 hbound n hn p
       ⟨⟨hp.1.1.le, hp.1.2.le⟩, hp.2⟩
 

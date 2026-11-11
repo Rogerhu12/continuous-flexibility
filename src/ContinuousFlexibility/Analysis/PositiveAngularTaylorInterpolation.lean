@@ -45,16 +45,16 @@ theorem positiveAngularTaylorInterpolation_radial_germ
   have hcd : δ ≤ |c - d| := by
     cases side with
     | false =>
-        dsimp only [c, d]
+        change δ ≤ |l - r|
         rw [abs_sub_comm, abs_of_nonneg hsep]
         linarith
     | true =>
-        dsimp only [c, d]
+        change δ ≤ |r - l|
         rw [abs_of_nonneg hsep]
         linarith
   have hother := positiveEndpointCutoff_zero_germ_of_separation hδ hcd
   filter_upwards [positiveEndpointCutoff_one_germ c δ, hother] with x hx hy
-  cases side <;> dsimp only [c, d] at hx hy ⊢
+  cases side <;> simp only [c, d, Bool.false_eq_true, ite_false, ite_true] at hx hy ⊢
   <;> simp only [positiveAngularTaylorInterpolation, positiveAngularTaylorPatch,
     hx, hy, Pi.one_apply, Pi.zero_apply, one_mul, zero_mul, add_zero]
   <;> ring

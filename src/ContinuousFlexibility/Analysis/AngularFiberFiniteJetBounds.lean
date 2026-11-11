@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.AngularFiberEndpointJets
 import ContinuousFlexibility.Analysis.AngularInverseFirstDerivative
+import ContinuousFlexibility.Analysis.CylinderMixedJetNorms
 import ContinuousFlexibility.Analysis.FiniteInverseJetBounds
 import ContinuousFlexibility.Analysis.ScalarFlowTriangularJets
 
@@ -83,7 +84,7 @@ theorem exists_angularFiberPullback_finiteJet_bound
   have hLbound : ‖L‖ ≤ R := by
     have hh := flowJet_augmented_jet_norm_le hA (n := 1) le_rfl p
     simp only [norm_iteratedFDeriv_one] at hh
-    exact (hh.trans (add_le_add_left hAfirst 1)).trans (le_max_left _ _)
+    exact (hh.trans (add_le_add (le_refl (1 : ℝ)) hAfirst)).trans (le_max_left _ _)
   have hgjets (k : ℕ) (hk : 1 ≤ k) (hkn : k ≤ n) :
       ‖iteratedFDeriv ℝ k g p‖ ≤ C (k - 1) := by
     have hraw (j : ℕ) (_ : 1 ≤ j) (hjk : j ≤ k - 1) :
@@ -91,10 +92,13 @@ theorem exists_angularFiberPullback_finiteJet_bound
       have hjn : j + 1 ≤ n := by omega
       have hjpos : 1 ≤ j + 1 := by omega
       exact ((flowJet_augmented_jet_norm_le hφ hjpos (g p)).trans
-        (add_le_add_left (hφraw (j + 1) hjpos hjn) 1)).trans (le_max_right _ _)
+        (add_le_add (le_refl (1 : ℝ)) (hφraw (j + 1) hjpos hjn))).trans
+          (le_max_right _ _)
     have hh := hCb (k - 1) f g p hf.contDiffAt hg.contDiffAt
       (Filter.Eventually.of_forall fun q => congrFun hfg q) L hL hLbound hraw
-    simpa only [Nat.sub_add_cancel hk] using hh
+    have hk' : k - 1 + 1 = k := by omega
+    rw [hk'] at hh
+    exact hh
   have hs := norm_iteratedFDeriv_comp_le_partition_sum (x := p)
     hξ.contDiffAt hg.contDiffAt n
   have hsum :

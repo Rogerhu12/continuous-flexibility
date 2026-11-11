@@ -131,7 +131,8 @@ theorem n01_factoredCharacteristicSpeed_fixed_loss_bound
       |mixedDerivative a b u q| ≤ A (a + b) * (1 + p (a + b + inputLoss) x) := by
     have hh := hHbound a b z hz hsector hlowH q hq
     have hhigher : 1 + p (a + b + lossH) x ≤ 1 + p (a + b + inputLoss) x :=
-      add_le_add_left (hp (Nat.add_le_add_left (Nat.le_max_right loss lossH) (a + b)) x) 1
+      add_le_add (le_refl (1 : ℝ))
+        (hp (Nat.add_le_add_left (Nat.le_max_right loss lossH) (a + b)) x)
     exact hh.trans (mul_le_mul (hAHA a b) hhigher
       (add_nonneg zero_le_one (apply_nonneg _ _)) (zero_le_one.trans (hA (a + b))))
   have hvjet (q : PolarPoint) (hq : q ∈ U) (a b : ℕ) :
@@ -145,7 +146,8 @@ theorem n01_factoredCharacteristicSpeed_fixed_loss_bound
       (localizedOriginalCoefficient_eqOn D S C hlu hR z 0) a b hqphysical
     rw [he0] at hjet
     have hhigher : 1 + p (a + b + loss) x ≤ 1 + p (a + b + inputLoss) x :=
-      add_le_add_left (hp (Nat.add_le_add_left (Nat.le_max_left loss lossH) (a + b)) x) 1
+      add_le_add (le_refl (1 : ℝ))
+        (hp (Nat.add_le_add_left (Nat.le_max_left loss lossH) (a + b)) x)
     calc
       |mixedDerivative a b v q| =
           |mixedDerivative a b (polarLinearA (stateProfile D S C z.1)

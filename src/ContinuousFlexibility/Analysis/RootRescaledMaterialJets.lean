@@ -54,7 +54,7 @@ theorem rootRescaledField_rawMaterialJets
       (mul_le_mul (hAH n k hk)
         (Real.rpow_le_rpow_of_exponent_le hW (hAH n k hk))
         (Real.rpow_nonneg hW0 _) (zero_le_one.trans (hH n)))
-      (add_le_add_left ((hp (Nat.add_le_add_right hk inputLoss)) z) 1)
+      (add_le_add (le_refl (1 : ℝ)) ((hp (Nat.add_le_add_right hk inputLoss)) z))
       (hstate k)
       (mul_nonneg (zero_le_one.trans (hH n)) (Real.rpow_nonneg hW0 _))
   have ht2 : t ^ 2 ≤ 1 := by

@@ -94,9 +94,11 @@ theorem n01_rootCharacteristicField_fixed_loss_bound
     intro a b hab
     simpa only [Real.norm_eq_abs, hab] using hCbound z hz hsector hlowC a b q hq
   have hhighD : 1 + p (n + lossD) x ≤ 1 + p (n + max lossD lossC) x :=
-    add_le_add_left (hp (Nat.add_le_add_left (Nat.le_max_left lossD lossC) n) x) 1
+    add_le_add (le_refl (1 : ℝ))
+      (hp (Nat.add_le_add_left (Nat.le_max_left lossD lossC) n) x)
   have hhighC : 1 + p (n + lossC) x ≤ 1 + p (n + max lossD lossC) x :=
-    add_le_add_left (hp (Nat.add_le_add_left (Nat.le_max_right lossD lossC) n) x) 1
+    add_le_add (le_refl (1 : ℝ))
+      (hp (Nat.add_le_add_left (Nat.le_max_right lossD lossC) n) x)
   have hdnorm' := hdnorm.trans (mul_le_mul_of_nonneg_left
     (mul_le_mul_of_nonneg_left hhighD (hBD n).le) (pow_nonneg (by norm_num : (0 : ℝ) ≤ 2) n))
   have hcnorm' := hcnorm.trans (mul_le_mul_of_nonneg_left

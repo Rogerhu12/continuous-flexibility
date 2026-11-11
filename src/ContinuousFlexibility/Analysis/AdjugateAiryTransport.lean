@@ -30,6 +30,7 @@ theorem hasDerivAt_airyTravelPrimitive {ξ : ℝ} (hξ : 0 < ξ) :
     HasDerivAt airyTravelPrimitive (Real.sqrt ξ) ξ := by
   have hd := ((hasDerivAt_id ξ).rpow_const
     (p := (3 / 2 : ℝ)) (Or.inl hξ.ne')).const_mul (2 / 3 : ℝ)
+  simp only [id_eq] at hd
   apply hd.congr_deriv
   rw [show (3 / 2 : ℝ) - 1 = 1 / 2 by norm_num, ← Real.sqrt_eq_rpow]
   ring
@@ -88,6 +89,7 @@ theorem sqrt_discriminant_adjugateAiry
         adjugateCoordinatePrincipalCoefficients_determinant
           canonicalAiryPrincipalCoefficients F h p hJ hh
   have hdisc : B.b p ^ 2 - B.a p * B.c p = (F p).1 / h p ^ 4 := by
+    rw [neg_div] at hd
     linarith only [hd]
   have hdisc0 : 0 ≤ B.b p ^ 2 - B.a p * B.c p := by
     rw [hdisc]
@@ -99,12 +101,12 @@ theorem sqrt_discriminant_adjugateAiry
   rw [show (h p ^ 2) ^ 2 = h p ^ 4 by ring]
 
 private theorem airy_transport_scalar
-    {A B R k ar at br bt s : ℝ} (hA : A ≠ 0)
-    (ha : A = k * (bt ^ 2 - s ^ 2 * at ^ 2))
-    (hb : B = k * (-br * bt + s ^ 2 * ar * at))
-    (hR : R = k * s * (ar * bt - br * at)) :
-    br + s * ar + (B / A - R / A) * (bt + s * at) = 0 ∧
-      br - s * ar + (B / A + R / A) * (bt - s * at) = 0 := by
+    {A B R k ar aθ br bt s : ℝ} (hA : A ≠ 0)
+    (ha : A = k * (bt ^ 2 - s ^ 2 * aθ ^ 2))
+    (hb : B = k * (-br * bt + s ^ 2 * ar * aθ))
+    (hR : R = k * s * (ar * bt - br * aθ)) :
+    br + s * ar + (B / A - R / A) * (bt + s * aθ) = 0 ∧
+      br - s * ar + (B / A + R / A) * (bt - s * aθ) = 0 := by
   constructor <;> field_simp [hA] <;> rw [ha, hb, hR] <;> ring
 
 /-- A forward Airy chart with positive Jacobian supplies the actual

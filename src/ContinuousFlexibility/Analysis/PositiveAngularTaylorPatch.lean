@@ -39,8 +39,14 @@ theorem hasDerivAt_positiveAngularTaylorPatch_angle
       (1 + positiveEndpointCutoff c δ r *
         (boundaryTaylorPolynomial n c (fun j => deriv (A j)) (r, θ) - 1)) θ := by
   have hid : HasDerivAt (fun η : ℝ => η) 1 θ := hasDerivAt_id θ
+  change HasDerivAt
+    (fun η : ℝ => η + positiveEndpointCutoff c δ r *
+      (boundaryTaylorPolynomial n c A (r, η) - η))
+    (1 + positiveEndpointCutoff c δ r *
+      (boundaryTaylorPolynomial n c (fun j => deriv (A j)) (r, θ) - 1)) θ
   exact hid.fun_add
-    (((hasDerivAt_boundaryTaylorPolynomial_angle hA c r θ).fun_sub hid).const_mul _)
+    (((hasDerivAt_boundaryTaylorPolynomial_angle hA c r θ).fun_sub hid).const_mul
+      (positiveEndpointCutoff c δ r))
 
 /-- The data bound concerns actual angular derivatives of positive
 radial coefficients. The leading angle may have large displacement. -/

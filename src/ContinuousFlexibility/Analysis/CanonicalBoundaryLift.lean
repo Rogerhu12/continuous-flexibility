@@ -53,7 +53,7 @@ theorem periodic_lift_at_closure
   have hadd : ContinuousAt (fun q : PolarPoint => q + v) p :=
     continuousAt_id.add continuousAt_const
   have hl : ContinuousAt (fun q : PolarPoint => F (q + v)) p :=
-    hFv.comp hadd
+    ContinuousAt.comp (f := fun q : PolarPoint => q + v) (x := p) hFv hadd
   have hr : ContinuousAt (fun q : PolarPoint => F q + v) p :=
     hF.add continuousAt_const
   have he : (fun q : PolarPoint => F (q + v)) =ᶠ[𝓝[U] p]
