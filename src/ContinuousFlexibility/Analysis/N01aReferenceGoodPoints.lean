@@ -102,7 +102,7 @@ theorem n01a_weighted_density_good_points {D : ReferenceData} {C : ℕ → ℝ}
   have hmem := n01a_right_band_mem_core hp hgeo hr
   refine ⟨r, hmem.1, hmem.2, hr.2, ?_⟩
   have hminIntegral : (u - l) * e r ≤ ∫ x in l..u, e x := by
-    have hi := intervalIntegral.integral_mono_on hlu.le
+    have hi := intervalIntegral.integral_mono_on (μ := volume) hlu.le
       ((continuous_const : Continuous (fun _ : ℝ => e r)).intervalIntegrable l u)
       (he.intervalIntegrable l u)
       (isMinOn_iff.mp hmin)

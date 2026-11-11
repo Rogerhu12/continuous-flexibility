@@ -46,7 +46,6 @@ theorem n01a_memLp_comp_affineRadius_of_density {D : ReferenceData} {sample : â„
   apply hchange.mpr
   apply hdensity.integrable_sq.congr
   filter_upwards [ae_restrict_mem (Î¼ := volume) measurableSet_Ioo] with r hr
-  dsimp only
   rw [affineMaterialData_radius_rho (sample := sample) hab hr, smul_eq_mul,
     mul_pow, Real.sq_sqrt (inv_nonneg.mpr
       (affineMaterialData_positive (sample := sample) hab hr).1.le), one_div]
