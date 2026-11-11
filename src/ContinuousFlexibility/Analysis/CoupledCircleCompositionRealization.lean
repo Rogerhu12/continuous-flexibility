@@ -104,7 +104,8 @@ theorem coupledCircleKernelMajorant_le_coarse {base high N n : ℕ}
           (Finset.prod_le_prod₀ (fun _ _ => apply_nonneg _ _)
             (fun j _ => gradedSeminorm_monotone _ _ hb (v j)))
           (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)) (apply_nonneg _ _)
-      _ = P := Finset.mul_prod_erase Finset.univ _ (Finset.mem_univ i)
+      _ = P := Finset.mul_prod_erase Finset.univ
+        (fun j : Fin n => M.grading N (v j)) (Finset.mem_univ i)
   have hsum : (∑ i, M.grading high (v i) *
       ∏ j ∈ Finset.univ.erase i, M.grading base (v j)) ≤ (n : ℝ) * P := by
     calc
@@ -132,7 +133,14 @@ theorem coupled_circle_kernel_coarse :
   let loss : ℕ := hexists.choose_spec.choose
   have hb := hexists.choose_spec.choose_spec
   refine ⟨base, fun r k s R hR => ?_⟩
-  obtain ⟨C, hC, hc⟩ := hb r k s R hR
+  have hCexists := hb r k s R hR
+  let C : ℝ := hCexists.choose
+  have hC : 0 ≤ C := hCexists.choose_spec.1
+  have hc : ∀ ψ : M.Space, M.grading base ψ ≤ R →
+      ∀ (v : M.Space) (w : Fin k → M.Space),
+        M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ v w) ≤
+          C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons v w) :=
+    hCexists.choose_spec.2
   refine ⟨max base (r + s + loss), le_max_left _ _, C * (((k + 1 : ℕ) : ℝ) + 1),
     mul_nonneg hC (by positivity), fun ψ hψ v w => ?_⟩
   exact (hc ψ hψ v w).trans

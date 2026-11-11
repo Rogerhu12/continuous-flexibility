@@ -19,6 +19,72 @@ namespace ContinuousFlexibility.Statements
 open Set Function ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+section AbstractFeedback
+
+variable {X E H : Type*}
+  [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+  [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+  [TopologicalSpace H] [AddCommGroup H] [Module ℝ H]
+  [IsTopologicalAddGroup H] [ContinuousSMul ℝ H]
+  {F : ℕ → Type*} [∀ n, NormedAddCommGroup (F n)] [∀ n, NormedSpace ℝ (F n)]
+  [∀ n, CompleteSpace (F n)] {bond : ∀ n, F (n + 1) →L[ℝ] F n}
+
+private theorem coupled_feedback_response_comp
+    {p : ℕ → Seminorm ℝ X} {r : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ H}
+    {s : ℕ → Seminorm ℝ (ProjectiveLimit F bond)}
+    (hp : Monotone p) (htp : WithSeminorms p)
+    (hr : Monotone r) (htr : WithSeminorms r) (htq : WithSeminorms q)
+    {U : Set X} (hU : IsOpen U)
+    {response : X → E → H} {row : X → H → ProjectiveLimit F bond}
+    (hresponse : SmoothTameOn (pairGrading p r) q (U ×ˢ univ)
+      (fun z : X × E => response z.1 z.2))
+    (hrow : SmoothTameOn (pairGrading p q) s (U ×ˢ univ)
+      (fun z : X × H => row z.1 z.2)) :
+    SmoothTameOn (pairGrading p r) s (U ×ˢ univ)
+      (fun z : X × E => row z.1 (response z.1 z.2)) := by
+  have hpr := tamePairGrading_monotone hp hr
+  have htpr := withSeminorms_pairGrading htp htr
+  have htpq := withSeminorms_pairGrading htp htq
+  letI : LocallyConvexSpace ℝ (X × H) := htpq.toLocallyConvexSpace
+  have hfst : SmoothTameOn (pairGrading p r) p (U ×ˢ univ) (fun z : X × E => z.1) :=
+    smoothTameOn_continuousLinear_on (hU.prod isOpen_univ)
+      (ContinuousLinearMap.fst ℝ X E) (scalar_pair_fst_isTame p r)
+  have hin := smoothTameOn_prodMk_generic hpr htpr hfst hresponse
+  exact smoothTameOn_comp_generic hpr htpr htpq hin hrow
+    (fun z hz => ⟨hz.1, mem_univ _⟩)
+
+private theorem coupled_feedback_control_input
+    {Uc : Type*} [NormedAddCommGroup Uc] [NormedSpace ℝ Uc]
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ E}
+    (hp : Monotone p) (htp : WithSeminorms p)
+    (hq : Monotone q) (htq : WithSeminorms q)
+    {U : Set X} (hU : IsOpen U) (ρ : E →L[ℝ] Uc) :
+    SmoothTameOn (pairGrading p q) (pairGrading p (fun _ => normSeminorm ℝ Uc))
+      (U ×ˢ univ) (fun z : X × E => (z.1, ρ z.2)) := by
+  have hpq := tamePairGrading_monotone hp hq
+  have htpq := withSeminorms_pairGrading htp htq
+  let L : (X × E) →L[ℝ] Uc := ρ.comp (ContinuousLinearMap.snd ℝ X E)
+  have hbound := coupled_continuousLinear_to_norm_isTame hpq htpq L
+  have hρ : SmoothTameOn (pairGrading p q) (fun _ => normSeminorm ℝ Uc)
+      (U ×ˢ univ) (fun z : X × E => ρ z.2) :=
+    smoothTameOn_continuousLinear_on (hU.prod isOpen_univ) L hbound.choose_spec
+  have hfst : SmoothTameOn (pairGrading p q) p (U ×ˢ univ) (fun z : X × E => z.1) :=
+    smoothTameOn_continuousLinear_on (hU.prod isOpen_univ)
+      (ContinuousLinearMap.fst ℝ X E) (scalar_pair_fst_isTame p q)
+  exact smoothTameOn_prodMk_generic hpq htpq hfst hρ
+
+end AbstractFeedback
+
+private theorem coupled_feedback_mean_bound
+    {T : MaterialData} {γ : ℝ} {M : CircleModelData}
+    (hM : IsCircleModel T γ M) (n : ℕ) (u : M.Space) :
+    coupledConstantCircleGrading hM n (coupledConstantCircleProjection hM u) ≤
+      1 * M.grading n u :=
+  (coupled_circleAngularMeanProjection_grading_le hM n u).trans_eq (one_mul _).symm
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -37,54 +103,44 @@ theorem coupled_scaledHeightControlResponse_smoothTameOn
       (fun z : (StateDirections S × ℝ) × ControlBanach =>
         z.1.2 • B.heightRow (liftSectorParameter S C z.1)
           (controlHeightResponse S B G (liftSectorParameter S C z.1) z.2)) := by
-  let p := pairGrading (sectorGrading S) realGrading
-  have hp : Monotone p := tamePairGrading_monotone
-    (solve_sectorGrading_monotone S) weighted_realGrading_monotone
-  have htp : WithSeminorms p := withSeminorms_pairGrading
-    (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
-  have hpc := tamePairGrading_monotone hp coupled_controlGrading_monotone
-  have htpc := withSeminorms_pairGrading htp coupled_controlGrading_withSeminorms
-  have htph := withSeminorms_pairGrading htp (coupled_heightPairGrading_withSeminorms S)
   letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
     ((hS.2.1 (3 / 4 : ℝ)).2.1 n).isComplete.completeSpace_coe
-  have hresponse := coupled_controlHeightResponse_smoothTameOn hS h8.2.1
-    h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2 hG.2.2.2
-  have hfst : SmoothTameOn (pairGrading p controlGrading) p
-      (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × ControlBanach => z.1) :=
-    smoothTameOn_continuousLinear_on (h8.2.1.prod isOpen_univ)
-      (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) ControlBanach)
-      (scalar_pair_fst_isTame p controlGrading)
-  have hin := smoothTameOn_prodMk_generic hpc htpc hfst hresponse
-  exact smoothTameOn_comp_generic hpc htpc htph hin
-    (coupled_scaledHeightRow_smoothTameOn hRef h8) (fun z hz => ⟨hz.1, mem_univ _⟩)
+  exact coupled_feedback_response_comp
+    (F := fun n => ↥((S.circle (3 / 4 : ℝ)).level n))
+    (bond := (S.circle (3 / 4 : ℝ)).bond)
+    (p := pairGrading (sectorGrading S) realGrading)
+    (r := controlGrading) (q := heightPairGrading S) (s := (S.circle (3 / 4 : ℝ)).grading)
+    (response := fun z u => controlHeightResponse S B G (liftSectorParameter S C z) u)
+    (row := fun z η => z.2 • B.heightRow (liftSectorParameter S C z) η)
+    (tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone)
+    (withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S)
+      weighted_realGrading_withSeminorms)
+    coupled_controlGrading_monotone coupled_controlGrading_withSeminorms
+    (coupled_heightPairGrading_withSeminorms S) h8.2.1
+    (coupled_controlHeightResponse_smoothTameOn hS h8.2.1
+      h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2 hG.2.2.2)
+    (coupled_scaledHeightRow_smoothTameOn hRef h8)
 
 theorem coupledConstantHeightResponse_smoothTameOn
     (hS : IsPhysicalSpaces D T S)
     (hRef : referenceStateConditions D S C)
     (hG : ScalarInverseProperties D S C L G base ε)
     (h8 : N08Properties D T S C R G P B base loss ε) :
+    let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
     SmoothTameOn
       (pairGrading (pairGrading (sectorGrading S) realGrading) controlGrading)
-      (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ)))
+      (coupledConstantCircleGrading hM)
       (sectorNeighborhood S base ε ε ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ControlBanach =>
-        coupledConstantHeightResponse (hS.2.1 (3 / 4 : ℝ)) B G
+        coupledConstantHeightResponse hM B G
           (liftSectorParameter S C z.1) z.2) := by
+  let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
   have hr := coupled_scaledHeightControlResponse_smoothTameOn hS hRef hG h8
-  have hproj : ∀ n u, coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ)) n
-      (coupledConstantCircleProjection (hS.2.1 (3 / 4 : ℝ)) u) ≤
-        1 * (S.circle (3 / 4 : ℝ)).grading n u := by
-    intro n u
-    change (S.circle (3 / 4 : ℝ)).grading n
-      (coupledConstantCircleProjection (hS.2.1 (3 / 4 : ℝ)) u).val ≤ _
-    rw [coupledConstantCircleProjection_val, one_mul]
-    exact circleAngularMeanLinear_grading_le (hS.2.1 (3 / 4 : ℝ)) n u
   apply smoothTameOn_congr
-    (solve_smoothTameOn_postcomp hr
-      (coupledConstantCircleProjection (hS.2.1 (3 / 4 : ℝ))) zero_le_one hproj)
-  intro z hz
-  exact (coupledConstantHeightResponse_apply (hS.2.1 (3 / 4 : ℝ)) B G
+    (solve_smoothTameOn_postcomp hr (coupledConstantCircleProjection hM) zero_le_one
+      (coupled_feedback_mean_bound hM))
+  intro z _
+  exact (coupledConstantHeightResponse_apply hM B G
     (liftSectorParameter S C z.1) z.2).symm
 
 theorem coupledConstantFeedbackOperator_smoothTameOn
@@ -92,41 +148,27 @@ theorem coupledConstantFeedbackOperator_smoothTameOn
     (hRef : referenceStateConditions D S C)
     (hG : ScalarInverseProperties D S C L G base ε)
     (h8 : N08Properties D T S C R G P B base loss ε) :
+    let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
     SmoothTameOn
       (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))))
-      (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ)))
+        (coupledConstantCircleGrading hM))
+      (coupledConstantCircleGrading hM)
       (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle (hS.2.1 (3 / 4 : ℝ)) =>
-        coupledConstantFeedbackOperator (hS.2.1 (3 / 4 : ℝ)) B G
+      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle hM =>
+        coupledConstantFeedbackOperator hM B G
           (liftSectorParameter S C z.1) z.2) := by
-  let hM := hS.2.1 (3 / 4 : ℝ)
-  let p := pairGrading (sectorGrading S) realGrading
-  let k := coupledConstantCircleGrading hM
+  let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
+  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) := pairGrading (sectorGrading S) realGrading
+  let k : ℕ → Seminorm ℝ (CoupledConstantCircle hM) := coupledConstantCircleGrading hM
   have hp : Monotone p := tamePairGrading_monotone
     (solve_sectorGrading_monotone S) weighted_realGrading_monotone
   have htp : WithSeminorms p := withSeminorms_pairGrading
     (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
   have hpk := tamePairGrading_monotone hp (coupledConstantCircleGrading_monotone hM)
   have htpk := withSeminorms_pairGrading htp (coupledConstantCircleGrading_withSeminorms hM)
-  let ρ : ((StateDirections S × ℝ) × CoupledConstantCircle hM) →L[ℝ] ControlBanach :=
-    (coupledConstantControlRestriction hM B).comp
-      (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) (CoupledConstantCircle hM))
-  obtain ⟨b, hρ⟩ := coupled_continuousLinear_to_norm_isTame hpk htpk ρ
-  have hρsmooth : SmoothTameOn (pairGrading p k) controlGrading
-      (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle hM =>
-        coupledConstantControlRestriction hM B z.2) := by
-    apply smoothTameOn_congr
-      (smoothTameOn_continuousLinear_on (h8.2.1.prod isOpen_univ) ρ hρ)
-    intro z hz
-    rw [ρ, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_snd']
-  have hfst : SmoothTameOn (pairGrading p k) p (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle hM => z.1) :=
-    smoothTameOn_continuousLinear_on (h8.2.1.prod isOpen_univ)
-      (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) (CoupledConstantCircle hM))
-      (scalar_pair_fst_isTame p k)
-  have hin := smoothTameOn_prodMk_generic hpk htpk hfst hρsmooth
+  have hin := coupled_feedback_control_input hp htp
+    (coupledConstantCircleGrading_monotone hM) (coupledConstantCircleGrading_withSeminorms hM)
+    h8.2.1 (coupledConstantControlRestriction hM B)
   have hr := coupled_smoothTameOn_comp_constantCircle hM hpk htpk
     (withSeminorms_pairGrading htp coupled_controlGrading_withSeminorms) hin
     (coupledConstantHeightResponse_smoothTameOn hS hRef hG h8)

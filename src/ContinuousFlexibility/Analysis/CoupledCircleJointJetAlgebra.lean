@@ -19,7 +19,7 @@ variable {X Y : Type*}
   [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
   [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
 
-private theorem coupled_cons_update {n : ℕ} (x : X) (v : Fin n → X)
+private theorem coupled_cons_update {n : ℕ} [DecidableEq (Fin n)] (x : X) (v : Fin n → X)
     (i : Fin n) (a : X) :
     (Fin.cons x (Function.update v i a) : Fin (n + 1) → X) =
       Function.update (Fin.cons x v : Fin (n + 1) → X) i.succ a := by
@@ -33,10 +33,12 @@ def coupledKernelFixFirst {n : ℕ} (A : X [×(n + 1)]→L[ℝ] Y) (x : X) :
   toMultilinearMap :=
     { toFun := fun v => A (Fin.cons x v)
       map_update_add' := by
-        intro _ v i a b
+        intro inst v i a b
+        letI : DecidableEq (Fin n) := inst
         simpa only [← coupled_cons_update] using A.map_update_add (Fin.cons x v) i.succ a b
       map_update_smul' := by
-        intro _ v i c a
+        intro inst v i c a
+        letI : DecidableEq (Fin n) := inst
         simpa only [← coupled_cons_update] using A.map_update_smul (Fin.cons x v) i.succ c a }
   cont := A.cont.comp (continuous_pi (fun i =>
     Fin.cases continuous_const (fun j => continuous_apply j) i))

@@ -20,6 +20,52 @@ open Set ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
+section GenericProjections
+
+variable {X E F : Type*}
+  [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+  {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ E} {r : ℕ → Seminorm ℝ F}
+  {U : Set X}
+
+private theorem coupled_recovery_fst_smoothTameOn {f : X → E × F}
+    (hf : SmoothTameOn p (pairGrading q r) U f) :
+    SmoothTameOn p q U (fun x => (f x).1) := by
+  exact solve_smoothTameOn_postcomp hf (ContinuousLinearMap.fst ℝ E F)
+    (B := 1) zero_le_one (fun n y => by
+      change q n y.1 ≤ 1 * (q n y.1 + r n y.2)
+      simpa only [one_mul] using le_add_of_nonneg_right (apply_nonneg (r n) y.2))
+
+private theorem coupled_recovery_snd_smoothTameOn {f : X → E × F}
+    (hf : SmoothTameOn p (pairGrading q r) U f) :
+    SmoothTameOn p r U (fun x => (f x).2) := by
+  exact solve_smoothTameOn_postcomp hf (ContinuousLinearMap.snd ℝ E F)
+    (B := 1) zero_le_one (fun n y => by
+      change r n y.2 ≤ 1 * (q n y.1 + r n y.2)
+      simpa only [one_mul] using le_add_of_nonneg_left (apply_nonneg (q n) y.1))
+
+private theorem coupled_recovery_subtype_smoothTameOn
+    (W : Submodule ℝ E) {f : X → W}
+    (hf : SmoothTameOn p (fun n => (q n).comp W.subtype) U f) :
+    SmoothTameOn p q U (fun x => (f x).val) := by
+  exact solve_smoothTameOn_postcomp hf W.subtypeL (B := 1) zero_le_one (fun n y => by
+    change q n y.val ≤ 1 * q n y.val
+    exact le_of_eq (one_mul _).symm)
+
+private theorem coupled_recovery_constant_projection_smoothTameOn
+    {T : MaterialData} {γ : ℝ} {M : CircleModelData} (hM : IsCircleModel T γ M)
+    {f : X → M.Space} (hf : SmoothTameOn p M.grading U f) :
+    SmoothTameOn p (coupledConstantCircleGrading hM) U
+      (fun x => coupledConstantCircleProjection hM (f x)) := by
+  exact solve_smoothTameOn_postcomp hf (coupledConstantCircleProjection hM)
+    (B := 1) zero_le_one (fun n u => by
+      change M.grading n (coupledConstantCircleProjection hM u).val ≤ 1 * M.grading n u
+      exact (coupled_circleAngularMeanProjection_grading_le hM n u).trans_eq
+        (one_mul _).symm)
+
+end GenericProjections
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {G : ScalarInverseData S} {P : ResidualData S} {B : ControlColumnData S}
@@ -33,9 +79,8 @@ private theorem coupled_recoveredState_smoothTameOn
       (stateGrading S) (sectorNeighborhood S base ε q0 ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         V.V (liftSectorParameter S C z.1) z.2) := by
-  have h := solve_smoothTameOn_postcomp h9.2.2.2.2.2.2
-    (stateSectorSubmodule S).subtypeL (r := stateGrading S) (B := 1) zero_le_one
-    (fun n v => by change stateGrading S n v.val ≤ 1 * stateGrading S n v.val; rw [one_mul])
+  have h := coupled_recovery_subtype_smoothTameOn
+    (q := stateGrading S) (stateSectorSubmodule S) h9.2.2.2.2.2.2
   exact smoothTameOn_congr h (fun z hz => h9.2.2.2.2.2.1 z.1 hz.1 z.2)
 
 theorem coupled_recoveredHeight_smoothTameOn
@@ -45,14 +90,7 @@ theorem coupled_recoveredHeight_smoothTameOn
       (heightPairGrading S) (sectorNeighborhood S base ε q0 ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         (V.V (liftSectorParameter S C z.1) z.2).1) := by
-  exact solve_smoothTameOn_postcomp (coupled_recoveredState_smoothTameOn h9)
-    (ContinuousLinearMap.fst ℝ (HeightPair S) (ℝ × (CircleSpace S × CircleSpace S)))
-    (r := heightPairGrading S) (B := 1) zero_le_one (fun n x => by
-      change heightPairGrading S n x.1 ≤ 1 * (heightPairGrading S n x.1 +
-        pairGrading realGrading
-          (pairGrading (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading) n x.2)
-      rw [one_mul]
-      exact le_add_of_nonneg_right (apply_nonneg _ _))
+  exact coupled_recovery_fst_smoothTameOn (coupled_recoveredState_smoothTameOn h9)
 
 theorem coupled_recoveredKappa_smoothTameOn
     (h9 : N09Properties D T S C R G B N V base ε q0) :
@@ -61,26 +99,9 @@ theorem coupled_recoveredKappa_smoothTameOn
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε q0 ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         (V.V (liftSectorParameter S C z.1) z.2).2.2.1) := by
-  let K : AnnularState S →L[ℝ] CircleSpace S :=
-    (ContinuousLinearMap.fst ℝ (CircleSpace S) (CircleSpace S)).comp
-      ((ContinuousLinearMap.snd ℝ ℝ (CircleSpace S × CircleSpace S)).comp
-        (ContinuousLinearMap.snd ℝ (HeightPair S) (ℝ × (CircleSpace S × CircleSpace S))))
-  have hK (x : AnnularState S) : K x = x.2.2.1 := by
-    simp only [K, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
-      ContinuousLinearMap.coe_snd']
-  have hb : ∀ n x, (S.circle (3 / 4 : ℝ)).grading n (K x) ≤ 1 * stateGrading S n x := by
-    intro n x
-    rw [hK, one_mul]
-    change (S.circle (3 / 4 : ℝ)).grading n x.2.2.1 ≤ heightPairGrading S n x.1 +
-      (realGrading n x.2.1 + ((S.circle (3 / 4 : ℝ)).grading n x.2.2.1 +
-        (S.circle (3 / 4 : ℝ)).grading n x.2.2.2))
-    exact (le_add_of_nonneg_right
-      (apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) x.2.2.2)).trans
-      ((le_add_of_nonneg_left (apply_nonneg (realGrading n) x.2.1)).trans
-        (le_add_of_nonneg_left (apply_nonneg (heightPairGrading S n) x.1)))
-  exact smoothTameOn_congr
-    (solve_smoothTameOn_postcomp (coupled_recoveredState_smoothTameOn h9) K zero_le_one hb)
-    (fun z _ => hK _)
+  exact coupled_recovery_fst_smoothTameOn
+    (coupled_recovery_snd_smoothTameOn
+      (coupled_recovery_snd_smoothTameOn (coupled_recoveredState_smoothTameOn h9)))
 
 def coupledRecoveredConstantComponent
     (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -95,9 +116,8 @@ theorem coupledRecoveredConstantComponent_val
     (y : ResidualSpace S) :
     (coupledRecoveredConstantComponent hM C V z y).val =
       (V.V (liftSectorParameter S C z) y).2.2.1 := by
-  have hsector : stateSector S (V.V (liftSectorParameter S C z) y) := by
-    rw [← h9.2.2.2.2.2.1 z hz y]
-    exact (V.sectorV z y).property
+  have hsector : stateSector S (V.V (liftSectorParameter S C z) y) :=
+    (congrArg (stateSector S) (h9.2.2.2.2.2.1 z hz y)).mp (V.sectorV z y).property
   exact circleAngularMeanProjection_eq_self hM _ hsector.1
 
 theorem coupled_recoveredConstantControl_smoothTameOn
@@ -108,12 +128,8 @@ theorem coupled_recoveredConstantControl_smoothTameOn
       (coupledConstantCircleGrading hM) (sectorNeighborhood S base ε q0 ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         coupledRecoveredConstantComponent hM C V z.1 z.2) := by
-  exact solve_smoothTameOn_postcomp (coupled_recoveredKappa_smoothTameOn h9)
-    (coupledConstantCircleProjection hM) (r := coupledConstantCircleGrading hM)
-    (B := 1) zero_le_one (fun n u => by
-      change (S.circle (3 / 4 : ℝ)).grading n (coupledConstantCircleProjection hM u).val ≤ _
-      rw [coupledConstantCircleProjection_val, one_mul]
-      exact circleAngularMeanLinear_grading_le hM n u)
+  exact coupled_recovery_constant_projection_smoothTameOn hM
+    (coupled_recoveredKappa_smoothTameOn h9)
 
 /-- The actual circle solution before the final chart increment is smooth
 tame for any inverse satisfying N09. -/
@@ -170,14 +186,10 @@ theorem coupled_recoveredCircleSolution_smoothTameOn
     smoothTameOn_continuousLinear_on (hU.prod isOpen_univ)
       (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) (ResidualSpace S))
       (scalar_pair_snd_isTame p (residualGrading S))
-  let LC : ResidualSpace S →L[ℝ] CircleSpace S :=
-    (evenCircleSubmodule S).subtypeL.comp (ContinuousLinearMap.snd ℝ S.Source (EvenCircle S))
   have hyCircle : SmoothTameOn a c (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.2.2.val) := by
-    exact solve_smoothTameOn_postcomp hy LC (r := c) (B := 1) zero_le_one (fun n y => by
-      change c n y.2.val ≤ 1 * (S.sourceGrading n y.1 + c n y.2.val)
-      rw [one_mul]
-      exact le_add_of_nonneg_left (apply_nonneg (S.sourceGrading n) y.1))
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.2.2.val) :=
+    coupled_recovery_subtype_smoothTameOn (evenCircleSubmodule S)
+      (coupled_recovery_snd_smoothTameOn hy)
   have hrow := smoothTameOn_mono (coupled_scaledHeightRow_smoothTameOn hRef h8)
     (hU.prod isOpen_univ) (Set.prod_mono hsub (subset_refl _))
   have hrowη := smoothTameOn_comp_generic ha hta htph
@@ -198,7 +210,11 @@ theorem coupled_recoveredCircleSolution_smoothTameOn
     exact congrArg (B.circleColumn (liftSectorParameter S C z.1))
       (coupledRecoveredConstantComponent_val hM h9 hz.1 z.2)
   have hrem := coupled_smoothTameOn_sub ha (coupled_smoothTameOn_sub ha hyCircle hrowη) hcolumnActual
-  obtain ⟨li, bi, hi⟩ := h2.2.2.2.2.2.2.2.2.2.1
+  let hinverse := h2.2.2.2.2.2.2.2.2.2.1
+  let li : ℕ := hinverse.choose
+  let hbase := hinverse.choose_spec
+  let bi : ℕ := hbase.choose
+  have hi : IsTameLinear c c R.inverse li bi := hbase.choose_spec
   let Inv : CircleSpace S →L[ℝ] CircleSpace S :=
     hi.toContinuousLinearMap htc htc (gradedSeminorm_monotone _ _)
   have hInv := smoothTameOn_comp_generic ha hta htc hrem

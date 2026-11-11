@@ -16,6 +16,9 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable {T : MaterialData} {S : PhysicalSpacesData}
   (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
   (B : ControlColumnData S) (G : ScalarInverseData S)
@@ -25,8 +28,9 @@ theorem coupledConstantHeightResponse_grading_le (z : AnnularState S × ℝ)
     coupledConstantCircleGrading hS s (coupledConstantHeightResponse hS B G z u) ≤
       (S.circle (3 / 4 : ℝ)).grading s
         (z.2 • B.heightRow z (controlHeightResponse S B G z u)) := by
-  rw [coupledConstantHeightResponse_apply]
-  exact circleAngularMeanLinear_grading_le hS s _
+  exact (congrArg (coupledConstantCircleGrading hS s)
+    (coupledConstantHeightResponse_apply hS B G z u)).trans_le
+      (coupled_circleAngularMeanProjection_grading_le hS s _)
 
 section Parameters
 
@@ -49,7 +53,12 @@ theorem coupledConstantFeedbackInverse_linearFamilyTame :
     LinearFamilyTame p (coupledConstantCircleGrading hS)
       (coupledConstantCircleGrading hS) U
       (fun x => (coupledConstantFeedbackInverse hS B G (z x)).toLinearMap) := by
-  obtain ⟨b0, c0, hc0⟩ := controlRestriction_grading_bound B
+  let hbound := controlRestriction_grading_bound B
+  let b0 : ℕ := hbound.choose
+  let c0 : ℝ≥0 := hbound.choose_spec.choose
+  have hc0 : ∀ u : CircleSpace S,
+      ‖B.restriction u‖ ≤ (c0 : ℝ) * (S.circle (3 / 4 : ℝ)).grading b0 u :=
+    hbound.choose_spec.choose_spec
   apply coupled_inverseFamily_tame_of_regularizing_recovery
     (coupledConstantCircleGrading_monotone hS)
     (control := fun x u => coupledConstantFeedbackControl hS B G (z x) u)
@@ -63,15 +72,18 @@ theorem coupledConstantFeedbackInverse_linearFamilyTame :
         coupledConstantFeedbackControl_norm_le hS B G (z x)
           (hdiag x hx) (hJ x hx) (hlo x hx) (hsmall x hx) u
       _ ≤ 4 * ((c0 : ℝ) * (S.circle (3 / 4 : ℝ)).grading b0 u.val) := by
-        rw [coupledConstantControlRestriction_apply]
-        exact mul_le_mul_of_nonneg_left (hc0 u.val) (by norm_num)
-      _ = (4 * (c0 : ℝ)) * coupledConstantCircleGrading hS b0 u := by ring
+        exact mul_le_mul_of_nonneg_left
+          ((congrArg norm (coupledConstantControlRestriction_apply hS B u)).trans_le
+            (hc0 u.val)) (by norm_num)
+      _ = (4 * (c0 : ℝ)) * coupledConstantCircleGrading hS b0 u :=
+        (mul_assoc 4 (c0 : ℝ) ((S.circle (3 / 4 : ℝ)).grading b0 u.val)).symm
   · intro x _ u s
     exact coupledConstantFeedbackInverse_grading_le hS B G (z x) s u
   · intro s hs
-    obtain ⟨c, hc, h⟩ := hregular s hs
-    exact ⟨c, hc, fun x hx u =>
-      (coupledConstantHeightResponse_grading_le hS B G (z x) s u).trans (h x hx u)⟩
+    let hbound := hregular s hs
+    exact ⟨hbound.choose, hbound.choose_spec.1, fun x hx u =>
+      (coupledConstantHeightResponse_grading_le hS B G (z x) s u).trans
+        (hbound.choose_spec.2 x hx u)⟩
 
 variable [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
 

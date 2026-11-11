@@ -69,6 +69,7 @@ variable (K : ∀ n : ℕ, X → X [×(n + 1)]→L[ℝ] Y)
     (fun ψ => K n ψ (Fin.cons v w))
     (K (n + 1) x (Fin.cons v (Fin.cons u w))) x u)
 
+include hK hline in
 theorem coupledKernelBaseJoint_hasLineDerivAt (n : ℕ) (z h : X × X) (w : Fin n → X) :
     HasProjectiveLineDerivAt (fun y : X × X => K n y.1 (Fin.cons y.2 w))
       (K (n + 1) z.1 (Fin.cons z.2 (Fin.cons h.1 w)) +
@@ -88,6 +89,7 @@ theorem coupledKernelBaseJoint_hasLineDerivAt (n : ℕ) (z h : X × X) (w : Fin 
     coupled_lineDeriv_linear_family (fun ψ => (A ψ).toLinearMap) hc
       z.1 z.2 h.1 h.2 _ hd
 
+include hK in
 theorem coupledKernelJointJet_continuous (n : ℕ) :
     Continuous (fun z : (X × X) × (Fin n → X × X) =>
       coupledKernelJointJet K n z.1 z.2) := by
@@ -128,6 +130,7 @@ private theorem coupled_cons_omit {n : ℕ} (u : X × X)
   · simp only [Fin.succ_succAbove_zero, Fin.cons_zero]
   · simp only [Fin.succ_succAbove_succ, Fin.cons_succ]
 
+include hK hline in
 theorem coupledKernelJointJet_hasLineDerivAt (n : ℕ) (z h : X × X)
     (w : Fin n → X × X) :
     HasProjectiveLineDerivAt (fun y => coupledKernelJointJet K n y w)

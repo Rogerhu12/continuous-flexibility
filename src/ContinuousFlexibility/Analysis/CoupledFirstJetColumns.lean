@@ -140,7 +140,8 @@ theorem coupled_circle_firstJet_of_return_derivative
   filter_upwards [hnear] with t ht
   have he := hcircle _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
     (hRef.liftSectorParameter_sector _)
-  simpa only [coupled_liftSectorParameter_add, coupledScalarAction] using he
+  exact (congrArg (fun x : AnnularState S × ℝ => (P.circle x).val = R.residual x)
+    (coupled_liftSectorParameter_add (C := C) z v t)).mp he
 
 /-- The full genuine sector jet is also the actual ambient state-line
 derivative in its included direction. -/

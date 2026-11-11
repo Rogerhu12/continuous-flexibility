@@ -60,6 +60,7 @@ theorem coupledCircleKernel_level (r k : ℕ)
     (fun f : ℝ → ℝ => (T.M (T.sample m) ^ (j.val 1).val *
       T.H (T.sample m) ^ (-γ)) * iteratedDeriv (j.val 0).val f θ) he)
 
+include hD hT hγ hI in
 theorem coupledCircleKernelJetLp_affine_hasDerivAt (r k s : ℕ)
     (ψ u v : M.Space) (w : Fin k → M.Space) (t₀ : ℝ)
     (m : ℕ) (j : CircleJetIndex s) :
