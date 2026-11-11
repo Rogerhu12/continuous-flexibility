@@ -58,8 +58,7 @@ theorem tailNaturalEquation_system {T : DeepTailData}
   refine ⟨hdu.hasDerivAt.congr_deriv ?_, hdv.hasDerivAt.congr_deriv ?_⟩
   · dsimp only
     field_simp [(deepTail_pos hT x ⟨hx.1.le, hx.2⟩).ne']
-  · dsimp only
-    linarith only [hu.2.2.2 x hx]
+  · linarith only [hu.2.2.2 x hx]
 
 theorem tailNaturalEquation_node_recurrence {T : DeepTailData}
     (hT : DeepTailHypotheses T) {u : ℝ → ℝ} (hu : TailNaturalEquation T u) (n : ℕ) :

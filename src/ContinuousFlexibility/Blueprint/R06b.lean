@@ -28,4 +28,6 @@ theorem R06b : R06bStatement := by
     (hη.trans (min_le_right _ _)) ((le_max_right _ _).trans hK) hI G hgraph
   exact ⟨hI, hIₙ, G, hnorm, hgraph, hinverse, htrunc, hfull.1, hfull.2⟩
 
+#print axioms R06b
+
 end ContinuousFlexibility.Blueprint

@@ -53,7 +53,8 @@ theorem tailGreen_reverse_node_product_bound {w₀ w₁ u₀ u₁ c L g r H : �
     _ ≤ |1 / c| + |w₀ * u₁| := abs_add_le _ _
     _ = 1 / c + |w₀ * u₁| := by rw [abs_of_pos (one_div_pos.mpr hc)]
     _ ≤ L + g * r := add_le_add hcL hΓ
-    _ ≤ L + g := add_le_add_left ((mul_le_mul_of_nonneg_left hr hg).trans_eq (mul_one _)) L
+    _ ≤ L + g := add_le_add le_rfl
+      ((mul_le_mul_of_nonneg_left hr hg).trans_eq (mul_one _))
     _ ≤ H := hbudget
 
 /-- All four corner products have one common bound, including the
@@ -145,7 +146,7 @@ theorem tailGreen_mass_resistance_budget {Λ B μ ν I R A : ℝ}
         _ ≤ B * Λ * A := mul_le_mul_of_nonneg_left hAR hBΛ
         _ ≤ (B * Λ + 1) * A :=
           mul_le_mul_of_nonneg_right (by linarith) hA₀
-    rw [mul_div_assoc]
+    rw [← mul_div_assoc]
     apply (le_div_iff₀ (mul_pos (mul_pos hΛ hν) hR)).mpr
     calc
       (B / ν) * (Λ * ν * R) = B * Λ * R := by
@@ -265,7 +266,7 @@ theorem tailGreen_block_bound_mono {T : DeepTailData}
     Finset.prod_nonneg fun k _ => div_nonneg (by norm_num) (hden k).le
   have hprod : (∏ k ∈ Finset.Ico m n, 8 / (T.Λ * tailMass T (k + 1) * tailResistance T k)) ≤
       ∏ k ∈ Finset.Ico m n, C / (T.Λ * tailMass T (k + 1) * tailResistance T k) :=
-    Finset.prod_le_prod (fun k _ => div_nonneg (by norm_num) (hden k).le)
+    Finset.prod_le_prod₀ (fun k _ => div_nonneg (by norm_num) (hden k).le)
       (fun k _ => div_le_div_of_nonneg_right hC₈ (hden k).le)
   have hcoeff : 16 * (B * T.Λ + 1) * tailFundamentalGreenBlockWeight T m ≤
       C * tailFundamentalGreenBlockWeight T m * tailFundamentalGreenBlockWeight T n := by

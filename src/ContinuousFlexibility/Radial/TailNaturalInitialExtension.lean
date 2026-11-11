@@ -23,11 +23,12 @@ theorem tailGlueCut_hasDerivAt {f g : ℝ → ℝ} {c d : ℝ}
     HasDerivAt (morseGlueCut c f g) d c := by
   have hL : HasDerivWithinAt (morseGlueCut c f g) d (Iic c) c :=
     hf.hasDerivWithinAt.congr_of_mem
-      (fun x hx => by simp only [morseGlueCut, ite_eq_left (mem_Iic.mp hx)]) le_rfl
+      (fun x hx => by simp only [morseGlueCut, ite_eq_left (mem_Iic.mp hx)])
+      (mem_Iic.mpr le_rfl)
   have hR : HasDerivWithinAt (morseGlueCut c f g) d (Ici c) c := by
-    apply hg.hasDerivWithinAt.congr_of_mem _ le_rfl
+    apply hg.hasDerivWithinAt.congr_of_mem _ (mem_Ici.mpr le_rfl)
     intro x hx
-    rcases eq_or_lt_of_le hx with rfl | hlt
+    rcases eq_or_lt_of_le (mem_Ici.mp hx) with rfl | hlt
     · simpa only [morseGlueCut, le_refl, ite_true] using heq
     · simp only [morseGlueCut, ite_eq_right (not_le_of_gt hlt)]
   simpa only [Iic_union_Ici, hasDerivWithinAt_univ] using hL.union hR

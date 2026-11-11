@@ -391,6 +391,7 @@ import ContinuousFlexibility.Radial.TailActualMassRecovery
 import ContinuousFlexibility.Radial.TailNaturalUniqueness
 import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
 import ContinuousFlexibility.Radial.TailNaturalFull
+import ContinuousFlexibility.Blueprint.R06b
 import ContinuousFlexibility.Blueprint.R05a
 import ContinuousFlexibility.Analysis.TransmissionJetAlgebra
 import ContinuousFlexibility.Blueprint.N04Transmission
