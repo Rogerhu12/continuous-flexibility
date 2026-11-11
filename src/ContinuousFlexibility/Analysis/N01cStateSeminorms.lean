@@ -136,7 +136,7 @@ theorem reference_mem_stateNeighborhood (S : PhysicalSpacesData)
       sub_self C.referenceState
     have hgrade : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
       (congrArg (fun x : AnnularState S => stateGrading S base x) hzero).trans
-        (map_zero (stateGrading S base))
+        (stateGrading S base).map_zero'
     exact hgrade.trans_lt hε
   · simpa only [abs_zero] using hε
 

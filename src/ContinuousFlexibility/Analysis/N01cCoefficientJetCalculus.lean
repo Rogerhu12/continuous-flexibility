@@ -338,7 +338,7 @@ def smoothDirections_polarCoefficients {U : Set X}
     refine Fin.cases Jkr ?_
     refine Fin.cases Jpr ?_
     refine Fin.cases Jpθ ?_
-    exact Fin.elim0
+    exact fun i => Fin.elim0 i
   exact smoothDirections_scalarCoefficients p.1 f J hD hQ
 
 end ScalarCoefficientCalculus

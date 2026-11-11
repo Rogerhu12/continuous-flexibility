@@ -87,7 +87,7 @@ def heightMaterialJetLinear {D : ReferenceData} {T : MaterialData} {γ : ℝ}
       (contDiff_materialPullback hT (hM.2.2.2.1 v).1) a b p
   map_smul' c u := by
     rw [materialPullback_decode_smul]
-    simpa only [smul_eq_mul] using mixedDerivative_const_mul c _ a b p
+    simpa only [RingHom.id_apply, smul_eq_mul] using mixedDerivative_const_mul c _ a b p
 
 theorem heightMaterialJetLinear_apply {D : ReferenceData} {T : MaterialData} {γ : ℝ}
     {M : SobolevModelData} (hT : IsMaterialData D T) (hM : IsSobolevModel D T γ M)
