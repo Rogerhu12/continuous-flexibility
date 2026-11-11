@@ -162,11 +162,11 @@ theorem exists_seedGluedPair {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → �
     have hw := (seedThreeGlue_left_germ hzLR hwL hwR hrL).eq_of_nhds
     have hu := (seedThreeGlue_left_germ hzLR huL huR hrL).eq_of_nhds
     constructor
-    · change W₀ r = 0
+    · change seedThreeGlue zL zR WL K.profile WR r = 0
       rw [hw]
       change HL * RL * TL.profile (RL⁻¹ * r) = 0
       rw [hz.1, mul_zero]
-    · change U₀ r = 0
+    · change seedThreeGlue zL zR UL K.height UR r = 0
       rw [hu]
       change AL * TL.height (RL⁻¹ * r) = 0
       rw [hz.2, mul_zero]
@@ -295,6 +295,7 @@ theorem exists_seedGluedPair {D : ReferenceData} {c d : ℝ} {uL uR : ℝ → �
     have hmem : (1 : ℝ) ∈ Ioo (RL * D.a) (RR * D.b) :=
       ⟨hbefore.trans hzLone, honezR.trans hafter⟩
     refine ⟨1, hmem, ?_⟩
+    change U 1 ≠ 0
     rw [(hmiddle 1 ⟨hzLone.le, honezR.le⟩).2.eq_of_nhds]
     exact (K.height_pos 1).ne'
   · intro r hr

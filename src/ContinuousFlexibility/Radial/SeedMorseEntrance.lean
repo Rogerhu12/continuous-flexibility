@@ -41,6 +41,7 @@ theorem profile_deriv_of_cell_identity {w R : ℝ → ℝ} {a b amp A B : ℝ}
       (((hw.differentiable (by simp) (R x)).hasDerivAt).comp x
         (hR.differentiable (by simp) x).hasDerivAt).unique
         (((hRs.differentiable (by simp) x).hasDerivAt.const_mul amp).congr_of_eventuallyEq hg)
+    change deriv w (R x) * deriv R x = amp * (-morseRho A B x * R x)
     rw [hd, (hcell x (Ioo_subset_Icc_self hx)).1]
   have hclosure := closure_minimal hopen hclosed
   rw [closure_Ioo hab.ne] at hclosure
@@ -80,7 +81,7 @@ theorem morseRealization_seam_deriv_pos {T : MorseChainData} {σ : ℕ → ℝ}
         congr 1
         ring
       rw [hexp, exp_neg_morseCellLeftCut]
-      nlinarith
+      nlinarith [hg.1]
   have hprod : 0 < deriv D.w (T.radius right n x) * deriv (T.radius right n) x := by
     rw [he]
     exact mul_pos hamp (mul_pos (neg_pos.mpr hρ) hr)

@@ -31,7 +31,13 @@ theorem seedConeFrequency_ne_zero (right : Bool) : seedConeFrequency right ≠ 0
 theorem seedConeFrequency_order (right : Bool) (x y : ℝ) :
     seedConeFrequency right * x < seedConeFrequency right * y ↔
       (if right then y < x else x < y) := by
-  cases right <;> dsimp only [seedConeFrequency] <;> constructor <;> intro h <;> linarith
+  cases right with
+  | false =>
+      change 2 * x < 2 * y ↔ x < y
+      constructor <;> intro h <;> linarith
+  | true =>
+      change (-2 : ℝ) * x < (-2) * y ↔ y < x
+      constructor <;> intro h <;> linarith
 
 theorem seedConeFrequency_log_order (right : Bool) {c r : ℝ}
     (hc : 0 < c) (hr : 0 < r) :
@@ -90,7 +96,9 @@ theorem connectorProfile_eq_cone_on_const {k : ℝ → ℝ} {J : Set ℝ} {p : �
       connectorLogProfile k y₀ f₀ y₃ :=
     hJ.is_const_of_deriv_eq_zero hconn
       (fun y _ => (hasDerivAt_connectorLogProfile hk hk4 y₀ f₀ y).differentiableAt.differentiableWithinAt)
-      (fun y hy => by rw [(hasDerivAt_connectorLogProfile hk hk4 y₀ f₀ y).deriv, hz y hy])
+      (fun y hy => by
+        change deriv (connectorLogProfile k y₀ f₀) y = 0
+        exact (hasDerivAt_connectorLogProfile hk hk4 y₀ f₀ y).deriv.trans (hz y hy))
       hr hy₃
   rw [connectorProfile, he, mul_comm]
 
@@ -106,7 +114,7 @@ theorem SeedConeTail.toPureTail {D : ReferenceData} {right : Bool} {entry : ℝ}
   have hs : s ^ 2 = 4 := seedConeFrequency_sq right
   have hsne : s ≠ 0 := seedConeFrequency_ne_zero right
   have hAB : (A, B) ≠ (0, 0) := by
-    cases right <;> simpa only [A, B, Prod.mk.injEq, and_comm] using T.coeff_ne_zero
+    cases right <;> simpa [A, B, Prod.mk.injEq, and_comm] using T.coeff_ne_zero
   have hPair : coneModePair s A B = coneModePair 2 T.coneA T.coneB := by
     cases right with
     | false => rfl
@@ -174,7 +182,7 @@ theorem SeedConeTail.toPureTail {D : ReferenceData} {right : Bool} {entry : ℝ}
   have hlocal : ∀ᶠ y in 𝓝 P.base,
       Q < s * y ∧ T.height (exp y) ≠ 0 ∧ P.slope y = seedLogSlope T.height y := by
     filter_upwards [(isOpen_Ioi.preimage hcoord).mem_nhds P.base_deep,
-      (isOpen_ne hModeSmooth.continuous continuous_const).mem_nhds P.base_nonzero,
+      (isOpen_ne.preimage hModeSmooth.continuous).mem_nhds P.base_nonzero,
       hSlopeGerm] with y hy hn hk
     exact ⟨hy, by rw [hcone y hy]; exact hn, hk⟩
   obtain ⟨l, h, hbase, hJ⟩ := hlocal.exists_Ioo_subset

@@ -62,11 +62,11 @@ theorem SeedPureTail.bridge_to_opposite {D : ReferenceData} {right : Bool}
   have hcoordpos (r : ℝ) (hr : 0 < r) : 0 < R⁻¹ * r :=
     mul_pos (inv_pos.mpr hR) hr
   have hcoord_lt {r x : ℝ} (h : r < R * x) : R⁻¹ * r < x := by
-    apply (mul_lt_mul_left hR).mp
-    simpa only [mul_inv_cancel_left₀ hR.ne'] using h
+    have hh : r / R < x := (div_lt_iff₀ hR).mpr (by simpa only [mul_comm] using h)
+    simpa only [div_eq_mul_inv, mul_comm] using hh
   have hlt_coord {r x : ℝ} (h : R * x < r) : x < R⁻¹ * r := by
-    apply (mul_lt_mul_left hR).mp
-    simpa only [mul_inv_cancel_left₀ hR.ne'] using h
+    have hh : x < r / R := (lt_div_iff₀ hR).mpr (by simpa only [mul_comm] using h)
+    simpa only [div_eq_mul_inv, mul_comm] using hh
   have houter (r : ℝ) (hr : 0 < r)
       (hout : if right then R * B.right < r else r < R * B.left) :
       W r = T.cone_scale * r ∧ U r = T.amplitude * r ^ T.mode := by
@@ -129,14 +129,14 @@ theorem SeedPureTail.bridge_to_opposite {D : ReferenceData} {right : Bool}
         change 2 * R * B.right < r at hrcut
         nlinarith [mul_pos hR hright]
       obtain ⟨hw, hu⟩ := B.right_eq (R⁻¹ * r) (hlt_coord hs)
-      simpa only [W, U, cNew, aNew, p] using
+      simpa [W, U, cNew, aNew, p] using
         And.intro (seedRescale_cone (H := H) hR.ne' hw)
           (seedRescale_power (A := A) hR hr hu)
     · have hs : r < R * B.left := by
         change r < R * B.left / 2 at hrcut
         linarith [mul_pos hR B.left_pos]
       obtain ⟨hw, hu⟩ := B.left_eq (R⁻¹ * r) (hcoordpos r hr) (hcoord_lt hs)
-      simpa only [W, U, cNew, aNew, p] using
+      simpa [W, U, cNew, aNew, p] using
         And.intro (seedRescale_cone (H := H) hR.ne' hw)
           (seedRescale_power (A := A) hR hr hu)
   exact T.replace_inward hD hentry hsplice hcut hcutsplice

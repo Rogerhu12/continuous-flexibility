@@ -133,11 +133,13 @@ theorem morseSecondMode_deepHypotheses {T : MorseChainData} {σ : ℕ → ℝ}
       cases right <;> simp only [Bool.false_eq_true, ↓reduceIte] <;> omega
     have hm : N ≤ N + (n + 1) := Nat.le_add_right N (n + 1)
     have hnear : N + n = e ∨ N + n = e + 1 ∨ e = N + n + 1 := by
-      dsimp only [e]
-      cases right <;> simp only [Bool.false_eq_true, ↓reduceIte] <;> omega
+      cases right
+      · exact Or.inr (Or.inr rfl)
+      · exact Or.inl rfl
     have hnear' : N + (n + 1) = e ∨ N + (n + 1) = e + 1 ∨ e = N + (n + 1) + 1 := by
-      dsimp only [e]
-      cases right <;> simp only [Bool.false_eq_true, ↓reduceIte] <;> omega
+      cases right
+      · exact Or.inl (Nat.add_assoc N n 1).symm
+      · exact Or.inr (Or.inl (Nat.add_assoc N n 1).symm)
     have hcur := hdeep right (N + n) hn
     have hedge := hdeep right e he
     have hp := hedge.2.2.2.2 (N + n) hn hnear
