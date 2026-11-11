@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01cStateSeminorms
+import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
 import Mathlib.Analysis.Calculus.MeanValue
 import Mathlib.Tactic.Abel
@@ -109,7 +110,8 @@ theorem pair_seminorm_reference_segment
     simp only [Prod.fst_add, Prod.fst_smul, Prod.fst_sub]
     abel
   have hsnd : ((x, (0 : ℝ)) + t • (z - (x, (0 : ℝ)))).2 = t * z.2 := by
-    simp only [Prod.snd_add, Prod.snd_smul, Prod.snd_sub, sub_zero, zero_add, smul_eq_mul]
+    change t * (z.2 - 0) = t * z.2
+    rw [sub_zero]
   constructor
   · rw [hfst, map_smul_eq_mul, Real.norm_of_nonneg ht.1]
     exact (mul_le_of_le_one_left (apply_nonneg p _) ht.2).trans_lt hz.1
@@ -121,6 +123,32 @@ end ContinuousFlexibility.Analysis
 namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
+
+private abbrev n01cDifferenceStateGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S) := inferInstance
+attribute [local instance] n01cDifferenceStateGroup
+
+private abbrev n01cDifferenceStateModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S) := inferInstance
+attribute [local instance] n01cDifferenceStateModule
+
+private abbrev n01cDifferenceStateSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S) :=
+  (n01cDifferenceStateModule S).toDistribMulAction.toDistribSMul.toSMul
+attribute [local instance] n01cDifferenceStateSMul
+
+private abbrev n01cDifferenceJointGroup (S : PhysicalSpacesData) :
+    AddCommGroup (AnnularState S × ℝ) := inferInstance
+attribute [local instance] n01cDifferenceJointGroup
+
+private abbrev n01cDifferenceJointModule (S : PhysicalSpacesData) :
+    Module ℝ (AnnularState S × ℝ) := inferInstance
+attribute [local instance] n01cDifferenceJointModule
+
+private abbrev n01cDifferenceJointSMul (S : PhysicalSpacesData) :
+    SMul ℝ (AnnularState S × ℝ) :=
+  (n01cDifferenceJointModule S).toDistribMulAction.toDistribSMul.toSMul
+attribute [local instance] n01cDifferenceJointSMul
 
 set_option backward.isDefEq.respectTransparency true in
 /-- No smaller neighbourhood is required for the reference-segment

@@ -248,37 +248,13 @@ theorem stateU_qPolarMixedJets_oneHigh_bound
           (1 + stateGrading S (s + 4) x0) *
           oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
             base (s + 4) (z - (x0, 0)) v := by
-  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
-  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
-  obtain ⟨C, A, hC, hA, hraw⟩ := stateU_polarMixedJets_le_E0_stateGrading hT hS hD s
-  refine ⟨C, A, hC, hA, fun i a b hab p hp U J k base x0 z hz hq v => ?_⟩
-  have hr : p.1 ≠ 0 := (hD.trans hp.1.1).ne'
-  let L : AnnularState S →L[ℝ] ℝ := stateUPolarMixedJetCLM hT hS a b p hp i
-  have hW : 0 ≤ C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ) :=
-    mul_nonneg (mul_nonneg hC (Real.rpow_nonneg (hT.2.1 _ hp.1).2.2.1.le _))
-      (Real.rpow_nonneg (hT.2.1 _ hp.1).2.1.le _)
-  have hinput (x : AnnularState S) :
-      |mixedDerivative a b (stateUPolarInput S i x) p| ≤
-        C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ) * stateGrading S (s + 4) x := by
-    have hfive := hraw x a b hab p hp
-    refine Fin.cases hfive.1 ?_ i
-    refine Fin.cases hfive.2.1 ?_
-    refine Fin.cases hfive.2.2.1 ?_
-    refine Fin.cases hfive.2.2.2.1 ?_
-    refine Fin.cases hfive.2.2.2.2 ?_
-    exact fun j => Fin.elim0 j
-  have hL (x : AnnularState S) :
-      |L x| ≤ (C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ)) *
-        stateGrading S (s + 4) x := by
-    calc
-      _ = |mixedDerivative a b (stateUPolarInput S i x) p| :=
-        congrArg abs (stateUPolarMixedJetCLM_apply hT hS a b p hp hr i x)
-      _ ≤ _ := hinput x
-  have hformula (y : AnnularState S × ℝ) (_hy : y ∈ U) :
-      y.2 * mixedDerivative a b (stateUPolarInput S i y.1) p = y.2 * L y.1 :=
-    congrArg (fun t : ℝ => y.2 * t)
-      (stateUPolarMixedJetCLM_apply hT hS a b p hp hr i y.1).symm
-  exact qLinear_oneHigh_bound (E := AnnularState S) (stateGrading S) L
-    base (s + 4) hW hL J hformula k x0 z hz hq v
+  exact family_qFiveMixedJets_oneHigh_bound (E := AnnularState S)
+    (stateGrading S) (stateUPolarInput S) T.E0 T.H (3 / 4 : ℝ)
+    (annularOpen D) s (s + 4)
+    (stateUPolarMixedJetCLM (D := D) (T := T) (S := S) hT hS)
+    (fun a b q hq i x => stateUPolarMixedJetCLM_apply
+      (D := D) (T := T) (S := S) hT hS a b q hq (hD.trans hq.1.1).ne' i x)
+    (fun q hq => ⟨(hT.2.1 q.1 hq.1).2.2.1.le, (hT.2.1 q.1 hq.1).2.1.le⟩)
+    (stateU_polarMixedJets_le_E0_stateGrading (D := D) (T := T) (S := S) hT hS hD s)
 
 end ContinuousFlexibility.Statements

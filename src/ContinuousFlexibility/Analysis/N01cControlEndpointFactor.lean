@@ -37,10 +37,10 @@ theorem supported_deriv_le_endpointDistance
       iteratedDeriv_zero_off_open_interval hf hs 1 (fun q => lt_irrefl h q.2)
   have hb (t : ℝ) (ht : t ∈ Icc l h) : ‖deriv (deriv f) t‖ ≤ B := by
     by_cases hi : t ∈ Ioo l h
-    · simpa only [iteratedDeriv_succ, iteratedDeriv_one, Real.norm_eq_abs] using hbound t hi
+    · simpa only [iteratedDeriv_succ, iteratedDeriv_one, iteratedDeriv_zero, Real.norm_eq_abs] using hbound t hi
     · have hz := iteratedDeriv_zero_off_open_interval hf hs 2 hi
       have hz' : deriv (deriv f) t = 0 := by
-        simpa only [iteratedDeriv_succ, iteratedDeriv_one] using hz
+        simpa only [iteratedDeriv_succ, iteratedDeriv_one, iteratedDeriv_zero] using hz
       rw [hz', norm_zero]
       exact hB
   have hL := Convex.norm_image_sub_le_of_norm_deriv_le
@@ -80,7 +80,7 @@ theorem n01_controlFirstJet_le_endpointDistance
   have hweight : 0 ≤ B * T.E0 (T.sample (C.cell m)) ^ B :=
     mul_nonneg hB.le (Real.rpow_nonneg (hT.2.1 _ hsample).2.2.1.le B)
   obtain ⟨_, _, _, _, _, hcontrol, _⟩ := hC
-  exact supported_deriv_le_endpointDistance (hC.1 m).2.1.le
+  exact supported_deriv_le_endpointDistance (hA.2.2.1.1 m).2.1.le
     (hcontrol m).1 (hcontrol m).2.2 hweight
     (hbound m) ⟨hr.1.le, hr.2.le⟩
 

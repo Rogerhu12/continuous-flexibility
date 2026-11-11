@@ -121,7 +121,7 @@ theorem exists_oneHighMultilinearSumProductBounds
         ∀ y : X, p base y ≤ 1 →
         ∀ A : X [×k]→L[ℝ] Z, ∀ K : ι → ℝ, (∀ t, 0 ≤ K t) →
         (∀ v : Fin k → X, ‖A v‖ ≤
-          ∑ t, K t * ∏ i, p (a t i + offset) (Fin.cons y v (select t i))) →
+          ∑ t, K t * ∏ i, p (a t i + offset) ((Fin.cons y v : Fin (k + 1) → X) (select t i))) →
         ∀ v : Fin k → X, ‖A v‖ ≤
           C * (∑ t, K t) * oneHighVariationWeight p base (s + loss) y v := by
   classical
@@ -153,9 +153,9 @@ theorem exists_oneHighMultilinearSumProductBounds
       Finset.sum_nonneg (fun j _ => apply_nonneg _ _)
     have hR : 0 ≤ R := add_nonneg hy0 hv0
     have hfactor (t : ι) :
-        ∏ i, p (a t i + offset) (Fin.cons y v (select t i)) ≤
+        ∏ i, p (a t i + offset) ((Fin.cons y v : Fin (k + 1) → X) (select t i)) ≤
           C * ((1 + p (s + loss) y) + ∑ j, p (s + loss) (v j)) := by
-      let w : Fin (factors t) → X := fun i => Fin.cons y v (select t i)
+      let w : Fin (factors t) → X := fun i => (Fin.cons y v : Fin (k + 1) → X) (select t i)
       have hw (i : Fin (factors t)) : p base (w i) ≤ 1 :=
         Fin.cases hy (fun j => (hv j).le) (select t i)
       have hslot (i : Fin (factors t)) : p (s + loss) (w i) ≤ R := by
@@ -185,7 +185,7 @@ theorem exists_oneHighMultilinearSumProductBounds
         ‖A v‖ ≤ C * (∑ t, K t) *
           ((1 + p (s + loss) y) + ∑ j, p (s + loss) (v j)) := by
       calc
-        _ ≤ ∑ t, K t * ∏ i, p (a t i + offset) (Fin.cons y v (select t i)) :=
+        _ ≤ ∑ t, K t * ∏ i, p (a t i + offset) ((Fin.cons y v : Fin (k + 1) → X) (select t i)) :=
           hraw v
         _ ≤ ∑ t, K t *
             (C * ((1 + p (s + loss) y) + ∑ j, p (s + loss) (v j))) :=
@@ -236,7 +236,7 @@ theorem exists_oneHighCompositionSumBounds
         (∀ c (v : Fin k → X),
           (∏ i : Fin c.length, ‖J.D (c.partSize i) x (v ∘ c.emb i)‖) ≤
             ∑ t, K c t *
-              ∏ i, p (a c t i + offset) (Fin.cons y v (select c t i))) →
+              ∏ i, p (a c t i + offset) ((Fin.cons y v : Fin (k + 1) → X) (select c t i))) →
         ∀ v : Fin k → X,
           ‖(smoothDirections_contDiff_comp J hV hg hmap).D k x v‖ ≤
             C * (∑ c, B c * ∑ t, K c t) *
@@ -253,7 +253,7 @@ theorem exists_oneHighCompositionSumBounds
   let A : X [×k]→L[ℝ] Z := (smoothDirections_contDiff_comp J hV hg hmap).D k x
   have hrawall (v : Fin k → X) :
       ‖A v‖ ≤ ∑ j : I, (B j.1 * K j.1 j.2) *
-        ∏ i, p (a j.1 j.2 i + offset) (Fin.cons y v (select j.1 j.2 i)) := by
+        ∏ i, p (a j.1 j.2 i + offset) ((Fin.cons y v : Fin (k + 1) → X) (select j.1 j.2 i)) := by
     calc
       _ ≤ ∑ c : OrderedFinpartition k,
           ‖iteratedFDeriv ℝ c.length g (u x)‖ *
@@ -261,7 +261,7 @@ theorem exists_oneHighCompositionSumBounds
         smoothDirections_contDiff_comp_D_norm_le J hV hg hmap k x v
       _ ≤ ∑ c : OrderedFinpartition k,
           B c * (∑ t, K c t *
-            ∏ i, p (a c t i + offset) (Fin.cons y v (select c t i))) :=
+            ∏ i, p (a c t i + offset) ((Fin.cons y v : Fin (k + 1) → X) (select c t i))) :=
         Finset.sum_le_sum (fun c _ => mul_le_mul (houter c) (hraw c v)
           (Finset.prod_nonneg (fun i _ => norm_nonneg _)) (hB c))
       _ = _ := by

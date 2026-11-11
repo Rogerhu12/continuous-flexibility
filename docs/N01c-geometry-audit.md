@@ -106,6 +106,11 @@ work is:
    B⁻¹ * (T.E0 (T.sample (C.cell m)))^(-B) * δₘ r ≤ Q₀ r.
    ```
 
+3. The true scalar border is compactly contained in the positive region:
+   `tsupport D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}`,
+   retaining the existing `HasCompactSupport D.chi`.  Section 8 explains
+   why the current ordinary-support clause does not imply this fact.
+
 The second assertion is quantitative simple-root nondegeneracy on the whole
 component, not a bound for a perturbed coefficient or flow.  It packages the
 root-collar lower bound and the interior lower bound from the manuscript.
@@ -338,7 +343,7 @@ There are two distinct localization assertions.
   negative component is contained in **some** actual reference cell.
   Thus existence of a containing cell is available from
   `IsRadialReference`.
-- N01c needs the cell specified by `C.cell m\), because this same index
+- N01c needs the cell specified by `C.cell m`, because this same index
   determines the control and flow weights.  Neither
   `controlGeometryConditions` nor `N01PartA` asserts containment in that
   particular cell.  The bounded shift
@@ -351,7 +356,7 @@ specific choice, not an arbitrary relabeling.
 (`MorseChainPartitionData.lean` lines 436–457) covers the entire physical
 block with the single tail cell.  The exact `morseTwoTailAt_tail` identities
 then identify both this cell and its index \(T.index+k\) at
-`morseTailIndex side k\).  A negative model component inside that block has
+`morseTailIndex side k`.  A negative model component inside that block has
 the required same-cell localization.
 
 The interfaces have the following precise scope.
@@ -389,3 +394,156 @@ Finally, the small scales remain distinct:
 No extra factor from \(w_0\) can supply a missing \(H_n^{3/4}\) control weight.
 The actual designated-cell localization remains necessary in the coefficient
 estimates as well as the flow estimates.
+
+
+## 8. The compact true border is another primitive geometric datum
+
+The current `RadialTrueBorder`
+(`Statements/Radial.lean`, lines 555–561) asserts
+`HasCompactSupport D.chi` and
+
+```lean
+Function.support D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}.
+```
+
+These assertions do not imply that the closed support is contained in the
+open core.  A globally smooth flat function can be nonzero arbitrarily
+close to an annular endpoint and vanish at and outside that endpoint.
+Its ordinary support lies in the core and its closed support is compact,
+but the closed support contains the endpoint.  Thus these assertions alone
+do not justify replacing the scalar-control region by a compact subset of
+the core, or saying that it meets only finitely many reference cells.
+
+This matters quantitatively.  The `ν` direction carries no material height
+weight by itself.  A compact subset of the core meets only finitely many
+cells by `AccumulatingProfileBounds`; all positive material weights on
+those finitely many samples can then be included in a fixed constant.
+There is no such finite reduction for a support that accumulates at an
+endpoint.  The recorded upper estimates for `w` cannot replace the missing
+`H^(3/4)` factor: their scales are different, as recorded in section 7.
+
+The construction has the right stronger input already, before it is
+forgotten by the interface.  In
+`Radial/BorderNormalization.lean`, `border_pairing_neg` (lines 112–119)
+and `border_normalized` (lines 162–181) require
+
+```lean
+Function.support χ ⊆ Icc α' β'
+```
+
+with `α < α'` and `β' < β`.  Choose that closed interval strictly inside
+the positive connector.  Taking closure preserves containment in the
+closed interval.  Dividing the actual bump by the nonzero pairing constant
+does not enlarge its support.  Hence the actual normalized true border has
+closed support compactly contained in the positive region.  This is a
+support conclusion about the constructed metric bump, not a coefficient
+or flow tame estimate.
+
+The manuscript makes the same choice.
+`paper/flexible-surface-rewrite/06-global-reference-inverse.tex`,
+lines 862–875, constructs the bump on a positive connector and normalizes
+it by the actual border pairing.
+`paper/flexible-surface-readable/07-fixed-geometry.tex`,
+lines 729–751, applies finite-cell bounds to the compact scalar control and
+uses a positive minimum of `w*'/w*` on its support.
+The newer shortened rewrite of chapter 7 states the corresponding type
+argument in lines 276–313.  The long chapter-7 line references elsewhere
+in this audit refer to the readable manuscript.
+
+`Radial/CentralAuxiliaryBorder.lean` does prove compact support statements
+for the auxiliary Hilbert column and row.  Those auxiliary objects are
+different from the final metric control `D.chi`; their support theorem
+cannot be transferred to `D.chi` without the actual final-border
+construction.  Likewise, the current `CentralPatch` predicate records
+equalities for `D.w` and `D.phi`, and contains no condition on `D.chi`.
+
+## 9. The finite head follows from the original simple-root geometry
+
+`Analysis/N01cFiniteHeadOpticalBounds.lean` gives the following actual
+mathematical route, with no additional optical hypothesis:
+
+- `negativeRadialComponent_optical_lower_bound` takes only
+  `RadialProfileGeometry D` and
+  `NegativeRadialComponent D l h`.  It concludes that there is
+  `c > 0` such that, for every `r ∈ Icc l h`,
+  \[
+    c\min(r-l,h-r)\le
+    -\frac{w'(r)}{r\,w(r)}.
+  \]
+- The proof applies continuous divided differences to `f = -deriv D.w`.
+  On the two closed half intervals, respectively,
+  `|dslope f l|` and `|dslope f h|` have positive minima.
+  At an endpoint their values are the absolute values of the nonzero
+  actual second derivatives of `w`; in the interior they are nonzero
+  because `w' < 0`.  The denominator `r*w(r)` has a positive finite
+  maximum on the closed component.
+- `radialProfile_finite_criticalPoints_on_compact` proves that the
+  critical points in any compact subset of the core are finite.
+  A nonzero continuous divided difference isolates each genuine simple
+  critical point, so the closed critical set is compact and discrete.
+- `compact_head_negativeRadialComponents_optical_lower_bound` consequently
+  gives one positive constant for all actual negative components whose
+  two endpoints lie in any specified compact subset of the core.  It
+  applies the single-component theorem to the finite set of pairs of
+  actual critical points.
+
+This treats the finite head without adding a "finite head" assumption.
+It does not make an infinite compactness argument at the accumulating
+endpoints.  The quantitative Morse estimate in section 6 is still needed
+on the tails, together with actual dilation and cell-index comparison.
+
+## 10. Exact same-reference threading needed upstream
+
+The three primitive facts in section 3 can be named separately and proved
+from the actual construction.  They must not be inserted as assumptions
+of `N01c`, or asserted to follow from the current `N01bStatement`.
+The latter is existential: a defective witness does not disprove its
+implication to another existential statement.  A proof may choose a new,
+well-constructed witness, but must actually build all properties of that
+same witness.
+
+Here is the precise current point of loss and the necessary proof shape.
+
+1. `R08Statement` (`Statements/RadialTargets.lean`, lines 114–143)
+   chooses the selected tail data `S` and the final joined `D` together.
+   Its positive-head clauses, central equalities, tail dilation equalities
+   and endpoint identities can be packaged as internal construction
+   metadata about that very `D`.  Such packaging requires no new
+   mathematical assumption.
+2. `R10aStatement` (`Blueprint/Statements.lean`, lines 107–110)
+   exports an existential `D` with profile, border and matching pieces,
+   but drops that construction metadata.  An internal proof of the
+   stronger result must choose the R08 witness once, carry its metadata,
+   and actually construct the matching pieces on it.
+3. `R10bStatement` is already universally quantified over the supplied
+   `D`.  `R10_of_nodes` in `Blueprint/Assembly.lean` already passes
+   the same `D` into it.  This matching step can retain metadata unchanged.
+4. `R11aStatement` and `R11Statement` again have existential reference
+   outputs.  Their internal proofs need versions for a supplied `D`,
+   with its actual matching representations and tail metadata.
+   The weighted stage must construct the common exponents and inverse
+   `G` on that `D`; the first-normal stage must preserve the same
+   `D` and `G`.  Applying the present existential wrapper does not
+   certify either identity.
+5. The final-reference stage must prove the natural-kernel, travel,
+   maximal-graph, closure and reciprocity assertions for that supplied
+   reference and inverse.  If it replaces the auxiliary border by the
+   actual normalized metric border, the new data can be explicitly
+   `{D with chi := χ / a*}`.  The profile, endpoints and cells then remain
+   definitionally the same.  The inverse, graph and row must be changed
+   by the actual finite-rank border calculation; those properties cannot
+   be transported by reflexivity.
+6. The resulting enriched reference existence can be used to construct
+   the N01 controls with their actual designated cells, and to prove the
+   quantitative geometry.  The old public existence statements may remain
+   projections of the stronger actual construction.  If the public
+   dependency graph is changed, its assembly must pass this enriched
+   witness all the way through; simply appending an unproved geometry
+   conjunct to `N01PartA` or `N01PartB` would only move the obligation.
+
+The current R08, R10a, R11a, R11b and R12 blueprint nodes are still open;
+the stronger internal constructions above are not available as completed
+proofs.  This is an implementation route and an exact account of what must
+be retained, not a claim that the current hypotheses already provide the
+missing estimates.  In particular, this audit does not authorize replacing
+the requested theorem by a conditional speed/flow theorem.

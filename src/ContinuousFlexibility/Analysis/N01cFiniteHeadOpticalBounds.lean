@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Statements.Radial
 import Mathlib.Analysis.Calculus.DSlope
 import Mathlib.Topology.Order.Compact
+import Mathlib.Topology.DiscreteSubset
 
 /-!
 # Optical lower bounds on finitely many actual negative components
@@ -58,7 +59,7 @@ theorem exists_linear_distance_lower_bound_of_simple_zeros
       rw [dslope_same, hl.deriv]
       exact abs_pos.mpr hdl
     · have hri : r ∈ Ioo l h :=
-        ⟨(lt_or_eq_of_le hr.1).resolve_right he.symm, hr.2.trans_lt hmh⟩
+        ⟨(lt_or_eq_of_le hr.1).resolve_right (Ne.symm he), hr.2.trans_lt hmh⟩
       apply abs_pos.mpr
       intro hz
       have hid : (r - l) * dslope f l r = f r := by
@@ -89,7 +90,7 @@ theorem exists_linear_distance_lower_bound_of_simple_zeros
     · simpa only [hel, hfl] using (le_refl (0 : ℝ))
     by_cases heh : r = h
     · simpa only [heh, hfh] using (le_refl (0 : ℝ))
-    exact (hpos r ⟨(lt_or_eq_of_le hr.1).resolve_right hel.symm,
+    exact (hpos r ⟨(lt_or_eq_of_le hr.1).resolve_right (Ne.symm hel),
       (lt_or_eq_of_le hr.2).resolve_right heh⟩).le
   refine ⟨min cL cR, lt_min hcLpos hcRpos, fun r hr => ?_⟩
   have hdelta : 0 ≤ min (r - l) (h - r) :=
@@ -143,11 +144,11 @@ theorem negativeRadialComponent_optical_lower_bound
   let F : ℝ → ℝ := fun r => -deriv D.w r
   have hFc : Continuous F := hwd.continuous.neg
   have hFl : HasDerivAt F (-deriv (deriv D.w) l) l := by
-    simpa only [F, Pi.neg_apply] using
-      ((hwd.differentiable (by simp)) l).hasDerivAt.neg
+    change HasDerivAt (fun r : ℝ => -deriv D.w r) (-deriv (deriv D.w) l) l
+    exact ((hwd.differentiable (by simp)) l).hasDerivAt.fun_neg
   have hFh : HasDerivAt F (-deriv (deriv D.w) h) h := by
-    simpa only [F, Pi.neg_apply] using
-      ((hwd.differentiable (by simp)) h).hasDerivAt.neg
+    change HasDerivAt (fun r : ℝ => -deriv D.w r) (-deriv (deriv D.w) h) h
+    exact ((hwd.differentiable (by simp)) h).hasDerivAt.fun_neg
   obtain ⟨c, hc, hbound⟩ :=
     Analysis.exists_linear_distance_lower_bound_of_simple_zeros hlh hFc hFl hFh
       (by simp only [F, hleft, neg_zero]) (by simp only [F, hright, neg_zero])
@@ -202,5 +203,74 @@ theorem finite_negativeRadialComponents_optical_lower_bound
     · exact (mul_le_mul_of_nonneg_right (min_le_left _ _) hdelta).trans (hibound r hr)
     · exact (mul_le_mul_of_nonneg_right (min_le_right _ _) hdelta).trans
         (hsbound j hjs r hr)
+
+
+/-- The actual nondegenerate critical points are finite in every compact
+subset of the radial core.  The proof uses the continuous divided
+difference at each genuine root. -/
+theorem radialProfile_finite_criticalPoints_on_compact
+    {D : ReferenceData} (hD : RadialProfileGeometry D)
+    {K : Set ℝ} (hK : IsCompact K) (hKcore : K ⊆ radialCore D) :
+    Set.Finite {r : ℝ | r ∈ K ∧ deriv D.w r = 0} := by
+  obtain ⟨_, _, hw, _, _, _, hsimple⟩ := hD
+  have hwd : ContDiff ℝ ∞ (deriv D.w) := (contDiff_infty_iff_deriv.mp hw.1).2
+  let Z : Set ℝ := K ∩ {r : ℝ | deriv D.w r = 0}
+  have hZcompact : IsCompact Z :=
+    hK.inter_right (isClosed_eq hwd.continuous continuous_const)
+  have hZdiscrete : IsDiscrete Z := by
+    apply isDiscrete_iff_forall_mem_exists_isOpen.mpr
+    intro x hx
+    have hds : Continuous (dslope (deriv D.w) x) := by
+      apply continuous_iff_continuousAt.mpr
+      intro y
+      by_cases hy : y = x
+      · subst y
+        exact continuousAt_dslope_same.mpr ((hwd.differentiable (by simp)) x)
+      · exact (continuousAt_dslope_of_ne hy).mpr hwd.continuous.continuousAt
+    have hnonzero : dslope (deriv D.w) x x ≠ 0 := by
+      rw [dslope_same]
+      exact hsimple x (hKcore hx.1) hx.2
+    refine ⟨{y : ℝ | dslope (deriv D.w) x y ≠ 0},
+      (isClosed_eq hds continuous_const).isOpen_compl, ?_⟩
+    ext y
+    constructor
+    · rintro ⟨hyu, hyZ⟩
+      have hprod : (y - x) * dslope (deriv D.w) x y = 0 := by
+        simpa only [smul_eq_mul, hyZ.2, hx.2, sub_self] using
+          sub_smul_dslope (deriv D.w) x y
+      exact mem_singleton_iff.mpr
+        (sub_eq_zero.mp ((mul_eq_zero.mp hprod).resolve_right hyu))
+    · intro hy
+      rcases mem_singleton_iff.mp hy with rfl
+      exact ⟨hnonzero, hx⟩
+  exact hZcompact.finite hZdiscrete
+
+/-- Every actual component whose two turning points lie in a fixed compact
+core has one common positive optical constant.  Finiteness of the head is
+a conclusion of the original simple-root geometry, not an extra premise. -/
+theorem compact_head_negativeRadialComponents_optical_lower_bound
+    {D : ReferenceData} (hD : RadialProfileGeometry D)
+    {K : Set ℝ} (hK : IsCompact K) (hKcore : K ⊆ radialCore D) :
+    ∃ c : ℝ, 0 < c ∧ ∀ l h : ℝ, NegativeRadialComponent D l h →
+      l ∈ K → h ∈ K → ∀ r ∈ Icc l h,
+        c * min (r - l) (h - r) ≤ -deriv D.w r / (r * D.w r) := by
+  classical
+  have hfinite := radialProfile_finite_criticalPoints_on_compact hD hK hKcore
+  let roots : Finset ℝ := hfinite.toFinset
+  let pairs : Finset (ℝ × ℝ) :=
+    (roots.product roots).filter (fun p => NegativeRadialComponent D p.1 p.2)
+  have hcomponents (p : ℝ × ℝ) (hp : p ∈ pairs) :
+      NegativeRadialComponent D p.1 p.2 := (Finset.mem_filter.mp hp).2
+  obtain ⟨c, hc, hbound⟩ :=
+    finite_negativeRadialComponents_optical_lower_bound hD Prod.fst Prod.snd pairs hcomponents
+  refine ⟨c, hc, fun l h hcomponent hlK hhK r hr => ?_⟩
+  have hlroot : l ∈ roots := by
+    simpa only [roots, Set.mem_toFinset] using
+      (show l ∈ K ∧ deriv D.w l = 0 from ⟨hlK, hcomponent.2.2.2.1⟩)
+  have hhroot : h ∈ roots := by
+    simpa only [roots, Set.mem_toFinset] using
+      (show h ∈ K ∧ deriv D.w h = 0 from ⟨hhK, hcomponent.2.2.2.2.1⟩)
+  exact hbound (l, h)
+    (Finset.mem_filter.mpr ⟨Finset.mem_product.mpr ⟨hlroot, hhroot⟩, hcomponent⟩) r hr
 
 end ContinuousFlexibility.Statements

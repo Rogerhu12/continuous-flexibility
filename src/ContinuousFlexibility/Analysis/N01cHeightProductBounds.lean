@@ -38,6 +38,17 @@ section Bounds
 
 variable [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
 
+/-- The explicit two-slot weight, stated with a literal finite index type. -/
+private theorem oneHighVariationWeight_two
+    (p : ℕ → Seminorm ℝ E) (base high : ℕ) (x : E) (v : Fin 2 → E) :
+    oneHighVariationWeight p base high x v =
+      (1 + p high x) * (p base (v 0) * p base (v 1)) +
+        (p high (v 0) * p base (v 1) + p high (v 1) * p base (v 0)) := by
+  have h0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
+  have h1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
+  simp only [oneHighVariationWeight, Fin.prod_univ_two, Fin.sum_univ_two,
+    h0, h1, Finset.prod_singleton]
+
 /-- The exact quadratic parameter tower obeys one fixed high-order bound.
 The low order is arbitrary; only the real parameter is bounded by one. -/
 theorem qLinear_oneHigh_bound
@@ -128,13 +139,10 @@ theorem qLinear_oneHigh_bound
               have hd : J.D 2 z v =
                   (v 0).2 * L (v 1).1 + (v 1).2 * L (v 0).1 := by
                 simpa only [hQ, hA] using scalarLinearProduct_D_two Q A J hproduct z hz v
-              have h0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
-              have h1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
               have hsize : oneHighVariationWeight P base high (z - (x0, 0)) v =
                   (1 + H) * (P base (v 0) * P base (v 1)) +
                     (P high (v 0) * P base (v 1) + P high (v 1) * P base (v 0)) := by
-                simp only [oneHighVariationWeight, Fin.prod_univ_two, Fin.sum_univ_two,
-                  h0, h1, Finset.prod_singleton]
+                exact oneHighVariationWeight_two P base high (z - (x0, 0)) v
               have hrest : 0 ≤ (1 + H) * (P base (v 0) * P base (v 1)) :=
                 mul_nonneg (add_nonneg zero_le_one hH)
                   (mul_nonneg (apply_nonneg _ _) (apply_nonneg _ _))
@@ -163,6 +171,141 @@ theorem qLinear_oneHigh_bound
                 unfold oneHighVariationWeight
                 positivity
               simpa only [hd, abs_zero] using mul_nonneg hWM hsize
+
+
+/-- The weighted scalar-jet estimate passes to every genuine q-linear
+tower. The whole existential and quantifier calculation takes place over
+an abstract state space, before any concrete physical model is supplied. -/
+theorem family_qMixedJets_oneHigh_bound
+    (p : ℕ → Seminorm ℝ E) (f : E → PolarPoint → ℝ)
+    (E0 H : ℝ → ℝ) (γ : ℝ) (Ω : Set PolarPoint) (s high : ℕ)
+    (L : ∀ a b : ℕ, ∀ q : PolarPoint, q ∈ Ω → E →L[ℝ] ℝ)
+    (heval : ∀ a b q hq x, L a b q hq x = mixedDerivative a b (f x) q)
+    (hweights : ∀ q ∈ Ω, 0 ≤ E0 q.1 ∧ 0 ≤ H q.1)
+    (hraw : ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧ ∀ x : E, ∀ a b : ℕ,
+      0 < a + b → a + b ≤ s → ∀ q ∈ Ω,
+        |mixedDerivative a b (f x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) :
+    ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧ ∀ a b : ℕ,
+      0 < a + b → a + b ≤ s → ∀ q ∈ Ω,
+      ∀ U : Set (E × ℝ),
+      ∀ J : SmoothDirections U (fun z => z.2 * mixedDerivative a b (f z.1) q),
+      ∀ k base : ℕ, ∀ x0 : E, ∀ z ∈ U, |z.2| ≤ 1 →
+      ∀ v : Fin k → (E × ℝ),
+        |J.D k z v| ≤ C * E0 q.1 ^ A * H q.1 ^ γ *
+          (1 + p high x0) *
+          oneHighVariationWeight (pairGrading p realGrading)
+            base high (z - (x0, 0)) v := by
+  obtain ⟨C, A, hC, hA, hb⟩ := hraw
+  refine ⟨C, A, hC, hA, fun a b hpos horder q hq U J k base x0 z hz hzq v => ?_⟩
+  have hW : 0 ≤ C * E0 q.1 ^ A * H q.1 ^ γ :=
+    mul_nonneg (mul_nonneg hC (Real.rpow_nonneg (hweights q hq).1 _))
+      (Real.rpow_nonneg (hweights q hq).2 _)
+  have hL (x : E) :
+      |L a b q hq x| ≤ (C * E0 q.1 ^ A * H q.1 ^ γ) * p high x := by
+    rw [heval]
+    exact hb x a b hpos horder q hq
+  have hformula (y : E × ℝ) (_hy : y ∈ U) :
+      y.2 * mixedDerivative a b (f y.1) q = y.2 * L a b q hq y.1 :=
+    congrArg (fun t : ℝ => y.2 * t) (heval a b q hq y.1).symm
+  exact qLinear_oneHigh_bound p (L a b q hq) base high hW hL
+    J hformula k x0 z hz hzq v
+
+/-- The five polar input functions can share constants before selecting
+an input. This zero-spatial-order specialization uses the full raw jet
+estimate without inspecting a concrete state model. -/
+theorem family_qFiveInputs_oneHigh_bound
+    (p : ℕ → Seminorm ℝ E) (f : Fin 5 → E → PolarPoint → ℝ)
+    (E0 H : ℝ → ℝ) (γ : ℝ) (Ω : Set PolarPoint) (s high : ℕ)
+    (L : ∀ q : PolarPoint, q ∈ Ω → Fin 5 → E →L[ℝ] ℝ)
+    (heval : ∀ q hq i x, L q hq i x = f i x q)
+    (hweights : ∀ q ∈ Ω, 0 ≤ E0 q.1 ∧ 0 ≤ H q.1)
+    (hraw : ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧ ∀ x : E, ∀ a b : ℕ,
+      a + b ≤ s → ∀ q ∈ Ω,
+      (|mixedDerivative a b (f 0 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 1 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 2 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 3 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 4 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x)) :
+    ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧ ∀ i : Fin 5, ∀ q ∈ Ω,
+      ∀ U : Set (E × ℝ),
+      ∀ J : SmoothDirections U (fun z => z.2 * f i z.1 q),
+      ∀ k base : ℕ, ∀ x0 : E, ∀ z ∈ U, |z.2| ≤ 1 →
+      ∀ v : Fin k → (E × ℝ),
+        |J.D k z v| ≤ C * E0 q.1 ^ A * H q.1 ^ γ *
+          (1 + p high x0) *
+          oneHighVariationWeight (pairGrading p realGrading)
+            base high (z - (x0, 0)) v := by
+  obtain ⟨C, A, hC, hA, hb⟩ := hraw
+  refine ⟨C, A, hC, hA, fun i q hq U J k base x0 z hz hzq v => ?_⟩
+  have hW : 0 ≤ C * E0 q.1 ^ A * H q.1 ^ γ :=
+    mul_nonneg (mul_nonneg hC (Real.rpow_nonneg (hweights q hq).1 _))
+      (Real.rpow_nonneg (hweights q hq).2 _)
+  have hinput (x : E) : |f i x q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x := by
+    have hfive := hb x 0 0 (Nat.zero_le s) q hq
+    simp only [mixedDerivative, iteratedDeriv_zero] at hfive
+    refine Fin.cases hfive.1 ?_ i
+    refine Fin.cases hfive.2.1 ?_
+    refine Fin.cases hfive.2.2.1 ?_
+    refine Fin.cases hfive.2.2.2.1 ?_
+    refine Fin.cases hfive.2.2.2.2 ?_
+    exact fun j => Fin.elim0 j
+  have hL (x : E) : |L q hq i x| ≤
+      (C * E0 q.1 ^ A * H q.1 ^ γ) * p high x := by
+    rw [heval]
+    exact hinput x
+  have hformula (y : E × ℝ) (_hy : y ∈ U) :
+      y.2 * f i y.1 q = y.2 * L q hq i y.1 :=
+    congrArg (fun t : ℝ => y.2 * t) (heval q hq i y.1).symm
+  exact qLinear_oneHigh_bound p (L q hq i) base high hW hL
+    J hformula k x0 z hz hzq v
+
+/-- The same full-quantifier bridge preserves every actual mixed spatial
+jet of the five inputs and one fixed high grading index. -/
+theorem family_qFiveMixedJets_oneHigh_bound
+    (p : ℕ → Seminorm ℝ E) (f : Fin 5 → E → PolarPoint → ℝ)
+    (E0 H : ℝ → ℝ) (γ : ℝ) (Ω : Set PolarPoint) (s high : ℕ)
+    (L : ∀ a b : ℕ, ∀ q : PolarPoint, q ∈ Ω → Fin 5 → E →L[ℝ] ℝ)
+    (heval : ∀ a b q hq i x, L a b q hq i x = mixedDerivative a b (f i x) q)
+    (hweights : ∀ q ∈ Ω, 0 ≤ E0 q.1 ∧ 0 ≤ H q.1)
+    (hraw : ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧ ∀ x : E, ∀ a b : ℕ,
+      a + b ≤ s → ∀ q ∈ Ω,
+      (|mixedDerivative a b (f 0 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 1 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 2 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 3 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x) ∧
+      (|mixedDerivative a b (f 4 x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x)) :
+    ∃ C A : ℝ, 0 ≤ C ∧ 0 ≤ A ∧ ∀ i : Fin 5, ∀ a b : ℕ, a + b ≤ s →
+      ∀ q ∈ Ω, ∀ U : Set (E × ℝ),
+      ∀ J : SmoothDirections U (fun z => z.2 * mixedDerivative a b (f i z.1) q),
+      ∀ k base : ℕ, ∀ x0 : E, ∀ z ∈ U, |z.2| ≤ 1 →
+      ∀ v : Fin k → (E × ℝ),
+        |J.D k z v| ≤ C * E0 q.1 ^ A * H q.1 ^ γ *
+          (1 + p high x0) *
+          oneHighVariationWeight (pairGrading p realGrading)
+            base high (z - (x0, 0)) v := by
+  obtain ⟨C, A, hC, hA, hb⟩ := hraw
+  refine ⟨C, A, hC, hA, fun i a b hab q hq U J k base x0 z hz hzq v => ?_⟩
+  have hW : 0 ≤ C * E0 q.1 ^ A * H q.1 ^ γ :=
+    mul_nonneg (mul_nonneg hC (Real.rpow_nonneg (hweights q hq).1 _))
+      (Real.rpow_nonneg (hweights q hq).2 _)
+  have hinput (x : E) :
+      |mixedDerivative a b (f i x) q| ≤ C * E0 q.1 ^ A * H q.1 ^ γ * p high x := by
+    have hfive := hb x a b hab q hq
+    refine Fin.cases hfive.1 ?_ i
+    refine Fin.cases hfive.2.1 ?_
+    refine Fin.cases hfive.2.2.1 ?_
+    refine Fin.cases hfive.2.2.2.1 ?_
+    refine Fin.cases hfive.2.2.2.2 ?_
+    exact fun j => Fin.elim0 j
+  have hL (x : E) : |L a b q hq i x| ≤
+      (C * E0 q.1 ^ A * H q.1 ^ γ) * p high x := by
+    rw [heval]
+    exact hinput x
+  have hformula (y : E × ℝ) (_hy : y ∈ U) :
+      y.2 * mixedDerivative a b (f i y.1) q = y.2 * L a b q hq i y.1 :=
+    congrArg (fun t : ℝ => y.2 * t) (heval a b q hq i y.1).symm
+  exact qLinear_oneHigh_bound p (L a b q hq i) base high hW hL
+    J hformula k x0 z hz hzq v
 
 end Bounds
 
@@ -250,27 +393,12 @@ theorem stateU_qMixedJets_oneHigh_bound
           (1 + stateGrading S (s + 2) x0) *
           oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
             base (s + 2) (z - (x0, 0)) v := by
-  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
-  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
-  obtain ⟨C, A, hC, hA, hraw⟩ := stateU_positiveMixedJets_le_E0_stateGrading hT hS s
-  refine ⟨C, A, hC, hA, fun a b hpos horder p hp U J k base x0 z hz hq v => ?_⟩
-  let L : AnnularState S →L[ℝ] ℝ := stateUJetCLM hT hS a b p hp
-  have hW : 0 ≤ C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ) :=
-    mul_nonneg (mul_nonneg hC (Real.rpow_nonneg (hT.2.1 _ hp.1).2.2.1.le _))
-      (Real.rpow_nonneg (hT.2.1 _ hp.1).2.1.le _)
-  have hL (x : AnnularState S) :
-      |L x| ≤ (C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ)) *
-        stateGrading S (s + 2) x := by
-    calc
-      _ = |mixedDerivative a b (stateU S x) p| :=
-        congrArg abs (stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS a b p hp x)
-      _ ≤ _ := hraw x a b hpos horder p hp
-  have hformula (y : AnnularState S × ℝ) (_hy : y ∈ U) :
-      y.2 * mixedDerivative a b (stateU S y.1) p = y.2 * L y.1 :=
-    congrArg (fun t : ℝ => y.2 * t)
-      (stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS a b p hp y.1).symm
-  exact qLinear_oneHigh_bound (E := AnnularState S) (stateGrading S) L
-    base (s + 2) hW hL J hformula k x0 z hz hq v
+  exact family_qMixedJets_oneHigh_bound (E := AnnularState S)
+    (stateGrading S) (stateU S) T.E0 T.H (3 / 4 : ℝ) (annularOpen D) s (s + 2)
+    (stateUJetCLM (D := D) (T := T) (S := S) hT hS)
+    (stateUJetCLM_apply (D := D) (T := T) (S := S) hT hS)
+    (fun q hq => ⟨(hT.2.1 q.1 hq.1).2.2.1.le, (hT.2.1 q.1 hq.1).2.1.le⟩)
+    (stateU_positiveMixedJets_le_E0_stateGrading (D := D) (T := T) (S := S) hT hS s)
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The same weighted bound applies to all five actual polar height
@@ -290,36 +418,13 @@ theorem stateU_qPolarInputs_oneHigh_bound
           (1 + stateGrading S (s + 4) x0) *
           oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
             base (s + 4) (z - (x0, 0)) v := by
-  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
-  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
-  obtain ⟨C, A, hC, hA, hraw⟩ := stateU_polarMixedJets_le_E0_stateGrading hT hS hD s
-  refine ⟨C, A, hC, hA, fun i p hp U J k base x0 z hz hq v => ?_⟩
-  have hr : p.1 ≠ 0 := (hD.trans hp.1.1).ne'
-  let L : AnnularState S →L[ℝ] ℝ := stateUPolarInputCLM hT hS p hp i
-  have hW : 0 ≤ C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ) :=
-    mul_nonneg (mul_nonneg hC (Real.rpow_nonneg (hT.2.1 _ hp.1).2.2.1.le _))
-      (Real.rpow_nonneg (hT.2.1 _ hp.1).2.1.le _)
-  have hinput (x : AnnularState S) :
-      |stateUPolarInput S i x p| ≤
-        C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ) * stateGrading S (s + 4) x := by
-    have hfive := hraw x 0 0 (by omega) p hp
-    simp only [mixedDerivative, iteratedDeriv_zero] at hfive
-    refine Fin.cases hfive.1 ?_ i
-    refine Fin.cases hfive.2.1 ?_
-    refine Fin.cases hfive.2.2.1 ?_
-    refine Fin.cases hfive.2.2.2.1 ?_
-    refine Fin.cases hfive.2.2.2.2 ?_
-    exact fun j => Fin.elim0 j
-  have hL (x : AnnularState S) :
-      |L x| ≤ (C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ)) *
-        stateGrading S (s + 4) x := by
-    calc
-      _ = |stateUPolarInput S i x p| := congrArg abs (stateUPolarInputCLM_apply hT hS p hp hr i x)
-      _ ≤ _ := hinput x
-  have hformula (y : AnnularState S × ℝ) (_hy : y ∈ U) :
-      y.2 * stateUPolarInput S i y.1 p = y.2 * L y.1 :=
-    congrArg (fun t : ℝ => y.2 * t) (stateUPolarInputCLM_apply hT hS p hp hr i y.1).symm
-  exact qLinear_oneHigh_bound (E := AnnularState S) (stateGrading S) L
-    base (s + 4) hW hL J hformula k x0 z hz hq v
+  exact family_qFiveInputs_oneHigh_bound (E := AnnularState S)
+    (stateGrading S) (stateUPolarInput S) T.E0 T.H (3 / 4 : ℝ)
+    (annularOpen D) s (s + 4)
+    (stateUPolarInputCLM (D := D) (T := T) (S := S) hT hS)
+    (fun q hq i x => stateUPolarInputCLM_apply
+      (D := D) (T := T) (S := S) hT hS q hq (hD.trans hq.1.1).ne' i x)
+    (fun q hq => ⟨(hT.2.1 q.1 hq.1).2.2.1.le, (hT.2.1 q.1 hq.1).2.1.le⟩)
+    (stateU_polarMixedJets_le_E0_stateGrading (D := D) (T := T) (S := S) hT hS hD s)
 
 end ContinuousFlexibility.Statements
