@@ -483,7 +483,7 @@ def X01Statement : Prop :=
             OutputRealization D γ M₁ aL (G F) ∧
               outputNormSquare D γ M₁ aL (G F) ≤ C ^ 2 * sourceNormSquare D γ M₀ F) ∧
           (∀ F fθ, SourceMember D γ M₀ F → WeakAngularDerivative D F.1 fθ →
-            SourceMember D γ M₀ (fθ, 0) → ∃ ur : PolarPoint → ℝ,
+            SourceDerivativeMember D γ M₀ fθ → ∃ ur : PolarPoint → ℝ,
               WeakNormalDerivative D (G F).1 ur ∧ OutputRealization D γ M₁ 0 (ur, 0) ∧
               outputNormSquare D γ M₁ 0 (ur, 0) ≤ C ^ 2 *
                 (sourceNormSquare D γ M₀ F + sourceNormSquare D γ M₀ (fθ, 0)))

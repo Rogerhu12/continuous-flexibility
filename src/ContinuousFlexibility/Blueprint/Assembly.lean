@@ -97,7 +97,11 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR08 : R08Statement := R08 hR03 hR07
   have hR09 : R09Statement := R09
   have hR10 : R10Statement := R10_of_nodes (R10a hR06 hR07 hR08 hR09) R10b
-  have hR11 : R11Statement := R11b (R11a hR05 hR10)
+  -- R11a supplies the maximum graph on actual measurable L² fields.
+  -- R11b measures the weak angular derivative in the source weights without
+  -- imposing the even-source symmetry on that derivative.
+  have hR11a : R11aStatement := R11a hR05 hR10
+  have hR11 : R11Statement := R11b hR11a
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
