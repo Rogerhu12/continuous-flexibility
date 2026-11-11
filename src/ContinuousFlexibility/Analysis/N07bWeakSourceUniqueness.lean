@@ -41,12 +41,12 @@ theorem n07b_perturbedCanonicalRelation_right_unique
   funext m
   apply Lp.ext
   let A : Set PolarPoint :=
-    physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)
+    physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)
   have hopen : IsOpen A :=
-    (isOpen_Ioo.prod isOpen_univ).inter (isOpen_univ.prod isOpen_Ioo)
+    (hK.domains z hz hsector m).1.inter (isOpen_univ.prod isOpen_Ioo)
   have hA : A ⊆ radialCore D ×ˢ Ioo (0 : ℝ) Real.pi := by
     intro p hp
-    exact ⟨(hK.2.2.2.1 m).2.2 hp.1.1, hp.2.2⟩
+    exact ⟨((hK.domains z hz hsector m).2.2.1 hp.1).1, hp.2.2⟩
   have hfLoc : LocallyIntegrableOn f A volume :=
     n07b_locallyIntegrable_of_canonicalSource_memLp hK hz hsector m
       (MemLp.ae_eq (hηrep.2 m) (Lp.memLp (F m)))
@@ -58,10 +58,10 @@ theorem n07b_perturbedCanonicalRelation_right_unique
       (fun p => ξ p - U.2.1 * S.chiLeft p.1)).mp
     ((hηrep.1 m).symm.trans (hξrep.1 m))
   have hηξbig : η =ᵐ[volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] ξ := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] ξ := by
     filter_upwards [hrem] with p hp
     exact (sub_left_inj).mp hp
-  have hsub : A ⊆ physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) := by
+  have hsub : A ⊆ physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) := by
     intro p hp
     exact ⟨hp.1, ⟨hp.2.1, ⟨hp.2.2.1, hp.2.2.2.le⟩⟩⟩
   have hηξ : η =ᵐ[volume.restrict A] ξ :=
@@ -112,13 +112,12 @@ theorem n07b_perturbedCanonicalRelation_right_unique
     rw [hunknown] at hη
     exact hη.symm.trans hξ
   have hmeasure :
-      volume.restrict (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
+      volume.restrict (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
         volume.restrict A := by
-    simpa only [A, physicalPieceOpen, prod_inter_prod, inter_univ, univ_inter] using
-      Measure.restrict_congr_set
-        (polarStrip_Ioc_ae_eq_Ioo (K.physicalLeft m) (K.physicalRight m) 0 Real.pi)
+    exact Measure.restrict_congr_set
+      (polarDomain_Ioc_ae_eq_Ioo (physicalPieceOpen S K z m) 0 Real.pi)
   have hphysical : f =ᵐ[volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] g := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] g := by
     rw [hmeasure]
     exact hsource
   have hcanonical := (n07b_canonicalSource_ae_iff hK hz hsector m f g).mpr hphysical

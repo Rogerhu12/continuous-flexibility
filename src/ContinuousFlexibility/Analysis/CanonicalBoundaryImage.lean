@@ -2,12 +2,12 @@ import ContinuousFlexibility.Blueprint.Statements
 import Mathlib.Topology.Separation.Hausdorff
 
 /-!
-# Images of physical endpoints
+# Images of physical boundaries
 
-The frozen chart assumptions only specify the inverse on the open pieces.
-Nevertheless continuity of the forward chart and continuity of that open
-inverse force every physical endpoint to map to a canonical endpoint.
-This does not prescribe the value of the totalized inverse at the endpoint.
+The generic rectangle theorem uses only the open inverse and continuity.
+For an actual state-dependent piece, the closed bijection and open inverse
+send every frontier point to a canonical radial boundary. No current
+physical domain is assumed to be a radial rectangle.
 -/
 
 noncomputable section
@@ -72,27 +72,34 @@ theorem endpoint_image_mem_boundary_of_openStrip_inverse
     · exact Or.inr hr
   · exact Or.inl hl.symm
 
-/-- In particular, PartA itself determines that the physical endpoints
-land on canonical endpoints, although it does not specify their order. -/
+/-- Every point of the actual physical frontier maps to a canonical radial
+boundary. The reference radial endpoints are not used for the current
+state-dependent domain. -/
 theorem canonicalChart_endpoint_radial_eq_boundary
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hK : Blueprint.N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (p : PolarPoint)
-    (hp : p.1 = K.physicalLeft m ∨ p.1 = K.physicalRight m) :
+    (hp : p ∈ frontier (physicalPieceOpen S K z m)) :
     (K.chart z m p).1 = K.left m ∨ (K.chart z m p).1 = K.right m := by
-  have hpiece := hK.2.2.2.1 m
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  have hpcc : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) := by
-    rcases hp with h | h
-    · rw [h]
-      exact ⟨le_rfl, hpiece.1.le⟩
-    · rw [h]
-      exact ⟨hpiece.1.le, le_rfl⟩
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hsector m p hpcc
-  exact endpoint_image_mem_boundary_of_openStrip_inverse hpiece.1 hpiece.2.1
-    hclosed.1.continuousAt hcharts.2.2.2.2.2.1.continuousOn
-    hcharts.1 hcharts.2.1 hcharts.2.2.1 hp
+  have hcharts := hK.charts z hz hsector m
+  have hclosed := hK.boundary z hz hsector m
+  have hfront : p ∈ closure (physicalPieceOpen S K z m) ∧
+      p ∉ physicalPieceOpen S K z m := by
+    simpa only [(hK.domains z hz hsector m).1.frontier_eq] using hp
+  have hpclosed : p ∈ physicalPieceClosed S K z m := hfront.1
+  have himage := hclosed.1 hpclosed
+  have hnot : K.chart z m p ∉ canonicalOpen S K m := by
+    intro himageOpen
+    apply hfront.2
+    have hpre := hcharts.2.1 himageOpen
+    rw [hclosed.2.2.1 p hpclosed] at hpre
+    exact hpre
+  rcases lt_or_eq_of_le himage.1.1 with hl | hl
+  · rcases lt_or_eq_of_le himage.1.2 with hr | hr
+    · exact False.elim (hnot ⟨⟨hl, hr⟩, mem_univ _⟩)
+    · exact Or.inr hr
+  · exact Or.inl hl.symm
 
 end ContinuousFlexibility.Analysis

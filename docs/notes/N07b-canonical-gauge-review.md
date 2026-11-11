@@ -335,3 +335,381 @@ it must not be reported as a proof from the old frozen hypotheses. In
 particular, merely appending the desired source norm bound or fixed-graph
 membership to `N07aStatement` would move the task into its premise and is
 not the proposed repair.
+
+## Minimal executable certificate for the fixed graph argument
+
+The finite base order changes the required quantifiers. N07b does not need
+an all-order linear tame estimate in its new geometric certificate. It is
+enough to retain, on one common original neighborhood, polynomial bounds
+
+    for every N, there are r, d in Nat and C > 0, A >= 0,
+    for every state z, piece m, and point x in its current physical domain,
+    every listed material-coordinate geometric jet of order k <= N is bounded by
+        C * E0(x.radial)^A * Q_r(z)^d,
+    where Q_r(z) = 1 + stateGrading r (z.state-referenceState) + |z.parameter|.
+
+After N05 has chosen b, N07b uses only N = b+2 and the fixed low transport
+order. Raise the final base above the finitely many resulting r and take
+the radius at most 1/2. `n07b_stateWeight_le_two` makes each Q_r at most 2.
+The old inverse, graph, source model, and all witnesses remain unchanged.
+The required displayed bridge bound follows from a uniform bound, since
+its extra state factor is at least one. This avoids imposing an unnecessary
+linear high-order state bound on the repaired coordinate interface.
+
+### Fields which can be defined entirely in Statements
+
+Put beta = 3/4, zstar = (referenceState,0), and write Psi, G, h, J for
+the stored chart, inverse, height, and actual `planeJacobian`. All the
+following functions are explicit formulas in D, T, S, C, K and the state;
+there is no physical source or unknown argument.
+
+At a current physical point x of piece m define
+
+    Theta(x) = G_star,m(Psi_z,m(x)),
+    a(x) = h_star,m(Theta(x)) / h_z,m(x),
+    V(x) = D G_z,m(Psi_z,m(x)) (0,1),
+    X_e(x) = D (G_z,m o Psi_star,m)(Theta(x)) e,
+    Omega(x) = ell(x.radial) * |J_z,m(x)|,
+    N(x) = sqrt(Omega(x)) * (H(x.radial)/H(sample(cell m)))^beta.
+
+Here e is either (1,0) or (0,1). The use of `fderiv` of an actual
+composition is intentional; an inverse derivative formula remains a
+theorem following from the actual local inverse relation. No Analysis
+definition or theorem is needed to declare these functions.
+
+A sufficient finite scalar family consists of:
+
+- For each Y in {V, X_radial, X_angular}, the three scalar fields
+  Y.radial/ell, Y.angular, and `-D Omega(Y)/(2*Omega)`.
+- The three seeds `N*h_z/|J_z|`, `N/h_z`, and `N*a`.
+- With `B(x)=h_star(Theta(x))/|J_star(Theta(x))|`, the three multipliers
+  `B*w'(Theta.radial)`, `B*w(Theta.radial)`, and
+  `B*w'(Theta.radial)/Theta.radial`.
+
+This gives 15 explicit scalar functions. For each such g, the certificate
+bounds the actual `iteratedFDeriv` of `fun y => g (T.radius y.1,y.2)` at
+`(T.rho x.1,x.2)` by the polynomial estimate above. This composition can be
+declared directly in Statements; it does not need an Analysis material-chart
+definition. These are finite jets of actual geometric functions, not an
+operator estimate.
+The normalized seeds include the actual sample weight and Jacobian;
+unweighted bounds on charts alone would miss precisely that information.
+No absolute bound on a lifted angle is requested.
+
+For the global interface and endpoints, retain a second, finite-order
+geometric block: maps tau_z and q_z on the open annulus, independent of any
+field, which are C3, map the annulus into itself, obey the actual angular
+equivariance/reflection identities, and agree on each reference piece with
+
+    tau_z = G_z,m o Psi_star,m,
+    q_z = h_star,m / (h_z,m o tau_z).
+
+Bound the actual jets of q through order two and of tau of orders one and
+two by `C_z * M^A_z`. In addition retain the pure weight comparisons
+`H(tau x)/H(x) <= C_z E0(x)^A_z` and
+`M(tau x)/M(x) <= C_z E0(x)^A_z`. These constants may depend on z,
+but are chosen before the physical field. They follow from the manuscript's
+same-cell weight comparisons; alternatively retain those stronger sample
+comparisons and derive these two inequalities. Material absorption then
+gives `H(tau x)^beta M(tau x) <= C_delta H(x)^delta` for every delta < beta.
+There is no need to store any decay statement about a transported field.
+
+Finally retain C1 regularity and angular periodicity of the actual physical
+coefficients L.a, L.b, L.c on the open annulus. The old N03 reflection
+identities already give the relevant parity. The new regularity statement
+concerns these coefficient functions, not the error operator on a source.
+
+The global C3 statement and arbitrary finite piecewise jet bounds are
+different clauses. The latter do not assert matching of all normal jets
+across roots. Likewise this certificate does not repair the moving-cut
+issue by itself: its piece identities must use the actual current domains
+from the N04b repair, with the reference domains used on the reference side.
+
+### Why these primitive clauses close the remaining reference-source step
+
+Write u = H^beta v in material coordinates. For any of the three actual
+directions Y, the normalized three-branch coefficient recursion is
+
+    c -> D c(Y) - D Omega(Y)/(2*Omega) * c,
+         (Y.radial/ell) * c,
+         Y.angular * c.
+
+The first branch keeps the material derivative of v, while the other two
+increase its radial or angular order. Thus every resulting coefficient is
+a finite differential polynomial in the 15 listed geometric functions.
+The reference PDE at Theta(x) is exactly
+
+    w'(Theta.radial) D_Xradial(a*u)
+      + w(Theta.radial) D_Xradial^2(a*u)
+      + (w'(Theta.radial)/Theta.radial) D_Xangular^2(a*u).
+
+Multiplying by B and applying D_V j times, for j <= b, gives the actual
+reference canonical source jets. The required material jets of v have
+order at most b+2. The pure geometric bounds and E0^A <= C*M dominate
+their squared canonical densities by a finite sum of actual material jet
+energies with one extra M weight. More precisely, the existing
+`materialE0_rpow_le_subpowerM` gives `E0^A <= C_(A,e)*M^e` for every e>0.
+For the angular source chain, e=1/(b+1) supplies the four primitive jet
+hypotheses used by the finite product estimate; the complete path then
+costs one M, not one M per factor. Change of variables and the disjoint
+current atlas sum these energies. No bound on the number of pieces with a
+given cell index is used. Compact left-cutoff and reference-column terms
+are handled by the same estimate. The angular weak-jet lemma requires only
+smoothness on the canonical open piece, so the C3 interface does not force
+an invalid global smoothness assumption on the reference forcing.
+
+This derives Fstar in `V.level beta 0 b` at the same beta, rather than
+storing it in the certificate. The exponent gap is used separately: choose
+weakExponent < delta2 < delta1 < beta, construct the C2 flat reference
+representative, and derive its natural source/output classes and weak
+equation by `ReferenceGraphFromDecay`. The height seed supplies the actual
+canonical unknown and its required weighted zeroth level. N05's literal
+graph equivalence now places the pair (U,Fstar) in B.graph. N06, actual
+source separation, and `n07aBaseInverse_eq_of_operator` identify U with the
+chosen Banach solution. None of these conclusions is a certificate field.
+
+### Exact declaration and projection impact
+
+At the reviewed local snapshot 7103ab9784dd6cb1ba1870a1b0f35b014ada6fe0,
+the smallest cumulative placement is a new predicate, for example
+`CanonicalPrimitiveGeometry D T S C L K base epsilon`, declared in
+`Statements/Nonlinear.lean` after `CanonicalData` and its basic formulas.
+Its explicit fields use only existing material functions, `fderiv`,
+`iteratedFDeriv`, chart/height formulas, sets, and state gradings. It must
+not import Analysis or mention VolumeModelData, CanonicalDomainData,
+ScalarInverseData, membership, or norms of a variable physical field.
+
+Keep `N04Properties` and `N04PartA` unchanged for this separate addition.
+Append the new predicate to the result of `Blueprint.N04cStatement`, and
+to the final conjunction of `NonlinearPropertiesThrough04`. The actual
+coordinate producer is responsible for proving it. This makes the new
+data pass through N05, N06, N07a and N07 without another existential choice.
+
+The current direct proof edits are exactly two sites, each with a pattern
+and a constructor to update:
+
+1. `Blueprint.Assembly.N04_of_nodes`: unpack the extra N04c proof and pack
+   it into Through04.
+2. `Analysis.N06Neighborhood.n06_NonlinearPropertiesThrough05_mono`:
+   unpack it and restrict its state quantifiers to the smaller neighborhood.
+
+Add a standalone monotonicity lemma for the certificate. The bodies of
+`n07b_NonlinearPropertiesThrough06_mono` and the Through07 restriction then
+continue to call the Through05 restriction. The internal projections of
+`N04PartA`, `N04Properties`, N05 and N06 remain unchanged; appending this
+separate certificate therefore avoids renumbering their long projections.
+`N04Coordinates` has a strengthened output definition, and the assembly
+chain must be rebuilt even though its final calls have the same surface
+types. The moving-domain repair is a separate, wider change and must be
+coordinated with N04b. This is a proposed explicit upstream statement
+repair, not a proof from the previously frozen N07a hypotheses.
+
+## Audit of the separate primitive bounds and moving physical cuts
+
+The 15-field proposal above has now been checked against the actual scales
+and formulas in the readable manuscript. For the manuscript's normalized
+atlas, the separate bounds are supported; a cancellation of negative powers
+of the solution weight H is not needed between the reference multipliers
+and the normalized seed. This is a statement about the specific geometric
+construction, not a consequence of the old frozen N04 predicates for an
+arbitrary choice of their witnesses.
+
+### The profile height is not the solution weight
+
+In `05-flat-end-chain.tex`, lines 36--79 distinguish the profile amplitude
+`lambda_n = exp(-n^(5/2)+O(n))` from the solution weight
+`H_n = exp(-2*n^3/3)`. Lines 284--302 give explicit bounds for every fixed
+ordinary derivative of both w and its reciprocal. Their growth is at most
+`C_s exp(n^(5/2)+C_s*n^2)`, hence a finite power of E_n. In particular,
+the reciprocal of w is not an uncontrolled negative power of H_n.
+At a turning circle w is strictly positive: it is w' that vanishes there.
+The natural endpoints, where w vanishes, are limits of these pieces and
+are not endpoints of any one closed canonical chart.
+
+On a reference negative half, put `Jstar=abs(xi_r)`. The explicit formulas
+in `07-fixed-geometry.tex`, lines 1332--1345 and 1395--1404, give
+
+    hstar = (wstar * Jstar)^(-1/2),
+    B = hstar/Jstar = wstar^(-1/2) * Jstar^(-3/2).
+
+Both Jstar and its reciprocal have coefficient bounds up to the root.
+Consequently the three proposed reference multipliers separately satisfy
+coefficient bounds. For example,
+
+    B*wstar  = wstar^(1/2) * Jstar^(-3/2),
+    B*wstar' = wstar^(-1/2) * wstar' * Jstar^(-3/2).
+
+The extra division by the physical radius is harmless because the annulus
+has positive inner radius. At the root these formulas contain no division
+by wstar', xi, or the distance to the turning circle. The canonical length
+xi_c and its reciprocal are powers of the Morse scale A_n, so the same
+conclusion holds after unit rescaling (lines 1387--1393).
+
+For positive components, lines 1424--1432 and 1469--1485 explicitly bound
+the interpolated height, its reciprocal, the inverse coordinate and both
+source factors. The general-state inverse and height estimates are proved
+in lines 1654--1687, using low-order comparability with the reference
+Jacobian and height. The higher-order dependence can be retained as the
+polynomial Q_r bound used in the proposed certificate.
+
+### Every normalized seed and direction has the same coefficient scale
+
+The only discrete solution-weight denominator in the three seeds is inside
+`R=(H(x.radial)/H(sample(cell m)))^beta`. The geometric weight-conversion
+lemma, lines 1505--1540, bounds this ratio by coefficient powers on the
+actual cell and its neighbours. Material derivatives of R equal R times
+polynomials in material derivatives of log H. These logarithmic derivatives
+are bounded, so differentiation does not produce an independent factor
+`H(sample(cell m))^(-beta)` that must be estimated on its own.
+
+Thus each of
+
+    N*h_z/abs(J_z),  N/h_z,  N*a
+
+has coefficient bounds separately: N is `sqrt(ell*abs(J_z))*R`, and a
+is a ratio of two actual height factors at the corresponding current and
+reference physical points. The cell label must refer to this actual
+location; an arbitrary old `K.cell` assignment does not establish the
+weight comparison.
+
+The nine direction fields have the same property. The directions are
+derivatives of actual chart/inverse-chart compositions. Passing to
+material coordinates introduces ell and its reciprocal; the drift term
+uses the reciprocal of `Omega=ell*abs(J_z)`. Lines 1505--1540 and
+1654--1677 control precisely these quantities and their finite jets.
+All reciprocals here are of nonvanishing regularized quantities. The
+manuscript explicitly excludes use of the reciprocal Jacobian of the
+unregularized travel coordinates `(sigma,phi)`, which vanishes at a root
+(lines 1674--1677). Likewise, expanding the regularized height through
+`delta/sqrt(xi)` and separately bounding delta's reciprocal at the root
+would be invalid. The 15-field formulas themselves do neither.
+
+It is therefore unnecessary to replace these 15 actual fields by the
+fully expanded reference-source coefficients just to avoid an H loss.
+Their geometric proof still has to be supplied for the chosen atlas;
+the present review does not promote those estimates to existing Lean
+theorems or to consequences of the old existential interface.
+
+### What has, and has not, a compatible fixed-domain model
+
+The reference construction has a concrete radial midpoint r_c, defined by
+`sigma_star(r_c)=T/2`, and therefore has fixed physical half-intervals.
+The manuscript's general-state construction instead uses
+`sigma_z(r,theta) <= T/2` and `sigma_z(r,theta) >= T/2`
+(lines 1030--1034). Its assertion that the domain is fixed concerns the
+canonical cylinders and transmission relations (lines 1735--1747), not
+fixed radial physical half-intervals for all states.
+
+A simple local geometric family shows the distinction. On one negative
+component take a smooth radial bump psi, zero near its two roots but with
+`psi(r_c) != 0`, and, for small epsilon, set
+
+    F_epsilon(r,theta) = (r + epsilon*psi(r)*cos(2*theta), theta).
+
+Pull back the reference divergence density by this diffeomorphism, and
+set `Psi_epsilon=Psi_star o F_epsilon` and
+`h_epsilon=h_star o F_epsilon`. The root germs, boundary return maps and
+canonical differential expression remain the reference ones. The physical
+middle cut is nevertheless
+
+    r + epsilon*psi(r)*cos(2*theta) = r_c,
+
+which is nonradial when epsilon is nonzero. The deformation is confined to
+one compact component, so it creates no new endpoint-scale difficulty.
+This illustrates the geometric domain issue; it has not been checked
+against the specific nonlinear coefficient formulas in N03 or every N05
+and N06 clause and is not an existential counterexample to N07a or N07b.
+
+Reference-only atlases, and restricted diffeomorphism families that fix
+all cuts, provide models with static physical halves. There is currently
+no verified reason that the manuscript's full actual state family belongs
+to this restricted class. Therefore the proposed 15-field certificate
+cannot be advertised as realized by the actual family while its piece
+identities still use the old static physicalLeft/physicalRight interface.
+The current physical domains and the reference physical intervals must be
+distinguished as in the N04b geometry repair. This requires checking and
+porting the actual atlas, change-of-variables and covering arguments; it
+cannot be hidden by appending a new estimate predicate to the old fields.
+
+## The coordinated N07b implementation
+
+The complete candidate couples the dynamic-domain repair above to the
+separate primitive geometric certificate. `N04Properties` retains its four
+named groups after the domain migration: geometry, cut/operator identities,
+the old quantitative coefficient clause, and actual source pairing. The
+new `CanonicalPrimitiveGeometry` is appended to `N04cStatement` and
+`NonlinearPropertiesThrough04`, and `Assembly.N04_of_nodes` carries the
+same certificate into the cumulative construction. It is not inserted into
+the conclusion of N07b as a condition to be discharged later.
+
+For precision, the old quantitative clause was:
+
+```lean
+(∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ z ∈ U, ∀ m p,
+  p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →
+    |mixedDerivative a b (K.potential z m) p| +
+    |mixedDerivative a b (K.dividedDifference z m).a p| +
+    |mixedDerivative a b (K.dividedDifference z m).b p| +
+    |mixedDerivative a b (K.dividedDifference z m).c p| ≤
+      B * T.E0 (T.sample (K.cell m)) ^ B *
+        (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|))
+```
+
+This clause does not mention the geometric quantities below. The extra
+certificate makes the missing producer obligations explicit, on the same
+state neighborhood and for the same actual charts and sample labels:
+
+| Fields | Actual quantities retained |
+| --- | --- |
+| Nine direction fields | For each of the current inverse angular direction and the transported reference radial/angular directions: the radial component divided by ell, the angular component, and the logarithmic derivative of `ell * abs(J)` divided by minus two. |
+| Three normalized initial fields | `N * h / abs(J)`, `N / h`, and `N * (href at the corresponding point / h)`, where `N = sqrt(ell * abs(J)) * (H / Hsample)^(3/4)`. |
+| Three reference multipliers | `(href / abs(Jref)) * w'`, the same factor times `w`, and the same factor times `w' / r`, evaluated at the corresponding reference point. |
+| Global finite transport data | Actual transition maps and height ratios, their C3 matching on the open annulus, first two jet bounds, and material comparisons of H and M along the transition. |
+| Physical coefficient data | Smoothness and the angular periodicity needed for the actual full-period physical Green identity. |
+
+The `materialJets` constants and polynomial state orders are chosen before
+the state, piece, or point. These uniform estimates give the common source
+and bulk-coefficient neighborhoods. The lower-order `transport` constants
+are chosen after fixing the state; they remain independent of the physical
+field, piece, and point. This suffices for the reference graph construction,
+which is made separately at each state. The certificate has no physical
+source or unknown, no volume model, no reference graph, no inverse operator,
+and no final source norm in its fields. The upstream coordinate producer still
+has to prove it. Thus the cumulative N04 output is explicitly stronger;
+the surface theorem signature of N07b is unchanged, but this is a repaired
+statement layer rather than a proof from the previous frozen definitions.
+
+The candidate derives the actual consequences in this order:
+
+1. The original source is encoded in the prescribed `V.level (3/4) 0 b`
+   from its true finite angular expansion, coefficient-square bound and
+   atlas energy. Its norm is controlled by source grading `b+1`.
+2. The primitive reciprocal-height field gives the actual unknown's
+   weighted canonical zeroth level, with the loss already selected by N05.
+3. The actual transition constructs a global C2 reference representative
+   and preserves the physical row. Both endpoint extensions use the same
+   general flat-extension theorem.
+4. The reference bulk forcing has smooth closed-piece representatives.
+   Its true angular jets are finite sums of material jets of the physical
+   height. A common physical majorant, independent of the piece label,
+   is integrable with order `b+3`. Summing over the actual current atlas
+   constructs its source element at the same exponent `3/4`.
+5. The genuine physical cutoff flux and reference column have compact
+   radial support and zero source mean. Their actual source encodings add
+   to the bulk element in the same volume model. `S.chiLeft` is not assumed
+   equal to `D.chiLeft`; their compact difference is handled explicitly.
+6. A strict exponent gap below `3/4` gives the natural endpoint class and
+   reference graph. Only this natural graph uses the weaker exponent;
+   the reference forcing remains in the original source level.
+7. N05's exact graph equivalence places the constructed pair in the given
+   fixed domain. The repaired full-period N06 relation identifies its
+   current source. The existing left-inverse identity then identifies the
+   complete graph element, preserving the left constant, border scalar
+   and zero compatibility scalar.
+
+The final neighborhood is the intersection of the two finite geometric
+estimate neighborhoods. Every original witness is retained. The final
+source grading is `b+1`; multiplying its uniform bound by the required
+state factor is legitimate because that factor is at least one. The
+proof and all consumer ports still require a green CI run and the exact
+standard-axiom audit before this candidate is reported as a closed node.

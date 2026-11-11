@@ -35,27 +35,27 @@ theorem n07b_sourceBound_row_integral
     (f : S.Source) (b m : ℕ) :
     IntegrableOn
         (n07bSourceRowDensity T K z ((S.height (3 / 4 : ℝ)).decode f.val) b m)
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) ∧
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) ∧
       n07bActualCanonicalJetEnergy T K z f (3 / 4 : ℝ) 0 b m =
-        ∫ x in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+        ∫ x in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
           n07bSourceRowDensity T K z ((S.height (3 / 4 : ℝ)).decode f.val) b m x := by
   classical
   let f₀ : PolarPoint → ℝ := (S.height (3 / 4 : ℝ)).decode f.val
   have hf : ContDiff ℝ ∞ f₀ :=
     (physical_height_contDiff_and_flatJets hT hS (by norm_num : (0 : ℝ) < 3 / 4) f.val).1
   have hP : MeasurableSet
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
-    (measurableSet_Ioo.prod MeasurableSet.univ).inter
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
+    (hK.domains z hz hs m).1.measurableSet.inter
       (MeasurableSet.univ.prod measurableSet_Ioc)
   have hjet (j : Fin (b + 1)) := n07bActualCanonicalAngularJet_memLp hK hz hs hT hS f m j.val
-  have heq (j : Fin (b + 1)) (x : PolarPoint) (hx : x ∈ physicalPieceOpen S K m) :
+  have heq (j : Fin (b + 1)) (x : PolarPoint) (hx : x ∈ physicalPieceOpen S K z m) :
       n07bActualCanonicalAngularJet K z f m j.val (K.chart z m x) =
         n07bPhysicalSourceJet K z m f₀ j.val x :=
     n07b_canonicalSource_angularJet_comp_chart_of_contDiff hK hz hs m hf j.val hx
   have hi (j : Fin (b + 1)) :
       IntegrableOn (fun x => |planeJacobian (K.chart z m) x| *
         (n07bPhysicalSourceJet K z m f₀ j.val x) ^ 2)
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
     apply (n07b_sourceBound_square_integrable hK hz hs m (hjet j)).congr
     filter_upwards [ae_restrict_mem hP] with x hx
     exact congrArg (fun v : ℝ => |planeJacobian (K.chart z m) x| * v ^ 2)
@@ -63,7 +63,7 @@ theorem n07b_sourceBound_row_integral
   have hterm (j : Fin (b + 1)) :
       IntegrableOn (fun x => (n07bCanonicalSourceFactor T K (3 / 4 : ℝ) 0 m)⁻¹ ^ 2 *
         (|planeJacobian (K.chart z m) x| * (n07bPhysicalSourceJet K z m f₀ j.val x) ^ 2))
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
     (hi j).const_mul _
   constructor
   · change IntegrableOn (fun x => ∑ j : Fin (b + 1),
@@ -73,7 +73,7 @@ theorem n07b_sourceBound_row_integral
   · change (∑ j : Fin (b + 1), (n07bCanonicalSourceFactor T K (3 / 4 : ℝ) 0 m)⁻¹ ^ 2 *
       (eLpNorm (n07bActualCanonicalAngularJet K z f m j.val) 2
         (canonicalMeasure S K m)).toReal ^ 2) =
-      ∫ x in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      ∫ x in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         ∑ j : Fin (b + 1), (n07bCanonicalSourceFactor T K (3 / 4 : ℝ) 0 m)⁻¹ ^ 2 *
           (|planeJacobian (K.chart z m) x| * (n07bPhysicalSourceJet K z m f₀ j.val x) ^ 2)
     rw [integral_finsetSum Finset.univ (fun j _ => hterm j)]
@@ -93,7 +93,7 @@ theorem n07b_sourceBound_energy_summable
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (f : S.Source) (b : ℕ) {A : ℝ} (hA : 0 ≤ A)
-    (hcoeff : ∀ m x, x ∈ physicalPieceOpen S K m →
+    (hcoeff : ∀ m x, x ∈ physicalPieceOpen S K z m →
       ∀ j : Fin (b + 1), ∀ i : n07bAngularChainIndex j.val,
         n07bSourceGeometricWeight T K z m x *
           n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2 ≤ A * T.M x.1 ^ 2) :
@@ -107,18 +107,18 @@ theorem n07b_sourceBound_energy_summable
   have hg : IntegrableOn g (Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi) :=
     (n07bSourceMaterialMajorant_integrable hT hf b).const_mul A
   have hbound (m : ℕ) : n07bActualCanonicalJetEnergy T K z f (3 / 4 : ℝ) 0 b m ≤
-      ∫ x in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), g x := by
+      ∫ x in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), g x := by
     have hrow := n07b_sourceBound_row_integral hT hS hK hz hs f b m
     rw [hrow.2]
-    have hsub : physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) ⊆
+    have hsub : physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) ⊆
         Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi :=
-      fun x hx => ⟨(hK.2.2.2.1 m).2.2 hx.1.1, hx.2.2⟩
+      fun x hx => ⟨((hK.domains z hz hs m).2.2.1 hx.1).1, hx.2.2⟩
     apply integral_mono_ae hrow.1 (hg.mono_set hsub)
     filter_upwards [ae_restrict_mem
-      ((measurableSet_Ioo.prod MeasurableSet.univ).inter
+      ((hK.domains z hz hs m).1.measurableSet.inter
         (MeasurableSet.univ.prod measurableSet_Ioc))] with x hx
     exact n07b_sourceBound_row_pointwise hT hK hz hs hf.1 b m hx.1 (hcoeff m x hx.1)
-  have hsum := n07b_summable_energy_of_piece_integral_bound hK hg
+  have hsum := n07b_summable_energy_of_piece_integral_bound hK hz hs hg
     (fun m => n07bActualCanonicalJetEnergy_nonneg T K z f (3 / 4 : ℝ) 0 b m) hbound
   refine ⟨hsum.1, hsum.2.trans ?_⟩
   change (∫ x in Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi,
@@ -136,7 +136,7 @@ theorem n07b_exists_sourceLift_of_M_bound
     (hK : N04PartA D S C K base ε)
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (f : S.Source) (b : ℕ) {A : ℝ} (hA : 0 ≤ A)
-    (hcoeff : ∀ m x, x ∈ physicalPieceOpen S K m →
+    (hcoeff : ∀ m x, x ∈ physicalPieceOpen S K z m →
       ∀ j : Fin (b + 1), ∀ i : n07bAngularChainIndex j.val,
         n07bSourceGeometricWeight T K z m x *
           n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2 ≤ A * T.M x.1 ^ 2) :

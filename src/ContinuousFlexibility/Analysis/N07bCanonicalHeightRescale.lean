@@ -78,29 +78,45 @@ theorem n07bCanonicalHeightRescale_partA
     {D : ReferenceData} {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
     (hK : N04PartA D S C K base ε) (ha : ∀ m, 0 < a m) :
     N04PartA D S C (n07bCanonicalHeightRescale K a) base ε := by
-  rcases hK with
-    ⟨hopen, hsupport, hnorm, hpieces, hpositive, hnegative, hcover,
-      hcharts, hclosed, hreflect, hinverseReflect⟩
-  refine ⟨hopen, hsupport, ?_, hpieces, hpositive, hnegative, hcover,
-    ?_, ?_, ?_, hinverseReflect⟩
-  · intro z hz hs m p hp hpn
-    obtain ⟨hc, hh⟩ := hnorm z hz hs m p hp hpn
+  refine {
+    normalizationOpen := hK.normalizationOpen
+    normalizationSupport := hK.normalizationSupport
+    normalization := ?_
+    referenceBounds := hK.referenceBounds
+    referencePositive := hK.referencePositive
+    referenceNegative := hK.referenceNegative
+    referencePartition := hK.referencePartition
+    referenceDomain := hK.referenceDomain
+    domains := hK.domains
+    partition := hK.partition
+    charts := ?_
+    boundary := ?_
+    reflection := ?_
+    inverseReflection := hK.inverseReflection }
+  · intro z hz hs m
+    have hn := hK.normalization z hz hs m
+    refine ⟨hn.1, ?_⟩
+    intro p hp hpn
+    obtain ⟨hc, hh⟩ := hn.2 p hp hpn
     exact ⟨hc, congrArg (fun t : ℝ => a m * t) hh⟩
   · intro z hz hs m
     obtain ⟨hmap, himap, hleft, hright, hchart, hinverse, hheight, hregular⟩ :=
-      hcharts z hz hs m
+      hK.charts z hz hs m
     refine ⟨hmap, himap, hleft, hright, hchart, hinverse,
       (contDiffOn_const (c := a m)).mul hheight, ?_⟩
     intro p hp
     obtain ⟨hpos, hJ, hchartPeriod, hheightPeriod⟩ := hregular p hp
     exact ⟨mul_pos (ha m) hpos, hJ, hchartPeriod,
       congrArg (fun t : ℝ => a m * t) hheightPeriod⟩
-  · intro z hz hs m p hp
-    obtain ⟨hchart, hheight, hJ, hpos⟩ := hclosed z hz hs m p hp
+  · intro z hz hs m
+    obtain ⟨hmap, himap, hleft, hright, hregular, hgerm⟩ := hK.boundary z hz hs m
+    refine ⟨hmap, himap, hleft, hright, ?_, hgerm⟩
+    intro p hp
+    obtain ⟨hchart, hheight, hJ, hpos⟩ := hregular p hp
     exact ⟨hchart, (contDiffAt_const (c := a m)).mul hheight,
       hJ, mul_pos (ha m) hpos⟩
   · intro z hz hs m p hp
-    obtain ⟨hchart, hheight, hJ⟩ := hreflect z hz hs m p hp
+    obtain ⟨hchart, hheight, hJ⟩ := hK.reflection z hz hs m p hp
     exact ⟨hchart, congrArg (fun t : ℝ => a m * t) hheight, hJ⟩
 
 end ContinuousFlexibility.Analysis

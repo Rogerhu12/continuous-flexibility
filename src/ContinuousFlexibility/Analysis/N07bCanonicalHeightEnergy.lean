@@ -31,7 +31,7 @@ theorem n07b_canonicalSource_inverseDensity_mul (m : ℕ) (u : PolarPoint → �
     canonicalSource S K z m
       (fun x => |planeJacobian (K.chart z m) x| / K.height z m x ^ 2 * u x) p =
         canonicalHeight S K z m u p := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hcharts := hK.charts z hz hsector m
   have hx := hcharts.2.1 hp
   have hregular := hcharts.2.2.2.2.2.2.2 (K.inverseChart z m p) hx
   have hh := hregular.1.ne'
@@ -42,7 +42,7 @@ theorem n07b_canonicalSource_inverseDensity_mul (m : ℕ) (u : PolarPoint → �
 /-- Exact square-energy conversion for the actual canonical height. -/
 theorem n07b_canonicalHeight_square_integral (m : ℕ) (u : PolarPoint → ℝ) :
     (∫ p, canonicalHeight S K z m u p ^ 2 ∂canonicalMeasure S K m) =
-      ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         |planeJacobian (K.chart z m) p| / K.height z m p ^ 2 * u p ^ 2 := by
   have hpair := canonicalSource_pairing_of_partA hK hz hsector m u
     (fun p => |planeJacobian (K.chart z m) p| / K.height z m p ^ 2 * u p)
@@ -70,7 +70,7 @@ theorem n07b_canonicalHeight_square_integral (m : ℕ) (u : PolarPoint → ℝ) 
 theorem n07b_canonicalHeight_toLp_norm_sq (m : ℕ) (u : PolarPoint → ℝ)
     (hu : MemLp (canonicalHeight S K z m u) 2 (canonicalMeasure S K m)) :
     ‖hu.toLp (canonicalHeight S K z m u)‖ ^ 2 =
-      ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         |planeJacobian (K.chart z m) p| / K.height z m p ^ 2 * u p ^ 2 := by
   rw [spaces_lp_norm_sq_toLp hu, n07b_canonicalHeight_square_integral hK hz hsector m u]
 

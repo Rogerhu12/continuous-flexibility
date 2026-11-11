@@ -1,22 +1,20 @@
 import ContinuousFlexibility.Analysis.N07bCanonicalSourceIntegrability
-import ContinuousFlexibility.Analysis.N07bCompactLocalBounds
-import ContinuousFlexibility.Analysis.CanonicalInteriorInverse
 import ContinuousFlexibility.Analysis.PointwiseCylinderJets
 import ContinuousFlexibility.Analysis.PhysicalTransmissionTrace
 import Mathlib.Analysis.Calculus.Deriv.Abs
 
 /-!
-# Actual canonical source jets on a single piece
+# Actual canonical source jets on a single dynamic piece
 
-At a physical endpoint the prescribed inverse is used only on the
-canonical interior. The actual inverse function theorem supplies a smooth
-local inverse agreeing there with the prescribed inverse. Each actual jet
-therefore has a local bound pulled back to the physical closed piece.
-Compactness of one fundamental physical rectangle gives a bound for that
-piece, and hence actual L² membership of every canonical mixed jet.
+The stored boundary inverse germ makes the actual canonical source smooth
+at every point of the closed canonical cylinder whenever the physical
+source is smooth at every point of the actual physical closure. Compactness
+is used only on the fixed canonical fundamental rectangle.
 
-No estimate uniform in the piece or state, and no global summability, is
-claimed in this module.
+The generic extension lemmas also treat an arbitrary canonical field that
+agrees on the open piece with a smooth closed-piece extension. They do not
+require the original field to be smooth across interfaces. No estimate
+uniform in the piece or state, and no global summability, is asserted.
 -/
 
 noncomputable section
@@ -29,6 +27,84 @@ open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
 
+/-- A pointwise smooth extension has bounded actual jets on a compact
+closed canonical fundamental rectangle. -/
+theorem n07b_canonical_mixedDerivative_bound_closed
+    {S : PhysicalSpacesData} {K : CanonicalData S} (m : ℕ)
+    {e : PolarPoint → ℝ}
+    (he : ∀ p ∈ canonicalClosed S K m, ContDiffAt ℝ ∞ e p) (a b : ℕ) :
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ p ∈
+      Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi,
+        ‖mixedDerivative a b e p‖ ≤ B := by
+  have hcont : ContinuousOn (mixedDerivative a b e)
+      (Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi) := by
+    intro p hp
+    exact (contDiffAt_mixedDerivative (he p ⟨hp.1, mem_univ _⟩) a b).continuousAt.continuousWithinAt
+  obtain ⟨B, hB⟩ :=
+    (isCompact_Icc.prod isCompact_Icc).bddAbove_image hcont.norm
+  refine ⟨max B 0, le_max_right _ _, ?_⟩
+  intro p hp
+  exact (hB ⟨p, hp, rfl⟩).trans (le_max_left _ _)
+
+/-- Actual jets of a smooth closed-piece extension belong to the given
+canonical L² space. Only the canonical rectangle is used. -/
+theorem n07b_canonical_mixedDerivative_memLp_closed
+    {S : PhysicalSpacesData} {K : CanonicalData S} (m : ℕ)
+    {e : PolarPoint → ℝ}
+    (he : ∀ p ∈ canonicalClosed S K m, ContDiffAt ℝ ∞ e p) (a b : ℕ) :
+    MemLp (mixedDerivative a b e) 2 (canonicalMeasure S K m) := by
+  have hcont : ContinuousOn (mixedDerivative a b e)
+      (Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+    intro p hp
+    exact (contDiffAt_mixedDerivative
+      (he p ⟨⟨hp.1.1.le, hp.1.2.le⟩, mem_univ _⟩) a b).continuousAt.continuousWithinAt
+  have hmeas : AEStronglyMeasurable (mixedDerivative a b e)
+      (canonicalMeasure S K m) :=
+    hcont.aestronglyMeasurable (measurableSet_Ioo.prod measurableSet_Ioc)
+  obtain ⟨B, _, hB⟩ := n07b_canonical_mixedDerivative_bound_closed m he a b
+  refine MemLp.of_bound hmeas B ?_
+  have ha : ∀ᵐ p ∂canonicalMeasure S K m,
+      p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi :=
+    ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)
+  filter_upwards [ha] with p hp
+  exact hB p ⟨⟨hp.1.1.le, hp.1.2.le⟩, ⟨hp.2.1.le, hp.2.2⟩⟩
+
+/-- Equality on the actual canonical open set identifies all actual jets
+there with those of a closed-piece extension. No boundary value of g is
+used in the resulting bound. -/
+theorem n07b_canonical_mixedDerivative_bound_of_extension
+    {S : PhysicalSpacesData} {K : CanonicalData S} (m : ℕ)
+    {g e : PolarPoint → ℝ} (hge : EqOn g e (canonicalOpen S K m))
+    (he : ∀ p ∈ canonicalClosed S K m, ContDiffAt ℝ ∞ e p) (a b : ℕ) :
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ p ∈
+      Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi,
+        ‖mixedDerivative a b g p‖ ≤ B := by
+  obtain ⟨B, hB, hbound⟩ := n07b_canonical_mixedDerivative_bound_closed m he a b
+  have hjets := mixedDerivative_eqOn_of_isOpen
+    (isOpen_Ioo.prod isOpen_univ) hge a b
+  refine ⟨B, hB, ?_⟩
+  intro p hp
+  rw [hjets ⟨hp.1, mem_univ _⟩]
+  exact hbound p ⟨⟨hp.1.1.le, hp.1.2.le⟩, ⟨hp.2.1.le, hp.2.2⟩⟩
+
+/-- A smooth extension on the closed canonical piece suffices for the
+actual open-piece jets of an arbitrary raw canonical field to be in L².
+The raw field need not be globally smooth or smooth across interfaces. -/
+theorem n07b_canonical_mixedDerivative_memLp_of_extension
+    {S : PhysicalSpacesData} {K : CanonicalData S} (m : ℕ)
+    {g e : PolarPoint → ℝ} (hge : EqOn g e (canonicalOpen S K m))
+    (he : ∀ p ∈ canonicalClosed S K m, ContDiffAt ℝ ∞ e p) (a b : ℕ) :
+    MemLp (mixedDerivative a b g) 2 (canonicalMeasure S K m) := by
+  have hjets := mixedDerivative_eqOn_of_isOpen
+    (isOpen_Ioo.prod isOpen_univ) hge a b
+  have hAE : mixedDerivative a b e =ᵐ[canonicalMeasure S K m] mixedDerivative a b g := by
+    have ha : ∀ᵐ p ∂canonicalMeasure S K m,
+        p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi :=
+      ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)
+    filter_upwards [ha] with p hp
+    exact (hjets ⟨hp.1, mem_univ _⟩).symm
+  exact MemLp.ae_eq hAE (n07b_canonical_mixedDerivative_memLp_closed m he a b)
+
 variable {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
   {K : CanonicalData S} {base : ℕ} {ε : ℝ}
   (hK : N04PartA D S C K base ε)
@@ -37,152 +113,95 @@ variable {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData
 
 include hK hz hsector
 
-/-- The physical source factor is smooth at every closed-piece point where
-the physical source itself is smooth. -/
+/-- The physical source factor is smooth at every point of the actual
+physical closure where the physical source is smooth. -/
 theorem n07b_contDiffAt_physicalSourceFactor (m : ℕ)
     {f : PolarPoint → ℝ} {p : PolarPoint}
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hp : p ∈ physicalPieceClosed S K z m)
     (hf : ContDiffAt ℝ ∞ f p) :
     ContDiffAt ℝ ∞
       (fun x => K.height z m x * f x / |planeJacobian (K.chart z m) x|) p := by
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hsector m p hp
+  have hclosed := (hK.boundary z hz hsector m).2.2.2.2.1 p hp
   have hJ := ContinuousFlexibility.contDiffAt_planeJacobian hclosed.1
   exact (hclosed.2.1.mul hf).div (hJ.abs hclosed.2.2.1)
     (abs_ne_zero.mpr hclosed.2.2.1)
 
-/-- The actual prescribed source conversion is smooth on its canonical
-open piece. Only pointwise physical smoothness on the closed strip is used. -/
-theorem n07b_contDiffOn_canonicalSource (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ∀ p : PolarPoint,
-      p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) → ContDiffAt ℝ ∞ f p) :
-    ContDiffOn ℝ ∞ (canonicalSource S K z m f) (canonicalOpen S K m) := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  intro p hp
-  have hx := hcharts.2.1 hp
-  have hxclosed : (K.inverseChart z m p).1 ∈
-      Icc (K.physicalLeft m) (K.physicalRight m) := ⟨hx.1.1.le, hx.1.2.le⟩
-  have hraw := n07b_contDiffAt_physicalSourceFactor hK hz hsector m
-    hxclosed (hf _ hxclosed)
-  have hinv : ContDiffAt ℝ ∞ (K.inverseChart z m) p :=
-    hcharts.2.2.2.2.2.1.contDiffAt
-      ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp)
-  change ContDiffWithinAt ℝ ∞
+/-- The actual stored inverse, including its genuine boundary germ,
+gives smoothness of the actual canonical source at closed-piece points. -/
+theorem n07b_contDiffAt_canonicalSource_closed (m : ℕ) {f : PolarPoint → ℝ}
+    (hf : ∀ p ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f p)
+    {p : PolarPoint} (hp : p ∈ canonicalClosed S K m) :
+    ContDiffAt ℝ ∞ (canonicalSource S K z m f) p := by
+  have hx := (hK.boundary z hz hsector m).2.1 hp
+  have hraw := n07b_contDiffAt_physicalSourceFactor hK hz hsector m hx (hf _ hx)
+  have hinv := n04b_inverseChart_contDiffAt_closed hK hz hsector m hp
+  change ContDiffAt ℝ ∞
     ((fun x => K.height z m x * f x / |planeJacobian (K.chart z m) x|) ∘
-      K.inverseChart z m) (canonicalOpen S K m) p
-  exact (hraw.comp p hinv).contDiffWithinAt
+      K.inverseChart z m) p
+  exact hraw.comp p hinv
 
-/-- Every finite actual mixed jet has an interior bound near each physical
-closed-piece point. This statement never evaluates the prescribed inverse
-at a canonical endpoint. -/
+/-- Closed-piece physical smoothness gives the usual open canonical
+smoothness without assuming a static physical rectangle. -/
+theorem n07b_contDiffOn_canonicalSource (m : ℕ) {f : PolarPoint → ℝ}
+    (hf : ∀ p ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f p) :
+    ContDiffOn ℝ ∞ (canonicalSource S K z m f) (canonicalOpen S K m) := by
+  intro p hp
+  exact (n07b_contDiffAt_canonicalSource_closed hK hz hsector m hf
+    ⟨⟨hp.1.1.le, hp.1.2.le⟩, mem_univ _⟩).contDiffWithinAt
+
+/-- The actual mixed jet composed with the chart has a local bound at
+every point of the actual physical closure. -/
 theorem n07b_canonicalSource_mixedDerivative_local_bound
     (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ∀ p : PolarPoint,
-      p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) → ContDiffAt ℝ ∞ f p)
-    (a b : ℕ) (p : PolarPoint)
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
-    ∃ B : ℝ, ∀ᶠ x in 𝓝 p, x ∈ physicalPieceOpen S K m →
+    (hf : ∀ p ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f p)
+    (a b : ℕ) (p : PolarPoint) (hp : p ∈ physicalPieceClosed S K z m) :
+    ∃ B : ℝ, ∀ᶠ x in 𝓝 p, x ∈ physicalPieceOpen S K z m →
       ‖mixedDerivative a b (canonicalSource S K z m f) (K.chart z m x)‖ ≤ B := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hsector m p hp
-  obtain ⟨e, δ, he, hpe, heSmooth, hδ, htarget, hlocal, heq⟩ :=
-    canonicalChart_exists_smooth_interiorInverse hK hz hsector m p hp
-  let g₀ : PolarPoint → ℝ := fun x =>
-    K.height z m x * f x / |planeJacobian (K.chart z m) x|
-  let g : PolarPoint → ℝ := g₀ ∘ e.symm
-  have hinvp : e.symm (K.chart z m p) = p := by
-    rw [← he]
-    exact e.left_inv hpe
-  have hg₀ : ContDiffAt ℝ ∞ g₀ (e.symm (K.chart z m p)) := by
-    rw [hinvp]
-    exact n07b_contDiffAt_physicalSourceFactor hK hz hsector m hp (hf p hp)
-  have hg : ContDiffAt ℝ ∞ g (K.chart z m p) := hg₀.comp _ heSmooth
-  have hjet : ContinuousAt (mixedDerivative a b g) (K.chart z m p) :=
-    (contDiffAt_mixedDerivative hg a b).continuousAt
-  let B := ‖mixedDerivative a b g (K.chart z m p)‖ + 1
-  have hbound : ∀ᶠ q in 𝓝 (K.chart z m p), ‖mixedDerivative a b g q‖ ≤ B :=
-    hjet.norm.eventually_le_const (lt_add_one _)
-  have hnear : ∀ᶠ x in 𝓝 p,
-      K.chart z m x ∈ Metric.ball (K.chart z m p) δ :=
-    hclosed.1.continuousAt.eventually (Metric.ball_mem_nhds _ hδ)
-  have hcompose : ∀ᶠ x in 𝓝 p,
-      ‖mixedDerivative a b g (K.chart z m x)‖ ≤ B :=
-    hclosed.1.continuousAt.eventually hbound
-  have hsame : EqOn (canonicalSource S K z m f) g
-      (Metric.ball (K.chart z m p) δ ∩ canonicalOpen S K m) := by
-    intro q hq
-    change g₀ (K.inverseChart z m q) = g₀ (e.symm q)
-    rw [heq hq]
-  have hjetsame := mixedDerivative_eqOn_of_isOpen
-    (Metric.isOpen_ball.inter (isOpen_Ioo.prod isOpen_univ)) hsame a b
-  refine ⟨B, ?_⟩
-  filter_upwards [hnear, hcompose] with x hx hboundx
-  intro hxopen
-  rw [hjetsame ⟨hx, hcharts.1 hxopen⟩]
-  exact hboundx
+  have hclosed := hK.boundary z hz hsector m
+  have hsource := n07b_contDiffAt_canonicalSource_closed hK hz hsector m hf (hclosed.1 hp)
+  have hjet : ContinuousAt
+      (fun x => mixedDerivative a b (canonicalSource S K z m f) (K.chart z m x)) p :=
+    (contDiffAt_mixedDerivative hsource a b).continuousAt.comp
+      (hclosed.2.2.2.2.1 p hp).1.continuousAt
+  refine ⟨‖mixedDerivative a b (canonicalSource S K z m f) (K.chart z m p)‖ + 1, ?_⟩
+  filter_upwards [hjet.norm.eventually_le_const (lt_add_one _)] with x hx
+  exact fun _ => hx
 
-/-- Compactness gives one bound for each actual canonical mixed jet on the
-open fundamental rectangle. The constant may depend on every displayed
-parameter. -/
+/-- A compact canonical rectangle bounds every actual source jet, including
+the canonical boundary values supplied by the genuine inverse germ. -/
+theorem n07b_canonicalSource_mixedDerivative_bound_closed
+    (m : ℕ) {f : PolarPoint → ℝ}
+    (hf : ∀ p ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f p) (a b : ℕ) :
+    ∃ B : ℝ, 0 ≤ B ∧ ∀ p ∈
+      Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi,
+        ‖mixedDerivative a b (canonicalSource S K z m f) p‖ ≤ B :=
+  n07b_canonical_mixedDerivative_bound_closed m
+    (fun _ hp => n07b_contDiffAt_canonicalSource_closed hK hz hsector m hf hp) a b
+
+/-- The original open fundamental-rectangle bound follows from the actual
+closed canonical bound. -/
 theorem n07b_canonicalSource_mixedDerivative_bound
     (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ∀ p : PolarPoint,
-      p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) → ContDiffAt ℝ ∞ f p)
-    (a b : ℕ) :
+    (hf : ∀ p ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f p) (a b : ℕ) :
     ∃ B : ℝ, 0 ≤ B ∧ ∀ p ∈
       Ioo (K.left m) (K.right m) ×ˢ Ioo (0 : ℝ) Real.pi,
         ‖mixedDerivative a b (canonicalSource S K z m f) p‖ ≤ B := by
-  have hcompact : IsCompact
-      (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ Icc (0 : ℝ) Real.pi) :=
-    isCompact_Icc.prod isCompact_Icc
-  obtain ⟨B, hB, hbound⟩ := n07b_exists_bound_on_compact_of_local_bounds
-    (U := physicalPieceOpen S K m)
-    (f := fun x => mixedDerivative a b (canonicalSource S K z m f) (K.chart z m x))
-    hcompact (fun p hp =>
-      n07b_canonicalSource_mixedDerivative_local_bound hK hz hsector m hf a b p hp.1)
-  refine ⟨B, hB, ?_⟩
-  intro p hp
-  have hpin : p ∈ canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi) :=
-    ⟨⟨hp.1, mem_univ _⟩, ⟨mem_univ _, hp.2⟩⟩
-  rw [← canonicalChart_image_openStrip hK hz hsector m] at hpin
-  obtain ⟨x, hx, hxp⟩ := hpin
-  rw [← hxp]
-  exact hbound x
-    ⟨⟨hx.1.1.1.le, hx.1.1.2.le⟩, ⟨hx.2.2.1.le, hx.2.2.2.le⟩⟩ hx.1
+  obtain ⟨B, hB, hbound⟩ :=
+    n07b_canonicalSource_mixedDerivative_bound_closed hK hz hsector m hf a b
+  exact ⟨B, hB, fun p hp =>
+    hbound p ⟨⟨hp.1.1.le, hp.1.2.le⟩, ⟨hp.2.1.le, hp.2.2.le⟩⟩⟩
 
 /-- Every actual mixed derivative of the actual source conversion belongs
 to the prescribed piece's L² space. -/
 theorem n07b_canonicalSource_mixedDerivative_memLp
     (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ∀ p : PolarPoint,
-      p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) → ContDiffAt ℝ ∞ f p)
-    (a b : ℕ) :
+    (hf : ∀ p ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f p) (a b : ℕ) :
     MemLp (mixedDerivative a b (canonicalSource S K z m f))
-      2 (canonicalMeasure S K m) := by
-  have hcont : ContinuousOn (mixedDerivative a b (canonicalSource S K z m f))
-      (canonicalOpen S K m) :=
-    (contDiffOn_mixedDerivative (isOpen_Ioo.prod isOpen_univ)
-      (n07b_contDiffOn_canonicalSource hK hz hsector m hf) a b).continuousOn
-  have hmeas : AEStronglyMeasurable
-      (mixedDerivative a b (canonicalSource S K z m f)) (canonicalMeasure S K m) := by
-    apply (hcont.mono
-      (fun p (hp : p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi) =>
-        show p ∈ canonicalOpen S K m from ⟨hp.1, mem_univ _⟩)).aestronglyMeasurable
-    exact measurableSet_Ioo.prod measurableSet_Ioc
-  obtain ⟨B, _, hB⟩ := n07b_canonicalSource_mixedDerivative_bound hK hz hsector m hf a b
-  refine MemLp.of_bound hmeas B ?_
-  have hmeasure : canonicalMeasure S K m =
-      volume.restrict (Ioo (K.left m) (K.right m) ×ˢ Ioo (0 : ℝ) Real.pi) :=
-    Measure.restrict_congr_set
-      (polarStrip_Ioc_ae_eq_Ioo (K.left m) (K.right m) 0 Real.pi)
-  have ha : ∀ᵐ p ∂canonicalMeasure S K m,
-      p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioo (0 : ℝ) Real.pi := by
-    rw [hmeasure]
-    exact ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioo)
-  filter_upwards [ha] with p hp
-  exact hB p hp
+      2 (canonicalMeasure S K m) :=
+  n07b_canonical_mixedDerivative_memLp_closed m
+    (fun _ hp => n07b_contDiffAt_canonicalSource_closed hK hz hsector m hf hp) a b
 
-/-- Globally smooth physical data satisfy the pointwise closed-piece input
-without any endpoint convention for the prescribed inverse. -/
+/-- Globally smooth physical data satisfy the actual closed-domain input. -/
 theorem n07b_canonicalSource_mixedDerivative_memLp_of_contDiff
     (m : ℕ) {f : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f) (a b : ℕ) :
     MemLp (mixedDerivative a b (canonicalSource S K z m f))

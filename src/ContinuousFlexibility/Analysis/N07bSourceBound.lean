@@ -29,7 +29,7 @@ def N07bSourceCoefficientBound (T : MaterialData) (S : PhysicalSpacesData)
     (base : ℕ) (ε : ℝ) (b loss : ℕ) : Prop :=
   ∃ B A : ℝ, 0 ≤ B ∧ 0 ≤ A ∧
     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
-      ∀ m x, x ∈ physicalPieceOpen S K m →
+      ∀ m x, x ∈ physicalPieceOpen S K z m →
         ∀ j : Fin (b + 1), ∀ i : n07bAngularChainIndex j.val,
           n07bSourceGeometricWeight T K z m x *
             n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2 ≤

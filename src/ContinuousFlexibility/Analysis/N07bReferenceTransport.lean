@@ -102,9 +102,9 @@ section ActualAtlas
 variable {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
   {K : CanonicalData S} {base : ℕ} {ε : ℝ} {z : AnnularState S × ℝ}
   {τ : PolarPoint → PolarPoint} {q : PolarPoint → ℝ}
-  (hτpiece : ∀ m, ∀ p ∈ physicalPieceOpen S K m,
+  (hτpiece : ∀ m, ∀ p ∈ referencePhysicalPieceOpen S K m,
     τ p = K.inverseChart z m (K.chart (C.referenceState, 0) m p))
-  (hqpiece : ∀ m, ∀ p ∈ physicalPieceOpen S K m,
+  (hqpiece : ∀ m, ∀ p ∈ referencePhysicalPieceOpen S K m,
     q p = K.height (C.referenceState, 0) m p / K.height z m (τ p))
 
 include hτpiece hqpiece
@@ -112,7 +112,7 @@ include hτpiece hqpiece
 /-- The representative is the actual reference piece pullback at every
 point of that piece, independently of all regularity questions. -/
 theorem n07bReferenceTransport_on_piece (a : ℝ) (η : PolarPoint → ℝ)
-    {m : ℕ} {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {m : ℕ} {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n07bReferenceTransport S τ q a η p =
       n07bReferencePiecePullback C K z m a η p := by
   simp only [n07bReferenceTransport, n07bReferencePiecePullback, canonicalHeight,
@@ -123,7 +123,7 @@ theorem n07bReferenceTransport_on_piece (a : ℝ) (η : PolarPoint → ℝ)
 open piece. The two definitions may assign different boundary values. -/
 theorem n07bReferenceTransport_eq_pullback_on_piece
     (hK : N04PartA D S C K base ε) (a : ℝ) (η : PolarPoint → ℝ)
-    {m : ℕ} {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {m : ℕ} {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n07bReferenceTransport S τ q a η p = n07bReferencePullback C K z a η p :=
   (n07bReferenceTransport_on_piece hτpiece hqpiece a η hp).trans
     (n07bReferencePullback_on_piece hK z a η hp).symm
@@ -139,13 +139,16 @@ theorem n07bReferenceTransport_canonicalHeight
     canonicalHeight S K (C.referenceState, 0) m
       (fun x => n07bReferenceTransport S τ q a η x - a * S.chiLeft x.1) p =
         canonicalHeight S K z m (fun x => η x - a * S.chiLeft x.1) p := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsectorRef m
+  have hcharts := hK.charts (C.referenceState, 0) href hsectorRef m
   have hx := hcharts.2.1 hp
+  have hxref : K.inverseChart (C.referenceState, 0) m p ∈ referencePhysicalPieceOpen S K m := by
+    rw [← hK.referenceDomain m]
+    exact hx
   calc
     _ = canonicalHeight S K (C.referenceState, 0) m
         (fun x => n07bReferencePullback C K z a η x - a * S.chiLeft x.1) p := by
       dsimp only [canonicalHeight]
-      rw [n07bReferenceTransport_eq_pullback_on_piece hτpiece hqpiece hK a η hx]
+      rw [n07bReferenceTransport_eq_pullback_on_piece hτpiece hqpiece hK a η hxref]
     _ = _ := n07bReferencePullback_canonicalHeight hK href hsectorRef z a η m hp
 
 /-- The same identities give the actual canonical a.e. representatives. -/
@@ -171,7 +174,7 @@ theorem n07bReferenceTransport_ae_eq_pullback
     (hK : N04PartA D S C K base ε) (a : ℝ) (η : PolarPoint → ℝ) :
     n07bReferenceTransport S τ q a η =ᵐ[radialPhysicalMeasure D]
       n07bReferencePullback C K z a η := by
-  obtain ⟨E, hE, hcover⟩ := hK.2.2.2.2.2.2.1
+  obtain ⟨E, hE, hcover⟩ := hK.referencePartition
   have hr : ∀ᵐ r : ℝ ∂volume, r ∉ E := by
     apply ae_iff.mpr
     simpa only [not_not, setOf_mem_eq] using hE
@@ -185,7 +188,7 @@ theorem n07bReferenceTransport_ae_eq_pullback
   filter_upwards [houtside] with p hpE hpstrip
   obtain ⟨m, hm, _⟩ := hcover p.1 ⟨hpstrip.1, hpE⟩
   exact n07bReferenceTransport_eq_pullback_on_piece hτpiece hqpiece hK a η
-    (show p ∈ physicalPieceOpen S K m from ⟨hm, mem_univ _⟩)
+    (show p ∈ referencePhysicalPieceOpen S K m from ⟨hm, mem_univ _⟩)
 
 /-- The physical row is retained by the geometric representative. Its proof
 uses the frozen normalization region and the actual a.e. atlas cover. -/

@@ -23,9 +23,8 @@ open scoped ContDiff Topology
 set_option backward.isDefEq.respectTransparency false
 
 /-- The second column of the inverse of the actual chart derivative. -/
-def n07bInverseAngleVector (Ψ : PolarPoint → PolarPoint) (x : PolarPoint) : PolarPoint :=
-  (-(fderiv ℝ Ψ x (0, 1)).1 / planeJacobian Ψ x,
-    (fderiv ℝ Ψ x (1, 0)).1 / planeJacobian Ψ x)
+abbrev n07bInverseAngleVector (Ψ : PolarPoint → PolarPoint) (x : PolarPoint) : PolarPoint :=
+  ContinuousFlexibility.Statements.canonicalInverseAngularVector Ψ x
 
 /-- The actual forward derivative sends this vector to the angular unit
 vector. This is a two-dimensional matrix calculation. -/
@@ -34,7 +33,7 @@ theorem n07b_fderiv_inverseAngleVector
     (hJ : planeJacobian Ψ x ≠ 0) :
     fderiv ℝ Ψ x (n07bInverseAngleVector Ψ x) = (0, 1) := by
   rw [planeCLM_apply_decompose]
-  apply Prod.ext <;> dsimp only [n07bInverseAngleVector] <;>
+  apply Prod.ext <;> dsimp only [n07bInverseAngleVector, canonicalInverseAngularVector] <;>
     field_simp [hJ] <;> simp only [planeJacobian] <;> ring
 
 /-- A genuine local left inverse has the computed angular derivative.
@@ -91,19 +90,20 @@ theorem n07b_canonical_angularPartial_comp_inverse
     (hK : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m)
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m)
     {F : PolarPoint → ℝ} (hF : DifferentiableAt ℝ F x) :
     angularPartial (F ∘ K.inverseChart z m) (K.chart z m x) =
       (n07bInverseAngleVector (K.chart z m) x).1 * radialPartial F x +
         (n07bInverseAngleVector (K.chart z m) x).2 * angularPartial F x := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
+  have hU : IsOpen (physicalPieceOpen S K z m) := (hK.domains z hz hs m).1
   have hΨ : DifferentiableAt ℝ (K.chart z m) x :=
     (hcharts.2.2.2.2.1.contDiffAt
-      ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx)).differentiableAt (by simp)
+      (hU.mem_nhds hx)).differentiableAt (by simp)
   have hG : DifferentiableAt ℝ (K.inverseChart z m) (K.chart z m x) :=
     (hcharts.2.2.2.2.2.1.contDiffAt
       ((isOpen_Ioo.prod isOpen_univ).mem_nhds (hcharts.1 hx))).differentiableAt (by simp)
-  exact n07b_angularPartial_comp_inverse (isOpen_Ioo.prod isOpen_univ) hx
+  exact n07b_angularPartial_comp_inverse hU hx
     hcharts.2.2.1 hΨ hG (hcharts.2.2.2.2.2.2.2 x hx).2.1 hF
 
 end ContinuousFlexibility.Analysis

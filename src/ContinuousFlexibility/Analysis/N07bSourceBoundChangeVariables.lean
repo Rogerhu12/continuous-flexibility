@@ -32,16 +32,17 @@ from one canonical period to its prescribed physical piece. -/
 theorem n07b_sourceBound_integrable_chart_iff (m : ℕ) (g : PolarPoint → ℝ) :
     Integrable g (canonicalMeasure S K m) ↔
       IntegrableOn (fun p => |planeJacobian (K.chart z m) p| * g (K.chart z m p))
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
   let : (volume : Measure PolarPoint).IsAddHaarMeasure := by
     rw [Measure.volume_eq_prod]
     infer_instance
+  have hphysicalOpen : IsOpen (physicalPieceOpen S K z m) :=
+    (hK.domains z hz hs m).1
   have hphys : volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
-      volume.restrict (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
+      volume.restrict (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
     apply Measure.restrict_congr_set
-    simpa only [physicalPieceOpen, prod_inter_prod, inter_univ, univ_inter] using
-      polarStrip_Ioc_ae_eq_Ioo (K.physicalLeft m) (K.physicalRight m) 0 Real.pi
+    exact polarDomain_Ioc_ae_eq_Ioo (physicalPieceOpen S K z m) 0 Real.pi
   have hcan : canonicalMeasure S K m = volume.restrict
       (canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
     apply Measure.restrict_congr_set
@@ -49,22 +50,22 @@ theorem n07b_sourceBound_integrable_chart_iff (m : ℕ) (g : PolarPoint → ℝ)
       polarStrip_Ioc_ae_eq_Ioo (K.left m) (K.right m) 0 Real.pi
   change Integrable g (canonicalMeasure S K m) ↔
     Integrable (fun p => |planeJacobian (K.chart z m) p| * g (K.chart z m p))
-      (volume.restrict (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)))
+      (volume.restrict (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)))
   rw [hcan, hphys]
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
   have hU : MeasurableSet
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
-    (measurableSet_Ioo.prod MeasurableSet.univ).inter
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+    hphysicalOpen.measurableSet.inter
       (MeasurableSet.univ.prod measurableSet_Ioo)
-  have hd : ∀ p ∈ physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
+  have hd : ∀ p ∈ physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
       HasFDerivWithinAt (K.chart z m) (fderiv ℝ (K.chart z m) p)
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) p := by
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) p := by
     intro p hp
     exact ((hcharts.2.2.2.2.1.contDiffAt
-      ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp.1)).differentiableAt
+      (hphysicalOpen.mem_nhds hp.1)).differentiableAt
         (by simp)).hasFDerivAt.hasFDerivWithinAt
   have hinj : InjOn (K.chart z m)
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
     (canonicalChart_injOn hK hz hs m).mono inter_subset_left
   have hc := integrableOn_image_iff_integrableOn_abs_det_fderiv_smul
     (volume : Measure PolarPoint) hU hd hinj g
@@ -75,37 +76,38 @@ theorem n07b_sourceBound_integrable_chart_iff (m : ℕ) (g : PolarPoint → ℝ)
 and the same half-open angular period on both sides. -/
 theorem n07b_sourceBound_integral_chart (m : ℕ) (g : PolarPoint → ℝ) :
     (∫ p, g p ∂canonicalMeasure S K m) =
-      ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         |planeJacobian (K.chart z m) p| * g (K.chart z m p) := by
   let : (volume : Measure PolarPoint).IsAddHaarMeasure := by
     rw [Measure.volume_eq_prod]
     infer_instance
+  have hphysicalOpen : IsOpen (physicalPieceOpen S K z m) :=
+    (hK.domains z hz hs m).1
   have hphys : volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
-      volume.restrict (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
+      volume.restrict (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
     apply Measure.restrict_congr_set
-    simpa only [physicalPieceOpen, prod_inter_prod, inter_univ, univ_inter] using
-      polarStrip_Ioc_ae_eq_Ioo (K.physicalLeft m) (K.physicalRight m) 0 Real.pi
+    exact polarDomain_Ioc_ae_eq_Ioo (physicalPieceOpen S K z m) 0 Real.pi
   have hcan : canonicalMeasure S K m = volume.restrict
       (canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
     apply Measure.restrict_congr_set
     simpa only [canonicalOpen, prod_inter_prod, inter_univ, univ_inter] using
       polarStrip_Ioc_ae_eq_Ioo (K.left m) (K.right m) 0 Real.pi
   rw [hcan, hphys]
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
   have hU : MeasurableSet
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
-    (measurableSet_Ioo.prod MeasurableSet.univ).inter
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+    hphysicalOpen.measurableSet.inter
       (MeasurableSet.univ.prod measurableSet_Ioo)
-  have hd : ∀ p ∈ physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
+  have hd : ∀ p ∈ physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
       HasFDerivWithinAt (K.chart z m) (fderiv ℝ (K.chart z m) p)
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) p := by
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) p := by
     intro p hp
     exact ((hcharts.2.2.2.2.1.contDiffAt
-      ((isOpen_Ioo.prod isOpen_univ).mem_nhds hp.1)).differentiableAt
+      (hphysicalOpen.mem_nhds hp.1)).differentiableAt
         (by simp)).hasFDerivAt.hasFDerivWithinAt
   have hinj : InjOn (K.chart z m)
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
     (canonicalChart_injOn hK hz hs m).mono inter_subset_left
   have hc := integral_image_eq_integral_abs_det_fderiv_smul
     (volume : Measure PolarPoint) hU hd hinj g
@@ -115,7 +117,7 @@ theorem n07b_sourceBound_integral_chart (m : ℕ) (g : PolarPoint → ℝ) :
 theorem n07b_sourceBound_square_integrable (m : ℕ) {g : PolarPoint → ℝ}
     (hg : MemLp g 2 (canonicalMeasure S K m)) :
     IntegrableOn (fun p => |planeJacobian (K.chart z m) p| * (g (K.chart z m p)) ^ 2)
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) :=
   (n07b_sourceBound_integrable_chart_iff hK hz hs m (fun p => g p ^ 2)).mp hg.integrable_sq
 
 /-- The square of the genuine canonical `L²` norm is its physical
@@ -123,7 +125,7 @@ Jacobian-weighted square integral. -/
 theorem n07b_sourceBound_eLpNorm_sq (m : ℕ) {g : PolarPoint → ℝ}
     (hg : MemLp g 2 (canonicalMeasure S K m)) :
     (eLpNorm g 2 (canonicalMeasure S K m)).toReal ^ 2 =
-      ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         |planeJacobian (K.chart z m) p| * (g (K.chart z m p)) ^ 2 := by
   calc
     _ = ‖hg.toLp g‖ ^ 2 := by rw [Lp.norm_toLp]

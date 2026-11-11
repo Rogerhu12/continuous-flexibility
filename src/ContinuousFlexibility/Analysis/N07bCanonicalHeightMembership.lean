@@ -6,8 +6,8 @@ import ContinuousFlexibility.Analysis.N07bVolumeUnknownSequence
 /-!
 # Actual canonical height classes and their zeroth-order volume lift
 
-Local L² membership and reflection follow from the actual chart formulas
-and a continuous even periodic physical height. The lift then uses the
+Local L² membership on each dynamic domain and reflection follow from
+the actual chart formulas and a continuous even periodic physical height. The lift then uses the
 prescribed volume model and the exact physical square-energy series. The
 series remains an explicit analytic input, to be proved from geometric
 bounds; this module does not assert fixed-domain membership.
@@ -31,14 +31,14 @@ include hK hz hs
 
 /-- Each actual height coordinate is locally L² on its canonical piece. -/
 theorem n07b_canonicalHeight_memLp (m : ℕ) {u : PolarPoint → ℝ}
-    (hu : ContinuousOn u (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ)) :
+    (hu : ContinuousOn u (physicalPieceClosed S K z m)) :
     MemLp (canonicalHeight S K z m u) 2 (canonicalMeasure S K m) := by
   let f : PolarPoint → ℝ := fun p =>
     |planeJacobian (K.chart z m) p| / K.height z m p ^ 2 * u p
   have hf : ContinuousOn f
-      (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ) := by
+      (physicalPieceClosed S K z m) := by
     intro p hp
-    have hc := hK.2.2.2.2.2.2.2.2.1 z hz hs m p hp.1
+    have hc := (hK.boundary z hz hs m).2.2.2.2.1 p hp
     exact (((contDiffAt_planeJacobian hc.1).continuousAt.abs.continuousWithinAt).div
       ((hc.2.1.continuousAt.continuousWithinAt).pow 2)
       (pow_ne_zero 2 hc.2.2.2.ne')).mul (hu p hp)
@@ -57,7 +57,7 @@ theorem n07b_canonicalHeight_add (u : PolarPoint → ℝ)
     (hu : Function.Periodic u (0, Real.pi)) (m : ℕ) {p : PolarPoint}
     (hp : p ∈ canonicalOpen S K m) :
     canonicalHeight S K z m u (p + (0, Real.pi)) = canonicalHeight S K z m u p := by
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hK.charts z hz hs m
   have hx := hc.2.1 hp
   have hh := (hc.2.2.2.2.2.2.2 (K.inverseChart z m p) hx).2.2.2
   simp only [canonicalHeight]
@@ -67,10 +67,10 @@ theorem n07b_canonicalHeight_neg (u : PolarPoint → ℝ)
     (hu : ∀ r θ, u (r, -θ) = u (r, θ)) (m : ℕ) {p : PolarPoint}
     (hp : p ∈ canonicalOpen S K m) :
     canonicalHeight S K z m u (p.1, -p.2) = canonicalHeight S K z m u p := by
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hc := hK.charts z hz hs m
   have hx := hc.2.1 hp
-  have hh := hK.2.2.2.2.2.2.2.2.2.1 z hz hs m (K.inverseChart z m p) hx
-  have hi := hK.2.2.2.2.2.2.2.2.2.2 z hz hs m p hp
+  have hh := hK.reflection z hz hs m (K.inverseChart z m p) hx
+  have hi := hK.inverseReflection z hz hs m p hp
   simp only [canonicalHeight]
   rw [hi, hh.2.1, hu]
 
@@ -99,7 +99,7 @@ coordinates. -/
 def n07bPhysicalHeightEnergy {T : MaterialData} (γ t : ℝ)
     (z : AnnularState S × ℝ) (u : PolarPoint → ℝ) (m : ℕ) : ℝ :=
   (n07bCanonicalSourceFactor T K γ t m)⁻¹ ^ 2 *
-    ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+    ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
       |planeJacobian (K.chart z m) p| / K.height z m p ^ 2 * u p ^ 2
 
 /-- Exact identification of the zeroth-jet Hilbert energy. -/
@@ -162,4 +162,3 @@ theorem n07b_exists_canonicalHeightLevel
     (Real.rpow_pos_of_pos (hT.2.1 _ hsample).2.1 _)).ne'
 
 end ContinuousFlexibility.Analysis
-

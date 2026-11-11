@@ -32,32 +32,32 @@ theorem n07b_locallyIntegrable_of_canonical_factor
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ)
     {a f : PolarPoint → ℝ}
-    (ha : ContinuousOn a (physicalPieceOpen S K m))
-    (ha0 : ∀ p ∈ physicalPieceOpen S K m, a p ≠ 0)
+    (ha : ContinuousOn a (physicalPieceOpen S K z m))
+    (ha0 : ∀ p ∈ physicalPieceOpen S K z m, a p ≠ 0)
     (hf : Integrable (fun p =>
       a (K.inverseChart z m p) * f (K.inverseChart z m p)) (canonicalMeasure S K m)) :
     LocallyIntegrableOn f
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
   let : (volume : Measure PolarPoint).IsAddHaarMeasure := by
     rw [Measure.volume_eq_prod]
     infer_instance
-  have hopen : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  have hsmooth : ∀ p ∈ physicalPieceOpen S K m,
+  have hopen : IsOpen (physicalPieceOpen S K z m) := (hK.domains z hz hsector m).1
+  have hcharts := hK.charts z hz hsector m
+  have hsmooth : ∀ p ∈ physicalPieceOpen S K z m,
       ContDiffAt ℝ ∞ (K.chart z m) p := fun p hp =>
     (hcharts.2.2.2.2.1 p hp).contDiffAt (hopen.mem_nhds hp)
-  have hJ : ContinuousOn (planeJacobian (K.chart z m)) (physicalPieceOpen S K m) :=
+  have hJ : ContinuousOn (planeJacobian (K.chart z m)) (physicalPieceOpen S K z m) :=
     fun p hp => (contDiffAt_planeJacobian (hsmooth p hp)).continuousAt.continuousWithinAt
-  have hJ0 : ∀ p ∈ physicalPieceOpen S K m, |planeJacobian (K.chart z m) p| ≠ 0 :=
+  have hJ0 : ∀ p ∈ physicalPieceOpen S K z m, |planeJacobian (K.chart z m) p| ≠ 0 :=
     fun p hp => abs_ne_zero.mpr (hcharts.2.2.2.2.2.2.2 p hp).2.1
   have hnormalizer : ContinuousOn
       (fun p => (|planeJacobian (K.chart z m) p| * a p)⁻¹)
-      (physicalPieceOpen S K m) :=
+      (physicalPieceOpen S K z m) :=
     (hJ.abs.mul ha).inv₀ (fun p hp => mul_ne_zero (hJ0 p hp) (ha0 p hp))
   apply (locallyIntegrableOn_iff
     (hopen.inter (isOpen_univ.prod isOpen_Ioo)).isLocallyClosed).mpr
   intro Q hQsub hQ
-  have hQphysical : Q ⊆ physicalPieceOpen S K m := hQsub.trans inter_subset_left
+  have hQphysical : Q ⊆ physicalPieceOpen S K z m := hQsub.trans inter_subset_left
   have himage := canonicalChart_image_openStrip hK hz hsector m
   have hQimage : K.chart z m '' Q ⊆
       Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi := by
@@ -98,21 +98,21 @@ theorem n07b_locallyIntegrable_of_canonicalSource_memLp
     (hsector : stateSector S z.1) (m : ℕ) {f : PolarPoint → ℝ}
     (hf : MemLp (canonicalSource S K z m f) 2 (canonicalMeasure S K m)) :
     LocallyIntegrableOn f
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  have hopen : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
-  have hJ : ContinuousOn (planeJacobian (K.chart z m)) (physicalPieceOpen S K m) := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
+  have hcharts := hK.charts z hz hsector m
+  have hopen : IsOpen (physicalPieceOpen S K z m) := (hK.domains z hz hsector m).1
+  have hJ : ContinuousOn (planeJacobian (K.chart z m)) (physicalPieceOpen S K z m) := by
     intro p hp
     exact (contDiffAt_planeJacobian
       ((hcharts.2.2.2.2.1 p hp).contDiffAt (hopen.mem_nhds hp))).continuousAt.continuousWithinAt
-  have hJ0 : ∀ p ∈ physicalPieceOpen S K m, |planeJacobian (K.chart z m) p| ≠ 0 :=
+  have hJ0 : ∀ p ∈ physicalPieceOpen S K z m, |planeJacobian (K.chart z m) p| ≠ 0 :=
     fun p hp => abs_ne_zero.mpr (hcharts.2.2.2.2.2.2.2 p hp).2.1
-  have hh0 : ∀ p ∈ physicalPieceOpen S K m, K.height z m p ≠ 0 :=
+  have hh0 : ∀ p ∈ physicalPieceOpen S K z m, K.height z m p ≠ 0 :=
     fun p hp => (hcharts.2.2.2.2.2.2.2 p hp).1.ne'
   let a : PolarPoint → ℝ := fun p => K.height z m p / |planeJacobian (K.chart z m) p|
-  have ha : ContinuousOn a (physicalPieceOpen S K m) :=
+  have ha : ContinuousOn a (physicalPieceOpen S K z m) :=
     hcharts.2.2.2.2.2.2.1.continuousOn.div₀ hJ.abs hJ0
-  have ha0 : ∀ p ∈ physicalPieceOpen S K m, a p ≠ 0 :=
+  have ha0 : ∀ p ∈ physicalPieceOpen S K z m, a p ≠ 0 :=
     fun p hp => div_ne_zero (hh0 p hp) (hJ0 p hp)
   have hi : Integrable (fun p =>
       a (K.inverseChart z m p) * f (K.inverseChart z m p)) (canonicalMeasure S K m) := by
@@ -130,14 +130,14 @@ theorem n07b_locallyIntegrable_of_canonicalHeight_memLp
     (hsector : stateSector S z.1) (m : ℕ) {u : PolarPoint → ℝ}
     (hu : MemLp (canonicalHeight S K z m u) 2 (canonicalMeasure S K m)) :
     LocallyIntegrableOn u
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  have hh0 : ∀ p ∈ physicalPieceOpen S K m, K.height z m p ≠ 0 :=
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
+  have hcharts := hK.charts z hz hsector m
+  have hh0 : ∀ p ∈ physicalPieceOpen S K z m, K.height z m p ≠ 0 :=
     fun p hp => (hcharts.2.2.2.2.2.2.2 p hp).1.ne'
   let a : PolarPoint → ℝ := fun p => (K.height z m p)⁻¹
-  have ha : ContinuousOn a (physicalPieceOpen S K m) :=
+  have ha : ContinuousOn a (physicalPieceOpen S K z m) :=
     hcharts.2.2.2.2.2.2.1.continuousOn.inv₀ hh0
-  have ha0 : ∀ p ∈ physicalPieceOpen S K m, a p ≠ 0 :=
+  have ha0 : ∀ p ∈ physicalPieceOpen S K z m, a p ≠ 0 :=
     fun p hp => inv_ne_zero (hh0 p hp)
   have hi : Integrable (fun p =>
       a (K.inverseChart z m p) * u (K.inverseChart z m p)) (canonicalMeasure S K m) := by
@@ -157,19 +157,19 @@ theorem n07b_representation_locallyIntegrable
     {η f : PolarPoint → ℝ}
     (hrep : HasCanonicalRepresentation D S C K z U F η f) (m : ℕ) :
     LocallyIntegrableOn η
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume ∧
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume ∧
     LocallyIntegrableOn f
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume := by
   constructor
   · have hrem := n07b_locallyIntegrable_of_canonicalHeight_memLp hK hz hsector m
       (MemLp.ae_eq (hrep.1 m) (Lp.memLp (U.1 m)))
     have hleft : Continuous (fun p : PolarPoint => U.2.1 * S.chiLeft p.1) :=
       continuous_const.mul (hchi.comp continuous_fst)
     have hopen : IsOpen
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
-      (isOpen_Ioo.prod isOpen_univ).inter (isOpen_univ.prod isOpen_Ioo)
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+      (hK.domains z hz hsector m).1.inter (isOpen_univ.prod isOpen_Ioo)
     have hl : LocallyIntegrableOn (fun p : PolarPoint => U.2.1 * S.chiLeft p.1)
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume :=
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) volume :=
       hleft.continuousOn.locallyIntegrableOn hopen.measurableSet
     have heq : (fun p => η p - U.2.1 * S.chiLeft p.1) +
         (fun p => U.2.1 * S.chiLeft p.1) = η := by

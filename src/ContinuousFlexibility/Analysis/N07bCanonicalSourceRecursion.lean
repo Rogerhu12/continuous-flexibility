@@ -80,10 +80,10 @@ include hK hz hs
 point where the original source is smooth. -/
 theorem n07b_contDiffAt_physicalSourceJet (m : ℕ)
     {f : PolarPoint → ℝ} {x : PolarPoint}
-    (hx : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m))
+    (hx : x ∈ physicalPieceClosed S K z m)
     (hf : ContDiffAt ℝ ∞ f x) (j : ℕ) :
     ContDiffAt ℝ ∞ (n07bPhysicalSourceJet K z m f j) x := by
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hs m x hx
+  have hclosed := (hK.boundary z hz hs m).2.2.2.2.1 x hx
   induction j with
   | zero =>
       exact n07b_contDiffAt_physicalSourceFactor hK hz hs m hx hf
@@ -95,12 +95,11 @@ at the actual chart image. The induction differentiates equality on the
 canonical open piece, so it never uses endpoint values of the inverse. -/
 theorem n07b_canonicalSource_angularJet_comp_chart (m : ℕ)
     {f : PolarPoint → ℝ}
-    (hf : ∀ x : PolarPoint,
-      x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) → ContDiffAt ℝ ∞ f x)
-    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    (hf : ∀ x ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f x)
+    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     mixedDerivative 0 j (canonicalSource S K z m f) (K.chart z m x) =
       n07bPhysicalSourceJet K z m f j x := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
   have hopen : IsOpen (canonicalOpen S K m) := isOpen_Ioo.prod isOpen_univ
   have hsource := n07b_contDiffOn_canonicalSource hK hz hs m hf
   induction j generalizing x with
@@ -123,8 +122,7 @@ theorem n07b_canonicalSource_angularJet_comp_chart (m : ℕ)
           (n07bPhysicalSourceJet K z m f j ∘ K.inverseChart z m) := by
         filter_upwards [hopen.mem_nhds (hcharts.1 hx)] with p hp
         exact heq hp
-      have hxclosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
-        ⟨hx.1.1.le, hx.1.2.le⟩
+      have hxclosed : x ∈ physicalPieceClosed S K z m := subset_closure hx
       have hd : DifferentiableAt ℝ (n07bPhysicalSourceJet K z m f j) x :=
         (n07b_contDiffAt_physicalSourceJet hK hz hs m hxclosed (hf x hxclosed) j).differentiableAt
           (by simp)
@@ -145,12 +143,11 @@ theorem n07b_canonicalSource_angularJet_comp_chart (m : ℕ)
 /-- The same exact identity stated at a canonical point. -/
 theorem n07b_canonicalSource_angularJet_eq_physical (m : ℕ)
     {f : PolarPoint → ℝ}
-    (hf : ∀ x : PolarPoint,
-      x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) → ContDiffAt ℝ ∞ f x)
+    (hf : ∀ x ∈ physicalPieceClosed S K z m, ContDiffAt ℝ ∞ f x)
     (j : ℕ) {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     mixedDerivative 0 j (canonicalSource S K z m f) p =
       n07bPhysicalSourceJet K z m f j (K.inverseChart z m p) := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+  have hcharts := hK.charts z hz hs m
   have h := n07b_canonicalSource_angularJet_comp_chart hK hz hs m hf j (hcharts.2.1 hp)
   rwa [hcharts.2.2.2.1 p hp] at h
 
@@ -158,7 +155,7 @@ theorem n07b_canonicalSource_angularJet_eq_physical (m : ℕ)
 input for the actual derivative identity. -/
 theorem n07b_canonicalSource_angularJet_comp_chart_of_contDiff (m : ℕ)
     {f : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f) (j : ℕ)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     mixedDerivative 0 j (canonicalSource S K z m f) (K.chart z m x) =
       n07bPhysicalSourceJet K z m f j x :=
   n07b_canonicalSource_angularJet_comp_chart hK hz hs m

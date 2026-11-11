@@ -57,27 +57,28 @@ theorem n07b_ae_inverseChart_iff
     ((fun p => u (K.inverseChart z m p)) =ᵐ[canonicalMeasure S K m]
       (fun p => v (K.inverseChart z m p))) ↔
     u =ᵐ[volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] v := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] v := by
   let A : Set PolarPoint :=
-    physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)
+    physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)
   let B : Set PolarPoint :=
     canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)
+  have hphysicalOpen : IsOpen (physicalPieceOpen S K z m) :=
+    (hK.domains z hz hsector m).1
   have hA : MeasurableSet A :=
-    ((isOpen_Ioo.prod isOpen_univ).inter (isOpen_univ.prod isOpen_Ioo)).measurableSet
+    (hphysicalOpen.inter (isOpen_univ.prod isOpen_Ioo)).measurableSet
   have hB : MeasurableSet B :=
     ((isOpen_Ioo.prod isOpen_univ).inter (isOpen_univ.prod isOpen_Ioo)).measurableSet
   have hphysical :
-      volume.restrict (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
+      volume.restrict (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =
         volume.restrict A := by
-    simpa only [A, physicalPieceOpen, prod_inter_prod, inter_univ, univ_inter] using
-      Measure.restrict_congr_set
-        (polarStrip_Ioc_ae_eq_Ioo (K.physicalLeft m) (K.physicalRight m) 0 Real.pi)
+    exact Measure.restrict_congr_set
+      (polarDomain_Ioc_ae_eq_Ioo (physicalPieceOpen S K z m) 0 Real.pi)
   have hcanonical : canonicalMeasure S K m = volume.restrict B := by
     simpa only [canonicalMeasure, B, canonicalOpen, prod_inter_prod,
       inter_univ, univ_inter] using
       Measure.restrict_congr_set
         (polarStrip_Ioc_ae_eq_Ioo (K.left m) (K.right m) 0 Real.pi)
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hcharts := hK.charts z hz hsector m
   have himage : K.chart z m '' A = B :=
     canonicalChart_image_openStrip hK hz hsector m
   have hF : MapsTo (K.chart z m) A B := by
@@ -116,9 +117,9 @@ theorem n07b_canonicalSource_ae_iff
     canonicalSource S K z m f =ᵐ[canonicalMeasure S K m]
       canonicalSource S K z m g ↔
     f =ᵐ[volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] g := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] g := by
   rw [← n07b_ae_inverseChart_iff hK hz hsector m f g]
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hcharts := hK.charts z hz hsector m
   have hmem : ∀ᵐ p ∂canonicalMeasure S K m,
       p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi :=
     ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)
@@ -148,9 +149,9 @@ theorem n07b_canonicalHeight_ae_iff
     canonicalHeight S K z m u =ᵐ[canonicalMeasure S K m]
       canonicalHeight S K z m v ↔
     u =ᵐ[volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] v := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] v := by
   rw [← n07b_ae_inverseChart_iff hK hz hsector m u v]
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hcharts := hK.charts z hz hsector m
   have hmem : ∀ᵐ p ∂canonicalMeasure S K m,
       p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi :=
     ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)
@@ -180,9 +181,9 @@ theorem n07b_representation_physical_ae
     (hη : HasCanonicalRepresentation D S C K z U F η f)
     (hξ : HasCanonicalRepresentation D S C K z U F ξ g) (m : ℕ) :
     η =ᵐ[volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] ξ ∧
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] ξ ∧
     f =ᵐ[volume.restrict
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] g := by
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] g := by
   constructor
   · have h := (n07b_canonicalHeight_ae_iff hK hz hsector m
         (fun p => η p - U.2.1 * S.chiLeft p.1)

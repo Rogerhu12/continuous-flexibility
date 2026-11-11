@@ -11,7 +11,7 @@ import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 The geometric hypothesis is a pointwise comparison of the actual reciprocal
 height density with a fixed material weight. It is independent of the
 physical height. The normalized height's zeroth material jet then gives one
-integrable density for the whole atlas, and the existing disjoint-atlas
+integrable density for the current atlas, and the existing disjoint-atlas
 summation theorem supplies genuine square summability.
 
 This is a conditional analytic estimate. No such geometric comparison is
@@ -32,7 +32,7 @@ set_option backward.isDefEq.respectTransparency false
 def N07bHeightDensityBound {S : PhysicalSpacesData}
     (T : MaterialData) (K : CanonicalData S) (z : AnnularState S × ℝ)
     (β γ t : ℝ) (c : ℕ) (A : ℝ) : Prop :=
-  ∀ m x, x ∈ physicalPieceOpen S K m →
+  ∀ m x, x ∈ physicalPieceOpen S K z m →
     (n07bCanonicalSourceFactor T K γ t m)⁻¹ ^ 2 *
         T.ell x.1 * |planeJacobian (K.chart z m) x| / K.height z m x ^ 2 *
           T.H x.1 ^ (2 * β) ≤ A * T.M x.1 ^ (2 * c)
@@ -94,12 +94,12 @@ theorem n07b_physicalHeightDensity_integrable (u : PolarPoint → ℝ)
     (hu : Continuous u) (m : ℕ) :
     IntegrableOn (fun p =>
       |planeJacobian (K.chart z m) p| / K.height z m p ^ 2 * u p ^ 2)
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hs m
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+  have hcharts := hK.charts z hz hs m
   have hcan := n07b_canonicalHeight_memLp hK hz hs m hu.continuousOn
   apply (n07b_sourceBound_square_integrable hK hz hs m hcan).congr
   filter_upwards [ae_restrict_mem
-    ((measurableSet_Ioo.prod MeasurableSet.univ).inter
+    ((hK.domains z hz hs m).1.measurableSet.inter
       (MeasurableSet.univ.prod measurableSet_Ioc))] with p hp
   change |planeJacobian (K.chart z m) p| *
       canonicalHeight S K z m u (K.chart z m p) ^ 2 =
@@ -128,23 +128,23 @@ theorem n07b_height_energy_summable_of_geometric_bound
       mul_nonneg (div_nonneg (abs_nonneg _) (sq_nonneg _)) (sq_nonneg _))
   have hpiece (m : ℕ) :
       n07bPhysicalHeightEnergy (T := T) (K := K) γ t z u m ≤
-        ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), g p := by
-    have hsub : physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) ⊆
+        ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), g p := by
+    have hsub : physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) ⊆
         Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi :=
-      fun p hp => ⟨(hK.2.2.2.1 m).2.2 hp.1.1, hp.2.2⟩
+      fun p hp => ⟨((hK.domains z hz hs m).2.2.1 hp.1).1, hp.2.2⟩
     change (n07bCanonicalSourceFactor T K γ t m)⁻¹ ^ 2 *
-      (∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      (∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         |planeJacobian (K.chart z m) p| / K.height z m p ^ 2 * u p ^ 2) ≤ _
     rw [← integral_const_mul]
     apply integral_mono_ae
       ((n07b_physicalHeightDensity_integrable hK hz hs u huc m).const_mul _)
       (hg.mono_set hsub)
     filter_upwards [ae_restrict_mem
-      ((measurableSet_Ioo.prod MeasurableSet.univ).inter
+      ((hK.domains z hz hs m).1.measurableSet.inter
         (MeasurableSet.univ.prod measurableSet_Ioc))] with p hp
     exact n07b_heightDensity_le_materialJetEnergy hT β γ t u c m
-      ((hK.2.2.2.1 m).2.2 hp.1.1) (hbound m p hp.1)
-  have hsum := n07b_summable_energy_of_piece_integral_bound hK hg hnonneg hpiece
+      ((hK.domains z hz hs m).2.2.1 hp.1).1 (hbound m p hp.1)
+  have hsum := n07b_summable_energy_of_piece_integral_bound hK hz hs hg hnonneg hpiece
   refine ⟨hsum.1, hsum.2.trans ?_⟩
   change (∫ p in Ioo D.a D.b ×ˢ Ioc (0 : ℝ) Real.pi,
     A * n07bMaterialJetEnergyDensity T β 0 0 c u p) ≤ _

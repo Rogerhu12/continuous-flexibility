@@ -1,19 +1,18 @@
 import ContinuousFlexibility.Analysis.CanonicalEndpointInverse
 import ContinuousFlexibility.Analysis.CanonicalBoundaryImage
+import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
 import Mathlib.Topology.Order.IntermediateValue
 import Mathlib.Analysis.Convex.Topology
 
 /-!
 # Agreement of genuine local inverses on the canonical interior
 
-A local inverse near a physical endpoint maps the nearby canonical
-interior into the physical interior. The argument uses connectedness and
-the fact that physical boundary points cannot map into the target strip.
-It requires neither continuity nor prescribed values of a totalized
-inverse at a canonical boundary.
-
-Consequently every actual open-strip inverse, including `invFunOn`,
-agrees with the smooth local inverse on a full interior neighborhood.
+The generic rectangle lemmas retain their connectedness argument and do
+not prescribe boundary values of a totalized inverse. The actual dynamic
+piece wrapper instead uses the stored boundary inverse germ: the actual
+inverse is continuous on the canonical closed cylinder, and hence agrees
+with a genuine local inverse throughout a nearby canonical interior.
+No current physical domain is assumed to be a radial rectangle.
 -/
 
 noncomputable section
@@ -161,45 +160,56 @@ theorem exists_invFunOn_eq_localInverse_on_openStrip
   exists_rightInverse_eq_localInverse_on_openStrip hab hbij.mapsTo hboundary hbij.injOn
     hbij.surjOn.mapsTo_invFunOn hbij.surjOn.rightInvOn_invFunOn e heF hpe hp
 
-/-- PartA supplies the endpoint avoidance and actual smooth local inverse,
-so the prescribed canonical inverse agrees on a full interior neighborhood
-at every point of the physical closed piece. -/
+/-- At every point of the actual closed physical domain, the prescribed
+inverse agrees with a smooth local inverse on a nearby canonical interior.
+Closed-domain inverse continuity follows from the stored boundary germ. -/
 theorem canonicalChart_exists_smooth_interiorInverse
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hK : Blueprint.N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (p : PolarPoint)
-    (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
+    (hp : p ∈ physicalPieceClosed S K z m) :
     ∃ (e : OpenPartialHomeomorph PolarPoint PolarPoint) (δ : ℝ),
       (e : PolarPoint → PolarPoint) = K.chart z m ∧ p ∈ e.source ∧
       ContDiffAt ℝ ∞ e.symm (K.chart z m p) ∧ 0 < δ ∧
       Metric.ball (K.chart z m p) δ ⊆ e.target ∧
       MapsTo e.symm (Metric.ball (K.chart z m p) δ ∩ canonicalOpen S K m)
-        (physicalPieceOpen S K m) ∧
+        (physicalPieceOpen S K z m) ∧
       EqOn (K.inverseChart z m) e.symm
         (Metric.ball (K.chart z m p) δ ∩ canonicalOpen S K m) := by
-  have hpiece := hK.2.2.2.1 m
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hsector m p hp
+  have hcharts := hK.charts z hz hsector m
+  have hclosed := hK.boundary z hz hsector m
+  have hpreg := hclosed.2.2.2.2.1 p hp
   obtain ⟨e, heF, hpe, hsmooth⟩ :=
-    exists_smooth_localInverse_of_planeJacobian_ne_zero hclosed.1 hclosed.2.2.1
-  have hboundary : ∀ x : PolarPoint,
-      x.1 = K.physicalLeft m ∨ x.1 = K.physicalRight m →
-      (K.chart z m x).1 ∉ Ioo (K.left m) (K.right m) := by
-    intro x hx hxin
-    rcases canonicalChart_endpoint_radial_eq_boundary hK hz hsector m x hx with hl | hr
-    · exact (ne_of_gt hxin.1) hl
-    · exact (ne_of_lt hxin.2) hr
-  have hinj : InjOn (K.chart z m) (physicalPieceOpen S K m) := by
-    intro x hx y hy heq
+    exists_smooth_localInverse_of_planeJacobian_ne_zero hpreg.1 hpreg.2.2.1
+  have hFp : K.chart z m p ∈ e.target := by
+    rw [← heF]
+    exact e.map_source hpe
+  have hGp : K.inverseChart z m (K.chart z m p) = p :=
+    hclosed.2.2.1 p hp
+  have hGcont : ContinuousAt (K.inverseChart z m) (K.chart z m p) :=
+    (n04b_inverseChart_contDiffAt_closed hK hz hsector m (hclosed.1 hp)).continuousAt
+  have hGsource : K.inverseChart z m (K.chart z m p) ∈ e.source := by
+    rw [hGp]
+    exact hpe
+  have hnear : ∀ᶠ q in 𝓝 (K.chart z m p),
+      q ∈ e.target ∧ K.inverseChart z m q ∈ e.source :=
+    (e.open_target.mem_nhds hFp).and
+      (hGcont.eventually (e.open_source.mem_nhds hGsource))
+  obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp hnear
+  have heq : EqOn (K.inverseChart z m) e.symm
+      (Metric.ball (K.chart z m p) δ ∩ canonicalOpen S K m) := by
+    intro q hq
+    have hGin := (hball hq.1).2
     calc
-      x = K.inverseChart z m (K.chart z m x) := (hcharts.2.2.1 x hx).symm
-      _ = K.inverseChart z m (K.chart z m y) := congrArg (K.inverseChart z m) heq
-      _ = y := hcharts.2.2.1 y hy
-  obtain ⟨δ, hδ, htarget, hlocal, heq⟩ :=
-    exists_rightInverse_eq_localInverse_on_openStrip hpiece.1 hcharts.1 hboundary hinj
-      hcharts.2.1 hcharts.2.2.2.1 e heF hpe hp
-  exact ⟨e, δ, heF, hpe, hsmooth, hδ, htarget, hlocal, heq⟩
+      K.inverseChart z m q = e.symm (e (K.inverseChart z m q)) :=
+        (e.left_inv hGin).symm
+      _ = e.symm q := by
+        rw [heF, hcharts.2.2.2.1 q hq.2]
+  refine ⟨e, δ, heF, hpe, hsmooth, hδ, fun q hq => (hball hq).1, ?_, heq⟩
+  intro q hq
+  rw [← heq hq]
+  exact hcharts.2.1 hq.2
 
 end ContinuousFlexibility.Analysis

@@ -44,17 +44,19 @@ include hK hz hsector
 theorem n07b_canonicalInverse_add (m : ℕ) {p : PolarPoint}
     (hp : p ∈ canonicalOpen S K m) :
     K.inverseChart z m (p + (0, Real.pi)) = K.inverseChart z m p + (0, Real.pi) := by
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  exact inverseChart_periodic_of_chart_periodic hc.2.1 hc.2.2.1 hc.2.2.2.1
+  have hc := hK.charts z hz hsector m
+  have hd := hK.domains z hz hsector m
+  exact inverseChart_periodic_of_chart_periodic_on hc.2.1
+    (fun x hx => (hd.2.2.2.1 x).mpr hx) hc.2.2.1 hc.2.2.2.1
     (fun x hx => (hc.2.2.2.2.2.2.2 x hx).2.2.1) hp
 
 theorem n07b_canonicalJacobian_add (m : ℕ) {p : PolarPoint}
-    (hp : p ∈ physicalPieceOpen S K m) :
+    (hp : p ∈ physicalPieceOpen S K z m) :
     planeJacobian (K.chart z m) (p + (0, Real.pi)) =
       planeJacobian (K.chart z m) p := by
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hc := hK.charts z hz hsector m
   exact n07b_planeJacobian_add_of_equivariantOn
-    (show IsOpen (physicalPieceOpen S K m) from isOpen_Ioo.prod isOpen_univ)
+    (hK.domains z hz hsector m).1
     (fun x hx => (hc.2.2.2.2.2.2.2 x hx).2.2.1) hp
 
 /-- The actual source transformation preserves angular translation on its
@@ -63,7 +65,7 @@ theorem n07b_canonicalSource_add (f : PolarPoint → ℝ)
     (hf : Function.Periodic f (0, Real.pi)) (m : ℕ) {p : PolarPoint}
     (hp : p ∈ canonicalOpen S K m) :
     canonicalSource S K z m f (p + (0, Real.pi)) = canonicalSource S K z m f p := by
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hc := hK.charts z hz hsector m
   have hx := hc.2.1 hp
   have hh := (hc.2.2.2.2.2.2.2 (K.inverseChart z m p) hx).2.2.2
   simp only [canonicalSource]
@@ -87,10 +89,10 @@ theorem n07b_canonicalSource_neg (f : PolarPoint → ℝ)
     (hf : ∀ r θ, f (r, -θ) = f (r, θ)) (m : ℕ) {p : PolarPoint}
     (hp : p ∈ canonicalOpen S K m) :
     canonicalSource S K z m f (p.1, -p.2) = canonicalSource S K z m f p := by
-  have hc := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hc := hK.charts z hz hsector m
   have hx := hc.2.1 hp
-  have hs := hK.2.2.2.2.2.2.2.2.2.1 z hz hsector m (K.inverseChart z m p) hx
-  have hi := hK.2.2.2.2.2.2.2.2.2.2 z hz hsector m p hp
+  have hs := hK.reflection z hz hsector m (K.inverseChart z m p) hx
+  have hi := hK.inverseReflection z hz hsector m p hp
   simp only [canonicalSource]
   rw [hi, hs.2.1, hs.2.2, hf]
 

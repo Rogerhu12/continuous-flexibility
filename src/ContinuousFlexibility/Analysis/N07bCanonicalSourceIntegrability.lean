@@ -1,19 +1,20 @@
 import ContinuousFlexibility.Analysis.N07bCanonicalSourceEnergy
 import ContinuousFlexibility.Analysis.N05CanonicalTests
+import ContinuousFlexibility.Analysis.N04bBoundaryInverseRegularity
 import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # Actual square integrability of each canonical source piece
 
-PartA gives a smooth chart and height, with nonzero Jacobian, at every
-point of the physical closed piece. A continuous physical source therefore
-makes its physical source factor bounded on the compact fundamental
-rectangle. The actual chart image identifies its canonical pullback on a
-full-measure open rectangle.
+The physical source factor is continuous on the closure of the actual
+state-dependent physical domain. The stored boundary inverse germ gives
+continuity of the actual inverse on the closed canonical cylinder.
+Consequently the actual source is bounded on one compact canonical
+fundamental rectangle and belongs to the prescribed piece's L² space.
 
-This proves genuine piecewise L² membership. The bound may depend on the
-piece and the state; no uniform material estimate or global summability
-is asserted here.
+No physical domain is assumed to be a rectangle or compact. The bound may
+depend on the piece and state; no uniform material estimate or global
+summability is asserted here.
 -/
 
 noncomputable section
@@ -34,82 +35,69 @@ variable {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData
 
 include hK hz hsector
 
-/-- The physical source factor is continuous through both radial endpoints. -/
+/-- The physical source factor is continuous on the actual closed domain. -/
 theorem n07b_continuousOn_physicalSourceFactor (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ContinuousOn f (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ)) :
+    (hf : ContinuousOn f (physicalPieceClosed S K z m)) :
     ContinuousOn
       (fun p => K.height z m p * f p / |planeJacobian (K.chart z m) p|)
-      (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ) := by
+      (physicalPieceClosed S K z m) := by
   intro p hp
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hsector m p hp.1
+  have hclosed := (hK.boundary z hz hsector m).2.2.2.2.1 p hp
   have hJ := ContinuousFlexibility.contDiffAt_planeJacobian hclosed.1
   exact (hclosed.2.1.continuousAt.continuousWithinAt.mul (hf p hp)).div
     hJ.continuousAt.abs.continuousWithinAt (abs_ne_zero.mpr hclosed.2.2.1)
 
-/-- Continuity of the given inverse on the canonical interior gives
-continuity of the actual source conversion there. -/
-theorem n07b_continuousOn_canonicalSource (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ContinuousOn f (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ)) :
-    ContinuousOn (canonicalSource S K z m f) (canonicalOpen S K m) := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-  have hmap : MapsTo (K.inverseChart z m) (canonicalOpen S K m)
-      (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ) := by
+/-- The actual closed inverse transports continuity to the whole closed
+canonical cylinder, including both radial boundary circles. -/
+theorem n07b_continuousOn_canonicalSource_closed (m : ℕ) {f : PolarPoint → ℝ}
+    (hf : ContinuousOn f (physicalPieceClosed S K z m)) :
+    ContinuousOn (canonicalSource S K z m f) (canonicalClosed S K m) := by
+  have hG : ContinuousOn (K.inverseChart z m) (canonicalClosed S K m) := by
     intro p hp
-    have hx := hcharts.2.1 hp
-    exact ⟨⟨hx.1.1.le, hx.1.2.le⟩, mem_univ _⟩
+    exact (n04b_inverseChart_contDiffAt_closed hK hz hsector m hp).continuousAt.continuousWithinAt
   change ContinuousOn
     ((fun x => K.height z m x * f x / |planeJacobian (K.chart z m) x|) ∘
-      K.inverseChart z m) (canonicalOpen S K m)
-  exact (n07b_continuousOn_physicalSourceFactor hK hz hsector m hf).comp
-    hcharts.2.2.2.2.2.1.continuousOn hmap
+      K.inverseChart z m) (canonicalClosed S K m)
+  exact (n07b_continuousOn_physicalSourceFactor hK hz hsector m hf).comp hG
+    (hK.boundary z hz hsector m).2.1
+
+/-- In particular the actual source conversion is continuous on its open
+canonical piece. -/
+theorem n07b_continuousOn_canonicalSource (m : ℕ) {f : PolarPoint → ℝ}
+    (hf : ContinuousOn f (physicalPieceClosed S K z m)) :
+    ContinuousOn (canonicalSource S K z m f) (canonicalOpen S K m) :=
+  (n07b_continuousOn_canonicalSource_closed hK hz hsector m hf).mono
+    (fun _ hp => ⟨⟨hp.1.1.le, hp.1.2.le⟩, mem_univ _⟩)
 
 /-- Every fixed canonical piece of a continuous physical source is an
-actual L² function. No uniform bound in `m` or `z` is used. -/
+actual L² function. Compactness is used only in canonical coordinates. -/
 theorem n07b_canonicalSource_memLp (m : ℕ) {f : PolarPoint → ℝ}
-    (hf : ContinuousOn f (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ univ)) :
+    (hf : ContinuousOn f (physicalPieceClosed S K z m)) :
     MemLp (canonicalSource S K z m f) 2 (canonicalMeasure S K m) := by
-  let g : PolarPoint → ℝ := fun p =>
-    K.height z m p * f p / |planeJacobian (K.chart z m) p|
-  have hg : ContinuousOn g
-      (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ Icc (0 : ℝ) Real.pi) :=
-    (n07b_continuousOn_physicalSourceFactor hK hz hsector m hf).mono
+  have hg : ContinuousOn (canonicalSource S K z m f)
+      (Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi) :=
+    (n07b_continuousOn_canonicalSource_closed hK hz hsector m hf).mono
       (fun _ hp => ⟨hp.1, mem_univ _⟩)
   have hcompact : IsCompact
-      (Icc (K.physicalLeft m) (K.physicalRight m) ×ˢ Icc (0 : ℝ) Real.pi) :=
+      (Icc (K.left m) (K.right m) ×ˢ Icc (0 : ℝ) Real.pi) :=
     isCompact_Icc.prod isCompact_Icc
   obtain ⟨B, hB⟩ := hcompact.bddAbove_image hg.norm
   have hmeas : AEStronglyMeasurable (canonicalSource S K z m f)
       (canonicalMeasure S K m) := by
-    apply ((n07b_continuousOn_canonicalSource hK hz hsector m hf).mono
+    apply ((n07b_continuousOn_canonicalSource_closed hK hz hsector m hf).mono
       (fun p (hp : p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi) =>
-        show p ∈ canonicalOpen S K m from ⟨hp.1, mem_univ _⟩)).aestronglyMeasurable
+        show p ∈ canonicalClosed S K m from
+          ⟨⟨hp.1.1.le, hp.1.2.le⟩, mem_univ _⟩)).aestronglyMeasurable
     exact measurableSet_Ioo.prod measurableSet_Ioc
   refine MemLp.of_bound hmeas B ?_
-  have hmeasure : canonicalMeasure S K m =
-      volume.restrict (Ioo (K.left m) (K.right m) ×ˢ Ioo (0 : ℝ) Real.pi) :=
-    Measure.restrict_congr_set
-      (polarStrip_Ioc_ae_eq_Ioo (K.left m) (K.right m) 0 Real.pi)
   have ha : ∀ᵐ p ∂canonicalMeasure S K m,
-      p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioo (0 : ℝ) Real.pi := by
-    rw [hmeasure]
-    exact ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioo)
-  have himage := canonicalChart_image_openStrip hK hz hsector m
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+      p ∈ Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi :=
+    ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)
   filter_upwards [ha] with p hp
-  have hpin : p ∈ canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi) :=
-    ⟨⟨hp.1, mem_univ _⟩, ⟨mem_univ _, hp.2⟩⟩
-  rw [← himage] at hpin
-  obtain ⟨x, hx, hxp⟩ := hpin
-  have hinv : K.inverseChart z m p = x := by
-    rw [← hxp]
-    exact hcharts.2.2.1 x hx.1
-  change ‖g (K.inverseChart z m p)‖ ≤ B
-  rw [hinv]
-  exact hB ⟨x, ⟨⟨hx.1.1.1.le, hx.1.1.2.le⟩,
-    ⟨hx.2.2.1.le, hx.2.2.2.le⟩⟩, rfl⟩
+  exact hB ⟨p, ⟨⟨hp.1.1.le, hp.1.2.le⟩, ⟨hp.2.1.le, hp.2.2⟩⟩, rfl⟩
 
-/-- In particular, the actual canonical L² class exists for every globally
-continuous physical source. -/
+/-- Globally continuous physical data satisfy the actual closed-domain
+input with no change to the source formula. -/
 theorem n07b_canonicalSource_memLp_of_continuous (m : ℕ) {f : PolarPoint → ℝ}
     (hf : Continuous f) :
     MemLp (canonicalSource S K z m f) 2 (canonicalMeasure S K m) :=

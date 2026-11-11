@@ -231,6 +231,31 @@ theorem n06_N03Properties_mono {D : ReferenceData} {T : MaterialData}
     (Set.prod_mono (Set.prod_mono (n06_sectorNeighborhood_mono hb hε hε)
       (subset_refl _)) (subset_refl _))
 
+/-- Actual current domains and their boundary germs restrict with the
+same geometry when the nonlinear neighborhood shrinks. -/
+theorem n06_CanonicalGeometry_mono {D : ReferenceData}
+    {S : PhysicalSpacesData} {C : NonlinearGeometryData S} {K : CanonicalData S}
+    {base base' : ℕ} {ε ε' : ℝ}
+    (h : CanonicalGeometry D S C K base ε)
+    (hb : base ≤ base') (hε : ε' ≤ ε) :
+    CanonicalGeometry D S C K base' ε' := by
+  have hU := n06_stateNeighborhood_mono (C := C) hb hε
+  exact {
+    normalizationOpen := h.normalizationOpen
+    normalizationSupport := h.normalizationSupport
+    normalization := fun z hz => h.normalization z (hU hz)
+    referenceBounds := h.referenceBounds
+    referencePositive := h.referencePositive
+    referenceNegative := h.referenceNegative
+    referencePartition := h.referencePartition
+    referenceDomain := h.referenceDomain
+    domains := fun z hz => h.domains z (hU hz)
+    partition := fun z hz => h.partition z (hU hz)
+    charts := fun z hz => h.charts z (hU hz)
+    boundary := fun z hz => h.boundary z (hU hz)
+    reflection := fun z hz => h.reflection z (hU hz)
+    inverseReflection := fun z hz => h.inverseReflection z (hU hz) }
+
 theorem n06_N04Properties_mono {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -238,21 +263,33 @@ theorem n06_N04Properties_mono {D : ReferenceData} {T : MaterialData}
     (h : N04Properties D T S C L K base loss ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) :
     N04Properties D T S C L K base' loss ε' := by
-  rcases h with ⟨hopen, hsupport, hnormalization, hpieces, hpositive, hnegative,
-    hcover, hcharts, hboundary, hparity, hinverseParity, hcuts, htransmission,
-    hoperator, hnegativeCoefficients, hpositiveDifference, hbounds, hpairing⟩
+  rcases h with ⟨hgeometry, hoperator, hbounds, hpairing⟩
+  rcases hoperator with ⟨hcuts, htransmission, hoperator, hnegative, hpositive⟩
   have hU := n06_stateNeighborhood_mono (C := C) hb hε
-  exact ⟨hopen, hsupport, n06_forall_mem_mono hU hnormalization,
-    hpieces, hpositive, hnegative, hcover, n06_forall_mem_mono hU hcharts,
-    n06_forall_mem_mono hU hboundary, n06_forall_mem_mono hU hparity,
-    n06_forall_mem_mono hU hinverseParity, hcuts,
-    n06_forall_mem_mono hU htransmission, n06_forall_mem_mono hU hoperator,
-    n06_forall_mem_mono hU hnegativeCoefficients,
-    n06_forall_mem_mono hU hpositiveDifference, n06_uniform_bound_mono hU hbounds,
-    n06_forall_mem_mono hU hpairing⟩
+  exact ⟨n06_CanonicalGeometry_mono hgeometry hb hε,
+    ⟨⟨hcuts.1, n06_forall_mem_mono hU hcuts.2⟩,
+      n06_forall_mem_mono hU htransmission, n06_forall_mem_mono hU hoperator,
+      n06_forall_mem_mono hU hnegative, n06_forall_mem_mono hU hpositive⟩,
+    n06_uniform_bound_mono hU hbounds, n06_forall_mem_mono hU hpairing⟩
 
 /-- Raising the low order and reducing the radius retains the complete
 construction through N05, on the very same source space and reference graph. -/
+theorem n06_CanonicalPrimitiveGeometry_mono {D : ReferenceData} {T : MaterialData}
+    {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base base' : ℕ} {ε ε' : ℝ}
+    (h : CanonicalPrimitiveGeometry D T S C L K base ε)
+    (hb : base ≤ base') (hε : ε' ≤ ε) :
+    CanonicalPrimitiveGeometry D T S C L K base' ε' := by
+  have hU := n06_stateNeighborhood_mono (C := C) hb hε
+  refine ⟨?_, fun z hz => h.transport z (hU hz),
+    fun z hz => h.physicalCoefficients z (hU hz)⟩
+  intro N
+  obtain ⟨r, d, C₀, A, hC₀, hA, hbound⟩ := h.materialJets N
+  exact ⟨r, d, C₀, A, hC₀, hA, fun z hz => hbound z (hU hz)⟩
+
+/-- Every geometric jet and transition certificate is retained on the
+same smaller neighborhood as the original nonlinear construction. -/
 theorem n06_NonlinearPropertiesThrough05_mono {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {R : ReturnEquationData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -262,9 +299,10 @@ theorem n06_NonlinearPropertiesThrough05_mono {D : ReferenceData} {T : MaterialD
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
     (hb : base ≤ base') (hε' : 0 < ε') (hε : ε' ≤ ε) :
     NonlinearPropertiesThrough05 D T S C R L K V b B base' loss ε' := by
-  rcases h with ⟨⟨⟨⟨h01, h02⟩, h03⟩, hroot, hcubic, htransmission, h04⟩, h05⟩
+  rcases h with ⟨⟨⟨⟨h01, h02⟩, h03⟩, hroot, hcubic, htransmission, h04, hprimitive⟩, h05⟩
   exact ⟨⟨⟨⟨n06_N01Properties_mono hT h01 hb hε' hε,
     n06_N02Properties_mono h02 hb hε⟩, n06_N03Properties_mono h03 hb hε⟩,
-    hroot, hcubic, htransmission, n06_N04Properties_mono h04 hb hε⟩, h05⟩
+    hroot, hcubic, htransmission, n06_N04Properties_mono h04 hb hε,
+      n06_CanonicalPrimitiveGeometry_mono hprimitive hb hε⟩, h05⟩
 
 end ContinuousFlexibility.Statements

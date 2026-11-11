@@ -25,19 +25,18 @@ open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
 
-def n07bSourceMaterialJacobian {S : PhysicalSpacesData} (T : MaterialData)
+abbrev n07bSourceMaterialJacobian {S : PhysicalSpacesData} (T : MaterialData)
     (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) (x : PolarPoint) : ℝ :=
-  T.ell x.1 * |planeJacobian (K.chart z m) x|
+  ContinuousFlexibility.Statements.canonicalMaterialJacobian T K z m x
 
-def n07bSourceHeightRatio {S : PhysicalSpacesData} (T : MaterialData)
+abbrev n07bSourceHeightRatio {S : PhysicalSpacesData} (T : MaterialData)
     (K : CanonicalData S) (m : ℕ) (x : PolarPoint) : ℝ :=
-  T.H x.1 / T.H (T.sample (K.cell m))
+  ContinuousFlexibility.Statements.canonicalMaterialHeightRatio T K m x
 
-def n07bSourceNormalizer {S : PhysicalSpacesData} (T : MaterialData)
+abbrev n07bSourceNormalizer {S : PhysicalSpacesData} (T : MaterialData)
     (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) (β : ℝ)
     (x : PolarPoint) : ℝ :=
-  Real.sqrt (n07bSourceMaterialJacobian T K z m x) *
-    n07bSourceHeightRatio T K m x ^ β
+  ContinuousFlexibility.Statements.canonicalMaterialNormalizer T K z m β x
 
 def n07bSourceMaterialAngleVector {S : PhysicalSpacesData} (T : MaterialData)
     (K : CanonicalData S) (z : AnnularState S × ℝ) (m : ℕ) (x : PolarPoint) : PolarPoint :=
@@ -63,7 +62,9 @@ theorem n07bSourceNormalizer_eq_product {S : PhysicalSpacesData}
     n07bSourceNormalizer T K z m β x =
       Real.sqrt (n07bSourceMaterialJacobian T K z m x) *
         (T.H (T.sample (K.cell m)) ^ β)⁻¹ * T.H x.1 ^ β := by
-  rw [n07bSourceNormalizer, n07bSourceHeightRatio, Real.div_rpow hx.le hm.le]
+  change Real.sqrt (n07bSourceMaterialJacobian T K z m x) *
+    (T.H x.1 / T.H (T.sample (K.cell m))) ^ β = _
+  rw [Real.div_rpow hx.le hm.le]
   simp only [div_eq_mul_inv]
   ring
 
@@ -74,19 +75,19 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem n07bSourceMaterialJacobian_pos (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) :
+    (hx : x ∈ physicalPieceOpen S K z m) :
     0 < n07bSourceMaterialJacobian T K z m x := by
-  have hxcore := (hK.2.2.2.1 m).2.2 hx.1
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hs m x ⟨hx.1.1.le, hx.1.2.le⟩
+  have hxcore := ((hK.domains z hz hs m).2.2.1 hx).1
+  have hclosed := (hK.boundary z hz hs m).2.2.2.2.1 x (subset_closure hx)
   exact mul_pos (hT.2.1 x.1 hxcore).1 (abs_pos.mpr hclosed.2.2.1)
 
 theorem n07bSourceMaterialJacobian_contDiffAt (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) :
+    (hx : x ∈ physicalPieceOpen S K z m) :
     ContDiffAt ℝ ∞ (n07bSourceMaterialJacobian T K z m) x := by
-  have hxcore := (hK.2.2.2.1 m).2.2 hx.1
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hs m x ⟨hx.1.1.le, hx.1.2.le⟩
+  have hxcore := ((hK.domains z hz hs m).2.2.1 hx).1
+  have hclosed := (hK.boundary z hz hs m).2.2.2.2.1 x (subset_closure hx)
   have hell : ContDiffAt ℝ ∞ (fun y : PolarPoint => T.ell y.1) x :=
     ((hT.1 T.ell (by simp)).contDiffAt (isOpen_Ioo.mem_nhds hxcore)).comp x contDiffAt_fst
   exact hell.mul ((ContinuousFlexibility.contDiffAt_planeJacobian hclosed.1).abs hclosed.2.2.1)
@@ -99,16 +100,17 @@ private theorem sampleHeight_pos (hD : IsAccumulatingProfile D)
       (n07bCanonicalSourceFactor_pos_of_material (K := K) hD hT 1 0 m)
 
 theorem n07bSourceHeightRatio_pos (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-    (hK : N04PartA D S C K base ε) (m : ℕ) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) : 0 < n07bSourceHeightRatio T K m x :=
-  div_pos (hT.2.1 x.1 ((hK.2.2.2.1 m).2.2 hx.1)).2.1 (sampleHeight_pos hD hT K m)
+    (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (m : ℕ) {x : PolarPoint}
+    (hx : x ∈ physicalPieceOpen S K z m) : 0 < n07bSourceHeightRatio T K m x :=
+  div_pos (hT.2.1 x.1 (((hK.domains z hz hs m).2.2.1 hx).1)).2.1 (sampleHeight_pos hD hT K m)
 
 theorem n07bSourceNormalizer_pos (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (β : ℝ) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) : 0 < n07bSourceNormalizer T K z m β x :=
+    (hx : x ∈ physicalPieceOpen S K z m) : 0 < n07bSourceNormalizer T K z m β x :=
   mul_pos (Real.sqrt_pos.mpr (n07bSourceMaterialJacobian_pos hT hK hz hs m hx))
-    (Real.rpow_pos_of_pos (n07bSourceHeightRatio_pos hD hT hK m hx) β)
+    (Real.rpow_pos_of_pos (n07bSourceHeightRatio_pos hD hT hK hz hs m hx) β)
 
 /-- The density, normalizer, material inverse direction, and drift are
 actual smooth geometric fields on the actual physical piece. -/
@@ -116,13 +118,13 @@ theorem n07b_sourceNormalizationFields_contDiffAt
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (β : ℝ) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) :
+    (hx : x ∈ physicalPieceOpen S K z m) :
     ContDiffAt ℝ ∞ (n07bSourceMaterialJacobian T K z m) x ∧
       ContDiffAt ℝ ∞ (n07bSourceNormalizer T K z m β) x ∧
       ContDiffAt ℝ ∞ (n07bSourceMaterialAngleVector T K z m) x ∧
       ContDiffAt ℝ ∞ (n07bSourceNormalizationDrift T K z m) x := by
-  have hxcore := (hK.2.2.2.1 m).2.2 hx.1
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hs m x ⟨hx.1.1.le, hx.1.2.le⟩
+  have hxcore := ((hK.domains z hz hs m).2.2.1 hx).1
+  have hclosed := (hK.boundary z hz hs m).2.2.2.2.1 x (subset_closure hx)
   have hΩ := n07bSourceMaterialJacobian_contDiffAt hT hK hz hs m hx
   have hΩpos := n07bSourceMaterialJacobian_pos hT hK hz hs m hx
   have hH : ContDiffAt ℝ ∞ (fun y : PolarPoint => T.H y.1) x :=
@@ -135,7 +137,7 @@ theorem n07b_sourceNormalizationFields_contDiffAt
   have hDΩ := n07b_contDiffAt_inverseAngleDerivative hclosed.1 hclosed.2.2.1 hΩ
   refine ⟨hΩ, ?_, ?_, ?_⟩
   · exact (hΩ.sqrt hΩpos.ne').mul
-      (hR.rpow_const_of_ne (n07bSourceHeightRatio_pos hD hT hK m hx).ne')
+      (hR.rpow_const_of_ne (n07bSourceHeightRatio_pos hD hT hK hz hs m hx).ne')
   · exact (hV.fst.div hell (hT.2.1 x.1 hxcore).1.ne').prodMk hV.snd
   · exact hDΩ.neg.div (contDiffAt_const.mul hΩ) (mul_ne_zero (by norm_num) hΩpos.ne')
 
@@ -144,10 +146,12 @@ the squared material-height ratio. -/
 theorem n07bSourceNormalizer_sq (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (β : ℝ) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) :
+    (hx : x ∈ physicalPieceOpen S K z m) :
     n07bSourceNormalizer T K z m β x ^ 2 =
       n07bSourceMaterialJacobian T K z m x * (n07bSourceHeightRatio T K m x ^ β) ^ 2 := by
-  rw [n07bSourceNormalizer, mul_pow,
+  change (Real.sqrt (n07bSourceMaterialJacobian T K z m x) *
+    n07bSourceHeightRatio T K m x ^ β) ^ 2 = _
+  rw [mul_pow,
     Real.sq_sqrt (n07bSourceMaterialJacobian_pos hT hK hz hs m hx).le]
 
 /-- The actual path energy is exactly the square of its normalized
@@ -155,7 +159,7 @@ coefficient. No source function occurs on either side. -/
 theorem n07bNormalizedSourceCoefficient_sq (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (β : ℝ) (j : ℕ) (i : n07bAngularChainIndex j)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     n07bNormalizedSourceCoefficient T K z m β j i x ^ 2 =
       (n07bSourceMaterialJacobian T K z m x * (n07bSourceHeightRatio T K m x ^ β) ^ 2) *
         n07bAngularChainCoefficient T K z m β j i x ^ 2 := by
@@ -167,7 +171,7 @@ theorem n07b_normalizedSource_stay
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (β : ℝ) {c : PolarPoint → ℝ} {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) (hc : ContDiffAt ℝ ∞ c x) :
+    (hx : x ∈ physicalPieceOpen S K z m) (hc : ContDiffAt ℝ ∞ c x) :
     n07bSourceNormalizer T K z m β x * n07bMaterialCoeffStay T β (K.chart z m) c x =
       n07bInverseAngleDerivative (K.chart z m)
         (fun y => n07bSourceNormalizer T K z m β y * c y) x +
@@ -176,7 +180,7 @@ theorem n07b_normalizedSource_stay
   let k : ℝ := (T.H (T.sample (K.cell m)) ^ β)⁻¹
   let u : PolarPoint → ℝ := fun y => T.H y.1 ^ β * c y
   let g : PolarPoint → ℝ := fun y => k * u y
-  have hxcore := (hK.2.2.2.1 m).2.2 hx.1
+  have hxcore := ((hK.domains z hz hs m).2.2.1 hx).1
   have hHpos : 0 < T.H x.1 := (hT.2.1 x.1 hxcore).2.1
   have hmpos := sampleHeight_pos hD hT K m
   have hΩ := n07bSourceMaterialJacobian_contDiffAt hT hK hz hs m hx
@@ -189,10 +193,10 @@ theorem n07b_normalizedSource_stay
     rw [← Real.rpow_add hHpos, add_neg_cancel, Real.rpow_zero]
   have heq : (fun y => n07bSourceNormalizer T K z m β y * c y) =ᶠ[𝓝 x]
       (fun y => Real.sqrt (Ω y) * g y) := by
-    filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds hx] with y hy
+    filter_upwards [(hK.domains z hz hs m).1.mem_nhds hx] with y hy
     change n07bSourceNormalizer T K z m β y * c y = Real.sqrt (Ω y) * g y
     rw [n07bSourceNormalizer_eq_product T K z m β y
-      (hT.2.1 y.1 ((hK.2.2.2.1 m).2.2 hy.1)).2.1 hmpos]
+      (hT.2.1 y.1 (((hK.domains z hz hs m).2.2.1 hy).1)).2.1 hmpos]
     dsimp only [Ω, g, k, u]
     ring
   have hderiv : n07bInverseAngleDerivative (K.chart z m)
@@ -225,7 +229,7 @@ theorem n07bNormalizedSourceCoefficient_contDiffAt
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (β : ℝ) (j : ℕ) (i : n07bAngularChainIndex j)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     ContDiffAt ℝ ∞ (n07bNormalizedSourceCoefficient T K z m β j i) x :=
   (n07b_sourceNormalizationFields_contDiffAt hD hT hK hz hs m β hx).2.1.mul
     (n07b_angularChainCoefficient_contDiffAt hT hK hz hs m β j i hx)
@@ -234,7 +238,7 @@ theorem n07bNormalizedSourceCoefficient_stay
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hK : N04PartA D S C K base ε) (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) (β : ℝ) (j : ℕ) (i : n07bAngularChainIndex j)
-    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     n07bNormalizedSourceCoefficient T K z m β (j + 1) (i, 0) x =
       n07bInverseAngleDerivative (K.chart z m) (n07bNormalizedSourceCoefficient T K z m β j i) x +
         n07bSourceNormalizationDrift T K z m x * n07bNormalizedSourceCoefficient T K z m β j i x := by

@@ -116,12 +116,11 @@ include hT hK hz hs
 each physical open piece, by the actual chart and material fields. -/
 theorem n07b_angularChainCoefficient_contDiffAt (m : ℕ) (β : ℝ)
     (j : ℕ) (i : n07bAngularChainIndex j) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) :
+    (hx : x ∈ physicalPieceOpen S K z m) :
     ContDiffAt ℝ ∞ (n07bAngularChainCoefficient T K z m β j i) x := by
-  have hxcore : x.1 ∈ Ioo D.a D.b := (hK.2.2.2.1 m).2.2 hx.1
-  have hxclosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
-    ⟨hx.1.1.le, hx.1.2.le⟩
-  have hclosed := hK.2.2.2.2.2.2.2.2.1 z hz hs m x hxclosed
+  have hxcore : x.1 ∈ Ioo D.a D.b := ((hK.domains z hz hs m).2.2.1 hx).1
+  have hxclosed : x ∈ physicalPieceClosed S K z m := subset_closure hx
+  have hclosed := (hK.boundary z hz hs m).2.2.2.2.1 x hxclosed
   induction j with
   | zero =>
       have hJ := ContinuousFlexibility.contDiffAt_planeJacobian hclosed.1
@@ -139,20 +138,20 @@ theorem n07b_angularChainCoefficient_contDiffAt (m : ℕ) (β : ℝ)
 material expansion with the preassigned geometric coefficients. -/
 theorem n07b_physicalSourceJet_material_expansion (m : ℕ) (β : ℝ)
     {f : PolarPoint → ℝ} (hf : ContDiffOn ℝ ∞ f (annularOpen D))
-    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     n07bPhysicalSourceJet K z m f j x = T.H x.1 ^ β *
       ∑ i : n07bAngularChainIndex j, n07bAngularChainCoefficient T K z m β j i x *
         mixedDerivative (n07bAngularChainRadial j i) (n07bAngularChainAngular j i)
           (materialPullback T β f) (n07bMaterialChart T x) := by
   have hu : ContDiff ℝ ∞ (materialPullback T β f) := contDiff_materialPullback hT hf
-  have hopen : IsOpen (physicalPieceOpen S K m) := isOpen_Ioo.prod isOpen_univ
+  have hopen : IsOpen (physicalPieceOpen S K z m) := (hK.domains z hz hs m).1
   induction j generalizing x with
   | zero =>
       simpa [n07bAngularChainIndex, n07bAngularChainCoefficient,
         n07bAngularChainRadial, n07bAngularChainAngular, mul_assoc] using
-        n07b_physicalSourceJet_zero_material hT K z m β f ((hK.2.2.2.1 m).2.2 hx.1)
+        n07b_physicalSourceJet_zero_material hT K z m β f (((hK.domains z hz hs m).2.2.1 hx).1)
   | succ j ih =>
-      have hxcore : x.1 ∈ Ioo D.a D.b := (hK.2.2.2.1 m).2.2 hx.1
+      have hxcore : x.1 ∈ Ioo D.a D.b := ((hK.domains z hz hs m).2.2.1 hx).1
       have hgerm : n07bPhysicalSourceJet K z m f j =ᶠ[𝓝 x]
           (fun y => T.H y.1 ^ β * ∑ i : n07bAngularChainIndex j,
             n07bAngularChainCoefficient T K z m β j i y *
@@ -197,7 +196,7 @@ theorem n07b_physicalSourceJet_material_expansion (m : ℕ) (β : ℝ)
 expansion. No estimates or coefficient identities are assumed. -/
 theorem n07b_physicalSourceJet_material_expansion_of_heightMember (m : ℕ) (β : ℝ)
     {f : PolarPoint → ℝ} (hf : HeightMember D T β f)
-    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     n07bPhysicalSourceJet K z m f j x = T.H x.1 ^ β *
       ∑ i : n07bAngularChainIndex j, n07bAngularChainCoefficient T K z m β j i x *
         mixedDerivative (n07bAngularChainRadial j i) (n07bAngularChainAngular j i)
@@ -208,7 +207,7 @@ theorem n07b_physicalSourceJet_material_expansion_of_heightMember (m : ℕ) (β 
 the actual canonical angular derivative at the actual chart image. -/
 theorem n07b_canonicalSource_material_expansion (m : ℕ) (β : ℝ)
     {f : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f)
-    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K m) :
+    (j : ℕ) {x : PolarPoint} (hx : x ∈ physicalPieceOpen S K z m) :
     mixedDerivative 0 j (canonicalSource S K z m f) (K.chart z m x) = T.H x.1 ^ β *
       ∑ i : n07bAngularChainIndex j, n07bAngularChainCoefficient T K z m β j i x *
         mixedDerivative (n07bAngularChainRadial j i) (n07bAngularChainAngular j i)

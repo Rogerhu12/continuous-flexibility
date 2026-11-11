@@ -32,7 +32,7 @@ def N07bSourcePolynomialCoefficientBound (T : MaterialData) (S : PhysicalSpacesD
     (base : ℕ) (ε : ℝ) (b : ℕ) : Prop :=
   ∃ r d : ℕ, ∃ B A : ℝ, 0 ≤ B ∧ 0 ≤ A ∧
     ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
-      ∀ m x, x ∈ physicalPieceOpen S K m →
+      ∀ m x, x ∈ physicalPieceOpen S K z m →
         ∀ j : Fin (b + 1), ∀ i : n07bAngularChainIndex j.val,
           n07bSourceGeometricWeight T K z m x *
             n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2 ≤
@@ -62,7 +62,7 @@ theorem n07b_sourceCoefficientBound_of_polynomial_on_smaller
     (hb : base ≤ base') (hr : r ≤ base') (hε : ε' ≤ ε)
     (hεsmall : ε' ≤ (1 / 2 : ℝ)) (hB : 0 ≤ B) (hA : 0 ≤ A)
     (hcoeff : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
-      ∀ m x, x ∈ physicalPieceOpen S K m →
+      ∀ m x, x ∈ physicalPieceOpen S K z m →
         ∀ j : Fin (b + 1), ∀ i : n07bAngularChainIndex j.val,
           n07bSourceGeometricWeight T K z m x *
             n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2 ≤
@@ -73,7 +73,7 @@ theorem n07b_sourceCoefficientBound_of_polynomial_on_smaller
   refine ⟨B * (2 : ℝ) ^ d, A, hB', hA, ?_⟩
   intro z hz hs m x hx j i
   have hzold := n06_stateNeighborhood_mono (C := C) hb hε hz
-  have hxcore : x.1 ∈ Ioo D.a D.b := (hK.2.2.2.1 m).2.2 hx.1
+  have hxcore : x.1 ∈ Ioo D.a D.b := ((hK.domains z hzold hs m).2.2.1 hx).1
   have hE : 0 ≤ T.E0 x.1 ^ A :=
     Real.rpow_nonneg (hT.2.1 x.1 hxcore).2.2.1.le _
   have hpow := n07b_stateWeight_pow_le_two_pow (d := d) hr hεsmall hz

@@ -151,14 +151,14 @@ theorem n07b_sourceBound_row_pointwise
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) {f : PolarPoint → ℝ}
     (hf : ContDiffOn ℝ ∞ f (annularOpen D)) (b m : ℕ) {x : PolarPoint}
-    (hx : x ∈ physicalPieceOpen S K m) {A : ℝ}
+    (hx : x ∈ physicalPieceOpen S K z m) {A : ℝ}
     (hcoeff : ∀ j : Fin (b + 1), ∀ i : n07bAngularChainIndex j.val,
       n07bSourceGeometricWeight T K z m x *
         n07bAngularChainCoefficient T K z m (3 / 4 : ℝ) j.val i x ^ 2 ≤
           A * T.M x.1 ^ 2) :
     n07bSourceRowDensity T K z f b m x ≤ A * n07bSourceMaterialMajorant T b f x := by
   classical
-  have hxcore : x.1 ∈ Ioo D.a D.b := (hK.2.2.2.1 m).2.2 hx.1
+  have hxcore : x.1 ∈ Ioo D.a D.b := ((hK.domains z hz hs m).2.2.1 hx).1
   unfold n07bSourceRowDensity n07bSourceMaterialMajorant
   rw [Finset.mul_sum]
   apply Finset.sum_le_sum

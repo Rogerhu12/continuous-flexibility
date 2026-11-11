@@ -30,14 +30,14 @@ def n07bReferencePiecePullback {S : PhysicalSpacesData}
     canonicalHeight S K z m (fun x => η x - a * S.chiLeft x.1)
       (K.chart (C.referenceState, 0) m p)
 
-/-- The global reference representative uses the actual physical piece
-containing the point. Off the open atlas it retains the original field. -/
+/-- The global reference representative selects the reference physical piece
+containing the reference point. Off the open atlas it retains the original field. -/
 def n07bReferencePullback {S : PhysicalSpacesData}
     (C : NonlinearGeometryData S) (K : CanonicalData S)
     (z : AnnularState S × ℝ) (a : ℝ) (η : PolarPoint → ℝ)
     (p : PolarPoint) : ℝ := by
   classical
-  exact if h : ∃ m, p ∈ physicalPieceOpen S K m then
+  exact if h : ∃ m, p ∈ referencePhysicalPieceOpen S K m then
     n07bReferencePiecePullback C K z h.choose a η p
   else η p
 
@@ -47,11 +47,11 @@ theorem n07bReferencePullback_on_piece
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hK : N04PartA D S C K base ε)
     (z : AnnularState S × ℝ) (a : ℝ) (η : PolarPoint → ℝ)
-    {m : ℕ} {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    {m : ℕ} {p : PolarPoint} (hp : p ∈ referencePhysicalPieceOpen S K m) :
     n07bReferencePullback C K z a η p =
       n07bReferencePiecePullback C K z m a η p := by
   classical
-  have hex : ∃ n, p ∈ physicalPieceOpen S K n := ⟨m, hp⟩
+  have hex : ∃ n, p ∈ referencePhysicalPieceOpen S K n := ⟨m, hp⟩
   have hm : hex.choose = m := by
     by_contra hne
     exact Set.disjoint_left.mp (n07b_physicalIntervals_pairwiseDisjoint hK hne)
@@ -71,13 +71,16 @@ theorem n07bReferencePullback_canonicalHeight
     canonicalHeight S K (C.referenceState, 0) m
       (fun x => n07bReferencePullback C K z a η x - a * S.chiLeft x.1) p =
         canonicalHeight S K z m (fun x => η x - a * S.chiLeft x.1) p := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 (C.referenceState, 0) href hsectorRef m
+  have hcharts := hK.charts (C.referenceState, 0) href hsectorRef m
   have hx := hcharts.2.1 hp
+  have hxref : K.inverseChart (C.referenceState, 0) m p ∈ referencePhysicalPieceOpen S K m := by
+    rw [← hK.referenceDomain m]
+    exact hx
   have hheight := (hcharts.2.2.2.2.2.2.2 _ hx).1.ne'
   change (n07bReferencePullback C K z a η (K.inverseChart (C.referenceState, 0) m p) -
       a * S.chiLeft (K.inverseChart (C.referenceState, 0) m p).1) /
       K.height (C.referenceState, 0) m (K.inverseChart (C.referenceState, 0) m p) = _
-  rw [n07bReferencePullback_on_piece hK z a η hx]
+  rw [n07bReferencePullback_on_piece hK z a η hxref]
   simp only [n07bReferencePiecePullback, add_sub_cancel_left,
     hcharts.2.2.2.1 p hp]
   exact mul_div_cancel_left₀ _ hheight
@@ -93,14 +96,23 @@ theorem n07bReferencePullback_eq_on_normalizationRegion
     {p : PolarPoint} (hp : p.1 ∈ K.normalizationRegion) :
     n07bReferencePullback C K z a η p = η p := by
   classical
-  by_cases hex : ∃ m, p ∈ physicalPieceOpen S K m
+  by_cases hex : ∃ m, p ∈ referencePhysicalPieceOpen S K m
   · obtain ⟨m, hm⟩ := hex
-    have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
-    have hfixed := hK.2.2.1 z hz hsector m p hm hp
+    have hcharts := hK.charts z hz hsector m
+    have hnorm := hK.normalization z hz hsector m
+    have hmref : p ∈ physicalPieceOpen S K (C.referenceState, 0) m := by
+      rw [hK.referenceDomain m]
+      exact hm
+    have hmcurrent : p ∈ physicalPieceOpen S K z m := by
+      have hboth : p ∈ physicalPieceOpen S K (C.referenceState, 0) m ∩
+          (K.normalizationRegion ×ˢ univ) := ⟨hmref, hp, mem_univ _⟩
+      rw [← hnorm.1] at hboth
+      exact hboth.1
+    have hfixed := hnorm.2 p hmcurrent hp
     have hinverse : K.inverseChart z m (K.chart (C.referenceState, 0) m p) = p := by
       rw [← hfixed.1]
-      exact hcharts.2.2.1 p hm
-    have hheight := (hcharts.2.2.2.2.2.2.2 p hm).1.ne'
+      exact hcharts.2.2.1 p hmcurrent
+    have hheight := (hcharts.2.2.2.2.2.2.2 p hmcurrent).1.ne'
     rw [n07bReferencePullback_on_piece hK z a η hm]
     simp only [n07bReferencePiecePullback, canonicalHeight, hinverse, ← hfixed.2]
     field_simp [hheight]
@@ -122,7 +134,7 @@ theorem n07bReferencePullback_referenceRow
     funext r
     by_cases hc : referenceColumn D r = 0
     · simp only [hc, zero_mul]
-    · have hr : r ∈ K.normalizationRegion := hK.2.1 hc
+    · have hr : r ∈ K.normalizationRegion := hK.normalizationSupport hc
       have hfield : (fun θ => n07bReferencePullback C K z a η (r, θ) *
           Radial.cosineMode 2 θ) = (fun θ => η (r, θ) * Radial.cosineMode 2 θ) := by
         funext θ

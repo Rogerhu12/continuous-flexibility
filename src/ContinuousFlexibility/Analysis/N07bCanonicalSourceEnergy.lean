@@ -46,7 +46,7 @@ theorem n07b_canonicalHeight_density_mul (m : ℕ) (f : PolarPoint → ℝ)
     {p : PolarPoint} (hp : p ∈ canonicalOpen S K m) :
     canonicalHeight S K z m (fun x => n07bCanonicalSourceDensity S K z m x * f x) p =
       canonicalSource S K z m f p := by
-  have hcharts := hK.2.2.2.2.2.2.2.1 z hz hsector m
+  have hcharts := hK.charts z hz hsector m
   have hx := hcharts.2.1 hp
   have hregular := hcharts.2.2.2.2.2.2.2 (K.inverseChart z m p) hx
   have hh : K.height z m (K.inverseChart z m p) ≠ 0 := hregular.1.ne'
@@ -59,7 +59,7 @@ theorem n07b_canonicalHeight_density_mul (m : ℕ) (f : PolarPoint → ℝ)
 totalized integral convention as the underlying change of variables. -/
 theorem n07b_canonicalSource_square_integral (m : ℕ) (f : PolarPoint → ℝ) :
     (∫ p, canonicalSource S K z m f p ^ 2 ∂canonicalMeasure S K m) =
-      ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         n07bCanonicalSourceDensity S K z m p * f p ^ 2 := by
   have hpair := canonicalSource_pairing_of_partA hK hz hsector m
     (fun p => n07bCanonicalSourceDensity S K z m p * f p) f
@@ -82,7 +82,7 @@ theorem n07b_canonicalSource_square_integral (m : ℕ) (f : PolarPoint → ℝ) 
         canonicalHeight S K z m
           (fun x => n07bCanonicalSourceDensity S K z m x * f x) p *
             canonicalSource S K z m f p := hcanonical.symm
-    _ = ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+    _ = ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         (n07bCanonicalSourceDensity S K z m p * f p) * f p := hpair.symm
     _ = _ := by
       apply integral_congr_ae
@@ -93,7 +93,7 @@ Hilbert norm. The `MemLp` hypothesis is not inferred from the raw identity. -/
 theorem n07b_canonicalSource_toLp_norm_sq (m : ℕ) (f : PolarPoint → ℝ)
     (hf : MemLp (canonicalSource S K z m f) 2 (canonicalMeasure S K m)) :
     ‖hf.toLp (canonicalSource S K z m f)‖ ^ 2 =
-      ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+      ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         n07bCanonicalSourceDensity S K z m p * f p ^ 2 := by
   rw [spaces_lp_norm_sq_toLp hf, n07b_canonicalSource_square_integral hK hz hsector m f]
 

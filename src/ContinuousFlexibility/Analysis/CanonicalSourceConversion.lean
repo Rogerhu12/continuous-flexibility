@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+import ContinuousFlexibility.Analysis.CanonicalAngularStripMeasure
 import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
@@ -28,28 +28,26 @@ theorem canonicalSource_pairing_of_partA
     (hK : N04PartA D S C K base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hsector : stateSector S z.1) (m : ℕ) (u f : PolarPoint → ℝ) :
-    (∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), u p * f p) =
+    (∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi), u p * f p) =
       ∫ p in canonicalOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
         canonicalHeight S K z m u p * canonicalSource S K z m f p := by
-  have hphysicalOpen : IsOpen (physicalPieceOpen S K m) :=
-    isOpen_Ioo.prod isOpen_univ
+  have hphysicalOpen : IsOpen (physicalPieceOpen S K z m) :=
+    (hK.domains z hz hsector m).1
   have hphys_ae :
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =ᵐ[volume]
-        (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
-    simpa only [physicalPieceOpen, prod_inter_prod, inter_univ, univ_inter] using
-      polarStrip_Ioc_ae_eq_Ioo (K.physicalLeft m) (K.physicalRight m) 0 Real.pi
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =ᵐ[volume]
+        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
+    exact polarDomain_Ioc_ae_eq_Ioo (physicalPieceOpen S K z m) 0 Real.pi
   have hcanon_ae :
       (canonicalOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =ᵐ[volume]
         (canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
     simpa only [canonicalOpen, prod_inter_prod, inter_univ, univ_inter] using
       polarStrip_Ioc_ae_eq_Ioo (K.left m) (K.right m) 0 Real.pi
   have himage := canonicalChart_image_openStrip hK hz hsector m
-  obtain ⟨_, _, _, _, _, _, _, hcharts, _, _, _⟩ := hK
-  obtain ⟨_, _, hinv, _, hsmooth, _, _, hnonzero⟩ := hcharts z hz hsector m
+  obtain ⟨_, _, hinv, _, hsmooth, _, _, hnonzero⟩ := hK.charts z hz hsector m
   have hmeas : MeasurableSet
-      (physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
+      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) :=
     (hphysicalOpen.inter (isOpen_univ.prod isOpen_Ioo)).measurableSet
-  have hdiff : ∀ p ∈ physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
+  have hdiff : ∀ p ∈ physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
       DifferentiableAt ℝ (K.chart z m) p := by
     intro p hp
     exact ((hsmooth p hp.1).contDiffAt (hphysicalOpen.mem_nhds hp.1)).differentiableAt
@@ -59,7 +57,7 @@ theorem canonicalSource_pairing_of_partA
     (fun p hp => (hnonzero p hp.1).1.ne')
     (fun p hp => (hnonzero p hp.1).2.1) u f
   calc
-    _ = ∫ p in physicalPieceOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi), u p * f p :=
+    _ = ∫ p in physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi), u p * f p :=
       setIntegral_congr_set hphys_ae
     _ = ∫ p in canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi),
         canonicalHeight S K z m u p * canonicalSource S K z m f p := by
