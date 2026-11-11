@@ -42,16 +42,18 @@ theorem profileScalarCellSquare_add_le {D : ReferenceData} {f g : ℝ → ℝ} (
       2 * (profileScalarCellSquare D f m + profileScalarCellSquare D g m) := by
   have hfg : MemLp (fun r => D.localizer m r * (f r + g r)) 2
       (volume.restrict (radialCore D)) :=
-    (hf.add hg).congr (Eventually.of_forall fun r => by
+    MemLp.ae_eq (Eventually.of_forall fun r => by
       change D.localizer m r * f r + D.localizer m r * g r =
         D.localizer m r * (f r + g r)
-      ring)
+      ring) (hf.add hg)
   calc
     _ ≤ ∫ r in radialCore D,
         2 * ((D.localizer m r * f r) ^ 2 + (D.localizer m r * g r) ^ 2) := by
       apply integral_mono hfg.integrable_sq
         ((hf.integrable_sq.add hg.integrable_sq).const_mul 2)
       intro r
+      change (D.localizer m r * (f r + g r)) ^ 2 ≤
+        2 * ((D.localizer m r * f r) ^ 2 + (D.localizer m r * g r) ^ 2)
       nlinarith only [sq_nonneg (D.localizer m r * (f r - g r))]
     _ = _ := by
       rw [integral_const_mul, integral_add hf.integrable_sq hg.integrable_sq]
@@ -64,9 +66,9 @@ theorem profileScalarCellSquare_sub_le {D : ReferenceData} {f g : ℝ → ℝ} (
       2 * (profileScalarCellSquare D f m + profileScalarCellSquare D g m) := by
   have hng : MemLp (fun r => D.localizer m r * (-g r)) 2
       (volume.restrict (radialCore D)) :=
-    hg.neg.congr (Eventually.of_forall fun r => by
+    MemLp.ae_eq (Eventually.of_forall fun r => by
       change -(D.localizer m r * g r) = D.localizer m r * (-g r)
-      ring)
+      ring) hg.neg
   simpa only [sub_eq_add_neg, profileScalarCellSquare_neg] using
     profileScalarCellSquare_add_le m hf hng
 
