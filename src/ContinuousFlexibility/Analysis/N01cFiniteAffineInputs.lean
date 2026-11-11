@@ -36,7 +36,8 @@ theorem contDiffOn_finiteAffine_linearField
       have hh := congrArg L (pi_eq_sum_univ' q)
       simpa only [map_sum, map_smul, e] using hh
     rw [← heval p hp (x + L q), map_add, hL]
-    simp only [map_sum, map_smul, smul_eq_mul, heval]
+    simp only [map_sum, map_smul, smul_eq_mul]
+    simp only [heval]
   have hbase : ContDiffOn ℝ ∞ (fun p : (Fin m → ℝ) × X => F x p.2)
       ((univ : Set (Fin m → ℝ)) ×ˢ V) :=
     (hF x).comp contDiff_snd.contDiffOn (fun p hp => hp.2)

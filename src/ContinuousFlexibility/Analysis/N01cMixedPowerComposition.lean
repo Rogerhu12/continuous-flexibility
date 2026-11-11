@@ -222,6 +222,7 @@ theorem MixedPowerBounds.scalarComp
     have hM : 1 ≤ Cf * E q ^ Af :=
       one_le_mul_of_one_le_of_one_le hCf (Real.one_le_rpow (hE q hq) hAf)
     have hb := scalarComposition_parameterJet_power_bound
+      (f := fun y => f y q) (g := iteratedDeriv m g)
       J0 (JO m) hV (contDiffOn_iteratedDeriv_open hV hg m)
       (fun y hy => hKV (hmap y hy hq)) hj hx hCg hP (hcardP j hj) hM
       (hH q hq).1 (hH q hq).2
@@ -266,14 +267,17 @@ theorem MixedPowerBounds.scalarComp
         (Real.rpow_pos_of_pos hRpos _))
     have hbase : ∀ i, ‖ff c i x‖ ≤ B i := by
       refine Fin.cases ?_ (fun i => ?_)
-      · simpa only [smoothDirections_D_zero_apply (JO c.length) hx,
-          parameterHeightWeight, ite_true, mul_one] using
-          hOJ c.length hm 0 (Nat.zero_le N) Fin.elim0 (fun i => i.elim0) (fun i => i.elim0)
+      · have hh := hOJ c.length hm 0 (Nat.zero_le N) Fin.elim0
+          (fun i => i.elim0) (fun i => i.elim0)
+        rw [(JO c.length).zero x hx] at hh
+        simpa only [ff, B, Fin.cons_zero,
+          parameterHeightWeight, ite_true, mul_one] using hh
       · have hh := hfb 0 (Nat.zero_le N) (ra c i) (an c i)
           ((horder c i).le.trans ((c.partSize_le i).trans hab))
           q hq (F.parameter (ra c i) (an c i) q hq) x hx hlow
           Fin.elim0 (fun j => j.elim0) R hR hhigh (fun j => j.elim0)
-        simpa only [smoothDirections_D_zero_apply, horder, parameterHeightWeight,
+        rw [(F.parameter (ra c i) (an c i) q hq).zero x hx] at hh
+        simpa only [ff, B, Fin.cons_succ, horder, parameterHeightWeight,
           ite_true, mul_one] using hh
     have hjet : ∀ i (d : OrderedFinpartition k) (j : Fin d.length),
         ‖(JJ c i).D (d.partSize j) x (v ∘ d.emb j)‖ ≤ H q * B i := by
@@ -281,14 +285,16 @@ theorem MixedPowerBounds.scalarComp
       · intro d j
         have hh := hOJ c.length hm (d.partSize j) ((d.partSize_le j).trans hk)
           (v ∘ d.emb j) (fun i => hv _) (fun i => hvhigh _)
-        simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt (d.partSize_pos j)),
+        simpa only [JJ, Fin.cases_zero, B, Fin.cons_zero,
+          parameterHeightWeight, if_neg (Nat.ne_of_gt (d.partSize_pos j)),
           mul_comm] using hh
       · intro d j
         have hh := hfb (d.partSize j) ((d.partSize_le j).trans hk) (ra c i) (an c i)
           ((horder c i).le.trans ((c.partSize_le i).trans hab))
           q hq (F.parameter (ra c i) (an c i) q hq) x hx hlow
           (v ∘ d.emb j) (fun l => hv _) R hR hhigh (fun l => hvhigh _)
-        simpa only [horder, parameterHeightWeight, if_neg (Nat.ne_of_gt (d.partSize_pos j)),
+        simpa only [JJ, Fin.cases_succ, B, Fin.cons_succ, horder,
+          parameterHeightWeight, if_neg (Nat.ne_of_gt (d.partSize_pos j)),
           mul_comm, mul_left_comm, mul_assoc] using hh
     have hsum : (∑ i : Fin c.length, (c.partSize i : ℝ) / ((s : ℝ) + 1)) =
         ((a + b : ℕ) : ℝ) / ((s : ℝ) + 1) := by

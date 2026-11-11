@@ -131,6 +131,32 @@ theorem continuousOn_volterraWeightedForcing {n : ℕ} {K : X × ℝ → ℝ}
   simpa only [volterraWeightedForcing, smul_apply, smul_eq_mul, Pi.mul_def, Pi.mul_apply] using
     he.mul hA
 
+private theorem continuousOn_scalarPrimitiveWithDirection
+    {Y : Type*} [TopologicalSpace Y]
+    {F : (X × ℝ) × Y → ℝ} {U : Set X}
+    (hF : ContinuousOn F ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y))) :
+    ContinuousOn
+      (fun p : (X × ℝ) × Y => ∫ t in (0 : ℝ)..p.1.2, F ((p.1.1, t), p.2))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) := by
+  have hswap₁ : ContinuousOn
+      (fun p : (X × Y) × ℝ => ((p.1.1, p.2), p.1.2))
+      ((U ×ˢ (univ : Set Y)) ×ˢ (univ : Set ℝ)) :=
+    ((continuous_fst.fst.prodMk continuous_snd).prodMk continuous_fst.snd).continuousOn
+  have hg : ContinuousOn
+      (fun p : (X × Y) × ℝ => F ((p.1.1, p.2), p.1.2))
+      ((U ×ˢ (univ : Set Y)) ×ˢ (univ : Set ℝ)) :=
+    hF.comp' hswap₁ (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
+  have hprimitive : ContinuousOn
+      (fun p : (X × Y) × ℝ => ∫ t in (0 : ℝ)..p.2, F ((p.1.1, t), p.1.2))
+      ((U ×ˢ (univ : Set Y)) ×ˢ (univ : Set ℝ)) :=
+    continuousOn_parametric_primitive_univ_topological hg 0
+  have hswap₂ : ContinuousOn
+      (fun p : (X × ℝ) × Y => ((p.1.1, p.2), p.1.2))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) :=
+    ((continuous_fst.fst.prodMk continuous_snd).prodMk continuous_fst.snd).continuousOn
+  exact hprimitive.comp' hswap₂
+    (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
+
 private theorem continuousOn_scalarVolterraValue
     {Y : Type*} [TopologicalSpace Y]
     {K : X × ℝ → ℝ} {F : (X × ℝ) × Y → ℝ} {U : Set X}
@@ -141,43 +167,36 @@ private theorem continuousOn_scalarVolterraValue
         ∫ t in (0 : ℝ)..p.1.2,
           Real.exp (-volterraPrimitive K (p.1.1, t)) * F ((p.1.1, t), p.2))
       ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) := by
+  have hproj : ContinuousOn (fun p : (X × ℝ) × Y => p.1)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) :=
+    continuous_fst.continuousOn
   have houter : ContinuousOn
       (fun p : (X × ℝ) × Y => volterraPrimitive K p.1)
       ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) :=
-    (continuousOn_volterraPrimitive hK).comp
-      continuous_fst.continuousOn (fun p hp => hp.1)
+    (continuousOn_volterraPrimitive hK).comp' hproj (fun p hp => hp.1)
+  have hneg : ContinuousOn
+      (fun p : (X × ℝ) × Y => -volterraPrimitive K p.1)
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) := by
+    simpa only [Pi.neg_def] using houter.neg
+  have hexp : ContinuousOn
+      (fun p : (X × ℝ) × Y => Real.exp (-volterraPrimitive K p.1))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) :=
+    Real.continuous_exp.comp_continuousOn' hneg
   have hw : ContinuousOn
       (fun p : (X × ℝ) × Y => Real.exp (-volterraPrimitive K p.1) * F p)
       ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) := by
-    simpa only [Pi.mul_def, Pi.mul_apply] using
-      (Real.continuous_exp.comp_continuousOn houter.neg).mul hF
-  have hswap₁ : Continuous
-      (fun p : (X × Y) × ℝ => ((p.1.1, p.2), p.1.2)) :=
-    (continuous_fst.fst.prodMk continuous_snd).prodMk continuous_fst.snd
-  have hg : ContinuousOn
-      (fun p : (X × Y) × ℝ =>
-        Real.exp (-volterraPrimitive K (p.1.1, p.2)) * F ((p.1.1, p.2), p.1.2))
-      ((U ×ˢ (univ : Set Y)) ×ˢ (univ : Set ℝ)) :=
-    hw.comp hswap₁.continuousOn
-      (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
-  have hprimitive : ContinuousOn
-      (fun p : (X × Y) × ℝ =>
-        ∫ t in (0 : ℝ)..p.2,
-          Real.exp (-volterraPrimitive K (p.1.1, t)) * F ((p.1.1, t), p.1.2))
-      ((U ×ˢ (univ : Set Y)) ×ˢ (univ : Set ℝ)) :=
-    continuousOn_parametric_primitive_univ_topological hg 0
-  have hswap₂ : Continuous
-      (fun p : (X × ℝ) × Y => ((p.1.1, p.2), p.1.2)) :=
-    (continuous_fst.fst.prodMk continuous_snd).prodMk continuous_fst.snd
+    simpa only [Pi.mul_def] using hexp.mul hF
   have hinner : ContinuousOn
       (fun p : (X × ℝ) × Y =>
         ∫ t in (0 : ℝ)..p.1.2,
           Real.exp (-volterraPrimitive K (p.1.1, t)) * F ((p.1.1, t), p.2))
       ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) :=
-    hprimitive.comp hswap₂.continuousOn
-      (fun p hp => ⟨⟨hp.1.1, mem_univ _⟩, mem_univ _⟩)
-  simpa only [Pi.mul_def, Pi.mul_apply] using
-    (Real.continuous_exp.comp_continuousOn houter).mul hinner
+    continuousOn_scalarPrimitiveWithDirection hw
+  have hexpOuter : ContinuousOn
+      (fun p : (X × ℝ) × Y => Real.exp (volterraPrimitive K p.1))
+      ((U ×ˢ (univ : Set ℝ)) ×ˢ (univ : Set Y)) :=
+    Real.continuous_exp.comp_continuousOn' houter
+  simpa only [Pi.mul_def] using hexpOuter.mul hinner
 
 theorem continuousOn_volterraValue {n : ℕ} {K : X × ℝ → ℝ}
     {A : X × ℝ → E [×n]→L[ℝ] ℝ} {U : Set X}
