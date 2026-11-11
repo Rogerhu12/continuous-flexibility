@@ -3,11 +3,10 @@ import ContinuousFlexibility.Analysis.CircleCompositionLocalTame
 /-!
 # Joint smooth tame chart composition in the actual circle space
 
-The genuine projective directional tower is already constructed.
-Every one of its actual finite-product expressions is locally tame as
-a joint function of the base point and all increments. Homogeneous
-multilinear normalization gives precisely the frozen SmoothTameOn
-definition with a loss fixed before the output order.
+The genuine projective directional tower and its uniform homogeneous
+bounds are already constructed. A unit low-seminorm ball around each
+point gives the frozen local estimate, with a loss fixed before the
+output order.
 -/
 
 noncomputable section
@@ -22,6 +21,37 @@ local instance circleCompositionSmoothTamePairSMul (S : CircleModelData) :
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem smoothTameOn_of_uniform_jet_bounds
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [ContinuousConstSMul ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    {f : E → F} (J : SmoothDirections univ f)
+    (hbound : ∀ k : ℕ, ∃ base loss : ℕ, ∀ K : ℝ, 0 ≤ K →
+      ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x, p base x ≤ K →
+        ∀ v : Fin k → E,
+          q s (J.D k x v) ≤ C * tameJetSize p k s loss base x v) :
+    SmoothTameOn p q univ f := by
+  refine ⟨J, ?_⟩
+  intro k x₀ hx₀
+  obtain ⟨base, loss, hb⟩ := hbound k
+  refine ⟨loss, base, 1, zero_lt_one, ?_⟩
+  intro s hs
+  obtain ⟨C, hC, hc⟩ := hb (1 + p base x₀)
+    (add_nonneg zero_le_one (apply_nonneg _ _)) s
+  refine ⟨C, hC, ?_⟩
+  intro x hx hnear v
+  have hxbound : p base x ≤ 1 + p base x₀ := by
+    calc
+      p base x = p base ((x - x₀) + x₀) :=
+        congrArg (p base) (sub_add_cancel x x₀).symm
+      _ ≤ p base (x - x₀) + p base x₀ :=
+        map_add_le_add (p base) (x - x₀) x₀
+      _ ≤ 1 + p base x₀ := add_le_add_right hnear.le _
+  exact hc x hxbound v
+
 theorem smoothTameOn_circleChartComposition
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
@@ -30,62 +60,14 @@ theorem smoothTameOn_circleChartComposition
       (fun x : S.Space × S.Space =>
         circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) := by
   classical
-  let p := pairGrading S.grading S.grading
-  have hmono := gradedSeminorm_monotone (fun j => S.level j) S.bond
-  have hp : Monotone p := tamePairGrading_monotone hmono hmono
-  have ht : WithSeminorms p := withSeminorms_pairGrading
-    (withSeminorms_graded (fun j => S.level j) S.bond)
-    (withSeminorms_graded (fun j => S.level j) S.bond)
-  obtain ⟨J, hdecode⟩ := exists_circleChartComposition_smoothDirections
-    hS hT hD hγ hinterp travel
-  apply smoothTameOn_of_locallyTameOn_jets hp ht J
-  intro n
-  have hpj : Monotone (jetGrading p n) := jetGrading_monotone hp n
-  have hbase := locallyTameOn_jet_base p n
-  have hdir (i : Fin n) := locallyTameOn_jet_direction p n i
-  have hbaseChart := (locallyTameOn_pair_fst S.grading S.grading).comp hbase
-    (fun z hz => mem_univ _)
-  have hchart (i : Fin n) := (locallyTameOn_pair_fst S.grading S.grading).comp (hdir i)
-    (fun z hz => mem_univ _)
-  have hfield (i : Fin n) := (locallyTameOn_pair_snd S.grading S.grading).comp (hdir i)
-    (fun z hz => mem_univ _)
-  have hmain :
-      LocallyTameOn (jetGrading p n) S.grading univ
-        (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-          circleFiniteProductWith hS hT hD hγ
-            (circleOuterJetComposeContinuousLinear hS hT hD hγ travel n z.1.1 z.1.2)
-            (fun i => (z.2 i).1) Finset.univ) := by
-    apply locallyTameOn_circleFiniteProductWith hpj hS hT hD hγ hinterp Finset.univ
-    · exact (locallyTameOn_circleOuterJetCompose hS hT hD hγ hinterp travel n).comp hbase
-        (fun z hz => mem_univ _)
-    · intro i hi
-      exact hchart i
-  have hterm (i : Fin n) :
-      LocallyTameOn (jetGrading p n) S.grading univ
-        (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-          circleFiniteProductWith hS hT hD hγ
-            (circleOuterJetComposeContinuousLinear hS hT hD hγ travel (n - 1) z.1.1 (z.2 i).2)
-            (fun j => (z.2 j).1) (Finset.univ.erase i)) := by
-    apply locallyTameOn_circleFiniteProductWith hpj hS hT hD hγ hinterp (Finset.univ.erase i)
-    · exact (locallyTameOn_circleOuterJetCompose hS hT hD hγ hinterp travel (n - 1)).comp
-        (hbaseChart.prodMk hpj (hfield i)) (fun z hz => mem_univ _)
-    · intro j hj
-      exact hchart j
-  have hsum := LocallyTameOn.finset_sum hpj Finset.univ (fun i hi => hterm i)
-  have hvalue := hmain.add hpj hsum
-  change LocallyTameOn (jetGrading p n) S.grading univ
-    (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-      circleChartCompositionJetValue hS hT hD hγ travel n z.1 z.2) at hvalue
-  have hactual :
-      LocallyTameOn (jetGrading p n) S.grading univ
-        (fun z : (S.Space × S.Space) × (Fin n → S.Space × S.Space) =>
-          J.D n z.1 z.2) := by
-    apply hvalue.congr
-    intro z hz
-    apply hS.2.2.2.2.2.1
-    exact (hdecode n z.1 z.2).trans
-      (circleChartCompositionJetValue_decode hS hT hD hγ travel n z.1 z.2).symm
-  simpa only [Set.univ_prod_univ] using hactual
+  let h := exists_circleChartComposition_uniform_oneHigh
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp travel
+  let J : SmoothDirections univ
+      (fun x : S.Space × S.Space =>
+        circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) :=
+    h.choose
+  exact smoothTameOn_of_uniform_jet_bounds
+    (pairGrading S.grading S.grading) S.grading J h.choose_spec.2
 
 theorem smoothTameOn_circleShiftedChartComposeLinear
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
