@@ -74,9 +74,11 @@ def physicalFlowGraphTop (s K offset : ℕ) : ℕ :=
 theorem physicalFlowGraph_order_le_top
     {n b k s K offset : ℕ} (hab : n + 1 + b ≤ s) (hk : k ≤ K) :
     n + b + (offset + 1) * k ≤ physicalFlowGraphTop s K offset := by
-  have hm := Nat.mul_le_mul_left (offset + 1) (hk.trans (Nat.le_succ K))
+  have hm : (offset + 1) * k ≤ (offset + 1) * (K + 1) := by
+    simpa only [Nat.succ_eq_add_one] using
+      Nat.mul_le_mul_left (offset + 1) (hk.trans (Nat.le_succ K))
   dsimp only [physicalFlowGraphTop]
-  omega
+  exact Nat.add_le_add (show n + b ≤ s by omega) hm
 
 theorem physicalFlowGraph_slots_offset_le_top
     {n b k s K offset : ℕ} (hab : n + 1 + b ≤ s) (hk : k ≤ K) :

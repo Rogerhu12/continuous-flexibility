@@ -42,7 +42,7 @@ private theorem n01c_selectedOuterJet_eq_stateJet
     (x : X) (hx : x ∈ U) (L : Y →L[ℝ] X)
     {N : ℕ} (v : Fin N → Y) (choice : FlowForcingChoice N) (t c : ℝ)
     (field : ℝ → ℝ) (F : ℕ → C(AddCircle Real.pi, ℝ))
-    (hF : ∀ b θ, F b (θ : AddCircle Real.pi) = iteratedDeriv b field θ)
+    (hF : ∀ (b : ℕ) (θ : ℝ), F b (θ : AddCircle Real.pi) = iteratedDeriv b field θ)
     (hfield : ∀ η, field η = c * J.D choice.1.length (x, (t, η))
       (fun i => flowStateAngleMap L (if i ∈ choice.2 then
         ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0)
@@ -81,11 +81,11 @@ private theorem n01c_selectedOuter_sobolev_prefix
     (F : ∀ m d : ℕ, ∀ x : X, x ∈ U →
       ((Fin d → ℝ) →L[ℝ] X) → ∀ N : ℕ, (Fin N → (Fin d → ℝ)) →
       ℝ → FlowForcingChoice N → ℕ → C(AddCircle Real.pi, ℝ))
-    (hF : ∀ m d x hx L N v t choice b θ,
+    (hF : ∀ m d x hx L N v t choice (b : ℕ) (θ : ℝ),
       HasDerivAt (fun η : ℝ => F m d x hx L N v t choice b (η : AddCircle Real.pi))
         (F m d x hx L N v t choice (b + 1) (θ : AddCircle Real.pi)) θ)
     (hidentify : ∀ m, ∀ J : ContinuousTimeSpeedTower U (G m),
-      ∀ d x hx L N v t choice b θ,
+      ∀ d x hx L N v t choice (b : ℕ) (θ : ℝ),
       F m d x hx L N v t choice b (θ : AddCircle Real.pi) = c t *
         (smoothDirections_angularStateSlice (J.jet (τ t))
           (choice.stateWord.angleArity + b) θ).D choice.stateWord.stateArity x
@@ -135,7 +135,8 @@ private theorem n01c_selectedOuter_sobolev_prefix
   have hsum : 0 ≤ ∑ i, p high (L (v i)) :=
     Finset.sum_nonneg (fun i _ => apply_nonneg _ _)
   have hselectedHigh := flowForcingStateDirections_seminorm_le choice L v (p high) hsum
-    (fun i => Finset.single_le_sum (fun j _ => apply_nonneg _ _) (Finset.mem_univ i))
+    (fun i => Finset.single_le_sum (f := fun j : Fin N => p high (L (v j)))
+      (fun j _ => apply_nonneg _ _) (Finset.mem_univ i))
   have hselected : oneHighVariationWeight p base high (x - center)
       (flowForcingStateDirections choice L v) ≤ ((N : ℝ) + 1) * R :=
     (oneHighVariationWeight_le_selectedAggregate p base high (x - center)
