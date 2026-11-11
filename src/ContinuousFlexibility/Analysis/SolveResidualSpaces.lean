@@ -29,7 +29,7 @@ theorem solve_isClosed_evenCircle (hS : IsPhysicalSpaces D T S) :
   have hd := (hS.2.1 (3 / 4 : ℝ)).2.2.1
   change IsClosed {u : CircleSpace S | ∀ m θ,
     (S.circle (3 / 4 : ℝ)).decode u m (-θ) = (S.circle (3 / 4 : ℝ)).decode u m θ}
-  simp only [Set.setOf_forall]
+  simp only [Set.ofPred_forall]
   apply isClosed_iInter
   intro m
   apply isClosed_iInter

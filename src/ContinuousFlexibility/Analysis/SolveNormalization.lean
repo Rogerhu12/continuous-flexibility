@@ -31,7 +31,8 @@ theorem continuous_referenceMode {u : PolarPoint → ℝ} (hu : Continuous u) (j
   have hf : Continuous (fun p : ℝ × ℝ => u p * Radial.cosineMode j p.2) :=
     hu.mul ((continuous_cosineMode j).comp continuous_snd)
   exact continuous_const.mul
-    (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous' hf 0 (2 * Real.pi))
+    (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
+      (f := fun r θ => u (r, θ) * Radial.cosineMode j θ) hf 0 (2 * Real.pi))
 
 theorem referenceMode_add_of_continuous {u v : PolarPoint → ℝ}
     (hu : Continuous u) (hv : Continuous v) (j : ℕ) (r : ℝ) :
@@ -265,7 +266,9 @@ def stateReferenceRowCLM {D : ReferenceData} {T : MaterialData}
 theorem stateReferenceRowCLM_apply {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hD : IsRadialReference D)
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) (x : AnnularState S) :
-    stateReferenceRowCLM hD hT hS x = referenceRow D (stateU S x) := rfl
+    stateReferenceRowCLM hD hT hS x = referenceRow D (stateU S x) := by
+  simp only [stateReferenceRowCLM, ContinuousLinearMap.comp_apply,
+    ContinuousLinearMap.fst_apply, heightReferenceRowCLM_apply, stateU]
 
 /-- The normalization row on constant-control, odd-chart directions. -/
 def sectorReferenceRowCLM {D : ReferenceData} {T : MaterialData}
@@ -276,7 +279,9 @@ def sectorReferenceRowCLM {D : ReferenceData} {T : MaterialData}
 theorem sectorReferenceRowCLM_apply {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hD : IsRadialReference D)
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) (x : StateDirections S) :
-    sectorReferenceRowCLM hD hT hS x = referenceRow D (stateU S x.val) := rfl
+    sectorReferenceRowCLM hD hT hS x = referenceRow D (stateU S x.val) := by
+  simp only [sectorReferenceRowCLM, ContinuousLinearMap.comp_apply,
+    Submodule.subtypeL_apply, stateReferenceRowCLM_apply]
 
 /-- On a monotone defining grading, a continuous scalar functional has a
 bound at one finite order. -/
@@ -306,7 +311,9 @@ theorem hasSmoothing_normalizedSector
       (sectorReferenceRowCLM hD hT hS).toLinearMap.ker.subtype) := by
   obtain ⟨b, C, hC, hb⟩ := exists_grade_bound_clm (sectorGrading S) hp hmono
     (sectorReferenceRowCLM hD hT hS)
-  exact hasSmoothing_ker_rankOne (sectorReferenceRowCLM hD hT hS) ψ hψ
+  have hψ' : sectorReferenceRowCLM hD hT hS ψ = 1 :=
+    (sectorReferenceRowCLM_apply hD hT hS ψ).trans hψ
+  exact hasSmoothing_ker_rankOne (sectorReferenceRowCLM hD hT hS) ψ hψ'
     (fun _ _ h x => hmono h x) hC hb hsmooth
 
 theorem referenceRow_affine_of_mem_kernel
@@ -318,7 +325,9 @@ theorem referenceRow_affine_of_mem_kernel
     referenceRow D (stateU S (C.referenceState + x.val.val)) = 1 := by
   rw [← stateReferenceRowCLM_apply hD hT hS, map_add,
     stateReferenceRowCLM_apply hD hT hS]
-  have hx : stateReferenceRowCLM hD hT hS x.val.val = 0 := x.property
+  have hx : stateReferenceRowCLM hD hT hS x.val.val = 0 := by
+    rw [stateReferenceRowCLM_apply, ← sectorReferenceRowCLM_apply hD hT hS x.val]
+    exact x.property
   rw [hx, add_zero]
   exact href.2.2.2.2.2
 

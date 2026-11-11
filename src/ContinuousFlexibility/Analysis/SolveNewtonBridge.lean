@@ -30,7 +30,7 @@ private theorem solve_product_le {k : ℕ} (a b : Fin k → ℝ) (A : ℝ)
   have ht : t.card ≤ k := by simpa using Finset.card_le_univ t
   calc
     (∏ i ∈ t, a i) ≤ ∏ i ∈ t, A * b i :=
-      Finset.prod_le_prod (fun i _ => ha i) (fun i _ => hab i)
+      Finset.prod_le_prod₀ (fun i _ => ha i) (fun i _ => hab i)
     _ = A ^ t.card * ∏ i ∈ t, b i := by
       rw [Finset.prod_mul_distrib, Finset.prod_const]
     _ ≤ A ^ k * ∏ i ∈ t, b i :=
