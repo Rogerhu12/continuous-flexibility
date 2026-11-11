@@ -110,7 +110,8 @@ theorem referenceMatrix_commute (w : Fin n → ℝ)
     Commute (Matrix.diagonal w) C.referenceMatrix := by
   rw [C.referenceMatrix_eq]
   apply (Matrix.commute_diagonal w C.kappa).add_right
-  apply Commute.of_map (Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ)).injective
+  apply Commute.of_map (f := Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ))
+    (EquivLike.injective (Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ)))
   rw [gapMatrix, innerChainErrorMatrix_toEuclideanCLM]
   apply innerChainBlockSum_commute_of_constant_weights
   intro p

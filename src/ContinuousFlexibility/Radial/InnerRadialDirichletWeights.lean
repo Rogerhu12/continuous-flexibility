@@ -96,9 +96,9 @@ theorem dirichlet_localized_coefficient_bound (hw : ContDiff ℝ ∞ D.w)
     ‖innerRadialSupportedMultiplier D G bordered W₁ hW₁ CW hWC ∘L A.dirichlet hw ∘L
       innerRadialSupportedMultiplier D G bordered V hV CV hVC‖ ≤ K * radialE N ^ (37 : ℝ) := by
   have hsqrt : 1 ≤ sqrt (radialE N) := by
-    simpa only [sqrt_one] using sqrt_le_sqrt (one_le_exp_iff.mpr (radialQ_nonneg N))
-  have hlosscenter : innerCoefficientLoss N 37 (index central) = 1 := by
-    rw [hcenter, innerCoefficientLoss_eq_exp, sub_self, mul_zero, neg_zero, exp_zero]
+    simpa only [sqrt_one, radialE] using sqrt_le_sqrt (one_le_exp_iff.mpr (radialQ_nonneg N))
+  have hlosscenter : innerCoefficientLoss N 37 N = 1 := by
+    rw [innerCoefficientLoss_eq_exp, sub_self, mul_zero, neg_zero, exp_zero]
   apply A.dirichlet_weighted_piece_cost hw W₁ V hW₁ hV CW CV hWC hVC
     (fun p => innerCoefficientLoss N 37 (index p)) (fun p => sqrt (radialE (index p))) base
     (fun p => (innerCoefficientLoss_pos N 37 (index p)).le)
@@ -107,7 +107,7 @@ theorem dirichlet_localized_coefficient_bound (hw : ContDiff ℝ ∞ D.w)
     (by simpa only [hbasecenter, hcenter, div_one] using hsqrt)
     hlocalW hlocalV (mul_nonneg hK (rpow_nonneg (exp_pos _).le _))
   intro p
-  simpa only [show (36 : ℝ) + 1 = 37 by norm_num] using
+  simpa only [radialE, show (36 : ℝ) + 1 = 37 by norm_num] using
     inner_dirichlet_fixed_loss_cost hK (sqrt_nonneg (radialE (index p)))
       (norm_nonneg ((A.piece p).dirichlet hw)) le_rfl (hcost p) (hindex p)
       (by norm_num : (36 : ℝ) + 1 ≤ 37)
@@ -126,7 +126,7 @@ theorem dirichlet_coarse_coefficient_bound (hw : ContDiff ℝ ∞ D.w)
     ‖innerRadialSupportedMultiplier D G bordered W hW CW hWC ∘L A.dirichlet hw ∘L
       innerRadialSupportedMultiplier D G bordered V hV CV hVC‖ ≤ K * radialE band ^ (37 : ℝ) := by
   have hsqrt : 1 ≤ sqrt (radialE (index central)) := by
-    simpa only [sqrt_one] using
+    simpa only [sqrt_one, radialE] using
       sqrt_le_sqrt (one_le_exp_iff.mpr (radialQ_nonneg (index central)))
   apply A.dirichlet_weighted_piece_cost hw W V hW hV CW CV hWC hVC
     (fun _ => 1) (fun p => sqrt (radialE (index p))) base (fun _ => zero_le_one)
@@ -136,7 +136,7 @@ theorem dirichlet_coarse_coefficient_bound (hw : ContDiff ℝ ∞ D.w)
     (by simpa only [one_mul] using hlocalW) hlocalV
     (mul_nonneg hK (rpow_nonneg (exp_pos _).le _))
   intro p
-  simpa only [one_mul, show (36 : ℝ) + 1 = 37 by norm_num] using
+  simpa only [radialE, one_mul, show (36 : ℝ) + 1 = 37 by norm_num] using
     inner_dirichlet_coarse_cost hK (sqrt_nonneg (radialE (index p)))
       (norm_nonneg ((A.piece p).dirichlet hw)) (by norm_num : (0 : ℝ) ≤ 36)
       le_rfl (hcost p) (hindex p)

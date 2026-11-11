@@ -73,7 +73,7 @@ theorem innerChainErrorMatrix_add (n : ℕ)
     (A B : Fin (n + 1) → Matrix (Fin 2) (Fin 2) ℝ) :
     innerChainErrorMatrix n (fun p => A p + B p) =
       innerChainErrorMatrix n A + innerChainErrorMatrix n B := by
-  apply (Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ)).injective
+  apply EquivLike.injective (Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ))
   simp only [map_add, innerChainErrorMatrix_toEuclideanCLM, innerInterfaceBlockSum,
     ContinuousLinearMap.add_comp, ContinuousLinearMap.comp_add, Finset.sum_add_distrib]
 
@@ -81,7 +81,7 @@ theorem innerChainErrorMatrix_diagonal (n : ℕ)
     (κ : Fin (n + 1) → Fin 2 → ℝ) :
     innerChainErrorMatrix n (fun p => Matrix.diagonal (κ p)) =
       Matrix.diagonal (innerChainAggregateKappa n κ) := by
-  apply (Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ)).injective
+  apply EquivLike.injective (Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ))
   rw [innerChainErrorMatrix_toEuclideanCLM]
   exact innerChainDiagonal_blockSum n κ
 

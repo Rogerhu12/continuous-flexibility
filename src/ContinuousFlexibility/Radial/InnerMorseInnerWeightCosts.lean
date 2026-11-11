@@ -110,7 +110,7 @@ theorem innerMorseInnerPieceBase_center (N K : ℕ) (a γ σ : ℝ) :
     innerCellWeight_base, one_rpow]
 
 theorem inner_radialE_sqrt_ge_one (m : ℕ) : 1 ≤ sqrt (radialE m) := by
-  simpa only [sqrt_one] using sqrt_le_sqrt (one_le_exp_iff.mpr (radialQ_nonneg m))
+  simpa only [sqrt_one, radialE] using sqrt_le_sqrt (one_le_exp_iff.mpr (radialQ_nonneg m))
 
 section ActualWeight
 
