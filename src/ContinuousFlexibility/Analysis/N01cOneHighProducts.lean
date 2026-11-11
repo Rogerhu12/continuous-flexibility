@@ -55,15 +55,14 @@ section SeminormProducts
 
 variable {E : Type*} [AddCommGroup E] [Module ℝ E]
 
-/-- All finite product arities and all spatial orders use one common base
-and loss.  The offset is the fixed cost of each individual jet evaluation. -/
-theorem exists_oneHighProductBounds (p : ℕ → Seminorm ℝ E)
+/-- The spatial order determines the interpolation exponent. The same
+base and loss work before the order and the input vector are chosen. -/
+theorem exists_interpolatedJetBounds (p : ℕ → Seminorm ℝ E)
     (hp : Monotone p) (hinterp : HasInterpolation p) (offset : ℕ) :
-    ∃ base loss : ℕ, ∀ k s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
-      ∀ a : Fin k → ℕ, (∑ i, a i ≤ s) → ∀ v : Fin k → E,
-        (∀ i, p base (v i) ≤ 1) →
-        ∏ i, p (a i + offset) (v i) ≤
-          C * (1 + ∑ i, p (s + loss) (v i)) := by
+    ∃ base loss : ℕ, ∀ s a : ℕ, a ≤ s →
+      ∃ C : ℝ, 1 ≤ C ∧ ∀ x : E, p base x ≤ 1 →
+        p (a + offset) x ≤
+          C * (1 + p (s + loss) x) ^ ((a : ℝ) / ((s : ℝ) + 1)) := by
   classical
   obtain ⟨b₀, σ, hinterp⟩ := hinterp
   let base : ℕ := max b₀ (offset + σ)
@@ -151,6 +150,19 @@ theorem exists_oneHighProductBounds (p : ℕ → Seminorm ℝ E)
           simpa only [mul_one] using mul_le_mul_of_nonneg_left hpower hC
         _ ≤ max 1 C * (1 + p (s + loss) x) ^ ((a : ℝ) / ((s : ℝ) + 1)) :=
           mul_le_mul_of_nonneg_right (le_max_right _ _) (Real.rpow_nonneg (by linarith) _)
+  exact ⟨base, loss, hsingle⟩
+
+/-- All finite product arities and all spatial orders use one common base
+and loss.  The offset is the fixed cost of each individual jet evaluation. -/
+theorem exists_oneHighProductBounds (p : ℕ → Seminorm ℝ E)
+    (hp : Monotone p) (hinterp : HasInterpolation p) (offset : ℕ) :
+    ∃ base loss : ℕ, ∀ k s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ a : Fin k → ℕ, (∑ i, a i ≤ s) → ∀ v : Fin k → E,
+        (∀ i, p base (v i) ≤ 1) →
+        ∏ i, p (a i + offset) (v i) ≤
+          C * (1 + ∑ i, p (s + loss) (v i)) := by
+  classical
+  obtain ⟨base, loss, hsingle⟩ := exists_interpolatedJetBounds p hp hinterp offset
   refine ⟨base, loss, fun k s => ?_⟩
   choose c hc hcb using
     (fun a : Fin (s + 1) => hsingle s a.val (Nat.le_of_lt_succ a.isLt))

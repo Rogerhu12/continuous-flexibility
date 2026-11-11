@@ -225,6 +225,26 @@ theorem n01b_normalizeMaterialE0
     n01PartA_normalizeMaterialE0 hT hA, hB,
     fun r hr => one_le_normalizeMaterialE0 T (hT.2.1 r hr).2.2.1.le⟩
 
+/-- Increasing the material envelope weakens the negative-power reference
+lower bound and preserves the same primitive geometric witness. -/
+theorem n01PrimitiveGeometry_normalizeMaterialE0
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hT : IsMaterialData D T) (hA : N01PartA D T S C)
+    (hG : N01PrimitiveGeometry D T S C) :
+    N01PrimitiveGeometry D (normalizeMaterialE0 T) S C := by
+  obtain ⟨hloc, hχ, K, hK, hbound⟩ := hG
+  refine ⟨hloc, hχ, K, hK, fun m r hr => ?_⟩
+  have hpart : RadialPartition D := hA.1.1.choose_spec.2.1
+  have hs := materialSample_mem_radialCore hT hpart (C.cell m)
+  have hE : 0 < T.E0 (T.sample (C.cell m)) := (hT.2.1 _ hs).2.2.1
+  have hpow := Real.rpow_le_rpow_of_nonpos hE
+    (le_normalizeMaterialE0 T (T.sample (C.cell m))) (neg_nonpos.mpr hK.le)
+  have hδ : 0 ≤ min (r - C.left m) (C.right m - r) :=
+    le_min (sub_nonneg.mpr hr.1.le) (sub_nonneg.mpr hr.2.le)
+  exact (mul_le_mul_of_nonneg_right
+    (mul_le_mul_of_nonneg_left hpow (inv_nonneg.mpr hK.le)) hδ).trans (hbound m r hr)
+
 /-- N01b can always be realized with a coefficient envelope at least one.
 This is an existence-preserving construction from N01b itself. -/
 theorem n01b_exists_normalized_material (h : N01bStatement) :
@@ -232,10 +252,12 @@ theorem n01b_exists_normalized_material (h : N01bStatement) :
       ∃ C : NonlinearGeometryData S, ∃ base : ℕ, ∃ ε : ℝ,
         IsMaterialData A.val T ∧ IsPhysicalSpaces A.val T S ∧
         N01PartA A.val T S C ∧ 0 < ε ∧ N01PartB A.val S C base ε ∧
+        N01PrimitiveGeometry A.val T S C ∧
         ∀ r ∈ Ioo A.val.a A.val.b, 1 ≤ T.E0 r := by
-  obtain ⟨A, T, S, C, base, ε, hT, hS, hA, hε, hB⟩ := h
+  obtain ⟨A, T, S, C, base, ε, hT, hS, hA, hε, hB, hG⟩ := h
   have hn := n01b_normalizeMaterialE0 hT hS hA hB
   exact ⟨A, normalizeMaterialE0 T, S, C, base, ε,
-    hn.1, hn.2.1, hn.2.2.1, hε, hn.2.2.2.1, hn.2.2.2.2⟩
+    hn.1, hn.2.1, hn.2.2.1, hε, hn.2.2.2.1,
+    n01PrimitiveGeometry_normalizeMaterialE0 hT hA hG, hn.2.2.2.2⟩
 
 end ContinuousFlexibility.Statements

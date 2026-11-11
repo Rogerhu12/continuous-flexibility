@@ -1,9 +1,10 @@
 # N01c geometric interfaces and ordinary-flow dependencies
 
-This is a mathematical audit and dependency recommendation, not a counterexample
-to the existential `N01Statement`.  The input and output existential witnesses
-may differ.  None of the proposed extra geometric facts below has been silently
-inserted as an assumption of a completed N01c theorem.
+Sections 1–10 audit the original interfaces; section 11 records the explicit
+repair of the information they discarded. This is not a counterexample to the
+existential `N01Statement`: the input and output witnesses may differ. The repair
+retains primitive reference geometry, never a coefficient, speed or flow tame
+conclusion. Completion of N01c still requires its three actual proof stages.
 
 ## 1. Exact type calculation
 
@@ -106,10 +107,11 @@ work is:
    B⁻¹ * (T.E0 (T.sample (C.cell m)))^(-B) * δₘ r ≤ Q₀ r.
    ```
 
-3. The true scalar border is compactly contained in the positive region:
-   `tsupport D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}`,
-   retaining the existing `HasCompactSupport D.chi`.  Section 8 explains
-   why the current ordinary-support clause does not imply this fact.
+3. The true scalar border has closed support in the open core:
+   `tsupport D.chi ⊆ radialCore D`, retaining the existing compactness and
+   ordinary-support positivity. This is sufficient for the finite-cell bounds
+   and its vanishing on negative components. Section 8 explains why the
+   original ordinary-support clause does not imply the closed-support fact.
 
 The second assertion is quantitative simple-root nondegeneracy on the whole
 component, not a bound for a perturbed coefficient or flow.  It packages the
@@ -383,9 +385,11 @@ One cannot obtain this by taking the R05 profile and independently attaching
 the natural-kernel/common-inverse properties of another existential witness.
 Likewise, replacing `C.cell` by an arbitrary containing-cell choice would
 require rechecking the index-shift and all control-weight clauses.  This
-audit identifies a route for a necessary interface repair; it does not modify
-`IsRadialReference`, N01a/b, or claim a counterexample to the full existential
-N01 statement.
+audit identifies the information needed by the same-witness proof. Section 10
+records the necessary construction route; section 11 records the explicit
+interface repair. `IsRadialReference` itself
+is unchanged, and no counterexample to the full existential N01 statement is
+claimed.
 
 Finally, the small scales remain distinct:
 \(w_0\) has the recorded
@@ -495,8 +499,9 @@ on the tails, together with actual dilation and cell-index comparison.
 ## 10. Exact same-reference threading needed upstream
 
 The three primitive facts in section 3 can be named separately and proved
-from the actual construction.  They must not be inserted as assumptions
-of `N01c`, or asserted to follow from the current `N01bStatement`.
+from the actual construction. They cannot be inserted as extra assumptions
+of an allegedly unchanged `N01c`, or asserted to follow from the original
+`N01bStatement`.
 The latter is existential: a defective witness does not disprove its
 implication to another existential statement.  A proof may choose a new,
 well-constructed witness, but must actually build all properties of that
@@ -541,9 +546,70 @@ Here is the precise current point of loss and the necessary proof shape.
    witness all the way through; simply appending an unproved geometry
    conjunct to `N01PartA` or `N01PartB` would only move the obligation.
 
-The current R08, R10a, R11a, R11b and R12 blueprint nodes are still open;
-the stronger internal constructions above are not available as completed
-proofs.  This is an implementation route and an exact account of what must
-be retained, not a claim that the current hypotheses already provide the
-missing estimates.  In particular, this audit does not authorize replacing
-the requested theorem by a conditional speed/flow theorem.
+R08 is now proved on main. R10a, R11a, R11b and R12 remain open, and the
+stronger common-reference construction above is not a completed proof.
+This describes what must be retained, not a claim that the original
+hypotheses already provide the missing estimates. An isolated conditional
+speed/flow theorem does not complete N01c.
+
+## 11. Explicit repair of the construction contract
+
+The task permits repairing an unusable frozen interface together with the
+assembly. The original radial endpoint was exactly
+
+```lean
+def R12Statement : Prop := RadialReferenceStatement
+```
+
+where `RadialReferenceStatement = Nonempty RadialReference`. The original
+nonlinear endpoint was exactly
+
+```lean
+def N01bStatement : Prop :=
+  ∃ A : RadialReference, ∃ T : MaterialData, ∃ S : PhysicalSpacesData,
+    ∃ C : NonlinearGeometryData S, ∃ base : ℕ, ∃ ε : ℝ,
+      IsMaterialData A.val T ∧ IsPhysicalSpaces A.val T S ∧ N01PartA A.val T S C ∧
+        0 < ε ∧ N01PartB A.val S C base ε
+```
+
+These interfaces discard the construction facts identified above. The repair
+strengthens the predecessor outputs explicitly; it does not pretend that the
+old existential implication has been refuted or that its old hypotheses have
+already been shown to imply the richer output.
+
+`RadialConstructionGeometry D` now records closed border support in the core
+and one uniform reference optical lower bound
+
+```lean
+∃ K : ℝ, 0 < K ∧ ∀ l h m,
+  NegativeRadialComponent D l h → Ioo l h ⊆ D.cells m →
+  ∀ r ∈ Ioo l h,
+    K⁻¹ * radialE (D.cellIndex m) ^ (-K) * min (r - l) (h - r) ≤
+      -deriv D.w r / (r * D.w r)
+```
+
+R12 must produce this on the very `A.val` whose natural graph, border and
+inverse satisfy `IsRadialReference`. Its still-open proof must carry the
+Morse tail/dilation evidence and normalized border through the same R08/R10/R11
+construction. This is a genuine additional upstream proof obligation; no
+independent reference may supply it.
+
+`N01PrimitiveGeometry D T S C` records the designated-cell containment,
+the same closed border support, and the corresponding lower bound with
+`T.E0 (T.sample (C.cell m))`. N01a constructs it together with its controls;
+N01b preserves it. The coefficient and speed stages retain it with their
+same existential data. `N01PartA`, `N01PartB`, `IsRadialReference` and the
+final `N01Properties` keep their existing meanings.
+
+The ordinary theorem `n01PrimitiveGeometry_of_radialConstruction` converts
+the radial-envelope lower bound to the sampled material envelope using the
+proved envelope comparison. `n01PrimitiveGeometry_normalizeMaterialE0`
+preserves it under the explicit envelope normalization: raising `E0` lowers
+its negative powers. Neither theorem assumes a nonlinear tame estimate.
+
+`Blueprint/Assembly.lean` passes the enriched R12/N01a/N01b outputs along the
+same dependency chain. The task files for those nodes now state the retained
+construction obligations. Closing the N01c axiom gate proves its implication
+under this repaired predecessor contract; it does not close R12, N01a or N01b.
+The coefficient, speed and flow estimates still have to be derived from their
+actual definitions on one common neighborhood.

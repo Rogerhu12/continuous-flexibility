@@ -465,8 +465,23 @@ def R11Statement : Prop :=
           ReferenceInverseProperties D γ M₀ M₁ G ∧
           FirstNormalInverseEstimate D γ M₀ M₁ G
 
-/-- R12, §4 `prop:rad-fixed-theorem` and §6 `lem:rad-green-completion`. -/
-def R12Statement : Prop := RadialReferenceStatement
+/-- Primitive geometry retained by the same radial construction that supplies
+the natural graph and inverse. The optical assertion concerns the reference
+profile alone, on each actual containing cell. It asserts no nonlinear
+coefficient, speed, parameter derivative or flow estimate. -/
+def RadialConstructionGeometry (D : ReferenceData) : Prop :=
+  tsupport D.chi ⊆ radialCore D ∧
+  ∃ K : ℝ, 0 < K ∧ ∀ l h m,
+    NegativeRadialComponent D l h → Ioo l h ⊆ D.cells m →
+    ∀ r ∈ Ioo l h,
+      K⁻¹ * radialE (D.cellIndex m) ^ (-K) * min (r - l) (h - r) ≤
+        -deriv D.w r / (r * D.w r)
+
+/-- R12, §4 `prop:rad-fixed-theorem` and §6 `lem:rad-green-completion`.
+The final border and optical geometry belong to this very reference;
+independent existential witnesses cannot be combined here. -/
+def R12Statement : Prop :=
+  ∃ A : RadialReference, RadialConstructionGeometry A.val
 
 /-- X01: first choose the actual geometry and inverse, then quantify over
 all compact exponent intervals.  No interval-dependent profile is allowed. -/

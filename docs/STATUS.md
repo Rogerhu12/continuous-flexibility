@@ -37,6 +37,46 @@ still requires its three concrete coefficient, speed and flow stages;
 its assembly alone is not a completed node. Progress and CI results are
 reported in pull request #23.
 
+## N01c predecessor geometry correction
+
+The original predecessor clauses were
+
+```lean
+def R12Statement : Prop := RadialReferenceStatement
+
+def N01bStatement : Prop :=
+  ∃ A : RadialReference, ∃ T : MaterialData, ∃ S : PhysicalSpacesData,
+    ∃ C : NonlinearGeometryData S, ∃ base : ℕ, ∃ ε : ℝ,
+      IsMaterialData A.val T ∧ IsPhysicalSpaces A.val T S ∧ N01PartA A.val T S C ∧
+        0 < ε ∧ N01PartB A.val S C base ε
+```
+
+The original `N01PartA` bound
+`|(D.cellIndex (C.cell m) : ℝ) - D.cellIndex m| ≤ B` does not locate the
+component in its designated cell. `RadialTrueBorder` gives ordinary support
+in the positive core and compact closed support, but its exact clause
+`Function.support D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}`
+does not keep the closed support away from annular endpoints. Simple roots
+and upper bounds on reference jets likewise do not supply the uniform
+optical lower bound used by the manuscript's square-root estimates.
+
+The [geometry audit](N01c-geometry-audit.md), sections 1–11, records the
+information loss and the explicit contract repair. R12 now retains
+`RadialConstructionGeometry` on the same reference as its natural graph and
+inverse. N01a/N01b and the N01c coefficient/speed stages carry
+`N01PrimitiveGeometry` with their same data. The sampled-envelope conversion
+and preservation under material normalization are ordinary proof obligations;
+the upstream same-reference construction remains part of the open R12/N01a
+tasks. `Blueprint/Assembly.lean` documents that dependency.
+
+This strengthens predecessor outputs to retain primitive construction facts.
+It does not assert a counterexample to the original existential N01c
+implication, or assert that the open upstream construction is complete.
+No nonlinear coefficient, speed or flow tame conclusion is a new hypothesis;
+the final N01 target is unchanged by this geometry repair. The N01c axiom
+check applies to the repaired predecessor contract, not to a purported
+derivation of the missing geometry from the original contract.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.

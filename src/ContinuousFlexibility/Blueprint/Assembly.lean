@@ -98,6 +98,10 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR09 : R09Statement := R09
   have hR10 : R10Statement := R10_of_nodes (R10a hR06 hR07 hR08 hR09) R10b
   have hR11 : R11Statement := R11b (R11a hR05 hR10)
+  -- R12 must retain the closed border support and quantitative optical
+  -- geometry of the same reference used by its graph and inverse.
+  -- N01a and N01b carry that geometry with their chosen controls and weights;
+  -- the open upstream construction obligations are not proved by N01c.
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
