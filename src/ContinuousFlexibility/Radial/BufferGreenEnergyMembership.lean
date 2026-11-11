@@ -43,8 +43,9 @@ theorem positiveBufferGreenProfileDerivative_memLp {σ : ℝ} {pin pout : ℝ �
   have hcomp := positiveBuffer_affine_memLp_two_restrict measurableSet_Ici hdout
     (0 : ℝ) (by norm_num : (-1 : ℝ) ≠ 0)
   have hpre : (fun x : ℝ => 0 + -1 * x) ⁻¹' Ici 0 = Iic 0 := by ext x; simp
+  rw [hpre] at hcomp
   have hreflect : MemLp (fun x => deriv pout (-x)) 2 (volume.restrict (Iic 0)) := by
-    simpa only [hpre, zero_add, neg_one_mul] using hcomp
+    simpa only [zero_add, neg_one_mul] using hcomp
   have hleft : MemLp (deriv (fun t => pout (-t))) 2 (volume.restrict (Iic 0)) := by
     have hd : deriv (fun t => pout (-t)) = fun t => -deriv pout (-t) := by
       funext t
@@ -76,10 +77,13 @@ theorem positiveBufferGreenKernelDerivative_memLp {B : BufferData}
   have hraw := positiveBufferGreenProfileDerivative_memLp (σ := B.action i) hpin hpout hdout
   have hraw' : MemLp (positiveBufferGreenProfileDerivative (B.action i) pin pout) 2
       (volume.restrict univ) := by simpa only [Measure.restrict_univ] using hraw
-  have h := positiveBuffer_affine_memLp_two_restrict measurableSet_univ hraw'
+  have h := positiveBuffer_affine_memLp_two_restrict MeasurableSet.univ hraw'
     (bufferSign i * B.mass i * bufferCut B i)
     (positiveBufferCoordinate_slope_ne_zero hB i)
-  simpa only [preimage_univ, Measure.restrict_univ, positiveBufferGreenKernelDerivative,
+  change MemLp (fun x => A⁻¹ * (-bufferSign i * B.mass i) *
+    positiveBufferGreenProfileDerivative (B.action i) pin pout (positiveBufferCoordinate B i x))
+      2 volume
+  simpa only [preimage_univ, Measure.restrict_univ,
     ← positiveBufferCoordinate_affine] using h.const_mul (A⁻¹ * (-bufferSign i * B.mass i))
 
 theorem positiveBufferGreenProfileWeight_memLp {B : BufferData}
@@ -96,13 +100,15 @@ theorem positiveBufferGreenProfileWeight_memLp {B : BufferData}
   have hcomp := positiveBuffer_affine_memLp_two_restrict measurableSet_Ici hwout
     (0 : ℝ) (by norm_num : (-1 : ℝ) ≠ 0)
   have hpre : (fun x : ℝ => 0 + -1 * x) ⁻¹' Ici 0 = Iic 0 := by ext x; simp
+  rw [hpre] at hcomp
   have hleft : MemLp (fun t => w t * pout (-t)) 2 (volume.restrict (Iic 0)) := by
-    simpa only [w, hpre, zero_add, neg_one_mul, neg_neg] using hcomp
+    simpa only [w, zero_add, neg_one_mul, neg_neg] using hcomp
   have hright : MemLp (fun t => w t * (positiveBufferCutoff (B.action i) t * pin t))
       2 (volume.restrict (Ioi 0)) := by
     apply buffer_memLp_Ioi_of_zero_after
       (hw.mul ((positiveBufferCutoff_contDiff (B.action i)).continuous.mul hpin)) (B.action i + 4)
     intro t ht
+    change w t * (positiveBufferCutoff (B.action i) t * pin t) = 0
     rw [positiveBufferCutoff_zero ht, zero_mul, mul_zero]
   refine MemLp.ae_eq ?_ (positiveBuffer_cutGlue_memLp 0 hleft hright)
   filter_upwards [] with t
@@ -119,7 +125,7 @@ theorem positiveBufferGreenKernel_weight_memLp {B : BufferData}
     positiveBufferGreenProfile (B.action i) pin pout t
   have hraw : MemLp W 2 (volume.restrict univ) := by
     simpa only [Measure.restrict_univ] using positiveBufferGreenProfileWeight_memLp hB i hpin hwout
-  have h := positiveBuffer_affine_memLp_two_restrict measurableSet_univ hraw
+  have h := positiveBuffer_affine_memLp_two_restrict MeasurableSet.univ hraw
     (bufferSign i * B.mass i * bufferCut B i) (positiveBufferCoordinate_slope_ne_zero hB i)
   have hphysical : MemLp (fun x => A⁻¹ * W (positiveBufferCoordinate B i x)) 2 volume := by
     simpa only [preimage_univ, Measure.restrict_univ, ← positiveBufferCoordinate_affine] using

@@ -78,8 +78,11 @@ theorem positiveBuffer_normalized_inner_equation {B : BufferData}
   have h := positiveBuffer_affine_homogeneous_equation hp (bufferCut B i)
     (-bufferSign i / B.mass i) t
     (by simpa only [← positiveBufferPoint_affine] using he)
-  simpa only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq,
-    one_div, div_eq_mul_inv, mul_comm] using h
+  simp only [← positiveBufferPoint_affine, positiveBufferPoint_slope_sq] at h
+  have hcoeff :
+      (1 / B.mass i ^ 2) * B.potential (positiveBufferPoint B i t) =
+        B.potential (positiveBufferPoint B i t) / B.mass i ^ 2 := by ring
+  simpa only [hcoeff] using h
 
 theorem positiveBuffer_normalized_outer_equation {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) {p : ℝ → ℝ} (hp : ContDiff ℝ ∞ p)
@@ -97,8 +100,13 @@ theorem positiveBuffer_normalized_outer_equation {B : BufferData}
   have h := positiveBuffer_affine_homogeneous_equation hp (bufferCut B i)
     (bufferSign i / B.mass i) t
     (by simpa only [← positiveBufferPoint_outward_affine] using he)
-  simpa only [← positiveBufferPoint_outward_affine, div_pow, bufferSign_sq,
-    one_div, div_eq_mul_inv, mul_comm] using h
+  have hslope : (bufferSign i / B.mass i) ^ 2 = 1 / B.mass i ^ 2 := by
+    rw [div_pow, bufferSign_sq]
+  simp only [← positiveBufferPoint_outward_affine, hslope] at h
+  have hcoeff :
+      (1 / B.mass i ^ 2) * B.potential (positiveBufferPoint B i (-t)) =
+        B.potential (positiveBufferPoint B i (-t)) / B.mass i ^ 2 := by ring
+  simpa only [hcoeff] using h
 
 theorem positiveBuffer_normalized_conormal_sum {B : BufferData}
     (hB : BufferHypotheses B) (i : Fin 2) {pin pout : ℝ → ℝ} {αin αout : ℝ}
