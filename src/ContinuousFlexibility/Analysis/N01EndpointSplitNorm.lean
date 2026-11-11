@@ -28,7 +28,7 @@ def circleWeightedJetNorm (T : MaterialData) (γ : ℝ) (b c : ℕ)
     ((T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-γ)) ^ 2) *
       eLpNorm (iteratedDeriv b (v m)) 2 angleMeasure ^ 2).toReal
 
-private theorem weightedJetNorm_le_scaled_two_envelopes
+theorem weightedJetNorm_le_scaled_two_envelopes
     {T : MaterialData} {γ : ℝ} {v : ℕ → ℝ → ℝ}
     {E F : ℕ → ℝ≥0∞} {K K₀ K₁ A u₀ u₁ : ℝ}
     (hK : 0 ≤ K) (hK₀ : 0 ≤ K₀) (hK₁ : 0 ≤ K₁)
