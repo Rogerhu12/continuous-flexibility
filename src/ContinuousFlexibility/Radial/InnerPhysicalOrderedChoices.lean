@@ -6,8 +6,9 @@ import ContinuousFlexibility.Radial.InnerOrderedChoices
 # Ordered choices for the same physical central and Morse models
 
 The original R09 statement first gives the compression constants. For
-each weight exponent we then choose the frequency threshold, the tail
-index, and only afterwards the central cut and the cone length. The
+each weight exponent we then choose the frequency threshold and an index
+floor. Every later actual tail index is allowed; only afterwards do we
+choose the central cut and the cone length. The
 central floor may depend on the chosen index, and the cone coefficients
 and floor may also depend on the chosen central cut.
 
@@ -58,6 +59,7 @@ def InnerMorsePhysicalFamily (a Cstar : ℝ) (N : ℕ) (C K η : ℝ) : Prop :=
         (innerMorseBufferData (morseChainA T m) (morseChainB T m) j
           (8 * (T.d m : ℝ) ^ 9)) C K,
         (∀ i, 0 < (M.column i).inwardEnergy) ∧
+        (∀ i, innerMorseModelNormalizedRemainder M i ≤ 1 / (j : ℝ)) ∧
         InnerMorsePhysicalPoissonBound hreal N a M ∧
         ∀ γ : ℝ, |γ| ≤ 1 → ∀ side : Bool, ∀ height : ℝ, 0 < height → ∀ sign : Bool,
           ‖innerTwoCutWeightedError
@@ -88,9 +90,9 @@ the number of retained cells. -/
 theorem exists_innerPhysicalOrderedChoices (hR09 : R09Statement) {a : ℝ} (ha : 0 ≤ a) :
     ∃ CM KM CC KC : ℝ, 0 < CM ∧ 0 < KM ∧ 0 < CC ∧ 0 < KC ∧
       ∃ Cstar : ℝ, 0 < Cstar ∧ innerMorseBufferThreshold ≤ Cstar ∧
-        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ N : ℕ,
-          initial ≤ N ∧ 4096 ≤ N ∧ 64 * a ≤ (N : ℝ) ∧
-          ∀ centralFloor : ℝ, ∃ X₀ : ℝ,
+        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ Nfloor : ℕ,
+          initial ≤ Nfloor ∧ 4096 ≤ Nfloor ∧ 64 * a ≤ (Nfloor : ℝ) ∧
+          ∀ N : ℕ, Nfloor ≤ N → ∀ centralFloor : ℝ, ∃ X₀ : ℝ,
             centralFloor ≤ X₀ ∧ 8 ≤ X₀ ∧ innerCentralModelBorderRadius < X₀ ∧
             InnerCentralPhysicalFamily CC KC X₀ η ∧
             ∀ coneFloor Acone bcone dcone ccone : ℝ,
@@ -104,13 +106,14 @@ theorem exists_innerPhysicalOrderedChoices (hR09 : R09Statement) {a : ℝ} (ha :
     hmorse (innerMorseModelAmplitude CM KM) le_rfl
   refine ⟨CM, KM, CC, KC, hCM, hKM, hCC, hKC, Cstar, hCstar, hgeometry, ?_⟩
   intro η hη initial
-  obtain ⟨N, hN, hlarge, hweight, hmodels⟩ := htail η hη initial
+  obtain ⟨Nfloor, hN, hlarge, hweight, hmodels⟩ := htail η hη initial
+  refine ⟨Nfloor, hN, hlarge, hweight, ?_⟩
+  intro N hNfloor
   have hMorseFamily : InnerMorsePhysicalFamily a Cstar N CM KM η := by
     intro T σ D cost hreal hindex m n j hm hmn hj hband
-    obtain ⟨hB, M, hcolumns, herror⟩ :=
-      hmodels T σ D cost hreal hindex m n j hm hmn hj hband
-    exact ⟨hB, M, fun i => (M.energies_pos hB hCM i).1, hcolumns, herror⟩
-  refine ⟨N, hN, hlarge, hweight, ?_⟩
+    obtain ⟨hB, M, hrem, hcolumns, herror⟩ :=
+      hmodels N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
+    exact ⟨hB, M, fun i => (M.energies_pos hB hCM i).1, hrem, hcolumns, herror⟩
   intro centralFloor
   obtain ⟨X₀, hfloor, hX, hfar, hmodelsCentral⟩ :=
     hcentral (innerCentralModelAmplitude CC KC) le_rfl η hη

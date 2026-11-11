@@ -67,6 +67,7 @@ theorem innerMorsePhysicalFamily_even :
       (innerMorseBufferData (morseChainA T m) (morseChainB T m) ((2 : ℝ) * q)
         (8 * (T.d m : ℝ) ^ 9)) C K,
       (∀ i, 0 < (M.column i).inwardEnergy) ∧
+      (∀ i, innerMorseModelNormalizedRemainder M i ≤ 1 / ((2 : ℝ) * q)) ∧
       InnerMorsePhysicalPoissonBound hreal N a M ∧
       ∀ γ : ℝ, |γ| ≤ 1 → ∀ side : Bool, ∀ height : ℝ, 0 < height → ∀ sign : Bool,
         ‖innerTwoCutWeightedError
@@ -95,11 +96,20 @@ theorem innerSelectedMorseModel_energy_pos (i : Fin 2) :
   (Classical.choose_spec
     (innerMorsePhysicalFamily_even hfamily hreal hindex m n q hm hmn hq hband).2).1 i
 
+/-- The original remainder bound belongs to the same selected model.
+It can therefore be transported to independently scaled physical tails. -/
+theorem innerSelectedMorseModel_remainder (i : Fin 2) :
+    innerMorseModelNormalizedRemainder
+      (innerSelectedMorseModel hfamily hreal hindex m n q hm hmn hq hband) i ≤
+        1 / ((2 : ℝ) * q) :=
+  (Classical.choose_spec
+    (innerMorsePhysicalFamily_even hfamily hreal hindex m n q hm hmn hq hband).2).2.1 i
+
 theorem innerSelectedMorseModel_poisson_bound :
     InnerMorsePhysicalPoissonBound hreal N a
       (innerSelectedMorseModel hfamily hreal hindex m n q hm hmn hq hband) :=
   (Classical.choose_spec
-    (innerMorsePhysicalFamily_even hfamily hreal hindex m n q hm hmn hq hband).2).2.1
+    (innerMorsePhysicalFamily_even hfamily hreal hindex m n q hm hmn hq hband).2).2.2.1
 
 theorem innerSelectedMorseModel_error {γ : ℝ} (hγ : |γ| ≤ 1) (side : Bool)
     {height : ℝ} (hh : 0 < height) (sign : Bool) :
@@ -111,7 +121,7 @@ theorem innerSelectedMorseModel_error {γ : ℝ} (hγ : |γ| ≤ 1) (side : Bool
       ((innerSelectedMorseModel hfamily hreal hindex m n q hm hmn hq hband).physicalFluxError
         height (fun _ => 1)) sign‖ < η :=
   (Classical.choose_spec
-    (innerMorsePhysicalFamily_even hfamily hreal hindex m n q hm hmn hq hband).2).2.2
+    (innerMorsePhysicalFamily_even hfamily hreal hindex m n q hm hmn hq hband).2).2.2.2
       γ hγ side height hh sign
 
 end Morse
