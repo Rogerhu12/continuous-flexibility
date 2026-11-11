@@ -120,6 +120,14 @@ def N01ControlledRootFlowBound
 
 /-- Localizing preserves the actual ordinary Fréchet jets on the quarter
 strip. Keep this concrete conversion separate from choosing the flow. -/
+private theorem norm_pair_bound_of_eq
+    {E F : Type*} [NormedAddCommGroup E] [NormedAddCommGroup F]
+    {a a' : E} {b b' : F} {M : ℝ}
+    (ha : a = a') (hb : b = b') (h : ‖a'‖ + ‖b'‖ ≤ M) :
+    ‖a‖ + ‖b‖ ≤ M := by
+  rw [ha, hb]
+  exact h
+
 private theorem n01_localizedRootFields_bound
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {base low loss : ℕ} {ε r σ R : ℝ} {g : ℝ → ℝ} {A : ℕ → ℝ}
@@ -136,8 +144,7 @@ private theorem n01_localizedRootFields_bound
   have hq : (t, θ) ∈ Ioo (-R) R ×ˢ (univ : Set ℝ) := by
     refine ⟨⟨?_, ?_⟩, mem_univ _⟩ <;> linarith [(abs_le.mp ht).1, (abs_le.mp ht).2]
   have he := iteratedFDeriv_localizedRootFields_eq D S C g r σ hR z n (q := (t, θ)) ht
-  rw [he.1, he.2]
-  exact hraw z hz hs hlow n (t, θ) hq
+  exact norm_pair_bound_of_eq he.1 he.2 (hraw z hz hs hlow n (t, θ) hq)
 
 private theorem n01_controlledRootFlow_of_frechet_family
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
