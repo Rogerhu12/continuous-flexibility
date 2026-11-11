@@ -78,7 +78,8 @@ theorem n05CanonicalSingle_mem_smoothCoreClosure (S : PhysicalSpacesData)
     ((n05CanonicalReflection_fixed_iff S K m (v.val m 0)).mpr (hv.1 m)) (hv.2 m)
   have hc : Continuous (lp.single 2 m :
       PiLp 2 (fun _ : Fin (s + 1) => CanonicalL2 S K m) → CanonicalVolumeJets S K s) :=
-    (lp.isometry_single m).continuous
+    (lp.isometry_single (p := (2 : ENNReal))
+      (E := fun k : ℕ => PiLp 2 (fun _ : Fin (s + 1) => CanonicalL2 S K k)) m).continuous
   have hi := mem_closure_image hc.continuousAt hrow
   rw [closure_subtype, n05CanonicalFiniteTruncate_singleton_val]
   apply closure_mono ?_ hi

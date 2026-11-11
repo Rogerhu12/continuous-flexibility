@@ -79,7 +79,7 @@ theorem n05CanonicalJetSource_source_ae (γ t : ℝ) (s : ℕ) (j : Fin (s + 1))
     (fun p => n05CanonicalSampleWeight T S K γ t m * v m j p)
       =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m
         (n05CanonicalJetSource T S C K γ t s j v) := by
-  simpa only [n05CanonicalAngularColumn_apply] using
+  simpa only [n05CanonicalJetSource, n05CanonicalAngularColumn_apply] using
     n05CanonicalAngularSource_source_ae h hcoordinates γ t
       (n05CanonicalAngularColumn S K s j v) m
 
@@ -93,9 +93,9 @@ theorem n05CanonicalJetSource_zero_ae {V : VolumeModelData S K}
     funext m
     rw [n05CanonicalAngularColumn_apply, hV.2.2.2 γ t s v m]
     rfl
-  change n05CanonicalAngularLift S C K _ =ᵐ[radialPhysicalMeasure D] _
+  unfold n05CanonicalJetSource n05CanonicalAngularSource
   rw [he]
-  exact n05CanonicalAngularLift_eq_sourceLift_ae h hcoordinates _
+  exact n05CanonicalAngularLift_eq_sourceLift_ae h hcoordinates (V.forget γ t s v)
     (n05_volumeMember_reflection hV (show VolumeMember S K V γ t s (V.forget γ t s v)
       from ⟨v, rfl⟩))
 
