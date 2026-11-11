@@ -570,6 +570,14 @@ def RadialTrueBorder (D : ReferenceData) : Prop :=
     (∃ ε : ℝ, 0 < ε ∧ (∀ r ∈ Ioo D.a (D.a + ε), D.chiLeft r = 1) ∧
       (∀ r ∈ Ioo (D.b - ε) D.b, D.chiLeft r = 0))
 
+/-- Geometric facts established when the central solution is joined to the
+selected tails, retained by every subsequent inverse construction.
+These are properties of the actual profile and cells, not inverse or
+graph-closure assumptions. -/
+def RadialConstructionGeometry (D : ReferenceData) : Prop :=
+  (∀ r ∈ radialCore D, Radial.radialJacobi 4 D.w D.phi r = 0) ∧
+    RadialReturnMargins D
+
 def referenceBeta : ℝ := 3 / 4
 
 /-- All three exponents use one profile, border, natural graph and inverse. -/

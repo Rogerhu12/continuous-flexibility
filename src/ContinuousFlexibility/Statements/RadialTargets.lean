@@ -114,8 +114,7 @@ unchanged selected tails/negative components, with free positive-head length. -/
 def R08Statement : Prop :=
   ∀ requiredHead : ℝ, 0 < requiredHead →
     ∃ S : SelectedTailData, IsSelectedTail S ∧ ∃ D : ReferenceData,
-      IsAccumulatingProfile D ∧
-      (∀ r ∈ radialCore D, Radial.radialJacobi 4 D.w D.phi r = 0) ∧
+      IsAccumulatingProfile D ∧ RadialConstructionGeometry D ∧
       ∃ l h : ℝ, CentralPatch D l h ∧
         (∃ l₁ l₂ h₁ h₂ cL cR : ℝ,
           D.a < l₁ ∧ l₁ < l₂ ∧ l₂ < l ∧ h < h₁ ∧ h₁ < h₂ ∧ h₂ < D.b ∧
@@ -447,6 +446,7 @@ def ActualMatchedRepresentation (D : ReferenceData)
 Hilbert density and ordinary source conversion are explicit in ModeLocalEquation. -/
 def R10Statement : Prop :=
   ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+    RadialConstructionGeometry D ∧
     ∀ j : ℕ, 2 ≤ j → Even j →
       ∃ G : RadialModePair D →L[ℝ] RadialModePair D,
         ModeInverseProperties D j G ∧
@@ -455,6 +455,7 @@ def R10Statement : Prop :=
 /-- R11, §6: the same geometry, border and inverse at all three exponents. -/
 def R11Statement : Prop :=
   ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+    RadialConstructionGeometry D ∧
     ∃ ε M₀ M₁ : ℝ, 0 < ε ∧ ε < 1 / 4 ∧
       ∃ G : RadialSource → RadialUnknown,
         (∀ j : ℕ, 2 ≤ j → Even j →

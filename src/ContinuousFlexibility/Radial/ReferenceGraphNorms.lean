@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory Filter Real
-open scoped Topology RealInnerProductSpace
+open scoped Topology RealInnerProductSpace InnerProductSpace
 open ContinuousFlexibility.Statements
 
 theorem referenceSource_physical_square_bound {D : ReferenceData}
@@ -72,8 +72,9 @@ theorem referenceOutput_physical_square_bound {D : ReferenceData}
             apply integral_mono hu.integrable_sq
               ((hrem.integrable_sq.const_mul 2).add (hleft.integrable_sq.const_mul 2))
             intro x
-            dsimp only [outputRemainder]
-            nlinarith [sq_nonneg (U.1 x - 2 * (aL * D.chiLeft x.1))]
+            change U.1 x ^ 2 ≤ 2 * (U.1 x - aL * D.chiLeft x.1) ^ 2 +
+              2 * (aL * D.chiLeft x.1) ^ 2
+            nlinarith only [sq_nonneg (U.1 x - 2 * (aL * D.chiLeft x.1))]
       _ = _ := by
         rw [integral_add (hrem.integrable_sq.const_mul 2)
           (hleft.integrable_sq.const_mul 2), integral_const_mul, integral_const_mul,
@@ -124,13 +125,13 @@ theorem reference_memLp_tendsto_of_sub_sq {α : Type*} [MeasurableSpace α]
       filter_upwards [Lp.coeFn_sub ((hf n).toLp (f n)) (hg.toLp g),
         (hf n).coeFn_toLp, hg.coeFn_toLp, ((hf n).sub hg).coeFn_toLp]
         with x hsub hfn hgn hdiff
-      rw [hsub, hfn, hgn, hdiff]
+      simp only [hsub, Pi.sub_apply, hfn, hgn, hdiff]
     rw [he, reference_memLp_norm_sq_eq_integral]
   have hsq : Tendsto (fun n => ‖(hf n).toLp (f n) - hg.toLp g‖ ^ 2)
       atTop (𝓝 0) := by
     simpa only [heq] using h
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
-  simpa only [Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), Real.sqrt_zero] using
+  simpa only [Function.comp_apply, Real.sqrt_sq_eq_abs, abs_of_nonneg (norm_nonneg _), Real.sqrt_zero] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hsq
 
 theorem reference_memLp_pairing_tendsto_of_sub_sq {α : Type*} [MeasurableSpace α]
@@ -138,7 +139,7 @@ theorem reference_memLp_pairing_tendsto_of_sub_sq {α : Type*} [MeasurableSpace 
     (hf : ∀ n, MemLp (f n) 2 μ) (hg : MemLp g 2 μ) (hk : MemLp k 2 μ)
     (h : Tendsto (fun n => ∫ x, (f n x - g x) ^ 2 ∂μ) atTop (𝓝 0)) :
     Tendsto (fun n => ∫ x, f n x * k x ∂μ) atTop (𝓝 (∫ x, g x * k x ∂μ)) := by
-  have ht := (reference_memLp_tendsto_of_sub_sq hf hg h).inner
+  have ht := (reference_memLp_tendsto_of_sub_sq hf hg h).inner (𝕜 := ℝ)
     (tendsto_const_nhds (x := hk.toLp k))
   simpa only [reference_memLp_inner_eq_integral] using ht
 
@@ -159,7 +160,8 @@ theorem referenceSource_sub_sq_tendsto {D : ReferenceData}
     Tendsto (fun n => ∫ x, ((F n).1 x - K.1 x) ^ 2 ∂radialPhysicalMeasure D)
       atTop (𝓝 0) := by
   obtain ⟨C, _, hbound⟩ := referenceSource_physical_square_bound hD hγ M
-  apply squeeze_zero (fun n => integral_nonneg (fun _ => sq_nonneg _))
+  apply squeeze_zero (g := fun n => C * sourceNormSquare D γ M (F n - K))
+    (fun n => integral_nonneg (fun _ => sq_nonneg _))
   · intro n
     have hb := hbound (F n - K) (referenceSource_sub hD (hF n) hK)
     change ((F n).2 - K.2) ^ 2 +
@@ -177,7 +179,8 @@ theorem referenceOutput_sub_sq_tendsto {D : ReferenceData}
     Tendsto (fun n => ∫ x, ((U n).1 x - V.1 x) ^ 2 ∂radialPhysicalMeasure D)
       atTop (𝓝 0) := by
   obtain ⟨C, _, hbound⟩ := referenceOutput_physical_square_bound hD hborder hγ M
-  apply squeeze_zero (fun n => integral_nonneg (fun _ => sq_nonneg _))
+  apply squeeze_zero (g := fun n => C * outputNormSquare D γ M (a n) (U n - V))
+    (fun n => integral_nonneg (fun _ => sq_nonneg _))
   · intro n
     have hb := hbound (a n) (U n - V) (hU n)
     change ((U n).2 - V.2) ^ 2 +
@@ -194,7 +197,8 @@ theorem referenceSource_scalar_tendsto {D : ReferenceData}
     Tendsto (fun n => (F n).2) atTop (𝓝 K.2) := by
   obtain ⟨C, _, hbound⟩ := referenceSource_physical_square_bound hD hγ M
   have hs : Tendsto (fun n => ((F n).2 - K.2) ^ 2) atTop (𝓝 0) := by
-    apply squeeze_zero (fun n => sq_nonneg _)
+    apply squeeze_zero (g := fun n => C * sourceNormSquare D γ M (F n - K))
+      (fun n => sq_nonneg _)
     · intro n
       have hb := hbound (F n - K) (referenceSource_sub hD (hF n) hK)
       have hi : 0 ≤ ∫ x, ((F n).1 x - K.1 x) ^ 2 ∂radialPhysicalMeasure D :=
@@ -205,7 +209,7 @@ theorem referenceSource_scalar_tendsto {D : ReferenceData}
       linarith
     · simpa only [mul_zero] using h.const_mul C
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
-  simpa only [Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
+  simpa only [Function.comp_apply, Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hs
 
 theorem referenceOutput_scalar_tendsto {D : ReferenceData}
@@ -217,7 +221,8 @@ theorem referenceOutput_scalar_tendsto {D : ReferenceData}
     Tendsto (fun n => (U n).2) atTop (𝓝 V.2) := by
   obtain ⟨C, _, hbound⟩ := referenceOutput_physical_square_bound hD hborder hγ M
   have hs : Tendsto (fun n => ((U n).2 - V.2) ^ 2) atTop (𝓝 0) := by
-    apply squeeze_zero (fun n => sq_nonneg _)
+    apply squeeze_zero (g := fun n => C * outputNormSquare D γ M (a n) (U n - V))
+      (fun n => sq_nonneg _)
     · intro n
       have hb := hbound (a n) (U n - V) (hU n)
       have hi : 0 ≤ ∫ x, ((U n).1 x - V.1 x) ^ 2 ∂radialPhysicalMeasure D :=
@@ -228,7 +233,7 @@ theorem referenceOutput_scalar_tendsto {D : ReferenceData}
       linarith
     · simpa only [mul_zero] using h.const_mul C
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
-  simpa only [Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
+  simpa only [Function.comp_apply, Real.sqrt_sq_eq_abs, Real.norm_eq_abs, Real.sqrt_zero] using
     (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hs
 
 end ContinuousFlexibility.Radial

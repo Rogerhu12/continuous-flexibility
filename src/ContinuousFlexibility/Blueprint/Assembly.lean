@@ -73,8 +73,8 @@ theorem R06_of_nodes (hA : R06aStatement) (hB : R06bStatement) (hC : R06cStateme
   exact ⟨C₂, η₂, K₂, g1, g2, g3, g4, hfull', hphys, hcont⟩
 
 theorem R10_of_nodes (hA : R10aStatement) (hB : R10bStatement) : R10Statement := by
-  obtain ⟨D, hacc, hborder, hpieces⟩ := hA
-  refine ⟨D, hacc, hborder, fun j hj he => ?_⟩
+  obtain ⟨D, hacc, hborder, hgeometry, hpieces⟩ := hA
+  refine ⟨D, hacc, hborder, hgeometry, fun j hj he => ?_⟩
   obtain ⟨M, hM, hp⟩ := hpieces j hj he
   exact hB D hacc hborder j hj he M hM hp
 
@@ -102,6 +102,8 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   -- imposing the even-source symmetry on that derivative.
   have hR11a : R11aStatement := R11a hR05 hR10
   have hR11 : R11Statement := R11b hR11a
+  -- The radial pipeline retains the homogeneous profile and return margins
+  -- on the same reference data throughout its inverse constructions.
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
