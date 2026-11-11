@@ -177,8 +177,9 @@ theorem exists_innerMorseModelChoices (hR09 : R09Statement) {a : ℝ} (ha : 0 �
     ∃ C K : ℝ, 0 < C ∧ 0 < K ∧
       ∀ A : ℝ, innerMorseModelAmplitude C K ≤ A →
       ∃ Cstar : ℝ, 0 < Cstar ∧ innerMorseBufferThreshold ≤ Cstar ∧
-        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ N : ℕ,
-          initial ≤ N ∧ 4096 ≤ N ∧ 64 * a ≤ (N : ℝ) ∧
+        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ Nfloor : ℕ,
+          initial ≤ Nfloor ∧ 4096 ≤ Nfloor ∧ 64 * a ≤ (Nfloor : ℝ) ∧
+          ∀ N : ℕ, Nfloor ≤ N →
           ∀ (T : MorseChainData) (σ : ℕ → ℝ) (D : ReferenceData) (cost : ℕ → ℝ),
             MorseChainRealization T σ D cost → T.index = N →
             ∀ m n j : ℕ, N ≤ m → m < n → 2 ≤ j → radialFrequencyBand T Cstar n j →
@@ -201,10 +202,10 @@ theorem exists_innerMorseModelChoices (hR09 : R09Statement) {a : ℝ} (ha : 0 �
   obtain ⟨Cstar, hCstar, hgeometry, hmodels⟩ := hchoice A (hfactor.1.trans hA)
   refine ⟨Cstar, hCstar, hgeometry, ?_⟩
   intro η hη initial
-  obtain ⟨N, hN, hlarge, hweight, htail⟩ := hmodels (min 1 η) (lt_min zero_lt_one hη) initial
-  refine ⟨N, hN, hlarge, hweight, ?_⟩
-  intro T σ D cost hreal hindex m n j hm hmn hj hband
-  obtain ⟨⟨M⟩, henv, hfreq⟩ := htail T σ D cost hreal hindex m n j hm hmn hj hband
+  obtain ⟨Nfloor, hN, hlarge, hweight, htail⟩ := hmodels (min 1 η) (lt_min zero_lt_one hη) initial
+  refine ⟨Nfloor, hN, hlarge, hweight, ?_⟩
+  intro N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
+  obtain ⟨⟨M⟩, henv, hfreq⟩ := htail N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
   have hmIndex : T.index ≤ m := by simpa only [hindex] using hm
   have hraw := innerMorseChain_buffer hreal hgeometry (by omega : 10 ≤ T.index)
     hmIndex hmn hj hband
@@ -222,7 +223,8 @@ theorem exists_innerMorseModelChoices (hR09 : R09Statement) {a : ℝ} (ha : 0 �
       (mul_le_mul_of_nonneg_left hrem hjpos.le).trans_lt hs.2
   · intro γ hγ side height hh sign
     exact (innerMorseModelFluxError_le_envelope T m N (hreal.d_eq m hmIndex)
-      hj1 hC ha hγ hlarge hweight hm hraw.1 M hraw.2 (hfactor.2.2.trans hA) side hh sign).trans_lt
+      hj1 hC ha hγ (hlarge.trans hNfloor) (hweight.trans (Nat.cast_le.mpr hNfloor))
+      hm hraw.1 M hraw.2 (hfactor.2.2.trans hA) side hh sign).trans_lt
       (hs.1.trans_le (min_le_right 1 η))
 
 end ContinuousFlexibility.Radial

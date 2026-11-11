@@ -72,8 +72,9 @@ theorem exists_innerMorseLocalizedChoices (hR09 : R09Statement) (a : ℝ) :
     ∃ C K ε : ℝ, 0 < C ∧ 0 < K ∧ 0 < ε ∧
       ∀ A : ℝ, innerMorseCompressionAmplitude ≤ A →
       ∃ Cstar : ℝ, 0 < Cstar ∧ innerMorseBufferThreshold ≤ Cstar ∧
-        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ N : ℕ,
-          initial ≤ N ∧ 4096 ≤ N ∧ 64 * a ≤ (N : ℝ) ∧
+        ∀ η : ℝ, 0 < η → ∀ initial : ℕ, ∃ Nfloor : ℕ,
+          initial ≤ Nfloor ∧ 4096 ≤ Nfloor ∧ 64 * a ≤ (Nfloor : ℝ) ∧
+          ∀ N : ℕ, Nfloor ≤ N →
           ∀ (T : MorseChainData) (σ : ℕ → ℝ) (D : ReferenceData) (cost : ℕ → ℝ),
             MorseChainRealization T σ D cost → T.index = N →
             ∀ m n j : ℕ, N ≤ m → m < n → 2 ≤ j → radialFrequencyBand T Cstar n j →
@@ -94,11 +95,11 @@ theorem exists_innerMorseLocalizedChoices (hR09 : R09Statement) (a : ℝ) :
     innerMorseBufferActionScale_pos
   refine ⟨Cstar, hCstar, hgeometry, ?_⟩
   intro η hη initial
-  obtain ⟨N, hN, hlarge, hweight, hmodels⟩ :=
+  obtain ⟨Nfloor, hN, hlarge, hweight, hmodels⟩ :=
     hchoice (min ε η) (lt_min hε hη) initial
-  refine ⟨N, hN, hlarge, hweight, ?_⟩
-  intro T σ D cost hreal hindex m n j hm hmn hj hband
-  have h := hmodels T σ D cost hreal hindex m n j hm hmn hj hband
+  refine ⟨Nfloor, hN, hlarge, hweight, ?_⟩
+  intro N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
+  have h := hmodels N hNfloor T σ D cost hreal hindex m n j hm hmn hj hband
   have hmIndex : T.index ≤ m := by simpa only [hindex] using hm
   have htol (i : Fin 2) :=
     (innerMorse_compression_envelope_le hreal hmIndex hj h.1 h.2.1 hA i).trans_lt

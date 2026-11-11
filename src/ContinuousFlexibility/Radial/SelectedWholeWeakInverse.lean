@@ -48,7 +48,7 @@ theorem exists_wholeWeakInverse
         OuterWeightedGreenResponse μ w ρ a b ((j : ℝ) ^ 2) lam H.entrance R ∧
         R.toLinearMap.IsSymmetric ∧
         OuterWeightedHomogeneousUnique μ w a b ((j : ℝ) ^ 2) lam H.entrance := by
-  have hex := F.exists_wholeGreenOperator hD hcut hentry hac.le hlam hT hphysical
+  have hex := F.exists_selectedWholeGreenOperator hD hcut hentry hac.le hlam hT hphysical
     hη hK hKinv
   have hmeasure : μ = ν := by
     simpa only [outerOutwardRadius_eq_sign] using

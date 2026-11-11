@@ -117,10 +117,9 @@ theorem exists_reference_true_border_controls {D : ReferenceData} {l h : ℝ}
       contDiff_referenceLeftCutoff D.a D.b,
       referenceLeftCutoff_endpoint_germs hgeom.2.1⟩
     intro r hr
-    have hrclosed := subset_tsupport χ hr
-    have hrinterval := hχcap hrclosed
+    have hrinterval := hχcap hr
     exact ⟨⟨haright.trans hrinterval.1, hrinterval.2.trans hhb⟩,
-      (hχsign r hrclosed).1⟩
+      (hχsign r hr).1⟩
   refine ⟨χ, ?_, ?_, hborder, hχcap, ?_, ?_, ?_⟩
   · exact (referenceWithTrueBorderControls_accumulating_iff D χ).mpr hacc
   · exact (referenceWithTrueBorderControls_centralPatch_iff D χ l h).mpr hpatch
