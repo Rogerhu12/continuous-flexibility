@@ -14,6 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory Filter ContinuousFlexibility.Statements
+open scoped InnerProductSpace
 
 theorem innerRadialPotentialClass_zero (D : ReferenceData) (j a b : ℝ) :
     InnerRadialPotentialClass D j a b 0 0 := by
@@ -53,6 +54,21 @@ theorem InnerRadialPotentialClass.eq_zero_of_value_eq_zero
   by_cases hmem : r ∈ Ioo a b
   · simpa only [indicator_of_mem hmem, hz, mul_zero] using hr
   · simpa only [indicator_of_notMem hmem] using hr
+
+/-- The actual real signed potential contributes a symmetric pairing. -/
+theorem InnerRadialPotentialClass.inner_symm
+    {D : ReferenceData} {j a b : ℝ} {u v u' v' : RadialModeL2 D}
+    (h : InnerRadialPotentialClass D j a b u v)
+    (h' : InnerRadialPotentialClass D j a b u' v') :
+    ⟪v, u'⟫_ℝ = ⟪v', u⟫_ℝ := by
+  rw [L2.inner_def, L2.inner_def]
+  apply integral_congr_ae
+  filter_upwards [h, h'] with r hr hr'
+  rw [hr, hr']
+  by_cases hmem : r ∈ Ioo a b
+  · simp only [indicator_of_mem hmem, RCLike.inner_apply, conj_trivial]
+    ring
+  · simp only [indicator_of_notMem hmem, inner_zero_left]
 
 /-- The genuine physical multiplication graph. -/
 def innerRadialPotentialGraph (D : ReferenceData) (j a b : ℝ) :

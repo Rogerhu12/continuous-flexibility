@@ -28,8 +28,8 @@ def innerAdmissibleSource (bordered : Bool) : ClosedSubmodule ℝ (InnerBorderL2
 theorem mem_innerAdmissibleSource (bordered : Bool) (F : InnerBorderL2 μ) :
     F ∈ innerAdmissibleSource μ bordered ↔ bordered = true ∨ F.snd = 0 := by
   cases bordered <;>
-    simp only [innerAdmissibleSource, Bool.false_eq_true, Bool.true_eq_true,
-      if_false, if_true, ClosedSubmodule.mem_comap, ClosedSubmodule.mem_bot,
+    simp only [innerAdmissibleSource, Bool.false_eq_true, eq_self_iff_true,
+      ite_false, ite_true, ClosedSubmodule.mem_comap, ClosedSubmodule.mem_bot,
       WithLp.sndL_apply, false_or, true_or, ClosedSubmodule.mem_top]
 
 abbrev InnerAdmissibleSource (bordered : Bool) := ↥(innerAdmissibleSource μ bordered)

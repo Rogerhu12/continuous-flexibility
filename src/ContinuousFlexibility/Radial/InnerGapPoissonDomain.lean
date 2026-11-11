@@ -134,8 +134,7 @@ theorem innerGapPoissonH1Unit_sub_affine (hab : a < b)
   apply innerRadialH1Zero_of_smooth_zero_endpoints D hw hab ha hcore
     (fun r hr => (hpos r (Ioo_subset_Icc_self hr)).le)
     (fun _ _ => hφ.contDiffAt) hφa hφb
-  · simp only [Prod.fst_sub]
-    filter_upwards [Lp.coeFn_sub
+  · filter_upwards [Lp.coeFn_sub
       (innerGapPoissonH1Unit D hw ha hcore hpos p hp i).1
       (innerRadialAffineUnitPair D hw ha hcore hpos i).1,
       innerGapPoissonH1Unit_value_ae D hw ha hcore hpos p hp i,
@@ -144,8 +143,7 @@ theorem innerGapPoissonH1Unit_sub_affine (hab : a < b)
     by_cases hr : r ∈ Ioo a b
     · simp only [indicator_of_mem hr, φ, h]
     · simp only [indicator_of_notMem hr, sub_self]
-  · simp only [Prod.snd_sub]
-    filter_upwards [Lp.coeFn_sub
+  · filter_upwards [Lp.coeFn_sub
       (innerGapPoissonH1Unit D hw ha hcore hpos p hp i).2
       (innerRadialAffineUnitPair D hw ha hcore hpos i).2,
       innerGapPoissonH1Unit_gradient_ae D hw ha hcore hpos p hp i,

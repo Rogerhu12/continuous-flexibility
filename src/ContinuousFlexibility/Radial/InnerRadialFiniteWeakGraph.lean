@@ -98,6 +98,13 @@ def innerRadialChainLift (p : Fin (n + 1)) :
   (innerRadialAffineLift D hw (G.left_pos p) (G.in_core p) (G.weight_pos p)).comp
     (innerChainBoundaryRestriction n p)
 
+@[simp] theorem innerRadialChainLift_apply (p : Fin (n + 1))
+    (ξ : EuclideanSpace ℝ (Fin n)) :
+    innerRadialChainLift D hw G p ξ =
+      innerRadialAffineLift D hw (G.left_pos p) (G.in_core p) (G.weight_pos p)
+        (innerChainBoundaryRestriction n p ξ) :=
+  LinearMap.comp_apply _ _ _
+
 /-- The actual finite weak domain: all pieces share one internal cut
 vector, and their residuals after the fixed affine lifts are in the
 actual zero-endpoint physical closures. -/
@@ -120,13 +127,15 @@ theorem innerRadialChainDomain_trace_iff (q : Fin (n + 1) → InnerRadialH1Pair 
     intro p
     apply (innerRadialH1Domain_trace_iff D hw (G.left_lt_right p)
       (G.left_pos p) (G.in_core p) (G.weight_pos p) (q p) _).mpr
-    simpa only [innerRadialChainLift, LinearMap.comp_apply] using hξ p
+    have hp := hξ p
+    rw [innerRadialChainLift_apply] at hp
+    exact hp
   · rintro ⟨ξ, hξ⟩
     refine ⟨ξ, ?_⟩
     intro p
-    simpa only [innerRadialChainLift, LinearMap.comp_apply] using
-      (innerRadialH1Domain_trace_iff D hw (G.left_lt_right p)
-        (G.left_pos p) (G.in_core p) (G.weight_pos p) (q p) _).mp (hξ p)
+    rw [innerRadialChainLift_apply]
+    exact (innerRadialH1Domain_trace_iff D hw (G.left_lt_right p)
+      (G.left_pos p) (G.in_core p) (G.weight_pos p) (q p) _).mp (hξ p)
 
 /-- The physical multiplication relation for the signed radial
 potential. Positive gaps and negative wells use this same formula. -/
@@ -194,6 +203,7 @@ theorem innerRadialChainWeakGraph_iff (bordered : Bool) (j : ℝ)
       innerRadialChainFlux D hw G central column q v f borderScalar = 0 := by
   unfold InnerRadialChainWeakGraph innerRadialChainDomain innerRadialChainFlux
   rw [innerMatchedPiece_weak_gluing]
+  simp only [ClosedSubmodule.mem_toSubmodule_iff]
 
 end PhysicalChain
 

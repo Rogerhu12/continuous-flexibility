@@ -78,9 +78,11 @@ theorem innerBorderPieceProjection_contract
     (hmeas : ∀ i, MeasurableSet (sets i)) (i : ι) (F : InnerBorderL2 μ) :
     ‖innerBorderPieceProjection μ sets center i F‖ ≤ ‖F‖ := by
   have hf := (innerL2PieceProjection μ (sets i)).le_opNorm F.fst
+  have hpbound : ‖innerL2PieceProjection μ (sets i)‖ * ‖F.fst‖ ≤ 1 * ‖F.fst‖ :=
+    mul_le_mul_of_nonneg_right
+      (norm_innerL2PieceProjection_le_one μ (sets i) (hmeas i)) (norm_nonneg F.fst)
   have hf' : ‖innerL2PieceProjection μ (sets i) F.fst‖ ≤ ‖F.fst‖ :=
-    hf.trans (by simpa only [one_mul] using mul_le_mul_of_nonneg_right
-      (norm_innerL2PieceProjection_le_one μ (sets i) (hmeas i)) (norm_nonneg F.fst))
+    hf.trans (by simpa only [one_mul] using hpbound)
   have hs : (if i = center then F.snd else 0) ^ 2 ≤ F.snd ^ 2 := by
     split_ifs
     · exact le_rfl

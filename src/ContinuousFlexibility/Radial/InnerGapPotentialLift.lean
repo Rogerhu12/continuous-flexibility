@@ -36,9 +36,12 @@ theorem innerGapPotentialWeight_bounded (D : ReferenceData) (hw : ContDiff ℝ �
     ∃ C : ℝ, 0 ≤ C ∧ ∀ r, |innerGapPotentialWeight D j a b r| ≤ C := by
   have hc : ContinuousOn
       (fun r => Real.sqrt ((j ^ 2 / 12) * (r * deriv D.w r / D.w r))) (Icc a b) := by
-    simpa only [innerGapPotentialField, mul_one] using
-      (innerGapPotentialField_continuousOn (u := fun _ : ℝ => (1 : ℝ))
-        hw contDiff_const hpos j)
+    have he : innerGapPotentialField D.w j (fun _ : ℝ => (1 : ℝ)) =
+        (fun r => Real.sqrt ((j ^ 2 / 12) * (r * deriv D.w r / D.w r))) := by
+      funext r
+      simp only [innerGapPotentialField, mul_one]
+    rw [← he]
+    exact innerGapPotentialField_continuousOn hw contDiff_const hpos j
   obtain ⟨C, hC⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn hc
   refine ⟨max C 0, le_max_right _ _, ?_⟩
   intro r
@@ -80,7 +83,7 @@ theorem innerGapPotentialLift_apply (D : ReferenceData)
     (M : RadialModeL2 D →L[ℝ] RadialModeL2 D) (v : InnerRadialH1Pair D) :
     innerGapPotentialLift D M v = WithLp.toLp 2 (v.1, WithLp.toLp 2 (v.2, M v.1)) := by
   simp only [innerGapPotentialLift, ContinuousLinearMap.comp_apply, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply,
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
     ContinuousLinearEquiv.coe_coe, WithLp.prodContinuousLinearEquiv_symm_apply]
 
 theorem innerGapPotentialLift_core (D : ReferenceData) (hw : ContDiff ℝ ∞ D.w)

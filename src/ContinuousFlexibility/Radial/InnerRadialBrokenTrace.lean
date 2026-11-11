@@ -68,6 +68,21 @@ theorem innerRadialChainDomain_zero_trace {q : Fin (n + 1) → InnerRadialH1Pair
     (innerChainBoundaryRestriction n p ξ)).mp (hξ p)
   rwa [hξ0, map_zero, map_zero, sub_zero] at hp
 
+/-- Subtracting the fixed lift of the recovered internal trace gives
+an actual zero-endpoint field on every piece. -/
+theorem innerRadialChainDomain_sub_lift {q : Fin (n + 1) → InnerRadialH1Pair D}
+    (hq : q ∈ innerRadialChainDomain D hw G) :
+    ∀ p, q p - innerRadialAffineLift D hw (G.left_pos p) (G.in_core p) (G.weight_pos p)
+      (innerChainBoundaryRestriction n p (innerRadialChainTrace D hw G q)) ∈
+      innerRadialH1Zero D (G.left p) (G.right p) := by
+  obtain ⟨ξ, hξ⟩ := (innerRadialChainDomain_trace_iff D hw G q).mp hq
+  have htr := innerRadialChainTrace_eq D hw G (fun p => (hξ p).2)
+  intro p
+  rw [htr]
+  exact (innerRadialH1Domain_trace_iff D hw (G.left_lt_right p)
+    (G.left_pos p) (G.in_core p) (G.weight_pos p) (q p)
+    (innerChainBoundaryRestriction n p ξ)).mp (hξ p)
+
 /-- The local homogeneous zero-Dirichlet uniqueness statement needed
 for one actual piece. Only the central piece carries the scalar row.
 This is a local realization property, not an assembled inverse. -/

@@ -58,7 +58,7 @@ theorem innerLiouville_densityDrift_deriv {s : ℝ → ℝ} {x : ℝ}
     (hs₀ : s x ≠ 0) :
     deriv (fun y => deriv s y / s y) x =
       liouvilleV0 s x - (deriv s x / s x) ^ 2 := by
-  rw [(hs₂.hasDerivAt.div hs.hasDerivAt hs₀).deriv]
+  rw [(hs₂.hasDerivAt.fun_div hs.hasDerivAt hs₀).deriv]
   unfold liouvilleV0
   field_simp [hs₀]
   <;> ring
@@ -69,7 +69,8 @@ theorem innerLiouville_densityDrift_prod_deriv {s p : ℝ → ℝ} {x : ℝ}
     deriv (fun y => (deriv s y / s y) * p y) x =
       (liouvilleV0 s x - (deriv s x / s x) ^ 2) * p x +
         (deriv s x / s x) * deriv p x := by
-  rw [deriv_mul (hs₂.div hs hs₀) hp,
+  have hd : DifferentiableAt ℝ (fun y => deriv s y / s y) x := hs₂.div hs hs₀
+  rw [deriv_fun_mul hd hp,
     innerLiouville_densityDrift_deriv hs hs₂ hs₀]
 
 theorem innerLiouville_densityDrift_contDiffAt {s : ℝ → ℝ} {x : ℝ}

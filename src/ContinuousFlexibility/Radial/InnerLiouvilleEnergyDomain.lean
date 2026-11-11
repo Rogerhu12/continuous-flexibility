@@ -27,7 +27,7 @@ variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}
   (hw : ∀ x ∈ Icc a b, D.w (R x) = lam * s x ^ 2 * deriv R x)
 
 theorem innerLiouvilleGradientLift_eq_indicator
-    (f d : Lp ℝ 2 volume) (p u : ℝ → ℝ)
+    (f d : Lp ℝ 2 (volume : Measure ℝ)) (p u : ℝ → ℝ)
     (hpp : ∀ x ∈ Icc a b, ContDiffAt ℝ ∞ p x)
     (hfp : (f : ℝ → ℝ) =ᵐ[volume.restrict (Ioo a b)] p)
     (hdp : (d : ℝ → ℝ) =ᵐ[volume.restrict (Ioo a b)] deriv p)
@@ -82,14 +82,16 @@ theorem innerLiouville_radial_weight_pos :
 omit hab in
 theorem innerLiouvilleEnergyLift_core (hab : a < b) (hDw : Continuous D.w)
     (U : ℝ) (hU : 0 ≤ U) (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U)
-    (V : ℝ → ℝ) (q : Lp ℝ 2 volume × Lp ℝ 2 volume × Lp ℝ 2 volume)
+    (V : ℝ → ℝ) (q : Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ))
     (hq : q ∈ IntervalEnergyCore V a b) :
     innerLiouvilleEnergyLift D hab.le hlam hR hs hp hcore hw U hU hv q ∈
       innerRadialH1Zero D (R a) (R b) := by
   rcases q with ⟨f, d, q⟩
   rcases hq with ⟨⟨p, hpp, _hpc, hfp, hdp, _hqp⟩, hfout⟩
+  have hfpout : (f : ℝ → ℝ) =ᵐ[volume.restrict ((Ioo a b)ᶜ)] p :=
+    ae_restrict_of_ae hfp
   have hpout : p =ᵐ[volume.restrict ((Ioo a b)ᶜ)] (fun _ => 0) :=
-    (ae_restrict_of_ae hfp).symm.trans hfout
+    Filter.EventuallyEq.trans (Filter.EventuallyEq.symm hfpout) hfout
   have hpzero := innerDirichlet_representative_zero_outside hab hpp.continuous hpout
   have hpa : p a = 0 := hpzero (by simp : a ∈ (Ioo a b)ᶜ)
   have hpb : p b = 0 := hpzero (by simp : b ∈ (Ioo a b)ᶜ)
@@ -117,7 +119,7 @@ theorem innerLiouvilleEnergyLift_core (hab : a < b) (hDw : Continuous D.w)
 omit hab in
 theorem innerLiouvilleEnergyLift_closure (hab : a < b) (hDw : Continuous D.w)
     (U : ℝ) (hU : 0 ≤ U) (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U)
-    (V : ℝ → ℝ) (q : Lp ℝ 2 volume × Lp ℝ 2 volume × Lp ℝ 2 volume)
+    (V : ℝ → ℝ) (q : Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ))
     (hq : q ∈ closure (IntervalEnergyCore V a b)) :
     innerLiouvilleEnergyLift D hab.le hlam hR hs hp hcore hw U hU hv q ∈
       innerRadialH1Zero D (R a) (R b) := by

@@ -34,7 +34,11 @@ theorem innerBorderPieceProjection_apply (i : ι) (F : InnerBorderL2 μ) :
       WithLp.toLp 2 (innerL2PieceProjection μ (sets i) F.fst,
         if i = center then F.snd else 0) := by
   by_cases hi : i = center <;>
-    simp only [innerBorderPieceProjection, hi, ite_true, ite_false] <;> rfl
+    simp only [innerBorderPieceProjection, hi, ite_true, ite_false,
+      ContinuousLinearMap.comp_apply, ContinuousLinearEquiv.coe_coe,
+      innerBorderMaxEquiv_apply, innerBorderMaxEquiv_symm_apply,
+      ContinuousLinearMap.coe_prodMap', Prod.map_apply', WithLp.ofLp_fst,
+      WithLp.ofLp_snd, ContinuousLinearMap.id_apply, ContinuousLinearMap.zero_apply]
 
 theorem innerBorderPieceProjection_norm_sq (i : ι) (F : InnerBorderL2 μ) :
     ‖innerBorderPieceProjection μ sets center i F‖ ^ 2 =

@@ -50,7 +50,7 @@ theorem innerLiouvilleSource_apply (F : Lp ℝ 2 (radialHilbertMeasure D)) :
     ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
     LinearIsometryEquiv.coe_coe'', innerL2ZeroExtension]
 
-theorem innerLiouvilleFieldLift_pullback_ae (f : Lp ℝ 2 volume) :
+theorem innerLiouvilleFieldLift_pullback_ae (f : Lp ℝ 2 (volume : Measure ℝ)) :
     (fun x => innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f (R x)) =ᵐ[
       volume.restrict (Ioo a b)] (fun x => f x / (Real.sqrt lam * s x)) := by
   let V := innerLiouvilleVelocityMultiplier R a b hR U hU hv
@@ -86,7 +86,7 @@ theorem innerLiouvilleFieldLift_pullback_ae (f : Lp ℝ 2 volume) :
   field_simp [h12, hlam', (hp x hx').1.ne', (hp x hx').2.1.ne', (hp x hx').2.2.ne']
   <;> ring
 
-theorem innerLiouvilleFieldLift_support_ae (f : Lp ℝ 2 volume) :
+theorem innerLiouvilleFieldLift_support_ae (f : Lp ℝ 2 (volume : Measure ℝ)) :
     ∀ᵐ r ∂radialHilbertMeasure D, r ∉ Ioo (R a) (R b) →
       innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f r = 0 := by
   let u := (innerLiouvilleIntervalEquiv D hab hlam hR hs hp hcore hw).symm

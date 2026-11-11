@@ -31,14 +31,14 @@ theorem exists_innerLiouvilleDriftBound {s : ℝ → ℝ} {a b : ℝ}
 
 def innerLiouvilleDriftMultiplier (s : ℝ → ℝ) (a b : ℝ)
     (hs : ContDiff ℝ ∞ s) (hsp : ∀ x ∈ Icc a b, 0 < s x) :
-    Lp ℝ 2 volume →L[ℝ] Lp ℝ 2 volume :=
+    Lp ℝ 2 (volume : Measure ℝ) →L[ℝ] Lp ℝ 2 (volume : Measure ℝ) :=
   innerLiouvilleVelocityMultiplier s a b hs
     (Classical.choose (exists_innerLiouvilleDriftBound hs hsp))
     (Classical.choose_spec (exists_innerLiouvilleDriftBound hs hsp)).1
     (Classical.choose_spec (exists_innerLiouvilleDriftBound hs hsp)).2
 
 theorem innerLiouvilleDriftMultiplier_ae (s : ℝ → ℝ) (a b : ℝ)
-    (hs : ContDiff ℝ ∞ s) (hsp : ∀ x ∈ Icc a b, 0 < s x) (f : Lp ℝ 2 volume) :
+    (hs : ContDiff ℝ ∞ s) (hsp : ∀ x ∈ Icc a b, 0 < s x) (f : Lp ℝ 2 (volume : Measure ℝ)) :
     (innerLiouvilleDriftMultiplier s a b hs hsp f : ℝ → ℝ) =ᵐ[volume]
       (fun x => innerLiouvilleModelVelocity s a b x * f x) := by
   unfold innerLiouvilleDriftMultiplier
@@ -53,17 +53,17 @@ variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}
 
 /-- The normalized physical gradient of the same model field. -/
 def innerLiouvilleGradientLift :
-    (Lp ℝ 2 volume × Lp ℝ 2 volume) →L[ℝ] Lp ℝ 2 (radialHilbertMeasure D) :=
+    (Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ)) →L[ℝ] Lp ℝ 2 (radialHilbertMeasure D) :=
   (innerL2ZeroExtension (radialHilbertMeasure D) (Ioo (R a) (R b))).comp
     (((innerLiouvilleIntervalEquiv D hab hlam hR hs hp hcore hw).symm :
       Lp ℝ 2 (volume.restrict (Ioo a b)) →L[ℝ]
         Lp ℝ 2 ((radialHilbertMeasure D).restrict (Ioo (R a) (R b)))).comp
       ((LpToLpRestrictCLM ℝ ℝ ℝ volume 2 (Ioo a b)).comp
-        (ContinuousLinearMap.snd ℝ (Lp ℝ 2 volume) (Lp ℝ 2 volume) -
+        (ContinuousLinearMap.snd ℝ (Lp ℝ 2 (volume : Measure ℝ)) (Lp ℝ 2 (volume : Measure ℝ)) -
           (innerLiouvilleDriftMultiplier s a b hs (fun x hx => (hp x hx).2.2)).comp
-            (ContinuousLinearMap.fst ℝ (Lp ℝ 2 volume) (Lp ℝ 2 volume)))))
+            (ContinuousLinearMap.fst ℝ (Lp ℝ 2 (volume : Measure ℝ)) (Lp ℝ 2 (volume : Measure ℝ))))))
 
-theorem innerLiouvilleGradientLift_apply (f d : Lp ℝ 2 volume) :
+theorem innerLiouvilleGradientLift_apply (f d : Lp ℝ 2 (volume : Measure ℝ)) :
     innerLiouvilleGradientLift D hab hlam hR hs hp hcore hw (f, d) =
       innerL2ZeroExtension (radialHilbertMeasure D) (Ioo (R a) (R b))
         ((innerLiouvilleIntervalEquiv D hab hlam hR hs hp hcore hw).symm
@@ -74,7 +74,7 @@ theorem innerLiouvilleGradientLift_apply (f d : Lp ℝ 2 volume) :
     ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
     LinearIsometryEquiv.coe_coe'']
 
-theorem innerLiouvilleGradientLift_pullback_ae (f d : Lp ℝ 2 volume) :
+theorem innerLiouvilleGradientLift_pullback_ae (f d : Lp ℝ 2 (volume : Measure ℝ)) :
     (fun x => innerLiouvilleGradientLift D hab hlam hR hs hp hcore hw (f, d) (R x)) =ᵐ[
       volume.restrict (Ioo a b)]
       (fun x => (d x - (deriv s x / s x) * f x) /
@@ -104,7 +104,7 @@ theorem innerLiouvilleGradientLift_pullback_ae (f d : Lp ℝ 2 volume) :
   rw [hxt, indicator_of_mem hRx, he', hg', hsub', hM',
     innerLiouvilleModelVelocity, indicator_of_mem hx]
 
-theorem innerLiouvilleGradientLift_support_ae (f d : Lp ℝ 2 volume) :
+theorem innerLiouvilleGradientLift_support_ae (f d : Lp ℝ 2 (volume : Measure ℝ)) :
     ∀ᵐ r ∂radialHilbertMeasure D, r ∉ Ioo (R a) (R b) →
       innerLiouvilleGradientLift D hab hlam hR hs hp hcore hw (f, d) r = 0 := by
   rw [innerLiouvilleGradientLift_apply]
@@ -120,12 +120,12 @@ variable (U : ℝ) (hU : 0 ≤ U)
   (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U)
 
 def innerLiouvilleH1Lift :
-    (Lp ℝ 2 volume × Lp ℝ 2 volume) →L[ℝ] InnerRadialH1Pair D :=
+    (Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ)) →L[ℝ] InnerRadialH1Pair D :=
   ((innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv).comp
-    (ContinuousLinearMap.fst ℝ (Lp ℝ 2 volume) (Lp ℝ 2 volume))).prod
+    (ContinuousLinearMap.fst ℝ (Lp ℝ 2 (volume : Measure ℝ)) (Lp ℝ 2 (volume : Measure ℝ)))).prod
       (innerLiouvilleGradientLift D hab hlam hR hs hp hcore hw)
 
-theorem innerLiouvilleH1Lift_apply (f d : Lp ℝ 2 volume) :
+theorem innerLiouvilleH1Lift_apply (f d : Lp ℝ 2 (volume : Measure ℝ)) :
     innerLiouvilleH1Lift D hab hlam hR hs hp hcore hw U hU hv (f, d) =
       (innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f,
         innerLiouvilleGradientLift D hab hlam hR hs hp hcore hw (f, d)) := by
@@ -137,13 +137,13 @@ theorem innerLiouvilleH1Lift_apply (f d : Lp ℝ 2 volume) :
 the model domain, while the actual physical H1 map needs its first two
 coordinates only. -/
 def innerLiouvilleEnergyLift :
-    (Lp ℝ 2 volume × Lp ℝ 2 volume × Lp ℝ 2 volume) →L[ℝ] InnerRadialH1Pair D :=
+    (Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ)) →L[ℝ] InnerRadialH1Pair D :=
   (innerLiouvilleH1Lift D hab hlam hR hs hp hcore hw U hU hv).comp
-    ((ContinuousLinearMap.fst ℝ (Lp ℝ 2 volume) (Lp ℝ 2 volume × Lp ℝ 2 volume)).prod
-      ((ContinuousLinearMap.fst ℝ (Lp ℝ 2 volume) (Lp ℝ 2 volume)).comp
-        (ContinuousLinearMap.snd ℝ (Lp ℝ 2 volume) (Lp ℝ 2 volume × Lp ℝ 2 volume))))
+    ((ContinuousLinearMap.fst ℝ (Lp ℝ 2 (volume : Measure ℝ)) (Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ))).prod
+      ((ContinuousLinearMap.fst ℝ (Lp ℝ 2 (volume : Measure ℝ)) (Lp ℝ 2 (volume : Measure ℝ))).comp
+        (ContinuousLinearMap.snd ℝ (Lp ℝ 2 (volume : Measure ℝ)) (Lp ℝ 2 (volume : Measure ℝ) × Lp ℝ 2 (volume : Measure ℝ)))))
 
-theorem innerLiouvilleEnergyLift_apply (f d q : Lp ℝ 2 volume) :
+theorem innerLiouvilleEnergyLift_apply (f d q : Lp ℝ 2 (volume : Measure ℝ)) :
     innerLiouvilleEnergyLift D hab hlam hR hs hp hcore hw U hU hv (f, d, q) =
       (innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f,
         innerLiouvilleGradientLift D hab hlam hR hs hp hcore hw (f, d)) := by

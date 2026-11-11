@@ -50,7 +50,7 @@ variable (U : ℝ) (hU : 0 ≤ U)
   (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U)
 
 theorem innerLiouvilleFieldLift_eq_indicator
-    (f : Lp ℝ 2 volume) (p u : ℝ → ℝ)
+    (f : Lp ℝ 2 (volume : Measure ℝ)) (p u : ℝ → ℝ)
     (hfp : (f : ℝ → ℝ) =ᵐ[volume.restrict (Ioo a b)] p)
     (huc : ContinuousOn u (Icc (R a) (R b)))
     (hup : ∀ x ∈ Icc a b, u (R x) = p x / (Real.sqrt lam * s x)) :
@@ -73,12 +73,12 @@ theorem innerLiouvilleFieldLift_eq_indicator
   · rw [indicator_of_notMem hr]
     exact ho hr
 
-def innerLiouvilleUnitPoissonPair (t : ℝ) (P : Lp ℝ 2 volume) (scalar : ℝ) :
+def innerLiouvilleUnitPoissonPair (t : ℝ) (P : Lp ℝ 2 (volume : Measure ℝ)) (scalar : ℝ) :
     Lp ℝ 2 (radialHilbertMeasure D) × ℝ :=
   (Real.sqrt lam * s t) •
     innerLiouvillePairLift D hab hlam hR hs hp hcore hw U hU hv (P, scalar)
 
-theorem innerLiouvilleUnitPoissonPair_apply (t : ℝ) (P : Lp ℝ 2 volume) (scalar : ℝ) :
+theorem innerLiouvilleUnitPoissonPair_apply (t : ℝ) (P : Lp ℝ 2 (volume : Measure ℝ)) (scalar : ℝ) :
     innerLiouvilleUnitPoissonPair D hab hlam hR hs hp hcore hw U hU hv t P scalar =
       ((Real.sqrt lam * s t) •
         innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv P,
@@ -93,7 +93,7 @@ theorem innerLiouvilleUnitPoissonPair_apply (t : ℝ) (P : Lp ℝ 2 volume) (sca
 endpoints. Thus a model unit trace becomes exactly the same radial
 unit trace, while the scalar is scaled by sqrt(lam)*s at that cut. -/
 theorem exists_innerLiouvilleUnitPoissonRepresentative
-    (t : ℝ) (ht : t ∈ Icc a b) (P : Lp ℝ 2 volume) (scalar : ℝ) (p : ℝ → ℝ)
+    (t : ℝ) (ht : t ∈ Icc a b) (P : Lp ℝ 2 (volume : Measure ℝ)) (scalar : ℝ) (p : ℝ → ℝ)
     (hpp : ∀ x ∈ Icc a b, ContDiffAt ℝ ∞ p x)
     (hfp : (P : ℝ → ℝ) =ᵐ[volume.restrict (Ioo a b)] p) :
     ∃ u : ℝ → ℝ,

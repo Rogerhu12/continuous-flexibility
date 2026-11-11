@@ -44,21 +44,21 @@ theorem innerLiouvilleModelVelocity_bound {R : ℝ → ℝ} {a b U : ℝ}
 def innerLiouvilleVelocityMultiplier (R : ℝ → ℝ) (a b : ℝ)
     (hR : ContDiff ℝ ∞ R) (U : ℝ) (hU : 0 ≤ U)
     (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U) :
-    Lp ℝ 2 volume →L[ℝ] Lp ℝ 2 volume :=
+    Lp ℝ 2 (volume : Measure ℝ) →L[ℝ] Lp ℝ 2 (volume : Measure ℝ) :=
   innerWeightMultiplier volume (innerLiouvilleModelVelocity R a b)
     (innerLiouvilleModelVelocity_measurable hR a b) U
     (innerLiouvilleModelVelocity_bound hU hv)
 
 theorem innerLiouvilleVelocityMultiplier_ae (R : ℝ → ℝ) (a b : ℝ)
     (hR : ContDiff ℝ ∞ R) (U : ℝ) (hU : 0 ≤ U)
-    (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U) (f : Lp ℝ 2 volume) :
+    (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U) (f : Lp ℝ 2 (volume : Measure ℝ)) :
     (innerLiouvilleVelocityMultiplier R a b hR U hU hv f : ℝ → ℝ) =ᵐ[volume]
       (fun x => innerLiouvilleModelVelocity R a b x * f x) :=
   innerWeightMultiplier_ae volume _ _ U _ f
 
 theorem innerLiouvilleVelocityMultiplier_norm_apply_le (R : ℝ → ℝ) (a b : ℝ)
     (hR : ContDiff ℝ ∞ R) (U : ℝ) (hU : 0 ≤ U)
-    (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U) (f : Lp ℝ 2 volume) :
+    (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U) (f : Lp ℝ 2 (volume : Measure ℝ)) :
     ‖innerLiouvilleVelocityMultiplier R a b hR U hU hv f‖ ≤ U * ‖f‖ :=
   innerWeightMultiplier_norm_apply_le volume _ _ U _ f
 
@@ -83,7 +83,7 @@ variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}
 /-- The model field is normalized by sqrt(lam); its physical lift is
 f/(sqrt(lam)*s) on the actual retained radial cell and zero off it. -/
 def innerLiouvilleFieldLift :
-    Lp ℝ 2 volume →L[ℝ] Lp ℝ 2 (radialHilbertMeasure D) :=
+    Lp ℝ 2 (volume : Measure ℝ) →L[ℝ] Lp ℝ 2 (radialHilbertMeasure D) :=
   Real.sqrt 12 •
     (innerL2ZeroExtension (radialHilbertMeasure D) (Ioo (R a) (R b))).comp
       (((innerLiouvilleIntervalEquiv D hab hlam hR hs hp hcore hw).symm :
@@ -92,7 +92,7 @@ def innerLiouvilleFieldLift :
         ((LpToLpRestrictCLM ℝ ℝ ℝ volume 2 (Ioo a b)).comp
           (innerLiouvilleVelocityMultiplier R a b hR U hU hv)))
 
-theorem innerLiouvilleFieldLift_apply (f : Lp ℝ 2 volume) :
+theorem innerLiouvilleFieldLift_apply (f : Lp ℝ 2 (volume : Measure ℝ)) :
     innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f =
       Real.sqrt 12 • innerL2ZeroExtension (radialHilbertMeasure D) (Ioo (R a) (R b))
         ((innerLiouvilleIntervalEquiv D hab hlam hR hs hp hcore hw).symm
@@ -102,7 +102,7 @@ theorem innerLiouvilleFieldLift_apply (f : Lp ℝ 2 volume) :
   simp only [ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
     LinearIsometryEquiv.coe_coe'']
 
-theorem innerLiouvilleFieldLift_norm_apply_le (f : Lp ℝ 2 volume) :
+theorem innerLiouvilleFieldLift_norm_apply_le (f : Lp ℝ 2 (volume : Measure ℝ)) :
     ‖innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f‖ ≤
       (Real.sqrt 12 * U) * ‖f‖ := by
   rw [innerLiouvilleFieldLift_apply, norm_smul, Real.norm_eq_abs,
@@ -126,7 +126,7 @@ theorem norm_innerLiouvilleFieldLift_le :
 
 /-- Source conversion is the adjoint of the actual normalized field lift. -/
 def innerLiouvilleSource :
-    Lp ℝ 2 (radialHilbertMeasure D) →L[ℝ] Lp ℝ 2 volume :=
+    Lp ℝ 2 (radialHilbertMeasure D) →L[ℝ] Lp ℝ 2 (volume : Measure ℝ) :=
   (innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv).adjoint
 
 theorem norm_innerLiouvilleSource_le :
@@ -136,23 +136,23 @@ theorem norm_innerLiouvilleSource_le :
   exact norm_innerLiouvilleFieldLift_le D hab hlam hR hs hp hcore hw U hU hv
 
 theorem innerLiouvilleSource_inner
-    (F : Lp ℝ 2 (radialHilbertMeasure D)) (f : Lp ℝ 2 volume) :
+    (F : Lp ℝ 2 (radialHilbertMeasure D)) (f : Lp ℝ 2 (volume : Measure ℝ)) :
     ⟪innerLiouvilleSource D hab hlam hR hs hp hcore hw U hU hv F, f⟫_ℝ =
       ⟪F, innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f⟫_ℝ :=
   ContinuousLinearMap.adjoint_inner_left _ _ _
 
 /-- The single central scalar is carried without rescaling. -/
 def innerLiouvillePairLift :
-    (Lp ℝ 2 volume × ℝ) →L[ℝ] (Lp ℝ 2 (radialHilbertMeasure D) × ℝ) :=
+    (Lp ℝ 2 (volume : Measure ℝ) × ℝ) →L[ℝ] (Lp ℝ 2 (radialHilbertMeasure D) × ℝ) :=
   (innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv).prodMap
     (ContinuousLinearMap.id ℝ ℝ)
 
 def innerLiouvillePairSource :
-    (Lp ℝ 2 (radialHilbertMeasure D) × ℝ) →L[ℝ] (Lp ℝ 2 volume × ℝ) :=
+    (Lp ℝ 2 (radialHilbertMeasure D) × ℝ) →L[ℝ] (Lp ℝ 2 (volume : Measure ℝ) × ℝ) :=
   (innerLiouvilleSource D hab hlam hR hs hp hcore hw U hU hv).prodMap
     (ContinuousLinearMap.id ℝ ℝ)
 
-theorem innerLiouvillePairLift_apply (f : Lp ℝ 2 volume × ℝ) :
+theorem innerLiouvillePairLift_apply (f : Lp ℝ 2 (volume : Measure ℝ) × ℝ) :
     innerLiouvillePairLift D hab hlam hR hs hp hcore hw U hU hv f =
       (innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f.1, f.2) := by
   unfold innerLiouvillePairLift
@@ -201,14 +201,14 @@ theorem norm_innerLiouvillePairSource_le :
 /-- The same model inverse is transported on both sides; there is only
 one scalar coordinate, including for the central bordered block. -/
 def innerLiouvillePhysicalDirichlet
-    (G : (Lp ℝ 2 volume × ℝ) →L[ℝ] (Lp ℝ 2 volume × ℝ)) :
+    (G : (Lp ℝ 2 (volume : Measure ℝ) × ℝ) →L[ℝ] (Lp ℝ 2 (volume : Measure ℝ) × ℝ)) :
     (Lp ℝ 2 (radialHilbertMeasure D) × ℝ) →L[ℝ]
       (Lp ℝ 2 (radialHilbertMeasure D) × ℝ) :=
   (innerLiouvillePairLift D hab hlam hR hs hp hcore hw U hU hv).comp
     (G.comp (innerLiouvillePairSource D hab hlam hR hs hp hcore hw U hU hv))
 
 theorem innerLiouvillePhysicalDirichlet_apply
-    (G : (Lp ℝ 2 volume × ℝ) →L[ℝ] (Lp ℝ 2 volume × ℝ))
+    (G : (Lp ℝ 2 (volume : Measure ℝ) × ℝ) →L[ℝ] (Lp ℝ 2 (volume : Measure ℝ) × ℝ))
     (F : Lp ℝ 2 (radialHilbertMeasure D) × ℝ) :
     innerLiouvillePhysicalDirichlet D hab hlam hR hs hp hcore hw U hU hv G F =
       (innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv
@@ -219,7 +219,7 @@ theorem innerLiouvillePhysicalDirichlet_apply
     innerLiouvillePairSource_apply, innerLiouvillePairLift_apply]
 
 theorem norm_innerLiouvillePhysicalDirichlet_le
-    (G : (Lp ℝ 2 volume × ℝ) →L[ℝ] (Lp ℝ 2 volume × ℝ)) :
+    (G : (Lp ℝ 2 (volume : Measure ℝ) × ℝ) →L[ℝ] (Lp ℝ 2 (volume : Measure ℝ) × ℝ)) :
     ‖innerLiouvillePhysicalDirichlet D hab hlam hR hs hp hcore hw U hU hv G‖ ≤
       (max (Real.sqrt 12 * U) 1) ^ 2 * ‖G‖ := by
   let C := max (Real.sqrt 12 * U) 1

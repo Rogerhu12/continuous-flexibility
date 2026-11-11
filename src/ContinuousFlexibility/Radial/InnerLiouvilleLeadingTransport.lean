@@ -25,7 +25,7 @@ variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}
   (U : ℝ) (hU : 0 ≤ U)
   (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U)
 
-theorem innerLiouvilleFieldLift_norm_le_velocity (f : Lp ℝ 2 volume) :
+theorem innerLiouvilleFieldLift_norm_le_velocity (f : Lp ℝ 2 (volume : Measure ℝ)) :
     ‖innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f‖ ≤
       Real.sqrt 12 * ‖innerLiouvilleVelocityMultiplier R a b hR U hU hv f‖ := by
   rw [innerLiouvilleFieldLift_apply, norm_smul, Real.norm_eq_abs,
@@ -35,7 +35,7 @@ theorem innerLiouvilleFieldLift_norm_le_velocity (f : Lp ℝ 2 volume) :
     (innerL2Restriction_norm_apply_le volume (Ioo a b) _)
     (Real.sqrt_nonneg 12)
 
-theorem innerLiouvilleFieldLift_norm_le_on_support (f : Lp ℝ 2 volume)
+theorem innerLiouvilleFieldLift_norm_le_on_support (f : Lp ℝ 2 (volume : Measure ℝ))
     {Ucap : ℝ} (hcap : 0 ≤ Ucap)
     (hf : ∀ᵐ x ∂volume, x ∈ Ioo a b → f x ≠ 0 → |deriv R x / R x| ≤ Ucap) :
     ‖innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f‖ ≤
@@ -61,7 +61,7 @@ theorem innerLiouvilleFieldLift_norm_le_on_support (f : Lp ℝ 2 volume)
 
 /-- A genuine cutoff support and a geometric velocity estimate imply
 the local leading estimate for the same field lift. -/
-theorem innerLiouvilleFieldLift_norm_le_of_buffer (f : Lp ℝ 2 volume)
+theorem innerLiouvilleFieldLift_norm_le_of_buffer (f : Lp ℝ 2 (volume : Measure ℝ))
     (buffer : Set ℝ) {Ucap : ℝ} (hcap : 0 ≤ Ucap)
     (hsupport : ∀ᵐ x ∂volume, f x ≠ 0 → x ∈ buffer)
     (hbuffer : ∀ x ∈ buffer, |deriv R x / R x| ≤ Ucap) :

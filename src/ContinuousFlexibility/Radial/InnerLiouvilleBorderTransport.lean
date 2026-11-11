@@ -47,14 +47,14 @@ theorem exists_innerLiouvilleInverseVelocity_bound {R : ℝ → ℝ} {a b : ℝ}
 
 def innerLiouvilleInverseVelocityMultiplier (R : ℝ → ℝ) (a b : ℝ)
     (hR : ContDiff ℝ ∞ R) (hv : ∀ x ∈ Icc a b, 0 < deriv R x) :
-    Lp ℝ 2 volume →L[ℝ] Lp ℝ 2 volume :=
+    Lp ℝ 2 (volume : Measure ℝ) →L[ℝ] Lp ℝ 2 (volume : Measure ℝ) :=
   innerWeightMultiplier volume (innerLiouvilleInverseVelocity R a b)
     (innerLiouvilleInverseVelocity_measurable hR a b)
     (Classical.choose (exists_innerLiouvilleInverseVelocity_bound hR hv))
     (Classical.choose_spec (exists_innerLiouvilleInverseVelocity_bound hR hv)).2
 
 theorem innerLiouvilleInverseVelocityMultiplier_ae (R : ℝ → ℝ) (a b : ℝ)
-    (hR : ContDiff ℝ ∞ R) (hv : ∀ x ∈ Icc a b, 0 < deriv R x) (f : Lp ℝ 2 volume) :
+    (hR : ContDiff ℝ ∞ R) (hv : ∀ x ∈ Icc a b, 0 < deriv R x) (f : Lp ℝ 2 (volume : Measure ℝ)) :
     (innerLiouvilleInverseVelocityMultiplier R a b hR hv f : ℝ → ℝ) =ᵐ[volume]
       (fun x => innerLiouvilleInverseVelocity R a b x * f x) := by
   unfold innerLiouvilleInverseVelocityMultiplier
@@ -69,7 +69,7 @@ variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}
 
 /-- The inverse-adjoint lift of the actual model border. -/
 def innerLiouvilleColumnLift :
-    Lp ℝ 2 volume →L[ℝ] Lp ℝ 2 (radialHilbertMeasure D) :=
+    Lp ℝ 2 (volume : Measure ℝ) →L[ℝ] Lp ℝ 2 (radialHilbertMeasure D) :=
   (1 / Real.sqrt 12) •
     (innerL2ZeroExtension (radialHilbertMeasure D) (Ioo (R a) (R b))).comp
       (((innerLiouvilleIntervalEquiv D hab hlam hR hs hp hcore hw).symm :
@@ -78,7 +78,7 @@ def innerLiouvilleColumnLift :
         ((LpToLpRestrictCLM ℝ ℝ ℝ volume 2 (Ioo a b)).comp
           (innerLiouvilleInverseVelocityMultiplier R a b hR (fun x hx => (hp x hx).2.1))))
 
-theorem innerLiouvilleColumnLift_apply (g : Lp ℝ 2 volume) :
+theorem innerLiouvilleColumnLift_apply (g : Lp ℝ 2 (volume : Measure ℝ)) :
     innerLiouvilleColumnLift D hab hlam hR hs hp hcore hw g =
       (1 / Real.sqrt 12) •
         innerL2ZeroExtension (radialHilbertMeasure D) (Ioo (R a) (R b))
@@ -90,7 +90,7 @@ theorem innerLiouvilleColumnLift_apply (g : Lp ℝ 2 volume) :
   simp only [ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
     LinearIsometryEquiv.coe_coe'']
 
-theorem innerLiouvilleColumnLift_pullback_ae (g : Lp ℝ 2 volume) :
+theorem innerLiouvilleColumnLift_pullback_ae (g : Lp ℝ 2 (volume : Measure ℝ)) :
     (fun x => innerLiouvilleColumnLift D hab hlam hR hs hp hcore hw g (R x)) =ᵐ[
       volume.restrict (Ioo a b)]
       (fun x => g x / (12 * Real.sqrt lam * s x * (deriv R x / R x) ^ 2)) := by
@@ -134,7 +134,7 @@ theorem innerLiouvilleColumnLift_pullback_ae (g : Lp ℝ 2 volume) :
 variable (U : ℝ) (hU : 0 ≤ U)
   (hv : ∀ x ∈ Icc a b, |deriv R x / R x| ≤ U)
 
-theorem innerLiouvilleSource_columnLift (g : Lp ℝ 2 volume) :
+theorem innerLiouvilleSource_columnLift (g : Lp ℝ 2 (volume : Measure ℝ)) :
     innerLiouvilleSource D hab hlam hR hs hp hcore hw U hU hv
       (innerLiouvilleColumnLift D hab hlam hR hs hp hcore hw g) =
       innerL2ZeroExtension volume (Ioo a b) (LpToLpRestrictCLM ℝ ℝ ℝ volume 2 (Ioo a b) g) := by
@@ -153,7 +153,7 @@ theorem innerLiouvilleSource_columnLift (g : Lp ℝ 2 volume) :
     field_simp [(Real.sqrt_pos.mpr hlam).ne', hp'.1.ne', hp'.2.1.ne', hp'.2.2.ne']
   · rw [indicator_of_notMem hi, indicator_of_notMem hi]
 
-theorem innerLiouvilleSource_columnLift_of_support (g : Lp ℝ 2 volume)
+theorem innerLiouvilleSource_columnLift_of_support (g : Lp ℝ 2 (volume : Measure ℝ))
     (hg : (g : ℝ → ℝ) =ᵐ[volume.restrict ((Ioo a b)ᶜ)] (fun _ => 0)) :
     innerLiouvilleSource D hab hlam hR hs hp hcore hw U hU hv
       (innerLiouvilleColumnLift D hab hlam hR hs hp hcore hw g) = g := by
@@ -169,7 +169,7 @@ theorem innerLiouvilleSource_columnLift_of_support (g : Lp ℝ 2 volume)
 
 /-- The single physical scalar row equals the original model scalar
 row, for every model vector, including the true Poisson columns. -/
-theorem innerLiouvilleColumnLift_field_pairing (g f : Lp ℝ 2 volume)
+theorem innerLiouvilleColumnLift_field_pairing (g f : Lp ℝ 2 (volume : Measure ℝ))
     (hg : (g : ℝ → ℝ) =ᵐ[volume.restrict ((Ioo a b)ᶜ)] (fun _ => 0)) :
     ⟪innerLiouvilleColumnLift D hab hlam hR hs hp hcore hw g,
       innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f⟫_ℝ = ⟪g, f⟫_ℝ := by

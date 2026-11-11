@@ -78,7 +78,7 @@ theorem mem_innerRadialBrokenBorder (bordered : Bool) (central : Fin (n + 1))
       if bordered then ⟪column, (x.1.1 central).1⟫_ℝ = rowSource x.2
       else x.1.2.2 = 0 ∧ rowSource x.2 = 0 := by
   cases bordered <;>
-    simp only [innerRadialBrokenBorder, Bool.false_eq_true, Bool.true_eq_true,
+    simp only [innerRadialBrokenBorder, Bool.false_eq_true, eq_self_iff_true,
       if_false, if_true, Submodule.mem_inf, LinearMap.mem_ker,
       innerRadialBrokenRow, innerRadialBrokenScalar, innerRadialBrokenSource,
       LinearMap.comp_apply, LinearMap.snd_apply, sub_eq_zero]

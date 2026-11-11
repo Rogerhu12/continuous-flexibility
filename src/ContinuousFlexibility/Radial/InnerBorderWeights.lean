@@ -40,19 +40,26 @@ def innerBorderFieldMap (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) :
 
 theorem innerBorderFieldMap_apply (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ)
     (F : InnerBorderL2 μ) :
-    innerBorderFieldMap μ A F = WithLp.toLp 2 (A F.fst, F.snd) := rfl
+    innerBorderFieldMap μ A F = WithLp.toLp 2 (A F.fst, F.snd) := by
+  simp only [innerBorderFieldMap, ContinuousLinearMap.comp_apply,
+    ContinuousLinearEquiv.coe_coe, innerBorderMaxEquiv_apply,
+    innerBorderMaxEquiv_symm_apply, ContinuousLinearMap.coe_prodMap',
+    Prod.map_apply', WithLp.ofLp_fst, WithLp.ofLp_snd, ContinuousLinearMap.id_apply]
 
 theorem innerBorderFieldMap_fst (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) (F : InnerBorderL2 μ) :
-    (innerBorderFieldMap μ A F).fst = A F.fst := rfl
+    (innerBorderFieldMap μ A F).fst = A F.fst := by
+  rw [innerBorderFieldMap_apply, WithLp.toLp_fst]
 
 theorem innerBorderFieldMap_snd (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) (F : InnerBorderL2 μ) :
-    (innerBorderFieldMap μ A F).snd = F.snd := rfl
+    (innerBorderFieldMap μ A F).snd = F.snd := by
+  rw [innerBorderFieldMap_apply, WithLp.toLp_snd]
 
 theorem innerBorderFieldMap_comp (A B : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ) :
     innerBorderFieldMap μ (A ∘L B) = innerBorderFieldMap μ A ∘L innerBorderFieldMap μ B := by
   apply ContinuousLinearMap.ext
   intro F
-  rfl
+  simp only [innerBorderFieldMap_apply, ContinuousLinearMap.comp_apply,
+    WithLp.toLp_fst, WithLp.toLp_snd]
 
 theorem innerBorderFieldMap_selfAdjoint (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ)
     (hA : IsSelfAdjoint A) : IsSelfAdjoint (innerBorderFieldMap μ A) := by
