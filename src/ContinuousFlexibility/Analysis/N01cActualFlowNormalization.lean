@@ -30,6 +30,14 @@ private theorem n01c_normalization_at_compact_preimage
   obtain ⟨t, ht, htr⟩ := hpreimage
   exact close t ht htr
 
+private theorem n01c_normalization_unit_value_transport
+    {value actual material high low high' low' : ℝ} {degree : ℕ}
+    (hvalue : value = actual) (hhigh : high = high') (hlow : low = low')
+    (hbound : |value| ≤ material * high * low ^ degree) :
+    ‖actual‖ ≤ material * high' * low' ^ degree := by
+  rw [hvalue, hhigh, hlow] at hbound
+  simpa only [Real.norm_eq_abs] using hbound
+
 theorem n01_ordinaryFlowAngularOrderBound_of_unitPolynomial
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss normLoss n degree : ℕ} {ε : ℝ}
@@ -99,11 +107,15 @@ theorem n01_ordinaryFlowAngularOrderBound_of_unitPolynomial
             ∑ i, p offset (w i)) ^ degree) := by
       intro w hw
       let u := ordinaryFlowVariationInputOfDirections m J x hx w (fun i => (hw i).le)
-      have hh := hb u t ht θ
-      rw [ordinaryFlowVariationInputOfDirections_value hS hT hA hB hpos
-        m J x hx w (fun i => (hw i).le) b θ t r hr htr] at hh
-      simpa only [ordinaryFlowVariationInputOfDirections_aggregate, Real.norm_eq_abs]
-        using hh
+      exact n01c_normalization_unit_value_transport
+        (actual := A w) (material := M) (degree := degree)
+        (ordinaryFlowVariationInputOfDirections_value hS hT hA hB hpos
+          m J x hx w (fun i => (hw i).le) b θ t r hr htr)
+        (ordinaryFlowVariationInputOfDirections_aggregate
+          m J x hx w (fun i => (hw i).le) (b + offset))
+        (ordinaryFlowVariationInputOfDirections_aggregate
+          m J x hx w (fun i => (hw i).le) offset)
+        (hb u t ht θ)
     have hn := hnormalize (x - (C.referenceState, 0))
       (jointStateGrading_displacement_lt_one hε2 hx).le A M hM hunit v
     let high : ℕ := b + (degree + 1) * offset + normLoss

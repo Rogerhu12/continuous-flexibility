@@ -77,8 +77,11 @@ theorem n01_ordinaryFlowForcing_bounds
     (fun s i => i.1.aggregate_one_le s)
     (fun a b hab i => i.1.aggregate_mono hab)
     (fun s i choice j => circle_real_sobolevNorm_nonneg _ _)
-    (fun s i => ordinaryFlowCircleVariationData_forcingNorm_le hS hT hA hB hpos
-      i.1.component i.1.tower i.1.state i.1.mem i.1.plot n i.1.directions i.2 s)
+    (fun s i => by
+      simpa only [F, f, OrdinaryFlowVariationInput.data,
+        OrdinaryFlowVariationInput.factorNorm, Nat.cast_one] using
+        ordinaryFlowCircleVariationData_forcingNorm_le hS hT hA hB hpos
+          i.1.component i.1.tower i.1.state i.1.mem i.1.plot n i.1.directions i.2 s)
     hh hl
   refine n01c_transport_offset_bounds _ _ hf ?_
   intro o s B hBpos hb u t ht
