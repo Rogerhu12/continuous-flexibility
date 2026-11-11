@@ -95,7 +95,7 @@ theorem norm_circleFourierCoeff_le_angleL2 {g : ℝ → ℂ}
 actual smooth real function. -/
 theorem circle_iteratedDeriv_ofReal {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) (k : ℕ) :
     iteratedDeriv k (fun x => (f x : ℂ)) =
-      fun x => (iteratedDeriv k f x : ℂ) := by
+      fun x => Complex.ofReal (iteratedDeriv k f x) := by
   induction k with
   | zero => simp only [iteratedDeriv_zero]
   | succ k ih =>
@@ -125,12 +125,12 @@ theorem circleFourierCoeff_moment_le_angleL2 {f : ℝ → ℝ}
   have hpc : Function.Periodic (fun x => (f x : ℂ)) Real.pi :=
     fun x => congrArg Complex.ofReal (hp x)
   have hd : Continuous (iteratedDeriv k f) := hf.continuous_iteratedDeriv k (by simp)
-  have hdc : Continuous (fun x => (iteratedDeriv k f x : ℂ)) :=
+  have hdc : Continuous (fun x => Complex.ofReal (iteratedDeriv k f x)) :=
     Complex.continuous_ofReal.comp hd
-  have hdp : Function.Periodic (fun x => (iteratedDeriv k f x : ℂ)) Real.pi := by
+  have hdp : Function.Periodic (fun x => Complex.ofReal (iteratedDeriv k f x)) Real.pi := by
     rw [← circle_iteratedDeriv_ofReal hf k]
     exact circlePeriodic_iteratedDeriv hpc k
-  have hnorm : eLpNorm (fun x => (iteratedDeriv k f x : ℂ)) 2 angleMeasure =
+  have hnorm : eLpNorm (fun x => Complex.ofReal (iteratedDeriv k f x)) 2 angleMeasure =
       eLpNorm (iteratedDeriv k f) 2 angleMeasure :=
     eLpNorm_congr_norm_ae hdc.aestronglyMeasurable hd.aestronglyMeasurable
       (Eventually.of_forall fun x => Complex.norm_real _)
@@ -198,7 +198,8 @@ theorem tsum_circleCosineCoeff_moment_le_angleL2 {f : ℝ → ℝ}
       exact circleCosineCoeff_moment_le_angleL2 hf hp (s + 3) hj
   calc
     _ ≤ ∑' j : ℕ, B * (1 / (j : ℝ) ^ 2) :=
-      tsum_le_tsum hbound (summable_circleCosineCoeff_moment hf (circle_periodic_two_pi hp) (s + 1)) hmajor
+      Summable.tsum_le_tsum hbound
+        (summable_circleCosineCoeff_moment hf (circle_periodic_two_pi hp) (s + 1)) hmajor
     _ = _ := by
       rw [tsum_mul_left]
       dsimp [B, circleFourierMomentConstant]
@@ -209,10 +210,17 @@ theorem abs_iteratedDeriv_circleSineSeries_le {a : ℕ → ℝ}
     (ha : ∀ k : ℕ, Summable (fun j : ℕ => |a j| * (j : ℝ) ^ k)) (s : ℕ) (θ : ℝ) :
     |iteratedDeriv s (fun x : ℝ => ∑' j : ℕ, a j * Real.sin (j * x)) θ| ≤
       ∑' j : ℕ, |a j| * (j : ℝ) ^ s := by
+  have hterm : ∀ j : ℕ, ContDiff ℝ (⊤ : ℕ∞)
+      (fun x : ℝ => a j * Real.sin ((j : ℝ) * x)) := by
+    intro j
+    simpa only [Function.comp_def, Pi.mul_apply, id_eq] using
+      (contDiff_const.mul (Real.contDiff_sin.comp (contDiff_const.mul contDiff_id)) :
+        ContDiff ℝ (⊤ : ℕ∞) (fun x : ℝ => a j * (Real.sin ∘ (fun y : ℝ => (j : ℝ) * id y)) x))
   rw [← Real.norm_eq_abs, ← norm_iteratedFDeriv_eq_norm_iteratedDeriv]
   rw [iteratedFDeriv_tsum_apply (N := ⊤)
+    (f := fun (j : ℕ) (x : ℝ) => a j * Real.sin ((j : ℝ) * x)) (k := s)
     (v := fun k j => |a j| * (j : ℝ) ^ k)
-    (fun j => contDiff_const.mul (Real.contDiff_sin.comp (contDiff_const.mul contDiff_id)))
+    hterm
     (fun k _ => ha k)
     (fun k j x _ => circleSineTerm_iteratedFDeriv_bound (a j) j k x)
     (by simp) θ]
@@ -249,7 +257,7 @@ theorem tsum_circlePiCosineCoeff_moment_le_angleL2 {f : ℝ → ℝ}
       circleFourierMomentConstant *
         (eLpNorm (iteratedDeriv (s + 3) f) 2 angleMeasure).toReal := by
   apply le_trans _ (tsum_circleCosineCoeff_moment_le_angleL2 hf hp s)
-  apply tsum_le_tsum _ ((circlePiCosineCoeff_spec hf hp he hm).2.1 (s + 1))
+  apply Summable.tsum_le_tsum _ ((circlePiCosineCoeff_spec hf hp he hm).2.1 (s + 1))
     (summable_circleCosineCoeff_moment hf (circle_periodic_two_pi hp) (s + 1))
   intro j
   by_cases hj : Even j
@@ -274,7 +282,7 @@ theorem abs_iteratedDeriv_circleReturnSolution_le {f : ℝ → ℝ} {T γ : ℝ}
       |circlePiCosineCoeff f j / Real.sin (j * T)| * (j : ℝ) ^ s) ≤
       γ⁻¹ * ∑' j : ℕ, |circlePiCosineCoeff f j| * (j : ℝ) ^ (s + 1) := by
     rw [← tsum_mul_left]
-    exact tsum_le_tsum (circleReturn_divided_moment_le (circlePiCosineCoeff f) hγ hT s)
+    exact Summable.tsum_le_tsum (circleReturn_divided_moment_le (circlePiCosineCoeff f) hγ hT s)
       (ha s) ((hc (s + 1)).mul_left γ⁻¹)
   exact (abs_iteratedDeriv_circleSineSeries_le ha s θ).trans
     (hsum.trans (mul_le_mul_of_nonneg_left

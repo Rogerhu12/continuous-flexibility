@@ -42,8 +42,11 @@ theorem divergenceOperator_difference_same_radial
     funext q
     simp only [symmetricAngularFlux]
     ring
+  change (radialPartial (symmetricNormalFlux L.a L.b u) p +
+      angularPartial (symmetricAngularFlux L.b L.c u) p) -
+    (radialPartial (symmetricNormalFlux K.a K.b u) p +
+      angularPartial (symmetricAngularFlux K.b K.c u) p) = _
   rw [hrad, hang, radialPartial_sub hLr hKr, angularPartial_sub hLt hKt]
-  simp only [divergenceOperator, symmetricNormalFlux, symmetricAngularFlux]
   ring
 
 /-- Smooth coefficient and height germs supply the derivative

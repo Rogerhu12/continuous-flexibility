@@ -150,7 +150,7 @@ theorem tsum_circlePiCosineCoeff_moment_le_angleL2_all {f : ℝ → ℝ}
       circleFourierMomentConstant *
         (eLpNorm (iteratedDeriv (s + 3) f) 2 angleMeasure).toReal := by
   apply le_trans _ (tsum_circleCosineCoeff_moment_le_angleL2 hf hp s)
-  apply tsum_le_tsum _ (summable_circlePiCosineCoeff_moment hf hp (s + 1))
+  apply Summable.tsum_le_tsum _ (summable_circlePiCosineCoeff_moment hf hp (s + 1))
     (summable_circleCosineCoeff_moment hf (circle_periodic_two_pi_linear hp) (s + 1))
   intro j
   by_cases hj : Even j
@@ -171,7 +171,7 @@ theorem abs_iteratedDeriv_circleReturnSolution_le_all {f : ℝ → ℝ} {T γ : 
       |circlePiCosineCoeff f j / Real.sin (j * T)| * (j : ℝ) ^ s) ≤
       γ⁻¹ * ∑' j : ℕ, |circlePiCosineCoeff f j| * (j : ℝ) ^ (s + 1) := by
     rw [← tsum_mul_left]
-    exact tsum_le_tsum (circleReturn_divided_moment_le (circlePiCosineCoeff f) hγ hT s)
+    exact Summable.tsum_le_tsum (circleReturn_divided_moment_le (circlePiCosineCoeff f) hγ hT s)
       (ha s) ((hc (s + 1)).mul_left γ⁻¹)
   exact (abs_iteratedDeriv_circleSineSeries_le ha s θ).trans
     (hsum.trans (mul_le_mul_of_nonneg_left

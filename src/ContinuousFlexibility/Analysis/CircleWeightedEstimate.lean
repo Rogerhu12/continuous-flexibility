@@ -85,7 +85,7 @@ theorem circleEnergy_le_of_jet_bound
     _ = C * ∑ j : CircleJetIndex s, term (circleJetShiftIndex s d k j) :=
       (Finset.mul_sum _ _ _).symm
     _ ≤ C * ∑ j : CircleJetIndex (s + d + k), term j := by
-      apply mul_le_mul_of_nonneg_left _ (zero_le C)
+      apply mul_le_mul_of_nonneg_left _ zero_le
       calc
         _ = ∑ j ∈ Finset.univ.map (circleJetShiftIndex s d k), term j := by
           rw [Finset.sum_map]
@@ -136,5 +136,71 @@ theorem circleNorm_le_of_jet_bound
   have hs := Real.sqrt_le_sqrt hr
   rw [Real.sqrt_mul (sq_nonneg C), Real.sqrt_sq hC] at hs
   exact hs
+
+/-- A derivative estimate with a power of the actual sample weight gives
+the weighted jet estimate used above. All constants remain independent of
+the sample index. -/
+theorem circleWeightedJet_le_of_derivative_bound
+    {T : MaterialData} {γ : ℝ} {u v : ℕ → ℝ → ℝ}
+    {s d k m : ℕ} (j : CircleJetIndex s) {C : ℝ} (hC : 0 ≤ C)
+    (hM : 0 ≤ T.M (T.sample m)) (hH : 0 ≤ T.H (T.sample m))
+    (hb : eLpNorm (iteratedDeriv (j.val 0).val (v m)) 2 angleMeasure ≤
+      ENNReal.ofReal (C * T.M (T.sample m) ^ k) *
+        eLpNorm (iteratedDeriv ((j.val 0).val + d) (u m)) 2 angleMeasure) :
+    ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
+      T.H (T.sample m) ^ (-γ)) ^ 2) *
+      eLpNorm (iteratedDeriv (j.val 0).val (v m)) 2 angleMeasure ^ 2 ≤
+    ENNReal.ofReal (C ^ 2) *
+      (ENNReal.ofReal ((T.M (T.sample m) ^ ((j.val 1).val + k) *
+      T.H (T.sample m) ^ (-γ)) ^ 2) *
+      eLpNorm (iteratedDeriv ((j.val 0).val + d) (u m)) 2 angleMeasure ^ 2) := by
+  have hCM : 0 ≤ C * T.M (T.sample m) ^ k := mul_nonneg hC (pow_nonneg hM k)
+  have hcoeff :
+      ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
+        T.H (T.sample m) ^ (-γ)) ^ 2) *
+        ENNReal.ofReal (C * T.M (T.sample m) ^ k) ^ 2 =
+      ENNReal.ofReal (C ^ 2) *
+        ENNReal.ofReal ((T.M (T.sample m) ^ ((j.val 1).val + k) *
+        T.H (T.sample m) ^ (-γ)) ^ 2) := by
+    rw [← ENNReal.ofReal_pow hCM, ← ENNReal.ofReal_mul (sq_nonneg _),
+      ← ENNReal.ofReal_mul (sq_nonneg C)]
+    congr 1
+    rw [pow_add]
+    ring
+  calc
+    _ ≤ ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
+        T.H (T.sample m) ^ (-γ)) ^ 2) *
+        (ENNReal.ofReal (C * T.M (T.sample m) ^ k) *
+          eLpNorm (iteratedDeriv ((j.val 0).val + d) (u m)) 2 angleMeasure) ^ 2 :=
+      mul_le_mul_of_nonneg_left (pow_le_pow_left' hb 2) zero_le
+    _ = _ := by rw [mul_pow, ← mul_assoc, hcoeff, mul_assoc]
+
+/-- Uniform derivative estimates with fixed losses produce an actual
+weighted circle field, including finiteness of every complete norm sum. -/
+theorem circleMember_of_L2_derivative_bound
+    {T : MaterialData} {γ : ℝ} {u v : ℕ → ℝ → ℝ}
+    (hu : CircleMember T γ u) (d k : ℕ) {C : ℝ} (hC : 0 ≤ C)
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (hv : ∀ m, ContDiff ℝ ∞ (v m) ∧ Function.Periodic (v m) Real.pi)
+    (hb : ∀ m b, eLpNorm (iteratedDeriv b (v m)) 2 angleMeasure ≤
+      ENNReal.ofReal (C * T.M (T.sample m) ^ k) *
+        eLpNorm (iteratedDeriv (b + d) (u m)) 2 angleMeasure) :
+    CircleMember T γ v := by
+  apply circleMember_of_jet_bound hu d k hv
+  · exact fun m b => memLp_angleMeasure_iteratedDeriv_of_contDiff (hv m).1 b
+  · intro s
+    exact ⟨ENNReal.ofReal (C ^ 2), ENNReal.ofReal_lt_top,
+      fun m j => circleWeightedJet_le_of_derivative_bound j hC (hM m) (hH m) (hb m _)⟩
+
+theorem circleNorm_le_of_L2_derivative_bound
+    {T : MaterialData} {γ : ℝ} {u v : ℕ → ℝ → ℝ}
+    (hu : CircleMember T γ u) (s d k : ℕ) {C : ℝ} (hC : 0 ≤ C)
+    (hM : ∀ m, 0 ≤ T.M (T.sample m)) (hH : ∀ m, 0 ≤ T.H (T.sample m))
+    (hb : ∀ m b, eLpNorm (iteratedDeriv b (v m)) 2 angleMeasure ≤
+      ENNReal.ofReal (C * T.M (T.sample m) ^ k) *
+        eLpNorm (iteratedDeriv (b + d) (u m)) 2 angleMeasure) :
+    circleNorm T γ s v ≤ C * circleNorm T γ (s + d + k) u := by
+  apply circleNorm_le_of_jet_bound hu s d k hC
+  exact fun m j => circleWeightedJet_le_of_derivative_bound j hC (hM m) (hH m) (hb m _)
 
 end ContinuousFlexibility.Statements

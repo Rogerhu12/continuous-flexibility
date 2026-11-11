@@ -120,7 +120,7 @@ theorem circle_angleL2_return_deriv_le {f : ℝ → ℝ}
     _ ≤ ENNReal.ofReal |(2 : ℝ)⁻¹| *
         (eLpNorm (fun θ => iteratedDeriv s f (θ + t)) 2 angleMeasure +
           eLpNorm ((-1 : ℝ) ^ s • (fun θ => iteratedDeriv s f (t - θ))) 2 angleMeasure) :=
-      mul_le_mul_of_nonneg_left (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)) (zero_le _)
+      mul_le_mul_of_nonneg_left (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)) zero_le
     _ = _ := by
       rw [eLpNorm_const_smul, hsign, one_mul,
         circle_angleL2_shift hd hpd t, circle_angleL2_reflected_shift hd hpd t,
@@ -155,8 +155,8 @@ theorem circleMember_circleReturnShift
     simpa only [Nat.add_zero, one_mul] using
       mul_le_mul_of_nonneg_left (pow_le_pow_left'
         (circle_angleL2_return_deriv_le (hu.1 m).1 (hu.1 m).2 (travel m) (j.val 0).val) 2)
-        (zero_le (ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
-          T.H (T.sample m) ^ (-γ)) ^ 2)))
+        (show 0 ≤ ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
+          T.H (T.sample m) ^ (-γ)) ^ 2) from zero_le)
 
 theorem circleNorm_circleReturnShift_le
     {T : MaterialData} {γ : ℝ} {u : ℕ → ℝ → ℝ}
@@ -170,8 +170,8 @@ theorem circleNorm_circleReturnShift_le
   simpa only [one_pow, ENNReal.ofReal_one, one_mul] using
     mul_le_mul_of_nonneg_left (pow_le_pow_left'
       (circle_angleL2_return_deriv_le (hu.1 m).1 (hu.1 m).2 (travel m) (j.val 0).val) 2)
-      (zero_le (ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
-        T.H (T.sample m) ^ (-γ)) ^ 2)))
+      (show 0 ≤ ENNReal.ofReal ((T.M (T.sample m) ^ (j.val 1).val *
+        T.H (T.sample m) ^ (-γ)) ^ 2) from zero_le)
 
 end ContinuousFlexibility.Analysis
 

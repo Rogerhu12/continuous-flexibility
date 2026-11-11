@@ -195,8 +195,11 @@ theorem returnCorrectedMinusSpeed_on_flow
       deriv (C.minusFlow z m r)
         (returnInterpolation (χ m r) (returnCorrectionInitialMap S C z m) θ) * deriv (χ m) r *
           (returnCorrectionInitialMap S C z m θ - θ) := by
-  simp only [returnCorrectedMinusSpeed, returnCorrectedMinusFlow_apply,
-    Function.leftInverse_invFun hΦ, Function.leftInverse_invFun hJ]
+  have hΦinv := Function.leftInverse_invFun hΦ
+    (returnInterpolation (χ m r) (returnCorrectionInitialMap S C z m) θ)
+  have hJinv := Function.leftInverse_invFun hJ θ
+  simp only [returnCorrectedMinusSpeed, returnCorrectedMinusFlow_apply]
+  rw [hΦinv, hJinv]
 
 /-- The actual corrected flow solves the explicitly computed corrected
 velocity equation. Only joint differentiability of the old flow and

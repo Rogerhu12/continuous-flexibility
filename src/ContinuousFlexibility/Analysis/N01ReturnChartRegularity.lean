@@ -26,7 +26,10 @@ theorem stateLeftChart_contDiff {T : MaterialData}
     (hcircle : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ))) :
     ContDiff ℝ ∞ (stateLeftChart S z.1 m) := by
   have hdecode := ((hcircle.2.2.2.1 z.1.2.2.2).1 m).1
-  simpa only [stateLeftChart] using contDiff_id.add hdecode
+  apply contDiff_iff_contDiffAt.mpr
+  intro θ
+  exact (contDiff_id.add hdecode).contDiffAt.congr_of_eventuallyEq
+    (Filter.Eventually.of_forall fun t => by simp only [stateLeftChart, Pi.add_apply, id_eq])
 
 theorem N01Properties.minusFlow_differentiable {D : ReferenceData} {T : MaterialData}
     {base loss : ℕ} {ε r : ℝ} (hN01 : N01Properties D T S C base loss ε)
@@ -89,9 +92,13 @@ theorem N01Properties.returnResidualField_differentiable {D : ReferenceData} {T 
   have hF : Differentiable ℝ F :=
     N01Properties.transportedLeftChart_differentiable S C z m hN01 hz hsector
   have hEven : Differentiable ℝ (evenPart F) := by
-    simpa only [evenPart, Function.comp_def, Pi.add_apply] using
-      (hF.add (hF.comp differentiable_neg)).div_const (2 : ℝ)
+    intro θ
+    exact (((hF.add (hF.comp differentiable_neg)).div_const (2 : ℝ)) θ).congr_of_eventuallyEq
+      (Filter.Eventually.of_forall fun t => by
+        simp only [evenPart, Function.comp_def, Pi.add_apply])
   have hInv := N01Properties.rightChartInverse_differentiable S C z m hN01 hz hsector
-  simpa only [returnResidualField, F, Function.comp_def] using hEven.comp hInv
+  intro θ
+  exact ((hEven.comp hInv) θ).congr_of_eventuallyEq
+    (Filter.Eventually.of_forall fun t => by simp only [returnResidualField, F, Function.comp_def])
 
 end ContinuousFlexibility.Statements
