@@ -5,6 +5,7 @@ import ContinuousFlexibility.Radial.SeedPureTailConstruction
 import ContinuousFlexibility.Radial.SeedPureTailCanonical
 import ContinuousFlexibility.Radial.SeedGluedPairConstruction
 import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
+import ContinuousFlexibility.Radial.SeedReturnMargins
 import ContinuousFlexibility.Radial.OpenComponentTransport
 import ContinuousFlexibility.Radial.MorseRealizationBasic
 
@@ -25,15 +26,20 @@ open Real Set Filter
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
-theorem exists_seedControlledReference_of_gluedPair {S : SelectedTailData}
+theorem exists_seedControlledReference_with_property {S : SelectedTailData}
     (hS : IsSelectedTail S)
     (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
     (hentry : ∀ right, S.entry right S.chain.index ∈ radialCore (S.family S.sigma))
     (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q)
     (G : SeedGluedPair (S.family S.sigma)
       (S.entry false S.chain.index) (S.entry true S.chain.index)
-      (S.outgoing false 2) (S.outgoing true 2) K q) :
-    ∃ D : ReferenceData, D.w = G.profile ∧ D.phi = G.height ∧ IsAccumulatingProfile D ∧
+      (S.outgoing false 2) (S.outgoing true 2) K q)
+    (Q : ReferenceData → Prop)
+    (hchoice : ∃ D : ReferenceData,
+      D.a = G.radiusL * (S.family S.sigma).a ∧
+      D.b = G.radiusR * (S.family S.sigma).b ∧
+      D.w = G.profile ∧ D.phi = G.height ∧ IsAccumulatingProfile D ∧ Q D) :
+    ∃ D : ReferenceData, Q D ∧ D.w = G.profile ∧ D.phi = G.height ∧ IsAccumulatingProfile D ∧
       EqOn D.w (centralRadialProfile 1) (Ioo (exp K.left) (exp K.right)) ∧
       EqOn D.phi centralKernelHeight (Ioo (exp K.left) (exp K.right)) ∧
       (∀ r ∈ radialCore D, radialJacobi 4 D.w D.phi r = 0) ∧
@@ -52,10 +58,7 @@ theorem exists_seedControlledReference_of_gluedPair {S : SelectedTailData}
   have hc : c ∈ radialCore D₀ := hentry false
   have hd : d ∈ radialCore D₀ := hentry true
   have hAccum₀ : IsAccumulatingProfile D₀ := ⟨S.constants, hBounds⟩
-  obtain ⟨D, hDa, hDb, hDw, hDphi, hAccum⟩ :=
-    exists_accumulating_reference_of_two_tail_surgery hAccum₀ G.radiusL_pos
-      G.radius_order G.heightL_pos G.heightR_pos hc.1 hentries hd.2 G.geometry
-      (fun r hr => (G.left_tail r hr).1) (fun r hr => (G.right_tail r hr).1)
+  obtain ⟨D, hDa, hDb, hDw, hDphi, hAccum, hQ⟩ := hchoice
   have hGeo : RadialProfileGeometry D := (Classical.choose_spec hAccum).1
   have hRR : 0 < G.radiusR := G.radiusL_pos.trans_le G.radius_order
   let L := exp K.left
@@ -77,7 +80,7 @@ theorem exists_seedControlledReference_of_gluedPair {S : SelectedTailData}
     exact G.middle_germ r hr
   have hcentral (r : ℝ) (hr : r ∈ Ioo L H) : r ∈ Ioo L₀ H₀ :=
     ⟨hL₀L.trans hr.1, hr.2.trans hHH₀⟩
-  refine ⟨D, hDw, hDphi, hAccum, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨D, hQ, hDw, hDphi, hAccum, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro r hr
     exact (hmid r (hcentral r hr)).1.eq_of_nhds.trans (K.profile_retained hr)
   · intro r hr
@@ -207,6 +210,59 @@ theorem exists_seedControlledReference_of_gluedPair {S : SelectedTailData}
           · intro r hr
             rw [hDw]
             exact (G.right_tail r hr).1
+
+theorem exists_seedControlledReference_of_gluedPair {S : SelectedTailData}
+    (hS : IsSelectedTail S)
+    (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
+    (hentry : ∀ right, S.entry right S.chain.index ∈ radialCore (S.family S.sigma))
+    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q)
+    (G : SeedGluedPair (S.family S.sigma)
+      (S.entry false S.chain.index) (S.entry true S.chain.index)
+      (S.outgoing false 2) (S.outgoing true 2) K q) :
+    ∃ D : ReferenceData, D.w = G.profile ∧ D.phi = G.height ∧ IsAccumulatingProfile D ∧
+      EqOn D.w (centralRadialProfile 1) (Ioo (exp K.left) (exp K.right)) ∧
+      EqOn D.phi centralKernelHeight (Ioo (exp K.left) (exp K.right)) ∧
+      (∀ r ∈ radialCore D, radialJacobi 4 D.w D.phi r = 0) ∧
+      CentralPatch D (exp K.left) (exp K.right) ∧
+      ConnectedPositiveHeads D (exp K.left) (exp K.right) q ∧
+      ConnectedSelectedTails S D (exp K.left) (exp K.right) := by
+  have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
+  have hAccum₀ : IsAccumulatingProfile (S.family S.sigma) :=
+    ⟨S.constants, hreal.accumulating⟩
+  obtain ⟨D, ha, hb, hw, hphi, hD⟩ :=
+    exists_accumulating_reference_of_two_tail_surgery hAccum₀ G.radiusL_pos
+      G.radius_order G.heightL_pos G.heightR_pos (hentry false).1 hentries (hentry true).2
+      G.geometry (fun r hr => (G.left_tail r hr).1) (fun r hr => (G.right_tail r hr).1)
+  obtain ⟨E, _, hE⟩ := exists_seedControlledReference_with_property
+    hS hentries hentry K hq G (fun _ => True) ⟨D, ha, hb, hw, hphi, hD, trivial⟩
+  exact ⟨E, hE⟩
+
+theorem exists_seedControlledReference_with_construction {S : SelectedTailData}
+    (hS : IsSelectedTail S)
+    (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
+    (hentry : ∀ right, S.entry right S.chain.index ∈ radialCore (S.family S.sigma))
+    (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
+    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q)
+    (G : SeedGluedPair (S.family S.sigma)
+      (S.entry false S.chain.index) (S.entry true S.chain.index)
+      (S.outgoing false 2) (S.outgoing true 2) K q) :
+    ∃ D : ReferenceData, RadialConstructionGeometry D ∧ D.w = G.profile ∧ D.phi = G.height ∧ IsAccumulatingProfile D ∧
+      EqOn D.w (centralRadialProfile 1) (Ioo (exp K.left) (exp K.right)) ∧
+      EqOn D.phi centralKernelHeight (Ioo (exp K.left) (exp K.right)) ∧
+      (∀ r ∈ radialCore D, radialJacobi 4 D.w D.phi r = 0) ∧
+      CentralPatch D (exp K.left) (exp K.right) ∧
+      ConnectedPositiveHeads D (exp K.left) (exp K.right) q ∧
+      ConnectedSelectedTails S D (exp K.left) (exp K.right) := by
+  have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
+  have hseam (side : Bool) :
+      S.entry side S.chain.index = morseChainSeam S.chain side S.chain.index := by
+    simpa only [morseChainSeam] using
+      (hS.2.2.2.2.2 side S.chain.index 2 le_rfl (by decide) hband).2.2.2.2.2.1
+  exact exists_seedControlledReference_with_property hS hentries hentry K hq G
+    RadialConstructionGeometry
+    (G.exists_accumulating_reference_with_construction_geometry
+      hreal hS.2.2.1 hq (le_refl S.chain.index) (hseam false) (hseam true)
+      (hentry false) (hentry true) hentries)
 
 /-- The original controlled construction, retaining its exact interface.
 The assembly companion also accepts an already constructed, retained pair. -/

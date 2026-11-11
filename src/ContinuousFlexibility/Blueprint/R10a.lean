@@ -18,8 +18,8 @@ namespace ContinuousFlexibility.Blueprint
 open ContinuousFlexibility.Statements
 
 theorem R10a (hR06 : R06Statement) (hR07 : R07Statement) (hR08 : R08Statement) (hR09 : R09Statement) : R10aStatement := by
-  obtain ⟨D, hD, hB, hregional⟩ := R10aRegional hR06 hR09 (R10aGeometry hR06)
-  refine ⟨D, hD, hB, ?_⟩
+  obtain ⟨D, hD, hB, hconstruction, hregional⟩ := R10aRegional hR06 hR09 (R10aGeometry hR06)
+  refine ⟨D, hD, hB, hconstruction, ?_⟩
   intro j hj heven
   obtain ⟨W, hfrequency⟩ := hregional j hj heven
   obtain ⟨M, hM, hpieces⟩ := R10aPoisson hD hB W

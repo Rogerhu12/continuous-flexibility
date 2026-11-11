@@ -279,6 +279,13 @@ theorem SeedConeTail.toPureTail_retaining_logSlope {D : ReferenceData} {right : 
     outward_zero := ?_
     tail_eq := ?_
     positive := ?_
+    inward_increasing := by
+      intro r hr hinner
+      rcases seedOrientedGlue_sides right r₀ r with hi | ho
+      · rw [(hin r hi).1.deriv_eq]
+        exact hWdpos r hr
+      · rw [(hout r ho).1.deriv_eq]
+        exact T.inward_increasing r hr hinner
     simple_critical := ?_
     homogeneous := ?_
     cut := r₃

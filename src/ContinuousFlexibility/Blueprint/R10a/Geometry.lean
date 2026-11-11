@@ -81,7 +81,8 @@ def R10aGeometrySupply : Prop :=
             Γ.centralLeft < centralRadius (-T) ∧ centralRadius T < Γ.centralRight ∧
             referenceColumn Γ.reference = fixedCentralColumn B.chi ∧
             EqOn Γ.reference.w (centralRadialProfile 1) (Ioo Γ.centralLeft Γ.centralRight) ∧
-            EqOn Γ.reference.phi centralKernelHeight (Ioo Γ.centralLeft Γ.centralRight)
+            EqOn Γ.reference.phi centralKernelHeight (Ioo Γ.centralLeft Γ.centralRight) ∧
+            RadialConstructionGeometry Γ.reference
 
 /-- The controlled selected-tail and retained-reference constructors
 already prove the complete geometry supply, using only the deep-tail input. -/
@@ -130,7 +131,8 @@ theorem R10aGeometry (hR06 : R06Statement) : R10aGeometrySupply := by
     first_cone := hcone }
   refine ⟨S, metadata, ?_⟩
   intro T q length hT hq hlength
-  exact exists_seedRetainedFixedBorderGeometry B hS horder hfirst hT hq hlength
+  exact exists_seedRetainedFixedBorderGeometry B hS horder hfirst
+    metadata.initial_bridge_positive hT hq hlength
 
 end ContinuousFlexibility.Blueprint
 

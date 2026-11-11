@@ -18,6 +18,7 @@ open ContinuousFlexibility.Statements ContinuousFlexibility.Radial
 theorem R10aRegional (hR06 : R06Statement) (hR09 : R09Statement)
     (hgeometry : R10aGeometrySupply) :
     ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+      RadialConstructionGeometry D ∧
       ∀ j : ℕ, 2 ≤ j → Even j →
         ∃ W : TerminalRegionalData D, W.matching.frequency = j := by
   sorry

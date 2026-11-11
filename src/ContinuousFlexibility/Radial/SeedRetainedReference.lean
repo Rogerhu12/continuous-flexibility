@@ -21,6 +21,9 @@ theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
     {S : SelectedTailData} (hS : IsSelectedTail S)
     (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
     (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
+    (hbridge : ∀ side r,
+      r ∈ uIcc (S.cut side S.chain.index) (S.entry side S.chain.index) →
+        0 < deriv (S.family S.sigma).w r)
     {T q length : ℝ} (hT : sqrt centralOscillatorA + 2 ≤ T)
     (hq : 0 < q) (hlength : 0 < length) :
     ∃ K : SeedCentralCutoff, ∃ P : SeedRetainedPair S K q length,
@@ -33,14 +36,14 @@ theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
         EqOn Γ.reference.w (centralRadialProfile 1)
           (Ioo Γ.centralLeft Γ.centralRight) ∧
         EqOn Γ.reference.phi centralKernelHeight
-          (Ioo Γ.centralLeft Γ.centralRight) := by
+          (Ioo Γ.centralLeft Γ.centralRight) ∧ RadialConstructionGeometry Γ.reference := by
   obtain ⟨K, hleft, hright, _⟩ := exists_seedCentralCutoff_model_window T
-  obtain ⟨P⟩ := exists_seedRetainedPair hS hband K hq hlength
+  obtain ⟨P⟩ := exists_seedRetainedPair hS hband hbridge K hq hlength
   have hentry (right : Bool) :
       S.entry right S.chain.index ∈ radialCore (S.family S.sigma) :=
     (hS.2.2.2.2.2 right S.chain.index 2 le_rfl (by decide) hband).2.1
-  obtain ⟨D, hDw, hDφ, hacc, hw, hφ, hkernel, hpatch, hheads, htails⟩ :=
-    exists_seedControlledReference_of_gluedPair hS hentries hentry K hq
+  obtain ⟨D, hconstruction, hDw, hDφ, hacc, hw, hφ, hkernel, hpatch, hheads, htails⟩ :=
+    exists_seedControlledReference_with_construction hS hentries hentry hband K hq
       (P.toEntryPair hS hband)
   have hDw' : D.w = P.pair.profile := by
     simpa only [SeedRetainedPair.toEntryPair_profile] using hDw
@@ -79,7 +82,7 @@ theorem exists_seedRetainedFixedBorderGeometry (B : FixedCentralBorder)
       intro r hr
       have hi := B.column_support hr
       exact ⟨fixedCentralCap_order.2.1.trans hi.1, hi.2.trans hrightcap⟩
-  exact ⟨K, P, Γ, rfl, rfl, hreal, hDw', hDφ', rfl, rfl, hleft, hright, hcol, hw, hφ⟩
+  exact ⟨K, P, Γ, rfl, rfl, hreal, hDw', hDφ', rfl, rfl, hleft, hright, hcol, hw, hφ, hconstruction⟩
 
 /-- Nonvanishing of the actual profile locates the cap in the core; no
 unrecorded inequality concerning the gluing radii is needed. -/

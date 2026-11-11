@@ -30,9 +30,15 @@ structure SeedRetainedPair (S : SelectedTailData) (K : SeedCentralCutoff)
     (3 / 4 : ℝ) * pair.profile r ≤ r * deriv pair.profile r
   right_logSlope_lower : ∀ r ∈ Icc (exp K.right) (pair.radiusR * S.cut true S.chain.index),
     (3 / 4 : ℝ) * pair.profile r ≤ r * deriv pair.profile r
+  initial_bridge_positive : ∀ side r,
+    r ∈ uIcc (S.cut side S.chain.index) (S.entry side S.chain.index) →
+      0 < deriv (S.family S.sigma).w r
 
 theorem exists_seedRetainedPair {S : SelectedTailData} (hS : IsSelectedTail S)
     (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
+    (hbridge : ∀ side r,
+      r ∈ uIcc (S.cut side S.chain.index) (S.entry side S.chain.index) →
+        0 < deriv (S.family S.sigma).w r)
     (K : SeedCentralCutoff) {q length : ℝ} (hq : 0 < q) (hlength : 0 < length) :
     Nonempty (SeedRetainedPair S K q length) := by
   obtain ⟨L⟩ := exists_seedRetainedFirstCone hS hband false hlength
@@ -45,7 +51,7 @@ theorem exists_seedRetainedPair {S : SelectedTailData} (hS : IsSelectedTail S)
     exists_seedGluedPair_retaining_logSlope hD hL.1 hR.1
     L.tail R.tail (by simpa using L.canonical) (by simpa using R.canonical) K hq
   exact ⟨⟨L, R, G, hGL, hGR, hbefore, hafter,
-    hLLower L.logSlope_inward, hRLower R.logSlope_inward⟩⟩
+    hLLower L.logSlope_inward, hRLower R.logSlope_inward, hbridge⟩⟩
 
 /-- Both physical connecting gaps have the same lower bound, independent
 of the retained logarithmic length and all radius and height rescalings. -/
@@ -64,6 +70,87 @@ private theorem seed_selected_first_cut_entry_order {S : SelectedTailData}
       else S.entry right S.chain.index < S.cut right S.chain.index := by
   have h := (hS.2.2.2.2.2 right S.chain.index 2 le_rfl (by decide) hband).2.2.2.2.1
   cases right <;> exact h.1.trans h.2
+
+private theorem seedRetainedPair_bridge_deriv_pos {S : SelectedTailData}
+    {K : SeedCentralCutoff} {q length : ℝ} (P : SeedRetainedPair S K q length)
+    (side : Bool) {r : ℝ}
+    (htail : r ∈ radialTailInterval (S.family S.sigma) side (S.cut side S.chain.index))
+    (hspan : r ∈ uIcc (S.cut side S.chain.index) (S.entry side S.chain.index)) :
+    0 < deriv P.pair.profile ((if side then P.pair.radiusR else P.pair.radiusL) * r) := by
+  let κ := if side then P.pair.radiusR else P.pair.radiusL
+  let β := if side then P.pair.heightR else P.pair.heightL
+  have hκ : 0 < κ := by
+    cases side
+    · exact P.pair.radiusL_pos
+    · exact P.pair.radiusL_pos.trans_le P.pair.radius_order
+  have hβ : 0 < β := by
+    cases side
+    · exact P.pair.heightL_pos
+    · exact P.pair.heightR_pos
+  have hopen : IsOpen
+      (radialTailInterval (S.family S.sigma) side (S.cut side S.chain.index)) := by
+    cases side <;> exact isOpen_Ioo
+  have hcancel : κ * r / κ = r := by field_simp [hκ.ne'] <;> ring
+  have ht : Tendsto (fun t : ℝ => t / κ) (𝓝 (κ * r)) (𝓝 r) := by
+    simpa only [id_eq, hcancel] using (continuous_id.div_const κ).tendsto (κ * r)
+  have hg : P.pair.profile =ᶠ[𝓝 (κ * r)]
+      radialRadiusScale κ (β * κ) (S.family S.sigma).w := by
+    filter_upwards [ht.eventually (hopen.mem_nhds htail)] with t hti
+    have hv : P.pair.profile (κ * (t / κ)) =
+        (β * κ) * (S.family S.sigma).w (t / κ) := by
+      cases side
+      · exact (P.pair.left_tail (t / κ) hti).1
+      · exact (P.pair.right_tail (t / κ) hti).1
+    have hc : κ * (t / κ) = t := by field_simp [hκ.ne'] <;> ring
+    simpa only [hc, radialRadiusScale] using hv
+  change 0 < deriv P.pair.profile (κ * r)
+  rw [hg.deriv_eq, deriv_radialRadiusScale_apply_mul hκ.ne']
+  exact mul_pos (div_pos (mul_pos hβ hκ) hκ)
+    (P.initial_bridge_positive side r hspan)
+
+private theorem seedRetainedPair_increasing_from_entry {S : SelectedTailData}
+    {K : SeedCentralCutoff} {q length : ℝ} (P : SeedRetainedPair S K q length)
+    (hS : IsSelectedTail S)
+    (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
+    (side : Bool) (r : ℝ)
+    (hr : if side then
+        exp K.right ≤ r ∧ r ≤ P.pair.radiusR * S.entry side S.chain.index
+      else P.pair.radiusL * S.entry side S.chain.index ≤ r ∧ r ≤ exp K.left) :
+    0 < deriv P.pair.profile r := by
+  let κ := if side then P.pair.radiusR else P.pair.radiusL
+  have hκ : 0 < κ := by
+    cases side
+    · exact P.pair.radiusL_pos
+    · exact P.pair.radiusL_pos.trans_le P.pair.radius_order
+  by_cases hi : if side then r ≤ κ * S.cut side S.chain.index
+      else κ * S.cut side S.chain.index ≤ r
+  · cases side
+    · exact P.pair.left_increasing r hi hr.2
+    · exact P.pair.right_increasing r hr.1 hi
+  · have he := (hS.2.2.2.2.2 side S.chain.index 2 le_rfl (by decide) hband).2.1
+    have ho := seed_selected_first_cut_entry_order hS hband side
+    have hs :
+        r / κ ∈ radialTailInterval (S.family S.sigma) side (S.cut side S.chain.index) ∧
+        r / κ ∈ uIcc (S.cut side S.chain.index) (S.entry side S.chain.index) := by
+      cases side
+      · have hle : S.entry false S.chain.index ≤ r / κ :=
+          (le_div_iff₀ hκ).mpr (by simpa only [κ, mul_comm] using hr.1)
+        have hlt : r / κ < S.cut false S.chain.index :=
+          (div_lt_iff₀ hκ).mpr (by simpa only [mul_comm] using lt_of_not_ge hi)
+        refine ⟨⟨he.1.trans_le hle, hlt⟩, ?_⟩
+        rw [uIcc_of_ge ho.le]
+        exact ⟨hle, hlt.le⟩
+      · have hlt : S.cut true S.chain.index < r / κ :=
+          (lt_div_iff₀ hκ).mpr (by simpa only [mul_comm] using lt_of_not_ge hi)
+        have hle : r / κ ≤ S.entry true S.chain.index :=
+          (div_le_iff₀ hκ).mpr (by simpa only [κ, mul_comm] using hr.2)
+        refine ⟨⟨hlt, hle.trans_lt he.2⟩, ?_⟩
+        rw [uIcc_of_le ho.le]
+        exact ⟨hlt.le, hle⟩
+    have hd := seedRetainedPair_bridge_deriv_pos P side hs.1 hs.2
+    have hc : κ * (r / κ) = r := by field_simp [hκ.ne'] <;> ring
+    change 0 < deriv P.pair.profile (κ * (r / κ)) at hd
+    rwa [hc] at hd
 
 /-- Reindex the same glued functions by the original selected entrances.
 Only the bookkeeping changes; the actual old cut-to-entry intervals remain. -/
@@ -96,6 +183,10 @@ def SeedRetainedPair.toEntryPair {S : SelectedTailData} {K : SeedCentralCutoff}
     (seed_selected_first_cut_entry_order hS hband true)
     (T.pair.radiusL_pos.trans_le T.pair.radius_order))
   middle_germ := T.pair.middle_germ
+  left_increasing := fun r he hr =>
+    seedRetainedPair_increasing_from_entry T hS hband false r ⟨he, hr⟩
+  right_increasing := fun r hr he =>
+    seedRetainedPair_increasing_from_entry T hS hband true r ⟨hr, he⟩
   left_tail := by
     intro r hr
     have ht := T.pair.left_tail r ⟨hr.1,

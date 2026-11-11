@@ -305,6 +305,36 @@ theorem exists_seedGluedPair_retaining_logSlope {D : ReferenceData} {c d : ℝ} 
     left_entry := heL
     right_entry := heR
     middle_germ := fun r hr => hmiddle r ⟨hr.1.le, hr.2.le⟩
+    left_increasing := by
+      intro r hentry hretained
+      have hp : 0 < r := (mul_pos hRL (hD.1.trans hc.1)).trans_le hentry
+      by_cases hr : r ≤ zL
+      · rw [(hleft r hp hr).1.deriv_eq]
+        apply seedRescale_deriv_pos hRL (mul_pos hHL hRL)
+        apply TL.inward_increasing _ (mul_pos (inv_pos.mpr hRL) hp)
+        change c ≤ RL⁻¹ * r
+        have h : c ≤ r / RL := (le_div_iff₀ hRL).mpr
+          (by simpa only [mul_comm] using hentry)
+        simpa only [div_eq_mul_inv, mul_comm] using h
+      · have hz : r ≤ zR := hretained.trans (exp_le_exp.mpr
+          (by linarith only [K.left_neg, K.right_pos, hq]))
+        rw [(hmiddle r ⟨(lt_of_not_ge hr).le, hz⟩).1.deriv_eq]
+        exact K.profile_deriv_pos hp (Or.inl ((log_le_iff_le_exp hp).mpr hretained))
+    right_increasing := by
+      intro r hretained hentry
+      have hp : 0 < r := (exp_pos K.right).trans_le hretained
+      by_cases hr : zR ≤ r
+      · rw [(hright r hr).1.deriv_eq]
+        apply seedRescale_deriv_pos hRR (mul_pos hHR hRR)
+        apply TR.inward_increasing _ (mul_pos (inv_pos.mpr hRR) hp)
+        change RR⁻¹ * r ≤ d
+        have h : r / RR ≤ d := (div_le_iff₀ hRR).mpr
+          (by simpa only [mul_comm] using hentry)
+        simpa only [div_eq_mul_inv, mul_comm] using h
+      · have hz : zL ≤ r := (exp_le_exp.mpr
+          (by linarith only [K.left_neg, K.right_pos, hq])).trans hretained
+        rw [(hmiddle r ⟨hz, (lt_of_not_ge hr).le⟩).1.deriv_eq]
+        exact K.profile_deriv_pos hp (Or.inr ((le_log_iff_exp_le hp).mpr hretained))
     left_tail := ?_
     right_tail := ?_
   }, ?_, ?_, hcutL, hcutR, ?_, ?_, ?_, ?_⟩
