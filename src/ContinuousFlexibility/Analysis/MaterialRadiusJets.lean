@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.MaterialOrdinaryJets
 import Mathlib.Analysis.Calculus.ContDiff.Bounds
+import ContinuousFlexibility.Scalar.WeightedMaterialRadiusJets
 
 /-!
 # Uniform ordinary jets of the material radius
@@ -19,41 +20,6 @@ open Set
 open scoped ContDiff BigOperators
 
 set_option backward.isDefEq.respectTransparency false
-
-theorem n02n03_materialEll_bounded {D : ReferenceData} {T : MaterialData}
-    (hT : IsMaterialData D T) :
-    ∃ K : ℝ, 0 ≤ K ∧ ∀ r ∈ Ioo D.a D.b, |T.ell r| ≤ K := by
-  obtain ⟨hsmooth, hpos, _, _, _, _, _, _, _, _, hend, _⟩ := hT
-  obtain ⟨d₀, δ, _, hδ, _, hleft, hright⟩ := hend
-  have hcore : Icc (D.a + δ) (D.b - δ) ⊆ Ioo D.a D.b := by
-    intro r hr
-    constructor <;> linarith [hr.1, hr.2]
-  have hc : ContinuousOn T.ell (Icc (D.a + δ) (D.b - δ)) :=
-    (hsmooth T.ell (by simp)).continuousOn.mono hcore
-  obtain ⟨A, hA⟩ := isCompact_Icc.exists_bound_of_continuousOn hc
-  refine ⟨max (max A δ) 0, le_max_right _ _, fun r hr => ?_⟩
-  have hell : 0 < T.ell r := (hpos r hr).1
-  rw [abs_of_pos hell]
-  by_cases hl : r < D.a + δ
-  · rw [(hleft r ⟨hr.1, hl⟩).1]
-    have hx : 0 ≤ ContinuousFlexibility.Analysis.endpointX d₀ (r - D.a) :=
-      Real.sqrt_nonneg _
-    apply (div_le_self (sub_nonneg.mpr hr.1.le) (by linarith :
-      1 ≤ 1 + ContinuousFlexibility.Analysis.endpointX d₀ (r - D.a))).trans
-    exact (show r - D.a ≤ δ by linarith).trans
-      ((le_max_right A δ).trans (le_max_left _ _))
-  · by_cases hr' : D.b - δ < r
-    · rw [(hright r ⟨hr', hr.2⟩).1]
-      have hx : 0 ≤ ContinuousFlexibility.Analysis.endpointX d₀ (D.b - r) :=
-        Real.sqrt_nonneg _
-      apply (div_le_self (sub_nonneg.mpr hr.2.le) (by linarith :
-        1 ≤ 1 + ContinuousFlexibility.Analysis.endpointX d₀ (D.b - r))).trans
-      exact (show D.b - r ≤ δ by linarith).trans
-        ((le_max_right A δ).trans (le_max_left _ _))
-    · have hb := hA r ⟨le_of_not_gt hl, le_of_not_gt hr'⟩
-      have hb' : T.ell r ≤ A := by
-        simpa only [Real.norm_eq_abs, abs_of_pos hell] using hb
-      exact hb'.trans ((le_max_left A δ).trans (le_max_left _ _))
 
 theorem materialRadius_comp_contDiff {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) {f : ℝ → ℝ}
@@ -81,7 +47,7 @@ theorem materialEll_radius_iteratedDeriv_bounded
     rw [iteratedDeriv_comp_materialRadius hT hlogell]
     exact (hb (T.radius x) (hinside x).1).2.2
   obtain ⟨C, hC, hb⟩ := iteratedDeriv_exp_majorant hL hLb n
-  obtain ⟨A, hA, hAb⟩ := n02n03_materialEll_bounded hT
+  obtain ⟨A, hA, hAb⟩ := materialEll_bounded hT
   have heq : (fun t => T.ell (T.radius t)) =
       (fun t => Real.exp (Real.log (T.ell (T.radius t)))) :=
     funext (fun t => (Real.exp_log (hp t)).symm)

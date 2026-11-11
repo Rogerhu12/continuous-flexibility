@@ -5,6 +5,7 @@ import Mathlib.Analysis.Calculus.BumpFunction.InnerProduct
 import Mathlib.Analysis.Normed.Group.Bounded
 import Mathlib.MeasureTheory.Function.LpSeminorm.SMul
 import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
+import ContinuousFlexibility.Scalar.WeightedRadialMultiplier
 
 /-!
 # Localization of actual weighted heights
@@ -38,33 +39,6 @@ theorem materialPullback_cutoff {D : ReferenceData} {T : MaterialData}
   simp only [materialPullback, materialCutoffHeight, (hInv p.1).2]
   ring
 
-/-- The full mixed jet of a radial multiplier uses exactly the radial
-Leibniz sum; angular differentiation does not touch the multiplier. -/
-theorem n02n03_mixedDerivative_radial_mul {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
-    (hχ : ContDiff ℝ ∞ χ) (hf : ContDiff ℝ ∞ f) (a b : ℕ) (p : PolarPoint) :
-    mixedDerivative a b (fun q => χ q.1 * f q) p =
-      ∑ i ∈ Finset.range (a + 1),
-        (a.choose i : ℝ) * iteratedDeriv i χ p.1 * mixedDerivative (a - i) b f p := by
-  have hg : ContDiff ℝ ∞ (fun r => iteratedDeriv b (fun θ => f (r, θ)) p.2) := by
-    have h := (contDiff_mixedDerivative hf 0 b).comp
-      (contDiff_id.prodMk (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => p.2)))
-    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero, id_eq] using h
-  have hangle (r : ℝ) :
-      iteratedDeriv b (fun θ => χ r * f (r, θ)) p.2 =
-        χ r * iteratedDeriv b (fun θ => f (r, θ)) p.2 :=
-    iteratedDeriv_const_mul_field (χ r) (fun θ => f (r, θ))
-  unfold mixedDerivative
-  simp only [hangle]
-  have heq : χ * (fun r => iteratedDeriv b (fun θ => f (r, θ)) p.2) =
-      (fun r => χ r * iteratedDeriv b (fun θ => f (r, θ)) p.2) := by
-    funext r
-    exact Pi.mul_apply _ _ r
-  have hprod :=
-    iteratedDeriv_mul (x := p.1) (hχ.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ (∞ : ℕ∞ω)))
-      (hg.contDiffAt.of_le (by simp : (a : ℕ∞ω) ≤ (∞ : ℕ∞ω)))
-  rw [heq] at hprod
-  exact hprod
-
 theorem weightedPhysicalJet_cutoff {D : ReferenceData} {T : MaterialData}
     {γ : ℝ} {χ : ℝ → ℝ} {f : PolarPoint → ℝ}
     (hT : IsMaterialData D T) (hχ : ContDiff ℝ ∞ χ)
@@ -74,8 +48,8 @@ theorem weightedPhysicalJet_cutoff {D : ReferenceData} {T : MaterialData}
         (a.choose i : ℝ) * iteratedDeriv i χ p.1 *
           weightedPhysicalJet T γ (a - i) b c f p := by
   unfold weightedPhysicalJet
-  rw [materialPullback_cutoff hT, n02n03_mixedDerivative_radial_mul hχ
-    (contDiff_materialPullback hT hf), Finset.mul_sum]
+  rw [materialPullback_cutoff hT, mixedDerivative_radial_mul hχ
+    (contDiff_materialPullback hT hf), Fin.sum_univ_eq_sum_range, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro i hi
   ring

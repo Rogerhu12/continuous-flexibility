@@ -25,7 +25,8 @@ theorem controlGeometryConditions.control_zero_other
     (hC : controlGeometryConditions D S C) {m n : ℕ} (hmn : n ≠ m)
     {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) : C.control n r = 0 := by
   by_contra hn
-  have hnr : r ∈ Ioo (C.left n) (C.right n) := hC.support_subset n hn
+  have hnr : r ∈ Ioo (C.left n) (C.right n) :=
+    (hC.2.2.2.2.2.1 n).2.2 (subset_tsupport (C.control n) hn)
   exact Set.disjoint_left.mp (hC.2.2.1 n m hmn) hnr hr
 
 theorem N01Properties.border_zero_on_component

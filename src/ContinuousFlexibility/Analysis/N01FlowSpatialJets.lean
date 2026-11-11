@@ -43,6 +43,7 @@ def N01Properties.sectorFlowStripTower
       (fun z => ordinaryFlowFamily S C m a b p (liftSectorParameter S C z)) :=
   hN.sectorFlowMixedTower m a b p ⟨hl.trans hp.1.1, hp.1.2.trans hh⟩
 
+include hT in
 theorem N01Properties.sectorFlowStripTower_uniform (a b : ℕ) :
     UniformScalarJetSeminormBounds (fun p : Ioo l h ×ˢ (univ : Set ℝ) =>
       hN.sectorFlowStripTower m l h hl hh a b p p.property) := by
@@ -50,11 +51,14 @@ theorem N01Properties.sectorFlowStripTower_uniform (a b : ℕ) :
     (fun p : Ioo l h ×ˢ (univ : Set ℝ) =>
       ((⟨p.1.1, ⟨p.2.1.1.le, p.2.1.2.le⟩⟩ : Icc l h), p.1.2))
 
+include hT in
 theorem N01Properties.sectorFlowStripTower_localUniform (a b : ℕ) :
     LocalUniformScalarJetSeminormBounds (hN.sectorFlowStripTower m l h hl hh a b) := by
   intro p hp
   exact ⟨Ioo l h ×ˢ univ, subset_rfl, isOpen_Ioo.prod isOpen_univ, hp,
     hN.sectorFlowStripTower_uniform hT m l h hl hh a b⟩
+
+include hN hS hT hl hh hdisc
 
 theorem N01Properties.sectorFlowStrip_increment_contDiffOn
     (z : StateDirections S × ℝ) (hz : z ∈ sectorNeighborhood S base ε ε) :
