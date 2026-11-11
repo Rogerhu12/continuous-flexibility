@@ -80,7 +80,8 @@ theorem rootChart_pointwise_fixed_loss_material_bound
     hφjet.mono hp (le_max_left _ _) (fun n => (hA n).le)
       (fun n => le_add_of_nonneg_right (hP n).le)
   have hchart : PointwiseMaterialJetBound p pairLoss D z (extendedRootEvenOddChart G) x := by
-    simpa only [max_self] using hξD.prodMk hξSmooth hφ hφD
+    simpa only [PointwiseMaterialJetBound, extendedRootEvenOddChart, max_self] using
+      hξD.prodMk hξSmooth hφ hφD
   have hJ := hjets z hzJacobian (extendedRootEvenOddChart G) x hchartSmooth hchart
   have hfactorD : PointwiseMaterialJetBound p pairLoss D z (extendedRootRadialFactor G) x :=
     hfactor.mono hp (le_max_right _ _) (fun n => (hP n).le)

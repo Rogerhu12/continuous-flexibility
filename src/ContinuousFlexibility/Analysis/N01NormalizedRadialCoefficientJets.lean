@@ -82,7 +82,7 @@ private theorem scaledRadialCoefficient_material_bound
           (mul_le_mul (le_add_of_nonneg_left zero_le_one)
             (le_add_of_nonneg_left zero_le_one) hn
             (add_nonneg zero_le_one (abs_nonneg _))) (hA n).le
-      _ = B n := by dsimp only [B]; ring
+      _ = B n := rfl
   exact ⟨hsmooth, hscaled.mono hp le_rfl
     (fun n => mul_nonneg (abs_nonneg _) (mul_nonneg (pow_nonneg (norm_nonneg L) n) (hA n).le))
     hconstant⟩

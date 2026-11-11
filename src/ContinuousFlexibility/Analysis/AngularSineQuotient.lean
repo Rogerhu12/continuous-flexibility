@@ -107,7 +107,7 @@ theorem angularSineQuotient_eq_local
     have hmult : Real.cos (2 * c) * ψ 0 = Real.cos (2 * c) / 2 := by
       rw [hψzero]
       ring
-    simp only [angularSineQuotient, if_pos hs, hx, sub_self, hmult]
+    simp only [angularSineQuotient, hx, if_pos hc, sub_self, hmult]
   · rw [angularSineQuotient, if_neg hs]
     apply (div_eq_iff (pow_ne_zero (sineFactorOrder square) hs)).mpr
     calc

@@ -57,7 +57,7 @@ private theorem radialBoundaryJet_linear_zero
   rw [iteratedDeriv_fun_add
     (hleft.of_le (show (k : ℕ∞ω) ≤ ∞ by simp))
     (hright.of_le (show (k : ℕ∞ω) ≤ ∞ by simp))]
-  simpa only [zero_add] using congrArg₂ (fun x y : ℝ => x + y)
+  simpa only [radialBoundaryJet, zero_add] using congrArg₂ (fun x y : ℝ => x + y)
     (radialBoundaryJet_mul_zero ha hs hszero hk)
     (radialBoundaryJet_mul_zero hb ht htzero hk)
 
@@ -132,6 +132,7 @@ theorem positiveConformalDensity_zero_jets_of_residual
     filter_upwards [hNearA, hNearDet, hNearJ] with p hpA hpD hpJ
     exact positiveConformalDensity_remainder
       (fun side => (hX side).differentiable (by simp) p) hpA hpD hpJ
+  dsimp only
   intro k hk
   refine ⟨?_, ?_, ?_⟩
   · exact radialBoundaryJet_zero_of_germ (hGerm.mono fun _ hp => hp.1)
