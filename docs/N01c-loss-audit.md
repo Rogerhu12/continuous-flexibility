@@ -1,10 +1,10 @@
 # N01c audit: parameter derivative loss
 
-Internal audit, 2026-11-11. Read-only audit of the repository; this note is not a completed N01c proof.
+Historical audit, 2026-11-11, with the implemented contract repair recorded below. The quoted uniform-loss clause is the original statement before this branch's repair; it is not the current `OrdinaryFlowFamilyTameBounds`. This note is not a completed N01c proof or its axiom check.
 
 ## Verified statement discrepancy
 
-`Statements/Nonlinear.lean`, in `N01Properties`, fixes `base loss : ℕ` and `ε : ℝ` before both of its last conjuncts. The flow conjunct is literally:
+The original `Statements/Nonlinear.lean`, in `N01Properties`, fixed `base loss : ℕ` and `ε : ℝ` before both of its last conjuncts. Before the repair, its flow conjunct was literally:
 
 ```lean
 (∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
@@ -18,9 +18,9 @@ Internal audit, 2026-11-11. Read-only audit of the repository; this note is not 
           base (s + loss) (z - (C.referenceState, 0)) v)
 ```
 
-Thus the same finite loss is required for every state derivative order `k`. The coefficient conjunct has the same quantifier order. In contrast, the manuscript's `eq:tame-derivative-shape` in `paper/flexible-surface-readable/07-fixed-geometry.tex`, lines 222–231, uses `s+d_k` and explicitly requires independence of the spatial order `s`, not independence of `k`. Proposition 7.8(iii), lines 788–794, invokes this derivative estimate. Lemma `current-geometric-jets`, lines 1619–1623, does the same. Step 5, lines 1692–1710, enumerates a fixed spatial differential cost, then separately discusses state differentiation of the flow equations; it does not remove the additional angular derivatives created by repeated parameter differentiation.
+Thus the old clause required the same finite loss for every state derivative order `k`. The coefficient conjunct had the same quantifier order, which this branch retains for coefficients. In contrast, the manuscript's `eq:tame-derivative-shape` in `paper/flexible-surface-readable/07-fixed-geometry.tex`, lines 222–231, uses `s+d_k` and explicitly requires independence of the spatial order `s`, not independence of `k`. Proposition 7.8(iii), lines 790–796, invokes this derivative estimate. Lemma `current-geometric-jets`, lines 1619–1627, does the same. Step 5, lines 1700–1710, enumerates a fixed spatial differential cost, then separately discusses state differentiation of the flow equations; it does not remove the additional angular derivatives created by repeated parameter differentiation.
 
-The existing general `SmoothTameOn` definition in `Statements/Analysis.lean` already has the correct order `∀ k, ∀ x0 ∈ U, ∃ loss base, ...`. Therefore a theorem proving smooth tameness cannot simply be unpacked to obtain the current N01 flow clause.
+The general `SmoothTameOn` definition in `Statements/Analysis.lean` already had the order `∀ k, ∀ x0 ∈ U, ∃ loss base, ...`. Therefore a theorem proving smooth tameness could not simply be unpacked to obtain that former N01 flow clause. The repaired N01 bound additionally keeps one common base and radius before all derivative orders.
 
 ## Exact counterexample for ordinary smooth circle flows
 
@@ -79,9 +79,9 @@ The generic counterexample does not automatically realize every circle vector fi
 
 Until that final realization is written, the claim justified here is: **the frozen uniform-in-k flow clause is stronger than its cited manuscript theorem and is false for the standard circle-flow mechanism being invoked.** It should not be reported as an already machine-checked contradiction of `N01Statement`.
 
-## Safe repair
+## Implemented contract repair
 
-Keep one common `base`, one positive neighborhood radius `ε`, and the fixed spatial loss `loss : ℕ` used by the remaining nonlinear interface. Allow an additional parameter loss depending on `k` inside the flow conjunct. For example:
+The current `OrdinaryFlowFamilyTameBounds` keeps one common `base`, one positive neighborhood radius `ε`, and the fixed spatial loss `loss : ℕ` used by the remaining nonlinear interface. Its flow conjunct allows an additional parameter loss depending on `k`:
 
 ```lean
 (∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ...
@@ -92,11 +92,11 @@ Here `parameterLoss` is quantified before `s`, the component, the point, the sta
 
 The coefficient clause concerns a finite-order differential expression with pointwise smooth functions and may admit a uniform loss in `k`. There is no need to weaken it merely because the flow clause requires a repair. Allowing order-dependent loss there too would match the manuscript but should be a deliberate, documented choice.
 
-The outer type `N01Statement` can remain `∃ ... base loss ε, ... N01Properties ...`. This preserves all existing cumulative nonlinear types and the final main theorem; only the actual meaning of the flow bound changes to the manuscript's quantifier order. `Blueprint/Assembly.lean` should explicitly document that the assembled N01 result uses the corrected state-derivative loss. The assembly proof need not introduce any additional hypothesis.
+The outer type `N01Statement` remains `∃ ... base loss ε, ... N01Properties ...`. This preserves the cumulative nonlinear type constructors, while the mathematical content of the flow bound changes to the manuscript's quantifier order. `Blueprint/Assembly.lean` explicitly documents that correction. The separate primitive-geometry repair changes the predecessor contract, as recorded in `docs/N01c-geometry-audit.md`; it must not be confused with proving the original unchanged implication.
 
-## Downstream uses checked
+## Downstream uses checked at the original audit
 
-Repository code search finds `ordinaryFlowFamily` and `coefficientFamily` only in their definitions and in `N01Properties`. Other consumers of `N01Properties` are endpoint-closure and point-solution modules (`StateControlEndpointClosure`, `StateControlCofiniteClosure`, `MaterialHeightRegularity`, `PointSolutionCore`, `WeakBranchCore`, `ControlCellEndpointBounds`), the cumulative statement files, and the blueprint generator. Their visible uses concern earlier geometric/control conjuncts or pass the whole proposition through. Preserving the earlier conjunct order avoids disturbing those projections. A local full `rg` and CI should still verify this after checkout; current GitHub code-search result was at revision `3a7853f30c9b6253375cc96d22cede2c34b59358`.
+The initial code search at revision `3a7853f30c9b6253375cc96d22cede2c34b59358` found `ordinaryFlowFamily` and `coefficientFamily` only in their definitions and in `N01Properties`. At that revision, other consumers were endpoint-closure and point-solution modules (`StateControlEndpointClosure`, `StateControlCofiniteClosure`, `MaterialHeightRegularity`, `PointSolutionCore`, `WeakBranchCore`, `ControlCellEndpointBounds`), the cumulative statement files, and the blueprint generator. Their visible uses concerned earlier geometric/control conjuncts or passed the whole proposition through. This is a historical inventory: the current N01c implementation now uses both families throughout its analytic proofs and restriction/assembly modules. The complete current tree and the four actual N01c declarations must pass the build and strict transitive axiom gate.
 
 ## Secondary issue: localization of witnesses
 

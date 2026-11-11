@@ -70,14 +70,14 @@ theorem EndpointMixedPowerBounds.angular_unit_bound
 
 private theorem abs_signedCosine_coefficients_le {c : ℝ}
     (hc : 0 ≤ c) (t : ℝ) :
-    |c * |Real.sin t|| ≤ c ∧
+    |c * (|Real.sin t|)| ≤ c ∧
       |c * (|Real.sin t| - Real.sin t)| ≤ 2 * c := by
   constructor
   · rw [abs_mul, abs_of_nonneg hc, abs_abs]
     exact (mul_le_mul_of_nonneg_left (Real.abs_sin_le_one t) hc).trans_eq (mul_one _)
   · rw [abs_mul, abs_of_nonneg hc]
     calc
-      c * ||Real.sin t| - Real.sin t| ≤ c * (||Real.sin t|| + |Real.sin t|) :=
+      c * |(|Real.sin t|) - Real.sin t| ≤ c * (|(|Real.sin t|)| + |Real.sin t|) :=
         mul_le_mul_of_nonneg_left (abs_sub _ _) hc
       _ = c * (|Real.sin t| + |Real.sin t|) := by rw [abs_abs]
       _ ≤ c * (1 + 1) :=
@@ -130,10 +130,10 @@ theorem signedCosineAngularJet_unit_bounds
     have hcs := abs_signedCosine_coefficients_le hc q.1
     rw [signedCosineAngularJet_D_apply hU (F m) (A m) RF RA G heq b k q hr J hx v]
     calc
-      _ ≤ |c * |Real.sin q.1| * (RF.angularStateJets b _ hr q.2).D k x v| +
+      _ ≤ |c * (|Real.sin q.1|) * (RF.angularStateJets b _ hr q.2).D k x v| +
           |c * (|Real.sin q.1| - Real.sin q.1) *
             (RA.angularStateJets b _ hr q.2).D k x v| := abs_add_le _ _
-      _ = |c * |Real.sin q.1|| * |(RF.angularStateJets b _ hr q.2).D k x v| +
+      _ = |c * (|Real.sin q.1|)| * |(RF.angularStateJets b _ hr q.2).D k x v| +
           |c * (|Real.sin q.1| - Real.sin q.1)| *
             |(RA.angularStateJets b _ hr q.2).D k x v| := by simp only [abs_mul]
       _ ≤ c * (CF * R) + (2 * c) * (CA * R) :=

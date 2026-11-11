@@ -53,7 +53,7 @@ theorem exists_smooth_neighbourhood_compression {V : Set P}
       rw [dist_zero_right, norm_smul, Real.norm_eq_abs, abs_of_nonneg χ.nonneg]
       exact (mul_le_of_le_one_left (norm_nonneg q) χ.le_one).trans_lt hq'
   · filter_upwards [χ.eventuallyEq_one] with q hq
-    simpa only [ρ, hq, one_smul, id_eq]
+    simpa only [ρ, hq, Pi.one_apply, one_smul, id_eq]
 
 def speedTimeSliceInjection : (P × ℝ) →L[ℝ] (P × PolarPoint) :=
   (ContinuousLinearMap.fst ℝ P ℝ).prod
@@ -167,7 +167,8 @@ theorem flow_finiteAffine_germ_jets
       _ = iteratedFDeriv ℝ n (fun q : P × ℝ => G (x + L q.1, (t, q.2))) (0, θ) v :=
         congrArg (fun B : (P × ℝ) [×n]→L[ℝ] ℝ => B v) hejet
       _ = J.D n (x, (t, θ)) (fun i => flowStateAngleMap L (v i)) := by
-        simpa only [flowStateAngleMap_apply, map_zero, Prod.mk_add_mk, add_zero, zero_add] using ha
+        simpa only [ContinuousTimeSpeedTower.D, flowStateAngleMap_apply, map_zero,
+          Prod.mk_add_mk, add_zero, zero_add] using ha
   have htrajectory (t : ℝ) :
       (fun q : P => Φ (q, t)) =ᶠ[𝓝 (0 : P)] (fun q => Θ (x + L q, t)) := by
     filter_upwards [hρid] with q hq

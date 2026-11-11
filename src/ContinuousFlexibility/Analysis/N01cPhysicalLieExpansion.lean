@@ -89,7 +89,7 @@ def PhysicalLieExpansion.step {n : ℕ} (e : PhysicalLieExpansion n) :
         change fderiv ℝ (physicalFlowLieJet f n) p (1, 0) +
           f p * fderiv ℝ (physicalFlowLieJet f n) p (0, 1) = _
         rw [hd]
-        simp only [cylinderBasisVector, if_pos rfl,
+        simp only [cylinderBasisVector, if_pos rfl, ite_true,
           if_neg (by decide : (1 : Fin 2) ≠ 0)]
       _ = (∑ ti : (Σ t : e.Index, Fin (e.arity t)),
             ∏ i, (physicalLieHit (e.words ti.1) 0 ti.2 i).eval f p) +
@@ -113,8 +113,8 @@ def physicalLieExpansion : (n : ℕ) → PhysicalLieExpansion n
   | n + 1 => (physicalLieExpansion n).step
 
 theorem physicalLieExpansion_spatial_order (n : ℕ) (t : (physicalLieExpansion n).Index) :
-    (∑ i, ((physicalLieExpansion n).words t i).radialOrder +
-      ((physicalLieExpansion n).words t i).angularOrder) = n := by
+    (∑ i, (((physicalLieExpansion n).words t i).radialOrder +
+      ((physicalLieExpansion n).words t i).angularOrder)) = n := by
   simp only [PhysicalLieWord.radialOrder_add_angularOrder]
   exact (physicalLieExpansion n).total_order t
 

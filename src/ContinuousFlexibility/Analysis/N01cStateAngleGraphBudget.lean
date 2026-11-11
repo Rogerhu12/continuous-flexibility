@@ -66,7 +66,7 @@ theorem selectedProduct_mul {n : ℕ} (w : StateAngleWord n)
   | nil => simp only [selectedProduct, one_mul]
   | state w ih => exact ih (Fin.tail f) (Fin.tail g)
   | angle w ih =>
-      simp only [selectedProduct, ih]
+      simp only [selectedProduct, Fin.tail_def, ih]
       ring
 
 theorem selectedProduct_const {n : ℕ} (w : StateAngleWord n) (c : ℝ) :
@@ -75,7 +75,7 @@ theorem selectedProduct_const {n : ℕ} (w : StateAngleWord n) (c : ℝ) :
   | nil => simp only [selectedProduct, angleArity, pow_zero]
   | state w ih => exact ih
   | angle w ih =>
-      simp only [selectedProduct, angleArity, ih, pow_succ]
+      simp only [selectedProduct, Fin.tail_def, angleArity, ih, pow_succ]
       ring
 
 theorem abs_angleFactor {E : Type*} {n : ℕ} (w : StateAngleWord n)
@@ -85,7 +85,7 @@ theorem abs_angleFactor {E : Type*} {n : ℕ} (w : StateAngleWord n)
   | nil => simp only [angleFactor, selectedProduct, abs_one]
   | state w ih => exact ih (Fin.tail v)
   | angle w ih =>
-      simp only [angleFactor, selectedProduct, abs_mul, ih]
+      simp only [angleFactor, selectedProduct, Fin.tail_def, abs_mul, ih]
 
 theorem selectedProduct_spatialPower {n : ℕ} (w : StateAngleWord n)
     (orders : Fin n → ℕ) {R : ℝ} (hR : 0 < R) (s : ℕ) :
@@ -96,7 +96,7 @@ theorem selectedProduct_spatialPower {n : ℕ} (w : StateAngleWord n)
       simp only [selectedProduct, selectedSum, Nat.cast_zero, zero_div, Real.rpow_zero]
   | state w ih => exact ih (Fin.tail orders)
   | angle w ih =>
-      simp only [selectedProduct, selectedSum, ih]
+      simp only [selectedProduct, selectedSum, Fin.tail_def, ih]
       exact rpow_spatialOrder_mul hR (orders 0) (w.selectedSum (Fin.tail orders)) s
 
 /-- Effective spatial order of all selected flow factors together with
@@ -120,13 +120,13 @@ theorem flowSpatialOrder_le {n : ℕ} (w : StateAngleWord n)
         Nat.mul_zero, Nat.add_zero, le_refl]
   | state w ih =>
       have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
-      simp only [flowSpatialOrder, angleArity, selectedSum] at ht ⊢
+      simp only [flowSpatialOrder, angleArity, selectedSum, Fin.tail_def] at ht ⊢
       simp only [Fin.sum_univ_succ, Nat.mul_add]
       omega
   | angle w ih =>
       have ht := ih (Fin.tail κ) (Fin.tail β) (fun i => hpart i.succ)
       have hhead := hpart 0
-      simp only [flowSpatialOrder, angleArity, selectedSum] at ht ⊢
+      simp only [flowSpatialOrder, angleArity, selectedSum, Fin.tail_def] at ht ⊢
       simp only [Fin.sum_univ_succ, Nat.mul_add]
       by_cases hk : κ 0 = 0
       · simp only [hk, if_pos rfl, ite_true, Nat.mul_zero]
@@ -140,7 +140,9 @@ theorem flowSpatialOrder_le {n : ℕ} (w : StateAngleWord n)
 theorem flowParameterOrder_pos {n : ℕ} (w : StateAngleWord n)
     (κ : Fin n → ℕ) (hk : 0 < ∑ i, κ i) : 0 < w.flowParameterOrder κ := by
   induction w with
-  | nil => simpa only [Fin.sum_univ_zero] using hk
+  | nil =>
+      simpa only [Fin.sum_univ_zero, flowParameterOrder, stateArity,
+        selectedSum, Nat.zero_add] using hk
   | state w ih =>
       simp only [flowParameterOrder, stateArity, selectedSum]
       omega
@@ -205,7 +207,7 @@ theorem StateAngleWord.selected_heightProduct_le
   | nil =>
       simp only [StateAngleWord.stateArity, StateAngleWord.selectedProduct,
         StateAngleWord.flowParameterOrder, StateAngleWord.selectedSum, Nat.add_zero,
-        pow_zero, one_mul, mul_one]
+        pow_zero, one_mul, mul_one, le_refl]
   | @state n w ih =>
       have hh := ih (κ := Fin.tail κ) (j := j + 1)
       have hleft : j + (w.stateArity + 1) = (j + 1) + w.stateArity := by omega

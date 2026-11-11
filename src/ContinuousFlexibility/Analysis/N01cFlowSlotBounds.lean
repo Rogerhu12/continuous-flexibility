@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01cStateAngleSelections
 import ContinuousFlexibility.Analysis.N01cFlowForcingExpansion
+import ContinuousFlexibility.Analysis.N01cFlowForcingSobolev
 import ContinuousFlexibility.Analysis.N01cStateSeminorms
 
 /-!
@@ -44,7 +45,7 @@ theorem n01c_finiteOrderPrefix
   refine ⟨B, hB, fun k hk => ?_⟩
   let i : Fin (K + 1) := ⟨k, Nat.lt_succ_of_le hk⟩
   have hdi : d i ≤ ∑ j : Fin (K + 1), d j :=
-    Finset.single_le_sum (fun j _ => Nat.zero_le (d j)) (Finset.mem_univ i)
+    Finset.single_le_sum (fun (j : Fin (K + 1)) _ => Nat.zero_le (d j)) (Finset.mem_univ i)
   have hci : c i ≤ B :=
     (Finset.single_le_sum (fun j _ => (hc j).le) (Finset.mem_univ i)).trans
       (le_add_of_nonneg_left (by norm_num : (0 : ℝ) ≤ 1))
@@ -131,11 +132,11 @@ theorem oneHighVariationWeight_le_unitAggregate
   unfold oneHighVariationWeight
   apply add_le_add
   · apply mul_le_of_le_one_right (by positivity)
-    exact Finset.prod_le_one (fun i _ => apply_nonneg _ _) (fun i _ => hv i)
+    exact Finset.prod_le_one₀ (fun i _ => apply_nonneg _ _) (fun i _ => hv i)
   · apply Finset.sum_le_sum
     intro i _
     apply mul_le_of_le_one_right (apply_nonneg _ _)
-    exact Finset.prod_le_one (fun j _ => apply_nonneg _ _) (fun j _ => hv j)
+    exact Finset.prod_le_one₀ (fun j _ => apply_nonneg _ _) (fun j _ => hv j)
 
 /-- Repeated selection is harmless: its finite multiplicity is a scalar
 constant and does not consume additional spatial derivative orders. -/
