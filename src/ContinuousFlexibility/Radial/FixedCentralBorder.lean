@@ -139,7 +139,7 @@ theorem install (B : FixedCentralBorder) {D : ReferenceData}
     contDiff_referenceLeftCutoff D.a D.b,
     referenceLeftCutoff_endpoint_germs hab⟩, hcol⟩
   intro r hr
-  have hi := B.chi_support (subset_tsupport B.chi hr)
+  have hi := B.chi_support hr
   refine ⟨⟨hal.trans hi.1, hi.2.trans hhb⟩, ?_⟩
   change 0 < deriv D.w r
   rw [hw.deriv isOpen_Ioo hi]

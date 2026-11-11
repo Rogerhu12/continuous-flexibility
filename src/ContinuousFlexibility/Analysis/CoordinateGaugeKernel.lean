@@ -107,4 +107,16 @@ theorem coordinateGauge_operator_kernel
     exact ae_iff.mp halong'
   rwa [hmeasure] at hmap
 
+/-- Coordinate pullback and multiplication compose at the level of
+representatives without unfolding either Hilbert isometry. -/
+theorem l2Equiv_trans_coordinate_mul_ae {μ ν κ : Measure ℝ}
+    (E : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν) (F : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 κ)
+    (f : Lp ℝ 2 μ) (a R p : ℝ → ℝ)
+    (hE : (fun x => E f (R x)) =ᵐ[κ] p)
+    (hF : (F (E f) : ℝ → ℝ) =ᵐ[κ] fun x => a x * E f (R x)) :
+    ((E.trans F) f : ℝ → ℝ) =ᵐ[κ] fun x => a x * p x := by
+  rw [LinearIsometryEquiv.trans_apply]
+  filter_upwards [hE, hF] with x hx hy
+  exact hy.trans (congrArg (fun t => a x * t) hx)
+
 end ContinuousFlexibility.Analysis

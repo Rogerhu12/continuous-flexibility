@@ -32,7 +32,7 @@ local notation "μ" => outerOutwardIntervalMeasure D right (radialTailInterval D
 local notation "α" => (fun x => lam / w x)
 local notation "β" => (fun x => (j : ℝ) ^ 2 * deriv w x / (lam * x))
 
-theorem exists_wholeGreenOperator
+theorem exists_selectedWholeGreenOperator
     (hD : IsAccumulatingProfile D) (hcut : cut ∈ radialCore D)
     (hentry : entrance ∈ radialCore D) (hac : a ≤ c) (hlam : lam ≠ 0)
     (hT : DeepTailHypotheses T) (hphysical : TailPhysicalRelation D T right j start)

@@ -20,7 +20,7 @@ open Set Filter MeasureTheory
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements ContinuousFlexibility.Analysis
 
-theorem tailFundamentalGreenKernel_memLp_row {T : DeepTailData}
+theorem tailFundamentalGreenKernel_memLp_row_allSources {T : DeepTailData}
     {w u : ℝ → ℝ} {W x : ℝ}
     (hp : ContinuousOn T.p (Ico T.entrance T.endpoint))
     (hp₀ : ∀ y ∈ Ico T.entrance T.endpoint, 0 ≤ T.p y)
@@ -83,7 +83,7 @@ theorem tailFundamentalGreen_representation_L2 {T : DeepTailData}
   have hrow : ∀ᵐ x ∂deepTailMeasure T,
       MemLp (fun y => tailFundamentalGreenKernel T.entrance T.endpoint w u 1 x y)
         2 (deepTailMeasure T) := hfull.mono fun x hx =>
-    tailFundamentalGreenKernel_memLp_row hp.continuousOn
+    tailFundamentalGreenKernel_memLp_row_allSources hp.continuousOn
       (fun y hy => (hpos y hy).le) hwc hu.2.2.1 hx
   exact l2Kernel_representation_of_smooth_tests isOpen_Ioo hfull G _ hrow
     (tailFundamentalGreen_compact_representation hT hI G hG hu hua hUnique
