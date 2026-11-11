@@ -224,8 +224,13 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData_with_data {S : Select
       hTL hTR hmodel hcolumn q hq hB model hk herror base hfq rfl rfl rfl
   obtain ⟨R, rep, Q, p, houterRealized⟩ := houter A u
   let M : RadialMatchingData D :=
-    { base with innerInverse := A, innerRepresentative := u,
-      outerInverse := R, outerRepresentative := rep, outerPoisson := Q, outerFunction := p }
+    { base with
+      innerInverse := A
+      innerRepresentative := u
+      outerInverse := R
+      outerRepresentative := rep
+      outerPoisson := Q
+      outerFunction := p }
   let U (side : Bool) : SeedPhysicalFirstIncoming P D side f.1 :=
     Classical.choice (P.exists_physical_firstIncoming hw hS side f.2.1 f.2.2.1 f.2.2.2
       (hincoming side) (hcone side))

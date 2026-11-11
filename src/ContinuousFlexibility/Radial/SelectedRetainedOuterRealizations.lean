@@ -53,8 +53,11 @@ theorem SeedRetainedPair.exists_selectedOuterRealizations {S : SelectedTailData}
       ∃ rep : RadialModePair D → ℝ → ℝ,
         ∃ Q : Fin 2 → RadialModePair D, ∃ p : Fin 2 → ℝ → ℝ,
           MatchingOuterRealizations D
-            { M with outerInverse := RO, outerRepresentative := rep,
-              outerPoisson := Q, outerFunction := p } := by
+            { M with
+              outerInverse := RO
+              outerRepresentative := rep
+              outerPoisson := Q
+              outerFunction := p } := by
   classical
   obtain ⟨R, hR⟩ := P.exists_selectedOuterRegionalInverse hD hw hS G hends hentry hfirst hcut
     hj heven hband V hV hN
