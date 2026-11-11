@@ -59,6 +59,10 @@ theorem radialOuterPairOperator_graph {D : ReferenceData}
       (radialTailZeroExtendOperator D true M.innerRight (R true) F.1),
       radialTailZeroExtendOperator_ae (he false), radialTailZeroExtendOperator_ae (he true)]
       with r hr hL hR
+    change (radialTailZeroExtendOperator D false M.innerLeft (R false) F.1 : ℝ → ℝ) r =
+      (Ioo D.a M.innerLeft).indicator (u false) r at hL
+    change (radialTailZeroExtendOperator D true M.innerRight (R true) F.1 : ℝ → ℝ) r =
+      (Ioo M.innerRight D.b).indicator (u true) r at hR
     change (radialTailZeroExtendOperator D false M.innerLeft (R false) F.1 +
       radialTailZeroExtendOperator D true M.innerRight (R true) F.1) r = _
     rw [hr, Pi.add_apply, hL, hR]
@@ -94,6 +98,10 @@ theorem radialOuterPairOperator_graph {D : ReferenceData}
       have hvalue := hve' (radialTailHalf_cut (matchingCut_mem_core_of_geometry ha hm hb i))
       have hderiv := derivWithin_congr hve' hvalue
       have hf := matchingOuterFlux_eq_tailHalf ha hm hb hv right
+      change matchingOuterFlux D M v i =
+        outerTailSign right * D.w (matchingCut D M i) *
+          derivWithin v (radialTailHalf D right (matchingCut D M i)) (matchingCut D M i) /
+            sqrt (M.boundaryScale i) at hf
       change M.A i i * sqrt (M.boundaryScale i) * v (matchingCut D M i) +
         M.B i i * matchingOuterFlux D M v i = 0
       rw [hf, hvalue, hderiv]
