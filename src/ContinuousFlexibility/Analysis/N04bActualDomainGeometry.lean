@@ -70,10 +70,10 @@ theorem n04b_actual_typed_domain_fields
         ∀ p ∈ Ioo (C.left i.1) (C.right i.1) ×ˢ (univ : Set ℝ),
           n04bActualTravelChart S C L z i.1 (p + (0, Real.pi)) =
             n04bActualTravelChart S C L z i.1 p + (0, Real.pi) := by
-      intro p hp
+      rintro ⟨r, θ⟩ hp
       simpa only [Prod.mk_add_mk, add_zero] using
         n04b_actualTravelChart_period_add h03 hS hT hfield hz hs i.1
-          ⟨hp.1.1.le, hp.1.2.le⟩ p.2
+          ⟨hp.1.1.le, hp.1.2.le⟩ θ
     have hg := n04b_negativeHalfDomain_properties
       (n04b_actualTravel_positive h03 hS hT hfield hz hs i.1)
       hF (n04b_actualTravelChart_smooth h03 hS hT hfield hz hs i.1).continuousOn

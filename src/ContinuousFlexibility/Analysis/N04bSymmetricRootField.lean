@@ -65,10 +65,16 @@ theorem n04b_exists_symmetric_corrected_root_factors
   refine ⟨ρ, ds, cs, hρ, hds, hcs, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro r θ
     dsimp only [ds]
-    rw [hdp r θ, hreflect_period (fun x => d (r, x)) (hdp r) θ]
+    have hperiod : d (r, θ + Real.pi) = d (r, θ) := hdp r θ
+    have hreflect : d (r, -(θ + Real.pi)) = d (r, -θ) :=
+      hreflect_period (fun x => d (r, x)) (hdp r) θ
+    rw [hperiod, hreflect]
   · intro r θ
     dsimp only [cs]
-    rw [hcp r θ, hreflect_period (fun x => c₀ (r, x)) (hcp r) θ]
+    have hperiod : c₀ (r, θ + Real.pi) = c₀ (r, θ) := hcp r θ
+    have hreflect : c₀ (r, -(θ + Real.pi)) = c₀ (r, -θ) :=
+      hreflect_period (fun x => c₀ (r, x)) (hcp r) θ
+    rw [hperiod, hreflect]
   · intro r θ
     dsimp only [ds]
     rw [neg_neg]

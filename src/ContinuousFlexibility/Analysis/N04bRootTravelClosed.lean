@@ -19,7 +19,8 @@ theorem n04b_rootCoordinate_mapsTo_closed {T : ℝ} (hT : 0 < T) :
     MapsTo n04bRootCoordinate (Icc (0 : ℝ) (T / 2))
       (Icc (0 : ℝ) (n04bRootCutRadius T)) := by
   intro s hs
-  have hb : 0 ≤ 3 * s / 2 := by positivity
+  have hb : 0 ≤ 3 * s / 2 :=
+    div_nonneg (mul_nonneg (by norm_num) hs.1) (by norm_num)
   change 0 ≤ (3 * s / 2) ^ (2 / 3 : ℝ) ∧
     (3 * s / 2) ^ (2 / 3 : ℝ) ≤ (3 * T / 4) ^ (2 / 3 : ℝ)
   exact ⟨Real.rpow_nonneg hb _,
@@ -103,6 +104,14 @@ theorem n04b_rootStrip_closed_bijOn {T : ℝ} (hT : 0 < T) (side : Bool) :
       (n04bClosedTravelHalfInterval T side ×ˢ (univ : Set ℝ))
       (Icc (0 : ℝ) (n04bRootCutRadius T) ×ˢ univ) := by
   obtain ⟨hc, ht, htc, hct⟩ := n04b_rootStrip_closed_chart_data hT side
-  exact n04b_bijOn_of_travel_inverse hc ht htc hct
+  refine ⟨hc, ?_, ?_⟩
+  · intro p hp q hq he
+    calc
+      p = n04bRootStripInverse T side (n04bRootStripChart T side p) := (htc p hp).symm
+      _ = n04bRootStripInverse T side (n04bRootStripChart T side q) :=
+        congrArg (n04bRootStripInverse T side) he
+      _ = q := htc q hq
+  · intro q hq
+    exact ⟨n04bRootStripInverse T side q, ht hq, hct q hq⟩
 
 end ContinuousFlexibility.Analysis

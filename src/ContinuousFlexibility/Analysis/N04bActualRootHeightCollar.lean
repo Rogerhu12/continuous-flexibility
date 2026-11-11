@@ -74,7 +74,7 @@ theorem n04b_exists_actual_root_height_collar
     continuous_const.add (continuous_const.mul continuous_id)
   have hnear : ∀ᶠ r in 𝓝 (0 : ℝ), r₀ + ι * r ∈ Ioo D.a D.b :=
     hshift.continuousAt.tendsto.eventually
-      (by simpa only [mul_zero, add_zero] using isOpen_Ioo.mem_nhds hr₀)
+      (by simpa only [mul_zero, add_zero] using isOpen_Ioo.eventually_mem hr₀)
   obtain ⟨δ₂, hδ₂, hphysical⟩ := Metric.mem_nhds_iff.mp hnear
   refine ⟨min δ₁ δ₂, lt_min_iff.mpr ⟨hδ₁, hδ₂⟩, ?_⟩
   intro r θ hr

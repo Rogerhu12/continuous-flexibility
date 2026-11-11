@@ -138,8 +138,11 @@ theorem n04bPastedRootChart_inverse_germ
   have hJSmooth : ContDiffAt ℝ ∞ J (F p) :=
     hJModel.congr_of_eventuallyEq hJGerm
   have hValue : J (F p) = p := by
-    rw [hEqJ hFpT, hFp, hLeft hp]
-    exact e.symm_apply_apply p
+    calc
+      J (F p) = e.symm (G (F p)) := hEqJ hFpT
+      _ = e.symm (G (Froot (e p))) := congrArg (fun q => e.symm (G q)) hFp
+      _ = e.symm (e p) := congrArg e.symm (hLeft hp)
+      _ = p := e.symm_apply_apply p
   have hRightPaste : ∀ᶠ q in 𝓝 (F p), F (J q) = q := by
     filter_upwards [hT.mem_nhds hFpT] with q hq
     rw [hEqJ hq]

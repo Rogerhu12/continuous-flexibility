@@ -97,7 +97,9 @@ theorem n04b_actualRootDensity_germ
       (characteristicTravelChart U V x).1 := ht
   have hFgerm : F =ᶠ[𝓝 x]
       n04bRootPhysicalChart (characteristicTravelChart U V) (C.travel m) side := hF
-  have hD := hFgerm.fderiv_eq
+  have hD : fderiv ℝ F x =
+      fderiv ℝ (n04bRootPhysicalChart (characteristicTravelChart U V)
+        (C.travel m) side) x := hFgerm.fderiv_eq
   have hpoint : F x =
       n04bRootPhysicalChart (characteristicTravelChart U V) (C.travel m) side x :=
     hFgerm.self_of_nhds
