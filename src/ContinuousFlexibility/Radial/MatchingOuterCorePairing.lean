@@ -91,7 +91,7 @@ theorem matchingOuterPoisson_testSource_pairing {D : ReferenceData}
     rw [matchingSourceOuter_pairing_of_fixed D M hM _ _ hfix,
       matchingTestSource_pairing,
       matchingJacobi_integral_eq_inner hD (M.outerPoisson i).1 hψ M.frequency]
-    simp only [hscalar, hrow, zero_mul, mul_zero, add_zero, ite_self]
+    simp only [matchingJacobiVector, hscalar, hrow, zero_mul, mul_zero, add_zero, ite_self]
   have hg := matchingOuter_green_test hD hB hM ha hm hb hfix hEq hrep
     (hreg.of_le (by norm_num)) hψ hcψ hsψ
   rw [hpair, hg]
