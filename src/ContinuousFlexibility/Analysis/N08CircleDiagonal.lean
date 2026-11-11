@@ -110,7 +110,7 @@ theorem n08ControlMeanCoordinate_apply (S : PhysicalSpacesData) (m : ℕ) (u : C
       ContinuousLinearMap.comp_apply _ _ _
     _ = _ := lp.evalₗ_apply (fun _ : ℕ => ℝ) 2 m (n08ControlRestriction S u)
 
-private theorem n08ControlMeanCoordinate_eq_of_decode
+theorem n08ControlMeanCoordinate_eq_of_decode
     (hS : IsPhysicalSpaces D T S) (m : ℕ) (u v : CircleSpace S)
     (h : (S.circle (3 / 4 : ℝ)).decode u m =
       (S.circle (3 / 4 : ℝ)).decode v m) :
@@ -121,6 +121,22 @@ private theorem n08ControlMeanCoordinate_eq_of_decode
         T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * angularMean f) h).trans
         ((n08ControlRestriction_apply hS v m).symm.trans
           (n08ControlMeanCoordinate_apply S m v).symm)))
+
+theorem n08CircleResidual_mean_eq_of_decode
+    (hS : IsPhysicalSpaces D T S) (hR : N02Properties D T S C R base ε)
+    (z w : AnnularState S × ℝ)
+    (hz : z ∈ stateNeighborhood S C base ε)
+    (hw : w ∈ stateNeighborhood S C base ε)
+    (hsz : stateSector S z.1) (hsw : stateSector S w.1)
+    (m : ℕ) (h : (S.circle (3 / 4 : ℝ)).decode (R.residual z) m =
+      (S.circle (3 / 4 : ℝ)).decode (R.residual w) m) :
+    n08ControlMeanCoordinate S m (n08CircleResidual hS hR z).val =
+      n08ControlMeanCoordinate S m (n08CircleResidual hS hR w).val :=
+  (congrArg (n08ControlMeanCoordinate S m)
+      (n08CircleResidual_coe hS hR (z := z) hz hsz)).trans
+    ((n08ControlMeanCoordinate_eq_of_decode hS m _ _ h).trans
+      (congrArg (n08ControlMeanCoordinate S m)
+        (n08CircleResidual_coe hS hR (z := w) hw hsw)).symm)
 
 private theorem n08CircleResidual_mean_eq_of_projected_decode
     (hS : IsPhysicalSpaces D T S) (hR : N02Properties D T S C R base ε)

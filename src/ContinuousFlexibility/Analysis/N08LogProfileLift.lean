@@ -33,6 +33,41 @@ private theorem n08_profileCoordinates_bound {E F : Type*}
   have ha := norm_nonneg x.2.1
   constructor <;> linarith
 
+private theorem n08_profileSum_bound {X Y B : Type*}
+    [AddCommGroup X] [Module ℝ X] [AddCommGroup Y] [Module ℝ Y]
+    [NormedAddCommGroup B]
+    (p : Seminorm ℝ X) (q : Seminorm ℝ Y)
+    (f : X → Y) (nu : X → ℝ) (control : X → B)
+    (scalarLift : ℝ → Y) (controlLift : B → Y)
+    (heq : ∀ x, f x = scalarLift (nu x) + controlLift (control x))
+    (hscalar : ∃ A : ℝ, 0 ≤ A ∧ ∀ a, q (scalarLift a) ≤ A * ‖a‖)
+    (hcontrol : ∃ A : ℝ, 0 ≤ A ∧ ∀ u, q (controlLift u) ≤ A * ‖u‖)
+    (K : ℝ) (hK : 0 ≤ K)
+    (hnu : ∀ x, ‖nu x‖ ≤ p x) (hc : ∀ x, ‖control x‖ ≤ K * p x) :
+    ∃ A : ℝ, 0 ≤ A ∧ ∀ x, q (f x) ≤ A * p x := by
+  obtain ⟨A1, hA1, hA1b⟩ := hscalar
+  obtain ⟨A2, hA2, hA2b⟩ := hcontrol
+  refine ⟨A1 + A2 * K, add_nonneg hA1 (mul_nonneg hA2 hK), fun x => ?_⟩
+  rw [heq x]
+  calc
+    _ ≤ q (scalarLift (nu x)) + q (controlLift (control x)) := map_add_le_add q _ _
+    _ ≤ A1 * ‖nu x‖ + A2 * ‖control x‖ := add_le_add (hA1b _) (hA2b _)
+    _ ≤ A1 * p x + A2 * (K * p x) :=
+      add_le_add (mul_le_mul_of_nonneg_left (hnu x) hA1)
+        (mul_le_mul_of_nonneg_left (hc x) hA2)
+    _ = _ := by ring
+
+private theorem n08_tameLinear_of_zero_level_bound {X Y : Type*}
+    [AddCommGroup X] [Module ℝ X] [AddCommGroup Y] [Module ℝ Y]
+    (p : ℕ → Seminorm ℝ X) (q : ℕ → Seminorm ℝ Y) (L : X →ₗ[ℝ] Y)
+    (hp : Monotone p)
+    (h : ∀ s, ∃ K : ℝ, 0 ≤ K ∧ ∀ x, q s (L x) ≤ K * p 0 x) :
+    IsTameLinear p q L 0 0 := by
+  intro s _
+  obtain ⟨K, hK, hKb⟩ := h s
+  refine ⟨⟨K, hK⟩, fun x => ?_⟩
+  exact (hKb x).trans (mul_le_mul_of_nonneg_left (hp (Nat.zero_le _) x) hK)
+
 def n08NuCoordinateCLM (S : PhysicalSpacesData) : AnnularState S →L[ℝ] ℝ :=
   (ContinuousLinearMap.fst ℝ ℝ (CircleSpace S × CircleSpace S)).comp
     (ContinuousLinearMap.snd ℝ (HeightPair S) (ℝ × (CircleSpace S × CircleSpace S)))
@@ -57,6 +92,13 @@ theorem n08ControlCoordinateCLM_bound (S : PhysicalSpacesData) (s : ℕ)
     (x : AnnularState S) :
     (S.circle (3 / 4 : ℝ)).grading s (n08ControlCoordinateCLM S x) ≤ stateGrading S s x :=
   (n08_profileCoordinates_bound (heightPairGrading S) (S.circle (3 / 4 : ℝ)).grading s x).2
+
+private theorem n08ControlWeakCoordinate_bound (S : PhysicalSpacesData)
+    (x : AnnularState S) :
+    ‖n08ControlRestriction S x.2.2.1‖ ≤ n08ControlMeanConstant * stateGrading S 0 x :=
+  (n08ControlRestriction_norm_le S x.2.2.1).trans
+    (mul_le_mul_of_nonneg_left (n08ControlCoordinateCLM_bound S 0 x)
+      n08ControlMeanConstant_nonneg)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -89,37 +131,28 @@ theorem n08LogProfileLift_grading_bound
     (hN : N01Properties D T S C base loss ε) (s : ℕ) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ x : AnnularState S,
       (S.height n08WeakControlWeight).grading s (n08LogProfileLift hT hS hN x) ≤
-        K * stateGrading S 0 x := by
-  obtain ⟨A, hA, hAb⟩ := n08NuProfileLift_grading_bound hT hS hN s
-  obtain ⟨B, hB, hBb⟩ := n08WeakControlLift_grading_bound hT hS hN s
-  refine ⟨A + B * n08ControlMeanConstant,
-    add_nonneg hA (mul_nonneg hB n08ControlMeanConstant_nonneg), fun x => ?_⟩
-  have hn : ‖x.2.1‖ ≤ stateGrading S 0 x := n08NuCoordinateCLM_bound S 0 x
-  have hc : ‖n08ControlRestriction S x.2.2.1‖ ≤
-      n08ControlMeanConstant * stateGrading S 0 x :=
-    (n08ControlRestriction_norm_le S x.2.2.1).trans
-      (mul_le_mul_of_nonneg_left (n08ControlCoordinateCLM_bound S 0 x)
-        n08ControlMeanConstant_nonneg)
-  rw [n08LogProfileLift_apply hT hS hN x]
-  calc
-    _ ≤ (S.height n08WeakControlWeight).grading s (n08NuProfileLift hT hS hN x.2.1) +
-        (S.height n08WeakControlWeight).grading s
-          (n08WeakControlLift hT hS hN (n08ControlRestriction S x.2.2.1)) :=
-      map_add_le_add _ _ _
-    _ ≤ A * ‖x.2.1‖ + B * ‖n08ControlRestriction S x.2.2.1‖ := add_le_add (hAb _) (hBb _)
-    _ ≤ A * stateGrading S 0 x + B * (n08ControlMeanConstant * stateGrading S 0 x) :=
-      add_le_add (mul_le_mul_of_nonneg_left hn hA) (mul_le_mul_of_nonneg_left hc hB)
-    _ = _ := by ring
+        K * stateGrading S 0 x :=
+  n08_profileSum_bound (X := AnnularState S) (Y := (S.height n08WeakControlWeight).Space)
+    (B := ControlBanach) (stateGrading S 0) ((S.height n08WeakControlWeight).grading s)
+    (n08LogProfileLift hT hS hN) (fun x : AnnularState S => x.2.1)
+    (fun x : AnnularState S => n08ControlRestriction S x.2.2.1)
+    (n08NuProfileLift hT hS hN) (n08WeakControlLift hT hS hN)
+    (n08LogProfileLift_apply hT hS hN)
+    (n08NuProfileLift_grading_bound hT hS hN s)
+    (n08WeakControlLift_grading_bound hT hS hN s)
+    n08ControlMeanConstant n08ControlMeanConstant_nonneg
+    (n08NuCoordinateCLM_bound S 0) (n08ControlWeakCoordinate_bound S)
 
 theorem n08LogProfileLift_isTame
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) :
     IsTameLinear (stateGrading S) (S.height n08WeakControlWeight).grading
-      (n08LogProfileLift hT hS hN).toLinearMap 0 0 := by
-  intro s _
-  obtain ⟨K, hK, hKb⟩ := n08LogProfileLift_grading_bound hT hS hN s
-  refine ⟨⟨K, hK⟩, fun x => (hKb x).trans ?_⟩
-  exact mul_le_mul_of_nonneg_left (solve_stateGrading_monotone S (Nat.zero_le _) x) hK
+      (n08LogProfileLift hT hS hN).toLinearMap 0 0 :=
+  n08_tameLinear_of_zero_level_bound
+    (X := AnnularState S) (Y := (S.height n08WeakControlWeight).Space)
+    (stateGrading S) (S.height n08WeakControlWeight).grading
+    (n08LogProfileLift hT hS hN).toLinearMap (solve_stateGrading_monotone S)
+    (n08LogProfileLift_grading_bound hT hS hN)
 
 theorem n08LogProfileLift_reference
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

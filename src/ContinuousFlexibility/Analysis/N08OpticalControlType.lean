@@ -41,6 +41,35 @@ private theorem n08_zero_parameter_line
     (x, (0 : ℝ)) + t • (v, (0 : ℝ)) = (x + t • v, (0 : ℝ)) := by
   simp only [Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero]
 
+private theorem n08_affine_radicand_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    (p : Seminorm ℝ E) (x v : E) (f : E × ℝ → ℝ) {ε A B K : ℝ}
+    (hε : 0 < ε) (hA : 0 < A)
+    (J : SmoothDirections {z : E × ℝ | p (z.1 - x) < ε ∧ |z.2| < ε} f)
+    (hf : ∀ t : ℝ, (x + n08RealSMul t v, 0) ∈
+      {z : E × ℝ | p (z.1 - x) < ε ∧ |z.2| < ε} →
+        f (x + n08RealSMul t v, 0) = K - Real.sqrt (A + t * B)) :
+    (ε / (1 + p v)) * |B| ≤ A := by
+  have hp : 0 < 1 + p v := by
+    have := apply_nonneg p v
+    linarith
+  have hmem (t : ℝ) (ht : |t| < ε / (1 + p v)) :
+      (x + t • v, (0 : ℝ)) ∈
+        {z : E × ℝ | p (z.1 - x) < ε ∧ |z.2| < ε} :=
+    ⟨n08_affine_seminorm_lt p x v ht, (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
+  apply n08_sqrtAffine_bound_of_lineDerivatives f (x, 0) (v, 0)
+    hA (div_pos hε hp)
+  · intro t ht
+    have hm : (x, 0) + t • (v, 0) ∈
+        {z : E × ℝ | p (z.1 - x) < ε ∧ |z.2| < ε} := by
+      rw [n08_zero_parameter_line]
+      exact hmem t ht
+    exact ⟨_, J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain hm (v, 0)⟩
+  · intro t ht
+    rw [n08_zero_parameter_line]
+    exact hf t (hmem t ht)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -60,17 +89,19 @@ theorem n08_ordinaryFlow_radial_jet_zero_parameter
   have hg : RadialProfileGeometry D := hbounds.1
   have hcore : r ∈ radialCore D :=
     ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
-  have hzero : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
-    constructor
-    · simpa only [stateNeighborhood, sub_self, map_zero] using hε
-    · simpa only [abs_zero] using hε
+  have hzero : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+    ⟨n08_seminorm_center_lt (stateGrading S base) C.referenceState hε,
+      (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
   have hxder := ((hflow (x, 0) hx m θ).2.2.1 r hr).congr_deriv
     (n08_minusCharacteristicSpeed_zero_parameter hg x hw r _ hcore)
   have hzeroder := ((hflow (C.referenceState, 0) hzero m θ).2.2.1 r hr).congr_deriv
     (n08_minusCharacteristicSpeed_reference hg href r _ hcore)
-  have hd := (hxder.sub hzeroder).deriv
+  have hd := hxder.sub hzeroder
+  change HasDerivAt
+    (fun s => C.minusFlow (x, 0) m s θ - C.minusFlow (C.referenceState, 0) m s θ)
+    (-opticalSpeed (stateProfile D S C x) r - -opticalSpeed D.w r) r at hd
   simpa only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_one,
-    iteratedDeriv_zero, sub_neg_eq_add] using hd
+    iteratedDeriv_zero, sub_neg_eq_add] using hd.deriv
 
 /-- A public affine-radicand identity for the actual logarithmic control. -/
 theorem n08_opticalSpeed_logPerturbation {w χ : ℝ → ℝ} {t r : ℝ}
@@ -88,6 +119,40 @@ theorem n08_opticalSpeed_logPerturbation {w χ : ℝ → ℝ} {t r : ℝ}
   field_simp [hr, hwr, (Real.exp_pos (t * χ r)).ne']
   ring
 
+private theorem n08_ordinaryFlow_radial_smoothDirections
+    (hN : N01Properties D T S C base loss ε) (m : ℕ) (r : ℝ)
+    (hr : r ∈ Ioo (C.left m) (C.right m)) :
+    ∃ J : SmoothDirections (stateNeighborhood S C base ε)
+      (ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ))), True := by
+  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩ := hN
+  obtain ⟨K, _, hK⟩ := hflow 1 1
+  obtain ⟨J, _⟩ := hK m 1 0 (r, (0 : ℝ)) (by omega) hr
+  exact ⟨J, trivial⟩
+
+private theorem n08_controlBasis_flow_jet_affine
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε)
+    (m : ℕ) (r : ℝ) (hr : r ∈ Ioo (C.left m) (C.right m)) (t : ℝ)
+    (ht : (C.referenceState + n08StateSMul S t (0, 0, n08ControlBasis hS m, 0), 0) ∈
+      stateNeighborhood S C base ε) :
+    ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ))
+      (C.referenceState + n08StateSMul S t (0, 0, n08ControlBasis hS m, 0), 0) =
+      opticalSpeed D.w r - Real.sqrt (-deriv D.w r / (r * D.w r) +
+        t * (T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r))) := by
+  have hC := hN.2.2.2.1
+  obtain ⟨bounds, hbounds⟩ := hN.1.1
+  have hg : RadialProfileGeometry D := hbounds.1
+  have hcore : r ∈ radialCore D :=
+    ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
+  have hrpos : 0 < r := hg.1.trans hcore.1
+  have hwpos : 0 < D.w r := hg.2.2.2.2.1 r hcore
+  have hf := n08_ordinaryFlow_radial_jet_zero_parameter hS hT hN _ ht m r 0 hr
+  rw [n08_controlBasis_reference_profile hS hN.2.2.1 hC m t,
+    n08_opticalSpeed_logPerturbation
+      (hg.2.2.1.1.differentiable (by simp) r)
+      ((hC.2.2.2.2.2.1 m).1.differentiable (by simp) r) hrpos.ne' hwpos.ne'] at hf
+  simpa only [mul_assoc, sub_eq_add_neg, add_comm] using hf
+
 /-- The same weighted control basis used by the circle diagonal has an
 actual relative radicand bound on its own negative component. -/
 theorem n08_controlBasis_radical_relative_bound
@@ -97,12 +162,6 @@ theorem n08_controlBasis_radical_relative_bound
     (ε / (1 + stateGrading S base (0, 0, n08ControlBasis hS m, 0))) *
         |T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r)| ≤
       -deriv D.w r / (r * D.w r) := by
-  let v : AnnularState S := (0, 0, n08ControlBasis hS m, 0)
-  let A : ℝ := -deriv D.w r / (r * D.w r)
-  let B : ℝ := T.H (T.sample m) ^ (3 / 4 : ℝ) * (-deriv (C.control m) r / r)
-  let radius : ℝ := ε / (1 + stateGrading S base v)
-  let f := ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ))
-  have href := hN.2.2.1
   have hC := hN.2.2.2.1
   obtain ⟨bounds, hbounds⟩ := hN.1.1
   have hg : RadialProfileGeometry D := hbounds.1
@@ -110,42 +169,11 @@ theorem n08_controlBasis_radical_relative_bound
     ⟨(hC.1 m).1.trans hr.1, hr.2.trans (hC.1 m).2.2⟩
   have hrpos : 0 < r := hg.1.trans hcore.1
   have hwpos : 0 < D.w r := hg.2.2.2.2.1 r hcore
-  have hA : 0 < A :=
+  have hA : 0 < -deriv D.w r / (r * D.w r) :=
     div_pos (neg_pos.mpr (hC.2.2.2.1 m r hr)) (mul_pos hrpos hwpos)
-  have hp : 0 < 1 + stateGrading S base v := by
-    have := apply_nonneg (stateGrading S base) v
-    linarith
-  have hrad : 0 < radius := div_pos hN.2.1 hp
-  have hmem (t : ℝ) (ht : |t| < radius) :
-      (C.referenceState + n08StateSMul S t v, 0) ∈
-        stateNeighborhood S C base ε :=
-    ⟨n08_affine_seminorm_lt (stateGrading S base) C.referenceState v ht,
-      (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1⟩
-  have hpair (t : ℝ) :
-      (C.referenceState, 0) + n08StateParameterSMul S t (v, 0) =
-        (C.referenceState + n08StateSMul S t v, 0) :=
-    n08_zero_parameter_line C.referenceState v t
-  have hflowjets : ∃ J : SmoothDirections (stateNeighborhood S C base ε) f, True := by
-    have hdata := hN
-    obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩ := hdata
-    obtain ⟨K, _, hK⟩ := hflow 1 1
-    obtain ⟨J, _⟩ := hK m 1 0 (r, (0 : ℝ)) (by omega) hr
-    exact ⟨J, trivial⟩
-  obtain ⟨J, _⟩ := hflowjets
-  apply n08_sqrtAffine_bound_of_lineDerivatives f (C.referenceState, 0) (v, 0)
-    (A := A) (B := B) (K := opticalSpeed D.w r) (R := radius) hA hrad
-  · intro t ht
-    have hm : (C.referenceState, 0) + n08StateParameterSMul S t (v, 0) ∈
-        stateNeighborhood S C base ε := (hpair t).symm ▸ hmem t ht
-    exact ⟨_, J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain hm (v, 0)⟩
-  · intro t ht
-    have hf := n08_ordinaryFlow_radial_jet_zero_parameter hS hT hN
-      (C.referenceState + n08StateSMul S t v) (hmem t ht) m r 0 hr
-    rw [n08_controlBasis_reference_profile hS href hC m t,
-      n08_opticalSpeed_logPerturbation
-        (hg.2.2.1.1.differentiable (by simp) r)
-        ((hC.2.2.2.2.2.1 m).1.differentiable (by simp) r) hrpos.ne' hwpos.ne'] at hf
-    exact (congrArg f (hpair t)).trans
-      (by simpa only [A, B, mul_assoc, sub_eq_add_neg, add_comm] using hf)
+  obtain ⟨J, _⟩ := n08_ordinaryFlow_radial_smoothDirections hN m r hr
+  exact n08_affine_radicand_bound (stateGrading S base) C.referenceState
+    (0, 0, n08ControlBasis hS m, 0) (ordinaryFlowFamily S C m 1 0 (r, (0 : ℝ)))
+    hN.2.1 hA J (fun t ht => n08_controlBasis_flow_jet_affine hS hT hN m r hr t ht)
 
 end ContinuousFlexibility.Statements

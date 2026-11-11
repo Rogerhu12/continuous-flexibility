@@ -26,7 +26,9 @@ theorem n08CircleDiagonal_value (hS : IsPhysicalSpaces D T S)
     n08CircleDiagonal hS hR z m = n08ControlMeanCoordinate S m
       ((n08CircleSectorJet hR).D 1 (n08CircleSectorPoint hS C z)
         (Fin.cons (n08_sectorProjection hS (0, 0, n08ControlBasis hS m, 0), 0) Fin.elim0)) := by
-  rw [n08CircleDiagonal, n08CircleColumn_apply, n08CircleStateDerivative_apply]
+  exact congrArg (n08ControlMeanCoordinate S m)
+    ((n08CircleColumn_apply hS hR z (n08ControlBasis hS m)).trans
+      (n08CircleStateDerivative_apply hS hR z (0, (0, (n08ControlBasis hS m, 0)))))
 
 theorem n08CircleDiagonal_continuousOn (hS : IsPhysicalSpaces D T S)
     (href : referenceStateConditions D S C)
@@ -72,8 +74,10 @@ theorem n08CircleDiagonal_finite_near_reference
         |n08CircleDiagonal hS hR z m| ≤ 2 := by
   apply I.eventually_all.mpr
   intro m _
-  have hc := ((n08CircleDiagonal_continuousAt_reference hS hN hR m).sub
-    continuousAt_const).abs
+  have hc : ContinuousAt (fun z : AnnularState S × ℝ =>
+      |n08CircleDiagonal hS hR z m - 1|) (C.referenceState, 0) :=
+    ((n08CircleDiagonal_continuousAt_reference hS hN hR m).sub
+      (continuousAt_const (y := (1 : ℝ)))).abs
   have ht : Tendsto (fun z => |n08CircleDiagonal hS hR z m - 1|)
       (𝓝 (C.referenceState, (0 : ℝ))) (𝓝 0) := by
     simpa only [n08CircleDiagonal_reference hT hS hN hR, sub_self, abs_zero] using hc

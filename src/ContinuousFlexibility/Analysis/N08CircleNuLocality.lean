@@ -127,11 +127,86 @@ private theorem n08_kappaLine_sector (hS : IsPhysicalSpaces D T S)
 
 private theorem n08_kappaLine_chart (hS : IsPhysicalSpaces D T S)
     (x : AnnularState S) (m : ℕ) (t : ℝ) :
-    stateLeftChart S (n08_kappaLine hS x m t) m = stateLeftChart S x m := by
-  have he : (n08_kappaLine hS x m t).2.2.2 = x.2.2.2 := by
-    simp only [n08_kappaLine, n08StateSMul, n08RealSMul, Prod.snd_add, Prod.smul_snd,
-      smul_zero, add_zero]
-  simp only [stateLeftChart, he]
+    stateLeftChart S (n08_kappaLine hS x m t) m = stateLeftChart S x m :=
+  congrArg (fun u : CircleSpace S => fun θ : ℝ =>
+    θ + (S.circle (3 / 4 : ℝ)).decode u m θ)
+    (n08_kappaLine_fixed_coordinates S x (n08ControlBasis hS m) t).2.2
+
+private theorem n08_kappaLine_kappa_eq (hS : IsPhysicalSpaces D T S)
+    {x y : AnnularState S} {m : ℕ}
+    (hκ : stateKappa S x m = stateKappa S y m) (t : ℝ) :
+    stateKappa S (n08_kappaLine hS x m t) m =
+      stateKappa S (n08_kappaLine hS y m t) m :=
+  (n08_stateKappa_add hS x
+      (n08StateSMul S t (0, (0, (n08ControlBasis hS m, 0)))) m).trans
+    ((congrArg (fun a : ℝ => a + stateKappa S
+        (n08StateSMul S t (0, (0, (n08ControlBasis hS m, 0)))) m) hκ).trans
+      (n08_stateKappa_add hS y
+        (n08StateSMul S t (0, (0, (n08ControlBasis hS m, 0)))) m).symm)
+
+private theorem n08_nuMeanCoordinate_eq_of_decode
+    (hS : IsPhysicalSpaces D T S) (m : ℕ) (u v : CircleSpace S)
+    (h : (S.circle (3 / 4 : ℝ)).decode u m =
+      (S.circle (3 / 4 : ℝ)).decode v m) :
+    n08ControlMeanCoordinate S m u = n08ControlMeanCoordinate S m v :=
+  (n08ControlMeanCoordinate_apply S m u).trans
+    ((n08ControlRestriction_apply hS u m).trans
+      ((congrArg (fun f : ℝ → ℝ =>
+        T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * angularMean f) h).trans
+        ((n08ControlRestriction_apply hS v m).symm.trans
+          (n08ControlMeanCoordinate_apply S m v).symm)))
+
+private theorem n08_circleMean_zero_eq_of_kappa
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε)
+    (hR : N02Properties D T S C R base ε)
+    {x y : AnnularState S} {m : ℕ}
+    (hx : (x, 0) ∈ stateNeighborhood S C base ε)
+    (hy : (y, 0) ∈ stateNeighborhood S C base ε)
+    (hsx : stateSector S x) (hsy : stateSector S y)
+    (hκ : stateKappa S x m = stateKappa S y m)
+    (hchart : stateLeftChart S x m = stateLeftChart S y m) :
+    n08ControlMeanCoordinate S m (n08CircleResidual hS hR (x, 0)).val =
+      n08ControlMeanCoordinate S m (n08CircleResidual hS hR (y, 0)).val := by
+  have hd : (S.circle (3 / 4 : ℝ)).decode (R.residual (x, 0)) m =
+      (S.circle (3 / 4 : ℝ)).decode (R.residual (y, 0)) m :=
+    funext fun θ => n08_returnResidual_zero_eq_of_kappa hT hS hN hR
+      (x := x) (y := y) (m := m) hx hy hsx hsy hκ hchart θ
+  exact (congrArg (n08ControlMeanCoordinate S m)
+      (n08CircleResidual_coe hS hR (z := (x, 0)) hx hsx)).trans
+    ((n08_nuMeanCoordinate_eq_of_decode hS m _ _ hd).trans
+      (congrArg (n08ControlMeanCoordinate S m)
+        (n08CircleResidual_coe hS hR (z := (y, 0)) hy hsy)).symm)
+
+private theorem n08_kappaLine_return_eq
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε)
+    (hR : N02Properties D T S C R base ε)
+    {x y : AnnularState S} {m : ℕ}
+    (hsx : stateSector S x) (hsy : stateSector S y)
+    (hκ : stateKappa S x m = stateKappa S y m)
+    (hchart : stateLeftChart S x m = stateLeftChart S y m) (t : ℝ)
+    (hx : (n08_kappaLine hS x m t, 0) ∈ stateNeighborhood S C base ε)
+    (hy : (n08_kappaLine hS y m t, 0) ∈ stateNeighborhood S C base ε) :
+    n08ControlMeanCoordinate S m
+        (n08CircleResidual hS hR (n08_kappaLine hS x m t, 0)).val =
+      n08ControlMeanCoordinate S m
+        (n08CircleResidual hS hR (n08_kappaLine hS y m t, 0)).val :=
+  n08_circleMean_zero_eq_of_kappa hT hS hN hR
+    (x := n08_kappaLine hS x m t) (y := n08_kappaLine hS y m t) (m := m)
+    hx hy (n08_kappaLine_sector hS hsx m t) (n08_kappaLine_sector hS hsy m t)
+    (n08_kappaLine_kappa_eq hS hκ t)
+    ((n08_kappaLine_chart hS x m t).trans
+      (hchart.trans (n08_kappaLine_chart hS y m t).symm))
+
+private theorem n08_kappaLine_eventually_mem
+    (hS : IsPhysicalSpaces D T S) {x : AnnularState S}
+    (hx : (x, 0) ∈ stateNeighborhood S C base ε) (m : ℕ) :
+    ∀ᶠ t : ℝ in 𝓝 0,
+      (n08_kappaLine hS x m t, 0) ∈ stateNeighborhood S C base ε :=
+  n08_fixedParameter_affine_mem (E := AnnularState S)
+    (n08_isOpen_stateNeighborhood S C base ε) (x := x) (q := 0) hx
+    (0, (0, (n08ControlBasis hS m, 0)))
 
 private theorem n08_kappaLine_return_germ
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -147,31 +222,10 @@ private theorem n08_kappaLine_return_germ
       (n08CircleResidual hS hR (n08_kappaLine hS x m t, 0)).val) =ᶠ[𝓝 (0 : ℝ)]
     (fun t => n08ControlMeanCoordinate S m
       (n08CircleResidual hS hR (n08_kappaLine hS y m t, 0)).val) := by
-  have hX : ∀ᶠ t : ℝ in 𝓝 0,
-      (n08_kappaLine hS x m t, 0) ∈ stateNeighborhood S C base ε := by
-    simpa only [n08_kappaLine, n08StateSMul] using
-      n08_fixedParameter_affine_mem (n08_isOpen_stateNeighborhood S C base ε) hx
-        (0, (0, (n08ControlBasis hS m, 0)))
-  have hY : ∀ᶠ t : ℝ in 𝓝 0,
-      (n08_kappaLine hS y m t, 0) ∈ stateNeighborhood S C base ε := by
-    simpa only [n08_kappaLine, n08StateSMul] using
-      n08_fixedParameter_affine_mem (n08_isOpen_stateNeighborhood S C base ε) hy
-        (0, (0, (n08ControlBasis hS m, 0)))
-  filter_upwards [hX, hY] with t hXt hYt
-  have hsX := n08_kappaLine_sector hS hsx m t
-  have hsY := n08_kappaLine_sector hS hsy m t
-  have hκt : stateKappa S (n08_kappaLine hS x m t) m =
-      stateKappa S (n08_kappaLine hS y m t) m := by
-    simp only [n08_kappaLine, n08_stateKappa_add hS, n08_stateKappa_smul hS, hκ]
-  have hct : stateLeftChart S (n08_kappaLine hS x m t) m =
-      stateLeftChart S (n08_kappaLine hS y m t) m := by
-    rw [n08_kappaLine_chart, n08_kappaLine_chart, hchart]
-  rw [n08ControlMeanCoordinate_apply, n08ControlMeanCoordinate_apply,
-    n08ControlRestriction_apply hS, n08ControlRestriction_apply hS,
-    n08CircleResidual_coe hS hR hXt hsX, n08CircleResidual_coe hS hR hYt hsY]
-  apply congrArg (fun u : ℝ → ℝ => T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * angularMean u)
-  funext θ
-  exact n08_returnResidual_zero_eq_of_kappa hT hS hN hR hXt hYt hsX hsY hκt hct θ
+  filter_upwards [n08_kappaLine_eventually_mem hS hx m,
+    n08_kappaLine_eventually_mem hS hy m] with t hXt hYt
+  exact n08_kappaLine_return_eq hT hS hN hR
+    (x := x) (y := y) (m := m) hsx hsy hκ hchart t hXt hYt
 
 /-- The actual q-zero diagonal depends only on the local control mean and
 left chart. In particular, its nu and height coordinates can be removed. -/

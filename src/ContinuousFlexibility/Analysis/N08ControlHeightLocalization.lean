@@ -24,6 +24,32 @@ private theorem n08_rpow_inverse_successor {M : ℝ} (hM : 0 < M) (N : ℝ) :
   rw [Real.rpow_add hM, Real.rpow_one, mul_inv_rev]
   field_simp [(Real.rpow_pos_of_pos hM N).ne', hM.ne']
 
+private theorem n08_reweight_localizations
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (M : ℕ → ℝ) (F : ℕ → E → E) (physical : ℕ → ℕ)
+    (hM : ∀ m, 0 < M m)
+    (hweight : ∀ a : ℝ, ∃ C N : ℝ, 0 < C ∧ 0 ≤ N ∧ ∀ m,
+      M m ^ a ≤ C * M (physical m) ^ N)
+    (htail : ∀ N : ℝ, ∃ l : ℕ, ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧ ∀ m u,
+      p s (F m u) ≤ K * (M m ^ N)⁻¹ * p (s + l) u) :
+    ∀ s a : ℕ, ∃ b : ℕ, ∃ K : ℝ, 0 ≤ K ∧ ∀ m u,
+      M m ^ a * p s (F (physical m) u) ≤ K * (M (physical m))⁻¹ * p b u := by
+  intro s a
+  obtain ⟨C, N, hC, _, hCb⟩ := hweight (a : ℝ)
+  obtain ⟨l, hLb⟩ := htail (N + 1)
+  obtain ⟨K, hK, hKb⟩ := hLb s
+  refine ⟨s + l, C * K, mul_nonneg hC.le hK, fun m u => ?_⟩
+  have hlabel : M m ^ a ≤ C * M (physical m) ^ N := by
+    simpa only [Real.rpow_natCast] using hCb m
+  calc
+    _ ≤ (C * M (physical m) ^ N) *
+        (K * (M (physical m) ^ (N + 1))⁻¹ * p (s + l) u) :=
+      mul_le_mul hlabel (hKb (physical m) u) (apply_nonneg _ _)
+        (mul_nonneg hC.le (Real.rpow_nonneg (hM (physical m)).le _))
+    _ = (C * K) *
+        (M (physical m) ^ N * (M (physical m) ^ (N + 1))⁻¹) * p (s + l) u := by ring
+    _ = _ := by rw [n08_rpow_inverse_successor (hM (physical m))]
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -51,25 +77,13 @@ theorem n08_control_height_localizations
   · intro m u r hr θ
     exact n08CellLayerMultiplier_decode_germ hT (hS.1 (3 / 4 : ℝ))
       (zero_lt_one.trans_le hA) (physical m) u (hplatform (physical m) r (hcell m hr))
-  · intro s a
-    obtain ⟨C0, N, hC0, _, hCb⟩ := hweight (a : ℝ)
-    obtain ⟨l, hLb⟩ := n08CellLayerMultiplier_tail_bound hN.1.1 hT
-      (hS.1 (3 / 4 : ℝ)) hA (N + 1)
-    obtain ⟨K, hK, hKb⟩ := hLb s
-    refine ⟨s + l, C0 * K, mul_nonneg hC0.le hK, fun m u => ?_⟩
-    have hM : 0 < T.M (T.sample (physical m)) :=
-      zero_lt_one.trans_le (n08_material_sample_bounds hN.1.1 hT (physical m)).2
-    have hlabel : T.M (T.sample m) ^ a ≤ C0 * T.M (T.sample (physical m)) ^ N := by
-      simpa only [Real.rpow_natCast] using hCb m
-    calc
-      _ ≤ (C0 * T.M (T.sample (physical m)) ^ N) *
-          (K * (T.M (T.sample (physical m)) ^ (N + 1))⁻¹ *
-            (S.height (3 / 4 : ℝ)).grading (s + l) u) :=
-        mul_le_mul hlabel (hKb (physical m) u) (apply_nonneg _ _)
-          (mul_nonneg hC0.le (Real.rpow_nonneg hM.le _))
-      _ = (C0 * K) *
-          (T.M (T.sample (physical m)) ^ N * (T.M (T.sample (physical m)) ^ (N + 1))⁻¹) *
-            (S.height (3 / 4 : ℝ)).grading (s + l) u := by ring
-      _ = _ := by rw [n08_rpow_inverse_successor hM]
+  · exact n08_reweight_localizations (S.height (3 / 4 : ℝ)).grading
+      (fun m => T.M (T.sample m))
+      (fun m u => n08CellLayerMultiplier hT (hS.1 (3 / 4 : ℝ)) A m u) physical
+      (fun m => zero_lt_one.trans_le (n08_material_sample_bounds hN.1.1 hT m).2)
+      hweight
+      (fun N => n08CellLayerMultiplier_tail_bound
+        (W := S.height (3 / 4 : ℝ)) (γ := (3 / 4 : ℝ)) hN.1.1 hT
+        (hS.1 (3 / 4 : ℝ)) hA N)
 
 end ContinuousFlexibility.Statements
