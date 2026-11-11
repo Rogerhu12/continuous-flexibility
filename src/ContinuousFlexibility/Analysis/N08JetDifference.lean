@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N08OpticalSquareRoot
+import ContinuousFlexibility.Statements.Nonlinear
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Scalar.WeightedProductTower
 import Mathlib.Analysis.Calculus.MeanValue

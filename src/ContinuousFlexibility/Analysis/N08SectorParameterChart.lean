@@ -22,6 +22,36 @@ private theorem n08_pairSubtype_grading {E : Type*}
     pairGrading p realGrading s (n08_pairSubtypeCLM Q z) =
       pairGrading (fun n => (p n).comp Q.subtype) realGrading s z := rfl
 
+private theorem n08_pairSubtype_grading_bound {E : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (Q : Submodule ℝ E) (p : ℕ → Seminorm ℝ E) (s : ℕ) (z : Q × ℝ) :
+    pairGrading p realGrading s (n08_pairSubtypeCLM Q z) ≤
+      1 * pairGrading (fun n => (p n).comp Q.subtype) realGrading s z := by
+  simpa only [one_mul] using (n08_pairSubtype_grading Q p s z).le
+
+private theorem n08_centered_pair_membership {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (p : ℕ → Seminorm ℝ E)
+    (base : ℕ) (ε q : ℝ) (a x : E) :
+    (p base (a + x - a) < ε ∧ |q| < ε) ↔ (p base x < ε ∧ |q| < ε) := by
+  rw [add_sub_cancel_left]
+
+private theorem n08_smoothTameOn_affine_chart
+    {E F G : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [IsTopologicalAddGroup F]
+    [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F} {r : ℕ → Seminorm ℝ G}
+    {U : Set F} {f : F → G} (hf : SmoothTameOn q r U f)
+    (a : F) (L : E →L[ℝ] F) (chart : E → F) (hchart : ∀ z, chart z = a + L z)
+    {V : Set E} (hV : IsOpen V) (hL : ∀ n x, q n (L x) ≤ 1 * p n x)
+    (hmap : MapsTo chart V U) : SmoothTameOn p r V (fun z => f (chart z)) := by
+  have hpre := n08_smoothTameOn_affine_pullback (p := p) hf a L (A := 1) le_rfl hL
+  have hs := smoothTameOn_mono hpre hV (fun z hz => by
+    change a + L z ∈ U
+    rw [← hchart z]
+    exact hmap hz)
+  exact smoothTameOn_congr hs (fun z _ => congrArg f (hchart z).symm)
+
 def n08SectorParameterInclusion (S : PhysicalSpacesData) :
     StateDirections S × ℝ →L[ℝ] AnnularState S × ℝ :=
   n08_pairSubtypeCLM (stateSectorSubmodule S)
@@ -34,6 +64,12 @@ theorem n08SectorParameterInclusion_grading (S : PhysicalSpacesData)
     pairGrading (stateGrading S) realGrading s (n08SectorParameterInclusion S z) =
       pairGrading (sectorGrading S) realGrading s z :=
   n08_pairSubtype_grading (stateSectorSubmodule S) (stateGrading S) s z
+
+theorem n08SectorParameterInclusion_bound (S : PhysicalSpacesData)
+    (s : ℕ) (z : StateDirections S × ℝ) :
+    pairGrading (stateGrading S) realGrading s (n08SectorParameterInclusion S z) ≤
+      1 * pairGrading (sectorGrading S) realGrading s z :=
+  n08_pairSubtype_grading_bound (stateSectorSubmodule S) (stateGrading S) s z
 
 theorem n08_liftSectorParameter_eq (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : StateDirections S × ℝ) :
@@ -60,10 +96,8 @@ theorem n08_liftSectorParameter_difference (S : PhysicalSpacesData)
 theorem n08_liftSectorParameter_mem (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (base : ℕ) (ε : ℝ) (z : StateDirections S × ℝ) :
     liftSectorParameter S C z ∈ stateNeighborhood S C base ε ↔
-      z ∈ sectorNeighborhood S base ε ε := by
-  change (stateGrading S base (C.referenceState + z.1.val - C.referenceState) < ε ∧
-    |z.2| < ε) ↔ (stateGrading S base z.1.val < ε ∧ |z.2| < ε)
-  rw [add_sub_cancel_left]
+      z ∈ sectorNeighborhood S base ε ε :=
+  n08_centered_pair_membership (stateGrading S) base ε z.2 C.referenceState z.1.val
 
 theorem n08_referenceState_sector {D : ReferenceData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} (href : referenceStateConditions D S C) :
@@ -88,16 +122,10 @@ theorem n08_smoothTameOn_sector_pullback
     (hf : SmoothTameOn (pairGrading (stateGrading S) realGrading) q U f)
     (hmap : MapsTo (liftSectorParameter S C) (sectorNeighborhood S base ε ε) U) :
     SmoothTameOn (pairGrading (sectorGrading S) realGrading) q
-      (sectorNeighborhood S base ε ε) (fun z => f (liftSectorParameter S C z)) := by
-  have hpre := n08_smoothTameOn_affine_pullback hf (C.referenceState, 0)
-    (n08SectorParameterInclusion S) (A := 1) le_rfl
-    (fun n x => by rw [n08SectorParameterInclusion_grading, one_mul])
-  have hs := smoothTameOn_mono hpre (n08_isOpen_sectorNeighborhood S base ε ε)
-    (fun z hz => by
-      change (C.referenceState, 0) + n08SectorParameterInclusion S z ∈ U
-      rw [← n08_liftSectorParameter_eq]
-      exact hmap hz)
-  exact smoothTameOn_congr hs
-    (fun z _ => congrArg f (n08_liftSectorParameter_eq S C z).symm)
+      (sectorNeighborhood S base ε ε) (fun z => f (liftSectorParameter S C z)) :=
+  n08_smoothTameOn_affine_chart (p := pairGrading (sectorGrading S) realGrading)
+    hf (C.referenceState, 0) (n08SectorParameterInclusion S) (liftSectorParameter S C)
+    (n08_liftSectorParameter_eq S C) (n08_isOpen_sectorNeighborhood S base ε ε)
+    (n08SectorParameterInclusion_bound S) hmap
 
 end ContinuousFlexibility.Statements

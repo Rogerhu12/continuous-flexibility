@@ -55,8 +55,9 @@ theorem n08_intervalLayerThreshold_jet (δ x : ℝ) (j : ℕ) :
       fun y => (fun t => Real.smoothTransition (t - 1)) (δ⁻¹ * y) := by
     funext y
     simp only [Analysis.intervalLayerThreshold, div_eq_mul_inv, mul_comm]
-  rw [he, iteratedDeriv_comp_const_mul
-    (Real.smoothTransition.contDiff.comp (contDiff_id.sub contDiff_const)),
+  have hs : ContDiff ℝ j (fun t : ℝ => Real.smoothTransition (t - 1)) :=
+    (Real.smoothTransition.contDiff.comp (contDiff_id.sub contDiff_const)).of_le (by simp)
+  rw [he, congrFun (iteratedDeriv_comp_const_mul hs δ⁻¹) x,
     iteratedDeriv_comp_sub_const]
   simp only [div_eq_mul_inv, mul_comm]
 
@@ -109,8 +110,12 @@ theorem n08_jetPrefix_one_sub_bound {f : ℝ → ℝ} (hf : ContDiff ℝ ∞ f)
     |iteratedDeriv j (fun y => 1 - f y) x| ≤ 1 + B := by
   by_cases hz : j = 0
   · subst j
-    simpa only [iteratedDeriv_zero, abs_one] using
-      (abs_sub (1 : ℝ) (f x)).trans (add_le_add_left (hb 0 (Nat.zero_le _)) 1)
+    rw [iteratedDeriv_zero]
+    calc
+      |1 - f x| ≤ |1| + |f x| := abs_sub _ _
+      _ = 1 + |f x| := by rw [abs_one]
+      _ ≤ 1 + B := add_le_add le_rfl
+        (by simpa only [iteratedDeriv_zero] using hb 0 (Nat.zero_le s))
   · rw [iteratedDeriv_const_sub (Nat.pos_of_ne_zero hz), iteratedDeriv_neg, abs_neg]
     exact (hb j hj).trans (le_add_of_nonneg_left zero_le_one)
 
@@ -128,7 +133,9 @@ theorem n08_intervalLayerCutoff_jet_bound (s : ℕ) :
   have hR : 1 ≤ δ⁻¹ := (one_le_inv₀ hδ).mpr hδ1
   have hL : 1 ≤ L := by dsimp only [L]; linarith
   have hδh : 0 < δ / 2 := by positivity
-  have hhL : (δ / 2)⁻¹ ≤ L := by dsimp only [L]; simp only [inv_div]; norm_num
+  have hhL : (δ / 2)⁻¹ ≤ L := by
+    dsimp only [L]
+    rw [inv_div, div_eq_mul_inv]
   have hΔ : 0 < Δ := hδ.trans_le hδΔ
   have hΔL : Δ⁻¹ ≤ L := (inv_anti₀ hδ hδΔ).trans (by dsimp only [L]; linarith)
   let f : ℝ → ℝ := fun y => Analysis.intervalLayerThreshold (δ / 2) (y - a)

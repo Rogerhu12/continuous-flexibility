@@ -41,7 +41,6 @@ theorem n08CellLayerInner_le_one {A : ℝ} (hA : 1 ≤ A) (n : ℕ) :
   have he : Real.exp (-((n : ℝ) + 1) ^ 2) ≤ 1 :=
     Real.exp_le_one_iff.mpr (neg_nonpos.mpr (sq_nonneg _))
   apply (div_le_iff₀ (by linarith : 0 < 2 * A)).mpr
-  dsimp only [n08CellLayerInner]
   linarith
 
 theorem n08CellLayerInner_le_outer {A : ℝ} (hA : 1 ≤ A) (n : ℕ) :

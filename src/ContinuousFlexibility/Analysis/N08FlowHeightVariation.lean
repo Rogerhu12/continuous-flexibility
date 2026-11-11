@@ -23,7 +23,21 @@ set_option backward.isDefEq.respectTransparency false
 private theorem heightLine_pair_eq {E F : Type*}
     [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
     (x : E × F) (η : E) (t : ℝ) : x + t • (η, (0 : F)) = (x.1 + t • η, x.2) := by
+  rcases x with ⟨e, f⟩
   simp only [Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero]
+
+private theorem heightLine_eventually_mem
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set (E × ℝ)} (hU : IsOpen U) {x : E} {q : ℝ}
+    (hx : (x, q) ∈ U) (v : E) :
+    ∀ᶠ t : ℝ in 𝓝 0, (x + n08RealSMul t v, q) ∈ U := by
+  have hc : Continuous (fun t : ℝ => (x + n08RealSMul t v, q)) :=
+    (continuous_const.add (continuous_id.smul continuous_const)).prodMk continuous_const
+  have ht : Tendsto (fun t : ℝ => (x + n08RealSMul t v, q))
+      (𝓝 0) (𝓝 (x, q)) := by
+    simpa only [n08RealSMul, zero_smul, add_zero] using hc.tendsto 0
+  exact ht.eventually (hU.mem_nhds hx)
 
 private theorem heightField_affine {E : Type*} [AddCommGroup E] [Module ℝ E]
     (L : E →ₗ[ℝ] (PolarPoint → ℝ)) (χ : PolarPoint → ℝ) (x η : E × ℝ) (t : ℝ) :
@@ -110,11 +124,10 @@ theorem n08_minusFlow_parameter_height_jet
   have hzero : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     ⟨seminorm_center_lt (stateGrading S base) C.referenceState hN.2.1,
       (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1⟩
-  have hxcont : Continuous (fun t : ℝ => (x t, (0 : ℝ))) :=
-    (continuous_const.add (continuous_id.smul continuous_const)).prodMk continuous_const
-  have hxlim : Tendsto (fun t : ℝ => (x t, (0 : ℝ))) (𝓝 0) (𝓝 (C.referenceState, 0)) := by
-    simpa only [x, n08HeightLine, n08StateSMul, n08RealSMul, zero_smul, add_zero] using hxcont.tendsto 0
-  have hnear := hxlim.eventually ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hzero)
+  have hnear : ∀ᶠ t : ℝ in 𝓝 0, (x t, 0) ∈ stateNeighborhood S C base ε := by
+    simpa only [x, n08HeightLine, n08StateSMul] using
+      heightLine_eventually_mem (n08_isOpen_stateNeighborhood S C base ε)
+        hzero (η, (0, (0, 0)))
   have hcore (s : ℝ) (hs : s ∈ Icc (C.left m) r) : s ∈ radialCore D :=
     ⟨hcell.1.trans_le hs.1, hs.2.trans_lt (hr.2.trans hcell.2.2)⟩
   have hflow := hN.2.2.2.2.2.2.1
@@ -144,6 +157,7 @@ theorem n08_minusFlow_parameter_height_jet
         intro s hs
         have hscc : s ∈ Icc (C.left m) r := by simpa only [uIcc_of_le hr.1.le] using hs
         have hsfull : s ∈ Icc (C.left m) (C.right m) := ⟨hscc.1, hscc.2.trans hr.2.le⟩
+        dsimp only [x]
         rw [n08_minusFlow_reference_heightLine_zero hT hS hN η t ht m θ s hsfull,
           n08HeightLine_profile, n08_stateProfile_reference href, n08HeightLine_stateU]
         exact n08RadialSpeedVariation_heightFamily D.w hu0 huη (hg.1.trans (hcore s hscc).1).ne' t

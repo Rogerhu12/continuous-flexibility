@@ -21,6 +21,53 @@ open Set Filter
 open ContinuousFlexibility.Analysis
 open scoped Topology
 
+set_option backward.isDefEq.respectTransparency false
+
+private theorem n08_projected_affine_eventually
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (P : E →L[ℝ] F) (x v : E) (q : ℝ) {U : Set (F × ℝ)}
+    (hU : IsOpen U) (hx : (P x, q) ∈ U) :
+    ∀ᶠ t : ℝ in 𝓝 0, (P (x + n08RealSMul t v), q) ∈ U := by
+  have hc : Continuous (fun t : ℝ => (P (x + n08RealSMul t v), q)) :=
+    (P.continuous.comp (continuous_const.add
+      (continuous_id.smul continuous_const))).prodMk continuous_const
+  have ht : Tendsto (fun t : ℝ => (P (x + n08RealSMul t v), q))
+      (𝓝 0) (𝓝 (P x, q)) := by
+    simpa only [n08RealSMul, zero_smul, add_zero] using hc.tendsto 0
+  exact ht.eventually (hU.mem_nhds hx)
+
+private theorem n08_line_zero_derivative
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (f : E → ℝ) (x v : E)
+    (h : (fun t : ℝ => f (x + n08RealSMul t v)) =ᶠ[𝓝 0] fun _ => f x) :
+    HasProjectiveLineDerivAt f 0 x v := by
+  unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
+  simp only [zero_add, zero_smul, add_zero]
+  apply (tendsto_const_nhds (x := (0 : ℝ)) :
+    Tendsto (fun _ : ℝ => (0 : ℝ)) (𝓝[≠] (0 : ℝ)) (𝓝 0)).congr'
+  filter_upwards [h.filter_mono nhdsWithin_le_nhds] with t ht
+  rw [ht, sub_self, smul_zero]
+
+private theorem n08_scalar_row_diagonal
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (L : E →L[ℝ] ℝ) (A : E →L[ℝ] E) (e : E)
+    (he : L e = 1) (hker : ∀ u, L u = 0 → L (A u) = 0) (u : E) :
+    L (A u) = L (A e) * L u := by
+  have hz : L (u - L u • e) = 0 := by
+    rw [map_sub, map_smul, smul_eq_mul, he, mul_one, sub_self]
+  have hd := hker (u - L u • e) hz
+  rw [map_sub, map_smul, map_sub, map_smul, smul_eq_mul] at hd
+  linarith only [hd]
+
+private theorem n08_controlDiagonal_eq_of_coordinates
+    (a : ℕ → ℝ) (ha : ∀ m, |a m| ≤ 2) (f g : ControlBanach)
+    (h : ∀ m, f m = a m * g m) : f = n08ControlDiagonal a ha g := by
+  apply lp.ext
+  funext m
+  exact (h m).trans (n08ControlDiagonal_apply a ha g m).symm
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -39,6 +86,55 @@ theorem n08_materialSample_H_pos (hT : IsMaterialData D T)
     (hRef : IsAccumulatingProfile D) (m : ℕ) : 0 < T.H (T.sample m) :=
   (hT.2.1 _ (materialSample_mem_radialCore hT hRef.choose_spec.2.1 m)).2.1
 
+private theorem n08_kappaLine_fixed_coordinates (S : PhysicalSpacesData)
+    (x : AnnularState S) (u : CircleSpace S) (t : ℝ) :
+    (x + n08StateSMul S t (0, (0, (u, 0)))).1 = x.1 ∧
+    (x + n08StateSMul S t (0, (0, (u, 0)))).2.1 = x.2.1 ∧
+    (x + n08StateSMul S t (0, (0, (u, 0)))).2.2.2 = x.2.2.2 := by
+  simp only [n08StateSMul, n08RealSMul, Prod.fst_add, Prod.snd_add,
+    Prod.fst_smul, Prod.snd_smul, smul_zero, add_zero, and_self]
+
+private theorem n08CircleResidual_mean_zero_line_eq
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε)
+    (hR : N02Properties D T S C R base ε) (z : AnnularState S × ℝ)
+    (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε)
+    (m : ℕ) (u : CircleSpace S) (hu : n08ControlMeanCoordinate S m u = 0)
+    (t : ℝ) (ht : (n08_stateProjection hS
+      (z.1 + n08StateSMul S t (0, (0, (u, 0)))), z.2) ∈ stateNeighborhood S C base ε) :
+    n08ControlMeanCoordinate S m
+        (n08CircleResidual hS hR (z.1 + n08StateSMul S t (0, (0, (u, 0))), z.2)).val =
+      n08ControlMeanCoordinate S m (n08CircleResidual hS hR z).val := by
+  let v : AnnularState S := (0, (0, (u, 0)))
+  have hmean : stateKappa S v m = 0 := by
+    rw [n08ControlMeanCoordinate_apply, n08ControlRestriction_apply hS] at hu
+    exact (mul_eq_zero.mp hu).resolve_left
+      (Real.rpow_pos_of_pos (n08_materialSample_H_pos hT hN.1.1 m) _).ne'
+  have hcoord := n08_kappaLine_fixed_coordinates S z.1 u t
+  have hheight : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).1 =
+      (n08_stateProjection hS z.1).1 := by
+    exact (n08_stateProjection_height hS _).trans
+      (hcoord.1.trans (n08_stateProjection_height hS z.1).symm)
+  have hν : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).2.1 =
+      (n08_stateProjection hS z.1).2.1 := by
+    exact (n08_stateProjection_nu hS _).trans
+      (hcoord.2.1.trans (n08_stateProjection_nu hS z.1).symm)
+  have hκ : stateKappa S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
+      stateKappa S (n08_stateProjection hS z.1) m := by
+    rw [n08_stateKappa_projection, n08_stateKappa_projection, n08_stateKappa_add hS,
+      n08_stateKappa_smul hS, hmean, mul_zero, add_zero]
+  have hchart : stateLeftChart S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
+      stateLeftChart S (n08_stateProjection hS z.1) m := by
+    funext θ
+    simp only [stateLeftChart, n08_stateProjection_chart_decode, v, hcoord.2.2]
+  rw [n08ControlMeanCoordinate_apply, n08ControlMeanCoordinate_apply,
+    n08ControlRestriction_apply hS, n08ControlRestriction_apply hS,
+    n08CircleResidual_projected_coe hS hR ht, n08CircleResidual_projected_coe hS hR hz]
+  apply congrArg (fun f : ℝ → ℝ => T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * angularMean f)
+  funext θ
+  exact n08_returnResidual_component_eq hT hS hN hR ht hz
+    (n08_stateProjection_mem hS _) (n08_stateProjection_mem hS _) hheight hν hκ hchart θ
+
 private theorem n08CircleResidual_mean_zero_hasLineDerivAt
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε)
@@ -47,63 +143,11 @@ private theorem n08CircleResidual_mean_zero_hasLineDerivAt
     (m : ℕ) (u : CircleSpace S) (hu : n08ControlMeanCoordinate S m u = 0) :
     HasProjectiveLineDerivAt
       (fun x => n08ControlMeanCoordinate S m (n08CircleResidual hS hR (x, z.2)).val)
-      0 z.1 (0, (0, (u, 0))) := by
-  let v : AnnularState S := (0, (0, (u, 0)))
-  have hmean : stateKappa S v m = 0 := by
-    rw [n08ControlMeanCoordinate_apply, n08ControlRestriction_apply hS] at hu
-    exact (mul_eq_zero.mp hu).resolve_left
-      (Real.rpow_pos_of_pos (n08_materialSample_H_pos hT hN.1.1 m) _).ne'
-  have hc : Continuous (fun t : ℝ => (n08_stateProjection hS (z.1 + n08StateSMul S t v), z.2)) :=
-    ((n08_stateProjection hS).continuous.comp
-      (continuous_const.add (continuous_id.smul continuous_const))).prodMk continuous_const
-  have ht : Tendsto (fun t : ℝ => (n08_stateProjection hS (z.1 + n08StateSMul S t v), z.2))
-      (𝓝[≠] (0 : ℝ)) (𝓝 (n08_stateProjection hS z.1, z.2)) := by
-    simpa only [n08StateSMul, n08RealSMul, zero_smul, add_zero] using
-      (hc.tendsto 0).mono_left nhdsWithin_le_nhds
-  have hev := ht.eventually ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hz)
-  unfold HasProjectiveLineDerivAt HasProjectiveCurveDerivAt
-  simp only [zero_add, zero_smul, add_zero]
-  apply (tendsto_const_nhds (x := (0 : ℝ)) :
-    Tendsto (fun _ : ℝ => (0 : ℝ)) (𝓝[≠] (0 : ℝ)) (𝓝 0)).congr'
-  filter_upwards [hev] with t ht
-  have hheight : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).1 =
-      (n08_stateProjection hS z.1).1 := by
-    simp only [n08StateSMul, n08RealSMul]
-    rw [map_add, map_smul]
-    simp only [v, n08_stateProjection_kappaDirection, Prod.fst_add, Prod.fst_smul,
-      smul_zero, add_zero]
-  have hν : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).2.1 =
-      (n08_stateProjection hS z.1).2.1 := by
-    simp only [n08StateSMul, n08RealSMul]
-    rw [map_add, map_smul]
-    simp only [v, n08_stateProjection_kappaDirection, Prod.snd_add, Prod.snd_smul,
-      Prod.fst_add, Prod.fst_smul, smul_zero, add_zero]
-  have hκ : stateKappa S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
-      stateKappa S (n08_stateProjection hS z.1) m := by
-    rw [n08_stateKappa_projection, n08_stateKappa_projection, n08_stateKappa_add hS,
-      n08_stateKappa_smul hS, hmean, mul_zero, add_zero]
-  have hchartValue : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).2.2.2 =
-      (n08_stateProjection hS z.1).2.2.2 := by
-    simp only [n08StateSMul, n08RealSMul]
-    rw [map_add, map_smul]
-    simp only [v, n08_stateProjection_kappaDirection, Prod.snd_add, Prod.snd_smul,
-      smul_zero, add_zero]
-  have hchart : stateLeftChart S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
-      stateLeftChart S (n08_stateProjection hS z.1) m := by
-    funext θ
-    simp only [stateLeftChart, hchartValue]
-  have heq : n08ControlMeanCoordinate S m
-      (n08CircleResidual hS hR (z.1 + n08StateSMul S t v, z.2)).val =
-      n08ControlMeanCoordinate S m (n08CircleResidual hS hR z).val := by
-    rw [n08ControlMeanCoordinate_apply, n08ControlMeanCoordinate_apply,
-      n08ControlRestriction_apply hS, n08ControlRestriction_apply hS,
-      n08CircleResidual_projected_coe hS hR ht, n08CircleResidual_projected_coe hS hR hz]
-    congr 1
-    apply congrArg angularMean
-    funext θ
-    exact n08_returnResidual_component_eq hT hS hN hR ht hz
-      (n08_stateProjection_mem hS _) (n08_stateProjection_mem hS _) hheight hν hκ hchart θ
-  rw [heq, sub_self, smul_zero]
+      0 z.1 (0, (0, (u, 0))) :=
+  n08_line_zero_derivative _ z.1 (0, (0, (u, 0)))
+    ((n08_projected_affine_eventually (n08_stateProjection hS) z.1 (0, (0, (u, 0))) z.2
+      (n08_isOpen_stateNeighborhood S C base ε) hz).mono
+      (fun t ht => n08CircleResidual_mean_zero_line_eq hT hS hN hR z hz m u hu t ht))
 
 theorem n08CircleColumn_mean_zero
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -132,17 +176,15 @@ theorem n08CircleColumn_mean_diagonal
     n08ControlRestriction S (n08CircleColumn hS hR z u) m =
       n08CircleDiagonal hS hR z m * n08ControlRestriction S u m := by
   let L : CircleSpace S →L[ℝ] ℝ := n08ControlMeanCoordinate S m
-  let A : CircleSpace S →L[ℝ] ℝ := L.comp (n08CircleColumn hS hR z)
   have hb : L (n08ControlBasis hS m) = 1 := by
     rw [n08ControlMeanCoordinate_apply,
       n08ControlBasis_restriction hS m (n08_materialSample_H_pos hT hN.1.1 m), lp.single_apply_self]
-  have hu : L (u - L u • n08ControlBasis hS m) = 0 := by
-    rw [map_sub, map_smul, smul_eq_mul, hb, mul_one, sub_self]
-  have hzder : A (u - L u • n08ControlBasis hS m) = 0 :=
-    n08CircleColumn_mean_zero hT hS hN hR hz hs m _ hu
-  rw [map_sub, map_smul, smul_eq_mul] at hzder
-  have heq : A u = A (n08ControlBasis hS m) * L u := by linarith only [hzder]
-  exact heq
+  have heq := n08_scalar_row_diagonal L (n08CircleColumn hS hR z) (n08ControlBasis hS m) hb
+    (fun v hv => n08CircleColumn_mean_zero hT hS hN hR hz hs m v hv) u
+  change n08ControlRestriction S (n08CircleColumn hS hR z u) m =
+    n08ControlMeanCoordinate S m (n08CircleColumn hS hR z (n08ControlBasis hS m)) *
+      n08ControlRestriction S u m
+  simpa only [L, n08ControlMeanCoordinate_apply] using heq
 
 /-- Once the numerical bound is established on the chosen neighborhood,
 the bounded diagonal is the mean row of this very same circle derivative. -/
@@ -153,10 +195,8 @@ theorem n08CircleColumn_restriction_eq
     (hz : z ∈ stateNeighborhood S C base ε) (hs : stateSector S z.1)
     (hbound : ∀ m, |n08CircleDiagonal hS hR z m| ≤ 2) (u : CircleSpace S) :
     n08ControlRestriction S (n08CircleColumn hS hR z u) =
-      n08ControlDiagonal (n08CircleDiagonal hS hR z) hbound (n08ControlRestriction S u) := by
-  apply lp.ext
-  funext m
-  rw [n08ControlDiagonal_apply]
-  exact n08CircleColumn_mean_diagonal hT hS hN hR hz hs u m
+      n08ControlDiagonal (n08CircleDiagonal hS hR z) hbound (n08ControlRestriction S u) :=
+  n08_controlDiagonal_eq_of_coordinates (n08CircleDiagonal hS hR z) hbound _ _
+    (fun m => n08CircleColumn_mean_diagonal hT hS hN hR hz hs u m)
 
 end ContinuousFlexibility.Statements
