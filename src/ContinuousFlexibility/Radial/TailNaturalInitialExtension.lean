@@ -23,7 +23,7 @@ theorem tailGlueCut_hasDerivAt {f g : ℝ → ℝ} {c d : ℝ}
     HasDerivAt (morseGlueCut c f g) d c := by
   have hL : HasDerivWithinAt (morseGlueCut c f g) d (Iic c) c :=
     hf.hasDerivWithinAt.congr_of_mem
-      (fun x hx => by simp only [morseGlueCut, ite_eq_left hx]) le_rfl
+      (fun x hx => by simp only [morseGlueCut, ite_eq_left (mem_Iic.mp hx)]) le_rfl
   have hR : HasDerivWithinAt (morseGlueCut c f g) d (Ici c) c := by
     apply hg.hasDerivWithinAt.congr_of_mem _ le_rfl
     intro x hx
@@ -39,19 +39,20 @@ theorem tailFirstOrderSystem_glue {p u v U V : ℝ → ℝ} {Λ a b c : ℝ}
     (hu : u c = U c) (hv : v c = V c) :
     TailFirstOrderSystem p Λ (morseGlueCut c u U) (morseGlueCut c v V) (Ico a b) := by
   intro x hx
-  rcases lt_trichotomy x c with hlt | rfl | hgt
+  rcases lt_trichotomy x c with hlt | heq | hgt
   · have hUg : morseGlueCut c u U =ᶠ[𝓝 x] u := by
       filter_upwards [Iio_mem_nhds hlt] with y hy
-      simp only [morseGlueCut, ite_eq_left hy.le]
+      simp only [morseGlueCut, ite_eq_left (mem_Iio.mp hy).le]
     have hVg : morseGlueCut c v V =ᶠ[𝓝 x] v := by
       filter_upwards [Iio_mem_nhds hlt] with y hy
-      simp only [morseGlueCut, ite_eq_left hy.le]
+      simp only [morseGlueCut, ite_eq_left (mem_Iio.mp hy).le]
     simpa only [morseGlueCut, ite_eq_left hlt.le] using
       (show HasDerivAt (morseGlueCut c u U) (v x / p x) x ∧
         HasDerivAt (morseGlueCut c v V) (-Λ * p x * u x) x from
         ⟨((hL x ⟨hx.1, hlt.le⟩).1).congr_of_eventuallyEq hUg,
           ((hL x ⟨hx.1, hlt.le⟩).2).congr_of_eventuallyEq hVg⟩)
-  · have h₁ := hL c ⟨hac, le_rfl⟩
+  · subst x
+    have h₁ := hL c ⟨hac, le_rfl⟩
     have h₂ := hR c ⟨le_rfl, hcb⟩
     rw [← hv, ← hu] at h₂
     simpa only [morseGlueCut, le_refl, ite_true] using
@@ -60,10 +61,10 @@ theorem tailFirstOrderSystem_glue {p u v U V : ℝ → ℝ} {Λ a b c : ℝ}
         ⟨tailGlueCut_hasDerivAt hu h₁.1 h₂.1, tailGlueCut_hasDerivAt hv h₁.2 h₂.2⟩)
   · have hUg : morseGlueCut c u U =ᶠ[𝓝 x] U := by
       filter_upwards [Ioi_mem_nhds hgt] with y hy
-      simp only [morseGlueCut, ite_eq_right (not_le_of_gt hy)]
+      simp only [morseGlueCut, ite_eq_right (not_le_of_gt (mem_Ioi.mp hy))]
     have hVg : morseGlueCut c v V =ᶠ[𝓝 x] V := by
       filter_upwards [Ioi_mem_nhds hgt] with y hy
-      simp only [morseGlueCut, ite_eq_right (not_le_of_gt hy)]
+      simp only [morseGlueCut, ite_eq_right (not_le_of_gt (mem_Ioi.mp hy))]
     simpa only [morseGlueCut, ite_eq_right (not_le_of_gt hgt)] using
       (show HasDerivAt (morseGlueCut c u U) (V x / p x) x ∧
         HasDerivAt (morseGlueCut c v V) (-Λ * p x * U x) x from
@@ -86,7 +87,7 @@ theorem exists_tailNaturalInitialExtension {T : DeepTailData}
   have hR : TailFirstOrderSystem T.p T.Λ U V (Ico (T.node 0) T.endpoint) :=
     tailPoissonInterpolation_system_Ico hT hrec
   rcases hT.2.2.2.1 with heq | hgap
-  · refine ⟨U, V, ?_, EqOn.refl _ _, EqOn.refl _ _⟩
+  · refine ⟨U, V, ?_, (fun _ _ => rfl), (fun _ _ => rfl)⟩
     simpa only [heq] using hR
   · have hsub := deepTail_Icc_subset hT le_rfl (deepTail_node_lt_endpoint hT 0)
     have hp := (deepTail_contDiffOn hT).continuousOn.mono hsub
@@ -101,11 +102,11 @@ theorem exists_tailNaturalInitialExtension {T : DeepTailData}
     · intro x hx
       rcases eq_or_lt_of_le hx.1 with rfl | hlt
       · simpa only [morseGlueCut, le_refl, ite_true] using hu
-      · simp only [morseGlueCut, ite_eq_right (not_le_of_gt hlt)]
+      · simp only [morseGlueCut, ite_eq_right (not_le_of_gt hlt), U]
     · intro x hx
       rcases eq_or_lt_of_le hx.1 with rfl | hlt
       · simpa only [morseGlueCut, le_refl, ite_true] using hv
-      · simp only [morseGlueCut, ite_eq_right (not_le_of_gt hlt)]
+      · simp only [morseGlueCut, ite_eq_right (not_le_of_gt hlt), V]
 
 /-- A smooth extension preserves a first-order state on the closed entrance
 side as well as the open interior. -/

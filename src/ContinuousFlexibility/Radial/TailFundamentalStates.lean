@@ -66,10 +66,11 @@ theorem tailFirstOrderSystem_wronskian_const_Ico
     fun _ ht => ⟨ht.1, ht.2.trans_lt (max_lt hx.2 hy.2)⟩
   have hxs : x ∈ Icc a (max x y) := ⟨hx.1, le_max_left _ _⟩
   have hys : y ∈ Icc a (max x y) := ⟨hy.1, le_max_right _ _⟩
-  have hc := tailFirstOrderSystem_wronskian_const_Icc
-    (hu.mono hs) (hv.mono hs) (hU.mono hs) (hV.mono hs)
-    (h.mono (Ioo_subset_Icc_self.trans hs)) (h'.mono (Ioo_subset_Icc_self.trans hs))
-  exact (hc hxs).trans (hc hys).symm
+  have hc (t : ℝ) (ht : t ∈ Icc a (max x y)) :=
+    tailFirstOrderSystem_wronskian_const_Icc
+      (hu.mono hs) (hv.mono hs) (hU.mono hs) (hV.mono hs)
+      (h.mono (Ioo_subset_Icc_self.trans hs)) (h'.mono (Ioo_subset_Icc_self.trans hs)) ht
+  exact (hc x hxs).trans (hc y hys).symm
 
 theorem exists_tailDirichletLeftState {T : DeepTailData} (hT : DeepTailHypotheses T)
     {u v : ℝ → ℝ} (hu : ContDiffOn ℝ ∞ u (Iio T.endpoint))

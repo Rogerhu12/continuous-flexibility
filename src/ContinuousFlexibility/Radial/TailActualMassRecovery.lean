@@ -169,9 +169,12 @@ theorem tailActualEdgeInterpolation_mass_recovery {T : DeepTailData}
     (deepTail_massEnd_lt_endpoint hT (n + 1))
   have hp := (deepTail_contDiffOn hT).continuousOn.mono hsub
   have hpi := hp.intervalIntegrable_of_Icc (μ := volume) hab
-  have hui := (hp.mul
-    ((tailActualEdgeInterpolation_differentiable hT (n + 1) b e).continuous.pow 2).continuousOn).intervalIntegrable_of_Icc
-      (μ := volume) hab
+  have hui : IntervalIntegrable
+      (fun x => T.p x * tailActualEdgeInterpolation T hT (n + 1) b e x ^ 2)
+      volume (T.node (n + 1)) (T.massEnd (n + 1)) :=
+    (hp.mul
+      ((tailActualEdgeInterpolation_differentiable hT (n + 1) b e).continuous.pow 2).continuousOn).intervalIntegrable_of_Icc
+        (μ := volume) hab
   have hi := intervalIntegral.integral_mono_on hab (hpi.mul_const (b ^ 2))
     ((hui.const_mul 8).add (hpi.const_mul E)) (fun x hx => calc
       T.p x * b ^ 2 ≤ T.p x *

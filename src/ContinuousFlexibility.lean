@@ -364,3 +364,5 @@ import ContinuousFlexibility.Radial.TailKernelTestExtension
 import ContinuousFlexibility.Radial.TailNaturalEquationState
 import ContinuousFlexibility.Radial.TailActualMassRecovery
 import ContinuousFlexibility.Radial.TailNaturalUniqueness
+import ContinuousFlexibility.Radial.TailFundamentalGreenRepresentation
+import ContinuousFlexibility.Radial.TailNaturalFull

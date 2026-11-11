@@ -97,7 +97,8 @@ theorem tailNaturalNode_backward_ratio {T : DeepTailData} (hT : DeepTailHypothes
       b * |a (n + 1)| = |-b * a (n + 1)| := by
         rw [abs_mul, abs_neg, abs_of_pos hb]
       _ = |c * a n + c' * a (n + 2)| := congrArg abs (hrec n)
-      _ ≤ |c * a n| + |c' * a (n + 2)| := abs_add _ _
+      _ ≤ |c * a n| + |c' * a (n + 2)| := by
+        simpa only [Real.norm_eq_abs] using norm_add_le (c * a n) (c' * a (n + 2))
       _ = _ := by rw [abs_mul, abs_mul, abs_of_pos hc, abs_of_nonneg hc']
   have hlower : (A / 4) * |a (n + 1)| ≤ c * |a n| := by
     have h₁ := mul_le_mul_of_nonneg_right hbL (abs_nonneg (a (n + 1)))
@@ -124,13 +125,13 @@ theorem tailNode_green_diagonal_step {μ ν a A w W c Λ : ℝ}
         apply (eq_div_iff (mul_ne_zero hc ha)).mpr
         nlinarith only [hW]
       _ = (A / a) ^ 2 * (a * w) + A / (c * a) := by
-        field_simp [ha, hc]
-        ring
+        field_simp [ha, hc] <;> ring
   rw [heq]
   calc
     ν * |(A / a) ^ 2 * (a * w) + A / (c * a)| ≤
         ν * (|(A / a) ^ 2 * (a * w)| + |A / (c * a)|) :=
-      mul_le_mul_of_nonneg_left (abs_add _ _) hν
+      mul_le_mul_of_nonneg_left
+        (by simpa only [Real.norm_eq_abs] using norm_add_le ((A / a) ^ 2 * (a * w)) (A / (c * a))) hν
     _ = (ν * (A / a) ^ 2) * |a * w| + ν * |A / (c * a)| := by
       rw [abs_mul, abs_of_nonneg (sq_nonneg _)]
       ring
@@ -167,7 +168,8 @@ theorem exists_tailFundamentalNode_bound {T : DeepTailData} (hT : DeepTailHypoth
       have hbase : 8 / T.Λ ≤ B := le_add_of_nonneg_left
         (mul_nonneg (tailMass_pos hT 0).le (abs_nonneg _))
       have h := hdiagStep n
-      linarith only [h, ih, hbase, hB]
+      have heq : 8 / T.Λ = 2 * (4 / T.Λ) := by ring
+      linarith only [h, ih, hbase, hB, heq]
   refine ⟨B, hB, ?_⟩
   intro m n hmn
   have hprod := tailNode_ratio_le_prod (fun k => abs_pos.mpr (ha k))

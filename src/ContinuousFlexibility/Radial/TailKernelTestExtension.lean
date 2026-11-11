@@ -87,8 +87,10 @@ theorem intervalTestCutoff_eventually_one {a b x : ℝ} (hx : x ∈ Ioo a b) :
     Real.smoothTransition.one_of_one_le (by linarith only [hR']), mul_one]
 
 theorem tendsto_intervalTestCutoff {a b x : ℝ} (hx : x ∈ Ioo a b) :
-    Tendsto (fun n : ℕ => intervalTestCutoff a b n x) atTop (𝓝 1) :=
-  tendsto_const_nhds.congr' (intervalTestCutoff_eventually_one hx).symm
+    Tendsto (fun n : ℕ => intervalTestCutoff a b n x) atTop (𝓝 1) := by
+  apply tendsto_const_nhds.congr'
+  filter_upwards [intervalTestCutoff_eventually_one hx] with n hn
+  exact hn.symm
 
 /-- The same smooth test, cut off strictly inside the interval. -/
 def intervalCutoffTest (a b : ℝ) (ψ : ℝ → ℝ) (n : ℕ) (x : ℝ) : ℝ :=
@@ -135,7 +137,7 @@ theorem intervalCutoffTest_memLp {μ : Measure ℝ} {a b : ℝ} {ψ : ℝ → �
     MemLp (intervalCutoffTest a b ψ n) 2 μ := by
   apply hLp.of_le ((contDiff_intervalTestCutoff a b n).continuous.fun_mul hψ).aestronglyMeasurable
   exact Eventually.of_forall fun x => by
-    simpa only [Real.norm_eq_abs] using abs_intervalCutoffTest_le a b ψ n x
+    simpa only [Real.norm_eq_abs, intervalCutoffTest] using abs_intervalCutoffTest_le a b ψ n x
 
 private theorem realL2_norm_sq_sub_toLp_measure {μ : Measure ℝ} {f g : ℝ → ℝ}
     (hf : MemLp f 2 μ) (hg : MemLp g 2 μ) :

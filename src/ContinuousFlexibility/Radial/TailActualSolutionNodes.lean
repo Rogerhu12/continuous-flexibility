@@ -141,7 +141,9 @@ theorem tailActualEdge_state_eq_of_initial {T : DeepTailData}
           (tailActualEdgeInterpolationFlux T hT n a b) x =
         tailFirstOrderWronskian U V (tailActualEdgeInterpolation T hT n a b)
           (tailActualEdgeInterpolationFlux T hT n a b) x := by
-    have hc := (tailActualEdgeInterpolation_differentiable hT n a b).continuous.continuousOn
+    have hc : ContinuousOn (tailActualEdgeInterpolation T hT n a b)
+        (Icc (T.node n) (T.node (n + 1))) :=
+      (tailActualEdgeInterpolation_differentiable hT n a b).continuous.continuousOn
     have hf := tailActualEdgeInterpolationFlux_continuousOn hT n a b
     have hs := (tailActualEdgeInterpolation_system hT n a b).mono Ioo_subset_Icc_self
     rw [tailFirstOrderSystem_wronskian_const_Icc hu hv hc hf h hs hx,
