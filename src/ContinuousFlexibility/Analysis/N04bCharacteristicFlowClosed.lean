@@ -95,7 +95,8 @@ theorem exists_angular_lipschitz :
   refine ⟨⟨K, hK0⟩, fun r hr => ?_⟩
   apply LipschitzWith.of_dist_le_mul
   intro θ η
-  simpa only [dist_eq_norm, NNReal.coe_mk] using
+  change dist (F (r, θ)) (F (r, η)) ≤ K * dist θ η
+  simpa only [dist_eq_norm] using
     (convex_univ : Convex ℝ (univ : Set ℝ)).norm_image_sub_le_of_norm_hasDerivWithin_le
       (fun x _ => (hF.angular_hasDerivAt hr x).hasDerivWithinAt)
       (fun x _ => hK r hr x) (mem_univ η) (mem_univ θ)
@@ -166,7 +167,7 @@ theorem n04b_scalarFlow_continuous_periodic
   have hLift : ∀ r ∈ Ico a b,
       LipschitzOnWith K (fun q : ℝ × ℝ => F (r, q.2)) (univ ×ˢ univ) := by
     intro r hr
-    simpa only [mul_one] using
+    simpa only [mul_one, Function.comp_def] using
       ((hK r ⟨hr.1, hr.2.le⟩).comp
         (LipschitzWith.prod_snd : LipschitzWith 1 (@Prod.snd ℝ ℝ))).lipschitzOnWith
   have hswap : ContinuousOn (fun q : ℝ × ℝ => Φ (q.2, q.1)) (univ ×ˢ Icc a b) :=

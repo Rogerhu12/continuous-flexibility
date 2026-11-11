@@ -32,16 +32,46 @@ def n04bStateLogExponent (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (v : AnnularState S) (r : ℝ) : ℝ :=
   v.2.1 * D.chi r + stateControlSum C v r
 
+private theorem n04b_stateType_zero_add_smul {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (x₀ v : E) (h₀ : x₀ = 0) (t : ℝ) :
+    x₀ + t • v = t • v := by
+  rw [h₀, zero_add]
+
+private theorem n04b_stateType_mean_smul
+    (u : CircleSpace S) (m : ℕ) (t : ℝ) :
+    angularMean ((S.circle (3 / 4 : ℝ)).decode (t • u) m) =
+      t * angularMean ((S.circle (3 / 4 : ℝ)).decode u m) := by
+  have hd : (S.circle (3 / 4 : ℝ)).decode (t • u) m =
+      fun θ => t * (S.circle (3 / 4 : ℝ)).decode u m θ :=
+    congrFun ((S.circle (3 / 4 : ℝ)).decode.map_smul t u) m
+  have hm (f : ℝ → ℝ) :
+      angularMean (fun θ => t * f θ) = t * angularMean f := by
+    unfold angularMean
+    rw [intervalIntegral.integral_const_mul]
+    ring
+  exact (congrArg angularMean hd).trans (hm _)
+
+private theorem n04b_stateType_seminorm_affine {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (p : Seminorm ℝ E) (x v : E) (t : ℝ) :
+    p ((x + t • v) - x) = |t| * p v := by
+  rw [add_sub_cancel_left, map_smul_eq_mul, Real.norm_eq_abs]
+
+private theorem n04b_stateType_affine_zero {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (x v : E) :
+    x + (0 : ℝ) • v = x := by
+  rw [zero_smul, add_zero]
+
 theorem n04b_stateKappa_reference_line
     (href : referenceStateConditions D S C)
     (v : AnnularState S) (t : ℝ) (m : ℕ) :
     stateKappa S (C.referenceState + t • v) m = t * stateKappa S v m := by
-  change angularMean ((S.circle (3 / 4 : ℝ)).decode
-    (C.referenceState.2.2.1 + t • v.2.2.1) m) = _
-  rw [href.2.2.2.1, zero_add, map_smul]
-  simp only [Pi.smul_apply, smul_eq_mul, RingHom.id_apply, stateKappa, angularMean,
-    intervalIntegral.integral_const_mul]
-  ring
+  have hcoord : (C.referenceState + t • v).2.2.1 = t • v.2.2.1 := by
+    change C.referenceState.2.2.1 + t • v.2.2.1 = t • v.2.2.1
+    exact n04b_stateType_zero_add_smul _ _ href.2.2.2.1 t
+  unfold stateKappa
+  exact (congrArg
+    (fun u : CircleSpace S => angularMean ((S.circle (3 / 4 : ℝ)).decode u m))
+      hcoord).trans (n04b_stateType_mean_smul v.2.2.1 m t)
 
 theorem n04b_stateProfile_reference_line
     (href : referenceStateConditions D S C) (v : AnnularState S) (t : ℝ) :
@@ -74,9 +104,8 @@ theorem n04b_state_reference_line_mem
     (ht : |t| * stateGrading S base v < ε) :
     (C.referenceState + t • v, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
   constructor
-  · change stateGrading S base ((C.referenceState + t • v) - C.referenceState) < ε
-    rw [add_sub_cancel_left, map_smul_eq_mul, Real.norm_eq_abs]
-    exact ht
+  · exact lt_of_eq_of_lt
+      (n04b_stateType_seminorm_affine (stateGrading S base) C.referenceState v t) ht
   · simpa only [abs_zero] using hε
 
 private theorem n04b_state_joint_line (v : AnnularState S) (t : ℝ) :
@@ -84,6 +113,33 @@ private theorem n04b_state_joint_line (v : AnnularState S) (t : ℝ) :
       (C.referenceState + t • v, (0 : ℝ)) := by
   change (C.referenceState + t • v, (0 : ℝ) + t • (0 : ℝ)) = _
   simp only [smul_zero, add_zero]
+
+private theorem n04b_stateType_reference_profile
+    (href : referenceStateConditions D S C) (v : AnnularState S) :
+    stateProfile D S C C.referenceState = D.w := by
+  have hprofile := n04b_stateProfile_reference_line href v 0
+  have hzero := n04b_stateType_affine_zero C.referenceState v
+  have hperturbation : opticalLogPerturbation D.w (n04bStateLogExponent D S C v) 0 =
+      D.w := by
+    funext r
+    simp only [opticalLogPerturbation, zero_mul, Real.exp_zero, mul_one]
+  exact (congrArg (stateProfile D S C) hzero).symm.trans
+    (hprofile.trans hperturbation)
+
+private theorem n04b_stateType_opticalSpeed_affine
+    (hN : N01Properties D T S C base loss ε) (v : AnnularState S) (m : ℕ)
+    {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) (t : ℝ) :
+    opticalSpeed (opticalLogPerturbation D.w (n04bStateLogExponent D S C v) t) r =
+      Real.sqrt (-deriv D.w r / (r * D.w r) +
+        (-deriv (n04bStateLogExponent D S C v) r / r) * t) := by
+  obtain ⟨_, hgeom⟩ := hN.1.1
+  have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
+  have hrD : r ∈ Ioo D.a D.b :=
+    ⟨(hcontrol.1 m).1.trans hr.1, hr.2.trans (hcontrol.1 m).2.2⟩
+  exact n04b_opticalSpeed_logPerturbation_affine
+    (hgeom.1.2.2.1.1.differentiable (by simp) r)
+    ((hN.n04b_stateLogExponent_contDiffAt v hrD).differentiableAt (by simp))
+    (hgeom.1.1.trans hrD.1).ne' (hgeom.1.2.2.2.2.1 r hrD).ne'
 
 theorem N01Properties.n04b_ordinaryFlowFamily_stateLine_radial
     (hN : N01Properties D T S C base loss ε)
@@ -95,20 +151,13 @@ theorem N01Properties.n04b_ordinaryFlowFamily_stateLine_radial
       opticalSpeed D.w r -
         Real.sqrt (-deriv D.w r / (r * D.w r) +
           (-deriv (n04bStateLogExponent D S C v) r / r) * t) := by
-  obtain ⟨_, hgeom⟩ := hN.1.1
-  have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
-  have hrD : r ∈ Ioo D.a D.b :=
-    ⟨(hcontrol.1 m).1.trans hr.1, hr.2.trans (hcontrol.1 m).2.2⟩
-  have href : stateProfile D S C C.referenceState = D.w := by
-    simpa only [zero_smul, add_zero, opticalLogPerturbation, zero_mul,
-      Real.exp_zero, mul_one] using
-      n04b_stateProfile_reference_line hN.2.2.1 v 0
-  rw [hN.n04b_ordinaryFlowFamily_radial_zero hS hT ht m θ hr,
-    n04b_stateProfile_reference_line hN.2.2.1, href,
-    n04b_opticalSpeed_logPerturbation_affine
-      (hgeom.1.2.2.1.1.differentiable (by simp) r)
-      ((hN.n04b_stateLogExponent_contDiffAt v hrD).differentiableAt (by simp))
-      (hgeom.1.1.trans hrD.1).ne' (hgeom.1.2.2.2.2.1 r hrD).ne']
+  have href := n04b_stateType_reference_profile hN.2.2.1 v
+  have hprofile := n04b_stateProfile_reference_line hN.2.2.1 v t
+  exact (hN.n04b_ordinaryFlowFamily_radial_zero hS hT ht m θ hr).trans
+    (congrArg₂ (fun a b : ℝ => a - b)
+      (congrArg (fun w : ℝ → ℝ => opticalSpeed w r) href)
+      ((congrArg (fun w : ℝ → ℝ => opticalSpeed w r) hprofile).trans
+        (n04b_stateType_opticalSpeed_affine hN v m hr t)))
 
 theorem N01Properties.n04b_sqrt_stateLine_differentiableAt
     (hN : N01Properties D T S C base loss ε)
@@ -158,7 +207,7 @@ theorem N01Properties.n04b_stateLine_radicand_pos
     div_pos (neg_pos.mpr (hcontrol.2.2.2.1 m r hr))
       (mul_pos (hgeom.1.1.trans hrD.1) (hgeom.1.2.2.2.2.1 r hrD))
   exact Analysis.n04b_affine_pos_of_sqrt_differentiableAt_weighted_ball
-    hbase ((stateGrading S base).nonneg _)
+    hbase (apply_nonneg (stateGrading S base) _)
     (fun s hs => hN.n04b_sqrt_stateLine_differentiableAt hS hT v m hr hs) ht
 
 /-- The controlled profile retains the strict reference sign on every

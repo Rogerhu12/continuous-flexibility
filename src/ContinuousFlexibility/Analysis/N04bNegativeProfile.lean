@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04bProfileLine
+import ContinuousFlexibility.Analysis.N04bSingletonType
 import ContinuousFlexibility.Analysis.N04bSqrtCrossing
 import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
@@ -54,31 +55,8 @@ theorem n04b_ordinaryFlowFamily_radial_zero
     ordinaryFlowFamily S C m 1 0 p (x, 0) =
       -opticalSpeed (stateProfile D S C x) p.1 +
         opticalSpeed (stateProfile D S C C.referenceState) p.1 := by
-  obtain ⟨_, hbounds⟩ := hN.1.1
-  have hC : controlGeometryConditions D S C := hN.2.2.2.1
-  have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=
-    hN.2.2.2.2.2.2.1
-  have hpD : p.1 ∈ Ioo D.a D.b :=
-    ⟨(hC.1 m).1.trans hp.1, hp.2.trans (hC.1 m).2.2⟩
-  have hr : p.1 ≠ 0 := (hbounds.1.1.trans hpD.1).ne'
-  have hderiv (y : AnnularState S)
-      (hy : (y, (0 : ℝ)) ∈ stateNeighborhood S C base ε) :
-      HasDerivAt (fun r => C.minusFlow (y, 0) m r p.2)
-        (-opticalSpeed (stateProfile D S C y) p.1) p.1 := by
-    have hw := contDiff_stateProfile_of_n01 hS hT hN y
-    have hwp : 0 < stateProfile D S C y p.1 :=
-      mul_pos (hbounds.1.2.2.2.2.1 p.1 hpD) (Real.exp_pos _)
-    obtain ⟨ha, hb, hc⟩ := originalCoefficients_radial_zero y hw
-      (p.1, C.minusFlow (y, 0) m p.1 p.2)
-    have hspeed := minusCharacteristicSpeed_of_radial_coefficients ha hb hc hr hwp
-    simpa only [hspeed] using (hflow (y, 0) hy m p.2).2.2.1 p.1 hp
-  have href : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
-    constructor
-    · simpa only [sub_self, map_zero] using hN.2.1
-    · simpa only [abs_zero] using hN.2.1
-  have hd := (hderiv x hx).sub (hderiv C.referenceState href)
-  simpa only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_one,
-    iteratedDeriv_zero, sub_neg_eq_add] using hd.deriv
+  exact (hN.n04b_ordinaryFlowFamily_radial_zero hS hT hx m p.2 hp).trans
+    (by ring)
 
 /-- N01 supplies genuine scalar differentiability of the actual optical
 speed at every point of the state line that lies in its open domain. -/
@@ -108,10 +86,10 @@ theorem n04b_opticalSpeed_stateLine_differentiableAt
     simpa only [n04bStateLine_joint] using hline
   have hcontinuous : Continuous
       (fun s : ℝ => (n04bStateLine C x s, (0 : ℝ))) := by
-    simpa only [n04bStateLine_joint] using
-      (continuous_const.add (continuous_id.smul continuous_const) :
-        Continuous (fun s : ℝ => (C.referenceState, (0 : ℝ)) +
-          s • (x - C.referenceState, (0 : ℝ))))
+    have hc : Continuous (fun s : ℝ => (C.referenceState, (0 : ℝ)) +
+        s • (x - C.referenceState, (0 : ℝ))) :=
+      continuous_const.add (continuous_id.smul continuous_const)
+    exact hc.congr (fun s => n04bStateLine_joint C x s)
   have hmem : ∀ᶠ s in 𝓝 t,
       (n04bStateLine C x s, (0 : ℝ)) ∈ stateNeighborhood S C base ε :=
     hcontinuous.continuousAt.eventually (J.open_domain.mem_nhds ht)
@@ -162,6 +140,14 @@ theorem n04b_stateProfile_deriv_neg
     (mul_pos (hbounds.1.1.trans hrD.1) hwp)).mp
       (n04b_stateProfile_radicand_pos hN hS hT hx m hr))
 
+private theorem n04b_seminorm_double_affine_lt {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (p : Seminorm ℝ E) (x₀ x : E)
+    {ε : ℝ} (hx : p (x - x₀) < ε / 2) :
+    p ((x₀ + (2 : ℝ) • (x - x₀)) - x₀) < ε := by
+  rw [add_sub_cancel_left, map_smul_eq_mul,
+    Real.norm_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
+  linarith only [hx]
+
 /-- One halving of the state radius gives a relative lower bound, with
 no component-dependent shrinking and no lower bound assumed on `w'`. -/
 theorem n04b_stateProfile_radicand_reference_half_lt
@@ -176,11 +162,8 @@ theorem n04b_stateProfile_radicand_reference_half_lt
       -deriv (stateProfile D S C x) r / (r * stateProfile D S C x r) := by
   have hdouble : (n04bStateLine C x 2, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
-    · change stateGrading S base
-        (C.referenceState + (2 : ℝ) • (x - C.referenceState) - C.referenceState) < ε
-      rw [add_sub_cancel_left, map_smul_eq_mul,
-        Real.norm_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
-      linarith
+    · exact n04b_seminorm_double_affine_lt
+        (stateGrading S base) C.referenceState x hx
     · simpa only [abs_zero] using hN.2.1
   have hpositive := n04b_stateProfile_radicand_pos hN hS hT hdouble m hr
   rw [n04b_stateProfile_radicand_stateLine hN x m hr] at hpositive
