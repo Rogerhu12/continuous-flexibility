@@ -116,7 +116,7 @@ theorem actualChain_poisson_bound
     innerSelectedModelPoissonConstant_pos.le P.gapSlope_pos hj
     (fun _ => le_rfl)
     (fun sign p i => by
-      simpa only [ite_self] using
+      simpa only [ite_self, actualChain] using
         P.models_column_norm_le hCentralFamily hMorseFamily hX hsupport K q hq hband
           ha hN hNa hCM γ hγ sign CW
           (innerMorseInnerSignedWeight_abs_le S.chain.index K a γ (P.chain K) A sign) p i)
