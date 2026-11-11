@@ -36,7 +36,8 @@ theorem n07b_integral_radialAngularMean_const_mul (D : ReferenceData)
     _ = ∫ r in D.a..D.b, c * radialAngularMean (fun θ => f (r, θ)) := by
       apply intervalIntegral.integral_congr
       intro r _
-      unfold radialAngularMean
+      change (2 * Real.pi)⁻¹ * (∫ θ in (0 : ℝ)..2 * Real.pi, c * f (r, θ)) =
+        c * ((2 * Real.pi)⁻¹ * ∫ θ in (0 : ℝ)..2 * Real.pi, f (r, θ))
       rw [intervalIntegral.integral_const_mul]
       ring
     _ = _ := intervalIntegral.integral_const_mul c _

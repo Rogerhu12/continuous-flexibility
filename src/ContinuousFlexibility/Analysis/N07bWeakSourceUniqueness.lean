@@ -61,9 +61,11 @@ theorem n07b_perturbedCanonicalRelation_right_unique
       (physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))] ξ := by
     filter_upwards [hrem] with p hp
     exact (sub_left_inj).mp hp
+  have hsub : A ⊆ physicalPieceOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi) := by
+    intro p hp
+    exact ⟨hp.1, ⟨hp.2.1, ⟨hp.2.2.1, hp.2.2.2.le⟩⟩⟩
   have hηξ : η =ᵐ[volume.restrict A] ξ :=
-    ae_restrict_of_ae_restrict_of_subset
-      (fun p hp => ⟨hp.1, ⟨hp.2.1, ⟨hp.2.2.1, hp.2.2.2.le⟩⟩⟩) hηξbig
+    ae_restrict_of_ae_restrict_of_subset hsub hηξbig
   have hsource : f =ᵐ[volume.restrict A] g := by
     apply n07b_ae_eq_of_halfPeriod_pairing hab hopen hA hfLoc hgLoc
     intro φ hφ hcompact hs
@@ -77,7 +79,11 @@ theorem n07b_perturbedCanonicalRelation_right_unique
         ∫ r in D.a..D.b, radialAngularMean (fun θ =>
           ξ (r, θ) * divergenceOperator (L.coefficients z)
             (n07bFullPeriodTest φ) (r, θ)) := by
-      apply Radial.r11b_iteratedAngularMean_congr_ae hab
+      apply Radial.r11b_iteratedAngularMean_congr_ae (D := D)
+        (f := fun p : PolarPoint => η p * divergenceOperator (L.coefficients z)
+          (n07bFullPeriodTest φ) p)
+        (g := fun p : PolarPoint => ξ p * divergenceOperator (L.coefficients z)
+          (n07bFullPeriodTest φ) p) hab
       have hsupport : tsupport φ ⊆ (univ : Set ℝ) ×ˢ Ioo (0 : ℝ) Real.pi :=
         fun p hp => ⟨mem_univ _, (hA (hs hp)).2⟩
       have hmeasure : radialPhysicalMeasure D =
