@@ -184,7 +184,9 @@ theorem innerDirichletApprox_deriv_bound {a b C M : ℝ} {u : ℝ → ℝ}
   exact (abs_add_le _ _).trans ((add_le_add_right (abs_sub _ _) _).trans (by
     have hLL := hprod (y := k * (b - x) - 1) hL
     have hRR := hprod (y := k * (x - a) - 1) hR
-    linarith))
+    calc
+      _ ≤ 2 * C * M + 2 * C * M + M := add_le_add (add_le_add hLL hRR) hlast
+      _ = (4 * C + 1) * M := by ring))
 
 theorem innerDirichlet_deriv_continuousOn {a b : ℝ} {u : ℝ → ℝ}
     (hu : ∀ x ∈ Icc a b, ContDiffAt ℝ ∞ u x) :

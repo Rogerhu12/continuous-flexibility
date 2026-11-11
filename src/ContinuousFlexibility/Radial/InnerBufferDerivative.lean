@@ -41,7 +41,9 @@ theorem innerBuffer_local_derivative_bound {u : ℝ → ℝ} {x δ M K : ℝ}
     (fun y hy => by simpa only [Real.norm_eq_abs] using hsecond y hy)
     (convex_Icc x (x + δ)) hc' hxx
   have hdif' : |deriv u x - deriv u c| ≤ K * δ := by
-    have hdist : |x - c| ≤ δ := by rw [abs_of_nonpos (sub_nonpos.mpr hc'.1)]; linarith
+    have hdist : |x - c| ≤ δ := by
+      rw [abs_of_nonpos (sub_nonpos.mpr hc'.1)]
+      linarith only [hc'.2]
     exact (show |deriv u x - deriv u c| ≤ K * |x - c| from hdif).trans
       (mul_le_mul_of_nonneg_left hdist hK)
   calc
@@ -70,7 +72,6 @@ theorem innerBuffer_mass_scale_derivative {u V : ℝ → ℝ} {x m M C : ℝ}
     (mul_nonneg (mul_nonneg hC (sq_nonneg _)) hM) hu hdu hheight hsecond
   convert h using 1
   field_simp [hm.ne']
-  ring
 
 /-- The cutoff commutator has the expected `m²` pointwise factor.
 The support length supplies the remaining square-root factor in `L²`. -/

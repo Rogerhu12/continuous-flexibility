@@ -101,7 +101,7 @@ theorem innerBorderPiece_sum_norm_sq [DecidableEq ι] (center : ι)
   simp only [innerBorderPiece, innerBorderL2_norm_sq, Finset.sum_add_distrib]
   congr 1
   rw [Finset.sum_eq_single center]
-  · simp only [if_pos rfl]
+  · simp
   · intro i _ hi
     simp only [if_neg hi, zero_pow (by decide : 2 ≠ 0)]
   · intro hc

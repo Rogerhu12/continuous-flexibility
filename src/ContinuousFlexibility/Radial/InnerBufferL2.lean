@@ -35,7 +35,7 @@ theorem innerL2_norm_le_of_support_bound {α : Type*} [MeasurableSpace α]
     by_cases hx : x ∈ s
     · rw [hg, indicator_of_mem hx, Real.norm_eq_abs, Real.norm_eq_abs, abs_of_nonneg hM]
       exact hb hx
-    · rw [hz hx, hg, indicator_of_notMem hx, norm_zero, norm_zero]
+    · rw [hz hx, hg, indicator_of_notMem hx, norm_zero]
   have hg : ‖g‖ = M * Real.sqrt (μ.real s) := by
     dsimp only [g]
     rw [norm_indicatorConstLp (by norm_num : (2 : ENNReal) ≠ 0)
@@ -63,7 +63,7 @@ private theorem inner_mass_sqrt_layer {m : ℝ} (hm : 0 < m) :
     Real.rpow_one, ← Real.sqrt_eq_rpow]
   field_simp [hm0]
   have hsm := congrArg (fun t : ℝ => m * t) hs
-  nlinarith only [hsm]
+  nlinarith only [hs, hsm]
 
 /-- A mass-scale layer has the exact `m^(3/2)` source cost needed for
 the exponentially small global Dirichlet correction. -/

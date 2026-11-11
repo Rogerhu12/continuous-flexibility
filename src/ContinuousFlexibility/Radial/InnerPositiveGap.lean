@@ -79,7 +79,13 @@ theorem innerRadialGap_coercive {a b s : ℝ} (hab : a ≤ b) (ha : 0 < a)
   have hmul := mul_le_mul_of_nonneg_right hcoef
     (mul_nonneg (sq_nonneg j) (sq_nonneg (u r)))
   have hgrad : 0 ≤ w r * deriv u r ^ 2 := mul_nonneg (hpos r h).le (sq_nonneg _)
-  nlinarith only [hmul, hgrad]
+  calc
+    (s / 12) * j ^ 2 * ((12 * w r / r ^ 2) * u r ^ 2) =
+        ((s / 12) * (12 * w r / r ^ 2)) * (j ^ 2 * u r ^ 2) := by ring
+    _ ≤ (deriv w r / r) * (j ^ 2 * u r ^ 2) := hmul
+    _ ≤ w r * deriv u r ^ 2 + (deriv w r / r) * (j ^ 2 * u r ^ 2) :=
+      le_add_of_nonneg_left hgrad
+    _ = w r * deriv u r ^ 2 + j ^ 2 * deriv w r / r * u r ^ 2 := by ring
 
 theorem innerRadialJoin_coercive {a b : ℝ} (hab : a ≤ b) (ha : 0 < a)
     {w u : ℝ → ℝ} (hw : ContDiff ℝ ∞ w) (hu : ContDiff ℝ ∞ u)

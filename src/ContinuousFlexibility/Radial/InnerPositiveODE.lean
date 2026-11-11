@@ -89,12 +89,11 @@ theorem innerSecondOrder_combination {a b : ℝ} {V u v : ℝ → ℝ}
     exact (((hu.differentiable (by simp) y).hasDerivAt.const_mul c).add
       ((hv.differentiable (by simp) y).hasDerivAt.const_mul d)).deriv
   intro x hx
-  have hsecond : HasDerivAt (fun y => c * deriv u y + d * deriv v y)
-      (c * deriv (deriv u) x + d * deriv (deriv v) x) x := by
-    simpa only [Pi.add_apply] using
-      (((hdu.differentiable (by simp) x).hasDerivAt.const_mul c).add
-        ((hdv.differentiable (by simp) x).hasDerivAt.const_mul d))
-  rw [he, hsecond.deriv, huEq x hx, hvEq x hx]
+  have hsecond : deriv (fun y => c * deriv u y + d * deriv v y) x =
+      c * deriv (deriv u) x + d * deriv (deriv v) x :=
+    (((hdu.differentiable (by simp) x).hasDerivAt.const_mul c).fun_add
+      ((hdv.differentiable (by simp) x).hasDerivAt.const_mul d)).deriv
+  rw [he, hsecond, huEq x hx, hvEq x hx]
   ring
 
 /-- Actual smooth initial values for the positive-sign equation. -/

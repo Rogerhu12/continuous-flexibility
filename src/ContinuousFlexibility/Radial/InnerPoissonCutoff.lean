@@ -123,8 +123,10 @@ theorem innerPoisson_cutoff_expression {a b : ℝ} {V χ pin : ℝ → ℝ}
   intro x hx
   by_cases hs : x ∈ tsupport χ
   · rw [innerPoisson_second_deriv_mul hχ (hpin x (Ioo_subset_Icc_self hx) hs)]
-    have h := heq x hx hs
-    nlinarith
+    have hsecond : deriv (deriv pin) x = V x * pin x := by
+      linarith [heq x hx hs]
+    rw [hsecond]
+    ring
   · have hz : χ =ᶠ[𝓝 x] (fun _ => 0) := notMem_tsupport_iff_eventuallyEq.mp hs
     have hprod : (fun y => χ y * pin y) =ᶠ[𝓝 x] (fun _ => 0) := by
       filter_upwards [hz] with y hy
