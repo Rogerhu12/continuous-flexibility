@@ -78,6 +78,56 @@ end MorsePhysicalTailBasis
 /-- A single constant controls the actual P in the constructed physical
 basis at every positive transition index and for every allowed height
 choice. The identical basis supplies Qflux=1 and natural-line uniqueness. -/
+theorem exists_morsePhysicalTailBasis_all_indices_norm_of_upper
+    {M : MorseChainData} {σ₀ : ℕ → ℝ} {D₀ : ReferenceData} {C₀ : ℕ → ℝ}
+    {B Cstar : ℝ} (h₀ : MorseChainRealization M σ₀ D₀ C₀)
+    (hcell : MorseRealizedCellEstimates M B) (hCstar : 0 < Cstar) :
+    ∃ Cbound : ℝ, 0 < Cbound ∧
+      ∀ (σ : ℕ → ℝ) (D : ReferenceData) (C : ℕ → ℝ),
+        (∀ k, 1 ≤ σ k ∧ σ k ≤ 2) → MorseChainRealization M σ D C →
+        ∀ n : ℕ, 1 ≤ n → M.index ≤ n →
+          ∀ j : ℕ, (j : ℝ) < radialFrequencyThreshold M Cstar n →
+          ∀ right : Bool, ∀ entrance η K : ℝ,
+            M.radius right (n + 1) (M.leftX right (n + 1)) ≤ entrance →
+            η ≤ 1 / 16 → 32 ≤ K →
+            DeepTailHypotheses (morsePhysicalDeepTail M D right j (n + 1) entrance η K) →
+            ∃ F : MorsePhysicalTailBasis M D right j (n + 1) entrance η K,
+              ∃ hP : MemLp F.P 2 (outerOutwardTailMeasure D
+                (morsePhysicalDeepTail M D right j (n + 1) entrance η K) right),
+                ‖hP.toLp F.P‖ ≤
+                  sqrt (morseChainAmplitude M σ n) * exp (Cbound * (n : ℝ) ^ 2) := by
+  obtain ⟨Cbase, hCbase, hmass⟩ :=
+    morsePhysicalDeepTail_first_mass_all_indices_uniform_of_upper h₀ hcell hCstar
+  refine ⟨(Cbase + 396) / 2, by linarith only [hCbase], ?_⟩
+  intro σ D C hσ h n hn hnidx j hj right entrance η K hentry hη hK hT
+  have hstart : M.index ≤ n + 1 := hnidx.trans (Nat.le_succ n)
+  obtain ⟨_, _, _, hlt, htr, _, _⟩ := h.retained_data right (n + 1) hstart
+  have hepos : 0 < entrance :=
+    (h.radius_positive right (n + 1) hstart _
+      (left_mem_Icc.mpr (hlt.trans htr).le)).trans_le hentry
+  obtain ⟨F⟩ := exists_morsePhysicalTailBasis h.geometry right j (n + 1) hepos hT hη hK
+  refine ⟨F, F.P_memLp_outward h.geometry hepos hT, ?_⟩
+  apply F.P_norm_le h.geometry hepos hT (morseChainAmplitude_pos M σ hσ n).le n
+    (exponent := Cbase + 396)
+  have hfirst := hmass σ D C hσ h n hn hnidx j hj right entrance η K hentry
+  have hpref : (396 : ℝ) ≤ exp (396 * (n : ℝ) ^ 2) :=
+    nonneg_le_exp_mul_nat_sq (by norm_num) hn
+  calc
+    _ ≤ 396 * (tailMass (morsePhysicalDeepTail M D right j (n + 1) entrance η K) 0 /
+        ((entrance / tailPhysicalEndpoint D right) ^ ((j : ℝ) ^ 2)) ^ 2) := F.P_bound
+    _ ≤ 396 * (morseChainAmplitude M σ n * exp (Cbase * (n : ℝ) ^ 2)) :=
+      mul_le_mul_of_nonneg_left hfirst (by norm_num)
+    _ ≤ exp (396 * (n : ℝ) ^ 2) *
+        (morseChainAmplitude M σ n * exp (Cbase * (n : ℝ) ^ 2)) :=
+      mul_le_mul_of_nonneg_right hpref
+        (mul_nonneg (morseChainAmplitude_pos M σ hσ n).le (exp_pos _).le)
+    _ = morseChainAmplitude M σ n * exp ((Cbase + 396) * (n : ℝ) ^ 2) := by
+      rw [mul_left_comm, ← exp_add]
+      congr 2
+      ring
+
+/-- The original band interface is retained without imposing a lower
+frequency threshold on the underlying mass or natural norm estimate. -/
 theorem exists_morsePhysicalTailBasis_all_indices_norm
     {M : MorseChainData} {σ₀ : ℕ → ℝ} {D₀ : ReferenceData} {C₀ : ℕ → ℝ}
     {B Cstar : ℝ} (h₀ : MorseChainRealization M σ₀ D₀ C₀)
@@ -95,35 +145,11 @@ theorem exists_morsePhysicalTailBasis_all_indices_norm
                 (morsePhysicalDeepTail M D right j (n + 1) entrance η K) right),
                 ‖hP.toLp F.P‖ ≤
                   sqrt (morseChainAmplitude M σ n) * exp (Cbound * (n : ℝ) ^ 2) := by
-  obtain ⟨Cbase, hCbase, hmass⟩ :=
-    morsePhysicalDeepTail_first_mass_all_indices_uniform h₀ hcell hCstar
-  refine ⟨(Cbase + 396) / 2, by linarith only [hCbase], ?_⟩
+  obtain ⟨Cbound, hCbound, hbound⟩ :=
+    exists_morsePhysicalTailBasis_all_indices_norm_of_upper h₀ hcell hCstar
+  refine ⟨Cbound, hCbound, ?_⟩
   intro σ D C hσ h n hn j hj right entrance η K hentry hη hK hT
-  have hstart : M.index ≤ n + 1 := hj.1.trans (Nat.le_succ n)
-  obtain ⟨_, _, _, hlt, htr, _, _⟩ := h.retained_data right (n + 1) hstart
-  have hepos : 0 < entrance :=
-    (h.radius_positive right (n + 1) hstart _
-      (left_mem_Icc.mpr (hlt.trans htr).le)).trans_le hentry
-  obtain ⟨F⟩ := exists_morsePhysicalTailBasis h.geometry right j (n + 1) hepos hT hη hK
-  refine ⟨F, F.P_memLp_outward h.geometry hepos hT, ?_⟩
-  apply F.P_norm_le h.geometry hepos hT (morseChainAmplitude_pos M σ hσ n).le n
-    (exponent := Cbase + 396)
-  have hfirst := hmass σ D C hσ h n hn j hj right entrance η K hentry
-  have hpref : (396 : ℝ) ≤ exp (396 * (n : ℝ) ^ 2) :=
-    nonneg_le_exp_mul_nat_sq (by norm_num) hn
-  calc
-    _ ≤ 396 * (tailMass (morsePhysicalDeepTail M D right j (n + 1) entrance η K) 0 /
-        ((entrance / tailPhysicalEndpoint D right) ^ ((j : ℝ) ^ 2)) ^ 2) := F.P_bound
-    _ ≤ 396 * (morseChainAmplitude M σ n * exp (Cbase * (n : ℝ) ^ 2)) :=
-      mul_le_mul_of_nonneg_left hfirst (by norm_num)
-    _ ≤ exp (396 * (n : ℝ) ^ 2) *
-        (morseChainAmplitude M σ n * exp (Cbase * (n : ℝ) ^ 2)) :=
-      mul_le_mul_of_nonneg_right hpref
-        (mul_nonneg (morseChainAmplitude_pos M σ hσ n).le (exp_pos _).le)
-    _ = morseChainAmplitude M σ n * exp ((Cbase + 396) * (n : ℝ) ^ 2) := by
-      rw [mul_left_comm, ← exp_add]
-      congr 2
-      ring
+  exact hbound σ D C hσ h n hn hj.1 j hj.2.2 right entrance η K hentry hη hK hT
 
 end ContinuousFlexibility.Radial
 

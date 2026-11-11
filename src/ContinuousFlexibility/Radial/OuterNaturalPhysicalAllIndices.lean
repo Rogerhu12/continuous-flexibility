@@ -21,6 +21,33 @@ set_option backward.isDefEq.respectTransparency false
 
 /-- The normalized first mass of the actual tail has the required height
 scale for all positive indices, uniformly in the height ratios. -/
+theorem morsePhysicalDeepTail_first_mass_all_indices_uniform_of_upper
+    {M : MorseChainData} {σ₀ : ℕ → ℝ} {D₀ : ReferenceData} {C₀ : ℕ → ℝ}
+    {B Cstar : ℝ} (h₀ : MorseChainRealization M σ₀ D₀ C₀)
+    (hcell : MorseRealizedCellEstimates M B) (hCstar : 0 < Cstar) :
+    ∃ Cbound : ℝ, 0 < Cbound ∧
+      ∀ (σ : ℕ → ℝ) (D : ReferenceData) (C : ℕ → ℝ),
+        (∀ k, 1 ≤ σ k ∧ σ k ≤ 2) → MorseChainRealization M σ D C →
+        ∀ n : ℕ, 1 ≤ n → M.index ≤ n →
+          ∀ j : ℕ, (j : ℝ) < radialFrequencyThreshold M Cstar n →
+          ∀ right : Bool, ∀ entrance η K : ℝ,
+            M.radius right (n + 1) (M.leftX right (n + 1)) ≤ entrance →
+            tailMass (morsePhysicalDeepTail M D right j (n + 1) entrance η K) 0 /
+                ((entrance / tailPhysicalEndpoint D right) ^ ((j : ℝ) ^ 2)) ^ 2 ≤
+              morseChainAmplitude M σ n * exp (Cbound * (n : ℝ) ^ 2) := by
+  obtain ⟨Cbound, hCbound, hbound⟩ :=
+    morseRealized_next_normalized_mass_all_indices_uniform_of_upper h₀ hcell hCstar
+  refine ⟨Cbound, hCbound, ?_⟩
+  intro σ D C hσ h n hn hnidx j hj right entrance η K hentry
+  have hstart : M.index ≤ n + 1 := hnidx.trans (Nat.le_succ n)
+  obtain ⟨_, _, _, hlt, htr, _, _⟩ := h.retained_data right (n + 1) hstart
+  have hepos : 0 < entrance :=
+    (h.radius_positive right (n + 1) hstart _
+      (left_mem_Icc.mpr (hlt.trans htr).le)).trans_le hentry
+  rw [morsePhysicalDeepTail_normalized_first_mass h right j (n + 1) hstart hepos η K]
+  exact hbound σ D C hσ h n hn hnidx j hj right entrance hentry
+
+/-- The frequency-band form of the upper-only physical mass estimate. -/
 theorem morsePhysicalDeepTail_first_mass_all_indices_uniform
     {M : MorseChainData} {σ₀ : ℕ → ℝ} {D₀ : ReferenceData} {C₀ : ℕ → ℝ}
     {B Cstar : ℝ} (h₀ : MorseChainRealization M σ₀ D₀ C₀)
@@ -35,16 +62,10 @@ theorem morsePhysicalDeepTail_first_mass_all_indices_uniform
                 ((entrance / tailPhysicalEndpoint D right) ^ ((j : ℝ) ^ 2)) ^ 2 ≤
               morseChainAmplitude M σ n * exp (Cbound * (n : ℝ) ^ 2) := by
   obtain ⟨Cbound, hCbound, hbound⟩ :=
-    morseRealized_next_normalized_mass_all_indices_uniform h₀ hcell hCstar
+    morsePhysicalDeepTail_first_mass_all_indices_uniform_of_upper h₀ hcell hCstar
   refine ⟨Cbound, hCbound, ?_⟩
   intro σ D C hσ h n hn j hj right entrance η K hentry
-  have hstart : M.index ≤ n + 1 := hj.1.trans (Nat.le_succ n)
-  obtain ⟨_, _, _, hlt, htr, _, _⟩ := h.retained_data right (n + 1) hstart
-  have hepos : 0 < entrance :=
-    (h.radius_positive right (n + 1) hstart _
-      (left_mem_Icc.mpr (hlt.trans htr).le)).trans_le hentry
-  rw [morsePhysicalDeepTail_normalized_first_mass h right j (n + 1) hstart hepos η K]
-  exact hbound σ D C hσ h n hn j hj right entrance hentry
+  exact hbound σ D C hσ h n hn hj.1 j hj.2.2 right entrance η K hentry
 
 /-- The physical natural solution required by Lemma 6.4 exists at every
 positive transition index and has the actual full-tail Hilbert norm.

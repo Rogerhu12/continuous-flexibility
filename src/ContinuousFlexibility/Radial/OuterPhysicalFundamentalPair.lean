@@ -77,7 +77,8 @@ theorem exists_outerPhysicalFundamentalStatePair
       (outerOutwardRadius right entry) (outerOutwardRadius right deep)
       (outerOutwardRadius right (tailPhysicalEndpoint D right))) := by
   have hcb := outerWhole_interval (right := right) hdeep
-  have hcoeff := outerWhole_coefficients_smooth (J := (j : ℝ) ^ 2) hD hentry hlam.ne'
+  have hcoeff := outerWhole_coefficients_smooth (right := right) (J := (j : ℝ) ^ 2)
+    hD hentry hlam.ne'
   have hsub : Icc (outerOutwardRadius right entry) (outerOutwardRadius right deep) ⊆
       Ico (outerOutwardRadius right entry)
         (outerOutwardRadius right (tailPhysicalEndpoint D right)) :=

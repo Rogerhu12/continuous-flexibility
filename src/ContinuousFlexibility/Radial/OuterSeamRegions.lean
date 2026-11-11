@@ -49,6 +49,8 @@ theorem morseRealized_outward_seam_strictMonoOn {M : MorseChainData} {σ : ℕ �
     simpa only [Nat.add_assoc] using
       morseRealized_outward_seam_step h right (M.index + k) (Nat.le_add_right _ _)
   intro m hm n hn hmn
+  change M.index ≤ m at hm
+  change M.index ≤ n at hn
   have hsub : m - M.index < n - M.index := by omega
   simpa only [Nat.add_sub_of_le hm, Nat.add_sub_of_le hn] using hs hsub
 

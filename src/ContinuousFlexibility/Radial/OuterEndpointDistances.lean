@@ -38,8 +38,10 @@ theorem morseRealized_seam_tendsto {M : MorseChainData} {σ : ℕ → ℝ}
     Tendsto (morseChainSeam M right) atTop (𝓝 (if right then D.b else D.a)) := by
   rcases h with ⟨_, _, _, _, _, _, hlim, _, _, _⟩
   cases right
-  · simpa only [morseChainSeam, Bool.false_eq_true, ite_false] using (hlim false).2
-  · simpa only [morseChainSeam, ite_true] using (hlim true).1
+  · change Tendsto (fun n => M.radius false n (M.rightX false n)) atTop (𝓝 D.a)
+    simpa only [Bool.false_eq_true, ite_false] using (hlim false).2
+  · change Tendsto (fun n => M.radius true n (M.leftX true n)) atTop (𝓝 D.b)
+    simpa only [ite_true] using (hlim true).1
 
 /-- The nearest endpoint at a sufficiently far seam is its own endpoint. -/
 theorem morseRealized_eventually_seam_distance {M : MorseChainData} {σ : ℕ → ℝ}

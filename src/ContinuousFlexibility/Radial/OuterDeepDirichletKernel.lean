@@ -29,13 +29,14 @@ theorem MorsePhysicalTailBasis.logDirichletRow_memLp
     MemLp (fun y => F.logQ (min x y) * F.logP (max x y)) 2
       (deepTailMeasure (morsePhysicalDeepTail M D right j start entrance η K)) := by
   let T := morsePhysicalDeepTail M D right j start entrance η K
+  have hqa : F.logQ T.entrance = 0 := F.Q_log_entry
   rcases eq_or_lt_of_le hx.1 with heq | hlt
   · subst x
     refine (memLp_congr_ae ?_).mp
       (MemLp.zero : MemLp (fun _ : ℝ => (0 : ℝ)) 2 (deepTailMeasure T))
     filter_upwards [deepTailMeasure_ae_mem T] with y hy
     change (0 : ℝ) = F.logQ (min T.entrance y) * F.logP (max T.entrance y)
-    rw [min_eq_left hy.1.le, max_eq_right hy.1.le, F.Q_log_entry, zero_mul]
+    rw [min_eq_left hy.1.le, max_eq_right hy.1.le, hqa, zero_mul]
   · have hrow := tailFundamentalGreenKernel_memLp_row (W := (1 : ℝ))
       (deepTail_contDiffOn hT)
       (fun y hy => (deepTail_pos hT y hy))
@@ -70,8 +71,9 @@ theorem MorsePhysicalTailBasis.logGreen_kernel
     (fun x hx => deepTail_pos hT x (Ioo_subset_Ico_self hx)) le_rfl
   have hua : F.logP T.entrance ≠ 0 := by
     intro hz
+    have hqa : F.logQ T.entrance = 0 := F.Q_log_entry
     have hW := F.log_wronskian T.entrance ⟨le_rfl, hT.1⟩
-    rw [hz, F.Q_log_entry, mul_zero, zero_mul, sub_self] at hW
+    rw [hz, hqa, mul_zero, zero_mul, sub_self] at hW
     norm_num at hW
   have hUnique : ∀ v, TailNaturalEquation T v → ∃ C : ℝ,
       ∀ x ∈ Ioo T.entrance T.endpoint, v x = C * F.logP x := by
