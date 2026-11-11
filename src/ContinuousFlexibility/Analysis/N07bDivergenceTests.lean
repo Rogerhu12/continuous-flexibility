@@ -58,7 +58,7 @@ theorem n07b_tsupport_divergenceOperator_subset (L : SymmetricCoefficients)
   intro p hp
   by_contra hnot
   have hz : φ =ᶠ[𝓝 p] (fun _ => 0) :=
-    ((isClosed_tsupport φ).isOpen_compl.mem_nhds hnot).mono
+    Filter.Eventually.mono ((isClosed_tsupport φ).isOpen_compl.mem_nhds hnot)
       (fun q hq => image_eq_zero_of_notMem_tsupport hq)
   have hd := (n07b_divergenceOperator_eventuallyEq L hz).self_of_nhds
   rw [n07b_divergenceOperator_zero] at hd
@@ -85,7 +85,8 @@ theorem n07b_contDiff_divergence_compact_test {A : Set PolarPoint}
   · have hnot : p ∉ tsupport (divergenceOperator L φ) :=
       fun h => hp (hs (n07b_tsupport_divergenceOperator_subset L φ h))
     have hz : divergenceOperator L φ =ᶠ[𝓝 p] (fun _ => 0) :=
-      ((isClosed_tsupport (divergenceOperator L φ)).isOpen_compl.mem_nhds hnot).mono
+      Filter.Eventually.mono
+        ((isClosed_tsupport (divergenceOperator L φ)).isOpen_compl.mem_nhds hnot)
         (fun q hq => image_eq_zero_of_notMem_tsupport hq)
     exact contDiffAt_const.congr_of_eventuallyEq hz
 
@@ -98,7 +99,7 @@ theorem n07b_fullPeriodTest_divergence_eqOn (L : SymmetricCoefficients)
       ((univ : Set ℝ) ×ˢ Ioo (0 : ℝ) (2 * Real.pi)) := by
   intro p hp
   have he : n07bFullPeriodTest φ =ᶠ[𝓝 p] φ :=
-    ((isOpen_univ.prod isOpen_Ioo).mem_nhds hp).mono (fun q hq =>
+    Filter.Eventually.mono ((isOpen_univ.prod isOpen_Ioo).mem_nhds hp) (fun q hq =>
       n07bFullPeriodTest_eqOn hs ⟨hq.1, ⟨hq.2.1, hq.2.2.le⟩⟩)
   exact (n07b_divergenceOperator_eventuallyEq L he).self_of_nhds
 
