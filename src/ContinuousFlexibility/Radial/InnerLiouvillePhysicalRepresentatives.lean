@@ -48,7 +48,7 @@ theorem innerLiouvilleSource_apply (F : Lp ℝ 2 (radialHilbertMeasure D)) :
     innerL2ZeroExtension_adjoint, innerLiouvilleVelocityMultiplier_adjoint,
     LinearIsometryEquiv.adjoint_eq_symm, LinearIsometryEquiv.symm_symm,
     ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
-    LinearIsometryEquiv.coe_coe'', innerL2ZeroExtension]
+    LinearIsometryEquiv.coe_coe'', innerL2ZeroExtension, ContinuousLinearMap.adjoint_adjoint]
 
 theorem innerLiouvilleFieldLift_pullback_ae (f : Lp ℝ 2 (volume : Measure ℝ)) :
     (fun x => innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f (R x)) =ᵐ[
@@ -64,7 +64,7 @@ theorem innerLiouvilleFieldLift_pullback_ae (f : Lp ℝ 2 (volume : Measure ℝ)
       (Ioo (R a) (R b)) measurableSet_Ioo u))
   have he := innerLiouvilleIntervalEquiv_symm_pullback_ae D hab hlam hR hs hp hcore hw g
   have hg := LpToLpRestrictCLM_coeFn ℝ (Ioo a b) (V f)
-  have hV := ae_restrict_of_ae
+  have hV := ae_restrict_of_ae (s := Ioo a b)
     (innerLiouvilleVelocityMultiplier_ae R a b hR U hU hv f)
   rw [innerLiouvilleFieldLift_apply]
   change (fun x => (Real.sqrt 12 •
@@ -119,8 +119,8 @@ theorem innerLiouvilleSource_ae (F : Lp ℝ 2 (radialHilbertMeasure D)) :
     (innerLiouvilleInterval_pullback_ae D hab hlam hR hs hp hcore hw
       (LpToLpRestrictCLM_coeFn ℝ (Ioo (R a) (R b)) F))
   rw [innerLiouvilleSource_apply]
-  change (Real.sqrt 12 • innerLiouvilleVelocityMultiplier R a b hR U hU hv zext :
-    ℝ → ℝ) =ᵐ[volume] (Ioo a b).indicator
+  change ((Real.sqrt 12 • innerLiouvilleVelocityMultiplier R a b hR U hU hv zext :
+    RadialL2) : ℝ → ℝ) =ᵐ[volume] (Ioo a b).indicator
       (fun x => 12 * Real.sqrt lam * s x * (deriv R x / R x) ^ 2 * F (R x))
   filter_upwards [hsmul, hV, hext, he, hF] with x hsm hV' hext' he' hF'
   simp only [Pi.smul_apply, smul_eq_mul] at hsm

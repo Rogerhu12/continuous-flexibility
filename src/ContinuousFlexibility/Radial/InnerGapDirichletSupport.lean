@@ -15,11 +15,11 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set MeasureTheory Filter ContinuousFlexibility.Statements
-open scoped ContDiff InnerProductSpace ENNReal
+open scoped ContDiff InnerProductSpace
 
 def innerGapOutsideRestriction (D : ReferenceData) (a b : ℝ) :
     RadialModeL2 D →L[ℝ] Lp ℝ 2 ((radialHilbertMeasure D).restrict (Ioo a b)ᶜ) :=
-  Lp.LpToLpOfMeasureLeSMul (by simp : (1 : ℝ≥0∞) ≠ ∞)
+  Lp.LpToLpOfMeasureLeSMul (by simp : (1 : ℝ≥0∞) ≠ ⊤)
     (by simpa only [one_smul] using
       (Measure.restrict_le_self : (radialHilbertMeasure D).restrict (Ioo a b)ᶜ ≤
         radialHilbertMeasure D))
@@ -27,7 +27,7 @@ def innerGapOutsideRestriction (D : ReferenceData) (a b : ℝ) :
 theorem innerGapOutsideRestriction_ae (D : ReferenceData) (a b : ℝ) (u : RadialModeL2 D) :
     innerGapOutsideRestriction D a b u =ᵐ[(radialHilbertMeasure D).restrict (Ioo a b)ᶜ] u := by
   exact Lp.coeFn_LpToLpOfMeasureLeSMul
-    (by simp : (1 : ℝ≥0∞) ≠ ∞)
+    (by simp : (1 : ℝ≥0∞) ≠ ⊤)
     (by simpa only [one_smul] using
       (Measure.restrict_le_self : (radialHilbertMeasure D).restrict (Ioo a b)ᶜ ≤
         radialHilbertMeasure D)) u

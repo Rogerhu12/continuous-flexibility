@@ -128,7 +128,7 @@ theorem innerMorseBuffer_fits_and_action {A B j : ℝ}
     exact (by norm_num : (16 : ℝ) ≤ 32).trans hl
   · exact (by norm_num : (32 : ℝ) ≤ 64).trans (hr.trans hright)
   · intro i
-    fin_cases i
+    rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
     · have hc := mul_le_mul_of_nonneg_right
         (min_le_left (innerMorseLeftFitScale / 4) (innerMorseRightFitScale / 8)) ht
       have hprod : innerMorseBufferMass A B j 0 * (morseShortLeftCapLength / 2) =

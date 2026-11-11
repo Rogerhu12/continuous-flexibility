@@ -58,8 +58,7 @@ theorem innerMorseBufferMass_zero (A B j : ℝ) :
 
 theorem innerMorseBufferMass_one (A B j : ℝ) :
     innerMorseBufferMass A B j 1 = j * sqrt (B / 2) := by
-  have h10 : (1 : Fin 2) ≠ 0 := by decide
-  simp only [innerMorseBufferMass, h10, decide_true, innerMorseCapMass, ite_true]
+  norm_num [innerMorseBufferMass, innerMorseCapMass]
 
 theorem innerMorseBufferInnerWall_eq {A B j : ℝ} (B₀ : ℝ)
     (i : Fin 2) (hm : innerMorseBufferMass A B j i ≠ 0) :
@@ -69,7 +68,9 @@ theorem innerMorseBufferInnerWall_eq {A B j : ℝ} (B₀ : ℝ)
   unfold bufferInnerWall
   have ha : (innerMorseBufferData A B j B₀).action i =
       innerMorseBufferMass A B j i * innerMorseBufferDistance A i - 6 := rfl
-  rw [ha, sub_add_cancel, mul_div_cancel_left₀ _ hm]
+  rw [ha, sub_add_cancel]
+  rw [show (innerMorseBufferData A B j B₀).mass i =
+    innerMorseBufferMass A B j i from rfl, mul_div_assoc, mul_div_cancel_left₀ _ hm]
 
 theorem innerMorseBufferInnerWall_zero {A B j : ℝ} (B₀ : ℝ)
     (hm : innerMorseBufferMass A B j 0 ≠ 0) :
@@ -153,26 +154,26 @@ theorem innerMorseBufferData_hypotheses {A B j B₀ : ℝ}
   refine ⟨hcuts, hwalls, hB₀, by norm_num [innerMorseBufferData], ?_, hreal,
     contDiff_const, HasCompactSupport.zero, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · exact contDiff_const.mul (contDiff_morseRho A B)
-  · simpa only [Pi.zero_apply] using (Lp.coeFn_zero ℝ 2 volume)
+  · simpa only [innerMorseBufferData, Pi.zero_apply] using (Lp.coeFn_zero ℝ 2 volume)
   · simp only [innerMorseBufferData, Function.support_zero, empty_subset]
   · intro i
     refine ⟨hm i, ?_⟩
-    fin_cases i
+    rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
     · simp only [innerMorseBufferData, innerMorseBufferDistance, ite_true]
       nlinarith only [hleft]
     · have h10 : (1 : Fin 2) ≠ 0 := by decide
       simp only [innerMorseBufferData, innerMorseBufferDistance, h10, ite_false]
       nlinarith only [hright]
   · filter_upwards [ae_restrict_of_ae (Lp.coeFn_zero ℝ 2 volume)] with x hx
-    simpa only [Pi.zero_apply] using hx
+    simpa only [innerMorseBufferData, Pi.zero_apply] using hx
   · intro i x hx
-    fin_cases i
+    rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
     · have hx' : x ≤ morseShortLeftCapCut := by
         have he : (innerMorseBufferData A B j B₀).l +
             ((innerMorseBufferData A B j B₀).action 0 + 6) /
               (innerMorseBufferData A B j B₀).mass 0 = morseShortLeftCapCut := by
           simpa only [bufferInnerWall, bufferCut, bufferSign,
-            ite_true, neg_one_mul, sub_neg_eq_add] using hw0
+            ite_true, neg_one_mul, neg_div, sub_neg_eq_add] using hw0
         exact (show x ≤ (innerMorseBufferData A B j B₀).l +
           ((innerMorseBufferData A B j B₀).action 0 + 6) /
             (innerMorseBufferData A B j B₀).mass 0 from hx).trans_eq he
@@ -200,7 +201,7 @@ theorem innerMorseBufferData_hypotheses {A B j B₀ : ℝ}
         from rfl, innerMorseBufferMass_one, mul_pow, sq_sqrt (by positivity : 0 ≤ B / 2)]
       simpa only [innerMorseBufferData, morsePotential, neg_mul] using hρ
   · intro i x hx
-    fin_cases i
+    rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
     · have hx' : |x - innerMorseBufferLeftCut| ≤ 4 / innerMorseBufferMass A B j 0 ∨
           |x - morseShortLeftCapCut| ≤ 4 / innerMorseBufferMass A B j 0 := by
         rw [hw0] at hx

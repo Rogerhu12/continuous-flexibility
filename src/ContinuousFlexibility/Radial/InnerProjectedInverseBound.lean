@@ -86,7 +86,7 @@ theorem innerBorderPieceProjection_contract
   have hs : (if i = center then F.snd else 0) ^ 2 ≤ F.snd ^ 2 := by
     split_ifs
     · exact le_rfl
-    · positivity
+    · simpa only [zero_pow (by decide : (2 : ℕ) ≠ 0)] using sq_nonneg F.snd
   apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg F)).mp
   rw [innerBorderPieceProjection_norm_sq, innerBorderL2_norm_sq_coordinates]
   exact add_le_add ((sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mpr hf') hs

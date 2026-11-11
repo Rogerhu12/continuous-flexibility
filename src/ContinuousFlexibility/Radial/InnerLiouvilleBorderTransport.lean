@@ -105,7 +105,7 @@ theorem innerLiouvilleColumnLift_pullback_ae (g : Lp ℝ 2 (volume : Measure ℝ
       (Ioo (R a) (R b)) measurableSet_Ioo u))
   have he := innerLiouvilleIntervalEquiv_symm_pullback_ae D hab hlam hR hs hp hcore hw f
   have hf := LpToLpRestrictCLM_coeFn ℝ (Ioo a b) (M g)
-  have hM := ae_restrict_of_ae
+  have hM := ae_restrict_of_ae (s := Ioo a b)
     (innerLiouvilleInverseVelocityMultiplier_ae R a b hR (fun x hx => (hp x hx).2.1) g)
   rw [innerLiouvilleColumnLift_apply]
   change (fun x => ((1 / Real.sqrt 12) •

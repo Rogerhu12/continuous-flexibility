@@ -58,7 +58,7 @@ theorem innerGapFormGraph_iff_weakResidual (D : ReferenceData)
       innerGapPotentialClass D hw hpos hslope j u, ?_⟩
     intro r hr
     have he := hform r hr
-    dsimp only [innerRadialWeakResidual]
+    rw [innerRadialWeakResidual_apply]
     rw [innerGapPotentialMultiplier_square_inner]
     simp only [zero_mul, add_zero]
     linarith
@@ -66,7 +66,7 @@ theorem innerGapFormGraph_iff_weakResidual (D : ReferenceData)
     refine ⟨d, hd, ?_⟩
     intro r hr
     have he := hweak r hr
-    dsimp only [innerRadialWeakResidual] at he
+    rw [innerRadialWeakResidual_apply] at he
     rw [innerGapPotentialClass_eq D hw hpos hslope j hv,
       innerGapPotentialMultiplier_square_inner] at he
     simp only [zero_mul, add_zero] at he

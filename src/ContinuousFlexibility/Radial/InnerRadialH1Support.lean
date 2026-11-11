@@ -66,7 +66,11 @@ theorem innerRadialH1Domain_piece_projection {q : InnerRadialH1Pair D}
   have hz := (mem_innerRadialH1Domain D hw ha hcore hpos q).mp hq
   have hp := (innerRadialH1Zero_piece_projection D a b hz).1
   rw [Prod.fst_sub, map_sub, innerRadialAffineLift_piece_projection] at hp
-  exact sub_right_cancel hp
+  have he := congrArg
+    (fun z : RadialModeL2 D => z +
+      (innerRadialAffineLift D hw ha hcore hpos
+        (innerRadialH1Trace D hw ha hcore hpos q)).1) hp
+  simpa only [sub_add_cancel] using he
 
 theorem innerRadialH1Domain_supported {q : InnerRadialH1Pair D}
     (hq : q ∈ innerRadialH1Domain D hw ha hcore hpos) :

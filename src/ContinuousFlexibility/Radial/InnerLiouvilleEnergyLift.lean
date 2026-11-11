@@ -87,8 +87,8 @@ theorem innerLiouvilleGradientLift_pullback_ae (f d : Lp ℝ 2 (volume : Measure
       (Ioo (R a) (R b)) measurableSet_Ioo u))
   have he := innerLiouvilleIntervalEquiv_symm_pullback_ae D hab hlam hR hs hp hcore hw g
   have hg := LpToLpRestrictCLM_coeFn ℝ (Ioo a b) (d - M f)
-  have hsub := ae_restrict_of_ae (Lp.coeFn_sub d (M f))
-  have hM := ae_restrict_of_ae
+  have hsub := ae_restrict_of_ae (s := Ioo a b) (Lp.coeFn_sub d (M f))
+  have hM := ae_restrict_of_ae (s := Ioo a b)
     (innerLiouvilleDriftMultiplier_ae s a b hs (fun x hx => (hp x hx).2.2) f)
   rw [innerLiouvilleGradientLift_apply]
   change (fun x => innerL2ZeroExtension (radialHilbertMeasure D)

@@ -156,6 +156,11 @@ def innerRadialWeakResidual (q : InnerRadialH1Pair D)
     simp only [Prod.smul_fst, Prod.smul_snd, real_inner_smul_right, RingHom.id_apply, smul_eq_mul]
     ring
 
+@[simp] theorem innerRadialWeakResidual_apply (q : InnerRadialH1Pair D)
+    (v f g : RadialModeL2 D) (borderScalar : ℝ) (r : InnerRadialH1Pair D) :
+    innerRadialWeakResidual D q v f g borderScalar r =
+      ⟪q.2, r.2⟫_ℝ + ⟪v, r.1⟫_ℝ + borderScalar * ⟪g, r.1⟫_ℝ - ⟪f, r.1⟫_ℝ := rfl
+
 /-- Exactly one piece carries the one temporary scalar column. -/
 def innerRadialChainResidual (central : Fin (n + 1)) (column : RadialModeL2 D)
     (q : Fin (n + 1) → InnerRadialH1Pair D)

@@ -20,8 +20,8 @@ theorem innerRadialPotentialClass_zero (D : ReferenceData) (j a b : ℝ) :
     InnerRadialPotentialClass D j a b 0 0 := by
   filter_upwards [Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D)] with r hr
   by_cases hmem : r ∈ Ioo a b
-  · simp only [indicator_of_mem hmem, hr, mul_zero]
-  · simp only [indicator_of_notMem hmem, hr]
+  · simp only [indicator_of_mem hmem, hr, Pi.zero_apply, mul_zero]
+  · simp only [indicator_of_notMem hmem, hr, Pi.zero_apply]
 
 theorem InnerRadialPotentialClass.add {D : ReferenceData} {j a b : ℝ}
     {u v u' v' : RadialModeL2 D}
@@ -52,8 +52,8 @@ theorem InnerRadialPotentialClass.eq_zero_of_value_eq_zero
   rw [hu] at h
   filter_upwards [h, Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D)] with r hr hz
   by_cases hmem : r ∈ Ioo a b
-  · simpa only [indicator_of_mem hmem, hz, mul_zero] using hr
-  · simpa only [indicator_of_notMem hmem] using hr
+  · simpa only [indicator_of_mem hmem, hz, Pi.zero_apply, mul_zero] using hr
+  · simpa only [indicator_of_notMem hmem, Pi.zero_apply] using hr
 
 /-- The actual real signed potential contributes a symmetric pairing. -/
 theorem InnerRadialPotentialClass.inner_symm
@@ -75,7 +75,11 @@ def innerRadialPotentialGraph (D : ReferenceData) (j a b : ℝ) :
     Submodule ℝ (RadialModeL2 D × RadialModeL2 D) where
   carrier := {z | InnerRadialPotentialClass D j a b z.1 z.2}
   zero_mem' := innerRadialPotentialClass_zero D j a b
-  add_mem' := fun _ _ h h' => h.add h'
-  smul_mem' := fun c _ h => h.smul c
+  add_mem' := by
+    intro x y hx hy
+    exact hx.add hy
+  smul_mem' := by
+    intro c x hx
+    exact hx.smul c
 
 end ContinuousFlexibility.Radial
