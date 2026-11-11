@@ -22,6 +22,9 @@ theorem n05CanonicalMeasure_eq_open_rectangle (S : PhysicalSpacesData)
     canonicalMeasure S K m =
       volume.restrict (Ioo (K.left m) (K.right m) ×ˢ Ioo (0 : ℝ) Real.pi) := by
   rw [n05CanonicalMeasure_eq_prod]
+  change ((volume : Measure ℝ).restrict (Ioo (K.left m) (K.right m))).prod angleMeasure =
+    ((volume : Measure ℝ).prod (volume : Measure ℝ)).restrict
+      (Ioo (K.left m) (K.right m) ×ˢ Ioo (0 : ℝ) Real.pi)
   have ha : angleMeasure = (volume : Measure ℝ).restrict (Ioo (0 : ℝ) Real.pi) :=
     (Measure.restrict_congr_set Ioo_ae_eq_Ioc).symm
   rw [ha, Measure.prod_restrict]

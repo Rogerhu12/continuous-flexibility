@@ -48,7 +48,7 @@ theorem n05LpMapLinear_bound (A : ∀ m, E m →ₗ[ℝ] F m) (B : ℝ) (hB : 0 
     ‖n05LpMapLinear A B hB hA u‖ ≤ B * ‖u‖ := by
   calc
     ‖n05LpMapLinear A B hB hA u‖ ≤ ‖B • u‖ := by
-      apply lp.norm_mono (by norm_num : (2 : ℝ≥0∞) ≠ 0)
+      apply lp.norm_mono (by norm_num : (2 : ENNReal) ≠ 0)
       intro m
       simpa only [n05LpMapLinear_apply, lp.coeFn_smul, Pi.smul_apply,
         norm_smul, Real.norm_eq_abs, abs_of_nonneg hB] using hA m (u m)
