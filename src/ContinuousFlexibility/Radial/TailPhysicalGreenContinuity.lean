@@ -45,6 +45,14 @@ theorem continuous_tailClampedResistance_family
 
 end DensityFamily
 
+theorem tailClampedResistanceLength_pos {p : ℝ → ℝ} {a b : ℝ} (hab : a < b)
+    (hp : ContinuousOn p (Icc a b)) (hpos : ∀ x ∈ Icc a b, 0 < p x) :
+    0 < tailResistanceChart (tailClampedDensity p a b hab.le) a b := by
+  have hm := tailResistanceChart_strictMono
+    (tailClampedDensity_continuous hab.le hp)
+    (tailClampedDensity_pos hab.le hpos) a hab
+  simpa only [tailResistanceChart, intervalIntegral.integral_same] using hm
+
 /-- The unperturbed resistance Green kernel, expressed on the physical
 edge.  Both occurrences of the coordinate are forward integrals. -/
 def tailPhysicalGreenKernel (p : ℝ → ℝ) (a b : ℝ) (hab : a ≤ b) (x t : ℝ) : ℝ :=
@@ -70,10 +78,7 @@ theorem continuous_tailPhysicalGreenKernel_family {P : Type*} [TopologicalSpace 
     have hpσ : ContinuousOn (p σ) (Icc a b) := by
       apply continuousOn_iff_continuous_restrict.mpr
       exact hp.comp (continuous_const.prodMk continuous_id)
-    have hm := tailResistanceChart_strictMono
-      (tailClampedDensity_continuous hab.le hpσ)
-      (tailClampedDensity_pos hab.le (hpos σ)) a hab
-    simpa only [tailResistanceChart, intervalIntegral.integral_same] using hm
+    exact tailClampedResistanceLength_pos hab hpσ (hpos σ)
   change Continuous (fun z : (P × ℝ) × ℝ =>
     (min (R z.1.1 z.1.2) (R z.1.1 z.2) - 0) *
       (R z.1.1 b - max (R z.1.1 z.1.2) (R z.1.1 z.2)) / (R z.1.1 b - 0))
@@ -95,6 +100,71 @@ theorem continuous_tailPhysicalGreenWeight_family {P : Type*} [TopologicalSpace 
     ((hΛ.comp continuous_fst.fst).mul
       ((continuous_tailClampedDensity_family p hab.le hp).comp
         (continuous_fst.fst.prodMk continuous_snd)))
+
+/-- The zero-potential height function on a physical edge. -/
+def tailPhysicalHeight (p : ℝ → ℝ) (a b : ℝ) (hab : a ≤ b)
+    (right : Bool) (x : ℝ) : ℝ :=
+  let R := tailResistanceChart (tailClampedDensity p a b hab) a
+  if right then R x / R b else (R b - R x) / R b
+
+theorem continuous_tailPhysicalHeight_family {P : Type*} [TopologicalSpace P]
+    {a b : ℝ} (p : P → ℝ → ℝ) (hab : a < b)
+    (hp : Continuous (fun z : P × Icc a b => p z.1 z.2))
+    (hpos : ∀ σ x, x ∈ Icc a b → 0 < p σ x) (right : Bool) :
+    Continuous (fun z : P × ℝ => tailPhysicalHeight (p z.1) a b hab.le right z.2) := by
+  let R (σ : P) := tailResistanceChart (tailClampedDensity (p σ) a b hab.le) a
+  have hR : Continuous (fun z : P × ℝ => R z.1 z.2) :=
+    continuous_tailClampedResistance_family p hab.le hp hpos
+  have hL : Continuous (fun z : P × ℝ => R z.1 b) :=
+    hR.comp (continuous_fst.prodMk continuous_const)
+  have hLne (z : P × ℝ) : R z.1 b ≠ 0 := by
+    apply (tailClampedResistanceLength_pos hab _ (hpos z.1)).ne'
+    apply continuousOn_iff_continuous_restrict.mpr
+    exact hp.comp (continuous_const.prodMk continuous_id)
+  cases right
+  · exact (hL.sub hR).div hL hLne
+  · exact hR.div hL hLne
+
+/-- Regard the two physical height functions as a parameter family in one
+fixed Banach space of continuous functions. -/
+def tailPhysicalHeightFamily {P : Type*} [TopologicalSpace P] {a b : ℝ}
+    (p : P → ℝ → ℝ) (hab : a < b)
+    (hp : Continuous (fun z : P × Icc a b => p z.1 z.2))
+    (hpos : ∀ σ x, x ∈ Icc a b → 0 < p σ x) (right : Bool) (σ : P) : C(Icc a b, ℝ) :=
+  ⟨fun x => tailPhysicalHeight (p σ) a b hab.le right x,
+    (continuous_tailPhysicalHeight_family p hab hp hpos right).comp
+      (continuous_const.prodMk continuous_subtype_val)⟩
+
+theorem tailPhysicalHeightFamily_apply {P : Type*} [TopologicalSpace P] {a b : ℝ}
+    (p : P → ℝ → ℝ) (hab : a < b)
+    (hp : Continuous (fun z : P × Icc a b => p z.1 z.2))
+    (hpos : ∀ σ x, x ∈ Icc a b → 0 < p σ x) (right : Bool) (σ : P) (x : Icc a b) :
+    tailPhysicalHeightFamily p hab hp hpos right σ x =
+      tailPhysicalHeight (p σ) a b hab.le right x := rfl
+
+theorem continuous_tailPhysicalHeightFamily {P : Type*} [TopologicalSpace P] {a b : ℝ}
+    (p : P → ℝ → ℝ) (hab : a < b)
+    (hp : Continuous (fun z : P × Icc a b => p z.1 z.2))
+    (hpos : ∀ σ x, x ∈ Icc a b → 0 < p σ x) (right : Bool) :
+    Continuous (tailPhysicalHeightFamily p hab hp hpos right) := by
+  apply ContinuousMap.continuous_of_continuous_uncurry
+  exact (continuous_tailPhysicalHeight_family p hab hp hpos right).comp
+    (continuous_fst.prodMk (continuous_subtype_val.comp continuous_snd))
+
+/-- The mass pairings occurring in the exact edge flux matrix are
+continuous for supremum-norm continuous families of edge functions. -/
+theorem continuous_tailPhysicalMassPairing {P : Type*} [TopologicalSpace P] {a b : ℝ}
+    (p : P → ℝ → ℝ) (hab : a ≤ b)
+    (hp : Continuous (fun z : P × Icc a b => p z.1 z.2))
+    (u v : P → C(Icc a b, ℝ)) (hu : Continuous u) (hv : Continuous v) :
+    Continuous (fun σ => ∫ t in a..b,
+      tailClampedDensity (p σ) a b hab t * IccExtend hab (u σ) t * IccExtend hab (v σ) t) := by
+  have hext (f : P → C(Icc a b, ℝ)) (hf : Continuous f) :
+      Continuous (fun z : P × ℝ => IccExtend hab (f z.1) z.2) :=
+    continuous_eval.comp ((hf.comp continuous_fst).prodMk
+      (continuous_projIcc.comp continuous_snd))
+  exact intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
+    (((continuous_tailClampedDensity_family p hab hp).mul (hext u hu)).mul (hext v hv)) a b
 
 section IntegralOperator
 
@@ -129,7 +199,7 @@ theorem continuous_tailContinuousKernelAction :
       (continuous_subtype_val.comp continuous_fst.snd)).prodMk continuous_snd)
   have hu : Continuous (fun z : ((P × C(Icc a b, ℝ)) × Icc a b) × ℝ =>
       IccExtend hab z.1.1.2 z.2) :=
-    ContinuousMap.continuous_eval.comp
+    continuous_eval.comp
       (continuous_fst.fst.snd.prodMk (continuous_projIcc.comp continuous_snd))
   exact intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
     (hk.mul hu) a b

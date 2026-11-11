@@ -92,7 +92,7 @@ theorem physicalEnvelope_le_gaussian (A : ℝ) (order shift : ℕ) :
     _ ≤ K * exp (2 * order * (shift : ℝ) ^ 2 -
         (order : ℝ) * ((n : ℝ) + shift) ^ 2) :=
       mul_le_mul_of_nonneg_left (exp_le_exp.mpr hexp) hK.le
-    _ = _ := by rw [sub_eq_add_neg, exp_add, mul_assoc]
+    _ = _ := by simp only [sub_eq_add_neg, exp_add, mul_assoc]
 
 /-- An actual Gaussian lower bound for the distance converts the node
 envelope to any chosen integer power of that distance. -/

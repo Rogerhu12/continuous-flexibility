@@ -1,5 +1,6 @@
 import Mathlib.Analysis.Calculus.Deriv.MeanValue
 import Mathlib.Analysis.Calculus.Deriv.Inv
+import Mathlib.Analysis.ODE.ExistUnique
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
 
@@ -28,7 +29,7 @@ private theorem eq_endpoints_of_hasDerivAt_zero {a b : ℝ} {f : ℝ → ℝ}
   linarith
 
 private theorem divergence_eq_zero_of_positive_solution_aux
-    {a b Λ : ℝ} {p u du v dv : ℝ → ℝ} (hab : a < b)
+    {a b Λ : ℝ} {p u du v dv : ℝ → ℝ} (_hab : a < b)
     (hp : ContinuousOn p (Icc a b)) (hu : ContinuousOn u (Icc a b))
     (hdu : ContinuousOn du (Icc a b)) (hv : ContinuousOn v (Icc a b))
     (hdv : ContinuousOn dv (Icc a b))
@@ -130,6 +131,7 @@ theorem tailEdge_solutions_eq_of_positive_solution
     intro x hx
     convert (hpu₀ x hx).sub (hpu₁ x hx) using 1
     · funext y
+      simp only [Pi.sub_apply]
       ring
     · ring
   have hz := divergence_eq_zero_of_positive_solution_aux hab hp
@@ -138,5 +140,68 @@ theorem tailEdge_solutions_eq_of_positive_solution
     (sub_eq_zero.mpr hua) (sub_eq_zero.mpr hub) hva hv_pos
   intro x hx
   exact sub_eq_zero.mp (hz x hx)
+
+private theorem offDiagonal_lipschitz {A B : ℝ} {K : ℝ≥0}
+    (hA : ‖A‖ ≤ (K : ℝ)) (hB : ‖B‖ ≤ (K : ℝ)) :
+    LipschitzWith K (fun z : ℝ × ℝ => (A * z.2, B * z.1)) := by
+  apply LipschitzWith.of_dist_le_mul
+  intro y z
+  simp only [dist_eq_norm, Prod.norm_def, Prod.fst_sub, Prod.snd_sub,
+    ← mul_sub, norm_mul]
+  exact max_le
+    (mul_le_mul hA (le_max_right _ _) (norm_nonneg _) K.2)
+    (mul_le_mul hB (le_max_left _ _) (norm_nonneg _) K.2)
+
+/-- Initial-value uniqueness for the actual height and flux.  The comparison
+point is in the open edge; continuity transfers the equality to both
+endpoints without requiring the differential equation there. -/
+theorem tailEdge_solutions_eq_of_state_eq
+    {a b Λ t₀ : ℝ} {p u₀ u₁ : ℝ → ℝ} (ht₀ : t₀ ∈ Ioo a b)
+    (hp : ContinuousOn p (Icc a b)) (hp_pos : ∀ x ∈ Icc a b, 0 < p x)
+    (hu₀ : ContinuousOn u₀ (Icc a b)) (hdu₀ : ContinuousOn (deriv u₀) (Icc a b))
+    (hu₁ : ContinuousOn u₁ (Icc a b)) (hdu₁ : ContinuousOn (deriv u₁) (Icc a b))
+    (hu₀D : ∀ x ∈ Ioo a b, HasDerivAt u₀ (deriv u₀ x) x)
+    (hu₁D : ∀ x ∈ Ioo a b, HasDerivAt u₁ (deriv u₁ x) x)
+    (hpu₀ : ∀ x ∈ Ioo a b,
+      HasDerivAt (fun y => p y * deriv u₀ y) (-(Λ * p x * u₀ x)) x)
+    (hpu₁ : ∀ x ∈ Ioo a b,
+      HasDerivAt (fun y => p y * deriv u₁ y) (-(Λ * p x * u₁ x)) x)
+    (hvalue : u₀ t₀ = u₁ t₀)
+    (hflux : p t₀ * deriv u₀ t₀ = p t₀ * deriv u₁ t₀) :
+    EqOn u₀ u₁ (Icc a b) := by
+  let state (u : ℝ → ℝ) : ℝ → ℝ × ℝ := fun x => (u x, p x * deriv u x)
+  let field : ℝ → (ℝ × ℝ) → ℝ × ℝ :=
+    fun x z => ((p x)⁻¹ * z.2, -(Λ * p x) * z.1)
+  have hstateD (u : ℝ → ℝ)
+      (huD : ∀ x ∈ Ioo a b, HasDerivAt u (deriv u x) x)
+      (hpu : ∀ x ∈ Ioo a b,
+        HasDerivAt (fun y => p y * deriv u y) (-(Λ * p x * u x)) x)
+      (x : ℝ) (hx : x ∈ Ioo a b) :
+      HasDerivAt (state u) (field x (state u x)) x := by
+    apply ((huD x hx).prodMk (hpu x hx)).congr_deriv
+    apply Prod.ext
+    · dsimp only [field, state]
+      rw [← mul_assoc, inv_mul_cancel₀ (hp_pos x (Ioo_subset_Icc_self hx)).ne', one_mul]
+    · dsimp only [field, state]
+      ring
+  have hcoeff : ContinuousOn (fun x : ℝ => ((p x)⁻¹, -(Λ * p x))) (Icc a b) :=
+    (hp.inv₀ (fun x hx => (hp_pos x hx).ne')).prodMk ((continuousOn_const.mul hp).neg)
+  obtain ⟨C, hC⟩ := (isCompact_Icc : IsCompact (Icc a b)).exists_bound_of_continuousOn hcoeff
+  let K : ℝ≥0 := ⟨max 0 C, le_max_left _ _⟩
+  have hLip (x : ℝ) (hx : x ∈ Icc a b) : LipschitzWith K (field x) := by
+    have hb : max ‖(p x)⁻¹‖ ‖-(Λ * p x)‖ ≤ C := by
+      simpa only [Prod.norm_def] using hC x hx
+    apply offDiagonal_lipschitz
+    · exact (le_max_left _ _).trans (hb.trans (le_max_right _ _))
+    · exact (le_max_right _ _).trans (hb.trans (le_max_right _ _))
+  have hstart : state u₀ t₀ = state u₁ t₀ := Prod.ext hvalue hflux
+  have heq := ODE_solution_unique_of_mem_Icc
+    (v := field) (s := fun _ => univ) (f := state u₀) (g := state u₁)
+    (fun x hx => (hLip x (Ioo_subset_Icc_self hx)).lipschitzOnWith) ht₀
+    (hu₀.prodMk (hp.mul hdu₀)) (hstateD u₀ hu₀D hpu₀) (fun _ _ => mem_univ _)
+    (hu₁.prodMk (hp.mul hdu₁)) (hstateD u₁ hu₁D hpu₁) (fun _ _ => mem_univ _)
+    hstart
+  intro x hx
+  exact congrArg Prod.fst (heq hx)
 
 end ContinuousFlexibility.Radial

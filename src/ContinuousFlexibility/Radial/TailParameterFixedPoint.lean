@@ -32,8 +32,11 @@ theorem continuous_tailFixedPoint {P X : Type*} [TopologicalSpace P] [MetricSpac
       (hF p).dist_le_of_fixedPoint (u p₀) (hfix p)
   have hlim : Tendsto (fun p => dist (u p₀) (F p (u p₀)) / (1 - (K : ℝ)))
       (𝓝 p₀) (𝓝 0) := by
-    have h := (continuous_const.dist (hcont (u p₀))).continuousAt.tendsto.div_const
-      (1 - (K : ℝ))
+    have hd : Continuous (fun p => dist (u p₀) (F p (u p₀))) :=
+      continuous_const.dist (hcont (u p₀))
+    have h : Tendsto (fun p => dist (u p₀) (F p (u p₀)) / (1 - (K : ℝ)))
+        (𝓝 p₀) (𝓝 (dist (u p₀) (F p₀ (u p₀)) / (1 - (K : ℝ)))) :=
+      hd.continuousAt.tendsto.div_const (1 - (K : ℝ))
     simpa only [hfix p₀, dist_self, zero_div] using h
   exact squeeze_zero (fun p => dist_nonneg) hbound hlim
 

@@ -43,7 +43,8 @@ left endpoint; no information to the left of the entrance is needed. -/
 theorem tailEntrance_eq_of_eqOn {a b : ℝ} (hab : a < b) {u v : ℝ → ℝ}
     (hu : ContinuousAt u a) (hv : ContinuousAt v a)
     (huv : EqOn u v (Ioo a b)) : u a = v a := by
-  have heq : u =ᶠ[𝓝[>] a] v := (Ioo_mem_nhdsGT hab).mono fun _ hx => huv hx
+  have heq : u =ᶠ[𝓝[>] a] v :=
+    Filter.mem_of_superset (Ioo_mem_nhdsGT hab) fun _ hx => huv hx
   exact tendsto_nhds_unique_of_eventuallyEq
     (hu.mono_left nhdsWithin_le_nhds) (hv.mono_left nhdsWithin_le_nhds) heq
 
@@ -51,7 +52,8 @@ theorem tailEntrance_eq_of_eqOn {a b : ℝ} (hab : a < b) {u v : ℝ → ℝ}
 theorem tailEntrance_deriv_eq_of_eqOn {a b : ℝ} (hab : a < b) {u v : ℝ → ℝ}
     (hu : DifferentiableAt ℝ u a) (hv : DifferentiableAt ℝ v a)
     (huv : EqOn u v (Ioo a b)) : deriv u a = deriv v a := by
-  have heq : u =ᶠ[𝓝[>] a] v := (Ioo_mem_nhdsGT hab).mono fun _ hx => huv hx
+  have heq : u =ᶠ[𝓝[>] a] v :=
+    Filter.mem_of_superset (Ioo_mem_nhdsGT hab) fun _ hx => huv hx
   have ha := tailEntrance_eq_of_eqOn hab hu.continuousAt hv.continuousAt huv
   exact (uniqueDiffWithinAt_Ioi a).eq_deriv (Ioi a)
     hu.hasDerivAt.hasDerivWithinAt
@@ -73,6 +75,37 @@ theorem tailEntranceNormalize_entrance {T : DeepTailData} {u : ℝ → ℝ}
 theorem deriv_tailEntranceNormalize (T : DeepTailData) (u : ℝ → ℝ) (x : ℝ) :
     deriv (tailEntranceNormalize T u) x = (u T.entrance)⁻¹ * deriv u x := by
   exact deriv_const_mul_field _
+
+/-- Any nonzero natural solution spans the same line as the witness of
+the frozen existential natural-line statement. -/
+theorem tailNaturalLine_span_of_nonzero {T : DeepTailData}
+    (hline : TailNaturalLineAndKernel T) {u v : ℝ → ℝ}
+    (hu : TailNaturalEquation T u) (hv : TailNaturalEquation T v)
+    (hune : ∃ x ∈ Ioo T.entrance T.endpoint, u x ≠ 0) :
+    ∃ c : ℝ, EqOn v (fun x => c * u x) (Ioo T.entrance T.endpoint) := by
+  obtain ⟨w, _, _, hspan, _⟩ := hline
+  obtain ⟨cu, hcu⟩ := hspan u hu
+  obtain ⟨cv, hcv⟩ := hspan v hv
+  obtain ⟨x, hx, hux⟩ := hune
+  have hcu₀ : cu ≠ 0 := by
+    intro hc
+    exact hux (by rw [hcu x hx, hc, zero_mul])
+  refine ⟨cv / cu, ?_⟩
+  intro y hy
+  rw [hcv y hy, hcu y hy]
+  field_simp [hcu₀] <;> ring
+
+theorem tailNaturalLine_span_nonzero {T : DeepTailData}
+    (hline : TailNaturalLineAndKernel T) {u v : ℝ → ℝ}
+    (hu : TailNaturalEquation T u) (hv : TailNaturalEquation T v)
+    (hune : ∃ x ∈ Ioo T.entrance T.endpoint, u x ≠ 0)
+    (hvne : ∃ x ∈ Ioo T.entrance T.endpoint, v x ≠ 0) :
+    ∃ c : ℝ, c ≠ 0 ∧ EqOn v (fun x => c * u x) (Ioo T.entrance T.endpoint) := by
+  obtain ⟨c, hc⟩ := tailNaturalLine_span_of_nonzero hline hu hv hune
+  refine ⟨c, ?_, hc⟩
+  intro hc₀
+  obtain ⟨x, hx, hxne⟩ := hvne
+  exact hxne (by rw [hc hx, hc₀, zero_mul])
 
 /-- Two natural solutions with entrance value one agree throughout the
 closed-at-entrance tail.  The scalar in the abstract natural-line property

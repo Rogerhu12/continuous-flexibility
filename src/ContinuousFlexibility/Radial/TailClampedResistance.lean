@@ -57,6 +57,7 @@ theorem tailClampedDensity_inv_integral {p : ℝ → ℝ} {a b l r : ℝ}
       ∫ x in l..r, (p x)⁻¹ := by
   apply intervalIntegral.integral_congr
   intro x hx
+  dsimp only
   rw [tailClampedDensity_eq_of_mem hab (uIcc_subset_Icc hl hr hx)]
 
 /-- The tail hypotheses supply the global transport assumptions on every compact edge. -/
@@ -109,6 +110,7 @@ theorem tailClampedResistance_mass_change {p V : ℝ → ℝ} {a b l r : ℝ}
     (tailClampedDensity_pos hab hpos) hV]
   apply intervalIntegral.integral_congr
   intro x hx
+  dsimp only
   rw [tailClampedDensity_eq_of_mem hab (uIcc_subset_Icc hl hr hx)]
 
 theorem tailClampedResistanceDensity_chart {p : ℝ → ℝ} {a b x : ℝ}
@@ -175,8 +177,10 @@ theorem tailClampedResistance_equation {p V f : ℝ → ℝ} {a b x : ℝ}
       (fun y => tailClampedDensity p a b hab y *
         deriv (V ∘ tailResistanceChart (tailClampedDensity p a b hab) a) y) (Ioo a b) := by
     intro y hy
+    dsimp only
     rw [tailClampedDensity_eq_of_mem hab ⟨hy.1.le, hy.2.le⟩]
-  rw [heq.deriv isOpen_Ioo hx, ← tailClampedDensity_eq_of_mem hab ⟨hx.1.le, hx.2.le⟩]
+  rw [heq.deriv isOpen_Ioo hx]
+  conv_lhs => rw [← tailClampedDensity_eq_of_mem (p := p) hab ⟨hx.1.le, hx.2.le⟩]
   exact tailResistance_equation (tailClampedDensity_continuous hab hp)
     (tailClampedDensity_pos hab hpos) hV a Λ x hV₂
 
