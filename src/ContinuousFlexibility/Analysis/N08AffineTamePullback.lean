@@ -72,8 +72,8 @@ theorem n08_smoothTameOn_translate
     simpa only [add_sub_add_left_eq_sub] using hnear
   change q s (J.D k (a + x) v) ≤ _
   exact (hCb (a + x) hx hnear' v).trans
-    ((mul_le_mul_of_nonneg_left (n08_tameJetSize_translate p k s loss base a x v) hC)
-      .trans_eq (by rw [mul_assoc]))
+    ((mul_le_mul_of_nonneg_left
+      (n08_tameJetSize_translate p k s loss base a x v) hC).trans_eq (by ring))
 
 end Translation
 

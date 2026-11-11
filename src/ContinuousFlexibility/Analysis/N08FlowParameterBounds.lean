@@ -58,9 +58,9 @@ theorem n08_minusFlow_parameter_lipschitz
     T.E0 (T.sample (C.cell m)) ^ B
   let M : ℝ := |A| * (2 + stateGrading S loss (x - C.referenceState) + ε)
   have hgrade : 0 ≤ stateGrading S loss (x - C.referenceState) :=
-    (stateGrading S loss).nonneg _
+    apply_nonneg _ _
   have hM : 0 ≤ M := mul_nonneg (abs_nonneg A) (by linarith [hN.2.1])
-  refine ⟨⟨M, hM⟩, ?_⟩
+  refine ⟨NNReal.mk M hM, ?_⟩
   intro r hr
   obtain ⟨J, hJ⟩ := hBj m 0 0 (r, θ) (by simp) hr
   have hmem (q : ℝ) (hq : q ∈ Icc (-(ε / 2)) (ε / 2)) :
@@ -85,6 +85,6 @@ theorem n08_minusFlow_parameter_lipschitz
       _ ≤ |A| * (2 + stateGrading S loss (x - C.referenceState) + |q|) :=
         mul_le_mul_of_nonneg_right (le_abs_self A) (by positivity)
       _ ≤ M := mul_le_mul_of_nonneg_left (by linarith [hN.2.1]) (abs_nonneg A)
-  simpa only [← NNReal.coe_le_coe, coe_nnnorm, Real.norm_eq_abs] using hreal
+  simpa only [← NNReal.coe_le_coe, coe_nnnorm, Real.norm_eq_abs, NNReal.coe_mk] using hreal
 
 end ContinuousFlexibility.Statements

@@ -87,9 +87,11 @@ theorem n08_parameterAngleSpeed_differentiableAt
       (fun _ : ℝ × ℝ => Real.sqrt (-w r * deriv w r / r)) (q, θ) := contDiffAt_const
   have hg := (hA.sub (hvconst.mul hB)).differentiableAt (by simp)
   apply hg.congr_of_eventuallyEq
-  have hd := (contDiffAt_parameter_polarDiscriminant hW.contDiffAt hZ.contDiffAt hr).comp
+  have hd := (contDiffAt_parameter_polarDiscriminant (p := q) (x := (r, θ))
+    hW.contDiffAt hZ.contDiffAt hr).comp
     (q, θ) hemb.contDiffAt
-  have hq := (n08_contDiffAt_parameter_heightQ hW.contDiffAt hZ.contDiffAt hr).comp
+  have hq := (n08_contDiffAt_parameter_heightQ (p := q) (x := (r, θ))
+    hW.contDiffAt hZ.contDiffAt hr).comp
     (q, θ) hemb.contDiffAt
   have hdp : ∀ᶠ z : ℝ × ℝ in 𝓝 (q, θ),
       0 < polarDiscriminant w (fun p => Z (z.1, p)) (r, z.2) :=
@@ -181,6 +183,7 @@ theorem n08_parameterSpeed_box
       apply LipschitzWith.of_dist_le_mul
       intro x y
       simp only [Prod.dist_eq, dist_self, max_eq_right dist_nonneg, NNReal.coe_one, one_mul]
+      exact le_rfl
     have hmaps : MapsTo (fun z : ℝ × ℝ => (z.1, (r, z.2)))
         (Icc c d ×ˢ Icc e f) I := fun z hz => ⟨hz.1, hr, hz.2⟩
     have hAL : LipschitzOnWith KA (fun z : ℝ × ℝ => A (z.1, (r, z.2)))

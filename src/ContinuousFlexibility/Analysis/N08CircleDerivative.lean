@@ -74,7 +74,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base : ℕ} {ε : ℝ}
 
-private theorem n08_return_smoothTame
+theorem n08_return_smoothTame
     (hR : N02Properties D T S C R base ε) :
     SmoothTameOn (pairGrading (sectorGrading S) realGrading)
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
@@ -129,34 +129,51 @@ theorem n08CircleStateDerivative_apply (hS : IsPhysicalSpaces D T S)
     ContinuousLinearMap.prod_apply, ContinuousLinearMap.zero_apply,
     projectiveJetHeadLinear_apply]
 
-theorem n08CircleStateDerivative_hasLineDerivAt
+theorem n08CircleSectorPoint_line
+    (hS : IsPhysicalSpaces D T S) (C : NonlinearGeometryData S)
+    (z : AnnularState S × ℝ) (v : AnnularState S) (t : ℝ) :
+    n08CircleSectorPoint hS C (z.1 + n08StateSMul S t v, z.2) =
+      n08CircleSectorPoint hS C z +
+        n08RealSMul (E := StateDirections S × ℝ) t (n08_sectorProjection hS v, (0 : ℝ)) :=
+  n08_centered_pair_line (n08_sectorProjection hS) C.referenceState z.1 v z.2 t
+
+private theorem n08CircleStateDerivative_raw
     (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
     (hR : N02Properties D T S C R base ε) {z : AnnularState S × ℝ}
     (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε)
     (v : AnnularState S) :
-    HasProjectiveLineDerivAt (fun x => (n08CircleResidual hS hR (x, z.2)).val)
+    HasProjectiveLineDerivAt
+      (fun x => R.residual (liftSectorParameter S C (n08CircleSectorPoint hS C (x, z.2))))
       (n08CircleStateDerivative hS hR z v) z.1 v := by
   let J := n08CircleSectorJet hR
   have hj := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain
     (n08CircleSectorPoint_mem hS href hz) (n08_sectorProjection hS v, 0)
-  have hpoint (t : ℝ) :
-      n08CircleSectorPoint hS C (z.1 + n08StateSMul S t v, z.2) =
-        n08CircleSectorPoint hS C z +
-          n08RealSMul (E := StateDirections S × ℝ) t (n08_sectorProjection hS v, (0 : ℝ)) :=
-    n08_centered_pair_line (n08_sectorProjection hS) C.referenceState z.1 v z.2 t
-  have hline : HasProjectiveLineDerivAt
-      (fun x => R.residual (liftSectorParameter S C (n08CircleSectorPoint hS C (x, z.2))))
-      (n08CircleStateDerivative hS hR z v) z.1 v :=
-    n08_lineDerivative_pullback (fun x => n08CircleSectorPoint hS C (x, z.2))
-      (fun y => R.residual (liftSectorParameter S C y)) hpoint hj
-      (n08CircleStateDerivative_apply hS hR z v)
-  apply hline.congr_germ
+  exact n08_lineDerivative_pullback (fun x => n08CircleSectorPoint hS C (x, z.2))
+    (fun y => R.residual (liftSectorParameter S C y))
+    (n08CircleSectorPoint_line hS C z v) hj (n08CircleStateDerivative_apply hS hR z v)
+
+private theorem n08CircleResidual_germ
+    (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
+    (hR : N02Properties D T S C R base ε) {z : AnnularState S × ℝ}
+    (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε) :
+    (fun x => (n08CircleResidual hS hR (x, z.2)).val) =ᶠ[𝓝 z.1]
+      (fun x => R.residual (liftSectorParameter S C (n08CircleSectorPoint hS C (x, z.2)))) := by
   have hc : Continuous (fun x : AnnularState S => (n08_stateProjection hS x, z.2)) :=
     (n08_stateProjection hS).continuous.prodMk continuous_const
   have hn := hc.continuousAt.preimage_mem_nhds
     ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hz)
   filter_upwards [hn] with x hx
   rw [n08CircleResidual_projected_coe hS hR hx, n08CircleSectorPoint_lift hS href]
+
+theorem n08CircleStateDerivative_hasLineDerivAt
+    (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
+    (hR : N02Properties D T S C R base ε) {z : AnnularState S × ℝ}
+    (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε)
+    (v : AnnularState S) :
+    HasProjectiveLineDerivAt (fun x => (n08CircleResidual hS hR (x, z.2)).val)
+      (n08CircleStateDerivative hS hR z v) z.1 v :=
+  (n08CircleStateDerivative_raw hS href hR hz v).congr_germ
+    (n08CircleResidual_germ hS href hR hz)
 
 /-- Injection of a circle control into the full ambient state. -/
 def n08KappaDirection (S : PhysicalSpacesData) : CircleSpace S →L[ℝ] AnnularState S :=

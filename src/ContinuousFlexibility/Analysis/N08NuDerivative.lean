@@ -94,7 +94,8 @@ def n08NuDirection (S : PhysicalSpacesData) : AnnularState S :=
 
 theorem n08_add_smul_nuDirection (x : AnnularState S) (t : ℝ) :
     x + (n08StateSMul S t (n08NuDirection S)) = (x.1, (x.2.1 + t, x.2.2)) := by
-  simpa only [n08StateSMul, n08RealSMul, n08NuDirection] using add_smul_middle_coordinate x t
+  simpa only [n08StateSMul, n08RealSMul, n08NuDirection, Prod.zero_eq_mk] using
+    add_smul_middle_coordinate x t
 
 theorem n08_stateSector_add_nuDirection {x : AnnularState S}
     (hx : stateSector S x) (t : ℝ) :
@@ -125,7 +126,7 @@ theorem n08_decode_nuDerivative
       SobolevModelData.evaluationCLM_apply]
   rw [← hL v]
   apply middle_coordinate_derivative hU L f (fun y => scalarResidualField D S C y p) hz
-  · simpa only [n08NuDirection] using hd
+  · simpa only [n08NuDirection, Prod.zero_eq_mk] using hd
   · intro a ha
     rw [hL]
     exact hdecode ((z.1.1, (a, z.1.2.2)), z.2) ha hs p hp

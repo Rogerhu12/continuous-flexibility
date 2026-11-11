@@ -52,7 +52,7 @@ theorem n08_sqrtAffine_radius_bound {A B R : ℝ} (hA : 0 < A) (hR : 0 < R)
   have hroot' : DifferentiableAt ℝ (fun s : ℝ => Real.sqrt (A + s * B))
       ((0 - A) / B) := by
     simpa only [zero_sub] using hroot
-  have hcomp := hroot'.comp hinv
+  have hcomp := hroot'.comp 0 hinv
   have heq : (fun s : ℝ => Real.sqrt (A + ((s - A) / B) * B)) = Real.sqrt := by
     funext s
     rw [div_mul_cancel₀ _ hB]
@@ -89,6 +89,7 @@ theorem n08_sqrtAffine_bound_of_lineDerivatives
   have hn : ∀ᶠ s : ℝ in 𝓝 t, |s| < R :=
     (isOpen_lt continuous_abs continuous_const).mem_nhds ht
   filter_upwards [hn] with s hs
+  change Real.sqrt (A + s * B) = K - f (x + s • v)
   rw [hf s hs]
   ring
 

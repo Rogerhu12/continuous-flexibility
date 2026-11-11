@@ -14,7 +14,7 @@ namespace ContinuousFlexibility.Statements
 
 open Set
 
-private theorem n08_referenceCell_near_bound_global
+theorem n08_referenceCell_near_bound_global
     {D : ReferenceData} {T : MaterialData} (hD : IsAccumulatingProfile D)
     (hT : IsMaterialData D T) {weight : ℕ → ℝ} {γ δ K : ℝ}
     (hweight : ∀ m, 0 ≤ weight m) (hδ : 0 < δ) (hK : 0 < K)

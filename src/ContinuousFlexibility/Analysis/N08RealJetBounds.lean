@@ -22,7 +22,9 @@ theorem n08_realFirstJet_fixedParameter
     {x v : E} {q df : ℝ} (hx : (x, q) ∈ U)
     (hd : HasDerivAt (fun t : ℝ => f (x + n08RealSMul t v, q)) df 0) :
     J.D 1 (x, q) (Fin.cons (v, 0) Fin.elim0) = df := by
-  have hline := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain hx (v, 0)
+  have hJ : HasProjectiveJetsOn f J.D U :=
+    ⟨J.zero, J.continuous, fun n y hy w vs => J.derivative n y hy vs w⟩
+  have hline := hJ.hasLineDerivAt J.open_domain hx (v, 0)
   have h : HasDerivAt (fun t : ℝ => f ((x, q) + t • (v, 0)))
       (J.D 1 (x, q) (Fin.cons (v, 0) Fin.elim0)) 0 :=
     hasDerivAt_iff_tendsto_slope_zero.mpr hline
