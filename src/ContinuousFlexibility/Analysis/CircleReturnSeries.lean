@@ -89,8 +89,9 @@ theorem circleSineTerm_iteratedFDeriv_bound (a : ℝ) (j s : ℕ) (θ : ℝ) :
       |a| * (j : ℝ) ^ s := by
   rw [norm_iteratedFDeriv_eq_norm_iteratedDeriv,
     iteratedDeriv_const_mul_field,
-    iteratedDeriv_comp_const_mul (Real.contDiff_sin.of_le (by simp))]
-  rw [Real.norm_eq_abs, abs_mul, abs_mul, abs_of_nonneg (pow_nonneg (Nat.cast_nonneg j) s)]
+    iteratedDeriv_comp_const_mul (Real.contDiff_sin : ContDiff ℝ s Real.sin)]
+  simp only [Real.norm_eq_abs, abs_mul, abs_pow,
+    abs_of_nonneg (Nat.cast_nonneg j)]
   calc
     |a| * ((j : ℝ) ^ s * |iteratedDeriv s Real.sin (j * θ)|) ≤
         |a| * ((j : ℝ) ^ s * 1) :=

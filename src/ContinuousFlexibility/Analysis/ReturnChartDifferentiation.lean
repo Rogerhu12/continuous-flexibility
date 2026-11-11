@@ -32,7 +32,7 @@ theorem returnChart_hasDerivAt_inverse (f g : ℝ → ℝ)
   have hgc : Continuous g := hgmono.continuous_of_surjective hgsurj
   have hf : HasDerivAt f (deriv f (g θ)) (g θ) :=
     (differentiableAt_of_deriv_ne_zero (hfpos (g θ)).ne').hasDerivAt
-  exact hf.of_local_left_inverse hgc.continuousAt (hfpos (g θ)).ne'
+  exact HasDerivAt.of_local_left_inverse hgc.continuousAt hf (hfpos (g θ)).ne'
     (Filter.Eventually.of_forall hright)
 
 theorem returnChart_inverse_deriv_pos (f g : ℝ → ℝ)
@@ -46,8 +46,8 @@ theorem oddPart_hasDerivAt {f : ℝ → ℝ} {θ dpos dneg : ℝ}
     (hpos : HasDerivAt f dpos θ) (hneg : HasDerivAt f dneg (-θ)) :
     HasDerivAt (oddPart f) ((dpos + dneg) / 2) θ := by
   have hreflect : HasDerivAt (fun t => f (-t)) (-dneg) θ := by
-    simpa only [mul_neg_one] using hneg.comp θ (hasDerivAt_neg (x := θ))
-  simpa only [oddPart, sub_neg_eq_add] using (hpos.sub hreflect).div_const 2
+    simpa only [mul_neg_one, Function.comp_def] using hneg.comp θ (hasDerivAt_neg (x := θ))
+  simpa only [oddPart, sub_neg_eq_add, Pi.sub_apply] using (hpos.sub hreflect).div_const 2
 
 theorem deriv_oddPart_pos (f : ℝ → ℝ) (hfpos : ∀ θ, 0 < deriv f θ) (θ : ℝ) :
     0 < deriv (oddPart f) θ := by
@@ -73,7 +73,11 @@ theorem rightChartCandidate_deriv_pos
   have hinv := returnChart_hasDerivAt_inverse _ _ hflowPos hreturnLeft hreturnRight t
   have hleft := (differentiableAt_of_deriv_ne_zero
     (hleftPos (C.minusReturnInverse z m t)).ne').hasDerivAt
-  have h := (hleft.comp t hinv).sub_const (C.travel m)
+  have h : HasDerivAt
+      (fun u => stateLeftChart S z.1 m (C.minusReturnInverse z m u) - C.travel m)
+      (deriv (stateLeftChart S z.1 m) (C.minusReturnInverse z m t) *
+        (deriv (C.minusFlow z m (C.right m)) (C.minusReturnInverse z m t))⁻¹) t := by
+    simpa only [Function.comp_def] using (hleft.comp t hinv).sub_const (C.travel m)
   rw [h.deriv]
   exact mul_pos (hleftPos _) (inv_pos.mpr (hflowPos _))
 

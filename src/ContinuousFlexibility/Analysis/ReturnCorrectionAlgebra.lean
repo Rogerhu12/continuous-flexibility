@@ -233,13 +233,13 @@ theorem returnCorrection_flow_hasDerivAt
       (c + p * χ' * (K θ - θ)) r := by
   have hJ : HasDerivAt (fun t => returnInterpolation (χ t) K θ)
       (χ' * (K θ - θ)) r := by
-    simpa only [returnInterpolation_apply, zero_add] using
+    simpa only [returnInterpolation_apply, Pi.add_apply, zero_add] using
       (hasDerivAt_const r θ).add (hχ.mul_const (K θ - θ))
   have hpath := (hasDerivAt_id r).prodMk hJ
-  convert hΦ.comp_hasDerivAt r hpath using 1
-  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.smul_apply,
-    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd', smul_eq_mul, mul_one]
-  ring
+  simpa only [Function.comp_def, id_eq, ContinuousLinearMap.add_apply,
+    ContinuousLinearMap.smul_apply, ContinuousLinearMap.coe_fst',
+    ContinuousLinearMap.coe_snd', smul_eq_mul, mul_one, mul_assoc] using
+      hΦ.comp_hasDerivAt r hpath
 
 /-- Evaluate the velocity correction along the corrected curve. The
 two inverse identities are precisely those used in the manuscript. -/
@@ -263,8 +263,9 @@ theorem returnCorrection_difference_integral
   have hderiv : ∀ t : ℝ, HasDerivAt (fun s => F (x + s * d))
       (d * deriv F (x + t * d)) t := by
     intro t
-    convert (hdF (x + t * d)).hasDerivAt.comp t
-      ((hasDerivAt_const t x).add ((hasDerivAt_id t).mul_const d)) using 1 <;> ring
+    simpa only [Function.comp_def, Pi.add_apply, id_eq, zero_add, one_mul, mul_comm] using
+      (hdF (x + t * d)).hasDerivAt.comp t
+        ((hasDerivAt_const t x).add ((hasDerivAt_id t).mul_const d))
   have hcontinuous : Continuous (fun t : ℝ => d * deriv F (x + t * d)) :=
     continuous_const.mul ((hF.continuous_deriv_one).comp
       (continuous_const.add (continuous_id.mul continuous_const)))
