@@ -44,6 +44,8 @@ theorem referenceRow_eq_physical_pairing {D : ReferenceData}
           (fun θ => referenceColumn D r * (u (r, θ) * cosineMode 2 θ)) := by
         funext θ
         ring
+      change referenceColumn D r * radialAngularMean (fun θ => u (r, θ) * cosineMode 2 θ) =
+        radialAngularMean (fun θ => u (r, θ) * (referenceColumn D r * cosineMode 2 θ))
       rw [he, radialAngularMean_const_mul]
     _ = _ := r11b_integral_angularMean_eq hgeom.2.1.le (hu.integrable_mul hc)
 

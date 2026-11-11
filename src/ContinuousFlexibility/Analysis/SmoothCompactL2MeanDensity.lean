@@ -24,11 +24,10 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 theorem norm_toLp_sq_eq_integral_sq {μ : Measure E} {f : E → ℝ}
     (hf : MemLp f 2 μ) :
     ‖hf.toLp f‖ ^ 2 = ∫ x, f x ^ 2 ∂μ := by
-  calc
-    ‖hf.toLp f‖ ^ 2 = ∫ x, (hf.toLp f x) ^ 2 ∂μ := by
-      simpa only [real_inner_self_eq_norm_sq, Real.inner_apply, pow_two] using
-        (L2.inner_def (𝕜 := ℝ) (hf.toLp f) (hf.toLp f))
-    _ = ∫ x, f x ^ 2 ∂μ := integral_congr_ae (hf.coeFn_toLp.fun_comp (fun t => t ^ 2))
+  rw [← real_inner_self_eq_norm_sq, L2.inner_def]
+  apply integral_congr_ae
+  filter_upwards [hf.coeFn_toLp] with x hx
+  simp only [hx, Real.inner_apply, pow_two]
 
 theorem norm_toLp_mono_measure {μ ν : Measure E} (hμν : μ ≤ ν)
     {f : E → ℝ} (hμ : MemLp f 2 μ) (hν : MemLp f 2 ν) :
@@ -120,14 +119,17 @@ theorem MemLp.exists_contDiff_compact_approximation_integral
   have hsq : Tendsto (fun n => ∫ x, (fN n x - f x) ^ 2 ∂μ) atTop (𝓝 0) := by
     have hlim : ∀ᵐ x ∂μ, Tendsto (fun n => (fN n x - f x) ^ 2) atTop (𝓝 (0 : ℝ)) := by
       filter_upwards with x
-      simpa only [sub_self, zero_pow (by decide : (2 : ℕ) ≠ 0)] using
-        ((boundedTruncation_tendsto (f x)).sub tendsto_const_nhds).pow 2
+      simpa only [fN, sub_self, zero_pow (by decide : (2 : ℕ) ≠ 0)] using
+        ((boundedTruncation_tendsto (f x)).sub
+          (tendsto_const_nhds (x := f x))).pow 2
     have hdom (n : ℕ) : ∀ᵐ x ∂μ, ‖(fN n x - f x) ^ 2‖ ≤ f x ^ 2 := by
       filter_upwards with x
       rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)]
       exact (sq_le_sq).mpr (boundedTruncation_bounds n (f x)).2.2
     simpa only [integral_zero] using
-      tendsto_integral_of_dominated_convergence (fun x => f x ^ 2)
+      tendsto_integral_of_dominated_convergence
+        (F := fun n x => (fN n x - f x) ^ 2) (f := fun _ => (0 : ℝ))
+        (fun x => f x ^ 2)
         (fun n => ((hNμ n).aestronglyMeasurable.sub hf.aestronglyMeasurable).pow 2)
         hf.integrable_sq hdom hlim
   have hnorm : Tendsto (fun n => ‖(hNμ n).toLp (fN n) - hf.toLp f‖)
@@ -139,8 +141,9 @@ theorem MemLp.exists_contDiff_compact_approximation_integral
         rw [← MemLp.toLp_sub]
         exact norm_toLp_sq_eq_integral_sq ((hNμ n).sub hf)
       simpa only [heq] using hsq
-    have hsqrt := Real.continuous_sqrt.continuousAt.tendsto.comp hsq'
-    simpa only [Function.comp_apply, Real.sqrt_sq (norm_nonneg _), Real.sqrt_zero] using hsqrt
+    simpa only [Function.comp_def, Real.sqrt_sq_eq_abs,
+      abs_of_nonneg (norm_nonneg _), Real.sqrt_zero] using
+      (Real.continuous_sqrt.tendsto (0 : ℝ)).comp hsq'
   have hint : Tendsto (fun n => ∫ x, fN n x ∂ν) atTop (𝓝 (∫ x, f x ∂ν)) :=
     tendsto_integral_of_dominated_convergence (fun x => |f x|)
       (fun n => (hNν n).aestronglyMeasurable) hfi.norm
@@ -148,7 +151,8 @@ theorem MemLp.exists_contDiff_compact_approximation_integral
       (ae_of_all _ (fun x => boundedTruncation_tendsto (f x)))
   have hinterr : Tendsto (fun n => |(∫ x, fN n x ∂ν) - ∫ x, f x ∂ν|)
       atTop (𝓝 0) := by
-    simpa only [sub_self, abs_zero] using (hint.sub tendsto_const_nhds).abs
+    simpa only [sub_self, abs_zero] using
+      (hint.sub (tendsto_const_nhds (x := ∫ x, f x ∂ν))).abs
   obtain ⟨n, hnμ, hnν⟩ := (((tendsto_order.1 hnorm).2 _ (half_pos hε)).and
     ((tendsto_order.1 hinterr).2 _ (half_pos hε))).exists
   let C : ℝ := ‖(memLp_const (μ := ν) (p := 2) (1 : ℝ)).toLp (fun _ : E => 1)‖
@@ -188,9 +192,10 @@ theorem MemLp.exists_contDiff_compact_approximation_integral
       ((hNν n).mono_exponent (by norm_num))
     rw [← integral_sub hgνi hNνi]
     have hbound := abs_integral_le_L2_one_norm (hgν.sub (hNν n))
-    rw [MemLp.toLp_sub] at hbound
+    rw [MemLp.toLp_sub hgν (hNν n)] at hbound
     have hn0 : 0 ≤ ‖hgν.toLp g - (hNν n).toLp (fN n)‖ := norm_nonneg _
-    change _ ≤ C * _ at hbound
+    change |∫ x, g x - fN n x ∂ν| ≤
+      C * ‖hgν.toLp g - (hNν n).toLp (fN n)‖ at hbound
     have hmul := mul_le_mul_of_nonneg_left hdistν.le hC
     nlinarith
   refine ⟨g, hg, hgc, hgu, hgμ, ?_, ?_⟩

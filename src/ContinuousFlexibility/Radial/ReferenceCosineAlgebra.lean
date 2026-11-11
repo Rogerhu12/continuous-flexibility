@@ -61,7 +61,11 @@ theorem toLp_sum_referenceAngularBasis (I : Finset ℕ) (c : ℕ → ℝ) :
         (fun θ => c n * referenceAngularBasis n θ) := by
     filter_upwards [Lp.coeFn_smul (c n) (referenceAngularBasisL2 n),
       (memLp_referenceAngularBasis n).coeFn_toLp] with θ hs hb
-    simpa only [hs, Pi.smul_apply, smul_eq_mul, referenceAngularBasisL2, hb]
+    calc
+      ((c n • referenceAngularBasisL2 n : Lp ℝ 2 referenceAngularProbability) : ℝ → ℝ) θ =
+          c n * (referenceAngularBasisL2 n : ℝ → ℝ) θ := by
+        simpa only [Pi.smul_apply, smul_eq_mul] using hs
+      _ = c n * referenceAngularBasis n θ := congrArg (fun z : ℝ => c n * z) hb
   apply Lp.ext
   filter_upwards [(memLp_sum_referenceAngularBasis I c).coeFn_toLp,
     Lp.coeFn_fun_finsetSum I (fun n => c n • referenceAngularBasisL2 n),

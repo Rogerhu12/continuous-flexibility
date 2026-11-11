@@ -57,7 +57,7 @@ theorem referenceWeightedMeasure_radialCompact_lt_top {D : ReferenceData}
     calc
       (∫⁻ x in Prod.fst ⁻¹' K,
           referenceCellMeasureDensity D γ M m x ∂radialPhysicalMeasure D) =
-          ∫⁻ _x in Prod.fst ⁻¹' K, (0 : ℝ≥0∞) ∂radialPhysicalMeasure D := by
+          ∫⁻ _x in Prod.fst ⁻¹' K, (0 : ENNReal) ∂radialPhysicalMeasure D := by
         apply lintegral_congr_ae
         filter_upwards [ae_restrict_mem hslab] with x hx
         have hlocal : D.localizer m x.1 = 0 := by

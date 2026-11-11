@@ -81,7 +81,7 @@ theorem exists_accumulating_reference_of_two_tail_surgery_with_cells
   have hEb : E.b = B * D.b := hb
   have hNew : RadialProfileGeometry E := by
     simpa only [RadialProfileGeometry, EndpointFlat, radialCore, E,
-      replaceReferenceProfile, coordinateReference, D₁, positiveIndexReference, ha, hb] using hGeo
+      replaceReferenceProfile, coordinateReference, D₁, positiveIndexReference, floorReferenceIndex, ha, hb] using hGeo
   let K : Set ℝ := Icc (A * c) (B * d)
   have hK : IsCompact K := isCompact_Icc
   have hKcore : K ⊆ radialCore (coordinateReference D₁ e) := by

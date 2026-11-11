@@ -124,7 +124,8 @@ theorem reference_contDiff_zero_extension_of_cell_jets {D : ReferenceData}
       Tendsto (iteratedDeriv s f) (𝓝[>] D.a) (𝓝 0) ∧
         Tendsto (iteratedDeriv s f) (𝓝[<] D.b) (𝓝 0) := by
     obtain ⟨C, A, hbound⟩ := hjets s
-    apply reference_cellwise_endpoint_limits hD _ hbound
+    apply reference_cellwise_endpoint_limits hD
+      (B := fun n => C * exp (A * radialQ n - γ * radialS n)) _ hbound
     simpa only [mul_zero] using (reference_exp_decay_tendsto A hγ).const_mul C
   exact Analysis.contDiff_extendZeroOutside hD.choose_spec.1.2.1 hf
     (fun s => (hlim s).1) (fun s => (hlim s).2)

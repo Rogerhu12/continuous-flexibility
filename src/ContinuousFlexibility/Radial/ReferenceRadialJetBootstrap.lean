@@ -25,6 +25,7 @@ inductive ReferenceCoefficientExpr where
   | profile : ℕ → ReferenceCoefficientExpr
   | reciprocalProfile : ℕ → ReferenceCoefficientExpr
   | reciprocalRadius : ℕ → ReferenceCoefficientExpr
+  | smooth : {k : ℝ → ℝ // ContDiff ℝ ∞ k} → ℕ → ReferenceCoefficientExpr
   | add : ReferenceCoefficientExpr → ReferenceCoefficientExpr → ReferenceCoefficientExpr
   | mul : ReferenceCoefficientExpr → ReferenceCoefficientExpr → ReferenceCoefficientExpr
 
@@ -33,6 +34,7 @@ def ReferenceCoefficientExpr.eval (D : ReferenceData) : ReferenceCoefficientExpr
   | .profile n => iteratedDeriv n D.w
   | .reciprocalProfile n => iteratedDeriv n (fun r => (D.w r)⁻¹)
   | .reciprocalRadius n => iteratedDeriv n (fun r : ℝ => r⁻¹)
+  | .smooth k n => iteratedDeriv n k.1
   | .add e f => fun r => e.eval D r + f.eval D r
   | .mul e f => fun r => e.eval D r * f.eval D r
 
@@ -41,6 +43,7 @@ def ReferenceCoefficientExpr.formalDeriv : ReferenceCoefficientExpr → Referenc
   | .profile n => .profile (n + 1)
   | .reciprocalProfile n => .reciprocalProfile (n + 1)
   | .reciprocalRadius n => .reciprocalRadius (n + 1)
+  | .smooth k n => .smooth k (n + 1)
   | .add e f => .add e.formalDeriv f.formalDeriv
   | .mul e f => .add (.mul e.formalDeriv f) (.mul e f.formalDeriv)
 
@@ -52,6 +55,7 @@ theorem ReferenceCoefficientExpr.moderate {D : ReferenceData}
   | profile n => exact referenceModerate_profile_jet hD n
   | reciprocalProfile n => exact referenceModerate_reciprocal_profile_jet hD n
   | reciprocalRadius n => exact referenceModerate_reciprocal_radius_jet hD n
+  | smooth k n => exact referenceModerate_smooth_jet hD k.2 n
   | add e f he hf => exact he.add hf
   | mul e f he hf => exact he.mul hf
 
@@ -70,6 +74,10 @@ theorem ReferenceCoefficientExpr.hasDerivAt_eval {D : ReferenceData}
     simpa only [eval, formalDeriv, iteratedDeriv_succ] using hd
   | reciprocalRadius n =>
     have hd := (((referenceModerate_reciprocal_radius_jet hD n).1.differentiableOn
+      (by simp) r hr).differentiableAt (isOpen_Ioo.mem_nhds hr)).hasDerivAt
+    simpa only [eval, formalDeriv, iteratedDeriv_succ] using hd
+  | smooth k n =>
+    have hd := (((referenceModerate_smooth_jet hD k.2 n).1.differentiableOn
       (by simp) r hr).differentiableAt (isOpen_Ioo.mem_nhds hr)).hasDerivAt
     simpa only [eval, formalDeriv, iteratedDeriv_succ] using hd
   | add e f he hf => exact he.add hf
@@ -197,5 +205,44 @@ theorem reference_radial_jets_rapid {D : ReferenceData}
   apply ((referenceSolutionJetExpr J n).rapid hD huW hdW hfW).of_eqOn
   intro r hr
   exact (referenceSolutionJetExpr_eqOn hD hu hf he n hr).symm
+
+/-- The same genuine differentiation proof applies to every finite solution
+expression, including the border commutator. -/
+def ReferenceSolutionExpr.jetExpr (J : ℝ) (e : ReferenceSolutionExpr) :
+    ℕ → ReferenceSolutionExpr
+  | 0 => e
+  | n + 1 => (e.jetExpr J n).formalDeriv J
+
+theorem ReferenceSolutionExpr.jetExpr_eqOn {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) {u f : ℝ → ℝ} {J : ℝ}
+    (hu : ContDiffOn ℝ ∞ u (radialCore D))
+    (hf : ContDiffOn ℝ ∞ f (radialCore D))
+    (he : ∀ r ∈ radialCore D, radialJacobi J D.w u r = f r)
+    (e : ReferenceSolutionExpr) (n : ℕ) :
+    EqOn (iteratedDeriv n (e.eval D u f)) ((e.jetExpr J n).eval D u f)
+      (radialCore D) := by
+  induction n with
+  | zero => intro r _; rfl
+  | succ n ih =>
+    intro r hr
+    have heq : iteratedDeriv n (e.eval D u f) =ᶠ[𝓝 r]
+        (e.jetExpr J n).eval D u f := by
+      filter_upwards [isOpen_Ioo.mem_nhds hr] with t ht
+      exact ih ht
+    rw [iteratedDeriv_succ, heq.deriv_eq]
+    exact ((e.jetExpr J n).hasDerivAt_eval hD hu hf he hr).deriv
+
+theorem ReferenceSolutionExpr.jets_rapid {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) {u f : ℝ → ℝ} {J : ℝ}
+    (hu : ContDiffOn ℝ ∞ u (radialCore D))
+    (hf : ContDiffOn ℝ ∞ f (radialCore D))
+    (he : ∀ r ∈ radialCore D, radialJacobi J D.w u r = f r)
+    (huW : ReferenceRapid D u) (hdW : ReferenceRapid D (deriv u))
+    (hfW : ∀ n, ReferenceRapid D (iteratedDeriv n f))
+    (e : ReferenceSolutionExpr) (n : ℕ) :
+    ReferenceRapid D (iteratedDeriv n (e.eval D u f)) := by
+  apply ((e.jetExpr J n).rapid hD huW hdW hfW).of_eqOn
+  intro r hr
+  exact (e.jetExpr_eqOn hD hu hf he n hr).symm
 
 end ContinuousFlexibility.Radial

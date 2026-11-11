@@ -168,7 +168,14 @@ theorem angularBasisProjection_toLp (I : Finset ℕ) (f : ℝ → ℝ) :
           (fun θ => referenceAngularCoefficient f n * referenceAngularBasis n θ) := by
     filter_upwards [Lp.coeFn_smul (referenceAngularCoefficient f n) (referenceAngularBasisL2 n),
       (memLp_referenceAngularBasis n).coeFn_toLp] with θ hsmul hb
-    simpa only [hsmul, Pi.smul_apply, smul_eq_mul, referenceAngularBasisL2, hb]
+    calc
+      ((referenceAngularCoefficient f n • referenceAngularBasisL2 n :
+          Lp ℝ 2 referenceAngularProbability) : ℝ → ℝ) θ =
+          referenceAngularCoefficient f n *
+            (referenceAngularBasisL2 n : ℝ → ℝ) θ := by
+        simpa only [Pi.smul_apply, smul_eq_mul] using hsmul
+      _ = referenceAngularCoefficient f n * referenceAngularBasis n θ :=
+        congrArg (fun z : ℝ => referenceAngularCoefficient f n * z) hb
   have hall := ae_all_iff.mpr he
   apply Lp.ext
   filter_upwards [hp.coeFn_toLp,

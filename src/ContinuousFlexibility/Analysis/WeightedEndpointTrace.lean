@@ -104,12 +104,14 @@ theorem endpoint_limits_zero_of_integrable_div {a b : ℝ} (hab : a < b)
   have hvb : v b = 0 :=
     continuousAt_eq_zero_of_integrable_div_sub hab ⟨hab.le, le_rfl⟩ hv.continuousAt huv hright
   constructor
-  · have ht := (hv.tendsto a).mono_left nhdsWithin_le_nhds
+  · have ht : Tendsto v (𝓝[>] a) (𝓝 (v a)) :=
+      (hv.tendsto a).mono_left nhdsWithin_le_nhds
     rw [hva] at ht
     apply ht.congr'
     filter_upwards [Ioo_mem_nhdsGT hab] with x hx
     exact (huv hx).symm
-  · have ht := (hv.tendsto b).mono_left nhdsWithin_le_nhds
+  · have ht : Tendsto v (𝓝[<] b) (𝓝 (v b)) :=
+      (hv.tendsto b).mono_left nhdsWithin_le_nhds
     rw [hvb] at ht
     apply ht.congr'
     filter_upwards [Ioo_mem_nhdsLT hab] with x hx

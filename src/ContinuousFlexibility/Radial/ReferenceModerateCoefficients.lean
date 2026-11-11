@@ -143,8 +143,11 @@ theorem referenceModerate_reciprocal_profile_jet {D : ReferenceData}
     ReferenceModerate D (iteratedDeriv s (fun r => (D.w r)⁻¹)) := by
   obtain ⟨C, hgeom, _, hC, _, _, _, _, _, _, hjet, _⟩ := hD
   have hinv : ContDiffOn ℝ ∞ (fun r => (D.w r)⁻¹) (radialCore D) := by
-    simpa only [one_div] using contDiffOn_const.div hgeom.2.2.1.1.contDiffOn
-      (fun r hr => (hgeom.2.2.2.2.1 r hr).ne')
+    have h := (contDiffOn_const (c := (1 : ℝ)) :
+      ContDiffOn ℝ ∞ (fun _ : ℝ => 1) (radialCore D)).div
+        hgeom.2.2.1.1.contDiffOn (fun r hr => (hgeom.2.2.2.2.1 r hr).ne')
+    change ContDiffOn ℝ ∞ (fun r => 1 / D.w r) (radialCore D) at h
+    simpa only [one_div] using h
   refine ⟨reference_contDiffOn_iteratedDeriv isOpen_Ioo hinv s,
     C s, C s, (hC s).le, fun m r hr => ?_⟩
   have hj := hjet m r hr s
@@ -155,8 +158,12 @@ theorem referenceModerate_reciprocal_radius_jet {D : ReferenceData}
     ReferenceModerate D (iteratedDeriv s (fun r : ℝ => r⁻¹)) := by
   have hgeom : RadialProfileGeometry D := hD.choose_spec.1
   have hinv : ContDiffOn ℝ ∞ (fun r : ℝ => r⁻¹) (Ioi (0 : ℝ)) := by
-    simpa only [one_div] using contDiffOn_const.div contDiffOn_id
-      (fun r hr => (show 0 < r from hr).ne')
+    have h := (contDiffOn_const (c := (1 : ℝ)) :
+      ContDiffOn ℝ ∞ (fun _ : ℝ => 1) (Ioi (0 : ℝ))).div
+        (contDiffOn_id : ContDiffOn ℝ ∞ (fun r : ℝ => r) (Ioi (0 : ℝ)))
+        (fun r hr => (show 0 < r from hr).ne')
+    change ContDiffOn ℝ ∞ (fun r : ℝ => 1 / r) (Ioi (0 : ℝ)) at h
+    simpa only [one_div] using h
   have hj := reference_contDiffOn_iteratedDeriv isOpen_Ioi hinv s
   have hsub : Icc D.a D.b ⊆ Ioi (0 : ℝ) := fun r hr => hgeom.1.trans_le hr.1
   obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image (hj.continuousOn.norm.mono hsub)
@@ -165,5 +172,30 @@ theorem referenceModerate_reciprocal_radius_jet {D : ReferenceData}
   have hb := hC ⟨r, hrI, rfl⟩
   simpa only [zero_mul, exp_zero, mul_one, Real.norm_eq_abs] using
     hb.trans (le_abs_self C)
+
+/-- A globally smooth scalar coefficient and all its derivatives are
+moderate on the bounded radial core. -/
+theorem referenceModerate_smooth_jet {D : ReferenceData}
+    (hD : IsAccumulatingProfile D) {k : ℝ → ℝ} (hk : ContDiff ℝ ∞ k) (n : ℕ) :
+    ReferenceModerate D (iteratedDeriv n k) := by
+  have hkn : ContDiff ℝ ∞ (iteratedDeriv n k) :=
+    contDiffOn_univ.mp (reference_contDiffOn_iteratedDeriv isOpen_univ hk.contDiffOn n)
+  obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image
+    (hkn.continuous.norm.continuousOn (s := Icc D.a D.b))
+  refine ⟨hkn.contDiffOn, |C|, 0, abs_nonneg C, fun m r hr => ?_⟩
+  have hrI : r ∈ Icc D.a D.b :=
+    Ioo_subset_Icc_self (hD.choose_spec.2.1.2.2.2.1 m hr)
+  have hb := (hC ⟨r, hrI, rfl⟩).trans (le_abs_self C)
+  simpa only [Real.norm_eq_abs, zero_mul, Real.exp_zero, mul_one] using hb
+
+theorem ReferenceRapid.zero (D : ReferenceData) :
+    ReferenceRapid D (fun _ : ℝ => 0) := by
+  refine ⟨1, 0, zero_lt_one, ?_⟩
+  constructor
+  · intro m
+    simpa only [mul_zero] using
+      (memLp_zero : MemLp (fun _ : ℝ => (0 : ℝ)) 2 (volume.restrict (radialCore D)))
+  · simpa only [mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0), integral_zero] using
+      (summable_zero : Summable (fun _ : ℕ => (0 : ℝ)))
 
 end ContinuousFlexibility.Radial

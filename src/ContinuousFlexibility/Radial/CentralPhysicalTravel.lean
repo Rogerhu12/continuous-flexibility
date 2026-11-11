@@ -35,6 +35,7 @@ theorem opticalTravel_integral_of_pullback
     _ = _ := by
       apply intervalIntegral.integral_congr
       intro x hx
+      change sqrt (-(deriv w (R x)) / (R x * w (R x))) * v x = sqrt (ρ x)
       rw [hdensity x hx, sqrt_div' _ (sq_nonneg _), sqrt_sq_eq_abs,
         abs_of_pos (hvpos x hx), div_mul_cancel₀ _ (hvpos x hx).ne']
 
