@@ -1,0 +1,39 @@
+name: Recover stalled N08 build
+
+# One-shot recovery for the completed runner whose run still holds the
+# line/N08 concurrency group. Remove this file after the queue is released.
+on:
+  push:
+    branches: ['line/N08']
+    paths: ['.github/workflows/n08-recover-stalled-build.yml']
+
+permissions:
+  actions: write
+
+jobs:
+  release-stalled-run:
+    if: github.repository == 'Rogerhu12/continuous-flexibility'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      GH_TOKEN: ${{ github.token }}
+      N08_STALLED_RUN: '43094396585'
+      N08_STALLED_SHA: 'dfa3b40d94017bb0ddd3f918fa4ab59241a4d940'
+    steps:
+      - name: Validate and cancel only the stalled N08 run
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint="repos/$GITHUB_REPOSITORY/actions/runs/$N08_STALLED_RUN"
+          run_json="$(gh api "$endpoint")"
+          test "$(jq -r .head_branch <<< "$run_json")" = 'line/N08'
+          test "$(jq -r .head_sha <<< "$run_json")" = "$N08_STALLED_SHA"
+          if [ "$(jq -r .status <<< "$run_json")" = completed ]; then
+            echo 'The target run already completed.'
+            exit 0
+          fi
+          gh api --method POST "$endpoint/cancel"
+          sleep 15
+          if [ "$(gh api "$endpoint" --jq .status)" != completed ]; then
+            gh api --method POST "$endpoint/force-cancel"
+          fi
