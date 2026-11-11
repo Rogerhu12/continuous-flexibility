@@ -87,10 +87,12 @@ local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "sets" => (fun p : Fin (n + 1) => Ioo (G.left p) (G.right p))
 local notation "projection" => innerBorderPieceProjection (radialHilbertMeasure D) sets central
 
+include C in
 theorem kernelUnique (hw : ContDiff ℝ ∞ D.w) :
     ∀ p, InnerRadialPieceKernelUnique D G bordered j central column p :=
   fun p => (C.piece p).kernelUnique hw
 
+include C in
 theorem solution_nonempty (hw : ContDiff ℝ ∞ D.w) :
     ∀ F ξ p, Nonempty (InnerRadialPieceSolution D hw.continuous G forcing rowSource
       bordered j central column F ξ p) :=

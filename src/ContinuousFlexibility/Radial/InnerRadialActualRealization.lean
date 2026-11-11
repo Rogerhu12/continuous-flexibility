@@ -157,6 +157,7 @@ theorem exists_solution (F : H) (ξ : EuclideanSpace ℝ (Fin n)) :
   | inl M => exact M.exists_solution hw F ξ
   | inr Q => exact Q.exists_solution hw bordered column F ξ
 
+include A in
 theorem solution_nonempty (F : H) (ξ : EuclideanSpace ℝ (Fin n)) :
     Nonempty (InnerRadialPieceSolution D hw.continuous G forcing rowSource
       bordered j central column F ξ piece) := by

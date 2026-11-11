@@ -98,8 +98,8 @@ def innerRadialFieldZeroLift (D : ReferenceData) :
 namespace InnerRadialModelChart
 
 variable {D : ReferenceData} {n : ℕ} {G : InnerRadialChainGeometry D n}
-  {bordered : Bool} {j : ℝ} {central : Fin (n + 1)} {column : RadialModeL2 D}
-  {piece : Fin (n + 1)} (A : InnerRadialModelChart D G bordered j central column piece)
+  {bordered : Bool} {j : ℝ} {central : Fin (n + 1)} {borderColumn : RadialModeL2 D}
+  {piece : Fin (n + 1)} (A : InnerRadialModelChart D G bordered j central borderColumn piece)
 
 def dirichlet : InnerBorderL2 (radialHilbertMeasure D) →L[ℝ]
     InnerBorderL2 (radialHilbertMeasure D) :=
@@ -135,9 +135,10 @@ theorem poisson_apply (z : EuclideanSpace ℝ (Fin 2)) :
   simp only [poisson, innerTwoColumnMap_apply, Fin.sum_univ_two, InnerRadialModelChart.column,
     innerModelPhysicalPoissonColumn, WithLp.toLp_add, WithLp.toLp_smul]
 
+include A in
 theorem kernelUnique (hw : ContDiff ℝ ∞ D.w) :
-    InnerRadialPieceKernelUnique D G bordered j central column piece :=
-  innerRadialModelPieceKernelUnique D G bordered j central column piece
+    InnerRadialPieceKernelUnique D G bordered j central borderColumn piece :=
+  innerRadialModelPieceKernelUnique D G bordered j central borderColumn piece
     A.buffer_hypotheses A.localized A.height_pos A.radius_smooth A.scale_smooth
     A.chart_pos A.in_core A.weight_identity A.U A.U_nonneg A.log_deriv_bound hw
     A.potential_identity A.left_eq A.right_eq A.bordered_eq A.column_eq
@@ -180,6 +181,7 @@ def fluxMatrix : Matrix (Fin 2) (Fin 2) ℝ :=
     A.poisson hw z = WithLp.toLp 2 (A.fieldPoisson hw z, (0 : ℝ)) := by
   simp only [poisson, ContinuousLinearMap.comp_apply, innerRadialFieldZeroLift_apply]
 
+include A in
 theorem kernelUnique (hw : ContDiff ℝ ∞ D.w) (bordered : Bool) (column : RadialModeL2 D) :
     InnerRadialPieceKernelUnique D G bordered j central column piece :=
   innerRadialGapPieceKernelUnique D hw G bordered j central column piece A.away_center
@@ -222,6 +224,7 @@ def errorMatrix : Matrix (Fin 2) (Fin 2) ℝ :=
 
 def referenceMatrix : Matrix (Fin 2) (Fin 2) ℝ := Matrix.diagonal A.kappa + A.gapMatrix
 
+include A in
 theorem kernelUnique (hw : ContDiff ℝ ∞ D.w) :
     InnerRadialPieceKernelUnique D G bordered j central column piece := by
   cases A with
