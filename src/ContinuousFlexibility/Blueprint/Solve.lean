@@ -32,7 +32,9 @@ theorem Solve (hN10 : N10Statement) (hTame : H01Statement ∧ H02Statement) : Po
       (base := base) (loss := loss) (ε := ε) (q0 := q0)
       hT hS h1 hG h8 h9 h10
   rcases hsolution with ⟨x, q, hq, hnear, hsector, hrow, hzero⟩
-  exact pointBranchStatement_of_jointResidual_zero hT hS h1 h2 h8
+  exact pointBranchStatement_of_jointResidual_zero
+    (A := A) (T := T) (S := S) (C := C) (R := R) (G := G) (P := P) (B := B)
+    (base := base) (loss := loss) (ε := ε) (x := x) (q := q) hT hS h1 h2 h8
     hq hnear hsector hrow hzero
 
 /--

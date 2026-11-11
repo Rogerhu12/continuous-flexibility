@@ -122,18 +122,19 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
     (ContinuousLinearMap.id ℝ (HeightPair S)).prodMap
       ((ContinuousLinearMap.id ℝ ℝ).prodMap (mean.prodMap odd))
   have hP (x : AnnularState S) : P x = (x.1, x.2.1, mean x.2.2.1, odd x.2.2.2) := by
-    simp only [P, ContinuousLinearMap.coe_prodMap', Prod.map_apply,
+    simp only [P, ContinuousLinearMap.coe_prodMap', Prod.map_apply',
       ContinuousLinearMap.id_apply]
   have hPmem (x : AnnularState S) : P x ∈ stateSectorSubmodule S := by
-    rw [hP]
-    constructor
-    · intro m θ φ
-      exact hmean x.2.2.1 m θ φ
-    · intro m θ
-      change (S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m (-θ) =
-        -(S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m θ
-      rw [hodd, hodd, neg_neg]
-      ring
+    have hstate : stateSector S (x.1, x.2.1, mean x.2.2.1, odd x.2.2.2) := by
+      constructor
+      · intro m θ φ
+        exact hmean x.2.2.1 m θ φ
+      · intro m θ
+        change (S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m (-θ) =
+          -(S.circle (3 / 4 : ℝ)).decode (odd x.2.2.2) m θ
+        rw [hodd, hodd, neg_neg]
+        ring
+    exact (congrArg (stateSector S) (hP x)).mpr hstate
   have hPid (x : AnnularState S) (hx : x ∈ stateSectorSubmodule S) : P x = x := by
     have hm := hmeanFix x.2.2.1 hx.1
     have ho : odd x.2.2.2 = x.2.2.2 := by
@@ -141,8 +142,7 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
       funext m θ
       rw [hodd, hx.2 m θ]
       ring
-    rw [hP]
-    exact Prod.ext rfl (Prod.ext rfl (Prod.ext hm ho))
+    exact (hP x).trans (Prod.ext rfl (Prod.ext rfl (Prod.ext hm ho)))
   have hpair := solve_isTameLinear_prodMap
     (gradedSeminorm_monotone _ _) (gradedSeminorm_monotone _ _)
     hmeanTame hoddTame
@@ -158,6 +158,7 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
     simpa only [P, ContinuousLinearMap.coe_prodMap, ContinuousLinearMap.coe_id,
       Nat.zero_max] using hfull
   exact hasSmoothing_submodule_of_tame_projection (solve_stateGrading_monotone S)
-    (stateSectorSubmodule S) P hPmem hPid hPt (solve_state_hasSmoothing hS)
+    (stateSectorSubmodule S) P hPmem hPid hPt
+    (solve_state_hasSmoothing (D := D) (T := T) (S := S) hS)
 
 end ContinuousFlexibility.Analysis

@@ -54,7 +54,8 @@ theorem solve_coupled_exists_normalized_zero
   letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
     ((hS.2.1 (3 / 4 : ℝ)).2.1 n).completeSpace_coe
   letI : CompleteSpace (StateDirections S) := hclosed.completeSpace_coe
-  let row : StateDirections S →L[ℝ] ℝ := sectorReferenceRowCLM h1.1 hT hS
+  let row : StateDirections S →L[ℝ] ℝ :=
+    sectorReferenceRowCLM (D := D) (T := T) (S := S) h1.1 hT hS
   let W : Submodule ℝ (StateDirections S) := row.toLinearMap.ker
   letI : CompleteSpace W := row.isClosed_ker.completeSpace_coe
   let p : ℕ → Seminorm ℝ W := fun n => (sectorGrading S n).comp W.subtype
@@ -64,10 +65,11 @@ theorem solve_coupled_exists_normalized_zero
       (solve_sectorGrading_withSeminorms S)
   let ψ : StateDirections S := ⟨C.referenceState, href.stateSector⟩
   have hψ : referenceRow D (stateU S ψ.val) = 1 := href.2.2.2.2.2
-  have hψrow : row ψ = 1 := (sectorReferenceRowCLM_apply h1.1 hT hS ψ).trans hψ
+  have hψrow : row ψ = 1 :=
+    (sectorReferenceRowCLM_apply (D := D) (T := T) (S := S) h1.1 hT hS ψ).trans hψ
   have hSX : HasSmoothing p := hasSmoothing_ker_of_continuous (sectorGrading S)
     (solve_sectorGrading_withSeminorms S) (solve_sectorGrading_monotone S)
-    (solve_sector_hasSmoothing hS) row ψ hψrow
+    (solve_sector_hasSmoothing (D := D) (T := T) (S := S) hS) row ψ hψrow
   let ρ : ℝ := min ε q0
   have hρ : 0 < ρ := lt_min h1.2.1 hq0
   let U : Set (W × ℝ) := {z | p base z.1 < ρ ∧ |z.2| < ρ}
@@ -92,10 +94,15 @@ theorem solve_coupled_exists_normalized_zero
   have hVmem (z : W × ℝ) (hz : z ∈ U) (y : ResidualSpace S) :
       V.sectorV (Lz z) y ∈ W := by
     apply LinearMap.mem_ker.mpr
-    change sectorReferenceRowCLM h1.1 hT hS (V.sectorV (Lz z) y) = 0
-    rw [sectorReferenceRowCLM_apply]
+    change sectorReferenceRowCLM (D := D) (T := T) (S := S) h1.1 hT hS
+      (V.sectorV (Lz z) y) = 0
+    rw [sectorReferenceRowCLM_apply (D := D) (T := T) (S := S) h1.1 hT hS
+      (V.sectorV (Lz z) y)]
     rw [hVident (Lz z) (hnear z hz) y]
-    exact h9.referenceRow_coupledInverse_zero hG (hactual z hz)
+    exact N09Properties.referenceRow_coupledInverse_zero
+      (D := D) (T := T) (S := S) (C := C) (R := R) (L := L) (G := G)
+      (B := B) (N := N) (V := V) (base := base) (ε := ε) (q0 := q0)
+      (z := liftSectorParameter S C (Lz z)) h9 hG (hactual z hz)
       (href.liftSectorParameter_sector (Lz z)) y
   let RN : W × ℝ → ResidualSpace S := fun z => sectorJointResidual S C P (Lz z)
   let VN : W × ℝ → ResidualSpace S →ₗ[ℝ] W := fun z =>
@@ -155,14 +162,18 @@ theorem solve_coupled_exists_normalized_zero
     rw [← hVN z hz y] at h
     exact HasProjectiveLineDerivAt.comp_linear W.subtype (x := z.1) (v := VN z y) h
   have hpoint := solve_exists_nonzero_zero p (residualGrading S)
-    hp hwp (solveResidualEquiv hS) (solveResidualEquiv_grading_le hS)
-    (solve_residualGrading_le_two hS) base ρ hρ RN VN QN hzeroN
-    hSX (solve_residual_hasSmoothing hS) hRN hVN_tame hQN hRightN
+    hp hwp (solveResidualEquiv (D := D) (T := T) (S := S) hS)
+    (solveResidualEquiv_grading_le (D := D) (T := T) (S := S) hS)
+    (solve_residualGrading_le_two (D := D) (T := T) (S := S) hS)
+    base ρ hρ RN VN QN hzeroN hSX
+    (solve_residual_hasSmoothing (D := D) (T := T) (S := S) hS)
+    hRN hVN_tame hQN hRightN
   rcases hpoint with ⟨x, τ, hτ, hmem, hz⟩
   refine ⟨C.referenceState + x.val.val, τ, hτ, ?_, ?_, ?_, hz⟩
   · exact liftSectorParameter_mem_stateNeighborhood (hnear (x, τ) hmem) hqε
   · exact href.liftSectorParameter_sector (Lz (x, τ))
-  · exact referenceRow_affine_of_mem_kernel h1.1 hT hS href x.val
+  · exact referenceRow_affine_of_mem_kernel (D := D) (T := T) (S := S) (C := C)
+      h1.1 hT hS href x.val
       (LinearMap.mem_ker.mp x.property)
 
 end ContinuousFlexibility.Analysis

@@ -39,18 +39,10 @@ theorem solve_isClosed_evenCircle (hS : IsPhysicalSpaces D T S) :
     ((continuous_apply θ).comp ((continuous_apply m).comp hd))
 
 /-- Levels for the actual two-component residual. -/
-def SolveResidualLevel (S : PhysicalSpacesData) (n : ℕ) : Type :=
+abbrev SolveResidualLevel (S : PhysicalSpacesData) (n : ℕ) : Type :=
   subLevel (S.Q.toLinearMap.ker) n × subLevel (evenCircleSubmodule S) n
 
-instance (S : PhysicalSpacesData) (n : ℕ) : NormedAddCommGroup (SolveResidualLevel S n) :=
-  inferInstanceAs (NormedAddCommGroup
-    (subLevel S.Q.toLinearMap.ker n × subLevel (evenCircleSubmodule S) n))
-
-instance (S : PhysicalSpacesData) (n : ℕ) : NormedSpace ℝ (SolveResidualLevel S n) :=
-  inferInstanceAs (NormedSpace ℝ
-    (subLevel S.Q.toLinearMap.ker n × subLevel (evenCircleSubmodule S) n))
-
-def solveResidualBond (S : PhysicalSpacesData) (n : ℕ) :
+abbrev solveResidualBond (S : PhysicalSpacesData) (n : ℕ) :
     SolveResidualLevel S (n + 1) →L[ℝ] SolveResidualLevel S n :=
   (subBond S.Q.toLinearMap.ker n).prodMap (subBond (evenCircleSubmodule S) n)
 
@@ -74,16 +66,19 @@ private theorem solveResidualEquiv_apply (hS : IsPhysicalSpaces D T S)
           subspaceEquiv (evenCircleSubmodule S)
             (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) y.2) := by
   unfold solveResidualEquiv
-  rw [ContinuousLinearEquiv.trans_apply
+  exact (ContinuousLinearEquiv.trans_apply
     ((subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker).prodCongr
       (subspaceEquiv (evenCircleSubmodule S)
         (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS)))
     (prodEquiv (fun k => subLevel S.Q.toLinearMap.ker k) (subBond S.Q.toLinearMap.ker)
-      (fun k => subLevel (evenCircleSubmodule S) k) (subBond (evenCircleSubmodule S))) y,
-    ContinuousLinearEquiv.prodCongr_apply
-      (subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker)
-      (subspaceEquiv (evenCircleSubmodule S)
-        (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS)) y]
+      (fun k => subLevel (evenCircleSubmodule S) k) (subBond (evenCircleSubmodule S))) y).trans
+    (congrArg
+      (prodEquiv (fun k => subLevel S.Q.toLinearMap.ker k) (subBond S.Q.toLinearMap.ker)
+        (fun k => subLevel (evenCircleSubmodule S) k) (subBond (evenCircleSubmodule S)))
+      (ContinuousLinearEquiv.prodCongr_apply
+        (subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker)
+        (subspaceEquiv (evenCircleSubmodule S)
+          (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS)) y))
 
 -- Keep later comparisons from unfolding the inverse of the bundled equivalence.
 attribute [irreducible] solveResidualEquiv
