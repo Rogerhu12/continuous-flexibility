@@ -190,7 +190,9 @@ theorem n05_exists_heightPair_local_germ
     n05_exists_even_compact_germ hU hf hpU hp hθ
   obtain ⟨η, hη⟩ :=
     n05_exists_heightPair_of_compact_test hT hS hg heven hperiodic hsupport
-  exact ⟨η, (Filter.Eventually.of_forall (congrFun hη)).trans hgerm⟩
+  have hηg : heightPairField S η =ᶠ[𝓝 p] g :=
+    Filter.Eventually.of_forall (congrFun hη)
+  exact ⟨η, hηg.trans hgerm⟩
 
 /-- Away from the reflection circles, the frozen reference identity acts on
 every actual smooth germ, without any regularity assumption on L. -/

@@ -55,8 +55,9 @@ theorem n05_physicalPieces_pairwise_disjoint
   intro r hr m n hm hn
   exact (hcover r ⟨(hinterval m).2.2 hm, hr⟩).unique hm hn
 
-def n05PhysicalPieceIndex (S : PhysicalSpacesData) (K : CanonicalData S) (r : ℝ) : ℕ :=
-  if h : ∃ m, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) then h.choose else 0
+def n05PhysicalPieceIndex (S : PhysicalSpacesData) (K : CanonicalData S) (r : ℝ) : ℕ := by
+  classical
+  exact if h : ∃ m, r ∈ Ioo (K.physicalLeft m) (K.physicalRight m) then h.choose else 0
 
 theorem n05PhysicalPieceIndex_eq
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -65,8 +66,9 @@ theorem n05PhysicalPieceIndex_eq
     (h04 : N04Properties D T S C L K base loss ε)
     {m : ℕ} {r : ℝ} (hr : r ∈ Ioo (K.physicalLeft m) (K.physicalRight m)) :
     n05PhysicalPieceIndex S K r = m := by
+  classical
   have hsome : ∃ n, r ∈ Ioo (K.physicalLeft n) (K.physicalRight n) := ⟨m, hr⟩
-  rw [n05PhysicalPieceIndex, dif_pos hsome]
+  rw [n05PhysicalPieceIndex, dite_eq_left hsome]
   by_contra hne
   exact Set.disjoint_left.mp (n05_physicalPieces_pairwise_disjoint h04 hne)
     hsome.choose_spec hr

@@ -120,7 +120,7 @@ theorem n05_canonicalSource_ae_iff_physicalPiece
     (fun p => canonicalSource S K z m f p = canonicalSource S K z m g p)
   rcases h04 with ⟨_, _, _, _, _, _, _, hcharts, _⟩
   obtain ⟨_, _, hleft, _, _, _, _, hnonzero⟩ := hcharts z hz hs m
-  rw [htransport]
+  refine htransport.trans ?_
   constructor
   · intro hfg
     filter_upwards [hfg,
@@ -135,6 +135,17 @@ theorem n05_canonicalSource_ae_iff_physicalPiece
       ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpU
     have hpopen : p ∈ physicalPieceOpen S K m := ⟨hpU.1, mem_univ _⟩
     simp only [canonicalSource, hleft p hpopen, hp]
+
+/-- Translating a genuine π-periodic field backwards by one period preserves
+its value. The equality is stated with the actual product addition. -/
+theorem n05_piPeriodic_sub {f : PolarPoint → ℝ}
+    (hf : Function.Periodic f (0, Real.pi)) (p : PolarPoint) :
+    f (p - (0, Real.pi)) = f p := by
+  have he : f ((p - (0, Real.pi)) + (0, Real.pi)) = f (p - (0, Real.pi)) :=
+    hf (p - (0, Real.pi))
+  have hp : (p - ((0, Real.pi) : PolarPoint)) + (0, Real.pi) = p :=
+    sub_add_cancel p ((0, Real.pi) : PolarPoint)
+  exact he.symm.trans (congrArg f hp)
 
 /-- A genuine π-periodic pair equal on the canonical half-period is equal
 on the full angular interval in the frozen physical measure. -/
@@ -159,11 +170,9 @@ theorem n05_piPeriodic_ae_eq_fullPeriod
       · change 0 < p.2 - Real.pi ∧ p.2 - Real.pi ≤ Real.pi
         constructor <;> linarith [hpfull.2.2]
     calc
-      f p = f (p - (0, Real.pi)) := by
-        simpa only [sub_add_cancel] using hf (p - (0, Real.pi))
+      f p = f (p - (0, Real.pi)) := (n05_piPeriodic_sub hf p).symm
       _ = g (p - (0, Real.pi)) := hs hq
-      _ = g p := by
-        simpa only [sub_add_cancel] using (hg (p - (0, Real.pi))).symm
+      _ = g p := n05_piPeriodic_sub hg p
 
 /-- Canonical representatives determine the actual periodic physical source
 on every point outside the genuine N04 null exceptional cover. -/
@@ -181,8 +190,10 @@ theorem n05_referenceCanonicalSource_ae_physical
       =ᵐ[canonicalMeasure S K m] canonicalSource S K (C.referenceState, 0) m g) :
     f =ᵐ[radialPhysicalMeasure D] g := by
   have h01 := h.1.1.1
-  have hz := n05_referenceState_mem h01.2.1
-  have hs := n05_referenceState_sector h01.2.2.1
+  have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+    n05_referenceState_mem h01.2.1
+  have hs : stateSector S C.referenceState :=
+    n05_referenceState_sector h01.2.2.1
   have hpiece : ∀ m, ∀ᵐ p : PolarPoint ∂volume,
       p ∈ Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ
         Ioc (0 : ℝ) (2 * Real.pi) → f p = g p := by
@@ -204,4 +215,3 @@ theorem n05_referenceCanonicalSource_ae_physical
   exact hp m ⟨hm, hpD.2⟩
 
 end ContinuousFlexibility.Statements
-

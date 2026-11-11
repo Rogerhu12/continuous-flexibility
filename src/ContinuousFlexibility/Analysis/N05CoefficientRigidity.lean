@@ -36,8 +36,11 @@ theorem n05_mixed_differentiable_of_radialProbes
     have hs : DifferentiableAt ℝ
         (fun y => 2 * s * L.a y * n05RadialLinear x y) x :=
       ((differentiableAt_const (2 * s)).mul ha).mul hr
+    have hdiff : DifferentiableAt ℝ
+        (fun y => (2 * s * L.a y * n05RadialLinear x y + L.b y) -
+          2 * s * L.a y * n05RadialLinear x y) x := hN.sub hs
     apply hb
-    convert hN.sub hs using 1
+    convert hdiff using 1
     funext y
     ring
   have hslice (s : ℝ) (hs : s ≠ 0) :
@@ -89,8 +92,15 @@ theorem n05_angular_differentiable_of_angularProbes
       intro hT
       have hnear : ∀ᶠ y in 𝓝 x, 1 + 2 * s * n05AngularLinear x y ≠ 0 :=
         (isOpen_ne_fun hfactor.continuous continuous_const).mem_nhds hfactor0
+      have hinv : DifferentiableAt ℝ
+          (fun y : PolarPoint => (1 + 2 * s * n05AngularLinear x y)⁻¹) x :=
+        ((hasDerivAt_inv hfactor0).hasFDerivAt.comp x hfactor'.hasFDerivAt).differentiableAt
+      have hquot : DifferentiableAt ℝ
+          (fun y : PolarPoint => L.c y * (1 + 2 * s * n05AngularLinear x y) /
+            (1 + 2 * s * n05AngularLinear x y)) x := by
+        simpa only [div_eq_mul_inv, Pi.mul_def] using hT.mul hinv
       apply hbad
-      apply (hT.div hfactor' hfactor0).congr_of_eventuallyEq
+      apply hquot.congr_of_eventuallyEq
       filter_upwards [hnear] with y hy
       change L.c y = L.c y * (1 + 2 * s * n05AngularLinear x y) /
         (1 + 2 * s * n05AngularLinear x y)
@@ -99,7 +109,7 @@ theorem n05_angular_differentiable_of_angularProbes
         (fun y => L.b y * (1 + 2 * s * n05AngularLinear x y)) x =
           radialPartial L.b x := by
       rw [radialPartial_mul hb hfactor',
-        radialPartial_add differentiableAt_const hscaled,
+        radialPartial_add (differentiableAt_const (1 : ℝ)) hscaled,
         radialPartial_mul (differentiableAt_const (2 * s)) ht]
       simp only [n05AngularLinear_self, n05AngularLinear_radial, radialPartial_const,
         mul_zero, zero_mul, add_zero, zero_add, mul_one]
