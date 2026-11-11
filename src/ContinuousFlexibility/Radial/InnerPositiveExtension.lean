@@ -18,7 +18,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Radial
 
-open Set Filter
+open Set Filter Real
 open ContinuousFlexibility.Statements
 open scoped Topology ContDiff
 
@@ -65,7 +65,8 @@ theorem exists_innerIntervalCutoff {A l h B : ℝ}
       change m - (d + δ) < x ∧ x < m + (d + δ)
       dsimp only [m, d]
       exact ⟨by linarith only [hx.1, hδ], by linarith only [hx.2, hδ]⟩
-    simpa only [Pi.one_apply] using χ.eventuallyEq_one_of_mem_ball hball
+    filter_upwards [χ.eventuallyEq_one_of_mem_ball hball] with y hy
+    simpa only [Pi.one_apply] using hy
 
 def innerPositiveWeightExtension (w χ : ℝ → ℝ) (x : ℝ) : ℝ := w x + 1 - χ x
 
@@ -99,8 +100,8 @@ theorem exists_innerPositiveWeight {A l h B : ℝ}
     (hAl : A < l) (hlh : l ≤ h) (hhB : h < B)
     {w : ℝ → ℝ} (hw : ContDiff ℝ ∞ w) (hwnonneg : ∀ x, 0 ≤ w x)
     (hwpos : ∀ x ∈ Ioo A B, 0 < w x) :
-    ∃ w₊ : ℝ → ℝ, ContDiff ℝ ∞ w₊ ∧ (∀ x, 0 < w₊ x) ∧
-      ∀ x ∈ Icc l h, w₊ =ᶠ[𝓝 x] w := by
+    ∃ wPos : ℝ → ℝ, ContDiff ℝ ∞ wPos ∧ (∀ x, 0 < wPos x) ∧
+      ∀ x ∈ Icc l h, wPos =ᶠ[𝓝 x] w := by
   obtain ⟨χ, hχ, _, hχbounds, hs, hg⟩ := exists_innerIntervalCutoff hAl hlh hhB
   exact ⟨innerPositiveWeightExtension w χ, innerPositiveWeightExtension_contDiff hw hχ,
     innerPositiveWeightExtension_pos hwnonneg hwpos (fun x => (hχbounds x).2) hs,
@@ -151,12 +152,12 @@ theorem exists_innerRadialFluxCoefficients {A l h B : ℝ}
       ∀ x ∈ Icc l h,
         p =ᶠ[𝓝 x] (fun y => (w y)⁻¹) ∧
         q =ᶠ[𝓝 x] (fun y => j ^ 2 * deriv w y / y) := by
-  obtain ⟨w₊, hw₊, hpos, hg⟩ := exists_innerPositiveWeight hAl hlh hhB hw hwnonneg hwpos
+  obtain ⟨wPos, hwPos, hpos, hg⟩ := exists_innerPositiveWeight hAl hlh hhB hw hwnonneg hwpos
   let c : ℝ := A / 3
   have hc : 0 < c := div_pos hA (by norm_num)
-  have hp : ContDiff ℝ ∞ (fun x => (w₊ x)⁻¹) := hw₊.inv (fun x => (hpos x).ne')
-  have hq : ContDiff ℝ ∞ (fun x => j ^ 2 * deriv w₊ x / innerPositiveRadius c x) :=
-    (contDiff_const.mul (contDiff_infty_iff_deriv.mp hw₊).2).div
+  have hp : ContDiff ℝ ∞ (fun x => (wPos x)⁻¹) := hwPos.inv (fun x => (hpos x).ne')
+  have hq : ContDiff ℝ ∞ (fun x => j ^ 2 * deriv wPos x / innerPositiveRadius c x) :=
+    (contDiff_const.mul (contDiff_infty_iff_deriv.mp hwPos).2).div
       (innerPositiveRadius_contDiff c) (fun x => (innerPositiveRadius_pos hc x).ne')
   refine ⟨_, _, hp, hq, ?_⟩
   intro x hx

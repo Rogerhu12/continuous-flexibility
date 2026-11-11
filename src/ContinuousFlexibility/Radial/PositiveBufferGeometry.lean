@@ -64,7 +64,7 @@ theorem positiveBufferPoint_potential_lower {B : BufferData}
   by_cases hi : i = 0
   · simp only [positiveBufferPoint, bufferCut, bufferSign, hi, if_true, neg_mul,
       one_mul, neg_div, sub_neg_eq_add]
-    exact add_le_add_left hdiv B.l
+    simpa only [hi, add_comm] using add_le_add_left hdiv B.l
   · simp only [positiveBufferPoint, bufferCut, bufferSign, hi, if_false, one_mul]
     exact sub_le_sub_left hdiv B.h
 
@@ -102,10 +102,12 @@ theorem positiveBufferPoint_border_eq_zero {B : BufferData}
   · have hleft := hx.1
     simp only [positiveBufferPoint, bufferInnerWall, bufferCut, bufferSign,
       Fin.zero_eta, if_true, neg_mul, one_mul, neg_div, sub_neg_eq_add] at hleft
-    linarith
+    have hd : t / B.mass 0 ≤ (B.action 0 + 6) / B.mass 0 := by simpa only [] using hdiv
+    linarith only [hleft, hd]
   · have hright := hx.2
     norm_num [positiveBufferPoint, bufferInnerWall, bufferCut, bufferSign] at hright
-    linarith
+    have hd : t / B.mass 1 ≤ (B.action 1 + 6) / B.mass 1 := by simpa only [] using hdiv
+    linarith only [hright, hd]
 
 /-- A nonempty positive buffer necessarily has layer constant at least one. -/
 theorem buffer_one_le_layerBound {B : BufferData} (hB : BufferHypotheses B) :

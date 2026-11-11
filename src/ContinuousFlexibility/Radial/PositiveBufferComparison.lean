@@ -125,7 +125,7 @@ theorem positiveBuffer_hasDerivAt_exponential (A m a x : ℝ) :
     HasDerivAt (fun y : ℝ => A * exp (-m * (y - a)))
       (-m * (A * exp (-m * (x - a)))) x := by
   have hd := (((hasDerivAt_id x).sub_const a).const_mul (-m)).exp.const_mul A
-  convert hd using 1 <;> ring
+  convert hd using 1 <;> simp only [id_eq, mul_one] <;> ring
 
 theorem positiveBuffer_hasDerivAt_exponential_deriv (A m a x : ℝ) :
     HasDerivAt (fun y : ℝ => -m * (A * exp (-m * (y - a))))

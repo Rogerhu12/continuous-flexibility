@@ -3,6 +3,7 @@ import Mathlib.Analysis.InnerProductSpace.Adjoint
 import Mathlib.Analysis.Normed.Operator.Mul
 import Mathlib.MeasureTheory.Function.Holder
 import Mathlib.MeasureTheory.Function.L2Space
+import Mathlib.Topology.Algebra.Module.Equiv
 
 /-!
 # Actual inner weights on the physical L² space

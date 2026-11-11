@@ -181,7 +181,7 @@ theorem innerDirichletApprox_deriv_bound {a b C M : ℝ} {u : ℝ → ℝ}
       (abs_nonneg _) zero_le_one).trans_eq (one_mul _)
   rw [show innerDirichletApprox a b u n = fun y => innerDirichletCutoff a b k y * u y from rfl,
     innerDirichletApprox_deriv_formula (hu x hx)]
-  exact (abs_add_le _ _).trans ((add_le_add_right (abs_sub _ _) _).trans (by
+  exact (abs_add_le _ _).trans ((add_le_add (abs_sub _ _) (le_refl _)).trans (by
     have hLL := hprod (y := k * (b - x) - 1) hL
     have hRR := hprod (y := k * (x - a) - 1) hR
     calc
@@ -309,7 +309,7 @@ theorem innerDirichlet_representative_zero_outside {a b : ℝ} {ψ : ℝ → ℝ
   simp only [interior_compl, closure_compl, closure_Ioo hab.ne, interior_Icc]
   exact Subset.rfl
 
-private theorem innerDirichlet_classical_pairing {a b : ℝ} {V φ ψ : ℝ → ℝ}
+theorem innerDirichlet_classical_pairing {a b : ℝ} {V φ ψ : ℝ → ℝ}
     (hab : a < b) (hV : ContinuousOn V (Icc a b))
     (hφ : ∀ x ∈ Icc a b, ContDiffAt ℝ ∞ φ x)
     (hψ : ContDiff ℝ ∞ ψ) (haψ : ψ a = 0) (hbψ : ψ b = 0) :
@@ -356,7 +356,7 @@ private theorem innerDirichlet_classical_pairing {a b : ℝ} {V φ ψ : ℝ → 
     _ = (∫ x in a..b, deriv φ x * deriv ψ x) +
         ∫ x in a..b, V x * φ x * ψ x := by linarith
 
-private theorem innerDirichlet_pairing_indicator {a b : ℝ} (hab : a ≤ b)
+theorem innerDirichlet_pairing_indicator {a b : ℝ} (hab : a ≤ b)
     {u v : RadialL2} {f g : ℝ → ℝ}
     (hu : (u : ℝ → ℝ) =ᵐ[volume] (Ioo a b).indicator f)
     (hv : (v : ℝ → ℝ) =ᵐ[volume] g) :

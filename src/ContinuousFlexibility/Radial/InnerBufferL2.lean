@@ -54,7 +54,7 @@ theorem innerIntervalL2_norm_le_of_support_bound {a b M : ℝ} (hab : a ≤ b)
   simpa only [Real.volume_real_Icc_of_le hab] using
     innerL2_norm_le_of_support_bound measurableSet_Icc hμ f hM hbound hsupport
 
-private theorem inner_mass_sqrt_layer {m : ℝ} (hm : 0 < m) :
+theorem inner_mass_sqrt_layer {m : ℝ} (hm : 0 < m) :
     m ^ 2 * Real.sqrt (1 / m) = m ^ (3 / 2 : ℝ) := by
   have hm0 : Real.sqrt m ≠ 0 := (Real.sqrt_pos.mpr hm).ne'
   have hs : Real.sqrt m * Real.sqrt m = m := Real.mul_self_sqrt hm.le

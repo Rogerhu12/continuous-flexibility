@@ -45,7 +45,8 @@ theorem innerBorderMaxEquiv_symm_apply (μ : Measure α) (u : Lp ℝ 2 μ × ℝ
 theorem innerBorder_ofLp_norm_le {μ : Measure α} (u : InnerBorderL2 μ) :
     ‖WithLp.ofLp u‖ ≤ ‖u‖ := by
   rw [Prod.norm_def, WithLp.ofLp_fst, WithLp.ofLp_snd]
-  exact max_le (WithLp.norm_fst_le u) (WithLp.norm_snd_le u)
+  exact max_le (WithLp.norm_fst_le (Lp ℝ 2 μ) u)
+    (WithLp.norm_snd_le (Lp ℝ 2 μ) u)
 
 /-- Passing to the Hilbert product costs at most `sqrt 2`, independently
 of the physical measure or the number of inner pieces. -/
@@ -118,14 +119,16 @@ theorem innerBorderToMaxOperator_comp (μ : Measure α)
     (A B : InnerBorderL2 μ →L[ℝ] InnerBorderL2 μ) :
     innerBorderToMaxOperator μ (A ∘L B) =
       innerBorderToMaxOperator μ A ∘L innerBorderToMaxOperator μ B := by
-  ext F
+  apply ContinuousLinearMap.ext
+  intro F
   simp only [innerBorderToMaxOperator_apply, ContinuousLinearMap.comp_apply,
     WithLp.toLp_ofLp]
 
 theorem innerBorderToMaxOperator_id (μ : Measure α) :
     innerBorderToMaxOperator μ (ContinuousLinearMap.id ℝ (InnerBorderL2 μ)) =
       ContinuousLinearMap.id ℝ (Lp ℝ 2 μ × ℝ) := by
-  ext F
+  apply ContinuousLinearMap.ext
+  intro F
   simp only [innerBorderToMaxOperator_apply, ContinuousLinearMap.id_apply, WithLp.ofLp_toLp]
 
 /-- A fixed norm-equivalence constant is the only cost of expressing a

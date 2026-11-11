@@ -41,8 +41,8 @@ theorem innerRadialGap_lagrange {a b j : ℝ} (hab : a ≤ b) (ha : 0 < a)
   have hfluxu := hw.mul hdu
   have hfluxv := hw.mul hdv
   have hc := (hv.continuous.continuousOn.mul
-    (innerRadialJacobi_continuousOn (j := j) ha hw hu)).sub
-      (hu.continuous.continuousOn.mul (innerRadialJacobi_continuousOn (j := j) ha hw hv))
+    (innerRadialJacobi_continuousOn (b := b) (j := j) ha hw hu)).sub
+      (hu.continuous.continuousOn.mul (innerRadialJacobi_continuousOn (b := b) (j := j) ha hw hv))
   unfold innerRadialGapMixedBoundary
   apply intervalIntegral.integral_eq_sub_of_hasDerivAt
     (f := fun r => v r * (w r * deriv u r) - u r * (w r * deriv v r)) _
@@ -75,6 +75,7 @@ theorem innerRadialGap_forced_flux {a b j : ℝ} (hab : a ≤ b) (ha : 0 < a)
     apply intervalIntegral.integral_congr
     intro r hr
     have hr' : r ∈ Icc a b := by simpa only [uIcc_of_le hab] using hr
+    dsimp only
     rw [huEq r hr', hvEq r hr']
     ring
   rw [hi] at h
