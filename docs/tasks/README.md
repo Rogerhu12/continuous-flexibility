@@ -44,6 +44,9 @@ git show origin/main:AGENTS.md
 - New files you create. Proofs go in new modules under `src/ContinuousFlexibility/<Area>/`
   with distinctive names; sub-blueprint statements go in `src/ContinuousFlexibility/Blueprint/<Node>/`.
 - Existing files of other areas only when the proof needs a change there; say so in the pull request.
+  Before changing or generalizing an existing file, merge `origin/main` and search it for the lemma:
+  three lines once proved the same ODE lemma in the same file under three names, and every copy
+  became a merge conflict. Give a new declaration a name that is not used anywhere in `src/`.
 - **Not** `src/ContinuousFlexibility.lean` and **not** `docs/STATUS.md`. The root import is generated
   by `scripts/gen_root.py` from every `.lean` file under `src/ContinuousFlexibility/` (outside
   `Blueprint/`), in CI and before local builds; the ledger is kept by the lead. Report your numbers
