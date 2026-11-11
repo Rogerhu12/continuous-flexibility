@@ -18,6 +18,26 @@ in minutes because a theorem with exactly the node statement was already in the 
 Work until the completion standard is fully met. Do not stop at a draft or an interim report.
 Push often.
 
+## The rules change: check them often
+
+The rules are this file and `AGENTS.md` **on `main`**. The lead updates them while lines work, and
+the copy on your branch is the one from when you branched, so it goes stale. The version on `main`
+always wins. Check for changes before each push, and at least once an hour (git only, no API quota):
+
+```bash
+git fetch -q origin main && git log --oneline HEAD..origin/main -- docs/tasks/README.md AGENTS.md
+```
+
+If it prints anything, read the current rules and follow them from then on:
+
+```bash
+git show origin/main:docs/tasks/README.md
+```
+
+```bash
+git show origin/main:AGENTS.md
+```
+
 ## What you edit
 
 - Your node file.
