@@ -28,7 +28,9 @@ theorem matchedInner_affine_deriv (a b : ℝ) (z : Fin 2 → ℝ) (x : ℝ) :
     simp only [innerIntervalAffineLift, div_eq_mul_inv]
     ring
   rw [he]
-  exact (((hasDerivAt_id x).const_mul ((z 1 - z 0) / (b - a))).add_const _).deriv
+  simpa only [id_eq, mul_one] using
+    (((hasDerivAt_id x).const_mul ((z 1 - z 0) / (b - a))).add_const
+      ((b * z 0 - a * z 1) / (b - a))).deriv
 
 section Affine
 

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.ReferenceRawKernelSchur
+import ContinuousFlexibility.Radial.MatchedPhysicalChannelComparison
 import ContinuousFlexibility.Radial.InnerWeightL2
 
 /-!
@@ -26,7 +27,7 @@ def matchedModeActualWeight (D : ReferenceData)
   (innerWeightEquiv (radialHilbertMeasure D) W hW hpos CW CV hCW hCV).prodCongr
     (ContinuousLinearEquiv.refl ℝ ℝ)
 
-private theorem matchedMode_fieldWeight_commutes (D : ReferenceData)
+theorem matchedMode_fieldWeight_commutes (D : ReferenceData)
     (hP : RadialPartition D) (E : RadialModeL2 D ≃L[ℝ] RadialModeL2 D)
     (w : ℝ → ℝ)
     (hE : ∀ u, E u =ᵐ[radialHilbertMeasure D] fun r => w r * u r) (k : ℕ) :
@@ -52,7 +53,7 @@ private theorem matchedMode_fieldWeight_commutes (D : ReferenceData)
     rw [he, hc, hce, heu]
     ring
 
-private theorem norm_matchedMode_fieldWeight_channel_le (D : ReferenceData)
+theorem norm_matchedMode_fieldWeight_channel_le (D : ReferenceData)
     (hP : RadialPartition D) (E : RadialModeL2 D ≃L[ℝ] RadialModeL2 D)
     (w : ℝ → ℝ)
     (hE : ∀ u, E u =ᵐ[radialHilbertMeasure D] fun r => w r * u r)

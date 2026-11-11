@@ -52,6 +52,7 @@ theorem matchedInner_smoothResidual_zero {T : InnerRadialH1Pair D}
     image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl b) (hs h).2)
   have h := innerRadialWeakResidual_smooth D hw hab.le ha hcore hpos hu
     (fun _ _ => hp.contDiffAt) scalar hQu hQd hRu hRd hV hF
+  change innerRadialWeakResidual D Q V F C scalar R = 0
   simpa only [hpa, hpb, zero_mul, sub_self] using h
 
 /-- Green's identity for a smooth physical field tested against any

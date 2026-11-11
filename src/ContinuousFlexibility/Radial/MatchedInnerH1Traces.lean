@@ -53,7 +53,8 @@ theorem matchedInnerH1Zero_test (p : ℝ → ℝ) (hp : ContDiff ℝ ∞ p)
     image_eq_zero_of_notMem_tsupport (fun h => (lt_irrefl b) (hs h).2)
   have h := innerRadialH1_smooth_trace_pairing D hw hab ha hcore hpos
     (fun _ _ => hu.contDiffAt) (fun _ _ => hp.contDiffAt) hzu hzd
-  simpa only [hua, hub, mul_zero, sub_self] using h
+  change ⟪z.2, Tg⟫_ℝ + ⟪z.1, Tv⟫_ℝ = 0
+  simpa only [Tg, Tv, hua, hub, mul_zero, sub_self] using h
 
 theorem matchedInnerH1Domain_test (p : ℝ → ℝ) (hp : ContDiff ℝ ∞ p)
     {q : InnerRadialH1Pair D}
@@ -183,8 +184,10 @@ theorem matchedInnerH1Domain_continuous_representative
   have hg : IntervalIntegrable g volume a b := by
     have hc : ContinuousOn (fun r : ℝ => sqrt 12 / r) (Icc a b) :=
       continuousOn_const.div continuousOn_id (fun r hr => (ha.trans_le hr.1).ne')
+    have hc' : ContinuousOn (fun r : ℝ => sqrt 12 / r) (uIcc a b) := by
+      simpa only [uIcc_of_le hab.le] using hc
     simpa only [g, mul_comm] using
-      (matchingMode_intervalIntegrable hD q.2 hab.le hsub).mul_continuousOn hc
+      (matchingMode_intervalIntegrable hD q.2 hab.le hsub).mul_continuousOn hc'
   have hweak : ∀ p : ℝ → ℝ, ContDiff ℝ ∞ p → HasCompactSupport p →
       tsupport p ⊆ Ioo a b →
       (∫ r in a..b, q.1 r * deriv p r) = -(∫ r in a..b, g r * p r) := by
@@ -203,7 +206,8 @@ theorem matchedInnerH1Domain_continuous_representative
   let v (r : ℝ) := c + ∫ t in a..r, g t
   have hP := hg.absolutelyContinuousOnInterval_intervalIntegral (c := a) (by simp)
   have hv : ContinuousOn v (Icc a b) := by
-    simpa only [uIcc_of_le hab.le] using continuousOn_const.add hP.continuousOn
+    have hc' : ContinuousOn (fun _ : ℝ => c) (Icc a b) := continuousOn_const
+    exact hc'.add (by simpa only [uIcc_of_le hab.le] using hP.continuousOn)
   have hboundary (p : ℝ → ℝ) (hp : ContDiff ℝ ∞ p) :
       p b * v b - p a * v a =
         p b * innerRadialH1Trace D hw ha (Ioo_subset_Icc_self.trans hsub) hpos q 1 -

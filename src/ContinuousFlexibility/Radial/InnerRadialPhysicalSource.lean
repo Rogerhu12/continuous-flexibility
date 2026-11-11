@@ -47,8 +47,10 @@ def innerRadialPhysicalInclusion (bordered : Bool) :
 @[simp] theorem innerRadialPhysicalInclusion_apply (bordered : Bool)
     (F : InnerRadialPhysicalSource D G bordered) :
     innerRadialPhysicalInclusion D G bordered F = F.val := by
-  simp only [innerRadialPhysicalInclusion, Submodule.coe_subtypeₗᵢ,
-    Submodule.subtype_apply]
+  simpa only [Submodule.subtype_apply] using
+    congrFun (Submodule.coe_subtypeₗᵢ
+      (innerSupportedAdmissibleSource (radialHilbertMeasure D)
+        (innerRadialChainRegion D G) bordered).toSubmodule) F
 
 def innerRadialPhysicalValue (bordered : Bool) :
     InnerRadialPhysicalSource D G bordered →L[ℝ] RadialModeL2 D :=
@@ -105,7 +107,8 @@ variable (hw : Continuous D.w) (bordered : Bool) (j : ℝ)
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" =>
+  ContinuousLinearMap.toLinearMap (innerRadialPhysicalRow D G bordered)
 local notation "W" =>
   InnerRadialDomain D hw G forcing rowSource bordered j central column
 

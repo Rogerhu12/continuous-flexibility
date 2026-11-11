@@ -140,14 +140,14 @@ theorem innerRadialAssemblePieces_flux
     (s : ∀ p, InnerRadialPieceSolution D hw G forcing rowSource bordered j central column F ξ p) :
     innerRadialDomainFlux D hw G forcing rowSource bordered j central column
       (innerRadialAssemblePieces D hw G forcing rowSource bordered j central column F ξ s) η =
-      ∑ p, innerChainBoundaryRestriction n p η 0 *
+      ∑ p, (innerChainBoundaryRestriction n p η 0 *
         innerRadialWeakResidual D (s p).q (s p).potential (forcing F p)
           (if p = central then column else 0) (s p).borderScalar
           (innerRadialAffineUnitPair D hw (G.left_pos p) (G.in_core p) (G.weight_pos p) 0) +
         innerChainBoundaryRestriction n p η 1 *
         innerRadialWeakResidual D (s p).q (s p).potential (forcing F p)
           (if p = central then column else 0) (s p).borderScalar
-          (innerRadialAffineUnitPair D hw (G.left_pos p) (G.in_core p) (G.weight_pos p) 1) := by
+          (innerRadialAffineUnitPair D hw (G.left_pos p) (G.in_core p) (G.weight_pos p) 1)) := by
   rw [innerRadialDomainFlux_apply, innerRadialBrokenFlux_eq]
   change innerRadialChainFlux D hw G central column (fun p => (s p).q)
     (fun p => (s p).potential) (forcing F) (s central).borderScalar η = _
