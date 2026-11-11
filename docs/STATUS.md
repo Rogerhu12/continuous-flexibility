@@ -20,7 +20,7 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 | Modules in the root import | 319 |
 | Lines of Lean under `src/` | 87,633 |
 | Axiom audit (`lake build`, 3751 jobs) | passed: 10,671 declarations, 8,043 theorems |
-| Blueprint statements proved / total | 6 / 35 (S01, S02, R01, R02, R03, R04) |
+| Blueprint statements proved / total | 7 / 37 (S01, S02, R01, R02, R03, R04, W01) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
 | Modules on the module system | 1 (the Challenge) of 329 |
 
@@ -44,19 +44,39 @@ The 8 modules that do not compile are unfinished files of the earlier workflow:
 the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9) and its
 endpoint regularity (§10).
 
-## Blueprint v2
+## Blueprint v3
 
-`src/ContinuousFlexibility/Blueprint/<ID>.lean` holds one theorem per node on the path to
-`Nonempty FlatAnnularCore`: the statements of its dependencies imply its own statement.
-`Blueprint/Assembly.lean` composes the 35 nodes without `sorry`, and
+`src/ContinuousFlexibility/Blueprint/<Node>.lean` holds one theorem per node; `Blueprint/Statements.lean`
+holds the intermediate statements that the earlier statement layer did not have.
+`Blueprint/Assembly.lean` composes the nodes to `Nonempty FlatAnnularCore` without `sorry`, and
 `FlexibleSphere.exists_closedBending` in the Solution follows; it depends on `sorryAx` exactly
 through the open nodes. `scripts/BlueprintStatus.lean` prints proved / total.
 
-Open (29): S03, S04, S05, R05–R12, W01–W03, H01–H03, N01–N12. One task file each in `docs/tasks/`.
+v3 regroups the 35 nodes of v2 by the structure of their statements:
 
-The node statements are those of the earlier statement layer, so the assembly holds by form and
-does not test whether each node can be derived from its dependencies. Each line reports a clause
-it finds false or underivable; N12 (the last link) is the first real test.
+- merged: S03–S05 are now `ScalarCalculus` (pointwise calculus) and `ScalarWeighted` (weighted
+  spaces); H01+H02 → `Tame`; W02+W03 → `Spaces`; N02+N03 → `N02N03`;
+  N09+N10+H03+N11 → `Solve`;
+- split: R05 → `R05a` (realization), `R05b` (mass and resistance); R06 → `R06a` (inverse),
+  `R06b` (natural line, Green kernel), `R06c` (physical flatness, continuity); R10 → `R10a`
+  (inner and outer pieces), `R10b` (matching); R11 → `R11a` (weighted bound), `R11b` (first normal);
+  N04 → `N04Root`, `N04Cubic`, `N04Transmission` (three statements that use mathlib only) and
+  `N04Coordinates`; N07 → `N07a` (scalar inverse), `N07b` (Banach bridge);
+- weakened: `Solve` produces `PointBranchStatement`, one solution at one nonzero parameter,
+  instead of a branch that is smooth in the parameter. The main theorem fixes one nonzero
+  parameter; the existing bridge to `FlatAnnularCore` uses only the pointwise part.
+
+Open (30): ScalarCalculus, ScalarWeighted, Tame, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08, R09,
+R10a, R10b, R11a, R11b, R12, N01, N02N03, N04Root, N04Cubic, N04Transmission, N04Coordinates,
+N05, N06, N07a, N07b, N08, Solve, N12. One task file each in `docs/tasks/`.
+
+The split statements are pipelines: a later piece takes the output of the earlier piece as a
+hypothesis and re-asserts it for possibly larger constants, so all pieces can be worked in
+parallel. Whether each node can be derived from its hypotheses is tested by its line; N12 (the
+last link) and `Solve` are the first real tests of the chain.
+
+Not yet split although large: `R10a` (paper §6 lines 231–522, about 50,000–90,000 lines by the
+ratios below). Its line should first separate the inner assembly from the outer transition region.
 
 ## Size estimate
 
@@ -99,14 +119,15 @@ with the cache restored, about 5 minutes. The compiled build is published as `la
 Estimated from the manuscript line range of each node at 168–320 lines of Lean per line of TeX.
 One line carries about 20,000–30,000 lines.
 
-- Clearly above 30,000, sub-blueprint first: R05 (41–79k), R06 (39–75k), R10 (60–115k), R11 (32–62k),
-  N04 (42–81k), N07 (35–66k).
-- Above 30,000 only at the high ratio: R07 (27–51k), R09 (21–41k), R12 (29–56k), N01 (22–41k),
-  N05 (26–50k), N06 (24–47k), N08 (21–40k).
-- One line: S03, S04, S05, R08, W01, W02, W03, H01, H02, H03, N02, N03, N09, N10, N11, N12.
+- Above 30,000 even at the low ratio: R10a (49–93k), N04Coordinates (31–59k).
+- Above 30,000 only at the high ratio: R05a (27–52k), R06a (25–47k), R07 (27–51k), R09 (22–42k),
+  R11a (24–46k), R12 (25–48k), N01 (30–58k), N02N03 (20–38k), N05 (27–51k), N06 (25–47k),
+  N07a (29–54k), N08 (21–40k), Solve (17–33k).
+- Below 30,000: ScalarCalculus, ScalarWeighted, Tame, Spaces, R05b, R06b, R06c, R08, R10b, R11b,
+  N04Root, N04Cubic, N04Transmission, N07b, N12.
 
 ## Next
 
-1. Lines on the 29 open nodes, one branch `line/<ID>` each (`docs/tasks/README.md`).
+1. Lines on the 30 open nodes, one branch `line/<Node>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.

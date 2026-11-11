@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Milestones
+import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Blueprint node N01
 
-Source: `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 208–338 (`prop:uniform-physical-geometry`).
+Root scales, quantitative optical controls and the uniform physical geometry on one neighbourhood.
+
+Source: `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 159–339.
 
 Task file: `docs/tasks/N01.md`. The statement is frozen; replace the `sorry`.
 -/

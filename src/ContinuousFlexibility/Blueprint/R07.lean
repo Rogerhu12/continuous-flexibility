@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Milestones
+import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Blueprint node R07
 
-Source: `paper/flexible-surface-rewrite/05-flat-end-chain.tex` lines 507–667 (`lem:radial-product-selection`).
+One transition cell per frequency and one height sequence with all matching angles bounded below.
+
+Source: `paper/flexible-surface-rewrite/05-flat-end-chain.tex` lines 507–667.
 
 Task file: `docs/tasks/R07.md`. The statement is frozen; replace the `sorry`.
 -/

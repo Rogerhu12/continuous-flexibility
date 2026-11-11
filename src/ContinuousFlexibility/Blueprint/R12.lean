@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Milestones
+import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Blueprint node R12
 
-Source: `paper/flexible-surface-rewrite/04-designing-the-profile.tex` lines 74–106 (`prop:rad-fixed-theorem`); `paper/flexible-surface-rewrite/06-global-reference-inverse.tex` lines 766–908 (`lem:rad-green-completion`).
+The fixed radial reference: graph domain, zero mode, final border, two-sided inverse.
+
+Source: `paper/flexible-surface-rewrite/04-designing-the-profile.tex` lines 74–106; `paper/flexible-surface-rewrite/06-global-reference-inverse.tex` lines 766–883.
 
 Task file: `docs/tasks/R12.md`. The statement is frozen; replace the `sorry`.
 -/

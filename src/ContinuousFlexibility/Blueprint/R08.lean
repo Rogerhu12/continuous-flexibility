@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Milestones
+import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Blueprint node R08
 
-Source: `paper/flexible-surface-rewrite/06-global-reference-inverse.tex` lines 50–98 (`eq:rad-eq-sp1`).
+Joining the central model to the selected tails while keeping the second-mode solution.
+
+Source: `paper/flexible-surface-rewrite/06-global-reference-inverse.tex` lines 50–98.
 
 Task file: `docs/tasks/R08.md`. The statement is frozen; replace the `sorry`.
 -/

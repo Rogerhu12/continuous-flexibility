@@ -9,9 +9,11 @@ the axioms of the Challenge theorem. Run with `lake env lean scripts/BlueprintSt
 open Lean in
 run_cmd do
   let env ← getEnv
-  let nodes := #["S01", "S02", "R01", "S03", "S04", "S05", "R02", "R03", "R04", "R05", "R06",
-    "R07", "R08", "R09", "R10", "R11", "R12", "W01", "H01", "W02", "W03", "N01", "N02", "N03",
-    "N04", "N05", "N06", "H02", "N07", "N08", "N09", "N10", "H03", "N11", "N12"]
+  let nodes := #["S01", "S02", "R01", "R02", "R03", "R04", "W01", "ScalarCalculus",
+    "ScalarWeighted", "Tame", "Spaces", "R05a", "R05b", "R06a", "R06b", "R06c", "R07",
+    "R08", "R09", "R10a", "R10b", "R11a", "R11b", "R12", "N01", "N02N03", "N04Root",
+    "N04Cubic", "N04Transmission", "N04Coordinates", "N05", "N06", "N07a", "N07b", "N08",
+    "Solve", "N12"]
   let mut proved : Array String := #[]
   let mut openNodes : Array String := #[]
   for n in nodes do

@@ -1,9 +1,11 @@
-import ContinuousFlexibility.Statements.Milestones
+import ContinuousFlexibility.Blueprint.Statements
 
 /-!
 # Blueprint node N08
 
-Source: `paper/flexible-surface-rewrite/09-solving-the-equation.tex` lines 13–137 (`eq:readable-joint-residual`).
+The joint residual of height and circle equations and its control columns.
+
+Source: `paper/flexible-surface-rewrite/09-solving-the-equation.tex` lines 13–137.
 
 Task file: `docs/tasks/N08.md`. The statement is frozen; replace the `sorry`.
 -/
@@ -12,7 +14,7 @@ namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Statements
 
-theorem N08 (hS04 : S04Statement) (hN01 : N01Statement) (hN02 : N02Statement) (hN07 : N07Statement) (hW02 : W02Statement) : N08Statement := by
+theorem N08 (hN07 : N07Statement) (hS04 : S04Statement) : N08Statement := by
   sorry
 
 end ContinuousFlexibility.Blueprint
