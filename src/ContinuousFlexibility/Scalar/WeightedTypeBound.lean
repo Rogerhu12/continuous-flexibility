@@ -80,7 +80,7 @@ theorem scalarStateProfile_uniform_bound_on_ball
     calc
       _ ≤ |(1 : ℝ)| + |angularMean (fun θ => (S.height scalarBeta).decode x.1.1.1 (r, θ))| :=
         abs_add_le _ _
-      _ ≤ 1 + Cm := by simpa only [abs_one] using add_le_add_left hm 1
+      _ ≤ 1 + Cm := by simpa only [abs_one] using add_le_add (le_refl (1 : ℝ)) hm
   have hw : 0 < D.w r := hD.choose_spec.1.2.2.2.2.1 r hr
   rw [scalarStateProfile, abs_mul, abs_of_pos hw]
   calc
@@ -108,7 +108,7 @@ theorem scalarStateTypeB_uniform_bound
     mul_nonneg (by linarith only [hwbound.2]) (by linarith only [hwbound.1])
   have hE : 1 + scalarStateProfile D S x r ^ 2 ≤ 1 + M ^ 2 := by
     nlinarith only [hproduct]
-  exact scalarStateProfile_mul_typeB_le hD (hg x hx) ⟨hr, mem_univ _⟩ hE
+  exact scalarStateProfile_mul_typeB_le hD (hg x hx) (p := (r, θ)) ⟨hr, mem_univ _⟩ hE
 
 theorem exists_scalarStateBall_geometry_and_typeB
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)

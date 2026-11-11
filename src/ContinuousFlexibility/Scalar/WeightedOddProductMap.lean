@@ -90,25 +90,23 @@ def oddProductPrimitiveFieldMultilinear
   classical
   have hc (u : A.Space) : ContDiff ℝ ∞ (A.decode u) :=
     (heightMember_contDiff_and_flatJets hT hγ (hA.2.2.2.1 u)).1
+  have h10 : (1 : Fin 2) ≠ 0 := by decide
+  have h01 : (0 : Fin 2) ≠ 1 := by decide
   exact {
     toFun := fun u => scalarOddProductPrimitive (A.decode (u 0)) (A.decode (u 1))
     map_update_add' := by
       intro _ u i x y
       fin_cases i
-      · simpa only [Function.update_self, Function.update_of_ne
-          (by decide : (1 : Fin 2) ≠ 0), map_add] using
+      · simpa only [Function.update_self, Function.update_of_ne h10, map_add] using
           scalarOddProductPrimitive_add_left (hc x) (hc y) (hc (u 1))
-      · simpa only [Function.update_self, Function.update_of_ne
-          (by decide : (0 : Fin 2) ≠ 1), map_add] using
+      · simpa only [Function.update_self, Function.update_of_ne h01, map_add] using
           scalarOddProductPrimitive_add_right (hc (u 0)) (hc x) (hc y)
     map_update_smul' := by
       intro _ u i c x
       fin_cases i
-      · simpa only [Function.update_self, Function.update_of_ne
-          (by decide : (1 : Fin 2) ≠ 0), map_smul, RingHom.id_apply] using
+      · simpa only [Function.update_self, Function.update_of_ne h10, map_smul, RingHom.id_apply] using
           scalarOddProductPrimitive_const_mul_left c (A.decode x) (A.decode (u 1))
-      · simpa only [Function.update_self, Function.update_of_ne
-          (by decide : (0 : Fin 2) ≠ 1), map_smul, RingHom.id_apply] using
+      · simpa only [Function.update_self, Function.update_of_ne h01, map_smul, RingHom.id_apply] using
           scalarOddProductPrimitive_const_mul_right c (A.decode (u 0)) (hc x)
   }
 

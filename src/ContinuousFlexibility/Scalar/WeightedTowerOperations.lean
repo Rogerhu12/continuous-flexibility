@@ -60,7 +60,9 @@ theorem UniformScalarTowerEstimate.prodMk
   rw [ContinuousMultilinearMap.prod_apply]
   change q s (J.D k x v) + r s (K.D k x v) ≤
     (C + D) * tameJetSize p k s (max ell m) (max b c) x v
-  exact (add_le_add (hCx x hx v) (hDx x hx v)).trans_eq (by ring)
+  exact (add_le_add (hCx x hx v) (hDx x hx v)).trans_eq (by
+    simp only [tameJetSize]
+    ring)
 
 theorem FixedNeighborhoodSmoothTame.prodMk
     (hf : FixedNeighborhoodSmoothTame p q U b ell f)

@@ -176,9 +176,34 @@ theorem scalarStateRadialCLM_isTame
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) :
     IsTameLinear (scalarStateGrading S) (scalarHeightGrading S)
       (scalarStateRadialCLM hD hT hS).toLinearMap 2 0 := by
-  exact ((SobolevModelData.radialCLM_isTame hT (hS.1 scalarBeta)).comp
-    (scalarStateHeightProjection_isTame S)).add (scalarStateGrading_monotone S)
-      (scalarStateCutoffCLM_isTame hT hS)
+  intro s _
+  obtain ⟨C, hC⟩ := SobolevModelData.radialCLM_isTame hT (hS.1 scalarBeta) s (Nat.zero_le s)
+  obtain ⟨K, hK⟩ := scalarStateHeightProjection_isTame S (s + 2) (Nat.zero_le _)
+  obtain ⟨Q, hQ⟩ := scalarStateCutoffCLM_isTame hT hS s (Nat.zero_le s)
+  refine ⟨C * K + Q, fun x => ?_⟩
+  change scalarHeightGrading S s
+    (SobolevModelData.radialCLM hT (hS.1 scalarBeta) x.1.1.2 +
+      scalarStateCutoffCLM hT hS x) ≤
+    ((C : ℝ) * (K : ℝ) + (Q : ℝ)) * scalarStateGrading S (s + 2) x
+  have hproj : scalarHeightGrading S (s + 2) x.1.1.2 ≤
+      (K : ℝ) * scalarStateGrading S (s + 2) x := by
+    simpa only [Nat.add_zero] using hK x
+  have hcut : scalarHeightGrading S s (scalarStateCutoffCLM hT hS x) ≤
+      (Q : ℝ) * scalarStateGrading S (s + 2) x := by
+    have hh : scalarHeightGrading S s (scalarStateCutoffCLM hT hS x) ≤
+        (Q : ℝ) * scalarStateGrading S s x := by
+      simpa only [Nat.add_zero] using hQ x
+    exact hh.trans (mul_le_mul_of_nonneg_left
+      (scalarStateGrading_monotone S (by omega) x) Q.coe_nonneg)
+  calc
+    _ ≤ scalarHeightGrading S s
+        (SobolevModelData.radialCLM hT (hS.1 scalarBeta) x.1.1.2) +
+        scalarHeightGrading S s (scalarStateCutoffCLM hT hS x) := map_add_le_add _ _ _
+    _ ≤ (C : ℝ) * ((K : ℝ) * scalarStateGrading S (s + 2) x) +
+        (Q : ℝ) * scalarStateGrading S (s + 2) x :=
+      add_le_add ((hC x.1.1.2).trans
+        (mul_le_mul_of_nonneg_left hproj C.coe_nonneg)) hcut
+    _ = _ := by ring
 
 theorem scalarStateAngularPrimitiveCLM_isTame
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) :
@@ -229,7 +254,8 @@ theorem decode_scalarStateRadialCLM
       radialPartial (scalarStateIncrement S x) := by
   have hf := (scalarHeight_decode_contDiff_and_flatJets hT hS x.1.1.2).1
   have hχ := hS.2.2.1.1
-  have hχfield := hχ.comp contDiff_fst
+  have hχfield : ContDiff ℝ ∞ (fun p : PolarPoint => S.chiLeft p.1) :=
+    hχ.comp contDiff_fst
   have hsum (p : PolarPoint) :
       radialPartial (scalarStateIncrement S x) p =
         radialPartial ((S.height scalarBeta).decode x.1.1.2) p + x.1.2 * deriv S.chiLeft p.1 := by
@@ -282,9 +308,14 @@ theorem angularPartial_decode_scalarStateAngularPrimitiveCLM
       (scalarStateAngularPrimitiveCLM hD hT hS x)) p =
       p.1⁻¹ * angularPartial ((S.height scalarBeta).decode x.1.1.2) p := by
     have he := hleft.deriv
-    rw [hslice, hright.deriv] at he
-    simpa only [zero_mul, zero_add] using he.symm
-  have hχfield := hS.2.2.1.1.comp contDiff_fst
+    rw [hslice] at he
+    have hr : deriv (fun θ => p.1⁻¹ *
+        (S.height scalarBeta).decode x.1.1.2 (p.1, θ)) p.2 =
+        p.1⁻¹ * angularPartial ((S.height scalarBeta).decode x.1.1.2) p := by
+      simpa only [Pi.mul_apply, zero_mul, zero_add] using hright.deriv
+    exact he.symm.trans hr
+  have hχfield : ContDiff ℝ ∞ (fun p : PolarPoint => S.chiLeft p.1) :=
+    hS.2.2.1.1.comp contDiff_fst
   have hincrement : angularPartial (scalarStateIncrement S x) p =
       angularPartial ((S.height scalarBeta).decode x.1.1.2) p := by
     unfold scalarStateIncrement scalarCommonHeightDecode

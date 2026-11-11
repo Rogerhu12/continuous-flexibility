@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Scalar.WeightedAngularJetProduct
+import ContinuousFlexibility.Scalar.WeightedProductTower
 
 /-!
 # One-high-factor estimates for two odd angular jets
@@ -31,7 +32,7 @@ private theorem seminorm_half_two_sub_le
       norm_num
     _ ≤ p (a - b - c) := by nlinarith [apply_nonneg p (a - b - c)]
     _ ≤ p (a - b) + p c := map_sub_le_add _ _ _
-    _ ≤ p a + p b + p c := add_le_add_right (map_sub_le_add _ _ _) _
+    _ ≤ p a + p b + p c := add_le_add (map_sub_le_add _ _ _) (le_refl _)
 
 /-- The second derivative product identity preserves a one-high estimate,
 with two additional fixed orders in its base and loss. -/
@@ -136,10 +137,8 @@ theorem angularJetProductMap_oneHigh
     intro s
     obtain ⟨C, hC, hCu⟩ := hproduct 1 s
     refine ⟨C, hC, fun x y => ?_⟩
-    have h0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
-    have h1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
-    simpa only [Fin.sum_univ_two, h0, h1, Finset.prod_singleton,
-      Matrix.cons_val_zero, Matrix.cons_val_one, mul_comm] using hCu ![x, y]
+    rw [← oneHigh_fin_two (A.grading base) (A.grading (s + loss)) x y]
+    exact hCu ![x, y]
   refine ⟨base + 2, loss + 2, by omega, ?_⟩
   intro s
   obtain ⟨C, hC, hCxy⟩ := oneHigh_secondDerivative_product
@@ -147,7 +146,7 @@ theorem angularJetProductMap_oneHigh
     (fun x y => M ![x, y]) hL hM s
   refine ⟨C, hC, fun x y => ?_⟩
   rw [angularJetProductMap_apply]
-  simpa only [Matrix.cons_val_zero, Matrix.cons_val_one, L, M] using hCxy x y
+  exact hCxy x y
 
 end SobolevModelData
 

@@ -58,7 +58,7 @@ theorem weightedLinearFamilyCost_mono
     q (s + loss) u + (1 + p (s + loss) x) * q base u ≤
       q (s + loss') u + (1 + p (s + loss') x) * q base' u := by
   exact add_le_add (hq (Nat.add_le_add_left hl s) u)
-    (mul_le_mul (add_le_add_left (hp (Nat.add_le_add_left hl s) x) 1)
+    (mul_le_mul (add_le_add (le_refl 1) (hp (Nat.add_le_add_left hl s) x))
       (hq hb u) (apply_nonneg _ _) (by positivity))
 
 theorem weightedErrorFamilyCost_mono
@@ -76,7 +76,7 @@ theorem weightedErrorFamilyCost_mono
       (mul_le_mul (hq hb R) (hr (Nat.add_le_add_left hl s) u)
         (apply_nonneg _ _) (apply_nonneg _ _))
   · exact mul_le_mul
-      (mul_le_mul (add_le_add_left (hp (Nat.add_le_add_left hl s) x) 1)
+      (mul_le_mul (add_le_add (le_refl 1) (hp (Nat.add_le_add_left hl s) x))
         (hq hb R) (apply_nonneg _ _) (by positivity))
       (hr hb u) (apply_nonneg _ _) (by positivity)
 

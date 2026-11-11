@@ -1,4 +1,6 @@
 import Mathlib.Topology.Algebra.Module.Multilinear.Basic
+import Mathlib.Analysis.Normed.Field.Basic
+import Mathlib.Tactic.FinCases
 
 /-!
 # Fixing one input of a genuine continuous bilinear map

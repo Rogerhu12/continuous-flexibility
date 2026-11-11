@@ -28,6 +28,88 @@ def normalizedCompositionMonomial
       ∏ i, mixedDerivative (a i) (b i)
         (fun q => A.decode u (T.radius q.1, q.2)) p
 
+private theorem normalizedCompositionMonomial_zero_eq
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {A : SobolevModelData}
+    (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
+    (F : ℝ → ℝ) (hF0 : F 0 = 0) (a b : Fin 0 → ℕ) (c : ℕ)
+    (g : PolarPoint → ℝ) (u : A.Space) :
+    normalizedCompositionMonomial T γ A F a b c g u =
+      materialFamilyMonomial (normalizedMaterialJetFamily hT hA)
+        (fun p => g p * (F (A.decode u (T.radius p.1, p.2)) /
+          A.decode u (T.radius p.1, p.2)))
+        (fun _ : Fin 1 => 0) (fun _ : Fin 1 => 0) c (fun _ => u) := by
+  classical
+  let U : PolarPoint → ℝ := fun p => A.decode u (T.radius p.1, p.2)
+  funext p
+  simp only [normalizedCompositionMonomial, materialFamilyMonomial,
+    normalizedMaterialJetFamily, normalizedMaterialJet, mixedDerivative,
+    iteratedDeriv_zero, Fin.prod_univ_zero, Finset.prod_const, Finset.card_univ,
+    Fintype.card_fin, Nat.zero_add, pow_one, mul_one]
+  change g p * T.M (T.radius p.1) ^ c * T.H (T.radius p.1) ^ (-γ) * F (U p) =
+    (g p * (F (U p) / U p)) * T.M (T.radius p.1) ^ c *
+      (T.H (T.radius p.1) ^ (-γ) * U p)
+  by_cases hz : U p = 0
+  · simp only [hz, hF0, div_zero, mul_zero, zero_mul]
+  · field_simp [hz]
+    <;> ring
+
+private theorem normalizedCompositionMonomial_succ_eq
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {A : SobolevModelData}
+    (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
+    (F : ℝ → ℝ) (k : ℕ) (a b : Fin (k + 1) → ℕ) (c : ℕ)
+    (g : PolarPoint → ℝ) (u : A.Space) :
+    normalizedCompositionMonomial T γ A F a b c g u =
+      materialFamilyMonomial (normalizedMaterialJetFamily hT hA)
+        (fun p => g p * iteratedDeriv (k + 1) F (A.decode u (T.radius p.1, p.2)) *
+          T.H (T.radius p.1) ^ ((k : ℝ) * γ)) a b c (fun _ => u) := by
+  classical
+  have hdata := hT
+  obtain ⟨_, hpos, _, _, _, _, _, hinside, _⟩ := hdata
+  have hH (p : PolarPoint) : 0 < T.H (T.radius p.1) := (hpos _ (hinside p.1).1).2.1
+  let U : PolarPoint → ℝ := fun p => A.decode u (T.radius p.1, p.2)
+  let coefficient : PolarPoint → ℝ := fun p =>
+    g p * iteratedDeriv (k + 1) F (U p) * T.H (T.radius p.1) ^ ((k : ℝ) * γ)
+  funext p
+  have hjet (i : Fin (k + 1)) : mixedDerivative (a i) (b i) U p =
+      T.H (T.radius p.1) ^ γ *
+        normalizedMaterialJet T γ (a i) (b i) (A.decode u) p := by
+    change mixedDerivative (a i) (b i) U p =
+      T.H (T.radius p.1) ^ γ *
+        (T.H (T.radius p.1) ^ (-γ) * mixedDerivative (a i) (b i) U p)
+    rw [← mul_assoc, ← Real.rpow_add (hH p), add_neg_cancel, Real.rpow_zero, one_mul]
+  have hprod : (∏ i, mixedDerivative (a i) (b i) U p) =
+      (T.H (T.radius p.1) ^ γ) ^ (k + 1) *
+        ∏ i, normalizedMaterialJet T γ (a i) (b i) (A.decode u) p := by
+    simp_rw [hjet]
+    rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+  have hpower : T.H (T.radius p.1) ^ (-γ) *
+      (T.H (T.radius p.1) ^ γ) ^ (k + 1) =
+        T.H (T.radius p.1) ^ ((k : ℝ) * γ) := by
+    rw [← Real.rpow_natCast, ← Real.rpow_mul (hH p).le, ← Real.rpow_add (hH p)]
+    congr 1
+    push_cast
+    ring
+  change g p * T.M (T.radius p.1) ^ c * T.H (T.radius p.1) ^ (-γ) *
+    iteratedDeriv (k + 1) F (U p) * (∏ i, mixedDerivative (a i) (b i) U p) =
+      coefficient p * T.M (T.radius p.1) ^ c *
+        ∏ i, normalizedMaterialJet T γ (a i) (b i) (A.decode u) p
+  rw [hprod]
+  calc
+    _ = (g p * iteratedDeriv (k + 1) F (U p) *
+        (T.H (T.radius p.1) ^ (-γ) * (T.H (T.radius p.1) ^ γ) ^ (k + 1))) *
+          T.M (T.radius p.1) ^ c *
+            ∏ i, normalizedMaterialJet T γ (a i) (b i) (A.decode u) p := by ring
+    _ = _ := by rw [hpower]
+
+private theorem scalar_composition_bound_congr
+    {f g : PolarPoint → ℝ} {B C : ℝ} (heq : f = g)
+    (h : MemLp g 2 materialCylinderMeasure ∧
+      (eLpNorm g 2 materialCylinderMeasure).toReal ≤ B) (hBC : B = C) :
+    MemLp f 2 materialCylinderMeasure ∧
+      (eLpNorm f 2 materialCylinderMeasure).toReal ≤ C := by
+  subst g
+  exact ⟨h.1, h.2.trans_eq hBC⟩
+
 /-- The same base and loss control every actual scalar chain-rule term,
 including the term with no derivative of the scalar function. -/
 theorem normalizedCompositionMonomial_bound
@@ -72,23 +154,8 @@ theorem normalizedCompositionMonomial_bound
         _ ≤ (K * L) * T.M (T.radius p.1) :=
           le_mul_of_one_le_right (mul_nonneg hK hL) (hM p)
     have h := hCb coefficient (K * L) (mul_nonneg hK hL) hc hcb u hu
-    have heq : normalizedCompositionMonomial T γ A F a b c g u =
-        materialFamilyMonomial (normalizedMaterialJetFamily hT hA) coefficient
-          (fun _ : Fin 1 => 0) (fun _ : Fin 1 => 0) c (fun _ => u) := by
-      funext p
-      simp only [normalizedCompositionMonomial, materialFamilyMonomial,
-        normalizedMaterialJetFamily, normalizedMaterialJet, mixedDerivative,
-        iteratedDeriv_zero, Fin.prod_univ_zero, Finset.prod_const, Finset.card_univ,
-        Fintype.card_fin, Nat.zero_add, pow_one, mul_one]
-      change g p * T.M (T.radius p.1) ^ c * T.H (T.radius p.1) ^ (-γ) * F (U p) =
-        (g p * (F (U p) / U p)) * T.M (T.radius p.1) ^ c *
-          (T.H (T.radius p.1) ^ (-γ) * U p)
-      by_cases hz : U p = 0
-      · simp only [hz, hF0, div_zero, mul_zero, zero_mul]
-      · field_simp [hz]
-        <;> ring
-    rw [heq]
-    exact ⟨h.1, h.2.trans_eq (by ring)⟩
+    exact scalar_composition_bound_congr
+      (normalizedCompositionMonomial_zero_eq hT hA F hF0 a b c g u) h (by ring)
   | succ k =>
     obtain ⟨L, hL, hLb⟩ := scalar_iteratedDeriv_bound_on_interval hF (k + 1) B
     obtain ⟨H, hH0, hHb⟩ := materialH_nonnegative_power_bounded hT
@@ -119,42 +186,8 @@ theorem normalizedCompositionMonomial_bound
         _ ≤ (K * L * H) * T.M (T.radius p.1) :=
           le_mul_of_one_le_right (mul_nonneg (mul_nonneg hK hL) hH0) (hM p)
     have h := hCb coefficient (K * L * H) (mul_nonneg (mul_nonneg hK hL) hH0) hc hcb u hu
-    have heq : normalizedCompositionMonomial T γ A F a b c g u =
-        materialFamilyMonomial (normalizedMaterialJetFamily hT hA) coefficient
-          a b c (fun _ => u) := by
-      funext p
-      have hjet (i : Fin (k + 1)) : mixedDerivative (a i) (b i) U p =
-          T.H (T.radius p.1) ^ γ *
-            normalizedMaterialJet T γ (a i) (b i) (A.decode u) p := by
-        change mixedDerivative (a i) (b i) U p =
-          T.H (T.radius p.1) ^ γ *
-            (T.H (T.radius p.1) ^ (-γ) * mixedDerivative (a i) (b i) U p)
-        rw [← mul_assoc, ← Real.rpow_add (hH p), add_neg_cancel, Real.rpow_zero, one_mul]
-      have hprod : (∏ i, mixedDerivative (a i) (b i) U p) =
-          (T.H (T.radius p.1) ^ γ) ^ (k + 1) *
-            ∏ i, normalizedMaterialJet T γ (a i) (b i) (A.decode u) p := by
-        simp_rw [hjet]
-        rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin]
-      have hpower : T.H (T.radius p.1) ^ (-γ) *
-          (T.H (T.radius p.1) ^ γ) ^ (k + 1) =
-            T.H (T.radius p.1) ^ ((k : ℝ) * γ) := by
-        rw [← Real.rpow_natCast, ← Real.rpow_mul (hH p).le, ← Real.rpow_add (hH p)]
-        congr 1
-        push_cast
-        ring
-      change g p * T.M (T.radius p.1) ^ c * T.H (T.radius p.1) ^ (-γ) *
-        iteratedDeriv (k + 1) F (U p) * (∏ i, mixedDerivative (a i) (b i) U p) =
-          coefficient p * T.M (T.radius p.1) ^ c *
-            ∏ i, normalizedMaterialJet T γ (a i) (b i) (A.decode u) p
-      rw [hprod]
-      calc
-        _ = (g p * iteratedDeriv (k + 1) F (U p) *
-            (T.H (T.radius p.1) ^ (-γ) * (T.H (T.radius p.1) ^ γ) ^ (k + 1))) *
-              T.M (T.radius p.1) ^ c *
-                ∏ i, normalizedMaterialJet T γ (a i) (b i) (A.decode u) p := by ring
-        _ = _ := by rw [hpower]
-    rw [heq]
-    exact ⟨h.1, h.2.trans_eq (by ring)⟩
+    exact scalar_composition_bound_congr
+      (normalizedCompositionMonomial_succ_eq hT hA F k a b c g u) h (by ring)
 
 /-- Summing the universal finite chain rule keeps the same base and loss. -/
 theorem normalizedCompositionJet_bound
