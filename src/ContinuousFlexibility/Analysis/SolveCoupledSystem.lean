@@ -24,6 +24,7 @@ open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
 
+set_option diagnostics true in
 theorem solve_coupled_exists_normalized_zero
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -153,10 +154,11 @@ theorem solve_coupled_exists_normalized_zero
     have h := hRight (Lz z) (hnear z hz) y
     rw [← hVN z hz y] at h
     exact HasProjectiveLineDerivAt.comp_linear W.subtype (x := z.1) (v := VN z y) h
-  obtain ⟨x, τ, hτ, hmem, hz⟩ := solve_exists_nonzero_zero p (residualGrading S)
+  have hpoint := solve_exists_nonzero_zero p (residualGrading S)
     hp hwp (solveResidualEquiv hS) (solveResidualEquiv_grading_le hS)
     (solve_residualGrading_le_two hS) base ρ hρ RN VN QN hzeroN
     hSX (solve_residual_hasSmoothing hS) hRN hVN_tame hQN hRightN
+  rcases hpoint with ⟨x, τ, hτ, hmem, hz⟩
   refine ⟨C.referenceState + x.val.val, τ, hτ, ?_, ?_, ?_, hz⟩
   · exact liftSectorParameter_mem_stateNeighborhood (hnear (x, τ) hmem) hqε
   · exact href.liftSectorParameter_sector (Lz (x, τ))

@@ -59,27 +59,40 @@ levels, followed by their closed scalar and parity subspaces. -/
 def solveResidualEquiv (hS : IsPhysicalSpaces D T S) :
     ResidualSpace S ≃L[ℝ] ProjectiveLimit (SolveResidualLevel S) (solveResidualBond S) :=
   ((subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker).prodCongr
-    (subspaceEquiv (evenCircleSubmodule S) (solve_isClosed_evenCircle hS))).trans
+    (subspaceEquiv (evenCircleSubmodule S)
+      (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS))).trans
     (prodEquiv (fun n => subLevel S.Q.toLinearMap.ker n) (subBond S.Q.toLinearMap.ker)
       (fun n => subLevel (evenCircleSubmodule S) n) (subBond (evenCircleSubmodule S)))
 
+set_option diagnostics true in
 private theorem solveResidualEquiv_apply (hS : IsPhysicalSpaces D T S)
     (y : ResidualSpace S) :
-    solveResidualEquiv hS y =
+    solveResidualEquiv (D := D) (T := T) (S := S) hS y =
       prodEquiv (fun n => subLevel S.Q.toLinearMap.ker n) (subBond S.Q.toLinearMap.ker)
         (fun n => subLevel (evenCircleSubmodule S) n) (subBond (evenCircleSubmodule S))
         (subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker y.1,
-          subspaceEquiv (evenCircleSubmodule S) (solve_isClosed_evenCircle hS) y.2) := by
+          subspaceEquiv (evenCircleSubmodule S)
+            (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) y.2) := by
   unfold solveResidualEquiv
-  rw [ContinuousLinearEquiv.trans_apply, ContinuousLinearEquiv.prodCongr_apply]
+  rw [ContinuousLinearEquiv.trans_apply
+    ((subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker).prodCongr
+      (subspaceEquiv (evenCircleSubmodule S)
+        (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS)))
+    (prodEquiv (fun k => subLevel S.Q.toLinearMap.ker k) (subBond S.Q.toLinearMap.ker)
+      (fun k => subLevel (evenCircleSubmodule S) k) (subBond (evenCircleSubmodule S))) y,
+    ContinuousLinearEquiv.prodCongr_apply
+      (subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker)
+      (subspaceEquiv (evenCircleSubmodule S)
+        (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS)) y]
 
 -- Keep later comparisons from unfolding the inverse of the bundled equivalence.
 attribute [irreducible] solveResidualEquiv
 
+set_option diagnostics true in
 theorem solveResidualEquiv_grading (hS : IsPhysicalSpaces D T S)
     (n : ℕ) (y : ResidualSpace S) :
     gradedSeminorm (SolveResidualLevel S) (solveResidualBond S) n
-        (solveResidualEquiv hS y) =
+        (solveResidualEquiv (D := D) (T := T) (S := S) hS y) =
       max (S.sourceGrading n y.1)
         (((S.circle (3 / 4 : ℝ)).grading n) y.2.val) := by
   have hsource :
@@ -91,19 +104,21 @@ theorem solveResidualEquiv_grading (hS : IsPhysicalSpaces D T S)
   have hcircle :
       gradedSeminorm (fun k => subLevel (evenCircleSubmodule S) k)
         (subBond (evenCircleSubmodule S)) n
-        (subspaceEquiv (evenCircleSubmodule S) (solve_isClosed_evenCircle hS) y.2) =
+        (subspaceEquiv (evenCircleSubmodule S)
+          (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) y.2) =
       ((S.circle (3 / 4 : ℝ)).grading n) y.2.val :=
     gradedSeminorm_subspaceEquiv (evenCircleSubmodule S)
-      (solve_isClosed_evenCircle hS) y.2 n
+      (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) y.2 n
+  have hprod := gradedSeminorm_prodEquiv
+    (fun k => subLevel S.Q.toLinearMap.ker k) (subBond S.Q.toLinearMap.ker)
+    (fun k => subLevel (evenCircleSubmodule S) k) (subBond (evenCircleSubmodule S)) n
+    (subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker y.1)
+    (subspaceEquiv (evenCircleSubmodule S)
+      (solve_isClosed_evenCircle (D := D) (T := T) (S := S) hS) y.2)
   exact (congrArg (fun z =>
       gradedSeminorm (SolveResidualLevel S) (solveResidualBond S) n z)
-      (solveResidualEquiv_apply hS y)).trans
-    ((gradedSeminorm_prodEquiv
-      (fun k => subLevel S.Q.toLinearMap.ker k) (subBond S.Q.toLinearMap.ker)
-      (fun k => subLevel (evenCircleSubmodule S) k) (subBond (evenCircleSubmodule S)) n
-      (subspaceEquiv S.Q.toLinearMap.ker S.Q.isClosed_ker y.1)
-      (subspaceEquiv (evenCircleSubmodule S) (solve_isClosed_evenCircle hS) y.2)).trans
-      (congrArg₂ max hsource hcircle))
+      (solveResidualEquiv_apply (D := D) (T := T) (S := S) hS y)).trans
+    (hprod.trans (congrArg₂ max hsource hcircle))
 
 private theorem solve_residualGrading_apply (n : ℕ) (y : ResidualSpace S) :
     residualGrading S n y = S.sourceGrading n y.1 +
@@ -114,35 +129,36 @@ private theorem solve_residualGrading_apply (n : ℕ) (y : ResidualSpace S) :
 theorem solveResidualEquiv_grading_le (hS : IsPhysicalSpaces D T S)
     (n : ℕ) (y : ResidualSpace S) :
     gradedSeminorm (SolveResidualLevel S) (solveResidualBond S) n
-      (solveResidualEquiv hS y) ≤ residualGrading S n y := by
+      (solveResidualEquiv (D := D) (T := T) (S := S) hS y) ≤ residualGrading S n y := by
   calc
     _ = max (S.sourceGrading n y.1)
         (((S.circle (3 / 4 : ℝ)).grading n) y.2.val) :=
-      solveResidualEquiv_grading hS n y
+      solveResidualEquiv_grading (D := D) (T := T) (S := S) hS n y
     _ ≤ S.sourceGrading n y.1 + ((S.circle (3 / 4 : ℝ)).grading n) y.2.val :=
       max_le
         (le_add_of_nonneg_right
           (apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) y.2.val))
         (le_add_of_nonneg_left (apply_nonneg (S.sourceGrading n) y.1))
-    _ = residualGrading S n y := (solve_residualGrading_apply n y).symm
+    _ = residualGrading S n y := (solve_residualGrading_apply (S := S) n y).symm
 
 theorem solve_residualGrading_le_two (hS : IsPhysicalSpaces D T S)
     (n : ℕ) (y : ResidualSpace S) :
     residualGrading S n y ≤
       2 * gradedSeminorm (SolveResidualLevel S) (solveResidualBond S) n
-        (solveResidualEquiv hS y) := by
+        (solveResidualEquiv (D := D) (T := T) (S := S) hS y) := by
   calc
     residualGrading S n y =
         S.sourceGrading n y.1 + ((S.circle (3 / 4 : ℝ)).grading n) y.2.val :=
-      solve_residualGrading_apply n y
+      solve_residualGrading_apply (S := S) n y
     _ ≤ max (S.sourceGrading n y.1) (((S.circle (3 / 4 : ℝ)).grading n) y.2.val) +
         max (S.sourceGrading n y.1) (((S.circle (3 / 4 : ℝ)).grading n) y.2.val) :=
       add_le_add (le_max_left _ _) (le_max_right _ _)
     _ = 2 * max (S.sourceGrading n y.1)
         (((S.circle (3 / 4 : ℝ)).grading n) y.2.val) := (two_mul _).symm
     _ = 2 * gradedSeminorm (SolveResidualLevel S) (solveResidualBond S) n
-        (solveResidualEquiv hS y) :=
-      congrArg (fun t : ℝ => 2 * t) (solveResidualEquiv_grading hS n y).symm
+        (solveResidualEquiv (D := D) (T := T) (S := S) hS y) :=
+      congrArg (fun t : ℝ => 2 * t)
+        (solveResidualEquiv_grading (D := D) (T := T) (S := S) hS n y).symm
 
 /-- The scalar compatibility subspace inherits smoothing from the actual
 height model, through the projection already supplied in W02. -/
@@ -154,13 +170,15 @@ theorem solve_source_hasSmoothing (hS : IsPhysicalSpaces D T S) :
     (fun x => hPker x) (fun w hw => hPid w hw) hPt
     ((hS.2.2.2.1 (3 / 4 : ℝ)).2.1)
 
+set_option diagnostics true in
 /-- The even residual circle sector uses its actual supplied parity
 projection, retaining its fixed derivative loss. -/
 theorem solve_even_hasSmoothing (hS : IsPhysicalSpaces D T S) :
     HasSmoothing (fun n => ((S.circle (3 / 4 : ℝ)).grading n).comp
       (evenCircleSubmodule S).subtype) := by
-  obtain ⟨even, odd, heven, _, _, ⟨r, b, hPt⟩, _⟩ :=
-    solve_parityProjection_data hS (3 / 4 : ℝ)
+  have hparity :=
+    solve_parityProjection_data (D := D) (T := T) (S := S) hS (3 / 4 : ℝ)
+  rcases hparity with ⟨even, odd, heven, _, _, ⟨r, b, hPt⟩, _⟩
   have hinj : Function.Injective (S.circle (3 / 4 : ℝ)).decode :=
     (hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.1
   have hmem (u : CircleSpace S) : even u ∈ evenCircleSubmodule S := by
@@ -198,6 +216,8 @@ theorem solve_even_hasSmoothing (hS : IsPhysicalSpaces D T S) :
 
 theorem solve_residual_hasSmoothing (hS : IsPhysicalSpaces D T S) :
     HasSmoothing (residualGrading S) :=
-  hasSmoothing_pairGrading (solve_source_hasSmoothing hS) (solve_even_hasSmoothing hS)
+  hasSmoothing_pairGrading
+    (solve_source_hasSmoothing (D := D) (T := T) (S := S) hS)
+    (solve_even_hasSmoothing (D := D) (T := T) (S := S) hS)
 
 end ContinuousFlexibility.Analysis

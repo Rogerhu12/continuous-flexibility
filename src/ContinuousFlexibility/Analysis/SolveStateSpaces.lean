@@ -95,15 +95,17 @@ theorem solve_state_hasSmoothing {D : ReferenceData} {T : MaterialData}
       (hasSmoothing_pairGrading ((hS.2.2.2.2.1 (3 / 4 : ℝ)).2.1)
         ((hS.2.2.2.2.1 (3 / 4 : ℝ)).2.1)))
 
+set_option diagnostics true in
 /-- The physical sector is a tame direct summand, with the prescribed
 constant control mode and odd chart mode. -/
 theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S) :
     HasSmoothing (sectorGrading S) := by
-  obtain ⟨even, odd, heven, hodd, hidem, hevenTame, hoddTame⟩ :=
-    solve_parityProjection_data hS (3 / 4 : ℝ)
-  obtain ⟨r, b, hoddTame⟩ := hoddTame
-  obtain ⟨mean, hmean, hmeanFix, hmeanTame⟩ :
+  have hparity := solve_parityProjection_data (D := D) (T := T) (S := S) hS (3 / 4 : ℝ)
+  rcases hparity with ⟨even, odd, heven, hodd, hidem, hevenTame, hoddTame⟩
+  rcases hoddTame with ⟨r, b, hoddTame⟩
+  have hCM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
+  have hmeanExists :
       ∃ mean : CircleSpace S →L[ℝ] CircleSpace S,
         (∀ u m θ φ, (S.circle (3 / 4 : ℝ)).decode (mean u) m θ =
           (S.circle (3 / 4 : ℝ)).decode (mean u) m φ) ∧
@@ -111,10 +113,11 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
           (S.circle (3 / 4 : ℝ)).decode u m φ) → mean u = u) ∧
         IsTameLinear (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading
           mean.toLinearMap 0 0 :=
-    ⟨circleAngularMeanProjection (hS.2.1 (3 / 4 : ℝ)),
-      circleAngularMeanProjection_constant (hS.2.1 (3 / 4 : ℝ)),
-      circleAngularMeanProjection_eq_self (hS.2.1 (3 / 4 : ℝ)),
-      circleAngularMeanProjection_isTame (hS.2.1 (3 / 4 : ℝ))⟩
+    ⟨circleAngularMeanProjection (T := T) (γ := 3 / 4) (S := S.circle (3 / 4)) hCM,
+      circleAngularMeanProjection_constant hCM,
+      circleAngularMeanProjection_eq_self hCM,
+      circleAngularMeanProjection_isTame hCM⟩
+  rcases hmeanExists with ⟨mean, hmean, hmeanFix, hmeanTame⟩
   let P : AnnularState S →L[ℝ] AnnularState S :=
     (ContinuousLinearMap.id ℝ (HeightPair S)).prodMap
       ((ContinuousLinearMap.id ℝ ℝ).prodMap (mean.prodMap odd))
@@ -134,7 +137,7 @@ theorem solve_sector_hasSmoothing {D : ReferenceData} {T : MaterialData}
   have hPid (x : AnnularState S) (hx : x ∈ stateSectorSubmodule S) : P x = x := by
     have hm := hmeanFix x.2.2.1 hx.1
     have ho : odd x.2.2.2 = x.2.2.2 := by
-      apply (hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.1
+      apply hCM.2.2.2.2.2.1
       funext m θ
       rw [hodd, hx.2 m θ]
       ring

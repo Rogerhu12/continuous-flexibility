@@ -25,9 +25,13 @@ theorem Solve (hN10 : N10Statement) (hTame : H01Statement ∧ H02Statement) : Po
   have hG := h09.1.1.2.1
   have h8 := h09.1.2
   have h9 := h09.2
-  obtain ⟨x, q, hq, hnear, hsector, hrow, hzero⟩ :=
+  have hsolution :=
     ContinuousFlexibility.Analysis.solve_coupled_exists_normalized_zero
+      (D := A.val) (T := T) (S := S) (C := C) (R := R)
+      (L := L) (G := G) (P := P) (B := B) (N := N) (V := V) (Q := Q)
+      (base := base) (loss := loss) (ε := ε) (q0 := q0)
       hT hS h1 hG h8 h9 h10
+  rcases hsolution with ⟨x, q, hq, hnear, hsector, hrow, hzero⟩
   exact pointBranchStatement_of_jointResidual_zero hT hS h1 h2 h8
     hq hnear hsector hrow hzero
 
