@@ -3,7 +3,7 @@ import ContinuousFlexibility.Radial.SeedConeTailConstruction
 import ContinuousFlexibility.Radial.SeedPureTailConstruction
 import ContinuousFlexibility.Radial.SeedPureTailCanonical
 import ContinuousFlexibility.Radial.SeedGluedPairConstruction
-import ContinuousFlexibility.Radial.TwoTailReferenceAssembly
+import ContinuousFlexibility.Radial.SeedReturnMargins
 import ContinuousFlexibility.Radial.OpenComponentTransport
 
 /-!
@@ -24,7 +24,8 @@ open ContinuousFlexibility.Statements
 
 theorem seedReference_theorem (_hR03 : R03Statement) (hR07 : R07Statement) : R08Statement := by
   intro q hq
-  obtain ⟨S, hS, hentries, hentry⟩ := exists_seedPreparedSelectedTail hR07
+  obtain ⟨S, hS, start, hstart, hseams, hentries, hentry⟩ :=
+    exists_seedPreparedSelectedTail_with_seams hR07
   let D₀ := S.family S.sigma
   let c := S.entry false S.chain.index
   let d := S.entry true S.chain.index
@@ -48,11 +49,9 @@ theorem seedReference_theorem (_hR03 : R03Statement) (hR07 : R07Statement) : R08
   obtain ⟨G⟩ := exists_seedGluedPair hD hc hd TL TR
     (by simpa using hTL)
     (by simpa using hTR) K hq
-  have hAccum₀ : IsAccumulatingProfile D₀ := ⟨S.constants, hBounds⟩
-  obtain ⟨D, hDa, hDb, hDw, hDphi, hAccum⟩ :=
-    exists_accumulating_reference_of_two_tail_surgery hAccum₀ G.radiusL_pos
-      G.radius_order G.heightL_pos G.heightR_pos hc.1 hentries hd.2 G.geometry
-      (fun r hr => (G.left_tail r hr).1) (fun r hr => (G.right_tail r hr).1)
+  obtain ⟨D, hDa, hDb, hDw, hDphi, hAccum, hConstruction⟩ :=
+    G.exists_accumulating_reference_with_construction_geometry hreal hσ hq hstart
+      (hseams false) (hseams true) hc hd hentries
   have hGeo : RadialProfileGeometry D := (Classical.choose_spec hAccum).1
   have hRR : 0 < G.radiusR := G.radiusL_pos.trans_le G.radius_order
   let L := exp K.left
@@ -74,11 +73,7 @@ theorem seedReference_theorem (_hR03 : R03Statement) (hR07 : R07Statement) : R08
     exact G.middle_germ r hr
   have hcentral (r : ℝ) (hr : r ∈ Ioo L H) : r ∈ Ioo L₀ H₀ :=
     ⟨hL₀L.trans hr.1, hr.2.trans hHH₀⟩
-  refine ⟨S, hS, D, hAccum, ?_, L, H, ?_, ?_, ?_⟩
-  · intro r hr
-    rw [hDw, hDphi]
-    apply G.equation r
-    simpa only [radialCore, hDa, hDb] using hr
+  refine ⟨S, hS, D, hAccum, hConstruction, L, H, ?_, ?_, ?_⟩
   · refine ⟨hDaL₀.trans hL₀L, K.retained_turns.2.1, K.retained_turns.2.2,
       hHH₀.trans hH₀Db, 1, 1, by norm_num, by norm_num, ?_, ?_⟩
     · intro r hr

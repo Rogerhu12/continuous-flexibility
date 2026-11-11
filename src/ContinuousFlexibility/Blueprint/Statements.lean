@@ -107,6 +107,7 @@ def MatchedPieces (D : ReferenceData) (M : RadialMatchingData D) : Prop :=
 
 def R10aStatement : Prop :=
   ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+    RadialConstructionGeometry D ∧
     ∀ j : ℕ, 2 ≤ j → Even j →
       ∃ M : RadialMatchingData D, M.frequency = j ∧ MatchedPieces D M
 
@@ -123,6 +124,7 @@ def R10bStatement : Prop :=
 /-- `R11Statement` without the first normal estimate. -/
 def R11aStatement : Prop :=
   ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+    RadialConstructionGeometry D ∧
     ∃ ε M₀ M₁ : ℝ, 0 < ε ∧ ε < 1 / 4 ∧
       ∃ G : RadialSource → RadialUnknown,
         (∀ j : ℕ, 2 ≤ j → Even j →
