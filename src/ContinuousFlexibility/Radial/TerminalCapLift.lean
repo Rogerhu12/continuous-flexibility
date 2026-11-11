@@ -246,7 +246,7 @@ theorem terminalCapLift_weighted_equation {a lam r : ℝ} {w χ u : ℝ → ℝ}
     (hr : r ≠ 0) (hw₀ : w r ≠ 0) (heq : radialJacobi a w u r = 0) :
     radialJacobi a w (terminalCapLift lam χ u) r =
       -(12 * w r / r ^ 2) * terminalCapHilbertSource lam w χ u r := by
-  have h := terminalCapLift_homogeneous_residual hw hχ hu heq
+  have h := terminalCapLift_homogeneous_residual (lam := lam) hw hχ hu heq
   have hρ := terminalCapHilbertSource_density (lam := lam) (χ := χ) (u := u) hr hw₀
   linarith only [h, hρ]
 
