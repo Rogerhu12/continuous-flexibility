@@ -7,6 +7,23 @@ cite the 62-page version in `paper/flexible-surface-rewrite/`, which has the sam
 One line works on one branch `line/<Node>` and opens one pull request into `main`.
 The rules below are the same for every line.
 
+## Notices to individual lines
+
+Read this section every time you check the rules. A notice is removed when it is done.
+
+- **N01a (PR #31): do not mark ready yet; merge `origin/main` and port to R12's definitions.**
+  R12 (merged) changed two definitions in `Statements/Radial.lean`:
+  `RadialCellIntegrable D f` is now `∀ m, MemLp (fun x => D.localizer m x.1 * f x) 2
+  (radialPhysicalMeasure D)`, and the first-normal estimate takes `SourceDerivativeMember D γ M fθ`
+  instead of `SourceMember D γ M (fθ, 0)`. R12 also added declarations with the names of six of
+  yours in `ContinuousFlexibility.Statements`. Branch `integrate/batch-7` already contains two
+  fixes you can merge: the six clashing names renamed `n01a_*`, and the argument in
+  `N01aReferencePureRow.lean`. The next error is `N01aReferenceMeasure.lean:40`
+  (`integrable_square` becomes `(hf m).integrable_sq`); the places that construct
+  `RadialCellIntegrable` (`n01a_radialCellIntegrable_sub`, `cell_integrable_iff`, ...) need
+  `memLp_two_iff_integrable_sq` with the measurability you already assume. Mark ready again when
+  CI is green on the merge with current `main`.
+
 ## Start
 
 Read `AGENTS.md`, `docs/STATUS.md`, your task file, your node file
