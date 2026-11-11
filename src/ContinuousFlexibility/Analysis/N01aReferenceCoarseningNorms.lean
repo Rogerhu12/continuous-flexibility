@@ -17,12 +17,12 @@ open scoped BigOperators
 
 theorem n01a_sourceNormSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M : ℝ) (F : RadialSource) : 0 ≤ sourceNormSquare D γ M F :=
-  add_nonneg (sq_nonneg _) (tsum_nonneg fun i => sourceCellSquare_nonneg hab γ M F.1 i)
+  add_nonneg (sq_nonneg _) (tsum_nonneg fun i => n01a_sourceCellSquare_nonneg hab γ M F.1 i)
 
 theorem n01a_outputNormSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M aL : ℝ) (U : RadialUnknown) : 0 ≤ outputNormSquare D γ M aL U :=
   add_nonneg (add_nonneg (sq_nonneg _) (sq_nonneg _))
-    (tsum_nonneg fun i => outputCellSquare_nonneg hab γ M (outputRemainder D aL U) i)
+    (tsum_nonneg fun i => n01a_outputCellSquare_nonneg hab γ M (outputRemainder D aL U) i)
 
 private theorem n01a_add_weighted_sum_bounds {a b q : ℝ} (ha : 0 ≤ a) (hq : 0 ≤ q)
     (B : ℕ) (h : a ≤ b ∧ b ≤ (B : ℝ) * a) :
@@ -61,14 +61,14 @@ theorem weighted_comparison (hD : RadialPartition D) (hE : RadialPartition E)
   have heqfine (i : ℕ) : Λ (σ i) * n01aLocalSquare (radialPhysicalMeasure D)
       (fun i (p : PolarPoint) => D.localizer i p.1) f i =
       W (D.cellIndex i) * referenceCellSquare D i f := by
-    rw [referenceCellSquare_eq_integral hab hf i]
+    rw [n01a_referenceCellSquare_eq_integral hab hf i]
     simp only [Λ, n01aLocalSquare, h.index_eq]
     ring
   have heqcoarse (j : ℕ) : Λ j * n01aLocalSquare (radialPhysicalMeasure D)
       (n01aCoarseLocalizer σ h.finite_fibers
         (fun i (p : PolarPoint) => D.localizer i p.1)) f j =
       W (E.cellIndex j) * referenceCellSquare E j f := by
-    rw [referenceCellSquare_eq_integral habE hfE j]
+    rw [n01a_referenceCellSquare_eq_integral habE hfE j]
     simp only [Λ, n01aLocalSquare, h.coarse_localizer_apply, h.measure_eq]
     ring
   have hs := n01aCoarseLocalizer_summable_iff (radialPhysicalMeasure D) σ h.finite_fibers
@@ -108,6 +108,30 @@ theorem source_iff (hD : RadialPartition D) (hE : RadialPartition E) (hab : D.a 
     refine ⟨(h.cell_integrable_iff hD hE F.1).mpr hi, (hs hi).mpr hsum, hp, he, ?_, ?_⟩
     · simpa only [h.a_eq, h.b_eq] using hint
     · simpa only [h.a_eq, h.b_eq] using hzero
+
+/-- The derivative source space retains local signed L² and the same
+weighted square sum, without imposing evenness or a compatibility mean. -/
+theorem source_derivative_iff (hD : RadialPartition D) (hE : RadialPartition E)
+    (hab : D.a ≤ D.b) (γ M : ℝ) (f : PolarPoint → ℝ) :
+    SourceDerivativeMember E γ M f ↔ SourceDerivativeMember D γ M f := by
+  obtain ⟨B, hB⟩ := hD.2.2.2.2.2
+  have hs (hf : RadialCellIntegrable D f) :
+      Summable (sourceCellSquare E γ M f) ↔ Summable (sourceCellSquare D γ M f) := by
+    change (Summable (fun j =>
+      Real.exp (2 * M * radialQ (E.cellIndex j) + 2 * γ * radialS (E.cellIndex j)) *
+        referenceCellSquare E j f)) ↔
+      Summable (fun i =>
+        Real.exp (2 * M * radialQ (D.cellIndex i) + 2 * γ * radialS (D.cellIndex i)) *
+          referenceCellSquare D i f)
+    exact (h.weighted_comparison hD hE hab B hB
+      (fun n => Real.exp (2 * M * radialQ n + 2 * γ * radialS n))
+      (fun _ => (Real.exp_pos _).le) f hf).1
+  constructor
+  · rintro ⟨hi, hsum⟩
+    have hiD := (h.cell_integrable_iff hD hE f).mp hi
+    exact ⟨hiD, (hs hiD).mp hsum⟩
+  · rintro ⟨hi, hsum⟩
+    exact ⟨(h.cell_integrable_iff hD hE f).mpr hi, (hs hi).mpr hsum⟩
 
 theorem output_realization_iff (hD : RadialPartition D) (hE : RadialPartition E)
     (hab : D.a ≤ D.b) (γ M aL : ℝ) (U : RadialUnknown) :
@@ -174,7 +198,7 @@ theorem exists_norm_comparison (hD : RadialPartition D) (hE : RadialPartition E)
           (fun n => Real.exp (2 * M * radialQ n + 2 * γ * radialS n))
           (fun _ => (Real.exp_pos _).le) F.1 hi).2 hsum
     exact n01a_add_weighted_sum_bounds
-      (tsum_nonneg fun i => sourceCellSquare_nonneg hab γ M F.1 i) (sq_nonneg F.2) B hb
+      (tsum_nonneg fun i => n01a_sourceCellSquare_nonneg hab γ M F.1 i) (sq_nonneg F.2) B hb
   · intro γ M aL U hU
     have hsum := hU.2.1
     change Summable (fun i =>
@@ -189,7 +213,7 @@ theorem exists_norm_comparison (hD : RadialPartition D) (hE : RadialPartition E)
           (fun n => Real.exp (-2 * M * radialQ n + 2 * γ * radialS n))
           (fun _ => (Real.exp_pos _).le) (outputRemainder D aL U) hU.1).2 hsum
     simpa only [outputNormSquare, h.remainder_eq] using n01a_add_weighted_sum_bounds
-      (tsum_nonneg fun i => outputCellSquare_nonneg hab γ M (outputRemainder D aL U) i)
+      (tsum_nonneg fun i => n01a_outputCellSquare_nonneg hab γ M (outputRemainder D aL U) i)
       (add_nonneg (sq_nonneg aL) (sq_nonneg U.2)) B hb
 
 end N01aReferenceCoarsening

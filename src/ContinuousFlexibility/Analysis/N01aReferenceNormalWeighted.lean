@@ -129,8 +129,8 @@ theorem weakNormalDerivative_reference_cell_square_le {D : ReferenceData}
     integral_reference_cell_square hab
       (radialCellIntegrable_cosine_lift hpart hphid.continuous 2) m
   rw [hfint, hgint, n01a_normalized_sqrt_product] at hcell
-  exact n01a_le_of_sqrt_product (referenceCellSquare_nonneg hab m _)
-    (referenceCellSquare_nonneg hab m ur) hcell
+  exact n01a_le_of_sqrt_product (n01a_referenceCellSquare_nonneg hab m _)
+    (n01a_referenceCellSquare_nonneg hab m ur) hcell
 
 theorem weakNormalDerivative_reference_output {D : ReferenceData}
     (hab : D.a ≤ D.b) (hpart : RadialPartition D) (hphi : EndpointFlat D D.phi)
@@ -147,7 +147,7 @@ theorem weakNormalDerivative_reference_output {D : ReferenceData}
   apply outputRealization_cosine_lift_of_summable hpart
     (contDiff_infty_iff_deriv.mp hphi.1).2.continuous
   apply Summable.of_nonneg_of_le
-    (fun m => outputCellSquare_nonneg hab γ M _ m) _ hs
+    (fun m => n01a_outputCellSquare_nonneg hab γ M _ m) _ hs
   intro m
   exact mul_le_mul_of_nonneg_left
     (weakNormalDerivative_reference_cell_square_le hab hpart hphi hweak hmode hcells m)

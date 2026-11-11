@@ -22,8 +22,13 @@ theorem sourceMember_pure_row (D : ReferenceData) (γ M η : ℝ) :
   have hz : sourceCellSquare D γ M (0 : PolarPoint → ℝ) = fun _ => 0 := by
     funext m
     simp [sourceCellSquare, referenceCellSquare, radialAngularMean]
-  simp [SourceMember, RadialCellIntegrable, hz,
-    radialAngularMean, Function.Periodic]
+  refine ⟨RadialCellIntegrable.zero D, ?_⟩
+  simp [hz, radialAngularMean, Function.Periodic]
+
+/-- The zero angular derivative belongs to the derivative source space. -/
+theorem n01a_sourceDerivativeMember_zero (D : ReferenceData) (γ M : ℝ) :
+    SourceDerivativeMember D γ M (0 : PolarPoint → ℝ) :=
+  ⟨(sourceMember_pure_row D γ M 0).1, (sourceMember_pure_row D γ M 0).2.1⟩
 
 theorem sourceNormSquare_pure_row (D : ReferenceData) (γ M η : ℝ) :
     sourceNormSquare D γ M ((0 : PolarPoint → ℝ), η) = η ^ 2 := by
@@ -55,7 +60,7 @@ theorem exists_reference_pure_row_output {D : ReferenceData} (hD : IsRadialRefer
   obtain ⟨C, hC, hnormal⟩ := hplus.2.2.2.2
   obtain ⟨ur, hur, hreal, hbound⟩ :=
     hnormal F 0 (hF _) (weakAngularDerivative_zero D)
-      (sourceMember_pure_row D (referenceBeta + ε) M₀ 0)
+      (n01a_sourceDerivativeMember_zero D (referenceBeta + ε) M₀)
   refine ⟨ε, M₀, M₁, G F, hε, hεsmall, hgraph, ?_, ur, hur, hreal⟩
   exact (hgraph referenceBeta (Or.inr (Or.inl rfl))).2.2.1
 

@@ -94,13 +94,21 @@ theorem cell_integrable_iff (hD : RadialPartition D) (hE : RadialPartition E)
         (radialPhysicalMeasure D) := by
       intro j
       simpa only [h.coarse_localizer_apply, h.measure_eq] using hf.integrable_square j
-    exact (n01aCoarseLocalizer_integrable_iff (radialPhysicalMeasure D) σ h.finite_fibers
-      hn hm hfm).mp hc
+    have hfield : AEStronglyMeasurable f (radialPhysicalMeasure D) := by
+      simpa only [h.measure_eq] using hf.aestronglyMeasurable hE
+    intro i
+    exact (memLp_two_iff_integrable_sq
+      (((hD.1 i).continuous.comp continuous_fst).aestronglyMeasurable.mul hfield)).mpr
+        ((n01aCoarseLocalizer_integrable_iff (radialPhysicalMeasure D) σ h.finite_fibers
+          hn hm hfm).mp hc i)
   · intro hf
     intro j
     have hc := n01aCoarseLocalizer_square_integrable (radialPhysicalMeasure D)
       σ h.finite_fibers hm (hf.aemeasurable_sq hD) (fun i => hf.integrable_square i) j
-    change Integrable (fun p => (E.localizer j p.1 * f p) ^ 2) (radialPhysicalMeasure E)
+    have hfield : AEStronglyMeasurable f (radialPhysicalMeasure E) := by
+      simpa only [h.measure_eq] using hf.aestronglyMeasurable hD
+    apply (memLp_two_iff_integrable_sq
+      (((hE.1 j).continuous.comp continuous_fst).aestronglyMeasurable.mul hfield)).mpr
     simpa only [h.coarse_localizer_apply, ← h.measure_eq] using hc
 
 end N01aReferenceCoarsening

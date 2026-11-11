@@ -6,10 +6,9 @@ import Mathlib.MeasureTheory.Constructions.Polish.Basic
 /-!
 # Recovering the physical square integral from the reference partition
 
-Only integrability of the localized squares is assumed.  In particular, this
-argument does not silently strengthen `RadialCellIntegrable` to measurability
-of the signed field.  The square itself is measurable by dividing the sum of
-localized squares by the positive sum of squared localizers.
+The revised local L² contract includes measurability of each signed
+localized field. The quantitative square estimate below uses their
+integrable squares and the actual bounded-overlap partition identity.
 -/
 
 noncomputable section
@@ -144,7 +143,7 @@ theorem exists_radialPartition_integral_square_bound {D : ReferenceData}
   simp_rw [integral_reference_cell_square hab hf] at hlim
   rw [tsum_mul_left] at hlim
   have hnonneg : 0 ≤ ∑' m, referenceCellSquare D m f :=
-    tsum_nonneg fun m => referenceCellSquare_nonneg hab m f
+    tsum_nonneg fun m => n01a_referenceCellSquare_nonneg hab m f
   calc
     _ ≤ (B : ℝ) * ((2 * Real.pi) * ∑' m, referenceCellSquare D m f) := hlim
     _ ≤ ((B : ℝ) + 1) * (2 * Real.pi) * ∑' m, referenceCellSquare D m f := by

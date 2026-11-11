@@ -3,9 +3,9 @@ import ContinuousFlexibility.Analysis.N01aReferenceCoarseningNorms
 /-!
 # Actual source differences with measurable representatives
 
-The frozen graph topology uses square norms of differences. Signed
-measurability is made explicit here, because integrability of the two
-individual squares alone does not give measurability of their difference.
+The frozen graph topology uses square norms of differences. The revised
+local L² contract supplies signed measurability and is closed under
+subtraction; the actual integral estimates retain their original form.
 -/
 
 noncomputable section
@@ -43,10 +43,7 @@ theorem n01a_radialCellIntegrable_sub {D : ReferenceData} (hD : RadialPartition 
     (hfm : AEMeasurable f (radialPhysicalMeasure D))
     (hgm : AEMeasurable g (radialPhysicalMeasure D)) :
     RadialCellIntegrable D (fun p => f p - g p) := by
-  intro i
-  exact (n01a_integrable_localized_sub_square
-    ((hD.1 i).continuous.comp continuous_fst).measurable.aemeasurable hfm hgm
-    (hf.integrable_square i) (hg.integrable_square i)).1
+  exact hf.sub hg
 
 theorem n01a_referenceCellSquare_sub_le {D : ReferenceData} (hD : RadialPartition D)
     (hab : D.a ≤ D.b) {f g : PolarPoint → ℝ}
@@ -59,8 +56,8 @@ theorem n01a_referenceCellSquare_sub_le {D : ReferenceData} (hD : RadialPartitio
   have hb := (n01a_integrable_localized_sub_square
     ((hD.1 i).continuous.comp continuous_fst).measurable.aemeasurable hfm hgm
     (hf.integrable_square i) (hg.integrable_square i)).2
-  rw [referenceCellSquare_eq_integral hab hi i, referenceCellSquare_eq_integral hab hf i,
-    referenceCellSquare_eq_integral hab hg i]
+  rw [n01a_referenceCellSquare_eq_integral hab hi i, n01a_referenceCellSquare_eq_integral hab hf i,
+    n01a_referenceCellSquare_eq_integral hab hg i]
   calc
     _ ≤ (2 * Real.pi)⁻¹ *
         (2 * (∫ p, (D.localizer i p.1 * f p) ^ 2 ∂radialPhysicalMeasure D) +
@@ -89,7 +86,7 @@ theorem n01a_source_difference_square_member {D : ReferenceData} (hD : RadialPar
           (n01a_referenceCellSquare_sub_le hD hab hf hg hfm hgm i) (Real.exp_pos _).le
       _ = _ := by unfold sourceCellSquare; ring
   exact Summable.of_nonneg_of_le
-    (fun i => sourceCellSquare_nonneg hab γ M (fun p => f p - g p) i) hb
+    (fun i => n01a_sourceCellSquare_nonneg hab γ M (fun p => f p - g p) i) hb
     ((hfs.mul_left 2).add (hgs.mul_left 2))
 
 end ContinuousFlexibility.Statements

@@ -38,7 +38,7 @@ theorem radialCellIntegrable_cosine_lift {D : ReferenceData}
       D.localizer m p.1 * (f p.1 * Radial.cosineMode j p.2)) := by
     unfold Radial.cosineMode
     fun_prop
-  exact (continuous_memLp_radialPhysicalMeasure hc).integrable_sq
+  exact continuous_memLp_radialPhysicalMeasure hc
 
 theorem outputRealization_cosine_lift_of_summable {D : ReferenceData}
     (hpart : RadialPartition D) {γ M : ℝ} {f : ℝ → ℝ} (hf : Continuous f)
@@ -106,7 +106,7 @@ theorem outputRealization_cosine_of_mode_eq {D : ReferenceData}
       (Real.exp_pos (-2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m))).le
     simpa only [outputCellSquare, mul_left_comm, mul_assoc] using h
   have hs : Summable (outputCellSquare D γ M g) :=
-    Summable.of_nonneg_of_le (fun m => outputCellSquare_nonneg hab γ M g m) hweighted
+    Summable.of_nonneg_of_le (fun m => n01a_outputCellSquare_nonneg hab γ M g m) hweighted
       (hreal.2.1.mul_left K)
   exact outputRealization_cosine_lift_of_summable hpart hf hs
 

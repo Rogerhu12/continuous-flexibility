@@ -84,7 +84,7 @@ theorem first_normal_estimate (hD : RadialPartition D) (hE : RadialPartition E)
   refine ⟨K * C, mul_pos hKpos hC, ?_⟩
   intro F fθ hF hθ hfθ
   have hFD := (h.source_iff hD hE hab γ M₀ F).mp hF
-  have hfθD := (h.source_iff hD hE hab γ M₀ (fθ, 0)).mp hfθ
+  have hfθD := (h.source_derivative_iff hD hE hab γ M₀ fθ).mp hfθ
   obtain ⟨ur, hur, hU, hbound⟩ := hN F fθ hFD ((h.angular_iff F.1 fθ).mp hθ) hfθD
   refine ⟨ur, (h.normal_iff (G F).1 ur).mpr hur,
     (h.output_realization_iff hD hE hab γ M₁ 0 (ur, 0)).mpr hU, ?_⟩
@@ -95,7 +95,7 @@ theorem first_normal_estimate (hD : RadialPartition D) (hE : RadialPartition E)
     _ ≤ K * (C ^ 2 * (sourceNormSquare E γ M₀ F + sourceNormSquare E γ M₀ (fθ, 0))) :=
       mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left
         (add_le_add (hsrc γ M₀ F hFD.1 hFD.2.1).1
-          (hsrc γ M₀ (fθ, 0) hfθD.1 hfθD.2.1).1) (sq_nonneg C)) hKpos.le
+          (hsrc γ M₀ (fθ, 0) hfθD.1 hfθD.2).1) (sq_nonneg C)) hKpos.le
     _ ≤ _ := n01a_coarsened_inverse_constant hK
       (add_nonneg (n01a_sourceNormSquare_nonneg habE γ M₀ F)
         (n01a_sourceNormSquare_nonneg habE γ M₀ (fθ, 0)))

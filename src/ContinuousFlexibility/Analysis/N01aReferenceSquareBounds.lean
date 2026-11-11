@@ -14,12 +14,12 @@ open scoped BigOperators Topology
 theorem sourceNormSquare_scalar_le {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M : ℝ) (F : RadialSource) : F.2 ^ 2 ≤ sourceNormSquare D γ M F := by
   unfold sourceNormSquare
-  exact le_add_of_nonneg_right (tsum_nonneg fun m => sourceCellSquare_nonneg hab γ M F.1 m)
+  exact le_add_of_nonneg_right (tsum_nonneg fun m => n01a_sourceCellSquare_nonneg hab γ M F.1 m)
 
 theorem outputNormSquare_scalar_le {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M aL : ℝ) (U : RadialUnknown) : U.2 ^ 2 ≤ outputNormSquare D γ M aL U := by
   have hs : 0 ≤ ∑' m : ℕ, outputCellSquare D γ M (outputRemainder D aL U) m :=
-    tsum_nonneg fun m => outputCellSquare_nonneg hab γ M (outputRemainder D aL U) m
+    tsum_nonneg fun m => n01a_outputCellSquare_nonneg hab γ M (outputRemainder D aL U) m
   unfold outputNormSquare
   linarith only [sq_nonneg aL, hs]
 

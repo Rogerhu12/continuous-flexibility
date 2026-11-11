@@ -53,21 +53,22 @@ theorem n01a_reference_multiplier_memLp {D : ReferenceData}
     have hm : AEStronglyMeasurable
         (fun p : PolarPoint => (D.localizer m p.1 * V p) ^ 2) (radialPhysicalMeasure D) :=
       (hloc.aemeasurable.pow_const (2 : ℕ)).aestronglyMeasurable
+    apply (memLp_two_iff_integrable_sq hloc).mpr
     exact ((hcell.integrable_square m).const_mul (K * W m)).mono_nonneg hm
       (Eventually.of_forall fun _ => sq_nonneg _) (Eventually.of_forall (hmajor m))
   have hcells (m : ℕ) : referenceCellSquare D m V ≤ K * outputCellSquare D γ M F m := by
     have hi := integral_mono (hVcell.integrable_square m)
       ((hcell.integrable_square m).const_mul (K * W m)) (hmajor m)
     rw [integral_const_mul] at hi
-    rw [referenceCellSquare_eq_integral hab hVcell m, outputCellSquare,
-      referenceCellSquare_eq_integral hab hcell m]
+    rw [n01a_referenceCellSquare_eq_integral hab hVcell m, outputCellSquare,
+      n01a_referenceCellSquare_eq_integral hab hcell m]
     calc
       _ ≤ (2 * Real.pi)⁻¹ *
           ((K * W m) * ∫ p, (D.localizer m p.1 * F p) ^ 2 ∂radialPhysicalMeasure D) :=
         mul_le_mul_of_nonneg_left hi (inv_nonneg.mpr (by positivity))
       _ = _ := by dsimp only [W]; ring
   have hsV : Summable (fun m => referenceCellSquare D m V) :=
-    Summable.of_nonneg_of_le (fun m => referenceCellSquare_nonneg hab m V) hcells
+    Summable.of_nonneg_of_le (fun m => n01a_referenceCellSquare_nonneg hab m V) hcells
       (hsum.mul_left K)
   obtain ⟨C, hC, hb⟩ := exists_radialPartition_integral_square_bound hab hpart
   exact (memLp_two_iff_integrable_sq hVm).mpr (hb V hVcell hsV).1

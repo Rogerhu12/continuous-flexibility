@@ -22,19 +22,19 @@ theorem radialAngularMean_nonneg {f : ℝ → ℝ} (hf : ∀ θ, 0 ≤ f θ) :
   exact mul_nonneg (inv_nonneg.mpr (by positivity))
     (intervalIntegral.integral_nonneg (by positivity) (fun θ _ => hf θ))
 
-theorem referenceCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
+theorem n01a_referenceCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
     (m : ℕ) (f : PolarPoint → ℝ) : 0 ≤ referenceCellSquare D m f := by
   apply intervalIntegral.integral_nonneg hab
   intro r _
   exact radialAngularMean_nonneg fun θ => sq_nonneg _
 
-theorem sourceCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
+theorem n01a_sourceCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M : ℝ) (f : PolarPoint → ℝ) (m : ℕ) : 0 ≤ sourceCellSquare D γ M f m :=
-  mul_nonneg (Real.exp_pos _).le (referenceCellSquare_nonneg hab m f)
+  mul_nonneg (Real.exp_pos _).le (n01a_referenceCellSquare_nonneg hab m f)
 
-theorem outputCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
+theorem n01a_outputCellSquare_nonneg {D : ReferenceData} (hab : D.a ≤ D.b)
     (γ M : ℝ) (f : PolarPoint → ℝ) (m : ℕ) : 0 ≤ outputCellSquare D γ M f m :=
-  mul_nonneg (Real.exp_pos _).le (referenceCellSquare_nonneg hab m f)
+  mul_nonneg (Real.exp_pos _).le (n01a_referenceCellSquare_nonneg hab m f)
 
 /-- Any positive attenuation exponent absorbs either sign of the fixed
 coefficient loss, uniformly over all physical cell indices. -/
@@ -62,10 +62,10 @@ theorem exists_source_cell_square_bound {D : ReferenceData} (hab : D.a ≤ D.b)
   refine ⟨C, hC, fun f hf => ?_⟩
   have hb (m : ℕ) : referenceCellSquare D m f ≤ C * sourceCellSquare D γ M f m := by
     have h := mul_le_mul_of_nonneg_right (hw (D.cellIndex m))
-      (referenceCellSquare_nonneg hab m f)
+      (n01a_referenceCellSquare_nonneg hab m f)
     simpa only [one_mul, sourceCellSquare, mul_assoc] using h
   have hs : Summable (fun m => referenceCellSquare D m f) :=
-    Summable.of_nonneg_of_le (fun m => referenceCellSquare_nonneg hab m f) hb
+    Summable.of_nonneg_of_le (fun m => n01a_referenceCellSquare_nonneg hab m f) hb
       (hf.mul_left C)
   refine ⟨hs, ?_⟩
   simpa only [tsum_mul_left] using hs.tsum_le_tsum hb (hf.mul_left C)

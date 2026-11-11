@@ -45,7 +45,7 @@ theorem exists_reference_eigenfield_weighted_realizations {D : ReferenceData}
       referenceGraph_pure_row_mode_eq hgeo hpart hkernel hborder hγ hcore hgraph
   obtain ⟨Cnormal, hCnormal, hnormal⟩ := hplus.2.2.2.2
   obtain ⟨ur, hur, hreal, _⟩ := hnormal F 0 hF (weakAngularDerivative_zero D)
-    (sourceMember_pure_row D (referenceBeta + ε) M₀ 0)
+    (n01a_sourceDerivativeMember_zero D (referenceBeta + ε) M₀)
   refine ⟨ε, M₁, hε, hεsmall, hvalue, ?_⟩
   exact weakNormalDerivative_reference_output hgeo.2.1.le hpart hgeo.2.2.2.1
     hur hmode hreal

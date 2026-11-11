@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Statements.Nonlinear
+import ContinuousFlexibility.Radial.ReferenceCellAlgebra
 
 /-!
 # Normalization of the reference height
@@ -14,12 +15,6 @@ namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory
 open scoped ContDiff Topology
-
-theorem radialAngularMean_const_mul (c : ℝ) (f : ℝ → ℝ) :
-    radialAngularMean (fun θ => c * f θ) = c * radialAngularMean f := by
-  unfold radialAngularMean
-  rw [intervalIntegral.integral_const_mul]
-  ring
 
 theorem radialAngularMean_cosineMode (j : ℕ) (hj : 0 < j) :
     radialAngularMean (Radial.cosineMode j) = 0 := by
