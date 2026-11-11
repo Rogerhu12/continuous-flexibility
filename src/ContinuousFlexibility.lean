@@ -363,3 +363,13 @@ import ContinuousFlexibility.Scalar.S05CalculusProof
 import ContinuousFlexibility.Blueprint.ScalarCalculus
 import ContinuousFlexibility.Radial.R07BandSelection
 import ContinuousFlexibility.Radial.R07JoinParameter
+import ContinuousFlexibility.Radial.R07AngleScale
+import ContinuousFlexibility.Radial.R07DeepTailBridge
+import ContinuousFlexibility.Radial.R07DeepTailChange
+import ContinuousFlexibility.Radial.R07DeepTailDensity
+import ContinuousFlexibility.Radial.R07JoinContrast
+import ContinuousFlexibility.Radial.R07JoinParameterJets
+import ContinuousFlexibility.Radial.R07JoinSmallness
+import ContinuousFlexibility.Radial.R07LogGermParameter
+import ContinuousFlexibility.Radial.R07MorseJoinParameters
+import ContinuousFlexibility.Radial.R07RadialODE

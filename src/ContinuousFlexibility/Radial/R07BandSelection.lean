@@ -82,7 +82,9 @@ theorem exists_r07_height_tolerance (T : Statements.MorseChainData) {C : ℝ}
           ring
     _ = ∑' p : R07BandFrequency T C,
         ENNReal.ofReal (192 * (b * exp (-(p.1.1 : ℝ) ^ 2))) :=
-          tsum_two_endpoints_half _ (fun _ => by positivity)
+          tsum_two_endpoints_half
+            (fun p : R07BandFrequency T C => 192 * (b * exp (-(p.1.1 : ℝ) ^ 2)))
+            (fun p : R07BandFrequency T C => by positivity)
     _ < 1 := hsum
 
 /-- The two-endpoint tolerance needs no extra arithmetic assumption for a

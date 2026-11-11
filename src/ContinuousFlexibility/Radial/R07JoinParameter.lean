@@ -25,6 +25,7 @@ private theorem weighted_deriv_eqOn_of_germs {s t : Set ℝ} {q f g : ℝ → �
     (hs : ∀ x ∈ s, q x ≠ 0 → x ∈ t) :
     EqOn (fun x => q x * deriv f x) (fun x => q x * deriv g x) s := by
   intro x hx
+  dsimp only
   by_cases hq : q x = 0
   · rw [hq, zero_mul, zero_mul]
   · rw [(hg x (hs x hx hq)).deriv_eq]
@@ -158,10 +159,23 @@ theorem morseJoinLog_add_const {a b hL hR : ℝ} {fL fR : ℝ → ℝ}
   have hq : Continuous (morseJoinRemainder a b hL hR) :=
     (continuous_const.sub (contDiff_morseJoinLeftWeight a hL).continuous).sub
       (contDiff_morseJoinRightWeight b hR).continuous
+  have hqInt : IntervalIntegrable
+      (fun t => ((cR - cL) / morseJoinDenominator a b hL hR) *
+        morseJoinRemainder a b hL hR t) volume a x :=
+    (continuous_const.mul hq).intervalIntegrable a x
+  have hInt : (∫ t in a..x, morseJoinSlope a b hL hR fL fR t +
+      ((cR - cL) / morseJoinDenominator a b hL hR) * morseJoinRemainder a b hL hR t) =
+      (∫ t in a..x, morseJoinSlope a b hL hR fL fR t) +
+        ((cR - cL) / morseJoinDenominator a b hL hR) *
+          (∫ t in a..x, morseJoinRemainder a b hL hR t) := by
+    calc
+      _ = (∫ t in a..x, morseJoinSlope a b hL hR fL fR t) +
+          (∫ t in a..x, ((cR - cL) / morseJoinDenominator a b hL hR) *
+            morseJoinRemainder a b hL hR t) :=
+        intervalIntegral.integral_add (hS.intervalIntegrable a x) hqInt
+      _ = _ := by rw [intervalIntegral.integral_const_mul]
   simp only [morseJoinLog, morseJoinSlope_add_const]
-  rw [intervalIntegral.integral_add (hS.intervalIntegrable a x)
-      ((continuous_const.mul hq).intervalIntegrable a x),
-    intervalIntegral.integral_const_mul]
+  rw [hInt]
   unfold morseJoinHeightCoordinate
   ring
 
@@ -205,6 +219,6 @@ theorem continuous_morseJoinProfile_add_const {X : Type*} [TopologicalSpace X]
     {cL cR x : X → ℝ} (hCL : Continuous cL) (hCR : Continuous cR) (hx : Continuous x) :
     Continuous (fun z => morseJoinProfile a b hL hR
       (fun y => fL y + cL z) (fun y => fR y + cR z) (x z)) :=
-  (continuous_morseJoinLog_add_const hfL hfR hCL hCR hx).exp
+  Real.continuous_exp.comp (continuous_morseJoinLog_add_const hfL hfR hCL hCR hx)
 
 end ContinuousFlexibility.Radial
