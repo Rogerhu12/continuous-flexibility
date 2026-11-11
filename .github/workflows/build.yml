@@ -5,13 +5,13 @@ name: Build
 # cancels the running build.
 on:
   push:
-    branches: [main]
+    branches: [main, 'line/**']
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write # upload the precompiled build to the `lake-cache` release (main only)
 
 concurrency:
   group: build-${{ github.ref }}
@@ -75,14 +75,20 @@ jobs:
           total=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)
           built=$(find .lake/build/lib/lean/ContinuousFlexibility -name '*.olean' ! -name '*.server.olean' ! -name '*.private.olean' | wc -l)
           echo "modules compiled / total: $built / $total"
-      - name: Print axioms of the endpoint
+      - name: Blueprint status and endpoint axioms
         shell: bash
+        run: lake env lean scripts/BlueprintStatus.lean
+      - name: Publish the precompiled build for line sandboxes
+        if: github.ref == 'refs/heads/main' && success()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          cat > EndpointAxioms.lean <<'EOF'
-          import FlexibleSphereSolution
-          #print axioms FlexibleSphere.exists_closedBending_of_core
-          EOF
-          lake env lean EndpointAxioms.lean
+          find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
+          tar --zstd -cf lake-build.tar.zst .lake/build
+          ls -lh lake-build.tar.zst
+          git rev-parse HEAD > lake-build.commit
+          gh release upload lake-cache lake-build.tar.zst lake-build.commit --clobber -R "$GITHUB_REPOSITORY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

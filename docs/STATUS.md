@@ -20,7 +20,7 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 | Modules in the root import | 319 |
 | Lines of Lean under `src/` | 87,633 |
 | Axiom audit (`lake build`, 3751 jobs) | passed: 10,671 declarations, 8,043 theorems |
-| Blueprint statements proved / total | blueprint v2 not written yet |
+| Blueprint statements proved / total | 6 / 35 (S01, S02, R01, R02, R03, R04) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
 | Modules on the module system | 1 (the Challenge) of 329 |
 
@@ -44,8 +44,19 @@ The 8 modules that do not compile are unfinished files of the earlier workflow:
 the weighted spaces and fixed-type inverse (§7–§8), the nonlinear solution (§9) and its
 endpoint regularity (§10).
 
-The earlier statement layer (`Statements/`, 58 target propositions) has no assembly theorem:
-nothing proves that those targets imply the main theorem. Blueprint v2 replaces it.
+## Blueprint v2
+
+`src/ContinuousFlexibility/Blueprint/<ID>.lean` holds one theorem per node on the path to
+`Nonempty FlatAnnularCore`: the statements of its dependencies imply its own statement.
+`Blueprint/Assembly.lean` composes the 35 nodes without `sorry`, and
+`FlexibleSphere.exists_closedBending` in the Solution follows; it depends on `sorryAx` exactly
+through the open nodes. `scripts/BlueprintStatus.lean` prints proved / total.
+
+Open (29): S03, S04, S05, R05–R12, W01–W03, H01–H03, N01–N12. One task file each in `docs/tasks/`.
+
+The node statements are those of the earlier statement layer, so the assembly holds by form and
+does not test whether each node can be derived from its dependencies. Each line reports a clause
+it finds false or underivable; N12 (the last link) is the first real test.
 
 ## Size estimate
 
@@ -73,14 +84,12 @@ bottom-up, and the full rebuild belongs in CI.
 
 ## CI
 
-`.github/workflows/build.yml` is written and has never run: there is no GitHub remote yet.
+Repository: https://github.com/Rogerhu12/continuous-flexibility. `.github/workflows/build.yml` runs on
+`main`, on `line/**` branches and on pull requests; no run has finished yet.
 
 ## Next
 
-1. Create the GitHub repository, push, get the first green CI run with cache.
-2. Module-system migration of the existing files on a branch, verified by CI.
-3. Blueprint v2: necessary intermediate statements in paper order as
-   "for all inputs of the previous step there is the output of this step", proofs `sorry`,
-   assembly theorem to the Challenge proved first.
+1. First green CI run on `main`; it publishes the compiled build to the `lake-cache` release.
+2. Lines on the 29 open nodes, one branch `line/<ID>` each (`docs/tasks/README.md`).
+3. Module-system migration of the existing files on a branch, verified by CI.
 4. `formalization.yaml`, `LICENSE`.
-5. One task file per statement; start the lines.
