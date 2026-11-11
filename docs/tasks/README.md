@@ -215,9 +215,15 @@ Then open a draft pull request into `main` titled `<Task>`.
    - Check access first: `git ls-remote https://github.com/Rogerhu12/math-research.git HEAD`. If it
      fails, your credentials do not cover that repository: write "no access to math-research" at the
      end of your pull request's final report and stop; the lead will tell the author.
-   - Clone it, pull `main`, read its root `README.md` and the topic's `README.md`, change the topic's
-     row in `QUEUE.md` to 进行中（会话名/日期）, push, and start the research. From then on follow
-     that repository's rules, not these.
+   - Clone it and pull `main`. Read its root `README.md` in full, including the authorization section
+     and every rule, and the topic's `README.md`. Change the topic's row in `QUEUE.md` to
+     进行中（会话名/日期）, push, and start the research. From then on follow that repository's rules,
+     not these.
+   - Keep going until the completion standard in the topic's `README.md` is met. Do not stop at a
+     stage report, an intermediate result or a "suggested next step" to wait for a reply; reaching a
+     time limit is not a reason to stop. When a subproblem is done, take the next one in the topic's
+     `open.md`. Wrap up only when the topic is truly complete or the conversation is close to its
+     length limit, and update `HANDOFF.md` before you wrap up.
    - Never write a token into any file, commit, log, HANDOFF or note, and never repeat it in a reply.
      Do not upload PDFs, do not render pages as images, keep each file under 5 MB.
 
