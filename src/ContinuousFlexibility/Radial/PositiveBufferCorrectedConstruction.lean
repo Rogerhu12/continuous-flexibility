@@ -48,7 +48,9 @@ theorem positiveBuffer_corrected_scalar_norm_bound {A m P F B₀ σ : ℝ}
       field_simp [hm.ne', (sqrt_pos.mpr hA).ne']
       <;> ring
     _ ≤ 1 / m + (2 * P * m) * (F * B₀ * exp (-σ)) :=
-      add_le_add_left (mul_le_mul_of_nonneg_right hmass (by positivity)) _
+      add_le_add le_rfl
+        (mul_le_mul_of_nonneg_right hmass
+          (show 0 ≤ F * B₀ * exp (-σ) from mul_nonneg (mul_nonneg hF hB₀) (exp_pos _).le))
     _ = 1 / m + (2 * P * F) * (B₀ * m * exp (-σ)) := by ring
     _ ≤ 1 / m + (2 * P * F) * (1 / m) :=
       add_le_add le_rfl
@@ -146,9 +148,9 @@ theorem corrected_trace_error (i j : Fin 2) :
       (D.profiles.A_pos hB j).le (buffer_mass_pos hB i).le (buffer_mass_pos hB j).le
       (by linarith) hF hB₀ (hAupper i) (hAupper j)
 
+include hB H hH hHnorm hP hF hAupper hsource in
 /-- All corrected data are supplied by the actual Green columns and the
 given full inverse. -/
-include hB H hH hHnorm hP hF hAupper hsource in
 theorem correctedData_nonempty
     (hsmall : ∀ i, B.B₀ * B.mass i ^ 2 * exp (-B.action i) ≤ 1) :
     Nonempty (PositiveBufferCorrectedData B D.profiles.A D.profiles.alphaOut
