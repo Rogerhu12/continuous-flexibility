@@ -139,6 +139,39 @@ private theorem normalizedCoefficientPowerField_value
     · simp only [normalizedCoefficientPowerField, coefficientPowerFormula, if_neg h0, if_pos h1] <;> rfl
     · simp only [normalizedCoefficientPowerField, coefficientPowerFormula, if_neg h0, if_neg h1] <;> rfl
 
+/-- Package the actual input families and perform the final transport
+with an abstract source, before specializing to the projective state. -/
+private theorem coefficientPowerBounds_of_inputs
+    (hHbounded : ∃ R : ℝ, ∀ q ∈ Ω, 0 ≤ H q ∧ H q ≤ R)
+    (rad : Fin 3 → X → PolarPoint → ℝ) (pol : Fin 5 → X → PolarPoint → ℝ)
+    (radReg : ∀ j, MixedJetRegularity U Ω (rad j))
+    (radBound : ∀ j, MixedPowerBounds p center base loss U Ω H E (rad j))
+    (polReg : ∀ j, MixedJetRegularity U Ω (pol j))
+    (polBound : ∀ j, MixedPowerBounds p center base loss U Ω H E (pol j))
+    (radiusInverse : PowerControlledField p center base loss U Ω H E)
+    (f : Fin 3 → X → PolarPoint → ℝ) (fReg : ∀ i, MixedJetRegularity U Ω (f i))
+    (hDcompact : ∀ x ∈ U, MapsTo (fun q => normalizedPowerDiscriminantValue
+      (rad 0 x q) (pol 0 x q) (pol 1 x q)) Ω (Icc (1 / 2 : ℝ) (3 / 2)))
+    (hQcompact : ∀ x ∈ U, MapsTo (fun q => normalizedPowerQuotientValue
+      (rad 0 x q) (rad 2 x q) (pol 0 x q) (pol 4 x q)) Ω (Icc (1 / 2 : ℝ) (3 / 2)))
+    (hformula : ∀ i x, x ∈ U → ∀ q, q ∈ Ω →
+      coefficientPowerFormula i (rad 0 x q) (rad 1 x q) (rad 2 x q)
+        (pol 0 x q) (pol 1 x q) (pol 3 x q) (pol 4 x q) (radiusInverse.value x q) =
+          f i x q) (i : Fin 3) :
+    MixedPowerBounds p center base loss U Ω H E (f i) := by
+  obtain ⟨R, hR⟩ := hHbounded
+  let rd : Fin 3 → PowerControlledField p center base loss U Ω H E :=
+    fun j => ⟨rad j, radReg j, radBound j⟩
+  let pl : Fin 5 → PowerControlledField p center base loss U Ω H E :=
+    fun j => ⟨pol j, polReg j, polBound j⟩
+  let F := normalizedCoefficientPowerField hU hΩ hE hR
+    (rd 0) (rd 1) (rd 2) (pl 0) (pl 1) (pl 3) (pl 4) radiusInverse hDcompact hQcompact i
+  apply F.bounds.congr F.regular (fReg i) hΩ
+  intro x hx q hq
+  exact (normalizedCoefficientPowerField_value hU hΩ hE hR
+    (rd 0) (rd 1) (rd 2) (pl 0) (pl 1) (pl 3) (pl 4)
+      radiusInverse hDcompact hQcompact i x q).trans (hformula i x hx q hq)
+
 end ControlledAlgebra
 
 end ContinuousFlexibility.Analysis
@@ -221,6 +254,64 @@ private theorem stateCoefficientPowerFormula_eq
       simp only [div_eq_mul_inv, pow_two]
       ring
 
+
+private theorem materialHeight_threeQuarter_bounded
+    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T) :
+    ∃ R : ℝ, ∀ q ∈ annularOpen D,
+      0 ≤ T.H q.1 ^ (3 / 4 : ℝ) ∧ T.H q.1 ^ (3 / 4 : ℝ) ≤ R := by
+  obtain ⟨R, hR, hb⟩ :=
+    materialHeight_E0_weight_bounded hT (γ := (3 / 4 : ℝ)) (by norm_num) 0
+  refine ⟨R, fun q hq => ⟨Real.rpow_nonneg (hT.2.1 q.1 hq.1).2.1.le _, ?_⟩⟩
+  simpa only [Real.rpow_zero, mul_one] using hb q.1 hq.1
+
+private theorem stateCoefficientInputs_discriminant_mem
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (hA : N01PartA D T S C)
+    (hB : N01PartB D S C base ε) :
+    ∀ z ∈ stateNeighborhood S C base ε, MapsTo (fun q => normalizedPowerDiscriminantValue
+      (coefficientRadialInput D S C 0 z.1 q.1)
+      (z.2 * stateUPolarInput S 0 z.1 q) (z.2 * stateUPolarInput S 1 z.1 q))
+        (annularOpen D) (Icc (1 / 2 : ℝ) (3 / 2)) := by
+  intro z hz q hq
+  change normalizedPowerDiscriminantValue (stateProfile D S C z.1 q.1)
+    (z.2 * heightRadial (stateU S z.1) q) (z.2 * heightAngular (stateU S z.1) q) ∈ _
+  rw [stateNormalizedPowerDiscriminant_eq hS hT hA z q]
+  exact (n01PartB_denominator_bounds hS hA.2.1 hB hz hq).2.2.2.2
+
+private theorem stateCoefficientInputs_quotient_mem
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (hA : N01PartA D T S C)
+    (hB : N01PartB D S C base ε) :
+    ∀ z ∈ stateNeighborhood S C base ε, MapsTo (fun q => normalizedPowerQuotientValue
+      (coefficientRadialInput D S C 0 z.1 q.1) (coefficientRadialInput D S C 2 z.1 q.1)
+      (z.2 * stateUPolarInput S 0 z.1 q) (z.2 * stateUPolarInput S 4 z.1 q))
+        (annularOpen D) (Icc (1 / 2 : ℝ) (3 / 2)) := by
+  intro z hz q hq
+  change normalizedPowerQuotientValue (stateProfile D S C z.1 q.1)
+    (stateProfile D S C z.1 q.1)⁻¹ (z.2 * heightRadial (stateU S z.1) q)
+    (z.2 * angularPartial (heightAngular (stateU S z.1)) q) ∈ _
+  rw [stateNormalizedPowerQuotient_eq hS hT hA hB hz hq]
+  have hb := n01PartB_denominator_bounds hS hA.2.1 hB hz hq
+  constructor <;> linarith [hb.2.2.1, hb.2.2.2.1]
+
+private theorem stateCoefficientInputs_formula_eq
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (hA : N01PartA D T S C)
+    (hB : N01PartB D S C base ε) :
+    ∀ i z, z ∈ stateNeighborhood S C base ε → ∀ q, q ∈ annularOpen D →
+      coefficientPowerFormula i
+        (coefficientRadialInput D S C 0 z.1 q.1)
+        (coefficientRadialInput D S C 1 z.1 q.1)
+        (coefficientRadialInput D S C 2 z.1 q.1)
+        (z.2 * stateUPolarInput S 0 z.1 q) (z.2 * stateUPolarInput S 1 z.1 q)
+        (z.2 * stateUPolarInput S 3 z.1 q) (z.2 * stateUPolarInput S 4 z.1 q) q.1⁻¹ =
+          coefficientOriginalField D S C i z q := by
+  intro i z hz q hq
+  exact stateCoefficientPowerFormula_eq hS hT hA hB hz hq i
+
 theorem originalCoefficient_mixedPowerBounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -242,57 +333,26 @@ theorem originalCoefficient_mixedPowerBounds
       (coefficientOriginalField D S C i) := by
   letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
   letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
-  have hD : RadialProfileGeometry D := hA.1.1.choose_spec.1
-  let U := stateNeighborhood S C base ε
-  let Ω := annularOpen D
-  have hU : IsOpen U := isOpen_stateNeighborhood S C base ε
-  have hΩ : IsOpen Ω := isOpen_Ioo.prod isOpen_univ
-  have hEq (q : PolarPoint) (hq : q ∈ Ω) : 1 ≤ T.E0 q.1 := hE q.1 hq.1
-  obtain ⟨RH, hRH, hRHb⟩ :=
-    materialHeight_E0_weight_bounded hT (γ := (3 / 4 : ℝ)) (by norm_num) 0
-  have hH (q : PolarPoint) (hq : q ∈ Ω) :
-      0 ≤ T.H q.1 ^ (3 / 4 : ℝ) ∧ T.H q.1 ^ (3 / 4 : ℝ) ≤ RH := by
-    refine ⟨Real.rpow_nonneg (hT.2.1 q.1 hq.1).2.1.le _, ?_⟩
-    simpa only [Real.rpow_zero, mul_one] using hRHb q.1 hq.1
-  let PC := PowerControlledField (pairGrading (stateGrading S) realGrading)
-    (C.referenceState, 0) base loss U Ω
-    (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1)
-  let rd : Fin 3 → PC := fun j =>
-    ⟨fun z q => coefficientRadialInput D S C j z.1 q.1,
-      coefficientRadialInput_regular hS hT hA hB j,
-      coefficientRadialInput_powerBounds hS hT hA hε hB hE hloc hχloc j⟩
-  let pl : Fin 5 → PC := fun j =>
-    ⟨fun z q => z.2 * stateUPolarInput S j z.1 q,
-      coefficientPolarInput_regular hS hT hD.1 C base ε j,
-      coefficientPolarInput_powerBounds hS hT hD.1 C base loss hε1 hE hI j⟩
-  let ri : PC := coefficientRadiusInverse_controlled hT hD C base loss ε hE
-  have hdmap : ∀ z ∈ U, MapsTo (fun q => normalizedPowerDiscriminantValue
-      ((rd 0).value z q) ((pl 0).value z q) ((pl 1).value z q)) Ω
-        (Icc (1 / 2 : ℝ) (3 / 2)) := by
-    intro z hz q hq
-    change normalizedPowerDiscriminantValue (stateProfile D S C z.1 q.1)
-      (z.2 * heightRadial (stateU S z.1) q) (z.2 * heightAngular (stateU S z.1) q) ∈ _
-    rw [stateNormalizedPowerDiscriminant_eq hS hT hA z q]
-    exact (n01PartB_denominator_bounds hS hA.2.1 hB hz hq).2.2.2.2
-  have hqmap : ∀ z ∈ U, MapsTo (fun q => normalizedPowerQuotientValue
-      ((rd 0).value z q) ((rd 2).value z q) ((pl 0).value z q) ((pl 4).value z q)) Ω
-        (Icc (1 / 2 : ℝ) (3 / 2)) := by
-    intro z hz q hq
-    change normalizedPowerQuotientValue (stateProfile D S C z.1 q.1)
-      (stateProfile D S C z.1 q.1)⁻¹ (z.2 * heightRadial (stateU S z.1) q)
-      (z.2 * angularPartial (heightAngular (stateU S z.1)) q) ∈ _
-    rw [stateNormalizedPowerQuotient_eq hS hT hA hB hz hq]
-    have hb := n01PartB_denominator_bounds hS hA.2.1 hB hz hq
-    constructor <;> linarith [hb.2.2.1, hb.2.2.2.1]
-  let F := normalizedCoefficientPowerField hU hΩ hEq hH
-    (rd 0) (rd 1) (rd 2) (pl 0) (pl 1) (pl 3) (pl 4) ri hdmap hqmap i
-  let J : MixedJetRegularity U Ω (coefficientOriginalField D S C i) :=
-    ⟨fun z hz => contDiffOn_coefficientOriginalField hS hT hA hB i hz,
-      n01_originalCoefficientMixedSmoothDirections hS hT hA hB i⟩
-  apply F.bounds.congr F.regular J hΩ
-  intro z hz q hq
-  exact (normalizedCoefficientPowerField_value hU hΩ hEq hH
-    (rd 0) (rd 1) (rd 2) (pl 0) (pl 1) (pl 3) (pl 4) ri hdmap hqmap i z q).trans
-      (stateCoefficientPowerFormula_eq hS hT hA hB hz hq i)
+  exact coefficientPowerBounds_of_inputs
+    (X := AnnularState S × ℝ) (p := pairGrading (stateGrading S) realGrading)
+    (center := (C.referenceState, 0)) (base := base) (loss := loss)
+    (U := stateNeighborhood S C base ε) (Ω := annularOpen D)
+    (H := fun q => T.H q.1 ^ (3 / 4 : ℝ)) (E := fun q => T.E0 q.1)
+    (isOpen_stateNeighborhood S C base ε) (isOpen_Ioo.prod isOpen_univ)
+    (fun q hq => hE q.1 hq.1) (materialHeight_threeQuarter_bounded hT)
+    (fun j z q => coefficientRadialInput D S C j z.1 q.1)
+    (fun j z q => z.2 * stateUPolarInput S j z.1 q)
+    (fun j => coefficientRadialInput_regular hS hT hA hB j)
+    (fun j => coefficientRadialInput_powerBounds hS hT hA hε hB hE hloc hχloc j)
+    (fun j => coefficientPolarInput_regular hS hT hA.1.1.choose_spec.1.1 C base ε j)
+    (fun j => coefficientPolarInput_powerBounds
+      hS hT hA.1.1.choose_spec.1.1 C base loss hε1 hE hI j)
+    (coefficientRadiusInverse_controlled hT hA.1.1.choose_spec.1 C base loss ε hE)
+    (coefficientOriginalField D S C)
+    (fun j => ⟨fun z hz => contDiffOn_coefficientOriginalField hS hT hA hB j hz,
+      n01_originalCoefficientMixedSmoothDirections hS hT hA hB j⟩)
+    (stateCoefficientInputs_discriminant_mem hS hT hA hB)
+    (stateCoefficientInputs_quotient_mem hS hT hA hB)
+    (stateCoefficientInputs_formula_eq hS hT hA hB) i
 
 end ContinuousFlexibility.Statements
