@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N04FlowJetsTarget
+import ContinuousFlexibility.Analysis.N04FlowJetsProof
 
 /-!
 # N04Coordinates: actual mixed-parameter flow estimates
@@ -18,9 +18,13 @@ namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Statements
 
-theorem N04CoordinatesFlowJets : N04FlowJetsTarget := by
-  sorry
+theorem N04CoordinatesFlowJets : N04FlowJetsTarget :=
+  ContinuousFlexibility.Analysis.n04FlowJetsTarget_proof
 
 end ContinuousFlexibility.Blueprint
 
+/--
+info: 'ContinuousFlexibility.Blueprint.N04CoordinatesFlowJets' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
 #print axioms ContinuousFlexibility.Blueprint.N04CoordinatesFlowJets

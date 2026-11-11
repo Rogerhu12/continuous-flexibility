@@ -148,7 +148,10 @@ theorem exists_n04Flow_spatialJet_polynomial (Λ : ℝ) (n : ℕ) :
                   omega
                 have hprev := hQbound (c.partSize j - 1) hj
                   M hM F hF hperiod hraw hangular Θ hΘ r hr q hq
-                simpa only [Nat.sub_add_cancel (c.partSize_pos j)] using hprev
+                have horder : c.partSize j - 1 + 1 = c.partSize j :=
+                  Nat.sub_add_cancel (c.partSize_pos j)
+                rw [horder] at hprev
+                exact hprev
               exact mul_le_mul hrawc
                 (Finset.prod_le_prod₀
                   (fun _ _ => add_nonneg zero_le_one (norm_nonneg _))
