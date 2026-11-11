@@ -99,7 +99,7 @@ private theorem two_is_not_nat_square : ¬ ∃ k : ℕ, k ^ 2 = 2 := by
 
 /-- The actual glued construction establishes all return margins on the
 same reference as its global second-mode solution. -/
-theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry
+theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry_transport
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
     {c d : ℝ} {uL uR : ℝ → ℝ} {K : SeedCentralCutoff} {q : ℝ}
     (G : SeedGluedPair D c d uL uR K q)
@@ -111,9 +111,15 @@ theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry
     ∃ E : ReferenceData,
       E.a = G.radiusL * D.a ∧ E.b = G.radiusR * D.b ∧
       E.w = G.profile ∧ E.phi = G.height ∧
-      IsAccumulatingProfile E ∧ RadialConstructionGeometry E := by
-  obtain ⟨E₀, hEa, hEb, hEw, hEphi, hAccum₀, e, heCells, heIndex, heLeft, heRight⟩ :=
-    exists_accumulating_reference_of_two_tail_surgery_with_cells
+      IsAccumulatingProfile E ∧ RadialConstructionGeometry E ∧
+      ∃ e : ℝ ≃o ℝ, ∃ N : ℕ, 1 ≤ N ∧
+        E.cellIndex = (fun m => max (D.cellIndex m) N) ∧
+        (∀ m, e ⁻¹' D.cells m ⊆ E.cells m) ∧
+        E.localizer = (fun m r => D.localizer m (e r)) ∧
+        (∀ r, r ≤ c → e.symm r = G.radiusL * r) ∧
+        (∀ r, d ≤ r → e.symm r = G.radiusR * r) := by
+  obtain ⟨E₀, hEa, hEb, hEw, hEphi, hAccum₀, e, heCells, heIndex, heLocalizer, heLeft, heRight⟩ :=
+    exists_accumulating_reference_of_two_tail_surgery_with_transport
       ⟨C, hreal.accumulating⟩ G.radiusL_pos G.radius_order G.heightL_pos G.heightR_pos
       hc.1 hcd hd.2 G.geometry
       (fun r hr => (G.left_tail r hr).1) (fun r hr => (G.right_tail r hr).1)
@@ -222,14 +228,43 @@ theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry
             [radialTailInterval, ↓reduceIte, ← hdseam] using ht)).1)
         (by simpa only [radialTailInterval, ↓reduceIte, ← hdseam] using hrightCells) hindex
         (by simpa only [radialTailInterval, ↓reduceIte, ← hdseam] using hs) hsneg
+  have hconstruction : RadialConstructionGeometry (saturateReferenceCells F) := by
+    constructor
+    · intro r hr
+      change radialJacobi 4 E₀.w E₀.phi r = 0
+      rw [hEw, hEphi]
+      apply G.equation r
+      change E₀.a < r ∧ r < E₀.b at hr
+      simpa only [Set.mem_Ioo, hEa, hEb] using hr
+    · exact radialReturnMargins_saturate_of_model_components hmodels
   refine ⟨saturateReferenceCells F, hEa, hEb, hEw, hEphi,
-    isAccumulatingProfile_saturateReferenceCells hF, ?_, ?_⟩
-  · intro r hr
-    change radialJacobi 4 E₀.w E₀.phi r = 0
-    rw [hEw, hEphi]
-    apply G.equation r
-    change E₀.a < r ∧ r < E₀.b at hr
-    simpa only [Set.mem_Ioo, hEa, hEb] using hr
-  · exact radialReturnMargins_saturate_of_model_components hmodels
+    isAccumulatingProfile_saturateReferenceCells hF, hconstruction,
+    e, N, hN, ?_, ?_, heLocalizer, heLeft, heRight⟩
+  · funext m
+    exact hindex m
+  · intro m r hr
+    apply subset_saturateReferenceCells F m
+    change r ∈ E₀.cells m
+    rw [heCells]
+    exact hr
+
+/-- The original constructor retains its public conclusion. -/
+theorem SeedGluedPair.exists_accumulating_reference_with_construction_geometry
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
+    {c d : ℝ} {uL uR : ℝ → ℝ} {K : SeedCentralCutoff} {q : ℝ}
+    (G : SeedGluedPair D c d uL uR K q)
+    (hreal : MorseChainRealization T σ D C) (hσ : ∀ n, 1 ≤ σ n ∧ σ n ≤ 2)
+    (hq : 0 < q) {start : ℕ} (hstart : T.index ≤ start)
+    (hcseam : c = morseChainSeam T false start)
+    (hdseam : d = morseChainSeam T true start)
+    (hc : c ∈ radialCore D) (hd : d ∈ radialCore D) (hcd : c < d) :
+    ∃ E : ReferenceData,
+      E.a = G.radiusL * D.a ∧ E.b = G.radiusR * D.b ∧
+      E.w = G.profile ∧ E.phi = G.height ∧
+      IsAccumulatingProfile E ∧ RadialConstructionGeometry E := by
+  obtain ⟨E, ha, hb, hw, hphi, hacc, hconstruction, _⟩ :=
+    G.exists_accumulating_reference_with_construction_geometry_transport
+      hreal hσ hq hstart hcseam hdseam hc hd hcd
+  exact ⟨E, ha, hb, hw, hphi, hacc, hconstruction⟩
 
 end ContinuousFlexibility.Radial
