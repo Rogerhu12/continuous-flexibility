@@ -49,17 +49,22 @@ theorem solve_coupled_exists_normalized_zero
   have h10' := h10
   rcases h10' with ⟨_, _, _, _, hRight, hQTame⟩
   have href := h1.2.2.1
-  letI : ∀ n, CompleteSpace ((S.height (3 / 4 : ℝ)).level n) := fun n =>
+  let _ : ∀ n, CompleteSpace ((S.height (3 / 4 : ℝ)).level n) := fun n =>
     ((hS.1 (3 / 4 : ℝ)).2.1 n).completeSpace_coe
-  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
+  let _ : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
     ((hS.2.1 (3 / 4 : ℝ)).2.1 n).completeSpace_coe
-  letI : CompleteSpace (StateDirections S) := hclosed.completeSpace_coe
+  let _ : CompleteSpace (StateDirections S) := hclosed.completeSpace_coe
   let row : StateDirections S →L[ℝ] ℝ :=
     sectorReferenceRowCLM (D := D) (T := T) (S := S) h1.1 hT hS
   let W : Submodule ℝ (StateDirections S) := row.toLinearMap.ker
-  letI : CompleteSpace W := row.isClosed_ker.completeSpace_coe
+  letI : AddCommGroup W := Submodule.addCommGroup W
+  letI : Module ℝ W := Submodule.module W
+  let _ : CompleteSpace W := row.isClosed_ker.completeSpace_coe
   let p : ℕ → Seminorm ℝ W := fun n => (sectorGrading S n).comp W.subtype
-  have hp : Monotone p := fun _ _ h x => solve_sectorGrading_monotone S h x.val
+  have hp : Monotone p := by
+    intro i j hij x
+    simpa only [p, Seminorm.comp_apply, Submodule.subtype_apply] using
+      solve_sectorGrading_monotone S hij x.val
   have hwp : WithSeminorms p :=
     (Topology.IsInducing.subtypeVal).withSeminorms (f := W.subtype)
       (solve_sectorGrading_withSeminorms S)
