@@ -72,7 +72,7 @@ theorem exists_n01aOpticalPeak {q : ℝ → ℝ} {l h L δ : ℝ}
     ∃ p ∈ Icc l h, 4 * δ ≤ q p := by
   by_contra hex
   push_neg at hex
-  have hint := hq.sqrt.intervalIntegrable_of_Icc hlh.le
+  have hint := hq.sqrt.intervalIntegrable_of_Icc (μ := volume) hlh.le
   have hconst : Continuous (fun _ : ℝ => Real.sqrt (4 * δ)) := continuous_const
   have hupper := intervalIntegral.integral_mono_on (μ := volume) hlh.le hint
     (hconst.intervalIntegrable l h)
@@ -125,8 +125,8 @@ theorem n01aOpticalRawControl_variation_lower {w : ℝ → ℝ} {l h δ K β p :
   have hsub : Icc (p - δ / K) (p + δ / K) ⊆ Icc l h :=
     Icc_subset_Icc hL.le hR.le
   have hc := continuousOn_n01aOpticalKernel hl hδ hw hpos
-  have hint := hc.intervalIntegrable_of_Icc hlh.le
-  have hsmall := (hc.mono hsub).intervalIntegrable_of_Icc hbandle
+  have hint := hc.intervalIntegrable_of_Icc (μ := volume) hlh.le
+  have hsmall := (hc.mono hsub).intervalIntegrable_of_Icc (μ := volume) hbandle
   have hconst : Continuous (fun _ : ℝ => 1 / (β * K)) := continuous_const
   have hlo := intervalIntegral.integral_mono_on (μ := volume) hbandle
     (hconst.intervalIntegrable _ _) hsmall (fun r hr =>

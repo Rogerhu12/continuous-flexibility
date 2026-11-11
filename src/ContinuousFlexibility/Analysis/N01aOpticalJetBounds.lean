@@ -112,9 +112,16 @@ theorem n01aOpticalRawControl_finiteJet_bound (s : ℕ) :
         linarith [hr.2.trans_le hhβ]
       · simpa only [abs_one] using (le_add_of_nonneg_right hβ : (1 : ℝ) ≤ 1 + β)
       · simpa only [abs_zero] using (show (0 : ℝ) ≤ 1 + β by linarith)
-    rw [iteratedDeriv_n01aOpticalRawControl_eq hr s,
-      iteratedDeriv_fun_mul (contDiffAt_id : ContDiffAt ℝ s (fun x : ℝ => x) r)
-        (hg.of_le (by simp))]
+    have hmul : iteratedDeriv s
+        (fun x => x * n01aOpticalCutoff (n01aOpticalRadicand w x / δ)) r =
+        ∑ k ∈ Finset.range (s + 1), (s.choose k : ℝ) *
+          iteratedDeriv k (fun x : ℝ => x) r *
+          iteratedDeriv (s - k) (fun x => n01aOpticalCutoff (n01aOpticalRadicand w x / δ)) r := by
+      simpa only [id_eq] using
+        (iteratedDeriv_fun_mul (f := fun x : ℝ => x)
+          (g := fun x => n01aOpticalCutoff (n01aOpticalRadicand w x / δ))
+          (contDiffAt_id : ContDiffAt ℝ s (fun x : ℝ => x) r) (hg.of_le (by simp)))
+    rw [iteratedDeriv_n01aOpticalRawControl_eq hr s, hmul]
     calc
       |∑ k ∈ Finset.range (s + 1), (s.choose k : ℝ) *
           iteratedDeriv k (fun x : ℝ => x) r *

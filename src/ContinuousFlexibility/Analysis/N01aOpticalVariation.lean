@@ -70,7 +70,8 @@ theorem deriv_n01aOpticalRawControl {w : ℝ → ℝ} {l h δ r : ℝ}
   have hk := (hasDerivAt_n01aOpticalCutoff (n01aOpticalRadicand w r / δ)).comp r
     (hq.hasDerivAt.div_const δ)
   rw [(n01aOpticalRawControl_eventuallyEq hr).deriv_eq]
-  simpa only [n01aOpticalCutoffDensity, one_mul] using ((hasDerivAt_id r).mul hk).deriv
+  simpa only [n01aOpticalCutoffDensity, one_mul, Pi.mul_def,
+    Function.comp_def, id_eq] using ((hasDerivAt_id r).mul hk).deriv
 
 private theorem n01a_optical_variation_algebra {r q δ : ℝ}
     (hr : 0 < r) (hq : 0 < q) (hδ : 0 < δ) (K D z : ℝ) :
@@ -148,8 +149,10 @@ theorem n01aOpticalRawControl_variation_eq {w : ℝ → ℝ} {l h δ : ℝ}
     (∫ r in l..h, -deriv (n01aOpticalRawControl w l h δ) r /
       (2 * r * opticalSpeed w r)) =
       -(1 / 2 : ℝ) * ∫ r in l..h, n01aOpticalKernel w δ r := by
-  have hk := (continuousOn_n01aOpticalKernel hl hδ hw hpos).intervalIntegrable_of_Icc hlh.le
-  have hs := (continuousOn_deriv_n01aOpticalStepField δ hl hw hpos).intervalIntegrable_of_Icc hlh.le
+  have hk := (continuousOn_n01aOpticalKernel hl hδ hw hpos).intervalIntegrable_of_Icc
+    (μ := volume) hlh.le
+  have hs := (continuousOn_deriv_n01aOpticalStepField δ hl hw hpos).intervalIntegrable_of_Icc
+    (μ := volume) hlh.le
   have he : EqOn
       (fun r => -deriv (n01aOpticalRawControl w l h δ) r / (2 * r * opticalSpeed w r))
       (fun r => -(1 / 2 : ℝ) * n01aOpticalKernel w δ r -

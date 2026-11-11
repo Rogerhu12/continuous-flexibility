@@ -47,6 +47,7 @@ private theorem n01a_hasDerivAt_fixed_intervalIntegral
   exact h.2
 
 /-- Every radial jet can be differentiated through its actual angular mode. -/
+set_option backward.isDefEq.respectTransparency false in
 theorem hasDerivAt_referenceMode_mixedDerivative {u : PolarPoint → ℝ}
     (hu : ContDiff ℝ ∞ u) (n j : ℕ) (r : ℝ) :
     HasDerivAt (referenceMode (mixedDerivative n 0 u) j)
@@ -71,13 +72,22 @@ theorem hasDerivAt_referenceMode_mixedDerivative {u : PolarPoint → ℝ}
     simpa only [mixedDerivative, iteratedDeriv_zero, iteratedDeriv_succ] using
       (hn x).hasDerivAt.mul_const (Radial.cosineMode j θ)
   have hi := n01a_hasDerivAt_fixed_intervalIntegral hf hdf hd 0 (2 * Real.pi) r
-  simpa only [referenceMode, radialAngularMean] using hi.const_mul (2 * Real.pi)⁻¹
+  change HasDerivAt
+    (fun y => (2 * Real.pi)⁻¹ *
+      ∫ θ in 0..2 * Real.pi, mixedDerivative n 0 u (y, θ) * Radial.cosineMode j θ)
+    ((2 * Real.pi)⁻¹ *
+      ∫ θ in 0..2 * Real.pi, mixedDerivative (n + 1) 0 u (r, θ) * Radial.cosineMode j θ) r
+  exact hi.const_mul (2 * Real.pi)⁻¹
 
 theorem iteratedDeriv_referenceMode {u : PolarPoint → ℝ}
     (hu : ContDiff ℝ ∞ u) (n j : ℕ) :
     iteratedDeriv n (referenceMode u j) = referenceMode (mixedDerivative n 0 u) j := by
   induction n with
-  | zero => simp only [iteratedDeriv_zero, mixedDerivative]
+  | zero =>
+      have hm : mixedDerivative 0 0 u = u := by
+        funext p
+        simp only [mixedDerivative, iteratedDeriv_zero]
+      simp only [iteratedDeriv_zero, hm]
   | succ n ih =>
       rw [iteratedDeriv_succ, ih]
       exact funext fun r => (hasDerivAt_referenceMode_mixedDerivative hu n j r).deriv

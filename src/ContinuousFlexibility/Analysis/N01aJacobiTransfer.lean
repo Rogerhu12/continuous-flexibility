@@ -33,7 +33,11 @@ theorem hasDerivAt_n01aJacobiEnergy {u : ℝ → ℝ} (hu : ContDiff ℝ ∞ u) 
   have hdu := (contDiff_infty_iff_deriv.mp hu).2
   have h := ((hu.differentiable (by simp) r).hasDerivAt.pow 2).add
     ((hdu.differentiable (by simp) r).hasDerivAt.pow 2)
-  simpa only [n01aJacobiEnergy, Nat.cast_ofNat, pow_one] using h
+  have hf : (u ^ 2 + deriv u ^ 2 : ℝ → ℝ) = n01aJacobiEnergy u := by
+    funext x
+    simp only [Pi.add_apply, Pi.pow_apply, n01aJacobiEnergy]
+  rw [hf] at h
+  simpa only [Nat.cast_ofNat, Nat.reduceSub, pow_one] using h
 
 theorem n01a_second_deriv_of_jacobi {w u : ℝ → ℝ}
     (hw : ContDiff ℝ ∞ w) (hu : ContDiff ℝ ∞ u) {r : ℝ}
@@ -42,6 +46,10 @@ theorem n01a_second_deriv_of_jacobi {w u : ℝ → ℝ}
   have hdu := (contDiff_infty_iff_deriv.mp hu).2
   have hp := ((hw.differentiable (by simp) r).hasDerivAt.mul
     (hdu.differentiable (by simp) r).hasDerivAt).deriv
+  have hf : (w * deriv u : ℝ → ℝ) = (fun t => w t * deriv u t) := by
+    funext t
+    simp only [Pi.mul_apply]
+  rw [hf] at hp
   rw [Radial.radialJacobi, hp] at hJ
   field_simp [hr] at hJ
   field_simp [hr, hwr]
@@ -74,8 +82,9 @@ theorem n01a_jacobi_energy_abs_bound (α r u v g : ℝ)
       _ = (4 / α + 2) * (u ^ 2 + v ^ 2) := by ring
   calc
     |2 * u * v + 2 * v * (4 * u / r - v) * g| ≤
-        |2 * u * v| + |2 * v * (4 * u / r - v) * g| := abs_add _ _
-    _ = |2 * u * v| + |2 * v * (4 * u / r - v)| * |g| := by rw [abs_mul]
+        |2 * u * v| + |2 * v * (4 * u / r - v) * g| := abs_add_le _ _
+    _ = |2 * u * v| + |2 * v * (4 * u / r - v)| * |g| := by
+      rw [abs_mul (2 * v * (4 * u / r - v)) g]
     _ ≤ (u ^ 2 + v ^ 2) + ((4 / α + 2) * (u ^ 2 + v ^ 2)) * |g| :=
       add_le_add hcross (mul_le_mul_of_nonneg_right hinner (abs_nonneg _))
     _ = (1 + (4 / α + 2) * |g|) * (u ^ 2 + v ^ 2) := by ring
@@ -98,8 +107,9 @@ theorem n01aJacobiEnergy_transfer {w u : ℝ → ℝ} {α a b : ℝ}
   intro r hr
   have hrpos : 0 < r := hα.trans_le (hαa.trans hr.1)
   rw [n01a_second_deriv_of_jacobi hw hu hrpos.ne' (hwpos r hr).ne' (hJ r hr)]
-  exact n01a_jacobi_energy_abs_bound α r (u r) (deriv u r) (deriv w r / w r)
-    hα (hαa.trans hr.1)
+  simpa only [n01aJacobiEnergy, mul_assoc, mul_left_comm, mul_comm] using
+    n01a_jacobi_energy_abs_bound α r (u r) (deriv u r) (deriv w r / w r)
+      hα (hαa.trans hr.1)
 
 /-- Exponential state decay forces a corresponding lower bound for its
 actual transfer exponent. This scalar step keeps the later counting

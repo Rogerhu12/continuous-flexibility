@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N01aNegativeComponentVariation
 import Mathlib.Algebra.BigOperators.Pi
 import Mathlib.MeasureTheory.Integral.Bochner.Set
+import Mathlib.Topology.Order.Lattice
 
 /-!
 # Total logarithmic variation from the finitely many negative components
@@ -29,7 +30,7 @@ def n01aNegativeComponentsMeeting {D : ReferenceData} (hD : RadialProfileGeometr
     (hD : RadialProfileGeometry D) {a b : ℝ}
     (ha : a ∈ radialCore D) (hb : b ∈ radialCore D) (J : N01aNegativeComponent D) :
     J ∈ n01aNegativeComponentsMeeting hD ha hb ↔ (J.interval ∩ Icc a b).Nonempty := by
-  simp only [n01aNegativeComponentsMeeting, Set.Finite.mem_toFinset]
+  simp only [n01aNegativeComponentsMeeting, Set.Finite.mem_toFinset, Set.mem_setOf_eq]
 
 private theorem logDerivative_continuousOn {D : ReferenceData}
     (hD : RadialProfileGeometry D) {a b : ℝ}
@@ -63,7 +64,10 @@ theorem n01a_totalVariation_eq_log_difference_add_negativePart {D : ReferenceDat
         2 * ∫ r in a..b, max (-(deriv D.w r / D.w r)) 0 := by
   have hc := logDerivative_continuousOn hD ha hb
   have hi := hc.intervalIntegrable_of_Icc (μ := volume) hab
-  have hn := (hc.neg.max continuousOn_const).intervalIntegrable_of_Icc (μ := volume) hab
+  have hn : IntervalIntegrable (fun r => max (-(deriv D.w r / D.w r)) 0) volume a b := by
+    simpa only [Pi.neg_apply] using
+      (hc.neg.sup (continuousOn_const : ContinuousOn (fun _ : ℝ => (0 : ℝ))
+        (Icc a b))).intervalIntegrable_of_Icc (μ := volume) hab
   have he : (fun r => |deriv D.w r / D.w r|) =
       (fun r => deriv D.w r / D.w r + 2 * max (-(deriv D.w r / D.w r)) 0) := by
     funext r
@@ -122,8 +126,11 @@ theorem n01a_negativePart_integral_le_component_drops {D : ReferenceData}
     (∫ r in a..b, max (-(deriv D.w r / D.w r)) 0) ≤
       ∑ J ∈ S, (Real.log (D.w J.left) - Real.log (D.w J.right)) := by
   classical
-  have hn := ((logDerivative_continuousOn hD ha hb).neg.max continuousOn_const).intervalIntegrable_of_Icc
-    (μ := volume) hab
+  have hn : IntervalIntegrable (fun r => max (-(deriv D.w r / D.w r)) 0) volume a b := by
+    simpa only [Pi.neg_apply] using
+      ((logDerivative_continuousOn hD ha hb).neg.sup
+        (continuousOn_const : ContinuousOn (fun _ : ℝ => (0 : ℝ))
+          (Icc a b))).intervalIntegrable_of_Icc (μ := volume) hab
   have hi (J : N01aNegativeComponent D) :
       IntervalIntegrable (componentDensity J) volume a b :=
     (componentDensity_integrable hD J).intervalIntegrable
@@ -161,7 +168,8 @@ theorem n01a_totalVariation_le_component_drops_of_cover {D : ReferenceData}
         2 * ∑ J ∈ S, (Real.log (D.w J.left) - Real.log (D.w J.right)) := by
   rw [n01a_totalVariation_eq_log_difference_add_negativePart hD ha hb hab]
   exact add_le_add_left (mul_le_mul_of_nonneg_left
-    (n01a_negativePart_integral_le_component_drops hD ha hb hab S hcover) (by norm_num)) _
+    (n01a_negativePart_integral_le_component_drops hD ha hb hab S hcover)
+      (show (0 : ℝ) ≤ 2 by norm_num)) _
 
 /-- The finite family of all intersecting components gives the canonical total-variation bound. -/
 theorem n01a_totalVariation_le_component_drops {D : ReferenceData}

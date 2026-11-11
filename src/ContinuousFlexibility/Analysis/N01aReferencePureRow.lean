@@ -19,7 +19,10 @@ open scoped ContDiff Topology
 /-- Every pure scalar row is an admissible physical source. -/
 theorem sourceMember_pure_row (D : ReferenceData) (γ M η : ℝ) :
     SourceMember D γ M ((0 : PolarPoint → ℝ), η) := by
-  simp [SourceMember, RadialCellIntegrable, sourceCellSquare, referenceCellSquare,
+  have hz : sourceCellSquare D γ M (0 : PolarPoint → ℝ) = fun _ => 0 := by
+    funext m
+    simp [sourceCellSquare, referenceCellSquare, radialAngularMean]
+  simp [SourceMember, RadialCellIntegrable, hz,
     radialAngularMean, Function.Periodic]
 
 theorem sourceNormSquare_pure_row (D : ReferenceData) (γ M η : ℝ) :
