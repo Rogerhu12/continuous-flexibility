@@ -1,0 +1,90 @@
+name: Build
+
+# Builds every library of the lakefile, runs the axiom audit (part of the default
+# targets) and prints the axioms of the endpoint. A newer commit on the same ref
+# cancels the running build.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      LEAN_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Reserve space for the toolchain and artifacts
+        run: |
+          sudo rm -rf -- /usr/share/dotnet /usr/local/lib/android /usr/local/.ghcup /usr/share/swift /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+      - name: Set up the pinned Lean and Mathlib environment
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64
+        with:
+          auto-config: "false"
+          build: "false"
+          test: "false"
+          lint: "false"
+          use-mathlib-cache: "true"
+          use-github-cache: "false"
+      - name: Restore project build artifacts
+        id: restore
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
+          restore-keys: |
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
+      - name: Report which cache was restored
+        run: echo "matched key = ${{ steps.restore.outputs.cache-matched-key }}"
+      - name: Build every library
+        shell: bash
+        run: |
+          set -o pipefail
+          status=0
+          timeout --signal=TERM --kill-after=60s 270m lake build 2>&1 | tee build.log |
+            awk '/^error:|^✖/ { remaining = 60 }
+              /Build completed|Some required targets logged failures|error: build failed/ || remaining > 0 {
+                print; fflush(); if (remaining > 0) remaining--
+              }' || status=$?
+          grep -E '^(error|✖)' build.log | head -100 || true
+          exit "$status"
+      - name: Save project build artifacts
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.sha }}
+      - name: Count compiled modules
+        if: always()
+        shell: bash
+        run: |
+          total=$(find src/ContinuousFlexibility -name '*.lean' | wc -l)
+          built=$(find .lake/build/lib/lean/ContinuousFlexibility -name '*.olean' ! -name '*.server.olean' ! -name '*.private.olean' | wc -l)
+          echo "modules compiled / total: $built / $total"
+      - name: Print axioms of the endpoint
+        shell: bash
+        run: |
+          cat > EndpointAxioms.lean <<'EOF'
+          import FlexibleSphereSolution
+          #print axioms FlexibleSphere.exists_closedBending_of_core
+          EOF
+          lake env lean EndpointAxioms.lean
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-log
+          path: build.log

@@ -1,0 +1,6 @@
+{
+  "challenge_module": "FlexibleSphereChallenge",
+  "solution_module": "FlexibleSphereSolution",
+  "theorem_names": ["FlexibleSphere.exists_closedBending"],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

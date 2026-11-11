@@ -1,6 +1,6 @@
 name = "continuous_flexibility"
 version = "0.1.0"
-defaultTargets = ["ContinuousFlexibility", "AxiomAudit"]
+defaultTargets = ["ContinuousFlexibility", "AxiomAudit", "FlexibleSphereChallenge", "FlexibleSphereSolution"]
 
 [leanOptions]
 autoImplicit = false
@@ -18,3 +18,12 @@ srcDir = "src"
 [[lean_lib]]
 name = "AxiomAudit"
 srcDir = "src"
+
+# Statement of the main theorem with Mathlib notions only; see src/Challenge/comparator.json.
+[[lean_lib]]
+name = "FlexibleSphereChallenge"
+srcDir = "src/Challenge"
+
+[[lean_lib]]
+name = "FlexibleSphereSolution"
+srcDir = "src/Solution"
