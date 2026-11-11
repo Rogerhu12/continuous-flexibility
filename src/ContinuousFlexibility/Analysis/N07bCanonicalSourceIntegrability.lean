@@ -57,9 +57,11 @@ theorem n07b_continuousOn_canonicalSource (m : ℕ) {f : PolarPoint → ℝ}
     intro p hp
     have hx := hcharts.2.1 hp
     exact ⟨⟨hx.1.1.le, hx.1.2.le⟩, mem_univ _⟩
-  have h := (n07b_continuousOn_physicalSourceFactor hK hz hsector m hf).comp
+  change ContinuousOn
+    ((fun x => K.height z m x * f x / |planeJacobian (K.chart z m) x|) ∘
+      K.inverseChart z m) (canonicalOpen S K m)
+  exact (n07b_continuousOn_physicalSourceFactor hK hz hsector m hf).comp
     hcharts.2.2.2.2.2.1.continuousOn hmap
-  simpa only [canonicalSource, Function.comp_def] using h
 
 /-- Every fixed canonical piece of a continuous physical source is an
 actual L² function. No uniform bound in `m` or `z` is used. -/
