@@ -345,3 +345,4 @@ import ContinuousFlexibility.Radial.TailPoissonInterpolationBounds
 import ContinuousFlexibility.Radial.TailActualNaturalNodes
 import ContinuousFlexibility.Radial.TailNaturalInterpolation
 import ContinuousFlexibility.Radial.TailResolventClassical
+import ContinuousFlexibility.Analysis.OneSidedSmoothExtension
