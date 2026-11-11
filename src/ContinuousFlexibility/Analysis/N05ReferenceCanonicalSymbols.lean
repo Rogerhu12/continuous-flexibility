@@ -31,8 +31,11 @@ theorem n05_divergenceOperator_coeff_congr
       (fun q => A.b q * radialPartial f q + A.c q * angularPartial f q) := by
     filter_upwards [hb, hc] with q hqb hqc
     rw [hqb, hqc]
-  unfold divergenceOperator radialPartial angularPartial
-  rw [hN.fderiv_eq (𝕜 := ℝ), hT.fderiv_eq (𝕜 := ℝ)]
+  exact congrArg₂ (fun a b : ℝ => a + b)
+    (congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (1, 0))
+      (hN.fderiv_eq (𝕜 := ℝ)))
+    (congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (0, 1))
+      (hT.fderiv_eq (𝕜 := ℝ)))
 
 /-- The true N04 operator formula, in physical coordinates on a negative piece. -/
 theorem n05_negative_conjugation_from_N04

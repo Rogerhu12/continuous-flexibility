@@ -40,7 +40,7 @@ theorem n05_materialPullback_isCylinderTest
         T.H (T.radius p.1) ^ (-γ) * f (T.radius p.1, p.2)
     rw [add_zero]
     congr 1
-    simpa only [Prod.fst_add, Prod.snd_add, add_zero] using
+    simpa only [Prod.mk_add_mk, add_zero] using
       hperiodic (T.radius p.1, p.2)
   · intro p hp
     have hout : T.radius p.1 ∉ K := by
@@ -102,8 +102,11 @@ theorem n05_divergenceOperator_congr
       (fun q => L.b q * radialPartial g q + L.c q * angularPartial g q) := by
     filter_upwards [hpartial] with q hq
     rw [hq.1, hq.2]
-  unfold divergenceOperator radialPartial angularPartial
-  rw [hN.fderiv_eq (𝕜 := ℝ), hT.fderiv_eq (𝕜 := ℝ)]
+  exact congrArg₂ (fun a b : ℝ => a + b)
+    (congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (1, 0))
+      (hN.fderiv_eq (𝕜 := ℝ)))
+    (congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (0, 1))
+      (hT.fderiv_eq (𝕜 := ℝ)))
 
 /-- A realized local test may be used in the reference operator identity. -/
 theorem n05_reference_correctionOperator_eq_germ

@@ -31,26 +31,30 @@ theorem n05AngularLinear_contDiff (x : PolarPoint) :
 @[simp] theorem n05RadialLinear_radial (x : PolarPoint) :
     radialPartial (n05RadialLinear x) = fun _ => 1 := by
   funext y
-  simp only [n05RadialLinear, radialPartial_sub differentiableAt_fst
-    (differentiableAt_const x.1), radialPartial_fst, radialPartial_const, sub_zero]
+  change radialPartial (fun z : PolarPoint => z.1 - x.1) y = 1
+  simpa only [radialPartial_fst, radialPartial_const, sub_zero] using
+    (radialPartial_sub (x := y) differentiableAt_fst (differentiableAt_const x.1))
 
 @[simp] theorem n05RadialLinear_angular (x : PolarPoint) :
     angularPartial (n05RadialLinear x) = fun _ => 0 := by
   funext y
-  simp only [n05RadialLinear, angularPartial_sub differentiableAt_fst
-    (differentiableAt_const x.1), angularPartial_fst, angularPartial_const, sub_zero]
+  change angularPartial (fun z : PolarPoint => z.1 - x.1) y = 0
+  simpa only [angularPartial_fst, angularPartial_const, sub_zero] using
+    (angularPartial_sub (x := y) differentiableAt_fst (differentiableAt_const x.1))
 
 @[simp] theorem n05AngularLinear_radial (x : PolarPoint) :
     radialPartial (n05AngularLinear x) = fun _ => 0 := by
   funext y
-  simp only [n05AngularLinear, radialPartial_sub differentiableAt_snd
-    (differentiableAt_const x.2), radialPartial_snd, radialPartial_const, sub_zero]
+  change radialPartial (fun z : PolarPoint => z.2 - x.2) y = 0
+  simpa only [radialPartial_snd, radialPartial_const, sub_zero] using
+    (radialPartial_sub (x := y) differentiableAt_snd (differentiableAt_const x.2))
 
 @[simp] theorem n05AngularLinear_angular (x : PolarPoint) :
     angularPartial (n05AngularLinear x) = fun _ => 1 := by
   funext y
-  simp only [n05AngularLinear, angularPartial_sub differentiableAt_snd
-    (differentiableAt_const x.2), angularPartial_snd, angularPartial_const, sub_zero]
+  change angularPartial (fun z : PolarPoint => z.2 - x.2) y = 1
+  simpa only [angularPartial_snd, angularPartial_const, sub_zero] using
+    (angularPartial_sub (x := y) differentiableAt_snd (differentiableAt_const x.2))
 
 def n05RadialProbe (x : PolarPoint) (s : ℝ) (y : PolarPoint) : ℝ :=
   n05AngularLinear x y + s * n05RadialLinear x y ^ 2
@@ -180,7 +184,6 @@ theorem n05_divergence_radialProbe {L : SymmetricCoefficients} {x : PolarPoint}
     radialPartial_mul hsa hr, angularPartial_mul hsb hr]
   simp only [n05RadialLinear_self, n05RadialLinear_radial, n05RadialLinear_angular,
     mul_zero, zero_add, mul_one, add_zero]
-  ring
 
 theorem n05_divergence_angularProbe {L : SymmetricCoefficients} {x : PolarPoint}
     (hb : DifferentiableAt ℝ L.b x) (hc : DifferentiableAt ℝ L.c x) (s : ℝ) :
@@ -191,10 +194,10 @@ theorem n05_divergence_angularProbe {L : SymmetricCoefficients} {x : PolarPoint}
   have hscaled : DifferentiableAt ℝ (fun y => 2 * s * n05AngularLinear x y) x :=
     (differentiableAt_const (2 * s)).mul ht
   have hs : DifferentiableAt ℝ (fun y => 1 + 2 * s * n05AngularLinear x y) x :=
-    differentiableAt_const.add hscaled
+    (differentiableAt_const (1 : ℝ)).add hscaled
   rw [radialPartial_mul hb hs, angularPartial_mul hc hs,
-    radialPartial_add differentiableAt_const hscaled,
-    angularPartial_add differentiableAt_const hscaled,
+    radialPartial_add (differentiableAt_const (1 : ℝ)) hscaled,
+    angularPartial_add (differentiableAt_const (1 : ℝ)) hscaled,
     radialPartial_mul (differentiableAt_const (2 * s)) ht,
     angularPartial_mul (differentiableAt_const (2 * s)) ht]
   simp only [n05AngularLinear_self, n05AngularLinear_radial, n05AngularLinear_angular,

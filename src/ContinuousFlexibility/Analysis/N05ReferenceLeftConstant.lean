@@ -69,31 +69,41 @@ namespace ContinuousFlexibility.Radial
 
 open ContinuousFlexibility.Statements ContinuousFlexibility.Analysis
 
-theorem n05_not_memLp_leftCutoff_inverse_sqrt {D : ReferenceData}
-    (hgeom : RadialProfileGeometry D) (hborder : RadialTrueBorder D) :
-    ¬MemLp (fun r => Real.sqrt ((D.w r)⁻¹) * D.chiLeft r) 2
+/-- Any cutoff that equals one on a left tail detects the same endpoint
+resistance. This also applies to the independently selected physical cutoff. -/
+theorem n05_not_memLp_tailCutoff_inverse_sqrt {D : ReferenceData}
+    (hgeom : RadialProfileGeometry D) {χ : ℝ → ℝ}
+    (htail : ∃ ε : ℝ, 0 < ε ∧ ∀ r ∈ Ioo D.a (D.a + ε), χ r = 1) :
+    ¬MemLp (fun r => Real.sqrt ((D.w r)⁻¹) * χ r) 2
       (volume.restrict (radialCore D)) := by
   intro hLp
-  obtain ⟨ε, hε, hχ, _⟩ := hborder.2.2.2.2.2
+  obtain ⟨ε, hε, hχ⟩ := htail
   obtain ⟨x₀, hx₀l, hx₀r⟩ := exists_between
     (lt_min hgeom.2.1 (by linarith : D.a < D.a + ε))
   have hx₀b : x₀ < D.b := hx₀r.trans_le (min_le_left _ _)
   have hx₀ε : x₀ < D.a + ε := hx₀r.trans_le (min_le_right _ _)
   have hsub : Ioo D.a x₀ ⊆ radialCore D :=
     Ioo_subset_Ioo le_rfl hx₀b.le
-  have hχtail (r : ℝ) (hr : r ∈ Ioo D.a x₀) : D.chiLeft r = 1 :=
+  have hχtail (r : ℝ) (hr : r ∈ Ioo D.a x₀) : χ r = 1 :=
     hχ r ⟨hr.1, hr.2.trans hx₀ε⟩
   have ht := MemLp.mono_measure (Measure.restrict_mono hsub le_rfl) hLp
   have hinv : IntegrableOn (fun r => (D.w r)⁻¹) (Ioo D.a x₀) volume := by
     apply ht.integrable_sq.congr
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with r hr
-    change (Real.sqrt ((D.w r)⁻¹) * D.chiLeft r) ^ 2 = (D.w r)⁻¹
+    change (Real.sqrt ((D.w r)⁻¹) * χ r) ^ 2 = (D.w r)⁻¹
     rw [hχtail r hr, mul_one,
       Real.sq_sqrt (inv_nonneg.mpr (hgeom.2.2.2.2.1 r (hsub hr)).le)]
   exact n05_not_integrableOn_inverse_of_zero (c := D.a) hx₀l
     ⟨le_rfl, hx₀l.le⟩ (hgeom.2.2.1.1.of_le (by simp))
     (fun r hr => hgeom.2.2.2.2.1 r (hsub hr))
     (hgeom.2.2.1.2 D.a (Or.inl le_rfl)) hinv
+
+theorem n05_not_memLp_leftCutoff_inverse_sqrt {D : ReferenceData}
+    (hgeom : RadialProfileGeometry D) (hborder : RadialTrueBorder D) :
+    ¬MemLp (fun r => Real.sqrt ((D.w r)⁻¹) * D.chiLeft r) 2
+      (volume.restrict (radialCore D)) := by
+  obtain ⟨ε, hε, hχ, _⟩ := hborder.2.2.2.2.2
+  exact n05_not_memLp_tailCutoff_inverse_sqrt hgeom ⟨ε, hε, hχ⟩
 
 /-- Positive attenuation determines the same physical left constant at all
 coefficient and attenuation exponents. -/
