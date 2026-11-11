@@ -358,8 +358,8 @@ theorem characteristicSpeed_simple_turning_germ
     have houter : HasDerivAt (deriv w) (deriv (deriv w) r) (r + σ * 0) := by
       simpa only [mul_zero, add_zero] using (hwd.differentiable (by simp) r).hasDerivAt
     have hd := (houter.comp 0
-      (((hasDerivAt_id 0).const_mul σ).const_add r)).neg
-    simpa only [Function.comp_def, id_eq, Pi.neg_apply, f, mul_zero, add_zero, mul_one] using hd
+      (((hasDerivAt_id 0).const_mul σ).const_add r)).fun_neg
+    simpa only [Function.comp_def, id_eq, f, mul_zero, add_zero, mul_one] using hd
   have hgpos : 0 < g 0 := by
     rw [hgzero, hfderiv.deriv]
     nlinarith only [hsign]

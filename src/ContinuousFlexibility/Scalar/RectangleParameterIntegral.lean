@@ -69,9 +69,9 @@ variable [FiniteDimensional ℝ P] [MeasurableSpace X] [BorelSpace X]
   [SecondCountableTopology X] [CompleteSpace F]
   {μ : Measure X} [IsLocallyFiniteMeasure μ]
 
+omit [SecondCountableTopology X] [CompleteSpace F] in
 /-- The compact-set parameter derivative. The dominating function is a
 constant bound on a compact parameter ball times the physical set. -/
-omit [SecondCountableTopology X] [CompleteSpace F] in
 theorem hasFDerivAt_compactIntegral_parameter
     {f : P × X → F} {O : Set P} {K : Set X}
     (hO : IsOpen O) (hK : IsCompact K)
