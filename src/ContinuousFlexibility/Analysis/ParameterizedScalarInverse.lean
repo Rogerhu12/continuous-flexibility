@@ -58,7 +58,7 @@ theorem contDiff_parameterized_scalar_rightInverse
   have hp : HasFDerivAt (fun θ => H (q, θ))
       ((fderiv ℝ H (q, G q)).comp (ContinuousLinearMap.inr ℝ (P × ℝ) ℝ)) (G q) := by
     have hh := (hH.differentiable (by simp) (q, G q)).hasFDerivAt.comp (G q)
-      (hasFDerivAt_prodMk_right q (G q))
+      (hasFDerivAt_prodMk_right (𝕜 := ℝ) q (G q))
     have he : H ∘ Prod.mk q = (fun θ : ℝ => H (q, θ)) := by
       funext θ
       exact Function.comp_apply
@@ -81,7 +81,8 @@ theorem contDiff_parameterized_scalar_rightInverse
     filter_upwards [hsol] with z hz
     rw [hzero] at hz
     change F (z.1, ψ z) - z.2 = 0 at hz
-    apply (strictMono_of_deriv_pos (fun θ => hpositive (z.1, θ))).injective
+    apply (strictMono_of_deriv_pos (f := fun θ : ℝ => F (z.1, θ))
+      (fun θ => hpositive (z.1, θ))).injective
     exact (hright z).trans (sub_eq_zero.mp hz).symm
   exact hψ.congr_of_eventuallyEq heq
 

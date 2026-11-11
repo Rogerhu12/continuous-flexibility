@@ -92,8 +92,12 @@ theorem contDiff_scalarFlow
     exact hd
   have hparameter (p : P) (t x : ℝ) :
       HasFDerivAt (fun q => F (q, (t, x))) (Dp (p, (t, x))) p := by
-    have hd := (hF.differentiable (by simp) (p, (t, x))).hasFDerivAt.comp p
-      (hasFDerivAt_prodMk_left p (t, x))
+    have hbase : HasFDerivAt F (fderiv ℝ F (p, (t, x))) (p, (t, x)) :=
+      (hF.differentiable (by simp) (p, (t, x))).hasFDerivAt
+    have hcurve : HasFDerivAt (fun q : P => (q, (t, x)))
+        (ContinuousLinearMap.inl ℝ P (ℝ × ℝ)) p :=
+      hasFDerivAt_prodMk_left (𝕜 := ℝ) p (t, x)
+    have hd := hbase.comp p hcurve
     have he : F ∘ (fun q : P => (q, (t, x))) = (fun q => F (q, (t, x))) := by
       funext q
       exact Function.comp_apply

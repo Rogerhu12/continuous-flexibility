@@ -65,7 +65,7 @@ theorem divergence_coordinate_change_of_density
     rw [hea.fderiv_eq, her.fderiv_eq]
     simp only [polar_directional_mul (differentiableAt_const σ) hα.2,
       polar_directional_mul (differentiableAt_const σ) hα.1,
-      fderiv_const, ContinuousLinearMap.zero_apply, zero_mul, zero_add]
+      fderiv_const_apply, ContinuousLinearMap.zero_apply, zero_mul, zero_add]
     ring
   have hTransform := exteriorCoefficient_pullbackPlaneOneForm hF hβ.1 hβ.2
   rw [exteriorCoefficient_divergenceFlux] at hTransform

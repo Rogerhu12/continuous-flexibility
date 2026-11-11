@@ -25,6 +25,7 @@ theorem fderiv_radialAffineChart_apply
     fderiv ℝ (radialAffineChart o s F) x v =
       (s * (fderiv ℝ F x v).1, (fderiv ℝ F x v).2) := by
   have hd := ((hF.hasFDerivAt.fst.const_mul s).add_const o).prodMk hF.hasFDerivAt.snd
+  unfold radialAffineChart
   rw [hd.fderiv]
   simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',

@@ -113,7 +113,7 @@ theorem rootRegularizedFlow_reflect
         (rootRegularizedField d c₀ (r, ((x, ζ), Θ (x, ζ) r θ)))
         (Icc (0 : ℝ) 1) r :=
       hflow (x, ζ) θ r hr
-    simpa only [rootRegularizedField_reflect hdodd hc₀even] using hu.neg
+    simpa only [rootRegularizedField_reflect hdodd hc₀even] using hu.fun_neg
   · rw [hinit, hinit]
 
 end ContinuousFlexibility.Analysis
