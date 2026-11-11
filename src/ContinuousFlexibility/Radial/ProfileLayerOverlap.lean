@@ -2,7 +2,7 @@ import ContinuousFlexibility.Radial.ProfileLayerGeometry
 import ContinuousFlexibility.Radial.ProfilePartitionBounds
 import Mathlib.MeasureTheory.Integral.Bochner.Set
 import Mathlib.Order.Interval.Finset.Nat
-import Mathlib.Tactic.Omega
+import Lean.Elab.Tactic.Omega
 
 /-!
 # Finite overlap of endpoint layers

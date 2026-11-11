@@ -29,6 +29,7 @@ theorem r11b_cellIntegrable_of_global_memLp {D : ReferenceData}
     (((hpart.1 m).continuous.measurable.comp measurable_fst).aestronglyMeasurable)
     (C := 1) _ hf
   exact Eventually.of_forall fun x => by
+    change ‖D.localizer m x.1‖ ≤ 1
     simpa only [Real.norm_eq_abs] using profile_localizer_abs_le_one hpart m x.1
 
 theorem r11b_tendsto_referenceCellSquare {D : ReferenceData}

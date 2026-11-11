@@ -71,7 +71,9 @@ theorem interval_flux_sub_smooth {a b : ℝ} {u f w V z : ℝ → ℝ}
       (isOpen_Ioo.mem_nhds hx)).hasDerivAt
   have hzdAt : HasDerivAt z (deriv z x) x :=
     (hz.differentiable (by simp) x).hasDerivAt
-  rw [(hud.sub hzdAt).deriv, mul_sub, hflux x hx, hsplit]
+  have hsub : HasDerivAt (fun t => u t - z t) (deriv u x - deriv z x) x :=
+    hud.sub hzdAt
+  rw [hsub.deriv, mul_sub, hflux x hx, hsplit]
   ring
 
 end ContinuousFlexibility.Analysis

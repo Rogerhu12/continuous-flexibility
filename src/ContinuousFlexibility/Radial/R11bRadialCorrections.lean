@@ -35,7 +35,10 @@ theorem r11b_radial_source_scalar_summable {D : ReferenceData}
     Summable (fun m => Real.exp
       (2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
         profileScalarCellSquare D f m) := by
-  simpa only [sourceCellSquare, r11b_referenceCellSquare_radial hab] using hf.2
+  refine hf.2.congr (fun m => ?_)
+  change Real.exp (2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
+    referenceCellSquare D m (fun x : PolarPoint => f x.1) = _
+  rw [r11b_referenceCellSquare_radial hab]
 
 theorem r11b_chiLeft_flux_scalar_source_summable {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (hborder : RadialTrueBorder D) (γ M : ℝ) :
@@ -100,6 +103,9 @@ theorem r11b_chiLeft_deriv_scalar_output_summable {D : ReferenceData}
     (contDiff_infty_iff_deriv.mp hborder.2.2.2.2.1).2.continuous
   have h := r11b_compact_output_cell_summable hD hK hKcore
     (hc.comp continuous_fst) (fun r hr hrK _ => hz r hr hrK) γ M
-  simpa only [outputCellSquare, r11b_referenceCellSquare_radial hgeom.2.1.le] using h.2
+  refine h.2.congr (fun m => ?_)
+  change Real.exp (-2 * M * radialQ (D.cellIndex m) + 2 * γ * radialS (D.cellIndex m)) *
+    referenceCellSquare D m (fun x : PolarPoint => deriv D.chiLeft x.1) = _
+  rw [r11b_referenceCellSquare_radial hgeom.2.1.le]
 
 end ContinuousFlexibility.Radial
