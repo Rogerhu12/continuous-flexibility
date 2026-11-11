@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N08StateProjection
 import ContinuousFlexibility.Analysis.StateProfileRegularity
+import ContinuousFlexibility.Analysis.N08StateLinearOperations
 
 /-!
 # Actual linear logarithmic profiles and their parameter derivatives
@@ -72,8 +73,8 @@ theorem n08_stateKappa_add (hS : IsPhysicalSpaces D T S)
 
 theorem n08_stateKappa_smul (hS : IsPhysicalSpaces D T S)
     (a : ℝ) (x : AnnularState S) (m : ℕ) :
-    stateKappa S (@SMul.smul ℝ (AnnularState S) _ a x) m = a * stateKappa S x m := by
-  simpa only [n08_stateKappaEvalCLM_apply, smul_eq_mul] using
+    stateKappa S (n08StateSMul S a x) m = a * stateKappa S x m := by
+  simpa only [n08StateSMul, n08RealSMul, n08_stateKappaEvalCLM_apply, smul_eq_mul] using
     (n08_stateKappaEvalCLM hS m).map_smul a x
 
 /-- At a fixed radial point, at most one control is nonzero. -/
@@ -152,26 +153,26 @@ theorem n08_logProfilePointwiseCLM_apply (hS : IsPhysicalSpaces D T S)
 
 theorem n08_stateLogProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    n08_stateLogProfile D S C (x + @SMul.smul ℝ (AnnularState S) _ t v) r =
+    n08_stateLogProfile D S C (x + n08StateSMul S t v) r =
       n08_stateLogProfile D S C x r + t * n08_stateLogProfile D S C v r := by
-  simpa only [n08_logProfileEvalCLM_apply] using
+  simpa only [n08StateSMul, n08RealSMul, n08_logProfileEvalCLM_apply] using
     n08_clm_affine (n08_logProfileEvalCLM hS hC r) x v t
 
 theorem n08_stateProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) _ t v) r =
+    stateProfile D S C (x + n08StateSMul S t v) r =
       stateProfile D S C x r * Real.exp (t * n08_stateLogProfile D S C v r) := by
   change D.w r * Real.exp (n08_stateLogProfile D S C
-      (x + @SMul.smul ℝ (AnnularState S) _ t v) r) =
+      (x + n08StateSMul S t v) r) =
     (D.w r * Real.exp (n08_stateLogProfile D S C x r)) *
       Real.exp (t * n08_stateLogProfile D S C v r)
-  rw [n08_stateLogProfile_affine hS hC, Real.exp_add, mul_assoc]
+  rw [n08_stateLogProfile_affine hS hC x v t r, Real.exp_add, mul_assoc]
 
 /-- This is the derivative of the actual infinite-control physical profile,
 including every circle direction and every state outside the sector. -/
 theorem n08_stateProfile_hasDerivAt (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (r : ℝ) :
-    HasDerivAt (fun t : ℝ => stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) _ t v) r)
+    HasDerivAt (fun t : ℝ => stateProfile D S C (x + n08StateSMul S t v) r)
       (stateProfile D S C x r * n08_stateLogProfile D S C v r) 0 := by
   have h : HasDerivAt
       (fun t : ℝ => Real.exp (t * n08_stateLogProfile D S C v r))

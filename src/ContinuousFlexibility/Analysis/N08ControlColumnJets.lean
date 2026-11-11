@@ -49,7 +49,8 @@ theorem orderedJet_zero (J : SmoothDirections U F) (x : X) (b : B) :
   funext i
   fin_cases i
   simp only [Fin.snoc_zero]
-  exact (Fin.cons_zero ((0 : X), b) Fin.elim0).symm
+  exact (Fin.cons_zero (n := 0) (α := fun _ : Fin 1 => X × B)
+    ((0 : X), b) Fin.elim0).symm
 
 def orderedLinear (J : SmoothDirections U F) (n : ℕ) (x : X)
     (v : Fin n → X) : B →L[ℝ] Y :=

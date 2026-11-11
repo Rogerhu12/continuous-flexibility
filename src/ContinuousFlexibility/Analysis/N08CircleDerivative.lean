@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N08CircleResidual
 import ContinuousFlexibility.Analysis.N08Neighborhoods
 import ContinuousFlexibility.Analysis.ProjectiveJetEvaluation
+import ContinuousFlexibility.Analysis.N08StateLinearOperations
 
 /-!
 # The actual state derivative of the projected return residual
@@ -139,7 +140,7 @@ theorem n08CircleStateDerivative_hasLineDerivAt
   have hj := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain
     (n08CircleSectorPoint_mem hS href hz) (n08_sectorProjection hS v, 0)
   have hpoint (t : ℝ) :
-      n08CircleSectorPoint hS C (z.1 + @SMul.smul ℝ (AnnularState S) _ t v, z.2) =
+      n08CircleSectorPoint hS C (z.1 + n08StateSMul S t v, z.2) =
         n08CircleSectorPoint hS C z + t • (n08_sectorProjection hS v, 0) :=
     n08_centered_pair_line (n08_sectorProjection hS) C.referenceState z.1 v z.2 t
   have hline : HasProjectiveLineDerivAt

@@ -61,7 +61,7 @@ theorem n08_coefficientA_jet_state_hasDerivAt (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
     (x v : AnnularState S) (a b : ℕ) (p : PolarPoint) :
     HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 a b p (x + (@SMul.smul ℝ (AnnularState S) _ t v), 0))
+      (fun t : ℝ => coefficientFamily D S C 0 a b p (x + n08StateSMul S t v, 0))
       (mixedDerivative a b
         (fun q => stateProfile D S C x q.1 * n08_stateLogProfile D S C v q.1) p) 0 := by
   let F : ℝ × PolarPoint → ℝ := fun z =>
@@ -116,13 +116,14 @@ theorem n08_logProfile_reference_jet_bound (hT : IsMaterialData D T)
   have hline := J.hasProjectiveJetsOn.hasLineDerivAt J.open_domain hz (v, 0)
   have hd : HasDerivAt
       (fun t : ℝ => coefficientFamily D S C 0 s 0 (r, 0)
-        ((C.referenceState, 0) + (@SMul.smul ℝ (AnnularState S × ℝ) _ t (v, 0))))
+        ((C.referenceState, 0) + n08StateParameterSMul S t (v, 0)))
       (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 :=
     hasDerivAt_iff_tendsto_slope_zero.mpr hline
   have hd' : HasDerivAt
-      (fun t : ℝ => coefficientFamily D S C 0 s 0 (r, 0) (C.referenceState + (@SMul.smul ℝ (AnnularState S) _ t v), 0))
+      (fun t : ℝ => coefficientFamily D S C 0 s 0 (r, 0) (C.referenceState + n08StateSMul S t v, 0))
       (J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0)) 0 := by
-    simpa only [Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero] using hd
+    simpa only [n08StateParameterSMul, n08StateSMul, n08RealSMul,
+      Prod.smul_mk, Prod.mk_add_mk, smul_zero, add_zero] using hd
   have ha := n08_coefficientA_jet_state_hasDerivAt hT hS hN C.referenceState v s 0 (r, 0)
   have hvalue : J.D 1 (C.referenceState, 0) (Fin.cons (v, 0) Fin.elim0) =
       iteratedDeriv s (fun t => D.w t * n08_stateLogProfile D S C v t) r := by

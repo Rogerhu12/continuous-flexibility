@@ -44,6 +44,23 @@ theorem n08_profile_deriv_from_decode (hD : IsAccumulatingProfile D)
 
 variable {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem n08_discriminant_substitute
+    {a w q t : ℝ} {u v : PolarPoint → ℝ} (p : PolarPoint)
+    (hu : u = v) (hq : q = t)
+    (h : a = (1 + w ^ 2) * (1 - (q * heightAngular u p) ^ 2) -
+      (w + q * radialPartial u p) ^ 2) :
+    a = (1 + w ^ 2) * (1 - (t * heightAngular v p) ^ 2) -
+      (w + t * radialPartial v p) ^ 2 := by
+  subst v t
+  exact h
+
+private theorem n08_scalarFormula_substitute
+    {a q t : ℝ} {w : ℝ → ℝ} {u v : PolarPoint → ℝ} (p : PolarPoint)
+    (hu : u = v) (hq : q = t) (h : a = n08ScalarFiniteFormula w u q p) :
+    a = n08ScalarFiniteFormula w v t p := by
+  subst v t
+  exact h
+
 theorem n08ProfileDiscriminant_state_decode
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (hγ : 0 ≤ γ)
@@ -57,8 +74,9 @@ theorem n08ProfileDiscriminant_state_decode
   have hcalc := n08ProfileDiscriminant_decode hN.1.1 hT hS hγ m
     (n08ScalarHeightParameter S z) p (hm p hp)
   have hq : (n08ScalarHeightParameter S z).2 = z.2 := rfl
-  rw [n08ScalarHeightParameter_increment S z, hq] at hcalc
-  exact hcalc.trans (n08_polarDiscriminant_radialFamily
+  have hfinite := n08_discriminant_substitute p
+    (n08ScalarHeightParameter_increment S z) hq hcalc
+  exact hfinite.trans (n08_polarDiscriminant_radialFamily
     (n08_stateRadialHeight_contDiff hT hS hN z.1)
     (n08_stateRadialHeight_hasDerivAt hT hS hN z.1)
     (n08_stateU_contDiff hT hS z.1) z.2 p).symm
@@ -90,15 +108,17 @@ theorem n08ProfileResidual_state_decode
     (S.height scalarBeta).decode
       (n08ProfileResidual hN.1.1 hT hS hγ m (n08ScalarHeightParameter S z)) p =
         scalarResidualField D S C z p := by
-  rw [n08ProfileResidual_decode hN.1.1 hT hS hγ m (n08ScalarHeightParameter S z) p
+  have hcalc := n08ProfileResidual_decode hN.1.1 hT hS hγ m (n08ScalarHeightParameter S z) p
     (stateProfile D S C z.1) (hm p hp)
     (n08_profile_deriv_from_decode hN.1.1 hS m (stateProfile D S C z.1) hm p hp)
-    (n08ProfileDiscriminant_small_on_stateNeighborhood hT hS hN hγ m hz hs hm p hp)]
-  rw [n08ScalarHeightParameter_increment S z]
+    (n08ProfileDiscriminant_small_on_stateNeighborhood hT hS hN hγ m hz hs hm p hp)
+  have hfinite := n08_scalarFormula_substitute p
+    (n08ScalarHeightParameter_increment S z)
+    (show (n08ScalarHeightParameter S z).2 = z.2 from rfl) hcalc
   have hr : p.1 ≠ 0 := by
     obtain ⟨B, hB⟩ := hN.1.1
     exact (hB.1.1.trans hp.1.1).ne'
-  exact (n08_scalarResidualField_eq_finiteFormula hT hS hN z hr).symm
+  exact hfinite.trans (n08_scalarResidualField_eq_finiteFormula hT hS hN z hr).symm
 
 def n08ScalarSourceResidual
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
