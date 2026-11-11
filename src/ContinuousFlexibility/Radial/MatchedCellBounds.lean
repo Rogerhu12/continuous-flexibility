@@ -19,7 +19,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Statements
-open scoped BigOperators RealInnerProductSpace
+open scoped BigOperators RealInnerProductSpace InnerProductSpace
 
 /-- A two-dimensional matrix bound with the entrywise maximum convention. -/
 theorem matchedCell_matrixApply_bound (A : RadialMatrix) (x : Fin 2 → ℝ)

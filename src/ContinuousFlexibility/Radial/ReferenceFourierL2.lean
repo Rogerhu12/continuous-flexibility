@@ -82,18 +82,6 @@ theorem memLp_two_prod_sections {α β : Type*}
     hf.integrable_sq.prod_right_ae] with r hrm hri
   exact (memLp_two_iff_integrable_sq hrm).2 hri
 
-theorem RadialPartition.exists_localizer_ne_zero {D : ReferenceData}
-    (hD : RadialPartition D) {r : ℝ} (hr : r ∈ radialCore D) :
-    ∃ m : ℕ, D.localizer m r ≠ 0 := by
-  by_contra h
-  have hz : ∀ m : ℕ, D.localizer m r = 0 := by
-    intro m
-    by_contra hm
-    exact h ⟨m, hm⟩
-  have hsum : (∑' m : ℕ, D.localizer m r) = 0 := by
-    simp only [hz, tsum_zero]
-  exact zero_ne_one (hsum.symm.trans (hD.2.2.2.2.1 r hr).2)
-
 theorem RadialCellIntegrable.ae_angular_memLp
     {D : ReferenceData} {f : PolarPoint → ℝ}
     (hf : RadialCellIntegrable D f) (hD : RadialPartition D) :

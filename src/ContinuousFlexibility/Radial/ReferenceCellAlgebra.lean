@@ -272,6 +272,8 @@ theorem RadialCellIntegrable.ae_angular_intervalIntegrable
   obtain ⟨m, hm⟩ := hnonzero
   apply (intervalIntegrable_iff_integrableOn_Ioc_of_le
     (show (0 : ℝ) ≤ 2 * Real.pi by positivity)).2
+  change Integrable (fun θ => f (r, θ))
+    (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))
   simpa only [← mul_assoc, inv_mul_cancel₀ hm, one_mul] using
     (hr m).const_mul ((D.localizer m r)⁻¹)
 
