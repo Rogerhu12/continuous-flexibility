@@ -82,7 +82,7 @@ theorem referenceRadialCoefficient_output_mean_remainder_ae {D : ReferenceData}
   change referenceAngularCoefficient (fun θ => outputRemainder D aL U (r, θ)) 0 =
     referenceAngularCoefficient (fun θ => U.1 (r, θ)) 0 - aL * D.chiLeft r
   rw [he, referenceAngularCoefficient_add hr hc]
-  simp only [referenceAngularCoefficient_const, ite_eq_left (show (0 : ℕ) = 0 from rfl)]
+  simp only [referenceAngularCoefficient_const, ite_true]
   ring
 
 theorem radialJacobi_sub_const_mul_on_core {D : ReferenceData}
@@ -146,7 +146,7 @@ theorem reference_smooth_zeroMode_extension {D : ReferenceData}
     dsimp only [z]
     ring
   have hg'W : ReferenceRapid D (deriv g) := by
-    simpa only [iteratedDeriv_one] using hgjets 0
+    simpa only [Nat.zero_add, iteratedDeriv_one] using hgjets 0
   have hdzW : ReferenceRapid D (deriv z) := by
     apply (hdW.sub hp (hg'W.const_mul hp aL)).of_eqOn
     intro r hr
@@ -166,13 +166,16 @@ theorem reference_smooth_zeroMode_extension {D : ReferenceData}
   refine ⟨fun r => aL * g r + extendZeroOutside D.a D.b z r,
     (contDiff_const.mul hg).add hzs, ?_, ?_, ?_⟩
   · intro r hr
+    change aL * g r + extendZeroOutside D.a D.b z r = u r
     rw [extendZeroOutside_of_mem hr]
     dsimp only [z]
     ring
   · intro r hr
+    change aL * g r + extendZeroOutside D.a D.b z r = aL
     rw [hgl r (hr.trans hal.le), extendZeroOutside_of_notMem
       (fun hmem => (not_lt.mpr hr) hmem.1), mul_one, add_zero]
   · intro r hr
+    change aL * g r + extendZeroOutside D.a D.b z r = 0
     rw [hgh r (hhb.le.trans hr), extendZeroOutside_of_notMem
       (fun hmem => (not_lt.mpr hr) hmem.2), mul_zero, add_zero]
 

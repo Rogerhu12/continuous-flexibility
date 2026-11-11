@@ -114,23 +114,33 @@ theorem reference_smooth_inverse_image {D : ReferenceData}
     change (∑ n ∈ I, ve n (x.1 + 0) * referenceAngularBasis n (x.2 + Real.pi)) =
       ∑ n ∈ I, ve n x.1 * referenceAngularBasis n x.2
     simp only [add_zero]
-    exact Finset.sum_congr rfl (fun n _ => by rw [referenceAngularBasis_periodic n x.2])
+    exact Finset.sum_congr rfl (fun n _ => by
+      change ve n x.1 * referenceAngularBasis n (x.2 + Real.pi) =
+        ve n x.1 * referenceAngularBasis n x.2
+      rw [referenceAngularBasis_periodic n x.2])
   have hVe : ∀ r θ, V (r, -θ) = V (r, θ) := by
     intro r θ
+    change (∑ n ∈ I, ve n r * referenceAngularBasis n (-θ)) =
+      ∑ n ∈ I, ve n r * referenceAngularBasis n θ
     apply Finset.sum_congr rfl
     intro n _hn
+    change ve n r * referenceAngularBasis n (-θ) = ve n r * referenceAngularBasis n θ
     rw [referenceAngularBasis_even n θ]
   have hVL (r : ℝ) (hr : r ≤ D.a) (θ : ℝ) : V (r, θ) = aL := by
     change (∑ n ∈ I, ve n r * referenceAngularBasis n θ) = aL
     rw [Finset.sum_eq_single 0]
-    · rw [hleft 0 r hr]
+    · change ve 0 r * referenceAngularBasis 0 θ = aL
+      rw [hleft 0 r hr]
       simp only [ite_true, referenceAngularBasis, mul_one]
     · intro n _hn hn0
+      change ve n r * referenceAngularBasis n θ = 0
       rw [hleft n r hr, if_neg hn0, zero_mul]
     · exact fun hn => (hn h0).elim
   have hVR (r : ℝ) (hr : D.b ≤ r) (θ : ℝ) : V (r, θ) = 0 := by
     change (∑ n ∈ I, ve n r * referenceAngularBasis n θ) = 0
-    exact Finset.sum_eq_zero (fun n _ => by rw [hright n r hr, zero_mul])
+    exact Finset.sum_eq_zero (fun n _ => by
+      change ve n r * referenceAngularBasis n θ = 0
+      rw [hright n r hr, zero_mul])
   have hcoef (n : ℕ) :
       referenceRadialCoefficient U.1 n =ᵐ[volume.restrict (radialCore D)] ve n := by
     apply (hae n).trans
