@@ -76,9 +76,10 @@ theorem scalarFamilyLift_circleInverse_fderiv_comp
     (contDiff_parameterizedCircleInverse hT hf hpositive hperiod)
   obtain ⟨hleft, hright⟩ := scalarFamilyLift_circleInverse_identities hT hf hpositive hperiod
   have he : G ∘ F = id := funext hleft
+  have hrightAt : F (G x) = x := hright x
   change (fderiv ℝ G x).comp (fderiv ℝ F (G x)) = _
   calc
-    _ = (fderiv ℝ G (F (G x))).comp (fderiv ℝ F (G x)) := by rw [hright x]
+    _ = (fderiv ℝ G (F (G x))).comp (fderiv ℝ F (G x)) := by rw [hrightAt]
     _ = fderiv ℝ (G ∘ F) (G x) :=
       (fderiv_comp (G x) (hG.differentiable (by simp) _)
         (hF.differentiable (by simp) _)).symm
