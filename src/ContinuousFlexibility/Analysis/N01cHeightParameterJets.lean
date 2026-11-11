@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N01cHeightSeminorms
 import ContinuousFlexibility.Analysis.N01cLinearContinuity
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
+import ContinuousFlexibility.Scalar.WeightedFieldRegularity
 
 /-!
 # Actual continuous-linear height-jet evaluations
@@ -22,36 +23,6 @@ open ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
-
-/-- Mixed spatial derivatives add on actual smooth cylinder functions. -/
-theorem mixedDerivative_add_of_contDiff {f g : PolarPoint → ℝ}
-    (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (a b : ℕ) (p : PolarPoint) :
-    mixedDerivative a b (fun q => f q + g q) p =
-      mixedDerivative a b f p + mixedDerivative a b g p := by
-  have hline : ContDiff ℝ ∞ (fun r : ℝ => (r, p.2)) :=
-    contDiff_id.prodMk contDiff_const
-  have hfr : ContDiff ℝ ∞ (fun r : ℝ =>
-      iteratedDeriv b (fun θ : ℝ => f (r, θ)) p.2) := by
-    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero] using
-      (contDiff_mixedDerivative hf 0 b).comp hline
-  have hgr : ContDiff ℝ ∞ (fun r : ℝ =>
-      iteratedDeriv b (fun θ : ℝ => g (r, θ)) p.2) := by
-    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero] using
-      (contDiff_mixedDerivative hg 0 b).comp hline
-  have hinner :
-      (fun r : ℝ => iteratedDeriv b (fun θ : ℝ => f (r, θ) + g (r, θ)) p.2) =
-        (fun r : ℝ => iteratedDeriv b (fun θ : ℝ => f (r, θ)) p.2 +
-          iteratedDeriv b (fun θ : ℝ => g (r, θ)) p.2) := by
-    funext r
-    have hθ : ContDiff ℝ ∞ (fun θ : ℝ => (r, θ)) :=
-      contDiff_const.prodMk contDiff_id
-    exact iteratedDeriv_fun_add
-      ((hf.comp hθ).contDiffAt.of_le (by simp))
-      ((hg.comp hθ).contDiffAt.of_le (by simp))
-  unfold mixedDerivative
-  rw [hinner]
-  exact iteratedDeriv_fun_add (hfr.contDiffAt.of_le (by simp))
-    (hgr.contDiffAt.of_le (by simp))
 
 /-- Scalar multiplication commutes with the actual mixed derivatives. -/
 theorem mixedDerivative_const_mul (c : ℝ) (f : PolarPoint → ℝ)

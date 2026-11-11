@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Analysis.N01cDistributedRadialProducts
 import ContinuousFlexibility.Analysis.N01cStateParameterJets
-import Mathlib.Analysis.SpecialFunctions.Pow.Deriv
+import ContinuousFlexibility.Analysis.RootPowerJets
 
 /-!
 # Exact square-root jets and endpoint cancellation
@@ -22,30 +22,13 @@ open scoped ContDiff Topology BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The actual falling coefficient in an ordinary real-power jet. -/
-def rpowJetCoefficient (α : ℝ) : ℕ → ℝ
-  | 0 => 1
-  | n + 1 => rpowJetCoefficient α n * (α - (n : ℝ))
-
-theorem iteratedDeriv_rpow_eq (α : ℝ) (n : ℕ) :
-    iteratedDeriv n (fun q : ℝ => q ^ α) =
-      fun q => rpowJetCoefficient α n * q ^ (α - (n : ℝ)) := by
-  induction n with
-  | zero => simp only [iteratedDeriv_zero, rpowJetCoefficient, Nat.cast_zero, sub_zero, one_mul]
-  | succ n ih =>
-      rw [iteratedDeriv_succ, ih]
-      funext q
-      rw [deriv_const_mul_field, Real.deriv_rpow_const]
-      simp only [rpowJetCoefficient, Nat.cast_add_one]
-      rw [show α - (n : ℝ) - 1 = α - ((n : ℝ) + 1) by ring]
-      ring
-
 theorem iteratedDeriv_sqrt_eq (n : ℕ) (q : ℝ) :
     iteratedDeriv n Real.sqrt q =
       rpowJetCoefficient (1 / 2) n * q ^ ((1 / 2 : ℝ) - (n : ℝ)) := by
   have hs : Real.sqrt = (fun q : ℝ => q ^ (1 / 2 : ℝ)) :=
     funext Real.sqrt_eq_rpow
-  rw [hs, iteratedDeriv_rpow_eq]
+  rw [hs]
+  exact iteratedDeriv_rpow_eq (1 / 2 : ℝ) n q
 
 section AffineParameterJets
 
@@ -171,7 +154,7 @@ theorem endpoint_rpowJet_bound
         |iteratedDeriv N (fun t : ℝ => t ^ ((1 / 2 : ℝ) - (k : ℝ))) q| ≤
       (|rpowJetCoefficient ((1 / 2 : ℝ) - (k : ℝ)) N| *
         (Real.sqrt M / c ^ (k + N))) * Real.sqrt δ := by
-  rw [iteratedDeriv_rpow_eq, abs_mul,
+  rw [iteratedDeriv_rpow_eq ((1 / 2 : ℝ) - (k : ℝ)) N q, abs_mul,
     abs_of_nonneg (Real.rpow_nonneg ((mul_pos hc hδ).trans_le hlower).le _)]
   rw [show (1 / 2 : ℝ) - (k : ℝ) - (N : ℝ) =
     (1 / 2 : ℝ) - ((k + N : ℕ) : ℝ) by push_cast; ring]

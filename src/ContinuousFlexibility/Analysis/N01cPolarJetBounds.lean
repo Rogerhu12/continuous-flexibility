@@ -23,7 +23,7 @@ open scoped ContDiff BigOperators
 /-- Exact Leibniz expansion for a radial scalar multiplier of a smooth
 cylinder function. Smoothness of the multiplier is needed only at the
 actual evaluation radius. -/
-theorem mixedDerivative_radial_mul
+theorem n01c_mixedDerivative_radial_mul
     {f : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f) {g : ℝ → ℝ}
     (a b : ℕ) (p : PolarPoint) (hg : ContDiffAt ℝ ∞ g p.1) :
     mixedDerivative a b (fun q => g q.1 * f q) p =
@@ -86,7 +86,7 @@ theorem reciprocal_radius_mul_mixedJets_bound
   let j : Fin (s + 1) := ⟨a, by omega⟩
   have hAK : A a ≤ K :=
     Finset.single_le_sum (fun k _ => hA k.val) (Finset.mem_univ j)
-  rw [mixedDerivative_radial_mul hf a b p hg]
+  rw [n01c_mixedDerivative_radial_mul hf a b p hg]
   calc
     _ ≤ ∑ i : Fin (a + 1),
         |(a.choose i.val : ℝ) * iteratedDeriv i.val (fun r : ℝ => r⁻¹) p.1 *

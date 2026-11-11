@@ -105,7 +105,7 @@ theorem stateUHeightAngularMixedJetCLM_apply
         congrArg (fun f : PolarPoint → ℝ => mixedDerivative a b f p) hfield
       _ = ∑ i : Fin (a + 1), c i *
           mixedDerivative (a - i.val) b (angularPartial (stateU S x)) p :=
-        mixedDerivative_radial_mul hθ a b p hinv
+        n01c_mixedDerivative_radial_mul hθ a b p hinv
       _ = _ := Finset.sum_congr rfl fun i _ =>
         congrArg (fun t : ℝ => c i * t)
           (mixedDerivative_angularPartial isOpen_univ hf.contDiffOn
