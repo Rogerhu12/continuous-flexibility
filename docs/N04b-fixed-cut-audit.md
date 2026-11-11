@@ -1,655 +1,679 @@
 # N04b: audit of the fixed physical cut
 
-## Status and scope
+## Scope and status
 
-This audit concerns the exact existential statement `N04bStatement` at main
-`7393d676930e9b92bfe5a4defa8a79d6f03db323`. It does not criticize the arbitrary
-choice of atlas supplied by N04a: N04b is allowed to choose all its witnesses
-again. The argument below starts with an arbitrary proposed N04b witness.
+This audit concerns the exact frozen endpoint
 
-The calculation identifies a candidate contradiction between a fixed physical
-cut, a fixed common canonical half-radius, and the genuine nonlinear operator
-identity. It uses radial height variations available in every stipulated
-physical space. It does not require the existence of a nonlinear zero-return
-solution, and it does not use the values of the totalized inverse chart at a
-canonical boundary.
+```lean
+theorem N04b (hN04a : N04aStatement) : N04bStatement
+```
 
-**This is a mathematical audit, not a Lean proof of `¬ N04bStatement`.**
-No frozen statement has been changed on the strength of this document.
-The principal-field extraction, full endpoint flow variation, and the
-half-holonomy argument must be independently reviewed and then proved as
-actual lemmas before a formal contradiction is claimed. The last section
-lists these obligations separately from the calculations and source facts
-already checked.
+in [the task](tasks/N04b.md). It identifies a geometric compatibility problem
+between the fixed physical domains in `N04PartA` and the fixed Tricomi cylinders
+in `N04PartB`. It gives the mathematical obstruction argument, states the
+analytic bridges that still require Lean proofs, and describes a repair that
+preserves the actual operator and the source pairing.
 
-## 1. The frozen requirements involved
+**This document is not a proof of `N04b`, a Lean proof of its negation, or a claim
+that the task's completion standard has been met.** In particular, a local
+calculation showing that the manuscript's preferred cut moves would not by
+itself refute the existential statement: `N04bStatement` can rechoose every
+piece of cumulative data. The argument below is designed to apply to an
+arbitrary putative witness. Its outstanding formal obligations are listed
+explicitly in the last section.
 
-The data in `Statements/Nonlinear.lean` have
+This version reconciles the audit already published at `204e9a6` with the
+subsequent coefficient and bounded-corrector work. The four statement files
+below are unchanged between the earlier audit's pin `7393d67` and main
+`875357e209ac27cdb94c9db0429946daf553d3f3`.
 
-~~~lean
+The audited definitions are in
+[Blueprint/Statements.lean](../src/ContinuousFlexibility/Blueprint/Statements.lean),
+[Statements/Nonlinear.lean](../src/ContinuousFlexibility/Statements/Nonlinear.lean),
+[Statements/Analysis.lean](../src/ContinuousFlexibility/Statements/Analysis.lean),
+and [Statements/Radial.lean](../src/ContinuousFlexibility/Statements/Radial.lean).
+The mathematical construction is in the paragraphs “Travel coordinates,”
+“The root coordinate,” “The canonical form,” and “Transmission in the middle”
+of [the readable manuscript](../paper/flexible-surface-readable/07-fixed-geometry.tex).
+
+## 1. The clauses imposing the extra invariant
+
+The physical endpoints in `CanonicalData` have no state argument:
+
+```lean
 physicalLeft : ℕ → ℝ
 physicalRight : ℕ → ℝ
 cutRadius : ℕ → ℝ
+```
 
+The actual physical domain is defined by
+
+```lean
 def physicalPieceOpen (S : PhysicalSpacesData) (K : CanonicalData S)
     (m : ℕ) : Set PolarPoint :=
   Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ univ
-~~~
+```
 
-The first conjunct of `N04PartB` includes, for every negative component index
-`m`, the exact clauses
+`N04PartA` requires, for every state in the common neighborhood and sector,
+that the actual forward chart and inverse chart be mutually inverse smooth
+maps between this fixed strip and `canonicalOpen S K m`. It also requires
 
-~~~lean
-K.physicalLeft (K.cutPair m).1 = C.left m ∧
-K.physicalRight (K.cutPair m).2 = C.right m ∧
-K.physicalRight (K.cutPair m).1 =
-  K.physicalLeft (K.cutPair m).2 ∧
-0 < K.cutRadius m ∧
-K.left (K.cutPair m).1 = 0 ∧
-K.left (K.cutPair m).2 = 0 ∧
-K.right (K.cutPair m).1 = K.cutRadius m ∧
+```lean
+∀ z ∈ U, stateSector S z.1 → ∀ m p,
+  p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) →
+  ContDiffAt ℝ ∞ (K.chart z m) p ∧
+  ContDiffAt ℝ ∞ (K.height z m) p ∧
+  planeJacobian (K.chart z m) p ≠ 0 ∧
+  0 < K.height z m p
+```
+
+The forward chart is therefore smooth and nondegenerate at both physical
+boundary circles. Its angular component is a degree-one lift: in the open
+strip the chart sends `p + (0, π)` to `chart p + (0, π)`, and this identity
+extends to the boundary by continuity.
+
+For each negative component, the first conjunct of `N04PartB` fixes
+
+```lean
+K.physicalLeft (K.cutPair m).1 = C.left m
+K.physicalRight (K.cutPair m).2 = C.right m
+K.physicalRight (K.cutPair m).1 = K.physicalLeft (K.cutPair m).2
+0 < K.cutRadius m
+K.left (K.cutPair m).1 = 0
+K.left (K.cutPair m).2 = 0
+K.right (K.cutPair m).1 = K.cutRadius m
 K.right (K.cutPair m).2 = K.cutRadius m
-~~~
+```
 
-Both pieces have `positive = false`. Part A gives strict physical interval
-lengths. Consequently, writing
+Thus a single state-independent physical circle `r = c` divides the component
+`(a,b) = (C.left m,C.right m)` into `(a,c)` and `(c,b)`, and both canonical
+pieces have the same state-independent interval `(0,R)`.
 
-\[
- \ell=C.left(m),\quad r=C.right(m),\quad
- c=K.physicalRight((K.cutPair\,m).1),\quad R=K.cutRadius(m),
-\]
+This is a condition on the actual operator. `canonicalOperator` is defined
+using `divergenceOperator (L.coefficients z)`, the actual chart, the positive
+height factor, and its Jacobian. `N04PartB` requires its equality on every
+smooth canonical test function with the displayed canonical divergence
+operator plus a potential. On each negative piece it additionally requires
 
-one has \(\ell<c<r\), \(R>0\), and two physical strips
-\((\ell,c)\times\mathbb R\) and \((c,r)\times\mathbb R\), both mapped onto
-\((0,R)\times\mathbb R\). Neither \(c\) nor \(R\) depends on the state.
-
-Part A also gives the actual smooth forward chart and height, nonzero
-Jacobian and positive height at every point of the **closed** physical
-piece, together with an actual smooth inverse on the open pieces and
-angular lift periodicity by \(\pi\).
-
-The operator and negative-coefficient conjuncts of Part B require
-
-~~~lean
-canonicalOperator S K L z m W p =
-  divergenceOperator (K.coefficients z m) W p +
-    K.potential z m p * W p
-
-(K.coefficients z m).a p = 1 ∧
-(K.coefficients z m).b p = 0 ∧
+```lean
+(K.coefficients z m).a p = 1
+(K.coefficients z m).b p = 0
 (K.coefficients z m).c p = -p.1
-~~~
+```
 
-on a negative canonical piece, for every globally smooth \(W\). Hence the
-actual transformed operator on each half is
-\(\partial_\xi^2-\xi\partial_\varphi^2+V\).
+Consequently each half must have the characteristic geometry of
+`∂ξ² − ξ ∂θ²` on the same fixed cylinder. The potential and the scalar height
+conjugation do not change characteristic curves. The cut-transmission
+conjunct is not needed for this obstruction argument.
 
-These conditions already impose the half-return restriction below. The
-cut-transmission conjunct is not needed for the proposed contradiction.
-
-## 2. Reference facts that are genuinely available
-
-Fix any component \(m\); taking \(m=0\) is enough. Put \(w=D.w\) and
+The manuscript instead divides a component at the level `σ = T/2` of its
+state-dependent travel coordinate. If `X_z` is the inverse travel chart, its
+physical cut is
 
 \[
- v_0(s)=\sqrt{-\frac{w'(s)}{s\,w(s)}},\qquad
- t(s)=\int_\ell^s v_0(x)\,dx,\qquad T=t(r)=C.travel(m).
+  \theta\longmapsto X_z(T/2,\theta).
 \]
 
-The N01 control geometry gives positive \(w\), \(\ell>0\),
-\(w'<0\) on \((\ell,r)\), simple zeros of \(w'\) at both endpoints, and the
-displayed formula for \(C.travel\). Thus \(v_0>0\) inside the component,
-\(v_0\) tends to zero at both endpoints, and it has the usual square-root
-factor at each simple root.
+That is an actual moving curve. Replacing it by a fixed radial circle requires
+an additional invariant; it is not a consequence of a diffeomorphism of the
+whole component onto `(0,T) × 𝕋`.
 
-There is also an explicit nonresonance hypothesis. In the pinned source,
+## 2. The witness-independent perturbation
 
-~~~lean
-def QuadraticIrrational (t : ℝ) : Prop :=
-  Irrational t ∧
-    ∃ a b c : ℤ, a ≠ 0 ∧ (a : ℝ) * t ^ 2 + b * t + c = 0
-~~~
+Assume for the argument that all data in `N04bStatement` have been chosen.
+Choose any of its negative components `(a,b)` and let `c` be its claimed
+fixed cut. The strict endpoint inequalities in Part A and the displayed
+pairing identities give `a < c < b`.
 
-and `RadialReturnMargins` requires
-
-~~~lean
-∀ l h, NegativeRadialComponent D l h →
-  QuadraticIrrational (radialTravel D l h / Real.pi) ∧ ...
-~~~
-
-It is the third conjunct of `IsRadialReference`. The control component is
-a `NegativeRadialComponent`, and its travel is that same radial integral.
-Therefore \(T/\pi\) is irrational, in particular \(e^{2iT}\ne1\).
-This fact does not have to be inferred from the N02 inverse.
-
-The reference state has height
-\(u_*(s,\theta)=\phi(s)\cos(2\theta)\) and zero metric, control, and chart
-increments. At \(q=0\), with those other increments still zero, the actual
-coefficient field is
+Write `w = D.w` and
 
 \[
- A_0(s)=\begin{pmatrix}w(s)&0\\0&w'(s)/s\end{pmatrix}.
+ v_0(r)=\sqrt{\frac{-w'(r)}{r w(r)}},\qquad
+ E(r)=1+w(r)^2,\qquad
+ \omega(r)=v_0(r)\frac{E(r)}{w(r)}.
 \]
 
-It is independent of the height-state variable. The ordinary minus flow is
-\(\theta\mapsto\theta-t(s)\). Its inverse return and the odd right chart
-therefore give zero return residual. This remains true at \(q=0\) if
-\(u_*\) is replaced by any other height sufficiently near \(u_*\).
+The radial hypotheses give `w > 0`, `w' < 0` on the open component, and
+simple zeros of `w'` at its two endpoints. Therefore `ω` is continuous on
+`[a,b]`, smooth and positive in `(a,b)`, and zero at `a` and `b`.
 
-## 3. Work with the effective smooth operator, not unsupported regularity of L
-
-N03 does not explicitly state smoothness of the functions stored in
-`L.coefficients`. The total Fréchet derivative in Lean is zero at a
-nondifferentiable point, so it would be unsafe to assume ordinary
-product rules for these fields. The following route avoids that assumption.
-
-On one physical half, write \(F\) for its actual forward chart, \(G\) for
-the interior inverse, and \(h>0\) for its height. For any physical smooth
-test function \(u\), the local canonical function
-\((u/h)\circ G\) is smooth. A compact cutoff extends its germ near an
-interior point to a globally smooth \(W\), to which Part B applies.
-Thus the **actual action** of \(\operatorname{div}L\nabla\) is equal there
-to the pullback of the genuine smooth Tricomi operator.
-
-The principal matrix of that actual pullback is
+There is a smooth radial function `f`, supported in a compact subset of
+`(a,c) ∪ (c,b)`, such that
 
 \[
- B=\frac{|\det DF|}{h^2}\,
-       (DF)^{-1}
-       \begin{pmatrix}1&0\\0&-\xi\end{pmatrix}
-       (DF)^{-T},\qquad \xi=F^1.
- \tag{3.1}
+ \int_a^b\omega f'=0,\qquad \int_a^c\omega f'=1. \tag{1}
 \]
 
-This formula uses only derivatives of the known smooth chart and height.
-It is smooth in the physical variables and extends to the closed physical
-half at every finite derivative order. In particular,
+One construction is as follows. Since `ω(a)=0`, `ω(c)>0`, and `ω(b)=0`,
+the weight is nonconstant on each half. Smooth compact tests `f_L,f_R`
+supported in the respective halves can therefore be chosen with nonzero
+pairings `I_L = ∫ω f_L'` and `I_R = ∫ω f_R'`. Integration by parts on their
+compact supports proves this assertion from the nonvanishing of `ω'`
+somewhere in each half. Then `f=f_L/I_L−f_R/I_R` has (1).
+
+The physical-space realization in `IsSobolevModel` represents this compact
+radial function by an actual height-space element. Choose a nonzero real
+`δ` sufficiently small and replace the height entry of the reference state by
 
 \[
- \det B=-\frac{\xi}{h^4}. \tag{3.2}
+ u_\delta(r,\theta)=u_{\rm ref}(r,\theta)+\delta f(r).
 \]
 
-The possibly unspecified potential causes no difficulty: the actual
-divergence kills the constant function. Applying Part B locally to
-\((1/h)\circ G\) identifies \(V\) with a smooth expression and cancels
-the zeroth-order term in the physical pullback. The inverse coordinate
-and gauge calculation then identifies the actual physical action with
-\(\operatorname{div}(B\nabla)\). This is a reverse use of the genuine
-coordinate-divergence identity, not an identification of arbitrary
-stored values of \(L.b,L.c\).
+Keep the profile controls `μ,κ` and the left-chart control `η` equal to zero.
+This state, denoted `x_δ`, lies in the common state neighborhood and sector.
+There is no restriction in the sector condition excluding a radial height
+perturbation. The required smallness follows by scaling one fixed finite
+seminorm, not by changing the neighborhood or its witnesses.
 
-N03 gives, for every physical height test \(\eta\),
+At `q=0`, the actual physical height and coefficients do not depend on the
+height entry of the state. They are the original radial height `H`, with
+`H'=w`, and the matrix
 
 \[
- \operatorname{div}(A_{\rm orig}\nabla\eta)
- -\operatorname{div}(B\nabla\eta)
- =\mathcal E_z(R_z)\eta. \tag{3.3}
+ A_0=\begin{pmatrix}w&0\\0&w'/r\end{pmatrix}.
 \]
 
-The error is linear in \(R_z\), linear in \(\eta\), and jointly smooth tame
-in the stipulated projective spaces.
-
-### Even test functions suffice to extract B
-
-The physical height space contains every smooth, even, \(\pi\)-periodic
-function with compact radial support; no zero angular mean is required
-by `HeightMember`. Its decoder is surjective onto that class.
-
-Choose one radial cutoff equal to one on a neighborhood of
-\([\ell,r]\). Radial polynomial tests \(1,s,s^2\), multiplied by that
-cutoff, extract \(B_{11}\). Products with \(\cos(2\theta)\) and
-\(\cos(4\theta)\) extract the other entries by the carré-du-champ identity
+For the original type-corrected coefficients, let
 
 \[
- \tfrac12\big(P(fg)-fP(g)-gP(f)\big)
-   = \nabla f^T B\,\nabla g
+ d=b/a,\qquad v=\sqrt{b^2-ac}/a.
 \]
 
-for the actual zero-potential divergence operator \(P\).
-In particular the mixed probe gives a fixed multiple of
-\(B_{12}\sin(2\theta)\), and the angular square probe gives a fixed
-multiple of \(B_{22}\sin^2(2\theta)\).
-The same formulas apply to \(A_{\rm orig}\).
-
-Away from the reflection axes this identifies all entries directly.
-Near an axis, ordinary smooth division by the fixed sine factor,
-using its vanishing jets, gives the same unique extension. For uniform
-bounds one loses one angular derivative for the mixed probe and two for
-the angular square probe. The forward-chart reflection identities give
-the expected odd/even parity; they also identify the values on the axes
-by continuity. This handles the restriction to even physical tests
-without assuming access to an odd height state.
-
-Consequently, if \(R_{z(q)}=o(q)\) in every circle seminorm, (3.3) and the
-smooth tame error imply
+For the genuine height family `H(r)+q u(r,θ)`, direct differentiation of the
+definitions at `q=0` gives
 
 \[
- B(q)-A_{\rm orig}(q)=o(q)
- \quad\hbox{in every compact physical }C^k\hbox{ norm}. \tag{3.4}
+ \dot d=-\frac{1+w^2}{rw}
+       \left(u_{r\theta}-\frac{u_\theta}{r}\right),\qquad
+ \dot v=-v_0\frac{1+w^2}{w}
+       \left(u_r+\frac{u_{\theta\theta}}r\right). \tag{2}
 \]
 
-The projective physical norm equalities and compact Sobolev estimates
-justify passage from source seminorms to these compact jet norms.
-The same probes identify the principal field across the fixed cut:
-their source outputs are smooth on the whole annulus. Thus the two
-half formulas do not introduce an unproved interface regularity
-assumption. No state smoothness of the chosen \(F,h\) has been assumed;
-the actual principal field gets its parameter dependence from (3.3).
-
-At a turning root, N03 gives germs equal to the original \(b,c\), and
-the \(a\) field is equal everywhere. Hence the effective field agrees
-with the original on a neighborhood of that root for each state.
-The difference in (3.4) is flat at each fixed root. Dividing by the
-fixed endpoint-distance factors, with the corresponding finite
-derivative loss, preserves its \(o(q)\) property.
-
-## 4. A canonical half fixes a characteristic round trip
-
-The stored inverse need not be continuous at \((R,\theta)\). That gap
-does not defeat this argument, since only the forward chart and its
-genuine local inverse are used.
-
-For a physical endpoint \(p\), continuity of \(F\) and continuity of
-the specified inverse on the canonical **interior** imply that \(F(p)\)
-lies on the canonical boundary. Indeed, if it were an interior point,
-apply that continuous inverse to a sequence of interior physical
-points tending to \(p\); its limit would be \(p\), contradicting the
-requirement that the inverse maps the canonical interior into the
-physical interior.
-
-This exact argument is already proved on PR #18 by
-`canonicalChart_endpoint_radial_eq_boundary` in
-`Analysis/CanonicalBoundaryImage.lean`. The genuine endpoint local
-inverse is provided by
-`canonicalChart_exists_smooth_endpointInverse` in
-`Analysis/CanonicalEndpointInverse.lean`.
-
-At a root, (3.2) and the N03 root germ force the image coordinate to
-be \(\xi=0\), because the original determinant is zero there and
-\(h>0\). The other physical boundary therefore maps to \(\xi=R\).
-For the latter assertion, use interior surjectivity and compactness
-modulo the angular period: a sequence with canonical radii tending
-to \(R\) has a physical subsequence in the closed cylinder, and its
-limit cannot be interior or on the already identified root boundary.
-
-The boundary angular maps are degree-one circle diffeomorphisms.
-Their derivative cannot vanish, since the radial coordinate is
-constant along the boundary and the actual Jacobian is nonzero;
-the lift condition fixes the positive degree. The local inverse
-function theorem supplies their genuine inverse. No value of
-`K.inverseChart` at the canonical boundary is used.
-
-The two genuine characteristic first integrals of
-\(\partial_\xi^2-\xi\partial_\varphi^2\) are
+For example, the defining discriminant and denominator have
 
 \[
- \varphi-\tfrac23\xi^{3/2},\qquad
- \varphi+\tfrac23\xi^{3/2}.
+ D_0=1,\quad Q_0=w,\quad
+ \dot D=-2w u_r,\quad
+ \dot Q=u_r+(1+w^2)u_{\theta\theta}/r,
 \]
 
-Put \(H=\tfrac23R^{3/2}\). Following one family from the root to the
-cut and returning along the other gives a physical circle lift
-conjugate to the translation by \(-2H\). The height factor and the
-potential do not affect the principal characteristics.
+and the determinant identity gives
+`v=√(-w w'/r) √D/Q`. These yield (2) with the displayed signs. The radial
+part contributes `dot d=0` and `dot v=−δ ω f'`. The reference height is
+exactly `D.phi(r) cos(2θ)` by `referenceStateConditions`, so its contribution
+to both first variations consists only of angular frequency two.
 
-At \(q=0\), (3.3) has zero error. Hence \(B=A_0\), the left physical
-half has travel \(t(c)\), and the right half has travel \(T-t(c)\).
-Their common \(R\) forces
+The new modules `N04bOpticalHeightVariation`,
+`N04bOpticalCoefficientVariation`, `N04bOpticalBalancedTests`, and
+`N04bOpticalBalancedHeight` isolate these algebraic and test-function steps.
+Their source content must be distinguished from a green CI result and from
+the additional differentiation-under-the-integral and flow-variation steps
+below; the latter are not supplied merely by pointwise derivative formulas.
+
+## 3. Cancel the return error to first order
+
+Let
 
 \[
- t(c)=H=T-t(c),\qquad t(c)=T/2,\qquad 2H=T. \tag{4.1}
+ T=\int_a^b v_0(r)\,dr.
 \]
 
-For every nearby state, each canonical half still has the same \(R\).
-Its actual half-round-trip map must therefore remain conjugate to
-the **same** translation by \(-T\).
+At `(x_δ,0)` the original minus return is `θ ↦ θ−T`, both boundary charts
+are the identity, and the actual N02 residual is zero. The same statement
+holds on every other negative component.
 
-This conclusion uses the closed forward-chart nondegeneracy and the
-actual operator identity. It does not assume that the manuscript's
-chosen travel chart is the only possible chart, and it does not use
-the cut-transmission values of the totalized inverse.
-
-## 5. A height variation that preserves full travel to first order
-
-For \(Z=Z_0+q u\), with \(Z_0'=w\), hold the metric and control states
-fixed at zero. Write \(E=1+w^2\). From the actual frozen coefficients,
-
-\[
- D=1-2qwu_s+O(q^2),\quad
- Q=w+q\left(u_s+\frac{E}{s}u_{\theta\theta}\right),\quad
- a=Q D^{-3/2}.
-\]
-
-The proved original determinant identity is
-
-\[
- a c-b^2=\frac{w w'}{sD^2}.
-\]
-
-Therefore the half-width of the two characteristic speeds is exactly
-
-\[
- v=\frac{\sqrt{b^2-ac}}a
-   =\frac{\sqrt{-w w'/s}\sqrt D}{Q},
-\]
-
-and its first derivative at zero is
-
-\[
- \dot v=-v_0\,\frac{1+w^2}{w}
-          \left(u_s+\frac{u_{\theta\theta}}s\right). \tag{5.1}
-\]
-
-The drift derivative is
-
-\[
- \dot d
- =-\frac{1+w^2}{w}
-     \left(\frac{u_{s\theta}}s-\frac{u_\theta}{s^2}\right). \tag{5.2}
-\]
-
-For the reference height \(\phi(s)\cos(2\theta)\), these derivatives
-contain only angular frequency two. For a radial added height \(f(s)\),
-the added drift derivative is zero and the added speed derivative is
-
-\[
- -\omega(s)f'(s),\qquad
- \omega(s)=v_0(s)\frac{1+w(s)^2}{w(s)}. \tag{5.3}
-\]
-
-The smooth positive function \(\omega\) in the open component tends to
-zero at both roots. It cannot be constant on either half.
-Choose compact smooth bumps \(f_L,f_R\), supported strictly inside
-\((\ell,c)\) and \((c,r)\), respectively, such that
-
-\[
- I_L=-\int_\ell^c\omega f_L'\ne0,\qquad
- I_R=-\int_c^r\omega f_R'\ne0.
-\]
-
-For example, integration by parts reduces the first functional to
-\(\int\omega'f_L\); choose a nonnegative bump where \(\omega'\) has a
-nonzero fixed sign. The right half is identical.
+Let `ρ` be the derivative with respect to `q` of the actual N02 residual at
+`(x_δ,0)`. N02's smoothness puts it in the actual circle space. Its decoded
+components are even and have zero mean. Indeed, differentiating the genuine
+return ODE at the radial state integrates (2) along angular translations.
+The reference term remains frequency two. The only radial constant term
+is the integral of `−δ ω f'`, which vanishes over the full selected
+component by (1); the perturbation is zero in every other component.
+Composition with the right inverse chart contributes no extra term at this
+base point because the uncomposed even residual is identically zero there.
 
 Set
 
 \[
- f=f_L-\frac{I_L}{I_R}f_R.
+ v_\eta=-R.\mathrm{inverse}(\rho).
 \]
 
-Then
+N02 gives that `v_η` is odd and `R.linearPart v_η=−ρ`. At `q=0` the actual
+`chartIncrement` is the identity because the left chart is the identity.
+Thus N02's derivative formula shows that the affine sector path
 
 \[
- -\int_\ell^r\omega f'=0,\qquad
- -\int_\ell^c\omega f'=I_L\ne0. \tag{5.4}
+ z(q)=\bigl(x_\delta+q(0,(0,(0,v_\eta))),q\bigr)
 \]
 
-The radial function \(f(s)\), constant in angle and extended by zero,
-is a legitimate `HeightMember`: its radial support is compactly
-inside the annulus, and all material weights and coordinate factors
-are smooth and bounded there. Surjectivity of the physical decoder
-realizes it as an actual height state. Choose a nonzero small
-\(\delta\), so that
+satisfies
 
 \[
- u_\delta=u_*+\delta f
+ R.\mathrm{residual}(z(q))=o(q)
+ \quad\text{in every graded circle seminorm}. \tag{3}
 \]
 
-lies inside the given low-order neighborhood. This choice is made
-after the proposed fixed cut \(c\) is known, so it applies to every
-possible existential choice of the cut.
+The path remains in the same open neighborhood for sufficiently small `q`.
+The chart control `η` enters neither the physical height nor the profile, so
+it does not alter (2). No exact nonlinear solution of the return equation
+is being assumed here.
 
-### Cancel the full return derivative, not the half derivative
+The Fourier multiplier in `circleRotationDifference` on an odd mode
+`sin(2jθ)` is `sin(2jT)`, producing the corresponding even cosine mode.
+It is not a cosine multiplier. The cancellation above uses N02's actual
+inverse theorem and therefore does not need a separate multiplier estimate.
 
-At the base state with height \(u_\delta\), zero metric/control/chart
-increments and \(q=0\), the return residual is zero. N02's actual smooth
-tame residual supplies its derivative \(\rho\) in the actual circle space
-in the \(q\) direction.
+## 4. Extract a smooth effective operator without assuming smooth raw L
 
-The linearized ordinary flow at a radial reference preserves each
-angular Fourier frequency. The \(u_*\) part contributes only frequency
-two. The radial part contributes a constant proportional to the full
-integral in (5.4), which is zero. The definition of the return residual
-takes its even part; the varying right-chart inverse has no first-order
-effect on an outer residual whose value at zero is identically zero.
-Thus \(\rho\) is an even zero-mean circle element at every component.
-Its weighted membership is supplied by the genuine N02 derivative,
-not by an unsupported estimate of a formal sequence of Fourier coefficients.
+This step is necessary. The frozen N03 clauses do not directly state that
+the raw fields `L.b` and `L.c` are jointly smooth, and Lean's total `fderiv`
+must not be treated as an ordinary derivative at an arbitrary nonsmooth
+field.
 
-Take
+On one negative open piece, write `F=K.chart z m`, `G=K.inverseChart z m`,
+`h=K.height z m`, and `J=det DF`. Part A makes these genuine smooth inverse
+charts in the interior, with `h>0` and `J≠0`. Given a smooth local physical
+test `u`, choose a globally smooth canonical test agreeing locally with
+`(u/h) ∘ G`; a cutoff supported inside the canonical open strip makes this
+possible. Locality of `fderiv` then transfers Part B to the local physical
+test.
+
+The transferred expression is a genuine local second-order differential
+operator whose smooth principal matrix is
 
 \[
- v=-R.inverse(\rho)
+ A_{\rm eff}=
+ \frac{|J|}{h^2}(DF)^{-1}
+       \begin{pmatrix}1&0\\0&-F_1\end{pmatrix}(DF)^{-t}. \tag{4}
 \]
 
-and vary the odd chart state by \(qv\), holding \(u_\delta\), the metric
-state, and the control state fixed. The state remains in `stateSector\):
-the control is constant zero and \(v\) is odd by N02. For small \(q\)
-it remains in the same positive-radius state neighborhood.
+The raw divergence operator annihilates locally constant functions exactly.
+Consequently the transferred zeroth-order coefficient vanishes. This also
+determines its apparently arbitrary potential by smooth chart expressions.
+For the characteristic argument it is enough that the transferred operator
+has matrix (4); no unproved identification of the raw coefficients with
+that matrix is needed. In fact, the reverse coordinate-divergence and gauge
+identity identifies its action with `div(A_eff ∇u)`: the smooth transformed
+principal density divided by `h²` is (4), and the locally constant test
+cancels exactly the remaining zeroth-order term. This uses the genuine
+coordinate calculus, not a product rule for unsupported raw fields.
 
-At zero chart increment, `R.chartIncrement` is the identity (by its
-decoded formula and decoder injectivity). The N02 derivative in this
-chart direction is \(R.linearPart(v)=-\rho\), since its error is linear
-in the zero base residual. Joint smoothness therefore gives
+For any fixed physical height test `u`, N03 gives
 
 \[
- R_{z(q)}=o(q) \tag{5.5}
+ B_q u=B_{{\rm orig},q}u-e_q(u),\qquad
+ e_q(u)=\operatorname{decode}
+   \bigl(L.\mathrm{error}(z(q),R.\mathrm{residual}(z(q)),u)\bigr).
 \]
 
-in every circle seminorm.
+Joint continuity of the N03 smooth family, its linearity in its circle
+argument, and (3) imply `e_q(u)=o(q)` in every source seminorm. In fact,
+for `q≠0` one can put `R.residual(z(q))/q` into that linear argument and
+use continuity at zero; no parameter differentiability of `L.b,c` is
+being added.
 
-This step requires no nonlinear implicit-function theorem and no
-nonlinear curve with exactly zero residual. The genuine first derivative
-and N03's smooth linear error are enough.
-
-### Transfer the first variation to the effective operator
-
-Equations (3.3)--(3.4) and (5.5) show that the effective principal field
-has the same first variation as the original one. It remains positive
-in its radial principal entry on the compact component for small \(q\).
-Its determinant has the same simple endpoint factors: the original
-determinant has them, and the error is flat at the roots and \(o(q)\)
-after division by those fixed factors.
-
-Thus the actual characteristic speeds have the original first
-variation, uniformly in the integrable endpoint coordinates. Ordinary
-ODE variation on the full closed half applies after the usual root
-time substitution. This is the endpoint-flow bridge that must be
-proved explicitly; a result only on compact subintervals would not suffice.
-
-The actual left half-round-trip lift consequently has the expansion
+To use this on characteristics one needs a local Sobolev estimate: for a
+compact radial subinterval of the annulus and every finite `j`, a sufficiently
+high physical source seminorm bounds the decoded `C^j` norm on that interval
+times the angular circle. The concrete norm contains all the required
+material-coordinate derivatives. On such a compact interval the material
+coordinate change and the positive weights have bounded derivatives and
+bounded inverses, so the usual compact Sobolev estimate supplies the bound.
+This is a proof obligation, not a consequence of pointwise decode continuity
+alone. With it,
 
 \[
- F_q(\theta)=\theta-T+
- q\big(g_0+g_c\cos(2\theta)+g_s\sin(2\theta)\big)+o(q)
- \tag{5.6}
+ e_q(u)=o(q)\quad\text{uniformly in every compact spatial }C^j\text{ norm}.
+ \tag{5}
 \]
 
-uniformly in \(\theta\). For the convention “minus out, plus back,”
+### Even probes also control the symmetry axes
+
+Only even, π-periodic physical height tests are available. Arbitrary mixed
+quadratic jets cannot be prescribed at an angular reflection axis. That
+restriction does not prevent coefficient extraction, but it must be handled.
+
+Choose a compact radial cutoff equal to one on a neighborhood of the closed
+half-component. On that neighborhood let `P=r` and `Q=cos(2θ)`, extending
+them with the cutoff so that they and their products are admissible physical
+height tests. For the difference `D_q=B_q−B_orig,q`, define
 
 \[
- g_0=-2\delta I_L\ne0. \tag{5.7}
+ \Gamma_{D_q}(P,Q)=D_q(PQ)-P D_qQ-Q D_qP.
 \]
 
-The two passages through the half add the radial travel variation.
-The reference-height contribution remains frequency two under the
-reference translations. The added chart state does not enter the
-original physical coefficients at all; it was used only to make the
-N03 correction have zero first derivative.
-
-## 6. The finite Fourier contradiction is elementary
-
-Because \(e^{2iT}\ne1\), a trigonometric polynomial \(k\) of frequency two
-solves the finite cohomological equation that removes the oscillatory
-part of (5.6). The lift
+Both local operators have zero zeroth-order coefficient. If
+`ΔA=A_eff−A_orig`, ordinary product differentiation gives
 
 \[
- H_q(\theta)=\theta+qk(\theta)
+ \Gamma_{D_q}(P,P)=2\Delta a,\qquad
+ \Gamma_{D_q}(P,Q)=-4\sin(2\theta)\Delta b,\qquad
+ \Gamma_{D_q}(Q,Q)=8\sin^2(2\theta)\Delta c. \tag{6}
 \]
 
-is a degree-one circle diffeomorphism for small \(q\). Its conjugated
-round-trip map satisfies
+Every left side is `o(q)` in all compact `C^j` norms by (5). Division by
+the fixed function `sin(2θ)` is bounded from `C^{j+1}` to `C^j` on smooth
+functions divisible by that factor; division by its square loses two
+derivatives. Near a zero this is the elementary integral Taylor formula
+for division by `θ−θ₀`, and away from the finitely many zeros it is ordinary
+smooth division. The matrices in (4) are smooth for each state, so the
+divisibility is exact. Applying these fixed division estimates to (6)
+establishes
 
 \[
- H_q F_q H_q^{-1}(\theta)=\theta-T+qg_0+o(q)
- \tag{6.1}
+ A_{{\rm eff},q}=A_{{\rm orig},q}+o(q)
+ \quad\text{in every compact spatial }C^j\text{ norm}. \tag{7}
 \]
 
-uniformly in \(\theta\).
+This includes the reflection axes; dense-set equality followed by continuity
+would not, on its own, justify the needed uniform estimates there.
 
-Choose the sign of \(q\) so that \(qg_0>0\), and then make \(|q|\) small.
-Every displacement in (6.1) is strictly greater than
-\(-T+|qg_0|/2\). Iteration gives an excess of at least
-\(n|qg_0|/2\) over the translation by \(-nT\).
+Part A extends (4) smoothly to each closed physical half. The probe estimates
+extend to its endpoints by continuity, with their derivative versions using
+the smooth extensions. The same fixed probes also give matching effective
+coefficient jets at the fixed cut: their N03 source outputs are smooth on the
+whole annulus, and fixed sine division reconstructs one smooth field across
+it. No additional interface regularity or smooth dependence of the charts
+on `q` is being assumed.
 
-But section 4 says that this same map is conjugate to translation by
-\(-T\). Every \(\pi\)-periodic degree-one conjugating lift differs from
-the identity by a bounded function. Its iterates can therefore differ
-from \(\theta-nT\) by only a bounded amount (for this fixed \(q\)),
-contradicting the linearly growing excess.
+## 5. What the closed chart forces at the roots and the cut
 
-This does not invoke differentiability of an abstract rotation-number
-functional. It needs only the finite Fourier calculation, monotone
-iteration, and bounded displacement of a periodic conjugacy.
+The boundary values of the *forward* chart suffice. The frozen specification
+does not explicitly control the inverse chart at canonical boundary points,
+so this argument does not use those values.
 
-## 7. Why common shortcuts do not resolve the issue
+A physical boundary point cannot be sent to canonical interior. Otherwise
+an interior sequence approaching it, followed by continuity of the interior
+inverse, would put that boundary point in the physical open strip, contrary
+to `MapsTo`. Hence the first component of the forward chart takes a value
+in `{0,R}` at each physical boundary. It is constant on each boundary circle
+by connectedness. The two boundaries cannot have the same value: on the
+compact closed cylinder modulo π the extrema of the first component, and
+surjectivity onto every `ξ∈(0,R)`, require the values zero and `R`.
 
-- The failure of a particular N04a atlas would not refute N04b. The
-  variation above is chosen after **arbitrary** N04b witnesses are fixed.
-- Changing the return-corrected operator freely is not permitted along
-  the constructed path: its N03 error is \(o(q)\), so it cannot cancel
-  the nonzero first-order half-travel change.
-- It is unnecessary to find an exact nonlinear zero-return state.
-- Values assigned to `K.inverseChart` at the canonical cut cannot repair
-  the interior half-holonomy restriction. The argument uses the actual
-  closed forward chart and its genuine local inverse.
-- A second choice of characteristic charts cannot change the invariant:
-  it only conjugates the same half-round-trip lift.
-- Shrinking the positive neighborhood does not remove the variation.
-  The radial bump and the chart-state curve can be scaled arbitrarily small.
-- Allowing only a state-dependent **radial** cut would still miss the
-  manuscript's general angle-dependent cut. The manuscript uses the
-  actual level \(\sigma=T/2\).
+Part of this topology already has a reusable proof on `line/N04Coordinates`:
+`canonicalChart_endpoint_radial_eq_boundary` in
+`Analysis/CanonicalBoundaryImage.lean` establishes the endpoint image fact,
+and `canonicalChart_exists_smooth_endpointInverse` in
+`Analysis/CanonicalEndpointInverse.lean` obtains the genuine smooth local
+inverse by the inverse function theorem. Those source proofs were checked
+at that branch's `7a710c39ca424751134f091be4a2c6f43a379b69`; this audit does
+not claim their complete use in a compiled N04b obstruction theorem.
 
-## 8. Minimal scientific repair to prepare if the audit is confirmed
+N03 identifies the raw coefficient germs with the original coefficient
+germs at every root of `w'`. There they are genuinely smooth. The true
+type-correction determinant identity is
 
-The manuscript's construction should retain its actual physical domains:
+\[
+ a_{\rm orig}c_{\rm orig}-b_{\rm orig}^2
+    =\frac{w w'/r}{D^2}.
+\]
+
+For the chosen path the profile is exactly `w`. Thus (4), as the effective
+operator of the same local tests, agrees with the original principal matrix
+near the physical root and has zero determinant at the root. Taking the
+determinant in (4) simplifies to
+
+\[
+ \det A_{\rm eff}=-F_1/h^4. \tag{8}
+\]
+
+Consequently each true physical root is mapped to `ξ=0`; its paired
+artificial cut is mapped to `ξ=R`.
+
+On a physical boundary `F_{1,θ}=0`, and nonzero Jacobian gives
+`F_{1,r} F_{2,θ}≠0`. The angular derivative has constant sign, and
+π-equivariance forces that sign to be positive. Thus the boundary angular
+map is an orientation-preserving degree-one circle diffeomorphism lift.
+
+The estimates (7) also give `a_eff>0` on both closed halves for small `q`,
+because the reference value is the positive function `w`. Characteristics
+are then graphs over the physical radius. Their images under `F` are the
+canonical characteristics `dθ/dξ=±√ξ`. The sign and the nonvanishing of the
+radial component follow either from (4), or from the positivity of
+`F_{2,θ}²−F_1 F_{1,θ}²` and the fixed sign of `J`. Therefore they reach
+the specified boundary components rather than turning inside the strip.
+
+Define the positive root loop on a half by following the inward positive
+canonical family from the root to the cut, then the other family back to
+the root. Its holonomy lift is conjugate, by the boundary angular chart, to
+translation by
+
+\[
+ 2\tau(R),\qquad
+ \tau(R)=\int_0^R\sqrt\xi\,d\xi=\frac23 R^{3/2}. \tag{9}
+\]
+
+At `q=0` the physical left and right loop shifts are respectively
+`2T_L` and `2T_R`, where
+
+\[
+ T_L=\int_a^c v_0,\qquad T_R=\int_c^b v_0.
+\]
+
+A degree-one lift conjugacy preserves the average displacement of iterates:
+the conjugating map differs from the identity by a bounded periodic
+function. Equations (9) for both halves force
+
+\[
+ T_L=T_R=\tau(R),\qquad T=T_L+T_R=2\tau(R). \tag{10}
+\]
+
+In particular, an arbitrary possible witness is forced to choose the
+reference optical midpoint, and each of its two loop holonomies must have
+the fixed average displacement `T` at every nearby state. This conclusion
+does not assume that its charts were constructed by the manuscript's method.
+
+## 6. Justify variation through the degenerate roots
+
+A bare uniform `o(q)` error in a principal matrix is not enough near a zero
+of its determinant: taking a square root can enlarge it to order
+`sqrt(|q|)`. The shared root and one spatial derivative are essential.
+
+For every `q` both effective and original determinants vanish at the same
+fixed physical root, by the N03 germ and (8). Their difference is `o(q)`
+in `C^1` by (7). Writing `x` for inward distance to the root, the integral
+Taylor formula therefore factors their difference as `x o(q)`, uniformly
+with angular derivatives. Simplicity of `w'` gives
+
+\[
+ b_0^2-a_0c_0=x\,k_0(x),\qquad k_0>0
+\]
+
+on a sufficiently small fixed endpoint collar. The divided factors remain
+positive for small `q`; square root and division by the uniformly positive
+`a_eff` are smooth operations on these factors. Consequently the difference
+of the two characteristic speeds is `sqrt(x)o(q)` on that collar. Away
+from the endpoints ordinary smooth coefficient calculus applies.
+
+Together with `d=b/a`, this gives the uniform coefficient first variations
+needed in the integral form of the characteristic ODE, including at the
+roots. Periodicity and bounded angular derivatives give a uniform angular
+Lipschitz bound. The usual integral-equation comparison and Gronwall estimate
+then justify differentiation of the endpoint flows and their compositions.
+This establishes the required uniform remainder in the next section; a
+pointwise speed derivative alone would not establish it.
+
+## 7. A fixed cut contradicts the first loop variation
+
+Let `F_q` now denote the left root-loop holonomy (not the coordinate chart).
+At the radial state it is `F_0(θ)=θ+T` by (10). The first variation of each
+half-flow integrates the coefficient variations along radial angular
+translations. Thus the reference-height part is a linear combination of
+`cos(2θ)` and `sin(2θ)`, while the radial perturbation has mean
+
+\[
+ \kappa=2\int_a^c(-\delta\omega f')\,dr=-2\delta\ne0.
+\]
+
+The chart-control correction in Section 3 contributes nothing to the
+original coefficients, and the effective-operator correction is `o(q)`
+by Sections 4 and 6. Consequently there are real `A,B` such that
+
+\[
+ F_q(\theta)=\theta+T+
+     q\bigl(\kappa+A\cos(2\theta)+B\sin(2\theta)\bigr)+o(q), \tag{11}
+\]
+
+uniformly in `θ`. The sign of `κ` changes if the opposite loop convention
+is chosen; its nonvanishing does not.
+
+The exact `RadialReturnMargins` clause applies to **every**
+`NegativeRadialComponent D a b`, hence to this one. It supplies
+`QuadraticIrrational (T/π)`. In particular, `sin T≠0`. This is stronger
+than the nonresonance needed to remove the single oscillatory mode in (11).
+
+Put `d=cos(2T)−1`, `s=sin(2T)`, and
+`Δ=d²+s²=4 sin²T>0`. The periodic function
+
+\[
+ g(\theta)=\frac{-Ad+Bs}{\Delta}\cos(2\theta)
+          +\frac{-As-Bd}{\Delta}\sin(2\theta)
+\]
+
+satisfies
+
+\[
+ g(\theta+T)-g(\theta)=-A\cos(2\theta)-B\sin(2\theta).
+\]
+
+Set `H_q(θ)=θ+q g(θ)`. Its displacement from the identity is bounded.
+Equation (11), the displayed cohomological identity, and the bounded
+derivative of `g` give
+
+\[
+ H_q(F_q(\theta))-H_q(\theta)=T+q\kappa+o(q)
+\]
+
+uniformly in `θ`. Telescoping this estimate along iterates shows that their
+average displacement lies between `T+qκ−o(|q|)` and `T+qκ+o(|q|)`.
+Section 5, however, gives an exact boundary-chart conjugacy to translation
+by `T`, so that average displacement equals `T`. Hence
+
+\[
+ |q\kappa|\le o(|q|),
+\]
+
+contradicting `κ≠0` for sufficiently small nonzero `q`.
+
+This last step does not assume a general differentiability theorem for
+rotation numbers. It does not even require using `H_q` as an invertible
+conjugacy: bounded displacement and orbit telescoping suffice. The helper
+`N04bRotationBounds` isolates the corresponding degree-one-lift estimate.
+The preexisting `N04bFourierCorrector`, `N04bRotationVariation`, and
+`N04bRotationVariationBound` interfaces provide the physical-period
+formulation; their revised bounded-corrector application still needs its
+own successful CI check.
+
+### Why the usual changes of presentation do not remove this issue
+
+- The perturbation is chosen after an arbitrary proposed cut is fixed, so
+  the argument concerns every possible existential choice of atlas.
+- Shrinking the positive neighborhood does not remove it: both the radial
+  bump and the odd chart-state direction can be scaled arbitrarily small.
+- The N03 operator cannot cancel this first-order half-travel change along
+  the chosen path, because its actual error is `o(q)` on all the probes.
+- Values assigned to the stored inverse at a canonical boundary do not
+  change the interior characteristic holonomy or the closed forward chart.
+- A different valid canonical chart only conjugates the same physical
+  loop. It does not change its average displacement.
+- No exact zero-return solution or general rotation-number differentiability
+  theorem is required.
+- Allowing only a state-dependent radial cut still fails to represent the
+  manuscript's general angle-dependent travel level.
+
+## 8. Minimal coherent statement repair
+
+The conflict is the demand that the artificial physical cut remain a fixed
+radial circle while the canonical halves and their operators are fixed.
+The manuscript preserves the canonical geometry by allowing precisely that
+physical cut to move. The corresponding repair should make the domain an
+actual state-dependent geometric object, rather than assume the final
+normal form as a new hypothesis.
+
+Concretely, the negative halves in the intended construction are
 
 \[
  \Omega_{z,m,L}
- =\{p:\ell_m<p^1<r_m,\ 0<\sigma_{z,m}(p)<T_m/2\},
+   =\{p:a_m<p_1<b_m,\ 0<\sigma_{z,m}(p)<T_m/2\},
 \]
 \[
  \Omega_{z,m,R}
- =\{p:\ell_m<p^1<r_m,\ T_m/2<\sigma_{z,m}(p)<T_m\}.
+   =\{p:a_m<p_1<b_m,\ T_m/2<\sigma_{z,m}(p)<T_m\}.
 \]
 
-Their common boundary is the actual moving cut
+Their common cut is `Γ_z,m(θ)=X_z,m(T_m/2,θ)`, where `X` is the genuine
+inverse of the actual travel chart.
 
-\[
- \Gamma_{z,m}(\theta)=X_{z,m}(T_m/2,\theta),
-\]
+1. Give the physical piece domain a state argument, for example an actual
+   `physicalDomain z m : Set PolarPoint`, and define
+   `physicalPieceOpen S K z m` from it. It can equivalently be the image of
+   an explicitly constructed closed/open half-cylinder under the inverse
+   travel chart. Reference radial endpoint metadata may remain, but must
+   no longer define all perturbed negative domains.
+2. For a negative pair, retain the genuine fixed root circles `C.left m`
+   and `C.right m`. Specify a common physical cut parametrization
+   `cutPoint z m θ = X_z(T_m/2,θ)` and the two domains bounded by that
+   curve and the roots. A periodic embedded curve is sufficient; do not
+   assume a radial-graph representation without proving its transversality.
+3. Make the Part A sign conditions, the almost-everywhere partition, the
+   chart/inverse identities, and the smooth nondegenerate boundary
+   extensions refer to these actual domains for each state. The partition
+   is now a partition of the physical cylinder, not merely of its radial
+   axis. Keep periodicity, reflection symmetry, positivity, and
+   normalization on the designated region.
+4. In Part B replace the equality of two constant physical cut radii by
+   their equality to the same physical cut curve, with the real chart and
+   height boundary germs at that curve. Keep both canonical intervals
+   `(0,R_m)`, with `R_m=(3T_m/4)^(2/3)`, and keep the exact transmission
+   coefficient `−1/(2R_m)` and the actual Tricomi operator conclusion.
+5. Preserve the definitions of `canonicalHeight`, `canonicalSource`, and
+   `canonicalOperator` as the genuine pullbacks and conjugated physical
+   divergence expression. No freely assigned operator may replace them.
+6. Update the matching clauses of `N04Properties`, not only its blueprint
+   fragments. In particular its source pairing must integrate over
+   `physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc 0 π)` on the physical side.
+   The canonical integral and its genuine Jacobian transformation remain.
+7. Update `Blueprint/Assembly.lean` together with the definitions so that
+   `N04_of_nodes` assembles exactly the repaired conjunction. Audit
+   `N04a`, `N04Coordinates`, and every use of `physicalPieceOpen` for the
+   new state argument. A reference affine atlas can use constant domains;
+   it does not supply the negative normal-form conclusion at nearby states.
 
-where \(X\) is the genuine inverse of the travel chart. The canonical
-half-radius remains fixed:
+The root regularity, construction of the travel diffeomorphism, boundary
+transmission, source-pairing change of variables, and quantitative estimates
+remain mathematical proof obligations after this repair. Changing the domain
+interface does not prove them. In particular, the repair must not turn the
+desired normal form or the desired cut pullback into an assumed structure
+field with no construction.
 
-\[
- R_m=(3T_m/4)^{2/3}.
-\]
+This audit does not edit the shared statement files, the assembly, or the
+lead-owned status ledger. Any agreed repair must be coordinated and checked
+as one consistent change.
 
-A suitable statement-layer repair would do the following consistently.
+## 9. Formal obligation ledger
 
-1. Give `CanonicalData` actual state-dependent physical domains and a
-   genuine cut curve, or an equivalent representation derived from the
-   actual travel chart. Keep canonical intervals fixed. Avoid representing
-   a curved physical cut by a pair of constant radial endpoints.
-2. Make `physicalPieceOpen` take the state parameter. In Part A, require
-   actual open nonempty domains, annular inclusion, sign on the actual
-   points, periodic/reflection invariance, and a measure-zero exceptional
-   set for their two-dimensional partition. Keep the genuine chart/inverse
-   identities and smoothness, positive height, and nonzero Jacobian.
-   Apply the closed-piece regularity to the actual physical closure.
-3. In Part B replace the fixed radial half-identifications by actual
-   decomposition of each negative component into the two domains and
-   their common cut. Identify both actual chart traces and actual boundary
-   inverses on \(\Gamma_{z,m}\). Keep the same common \(R_m\), the exact
-   transmission matrix, the actual canonical operator identity, and the
-   negative coefficients \(1,0,-\xi\).
-4. In the source-pairing clause integrate over the actual state-dependent
-   physical domain. Keep the definitions of `canonicalHeight`,
-   `canonicalSource`, and `canonicalOperator` as the actual coordinate
-   and height transforms.
-5. Carry the same revised Part A/B clauses into `N04Properties`, all three
-   N04 stage statements, and the conjunction assembly in
-   `Blueprint/Assembly.lean`. Update the N04a construction and the
-   N04Coordinates source-pairing/endpoint interfaces accordingly.
-   Do not leave two incompatible copies of the canonical parts.
-6. Construct the domains from the actual characteristics, prove the
-   transmission formula and all operator/estimate conclusions, and
-   recheck the complete dependency chain. Do not add the desired Tricomi
-   normal form or the final N04 estimate to an upstream hypothesis.
+The argument separates explicit calculations from the remaining analytic
+and topological work. The following items must be proved against the actual
+frozen predicates before claiming a formal contradiction or revising the
+task's completion status.
 
-This is a proposed repair, not a completed implementation or permission
-to weaken the target. It preserves the manuscript's canonical geometry,
-operator, transmission, source pairing, and downstream quantitative
-obligations, while correcting which physical sets are being charted.
+| Obligation | Precise content | Current role |
+| --- | --- | --- |
+| Actual coefficient derivatives | Derive (2) for `b/a` and `sqrt(b²−ac)/a`, with real neighborhood admissibility. | Isolated in new optical-variation helper sources; CI must validate them. |
+| Balanced physical perturbation | Construct compact radial `f` satisfying (1), represent it in the actual height space, and place `x_δ` in the common neighborhood. | Balanced-test and height helper sources cover the scalar construction; representation and neighborhood transport still need integration. |
+| Actual return derivative | Differentiate the N01 flow and N02 inverse/right-chart formula, identify all components of `ρ`, and prove evenness and zero mean. | Mathematical flow calculation described above; not a completed Lean theorem here. |
+| Joint path derivative | Apply the actual N02 derivative and odd inverse on the affine sector path to obtain (3) in the projective topology. | Requires explicit state/sector and `chartIncrement` transport. |
+| Uniform source-to-jet control | Bound decoded compact `C^j` norms by actual physical source seminorms; use error linearity to prove (5). | Essential analytic bridge; pointwise continuity is insufficient. |
+| Effective principal extraction | Localize canonical tests, derive (4), and apply the finite even probes and fixed-factor division in (6). | Avoids any unstated raw-coefficient smoothness; requires formal local operator calculus and division estimates. |
+| Boundary topology | Prove boundary values of the forward chart, determinant identity (8), the genuine root identification, and boundary angular diffeomorphisms. | Must use closed forward-chart regularity, not unconstrained inverse boundary values. |
+| Closed-interval flow variation | Factor the shared determinant zero, establish uniform angular Lipschitz estimates, and obtain endpoint variation with a uniform remainder. | Necessary to pass from pointwise formulas to (11). |
+| Holonomy conjugacy | Transport the actual two characteristic families to the Tricomi strip and prove (9) and (10) as lift identities/invariants. | Does not follow just from naming a normal-form coefficient tuple. |
+| Fourier/telescoping bound | Remove the one nonconstant mode and bound the average displacement from (11). | Isolated in `N04bRotationBounds`; its application still needs the actual holonomy and uniform remainder. |
+| Universal witness conclusion | Quantify the above over every cumulative witness of `N04bStatement`. | Required because disproving one atlas construction does not refute the existential endpoint. |
 
-## 9. Verification ledger and next proof obligations
-
-### Checked directly against the pinned definitions
-
-- The physical halves and their common canonical radius are state-independent.
-- Part A has closed forward-chart smoothness and nonzero actual Jacobian.
-- Part B quantifies the actual operator identity over every smooth \(W\).
-- `IsRadialReference` includes the quadratic irrational travel margin.
-- `HeightMember` allows compact radial height perturbations.
-- The Sobolev decoder is surjective onto that physical class.
-- N02 provides the genuine residual derivative, the chart-direction
-  derivative, and an inverse on even zero-mean circle elements.
-- N03's error is genuinely linear in both residual and height test and
-  jointly smooth tame.
-- The first-speed variations (5.1)--(5.3) follow from the displayed exact
-  coefficient and determinant formulas.
-- PR #18 already proves boundary-image and actual endpoint-local-inverse
-  facts without prescribing stored inverse values at the boundary.
-
-### Complete mathematical reductions described above, not yet kernel-checked
-
-1. Reverse the actual canonical operator to a smooth effective physical
-   divergence field and prove its determinant formula.
-2. Use the compact even probes, including the reflection axes, to obtain
-   the compact \(C^k\) version of (3.4) from the projective source error.
-3. Prove the closed-strip half-holonomy conjugacy from that effective field.
-4. Formalize the compact bump construction and actual height-space realization.
-5. Identify the decoded full-return derivative and form the actual sector
-   path with residual derivative zero.
-6. Carry the first variation through the simple roots on the full half,
-   obtaining the uniform expansion (5.6), not merely an interior expansion.
-7. Prove the finite trigonometric conjugation and iterate contradiction.
-
-Until these bridges have been independently checked, this audit should be
-reported as a concrete obstruction under investigation. It must not be
-reported as a Lean-certified refutation, a closed N04b task, or a completed
-statement repair.
-
-## Sources
-
-All frozen definitions above were read at
-`7393d676930e9b92bfe5a4defa8a79d6f03db323`:
-
-- `src/ContinuousFlexibility/Blueprint/Statements.lean`:
-  `N04PartA`, `N04PartB`, `N04aStatement`, `N04bStatement`.
-- `src/ContinuousFlexibility/Statements/Nonlinear.lean`:
-  physical/canonical data, N01--N03, actual operators.
-- `src/ContinuousFlexibility/Statements/Analysis.lean`:
-  `HeightMember`, `IsSobolevModel`, `IsPhysicalSpaces`.
-- `src/ContinuousFlexibility/Statements/Radial.lean`:
-  `QuadraticIrrational`, `RadialReturnMargins`, `IsRadialReference`.
-- `src/ContinuousFlexibility/Scalar/Linearization.lean` and
-  `Scalar/TypeCorrection.lean`: actual coefficient and determinant formulas.
-- `paper/flexible-surface-readable/07-fixed-geometry.tex`, especially
-  lines 999--1034 and 1155--1196: genuine travel coordinates, root
-  coordinates, and the moving travel-midpoint cut.
-
-The existing boundary-image and endpoint-inverse proofs were read at
-PR #18 commit `fe5009423b9ffc766438b51d75377229b1fbc938`.
+The finite Fourier step and the scalar speed variation are substantially
+smaller than the analytic bridges. They must not be reported as completion
+of the global obstruction. Conversely, the missing bridges are specific:
+they do not justify silently treating the fixed physical radial strip as
+the manuscript's moving travel half.

@@ -23,8 +23,8 @@ open scoped ContDiff Topology
 /-- A compactly supported derivative can be integrated on its enclosing
 interval instead of the whole line. -/
 theorem n04b_integral_weighted_deriv_eq_interval {a b : ℝ} (hab : a ≤ b)
-    (ω f : ℝ → ℝ) (hs : tsupport f ⊆ Ioo a b) :
-    (∫ x, ω x * deriv f x) = ∫ x in a..b, ω x * deriv f x := by
+    (weight f : ℝ → ℝ) (hs : tsupport f ⊆ Ioo a b) :
+    (∫ x, weight x * deriv f x) = ∫ x in a..b, weight x * deriv f x := by
   rw [intervalIntegral.integral_of_le hab]
   symm
   apply setIntegral_eq_integral_of_forall_compl_eq_zero
@@ -38,17 +38,17 @@ theorem n04b_integral_weighted_deriv_eq_interval {a b : ℝ} (hab : a ≤ b)
 endpoints and nonzero at the cut has a smooth compact test with zero total
 pairing but unit pairing on the left piece. -/
 theorem n04b_exists_balanced_compact_deriv_test {a b c : ℝ}
-    (hc : c ∈ Ioo a b) {ω : ℝ → ℝ}
-    (hω : ContinuousOn ω (Icc a b)) (ha : ω a = 0) (hb : ω b = 0)
-    (hcut : ω c ≠ 0) :
+    (hc : c ∈ Ioo a b) {weight : ℝ → ℝ}
+    (hweight : ContinuousOn weight (Icc a b)) (ha : weight a = 0) (hb : weight b = 0)
+    (hcut : weight c ≠ 0) :
     ∃ f : ℝ → ℝ, ContDiff ℝ ∞ f ∧ HasCompactSupport f ∧
       tsupport f ⊆ Ioo a b ∧
-      (∫ x in a..b, ω x * deriv f x) = 0 ∧
-      (∫ x in a..c, ω x * deriv f x) = 1 := by
+      (∫ x in a..b, weight x * deriv f x) = 0 ∧
+      (∫ x in a..c, weight x * deriv f x) = 1 := by
   obtain ⟨f, hf, hfc, hfs, htotal, hhalf⟩ :=
-    n04b_exists_zero_total_nonzero_half_test hc.1 hc.2 hω ha hb hcut
+    n04b_exists_zero_total_nonzero_half_test hc.1 hc.2 hweight ha hb hcut
   refine ⟨f, hf, hfc, hfs, ?_, ?_⟩
-  · rw [← n04b_integral_weighted_deriv_eq_interval (hc.1.trans hc.2).le ω f hfs]
+  · rw [← n04b_integral_weighted_deriv_eq_interval (hc.1.trans hc.2).le weight f hfs]
     exact htotal
   · simpa only [intervalIntegral.integral_of_le hc.1.le, integral_Ioc_eq_integral_Ioo]
       using hhalf
@@ -57,15 +57,15 @@ theorem n04b_exists_balanced_compact_deriv_test {a b c : ℝ}
 balanced-test construction. No differentiability assumption on the weight
 is necessary. -/
 theorem n04b_exists_balanced_compact_deriv_test_of_pos {a b c : ℝ}
-    (hc : c ∈ Ioo a b) {ω : ℝ → ℝ}
-    (hω : ContinuousOn ω (Icc a b)) (ha : ω a = 0) (hb : ω b = 0)
-    (hpos : ∀ x ∈ Ioo a b, 0 < ω x) :
+    (hc : c ∈ Ioo a b) {weight : ℝ → ℝ}
+    (hweight : ContinuousOn weight (Icc a b)) (ha : weight a = 0) (hb : weight b = 0)
+    (hpos : ∀ x ∈ Ioo a b, 0 < weight x) :
     ∃ f : ℝ → ℝ, ContDiff ℝ ∞ f ∧ HasCompactSupport f ∧
       tsupport f ⊆ Ioo a b ∧
-      (∫ x in a..b, ω x * deriv f x) = 0 ∧
-      (∫ x in a..c, ω x * deriv f x) ≠ 0 := by
+      (∫ x in a..b, weight x * deriv f x) = 0 ∧
+      (∫ x in a..c, weight x * deriv f x) ≠ 0 := by
   obtain ⟨f, hf, hfc, hfs, htotal, hhalf⟩ :=
-    n04b_exists_balanced_compact_deriv_test hc hω ha hb (hpos c hc).ne'
+    n04b_exists_balanced_compact_deriv_test hc hweight ha hb (hpos c hc).ne'
   exact ⟨f, hf, hfc, hfs, htotal, by rw [hhalf]; exact one_ne_zero⟩
 
 end ContinuousFlexibility.Analysis

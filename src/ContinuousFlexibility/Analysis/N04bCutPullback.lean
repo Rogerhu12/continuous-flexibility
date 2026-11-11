@@ -63,9 +63,9 @@ theorem n04b_radialPartial_gaugedTravel
   unfold n04bGaugedTravel
   rw [radialPartial_mul hb.differentiableAt hc]
   simp only [radialPartial, hb.fderiv,
-    fderiv_comp (r, θ) hG' hs.differentiableAt, hs.fderiv,
-    he, fstL, sndL, ContinuousLinearMap.add_apply,
-    ContinuousLinearMap.smul_apply, ContinuousLinearMap.comp_apply,
+    fderiv_fun_comp (r, θ) hG' hs.differentiableAt, hs.fderiv,
+    he, fstL, sndL, add_apply,
+    smul_apply, ContinuousLinearMap.comp_apply,
     ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
     ContinuousLinearMap.coe_snd', smul_eq_mul, mul_one]
   rw [show (s * τ', (0 : ℝ)) = (s * τ') • ((1 : ℝ), (0 : ℝ)) by simp,

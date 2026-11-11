@@ -79,7 +79,8 @@ theorem n04b_hasDerivAt_characteristicDrift_radialHeight
       ((contDiff_heightFamily hH hu q).contDiffAt.of_le (by simp)) hr.ne'
   rw [heq]
   apply hd.congr_deriv
-  simp only [hQ0, heightFamily_zero, heightAngular_radialHeightField hhw,
+  simp only [hQ0]
+  simp only [heightFamily_zero, heightAngular_radialHeightField hhw,
     radialPartial_const, mul_zero, zero_mul, sub_zero]
   have hc := height_compatibility (hu.contDiffAt.of_le (by simp)) hr.ne'
   have hp : radialPartial (heightAngular u) x =

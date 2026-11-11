@@ -34,7 +34,7 @@ theorem n04bFourier_conjugacy_defect
   have hc (x : ℝ) : |c + n04bSecondHarmonic a b x| ≤ M := by
     calc
       _ ≤ |c| + |n04bSecondHarmonic a b x| := abs_add_le _ _
-      _ ≤ |c| + (|a| + |b|) := add_le_add_left (n04bSecondHarmonic_abs_le a b x) _
+      _ ≤ |c| + (|a| + |b|) := add_le_add le_rfl (n04bSecondHarmonic_abs_le a b x)
       _ = M := by dsimp only [M]; ring
   have he :
       (F θ + q * n04bFourierCorrector T a b (F θ)) -

@@ -44,12 +44,12 @@ theorem n04b_translationNumber_bound_of_bounded_corrector
       · calc
           H 0 + ((n : ℝ) + 1) * (α - E) =
               (H 0 + (n : ℝ) * (α - E)) + (α - E) := by ring
-          _ ≤ H ((f ^ n) 0) + (α - E) := add_le_add_right ih.1 _
+          _ ≤ H ((f ^ n) 0) + (α - E) := add_le_add ih.1 le_rfl
           _ ≤ H (f ((f ^ n) 0)) := by linarith [h.1]
       · calc
           H (f ((f ^ n) 0)) ≤ H ((f ^ n) 0) + (α + E) := by linarith [h.2]
           _ ≤ (H 0 + (n : ℝ) * (α + E)) + (α + E) :=
-            add_le_add_right ih.2 _
+            add_le_add ih.2 le_rfl
           _ = H 0 + ((n : ℝ) + 1) * (α + E) := by ring
   have hzero := abs_le.mp (hB 0)
   simp only [sub_zero] at hzero
@@ -77,7 +77,7 @@ theorem n04b_translationNumber_bound_of_bounded_corrector
         field_simp [ne_of_gt hn] <;> ring
   have hvanish :
       Tendsto (fun n : ℕ => (2 * B) / ((n : ℝ) + 1)) atTop (𝓝 0) := by
-    simpa only [Function.comp_apply, Nat.cast_add, Nat.cast_one] using
+    simpa only [Function.comp_def, Nat.cast_add, Nat.cast_one] using
       (tendsto_const_div_atTop_nhds_zero_nat (2 * B)).comp
         (tendsto_add_atTop_nat 1)
   have hright : Tendsto (fun n : ℕ => E + (2 * B) / ((n : ℝ) + 1))
@@ -128,8 +128,8 @@ theorem n04b_bounded_corrector_displacement
       exact add_le_add (hrem x)
         (mul_le_mul_of_nonneg_left (hLip (F x) (x + T)) (abs_nonneg q))
     _ ≤ |q| * η + |q| * (L * (|q| * (M + η))) :=
-      add_le_add_left (mul_le_mul_of_nonneg_left
-        (mul_le_mul_of_nonneg_left hmove hL) (abs_nonneg q)) _
+      add_le_add le_rfl (mul_le_mul_of_nonneg_left
+        (mul_le_mul_of_nonneg_left hmove hL) (abs_nonneg q))
     _ = |q| * η + |q| ^ 2 * L * (M + η) := by ring
     _ = |q| * η + q ^ 2 * L * (M + η) := by rw [sq_abs]
 
