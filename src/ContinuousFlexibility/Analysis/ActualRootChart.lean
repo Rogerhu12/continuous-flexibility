@@ -155,7 +155,7 @@ theorem rootInverseCoordinate_boundary_chart (θ : ℝ)
   have hJpos : 0 < rootChartJacobianWithin G (0, θ) := by
     rw [hJ]
     exact mul_pos (Real.rpow_pos_of_pos (mul_pos hcpos hlpos) _) hlpos
-  refine ⟨contDiffWithinAt_rootEvenOddChart hG ⟨le_rfl, mem_univ _⟩ hχ.ne',
+  refine ⟨contDiffWithinAt_rootEvenOddChart hG (by simp [rootChartHalfPlane]) hχ.ne',
     ?_, ?_, fderivWithin_rootEven_zero_angle hG hzero hdL, hJ, hJpos,
     exists_rootEvenOddChart_positive_collar hG hzero hdL hχ hlpos⟩
   · rw [hξ]

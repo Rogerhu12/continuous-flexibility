@@ -79,7 +79,8 @@ private theorem n04_continuous_circleFlowLowGeometryBound (P : ℝ) :
     Continuous (circleFlowLowGeometryBound P) := by
   have hj := (n04_continuous_circleFlowJetBound 4).comp
     (show Continuous (fun L : ℝ => circleSobolevEmbeddingConstant P * L) by fun_prop)
-  simp only [circleFlowLowGeometryBound]
+  change Continuous (fun L : ℝ =>
+    16 * (circleFlowJetBound 4 (circleSobolevEmbeddingConstant P * L) + 1))
   fun_prop
 
 /-- The actual all-order flow estimate has a continuous dependence on
@@ -100,7 +101,8 @@ theorem continuous_circleFlowTranslationConstant (P : ℝ) (s : ℕ) :
     Continuous (fun z : ℝ × ℝ => circleFlowTranslationConstant P z.1 z.2 s) := by
   have hc : Continuous (fun z : ℝ × ℝ =>
       Real.exp (-(circleFlowEmbeddingConstant P * z.1))) := by fun_prop
-  have hM := (n04_continuous_circleFlowLowGeometryBound P).comp continuous_fst
+  have hM : Continuous (fun z : ℝ × ℝ => circleFlowLowGeometryBound P z.1) :=
+    (n04_continuous_circleFlowLowGeometryBound P).comp continuous_fst
   have hs := n04_continuous_circleLiftCompositionConstant P s hc hM
     (fun _ => Real.exp_pos _)
   have hh : Continuous (fun L : ℝ => circleFlowTranslationHighFactor P L s) := by
@@ -108,7 +110,8 @@ theorem continuous_circleFlowTranslationConstant (P : ℝ) (s : ℕ) :
     | zero => simpa only [circleFlowTranslationHighFactor] using
         (continuous_const : Continuous (fun _ : ℝ => (0 : ℝ)))
     | succ n => exact continuous_circleFlowSobolevConstant P n
-  have hh' := hh.comp continuous_fst
+  have hh' : Continuous (fun z : ℝ × ℝ => circleFlowTranslationHighFactor P z.1 s) :=
+    hh.comp continuous_fst
   simp only [circleFlowTranslationConstant]
   fun_prop
 

@@ -81,11 +81,13 @@ theorem continuous_seeleyCylinderJet (S : SeeleyData ι)
     · intro i
       have hm : Continuous (fun p : ℝ × ℝ => (-S.b i * p.1, p.2)) :=
         (continuous_const.mul continuous_fst).prodMk continuous_snd
-      have hc := (hJ.continuous a b).comp hm.continuousOn
-        (fun p (hp : p.1 ≤ 0) => mul_nonneg_of_nonpos_of_nonpos
-          (neg_nonpos.mpr (S.b_nonneg i)) hp)
-      simpa only [Pi.smul_def, Function.comp_def] using
-        hc.const_smul (S.a i * (-S.b i) ^ a)
+      have hc : ContinuousOn
+          (fun p : ℝ × ℝ => J a b (-S.b i * p.1, p.2))
+          {p : ℝ × ℝ | p.1 ≤ 0} :=
+        (hJ.continuous a b).comp hm.continuousOn
+          (fun p (hp : p.1 ≤ 0) => mul_nonneg_of_nonpos_of_nonpos
+            (neg_nonpos.mpr (S.b_nonneg i)) hp)
+      exact continuousOn_const.smul hc
     · intro i p hp
       rw [norm_smul, norm_seeley_coefficient]
       exact mul_le_mul_of_nonneg_left
@@ -213,7 +215,13 @@ private theorem contDiff_nat_seeleyCylinderJet (S : SeeleyData ι)
               v.2 * seeleyCylinderJet S J a (b + 1) p :=
           funext fun p => fderiv_seeleyCylinderJet_apply S hJ a b p v
         rw [he]
-        exact ((ih (a + 1) b).const_mul v.1).add ((ih a (b + 1)).const_mul v.2)
+        have hr : ContDiff ℝ n (seeleyCylinderJet S J (a + 1) b) := ih (a + 1) b
+        have hθ : ContDiff ℝ n (seeleyCylinderJet S J a (b + 1)) := ih a (b + 1)
+        have hr' : ContDiff ℝ n (fun p => v.1 * seeleyCylinderJet S J (a + 1) b p) :=
+          contDiff_const.mul hr
+        have hθ' : ContDiff ℝ n (fun p => v.2 * seeleyCylinderJet S J a (b + 1) p) :=
+          contDiff_const.mul hθ
+        exact hr'.add hθ'
       simpa only [Nat.cast_add, Nat.cast_one] using hnext
 
 /-- Every candidate extended jet is jointly smooth of all orders. -/

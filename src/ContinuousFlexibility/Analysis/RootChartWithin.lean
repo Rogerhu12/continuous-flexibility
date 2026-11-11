@@ -90,7 +90,7 @@ theorem hasFDerivWithinAt_rootRadialCoordinate_zero
     HasFDerivWithinAt (rootRadialCoordinate G)
       (rootRadialFactor G (0, θ) • ContinuousLinearMap.fst ℝ ℝ ℝ)
       rootChartHalfPlane (0, θ) := by
-  have hm : (0, θ) ∈ rootChartHalfPlane := ⟨le_rfl, mem_univ _⟩
+  have hm : (0, θ) ∈ rootChartHalfPlane := (by simp [rootChartHalfPlane])
   have ha : ContDiffWithinAt ℝ ∞ (rootRadialFactor G) rootChartHalfPlane (0, θ) :=
     (contDiffWithinAt_const.mul (contDiffOn_rootOddCoefficient hG (0, θ) hm)).rpow_const_of_ne
       (mul_ne_zero (by norm_num : (3 : ℝ) / 2 ≠ 0) hχ)
@@ -108,7 +108,7 @@ theorem fderivWithin_rootRadialCoordinate_zero
     fderivWithin ℝ (rootRadialCoordinate G) rootChartHalfPlane (0, θ) =
       rootRadialFactor G (0, θ) • ContinuousLinearMap.fst ℝ ℝ ℝ :=
   (hasFDerivWithinAt_rootRadialCoordinate_zero hG θ hχ).fderivWithin
-    (uniqueDiffOn_rootChartHalfPlane (0, θ) ⟨le_rfl, mem_univ _⟩)
+    (uniqueDiffOn_rootChartHalfPlane (0, θ) (by simp [rootChartHalfPlane]))
 
 /-- The angular boundary derivative is the derivative of the prescribed
 zero-section angular map, even though radial derivatives are one-sided. -/
@@ -118,14 +118,14 @@ theorem fderivWithin_rootEven_zero_angle
     (hzero : ∀ η : ℝ, G (0, 0, η) = hL η)
     (hLderiv : HasDerivAt hL a θ) :
     fderivWithin ℝ (rootEven G) rootChartHalfPlane (0, θ) (0, 1) = a := by
-  have hm : (0, θ) ∈ rootChartHalfPlane := ⟨le_rfl, mem_univ _⟩
+  have hm : (0, θ) ∈ rootChartHalfPlane := (by simp [rootChartHalfPlane])
   have hd := ((contDiffOn_rootEven hG (0, θ) hm).differentiableWithinAt
     (by simp)).hasFDerivWithinAt
   have hp : HasDerivAt (fun η : ℝ => ((0 : ℝ), η)) (0, 1) θ :=
     (hasDerivAt_const θ (0 : ℝ)).prodMk (hasDerivAt_id θ)
   have hc := hd.comp_hasDerivAt θ hp
     (Eventually.of_forall fun η => (show (0, η) ∈ rootChartHalfPlane from
-      ⟨le_rfl, mem_univ _⟩))
+      (by simp [rootChartHalfPlane])))
   have he : rootEven G ∘ (fun η : ℝ => ((0 : ℝ), η)) = hL := by
     funext η
     simp only [Function.comp_apply, rootEven_zero, hzero]
@@ -141,7 +141,7 @@ theorem rootChartJacobianWithin_zero
     (hLderiv : HasDerivAt hL a θ)
     (hχ : rootOddCoefficient G (0, θ) ≠ 0) :
     rootChartJacobianWithin G (0, θ) = rootRadialFactor G (0, θ) * a := by
-  have hm : (0, θ) ∈ rootChartHalfPlane := ⟨le_rfl, mem_univ _⟩
+  have hm : (0, θ) ∈ rootChartHalfPlane := (by simp [rootChartHalfPlane])
   have hr := hasFDerivWithinAt_rootRadialCoordinate_zero hG θ hχ
   have ha := ((contDiffOn_rootEven hG (0, θ) hm).differentiableWithinAt
     (by simp)).hasFDerivWithinAt
@@ -166,7 +166,7 @@ theorem exists_rootEvenOddChart_positive_collar
     (hχ : 0 < rootOddCoefficient G (0, θ)) (ha : 0 < a) :
     ∃ δ : ℝ, 0 < δ ∧ ∀ p ∈ rootChartHalfPlane, dist p (0, θ) < δ →
       0 < rootOddCoefficient G p ∧ 0 < rootChartJacobianWithin G p := by
-  have hm : (0, θ) ∈ rootChartHalfPlane := ⟨le_rfl, mem_univ _⟩
+  have hm : (0, θ) ∈ rootChartHalfPlane := (by simp [rootChartHalfPlane])
   have hs := contDiffWithinAt_rootEvenOddChart hG hm hχ.ne'
   have hD : ContinuousWithinAt
       (fderivWithin ℝ (rootEvenOddChart G) rootChartHalfPlane)
