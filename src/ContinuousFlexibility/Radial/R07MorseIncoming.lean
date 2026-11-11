@@ -94,14 +94,14 @@ theorem r07_cap_profile_increasing (right : Bool) {R w : ℝ → ℝ} {scale L :
 hypothesis. The final state is the project's `radialState`, at the physical
 join and scaled by its actual profile height. -/
 theorem exists_r07_normalized_morse_incoming (right : Bool) {D : Statements.ReferenceData}
-    (hD : Statements.RadialProfileGeometry D) {A B s λ l h : ℝ} {j : ℕ} {r : ℝ → ℝ}
-    (hB : 0 < B) (hAB : 4 * B < A) (hBA : B ≤ A ^ 9) (hs : 0 < s) (hλ : 0 < λ)
+    (hD : Statements.RadialProfileGeometry D) {A B s lam l h : ℝ} {j : ℕ} {r : ℝ → ℝ}
+    (hB : 0 < B) (hAB : 4 * B < A) (hBA : B ≤ A ^ 9) (hs : 0 < s) (hlam : 0 < lam)
     (hj : 2 ≤ j) (hr : IsNormalizedMorseCell A B r)
     (hl : D.a < l) (hlh : l ≤ h) (hh : h < D.b)
     (hmap : ∀ t ∈ Icc 0 (r07CapLength right A),
       r07CapRadius right A B s r t ∈ Icc l h)
     (hweight : ∀ x ∈ Icc morseCellLeftCut (morseRightCapEnd A B (1 / 100)),
-      D.w (s * r x) = λ * (s * deriv r x))
+      D.w (s * r x) = lam * (s * deriv r x))
     (haction : 1000 ≤ (j : ℝ) * sqrt A) :
     ∃ (u : ℝ → ℝ) (a : ℝ), ContDiff ℝ ∞ u ∧
       u (s * r (r07CapCut right A B)) = 0 ∧ u (s * r (r07CapEnd right A B)) = 1 ∧
@@ -120,22 +120,22 @@ theorem exists_r07_normalized_morse_incoming (right : Bool) {D : Statements.Refe
   let R := r07CapRadius right A B s r
   let L := r07CapLength right A
   let M := r07CapRiccatiBound right A (j : ℝ)
-  let scale := λ * r07OutwardSign right
+  let scale := lam * r07OutwardSign right
   have hL : 0 < L := r07CapLength_pos right hA
   have hM : 0 < M := r07CapRiccatiBound_pos right hA hj₀
   have hR : ContDiff ℝ ∞ R := r07CapRadius_smooth right A B s hr.smooth
   have hdir : ∀ t ∈ Icc 0 L, if right then 0 < deriv R t else deriv R t < 0 :=
     fun t ht => (r07CapRadius_model_bounds right hB hAB hs hr ht).2
-  have hscale : scale ≠ 0 := mul_ne_zero hλ.ne'
+  have hscale : scale ≠ 0 := mul_ne_zero hlam.ne'
     (by cases right <;> norm_num [r07OutwardSign])
   have hweight' : ∀ t ∈ Icc 0 L, D.w (R t) = scale * deriv R t := by
     intro t ht
     rw [r07CapRadius_deriv right A B s t hr.smooth]
     change D.w (s * r (r07CapPoint right A B t)) =
-      (λ * r07OutwardSign right) * (s * deriv r (r07CapPoint right A B t) * r07OutwardSign right)
+      (lam * r07OutwardSign right) * (s * deriv r (r07CapPoint right A B t) * r07OutwardSign right)
     rw [hweight _ (r07CapPoint_mem_cell right hB hAB ht)]
     calc
-      _ = λ * (s * deriv r (r07CapPoint right A B t)) * r07OutwardSign right ^ 2 := by
+      _ = lam * (s * deriv r (r07CapPoint right A B t)) * r07OutwardSign right ^ 2 := by
         rw [r07OutwardSign_sq, mul_one]
       _ = _ := by ring
   have hpos : ∀ t ∈ Icc 0 L, 0 < D.w (R t) := by

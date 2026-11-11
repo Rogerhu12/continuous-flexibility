@@ -92,7 +92,7 @@ theorem exists_r07_cone_positions {a b WL WR η : ℝ}
     linarith only [h, hab]
   have hg : L e < R e := hdgap (by simpa only [Real.dist_eq, sub_zero, abs_of_pos he] using heD)
   refine ⟨a + e, a + 2 * e, b - 2 * e, b - e,
-    by linarith only [he], by linarith only [he], by linarith only [heGap],
+    by linarith only [he], by linarith only [he], by linarith only [heGap, he],
     by linarith only [he], by linarith only [he], ?_, ?_, ?_⟩
   · linarith only [heη]
   · linarith only [heη]

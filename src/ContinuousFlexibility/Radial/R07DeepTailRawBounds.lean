@@ -102,7 +102,7 @@ theorem r07_realized_small_products {T : MorseChainData} {D : ReferenceData} {σ
       _ ≤ (C 0 * morseChainAmplitude T σ n * morseChainA T n ^ 2) *
           (C 0 / morseChainAmplitude T σ n * log (morseChainA T n / morseChainB T n)) :=
         mul_le_mul_of_nonneg_right hnB.2.1 (by positivity)
-      _ = _ := by field_simp [hlam.ne']; ring
+      _ = _ := by field_simp [hlam.ne']
   · calc
       _ ≤ (C 0 * morseChainAmplitude T σ n * morseChainA T n ^ 6) *
           morseJoinResistance T D side n :=
@@ -110,7 +110,7 @@ theorem r07_realized_small_products {T : MorseChainData} {D : ReferenceData} {σ
       _ ≤ (C 0 * morseChainAmplitude T σ n * morseChainA T n ^ 6) *
           (C 0 * (morseChainAmplitude T σ n)⁻¹ * (morseChainA T n ^ 4)⁻¹) :=
         mul_le_mul_of_nonneg_left hnB.2.2.2.2.2 (by positivity)
-      _ = _ := by field_simp [hlam.ne', hA.ne']; ring
+      _ = _ := by field_simp [hlam.ne', hA.ne']
 
 theorem r07_realized_small_products_coarse
     {T : MorseChainData} {D : ReferenceData} {σ C : ℕ → ℝ}

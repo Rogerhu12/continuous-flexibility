@@ -86,7 +86,7 @@ theorem r07_exists_finite_angle_tolerance {ι : Type*} (I : Finset ι)
         (min_le_left _ _).trans hδs, ?_⟩
       intro k hk
       rcases Finset.mem_insert.mp hk with rfl | hk
-      · have hb := min_le_right δ (f i / 4)
+      · have hb := min_le_right δ (f k / 4)
         linarith only [hb, hfi]
       · exact (mul_le_mul_of_nonneg_left (min_le_left _ _) (by norm_num)).trans (hδf k hk)
 

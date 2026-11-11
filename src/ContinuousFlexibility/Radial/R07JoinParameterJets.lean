@@ -93,7 +93,9 @@ theorem continuous_morseJoinProfile_add_const_iteratedDeriv {X : Type*} [Topolog
       (morseJoinProfile a b hL hR (fun y => fL y + cL z) (fun y => fR y + cR z)) (x z)) := by
   have hf := contDiff_morseJoinProfile_two_amplitudes
     (a := a) (b := b) (hL := hL) (hR := hR) hfL hfR
-  have hi := contDiff_parametric_iteratedDeriv hf n
+  have hi := contDiff_parametric_iteratedDeriv
+    (f := fun c : ℝ × ℝ => morseJoinProfile a b hL hR (fun y => fL y + c.1)
+      (fun y => fR y + c.2)) (by simpa only [Function.uncurry_def] using hf) n
   exact hi.continuous.comp ((hCL.prodMk hCR).prodMk hx)
 
 /-- Product-topology continuity of every actual chosen-join spatial jet,

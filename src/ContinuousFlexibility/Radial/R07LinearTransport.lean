@@ -45,7 +45,7 @@ theorem continuous_linearODE_endpoint {X E : Type*} [TopologicalSpace X]
   let ε : X → ℝ := fun p => ‖B p - B q‖ * ‖V‖
   let majorant : X → ℝ := fun p =>
     δ p * exp (K p * (b - a)) + ε p / K p * (exp (K p * (b - a)) - 1)
-  have hK (p : X) : 0 < K p := add_pos_of_nonneg_of_pos (norm_nonneg _) zero_lt_one
+  have hK (p : X) : 0 < K p := add_pos_of_nonneg_of_pos (norm_nonneg (B p)) zero_lt_one
   have hδc : Continuous δ := (hinit.sub continuous_const).norm
   have hKc : Continuous K := hBc.norm.add_const 1
   have hεc : Continuous ε := (hBc.sub continuous_const).norm.mul_const ‖V‖
@@ -104,6 +104,7 @@ theorem continuous_linearODE_endpoint_from_right {X E : Type*} [TopologicalSpace
       {z | z.2 ∈ Icc (-b) (-a)} := by
     refine (hA.comp (continuous_fst.prodMk continuous_snd.neg).continuousOn ?_).neg
     intro z hz
+    change a ≤ -z.2 ∧ -z.2 ≤ b
     exact ⟨by linarith only [hz.2], by linarith only [hz.1]⟩
   have huc (p : X) : ContinuousOn (fun t => u p (-t)) (Icc (-b) (-a)) := by
     refine (hu p).comp continuous_neg.continuousOn ?_
@@ -113,7 +114,7 @@ theorem continuous_linearODE_endpoint_from_right {X E : Type*} [TopologicalSpace
       HasDerivAt (fun t => u p (-t)) ((-A p (-t)) (u p (-t))) t := by
     have h := (hderiv p (-t) ⟨by linarith only [ht.2], by linarith only [ht.1]⟩).scomp t
       (hasDerivAt_id t).neg
-    simpa only [Function.comp_apply, neg_one_smul, ContinuousLinearMap.neg_apply] using h
+    simpa only [Function.comp_def, neg_one_smul, ContinuousLinearMap.neg_apply] using h
   have hi : Continuous (fun p => u p (-(-b))) := by simpa only [neg_neg] using hinit
   have h := continuous_linearODE_endpoint (neg_le_neg hab) hAc huc hdc hi
   simpa only [neg_neg] using h

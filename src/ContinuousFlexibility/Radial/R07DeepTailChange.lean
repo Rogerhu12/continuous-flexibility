@@ -29,11 +29,17 @@ theorem r07_hasDerivAt_radius (right : Bool) (x : ℝ) :
     HasDerivAt (tailPhysicalRadius right)
       (r07OutwardSign right * tailPhysicalRadius right x) x := by
   cases right
-  · simp only [tailPhysicalRadius, r07OutwardSign, Bool.false_eq_true, if_false, neg_one_mul]
-    simpa only [Function.comp_def, mul_neg_one] using
-      (hasDerivAt_exp (-x)).comp x (hasDerivAt_neg x)
-  · simp only [tailPhysicalRadius, r07OutwardSign, if_true, one_mul]
-    exact hasDerivAt_exp x
+  · have hfun : tailPhysicalRadius false = fun y : ℝ => exp (-y) := by
+      funext y
+      rfl
+    rw [hfun]
+    simpa only [r07OutwardSign, Bool.false_eq_true, if_false, neg_one_mul, mul_neg_one]
+      using (hasDerivAt_neg x).exp
+  · have hfun : tailPhysicalRadius true = exp := by
+      funext y
+      rfl
+    rw [hfun]
+    simpa only [r07OutwardSign, if_true, one_mul] using hasDerivAt_exp x
 
 /-- Substitution by the outward radius map, with the orientation recorded
 explicitly outside the physical radial integral. -/
