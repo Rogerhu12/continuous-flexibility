@@ -38,6 +38,44 @@ def coefficientPrimitiveVector (D : ReferenceData) (S : PhysicalSpacesData)
       (Fin.cons (deriv (stateProfile D S C z.1) p.1)
         (fun i : Fin 5 => z.2 * stateUPolarInput S i z.1 p)))
 
+/-- Explicit evaluations avoid numerical-index reduction inside nested
+finite tuples. The last five slots are reached by three successor maps. -/
+theorem coefficientPrimitiveVector_evaluations (D : ReferenceData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (z : AnnularState S × ℝ) (p : PolarPoint) :
+    coefficientPrimitiveVector D S C z p 0 = p.1 ∧
+    coefficientPrimitiveVector D S C z p 1 = stateProfile D S C z.1 p.1 ∧
+    coefficientPrimitiveVector D S C z p 2 = deriv (stateProfile D S C z.1) p.1 ∧
+    coefficientPrimitiveVector D S C z p 3 = z.2 * heightRadial (stateU S z.1) p ∧
+    coefficientPrimitiveVector D S C z p 4 = z.2 * heightAngular (stateU S z.1) p ∧
+    coefficientPrimitiveVector D S C z p 5 =
+      z.2 * radialPartial (heightRadial (stateU S z.1)) p ∧
+    coefficientPrimitiveVector D S C z p 6 =
+      z.2 * radialPartial (heightAngular (stateU S z.1)) p ∧
+    coefficientPrimitiveVector D S C z p 7 =
+      z.2 * angularPartial (heightAngular (stateU S z.1)) p := by
+  have htail (j : Fin 5) :
+      coefficientPrimitiveVector D S C z p j.succ.succ.succ =
+        z.2 * stateUPolarInput S j z.1 p := by
+    simp only [coefficientPrimitiveVector, Fin.cons_succ]
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · simp only [coefficientPrimitiveVector, Fin.cons_zero]
+  · simp only [coefficientPrimitiveVector, Fin.cons_one, Fin.cons_zero]
+  · have htwo :
+        coefficientPrimitiveVector D S C z p (0 : Fin 6).succ.succ =
+          deriv (stateProfile D S C z.1) p.1 := by
+      simp only [coefficientPrimitiveVector, Fin.cons_succ, Fin.cons_zero]
+    exact htwo
+  · simpa only [stateUPolarInput, Fin.cases_zero] using htail (0 : Fin 5)
+  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
+      htail (0 : Fin 4).succ
+  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
+      htail (0 : Fin 3).succ.succ
+  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
+      htail (0 : Fin 2).succ.succ.succ
+  · simpa only [stateUPolarInput, Fin.cases_succ, Fin.cases_zero] using
+      htail (0 : Fin 1).succ.succ.succ.succ
+
 /-- The discriminant expressed in the eight actual primitive inputs. -/
 def coefficientPrimitiveDiscriminant (y : Fin 8 → ℝ) : ℝ :=
   heightDiscriminant (radialEnergy (y 1)) (y 1 + y 3) (y 4)
@@ -117,11 +155,12 @@ theorem contDiffOn_coefficientPrimitiveKernel (i : Fin 3) :
         (inverseDThreeHalves (coefficientPrimitiveDiscriminant v))) y :=
     ((((hE.mul hkr).sub ((hEr.mul hk).div_const 2)).mul ht).div (hj 0) hy.1).sub
       ((hE.mul ((hnum.mul ht).div (hj 0) hy.1)).div hq hy.2.2)
+  unfold coefficientPrimitiveKernel
   by_cases hi : i = 0
-  · simpa only [coefficientPrimitiveKernel, if_pos hi] using hA.contDiffWithinAt
+  · simpa only [if_pos hi] using hA.contDiffWithinAt
   · by_cases hi' : i = 1
-    · simpa only [coefficientPrimitiveKernel, if_neg hi, if_pos hi'] using hB.contDiffWithinAt
-    · simpa only [coefficientPrimitiveKernel, if_neg hi, if_neg hi'] using hC.contDiffWithinAt
+    · simpa only [if_neg hi, if_pos hi'] using hB.contDiffWithinAt
+    · simpa only [if_neg hi, if_neg hi'] using hC.contDiffWithinAt
 
 /-- The actual state polar fields are spatially smooth in the open annulus. -/
 theorem contDiffOn_stateUPolarInput
@@ -195,7 +234,7 @@ def n01_coefficientPrimitiveMixedSmoothDirections
     · let J := smoothDirections_precompCLM
         (stateProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ a p.1 hp.1) L
       refine J.congr (fun z _ => ?_)
-      simp only [mixedDerivative_radialFunction, hb, if_pos rfl,
+      simp only [mixedDerivative_radialFunction, hb, ite_true,
         Function.comp_apply, L, ContinuousLinearMap.coe_fst']
     · let J : SmoothDirections univ (fun _ : AnnularState S × ℝ => (0 : ℝ)) :=
         smoothDirections_constant isOpen_univ 0
@@ -208,7 +247,7 @@ def n01_coefficientPrimitiveMixedSmoothDirections
         (stateProfileRadialJetSmoothDirections hS hT hA.1.1 hD hA.2.2.1 hχ
           (a + 1) p.1 hp.1) L
       refine J.congr (fun z _ => ?_)
-      simp only [mixedDerivative_radialFunction, hb, if_pos rfl, iteratedDeriv_succ',
+      simp only [mixedDerivative_radialFunction, hb, ite_true, iteratedDeriv_succ',
         Function.comp_apply, L, ContinuousLinearMap.coe_fst']
     · let J : SmoothDirections univ (fun _ : AnnularState S × ℝ => (0 : ℝ)) :=
         smoothDirections_constant isOpen_univ 0
@@ -227,8 +266,9 @@ theorem coefficientPrimitiveDiscriminant_eq
     (hA : N01PartA D T S C) (z : AnnularState S × ℝ) (p : PolarPoint) :
     coefficientPrimitiveDiscriminant (coefficientPrimitiveVector D S C z p) =
       polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z) p := by
-  simp only [coefficientPrimitiveDiscriminant, coefficientPrimitiveVector,
-    Fin.cons_zero, Fin.cons_one, Fin.cons_succ, stateUPolarInput, Fin.cases_zero, Fin.cases_succ,
+  obtain ⟨_, h1, _, h3, h4, _, _, _⟩ :=
+    coefficientPrimitiveVector_evaluations D S C z p
+  simp only [coefficientPrimitiveDiscriminant, h1, h3, h4,
     polarDiscriminant, profileEnergy,
     heightRadial_stateHeight hS hT hA z p, heightAngular_stateHeight hS hT hA z p]
 
@@ -242,8 +282,9 @@ theorem coefficientPrimitiveQ_eq
       heightQ (profileEnergy (stateProfile D S C z.1) p)
         (heightRadial (stateHeight D S C z) p)
         (angularPartial (heightAngular (stateHeight D S C z)) p) := by
-  simp only [coefficientPrimitiveQ, coefficientPrimitiveVector,
-    Fin.cons_zero, Fin.cons_one, Fin.cons_succ, stateUPolarInput, Fin.cases_zero, Fin.cases_succ,
+  obtain ⟨_, h1, _, h3, _, _, _, h7⟩ :=
+    coefficientPrimitiveVector_evaluations D S C z p
+  simp only [coefficientPrimitiveQ, h1, h3, h7,
     profileEnergy, heightRadial_stateHeight hS hT hA z p,
     angularPartial_heightAngular_stateHeight hS hT hA z hr]
 
@@ -259,10 +300,11 @@ theorem coefficientPrimitiveKernel_eq_original
       coefficientOriginalField D S C i z p := by
   have hEr := radialPartial_profileEnergy (x := p)
     ((contDiff_stateProfile_of_partA hS hT hA z.1).differentiable (by simp) p.1)
+  obtain ⟨h0, h1, h2, h3, h4, h5, h6, h7⟩ :=
+    coefficientPrimitiveVector_evaluations D S C z p
   unfold coefficientPrimitiveKernel coefficientOriginalField
   split_ifs <;>
-    simp only [coefficientPrimitiveVector,
-      Fin.cons_zero, Fin.cons_one, Fin.cons_succ, stateUPolarInput, Fin.cases_zero, Fin.cases_succ,
+    simp only [h0, h1, h2, h3, h4, h5, h6, h7,
       originalCoefficients, polarLinearA, polarLinearB,
       polarCorrectedC, polarScale, coefficientPrimitiveDiscriminant,
       polarDiscriminant, hEr, profileEnergy,
@@ -387,10 +429,8 @@ def n01_coefficientFamilySmoothDirections
     SmoothDirections (stateNeighborhood S C base ε) (coefficientFamily D S C i a b p) := by
   letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
   letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
-  have href : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
-    constructor
-    · simpa only [sub_self, map_zero] using hε
-    · simpa only [abs_zero] using hε
+  have href : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε :=
+    reference_mem_stateNeighborhood S C base hε
   have hΩ : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
   let f : (AnnularState S × ℝ) → PolarPoint → ℝ := coefficientOriginalField D S C i
   have hf : ∀ z ∈ stateNeighborhood S C base ε,

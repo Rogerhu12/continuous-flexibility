@@ -24,6 +24,23 @@ private theorem reference_add_displacement {E : Type*} [AddCommGroup E]
     (reference x : E) : reference + (x - reference) = x := by
   abel
 
+/-- Use explicit product coordinates after the generic segment theorem,
+so a concrete projective-state wrapper need not normalize a product action. -/
+private theorem pair_seminorm_reference_segment_explicit
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (x : E) {z : E × ℝ} {ε t : ℝ}
+    (hz : p (z.1 - x) < ε ∧ |z.2| < ε) (ht : t ∈ Icc (0 : ℝ) 1) :
+    p ((x + t • (z.1 - x)) - x) < ε ∧ |t * z.2| < ε := by
+  have hfst : ((x, (0 : ℝ)) + t • (z - (x, (0 : ℝ)))).1 =
+      x + t • (z.1 - x) := by
+    simp only [Prod.fst_add, Prod.fst_smul, Prod.fst_sub]
+  have hsnd : ((x, (0 : ℝ)) + t • (z - (x, (0 : ℝ)))).2 = t * z.2 := by
+    change (0 : ℝ) + t * (z.2 - 0) = t * z.2
+    rw [zero_add, sub_zero]
+  have h := pair_seminorm_reference_segment p x hz ht
+  rw [hfst, hsnd] at h
+  exact h
+
 private abbrev differenceStateTopology (S : PhysicalSpacesData) :
     TopologicalSpace (AnnularState S) := inferInstance
 attribute [local instance] differenceStateTopology
@@ -70,12 +87,14 @@ theorem stateProfileRadialJet_difference_bound
     apply smoothDirections_abs_sub_le_of_firstJet_bound J
       (x := C.referenceState) (d := z.1 - C.referenceState) (fun _ _ => mem_univ _)
     intro t ht
-    have hsegment := stateNeighborhood_reference_segment S C hz ht
+    have hsegment :
+        (C.referenceState + t • (z.1 - C.referenceState), t * z.2) ∈
+          stateNeighborhood S C base ε :=
+      pair_seminorm_reference_segment_explicit (stateGrading S base) C.referenceState hz ht
     have hb := stateProfileRadialJetSmoothDirections_rawProductBound_on_neighborhood
       hS hT hRef hD hC hχ href hB n 1 r hr hsegment
       (Fin.cons (z.1 - C.referenceState) Fin.elim0 : Fin 1 → AnnularState S)
-    simpa only [Prod.fst_add, Prod.fst_smul, Prod.fst_sub,
-      Fin.prod_univ_one, Fin.cons_zero] using hb
+    simpa only [Fin.prod_univ_one, Fin.cons_zero] using hb
   have hendpoint :
       iteratedDeriv n (stateProfile D S C (C.referenceState + (z.1 - C.referenceState))) r =
         iteratedDeriv n (stateProfile D S C z.1) r :=

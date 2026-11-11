@@ -38,7 +38,9 @@ theorem hasFDerivAt_of_continuous_linear_secant
   rw [isLittleO_iff]
   intro ε hε
   have hn : Tendsto (fun y => ‖R y - R x‖) (𝓝 x) (𝓝 (0 : ℝ)) := by
-    simpa only [sub_self, norm_zero] using (hR.sub continuousAt_const).norm.tendsto
+    have hsub : ContinuousAt (fun y : E => R y - R x) x :=
+      hR.sub continuousAt_const
+    simpa only [sub_self, norm_zero] using hsub.norm.tendsto
   filter_upwards [hn.eventually (gt_mem_nhds hε)] with y hy
   calc
     ‖f y - f x - R x (y - x)‖ = ‖(R y - R x) (y - x)‖ := by
@@ -117,7 +119,7 @@ theorem circleVectorSpeedLine_parameterDeriv {G : E × PolarPoint → ℝ}
   apply (hasDerivAt_circleSpeed_parameterSlice
     (contDiff_circleVectorSpeedLine hG q v) s p).unique
   have hs : HasDerivAt (fun r : ℝ => q + r • v) v s := by
-    simpa only [one_smul] using ((hasDerivAt_id s).smul_const v).const_add q
+    simpa only [id_eq, one_smul] using ((hasDerivAt_id s).smul_const v).const_add q
   exact (hG.differentiable (by simp) (q + s • v, p)).hasFDerivAt.comp_hasDerivAt s
     (hs.prodMk (hasDerivAt_const s p))
 
@@ -183,11 +185,15 @@ theorem circleVectorTrajectoryParameterDerivative_apply
   have hI : Continuous (fun t : ℝ => ∫ r in (0 : ℝ)..t,
       circleVectorSpeedAngleDeriv G (p.1, (r, Θ (p.1, r)))) :=
     continuous_iff_continuousAt.mpr
-      (fun t => (hK.integral_hasStrictDerivAt 0 t).continuousAt)
-  have hF := (Real.continuous_exp.comp hI.neg).smul hQ
+      (fun t => (hK.integral_hasStrictDerivAt 0 t).hasDerivAt.continuousAt)
+  have hF : Continuous (fun t : ℝ =>
+      Real.exp (-(∫ r in (0 : ℝ)..t,
+        circleVectorSpeedAngleDeriv G (p.1, (r, Θ (p.1, r))))) •
+          circleVectorSpeedParameterDeriv G (p.1, (t, Θ (p.1, t)))) :=
+    (Real.continuous_exp.comp hI.neg).smul hQ
   dsimp only [circleVectorTrajectoryParameterDerivative]
   rw [ContinuousLinearMap.smul_apply, smul_eq_mul,
-    ContinuousLinearMap.intervalIntegral_apply (hF.intervalIntegrable 0 p.2)]
+    ContinuousLinearMap.intervalIntegral_apply (hF.intervalIntegrable 0 p.2) v]
   simp only [ContinuousLinearMap.smul_apply, smul_eq_mul]
 
 /-- The scalar-parameter theorem proves every actual vector-line
