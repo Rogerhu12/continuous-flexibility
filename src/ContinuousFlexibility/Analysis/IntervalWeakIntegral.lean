@@ -75,9 +75,9 @@ theorem hasDerivAt_intervalLocalPrimitive_of_continuousOn {a b : ℝ}
 
 /-- Fubini gives integration by parts for a merely integrable primitive on
 a bounded interval. No derivative of the primitive is invoked. -/
-theorem integral_intervalLocalPrimitive_mul_deriv {l r : ℝ}
+theorem integral_intervalLocalPrimitive_mul_deriv_of_contDiff_one {l r : ℝ}
     {f ψ : ℝ → ℝ} (hf : IntegrableOn f (Ioc l r) volume)
-    (hψ : ContDiff ℝ ∞ ψ) :
+    (hψ : ContDiff ℝ 1 ψ) :
     (∫ x in Ioc l r, intervalLocalPrimitive f l x * deriv ψ x) =
       ψ r * (∫ x in Ioc l r, f x) - ∫ x in Ioc l r, f x * ψ x := by
   let μ : Measure ℝ := volume.restrict (Ioc l r)
@@ -85,8 +85,8 @@ theorem integral_intervalLocalPrimitive_mul_deriv {l r : ℝ}
   let W : Set (ℝ × ℝ) := {p | p.2 ≤ p.1}
   let K (x y : ℝ) : ℝ := W.indicator (fun p => deriv ψ p.1 * f p.2) (x, y)
   have hW : MeasurableSet W := measurableSet_le measurable_snd measurable_fst
-  have hψ' : ContDiff ℝ ∞ (deriv ψ) := (contDiff_infty_iff_deriv.mp hψ).2
-  have hψ'i : Integrable (deriv ψ) μ := hψ'.continuous.integrableOn_Ioc
+  have hψ' : Continuous (deriv ψ) := hψ.continuous_deriv le_rfl
+  have hψ'i : Integrable (deriv ψ) μ := hψ'.integrableOn_Ioc
   have hfi : Integrable f μ := hf
   have hK : Integrable (Function.uncurry K) (μ.prod μ) :=
     (hψ'i.mul_prod hfi).indicator hW
@@ -136,14 +136,16 @@ theorem integral_intervalLocalPrimitive_mul_deriv {l r : ℝ}
     rw [hr, ← intervalIntegral.integral_of_le hy.2,
       intervalIntegral.integral_deriv_eq_sub
         (fun x _ => hψ.differentiable (by simp) x)
-        (hψ'.continuous.intervalIntegrable _ _)]
+        (hψ'.intervalIntegrable _ _)]
   have hprod : Integrable (fun x => f x * ψ x) μ :=
     hf.mul_continuousOn_of_subset hψ.continuous.continuousOn
       measurableSet_Ioc isCompact_Icc Ioc_subset_Icc_self
   calc
     (∫ x in Ioc l r, intervalLocalPrimitive f l x * deriv ψ x) =
         ∫ x, P x * deriv ψ x ∂μ :=
-      integral_congr_ae (hmem.mono fun x hx => by rw [hP x hx])
+      integral_congr_ae (hmem.mono fun x hx => by
+        change intervalLocalPrimitive f l x * deriv ψ x = P x * deriv ψ x
+        rw [hP x hx])
     _ = ∫ x, (∫ y, K x y ∂μ) ∂μ :=
       integral_congr_ae (hmem.mono fun x hx => (hleft x hx).symm)
     _ = ∫ y, (∫ x, K x y ∂μ) ∂μ := integral_integral_swap hK
@@ -153,12 +155,20 @@ theorem integral_intervalLocalPrimitive_mul_deriv {l r : ℝ}
       simp_rw [mul_sub]
       rw [integral_sub (hfi.mul_const (ψ r)) hprod, integral_mul_const, mul_comm]
 
+/-- Smooth-test specialization of the bounded-interval primitive identity. -/
+theorem integral_intervalLocalPrimitive_mul_deriv {l r : ℝ}
+    {f ψ : ℝ → ℝ} (hf : IntegrableOn f (Ioc l r) volume)
+    (hψ : ContDiff ℝ ∞ ψ) :
+    (∫ x in Ioc l r, intervalLocalPrimitive f l x * deriv ψ x) =
+      ψ r * (∫ x in Ioc l r, f x) - ∫ x in Ioc l r, f x * ψ x :=
+  integral_intervalLocalPrimitive_mul_deriv_of_contDiff_one hf (hψ.of_le (by simp))
+
 /-- The indefinite integral of a locally integrable function has that
 function as its first weak derivative against all interior smooth tests. -/
-theorem integral_intervalLocalPrimitive_mul_deriv_Ioo {a b : ℝ} (hab : a < b)
+theorem integral_intervalLocalPrimitive_mul_deriv_Ioo_of_contDiff_one {a b : ℝ} (hab : a < b)
     {f : ℝ → ℝ} (hf : LocallyIntegrableOn f (Ioo a b) volume)
     {x₀ : ℝ} (hx₀ : x₀ ∈ Ioo a b) {ψ : ℝ → ℝ}
-    (hψ : ContDiff ℝ ∞ ψ) (hψc : HasCompactSupport ψ)
+    (hψ : ContDiff ℝ 1 ψ) (hψc : HasCompactSupport ψ)
     (hψs : tsupport ψ ⊆ Ioo a b) :
     (∫ x, intervalLocalPrimitive f x₀ x * deriv ψ x) =
       -(∫ x, f x * ψ x) := by
@@ -183,18 +193,18 @@ theorem integral_intervalLocalPrimitive_mul_deriv_Ioo {a b : ℝ} (hab : a < b)
     image_eq_zero_of_notMem_tsupport (fun hh => (lt_irrefl r) (hψlr hh).2)
   have hφl : ψ l = 0 :=
     image_eq_zero_of_notMem_tsupport (fun hh => (lt_irrefl l) (hψlr hh).1)
-  have hψd : ContDiff ℝ ∞ (deriv ψ) := (contDiff_infty_iff_deriv.mp hψ).2
+  have hψd : Continuous (deriv ψ) := hψ.continuous_deriv le_rfl
   have hψdi : IntegrableOn (deriv ψ) (Ioc l r) volume :=
-    hψd.continuous.integrableOn_Ioc
+    hψd.integrableOn_Ioc
   have hψint : (∫ x in Ioc l r, deriv ψ x) = 0 := by
     rw [← intervalIntegral.integral_of_le hlr.le,
       intervalIntegral.integral_deriv_eq_sub
         (fun x _ => hψ.differentiable (by simp) x)
-        (hψd.continuous.intervalIntegrable _ _), hφr, hφl, sub_self]
+        (hψd.intervalIntegrable _ _), hφr, hφl, sub_self]
   have hPcont := continuousOn_intervalLocalPrimitive hab hf hl
   have hPprod : IntegrableOn
       (fun x => intervalLocalPrimitive f l x * deriv ψ x) (Ioc l r) volume :=
-    (((hPcont.mono hIcc).mul hψd.continuous.continuousOn).integrableOn_Icc).mono_set
+    (((hPcont.mono hIcc).mul hψd.continuousOn).integrableOn_Icc).mono_set
       Ioc_subset_Icc_self
   let C : ℝ := intervalLocalPrimitive f x₀ l
   have hsplit (x : ℝ) (hx : x ∈ Ioc l r) :
@@ -233,14 +243,27 @@ theorem integral_intervalLocalPrimitive_mul_deriv_Ioo {a b : ℝ} (hab : a < b)
           C * deriv ψ x + intervalLocalPrimitive f l x * deriv ψ x := by
       apply setIntegral_congr_fun measurableSet_Ioc
       intro x hx
+      change intervalLocalPrimitive f x₀ x * deriv ψ x =
+        C * deriv ψ x + intervalLocalPrimitive f l x * deriv ψ x
       rw [hsplit x hx, add_mul]
     _ = C * (∫ x in Ioc l r, deriv ψ x) +
         ∫ x in Ioc l r, intervalLocalPrimitive f l x * deriv ψ x := by
       rw [integral_add (hψdi.const_mul C) hPprod, integral_const_mul]
     _ = -(∫ x in Ioc l r, f x * ψ x) := by
-      rw [hψint, mul_zero, zero_add, integral_intervalLocalPrimitive_mul_deriv hfi hψ,
-        hφr, mul_zero, zero_sub]
+      rw [hψint, mul_zero, zero_add, integral_intervalLocalPrimitive_mul_deriv_of_contDiff_one hfi hψ,
+        hφr, zero_mul, zero_sub]
     _ = -(∫ x, f x * ψ x) := by rw [hright]
+
+/-- Smooth-test specialization of the local primitive identity. -/
+theorem integral_intervalLocalPrimitive_mul_deriv_Ioo {a b : ℝ} (hab : a < b)
+    {f : ℝ → ℝ} (hf : LocallyIntegrableOn f (Ioo a b) volume)
+    {x₀ : ℝ} (hx₀ : x₀ ∈ Ioo a b) {ψ : ℝ → ℝ}
+    (hψ : ContDiff ℝ ∞ ψ) (hψc : HasCompactSupport ψ)
+    (hψs : tsupport ψ ⊆ Ioo a b) :
+    (∫ x, intervalLocalPrimitive f x₀ x * deriv ψ x) =
+      -(∫ x, f x * ψ x) :=
+  integral_intervalLocalPrimitive_mul_deriv_Ioo_of_contDiff_one hab hf hx₀
+    (hψ.of_le (by simp)) hψc hψs
 
 /-- A locally integrable first weak derivative determines an actual
 indefinite-integral representative, up to one additive constant. -/

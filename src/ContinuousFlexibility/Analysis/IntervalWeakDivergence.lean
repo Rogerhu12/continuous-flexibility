@@ -25,9 +25,9 @@ noncomputable section
 
 /-- Smoothness on an open set extends globally for a function whose
 topological support lies in that open set. -/
-theorem contDiff_of_contDiffOn_of_tsupport_subset {s : Set ℝ} (hs : IsOpen s)
-    {f : ℝ → ℝ} (hf : ContDiffOn ℝ ∞ f s) (hfs : tsupport f ⊆ s) :
-    ContDiff ℝ ∞ f := by
+theorem contDiff_of_contDiffOn_of_tsupport_subset {n : ℕ∞ω} {s : Set ℝ} (hs : IsOpen s)
+    {f : ℝ → ℝ} (hf : ContDiffOn ℝ n f s) (hfs : tsupport f ⊆ s) :
+    ContDiff ℝ n f := by
   rw [contDiff_iff_contDiffAt]
   intro x
   by_cases hx : x ∈ tsupport f
@@ -38,10 +38,10 @@ theorem contDiff_of_contDiffOn_of_tsupport_subset {s : Set ℝ} (hs : IsOpen s)
 
 /-- Dividing an interior smooth test by a coefficient which is nonzero on
 the open set preserves global smoothness, including outside the open set. -/
-theorem contDiff_div_of_tsupport_subset {s : Set ℝ} (hs : IsOpen s)
-    {f w : ℝ → ℝ} (hf : ContDiff ℝ ∞ f) (hw : ContDiffOn ℝ ∞ w s)
+theorem contDiff_div_of_tsupport_subset {n : ℕ∞ω} {s : Set ℝ} (hs : IsOpen s)
+    {f w : ℝ → ℝ} (hf : ContDiff ℝ n f) (hw : ContDiffOn ℝ n w s)
     (hwn : ∀ x ∈ s, w x ≠ 0) (hfs : tsupport f ⊆ s) :
-    ContDiff ℝ ∞ (fun x => f x / w x) := by
+    ContDiff ℝ n (fun x => f x / w x) := by
   apply contDiff_of_contDiffOn_of_tsupport_subset hs (hf.contDiffOn.div hw hwn)
   have hsub : tsupport (fun x => f x / w x) ⊆ tsupport f := by
     simpa only [div_eq_mul_inv] using

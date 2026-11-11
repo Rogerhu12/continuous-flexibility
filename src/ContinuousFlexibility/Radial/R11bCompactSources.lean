@@ -47,7 +47,9 @@ theorem r11b_compact_weighted_cells {D : ReferenceData} (hpart : RadialPartition
   intro m hm
   by_contra hmiss
   have hz := r11b_cellSquare_zero_of_disjoint_support hpart hzero hmiss
-  exact hm (by rw [hz, mul_zero])
+  apply hm
+  change W m * referenceCellSquare D m f = 0
+  rw [hz, mul_zero]
 
 theorem r11b_compact_sourceDerivativeMember {D : ReferenceData}
     (hD : IsAccumulatingProfile D) {K : Set ℝ} (hK : IsCompact K)
@@ -98,6 +100,7 @@ theorem r11b_referenceColumn_sourceDerivativeMember {D : ReferenceData}
   have hz : referenceColumn D r = 0 := by
     by_contra hne
     exact hrK (hs hne)
+  change referenceColumn D r * cosineMode j θ = 0
   rw [hz, zero_mul]
 
 end ContinuousFlexibility.Radial

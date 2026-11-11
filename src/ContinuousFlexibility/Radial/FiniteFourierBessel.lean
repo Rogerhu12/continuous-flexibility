@@ -46,8 +46,8 @@ theorem angularPairing_finite_bessel {ι : Type*} [DecidableEq ι]
   calc
     (∑ i ∈ s, angularPairing f (e i) ^ 2) =
         ∑ i : s, ‖⟪v i, u⟫_ℝ‖ ^ 2 := by
-      simp only [hcoeff, Real.norm_eq_abs, sq_abs,
-        Finset.univ_eq_attach, Finset.sum_attach]
+      simp only [hcoeff, Real.norm_eq_abs, sq_abs, Finset.univ_eq_attach]
+      exact (Finset.sum_attach s (fun i => angularPairing f (e i) ^ 2)).symm
     _ ≤ ‖u‖ ^ 2 := hB
     _ = angularAverage (fun θ => f θ ^ 2) :=
       angularMean_norm_sq_toLp (memLp_angularMeanMeasure hf)

@@ -56,7 +56,8 @@ theorem angularAverage_sq_finite_sum {ι : Type*} [DecidableEq ι]
     change (∑ i : s, c i • v i : Lp ℝ 2 angularMeanMeasure) θ =
       ∑ i ∈ s, c i * e i θ
     rw [hsum]
-    simp only [hθ, Finset.univ_eq_attach, Finset.sum_attach]
+    simp only [hθ, Finset.univ_eq_attach]
+    exact Finset.sum_attach s (fun i => c i * e i θ)
   have hnorm : ‖p‖ ^ 2 = ∑ i ∈ s, c i ^ 2 := by
     calc
       _ = ⟪p, p⟫_ℝ := (real_inner_self_eq_norm_sq _).symm
@@ -64,7 +65,8 @@ theorem angularAverage_sq_finite_sum {ι : Type*} [DecidableEq ι]
         simpa [p, pow_two] using
           hv.inner_sum (fun i : s => c i) (fun i : s => c i) Finset.univ
       _ = ∑ i ∈ s, c i ^ 2 := by
-        simp only [Finset.univ_eq_attach, Finset.sum_attach]
+        simp only [Finset.univ_eq_attach]
+        exact Finset.sum_attach s (fun i => c i ^ 2)
   have hp : ‖p‖ ^ 2 = angularAverage (fun θ => p θ ^ 2) := by
     simpa only [Lp.toLp_coeFn] using angularMean_norm_sq_toLp (Lp.memLp p)
   calc
