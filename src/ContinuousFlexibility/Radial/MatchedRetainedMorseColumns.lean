@@ -51,6 +51,8 @@ variable
   (C : InnerRadialActualChain D H bordered j center column)
   (hpiece : C.piece piece = .inl A)
 
+include hleft hright hB hpiece
+
 /-- Both real signs are estimates of the actual model column inside
 the same physical finite-chain weight and the same interface diagonal. -/
 theorem retainedMorseModelChart_actual_weighted_column_bound
@@ -80,8 +82,25 @@ theorem retainedMorseModelChart_actual_weighted_column_bound
       innerMorseInnerModelWeight_tail] using
       innerChainScalarRestriction_map (2 * (2 * K + 1)) piece
         (innerMorseInnerInterfaceWeight S.chain.index K a γ) 1 (fun z : ℝ => z ^ σ) i
+  have hinterp (x : ℝ) (hx : x ∈ Icc innerMorseBufferLeftCut
+      (innerMorseBufferRightCut (morseChainA S.chain m) (morseChainB S.chain m))) :
+      (innerMorseInnerWeight S.chain.index K a γ H
+        C.matchedWeightLeft C.matchedWeightRight
+        (P.sideRadius side * S.chain.radius side m x)) ^ σ =
+      (innerMorseInterpolatedWeight S.chain.index a γ side m
+        (P.sideRadius side * S.chain.radius side m (bufferInnerWall
+          (innerMorseBufferData (morseChainA S.chain m) (morseChainB S.chain m) j
+            (8 * (S.chain.d m : ℝ) ^ 9)) 0))
+        (P.sideRadius side * S.chain.radius side m (bufferInnerWall
+          (innerMorseBufferData (morseChainA S.chain m) (morseChainB S.chain m) j
+            (8 * (S.chain.d m : ℝ) ^ 9)) 1))
+        (P.sideRadius side * S.chain.radius side m x)) ^ σ := by
+    have h := C.matchedWeight_on_closed_model S.chain.index K a γ
+      (innerMorseInnerTailSlot K side p) A hpiece hx
+    simpa only [retainedMorseModelChart, innerMorseInnerModelWeight_tail,
+      innerMorseInterpolatedWeight] using congrArg (fun z : ℝ => z ^ σ) h
   rw [hcut]
-  apply P.retainedMorseModelChart_weighted_column_bound hw hS G₀ hfirst H bordered j
+  exact P.retainedMorseModelChart_weighted_column_bound hw hS G₀ hfirst H bordered j
     center piece column side m (innerMorseInnerTailIndex_bounds S.chain.index K side p).1
     (innerMorseInnerTailPiece_ne_center K side p) hleft hright hB M
     S.chain.index ha hN hNa (innerMorseInnerTailIndex_bounds S.chain.index K side p).1
@@ -89,12 +108,7 @@ theorem retainedMorseModelChart_actual_weighted_column_bound
     (fun x => (innerMorseInnerWeight S.chain.index K a γ H
       C.matchedWeightLeft C.matchedWeightRight x) ^ σ)
     ((innerMorseInnerWeight_measurable S.chain.index K a γ H
-      C.matchedWeightLeft C.matchedWeightRight).pow_const σ) CW hCW ?_ i
-  intro x hx
-  have h := C.matchedWeight_on_closed_model S.chain.index K a γ
-    (innerMorseInnerTailSlot K side p) A hpiece hx
-  simpa only [retainedMorseModelChart, innerMorseInnerModelWeight_tail,
-    innerMorseInterpolatedWeight] using congrArg (fun z : ℝ => z ^ σ) h
+      C.matchedWeightLeft C.matchedWeightRight).pow_const σ) CW hCW hinterp i
 
 end SeedRetainedPair
 

@@ -25,7 +25,7 @@ open Set Filter MeasureTheory
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements ContinuousFlexibility.Analysis
 
-private abbrev matchedOuterGreenCut {D : ReferenceData}
+private def matchedOuterGreenCut {D : ReferenceData}
     (M : RadialMatchingData D) (side : Bool) : ℝ :=
   if side then M.innerRight else M.innerLeft
 
@@ -51,7 +51,7 @@ variable {c : Bool → ℝ} {P ZP Q ZQ : Bool → ℝ → ℝ}
     (outerOutwardRadius side (cut side)) (c side)
     (outerOutwardRadius side (tailPhysicalEndpoint D side)))
   (hV : ∀ side, MemLp (H side).V 2 (outerWholeMeasure D side (cut side)))
-  (R : ∀ side, OuterWholeL2 D side (cut side) →L[ℝ]
+  (R : ∀ side : Bool, OuterWholeL2 D side (cut side) →L[ℝ]
     OuterWholeL2 D side (cut side))
   (hR : ∀ side (f : OuterWholeL2 D side (cut side)),
     (R side f : ℝ → ℝ) =ᵐ[outerWholeMeasure D side (cut side)] fun x =>
@@ -66,7 +66,7 @@ include hD hB ha hm hb hlam H hV R hR hline
 /-- The actual pair of supplied whole Green operators satisfies the
 original separated graph for every Hilbert source. -/
 theorem matchedOuterSeparatedGreen_graph (F : RadialModePair D) :
-    ModeOuterSeparatedGraph D M (matchedOuterSeparatedInverse D cut R F) F := by
+    ModeOuterSeparatedGraph D M (matchedOuterSeparatedInverse D cut (fun side : Bool => R side) F) F := by
   classical
   have hcut (side : Bool) : cut side ∈ radialCore D := by
     cases side
@@ -79,10 +79,10 @@ theorem matchedOuterSeparatedGreen_graph (F : RadialModePair D) :
   let v := matchedOuterSideGlue M.innerLeft M.innerRight
     (fun r => u false (outerOutwardRadius false r))
     (fun r => u true (outerOutwardRadius true r))
-  let G := matchedOuterSeparatedInverse D cut R
+  let G : RadialModePair D →L[ℝ] RadialModePair D := matchedOuterSeparatedInverse D cut (fun side : Bool => R side)
   have hrep : ((G F).1 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D] v :=
-    matchedOuterSeparatedInverse_representative hD cut hm R F hu
-  have hscalar : (G F).2 = 0 := matchedOuterSeparatedInverse_scalar D cut R F
+    matchedOuterSeparatedInverse_representative hD cut hm (fun side : Bool => R side) F hu
+  have hscalar : (G F).2 = 0 := matchedOuterSeparatedInverse_scalar D cut (fun side : Bool => R side) F
   have hreg : ContDiffOn ℝ 1 v (Ioc D.a M.innerLeft ∪ Ico M.innerRight D.b) :=
     matchedOuterSideGlue_contDiffOn hm
       (matchedOuterWhole_contDiff_physical (hc false))
@@ -158,7 +158,7 @@ theorem matchedOuterSeparatedGreen_graph (F : RadialModePair D) :
 quantified Green operator; no replacement matching datum is introduced. -/
 theorem matchedOuterInverse_eq_separatedGreen
     (hM : MatchingOuterRealizations D M) :
-    M.outerInverse = matchedOuterSeparatedInverse D cut R := by
+    M.outerInverse = matchedOuterSeparatedInverse D cut (fun side : Bool => R side) := by
   apply ContinuousLinearMap.ext
   intro F
   exact hM.2.1 _ F

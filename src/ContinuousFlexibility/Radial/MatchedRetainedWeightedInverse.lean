@@ -70,11 +70,12 @@ local notation "modelInduction" => P.retainedMorseActualChain_model_induction hD
 
 local notation "σ" => fun sign : Bool => if sign then (1 : ℝ) else -1
 local notation "W" => fun sign x => (innerMorseInnerWeight S.chain.index k 0 1 H
-  (A).matchedWeightLeft (A).matchedWeightRight x) ^ (σ sign)
+  (InnerRadialActualChain.matchedWeightLeft A) (InnerRadialActualChain.matchedWeightRight A) x) ^ (σ sign)
 local notation "w" => fun sign i =>
   (innerMorseInnerInterfaceWeight S.chain.index k 0 1 i) ^ (σ sign)
-local notation "hW" => fun sign => (innerMorseInnerWeight_measurable S.chain.index k 0 1 H
-  (A).matchedWeightLeft (A).matchedWeightRight).pow_const (σ sign)
+local notation "hW" => fun sign => Measurable.pow_const
+  (innerMorseInnerWeight_measurable S.chain.index k 0 1 H
+    (InnerRadialActualChain.matchedWeightLeft A) (InnerRadialActualChain.matchedWeightRight A)) (σ sign)
 local notation "loss" => innerMorseInnerLoss S.chain.index k H 37
 local notation "hloss" => innerMorseInnerLoss_measurable S.chain.index k H 37
 local notation "hlossBound" =>

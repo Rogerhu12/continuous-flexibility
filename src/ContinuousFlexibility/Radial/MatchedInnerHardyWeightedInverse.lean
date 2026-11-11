@@ -32,7 +32,7 @@ local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "E" => innerSupportedWeightEquiv (radialHilbertMeasure D)
   (innerRadialChainRegion D G) (innerRadialChainRegion_measurable D G) bordered
   (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-  (fun x => by rw [← hInv x]; exact hB false x)
+  (fun x => Eq.trans_le (congrArg abs (Eq.symm (hInv x))) (hB false x))
 local notation "MW" => fun sign : Bool =>
   innerSupportedWeightMultiplier (radialHilbertMeasure D)
     (innerRadialChainRegion D G) (innerRadialChainRegion_measurable D G) bordered
