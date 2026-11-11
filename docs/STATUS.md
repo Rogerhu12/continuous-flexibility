@@ -37,6 +37,19 @@ every fixed `β > 0` and `A`, using the actual material envelope assumptions.
 Uniform angular derivative bounds of a flow extend to both radial endpoints
 by passing increment bounds through the radial limit and differentiating.
 
+`ReferenceCircleFlow` proves that the actual ordinary flow at height parameter
+zero is a translation in the angular variable, on the whole closed component;
+its angular derivative is exactly one. This uses the actual radial coefficient
+formulas and the stated ODE with its initial values and endpoint continuity.
+
+The next integration modules are under CI validation. They derive value
+smallness from N01's genuine first state variation, retain the cumulative
+properties under a common-neighborhood restriction, and combine material
+absorption with the reference-flow formula to obtain ordinary-flow angular
+Jacobian bounds. The long N01 formulas are given exact named aliases in
+`Analysis/N01JetBounds.lean`; the original frozen definitions are unchanged.
+The generic first-variation segment argument was separately checked locally.
+
 The additional proof modules isolate the remaining uniform jet estimate without
 adding it to `N04bStatement`. `N04PartA` and `N04PartB` were moved verbatim to
 `Blueprint/CanonicalParts.lean` and reexported by `Blueprint/Statements.lean`;

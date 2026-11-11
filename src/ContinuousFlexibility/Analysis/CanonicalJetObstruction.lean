@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.CanonicalJetNormalization
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # Why the qualitative canonical identities do not bound an arbitrary witness
@@ -71,11 +72,7 @@ theorem not_canonicalJetBounds_unboundedNegativeDividedCanonicalData
   unfold CanonicalJetBoundAtOrder at hB
   obtain ⟨r, hlr, hrr⟩ := exists_between hinterval
   let Q : ℝ := B * T.E0 (T.sample (K.cell m)) ^ B
-  have hz : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
-    change stateGrading S base (C.referenceState - C.referenceState) < ε ∧ |(0 : ℝ)| < ε
-    constructor
-    · simpa only [sub_self, map_zero] using hε
-    · simpa only [abs_zero] using hε
+  have hz := reference_mem_stateNeighborhood S C base hε
   have hp : (r, |Q| + 1) ∈
       canonicalOpen S (unboundedNegativeDividedCanonicalData S K) m :=
     ⟨⟨hlr, hrr⟩, mem_univ _⟩

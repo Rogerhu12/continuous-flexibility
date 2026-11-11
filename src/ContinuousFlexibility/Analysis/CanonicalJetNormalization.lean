@@ -21,6 +21,8 @@ namespace ContinuousFlexibility.Analysis
 open Set
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- One order and one constant in the precise quantitative conjunct. -/
 def CanonicalJetBoundAtOrder (T : MaterialData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S)
@@ -150,7 +152,6 @@ theorem n04PartA_normalizedCanonicalData {D : ReferenceData} {S : PhysicalSpaces
     (h : N04PartA D S C K base ε) :
     N04PartA D S C (normalizedCanonicalData S K) base ε := h
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The canonical identities use exactly the coefficients retained by normalization. -/
 theorem n04PartB_normalizedCanonicalData {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -200,7 +201,29 @@ private theorem normalizedCanonicalData_jetSum_of_not_sector
   simp only [normalizedCanonicalData, hz, false_and, ite_false,
     zeroCanonicalCoefficients, mixedDerivative_zero, abs_zero, add_zero]
 
-set_option backward.isDefEq.respectTransparency false in
+private theorem normalizedCanonicalData_jetSum_le_weight
+    {S : PhysicalSpacesData} (K : CanonicalData S) (z : AnnularState S × ℝ)
+    (m a b : ℕ) (p : PolarPoint) {B E G q : ℝ}
+    (hB : 0 ≤ B) (hE : 0 ≤ E) (hG : 0 ≤ G)
+    (h : stateSector S z.1 →
+      |mixedDerivative a b (K.potential z m) p| +
+        (if K.positive m = true then
+          |mixedDerivative a b (K.dividedDifference z m).a p| +
+          |mixedDerivative a b (K.dividedDifference z m).b p| +
+          |mixedDerivative a b (K.dividedDifference z m).c p| else 0) ≤
+        B * E ^ B * (1 + G + |q|)) :
+    |mixedDerivative a b ((normalizedCanonicalData S K).potential z m) p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).a p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).b p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).c p| ≤
+      B * E ^ B * (1 + G + |q|) := by
+  classical
+  by_cases hs : stateSector S z.1
+  · exact (normalizedCanonicalData_jetSum_of_sector K hs m a b p).le.trans (h hs)
+  · exact (normalizedCanonicalData_jetSum_of_not_sector K hs m a b p).le.trans
+      (mul_nonneg (mul_nonneg hB (Real.rpow_nonneg hE _))
+        (add_nonneg (add_nonneg zero_le_one hG) (abs_nonneg q)))
+
 private theorem canonicalJetBoundAtOrder_normalized_of_sector
     {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
@@ -208,17 +231,12 @@ private theorem canonicalJetBoundAtOrder_normalized_of_sector
     (hE : ∀ m, 0 ≤ T.E0 (T.sample (K.cell m)))
     (h : SectorCanonicalJetBoundAtOrder T S C K base loss ε s B) :
     CanonicalJetBoundAtOrder T S C (normalizedCanonicalData S K) base loss ε s B := by
-  classical
   intro z hz m p hp a b hab
-  rw [normalizedCanonicalData_cell]
-  have hp' : p ∈ canonicalOpen S K m := by
-    simpa only [canonicalOpen_normalizedCanonicalData] using hp
-  by_cases hs : stateSector S z.1
-  · rw [normalizedCanonicalData_jetSum_of_sector K hs]
-    exact h z hz hs m p hp' a b hab
-  · rw [normalizedCanonicalData_jetSum_of_not_sector K hs]
-    exact mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hE m) _))
-      (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))
+  exact normalizedCanonicalData_jetSum_le_weight K z m a b p
+    (B := B) (E := T.E0 (T.sample (K.cell m)))
+    (G := stateGrading S (s + loss) (z.1 - C.referenceState)) (q := z.2) hB.le (hE m)
+    (apply_nonneg (stateGrading S (s + loss)) (z.1 - C.referenceState))
+    (fun hs => h z hz hs m p hp a b hab)
 
 /-- The sector estimate gives the exact frozen estimate after normalization.
 There is no change in the constants or in the derivative loss. -/
