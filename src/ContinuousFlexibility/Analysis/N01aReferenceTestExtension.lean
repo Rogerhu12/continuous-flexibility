@@ -53,8 +53,9 @@ theorem tendsto_radialWeakPairing_radial_cutoff {D : ReferenceData}
         Radial.intervalCutoffTest D.a D.b ψ n p.1 * Radial.cosineMode 2 p.2) =
       ∫ r in D.a..D.b, Radial.radialJacobi 4 D.w (referenceMode u 2) r *
         Radial.intervalCutoffTest D.a D.b ψ n r := by
-    have hsep := radialWeakPairing_cosine_test hw
-      (Radial.contDiff_intervalCutoffTest hψ.1 n) u 2
+    have hsep := radialWeakPairing_cosine_test (D := D)
+      (ψ := Radial.intervalCutoffTest D.a D.b ψ n) hw
+      (Radial.contDiff_intervalCutoffTest (a := D.a) (b := D.b) hψ.1 n) u 2
     have hsep' : radialWeakPairing D u (fun p =>
         Radial.intervalCutoffTest D.a D.b ψ n p.1 * Radial.cosineMode 2 p.2) =
       ∫ r in D.a..D.b, referenceMode u 2 r *

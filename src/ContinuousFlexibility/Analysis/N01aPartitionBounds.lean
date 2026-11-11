@@ -67,7 +67,8 @@ theorem n01aCoarseReference_accumulatingBounds (D : ReferenceData) (C : ℕ → 
     apply (hinvjets i r hri s).trans
     apply mul_le_mul (by linarith only [hpos s])
       (rpow_le_rpow_of_exponent_le hE (by linarith only [hpos s]))
-      (rpow_nonneg (zero_le_one.trans hE) _) (by positivity)
+      (rpow_nonneg (zero_le_one.trans hE) _)
+      (mul_nonneg (by norm_num) (hpos s).le)
 
 /-- Every accumulating profile has a finite-fiber coarsening whose scale
 index grows at least linearly with the enumeration index. -/

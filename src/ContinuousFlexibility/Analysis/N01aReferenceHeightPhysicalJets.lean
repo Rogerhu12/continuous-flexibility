@@ -86,7 +86,8 @@ theorem n01a_reference_phi_physical_jets {D : ReferenceData} {sample : ℕ → �
     · exact abs_le.mpr ⟨by linarith [hr.1, neg_abs_le D.a, abs_nonneg D.b],
         by linarith [hr.2, le_abs_self D.b, abs_nonneg D.a]⟩
     · simpa only [abs_one] using
-        (show (1 : ℝ) ≤ |D.a| + |D.b| + 1 by positivity)
+        (show (1 : ℝ) ≤ |D.a| + |D.b| + 1 by
+          linarith only [abs_nonneg D.a, abs_nonneg D.b])
     · simp only [abs_zero]
       positivity
   have haB (j : ℕ) : N01aPointwiseBound (radialCore D) T.M (fun _ => 1)
@@ -105,7 +106,7 @@ theorem n01a_reference_phi_physical_jets {D : ReferenceData} {sample : ℕ → �
   intro r hr
   rw [n01a_second_deriv_of_jacobi hgeom.2.2.1.1 hgeom.2.2.2.1.1
     (hgeom.1.trans hr.1).ne' (hgeom.2.2.2.2.1 r hr).ne' (hD.2.1.1 r hr)]
-  dsimp only [q, n01aOpticalRadicand]
+  dsimp only [q, n01aOpticalRadicand, id]
   field_simp [(hgeom.1.trans hr.1).ne', (hgeom.2.2.2.2.1 r hr).ne']
   <;> ring
 

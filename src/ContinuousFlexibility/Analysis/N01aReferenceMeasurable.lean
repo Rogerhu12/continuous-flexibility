@@ -38,7 +38,7 @@ theorem n01a_tendstoInMeasure_of_integral_sq {α : Type*} [MeasurableSpace α]
       (ENNReal.continuous_ofReal.tendsto 0).comp hsqrt
   have habs : TendstoInMeasure μ (fun n x => |f n x - g x|) atTop (fun _ => 0) := by
     apply tendstoInMeasure_of_tendsto_eLpNorm (p := 2) (by norm_num)
-    simpa only [Pi.sub_apply, sub_zero] using hnorm
+    simpa only [Pi.sub_def, sub_zero] using hnorm
   apply tendstoInMeasure_iff_dist.mpr
   intro ε hε
   simpa only [Real.dist_eq, sub_zero, abs_abs] using
