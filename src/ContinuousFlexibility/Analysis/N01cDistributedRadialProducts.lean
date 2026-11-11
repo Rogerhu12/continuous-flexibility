@@ -22,6 +22,7 @@ open scoped ContDiff BigOperators
 set_option backward.isDefEq.respectTransparency false
 
 /-- Indices of the recursive Leibniz expansion for a product of k+1 factors. -/
+@[reducible]
 def RadialLeibnizIndex : ℕ → ℕ → Type
   | 0, _ => Unit
   | k + 1, n => (j : Fin (n + 1)) × RadialLeibnizIndex k (n - j.val)
@@ -56,13 +57,18 @@ theorem radialLeibnizOrders_sum (k : ℕ) :
   induction k with
   | zero =>
       intro n d
-      simp only [radialLeibnizOrders, Fin.sum_univ_one]
+      change (∑ _i : Fin 1, n) = n
+      exact Fin.sum_univ_one (fun _i : Fin 1 => n)
   | succ k ih =>
       intro n d
-      simp only [radialLeibnizOrders, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ]
+      change ((j : Fin (n + 1)) × RadialLeibnizIndex k (n - j.val)) at d
+      rcases d with ⟨j, e⟩
+      change (∑ i : Fin (k + 2),
+        Fin.cons j.val (radialLeibnizOrders k (n - j.val) e) i) = n
+      rw [Fin.sum_univ_succ]
+      simp only [Fin.cons_zero, Fin.cons_succ]
       rw [ih]
-      have hj : d.1.val ≤ n := Nat.le_of_lt_succ d.1.isLt
-      omega
+      exact Nat.add_sub_of_le (Nat.le_of_lt_succ j.isLt)
 
 /-- Exact finite Leibniz formula; only smoothness at the evaluation point
 is needed, so the result applies to the original locally finite profiles. -/
@@ -79,7 +85,8 @@ theorem iteratedDeriv_finProduct_eq_radialLeibniz (k : ℕ) :
         funext (fun t => Fin.prod_univ_one (fun i => f i t))
       rw [hprod]
       simp only [radialLeibnizCoefficient, radialLeibnizOrders,
-        Fintype.sum_unique, Fin.prod_univ_one, Nat.cast_one, one_mul]
+        Fintype.sum_unique, Nat.cast_one, one_mul]
+      exact (Fin.prod_univ_one (fun i : Fin 1 => iteratedDeriv n (f i) x)).symm
   | succ k ih =>
       intro n f x hf
       let g : Fin (k + 1) → ℝ → ℝ := fun i => f i.succ
@@ -112,7 +119,10 @@ theorem iteratedDeriv_finProduct_eq_radialLeibniz (k : ℕ) :
         _ = ∑ d : RadialLeibnizIndex (k + 1) n,
             (radialLeibnizCoefficient (k + 1) n d : ℝ) *
               ∏ i, iteratedDeriv (radialLeibnizOrders (k + 1) n d i) (f i) x := by
-          rw [Fintype.sum_sigma]
+          exact (Fintype.sum_sigma
+            (fun d : (j : Fin (n + 1)) × RadialLeibnizIndex k (n - j.val) =>
+              (radialLeibnizCoefficient (k + 1) n d : ℝ) *
+                ∏ i, iteratedDeriv (radialLeibnizOrders (k + 1) n d i) (f i) x)).symm
 
 /-- Replacing each actual factor jet by its own original majorant preserves
 the distribution of spatial orders in every term. -/
@@ -155,7 +165,7 @@ theorem iteratedDeriv_exp_eq_orderedProducts {e : ℝ → ℝ} {r : ℝ}
   have h := iteratedDeriv_comp_eq_sum_orderedFinpartition
     (Real.contDiff_exp.contDiffAt : ContDiffAt ℝ ∞ Real.exp (e r)) he
     (by simp : (n : ℕ∞ω) ≤ ∞)
-  simpa only [Function.comp_apply, iteratedDeriv_eq_iterate, Real.iter_deriv_exp] using h
+  simpa only [Function.comp_def, iteratedDeriv_eq_iterate, Real.iter_deriv_exp] using h
 
 theorem abs_iteratedDeriv_exp_le_orderedProducts {e : ℝ → ℝ} {r : ℝ}
     (he : ContDiffAt ℝ ∞ e r) (P : ℕ → ℝ) (q : ℝ)

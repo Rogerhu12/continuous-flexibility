@@ -235,8 +235,10 @@ theorem radialProfile_finite_criticalPoints_on_compact
     ext y
     constructor
     · rintro ⟨hyu, hyZ⟩
+      have hyzero : deriv D.w y = 0 := hyZ.2
+      have hxzero : deriv D.w x = 0 := hx.2
       have hprod : (y - x) * dslope (deriv D.w) x y = 0 := by
-        simpa only [smul_eq_mul, hyZ.2, hx.2, sub_self] using
+        simpa only [smul_eq_mul, hyzero, hxzero, sub_self] using
           sub_smul_dslope (deriv D.w) x y
       exact mem_singleton_iff.mpr
         (sub_eq_zero.mp ((mul_eq_zero.mp hprod).resolve_right hyu))
@@ -264,12 +266,10 @@ theorem compact_head_negativeRadialComponents_optical_lower_bound
   obtain ⟨c, hc, hbound⟩ :=
     finite_negativeRadialComponents_optical_lower_bound hD Prod.fst Prod.snd pairs hcomponents
   refine ⟨c, hc, fun l h hcomponent hlK hhK r hr => ?_⟩
-  have hlroot : l ∈ roots := by
-    simpa only [roots, Set.mem_toFinset] using
-      (show l ∈ K ∧ deriv D.w l = 0 from ⟨hlK, hcomponent.2.2.2.1⟩)
-  have hhroot : h ∈ roots := by
-    simpa only [roots, Set.mem_toFinset] using
-      (show h ∈ K ∧ deriv D.w h = 0 from ⟨hhK, hcomponent.2.2.2.2.1⟩)
+  have hlroot : l ∈ roots :=
+    (hfinite.mem_toFinset).mpr ⟨hlK, hcomponent.2.2.2.1⟩
+  have hhroot : h ∈ roots :=
+    (hfinite.mem_toFinset).mpr ⟨hhK, hcomponent.2.2.2.2.1⟩
   exact hbound (l, h)
     (Finset.mem_filter.mpr ⟨Finset.mem_product.mpr ⟨hlroot, hhroot⟩, hcomponent⟩) r hr
 

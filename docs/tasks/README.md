@@ -18,6 +18,26 @@ in minutes because a theorem with exactly the node statement was already in the 
 Work until the completion standard is fully met. Do not stop at a draft or an interim report.
 Push often.
 
+## The rules change: check them often
+
+The rules are this file and `AGENTS.md` **on `main`**. The lead updates them while lines work, and
+the copy on your branch is the one from when you branched, so it goes stale. The version on `main`
+always wins. Check for changes before each push, and at least once an hour (git only, no API quota):
+
+```bash
+git fetch -q origin main && git log --oneline HEAD..origin/main -- docs/tasks/README.md AGENTS.md
+```
+
+If it prints anything, read the current rules and follow them from then on:
+
+```bash
+git show origin/main:docs/tasks/README.md
+```
+
+```bash
+git show origin/main:AGENTS.md
+```
+
 ## What you edit
 
 - Your node file.
@@ -78,7 +98,14 @@ of CI. That loop always works.
 
 - CI builds everything on every push to a `line/**` branch and on every pull request, prints the
   blueprint status, and takes about 5 minutes with the cache. A newer push cancels the older run.
-- Find the run of your branch and its errors:
+- See the CI result of your pull request (this uses GraphQL, which does not spend the REST quota
+  below):
+
+```bash
+gh pr checks <PR-number>
+```
+
+- When it failed, find the run and read its errors once:
 
 ```bash
 gh run list --branch line/<Node> --limit 3
@@ -91,7 +118,36 @@ gh run view <run-id> --log-failed
 - The step "Build every library" prints every `error:` line with the following 60 lines; the full
   log is the artifact `build-log`.
 - Push small, complete steps (one file or one lemma group at a time), so that one CI round tells
-  you about one change. Do not pile up thousands of unchecked lines before the first push.
+  you about one change.
+- **Hard limit: your branch may be at most 20,000 added lines of Lean ahead of its last commit that
+  passed CI.** A line can repair a few tens of thousands of uncompiled lines; beyond that the errors
+  pile up faster than they are fixed. When you reach the limit, stop writing new material and make
+  CI green first. Check the distance with:
+
+```bash
+git diff --shortstat $(gh run list --branch line/<Task> --status success --limit 1 --json headSha --jq '.[0].headSha') HEAD -- '*.lean'
+```
+
+  Code that does not compile is not progress: the further a branch runs ahead of a green build,
+  the more layered its errors become.
+
+## GitHub API quota
+
+All lines share one GitHub account, and with it one REST quota of 5,000 requests per hour. When it
+is used up, every `gh` command of every line fails with `API rate limit exceeded` for up to an hour.
+
+- Never run `gh run watch`: it polls every 3 seconds, about 1,200 requests an hour.
+- Never poll in a loop. Wait at least 5 minutes after a push, then check at most once a minute.
+- Check CI with `gh pr checks` (GraphQL, a separate quota), not with repeated `gh run list` or
+  `gh run view`.
+- Download a failed log once per run and keep it in a file.
+- List branches with `git ls-remote`, which uses no API quota.
+- If a command reports `API rate limit exceeded`, do not retry. Keep writing and checking code
+  locally; this shows when the quota resets (it does not count against the quota):
+
+```bash
+gh api rate_limit --jq '.resources.core.reset | todate'
+```
 
 ## Lean
 

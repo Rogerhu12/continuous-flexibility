@@ -157,13 +157,19 @@ theorem exists_oneHighMultilinearSumProductBounds
           C * ((1 + p (s + loss) y) + ∑ j, p (s + loss) (v j)) := by
       let w : Fin (factors t) → X := fun i => (Fin.cons y v : Fin (k + 1) → X) (select t i)
       have hw (i : Fin (factors t)) : p base (w i) ≤ 1 :=
-        Fin.cases hy (fun j => (hv j).le) (select t i)
+        Fin.cases
+          (motive := fun j : Fin (k + 1) =>
+            p base ((Fin.cons y v : Fin (k + 1) → X) j) ≤ 1)
+          hy (fun j => (hv j).le) (select t i)
       have hslot (i : Fin (factors t)) : p (s + loss) (w i) ≤ R := by
         have hyR : p (s + loss) y ≤ R := le_add_of_nonneg_right hv0
         have hvR (j : Fin k) : p (s + loss) (v j) ≤ R :=
           (Finset.single_le_sum (fun j _ => apply_nonneg (p (s + loss)) (v j))
             (Finset.mem_univ j)).trans (le_add_of_nonneg_left hy0)
-        exact Fin.cases hyR hvR (select t i)
+        exact Fin.cases
+          (motive := fun j : Fin (k + 1) =>
+            p (s + loss) ((Fin.cons y v : Fin (k + 1) → X) j) ≤ R)
+          hyR hvR (select t i)
       have hsumw : ∑ i, p (s + loss) (w i) ≤ (factors t : ℝ) * R := by
         calc
           _ ≤ ∑ _i : Fin (factors t), R :=

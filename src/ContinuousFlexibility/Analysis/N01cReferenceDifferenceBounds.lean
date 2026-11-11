@@ -110,8 +110,8 @@ theorem pair_seminorm_reference_segment
     simp only [Prod.fst_add, Prod.fst_smul, Prod.fst_sub]
     abel
   have hsnd : ((x, (0 : ℝ)) + t • (z - (x, (0 : ℝ)))).2 = t * z.2 := by
-    change t * (z.2 - 0) = t * z.2
-    rw [sub_zero]
+    change (0 : ℝ) + t * (z.2 - 0) = t * z.2
+    rw [zero_add, sub_zero]
   constructor
   · rw [hfst, map_smul_eq_mul, Real.norm_of_nonneg ht.1]
     exact (mul_le_of_le_one_left (apply_nonneg p _) ht.2).trans_lt hz.1

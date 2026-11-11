@@ -1,7 +1,4 @@
 # Modules that do not compile yet and are left out of the generated root import.
 # Remove a line when its module compiles.
-ContinuousFlexibility.Analysis.CircleJetEncoding
-ContinuousFlexibility.Analysis.CircleJetEvaluation
-ContinuousFlexibility.Analysis.PhysicalJetMollification
 ContinuousFlexibility.Analysis.ProjectiveNewtonCommonOrbit
 ContinuousFlexibility.Analysis.ProjectiveNewtonParameterGrowth

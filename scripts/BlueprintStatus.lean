@@ -1,4 +1,6 @@
 import FlexibleSphereSolution
+import ContinuousFlexibility.Analysis.SobolevExtension
+import ContinuousFlexibility.Analysis.HadamardThreeLinesExtension
 import Lean.Util.CollectAxioms
 
 /-!
@@ -37,3 +39,11 @@ run_cmd do
 #print axioms ContinuousFlexibility.Blueprint.N01cSpeeds
 #print axioms ContinuousFlexibility.Blueprint.N01cFlows
 #print axioms ContinuousFlexibility.Blueprint.N01c
+
+-- The external-input tool has no blueprint node: audit its actual endpoints.
+#print axioms ContinuousFlexibility.Analysis.exists_halfLineSobolevExtension
+#print axioms ContinuousFlexibility.Analysis.exists_intervalSobolevExtension
+#print axioms ContinuousFlexibility.Analysis.SobolevExtensionOperator.completion_rightInverse
+#print axioms ContinuousFlexibility.Analysis.SobolevExtensionOperator.completion_compatible
+#print axioms ContinuousFlexibility.Analysis.hadamard_threeLines_operator_norm_unit
+#print axioms ContinuousFlexibility.Analysis.hadamardThreeLinesExtension_spec_unit
