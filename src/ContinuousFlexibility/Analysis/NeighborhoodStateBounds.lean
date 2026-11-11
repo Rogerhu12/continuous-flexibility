@@ -131,8 +131,18 @@ theorem stateU_low_jet_bounds
         |heightAngular (stateU S x) p| ≤ Ct * stateGrading S 4 x ∧
         |angularPartial (heightAngular (stateU S x)) p| ≤
           Ctt * stateGrading S 4 x * D.w p.1 := by
-  obtain ⟨Cr, Ct, Ctt, hCr, hCt, hCtt, hjet⟩ :=
-    neighborhood_commonHeight_low_jet_bounds hD hT hS
+  have h := neighborhood_commonHeight_low_jet_bounds
+    (D := D) (T := T) (S := S) hD hT hS
+  let Cr : ℝ := h.choose
+  have ht := h.choose_spec
+  let Ct : ℝ := ht.choose
+  have htt := ht.choose_spec
+  let Ctt : ℝ := htt.choose
+  have hb := htt.choose_spec
+  have hCr : 0 ≤ Cr := hb.1
+  have hCt : 0 ≤ Ct := hb.2.1
+  have hCtt : 0 ≤ Ctt := hb.2.2.1
+  have hjet := hb.2.2.2
   refine ⟨Cr, Ct, Ctt, hCr, hCt, hCtt, fun x p hp => ?_⟩
   have hc := neighborhoodStateGrading_height_le S 4 x
   exact hjet x.1 (stateGrading S 4 x) hc.1 hc.2 p hp

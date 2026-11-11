@@ -37,9 +37,11 @@ theorem continuous_continuousAngleSpeedSecant {dG : PolarPoint → ℝ}
     continuous_parametric_integral_of_continuous (μ := volume)
       (f := fun (p : ℝ × (ℝ × ℝ)) (s : ℝ) =>
         dG (p.1, (p.2.2 - p.2.1) * s + p.2.1)) hc isCompact_Icc
-  simpa only [continuousAngleSpeedSecant,
+  apply hi.congr
+  intro p
+  rw [continuousAngleSpeedSecant,
     intervalIntegral.integral_of_le (zero_le_one : (0 : ℝ) ≤ 1),
-    integral_Icc_eq_integral_Ioc] using hi
+    integral_Icc_eq_integral_Ioc]
 
 theorem continuousAngleSpeedSecant_diagonal (dG : PolarPoint → ℝ) (t x : ℝ) :
     continuousAngleSpeedSecant dG (t, (x, x)) = dG (t, x) := by
@@ -150,7 +152,9 @@ theorem exists_continuousAngleFlow {G dG : PolarPoint → ℝ} {a b P : ℝ}
       · intro x _
         exact (hG.comp (continuous_id.prodMk continuous_const)).continuousOn
       · intro t ht x _
-        simpa only [L, NNReal.coe_mk, Real.norm_eq_abs] using hbound t ht x
+        change ‖G (t, x)‖ ≤ M
+        rw [Real.norm_eq_abs]
+        exact hbound t ht x
       · change M * max (b - a) (a - a) ≤ M * (b - a) - 0
         rw [sub_self, max_eq_left (sub_nonneg.mpr hab), sub_zero]
     exact hpl.exists_eq_forall_mem_Icc_hasDerivWithinAt₀
