@@ -35,7 +35,8 @@ def innerGradientForm (G : E →L[ℝ] Z) : E →L[ℝ] E →L[ℝ] ℝ :=
 theorem innerGradientForm_apply (G : E →L[ℝ] Z) (v z : E) :
     innerGradientForm G v z = ⟪G v, G z⟫_ℝ := by
   simp only [innerGradientForm, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.flip_apply, ContinuousLinearMap.compL_apply, innerSL_apply_apply]
+    ContinuousLinearMap.flip_apply, ContinuousLinearMap.compL_apply]
+  exact innerSL_apply_apply ℝ (G v) (G z)
 
 /-- Physical coercivity also controls the entire closed energy norm. -/
 theorem innerGradientForm_isCoercive (U : E →L[ℝ] H) (G : E →L[ℝ] Z)
@@ -123,6 +124,7 @@ theorem innerCoerciveGradientInverse_isSymmetric (U : E →L[ℝ] H) (G : E →L
     (h : IsCoercive (innerGradientForm G)) :
     (innerCoerciveGradientInverse U G h).IsSymmetric := by
   intro f g
+  simp only [ContinuousLinearMap.coe_coe]
   rw [innerCoerciveGradientInverse_apply, innerCoerciveGradientInverse_apply]
   calc
     _ = ⟪g, U (innerCoerciveGradientLift U G h f)⟫_ℝ := real_inner_comm _ _

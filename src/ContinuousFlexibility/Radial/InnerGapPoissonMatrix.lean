@@ -32,10 +32,10 @@ open scoped ContDiff BigOperators Matrix MatrixOrder Matrix.Norms.L2Operator Inn
 def innerGapEndpoint (a b : ℝ) (i : Fin 2) : ℝ := if i = 0 then a else b
 
 @[simp] theorem innerGapEndpoint_zero (a b : ℝ) : innerGapEndpoint a b 0 = a := by
-  simp only [innerGapEndpoint, if_pos rfl]
+  simp [innerGapEndpoint]
 
 @[simp] theorem innerGapEndpoint_one (a b : ℝ) : innerGapEndpoint a b 1 = b := by
-  simp only [innerGapEndpoint, Fin.one_ne_zero, if_false]
+  norm_num [innerGapEndpoint]
 
 /-- The actual two-column Poisson map. Its function-space target carries
 the pointwise topology; the physical mass estimate is proved below. -/
@@ -194,6 +194,7 @@ theorem innerGapFluxOperator_isSymmetric {a b j : ℝ} (hab : a ≤ b) (ha : 0 <
         apply intervalIntegral.integral_congr
         intro r hr
         have hr' : r ∈ Icc a b := by simpa only [uIcc_of_le hab] using hr
+        dsimp only
         rw [hξ r hr', hη r hr', mul_zero, mul_zero, sub_self]
       _ = 0 := intervalIntegral.integral_zero
   rw [hi] at h
@@ -304,8 +305,8 @@ theorem exists_innerGapPoissonColumns {A l h B : ℝ}
   refine ⟨p, hp, ?_, heq⟩
   intro i k
   fin_cases i
-  · simpa only [innerGapEndpoint_zero] using hleft k
-  · simpa only [innerGapEndpoint_one] using hright k
+  · simpa [innerGapEndpoint] using hleft k
+  · simpa [innerGapEndpoint] using hright k
 
 /-- Physical positive-gap data produces one Poisson map and its actual
 positive semidefinite flux matrix, together with the exact energy and

@@ -18,14 +18,14 @@ namespace ContinuousFlexibility.Radial
 open Set MeasureTheory Real
 open scoped ContDiff
 
-theorem innerLiouville_mass_change {R s w u ψ : ℝ → ℝ} {a b λ : ℝ}
+theorem innerLiouville_mass_change {R s w u ψ : ℝ → ℝ} {a b lam : ℝ}
     (hab : a ≤ b) (hR : ContDiff ℝ ∞ R)
     (hRp : ∀ x ∈ Icc a b, 0 < R x) (hVp : ∀ x ∈ Icc a b, 0 < deriv R x)
     (hs : ∀ x ∈ Icc a b, s x ≠ 0)
-    (hw : ∀ x ∈ Icc a b, w (R x) = λ * s x ^ 2 * deriv R x)
+    (hw : ∀ x ∈ Icc a b, w (R x) = lam * s x ^ 2 * deriv R x)
     (hu : ∀ x ∈ Icc a b, u (R x) = ψ x / s x) :
     innerRadialGapMass w u (R a) (R b) =
-      12 * λ * ∫ x in a..b, ((deriv R x / R x) * ψ x) ^ 2 := by
+      12 * lam * ∫ x in a..b, ((deriv R x / R x) * ψ x) ^ 2 := by
   have hmono := morseCell_strictMonoOn hR hVp
   have hrange : R a ≤ R b :=
     hmono.monotoneOn (left_mem_Icc.mpr hab) (right_mem_Icc.mpr hab) hab
@@ -47,16 +47,16 @@ theorem innerLiouville_mass_change {R s w u ψ : ℝ → ℝ} {a b λ : ℝ}
 /-- Only the support of the leading field needs the small velocity
 bound. In particular the long cap never pays the larger velocity of
 the opposite cap. -/
-theorem innerLiouville_mass_le_of_model_energy {R s w u ψ : ℝ → ℝ} {a b λ U m α : ℝ}
+theorem innerLiouville_mass_le_of_model_energy {R s w u ψ : ℝ → ℝ} {a b lam U m α : ℝ}
     (hab : a ≤ b) (hR : ContDiff ℝ ∞ R)
     (hRp : ∀ x ∈ Icc a b, 0 < R x) (hVp : ∀ x ∈ Icc a b, 0 < deriv R x)
     (hs : ∀ x ∈ Icc a b, s x ≠ 0)
-    (hw : ∀ x ∈ Icc a b, w (R x) = λ * s x ^ 2 * deriv R x)
+    (hw : ∀ x ∈ Icc a b, w (R x) = lam * s x ^ 2 * deriv R x)
     (hu : ∀ x ∈ Icc a b, u (R x) = ψ x / s x)
-    (hψ : ContinuousOn ψ (Icc a b)) (hλ : 0 ≤ λ) (hU : 0 ≤ U) (hm : 0 < m)
+    (hψ : ContinuousOn ψ (Icc a b)) (hlam : 0 ≤ lam) (hU : 0 ≤ U) (hm : 0 < m)
     (hvelocity : ∀ x ∈ Icc a b, ψ x ≠ 0 → |deriv R x / R x| ≤ U)
     (henergy : m ^ 2 * (∫ x in a..b, ψ x ^ 2) ≤ α) :
-    innerRadialGapMass w u (R a) (R b) ≤ 12 * λ * (U / m) ^ 2 * α := by
+    innerRadialGapMass w u (R a) (R b) ≤ 12 * lam * (U / m) ^ 2 * α := by
   have hvcont : ContinuousOn (fun x => deriv R x / R x) (Icc a b) :=
     (contDiff_infty_iff_deriv.mp hR).2.continuous.continuousOn.div
       hR.continuous.continuousOn (fun x hx => (hRp x hx).ne')
@@ -78,12 +78,12 @@ theorem innerLiouville_mass_le_of_model_energy {R s w u ψ : ℝ → ℝ} {a b �
     simpa only [mul_comm (∫ x in a..b, ψ x ^ 2)] using henergy
   rw [innerLiouville_mass_change hab hR hRp hVp hs hw hu]
   calc
-    _ ≤ 12 * λ * (U ^ 2 * (∫ x in a..b, ψ x ^ 2)) :=
-      mul_le_mul_of_nonneg_left hI (mul_nonneg (by norm_num) hλ)
-    _ ≤ 12 * λ * (U ^ 2 * (α / m ^ 2)) :=
+    _ ≤ 12 * lam * (U ^ 2 * (∫ x in a..b, ψ x ^ 2)) :=
+      mul_le_mul_of_nonneg_left hI (mul_nonneg (by norm_num) hlam)
+    _ ≤ 12 * lam * (U ^ 2 * (α / m ^ 2)) :=
       mul_le_mul_of_nonneg_left
         (mul_le_mul_of_nonneg_left hmodel (sq_nonneg U))
-        (mul_nonneg (by norm_num) hλ)
+        (mul_nonneg (by norm_num) hlam)
     _ = _ := by rw [div_pow]; ring
 
 end ContinuousFlexibility.Radial

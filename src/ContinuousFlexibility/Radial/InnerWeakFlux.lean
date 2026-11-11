@@ -138,7 +138,7 @@ theorem innerBufferInverse_weak_flux {B : BufferData} (hB : BufferHypotheses B)
     rcases hB with ⟨_, _, _, _, _, _, _, _, hg, _, _, hout, _, _, _⟩
     exact innerPoisson_eq_indicator (ae_restrict_of_ae hg) hout
   have hleft : p B.l = if i = 0 then 1 else 0 := by
-    simpa only [bufferCut, if_pos rfl] using hpTrace 0
+    simpa only [bufferCut, if_pos rfl, ite_true] using hpTrace 0
   have hright : p B.h = if i = 1 then 1 else 0 := by
     have hcut : bufferCut B (1 : Fin 2) = B.h := by norm_num [bufferCut]
     simpa only [hcut] using hpTrace 1
@@ -192,7 +192,7 @@ theorem innerBufferInverse_weak_flux_family {B : BufferData} (hB : BufferHypothe
     MemLp.coeFn_toLp hm
   have hP := innerPoisson_eq_indicator hPInside hPOutside
   have hleft : p i B.l = if i = 0 then 1 else 0 := by
-    simpa only [bufferCut, if_pos rfl] using hpTrace 0
+    simpa only [bufferCut, if_pos rfl, ite_true] using hpTrace 0
   have hright : p i B.h = if i = 1 then 1 else 0 := by
     have hcut : bufferCut B (1 : Fin 2) = B.h := by norm_num [bufferCut]
     simpa only [hcut] using hpTrace 1

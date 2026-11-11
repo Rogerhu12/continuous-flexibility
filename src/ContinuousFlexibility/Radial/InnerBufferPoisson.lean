@@ -43,8 +43,7 @@ theorem innerBufferPoint_coordinate {B : BufferData} (hB : BufferHypotheses B)
     positiveBufferPoint B i (B.mass i * bufferSign i * (bufferCut B i - x)) =
         bufferCut B i - bufferSign i ^ 2 * (bufferCut B i - x) := by
       dsimp only [positiveBufferPoint]
-      field_simp [hm]
-      ring
+      field_simp [hm] <;> ring
     _ = x := by rw [bufferSign_sq]; ring
 
 theorem innerBufferCutoff_point {B : BufferData} (hB : BufferHypotheses B)
@@ -58,15 +57,13 @@ theorem innerBufferCutoff_point {B : BufferData} (hB : BufferHypotheses B)
         (positiveBufferPoint B i t - bufferCut B i) =
       B.action i + 4 - bufferSign i ^ 2 * t := by
         dsimp only [positiveBufferPoint]
-        field_simp [hm]
-        ring
+        field_simp [hm] <;> ring
     _ = B.action i + 4 - t := by rw [bufferSign_sq, one_mul]
 
 theorem innerBufferCutoff_cut {B : BufferData} (hB : BufferHypotheses B) (i : Fin 2) :
     innerBufferCutoff B i (bufferCut B i) = 1 := by
   have hA := buffer_action_pos hB i
   apply smoothTransition.one_of_one_le
-  dsimp only
   nlinarith
 
 private theorem innerBuffer_cut_wall_gap {B : BufferData} (hB : BufferHypotheses B)
@@ -116,8 +113,7 @@ theorem innerBufferPoint_mem_openSpan {B : BufferData} (hB : BufferHypotheses B)
   refine ⟨t / (B.action i + 6), ⟨div_pos ht hlen, (div_lt_one hlen).mpr htw⟩, ?_⟩
   simp only [smul_eq_mul]
   dsimp only [positiveBufferPoint, bufferInnerWall]
-  field_simp [hm, hlen.ne']
-  ring
+  field_simp [hm, hlen.ne'] <;> ring
 
 theorem innerBuffer_openSpan_subset_retained {B : BufferData} (hB : BufferHypotheses B)
     (i : Fin 2) :
@@ -125,12 +121,15 @@ theorem innerBuffer_openSpan_subset_retained {B : BufferData} (hB : BufferHypoth
   have hW := innerBuffer_walls_inside hB
   have hL : B.l < bufferInnerWall B 0 := hW.1
   have hR : bufferInnerWall B 1 < B.h := hW.2.2
-  fin_cases i
-  · have hsub : Ioo B.l (bufferInnerWall B 0) ⊆ Ioo B.l B.h :=
-      Ioo_subset_Ioo le_rfl (hW.2.1.le.trans hR.le)
-    simpa only [bufferCut, if_pos rfl, radialOpenSpan, min_eq_left hL.le,
-      max_eq_right hL.le] using hsub
-  · have hcut : bufferCut B (1 : Fin 2) = B.h := by norm_num [bufferCut]
+  by_cases hi : i = 0
+  · subst i
+    have hcut : bufferCut B (0 : Fin 2) = B.l := by
+      simp only [bufferCut, ite_true]
+    rw [hcut, radialOpenSpan, min_eq_left hL.le, max_eq_right hL.le]
+    exact Ioo_subset_Ioo le_rfl (hW.2.1.le.trans hR.le)
+  · have hi1 : i = 1 := by omega
+    subst i
+    have hcut : bufferCut B (1 : Fin 2) = B.h := by norm_num [bufferCut]
     rw [hcut, radialOpenSpan, min_eq_right hR.le, max_eq_left hR.le]
     exact Ioo_subset_Ioo (hL.le.trans hW.2.1.le) le_rfl
 
@@ -141,7 +140,9 @@ theorem innerBufferCutoff_tsupport_bound {B : BufferData} (i : Fin 2) {x : ℝ}
       {y : ℝ | B.mass i * bufferSign i * (bufferCut B i - y) ≤ B.action i + 4} := by
     intro y hy
     by_contra hn
-    have hlt := lt_of_not_ge hn
+    have hn' : ¬ B.mass i * bufferSign i * (bufferCut B i - y) ≤ B.action i + 4 := by
+      simpa only [Set.mem_setOf_eq] using hn
+    have hlt := lt_of_not_ge hn'
     apply hy
     exact smoothTransition.zero_of_nonpos (by nlinarith)
   have hc : IsClosed {y : ℝ |
@@ -156,9 +157,14 @@ theorem innerBufferCutoff_tsupport_retained {B : BufferData} (hB : BufferHypothe
   let t : ℝ := B.mass i * bufferSign i * (bufferCut B i - x)
   have ht : 0 ≤ t := by
     have hm := (buffer_mass_pos hB i).le
-    have hL := hx.1
-    have hR := hx.2
-    fin_cases i <;> dsimp [t, bufferCut, bufferSign] <;> nlinarith
+    dsimp only [t]
+    by_cases hi : i = 0
+    · rw [bufferSign, if_pos hi, bufferCut, if_pos hi]
+      have he : B.mass i * (-1) * (B.l - x) = B.mass i * (x - B.l) := by ring
+      rw [he]
+      exact mul_nonneg hm (sub_nonneg.mpr hx.1)
+    · rw [bufferSign, if_neg hi, bufferCut, if_neg hi, mul_one]
+      exact mul_nonneg hm (sub_nonneg.mpr hx.2)
   have htw : t < B.action i + 6 := by
     have h := innerBufferCutoff_tsupport_bound i hs
     dsimp only [t]
@@ -190,8 +196,18 @@ theorem innerBufferCutoff_boundary_values {B : BufferData} (hB : BufferHypothese
       fin_cases j <;> simp [bufferCut, hB.1.le]
     have hs : bufferCut B j ∈ tsupport (innerBufferCutoff B i) := subset_closure hne
     rcases innerBufferCutoff_tsupport_retained hB i hmem hs with he | he
-    · have hab := hB.1
-      fin_cases i <;> fin_cases j <;> norm_num [bufferCut] at hij he ⊢ <;> linarith
+    · apply hij
+      by_cases hi : i = 0
+      · by_cases hj : j = 0
+        · exact hi.trans hj.symm
+        · have hab : B.h = B.l := by
+            simpa only [bufferCut, if_pos hi, if_neg hj] using he
+          exact (hB.1.ne hab.symm).elim
+      · by_cases hj : j = 0
+        · have hab : B.l = B.h := by
+            simpa only [bufferCut, if_neg hi, if_pos hj] using he
+          exact (hB.1.ne hab).elim
+        · omega
     · exact innerBufferCut_not_mem_retained B j
         (innerBuffer_openSpan_subset_retained hB i he)
 
@@ -324,10 +340,10 @@ theorem innerBufferPoisson_cutoff_decomposition {B : BufferData}
     rw [innerBufferCutoff_boundary_values hB i j, hpTrace j]
     by_cases hij : i = j
     · subst j
-      simp only [if_pos rfl, one_mul, hpinValue]
+      simp only [if_pos rfl, ite_true, one_mul, hpinValue, mul_one]
     · rw [if_neg hij, zero_mul]
   have hleft : innerBufferCutoff B i B.l * pin B.l = p B.l := by
-    simpa only [bufferCut, if_pos rfl] using hboundary 0
+    simpa only [bufferCut, if_pos rfl, ite_true] using hboundary 0
   have hright : innerBufferCutoff B i B.h * pin B.h = p B.h := by
     have hcut : bufferCut B (1 : Fin 2) = B.h := by norm_num [bufferCut]
     simpa only [hcut] using hboundary 1

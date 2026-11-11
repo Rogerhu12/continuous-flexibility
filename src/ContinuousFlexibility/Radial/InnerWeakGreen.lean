@@ -67,7 +67,10 @@ theorem innerWeakGreen_potential_class {a b : ℝ} {V p : ℝ → ℝ}
     (hV : ContinuousOn V (Icc a b)) (hp : ContinuousOn p (Icc a b))
     {P : RadialL2} (hP : (P : ℝ → ℝ) =ᵐ[volume] (Ioo a b).indicator p) :
     ∃ Pv : RadialL2, (Pv : ℝ → ℝ) =ᵐ[volume] (fun x => V x * P x) := by
-  have hm := innerDirichlet_indicator_memLp (hV.mul hp)
+  have hprod : ContinuousOn (fun x => V x * p x) (Icc a b) := by
+    simpa only [Pi.mul_apply] using hV.mul hp
+  have hm : MemLp ((Ioo a b).indicator (fun x => V x * p x)) 2 volume :=
+    innerDirichlet_indicator_memLp hprod
   refine ⟨hm.toLp ((Ioo a b).indicator (fun x => V x * p x)), ?_⟩
   filter_upwards [MemLp.coeFn_toLp hm, hP] with x hvx hpx
   rw [hvx, hpx]
@@ -90,7 +93,10 @@ theorem innerEnergyClosure_poisson_pairing {a b α : ℝ} {V column p : ℝ → 
     ⟪d, Pd⟫_ℝ + (∫ x : ℝ, V x * u x * P x) = -α * ⟪g, u⟫_ℝ := by
   have hpc : ContinuousOn p (Icc a b) :=
     fun x hx => (hp x hx).continuousAt.continuousWithinAt
-  have hm := innerDirichlet_indicator_memLp (hV.mul hpc)
+  have hprod : ContinuousOn (fun x => V x * p x) (Icc a b) := by
+    simpa only [Pi.mul_apply] using hV.mul hpc
+  have hm : MemLp ((Ioo a b).indicator (fun x => V x * p x)) 2 volume :=
+    innerDirichlet_indicator_memLp hprod
   let Pv : RadialL2 := hm.toLp ((Ioo a b).indicator (fun x => V x * p x))
   have hPv : (Pv : ℝ → ℝ) =ᵐ[volume]
       (Ioo a b).indicator (fun x => V x * p x) := MemLp.coeFn_toLp hm
@@ -111,7 +117,7 @@ theorem innerEnergyClosure_poisson_pairing {a b α : ℝ} {V column p : ℝ → 
       linarith [heq x hx]
     · rw [Set.indicator_of_notMem hx, Set.indicator_of_notMem hx, mul_zero]
   have hpair := innerEnergyClosure_smooth_pairing hab hV hp hPd hPv hPf hu
-  rw [real_inner_smul_left, real_inner_comm Pd d,
+  rw [real_inner_smul_left, real_inner_comm d Pd,
     innerWeakGreen_potential_pairing hPvGlobal u] at hpair
   exact hpair.symm
 
@@ -162,8 +168,9 @@ theorem innerWeakBoundaryPairing_eq_of_endpoint_values {a b : ℝ}
         ((hh x (Ioo_subset_Icc_self hx)).differentiableAt (by simp))
         ((hp x (Ioo_subset_Icc_self hx)).differentiableAt (by simp))).symm
     · simp only [Set.indicator_of_notMem hx, sub_self]
-  have hqmem := innerDirichlet_indicator_memLp
-    ((continuousOn_const.add hV.abs).sqrt.mul hwc)
+  have hqc : ContinuousOn (fun x => sqrt (1 + |V x|) * w x) (Icc a b) :=
+    (continuousOn_const.add hV.abs).sqrt.mul hwc
+  have hqmem := innerDirichlet_indicator_memLp hqc
   let q : RadialL2 := hqmem.toLp
     ((Ioo a b).indicator (fun x => sqrt (1 + |V x|) * w x))
   have hq : (q : ℝ → ℝ) =ᵐ[volume]
