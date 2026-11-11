@@ -44,15 +44,19 @@ jobs:
           use-github-cache: "false"
       - name: Restore project build artifacts
         # One cache entry per branch (the previous one is deleted when a new one is
-        # saved); a branch without its own entry starts from the newest entry of main.
+        # saved); a branch without its own entry starts from the newest entry of main,
+        # else from the newest entry of any branch. `~` separates the branch from the
+        # commit because git forbids it in branch names, so the prefix of line/R10a
+        # does not match line/R10a-Inner.
         id: restore
         uses: actions/cache/restore@v4
         with:
           path: .lake/build
-          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}-${{ github.sha }}
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
           restore-keys: |
-            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}-
-            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main-
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~
+            lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-
       - name: Report which cache was restored
         run: echo "matched key = ${{ steps.restore.outputs.cache-matched-key }}"
       - name: Generate the root import
@@ -74,7 +78,7 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}-
+          PREFIX: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~
         run: |
           gh cache list -R "$GITHUB_REPOSITORY" --key "$PREFIX" --limit 100 --json id --jq '.[].id' |
             while read -r id; do gh cache delete "$id" -R "$GITHUB_REPOSITORY" || true; done
@@ -83,7 +87,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: .lake/build
-          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}-${{ github.sha }}
+          key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-${{ github.ref_name }}~${{ github.sha }}
       - name: Count compiled modules
         if: always()
         shell: bash
