@@ -46,7 +46,7 @@ theorem height_factor (a : PolarPoint → ℝ) {p : PolarPoint}
     (v := Real.sqrt p.1 * c₀ p) a H.smooth Real.pi_ne_zero
     (fun r _ => H.odd_period r) (fun r _ => H.even_period r) hp hχ
   · simpa only [rootPhysicalSpeed, one_mul] using H.transport 1 p.1 p.2 hp
-  · simpa only [rootPhysicalSpeed, neg_one_mul, sub_eq_add_neg] using
+  · simpa only [rootPhysicalSpeed, neg_one_mul, neg_mul, sub_eq_add_neg] using
       H.transport (-1) p.1 p.2 hp
   · exact (H.angular_positive 1 p.1 p.2 hp).ne'
   · exact (H.angular_positive (-1) p.1 p.2 hp).ne'
