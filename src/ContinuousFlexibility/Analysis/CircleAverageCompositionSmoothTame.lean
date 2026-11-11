@@ -66,15 +66,32 @@ theorem circleAverageComposeLinear_eq_unitIntegral
           (pairScaleFirst a x).1 (pairScaleFirst a x).2) hc := by
   apply hS.2.2.2.2.2.1
   funext m θ
-  rw [circleAverageComposeLinear_decode,
-    circleUnitIntegral_decode hS (material_circle_sample_weights_pos hT hD).1
-      (material_circle_sample_weights_pos hT hD).2]
-  apply intervalIntegral.integral_congr
-  intro a ha
-  simp only [pairScaleFirst_apply]
-  rw [circleShiftedChartComposeContinuousLinear_apply,
-    circleShiftedChartComposeLinear_decode]
-  simp only [map_smul, Pi.smul_apply, RingHom.id_apply, smul_eq_mul]
+  have hpoint (a : ℝ) :
+      S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel
+        (pairScaleFirst a x).1 (pairScaleFirst a x).2) m θ =
+        S.decode x.2 m (θ + travel m + a * S.decode x.1 m θ) := by
+    have hpair := congrArg
+      (fun z : S.Space × S.Space =>
+        S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel z.1 z.2) m θ)
+      (pairScaleFirst_apply (E := S.Space) (G := S.Space) a x)
+    have hscale : S.decode (a • x.1) m θ = a * S.decode x.1 m θ :=
+      congrArg (fun f : ℕ → ℝ → ℝ => f m θ) (map_smul S.decode a x.1)
+    have hlinear := congrArg (fun u : S.Space => S.decode u m θ)
+      (circleShiftedChartComposeContinuousLinear_apply
+        (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel (a • x.1) x.2)
+    have hdecode := circleShiftedChartComposeLinear_decode
+      (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel (a • x.1) x.2 m θ
+    exact hpair.trans (hlinear.trans (hdecode.trans
+      (congrArg (fun y : ℝ => S.decode x.2 m (θ + travel m + y)) hscale)))
+  have havg := circleAverageComposeLinear_decode
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ travel x.1 x.2 m θ
+  have hint := circleUnitIntegral_decode (T := T) (γ := γ) (S := S) hS
+    (material_circle_sample_weights_pos hT hD).1
+    (material_circle_sample_weights_pos hT hD).2
+    (fun a => circleShiftedChartComposeContinuousLinear hS hT hD hγ travel
+      (pairScaleFirst a x).1 (pairScaleFirst a x).2) hc m θ
+  exact havg.trans
+    ((intervalIntegral.integral_congr (fun a _ => (hpoint a).symm)).trans hint.symm)
 
 theorem smoothTameOn_circleAverageComposeLinear
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)

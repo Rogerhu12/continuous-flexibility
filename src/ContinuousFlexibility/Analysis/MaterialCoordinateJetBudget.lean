@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.MaterialCoefficientMultipliers
 import ContinuousFlexibility.Analysis.ReturnCoefficientLocalBounds
+import ContinuousFlexibility.Analysis.TameMultilinearNormalization
 
 /-!
 # The exact spatial budget under the material coordinate

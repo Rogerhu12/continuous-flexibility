@@ -25,6 +25,11 @@ open scoped Topology ENNReal BigOperators ContDiff
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem abs_mul_le_of_mem_unit_interval
+    {t q : ℝ} (ht : t ∈ Icc (0 : ℝ) 1) : |t * q| ≤ |q| := by
+  rw [abs_mul, abs_of_nonneg ht.1]
+  exact mul_le_of_le_one_left (abs_nonneg _) ht.2
+
 private theorem pair_grading_scaled_scalar_le
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (j : ℕ) (z : E × ℝ)
@@ -91,9 +96,8 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     fun t => z₀ + (t * z.2) • scalarParameterDirection S
   have hpath_eq (t : ℝ) : path t = (z.1, t * z.2) :=
     scalarParameter_zero_line S z.1 (t * z.2)
-  have habs (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) : |t * z.2| ≤ |z.2| := by
-    rw [abs_mul, abs_of_nonneg ht.1]
-    exact mul_le_of_le_one_left (abs_nonneg _) ht.2
+  have habs (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) : |t * z.2| ≤ |z.2| :=
+    abs_mul_le_of_mem_unit_interval (q := z.2) ht
   have hpath (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       path t ∈ sectorNeighborhood S base ε ε :=
     (congrArg (fun x : StateDirections S × ℝ => x ∈ sectorNeighborhood S base ε ε)
