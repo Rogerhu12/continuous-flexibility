@@ -62,6 +62,7 @@ variable {T : MaterialData}
       0 < twoRootDivided (componentOpticalSquare D S C i z) (C.left i) (C.right i) r)
 
 /-- Both surjections concern the original closed component. -/
+include hA in
 theorem exists_ordinaryFlowCompactTime_of_radius (m : ℕ) {r : ℝ}
     (hr : r ∈ Icc (C.left m) (C.right m)) :
     ∃ t ∈ Icc (0 : ℝ) 1,

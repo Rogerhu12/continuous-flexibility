@@ -54,7 +54,7 @@ private theorem n01c_canonicalForcingHead_eq_comp {N : ℕ}
   simp only [canonicalFlowForcingFactorJet, periodicCircleJet_coe_apply,
     canonicalFlowForcingFactors, flowForcingFactors, Fin.cons_zero,
     flowSelectedSpeedCoefficient, flowSpeedJointField, flowTrajectoryGraph,
-    flowInitialSlice, Function.comp_apply]
+    flowInitialSlice, Function.comp_def]
 
 private theorem n01c_flowCircleCoefficient_eq_head
     (hinit : ∀ q α, Θ (q, (0, α)) = α)
@@ -107,11 +107,13 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 def ordinaryFlowFiniteAngle (t : ℝ) (θ : ℝ) : ℝ :=
   ordinaryFlowFiniteTrajectory x hx L m (0, (t, θ))
 
+include hS hT hA hB hpos J in
 theorem contDiff_ordinaryFlowFiniteAngle (t : ℝ) :
     ContDiff ℝ ∞ (ordinaryFlowFiniteAngle m x hx L t) :=
   (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L).comp
     (contDiff_const.prodMk (contDiff_const.prodMk contDiff_id))
 
+include hS hT hA hB hpos in
 theorem ordinaryFlowFiniteAngle_lift (t θ : ℝ) :
     ordinaryFlowFiniteAngle m x hx L t (θ + Real.pi) =
       ordinaryFlowFiniteAngle m x hx L t θ + Real.pi :=

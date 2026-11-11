@@ -116,16 +116,9 @@ theorem physicalFlowPositiveMixed_point_oneHigh_bound
       exact hflow R hR hxR j l hjl hjlN
         (by simpa only [w, StateAngleWord.stateThenAngle_stateArity] using hj)
         (Ja l θ) u hu huR
-  have hs' :
-      ∀ u : Fin k → X, (∀ i, p base (u i) ≤ 1) →
-      (∀ i, p high (u i) ≤ R) →
-      δ ^ (n + 1) * |(smoothDirections_angularStateSlice JC b θ).D k x u| ≤
-        n01c_graphPartitionWordCount (b + k) *
-          (C₀ * C₁ ^ (b + k) * L ^ (b + k)) *
-          E ^ (A₀ + A₁ * ((b + k : ℕ) : ℝ)) * H *
-            R ^ (((n + b + (offset + 1) * k : ℕ) : ℝ) / ((S : ℝ) + 1)) := by
-    simpa only [w, StateAngleWord.stateThenAngle_stateArity,
-      StateAngleWord.stateThenAngle_angleArity] using hs
-  exact hs' v hv hvR
+  have hwstate : w.stateArity = k := StateAngleWord.stateThenAngle_stateArity k b
+  have hwangle : w.angleArity = b := StateAngleWord.stateThenAngle_angleArity k b
+  rw [hwstate, hwangle] at hs
+  exact hs v hv hvR
 
 end ContinuousFlexibility.Analysis
