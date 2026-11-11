@@ -82,7 +82,7 @@ private theorem seeleyReflection_memLp_bound (S : SeeleyData ι) (n : ℕ)
         rw [← ofReal_norm, norm_seeley_coefficient]
       _ ≤ ENNReal.ofReal (|S.a i| * S.b i ^ n) *
           eLpNorm f 2 (volume.restrict (Ici 0)) :=
-        mul_le_mul_left' (eLpNorm_neg_mul_Iio_le f 2 (S.one_le_b i)) _
+        mul_le_mul_right (eLpNorm_neg_mul_Iio_le f 2 (S.one_le_b i)) _
   have hsum : (∑' i, eLpNorm
       (fun x => (S.a i * (-S.b i) ^ n) • f (-S.b i * x))
       2 (volume.restrict (Iio 0))) ≤
@@ -155,7 +155,7 @@ theorem eLpNorm_seeleyExtensionJet_le (S : SeeleyData ι) (J : ℕ → ℝ → F
     _ ≤ eLpNorm (J n) 2 (volume.restrict (Ici 0)) +
         ENNReal.ofReal (∑' i, |S.a i| * S.b i ^ n) *
           eLpNorm (J n) 2 (volume.restrict (Ici 0)) :=
-      add_le_add_left (eLpNorm_seeleyReflection_le S n hf) _
+      add_le_add le_rfl (eLpNorm_seeleyReflection_le S n hf)
     _ = ENNReal.ofReal (1 + ∑' i, |S.a i| * S.b i ^ n) *
         eLpNorm (J n) 2 (volume.restrict (Ici 0)) := by
       rw [ENNReal.ofReal_add zero_le_one (seeleyMomentNorm_nonneg S n),

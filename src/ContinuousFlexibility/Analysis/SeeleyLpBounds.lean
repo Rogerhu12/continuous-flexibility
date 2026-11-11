@@ -30,7 +30,7 @@ theorem map_neg_mul_restrict_Iic_le {b : ℝ} (hb : 1 ≤ b) :
   have hpre : (fun x : ℝ => -b * x) ⁻¹' Ici 0 = Iic 0 := by
     ext x
     simpa only [mem_preimage, mem_Ici, mem_Iic, neg_mul, neg_nonneg, mul_zero] using
-      (mul_le_mul_left hbpos : b * x ≤ b * 0 ↔ x ≤ 0)
+      (mul_le_mul_iff_right₀ hbpos : b * x ≤ b * 0 ↔ x ≤ 0)
   have hmap : Measure.map (fun x : ℝ => -b * x) (volume.restrict (Iic 0)) =
       ENNReal.ofReal |(-b)⁻¹| • volume.restrict (Ici 0) := by
     rw [← hpre, ← Measure.restrict_map (measurable_const_mul (-b)) measurableSet_Ici,
@@ -43,7 +43,7 @@ theorem map_neg_mul_restrict_Iic_le {b : ℝ} (hb : 1 ≤ b) :
   apply Measure.le_iff'.mpr
   intro s
   rw [Measure.smul_apply, smul_eq_mul]
-  exact (mul_le_mul_right' hc _).trans_eq (one_mul _)
+  exact (mul_le_mul_left hc _).trans_eq (one_mul _)
 
 /-- The reflection estimate is valid for every exponent, before specializing
 to the Hilbert exponent used by the Sobolev completion. -/
@@ -62,9 +62,15 @@ theorem eLpNorm_neg_mul_Iic_le (f : ℝ → F) (p : ℝ≥0∞) {b : ℝ} (hb : 
 theorem eLpNorm_neg_mul_Iio_le (f : ℝ → F) (p : ℝ≥0∞) {b : ℝ} (hb : 1 ≤ b) :
     eLpNorm (fun x => f (-b * x)) p (volume.restrict (Iio 0)) ≤
       eLpNorm f p (volume.restrict (Ici 0)) := by
-  exact (eLpNorm_mono_measure _
-    (Measure.restrict_mono (fun _ hx => le_of_lt hx) le_rfl)).trans
-    (eLpNorm_neg_mul_Iic_le f p hb)
+  have hmeasure : (volume : Measure ℝ).restrict (Iio 0) ≤
+      volume.restrict (Iic 0) :=
+    Measure.restrict_mono (fun (x : ℝ) (hx : x < 0) => hx.le)
+      (le_refl (volume : Measure ℝ))
+  calc
+    eLpNorm (fun x => f (-b * x)) p (volume.restrict (Iio 0)) ≤
+        eLpNorm (fun x => f (-b * x)) p (volume.restrict (Iic 0)) :=
+      eLpNorm_mono_measure (fun x => f (-b * x)) hmeasure
+    _ ≤ eLpNorm f p (volume.restrict (Ici 0)) := eLpNorm_neg_mul_Iic_le f p hb
 
 theorem memLp_neg_mul_Iio {f : ℝ → F} {p : ℝ≥0∞}
     (hf : MemLp f p (volume.restrict (Ici 0))) {b : ℝ} (hb : 1 ≤ b) :

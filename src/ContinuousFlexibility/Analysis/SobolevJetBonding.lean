@@ -30,7 +30,7 @@ private def sobolevJetTruncateLinear (s : Set ℝ) {k m : ℕ} (hkm : k ≤ m) :
   map_smul' c v := by
     apply PiLp.ext
     intro j
-    simp only [PiLp.toLp_apply, PiLp.smul_apply]
+    simp only [PiLp.toLp_apply, PiLp.smul_apply, RingHom.id_apply]
 
 private theorem sobolevJetTruncateLinear_apply (s : Set ℝ) {k m : ℕ} (hkm : k ≤ m)
     (v : SobolevJetAmbient F s m) (j : Fin (k + 1)) :

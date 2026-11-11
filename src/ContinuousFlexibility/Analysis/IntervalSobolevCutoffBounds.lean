@@ -3,6 +3,7 @@ import Mathlib.MeasureTheory.Function.LpSeminorm.Indicator
 import Mathlib.MeasureTheory.Function.LpSeminorm.Monotonicity
 import Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality
 import Mathlib.MeasureTheory.Integral.IntegrableOn
+import Mathlib.MeasureTheory.Measure.Lebesgue.Basic
 import Mathlib.Tactic.Ring
 
 /-!
@@ -75,8 +76,7 @@ theorem eLpNorm_cutoffHalfLine_jet_le {L c : ℝ} (hL : 0 < L) (hc : c < L)
   have hT (i : ℕ) : AEStronglyMeasurable (T i) (volume.restrict (Icc 0 L)) := by
     have hi : ContinuousOn (T i) (Icc 0 L) :=
       (((hχ.continuous_iteratedDeriv i (by simp)).continuousOn).smul
-        (hf.continuousOn_iteratedDerivWithin (by simp) (uniqueDiffOn_Icc hL)))
-        .const_smul (n.choose i)
+        (hf.continuousOn_iteratedDerivWithin (by simp) (uniqueDiffOn_Icc hL))).const_smul (n.choose i)
     exact hi.aestronglyMeasurable measurableSet_Icc
   have he : iteratedDerivWithin n (cutoffHalfLine χ f) (Ici 0)
       =ᵐ[volume.restrict (Icc 0 L)] ∑ i ∈ Finset.range (n + 1), T i := by

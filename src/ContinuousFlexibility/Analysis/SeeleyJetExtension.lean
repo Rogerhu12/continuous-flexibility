@@ -99,7 +99,7 @@ theorem continuousOn_seeleyReflection (S : SeeleyData ι) (n : ℕ) {f : ℝ →
     have hcomp := hc.comp (continuous_const.mul continuous_id).continuousOn
       (fun x (hx : x ∈ Iic (0 : ℝ)) => mul_nonneg_of_nonpos_of_nonpos
         (neg_nonpos.mpr (seeley_scale_nonneg S i)) hx)
-    simpa only [Pi.smul_def, Function.comp_def] using
+    simpa only [Pi.smul_def, Function.comp_def, Pi.mul_apply, id_eq] using
       hcomp.const_smul (S.a i * (-S.b i) ^ n)
   · intro i x hx
     rw [norm_smul, norm_seeley_coefficient]

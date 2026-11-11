@@ -80,7 +80,7 @@ def sobolevCoreJet (s : Set ℝ) (hs : MeasurableSet s)
   map_smul' c f := by
     apply PiLp.ext
     intro j
-    simp only [PiLp.toLp_apply, PiLp.smul_apply, map_smul]
+    simp only [PiLp.toLp_apply, PiLp.smul_apply, map_smul, RingHom.id_apply]
 
 @[simp] theorem sobolevCoreJet_apply (s : Set ℝ) (hs : MeasurableSet s)
     (hu : UniqueDiffOn ℝ s) (k : ℕ) (f : smoothSobolevCore F s hs hu)

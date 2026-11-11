@@ -68,7 +68,8 @@ private theorem seeleyBlocks_summable_absMoment (m : ℕ) :
 private theorem seeleyBlocks_hasSum_moment (m : ℕ) :
     HasSum (fun n => (seeleyBlocks n).moment m) 1 := by
   have hfinite : (∑ n ∈ range (m + 1), (seeleyBlocks n).moment m) = 1 := by
-    rw [Finset.sum_range_succ, seeleyBlocks_moment_self, Fin.sum_univ_eq_sum_range]
+    rw [Finset.sum_range_succ, seeleyBlocks_moment_self,
+      Fin.sum_univ_eq_sum_range (fun k : ℕ => (seeleyBlocks k).moment m) m]
     ring
   have hzero : ∀ n ∉ range (m + 1), (seeleyBlocks n).moment m = 0 := by
     intro n hn
@@ -94,7 +95,7 @@ theorem seeleyCoefficient_summable_moment (m : ℕ) :
   have hnonneg (i : SeeleyIndex) : 0 ≤ |seeleyCoefficient i| * seeleyDilation i ^ m :=
     mul_nonneg (abs_nonneg _) (pow_nonneg (zero_le_one.trans (seeleyDilation_one_le i)) m)
   apply (summable_sigma_of_nonneg hnonneg).mpr
-  refine ⟨fun _ => summable_fintype _, ?_⟩
+  refine ⟨fun _ => (hasSum_fintype _).summable, ?_⟩
   simpa only [tsum_fintype, seeleyCoefficient, seeleyDilation, SeeleyBlock.absMoment]
     using seeleyBlocks_summable_absMoment m
 

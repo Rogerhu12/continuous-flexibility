@@ -381,3 +381,6 @@ import ContinuousFlexibility.Analysis.IntervalSobolevCutoffBounds
 import ContinuousFlexibility.Analysis.IntervalSobolevCutoffCore
 import ContinuousFlexibility.Analysis.IntervalSobolevCutoffNorm
 import ContinuousFlexibility.Analysis.SobolevAffineExtension
+import ContinuousFlexibility.Analysis.SeeleyNaturality
+import ContinuousFlexibility.Analysis.IntervalSobolevExtension
+import ContinuousFlexibility.Analysis.SobolevExtension
