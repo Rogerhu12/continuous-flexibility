@@ -144,7 +144,7 @@ def innerRadialWeakResidual (q : InnerRadialH1Pair D)
     simp only [Prod.fst_add, Prod.snd_add, inner_add_right]
     ring
   map_smul' c r := by
-    simp only [Prod.fst_smul, Prod.snd_smul, real_inner_smul_right, smul_eq_mul]
+    simp only [Prod.smul_fst, Prod.smul_snd, real_inner_smul_right, RingHom.id_apply, smul_eq_mul]
     ring
 
 /-- Exactly one piece carries the one temporary scalar column. -/

@@ -56,7 +56,7 @@ theorem innerL2PieceProjection_selfAdjoint :
     IsSelfAdjoint (innerL2PieceProjection μ s) := by
   apply ContinuousLinearMap.isSelfAdjoint_iff'.mpr
   simp only [innerL2PieceProjection, ContinuousLinearMap.adjoint_comp,
-    innerL2ZeroExtension_adjoint, innerL2ZeroExtension]
+    innerL2ZeroExtension_adjoint, innerL2ZeroExtension, ContinuousLinearMap.adjoint_adjoint]
 
 theorem innerL2PieceProjection_inner_self (hs : MeasurableSet s) (f : Lp ℝ 2 μ) :
     ⟪innerL2PieceProjection μ s f, f⟫_ℝ = ‖innerL2PieceProjection μ s f‖ ^ 2 := by
@@ -88,6 +88,8 @@ section FinitePieces
 variable {ι : Type*} [Fintype ι] (sets : ι → Set α)
   (hmeas : ∀ i, MeasurableSet (sets i))
   (hdis : Pairwise (fun i k => Disjoint (sets i) (sets k)))
+
+include hmeas hdis
 
 /-- The support geometry yields the sum-of-squares identity for the
 actual restrictions extended by zero. -/

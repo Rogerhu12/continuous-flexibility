@@ -60,6 +60,7 @@ variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}
 
 /-- The exact Jacobian map into the same physical measure used by the
 global radial problem. No global monotonicity of R is imposed. -/
+include hab hlam hR hp hcore hw in
 theorem innerLiouvilleInterval_map_measure :
     Measure.map R ((volume.restrict (Ioo a b)).withDensity
       (fun x => ENNReal.ofReal (innerLiouvilleIntervalAmplitude R s lam x ^ 2))) =
@@ -94,6 +95,7 @@ theorem innerLiouvilleInterval_map_measure :
       ← innerLiouvilleIntervalAmplitude_sq hlam.le (hp x hx').1.ne' (hw x hx')]
   · simp only [mem_preimage, hxt, not_false_eq_true, indicator_of_notMem, mul_zero]
 
+include hab hlam hR hp hcore hw in
 theorem innerLiouvilleInterval_measurePreserving :
     MeasurePreserving R
       ((volume.restrict (Ioo a b)).withDensity
@@ -101,6 +103,7 @@ theorem innerLiouvilleInterval_measurePreserving :
       ((radialHilbertMeasure D).restrict (Ioo (R a) (R b))) :=
   ⟨hR.continuous.measurable, innerLiouvilleInterval_map_measure D hab hlam hR hp hcore hw⟩
 
+include hlam hp in
 theorem innerLiouvilleIntervalAmplitude_ne_ae :
     ∀ᵐ x ∂volume.restrict (Ioo a b), innerLiouvilleIntervalAmplitude R s lam x ≠ 0 := by
   filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
@@ -109,6 +112,7 @@ theorem innerLiouvilleIntervalAmplitude_ne_ae :
 
 /-- A physical L² representative may be pulled back through the actual
 radius without changing its almost everywhere class. -/
+include hab hlam hR hs hp hcore hw in
 theorem innerLiouvilleInterval_pullback_ae {f g : ℝ → ℝ}
     (hfg : f =ᵐ[(radialHilbertMeasure D).restrict (Ioo (R a) (R b))] g) :
     (fun x => f (R x)) =ᵐ[volume.restrict (Ioo a b)] (fun x => g (R x)) := by
@@ -123,6 +127,7 @@ theorem innerLiouvilleInterval_pullback_ae {f g : ℝ → ℝ}
     (innerLiouvilleIntervalAmplitude_ne_ae hlam hp)).ae_eq
       (ae_eq_comp hR.continuous.measurable.aemeasurable hh)
 
+include hab hlam hR hs hp hcore hw in
 theorem innerLiouvilleInterval_memLp_iff (u : ℝ → ℝ)
     (hu : AEStronglyMeasurable u
       ((radialHilbertMeasure D).restrict (Ioo (R a) (R b)))) :

@@ -43,7 +43,7 @@ theorem innerSquareDensity_memLp_iff (f : α → ℝ) :
     convert h using 1
     funext x
     rw [ENNReal.toReal_ofReal (sq_nonneg (A x))]
-    simp only [smul_eq_mul]
+    simp only [smul_eq_mul, Pi.mul_apply]
     ring
   · intro hf
     have hfm : AEStronglyMeasurable f μ := by
@@ -58,7 +58,7 @@ theorem innerSquareDensity_memLp_iff (f : α → ℝ) :
     convert hf.integrable_sq using 1
     funext x
     rw [ENNReal.toReal_ofReal (sq_nonneg (A x))]
-    simp only [smul_eq_mul]
+    simp only [smul_eq_mul, Pi.mul_apply]
     ring
 
 /-- The forward isometry acts on the existing Lp quotient. -/
@@ -97,6 +97,7 @@ def innerSquareDensityPullback :
     rw [hx, hsmul, hu, ha]
     ring
   norm_map' u := by
+    change ‖((innerSquareDensity_memLp_iff μ A hA hne u).mp (Lp.memLp u)).toLp _‖ = ‖u‖
     have ht : ‖((innerSquareDensity_memLp_iff μ A hA hne u).mp (Lp.memLp u)).toLp _‖ ^ 2 =
         ∫ x, (A x * u x) ^ 2 ∂μ := by
       rw [innerL2_norm_sq_eq_integral]

@@ -114,8 +114,10 @@ theorem innerRadialH1_smooth_trace_pairing
     have hr0 : r ≠ 0 := (ha.trans_le hrcc.1).ne'
     have hw0 : D.w r ≠ 0 := (hpos r hrcc).ne'
     field_simp [hr0, hw0] <;> ring
-  have hI₁ := (hφdc.mul hpc).intervalIntegrable_of_Icc hab.le
-  have hI₂ := (hφc.mul hpdc).intervalIntegrable_of_Icc hab.le
+  have hI₁ : IntervalIntegrable (fun r => deriv φ r * p r) volume a b :=
+    (hφdc.mul hpc).intervalIntegrable_of_Icc hab.le
+  have hI₂ : IntervalIntegrable (fun r => φ r * deriv p r) volume a b :=
+    (hφc.mul hpdc).intervalIntegrable_of_Icc hab.le
   rw [hpair₁, hpair₂, ← intervalIntegral.integral_add hI₁ hI₂]
   have hFTC := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hab.le
     (hφc.mul hpc)
@@ -140,8 +142,8 @@ def innerRadialH1Trace : InnerRadialH1Pair D →ₗ[ℝ] (Fin 2 → ℝ) where
     ring
   map_smul' c q := by
     funext i
-    simp only [Prod.fst_smul, Prod.snd_smul, Pi.smul_apply,
-      real_inner_smul_left, smul_eq_mul]
+    simp only [Prod.smul_fst, Prod.smul_snd, Pi.smul_apply,
+      real_inner_smul_left, RingHom.id_apply, smul_eq_mul]
     ring
 
 theorem innerRadialH1Trace_smooth {φ : ℝ → ℝ}

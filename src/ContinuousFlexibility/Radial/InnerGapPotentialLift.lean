@@ -211,4 +211,50 @@ theorem innerGapPotentialMultiplier_inner (D : ReferenceData) (hw : ContDiff ℝ
       dsimp only
       field_simp [(ha.trans hr.1).ne', (hpos r (Ioo_subset_Icc_self hr)).ne'] <;> ring
 
+
+/-- The multiplier is self-adjoint on the actual real Hilbert space. -/
+theorem innerGapPotentialMultiplier_adjoint (D : ReferenceData) (hw : ContDiff ℝ ∞ D.w)
+    {a b : ℝ} (hpos : ∀ r ∈ Icc a b, 0 < D.w r) (j : ℝ) :
+    (innerGapPotentialMultiplier D hw hpos j).adjoint =
+      innerGapPotentialMultiplier D hw hpos j := by
+  dsimp only [innerGapPotentialMultiplier]
+  exact innerWeightMultiplier_adjoint _ _ _ _ _
+
+/-- Squaring the constructed square-root multiplier gives the actual
+signed radial potential on a positive piece. -/
+theorem innerGapPotentialMultiplier_square_ae (D : ReferenceData)
+    (hw : ContDiff ℝ ∞ D.w) {a b : ℝ}
+    (hpos : ∀ r ∈ Icc a b, 0 < D.w r)
+    (hslope : ∀ r ∈ Icc a b, 0 ≤ r * deriv D.w r / D.w r)
+    (j : ℝ) (u : RadialModeL2 D) :
+    innerGapPotentialMultiplier D hw hpos j
+        (innerGapPotentialMultiplier D hw hpos j u) =ᵐ[radialHilbertMeasure D]
+      (Ioo a b).indicator
+        (fun r => ((j ^ 2 / 12) * (r * deriv D.w r / D.w r)) * u r) := by
+  filter_upwards [innerGapPotentialMultiplier_ae D hw hpos j
+    (innerGapPotentialMultiplier D hw hpos j u),
+    innerGapPotentialMultiplier_ae D hw hpos j u] with r houter hinner
+  rw [houter, hinner]
+  by_cases hr : r ∈ Ioo a b
+  · have hα : 0 ≤ (j ^ 2 / 12) * (r * deriv D.w r / D.w r) :=
+      mul_nonneg (div_nonneg (sq_nonneg _) (by norm_num))
+        (hslope r (Ioo_subset_Icc_self hr))
+    simp only [innerGapPotentialWeight, indicator_of_mem hr]
+    calc
+      _ = Real.sqrt ((j ^ 2 / 12) * (r * deriv D.w r / D.w r)) ^ 2 * u r := by ring
+      _ = _ := by rw [Real.sq_sqrt hα]
+  · simp only [innerGapPotentialWeight, indicator_of_notMem hr, zero_mul]
+
+theorem innerGapPotentialMultiplier_square_inner (D : ReferenceData)
+    (hw : ContDiff ℝ ∞ D.w) {a b : ℝ}
+    (hpos : ∀ r ∈ Icc a b, 0 < D.w r) (j : ℝ)
+    (u v : RadialModeL2 D) :
+    ⟪innerGapPotentialMultiplier D hw hpos j
+        (innerGapPotentialMultiplier D hw hpos j u), v⟫_ℝ =
+      ⟪innerGapPotentialMultiplier D hw hpos j u,
+        innerGapPotentialMultiplier D hw hpos j v⟫_ℝ := by
+  simpa only [innerGapPotentialMultiplier_adjoint] using
+    (innerGapPotentialMultiplier D hw hpos j).adjoint_inner_left v
+      (innerGapPotentialMultiplier D hw hpos j u)
+
 end ContinuousFlexibility.Radial

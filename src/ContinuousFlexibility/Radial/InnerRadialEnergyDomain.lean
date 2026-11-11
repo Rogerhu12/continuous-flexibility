@@ -38,7 +38,9 @@ theorem innerRadialH1Core_zero (D : ReferenceData) (a b : ℝ) :
   · simp only [tsupport_zero, empty_subset]
   all_goals
     filter_upwards [Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D)] with r hr
-    simpa [innerGapGradientField] using hr
+    by_cases hmem : r ∈ Ioo a b
+    · simpa [indicator_of_mem hmem, innerGapGradientField] using hr
+    · simpa [indicator_of_notMem hmem] using hr
 
 theorem innerRadialH1Core_add {D : ReferenceData} {a b : ℝ}
     {q r : InnerRadialH1Pair D}
@@ -69,13 +71,13 @@ theorem innerRadialH1Core_smul {D : ReferenceData} {a b : ℝ}
   rcases hq with ⟨u, hu, hcu, hsu, hu₀, hu₁⟩
   refine ⟨fun x => c * u x, contDiff_const.mul hu, hcu.mul_left,
     tsupport_mul_subset_right.trans hsu, ?_, ?_⟩
-  · simp only [Prod.fst_smul]
+  · simp only [Prod.smul_fst]
     filter_upwards [hu₀, Lp.coeFn_smul c q.1] with x hx hsmul
     rw [hsmul, Pi.smul_apply, smul_eq_mul, hx]
     by_cases hmem : x ∈ Ioo a b
     · simp only [indicator_of_mem hmem]
     · simp only [indicator_of_notMem hmem, mul_zero]
-  · simp only [Prod.snd_smul]
+  · simp only [Prod.smul_snd]
     filter_upwards [hu₁, Lp.coeFn_smul c q.2] with x hx hsmul
     rw [hsmul, Pi.smul_apply, smul_eq_mul, hx]
     by_cases hmem : x ∈ Ioo a b

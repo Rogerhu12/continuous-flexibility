@@ -49,7 +49,8 @@ theorem innerBufferCutoff_deriv (B : BufferData) (i : Fin 2) (x : ℝ) :
       deriv smoothTransition
         (B.action i + 4 + B.mass i * bufferSign i * (x - bufferCut B i)) *
           (B.mass i * bufferSign i) := by
-  exact (((smoothTransition.contDiff.differentiable (by simp) _).hasDerivAt).comp x
+  have hcd : ContDiff ℝ ∞ smoothTransition := smoothTransition.contDiff
+  exact (((hcd.differentiable (by simp) _).hasDerivAt).comp x
     (innerBufferCutoff_argument_deriv B i x)).deriv
 
 theorem innerBufferCutoff_second_deriv (B : BufferData) (i : Fin 2) (x : ℝ) :

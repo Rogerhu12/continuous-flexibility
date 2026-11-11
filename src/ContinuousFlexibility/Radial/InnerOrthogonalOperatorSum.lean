@@ -50,6 +50,8 @@ variable {α : Type*} [MeasurableSpace α] (μ : Measure α)
   (sets : ι → Set α) (hmeas : ∀ i, MeasurableSet (sets i))
   (D : ι → Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ)
 
+include hmeas
+
 /-- Restrict the source and zero extend the output of each local block. -/
 def innerPieceDirichletBlock (i : ι) : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ :=
   innerL2PieceProjection μ (sets i) ∘L D i ∘L innerL2PieceProjection μ (sets i)

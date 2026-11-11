@@ -1,5 +1,6 @@
 import Mathlib.LinearAlgebra.Pi
 import Mathlib.Data.Real.Basic
+import Mathlib.Tactic.Abel
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
@@ -97,9 +98,9 @@ theorem innerMatchedPiece_weak_gluing (Z : ι → Submodule ℝ E)
     refine ⟨?_, ?_⟩
     · intro p v hv
       have he := h (Pi.single p v) (innerMatchedPieceDomain_single Z lift p hv)
-      have hs : (∑ k, residual k (Pi.single p v k)) = residual p v := by
+      have hs : (∑ k, residual k ((Pi.single p v : ι → E) k)) = residual p v := by
         calc
-          _ = residual p (Pi.single p v p) := by
+          _ = residual p ((Pi.single p v : ι → E) p) := by
             apply Finset.sum_eq_single p
             · intro k _ hk
               rw [Pi.single_eq_of_ne hk, map_zero]

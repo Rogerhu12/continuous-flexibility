@@ -40,9 +40,10 @@ theorem innerEnergyClosure_derivative_pairing {a b : ℝ} {V p : ℝ → ℝ}
     have hz := innerDirichlet_representative_zero_outside hab hφ.continuous hφout
     have hφa : φ a = 0 := hz (by simp : a ∈ (Ioo a b)ᶜ)
     have hφb : φ b = 0 := hz (by simp : b ∈ (Ioo a b)ᶜ)
-    have hI₁ := (hpdc.mul hφ.continuous.continuousOn).intervalIntegrable_of_Icc hab.le
-    have hI₂ := (hpc.mul (hφ.continuous_deriv (by simp)).continuousOn).intervalIntegrable_of_Icc
-      hab.le
+    have hI₁ : IntervalIntegrable (fun x => deriv p x * φ x) volume a b :=
+      (hpdc.mul hφ.continuous.continuousOn).intervalIntegrable_of_Icc hab.le
+    have hI₂ : IntervalIntegrable (fun x => p x * deriv φ x) volume a b :=
+      (hpc.mul (hφ.continuous_deriv (by simp)).continuousOn).intervalIntegrable_of_Icc hab.le
     have hFTC : (∫ x in a..b, deriv p x * φ x + p x * deriv φ x) = 0 := by
       have he := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hab.le
         (hpc.mul hφ.continuous.continuousOn)
@@ -113,8 +114,10 @@ theorem innerSmooth_trace_pairing {a b : ℝ} {φ p : ℝ → ℝ}
     fun x hx => (hφ x hx).continuousAt.continuousWithinAt
   have hpc : ContinuousOn p (Icc a b) :=
     fun x hx => (hp x hx).continuousAt.continuousWithinAt
-  have hI₁ := ((innerDirichlet_deriv_continuousOn hp).mul hφc).intervalIntegrable_of_Icc hab.le
-  have hI₂ := (hpc.mul (innerDirichlet_deriv_continuousOn hφ)).intervalIntegrable_of_Icc hab.le
+  have hI₁ : IntervalIntegrable (fun x => deriv p x * φ x) volume a b :=
+    ((innerDirichlet_deriv_continuousOn hp).mul hφc).intervalIntegrable_of_Icc hab.le
+  have hI₂ : IntervalIntegrable (fun x => p x * deriv φ x) volume a b :=
+    (hpc.mul (innerDirichlet_deriv_continuousOn hφ)).intervalIntegrable_of_Icc hab.le
   have hFTC : (∫ x in a..b, deriv p x * φ x + p x * deriv φ x) =
       p b * φ b - p a * φ a := by
     have he := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hab.le (hpc.mul hφc)
@@ -153,8 +156,8 @@ def innerIntervalTraceLinear (a b : ℝ) : (RadialL2 × RadialL2) →ₗ[ℝ] (F
     ring
   map_smul' r U := by
     funext i
-    simp only [innerIntervalTrace, Prod.fst_smul, Prod.snd_smul, Pi.smul_apply,
-      real_inner_smul_left, smul_eq_mul]
+    simp only [innerIntervalTrace, Prod.smul_fst, Prod.smul_snd, Pi.smul_apply,
+      real_inner_smul_left, RingHom.id_apply, smul_eq_mul]
     ring
 
 @[simp] theorem innerIntervalTraceLinear_apply (a b : ℝ) (U : RadialL2 × RadialL2) :
