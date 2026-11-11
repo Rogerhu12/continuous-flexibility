@@ -54,6 +54,13 @@ theorem SeedPureTail.replace_inward {D : ReferenceData} {right : Bool}
     outward_zero := ?_
     tail_eq := ?_
     positive := ?_
+    inward_increasing := by
+      intro r hr hinner
+      rcases seedOrientedGlue_sides right splice r with hi | ho
+      · rw [(seedOrientedGlue_inward_germ hmatchW hi).deriv_eq]
+        exact hderiv r hr
+      · rw [(seedOrientedGlue_outward_germ hmatchW ho).deriv_eq]
+        exact T.inward_increasing r hr hinner
     simple_critical := ?_
     homogeneous := ?_
     cut := cut
