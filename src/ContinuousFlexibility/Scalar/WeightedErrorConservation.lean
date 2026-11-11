@@ -68,8 +68,11 @@ theorem integral_angularPartial_eq_zero_of_contDiffOn
       (continuous_const.prodMk continuous_id).continuousAt
   have hperiod : F (r, Real.pi) = F (r, 0) := by
     simpa only [Prod.mk_add_mk, add_zero, zero_add] using hFp (r, 0)
+  have hderiv (θ : ℝ) : HasDerivAt (fun t : ℝ => F (r, t))
+      (angularPartial F (r, θ)) θ := by
+    simpa only using! Radial.hasDerivAt_angularSlice ((hat θ).differentiableAt (by simp))
   rw [intervalIntegral.integral_eq_sub_of_hasDerivAt
-    (fun θ _ => Radial.hasDerivAt_angularSlice ((hat θ).differentiableAt (by simp)))
+    (fun θ _ => hderiv θ)
     (hslice.intervalIntegrable 0 Real.pi), hperiod, sub_self]
 
 theorem physicalSourceIntegral_angularPartial_eq_zero

@@ -28,10 +28,10 @@ theorem mixedDerivative_add_of_contDiff {f g : PolarPoint → ℝ}
       ((hf.comp (contDiff_const.prodMk contDiff_id)).contDiffAt.of_le (by simp))
       ((hg.comp (contDiff_const.prodMk contDiff_id)).contDiffAt.of_le (by simp))
   have hf' : ContDiff ℝ ∞ (fun r => iteratedDeriv b (fun θ => f (r, θ)) p.2) := by
-    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero] using
+    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero, id_eq] using
       (contDiff_mixedDerivative hf 0 b).comp (contDiff_id.prodMk contDiff_const)
   have hg' : ContDiff ℝ ∞ (fun r => iteratedDeriv b (fun θ => g (r, θ)) p.2) := by
-    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero] using
+    simpa only [Function.comp_def, mixedDerivative, iteratedDeriv_zero, id_eq] using
       (contDiff_mixedDerivative hg 0 b).comp (contDiff_id.prodMk contDiff_const)
   unfold mixedDerivative
   simp_rw [hs]

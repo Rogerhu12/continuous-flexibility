@@ -39,7 +39,7 @@ theorem iteratedDeriv_intervalIntegral_parameter
         fun s => -(∫ t in b..a, f (s, t)) := by
       funext s
       exact intervalIntegral.integral_symm _ _
-    rw [hreverse, iteratedDeriv_neg,
+    rw [hreverse, iteratedDeriv_fun_neg,
       iteratedDeriv_intervalIntegral_parameter_of_le hf hba]
     exact (intervalIntegral.integral_symm b a).symm
 

@@ -60,7 +60,7 @@ theorem SmoothDirections.scalar_comp_linear
       rw [ih (x + t • v 0) ht]
       simp only [map_add, map_smul, smul_eq_mul]
     have hline : HasDerivAt (fun t : ℝ => ℓ x + t * ℓ (v 0)) (ℓ (v 0)) 0 := by
-      simpa only [one_mul, zero_add] using
+      simpa only [one_mul, zero_add, Pi.add_apply, id_eq] using!
         (hasDerivAt_const (0 : ℝ) (ℓ x)).add ((hasDerivAt_id 0).mul_const (ℓ (v 0)))
     have hscalar : HasDerivAt
         (fun t : ℝ => iteratedDeriv k F (ℓ x + t * ℓ (v 0)) *

@@ -19,10 +19,12 @@ open scoped ContDiff ENNReal BigOperators
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Every summand of the actual physical norm is bounded by that norm. -/
-theorem weightedPhysicalJet_norm_le_physicalNorm
-    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
-    (hf : HeightMember D T γ f) {a b c s : ℕ} (h : a + b + c ≤ s) :
+/-- Every summand of the actual physical norm is bounded by that norm;
+the assertion does not require a parity condition on the field. -/
+theorem weightedPhysicalJet_norm_le_physicalNorm_of_memLp
+    {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
+    (hjets : ∀ a b c : ℕ, MemLp (weightedPhysicalJet T γ a b c f) 2 materialCylinderMeasure)
+    {a b c s : ℕ} (h : a + b + c ≤ s) :
     (eLpNorm (weightedPhysicalJet T γ a b c f) 2 materialCylinderMeasure).toReal ≤
       physicalNorm T γ s f := by
   let j : JetIndex s :=
@@ -31,7 +33,7 @@ theorem weightedPhysicalJet_norm_le_physicalNorm
     eLpNorm (weightedPhysicalJet T γ (i.val 0).val (i.val 1).val (i.val 2).val f)
       2 materialCylinderMeasure
   have hN (i : JetIndex s) : N i ≠ (⊤ : ℝ≥0∞) :=
-    (hf.2.2.2.2 (i.val 0).val (i.val 1).val (i.val 2).val).eLpNorm_ne_top
+    (hjets (i.val 0).val (i.val 1).val (i.val 2).val).eLpNorm_ne_top
   have hsum : (∑ i : JetIndex s, N i ^ 2) ≠ (⊤ : ℝ≥0∞) := by
     apply ENNReal.sum_ne_top.mpr
     intro i _
@@ -43,6 +45,14 @@ theorem weightedPhysicalJet_norm_le_physicalNorm
       (Finset.mem_univ j)
   have hr := ENNReal.toReal_mono hsum hle
   simpa [N, j, ENNReal.toReal_pow] using hr
+
+/-- The height-space specialization of the general weighted-jet bound. -/
+theorem weightedPhysicalJet_norm_le_physicalNorm
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
+    (hf : HeightMember D T γ f) {a b c s : ℕ} (h : a + b + c ≤ s) :
+    (eLpNorm (weightedPhysicalJet T γ a b c f) 2 materialCylinderMeasure).toReal ≤
+      physicalNorm T γ s f :=
+  weightedPhysicalJet_norm_le_physicalNorm_of_memLp hf.2.2.2.2 h
 
 /-- A physical norm is bounded by the specified increasing projective grading. -/
 theorem physicalNorm_decode_le_grading

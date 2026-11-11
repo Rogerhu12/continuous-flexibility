@@ -18,6 +18,8 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory ContinuousFlexibility.Analysis
 open scoped BigOperators ContDiff ENNReal
 
+set_option backward.isDefEq.respectTransparency false
+
 /-- The literal coefficient times material weight times finite jet product. -/
 def materialJetMonomial (T : MaterialData) (γ : ℝ) (A : SobolevModelData)
     {k : ℕ} (coefficient : PolarPoint → ℝ) (a b : Fin (k + 1) → ℕ) (c : ℕ)
@@ -97,7 +99,9 @@ theorem materialJetMonomial_memLp_and_norm_le
           (mul_le_mul_of_nonneg_left htail (abs_nonneg _))
           (mul_nonneg hK (pow_nonneg (hW0 p) (c + 1)))
       _ = B * (W p ^ (c + 1) * |J 0 p|) := by dsimp [B]; ring
-  have haepoint := Eventually.of_forall hpoint
+  have haepoint : ∀ᵐ p ∂materialCylinderMeasure,
+      ‖materialJetMonomial T γ A coefficient a b c u p‖ ≤ B * ‖F p‖ :=
+    Eventually.of_forall hpoint
   refine ⟨hF.of_le_mul hg haepoint, ?_⟩
   have he := eLpNorm_le_mul_eLpNorm_of_ae_le_mul hg haepoint 2
   have hfinite : ENNReal.ofReal B * eLpNorm F 2 materialCylinderMeasure ≠ ⊤ :=
@@ -110,6 +114,35 @@ theorem materialJetMonomial_memLp_and_norm_le
       (a := a 0) (b := b 0) (c := c + 1) le_rfl).trans
         (physicalNorm_decode_le_grading hA (u 0) (a 0 + b 0 + (c + 1)))
   exact hreal.trans (mul_le_mul_of_nonneg_left hFnorm hB)
+
+private theorem monomial_input_product_le
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) {k : ℕ}
+    (a b d : Fin (k + 1) → ℕ) (c : ℕ) {K Q : ℝ} (hK : 0 ≤ K) (hQ : 0 ≤ Q)
+    (hd0 : a 0 + b 0 + (c + 1) ≤ d 0 + 2)
+    (hdi : ∀ i, a i + b i + 2 ≤ d i + 2) (u : Fin (k + 1) → E) :
+    (K * ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), Q * p (a i + b i + 2) (u i)) *
+        p (a 0 + b 0 + (c + 1)) (u 0) ≤
+      (K * ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), Q) *
+        ∏ i, p (d i + 2) (u i) := by
+  classical
+  have hprod :
+      p (a 0 + b 0 + (c + 1)) (u 0) *
+        (∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), p (a i + b i + 2) (u i)) ≤
+      ∏ i, p (d i + 2) (u i) := by
+    rw [← Finset.mul_prod_erase Finset.univ (fun i => p (d i + 2) (u i))
+      (Finset.mem_univ (0 : Fin (k + 1)))]
+    exact mul_le_mul (hp hd0 (u 0))
+      (Finset.prod_le_prod₀ (fun _ _ => apply_nonneg _ _) (fun i _ => hp (hdi i) (u i)))
+      (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)) (apply_nonneg _ _)
+  calc
+    _ = (K * ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), Q) *
+        (p (a 0 + b 0 + (c + 1)) (u 0) *
+          ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), p (a i + b i + 2) (u i)) := by
+      rw [Finset.prod_mul_distrib]
+      ring
+    _ ≤ _ := mul_le_mul_of_nonneg_left hprod
+      (mul_nonneg hK (Finset.prod_nonneg (fun _ _ => hQ)))
 
 /-- Every actual weighted monomial has an L² one-high-factor estimate with a
 single base and loss for all positive arities.  Its coefficient is constrained
@@ -152,15 +185,6 @@ theorem materialJetMonomial_oneHigh
   have hdi (i : Fin (k + 1)) : a i + b i + 2 ≤ d i + 2 := by
     dsimp [d]
     split_ifs <;> omega
-  have hprod :
-      A.grading (a 0 + b 0 + (c + 1)) (u 0) *
-        (∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), A.grading (a i + b i + 2) (u i)) ≤
-      ∏ i, A.grading (d i + 2) (u i) := by
-    rw [← Finset.mul_prod_erase Finset.univ (fun i => A.grading (d i + 2) (u i))
-      (Finset.mem_univ (0 : Fin (k + 1)))]
-    exact mul_le_mul (hp hd0 (u 0))
-      (Finset.prod_le_prod₀ (fun _ _ => apply_nonneg _ _) (fun i _ => hp (hdi i) (u i)))
-      (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _)) (apply_nonneg _ _)
   have hindex : s + 1 + loss = s + (loss + 1) := by omega
   have hi := hCx u
   rw [hindex] at hi
@@ -170,14 +194,9 @@ theorem materialJetMonomial_oneHigh
         (K * ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)),
           (4 * Real.sqrt Real.pi) * A.grading (a i + b i + 2) (u i)) *
           A.grading (a 0 + b 0 + (c + 1)) (u 0) := hn
-    _ = (K * P) *
-        (A.grading (a 0 + b 0 + (c + 1)) (u 0) *
-          ∏ i ∈ Finset.univ.erase (0 : Fin (k + 1)), A.grading (a i + b i + 2) (u i)) := by
-      rw [Finset.prod_mul_distrib]
-      dsimp [P]
-      ring
     _ ≤ (K * P) * ∏ i, A.grading (d i + 2) (u i) :=
-      mul_le_mul_of_nonneg_left hprod (mul_nonneg hK hP)
+      monomial_input_product_le hp a b d c hK
+        (mul_nonneg (by norm_num) (Real.sqrt_nonneg _)) hd0 hdi u
     _ ≤ (K * P) * (C * ∑ i, A.grading (s + (loss + 1)) (u i) *
         ∏ j ∈ Finset.univ.erase i, A.grading base (u j)) :=
       mul_le_mul_of_nonneg_left hi (mul_nonneg hK hP)

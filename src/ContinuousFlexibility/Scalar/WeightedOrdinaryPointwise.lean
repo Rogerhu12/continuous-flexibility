@@ -62,7 +62,7 @@ theorem materialDerivative_decode_angular_slice_le_grading
   have hg : ContDiffOn ℝ ∞ g (Ioo D.a D.b) :=
     weighted_angular_slice_contDiffOn hf.1 b θ
   have hG : ContDiff ℝ ∞ G := by
-    simpa only [G, mixedDerivative, iteratedDeriv_zero, Function.comp_def] using
+    simpa only [G, mixedDerivative, iteratedDeriv_zero, Function.comp_def, id_eq] using
       (contDiff_mixedDerivative (contDiff_materialPullback hT hf.1) 0 b).comp
         (contDiff_id.prodMk (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => θ)))
   have hGform : G = fun x => T.H (T.radius x) ^ (-γ) * g (T.radius x) := by
