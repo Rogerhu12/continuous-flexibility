@@ -70,8 +70,8 @@ theorem matchedOuterWholeRestrict_representative {D : ReferenceData}
     (matchedOuterWholeRestrict D right entry f : ℝ → ℝ) =ᵐ[
       outerWholeMeasure D right entry] fun x => u (outerOutwardRadius right x) := by
   apply (measurableEmbedding_outerOutwardRadius right).ae_map_iff.mpr
-  simpa only [outerOutwardRadius_twice] using
-    (matchedOuterWholeRestrict_ae D right entry f).symm.trans hu
+  filter_upwards [(matchedOuterWholeRestrict_ae D right entry f).symm.trans hu] with r hr
+  simpa only [outerOutwardRadius_twice] using hr
 
 def matchedOuterWholeExtend (D : ReferenceData) (right : Bool) (entry : ℝ) :
     OuterWholeL2 D right entry →L[ℝ] RadialModeL2 D :=
@@ -118,7 +118,8 @@ theorem matchedOuterWholeExtend_representative {D : ReferenceData} {right : Bool
     ae_imp_of_ae_restrict hp] with r hr hp
   rw [hr]
   by_cases hs : r ∈ radialTailInterval D right entry
-  · rw [indicator_of_mem hs, indicator_of_mem hs, hp hs]
+  · rw [indicator_of_mem hs, indicator_of_mem hs]
+    exact hp hs
   · rw [indicator_of_notMem hs, indicator_of_notMem hs]
 
 end ContinuousFlexibility.Radial
