@@ -39,9 +39,47 @@ theorem N06RootFirstJets.reference_scale_ne_zero
   apply hJ
   rw [J.jacobian θ, hzero, mul_zero, zero_mul]
 
-/-- The actual reference reconstructions determine the canonical traces.
-The common physical germ may be supplied by the C¹ representatives of the
-original weak reference modes. -/
+/-- Equality of the actual physical value and radial derivative forces
+the canonical value and oriented normal traces to coincide. -/
+theorem n06_reference_root_canonical_traces_of_firstJets
+    {Fl Fr : PolarPoint → PolarPoint} {hl hr Wl Wr : PolarPoint → ℝ}
+    {r yl yr σl σr : ℝ} {H ρ κ Hr : ℝ → ℝ}
+    (Jl : N06RootFirstJets Fl hl r yl σl (fun θ => θ) H ρ κ Hr)
+    (Jr : N06RootFirstJets Fr hr r yr σr (fun θ => θ) H ρ κ Hr)
+    (hH : ∀ θ, H θ ≠ 0)
+    (hJac : ∀ θ, planeJacobian Fl (r, θ) ≠ 0)
+    (hWl : ∀ θ, DifferentiableAt ℝ Wl (yl, θ))
+    (hWr : ∀ θ, DifferentiableAt ℝ Wr (yr, θ))
+    (hphysical : ∀ θ, hl (r, θ) * Wl (Fl (r, θ)) = hr (r, θ) * Wr (Fr (r, θ)))
+    (hradial : ∀ θ, radialPartial (fun p => hl p * Wl (Fl p)) (r, θ) =
+      radialPartial (fun p => hr p * Wr (Fr p)) (r, θ)) :
+    (∀ θ, Wl (yl, θ) = Wr (yr, θ)) ∧
+      ∀ θ, σl * radialPartial Wl (yl, θ) = σr * radialPartial Wr (yr, θ) := by
+  have hvalue (θ : ℝ) : Wl (yl, θ) = Wr (yr, θ) := by
+    apply mul_left_cancel₀ (hH θ)
+    calc
+      H θ * Wl (yl, θ) = hl (r, θ) * Wl (Fl (r, θ)) :=
+        (Jl.reconstruction_value Wl θ).symm
+      _ = hr (r, θ) * Wr (Fr (r, θ)) := hphysical θ
+      _ = H θ * Wr (yr, θ) := Jr.reconstruction_value Wr θ
+  refine ⟨hvalue, ?_⟩
+  intro θ
+  have hrad := hradial θ
+  have hangular := n06_angularPartial_eq_of_boundary_values
+    (hWl θ) (hWr θ) hvalue
+  rw [Jl.reconstruction_radial θ (hWl θ), Jr.reconstruction_radial θ (hWr θ)] at hrad
+  change Hr θ * Wl (yl, θ) + H θ *
+      (σl * ρ θ * radialPartial Wl (yl, θ) + κ θ * angularPartial Wl (yl, θ)) =
+    Hr θ * Wr (yr, θ) + H θ *
+      (σr * ρ θ * radialPartial Wr (yr, θ) + κ θ * angularPartial Wr (yr, θ)) at hrad
+  rw [hvalue θ, hangular] at hrad
+  apply mul_left_cancel₀ (mul_ne_zero (hH θ) (Jl.reference_scale_ne_zero (hJac θ)))
+  change (H θ * ρ θ) * (σl * radialPartial Wl (yl, θ)) =
+    (H θ * ρ θ) * (σr * radialPartial Wr (yr, θ))
+  linear_combination hrad
+
+/-- Actual reconstructions with one common physical germ determine the
+canonical traces without separate trace-matching assumptions. -/
 theorem n06_reference_root_canonical_traces
     {Fl Fr : PolarPoint → PolarPoint} {hl hr Wl Wr η : PolarPoint → ℝ}
     {r yl yr σl σr : ℝ} {H ρ κ Hr : ℝ → ℝ}
@@ -55,33 +93,12 @@ theorem n06_reference_root_canonical_traces
     (hright : ∀ θ, (fun p => hr p * Wr (Fr p)) =ᶠ[𝓝 (r, θ)] η) :
     (∀ θ, Wl (yl, θ) = Wr (yr, θ)) ∧
       ∀ θ, σl * radialPartial Wl (yl, θ) = σr * radialPartial Wr (yr, θ) := by
-  have hvalue (θ : ℝ) : Wl (yl, θ) = Wr (yr, θ) := by
-    apply mul_left_cancel₀ (hH θ)
-    calc
-      H θ * Wl (yl, θ) = hl (r, θ) * Wl (Fl (r, θ)) :=
-        (Jl.reconstruction_value Wl θ).symm
-      _ = η (r, θ) := (hleft θ).eq_of_nhds
-      _ = hr (r, θ) * Wr (Fr (r, θ)) := (hright θ).eq_of_nhds.symm
-      _ = H θ * Wr (yr, θ) := Jr.reconstruction_value Wr θ
-  refine ⟨hvalue, ?_⟩
-  intro θ
-  have hrad :
-      radialPartial (fun p => hl p * Wl (Fl p)) (r, θ) =
-        radialPartial (fun p => hr p * Wr (Fr p)) (r, θ) := by
+  apply n06_reference_root_canonical_traces_of_firstJets Jl Jr hH hJac hWl hWr
+  · intro θ
+    exact (hleft θ).eq_of_nhds.trans (hright θ).eq_of_nhds.symm
+  · intro θ
     exact congrArg (fun L : PolarPoint →L[ℝ] ℝ => L (1, 0))
       (((hleft θ).fderiv_eq (𝕜 := ℝ)).trans ((hright θ).fderiv_eq (𝕜 := ℝ)).symm)
-  have hangular := n06_angularPartial_eq_of_boundary_values
-    (hWl θ) (hWr θ) hvalue
-  rw [Jl.reconstruction_radial θ (hWl θ), Jr.reconstruction_radial θ (hWr θ)] at hrad
-  change Hr θ * Wl (yl, θ) + H θ *
-      (σl * ρ θ * radialPartial Wl (yl, θ) + κ θ * angularPartial Wl (yl, θ)) =
-    Hr θ * Wr (yr, θ) + H θ *
-      (σr * ρ θ * radialPartial Wr (yr, θ) + κ θ * angularPartial Wr (yr, θ)) at hrad
-  rw [hvalue θ, hangular] at hrad
-  apply mul_left_cancel₀ (mul_ne_zero (hH θ) (Jl.reference_scale_ne_zero (hJac θ)))
-  change (H θ * ρ θ) * (σl * radialPartial Wl (yl, θ)) =
-    (H θ * ρ θ) * (σr * radialPartial Wr (yr, θ))
-  linear_combination hrad
 
 /-- One actual reference physical field gives the common current value
 and conormal, after only the actual shared root chart/height jets. -/
