@@ -49,7 +49,6 @@ theorem cylinderCutoffJet_tendsto_derivative_l2 (u : CylinderSmoothJet P)
     apply eLpNorm_congr_ae
     filter_upwards [cylinderCutoffJet_fourier_ae (P := P) hF hF1 hF2 N i j,
       u.fourier_derivative_ae hu2 hs hij] with ζ hN hU
-    dsimp only
     rw [hN, hU]
     simpa only [cylinderFrequencyCutoffJet] using congrArg
       (fun z : ℂ => z - cylinderDerivativeMultiplier P i j ζ * F ζ)

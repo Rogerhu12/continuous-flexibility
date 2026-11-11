@@ -64,7 +64,8 @@ theorem circleLiftDefectJet_coe_apply_eq (h : ℝ → ℝ) (hh : ContDiff ℝ �
     (hlift : ∀ x, h (x + P) = h x + P) (n : ℕ) (x : ℝ) :
     circleLiftDefectJet h hh hlift n (x : AddCircle P) =
       iteratedDeriv (n + 1) h x - if n = 0 then 1 else 0 := by
-  rw [circleLiftDefectJet_coe_apply, circleLiftDerivativeDefect]
+  rw [circleLiftDefectJet_coe_apply]
+  change iteratedDeriv n (fun y : ℝ => deriv h y - 1) x = _
   rw [iteratedDeriv_fun_sub (n := n)
     ((contDiff_infty_iff_deriv.mp hh).2.contDiffAt.of_le (by simp)) contDiffAt_const,
     ← iteratedDeriv_succ', iteratedDeriv_const]

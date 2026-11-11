@@ -42,19 +42,29 @@ theorem circleSubtractConstantJet_hasDerivAt
   simp only [circleSubtractConstantJet_apply, if_neg (Nat.succ_ne_zero n), sub_zero]
   exact (hf n x).sub_const (if n = 0 then c else 0)
 
+theorem circle_periodic_sub_const {v : ℝ → ℝ}
+    (hp : Function.Periodic v P) (c : ℝ) :
+    Function.Periodic (fun x => v x - c) P := by
+  intro x
+  exact congrArg (fun z : ℝ => z - c) (hp x)
+
 /-- The operation is exactly the canonical circle jet of the actual
 difference of the smooth real lift and a constant. -/
 theorem periodicCircleJet_sub_const (v : ℝ → ℝ)
     (hp : Function.Periodic v P) (hv : ContDiff ℝ ∞ v) (c : ℝ) (n : ℕ) :
     circleSubtractConstantJet (periodicCircleJet v hp hv) c n =
       periodicCircleJet (fun x => v x - c)
-        (fun x => congrArg (fun z : ℝ => z - c) (hp x)) (hv.sub contDiff_const) n := by
+        (circle_periodic_sub_const hp c) (hv.sub contDiff_const) n := by
   ext x
   induction x using QuotientAddGroup.induction_on
   rename_i x
-  simp only [circleSubtractConstantJet_apply, periodicCircleJet_coe_apply]
-  rw [iteratedDeriv_fun_sub (n := n)
-    (hv.contDiffAt.of_le (by simp)) contDiffAt_const, iteratedDeriv_const]
+  rw [circleSubtractConstantJet_apply, periodicCircleJet_coe_apply v hp hv n x,
+    periodicCircleJet_coe_apply (fun x => v x - c)
+      (circle_periodic_sub_const hp c) (hv.sub contDiff_const) n x]
+  have hsub : iteratedDeriv n (fun y => v y - c) x =
+      iteratedDeriv n v x - iteratedDeriv n (fun _ : ℝ => c) x :=
+    iteratedDeriv_fun_sub (n := n) (hv.contDiffAt.of_le (by simp)) contDiffAt_const
+  simpa only [iteratedDeriv_const] using hsub.symm
 
 theorem circleSubtractConstantJet_norm_le (f : ℕ → C(AddCircle P, ℝ))
     (c : ℝ) (n : ℕ) :
@@ -65,7 +75,7 @@ theorem circleSubtractConstantJet_norm_le (f : ℕ → C(AddCircle P, ℝ))
   rw [circleSubtractConstantJet_apply]
   have hc : ‖(if n = 0 then c else 0 : ℝ)‖ ≤ |c| := by
     by_cases hn : n = 0
-    · simp only [if_pos hn, Real.norm_eq_abs]
+    · simpa only [if_pos hn, Real.norm_eq_abs] using (le_rfl : |c| ≤ |c|)
     · simp only [if_neg hn, norm_zero]
       exact abs_nonneg c
   exact (norm_sub_le _ _).trans (add_le_add ((f n).norm_coe_le_norm x) hc)
@@ -97,7 +107,7 @@ theorem continuous_circleSubtractConstantJet
   have hconst : Continuous (fun x => ContinuousMap.const (AddCircle P) (c x)) :=
     L.continuous.comp hc
   by_cases hn : n = 0
-  · simpa only [circleSubtractConstantJet, if_pos hn] using (hf n).sub hconst
+  · simpa only [circleSubtractConstantJet, if_pos hn, Pi.sub_def] using (hf n).sub hconst
   · simpa only [circleSubtractConstantJet, if_neg hn, sub_zero] using hf n
 
 theorem continuous_circleSubtractConstantSobolevNorm

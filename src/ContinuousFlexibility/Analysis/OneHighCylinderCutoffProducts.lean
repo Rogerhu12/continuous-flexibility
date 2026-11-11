@@ -45,7 +45,8 @@ theorem norm_cylinderFrequencyCutoffJet_le_weight
     exact mul_le_mul_of_nonneg_right
       (norm_cylinderDerivativeMultiplier_le_weight P i j (i + j) le_rfl ζ) (norm_nonneg _)
   · rw [cylinderFrequencyCutoffJet, cylinderFrequencyCutoff, if_neg h, mul_zero, norm_zero]
-    positivity
+    exact mul_nonneg (pow_nonneg (cylinderFrequencyWeight_pos _ _ ζ).le (i + j))
+      (norm_nonneg (F ζ))
 
 theorem enorm_cylinderFrequencyCutoffJet_le_weight
     (N i j : ℕ) (F : ℝ × ℤ → ℂ) (ζ : ℝ × ℤ) :
