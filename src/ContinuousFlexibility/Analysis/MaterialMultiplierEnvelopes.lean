@@ -151,8 +151,8 @@ theorem materialCoordinate_comp_family_fderiv_bounded
     (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (annularOpen D))
     (hbound : ∀ n : ℕ, ∃ A : ℝ, 0 ≤ A ∧ ∀ i p, p ∈ annularOpen D →
       ‖iteratedFDeriv ℝ n (f i) p‖ ≤ A) (n : ℕ) :
-    ∃ A : ℝ, 0 ≤ A ∧ ∀ i p,
-      ‖iteratedFDeriv ℝ n (fun q => f i (T.radius q.1, q.2)) p‖ ≤ A := by
+    ∃ A : ℝ, 0 ≤ A ∧ ∀ (i : ι) (p : PolarPoint),
+      ‖iteratedFDeriv ℝ n (fun q : PolarPoint => f i (T.radius q.1, q.2)) p‖ ≤ A := by
   have hr : ContDiff ℝ ∞ T.radius := hT.2.2.2.2.2.2.1
   have hinside (r : ℝ) : T.radius r ∈ Ioo D.a D.b := (hT.2.2.2.2.2.2.2.1 r).1
   let g (p : PolarPoint) : PolarPoint := (T.radius p.1, p.2)
@@ -183,8 +183,8 @@ theorem materialCoordinate_comp_family_mixed_bounded
     (hf : ∀ i, ContDiffOn ℝ ∞ (f i) (annularOpen D))
     (hbound : ∀ n : ℕ, ∃ A : ℝ, 0 ≤ A ∧ ∀ i p, p ∈ annularOpen D →
       ‖iteratedFDeriv ℝ n (f i) p‖ ≤ A) (a b : ℕ) :
-    ∃ A : ℝ, 0 ≤ A ∧ ∀ i p,
-      |mixedDerivative a b (fun q => f i (T.radius q.1, q.2)) p| ≤ A := by
+    ∃ A : ℝ, 0 ≤ A ∧ ∀ (i : ι) (p : PolarPoint),
+      |mixedDerivative a b (fun q : PolarPoint => f i (T.radius q.1, q.2)) p| ≤ A := by
   have hr : ContDiff ℝ ∞ T.radius := hT.2.2.2.2.2.2.1
   have hinside (r : ℝ) : T.radius r ∈ Ioo D.a D.b := (hT.2.2.2.2.2.2.2.1 r).1
   have hg (i : ι) : ContDiff ℝ ∞ (fun q : PolarPoint => f i (T.radius q.1, q.2)) :=

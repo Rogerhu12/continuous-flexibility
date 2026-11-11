@@ -25,11 +25,12 @@ open scoped Topology ENNReal BigOperators ContDiff
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
-theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
+/-- The constants are fixed before every choice of closed flow radii. -/
+theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n b c : ℕ) :
-    ∃ K : ℝ, 0 < K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n b c : ℕ) :
+    ∃ K : ℝ, 0 < K ∧
+      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)), ∀ z ∈ sectorNeighborhood S base ε ε,
       ∀ vs : Fin n → (StateDirections S × ℝ),
       (∀ i, pairGrading (sectorGrading S) realGrading base (vs i) ≤ 1) →
       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
@@ -39,7 +40,7 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
           Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
-  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1) b
+  obtain ⟨K, hK, hpoint⟩ := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT (n + 1) b
   let L₀ : ℝ := 1 + circleSingletonGradingConstant base * (2 * circleSobolevConstant)
   let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss) * (2 * circleSobolevConstant)
   have hL₀ : 0 < L₀ := by
@@ -55,7 +56,7 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
   let L : ℝ := L₀ + L₁
   have hL : 0 < L := add_pos hL₀ hL₁
   refine ⟨K * L, mul_pos hK hL, ?_⟩
-  intro z hz vs hvs v hvq
+  intro rsel hrsel z hz vs hvs v hvq
   obtain ⟨w, _, hlocal, henergy⟩ :=
     hN.exists_localized_state_energy_directions hS hT v hvq
   intro m θ
@@ -86,7 +87,7 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
   calc
     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
         oneHighVariationWeight p base (b + loss) z (Fin.snoc vs (w m)) :=
-      hpoint m b c θ le_rfl z hz (Fin.snoc vs (w m))
+      hpoint rsel hrsel m b c θ le_rfl z hz (Fin.snoc vs (w m))
     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
         (A * p base (w m) + p (b + loss) (w m)) :=
       mul_le_mul_of_nonneg_left hW (mul_nonneg hK.le (pow_nonneg hM _))
@@ -98,5 +99,22 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
       mul_le_mul_of_nonneg_left
         (add_le_add (mul_le_mul_of_nonneg_left hlow hA) hhigh) hK.le
     _ = _ := by dsimp only [A, p]; ring
+
+theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n b c : ℕ) :
+    ∃ K : ℝ, 0 < K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
+      ∀ vs : Fin n → (StateDirections S × ℝ),
+      (∀ i, pairGrading (sectorGrading S) realGrading base (vs i) ≤ 1) →
+      ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
+      (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+        |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
+        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
+          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
+            Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
+          Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
+  obtain ⟨K, hK, hbound⟩ := hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n b c
+  exact ⟨K, hK, hbound rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

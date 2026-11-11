@@ -25,12 +25,13 @@ open scoped BigOperators
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
-theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all
+/-- The constants are fixed before every choice of closed flow radii. -/
+theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ b c : ℕ, b + c ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
@@ -54,13 +55,13 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
   intro n R hR s hs
   obtain ⟨I, hI0, hi⟩ := hinterp n R hR s hs
   have hraw (b c : ℕ) :=
-    hN.endpointFlowScalarJets_state_weightedJetNorm_bound hS hT rsel hrsel n b c
+    hN.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform_radius hS hT n b c
   choose K hK hk using hraw
   let K₀ : ℝ := ∑ b : Fin (s + 1), ∑ c : Fin (s + 1), K b.val c.val
   have hK₀ : 0 ≤ K₀ := Finset.sum_nonneg (fun b _ =>
     Finset.sum_nonneg (fun c _ => hK b.val c.val))
   refine ⟨K₀ * I, mul_nonneg hK₀ hI0, ?_⟩
-  intro b c hbc z hz hzb vs hvs v hv hvq
+  intro rsel hrsel b c hbc z hz hzb vs hvs v hv hvq
   have hvs0 (i : Fin n) : p base (vs i) ≤ 1 :=
     (hp hB (vs i)).trans (hvs i)
   have hKs : K b c ≤ K₀ := by
@@ -84,12 +85,79 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
         (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))) (apply_nonneg _ _))
       (apply_nonneg _ _)
   calc
-    _ ≤ K b c * Q := hk b c z hz vs hvs0 v hvq
+    _ ≤ K b c * Q := hk b c rsel hrsel z hz vs hvs0 v hvq
     _ ≤ K₀ * Q := mul_le_mul_of_nonneg_right hKs hQ
     _ ≤ K₀ * (I * (1 + p (s + L) z +
         ∑ i : Fin n, p (s + L) (vs i) + p (s + L) v)) :=
       mul_le_mul_of_nonneg_left (hi b c hbc z vs v hzb hvs hv) hK₀
     _ = _ := by dsimp only [p]; ring
+
+theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ b c : ℕ, b + c ≤ s →
+      ∀ z ∈ sectorNeighborhood S base ε ε,
+      pairGrading (sectorGrading S) realGrading B z ≤ R →
+      ∀ vs : Fin n → (StateDirections S × ℝ),
+      (∀ i, pairGrading (sectorGrading S) realGrading B (vs i) ≤ 1) →
+      ∀ v : StateDirections S × ℝ,
+      pairGrading (sectorGrading S) realGrading B v ≤ 1 → v.2 = 0 →
+      circleWeightedJetNorm T (3 / 4 : ℝ) b c
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
+        K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
+          pairGrading (sectorGrading S) realGrading (s + L) v) := by
+  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT
+  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
+  exact ⟨K, hK, hk rsel hrsel⟩
+
+/-- The constants are fixed before every choice of closed flow radii. -/
+theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
+      ∀ z ∈ sectorNeighborhood S base ε ε,
+      pairGrading (sectorGrading S) realGrading B z ≤ R →
+      ∀ vs : Fin n → (StateDirections S × ℝ),
+      (∀ i, pairGrading (sectorGrading S) realGrading B (vs i) ≤ 1) →
+      ∀ v : StateDirections S × ℝ,
+      pairGrading (sectorGrading S) realGrading B v ≤ 1 → v.2 = 0 →
+      circleNorm T (3 / 4 : ℝ) s
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
+        K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
+          pairGrading (sectorGrading S) realGrading (s + L) v) := by
+  classical
+  obtain ⟨B, L, hB, hbound⟩ :=
+    hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT
+  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
+  refine ⟨(Fintype.card (CircleJetIndex s) : ℝ) * K,
+    mul_nonneg (Nat.cast_nonneg _) hK, ?_⟩
+  intro rsel hrsel z hz hzb vs hvs v hv hvq
+  let A : ℝ := 1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+    ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
+    pairGrading (sectorGrading S) realGrading (s + L) v
+  calc
+    _ ≤ ∑ j : CircleJetIndex s, circleWeightedJetNorm T (3 / 4 : ℝ)
+        (j.val 0).val (j.val 1).val
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) :=
+      circleNorm_le_sum_weightedJetNorm
+        (hN.endpointFlowScalarJets_state_circleMember hS hT rsel hrsel n z hz vs v hvq) s
+    _ ≤ ∑ _j : CircleJetIndex s, K * A := by
+      apply Finset.sum_le_sum
+      intro j _
+      exact hk rsel hrsel _ _ j.property z hz hzb vs hvs v hv hvq
+    _ = _ := by
+      rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
+      dsimp only [A]
+      ring
 
 theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
     (hN : N01Properties D T S C base loss ε)
@@ -108,40 +176,20 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
           pairGrading (sectorGrading S) realGrading (s + L) v) := by
-  classical
-  obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all hS hT rsel hrsel
+  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
   obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
-  refine ⟨(Fintype.card (CircleJetIndex s) : ℝ) * K,
-    mul_nonneg (Nat.cast_nonneg _) hK, ?_⟩
-  intro z hz hzb vs hvs v hv hvq
-  let A : ℝ := 1 + pairGrading (sectorGrading S) realGrading (s + L) z +
-    ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
-    pairGrading (sectorGrading S) realGrading (s + L) v
-  calc
-    _ ≤ ∑ j : CircleJetIndex s, circleWeightedJetNorm T (3 / 4 : ℝ)
-        (j.val 0).val (j.val 1).val
-        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) :=
-      circleNorm_le_sum_weightedJetNorm
-        (hN.endpointFlowScalarJets_state_circleMember hS hT rsel hrsel n z hz vs v hvq) s
-    _ ≤ ∑ _j : CircleJetIndex s, K * A := by
-      apply Finset.sum_le_sum
-      intro j _
-      exact hk _ _ j.property z hz hzb vs hvs v hv hvq
-    _ = _ := by
-      rw [Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
-      dsimp only [A]
-      ring
+  exact ⟨K, hK, hk rsel hrsel⟩
 
 /-- The state slot may occur anywhere in the actual derivative tuple.
 The right hand side is symmetric in all direction seminorms. -/
-theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all
+/-- The constants are fixed before every choice of closed flow radii. -/
+theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
       ∀ v : Fin (n + 1) → (StateDirections S × ℝ),
@@ -152,11 +200,11 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
   obtain ⟨B, L, hB, hbound⟩ :=
-    hN.endpointFlowScalarJets_state_circleNorm_local_growth_all hS hT rsel hrsel
+    hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
   obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
   refine ⟨K, hK, ?_⟩
-  intro z hz hzb v hv ⟨i, hi⟩
+  intro rsel hrsel z hz hzb v hv ⟨i, hi⟩
   let p := pairGrading (sectorGrading S) realGrading
   have haux : ∀ k : ℕ, ∀ (w : Fin (n + 1) → (StateDirections S × ℝ))
       (j : Fin (n + 1)), j.val = k → (w j).2 = 0 →
@@ -170,7 +218,7 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
       have hj0 : j = 0 := Fin.ext hj
       rw [hj0] at hw
       rw [hN.endpointFlowScalarJets_rotate hS hT rsel hrsel n z hz w]
-      have hb := hk z hz hzb (Fin.tail w) (fun l => hwlow l.succ)
+      have hb := hk rsel hrsel z hz hzb (Fin.tail w) (fun l => hwlow l.succ)
         (w 0) (hwlow 0) hw
       have hsum : (∑ l : Fin (n + 1), p (s + L) (w l)) =
           p (s + L) (w 0) + ∑ l : Fin n, p (s + L) (Fin.tail w l) :=
@@ -210,5 +258,25 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
       have hb := ih w' i'.castSucc rfl hw' hwlow'
       simpa only [hsum] using hb
   exact haux i.val v i rfl hi hv
+
+theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ z ∈ sectorNeighborhood S base ε ε,
+      pairGrading (sectorGrading S) realGrading B z ≤ R →
+      ∀ v : Fin (n + 1) → (StateDirections S × ℝ),
+      (∀ i, pairGrading (sectorGrading S) realGrading B (v i) ≤ 1) →
+      (∃ i, (v i).2 = 0) →
+      circleNorm T (3 / 4 : ℝ) s
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
+        K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
+          ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
+  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT
+  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
+  exact ⟨K, hK, hk rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

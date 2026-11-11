@@ -25,20 +25,20 @@ private theorem oneHighVariationWeight_single_cons
       (1 + p H y) * p B x + p H x := by
   simp [oneHighVariationWeight, Fin.prod_univ_succ, Fin.sum_univ_succ]
 
-theorem N01Properties.endpointFlowCircle_circleNorm_local_growth
+/-- The constants are fixed before every choice of closed flow radii. -/
+theorem N01Properties.endpointFlowCircle_circleNorm_local_growth_uniform_radius
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ x ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B x ≤ R →
       circleNorm T (3 / 4 : ℝ) s ((S.circle (3 / 4 : ℝ)).decode (hN.endpointFlowCircle hS hT rsel hrsel x)) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) x) := by
-  obtain ⟨J, hJ⟩ := hN.exists_endpointFlowCircle_smoothDirections hS hT rsel hrsel
-  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh hS hT rsel hrsel
+  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT
   let p := pairGrading (sectorGrading S) realGrading
   have hzero : (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε := by
     constructor
@@ -51,7 +51,8 @@ theorem N01Properties.endpointFlowCircle_circleNorm_local_growth
   refine ⟨B, L, hB, fun R hR s hs => ?_⟩
   obtain ⟨K, hK, hk⟩ := hbound 0 R hR s hs
   refine ⟨K * (R + 1), mul_nonneg hK (add_nonneg hR zero_le_one), ?_⟩
-  intro x hx hxlow
+  intro rsel hrsel x hx hxlow
+  obtain ⟨J, hJ⟩ := hN.exists_endpointFlowCircle_smoothDirections hS hT rsel hrsel
   have hpath (t : ℝ) (ht : t ∈ Icc (0 : ℝ) 1) :
       (0 : StateDirections S × ℝ) + t • x ∈ sectorNeighborhood S base ε ε := by
     have hm := (sectorNeighborhood_convex S base ε ε) hzero hx
@@ -71,7 +72,7 @@ theorem N01Properties.endpointFlowCircle_circleNorm_local_growth
         (K * (R + 1)) * (1 + p (s + L) x) := by
     rw [(hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.2.2,
       hJ 1 (0 + t • x) (hpath t ht)]
-    have hb := hk (0 + t • x) (hpath t ht)
+    have hb := hk rsel hrsel (0 + t • x) (hpath t ht)
       ((hlinegrade B t ht).trans hxlow) (Fin.cons x Fin.elim0)
     have hw : oneHighVariationWeight p B (s + L) (0 + t • x) (Fin.cons x Fin.elim0) ≤
         (R + 1) * (1 + p (s + L) x) := by
@@ -99,5 +100,22 @@ theorem N01Properties.endpointFlowCircle_circleNorm_local_growth
     (J.D 0 (0 + (0 : ℝ) • x) Fin.elim0).val s‖ ≤ _ at hm
   rw [hval1, hval0, sub_zero] at hm
   exact ((hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.2.2 (hN.endpointFlowCircle hS hT rsel hrsel x) s).symm.trans_le hm
+
+theorem N01Properties.endpointFlowCircle_circleNorm_local_growth
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ x ∈ sectorNeighborhood S base ε ε,
+      pairGrading (sectorGrading S) realGrading B x ≤ R →
+      circleNorm T (3 / 4 : ℝ) s ((S.circle (3 / 4 : ℝ)).decode (hN.endpointFlowCircle hS hT rsel hrsel x)) ≤
+        K * (1 + pairGrading (sectorGrading S) realGrading (s + L) x) := by
+  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlowCircle_circleNorm_local_growth_uniform_radius hS hT
+  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+  obtain ⟨K, hK, hk⟩ := hbound R hR s hs
+  exact ⟨K, hK, hk rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

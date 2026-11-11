@@ -32,7 +32,11 @@ theorem hasDerivAt_angular_jet_of_contDiff
   have hjoint : ContDiff ℝ ∞
       (fun p : PolarPoint => iteratedDeriv b (fun y => F (p.1, y)) p.2) := by
     have h := contDiffOn_mixedDerivative isOpen_univ hF.contDiffOn 0 b
-    simpa only [mixedDerivative, iteratedDeriv_zero] using contDiffOn_univ.mp h
+    have heq : mixedDerivative 0 b F =
+        fun p : PolarPoint => iteratedDeriv b (fun y => F (p.1, y)) p.2 := by
+      funext p
+      simp only [mixedDerivative, iteratedDeriv_zero]
+    exact heq ▸ contDiffOn_univ.mp h
   have hslice : ContDiff ℝ ∞
       (fun q => iteratedDeriv b (fun y => F (q, y)) θ) :=
     hjoint.comp (contDiff_id.prodMk contDiff_const)
@@ -111,6 +115,9 @@ theorem circleChartCompositionJets_angular_line_hasDerivAt
       (iteratedDeriv b (circleChartCompositionJets hS travel (n + 1)
         (x + t • w) (Fin.cons w v) m) θ) t :=
   hasDerivAt_angular_jet_of_contDiff
+    (F := fun p : PolarPoint => circleChartCompositionJets hS travel n (x + p.1 • w) v m p.2)
+    (G := fun p : PolarPoint => circleChartCompositionJets hS travel (n + 1)
+      (x + p.1 • w) (Fin.cons w v) m p.2)
     (circleChartCompositionJets_scalar_angle_contDiff hS travel n x w v m)
     (fun q y => circleChartCompositionJets_line_hasDerivAt hS travel n x w v m y q) b t θ
 

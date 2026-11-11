@@ -295,17 +295,24 @@ theorem N01Properties.ordinaryFlowFamily_collar_bound
             T.E0 (T.sample (C.cell m)) ^ B *
             (1 + pairGrading (stateGrading S) realGrading (s + loss)
               (z - (C.referenceState, 0)))) := by
-  obtain ⟨K, A, hK, hA, hdata⟩ :=
+  let data :=
     @N01Properties.ordinaryFlowFamily_collar_directional_bounds
       D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
-  obtain ⟨B, hB, hpoint⟩ := hdata 0 s
+  let K : ℝ := data.choose
+  let dataA := data.choose_spec
+  let A : ℝ := dataA.choose
+  have hK : 0 < K := dataA.choose_spec.1
+  have hA : 0 < A := dataA.choose_spec.2.1
+  let dataB := dataA.choose_spec.2.2 0 s
+  let B : ℝ := dataB.choose
+  have hB : 0 < B := dataB.choose_spec.1
   refine ⟨K, A, B, hK, hA, hB, fun z hz m a b p hab hp => ?_⟩
   exact smoothDirections_zeroth_twoFactor_bound
     (pairGrading (stateGrading S) realGrading) base (s + loss)
     (C.referenceState, (0 : ℝ))
     (K ^ a * radialE (D.cellIndex (j m)) ^ (A * a))
     (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
-    (hpoint m a b p hab hp) z hz
+    (dataB.choose_spec.2 m a b p hab hp) z hz
 
 end ContinuousFlexibility.Statements
 

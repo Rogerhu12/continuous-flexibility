@@ -241,9 +241,32 @@ theorem N01Properties.exists_opticalCorrection_error_compatible
           (HeightMember D T (3 / 4 : ℝ) (E ρ η) ↔
             ∀ a b c : ℕ, MemLp (weightedPhysicalJet T (3 / 4 : ℝ) a b c
               (E ρ η)) 2 materialCylinderMeasure) := by
-  obtain ⟨base', ε', χ, j, A, lam, P, hbase, hε', hεε, hA, hlam, hP,
-    hnew, hcell, hχ, hend, hjets, hpositive⟩ :=
-    hN.exists_positive_opticalCorrectionCutoffs hT
+  let data := hN.exists_positive_opticalCorrectionCutoffs hT
+  let base' : ℕ := data.choose
+  let dataε := data.choose_spec
+  let ε' : ℝ := dataε.choose
+  let dataχ := dataε.choose_spec
+  let χ : ℕ → ℝ → ℝ := dataχ.choose
+  let dataj := dataχ.choose_spec
+  let j : ℕ → ℕ := dataj.choose
+  let dataA := dataj.choose_spec
+  let A : ℝ := dataA.choose
+  let datalam := dataA.choose_spec
+  let lam : ℝ := datalam.choose
+  let dataP := datalam.choose_spec
+  let P : ℝ := dataP.choose
+  have hbase : base ≤ base' := dataP.choose_spec.1
+  have hε' : 0 < ε' := dataP.choose_spec.2.1
+  have hεε : ε' ≤ ε := dataP.choose_spec.2.2.1
+  have hnew : N01Properties D T S C base' loss ε' :=
+    dataP.choose_spec.2.2.2.2.2.2.1
+  have hχ : ∀ m, ContDiff ℝ ∞ (χ m) ∧ ∀ r, χ m r ∈ Icc (0 : ℝ) 1 :=
+    dataP.choose_spec.2.2.2.2.2.2.2.2.1
+  have hend : ∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧
+      χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1) ∧
+      tsupport (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m) :=
+    dataP.choose_spec.2.2.2.2.2.2.2.2.2.1
+  have hpositive := dataP.choose_spec.2.2.2.2.2.2.2.2.2.2.2
   refine ⟨base', ε', χ, hbase, hε', hεε, hnew, hχ, hend, ?_⟩
   intro R z hz hsector
   have hsupp (m : ℕ) : Function.support (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m) :=

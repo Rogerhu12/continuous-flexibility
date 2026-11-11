@@ -45,7 +45,8 @@ theorem circleCompositionPartition_cost_bound
     {b : ℕ} (c : OrderedFinpartition b) (n k s base loss : ℕ)
     (hbase : loss + 2 ≤ base) (horder : b + k ≤ s) :
     (∑ i : Fin (c.length + 1), interpolationOrderCost base loss
-      (Fin.cons (c.length + n + k + 1) (fun j => c.partSize j + 1) i)) ≤
+      (Fin.cons (α := fun _ : Fin (c.length + 1) => ℕ)
+        (c.length + n + k + 1) (fun j => c.partSize j + 1) i)) ≤
       (s + (base + n + loss + 2)) - base := by
   rw [Fin.sum_univ_succ]
   simp only [Fin.cons_zero, Fin.cons_succ]
@@ -61,6 +62,80 @@ theorem circleCompositionPartition_cost_bound
       simp only [interpolationOrderCost, if_neg hout]
     rw [heq]
     omega
+
+private theorem seminorm_partition_product_local_bound
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : Monotone p)
+    (base high loss l outer : ℕ) (inner : Fin l → ℕ) (hhigh : base < high)
+    (horder : ∀ i : Fin (l + 1),
+      base < Fin.cons (α := fun _ : Fin (l + 1) => ℕ) outer inner i →
+      Fin.cons (α := fun _ : Fin (l + 1) => ℕ) outer inner i + loss < high)
+    (hcost : (∑ i : Fin (l + 1), interpolationOrderCost base loss
+      (Fin.cons (α := fun _ : Fin (l + 1) => ℕ) outer inner i)) ≤ high - base)
+    (hinterp : ∀ a c : ℕ, base < a → a + loss < c →
+      ∃ C : ℝ, 0 ≤ C ∧ ∀ x,
+        p a x ≤ C * (p base x) ^ (((c : ℝ) - a - loss) / (c - base)) *
+          (p c x) ^ (((a : ℝ) - base + loss) / (c - base)))
+    (K : ℝ) (hK : 0 ≤ K) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ e u : E, p base e ≤ K → p base u ≤ K →
+      (1 + p outer u) * (∏ i : Fin l, (1 + p (inner i) e)) ≤
+        C * (1 + p high u + (l : ℝ) * p high e) := by
+  classical
+  obtain ⟨C, hC, hb⟩ := finite_product_one_add_interpolation_bound
+    (E := fun _ : Fin (l + 1) => E) (fun _ => p) (fun _ => hp)
+    base high (fun _ => loss)
+    (Fin.cons (α := fun _ : Fin (l + 1) => ℕ) outer inner)
+    hhigh horder hcost (fun _ => hinterp) (fun _ => K) (fun _ => hK)
+  refine ⟨C, hC, ?_⟩
+  intro e u he hu
+  have hlow : ∀ i : Fin (l + 1),
+      p base (Fin.cons (α := fun _ : Fin (l + 1) => E) u (fun _ => e) i) ≤ K := by
+    intro i
+    exact Fin.cases hu (fun _ => he) i
+  simpa only [Fin.prod_univ_succ, Fin.sum_univ_succ, Fin.cons_zero,
+    Fin.cons_succ, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
+    nsmul_eq_mul, add_assoc] using
+    hb (Fin.cons (α := fun _ : Fin (l + 1) => E) u (fun _ => e)) hlow
+
+private theorem scalar_partition_product_local_bound
+    {l : ℕ} (inner : Fin l → ℝ) (hi : ∀ i, 0 ≤ inner i)
+    {B D N o e u C : ℝ} (hB : 0 ≤ B) (hD : 0 ≤ D)
+    (ho : 0 ≤ o) (he : 0 ≤ e) (hu : 0 ≤ u) (hC : 0 ≤ C)
+    (houter : N ≤ 1 + o)
+    (hproduct : (1 + o) * (∏ i, (1 + inner i)) ≤ C * (1 + u + (l : ℝ) * e)) :
+    (B * ∏ i, (1 + D * inner i)) * N ≤
+      (B * (1 + D) ^ l) * C * ((l : ℝ) + 1) * (1 + e + u) := by
+  have hP : 0 ≤ 1 + D := add_nonneg zero_le_one hD
+  have hinner : (∏ i : Fin l, (1 + D * inner i)) ≤
+      (1 + D) ^ l * ∏ i : Fin l, (1 + inner i) := by
+    calc
+      _ ≤ ∏ i : Fin l, (1 + D) * (1 + inner i) := by
+        apply Finset.prod_le_prod₀
+        · intro i _
+          exact add_nonneg zero_le_one (mul_nonneg hD (hi i))
+        · intro i _
+          have h := hi i
+          nlinarith only [hD, h]
+      _ = _ := by
+        rw [Finset.prod_mul_distrib]
+        simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+  have hQ : 1 + u + (l : ℝ) * e ≤ ((l : ℝ) + 1) * (1 + e + u) := by
+    have hl : 0 ≤ (l : ℝ) := Nat.cast_nonneg _
+    nlinarith only [he, hu, hl, mul_nonneg hl hu]
+  have hscale : 0 ≤ B * (1 + D) ^ l := mul_nonneg hB (pow_nonneg hP _)
+  calc
+    _ ≤ (B * ∏ i, (1 + D * inner i)) * (1 + o) :=
+      mul_le_mul_of_nonneg_left houter (mul_nonneg hB
+        (Finset.prod_nonneg (fun i _ => add_nonneg zero_le_one (mul_nonneg hD (hi i)))))
+    _ ≤ (B * (1 + D) ^ l) * ((1 + o) * ∏ i, (1 + inner i)) := by
+      have h := mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left hinner hB) (add_nonneg zero_le_one ho)
+      simpa only [mul_assoc, mul_left_comm, mul_comm] using h
+    _ ≤ (B * (1 + D) ^ l) * (C * (1 + u + (l : ℝ) * e)) :=
+      mul_le_mul_of_nonneg_left hproduct hscale
+    _ ≤ (B * (1 + D) ^ l) * (C * (((l : ℝ) + 1) * (1 + e + u))) :=
+      mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hQ hC) hscale
+    _ = _ := by ring
 
 variable {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
@@ -84,15 +159,16 @@ theorem circleCompositionPartition_norm_local_bound
   classical
   let high : ℕ := s + (base + n + loss + 2)
   let orders : Fin (c.length + 1) → ℕ :=
-    Fin.cons (c.length + n + k + 1) (fun j => c.partSize j + 1)
+    Fin.cons (α := fun _ : Fin (c.length + 1) => ℕ)
+      (c.length + n + k + 1) (fun j => c.partSize j + 1)
   have hhigh : base < high := by dsimp [high]; omega
   have hmax : ∀ i, orders i ≤ s + n + 1 := by
     intro i
     refine Fin.cases ?_ (fun j => ?_) i
-    · dsimp only [orders, Fin.cons_zero]
+    · change c.length + n + k + 1 ≤ s + n + 1
       have hl := c.length_le
       omega
-    · dsimp only [orders, Fin.cons_succ]
+    · change c.partSize j + 1 ≤ s + n + 1
       have hj := c.partSize_le j
       omega
   have horders : ∀ i, base < orders i → orders i + loss < high := by
@@ -102,87 +178,37 @@ theorem circleCompositionPartition_norm_local_bound
     omega
   have hcost : (∑ i, interpolationOrderCost base loss (orders i)) ≤ high - base :=
     circleCompositionPartition_cost_bound c n k s base loss hbase horder
-  obtain ⟨C, hC, hb⟩ := finite_product_one_add_interpolation_bound
-    (E := fun _ : Fin (c.length + 1) => S.Space)
-    (fun _ => S.grading)
-    (fun _ => gradedSeminorm_monotone (fun j => S.level j) S.bond)
-    base high (fun _ => loss) orders hhigh horders hcost
-    (fun _ => hinterp) (fun _ => K) (fun _ => hK)
+  let h := seminorm_partition_product_local_bound S.grading
+    (gradedSeminorm_monotone (fun j => S.level j) S.bond)
+    base high loss c.length (c.length + n + k + 1) (fun j => c.partSize j + 1)
+    hhigh horders hcost hinterp K hK
+  let C : ℝ := h.choose
+  have hC : 0 ≤ C := h.choose_spec.1
+  have hb := h.choose_spec.2
   let P : ℝ := 1 + 2 * circleSobolevConstant * A
   let L : ℝ := (c.length : ℝ) + 1
-  have hP : 0 ≤ P := by
-    dsimp [P]
-    have hs := circleSobolevConstant_nonneg
-    positivity
-  have hL : 0 ≤ L := by dsimp [L]; positivity
-  have hscale : 0 ≤ 2 * circleSobolevConstant * P ^ c.length := by
-    exact mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
-      (pow_nonneg hP _)
+  have hB : 0 ≤ 2 * circleSobolevConstant :=
+    mul_nonneg (by norm_num) circleSobolevConstant_nonneg
+  have hD : 0 ≤ 2 * circleSobolevConstant * A := mul_nonneg hB hA
+  have hP : 0 ≤ P := add_nonneg zero_le_one hD
+  have hL : 0 ≤ L := add_nonneg (Nat.cast_nonneg _) zero_le_one
+  have hscale : 0 ≤ 2 * circleSobolevConstant * P ^ c.length :=
+    mul_nonneg hB (pow_nonneg hP _)
   refine ⟨(2 * circleSobolevConstant * P ^ c.length) * C * L,
     mul_nonneg (mul_nonneg hscale hC) hL, ?_⟩
   intro e u he hu
-  have hlow : ∀ i : Fin (c.length + 1),
-      S.grading base (Fin.cons u (fun _ : Fin c.length => e) i) ≤ K := by
-    intro i
-    exact Fin.cases hu (fun _ => he) i
-  have hproduct : (1 + S.grading (c.length + n + k + 1) u) *
-      (∏ i : Fin c.length, (1 + S.grading (c.partSize i + 1) e)) ≤
-      C * (1 + S.grading high u + (c.length : ℝ) * S.grading high e) := by
-    simpa only [orders, Fin.prod_univ_succ, Fin.sum_univ_succ, Fin.cons_zero,
-      Fin.cons_succ, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
-      nsmul_eq_mul, add_assoc] using hb (Fin.cons u (fun _ => e)) hlow
-  have houter : circleNorm T γ (c.length + n + k + 1) (S.decode u) ≤
-      1 + S.grading (c.length + n + k + 1) u := by
-    have hg := ((circleGrading_le_iff_circleNorm hS (c.length + n + k + 1) u
+  have hg : circleNorm T γ (c.length + n + k + 1) (S.decode u) ≤
+      S.grading (c.length + n + k + 1) u :=
+    ((circleGrading_le_iff_circleNorm hS (c.length + n + k + 1) u
       (apply_nonneg _ _)).mp (le_refl (S.grading (c.length + n + k + 1) u)))
-        (c.length + n + k + 1) le_rfl
-    linarith
-  have hinner : (∏ i : Fin c.length,
-      (1 + (2 * circleSobolevConstant * A) * S.grading (c.partSize i + 1) e)) ≤
-      P ^ c.length * ∏ i : Fin c.length, (1 + S.grading (c.partSize i + 1) e) := by
-    calc
-      _ ≤ ∏ i : Fin c.length, P * (1 + S.grading (c.partSize i + 1) e) := by
-        apply Finset.prod_le_prod₀
-        · intro i hi
-          have hs := circleSobolevConstant_nonneg
-          positivity
-        · intro i hi
-          have hp : 0 ≤ S.grading (c.partSize i + 1) e := apply_nonneg _ _
-          have hs : 0 ≤ 2 * circleSobolevConstant * A :=
-            mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) hA
-          dsimp [P]
-          nlinarith
-      _ = _ := by rw [Finset.prod_mul_distrib]; simp only [Finset.prod_const,
-          Finset.card_univ, Fintype.card_fin]
-  have hQ : 1 + S.grading high u + (c.length : ℝ) * S.grading high e ≤
-      L * (1 + S.grading high e + S.grading high u) := by
-    have he0 : 0 ≤ S.grading high e := apply_nonneg _ _
-    have hu0 : 0 ≤ S.grading high u := apply_nonneg _ _
-    have hc0 : 0 ≤ (c.length : ℝ) := Nat.cast_nonneg _
-    dsimp [L]
-    nlinarith
-  calc
-    circleCompositionPartitionCoefficient S A e c *
-        circleNorm T γ (c.length + n + k + 1) (S.decode u) ≤
-        circleCompositionPartitionCoefficient S A e c *
-          (1 + S.grading (c.length + n + k + 1) u) :=
-      mul_le_mul_of_nonneg_left houter
-        (circleCompositionPartitionCoefficient_nonneg hA e c)
-    _ ≤ (2 * circleSobolevConstant * P ^ c.length) *
-        ((1 + S.grading (c.length + n + k + 1) u) *
-          ∏ i : Fin c.length, (1 + S.grading (c.partSize i + 1) e)) := by
-      have h := mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left hinner
-          (mul_nonneg (by norm_num) circleSobolevConstant_nonneg))
-        (show 0 ≤ 1 + S.grading (c.length + n + k + 1) u by positivity)
-      simpa only [circleCompositionPartitionCoefficient, mul_assoc, mul_left_comm, mul_comm] using h
-    _ ≤ (2 * circleSobolevConstant * P ^ c.length) *
-        (C * (1 + S.grading high u + (c.length : ℝ) * S.grading high e)) :=
-      mul_le_mul_of_nonneg_left hproduct hscale
-    _ ≤ (2 * circleSobolevConstant * P ^ c.length) *
-        (C * (L * (1 + S.grading high e + S.grading high u))) :=
-      mul_le_mul_of_nonneg_left (mul_le_mul_of_nonneg_left hQ hC) hscale
-    _ = _ := by ring
+      (c.length + n + k + 1) le_rfl
+  have hs := scalar_partition_product_local_bound
+    (fun i : Fin c.length => S.grading (c.partSize i + 1) e)
+    (fun _ => apply_nonneg _ _) hB hD
+    (apply_nonneg (S.grading (c.length + n + k + 1)) u)
+    (apply_nonneg (S.grading high) e) (apply_nonneg (S.grading high) u) hC
+    (hg.trans (le_add_of_nonneg_left zero_le_one)) (hb e u he hu)
+  exact hs
 
 /-- Genuine chart composition, including any fixed number of outer
 angular derivatives, has fixed-loss joint local seminorm growth. -/
@@ -229,7 +255,9 @@ theorem circleNorm_comp_outerJet_uniform_low_order
     rw [Finset.sum_mul]
     exact Finset.sum_le_sum (fun i _ => hbound i e u he hu)
   exact (circleNorm_comp_outerJet_le_mixed_orders hS hM hH hA hHA travel e u n s).trans
-    ((mul_le_mul_of_nonneg_left hsum (Real.sqrt_nonneg _)).trans_eq (by ring))
+    ((mul_le_mul_of_nonneg_left hsum (Real.sqrt_nonneg _)).trans_eq
+      (mul_assoc prefactor (∑ i, C i)
+        (1 + S.grading (s + loss) e + S.grading (s + loss) u)).symm)
 
 
 /-- The low order can be selected before the radius and before every
@@ -247,9 +275,11 @@ theorem circleNorm_comp_outerJet_local_growth
         circleNorm T γ s (fun m => (iteratedDeriv n (S.decode u m)) ∘
           circleAffineLift travel (S.decode e) 1 m) ≤
           C * (1 + S.grading (s + loss) e + S.grading (s + loss) u) := by
-  obtain ⟨base, hbase, hb⟩ :=
-    circleNorm_comp_outerJet_uniform_low_order hS hM hH hA hHA hinterp travel requestedBase
-  obtain ⟨loss, hloss⟩ := hb n
-  exact ⟨base, loss, hbase, fun s _ => hloss K hK s⟩
+  let h := circleNorm_comp_outerJet_uniform_low_order
+    hS hM hH hA hHA hinterp travel requestedBase
+  let base : ℕ := h.choose
+  let horder := h.choose_spec.2 n
+  exact ⟨base, horder.choose, h.choose_spec.1,
+    fun s _ => horder.choose_spec K hK s⟩
 
 end ContinuousFlexibility.Statements

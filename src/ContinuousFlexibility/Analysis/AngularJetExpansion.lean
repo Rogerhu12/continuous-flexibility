@@ -99,7 +99,7 @@ theorem scalarAngularExpansion_succ_apply (n : ℕ) (A : ScalarAngularJetData E)
         (v 0).2 * scalarAngularExpansion n (scalarAngularShift A) (Fin.tail v) := by
   change (((scalarAngularExpansion n).comp (scalarAngularHead A) +
     (LinearMap.snd ℝ E ℝ).smulRight
-      (scalarAngularExpansion n (scalarAngularShift A))).uncurryLeft v = _
+      (scalarAngularExpansion n (scalarAngularShift A))).uncurryLeft v) = _
   simp only [LinearMap.uncurryLeft_apply, LinearMap.add_apply, MultilinearMap.add_apply,
     LinearMap.comp_apply, LinearMap.smulRight_apply, MultilinearMap.smul_apply,
     LinearMap.snd_apply, smul_eq_mul]

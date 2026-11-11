@@ -108,7 +108,7 @@ theorem N01Properties.returnInterpolation_positive_fderiv_jets (n : ℕ) (hn : 1
   have hid : ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ m p, p ∈ U m →
       ‖iteratedFDeriv ℝ n (fun q : PolarPoint => q.2) p‖ ≤ A * W m ^ P := by
     refine ⟨‖ContinuousLinearMap.snd ℝ ℝ ℝ‖, 0, norm_nonneg _, le_rfl, fun m p _ => ?_⟩
-    simpa only [Real.rpow_zero, mul_one] using
+    simpa only [Real.rpow_zero, mul_one, ContinuousLinearMap.coe_snd'] using
       norm_iteratedFDeriv_linear_of_pos (ContinuousLinearMap.snd ℝ ℝ ℝ) n hn p
   obtain ⟨A, P, hA, hP, hbound⟩ := norm_iteratedFDeriv_add_polynomial_bound
     W hW U (fun _ => isOpen_univ) (fun _ p => p.2) (fun m p => a m p * b m p)

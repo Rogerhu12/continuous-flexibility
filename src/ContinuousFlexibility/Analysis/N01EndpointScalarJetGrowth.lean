@@ -21,14 +21,15 @@ local instance n01EndpointScalarJetGrowthStateSMul (S : PhysicalSpacesData) :
 open Set ContinuousFlexibility.Analysis
 open scoped BigOperators
 
-theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
+/-- The constants are fixed before every choice of closed flow radii. -/
+theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
     ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
       circleNorm T (3 / 4 : ℝ) s
@@ -44,11 +45,11 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
   refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
   obtain ⟨I, hI0, hi⟩ := hinterp R hR s hs
   have hraw (j : CircleJetIndex s) :=
-    hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound hS hT rsel hrsel n (j.val 0).val (j.val 1).val
+    hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n (j.val 0).val (j.val 1).val
   choose K hK hk using hraw
   refine ⟨(∑ j : CircleJetIndex s, K j) * I,
     mul_nonneg (Finset.sum_nonneg (fun j _ => hK j)) hI0, ?_⟩
-  intro z hz hzb
+  intro rsel hrsel z hz hzb
   calc
     _ ≤ ∑ j : CircleJetIndex s, circleWeightedJetNorm T (3 / 4 : ℝ)
         (j.val 0).val (j.val 1).val (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
@@ -58,11 +59,30 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
     _ ≤ ∑ j : CircleJetIndex s, K j * (I * (1 + p (s + L) z)) := by
       apply Finset.sum_le_sum
       intro j _
-      exact (hk j z hz).trans (mul_le_mul_of_nonneg_left
+      exact (hk j rsel hrsel z hz).trans (mul_le_mul_of_nonneg_left
         (hi _ _ j.property z hzb) (hK j))
     _ = _ := by
       rw [← Finset.sum_mul]
       dsimp only [p]
       ring
+
+theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
+    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ z ∈ sectorNeighborhood S base ε ε,
+      pairGrading (sectorGrading S) realGrading B z ≤ R →
+      circleNorm T (3 / 4 : ℝ) s
+        (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
+          (fun _ => scalarParameterDirection S)) ≤
+        K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z) := by
+  obtain ⟨B, L, hB, hbound⟩ := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
+  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
+  obtain ⟨K, hK, hk⟩ := hbound n R hR s hs
+  exact ⟨K, hK, hk rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

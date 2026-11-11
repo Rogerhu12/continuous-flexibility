@@ -56,7 +56,8 @@ theorem continuousOn_inverseFamily_of_linearFamilyTame
   have hA₀ : A z₀ = 0 := by
     simp only [A, d, sub_self, sub_zero, map_zero, mul_zero, add_zero]
   have hlim : Tendsto A (𝓝[U ×ˢ univ] z₀) (𝓝 (0 : ℝ)) := by
-    simpa only [hA₀] using hA z₀ hz₀
+    have hlim' : Tendsto A (𝓝[U ×ˢ univ] z₀) (𝓝 (A z₀)) := hA z₀ hz₀
+    simpa only [hA₀] using hlim'
   filter_upwards [hlim.eventually (gt_mem_nhds hε), self_mem_nhdsWithin] with z hz hzU
   have hid : V z.1 z.2 - V z₀.1 z₀.2 = V z.1 (d z) :=
     inverseFamily_resolvent L V (hleft z.1 hzU.1) (hright z₀.1 hz₀.1) z₀.2 z.2

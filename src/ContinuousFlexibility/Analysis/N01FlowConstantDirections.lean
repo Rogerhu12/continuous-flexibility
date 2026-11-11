@@ -23,6 +23,9 @@ open scoped Topology ContDiff
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem height_line_add_constant (a t b c : ℝ) :
+    a + t * (b + c) = (a + t * b) + t * c := by ring
+
 theorem N01Properties.ordinaryFlowFamily_height_line_constant_locality
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
@@ -42,19 +45,33 @@ theorem N01Properties.ordinaryFlowFamily_height_line_constant_locality
       (stateProfile D S C (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).1)
       (Ioo (C.left m) (C.right m)) := by
     intro s hs
-    rw [stateProfile_height_parameter_line, stateProfile_height_parameter_line]
+    exact congrFun ((stateProfile_height_parameter_line z η t).trans
+      (stateProfile_height_parameter_line z ξ t).symm) s
   have hq :
       (liftSectorParameter S C (z + t • heightParameterDirection S η)).2 =
       (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).2 := by
-    rw [liftSectorParameter_height_line, liftSectorParameter_height_line]
+    have hηq : (liftSectorParameter S C (z + t • heightParameterDirection S η)).2 = z.2 :=
+      congrArg (fun y : AnnularState S × ℝ => y.2)
+        (liftSectorParameter_height_line S C z η t)
+    have hξq : (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).2 = z.2 :=
+      congrArg (fun y : AnnularState S × ℝ => y.2)
+        (liftSectorParameter_height_line S C z ξ t)
+    exact hηq.trans hξq.symm
   have hu : ∀ s ∈ Ioo (C.left m) (C.right m), ∀ ψ,
       stateU S (liftSectorParameter S C (z + t • heightParameterDirection S η)).1 (s, ψ) =
       stateU S (liftSectorParameter S C (z + t • heightParameterDirection S ξ)).1 (s, ψ) +
         t * c := by
     intro s hs ψ
-    rw [liftSectorParameter_height_line_field, liftSectorParameter_height_line_field,
-      hηξ s hs ψ]
-    ring
+    have hfield := congrArg
+      (fun a : ℝ => stateU S (liftSectorParameter S C z).1 (s, ψ) + t * a)
+      (hηξ s hs ψ)
+    have hscalar := height_line_add_constant
+      (stateU S (liftSectorParameter S C z).1 (s, ψ)) t
+      (heightPairField S ξ (s, ψ)) c
+    have hright := congrArg (fun a : ℝ => a + t * c)
+      (liftSectorParameter_height_line_field S C z ξ t (s, ψ))
+    exact (liftSectorParameter_height_line_field S C z η t (s, ψ)).trans
+      (hfield.trans (hscalar.trans hright.symm))
   have hflow (ψ : ℝ) := hN.minusFlow_eq_of_local_profile_height hS hT
     (liftSectorParameter_mem_stateNeighborhood hη le_rfl)
     (liftSectorParameter_mem_stateNeighborhood hξ le_rfl)

@@ -35,11 +35,13 @@ theorem reflected_drift_speed_abs_bound
   constructor
   · rw [abs_div, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
     apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).mpr
-    exact (abs_sub_le _ _).trans ((add_le_add (hv θ) (hv (-θ))).trans_eq (by ring))
+    have h : |v θ - v (-θ)| ≤ |v θ| + |v (-θ)| := by
+      simpa only [sub_eq_add_neg, abs_neg] using abs_add_le (v θ) (-v (-θ))
+    exact h.trans ((add_le_add (hv θ) (hv (-θ))).trans_eq (by ring))
   · rw [abs_div, abs_of_nonneg (by norm_num : (0 : ℝ) ≤ 2)]
     apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).mpr
-    have h := abs_sub_le (-v (-θ)) (v θ)
-    rw [abs_neg] at h
+    have h : |-v (-θ) - v θ| ≤ |v (-θ)| + |v θ| := by
+      simpa only [sub_eq_add_neg, abs_neg] using abs_add_le (-v (-θ)) (-v θ)
     exact h.trans ((add_le_add (hv (-θ)) (hv θ)).trans_eq (by ring))
 
 theorem weighted_velocity_abs_le
