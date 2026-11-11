@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aNormalizedInverseMap
 import ContinuousFlexibility.Analysis.N07aInverseContinuity
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 import ContinuousFlexibility.Statements.N07aRegularity
 
 /-!
@@ -73,18 +74,22 @@ theorem n07a_scalarInverse_smooth_of_actualForward
   have hleft : ∀ z ∈ U, ∀ u, V z (F z u) = u := by
     intro z hz u
     apply Subtype.ext
-    rw [hVcoe z hz]
-    exact hLinear.2.1 _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
-      (href.liftSectorParameter_sector z) u.val.1 u.val.2 (F z u)
-      (n07aNormalizedUnknown_row hD hT hS u)
-      (fun p hp => (hdecode z hz u p hp).symm)
+    exact (hVcoe z hz (F z u)).trans
+      (hLinear.2.1 _ (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
+        (href.liftSectorParameter_sector z) u.val.1 u.val.2 (F z u)
+        (n07aNormalizedUnknown_row hD hT hS u)
+        (fun p hp => (hdecode z hz u p hp).symm))
   have hright : ∀ z ∈ U, ∀ f, F z (V z f) = f := by
     intro z hz f
     apply n07a_source_ext_core hS
     intro p hp
-    rw [hdecode z hz (V z f) p hp, hVcoe z hz f]
-    exact (hLinear.1 _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
-      (href.liftSectorParameter_sector z) f).2 p hp
+    exact (hdecode z hz (V z f) p hp).trans
+      ((congrArg (fun u : HeightPair S × ℝ =>
+        divergenceOperator (L.coefficients (liftSectorParameter S C z))
+          (heightPairField S u.1) p + u.2 * nuColumnField D S C
+            (liftSectorParameter S C z) p) (hVcoe z hz f)).trans
+        ((hLinear.1 _ (liftSectorParameter_mem_stateNeighborhood (S := S) (C := C) hz le_rfl)
+          (href.liftSectorParameter_sector z) f).2 p hp))
   have hVTame : LinearFamilyTame (n07aParameterGrading S)
       (n07aNormalizedGrading hD hT hS) S.sourceGrading U V := by
     let d : ℕ := hLinear.2.2.choose
@@ -95,11 +100,11 @@ theorem n07a_scalarInverse_smooth_of_actualForward
     let data := hb s hs
     refine ⟨data.choose, data.choose_spec.1, ?_⟩
     intro z hz f
-    change n07aOutputGrading S s (V z f).val ≤
-      data.choose * (S.sourceGrading (s + d) f +
-        (1 + n07aParameterGrading S (s + d) z) * S.sourceGrading n f)
-    rw [hVcoe z hz f]
-    exact data.choose_spec.2 z hz f
+    have hgrade : n07aNormalizedGrading hD hT hS s (V z f) =
+        n07aOutputGrading S s (G.G (liftSectorParameter S C z) f) :=
+      (n07aNormalizedGrading_apply hD hT hS s (V z f)).trans
+        (congrArg (fun u : HeightPair S × ℝ => n07aOutputGrading S s u) (hVcoe z hz f))
+    exact hgrade.le.trans (data.choose_spec.2 z hz f)
   have hVcont := n07a_inverseFamily_continuousOn_of_linearFamilyTame
     (n07aParameterGrading_withSeminorms S)
     (n07aNormalizedGrading_withSeminorms hD hT hS)

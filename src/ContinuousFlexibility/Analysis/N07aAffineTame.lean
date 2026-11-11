@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N07aAffineTower
+import ContinuousFlexibility.Analysis.TameElementaryCalculus
 
 /-!
 # Smooth tame pullback along a fixed affine contraction
@@ -54,9 +55,9 @@ theorem n07a_smoothTameOn_affine_nonexpansive
     exact (hL base (x - x₀)).trans_lt hnear
   have hlin : tameJetSize q k s loss base (L x) (fun i => L (v i)) ≤
       tameJetSize p k s loss base x v := by
-    simpa only [one_mul, one_pow] using
+    simpa only [tameJetSize, one_mul, one_pow, ContinuousLinearMap.coe_coe] using
       solve_oneHighWeight_le p q L.toLinearMap 1 le_rfl
-        (fun n y => by simpa only [one_mul] using hL n y)
+        (fun n y => by simpa only [one_mul, ContinuousLinearMap.coe_coe] using hL n y)
         base (s + loss) x v
   have hshift := n07a_tameJetSize_add_center_le q k s loss base c (L x)
     (fun i => L (v i))

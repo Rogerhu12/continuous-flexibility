@@ -69,7 +69,8 @@ theorem n07a_exists_nuReducedResidual
   have hU₀ : IsOpen U₀ := isOpen_uniformTameBall
     (n07aNuParameterGrading_withSeminorms S) b _ δ
   have hc₀ : n07aNuParameterCenter S v₀ ∈ U₀ := by
-    simpa only [U₀, Set.mem_ofPred_eq, sub_self, map_zero] using hδ
+    have hz : n07aNuParameterGrading S b (0 : N07aNuParameter S) = 0 := map_zero _
+    simpa only [U₀, Set.mem_ofPred_eq, sub_self, hz] using hδ
   have hIV : n07aNuParameterState hT hS hb ⁻¹' V ∈
       𝓝 (n07aNuParameterCenter S v₀) := by
     apply hI.continuousAt.preimage_mem_nhds
@@ -84,7 +85,8 @@ theorem n07a_exists_nuReducedResidual
     (n07aNuParameterGrading_withSeminorms S) c _ η
   refine ⟨U, hU, ?_, W.residual ∘ n07aNuParameterState hT hS hb,
     (hf.restrict hU (fun x hx => (hsub hx).1)).1, ?_, ?_⟩
-  · simpa only [U, Set.mem_ofPred_eq, sub_self, map_zero] using hη
+  · have hz : n07aNuParameterGrading S c (0 : N07aNuParameter S) = 0 := map_zero _
+    simpa only [U, Set.mem_ofPred_eq, sub_self, hz] using hη
   · intro x hx
     exact hQ _ (hsub hx).2
   · intro x hx p
@@ -98,7 +100,7 @@ theorem n07aNuParameter_add_direction (S : PhysicalSpacesData)
     x + t • n07aNuParameterDirection S = ((x.1.1, x.1.2 + t), x.2) := by
   rcases x with ⟨⟨⟨v, l⟩, ν⟩, q⟩
   simp only [n07aNuParameterDirection, Prod.smul_mk, smul_zero,
-    smul_eq_mul, mul_one, Prod.mk_add_mk, add_zero]
+    smul_eq_mul, mul_one, mul_zero, Prod.mk_add_mk, add_zero]
 
 theorem n07a_exists_nuReducedSource
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
@@ -134,7 +136,8 @@ theorem n07a_exists_nuReducedSource
   apply (congrArg (fun v : ScalarHeightSpace S => (S.height scalarBeta).decode v p)
     (hN x hx)).trans
   have hd := scalarHeightTower_decode_derivative hS J 0 x hx Fin.elim0 w p
-  have hv : Fin.cons w Fin.elim0 = Fin.snoc Fin.elim0 w := by
+  have hv : (Fin.cons w Fin.elim0 : Fin 1 → N07aNuParameter S) =
+      Fin.snoc (α := fun _ : Fin 1 => N07aNuParameter S) Fin.elim0 w := by
     ext i
     fin_cases i
     rfl

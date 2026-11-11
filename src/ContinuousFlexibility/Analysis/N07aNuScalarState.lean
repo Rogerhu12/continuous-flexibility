@@ -87,12 +87,14 @@ theorem n07aNuScalarState_residual_nu_eq_outside
   have he : scalarStateProfile D S y =ᶠ[𝓝 p.1] scalarStateProfile D S y' := by
     have hχ : D.chi =ᶠ[𝓝 p.1] 0 := notMem_tsupport_iff_eventuallyEq.mp hp
     filter_upwards [hχ] with r hr
-    change scalarStateProfile D S (n07aNuScalarState hT hS h01.1.2.2.2.1
-      ((z.1.1, (ν, z.1.2.2)), z.2)) r =
-        scalarStateProfile D S (n07aNuScalarState hT hS h01.1.2.2.2.1 z) r
-    rw [n07aNuScalarState_profile, n07aNuScalarState_profile]
     simp only [Pi.zero_apply] at hr
-    simp only [hr, mul_zero]
+    have hν : scalarStateProfile D S y r = D.w r * Real.exp (ν * D.chi r) :=
+      congrFun (n07aNuScalarState_profile hT hS h01.1.2.2.2.1
+        ((z.1.1, (ν, z.1.2.2)), z.2)) r
+    have hν₀ : scalarStateProfile D S y' r = D.w r * Real.exp (z.1.2.1 * D.chi r) :=
+      congrFun (n07aNuScalarState_profile hT hS h01.1.2.2.2.1 z) r
+    exact hν.trans ((by rw [hr]; simp only [mul_zero] :
+      D.w r * Real.exp (ν * D.chi r) = D.w r * Real.exp (z.1.2.1 * D.chi r)).trans hν₀.symm)
   exact n07a_normalizedResidual_radialProfile_congr
     (scalarStatePrimitive_contDiff h01.1.1 hT hS y)
     (scalarStatePrimitive_contDiff h01.1.1 hT hS y')
@@ -115,12 +117,19 @@ theorem n07a_nuColumnField_eq_pureResidual_deriv
           (n07aNuScalarState hT hS h01.1.2.2.2.1 ((z.1.1, (ν, z.1.2.2)), z.2)) p :=
       funext fun ν => n07aNuScalarState_residual_eq_on_border hS hT h01 _ hp
     exact congrArg (fun f : ℝ → ℝ => deriv f z.1.2.1) he
-  · rw [n07a_nuColumnField_eq_zero_outside hS hT h01 z hp]
+  · have hzero : nuColumnField D S C z p = 0 :=
+      n07a_nuColumnField_eq_zero_outside hS hT h01 z hp
     have he : (fun ν => scalarStateResidual D S
         (n07aNuScalarState hT hS h01.1.2.2.2.1 ((z.1.1, (ν, z.1.2.2)), z.2)) p) =
         fun _ : ℝ => scalarStateResidual D S
           (n07aNuScalarState hT hS h01.1.2.2.2.1 z) p :=
       funext fun ν => n07aNuScalarState_residual_nu_eq_outside hS hT h01 z ν hp
-    rw [he, deriv_const]
+    have hder : deriv (fun ν => scalarStateResidual D S
+        (n07aNuScalarState hT hS h01.1.2.2.2.1 ((z.1.1, (ν, z.1.2.2)), z.2)) p)
+        z.1.2.1 = 0 :=
+      (congrArg (fun f : ℝ → ℝ => deriv f z.1.2.1) he).trans
+        (deriv_const z.1.2.1 (scalarStateResidual D S
+          (n07aNuScalarState hT hS h01.1.2.2.2.1 z) p))
+    exact hzero.trans hder.symm
 
 end ContinuousFlexibility.Analysis

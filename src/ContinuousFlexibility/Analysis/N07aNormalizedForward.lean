@@ -30,6 +30,18 @@ attribute [local instance]
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hD : IsRadialReference D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
 
+private theorem n07aNormalizedForward_subtype_apply
+    (u : N07aNormalizedUnknown hD hT hS) :
+    (n07aNormalizationSubmodule hD hT hS).subtypeL u = u.val :=
+  Submodule.subtypeL_apply (n07aNormalizationSubmodule hD hT hS) u
+
+private theorem n07aNormalizedForward_grading_apply (n : ℕ)
+    (u : N07aNormalizedUnknown hD hT hS) :
+    n07aNormalizedGrading hD hT hS n u =
+      heightPairGrading S n u.val.1 + |u.val.2| :=
+  (n07aNormalizedGrading_apply hD hT hS n u).trans
+    (pairGrading_apply (heightPairGrading S) realGrading n u.val)
+
 def n07aNormalizedForwardCLM
     (F : (StateDirections S × ℝ) → HeightPair S →L[ℝ] S.Source)
     (N : (StateDirections S × ℝ) → S.Source) (z : StateDirections S × ℝ) :
@@ -69,13 +81,26 @@ theorem n07aNormalizedForwardCLM_smoothTame
   have hI (z : (StateDirections S × ℝ) × Y) : I z = (z.1, z.2.val.1) := by
     simp only [I, i, ContinuousLinearMap.coe_prodMap', Prod.map_apply',
       ContinuousLinearMap.id_apply, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.coe_fst', Submodule.subtypeL_apply]
+      ContinuousLinearMap.coe_fst']
+    exact congrArg (fun u : HeightPair S × ℝ => (z.1, u.1))
+      (n07aNormalizedForward_subtype_apply hD hT hS z.2)
+  have hgrading (n : ℕ) (z : (StateDirections S × ℝ) × Y) :
+      pairGrading p q n z = p n z.1 +
+        (heightPairGrading S n z.2.val.1 + |z.2.val.2|) :=
+    (pairGrading_apply p q n z).trans (congrArg (fun t : ℝ => p n z.1 + t)
+      (n07aNormalizedForward_grading_apply hD hT hS n z.2))
   have hi (n : ℕ) (z : (StateDirections S × ℝ) × Y) :
       n07aParameterHeightGrading S n (I z) ≤ 1 * pairGrading p q n z := by
-    rw [hI]
-    change p n z.1 + heightPairGrading S n z.2.val.1 ≤
-      1 * (p n z.1 + (heightPairGrading S n z.2.val.1 + |z.2.val.2|))
-    linarith only [abs_nonneg z.2.val.2]
+    have he : n07aParameterHeightGrading S n (I z) =
+        p n z.1 + heightPairGrading S n z.2.val.1 :=
+      (congrArg (fun v => n07aParameterHeightGrading S n v) (hI z)).trans
+        (pairGrading_apply (n07aParameterGrading S) (heightPairGrading S)
+          n (z.1, z.2.val.1))
+    have hnum : p n z.1 + heightPairGrading S n z.2.val.1 ≤
+        1 * (p n z.1 + (heightPairGrading S n z.2.val.1 + |z.2.val.2|)) := by
+      linarith only [abs_nonneg z.2.val.2]
+    exact he.le.trans (hnum.trans_eq
+      (congrArg (fun t : ℝ => 1 * t) (hgrading n z).symm))
   have hdom : I ⁻¹' (U ×ˢ univ) = U ×ˢ univ := by
     ext z
     simp only [mem_preimage, hI, mem_prod, mem_univ, and_true]
@@ -99,15 +124,20 @@ theorem n07aNormalizedForwardCLM_smoothTame
         (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) Y)
   have hm (z : (StateDirections S × ℝ) × Y) : m z = z.2.val.2 := by
     simp only [m, ContinuousLinearMap.comp_apply,
-      ContinuousLinearMap.coe_snd', Submodule.subtypeL_apply]
+      ContinuousLinearMap.coe_snd']
+    exact congrArg (fun u : HeightPair S × ℝ => u.2)
+      (n07aNormalizedForward_subtype_apply hD hT hS z.2)
   have hmt : IsTameLinear (pairGrading p q) realGrading m.toLinearMap 0 0 := by
     intro n _
     refine ⟨1, fun z => ?_⟩
-    simp only [ContinuousLinearMap.coe_coe, hm]
-    change |z.2.val.2| ≤ 1 *
-      (p (n + 0) z.1 + (heightPairGrading S (n + 0) z.2.val.1 + |z.2.val.2|))
-    simp only [Nat.add_zero, one_mul]
-    linarith only [apply_nonneg (p n) z.1, apply_nonneg (heightPairGrading S n) z.2.val.1]
+    have hnum : |z.2.val.2| ≤
+        p n z.1 + (heightPairGrading S n z.2.val.1 + |z.2.val.2|) := by
+      linarith only [apply_nonneg (p n) z.1,
+        apply_nonneg (heightPairGrading S n) z.2.val.1]
+    have hb : realGrading n (m.toLinearMap z) ≤ pairGrading p q n z :=
+      (congrArg (fun t : ℝ => |t|) (hm z)).le.trans
+        (hnum.trans_eq (hgrading n z).symm)
+    simpa only [Nat.add_zero, NNReal.coe_one, one_mul] using hb
   have hmu := smoothTameOn_continuousLinear_on (hU.prod isOpen_univ) m hmt
   have hp := tamePairGrading_monotone (n07aParameterGrading_monotone S)
     (n07aNormalizedGrading_monotone hD hT hS)
