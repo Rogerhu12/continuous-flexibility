@@ -22,7 +22,7 @@ variable {E : ℕ → Type*} [∀ n, NormedAddCommGroup (E n)]
 theorem angularFrequency_re_inner_eq_tsum
     (v : (angularFrequency (𝕜 := 𝕜) (E := E)).domain) :
     RCLike.re (inner 𝕜 (v : lp E 2) (angularFrequency (𝕜 := 𝕜) v)) =
-      ∑' n, (n : ℝ) * ‖(v : lp E 2) n‖ ^ 2 := by
+      ∑' n : ℕ, (n : ℝ) * ‖(v : lp E 2) n‖ ^ 2 := by
   rw [lp.inner_eq_tsum, RCLike.re_tsum 𝕜
     (lp.summable_inner (𝕜 := 𝕜) (v : lp E 2) (angularFrequency (𝕜 := 𝕜) v))]
   apply tsum_congr
