@@ -57,14 +57,61 @@ Build single targets, never a bare `lake build` in a small sandbox:
 LEAN_NUM_THREADS=2 lake build ContinuousFlexibility.Blueprint.<Node>
 ```
 
-Check one file without writing artifacts with `lake env lean <file>`. CI builds everything on every
-push to a `line/**` branch and on every pull request, and prints the blueprint status.
+Check one file without writing artifacts with `lake env lean <file>`.
+
+## If the sandbox cannot compile, use CI
+
+Do not spend time fighting the sandbox. If a compile runs out of memory, is killed, or takes more
+than a few minutes for one file, stop compiling locally: write the code, push, and read the result
+of CI. That loop always works.
+
+- CI builds everything on every push to a `line/**` branch and on every pull request, prints the
+  blueprint status, and takes about 5 minutes with the cache. A newer push cancels the older run.
+- Find the run of your branch and its errors:
+
+```bash
+gh run list --branch line/<Node> --limit 3
+```
+
+```bash
+gh run view <run-id> --log-failed
+```
+
+- The step "Build every library" prints every `error:` line with the following 60 lines; the full
+  log is the artifact `build-log`.
+- Push small, complete steps (one file or one lemma group at a time), so that one CI round tells
+  you about one change. Do not pile up thousands of unchecked lines before the first push.
 
 ## Lean
 
 - Toolchain and mathlib are fixed. `Set.mem_setOf_eq` and `push_neg` are deprecated in this mathlib.
 - Use plain `import` headers (no `module` keyword) until the module migration is merged.
 - Do not raise heartbeat limits; find the slow declaration.
+
+## Claiming a task
+
+A task is taken when the branch `line/<Task>` exists on GitHub. Nothing else records a claim.
+
+```bash
+git ls-remote --heads origin "line/*"
+```
+
+To claim a task, create its branch from `main` and push it at once, before doing any work:
+
+```bash
+git fetch origin && git switch -c line/<Task> origin/main && git commit --allow-empty -m "Claim <Task>" && git push -u origin line/<Task>
+```
+
+If the push is rejected because the branch exists, someone else has the task: pick another.
+Then open a draft pull request into `main` titled `<Task>`.
+
+## When you finish
+
+1. Mark your pull request ready for review and write the final report in it.
+2. Take the next task that nobody has: the first one in the list "Pick next" of `docs/STATUS.md`
+   whose branch does not exist. Claim it as above and continue. Do not wait for a review.
+3. If your own task turned out to need a sub-blueprint, its pieces go to the top of the candidates:
+   push the sub-blueprint first, so that they can be claimed.
 
 ## Final report in the pull request
 

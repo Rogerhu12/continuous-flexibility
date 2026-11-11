@@ -120,7 +120,8 @@ def solveSmoothDirectionsPrecomp {U : Set Y} {f : Y → Z}
         (Fin.cons (L w) (fun i => L (v i)) : Fin (n + 1) → Y) := by
       funext i
       refine Fin.cases ?_ ?_ i <;> simp
-    simpa only [ContinuousMultilinearMap.compContinuousLinearMap_apply, e] using
+    simpa only [ContinuousMultilinearMap.compContinuousLinearMap_apply,
+      ContinuousLinearMap.coe_coe, e] using
       HasProjectiveLineDerivAt.comp_linear L.toLinearMap
         (J.derivative n (L x) hx (fun i => L (v i)) (L w))
 

@@ -31,7 +31,7 @@ theorem referenceStateConditions.stateSector
 theorem referenceStateConditions.liftSectorParameter_sector
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     (h : referenceStateConditions D S C) (z : StateDirections S × ℝ) :
-    stateSector S (liftSectorParameter S C z).1 := by
+    ContinuousFlexibility.Statements.stateSector S (liftSectorParameter S C z).1 := by
   exact (stateSectorSubmodule S).add_mem h.stateSector z.1.property
 
 /-- The restricted parameter neighborhood maps into the geometric neighborhood. -/
@@ -72,7 +72,7 @@ theorem N08Properties.returnResidual_eq_zero
     R.residual z = 0 := by
   have hcircle : P.circle z = 0 := congrArg Prod.snd hzero
   rw [← h.2.2.2.1 z hz hs, hcircle]
-  exact ZeroMemClass.coe_zero
+  exact Submodule.coe_zero (p := evenCircleSubmodule S)
 
 /-- The coupled inverse has zero normalization row.  Its two scalar-inverse
 terms combine to one scalar-inverse value by linearity, so no unproved

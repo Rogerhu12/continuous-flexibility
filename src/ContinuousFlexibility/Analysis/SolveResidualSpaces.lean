@@ -108,7 +108,7 @@ projection, retaining its fixed derivative loss. -/
 theorem solve_even_hasSmoothing (hS : IsPhysicalSpaces D T S) :
     HasSmoothing (fun n => ((S.circle (3 / 4 : ℝ)).grading n).comp
       (evenCircleSubmodule S).subtype) := by
-  obtain ⟨even, odd, heven, _, _, r, b, hPt, _⟩ :=
+  obtain ⟨even, odd, heven, _, _, ⟨r, b, hPt⟩, _⟩ :=
     hS.2.2.2.2.2.2.2.2.2.2.2.2.2.2 (3 / 4 : ℝ)
   have hinj := (hS.2.1 (3 / 4 : ℝ)).2.2.2.2.2.1
   apply hasSmoothing_submodule_of_tame_projection (gradedSeminorm_monotone _ _)

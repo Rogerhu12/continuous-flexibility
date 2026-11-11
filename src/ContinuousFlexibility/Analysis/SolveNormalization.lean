@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.MaterialHeightRegularity
 import ContinuousFlexibility.Analysis.TameTransfer
 import Mathlib.Analysis.LocallyConvex.Barrelled
+import Mathlib.Analysis.Calculus.ContDiff.Deriv
 import Mathlib.Topology.Baire.CompleteMetrizable
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
 
@@ -18,7 +19,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory ContinuousFlexibility.Analysis
-open scoped Topology ContDiff BigOperators
+open scoped Topology ContDiff BigOperators NNReal
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -32,16 +33,17 @@ theorem continuous_referenceMode {u : PolarPoint → ℝ} (hu : Continuous u) (j
     hu.mul ((continuous_cosineMode j).comp continuous_snd)
   exact continuous_const.mul
     (intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
-      (f := fun r θ => u (r, θ) * Radial.cosineMode j θ) hf 0 (2 * Real.pi))
+      (μ := volume) (f := fun r θ => u (r, θ) * Radial.cosineMode j θ)
+      hf 0 (2 * Real.pi))
 
 theorem referenceMode_add_of_continuous {u v : PolarPoint → ℝ}
     (hu : Continuous u) (hv : Continuous v) (j : ℕ) (r : ℝ) :
     referenceMode (fun p => u p + v p) j r =
       referenceMode u j r + referenceMode v j r := by
   have hui := ((hu.comp (continuous_const.prodMk continuous_id)).mul
-    (continuous_cosineMode j)).intervalIntegrable 0 (2 * Real.pi)
+    (continuous_cosineMode j)).intervalIntegrable (μ := volume) 0 (2 * Real.pi)
   have hvi := ((hv.comp (continuous_const.prodMk continuous_id)).mul
-    (continuous_cosineMode j)).intervalIntegrable 0 (2 * Real.pi)
+    (continuous_cosineMode j)).intervalIntegrable (μ := volume) 0 (2 * Real.pi)
   simp only [referenceMode, radialAngularMean, add_mul]
   rw [intervalIntegral.integral_add hui hvi, mul_add]
 
@@ -59,11 +61,11 @@ theorem continuousOn_referenceColumn {D : ReferenceData} (hD : IsRadialReference
   have hphi : ContDiff ℝ ∞ D.phi := hgeo.2.2.2.1.1
   have hchi : ContDiff ℝ ∞ D.chi := hD.2.2.2.1.1
   have hprod : ContDiff ℝ ∞ (fun r => D.w r * D.chi r) := hw.mul hchi
-  have hphid : ContDiff ℝ ∞ (deriv D.phi) := hphi.deriv (by simp)
+  have hphid : ContDiff ℝ ∞ (deriv D.phi) := (contDiff_infty_iff_deriv.mp hphi).2
   have hterm : Continuous (deriv (fun r => (D.w r * D.chi r) * deriv D.phi r)) :=
-    ((hprod.mul hphid).deriv (by simp)).continuous
+    (hprod.mul hphid).continuous_deriv (by simp)
   have hprodd : Continuous (deriv (fun r => D.w r * D.chi r)) :=
-    (hprod.deriv (by simp)).continuous
+    hprod.continuous_deriv (by simp)
   exact hterm.continuousOn.sub
     (((continuous_const.mul hprodd).continuousOn.div continuousOn_id
       (fun r hr => (hgeo.1.trans_le hr.1).ne')).mul hphi.continuous.continuousOn)
@@ -111,7 +113,10 @@ theorem exists_continuous_seminorm_bound_of_compact
     refine ⟨B, ?_⟩
     rintro y ⟨z, rfl⟩
     exact hB (mem_image_of_mem (fun z => ‖L x z‖) z.property)
-  refine ⟨⨆ z, ps z, Seminorm.continuous_iSup ps hps hb, ?_⟩
+  have hp : Continuous ((⨆ z, ps z : Seminorm ℝ E) : E → ℝ) := by
+    rw [Seminorm.coe_iSup_eq hb]
+    exact Seminorm.continuous_iSup ps hps hb
+  refine ⟨⨆ z, ps z, hp, ?_⟩
   intro x z hz
   exact le_ciSup hb (⟨z, hz⟩ : K) x
 
@@ -159,7 +164,7 @@ private theorem referenceRow_bound_of_field_bound {D : ReferenceData}
 
 section RowLinear
 
-variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+variable {E : Type*} [AddCommGroup E] [Module ℝ E]
   (D : ReferenceData) (hab : D.a ≤ D.b)
   (hcol : ContinuousOn (referenceColumn D) (Icc D.a D.b))
   (L : E →ₗ[ℝ] (PolarPoint → ℝ)) (hfield : ∀ x, Continuous (L x))
@@ -177,7 +182,7 @@ def referenceRowLinear : E →ₗ[ℝ] ℝ where
 theorem referenceRowLinear_apply (x : E) :
     referenceRowLinear D hab hcol L hfield x = referenceRow D (L x) := rfl
 
-variable [IsTopologicalAddGroup E] [BarrelledSpace ℝ E]
+variable [TopologicalSpace E] [IsTopologicalAddGroup E] [BarrelledSpace ℝ E]
 
 theorem continuous_referenceRowLinear (hL : Continuous L) :
     Continuous (referenceRowLinear D hab hcol L hfield) := by
@@ -209,6 +214,8 @@ def referenceRowCLM (hL : Continuous L) : E →L[ℝ] ℝ where
 theorem referenceRowCLM_apply (hL : Continuous L) (x : E) :
     referenceRowCLM D hab hcol L hfield hL x = referenceRow D (L x) := rfl
 
+attribute [irreducible] referenceRowCLM
+
 end RowLinear
 
 /-- The decoded height including the free left endpoint constant. -/
@@ -220,8 +227,8 @@ def heightPairFieldLinear (S : PhysicalSpacesData) : HeightPair S →ₗ[ℝ] (P
     ring
   map_smul' c x := by
     funext p
-    simp only [heightPairField, Prod.fst_smul, Prod.snd_smul, map_smul,
-      Pi.smul_apply, smul_eq_mul]
+    simp only [heightPairField, Prod.smul_fst, Prod.smul_snd, map_smul,
+      Pi.smul_apply, smul_eq_mul, RingHom.id_apply]
     ring
 
 theorem heightPairFieldLinear_apply (S : PhysicalSpacesData) (x : HeightPair S) :
@@ -254,7 +261,10 @@ def heightReferenceRowCLM {D : ReferenceData} {T : MaterialData}
 theorem heightReferenceRowCLM_apply {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hD : IsRadialReference D)
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) (x : HeightPair S) :
-    heightReferenceRowCLM hD hT hS x = referenceRow D (heightPairField S x) := rfl
+    heightReferenceRowCLM hD hT hS x = referenceRow D (heightPairField S x) := by
+  simp only [heightReferenceRowCLM, referenceRowCLM_apply, heightPairFieldLinear_apply]
+
+attribute [irreducible] heightReferenceRowCLM
 
 /-- The normalization row on the full state. -/
 def stateReferenceRowCLM {D : ReferenceData} {T : MaterialData}
@@ -268,7 +278,9 @@ theorem stateReferenceRowCLM_apply {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) (x : AnnularState S) :
     stateReferenceRowCLM hD hT hS x = referenceRow D (stateU S x) := by
   simp only [stateReferenceRowCLM, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.fst_apply, heightReferenceRowCLM_apply, stateU]
+    ContinuousLinearMap.coe_fst', heightReferenceRowCLM_apply, stateU]
+
+attribute [irreducible] stateReferenceRowCLM
 
 /-- The normalization row on constant-control, odd-chart directions. -/
 def sectorReferenceRowCLM {D : ReferenceData} {T : MaterialData}
@@ -283,6 +295,8 @@ theorem sectorReferenceRowCLM_apply {D : ReferenceData} {T : MaterialData}
   simp only [sectorReferenceRowCLM, ContinuousLinearMap.comp_apply,
     Submodule.subtypeL_apply, stateReferenceRowCLM_apply]
 
+attribute [irreducible] sectorReferenceRowCLM
+
 /-- On a monotone defining grading, a continuous scalar functional has a
 bound at one finite order. -/
 theorem exists_grade_bound_clm
@@ -296,8 +310,20 @@ theorem exists_grade_bound_clm
   have hs : s.sup p ≤ p (s.sup id) := by
     apply Finset.sup_le
     intro i hi
-    exact hmono (Finset.le_sup hi)
+    exact hmono (Finset.le_sup (f := id) hi)
   exact (hC x).trans (mul_le_mul_of_nonneg_left (hs x) C.coe_nonneg)
+
+/-- A continuous scalar row defines a smoothing-compatible hyperplane on
+a space with a monotone defining grading. -/
+theorem hasSmoothing_ker_of_continuous
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : WithSeminorms p) (hmono : Monotone p)
+    (hsmooth : HasSmoothing p) (row : E →L[ℝ] ℝ) (ψ : E) (hψ : row ψ = 1) :
+    HasSmoothing (fun n => (p n).comp row.toLinearMap.ker.subtype) := by
+  obtain ⟨b, C, hC, hb⟩ := exists_grade_bound_clm p hp hmono row
+  exact hasSmoothing_ker_rankOne row ψ hψ
+    (fun _ _ h x => hmono h x) hC hb hsmooth
 
 /-- The normalization hyperplane inherits smoothing without a derivative
 loss from the rank-one normalization projection. -/
@@ -308,13 +334,10 @@ theorem hasSmoothing_normalizedSector
     (hsmooth : HasSmoothing (sectorGrading S)) (ψ : StateDirections S)
     (hψ : referenceRow D (stateU S ψ.val) = 1) :
     HasSmoothing (fun n => (sectorGrading S n).comp
-      (sectorReferenceRowCLM hD hT hS).toLinearMap.ker.subtype) := by
-  obtain ⟨b, C, hC, hb⟩ := exists_grade_bound_clm (sectorGrading S) hp hmono
-    (sectorReferenceRowCLM hD hT hS)
-  have hψ' : sectorReferenceRowCLM hD hT hS ψ = 1 :=
-    (sectorReferenceRowCLM_apply hD hT hS ψ).trans hψ
-  exact hasSmoothing_ker_rankOne (sectorReferenceRowCLM hD hT hS) ψ hψ'
-    (fun _ _ h x => hmono h x) hC hb hsmooth
+      (sectorReferenceRowCLM hD hT hS).toLinearMap.ker.subtype) :=
+  hasSmoothing_ker_of_continuous (sectorGrading S) hp hmono hsmooth
+    (sectorReferenceRowCLM hD hT hS) ψ
+    ((sectorReferenceRowCLM_apply hD hT hS ψ).trans hψ)
 
 theorem referenceRow_affine_of_mem_kernel
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

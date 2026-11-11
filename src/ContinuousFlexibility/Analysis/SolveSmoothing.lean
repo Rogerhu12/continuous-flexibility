@@ -38,20 +38,22 @@ theorem withSeminorms_pairGrading {p : ℕ → Seminorm ℝ E} {q : ℕ → Semi
     · exact (LinearMap.fst ℝ E F).withSeminorms_induced hp
     · exact (LinearMap.snd ℝ E F).withSeminorms_induced hq
   have hraw : WithSeminorms (SeminormFamily.sigma r) := by
-    have h := withSeminorms_iInf ht
+    have h := withSeminorms_iInf (𝕜 := ℝ) (E := E × F) (p := r) (t := t) ht
     simpa [t, iInf_bool_eq, inf_comm] using h
   apply hraw.congr
   · intro n
     refine ⟨{⟨false, n⟩, ⟨true, n⟩}, 2, ?_⟩
     intro x
-    simp only [Seminorm.comp_id, Seminorm.smul_apply, NNReal.smul_def, smul_eq_mul]
+    simp only [Seminorm.comp_id, smul_apply, NNReal.smul_def, smul_eq_mul]
     change p n x.1 + q n x.2 ≤ (2 : ℝ) * _
     have h1 : p n x.1 ≤ ({⟨false, n⟩, ⟨true, n⟩} : Finset (Sigma fun _ : Bool => ℕ)).sup
         (SeminormFamily.sigma r) x :=
-      Seminorm.le_finset_sup_apply (by simp)
+      Seminorm.le_finset_sup_apply (p := SeminormFamily.sigma r)
+        (i := ⟨false, n⟩) (by simp)
     have h2 : q n x.2 ≤ ({⟨false, n⟩, ⟨true, n⟩} : Finset (Sigma fun _ : Bool => ℕ)).sup
         (SeminormFamily.sigma r) x :=
-      Seminorm.le_finset_sup_apply (by simp)
+      Seminorm.le_finset_sup_apply (p := SeminormFamily.sigma r)
+        (i := ⟨true, n⟩) (by simp)
     linarith only [h1, h2]
   · intro z
     refine ⟨{z.2}, 1, ?_⟩
@@ -81,7 +83,9 @@ theorem hasSmoothing_submodule_of_tame_projection
   obtain ⟨base, loss, S, ha, hb, hc⟩ := hp
   let T : ℕ → W →L[ℝ] W := fun N =>
     ((P.comp (S N)).comp W.subtypeL).codRestrict W (fun x => hPW _)
-  have hT (N : ℕ) (w : W) : ((T N w : W) : E) = P (S N w) := rfl
+  have hT (N : ℕ) (w : W) : ((T N w : W) : E) = P (S N w) := by
+    simp only [T, ContinuousLinearMap.coe_codRestrict_apply,
+      ContinuousLinearMap.comp_apply, Submodule.subtypeL_apply]
   refine ⟨max base b, loss + r, T, ?_, ?_, ?_⟩
   · intro m n hm hmn
     obtain ⟨CP, hCP⟩ := hPt n ((le_of_max_le_right hm).trans hmn)
@@ -137,13 +141,14 @@ theorem hasSmoothing_submodule_of_tame_projection
           map_sub_le_add _ _ _
         _ ≤ p n w + CP * p (m + r) (S N w) := add_le_add (hpmono hmn _) h1
         _ ≤ p n w + CP * (C * Real.exp ((((m + r : ℕ) : ℝ) - n + loss) * N) * p n w) :=
-          add_le_add_left (mul_le_mul_of_nonneg_left (hSC N w) CP.2) _
+          add_le_add le_rfl (mul_le_mul_of_nonneg_left (hSC N w) CP.2)
         _ = p n w + CP * C * Real.exp (-((n : ℝ) - m - (loss + r : ℕ)) * N) * p n w := by
           rw [heq]
           ring
         _ ≤ Real.exp (-((n : ℝ) - m - (loss + r : ℕ)) * N) * p n w +
             CP * C * Real.exp (-((n : ℝ) - m - (loss + r : ℕ)) * N) * p n w := by
-          exact add_le_add_right (le_mul_of_one_le_left (apply_nonneg _ _) he) _
+          exact add_le_add
+            (le_mul_of_one_le_left (apply_nonneg (p n) (w : E)) he) le_rfl
         _ = (1 + CP * C) * Real.exp (-((n : ℝ) - m - (loss + r : ℕ)) * N) * p n w := by ring
   · intro w
     apply tendsto_subtype_rng.mpr

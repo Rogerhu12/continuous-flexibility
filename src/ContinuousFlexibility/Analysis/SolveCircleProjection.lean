@@ -49,12 +49,16 @@ theorem eLpNorm_angularMean_const_le {u : ℝ → ℝ}
 def circleAngularMeanField (u : ℕ → ℝ → ℝ) : ℕ → ℝ → ℝ :=
   fun m _ => angularMean (u m)
 
+theorem circleAngularMeanField_component (u : ℕ → ℝ → ℝ) (m : ℕ) :
+    circleAngularMeanField u m = fun _ : ℝ => angularMean (u m) := rfl
+
 private theorem iteratedDeriv_circleAngularMeanField_succ
     (u : ℕ → ℝ → ℝ) (m b : ℕ) :
     iteratedDeriv (b + 1) (circleAngularMeanField u m) = 0 := by
+  rw [circleAngularMeanField_component]
   funext θ
-  simp only [circleAngularMeanField, iteratedDeriv_const, Nat.succ_ne_zero,
-    ↓reduceIte, Pi.zero_apply]
+  have hb : b + 1 ≠ 0 := Nat.succ_ne_zero b
+  simp only [iteratedDeriv_const, hb, ↓reduceIte, Pi.zero_apply]
 
 theorem eLpNorm_iteratedDeriv_circleAngularMeanField_le
     {T : MaterialData} {γ : ℝ} {u : ℕ → ℝ → ℝ}
@@ -63,7 +67,7 @@ theorem eLpNorm_iteratedDeriv_circleAngularMeanField_le
       eLpNorm (iteratedDeriv b (u m)) 2 angleMeasure := by
   cases b with
   | zero =>
-    simpa only [iteratedDeriv_zero, circleAngularMeanField] using
+    simpa only [iteratedDeriv_zero, circleAngularMeanField_component] using
       eLpNorm_angularMean_const_le (hu.2.1 m 0)
   | succ b =>
     rw [iteratedDeriv_circleAngularMeanField_succ, eLpNorm_zero]
@@ -85,7 +89,7 @@ private theorem circleAngularMean_energy_le
   intro m
   apply Finset.sum_le_sum
   intro j _
-  exact mul_le_mul_left'
+  exact mul_le_mul_right
     (pow_le_pow_left₀ (zero_le _) (eLpNorm_iteratedDeriv_circleAngularMeanField_le hu m _) 2) _
 
 /-- Angular averaging preserves all weighted circle membership conditions. -/
@@ -96,11 +100,11 @@ theorem CircleMember.angularMeanField
   · intro m b
     cases b with
     | zero =>
-      simpa only [iteratedDeriv_zero, circleAngularMeanField] using
+      simpa only [iteratedDeriv_zero, circleAngularMeanField_component] using
         (memLp_const (angularMean (u m)) : MemLp (fun _ : ℝ => angularMean (u m)) 2 angleMeasure)
     | succ b =>
       rw [iteratedDeriv_circleAngularMeanField_succ]
-      exact memLp_zero
+      exact MemLp.zero
   · intro s
     exact (circleAngularMean_energy_le hu s).trans_lt (hu.2.2 s)
 
@@ -129,6 +133,7 @@ private theorem solve_angularMean_add {u v : ℝ → ℝ}
     (hu : Continuous u) (hv : Continuous v) :
     angularMean (u + v) = angularMean u + angularMean v := by
   unfold angularMean
+  simp only [Pi.add_apply]
   rw [intervalIntegral.integral_add
     (hu.intervalIntegrable _ _) (hv.intervalIntegrable _ _)]
   exact mul_add _ _ _
@@ -136,6 +141,7 @@ private theorem solve_angularMean_add {u v : ℝ → ℝ}
 private theorem solve_angularMean_smul (a : ℝ) (u : ℝ → ℝ) :
     angularMean (a • u) = a * angularMean u := by
   unfold angularMean
+  simp only [Pi.smul_apply]
   rw [intervalIntegral.integral_smul, smul_eq_mul]
   ring
 
@@ -224,7 +230,8 @@ theorem circleAngularMeanProjection_constant
     (hS : IsCircleModel T γ S) (u : S.Space) (m : ℕ) (θ φ : ℝ) :
     S.decode (circleAngularMeanProjection hS u) m θ =
       S.decode (circleAngularMeanProjection hS u) m φ := by
-  rw [circleAngularMeanProjection_decode, circleAngularMeanProjection_decode]
+  exact (circleAngularMeanProjection_decode hS u m θ).trans
+    (circleAngularMeanProjection_decode hS u m φ).symm
 
 /-- Angular averaging fixes exactly the angular-constant component. -/
 theorem circleAngularMeanProjection_eq_self
@@ -234,9 +241,12 @@ theorem circleAngularMeanProjection_eq_self
     circleAngularMeanProjection hS u = u := by
   apply hS.2.2.2.2.2.1
   funext m θ
-  rw [circleAngularMeanProjection_decode,
-    show S.decode u m = fun _ => S.decode u m θ from funext (fun φ => hu m φ θ)]
-  exact solve_angularMean_const _
+  calc
+    S.decode (circleAngularMeanProjection hS u) m θ = angularMean (S.decode u m) :=
+      circleAngularMeanProjection_decode hS u m θ
+    _ = angularMean (fun _ : ℝ => S.decode u m θ) :=
+      congrArg angularMean (funext (fun φ => hu m φ θ))
+    _ = S.decode u m θ := solve_angularMean_const _
 
 theorem circleAngularMeanProjection_idempotent
     {T : MaterialData} {γ : ℝ} {S : CircleModelData}

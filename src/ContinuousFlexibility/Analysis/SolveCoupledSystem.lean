@@ -89,7 +89,9 @@ theorem solve_coupled_exists_normalized_zero
     · exact (hnear z hz).2
   have hVmem (z : W × ℝ) (hz : z ∈ U) (y : ResidualSpace S) :
       V.sectorV (Lz z) y ∈ W := by
-    change referenceRow D (stateU S (V.sectorV (Lz z) y).val) = 0
+    apply LinearMap.mem_ker.mpr
+    change sectorReferenceRowCLM h1.1 hT hS (V.sectorV (Lz z) y) = 0
+    rw [sectorReferenceRowCLM_apply]
     rw [hVident (Lz z) (hnear z hz) y]
     exact h9.referenceRow_coupledInverse_zero hG (hactual z hz)
       (href.liftSectorParameter_sector (Lz z)) y
@@ -99,7 +101,8 @@ theorem solve_coupled_exists_normalized_zero
   let QN : W × ℝ → ResidualSpace S →ₗ[ℝ] ResidualSpace S →ₗ[ℝ] ResidualSpace S :=
     fun z => Q.Q (liftSectorParameter S C (Lz z))
   have hVN (z : W × ℝ) (hz : z ∈ U) (y : ResidualSpace S) :
-      (VN z y).val = V.sectorV (Lz z) y := by simp only [VN, dif_pos hz]; rfl
+      (VN z y).val = V.sectorV (Lz z) y := by
+    simp only [VN, dif_pos hz, LinearMap.codRestrict_apply]
   have hLz : ∀ n z, pairGrading (sectorGrading S) realGrading n (Lz z) ≤
       1 * a n z := by intro n z; rw [one_mul]; exact le_rfl
   have hRN : SmoothTameOn a (residualGrading S) U RN := by
@@ -140,7 +143,7 @@ theorem solve_coupled_exists_normalized_zero
     exact smoothTameOn_mono h ((hUopen.prod isOpen_univ).prod isOpen_univ)
       (fun z hz => ⟨⟨hnear z.1.1 hz.1.1, mem_univ _⟩, mem_univ _⟩)
   have hzeroN : RN (0, 0) = 0 := by
-    simpa only [RN, Lz, ContinuousLinearMap.prodMap_apply, ContinuousLinearMap.id_apply,
+    simpa only [RN, Lz, ContinuousLinearMap.coe_prodMap', Prod.map_apply, ContinuousLinearMap.id_apply,
       Submodule.subtypeL_apply, ZeroMemClass.coe_zero, sectorJointResidual,
       liftSectorParameter, add_zero] using hzero
   have hRightN : ∀ z ∈ U, ∀ y, HasProjectiveLineDerivAt (fun x => RN (x, z.2))
@@ -148,7 +151,7 @@ theorem solve_coupled_exists_normalized_zero
     intro z hz y
     have h := hRight (Lz z) (hnear z hz) y
     rw [← hVN z hz y] at h
-    exact h.comp_linear W.subtype
+    exact HasProjectiveLineDerivAt.comp_linear W.subtype (x := z.1) (v := VN z y) h
   obtain ⟨x, τ, hτ, hmem, hz⟩ := solve_exists_nonzero_zero p (residualGrading S)
     hp hwp (solveResidualEquiv hS) (solveResidualEquiv_grading_le hS)
     (solve_residualGrading_le_two hS) base ρ hρ RN VN QN hzeroN

@@ -31,4 +31,10 @@ theorem Solve (hN10 : N10Statement) (hTame : H01Statement ∧ H02Statement) : Po
   exact pointBranchStatement_of_jointResidual_zero hT hS h1 h2 h8
     hq hnear hsector hrow hzero
 
+/--
+info: 'ContinuousFlexibility.Blueprint.Solve' depends on axioms: [propext, Classical.choice, Quot.sound]
+-/
+#guard_msgs in
+#print axioms Solve
+
 end ContinuousFlexibility.Blueprint

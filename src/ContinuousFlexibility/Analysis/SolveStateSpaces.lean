@@ -16,7 +16,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set Filter
-open scoped Topology
+open scoped Topology NNReal
 open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false

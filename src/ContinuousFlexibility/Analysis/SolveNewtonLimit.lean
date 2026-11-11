@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.ProjectiveNewtonLimit
 import ContinuousFlexibility.Analysis.ProjectiveNewtonRapidDecay
+import Mathlib.Analysis.LocallyConvex.WithSeminorms
 
 /-!
 # Newton convergence on a complete space defined by seminorms
@@ -33,7 +34,8 @@ theorem solve_tendsto_of_summable_seminorm_increments
     ∃ x : X, Tendsto u atTop (𝓝 x) := by
   apply cauchySeq_tendsto_of_complete
   change Cauchy (Filter.map u atTop)
-  rw [p.withSeminorms_iff_uniformSpace_eq_iInf.mp hp, cauchy_iInf_uniformSpace]
+  rw [(SeminormFamily.withSeminorms_iff_uniformSpace_eq_iInf p).mp hp,
+    cauchy_iInf_uniformSpace]
   intro s
   letI : SeminormedAddCommGroup X := (p s).toSeminormedAddCommGroup
   apply cauchySeq_of_summable_dist
@@ -113,9 +115,13 @@ theorem solve_exists_fixed_branch
     obtain ⟨x, hx⟩ := solve_tendsto_of_summable_seminorm_increments p hwp
       (u := fun n => (z n).1) hsum
     have hz : Tendsto z atTop (𝓝 (x, τ)) := by
-      have hpair := hx.prodMk_nhds (tendsto_const_nhds (x := τ))
-      exact hpair.congr' (Eventually.of_forall fun n =>
-        Prod.ext rfl (projectiveSmoothedNewtonIterates_parameter R V SX N (x₀, τ) n).symm)
+      have hpair : Tendsto (fun n => ((z n).1, τ)) atTop (𝓝 (x, τ)) :=
+        hx.prodMk_nhds (tendsto_const_nhds (x := τ))
+      apply hpair.congr'
+      filter_upwards [] with n
+      apply Prod.ext
+      · rfl
+      · exact (projectiveSmoothedNewtonIterates_parameter R V SX N (x₀, τ) n).symm
     have hclosed (n : ℕ) : p b₀ ((z n).1 - x₀) ≤ μ ∧ |(z n).2| ≤ μ := by
       obtain ⟨_, hparam, hdisp, _⟩ := hiter τ hτ n
       refine ⟨(hp hb _).trans hdisp.le, ?_⟩

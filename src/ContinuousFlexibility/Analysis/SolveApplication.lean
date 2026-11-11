@@ -67,7 +67,8 @@ theorem solve_exists_nonzero_zero
     solve_hasSmoothing_of_comparable (by norm_num : (0 : ℝ) ≤ 2) zero_le_one
       hleΦ (fun n y => by simpa only [one_mul, Seminorm.comp_apply] using hΦle n y) hSY
   have hSYP : HasSmoothing qP :=
-    hasSmoothing_transport Φ (fun _ _ => rfl) hSYPull
+    hasSmoothing_transport Φ
+      (fun n y => (Seminorm.comp_apply (qP n) Φ.toLinearMap y).symm) hSYPull
   have hRP : SmoothTameOn a qP U RP := by
     simpa only [RP] using solve_smoothTameOn_postcomp hR Φ.toContinuousLinearMap
       zero_le_one (fun n y => by simpa only [one_mul] using hΦle n y)
