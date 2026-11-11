@@ -17,6 +17,8 @@ No Fourier-expansion hypothesis is imposed on either class of functions.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Analysis
 
 open MeasureTheory
@@ -79,11 +81,14 @@ theorem integral_circleReturnShift_eq_zero {v : ℝ → ℝ}
     (hv : Continuous v) (hp : Function.Periodic v Real.pi)
     (ho : ∀ θ, v (-θ) = -v θ) (T : ℝ) :
     ∫ θ in (0 : ℝ)..Real.pi, circleReturnShift T v θ = 0 := by
+  have hiPlus : IntervalIntegrable (fun θ : ℝ => v (θ + T)) volume 0 Real.pi := by
+    simpa only [Function.comp_def, Pi.add_apply, id_eq] using
+      ((hv.comp (continuous_id.add continuous_const)).intervalIntegrable 0 Real.pi)
+  have hiMinus : IntervalIntegrable (fun θ : ℝ => v (θ - T)) volume 0 Real.pi := by
+    simpa only [Function.comp_def, Pi.sub_apply, id_eq] using
+      ((hv.comp (continuous_id.sub continuous_const)).intervalIntegrable 0 Real.pi)
   simp_rw [circleReturnShift_odd ho]
-  rw [intervalIntegral.integral_div,
-    intervalIntegral.integral_sub
-      ((hv.comp (continuous_id.add continuous_const)).intervalIntegrable _ _)
-      ((hv.comp (continuous_id.sub continuous_const)).intervalIntegrable _ _),
+  rw [intervalIntegral.integral_div, intervalIntegral.integral_sub hiPlus hiMinus,
     circle_periodic_shift_integral hp T]
   have hminus : (∫ θ in (0 : ℝ)..Real.pi, v (θ - T)) =
       ∫ θ in (0 : ℝ)..Real.pi, v θ := by

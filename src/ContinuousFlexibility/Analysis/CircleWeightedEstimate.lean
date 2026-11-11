@@ -28,7 +28,7 @@ def circleJetShiftIndex (s d k : ℕ) : CircleJetIndex s ↪ CircleJetIndex (s +
     ⟨(j.val i).val + if i = 0 then d else k, by
       have hi := (j.val i).isLt
       split_ifs <;> omega⟩, by
-      simpa only [Fin.isValue, ↓reduceIte, Fin.one_ne_zero] using
+      simpa only [Fin.isValue, ↓reduceIte, show (1 : Fin 2) ≠ 0 from by decide] using
         (show (j.val 0).val + d + ((j.val 1).val + k) ≤ s + d + k by
           have hj := j.property
           omega)⟩
@@ -47,7 +47,7 @@ def circleJetShiftIndex (s d k : ℕ) : CircleJetIndex s ↪ CircleJetIndex (s +
 @[simp] theorem circleJetShiftIndex_one (s d k : ℕ) (j : CircleJetIndex s) :
     ((circleJetShiftIndex s d k j).val 1).val = (j.val 1).val + k := by
   simp only [circleJetShiftIndex, Function.Embedding.coeFn_mk, Fin.isValue,
-    Fin.one_ne_zero, ↓reduceIte]
+    show (1 : Fin 2) ≠ 0 from by decide, ↓reduceIte]
 
 /-- A bound on every weighted jet, with one common constant, controls
 the actual complete energy sum. -/
@@ -85,7 +85,7 @@ theorem circleEnergy_le_of_jet_bound
     _ = C * ∑ j : CircleJetIndex s, term (circleJetShiftIndex s d k j) :=
       (Finset.mul_sum _ _ _).symm
     _ ≤ C * ∑ j : CircleJetIndex (s + d + k), term j := by
-      apply mul_le_mul_left'
+      apply mul_le_mul_of_nonneg_left _ (zero_le C)
       calc
         _ = ∑ j ∈ Finset.univ.map (circleJetShiftIndex s d k), term j := by
           rw [Finset.sum_map]
@@ -129,7 +129,8 @@ theorem circleNorm_le_of_jet_bound
         eLpNorm (iteratedDeriv ((j.val 0).val + d) (u m)) 2 angleMeasure ^ 2)) :
     circleNorm T γ s v ≤ C * circleNorm T γ (s + d + k) u := by
   have hb := circleEnergy_le_of_jet_bound s d k (ENNReal.ofReal (C ^ 2)) hbound
-  have ht := ENNReal.mul_lt_top ENNReal.ofReal_lt_top (hu.2.2 (s + d + k))
+  have ht := ENNReal.mul_lt_top (ENNReal.ofReal_lt_top (r := C ^ 2))
+    (hu.2.2 (s + d + k))
   have hr := ENNReal.toReal_mono ht.ne hb
   rw [ENNReal.toReal_mul, ENNReal.toReal_ofReal (sq_nonneg C)] at hr
   have hs := Real.sqrt_le_sqrt hr

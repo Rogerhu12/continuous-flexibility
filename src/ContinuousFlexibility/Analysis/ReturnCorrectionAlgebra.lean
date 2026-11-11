@@ -235,8 +235,11 @@ theorem returnCorrection_flow_hasDerivAt
       (c + p * χ' * (K θ - θ)) r := by
   have hJ : HasDerivAt (fun t => returnInterpolation (χ t) K θ)
       (χ' * (K θ - θ)) r := by
-    simpa only [returnInterpolation_apply, Pi.add_apply, zero_add] using
-      (hasDerivAt_const r θ).add (hχ.mul_const (K θ - θ))
+    have h := ((hasDerivAt_const r θ).add (hχ.mul_const (K θ - θ))).congr_deriv
+      (zero_add (χ' * (K θ - θ)))
+    exact h.congr_of_eventuallyEq
+      (Filter.Eventually.of_forall fun t => by
+        simp only [returnInterpolation_apply, Pi.add_apply])
   have hpath := (hasDerivAt_id r).prodMk hJ
   simpa only [Function.comp_def, id_eq, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.smul_apply, ContinuousLinearMap.coe_fst',

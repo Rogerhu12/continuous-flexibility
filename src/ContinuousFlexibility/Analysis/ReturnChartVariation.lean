@@ -33,12 +33,12 @@ theorem oddPart_affine (F V : ℝ → ℝ) (s θ : ℝ) :
   ring
 
 theorem evenPart_continuous (F : ℝ → ℝ) (hF : Continuous F) : Continuous (evenPart F) := by
-  simpa only [evenPart, Pi.add_apply, Function.comp_def] using
-    (hF.add (hF.comp continuous_neg)).div_const 2
+  exact ((hF.add (hF.comp continuous_neg)).div_const 2).congr
+    (fun t => by simp only [evenPart, Pi.add_apply, Function.comp_def])
 
 theorem oddPart_continuous (F : ℝ → ℝ) (hF : Continuous F) : Continuous (oddPart F) := by
-  simpa only [oddPart, Pi.sub_apply, Function.comp_def] using
-    (hF.sub (hF.comp continuous_neg)).div_const 2
+  exact ((hF.sub (hF.comp continuous_neg)).div_const 2).congr
+    (fun t => by simp only [oddPart, Pi.sub_apply, Function.comp_def])
 
 theorem evenPart_hasDerivAt {F : ℝ → ℝ} {θ dpos dneg : ℝ}
     (hpos : HasDerivAt F dpos θ) (hneg : HasDerivAt F dneg (-θ)) :
@@ -125,7 +125,10 @@ theorem returnChart_inverse_affine_variation (F V : ℝ → ℝ)
     ((oddPart_continuous V hV).continuousAt.comp hg)
   have htarget : HasDerivAt (fun s : ℝ => θ - s * oddPart V (g s θ))
       (-oddPart V (g 0 θ)) 0 := by
-    simpa only [zero_sub, Pi.sub_apply] using (hasDerivAt_const (0 : ℝ) θ).sub hmul
+    have h := ((hasDerivAt_const (0 : ℝ) θ).sub hmul).congr_deriv
+      (g' := -oddPart V (g 0 θ)) (by simp only [zero_sub, Function.comp_def])
+    exact h.congr_of_eventuallyEq (Filter.Eventually.of_forall fun s => by
+      simp only [Pi.sub_apply, Function.comp_def])
   have hchart : HasDerivAt (oddPart F) (deriv (oddPart F) (g 0 θ)) (g 0 θ) :=
     (differentiableAt_of_deriv_ne_zero hpos.ne').hasDerivAt
   have hcomp : (oddPart F ∘ fun s => g s θ) =ᶠ[𝓝 (0 : ℝ)]
@@ -162,7 +165,8 @@ theorem hasDerivAt_returnResidual_affine_chart (F V : ℝ → ℝ)
       (((deriv F (g 0 θ) - deriv F (-g 0 θ)) / 2) *
           (-oddPart V (g 0 θ) / deriv (oddPart F) (g 0 θ)) +
         evenPart V (g 0 θ)) 0 := by
-    simpa only [Function.comp_def, Pi.add_apply] using (hE.comp 0 hginv).add hmul
+    exact ((hE.comp 0 hginv).add hmul).congr_of_eventuallyEq
+      (Filter.Eventually.of_forall fun s => by simp only [Function.comp_def, Pi.add_apply])
   have hparameter' : HasDerivAt
       (fun s => evenPart (fun x => F x + s * V x) (g s θ))
       (((deriv F (g 0 θ) - deriv F (-g 0 θ)) / 2) *
@@ -227,7 +231,6 @@ theorem hasDerivAt_returnResidual_chart_variation (F ψ : ℝ → ℝ) (T : ℝ)
     have hdecomp := oddPart_add_evenPart F (g 0 t)
     rw [hright0] at hdecomp
     apply congrArg ψ
-    dsimp only [Function.comp_apply]
     linarith only [hdecomp]
   have heven := congrFun
     (evenPart_comp_odd (fun x => ψ (F x + T)) (g 0) hoddInverse) θ
@@ -245,7 +248,7 @@ theorem returnChart_taylor_integral (ψ : ℝ → ℝ) (hψ : ContDiff ℝ ∞ �
   have hdiff := hψ.differentiable (by simp)
   have hderiv (t : ℝ) : HasDerivAt (fun s : ℝ => ψ (x + s * e))
       (e * deriv ψ (x + t * e)) t := by
-    simpa only [zero_add, one_mul, mul_comm, Function.comp_def, Pi.add_apply, id_eq] using
+    simpa only [zero_add, one_mul, mul_one, mul_comm, Function.comp_def, Pi.add_apply, id_eq] using
       (hdiff (x + t * e)).hasDerivAt.comp t
         ((hasDerivAt_const t x).add ((hasDerivAt_id t).mul_const e))
   have hcontinuous : Continuous (fun t : ℝ => e * deriv ψ (x + t * e)) :=
@@ -264,6 +267,7 @@ theorem returnChart_even_taylor_integral (ψ e : ℝ → ℝ)
       evenPart (fun t => ψ (t + T)) θ +
         evenPart (fun t => e t * ∫ a in (0 : ℝ)..1, deriv ψ (t + T + a * e t)) θ := by
   unfold evenPart
+  dsimp only
   rw [returnChart_taylor_integral ψ hψ (θ + T) (e θ),
     returnChart_taylor_integral ψ hψ (-θ + T) (e (-θ))]
   ring

@@ -313,17 +313,21 @@ theorem circleCosineMode_half_period (j : ℕ) (θ : ℝ) :
     mul_zero, sub_zero]
   ring
 
+/-- The canonical cosine coefficients after projection to period pi. -/
+def circlePiCosineCoeff (f : ℝ → ℝ) (j : ℕ) : ℝ :=
+  if Even j then circleCosineCoeff f j else 0
+
 /-- The actual pi-periodic circle functions have a rapid zero-mean cosine
 expansion supported on the even positive frequencies required by the
 return operator.  The half-period averaging is performed on convergent
 series, so it does not presume Fourier uniqueness or an expansion. -/
-theorem exists_rapid_circleCosine_expansion_pi {f : ℝ → ℝ}
+theorem circlePiCosineCoeff_spec {f : ℝ → ℝ}
     (hf : ContDiff ℝ ∞ f) (hp : Function.Periodic f Real.pi)
     (he : Function.Even f) (hm : ∫ x in (0 : ℝ)..Real.pi, f x = 0) :
-    ∃ c : ℕ → ℝ, c 0 = 0 ∧
-      (∀ s : ℕ, Summable (fun j : ℕ => |c j| * (j : ℝ) ^ s)) ∧
-      (∀ j : ℕ, c j ≠ 0 → Even j) ∧
-      ∀ θ : ℝ, f θ = ∑' j : ℕ, c j * Real.cos (j * θ) := by
+    circlePiCosineCoeff f 0 = 0 ∧
+      (∀ s : ℕ, Summable (fun j : ℕ => |circlePiCosineCoeff f j| * (j : ℝ) ^ s)) ∧
+      (∀ j : ℕ, circlePiCosineCoeff f j ≠ 0 → Even j) ∧
+      ∀ θ : ℝ, f θ = ∑' j : ℕ, circlePiCosineCoeff f j * Real.cos (j * θ) := by
   have hp2 : Function.Periodic f (2 * Real.pi) := by
     intro θ
     calc
@@ -332,7 +336,8 @@ theorem exists_rapid_circleCosine_expansion_pi {f : ℝ → ℝ}
       _ = f θ := hp θ
   have hm2 : ∫ x in (0 : ℝ)..2 * Real.pi, f x = 0 := by
     rw [circle_integral_two_pi hf.continuous hp, hm, mul_zero]
-  refine ⟨fun j => if Even j then circleCosineCoeff f j else 0, ?_, ?_, ?_, ?_⟩
+  dsimp only [circlePiCosineCoeff]
+  refine ⟨?_, ?_, ?_, ?_⟩
   · simp only [circleCosineCoeff_zero hm2, ite_self]
   · intro s
     apply Summable.of_nonneg_of_le
@@ -366,5 +371,16 @@ theorem exists_rapid_circleCosine_expansion_pi {f : ℝ → ℝ}
       · rw [hp θ]
         ring
     exact hfiltered.tsum_eq.symm
+
+/-- A rapid cosine expansion of a smooth pi-periodic even zero-mean
+function, with no coefficient or expansion assumption on the input. -/
+theorem exists_rapid_circleCosine_expansion_pi {f : ℝ → ℝ}
+    (hf : ContDiff ℝ ∞ f) (hp : Function.Periodic f Real.pi)
+    (he : Function.Even f) (hm : ∫ x in (0 : ℝ)..Real.pi, f x = 0) :
+    ∃ c : ℕ → ℝ, c 0 = 0 ∧
+      (∀ s : ℕ, Summable (fun j : ℕ => |c j| * (j : ℝ) ^ s)) ∧
+      (∀ j : ℕ, c j ≠ 0 → Even j) ∧
+      ∀ θ : ℝ, f θ = ∑' j : ℕ, c j * Real.cos (j * θ) :=
+  ⟨circlePiCosineCoeff f, circlePiCosineCoeff_spec hf hp he hm⟩
 
 end ContinuousFlexibility.Analysis
