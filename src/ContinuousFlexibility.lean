@@ -43,11 +43,13 @@ import ContinuousFlexibility.Analysis.ProjectiveNewtonSmoothing
 import ContinuousFlexibility.Analysis.ProjectiveNewtonTameBounds
 import ContinuousFlexibility.Analysis.ProjectiveNewtonTameData
 import ContinuousFlexibility.Analysis.RootCompositionEven
+import ContinuousFlexibility.Analysis.RootCompositionBounds
 import ContinuousFlexibility.Analysis.RootBoundaryJets
 import ContinuousFlexibility.Analysis.RootCompositionIntegral
 import ContinuousFlexibility.Analysis.RootCompositionSmooth
 import ContinuousFlexibility.Analysis.RootCompositionZeroOrder
 import ContinuousFlexibility.Analysis.RootCoordinateJets
+import ContinuousFlexibility.Analysis.RootEvenInteriorBounds
 import ContinuousFlexibility.Analysis.RootOddBounds
 import ContinuousFlexibility.Analysis.RootPowerJets
 import ContinuousFlexibility.Analysis.RootTaylorBounds
@@ -66,6 +68,7 @@ import ContinuousFlexibility.Analysis.StateControlCofiniteJets
 import ContinuousFlexibility.Analysis.StateControlCofiniteClosure
 import ContinuousFlexibility.Blueprint.Statements
 import ContinuousFlexibility.Blueprint.N12
+import ContinuousFlexibility.Blueprint.N04Root
 import ContinuousFlexibility.Contracts.Annular
 import ContinuousFlexibility.Contracts.CapInteriorClosure
 import ContinuousFlexibility.Contracts.CapInteriorFrontier

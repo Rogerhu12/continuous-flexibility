@@ -155,8 +155,8 @@ theorem contDiffOn_rootEven {G : ℝ × ℝ × ℝ → ℝ} (hG : ContDiff ℝ �
     rw [neg_neg, add_comm]
   have h := contDiffOn_even_rootSubstitution (ContinuousLinearMap.fst ℝ ℝ ℝ)
     ((uniqueDiffOn_Ici (0 : ℝ)).prod uniqueDiffOn_univ)
-    (fun p hp => by simpa only [ContinuousLinearMap.fst_apply] using hp.1) hK heK
-  simpa only [ContinuousLinearMap.fst_apply, K, H, rootEven] using h
+    (fun p hp => by simpa only [ContinuousLinearMap.coe_fst'] using hp.1) hK heK
+  simpa only [ContinuousLinearMap.coe_fst', K, H, rootEven] using h
 
 /-- The prescribed odd quotient has a smooth extension within the
 nonnegative halfspace, including its derivative value on the zero section. -/
@@ -179,10 +179,10 @@ theorem contDiffOn_rootOdd {G : ℝ × ℝ × ℝ → ℝ} (hG : ContDiff ℝ �
     rootDivideLast_even hO hoO
   have hsmooth : ContDiffOn ℝ ∞
       (fun p : PolarPoint => Q (p, p.1 ^ (3 / 2 : ℝ))) (Ici (0 : ℝ) ×ˢ univ) := by
-    simpa only [ContinuousLinearMap.fst_apply] using
+    simpa only [ContinuousLinearMap.coe_fst'] using
       contDiffOn_even_rootSubstitution (ContinuousLinearMap.fst ℝ ℝ ℝ)
         ((uniqueDiffOn_Ici (0 : ℝ)).prod uniqueDiffOn_univ)
-        (fun p hp => by simpa only [ContinuousLinearMap.fst_apply] using hp.1) hQ heQ
+        (fun p hp => by simpa only [ContinuousLinearMap.coe_fst'] using hp.1) hQ heQ
   apply hsmooth.congr
   intro p hp
   by_cases hx : p.1 = 0

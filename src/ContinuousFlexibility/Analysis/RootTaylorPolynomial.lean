@@ -4,6 +4,7 @@ import Mathlib.Analysis.Calculus.ContDiff.Operations
 import Mathlib.Analysis.Normed.Operator.Prod
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Algebra.Ring.Parity
+import Mathlib.Algebra.BigOperators.Field
 import Mathlib.Topology.Order.Compact
 import Mathlib.Tactic.FunProp
 import Mathlib.Tactic.Linarith
@@ -50,14 +51,14 @@ theorem multilinear_root_expansion
       ∑ S : Finset (Fin n), ζ ^ S.card * A (rootTaylorSlots S h) := by
   classical
   have hvec : (fun _ : Fin n => (h.1, ζ, h.2)) =
-      (fun _ : Fin n => ζ • (0, 1, 0 : ℝ × ℝ × ℝ)) +
+      (fun _ : Fin n => ζ • ((0, 1, 0) : ℝ × ℝ × ℝ)) +
         (fun _ : Fin n => (h.1, 0, h.2)) := by
     ext i <;> simp
   rw [hvec, A.map_add_univ]
   apply Finset.sum_congr rfl
   intro S _
   have hslots :
-      S.piecewise (fun _ => ζ • (0, 1, 0 : ℝ × ℝ × ℝ))
+      S.piecewise (fun _ => ζ • ((0, 1, 0) : ℝ × ℝ × ℝ))
           (fun _ => (h.1, 0, h.2)) =
         S.piecewise (fun i => ζ • rootTaylorSlots S h i) (rootTaylorSlots S h) := by
     funext i
@@ -148,8 +149,8 @@ theorem norm_iteratedFDeriv_prod_right_le
   rw [heq, L.toContinuousLinearMap.iteratedFDeriv_comp_right hshift x
     (ENat.natCast_le_of_coe_top_le_withTop le_rfl s)]
   calc
-    ‖(iteratedFDeriv ℝ s (fun z : P × E => f ((p, 0) + z)) (L x)).
-        compContinuousLinearMap (fun _ => L.toContinuousLinearMap)‖ ≤
+    ‖(iteratedFDeriv ℝ s (fun z : P × E => f ((p, 0) + z)) (L x)).compContinuousLinearMap
+        (fun _ => L.toContinuousLinearMap)‖ ≤
         ‖iteratedFDeriv ℝ s (fun z : P × E => f ((p, 0) + z)) (L x)‖ :=
       ContinuousMultilinearMap.norm_compContinuous_linearIsometry_le _ (fun _ => L)
     _ = ‖iteratedFDeriv ℝ s f (p, x)‖ := by
@@ -183,7 +184,8 @@ theorem exists_multilinear_comp_jet_bound
     calc
       ‖iteratedFDeriv ℝ i u x‖ ≤
           ∑ j ∈ Finset.range (s + 1), ‖iteratedFDeriv ℝ j u x‖ :=
-        Finset.single_le_sum (fun _ _ => norm_nonneg _)
+        Finset.single_le_sum (f := fun j => ‖iteratedFDeriv ℝ j u x‖)
+          (fun j _ => norm_nonneg (iteratedFDeriv ℝ j u x))
           (Finset.mem_range.mpr (Nat.lt_succ_of_le hi))
       _ ≤ b := hb ⟨x, hx, rfl⟩
       _ ≤ B := le_max_right _ _
@@ -231,7 +233,7 @@ private theorem rootTaylorAugmentedCoefficient_apply
     rootTaylorAugmentedCoefficient A (Fin.cons (c, 0, 0) v) = c * A v := by
   simp only [rootTaylorAugmentedCoefficient, ContinuousLinearMap.uncurryLeft_apply,
     Fin.cons_zero, Fin.tail_cons, ContinuousLinearMap.smulRight_apply,
-    ContinuousLinearMap.fst_apply, smul_apply, smul_eq_mul]
+    ContinuousLinearMap.coe_fst', smul_apply, smul_eq_mul]
 
 private theorem norm_rootTaylorAugmentedCoefficient
     (A : ContinuousMultilinearMap ℝ (fun _ : Fin n => ℝ × ℝ × ℝ) ℝ) :

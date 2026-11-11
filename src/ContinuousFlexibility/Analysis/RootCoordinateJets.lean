@@ -117,28 +117,28 @@ theorem exists_rootCoordinate_jet_bound (s : ℕ) :
   obtain ⟨D, hD, hcoeff⟩ := exists_rpowJetCoefficient_bound (3 / 2 : ℝ) s
   refine ⟨D, hD, ?_⟩
   intro σ hσ i hi his p hp hp1
-  let λ : ℝ := p.1 ^ (3 / 2 : ℝ)
-  have hλ : 0 < λ := Real.rpow_pos_of_pos hp _
-  have hλx : λ ≤ p.1 := Real.rpow_le_self_of_le_one hp.le hp1 (by norm_num)
-  have hλ1 : λ ≤ 1 := hλx.trans hp1
+  let ρ : ℝ := p.1 ^ (3 / 2 : ℝ)
+  have hρ : 0 < ρ := Real.rpow_pos_of_pos hp _
+  have hρx : ρ ≤ p.1 := Real.rpow_le_self_of_le_one hp.le hp1 (by norm_num)
+  have hρ1 : ρ ≤ 1 := hρx.trans hp1
   have hD0 : 0 ≤ D := zero_le_one.trans hD
   have hDi : D ≤ D ^ i := by simpa only [pow_one] using pow_le_pow_right₀ hD hi
-  have hratio : 1 ≤ D / λ := (le_div_iff₀ hλ).mpr (by simpa only [one_mul] using hλ1.trans hD)
-  have hone : 1 ≤ λ * (D / λ) ^ i := by
+  have hratio : 1 ≤ D / ρ := (le_div_iff₀ hρ).mpr (by simpa only [one_mul] using hρ1.trans hD)
+  have hone : 1 ≤ ρ * (D / ρ) ^ i := by
     calc
       1 ≤ D := hD
-      _ = λ * (D / λ) := by field_simp [hλ.ne'] <;> ring
-      _ ≤ λ * (D / λ) ^ i := mul_le_mul_of_nonneg_left
-        (by simpa only [pow_one] using pow_le_pow_right₀ hratio hi) hλ.le
-  have hpower : λ ^ i ≤ p.1 ^ i := pow_le_pow_left₀ hλ.le hλx i
-  have hmiddle : ‖rpowJetCoefficient (3 / 2 : ℝ) i‖ * λ / p.1 ^ i ≤
-      λ * (D / λ) ^ i := by
+      _ = ρ * (D / ρ) := by field_simp [hρ.ne'] <;> ring
+      _ ≤ ρ * (D / ρ) ^ i := mul_le_mul_of_nonneg_left
+        (by simpa only [pow_one] using pow_le_pow_right₀ hratio hi) hρ.le
+  have hpower : ρ ^ i ≤ p.1 ^ i := pow_le_pow_left₀ hρ.le hρx i
+  have hmiddle : ‖rpowJetCoefficient (3 / 2 : ℝ) i‖ * ρ / p.1 ^ i ≤
+      ρ * (D / ρ) ^ i := by
     calc
-      ‖rpowJetCoefficient (3 / 2 : ℝ) i‖ * λ / p.1 ^ i ≤ D ^ i * λ / λ ^ i :=
-        div_le_div₀ (mul_nonneg (pow_nonneg hD0 i) hλ.le)
-          (mul_le_mul_of_nonneg_right ((hcoeff i his).trans hDi) hλ.le)
-          (pow_pos hλ i) hpower
-      _ = λ * (D / λ) ^ i := by rw [div_pow]; ring
+      ‖rpowJetCoefficient (3 / 2 : ℝ) i‖ * ρ / p.1 ^ i ≤ D ^ i * ρ / ρ ^ i :=
+        div_le_div₀ (mul_nonneg (pow_nonneg hD0 i) hρ.le)
+          (mul_le_mul_of_nonneg_right ((hcoeff i his).trans hDi) hρ.le)
+          (pow_pos hρ i) hpower
+      _ = ρ * (D / ρ) ^ i := by rw [div_pow]; ring
   exact (norm_iteratedFDeriv_rootCoordinate_le hσ hi hp).trans (max_le hone hmiddle)
 
 end ContinuousFlexibility.Analysis

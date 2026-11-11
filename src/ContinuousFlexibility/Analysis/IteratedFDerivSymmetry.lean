@@ -26,10 +26,14 @@ private theorem iteratedFDeriv_cons_cons_eq (f : E → F) (n : ℕ)
       fderiv ℝ (fderiv ℝ (iteratedFDeriv ℝ n f)) x a b v := by
   rw [iteratedFDeriv_succ_apply_left]
   simp only [Fin.cons_zero, Fin.tail_cons]
-  rw [iteratedFDeriv_succ_eq_comp_left]
-  rw [(continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => E) F).symm.comp_fderiv
-    (f := fderiv ℝ (iteratedFDeriv ℝ n f)) (x := x)]
-  rfl
+  let C : (E →L[ℝ] (E [×n]→L[ℝ] F)) ≃ₗᵢ[ℝ] (E [×(n + 1)]→L[ℝ] F) :=
+    (continuousMultilinearCurryLeftEquiv ℝ (fun _ : Fin (n + 1) => E) F).symm
+  have hC : fderiv ℝ (C ∘ fderiv ℝ (iteratedFDeriv ℝ n f)) x =
+      (C : (E →L[ℝ] (E [×n]→L[ℝ] F)) →L[ℝ] (E [×(n + 1)]→L[ℝ] F)).comp
+        (fderiv ℝ (fderiv ℝ (iteratedFDeriv ℝ n f)) x) :=
+    C.comp_fderiv (𝕜 := ℝ) (f := fderiv ℝ (iteratedFDeriv ℝ n f)) (x := x)
+  change fderiv ℝ (C ∘ fderiv ℝ (iteratedFDeriv ℝ n f)) x a (Fin.cons b v) = _
+  exact congrArg (fun T : E →L[ℝ] (E [×(n + 1)]→L[ℝ] F) => T a (Fin.cons b v)) hC
 
 private theorem iteratedFDeriv_cons_cons_swap {f : E → F}
     (hf : ContDiff ℝ ∞ f) (n : ℕ) (x a b : E) (v : Fin n → E) :

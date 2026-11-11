@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.RootCompositionIntegral
+import Mathlib.Analysis.Calculus.ContDiff.Operations
 import Mathlib.Algebra.Group.EvenFunction
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
 import Mathlib.Analysis.Calculus.Deriv.Prod
@@ -59,10 +60,12 @@ theorem hasDerivAt_rootLastDerivative {G : E × ℝ → F}
 
 theorem contDiff_rootDivideLast [ProperSpace E] {G : E × ℝ → F}
     (hG : ContDiff ℝ ∞ G) : ContDiff ℝ ∞ (rootDivideLast G) := by
+  have hp : ContDiff ℝ ∞ (fun q : (E × ℝ) × ℝ => q.1.1) := contDiff_fst.fst
+  have hz : ContDiff ℝ ∞ (fun q : (E × ℝ) × ℝ => q.1.2) := contDiff_fst.snd
+  have ht : ContDiff ℝ ∞ (fun q : (E × ℝ) × ℝ => q.2) := contDiff_snd
   have hIntegrand : ContDiff ℝ ∞
       (fun q : (E × ℝ) × ℝ => rootLastDerivative G (q.1.1, q.2 * q.1.2)) :=
-    (contDiff_rootLastDerivative hG).comp
-      (contDiff_fst.fst.prodMk (contDiff_snd.mul contDiff_fst.snd))
+    (contDiff_rootLastDerivative hG).comp (hp.prodMk (ht.mul hz))
   exact contDiff_intervalIntegral_of_contDiff hIntegrand 0 1
 
 /-- The integral divided difference has the expected factorization. -/
