@@ -71,7 +71,8 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     have h := hd.comp t ((hasDerivAt_id t).mul_const z.2)
     simpa only [F, G, path, Function.comp_def, mul_comm] using h
   let ξ : HeightPair S := (liftSectorParameter S C z).1.1
-  obtain ⟨η, _, _, hlocal, henergy⟩ := hN.exists_height_pair_plateau_directions hS hT ξ
+  let directions := hN.exists_height_pair_plateau_directions hS hT ξ
+  let η : ℕ → HeightPair S := directions.choose
   have hmono : Monotone (heightPairGrading S) :=
     pairGrading_monotone
       (gradedSeminorm_monotone (fun i => (S.height (3 / 4 : ℝ)).level i)
@@ -86,7 +87,9 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
       (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (path 1) (hpath 1 (by simp)) Fin.elim0)
       (fun m => zero_le_one.trans (hM m)) hH hderiv
     intro s
-    obtain ⟨K, hK, hpoint⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel 0 s
+    let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel 0 s
+    let K : ℝ := pointData.choose
+    have hK : 0 < K := pointData.choose_spec.1
     let j : ℕ := max base (s + loss)
     let E : ℕ → ℝ≥0∞ := fun m =>
       ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
@@ -102,12 +105,12 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
       ((S.height (3 / 4 : ℝ)).decode ξ.1) m).toReal
     have he : 0 ≤ e := Real.sqrt_nonneg _
     have hbase : heightPairGrading S base (η m) ≤ e :=
-      (hmono (le_max_left _ _) (η m)).trans ((henergy j).2 m)
+      (hmono (le_max_left _ _) (η m)).trans ((directions.choose_spec.2.2.2 j).2 m)
     have hhigh : heightPairGrading S (s + loss) (η m) ≤ e :=
-      (hmono (le_max_right _ _) (η m)).trans ((henergy j).2 m)
+      (hmono (le_max_right _ _) (η m)).trans ((directions.choose_spec.2.2.2 j).2 m)
     have hη : ∃ a : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
         heightPairField S (η m) (r, ψ) = stateU S (liftSectorParameter S C (path t)).1 (r, ψ) + a := by
-      obtain ⟨a, ha⟩ := hlocal m
+      obtain ⟨a, ha⟩ := directions.choose_spec.2.2.1 m
       refine ⟨a, fun r hr ψ => ?_⟩
       rw [hpath_eq]
       exact ha r hr ψ
@@ -120,7 +123,7 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
             (add_le_add (le_refl 2) (hgrade (s + loss) t ht)) (apply_nonneg _ _)) (le_refl _)
         _ ≤ A * e + e := add_le_add (mul_le_mul_of_nonneg_left hbase hA) hhigh
         _ = _ := by ring
-    have hp := hpoint m b c θ (by omega) (path t) (hpath t ht) (η m) hη
+    have hp := pointData.choose_spec.2 m b c θ (by omega) (path t) (hpath t ht) (η m) hη
     simp only [Nat.cast_zero, zero_add] at hp
     have hc : T.M (T.sample m) ^ (c + 1) ≤ T.M (T.sample m) ^ (s + 1) :=
       pow_le_pow_right₀ (hM m) (by omega)
