@@ -48,7 +48,9 @@ theorem matchedOuterPoisson_norm_eq_unit_candidate {D : ReferenceData}
       (M.A i i ^ 2 + M.B i i ^ 2) * (z.1 ^ 2 + z.2 ^ 2) := by
     dsimp only [a, outerStatePair]
     ring
-  have ha₂ : a ^ 2 = 1 := by simpa only [horth, zero_pow (by decide), add_zero, hnorm i, hz, one_mul] using hid
+  have ha₂ : a ^ 2 = 1 := by
+    simpa only [horth, zero_pow (by decide : (2 : ℕ) ≠ 0), add_zero, hnorm i, hz, one_mul]
+      using hid
   have habs : |a| = 1 := by
     calc
       |a| = sqrt (a ^ 2) := (sqrt_sq_eq_abs a).symm
@@ -62,7 +64,6 @@ theorem matchedOuterPoisson_norm_eq_unit_candidate {D : ReferenceData}
       simp only [ite_true]
       dsimp only [a, outerStatePair]
       field_simp [(sqrt_pos.mpr (hscale i)).ne']
-      ring
     · simp only [if_neg hki, zero_div, mul_zero, add_zero]
   have hzero : (P.1 : ℝ → ℝ) =ᵐ[
       (radialHilbertMeasure D).restrict (Ioo M.innerLeft M.innerRight)] fun _ => 0 := by

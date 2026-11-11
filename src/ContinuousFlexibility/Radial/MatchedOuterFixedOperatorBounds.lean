@@ -87,7 +87,11 @@ theorem exists_matchedMorse_fixed_whole_radius_bounds
   let radius : ℝ → ℝ := fun x => outerOutwardRadius right (κ * x)
   have hradius : Continuous radius := by
     dsimp only [radius]
-    cases right <;> fun_prop
+    cases right
+    · change Continuous (fun x : ℝ => -(κ * x))
+      exact (continuous_const.mul continuous_id).neg
+    · change Continuous (fun x : ℝ => κ * x)
+      exact continuous_const.mul continuous_id
   have hscale (r : ℝ) : outerOutwardRadius right (κ * r) =
       κ * outerOutwardRadius right r := by cases right <;> simp [outerOutwardRadius]
   have hcb : outerOutwardRadius right (morseOuterDeepEntrance M right N) <

@@ -64,10 +64,12 @@ theorem terminalMorseCap_value_bound (long : Bool)
     have he : j ^ 2 *
         (-morseRho A B (terminalMorseLayerOrigin long A B + x) * R x) / R x =
         j ^ 2 * (-morseRho A B (terminalMorseLayerOrigin long A B + x)) := by
-      simpa only [mul_assoc] using
-        mul_div_cancel_right₀
+      exact (congrArg (fun t : ℝ => t / R x)
+        (mul_assoc (j ^ 2)
+          (-morseRho A B (terminalMorseLayerOrigin long A B + x)) (R x)).symm).trans
+        (mul_div_cancel_right₀
           (j ^ 2 * (-morseRho A B (terminalMorseLayerOrigin long A B + x)))
-          (show R x ≠ 0 from hpos.ne')
+          (show R x ≠ 0 from hpos.ne'))
     rw [he]
     exact mul_nonneg (sq_nonneg _) hq
   have hends := terminalMorseCap_endpoints long A B s r

@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.MatchedOuterPhysicalRadiusState
 import ContinuousFlexibility.Radial.MatchedOuterRadiusMeasure
 import ContinuousFlexibility.Radial.MatchedOuterScaledRobinLine
+import ContinuousFlexibility.Radial.SelectedFirstNaturalTransport
 import ContinuousFlexibility.Radial.MatchedOuterModalCells
 import ContinuousFlexibility.Radial.MatchedFiniteEnvelope
 
@@ -131,9 +132,12 @@ theorem matchedOuterTailEnvelope_of_radius_data
       (by simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hne) z
     simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hi
   · apply hcolumn
+    have hVeq : H'.V = fun x => H.V (x / κ) :=
+      (H.physicalRadiusScale_fields hD hE hκ hβ hlam.ne' hcut hend
+        hprofile hprofileCut).2.2.1
     filter_upwards [Lp.coeFn_smul (sqrt (β * lam))⁻¹ (hV'.toLp H'.V), hV'.coeFn_toLp]
       with x hs hx
     rw [hs]
-    simp only [Pi.smul_apply, smul_eq_mul, hx, div_eq_mul_inv, mul_comm]
+    simp only [Pi.smul_apply, smul_eq_mul, hx, hVeq, div_eq_mul_inv, mul_comm]
 
 end ContinuousFlexibility.Radial

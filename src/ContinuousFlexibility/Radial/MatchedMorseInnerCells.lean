@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Radial.MatchedInnerInterpolationWalls
 import ContinuousFlexibility.Radial.MatchedMorseLocalizerWeights
 import ContinuousFlexibility.Radial.MatchedMorseInnerWeightTransfer
 import ContinuousFlexibility.Radial.MatchedInnerSupportedCells
