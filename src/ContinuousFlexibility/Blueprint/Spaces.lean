@@ -5,7 +5,7 @@ import ContinuousFlexibility.Blueprint.Statements
 
 The weighted height, source and circle spaces with their tame structure, and smooth flat extension of their elements.
 
-Source: `paper/flexible-surface-rewrite/07-fixed-geometry.tex` lines 72–157.
+Source: `paper/flexible-surface-readable/07-fixed-geometry.tex` lines 108–237 and 399–506.
 
 Task file: `docs/tasks/Spaces.md`. The statement is frozen; replace the `sorry`.
 -/

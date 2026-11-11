@@ -2,6 +2,14 @@
 
 Last updated: 2026-11-11.
 
+## Active lines
+
+- `line/Spaces` (2026-11-11): working on W02 and W03 from `main` at
+  `97f8b35`. The existing `MaterialHeightRegularity` module proves the two
+  fixed-height clauses of W03. The parameter-family clause and the complete
+  W02 space construction are being checked independently. The node remains
+  open until its exact statement, axiom audit and CI all pass.
+
 ## Target
 
 `thm:main` of the manuscript. The statement was first taken from the 62-page version
