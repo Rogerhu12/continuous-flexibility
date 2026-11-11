@@ -36,7 +36,7 @@ theorem centralColumnKernel_source_compatible (g u f : HermiteL2)
     (hf : (u, f) ∈ centralRadialClosedGraph 2) :
     ⟪centralColumnKernel g, f⟫_ℝ = 0 := by
   rw [centralColumnKernel, real_inner_smul_left,
-    real_inner_comm centralRadialKernelVector f,
+    real_inner_comm f centralRadialKernelVector,
     centralRadialClosedGraph_two_compat u f hf, mul_zero]
 
 theorem centralColumnKernel_spans (g : HermiteL2)
@@ -54,7 +54,7 @@ theorem centralColumn_reduced_solves (g : HermiteL2)
   rw [centralColumnKernel, real_inner_smul_left] at hf
   have horth := (mul_eq_zero.mp hf).resolve_left (inv_ne_zero hg)
   exact centralRadialReducedHilbertInverse_graph_compatible f
-    ((real_inner_comm f centralRadialKernelVector).trans horth)
+    ((real_inner_comm centralRadialKernelVector f).trans horth)
 
 def centralColumnInverse (g : HermiteL2) :
     (HermiteL2 × ℝ) →L[ℝ] (HermiteL2 × ℝ) :=

@@ -148,12 +148,13 @@ theorem contDiff_trueBorderColumn_of_support
   · exact hflux.contDiffAt.sub
       (((contDiffAt_const.mul hdv.contDiffAt).div contDiffAt_id hr.ne').mul hφ.contDiffAt)
   · have hrI : r ∉ Icc l h := fun hm => hr (hl.trans_le hm.1)
+    have hn : ∀ᶠ t in 𝓝 r, t ∉ Icc l h :=
+      isClosed_Icc.isOpen_compl.mem_nhds hrI
     have hzero : (fun r => radialJacobi 4 (fun t => w t * χ t) φ r) =ᶠ[𝓝 r]
         (fun _ => (0 : ℝ)) :=
-      (isClosed_Icc.isOpen_compl.mem_nhds hrI).mono fun t ht =>
-        border_column_support hsupp ht
-    exact (contDiffAt_const : ContDiffAt ℝ ∞ (fun _ : ℝ => (0 : ℝ)) r).
-      congr_of_eventuallyEq hzero
+      hn.mono fun t ht => border_column_support hsupp ht
+    exact ContDiffAt.congr_of_eventuallyEq
+      (contDiffAt_const : ContDiffAt ℝ ∞ (fun _ : ℝ => (0 : ℝ)) r) hzero
 
 /-- The metric border can be normalized before constructing any global inverse.
 Only agreement with the central model on the chosen positive cap is needed.
@@ -224,7 +225,7 @@ theorem exists_central_true_border
     intro r hr
     have hgr : r ∈ Function.support g := by
       intro hz
-      exact hr (by rw [hz, zero_mul])
+      exact hr (by change g r * φ r = 0; rw [hz, zero_mul])
     have hi := hgcap (subset_tsupport g hgr)
     exact ⟨hi.1, hi.2.le⟩
   have hwhole : (∫ r : ℝ, g r * φ r) = 1 := by

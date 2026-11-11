@@ -34,7 +34,7 @@ theorem centralCompactColumnFunction_transform {scale : ℝ} (hscale : 0 < scale
   have hvarpi : centralRadialVarpi scale (centralRadius x) =
       centralRadialAmplitude scale x ^ 2 / deriv centralRadius x := by
     apply (eq_div_iff hd).mpr
-    exact (centralRadialVarpi_pullback_density scale x).trans
+    simpa only [mul_comm] using (centralRadialVarpi_pullback_density scale x).trans
       (centralRadialAmplitude_sq hscale x).symm
   rw [centralCompactColumnFunction, centralCompactColumnSourceFunction,
     centralRadialTestPullback, hvarpi]
@@ -66,8 +66,8 @@ theorem centralCompactColumnFunction_memLp {scale : ℝ} (hscale : 0 < scale)
         centralCompactColumnSourceFunction scale g :=
     funext (centralCompactColumnFunction_transform hscale g)
   rw [heq]
-  exact (contDiff_centralCompactColumnSourceFunction hscale hg).continuous.
-    memLp_of_hasCompactSupport (centralCompactColumnSourceFunction_hasCompactSupport scale hc hp)
+  exact (contDiff_centralCompactColumnSourceFunction hscale hg).continuous.memLp_of_hasCompactSupport
+    (centralCompactColumnSourceFunction_hasCompactSupport scale hc hp)
 
 def centralCompactColumn {scale : ℝ} (hscale : 0 < scale)
     {g : ℝ → ℝ} (hg : ContDiff ℝ ∞ g) (hc : HasCompactSupport g)

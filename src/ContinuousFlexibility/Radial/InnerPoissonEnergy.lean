@@ -98,6 +98,7 @@ theorem innerPoissonEnergyMatrix_eq (h : InnerPoissonGreenData base q G L F Z)
           q (G (F i)) (innerPoissonLift G L F j) := by
       simp only [innerPoissonEnergyMatrix, innerPoissonLift, map_sub,
         ContinuousLinearMap.sub_apply]
+      ring
     _ = q (L i) (innerPoissonLift G L F j) := by rw [horth, sub_zero]
     _ = q (L i) (L j) - innerPoissonCorrectionMatrix base G F i j := by
       rw [innerPoissonLift, map_sub, h.lift_identity i (G (F j))
@@ -114,7 +115,7 @@ theorem norm_base_innerPoissonLift_le (i : ι) :
     ‖base (innerPoissonLift G L F i)‖ ≤
       ‖base (L i)‖ + ‖base.comp G‖ * ‖F i‖ := by
   rw [innerPoissonLift, map_sub]
-  refine (norm_sub_le _ _).trans (add_le_add_left ?_ _)
+  refine (norm_sub_le _ _).trans (add_le_add (le_refl _) ?_)
   simpa only [ContinuousLinearMap.comp_apply] using (base.comp G).le_opNorm (F i)
 
 /-- Each correction entry contains one norm of each residual column. -/

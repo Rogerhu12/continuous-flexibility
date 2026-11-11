@@ -61,14 +61,14 @@ theorem simpleKernelBorderOutput_apply (R : E →L[ℝ] E) (φ g : E) (F : E × 
         (F.2 - ⟪g, R (simpleKernelCorrectedSource φ g F.1)⟫_ℝ) • φ := by
   simp only [simpleKernelBorderOutput, ContinuousLinearMap.add_apply,
     ContinuousLinearMap.sub_apply, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply,
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
     ContinuousLinearMap.smulRight_apply, innerSL_apply_apply]
 
 theorem simpleKernelBorderInverse_apply (R : E →L[ℝ] E) (φ g : E) (F : E × ℝ) :
     simpleKernelBorderInverse R φ g F =
       (simpleKernelBorderOutput R φ g F, ⟪φ, F.1⟫_ℝ) := by
   simp only [simpleKernelBorderInverse, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.comp_apply, ContinuousLinearMap.fst_apply, innerSL_apply_apply]
+    ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst', innerSL_apply_apply]
 
 /-- The constructed map solves the full symmetric bordered equation. -/
 theorem simpleKernelBorderInverse_solves (L : Submodule ℝ (E × E))
@@ -80,7 +80,7 @@ theorem simpleKernelBorderInverse_solves (L : Submodule ℝ (E × E))
     (simpleKernelCorrectedSource_orthogonal φ g hpair F.1)
   have hsum := L.add_mem hbase (L.smul_mem
     (F.2 - ⟪g, R (simpleKernelCorrectedSource φ g F.1)⟫_ℝ) hφ)
-  have hpair' : ⟪g, φ⟫_ℝ = 1 := (real_inner_comm g φ).trans hpair
+  have hpair' : ⟪g, φ⟫_ℝ = 1 := (real_inner_comm φ g).trans hpair
   rw [simpleKernelBorderInverse_apply]
   constructor
   · rw [simpleKernelBorderOutput_apply, ← simpleKernelCorrectedSource_apply]
@@ -119,7 +119,7 @@ theorem simpleKernelBorderInverse_unique (L : Submodule ℝ (E × E))
   have hd' : (U.1 - V.1, 0) ∈ L := by
     simpa only [Prod.sub_def, hc, sub_self] using hd
   obtain ⟨c, hdiff⟩ := hker (U.1 - V.1) hd'
-  have hpair' : ⟪g, φ⟫_ℝ = 1 := (real_inner_comm g φ).trans hpair
+  have hpair' : ⟪g, φ⟫_ℝ = 1 := (real_inner_comm φ g).trans hpair
   have hrow : ⟪g, U.1 - V.1⟫_ℝ = 0 := by
     rw [inner_sub_right, hU.2, hV.2, sub_self]
   rw [hdiff, real_inner_smul_right, hpair', mul_one] at hrow
