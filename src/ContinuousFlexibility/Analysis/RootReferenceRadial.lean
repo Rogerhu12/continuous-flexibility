@@ -110,6 +110,7 @@ theorem rootOddCoefficient_rootInverseCoordinate_radial
       funext fun ζ => rootInverseCoordinate_radial_formula hinit hflow 0 ζ θ
     rw [he]
     have hd := ((hasDerivAt_id (0 : ℝ)).mul_const (rootRadialDisplacement Θ 0)).const_sub θ
+    simp only [id_eq] at hd
     rw [hd.deriv]
     ring
   · have hpow : x ^ (3 / 2 : ℝ) ≠ 0 := (Real.rpow_pos_of_pos hx _).ne'

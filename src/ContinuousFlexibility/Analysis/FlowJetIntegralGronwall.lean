@@ -43,8 +43,8 @@ theorem flowJet_norm_le_of_integral_equation
       ‖u τ‖ = ‖c + ∫ r in (0 : ℝ)..τ, q r‖ := congrArg norm (heq τ hτ1)
       _ ≤ ‖c‖ + ‖∫ r in (0 : ℝ)..τ, q r‖ := norm_add_le _ _
       _ ≤ ‖c‖ + ∫ r in (0 : ℝ)..τ, ‖q r‖ :=
-        add_le_add_left (intervalIntegral.norm_integral_le_integral_norm hτ.1) _
-      _ ≤ _ := add_le_add_left hmono _
+        add_le_add le_rfl (intervalIntegral.norm_integral_le_integral_norm hτ.1)
+      _ ≤ _ := add_le_add le_rfl hmono
   have hg := integral_gronwall_of_continuousOn
     (u := fun r => ‖u r‖) (A := α) (B := fun _ => M) (δ := ‖c‖) ht.1
     (hu.norm.mono (Icc_subset_Icc le_rfl ht.2))
@@ -61,7 +61,7 @@ theorem flowJet_norm_le_of_integral_equation
       (fun r hr => hα0 r ⟨ht.1.trans hr.1, hr.2⟩))
   have hfirst : ‖c‖ + (∫ _r in (0 : ℝ)..t, M) ≤ ‖c‖ + M := by
     simp only [intervalIntegral.integral_const, sub_zero, smul_eq_mul]
-    exact add_le_add_left (mul_le_of_le_one_left hM ht.2) _
+    exact add_le_add le_rfl (mul_le_of_le_one_left hM ht.2)
   calc
     ‖u t‖ ≤ (‖c‖ + ∫ _r in (0 : ℝ)..t, M) *
         Real.exp (∫ r in (0 : ℝ)..t, α r) := hg

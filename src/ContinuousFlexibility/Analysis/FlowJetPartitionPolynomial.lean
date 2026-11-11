@@ -102,7 +102,10 @@ theorem flowJetPolynomial_exists_partition_forcing (n : ℕ)
       refine ⟨flowJetPolynomialMul [(1, [c.length - 1])] R, ?_, ?_⟩
       · have hd := (FlowJetPolynomialDegreeLE.atom (c.length - 1)).mul hR
         have hw := flowJet_partition_weight c (Nat.succ_pos n)
-        simpa only [Nat.add_sub_cancel] using hw ▸ hd
+        have hw' : (c.length - 1) + ∑ j, (c.partSize j - 1) = n := by
+          simpa only [Nat.add_sub_cancel] using hw
+        rw [hw'] at hd
+        exact hd
       · intro X
         rw [if_pos hc, flowJetPolynomialEval_mul, flowJetPolynomialEval_atom, heR X]
         congr 1

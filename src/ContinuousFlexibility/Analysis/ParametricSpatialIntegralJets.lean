@@ -31,8 +31,12 @@ theorem contDiff_parametricSpatialJet {f : Q × ℝ → E}
     ContDiff ℝ ∞ (parametricSpatialJet f n) := by
   induction n with
   | zero =>
-    simpa only [parametricSpatialJet, iteratedFDeriv_zero_eq_comp, Function.comp_apply] using
-      (continuousMultilinearCurryFin0 ℝ Q E).symm.contDiff.comp hf
+    have he : parametricSpatialJet f 0 =
+        (continuousMultilinearCurryFin0 ℝ Q E).symm ∘ f := by
+      funext z
+      simp only [parametricSpatialJet, iteratedFDeriv_zero_eq_comp, Function.comp_apply]
+    rw [he]
+    exact (continuousMultilinearCurryFin0 ℝ Q E).symm.contDiff.comp hf
   | succ n ih =>
     have haux : ContDiff ℝ ∞
         (fun z : (Q × ℝ) × Q => parametricSpatialJet f n (z.2, z.1.2)) :=
@@ -90,9 +94,10 @@ theorem parametricIntervalIntegral_contDiff_and_iteratedFDeriv
       (hj n) hc' (hasFDerivAt_parametricSpatialJet hf n) a b q
     have hI : (∫ t in a..b, L (parametricSpatialJet f (n + 1) (q, t))) =
         L (∫ t in a..b, parametricSpatialJet f (n + 1) (q, t)) := by
-      simpa only [LinearIsometryEquiv.coe_toLinearIsometry] using
-        L.toLinearIsometry.intervalIntegral_comp_comm (a := a) (b := b) (μ := volume)
-          (fun t => parametricSpatialJet f (n + 1) (q, t))
+      have hc : Continuous (fun t : ℝ => parametricSpatialJet f (n + 1) (q, t)) :=
+        (hj (n + 1)).comp (continuous_const.prodMk continuous_id)
+      exact L.toContinuousLinearEquiv.toContinuousLinearMap.intervalIntegral_comp_comm
+        (𝕜 := ℝ) (hc.intervalIntegrable a b)
     rw [hI] at hh
     exact hh
   have hjet : ∀ n : ℕ, ∀ q : Q,

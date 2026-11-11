@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.FlowJetLinearization
+import Mathlib.Analysis.Calculus.Deriv.Prod
 import Mathlib.Analysis.Normed.Operator.Prod
 
 /-!
@@ -64,9 +65,15 @@ theorem flowJet_linear_augmented_jet (L : (P × ℝ) →L[ℝ] ℝ)
         ((L : P × ℝ → ℝ) ∘ (fun y : P × ℝ => (y.1, h y))) x =
       iteratedFDeriv ℝ n (flowJet_parameterLinearPart L : P × ℝ → ℝ) x +
         L (0, 1) • iteratedFDeriv ℝ n h x := by
+  have hs : ContDiffAt ℝ n (L (0, 1) • h) x := by
+    have he : (fun y : P × ℝ => L (0, 1) • h y) = L (0, 1) • h := by
+      funext y
+      exact (Pi.smul_apply _ _ y).symm
+    rw [← he]
+    exact (hh.const_smul (L (0, 1))).contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)
   rw [flowJet_linear_augmented_eq, iteratedFDeriv_add_apply
     (flowJet_parameterLinearPart L).contDiff.contDiffAt
-    ((hh.const_smul _).contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)),
+    hs,
     iteratedFDeriv_const_smul_apply
       (hh.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))]
 
@@ -129,7 +136,7 @@ theorem flowJet_augmented_comp_first_norm_le
         ‖iteratedFDeriv ℝ 1 h x‖ := by
       rw [norm_iteratedFDeriv_one, (flowJet_parameterLinearPart L).fderiv,
         norm_smul, Real.norm_eq_abs, ha]
-      exact add_le_add_right (flowJet_parameterLinearPart_norm_le L) _
+      exact add_le_add (flowJet_parameterLinearPart_norm_le L) le_rfl
     _ = _ := rfl
 
 /-- At every higher order, only the actual angular derivative multiplies
@@ -185,6 +192,6 @@ theorem flowJet_augmented_comp_high_norm_le
         ‖iteratedFDeriv ℝ n ((L : P × ℝ → ℝ) ∘ H) x‖ := norm_add_le _ _
     _ ≤ _ := by
       rw [hlinear, add_comm]
-      exact add_le_add_left hnonlinear _
+      exact add_le_add le_rfl hnonlinear
 
 end ContinuousFlexibility.Analysis

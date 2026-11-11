@@ -69,7 +69,7 @@ theorem n04FlowJetsTarget_proof : N04FlowJetsTarget := by
           A 0 * W ^ (A 0) * (1 + p (0 + max loss inputLoss) z)
       rw [norm_iteratedFDeriv_zero, Real.norm_eq_abs, Nat.zero_add]
       exact hb.trans (mul_le_mul_of_nonneg_left
-        (add_le_add_left ((hp (le_max_right loss inputLoss)) z) 1)
+        (add_le_add le_rfl ((hp (le_max_right loss inputLoss)) z))
         (mul_nonneg (zero_le_one.trans (hA 0)) (Real.rpow_nonneg hW0 _)))
     | succ n =>
       let M : ℕ → ℝ := fun k =>
@@ -110,8 +110,8 @@ theorem n04FlowJetsTarget_proof : N04FlowJetsTarget := by
         _ ≤ C n * W ^ (C n) * (1 + p ((n + 1) + loss) z) :=
           hestimate n z hz W hW
         _ ≤ _ := mul_le_mul_of_nonneg_left
-          (add_le_add_left
-            ((hp (Nat.add_le_add_left (le_max_left loss inputLoss) (n + 1))) z) 1)
+          (add_le_add le_rfl
+            ((hp (Nat.add_le_add_left (le_max_left loss inputLoss) (n + 1))) z))
           (mul_nonneg (hC n).le (Real.rpow_nonneg hW0 _))
 
 end ContinuousFlexibility.Analysis

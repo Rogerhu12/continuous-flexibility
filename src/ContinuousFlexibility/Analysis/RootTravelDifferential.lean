@@ -132,6 +132,8 @@ theorem fderiv_extendedRootEvenOddChart_scaled_travel
     (((hV.hasFDerivAt.fun_sub hU.hasFDerivAt).const_mul (1 / 2 : ℝ)).prodMk
       ((hU.hasFDerivAt.fun_add hV.hasFDerivAt).const_mul (1 / 2 : ℝ))).differentiableAt
   have hτ : 0 < (F p).1 := by
+    change 0 < (characteristicTravelChart (rootCharacteristicCoordinate G 1)
+      (rootCharacteristicCoordinate G (-1)) p).1
     rw [characteristicTravelChart_rootCharacteristicCoordinate G hp]
     exact mul_pos (Real.rpow_pos_of_pos hp _) hχ
   have hcoord : rootTravelPower ((F p).1) = (extendedRootEvenOddChart G p).1 :=
@@ -160,7 +162,7 @@ theorem fderiv_extendedRootEvenOddChart_scaled_travel
     exact extendedRootEvenOddChart_eq_rootTravelPower G hq hraw.le
   have hB := hd.congr_of_eventuallyEq he
   rw [hB.fderiv]
-  simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.smul_apply,
+  simp only [F, ContinuousLinearMap.prod_apply, smul_apply,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
     ContinuousLinearMap.coe_snd', smul_eq_mul]
 

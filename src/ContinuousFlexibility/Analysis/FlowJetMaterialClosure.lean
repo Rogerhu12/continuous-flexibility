@@ -31,6 +31,7 @@ private theorem flow_list_prod_get (ks : List ℕ) (X : ℕ → ℝ) :
     (∏ i : Fin ks.length, X (ks.get i)) = (ks.map X).prod := by
   rw [← List.prod_ofFn]
   have h : List.ofFn (fun i : Fin ks.length => X (ks.get i)) = ks.map X := by
+    change List.ofFn (X ∘ List.get ks) = ks.map X
     rw [← List.map_ofFn, List.ofFn_get]
   rw [h]
 
@@ -77,7 +78,11 @@ theorem flowJetPolynomial_le_material_one_high
       obtain ⟨C, hC, hbound⟩ := hprod (List.get (k :: ks)) s
         (by simpa only [flow_list_sum_get] using hs)
       refine ⟨C, hC, fun z hz => ?_⟩
-      simpa only [flow_list_prod_get] using hbound z hz
+      calc
+        ((k :: ks).map (fun j => 1 + p (j + offset) z)).prod =
+            ∏ i : Fin (k :: ks).length, 1 + p ((k :: ks).get i + offset) z :=
+          (flow_list_prod_get (k :: ks) (fun j => 1 + p (j + offset) z)).symm
+        _ ≤ C * (1 + p (s + loss) z) := hbound z hz
   refine ⟨base, loss, ?_⟩
   intro s P hP A hA
   have hA0 (k : ℕ) : 0 ≤ A k := zero_le_one.trans (hA k)

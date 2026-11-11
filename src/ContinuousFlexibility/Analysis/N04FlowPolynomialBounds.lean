@@ -93,7 +93,7 @@ theorem exists_n04Flow_spatialJet_polynomial (Λ : ℝ) (n : ℕ) :
           _ ≤ (‖iteratedFDeriv ℝ 1 (fun y : N04FlowPoint => y.2) q‖ + M 0) *
               Real.exp Λ := hb
           _ ≤ (1 + M 0) * Real.exp Λ :=
-            mul_le_mul_of_nonneg_right (add_le_add_right hc _) (Real.exp_pos _).le
+            mul_le_mul_of_nonneg_right (add_le_add hc le_rfl) (Real.exp_pos _).le
           _ = flowJetPolynomialEval P M := by
             simp only [P, flowJetPolynomialEval_mul, flowJetPolynomialEval_const,
               flowJetPolynomialEval_append, flowJetPolynomialEval_atom]
@@ -152,7 +152,7 @@ theorem exists_n04Flow_spatialJet_polynomial (Λ : ℝ) (n : ℕ) :
               exact mul_le_mul hrawc
                 (Finset.prod_le_prod₀
                   (fun _ _ => add_nonneg zero_le_one (norm_nonneg _))
-                  (fun j _ => add_le_add_left (hinner j) 1))
+                  (fun j _ => add_le_add le_rfl (hinner j)))
                 (Finset.prod_nonneg fun _ _ =>
                   add_nonneg zero_le_one (norm_nonneg _)) (hM _)
             · rw [if_neg hc, if_neg hc]

@@ -65,6 +65,7 @@ theorem abs_integral_positiveEndpointCutoff_mul
               rw [Metric.mem_ball, Real.dist_eq,
                 abs_of_nonpos (by linarith [hx'.2] : x - c ≤ 0)]
               linarith [hx'.2]
+          dsimp only
           rw [positiveEndpointCutoff_eq_zero_of_not_mem_ball hδ hxout, zero_mul]
         _ = 0 := by simp
     have hsplit := intervalIntegral.integral_add_adjacent_intervals
@@ -102,8 +103,10 @@ theorem integral_positiveEndpointCutoff_complement_lower
       (fun _ _ => contDiffAt_const) (fun _ _ => by norm_num)
     rw [intervalIntegral.integral_symm, abs_neg] at h
     simpa only [mul_one, one_mul] using h
-  have hL := (contDiff_positiveEndpointCutoff l δ).continuous.intervalIntegrable l r
-  have hR := (contDiff_positiveEndpointCutoff r δ).continuous.intervalIntegrable l r
+  have hL : IntervalIntegrable (positiveEndpointCutoff l δ) MeasureTheory.volume l r :=
+    (contDiff_positiveEndpointCutoff l δ).continuous.intervalIntegrable l r
+  have hR : IntervalIntegrable (positiveEndpointCutoff r δ) MeasureTheory.volume l r :=
+    (contDiff_positiveEndpointCutoff r δ).continuous.intervalIntegrable l r
   rw [intervalIntegral.integral_sub (intervalIntegrable_const.sub hL) hR,
     intervalIntegral.integral_sub intervalIntegrable_const hL,
     intervalIntegral.integral_const]

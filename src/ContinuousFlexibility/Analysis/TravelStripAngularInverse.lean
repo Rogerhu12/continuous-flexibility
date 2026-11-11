@@ -80,7 +80,7 @@ theorem planeJacobian_preserve_first
   unfold planeJacobian angularPartial
   rw [hh.fderiv]
   simp only [ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
-    one_mul, zero_mul, sub_zero]
+    one_mul, mul_zero, sub_zero]
 
 /-- Smoothness of the actual angular inverse follows from a genuine
 triangular planar inverse, throughout the open radial parameter set. -/
@@ -105,14 +105,16 @@ theorem contDiffOn_parameterizedCircleInverse_of_strictMono
     rintro ⟨r, θ⟩ hp ⟨s, η⟩ hq he
     have hrs : r = s := congrArg Prod.fst he
     subst s
-    apply Prod.ext rfl
-    exact (hMono r hp.1).injective (congrArg Prod.snd he)
+    apply Prod.ext
+    · rfl
+    · exact (hMono r hp.1).injective (congrArg Prod.snd he)
   have hMaps : MapsTo A (I ×ˢ univ) (I ×ˢ univ) :=
     fun p hp => ⟨hp.1, mem_univ _⟩
   have hRight : RightInvOn A H (I ×ˢ univ) := by
     intro p hp
-    apply Prod.ext rfl
-    exact Function.rightInverse_invFun (hSurj p.1 hp.1) p.2
+    apply Prod.ext
+    · rfl
+    · exact Function.rightInverse_invFun (hSurj p.1 hp.1) p.2
   exact (contDiffOn_planar_rightInverse_of_injOn hOpen hOpen hH hJ hInj hMaps hRight).snd
 
 end ContinuousFlexibility.Analysis
