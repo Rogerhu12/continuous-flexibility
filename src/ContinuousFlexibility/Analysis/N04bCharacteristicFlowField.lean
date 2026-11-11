@@ -61,7 +61,7 @@ theorem n04b_actualMinusField_regular
       n04b_through03_root_coefficient_collar hS hN hfield hz hsector hp.1 hroot
     have hnear : ∀ᶠ q : PolarPoint in 𝓝 p, |q.1 - p.1| < δ :=
       (continuous_fst.sub continuous_const).abs.continuousAt.preimage_mem_nhds
-        (Iio_mem_nhds (by simpa only [sub_self, abs_zero] using hδ))
+        (Iio_mem_nhds (by simpa only [Pi.sub_apply, sub_self, abs_zero] using hδ))
     filter_upwards [hnear] with q hq
     obtain ⟨_, ha, hb, hc⟩ := hc q.1 q.2 hq
     dsimp only [F, minusCharacteristicSpeed]
@@ -108,7 +108,12 @@ theorem n04b_actualMinusField_regular
     have hc : ContinuousAt (mixedDerivative 0 n F) p :=
       ((contDiffOn_mixedDerivative (isOpen_Ioo.prod isOpen_univ) hinterior 0 n).contDiffAt
         ((isOpen_Ioo.prod isOpen_univ).mem_nhds hi)).continuousAt
-    simpa only [mixedDerivative, iteratedDeriv_zero] using hc.continuousWithinAt
+    have he : mixedDerivative 0 n F =
+        fun q : PolarPoint => iteratedDeriv n (fun θ => F (q.1, θ)) q.2 := by
+      funext q
+      simp only [mixedDerivative, iteratedDeriv_zero]
+    rw [he] at hc
+    exact hc.continuousWithinAt
   refine ⟨hab, Real.pi_pos, hinterior,
     n04b_angularRegular_closedStrip_of_jets hab.le hs hj, ?_⟩
   intro r hr θ
@@ -118,7 +123,7 @@ theorem n04b_actualMinusField_regular
       n04bCharacteristicHalfGap (L.coefficients z) (r, θ + Real.pi) =
     n04bCharacteristicDrift (L.coefficients z) (r, θ) -
       n04bCharacteristicHalfGap (L.coefficients z) (r, θ)
-  rw [hperiod.1 θ, hperiod.2 θ]
+  exact congrArg₂ (fun a b : ℝ => a - b) (hperiod.1 θ) (hperiod.2 θ)
 
 /-- The same N03 witness has the complete forward-flow regularity used
 to construct its actual first integrals. The only additional property is
