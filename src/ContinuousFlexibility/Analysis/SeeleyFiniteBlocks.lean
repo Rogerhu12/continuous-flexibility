@@ -24,7 +24,8 @@ private def seeleyUnitNode (n : ℕ) (i : Fin (n + 1)) : ℝ := (i : ℕ) + 1
 private theorem seeleyUnitNode_one_le (n : ℕ) (i : Fin (n + 1)) :
     1 ≤ seeleyUnitNode n i := by
   dsimp [seeleyUnitNode]
-  positivity
+  have hi : (0 : ℝ) ≤ (i : ℝ) := Nat.cast_nonneg _
+  linarith
 
 private theorem seeleyNegativeNode_injective (n : ℕ) :
     Function.Injective (fun i : Fin (n + 1) => -seeleyUnitNode n i) := by
@@ -35,7 +36,7 @@ private theorem seeleyNegativeNode_injective (n : ℕ) :
 
 private def seeleyUnitWeight (n : ℕ) (i : Fin (n + 1)) : ℝ :=
   (∏ j ∈ (univ : Finset (Fin (n + 1))).erase i,
-    (-seeleyUnitNode n i) - (-seeleyUnitNode n j))⁻¹
+    ((-seeleyUnitNode n i) - (-seeleyUnitNode n j)))⁻¹
 
 private theorem seeleyUnitWeight_moment (n m : ℕ) (hmn : m ≤ n) :
     (∑ i : Fin (n + 1), seeleyUnitWeight n i * (-seeleyUnitNode n i) ^ m) =

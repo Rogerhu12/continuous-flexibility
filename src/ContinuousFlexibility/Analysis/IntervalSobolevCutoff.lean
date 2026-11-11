@@ -110,7 +110,7 @@ def cutoffHalfLine (χ : ℝ → ℝ) (f : ℝ → F) (x : ℝ) : F := χ x • 
 
 theorem cutoffHalfLine_eq_smul (χ : ℝ → ℝ) (f : ℝ → F) : cutoffHalfLine χ f = χ • f := by
   funext x
-  exact (Pi.smul_apply χ f x).symm
+  simp only [cutoffHalfLine, Pi.smul_apply']
 
 theorem cutoffHalfLine_add (χ : ℝ → ℝ) (f g : ℝ → F) :
     cutoffHalfLine χ (f + g) = cutoffHalfLine χ f + cutoffHalfLine χ g := by

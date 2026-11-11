@@ -93,12 +93,14 @@ theorem continuousOn_seeleyReflection (S : SeeleyData ι) (n : ℕ) {f : ℝ →
     (hb : ∃ M : ℝ, ∀ y, 0 ≤ y → ‖f y‖ ≤ M) :
     ContinuousOn (seeleyReflection S n f) (Iic 0) := by
   obtain ⟨M, hM⟩ := hb
-  apply continuousOn_tsum _ ((S.summable_moment n).mul_right M)
+  unfold seeleyReflection
+  refine continuousOn_tsum ?_ ((S.summable_moment n).mul_right M) ?_
   · intro i
-    apply ContinuousOn.const_smul
-    exact hc.comp (continuous_const.mul continuous_id).continuousOn
-      (fun x hx => mul_nonneg_of_nonpos_of_nonpos
+    have hcomp := hc.comp (continuous_const.mul continuous_id).continuousOn
+      (fun x (hx : x ∈ Iic (0 : ℝ)) => mul_nonneg_of_nonpos_of_nonpos
         (neg_nonpos.mpr (seeley_scale_nonneg S i)) hx)
+    simpa only [Pi.smul_def, Function.comp_def] using
+      hcomp.const_smul (S.a i * (-S.b i) ^ n)
   · intro i x hx
     rw [norm_smul, norm_seeley_coefficient]
     exact mul_le_mul_of_nonneg_left
@@ -110,6 +112,7 @@ theorem continuous_seeleyExtensionJet (S : SeeleyData ι) {J : ℕ → ℝ → F
   apply continuous_if_le continuous_const continuous_id (hJ.continuous n)
     (continuousOn_seeleyReflection S n (hJ.continuous n) (hJ.bounded n))
   intro x hx
+  change (0 : ℝ) = x at hx
   subst x
   exact (seeleyReflection_at_zero S n (J n)).symm
 
@@ -117,9 +120,14 @@ private theorem hasDerivAt_seeleyReflection (S : SeeleyData ι) {J : ℕ → ℝ
     (hJ : IsBoundedHalfLineJet J) (n : ℕ) {x : ℝ} (hx : x < 0) :
     HasDerivAt (seeleyReflection S n (J n)) (seeleyReflection S (n + 1) (J (n + 1)) x) x := by
   obtain ⟨M, hM⟩ := hJ.bounded (n + 1)
-  apply hasDerivAt_tsum_of_isPreconnected
+  unfold seeleyReflection
+  refine hasDerivAt_tsum_of_isPreconnected
     (t := Iio (0 : ℝ))
+    (g := fun i y => (S.a i * (-S.b i) ^ n) • J n (-S.b i * y))
+    (g' := fun i y => (S.a i * (-S.b i) ^ (n + 1)) • J (n + 1) (-S.b i * y))
+    (y₀ := x)
     ((S.summable_moment (n + 1)).mul_right M) isOpen_Iio (convex_Iio 0).isPreconnected
+    ?_ ?_ hx (summable_seeleyReflection S n (hJ.bounded n) hx.le) hx
   · intro i y hy
     have hp : 0 < -S.b i * y := mul_pos_of_neg_of_neg
       (neg_neg_of_pos (seeley_scale_pos S i)) hy
@@ -132,9 +140,6 @@ private theorem hasDerivAt_seeleyReflection (S : SeeleyData ι) {J : ℕ → ℝ
       (hM _ (mul_nonneg_of_nonpos_of_nonpos
         (neg_nonpos.mpr (seeley_scale_nonneg S i)) hy.le))
       (mul_nonneg (abs_nonneg _) (pow_nonneg (seeley_scale_nonneg S i) (n + 1)))
-  · exact hx
-  · exact summable_seeleyReflection S n (hJ.bounded n) hx.le
-  · exact hx
 
 /-- The moment identities remove every boundary jump, so these are actual
 derivatives on the entire real line, including zero. -/
