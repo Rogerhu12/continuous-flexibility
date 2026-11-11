@@ -66,6 +66,9 @@ theorem innerGapEnergyPair_inner (D : ReferenceData) (hw : ContDiff ℝ ∞ D.w)
   have hqv := innerGapPotentialField_continuousOn hw hv hpos j
   unfold innerGapEnergyBilinear
   rw [← intervalIntegral.integral_add
+    (f := fun r => (12 * D.w r / r ^ 2) * innerGapGradientField u r * innerGapGradientField v r)
+    (g := fun r => (12 * D.w r / r ^ 2) *
+      innerGapPotentialField D.w j u r * innerGapPotentialField D.w j v r)
     (((hρ.mul hdu).mul hdv).intervalIntegrable_of_Icc hab)
     (((hρ.mul hqu).mul hqv).intervalIntegrable_of_Icc hab)]
   apply intervalIntegral.integral_congr
@@ -89,21 +92,26 @@ theorem innerGapEnergyBilinear_boundary {a b j : ℝ} (hab : a ≤ b) (ha : 0 < 
     (hdu.continuous.mul hflux.continuous).add (hu.continuous.mul hdflux.continuous)
   have hderiv (r : ℝ) : HasDerivAt (fun t => u t * (w t * deriv v t))
       (deriv u r * (w r * deriv v r) + u r * deriv (fun t => w t * deriv v t) r) r :=
-    (hu.differentiable (by simp) r).hasDerivAt.mul
+    (hu.differentiable (by simp) r).hasDerivAt.fun_mul
       (hflux.differentiable (by simp) r).hasDerivAt
   have hFTC : (∫ r in a..b, deriv u r * (w r * deriv v r) +
       u r * deriv (fun t => w t * deriv v t) r) =
         u b * (w b * deriv v b) - u a * (w a * deriv v a) := by
     exact intervalIntegral.integral_eq_sub_of_hasDerivAt
       (fun r (_ : r ∈ uIcc a b) => hderiv r) (hc.intervalIntegrable a b)
-  have hL := (hu.continuous.continuousOn.mul
-    (innerRadialJacobi_continuousOn (j := j) ha hw hv)).intervalIntegrable_of_Icc hab
+  have hL : IntervalIntegrable (fun r => u r * radialJacobi (j ^ 2) w v r) volume a b :=
+    (hu.continuous.continuousOn.mul
+      (innerRadialJacobi_continuousOn (j := j) ha hw hv)).intervalIntegrable_of_Icc hab
   calc
     _ = (∫ r in a..b, deriv u r * (w r * deriv v r) +
         u r * deriv (fun t => w t * deriv v t) r) -
       (∫ r in a..b, u r * radialJacobi (j ^ 2) w v r) := by
       unfold innerGapEnergyBilinear
-      rw [← intervalIntegral.integral_sub (hc.intervalIntegrable a b) hL]
+      rw [← intervalIntegral.integral_sub
+        (f := fun r => deriv u r * (w r * deriv v r) +
+          u r * deriv (fun t => w t * deriv v t) r)
+        (g := fun r => u r * radialJacobi (j ^ 2) w v r)
+        (hc.intervalIntegrable a b) hL]
       apply intervalIntegral.integral_congr
       intro r _
       dsimp only

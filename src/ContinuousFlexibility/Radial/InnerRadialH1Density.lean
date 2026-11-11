@@ -42,6 +42,7 @@ theorem innerL2_tendsto_toLp_of_dominated {α : Type*} [MeasurableSpace α]
         (fun n => (((hF n).sub hf).aestronglyMeasurable.aemeasurable.pow_const 2).aestronglyMeasurable)
         hBsq
         (fun n => Eventually.of_forall (fun x => by
+          simp only [Pi.sub_apply]
           rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (F n x - f x))]
           simpa only [sq_abs] using
             pow_le_pow_left₀ (abs_nonneg (F n x - f x)) (hbound n x) 2))
@@ -202,7 +203,10 @@ theorem innerRadialH1Zero_of_smooth_zero_endpoints (D : ReferenceData)
   intro n
   exact ⟨innerDirichletApprox a b φ n, innerDirichletApprox_contDiff hφ n,
     innerDirichletApprox_hasCompactSupport a b φ n, innerDirichletApprox_tsupport n,
-    innerRadialIntervalToLp_ae D hw ha hcore hpos _ _,
-    innerRadialIntervalToLp_ae D hw ha hcore hpos _ _⟩
+    innerRadialIntervalToLp_ae D hw ha hcore hpos (innerDirichletApprox a b φ n)
+      (innerDirichletApprox_contDiff hφ n).continuous.continuousOn,
+    innerRadialIntervalToLp_ae D hw ha hcore hpos
+      (innerGapGradientField (innerDirichletApprox a b φ n))
+      (innerGapGradientField_continuous (innerDirichletApprox_contDiff hφ n)).continuousOn⟩
 
 end ContinuousFlexibility.Radial

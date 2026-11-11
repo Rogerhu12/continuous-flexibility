@@ -58,9 +58,9 @@ variable (D : ReferenceData) {R s : ℝ → ℝ} {a b lam : ℝ}
   (hcore : Ioo (R a) (R b) ⊆ radialCore D)
   (hw : ∀ x ∈ Icc a b, D.w (R x) = lam * s x ^ 2 * deriv R x)
 
+include hab hlam hR hp hcore hw in
 /-- The exact Jacobian map into the same physical measure used by the
 global radial problem. No global monotonicity of R is imposed. -/
-include hab hlam hR hp hcore hw in
 theorem innerLiouvilleInterval_map_measure :
     Measure.map R ((volume.restrict (Ioo a b)).withDensity
       (fun x => ENNReal.ofReal (innerLiouvilleIntervalAmplitude R s lam x ^ 2))) =
@@ -110,9 +110,9 @@ theorem innerLiouvilleIntervalAmplitude_ne_ae :
   have h := hp x (Ioo_subset_Icc_self hx)
   exact (innerLiouvilleIntervalAmplitude_pos hlam h.1 h.2.1 h.2.2).ne'
 
+include hab hlam hR hs hp hcore hw in
 /-- A physical L² representative may be pulled back through the actual
 radius without changing its almost everywhere class. -/
-include hab hlam hR hs hp hcore hw in
 theorem innerLiouvilleInterval_pullback_ae {f g : ℝ → ℝ}
     (hfg : f =ᵐ[(radialHilbertMeasure D).restrict (Ioo (R a) (R b))] g) :
     (fun x => f (R x)) =ᵐ[volume.restrict (Ioo a b)] (fun x => g (R x)) := by

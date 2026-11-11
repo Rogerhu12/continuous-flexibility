@@ -68,7 +68,7 @@ theorem innerGapPoissonH1_apply (ξ : EuclideanSpace ℝ (Fin 2)) :
 theorem innerGapPoissonH1_value_ae (ξ : EuclideanSpace ℝ (Fin 2)) :
     ((innerGapPoissonH1 D hw ha hcore hpos p hp ξ).1 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D]
       (Ioo a b).indicator (innerGapPoisson p ξ) := by
-  simp only [innerGapPoissonH1_apply, Prod.fst_add, Prod.fst_smul]
+  simp only [innerGapPoissonH1_apply, Prod.fst_add, Prod.smul_fst]
   filter_upwards [Lp.coeFn_add
     (ξ 0 • (innerGapPoissonH1Unit D hw ha hcore hpos p hp 0).1)
     (ξ 1 • (innerGapPoissonH1Unit D hw ha hcore hpos p hp 1).1),
@@ -85,7 +85,7 @@ theorem innerGapPoissonH1_value_ae (ξ : EuclideanSpace ℝ (Fin 2)) :
 theorem innerGapPoissonH1_gradient_ae (ξ : EuclideanSpace ℝ (Fin 2)) :
     ((innerGapPoissonH1 D hw ha hcore hpos p hp ξ).2 : ℝ → ℝ) =ᵐ[radialHilbertMeasure D]
       (Ioo a b).indicator (innerGapGradientField (innerGapPoisson p ξ)) := by
-  simp only [innerGapPoissonH1_apply, Prod.snd_add, Prod.snd_smul]
+  simp only [innerGapPoissonH1_apply, Prod.snd_add, Prod.smul_snd]
   filter_upwards [Lp.coeFn_add
     (ξ 0 • (innerGapPoissonH1Unit D hw ha hcore hpos p hp 0).2)
     (ξ 1 • (innerGapPoissonH1Unit D hw ha hcore hpos p hp 1).2),

@@ -72,8 +72,9 @@ theorem inner_coefficient_absorb_constant {K p : ℝ} (hK : 0 ≤ K)
   calc
     K * radialE n ^ p ≤ radialE n ^ (K + 1) * radialE n ^ p :=
       mul_le_mul_of_nonneg_right hpower (rpow_pos_of_pos hE p).le
+    _ = radialE n ^ ((K + 1) + p) := (rpow_add hE _ _).symm
     _ = radialE n ^ (p + (K + 1)) := by
-      rw [rpow_add hE]
+      congr 1
       ring
 
 /-- The coefficient cost of the local inverse and the bounded Poisson

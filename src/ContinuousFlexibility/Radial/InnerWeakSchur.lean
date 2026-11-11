@@ -1,4 +1,4 @@
-import Mathlib.LinearAlgebra.Basic
+import Mathlib.LinearAlgebra.Prod
 import Mathlib.Data.Real.Basic
 
 /-!
@@ -20,6 +20,45 @@ section WeakSchur
 variable {H V B C : Type*}
   [AddCommGroup H] [Module ℝ H] [AddCommGroup V] [Module ℝ V]
   [AddCommGroup B] [Module ℝ B] [AddCommGroup C] [Module ℝ C]
+
+/-- Actual local existence and local zero-source/zero-trace uniqueness
+make the source/trace map a linear equivalence. In particular the
+Dirichlet and Poisson selections obtained from it are automatically
+linear; no linearity of an existential derivative choice is assumed. -/
+def innerWeakSourceTraceEquiv (L : V →ₗ[ℝ] H) (tr : V →ₗ[ℝ] B)
+    (hzero : ∀ v, L v = 0 → tr v = 0 → v = 0)
+    (hex : ∀ F ξ, ∃ v, L v = F ∧ tr v = ξ) : V ≃ₗ[ℝ] (H × B) :=
+  LinearEquiv.ofBijective (L.prod tr) (by
+    constructor
+    · intro v w hvw
+      apply sub_eq_zero.mp
+      apply hzero
+      · rw [map_sub]
+        apply sub_eq_zero.mpr
+        simpa only [LinearMap.prod_apply] using congrArg Prod.fst hvw
+      · rw [map_sub]
+        apply sub_eq_zero.mpr
+        simpa only [LinearMap.prod_apply] using congrArg Prod.snd hvw
+    · rintro ⟨F, ξ⟩
+      obtain ⟨v, hL, htr⟩ := hex F ξ
+      exact ⟨v, Prod.ext hL htr⟩)
+
+theorem innerWeakSourceTraceEquiv_apply
+    (L : V →ₗ[ℝ] H) (tr : V →ₗ[ℝ] B)
+    (hzero : ∀ v, L v = 0 → tr v = 0 → v = 0)
+    (hex : ∀ F ξ, ∃ v, L v = F ∧ tr v = ξ) (v : V) :
+    innerWeakSourceTraceEquiv L tr hzero hex v = (L v, tr v) := rfl
+
+theorem innerWeakSourceTraceEquiv_symm_source_trace
+    (L : V →ₗ[ℝ] H) (tr : V →ₗ[ℝ] B)
+    (hzero : ∀ v, L v = 0 → tr v = 0 → v = 0)
+    (hex : ∀ F ξ, ∃ v, L v = F ∧ tr v = ξ) (F : H) (ξ : B) :
+    L ((innerWeakSourceTraceEquiv L tr hzero hex).symm (F, ξ)) = F ∧
+      tr ((innerWeakSourceTraceEquiv L tr hzero hex).symm (F, ξ)) = ξ := by
+  have he := (innerWeakSourceTraceEquiv L tr hzero hex).apply_symm_apply (F, ξ)
+  constructor
+  · simpa only [innerWeakSourceTraceEquiv_apply] using congrArg Prod.fst he
+  · simpa only [innerWeakSourceTraceEquiv_apply] using congrArg Prod.snd he
 
 /-- One assembled solution, using the outgoing flux of the actual
 Dirichlet solution as the interface source. -/

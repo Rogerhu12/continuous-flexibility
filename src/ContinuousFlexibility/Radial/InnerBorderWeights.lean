@@ -58,7 +58,9 @@ theorem innerBorderFieldMap_selfAdjoint (A : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ)
     (hA : IsSelfAdjoint A) : IsSelfAdjoint (innerBorderFieldMap μ A) := by
   apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
   intro F H
-  simp only [innerBorderL2_inner_coordinates, innerBorderFieldMap_fst, innerBorderFieldMap_snd]
+  simp only [innerBorderL2_inner_coordinates]
+  change ⟪A F.fst, H.fst⟫_ℝ + F.snd * H.snd =
+    ⟪F.fst, A H.fst⟫_ℝ + F.snd * H.snd
   rw [hA.isSymmetric]
 
 /-- The exact Hilbert estimate, without a norm-equivalence factor. -/

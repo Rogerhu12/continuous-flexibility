@@ -34,11 +34,7 @@ theorem innerBorderPieceProjection_apply (i : ι) (F : InnerBorderL2 μ) :
       WithLp.toLp 2 (innerL2PieceProjection μ (sets i) F.fst,
         if i = center then F.snd else 0) := by
   by_cases hi : i = center <;>
-    simp only [innerBorderPieceProjection, ContinuousLinearMap.comp_apply,
-      ContinuousLinearEquiv.coe_coe, innerBorderMaxEquiv_apply,
-      innerBorderMaxEquiv_symm_apply, ContinuousLinearMap.prodMap_apply, hi,
-      ite_true, ite_false, ContinuousLinearMap.id_apply, ContinuousLinearMap.zero_apply,
-      WithLp.ofLp_fst, WithLp.ofLp_snd]
+    simp only [innerBorderPieceProjection, hi, ite_true, ite_false] <;> rfl
 
 theorem innerBorderPieceProjection_norm_sq (i : ι) (F : InnerBorderL2 μ) :
     ‖innerBorderPieceProjection μ sets center i F‖ ^ 2 =
@@ -65,8 +61,7 @@ theorem innerBorderPieceProjections_bessel
   simp_rw [innerBorderPieceProjection_norm_sq]
   rw [Finset.sum_add_distrib, innerBorderPieceProjection_scalar_sum]
   have hF : ‖F‖ ^ 2 = ‖F.fst‖ ^ 2 + F.snd ^ 2 := by
-    simpa only [Prod.mk.eta, WithLp.toLp_ofLp, WithLp.ofLp_fst, WithLp.ofLp_snd] using
-      innerBorderL2_norm_sq (WithLp.ofLp F).1 (WithLp.ofLp F).2
+    exact innerBorderL2_norm_sq (WithLp.ofLp F).1 (WithLp.ofLp F).2
   rw [hF]
   exact add_le_add (innerL2PieceProjections_bessel μ sets hmeas hdis F.fst) (le_refl _)
 

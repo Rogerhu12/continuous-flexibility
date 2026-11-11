@@ -43,6 +43,17 @@ theorem InnerRadialPotentialClass.smul {D : ReferenceData} {j a b : ℝ}
     ring
   · simp only [indicator_of_notMem hmem, mul_zero]
 
+/-- A genuine potential product vanishes when its value coordinate does. -/
+theorem InnerRadialPotentialClass.eq_zero_of_value_eq_zero
+    {D : ReferenceData} {j a b : ℝ} {u v : RadialModeL2 D}
+    (h : InnerRadialPotentialClass D j a b u v) (hu : u = 0) : v = 0 := by
+  apply Lp.eq_zero_iff_ae_eq_zero.mpr
+  rw [hu] at h
+  filter_upwards [h, Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D)] with r hr hz
+  by_cases hmem : r ∈ Ioo a b
+  · simpa only [indicator_of_mem hmem, hz, mul_zero] using hr
+  · simpa only [indicator_of_notMem hmem] using hr
+
 /-- The genuine physical multiplication graph. -/
 def innerRadialPotentialGraph (D : ReferenceData) (j a b : ℝ) :
     Submodule ℝ (RadialModeL2 D × RadialModeL2 D) where

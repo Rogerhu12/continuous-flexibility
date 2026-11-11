@@ -45,7 +45,8 @@ theorem innerGapEnergyCore_zero (D : ReferenceData) (j a b : ℝ) :
     by_cases hmem : r ∈ Ioo a b
     · simpa [indicator_of_mem hmem, innerGapGradientField, innerGapPotentialField,
         WithLp.zero_fst, WithLp.zero_snd] using hr
-    · simpa only [indicator_of_notMem hmem, WithLp.zero_fst, WithLp.zero_snd] using hr
+    · simpa only [indicator_of_notMem hmem, WithLp.zero_fst, WithLp.zero_snd,
+        Pi.zero_apply] using hr
 
 theorem innerGapEnergyCore_add {D : ReferenceData} {j a b : ℝ}
     {q r : InnerGapEnergyTriple D}
@@ -266,8 +267,9 @@ theorem innerGapDirichletInverse_graph_iff (D : ReferenceData) (hw : ContDiff �
     (hcore : Ioo a b ⊆ radialCore D) (hpos : ∀ r ∈ Icc a b, 0 < D.w r)
     (hslope : ∀ r ∈ Icc a b, s ≤ r * deriv D.w r / D.w r) (u f : RadialModeL2 D) :
     InnerGapFormGraph D j a b u f ↔
-      innerGapDirichletInverse D hw hab ha hj hs hcore hpos hslope f = u :=
-  innerGradientGraph_iff_inverse (E := innerGapFormSpace D j a b)
+      innerGapDirichletInverse D hw hab ha hj hs hcore hpos hslope f = u := by
+  unfold InnerGapFormGraph innerGapDirichletInverse
+  exact innerGradientGraph_iff_inverse (E := innerGapFormSpace D j a b)
     (H := RadialModeL2 D) (Z := InnerGapEnergyPair D)
     (innerGapFormFunction D j a b) (innerGapFormEnergy D j a b)
     (innerGapForm_isCoercive D hw hab ha hj hs hcore hpos hslope) u f
@@ -277,8 +279,9 @@ theorem innerGapDirichletInverse_graph (D : ReferenceData) (hw : ContDiff ℝ �
     (hcore : Ioo a b ⊆ radialCore D) (hpos : ∀ r ∈ Icc a b, 0 < D.w r)
     (hslope : ∀ r ∈ Icc a b, s ≤ r * deriv D.w r / D.w r) (f : RadialModeL2 D) :
     InnerGapFormGraph D j a b
-      (innerGapDirichletInverse D hw hab ha hj hs hcore hpos hslope f) f :=
-  innerCoerciveGradientInverse_graph (E := innerGapFormSpace D j a b)
+      (innerGapDirichletInverse D hw hab ha hj hs hcore hpos hslope f) f := by
+  unfold InnerGapFormGraph innerGapDirichletInverse
+  exact innerCoerciveGradientInverse_graph (E := innerGapFormSpace D j a b)
     (H := RadialModeL2 D) (Z := InnerGapEnergyPair D)
     (innerGapFormFunction D j a b) (innerGapFormEnergy D j a b)
     (innerGapForm_isCoercive D hw hab ha hj hs hcore hpos hslope) f
@@ -287,8 +290,9 @@ theorem innerGapDirichletInverse_isSymmetric (D : ReferenceData) (hw : ContDiff 
     {a b j s : ℝ} (hab : a ≤ b) (ha : 0 < a) (hj : 0 < j) (hs : 0 < s)
     (hcore : Ioo a b ⊆ radialCore D) (hpos : ∀ r ∈ Icc a b, 0 < D.w r)
     (hslope : ∀ r ∈ Icc a b, s ≤ r * deriv D.w r / D.w r) :
-    (innerGapDirichletInverse D hw hab ha hj hs hcore hpos hslope).IsSymmetric :=
-  innerCoerciveGradientInverse_isSymmetric (E := innerGapFormSpace D j a b)
+    (innerGapDirichletInverse D hw hab ha hj hs hcore hpos hslope).IsSymmetric := by
+  unfold innerGapDirichletInverse
+  exact innerCoerciveGradientInverse_isSymmetric (E := innerGapFormSpace D j a b)
     (H := RadialModeL2 D) (Z := InnerGapEnergyPair D)
     (innerGapFormFunction D j a b) (innerGapFormEnergy D j a b)
     (innerGapForm_isCoercive D hw hab ha hj hs hcore hpos hslope)
@@ -298,6 +302,7 @@ theorem innerGapDirichletInverse_norm_le (D : ReferenceData) (hw : ContDiff ℝ 
     (hcore : Ioo a b ⊆ radialCore D) (hpos : ∀ r ∈ Icc a b, 0 < D.w r)
     (hslope : ∀ r ∈ Icc a b, s ≤ r * deriv D.w r / D.w r) :
     ‖innerGapDirichletInverse D hw hab ha hj hs hcore hpos hslope‖ ≤ 12 / (s * j ^ 2) := by
+  unfold innerGapDirichletInverse
   calc
     _ ≤ ((s / 12) * j ^ 2)⁻¹ := by
       apply innerCoerciveGradientInverse_norm_le (E := innerGapFormSpace D j a b)

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.InnerRadialTrace
+import Mathlib.Tactic.Abel
 
 /-!
 # Fixed physical affine lifts and the full piece domain
@@ -55,6 +56,7 @@ theorem innerRadialAffineUnitPair_gradient_ae (i : Fin 2) :
     (innerGapGradientField_continuous
       (innerIntervalAffineLift_contDiff a b (innerEndpointValues i))).continuousOn
 
+include hab in
 theorem innerRadialAffineUnitPair_trace (i : Fin 2) :
     innerRadialH1Trace D hw ha hcore hpos
       (innerRadialAffineUnitPair D hw ha hcore hpos i) = innerEndpointValues i := by
@@ -66,7 +68,7 @@ theorem innerRadialAffineUnitPair_trace (i : Fin 2) :
   have hends := innerIntervalAffineLift_endpoints hab (innerEndpointValues i)
   by_cases hk : k = 0
   · subst k
-    simpa only [if_pos rfl] using hends.1
+    simpa only [if_pos rfl, ite_true] using hends.1
   · have hk1 : k = 1 := by omega
     subst k
     simpa only [show (1 : Fin 2) ≠ 0 by decide, if_false] using hends.2
@@ -79,7 +81,7 @@ def innerRadialAffineLift : (Fin 2 → ℝ) →ₗ[ℝ] InnerRadialH1Pair D wher
     simp only [Pi.add_apply, add_smul]
     abel
   map_smul' c z := by
-    simp only [Pi.smul_apply, smul_eq_mul, mul_smul, smul_add]
+    simp only [Pi.smul_apply, RingHom.id_apply, smul_eq_mul, mul_smul, smul_add]
 
 @[simp] theorem innerRadialAffineLift_apply (z : Fin 2 → ℝ) :
     innerRadialAffineLift D hw ha hcore hpos z =
@@ -87,6 +89,7 @@ def innerRadialAffineLift : (Fin 2 → ℝ) →ₗ[ℝ] InnerRadialH1Pair D wher
         z 1 • innerRadialAffineUnitPair D hw ha hcore hpos 1 := rfl
 
 /-- The lift has exactly the prescribed canonical endpoint values. -/
+include hab in
 theorem innerRadialH1Trace_affineLift (z : Fin 2 → ℝ) :
     innerRadialH1Trace D hw ha hcore hpos
       (innerRadialAffineLift D hw ha hcore hpos z) = z := by
@@ -114,6 +117,7 @@ theorem mem_innerRadialH1Domain (q : InnerRadialH1Pair D) :
       q - innerRadialAffineLift D hw ha hcore hpos
         (innerRadialH1Trace D hw ha hcore hpos q) ∈ innerRadialH1Zero D a b := Iff.rfl
 
+include hab in
 theorem innerRadialH1Zero_mem_domain {q : InnerRadialH1Pair D}
     (hq : q ∈ innerRadialH1Zero D a b) :
     q ∈ innerRadialH1Domain D hw ha hcore hpos := by
@@ -121,6 +125,7 @@ theorem innerRadialH1Zero_mem_domain {q : InnerRadialH1Pair D}
   rw [innerRadialH1Trace_zero D hw hab ha hcore hpos hq, map_zero, sub_zero]
   exact hq
 
+include hab in
 theorem innerRadialAffineLift_mem_domain (z : Fin 2 → ℝ) :
     innerRadialAffineLift D hw ha hcore hpos z ∈
       innerRadialH1Domain D hw ha hcore hpos := by
@@ -130,6 +135,7 @@ theorem innerRadialAffineLift_mem_domain (z : Fin 2 → ℝ) :
 
 /-- A field with prescribed endpoint values is precisely a zero-endpoint
 closed-domain field plus the fixed affine lift. -/
+include hab in
 theorem innerRadialH1Domain_trace_iff (q : InnerRadialH1Pair D) (z : Fin 2 → ℝ) :
     (q ∈ innerRadialH1Domain D hw ha hcore hpos ∧
       innerRadialH1Trace D hw ha hcore hpos q = z) ↔

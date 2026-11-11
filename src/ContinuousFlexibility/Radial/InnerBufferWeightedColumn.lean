@@ -43,7 +43,7 @@ theorem InnerBufferLocalizedData.column_decomposition (i : Fin 2) :
       (M.column i).scalar = -(M.remainder i).2 := by
   have hf := congrArg Prod.fst (M.column i).decomposition
   have hs := congrArg Prod.snd (M.column i).decomposition
-  exact ⟨hf, by simpa only [Prod.snd_sub, zero_sub] using hs⟩
+  exact ⟨hf, by simpa only [InnerBufferLocalizedData.remainder, Prod.snd_sub, zero_sub] using hs⟩
 
 theorem InnerBufferLocalizedData.remainder_supported (i : Fin 2) :
     ∀ᵐ x ∂volume, x ∉ Ioo B.l B.h → (M.remainder i).1 x = 0 := by

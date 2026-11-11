@@ -27,6 +27,7 @@ variable (D : ReferenceData) (hw : Continuous D.w)
   (hcore : Ioo a b ⊆ radialCore D)
   (hpos : ∀ r ∈ Icc a b, 0 < D.w r)
 
+include hw hpos in
 private theorem traceGradientTest_continuousOn (p : ℝ → ℝ)
     (hp : ContinuousOn p (Icc a b)) :
     ContinuousOn (fun r => (Real.sqrt 12 * r / (12 * D.w r)) * p r) (Icc a b) :=
@@ -34,6 +35,7 @@ private theorem traceGradientTest_continuousOn (p : ℝ → ℝ)
     (continuousOn_const.mul hw.continuousOn)
     (fun r hr => mul_ne_zero (by norm_num) (hpos r hr).ne')).mul hp)
 
+include hw hpos in
 private theorem traceValueTest_continuousOn (p : ℝ → ℝ)
     (hp : ContinuousOn (deriv p) (Icc a b)) :
     ContinuousOn (fun r => (r ^ 2 / (12 * D.w r)) * deriv p r) (Icc a b) :=
@@ -59,6 +61,7 @@ def innerRadialTraceValueTest (p : ℝ → ℝ)
 
 /-- The physical density and normalized derivative cancel exactly in
 the trace pairings. No norm-equivalence assumption is used. -/
+include hab in
 theorem innerRadialH1_smooth_trace_pairing
     {φ p : ℝ → ℝ}
     (hφ : ∀ x ∈ Icc a b, ContDiffAt ℝ ∞ φ x)
@@ -146,6 +149,7 @@ def innerRadialH1Trace : InnerRadialH1Pair D →ₗ[ℝ] (Fin 2 → ℝ) where
       real_inner_smul_left, RingHom.id_apply, smul_eq_mul]
     ring
 
+include hab in
 theorem innerRadialH1Trace_smooth {φ : ℝ → ℝ}
     (hφ : ∀ x ∈ Icc a b, ContDiffAt ℝ ∞ φ x)
     {q : InnerRadialH1Pair D}
@@ -163,6 +167,7 @@ theorem innerRadialH1Trace_smooth {φ : ℝ → ℝ}
   fin_cases i <;> norm_num [bufferSign, innerEndpointValues]
 
 /-- The trace vanishes on the physical zero-endpoint closure. -/
+include hab in
 theorem innerRadialH1Trace_zero {q : InnerRadialH1Pair D}
     (hq : q ∈ innerRadialH1Zero D a b) :
     innerRadialH1Trace D hw ha hcore hpos q = 0 := by

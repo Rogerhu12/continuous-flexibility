@@ -156,13 +156,13 @@ theorem innerLiouvillePairLift_apply (f : Lp ℝ 2 volume × ℝ) :
     innerLiouvillePairLift D hab hlam hR hs hp hcore hw U hU hv f =
       (innerLiouvilleFieldLift D hab hlam hR hs hp hcore hw U hU hv f.1, f.2) := by
   unfold innerLiouvillePairLift
-  rw [ContinuousLinearMap.prodMap_apply, ContinuousLinearMap.id_apply]
+  simp only [ContinuousLinearMap.coe_prodMap', Prod.map_apply', ContinuousLinearMap.id_apply]
 
 theorem innerLiouvillePairSource_apply (F : Lp ℝ 2 (radialHilbertMeasure D) × ℝ) :
     innerLiouvillePairSource D hab hlam hR hs hp hcore hw U hU hv F =
       (innerLiouvilleSource D hab hlam hR hs hp hcore hw U hU hv F.1, F.2) := by
   unfold innerLiouvillePairSource
-  rw [ContinuousLinearMap.prodMap_apply, ContinuousLinearMap.id_apply]
+  simp only [ContinuousLinearMap.coe_prodMap', Prod.map_apply', ContinuousLinearMap.id_apply]
 
 private theorem norm_prodMap_id_le {E F : Type*} [NormedAddCommGroup E]
     [NormedAddCommGroup F] [NormedSpace ℝ E] [NormedSpace ℝ F]
@@ -171,7 +171,7 @@ private theorem norm_prodMap_id_le {E F : Type*} [NormedAddCommGroup E]
   apply ContinuousLinearMap.opNorm_le_bound _ ((by norm_num : (0 : ℝ) ≤ 1).trans
     (le_max_right C 1))
   rintro ⟨f, c⟩
-  rw [ContinuousLinearMap.prodMap_apply, ContinuousLinearMap.id_apply, Prod.norm_def,
+  simp only [ContinuousLinearMap.coe_prodMap', Prod.map_apply', ContinuousLinearMap.id_apply,
     Prod.norm_def]
   apply max_le
   · calc
