@@ -71,26 +71,26 @@ theorem outer_inverse_envelope {n : ℕ} {C K d : ℝ}
 
 /-- Replacing the cell height by any allowed state scale preserves the
 natural-solution norm estimate after increasing its quadratic constant. -/
-theorem outer_natural_norm_change_scale {λ μ C L H : ℝ} {n : ℕ}
-    (hλ : 0 < λ) (hμ : 0 ≤ μ) (hL : 0 ≤ L)
-    (hscale : μ / λ ≤ exp (L * (n : ℝ) ^ 2))
+theorem outer_natural_norm_change_scale {lam μ C L H : ℝ} {n : ℕ}
+    (hlam : 0 < lam) (hμ : 0 ≤ μ) (hL : 0 ≤ L)
+    (hscale : μ / lam ≤ exp (L * (n : ℝ) ^ 2))
     (hH : H ≤ sqrt μ * exp (C * (n : ℝ) ^ 2)) :
-    H ≤ sqrt λ * exp ((C + L) * (n : ℝ) ^ 2) := by
+    H ≤ sqrt lam * exp ((C + L) * (n : ℝ) ^ 2) := by
   let E := exp (L * (n : ℝ) ^ 2)
   have hE : 1 ≤ E := one_le_exp_iff.mpr (mul_nonneg hL (sq_nonneg _))
-  have hm : μ ≤ λ * E := by
-    have hh := (div_le_iff₀ hλ).mp hscale
+  have hm : μ ≤ lam * E := by
+    have hh := (div_le_iff₀ hlam).mp hscale
     simpa only [mul_comm] using hh
-  have hs : sqrt μ ≤ sqrt λ * E := by
+  have hs : sqrt μ ≤ sqrt lam * E := by
     apply (sq_le_sq₀ (sqrt_nonneg _) (mul_nonneg (sqrt_nonneg _) (le_trans zero_le_one hE))).mp
     calc
       (sqrt μ) ^ 2 = μ := sq_sqrt hμ
-      _ ≤ λ * E := hm
-      _ ≤ λ * E ^ 2 := mul_le_mul_of_nonneg_left (by nlinarith) hλ.le
-      _ = (sqrt λ * E) ^ 2 := by rw [mul_pow, sq_sqrt hλ.le]
+      _ ≤ lam * E := hm
+      _ ≤ lam * E ^ 2 := mul_le_mul_of_nonneg_left (by nlinarith) hlam.le
+      _ = (sqrt lam * E) ^ 2 := by rw [mul_pow, sq_sqrt hlam.le]
   calc
     H ≤ sqrt μ * exp (C * (n : ℝ) ^ 2) := hH
-    _ ≤ (sqrt λ * E) * exp (C * (n : ℝ) ^ 2) :=
+    _ ≤ (sqrt lam * E) * exp (C * (n : ℝ) ^ 2) :=
       mul_le_mul_of_nonneg_right hs (exp_pos _).le
     _ = _ := by
       dsimp only [E]

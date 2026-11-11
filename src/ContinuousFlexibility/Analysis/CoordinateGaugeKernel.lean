@@ -22,6 +22,7 @@ variable {μ ν : Measure ℝ} {R a : ℝ → ℝ} {s : ℝ}
   (hmeasure : Measure.map R (squareDensityMeasure μ a) = ν)
   {K H : ℝ → ℝ → ℝ}
 
+include hR ha hmeasure in
 /-- The exact integral change with both amplitude factors. -/
 theorem coordinateGauge_kernel_integral (f : ℝ → ℝ) (x : ℝ)
     (hK : ∀ᵐ y ∂μ, a x * a y * H (R x) (R y) = s * K x y) :
@@ -38,12 +39,12 @@ theorem coordinateGauge_kernel_integral (f : ℝ → ℝ) (x : ℝ)
   rw [hi, ← integral_const_mul]
   apply integral_congr_ae
   filter_upwards [hK] with y hy
-  dsimp only
   calc
     a x * (a y ^ 2 * (H (R x) (R y) * f (R y))) =
         (a x * a y * H (R x) (R y)) * (a y * f (R y)) := by ring
     _ = K x y * (s * (a y * f (R y))) := by rw [hy]; ring
 
+include hR ha hpos hmeasure in
 /-- An actual L² row is preserved by the exact coordinate/gauge change. -/
 theorem coordinateGauge_kernel_row_memLp (x : ℝ)
     (hK : ∀ᵐ y ∂μ, a x * a y * H (R x) (R y) = s * K x y)
@@ -59,6 +60,7 @@ theorem coordinateGauge_kernel_row_memLp (x : ℝ)
     a x * ((s / a x) * K x y) = s * K x y := by field_simp [(hpos x).ne']
     _ = a x * (a y * H (R x) (R y)) := by rw [← hy]; ring
 
+include hR ha hpos hmeasure in
 /-- The conjugated bounded operator has the transformed kernel for every
 L² source.  The exact isometry and conjugacy are supplied by the coordinate
 and square-density constructions. -/
@@ -83,7 +85,6 @@ theorem coordinateGauge_operator_kernel
   have halong : (fun x => D f (R x)) =ᵐ[μ]
       fun x => ∫ t, H (R x) t * f t ∂ν := by
     filter_upwards [hE (D f), hg, hK] with x hx hgx hKx
-    dsimp only
     apply mul_left_cancel₀ (hpos x).ne'
     calc
       a x * D f (R x) = E (D f) x := hx.symm
@@ -100,6 +101,8 @@ theorem coordinateGauge_operator_kernel
     (withDensity_absolutelyContinuous μ _).ae_eq halong
   have hmap : (D f : ℝ → ℝ) =ᵐ[Measure.map R (squareDensityMeasure μ a)]
       fun r => ∫ t, H r t * f t ∂ν := by
+    change ∀ᵐ r ∂Measure.map R (squareDensityMeasure μ a),
+      D f r = ∫ t, H r t * f t ∂ν
     rw [ae_iff, hR.map_apply]
     exact ae_iff.mp halong'
   rwa [hmeasure] at hmap

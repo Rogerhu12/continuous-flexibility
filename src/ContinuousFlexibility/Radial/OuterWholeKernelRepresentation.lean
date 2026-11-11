@@ -55,8 +55,8 @@ theorem outer_compact_inner_eq_integral (U : ℝ → ℝ)
         (integral_subtype_comap (μ := μ) (s := Icc a c) measurableSet_Icc
           (fun x => U x * f x))
 
-/-- The core product is integrable, even for an arbitrary L² source. -/
 include hac in
+/-- The core product is integrable, even for an arbitrary L² source. -/
 theorem integrable_outer_core_product (U : ℝ → ℝ)
     (hU : ContinuousOn U (Icc a c)) (f : Lp ℝ 2 μ) :
     Integrable (fun x => U x * f x) (μ.restrict (Icc a c)) := by
@@ -98,7 +98,10 @@ theorem outer_compact_kernelRepresentative_eq_integral (lam : ℝ) (U V : ℝ �
       apply integral_congr_ae
       filter_upwards [outer_compact_source_coeFn μ hac f] with y hy
       rw [outerContinuousGreenKernel_apply, outerGreenKernel_core_restriction, hy]
-    _ = _ := integral_subtype_comap measurableSet_Icc _
+    _ = _ := by
+      simpa only [compactIntervalMeasure] using
+        (integral_subtype_comap (μ := μ) (s := Icc a c) measurableSet_Icc
+          (fun y => outerGreenKernel lam U V (x : ℝ) y * f y))
 
 theorem outer_compact_toLp_symm_coeFn (W : C(Icc a c, ℝ)) :
     ((l2CompactIntervalEquiv μ hac).symm

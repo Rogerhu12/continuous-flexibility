@@ -98,6 +98,8 @@ theorem morsePhysicalDeepTail_localization {M : MorseChainData} {σ : ℕ → �
         (hn.trans (by omega))
       change log (M.radius true (n + 1 + k) (M.leftX true (n + 1 + k))) < x ∧
         x < log (M.radius true (n + 1 + (k + 1)) (M.leftX true (n + 1 + (k + 1)))) at hx
+      change log (M.radius true (n + 1 + k) (M.leftX true (n + 1 + k))) ≤ x ∧
+        x ≤ log (M.radius true (n + 1 + k + 1) (M.leftX true (n + 1 + k + 1)))
       simpa only [Nat.add_assoc] using And.intro hx.1.le hx.2.le
   | false =>
       constructor

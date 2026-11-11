@@ -87,8 +87,8 @@ private theorem outer_integrable_of_core_tail {g : ℝ → ℝ}
   have h := hc.add_measure ht
   rwa [Measure.restrict_add_restrict_compl measurableSet_Icc] at h
 
-/-- Core rows of the full canonical kernel are integrable against every L² source. -/
 include hac in
+/-- Core rows of the full canonical kernel are integrable against every L² source. -/
 theorem OuterFundamentalStatePair.integrable_kernel_core
     {lam x : ℝ} (hcb : c < b) (hPc : P c = 1)
     (hμ : ∀ᵐ x ∂μ, x ∈ Ico a b)
@@ -106,8 +106,8 @@ theorem OuterFundamentalStatePair.integrable_kernel_core
     rw [F.kernel_core_tail hcb hPc hx hy]
     ring
 
-/-- The core part of the single full integral agrees with the actual core block. -/
 include hac in
+/-- The core part of the single full integral agrees with the actual core block. -/
 theorem OuterFundamentalStatePair.kernel_integral_core
     {lam x : ℝ} (hcb : c < b) (hPc : P c = 1)
     (hμ : ∀ᵐ x ∂μ, x ∈ Ico a b)
@@ -129,8 +129,8 @@ theorem OuterFundamentalStatePair.kernel_integral_core
       ring
     _ = _ := integral_const_mul _ _
 
-/-- Deep rows are integrable by the actual Dirichlet row and the Poisson vector. -/
 include hac in
+/-- Deep rows are integrable by the actual Dirichlet row and the Poisson vector. -/
 theorem OuterFundamentalStatePair.integrable_kernel_deep
     {lam x : ℝ} (hlam : lam ≠ 0) (hcb : c < b) (hPc : P c = 1) (hQc : Q c = 0)
     (hflux : ZQ c = 1 / lam) (hμ : ∀ᵐ x ∂μ, x ∈ Ico a b)
@@ -156,8 +156,8 @@ theorem OuterFundamentalStatePair.integrable_kernel_deep
     rw [F.green_tail_decomposition_unit_flux hlam hac hcb hPc hQc hflux hx hy]
     ring
 
-/-- The two deep blocks are exactly the deep restriction of the single integral. -/
 include hac in
+/-- The two deep blocks are exactly the deep restriction of the single integral. -/
 theorem OuterFundamentalStatePair.kernel_integral_deep
     {lam x : ℝ} (hlam : lam ≠ 0) (hcb : c < b) (hPc : P c = 1) (hQc : Q c = 0)
     (hflux : ZQ c = 1 / lam) (hμ : ∀ᵐ x ∂μ, x ∈ Ico a b)

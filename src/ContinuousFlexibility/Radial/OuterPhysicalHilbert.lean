@@ -173,17 +173,25 @@ def outerPhysicalTailEquiv
     OuterPhysicalTailL2 D T right ≃ₗᵢ[ℝ] DeepTailL2 T :=
   (outerPhysicalCoordinateEquiv hD hphysical).trans (outerPhysicalGaugeEquiv hD hphysical)
 
+theorem outerPhysicalTailEquiv_apply
+    {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
+    (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start)
+    (f : OuterPhysicalTailL2 D T right) :
+    outerPhysicalTailEquiv hD hphysical f =
+      outerPhysicalGaugeEquiv hD hphysical (outerPhysicalCoordinateEquiv hD hphysical f) :=
+  LinearIsometryEquiv.trans_apply _ _ _
+
 /-- The exact representative is sqrt(12) times inverse gauge and pullback. -/
 theorem outerPhysicalTailEquiv_ae
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start)
     (f : OuterPhysicalTailL2 D T right) :
     outerPhysicalTailEquiv hD hphysical f =ᵐ[deepTailMeasure T] fun x =>
-      outerPhysicalAmplitude D right j x * f (tailPhysicalRadius right x) :=
-  l2Equiv_trans_mul_ae (outerPhysicalCoordinateEquiv hD hphysical)
-    (outerPhysicalGaugeEquiv hD hphysical) f (outerPhysicalAmplitude D right j)
-    (fun x => f (tailPhysicalRadius right x))
-    (outerPhysicalPullback_ae_eq hD hphysical (outerPhysicalCoordinateEquiv_ae hD hphysical f))
-    (outerPhysicalGaugeEquiv_ae hD hphysical (outerPhysicalCoordinateEquiv hD hphysical f))
+      outerPhysicalAmplitude D right j x * f (tailPhysicalRadius right x) := by
+  rw [outerPhysicalTailEquiv_apply]
+  have hc := outerPhysicalPullback_ae_eq hD hphysical (outerPhysicalCoordinateEquiv_ae hD hphysical f)
+  have hg := outerPhysicalGaugeEquiv_ae hD hphysical (outerPhysicalCoordinateEquiv hD hphysical f)
+  filter_upwards [hc, hg] with x hx hy
+  exact hy.trans (congrArg (fun t => outerPhysicalAmplitude D right j x * t) hx)
 
 end ContinuousFlexibility.Radial

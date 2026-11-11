@@ -122,7 +122,6 @@ theorem OuterFundamentalStatePair.robin_unique_state
   have ha : a ∈ Ico a b := ⟨le_rfl, hac.trans_lt hcb⟩
   have hvalue : u =ᶠ[𝓝 d] fun x => (C * F.scale) * F.V x := by
     filter_upwards [Ioo_mem_nhds hcd hdb] with x hx
-    dsimp only
     rw [hC x hx, F.V_tail x ⟨hx.1.le, hx.2⟩]
     field_simp [F.scale_pos.ne'] <;> ring
   have hder := ((F.V_system d hd).1.const_mul (C * F.scale)).congr_of_eventuallyEq hvalue

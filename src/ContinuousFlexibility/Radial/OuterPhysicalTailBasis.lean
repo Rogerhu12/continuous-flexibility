@@ -83,7 +83,8 @@ theorem morsePhysicalDeepTail_zero_lift_outward_flux
     · exact hD.1.trans hD.2.1
   have hg : 0 < g := rpow_pos_of_pos (div_pos hentry hend) _
   have hdlog := (hsys T.entrance ⟨le_rfl, hT.1⟩).1
-  have hd := (hasDerivAt_tailPhysicalLift hend hentry hdlog.differentiableAt).deriv
+  have hd := (hasDerivAt_tailPhysicalLift (D := D) (right := right) (j := j)
+    (u := u) (r := entrance) hend hentry hdlog.differentiableAt).deriv
   have hp : T.p T.entrance = g ^ 2 * D.w entrance / entrance := by
     have hh := morsePhysicalDeepTail_density_eq M D right j start entrance η K T.entrance
     change T.p T.entrance =

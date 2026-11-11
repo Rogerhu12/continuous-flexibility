@@ -139,7 +139,7 @@ theorem morseOuterFullCore_energy_on_exp
         intro s hs t ht
         exact (outer_positive_physical_energy_on h.geometry hscale hj.1
           (hjoinSub.trans hfull.2) hj.2.2.2.2 (fun r hr => hstate r (hjoinSub hr)) hs ht).trans
-            (mul_le_mul_of_nonneg_left hjoinFactor (by dsimp only [E]; positivity))
+            (mul_le_mul_of_nonneg_left hjoinFactor (by positivity))
       rw [hseam] at hje
       have hbc : morseOuterCoreRight T true n ≤ T.joinRight true n := by
         rw [← hseam]
