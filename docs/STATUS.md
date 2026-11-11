@@ -23,6 +23,20 @@ hypotheses. The operator identity also determines the potential by testing the
 constant function, and the positive-piece factorization uniquely determines
 the divided coefficients in the open piece.
 
+The two-endpoint extension proves the actual interior quotient estimate on
+every interval `(l,r)`: if the numerator has vanishing radial jets of orders
+zero, one, and two at both ends, then each mixed quotient jet is bounded by
+`M / 36` from the corresponding numerator jet with six additional radial
+derivatives. No interval-width lower bound is used. An open-cylinder equality
+lemma applies this directly to a given factorization `F = d^3 * e`, without
+assuming regularity of `e` outside the open component.
+
+The common state neighborhood is proved open and convex, with monotone base
+restriction. Sampled material powers `H^β * E0^A` are uniformly bounded for
+every fixed `β > 0` and `A`, using the actual material envelope assumptions.
+Uniform angular derivative bounds of a flow extend to both radial endpoints
+by passing increment bounds through the radial limit and differentiating.
+
 The additional proof modules isolate the remaining uniform jet estimate without
 adding it to `N04bStatement`. `N04PartA` and `N04PartB` were moved verbatim to
 `Blueprint/CanonicalParts.lean` and reexported by `Blueprint/Statements.lean`;

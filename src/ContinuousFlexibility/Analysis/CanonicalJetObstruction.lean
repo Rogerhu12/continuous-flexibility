@@ -68,6 +68,7 @@ theorem not_canonicalJetBounds_unboundedNegativeDividedCanonicalData
   intro hbound
   unfold CanonicalJetBounds at hbound
   obtain ⟨B, _, hB⟩ := hbound 0
+  unfold CanonicalJetBoundAtOrder at hB
   obtain ⟨r, hlr, hrr⟩ := exists_between hinterval
   let Q : ℝ := B * T.E0 (T.sample (K.cell m)) ^ B
   have hz : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by

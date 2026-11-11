@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.CanonicalCubicMixed
 import ContinuousFlexibility.Analysis.CanonicalCubicPointwise
 import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
+import ContinuousFlexibility.Analysis.SmoothCompactIntervalIntegral
 
 /-!
 # Mixed cubic-division estimates on a cylinder
@@ -80,6 +81,21 @@ theorem radialCubicQuotient_eq_integral {F : PolarPoint → ℝ}
   obtain ⟨hd1, hd2⟩ := radialSlice_boundaryJets hF h1 h2 p.2
   simpa only [radialCubicQuotient, mixedDerivative, iteratedDeriv_zero] using
     cubicQuotient_eq_integral hs (h0 p.2) hd1 hd2 p.1
+
+/-- Removing the cubic radial zero preserves joint smoothness, including
+at the boundary circle.  This permits successive divisions at two ends. -/
+theorem contDiff_radialCubicQuotient {F : PolarPoint → ℝ}
+    (hF : ContDiff ℝ ∞ F)
+    (h0 : ∀ θ : ℝ, F (0, θ) = 0)
+    (h1 : ∀ θ : ℝ, radialPartial F (0, θ) = 0)
+    (h2 : ∀ θ : ℝ, radialPartial (radialPartial F) (0, θ) = 0) :
+    ContDiff ℝ ∞ (radialCubicQuotient F) := by
+  have hq : radialCubicQuotient F = fun p : PolarPoint => (1 / 2 : ℝ) *
+      ∫ t in (0 : ℝ)..1, (1 - t) ^ 2 * mixedDerivative 3 0 F (t * p.1, p.2) :=
+    funext (radialCubicQuotient_eq_integral hF h0 h1 h2)
+  rw [hq]
+  exact contDiff_const.mul (contDiff_scaled_cylinderIntegral
+    ((continuous_const.sub continuous_id).pow 2) (contDiff_mixedDerivative hF 3 0))
 
 /-- Exact mixed Taylor formula for radial cubic division.  The loss is
 three radial derivatives, independent of both requested orders. -/

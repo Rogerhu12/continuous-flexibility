@@ -21,11 +21,11 @@ namespace ContinuousFlexibility.Analysis
 open Set
 open ContinuousFlexibility.Statements ContinuousFlexibility.Blueprint
 
-/-- The precise quantitative conjunct in `N04Properties`. -/
-def CanonicalJetBounds (T : MaterialData) (S : PhysicalSpacesData)
+/-- One order and one constant in the precise quantitative conjunct. -/
+def CanonicalJetBoundAtOrder (T : MaterialData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S)
-    (base loss : ℕ) (ε : ℝ) : Prop :=
-  ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ z ∈ stateNeighborhood S C base ε, ∀ m p,
+    (base loss : ℕ) (ε : ℝ) (s : ℕ) (B : ℝ) : Prop :=
+  ∀ z ∈ stateNeighborhood S C base ε, ∀ m p,
     p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →
       |mixedDerivative a b (K.potential z m) p| +
       |mixedDerivative a b (K.dividedDifference z m).a p| +
@@ -34,13 +34,21 @@ def CanonicalJetBounds (T : MaterialData) (S : PhysicalSpacesData)
         B * T.E0 (T.sample (K.cell m)) ^ B *
           (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)
 
-/-- The genuine estimate still required by the coordinate construction:
-potential jets on sector states and divided coefficient jets on positive
-pieces, with the same constants and the same fixed loss. -/
-def SectorCanonicalJetBounds (T : MaterialData) (S : PhysicalSpacesData)
+/-- The precise quantitative conjunct in `N04Properties`, with its body
+factored out to keep existential elimination independent of state-space
+instance normalization. -/
+def CanonicalJetBounds (T : MaterialData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S)
     (base loss : ℕ) (ε : ℝ) : Prop :=
-  ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ z ∈ stateNeighborhood S C base ε,
+  ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ CanonicalJetBoundAtOrder T S C K base loss ε s B
+
+/-- The genuine estimate still required by the coordinate construction:
+potential jets on sector states and divided coefficient jets on positive
+pieces, at one order and one constant. -/
+def SectorCanonicalJetBoundAtOrder (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (base loss : ℕ) (ε : ℝ) (s : ℕ) (B : ℝ) : Prop :=
+  ∀ z ∈ stateNeighborhood S C base ε,
     stateSector S z.1 → ∀ m p,
     p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →
       |mixedDerivative a b (K.potential z m) p| +
@@ -50,6 +58,12 @@ def SectorCanonicalJetBounds (T : MaterialData) (S : PhysicalSpacesData)
         |mixedDerivative a b (K.dividedDifference z m).c p| else 0) ≤
         B * T.E0 (T.sample (K.cell m)) ^ B *
           (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)
+
+/-- The sector estimate at every order, with the same fixed derivative loss. -/
+def SectorCanonicalJetBounds (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (K : CanonicalData S)
+    (base loss : ℕ) (ε : ℝ) : Prop :=
+  ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ SectorCanonicalJetBoundAtOrder T S C K base loss ε s B
 
 private def zeroCanonicalCoefficients : SymmetricCoefficients where
   a := fun _ => 0
@@ -158,7 +172,54 @@ private theorem mixedDerivative_zero (a b : ℕ) (p : PolarPoint) :
     mixedDerivative a b (fun _ => 0) p = 0 := by
   simp only [mixedDerivative, iteratedDeriv_fun_const_zero]
 
+private theorem normalizedCanonicalData_jetSum_of_sector
+    {S : PhysicalSpacesData} (K : CanonicalData S) {z : AnnularState S × ℝ}
+    (hz : stateSector S z.1) (m a b : ℕ) (p : PolarPoint) :
+    |mixedDerivative a b ((normalizedCanonicalData S K).potential z m) p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).a p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).b p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).c p| =
+    |mixedDerivative a b (K.potential z m) p| +
+      (if K.positive m = true then
+        |mixedDerivative a b (K.dividedDifference z m).a p| +
+        |mixedDerivative a b (K.dividedDifference z m).b p| +
+        |mixedDerivative a b (K.dividedDifference z m).c p| else 0) := by
+  classical
+  by_cases hm : K.positive m = true
+  · simp only [normalizedCanonicalData, hz, hm, and_self, ite_true, add_assoc]
+  · simp only [normalizedCanonicalData, hz, hm, Bool.false_eq_true, true_and, ite_true, ite_false,
+      zeroCanonicalCoefficients, mixedDerivative_zero, abs_zero, add_zero]
+
+private theorem normalizedCanonicalData_jetSum_of_not_sector
+    {S : PhysicalSpacesData} (K : CanonicalData S) {z : AnnularState S × ℝ}
+    (hz : ¬stateSector S z.1) (m a b : ℕ) (p : PolarPoint) :
+    |mixedDerivative a b ((normalizedCanonicalData S K).potential z m) p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).a p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).b p| +
+      |mixedDerivative a b ((normalizedCanonicalData S K).dividedDifference z m).c p| = 0 := by
+  simp only [normalizedCanonicalData, hz, false_and, ite_false,
+    zeroCanonicalCoefficients, mixedDerivative_zero, abs_zero, add_zero]
+
 set_option backward.isDefEq.respectTransparency false in
+private theorem canonicalJetBoundAtOrder_normalized_of_sector
+    {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
+    {s : ℕ} {B : ℝ} (hB : 0 < B)
+    (hE : ∀ m, 0 ≤ T.E0 (T.sample (K.cell m)))
+    (h : SectorCanonicalJetBoundAtOrder T S C K base loss ε s B) :
+    CanonicalJetBoundAtOrder T S C (normalizedCanonicalData S K) base loss ε s B := by
+  classical
+  intro z hz m p hp a b hab
+  rw [normalizedCanonicalData_cell]
+  have hp' : p ∈ canonicalOpen S K m := by
+    simpa only [canonicalOpen_normalizedCanonicalData] using hp
+  by_cases hs : stateSector S z.1
+  · rw [normalizedCanonicalData_jetSum_of_sector K hs]
+    exact h z hz hs m p hp' a b hab
+  · rw [normalizedCanonicalData_jetSum_of_not_sector K hs]
+    exact mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hE m) _))
+      (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))
+
 /-- The sector estimate gives the exact frozen estimate after normalization.
 There is no change in the constants or in the derivative loss. -/
 theorem canonicalJetBounds_normalized_of_sector {T : MaterialData} {S : PhysicalSpacesData}
@@ -166,26 +227,9 @@ theorem canonicalJetBounds_normalized_of_sector {T : MaterialData} {S : Physical
     (hE : ∀ m, 0 ≤ T.E0 (T.sample (K.cell m)))
     (h : SectorCanonicalJetBounds T S C K base loss ε) :
     CanonicalJetBounds T S C (normalizedCanonicalData S K) base loss ε := by
-  classical
-  unfold CanonicalJetBounds
-  unfold SectorCanonicalJetBounds at h
   intro s
   obtain ⟨B, hB, hb⟩ := h s
-  refine ⟨B, hB, ?_⟩
-  intro z hz m p hp a b hab
-  by_cases hs : stateSector S z.1
-  · have hbound := hb z hz hs m p hp a b hab
-    by_cases hm : K.positive m = true
-    · simpa only [normalizedCanonicalData, hs, hm, and_self, ite_true, add_assoc]
-        using hbound
-    · simpa only [normalizedCanonicalData, hs, hm, true_and, ite_true, ite_false,
-        zeroCanonicalCoefficients, mixedDerivative_zero, abs_zero, add_zero] using hbound
-  · have hweight : 0 ≤ B * T.E0 (T.sample (K.cell m)) ^ B *
-        (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|) :=
-      mul_nonneg (mul_nonneg hB.le (Real.rpow_nonneg (hE m) _))
-        (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))
-    simpa only [normalizedCanonicalData, hs, false_and, ite_false,
-      zeroCanonicalCoefficients, mixedDerivative_zero, abs_zero, add_zero] using hweight
+  exact ⟨B, hB, canonicalJetBoundAtOrder_normalized_of_sector hB hE hb⟩
 
 /-- Material data supply the sampled weight positivity needed in the zero branches. -/
 theorem canonicalJetBounds_normalized_of_sector_of_material
