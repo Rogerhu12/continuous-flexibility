@@ -34,6 +34,7 @@ run_cmd do
   logInfo m!"axioms of FlexibleSphere.exists_closedBending: {endpoint}"
 
 #print axioms ContinuousFlexibility.Blueprint.R06a
+#print axioms ContinuousFlexibility.Blueprint.ScalarWeighted
 
 -- The external-input tool has no blueprint node: audit its actual endpoints.
 #print axioms ContinuousFlexibility.Analysis.exists_halfLineSobolevExtension
@@ -42,4 +43,6 @@ run_cmd do
 #print axioms ContinuousFlexibility.Analysis.SobolevExtensionOperator.completion_compatible
 #print axioms ContinuousFlexibility.Analysis.hadamard_threeLines_operator_norm_unit
 #print axioms ContinuousFlexibility.Analysis.hadamardThreeLinesExtension_spec_unit
-#print axioms ContinuousFlexibility.Blueprint.ScalarWeighted
+#print axioms ContinuousFlexibility.Blueprint.R07
+#print axioms ContinuousFlexibility.Blueprint.R08
+#print axioms ContinuousFlexibility.Blueprint.R10b
