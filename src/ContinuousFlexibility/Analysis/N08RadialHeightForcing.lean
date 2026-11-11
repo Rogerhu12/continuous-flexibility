@@ -81,10 +81,11 @@ private theorem n08_first_injection_grading
   rw [map_zero, add_zero]
 
 theorem n08_heightDirection_grading (S : PhysicalSpacesData) (s : ℕ) (η : HeightPair S) :
-    stateGrading S s (η, (0, (0, 0))) = heightPairGrading S s η :=
-  n08_first_injection_grading (heightPairGrading S)
-    (pairGrading realGrading (pairGrading (S.circle (3 / 4 : ℝ)).grading
-      (S.circle (3 / 4 : ℝ)).grading)) s η
+    stateGrading S s (η, (0, (0, 0))) = heightPairGrading S s η := by
+  simpa only [stateGrading, Prod.zero_eq_mk] using
+    n08_first_injection_grading (heightPairGrading S)
+      (pairGrading realGrading (pairGrading (S.circle (3 / 4 : ℝ)).grading
+        (S.circle (3 / 4 : ℝ)).grading)) s η
 
 private theorem n08_center_seminorm_lt {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : Seminorm ℝ E) (x : E) {ε : ℝ} (hε : 0 < ε) : p (x - x) < ε := by

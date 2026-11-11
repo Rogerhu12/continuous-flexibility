@@ -49,6 +49,112 @@ theorem n08RadialSpeedVariation_continuousOn
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
+private theorem n08_halfParameter_mem
+    (hε : 0 < ε) {x : AnnularState S}
+    (hx : (x, 0) ∈ stateNeighborhood S C base ε)
+    {q : ℝ} (hq : q ∈ Icc (-(ε / 2)) (ε / 2)) :
+    (x, q) ∈ stateNeighborhood S C base ε :=
+  ⟨hx.1, (abs_le.mpr hq).trans_lt (by linarith only [hε])⟩
+
+private theorem n08_stateHeight_parameter_contDiff
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (x : AnnularState S) :
+    ContDiff ℝ ∞ (fun z : ℝ × PolarPoint => stateHeight D S C (x, z.1) z.2) :=
+  ((n08_stateRadialHeight_contDiff hT hS hN x).comp contDiff_snd.fst).add
+    (contDiff_fst.mul ((n08_stateU_contDiff hT hS x).comp contDiff_snd))
+
+/-- The parameter Lipschitz constant and compact angular box are obtained
+before any differentiation of the speed along these trajectories. -/
+private theorem n08_minusFlow_parameter_box
+    (hN : N01Properties D T S C base loss ε)
+    (x : AnnularState S) (hx : (x, 0) ∈ stateNeighborhood S C base ε)
+    (m : ℕ) (θ : ℝ) {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) :
+    ∃ K : ℝ≥0, ∃ L : ℝ,
+      (∀ s ∈ Ioo (C.left m) (C.right m),
+        LipschitzOnWith K (fun q : ℝ => C.minusFlow (x, q) m s θ)
+          (Icc (-(ε / 2)) (ε / 2))) ∧
+      ∀ q ∈ Icc (-(ε / 2)) (ε / 2), ∀ s ∈ Icc (C.left m) r,
+        C.minusFlow (x, q) m s θ ∈ Icc (-L) L := by
+  have hflow := hN.2.2.2.2.2.2.1
+  let O : Set ℝ := Icc (-(ε / 2)) (ε / 2)
+  have hzero : (0 : ℝ) ∈ O :=
+    ⟨neg_nonpos.mpr (half_pos hN.2.1).le, (half_pos hN.2.1).le⟩
+  let f : ℝ → ℝ → ℝ := fun q s => C.minusFlow (x, q) m s θ
+  have hcont : ContinuousOn (f 0) (Icc (C.left m) r) :=
+    (hflow (x, 0) hx m θ).2.1.mono (Icc_subset_Icc le_rfl hr.2.le)
+  obtain ⟨K, hK⟩ := n08_minusFlow_parameter_lipschitz hN x hx m θ
+  obtain ⟨M, hM⟩ := isCompact_Icc.exists_bound_of_continuousOn hcont
+  let L : ℝ := M + (K : ℝ) * (ε / 2)
+  refine ⟨K, L, hK, ?_⟩
+  intro q hq s hs
+  have hbase : |f 0 s| ≤ M := by simpa only [Real.norm_eq_abs] using hM s hs
+  have hdiff : |f q s - f 0 s| ≤ (K : ℝ) * (ε / 2) := by
+    by_cases he : s = C.left m
+    · rw [he, show f q (C.left m) = θ from
+        (hflow (x, q) (n08_halfParameter_mem hN.2.1 hx hq) m θ).1,
+        show f 0 (C.left m) = θ from (hflow (x, 0) hx m θ).1, sub_self, abs_zero]
+      exact mul_nonneg (NNReal.coe_nonneg _) (half_pos hN.2.1).le
+    · have hi : s ∈ Ioo (C.left m) (C.right m) :=
+        ⟨lt_of_le_of_ne hs.1 (Ne.symm he), hs.2.trans_lt hr.2⟩
+      have hd' : |f q s - f 0 s| ≤ (K : ℝ) * |q| := by
+        simpa only [Real.dist_eq, sub_zero] using (hK s hi).dist_le_mul q hq 0 hzero
+      exact hd'.trans (mul_le_mul_of_nonneg_left (abs_le.mpr hq) (NNReal.coe_nonneg _))
+  apply abs_le.mp
+  calc
+    |f q s| = |(f q s - f 0 s) + f 0 s| := by rw [sub_add_cancel]
+    _ ≤ |f q s - f 0 s| + |f 0 s| := abs_add_le _ _
+    _ ≤ (K : ℝ) * (ε / 2) + M := add_le_add hdiff hbase
+    _ = L := by dsimp only [L]; ring
+
+/-- The moving-angle contribution vanishes in the zero-parameter radial
+speed. Both derivatives here are those of the actual supplied functions. -/
+private theorem n08_minusFlow_rhs_parameter_zero
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε)
+    (x : AnnularState S) (hx : (x, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S x) (m : ℕ) (θ : ℝ) {r : ℝ}
+    (hr : r ∈ Ioo (C.left m) (C.right m)) :
+    HasDerivAt (fun q : ℝ => minusCharacteristicSpeed (originalCoefficients D S C (x, q))
+      (r, C.minusFlow (x, q) m r θ))
+      (n08RadialSpeedVariation (stateProfile D S C x) (stateU S x)
+        (r, C.minusFlow (x, 0) m r θ)) 0 := by
+  have hg : RadialProfileGeometry D := hN.1.1.choose_spec.1
+  have hdata := hN
+  obtain ⟨_, _, _, hcontrol, _, _, _, _, _, hadmiss, _, _, hjet⟩ := hdata
+  have hcell := hcontrol.1 m
+  have hcore : r ∈ radialCore D := ⟨hcell.1.trans hr.1, hr.2.trans hcell.2.2⟩
+  let w : ℝ → ℝ := stateProfile D S C x
+  let Z : ℝ × PolarPoint → ℝ := fun z => stateHeight D S C (x, z.1) z.2
+  let f : ℝ → ℝ := fun q => C.minusFlow (x, q) m r θ
+  have hw : ContDiff ℝ ∞ w := contDiff_stateProfile_of_n01 hS hT hN x
+  have hZ : ContDiff ℝ ∞ Z := n08_stateHeight_parameter_contDiff hT hS hN x
+  obtain ⟨_, _, hQlo, _, hDlo, _⟩ :=
+    hadmiss (x, 0) hx hs (r, f 0) ⟨hcore, mem_univ _⟩
+  have hD : 0 < polarDiscriminant w (fun p => Z (0, p)) (r, f 0) :=
+    lt_of_lt_of_le (by norm_num) hDlo
+  have hQ : 0 < heightQ (profileEnergy w (r, f 0))
+      (heightRadial (fun p => Z (0, p)) (r, f 0))
+      (angularPartial (heightAngular (fun p => Z (0, p))) (r, f 0)) :=
+    (div_pos_iff_of_pos_right (n08_stateProfile_pos hg x hcore)).mp
+      (lt_of_lt_of_le (by norm_num) hQlo)
+  obtain ⟨B, _, hBj⟩ := hjet 1 0
+  obtain ⟨J, _⟩ := hBj m 0 0 (r, θ) (by simp) hr
+  have hc : HasDerivAt f
+      (J.D 1 (x, 0) (Fin.cons ((0 : AnnularState S), (1 : ℝ)) Fin.elim0)) 0 :=
+    n08_minusFlow_parameter_hasDerivAt J hx
+  have hfd : DifferentiableAt ℝ
+      (fun z : ℝ × ℝ => n08JacobiMinusSpeed w (fun p => Z (z.1, p)) (r, z.2)) (0, f 0) :=
+    n08_parameterAngleSpeed_differentiableAt hw hZ (hg.1.trans hcore.1).ne' hD hQ
+  simp only [n08_minusCharacteristicSpeed_eq_jacobi]
+  apply n08_hasDerivAt_comp_of_zeroSlice_const
+    (F := fun z : ℝ × ℝ => n08JacobiMinusSpeed w (fun p => Z (z.1, p)) (r, z.2))
+    (c := f) (a := -opticalSpeed w r) hfd hc
+  · intro φ
+    simpa only [n08_minusCharacteristicSpeed_eq_jacobi] using
+      n08_minusCharacteristicSpeed_zero_parameter hg x hw r φ hcore
+  · simpa only [n08_minusCharacteristicSpeed_eq_jacobi] using
+      n08_minusCharacteristicSpeed_parameter_zero hT hS hN x (r, f 0) hcore
+
 /-- The derivative is of N01's specified flow. Only the target radius is
 interior; the integral starts at its actual continuous left endpoint. -/
 theorem n08_minusFlow_parameter_zero
@@ -63,7 +169,7 @@ theorem n08_minusFlow_parameter_zero
           (s, C.minusFlow (x, 0) m s θ)) 0 := by
   have hg : RadialProfileGeometry D := hN.1.1.choose_spec.1
   have hdata := hN
-  obtain ⟨_, _, _, hcontrol, _, _, hflow, _, _, hadmiss, _, _, hjet⟩ := hdata
+  obtain ⟨_, _, _, hcontrol, _, _, hflow, _, _, hadmiss, _, _, _⟩ := hdata
   have hcell := hcontrol.1 m
   have hcore (s : ℝ) (hs' : s ∈ Icc (C.left m) r) : s ∈ radialCore D :=
     ⟨hcell.1.trans_le hs'.1, hs'.2.trans_lt (hr.2.trans hcell.2.2)⟩
@@ -72,39 +178,15 @@ theorem n08_minusFlow_parameter_zero
   have hO : O ∈ 𝓝 (0 : ℝ) := Icc_mem_nhds (by linarith [hN.2.1]) (half_pos hN.2.1)
   have hzero : (0 : ℝ) ∈ O := mem_of_mem_nhds hO
   have hmem (q : ℝ) (hq : q ∈ O) : (x, q) ∈ stateNeighborhood S C base ε :=
-    ⟨hx.1, (abs_le.mpr hq).trans_lt (by linarith [hN.2.1])⟩
+    n08_halfParameter_mem hN.2.1 hx hq
   let f : ℝ → ℝ → ℝ := fun q s => C.minusFlow (x, q) m s θ
   have hcont (q : ℝ) (hq : q ∈ O) : ContinuousOn (f q) (Icc (C.left m) r) :=
     (hflow (x, q) (hmem q hq) m θ).2.1.mono (Icc_subset_Icc le_rfl hr.2.le)
-  obtain ⟨KF, hKF⟩ := n08_minusFlow_parameter_lipschitz hN x hx m θ
-  obtain ⟨M, hM⟩ := isCompact_Icc.exists_bound_of_continuousOn (hcont 0 hzero)
-  let L : ℝ := M + (KF : ℝ) * (ε / 2)
-  have hbox (q : ℝ) (hq : q ∈ O) (s : ℝ) (hs' : s ∈ Icc (C.left m) r) :
-      f q s ∈ Icc (-L) L := by
-    have hbase : |f 0 s| ≤ M := by simpa only [Real.norm_eq_abs] using hM s hs'
-    have hdiff : |f q s - f 0 s| ≤ (KF : ℝ) * (ε / 2) := by
-      by_cases he : s = C.left m
-      · rw [he, show f q (C.left m) = θ from (hflow (x, q) (hmem q hq) m θ).1,
-          show f 0 (C.left m) = θ from (hflow (x, 0) hx m θ).1, sub_self, abs_zero]
-        exact mul_nonneg (NNReal.coe_nonneg _) (half_pos hN.2.1).le
-      · have hi : s ∈ Ioo (C.left m) (C.right m) :=
-          ⟨lt_of_le_of_ne hs'.1 (Ne.symm he), hs'.2.trans_lt hr.2⟩
-        have hd := (hKF s hi).dist_le_mul q hq 0 hzero
-        have hd' : |f q s - f 0 s| ≤ (KF : ℝ) * |q| := by
-          simpa only [Real.dist_eq, sub_zero] using hd
-        exact hd'.trans (mul_le_mul_of_nonneg_left (abs_le.mpr hq) (NNReal.coe_nonneg _))
-    apply abs_le.mp
-    calc
-      |f q s| = |(f q s - f 0 s) + f 0 s| := by rw [sub_add_cancel]
-      _ ≤ |f q s - f 0 s| + |f 0 s| := abs_add_le _ _
-      _ ≤ (KF : ℝ) * (ε / 2) + M := add_le_add hdiff hbase
-      _ = L := by dsimp only [L]; ring
+  obtain ⟨KF, L, hKF, hbox⟩ := n08_minusFlow_parameter_box hN x hx m θ hr
   let w : ℝ → ℝ := stateProfile D S C x
   let Z : ℝ × PolarPoint → ℝ := fun z => stateHeight D S C (x, z.1) z.2
   have hw : ContDiff ℝ ∞ w := contDiff_stateProfile_of_n01 hS hT hN x
-  have hZ : ContDiff ℝ ∞ Z :=
-    ((n08_stateRadialHeight_contDiff hT hS hN x).comp contDiff_snd.fst).add
-      (contDiff_fst.mul ((n08_stateU_contDiff hT hS x).comp contDiff_snd))
+  have hZ : ContDiff ℝ ∞ Z := n08_stateHeight_parameter_contDiff hT hS hN x
   have hpos (q : ℝ) (hq : q ∈ O) (s : ℝ) (hs' : s ∈ Icc (C.left m) r) (η : ℝ) :
       0 < polarDiscriminant w (fun p => Z (q, p)) (s, η) ∧
       0 < heightQ (profileEnergy w (s, η)) (heightRadial (fun p => Z (q, p)) (s, η))
@@ -138,20 +220,15 @@ theorem n08_minusFlow_parameter_zero
   have hVd (s : ℝ) (hs' : s ∈ Ioc (C.left m) r) :
       HasDerivAt (fun q => V q s) (W s) 0 := by
     have hi : s ∈ Ioo (C.left m) (C.right m) := ⟨hs'.1, hs'.2.trans_lt hr.2⟩
-    obtain ⟨B, _, hBj⟩ := hjet 1 0
-    obtain ⟨J, _⟩ := hBj m 0 0 (s, θ) (by simp) hi
-    have hc := n08_minusFlow_parameter_hasDerivAt J hx
-    have hscc := Ioc_subset_Icc_self hs'
-    have hp := hpos 0 hzero s hscc (f 0 s)
-    apply n08_hasDerivAt_comp_of_zeroSlice_const
-      (n08_parameterAngleSpeed_differentiableAt hw hZ (ha.trans_le hscc.1).ne' hp.1 hp.2) hc
-    · intro η
-      exact n08_minusCharacteristicSpeed_zero_parameter hg x hw s η (hcore s hscc)
-    · exact n08_minusCharacteristicSpeed_parameter_zero hT hS hN x (s, f 0 s) (hcore s hscc)
-  exact n08_hasDerivAt_integralTrajectory hr.1.le hO hcont
+    simpa only [n08_minusCharacteristicSpeed_eq_jacobi, V, W, w, Z, f] using
+      n08_minusFlow_rhs_parameter_zero hT hS hN x hx hs m θ hi
+  have htime (q : ℝ) (hq : q ∈ O) (s : ℝ) (hs' : s ∈ Ioo (C.left m) r) :
+      HasDerivAt (f q) (V q s) s := by
+    simpa only [n08_minusCharacteristicSpeed_eq_jacobi, f, V, w, Z] using
+      (hflow (x, q) (hmem q hq) m θ).2.2.1 s ⟨hs'.1, hs'.2.trans hr.2⟩
+  exact n08_hasDerivAt_integralTrajectory (f := f) (V := V) (W := W)
+    (K := KV * max 1 KF) hr.1.le hO hcont
     (fun q hq => (hflow (x, q) (hmem q hq) m θ).1)
-    (fun q hq s hs' => (hflow (x, q) (hmem q hq) m θ).2.2.1 s
-      ⟨hs'.1, hs'.2.trans hr.2⟩)
-    hVint (hWc.intervalIntegrable_of_Icc hr.1.le) hVL hVd
+    htime hVint (hWc.intervalIntegrable_of_Icc hr.1.le) hVL hVd
 
 end ContinuousFlexibility.Statements

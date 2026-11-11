@@ -54,12 +54,16 @@ theorem n08_coefficientA_state_hasDerivAt (hT : IsMaterialData D T)
     (n08_stateProfile_hasDerivAt hS hN.2.2.2.1 x v p.1).sub_const (D.w p.1)
 
 theorem n08_reference_mem_stateNeighborhood (hε : 0 < ε) :
-    (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
-  constructor
-  · change stateGrading S base (C.referenceState - C.referenceState) < ε
-    rw [sub_self]
-    exact (map_zero (stateGrading S base)).trans_lt hε
-  · simpa only [abs_zero] using hε
+    (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
+  ⟨n08_seminorm_center_lt (stateGrading S base) C.referenceState hε,
+    (abs_zero : |(0 : ℝ)| = 0).trans_lt hε⟩
+
+theorem n08_n01_coefficientTowers (hN : N01Properties D T S C base loss ε) :
+    N08RealCoefficientTowers (stateGrading S) (stateNeighborhood S C base ε)
+      (coefficientFamily D S C) (fun m y => y.1 ∈ D.cells m)
+      (fun B m => B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+      base loss C.referenceState :=
+  hN.2.2.2.2.2.2.2.2.2.2.2.1
 
 theorem n08_coefficientA_reference_hasDerivAt (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hN : N01Properties D T S C base loss ε)
@@ -79,18 +83,14 @@ theorem n08_logProfile_reference_coefficient_bound (hT : IsMaterialData D T)
     ∃ B : ℝ, 0 < B ∧ ∀ m r, r ∈ D.cells m → ∀ v : AnnularState S,
       |D.w r * n08_stateLogProfile D S C v r| ≤
         B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
-          (stateGrading S base v + stateGrading S loss v) := by
-  have hε : 0 < ε := hN.2.1
-  have hcoeff := hN.2.2.2.2.2.2.2.2.2.2.2.1
-  obtain ⟨B, hB, hBj⟩ := hcoeff 1 0
-  refine ⟨B, hB, ?_⟩
-  intro m r hr v
-  obtain ⟨J, hJ⟩ := hBj m 0 0 0 (r, 0) (by omega) hr
-  exact n08_realFirstJet_reference_bound J (stateGrading S) base loss C.referenceState
-    (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
-    (fun w => D.w r * n08_stateLogProfile D S C w r)
-    (n08_reference_mem_stateNeighborhood hε)
-    (fun w => n08_coefficientA_reference_hasDerivAt hT hS hN w (r, 0))
-    (by simpa only [Nat.zero_add] using hJ) v
+          (stateGrading S base v + stateGrading S loss v) :=
+  n08_realFirstJet_zero_tower_reference_bound (stateGrading S) (stateNeighborhood S C base ε)
+    (coefficientFamily D S C) (fun m y => y.1 ∈ D.cells m)
+    (fun B m => B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+    base loss C.referenceState 0 (fun r : ℝ => (r, 0))
+    (fun r v => D.w r * n08_stateLogProfile D S C v r)
+    (n08_reference_mem_stateNeighborhood hN.2.1)
+    (fun r v => n08_coefficientA_reference_hasDerivAt hT hS hN v (r, 0))
+    (n08_n01_coefficientTowers hN)
 
 end ContinuousFlexibility.Statements

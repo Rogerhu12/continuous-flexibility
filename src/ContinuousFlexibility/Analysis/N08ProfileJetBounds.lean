@@ -106,16 +106,14 @@ theorem n08_logProfile_reference_jet_bound (hT : IsMaterialData D T)
     ∃ B : ℝ, 0 < B ∧ ∀ m r, r ∈ D.cells m → ∀ v : AnnularState S,
       |iteratedDeriv s (fun t => D.w t * n08_stateLogProfile D S C v t) r| ≤
         B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
-          (stateGrading S base v + stateGrading S (s + loss) v) := by
-  have hcoeff := hN.2.2.2.2.2.2.2.2.2.2.2.1
-  obtain ⟨B, hB, hBj⟩ := hcoeff 1 s
-  refine ⟨B, hB, ?_⟩
-  intro m r hr v
-  obtain ⟨J, hJ⟩ := hBj m 0 s 0 (r, 0) (by omega) hr
-  exact n08_realFirstJet_reference_bound J (stateGrading S) base (s + loss) C.referenceState
-    (B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
-    (fun w => iteratedDeriv s (fun t => D.w t * n08_stateLogProfile D S C w t) r)
-    (n08_reference_mem_stateNeighborhood hN.2.1)
-    (fun w => n08_coefficientA_jet_reference_hasDerivAt hT hS hN w s r) hJ v
+          (stateGrading S base v + stateGrading S (s + loss) v) :=
+  n08_realFirstJet_tower_reference_bound (stateGrading S) (stateNeighborhood S C base ε)
+    (coefficientFamily D S C) (fun m y => y.1 ∈ D.cells m)
+    (fun B m => B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B)
+    base loss C.referenceState s s 0 0 (fun r : ℝ => (r, 0))
+    (fun r v => iteratedDeriv s (fun t => D.w t * n08_stateLogProfile D S C v t) r)
+    (by omega) (n08_reference_mem_stateNeighborhood hN.2.1)
+    (fun r v => n08_coefficientA_jet_reference_hasDerivAt hT hS hN v s r)
+    (n08_n01_coefficientTowers hN)
 
 end ContinuousFlexibility.Statements

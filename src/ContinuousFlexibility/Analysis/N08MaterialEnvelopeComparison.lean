@@ -76,12 +76,15 @@ theorem n08_material_model_comparison {D : ReferenceData} {T : MaterialData}
       zero_div, Real.exp_zero, mul_one] using hHupper
   · have hm0 : materialM 0 = Real.exp 1 := by norm_num [materialM, materialMExponent]
     rw [hm0]
-    exact hKe.trans (by simpa only [mul_one] using
-      mul_le_mul_of_nonneg_left hposM (zero_le_one.trans hK))
+    have hKM : K ≤ K * T.M r := by
+      simpa only [mul_one] using mul_le_mul_of_nonneg_left hposM (zero_le_one.trans hK)
+    exact hKe.trans hKM
   · have hm0 : materialM 0 = Real.exp 1 := by norm_num [materialM, materialMExponent]
     rw [hm0]
-    exact hMupper.trans (by simpa only [mul_one] using mul_le_mul_of_nonneg_left
-      (Real.one_le_exp_iff.mpr (by norm_num : (0 : ℝ) ≤ 1)) (zero_le_one.trans hK))
+    have hKe' : K ≤ K * Real.exp 1 := by
+      simpa only [mul_one] using mul_le_mul_of_nonneg_left
+        (Real.one_le_exp_iff.mpr (by norm_num : (0 : ℝ) ≤ 1)) (zero_le_one.trans hK)
+    exact hMupper.trans hKe'
 
 theorem n08_material_envelope_comparison {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) {a b C : ℝ} (ha : 0 < a) (hb : 0 < b) (hC : 0 < C) :

@@ -54,7 +54,8 @@ def n08HeightLine (S : PhysicalSpacesData) (x : AnnularState S) (η : HeightPair
 
 theorem n08HeightLine_eq (x : AnnularState S) (η : HeightPair S) (t : ℝ) :
     n08HeightLine S x η t = (x.1 + n08RealSMul t η, x.2) := by
-  simpa only [n08HeightLine, n08StateSMul, n08RealSMul] using heightLine_pair_eq x η t
+  simpa only [n08HeightLine, n08StateSMul, n08RealSMul, Prod.zero_eq_mk] using
+    heightLine_pair_eq x η t
 
 theorem n08HeightLine_sector {x : AnnularState S} (hx : stateSector S x)
     (η : HeightPair S) (t : ℝ) : stateSector S (n08HeightLine S x η t) := by

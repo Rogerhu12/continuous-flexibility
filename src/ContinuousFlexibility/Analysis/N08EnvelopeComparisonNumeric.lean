@@ -23,7 +23,9 @@ private theorem n08_materialMExponent_mono {x y : ℝ} (hx : 0 ≤ x) (hxy : x �
     Real.log_le_log (add_pos_of_pos_of_nonneg (Real.exp_pos 1) hx)
       (add_le_add_right hxy _)
   have hxlog : 0 ≤ materialLogFactor x := zero_le_one.trans (n08_logFactor_one_le hx)
-  apply add_le_add_left
+  change 1 + x ^ (5 / 2 : ℝ) * materialLogFactor x ^ 2 ≤
+    1 + y ^ (5 / 2 : ℝ) * materialLogFactor y ^ 2
+  apply add_le_add le_rfl
   exact mul_le_mul (Real.rpow_le_rpow hx hxy (by norm_num : (0 : ℝ) ≤ 5 / 2))
     (pow_le_pow_left₀ hxlog hlog 2) (sq_nonneg _)
     (Real.rpow_nonneg (hx.trans hxy) _)
@@ -81,8 +83,9 @@ theorem n08_materialMExponent_affine_bound {K : ℝ} (hK : 1 ≤ K) :
       nlinarith [mul_nonneg (zero_le_one.trans hK) (sub_nonneg.mpr (le_of_not_ge hx1))]
     have hyM := n08_materialMExponent_mono hy hyL
     have hMA : materialMExponent L ≤ A := by dsimp only [A]; linarith
-    exact (hyM.trans hMA).trans (by simpa only [mul_one] using
-      mul_le_mul_of_nonneg_left hMx hA.le)
+    have hAM : A ≤ A * materialMExponent x := by
+      simpa only [mul_one] using mul_le_mul_of_nonneg_left hMx hA.le
+    exact (hyM.trans hMA).trans hAM
 
 theorem n08_endpoint_height_envelope_comparison {a b C : ℝ}
     (ha : 0 < a) (hb : 0 < b) (hC : 0 < C) :
@@ -104,7 +107,6 @@ theorem n08_endpoint_height_envelope_comparison {a b C : ℝ}
     have heq : A * x ^ 3 + B = (2 * a * x ^ 3 + 3 * |Real.log C|) / (2 * b) := by
       dsimp only [A, B]
       field_simp
-      ring
     rw [heq]
     apply (le_div_iff₀ (by positivity : 0 < 2 * b)).mpr
     nlinarith only [hl, le_abs_self (Real.log C)]

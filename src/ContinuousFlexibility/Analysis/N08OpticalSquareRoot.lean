@@ -59,7 +59,10 @@ theorem n08_sqrtAffine_radius_bound {A B R : ℝ} (hA : 0 < A) (hR : 0 < R)
     congr 1
     ring
   apply n08_not_differentiableAt_sqrt_zero
-  simpa only [Function.comp_apply, heq] using hcomp
+  change DifferentiableAt ℝ
+    (fun s : ℝ => Real.sqrt (A + ((s - A) / B) * B)) 0 at hcomp
+  rw [heq] at hcomp
+  exact hcomp
 
 /-- Recenter the actual affine-line derivative at an arbitrary parameter. -/
 theorem n08_hasDerivAt_affine_parameter

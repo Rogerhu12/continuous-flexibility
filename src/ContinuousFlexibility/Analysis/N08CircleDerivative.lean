@@ -70,6 +70,14 @@ private theorem n08_lineDerivative_value
   rw [hvalue]
   exact hd
 
+private theorem n08_germ_eq_on_open_preimage
+    {E F G : Type*} [TopologicalSpace E] [TopologicalSpace F]
+    (p : E → F) (hp : Continuous p) {U : Set F} (hU : IsOpen U)
+    {x : E} (hx : p x ∈ U) (f g : E → G)
+    (hfg : ∀ y, p y ∈ U → f y = g y) : f =ᶠ[𝓝 x] g := by
+  filter_upwards [hp.continuousAt.preimage_mem_nhds (hU.mem_nhds hx)] with y hy
+  exact hfg y hy
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base : ℕ} {ε : ℝ}
@@ -152,18 +160,26 @@ private theorem n08CircleStateDerivative_raw
     (fun y => R.residual (liftSectorParameter S C y))
     (n08CircleSectorPoint_line hS C z v) hj (n08CircleStateDerivative_apply hS hR z v)
 
+private theorem n08CircleResidual_centered_coe
+    (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
+    (hR : N02Properties D T S C R base ε) {z : AnnularState S × ℝ}
+    (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε) :
+    (n08CircleResidual hS hR z).val =
+      R.residual (liftSectorParameter S C (n08CircleSectorPoint hS C z)) :=
+  (n08CircleResidual_projected_coe hS hR hz).trans
+    (congrArg R.residual (n08CircleSectorPoint_lift hS href z).symm)
+
 private theorem n08CircleResidual_germ
     (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
     (hR : N02Properties D T S C R base ε) {z : AnnularState S × ℝ}
     (hz : (n08_stateProjection hS z.1, z.2) ∈ stateNeighborhood S C base ε) :
     (fun x => (n08CircleResidual hS hR (x, z.2)).val) =ᶠ[𝓝 z.1]
       (fun x => R.residual (liftSectorParameter S C (n08CircleSectorPoint hS C (x, z.2)))) := by
-  have hc : Continuous (fun x : AnnularState S => (n08_stateProjection hS x, z.2)) :=
-    (n08_stateProjection hS).continuous.prodMk continuous_const
-  have hn := hc.continuousAt.preimage_mem_nhds
-    ((n08_isOpen_stateNeighborhood S C base ε).mem_nhds hz)
-  filter_upwards [hn] with x hx
-  rw [n08CircleResidual_projected_coe hS hR hx, n08CircleSectorPoint_lift hS href]
+  exact n08_germ_eq_on_open_preimage
+    (fun x : AnnularState S => (n08_stateProjection hS x, z.2))
+    ((n08_stateProjection hS).continuous.prodMk continuous_const)
+    (n08_isOpen_stateNeighborhood S C base ε) hz _ _
+    (fun _ hx => n08CircleResidual_centered_coe hS href hR hx)
 
 theorem n08CircleStateDerivative_hasLineDerivAt
     (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)

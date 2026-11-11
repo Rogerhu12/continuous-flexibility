@@ -70,7 +70,8 @@ theorem n08_smoothTameOn_translate
   intro x hx hnear v
   have hnear' : p base ((a + x) - (a + x0)) < ε := by
     simpa only [add_sub_add_left_eq_sub] using hnear
-  change q s (J.D k (a + x) v) ≤ _
+  change q s (J.D k (a + x) v) ≤
+    (C * (1 + p (s + loss) a)) * tameJetSize p k s loss base x v
   exact (hCb (a + x) hx hnear' v).trans
     ((mul_le_mul_of_nonneg_left
       (n08_tameJetSize_translate p k s loss base a x v) hC).trans_eq (by ring))
