@@ -125,12 +125,12 @@ theorem morsePhysicalDeepTail_state_radialJacobi_Ico
     have hflux : ContDiffAt ℝ ∞
         (fun r => D.w r * deriv (tailPhysicalLift D right j u) r)
         (tailPhysicalRadius right T.entrance) :=
-      hw.mul (hU.derivWithin (by simp))
+      hw.mul (hU.derivWithin (m := ∞) (by simp))
     have hJ : ContinuousAt
         (radialJacobi ((j : ℝ) ^ 2) D.w (tailPhysicalLift D right j u))
         (tailPhysicalRadius right T.entrance) :=
-      (hflux.derivWithin (by simp)).continuousAt.sub
-        (((continuousAt_const.mul (hw.derivWithin (by simp)).continuousAt).div
+      (hflux.derivWithin (m := ∞) (by simp)).continuousAt.sub
+        (((continuousAt_const.mul (hw.derivWithin (m := ∞) (by simp)).continuousAt).div
           continuousAt_id (tailPhysicalRadius_pos right T.entrance).ne').mul hU.continuousAt)
     have hc := hJ.comp (continuous_tailPhysicalRadius right).continuousAt
     have hz : (fun y => radialJacobi ((j : ℝ) ^ 2) D.w
@@ -177,7 +177,7 @@ theorem morsePhysicalDeepTail_state_firstOrder_at
     field_simp [hw₀, hlam] <;> ring
   · have hd := hasDerivAt_flux_of_radialJacobi_eq_zero
       (hD.2.2.1.1.differentiable (by simp) _)
-      ((hU.derivWithin (by simp)).differentiableAt (by simp))
+      ((hU.derivWithin (m := ∞) (by simp)).differentiableAt (by simp))
       (morsePhysicalDeepTail_state_radialJacobi_Ico hD hT hu hsys hx)
     exact (hd.div_const lam).congr_deriv (by ring)
 

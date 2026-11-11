@@ -45,7 +45,7 @@ def outerReflectedTransfer (A : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ)) :
     (A : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ)) :
     (outerReflectedTransfer A).symm = outerReflectedTransfer A.symm := by
   apply ContinuousLinearEquiv.ext
-  intro v
+  funext v
   rfl
 
 theorem outerReflectedTransfer_norm

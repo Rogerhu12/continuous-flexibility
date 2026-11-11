@@ -32,6 +32,20 @@ theorem ae_eq_of_measure_eq {μ ν : Measure ℝ} (h : μ = ν) {f g : ℝ → �
   rw [← h]
   exact hfg
 
+/-- A generic density change after equality of measures. The equality
+is eliminated before proving the representative formula. -/
+def squareDensityMeasureEquiv {μ ν : Measure ℝ} {a : ℝ → ℝ}
+    (h : ν = squareDensityMeasure μ a) (ha : Measurable a) (hpos : ∀ x, 0 < a x) :
+    Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 μ :=
+  (l2MeasureCongr h).trans (squareDensityEquiv μ ha hpos)
+
+theorem squareDensityMeasureEquiv_ae {μ ν : Measure ℝ} {a : ℝ → ℝ}
+    (h : ν = squareDensityMeasure μ a) (ha : Measurable a) (hpos : ∀ x, 0 < a x)
+    (f : Lp ℝ 2 ν) :
+    squareDensityMeasureEquiv h ha hpos f =ᵐ[μ] fun x => a x * f x := by
+  subst ν
+  exact squareDensityEquiv_ae μ ha hpos f
+
 end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Radial
@@ -162,10 +176,9 @@ def outerPhysicalGaugeEquiv
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start) :
     Lp ℝ 2 (outerPhysicalPullbackMeasure D T right) ≃ₗᵢ[ℝ] DeepTailL2 T :=
-  (l2MeasureCongr (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical)).trans
-    (squareDensityEquiv (deepTailMeasure T)
-      (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
-      (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j))
+  squareDensityMeasureEquiv (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical)
+    (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
+    (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j)
 
 theorem outerPhysicalPullback_ae_eq
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
@@ -182,17 +195,10 @@ theorem outerPhysicalGaugeEquiv_ae
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start)
     (f : Lp ℝ 2 (outerPhysicalPullbackMeasure D T right)) :
     outerPhysicalGaugeEquiv hD hphysical f =ᵐ[deepTailMeasure T]
-      fun x => outerPhysicalAmplitude D right j x * f x := by
-  have hc := squareDensity_ae_eq (deepTailMeasure T)
+      fun x => outerPhysicalAmplitude D right j x * f x :=
+  squareDensityMeasureEquiv_ae (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical)
     (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
-    (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j)
-    (l2MeasureCongr_ae (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical) f)
-  have hg := squareDensityEquiv_ae (deepTailMeasure T)
-    (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
-    (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j)
-    (l2MeasureCongr (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical) f)
-  filter_upwards [hc, hg] with x hx hy
-  exact hy.trans (congrArg (fun t => outerPhysicalAmplitude D right j x * t) hx)
+    (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j) f
 
 /-- The exact physical logarithmic-gauge isometry. -/
 def outerPhysicalTailEquiv

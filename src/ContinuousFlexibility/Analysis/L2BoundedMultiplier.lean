@@ -106,7 +106,6 @@ theorem l2BoundedMultiplier_comp
     rw [abs_mul]
     exact mul_le_mul hx hy (abs_nonneg _) (le_trans (abs_nonneg _) hx)
   ext f
-  apply Lp.ext
   filter_upwards
     [l2BoundedMultiplier_ae μ hφ hφb (l2BoundedMultiplier μ hψ hψb f),
       l2BoundedMultiplier_ae μ hψ hψb f,

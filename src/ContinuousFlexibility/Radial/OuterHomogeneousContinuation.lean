@@ -36,10 +36,11 @@ theorem hasDerivAt_morseGlueCut_of_matching {c d : ℝ} {f g : ℝ → ℝ}
     hf.hasDerivWithinAt.congr_of_mem
       (fun x hx => by
         change x ≤ c at hx
-        simp only [morseGlueCut, hx, ite_true]) le_rfl
+        simp only [morseGlueCut, hx, ite_true]) (by simp only [mem_Iic, le_refl])
   have hR : HasDerivWithinAt (morseGlueCut c f g) d (Ici c) c :=
     hg.hasDerivWithinAt.congr_of_mem
-      (fun x hx => morseGlueCut_eq_right_of_matching hmatch hx) le_rfl
+      (fun x hx => morseGlueCut_eq_right_of_matching hmatch (mem_Ici.mp hx))
+      (by simp only [mem_Ici, le_refl])
   have h := hL.union hR
   have hu : Iic c ∪ Ici c = (univ : Set ℝ) := by
     ext x

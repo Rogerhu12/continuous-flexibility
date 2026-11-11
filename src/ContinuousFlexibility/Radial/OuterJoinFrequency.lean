@@ -153,7 +153,7 @@ theorem morse_preceding_join_factor_le_sq_exp
       _ = U * exp ((L + 32) * N) := by
         rw [mul_pow, outer_exp_pow_nat]
         dsimp only [U]
-        norm_num only [Nat.cast_ofNat, show (3 : ℝ) ^ 5 = 243 by norm_num]
+        simp only [Nat.cast_ofNat, show (3 : ℝ) ^ 5 = 243 by norm_num]
         rw [show C 0 * K * 9 ^ 12 * exp ((L + 27) * N) * (243 * exp ((5 : ℝ) * N)) =
           (C 0 * K * 9 ^ 12 * 243) * (exp ((L + 27) * N) * exp (5 * N)) by ring,
           ← exp_add]
