@@ -45,7 +45,8 @@ theorem cylinder_mixedFrequency_le_weight (a q : ℝ) (ζ : ℝ × ℤ)
       mul_le_mul
         (pow_le_pow_left₀ (abs_nonneg _) (cylinder_radialFrequency_le_weight a q ζ) r)
         (pow_le_pow_left₀ (abs_nonneg _) (cylinder_angularFrequency_le_weight a q ζ) t)
-        (by positivity) (by positivity)
+        (pow_nonneg (abs_nonneg _) t)
+        (pow_nonneg (cylinderFrequencyWeight_pos a q ζ).le r)
     _ = cylinderFrequencyWeight a q ζ ^ (r + t) := (pow_add _ _ _).symm
     _ ≤ _ := pow_le_pow_right₀ (cylinderFrequencyWeight_one_le a q ζ) hrt
 

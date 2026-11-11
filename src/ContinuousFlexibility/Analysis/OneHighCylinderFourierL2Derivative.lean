@@ -29,7 +29,9 @@ theorem real_l2_fourier_pairing (u : ℝ → ℂ) (hu : MemLp u 2 (volume : Meas
     simpa only [TemperedDistribution.fourier_apply, Lp.toTemperedDistribution_apply,
       smul_eq_mul] using
       congrArg (fun T : 𝓢'(ℝ, ℂ) => T φ) (Lp.fourier_toTemperedDistribution_eq (hu.toLp u))
-  exact ht.symm.trans (integral_congr_ae (hu.coeFn_toLp.mono fun x hx => by rw [hx]))
+  exact ht.symm.trans (integral_congr_ae (hu.coeFn_toLp.mono fun x hx => by
+    dsimp only
+    rw [hx]))
 
 /-- Integration by parts for an actual `L²` derivative and an arbitrary
 Schwartz test function. -/
@@ -97,11 +99,14 @@ theorem real_l2_fourier_derivative_ae (u v : ℝ → ℂ)
         real_l2_integral_mul_deriv u v hu hv hderiv (𝓕 φ)
       _ = ∫ x : ℝ, (𝓕 η) x * u x := by
         rw [hd]
-        simp
+        simp only [SchwartzMap.neg_apply, neg_mul, integral_neg, neg_neg]
       _ = ∫ ξ : ℝ, η ξ * F ξ := (real_l2_fourier_pairing u hu η).symm
       _ = _ := by
         apply integral_congr_ae
-        exact Eventually.of_forall fun ξ => by rw [hη]; ring
+        exact Eventually.of_forall fun ξ => by
+          dsimp only
+          rw [hη]
+          ring
   simpa [φ, Complex.real_smul, smul_eq_mul] using hp
 
 end ContinuousFlexibility.Analysis

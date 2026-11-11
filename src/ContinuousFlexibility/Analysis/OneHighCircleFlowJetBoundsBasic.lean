@@ -65,12 +65,12 @@ theorem circleFlow_norm_iteratedDeriv_comp_le_linear_top
   have hproduct (c : OrderedFinpartition n) :
       (∏ j, ‖iteratedDeriv (c.partSize j) h x‖) ≤ ‖iteratedDeriv n h x‖ + K ^ n := by
     by_cases hc : c.length = 1
-    · rw [circleFlow_prod_partition_one c hc]
+    · rw [circleFlow_prod_partition_one c hc (fun d => ‖iteratedDeriv d h x‖)]
       exact le_add_of_nonneg_right (pow_nonneg hKnonneg n)
     · have hlength : 1 < c.length := by have hp := c.length_pos hn; omega
       have hb : (∏ j, ‖iteratedDeriv (c.partSize j) h x‖) ≤ K ^ c.length := by
         calc
-          _ ≤ ∏ _j : Fin c.length, K := Finset.prod_le_prod
+          _ ≤ ∏ _j : Fin c.length, K := Finset.prod_le_prod₀
             (fun _ _ => norm_nonneg _) (fun j _ =>
               hinner (c.partSize j) (c.partSize_pos j) (circleFlow_partSize_lt c hlength j) x)
           _ = _ := by simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
