@@ -13,7 +13,8 @@ run_cmd do
     "ScalarWeighted", "Tame", "Spaces", "R05a", "R05b", "R06a", "R06b", "R06c", "R07",
     "R08", "R09", "R10a", "R10b", "R11a", "R11b", "R12", "N01a", "N01b", "N01c", "N02N03",
     "N04Root", "N04Cubic", "N04Transmission", "N04a", "N04b", "N04Coordinates", "N05",
-    "N06", "N07a", "N07b", "N08", "N09N10", "Solve", "N12"]
+    "N06", "N07a", "N07b", "N08", "N09N10", "Solve", "N12",
+    "N01cCoefficients", "N01cSpeeds", "N01cFlows"]
   let mut proved : Array String := #[]
   let mut openNodes : Array String := #[]
   for n in nodes do

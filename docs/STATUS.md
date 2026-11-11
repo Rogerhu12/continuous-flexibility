@@ -2,6 +2,34 @@
 
 Last updated: 2026-11-11.
 
+## N01c statement audit and proof stages
+
+`line/N01c` found a quantifier mismatch in the frozen ordinary-flow clause:
+`∀ k s : ℕ, ... oneHighVariationWeight ... base (s + loss) ...`, with
+`loss : ℕ` fixed outside `∀ k s`. The manuscript's
+`eq:tame-derivative-shape` uses `s + d_k`, and Proposition 7.8(iii) invokes
+that estimate. Repeated parameter differentiation of translated evaluation
+requires arbitrarily high angular derivatives, so a fixed loss is not a
+consequence of ordinary smooth tame flow calculus. The complete former
+clause, the explicit circle-flow obstruction and its limitation to that
+general mechanism are in [the audit](N01c-loss-audit.md). This is not a claim
+that the complete existential `N01Statement` has been disproved.
+
+The repaired final clause is `OrdinaryFlowFamilyTameBounds`: it quantifies
+`∀ k, ∃ parameterLoss, ∀ s, ...` and uses `s + loss + parameterLoss`.
+The common base and positive radius, the coefficient clause, the outer
+N01 statement, and the main geometric endpoint are preserved.
+`Blueprint/Assembly.lean` explicitly assembles this corrected interface.
+
+N01c remains open. Its three concrete sub-statements are `N01cCoefficients`,
+`N01cSpeeds`, and `N01cFlows`; their definitions retain the actual coefficient,
+characteristic-speed and ordinary-flow families. The parent assembly does
+not count as a completed theorem while any leaf remains open. The three
+task files are available for parallel work; quantitative coefficient estimates,
+root/control estimates for the speeds, and the all-order ODE estimates remain
+separate obligations. No independent-witness implication has been substituted
+for the existential construction.
+
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
@@ -143,6 +171,9 @@ already exists in the tree.
   N04Root, N04Cubic, N04Transmission, N07b, N09N10, N12, and the five tool tasks.
 
 ## Pick next
+
+N01c sub-blueprint candidates take precedence: `N01c-Coefficients`,
+`N01c-Speeds`, `N01c-Flows`. Claim only a task whose branch is absent.
 
 Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
 R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
