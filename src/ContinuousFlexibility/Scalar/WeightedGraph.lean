@@ -34,10 +34,13 @@ theorem scalarAnnularIntegral_add (D : ReferenceData) {f g : PolarPoint → ℝ}
     intervalIntegral.continuous_parametric_intervalIntegral_of_continuous' hf 0 Real.pi
   have hgi : Continuous (fun r => ∫ θ in (0 : ℝ)..Real.pi, g (r, θ)) :=
     intervalIntegral.continuous_parametric_intervalIntegral_of_continuous' hg 0 Real.pi
+  have he (r : ℝ) : (∫ θ in (0 : ℝ)..Real.pi, f (r, θ) + g (r, θ)) =
+      (∫ θ in (0 : ℝ)..Real.pi, f (r, θ)) + (∫ θ in (0 : ℝ)..Real.pi, g (r, θ)) :=
+    intervalIntegral.integral_add
+      ((hf.comp (continuous_const.prodMk continuous_id)).intervalIntegrable 0 Real.pi)
+      ((hg.comp (continuous_const.prodMk continuous_id)).intervalIntegrable 0 Real.pi)
   unfold scalarAnnularIntegral
-  simp_rw [intervalIntegral.integral_add
-    ((hf.comp (continuous_const.prodMk continuous_id)).intervalIntegrable 0 Real.pi)
-    ((hg.comp (continuous_const.prodMk continuous_id)).intervalIntegrable 0 Real.pi)]
+  simp_rw [he]
   exact intervalIntegral.integral_add (hfi.intervalIntegrable D.a D.b)
     (hgi.intervalIntegrable D.a D.b)
 
