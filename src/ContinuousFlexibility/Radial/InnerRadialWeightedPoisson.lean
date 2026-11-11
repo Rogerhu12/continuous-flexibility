@@ -251,7 +251,7 @@ theorem weighted_poisson_norm_le_ambient (hDw : ContDiff ℝ ∞ D.w)
         C.ambientPoisson hDw ∘L innerBoundaryDiagonal (fun i => (w i)⁻¹)) ∘L
           Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ)
             (innerInterfaceInverseSqrt C.referenceMatrix)‖ := by
-  apply innerIsometricOperator_norm_le (LinearIsometry.id ℝ B)
+  apply innerIsometricOperator_norm_le (LinearIsometry.id : B →ₗᵢ[ℝ] B)
     (innerRadialPhysicalInclusion D G bordered)
   intro ξ
   simp only [ContinuousLinearMap.comp_apply, LinearIsometry.id_apply,
