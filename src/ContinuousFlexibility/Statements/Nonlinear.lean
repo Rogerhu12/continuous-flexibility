@@ -804,19 +804,22 @@ def nuColumnField (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (z : AnnularState S × ℝ) (p : PolarPoint) : ℝ :=
   deriv (fun ν => scalarResidualField D S C ((z.1.1, (ν, z.1.2.2)), z.2) p) z.1.2.1
 
+/-- The physical weak equation uses the full angular period of `RadialTest`,
+as does `ReferenceGraph`. The canonical source coordinates still use one
+half-period for the half-periodic fields themselves. -/
 def PerturbedCanonicalRelation (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (K : CanonicalData S) (L : ReturnCorrectionData S)
     (z : AnnularState S × ℝ) (U : CanonicalUnknown S K) (F : CanonicalSequence S K) : Prop :=
   ∃ η f : PolarPoint → ℝ,
     HasCanonicalRepresentation D S C K z U F η f ∧ referenceRow D η = 0 ∧
     ∀ φ, RadialTest D φ →
-      (∫ r in D.a..D.b, angularMean (fun θ =>
+      (∫ r in D.a..D.b, radialAngularMean (fun θ =>
         η (r, θ) * divergenceOperator (L.coefficients z) φ (r, θ))) +
-        U.2.2.1 * (∫ r in D.a..D.b, angularMean (fun θ =>
+        U.2.2.1 * (∫ r in D.a..D.b, radialAngularMean (fun θ =>
           nuColumnField D S C z (r, θ) * φ (r, θ))) +
-        U.2.2.2 * (∫ r in D.a..D.b, angularMean (fun θ =>
+        U.2.2.2 * (∫ r in D.a..D.b, radialAngularMean (fun θ =>
           (S.height (3 / 4 : ℝ)).decode S.psi (r, θ) * φ (r, θ))) =
-      ∫ r in D.a..D.b, angularMean (fun θ => f (r, θ) * φ (r, θ))
+      ∫ r in D.a..D.b, radialAngularMean (fun θ => f (r, θ) * φ (r, θ))
 
 structure RelativeInverseData (S : PhysicalSpacesData) (K : CanonicalData S)
     (V : VolumeModelData S K) (b : ℕ) (B : CanonicalDomainData S K V b) where
