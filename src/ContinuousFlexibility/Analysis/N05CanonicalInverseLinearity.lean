@@ -168,7 +168,7 @@ def n05CanonicalInverseLinear (t : ℝ) (s : ℕ) :
       n05CanonicalGlobalInverse_linear_combination
         hD hT hS h hcoordinates hγw hG hV hgap v w 1 1
   map_smul' c v := by
-    simpa only [zero_smul, add_zero] using
+    simpa only [zero_smul, add_zero, RingHom.id_apply] using
       n05CanonicalGlobalInverse_linear_combination
         hD hT hS h hcoordinates hγw hG hV hgap v v c 0
 
