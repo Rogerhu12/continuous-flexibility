@@ -35,9 +35,10 @@ theorem mixedDerivative_radialFunction (f : ℝ → ℝ) (a b : ℕ) (p : PolarP
       if b = 0 then iteratedDeriv a f p.1 else 0 := by
   by_cases hb : b = 0
   · subst b
-    simp only [mixedDerivative, iteratedDeriv_zero, if_pos rfl]
+    simp [mixedDerivative]
   · simp only [mixedDerivative, iteratedDeriv_const, if_neg hb, ite_self]
 
+set_option backward.isDefEq.respectTransparency true in
 /-- Exact physical jets of the state direction, including the scalar cutoff
 coordinate of `HeightPair`. -/
 theorem mixedDerivative_stateU
@@ -49,10 +50,12 @@ theorem mixedDerivative_stateU
         x.1.2 * (if b = 0 then iteratedDeriv a S.chiLeft p.1 else 0) := by
   change mixedDerivative a b
     (fun q => (S.height (3 / 4 : ℝ)).decode x.1.1 q + x.1.2 * S.chiLeft q.1) p = _
-  rw [mixedDerivative_add_of_contDiff
+  have hf : ContDiff ℝ ∞ ((S.height (3 / 4 : ℝ)).decode x.1.1) :=
     (physical_height_contDiff_and_flatJets hT hS
       (by norm_num : (0 : ℝ) < 3 / 4) x.1.1).1
-    (contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)),
+  have hg : ContDiff ℝ ∞ (fun q : PolarPoint => x.1.2 * S.chiLeft q.1) :=
+    contDiff_const.mul (hS.2.2.1.1.comp contDiff_fst)
+  rw [mixedDerivative_add_of_contDiff hf hg a b p,
     mixedDerivative_const_mul, mixedDerivative_radialFunction]
 
 /-- Projection onto the decoded height component of the actual state. -/
@@ -83,12 +86,13 @@ def stateUJetCLM
       (statePhysicalHeightCLM S) +
     (if b = 0 then iteratedDeriv a S.chiLeft p.1 else 0) • stateLeftHeightCLM S
 
+set_option backward.isDefEq.respectTransparency true in
 theorem stateUJetCLM_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (a b : ℕ) (p : PolarPoint) (hp : p ∈ annularOpen D) (x : AnnularState S) :
     stateUJetCLM hT hS a b p hp x = mixedDerivative a b (stateU S x) p := by
-  rw [mixedDerivative_stateU hT hS]
+  rw [mixedDerivative_stateU hT hS a b p x]
   simp only [stateUJetCLM, add_apply, ContinuousLinearMap.comp_apply,
     statePhysicalHeightCLM_apply, stateLeftHeightCLM_apply, smul_apply, smul_eq_mul,
     heightPhysicalJetCLM_apply]
@@ -133,8 +137,7 @@ theorem radialPartial_heightAngular_eq_mixedJets {f : PolarPoint → ℝ}
   unfold heightAngular
   rw [radialPartial_div hθ differentiableAt_fst hr, radialPartial_fst,
     angularPartial_eq_firstMixedJet hf, radialPartial_mixedDerivative hf 0 1]
-  field_simp [hr]
-  ring
+  field_simp [hr] <;> ring
 
 theorem angularPartial_heightAngular_eq_secondMixedJet {f : PolarPoint → ℝ}
     (hf : ContDiff ℝ ∞ f) {p : PolarPoint} (hr : p.1 ≠ 0) :
@@ -144,8 +147,7 @@ theorem angularPartial_heightAngular_eq_secondMixedJet {f : PolarPoint → ℝ}
   unfold heightAngular
   rw [angularPartial_div hθ differentiableAt_fst hr, angularPartial_fst,
     angularPartial_eq_firstMixedJet hf, angularPartial_mixedDerivative hf 0 1]
-  field_simp [hr]
-  ring
+  field_simp [hr] <;> ring
 
 def stateUHeightRadialCLM
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -178,6 +180,7 @@ def stateUAngularHeightAngularCLM
     (p : PolarPoint) (hp : p ∈ annularOpen D) : AnnularState S →L[ℝ] ℝ :=
   p.1⁻¹ • stateUJetCLM hT hS 0 2 p hp
 
+set_option backward.isDefEq.respectTransparency true in
 theorem stateUHeightRadialCLM_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -186,6 +189,7 @@ theorem stateUHeightRadialCLM_apply
   rw [heightRadial_eq_firstMixedJet (smooth_actualStateU hT hS x)]
   exact stateUJetCLM_apply hT hS 1 0 p hp x
 
+set_option backward.isDefEq.respectTransparency true in
 theorem stateUHeightAngularCLM_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -195,6 +199,7 @@ theorem stateUHeightAngularCLM_apply
   simp only [stateUHeightAngularCLM, smul_apply, smul_eq_mul, stateUJetCLM_apply,
     div_eq_mul_inv, mul_comm]
 
+set_option backward.isDefEq.respectTransparency true in
 theorem stateURadialHeightRadialCLM_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -204,6 +209,7 @@ theorem stateURadialHeightRadialCLM_apply
   rw [radialPartial_heightRadial_eq_secondMixedJet (smooth_actualStateU hT hS x)]
   exact stateUJetCLM_apply hT hS 2 0 p hp x
 
+set_option backward.isDefEq.respectTransparency true in
 theorem stateURadialHeightAngularCLM_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -214,6 +220,7 @@ theorem stateURadialHeightAngularCLM_apply
   simp only [stateURadialHeightAngularCLM, sub_apply, smul_apply, smul_eq_mul,
     stateUJetCLM_apply, div_eq_mul_inv, mul_comm]
 
+set_option backward.isDefEq.respectTransparency true in
 theorem stateUAngularHeightAngularCLM_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

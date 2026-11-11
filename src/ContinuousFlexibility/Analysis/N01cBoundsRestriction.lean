@@ -46,6 +46,7 @@ theorem n01_componentWeight_nonneg {D : ReferenceData} {T : MaterialData}
   exact mul_nonneg (mul_nonneg hB (Real.rpow_nonneg hH.le _))
     (Real.rpow_nonneg hE.le _)
 
+set_option backward.isDefEq.respectTransparency true in
 /-- Coefficient estimates persist on a stronger low-order ball with a larger
 spatial loss.  No constant or directional derivative is replaced. -/
 theorem coefficientFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
@@ -62,12 +63,15 @@ theorem coefficientFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
   refine ⟨B, hB, ?_⟩
   intro m i a b p hab hp
   obtain ⟨J, hJ⟩ := hbound m i a b p hab hp
-  refine ⟨J.restrict (isOpen_stateNeighborhood S C base' ε') hsub, ?_⟩
+  refine ⟨J.restrict (E := AnnularState S × ℝ) (F := ℝ)
+      (isOpen_stateNeighborhood S C base' ε') hsub, ?_⟩
   intro z hz v
   rw [SmoothDirections.restrict_D]
   exact (hJ z (hsub hz) v).trans
     (mul_le_mul_of_nonneg_left
-      (oneHighVariationWeight_mono (jointStateGrading_monotone S) hb
+      (oneHighVariationWeight_mono (E := AnnularState S × ℝ)
+        (p := pairGrading (stateGrading S) realGrading)
+        (jointStateGrading_monotone S) hb
         (Nat.add_le_add_left hl s) (z - (C.referenceState, 0)) v)
       (n01_componentWeight_nonneg hT hsample hB.le m))
 
@@ -84,6 +88,7 @@ theorem coefficientFamilyTameBounds_mono_of_accumulatingProfile
   exact coefficientFamilyTameBounds_mono hT
     (materialSample_mem_radialCore hT hbounds.2.1) h hb hl hε
 
+set_option backward.isDefEq.respectTransparency true in
 /-- Ordinary-flow estimates restrict with exactly the same state-derivative
 loss at each parameter order. -/
 theorem ordinaryFlowFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
@@ -102,12 +107,15 @@ theorem ordinaryFlowFamilyTameBounds_mono {D : ReferenceData} {T : MaterialData}
   refine ⟨B, hB, ?_⟩
   intro m a b p hab hp
   obtain ⟨J, hJ⟩ := hbound m a b p hab hp
-  refine ⟨J.restrict (isOpen_stateNeighborhood S C base' ε') hsub, ?_⟩
+  refine ⟨J.restrict (E := AnnularState S × ℝ) (F := ℝ)
+      (isOpen_stateNeighborhood S C base' ε') hsub, ?_⟩
   intro z hz v
   rw [SmoothDirections.restrict_D]
   exact (hJ z (hsub hz) v).trans
     (mul_le_mul_of_nonneg_left
-      (oneHighVariationWeight_mono (jointStateGrading_monotone S) hb
+      (oneHighVariationWeight_mono (E := AnnularState S × ℝ)
+        (p := pairGrading (stateGrading S) realGrading)
+        (jointStateGrading_monotone S) hb
         (Nat.add_le_add_right (Nat.add_le_add_left hl s) parameterLoss)
         (z - (C.referenceState, 0)) v)
       (n01_componentWeight_nonneg hT hsample hB.le (C.cell m)))

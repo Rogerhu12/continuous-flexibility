@@ -41,7 +41,7 @@ theorem eLpNorm_angularMean_const_le {f : ℝ → ℝ} (hf : MemLp f 2 angleMeas
   have hconst (c : ℝ) :
       (eLpNorm (fun _ : ℝ => c) 2 angleMeasure).toReal = |c| * Real.sqrt Real.pi := by
     rw [eLpNorm_const' c (by norm_num) (by norm_num), ENNReal.toReal_mul,
-      toReal_enorm, Real.norm_eq_abs, ENNReal.toReal_rpow,
+      toReal_enorm, Real.norm_eq_abs, ← ENNReal.toReal_rpow,
       angleMeasure_univ_for_projection, ENNReal.toReal_ofReal Real.pi_pos.le]
     congr 1
     rw [Real.sqrt_eq_rpow]
@@ -75,10 +75,15 @@ theorem circleMeanField_jet_eLpNorm_le {T : MaterialData} {γ : ℝ}
       eLpNorm (iteratedDeriv b (u m)) 2 angleMeasure := by
   by_cases hb : b = 0
   · subst b
-    simpa only [iteratedDeriv_zero, circleMeanField] using
-      eLpNorm_angularMean_const_le (hu.2.1 m 0)
+    simp only [iteratedDeriv_zero]
+    change eLpNorm (fun _ : ℝ => angularMean (u m)) 2 angleMeasure ≤
+      eLpNorm (u m) 2 angleMeasure
+    exact eLpNorm_angularMean_const_le
+      (by simpa only [iteratedDeriv_zero] using hu.2.1 m 0)
   · rw [circleMeanField_iteratedDeriv]
-    simp only [hb, if_false, eLpNorm_zero]
+    simp only [hb, ite_false]
+    change eLpNorm (0 : ℝ → ℝ) 2 angleMeasure ≤ _
+    rw [eLpNorm_zero]
     exact zero_le
 
 private theorem circleMeanField_energy_le {T : MaterialData} {γ : ℝ}
@@ -95,7 +100,8 @@ private theorem circleMeanField_energy_le {T : MaterialData} {γ : ℝ}
   intro m
   apply Finset.sum_le_sum
   intro j _
-  exact mul_le_mul_left' (pow_le_pow_left' (circleMeanField_jet_eLpNorm_le hu m _) 2) _
+  exact mul_le_mul_of_nonneg_left
+    (pow_le_pow_left₀ (zero_le _) (circleMeanField_jet_eLpNorm_le hu m _) 2) (zero_le _)
 
 /-- Averaging preserves the full smooth weighted circle space, including
 all the summability requirements in its definition. -/
@@ -117,6 +123,7 @@ theorem circleNorm_circleMeanField_le {T : MaterialData} {γ : ℝ}
 
 /-- Every realization contains the exact averaged field, and its actual
 grading decreases at every order. -/
+set_option backward.isDefEq.respectTransparency true in
 theorem exists_circleMeanProjection {T : MaterialData} {γ : ℝ}
     {M : CircleModelData} (hM : IsCircleModel T γ M) (u : M.Space) :
     ∃ v : M.Space, M.decode v = circleMeanField (M.decode u) ∧
@@ -184,7 +191,8 @@ theorem stateProfile_stateSectorProjection {D : ReferenceData} {T : MaterialData
     (C : NonlinearGeometryData S) (x : AnnularState S) :
     stateProfile D S C (stateSectorProjection hS x) = stateProfile D S C x := by
   funext r
-  simpa only [stateProfile, stateKappa_stateSectorProjection]
+  have hν : (stateSectorProjection hS x).2.1 = x.2.1 := rfl
+  simp only [stateProfile, stateKappa_stateSectorProjection, hν]
 
 theorem stateHeight_stateSectorProjection {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S)
@@ -202,6 +210,7 @@ theorem originalCoefficients_stateSectorProjection {D : ReferenceData} {T : Mate
   simp only [originalCoefficients, stateProfile_stateSectorProjection,
     stateHeight_stateSectorProjection]
 
+set_option backward.isDefEq.respectTransparency true in
 theorem stateSectorProjection_displacement_grading_le
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} (hS : IsPhysicalSpaces D T S)
@@ -209,12 +218,14 @@ theorem stateSectorProjection_displacement_grading_le
     stateGrading S n (stateSectorProjection hS x - C.referenceState) ≤
       stateGrading S n (x - C.referenceState) := by
   obtain ⟨_, _, _, hkappa, hchart, _⟩ := href
+  have hz : (S.circle (3 / 4 : ℝ)).grading n 0 = 0 :=
+    ((S.circle (3 / 4 : ℝ)).grading n).map_zero'
   rw [stateGrading_apply, stateGrading_apply]
   simp only [Prod.fst_sub, Prod.snd_sub, stateSectorProjection, hkappa, hchart,
-    sub_zero, map_zero]
+    sub_zero, hz]
   have hk := circleMeanProjection_grading_le (hS.2.1 (3 / 4 : ℝ)) x.2.2.1 n
   have hc := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) x.2.2.2
-  linarith
+  linarith only [hk, hc]
 
 /-- The projection preserves the exact same low-order radius; no new
 smallness or order-dependent neighbourhood is introduced. -/

@@ -28,7 +28,7 @@ open Set
 open ContinuousFlexibility.Statements
 open scoped ContDiff Topology BigOperators
 
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 section ExponentialJets
 
@@ -66,15 +66,22 @@ def smoothDirections_scaledExpLinear (a : ℝ) (L : E →L[ℝ] ℝ) :
   continuous := by
     intro n
     simp only [scaledExpLinearJets, smul_apply, smul_eq_mul]
-    exact ((continuous_const.mul (L.continuous.comp continuous_fst).exp).mul
-      ((scalarFunctionalProduct L n).continuous.comp continuous_snd)).continuousOn
+    have hL : Continuous (fun z : E × (Fin n → E) => L z.1) :=
+      L.continuous.comp continuous_fst
+    have hExp : Continuous (fun z : E × (Fin n → E) => Real.exp (L z.1)) :=
+      Real.continuous_exp.comp hL
+    have hProd : Continuous (fun z : E × (Fin n → E) =>
+        scalarFunctionalProduct L n z.2) :=
+      (scalarFunctionalProduct L n).cont.comp continuous_snd
+    exact ((continuous_const.mul hExp).mul hProd).continuousOn
   derivative := by
     intro n x _ v w
-    have hL : HasDerivAt (fun t : ℝ => L (x + t • w)) (L w) 0 :=
-      hasDerivAt_iff_tendsto_slope_zero.mpr (hasProjectiveLineDerivAt_clm L x w)
+    have hL : HasDerivAt (fun t : ℝ => L (x + t • w)) (L w) (0 : ℝ) := by
+      simpa only [map_add, map_smul, smul_eq_mul, one_mul] using
+        ((hasDerivAt_id (0 : ℝ)).mul_const (L w)).const_add (L x)
     have hcurve : HasDerivAt
         (fun t : ℝ => a * Real.exp (L (x + t • w)) * ∏ i, L (v i))
-        ((a * (Real.exp (L x) * L w)) * ∏ i, L (v i)) 0 := by
+        ((a * (Real.exp (L x) * L w)) * ∏ i, L (v i)) (0 : ℝ) := by
       simpa only [zero_smul, add_zero] using
         ((hL.exp.const_mul a).mul_const (∏ i, L (v i)))
     have hvalue : ((a * (Real.exp (L x) * L w)) * ∏ i, L (v i)) =
@@ -99,7 +106,7 @@ theorem contDiff_uncurry_iteratedDeriv {f : P → ℝ → ℝ}
     (hf : ContDiff ℝ ∞ (Function.uncurry f)) (n : ℕ) :
     ContDiff ℝ ∞ (fun y : P × ℝ => iteratedDeriv n (f y.1) y.2) := by
   induction n with
-  | zero => simpa only [iteratedDeriv_zero] using hf
+  | zero => simpa only [iteratedDeriv_zero, Function.uncurry_def] using hf
   | succ n ih =>
       have haux : ContDiff ℝ ∞ (fun z : (P × ℝ) × ℝ =>
           iteratedDeriv n (f z.1.1) z.2) :=
@@ -122,7 +129,7 @@ open Set Filter
 open ContinuousFlexibility.Analysis
 open scoped ContDiff Topology BigOperators
 
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 
 private theorem decodedControl_intervalIntegrable {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S)
@@ -133,14 +140,14 @@ private theorem decodedControl_intervalIntegrable {D : ReferenceData} {T : Mater
 
 theorem stateKappa_add {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     (hS : IsPhysicalSpaces D T S) (x y : AnnularState S) (m : ℕ) :
-    stateKappa S (x + y) m = stateKappa S x m + stateKappa S y m := by
+    stateKappa S (x + y : AnnularState S) m = stateKappa S x m + stateKappa S y m := by
   simp only [stateKappa, angularMean, Prod.fst_add, Prod.snd_add, map_add, Pi.add_apply]
   rw [intervalIntegral.integral_add (decodedControl_intervalIntegrable hS x m)
     (decodedControl_intervalIntegrable hS y m), mul_add]
 
 theorem stateKappa_smul (S : PhysicalSpacesData) (c : ℝ)
     (x : AnnularState S) (m : ℕ) :
-    stateKappa S (c • x) m = c * stateKappa S x m := by
+    stateKappa S (c • x : AnnularState S) m = c * stateKappa S x m := by
   simp only [stateKappa, angularMean, Prod.smul_fst, Prod.smul_snd, map_smul,
     Pi.smul_apply, smul_eq_mul]
   rw [intervalIntegral.integral_const_mul]
@@ -167,9 +174,15 @@ theorem continuous_stateKappa {D : ReferenceData} {T : MaterialData}
   let K : ℝ := ((1 / Real.pi) * Real.sqrt Real.pi) *
     T.H (T.sample m) ^ (3 / 4 : ℝ)
   have hbound (x : AnnularState S) : ‖L x‖ ≤ K * stateGrading S 0 x := by
-    simpa only [L, stateKappaLinear_apply, Real.norm_eq_abs, K,
-      mul_assoc, mul_left_comm, mul_comm] using
-      abs_stateKappa_le_stateGrading_of_accumulatingProfile hS hT hRef x 0 m
+    calc
+      ‖L x‖ = |stateKappa S x m| := by
+        simp only [L, stateKappaLinear_apply, Real.norm_eq_abs]
+      _ ≤ (((1 / Real.pi) * Real.sqrt Real.pi) * stateGrading S 0 x) *
+          T.H (T.sample m) ^ (3 / 4 : ℝ) :=
+        abs_stateKappa_le_stateGrading_of_accumulatingProfile hS hT hRef x 0 m
+      _ = K * stateGrading S 0 x := by
+        dsimp only [K]
+        ring
   exact continuous_linear_of_seminorm_bound L (stateGrading S 0)
     (continuous_stateGrading S 0) K hbound
 
@@ -229,7 +242,7 @@ def stateNuCLM (S : PhysicalSpacesData) : AnnularState S →L[ℝ] ℝ :=
 theorem stateNuCLM_apply (S : PhysicalSpacesData) (x : AnnularState S) :
     stateNuCLM S x = x.2.1 := by
   simp only [stateNuCLM, ContinuousLinearMap.comp_apply,
-    ContinuousLinearMap.fst_apply, ContinuousLinearMap.snd_apply]
+    ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd']
 
 /-- The exponent defining the controlled radial profile at one fixed radius. -/
 def stateProfileExponentCLM {D : ReferenceData} {T : MaterialData}
@@ -290,8 +303,16 @@ theorem stateProfileSmoothDirections_apply {D : ReferenceData} {T : MaterialData
     (v : Fin n → AnnularState S) :
     (stateProfileSmoothDirections hS hT hRef hC r hr).D n x v =
       stateProfile D S C x r * ∏ i, stateProfileExponentCLM hS hT hRef hC r hr (v i) := by
-  rw [stateProfile_eq_exp_exponentCLM hS hT hRef hC r hr x]
-  exact scaledExpLinearJets_apply _ _ _ _ _
+  calc
+    (stateProfileSmoothDirections hS hT hRef hC r hr).D n x v =
+        (D.w r * Real.exp (stateProfileExponentCLM hS hT hRef hC r hr x)) *
+          ∏ i, stateProfileExponentCLM hS hT hRef hC r hr (v i) :=
+      scaledExpLinearJets_apply _ _ _ _ _
+    _ = stateProfile D S C x r *
+        ∏ i, stateProfileExponentCLM hS hT hRef hC r hr (v i) :=
+      congrArg (fun a : ℝ => a *
+        ∏ i, stateProfileExponentCLM hS hT hRef hC r hr (v i))
+        (stateProfile_eq_exp_exponentCLM hS hT hRef hC r hr x).symm
 
 /-- A finite collection of controls represents the actual control sum on a
 neighbourhood of the radius, simultaneously for all states. -/
@@ -351,7 +372,7 @@ theorem stateControlJetEvalCLM_apply {D : ReferenceData} {T : MaterialData}
     stateControlJetEvalCLM hS hT hRef hC n r hr x =
       iteratedDeriv n (stateControlSum C x) r := by
   classical
-  obtain ⟨_, _, _, _, _, hcontrol, _⟩ := hC
+  have hcontrol := hC.2.2.2.2.2.1
   have hd (m : ℕ) : ContDiffAt ℝ n
       (fun s => stateKappa S x m * C.control m s) r :=
     (contDiffAt_const.mul (hcontrol m).1.contDiffAt).of_le (by simp)
@@ -495,7 +516,7 @@ theorem stateFiniteControlCLM_apply {D : ReferenceData} {T : MaterialData}
     stateFiniteControlCLM hS hT hRef indices x =
       (x.2.1, fun m : indices => stateKappa S x m) := by
   simp only [stateFiniteControlCLM, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.pi_apply, stateNuCLM_apply, stateKappaCLM_apply]
+    ContinuousLinearMap.coe_pi', stateNuCLM_apply, stateKappaCLM_apply]
 
 /-- The finite representation holds on a spatial neighbourhood of the
 radius, so it identifies every actual radial derivative there. -/
