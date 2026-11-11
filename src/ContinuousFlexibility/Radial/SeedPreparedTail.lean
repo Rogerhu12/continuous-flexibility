@@ -37,8 +37,13 @@ theorem morseRealization_seams_order {T : MorseChainData} {σ : ℕ → ℝ}
   obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hn
   exact ((hbounds k).1.trans_lt hfirst).trans_le (hbounds k).2
 
-theorem exists_seedPreparedSelectedTail (hR07 : R07Statement) :
-    ∃ S : SelectedTailData, IsSelectedTail S ∧
+/-- Keep the actual selected Morse band as well as its regular entrances.
+The prepared entry need not be the original first seam. -/
+theorem exists_seedPreparedSelectedTail_with_seams (hR07 : R07Statement) :
+    ∃ S : SelectedTailData, IsSelectedTail S ∧ ∃ N : ℕ,
+      S.chain.index ≤ N ∧
+      (∀ right : Bool,
+        S.entry right S.chain.index = morseChainSeam S.chain right N) ∧
       S.entry false S.chain.index < S.entry true S.chain.index ∧
       ∀ right : Bool,
         S.entry right S.chain.index ∈ radialCore (S.family S.sigma) ∧
@@ -50,10 +55,14 @@ theorem exists_seedPreparedSelectedTail (hR07 : R07Statement) :
   have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hdata (right : Bool) :=
     hS.2.2.2.2.2 right n 2 (by omega) (by decide) hn
-  refine ⟨seedSelectedTailAtBand S n, isSelectedTail_seedSelectedTailAtBand hS hn, ?_, ?_⟩
+  refine ⟨seedSelectedTailAtBand S n, isSelectedTail_seedSelectedTailAtBand hS hn,
+    n, hn.1, ?_, ?_, ?_⟩
+  · intro right
+    simpa [seedSelectedTailAtBand, morseChainSeam] using
+      (hdata right).2.2.2.2.2.1
   · have hL := (hdata false).2.2.2.2.2.1
     have hR := (hdata true).2.2.2.2.2.1
-    simp only [seedSelectedTailAtBand, if_pos rfl]
+    simp only [seedSelectedTailAtBand, ite_true]
     rw [hL, hR]
     exact morseRealization_seams_order hreal hn.1
   · intro right
@@ -64,5 +73,17 @@ theorem exists_seedPreparedSelectedTail (hR07 : R07Statement) :
       exact hpos
     simpa [seedSelectedTailAtBand] using
       And.intro he (And.intro hpos' hnatural)
+
+theorem exists_seedPreparedSelectedTail (hR07 : R07Statement) :
+    ∃ S : SelectedTailData, IsSelectedTail S ∧
+      S.entry false S.chain.index < S.entry true S.chain.index ∧
+      ∀ right : Bool,
+        S.entry right S.chain.index ∈ radialCore (S.family S.sigma) ∧
+        0 < deriv (S.family S.sigma).w (S.entry right S.chain.index) ∧
+        RadialNaturalTail (S.family S.sigma) right 2
+          (S.entry right S.chain.index) (S.outgoing right 2) := by
+  obtain ⟨S, hS, N, hN, hseams, horder, hentry⟩ :=
+    exists_seedPreparedSelectedTail_with_seams hR07
+  exact ⟨S, hS, horder, hentry⟩
 
 end ContinuousFlexibility.Radial

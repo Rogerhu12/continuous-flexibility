@@ -114,8 +114,7 @@ unchanged selected tails/negative components, with free positive-head length. -/
 def R08Statement : Prop :=
   ∀ requiredHead : ℝ, 0 < requiredHead →
     ∃ S : SelectedTailData, IsSelectedTail S ∧ ∃ D : ReferenceData,
-      IsAccumulatingProfile D ∧
-      (∀ r ∈ radialCore D, Radial.radialJacobi 4 D.w D.phi r = 0) ∧
+      IsAccumulatingProfile D ∧ RadialConstructionGeometry D ∧
       ∃ l h : ℝ, CentralPatch D l h ∧
         (∃ l₁ l₂ h₁ h₂ cL cR : ℝ,
           D.a < l₁ ∧ l₁ < l₂ ∧ l₂ < l ∧ h < h₁ ∧ h₁ < h₂ ∧ h₂ < D.b ∧
@@ -447,6 +446,7 @@ def ActualMatchedRepresentation (D : ReferenceData)
 Hilbert density and ordinary source conversion are explicit in ModeLocalEquation. -/
 def R10Statement : Prop :=
   ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+    RadialConstructionGeometry D ∧
     ∀ j : ℕ, 2 ≤ j → Even j →
       ∃ G : RadialModePair D →L[ℝ] RadialModePair D,
         ModeInverseProperties D j G ∧
@@ -455,6 +455,7 @@ def R10Statement : Prop :=
 /-- R11, §6: the same geometry, border and inverse at all three exponents. -/
 def R11Statement : Prop :=
   ∃ D : ReferenceData, IsAccumulatingProfile D ∧ RadialTrueBorder D ∧
+    RadialConstructionGeometry D ∧
     ∃ ε M₀ M₁ : ℝ, 0 < ε ∧ ε < 1 / 4 ∧
       ∃ G : RadialSource → RadialUnknown,
         (∀ j : ℕ, 2 ≤ j → Even j →
@@ -465,11 +466,11 @@ def R11Statement : Prop :=
           ReferenceInverseProperties D γ M₀ M₁ G ∧
           FirstNormalInverseEstimate D γ M₀ M₁ G
 
-/-- Primitive geometry retained by the same radial construction that supplies
-the natural graph and inverse. The optical assertion concerns the reference
-profile alone, on each actual containing cell. It asserts no nonlinear
-coefficient, speed, parameter derivative or flow estimate. -/
-def RadialConstructionGeometry (D : ReferenceData) : Prop :=
+/-- Additional primitive geometry for the N01a construction on the same
+reference as its controls and material data. This certificate is separate
+from the homogeneous equation and return margins retained by R12. It
+contains no nonlinear coefficient, speed or flow estimate. -/
+def N01RadialPrimitiveGeometry (D : ReferenceData) : Prop :=
   tsupport D.chi ⊆ radialCore D ∧
   ∃ K : ℝ, 0 < K ∧ ∀ l h m,
     NegativeRadialComponent D l h → Ioo l h ⊆ D.cells m →
@@ -477,11 +478,8 @@ def RadialConstructionGeometry (D : ReferenceData) : Prop :=
       K⁻¹ * radialE (D.cellIndex m) ^ (-K) * min (r - l) (h - r) ≤
         -deriv D.w r / (r * D.w r)
 
-/-- R12, §4 `prop:rad-fixed-theorem` and §6 `lem:rad-green-completion`.
-The final border and optical geometry belong to this very reference;
-independent existential witnesses cannot be combined here. -/
-def R12Statement : Prop :=
-  ∃ A : RadialReference, RadialConstructionGeometry A.val
+/-- R12, §4 `prop:rad-fixed-theorem` and §6 `lem:rad-green-completion`. -/
+def R12Statement : Prop := RadialReferenceStatement
 
 /-- X01: first choose the actual geometry and inverse, then quantify over
 all compact exponent intervals.  No interval-dependent profile is allowed. -/
@@ -498,7 +496,7 @@ def X01Statement : Prop :=
             OutputRealization D γ M₁ aL (G F) ∧
               outputNormSquare D γ M₁ aL (G F) ≤ C ^ 2 * sourceNormSquare D γ M₀ F) ∧
           (∀ F fθ, SourceMember D γ M₀ F → WeakAngularDerivative D F.1 fθ →
-            SourceMember D γ M₀ (fθ, 0) → ∃ ur : PolarPoint → ℝ,
+            SourceDerivativeMember D γ M₀ fθ → ∃ ur : PolarPoint → ℝ,
               WeakNormalDerivative D (G F).1 ur ∧ OutputRealization D γ M₁ 0 (ur, 0) ∧
               outputNormSquare D γ M₁ 0 (ur, 0) ≤ C ^ 2 *
                 (sourceNormSquare D γ M₀ F + sourceNormSquare D γ M₀ (fθ, 0)))

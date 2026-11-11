@@ -499,70 +499,69 @@ on the tails, together with actual dilation and cell-index comparison.
 ## 10. Exact same-reference threading needed upstream
 
 The three primitive facts in section 3 can be named separately and proved
-from the actual construction. They cannot be inserted as extra assumptions
-of an allegedly unchanged `N01c`, or asserted to follow from the original
-`N01bStatement`.
-The latter is existential: a defective witness does not disprove its
-implication to another existential statement.  A proof may choose a new,
-well-constructed witness, but must actually build all properties of that
-same witness.
+from the actual construction. They cannot be asserted to follow from the
+original `N01bStatement` without a proof. That statement is existential:
+a defective witness does not disprove its implication to another existential
+statement. A proof may choose a new, well-constructed witness, but must
+actually establish all properties of that same witness.
 
-Here is the precise current point of loss and the necessary proof shape.
+The upstream implementation has advanced since the original audit. In
+particular, main's R12 and R11b are now proved. The following distinguishes
+their retained data from the additional primitive certificate needed here.
 
-1. `R08Statement` (`Statements/RadialTargets.lean`, lines 114–143)
-   chooses the selected tail data `S` and the final joined `D` together.
-   Its positive-head clauses, central equalities, tail dilation equalities
-   and endpoint identities can be packaged as internal construction
-   metadata about that very `D`.  Such packaging requires no new
-   mathematical assumption.
-2. `R10aStatement` (`Blueprint/Statements.lean`, lines 107–110)
-   exports an existential `D` with profile, border and matching pieces,
-   but drops that construction metadata.  An internal proof of the
-   stronger result must choose the R08 witness once, carry its metadata,
-   and actually construct the matching pieces on it.
-3. `R10bStatement` is already universally quantified over the supplied
-   `D`.  `R10_of_nodes` in `Blueprint/Assembly.lean` already passes
-   the same `D` into it.  This matching step can retain metadata unchanged.
-4. `R11aStatement` and `R11Statement` again have existential reference
-   outputs.  Their internal proofs need versions for a supplied `D`,
-   with its actual matching representations and tail metadata.
-   The weighted stage must construct the common exponents and inverse
-   `G` on that `D`; the first-normal stage must preserve the same
-   `D` and `G`.  Applying the present existential wrapper does not
-   certify either identity.
-5. The final-reference stage must prove the natural-kernel, travel,
-   maximal-graph, closure and reciprocity assertions for that supplied
-   reference and inverse.  If it replaces the auxiliary border by the
-   actual normalized metric border, the new data can be explicitly
-   `{D with chi := χ / a*}`.  The profile, endpoints and cells then remain
-   definitionally the same.  The inverse, graph and row must be changed
-   by the actual finite-rank border calculation; those properties cannot
-   be transported by reflexivity.
-6. The resulting enriched reference existence can be used to construct
-   the N01 controls with their actual designated cells, and to prove the
-   quantitative geometry.  The old public existence statements may remain
-   projections of the stronger actual construction.  If the public
-   dependency graph is changed, its assembly must pass this enriched
-   witness all the way through; simply appending an unproved geometry
-   conjunct to `N01PartA` or `N01PartB` would only move the obligation.
+1. `R08Statement` chooses the selected tail data and joined reference
+   together. Main now retains `RadialConstructionGeometry D`: the
+   homogeneous profile equation and `RadialReturnMargins D`. The actual
+   construction also proves central and tail dilation identities. These
+   identities concern that same reference; independently selected witnesses
+   cannot supply them.
+2. Main's `R10aStatement`, `R10Statement`, `R11aStatement` and
+   `R11Statement` carry this existing `RadialConstructionGeometry D`.
+   `R10bStatement` acts on the supplied reference, and `R10_of_nodes`
+   retains the same reference and certificate.
+3. Main's proved R11b keeps its input reference and inverse while enlarging
+   the output weight needed for the first-normal estimate. Its angular
+   derivative premise is `SourceDerivativeMember`, without an even-source
+   condition on the angular derivative. The local L² premise is `MemLp`,
+   so it includes the necessary measurability.
+4. Main's proved R12 supplies the natural kernels, travel margins, maximal
+   graph, closure and reciprocity on its actual reference and inverse.
+   This branch preserves that proof and its public conclusion. No part of
+   that already completed inverse or final-border calculation is replaced
+   by an admission.
+5. The existing public `RadialConstructionGeometry` is not the additional
+   closed-support and quantitative optical certificate below. The actual
+   sources `Radial/SeedReturnMargins.lean` and
+   `Radial/BorderNormalization.lean` identify the relevant construction
+   evidence: negative components arise from the actual Morse tails or the
+   central patch, and the chosen final bump has a closed supporting interval
+   inside the core. The finite-head and Morse estimates in this audit can
+   be used with those identities. An enriched construction must still
+   produce these additional assertions on the reference that satisfies all
+   its original properties; merely choosing another geometric witness does
+   not establish that requirement.
+6. N01a must construct its controls and their designated cells together
+   with the additional primitive certificate on the same data. N01b then
+   retains it. Neither step is proved by the transport theorem below or by
+   closing the N01c implication.
 
-R08 is now proved on main. R10a, R11a, R11b and R12 remain open, and the
-stronger common-reference construction above is not a completed proof.
-This describes what must be retained, not a claim that the original
-hypotheses already provide the missing estimates. An isolated conditional
-speed/flow theorem does not complete N01c.
+R08, R12 and R11b are proved on main. R10a and R11a remain open at this
+audit update. The stronger common-reference construction required by the
+repaired N01a output is still an explicit upstream obligation. An isolated
+conditional speed or flow estimate does not complete N01c.
 
 ## 11. Explicit repair of the construction contract
 
 The task permits repairing an unusable frozen interface together with the
-assembly. The original radial endpoint was exactly
+assembly. The public radial endpoint remains exactly
 
 ```lean
 def R12Statement : Prop := RadialReferenceStatement
 ```
 
-where `RadialReferenceStatement = Nonempty RadialReference`. The original
-nonlinear endpoint was exactly
+where `RadialReferenceStatement = Nonempty RadialReference`. Main's proved
+R12 and its existing `RadialConstructionGeometry` are retained. The
+original nonlinear predecessor output was exactly
 
 ```lean
 def N01bStatement : Prop :=
@@ -572,13 +571,14 @@ def N01bStatement : Prop :=
         0 < ε ∧ N01PartB A.val S C base ε
 ```
 
-These interfaces discard the construction facts identified above. The repair
-strengthens the predecessor outputs explicitly; it does not pretend that the
-old existential implication has been refuted or that its old hypotheses have
-already been shown to imply the richer output.
+That output does not retain the three primitive facts identified above.
+The repair explicitly strengthens the N01a and N01b outputs. It does not
+claim that the original existential implication has been refuted, or that
+the original hypotheses have already been proved to imply the enriched
+output.
 
-`RadialConstructionGeometry D` now records closed border support in the core
-and one uniform reference optical lower bound
+The separately named `N01RadialPrimitiveGeometry D` records closed
+border support in the core and the uniform reference optical lower bound
 
 ```lean
 ∃ K : ℝ, 0 < K ∧ ∀ l h m,
@@ -588,28 +588,34 @@ and one uniform reference optical lower bound
       -deriv D.w r / (r * D.w r)
 ```
 
-R12 must produce this on the very `A.val` whose natural graph, border and
-inverse satisfy `IsRadialReference`. Its still-open proof must carry the
-Morse tail/dilation evidence and normalized border through the same R08/R10/R11
-construction. This is a genuine additional upstream proof obligation; no
-independent reference may supply it.
+This is an additional certificate for the N01a construction, not the
+public conclusion of R12. It must be proved on the very reference whose
+natural graph, border and inverse satisfy `IsRadialReference`. Its
+construction must retain or recover the actual Morse tail, dilation,
+central patch and final-border evidence on that same reference. This is a
+real additional upstream obligation; an independent reference cannot
+supply it.
 
-`N01PrimitiveGeometry D T S C` records the designated-cell containment,
+`N01PrimitiveGeometry D T S C` records designated-cell containment,
 the same closed border support, and the corresponding lower bound with
 `T.E0 (T.sample (C.cell m))`. N01a constructs it together with its controls;
-N01b preserves it. The coefficient and speed stages retain it with their
-same existential data. `N01PartA`, `N01PartB`, `IsRadialReference` and the
-final `N01Properties` keep their existing meanings.
+N01b preserves it. The coefficient and speed stages retain it on the same
+existential data. `N01PartA`, `N01PartB` and `IsRadialReference` keep
+their existing meanings; no tame estimate is added to these primitive
+hypotheses. The separate parameter-order flow-loss correction is recorded
+in `docs/N01c-loss-audit.md`.
 
-The ordinary theorem `n01PrimitiveGeometry_of_radialConstruction` converts
-the radial-envelope lower bound to the sampled material envelope using the
-proved envelope comparison. `n01PrimitiveGeometry_normalizeMaterialE0`
-preserves it under the explicit envelope normalization: raising `E0` lowers
-its negative powers. Neither theorem assumes a nonlinear tame estimate.
+The ordinary theorem `n01PrimitiveGeometry_of_radialConstruction`
+converts a supplied `N01RadialPrimitiveGeometry` certificate to the sampled
+material envelope using the proved comparison. It does not construct that
+certificate. `n01PrimitiveGeometry_normalizeMaterialE0` preserves it under
+the explicit envelope normalization: raising `E0` lowers its negative
+powers. Neither theorem assumes a nonlinear tame estimate.
 
-`Blueprint/Assembly.lean` passes the enriched R12/N01a/N01b outputs along the
-same dependency chain. The task files for those nodes now state the retained
-construction obligations. Closing the N01c axiom gate proves its implication
-under this repaired predecessor contract; it does not close R12, N01a or N01b.
-The coefficient, speed and flow estimates still have to be derived from their
-actual definitions on one common neighborhood.
+`Blueprint/Assembly.lean` uses the original proved R12 and then the
+enriched N01a/N01b outputs along the same dependency chain. The N01a and
+N01b task files state the retained construction obligations. Closing the
+N01c axiom gate proves its implication under this repaired predecessor
+contract; it does not close N01a or N01b. The coefficient, speed and flow
+estimates still have to be derived from their actual definitions on one
+common neighborhood.

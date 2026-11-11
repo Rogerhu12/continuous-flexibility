@@ -4,8 +4,8 @@ import ContinuousFlexibility.Analysis.N01cMaterialNormalization
 /-!
 # Transport of the retained primitive reference geometry
 
-The radial construction records an optical lower bound in its discrete
-reference envelope. The already proved reference/material comparison
+The additional N01a primitive certificate records an optical lower bound
+in the discrete reference envelope. The already proved reference/material comparison
 converts it to the exact sampled envelope used by N01. This conversion
 uses the same profile, cells, material data and chosen controls throughout.
 No coefficient, speed or flow estimate is an input.
@@ -53,15 +53,16 @@ theorem n01_negativeRadialComponent
   ⟨(hC.1 m).1, (hC.1 m).2.1, (hC.1 m).2.2,
     (hC.2.1 m).1, (hC.2.1 m).2.1, hC.2.2.2.1 m⟩
 
-/-- The strengthened radial construction supplies the nonlinear primitive
-geometry once the chosen component is attached to its actual cell.
+/-- An additional primitive certificate supplies the nonlinear geometry
+once the chosen component is attached to its actual cell. This theorem
+transports the certificate; its construction remains an N01a obligation.
 The envelope normalization is a proved replacement of material data. -/
 theorem n01PrimitiveGeometry_of_radialConstruction
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S}
     (hT : IsMaterialData D T) (hA : N01PartA D T S C)
     (hE : ∀ r ∈ Ioo D.a D.b, 1 ≤ T.E0 r)
-    (hR : RadialConstructionGeometry D)
+    (hR : N01RadialPrimitiveGeometry D)
     (hloc : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m)) :
     N01PrimitiveGeometry D T S C := by
   obtain ⟨hχ, K, hK, hlower⟩ := hR
