@@ -167,7 +167,7 @@ theorem innerLiouvilleLocalizedUnit_gradient_solution (i : Fin 2) :
       simp only [hb, ite_true] at hrow ⊢
       rw [real_inner_smul_right, innerLiouvilleColumnLift_field_pairing D hB.1.le
         hlam hR hs hp hcore hw U hU hv B.border (M.column i).field hborder, hrow, mul_zero]
-    · simp only [hb, ite_false] at hrow ⊢
+    · simp only [hb, Bool.false_eq_true, ite_false] at hrow ⊢
       rw [hrow, mul_zero]
   · intro T hT
     have hV : Continuous B.potential := by

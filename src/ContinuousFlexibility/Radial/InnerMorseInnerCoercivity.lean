@@ -81,8 +81,8 @@ theorem innerMorseInnerChain_exists_uniform_gap_slope
       c ≤ r * deriv D.w r / D.w r := by
   obtain ⟨a, ha, haBound⟩ := innerMorseMiddleGap_exists_slope h hN hc hcl hcr false (hpositive false)
   obtain ⟨b, hb, hbBound⟩ := innerMorseMiddleGap_exists_slope h hN hc hcl hcr true (hpositive true)
-  refine ⟨min innerMorseTailSlope (min a b), min_pos.mpr
-    ⟨innerMorseTailSlope_pos, min_pos.mpr ⟨ha, hb⟩⟩, ?_⟩
+  refine ⟨min innerMorseTailSlope (min a b),
+    lt_min innerMorseTailSlope_pos (lt_min ha hb), ?_⟩
   intro K hK g r hr
   have hg := innerMorseInnerGap_cases hK g
   rcases hg with ⟨side, rfl⟩ | ⟨side, rfl⟩ | ⟨side, p, rfl⟩

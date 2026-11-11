@@ -45,7 +45,7 @@ variable (D : ReferenceData) (hw : Continuous D.w) {n : ℕ}
 local notation "B" => EuclideanSpace ℝ (Fin n)
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "W" =>
   InnerRadialDomain D hw G forcing rowSource bordered j central column
 local notation "realize" =>
@@ -70,7 +70,7 @@ theorem innerRadialPhysicalRealization_pairing (F : H) (x : W) :
     (fun p => Ioo (G.left p) (G.right p)) F.val
     (fun p => (x.val.1.1 p).1) x.val.1.2.2 hfix]
   simp only [innerRadialSourcePairing, innerRadialPhysicalForcing_apply,
-    ContinuousLinearMap.coe_coe, innerRadialPhysicalRow_apply]
+    ContinuousLinearMap.coe_coe, innerRadialPhysicalRow_apply, innerRadialPhysicalRowLinear_apply]
 
 variable
   (hunique : ∀ p, InnerRadialPieceKernelUnique D G bordered j central column p)

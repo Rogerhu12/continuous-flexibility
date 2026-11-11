@@ -204,6 +204,9 @@ theorem innerChainScalarRestriction_full_right (n : ℕ) (p : Fin (n + 1))
     (w : Fin (n + 2) → ℝ) (hp : p.val < n) :
     innerChainScalarRestriction n p (fun i => w i.castSucc.succ) 1 1 = w p.succ := by
   rw [innerChainScalarRestriction, if_neg (by decide : (1 : Fin 2) ≠ 0), dif_pos hp]
+  apply congrArg w
+  apply Fin.ext
+  simp only [Fin.val_castSucc, Fin.val_succ]
 
 theorem innerMorseInnerInterfaceWeight_model (N K : ℕ) (a γ : ℝ)
     (p : Fin (2 * K + 1)) (i : Fin 2) :
@@ -214,9 +217,11 @@ theorem innerMorseInnerInterfaceWeight_model (N K : ℕ) (a γ : ℝ)
   have hr : (innerModelChainPiece p).val < 2 * (2 * K + 1) := by
     simp only [innerModelChainPiece] <;> omega
   rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
-  · rw [innerMorseInnerInterfaceWeight, innerChainScalarRestriction_full_left _ _ _ hl]
+  · dsimp only [innerMorseInnerInterfaceWeight]
+    rw [innerChainScalarRestriction_full_left _ _ _ hl]
     exact innerMorseInnerCutWeight_model_left N K a γ p
-  · rw [innerMorseInnerInterfaceWeight, innerChainScalarRestriction_full_right _ _ _ hr]
+  · dsimp only [innerMorseInnerInterfaceWeight]
+    rw [innerChainScalarRestriction_full_right _ _ _ hr]
     exact innerMorseInnerCutWeight_model_right N K a γ p
 
 /-- Closed model intervals see the same interpolation at their left
@@ -288,6 +293,22 @@ theorem innerMorseInnerWeight_on_gap (g : Fin (2 * K + 2)) {x : ℝ}
       innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ :=
   innerChainWeight_constant_piece G l r _ (innerMorseInnerCutWeight_pos N K a γ)
     _ (innerMorseInnerCutWeight_gap N K a γ g) hx
+
+theorem innerMorseInnerWeight_on_left_middle_gap {x : ℝ}
+    (hx : x ∈ Ioc (G.left (innerModelChainGap (innerMorseInnerCenter K).castSucc))
+      (G.right (innerModelChainGap (innerMorseInnerCenter K).castSucc))) :
+    innerMorseInnerWeight N K a γ G l r x = 1 := by
+  rw [innerMorseInnerWeight_on_gap N K a γ G l r _ hx,
+    ← innerModelChain_left_incidence, innerMorseInnerCutWeight_model_left,
+    innerMorseInnerModelWeight_center]
+
+theorem innerMorseInnerWeight_on_right_middle_gap {x : ℝ}
+    (hx : x ∈ Ioc (G.left (innerModelChainGap (innerMorseInnerCenter K).succ))
+      (G.right (innerModelChainGap (innerMorseInnerCenter K).succ))) :
+    innerMorseInnerWeight N K a γ G l r x = 1 := by
+  rw [innerMorseInnerWeight_on_gap N K a γ G l r _ hx,
+    ← innerMorseInnerCutWeight_gap, ← innerModelChain_right_incidence,
+    innerMorseInnerCutWeight_model_right, innerMorseInnerModelWeight_center]
 
 theorem innerMorseInnerWeight_at_interface
     (hlr : ∀ p, l p < r p) (hr : ∀ p, r p ≤ G.right p)

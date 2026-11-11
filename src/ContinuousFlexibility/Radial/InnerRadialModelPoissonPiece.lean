@@ -94,7 +94,7 @@ variable (D : ReferenceData) {n : ℕ} (G : InnerRadialChainGeometry D n)
 include hcoeff hleft hright hbordered hcolumn
 
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 
 /-- The same actual model Poisson columns realize every chain trace
 and have the complete physical conormal block, with no assumed flux

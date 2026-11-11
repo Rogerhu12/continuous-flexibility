@@ -44,7 +44,7 @@ variable {D : ReferenceData} {n : ℕ} {G : InnerRadialChainGeometry D n}
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "B" => EuclideanSpace ℝ (Fin n)
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 
 theorem interfaceEquiv_flux (hw : ContDiff ℝ ∞ D.w) (hS : IsUnit C.fluxMatrix)
     (ξ η : B) :

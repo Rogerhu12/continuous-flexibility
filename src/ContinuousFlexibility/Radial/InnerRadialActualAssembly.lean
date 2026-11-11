@@ -34,7 +34,7 @@ variable {D : ReferenceData} {n : ℕ} {G : InnerRadialChainGeometry D n}
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 
 theorem innerRadialPieceSolution_projection_fixed {F : H}
     {ξ : EuclideanSpace ℝ (Fin n)} {p : Fin (n + 1)}
@@ -83,7 +83,7 @@ local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "B" => EuclideanSpace ℝ (Fin n)
 local notation "ambient" => InnerBorderL2 (radialHilbertMeasure D)
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "sets" => (fun p : Fin (n + 1) => Ioo (G.left p) (G.right p))
 local notation "projection" => innerBorderPieceProjection (radialHilbertMeasure D) sets central
 

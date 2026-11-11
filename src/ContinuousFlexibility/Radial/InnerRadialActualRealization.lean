@@ -35,7 +35,7 @@ variable {D : ReferenceData} {n : ℕ} {G : InnerRadialChainGeometry D n}
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "projection" => innerBorderPieceProjection (radialHilbertMeasure D)
   (fun p => Ioo (G.left p) (G.right p)) central piece
 
@@ -90,7 +90,7 @@ variable {D : ReferenceData} {n : ℕ} {G : InnerRadialChainGeometry D n}
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "projection" => innerBorderPieceProjection (radialHilbertMeasure D)
   (fun p => Ioo (G.left p) (G.right p)) central piece
 
@@ -143,7 +143,7 @@ variable {D : ReferenceData} {n : ℕ} {G : InnerRadialChainGeometry D n}
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "projection" => innerBorderPieceProjection (radialHilbertMeasure D)
   (fun p => Ioo (G.left p) (G.right p)) central piece
 

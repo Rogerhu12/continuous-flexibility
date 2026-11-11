@@ -34,9 +34,9 @@ variable (D : ReferenceData) (hw : ContDiff ℝ ∞ D.w) {n : ℕ}
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "GapD" =>
-  innerGapDirichletInverse D hw (G.left_lt_right piece).le (G.left_pos piece)
+  innerGapDirichletInverse D hw (le_of_lt (G.left_lt_right piece)) (G.left_pos piece)
     hj hs (G.in_core piece) (G.weight_pos piece) hslope
 
 include hw hpiece hj hs hslope
@@ -68,7 +68,7 @@ include columns hcolumns hboundary hhomogeneous
 
 local notation "GapP" =>
   innerGapPoissonL2 D hw.continuous (G.left_pos piece) (G.in_core piece)
-    (fun r hr => (G.weight_pos piece r (Ioo_subset_Icc_self hr)).le) columns hcolumns
+    (fun r hr => le_of_lt (G.weight_pos piece r (Ioo_subset_Icc_self hr))) columns hcolumns
 
 /-- The same actual gap D/P solve the real local weak problem for every
 physical source, with their true trace and full conormal flux. -/

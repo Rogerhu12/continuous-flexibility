@@ -42,7 +42,7 @@ variable (D : ReferenceData) (hw : Continuous D.w) {n : ℕ}
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "W" =>
   InnerRadialDomain D hw G forcing rowSource bordered j central column
 local notation "realize" =>

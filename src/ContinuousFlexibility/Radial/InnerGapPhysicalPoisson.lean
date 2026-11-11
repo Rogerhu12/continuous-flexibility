@@ -119,7 +119,7 @@ theorem innerGapPoissonH1_weakResidual (D : ReferenceData)
   rw [innerRadialWeakResidual_apply, innerGapPotentialMultiplier_square_inner]
   simp only [zero_mul, add_zero, inner_zero_left, sub_zero]
   exact (congrArg₂ (· + ·) (real_inner_comm P.2 r.2)
-    (real_inner_comm (M P.1) (M r.1))).trans hzero
+    (real_inner_comm (M P.1) (M r.1))).symm.trans hzero
 
 /-- The physical residual on a Poisson test is exactly the previously
 constructed weak outgoing conormal coordinate. -/

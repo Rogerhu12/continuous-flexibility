@@ -104,7 +104,7 @@ theorem innerRadialModelPieceKernelUnique :
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "ModelD" =>
   innerLiouvillePhysicalDirichlet D hB.1.le hlam hR hscale hp hcore hweight
     U hU hv M.dirichlet

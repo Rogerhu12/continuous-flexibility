@@ -23,10 +23,10 @@ def innerChainAggregateKappa (n : ℕ) (κ : Fin (n + 1) → Fin 2 → ℝ) (i :
 
 theorem innerChainBoundary_diagonal_bilinear (n : ℕ)
     (κ : Fin (n + 1) → Fin 2 → ℝ) (ξ η : EuclideanSpace ℝ (Fin n)) :
-    (∑ p, κ p 0 * innerChainBoundaryRestriction n p ξ 0 *
+    (∑ p, (κ p 0 * innerChainBoundaryRestriction n p ξ 0 *
         innerChainBoundaryRestriction n p η 0 +
       κ p 1 * innerChainBoundaryRestriction n p ξ 1 *
-        innerChainBoundaryRestriction n p η 1) =
+        innerChainBoundaryRestriction n p η 1)) =
       ∑ i, innerChainAggregateKappa n κ i * ξ i * η i := by
   have hleft :
       (∑ p, κ p 0 * innerChainBoundaryRestriction n p ξ 0 *

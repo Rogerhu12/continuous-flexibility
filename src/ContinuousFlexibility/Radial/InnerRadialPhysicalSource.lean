@@ -47,8 +47,8 @@ def innerRadialPhysicalInclusion (bordered : Bool) :
 @[simp] theorem innerRadialPhysicalInclusion_apply (bordered : Bool)
     (F : InnerRadialPhysicalSource D G bordered) :
     innerRadialPhysicalInclusion D G bordered F = F.val := by
-  simp only [innerRadialPhysicalInclusion, Submodule.coe_subtypeₗᵢ,
-    Submodule.subtype_apply]
+  unfold innerRadialPhysicalInclusion
+  exact (congrFun (Submodule.coe_subtypeₗᵢ _) F).trans (Submodule.subtype_apply F)
 
 def innerRadialPhysicalValue (bordered : Bool) :
     InnerRadialPhysicalSource D G bordered →L[ℝ] RadialModeL2 D :=
@@ -73,6 +73,16 @@ def innerRadialPhysicalRow (bordered : Bool) :
   simp only [innerRadialPhysicalRow, ContinuousLinearMap.comp_apply,
     LinearIsometry.coe_toContinuousLinearMap, innerRadialPhysicalInclusion_apply,
     WithLp.sndL_apply]
+
+/-- The same physical scalar row viewed as a linear map. -/
+abbrev innerRadialPhysicalRowLinear (bordered : Bool) :
+    InnerRadialPhysicalSource D G bordered →ₗ[ℝ] ℝ :=
+  (innerRadialPhysicalRow D G bordered).toLinearMap
+
+@[simp] theorem innerRadialPhysicalRowLinear_apply (bordered : Bool)
+    (F : InnerRadialPhysicalSource D G bordered) :
+    innerRadialPhysicalRowLinear D G bordered F = F.val.snd :=
+  innerRadialPhysicalRow_apply D G bordered F
 
 theorem innerRadialPhysicalRow_unbordered
     (F : InnerRadialPhysicalSource D G false) :
@@ -105,7 +115,7 @@ variable (hw : Continuous D.w) (bordered : Bool) (j : ℝ)
 
 local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "forcing" => innerRadialPhysicalForcing D G bordered
-local notation "rowSource" => (innerRadialPhysicalRow D G bordered).toLinearMap
+local notation "rowSource" => innerRadialPhysicalRowLinear D G bordered
 local notation "W" =>
   InnerRadialDomain D hw G forcing rowSource bordered j central column
 
@@ -138,6 +148,7 @@ def innerRadialBrokenPhysicalField :
     innerRadialBrokenPhysicalCoordinates_apply]
   exact innerBorderMaxEquiv_symm_apply (radialHilbertMeasure D) _
 
+include hw in
 theorem innerRadialBrokenPhysicalField_mem (x : W) :
     innerRadialBrokenPhysicalField D G bordered x.val ∈
       innerSupportedAdmissibleSource (radialHilbertMeasure D)

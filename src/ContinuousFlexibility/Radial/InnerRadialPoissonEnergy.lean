@@ -51,16 +51,16 @@ theorem innerTwoColumnMap_weighted_energy
   rw [mul_pow] at hsq
   simpa only [normalized, η, innerBoundarySqrt_norm_sq κ (fun i => (hκ i).le) ξ] using hsq
 
-/-- Only active cut coordinates need the same weight; an outer zero
-trace imposes no artificial condition on the outer weight convention. -/
-theorem innerChainBoundary_inverse_weight_constant (n : ℕ) (p : Fin (n + 1))
+/-- The physical restriction sees a constant weight on its active cuts;
+the two exterior Dirichlet entries remain zero. -/
+theorem innerChainBoundary_weight_constant (n : ℕ) (p : Fin (n + 1))
     (w : Fin n → ℝ) (c : ℝ)
     (hleft : 0 < p.val → innerChainScalarRestriction n p w 1 0 = c)
     (hright : p.val < n → innerChainScalarRestriction n p w 1 1 = c)
     (ξ : EuclideanSpace ℝ (Fin n)) :
-    innerChainBoundaryCLM n p (innerBoundaryDiagonal (fun i => (w i)⁻¹) ξ) =
-      c⁻¹ • innerChainBoundaryCLM n p ξ := by
-  rw [innerChainBoundaryCLM_inverse_diagonal]
+    innerChainBoundaryCLM n p (innerBoundaryDiagonal w ξ) =
+      c • innerChainBoundaryCLM n p ξ := by
+  rw [innerChainBoundaryCLM_diagonal n p w 1]
   apply PiLp.ext
   intro i
   simp only [PiLp.toLp_apply, PiLp.smul_apply, smul_eq_mul]
@@ -77,6 +77,23 @@ theorem innerChainBoundary_inverse_weight_constant (n : ℕ) (p : Fin (n + 1))
         simp only [innerChainBoundaryCLM_apply, innerChainBoundaryRestriction_apply,
           show (1 : Fin 2) ≠ 0 by decide, ite_false, dif_neg hp]
       rw [hz, mul_zero, mul_zero]
+
+/-- Only active cut coordinates need the same weight; an outer zero
+trace imposes no artificial condition on the outer weight convention. -/
+theorem innerChainBoundary_inverse_weight_constant (n : ℕ) (p : Fin (n + 1))
+    (w : Fin n → ℝ) (c : ℝ)
+    (hleft : 0 < p.val → innerChainScalarRestriction n p w 1 0 = c)
+    (hright : p.val < n → innerChainScalarRestriction n p w 1 1 = c)
+    (ξ : EuclideanSpace ℝ (Fin n)) :
+    innerChainBoundaryCLM n p (innerBoundaryDiagonal (fun i => (w i)⁻¹) ξ) =
+      c⁻¹ • innerChainBoundaryCLM n p ξ := by
+  apply innerChainBoundary_weight_constant n p (fun i => (w i)⁻¹) c⁻¹ _ _ ξ
+  · intro hp
+    simpa only [inv_one, hleft hp] using
+      innerChainScalarRestriction_map n p w 1 (fun x : ℝ => x⁻¹) 0
+  · intro hp
+    simpa only [inv_one, hright hp] using
+      innerChainScalarRestriction_map n p w 1 (fun x : ℝ => x⁻¹) 1
 
 namespace InnerRadialGapChart
 
