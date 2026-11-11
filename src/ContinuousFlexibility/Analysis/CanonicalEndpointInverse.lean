@@ -43,7 +43,8 @@ theorem exists_smooth_localInverse_of_planeJacobian_ne_zero
       (hF.differentiableAt (by simp)).hasFDerivAt
   have hn : (∞ : ℕ∞ω) ≠ 0 := by simp
   let e := hF.toOpenPartialHomeomorph F hFD hn
-  refine ⟨e, rfl, hF.mem_toOpenPartialHomeomorph_source hFD hn, ?_⟩
+  refine ⟨e, hF.toOpenPartialHomeomorph_coe hFD hn,
+    hF.mem_toOpenPartialHomeomorph_source hFD hn, ?_⟩
   exact hF.to_localInverse hFD hn
 
 /-- The local endpoint inverse agrees with the specified inverse on the
