@@ -58,7 +58,7 @@ variable (B : FixedCentralBorder) (D : ReferenceData)
 theorem fixedCentralPhysicalModelChart_kappa (i : Fin 2) :
     (fixedCentralPhysicalModelChart B D hD hborder G central q hT hcap hcolumn hcore hw
       hleft hright hB M).kappa i = fixedCentralModelPhysicalKappa M i := by
-  change 1 * centralDensityRoot _ ^ 2 *
+  change 1 * centralDensityRoot (bufferCut (B.modelBuffer q T B₀) i) ^ 2 *
       ((M.column i).inwardEnergy + innerLiouvilleBoundaryDrift
         centralDensityRoot (bufferCut (B.modelBuffer q T B₀)) i) = _
   unfold fixedCentralModelPhysicalKappa innerPhysicalCutKappa fixedCentralModelCutEnergy

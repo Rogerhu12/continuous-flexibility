@@ -40,6 +40,8 @@ theorem matchedInner_signed_gap_weight (g : Fin (2 * K + 2)) :
   refine ⟨(innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ) ^ σ,
     rpow_pos_of_pos (innerMorseInnerCutWeight_pos N K a γ _) σ, ?_, ?_, ?_⟩
   · intro x hx
+    change (innerMorseInnerWeight N K a γ G l r x) ^ σ =
+      (innerMorseInnerCutWeight N K a γ (innerModelChainGap g).succ) ^ σ
     rw [innerMorseInnerWeight_on_gap N K a γ G l r g ⟨hx.1, hx.2.le⟩]
   · intro hp
     simpa only [innerMorseInnerInterfaceWeight, innerMorseInnerCutWeight_gap] using
@@ -81,6 +83,7 @@ theorem matchedInner_central_weighted_column_norm
     (fun x => (innerMorseInnerWeight N K a γ G l r x) ^ σ)
     ((innerMorseInnerWeight_measurable N K a γ G l r).pow_const σ) CW hCW]
   intro x hx
+  change (innerMorseInnerWeight N K a γ G l r x) ^ σ = 1
   rw [innerMorseInnerWeight_on_center N K a γ G l r ⟨hx.1, hx.2.le⟩, one_rpow]
 
 end GapAndMiddle

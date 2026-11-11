@@ -44,7 +44,7 @@ variable
       j (8 * (S.chain.d m : ℝ) ^ 9)) CM KM)
 
 local notation "A" => P.retainedMorseModelChart hw hS G₀ hfirst H bordered j center piece column
-  side m (innerMorseInnerTailIndex_bounds S.chain.index K side p).1
+  side m (And.left (innerMorseInnerTailIndex_bounds S.chain.index K side p))
   (innerMorseInnerTailPiece_ne_center K side p) hleft hright hB M
 
 variable

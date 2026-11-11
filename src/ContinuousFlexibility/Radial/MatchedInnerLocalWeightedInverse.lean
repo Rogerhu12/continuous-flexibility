@@ -32,7 +32,7 @@ variable {α : Type*} [MeasurableSpace α]
 
 local notation "E" => innerSupportedWeightEquiv μ s hs bordered
   (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-  (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
+  (fun x => Eq.trans_le (congrArg abs (Eq.symm (hInv x))) (hB false x))
 
 /-- Its continuous equivalence is the same identity, so the first band
 uses the unweighted inverse without any new operator representation. -/
@@ -61,10 +61,10 @@ theorem innerSupportedWeightEquiv_pair_sign (sign : Bool) :
   · simpa only [innerHilbertWeight, hfun] using
       innerSupportedWeightEquiv_symm_toCLM μ s hs bordered
         (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-        (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
+        (fun x => Eq.trans_le (congrArg abs (Eq.symm (hInv x))) (hB false x))
   · exact innerSupportedWeightEquiv_toCLM μ s hs bordered
       (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-      (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
+      (fun x => Eq.trans_le (congrArg abs (Eq.symm (hInv x))) (hB false x))
 
 end SupportedSigns
 
@@ -118,7 +118,7 @@ local notation "H" => InnerRadialPhysicalSource D G bordered
 local notation "E" => innerSupportedWeightEquiv (radialHilbertMeasure D)
   (innerRadialChainRegion D G) (innerRadialChainRegion_measurable D G) bordered
   (W true) (hW true) (hpos true) (B true) (B false) (hB true)
-  (fun x => (congrArg abs (hInv x).symm).trans_le (hB false x))
+  (fun x => Eq.trans_le (congrArg abs (Eq.symm (hInv x))) (hB false x))
 local notation "sets" => (fun p : Fin (n + 1) => Ioo (G.left p) (G.right p))
 
 /-- Actual local data imply both weighted estimates for the original

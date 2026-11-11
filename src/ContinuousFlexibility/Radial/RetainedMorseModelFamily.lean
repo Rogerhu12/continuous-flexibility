@@ -33,7 +33,8 @@ theorem innerMorseInnerTailSlot_pair_injective (k : ℕ) :
   · apply Prod.ext
     · rfl
     · apply Fin.ext
-      simp only [innerMorseInnerTailSlot, ite_true] at hv
+      change p.val = q.val
+      change k + 1 + p.val = k + 1 + q.val at hv
       omega
 
 theorem innerMorseInnerModelSlot_cases {k : ℕ} (p : Fin (2 * k + 1)) :

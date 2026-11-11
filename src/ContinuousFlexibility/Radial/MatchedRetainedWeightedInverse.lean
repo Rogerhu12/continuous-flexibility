@@ -78,7 +78,7 @@ local notation "hW" => fun sign => (innerMorseInnerWeight_measurable S.chain.ind
 local notation "loss" => innerMorseInnerLoss S.chain.index k H 37
 local notation "hloss" => innerMorseInnerLoss_measurable S.chain.index k H 37
 local notation "hlossBound" =>
-  innerMorseInnerLoss_le_one S.chain.index k H (by norm_num : (0 : ℝ) ≤ 37)
+  innerMorseInnerLoss_le_one S.chain.index k H (Nat.cast_nonneg 37)
 
 include hbridge hmodel hwindow hB hj in
 theorem retainedMorseActualChain_signed_inverse_bound

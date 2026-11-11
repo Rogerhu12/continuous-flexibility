@@ -25,6 +25,13 @@ open Set Filter MeasureTheory
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements ContinuousFlexibility.Analysis
 
+private abbrev matchedOuterGreenCut {D : ReferenceData}
+    (M : RadialMatchingData D) (side : Bool) : ℝ :=
+  if side then M.innerRight else M.innerLeft
+
+private abbrev matchedOuterGreenIndex (side : Bool) : Fin 2 :=
+  if side then 1 else 0
+
 section
 
 variable {D : ReferenceData} (hD : IsAccumulatingProfile D) (hB : RadialTrueBorder D)
@@ -32,8 +39,8 @@ variable {D : ReferenceData} (hD : IsAccumulatingProfile D) (hB : RadialTrueBord
   (ha : D.a < M.innerLeft) (hm : M.innerLeft < M.innerRight)
   (hb : M.innerRight < D.b) (hlam : ∀ i, 0 < M.boundaryScale i)
 
-local notation "cut" => (fun side : Bool => if side then M.innerRight else M.innerLeft)
-local notation "idx" => (fun side : Bool => if side then (1 : Fin 2) else 0)
+local notation "cut" => matchedOuterGreenCut M
+local notation "idx" => matchedOuterGreenIndex
 
 variable {c : Bool → ℝ} {P ZP Q ZQ : Bool → ℝ → ℝ}
   (H : ∀ side : Bool, OuterFundamentalStatePair
