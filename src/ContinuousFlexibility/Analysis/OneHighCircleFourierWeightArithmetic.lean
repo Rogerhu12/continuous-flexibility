@@ -11,6 +11,8 @@ noncomputable section
 
 namespace ContinuousFlexibility.Analysis
 
+open scoped ENNReal
+
 theorem circlePhysicalFrequency_add (P : ℝ) (m n : ℤ) :
     circlePhysicalFrequency P (m + n) =
       circlePhysicalFrequency P m + circlePhysicalFrequency P n := by

@@ -5,10 +5,14 @@ Last updated: 2026-11-11.
 ## Active line: Tool-OneHighFactor
 
 `line/Tool-OneHighFactor` implements Lemmas 7.2 and 7.3. This tool task is
-not yet complete. The first proof group contains weighted Fourier interpolation,
-the scalar integrating-factor formula, and the angular variational equation of
-an already smooth circle flow. The latter is an intermediate result: smooth
-dependence of the genuine flow and the Sobolev estimates are still required.
+not yet complete. CI has compiled weighted Fourier interpolation, the actual
+circle Parseval and derivative identities, the infinite Fourier product
+formula, and the integrating-factor and variational formulas. Smooth angular
+dependence and interior joint smoothness are derived from the classical time
+ODE; they are not assumptions on the final flow statements. The next proof
+groups connect actual derivative products to Sobolev norms, prove uniform
+smooth composition, and establish cylinder Fourier inversion and circle-flow
+norm bounds. Full composition, inversion, and flow estimates remain required.
 
 The stated dependence in Lemma 7.2(iii) is false. For the fixed circle input
 `v = 1`, the globally smooth functions `Phi_M(x) = M * (2*x - x^2)` have
@@ -18,14 +22,16 @@ on that range can give the stated estimate at order one. At order zero the
 linear functions `Phi_M(x) = M*x` also rule out a constant with no derivative
 control. `Analysis/OneHighFactorCounterexample.lean` states both obstructions,
 including their ordinary circle `L2` constant-function integrals for every
-positive period. These proofs are awaiting CI validation.
+positive period. CI has compiled these counterexample proofs.
 
-The needed repair is to require the outer function on a neighbourhood of the
+The readable manuscript now makes the minimal repair: the outer function is
+required on a neighbourhood of the
 convex hull of zero and the closed input range, and to control its derivatives
 of orders `1` through `max(1,s)` there. Constants must be uniform over inputs
 with fixed Fourier bounds and outer functions with these fixed derivative
 bounds. The multivariate assertion uses the corresponding convex region.
-This preserves the intended reciprocal-coefficient application, whose segment
+The original range-only assertion has not been silently substituted or counted
+as proved. This correction preserves the intended reciprocal-coefficient application, whose segment
 to zero stays away from the denominator's pole.
 
 ## Completed line: Tame

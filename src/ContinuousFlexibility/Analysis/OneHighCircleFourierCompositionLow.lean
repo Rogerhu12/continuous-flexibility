@@ -1,0 +1,169 @@
+import ContinuousFlexibility.Analysis.OneHighCircleFourierChangeVariables
+import ContinuousFlexibility.Analysis.OneHighCircleRealSobolev
+import ContinuousFlexibility.Analysis.OneHighCompositionJets
+import Mathlib.Topology.ContinuousMap.Lattice
+
+/-!
+# Low-order circle composition estimates
+
+The actual Faà di Bruno formula is combined with change of variables. Bounds
+on the first three derivatives of the lift will provide the uniform low-order
+base for the tame high-order induction.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Analysis
+
+open MeasureTheory Function
+open scoped ENNReal BigOperators ContDiff
+
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+
+/-- Every ordinary derivative of a smooth function is again smooth. -/
+theorem circle_contDiff_iteratedDeriv {v : ℝ → E} (hv : ContDiff ℝ ∞ v) (n : ℕ) :
+    ContDiff ℝ ∞ (iteratedDeriv n v) := by
+  rw [iteratedDeriv_eq_iterate]
+  exact ContDiff.iterate_deriv n hv
+
+/-- A bound on the inner derivatives yields an actual pointwise
+composition bound, with all outer derivative orders retained. -/
+theorem circleLift_norm_iteratedDeriv_comp_le {u : ℝ → E} {h : ℝ → ℝ}
+    (hu : ContDiff ℝ ∞ u) (hh : ContDiff ℝ ∞ h) (s : ℕ) {B : ℝ} (hB : 0 ≤ B)
+    (hbound : ∀ j : ℕ, 1 ≤ j → j ≤ s → ∀ x : ℝ, ‖iteratedDeriv j h x‖ ≤ B)
+    (x : ℝ) :
+    ‖iteratedDeriv s (u ∘ h) x‖ ≤
+      ∑ q : OrderedFinpartition s, B ^ q.length * ‖iteratedDeriv q.length u (h x)‖ := by
+  classical
+  have hchain := norm_iteratedFDeriv_comp_le_partition_sum
+    (x := x) hu.contDiffAt hh.contDiffAt s
+  simp only [norm_iteratedFDeriv_eq_norm_iteratedDeriv] at hchain
+  apply hchain.trans
+  apply Finset.sum_le_sum
+  intro q _
+  have hp : (∏ j, ‖iteratedDeriv (q.partSize j) h x‖) ≤ B ^ q.length := by
+    calc
+      _ ≤ ∏ _j : Fin q.length, B := Finset.prod_le_prod
+        (fun _ _ => norm_nonneg _) (fun j _ =>
+          hbound (q.partSize j) (q.partSize_pos j) (q.partSize_le j) x)
+      _ = _ := by simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+  simpa only [mul_comm] using
+    mul_le_mul_of_nonneg_left hp (norm_nonneg (iteratedDeriv q.length u (h x)))
+
+variable {P : ℝ} [Fact (0 < P)]
+
+/-- The zeroth circle jet of an actual derivative is the corresponding
+member of the original derivative tower. -/
+theorem periodicCircleJet_iteratedDeriv_zero (v : ℝ → E) (hp : Periodic v P)
+    (hv : ContDiff ℝ ∞ v) (j : ℕ) :
+    periodicCircleJet (iteratedDeriv j v) (periodic_iteratedDeriv hp j)
+      (circle_contDiff_iteratedDeriv hv j) 0 = periodicCircleJet v hp hv j := by
+  ext θ
+  induction θ using QuotientAddGroup.induction_on
+  simp only [periodicCircleJet_coe_apply, iteratedDeriv_zero]
+
+/-- Absolute value preserves the actual circle `L²` norm. -/
+theorem circle_l2_abs (f : C(AddCircle P, ℝ)) :
+    (eLpNorm |f| 2 AddCircle.haarAddCircle).toReal =
+      (eLpNorm f 2 AddCircle.haarAddCircle).toReal := by
+  congr 1
+  apply eLpNorm_congr_norm_ae (|f|).continuous.aestronglyMeasurable
+    f.continuous.aestronglyMeasurable
+  exact Filter.Eventually.of_forall fun θ => by
+    simp only [ContinuousMap.abs_apply, Real.norm_eq_abs, abs_abs]
+
+/-- Genuine `L²` control of an arbitrary derivative of the composition
+from bounds on the inner derivatives through that same order. -/
+theorem circleLift_derivative_l2_comp_le (u : ℝ → ℝ) (hp : Periodic u P)
+    (hu : ContDiff ℝ ∞ u) (h : ℝ → ℝ) (hh : ContDiff ℝ ∞ h)
+    (hlift : ∀ x, h (x + P) = h x + P) {c B : ℝ} (hc : 0 < c) (hB : 0 ≤ B)
+    (hlower : ∀ x, c ≤ deriv h x) (s : ℕ)
+    (hbound : ∀ j : ℕ, 1 ≤ j → j ≤ s → ∀ x : ℝ, ‖iteratedDeriv j h x‖ ≤ B) :
+    (eLpNorm (periodicCircleJet (u ∘ h) (periodic_comp_circleLift hp hlift)
+        (hu.comp hh) s) 2 AddCircle.haarAddCircle).toReal ≤
+      (∑ q : OrderedFinpartition s, B ^ q.length) * (Real.sqrt c)⁻¹ *
+        circleRealSobolevNorm (s : ℝ) (periodicCircleJet u hp hu 0) := by
+  classical
+  let U : ℕ → C(AddCircle P, ℝ) := periodicCircleJet u hp hu
+  let W : ℕ → C(AddCircle P, ℝ) :=
+    periodicCircleJet (u ∘ h) (periodic_comp_circleLift hp hlift) (hu.comp hh)
+  let V : ℕ → C(AddCircle P, ℝ) := fun j =>
+    periodicCircleJet ((iteratedDeriv j u) ∘ h)
+      (periodic_comp_circleLift (periodic_iteratedDeriv hp j) hlift)
+      ((circle_contDiff_iteratedDeriv hu j).comp hh) 0
+  let A : OrderedFinpartition s → C(AddCircle P, ℝ) := fun q =>
+    B ^ q.length • |V q.length|
+  have hA0 (q : OrderedFinpartition s) (θ : AddCircle P) : 0 ≤ A q θ := by
+    simp only [A, ContinuousMap.smul_apply, ContinuousMap.abs_apply, smul_eq_mul]
+    exact mul_nonneg (pow_nonneg hB _) (abs_nonneg _)
+  have hpoint (θ : AddCircle P) : ‖W s θ‖ ≤ ‖(∑ q, A q) θ‖ := by
+    have hsum : 0 ≤ (∑ q, A q) θ := by
+      rw [ContinuousMap.sum_apply]
+      exact Finset.sum_nonneg (fun q _ => hA0 q θ)
+    rw [Real.norm_of_nonneg hsum]
+    induction θ using QuotientAddGroup.induction_on
+    rename_i x
+    simpa only [W, V, A, ContinuousMap.sum_apply, ContinuousMap.smul_apply,
+      ContinuousMap.abs_apply, smul_eq_mul, periodicCircleJet_coe_apply,
+      iteratedDeriv_zero, Function.comp_apply, Real.norm_eq_abs] using
+      circleLift_norm_iteratedDeriv_comp_le hu hh s hB hbound x
+  have hV (j : ℕ) (hj : j ≤ s) :
+      (eLpNorm (V j) 2 AddCircle.haarAddCircle).toReal ≤
+        (Real.sqrt c)⁻¹ * circleRealSobolevNorm (s : ℝ) (U 0) := by
+    have hcomp := periodicCircleJet_l2_comp_le (iteratedDeriv j u)
+      (periodic_iteratedDeriv hp j) (circle_contDiff_iteratedDeriv hu j)
+      h hh hlift hc hlower
+    rw [periodicCircleJet_iteratedDeriv_zero] at hcomp
+    have hjnorm := circle_real_derivative_l2_le_sobolev U
+      (periodicCircleJet_hasDerivAt u hp hu) hj
+    exact hcomp.trans (mul_le_mul_of_nonneg_left hjnorm (inv_nonneg.mpr (Real.sqrt_nonneg c)))
+  have hterm (q : OrderedFinpartition s) :
+      (eLpNorm (A q) 2 AddCircle.haarAddCircle).toReal ≤
+        B ^ q.length * (Real.sqrt c)⁻¹ * circleRealSobolevNorm (s : ℝ) (U 0) := by
+    rw [A, circle_l2_const_smul _ (pow_nonneg hB _), circle_l2_abs]
+    simpa only [mul_assoc] using
+      mul_le_mul_of_nonneg_left (hV q.length q.length_le) (pow_nonneg hB _)
+  calc
+    _ ≤ (eLpNorm (∑ q, A q) 2 AddCircle.haarAddCircle).toReal :=
+      circle_l2_le_of_norm_le (W s) (∑ q, A q) hpoint
+    _ ≤ ∑ q, (eLpNorm (A q) 2 AddCircle.haarAddCircle).toReal := circle_l2_sum_le A
+    _ ≤ ∑ q : OrderedFinpartition s,
+        B ^ q.length * (Real.sqrt c)⁻¹ * circleRealSobolevNorm (s : ℝ) (U 0) :=
+      Finset.sum_le_sum (fun q _ => hterm q)
+    _ = _ := by simp only [Finset.sum_mul]
+
+/-- The actual Sobolev composition estimate when derivatives of the lift
+through order `s` have a fixed pointwise bound. For `s ≤ 3` these bounds
+follow from the prescribed low `H³` norm of `h' - 1`. -/
+theorem circleLift_sobolev_comp_le_of_derivative_bound (u : ℝ → ℝ)
+    (hp : Periodic u P) (hu : ContDiff ℝ ∞ u) (h : ℝ → ℝ) (hh : ContDiff ℝ ∞ h)
+    (hlift : ∀ x, h (x + P) = h x + P) {c B : ℝ} (hc : 0 < c) (hB : 0 ≤ B)
+    (hlower : ∀ x, c ≤ deriv h x) (s : ℕ)
+    (hbound : ∀ j : ℕ, 1 ≤ j → j ≤ s → ∀ x : ℝ, ‖iteratedDeriv j h x‖ ≤ B) :
+    circleRealSobolevNorm (s : ℝ)
+        (periodicCircleJet (u ∘ h) (periodic_comp_circleLift hp hlift) (hu.comp hh) 0) ≤
+      ((2 : ℝ) ^ s * (Real.sqrt c)⁻¹ *
+        (1 + ∑ q : OrderedFinpartition s, B ^ q.length)) *
+        circleRealSobolevNorm (s : ℝ) (periodicCircleJet u hp hu 0) := by
+  let U : ℕ → C(AddCircle P, ℝ) := periodicCircleJet u hp hu
+  let W : ℕ → C(AddCircle P, ℝ) :=
+    periodicCircleJet (u ∘ h) (periodic_comp_circleLift hp hlift) (hu.comp hh)
+  have hzero := (periodicCircleJet_l2_comp_le u hp hu h hh hlift hc hlower).trans
+    (mul_le_mul_of_nonneg_left
+      (circle_real_derivative_l2_le_sobolev U (periodicCircleJet_hasDerivAt u hp hu)
+        (Nat.zero_le s)) (inv_nonneg.mpr (Real.sqrt_nonneg c)))
+  have htop := circleLift_derivative_l2_comp_le u hp hu h hh hlift hc hB hlower s hbound
+  calc
+    _ ≤ (2 : ℝ) ^ s * ((eLpNorm (W 0) 2 AddCircle.haarAddCircle).toReal +
+        (eLpNorm (W s) 2 AddCircle.haarAddCircle).toReal) :=
+      circle_real_sobolevNorm_le_derivative_endpoints W
+        (periodicCircleJet_hasDerivAt (u ∘ h) (periodic_comp_circleLift hp hlift)
+          (hu.comp hh)) s
+    _ ≤ (2 : ℝ) ^ s *
+        ((Real.sqrt c)⁻¹ * circleRealSobolevNorm (s : ℝ) (U 0) +
+          (∑ q : OrderedFinpartition s, B ^ q.length) * (Real.sqrt c)⁻¹ *
+            circleRealSobolevNorm (s : ℝ) (U 0)) :=
+      mul_le_mul_of_nonneg_left (add_le_add hzero htop) (by positivity)
+    _ = _ := by ring
+
+end ContinuousFlexibility.Analysis

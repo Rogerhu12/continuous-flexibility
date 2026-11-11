@@ -67,7 +67,7 @@ private theorem exists_circleFlow_localTime {a b t : ℝ} (ht : t ∈ Ioo a b) :
     have hs' : s ∈ Metric.closedBall (2 : ℝ) χ.rIn := by
       simpa only [χ, Metric.mem_closedBall, Real.dist_eq] using hs
     have hone := χ.one_of_mem_closedBall hs'
-    simp only [τ, hone, sub_self, zero_mul, one_mul, zero_add]
+    simp only [τ, ε, hone, sub_self, zero_mul, one_mul, zero_add]
 
 /-- The supplied classical flow is jointly smooth at every interior time.
 The proof uses a local affine part of a smooth time change, not an

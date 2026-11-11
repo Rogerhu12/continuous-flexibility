@@ -18,7 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open MeasureTheory SchwartzMap Filter
-open scoped ENNReal FourierTransform SchwartzMap
+open scoped ENNReal FourierTransform SchwartzMap ContDiff
 
 theorem real_continuous_fourierInv_of_integrable {g : ℝ → ℂ}
     (hg : Integrable g) : Continuous (𝓕⁻ g) := by
@@ -31,7 +31,7 @@ bilinear integral pairing of two integrable functions. -/
 theorem real_integral_fourierInv_smul_eq {f g : ℝ → ℂ}
     (hf : Integrable f) (hg : Integrable g) :
     (∫ x : ℝ, 𝓕⁻ f x • g x) = ∫ x : ℝ, f x • 𝓕⁻ g x := by
-  simpa [Real.fourierInv_eq, VectorFourier.fourierIntegral, real_inner_comm] using
+  simpa [Real.fourierInv_eq, VectorFourier.fourierIntegral, real_inner_comm, mul_comm] using
     VectorFourier.integral_fourierIntegral_smul_eq_flip
       (L := -(innerₗ ℝ)) Real.continuous_fourierChar continuous_inner.neg hf hg
 
@@ -46,7 +46,7 @@ theorem real_l2_fourierInv_ae_eq_integral
     (real_continuous_fourierInv_of_integrable hg).locallyIntegrable
   intro a ha hcompact
   have hac : HasCompactSupport (Complex.ofRealCLM ∘ a) := hcompact.comp_left rfl
-  have has : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ a) := by fun_prop
+  have has : ContDiff ℝ ∞ (Complex.ofRealCLM ∘ a) := Complex.ofRealCLM.contDiff.comp ha
   let φ : 𝓢(ℝ, ℂ) := hac.toSchwartzMap has
   have hdist : (∫ x : ℝ, (𝓕⁻ φ) x • g x) =
       ∫ x : ℝ, φ x • (𝓕⁻ g : Lp ℂ 2 (volume : Measure ℝ)) x := by

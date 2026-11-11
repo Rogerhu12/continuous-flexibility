@@ -48,8 +48,10 @@ theorem circle_frequencyWeighted_memLp_of_derivatives
     (ContinuousMap.memLp (p := 2) (μ := AddCircle.haarAddCircle) ℂ (f 0))
   have hs := circle_fourier_memLp_two_of_memLp
     (ContinuousMap.memLp (p := 2) (μ := AddCircle.haarAddCircle) ℂ (f s))
-  apply (h0.norm.add hs.norm).of_le_mul (measurable_of_countable _).aestronglyMeasurable
+  apply (h0.norm.add hs.norm).of_le_mul (c := (2 : ℝ) ^ s)
+    (measurable_of_countable _).aestronglyMeasurable
   exact Eventually.of_forall fun n => by
+    simp only [Pi.add_apply]
     rw [Real.norm_of_nonneg (add_nonneg (norm_nonneg _) (norm_nonneg _))]
     exact circle_norm_frequencyWeighted_nat_le_derivative_endpoints f hderiv s n
 
@@ -135,7 +137,8 @@ theorem circle_sobolevNorm_le_derivative_endpoints
       _ ≤ ENNReal.ofReal ((2 : ℝ) ^ s) *
           (eLpNorm (fun n => ‖fourierCoeff (f 0) n‖) 2 Measure.count +
             eLpNorm (fun n => ‖fourierCoeff (f s) n‖) 2 Measure.count) :=
-        mul_le_mul_left' (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)) _
+        mul_le_mul_of_nonneg_left
+          (eLpNorm_add_le (by norm_num : (1 : ℝ≥0∞) ≤ 2)) (zero_le _)
       _ = _ := by
         rw [eLpNorm_norm _ h0.aestronglyMeasurable, eLpNorm_norm _ hs.aestronglyMeasurable]
   have hfinite : ENNReal.ofReal ((2 : ℝ) ^ s) *
@@ -159,11 +162,15 @@ theorem circle_sobolevNorm_le_sum_derivative_l2
       ∑ k ∈ Finset.range (s + 1), (eLpNorm (f k) 2 AddCircle.haarAddCircle).toReal := by
   have h0 : (eLpNorm (f 0) 2 AddCircle.haarAddCircle).toReal ≤
       ∑ k ∈ Finset.range (s + 1), (eLpNorm (f k) 2 AddCircle.haarAddCircle).toReal :=
-    Finset.single_le_sum (fun k _ => ENNReal.toReal_nonneg)
+    Finset.single_le_sum
+      (f := fun k => (eLpNorm (f k) 2 AddCircle.haarAddCircle).toReal)
+      (fun k _ => ENNReal.toReal_nonneg)
       (Finset.mem_range.mpr (Nat.zero_lt_succ s))
   have hs : (eLpNorm (f s) 2 AddCircle.haarAddCircle).toReal ≤
       ∑ k ∈ Finset.range (s + 1), (eLpNorm (f k) 2 AddCircle.haarAddCircle).toReal :=
-    Finset.single_le_sum (fun k _ => ENNReal.toReal_nonneg)
+    Finset.single_le_sum
+      (f := fun k => (eLpNorm (f k) 2 AddCircle.haarAddCircle).toReal)
+      (fun k _ => ENNReal.toReal_nonneg)
       (Finset.mem_range.mpr (Nat.lt_succ_self s))
   calc
     _ ≤ (2 : ℝ) ^ s * ((eLpNorm (f 0) 2 AddCircle.haarAddCircle).toReal +
@@ -192,6 +199,6 @@ theorem circle_sobolevNorm_succ_le_l2_add_derivative
     fun k x => hderiv (k + 1) x
   have hlast := circle_derivative_l2_le_sobolev (fun k => f (k + 1)) hd (le_refl s)
   exact (circle_sobolevNorm_le_derivative_endpoints f hderiv (s + 1)).trans
-    (mul_le_mul_of_nonneg_left (add_le_add_left hlast _) (by positivity))
+    (mul_le_mul_of_nonneg_left (add_le_add le_rfl hlast) (by positivity))
 
 end ContinuousFlexibility.Analysis

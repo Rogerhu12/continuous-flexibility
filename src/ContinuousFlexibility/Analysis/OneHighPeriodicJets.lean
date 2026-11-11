@@ -32,8 +32,8 @@ theorem periodic_iteratedDeriv {v : ℝ → E} (hp : Periodic v P) (n : ℕ) :
 
 private theorem continuous_periodic_lift {v : ℝ → E}
     (hp : Periodic v P) (hv : Continuous v) : Continuous hp.lift := by
-  apply isQuotientMap_quotient_mk'.continuous_iff.mpr
-  have he : (hp.lift ∘ (Quotient.mk' : ℝ → AddCircle P)) = v := by
+  apply (QuotientAddGroup.isQuotientMap_mk (AddSubgroup.zmultiples P)).continuous_iff.mpr
+  have he : (hp.lift ∘ (QuotientAddGroup.mk : ℝ → AddCircle P)) = v := by
     funext x
     exact hp.lift_coe x
   rw [he]

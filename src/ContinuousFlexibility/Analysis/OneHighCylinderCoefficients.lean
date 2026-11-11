@@ -56,7 +56,7 @@ theorem continuous_cylinderAngularCoefficient {f : ℝ × AddCircle P → ℂ}
     funext r
     rw [cylinderAngularCoefficient_apply, fourierCoeff_eq_intervalIntegral _ n 0, zero_add]
   rw [heq]
-  simpa only [Pi.smul_apply] using
+  simpa only [Pi.smul_def'] using
     (show Continuous (fun _ : ℝ => (1 / P : ℝ)) from continuous_const).smul hint
 
 /-- A single angular coefficient is bounded by the full angular `L²` energy. -/
