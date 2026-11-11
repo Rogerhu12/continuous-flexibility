@@ -65,8 +65,16 @@ theorem n05CanonicalFiniteReweight_apply (T : MaterialData) (S : PhysicalSpacesD
     (n05CanonicalFiniteReweight T S K γfrom tfrom γto tto s q v).val m j =
       if m ∈ q then n05CanonicalWeightRatio T S K γto γfrom tto tfrom m • v.val m j
         else 0 := by
-  rw [n05CanonicalFiniteReweight, n05CanonicalJetMultiplier_apply]
-  by_cases hm : m ∈ q <;> simp [n05CanonicalFiniteScalar, hm]
+  unfold n05CanonicalFiniteReweight
+  have he := n05CanonicalJetMultiplier_apply S K s
+    (n05CanonicalFiniteScalar q (n05CanonicalWeightRatio T S K γto γfrom tto tfrom))
+    (n05CanonicalFiniteScalarBound q (n05CanonicalWeightRatio T S K γto γfrom tto tfrom))
+    (n05CanonicalFiniteScalarBound_nonneg q _)
+    (n05CanonicalFiniteScalar_bound q _)
+    (show n05CanonicalClosedSubmodule S K s from v) m j
+  by_cases hm : m ∈ q
+  · simpa only [n05CanonicalFiniteScalar, if_pos hm] using he
+  · simpa only [n05CanonicalFiniteScalar, if_neg hm, zero_smul] using he
 
 theorem n05CanonicalFiniteReweight_bound (T : MaterialData) (S : PhysicalSpacesData)
     (K : CanonicalData S) (γfrom tfrom γto tto : ℝ) (s : ℕ) (q : Finset ℕ)
@@ -89,13 +97,21 @@ theorem n05CanonicalFiniteReweight_forget {D : ReferenceData} {T : MaterialData}
       (n05CanonicalVolumeModel T S K).forget γfrom tfrom s
         (n05CanonicalFiniteTruncate S K s q v) := by
   funext m
+  have hleft := n05CanonicalVolumeModel_forget T S K γto tto s
+    (n05CanonicalFiniteReweight T S K γfrom tfrom γto tto s q v) m
+  have hright := n05CanonicalVolumeModel_forget T S K γfrom tfrom s
+    (n05CanonicalFiniteTruncate S K s q v) m
+  refine hleft.trans (Eq.trans ?_ hright.symm)
+  have hr := n05CanonicalFiniteReweight_apply T S K γfrom tfrom γto tto s q v m 0
+  have ht := n05CanonicalFiniteTruncate_apply S K s q
+    (show n05CanonicalClosedSubmodule S K s from v) m 0
+  rw [hr, ht]
   by_cases hm : m ∈ q
-  · simp only [n05CanonicalVolumeModel_forget, n05CanonicalFiniteReweight_apply,
-      n05CanonicalFiniteTruncate_apply, if_pos hm, smul_smul]
-    exact congrArg (fun c : ℝ => c • v.val m 0)
-      (n05CanonicalWeightRatio_cancel hT hPart S K γfrom tfrom γto tto m)
-  · simp only [n05CanonicalVolumeModel_forget, n05CanonicalFiniteReweight_apply,
-      n05CanonicalFiniteTruncate_apply, if_neg hm, smul_zero]
+  · simp only [if_pos hm, smul_smul]
+    simpa only [n05CanonicalSampleWeight] using
+      congrArg (fun c : ℝ => c • v.val m 0)
+        (n05CanonicalWeightRatio_cancel hT hPart S K γfrom tfrom γto tto m)
+  · simp only [if_neg hm, smul_zero]
 
 def n05CanonicalCommonWeightCarrier (T : MaterialData) (S : PhysicalSpacesData)
     (K : CanonicalData S) (γ t : ℝ) (s : ℕ) :

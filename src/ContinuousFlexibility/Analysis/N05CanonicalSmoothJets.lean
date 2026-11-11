@@ -65,8 +65,8 @@ theorem n05CanonicalSmoothJet_ae (S : PhysicalSpacesData) (K : CanonicalData S)
 theorem n05CanonicalSmoothJet_zero_ae (S : PhysicalSpacesData) (K : CanonicalData S)
     (m : ℕ) {f : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f) :
     (n05CanonicalSmoothJet S K m hf 0 : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] f := by
-  simpa only [mixedDerivative, iteratedDeriv_zero, Prod.eta] using
-    n05CanonicalSmoothJet_ae S K m hf 0
+  filter_upwards [n05CanonicalSmoothJet_ae S K m hf 0] with p hp
+  simpa only [mixedDerivative, iteratedDeriv_zero, Prod.eta] using hp
 
 theorem n05CanonicalSmoothJet_weak (S : PhysicalSpacesData) (K : CanonicalData S)
     (m : ℕ) {f : PolarPoint → ℝ} (hf : ContDiff ℝ ∞ f)
