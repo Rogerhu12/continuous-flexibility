@@ -82,6 +82,63 @@ private theorem n01c_radialPrefix_commonNeighborhood
     (hinterp_mono bz base' lossIz (loss + d₀ + 2) hbz' hiz)
     (hinterp_mono bp base' lossIp 0 hbp' hip)
 
+private theorem n01c_radialPrefix_zero_restrict
+    {X : Type*} {U V : Set X} (hUV : U ⊆ V)
+    (I I₀ : ℕ → Set ℝ) (hI : ∀ m, I m ⊆ I₀ m)
+    (value : ℕ → X → ℕ → ℝ → ℝ → ℝ) (size : ℕ → X → ℝ)
+    (hbound : ∀ β : ℕ, 1 ≤ β → ∃ M : ℝ, 0 < M ∧
+      ∀ z ∈ V, ∀ m r, r ∈ I₀ m → ∀ θ,
+        |value β z m r θ| ≤ M * (1 + size β z)) :
+    ∀ β : ℕ, 1 ≤ β → ∃ M : ℝ, 0 < M ∧
+      ∀ m r, r ∈ I m → ∀ θ z, z ∈ U →
+        |value β z m r θ| ≤ M * (1 + size β z) := by
+  intro β hβ
+  obtain ⟨M, hM, hb⟩ := hbound β hβ
+  exact ⟨M, hM, fun m r hr θ z hz => hb z (hUV hz) m r (hI m hr) θ⟩
+
+private theorem n01c_radialPrefix_with_angularData
+    {Inputs : ℕ → ℕ → Prop} {Result : ℕ → Prop}
+    (hinputs : ∀ K : ℕ, ∃ offset : ℕ, Inputs K offset)
+    (hstep : ∀ K offset, Inputs K offset → Result K) : ∀ K, Result K := by
+  intro K
+  obtain ⟨offset, hinput⟩ := hinputs K
+  exact hstep K offset hinput
+
+private theorem n01c_radialPrefix_scalar_bound_mono
+    {value M M' A A' H E W : ℝ}
+    (hM : 1 ≤ M) (hMM : M ≤ M') (hAA : A ≤ A')
+    (hH : 0 ≤ H) (hE : 1 ≤ E) (hW : 0 ≤ W)
+    (hb : value ≤ M * H ^ (3 / 4 : ℝ) * E ^ A * W) :
+    value ≤ M' * H ^ (3 / 4 : ℝ) * E ^ A' * W := by
+  have hfac : M * H ^ (3 / 4 : ℝ) * E ^ A ≤
+      M' * H ^ (3 / 4 : ℝ) * E ^ A' :=
+    mul_le_mul
+      (mul_le_mul_of_nonneg_right hMM (Real.rpow_nonneg hH _))
+      (Real.rpow_le_rpow_of_exponent_le hE hAA)
+      (Real.rpow_nonneg (zero_le_one.trans hE) _)
+      (mul_nonneg ((zero_le_one.trans hM).trans hMM) (Real.rpow_nonneg hH _))
+  exact hb.trans (mul_le_mul_of_nonneg_right hfac hW)
+
+private theorem n01c_radialPrefix_materialFamily
+    (P : ℕ → ℕ → ℕ → ℕ → ℝ → ℝ → Prop) (K : ℕ)
+    {Result : ℕ → ℝ → Prop}
+    (hmono : ∀ n b k s M A M' A', 1 ≤ M → 0 ≤ A → M ≤ M' → A ≤ A' →
+      P n b k s M A → P n b k s M' A')
+    (hpoint : ∀ n b k s, 0 < k → k ≤ K → n + 1 + b ≤ s →
+      ∃ M A : ℝ, 1 ≤ M ∧ 0 ≤ A ∧ P n b k s M A)
+    (hfinish : ∀ s M A, 1 ≤ M → 0 ≤ A →
+      (∀ n b k, 0 < k → k ≤ K → n + 1 + b ≤ s → P n b k s M A) →
+      ∀ B : ℝ, 0 < B →
+      (∀ H E W : ℝ, 0 ≤ H → 1 ≤ E → 0 ≤ W →
+        M * H ^ (3 / 4 : ℝ) * E ^ A * W ≤ B * H ^ (3 / 4 : ℝ) * E ^ B * W) →
+      Result s B) :
+    ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ Result s B := by
+  intro s
+  obtain ⟨M, A, hM, hA, hb⟩ := n01c_finite_radial_prefix_constants P K hmono hpoint s
+  obtain ⟨B, hB, habsorb⟩ :=
+    exists_sameConstant_materialWeight_bound M A (3 / 4 : ℝ)
+  exact ⟨B, hB, hfinish s M A hM hA hb B hB habsorb⟩
+
 theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -132,10 +189,12 @@ theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
       z ∈ stateNeighborhood S C base' ε' →
         |iteratedDeriv β (fun η => C.minusFlow z m r η) θ| ≤
           M * (1 + p (β - 1 + o₀) (z - (C.referenceState, 0))) := by
-    intro β hβ
-    obtain ⟨M, hM, hb⟩ := hQ.2 β hβ
-    exact ⟨M, hM, fun m r hr θ z hz =>
-      hb z (hsubq hz) m r ⟨hr.1.le, hr.2.le⟩ θ⟩
+    exact n01c_radialPrefix_zero_restrict hsubq
+      (fun m => Ioo (C.left m) (C.right m))
+      (fun m => Icc (C.left m) (C.right m))
+      (fun m r hr => ⟨hr.1.le, hr.2.le⟩)
+      (fun β z m r θ => iteratedDeriv β (C.minusFlow z m r) θ)
+      (fun β z => p (β - 1 + o₀) (z - (C.referenceState, 0))) hQ.2
   have hsample (m : ℕ) : T.sample (C.cell m) ∈ Ioo D.a D.b :=
     materialSample_mem_radialCore hT hA.1.1.choose_spec.2.1 (C.cell m)
   have hH (m : ℕ) : 0 ≤ T.H (T.sample (C.cell m)) :=
@@ -145,9 +204,9 @@ theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
         (Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) :=
     fun z hz => contDiffOn_minusFlow_of_cosineSpeed hS hT hA hB' hz m
       (contDiff_componentCosineSpeed hS hT hA hB' hpos hz m)
-  intro K
-  obtain ⟨offset, hpositive⟩ :=
-    ordinaryFlowAngularPositivePrefix_to_fixedBounds (ha K)
+  refine n01c_radialPrefix_with_angularData
+    (fun K => ordinaryFlowAngularPositivePrefix_to_fixedBounds (ha K)) ?_
+  intro K offset hpositive
   let L : ℕ := max lossRaw (max lossIz lossIp)
   let P : ℕ → ℕ → ℕ → ℕ → ℝ → ℝ → Prop := fun n b k s M A =>
     ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ : ℝ,
@@ -162,18 +221,9 @@ theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
   have hmono : ∀ n b k s M A M' A', 1 ≤ M → 0 ≤ A → M ≤ M' → A ≤ A' →
       P n b k s M A → P n b k s M' A' := by
     intro n b k s M A M' A' hM _ hMM hAA hb m r hr θ J z hz v
-    have hfac : M * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-        T.E0 (T.sample (C.cell m)) ^ A ≤
-        M' * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
-          T.E0 (T.sample (C.cell m)) ^ A' :=
-      mul_le_mul
-        (mul_le_mul_of_nonneg_right hMM (Real.rpow_nonneg (hH m) _))
-        (Real.rpow_le_rpow_of_exponent_le (hE _ (hsample m)) hAA)
-        (Real.rpow_nonneg (zero_le_one.trans (hE _ (hsample m))) _)
-        (mul_nonneg ((zero_le_one.trans hM).trans hMM)
-          (Real.rpow_nonneg (hH m) _))
-    exact (hb m r hr θ J z hz v).trans
-      (mul_le_mul_of_nonneg_right hfac (oneHighVariationWeight_nonneg p base' _ _ v))
+    exact n01c_radialPrefix_scalar_bound_mono hM hMM hAA (hH m)
+      (hE _ (hsample m)) (oneHighVariationWeight_nonneg p base' _ _ v)
+      (hb m r hr θ J z hz v)
   have hpoint : ∀ n b k s, 0 < k → k ≤ K → n + 1 + b ≤ s →
       ∃ M A : ℝ, 1 ≤ M ∧ 0 ≤ A ∧ P n b k s M A := by
     intro n b k s hk hkK hab
@@ -181,13 +231,9 @@ theorem n01_exists_ordinaryFlowRadialPositivePrefixBounds
       W JT JR hIz hIp K offset n b k (physicalFlowGraphTop s K offset) hk hkK
       (physicalFlowGraph_slots_offset_le_top hab hkK)
       (physicalFlowGraph_order_le_top hab hkK) hzero hpositive
-  have hprefix := n01c_finite_radial_prefix_constants P K hmono hpoint
   let dK : ℕ := (offset + 1) * (K + 1) + L
-  refine ⟨dK, fun s => ?_⟩
-  obtain ⟨M, A, hM, hA₀, hb⟩ := hprefix s
-  obtain ⟨B, hBpos, habsorb⟩ :=
-    exists_sameConstant_materialWeight_bound M A (3 / 4 : ℝ)
-  refine ⟨B, hBpos, ?_⟩
+  refine ⟨dK, n01c_radialPrefix_materialFamily P K hmono hpoint ?_⟩
+  intro s M A hM hA₀ hb B hBpos habsorb
   intro m a b q ha hab hq
   cases a with
   | zero => omega
