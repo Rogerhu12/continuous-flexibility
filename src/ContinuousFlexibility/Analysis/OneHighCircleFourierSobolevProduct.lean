@@ -49,7 +49,7 @@ theorem circle_enorm_weighted_fourierCoeff_mul_le (s : ℕ)
         (ENNReal.ofReal (circleFrequencyWeight P k) ^ s +
           ENNReal.ofReal (circleFrequencyWeight P (-k + n)) ^ s)) *
         (‖fourierCoeff f k‖ₑ * ‖fourierCoeff g (-k + n)‖ₑ) :=
-      mul_le_mul_right' hw _
+      mul_le_mul_of_nonneg_right hw (by positivity)
     _ = _ := by ring
 
 /-- The weighted Fourier `L²` estimate before converting finite norms to

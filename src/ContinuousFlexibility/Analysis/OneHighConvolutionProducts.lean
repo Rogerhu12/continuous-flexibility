@@ -30,11 +30,11 @@ theorem prod_frequencyWeights_le_sum {ι : Type*} [Fintype ι] [Nonempty ι]
     exact Finset.le_sup (Finset.mem_univ i)
   calc
     (∏ i, w i ^ a i) ≤ ∏ i, w j ^ a i :=
-      Finset.prod_le_prod' (fun i _ => pow_le_pow_left' (hmax i) (a i))
+      Finset.prod_le_prod' (fun i _ => pow_le_pow_left₀ zero_le (hmax i) (a i))
     _ = w j ^ (∑ i, a i) := Finset.prod_pow_eq_pow_sum _ _ _
-    _ ≤ w j ^ s := pow_le_pow_right' (hw j) ha
+    _ ≤ w j ^ s := pow_le_pow_right₀ (hw j) ha
     _ ≤ ∑ i, w i ^ s :=
-      Finset.single_le_sum (fun i _ => zero_le (w i ^ s)) (Finset.mem_univ j)
+      Finset.single_le_sum (f := fun i => w i ^ s) (fun i _ => zero_le) (Finset.mem_univ j)
 
 theorem prod_weighted_frequency_le_sum {ι : Type*} [Fintype ι] [Nonempty ι] [DecidableEq ι]
     (w : ι → ℝ≥0∞) (a : ι → ℕ) (s : ℕ) (u : ι → ℝ≥0∞)
@@ -45,7 +45,7 @@ theorem prod_weighted_frequency_le_sum {ι : Type*} [Fintype ι] [Nonempty ι] [
   rw [Finset.prod_mul_distrib]
   calc
     (∏ i, w i ^ a i) * (∏ i, u i) ≤ (∑ j, w j ^ s) * (∏ i, u i) :=
-      mul_le_mul_right' (prod_frequencyWeights_le_sum w a s hw ha) _
+      mul_le_mul_of_nonneg_right (prod_frequencyWeights_le_sum w a s hw ha) zero_le
     _ = ∑ j, w j ^ s * (∏ i, u i) := Finset.sum_mul _ _ _
     _ = ∑ j, ∏ i, (if i = j then w i ^ s else 1) * u i := by
       apply Finset.sum_congr rfl
@@ -106,7 +106,7 @@ theorem positiveConvolution_oneHigh_eLpNorm_two_le (k s : ℕ) {w : G → ℝ≥
       eLpNorm (positiveConvolution μ k (oneHighFrequencyFamily w s f j)) 2 μ ≤
         eLpNorm (fun y => w y ^ s * f j y) 2 μ *
           ∏ i ∈ Finset.univ.erase j, eLpNorm (f i) 1 μ := by
-    have h := positiveConvolution_eLpNorm_two_le k
+    have h := positiveConvolution_eLpNorm_two_le (μ := μ) k
       (measurable_oneHighFrequencyFamily hw hf j) j
     have hhead : oneHighFrequencyFamily w s f j j = (fun y => w y ^ s * f j y) := by
       funext y
@@ -123,7 +123,8 @@ theorem positiveConvolution_oneHigh_eLpNorm_two_le (k s : ℕ) {w : G → ℝ≥
     _ ≤ eLpNorm (fun x => ∑ j,
         positiveConvolution μ k (oneHighFrequencyFamily w s f j) x) 2 μ :=
       eLpNorm_mono_enorm_ae hm.aestronglyMeasurable <| Filter.Eventually.of_forall fun x => by
-        simpa only [enorm_eq_self] using positiveConvolution_oneHigh_le k s hw hw1 hf a ha x
+        simpa only [enorm_eq_self] using
+          positiveConvolution_oneHigh_le (μ := μ) k s hw hw1 hf a ha x
     _ ≤ ∑ j, eLpNorm (positiveConvolution μ k (oneHighFrequencyFamily w s f j)) 2 μ := by
       simpa only [Finset.sum_apply] using
         eLpNorm_sum_le (f := fun j => positiveConvolution μ k (oneHighFrequencyFamily w s f j))
@@ -139,7 +140,7 @@ theorem positiveConvolution_oneHigh_memLp_two (k s : ℕ) {w : G → ℝ≥0∞}
     (hhigh : ∀ i, MemLp (fun y => w y ^ s * f i y) 2 μ) :
     MemLp (positiveConvolution μ k (fun i y => w y ^ a i * f i y)) 2 μ := by
   apply memLp_iff.mpr
-  apply (positiveConvolution_oneHigh_eLpNorm_two_le k s hw hw1 hf a ha).trans_lt
+  apply (positiveConvolution_oneHigh_eLpNorm_two_le (μ := μ) k s hw hw1 hf a ha).trans_lt
   apply ENNReal.sum_lt_top.mpr
   intro j _
   exact ENNReal.mul_lt_top (hhigh j) (ENNReal.prod_lt_top (fun i _ => hlow i))

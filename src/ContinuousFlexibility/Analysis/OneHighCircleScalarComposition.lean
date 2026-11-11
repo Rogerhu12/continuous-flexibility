@@ -19,12 +19,14 @@ open scoped ENNReal BigOperators ContDiff
 
 variable {P : ℝ} [Fact (0 < P)]
 
-theorem periodic_sub_base_comp {v : ℝ → ℝ} (hp : Periodic v P) (Φ : ℝ → ℝ) :
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+
+theorem periodic_sub_base_comp {v : ℝ → E} (hp : Periodic v P) (Φ : E → ℝ) :
     Periodic (fun x => Φ (v x) - Φ 0) P := by
   intro x
   rw [hp x]
 
-theorem contDiff_sub_base_comp {v Φ : ℝ → ℝ} (hv : ContDiff ℝ ∞ v)
+theorem contDiff_sub_base_comp {v : ℝ → E} {Φ : E → ℝ} (hv : ContDiff ℝ ∞ v)
     (hΦ : ∀ x, ContDiffAt ℝ ∞ Φ (v x)) :
     ContDiff ℝ ∞ (fun x => Φ (v x) - Φ 0) :=
   contDiff_iff_contDiffAt.mpr fun x =>

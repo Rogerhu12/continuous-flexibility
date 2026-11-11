@@ -82,7 +82,7 @@ theorem circle_real_selected_derivative_product_le
       (∏ i ∈ Finset.univ.erase j, circleRealFourierL1Norm (f (sel i) 0)) ≤ R ^ l := by
     calc
       _ ≤ ∏ _i ∈ Finset.univ.erase j, R :=
-        Finset.prod_le_prod (fun _ _ => ENNReal.toReal_nonneg) (fun i _ => hR (sel i))
+        Finset.prod_le_prod₀ (fun _ _ => ENNReal.toReal_nonneg) (fun i _ => hR (sel i))
       _ = _ := by simp
   have hhigh (j : Fin (l + 1)) : circleRealSobolevNorm (s : ℝ) (f (sel j) 0) ≤ H :=
     Finset.single_le_sum (f := fun i => circleRealSobolevNorm (s : ℝ) (f i 0))

@@ -83,7 +83,7 @@ theorem circle_frequencyWeighted_add (f g : C(AddCircle P, ℂ)) (s : ℝ) :
     (ContinuousMap.memLp (p := 1) (μ := AddCircle.haarAddCircle) ℂ g)
   have hc := fourierCoeff.add hf hg
   ext n
-  rw [frequencyWeighted_apply, hc]
+  rw [frequencyWeighted_apply, ContinuousMap.coe_add, hc]
   simp only [Pi.add_apply, frequencyWeighted_apply, smul_add]
 
 theorem circle_frequencyWeighted_memLp_add (f g : C(AddCircle P, ℂ)) (s : ℝ)
@@ -106,13 +106,13 @@ theorem circle_sobolevNorm_add_le (f g : C(AddCircle P, ℂ)) (s : ℝ)
     (eLpNorm_add_le (f := frequencyWeighted (circleFrequencyWeight P) s (fourierCoeff f))
       (g := frequencyWeighted (circleFrequencyWeight P) s (fourierCoeff g))
       (μ := Measure.count) (by norm_num : (1 : ℝ≥0∞) ≤ 2))
-  simpa only [ENNReal.toReal_add hf.ne hg.ne] using he
+  simpa only [circleSobolevNorm, frequencySobolevNorm, ENNReal.toReal_add hf.ne hg.ne] using he
 
 theorem circle_frequencyWeighted_const (s : ℝ) (c : ℂ) :
     frequencyWeighted (circleFrequencyWeight P) s
       (fourierCoeff (fun _ : AddCircle P => c)) = fourierCoeff (fun _ : AddCircle P => c) := by
   have hc : fourierCoeff (fun _ : AddCircle P => c) =
-      fun n : ℤ => c * (Pi.single (0 : ℤ) (1 : ℂ)) n := by
+      fun n : ℤ => c * (Pi.single (0 : ℤ) (1 : ℂ) : ℤ → ℂ) n := by
     have hfun : (fun _ : AddCircle P => c) = fun x => c * fourier 0 x := by
       funext x
       rw [fourier_zero, mul_one]

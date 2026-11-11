@@ -87,7 +87,7 @@ theorem cylinderFourier_angularDerivative_ae
       Complex.I * (circlePhysicalFrequency P ζ.2 : ℂ)) :=
     (measurable_of_countable (fun n : ℤ =>
       Complex.I * (circlePhysicalFrequency P n : ℂ))).comp measurable_snd
-  apply (ae_prod_iff_ae_ae (measurableSet_eq_fun
+  apply (Measure.ae_prod_iff_ae_ae (measurableSet_eq_fun
     (measurable_cylinderFourier df hdf hdf2)
     (hc.mul (measurable_cylinderFourier f hf hf2)))).mpr
   have hall : ∀ᵐ ξ : ℝ ∂volume, ∀ n : ℤ,

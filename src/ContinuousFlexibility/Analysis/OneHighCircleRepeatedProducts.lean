@@ -37,7 +37,7 @@ theorem circle_real_repeated_derivative_product_le
       (∏ _i ∈ Finset.univ.erase j, circleRealFourierL1Norm (f 0)) ≤ R ^ k := by
     calc
       _ ≤ ∏ _i ∈ Finset.univ.erase j, R :=
-        Finset.prod_le_prod (fun _ _ => hF) (fun _ _ => hR)
+        Finset.prod_le_prod₀ (fun _ _ => hF) (fun _ _ => hR)
       _ = R ^ k := by simp
   calc
     _ ≤ ∑ j : Fin (k + 1), circleRealSobolevNorm (s : ℝ) (f 0) *

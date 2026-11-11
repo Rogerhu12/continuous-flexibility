@@ -71,8 +71,12 @@ theorem circleFlow_hasDerivAt_angularJet_time {G Θ : PolarPoint → ℝ} {a b P
       ((hasDerivAt_id t).prodMk (hasDerivAt_const t θ))
   have hd : HasDerivAt (fun r => iteratedDeriv n (fun η => Θ (r, η)) θ)
       (deriv (fun r => iteratedDeriv n (fun η => Θ (r, η)) θ) t) t := by
-    simpa only [Statements.mixedDerivative, iteratedDeriv_zero] using
-      hd0.differentiableAt.hasDerivAt
+    have he : (Statements.mixedDerivative 0 n Θ ∘ (fun r : ℝ => (id r, θ))) =
+        fun r => iteratedDeriv n (fun η => Θ (r, η)) θ := by
+      funext r
+      simp only [Function.comp_apply, id_eq, Statements.mixedDerivative, iteratedDeriv_zero]
+    rw [he] at hd0
+    exact hd0.differentiableAt.hasDerivAt
   have heq : (fun η => radialPartial Θ (t, η)) = fun η => G (t, Θ (t, η)) := by
     funext η
     have hpartial : HasDerivAt (fun r => Θ (r, η)) (radialPartial Θ (t, η)) t :=

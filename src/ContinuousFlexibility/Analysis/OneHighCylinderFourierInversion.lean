@@ -83,8 +83,14 @@ theorem cylinder_hasSum_inverse_modes
     (integrable_count_iff.mp (memLp_one_iff_integrable.mp
       (cylinderAngularCoefficient_memLp_one f hf hL2 hF1 r))).of_norm
   have hh := has_pointwise_sum_fourier_series_of_summable hs θ
-  simpa only [cylinderAngularCoefficient_fourierInv f hf hL2 hF1,
-    cylinderAngularCoefficient_apply] using hh
+  have hterms : (fun n : ℤ =>
+      𝓕⁻ (cylinderFourierMode f hf hL2 n : ℝ → ℂ) r • fourier n θ) =
+      fun n : ℤ => fourierCoeff fr n • fourier n θ := by
+    funext n
+    rw [cylinderAngularCoefficient_fourierInv f hf hL2 hF1 n]
+    rfl
+  rw [hterms]
+  exact hh
 
 /-- The exact pointwise Fourier `L¹` bound on the full physical cylinder. -/
 theorem cylinder_norm_apply_le_fourierL1Norm
@@ -112,6 +118,8 @@ theorem cylinder_norm_apply_le_fourierL1Norm
     _ = ∫ ζ, ‖cylinderFourier f hf hL2 ζ‖ ∂cylinderFrequencyMeasure :=
       (integral_prod_symm _ hi.norm).symm
     _ = frequencyL1Norm cylinderFrequencyMeasure (cylinderFourier f hf hL2) := by
+      change (∫ ζ, ‖cylinderFourier f hf hL2 ζ‖ ∂volume.prod Measure.count) =
+        frequencyL1Norm (volume.prod Measure.count) (cylinderFourier f hf hL2)
       rw [frequencyL1Norm, toReal_eLpNorm,
         lpNorm_one_eq_integral_norm hi.aestronglyMeasurable]
 

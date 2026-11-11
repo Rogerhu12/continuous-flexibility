@@ -38,7 +38,7 @@ private theorem integral_gronwall_of_continuous {u A B : ℝ → ℝ} {a b δ : 
     (Real.continuous_exp.comp hK.neg).mul (((hA.mul hu).add hB).sub (hA.mul hJ))
   have hWderiv (t : ℝ) : HasDerivAt W (D t) t := by
     apply ((hJderiv t).mul (hKderiv t).neg.exp).congr_deriv
-    dsimp only [D]
+    simp only [D, Pi.neg_apply]
     ring
   have hDle (t : ℝ) (ht : t ∈ Icc a b) : D t ≤ B t := by
     have hJbound : u t ≤ J t := hbound t ht
@@ -93,14 +93,22 @@ theorem integral_gronwall_of_continuousOn {u A B : ℝ → ℝ} {a b δ : ℝ}
     have hr' : r ∈ Icc a b := by
       have hh : r ∈ Icc a t := by simpa only [uIcc_of_le ht.1] using hr
       exact ⟨hh.1, hh.2.trans ht.2⟩
+    dsimp only
     rw [heq r hr']
-  have hresult := integral_gronwall_of_continuous hab
-    (hu.comp_continuous hc hmem) (hA.comp_continuous hc hmem) (hB.comp_continuous hc hmem)
+  have huc : Continuous (fun r => u (clamp r)) := hu.comp_continuous hc hmem
+  have hAc : Continuous (fun r => A (clamp r)) := hA.comp_continuous hc hmem
+  have hBc : Continuous (fun r => B (clamp r)) := hB.comp_continuous hc hmem
+  have hclamped (t : ℝ) (ht : t ∈ Icc a b) :
+      u (clamp t) ≤ δ + ∫ r in a..t, A (clamp r) * u (clamp r) + B (clamp r) := by
+    have hi : (∫ r in a..t, A (clamp r) * u (clamp r) + B (clamp r)) =
+        ∫ r in a..t, A r * u r + B r :=
+      hIntegral (fun r => A r * u r + B r) t ht
+    rw [heq t ht, hi]
+    exact hbound t ht
+  have hresult := integral_gronwall_of_continuous hab huc hAc hBc
     (fun t _ => hApos (clamp t) (hmem t))
     (fun t _ => hBpos (clamp t) (hmem t))
-    (δ := δ) (by
-      intro t ht
-      simpa only [heq t ht, hIntegral (fun r => A r * u r + B r) t ht] using hbound t ht)
+    (δ := δ) hclamped
   simpa only [heq b ⟨hab, le_rfl⟩, hIntegral A b ⟨hab, le_rfl⟩,
     hIntegral B b ⟨hab, le_rfl⟩] using hresult
 

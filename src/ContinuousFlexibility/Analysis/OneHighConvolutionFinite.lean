@@ -31,27 +31,40 @@ theorem lconvolution_eLpNorm_one {f g : G → ℝ≥0∞}
 theorem positiveConvolution_eLpNorm_one (k : ℕ) {f : Fin (k + 1) → G → ℝ≥0∞}
     (hf : ∀ i, Measurable (f i)) :
     eLpNorm (positiveConvolution μ k f) 1 μ = ∏ i, eLpNorm (f i) 1 μ := by
-  induction k generalizing f with
-  | zero => simp only [positiveConvolution_zero, Fin.prod_univ_one]
+  induction k with
+  | zero =>
+    rw [positiveConvolution_zero]
+    change eLpNorm (f 0) 1 μ = ∏ i : Fin 1, eLpNorm (f i) 1 μ
+    exact (Fin.prod_univ_one _).symm
   | succ k ih =>
-    rw [positiveConvolution_succ k hf,
-      lconvolution_eLpNorm_one (hf 0).aemeasurable
-        (measurable_positiveConvolution k (fun i => hf i.succ)).aemeasurable,
-      ih (fun i => hf i.succ), Fin.prod_univ_succ]
+    calc
+      _ = eLpNorm (f 0) 1 μ *
+          eLpNorm (positiveConvolution μ k (fun i => f i.succ)) 1 μ := by
+        rw [positiveConvolution_succ k hf]
+        exact lconvolution_eLpNorm_one (hf 0).aemeasurable
+          (measurable_positiveConvolution k (fun i => hf i.succ)).aemeasurable
+      _ = eLpNorm (f 0) 1 μ * ∏ i : Fin (k + 1), eLpNorm (f i.succ) 1 μ := by
+        rw [ih (fun i => hf i.succ)]
+      _ = ∏ i : Fin (k + 2), eLpNorm (f i) 1 μ := (Fin.prod_univ_succ _).symm
 
 private theorem positiveConvolution_two_le_product (k : ℕ)
     {f : Fin (k + 1) → G → ℝ≥0∞} (hf : ∀ i, Measurable (f i)) (j : Fin (k + 1)) :
     eLpNorm (positiveConvolution μ k f) 2 μ ≤
       ∏ i, if i = j then eLpNorm (f i) 2 μ else eLpNorm (f i) 1 μ := by
   classical
-  induction k generalizing f with
+  induction k with
   | zero =>
-    have hj : j = 0 := Subsingleton.elim _ _
+    have hj : (j : Fin 1) = 0 := Subsingleton.elim _ _
     subst j
-    simp only [positiveConvolution_zero, Fin.prod_univ_one, ite_true, le_refl]
+    rw [positiveConvolution_zero]
+    change eLpNorm (f 0) 2 μ ≤
+      ∏ i : Fin 1, if i = 0 then eLpNorm (f i) 2 μ else eLpNorm (f i) 1 μ
+    rw [Fin.prod_univ_one]
+    simp only [ite_true, le_refl]
   | succ k ih =>
     refine Fin.cases ?_ (fun j => ?_) j
-    · rw [positiveConvolution_succ k hf, Fin.prod_univ_succ]
+    · rw [positiveConvolution_succ k hf]
+      conv_rhs => rw [Fin.prod_univ_succ]
       simp only [ite_true, Fin.succ_ne_zero, ite_false]
       calc
         _ ≤ eLpNorm (f 0) 2 μ *
@@ -59,11 +72,13 @@ private theorem positiveConvolution_two_le_product (k : ℕ)
           lconvolution_eLpNorm_two_le' (hf 0).aemeasurable
             (measurable_positiveConvolution k (fun i => hf i.succ)).aemeasurable
         _ = _ := by rw [positiveConvolution_eLpNorm_one k (fun i => hf i.succ)]
-    · rw [positiveConvolution_succ k hf, Fin.prod_univ_succ]
-      simp only [Fin.zero_ne_succ, Fin.succ_inj, ite_false]
+    · rw [positiveConvolution_succ k hf]
+      conv_rhs => rw [Fin.prod_univ_succ]
+      have hz : (0 : Fin (k + 2)) ≠ j.succ := (Fin.succ_ne_zero j).symm
+      simp only [hz, Fin.succ_inj, ite_false]
       exact (lconvolution_eLpNorm_two_le (hf 0).aemeasurable
         (measurable_positiveConvolution k (fun i => hf i.succ)).aemeasurable).trans
-          (mul_le_mul_left' (ih (fun i => hf i.succ) j) _)
+          (mul_le_mul_of_nonneg_left (ih (fun i => hf i.succ) j) zero_le)
 
 /-- The arbitrary-position, arbitrary-positive-arity Young estimate. -/
 theorem positiveConvolution_eLpNorm_two_le (k : ℕ)
@@ -71,7 +86,7 @@ theorem positiveConvolution_eLpNorm_two_le (k : ℕ)
     eLpNorm (positiveConvolution μ k f) 2 μ ≤
       eLpNorm (f j) 2 μ * ∏ i ∈ Finset.univ.erase j, eLpNorm (f i) 1 μ := by
   classical
-  have h := positiveConvolution_two_le_product k hf j
+  have h := positiveConvolution_two_le_product (μ := μ) k hf j
   have hprod : (∏ i, if i = j then eLpNorm (f i) 2 μ else eLpNorm (f i) 1 μ) =
       eLpNorm (f j) 2 μ * ∏ i ∈ Finset.univ.erase j, eLpNorm (f i) 1 μ := by
     rw [← Finset.mul_prod_erase _ _ (Finset.mem_univ j)]
