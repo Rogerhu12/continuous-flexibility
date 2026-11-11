@@ -63,7 +63,7 @@ theorem referenceBasisProjection_remainder_ae {D : ReferenceData}
     rw [he, angularBasisProjection_add hr hc I, angularBasisProjection_const h0]
     ring
   rw [radialPhysicalMeasure_eq_prod]
-  filter_upwards [(quasiMeasurePreserving_fst
+  filter_upwards [(Measure.quasiMeasurePreserving_fst
     (μ := volume.restrict (radialCore D))
     (ν := volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))).ae hs] with x hx
   exact hx x.2

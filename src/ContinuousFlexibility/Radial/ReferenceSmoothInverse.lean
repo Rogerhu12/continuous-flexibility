@@ -138,7 +138,7 @@ theorem reference_smooth_inverse_image {D : ReferenceData}
     exact (hext n hr).symm
   have hPV : referenceBasisProjection I U.1 =ᵐ[radialPhysicalMeasure D] V := by
     rw [radialPhysicalMeasure_eq_prod]
-    filter_upwards [(quasiMeasurePreserving_fst
+    filter_upwards [(Measure.quasiMeasurePreserving_fst
       (μ := volume.restrict (radialCore D))
       (ν := volume.restrict (Ioc (0 : ℝ) (2 * Real.pi)))).ae (ae_all_iff.mpr hcoef)]
       with x hx

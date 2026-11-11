@@ -72,7 +72,7 @@ theorem reference_exists_smooth_of_weakJacobi {D : ReferenceData}
     simp_rw [mul_div_assoc]
     exact contDiff_const.mul (reference_contDiff_flat_deriv_div hgeom.1 hgeom.2.2.1)
   have huI : IntegrableOn u (radialCore D) :=
-    hu.integrable (by norm_num : (1 : ℝ≥0∞) ≤ 2)
+    hu.integrable (by norm_num)
   have hquI : IntegrableOn (fun r => q r * u r) (radialCore D) :=
     (reference_memLp_radial_of_continuous D hq.continuous).integrable_mul hu
   have hfI : IntegrableOn f (radialCore D) :=
@@ -108,7 +108,7 @@ theorem reference_exists_smooth_of_weakJacobi {D : ReferenceData}
       change u r * (dφ r - q r * φ r) = 0
       rw [hzφ, hzd, mul_zero, sub_zero, mul_zero]
     have hfs : Function.support (fun r => f r * φ r) ⊆ radialCore D :=
-      support_mul_subset_right.trans ((subset_tsupport φ).trans hφs)
+      (Function.support_mul_subset_right f φ).trans ((subset_tsupport φ).trans hφs)
     have h := hweak φ hφ hφc hφs
     rw [reference_intervalIntegral_eq_integral hJs,
       reference_intervalIntegral_eq_integral hfs] at h
@@ -209,11 +209,12 @@ theorem reference_coefficient_normal_eq_deriv {D : ReferenceData}
     have h := weakNormalDerivative_coefficient hd n hφ hφc hφs
     have hleftS : Function.support
         (fun r => referenceRadialCoefficient u n r * deriv φ r) ⊆ radialCore D :=
-      support_mul_subset_right.trans
+      (Function.support_mul_subset_right (referenceRadialCoefficient u n) (deriv φ)).trans
         ((subset_tsupport (deriv φ)).trans (tsupport_deriv_subset.trans hφs))
     have hrightS : Function.support
         (fun r => referenceRadialCoefficient d n r * φ r) ⊆ radialCore D :=
-      support_mul_subset_right.trans ((subset_tsupport φ).trans hφs)
+      (Function.support_mul_subset_right (referenceRadialCoefficient d n) φ).trans
+        ((subset_tsupport φ).trans hφs)
     rw [reference_intervalIntegral_eq_integral hleftS,
       reference_intervalIntegral_eq_integral hrightS,
       reference_integral_mul_test_congr_ae huv (tsupport_deriv_subset.trans hφs)] at h
@@ -227,9 +228,10 @@ theorem reference_coefficient_normal_eq_deriv {D : ReferenceData}
       funext r
       simp only [smul_eq_mul]
       ring
+    simp only [Pi.sub_apply]
     rw [hfun, integral_sub hdφ hvφ, he, sub_self]
-  rw [ae_restrict_iff' measurableSet_Ioo]
-  filter_upwards [hzero] with r hr hrI
+  filter_upwards [ae_restrict_of_ae hzero,
+    ae_restrict_mem (s := radialCore D) measurableSet_Ioo] with r hr hrI
   exact sub_eq_zero.mp (hr hrI)
 
 end
