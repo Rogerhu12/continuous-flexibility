@@ -80,7 +80,9 @@ theorem n08ControlMeanCoordinate_bound (S : PhysicalSpacesData) (m s : ℕ)
   have hgrade : (S.circle (3 / 4 : ℝ)).grading 0 u ≤
       (S.circle (3 / 4 : ℝ)).grading s u :=
     gradedSeminorm_monotone _ _ (Nat.zero_le s) u
-  exact (by simpa only [Real.norm_eq_abs] using h).trans
+  have habs : |n08ControlRestriction S u m| ≤ ‖n08ControlRestriction S u‖ := by
+    simpa only [Real.norm_eq_abs] using h
+  exact habs.trans
     (hzero.trans (mul_le_mul_of_nonneg_left hgrade n08ControlMeanConstant_nonneg))
 
 theorem n08CircleSectorPoint_val (hS : IsPhysicalSpaces D T S)
@@ -214,6 +216,19 @@ private theorem n08_graded_diagonal_difference
   rw [hd, hd]
   convert hfinal using 1 <;> dsimp only [Kout] <;> ring
 
+private theorem n08_smoothTame_second_bound
+    {E F : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F} {U : Set E} {f : E → F}
+    (h : SmoothTameOn p q U f) (hzero : (0 : E) ∈ U) :
+    ∃ l a : ℕ, ∃ ρ K : ℝ, 0 < ρ ∧ 0 ≤ K ∧
+      ∀ z ∈ U, p a (z - 0) < ρ → ∀ v : Fin 2 → E,
+        q a (h.choose.D 2 z v) ≤ K * tameJetSize p 2 a l a z v := by
+  obtain ⟨l, a, ρ, hρ, hb⟩ := h.choose_spec 2 0 hzero
+  obtain ⟨K, hK, hKb⟩ := hb a le_rfl
+  exact ⟨l, a, ρ, K, hρ, hK, hKb⟩
+
 private theorem n08CircleSectorJet_second_bound
     (hR : N02Properties D T S C R base ε) (hε : 0 < ε) :
     ∃ l a : ℕ, ∃ ρ K : ℝ, 0 < ρ ∧ 0 ≤ K ∧
@@ -221,12 +236,9 @@ private theorem n08CircleSectorJet_second_bound
         pairGrading (sectorGrading S) realGrading a (z - 0) < ρ →
         ∀ v : Fin 2 → StateDirections S × ℝ,
           (S.circle (3 / 4 : ℝ)).grading a ((n08CircleSectorJet hR).D 2 z v) ≤
-            K * tameJetSize (pairGrading (sectorGrading S) realGrading) 2 a l a z v := by
-  have hzero : (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε :=
-    n08_pair_zero_mem (sectorGrading S) base hε
-  obtain ⟨l, a, ρ, hρ, hb⟩ := (n08_return_smoothTame hR).choose_spec 2 0 hzero
-  obtain ⟨K, hK, hKb⟩ := hb a le_rfl
-  exact ⟨l, a, ρ, K, hρ, hK, hKb⟩
+            K * tameJetSize (pairGrading (sectorGrading S) realGrading) 2 a l a z v :=
+  n08_smoothTame_second_bound (n08_return_smoothTame hR)
+    (n08_pair_zero_mem (sectorGrading S) base hε)
 
 private theorem n08CircleSectorPoint_mem_of_sector
     (hS : IsPhysicalSpaces D T S) (href : referenceStateConditions D S C)
