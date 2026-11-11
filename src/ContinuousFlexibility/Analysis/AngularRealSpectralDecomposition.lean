@@ -88,11 +88,22 @@ theorem angularResolventPartial_re_mem_iSup {B : H →L[ℝ] H} (hB : IsSelfAdjo
   have heq : (angularResolventPartial (extend B) N (ofReal x)).re =
       ∑ n ∈ Finset.range N,
         angularResolventEigenvalue n • (angularResolventProjection (extend B) n (ofReal x)).re := by
-    simpa only [angularResolventPartial, ← complexification_real_normedSpace_eq,
-      sum_apply, smul_apply, ContinuousLinearMap.smul_apply, reCLM_apply, re_real_smul] using
-      map_sum (reCLM : AngularComplexification H →L[ℝ] H)
-        (fun n => angularResolventEigenvalue n • angularResolventProjection (extend B) n (ofReal x))
-        (Finset.range N)
+    letI : NormedSpace ℝ (AngularComplexification H) := NormedSpace.complexToReal
+    have hre_term (n : ℕ) :
+        ((angularResolventEigenvalue n • angularResolventProjection (extend B) n)
+          (ofReal x)).re =
+          angularResolventEigenvalue n •
+            (angularResolventProjection (extend B) n (ofReal x)).re := by
+      rw [ContinuousLinearMap.smul_apply]
+      change ((angularResolventEigenvalue n : ℂ) •
+        angularResolventProjection (extend B) n (ofReal x)).re =
+          angularResolventEigenvalue n •
+            (angularResolventProjection (extend B) n (ofReal x)).re
+      simp only [re_smul, Complex.ofReal_re, Complex.ofReal_im, zero_smul, sub_zero]
+    simpa only [angularResolventPartial, sum_apply, reCLM_apply, hre_term] using
+      map_sum (reCLM (H := H))
+        (fun n => (angularResolventEigenvalue n • angularResolventProjection (extend B) n)
+          (ofReal x)) (Finset.range N)
   rw [heq]
   exact S.sum_mem (fun n (_ : n ∈ Finset.range N) => hterm n)
 
