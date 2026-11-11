@@ -138,7 +138,8 @@ theorem derivWithin_radialRadiusScale {s t : Set ℝ} {u : ℝ → ℝ}
     simpa only [hcancel] using hu.hasDerivWithinAt
   have hd := ((hu'.comp (κ * r)
     ((hasDerivAt_id (κ * r)).div_const κ).hasDerivWithinAt hmap).const_mul α).derivWithin ht
-  have hfun : (fun y : ℝ => α * u (id y / κ)) = radialRadiusScale κ α u := rfl
+  have hfun : (fun y : ℝ => α * (u ∘ fun x : ℝ => id x / κ) y) =
+      radialRadiusScale κ α u := rfl
   rw [hfun] at hd
   simpa only [div_eq_mul_inv, one_mul, mul_one,
     mul_assoc, mul_comm, mul_left_comm] using hd
