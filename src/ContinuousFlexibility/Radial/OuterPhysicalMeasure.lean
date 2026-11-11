@@ -32,7 +32,7 @@ theorem measurableEmbedding_tailPhysicalRadius (right : Bool) :
   · exact he.comp (Homeomorph.neg ℝ).toMeasurableEquiv.measurableEmbedding
   · exact he
 
-theorem hasDerivAt_tailPhysicalRadius (right : Bool) (x : ℝ) :
+private theorem hasDerivAt_tailPhysicalRadius (right : Bool) (x : ℝ) :
     HasDerivAt (tailPhysicalRadius right)
       (if right then tailPhysicalRadius right x else -tailPhysicalRadius right x) x := by
   cases right
