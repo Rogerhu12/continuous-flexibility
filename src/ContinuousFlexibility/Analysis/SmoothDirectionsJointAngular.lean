@@ -13,8 +13,6 @@ original parameter space.
 
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 universe u
 
 namespace ContinuousFlexibility.Analysis
@@ -48,9 +46,10 @@ theorem angularTower_jointLine_hasDerivAt
     (continuous_const.add (continuous_fst.smul continuous_const))
   have ha : ContinuousOn a V := by
     have hmap : Continuous (fun p : PolarPoint =>
-        (p.2, (x + p.1 • w.1, Fin.cons w.1 v))) :=
+        (p.2, (x + p.1 • w.1, (Fin.cons w.1 v : Fin (k + 1) → E)))) :=
       continuous_snd.prodMk
-        ((continuous_const.add (continuous_fst.smul continuous_const)).prodMk continuous_const)
+        ((continuous_const.add (continuous_fst.smul continuous_const)).prodMk
+          (continuous_const (y := (Fin.cons w.1 v : Fin (k + 1) → E))))
     exact (hjoint (k + 1) b).comp hmap.continuousOn
       (fun p hp => ⟨mem_univ _, hp, mem_univ _⟩)
   have hc : ContinuousOn c V := by
@@ -65,10 +64,12 @@ theorem angularTower_jointLine_hasDerivAt
   have hsecond (p : PolarPoint) (hp : p ∈ V) :
       HasDerivAt (fun t => F (p.1, t)) (c p) p.2 :=
     hangular k b p.2 (x + p.1 • w.1) hp v
-  have hp : (0, θ) ∈ V := by simpa only [V, zero_smul, add_zero] using hx
+  have hp : (0, θ) ∈ V := by
+    change x + (0 : ℝ) • w.1 ∈ U
+    simpa only [zero_smul, add_zero] using hx
   have hplane := (scalarPlane_hasStrictFDerivAt_of_partials hV ha hc hfirst hsecond hp).hasFDerivAt
   have hcurve : HasDerivAt (fun t : ℝ => (t, θ + t * w.2)) (1, w.2) 0 := by
-    simpa only [one_mul] using
+    simpa only [id_eq, one_mul] using
       (hasDerivAt_id (0 : ℝ)).prodMk (((hasDerivAt_id (0 : ℝ)).mul_const w.2).const_add θ)
   have hplane' : HasFDerivAt F
       (a (0, θ) • ContinuousLinearMap.fst ℝ ℝ ℝ +
@@ -98,13 +99,16 @@ def angularTowerJointDirections
   D n z := scalarAngularContinuousExpansion (fun b k => (J b z.2).D k z.1) n
   zero z hz := (J 0 z.2).zero z.1 hz.1
   continuous n := by
+    simp only [scalarAngularContinuousExpansion_apply]
     apply continuousOn_scalarAngularExpansion n
+      (fun z : E × ℝ => fun b k => ((J b z.2).D k z.1).toMultilinearMap)
     intro b k
     have hmap : Continuous (fun p : (E × ℝ) × (Fin k → E) =>
         (p.1.2, (p.1.1, p.2))) :=
       continuous_fst.snd.prodMk (continuous_fst.fst.prodMk continuous_snd)
-    exact (hjoint k b).comp hmap.continuousOn
-      (fun p hp => ⟨mem_univ _, hp.1.1, mem_univ _⟩)
+    simpa only [ContinuousMultilinearMap.coe_coe] using
+      (hjoint k b).comp hmap.continuousOn
+        (fun p hp => ⟨mem_univ _, hp.1.1, mem_univ _⟩)
   derivative n z hz v w := by
     let A : ScalarAngularJetData E := fun b k => ((J b z.2).D k z.1).toMultilinearMap
     let B : ScalarAngularJetData E := scalarAngularHead A w + w.2 • scalarAngularShift A
@@ -114,7 +118,8 @@ def angularTowerJointDirections
         HasDerivAt (fun t => C t b k vs) (B b k vs) 0 := by
       simpa only [C, B, A, Pi.add_apply, Pi.smul_apply,
         MultilinearMap.add_apply, MultilinearMap.smul_apply,
-        scalarAngularHead_apply, scalarAngularShift_apply, smul_eq_mul] using
+        scalarAngularHead_apply, scalarAngularShift_apply, smul_eq_mul,
+        ContinuousMultilinearMap.coe_coe] using
         angularTower_jointLine_hasDerivAt J hjoint hangular b k z.1 hz.1 z.2 vs w
     have hd := hasDerivAt_scalarAngularExpansion n C B hC v
     have he : scalarAngularExpansion n B v =
@@ -123,9 +128,11 @@ def angularTowerJointDirections
       simp only [B, map_add, map_smul, MultilinearMap.add_apply,
         MultilinearMap.smul_apply, Fin.cons_zero, Fin.tail_cons, smul_eq_mul]
     rw [he] at hd
+    have hfst_smul (t : ℝ) : ((t • w : E × ℝ)).1 = t • w.1 := rfl
+    have hsnd_smul (t : ℝ) : ((t • w : E × ℝ)).2 = t * w.2 := rfl
     simpa only [HasProjectiveLineDerivAt, HasProjectiveCurveDerivAt,
       scalarAngularContinuousExpansion_apply, C, A, Prod.fst_add, Prod.snd_add,
-      Prod.fst_smul, Prod.snd_smul, smul_eq_mul] using
+      hfst_smul, hsnd_smul, smul_eq_mul, zero_add, zero_mul, zero_smul, add_zero] using
       hasDerivAt_iff_tendsto_slope_zero.mp hd
 
 theorem angularTowerJointDirections_apply

@@ -98,6 +98,18 @@ theorem symmetricSourceScalarJets_zero
   rw [symmetricSourceScalarJets_apply, linearFiberJet_zero_apply,
     symmetricSourceJetData_apply]
 
+theorem symmetricSourceScalarJets_zero_apply
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E)
+      (annularSmoothCoefficientSpace D)) (z : E × HeightPair S)
+    (v : Fin 0 → E × HeightPair S) :
+    symmetricSourceScalarJets hS hT A 0 z v =
+      symmetricDivergenceBilinear hS hT (A 0 z.1 (fun i => (v i).1)) z.2 := by
+  rw [symmetricSourceScalarJets_apply, linearFiberJet_zero_apply,
+    symmetricSourceJetData_apply]
+  exact congrArg (fun vs : Fin 0 → E => symmetricDivergenceBilinear hS hT (A 0 z.1 vs) z.2)
+    (Subsingleton.elim _ _)
+
 theorem symmetricSourceScalarJets_contDiffOn
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E)

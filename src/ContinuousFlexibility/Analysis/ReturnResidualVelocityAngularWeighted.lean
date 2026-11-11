@@ -23,6 +23,27 @@ open Set
 open ContinuousFlexibility.Analysis
 open scoped ContDiff
 
+theorem returnCorrectionDriftSpeedLinear_angular_bound_of_velocity
+    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (χ : ℕ → ℝ → ℝ) (z : AnnularState S × ℝ) (ρ : CircleSpace S)
+    (n : ℕ) (m : ℕ) (r θ A : ℝ)
+    (hv : ContDiff ℝ ∞ (fun t =>
+      returnCorrectionVelocityLinear D S C χ z m (r, t) ρ))
+    (hb : ∀ t, |iteratedDeriv n (fun u =>
+      returnCorrectionVelocityLinear D S C χ z m (r, u) ρ) t| ≤ A) :
+    |iteratedDeriv n (fun t => returnCorrectionDriftLinear D S C χ z m (r, t) ρ) θ| ≤ A ∧
+      |iteratedDeriv n (fun t => returnCorrectionSpeedLinear D S C χ z m (r, t) ρ) θ| ≤ A := by
+  have hd : (fun t => returnCorrectionDriftLinear D S C χ z m (r, t) ρ) =
+      fun t => (returnCorrectionVelocityLinear D S C χ z m (r, t) ρ -
+        returnCorrectionVelocityLinear D S C χ z m (r, -t) ρ) / 2 :=
+    funext (fun t => returnCorrectionDriftLinear_apply D S C χ z m (r, t) ρ)
+  have hs : (fun t => returnCorrectionSpeedLinear D S C χ z m (r, t) ρ) =
+      fun t => (-returnCorrectionVelocityLinear D S C χ z m (r, -t) ρ -
+        returnCorrectionVelocityLinear D S C χ z m (r, t) ρ) / 2 :=
+    funext (fun t => returnCorrectionSpeedLinear_apply D S C χ z m (r, t) ρ)
+  rw [hd, hs]
+  exact iteratedDeriv_reflected_drift_speed_abs_le hv n hb θ
+
 section ActualVelocity
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -148,21 +169,14 @@ theorem N01Properties.returnCorrectionDriftSpeedLinear_angular_weighted_bound
         A * |deriv (χ m) r| * T.H (T.sample m) ^ (3 / 4 : ℝ) ∧
       |iteratedDeriv n (fun t => returnCorrectionSpeedLinear D S C χ z m (r, t) ρ) θ| ≤
         A * |deriv (χ m) r| * T.H (T.sample m) ^ (3 / 4 : ℝ) := by
-  obtain ⟨hsmooth, hbound⟩ := hN.returnCorrectionVelocityLinear_angular_weighted_bounds
+  let data := hN.returnCorrectionVelocityLinear_angular_weighted_bounds
     hS hT hz hsector hflow hinverse χ hχ ρ
-  obtain ⟨A, hA, hb⟩ := hbound n
-  refine ⟨A, hA, fun m r hr θ => ?_⟩
-  have h := iteratedDeriv_reflected_drift_speed_abs_le (hsmooth m r hr) n (hb m r hr) θ
-  have hd : (fun t => returnCorrectionDriftLinear D S C χ z m (r, t) ρ) =
-      fun t => (returnCorrectionVelocityLinear D S C χ z m (r, t) ρ -
-        returnCorrectionVelocityLinear D S C χ z m (r, -t) ρ) / 2 :=
-    funext (fun t => returnCorrectionDriftLinear_apply D S C χ z m (r, t) ρ)
-  have hv : (fun t => returnCorrectionSpeedLinear D S C χ z m (r, t) ρ) =
-      fun t => (-returnCorrectionVelocityLinear D S C χ z m (r, -t) ρ -
-        returnCorrectionVelocityLinear D S C χ z m (r, t) ρ) / 2 :=
-    funext (fun t => returnCorrectionSpeedLinear_apply D S C χ z m (r, t) ρ)
-  rw [hd, hv]
-  exact h
+  let boundData := data.2 n
+  let A : ℝ := boundData.choose
+  refine ⟨A, boundData.choose_spec.1, fun m r hr θ => ?_⟩
+  exact returnCorrectionDriftSpeedLinear_angular_bound_of_velocity D S C χ z ρ n m r θ
+    (A * |deriv (χ m) r| * T.H (T.sample m) ^ (3 / 4 : ℝ))
+    (data.1 m r hr) (boundData.choose_spec.2 m r hr)
 
 end ActualVelocity
 

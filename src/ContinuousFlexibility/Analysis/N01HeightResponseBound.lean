@@ -23,7 +23,8 @@ private theorem pairGrading_left_zero
     {E F : Type*} [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
     (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (s : ℕ) (x : E) :
     pairGrading p q s (x, 0) = p s x := by
-  rw [pairGrading_apply, (q s).map_zero', add_zero]
+  change p s x + q s (0 : F) = p s x
+  rw [(q s).map_zero', add_zero]
 
 theorem stateGrading_heightOnlyDirection (S : PhysicalSpacesData)
     (s : ℕ) (η : HeightPair S) :

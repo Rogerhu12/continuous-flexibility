@@ -53,6 +53,56 @@ theorem circleProductFieldMultilinear_member
     ← circleProductBilinear_decode hS hT hD hγ (v 0) (v 1)]
   exact hS.2.2.2.1 _
 
+private theorem bilinear_field_seminorm_bound
+    {E G : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    (p : ℕ → Seminorm ℝ E) (hp : ∀ s, Continuous (p s))
+    (N : ℕ → G → ℝ) (A : (Fin 2 → E) → G) (P : E → E → G)
+    (heq : ∀ v : Fin 2 → E, A v = P (v 0) (v 1))
+    (hb : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      N s (P u v) ≤ C * p (s + 1) u * p (s + 1) v) :
+    ∀ s, ∃ q : Seminorm ℝ E, ∃ B : ℝ, Continuous q ∧
+      ∀ v : Fin 2 → E, N s (A v) ≤ B * ∏ i, q (v i) := by
+  intro s
+  obtain ⟨C, hC, hc⟩ := hb s
+  refine ⟨p (s + 1), C, hp (s + 1), ?_⟩
+  intro v
+  rw [heq, Fin.prod_univ_two]
+  simpa only [mul_assoc] using hc (v 0) (v 1)
+
+private theorem bilinear_unit_growth_of_finite_norms
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (hp : Monotone p)
+    (N : ℕ → F → ℝ) (P : E → E → F) (R : ℕ → E → E → ℝ)
+    (hq : ∀ s y C, 0 ≤ C → (q s y ≤ C ↔ ∀ i, i ≤ s → N i y ≤ C))
+    (heq : ∀ s u v, N s (P u v) = R s u v)
+    (hg : ∃ base loss : ℕ, base ≤ loss ∧ ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      p base u ≤ 1 → p base v ≤ 1 →
+      R s u v ≤ C * (1 + p (s + loss) u + p (s + loss) v)) :
+    ∃ base loss : ℕ, base ≤ loss ∧ ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      p base u ≤ 1 → p base v ≤ 1 →
+      q s (P u v) ≤ C * (1 + p (s + loss) u + p (s + loss) v) := by
+  classical
+  obtain ⟨base, loss, hbl, hb⟩ := hg
+  choose C hC hbound using hb
+  refine ⟨base, loss, hbl, ?_⟩
+  intro s
+  let K : ℝ := ∑ i ∈ Finset.range (s + 1), C i
+  have hK : 0 ≤ K := Finset.sum_nonneg (fun i _ => hC i)
+  refine ⟨K, hK, ?_⟩
+  intro u v hu hv
+  have hsize : 0 ≤ 1 + p (s + loss) u + p (s + loss) v := by positivity
+  apply (hq s (P u v) _ (mul_nonneg hK hsize)).mpr
+  intro i hi
+  rw [heq]
+  have hCi : C i ≤ K := Finset.single_le_sum
+    (f := C) (fun j _ => hC j) (Finset.mem_range.mpr (by omega))
+  have hpu := hp (Nat.add_le_add_right hi loss) u
+  have hpv := hp (Nat.add_le_add_right hi loss) v
+  exact (hbound i u v hu hv).trans
+    ((mul_le_mul_of_nonneg_left (add_le_add (add_le_add le_rfl hpu) hpv) (hC i)).trans
+      (mul_le_mul_of_nonneg_right hCi hsize))
+
 theorem circleProductFieldMultilinear_bound
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ) :
@@ -64,15 +114,12 @@ theorem circleProductFieldMultilinear_bound
   have hA : 0 ≤ A := ha.choose_spec.1
   have hHA := ha.choose_spec.2
   have hw := material_circle_sample_weights_pos hT hD
-  intro s
-  let hc := circleNorm_product_coarse_bound hS hw.1 hw.2 hA hHA s
-  let C : ℝ := hc.choose
-  have hb := hc.choose_spec.2
-  refine ⟨S.grading (s + 1), C,
-    (withSeminorms_graded (fun i => S.level i) S.bond).continuous_seminorm _, ?_⟩
-  intro v
-  rw [circleProductFieldMultilinear_apply, Fin.prod_univ_two]
-  simpa only [mul_assoc] using hb (v 0) (v 1)
+  exact bilinear_field_seminorm_bound S.grading
+    (fun s => (withSeminorms_graded (fun i => S.level i) S.bond).continuous_seminorm s)
+    (circleNorm T γ) (circleProductFieldMultilinear S)
+    (fun u v m θ => S.decode u m θ * S.decode v m θ)
+    (circleProductFieldMultilinear_apply S)
+    (circleNorm_product_coarse_bound hS hw.1 hw.2 hA hHA)
 
 def circleProductContinuousMultilinear
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -108,35 +155,14 @@ theorem circleProduct_grading_unit_growth
   have hA : 0 ≤ A := ha.choose_spec.1
   have hHA := ha.choose_spec.2
   have hw := material_circle_sample_weights_pos hT hD
-  let hg := circleNorm_product_unit_growth hS hw.1 hw.2 hA hHA hinterp
-  let base : ℕ := hg.choose
-  let loss : ℕ := hg.choose_spec.choose
-  have hbl : base ≤ loss := hg.choose_spec.choose_spec.1
-  have hb := hg.choose_spec.choose_spec.2
-  let C : ℕ → ℝ := fun s => (hb s).choose
-  have hC (s : ℕ) : 0 ≤ C s := (hb s).choose_spec.1
-  have hbound (s : ℕ) := (hb s).choose_spec.2
-  refine ⟨base, loss, hbl, ?_⟩
-  intro s
-  let K : ℝ := ∑ i ∈ Finset.range (s + 1), C i
-  have hK : 0 ≤ K := Finset.sum_nonneg (fun i _ => hC i)
-  refine ⟨K, hK, ?_⟩
-  intro u v hu hv
-  have hsize : 0 ≤ 1 + S.grading (s + loss) u + S.grading (s + loss) v := by
-    positivity
-  apply (circleGrading_le_iff_circleNorm hS s _
-    (mul_nonneg hK hsize)).mpr
-  intro i hi
-  rw [circleProductBilinear_decode]
-  have hCi : C i ≤ K := Finset.single_le_sum
-    (f := C) (fun j _ => hC j) (Finset.mem_range.mpr (by omega))
-  have hpu := gradedSeminorm_monotone (fun j => S.level j) S.bond
-    (Nat.add_le_add_right hi loss) u
-  have hpv := gradedSeminorm_monotone (fun j => S.level j) S.bond
-    (Nat.add_le_add_right hi loss) v
-  exact (hbound i u v hu hv).trans
-    ((mul_le_mul_of_nonneg_left (add_le_add (add_le_add le_rfl hpu) hpv) (hC i)).trans
-      (mul_le_mul_of_nonneg_right hCi hsize))
+  exact bilinear_unit_growth_of_finite_norms S.grading S.grading
+    (gradedSeminorm_monotone (fun j => S.level j) S.bond)
+    (fun s y => circleNorm T γ s (S.decode y))
+    (circleProductBilinear hS hT hD hγ)
+    (fun s u v => circleNorm T γ s (fun m θ => S.decode u m θ * S.decode v m θ))
+    (fun s y C hC => circleGrading_le_iff_circleNorm hS s y hC)
+    (fun s u v => congrArg (circleNorm T γ s) (circleProductBilinear_decode hS hT hD hγ u v))
+    (circleNorm_product_unit_growth hS hw.1 hw.2 hA hHA hinterp)
 
 private theorem multilinearTameSize_fin_two
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -216,7 +242,10 @@ private theorem smoothTameOn_pair_of_multilinear_bound
     rw [heq]
     apply (hc x.1 y.2).trans
     apply mul_le_mul_of_nonneg_left _ hC
-    simp only [tamePairGrading_apply]
+    change
+      p (s + loss) x.1 * p base y.2 + p base x.1 * p (s + loss) y.2 ≤
+        (p (s + loss) x.1 + p (s + loss) x.2) * (p base y.1 + p base y.2) +
+          (p base x.1 + p base x.2) * (p (s + loss) y.1 + p (s + loss) y.2)
     apply add_le_add
     · exact mul_le_mul (le_add_of_nonneg_right (apply_nonneg _ _))
         (le_add_of_nonneg_left (apply_nonneg _ _)) (apply_nonneg _ _)
@@ -228,6 +257,59 @@ private theorem smoothTameOn_pair_of_multilinear_bound
   intro z hz
   exact multilinear_pair_precomp_apply B ![z, z]
 
+private theorem bilinear_function_oneHigh_of_unit_growth
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [ContinuousConstSMul ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (hp : Monotone p)
+    (B : E [×2]→L[ℝ] F) (P : E → E → F)
+    (heq : ∀ v : Fin 2 → E, B v = P (v 0) (v 1))
+    (hg : ∃ base loss : ℕ, base ≤ loss ∧ ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      p base u ≤ 1 → p base v ≤ 1 →
+      q s (P u v) ≤ C * (1 + p (s + loss) u + p (s + loss) v)) :
+    ∃ base loss : ℕ, ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      q s (P u v) ≤ C * (p (s + loss) u * p base v + p base u * p (s + loss) v) := by
+  obtain ⟨base, loss, hbl, hb⟩ := hg
+  have hunit : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ v : Fin 2 → E,
+      (∀ i, p base (v i) < 1) → q s (B v) ≤ C * (1 + ∑ i, p (s + loss) (v i)) := by
+    intro s
+    obtain ⟨C, hC, hc⟩ := hb s
+    refine ⟨C, hC, ?_⟩
+    intro v hv
+    rw [heq, Fin.sum_univ_two]
+    simpa only [add_assoc] using hc (v 0) (v 1) (hv 0).le (hv 1).le
+  have hn := bilinear_oneHigh_of_unit_bound p q hp B hbl hunit
+  refine ⟨base, loss, ?_⟩
+  intro s
+  obtain ⟨C, hC, hc⟩ := hn s
+  refine ⟨C, hC, ?_⟩
+  intro u v
+  have he : B ![u, v] = P u v := heq ![u, v]
+  exact he ▸ hc u v
+
+private theorem smoothTameOn_bilinear_function_of_bound
+    {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F)
+    (B : E [×2]→L[ℝ] F) (P : E → E → F)
+    (heq : ∀ v : Fin 2 → E, B v = P (v 0) (v 1))
+    (hg : ∃ base loss : ℕ, ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      q s (P u v) ≤ C * (p (s + loss) u * p base v + p base u * p (s + loss) v)) :
+    SmoothTameOn (pairGrading p p) q univ (fun z : E × E => P z.1 z.2) := by
+  obtain ⟨base, loss, hb⟩ := hg
+  have hB : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : E,
+      q s (B ![u, v]) ≤
+        C * (p (s + loss) u * p base v + p base u * p (s + loss) v) := by
+    intro s
+    obtain ⟨C, hC, hc⟩ := hb s
+    refine ⟨C, hC, ?_⟩
+    intro u v
+    have he : B ![u, v] = P u v := heq ![u, v]
+    exact he.symm ▸ hc u v
+  apply smoothTameOn_congr (smoothTameOn_pair_of_multilinear_bound p q B hB)
+  intro z hz
+  exact heq ![z.1, z.2]
+
 /-- The multiplication estimate has one high factor and a loss fixed
 before the output order. It holds on the entire original circle space. -/
 theorem circleProduct_oneHigh_bound
@@ -238,33 +320,12 @@ theorem circleProduct_oneHigh_bound
       S.grading s (circleProductBilinear hS hT hD hγ u v) ≤
         C * (S.grading (s + loss) u * S.grading base v +
           S.grading base u * S.grading (s + loss) v) := by
-  classical
-  let hg := circleProduct_grading_unit_growth hS hT hD hγ hinterp
-  let base : ℕ := hg.choose
-  let loss : ℕ := hg.choose_spec.choose
-  have hbl : base ≤ loss := hg.choose_spec.choose_spec.1
-  have hb := hg.choose_spec.choose_spec.2
-  let B := circleProductContinuousMultilinear hS hT hD hγ
-  have hunit : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ v : Fin 2 → S.Space,
-      (∀ i, S.grading base (v i) < 1) →
-      S.grading s (B v) ≤ C * (1 + ∑ i, S.grading (s + loss) (v i)) := by
-    intro s
-    let C : ℝ := (hb s).choose
-    have hC : 0 ≤ C := (hb s).choose_spec.1
-    have hc := (hb s).choose_spec.2
-    refine ⟨C, hC, ?_⟩
-    intro v hv
-    rw [show B v = circleProductBilinear hS hT hD hγ (v 0) (v 1) from
-      circleProductContinuousMultilinear_eq hS hT hD hγ v, Fin.sum_univ_two]
-    simpa only [add_assoc] using hc (v 0) (v 1) (hv 0).le (hv 1).le
-  have hnormal := bilinear_oneHigh_of_unit_bound S.grading S.grading
-    (gradedSeminorm_monotone (fun j => S.level j) S.bond) B hbl hunit
-  refine ⟨base, loss, ?_⟩
-  intro s
-  refine ⟨(hnormal s).choose, (hnormal s).choose_spec.1, ?_⟩
-  intro u v
-  have heq := circleProductContinuousMultilinear_eq hS hT hD hγ ![u, v]
-  exact heq ▸ (hnormal s).choose_spec.2 u v
+  exact bilinear_function_oneHigh_of_unit_growth S.grading S.grading
+    (gradedSeminorm_monotone (fun j => S.level j) S.bond)
+    (circleProductContinuousMultilinear hS hT hD hγ)
+    (circleProductBilinear hS hT hD hγ)
+    (circleProductContinuousMultilinear_eq hS hT hD hγ)
+    (circleProduct_grading_unit_growth hS hT hD hγ hinterp)
 
 def circleProductPairMultilinear
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -289,23 +350,10 @@ theorem smoothTameOn_circleProduct
     (hinterp : HasInterpolation S.grading) :
     SmoothTameOn (pairGrading S.grading S.grading) S.grading univ
       (fun z : S.Space × S.Space => circleProductBilinear hS hT hD hγ z.1 z.2) := by
-  let hg := circleProduct_oneHigh_bound hS hT hD hγ hinterp
-  let base : ℕ := hg.choose
-  let loss : ℕ := hg.choose_spec.choose
-  have hb := hg.choose_spec.choose_spec
-  let B := circleProductContinuousMultilinear hS hT hD hγ
-  have hB : ∀ s, ∃ C : ℝ, 0 ≤ C ∧ ∀ u v : S.Space,
-      S.grading s (B ![u, v]) ≤
-        C * (S.grading (s + loss) u * S.grading base v +
-          S.grading base u * S.grading (s + loss) v) := by
-    intro s
-    refine ⟨(hb s).choose, (hb s).choose_spec.1, ?_⟩
-    intro u v
-    have heq := circleProductContinuousMultilinear_eq hS hT hD hγ ![u, v]
-    exact heq.symm ▸ (hb s).choose_spec.2 u v
-  apply smoothTameOn_congr
-    (smoothTameOn_pair_of_multilinear_bound S.grading S.grading B hB)
-  intro z hz
-  exact circleProductContinuousMultilinear_eq hS hT hD hγ ![z.1, z.2]
+  exact smoothTameOn_bilinear_function_of_bound S.grading S.grading
+    (circleProductContinuousMultilinear hS hT hD hγ)
+    (circleProductBilinear hS hT hD hγ)
+    (circleProductContinuousMultilinear_eq hS hT hD hγ)
+    (circleProduct_oneHigh_bound hS hT hD hγ hinterp)
 
 end ContinuousFlexibility.Statements

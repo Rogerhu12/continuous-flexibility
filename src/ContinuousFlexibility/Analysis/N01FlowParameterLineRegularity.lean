@@ -52,7 +52,7 @@ theorem N01Properties.minusFlow_sectorLine_contDiffOn
       hN.2.2.1.stateSector m hr
   apply (hdiff.add ((href.comp contDiff_snd).contDiffOn)).congr
   intro p _
-  simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero]
+  simp only [ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero, Function.comp_apply]
   ring
 
 theorem N01Properties.minusFlow_sectorLine_hasDerivAt
@@ -89,7 +89,8 @@ theorem N01Properties.minusFlow_invFun_sectorLine_contDiffOn
       0 < deriv (F t) θ :=
     ((hflow _ (liftSectorParameter_mem_stateNeighborhood ht (le_refl ε)) m θ).2.2.2 r hr).1
   intro p hp
-  have hz := liftSectorParameter_mem_stateNeighborhood hp (le_refl ε)
+  have hz : liftSectorParameter S C (x + p.1 • w) ∈ stateNeighborhood S C base ε :=
+    liftSectorParameter_mem_stateNeighborhood hp (le_refl ε)
   have hsurj : Function.Surjective (F p.1) :=
     returnLift_surjective Real.pi_pos
       (N01Properties.minusFlow_differentiable S C _ m hN hz hr).continuous

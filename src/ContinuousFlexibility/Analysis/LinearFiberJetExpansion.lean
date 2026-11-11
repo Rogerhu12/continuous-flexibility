@@ -104,7 +104,7 @@ def linearFiberRemainder : (n : ℕ) → LinearFiberJetData X Y G →ₗ[ℝ]
           simp only [LinearMap.uncurryLeft_apply, LinearMap.add_apply,
             MultilinearMap.add_apply, LinearMap.comp_apply, linearFiberHead_smul,
             map_smul, linearFiberMain_smul, LinearMap.smul_apply,
-            MultilinearMap.smul_apply, smul_add] }
+            MultilinearMap.smul_apply, smul_add, RingHom.id_apply] }
 
 theorem linearFiberRemainder_zero_apply (A : LinearFiberJetData X Y G)
     (v : Fin 0 → X × Y) : linearFiberRemainder 0 A v = 0 := rfl
@@ -130,7 +130,7 @@ theorem linearFiberJet_succ_apply (n : ℕ) (A : LinearFiberJetData X Y G)
     (y : Y) (w : X × Y) (v : Fin n → X × Y) :
     linearFiberJet (n + 1) A y (Fin.cons w v) =
       linearFiberJet n (linearFiberHead A w) y v + A n (fun i => (v i).1) w.2 := by
-  have hcons : (fun i : Fin (n + 1) => (Fin.cons w v i).1) =
+  have hcons : (fun i : Fin (n + 1) => ((Fin.cons w v : Fin (n + 1) → X × Y) i).1) =
       Fin.cons w.1 (fun i => (v i).1) := by
     funext i
     cases i using Fin.cases <;> rfl
@@ -166,8 +166,10 @@ theorem linearFiberRemainder_eq_sum (n : ℕ) (A : LinearFiberJetData X Y G)
       ∑ i : Fin (n + 1), A n (fun j => (v (i.succAbove j)).1) (v i).2 := by
   induction n generalizing A with
   | zero =>
-      simp only [linearFiberRemainder_succ_apply, linearFiberRemainder_zero_apply,
-        zero_add, Fin.sum_univ_one]
+      rw [linearFiberRemainder_succ_apply, linearFiberRemainder_zero_apply, zero_add]
+      change A 0 (fun i : Fin 0 => (v i.succ).1) (v 0).2 =
+        ∑ i : Fin 1, A 0 (fun j : Fin 0 => (v (i.succAbove j)).1) (v i).2
+      rw [Fin.sum_univ_one]
       exact congrArg (fun vs : Fin 0 → X => A 0 vs (v 0).2) (Subsingleton.elim _ _)
   | succ n ih =>
       calc
@@ -239,11 +241,14 @@ theorem hasDerivAt_linearFiberJet_affine
   have hd := (hy.fun_add ((hasDerivAt_id t).mul hw)).fun_add hr
   convert hd using 1
   · funext s
-    simp only [linearFiberJet, MultilinearMap.add_apply, linearFiberMain_apply,
-      map_add, map_smul, smul_eq_mul]
+    change Q (A s n (fun i => (v i).1) (y + s • w.2) +
+      linearFiberRemainder n (A s) v) = _
+    simp only [map_add, map_smul, smul_eq_mul, Pi.mul_apply, id_eq]
   · rw [linearFiberJet_succ_apply]
-    simp only [linearFiberJet, MultilinearMap.add_apply, linearFiberMain_apply,
-      map_add, map_smul, smul_eq_mul, one_mul]
+    change Q (linearFiberHead (A t) w n (fun i => (v i).1) (y + t • w.2) +
+      linearFiberRemainder n (linearFiberHead (A t) w) v +
+      A t n (fun i => (v i).1) w.2) = _
+    simp only [map_add, map_smul, smul_eq_mul, Pi.mul_apply, id_eq, one_mul]
     ring
 
 end ContinuousFlexibility.Analysis

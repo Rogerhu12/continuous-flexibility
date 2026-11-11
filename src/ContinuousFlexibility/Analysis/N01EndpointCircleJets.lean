@@ -80,9 +80,17 @@ theorem N01Properties.endpointFlowScalarJets_iteratedDeriv
     iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel n z v m) θ =
       (hN.sectorFlow_closed_angularTower hS hT m (rsel m)
         (hrsel m) b θ).D n z v := by
-  simpa only [Nat.zero_add] using
-    hN.sectorFlow_closed_angularTower_iteratedDeriv hS hT m (rsel m)
-      (hrsel m) n 0 b z hz v θ
+  have hfun : hN.endpointFlowScalarJets hS hT rsel hrsel n z v m =
+      fun ψ => (hN.sectorFlow_closed_angularTower hS hT m (rsel m)
+        (hrsel m) 0 ψ).D n z v :=
+    funext (fun ψ => hN.endpointFlowScalarJets_apply hS hT rsel hrsel n z v m ψ)
+  have hfirst := congrArg (fun f : ℝ → ℝ => iteratedDeriv b f θ) hfun
+  have hmiddle := hN.sectorFlow_closed_angularTower_iteratedDeriv hS hT m (rsel m)
+    (hrsel m) n 0 b z hz v θ
+  have hlast := congrArg (fun j : ℕ =>
+    (hN.sectorFlow_closed_angularTower hS hT m (rsel m) (hrsel m) j θ).D n z v)
+    (Nat.zero_add b)
+  exact hfirst.trans (hmiddle.trans hlast)
 
 theorem N01Properties.endpointFlowScalarJets_hasDerivAt_line
     (hN : N01Properties D T S C base loss ε)
@@ -94,10 +102,14 @@ theorem N01Properties.endpointFlowScalarJets_hasDerivAt_line
       (hN.endpointFlowScalarJets hS hT rsel hrsel n (x + u • w) v m) θ)
       (iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1)
         (x + t • w) (Fin.cons w v) m) θ) t := by
-  rw [hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1) _ ht]
   let J := hN.sectorFlow_closed_angularTower hS hT m (rsel m)
     (hrsel m) b θ
-  apply (J.hasDerivAt_line_jet x w n v ht).congr_of_eventuallyEq
+  have hvalue : J.D (n + 1) (x + t • w) (Fin.cons w v) =
+      iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1)
+        (x + t • w) (Fin.cons w v) m) θ :=
+    (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel (n + 1)
+      (x + t • w) ht (Fin.cons w v) m b θ).symm
+  apply ((J.hasDerivAt_line_jet x w n v ht).congr_deriv hvalue).congr_of_eventuallyEq
   have hline : Continuous (fun u : ℝ => x + u • w) :=
     continuous_const.add (continuous_id.smul continuous_const)
   have hmem : ∀ᶠ u in 𝓝 t, x + u • w ∈ sectorNeighborhood S base ε ε :=

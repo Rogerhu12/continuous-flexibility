@@ -23,7 +23,8 @@ theorem circle_component_contraction_eLpNorm
     (m b : ℕ) :
     eLpNorm (iteratedDeriv b (fun θ => c m * u m θ)) 2 angleMeasure ≤
       eLpNorm (iteratedDeriv b (u m)) 2 angleMeasure := by
-  have hreg : ContDiff ℝ ∞ (fun θ => c m * u m θ) := (hu.1 m).1.const_mul (c m)
+  have hreg : ContDiff ℝ ∞ (fun θ => c m * u m θ) :=
+    contDiff_const.mul (hu.1 m).1
   apply eLpNorm_mono (memLp_angleMeasure_iteratedDeriv_of_contDiff hreg b).aestronglyMeasurable
   intro θ
   simp only [Real.norm_eq_abs, iteratedDeriv_const_mul_field, abs_mul]
@@ -34,10 +35,11 @@ theorem circleMember_component_contraction
     (hu : CircleMember T γ u) (c : ℕ → ℝ) (hc : ∀ m, |c m| ≤ 1) :
     CircleMember T γ (fun m θ => c m * u m θ) := by
   have hreg (m : ℕ) : ContDiff ℝ ∞ (fun θ => c m * u m θ) :=
-    (hu.1 m).1.const_mul (c m)
+    contDiff_const.mul (hu.1 m).1
   apply circleMember_of_jet_bound hu 0 0
   · intro m
     refine ⟨hreg m, fun θ => ?_⟩
+    change c m * u m (θ + Real.pi) = c m * u m θ
     rw [(hu.1 m).2 θ]
   · exact fun m b => memLp_angleMeasure_iteratedDeriv_of_contDiff (hreg m) b
   · intro s

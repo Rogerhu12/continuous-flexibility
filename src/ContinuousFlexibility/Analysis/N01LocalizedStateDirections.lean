@@ -14,6 +14,8 @@ plateau energy and the original control's circle component energy.
 
 noncomputable section
 
+set_option backward.isDefEq.respectTransparency false
+
 namespace ContinuousFlexibility.Statements
 
 local instance n01LocalizedStateDirectionsStateSMul (S : PhysicalSpacesData) :
@@ -21,6 +23,20 @@ local instance n01LocalizedStateDirectionsStateSMul (S : PhysicalSpacesData) :
 
 open Set Filter MeasureTheory ContinuousFlexibility.Analysis
 open scoped Topology ENNReal BigOperators ContDiff
+
+private theorem seminorm_add_smul_bound {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (p : Seminorm ℝ E) (x y : E) (c A B : ℝ)
+    (hx : p x = A) (hy : p y ≤ B) :
+    p (x + c • y) ≤ A + |c| * B := by
+  have ht : p (x + c • y) ≤ p x + |c| * p y := by
+    simpa only [map_smul_eq_mul, Real.norm_eq_abs] using p.add_le x (c • y)
+  rw [hx] at ht
+  exact ht.trans (add_le_add_left (mul_le_mul_of_nonneg_left hy (abs_nonneg c)) A)
+
+private theorem pairGrading_at_real_zero {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (p : ℕ → Seminorm ℝ E) (s : ℕ) (x : E) :
+    pairGrading p realGrading s (x, 0) = p s x := by
+  rw [pairGrading_apply, map_zero, add_zero]
 
 def controlParameterDirection
     {T : MaterialData} {S : PhysicalSpacesData}
@@ -68,8 +84,8 @@ theorem controlParameterDirection_grading
     (hC : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ))) (m s : ℕ) :
     pairGrading (sectorGrading S) realGrading s (controlParameterDirection hC m) =
       stateGrading S s (singletonKappaDirection hC m) := by
-  change stateGrading S s (singletonKappaDirection hC m) + ‖(0 : ℝ)‖ = _
-  rw [norm_zero, add_zero]
+  exact pairGrading_at_real_zero (sectorGrading S) s
+    (⟨singletonKappaDirection hC m, singletonKappaDirection_sector hC m⟩ : StateDirections S)
 
 theorem localizedStateParameterDirection_grading_le
     {T : MaterialData} {S : PhysicalSpacesData}
@@ -80,15 +96,14 @@ theorem localizedStateParameterDirection_grading_le
       (localizedStateParameterDirection hC m η c) ≤
       heightPairGrading S s η + |c| * circleSingletonGradingConstant s *
         (T.M (T.sample m) ^ s * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) := by
-  let p := pairGrading (sectorGrading S) realGrading s
-  have htri := map_add_le_add p
-    (heightParameterDirection S η) (c • controlParameterDirection hC m)
-  rw [map_smul_eq_mul, Real.norm_eq_abs, controlParameterDirection_grading,
-    heightParameterDirection_grading] at htri
-  apply htri.trans
-  apply add_le_add (le_refl _)
-  exact (mul_le_mul_of_nonneg_left
-    (singletonKappaDirection_grading_le hC m s hM hH) (abs_nonneg c)).trans_eq (by ring)
+  have hcontrol : pairGrading (sectorGrading S) realGrading s (controlParameterDirection hC m) ≤
+      circleSingletonGradingConstant s *
+        (T.M (T.sample m) ^ s * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) :=
+    (controlParameterDirection_grading hC m s).trans_le
+      (singletonKappaDirection_grading_le hC m s hM hH)
+  exact (seminorm_add_smul_bound (pairGrading (sectorGrading S) realGrading s)
+    (heightParameterDirection S η) (controlParameterDirection hC m) c _ _
+    (heightParameterDirection_grading S η s) hcontrol).trans_eq (by ring)
 
 theorem localizedStateParameterDirection_weighted_grading_le
     {T : MaterialData} {S : PhysicalSpacesData}
@@ -147,8 +162,11 @@ theorem N01Properties.exists_localized_state_directions
           (circleSingletonGradingConstant s * (2 * circleSobolevConstant)) *
             Real.sqrt (circleComponentEnergy T (3 / 4 : ℝ) (s + d + 1)
               ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1) m).toReal) := by
-  obtain ⟨η, _, _, hlocal, henergy⟩ :=
-    hN.exists_height_pair_plateau_directions hS hT v.1.val.1
+  have hex := hN.exists_height_pair_plateau_directions hS hT v.1.val.1
+  let η : ℕ → HeightPair S := Classical.choose hex
+  have hη := Classical.choose_spec hex
+  have hlocal := hη.2.2.1
+  have henergy := hη.2.2.2
   let w : ℕ → (StateDirections S × ℝ) := fun m =>
     localizedStateParameterDirection (hS.2.1 (3 / 4 : ℝ)) m (η m)
       ((S.circle (3 / 4 : ℝ)).decode v.1.val.2.2.1 m 0)

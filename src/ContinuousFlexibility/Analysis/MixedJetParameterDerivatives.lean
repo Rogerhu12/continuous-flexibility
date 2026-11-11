@@ -80,7 +80,7 @@ theorem MixedJetHasDerivAt.radialPartial
     {F : ℝ → PolarPoint → ℝ} {G : PolarPoint → ℝ} {t : ℝ}
     (hF : ∀ᶠ s in 𝓝 t, ContDiff ℝ ∞ (F s))
     (hG : ContDiff ℝ ∞ G) (h : MixedJetHasDerivAt F G t) :
-    MixedJetHasDerivAt (fun s => ContinuousFlexibility.Statements.radialPartial (F s)) (ContinuousFlexibility.Statements.radialPartial G) t := by
+    MixedJetHasDerivAt (fun s => ContinuousFlexibility.radialPartial (F s)) (ContinuousFlexibility.radialPartial G) t := by
   intro a b p
   rw [mixedDerivative_radialPartial isOpen_univ hG.contDiffOn a b (mem_univ p)]
   apply (h (a + 1) b p).congr_of_eventuallyEq
@@ -91,7 +91,7 @@ theorem MixedJetHasDerivAt.angularPartial
     {F : ℝ → PolarPoint → ℝ} {G : PolarPoint → ℝ} {t : ℝ}
     (hF : ∀ᶠ s in 𝓝 t, ContDiff ℝ ∞ (F s))
     (hG : ContDiff ℝ ∞ G) (h : MixedJetHasDerivAt F G t) :
-    MixedJetHasDerivAt (fun s => ContinuousFlexibility.Statements.angularPartial (F s)) (ContinuousFlexibility.Statements.angularPartial G) t := by
+    MixedJetHasDerivAt (fun s => ContinuousFlexibility.angularPartial (F s)) (ContinuousFlexibility.angularPartial G) t := by
   intro a b p
   rw [mixedDerivative_angularPartial isOpen_univ hG.contDiffOn a b (mem_univ p)]
   apply (h a (b + 1) p).congr_of_eventuallyEq

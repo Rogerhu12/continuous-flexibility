@@ -40,7 +40,8 @@ theorem circleMember_component_multiplier
     CircleMember T γ (fun m θ => c m * u m θ) := by
   apply circleMember_of_L2_derivative_bound hu 0 d hK hM hH
   · intro m
-    refine ⟨(hu.1 m).1.const_mul (c m), fun θ => ?_⟩
+    refine ⟨contDiff_const.mul (hu.1 m).1, fun θ => ?_⟩
+    change c m * u m (θ + Real.pi) = c m * u m θ
     rw [(hu.1 m).2 θ]
   · intro m b
     simpa only [Nat.add_zero] using circle_component_multiplier_eLpNorm c d K hc m b

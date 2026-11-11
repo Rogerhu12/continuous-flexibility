@@ -60,7 +60,7 @@ theorem N01Properties.coefficientFamily_uniform_bound
     have hraw : |J.D 0 z Fin.elim0| ≤ B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample m) ^ B * Q := by
       simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-        mul_one, add_zero, Q, B] using dataJ.choose_spec z hz Fin.elim0
+        mul_one, add_zero, Q, B, J] using dataJ.choose_spec z hz Fin.elim0
     have hzero : J.D 0 z Fin.elim0 = coefficientFamily D S C i a b p z := J.zero z hz
     have hM : B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample m) ^ B * Q ≤ B * A * Q := by

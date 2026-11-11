@@ -60,17 +60,17 @@ theorem PhysicalJetEnvelopes.symmetric_divergence_of_material_bounds
     (hu : ∀ i, ContDiffOn ℝ ∞ (u i) (annularOpen D))
     (huenv : PhysicalJetEnvelopes T γ u) :
     PhysicalJetEnvelopes T γ (fun i p =>
-      ContinuousFlexibility.Statements.radialPartial (fun q => A i q * ContinuousFlexibility.Statements.angularPartial (u i) q) p +
-        ContinuousFlexibility.Statements.angularPartial (fun q => A i q * ContinuousFlexibility.Statements.radialPartial (u i) q +
-          B i q * ContinuousFlexibility.Statements.angularPartial (u i) q) p) := by
+      ContinuousFlexibility.radialPartial (fun q => A i q * ContinuousFlexibility.angularPartial (u i) q) p +
+        ContinuousFlexibility.angularPartial (fun q => A i q * ContinuousFlexibility.radialPartial (u i) q +
+          B i q * ContinuousFlexibility.angularPartial (u i) q) p) := by
   have hU : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
   have hur (i : ι) := contDiffOn_radialPartial_of_isOpen hU (hu i)
   have hut (i : ι) := contDiffOn_angularPartial_of_isOpen hU (hu i)
   have hurEnv := PhysicalJetEnvelopes.radialPartial hT hu huenv
   have hutEnv := PhysicalJetEnvelopes.angularPartial hT hu huenv
-  let F (i : ι) (p : PolarPoint) : ℝ := A i p * ContinuousFlexibility.Statements.angularPartial (u i) p
+  let F (i : ι) (p : PolarPoint) : ℝ := A i p * ContinuousFlexibility.angularPartial (u i) p
   let G (i : ι) (p : PolarPoint) : ℝ :=
-    A i p * ContinuousFlexibility.Statements.radialPartial (u i) p + B i p * ContinuousFlexibility.Statements.angularPartial (u i) p
+    A i p * ContinuousFlexibility.radialPartial (u i) p + B i p * ContinuousFlexibility.angularPartial (u i) p
   have hF (i : ι) : ContDiffOn ℝ ∞ (F i) (annularOpen D) := (hA i).mul (hut i)
   have hG (i : ι) : ContDiffOn ℝ ∞ (G i) (annularOpen D) :=
     ((hA i).mul (hur i)).add ((hB i).mul (hut i))

@@ -100,26 +100,32 @@ theorem multiplier_eLpNorm_finset_sum
         (ih (fun j hj => hA j (Finset.mem_insert_of_mem hj))
           (fun j hj => hb j (Finset.mem_insert_of_mem hj))))
 
+private def multiplierBinomialSum (a b : ℕ) : ℝ :=
+  ∑ j ∈ Finset.range (b + 1), ∑ i ∈ Finset.range (a + 1),
+    (b.choose j : ℝ) * (a.choose i : ℝ)
+
+private theorem multiplierBinomialSum_nonneg (a b : ℕ) :
+    0 ≤ multiplierBinomialSum a b :=
+  Finset.sum_nonneg (fun j _ => Finset.sum_nonneg (fun i _ =>
+    mul_nonneg (Nat.cast_nonneg (b.choose j)) (Nat.cast_nonneg (a.choose i))))
+
 def materialMultiplierJetConstant (s : ℕ) : ℝ :=
-  ∑ J : JetIndex s,
-    ∑ j ∈ Finset.range ((J.val 1).val + 1),
-      ∑ i ∈ Finset.range ((J.val 0).val + 1),
-        ((J.val 1).val.choose j : ℝ) * ((J.val 0).val.choose i : ℝ)
+  ∑ J : JetIndex s, multiplierBinomialSum (J.val 0).val (J.val 1).val
 
 theorem materialMultiplierJetConstant_nonneg (s : ℕ) :
     0 ≤ materialMultiplierJetConstant s := by
-  unfold materialMultiplierJetConstant
-  positivity
+  exact Finset.sum_nonneg (fun J _ => multiplierBinomialSum_nonneg _ _)
 
 private theorem materialMultiplierJetConstant_term_le (s : ℕ) (J : JetIndex s) :
     (∑ j ∈ Finset.range ((J.val 1).val + 1),
       ∑ i ∈ Finset.range ((J.val 0).val + 1),
         ((J.val 1).val.choose j : ℝ) * ((J.val 0).val.choose i : ℝ)) ≤
       materialMultiplierJetConstant s := by
-  unfold materialMultiplierJetConstant
-  exact Finset.single_le_sum
-    (fun K _ => Finset.sum_nonneg (fun j _ => Finset.sum_nonneg (fun i _ =>
-      mul_nonneg (Nat.cast_nonneg _) (Nat.cast_nonneg _)))) (Finset.mem_univ J)
+  change multiplierBinomialSum (J.val 0).val (J.val 1).val ≤
+    ∑ K : JetIndex s, multiplierBinomialSum (K.val 0).val (K.val 1).val
+  exact Finset.single_le_sum (s := Finset.univ)
+    (f := fun K : JetIndex s => multiplierBinomialSum (K.val 0).val (K.val 1).val)
+    (fun K _ => multiplierBinomialSum_nonneg _ _) (Finset.mem_univ J)
 
 def materialMultiplierNormConstant (s : ℕ) : ℝ :=
   Real.sqrt (Fintype.card (JetIndex s) : ℝ) * materialMultiplierJetConstant s

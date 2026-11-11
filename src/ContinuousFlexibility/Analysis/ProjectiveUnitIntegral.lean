@@ -44,7 +44,9 @@ theorem projectiveUnitIntegral_congr
   funext n
   apply intervalIntegral.integral_congr
   intro a ha
-  rw [heq a (by simpa only [uIcc_of_le zero_le_one] using ha)]
+  change (f a).val n = (g a).val n
+  exact congrArg (fun u : ProjectiveLimit F bond => u.val n)
+    (heq a (by simpa only [uIcc_of_le zero_le_one] using ha))
 
 theorem projectiveUnitIntegral_add
     {f g : ℝ → ProjectiveLimit F bond} (hf : Continuous f) (hg : Continuous g) :

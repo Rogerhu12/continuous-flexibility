@@ -102,7 +102,7 @@ theorem PhysicalJetHasDerivAt.angularPartial
     (hF : ∀ᶠ s in 𝓝 t, ContDiffOn ℝ ∞ (F s) (annularOpen D))
     (hG : ContDiffOn ℝ ∞ G (annularOpen D))
     (h : PhysicalJetHasDerivAt T γ F G t) :
-    PhysicalJetHasDerivAt T γ (fun s => ContinuousFlexibility.Statements.angularPartial (F s)) (ContinuousFlexibility.Statements.angularPartial G) t := by
+    PhysicalJetHasDerivAt T γ (fun s => ContinuousFlexibility.angularPartial (F s)) (ContinuousFlexibility.angularPartial G) t := by
   have hd := MixedJetHasDerivAt.angularPartial
     (hF.mono fun s hs => contDiff_materialPullback hT hs)
     (contDiff_materialPullback hT hG) h
@@ -118,7 +118,7 @@ theorem PhysicalJetHasDerivAt.radialPartial
     (hF : ∀ᶠ s in 𝓝 t, ContDiffOn ℝ ∞ (F s) (annularOpen D))
     (hG : ContDiffOn ℝ ∞ G (annularOpen D))
     (h : PhysicalJetHasDerivAt T γ F G t) :
-    PhysicalJetHasDerivAt T γ (fun s => ContinuousFlexibility.Statements.radialPartial (F s)) (ContinuousFlexibility.Statements.radialPartial G) t := by
+    PhysicalJetHasDerivAt T γ (fun s => ContinuousFlexibility.radialPartial (F s)) (ContinuousFlexibility.radialPartial G) t := by
   let L (p : PolarPoint) : ℝ :=
     γ * deriv (fun r => Real.log (T.H (T.radius r))) p.1
   let A (p : PolarPoint) : ℝ := (T.ell (T.radius p.1))⁻¹
@@ -132,7 +132,7 @@ theorem PhysicalJetHasDerivAt.radialPartial
     hF.mono fun s hs => contDiff_materialPullback hT hs
   have hGm : ContDiff ℝ ∞ (materialPullback T γ G) := contDiff_materialPullback hT hG
   have hr (f : PolarPoint → ℝ) (hf : ContDiff ℝ ∞ f) :
-      ContDiff ℝ ∞ (ContinuousFlexibility.Statements.radialPartial f) := by
+      ContDiff ℝ ∞ (ContinuousFlexibility.radialPartial f) := by
     apply contDiff_iff_contDiffAt.mpr
     intro p
     exact contDiffAt_radialPartial hf.contDiffAt (m := ∞) (by simp)
@@ -165,10 +165,10 @@ theorem physicalJetHasDerivAt_symmetric_divergence
     (hBd : MixedJetHasDerivAt (fun s p => B s (T.radius p.1, p.2))
       (fun p => B' (T.radius p.1, p.2)) t) :
     PhysicalJetHasDerivAt T γ
-      (fun s p => ContinuousFlexibility.Statements.radialPartial (fun q => A s q * ContinuousFlexibility.Statements.angularPartial u q) p +
-        ContinuousFlexibility.Statements.angularPartial (fun q => A s q * ContinuousFlexibility.Statements.radialPartial u q + B s q * ContinuousFlexibility.Statements.angularPartial u q) p)
-      (fun p => ContinuousFlexibility.Statements.radialPartial (fun q => A' q * ContinuousFlexibility.Statements.angularPartial u q) p +
-        ContinuousFlexibility.Statements.angularPartial (fun q => A' q * ContinuousFlexibility.Statements.radialPartial u q + B' q * ContinuousFlexibility.Statements.angularPartial u q) p) t := by
+      (fun s p => ContinuousFlexibility.radialPartial (fun q => A s q * ContinuousFlexibility.angularPartial u q) p +
+        ContinuousFlexibility.angularPartial (fun q => A s q * ContinuousFlexibility.radialPartial u q + B s q * ContinuousFlexibility.angularPartial u q) p)
+      (fun p => ContinuousFlexibility.radialPartial (fun q => A' q * ContinuousFlexibility.angularPartial u q) p +
+        ContinuousFlexibility.angularPartial (fun q => A' q * ContinuousFlexibility.radialPartial u q + B' q * ContinuousFlexibility.angularPartial u q) p) t := by
   have hU : IsOpen (annularOpen D) := isOpen_Ioo.prod isOpen_univ
   have hur := contDiffOn_radialPartial_of_isOpen hU hu
   have hut := contDiffOn_angularPartial_of_isOpen hU hu
@@ -179,10 +179,10 @@ theorem physicalJetHasDerivAt_symmetric_divergence
     (physicalJetHasDerivAt_coefficient_mul hT hA hA' hur hAd)
     (physicalJetHasDerivAt_coefficient_mul hT hB hB' hut hBd)
   have hFs : ∀ᶠ s in 𝓝 t,
-      ContDiffOn ℝ ∞ (fun p => A s p * ContinuousFlexibility.Statements.angularPartial u p) (annularOpen D) :=
+      ContDiffOn ℝ ∞ (fun p => A s p * ContinuousFlexibility.angularPartial u p) (annularOpen D) :=
     hA.mono fun s hs => hs.mul hut
   have hGs : ∀ᶠ s in 𝓝 t, ContDiffOn ℝ ∞
-      (fun p => A s p * ContinuousFlexibility.Statements.radialPartial u p + B s p * ContinuousFlexibility.Statements.angularPartial u p) (annularOpen D) := by
+      (fun p => A s p * ContinuousFlexibility.radialPartial u p + B s p * ContinuousFlexibility.angularPartial u p) (annularOpen D) := by
     filter_upwards [hA, hB] with s hs hs'
     exact (hs.mul hur).add (hs'.mul hut)
   exact PhysicalJetHasDerivAt.add hT

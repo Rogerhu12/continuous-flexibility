@@ -1,5 +1,5 @@
 import ContinuousFlexibility.Analysis.ProjectiveUnitIntegral
-import ContinuousFlexibility.Analysis.CircleJetEvaluation
+import ContinuousFlexibility.Analysis.CircleAngleEvaluation
 import ContinuousFlexibility.Analysis.CircleModelRealization
 
 /-!
