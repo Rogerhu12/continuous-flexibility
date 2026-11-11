@@ -39,8 +39,8 @@ theorem n05CanonicalSourceLift_linear_combination_ae
           (n05CanonicalSourceLift S C K (F x)) :=
     n05CanonicalSourceLift_source_ae h hcoordinates (F x)
       (n05_volumeMember_reflection hV (show VolumeMember S K V γ t s (F x) from ⟨x, rfl⟩)) m
-  apply n05_referenceCanonicalSource_ae_physical h hcoordinates
-    (n05CanonicalSourceLift_periodic S C K _) ?_
+  refine n05_referenceCanonicalSource_ae_physical h hcoordinates
+    (n05CanonicalSourceLift_periodic S C K _) ?_ ?_
   · intro p
     change c * n05CanonicalSourceLift S C K (V.forget γ t s v) (p + (0, Real.pi)) +
       d * n05CanonicalSourceLift S C K (V.forget γ t s w) (p + (0, Real.pi)) =
@@ -60,7 +60,9 @@ theorem n05CanonicalSourceLift_linear_combination_ae
       simp only [Pi.add_apply, hc, hd, Pi.smul_apply, smul_eq_mul]
     filter_upwards [hrep (c • v + d • w) m, hrep v m, hrep w m, hsum]
       with p hp hv hw he
-    rw [← hp, he, hv, hw]
+    rw [← hp, he]
+    dsimp only
+    rw [hv, hw]
     simp only [canonicalSource]
     ring
 
