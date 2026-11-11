@@ -37,7 +37,7 @@ theorem outer_signed_state_energy_transfer {u z α β : ℝ → ℝ} {l r s t : 
       _ = 2 * |α x + β x| * |u x * z x| := by
         rw [abs_mul, abs_mul, abs_of_pos (by norm_num : (0 : ℝ) < 2)]
       _ ≤ 2 * (|α x| + |β x|) * |u x * z x| :=
-        mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left (abs_add _ _) (by norm_num)) (abs_nonneg _)
+        mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left (abs_add_le _ _) (by norm_num)) (abs_nonneg _)
       _ = (|α x| + |β x|) * (2 * |u x * z x|) := by ring
       _ ≤ _ := mul_le_mul_of_nonneg_left huv (add_nonneg (abs_nonneg _) (abs_nonneg _))
   exact gronwall_integral_exp hlr (hα.abs.add hβ.abs)

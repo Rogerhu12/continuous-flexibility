@@ -171,7 +171,8 @@ def outerPhysicalTailEquiv
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start) :
     OuterPhysicalTailL2 D T right ≃ₗᵢ[ℝ] DeepTailL2 T :=
-  l2EquivCompose (outerPhysicalCoordinateEquiv hD hphysical) (outerPhysicalGaugeEquiv hD hphysical)
+  Classical.choose (exists_l2EquivCompose_apply (outerPhysicalCoordinateEquiv hD hphysical)
+    (outerPhysicalGaugeEquiv hD hphysical))
 
 theorem outerPhysicalTailEquiv_apply
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
@@ -179,8 +180,8 @@ theorem outerPhysicalTailEquiv_apply
     (f : OuterPhysicalTailL2 D T right) :
     outerPhysicalTailEquiv hD hphysical f =
       outerPhysicalGaugeEquiv hD hphysical (outerPhysicalCoordinateEquiv hD hphysical f) :=
-  l2EquivCompose_apply (outerPhysicalCoordinateEquiv hD hphysical)
-    (outerPhysicalGaugeEquiv hD hphysical) f
+  Classical.choose_spec (exists_l2EquivCompose_apply (outerPhysicalCoordinateEquiv hD hphysical)
+    (outerPhysicalGaugeEquiv hD hphysical)) f
 
 /-- The exact representative is sqrt(12) times inverse gauge and pullback. -/
 theorem outerPhysicalTailEquiv_ae

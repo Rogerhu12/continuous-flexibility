@@ -95,5 +95,12 @@ theorem l2EquivCompose_apply {μ ν κ : Measure ℝ}
     (E : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν) (F : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 κ)
     (f : Lp ℝ 2 μ) : l2EquivCompose E F f = F (E f) := rfl
 
+/-- An existence certificate exposes the exact composition formula
+without reducing concrete equality casts hidden inside the factors. -/
+theorem exists_l2EquivCompose_apply {μ ν κ : Measure ℝ}
+    (E : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν) (F : Lp ℝ 2 ν ≃ₗᵢ[ℝ] Lp ℝ 2 κ) :
+    ∃ H : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 κ, ∀ f, H f = F (E f) :=
+  ⟨l2EquivCompose E F, l2EquivCompose_apply E F⟩
+
 end ContinuousFlexibility.Analysis
 
