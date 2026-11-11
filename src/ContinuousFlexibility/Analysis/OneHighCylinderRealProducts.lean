@@ -58,7 +58,9 @@ theorem cylinder_real_derivative_product_oneHigh (k s : ℕ)
   refine ⟨hm, ?_⟩
   have hb := h.2
   rw [he] at hb
-  simpa only [cylinderRealSobolevNorm, cylinderRealFourierL1Norm] using hb
+  have hbase (i : Fin (k + 1)) : (u i).complexify.jet 0 0 =
+      cylinderComplexify ((u i).jet 0 0) := rfl
+  simpa only [cylinderRealSobolevNorm, cylinderRealFourierL1Norm, hbase] using hb
 
 /-- Repeating the same physical input in any positive number of factors. -/
 theorem cylinder_real_repeated_derivative_product_le

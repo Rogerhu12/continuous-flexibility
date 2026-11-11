@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.OneHighCircleFlowConstantJets
+import ContinuousFlexibility.Analysis.OneHighCircleFourierRealAlgebra
 
 /-!
 # Integrability after subtracting an arbitrary reference speed
@@ -50,6 +51,23 @@ private theorem continuous_circleSubtractConstantSobolevNorm_clamped
     (fun n => (hf n).comp_continuous (hclamp.comp continuous_fst) (fun p => hmem p.1))
     (fun p => hderiv (max a (min p.1 b)) (hmem p.1)) continuous_snd s
 
+private theorem aestronglyMeasurable_clamped_parameter_graph
+    {a b : ℝ} (hab : a ≤ b) (F : ℝ × ℝ → ℝ)
+    (hF : Continuous (fun p : ℝ × ℝ => F (max a (min p.1 b), p.2)))
+    {c : ℝ → ℝ} (hc : AEStronglyMeasurable c (volume.restrict (uIoc a b))) :
+    AEStronglyMeasurable (fun t => F (t, c t)) (volume.restrict (uIoc a b)) := by
+  have hid : AEStronglyMeasurable (fun t : ℝ => t) (volume.restrict (uIoc a b)) :=
+    continuous_id.aestronglyMeasurable
+  have hm : AEStronglyMeasurable (fun t => F (max a (min t b), c t))
+      (volume.restrict (uIoc a b)) :=
+    hF.comp_aestronglyMeasurable (hid.prodMk hc)
+  have he : (fun t => F (max a (min t b), c t)) =ᵐ[volume.restrict (uIoc a b)]
+      (fun t => F (t, c t)) := by
+    filter_upwards [ae_restrict_mem measurableSet_uIoc] with t ht
+    have ht' : t ∈ Ioc a b := by simpa only [uIoc_of_le hab] using ht
+    rw [min_eq_left ht'.2, max_eq_right ht'.1.le]
+  exact hm.congr he
+
 /-- Measurability follows from joint continuity in the time and constant
 parameters, without requiring a continuous reference speed. -/
 theorem aestronglyMeasurable_circleSubtractConstantSobolevNorm
@@ -61,17 +79,10 @@ theorem aestronglyMeasurable_circleSubtractConstantSobolevNorm
     (hc : AEStronglyMeasurable c (volume.restrict (uIoc a b))) (s : ℕ) :
     AEStronglyMeasurable (fun t => circleRealSobolevNorm (s : ℝ)
       (circleSubtractConstantJet (f t) (c t) 0)) (volume.restrict (uIoc a b)) := by
-  have hparam := continuous_circleSubtractConstantSobolevNorm_clamped f hab hf hderiv s
-  have hid : AEStronglyMeasurable (fun t : ℝ => t) (volume.restrict (uIoc a b)) :=
-    continuous_id.aestronglyMeasurable
-  have hm : AEStronglyMeasurable (fun t => circleRealSobolevNorm (s : ℝ)
-      (circleSubtractConstantJet (f (max a (min t b))) (c t) 0))
-      (volume.restrict (uIoc a b)) :=
-    hparam.comp_aestronglyMeasurable (hid.prodMk hc)
-  apply hm.congr
-  filter_upwards [ae_restrict_mem measurableSet_uIoc] with t ht
-  have ht' : t ∈ Ioc a b := by simpa only [uIoc_of_le hab] using ht
-  rw [min_eq_left ht'.2, max_eq_right ht'.1.le]
+  exact aestronglyMeasurable_clamped_parameter_graph hab
+    (fun p : ℝ × ℝ => circleRealSobolevNorm (s : ℝ)
+      (circleSubtractConstantJet (f p.1) p.2 0))
+    (continuous_circleSubtractConstantSobolevNorm_clamped f hab hf hderiv s) hc
 
 /-- Every actual finite-order Sobolev norm is time integrable for the
 difference between a continuous smooth circle family and an integrable

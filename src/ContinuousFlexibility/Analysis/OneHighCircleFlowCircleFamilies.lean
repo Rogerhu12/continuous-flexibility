@@ -98,6 +98,7 @@ theorem continuousOn_circleFlowDefectSobolevNorm (s : ℕ) :
 theorem circleFlow_composedSpeed_periodic {t : ℝ} (ht : t ∈ Icc a b) :
     Function.Periodic (fun θ => G (t, Θ (t, θ))) P := by
   intro θ
+  dsimp only
   rw [circleFlow_lift_add hG hperiod hΘ hinit hflow ht θ, hperiod t]
 
 theorem circleFlow_contDiff_composedSpeed_angle {t : ℝ} (ht : t ∈ Icc a b) :

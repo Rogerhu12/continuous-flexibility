@@ -90,7 +90,7 @@ theorem circleLift_sobolev_comp_le_step (u : ℝ → ℝ) (hp : Periodic u P)
     exact circle_real_sobolevNorm_derivative_le U hU 3 1
   have hDU1 : circleRealSobolevNorm 1 (DU 0) ≤ Y := by
     rw [hDUzero]
-    simpa only [Nat.cast_one] using
+    simpa only [Y, Nat.cast_one, Nat.cast_ofNat] using
       (circle_real_sobolevNorm_derivative_le U hU 1 1).trans
         (circle_real_sobolevNorm_mono_of_derivatives U hU (show 2 ≤ 3 by omega))
   have hYle : Y ≤ A :=

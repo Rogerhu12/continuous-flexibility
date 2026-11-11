@@ -31,6 +31,7 @@ include hG hperiod hΘ hinit hflow
 theorem circleFlow_displacement_periodic {t : ℝ} (ht : t ∈ Icc a b) :
     Function.Periodic (fun θ => Θ (t, θ) - θ) P := by
   intro θ
+  dsimp only
   rw [circleFlow_lift_add hG hperiod hΘ hinit hflow ht θ]
   ring
 
