@@ -216,13 +216,21 @@ def controlGeometryConditions (D : ReferenceData) (S : PhysicalSpacesData)
   (∀ r ∈ Ioo D.a D.b, deriv D.w r < 0 →
     ∃ m, r ∈ Ioo (C.left m) (C.right m)) ∧
   (∀ m, ContDiff ℝ ∞ (C.control m) ∧ HasCompactSupport (C.control m) ∧
-    Function.support (C.control m) ⊆ Ioo (C.left m) (C.right m)) ∧
+    tsupport (C.control m) ⊆ Ioo (C.left m) (C.right m)) ∧
   LocallyFinite (fun m => {r : Ioo D.a D.b | (r : ℝ) ∈ Function.support (C.control m)}) ∧
   (∀ m, C.travel m = ∫ r in C.left m..C.right m,
     Real.sqrt (-deriv D.w r / (r * D.w r))) ∧
   (∀ m, HasDerivAt (fun t : ℝ => ∫ r in C.left m..C.right m,
       Real.sqrt (-deriv (fun s => D.w s * Real.exp (t * C.control m s)) r /
         (r * (D.w r * Real.exp (t * C.control m r))))) 1 0)
+
+/-- Passing to ordinary support preserves the component inclusion. -/
+theorem controlGeometryConditions.support_subset
+    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
+    (hC : controlGeometryConditions D S C) (m : ℕ) :
+    Function.support (C.control m) ⊆ Ioo (C.left m) (C.right m) := by
+  obtain ⟨_, _, _, _, _, hcontrol, _⟩ := hC
+  exact (subset_tsupport (C.control m)).trans (hcontrol m).2.2
 
 def ordinaryFlowConditions (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (U : Set (AnnularState S × ℝ)) : Prop :=

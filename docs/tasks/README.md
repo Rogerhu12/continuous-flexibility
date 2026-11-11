@@ -23,6 +23,9 @@ Read this section every time you check the rules. A notice is removed when it is
   `RadialCellIntegrable` (`n01a_radialCellIntegrable_sub`, `cell_integrable_iff`, ...) need
   `memLp_two_iff_integrable_sq` with the measurability you already assume. Mark ready again when
   CI is green on the merge with current `main`.
+  Since then N01b (merged) also changed `controlGeometryConditions` (`Statements/Nonlinear.lean`):
+  the control support clause is now `tsupport (C.control m) ⊆ Ioo (C.left m) (C.right m)`, so the
+  controls N01a constructs must satisfy the strict inclusion.
 
 ## Start
 
@@ -203,6 +206,20 @@ Then open a draft pull request into `main` titled `<Task>`.
    whose branch does not exist. Claim it as above and continue. Do not wait for a review.
 3. If your own task turned out to need a sub-blueprint, its pieces go to the top of the candidates:
    push the sub-blueprint first, so that they can be claimed.
+4. **If every task here has a branch, switch to the research repository `Rogerhu12/math-research`.**
+   The author has reserved six topics there for sessions that finish here. Take the first of them,
+   in this order, whose row in `QUEUE.md` still says 待领:
+   `topics/primes-n2-plus-1`, `topics/primes-4x3-27y2`, `topics/hodge-abelian-varieties`,
+   `topics/abelian-surface-torsion-uniform`, `topics/selberg-eigenvalue-conjecture`,
+   `topics/ramsey-r55`.
+   - Check access first: `git ls-remote https://github.com/Rogerhu12/math-research.git HEAD`. If it
+     fails, your credentials do not cover that repository: write "no access to math-research" at the
+     end of your pull request's final report and stop; the lead will tell the author.
+   - Clone it, pull `main`, read its root `README.md` and the topic's `README.md`, change the topic's
+     row in `QUEUE.md` to 进行中（会话名/日期）, push, and start the research. From then on follow
+     that repository's rules, not these.
+   - Never write a token into any file, commit, log, HANDOFF or note, and never repeat it in a reply.
+     Do not upload PDFs, do not render pages as images, keep each file under 5 MB.
 
 ## Final report in the pull request
 

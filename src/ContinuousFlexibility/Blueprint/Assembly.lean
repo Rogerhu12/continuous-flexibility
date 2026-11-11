@@ -107,7 +107,11 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
-  have hN01 : N01Statement := N01c (N01b (N01a hR12 hW01 hSpaces.1) hS05)
+  -- Retain the strict support certificates through the reference/control
+  -- construction and the common-neighbourhood flow construction.
+  have hN01a : N01aStatement := N01a hR12 hW01 hSpaces.1
+  have hN01b : N01bStatement := N01b hN01a hS05
+  have hN01 : N01Statement := N01c hN01b
   have hN03 : N03Statement := N02N03 hN01 hS05
   have hN04 : N04Statement := N04_of_nodes (N04Coordinates (N04b (N04a hN03))) N04Root N04Cubic N04Transmission
   have hN05 : N05Statement := N05 hN04
