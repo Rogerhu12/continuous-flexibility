@@ -101,7 +101,7 @@ theorem planeJacobian_reflected_travel
   have hd := ((hasFDerivAt_const (c := c) (x := p)).fun_sub
     hF.hasFDerivAt.fst).prodMk hF.hasFDerivAt.snd
   simp only [planeJacobian, hd.fderiv, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.sub_apply, ContinuousLinearMap.zero_apply,
+    ContinuousLinearMap.sub_apply, ContinuousLinearMap.zero_apply, ContinuousLinearMap.neg_apply,
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst',
     ContinuousLinearMap.coe_snd', zero_sub]
   ring

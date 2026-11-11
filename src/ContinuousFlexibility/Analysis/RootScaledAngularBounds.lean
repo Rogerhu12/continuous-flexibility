@@ -136,7 +136,7 @@ theorem rootScaledAngularProduct_bounds
   have hu0 : 0 ≤ 4 * Real.exp Λ := mul_nonneg (by norm_num) (Real.exp_pos _).le
   rw [rootAngularProduct_eq_characteristicProduct hG.1 Real.pi_ne_zero hχperiod hφperiod
     (p := (x, θ)) hx.1]
-  simpa only [pow_two] using
+  simpa only [Set.mem_Icc, pow_two] using
     And.intro (mul_le_mul hu.1 hv.1 hl (hl.trans hu.1))
       (mul_le_mul hu.2 hv.2 (hl.trans hv.1) hu0)
 
