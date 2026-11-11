@@ -18,6 +18,7 @@ namespace ContinuousFlexibility.Statements
 open Set Function ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -45,13 +46,15 @@ theorem coupledRecoveryRegularFormula_smoothTameOn
     (hU : IsOpen U) (hsub : U ⊆ sectorNeighborhood S base ε ε)
     (hinverse : ∃ l b, IsTameLinear (S.circle (3 / 4 : ℝ)).grading
       (S.circle (3 / 4 : ℝ)).grading R.inverse l b)
-    (hcontrol : SmoothTameOn
-      (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))))
-      (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))) (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle (hS.2.1 (3 / 4 : ℝ)) =>
-        coupledConstantFeedbackInverse (hS.2.1 (3 / 4 : ℝ)) B G
-          (liftSectorParameter S C z.1) z.2))
+    (hcontrol :
+      let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
+      SmoothTameOn
+        (pairGrading (pairGrading (sectorGrading S) realGrading)
+          (coupledConstantCircleGrading hM))
+        (coupledConstantCircleGrading hM) (U ×ˢ univ)
+        (fun z : (StateDirections S × ℝ) × CoupledConstantCircle hM =>
+          coupledConstantFeedbackInverse hM B G
+            (liftSectorParameter S C z.1) z.2))
     (hchart : SmoothTameOn
       (pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading)
       (S.circle (3 / 4 : ℝ)).grading (U ×ˢ univ)
@@ -63,7 +66,7 @@ theorem coupledRecoveryRegularFormula_smoothTameOn
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         coupledRecoveryRegularFormula (hS.2.1 (3 / 4 : ℝ)) B G
           (liftSectorParameter S C z.1) z.2 R) := by
-  let hM := hS.2.1 (3 / 4 : ℝ)
+  let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
   let p := pairGrading (sectorGrading S) realGrading
   let a := pairGrading p (residualGrading S)
   let c := (S.circle (3 / 4 : ℝ)).grading
@@ -209,13 +212,15 @@ theorem coupledRecoveredInverseData_smoothTameOn
     (hU : IsOpen U) (hsub : U ⊆ sectorNeighborhood S base ε ε)
     (hsmall : ∀ z ∈ U,
       ‖z.2 • controlFeedback S B G (liftSectorParameter S C z)‖ < (1 / 2 : ℝ))
-    (hcontrol : SmoothTameOn
-      (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))))
-      (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))) (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle (hS.2.1 (3 / 4 : ℝ)) =>
-        coupledConstantFeedbackInverse (hS.2.1 (3 / 4 : ℝ)) B G
-          (liftSectorParameter S C z.1) z.2))
+    (hcontrol :
+      let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
+      SmoothTameOn
+        (pairGrading (pairGrading (sectorGrading S) realGrading)
+          (coupledConstantCircleGrading hM))
+        (coupledConstantCircleGrading hM) (U ×ˢ univ)
+        (fun z : (StateDirections S × ℝ) × CoupledConstantCircle hM =>
+          coupledConstantFeedbackInverse hM B G
+            (liftSectorParameter S C z.1) z.2))
     (hchart : SmoothTameOn
       (pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading)
       (S.circle (3 / 4 : ℝ)).grading (U ×ˢ univ)

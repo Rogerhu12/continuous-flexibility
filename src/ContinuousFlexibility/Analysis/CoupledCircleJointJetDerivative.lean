@@ -80,7 +80,8 @@ theorem coupledKernelBaseJoint_hasLineDerivAt (n : ℕ) (z h : X × X) (w : Fin 
         (y.1, (Fin.cons y.2 w : Fin (n + 1) → X))) :=
       continuous_fst.prodMk
         (continuous_snd.finCons (A := fun _ : Fin (n + 1) => X) continuous_const)
-    simpa only [A, ContinuousLinearMap.coe_coe, coupledKernelOuterLinear_apply] using
+    simpa only [Function.comp_def, A, ContinuousLinearMap.coe_coe,
+      coupledKernelOuterLinear_apply] using
       (hK n).comp hm
   have hd : HasProjectiveLineDerivAt (fun ψ => (A ψ).toLinearMap z.2)
       (K (n + 1) z.1 (Fin.cons z.2 (Fin.cons h.1 w))) z.1 h.1 := by
@@ -174,9 +175,22 @@ theorem coupledKernelJointJet_hasLineDerivAt (n : ℕ) (z h : X × X)
         (∑ i : Fin (n + 1), K (n + 1) z.1 (Fin.cons (w i).2
           (Fin.cons h.1 (fun j => (w (i.succAbove j)).1)))) z h :=
       HasProjectiveCurveDerivAt.finset_sum Finset.univ (fun i _ => hterm i)
-    simpa only [HasProjectiveLineDerivAt, coupledKernelJointJet_succ_apply,
-      coupled_cons_fst, Fin.sum_univ_succ, Fin.cons_zero, Fin.cons_succ,
-      Fin.zero_succAbove, coupled_cons_omit, add_assoc] using hbase.add hsum
+    have hfun : (fun y : X × X => coupledKernelJointJet K (n + 1) y w) =
+        (fun y : X × X => K (n + 1) y.1 (Fin.cons y.2 (fun i => (w i).1)) +
+          ∑ i : Fin (n + 1), K n y.1
+            (Fin.cons (w i).2 (fun j => (w (i.succAbove j)).1))) :=
+      funext (fun y => coupledKernelJointJet_succ_apply K n y w)
+    have hvalue : coupledKernelJointJet K (n + 1 + 1) z (Fin.cons h w) =
+        (K (n + 1 + 1) z.1 (Fin.cons z.2 (Fin.cons h.1 (fun i => (w i).1))) +
+          K (n + 1) z.1 (Fin.cons h.2 (fun i => (w i).1))) +
+          ∑ i : Fin (n + 1), K (n + 1) z.1 (Fin.cons (w i).2
+            (Fin.cons h.1 (fun j => (w (i.succAbove j)).1))) := by
+      rw [coupledKernelJointJet_succ_apply, coupled_cons_fst, Fin.sum_univ_succ]
+      simp only [Fin.cons_zero, Fin.cons_succ, Fin.zero_succAbove,
+        coupled_cons_omit, add_assoc]
+    exact (congrArg₂ (fun (f : X × X → Y) (d : Y) =>
+      HasProjectiveLineDerivAt f d z h) hfun hvalue).mpr
+        (HasProjectiveLineDerivAt.add hbase hsum)
 
 def coupledKernelSmoothDirections :
     Statements.SmoothDirections univ (fun z : X × X => K 0 z.1 (Fin.cons z.2 Fin.elim0)) where

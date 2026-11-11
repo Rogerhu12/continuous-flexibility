@@ -57,18 +57,25 @@ theorem coupled_logProfile_physicalNorm_bound
       physicalNorm T coupledWeakProfileWeight s
           (coupledLogProfileFieldCLM hS hN.2.2.2.1 v) ≤
         K * stateGrading S (s + (base + loss)) v := by
-  obtain ⟨K, hK, hKb⟩ := coupledRadialFamilyField_physicalNorm_bound hT
+  let hbound := coupledRadialFamilyField_physicalNorm_bound hT
     (fun u => (coupled_contDiff_stateLogProfile hT hS hN u).contDiffOn)
     (P := fun n u => stateGrading S (n + (base + loss)) u)
     (fun n u => apply_nonneg _ _)
     (fun _ _ h u => solve_stateGrading_monotone S (Nat.add_le_add_right h _) u)
     (coupled_logProfile_decay_jet_bound hT hS hN) s
+  let K : ℝ := hbound.choose
+  have hK : 0 ≤ K := hbound.choose_spec.1
+  let hKb := hbound.choose_spec.2
   refine ⟨K, hK, fun v => ?_⟩
   have hfield : coupledLogProfileFieldCLM hS hN.2.2.2.1 v =
       coupledRadialFamilyField (coupled_stateLogProfile D S C) v :=
     funext fun p => coupledLogProfileFieldCLM_apply hS hN.2.2.2.1 v p
-  rw [hfield]
-  exact hKb v
+  calc
+    physicalNorm T coupledWeakProfileWeight s (coupledLogProfileFieldCLM hS hN.2.2.2.1 v) =
+        physicalNorm T coupledWeakProfileWeight s
+          (coupledRadialFamilyField (coupled_stateLogProfile D S C) v) :=
+      congrArg (physicalNorm T coupledWeakProfileWeight s) hfield
+    _ ≤ K * stateGrading S (s + (base + loss)) v := hKb v
 
 def coupledLogProfileLift
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -86,8 +93,13 @@ theorem coupledLogProfileLift_decode
     (hN : N01Properties D T S C base loss ε) (v : AnnularState S) (p : PolarPoint) :
     (S.height coupledWeakProfileWeight).decode (coupledLogProfileLift hT hS hN v) p =
       coupled_stateLogProfile D S C v p.1 := by
-  rw [coupledLogProfileLift, SobolevModelData.decode_liftCLM]
-  exact coupledLogProfileFieldCLM_apply hS hN.2.2.2.1 v p
+  exact (congrFun (SobolevModelData.decode_liftCLM (hS.1 coupledWeakProfileWeight)
+    (coupledLogProfileFieldCLM hS hN.2.2.2.1).toLinearMap
+    (coupled_logProfile_heightMember hT hS hN)
+    (p := stateGrading S) (base := 0) (loss := base + loss)
+    (solve_stateGrading_withSeminorms S)
+    (fun s _ => coupled_logProfile_physicalNorm_bound hT hS hN s) v) p).trans
+      (coupledLogProfileFieldCLM_apply hS hN.2.2.2.1 v p)
 
 theorem coupledLogProfileLift_isTame
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

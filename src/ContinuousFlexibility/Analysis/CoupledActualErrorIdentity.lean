@@ -1,10 +1,11 @@
 import ContinuousFlexibility.Analysis.CoupledRecoveredFirstJet
+import Mathlib.Analysis.Calculus.FDeriv.Congr
 
 /-!
 # Specializing the independent error to the actual residual
 
 The independent formulas are specialized only here. Equality of the scalar
-source on each complete angular slice identifies its angular divergence;
+source on the open annulus identifies its actual Fréchet angular divergence;
 the N08 circle identity identifies the return residual in the other row.
 -/
 
@@ -13,6 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
+open scoped Topology
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -26,12 +28,13 @@ private theorem coupled_scalarCorrectionError_congr_annulus
     (hr : ∀ p ∈ annularOpen D, r p = r' p)
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     scalarCorrectionError F r η p = scalarCorrectionError F r' η p := by
-  have hflux : (fun θ => F (p.1, θ) * r (p.1, θ) * angularPartial η (p.1, θ)) =
-      (fun θ => F (p.1, θ) * r' (p.1, θ) * angularPartial η (p.1, θ)) := by
-    funext θ
-    exact congrArg (fun a => F (p.1, θ) * a * angularPartial η (p.1, θ))
-      (hr (p.1, θ) ⟨hp.1, mem_univ _⟩)
-  exact congrArg (fun f : ℝ → ℝ => deriv f p.2) hflux
+  have hmem : annularOpen D ∈ 𝓝 p := (isOpen_Ioo.prod isOpen_univ).mem_nhds hp
+  have hflux : (fun y : PolarPoint => F y * r y * angularPartial η y) =ᶠ[𝓝 p]
+      (fun y : PolarPoint => F y * r' y * angularPartial η y) := by
+    filter_upwards [hmem] with y hy
+    exact congrArg (fun a : ℝ => F y * a * angularPartial η y) (hr y hy)
+  exact congrArg (fun A : PolarPoint →L[ℝ] ℝ => A (0, 1))
+    (hflux.fderiv_eq (𝕜 := ℝ))
 
 theorem coupled_actualError_scalar_identity
     (h8 : N08Properties D T S C R G P B base loss ε)

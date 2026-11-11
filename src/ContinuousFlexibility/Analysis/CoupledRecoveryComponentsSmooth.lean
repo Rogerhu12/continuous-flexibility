@@ -180,6 +180,103 @@ theorem coupled_recoveredConstantControl_smoothTameOn
   exact coupled_recovery_constant_projection_smoothTameOn hM
     (coupled_recoveredKappa_smoothTameOn h9)
 
+private theorem coupled_recovery_gradings (S : PhysicalSpacesData) :
+    Monotone (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S)) ∧
+    WithSeminorms (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S)) ∧
+    WithSeminorms (pairGrading (sectorGrading S) realGrading) := by
+  have hp := tamePairGrading_monotone
+    (solve_sectorGrading_monotone S) weighted_realGrading_monotone
+  have htp := withSeminorms_pairGrading
+    (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
+  have hr : Monotone (residualGrading S) := tamePairGrading_monotone
+    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
+    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
+  have htr : WithSeminorms (residualGrading S) := withSeminorms_pairGrading
+    (coupled_sourceGrading_withSeminorms S)
+    ((Topology.IsInducing.subtypeVal).withSeminorms
+      (f := (evenCircleSubmodule S).subtype) (withSeminorms_graded _ _))
+  exact ⟨tamePairGrading_monotone hp hr, withSeminorms_pairGrading htp htr, htp⟩
+
+private theorem coupled_recovery_parameterProjection_smoothTameOn
+    (S : PhysicalSpacesData) (base : ℕ) (ε q0 : ℝ) :
+    SmoothTameOn
+      (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+      (pairGrading (sectorGrading S) realGrading) (sectorNeighborhood S base ε q0 ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.1) :=
+  smoothTameOn_continuousLinear_on
+    ((coupled_sectorNeighborhood_isOpen S base ε q0).prod isOpen_univ)
+    (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) (ResidualSpace S))
+    (scalar_pair_fst_isTame (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+
+private theorem coupled_recovery_circleInput_smoothTameOn
+    (S : PhysicalSpacesData) (base : ℕ) (ε q0 : ℝ) :
+    SmoothTameOn
+      (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+      (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε q0 ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.2.2.val) := by
+  have hy : SmoothTameOn
+      (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+      (residualGrading S) (sectorNeighborhood S base ε q0 ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.2) :=
+    smoothTameOn_continuousLinear_on
+      ((coupled_sectorNeighborhood_isOpen S base ε q0).prod isOpen_univ)
+      (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) (ResidualSpace S))
+      (scalar_pair_snd_isTame (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+  exact coupled_recovery_subtype_smoothTameOn (evenCircleSubmodule S)
+    (coupled_recovery_snd_smoothTameOn hy)
+
+private theorem coupled_recovery_heightRow_smoothTameOn
+    (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
+    (hRef : referenceStateConditions D S C)
+    (h8 : N08Properties D T S C R G P B base loss ε)
+    (h9 : N09Properties D T S C R G B N V base ε q0) :
+    SmoothTameOn
+      (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+      (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε q0 ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
+        z.1.2 • B.heightRow (liftSectorParameter S C z.1)
+          (V.V (liftSectorParameter S C z.1) z.2).1) := by
+  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
+    (hM.2.1 n).isComplete.completeSpace_coe
+  let hg := coupled_recovery_gradings S
+  have hU := coupled_sectorNeighborhood_isOpen S base ε q0
+  have hsub : sectorNeighborhood S base ε q0 ⊆ sectorNeighborhood S base ε ε :=
+    coupled_sectorNeighborhood_mono le_rfl le_rfl h9.2.1
+  have hrow := smoothTameOn_mono (coupled_scaledHeightRow_smoothTameOn hRef h8)
+    (hU.prod isOpen_univ) (Set.prod_mono hsub (subset_refl (univ : Set (HeightPair S))))
+  exact coupled_recovery_parameterApply_smoothTameOn hg.1 hg.2.1 hg.2.2
+    (coupled_heightPairGrading_withSeminorms S)
+    (coupled_recovery_parameterProjection_smoothTameOn S base ε q0)
+    (coupled_recoveredHeight_smoothTameOn h9) hrow (fun z hz => hz.1)
+
+private theorem coupled_recovery_circleColumn_smoothTameOn
+    (hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
+    (hRef : referenceStateConditions D S C)
+    (h8 : N08Properties D T S C R G P B base loss ε)
+    (h9 : N09Properties D T S C R G B N V base ε q0) :
+    SmoothTameOn
+      (pairGrading (pairGrading (sectorGrading S) realGrading) (residualGrading S))
+      (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε q0 ×ˢ univ)
+      (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
+        B.circleColumn (liftSectorParameter S C z.1)
+          (V.V (liftSectorParameter S C z.1) z.2).2.2.1) := by
+  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
+    (hM.2.1 n).isComplete.completeSpace_coe
+  let hg := coupled_recovery_gradings S
+  have hU := coupled_sectorNeighborhood_isOpen S base ε q0
+  have hsub : sectorNeighborhood S base ε q0 ⊆ sectorNeighborhood S base ε ε :=
+    coupled_sectorNeighborhood_mono le_rfl le_rfl h9.2.1
+  have hcolumn := smoothTameOn_mono (coupled_constantCircleColumn_smoothTameOn hM hRef h8)
+    (hU.prod isOpen_univ)
+    (Set.prod_mono hsub (subset_refl (univ : Set (CoupledConstantCircle hM))))
+  have hconstant := coupled_recovery_parameterApply_smoothTameOn hg.1 hg.2.1 hg.2.2
+    (coupledConstantCircleGrading_withSeminorms hM)
+    (coupled_recovery_parameterProjection_smoothTameOn S base ε q0)
+    (coupled_recoveredConstantControl_smoothTameOn hM h9) hcolumn (fun z hz => hz.1)
+  exact smoothTameOn_congr hconstant (fun z hz =>
+    congrArg (B.circleColumn (liftSectorParameter S C z.1))
+      (coupledRecoveredConstantComponent_val hM h9 hz.1 z.2))
+
 /-- The actual circle solution before the final chart increment is smooth
 tame for any inverse satisfying N09. -/
 theorem coupled_recoveredCircleSolution_smoothTameOn
@@ -195,68 +292,20 @@ theorem coupled_recoveredCircleSolution_smoothTameOn
           (V.V (liftSectorParameter S C z.1) z.2).1 -
           B.circleColumn (liftSectorParameter S C z.1)
             (V.V (liftSectorParameter S C z.1) z.2).2.2.1)) := by
-  let hM := hS.2.1 (3 / 4 : ℝ)
-  let U := sectorNeighborhood S base ε q0
-  let p := pairGrading (sectorGrading S) realGrading
-  let a := pairGrading p (residualGrading S)
-  let c := (S.circle (3 / 4 : ℝ)).grading
-  have hp : Monotone p := tamePairGrading_monotone
-    (solve_sectorGrading_monotone S) weighted_realGrading_monotone
-  have htp : WithSeminorms p := withSeminorms_pairGrading
-    (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
-  have hr : Monotone (residualGrading S) := tamePairGrading_monotone
-    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
-    (fun _ _ h u => gradedSeminorm_monotone _ _ h u.val)
-  have htr : WithSeminorms (residualGrading S) := withSeminorms_pairGrading
-    (coupled_sourceGrading_withSeminorms S)
-    ((Topology.IsInducing.subtypeVal).withSeminorms
-      (f := (evenCircleSubmodule S).subtype) (withSeminorms_graded _ _))
-  have ha := tamePairGrading_monotone hp hr
-  have hta := withSeminorms_pairGrading htp htr
-  have htc : WithSeminorms c := withSeminorms_graded _ _
+  let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
   letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
     (hM.2.1 n).isComplete.completeSpace_coe
-  have hU : IsOpen U := coupled_sectorNeighborhood_isOpen S base ε q0
-  have hsub : U ⊆ sectorNeighborhood S base ε ε :=
-    coupled_sectorNeighborhood_mono le_rfl le_rfl h9.2.1
-  have hz : SmoothTameOn a p (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.1) :=
-    smoothTameOn_continuousLinear_on (hU.prod isOpen_univ)
-      (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) (ResidualSpace S))
-      (scalar_pair_fst_isTame p (residualGrading S))
-  have hy : SmoothTameOn a (residualGrading S) (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.2) :=
-    smoothTameOn_continuousLinear_on (hU.prod isOpen_univ)
-      (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) (ResidualSpace S))
-      (scalar_pair_snd_isTame p (residualGrading S))
-  have hyCircle : SmoothTameOn a c (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.2.2.val) :=
-    coupled_recovery_subtype_smoothTameOn (evenCircleSubmodule S)
-      (coupled_recovery_snd_smoothTameOn hy)
-  have hrow := smoothTameOn_mono (coupled_scaledHeightRow_smoothTameOn hRef h8)
-    (hU.prod isOpen_univ) (Set.prod_mono hsub (subset_refl _))
-  have hrowη := coupled_recovery_parameterApply_smoothTameOn ha hta htp
-    (coupled_heightPairGrading_withSeminorms S) hz
-    (coupled_recoveredHeight_smoothTameOn h9) hrow (fun z hz => hz.1)
-  have hcolumn := smoothTameOn_mono (coupled_constantCircleColumn_smoothTameOn hM hRef h8)
-    (hU.prod isOpen_univ) (Set.prod_mono hsub (subset_refl _))
-  have hcolumnκ := coupled_recovery_parameterApply_smoothTameOn ha hta htp
-    (coupledConstantCircleGrading_withSeminorms hM) hz
-    (coupled_recoveredConstantControl_smoothTameOn hM h9) hcolumn (fun z hz => hz.1)
-  have hcolumnActual : SmoothTameOn a c (U ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
-        B.circleColumn (liftSectorParameter S C z.1)
-          (V.V (liftSectorParameter S C z.1) z.2).2.2.1) := by
-    apply smoothTameOn_congr hcolumnκ
-    intro z hz
-    exact congrArg (B.circleColumn (liftSectorParameter S C z.1))
-      (coupledRecoveredConstantComponent_val hM h9 hz.1 z.2)
+  let hg := coupled_recovery_gradings S
   let hinverse := h2.2.2.2.2.2.2.2.2.2.1
   let li : ℕ := hinverse.choose
   let hbase := hinverse.choose_spec
   let bi : ℕ := hbase.choose
-  have hi : IsTameLinear c c R.inverse li bi := hbase.choose_spec
-  exact coupled_recovery_inverse_remainder_smoothTameOn ha hta htc
-    (gradedSeminorm_monotone _ _) hyCircle hrowη hcolumnActual R.inverse hi
+  have hi : IsTameLinear (S.circle (3 / 4 : ℝ)).grading (S.circle (3 / 4 : ℝ)).grading
+      R.inverse li bi := hbase.choose_spec
+  exact coupled_recovery_inverse_remainder_smoothTameOn hg.1 hg.2.1
+    (withSeminorms_graded _ _) (gradedSeminorm_monotone _ _)
+    (coupled_recovery_circleInput_smoothTameOn S base ε q0)
+    (coupled_recovery_heightRow_smoothTameOn hM hRef h8 h9)
+    (coupled_recovery_circleColumn_smoothTameOn hM hRef h8 h9) R.inverse hi
 
 end ContinuousFlexibility.Statements

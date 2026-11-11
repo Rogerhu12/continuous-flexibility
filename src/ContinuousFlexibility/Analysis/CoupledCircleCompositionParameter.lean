@@ -62,6 +62,12 @@ private theorem coupled_linear_decode_affine {E : Type*} [AddCommGroup E] [Modul
     L (ψ + t • u) m θ = L ψ m θ + t * L u m θ := by
   simp only [map_add, map_smul, Pi.add_apply, Pi.smul_apply, smul_eq_mul]
 
+private theorem coupled_scalar_prod_cons {E : Type*} {k : ℕ}
+    (f : E → ℝ) (u : E) (w : Fin k → E) :
+    (∏ i : Fin (k + 1), f ((Fin.cons u w : Fin (k + 1) → E) i)) =
+      f u * ∏ i, f (w i) :=
+  Fin.prod_univ_succ (fun i : Fin (k + 1) => f ((Fin.cons u w : Fin (k + 1) → E) i))
+
 variable {T : MaterialData} {γ : ℝ} {M : CircleModelData}
 
 private theorem coupledCircleKernelField_affine_eq (r k : ℕ)
@@ -69,8 +75,9 @@ private theorem coupledCircleKernelField_affine_eq (r k : ℕ)
     coupledCircleKernelField M r k (ψ + t • u) v w m θ =
       iteratedDeriv r (M.decode v m)
         (θ + (M.decode ψ m θ + t * M.decode u m θ)) * ∏ i, M.decode (w i) m θ := by
-  unfold coupledCircleKernelField
-  rw [coupled_linear_decode_affine M.decode ψ u t m θ]
+  exact congrArg (fun a : ℝ =>
+    iteratedDeriv r (M.decode v m) (θ + a) * ∏ i, M.decode (w i) m θ)
+      (coupled_linear_decode_affine M.decode ψ u t m θ)
 
 theorem coupledCircleKernelField_affine_contDiff
     (hM : IsCircleModel T γ M) (r k : ℕ)
@@ -104,11 +111,14 @@ theorem coupledCircleKernelField_affine_hasDerivAt
       iteratedDeriv (r + 1) (M.decode v m)
         (θ + (M.decode ψ m θ + t * M.decode u m θ)) *
           (M.decode u m θ * ∏ i, M.decode (w i) m θ) := by
-    rw [coupledCircleKernelField_affine_eq]
-    simp only [Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ]
-  rw [he, hd]
-  exact coupled_scalar_affine_hasDerivAt ((hM.2.2.2.1 v).1 m).1 r
-    (M.decode ψ m θ) (M.decode u m θ) (∏ i, M.decode (w i) m θ) θ t
+    exact (coupledCircleKernelField_affine_eq (r + 1) (k + 1)
+      ψ u v (Fin.cons u w) t m θ).trans
+        (congrArg (fun a : ℝ => iteratedDeriv (r + 1) (M.decode v m)
+          (θ + (M.decode ψ m θ + t * M.decode u m θ)) * a)
+            (coupled_scalar_prod_cons (fun a : M.Space => M.decode a m θ) u w))
+  exact (congrArg₂ (fun (f : ℝ → ℝ) (d : ℝ) => HasDerivAt f d t) he hd).mpr
+    (coupled_scalar_affine_hasDerivAt ((hM.2.2.2.1 v).1 m).1 r
+      (M.decode ψ m θ) (M.decode u m θ) (∏ i, M.decode (w i) m θ) θ t)
 
 theorem coupledCircleKernelField_weightedJet_affine_hasDerivAt
     (hM : IsCircleModel T γ M) (r k b c : ℕ)

@@ -38,7 +38,7 @@ private theorem coupled_regularizing_small_size_le_two
 
 section ParameterAlgebra
 
-variable {E : Type*} [AddCommGroup E] [Module ℝ E]
+variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
 
 private theorem coupled_regularizing_zero_small
     (q : ℕ → Seminorm ℝ E) (b : ℕ) {ε : ℝ} (hε : 0 < ε) :
