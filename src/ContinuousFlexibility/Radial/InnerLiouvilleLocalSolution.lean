@@ -73,6 +73,8 @@ theorem innerLiouvilleLocalizedSolution
   have hunit (i : Fin 2) := innerLiouvilleLocalizedUnit_solution D hB M hlam hR hs hp
     hcore hw U hU hv hDw j hcoeff i
   choose dP vP hPdom hPtrace hPpot hProw hPweak using hunit
+  change (if B.bordered then ⟪col, Z.1⟫_ℝ = F.2 else Z.2 = 0 ∧ F.2 = 0) at hZrow
+  change (∀ i, if B.bordered then ⟪col, (P i).1⟫_ℝ = 0 else (P i).2 = 0) at hProw
   let qZ : InnerRadialH1Pair D := (Z.1, dZ)
   let qP : Fin 2 → InnerRadialH1Pair D := fun i => ((P i).1, dP i)
   let q : InnerRadialH1Pair D := qZ + (z 0 • qP 0 + z 1 • qP 1)

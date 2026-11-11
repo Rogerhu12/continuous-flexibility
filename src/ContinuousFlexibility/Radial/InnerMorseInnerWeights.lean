@@ -217,12 +217,12 @@ theorem innerMorseInnerInterfaceWeight_model (N K : ℕ) (a γ : ℝ)
   have hr : (innerModelChainPiece p).val < 2 * (2 * K + 1) := by
     simp only [innerModelChainPiece] <;> omega
   rcases (show i = 0 ∨ i = 1 by omega) with rfl | rfl
-  · dsimp only [innerMorseInnerInterfaceWeight]
-    rw [innerChainScalarRestriction_full_left _ _ _ hl]
-    exact innerMorseInnerCutWeight_model_left N K a γ p
-  · dsimp only [innerMorseInnerInterfaceWeight]
-    rw [innerChainScalarRestriction_full_right _ _ _ hr]
-    exact innerMorseInnerCutWeight_model_right N K a γ p
+  · exact (innerChainScalarRestriction_full_left _ _
+      (innerMorseInnerCutWeight N K a γ) hl).trans
+        (innerMorseInnerCutWeight_model_left N K a γ p)
+  · exact (innerChainScalarRestriction_full_right _ _
+      (innerMorseInnerCutWeight N K a γ) hr).trans
+        (innerMorseInnerCutWeight_model_right N K a γ p)
 
 /-- Closed model intervals see the same interpolation at their left
 cut, which belongs to the preceding half-open gap in the partition. -/

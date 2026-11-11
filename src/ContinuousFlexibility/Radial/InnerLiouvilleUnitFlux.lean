@@ -65,6 +65,7 @@ theorem innerLiouvilleLocalizedUnit_affineFlux (i k : Fin 2)
       (M.column i).p_regular hreg hnear hcoeff (M.column i).equation
       (innerBuffer_border_indicator hB)
   have hscalar : P.2 = Real.sqrt lam * s (bufferCut B i) * (M.column i).scalar := by
+    dsimp only [P]
     rw [innerLiouvilleUnitPoissonPair_apply]
   rw [← hscalar] at hsource
   have hm := morseCell_strictMonoOn hR (fun x hx => (hp x hx).2.1)
@@ -96,7 +97,8 @@ theorem innerLiouvilleLocalizedUnit_affineFlux (i k : Fin 2)
   simp only [Matrix.of_apply]
   by_cases hki : k = i
   · subst i
-    simp only [if_pos rfl, mul_one, innerLiouvilleBoundaryKappa, innerLiouvilleBoundaryDrift]
+    simp only [eq_self_iff_true, ite_true, mul_one,
+      innerLiouvilleBoundaryKappa, innerLiouvilleBoundaryDrift]
     field_simp [(hp (bufferCut B k) hk).2.2.ne']
     <;> ring
   · simp only [if_neg hki, if_neg (Ne.symm hki), mul_zero, sub_zero, zero_add]

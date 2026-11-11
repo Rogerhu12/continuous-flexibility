@@ -79,8 +79,11 @@ theorem innerRadialPhysicalRealization_norm_sq (x : W) :
 
 variable
   (hunique : ∀ p, InnerRadialPieceKernelUnique D G bordered j central column p)
-  (hex : ∀ F ξ p, Nonempty
-    (InnerRadialPieceSolution D hw G forcing rowSource bordered j central column F ξ p))
+  (hex : ∀ (F : InnerRadialPhysicalSource D G bordered)
+    (ξ : EuclideanSpace ℝ (Fin n)) (p : Fin (n + 1)), Nonempty
+      (InnerRadialPieceSolution D hw G
+        (innerRadialPhysicalForcing D G bordered) (innerRadialPhysicalRowLinear D G bordered)
+        bordered j central column F ξ p))
 
 local notation "Dir" =>
   innerRadialDirichletRealization D hw G forcing rowSource bordered j central column

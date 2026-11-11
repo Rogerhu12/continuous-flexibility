@@ -109,7 +109,9 @@ theorem innerSupportedWeightMultiplier_selfAdjoint
     (innerSupportedWeightMultiplier μ s hs bordered W hW C hWC)
     (innerBorderFieldMap μ (innerWeightMultiplier μ W hW C hWC))
   · intro F
-    simpa only [Submodule.coe_subtypeₗᵢ, Submodule.subtype_apply] using
+    have hsub (F' : HSrc) : (S).toSubmodule.subtypeₗᵢ F' = F'.val :=
+      (congrFun (Submodule.coe_subtypeₗᵢ _) F').trans (Submodule.subtype_apply F')
+    simpa only [hsub] using
       innerSupportedWeightMultiplier_apply μ s hs bordered W hW C hWC F
   · exact innerBorderFieldMap_selfAdjoint μ _
       (innerWeightMultiplier_selfAdjoint μ W hW C hWC)

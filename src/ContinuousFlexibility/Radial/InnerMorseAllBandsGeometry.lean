@@ -20,13 +20,17 @@ position, including the empty tail of the first band. -/
 theorem innerMorseInnerTailSlot_injective (K : ℕ) :
     Function.Injective (fun p : Bool × Fin K => innerMorseInnerTailSlot K p.1 p.2) := by
   rintro ⟨side, p⟩ ⟨side', q⟩ he
+  change innerMorseInnerTailSlot K side p = innerMorseInnerTailSlot K side' q at he
   have hv := congrArg Fin.val he
-  cases side <;> cases side' <;>
-    simp only [innerMorseInnerTailSlot, Bool.false_eq_true, ite_false, ite_true] at hv
-  · exact Prod.ext rfl (Fin.ext (by omega))
-  · omega
-  · omega
-  · exact Prod.ext rfl (Fin.ext (by omega))
+  cases side <;> cases side'
+  · change p.val = q.val at hv
+    exact Prod.ext rfl (Fin.ext hv)
+  · change p.val = K + 1 + q.val at hv
+    omega
+  · change K + 1 + p.val = q.val at hv
+    omega
+  · change K + 1 + p.val = K + 1 + q.val at hv
+    exact Prod.ext rfl (Fin.ext (by omega))
 
 /-- The actual finite model array consists exactly of the central model
 and the two tail arrays. No tail element exists when K is zero. -/
@@ -55,6 +59,8 @@ variable (D : ReferenceData) (hD : RadialProfileGeometry D) (center : Fin 2 → 
 theorem innerCentralOnlyChainGeometry_gap_left (g : Fin 2) :
     (innerCentralOnlyChainGeometry D hD center L R hL hR hleft hc hright).left
       (innerModelChainGap g) = if 0 < g.val then center 1 else L := by
+  change innerModelChainCuts (fun _ : Fin 1 => center) L R
+    (innerModelChainGap g).castSucc = if 0 < g.val then center 1 else L
   have hg := innerModelChainCuts_gap_left (fun _ : Fin 1 => center) L R g
   by_cases hp : 0 < g.val <;>
     simpa only [hp, dite_true, dite_false, ite_true, ite_false] using hg
@@ -62,6 +68,8 @@ theorem innerCentralOnlyChainGeometry_gap_left (g : Fin 2) :
 theorem innerCentralOnlyChainGeometry_gap_right (g : Fin 2) :
     (innerCentralOnlyChainGeometry D hD center L R hL hR hleft hc hright).right
       (innerModelChainGap g) = if g.val < 1 then center 0 else R := by
+  change innerModelChainCuts (fun _ : Fin 1 => center) L R
+    (innerModelChainGap g).succ = if g.val < 1 then center 0 else R
   have hg := innerModelChainCuts_gap_right (fun _ : Fin 1 => center) L R g
   by_cases hp : g.val < 1 <;>
     simpa only [hp, dite_true, dite_false, ite_true, ite_false] using hg

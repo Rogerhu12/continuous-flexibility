@@ -28,8 +28,11 @@ theorem innerGapAffineEnergy_physical_pair (D : ReferenceData)
   apply Prod.ext
   · simp only [innerGapAffineEnergy, WithLp.toLp_fst, Prod.fst_add,
       innerGapPoissonH1_value]
-  · simp only [innerGapAffineEnergy, WithLp.toLp_snd, WithLp.add_fst,
-      innerGapPoissonH1_energy, WithLp.toLp_fst, Prod.snd_add]
+  · simp only [innerGapAffineEnergy, WithLp.toLp_snd, WithLp.add_fst, Prod.snd_add]
+    apply congrArg (fun d : RadialModeL2 D => q.snd.fst + d)
+    simpa only [WithLp.toLp_fst] using
+      congrArg (fun E : InnerGapEnergyPair D => E.fst)
+        (innerGapPoissonH1_energy D hw ha hcore hpos j p hp ξ)
 
 theorem innerGapAffineEnergy_physical_potential (D : ReferenceData)
     (hw : ContDiff ℝ ∞ D.w) {a b : ℝ} (ha : 0 < a)
@@ -42,8 +45,11 @@ theorem innerGapAffineEnergy_physical_potential (D : ReferenceData)
         (innerGapAffineEnergy D hw ha hcore hpos j p hp q ξ).fst := by
   have hpot := innerGapFormSpace_potential D hw hpos j q hq
   simp only [innerGapAffineEnergy, WithLp.toLp_fst, WithLp.toLp_snd,
-    WithLp.add_snd, innerGapPoissonH1_energy, hpot, map_add,
-    innerGapPoissonH1_value]
+    WithLp.add_snd, hpot, map_add]
+  apply congrArg (fun u : RadialModeL2 D => innerGapPotentialMultiplier D hw hpos j q.fst + u)
+  simpa only [WithLp.toLp_snd, innerGapPoissonH1_value] using
+    congrArg (fun E : InnerGapEnergyPair D => E.snd)
+      (innerGapPoissonH1_energy D hw ha hcore hpos j p hp ξ)
 
 /-- The local Dirichlet equation for its actual derivative witness,
 against every common physical zero-endpoint test. -/
@@ -64,10 +70,9 @@ theorem innerGapFormWitness_weakResidual (D : ReferenceData)
   have hvalue : ⟪F, r.1⟫_ℝ = ⟪q.snd.fst, r.2⟫_ℝ + ⟪M q.fst, M r.1⟫_ℝ := by
     simpa only [innerGapPotentialLift_apply, WithLp.toLp_fst, WithLp.toLp_snd,
       WithLp.prod_inner_apply, WithLp.ofLp_fst, WithLp.ofLp_snd, hpot] using he
-  dsimp only [innerRadialWeakResidual]
-  rw [innerGapPotentialMultiplier_square_inner]
+  rw [innerRadialWeakResidual_apply, innerGapPotentialMultiplier_square_inner]
   simp only [zero_mul, add_zero]
-  linarith
+  exact sub_eq_zero.mpr hvalue.symm
 
 /-- All common-domain and canonical-flux identities for one actual
 Dirichlet witness plus the actual Poisson correction. -/
@@ -119,10 +124,9 @@ theorem innerGapAffineEnergy_physical (D : ReferenceData)
     intro r hr
     have hD := innerGapFormWitness_weakResidual D hw hpos j q hq F hform r hr
     have hP := innerGapPoissonH1_weakResidual D hw hab.le ha hcore hpos hslope p hp heq ξ r hr
-    dsimp only [innerRadialWeakResidual] at hD hP ⊢
-    simp only [hQvalue, hQgrad, map_add, inner_add_left, zero_mul, add_zero,
-      inner_zero_left, sub_zero] at hD hP ⊢
-    linarith
+    simp only [innerRadialWeakResidual_apply, hQvalue, hQgrad, map_add,
+      inner_add_left, zero_mul, add_zero, inner_zero_left, sub_zero, M, P] at hD hP ⊢
+    linarith only [hD, hP]
   refine ⟨htrace.1, htrace.2, innerGapPotentialClass D hw hpos hslope j Q.fst, hweak, ?_⟩
   intro i
   exact (innerGapWeakResidual_affineUnit D hw hab ha hcore hpos j p hp hb Q hpot F hweak i).trans
@@ -160,12 +164,10 @@ theorem exists_innerGapDirichletPoisson_physical (D : ReferenceData)
   obtain ⟨q, hq, hvalue, hform⟩ := (innerGapFormGraph_iff D j a b (G F) F).mp
     (innerGapDirichletInverse_graph D hw hab.le ha hj hs hcore hpos hslope F)
   let Q := innerGapAffineEnergy D hw ha hcore hpos j p hp q ξ
-  have hQvalue : Q.fst = G F + P ξ := by
-    rw [innerGapAffineEnergy_function, hvalue]
   have h := innerGapAffineEnergy_physical D hw hab ha hcore hpos
     (fun r hr => hs.le.trans (hslope r hr)) p hp hb heq q hq F hform ξ
   refine ⟨Q.snd.fst, innerGapPotentialMultiplier D hw hpos j
     (innerGapPotentialMultiplier D hw hpos j Q.fst), ?_⟩
-  simpa only [hQvalue] using h
+  simpa only [Q, G, P, innerGapAffineEnergy_function, hvalue] using h
 
 end ContinuousFlexibility.Radial
