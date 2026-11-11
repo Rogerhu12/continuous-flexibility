@@ -36,8 +36,8 @@ theorem tailPhysical_density_bounded {D : ReferenceData} {T : DeepTailData}
           (hC.1.2.2.1.1.continuous.comp (continuous_tailPhysicalRadius right))
     · exact continuous_tailPhysicalRadius right
     · exact fun x => (tailPhysicalRadius_pos right x).ne'
-  obtain ⟨P, hP⟩ := (isCompact_Icc : IsCompact (Icc T.entrance T.endpoint)).
-    exists_bound_of_continuousOn hQ.continuousOn
+  obtain ⟨P, hP⟩ := (isCompact_Icc : IsCompact (Icc T.entrance T.endpoint)).exists_bound_of_continuousOn
+    hQ.continuousOn
   refine ⟨|P| + 1, by positivity, fun x hx => ?_⟩
   have heq : T.p x = Q x := by
     rcases eq_or_lt_of_le hx.1 with hxe | hxe
