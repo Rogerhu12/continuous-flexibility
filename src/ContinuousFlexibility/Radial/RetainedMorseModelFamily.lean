@@ -30,11 +30,11 @@ theorem innerMorseInnerTailSlot_pair_injective (k : ℕ) :
     omega
   · simp only [innerMorseInnerTailSlot, Bool.false_eq_true, ite_false, ite_true] at hv
     omega
-  · apply Prod.ext
-    · rfl
-    · apply Fin.ext
-      simp only [innerMorseInnerTailSlot, ite_true] at hv
+  · have hpq : p = q := by
+      apply Fin.ext
+      change k + 1 + p.val = k + 1 + q.val at hv
       omega
+    exact congrArg (fun r : Fin k => (true, r)) hpq
 
 theorem innerMorseInnerModelSlot_cases {k : ℕ} (p : Fin (2 * k + 1)) :
     p = innerMorseInnerCenter k ∨ ∃ side q, p = innerMorseInnerTailSlot k side q := by
@@ -135,6 +135,7 @@ def retainedMorseModelFamily (p : Fin (2 * k + 1)) :
     centralModel
     (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M) p
 
+include P hw hS G₀ hband htail hB M centralModel in
 theorem retainedMorseModelFamily_center :
     P.retainedMorseModelFamily hw hS G₀ hband H bordered j column htail hB M centralModel
       (innerMorseInnerCenter k) = centralModel :=
@@ -143,6 +144,7 @@ theorem retainedMorseModelFamily_center :
     centralModel
     (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M)
 
+include P hw hS G₀ hband htail hB M centralModel in
 theorem retainedMorseModelFamily_tail (side : Bool) (p : Fin k) :
     P.retainedMorseModelFamily hw hS G₀ hband H bordered j column htail hB M centralModel
       (innerMorseInnerTailSlot k side p) =

@@ -82,9 +82,11 @@ theorem retainedMorseModelChart_endpoint_weight_bound
   have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have hjpos : 0 < j := zero_lt_one.trans_le hj
   apply A.endpoint_weight_le_of_kappa (fun k => (M.column k).inwardEnergy)
-    (by intro k; simpa only [one_pow, mul_one] using
-      P.retainedMorseModelChart_kappa hw hS G₀ hband H bordered j central piece column
-        side m hm haway hleft hright hB M k) ?_ i
+    (by
+      intro k
+      simpa only [one_pow, mul_one] using
+        (P.retainedMorseModelChart_kappa hw hS G₀ hband H bordered j central piece column
+          side m hm haway hleft hright hB M k)) ?_ i
   intro k
   let x := bufferCut A.buffer k
   have hx : x ∈ uIcc (bufferCut A.buffer k) (bufferInnerWall A.buffer k) := left_mem_uIcc

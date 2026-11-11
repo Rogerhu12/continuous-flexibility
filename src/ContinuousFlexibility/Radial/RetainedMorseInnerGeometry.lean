@@ -179,7 +179,11 @@ theorem retainedMorseInnerGeometry_outer
     exact hout false
   · have heq : (Fin.last (2 * (2 * k + 1))).succ =
         Fin.last (2 * (2 * k + 1) + 1) := Fin.succ_last _
-    change innerModelChainCuts _ _ _ (Fin.last (2 * (2 * k + 1))).succ = _
+    change innerModelChainCuts
+      (scaledMorseInnerModelCuts S.chain P.sideRadius S.chain.index k (retainedMorseCenterCuts T))
+      (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k false)
+      (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k true)
+      (Fin.last (2 * (2 * k + 1))).succ = _
     rw [heq, innerModelChainCuts_last]
     exact hout true
 

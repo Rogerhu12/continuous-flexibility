@@ -138,7 +138,8 @@ theorem OuterFundamentalStatePair.weighted_solution
       (fun x hx => H.V_system x (Ioo_subset_Ico_self hx))
       (fun x hx => hwn x (Ioo_subset_Ico_self hx))
       (fun x hx => hr x (Ioo_subset_Ico_self hx))
-  have hW : ∀ x ∈ Ioo a b, radialWronskian w H.U H.V x = -lam :=
+  have hW : ∀ x ∈ Ioo a b,
+      ContinuousFlexibility.Radial.radialWronskian w H.U H.V x = -lam :=
     fun x hx => H.radialWronskian hwn x (Ioo_subset_Ico_self hx)
   have hweak : HasIntervalWeakDerivative a b p
       (fun x => J * deriv w x / x * u x - ρ x * f x) := by
