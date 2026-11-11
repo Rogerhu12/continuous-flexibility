@@ -115,16 +115,17 @@ theorem exists_outerFluxState_solution {a b J lam : ℝ} (hab : a ≤ b)
     rw [(hstate r hr).1.deriv]
     field_simp [(hwpos r hr).ne'] <;> ring
   refine ⟨u, z, hinit, hstate, fun r hr => ?_, fun r hr => ?_⟩
-  · apply Prod.ext rfl
-    change w r * deriv u r / lam = z r
-    rw [hflux r hr]
-    field_simp [hlam]
+  · apply Prod.ext
+    · rfl
+    · change w r * deriv u r / lam = z r
+      rw [hflux r hr]
+      field_simp [hlam]
   · have hr' := Ioo_subset_Icc_self hr
     have hdu : deriv u =ᶠ[𝓝 r] fun t => lam / w t * z t := by
       filter_upwards [Icc_mem_nhds hr.1 hr.2] with t ht
       exact (hstate t ht).1.deriv
     have hddu : DifferentiableAt ℝ (deriv u) r :=
-      ((differentiableAt_const.div (hwd r hr') (hwpos r hr').ne').mul
+      (((hasDerivAt_const r lam).differentiableAt.div (hwd r hr') (hwpos r hr').ne').mul
         (hstate r hr').2.differentiableAt).congr_of_eventuallyEq hdu
     have hfluxeq : (fun t => w t * deriv u t) =ᶠ[𝓝 r] fun t => lam * z t := by
       filter_upwards [Icc_mem_nhds hr.1 hr.2] with t ht

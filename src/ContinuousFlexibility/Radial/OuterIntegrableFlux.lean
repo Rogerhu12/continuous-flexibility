@@ -98,6 +98,7 @@ theorem outerSolutionFlux_ae_hasDerivAt {a b J lam cA cB c : ℝ} {w U V f : ℝ
       one_div_mul_cancel hlam, one_mul]
   apply hcalc.congr_deriv
   unfold outerSolution
+  simp only [Pi.add_apply, Pi.sub_apply, intervalWeakPrimitive]
   linear_combination key
 
 /-- The radial equation in weak form for every locally integrable source. -/

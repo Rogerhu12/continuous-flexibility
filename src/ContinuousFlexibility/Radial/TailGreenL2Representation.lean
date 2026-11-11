@@ -65,7 +65,7 @@ theorem tailFundamentalGreenKernel_memLp_row
         T.entrance T.endpoint w u W x y) = fun _ => (0 : ℝ) :=
       funext (tailFundamentalGreenKernel_eq_zero_of_notMem_left hx)
     rw [heq]
-    exact memLp_zero
+    exact MemLp.zero
 
 /-- Every L² source is integrable against every actual kernel row. -/
 theorem tailFundamentalGreenKernel_mul_integrable_L2
@@ -77,11 +77,10 @@ theorem tailFundamentalGreenKernel_mul_integrable_L2
     (huL2 : MemLp u 2 (deepTailMeasure T)) (x : ℝ) (f : DeepTailL2 T) :
     Integrable (fun y => tailFundamentalGreenKernel
       T.entrance T.endpoint w u W x y * f y) (deepTailMeasure T) := by
-  have hrow := tailFundamentalGreenKernel_memLp_row hp hp₀ hw hu huL2 x
+  have hrow := tailFundamentalGreenKernel_memLp_row (W := W) hp hp₀ hw hu huL2 x
   apply (L2.integrable_inner (𝕜 := ℝ) (hrow.toLp _) f).congr
   filter_upwards [MemLp.coeFn_toLp hrow] with y hy
   rw [Real.inner_apply, hy]
-  ring
 
 /-- Smooth functions supported compactly inside the tail form a dense
 source class for its finite physical weighted measure. -/
@@ -95,7 +94,7 @@ theorem dense_tailInteriorSources (T : DeepTailData) [IsFiniteMeasure (deepTailM
     HasCompactSupport ψ ∧ tsupport ψ ⊆ Ioo T.entrance T.endpoint}
   let A : Set (DeepTailL2 T) := {f | ∃ ψ : ℝ → ℝ,
     (f : ℝ → ℝ) =ᵐ[deepTailMeasure T] ψ ∧ HasCompactSupport ψ ∧ ContDiff ℝ ∞ ψ}
-  have hdense : Dense A := Lp.dense_hasCompactSupport_contDiff (by norm_num : (2 : ℝ≥0∞) ≠ ⊤)
+  have hdense : Dense A := Lp.dense_hasCompactSupport_contDiff (by norm_num : (2 : ENNReal) ≠ ⊤)
   have hsub : A ⊆ closure S := by
     intro f hf
     obtain ⟨ψ, hfψ, _, hψ⟩ := hf
@@ -179,7 +178,6 @@ theorem tailFundamentalGreen_L2_representation {T : DeepTailData}
     apply integral_congr_ae
     filter_upwards [MemLp.coeFn_toLp (hrow x)] with y hy
     rw [Real.inner_apply, hy]
-    ring
   have hdense := dense_tailInteriorSources T
   have hrep : ∀ g : DeepTailL2 T,
       g ∈ {g : DeepTailL2 T | ∃ ψ : ℝ → ℝ,
@@ -192,6 +190,7 @@ theorem tailFundamentalGreen_L2_representation {T : DeepTailData}
       hus hws hwa hW g ψ hψ hcψ hsψ hgψ).trans
     apply Eventually.of_forall
     intro x
+    change (∫ y, K x y * ψ y ∂deepTailMeasure T) = inner ℝ (row x) g
     rw [hpair]
     apply integral_congr_ae
     filter_upwards [hgψ] with y hy

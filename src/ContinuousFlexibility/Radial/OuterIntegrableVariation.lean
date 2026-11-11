@@ -55,8 +55,10 @@ theorem continuousOn_outerSolution_derivative {a b lam cA cB c : ℝ} {U V f : �
       (deriv V x * (cA + ∫ t in c..x, U t * f t) +
         deriv U x * (cB - ∫ t in c..x, V t * f t))) (Ioo a b) := by
   obtain ⟨hUf, hVf⟩ := outer_source_products hU.continuousOn hV.continuousOn hf
-  have hA := continuousOn_const.add (continuousOn_intervalWeakPrimitive hUf hc)
-  have hB := continuousOn_const.sub (continuousOn_intervalWeakPrimitive hVf hc)
+  have hA : ContinuousOn (fun x => cA + ∫ t in c..x, U t * f t) (Ioo a b) :=
+    continuousOn_const.add (continuousOn_intervalWeakPrimitive hUf hc)
+  have hB : ContinuousOn (fun x => cB - ∫ t in c..x, V t * f t) (Ioo a b) :=
+    continuousOn_const.sub (continuousOn_intervalWeakPrimitive hVf hc)
   exact continuousOn_const.mul
     (((hV.continuousOn_deriv_of_isOpen isOpen_Ioo le_rfl).mul hA).add
       ((hU.continuousOn_deriv_of_isOpen isOpen_Ioo le_rfl).mul hB))
@@ -82,20 +84,24 @@ theorem hasDerivAt_outerSolution_locallyIntegrable {a b lam cA cB c : ℝ} {U V 
     ((hV.contDiffAt (isOpen_Ioo.mem_nhds hx)).differentiableAt (by norm_num)).hasDerivAt
   have hA := (hasDerivAt_const x cA).add (hAx hxin)
   have hB := (hasDerivAt_const x cB).sub (hBx hxin)
-  exact (((hVd.mul hA).add (hUd.mul hB)).const_mul (-(1 / lam))).congr_deriv (by ring)
+  exact (((hVd.mul hA).add (hUd.mul hB)).const_mul (-(1 / lam))).congr_deriv (by
+    simp only [Pi.add_apply, Pi.sub_apply, intervalWeakPrimitive]
+    ring)
 
 /-- The canonical value representative is genuinely C¹ in the interior. -/
 theorem contDiffOn_outerSolution_locallyIntegrable {a b lam cA cB c : ℝ} {U V f : ℝ → ℝ}
     (hU : ContDiffOn ℝ 1 U (Ioo a b)) (hV : ContDiffOn ℝ 1 V (Ioo a b))
     (hf : LocallyIntegrableOn f (Ioo a b)) (hc : c ∈ Ioo a b) :
     ContDiffOn ℝ 1 (outerSolution lam cA cB c U V f) (Ioo a b) := by
-  have hd := hasDerivAt_outerSolution_locallyIntegrable hU hV hf hc
-  have hdc := continuousOn_outerSolution_derivative hU hV hf hc
+  have hd := hasDerivAt_outerSolution_locallyIntegrable
+    (lam := lam) (cA := cA) (cB := cB) hU hV hf hc
+  have hdc := continuousOn_outerSolution_derivative
+    (lam := lam) (cA := cA) (cB := cB) hU hV hf hc
   apply (contDiffOn_one_iff_derivWithin isOpen_Ioo.uniqueDiffOn).mpr
   refine ⟨fun x hx => (hd x hx).differentiableAt.differentiableWithinAt, ?_⟩
   apply hdc.congr
   intro x hx
-  exact ((hd x hx).hasDerivWithinAt.derivWithin (isOpen_Ioo.uniqueDiffWithinAt hx)).symm
+  exact (hd x hx).hasDerivWithinAt.derivWithin (isOpen_Ioo.uniqueDiffWithinAt hx)
 
 /-- The entrance state identity holds for locally integrable, in particular L², sources. -/
 theorem outerSolution_base_state_locallyIntegrable {a b lam cB c : ℝ} {w U V f : ℝ → ℝ}
