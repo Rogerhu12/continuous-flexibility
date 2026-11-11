@@ -28,7 +28,7 @@ open scoped ContDiff
 theorem n04b_volume_range_differentiable_curve {γ : ℝ → PolarPoint}
     (hγ : Differentiable ℝ γ) :
     (volume : Measure PolarPoint) (Set.range γ) = 0 := by
-  letI : (volume : Measure PolarPoint).IsAddHaarMeasure := by
+  let : (volume : Measure PolarPoint).IsAddHaarMeasure := by
     rw [Measure.volume_eq_prod]
     infer_instance
   have hline : (volume : Measure PolarPoint)
@@ -54,7 +54,7 @@ theorem n04b_contDiff_travelSlice {G : PolarPoint → PolarPoint} {T t : ℝ}
     ContDiff ℝ ∞ (fun θ : ℝ => G (t, θ)) := by
   have hs : ContDiff ℝ ∞ (fun θ : ℝ => (t, θ)) :=
     contDiff_const.prodMk contDiff_id
-  simpa only [Function.comp_apply] using
+  simpa only [Function.comp_def] using
     hG.comp_contDiff hs (fun θ => ⟨ht, mem_univ θ⟩)
 
 /-- The image of the entire interior slice is a null physical curve. -/

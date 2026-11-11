@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.CoordinateOperatorConstruction
 import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Analysis.N04bGeometryPreservation
 
 /-!
 # The actual canonical operator from the chart data
@@ -104,7 +105,9 @@ theorem n04bCanonicalOperatorData_partA
     (L : ReturnCorrectionData S) {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (hA : N04PartA D S C K base ε) :
     N04PartA D S C (n04bCanonicalOperatorData S L K) base ε := by
-  exact hA
+  exact hA.withOperatorFields
+    (n04bCanonicalOperatorData S L K).coefficients
+    (n04bCanonicalOperatorData S L K).potential K.dividedDifference
 
 /-- Both signs in the frozen operator clause follow from the same actual
 coordinate identity. -/

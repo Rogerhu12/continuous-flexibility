@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Analysis.N04bGeometryPreservation
 
 /-!
 # Interior divided coefficients for canonical pieces
@@ -66,7 +67,8 @@ theorem n04bWithInteriorDivision_factorization {S : PhysicalSpacesData}
 theorem n04bWithInteriorDivision_partA {D : ReferenceData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {K : CanonicalData S} {base : ℕ} {ε : ℝ}
     (h : Blueprint.N04PartA D S C K base ε) :
-    Blueprint.N04PartA D S C (n04bWithInteriorDivision C K) base ε := h
+    Blueprint.N04PartA D S C (n04bWithInteriorDivision C K) base ε :=
+  h.withOperatorFields K.coefficients K.potential (n04bInteriorDividedDifference C K)
 
 /-- Assemble the exact part-B statement from its first four clauses.
 The interior normalization supplies its final positive-piece clause and
