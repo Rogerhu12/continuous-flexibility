@@ -24,6 +24,7 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
 theorem periodic_sub_base_comp {v : ℝ → E} (hp : Periodic v P) (Φ : E → ℝ) :
     Periodic (fun x => Φ (v x) - Φ 0) P := by
   intro x
+  dsimp only
   rw [hp x]
 
 theorem contDiff_sub_base_comp {v : ℝ → E} {Φ : E → ℝ} (hv : ContDiff ℝ ∞ v)

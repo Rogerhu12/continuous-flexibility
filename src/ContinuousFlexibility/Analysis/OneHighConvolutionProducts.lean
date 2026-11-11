@@ -65,8 +65,16 @@ theorem measurable_oneHighFrequencyFamily {k : ℕ} {w : G → ℝ≥0∞} {s : 
     (j i : Fin (k + 1)) : Measurable (oneHighFrequencyFamily w s f j i) := by
   classical
   by_cases hij : i = j
-  · simpa only [oneHighFrequencyFamily, if_pos hij] using (hw.pow_const s).mul (hf i)
-  · simpa only [oneHighFrequencyFamily, if_neg hij] using hf i
+  · have he : oneHighFrequencyFamily w s f j i = (fun x => w x ^ s * f i x) := by
+      funext x
+      simp only [oneHighFrequencyFamily, if_pos hij]
+    rw [he]
+    exact (hw.pow_const s).mul (hf i)
+  · have he : oneHighFrequencyFamily w s f j i = f i := by
+      funext x
+      simp only [oneHighFrequencyFamily, if_neg hij]
+    rw [he]
+    exact hf i
 
 /-- The one-high-factor inequality holds already at each output frequency. -/
 theorem positiveConvolution_oneHigh_le (k s : ℕ) {w : G → ℝ≥0∞}
@@ -107,7 +115,8 @@ theorem positiveConvolution_oneHigh_eLpNorm_two_le (k s : ℕ) {w : G → ℝ≥
         eLpNorm (fun y => w y ^ s * f j y) 2 μ *
           ∏ i ∈ Finset.univ.erase j, eLpNorm (f i) 1 μ := by
     have h := positiveConvolution_eLpNorm_two_le (μ := μ) k
-      (measurable_oneHighFrequencyFamily hw hf j) j
+      (f := oneHighFrequencyFamily w s f j)
+      (measurable_oneHighFrequencyFamily (s := s) hw hf j) j
     have hhead : oneHighFrequencyFamily w s f j j = (fun y => w y ^ s * f j y) := by
       funext y
       simp only [oneHighFrequencyFamily, ite_true]
@@ -117,7 +126,10 @@ theorem positiveConvolution_oneHigh_eLpNorm_two_le (k s : ℕ) {w : G → ℝ≥
       apply Finset.prod_congr rfl
       intro i hi
       have hij := (Finset.mem_erase.mp hi).1
-      simp only [oneHighFrequencyFamily, if_neg hij]
+      have he : oneHighFrequencyFamily w s f j i = f i := by
+        funext y
+        simp only [oneHighFrequencyFamily, if_neg hij]
+      rw [he]
     rwa [hhead, hprod] at h
   calc
     _ ≤ eLpNorm (fun x => ∑ j,
@@ -126,9 +138,15 @@ theorem positiveConvolution_oneHigh_eLpNorm_two_le (k s : ℕ) {w : G → ℝ≥
         simpa only [enorm_eq_self] using
           positiveConvolution_oneHigh_le (μ := μ) k s hw hw1 hf a ha x
     _ ≤ ∑ j, eLpNorm (positiveConvolution μ k (oneHighFrequencyFamily w s f j)) 2 μ := by
-      simpa only [Finset.sum_apply] using
-        eLpNorm_sum_le (f := fun j => positiveConvolution μ k (oneHighFrequencyFamily w s f j))
-          (s := Finset.univ) (μ := μ) (p := (2 : ℝ≥0∞)) (by norm_num)
+      have hsum : (∑ j : Fin (k + 1), positiveConvolution μ k (oneHighFrequencyFamily w s f j)) =
+          (fun x => ∑ j : Fin (k + 1),
+            positiveConvolution μ k (oneHighFrequencyFamily w s f j) x) := by
+        funext x
+        simp only [Finset.sum_apply]
+      rw [← hsum]
+      exact eLpNorm_sum_le
+        (f := fun j => positiveConvolution μ k (oneHighFrequencyFamily w s f j))
+        (s := Finset.univ) (μ := μ) (p := (2 : ℝ≥0∞)) (by norm_num)
     _ ≤ _ := Finset.sum_le_sum (fun j _ => hhigh j)
 
 /-- Finite endpoint norms guarantee actual `L²` membership of the convolution
