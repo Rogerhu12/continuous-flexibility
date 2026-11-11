@@ -8,6 +8,9 @@ namespace ContinuousFlexibility.Radial
 noncomputable section
 
 open Set MeasureTheory
+open scoped ENNReal
+
+set_option backward.isDefEq.respectTransparency false
 
 theorem angularAverage_sub_of_memLp {f g : ℝ → ℝ}
     (hf : MemLp f 2 (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))))
@@ -42,13 +45,19 @@ theorem even_periodic_ae_eq_of_cosine_coefficients {f g : ℝ → ℝ}
     f =ᵐ[volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))] g := by
   have he : Function.Even (fun θ => f θ - g θ) := by
     intro θ
+    change f (-θ) - g (-θ) = f θ - g θ
     rw [hfe θ, hge θ]
   have hp : Function.Periodic (fun θ => f θ - g θ) Real.pi := by
     intro θ
+    change f (θ + Real.pi) - g (θ + Real.pi) = f θ - g θ
     rw [hfp θ, hgp θ]
   have hm : angularAverage (fun θ => f θ - g θ) = 0 := by
     rw [angularAverage_sub_of_memLp hf hg, hmean, sub_self]
-  have hz := even_periodic_ae_eq_zero_of_cosine_coefficients (hf.sub hg) he hp hm
+  have hsub : MemLp (fun θ => f θ - g θ) 2
+      (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := by
+    apply MemLp.ae_eq _ (hf.sub hg)
+    exact Filter.Eventually.of_forall fun _ => rfl
+  have hz := even_periodic_ae_eq_zero_of_cosine_coefficients hsub he hp hm
     (fun j hj hjEven => by
       have hjLp : MemLp (cosineMode j) 2
           (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))) := by

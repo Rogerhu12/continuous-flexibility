@@ -33,7 +33,7 @@ theorem r11b_toLp_radialHilbert_ae {D : ReferenceData}
 theorem r11b_zero_radialHilbert_ae {D : ReferenceData}
     (hgeom : RadialProfileGeometry D) :
     ((0 : RadialModeL2 D) : ℝ → ℝ) =ᵐ[volume.restrict (radialCore D)] 0 :=
-  (r11b_radialHilbert_ae_eq_iff hgeom).mp Lp.coeFn_zero
+  (r11b_radialHilbert_ae_eq_iff hgeom).mp (Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D))
 
 theorem r11b_intervalIntegral_eq_core {D : ReferenceData} (hab : D.a ≤ D.b)
     (f : ℝ → ℝ) : (∫ r in D.a..D.b, f r) = ∫ r in radialCore D, f r := by

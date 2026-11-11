@@ -43,7 +43,8 @@ theorem affine_inverse_primitive_eq_zero_of_integrable {a b : ℝ} (hab : a < b)
         calc
           |q| * P r = |q * P r| := by rw [abs_mul, abs_of_pos hPr]
           _ = |(c + q * P r) + -c| := by congr 1; ring
-          _ ≤ |c + q * P r| + |-c| := abs_add _ _
+          _ ≤ |c + q * P r| + |-c| := by
+            simpa only [Real.norm_eq_abs] using norm_add_le (c + q * P r) (-c)
           _ = |c + q * P r| + |c| := by rw [abs_neg]
       have hOne : (1 : ℝ) ≤ |c + q * P r| := by linarith
       have hs := (sq_le_sq₀ zero_le_one (abs_nonneg (c + q * P r))).mpr hOne

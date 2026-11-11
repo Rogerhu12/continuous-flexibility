@@ -36,7 +36,8 @@ theorem contDiff_intervalCompressionMap (a b scale : ℝ) :
 
 theorem hasDerivAt_intervalCompressionMap (a b scale x : ℝ) :
     HasDerivAt (intervalCompressionMap a b scale) scale x := by
-  simpa only [intervalCompressionMap, mul_one] using
+  change HasDerivAt (fun y : ℝ => (a + b) / 2 + scale * (y - (a + b) / 2)) scale x
+  simpa only [id_eq, mul_one] using
     (((hasDerivAt_id x).sub_const ((a + b) / 2)).const_mul scale).const_add ((a + b) / 2)
 
 theorem contDiff_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ)
@@ -48,9 +49,11 @@ theorem deriv_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞
     deriv (intervalTestCompression a b scale ψ) =
       fun x => scale * deriv ψ (intervalCompressionMap a b scale x) := by
   funext x
+  change deriv (fun y => ψ (intervalCompressionMap a b scale y)) x =
+    scale * deriv ψ (intervalCompressionMap a b scale x)
   have hd := ((hψ.differentiable (by simp) (intervalCompressionMap a b scale x)).hasDerivAt.comp
     x (hasDerivAt_intervalCompressionMap a b scale x)).deriv
-  simpa only [intervalTestCompression, Function.comp_def, mul_comm] using hd
+  simpa only [Function.comp_def, mul_comm] using hd
 
 theorem secondDeriv_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ)
     (a b scale : ℝ) :
@@ -150,7 +153,7 @@ theorem tendsto_deriv_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff
   have hψ' := (contDiff_infty_iff_deriv.mp hψ).2
   have h := tendsto_intervalCompressionScale.mul
     (hψ'.continuous.continuousAt.tendsto.comp (tendsto_intervalCompressionMap a b x))
-  simpa only [one_mul] using h
+  simpa only [Function.comp_def, one_mul] using h
 
 theorem tendsto_secondDeriv_intervalTestCompression {ψ : ℝ → ℝ} (hψ : ContDiff ℝ ∞ ψ)
     (a b x : ℝ) :
@@ -161,7 +164,7 @@ theorem tendsto_secondDeriv_intervalTestCompression {ψ : ℝ → ℝ} (hψ : Co
   have hψ'' := (contDiff_infty_iff_deriv.mp hψ').2
   have h := (tendsto_intervalCompressionScale.pow 2).mul
     (hψ''.continuous.continuousAt.tendsto.comp (tendsto_intervalCompressionMap a b x))
-  simpa only [one_pow, one_mul] using h
+  simpa only [Function.comp_def, one_pow, one_mul] using h
 
 end
 

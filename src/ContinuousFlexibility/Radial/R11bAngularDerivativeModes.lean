@@ -15,7 +15,7 @@ namespace ContinuousFlexibility.Radial
 noncomputable section
 
 open Set Filter MeasureTheory
-open scoped ContDiff Topology
+open scoped ContDiff Topology ENNReal
 open ContinuousFlexibility.Statements
 
 set_option backward.isDefEq.respectTransparency false
@@ -31,7 +31,7 @@ theorem r11b_referenceSineMode_L2_bound {D : ReferenceData} {f : PolarPoint → 
   have he : MemLp (sineMode j) 2 angularMeanMeasure :=
     memLp_angularMeanMeasure (angularInterval_memLp_of_continuous (continuous_sineMode j))
   have hunit : angularAverage (fun θ => sineMode j θ ^ 2) = 1 := by
-    simpa only [angularPairing, pow_two, if_pos rfl] using
+    simpa [angularPairing, pow_two] using
       angularPairing_sineMode j j hj hj
   have h := r11b_memLp_angularCoefficient hf he
   rw [hunit, one_mul] at h
@@ -62,7 +62,11 @@ theorem r11b_weakAngular_referenceMode_ae_of_locallyIntegrable
   have hloc : LocallyIntegrableOn
       (fun r => (j : ℝ) * referenceMode u j r + referenceSineMode d j r)
       (radialCore D) volume := by
-    simpa only [Pi.add_apply, Pi.smul_apply, smul_eq_mul] using (hu.smul (j : ℝ)).add hd
+    have h := (hu.smul (j : ℝ)).add hd
+    change LocallyIntegrableOn
+      (fun r => (j : ℝ) * referenceMode u j r + referenceSineMode d j r)
+      (radialCore D) volume at h
+    exact h
   have hzero : ∀ᵐ r ∂volume, r ∈ radialCore D →
       (j : ℝ) * referenceMode u j r + referenceSineMode d j r = 0 := by
     apply (show IsOpen (radialCore D) from isOpen_Ioo).ae_eq_zero_of_integral_contDiff_smul_eq_zero hloc
