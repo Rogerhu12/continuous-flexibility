@@ -167,7 +167,8 @@ theorem r07_actual_join_contrast {T : MorseChainData}
   have hmono := morseConnector_monotone_of_logSlope hreal.geometry.2.2.1.1
     (hreal.geometry.1.trans haCore.1) hwp hj.2.2.2.2
   have herror := r07_geometry_join_log_contrast G hreal hσ right k
-  have hC := r07_height_contrast_le_of_error (n := T.index + k + 1) hWa hWb
+  have hC := r07_height_contrast_le_of_error
+    (m := if right then T.index + k else T.index + k + 1) (n := T.index + k + 1) hWa hWb
     (by cases right <;> simp only [if_true, if_false, Bool.false_eq_true] <;>
       have h := G.start_large <;> omega)
     (by cases right <;> simp only [if_true, if_false, Bool.false_eq_true] <;> omega) herror

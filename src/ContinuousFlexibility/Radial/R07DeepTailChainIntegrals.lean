@@ -52,7 +52,7 @@ theorem r07_oriented_integral (right : Bool) (a b : ℝ) (f : ℝ → ℝ) :
       ∫ r in a..b, f r := by
   cases right
   · simp only [r07OutwardSign, Bool.false_eq_true, if_false, neg_one_mul]
-    rw [intervalIntegral.integral_symm (a := b) (b := a), neg_neg]
+    rw [intervalIntegral.integral_symm (a := b) (b := a)]
   · simp only [r07OutwardSign, if_true, one_mul]
 
 theorem r07_deepTail_cell_integrals {T : MorseChainData} {D : ReferenceData}

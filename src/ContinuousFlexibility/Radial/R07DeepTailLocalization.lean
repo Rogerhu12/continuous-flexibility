@@ -73,15 +73,15 @@ theorem r07_deepTail_localization {T : MorseChainData} {D : ReferenceData}
       have hseam : 0 < seam := ha.trans hcn.2.2.1
       refine ⟨capStart, ?_, ?_, ?_⟩
       · have hlt := neg_lt_neg (log_lt_log hseam hj)
-        simpa only [r07DeepTailData, r07MassExitRadius, r07OutwardLog,
+        simpa only [m, seam, capStart, r07DeepTailData, r07MassExitRadius, r07OutwardLog,
           Bool.false_eq_true, if_false] using hlt
       · have hlt := neg_lt_neg (log_lt_log (ha.trans hcn.2.1.1) hnCuts.2)
-        simpa only [r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
+        simpa only [m, seam, capStart, r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
           Bool.false_eq_true, if_false, Nat.add_assoc] using hlt
       · intro x hx
         have hxt : x ∈ Ioo (r07OutwardLog false (morseChainMassEnd T false m))
             (r07OutwardLog false (morseChainMassEnd T false (m + 1))) := by
-          simpa only [r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
+          simpa only [m, seam, capStart, r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
             Bool.false_eq_true, if_false, Nat.add_assoc] using hx
         by_cases hxc : x < capStart
         · rw [if_pos hxc]
@@ -109,14 +109,14 @@ theorem r07_deepTail_localization {T : MorseChainData} {D : ReferenceData}
         simpa only [hmnext] using (r07_chain_resistance_ends h hm).2
       refine ⟨capStart, ?_, ?_, ?_, ?_⟩
       · have hlt := neg_lt_neg (log_lt_log hseam hj)
-        simpa only [r07DeepTailData, r07OutwardLog, Bool.false_eq_true, if_false, hres] using hlt
+        simpa only [m, seam, capStart, r07DeepTailData, r07OutwardLog, Bool.false_eq_true, if_false, hres] using hlt
       · have hlt := neg_lt_neg (log_lt_log (ha.trans hcn.2.1.1) hnCuts.2)
-        simpa only [r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
+        simpa only [m, seam, capStart, r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
           Bool.false_eq_true, if_false, Nat.add_zero] using hlt
       · intro x hx
         have hxt : x ∈ Ico (r07OutwardLog false (T.radius false m (T.leftX false m)))
             (r07OutwardLog false seam) := by
-          simpa only [r07DeepTailData, r07OutwardLog, Bool.false_eq_true, if_false, hres] using hx
+          simpa only [m, seam, capStart, r07DeepTailData, r07OutwardLog, Bool.false_eq_true, if_false, hres] using hx
         have hsBlock : seam ∈ morseChainBlock T false m := by
           change T.radius false start (T.rightX false start) ∈ morseChainBlock T false m
           rw [← hmnext]
@@ -127,7 +127,7 @@ theorem r07_deepTail_localization {T : MorseChainData} {D : ReferenceData}
       · intro x hx
         have hxt : x ∈ Ico (r07OutwardLog false seam)
             (r07OutwardLog false (morseChainMassEnd T false start)) := by
-          simpa only [r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
+          simpa only [m, seam, capStart, r07DeepTailData, r07MassNodeRadius, r07OutwardLog,
             Bool.false_eq_true, if_false, Nat.add_zero] using hx
         exact r07_label_log_interval h false hstart.le hseam (ha.trans hcn.2.1.1)
           left_mem_uIcc (r07_three_cuts_mem_block h false hstart.le).2.1
@@ -142,7 +142,7 @@ theorem r07_deepTail_localization {T : MorseChainData} {D : ReferenceData}
     have hcn := r07_chain_mass_cuts_core h true hmnext
     have hxt : x ∈ Ioo (r07OutwardLog true (T.radius true m (T.leftX true m)))
         (r07OutwardLog true (T.radius true (m + 1) (T.leftX true (m + 1)))) := by
-      simpa only [r07DeepTailData, r07MassNodeRadius, r07OutwardLog, if_true, Nat.add_assoc] using hx
+      simpa only [m, r07DeepTailData, r07MassNodeRadius, r07OutwardLog, if_true, Nat.add_assoc] using hx
     exact r07_label_log_interval h true hm (ha.trans hc.1.1) (ha.trans hcn.1.1)
       left_mem_uIcc right_mem_uIcc (Icc_subset_uIcc ⟨hxt.1.le, hxt.2.le⟩)
 

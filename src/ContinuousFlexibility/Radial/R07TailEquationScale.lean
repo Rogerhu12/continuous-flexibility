@@ -64,7 +64,6 @@ theorem tailNaturalEquation_scale_iff {T S : Statements.DeepTailData}
     have hflux : (fun y => S.p y * deriv u y) =ᶠ[𝓝 x]
         fun y => scale * (T.p y * deriv u y) := by
       filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
-      dsimp only
       rw [hp hy]
       ring
     rw [hflux.deriv_eq, deriv_const_mul_field, hΛ, hp hx]

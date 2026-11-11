@@ -26,8 +26,8 @@ theorem r07_cap_action_of_later_band (T : Statements.MorseChainData) {C : ℝ}
   have hC₀ : 0 < C := lt_of_lt_of_le (by norm_num) hC
   have hm₁ : (1 : ℝ) ≤ m := by exact_mod_cast hstart.trans hm
   have hQ : 1 ≤ Statements.radialQ m := by
-    have hs := pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1) hm₁ 2
-    norm_num at hs
+    have hs : (1 : ℝ) ≤ (m : ℝ) ^ 2 := by
+      simpa only [one_pow] using pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1) hm₁ 2
     exact hs.trans (radial_nat_sq_le_Q m)
   exact (hC.trans (le_mul_of_one_le_right hC₀.le hQ)).trans
     (morseTransition_earlier_cap_action T hC₀ hd hband hm hmn)

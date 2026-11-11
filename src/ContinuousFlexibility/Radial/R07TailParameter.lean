@@ -89,7 +89,7 @@ theorem continuousOn_morseChainGluedProfile_iteratedDeriv_model {T : Statements.
   refine (hA.mul hM).continuousOn.congr ?_
   intro z hz
   have hσg := morseChainGluedProfile_model_germ G z.1.val z.1.property side k hz
-  have h₀g := hM₀.2.2 z.2 hz
+  have h₀g : M₀ =ᶠ[𝓝 z.2] morseChainPhysicalModelHeight G A₀ side k := hM₀.2.2 z.2 hz
   have he : morseChainGluedProfile G z.1.val z.1.property =ᶠ[𝓝 z.2]
       fun y => (Statements.morseChainAmplitude T z.1.val (T.index + k) / A₀) * M₀ y := by
     filter_upwards [hσg, h₀g] with y hyσ hy₀
