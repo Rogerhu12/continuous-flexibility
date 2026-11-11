@@ -17,7 +17,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set MeasureTheory Filter
-open scoped ENNReal InnerProductSpace
+open scoped ENNReal InnerProductSpace ContDiff
 
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
@@ -129,7 +129,26 @@ theorem RadialCellIntegrable.cosine_testOperator_pairing_hasSum {D : ReferenceDa
     exact hC.1.2.2.1.1
   have hh := hf.cosine_pairing_hasSum hD hfp hfe
     (hψ.operator_continuous hD) hK hKcore hs
-  simpa only [referenceCosineCoefficient_radialPDE hw hψ.1 hψ.2.1, radialWeakPairing]
-    using hh
+  change HasSum (fun n : ℕ => ∫ r in D.a..D.b,
+    referenceCosineCoefficient f n r *
+      referenceCosineCoefficient
+        (fun x : PolarPoint => Radial.radialPDE D.w (fun t θ => ψ (t, θ)) x.1 x.2) n r)
+    (radialWeakPairing D f ψ) at hh
+  have hterms :
+      (fun n : ℕ => ∫ r in D.a..D.b,
+        referenceCosineCoefficient f n r *
+          referenceCosineCoefficient
+            (fun x : PolarPoint => Radial.radialPDE D.w (fun t θ => ψ (t, θ)) x.1 x.2) n r) =
+      (fun n : ℕ => ∫ r in D.a..D.b,
+        referenceCosineCoefficient f n r *
+          Radial.radialJacobi (((2 * n : ℕ) : ℝ) ^ 2) D.w
+            (referenceCosineCoefficient ψ n) r) := by
+    funext n
+    apply intervalIntegral.integral_congr
+    intro r _
+    exact congrArg (fun z : ℝ => referenceCosineCoefficient f n r * z)
+      (referenceCosineCoefficient_radialPDE hw hψ.1 hψ.2.1 n r)
+  rw [hterms] at hh
+  exact hh
 
 end ContinuousFlexibility.Statements

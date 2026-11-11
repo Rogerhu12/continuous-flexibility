@@ -108,14 +108,27 @@ def matchedPhysicalOutputCell (D : ReferenceData)
     RadialModePair D →L[ℝ] MatchedPhysicalL2 D :=
   matchedPhysicalFieldFactor D hD hP k ∘L matchedModeCell D hP k
 
+/-- Regrouping is checked with abstract maps, before any density multiplier
+or its integrability proof is substituted. -/
+private theorem matchedPhysical_comp_regroup
+    {E H : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup H] [NormedSpace ℝ H]
+    (R : H →L[ℝ] E) (A G B : H →L[ℝ] H) (S : E →L[ℝ] H) :
+    R ∘L (A ∘L G ∘L B) ∘L S =
+      (R ∘L A) ∘L G ∘L (B ∘L S) := by
+  apply ContinuousLinearMap.ext
+  intro x
+  rfl
+
 theorem matchedPhysicalCellBlock_eq (D : ReferenceData)
     (hD : IsAccumulatingProfile D) (hP : RadialPartition D)
     (G : RadialModePair D →L[ℝ] RadialModePair D) (k m : ℕ) :
     matchedPhysicalCellBlock D hD hP G k m =
       matchedPhysicalOutputCell D hD hP k ∘L G ∘L
         matchedPhysicalSourceCell D hD hP m := by
-  simp only [matchedPhysicalCellBlock, matchedPhysicalOutputCell,
-    matchedPhysicalSourceCell, ContinuousLinearMap.comp_assoc]
+  exact matchedPhysical_comp_regroup
+    (matchedPhysicalFieldFactor D hD hP k) (matchedModeCell D hP k) G
+    (matchedModeCell D hP m) (matchedPhysicalSourceFactor D hD hP m)
 
 theorem matchedPhysicalPartitionInput_source {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (hP : RadialPartition D)

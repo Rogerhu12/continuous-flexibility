@@ -47,7 +47,7 @@ theorem referenceSourceCosineAnalysis_coordinate_scalar_le {D : ReferenceData}
     (fun k _ => sq_nonneg ‖referenceSourceCosineAnalysis hab hP hF k‖)
   calc
     _ ≤ (∑' k : ℕ, ‖referenceSourceCosineAnalysis hab hP hF k‖ ^ 2) + F.2 ^ 2 :=
-      add_le_add_right hle _
+      add_le_add hle le_rfl
     _ = sourceNormSquare D γ M F := by
       rw [add_comm]
       exact referenceSourceCosineAnalysis_norm_sq hab hP hF
