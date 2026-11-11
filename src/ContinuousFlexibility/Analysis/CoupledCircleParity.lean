@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.CoupledControlAlgebra
 import ContinuousFlexibility.Analysis.SolveResidualSpaces
 import ContinuousFlexibility.Analysis.SolveTameSubspace
+import ContinuousFlexibility.Analysis.NeighborhoodCircleChartsState
 
 /-!
 # Parity of the actual circle columns and the recovered chart
@@ -87,9 +88,13 @@ theorem coupled_chartIncrement_isOdd
     (hs : stateSector S z.1) {v : CircleSpace S} (hv : IsOddCircle S v) :
     IsOddCircle S (R.chartIncrement z v) := by
   intro m θ
-  rw [h2.2.2.2.2.2.1 z hz hs v m (-θ),
-    h2.2.2.2.2.2.1 z hz hs v m θ,
-    (h1.2.2.2.2.2.2.2.1 z hz hs m θ).2.2.2,
-    hv m (stateLeftChart S z.1 m θ)]
+  calc
+    _ = (S.circle (3 / 4 : ℝ)).decode v m (stateLeftChart S z.1 m (-θ)) :=
+      h2.2.2.2.2.2.1 z hz hs v m (-θ)
+    _ = (S.circle (3 / 4 : ℝ)).decode v m (-stateLeftChart S z.1 m θ) :=
+      congrArg ((S.circle (3 / 4 : ℝ)).decode v m) (stateLeftChart_odd hs m θ)
+    _ = -(S.circle (3 / 4 : ℝ)).decode v m (stateLeftChart S z.1 m θ) :=
+      hv m (stateLeftChart S z.1 m θ)
+    _ = _ := congrArg Neg.neg (h2.2.2.2.2.2.1 z hz hs v m θ).symm
 
 end ContinuousFlexibility.Statements

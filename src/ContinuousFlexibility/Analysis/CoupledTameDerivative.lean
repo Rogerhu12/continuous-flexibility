@@ -44,9 +44,6 @@ def coupledDerivativeJetValue (J : SmoothDirections U f)
   unfold coupledDerivativeJetValue coupledDerivativeExpressionJet
     CoupledDerivativeExpression.eval coupledOrderedJet
   congr 1
-  funext i
-  fin_cases i
-  rfl
 
 theorem coupledDerivativeJetValue_succ (J : SmoothDirections U f)
     (n : ℕ) (z : E × E) (v : Fin (n + 1) → E × E) :
@@ -112,8 +109,8 @@ theorem coupledDerivativeJetValue_update_smul (J : SmoothDirections U f) :
       · let w : Fin n → E × E := Fin.tail v
         let h : E × E := v 0
         have hsmul :=
-          (hasProjectiveLineDerivAt_coupledDerivativeJet J n hz (Function.update w j a) h).
-            const_smul c
+          (hasProjectiveLineDerivAt_coupledDerivativeJet J n hz
+            (Function.update w j a) h).const_smul c
         have hall := hasProjectiveLineDerivAt_coupledDerivativeJet J n hz
           (Function.update w j (c • a)) h
         have hgerm :

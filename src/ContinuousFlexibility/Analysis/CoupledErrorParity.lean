@@ -44,6 +44,8 @@ private theorem coupled_even_sub_odd_product (f g h : ℝ → ℝ)
     (hg : Function.Odd g) :
     Function.Even (fun θ => evenPart f θ - g θ * oddPart h θ) := by
   intro θ
+  change evenPart f (-θ) - g (-θ) * oddPart h (-θ) =
+    evenPart f θ - g θ * oddPart h θ
   rw [coupled_evenPart_even f θ, hg θ, coupled_oddPart_odd h θ, neg_mul_neg]
 
 private theorem coupled_even_average (f : ℝ → ℝ) (θ : ℝ) :

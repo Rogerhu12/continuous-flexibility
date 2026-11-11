@@ -74,6 +74,15 @@ theorem coupled_circle_jet_uniform_bound
     _ ≤ K * M.grading (b + 1) u :=
       mul_le_mul_of_nonneg_right (le_max_right _ _) (apply_nonneg _ _)
 
+private theorem coupled_circle_reserve_weight {W A d B : ℝ} (c : ℕ)
+    (hW : 0 < W) (hb : |(W ^ (c + 1) * A) * d| ≤ B) :
+    |(W ^ c * A) * d| ≤ W⁻¹ * B := by
+  have he : (W ^ c * A) * d = W⁻¹ * ((W ^ (c + 1) * A) * d) := by
+    rw [pow_succ]
+    field_simp [hW.ne']
+  rw [he, abs_mul, abs_of_pos (inv_pos.mpr hW)]
+  exact mul_le_mul_of_nonneg_left hb (inv_nonneg.mpr hW.le)
+
 /-- Reserving one weight order gives the same fixed square-summable
 envelope at every derivative order and every evaluation angle. -/
 theorem coupled_circle_weighted_jet_envelope
@@ -84,18 +93,9 @@ theorem coupled_circle_weighted_jet_envelope
         iteratedDeriv b (M.decode u m) θ| ≤
       (T.M (T.sample m))⁻¹ *
         (anglePairEvaluationConstant * M.grading (b + c + 2) u) := by
-  let W : ℝ := T.M (T.sample m)
-  have hW : 0 < W := zero_lt_one.trans_le (hT.2.1 _ (hsample m)).2.2.2
-  have he : (W ^ c * T.H (T.sample m) ^ (-γ)) *
-      iteratedDeriv b (M.decode u m) θ =
-      W⁻¹ * ((W ^ (c + 1) * T.H (T.sample m) ^ (-γ)) *
-        iteratedDeriv b (M.decode u m) θ) := by
-    rw [pow_succ]
-    field_simp [hW.ne']
-  rw [he, abs_mul, abs_of_pos (inv_pos.mpr hW)]
-  have hb := coupled_circle_weighted_jet_le_grading hM u m b (c + 1) θ
-  have hi : b + (c + 1) + 1 = b + c + 2 := by omega
-  rw [hi] at hb
-  exact mul_le_mul_of_nonneg_left hb (inv_nonneg.mpr hW.le)
+  apply coupled_circle_reserve_weight c
+    (zero_lt_one.trans_le (hT.2.1 _ (hsample m)).2.2.2)
+  simpa only [Nat.add_assoc] using
+    coupled_circle_weighted_jet_le_grading hM u m b (c + 1) θ
 
 end ContinuousFlexibility.Statements

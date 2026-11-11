@@ -59,22 +59,22 @@ theorem coupledSectorChartDirection_val (S : PhysicalSpacesData) (ψ : CircleSpa
 /-- Along state directions the independent parameter is fixed. -/
 theorem coupled_liftSectorParameter_add (z : StateDirections S × ℝ)
     (v : StateDirections S) (t : ℝ) :
-    liftSectorParameter S C (z + t • (v, 0)) =
-      ((liftSectorParameter S C z).1 + t • v.val, z.2) := by
+    liftSectorParameter S C (z + (@SMul.smul ℝ (StateDirections S × ℝ) _ t (v, 0))) =
+      ((liftSectorParameter S C z).1 + (@SMul.smul ℝ (AnnularState S) _ t v.val), z.2) := by
   simp only [liftSectorParameter, Prod.fst_add, Prod.snd_add,
     Prod.smul_fst, Prod.smul_snd, Submodule.coe_add, Submodule.coe_smul,
     smul_zero, add_zero, add_assoc]
 
 theorem coupled_stateProfile_add_heightDirection
     (x : AnnularState S) (η : HeightPair S) (t : ℝ) :
-    stateProfile D S C (x + t • (η, (0, (0, 0)))) = stateProfile D S C x := by
+    stateProfile D S C (x + (@SMul.smul ℝ (AnnularState S) _ t (η, (0, (0, 0))))) = stateProfile D S C x := by
   funext r
   simp only [stateProfile, stateKappa, Prod.fst_add, Prod.snd_add,
     Prod.smul_fst, Prod.smul_snd, smul_zero, add_zero]
 
 theorem coupled_stateU_add_heightDirection
     (x : AnnularState S) (η : HeightPair S) (t : ℝ) :
-    stateU S (x + t • (η, (0, (0, 0)))) =
+    stateU S (x + (@SMul.smul ℝ (AnnularState S) _ t (η, (0, (0, 0))))) =
       heightFamily (stateU S x) (heightPairField S η) t := by
   funext p
   simp only [stateU, heightPairField, Prod.fst_add, Prod.snd_add,
@@ -84,20 +84,21 @@ theorem coupled_stateU_add_heightDirection
 
 theorem coupled_scalarResidualField_add_heightDirection
     (x : AnnularState S) (η : HeightPair S) (q t : ℝ) :
-    scalarResidualField D S C (x + t • (η, (0, (0, 0))), q) =
+    scalarResidualField D S C (x + (@SMul.smul ℝ (AnnularState S) _ t (η, (0, (0, 0)))), q) =
       normalizedResidual (stateProfile D S C x) (stateRadialHeight D S C x)
         (heightFamily (stateU S x) (heightPairField S η) t) q := by
-  have hh : stateRadialHeight D S C (x + t • (η, (0, (0, 0)))) =
+  have hh : stateRadialHeight D S C (x + (@SMul.smul ℝ (AnnularState S) _ t (η, (0, (0, 0))))) =
       stateRadialHeight D S C x := by
     unfold stateRadialHeight
     rw [coupled_stateProfile_add_heightDirection]
-  simp only [scalarResidualField, coupled_stateProfile_add_heightDirection,
-    hh, coupled_stateU_add_heightDirection, normalizedResidual]
+  funext p
+  change normalizedHeightResidual _ _ _ q p = normalizedHeightResidual _ _ _ q p
+  simp only [coupled_stateProfile_add_heightDirection, hh, coupled_stateU_add_heightDirection]
 
 /-- Chart changes leave the actual scalar field exactly unchanged. -/
 theorem coupled_scalarResidualField_add_chartDirection
     (x : AnnularState S) (ψ : CircleSpace S) (q t : ℝ) :
-    scalarResidualField D S C (x + t • (0, (0, (0, ψ))), q) =
+    scalarResidualField D S C (x + (@SMul.smul ℝ (AnnularState S) _ t (0, (0, (0, ψ)))), q) =
       scalarResidualField D S C (x, q) := by
   simp only [scalarResidualField, stateRadialHeight, stateProfile, stateKappa,
     stateU, Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd,
@@ -112,7 +113,7 @@ theorem coupled_hasDerivAt_scalarResidualField_heightDirection
     (hs : stateSector S z.1) (η : HeightPair S)
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     HasDerivAt
-      (fun t : ℝ => scalarResidualField D S C (z.1 + t • (η, (0, (0, 0))), z.2) p)
+      (fun t : ℝ => scalarResidualField D S C (z.1 + (@SMul.smul ℝ (AnnularState S) _ t (η, (0, (0, 0)))), z.2) p)
       (divergenceOperator (originalCoefficients D S C z) (heightPairField S η) p +
         z.2 * scalarCorrectionError (residualErrorCoefficient D S C z)
           (scalarResidualField D S C z) (heightPairField S η) p) 0 := by
@@ -140,10 +141,17 @@ theorem coupled_hasDerivAt_scalarResidualField_heightDirection
       (angularPartial (heightAngular (stateHeight D S C z)) p) ≠ 0 :=
     ((div_pos_iff_of_pos_right hwp).mp hqratio).ne'
   simp_rw [coupled_scalarResidualField_add_heightDirection]
-  simpa only [divergenceOperator, originalCoefficients, heightCorrectedDivergence,
-    residualErrorCoefficient, scalarResidualField, normalizedResidual,
-    stateHeight, heightFamily, Radial.radialHeightField] using
-    hasDerivAt_normalizedResidual_corrected hw hh hu hη hhw z.2 hr hdisc hQ
+  change HasDerivAt
+    (fun t : ℝ => normalizedResidual (stateProfile D S C z.1) (stateRadialHeight D S C z.1)
+      (heightFamily (stateU S z.1) (heightPairField S η) t) z.2 p)
+    (heightCorrectedDivergence (stateProfile D S C z.1)
+      (heightFamily (Radial.radialHeightField (stateRadialHeight D S C z.1)) (stateU S z.1) z.2)
+      (heightPairField S η) p + z.2 *
+      scalarCorrectionError (polarTypeB (stateProfile D S C z.1)
+        (heightFamily (Radial.radialHeightField (stateRadialHeight D S C z.1)) (stateU S z.1) z.2))
+        (normalizedResidual (stateProfile D S C z.1) (stateRadialHeight D S C z.1)
+          (stateU S z.1) z.2) (heightPairField S η) p) 0
+  exact hasDerivAt_normalizedResidual_corrected hw hh hu hη hhw z.2 hr hdisc hQ
 
 /-- Interior decoding determines a source, since all decoded source heights
 vanish outside the physical annulus. -/
@@ -201,10 +209,10 @@ theorem coupled_scalar_first_derivative
 private theorem coupled_sector_eventually_line_mem
     {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
     {z : StateDirections S × ℝ} (hz : z ∈ U) (v : StateDirections S × ℝ) :
-    ∀ᶠ t : ℝ in 𝓝 0, z + t • v ∈ U := by
-  have ht : ContinuousAt (fun t : ℝ => z + t • v) 0 :=
+    ∀ᶠ t : ℝ in 𝓝 0, z + (@SMul.smul ℝ (StateDirections S × ℝ) _ t v) ∈ U := by
+  have ht : ContinuousAt (fun t : ℝ => z + (@SMul.smul ℝ (StateDirections S × ℝ) _ t v)) 0 :=
     (continuous_const.add (continuous_id.smul continuous_const)).continuousAt
-  have hline : Tendsto (fun t : ℝ => z + t • v) (𝓝 0) (𝓝 z) := by
+  have hline : Tendsto (fun t : ℝ => z + (@SMul.smul ℝ (StateDirections S × ℝ) _ t v)) (𝓝 0) (𝓝 z) := by
     simpa only [zero_smul, add_zero] using ht.tendsto
   exact hline.eventually (hU.mem_nhds hz)
 
@@ -237,7 +245,7 @@ theorem coupled_scalar_height_firstJet_decode
     (href.liftSectorParameter_sector z) η hp
   have hphysical' : HasDerivAt
       (fun t : ℝ => scalarResidualField D S C
-        (liftSectorParameter S C (z + t • (coupledSectorHeightDirection S η, 0))) p)
+        (liftSectorParameter S C (z + (@SMul.smul ℝ (StateDirections S × ℝ) _ t (coupledSectorHeightDirection S η, 0)))) p)
       (divergenceOperator (originalCoefficients D S C (liftSectorParameter S C z))
           (heightPairField S η) p +
         z.2 * scalarCorrectionError (residualErrorCoefficient D S C (liftSectorParameter S C z))
@@ -277,11 +285,18 @@ theorem coupled_scalar_chart_firstJet_eq_zero
   filter_upwards [hnear] with t ht
   change (S.height (3 / 4 : ℝ)).decode
       (P.scalar (liftSectorParameter S C
-        (z + t • (coupledSectorChartDirection S ψ hψ, 0)))).val p = _
+        (z + (@SMul.smul ℝ (StateDirections S × ℝ) _ t (coupledSectorChartDirection S ψ hψ, 0))))).val p = _
   rw [hscalar _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
     (href.liftSectorParameter_sector _) p hp]
   rw [coupled_liftSectorParameter_add, coupledSectorChartDirection_val,
     coupled_scalarResidualField_add_chartDirection]
+
+private theorem coupled_scalar_lineDerivAt_replace
+    {E F : Type*} [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {f : E → F} {df dg : F} {x v w : E}
+    (h : HasProjectiveLineDerivAt f df x v) (hd : df = dg) (hv : v = w) :
+    HasProjectiveLineDerivAt f dg x w := hd ▸ hv ▸ h
 
 /-- The scalar map has zero genuine ambient state derivative in every odd
 chart direction at a sector point. -/
@@ -297,8 +312,8 @@ theorem coupled_scalar_chart_hasLineDerivAt_zero
     HasProjectiveLineDerivAt (fun x => P.scalar (x, z.2)) 0
       (liftSectorParameter S C z).1 (0, (0, (0, ψ))) := by
   have hd := coupled_scalar_first_derivative J hz (coupledSectorChartDirection S ψ hψ)
-  rw [coupled_scalar_chart_firstJet_eq_zero hS href hscalar J hz ψ hψ,
-    coupledSectorChartDirection_val] at hd
-  exact hd
+  have hzero := coupled_scalar_chart_firstJet_eq_zero
+    (D := D) (T := T) (S := S) (C := C) (P := P) hS href hscalar J hz ψ hψ
+  exact coupled_scalar_lineDerivAt_replace hd hzero (coupledSectorChartDirection_val S ψ hψ)
 
 end ContinuousFlexibility.Statements

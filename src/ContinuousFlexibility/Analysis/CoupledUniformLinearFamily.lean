@@ -57,7 +57,8 @@ theorem coupled_uniformLinearFamilyTame_near
       (fun _ : Fin 1 => ((0 : X), y)) at h
   rw [heq, tameJetSize_one] at h
   simp only [pairGrading_apply, map_zero, add_zero, zero_add] at h
-  simpa only [add_comm ((1 + p (s + loss) x) * q b y) (q (s + loss) y)] using h
+  simpa only [ContinuousLinearMap.coe_coe,
+    add_comm ((1 + p (s + loss) x) * q b y) (q (s + loss) y)] using h
 
 end LinearFamily
 

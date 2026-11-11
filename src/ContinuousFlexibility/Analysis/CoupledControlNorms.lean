@@ -11,6 +11,8 @@ finite circle grading, obtained from the original seminorm topology.
 
 noncomputable section
 
+open scoped NNReal ENNReal
+
 namespace ContinuousFlexibility.Analysis
 
 section BanachTarget
@@ -30,7 +32,7 @@ theorem coupled_exists_grading_bound
   have hq : Continuous q := L.continuous.norm
   obtain ⟨s, C, _, hC⟩ := Seminorm.bound_of_continuous ht q hq
   have hsup : s.sup p ≤ p (s.sup id) :=
-    Finset.sup_le (fun i hi => hp (Finset.le_sup hi))
+    Finset.sup_le (fun i hi => hp (Finset.le_sup (f := id) hi))
   refine ⟨s.sup id, C, fun x => ?_⟩
   have hCx : ‖L x‖ ≤ (C : ℝ) * (s.sup p) x := hC x
   exact hCx.trans (mul_le_mul_of_nonneg_left (hsup x) C.coe_nonneg)

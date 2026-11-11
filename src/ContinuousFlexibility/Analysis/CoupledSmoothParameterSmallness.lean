@@ -57,14 +57,15 @@ theorem continuousOn_coupledParameterDerivative
     (J : SmoothDirections (U ×ˢ univ) (fun z : (X × ℝ) × E => A z.1 z.2)) :
     ContinuousOn (fun z : (X × ℝ) × E => coupledParameterDerivative J z.1 z.2)
       (U ×ˢ univ) := by
+  let v : Fin 1 → X × ℝ := Fin.cons ((0 : X), 1) Fin.elim0
   have hm : Continuous
-      (fun z : (X × ℝ) × E => (z.1, (Fin.cons ((0 : X), 1) Fin.elim0, z.2))) :=
+      (fun z : (X × ℝ) × E => (z.1, (v, z.2))) :=
     continuous_fst.prodMk (continuous_const.prodMk continuous_snd)
   have hc := (continuousOn_inverseForwardJet J 1).comp hm.continuousOn
     (fun z hz => ⟨hz.1, mem_univ _⟩)
   apply hc.congr
   intro z hz
-  exact inverseForwardJetLinear_apply J 1 z.1 (Fin.cons ((0 : X), 1) Fin.elim0) z.2
+  exact inverseForwardJetLinear_apply J 1 z.1 v z.2
 
 /-- A genuinely smooth linear family which vanishes at zero parameter has
 uniformly small fiber norm on one parameter strip near any base point. -/
@@ -75,9 +76,9 @@ theorem coupled_exists_small_smooth_parameter_family
     (hzero : ∀ x, (x, 0) ∈ U → ∀ u, A (x, 0) u = 0) :
     ∃ W : Set X, W ∈ 𝓝 x0 ∧ ∃ δ : ℝ, 0 < δ ∧
       ∀ x ∈ W, ∀ q : ℝ, |q| < δ → (x, q) ∈ U ∧ ‖A (x, q)‖ < (1 / 4 : ℝ) := by
+  have hc := (continuousOn_coupledParameterDerivative J) ((x0, 0), 0) ⟨hx0, mem_univ _⟩
   exact coupled_exists_small_parameter_family A (coupledParameterDerivative J) hU hx0 hzero
     (fun z hz u => coupledParameterDerivative_hasDerivAt hU J hz u)
-    ((continuousOn_coupledParameterDerivative J) ((x0, 0), 0) ⟨hx0, mem_univ _⟩).
-      continuousAt ((hU.prod isOpen_univ).mem_nhds ⟨hx0, mem_univ _⟩)
+    (hc.continuousAt ((hU.prod isOpen_univ).mem_nhds ⟨hx0, mem_univ _⟩))
 
 end ContinuousFlexibility.Analysis

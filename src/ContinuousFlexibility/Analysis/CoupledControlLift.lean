@@ -48,20 +48,31 @@ def coupledInverseControlLift (hM : IsCircleModel T γ M)
   (coupledCircleMultiplier hM (fun m => (a m)⁻¹) 2
     (coupled_inverseDiagonal_bound a ha)).comp (circleAngularMeanProjection hM)
 
+theorem coupledInverseControlLift_apply (hM : IsCircleModel T γ M)
+    (a : ℕ → ℝ) (ha : ∀ m, (1 / 2 : ℝ) ≤ |a m|) (u : M.Space) :
+    coupledInverseControlLift hM a ha u =
+      coupledCircleMultiplier hM (fun m => (a m)⁻¹) 2
+        (coupled_inverseDiagonal_bound a ha) (circleAngularMeanProjection hM u) :=
+  ContinuousLinearMap.comp_apply _ _ u
+
 theorem coupledInverseControlLift_decode (hM : IsCircleModel T γ M)
     (a : ℕ → ℝ) (ha : ∀ m, (1 / 2 : ℝ) ≤ |a m|)
     (u : M.Space) (m : ℕ) (θ : ℝ) :
     M.decode (coupledInverseControlLift hM a ha u) m θ =
       (a m)⁻¹ * angularMean (M.decode u m) := by
-  rw [coupledInverseControlLift, ContinuousLinearMap.comp_apply,
-    coupledCircleMultiplier_decode, circleAngularMeanProjection_decode]
+  exact (congrArg (fun v : M.Space => M.decode v m θ)
+    (coupledInverseControlLift_apply hM a ha u)).trans
+      ((coupledCircleMultiplier_decode hM (fun m => (a m)⁻¹) 2
+        (coupled_inverseDiagonal_bound a ha) (circleAngularMeanProjection hM u) m θ).trans
+          (congrArg ((a m)⁻¹ * ·) (circleAngularMeanProjection_decode hM u m θ)))
 
 theorem coupledInverseControlLift_constant (hM : IsCircleModel T γ M)
     (a : ℕ → ℝ) (ha : ∀ m, (1 / 2 : ℝ) ≤ |a m|)
     (u : M.Space) (m : ℕ) (θ φ : ℝ) :
     M.decode (coupledInverseControlLift hM a ha u) m θ =
       M.decode (coupledInverseControlLift hM a ha u) m φ := by
-  rw [coupledInverseControlLift_decode, coupledInverseControlLift_decode]
+  exact (coupledInverseControlLift_decode hM a ha u m θ).trans
+    (coupledInverseControlLift_decode hM a ha u m φ).symm
 
 theorem coupledInverseControlLift_even (hM : IsCircleModel T γ M)
     (a : ℕ → ℝ) (ha : ∀ m, (1 / 2 : ℝ) ≤ |a m|) (u : M.Space) (m : ℕ) :
@@ -72,11 +83,14 @@ theorem coupledInverseControlLift_even (hM : IsCircleModel T γ M)
 theorem coupledInverseControlLift_grading_le (hM : IsCircleModel T γ M)
     (a : ℕ → ℝ) (ha : ∀ m, (1 / 2 : ℝ) ≤ |a m|) (n : ℕ) (u : M.Space) :
     M.grading n (coupledInverseControlLift hM a ha u) ≤ 2 * M.grading n u := by
-  rw [coupledInverseControlLift, ContinuousLinearMap.comp_apply]
   calc
-    _ ≤ 2 * M.grading n (circleAngularMeanProjection hM u) :=
-      coupledCircleMultiplierLinear_grading_le hM (fun m => (a m)⁻¹) 2
-        (coupled_inverseDiagonal_bound a ha) n (circleAngularMeanProjection hM u)
+    _ = M.grading n (coupledCircleMultiplier hM (fun m => (a m)⁻¹) 2
+        (coupled_inverseDiagonal_bound a ha) (circleAngularMeanProjection hM u)) :=
+      congrArg (M.grading n) (coupledInverseControlLift_apply hM a ha u)
+    _ ≤ 2 * M.grading n (circleAngularMeanProjection hM u) := by
+      simpa only [NNReal.coe_ofNat] using
+        coupledCircleMultiplierLinear_grading_le hM (fun m => (a m)⁻¹) 2
+          (coupled_inverseDiagonal_bound a ha) n (circleAngularMeanProjection hM u)
     _ ≤ 2 * M.grading n u := mul_le_mul_of_nonneg_left
       (circleAngularMeanLinear_grading_le hM n u) (by norm_num)
 
@@ -85,7 +99,7 @@ theorem coupledInverseControlLift_isTame (hM : IsCircleModel T γ M)
     ContinuousFlexibility.Analysis.IsTameLinear M.grading M.grading
       (coupledInverseControlLift hM a ha).toLinearMap 0 0 := by
   intro n _
-  exact ⟨2, fun u => by simpa only [Nat.add_zero] using
+  exact ⟨2, fun u => by simpa only [Nat.add_zero, NNReal.coe_ofNat] using
     coupledInverseControlLift_grading_le hM a ha n u⟩
 
 end CircleModel
@@ -108,14 +122,25 @@ theorem coupledInverseControlLift_restriction
       B.JInverse z (B.restriction u) := by
   apply lp.ext
   funext m
-  rw [hrestriction, controlJInverse_apply_of_diagonal B z hdiag hJ hlo, hrestriction]
   have heq : (S.circle (3 / 4 : ℝ)).decode
       (coupledInverseControlLift hS (B.diagonal z) hlo u) m =
       (fun _ : ℝ => (B.diagonal z m)⁻¹ *
         angularMean ((S.circle (3 / 4 : ℝ)).decode u m)) :=
     funext (coupledInverseControlLift_decode hS (B.diagonal z) hlo u m)
-  rw [heq, coupled_angularMean_const]
-  ring
+  have hmean := (congrArg angularMean heq).trans (coupled_angularMean_const _)
+  calc
+    _ = T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
+        angularMean ((S.circle (3 / 4 : ℝ)).decode
+          (coupledInverseControlLift hS (B.diagonal z) hlo u) m) := hrestriction _ m
+    _ = T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
+        ((B.diagonal z m)⁻¹ * angularMean ((S.circle (3 / 4 : ℝ)).decode u m)) :=
+      congrArg (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * ·) hmean
+    _ = (B.diagonal z m)⁻¹ * (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
+        angularMean ((S.circle (3 / 4 : ℝ)).decode u m)) := mul_left_comm _ _ _
+    _ = (B.diagonal z m)⁻¹ * B.restriction u m :=
+      congrArg ((B.diagonal z m)⁻¹ * ·) (hrestriction u m).symm
+    _ = B.JInverse z (B.restriction u) m :=
+      (controlJInverse_apply_of_diagonal B z hdiag hJ hlo (B.restriction u) m).symm
 
 theorem controlRestriction_eq_zero_iff
     (B : ControlColumnData S)
