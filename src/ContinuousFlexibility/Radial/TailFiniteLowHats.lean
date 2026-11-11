@@ -140,7 +140,7 @@ theorem tailFiniteLowHat_deriv (T : DeepTailData) (hT : DeepTailHypotheses T)
     deriv (tailFiniteLowHat T hT a) x =
       ∑ n ∈ a.support, a n * deriv (tailLowHat T hT n) x := by
   unfold tailFiniteLowHat
-  rw [deriv_sum (fun n _ =>
+  rw [deriv_fun_sum (u := a.support) (fun n _ =>
     (((tailLowHat_smooth T hT n).differentiable (by simp)) x).const_mul (a n))]
   apply Finset.sum_congr rfl
   intro n _
@@ -242,10 +242,11 @@ theorem tailFiniteLowHat_gap_norm (T : DeepTailData) (hT : DeepTailHypotheses T)
       intro x hx
       try dsimp only
       apply mul_le_mul_of_nonneg_left _ (deepTail_pos hT x (hs hx)).le
+      simp only [Pi.pow_apply]
       rw [tailFiniteLowHat_gap T hT a ha m hx]
       exact tail_interpolation_sq_le (tailGapStep_range T hT m x).1
         (tailGapStep_range T hT m x).2
-    _ = _ := by rw [intervalIntegral.integral_mul_const]; ring
+    _ = _ := by rw [intervalIntegral.integral_mul_const, tailGapMass] <;> ring
 
 theorem tailFiniteLowHat_gap_energy (T : DeepTailData) (hT : DeepTailHypotheses T)
     (a : ℕ →₀ ℝ) (ha : ∀ n ∈ a.support, tailFirstMassIndex T ≤ n) (m : ℕ) :
@@ -294,6 +295,7 @@ theorem tailFiniteLowHat_initial_norm (T : DeepTailData) (hT : DeepTailHypothese
           intro x hx
           try dsimp only
           apply mul_le_mul_of_nonneg_left _ (deepTail_pos hT x (hs hx)).le
+          simp only [Pi.pow_apply]
           rw [tailFiniteLowHat_initial T hT a ha hx, mul_pow]
           have ht := tailEntryStep_range T hT x
           have ht2 : tailEntryStep T hT x ^ 2 ≤ 1 := by nlinarith
