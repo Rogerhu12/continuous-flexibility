@@ -36,7 +36,7 @@ private theorem n06_weighted_product_square {a w v x δ : ℝ}
       mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left hw (by positivity)) (sq_nonneg x)
 
-private theorem n06_cubic_firstOrder_abs {d e A Ar At δ : ℝ}
+theorem n06_cubic_firstOrder_abs {d e A Ar At δ : ℝ}
     (hd : 0 ≤ d) (hd₁ : d ≤ 1) (he : |e| ≤ 1)
     (hA : |A| ≤ δ) (hAr : |Ar| ≤ δ) (hAt : |At| ≤ δ) :
     |3 * e * A + d * Ar + d * At| ≤ 5 * δ := by
