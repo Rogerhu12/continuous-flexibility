@@ -48,7 +48,7 @@ theorem squareDensity_memLp_iff (μ : Measure ℝ) {a : ℝ → ℝ}
     convert h using 1
     funext x
     rw [ENNReal.toReal_ofReal (sq_nonneg (a x))]
-    simp only [smul_eq_mul]
+    simp only [smul_eq_mul, Pi.mul_apply]
     ring
   · intro hf
     have hfm : AEStronglyMeasurable f μ := by
@@ -63,7 +63,7 @@ theorem squareDensity_memLp_iff (μ : Measure ℝ) {a : ℝ → ℝ}
     convert hf.integrable_sq using 1
     funext x
     rw [ENNReal.toReal_ofReal (sq_nonneg (a x))]
-    simp only [smul_eq_mul]
+    simp only [smul_eq_mul, Pi.mul_apply]
     ring
 
 private theorem realL2_norm_sq {μ : Measure ℝ} (f : Lp ℝ 2 μ) :
@@ -115,8 +115,9 @@ def squareDensityIsometry (μ : Measure ℝ) {a : ℝ → ℝ}
   norm_map' u := by
     have ht := realToLp_norm_sq ((squareDensity_memLp_iff μ ha hpos u).mp (Lp.memLp u))
     have hu := realL2_norm_sq u
-    rw [squareDensityMeasure,
-      integral_withDensity_eq_integral_toReal_smul (ha.pow_const 2).ennreal_ofReal (by simp)] at hu
+    change ‖u‖ ^ 2 = ∫ x, u x ^ 2 ∂(μ.withDensity (fun x => ENNReal.ofReal (a x ^ 2))) at hu
+    rw [integral_withDensity_eq_integral_toReal_smul
+      (ha.pow_const 2).ennreal_ofReal (by simp)] at hu
     simp only [ENNReal.toReal_ofReal (sq_nonneg (a _)), smul_eq_mul] at hu
     have hi : (∫ x, (a x * u x) ^ 2 ∂μ) = ∫ x, a x ^ 2 * u x ^ 2 ∂μ := by
       congr 1

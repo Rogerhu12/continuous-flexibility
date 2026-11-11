@@ -97,9 +97,13 @@ def finiteLinearTransfer {a b c d : ℝ} (hab : a ≤ b)
   map_add' x y := finiteLinearSolution_add hab A hA hc hd x y
   map_smul' r x := finiteLinearSolution_smul hab A hA hc hd r x
   left_inv x := by
-    rw [finiteLinearSolution_rebase hab A hA hd hc, finiteLinearSolution_initial]
+    change finiteLinearSolution hab A hA d (finiteLinearSolution hab A hA c x d) c = x
+    exact (finiteLinearSolution_rebase hab A hA hd hc x).trans
+      (finiteLinearSolution_initial hab A hA c x)
   right_inv x := by
-    rw [finiteLinearSolution_rebase hab A hA hc hd, finiteLinearSolution_initial]
+    change finiteLinearSolution hab A hA c (finiteLinearSolution hab A hA d x c) d = x
+    exact (finiteLinearSolution_rebase hab A hA hc hd x).trans
+      (finiteLinearSolution_initial hab A hA d x)
 
 theorem finiteLinearTransfer_apply {a b c d : ℝ} (hab : a ≤ b)
     (A : ℝ → E →L[ℝ] E) (hA : ContinuousOn A (Icc a b))

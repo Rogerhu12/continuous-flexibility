@@ -53,6 +53,8 @@ theorem morseRealized_state_pullback {T : MorseChainData} {σ : ℕ → ℝ}
   have hcomp := ((hw.differentiable (by simp) (R X)).hasDerivAt).comp X hRd
   have hmodel := ((hR'.differentiable (by simp) X).hasDerivAt).const_mul lam
   have hderivative := derivWithin_congr hprofile (hprofile hX)
+  change derivWithin (D.w ∘ R) (Icc a b) X =
+    derivWithin (fun Y => lam * deriv R Y) (Icc a b) X at hderivative
   rw [hcomp.hasDerivWithinAt.derivWithin (uniqueDiffOn_Icc hab X hX),
     hmodel.hasDerivWithinAt.derivWithin (uniqueDiffOn_Icc hab X hX)] at hderivative
   have hweight : deriv D.w (R X) * deriv R X =

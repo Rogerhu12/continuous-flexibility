@@ -83,8 +83,7 @@ theorem outerGreenKernel_tail_decomposition {lam : ℝ} {U V P Q : X → ℝ} {c
       rw [hleft]
     _ = Q (min x y) * P (max x y) +
         (lam⁻¹ * (U c * V c)) * (P (min x y) * P (max x y)) := by
-      field_simp [hlam]
-      ring
+      field_simp [hlam] <;> ring
     _ = Q (min x y) * P (max x y) +
         outerGreenKernel lam U V c c * (P x * P y) := by
       rw [hprod, outerGreenKernel_self]
@@ -105,7 +104,7 @@ def outerContinuousGreenKernel (lam : ℝ) (U V : C(X, ℝ)) : C(X, C(X, ℝ)) :
 
 theorem outerContinuousGreenKernel_apply (lam : ℝ) (U V : C(X, ℝ)) (x y : X) :
     outerContinuousGreenKernel lam U V x y = outerGreenKernel lam U V x y := by
-  rw [outerContinuousGreenKernel, ContinuousMap.curry_apply]
+  rw [outerContinuousGreenKernel, ContinuousMap.curry_apply, ContinuousMap.coe_mk]
 
 variable [MeasurableSpace X] [BorelSpace X] [SecondCountableTopology X]
   (μ : Measure X) [IsFiniteMeasure μ]
@@ -141,7 +140,7 @@ theorem norm_outerCoreGreenOperator_scale_cancel {lam A K : ℝ}
       norm_outerCoreGreenOperator_le μ hlam hK U V hU hV
     _ ≤ (lam * A ^ 2) * (K ^ 2 / lam) :=
       mul_le_mul_of_nonneg_right hmass (div_nonneg (sq_nonneg K) hlam.le)
-    _ = A ^ 2 * K ^ 2 := by field_simp [hlam.ne']; ring
+    _ = A ^ 2 * K ^ 2 := by field_simp [hlam.ne'] <;> ring
 
 end ContinuousCore
 

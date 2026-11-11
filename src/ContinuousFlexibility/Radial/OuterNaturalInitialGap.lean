@@ -278,6 +278,8 @@ theorem tailActualState_initial_sq_integral_le {T : DeepTailData}
     have hi := intervalIntegral.integral_mono_on hg.1.le
       ((hp.mul (huc.pow 2)).intervalIntegrable_of_Icc (μ := volume) hg.1.le)
       ((continuousOn_const.mul hp).intervalIntegrable_of_Icc (μ := volume) hg.1.le) hpoint
+    change (∫ x in T.entrance..T.node 0, T.p x * u x ^ 2) ≤
+      ∫ x in T.entrance..T.node 0, (16 * u T.entrance ^ 2) * T.p x at hi
     rw [intervalIntegral.integral_const_mul] at hi
     change (∫ x in T.entrance..T.node 0, T.p x * u x ^ 2) ≤
       (16 * u T.entrance ^ 2) * tailInitialGapMass T at hi
@@ -350,7 +352,7 @@ theorem tailNaturalEquation_full_sq_integral_le {T : DeepTailData}
   have hone := tailActualState_entrance_abs_ge_one hT hη hK hsys hu₀ hv₀
   have hsq : 1 ≤ u T.entrance ^ 2 := by
     have h := mul_self_le_mul_self (by norm_num : (0 : ℝ) ≤ 1) hone
-    simpa only [one_mul, ← pow_two, sq_abs] using h
+    simpa only [one_mul, ← pow_two, sq_abs, one_pow] using h
   have hscale := mul_le_mul_of_nonneg_left hsq
     (mul_nonneg (by norm_num : (0 : ℝ) ≤ 32) (tailMass_pos hT 0).le)
   rw [tail_integral_density ((deepTail_contDiffOn hT).mono Ioo_subset_Ico_self)

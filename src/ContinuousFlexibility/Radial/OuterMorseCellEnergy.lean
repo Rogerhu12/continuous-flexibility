@@ -49,7 +49,8 @@ theorem morse_positive_endpoint_energy {A B j l r : ℝ} {u v : ℝ → ℝ}
     (continuous_const.mul hρc.neg).continuousOn (fun _ _ => zero_le_one)
     (fun x hx => mul_nonneg (sq_nonneg j) (hρ x hx)) hstate
   simpa only [morsePositiveEnergyFactor, intervalIntegral.integral_const,
-    smul_eq_mul, mul_one, intervalIntegral.integral_const_mul] using h
+    smul_eq_mul, mul_one, Pi.mul_apply, Pi.neg_apply,
+    intervalIntegral.integral_const_mul] using h
 
 theorem morseCellLeftCut_lt_leftTurn {A B : ℝ} (hB : 0 < B) (hAB : 4 * B < A) :
     morseCellLeftCut < morseLeftTurn A B := by

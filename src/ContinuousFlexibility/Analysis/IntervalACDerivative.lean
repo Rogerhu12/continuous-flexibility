@@ -68,7 +68,7 @@ theorem hasDerivAt_of_locallyAC_ae {a b : ℝ} {f g : ℝ → ℝ}
       (hasDerivAt_intervalWeakPrimitive hg hx (hsub hymem))).congr_deriv (by ring)
   obtain ⟨C, hC⟩ := ((hAC l hl r hr).sub hPAC).const_of_ae_hasDerivAt_zero hzero
   have hCx : f x = C := by
-    simpa only [intervalWeakPrimitive, intervalIntegral.integral_same, sub_zero] using hC x hxmem
+    simpa only [Pi.sub_apply, intervalWeakPrimitive, intervalIntegral.integral_same, sub_zero] using hC x hxmem
   have hclass : HasDerivAt (fun t => f x + intervalWeakPrimitive x g t) (g x) x :=
     (hasDerivAt_intervalWeakPrimitive hg hx hx).const_add (f x)
   apply hclass.congr_of_eventuallyEq
