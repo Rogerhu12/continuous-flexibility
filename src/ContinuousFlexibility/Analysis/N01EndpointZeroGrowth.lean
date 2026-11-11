@@ -29,7 +29,8 @@ private theorem zeroGrowth_seminorm_zero_line_le
     {E : Type*} [AddCommGroup E] [Module ℝ E]
     (p : Seminorm ℝ E) (x : E) {t : ℝ} (ht : |t| ≤ 1) :
     p (0 + t • x) ≤ p x := by
-  simpa only [p.map_zero', zero_add] using seminorm_line_le_of_abs_le_one p 0 x ht
+  exact (seminorm_line_le_of_abs_le_one p 0 x ht).trans_eq
+    ((congrArg (fun r : ℝ => r + p x) (map_zero p)).trans (zero_add (p x)))
 
 private theorem zeroGrowth_oneHigh_single_cons_le
     {E : Type*} [AddCommGroup E] [Module ℝ E]

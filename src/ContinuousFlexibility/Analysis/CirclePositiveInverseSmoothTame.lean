@@ -54,8 +54,8 @@ private theorem smoothTameOn_positiveFamily_of_local_bounds
   have hW : IsOpen W := isOpen_lt
     ((ht.continuous_seminorm base).comp (continuous_id.sub continuous_const)) continuous_const
   have hzW : z₀.1 ∈ W := by
-    change p base (z₀.1 - z₀.1) < δ
-    simpa only [sub_self, (p base).map_zero'] using hδ
+    have hzero : p base (0 : E) = 0 := map_zero (p base)
+    exact ((congrArg (fun y : E => p base y) (sub_self z₀.1)).trans hzero).trans_lt hδ
   have hlower' (e : E) (he : e ∈ W) (m : ℕ) (θ : ℝ) :
       a ≤ localSlope e m θ :=
     hpositive e ((hm hbase (e - z₀.1)).trans_lt he) m θ

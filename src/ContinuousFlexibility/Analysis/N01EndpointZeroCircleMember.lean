@@ -40,6 +40,12 @@ private theorem pair_grading_scaled_scalar_le
   rw [Real.norm_eq_abs, Real.norm_eq_abs, abs_mul, abs_of_nonneg ht.1]
   exact add_le_add (le_refl _) (mul_le_of_le_one_left (abs_nonneg _) ht.2)
 
+private theorem hasDerivAt_mul_argument
+    {f : ℝ → ℝ} {d t q : ℝ} (hf : HasDerivAt f d (t * q)) :
+    HasDerivAt (fun a => f (a * q)) (q * d) t := by
+  simpa only [Function.comp_def] using
+    (hf.comp t (hasDerivAt_mul_const q)).congr_deriv (mul_comm d q)
+
 private theorem scalar_height_curve_energy_bound
     {q M K A B lo hi p y : ℝ} {E : ℝ≥0∞}
     (c s : ℕ) (hM : 1 ≤ M) (hcs : c ≤ s)
@@ -123,9 +129,16 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
       HasDerivAt (fun a => iteratedDeriv b (F a m) θ) (G t m b θ) t := by
     have hd := hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel 0 z₀
       (scalarParameterDirection S) Fin.elim0 (t * z.2) (hpath t ht) m b θ
-    rw [htuple] at hd
-    have h := hd.comp t ((hasDerivAt_id t).mul_const z.2)
-    simpa only [F, G, path, Function.comp_def, mul_comm] using h
+    have heq : iteratedDeriv b
+        (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (path t)
+          (Fin.cons (scalarParameterDirection S)
+            (Fin.elim0 : Fin 0 → (StateDirections S × ℝ))) m) θ =
+        iteratedDeriv b
+          (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (path t)
+            (fun _ => scalarParameterDirection S) m) θ :=
+      congrArg (fun v : Fin 1 → (StateDirections S × ℝ) =>
+        iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel 1 (path t) v m) θ) htuple
+    exact hasDerivAt_mul_argument (t := t) (q := z.2) (hd.congr_deriv heq)
   let ξ : HeightPair S := (liftSectorParameter S C z).1.1
   let directions := hN.exists_height_pair_plateau_directions hS hT ξ
   let η : ℕ → HeightPair S := directions.choose
