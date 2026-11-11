@@ -116,11 +116,12 @@ theorem interval_entrance_trace_identity {a c : ℝ} (hac : a ≤ c) {U D : ℝ 
   have hWd (x : ℝ) (hx : x ∈ Ioo a c) :
       HasDerivAt (fun y => (c - y) * U y) (-U x + (c - x) * D x) x := by
     have h := ((hasDerivAt_const x c).fun_sub (hasDerivAt_id x)).fun_mul (hder x hx)
-    simpa only [zero_sub, neg_one_mul] using h
+    simpa only [zero_sub, neg_one_mul, id_eq] using h
   have hi : IntervalIntegrable (fun x => -U x + (c - x) * D x) volume a c :=
     hUi.neg.add hVi
+  have hUneg : IntervalIntegrable (fun x => -U x) volume a c := hUi.neg
   have hFTC := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hac hW hWd hi
-  rw [intervalIntegral.integral_add hUi.neg hVi, intervalIntegral.integral_neg] at hFTC
+  rw [intervalIntegral.integral_add hUneg hVi, intervalIntegral.integral_neg] at hFTC
   simp only [sub_self, zero_mul, zero_sub] at hFTC
   linarith only [hFTC]
 
@@ -163,7 +164,7 @@ theorem tailFormLift_entrance_integral_identity {T : DeepTailData} {c endCut : �
   dsimp only [A, B] at hpair
   rw [tailEntrancePairing_apply hp hpos hac.le hcb hA u EventuallyEq.rfl,
     tailEntrancePairing_apply hp hpos hac.le hcb hB d EventuallyEq.rfl] at hpair
-  simpa only [mul_one, mul_comm] using hpair
+  simpa only [mul_one, one_mul, mul_comm] using hpair
 
 /-- Every classical representative of a closed-form element has zero
 entrance value. The representative is not assumed to have zero trace. -/
@@ -195,6 +196,7 @@ theorem tailFormLift_classical_entrance_eq_zero {T : DeepTailData} {c endCut : �
     apply intervalIntegral.integral_congr_ae
     filter_upwards [hdVol] with x hx hxin
     rw [uIoc_of_le hac.le] at hxin
+    change (c - x) * d x = (c - x) * D x
     rw [hx ⟨hxin.1, hxin.2.trans_lt hcb⟩]
   rw [hUint, hDint] at hform
   have htrace := interval_entrance_trace_identity hac.le hU hD hder
@@ -230,5 +232,167 @@ theorem tailResolvent_classical_entrance_eq_zero {T : DeepTailData}
     simpa only [mul_comm] using hx
   exact tailFormLift_classical_entrance_eq_zero hpOpen hposOpen hac hcb hpNear hposNear
     hud hU (hQ.div hpNear (fun x hx => (hposNear x hx).ne')) hu hd hder
+
+/-- Every weighted `L²` vector is ordinarily integrable all the way to the
+regular entrance on a fixed initial interval. -/
+theorem tail_intervalIntegrable_at_entrance {T : DeepTailData} {c : ℝ}
+    (hp : ContDiffOn ℝ ∞ T.p (Ioo T.entrance T.endpoint))
+    (hpos : ∀ x ∈ Ioo T.entrance T.endpoint, 0 < T.p x)
+    (hac : T.entrance ≤ c) (hcb : c < T.endpoint)
+    (hpNear : ContinuousOn T.p (Icc T.entrance c))
+    (hposNear : ∀ x ∈ Icc T.entrance c, 0 < T.p x) (u : DeepTailL2 T) :
+    IntervalIntegrable (u : ℝ → ℝ) volume T.entrance c := by
+  have hA : MemLp (tailEntranceWeight T c (fun _ => 1)) 2 (deepTailMeasure T) :=
+    tailEntranceWeight_memLp hp hpos hpNear hposNear continuousOn_const
+  have hi := (Lp.memLp u).integrable_mul hA
+  have hdensity := (tail_integrable_density_iff hp hpos _).mp hi
+  have hsub : Ioc T.entrance c ⊆ Ioo T.entrance T.endpoint :=
+    fun x hx => ⟨hx.1, hx.2.trans_lt hcb⟩
+  apply (intervalIntegrable_iff_integrableOn_Ioc_of_le hac).mpr
+  apply (hdensity.mono_set hsub).congr_fun _ measurableSet_Ioc
+  intro x hx
+  change T.p x * (u x * tailEntranceWeight T c (fun _ => 1) x) = u x
+  rw [tailEntranceWeight, indicator_of_mem hx]
+  field_simp [(hposNear x (Ioc_subset_Icc_self hx)).ne'] <;> ring
+
+/-- An integrable classical derivative has a continuous primitive at the
+left endpoint. Only the endpoint value is changed; the whole open-interval
+function is retained. -/
+theorem exists_interval_left_continuous_extension {a b c : ℝ} {F H : ℝ → ℝ}
+    (hac : a < c) (hcb : c < b)
+    (hF : ContinuousOn F (Ioo a b))
+    (hder : ∀ x ∈ Ioo a b, HasDerivAt F (H x) x)
+    (hH : IntervalIntegrable H volume a c) :
+    ∃ E : ℝ → ℝ, EqOn E F (Ioo a b) ∧ ContinuousOn E (Ico a b) := by
+  let P : ℝ → ℝ := fun x => F c + ∫ t in c..x, H t
+  have hcc : c ∈ uIcc a c := by simp only [uIcc_of_le hac.le, mem_Icc, hac.le, le_refl, and_self]
+  have hPrimitive : ContinuousOn (fun x => ∫ t in c..x, H t) (Icc a c) := by
+    simpa only [uIcc_of_le hac.le] using
+      (hH.absolutelyContinuousOnInterval_intervalIntegral hcc).continuousOn
+  have hP : ContinuousOn P (Icc a c) := continuousOn_const.fun_add hPrimitive
+  have hPeq (x : ℝ) (hx : x ∈ Ioc a c) : P x = F x := by
+    have hsub : Icc x c ⊆ Ioo a b :=
+      fun y hy => ⟨hx.1.trans_le hy.1, hy.2.trans_lt hcb⟩
+    have hi : IntervalIntegrable H volume x c := hH.mono_set (by
+      rw [uIcc_of_le hx.2, uIcc_of_le hac.le]
+      exact fun y hy => ⟨hx.1.le.trans hy.1, hy.2⟩)
+    have hFTC := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hx.2 (hF.mono hsub)
+      (fun y hy => hder y (hsub (Ioo_subset_Icc_self hy))) hi
+    dsimp only [P]
+    rw [intervalIntegral.integral_symm, hFTC]
+    ring
+  let E : ℝ → ℝ := fun x => if x = a then P a else F x
+  have hEq : EqOn E F (Ioo a b) := by
+    intro x hx
+    simp only [E, if_neg hx.1.ne']
+  have hEqNear : EqOn E P (Icc a c) := by
+    intro x hx
+    by_cases hxa : x = a
+    · simp [E, hxa]
+    · rw [show E x = F x from if_neg hxa]
+      exact (hPeq x ⟨lt_of_le_of_ne hx.1 (Ne.symm hxa), hx.2⟩).symm
+  have hENear : ContinuousOn E (Icc a c) := hP.congr hEqNear
+  have hEOpen : ContinuousOn E (Ioo a b) := hF.congr hEq
+  refine ⟨E, hEq, ?_⟩
+  intro x hx
+  by_cases hxa : x = a
+  · subst x
+    apply (hENear a ⟨le_rfl, hac.le⟩).mono_of_mem_nhdsWithin
+    filter_upwards [self_mem_nhdsWithin,
+      mem_nhdsWithin_of_mem_nhds (Iio_mem_nhds hac)] with y hy hyc
+    exact ⟨hy.1, hyc.le⟩
+  · have hxin : x ∈ Ioo a b := ⟨lt_of_le_of_ne hx.1 (Ne.symm hxa), hx.2⟩
+    exact (hEOpen.continuousAt (isOpen_Ioo.mem_nhds hxin)).continuousWithinAt
+
+/-- No boundary regularity assumption is needed for the resolvent: local
+weighted integrability first extends its flux to the regular entrance, then
+extends its function, and the closed form forces the entrance value to zero. -/
+theorem exists_tailResolvent_classical_rep_with_entrance {T : DeepTailData}
+    (hT : DeepTailHypotheses T) (hI : TailFormIdentification T T.endpoint)
+    {u f : DeepTailL2 T} {ψ : ℝ → ℝ}
+    (hψ : ContinuousOn ψ (Ioo T.entrance T.endpoint))
+    (hf : (f : ℝ → ℝ) =ᵐ[deepTailMeasure T] ψ)
+    (hgraph : TailFriedrichsGraph T T.endpoint u (f + T.Λ • u)) :
+    ∃ d : DeepTailL2 T, ∃ U Q : ℝ → ℝ,
+      (u, d) ∈ TailFormLift T T.endpoint ∧
+      ContinuousOn U (Ico T.entrance T.endpoint) ∧
+      ContinuousOn Q (Ico T.entrance T.endpoint) ∧ U T.entrance = 0 ∧
+      (u : ℝ → ℝ) =ᵐ[deepTailMeasure T] U ∧
+      (fun x => T.p x * d x) =ᵐ[deepTailMeasure T] Q ∧
+      (∀ x ∈ Ioo T.entrance T.endpoint, HasDerivAt U (Q x / T.p x) x) ∧
+      (∀ x ∈ Ioo T.entrance T.endpoint,
+        HasDerivAt Q (-(T.p x * (ψ x + T.Λ * U x))) x) := by
+  obtain ⟨d, U, Q, hud, hU, hQ, huAE, hQAE, hUd, hQd⟩ :=
+    exists_tailResolvent_classical_rep hT hI hψ hf hgraph
+  have hTcopy := hT
+  rcases hTcopy with ⟨hab, _, _, _, _, _, _, hp, hpos, _, _⟩
+  let c : ℝ := (T.entrance + T.endpoint) / 2
+  have hac : T.entrance < c := by dsimp only [c]; linarith
+  have hcb : c < T.endpoint := by dsimp only [c]; linarith
+  have hsub : Icc T.entrance c ⊆ Ico T.entrance T.endpoint :=
+    fun x hx => ⟨hx.1, hx.2.trans_lt hcb⟩
+  have hpNear := hp.continuousOn.mono hsub
+  have hposNear : ∀ x ∈ Icc T.entrance c, 0 < T.p x := fun x hx => hpos x (hsub hx)
+  have hpOpen := hp.mono Ioo_subset_Ico_self
+  have hposOpen : ∀ x ∈ Ioo T.entrance T.endpoint, 0 < T.p x :=
+    fun x hx => hpos x (Ioo_subset_Ico_self hx)
+  let s : DeepTailL2 T := f + T.Λ • u
+  have hsAE : (s : ℝ → ℝ) =ᵐ[deepTailMeasure T] fun x => ψ x + T.Λ * U x := by
+    filter_upwards [Lp.coeFn_add f (T.Λ • u), Lp.coeFn_smul T.Λ u, hf, huAE]
+      with x hAdd hSmul hfx hux
+    change (f + T.Λ • u) x = ψ x + T.Λ * U x
+    change (f + T.Λ • u) x = f x + (T.Λ • u) x at hAdd
+    change (T.Λ • u) x = T.Λ * u x at hSmul
+    rw [hAdd, hSmul, hfx, hux]
+  have hsInt := tail_intervalIntegrable_at_entrance hpOpen hposOpen hac.le hcb hpNear hposNear s
+  have hpUcc : ContinuousOn T.p (uIcc T.entrance c) := by
+    simpa only [uIcc_of_le hac.le] using hpNear
+  have hRawInt : IntervalIntegrable (fun x => -(T.p x * s x)) volume T.entrance c :=
+    (hsInt.continuousOn_mul hpUcc).neg
+  have hHInt : IntervalIntegrable (fun x => -(T.p x * (ψ x + T.Λ * U x)))
+      volume T.entrance c := by
+    apply hRawInt.congr_ae
+    change ∀ᵐ x ∂volume.restrict (uIoc T.entrance c),
+      -(T.p x * s x) = -(T.p x * (ψ x + T.Λ * U x))
+    rw [ae_restrict_iff' measurableSet_uIoc]
+    filter_upwards [(ae_restrict_iff' measurableSet_Ioo).mp
+      ((tail_ae_eq_iff_volume hpOpen hposOpen).mp hsAE)] with x hx hxin
+    rw [uIoc_of_le hac.le] at hxin
+    rw [hx ⟨hxin.1, hxin.2.trans_lt hcb⟩]
+  obtain ⟨E, hEQ, hEcont⟩ := exists_interval_left_continuous_extension hac hcb hQ hQd hHInt
+  have hDcont : ContinuousOn (fun x => E x / T.p x) (Icc T.entrance c) :=
+    (hEcont.mono hsub).div hpNear (fun x hx => (hposNear x hx).ne')
+  have hDInt : IntervalIntegrable (fun x => Q x / T.p x) volume T.entrance c := by
+    apply (hDcont.intervalIntegrable_of_Icc hac.le).congr
+    intro x hx
+    rw [uIoc_of_le hac.le] at hx
+    change E x / T.p x = Q x / T.p x
+    rw [hEQ x ⟨hx.1, hx.2.trans_lt hcb⟩]
+  obtain ⟨F, hFU, hFcont⟩ := exists_interval_left_continuous_extension hac hcb hU hUd hDInt
+  have hUnew : (u : ℝ → ℝ) =ᵐ[deepTailMeasure T] F := huAE.trans
+    ((tail_ae_eq_iff_volume hpOpen hposOpen).mpr (by
+      filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
+      exact (hFU x hx).symm))
+  have hQnew : (fun x => T.p x * d x) =ᵐ[deepTailMeasure T] E := hQAE.trans
+    ((tail_ae_eq_iff_volume hpOpen hposOpen).mpr (by
+      filter_upwards [ae_restrict_mem measurableSet_Ioo] with x hx
+      exact (hEQ x hx).symm))
+  have hFd (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :
+      HasDerivAt F (E x / T.p x) x := by
+    rw [hEQ x hx]
+    apply (hUd x hx).congr_of_eventuallyEq
+    filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
+    exact hFU y hy
+  have hEd (x : ℝ) (hx : x ∈ Ioo T.entrance T.endpoint) :
+      HasDerivAt E (-(T.p x * (ψ x + T.Λ * F x))) x := by
+    rw [hFU x hx]
+    apply (hQd x hx).congr_of_eventuallyEq
+    filter_upwards [isOpen_Ioo.mem_nhds hx] with y hy
+    exact hEQ y hy
+  have hFa : F T.entrance = 0 :=
+    tailResolvent_classical_entrance_eq_zero hT hac hcb hud
+      (hFcont.mono hsub) (hEcont.mono hsub) hUnew hQnew
+      (fun x hx => hFd x ⟨hx.1, hx.2.trans hcb⟩)
+  exact ⟨d, F, E, hud, hFcont, hEcont, hFa, hUnew, hQnew, hFd, hEd⟩
 
 end ContinuousFlexibility.Radial

@@ -279,7 +279,8 @@ theorem exists_contDiffOn_Iio_extension_of_Ico
   have hres : ContDiffOn ℝ ∞ (f - g) (Ico a b) := hf.sub hg.contDiffOn
   have hflat (k : ℕ) : Tendsto (iteratedDeriv k (f - g)) (𝓝[>] a) (𝓝 0) := by
     have hzero : iteratedDerivWithin k (f - g) (Ico a b) a = 0 := by
-      rw [iteratedDerivWithin_sub ⟨le_rfl, hab⟩ (uniqueDiffOn_Ico a b)
+      rw [iteratedDerivWithin_sub (show a ∈ Ico a b from ⟨le_rfl, hab⟩)
+        (uniqueDiffOn_Ico a b)
         ((hf a ⟨le_rfl, hab⟩).of_le (by simp))
         (hg.contDiffAt.contDiffWithinAt.of_le (by simp)),
         iteratedDerivWithin_eq_iteratedDeriv (uniqueDiffOn_Ico a b)

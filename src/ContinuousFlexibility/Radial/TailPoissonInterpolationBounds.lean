@@ -213,7 +213,8 @@ theorem tailActualEdgePoisson_integral_le {T : DeepTailData}
     (tailInnerResistance_pos hT n).le (tailActualEdge_mass_subset hT n)
     (fun s hs => (tailActualEdgeAffineHeight_mass_bounds hT n right hs).2)
   rw [tailActualEdgeWeight_mass] at hm
-  have hg := tailActualEdgePoisson_integral_le_on hT hη n right (high := 1)
+  have hg := tailActualEdgePoisson_integral_le_on hT hη n right
+    (l := tailInnerResistance T n) (r := tailActualEdgeLength T n) (high := 1)
     (le_add_of_nonneg_right (tailResistance_pos hT n).le) (tailActualEdge_gap_subset hT n)
     (fun s hs => (tailActualEdgeAffineHeight_bounds hT n right (tailActualEdge_gap_subset hT n hs)).2)
   rw [tailActualEdgeWeight_gapMass, mul_one] at hg
