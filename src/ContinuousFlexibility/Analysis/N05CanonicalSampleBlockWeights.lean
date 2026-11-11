@@ -132,7 +132,7 @@ theorem n05_canonicalInverseBlock_weighted_bound
   rw [norm_smul, Real.norm_eq_abs, abs_of_pos (inv_pos.mpr hwo)]
   calc
     wo⁻¹ * ‖v‖ = wo⁻¹ * (Real.exp (-γ * d) * (Real.exp (γ * d) * ‖v‖)) := by
-      rw [← mul_assoc, hc, one_mul]
+      rw [← mul_assoc (Real.exp (-γ * d)) (Real.exp (γ * d)) ‖v‖, hc, one_mul]
     _ ≤ wo⁻¹ * (Real.exp (-γ * d) *
         (Cb * Real.exp (a * q - (ρ - δ) * |d|) * (wi * ‖u‖))) :=
       mul_le_mul_of_nonneg_left

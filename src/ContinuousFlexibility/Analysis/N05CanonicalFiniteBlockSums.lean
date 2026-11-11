@@ -45,6 +45,7 @@ theorem n05CanonicalFiniteTruncate_sum_singletons (S : PhysicalSpacesData)
   change lp.single 2 m (v.val m) = n05CanonicalFiniteTruncateRaw S K s {m} v.val
   rw [n05CanonicalFiniteTruncateRaw_eq_sum, Finset.sum_singleton]
 
+set_option backward.isDefEq.respectTransparency false in
 theorem n05CanonicalFiniteTruncate_forget_singleton (T : MaterialData)
     (S : PhysicalSpacesData) (K : CanonicalData S) (γ t : ℝ) (s m : ℕ)
     (v : (n05CanonicalVolumeModel T S K).level γ t s) :
@@ -72,6 +73,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 include hD hT hS h hcoordinates hγw hgap hG
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The finite sum is an exact equality of genuine canonical L² classes.
 Each summand uses the same literal global map on its actual single source. -/
 theorem n05CanonicalGlobalInverse_finite_block_sum (t : ℝ) (s : ℕ)
@@ -95,6 +97,7 @@ theorem n05CanonicalGlobalInverse_finite_block_sum (t : ℝ) (s : ℕ)
   simpa only [hP, n05CanonicalFiniteTruncate_forget_singleton,
     n05CanonicalInverseBlock] using he
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Finite block sums converge to the coordinate of the already fixed
 global inverse, by its actual continuous restriction on this source level. -/
 theorem n05CanonicalGlobalInverse_finite_coordinate_tendsto (t : ℝ) (s : ℕ)
