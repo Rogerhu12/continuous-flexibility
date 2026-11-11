@@ -32,6 +32,7 @@ theorem exists_seedLinearLogExtension {w : ℝ → ℝ} {e C : ℝ}
   have hg : (fun y : ℝ => y + log C) =ᶠ[𝓝 (log e)]
       (fun y => log (w (exp y))) := by
     filter_upwards [hw.comp_tendsto hmap] with y hy
+    simp only [Function.comp_apply] at hy
     change y + log C = log (w (exp y))
     rw [hy, log_mul hC.ne' (exp_ne_zero y), log_exp]
     ring

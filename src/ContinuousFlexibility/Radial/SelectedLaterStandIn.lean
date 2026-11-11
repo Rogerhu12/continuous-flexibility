@@ -169,9 +169,10 @@ theorem selected_later_standIn_bounds {S : SelectedTailData}
   let k := n - 1 - S.chain.index
   have hm : S.chain.index + k = n - 1 := by dsimp only [k]; omega
   have hn' : S.chain.index + k + 1 = n := by omega
+  have hn'' : n - 1 + 1 = n := by omega
   have hbound := r10a_actual_later_standIn_bounds G hreal hS.2.2.1 hC right k hj
     (by simpa only [hn'] using hband) hu
-    (by simpa only [hm, hn', hentry, hcut] using hODE.2)
+    (by simpa only [hm, hn', hn'', hentry, hcut] using hODE.2)
     (by simpa only [hm, hcut] using hnorm.1)
     (by simpa only [hm, hcut] using hnorm.2.2)
   refine ⟨hnorm.2.1, ?_⟩

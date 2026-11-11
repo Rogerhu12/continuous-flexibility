@@ -35,7 +35,7 @@ theorem terminalCapCutoffCrossFlux_hasDerivAt {w χ u : ℝ → ℝ} (x : ℝ)
       (hχ'.differentiable (by simp) x).hasDerivAt).mul
         ((hu.differentiable (by simp) x).hasDerivAt.pow 2))
   convert hf using 1
-  dsimp only [terminalCapCutoffCrossFlux, terminalCapCutoffEnergy]
+  try dsimp only [terminalCapCutoffCrossFlux, terminalCapCutoffEnergy]
   norm_num
   ring
 
@@ -60,7 +60,8 @@ theorem terminalCapLift_residual_pairing {lam a b : ℝ} {w χ u : ℝ → ℝ}
   have hF := terminalCapCutoffCrossFlux_smooth hw hχ hu
   have hFI : IntervalIntegrable (deriv (terminalCapCutoffCrossFlux w χ u)) volume a b :=
     (contDiff_infty_iff_deriv.mp hF).2.continuous.intervalIntegrable a b
-  have hEI := (terminalCapCutoffEnergy_continuous hw hχ hu).intervalIntegrable a b
+  have hEI : IntervalIntegrable (terminalCapCutoffEnergy w χ u) volume a b :=
+    (terminalCapCutoffEnergy_continuous hw hχ hu).intervalIntegrable a b
   have hFTC := intervalIntegral.integral_eq_sub_of_hasDerivAt
     (fun x (_ : x ∈ uIcc a b) => (hF.differentiable (by simp) x).hasDerivAt) hFI
   simp_rw [terminalCapLift_mul_residual hlam hw hχ hu]

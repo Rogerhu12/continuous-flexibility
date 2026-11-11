@@ -24,16 +24,15 @@ open Real Set Filter
 open scoped Topology ContDiff
 open ContinuousFlexibility.Statements
 
-theorem exists_seedControlledReference {S : SelectedTailData}
+theorem exists_seedControlledReference_of_gluedPair {S : SelectedTailData}
     (hS : IsSelectedTail S)
     (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
-    (hentry : ∀ right,
-      S.entry right S.chain.index ∈ radialCore (S.family S.sigma) ∧
-      0 < deriv (S.family S.sigma).w (S.entry right S.chain.index) ∧
-      RadialNaturalTail (S.family S.sigma) right 2
-        (S.entry right S.chain.index) (S.outgoing right 2))
-    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q) :
-    ∃ D : ReferenceData, IsAccumulatingProfile D ∧
+    (hentry : ∀ right, S.entry right S.chain.index ∈ radialCore (S.family S.sigma))
+    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q)
+    (G : SeedGluedPair (S.family S.sigma)
+      (S.entry false S.chain.index) (S.entry true S.chain.index)
+      (S.outgoing false 2) (S.outgoing true 2) K q) :
+    ∃ D : ReferenceData, D.w = G.profile ∧ D.phi = G.height ∧ IsAccumulatingProfile D ∧
       EqOn D.w (centralRadialProfile 1) (Ioo (exp K.left) (exp K.right)) ∧
       EqOn D.phi centralKernelHeight (Ioo (exp K.left) (exp K.right)) ∧
       (∀ r ∈ radialCore D, radialJacobi 4 D.w D.phi r = 0) ∧
@@ -49,19 +48,8 @@ theorem exists_seedControlledReference {S : SelectedTailData}
   have hmass : MorseMassResistanceBounds S.chain S.sigma D₀ S.constants := hfamily.2
   have hBounds : AccumulatingProfileBounds D₀ S.constants := hreal.2.2.2.2.2.2.2.2.2
   have hD : RadialProfileGeometry D₀ := hBounds.1
-  have hc : c ∈ radialCore D₀ := (hentry false).1
-  have hd : d ∈ radialCore D₀ := (hentry true).1
-  obtain ⟨CL⟩ := exists_morseSecondMode_coneTail hreal hmass hσ hc
-    (hentry false).2.2 (hentry false).2.1
-  obtain ⟨CR⟩ := exists_morseSecondMode_coneTail hreal hmass hσ hd
-    (hentry true).2.2 (hentry true).2.1
-  obtain ⟨PL⟩ := CL.toPureTail hc
-  obtain ⟨PR⟩ := CR.toPureTail hd
-  obtain ⟨TL, hTL⟩ := PL.toCanonical hD hc
-  obtain ⟨TR, hTR⟩ := PR.toCanonical hD hd
-  obtain ⟨G⟩ := exists_seedGluedPair hD hc hd TL TR
-    (by simpa using hTL)
-    (by simpa using hTR) K hq
+  have hc : c ∈ radialCore D₀ := hentry false
+  have hd : d ∈ radialCore D₀ := hentry true
   have hAccum₀ : IsAccumulatingProfile D₀ := ⟨S.constants, hBounds⟩
   obtain ⟨D, hDa, hDb, hDw, hDphi, hAccum⟩ :=
     exists_accumulating_reference_of_two_tail_surgery hAccum₀ G.radiusL_pos
@@ -88,7 +76,7 @@ theorem exists_seedControlledReference {S : SelectedTailData}
     exact G.middle_germ r hr
   have hcentral (r : ℝ) (hr : r ∈ Ioo L H) : r ∈ Ioo L₀ H₀ :=
     ⟨hL₀L.trans hr.1, hr.2.trans hHH₀⟩
-  refine ⟨D, hAccum, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  refine ⟨D, hDw, hDphi, hAccum, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro r hr
     exact (hmid r (hcentral r hr)).1.eq_of_nhds.trans (K.profile_retained hr)
   · intro r hr
@@ -218,5 +206,39 @@ theorem exists_seedControlledReference {S : SelectedTailData}
           · intro r hr
             rw [hDw]
             exact (G.right_tail r hr).1
+
+/-- The original controlled construction, retaining its exact interface.
+The assembly companion also accepts an already constructed, retained pair. -/
+theorem exists_seedControlledReference {S : SelectedTailData}
+    (hS : IsSelectedTail S)
+    (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
+    (hentry : ∀ right,
+      S.entry right S.chain.index ∈ radialCore (S.family S.sigma) ∧
+      0 < deriv (S.family S.sigma).w (S.entry right S.chain.index) ∧
+      RadialNaturalTail (S.family S.sigma) right 2
+        (S.entry right S.chain.index) (S.outgoing right 2))
+    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q) :
+    ∃ D : ReferenceData, IsAccumulatingProfile D ∧
+      EqOn D.w (centralRadialProfile 1) (Ioo (exp K.left) (exp K.right)) ∧
+      EqOn D.phi centralKernelHeight (Ioo (exp K.left) (exp K.right)) ∧
+      (∀ r ∈ radialCore D, radialJacobi 4 D.w D.phi r = 0) ∧
+      CentralPatch D (exp K.left) (exp K.right) ∧
+      ConnectedPositiveHeads D (exp K.left) (exp K.right) q ∧
+      ConnectedSelectedTails S D (exp K.left) (exp K.right) := by
+  have hfamily := hS.2.2.2.1 S.sigma hS.2.2.1
+  have hD : RadialProfileGeometry (S.family S.sigma) := hfamily.1.geometry
+  obtain ⟨CL⟩ := exists_morseSecondMode_coneTail hfamily.1 hfamily.2 hS.2.2.1
+    (hentry false).1 (hentry false).2.2 (hentry false).2.1
+  obtain ⟨CR⟩ := exists_morseSecondMode_coneTail hfamily.1 hfamily.2 hS.2.2.1
+    (hentry true).1 (hentry true).2.2 (hentry true).2.1
+  obtain ⟨PL⟩ := CL.toPureTail (hentry false).1
+  obtain ⟨PR⟩ := CR.toPureTail (hentry true).1
+  obtain ⟨TL, hTL⟩ := PL.toCanonical hD (hentry false).1
+  obtain ⟨TR, hTR⟩ := PR.toCanonical hD (hentry true).1
+  obtain ⟨G⟩ := exists_seedGluedPair hD (hentry false).1 (hentry true).1 TL TR
+    (by simpa using hTL) (by simpa using hTR) K hq
+  obtain ⟨D, _, _, h⟩ := exists_seedControlledReference_of_gluedPair hS hentries
+    (fun right => (hentry right).1) K hq G
+  exact ⟨D, h⟩
 
 end ContinuousFlexibility.Radial

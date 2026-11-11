@@ -30,7 +30,7 @@ theorem radialConeIncoming_eqOn_power {D : ReferenceData}
     EqOn u (fun r => r ^ ν / c ^ ν) (uIcc c p) := by
   have hcpos : 0 < c := hD.1.trans hc.1
   have hlpos : 0 < min c p := lt_min hcpos (hD.1.trans hp.1)
-  obtain ⟨R, hR, hRp, hRg⟩ := exists_r07_smooth_radius_germ hlpos (min_le_max c p)
+  obtain ⟨R, hR, hRp, hRg⟩ := exists_r07_smooth_radius_germ hlpos min_le_max
   let v : ℝ → ℝ := fun r => R r ^ ν / c ^ ν
   have hv : ContDiff ℝ ∞ v := (hR.rpow_const_of_ne (fun r => (hRp r).ne')).div_const _
   have hvg (r : ℝ) (hr : r ∈ uIcc c p) :
@@ -43,7 +43,7 @@ theorem radialConeIncoming_eqOn_power {D : ReferenceData}
     rw [(r07_hasDerivAt_normalized_power hcpos (hvg c left_mem_uIcc)).deriv,
       hv₀, mul_one]
   have hEq : EqOn u v (uIcc c p) := radialHomogeneous_eqOn_Icc hD
-    (lt_min hc.1 hp.1) (min_le_max c p) (max_lt hc.2 hp.2) left_mem_uIcc hu hv hODE
+    (lt_min hc.1 hp.1) min_le_max (max_lt hc.2 hp.2) left_mem_uIcc hu hv hODE
     (fun r hr => r07_radialJacobi_cone_power (hlpos.trans_le hr.1) hν
       (hcone r hr) (hvg r hr)) (hu₀.trans hv₀.symm) (hu₁.trans hv₁.symm)
   exact fun r hr => (hEq hr).trans (hvg r hr).eq_of_nhds
@@ -57,7 +57,7 @@ theorem radialConePower_deriv_of_eqOn {a b c ν : ℝ} {u : ℝ → ℝ}
   have hrd : HasDerivAt (fun t : ℝ => t ^ ν / c ^ ν)
       (ν / r * (r ^ ν / c ^ ν)) r :=
     r07_hasDerivAt_normalized_power ((lt_min ha hb).trans_le hr.1) Filter.EventuallyEq.rfl
-  have hdiff := uniqueDiffOn_Icc (min_lt_max.mpr hab) r hr
+  have hdiff := uniqueDiffOn_uIcc hab r hr
   have hd := derivWithin_congr heq (heq hr)
   rw [(hu.differentiable (by simp) r).derivWithin hdiff,
     hrd.differentiableAt.derivWithin hdiff] at hd
@@ -122,23 +122,29 @@ theorem exists_radialConeIncoming_graft {D : ReferenceData}
   let q := (c + p) / 2
   have hq : q ∈ Ioo (min c p) (max c p) := by
     cases right
-    · rw [min_eq_right hcp.le, max_eq_left hcp.le]
+    · change p < c at hcp
+      rw [min_eq_right hcp.le, max_eq_left hcp.le]
       change p < (c + p) / 2 ∧ (c + p) / 2 < c
       constructor <;> linarith
-    · rw [min_eq_left hcp.le, max_eq_right hcp.le]
+    · change c < p at hcp
+      rw [min_eq_left hcp.le, max_eq_right hcp.le]
       change c < (c + p) / 2 ∧ (c + p) / 2 < p
       constructor <;> linarith
   have hqc : if right then c < q else q < c := by
     cases right
-    · simpa only [max_eq_left hcp.le] using hq.2
-    · simpa only [min_eq_left hcp.le] using hq.1
+    · change q < c
+      simpa only [max_eq_left hcp.le] using hq.2
+    · change c < q
+      simpa only [min_eq_left hcp.le] using hq.1
   have hqp : if right then q < p else p < q := by
     cases right
-    · simpa only [min_eq_right hcp.le] using hq.1
-    · simpa only [max_eq_right hcp.le] using hq.2
+    · change p < q
+      simpa only [min_eq_right hcp.le] using hq.1
+    · change q < p
+      simpa only [max_eq_right hcp.le] using hq.2
   have hqFull : q ∈ uIcc a e := hOldSub (hConeSub ⟨hq.1.le, hq.2.le⟩)
   have hlpos : 0 < min a e := lt_min ha (hD.1.trans he.1)
-  obtain ⟨R, hR, hRp, hRg⟩ := exists_r07_smooth_radius_germ hlpos (min_le_max a e)
+  obtain ⟨R, hR, hRp, hRg⟩ := exists_r07_smooth_radius_germ hlpos min_le_max
   let v : ℝ → ℝ := fun r => R r ^ ν / c ^ ν
   have hv : ContDiff ℝ ∞ v := (hR.rpow_const_of_ne (fun r => (hRp r).ne')).div_const _
   have hvg (r : ℝ) (hr : r ∈ uIcc a e) :

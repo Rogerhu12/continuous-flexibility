@@ -146,8 +146,12 @@ theorem terminalMorse_cutoff_scalar_pairing_zero (D : Statements.ReferenceData) 
   have hcut := terminalPhysicalCutoff_support long (terminalMorseLayer_order long hB hAB hs hr) hzcut
   have hb := hborder hz
   cases long
-  · exact (not_lt_of_ge hb) hcut
-  · exact (not_lt_of_ge hb) hcut
+  · change z < terminalMorseLayerRight false A B s r at hcut
+    change terminalMorseLayerRight false A B s r ≤ z at hb
+    exact (not_lt_of_ge hb) hcut
+  · change terminalMorseLayerLeft true A B s r < z at hcut
+    change z ≤ terminalMorseLayerLeft true A B s r at hb
+    exact (not_lt_of_ge hb) hcut
 
 end ContinuousFlexibility.Radial
 

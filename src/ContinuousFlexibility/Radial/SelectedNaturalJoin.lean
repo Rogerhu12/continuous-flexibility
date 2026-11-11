@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.R07OutgoingFamily
 import ContinuousFlexibility.Radial.SelectedBoundaryMargin
+import ContinuousFlexibility.Radial.MorseRealizationBasic
 
 /-!
 # Continue the selected natural solution to the actual matching join
@@ -48,7 +49,7 @@ theorem radialNaturalTail_eqOn_of_cauchy {D : ReferenceData}
       exact ⟨hpe.trans_le hx.1, hx.2.trans_lt hr.2⟩
   have hVeq := radialNaturalTail_zero_uIcc hD he hrCore her hv hV
   have hEq := radialHomogeneous_eqOn_Icc hD (lt_min he.1 hrCore.1)
-    (min_le_max e r) (max_lt he.2 hrCore.2) (left_mem_uIcc : e ∈ uIcc e r)
+    min_le_max (max_lt he.2 hrCore.2) (left_mem_uIcc : e ∈ uIcc e r)
     hu hv hUeq hVeq hvalue hderiv
   exact hEq right_mem_uIcc
 
@@ -93,7 +94,8 @@ theorem selected_natural_continue_to_join {S : SelectedTailData}
             ((S.family S.sigma).w (S.joinInner right n)) (S.incoming right j))
           (radialState (S.family S.sigma) j (S.entry right n)
             ((S.family S.sigma).w (S.joinInner right n)) v) := by
-  have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
+  have hreal : MorseChainRealization S.chain S.sigma (S.family S.sigma) S.constants :=
+    (hS.2.2.2.1 S.sigma hS.2.2.1).1
   have h := hS.2.2.2.2.2 right n j hj heven hband
   rcases h with ⟨_, he, hp, _, horder, _, _, _, _, _, _, hnatural, hangle⟩
   have hpe : if right then S.joinInner right n < S.entry right n
@@ -102,7 +104,8 @@ theorem selected_natural_continue_to_join {S : SelectedTailData}
     · exact horder.1
     · exact horder.2
   obtain ⟨v, hsmooth, hN, hvalue, hderiv, hEq, hODE⟩ :=
-    exists_radialNaturalTail_continuation_preserving_tail hreal.geometry hp he hpe hv hnatural
+    exists_radialNaturalTail_continuation_preserving_tail
+      (MorseChainRealization.geometry hreal) hp he hpe hv hnatural
   have hstate (scale : ℝ) :
       radialState (S.family S.sigma) j (S.entry right n) scale v =
         radialState (S.family S.sigma) j (S.entry right n) scale (S.outgoing right j) := by

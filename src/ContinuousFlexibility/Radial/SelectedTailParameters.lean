@@ -239,11 +239,11 @@ theorem exists_r10a_parameterized_selectedTail_with_data (hR06 : R06Statement)
     simpa only [S, r07SelectedTailData, margin, if_neg hnne, cLater] using ha
   · intro right n j hj heven hband
     exact hmetadata right n j hj heven hband
-  · simpa only [S, r07SelectedTailData, cut, if_pos rfl] using hfirstCuts
+  · simpa only [S, r07SelectedTailData, cut, if_pos rfl, ite_true] using hfirstCuts
   · intro right
     obtain ⟨scale, hscale, hgerm⟩ := hfirstCone right
     refine ⟨scale, hscale, ?_⟩
-    simpa only [S, r07SelectedTailData, family, cut, join, if_pos rfl] using hgerm
+    simpa only [S, r07SelectedTailData, family, cut, join, if_pos rfl, ite_true] using hgerm
   · exact ⟨cFirst, G, H, phi, hcFirst, hcFirst48, rfl, hM, hfirstSpec, hPhi, rfl, rfl, rfl⟩
 
 /-- The original interface forgets only the newly retained solution metadata. -/
