@@ -23,8 +23,13 @@ Push often.
 - Your node file.
 - New files you create. Proofs go in new modules under `src/ContinuousFlexibility/<Area>/`
   with distinctive names; sub-blueprint statements go in `src/ContinuousFlexibility/Blueprint/<Node>/`.
-- The root import `src/ContinuousFlexibility.lean`: add your finished, sorry-free modules.
 - Existing files of other areas only when the proof needs a change there; say so in the pull request.
+- **Not** `src/ContinuousFlexibility.lean` and **not** `docs/STATUS.md`. The root import is generated
+  by `scripts/gen_root.py` from every `.lean` file under `src/ContinuousFlexibility/` (outside
+  `Blueprint/`), in CI and before local builds; the ledger is kept by the lead. Report your numbers
+  in the pull request instead. Editing these two files only causes merge conflicts.
+- Because every file is built, every `.lean` file you push must compile. Keep unfinished drafts out
+  of `src/` (for example in a `drafts/` directory at the repository root, which nothing builds).
 
 ## If the node is large
 
@@ -51,6 +56,12 @@ bash scripts/get_build_cache.sh
 ```
 
 The second command restores the compiled project modules of `main`, so only your files compile.
+Before building the root library locally, generate the root import:
+
+```bash
+python3 scripts/gen_root.py
+```
+
 Build single targets, never a bare `lake build` in a small sandbox:
 
 ```bash
