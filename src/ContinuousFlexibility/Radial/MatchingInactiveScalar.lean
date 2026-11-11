@@ -83,7 +83,7 @@ theorem matchingInnerInverse_pure_scalar {D : ReferenceData}
     · apply (modeLocalEquation_congr_source_fst
         (H := (0 : RadialModePair D)) (matchingSourceInner_fst_eq_zero hM hF)).mp heq
     · simp only [if_neg hj, hs, Prod.snd_zero, and_self]
-    · simpa only [matchingCut, if_pos rfl] using hcut 0
+    · simpa [matchingCut] using hcut 0
     · simpa only [matchingCut, show (1 : Fin 2) ≠ 0 by decide, if_false] using hcut 1
   have hu := hM.2.1 _ 0 hgraph
   rw [map_zero] at hu
@@ -126,7 +126,10 @@ theorem matchingFormulaValue_pure_scalar {D : ReferenceData}
   have ho (i : Fin 2) : modePairing D (M.outerPoisson i) (M.sourceOuter F) = 0 := by
     simp only [hout, modePairing, Prod.fst_zero, Prod.snd_zero,
       inner_zero_right, mul_zero, add_zero]
-  simp only [matchingFormulaValue, hh, ho, radialMatrixApply,
+  have hp0 (U : RadialModePair D) : modePairing D U 0 = 0 := by
+    simp only [modePairing, Prod.fst_zero, Prod.snd_zero,
+      inner_zero_right, mul_zero, add_zero]
+  simp only [matchingFormulaValue, hh, ho, hp0, radialMatrixApply,
     mul_zero, Finset.sum_const_zero, add_zero, sub_zero, hinv, hout,
     map_zero, zero_smul]
 

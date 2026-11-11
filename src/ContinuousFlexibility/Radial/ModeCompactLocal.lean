@@ -25,8 +25,10 @@ theorem matchingMode_integrableOn_compact {D : ReferenceData}
   letI : IsFiniteMeasure (radialHilbertMeasure D) := radialHilbertMeasure_isFinite hD
   have hU : Integrable (fun r => U r) (radialHilbertMeasure D) :=
     MemLp.integrable (by norm_num) (Lp.memLp U)
+  have hiCore : IntegrableOn (fun r => matchingDensity D r * U r) (radialCore D) volume :=
+    (matchingDensity_integrable_iff hD _).mp hU
   have hi : IntegrableOn (fun r => matchingDensity D r * U r) K volume :=
-    ((matchingDensity_integrable_iff hD _).mp hU).mono_set hsub
+    hiCore.mono_set hsub
   have hc : ContinuousOn (fun r => (matchingDensity D r)⁻¹) K := by
     apply ((matchingDensity_continuousOn hD).mono
       (hsub.trans Ioo_subset_Icc_self)).inv₀
@@ -105,7 +107,9 @@ theorem matchingPrincipalSource_integrableOn_compact {D : ReferenceData}
   have hu := matchingMode_integrableOn_compact hD U.1 hK hsub
   have hf := matchingMode_integrableOn_compact hD F.1 hK hsub
   have hq := hu.continuousOn_mul ((matchingPotential_continuousOn hD j).mono hsub') hK
-  have hc := (((matchingColumn_continuousOn hD hB).mono hsub').integrableOn_compact hK).const_mul U.2
+  have hc0 : IntegrableOn (referenceColumn D) K volume :=
+    ((matchingColumn_continuousOn hD hB).mono hsub').integrableOn_compact hK
+  have hc := hc0.const_mul U.2
   have hρ := hf.continuousOn_mul ((matchingDensity_continuousOn hD).mono hsub') hK
   exact (hq.add hc).sub hρ
 
