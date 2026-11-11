@@ -45,7 +45,7 @@ theorem circleMember_singleConstant (T : MaterialData) (γ : ℝ) (m : ℕ) (c :
       exact ite_eq_right hn
     have hd (b : ℕ) : iteratedDeriv b (circleSingleConstant m c n) = 0 := by
       funext θ
-      simp only [hf, iteratedDeriv_fun_const_zero, Pi.zero_apply]
+      simp only [hf, iteratedDeriv_const_zero, Pi.zero_apply]
     simp only [hd, eLpNorm_zero,
       zero_pow (by decide : 2 ≠ 0), mul_zero, Finset.sum_const_zero]
 
@@ -53,6 +53,17 @@ private theorem angularMean_single_constant (a : ℝ) :
     angularMean (fun _ : ℝ => a) = a := by
   rw [angularMean, intervalIntegral.integral_const, sub_zero, smul_eq_mul, one_div]
   exact inv_mul_cancel_left₀ Real.pi_ne_zero a
+
+private theorem linearMap_singleConstant_controlShift
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (decode : E →ₗ[ℝ] (ℕ → ℝ → ℝ)) {u0 u : E} {m : ℕ}
+    (hzero : u0 = 0) (hu : decode u = circleSingleConstant m 1) (t : ℝ) :
+    decode (u0 + t • u) = circleSingleConstant m t := by
+  rw [hzero, zero_add, map_smul, hu]
+  funext n θ
+  by_cases hn : n = m
+  · simp only [Pi.smul_apply, smul_eq_mul, circleSingleConstant, ite_eq_left hn, mul_one]
+  · simp only [Pi.smul_apply, smul_eq_mul, circleSingleConstant, ite_eq_right hn, mul_zero]
 
 private theorem pairGrading_control_shift
     {E K : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -81,15 +92,16 @@ private theorem stateProfile_profileControlShift
     (hu : (S.circle (3 / 4 : ℝ)).decode u = circleSingleConstant m 1) (t : ℝ) :
     stateProfile D S C (profileControlShift S C.referenceState u t) =
       fun s => D.w s * Real.exp (t * C.control m s) := by
+  have hzero : C.referenceState.2.2.1 = (0 : CircleSpace S) := href.2.2.2.1
+  have hdecode : (S.circle (3 / 4 : ℝ)).decode (C.referenceState.2.2.1 + t • u) =
+      circleSingleConstant m t :=
+    linearMap_singleConstant_controlShift (S.circle (3 / 4 : ℝ)).decode hzero hu t
   have hk (n : ℕ) : stateKappa S (profileControlShift S C.referenceState u t) n =
       if n = m then t else 0 := by
     change angularMean ((S.circle (3 / 4 : ℝ)).decode
       (C.referenceState.2.2.1 + t • u) n) = _
-    rw [href.2.2.2.1, zero_add, map_smul, hu]
-    simp only [Pi.smul_apply, smul_eq_mul, circleSingleConstant]
-    by_cases hn : n = m
-    · simp only [ite_eq_left hn, mul_one, angularMean_single_constant]
-    · simp only [ite_eq_right hn, mul_zero, angularMean_single_constant]
+    exact (congrArg (fun f : ℕ → ℝ → ℝ => angularMean (f n)) hdecode).trans
+      (angularMean_single_constant (if n = m then t else 0))
   funext s
   change D.w s * Real.exp (C.referenceState.2.1 * D.chi s +
     ∑' n, stateKappa S (profileControlShift S C.referenceState u t) n * C.control n s) = _

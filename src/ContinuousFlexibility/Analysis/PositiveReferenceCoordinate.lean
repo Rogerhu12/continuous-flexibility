@@ -101,7 +101,7 @@ theorem eventuallyEq_of_deriv_germ_and_value
     f =ᶠ[𝓝 c] g := by
   obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp (hg.and hder)
   have heq : EqOn f g (Metric.ball c δ) :=
-    isOpen_ball.eqOn_of_deriv_eq (convex_ball c δ).isPreconnected
+    Metric.isOpen_ball.eqOn_of_deriv_eq (convex_ball c δ).isPreconnected
       hf.differentiableOn
       (fun x hx => (hball hx).1.differentiableWithinAt)
       (fun x hx => (hball hx).2) (Metric.mem_ball_self hδ) hc

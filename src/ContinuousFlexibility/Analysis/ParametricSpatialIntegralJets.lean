@@ -85,8 +85,9 @@ private theorem intervalIntegral_spatialJet_curry (n : ℕ)
         (∫ t in a..b, g t) := by
   exact ContinuousLinearMap.intervalIntegral_comp_comm
     (𝕜 := ℝ) (E := Q [×(n + 1)]→L[ℝ] E)
-    (F := Q →L[ℝ] Q [×n]→L[ℝ] E)
-    (spatialJetCurryCLM (Q := Q) (E := E) n) (hg.intervalIntegrable a b)
+    (F := Q →L[ℝ] Q [×n]→L[ℝ] E) (μ := volume) (f := g)
+    (spatialJetCurryCLM (Q := Q) (E := E) n)
+    (hg.intervalIntegrable (μ := volume) a b)
 
 private theorem hasFDerivAt_integral_parametricSpatialJet
     {f : Q × ℝ → E}
