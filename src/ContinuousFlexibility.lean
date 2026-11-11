@@ -361,3 +361,7 @@ import ContinuousFlexibility.Scalar.S04CalculusProof
 import ContinuousFlexibility.Scalar.S05StateDerivative
 import ContinuousFlexibility.Scalar.S05CalculusProof
 import ContinuousFlexibility.Blueprint.ScalarCalculus
+import ContinuousFlexibility.Analysis.OneHighFactorCounterexample
+import ContinuousFlexibility.Analysis.OneHighFrequencyNorms
+import ContinuousFlexibility.Analysis.OneHighInterpolation
+import ContinuousFlexibility.Analysis.OneHighCircleFlowBasic
