@@ -73,7 +73,7 @@ theorem n05_referenceCanonical_representatives_congr_ae
   have hpull := n05_inverseChart_ae_eq_of_physical h.2.2.2.2
     (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m
-    (fun p hp => congrArg Prod.snd (hcoordinates.1 m p hp).1) hfg
+    (fun _ hp => n05_controlledReference_chart_second hcoordinates m hp) hfg
   constructor
   · filter_upwards [hpull] with p hp
     simp only [canonicalHeight, hp]
@@ -81,4 +81,3 @@ theorem n05_referenceCanonical_representatives_congr_ae
     simp only [canonicalSource, hp]
 
 end ContinuousFlexibility.Statements
-

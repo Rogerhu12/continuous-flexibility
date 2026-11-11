@@ -73,10 +73,10 @@ theorem n05_eqOn_closed_strip_of_nonreflection
       (fun t ht => heq (r, t) hr ht)) θ
   intro p hp
   have hfR : ContinuousOn (fun r : ℝ => f (r, p.2)) (Icc a b) := fun r hr =>
-    ((hf (r, p.2) hr).comp
+    ((hf (r, p.2) hr).comp (f := fun t : ℝ => (t, p.2))
       (continuousAt_id.prodMk continuousAt_const)).continuousWithinAt
   have hgR : ContinuousOn (fun r : ℝ => g (r, p.2)) (Icc a b) := fun r hr =>
-    ((hg (r, p.2) hr).comp
+    ((hg (r, p.2) hr).comp (f := fun t : ℝ => (t, p.2))
       (continuousAt_id.prodMk continuousAt_const)).continuousWithinAt
   have hR : EqOn (fun r : ℝ => f (r, p.2)) (fun r : ℝ => g (r, p.2)) (Ioo a b) :=
     fun r hr => hinterior r hr p.2

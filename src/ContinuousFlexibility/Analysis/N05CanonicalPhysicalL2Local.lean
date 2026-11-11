@@ -74,7 +74,7 @@ theorem n05_canonicalHeight_endpoint_piece_bound
     n05_referenceState_sector h01.2.2.1
   have hangle : ∀ p ∈ physicalPieceOpen S K m,
       (K.chart (C.referenceState, 0) m p).2 = p.2 :=
-    fun p hp => congrArg Prod.snd (hcoordinates.1 m p hp).1
+    fun _ hp => n05_controlledReference_chart_second hcoordinates m hp
   have hpull := (n05_canonicalChart_ae_iff h.2.2.2.2 hz hs m hangle
     (fun p => n05CanonicalSampleWeight T S K γ t m * u p =
       canonicalHeight S K (C.referenceState, 0) m f p)).mp hrep

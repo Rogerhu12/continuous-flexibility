@@ -19,6 +19,16 @@ namespace ContinuousFlexibility.Statements
 open Set Filter MeasureTheory
 open scoped ContDiff Topology
 
+/-- The controlled reference chart preserves the actual angular coordinate. -/
+theorem n05_controlledReference_chart_second
+    {D : ReferenceData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {K : CanonicalData S}
+    (hcoordinates : N05ControlledReferenceCoordinates D S C K)
+    (m : ℕ) {p : PolarPoint} (hp : p ∈ physicalPieceOpen S K m) :
+    (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+  have he := congrArg (fun q : PolarPoint => q.2) (hcoordinates.1 m p hp).1
+  exact he
+
 /-- A differentiable left inverse transfers almost-everywhere predicates.
 The null set need not be measurable. -/
 theorem n05_differentiableInverse_ae_pullback
@@ -201,7 +211,7 @@ theorem n05_referenceCanonicalSource_ae_physical
     apply ae_imp_of_ae_restrict
     apply n05_piPeriodic_ae_eq_fullPeriod measurableSet_Ioo hf hg
     apply (n05_canonicalSource_ae_iff_physicalPiece h.2.2.2.2 hz hs m
-      (fun p hp => congrArg Prod.snd (hcoordinates.1 m p hp).1) f g).mp
+      (fun _ hp => n05_controlledReference_chart_second hcoordinates m hp) f g).mp
     exact hfg m
   rcases h.2.2.2.2 with ⟨_, _, _, _, _, _, ⟨E, hE, hcover⟩, _⟩
   have hEplane : ∀ᵐ p : PolarPoint ∂volume, p.1 ∉ E := by
