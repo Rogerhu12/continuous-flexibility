@@ -148,9 +148,13 @@ theorem smoothTameOn_bilinear_comp
   letI : IsTopologicalAddGroup Y := htq.isTopologicalAddGroup
   letI : ContinuousSMul ℝ Y := htq.continuousSMul
   letI : LocallyConvexSpace ℝ Y := htq.toLocallyConvexSpace
-  exact smoothTameOn_comp_generic hp htp (withSeminorms_pairGrading htq htq)
+  have hc := smoothTameOn_comp_generic
+    (f := fun x => (f x, g x))
+    (g := fun z : Y × Y => bilinearJetValue B z.1 z.2)
+    hp htp (withSeminorms_pairGrading htq htq)
     (smoothTameOn_prodMk_generic hp htp hf hg) (smoothTameOn_bilinearMultilinear B hB)
     (fun _ _ => mem_univ _)
+  simpa only [Function.comp_def] using hc
 
 end BilinearComposition
 

@@ -83,13 +83,14 @@ theorem scalarCommonHeightDecode_angularPartial
   have hf := (scalarHeight_decode_contDiff_and_flatJets hT hS u.1).1
   have hχ := hS.2.2.1.1.comp contDiff_fst
   funext p
+  have hzero : angularPartial (fun q : PolarPoint => S.chiLeft q.1) p = 0 :=
+    Radial.angularPartial_radialHeightField (hS.2.2.1.1.differentiable (by simp) p.1)
   unfold scalarCommonHeightDecode
   rw [angularPartial_add (hf.differentiable (by simp) p)
     ((contDiff_const.mul hχ).differentiable (by simp) p),
     angularPartial_mul (differentiableAt_const u.2) (hχ.differentiable (by simp) p),
     angularPartial_const, zero_mul, zero_add,
-    Radial.angularPartial_radialHeightField (hS.2.2.1.1.differentiable (by simp) p.1),
-    mul_zero, add_zero]
+    hzero, mul_zero, add_zero]
 
 /-- Angular differentiation of a globally smooth radial product only uses
 the two smooth fields, and needs no global radial regularity of its multiplier. -/
@@ -99,14 +100,12 @@ theorem angularPartial_radialProduct_of_contDiff
     angularPartial (fun p => k p.1 * f p) =
       fun p => k p.1 * angularPartial f p := by
   funext p
-  have hl : HasDerivAt (fun θ => k p.1 * f (p.1, θ))
-      (angularPartial (fun q => k q.1 * f q) p) p.2 := by
-    simpa only using! Radial.hasDerivAt_angularSlice
-      (hprod.differentiable (by simp) p)
+  have hl := Radial.hasDerivAt_angularSlice (hprod.differentiable (by simp) p)
   have hr : HasDerivAt (fun θ => k p.1 * f (p.1, θ))
       (k p.1 * angularPartial f p) p.2 := by
-    simpa only using! (Radial.hasDerivAt_angularSlice
-      (hf.differentiable (by simp) p)).const_mul (k p.1)
+    apply ((Radial.hasDerivAt_angularSlice
+      (hf.differentiable (by simp) p)).const_mul (k p.1)).congr_of_eventuallyEq
+    exact Filter.Eventually.of_forall (fun _ => rfl)
   exact hl.unique hr
 
 def scalarReferenceCorrectedCLM

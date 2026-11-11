@@ -28,17 +28,29 @@ def scalarReferenceTypeCLM
     (ContinuousLinearMap.id ℝ _ +
       (scalarReferenceWCLM hD hT hS).comp (scalarReferenceWCLM hD hT hS))
 
+private theorem scalarReferenceTypeCLM_isTame_aux
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] {p : ℕ → Seminorm ℝ E}
+    (L W : E →L[ℝ] E) (hp : Monotone p)
+    (hL : IsTameLinear p p L.toLinearMap 1 0)
+    (hW : IsTameLinear p p W.toLinearMap 1 0) :
+    IsTameLinear p p
+      (L.comp (ContinuousLinearMap.id ℝ E + W.comp W)).toLinearMap 3 0 := by
+  have hmap : (L.comp (ContinuousLinearMap.id ℝ E + W.comp W)).toLinearMap =
+      L.toLinearMap.comp ((LinearMap.id : E →ₗ[ℝ] E) +
+        W.toLinearMap.comp W.toLinearMap) := by
+    ext u
+    rfl
+  rw [hmap]
+  exact hL.comp ((IsTameLinear.id p).add hp (hW.comp hW))
+
 theorem scalarReferenceTypeCLM_isTame
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) :
     IsTameLinear (scalarHeightGrading S) (scalarHeightGrading S)
-      (scalarReferenceTypeCLM hD hT hS).toLinearMap 3 0 := by
-  have hid : IsTameLinear (scalarHeightGrading S) (scalarHeightGrading S)
-      (ContinuousLinearMap.id ℝ (ScalarHeightSpace S)).toLinearMap 0 0 := by
-    intro s _
-    exact ⟨1, fun u => by simp only [ContinuousLinearMap.coe_id, id_eq, Nat.add_zero, one_mul]⟩
-  exact (scalarReferenceInvRadiusCLM_isTame hD hT hS).comp
-    (hid.add (scalarHeightGrading_monotone S)
-      ((scalarReferenceWCLM_isTame hD hT hS).comp (scalarReferenceWCLM_isTame hD hT hS)))
+      (scalarReferenceTypeCLM hD hT hS).toLinearMap 3 0 :=
+  scalarReferenceTypeCLM_isTame_aux (scalarReferenceInvRadiusCLM hD hT hS)
+    (scalarReferenceWCLM hD hT hS) (scalarHeightGrading_monotone S)
+    (scalarReferenceInvRadiusCLM_isTame hD hT hS) (scalarReferenceWCLM_isTame hD hT hS)
 
 theorem decode_scalarReferenceTypeCLM
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

@@ -118,6 +118,89 @@ private theorem uniformComposition_zero_bound
   change A.grading (s + valueLoss) x ≤ A.grading (s + loss) x at hh
   linarith only [hh]
 
+/-- The centered scalar coefficient is lifted once.  Exposing its exact
+decoder and its grading estimate separately keeps later proofs independent
+of the implementation of the lift. -/
+private theorem uniformComposition_centered_coefficient
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {A : SobolevModelData}
+    (hA : IsSobolevModel D T γ A)
+    {valueBase valueLoss base : ℕ} (hbase : valueBase ≤ base)
+    (hmember : ∀ F : ℝ → ℝ, ContDiff ℝ ∞ F → F 0 = 0 →
+      ∀ u : A.Space, HeightMember D T γ (fun p => F (A.decode u p)))
+    (hvalue : ∀ F : ℝ → ℝ, ContDiff ℝ ∞ F → F 0 = 0 →
+      ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+        ∀ u : A.Space, A.grading valueBase u ≤ R →
+          physicalNorm T γ s (fun p => F (A.decode u p)) ≤
+            C * A.grading (s + valueLoss) u)
+    {U : Set A.Space} {R : ℝ} (hR : 0 ≤ R)
+    (hU : ∀ x ∈ U, A.grading base x ≤ R)
+    {F : ℝ → ℝ} (hF : ContDiff ℝ ∞ F) (k : ℕ) :
+    ∃ g : A.Space → A.Space,
+      (∀ x, A.decode (g x) =
+        fun p => iteratedDeriv (k + 1) F (A.decode x p) - iteratedDeriv (k + 1) F 0) ∧
+      ∀ t : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U,
+        A.grading t (g x) ≤ C * A.grading (t + valueLoss) x := by
+  have hp : Monotone A.grading := gradedSeminorm_monotone (fun n => A.level n) A.bond
+  have hk : ContDiff ℝ ∞ (iteratedDeriv (k + 1) F) := by
+    rw [iteratedDeriv_eq_iterate]
+    exact hF.iterate_deriv (k + 1)
+  let G : ℝ → ℝ := fun z => iteratedDeriv (k + 1) F z - iteratedDeriv (k + 1) F 0
+  have hG : ContDiff ℝ ∞ G := hk.sub contDiff_const
+  have hG0 : G 0 = 0 := sub_self _
+  let g : A.Space → A.Space := fun x =>
+    SobolevModelData.liftHeight hA (fun p => G (A.decode x p)) (hmember G hG hG0 x)
+  have hgdecode (x : A.Space) : A.decode (g x) = fun p => G (A.decode x p) :=
+    SobolevModelData.decode_liftHeight hA _ (hmember G hG hG0 x)
+  refine ⟨g, hgdecode, ?_⟩
+  intro t
+  obtain ⟨C, hC, hCx⟩ := hvalue G hG hG0 R hR t
+  refine ⟨C, hC, ?_⟩
+  intro x hx
+  rw [sobolevGrading_eq_physicalNorm hA, hgdecode]
+  exact hCx x ((hp hbase x).trans (hU x hx))
+
+/-- One coefficient with a fixed-loss value estimate can be inserted into
+any family of one-high products.  This statement involves only abstract
+seminorms and therefore never unfolds a chosen Sobolev realization. -/
+private theorem uniformComposition_product_family
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p)
+    {productBase productLoss valueLoss base : ℕ}
+    (hbaseProduct : productBase ≤ base) (hbaseLow : productBase + valueLoss ≤ base)
+    (M : ∀ k : ℕ, (Fin (k + 1) → E) → E)
+    (hM : ∀ k s : ℕ, ∃ C : ℝ, 0 ≤ C ∧
+      ∀ u : Fin (k + 1) → E,
+        p s (M k u) ≤ C * ∑ i, p (s + productLoss) (u i) *
+          ∏ j ∈ Finset.univ.erase i, p productBase (u j))
+    {U : Set E} (g : E → E)
+    (hg : ∀ t : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U,
+      p t (g x) ≤ C * p (t + valueLoss) x)
+    {R : ℝ} (hR : 0 ≤ R) (hU : ∀ x ∈ U, p base x ≤ R)
+    (d : ℝ) (k s : ℕ) :
+    ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U, ∀ v : Fin (k + 1) → E,
+      p s (M (k + 1) (Fin.cons (g x) v) + d • M k v) ≤
+        C * tameJetSize p (k + 1) s (productLoss + valueLoss) base x v := by
+  obtain ⟨Cₕ, hCₕ, hgHigh⟩ := hg (s + productLoss)
+  obtain ⟨Cₗ, hCₗ, hgLow⟩ := hg productBase
+  obtain ⟨P, hP, hPu⟩ := hM (k + 1) s
+  obtain ⟨V, hV, hVu⟩ := hM k s
+  refine ⟨P * (Cₕ + Cₗ * R) + ‖d‖ * V,
+    add_nonneg (mul_nonneg hP (add_nonneg hCₕ (mul_nonneg hCₗ hR)))
+      (mul_nonneg (norm_nonneg _) hV), ?_⟩
+  intro x hx v
+  have hgH : p (s + productLoss) (g x) ≤
+      Cₕ * (1 + p (s + (productLoss + valueLoss)) x) := by
+    have hh : p (s + productLoss) (g x) ≤ Cₕ * p (s + (productLoss + valueLoss)) x := by
+      simpa only [Nat.add_assoc] using hgHigh x hx
+    exact hh.trans (mul_le_mul_of_nonneg_left (by linarith) hCₕ)
+  have hgL : p productBase (g x) ≤ Cₗ * R :=
+    (hgLow x hx).trans (mul_le_mul_of_nonneg_left
+      ((hp hbaseLow x).trans (hU x hx)) hCₗ)
+  exact uniformComposition_numeric hp hbaseProduct
+    (show s + productLoss ≤ s + (productLoss + valueLoss) by omega)
+    hP hV hCₕ (mul_nonneg hCₗ hR) x (g x) (M (k + 1) (Fin.cons (g x) v)) (M k v) v
+    (hPu (Fin.cons (g x) v)) (hVu v) hgH hgL
+
 /-- A single positive derivative order is estimated using two genuine
 products.  The low coefficient is bounded on the original common domain. -/
 private theorem uniformComposition_positive_bound
@@ -147,45 +230,16 @@ private theorem uniformComposition_positive_bound
     ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U, ∀ v : Fin (k + 1) → A.Space,
       A.grading s (J.D (k + 1) x v) ≤
         C * tameJetSize A.grading (k + 1) s (productLoss + valueLoss) base x v := by
-  have hp : Monotone A.grading := gradedSeminorm_monotone (fun n => A.level n) A.bond
-  have hk : ContDiff ℝ ∞ (iteratedDeriv (k + 1) F) := by
-    rw [iteratedDeriv_eq_iterate]
-    exact hF.iterate_deriv (k + 1)
-  let G : ℝ → ℝ := fun z => iteratedDeriv (k + 1) F z - iteratedDeriv (k + 1) F 0
-  have hG : ContDiff ℝ ∞ G := hk.sub contDiff_const
-  have hG0 : G 0 = 0 := sub_self _
-  let g : A.Space → A.Space := fun x =>
-    SobolevModelData.liftHeight hA (fun p => G (A.decode x p)) (hmember G hG hG0 x)
-  have hgdecode (x : A.Space) : A.decode (g x) = fun p => G (A.decode x p) :=
-    SobolevModelData.decode_liftHeight hA _ (hmember G hG hG0 x)
-  have hgbound (t : ℕ) : ∃ C : ℝ, 0 ≤ C ∧ ∀ x ∈ U,
-      A.grading t (g x) ≤ C * A.grading (t + valueLoss) x := by
-    obtain ⟨C, hC, hCx⟩ := hvalue G hG hG0 R hR t
-    refine ⟨C, hC, ?_⟩
-    intro x hx
-    rw [sobolevGrading_eq_physicalNorm hA, hgdecode]
-    exact hCx x ((hp hbaseValue x).trans (hU x hx))
-  obtain ⟨Cₕ, hCₕ, hgHigh⟩ := hgbound (s + productLoss)
-  obtain ⟨Cₗ, hCₗ, hgLow⟩ := hgbound productBase
-  obtain ⟨P, hP, hPu⟩ := hproduct (k + 1) s
-  obtain ⟨V, hV, hVu⟩ := hproduct k s
-  refine ⟨P * (Cₕ + Cₗ * R) + ‖iteratedDeriv (k + 1) F 0‖ * V,
-    add_nonneg (mul_nonneg hP (add_nonneg hCₕ (mul_nonneg hCₗ hR)))
-      (mul_nonneg (norm_nonneg _) hV), ?_⟩
+  obtain ⟨g, hgdecode, hgbound⟩ :=
+    uniformComposition_centered_coefficient hA hbaseValue hmember hvalue hR hU hF k
+  obtain ⟨C, hC, hCx⟩ := uniformComposition_product_family (p := A.grading)
+    (gradedSeminorm_monotone (fun n => A.level n) A.bond)
+    hbaseProduct hbaseLow (SobolevModelData.decodedProduct hT hA hinterp hγ)
+    hproduct g hgbound hR hU (iteratedDeriv (k + 1) F 0) k s
+  refine ⟨C, hC, ?_⟩
   intro x hx v
-  have hgH : A.grading (s + productLoss) (g x) ≤
-      Cₕ * (1 + A.grading (s + (productLoss + valueLoss)) x) := by
-    have hh := hgHigh x hx
-    rw [Nat.add_assoc] at hh
-    exact hh.trans (mul_le_mul_of_nonneg_left (by linarith) hCₕ)
-  have hgL : A.grading productBase (g x) ≤ Cₗ * R :=
-    (hgLow x hx).trans (mul_le_mul_of_nonneg_left
-      ((hp hbaseLow x).trans (hU x hx)) hCₗ)
   rw [sobolevCompositionTower_centered_product hT hA hinterp hγ J hF hdecode k g hgdecode hx v]
-  exact uniformComposition_numeric (p := A.grading) hp hbaseProduct
-    (show s + productLoss ≤ s + (productLoss + valueLoss) by omega)
-    hP hV hCₕ (mul_nonneg hCₗ hR) x (g x) _ _ v
-    (hPu (Fin.cons (g x) v)) (hVu v) hgH hgL
+  exact hCx x hx v
 
 /-- Package individual orders without unfolding the Sobolev model while
 introducing the quantifiers of the frozen uniform-tower interface. -/

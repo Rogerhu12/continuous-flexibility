@@ -40,6 +40,11 @@ private theorem weightedState_clm_comp_add_zero
     (hP : IsTameLinear p q P.toLinearMap 0 0)
     (hK : IsTameLinear p r K.toLinearMap 0 0) :
     IsTameLinear p r (L.comp P + K).toLinearMap loss 0 := by
+  have hmap : (L.comp P + K).toLinearMap =
+      L.toLinearMap.comp P.toLinearMap + K.toLinearMap := by
+    ext x
+    rfl
+  rw [hmap]
   have hl : max loss 0 = loss := max_eq_left (Nat.zero_le loss)
   simpa only [Nat.add_zero, Nat.zero_add, max_self, hl] using
     ((hL.comp hP).add hp hK)
