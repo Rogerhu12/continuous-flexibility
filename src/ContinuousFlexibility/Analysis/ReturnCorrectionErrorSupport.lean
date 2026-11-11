@@ -148,6 +148,7 @@ theorem returnCorrectionResidualErrorField_eq_zero_of_eventually_zero
     (hzero : (fun q => returnCorrectionCoefficientError D S C R χ z q)
       =ᶠ[𝓝 p] fun _ => 0) :
     returnCorrectionResidualErrorField D S C R χ z ρ η p = 0 := by
+  classical
   have hF : returnCorrectionRadialErrorFlux D S C R χ z ρ η =ᶠ[𝓝 p] fun _ => 0 := by
     filter_upwards [hzero] with q hq
     simp only [returnCorrectionRadialErrorFlux, hq, LinearMap.zero_apply,
@@ -157,11 +158,13 @@ theorem returnCorrectionResidualErrorField_eq_zero_of_eventually_zero
     simp only [returnCorrectionAngularErrorFlux, hq, LinearMap.zero_apply,
       Prod.fst_zero, Prod.snd_zero, zero_mul, zero_add]
   have hr : radialPartial (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p = 0 := by
-    rw [radialPartial, hF.fderiv_eq]
-    simp only [fderiv_const, ContinuousLinearMap.zero_apply]
+    change (fderiv ℝ (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p) (1, 0) = 0
+    simpa only [fderiv_const, ContinuousLinearMap.zero_apply] using
+      congrArg (fun L : PolarPoint →L[ℝ] ℝ => L (1, 0)) (hF.fderiv_eq (𝕜 := ℝ))
   have ht : angularPartial (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p = 0 := by
-    rw [angularPartial, hG.fderiv_eq]
-    simp only [fderiv_const, ContinuousLinearMap.zero_apply]
+    change (fderiv ℝ (returnCorrectionAngularErrorFlux D S C R χ z ρ η) p) (0, 1) = 0
+    simpa only [fderiv_const, ContinuousLinearMap.zero_apply] using
+      congrArg (fun L : PolarPoint →L[ℝ] ℝ => L (0, 1)) (hG.fderiv_eq (𝕜 := ℝ))
   by_cases hp : p ∈ annularOpen D
   · change (if p ∈ annularOpen D then
       radialPartial (returnCorrectionRadialErrorFlux D S C R χ z ρ η) p +

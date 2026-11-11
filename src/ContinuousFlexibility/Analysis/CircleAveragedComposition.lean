@@ -188,6 +188,7 @@ def circleShiftedChartComposeLinear : S.Space →ₗ[ℝ] S.Space :=
 theorem circleShiftedChartComposeLinear_decode (u : S.Space) (m : ℕ) (θ : ℝ) :
     S.decode (circleShiftedChartComposeLinear hS hT hD hγ travel e u) m θ =
       S.decode u m (θ + travel m + S.decode e m θ) := by
+  unfold circleShiftedChartComposeLinear
   have h := circleComposeModelLinear_decode hS (material_circle_sample_weights_pos hT hD).1
     (material_circle_sample_weights_pos hT hD).2
     (circleAffineLift travel (S.decode e) 1)

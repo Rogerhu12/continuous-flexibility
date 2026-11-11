@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Statements.Analysis
+import ContinuousFlexibility.Statements.Nonlinear
 import ContinuousFlexibility.Analysis.ProjectiveJets
 
 /-!
@@ -24,6 +24,14 @@ variable {E F G : Type*}
   [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
   {U : Set F} {V : Set E} {f : F → G}
 
+def SmoothDirections.congrOn (J : SmoothDirections U f) {g : F → G}
+    (hfg : EqOn f g U) : SmoothDirections U g where
+  open_domain := J.open_domain
+  D := J.D
+  zero x hx := (J.zero x hx).trans (hfg hx)
+  continuous := J.continuous
+  derivative := J.derivative
+
 def SmoothDirections.compAffine (J : SmoothDirections U f)
     (L : E →L[ℝ] F) (a : F) (hV : IsOpen V)
     (hmap : MapsTo (fun x => a + L x) V U) :
@@ -43,7 +51,7 @@ def SmoothDirections.compAffine (J : SmoothDirections U f)
     exact (J.continuous n).comp hc.continuousOn (fun z hz => ⟨hmap hz.1, mem_univ _⟩)
   derivative n x hx v w := by
     have hd := J.derivative n (a + L x) (hmap hx) (fun i => L (v i)) (L w)
-    have he : (fun i : Fin (n + 1) => L (Fin.cons w v i)) =
+    have he : (fun i : Fin (n + 1) => L ((Fin.cons w v : Fin (n + 1) → E) i)) =
         Fin.cons (L w) (fun i => L (v i)) := by
       funext i
       refine Fin.cases ?_ ?_ i <;> simp only [Fin.cons_zero, Fin.cons_succ]

@@ -47,8 +47,9 @@ theorem oneHighVariationWeight_one_smul_le
     abs_of_nonneg ht.1]
   have ht' : t * p high v ≤ p high v := by
     simpa only [one_mul] using mul_le_mul_of_nonneg_right ht.2 (apply_nonneg (p high) v)
-  exact add_le_add_right
-    (mul_le_mul_of_nonneg_right (add_le_add_left ht' 1) (apply_nonneg (p base) v)) _
+  have hmul : (1 + t * p high v) * p base v ≤ (1 + p high v) * p base v :=
+    mul_le_mul_of_nonneg_right (by linarith only [ht']) (apply_nonneg (p base) v)
+  linarith only [hmul]
 
 theorem SmoothDirections.sub_le_of_first_variation
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
@@ -116,11 +117,10 @@ theorem SmoothDirections.abs_le_of_first_variation_small
   rw [hzero, sub_zero] at h
   have hhigh_one : p high (y - x) ≤ 1 := hhigh.trans (by linarith only [hη])
   have hweight : (1 + p high (y - x)) * p base (y - x) + p high (y - x) ≤ 6 * η := by
-    calc
-      _ ≤ (1 + 1) * (2 * η) + 2 * η :=
-        add_le_add (mul_le_mul (add_le_add_left hhigh_one 1) hlow
-          (apply_nonneg (p base) (y - x)) (by norm_num)) hhigh
-      _ = _ := by ring
+    have hprod : (1 + p high (y - x)) * p base (y - x) ≤ (1 + 1) * (2 * η) :=
+      mul_le_mul (by linarith only [hhigh_one]) hlow
+        (apply_nonneg (p base) (y - x)) (by norm_num)
+    linarith only [hprod, hhigh]
   exact h.trans ((mul_le_mul_of_nonneg_left hweight hA).trans_eq (by ring))
 
 theorem seminorm_scalar_ball_segment

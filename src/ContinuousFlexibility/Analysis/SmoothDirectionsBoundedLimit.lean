@@ -97,7 +97,7 @@ theorem local_second_line_bounds_of_uniform_seminorm_bounds
       calc
         p (x + t • w) ≤ p x + p (t • w) := map_add_le_add _ _ _
         _ = p x + |t| * p w := by rw [map_smul_eq_mul, Real.norm_eq_abs]
-        _ ≤ p x + p w := add_le_add_left (mul_le_of_le_one_left (apply_nonneg p w) ht1) _
+        _ ≤ p x + p w := add_le_add le_rfl (mul_le_of_le_one_left (apply_nonneg p w) ht1)
     have hb' := hb i _ htu (Fin.cons w (Fin.cons w v))
     simp only [Fin.prod_univ_succ, Fin.cons_zero, Fin.cons_succ] at hb'
     exact hb'.trans (mul_le_mul_of_nonneg_right

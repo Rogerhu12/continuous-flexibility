@@ -108,9 +108,11 @@ theorem iteratedDeriv_oddPart_abs_le
     |iteratedDeriv n (ContinuousFlexibility.Statements.oddPart f) x| ≤ A := by
   have heq : ContinuousFlexibility.Statements.oddPart f =
       fun y => (f y - f (-y)) / 2 := rfl
+  have hr : ContDiff ℝ ∞ (fun y : ℝ => f (-y)) := by
+    simpa only [Function.comp_def] using hf.comp contDiff_neg
   rw [heq, iteratedDeriv_div_const,
     iteratedDeriv_fun_sub (hf.contDiffAt.of_le (by simp))
-      ((hf.comp contDiff_neg).contDiffAt.of_le (by simp)),
+      (hr.contDiffAt.of_le (by simp)),
     iteratedDeriv_comp_neg]
   simp only [smul_eq_mul, abs_div, abs_ofNat]
   apply (div_le_div_of_nonneg_right (abs_sub_le _ _) (by norm_num : (0 : ℝ) ≤ 2)).trans
@@ -125,9 +127,11 @@ theorem iteratedDeriv_evenPart_abs_le
     |iteratedDeriv n (ContinuousFlexibility.Statements.evenPart f) x| ≤ A := by
   have heq : ContinuousFlexibility.Statements.evenPart f =
       fun y => (f y + f (-y)) / 2 := rfl
+  have hr : ContDiff ℝ ∞ (fun y : ℝ => f (-y)) := by
+    simpa only [Function.comp_def] using hf.comp contDiff_neg
   rw [heq, iteratedDeriv_div_const,
     iteratedDeriv_fun_add (hf.contDiffAt.of_le (by simp))
-      ((hf.comp contDiff_neg).contDiffAt.of_le (by simp)),
+      (hr.contDiffAt.of_le (by simp)),
     iteratedDeriv_comp_neg]
   simp only [smul_eq_mul, abs_div, abs_ofNat]
   apply (div_le_div_of_nonneg_right (abs_add_le _ _) (by norm_num : (0 : ℝ) ≤ 2)).trans

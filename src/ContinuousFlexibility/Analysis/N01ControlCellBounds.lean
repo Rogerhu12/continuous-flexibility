@@ -88,19 +88,29 @@ theorem N01Properties.control_deriv_cell_bound_with_grading
         (A * B) * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
           radialE (D.cellIndex j) ^ A *
           (stateGrading S base v + stateGrading S (1 + loss) v) := by
-  obtain ⟨B, hB, hproducts⟩ := hN.control_product_jets_cell_bound hS hT
+  let hdata := hN.control_product_jets_cell_bound hS hT
+  let B : ℝ := hdata.choose
+  have hB : 0 < B := hdata.choose_spec.1
   obtain ⟨A, hA, hinverse⟩ := hN.1.1.inverse_first_jets_cell_bound
   obtain ⟨_, hgeom⟩ := hN.1.1
-  refine ⟨B, A, hB, hA, fun m j r hr => ?_⟩
-  dsimp only
-  obtain ⟨h0, h1⟩ := hproducts m j r hr
-  have hw : DifferentiableAt ℝ D.w r := hgeom.1.2.2.1.1.differentiable (by simp) r
-  have hwr : D.w r ≠ 0 :=
-    (hgeom.1.2.2.2.2.1 r (hgeom.2.1.2.2.2.1 j hr)).ne'
-  have hbound := abs_deriv_control_le_inverse_jets hw hwr h0 h1
-  have hnonneg := (abs_nonneg (D.w r * C.control m r)).trans h0
-  refine hbound.trans ((mul_le_mul_of_nonneg_right (hinverse j r hr) hnonneg).trans_eq ?_)
-  ring
+  have hpoint : ∀ (m j : ℕ) (r : ℝ), r ∈ D.cells j →
+      let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
+      |deriv (C.control m) r| ≤
+        (A * B) * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
+          radialE (D.cellIndex j) ^ A *
+          (stateGrading S base v + stateGrading S (1 + loss) v) := by
+    intro m j r hr
+    dsimp only
+    have h0 := (hdata.choose_spec.2 m j r hr).1
+    have h1 := (hdata.choose_spec.2 m j r hr).2
+    have hw : DifferentiableAt ℝ D.w r := hgeom.1.2.2.1.1.differentiable (by simp) r
+    have hwr : D.w r ≠ 0 :=
+      (hgeom.1.2.2.2.2.1 r (hgeom.2.1.2.2.2.1 j hr)).ne'
+    have hbound := abs_deriv_control_le_inverse_jets hw hwr h0 h1
+    have hnonneg := (abs_nonneg (D.w r * C.control m r)).trans h0
+    exact hbound.trans
+      ((mul_le_mul_of_nonneg_right (hinverse j r hr) hnonneg).trans_eq (by ring))
+  exact Exists.intro B (Exists.intro A (And.intro hB (And.intro hA hpoint)))
 
 /-- Uniform normalization of the two singleton direction grades. -/
 theorem singletonKappaDirection_two_grades_le
@@ -150,7 +160,11 @@ theorem N01Properties.control_deriv_actual_cell_bound
           radialE (D.cellIndex j) ^ A *
           (T.M (T.sample m) ^ max base (1 + loss) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) := by
-  obtain ⟨B, A, hB, hA, hbound⟩ := hN.control_deriv_cell_bound_with_grading hS hT
+  let hdata := hN.control_deriv_cell_bound_with_grading hS hT
+  let B : ℝ := hdata.choose
+  let A : ℝ := hdata.choose_spec.choose
+  have hB : 0 < B := hdata.choose_spec.choose_spec.1
+  have hA : 0 < A := hdata.choose_spec.choose_spec.2.1
   obtain ⟨_, hgeom⟩ := hN.1.1
   let G := circleSingletonGradingConstant base + circleSingletonGradingConstant (1 + loss) + 1
   have hG : 0 < G := by
@@ -171,7 +185,7 @@ theorem N01Properties.control_deriv_actual_cell_bound
       (mul_nonneg (mul_nonneg (mul_nonneg hA.le hB.le) (Real.rpow_nonneg hpJ.2.1.le _))
         (Real.rpow_nonneg hpJ.2.2.1.le _))
       (Real.rpow_nonneg (Real.exp_pos _).le _)
-  exact (hbound m j r hr).trans
+  exact (hdata.choose_spec.choose_spec.2.2 m j r hr).trans
     ((mul_le_mul_of_nonneg_left hgrade hfactor).trans_eq (by dsimp only [G]; ring))
 
 end ContinuousFlexibility.Statements

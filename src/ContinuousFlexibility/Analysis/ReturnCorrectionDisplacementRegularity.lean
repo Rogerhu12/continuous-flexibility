@@ -109,7 +109,9 @@ theorem N01Properties.returnCorrectionInitialMap_contDiff :
     ContDiff ℝ ∞ (returnCorrectionInitialMap S C z m) := by
   have hL := stateLeftChart_contDiff S z m (hS.2.1 (3 / 4 : ℝ))
   have hG := hN01.returnTransportInverse_contDiff hS hT hz hsector m
-  have h := hG.comp (hL.sub contDiff_const)
+  have h : ContDiff ℝ ∞ (fun θ => C.minusReturnInverse z m
+      (C.rightChartInverse z m (stateLeftChart S z.1 m θ - C.travel m))) :=
+    hG.comp (hL.sub (contDiff_const (c := C.travel m)))
   apply contDiff_iff_contDiffAt.mpr
   intro θ
   exact h.contDiffAt.congr_of_eventuallyEq (Eventually.of_forall fun t => by

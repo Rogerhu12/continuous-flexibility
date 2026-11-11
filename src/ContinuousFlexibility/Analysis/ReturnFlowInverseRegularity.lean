@@ -37,7 +37,7 @@ def returnTriangularEquiv (a b : ℝ) (hb : b ≠ 0) : PolarPoint ≃L[ℝ] Pola
   map_smul' c p := by
     apply Prod.ext
     · rfl
-    · simp only [Prod.smul_mk, smul_eq_mul, RingHom.id_apply]
+    · change a * (c * p.1) + b * (c * p.2) = c * (a * p.1 + b * p.2)
       ring
   left_inv p := by
     apply Prod.ext
@@ -94,7 +94,8 @@ theorem returnFlow_invFun_hasStrictFDerivAt
     apply Prod.ext
     · rfl
     · exact Function.leftInverse_invFun hq q.2
-  exact (hg.to_local_left_inverse hleft).snd
+  exact (hg.to_local_left_inverse
+    (g := fun q : PolarPoint => (q.1, Function.invFun (F q.1) q.2)) hleft).snd
 
 /-- Higher regularity of the actual fiberwise inverse follows from the
 forward coordinate map; inverse regularity is never an extra premise. -/
@@ -125,7 +126,8 @@ theorem returnFlow_invFun_contDiffAt
     · rfl
     · exact Function.leftInverse_invFun hq q.2
   have hs := hpair.hasStrictFDerivAt' hpairD hn
-  have heq := hs.localInverse_unique hleft
+  have heq := hs.localInverse_unique
+    (g := fun q : PolarPoint => (q.1, Function.invFun (F q.1) q.2)) hleft
   apply (hpair.to_localInverse hpairD hn).snd.congr_of_eventuallyEq
   exact heq.mono fun q hq => congrArg Prod.snd hq
 

@@ -167,7 +167,7 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
     let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
     let J := htower.choose
     apply ordinaryFlow_q_derivative_bound_of_tower (high := loss) J hxq
-    simpa only [pow_zero, one_mul] using
+    simpa only [pow_zero, one_mul, zero_add] using
       htower.choose_spec (x, q) hxq (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
   exact Exists.intro B (And.intro hB hpoint)
 

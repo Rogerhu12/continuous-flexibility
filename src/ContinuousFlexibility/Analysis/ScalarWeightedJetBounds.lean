@@ -43,7 +43,7 @@ theorem iteratedDeriv_comp_weighted_bound
   have heq : (fun y => f i (g i y)) = fun y => W i * F i (g i y) := by
     funext y
     dsimp only [F]
-    field_simp [(hW i).ne']
+    field_simp [(hW i).ne'] <;> ring
   rw [heq, iteratedDeriv_const_mul_field, abs_mul, abs_of_pos (hW i)]
   exact (mul_le_mul_of_nonneg_left (hb i x) (hW i).le).trans_eq (mul_comm _ _)
 
@@ -71,7 +71,7 @@ theorem iteratedDeriv_mul_weighted_bound
   have heq : (fun y => f i y * g i y) = fun y => W i * (f i y * G i y) := by
     funext y
     dsimp only [G]
-    field_simp [(hW i).ne']
+    field_simp [(hW i).ne'] <;> ring
   rw [heq, iteratedDeriv_const_mul_field, abs_mul, abs_of_pos (hW i)]
   exact (mul_le_mul_of_nonneg_left (hb i x) (hW i).le).trans_eq (mul_comm _ _)
 
