@@ -30,7 +30,10 @@ def componentCosineFlowDefectJet
     (m : ℕ)
     (hGz : ContDiff ℝ ∞ (fun p : PolarPoint => componentCosineSpeed D S C m (z, p)))
     (t : ℝ) (n : ℕ) : C(AddCircle Real.pi, ℝ) :=
-  circleFlowDefectJet hGz (componentCosineSpeed_periodic hS z m)
+  circleFlowDefectJet
+    (Θ := fun p : PolarPoint =>
+      C.minusFlow z m (rootCosinePath (C.left m) (C.right m) p.1) p.2)
+    hGz (componentCosineSpeed_periodic hS z m)
     (continuousOn_componentCosineFlow hA hB hz m)
     (componentCosineFlow_initial hB hz m)
     (fun r hr θ => hasDerivAt_componentCosineFlow hS hT hA hB hz m θ hr) t n

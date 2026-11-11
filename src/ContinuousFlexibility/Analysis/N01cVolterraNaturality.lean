@@ -72,7 +72,7 @@ theorem volterraStateVariation_natural_at
     congr 1
     funext i
     exact congrArg (fun z : E => (z, (1 : ℝ))) (map_zero L)
-  induction n using Nat.strong_induction_on generalizing v t with
+  induction n using Nat.strong_induction_on generalizing t with
   | h n ih =>
     cases n with
     | zero =>

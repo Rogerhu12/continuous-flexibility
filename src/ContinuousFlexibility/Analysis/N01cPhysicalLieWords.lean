@@ -117,11 +117,14 @@ theorem fderiv_eval
     · simp only [Fin.cons_succ]
   have he : w.eval f = fun y => iteratedFDeriv ℝ w.order f y
       (fun i => cylinderBasisVector (w.axes i)) := rfl
-  rw [he]
-  simpa only [eval, prepend, hv, Fin.tail_cons, Fin.cons_zero] using
-    (hj.iteratedFDeriv_succ_apply_left'
-      (m := Fin.cons (α := fun _ : Fin (w.order + 1) => PolarPoint)
-        (cylinderBasisVector j) (fun i => cylinderBasisVector (w.axes i)))).symm
+  rw [he, fderiv_continuousMultilinear_apply_const_apply hj]
+  change fderiv ℝ (iteratedFDeriv ℝ w.order f) p (cylinderBasisVector j)
+      (fun i => cylinderBasisVector (w.axes i)) =
+    iteratedFDeriv ℝ (w.order + 1) f p
+      (fun i : Fin (w.order + 1) =>
+        cylinderBasisVector
+          (Fin.cons (α := fun _ : Fin (w.order + 1) => Fin 2) j w.axes i))
+  rw [hv, iteratedFDeriv_succ_apply_left, Fin.cons_zero, Fin.tail_cons]
 
 end PhysicalLieWord
 

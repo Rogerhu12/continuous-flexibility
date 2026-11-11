@@ -62,8 +62,8 @@ theorem n01c_oneHigh_sum_le_marked {ι : Type*} [Fintype ι] [DecidableEq ι]
               (fun i hi => hotherLow i (Finset.ne_of_mem_erase hi))
           _ = B ^ (Finset.univ.erase i₀).card := by rw [Finset.prod_const]
           _ ≤ B ^ Fintype.card ι := pow_le_pow_right₀ hB
-            (by simpa only [Finset.card_univ] using Finset.card_erase_le
-              (Finset.univ : Finset ι) i₀)
+            (by simpa only [Finset.card_univ] using
+              (Finset.card_erase_le (s := (Finset.univ : Finset ι)) (a := i₀)))
       exact mul_le_mul hheadHigh hp
         (Finset.prod_nonneg (fun i _ => hlow i)) (mul_nonneg hW hA)
     · have hmem : i₀ ∈ Finset.univ.erase j := Finset.mem_erase.mpr
@@ -75,8 +75,8 @@ theorem n01c_oneHigh_sum_le_marked {ι : Type*} [Fintype ι] [DecidableEq ι]
           W * B ^ Fintype.card ι :=
         hp₀.trans (mul_le_mul_of_nonneg_left
           (pow_le_pow_right₀ hB
-            (by simpa only [Finset.card_univ] using Finset.card_erase_le
-              (Finset.univ : Finset ι) j)) hW)
+            (by simpa only [Finset.card_univ] using
+              (Finset.card_erase_le (s := (Finset.univ : Finset ι)) (a := j)))) hW)
       calc
         _ ≤ A * (W * B ^ Fintype.card ι) :=
           mul_le_mul (hotherHigh j hj) hp
@@ -146,8 +146,10 @@ theorem n01c_forcingMajorant_polynomial
     (hhigh : ∀ ω i, 0 ≤ high ω i) (hlow : ∀ ω i, 0 ≤ low ω i)
     (hheadHigh : ∀ ω, high ω 0 ≤ C * W * U * R)
     (hheadLow : ∀ ω, low ω 0 ≤ C * W * R ^ 2)
-    (hotherHigh : ∀ ω i, high ω i.succ ≤ C * U)
-    (hotherLow : ∀ ω i, low ω i.succ ≤ C * R) :
+    (hotherHigh : ∀ (ω : FlowForcingChoice N) (i : Fin ω.1.length),
+      high ω i.succ ≤ C * U)
+    (hotherLow : ∀ (ω : FlowForcingChoice N) (i : Fin ω.1.length),
+      low ω i.succ ≤ C * R) :
     (2 : ℝ) ^ (s + 1) *
       ∑ ω : FlowForcingChoice N, circleProductSobolevConstant P ω.1.length s *
         ∑ j, high ω j * ∏ i ∈ Finset.univ.erase j, low ω i ≤

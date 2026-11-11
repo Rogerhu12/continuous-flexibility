@@ -28,6 +28,8 @@ theorem convex_seminormDisplacement_lt
     (p : Seminorm ℝ X) (center : X) (R : ℝ) :
     Convex ℝ {x : X | p (x - center) < R} := by
   intro x hx y hy a b ha hb hab
+  change p (x - center) < R at hx
+  change p (y - center) < R at hy
   have he : a • x + b • y - center =
       a • (x - center) + b • (y - center) := by
     have hc : a • center + b • center = center := by

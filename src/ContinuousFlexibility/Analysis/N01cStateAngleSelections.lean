@@ -33,7 +33,7 @@ def ofBool : {n : ℕ} → (Fin n → Bool) → StateAngleWord n
 
 @[simp] theorem isState_ofBool {n : ℕ} (b : Fin n → Bool) :
     (ofBool b).isState = b := by
-  induction n generalizing b with
+  induction n with
   | zero =>
       funext i
       exact i.elim0
@@ -115,7 +115,7 @@ def IsPure {n : ℕ} (w : StateAngleWord n) (v : Fin n → E × ℝ) : Prop :=
 
 theorem isPure_pureSlots {n : ℕ} (w : StateAngleWord n)
     (v : Fin w.stateArity → E) : w.IsPure (w.pureSlots v) := by
-  induction w generalizing v with
+  induction w with
   | nil =>
       constructor <;> intro i <;> exact i.elim0
   | state w ih =>
@@ -146,7 +146,7 @@ theorem isPure_pureSlots {n : ℕ} (w : StateAngleWord n)
 theorem pureSlots_stateDirections {n : ℕ} (w : StateAngleWord n)
     (v : Fin n → E × ℝ) (hv : w.IsPure v) :
     w.pureSlots (w.stateDirections v) = v := by
-  induction w generalizing v with
+  induction w with
   | nil =>
       funext i
       exact i.elim0
@@ -171,7 +171,7 @@ theorem pureSlots_stateDirections {n : ℕ} (w : StateAngleWord n)
 
 theorem angleFactor_eq_one {n : ℕ} (w : StateAngleWord n)
     (v : Fin n → E × ℝ) (hv : w.IsPure v) : w.angleFactor v = 1 := by
-  induction w generalizing v with
+  induction w with
   | nil => rfl
   | state w ih =>
       exact ih (Fin.tail v)
@@ -214,7 +214,7 @@ theorem ofBool_isPure {n : ℕ} (b : Fin n → Bool) (v : Fin n → E) :
 theorem stateDirections_mem_range {n : ℕ} (w : StateAngleWord n)
     (v : Fin n → E × ℝ) (i : Fin w.stateArity) :
     ∃ j : Fin n, w.isState j = true ∧ w.stateDirections v i = (v j).1 := by
-  induction w generalizing v i with
+  induction w with
   | nil => exact i.elim0
   | state w ih =>
       refine Fin.cases ?_ (fun k => ?_) i
@@ -267,8 +267,8 @@ theorem iteratedDeriv_stateJet_angle_shift
       have he : iteratedDeriv a (fun η => (J b (t, η)).D k x v) =
           fun η => (J (b + a) (t, η)).D k x v := funext ih
       rw [iteratedDeriv_succ, he]
-      simpa only [Nat.add_assoc] using
-        deriv_stateJet_angle hU hf J k (b + a) x hx t θ v
+      exact (deriv_stateJet_angle hU hf J k (b + a) x hx t θ v).trans
+        (congrArg (fun j : ℕ => (J j (t, θ)).D k x v) (Nat.add_assoc b a 1))
 
 /-- The actual angular derivative of an arbitrarily interleaved
 state/angle jet is the corresponding actual angular-state jet. -/
