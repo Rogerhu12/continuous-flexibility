@@ -15,7 +15,7 @@ namespace ContinuousFlexibility.Statements
 
 open Set
 open ContinuousFlexibility.Analysis
-open scoped ContDiff Topology BigOperators
+open scoped ENNReal ContDiff Topology BigOperators
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -79,17 +79,22 @@ theorem n08WeakControlProfile_restriction
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (x : AnnularState S) :
     n08WeakControlProfile T C (n08ControlRestriction S x.2.2.1) = stateControlSum C x := by
-  funext r
-  apply tsum_congr
-  intro m
-  rw [n08ControlRestriction_apply hS]
-  have hH := (n08_material_sample_bounds hD hT m).1
-  change ((T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * stateKappa S x m) *
-      T.H (T.sample m) ^ (3 / 4 : ℝ)) * C.control m r = stateKappa S x m * C.control m r
-  calc
-    _ = (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * T.H (T.sample m) ^ (3 / 4 : ℝ)) *
-        (stateKappa S x m * C.control m r) := by ring
-    _ = _ := by rw [← Real.rpow_add hH, neg_add_cancel, Real.rpow_zero, one_mul]
+  have hcoeff (m : ℕ) :
+      n08ControlRestriction S x.2.2.1 m * T.H (T.sample m) ^ (3 / 4 : ℝ) =
+        stateKappa S x m := by
+    have hH := (n08_material_sample_bounds hD hT m).1
+    have h := n08ControlRestriction_apply hS x.2.2.1 m
+    calc
+      _ = (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) * stateKappa S x m) *
+          T.H (T.sample m) ^ (3 / 4 : ℝ) :=
+        congrArg (fun y : ℝ => y * T.H (T.sample m) ^ (3 / 4 : ℝ)) h
+      _ = (T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
+          T.H (T.sample m) ^ (3 / 4 : ℝ)) * stateKappa S x m := by ring
+      _ = _ := by rw [← Real.rpow_add hH, neg_add_cancel, Real.rpow_zero, one_mul]
+  change n08ControlSeries C
+    (fun m => n08ControlRestriction S x.2.2.1 m * T.H (T.sample m) ^ (3 / 4 : ℝ)) =
+      n08ControlSeries C (stateKappa S x)
+  exact congrArg (n08ControlSeries C) (funext hcoeff)
 
 /-- The constant is selected before the weak vector and the physical point.
 The entire Banach norm is charged once, at every ordinary derivative order. -/

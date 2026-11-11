@@ -80,7 +80,7 @@ theorem n08CircleDiagonal_reference
   have hzero : (C.referenceState, 0) ∈ stateNeighborhood S C base ε := by
     constructor
     · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      simpa only [sub_self] using ((stateGrading S base).map_zero).trans_lt hN.2.1
+      simpa only [sub_self, map_zero] using hN.2.1
     · exact (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1
   have hs (t : ℝ) : stateSector S (x t) :=
     (stateSectorSubmodule S).add_mem href.stateSector
@@ -110,7 +110,9 @@ theorem n08CircleDiagonal_reference
     simpa only [id_eq, one_mul] using (hasDerivAt_id (0 : ℝ)).mul_const A
   have hτ' : HasDerivAt τ 1 ((0 : ℝ) * A) := by simpa only [zero_mul] using hτ
   have hcomp : HasDerivAt (fun t : ℝ => τ (t * A)) A 0 := by
-    simpa only [Function.comp_apply, one_mul] using hτ'.comp 0 hlin
+    have hc := hτ'.comp 0 hlin
+    change HasDerivAt (fun t : ℝ => τ (t * A)) (1 * A) 0 at hc
+    simpa only [one_mul] using hc
   have hBA : B * A = 1 := by
     dsimp only [A, B]
     rw [← Real.rpow_add (n08_materialSample_H_pos hT hN.1.1 m),

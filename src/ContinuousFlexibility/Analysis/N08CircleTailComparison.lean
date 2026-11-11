@@ -36,7 +36,7 @@ theorem n08_totalHeight_grading_bound (S : PhysicalSpacesData) (s : ℕ)
       (S.height (3 / 4 : ℝ)).grading s a.1.1 := by
   have h := ((S.height (3 / 4 : ℝ)).grading s).add_le (x.1.1 - a.1.1) a.1.1
   rw [sub_add_cancel] at h
-  exact h.trans (add_le_add_right (n08_decayingHeight_grading_le_state S s (x - a)) _)
+  exact h.trans (add_le_add (n08_decayingHeight_grading_le_state S s (x - a)) le_rfl)
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}

@@ -79,7 +79,9 @@ theorem n08CellLayerMultiplier_tail_bound
     n08_scaledOperator (T.M (T.sample m) ^ N) (n08CellLayerMultiplier hT hW A m)
   have hdecode (m : ℕ) (u : W.Space) (p : PolarPoint) :
       W.decode (F m u) p = n08ScaledCellCutoff D T A N m p.1 * W.decode u p := by
-    rw [F, n08_scaledOperator_decode, n08CellLayerMultiplier_decode]
+    change W.decode (n08_scaledOperator (T.M (T.sample m) ^ N)
+      (n08CellLayerMultiplier hT hW A m) u) p = _
+    rw [n08_scaledOperator_decode, n08CellLayerMultiplier_decode]
     dsimp only [n08ScaledCellCutoff]
     ring
   have hsmooth (m : ℕ) : ContDiff ℝ ∞ (fun x => n08ScaledCellCutoff D T A N m (T.radius x)) :=

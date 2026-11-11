@@ -64,8 +64,9 @@ theorem n08CircleDiagonal_parameter_difference_bound
       have hb := n08LocalHeightState_grading_bound S C.referenceState x h b (v - 1)
       have hterm : |v - 1| * (S.height (3 / 4 : ℝ)).grading b h ≤ δ :=
         (mul_le_mul hcoeff hh (apply_nonneg _ _) (by norm_num : (0 : ℝ) ≤ 2)).trans_eq (by ring)
-      exact (hb.trans (add_le_add_left hterm _)).trans_lt
-        ((add_lt_add_right hx.1 δ).trans (by simpa only [two_mul] using htwodelta))
+      exact (hb.trans (add_le_add le_rfl hterm)).trans_lt
+        ((add_lt_add_of_lt_of_le hx.1 (le_refl δ)).trans
+          (by simpa only [two_mul] using htwodelta))
     · rw [abs_of_pos hqstar]
       exact htwodelta
   have hsY (v : ℝ) : stateSector S (Y v) := n08LocalHeightState_sector S hs h (v - 1)

@@ -59,7 +59,9 @@ theorem n08_weightedChi_point_jet_bound
     _ ≤ (2 * B) * (K * T.H r ^ ((3 / 4 : ℝ) / 16)) * ‖a‖ :=
       mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left
         (hKb m r hrm) (by positivity)) (norm_nonneg a)
-    _ = _ := by norm_num; ring
+    _ = _ := by
+      simp only [show (3 / 4 : ℝ) / 16 = 3 / 64 by norm_num]
+      ring
 
 private theorem n08_chi_radialJet_eq_iteratedDeriv (s : ℕ) (f : ℝ → ℝ) :
     radialJet s f = iteratedDeriv s f := by
