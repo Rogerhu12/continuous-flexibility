@@ -151,8 +151,8 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (33): ScalarCalculus, ScalarWeighted, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
-R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
+Open nodes (28): ScalarWeighted, Spaces, R05b, R06a, R06b, R06c, R07, R09,
+R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04a,
 N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
@@ -160,7 +160,7 @@ Lean statements follow the manuscript and are not frozen: Tool-OneHighFactor (Le
 Tool-AngularCommutator (Lemma 8.4), Tool-SobolevExtension (extension operator, three-lines lemma),
 Tool-R10a-Inner (Lemma 6.3), Tool-R10a-Outer (Lemmas 6.4, 6.5).
 
-One task file each in `docs/tasks/` (40 in total).
+Task descriptions and completion standards are in `docs/tasks/`.
 
 Whether each node can be derived from its hypotheses is tested by its line. `N12` has
 passed this test with its original statement; `Solve` remains open. `R10a` has one frozen statement for the inner and the outer
@@ -175,7 +175,7 @@ as the kernel on the weighted graph domain.
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook
 ratios rescaled to it (about 100–190 lines of Lean per line of readable TeX): about 900,000 lines in
-total, range 600,000–1,300,000. Current size is about 10% of the central estimate.
+total, range 600,000–1,300,000. Current size is about 13% of the central estimate.
 
 ## Node sizes
 
@@ -194,21 +194,21 @@ already exists in the tree.
 
 ## Pick next
 
-Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
-R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
+A branch `line/<Task>` records that the task is claimed. Check the current state
+with `git ls-remote --heads origin "line/*"` before claiming a task.
 
 A line that has finished takes the first task below whose branch does not exist:
 
-1. Standalone, mathlib only: N04Cubic, N04Transmission, N04Root.
+1. Standalone, mathlib only: N04Root.
 2. Pipelines whose first piece is running: R05b, R06b, R06c.
 3. Tools used by several nodes: Tool-OneHighFactor, Tool-SobolevExtension, Tool-AngularCommutator.
-4. Radial chain: R07, R09, R08, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
+4. Radial chain: R07, R09, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
 5. Scalar and geometry of the iteration: ScalarWeighted, N01a, N01b, N01c, N02N03.
 6. Coordinates and inverse: N04a, N04b, N04Coordinates, N05, N06, N07a, N07b.
 7. Nonlinear: N08, N09N10.
 
 ## Next
 
-1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 28 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.
