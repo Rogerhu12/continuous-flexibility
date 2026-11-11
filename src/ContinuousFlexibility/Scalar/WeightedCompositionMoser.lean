@@ -80,8 +80,10 @@ theorem weightedComposition_jet_bound_of_diagonal
     funext p
     change T.M (T.radius p.1) ^ c *
       mixedDerivative a b (fun q => w q.1 * F (A.decode u (T.radius q.1, q.2))) p = _
-    rw [mixedDerivative_radial_mul hw (hF.comp (decodedMaterialPullback_contDiff hT hA u)),
-      Finset.mul_sum, Finset.sum_apply]
+    have hcomp : ContDiff ℝ ∞ (fun q : PolarPoint =>
+        F (A.decode u (T.radius q.1, q.2))) :=
+      hF.comp (decodedMaterialPullback_contDiff hT hA u)
+    rw [mixedDerivative_radial_mul hw hcomp, Finset.mul_sum, Finset.sum_apply]
     apply Finset.sum_congr rfl
     intro i _
     dsimp only [term]
@@ -131,6 +133,7 @@ theorem weightedComposition_heightMember
     (fun r θ => congrArg F (hf.2.1 r θ)),
     (fun p => congrArg F (hf.2.2.1 p)), ?_, ?_⟩
   · intro p hp
+    change F (A.decode u p) = 0
     rw [hf.2.2.2.1 p hp, hF0]
   · obtain ⟨base, loss, _, hbound⟩ := exists_weightedComposition_jet_bounds hT hA hinterp hγ
     intro a b c

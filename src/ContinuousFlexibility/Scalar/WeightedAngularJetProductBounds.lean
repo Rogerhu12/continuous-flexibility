@@ -106,11 +106,56 @@ private theorem oneHigh_secondDerivative_product
       dsimp only [N]
       ring)
 
+variable [TopologicalSpace E] [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+
+/-- The abstract continuous bilinear Leibniz map has the fixed one-high
+estimate before any concrete Sobolev representation is substituted. -/
+private theorem scalarBilinearLeibnizMap_oneHigh
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p)
+    (L : E →L[ℝ] E) (M : E [×2]→L[ℝ] E) {base loss : ℕ}
+    (hL : ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x, p s (L x) ≤ C * p (s + 2) x)
+    (hM : ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x y,
+      p s (M ![x, y]) ≤ C *
+        (p (s + loss) x * p base y + p base x * p (s + loss) y)) :
+    ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x y,
+      p s (scalarBilinearLeibnizMap L M ![x, y]) ≤
+        C * (p (s + (loss + 2)) x * p (base + 2) y +
+          p (base + 2) x * p (s + (loss + 2)) y) := by
+  intro s
+  obtain ⟨C, hC, hCxy⟩ := oneHigh_secondDerivative_product hp L
+    (fun x y => M ![x, y]) hL hM s
+  refine ⟨C, hC, fun x y => ?_⟩
+  rw [scalarBilinearLeibnizMap_apply]
+  exact hCxy x y
+
 end Seminorm
 
 namespace SobolevModelData
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {A : SobolevModelData}
+
+private theorem angularSecondCLM_allOrders_bound
+    (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A) :
+    ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x : A.Space,
+      A.grading s (angularSecondCLM hT hA x) ≤ C * A.grading (s + 2) x := by
+  intro s
+  obtain ⟨C, hCx⟩ := angularSecondCLM_isTame hT hA s (Nat.zero_le s)
+  exact ⟨C, C.coe_nonneg, hCx⟩
+
+private theorem decodedProductMap_binary_allOrders_bound
+    (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A)
+    (hinterp : HasInterpolation A.grading) (hγ : 0 ≤ γ) :
+    ∃ base loss : ℕ, 2 ≤ base ∧ ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x y : A.Space,
+      A.grading s (decodedProductMap hT hA hinterp hγ 1 ![x, y]) ≤ C *
+        (A.grading (s + loss) x * A.grading base y +
+          A.grading base x * A.grading (s + loss) y) := by
+  obtain ⟨base, loss, hbase, hproduct⟩ := decodedProductMap_oneHigh hT hA hinterp hγ
+  refine ⟨base, loss, hbase, ?_⟩
+  intro s
+  obtain ⟨C, hC, hCu⟩ := hproduct 1 s
+  refine ⟨C, hC, fun x y => ?_⟩
+  rw [← oneHigh_fin_two (A.grading base) (A.grading (s + loss)) x y]
+  exact hCu ![x, y]
 
 /-- An actual fixed-loss estimate for the genuine even product of two
 odd angular derivatives. The base and loss are chosen before the order. -/
@@ -121,32 +166,13 @@ theorem angularJetProductMap_oneHigh
       A.grading s (angularJetProductMap hT hA hinterp hγ ![x, y]) ≤
         C * (A.grading (s + loss) x * A.grading base y +
           A.grading base x * A.grading (s + loss) y) := by
-  classical
-  obtain ⟨base, loss, hbase, hproduct⟩ := decodedProductMap_oneHigh hT hA hinterp hγ
-  let L := angularSecondCLM hT hA
-  let M := decodedProductMap hT hA hinterp hγ 1
-  have hL : ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x : A.Space,
-      A.grading s (L x) ≤ C * A.grading (s + 2) x := by
-    intro s
-    obtain ⟨C, hCx⟩ := angularSecondCLM_isTame hT hA s (Nat.zero_le s)
-    exact ⟨C, C.coe_nonneg, hCx⟩
-  have hM : ∀ s : ℕ, ∃ C : ℝ, 0 ≤ C ∧ ∀ x y : A.Space,
-      A.grading s (M ![x, y]) ≤ C *
-        (A.grading (s + loss) x * A.grading base y +
-          A.grading base x * A.grading (s + loss) y) := by
-    intro s
-    obtain ⟨C, hC, hCu⟩ := hproduct 1 s
-    refine ⟨C, hC, fun x y => ?_⟩
-    rw [← oneHigh_fin_two (A.grading base) (A.grading (s + loss)) x y]
-    exact hCu ![x, y]
+  obtain ⟨base, loss, hbase, hproduct⟩ :=
+    decodedProductMap_binary_allOrders_bound hT hA hinterp hγ
   refine ⟨base + 2, loss + 2, by omega, ?_⟩
-  intro s
-  obtain ⟨C, hC, hCxy⟩ := oneHigh_secondDerivative_product
-    (gradedSeminorm_monotone (fun n => A.level n) A.bond) L
-    (fun x y => M ![x, y]) hL hM s
-  refine ⟨C, hC, fun x y => ?_⟩
-  rw [angularJetProductMap_apply]
-  exact hCxy x y
+  exact scalarBilinearLeibnizMap_oneHigh
+    (gradedSeminorm_monotone (fun n => A.level n) A.bond)
+    (angularSecondCLM hT hA) (decodedProductMap hT hA hinterp hγ 1)
+    (angularSecondCLM_allOrders_bound hT hA) hproduct
 
 end SobolevModelData
 

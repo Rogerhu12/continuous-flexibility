@@ -32,3 +32,4 @@ run_cmd do
   logInfo m!"axioms of FlexibleSphere.exists_closedBending: {endpoint}"
 
 #print axioms ContinuousFlexibility.Blueprint.R06a
+#print axioms ContinuousFlexibility.Blueprint.ScalarWeighted

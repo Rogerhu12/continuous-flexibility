@@ -118,7 +118,7 @@ theorem HasProjectiveJetsOn.compositionTerm_hasLineDerivAt_generic
       continuous_const.add (continuous_id.smul continuous_const)
     simpa only [zero_smul, add_zero] using ht.tendsto 0
   have hcc : ContinuousAt (fun t : ℝ => u (x + t • w)) 0 := by
-    simpa only [ContinuousAt, Function.comp_def] using
+    simpa only [ContinuousAt, Function.comp_def, zero_smul, add_zero] using
       (hu.continuousOn.continuousAt (hU.mem_nhds hx)).tendsto.comp hpath
   have hcurve_mem : (fun t : ℝ => u (x + t • w)) 0 ∈ interior W := by
     simpa only [zero_smul, add_zero] using hux

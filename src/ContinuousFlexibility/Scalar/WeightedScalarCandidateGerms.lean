@@ -226,8 +226,7 @@ theorem scalarCoefficientAHeight_uniformTameGerm
   have hm := scalarStateMeanCLM_uniformTameGerm hD hT hS (scalarStateCenter S v0)
   have hq := scalarStateQuotientHeight_uniformTameGerm hD hT hS v0
   have hd := scalarStateDPower_uniformTameGerm hD hT hS v0 (-(3 / 2))
-  exact ((hm.scalarHeightUnitalMul hq hT hS hp ht).scalarHeightUnitalMul hd hT hS hp ht)
-    .scalarReferenceW hD hT hS hp ht
+  exact ((hm.scalarHeightUnitalMul hq hT hS hp ht).scalarHeightUnitalMul hd hT hS hp ht).scalarReferenceW hD hT hS hp ht
 
 theorem scalarCoefficientBPrimitive_uniformTameGerm
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -251,11 +250,8 @@ theorem scalarCoefficientQuadraticHeight_uniformTameGerm
   have hm := scalarStateMixedPrimitive_uniformTameGerm hD hT hS (scalarStateCenter S v0)
   have hc := hm.scalarHeightAngularMul hm hT hS hp ht
   have hleft := hc.scalarReferenceInvW hD hT hS hp ht
-  have hmiddle := (((scalarStateMeanSquare_uniformTameGerm hD hT hS v0)
-    .scalarHeightUnitalAct hc hT hS hp ht).scalarReferenceW hD hT hS hp ht).const_smul hp ht 2
-  have hright := ((((scalarStateMeanFourth_uniformTameGerm hD hT hS v0)
-    .scalarHeightUnitalAct hc hT hS hp ht).scalarReferenceW hD hT hS hp ht)
-      .scalarReferenceW hD hT hS hp ht).scalarReferenceW hD hT hS hp ht
+  have hmiddle := (((scalarStateMeanSquare_uniformTameGerm hD hT hS v0).scalarHeightUnitalAct hc hT hS hp ht).scalarReferenceW hD hT hS hp ht).const_smul hp ht 2
+  have hright := ((((scalarStateMeanFourth_uniformTameGerm hD hT hS v0).scalarHeightUnitalAct hc hT hS hp ht).scalarReferenceW hD hT hS hp ht).scalarReferenceW hD hT hS hp ht).scalarReferenceW hD hT hS hp ht
   exact (hleft.add hmiddle hp ht).add hright hp ht
 
 theorem scalarCoefficientCHeight_uniformTameGerm
@@ -268,10 +264,8 @@ theorem scalarCoefficientCHeight_uniformTameGerm
   have hm := scalarStateMeanCLM_uniformTameGerm hD hT hS (scalarStateCenter S v0)
   have hsigma := scalarStateSigma_uniformTameGerm hD hT hS v0
   have hmd := scalarStateMeanDerivCLM_uniformTameGerm hD hT hS (scalarStateCenter S v0)
-  have hleft := ((hm.scalarHeightUnitalMul hsigma hT hS hp ht)
-    .scalarReferenceWDeriv hD hT hS hp ht).scalarReferenceInvRadius hD hT hS hp ht
-  have hmiddle := ((hsigma.scalarHeightUnitalAct hmd hT hS hp ht)
-    .scalarReferenceW hD hT hS hp ht).scalarReferenceInvRadius hD hT hS hp ht
+  have hleft := ((hm.scalarHeightUnitalMul hsigma hT hS hp ht).scalarReferenceWDeriv hD hT hS hp ht).scalarReferenceInvRadius hD hT hS hp ht
+  have hmiddle := ((hsigma.scalarHeightUnitalAct hmd hT hS hp ht).scalarReferenceW hD hT hS hp ht).scalarReferenceInvRadius hD hT hS hp ht
   have hi := scalarStateInverseMeanHeight_uniformTameGerm hD hT hS v0
   have hq := scalarStateQPower_uniformTameGerm hD hT hS v0 (-1)
   have hd := scalarStateDPower_uniformTameGerm hD hT hS v0 (-(3 / 2))
@@ -311,8 +305,7 @@ theorem scalarTypePerturbationHeight_uniformTameGerm
   have hq := scalarStateQPower_uniformTameGerm hD hT hS v0 (-1)
   have hsigma := hi.scalarHeightUnitalMul hq hT hS hp ht
   have hm := scalarStateMeanSquare_uniformTameGerm hD hT hS v0
-  have hw := ((hm.scalarHeightUnitalMul hsigma hT hS hp ht)
-    .scalarReferenceW hD hT hS hp ht).scalarReferenceW hD hT hS hp ht
+  have hw := ((hm.scalarHeightUnitalMul hsigma hT hS hp ht).scalarReferenceW hD hT hS hp ht).scalarReferenceW hD hT hS hp ht
   exact (hsigma.add hw hp ht).scalarReferenceInvRadius hD hT hS hp ht
 
 theorem scalarResidualNumeratorHeight_uniformTameGerm
@@ -329,17 +322,12 @@ theorem scalarResidualNumeratorHeight_uniformTameGerm
   have he := scalarStateAngularSecondCLM_uniformTameGerm hD hT hS (scalarStateCenter S v0)
   have hlinear := ((ha.add he hp ht).scalarStateWDerivAct hD hT hS).add
     (hb.scalarStateWAct hD hT hS) hp ht
-  have hfirst := (ha.add (he.scalarStateEnergyAct hD hT hS) hp ht)
-    .scalarHeightMul hb hT hS hp ht
-  have hsecond := ((hd.scalarHeightAngularMul hd hT hS hp ht)
-    .scalarStateEnergyAct hD hT hS).scalarReferenceRadius hD hT hS hp ht
-  have hthird := (((hc.scalarHeightAngularMul hc hT hS hp ht)
-    .sub (ha.scalarHeightMul he hT hS hp ht) hp ht)
-      .scalarStateWDerivAct hD hT hS).scalarStateWAct hD hT hS
+  have hfirst := (ha.add (he.scalarStateEnergyAct hD hT hS) hp ht).scalarHeightMul hb hT hS hp ht
+  have hsecond := ((hd.scalarHeightAngularMul hd hT hS hp ht).scalarStateEnergyAct hD hT hS).scalarReferenceRadius hD hT hS hp ht
+  have hthird := (((hc.scalarHeightAngularMul hc hT hS hp ht).sub (ha.scalarHeightMul he hT hS hp ht) hp ht).scalarStateWDerivAct hD hT hS).scalarStateWAct hD hT hS
   have hnonlinear := (hfirst.sub hsecond hp ht).add hthird hp ht
   exact hlinear.add
-    ((scalarStateQProjection_uniformTameGerm S (scalarStateCenter S v0))
-      .scalarHeightSMul hnonlinear hS hp ht) hp ht
+    ((scalarStateQProjection_uniformTameGerm S (scalarStateCenter S v0)).scalarHeightSMul hnonlinear hS hp ht) hp ht
 
 theorem scalarCandidateResidual_uniformTameGerm
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

@@ -90,25 +90,31 @@ def oddProductPrimitiveFieldMultilinear
   classical
   have hc (u : A.Space) : ContDiff ℝ ∞ (A.decode u) :=
     (heightMember_contDiff_and_flatJets hT hγ (hA.2.2.2.1 u)).1
-  have h10 : (1 : Fin 2) ≠ 0 := by decide
-  have h01 : (0 : Fin 2) ≠ 1 := by decide
-  exact {
-    toFun := fun u => scalarOddProductPrimitive (A.decode (u 0)) (A.decode (u 1))
-    map_update_add' := by
-      intro _ u i x y
-      fin_cases i
-      · simpa only [Function.update_self, Function.update_of_ne h10, map_add] using
-          scalarOddProductPrimitive_add_left (hc x) (hc y) (hc (u 1))
-      · simpa only [Function.update_self, Function.update_of_ne h01, map_add] using
-          scalarOddProductPrimitive_add_right (hc (u 0)) (hc x) (hc y)
-    map_update_smul' := by
-      intro _ u i c x
-      fin_cases i
-      · simpa only [Function.update_self, Function.update_of_ne h10, map_smul, RingHom.id_apply] using
-          scalarOddProductPrimitive_const_mul_left c (A.decode x) (A.decode (u 1))
-      · simpa only [Function.update_self, Function.update_of_ne h01, map_smul, RingHom.id_apply] using
-          scalarOddProductPrimitive_const_mul_right c (A.decode (u 0)) (hc x)
-  }
+  refine MultilinearMap.mk'
+    (fun u : Fin 2 → A.Space => scalarOddProductPrimitive (A.decode (u 0)) (A.decode (u 1)))
+    ?_ ?_
+  · intro u i x y
+    fin_cases i
+    · change scalarOddProductPrimitive (A.decode (x + y)) (A.decode (u 1)) =
+        scalarOddProductPrimitive (A.decode x) (A.decode (u 1)) +
+          scalarOddProductPrimitive (A.decode y) (A.decode (u 1))
+      simpa only [map_add] using
+        scalarOddProductPrimitive_add_left (hc x) (hc y) (hc (u 1))
+    · change scalarOddProductPrimitive (A.decode (u 0)) (A.decode (x + y)) =
+        scalarOddProductPrimitive (A.decode (u 0)) (A.decode x) +
+          scalarOddProductPrimitive (A.decode (u 0)) (A.decode y)
+      simpa only [map_add] using
+        scalarOddProductPrimitive_add_right (hc (u 0)) (hc x) (hc y)
+  · intro u i c x
+    fin_cases i
+    · change scalarOddProductPrimitive (A.decode (c • x)) (A.decode (u 1)) =
+        c • scalarOddProductPrimitive (A.decode x) (A.decode (u 1))
+      simpa only [map_smul, Pi.smul_apply, smul_eq_mul] using
+        scalarOddProductPrimitive_const_mul_left c (A.decode x) (A.decode (u 1))
+    · change scalarOddProductPrimitive (A.decode (u 0)) (A.decode (c • x)) =
+        c • scalarOddProductPrimitive (A.decode (u 0)) (A.decode x)
+      simpa only [map_smul, Pi.smul_apply, smul_eq_mul] using
+        scalarOddProductPrimitive_const_mul_right c (A.decode (u 0)) (hc x)
 
 theorem oddProductPrimitiveFieldMultilinear_apply
     (hT : IsMaterialData D T) (hA : IsSobolevModel D T γ A) (hγ : 0 < γ)

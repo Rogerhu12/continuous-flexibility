@@ -125,9 +125,10 @@ theorem SmoothDirections.bilinearFamily_second_at
       (fun z => J.D 1 z ![((0, 0), u)]) := by
     filter_upwards [J.open_domain.mem_nhds hxy] with z hz
     exact (hfirst z hz).symm
-  have hJ := (J.derivative 1 ((x, r), y) hxy ![((0, 0), u)] ((0, dr), 0))
-    .congr_germ heq
-  have hvalue := hJ.unique (hasProjectiveLineDerivAt_bilinearFamily_first B x r dr y u)
+  have hJ := HasProjectiveLineDerivAt.congr_germ
+    (J.derivative 1 ((x, r), y) hxy ![((0, 0), u)] ((0, dr), 0)) heq
+  have hvalue := HasProjectiveLineDerivAt.unique hJ
+    (hasProjectiveLineDerivAt_bilinearFamily_first B x r dr y u)
   exact hvalue
 
 theorem SmoothDirections.bilinearFamily_second

@@ -25,6 +25,69 @@ set_option backward.isDefEq.respectTransparency false
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
+/-- Abstract map algebra keeps the concrete decoder implementation out of
+the tame estimate elaboration. -/
+private theorem weightedState_clm_comp_add_zero
+    {E F G : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    [TopologicalSpace G] [AddCommGroup G] [Module ℝ G]
+    [IsTopologicalAddGroup G]
+    {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F} {r : ℕ → Seminorm ℝ G}
+    (L : F →L[ℝ] G) (P : E →L[ℝ] F) (K : E →L[ℝ] G) {loss : ℕ}
+    (hp : Monotone p)
+    (hL : IsTameLinear q r L.toLinearMap loss 0)
+    (hP : IsTameLinear p q P.toLinearMap 0 0)
+    (hK : IsTameLinear p r K.toLinearMap 0 0) :
+    IsTameLinear p r (L.comp P + K).toLinearMap loss 0 := by
+  have hl : max loss 0 = loss := max_eq_left (Nat.zero_le loss)
+  simpa only [Nat.add_zero, Nat.zero_add, max_self, hl] using
+    ((hL.comp hP).add hp hK)
+
+/-- The cutoff contributes its actual ordinary radial derivative. -/
+private theorem weightedState_radialPartial_cutoff
+    {f : PolarPoint → ℝ} {k : ℝ → ℝ}
+    (hf : ContDiff ℝ ∞ f) (hk : ContDiff ℝ ∞ k) (c : ℝ) :
+    radialPartial (fun p => f p + c * k p.1) =
+      fun p => radialPartial f p + c * deriv k p.1 := by
+  have hkf : ContDiff ℝ ∞ (fun p : PolarPoint => k p.1) := hk.comp contDiff_fst
+  funext p
+  have hrad : radialPartial (fun q : PolarPoint => k q.1) p = deriv k p.1 :=
+    Radial.radialPartial_radialHeightField (hk.differentiable (by simp) p.1)
+  rw [radialPartial_add (hf.differentiable (by simp) p)
+    ((contDiff_const.mul hkf).differentiable (by simp) p),
+    radialPartial_mul (differentiableAt_const c) (hkf.differentiable (by simp) p),
+    radialPartial_const, zero_mul, zero_add, hrad]
+
+private theorem weightedState_angularPartial_cutoff
+    {f : PolarPoint → ℝ} {k : ℝ → ℝ}
+    (hf : ContDiff ℝ ∞ f) (hk : ContDiff ℝ ∞ k) (c : ℝ) :
+    angularPartial (fun p => f p + c * k p.1) = angularPartial f := by
+  have hkf : ContDiff ℝ ∞ (fun p : PolarPoint => k p.1) := hk.comp contDiff_fst
+  funext p
+  have hang : angularPartial (fun q : PolarPoint => k q.1) p = 0 :=
+    Radial.angularPartial_radialHeightField (hk.differentiable (by simp) p.1)
+  rw [angularPartial_add (hf.differentiable (by simp) p)
+    ((contDiff_const.mul hkf).differentiable (by simp) p),
+    angularPartial_mul (differentiableAt_const c) (hkf.differentiable (by simp) p),
+    angularPartial_const, zero_mul, zero_add, hang, mul_zero, add_zero]
+
+/-- An angular slice sees a radial multiplier as a constant, including at
+a radius where that multiplier has no ordinary radial derivative. -/
+private theorem weightedState_angularPartial_radialProduct
+    {f g : PolarPoint → ℝ} {k : ℝ → ℝ}
+    (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g)
+    (heq : ∀ p, g p = k p.1 * f p) :
+    angularPartial g = fun p => k p.1 * angularPartial f p := by
+  funext p
+  have hleft := Radial.hasDerivAt_angularSlice (hg.differentiable (by simp) p)
+  have hright : HasDerivAt (fun θ => g (p.1, θ))
+      (k p.1 * angularPartial f p) p.2 := by
+    apply ((Radial.hasDerivAt_angularSlice
+      (hf.differentiable (by simp) p)).const_mul (k p.1)).congr_of_eventuallyEq
+    exact Filter.Eventually.of_forall (fun θ => heq (p.1, θ))
+  exact hleft.unique hright
+
 def scalarStateProfileProjection (S : PhysicalSpacesData) :
     ScalarWeightedState S →L[ℝ] ScalarHeightSpace S where
   toFun := fun x => x.1.1.1
@@ -176,34 +239,13 @@ theorem scalarStateRadialCLM_isTame
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) :
     IsTameLinear (scalarStateGrading S) (scalarHeightGrading S)
       (scalarStateRadialCLM hD hT hS).toLinearMap 2 0 := by
-  intro s _
-  obtain ⟨C, hC⟩ := SobolevModelData.radialCLM_isTame hT (hS.1 scalarBeta) s (Nat.zero_le s)
-  obtain ⟨K, hK⟩ := scalarStateHeightProjection_isTame S (s + 2) (Nat.zero_le _)
-  obtain ⟨Q, hQ⟩ := scalarStateCutoffCLM_isTame hT hS s (Nat.zero_le s)
-  refine ⟨C * K + Q, fun x => ?_⟩
-  change scalarHeightGrading S s
-    (SobolevModelData.radialCLM hT (hS.1 scalarBeta) x.1.1.2 +
-      scalarStateCutoffCLM hT hS x) ≤
-    ((C : ℝ) * (K : ℝ) + (Q : ℝ)) * scalarStateGrading S (s + 2) x
-  have hproj : scalarHeightGrading S (s + 2) x.1.1.2 ≤
-      (K : ℝ) * scalarStateGrading S (s + 2) x := by
-    simpa only [Nat.add_zero] using hK x
-  have hcut : scalarHeightGrading S s (scalarStateCutoffCLM hT hS x) ≤
-      (Q : ℝ) * scalarStateGrading S (s + 2) x := by
-    have hh : scalarHeightGrading S s (scalarStateCutoffCLM hT hS x) ≤
-        (Q : ℝ) * scalarStateGrading S s x := by
-      simpa only [Nat.add_zero] using hQ x
-    exact hh.trans (mul_le_mul_of_nonneg_left
-      (scalarStateGrading_monotone S (by omega) x) Q.coe_nonneg)
-  calc
-    _ ≤ scalarHeightGrading S s
-        (SobolevModelData.radialCLM hT (hS.1 scalarBeta) x.1.1.2) +
-        scalarHeightGrading S s (scalarStateCutoffCLM hT hS x) := map_add_le_add _ _ _
-    _ ≤ (C : ℝ) * ((K : ℝ) * scalarStateGrading S (s + 2) x) +
-        (Q : ℝ) * scalarStateGrading S (s + 2) x :=
-      add_le_add ((hC x.1.1.2).trans
-        (mul_le_mul_of_nonneg_left hproj C.coe_nonneg)) hcut
-    _ = _ := by ring
+  exact weightedState_clm_comp_add_zero
+    (p := scalarStateGrading S) (q := scalarHeightGrading S) (r := scalarHeightGrading S)
+    (SobolevModelData.radialCLM hT (hS.1 scalarBeta))
+    (scalarStateHeightProjection S) (scalarStateCutoffCLM hT hS)
+    (scalarStateGrading_monotone S)
+    (SobolevModelData.radialCLM_isTame hT (hS.1 scalarBeta))
+    (scalarStateHeightProjection_isTame S) (scalarStateCutoffCLM_isTame hT hS)
 
 theorem scalarStateAngularPrimitiveCLM_isTame
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S) :
@@ -253,24 +295,16 @@ theorem decode_scalarStateRadialCLM
     (S.height scalarBeta).decode (scalarStateRadialCLM hD hT hS x) =
       radialPartial (scalarStateIncrement S x) := by
   have hf := (scalarHeight_decode_contDiff_and_flatJets hT hS x.1.1.2).1
-  have hχ := hS.2.2.1.1
-  have hχfield : ContDiff ℝ ∞ (fun p : PolarPoint => S.chiLeft p.1) :=
-    hχ.comp contDiff_fst
-  have hsum (p : PolarPoint) :
-      radialPartial (scalarStateIncrement S x) p =
-        radialPartial ((S.height scalarBeta).decode x.1.1.2) p + x.1.2 * deriv S.chiLeft p.1 := by
-    unfold scalarStateIncrement scalarCommonHeightDecode
-    rw [radialPartial_add (hf.differentiable (by simp) p)
-      ((contDiff_const.mul hχfield).differentiable (by simp) p),
-      radialPartial_mul (differentiableAt_const x.1.2) (hχfield.differentiable (by simp) p),
-      radialPartial_const, zero_mul, zero_add,
-      Radial.radialPartial_radialHeightField (hχ.differentiable (by simp) p.1)]
+  have hsum : radialPartial (scalarStateIncrement S x) =
+      fun p => radialPartial ((S.height scalarBeta).decode x.1.1.2) p +
+        x.1.2 * deriv S.chiLeft p.1 :=
+    weightedState_radialPartial_cutoff hf hS.2.2.1.1 x.1.2
   change (S.height scalarBeta).decode
     (SobolevModelData.radialCLM hT (hS.1 scalarBeta) x.1.1.2 +
       x.1.2 • scalarCutoffDerivativeHeight hT hS scalarBeta) = _
   rw [map_add, SobolevModelData.decode_radialCLM, map_smul, decode_scalarCutoffDerivativeHeight]
   funext p
-  exact (hsum p).symm
+  exact (congrFun hsum p).symm
 
 theorem decode_scalarStateRadialSecondCLM
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -296,35 +330,15 @@ theorem angularPartial_decode_scalarStateAngularPrimitiveCLM
   have hf := (scalarHeight_decode_contDiff_and_flatJets hT hS x.1.1.2).1
   have hP := (scalarHeight_decode_contDiff_and_flatJets hT hS
     (scalarStateAngularPrimitiveCLM hD hT hS x)).1
-  funext p
-  have hleft := Radial.hasDerivAt_angularSlice (hP.differentiable (by simp) p)
-  have hright := (hasDerivAt_const p.2 p.1⁻¹).mul
-    (Radial.hasDerivAt_angularSlice (hf.differentiable (by simp) p))
-  have hslice : (fun θ => (S.height scalarBeta).decode
-      (scalarStateAngularPrimitiveCLM hD hT hS x) (p.1, θ)) =
-      fun θ => p.1⁻¹ * (S.height scalarBeta).decode x.1.1.2 (p.1, θ) :=
-    funext (fun θ => decode_scalarStateAngularPrimitiveCLM hD hT hS x (p.1, θ))
   have hangular : angularPartial ((S.height scalarBeta).decode
-      (scalarStateAngularPrimitiveCLM hD hT hS x)) p =
-      p.1⁻¹ * angularPartial ((S.height scalarBeta).decode x.1.1.2) p := by
-    have he := hleft.deriv
-    rw [hslice] at he
-    have hr : deriv (fun θ => p.1⁻¹ *
-        (S.height scalarBeta).decode x.1.1.2 (p.1, θ)) p.2 =
-        p.1⁻¹ * angularPartial ((S.height scalarBeta).decode x.1.1.2) p := by
-      simpa only [Pi.mul_apply, zero_mul, zero_add] using hright.deriv
-    exact he.symm.trans hr
-  have hχfield : ContDiff ℝ ∞ (fun p : PolarPoint => S.chiLeft p.1) :=
-    hS.2.2.1.1.comp contDiff_fst
-  have hincrement : angularPartial (scalarStateIncrement S x) p =
-      angularPartial ((S.height scalarBeta).decode x.1.1.2) p := by
-    unfold scalarStateIncrement scalarCommonHeightDecode
-    rw [angularPartial_add (hf.differentiable (by simp) p)
-      ((contDiff_const.mul hχfield).differentiable (by simp) p),
-      angularPartial_mul (differentiableAt_const x.1.2) (hχfield.differentiable (by simp) p),
-      angularPartial_const, zero_mul, zero_add,
-      Radial.angularPartial_radialHeightField (hS.2.2.1.1.differentiable (by simp) p.1),
-      mul_zero, add_zero]
+      (scalarStateAngularPrimitiveCLM hD hT hS x)) =
+      fun p => p.1⁻¹ * angularPartial ((S.height scalarBeta).decode x.1.1.2) p :=
+    weightedState_angularPartial_radialProduct hf hP
+      (fun p => decode_scalarStateAngularPrimitiveCLM hD hT hS x p)
+  have hincrement : angularPartial (scalarStateIncrement S x) =
+      angularPartial ((S.height scalarBeta).decode x.1.1.2) :=
+    weightedState_angularPartial_cutoff hf hS.2.2.1.1 x.1.2
+  funext p
   rw [hangular, heightAngular, hincrement, div_eq_mul_inv, mul_comm]
 
 theorem angularPartial_decode_scalarStateAngularRadialPrimitiveCLM
