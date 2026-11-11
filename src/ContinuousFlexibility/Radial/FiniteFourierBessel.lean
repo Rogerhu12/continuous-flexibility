@@ -16,7 +16,7 @@ namespace ContinuousFlexibility.Radial
 noncomputable section
 
 open Set MeasureTheory
-open scoped BigOperators RealInnerProductSpace
+open scoped BigOperators InnerProductSpace
 
 /-- Finite Bessel inequality with an actual angular orthogonality hypothesis. -/
 theorem angularPairing_finite_bessel {ι : Type*} [DecidableEq ι]

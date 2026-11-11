@@ -15,7 +15,7 @@ namespace ContinuousFlexibility.Radial
 noncomputable section
 
 open Set MeasureTheory
-open scoped RealInnerProductSpace
+open scoped InnerProductSpace
 
 def angularMeanMeasure : Measure ℝ :=
   ENNReal.ofReal (1 / (2 * Real.pi)) •

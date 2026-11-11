@@ -191,7 +191,9 @@ theorem integral_mul_deriv_eq_neg_of_hasDerivAt_Ioo {a b : ℝ} (hab : a < b)
     intro x hx
     have hpx : ψ x ≠ 0 := by
       intro hz
-      exact hx (by rw [hz, mul_zero])
+      apply hx
+      change d x * ψ x = 0
+      rw [hz, mul_zero]
     have hxψ := hs (subset_tsupport ψ hpx)
     exact ⟨hxψ.1, hxψ.2.le⟩
   rw [intervalIntegral.integral_eq_integral_of_support_subset hsleft,

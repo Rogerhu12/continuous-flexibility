@@ -104,6 +104,8 @@ theorem integral_sineMode_product_self (j : ℕ) (hj : 0 < j) :
         1 - Real.cos ((((j : ℤ) + (j : ℤ) : ℤ) : ℝ) * θ) := by
       apply intervalIntegral.integral_congr
       intro θ _
+      change sineMode j θ * sineMode j θ =
+        1 - Real.cos ((((j : ℤ) + (j : ℤ) : ℤ) : ℝ) * θ)
       rw [sineMode_product_formula]
       simp only [sub_self, Int.cast_zero, zero_mul, Real.cos_zero]
     _ = _ := by

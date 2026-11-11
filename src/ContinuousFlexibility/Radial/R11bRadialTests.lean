@@ -50,7 +50,7 @@ theorem r11b_directionalPartial_zero_outside {K : Set ℝ} (hK : IsClosed K)
     filter_upwards [hopen.mem_nhds hr] with p hp
     exact hzero p.1 hp p.2
   rw [heq.fderiv_eq (𝕜 := ℝ)]
-  simp only [fderiv_const, zero_apply]
+  simp only [fderiv_const_apply, zero_apply]
 
 theorem r11b_radialTest_directionalPartial {D : ReferenceData}
     {ψ : PolarPoint → ℝ} (hψ : RadialTest D ψ) (d : PolarPoint) :
@@ -100,8 +100,11 @@ theorem r11b_continuous_radialJacobi {D : ReferenceData} (ha : 0 < D.a)
   have hflux : ContDiff ℝ ∞ (fun r => w r * deriv u r) := hw.1.mul hdu
   have hflux' : Continuous (deriv (fun r => w r * deriv u r)) :=
     (contDiff_infty_iff_deriv.mp hflux).2.continuous
-  simpa only [radialJacobi, mul_div_assoc] using
-    hflux'.sub (((show Continuous (fun _ : ℝ => j) from continuous_const).mul (r11b_continuous_flat_deriv_div ha hw)).mul hu.continuous)
+  change Continuous (fun r => deriv (fun t => w t * deriv u t) r -
+    j * deriv w r / r * u r)
+  simp_rw [mul_div_assoc]
+  exact hflux'.sub ((continuous_const.mul
+    (r11b_continuous_flat_deriv_div ha hw)).mul hu.continuous)
 
 theorem r11b_continuous_referenceColumn {D : ReferenceData}
     (hgeom : RadialProfileGeometry D) (hborder : RadialTrueBorder D) :
