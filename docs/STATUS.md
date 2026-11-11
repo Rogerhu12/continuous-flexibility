@@ -44,7 +44,7 @@ can also include artifacts of removed blueprint modules. The 5 unfinished module
   sequences outside the admissible range. The formerly unfinished partition trace, selected
   jet bounds and realization modules now compile and are in the root import. R05a depends
   only on `propext`, `Classical.choice`, `Quot.sound`; its geometric construction does not
-  require the retained R04 hypothesis. Spectral and normalization conclusions remain in R05b.
+  require the retained R04 hypothesis. Mass and resistance conclusions remain in R05b.
 - **Endpoint closure (N12).** The unchanged theorem
   `PointBranchStatement → W03Statement → S03Statement → N12Statement` is proved.
   `Analysis/MaterialSampleCofinite.lean`, `Analysis/StateControlCofiniteJets.lean` and
