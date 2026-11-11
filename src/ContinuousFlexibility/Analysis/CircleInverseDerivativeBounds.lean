@@ -63,8 +63,7 @@ theorem lipschitzWith_inverse_of_deriv_lower_bound
     LipschitzWith ⟨A⁻¹, inv_nonneg.mpr hA.le⟩ G := by
   apply LipschitzWith.of_dist_le_mul
   intro x y
-  change dist (G x) (G y) ≤ A⁻¹ * dist x y
-  simpa only [Real.dist_eq] using
+  simpa only [Real.dist_eq, NNReal.coe_mk] using
     abs_inverse_sub_le_of_deriv_lower_bound hA hF hFG x y
 
 theorem continuous_inverse_of_deriv_lower_bound

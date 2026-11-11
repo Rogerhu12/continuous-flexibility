@@ -2,84 +2,6 @@
 
 Last updated: 2026-11-11.
 
-## Active line: N04Coordinates
-
-The branch `line/N04Coordinates` and [PR #18](https://github.com/Rogerhu12/continuous-flexibility/pull/18)
-retain the exact frozen theorem `N04bStatement → N04cStatement`. This statement is still open.
-
-The source-pairing conjunct is proved by `Analysis.canonicalSource_pairing_of_partA`.
-Reflection, angular equivariance, and the inverse identities identify the fundamental
-open strip; a genuine Jacobian change of variables and null boundary lines then give
-the required half-open-period integral. Its local axiom audit reports exactly
-`propext`, `Classical.choice`, and `Quot.sound`.
-
-The analytic division lemmas use the actual Taylor remainder, rather than an
-assumed quotient estimate. `CanonicalCubicPointwise` proves the formula for every
-derivative and the bound `M / 6` on any closed nonnegative interval, with a fixed
-loss of three derivatives. `CanonicalCubicMixed` differentiates the scaled
-integral in both cylinder variables; `CanonicalCubicJets` applies that formula
-to the radial quotient. All three vanishing boundary jets are explicit
-hypotheses. The operator identity also determines the potential by testing the
-constant function, and the positive-piece factorization uniquely determines
-the divided coefficients in the open piece.
-
-The two-endpoint extension proves the actual interior quotient estimate on
-every interval `(l,r)`: if the numerator has vanishing radial jets of orders
-zero, one, and two at both ends, then each mixed quotient jet is bounded by
-`M / 36` from the corresponding numerator jet with six additional radial
-derivatives. No interval-width lower bound is used. An open-cylinder equality
-lemma applies this directly to a given factorization `F = d^3 * e`, without
-assuming regularity of `e` outside the open component.
-
-The common state neighborhood is proved open and convex, with monotone base
-restriction. Sampled material powers `H^β * E0^A` are uniformly bounded for
-every fixed `β > 0` and `A`, using the actual material envelope assumptions.
-Uniform angular derivative bounds of a flow extend to both radial endpoints
-by passing increment bounds through the radial limit and differentiating.
-
-`ReferenceCircleFlow` proves that the actual ordinary flow at height parameter
-zero is a translation in the angular variable, on the whole closed component;
-its angular derivative is exactly one. This uses the actual radial coefficient
-formulas and the stated ODE with its initial values and endpoint continuity.
-
-The next integration modules are under CI validation. They derive value
-smallness from N01's genuine first state variation, retain the cumulative
-properties under a common-neighborhood restriction, and combine material
-absorption with the reference-flow formula to obtain ordinary-flow angular
-Jacobian bounds. The long N01 formulas are given exact named aliases in
-`Analysis/N01JetBounds.lean`; the original frozen definitions are unchanged.
-The generic first-variation segment argument was separately checked locally.
-
-The additional proof modules isolate the remaining uniform jet estimate without
-adding it to `N04bStatement`. `N04PartA` and `N04PartB` were moved verbatim to
-`Blueprint/CanonicalParts.lean` and reexported by `Blueprint/Statements.lean`;
-their content and the assembly theorem are unchanged. Normalization sets only
-unused negative-piece divided coefficients and off-sector fields to zero.
-
-The still-unproved clause is the bound on all mixed derivatives of the potential
-and the three divided coefficients, on one neighborhood and with one fixed loss:
-
-```lean
-∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ z ∈ U, ∀ m p,
-  p ∈ canonicalOpen S K m → ∀ a b : ℕ, a + b ≤ s →
-    |mixedDerivative a b (K.potential z m) p| +
-    |mixedDerivative a b (K.dividedDifference z m).a p| +
-    |mixedDerivative a b (K.dividedDifference z m).b p| +
-    |mixedDerivative a b (K.dividedDifference z m).c p| ≤
-      B * T.E0 (T.sample (K.cell m)) ^ B *
-        (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|)
-```
-
-This cannot simply be extracted for an arbitrary qualitative witness. On a
-negative piece the divided coefficient may be replaced by the unbounded angular
-coordinate while preserving both qualitative parts. More substantially, the
-positive-piece relation `F = d^3 * e` is asserted only where `d > 0`; any numerator
-has that factorization there, so the relation does not assert the three vanishing
-endpoint jets needed by cubic division. The paper obtains them from its actual
-boundary-polynomial construction. A proof of the existential node must construct
-quantitatively controlled coordinates and establish those endpoint identities.
-The arbitrary-witness counterexample does **not** refute that existential node.
-
 ## Completed line: Tame
 
 `line/Tame` proves the unchanged theorem `Tame : H01Statement ∧ H02Statement`.
@@ -117,21 +39,26 @@ spectra and Hamilton's Nash–Moser theorem as standard inputs; none of these is
 
 | | |
 |---|---|
-| Lean modules compiled / total | 382 / 390 |
-| Modules in the root import | 340 |
-| Lines of Lean under `src/` | 93,574 |
-| Axiom audit (`lake build`, 3834 jobs) | passed: 11,293 declarations, 8,540 theorems |
-| Blueprint statements proved / total | 13 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus) |
+| Lean modules compiled / total | 427 / 432 (current source paths in the default build) |
+| Modules in the root import | 421 (generated by `scripts/gen_root.py`; 5 excluded in `scripts/root_exclude.txt`) |
+| Lines of Lean under `src/` | 101,191 |
+| Axiom audit (`lake build`, 3903 jobs) | passed: 12,442 declarations, 9,539 theorems |
+| Blueprint statements proved / total | 17 / 42 (S01, S02, R01, R02, R03, R04, W01, N12, Tame, N04Cubic, R05a, N04Transmission, ScalarCalculus, R05b, R06a, N04Root, Solve) |
 | Challenge (`FlexibleSphere.exists_closedBending`) | not proved |
-| Modules on the module system | 1 (the Challenge) of 394 |
+| Modules on the module system | 1 (the Challenge) of 436 |
 
-These counts include main's completed N12 proof. The compiled count is the
-source import closure of the four successful default targets; it excludes
-stale artifacts restored from other branches. The 8 modules outside that
-default build are unfinished files of the earlier workflow:
+These are current source counts after merging main `3a7853f30c9b6253375cc96d22cede2c34b59358`
+into the completed R06a line. The module count matches the source import closure
+of all four default targets and excludes stale artifacts restored from other
+branches. Five modules remain outside that default build:
 `Analysis.CircleJetEncoding`, `Analysis.CircleJetEvaluation`, `Analysis.PhysicalJetMollification`,
-`Analysis.ProjectiveNewtonCommonOrbit`, `Analysis.ProjectiveNewtonParameterGrowth`,
-`Radial.MorseChainPartitionTrace`, `Radial.MorseChainRealization`, `Radial.MorseChainSelectedJets`.
+`Analysis.ProjectiveNewtonCommonOrbit`, and `Analysis.ProjectiveNewtonParameterGrowth`.
+The three previously excluded Morse-chain modules are now dependencies of main's
+completed R05a proof. The workflow's raw artifact count includes restored cache
+remnants; this ledger counts only modules corresponding to the current source
+graph. [Combined integration CI](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42988251035)
+passed all four default targets (3860 jobs), confirmed the 14 closed nodes listed
+above, and printed only `propext`, `Classical.choice`, and `Quot.sound` for R06a.
 
 ## What is proved
 
@@ -148,6 +75,13 @@ default build are unfinished files of the earlier workflow:
   are in the root import; N12 depends only on `propext`, `Classical.choice`, `Quot.sound`.
 - **Abstract Nash–Moser, fixed parameter.** `exists_projectiveNewton_fixed_branch`
   (`Analysis/ProjectiveNewtonFixedBranch.lean`).
+- **Deep-tail inverse (R06a).** The actual weighted Friedrichs form is identified,
+  its shifted inverse has norm at most `4 / Λ`, and the finite Dirichlet inverses
+  converge strongly. `Radial/TailDeepInverse.lean` assembles the actual mass-average
+  projection, smooth resistance hats, reflected coercive inverse, and resolvent
+  exhaustion. All 26 new modules and `Blueprint.R06a` are in the root import.
+  The local test class correction is documented below; R06a depends only on
+  `propext`, `Classical.choice`, `Quot.sound`.
 - **Tame calculus and inverse families.** `Blueprint.Tame : H01Statement ∧ H02Statement`,
   assembled from `Analysis.h01Statement` and `Analysis.h02Statement` with the
   exact frozen hypotheses and conclusions.
@@ -179,9 +113,7 @@ The nodes follow the structure of the statements and the lemma structure of the 
   readable manuscript confirms that the main theorem uses nothing more (§10, proof of the annulus
   theorem); the doubled-weight estimates of §10 are not on the path.
 
-Open nodes (33): ScalarCalculus, ScalarWeighted, Spaces, R05a, R05b, R06a, R06b, R06c, R07, R08,
-R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04Cubic, N04Transmission, N04a,
-N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
+Open nodes (28): ScalarWeighted, Spaces, R05b, R06b, R06c, R07, R08, R09, R10a, R10b, R11a, R11b, R12, N01a, N01b, N01c, N02N03, N04Root, N04a, N04b, N04Coordinates, N05, N06, N07a, N07b, N08, N09N10, Solve.
 
 Tool tasks (5), abstract lemmas that the manuscript isolates and that have no blueprint node; their
 Lean statements follow the manuscript and are not frozen: Tool-OneHighFactor (Lemmas 7.2, 7.3),
@@ -195,6 +127,53 @@ passed this test with its original statement; `Solve` remains open. `R10a` has o
 region together, because the matching data structure of the statement layer interleaves them; its
 two regions are carried by the tool tasks.
 
+### R06a: correction of the local test class (line/R06a, 2026-11-11)
+
+The frozen clause
+`∀ u d, (u, d) ∈ TailFormLift T endCut → TailWeakDerivative T endCut u d`
+used the test condition `Function.support ψ ⊆ Ioo T.entrance endCut`.
+Together with `HasCompactSupport ψ` this does **not** say that the support is
+compactly contained in the open interval: its closure may meet the singular
+endpoint. The resulting weak-derivative clause is false for the allowed weights.
+
+Here is the counterexample mechanism, including why the deep-tail inequalities
+do not prevent it. Choose mass and gap intervals of length `l_n ≍ ε 2^(-n)`,
+with density `1/l_n` on each mass interval and a plateau of height
+`g_n = exp(-4 n^4)` on most of each gap. Smooth the transitions in arbitrarily
+short collars. Then the mass intervals have mass `1` and resistance `l_n^2`;
+the gaps have mass at most `2 g_n l_n` and resistance between
+`l_n/(2 g_n)` and `2 l_n/g_n`. Starting sufficiently far out and taking ε
+small makes the smallness conditions arbitrarily small and the two mass times
+resistance conditions arbitrarily large. The density is smooth and positive
+at every interior point, as required.
+
+In the plateau of gap n place a smooth bump `u_n` of height `exp(n^4)`, and a
+smooth cutoff `ψ_n` of height `exp(-n^4)` which is constant on the support of
+`u_n`. The disjoint sums `u = Σ u_n`, `d = Σ u_n'` have finite weighted energy;
+their finite partial sums prove `(u,d)` is in the stated form closure. The sum
+`ψ = Σ ψ_n` extends smoothly and flatly across the endpoint and has ordinary
+support in the open interval. However, `u ψ' = 0`, whereas
+`∫ |d ψ| = ∞`, since every gap contributes the same positive variation.
+Adding the compactly supported test `q = u_m'` for one fixed gap gives
+`∫ u (ψ+q)' = -∫ (u_m')^2 < 0`, while `d (ψ+q)` is still nonintegrable.
+Lean's total integral of that nonintegrable function is zero. Thus this is
+an actual failure of the frozen equality, not just a missing integrability lemma.
+
+The local tests and the Friedrichs core now require
+`tsupport ψ ⊆ Ioo T.entrance endCut`. The same corrected definitions feed
+`R06Operator`, `R06Full`, `R06Statement`, and `R06_of_nodes`; no inverse or
+convergence conclusion has been removed. The complete proof is
+assembled in `Radial.TailDeepInverse` and `Blueprint.R06a`, using actual weighted
+mass averages, smooth resistance hats, a reflected coercive form, and the
+positive-resolvent identity for truncations. Its constants are `C = 4`,
+`η₀ = 1/10`, and `K₀ = 10 * tailSmoothStepConstant + 2`. The independent scalar
+operator definitions have moved unchanged to `Statements.DeepTailOperator` to
+keep this proof layer independent of the oscillator and physical reference data.
+R06a is closed. [CI run 42986219745](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/42986219745)
+passed all default targets, including `AxiomAudit`, and printed
+`'ContinuousFlexibility.Blueprint.R06a' depends on axioms: [propext, Classical.choice, Quot.sound]`.
+No sub-blueprint or additional analytic hypothesis was needed.
+
 Not yet checked against the readable manuscript: the kernel clause of the radial reference
 (`R12`). The 62-page version left "endpoint-flat kernel" undefined; the readable version defines it
 as the kernel on the weighted graph domain.
@@ -203,7 +182,7 @@ as the kernel on the weighted graph domain.
 
 The readable manuscript has 6,890 lines of TeX in §2–§10 (62-page version: 4,460). With the playbook
 ratios rescaled to it (about 100–190 lines of Lean per line of readable TeX): about 900,000 lines in
-total, range 600,000–1,300,000. Current size is about 10% of the central estimate.
+total, range 600,000–1,300,000. Current size is about 11% of the central estimate.
 
 ## Node sizes
 
@@ -220,14 +199,27 @@ already exists in the tree.
 - Below 30,000: ScalarWeighted, Tame, Spaces, R05b, R06b, R06c, R08, R10b, R11b, R12, N01a, N01b,
   N04Root, N04Cubic, N04Transmission, N07b, N09N10, N12, and the five tool tasks.
 
+## Merging
+
+Lines open a pull request per task and do not edit `src/ContinuousFlexibility.lean` or this file.
+The lead merges ready pull requests in batches on an integration branch
+(`scripts/integration/review_pr.sh`, `scripts/integration/resolve_merge.py`), builds the whole tree
+with the axiom audit, and pushes to `main`. A pull request that changes the statement layer is merged
+only after the user agrees. Statement repairs merged so far:
+
+- R06a (PR #5): the deep-tail test functions require `tsupport ⊆ Ioo` instead of `support ⊆ Ioo`
+  (`Statements/DeepTailOperator.lean`); with the old condition a clause of R06 was false.
+
 ## Pick next
 
-Running since 2026-11-11 (branch `line/<Task>` exists): N12, Solve, Tame, Spaces, ScalarCalculus,
-R05a, R06a. The current state is always `git ls-remote --heads origin "line/*"`.
+Open task branches at the 2026-11-11 integration snapshot: N04Root, R05b,
+R06b, R06c, Solve, Spaces, Tool-OneHighFactor, and Tool-SobolevExtension.
+Branches for completed nodes may remain until their pull requests are merged.
+The current state is always `git ls-remote --heads origin "line/*"`.
 
 A line that has finished takes the first task below whose branch does not exist:
 
-1. Standalone, mathlib only: N04Cubic, N04Transmission, N04Root.
+1. Standalone, mathlib only: N04Root.
 2. Pipelines whose first piece is running: R05b, R06b, R06c.
 3. Tools used by several nodes: Tool-OneHighFactor, Tool-SobolevExtension, Tool-AngularCommutator.
 4. Radial chain: R07, R09, R08, R10b, Tool-R10a-Inner, Tool-R10a-Outer, R10a, R11a, R11b, R12.
@@ -237,6 +229,6 @@ A line that has finished takes the first task below whose branch does not exist:
 
 ## Next
 
-1. Lines on the 33 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
+1. Lines on the 28 open nodes and 5 tool tasks, one branch `line/<Task>` each (`docs/tasks/README.md`).
 2. Module-system migration of the existing files on a branch, verified by CI.
 3. `formalization.yaml`, `LICENSE`.

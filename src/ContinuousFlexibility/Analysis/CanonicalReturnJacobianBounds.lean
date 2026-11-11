@@ -25,7 +25,8 @@ theorem hasDerivAt_oddPart_of_two_derivatives
     {f : ℝ → ℝ} {a b θ : ℝ}
     (hp : HasDerivAt f a θ) (hn : HasDerivAt f b (-θ)) :
     HasDerivAt (oddPart f) ((a + b) / 2) θ := by
-  simpa only [oddPart, mul_neg_one, sub_neg_eq_add] using
+  change HasDerivAt (fun t : ℝ => (f t - f (-t)) / 2) ((a + b) / 2) θ
+  simpa only [Pi.sub_apply, Function.comp_apply, mul_neg_one, sub_neg_eq_add] using
     (hp.sub (hn.comp θ (hasDerivAt_id θ).neg)).div_const 2
 
 private theorem mul_bounds_of_half_two {a b : ℝ}
