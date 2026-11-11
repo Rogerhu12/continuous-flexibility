@@ -44,9 +44,11 @@ theorem n08_stateRadialHeight_reference_hasDerivAt
     (r : ℝ) :
     HasDerivAt (stateRadialHeight D S C C.referenceState) (D.w r) r := by
   have hw : Continuous D.w := hD.2.2.1.1.continuous
-  simpa only [stateRadialHeight, n08_stateProfile_reference href] using
-    intervalIntegral.integral_hasDerivAt_right (hw.intervalIntegrable D.b r)
-      hw.aestronglyMeasurable.stronglyMeasurableAtFilter hw.continuousAt
+  change HasDerivAt (fun u => ∫ t in D.b..u, stateProfile D S C C.referenceState t)
+    (D.w r) r
+  rw [n08_stateProfile_reference href]
+  exact intervalIntegral.integral_hasDerivAt_right (hw.intervalIntegrable D.b r)
+    hw.aestronglyMeasurable.stronglyMeasurableAtFilter hw.continuousAt
 
 /-- The zero-parameter value is proved for the actual distinguished mode
 and the actual normalized primitive used in the nonlinear state. -/
@@ -90,5 +92,24 @@ theorem n08_scalarResidualField_reference_zero
         (Eventually.of_forall fun r => hphi.differentiable (by simp) r)
         (hflux.differentiable (by simp) p.1)
     _ = 0 := by rw [hmode, zero_mul]
+
+/-- Equality of the actual field on the annulus determines the source
+element: its decoder already vanishes outside the annulus. -/
+theorem n08_source_reference_zero {T : MaterialData}
+    (hS : IsPhysicalSpaces D T S) (hD : IsRadialReference D)
+    (href : referenceStateConditions D S C) (u : S.Source)
+    (hu : ∀ p ∈ annularOpen D,
+      (S.height (3 / 4 : ℝ)).decode u.val p =
+        scalarResidualField D S C (C.referenceState, 0) p) :
+    u = 0 := by
+  apply Subtype.ext
+  apply (hS.1 (3 / 4 : ℝ)).2.2.2.2.2.1
+  funext p
+  change (S.height (3 / 4 : ℝ)).decode u.val p =
+    (S.height (3 / 4 : ℝ)).decode 0 p
+  simp only [map_zero, Pi.zero_apply]
+  by_cases hp : p ∈ annularOpen D
+  · exact (hu p hp).trans (n08_scalarResidualField_reference_zero hD href p hp)
+  · exact ((hS.1 (3 / 4 : ℝ)).2.2.2.1 u.val).2.2.2.1 p hp
 
 end ContinuousFlexibility.Statements
