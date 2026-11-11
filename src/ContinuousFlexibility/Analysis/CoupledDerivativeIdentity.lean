@@ -14,6 +14,25 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem coupled_lineDerivAt_value_eq
+    {X Y : Type*} [AddCommGroup X] [Module ℝ X]
+    [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    {f : X → Y} {a b : Y} {x v : X}
+    (hab : a = b) (hd : HasProjectiveLineDerivAt f a x v) :
+    HasProjectiveLineDerivAt f b x v :=
+  (congrArg (fun d : Y => HasProjectiveLineDerivAt f d x v) hab).mp hd
+
+private theorem coupled_lineDerivAt_direction_eq
+    {X Y : Type*} [AddCommGroup X] [Module ℝ X]
+    [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    {f : X → Y} {df : Y} {x v w : X}
+    (hvw : v = w) (hd : HasProjectiveLineDerivAt f df x v) :
+    HasProjectiveLineDerivAt f df x w :=
+  (congrArg (fun d : X => HasProjectiveLineDerivAt f df x d) hvw).mp hd
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {L : ReturnCorrectionData S} {G : ScalarInverseData S}
@@ -50,7 +69,8 @@ theorem coupled_recovered_hasLineDerivAt
   have hres : SmoothTameOn (pairGrading (sectorGrading S) realGrading)
       (residualGrading S) (sectorNeighborhood S base ε ε) (sectorJointResidual S C P) :=
     h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
-  let J := hres.choose
+  let J : SmoothDirections (sectorNeighborhood S base ε ε) (sectorJointResidual S C P) :=
+    hres.choose
   let v : StateDirections S := ⟨V.V (liftSectorParameter S C z) y,
     (h9.2.2.2.2.1 _ (coupled_liftSectorParameter_mem_coupledNeighborhood hz)
       (h1.2.2.1.liftSectorParameter_sector z) y).1⟩
@@ -60,7 +80,7 @@ theorem coupled_recovered_hasLineDerivAt
     · exact coupled_recovered_circle_firstJet hT hS h1 h2 h8 h9 J hz y e.2 heCircle
   have hd := coupled_joint_first_derivative J
     (show z ∈ sectorNeighborhood S base ε ε from ⟨hz.1, hz.2.trans_le h9.2.1⟩) v
-  exact hvalue ▸ hd
+  exact coupled_lineDerivAt_value_eq hvalue hd
 
 /-- The recovered direction used by the sector operator is precisely the
 direction included in the ambient derivative. -/
@@ -76,9 +96,9 @@ theorem coupled_recovered_sector_derivative
     h9.2.2.2.2.2.1 z hz y
   have hdir : HasProjectiveLineDerivAt (fun x => jointResidual S P (x, z.2)) (y + e)
       (C.referenceState + z.1.val) (V.sectorV z y).val := by
-    exact hval.symm ▸ hd
-  exact (coupled_lineDerivAt_affine_iff (stateSectorSubmodule S).subtype C.referenceState).mpr
-    hdir
+    exact coupled_lineDerivAt_direction_eq hval.symm hd
+  exact (coupled_lineDerivAt_affine_iff (stateSectorSubmodule S).subtype C.referenceState
+    (f := fun x => jointResidual S P (x, z.2))).mpr hdir
 
 /-- Every sector state in the coupled neighborhood has the same exact
 ambient line derivative, via its translated sector coordinates. -/

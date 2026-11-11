@@ -226,14 +226,14 @@ def coupledWeakTypeErrorSourceLinear
     apply LinearMap.ext
     intro u
     apply Subtype.ext
-    simp only [LinearMap.codRestrict_apply, map_add, LinearMap.add_apply, Submodule.coe_add]
+    simp only [LinearMap.codRestrict_apply, map_add, LinearMap.add_apply, Submodule.coe_add] <;> rfl
   map_smul' := by
     intro c R
     apply LinearMap.ext
     intro u
     apply Subtype.ext
     simp only [LinearMap.codRestrict_apply, map_smul, LinearMap.smul_apply,
-      Submodule.coe_smul, RingHom.id_apply]
+      Submodule.coe_smul, RingHom.id_apply] <;> rfl
 
 theorem coupledWeakTypeErrorSourceLinear_val
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

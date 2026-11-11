@@ -20,14 +20,20 @@ set_option backward.isDefEq.respectTransparency false
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
 
-theorem coupled_circle_affine_grading_le (n : ℕ) (ψ u : M.Space)
+private theorem coupled_seminorm_affine_le {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) (ψ u : E)
     {R t : ℝ} (ht : |t| ≤ R) :
-    M.grading n (ψ + t • u) ≤ M.grading n ψ + R * M.grading n u := by
+    p (ψ + t • u) ≤ p ψ + R * p u := by
   calc
-    _ ≤ M.grading n ψ + M.grading n (t • u) := map_add_le_add _ _ _
-    _ = M.grading n ψ + |t| * M.grading n u := by
+    _ ≤ p ψ + p (t • u) := map_add_le_add _ _ _
+    _ = p ψ + |t| * p u := by
       rw [map_smul_eq_mul, Real.norm_eq_abs]
     _ ≤ _ := add_le_add le_rfl (mul_le_mul_of_nonneg_right ht (apply_nonneg _ _))
+
+theorem coupled_circle_affine_grading_le (n : ℕ) (ψ u : M.Space)
+    {R t : ℝ} (ht : |t| ≤ R) :
+    M.grading n (ψ + t • u) ≤ M.grading n ψ + R * M.grading n u :=
+  coupled_seminorm_affine_le (M.grading n) ψ u ht
 
 theorem coupled_circle_kernel_majorant_affine_bound (base high : ℕ)
     (ψ u : M.Space) {n : ℕ} (v : Fin n → M.Space) {R : ℝ} (hR : 0 ≤ R) :
@@ -67,9 +73,22 @@ theorem coupled_circle_kernel_affine_jet_bound
   let loss : ℕ := hexists.choose_spec.choose
   have hb := hexists.choose_spec.choose_spec
   let L : ℝ := max 1 (M.grading base ψ + R * M.grading base u)
-  obtain ⟨C, hC, hc⟩ := hb r k s L (le_max_left _ _)
-  obtain ⟨A, hA, ha⟩ := coupled_circle_kernel_majorant_affine_bound
+  have hCexists := hb r k s L (le_max_left _ _)
+  let C : ℝ := hCexists.choose
+  have hC : 0 ≤ C := hCexists.choose_spec.1
+  have hc : ∀ ψ' : M.Space, M.grading base ψ' ≤ L →
+      ∀ (v' : M.Space) (w' : Fin k → M.Space) (m : ℕ) (j : CircleJetIndex s) (θ : ℝ),
+        |(T.M (T.sample m) ^ (j.val 1).val * T.H (T.sample m) ^ (-γ)) *
+            iteratedDeriv (j.val 0).val (coupledCircleKernelField M r k ψ' v' w' m) θ| ≤
+          (C * coupledCircleKernelMajorant M base (r + s + loss) ψ' (Fin.cons v' w')) *
+            (T.M (T.sample m))⁻¹ := hCexists.choose_spec.2
+  have hAexists := coupled_circle_kernel_majorant_affine_bound
     base (r + s + loss) ψ u (Fin.cons v w) hR
+  let A : ℝ := hAexists.choose
+  have hA : 0 ≤ A := hAexists.choose_spec.1
+  have ha : ∀ t : ℝ, |t| ≤ R →
+      coupledCircleKernelMajorant M base (r + s + loss) (ψ + t • u) (Fin.cons v w) ≤ A :=
+    hAexists.choose_spec.2
   refine ⟨C * A, mul_nonneg hC hA, fun t ht m j θ => ?_⟩
   have hlow : M.grading base (ψ + t • u) ≤ L :=
     (coupled_circle_affine_grading_le base ψ u ht).trans (le_max_right _ _)

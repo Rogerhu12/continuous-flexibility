@@ -144,6 +144,23 @@ private theorem coupled_cons_omit {n : ℕ} (u : X × X)
   · simp only [Fin.succ_succAbove_zero, Fin.cons_zero]
   · simp only [Fin.succ_succAbove_succ, Fin.cons_succ]
 
+private theorem coupled_cons_joint_value {n : ℕ}
+    (A : (Fin (n + 3) → X) → Y) (B : (Fin (n + 2) → X) → Y)
+    (v : X) (h : X × X) (w : Fin (n + 1) → X × X) :
+    A (Fin.cons v (fun i : Fin (n + 2) =>
+      ((Fin.cons h w : Fin (n + 2) → X × X) i).1)) +
+        ∑ i : Fin (n + 2), B (Fin.cons
+          (((Fin.cons h w : Fin (n + 2) → X × X) i).2)
+          (fun j : Fin (n + 1) =>
+            ((Fin.cons h w : Fin (n + 2) → X × X) (i.succAbove j)).1)) =
+      (A (Fin.cons v (Fin.cons h.1 (fun i => (w i).1))) +
+        B (Fin.cons h.2 (fun i => (w i).1))) +
+          ∑ i : Fin (n + 1), B (Fin.cons (w i).2
+            (Fin.cons h.1 (fun j : Fin n => (w (i.succAbove j)).1))) := by
+  rw [coupled_cons_fst, Fin.sum_univ_succ]
+  simp only [Fin.cons_zero, Fin.cons_succ, Fin.zero_succAbove,
+    coupled_cons_omit, add_assoc]
+
 include hK hline in
 theorem coupledKernelJointJet_hasLineDerivAt (n : ℕ) (z h : X × X)
     (w : Fin n → X × X) :
@@ -185,9 +202,8 @@ theorem coupledKernelJointJet_hasLineDerivAt (n : ℕ) (z h : X × X)
           K (n + 1) z.1 (Fin.cons h.2 (fun i => (w i).1))) +
           ∑ i : Fin (n + 1), K (n + 1) z.1 (Fin.cons (w i).2
             (Fin.cons h.1 (fun j => (w (i.succAbove j)).1))) := by
-      rw [coupledKernelJointJet_succ_apply, coupled_cons_fst, Fin.sum_univ_succ]
-      simp only [Fin.cons_zero, Fin.cons_succ, Fin.zero_succAbove,
-        coupled_cons_omit, add_assoc]
+      exact (coupledKernelJointJet_succ_apply K (n + 1) z (Fin.cons h w)).trans
+        (coupled_cons_joint_value (K (n + 1 + 1) z.1) (K (n + 1) z.1) z.2 h w)
     exact (congrArg₂ (fun (f : X × X → Y) (d : Y) =>
       HasProjectiveLineDerivAt f d z h) hfun hvalue).mpr
         (HasProjectiveLineDerivAt.add hbase hsum)

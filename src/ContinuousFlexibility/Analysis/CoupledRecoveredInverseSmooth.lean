@@ -85,7 +85,7 @@ theorem coupledRecoveryRegularFormula_smoothTameOn
   have htph := withSeminorms_pairGrading htp (coupled_heightPairGrading_withSeminorms S)
   have htpc := withSeminorms_pairGrading htp htc
   have htpk := withSeminorms_pairGrading htp htk
-  have hDom := hU.prod isOpen_univ
+  have hDom : IsOpen (U ×ˢ (univ : Set (ResidualSpace S))) := hU.prod isOpen_univ
   have hsubDom : U ×ˢ (univ : Set S.Source) ⊆ sectorNeighborhood S base ε ε ×ˢ univ :=
     Set.prod_mono hsub (subset_refl _)
   letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
@@ -201,6 +201,25 @@ theorem coupledRecoveryRegularFormula_smoothTameOn
     (smoothTameOn_prodMk_generic ha hta hμ
       (smoothTameOn_prodMk_generic ha hta hκval hchartOut))
 
+private theorem coupled_recoveredSectorV_eq_regularFormula
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (h1 : N01Properties D T S C base loss ε)
+    (h2 : N02Properties D T S C R base ε)
+    (h8 : N08Properties D T S C R G P B base loss ε)
+    {z : StateDirections S × ℝ} (hz : z ∈ sectorNeighborhood S base ε ε)
+    (hsmall : ‖z.2 • controlFeedback S B G (liftSectorParameter S C z)‖ < (1 / 2 : ℝ))
+    (y : ResidualSpace S) :
+    ((coupledRecoveredInverseData hT hS h1 h2 h8).sectorV z y).val =
+      coupledRecoveryRegularFormula (hS.2.1 (3 / 4 : ℝ)) B G
+        (liftSectorParameter S C z) y R := by
+  have hvalid : CoupledRecoveryValid S C B G base ε (liftSectorParameter S C z) :=
+    ⟨liftSectorParameter_mem_stateNeighborhood hz le_rfl,
+      h1.2.2.1.liftSectorParameter_sector z, hsmall⟩
+  have hvalue : ((coupledRecoveredInverseData hT hS h1 h2 h8).sectorV z y).val =
+      coupledRecoveredV hS h8 (liftSectorParameter S C z) y :=
+    coupledRecoveredInverseData_sectorV hT hS h1 h2 h8 z y
+  exact hvalue.trans (coupledRecoveryRegularFormula_eq_recoveredV hT hS h1 h8 hvalid y).symm
+
 /-- The conclusion uses the previously defined guarded inverse and its
 previously defined sector restriction. -/
 theorem coupledRecoveredInverseData_smoothTameOn
@@ -231,14 +250,14 @@ theorem coupledRecoveredInverseData_smoothTameOn
       (sectorGrading S) (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
         (coupledRecoveredInverseData hT hS h1 h2 h8).sectorV z.1 z.2) := by
-  have hformula := coupledRecoveryRegularFormula_smoothTameOn hS h1.2.2.1 hG h8 hU hsub
-    h2.2.2.2.2.2.2.2.2.2.1 hcontrol hchart
-  apply solve_smoothTameOn_codRestrict (stateSectorSubmodule S) h8.1 hformula
-  intro z hz
-  rw [coupledRecoveredInverseData_sectorV hT hS h1 h2 h8 z.1 z.2]
-  change coupledRecoveredV hS h8 (liftSectorParameter S C z.1) z.2 = _
-  exact (coupledRecoveryRegularFormula_eq_recoveredV hT hS h1 h8
-    ⟨liftSectorParameter_mem_stateNeighborhood (hsub hz.1) le_rfl,
-      h1.2.2.1.liftSectorParameter_sector z.1, hsmall z.1 hz.1⟩ z.2).symm
+  exact solve_smoothTameOn_codRestrict
+    (X := (StateDirections S × ℝ) × ResidualSpace S) (Y := AnnularState S)
+    (stateSectorSubmodule S) h8.1
+    (coupledRecoveryRegularFormula_smoothTameOn hS h1.2.2.1 hG h8 hU hsub
+      h2.2.2.2.2.2.2.2.2.2.1 hcontrol hchart)
+    (fun z : (StateDirections S × ℝ) × ResidualSpace S =>
+      (coupledRecoveredInverseData hT hS h1 h2 h8).sectorV z.1 z.2)
+    (fun z hz => coupled_recoveredSectorV_eq_regularFormula hT hS h1 h2 h8
+      (hsub hz.1) (hsmall z.1 hz.1) z.2)
 
 end ContinuousFlexibility.Statements
