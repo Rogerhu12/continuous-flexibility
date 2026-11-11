@@ -20,6 +20,6 @@ theorem r11b_sineCosineSource_member_scalar {D : ReferenceData} (hab : D.a ≤ D
   obtain ⟨hmember, hbound⟩ := r11b_sineCosineSource_member hab J hJ hf
   refine ⟨hmember, ?_⟩
   simp only [sourceNormSquare, zero_pow (by decide : (2 : ℕ) ≠ 0), zero_add] at hbound ⊢
-  exact add_le_add_left hbound (c ^ 2)
+  exact add_le_add le_rfl hbound
 
 end ContinuousFlexibility.Radial

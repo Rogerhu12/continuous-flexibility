@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Radial.R11bFourierCoefficients
+import ContinuousFlexibility.Radial.R11bAngularL2Bridge
 import ContinuousFlexibility.Radial.R11bWeakModes
 import ContinuousFlexibility.Radial.R11bZeroMode
 import ContinuousFlexibility.Radial.R11bGlobalL2
@@ -52,7 +53,8 @@ theorem r11b_evenCoefficient_weak_equation {D : ReferenceData}
       ∫ r in D.a..D.b, r11bEvenModeForcing D U F n r * φ r := by
   by_cases hn : n = 0
   · subst n
-    simpa [r11bEvenModeForcing, evenFourierCoefficient_zero_physical] using
+    simpa [r11bEvenModeForcing, evenFourierCoefficient_zero_physical,
+      r11b_radialAngularMean_eq_angularAverage] using
       r11b_referenceGraph_mean_equation hUF hφ hφc hφs
   · have hj : 0 < 2 * n := by omega
     have hj2 : 2 * n = 2 ↔ n = 1 := by omega

@@ -52,6 +52,7 @@ theorem profile_memLp_localizer_mul {D : ReferenceData} (h : RadialPartition D)
   apply hf.mono ((h.1 m).continuous.aestronglyMeasurable.mul hf.aestronglyMeasurable)
   apply Eventually.of_forall
   intro r
+  change ‖D.localizer m r * f r‖ ≤ ‖f r‖
   rw [norm_mul, Real.norm_eq_abs]
   exact (mul_le_mul_of_nonneg_right (profile_localizer_abs_le_one h m r)
     (norm_nonneg (f r))).trans_eq (one_mul _)

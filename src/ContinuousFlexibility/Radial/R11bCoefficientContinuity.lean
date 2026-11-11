@@ -25,7 +25,7 @@ theorem r11b_modeCoefficient_congr_ae {f g : α × β → ℝ}
     (hfg : f =ᵐ[μ.prod ν] g) (e : β → ℝ) :
     (fun r => ∫ θ, f (r, θ) * e θ ∂ν) =ᵐ[μ]
       (fun r => ∫ θ, g (r, θ) * e θ ∂ν) := by
-  filter_upwards [ae_ae_of_ae_prod hfg] with r hr
+  filter_upwards [Measure.ae_ae_of_ae_prod hfg] with r hr
   apply integral_congr_ae
   filter_upwards [hr] with θ hθ
   exact congrArg (fun t : ℝ => t * e θ) hθ

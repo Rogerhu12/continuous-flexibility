@@ -58,6 +58,7 @@ theorem r11b_weakNormalDerivative_finsetSum {D : ReferenceData}
           ∑ i ∈ s, -(∫ x, d i x * ψ x ∂radialPhysicalMeasure D) :=
         Finset.sum_congr rfl hi
       _ = _ := Finset.sum_neg_distrib
+        (fun i => ∫ x, d i x * ψ x ∂radialPhysicalMeasure D)
   rw [r11b_integral_angularMean_mul_eq hab hfs hψrLp,
     r11b_integral_angularMean_mul_eq hab hds hψLp, hleft, hright, hsum]
   ring

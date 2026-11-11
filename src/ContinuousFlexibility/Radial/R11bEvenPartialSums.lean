@@ -45,7 +45,7 @@ theorem r11bEvenPartialSum_coefficient {α : Type*}
   have hint (i : ℕ) :
       Integrable (fun θ => (c i r * evenCosineBasis i θ) * evenCosineBasis n θ)
         angularMeanMeasure := by
-    simpa only [mul_assoc] using
+    simpa only [Pi.mul_apply, mul_assoc] using
       ((evenCosineBasis_memLp i).integrable_mul (evenCosineBasis_memLp n)).const_mul (c i r)
   have hterm (i : ℕ) :
       (∫ θ, (c i r * evenCosineBasis i θ) * evenCosineBasis n θ ∂angularMeanMeasure) =
