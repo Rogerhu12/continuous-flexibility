@@ -267,12 +267,9 @@ theorem coupled_circle_first_derivative
 private theorem coupled_circle_eventually_line_mem
     {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
     {z : StateDirections S × ℝ} (hz : z ∈ U) (v : StateDirections S × ℝ) :
-    ∀ᶠ t : ℝ in 𝓝 0, z + t • v ∈ U := by
-  have ht : ContinuousAt (fun t : ℝ => z + t • v) 0 :=
-    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt
-  have hline : Tendsto (fun t : ℝ => z + t • v) (𝓝 0) (𝓝 z) := by
-    simpa only [zero_smul, add_zero] using ht.tendsto
-  exact hline.eventually (hU.mem_nhds hz)
+    ∀ᶠ t : ℝ in 𝓝 0,
+      z + coupledScalarAction (E := StateDirections S × ℝ) t v ∈ U :=
+  coupledScalarAction_eventually_line_mem hU hz v
 
 /-- Nu does not change the actual residual. Thus its first jet is zero
 in the original even-circle space, not merely after point evaluation. -/
@@ -291,15 +288,13 @@ theorem coupled_circle_nu_firstJet_eq_zero
   have href : referenceStateConditions D S C := h1.2.2.1
   have heq :
       (fun t : ℝ => (sectorJointResidual S C P
-        (z + @SMul.smul ℝ (StateDirections S × ℝ)
-          (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t
+        (z + coupledScalarAction (E := StateDirections S × ℝ) t
           (coupledSectorNuDirection S μ, 0))).2) =ᶠ[𝓝 0]
       (fun _ : ℝ => (sectorJointResidual S C P z).2) := by
     filter_upwards [hnear] with t ht
     apply Subtype.ext
     change (P.circle (liftSectorParameter S C
-      (z + @SMul.smul ℝ (StateDirections S × ℝ)
-        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t
+      (z + coupledScalarAction (E := StateDirections S × ℝ) t
         (coupledSectorNuDirection S μ, 0)))).val =
         (P.circle (liftSectorParameter S C z)).val
     rw [hcircle _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
@@ -308,21 +303,18 @@ theorem coupled_circle_nu_firstJet_eq_zero
         (href.liftSectorParameter_sector _)]
     have hxt :
         ((liftSectorParameter S C z).1 +
-          @SMul.smul ℝ (AnnularState S)
-            (inferInstance : Module ℝ (AnnularState S)).toSMul t
+          coupledScalarAction (E := AnnularState S) t
             (coupledSectorNuDirection S μ).val, z.2) ∈
           stateNeighborhood S C base ε := by
       simpa only [coupled_liftSectorParameter_add] using
         liftSectorParameter_mem_stateNeighborhood (C := C) ht le_rfl
     have hsxt : stateSector S
         ((liftSectorParameter S C z).1 +
-          @SMul.smul ℝ (AnnularState S)
-            (inferInstance : Module ℝ (AnnularState S)).toSMul t
+          coupledScalarAction (E := AnnularState S) t
             (coupledSectorNuDirection S μ).val) := by
       simpa only [coupled_liftSectorParameter_add] using
         href.liftSectorParameter_sector
-          (z + @SMul.smul ℝ (StateDirections S × ℝ)
-            (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t
+          (z + coupledScalarAction (E := StateDirections S × ℝ) t
             (coupledSectorNuDirection S μ, 0))
     rw [coupled_liftSectorParameter_add]
     apply coupled_returnResidual_eq_of_nu_change hT hS h1 h2
@@ -330,9 +322,9 @@ theorem coupled_circle_nu_firstJet_eq_zero
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
       hsxt (href.liftSectorParameter_sector _)
     · simp only [coupledSectorNuDirection_val,
-        Prod.fst_add, Prod.smul_fst, smul_zero, add_zero]
+        Prod.fst_add, coupledScalarAction_fst, coupledScalarAction_zero, add_zero]
     · simp only [coupledSectorNuDirection_val,
-        Prod.snd_add, Prod.smul_snd, smul_zero, add_zero]
+        Prod.snd_add, coupledScalarAction_snd, coupledScalarAction_zero, add_zero]
   exact hd.unique (coupled_lineDerivAt_congr_line
     (hasProjectiveLineDerivAt_const ((sectorJointResidual S C P z).2) z
       (coupledSectorNuDirection S μ, 0)) heq)

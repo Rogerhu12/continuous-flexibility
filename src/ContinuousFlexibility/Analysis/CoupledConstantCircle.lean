@@ -19,6 +19,14 @@ open ContinuousFlexibility.Analysis
 
 variable {T : MaterialData} {γ : ℝ} {M : CircleModelData}
 
+private theorem coupled_ker_id_sub_fixedPoint
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E]
+    (P : E →L[ℝ] E) (u : E) :
+    u ∈ ((ContinuousLinearMap.id ℝ E) - P).ker ↔ P u = u := by
+  change u - P u = 0 ↔ P u = u
+  exact sub_eq_zero.trans eq_comm
+
 /-- The kernel of identity minus the actual angular-mean projection. -/
 def coupledConstantCircleSubmodule (hM : IsCircleModel T γ M) : Submodule ℝ M.Space :=
   ((ContinuousLinearMap.id ℝ M.Space) - circleAngularMeanProjection hM).ker
@@ -30,9 +38,8 @@ def coupledConstantCircleGrading (hM : IsCircleModel T γ M) :
   fun n => (M.grading n).comp (coupledConstantCircleSubmodule hM).subtype
 
 theorem coupledConstantCircle_mem_iff (hM : IsCircleModel T γ M) (u : M.Space) :
-    u ∈ coupledConstantCircleSubmodule hM ↔ circleAngularMeanProjection hM u = u := by
-  change u - circleAngularMeanProjection hM u = 0 ↔ _
-  rw [sub_eq_zero, eq_comm]
+    u ∈ coupledConstantCircleSubmodule hM ↔ circleAngularMeanProjection hM u = u :=
+  coupled_ker_id_sub_fixedPoint (circleAngularMeanProjection hM) u
 
 theorem coupledConstantCircle_isClosed (hM : IsCircleModel T γ M) :
     IsClosed (coupledConstantCircleSubmodule hM : Set M.Space) :=
@@ -80,7 +87,8 @@ theorem coupledConstantCircleProjection_isTame (hM : IsCircleModel T γ M) :
   intro n _
   refine ⟨1, fun u => ?_⟩
   simpa only [Nat.add_zero, NNReal.coe_one, one_mul, coupledConstantCircleGrading,
-    Seminorm.comp_apply, Submodule.subtype_apply, coupledConstantCircleProjection_val] using
+    Seminorm.comp_apply, Submodule.subtype_apply, ContinuousLinearMap.coe_coe,
+    coupledConstantCircleProjection_val] using
     circleAngularMeanLinear_grading_le hM n u
 
 theorem coupledConstantCircleSubtype_isTame (hM : IsCircleModel T γ M) :
@@ -88,7 +96,7 @@ theorem coupledConstantCircleSubtype_isTame (hM : IsCircleModel T γ M) :
       (coupledConstantCircleSubmodule hM).subtype 0 0 := by
   intro n _
   exact ⟨1, fun u => by simp only [Nat.add_zero, NNReal.coe_one, one_mul,
-    coupledConstantCircleGrading, Seminorm.comp_apply]⟩
+    coupledConstantCircleGrading, Seminorm.comp_apply, le_refl]⟩
 
 /-- The reciprocal-diagonal recovery viewed in the closed constant space. -/
 def coupledConstantCircleInverse (hM : IsCircleModel T γ M)
@@ -109,7 +117,8 @@ theorem coupledConstantCircleInverse_isTame (hM : IsCircleModel T γ M)
   intro n _
   refine ⟨2, fun u => ?_⟩
   simpa only [Nat.add_zero, NNReal.coe_ofNat, coupledConstantCircleGrading,
-    Seminorm.comp_apply, Submodule.subtype_apply, coupledConstantCircleInverse_val] using
+    Seminorm.comp_apply, Submodule.subtype_apply, ContinuousLinearMap.coe_coe,
+    coupledConstantCircleInverse_val] using
     coupledInverseControlLift_grading_le hM a ha n u
 
 end ContinuousFlexibility.Statements

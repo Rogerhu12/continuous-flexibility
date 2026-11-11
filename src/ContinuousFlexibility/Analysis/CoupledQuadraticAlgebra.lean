@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.CoupledErrorParity
 import ContinuousFlexibility.Analysis.CoupledDerivativeAlgebra
+import ContinuousFlexibility.Analysis.CoupledWeakScalarError
 import ContinuousFlexibility.Scalar.WeightedScalarError
 import ContinuousFlexibility.Scalar.WeightedErrorConservation
 
@@ -128,42 +129,31 @@ theorem coupled_angularSecondCLM_compatible
   exact physicalSourceIntegral_angularPartial_eq_zero hD.choose_spec.1.2.1.le
     hflux (periodic_angularPartial hu.2.2.1)
 
-/-- Conservation of the actual weighted error needs no nonlinear type
-identity for the independent normalized coefficient. -/
-theorem coupled_scalarTypeErrorLinear_compatible
-    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-    (hS : IsPhysicalSpaces D T S) (t r : ScalarHeightSpace S) (η : HeightPair S) :
-    S.Q (scalarTypeErrorLinear hD hT hS t r η) = 0 := by
-  rw [scalarTypeErrorLinear_apply, scalarTypeErrorCLM_apply]
-  exact coupled_angularSecondCLM_compatible hD hT hS _
-
-/-- The independent scalar error as a genuine Source-valued bilinear map. -/
+/-- The independent scalar error uses the actual weak normalized coefficient. -/
 def coupledScalarTypeErrorSourceLinear
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-    (hS : IsPhysicalSpaces D T S) (t : ScalarHeightSpace S) :
+    (hS : IsPhysicalSpaces D T S) (t : CoupledWeakHeight S) :
     ScalarHeightSpace S →ₗ[ℝ] HeightPair S →ₗ[ℝ] S.Source :=
-  coupledBilinearCodRestrict (scalarTypeErrorLinear hD hT hS t) S.Q.toLinearMap.ker
-    (fun r η => coupled_scalarTypeErrorLinear_compatible hD hT hS t r η)
+  coupledWeakTypeErrorSourceLinear hD hT hS t
 
 theorem coupledScalarTypeErrorSourceLinear_val
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-    (hS : IsPhysicalSpaces D T S) (t r : ScalarHeightSpace S) (η : HeightPair S) :
+    (hS : IsPhysicalSpaces D T S) (t : CoupledWeakHeight S)
+    (r : ScalarHeightSpace S) (η : HeightPair S) :
     (coupledScalarTypeErrorSourceLinear hD hT hS t r η).val =
-      scalarTypeErrorLinear hD hT hS t r η :=
-  coupledBilinearCodRestrict_val _ _ _ r η
+      coupledWeakTypeErrorLinear hD hT hS t r η :=
+  coupledWeakTypeErrorSourceLinear_val hD hT hS t r η
 
-/-- Once the normalized coefficient is identified, the already constructed
-Source has the exact angular-divergence formula. -/
+/-- The normalized weak coefficient gives the exact angular-divergence formula. -/
 theorem coupledScalarTypeErrorSourceLinear_decode
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
-    (hS : IsPhysicalSpaces D T S) (t : ScalarHeightSpace S) (F : PolarPoint → ℝ)
-    (ht : ∀ p ∈ annularOpen D, (S.height (3 / 4 : ℝ)).decode t p =
+    (hS : IsPhysicalSpaces D T S) (t : CoupledWeakHeight S) (F : PolarPoint → ℝ)
+    (ht : ∀ p ∈ annularOpen D, (S.height coupledWeakProfileWeight).decode t p =
       D.w p.1 * F p - (1 + D.w p.1 ^ 2) / p.1)
     (r : ScalarHeightSpace S) (η : HeightPair S) :
     (S.height (3 / 4 : ℝ)).decode (coupledScalarTypeErrorSourceLinear hD hT hS t r η).val =
-      scalarCorrectionError F ((S.height (3 / 4 : ℝ)).decode r) (heightPairField S η) := by
-  rw [coupledScalarTypeErrorSourceLinear_val]
-  exact decode_scalarTypeErrorLinear_of_actual hD hT hS t F ht r η
+      scalarCorrectionError F ((S.height (3 / 4 : ℝ)).decode r) (heightPairField S η) :=
+  coupledWeakTypeErrorSourceLinear_decode hD hT hS t F ht r η
 
 /-- The height component of the given coupled inverse, as a linear map. -/
 def coupledErrorHeightLinear (V : CoupledInverseData S) (z : AnnularState S × ℝ) :
@@ -213,7 +203,7 @@ theorem coupledErrorInverseLinear_apply (R : ReturnEquationData S) (B : ControlC
 def coupledScalarQuadraticLinear
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (L : ReturnCorrectionData S)
-    (V : CoupledInverseData S) (t : ScalarHeightSpace S) (z : AnnularState S × ℝ) :
+    (V : CoupledInverseData S) (t : CoupledWeakHeight S) (z : AnnularState S × ℝ) :
     ResidualSpace S →ₗ[ℝ] ResidualSpace S →ₗ[ℝ] S.Source :=
   z.2 • coupledBilinearTransport (coupledScalarTypeErrorSourceLinear hD hT hS t)
     (S.Q.toLinearMap.ker.subtype.comp (LinearMap.fst ℝ S.Source (EvenCircle S)))
@@ -225,7 +215,7 @@ def coupledScalarQuadraticLinear
 theorem coupledScalarQuadraticLinear_apply
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (L : ReturnCorrectionData S)
-    (V : CoupledInverseData S) (t : ScalarHeightSpace S) (z : AnnularState S × ℝ)
+    (V : CoupledInverseData S) (t : CoupledWeakHeight S) (z : AnnularState S × ℝ)
     (r y : ResidualSpace S) :
     coupledScalarQuadraticLinear hD hT hS L V t z r y =
       z.2 • coupledScalarTypeErrorSourceLinear hD hT hS t r.1.val (V.V z y).1 +
@@ -263,7 +253,7 @@ def coupledQuadraticLinear
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
-    (t : ScalarHeightSpace S) (z : AnnularState S × ℝ) :
+    (t : CoupledWeakHeight S) (z : AnnularState S × ℝ) :
     ResidualSpace S →ₗ[ℝ] ResidualSpace S →ₗ[ℝ] ResidualSpace S :=
   coupledBilinearProd (coupledScalarQuadraticLinear hD hT hS L V t z)
     (coupledCircleQuadraticLinear hS R B V z)
@@ -272,7 +262,7 @@ theorem coupledQuadraticLinear_apply
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
-    (t : ScalarHeightSpace S) (z : AnnularState S × ℝ) (r y : ResidualSpace S) :
+    (t : CoupledWeakHeight S) (z : AnnularState S × ℝ) (r y : ResidualSpace S) :
     coupledQuadraticLinear hD hT hS R L B V t z r y =
       (coupledScalarQuadraticLinear hD hT hS L V t z r y,
         coupledCircleQuadraticLinear hS R B V z r y) :=
@@ -282,14 +272,14 @@ def coupledQuadraticErrorData
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
-    (typeCoefficient : AnnularState S × ℝ → ScalarHeightSpace S) : QuadraticErrorData S where
+    (typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S) : QuadraticErrorData S where
   Q z := coupledQuadraticLinear hD hT hS R L B V (typeCoefficient z) z
 
 theorem coupledQuadraticErrorData_scalar
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
-    (typeCoefficient : AnnularState S × ℝ → ScalarHeightSpace S)
+    (typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S)
     (z : AnnularState S × ℝ) (r y : ResidualSpace S) :
     ((coupledQuadraticErrorData hD hT hS R L B V typeCoefficient).Q z r y).1 =
       z.2 • coupledScalarTypeErrorSourceLinear hD hT hS (typeCoefficient z)
@@ -302,7 +292,7 @@ theorem coupledQuadraticErrorData_circle
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
-    (typeCoefficient : AnnularState S × ℝ → ScalarHeightSpace S)
+    (typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S)
     (z : AnnularState S × ℝ) (r y : ResidualSpace S) :
     ((coupledQuadraticErrorData hD hT hS R L B V typeCoefficient).Q z r y).2 =
       coupledEvenProjectionCLM hS
@@ -320,9 +310,9 @@ theorem coupledQuadraticErrorData_scalar_decode
     (hS : IsPhysicalSpaces D T S) (C : NonlinearGeometryData S)
     (R : ReturnEquationData S) (L : ReturnCorrectionData S)
     (B : ControlColumnData S) (V : CoupledInverseData S)
-    (typeCoefficient : AnnularState S × ℝ → ScalarHeightSpace S)
+    (typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S)
     (z : AnnularState S × ℝ)
-    (ht : ∀ p ∈ annularOpen D, (S.height (3 / 4 : ℝ)).decode (typeCoefficient z) p =
+    (ht : ∀ p ∈ annularOpen D, (S.height coupledWeakProfileWeight).decode (typeCoefficient z) p =
       D.w p.1 * residualErrorCoefficient D S C z p - (1 + D.w p.1 ^ 2) / p.1)
     (r y : ResidualSpace S) (p : PolarPoint) :
     (S.height (3 / 4 : ℝ)).decode
@@ -346,7 +336,7 @@ theorem coupledQuadraticErrorData_circle_decode
     (hS : IsPhysicalSpaces D T S) {C : NonlinearGeometryData S}
     (R : ReturnEquationData S) (L : ReturnCorrectionData S)
     (B : ControlColumnData S) (V : CoupledInverseData S)
-    (typeCoefficient : AnnularState S × ℝ → ScalarHeightSpace S)
+    (typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S)
     {base : ℕ} {ε : ℝ} (h2 : N02Properties D T S C R base ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (r y : ResidualSpace S) (m : ℕ) (θ : ℝ) :
@@ -370,7 +360,7 @@ theorem coupledQuadraticErrorData_source_integral
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (R : ReturnEquationData S)
     (L : ReturnCorrectionData S) (B : ControlColumnData S) (V : CoupledInverseData S)
-    (typeCoefficient : AnnularState S × ℝ → ScalarHeightSpace S)
+    (typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S)
     (z : AnnularState S × ℝ) (r y : ResidualSpace S) :
     physicalSourceIntegral D ((S.height (3 / 4 : ℝ)).decode
       ((coupledQuadraticErrorData hD hT hS R L B V typeCoefficient).Q z r y).1.val) = 0 := by

@@ -125,11 +125,12 @@ private theorem coupled_coefficientBounds_restrict
             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
               base' (s + loss) (z - (C.referenceState, 0)) v := by
   intro k s
-  obtain ⟨c, hc, h⟩ := hCoef k s
+  let c : ℝ := (hCoef k s).choose
+  have hc : 0 < c := (hCoef k s).choose_spec.1
   refine ⟨c, hc, fun m i a b p hab hpm => ?_⟩
   exact coupled_weightedTower_restrict hp hopen hsub hb (C.referenceState, 0) abs
     (mul_nonneg (mul_nonneg hc.le (Real.rpow_nonneg (hpos m).1 _))
-      (Real.rpow_nonneg (hpos m).2 _)) (h m i a b p hab hpm)
+      (Real.rpow_nonneg (hpos m).2 _)) ((hCoef k s).choose_spec.2 m i a b p hab hpm)
 
 private theorem coupled_flowBounds_restrict
     (hp : Monotone (pairGrading (stateGrading S) realGrading))
@@ -158,12 +159,14 @@ private theorem coupled_flowBounds_restrict
             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
               base' (s + loss) (z - (C.referenceState, 0)) v := by
   intro k s
-  obtain ⟨c, hc, h⟩ := hFlow k s
+  let c : ℝ := (hFlow k s).choose
+  have hc : 0 < c := (hFlow k s).choose_spec.1
   refine ⟨c, hc, fun m a b p hab hpm => ?_⟩
   exact coupled_weightedTower_restrict hp hopen hsub hb (C.referenceState, 0)
     (fun t => min (p.1 - C.left m) (C.right m - p.1) ^ a * |t|)
     (mul_nonneg (mul_nonneg hc.le (Real.rpow_nonneg (hpos (C.cell m)).1 _))
-      (Real.rpow_nonneg (hpos (C.cell m)).2 _)) (h m a b p hab hpm)
+      (Real.rpow_nonneg (hpos (C.cell m)).2 _))
+        ((hFlow k s).choose_spec.2 m a b p hab hpm)
 
 theorem coupled_N01Properties_restrict (hT : IsMaterialData D T)
     (h : N01Properties D T S C base loss ε)

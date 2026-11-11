@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.CoupledStateScalarAction
 import ContinuousFlexibility.Analysis.CoupledDerivativeAlgebra
 import ContinuousFlexibility.Analysis.NeighborhoodStateBounds
 import ContinuousFlexibility.Analysis.SolveReturnEquations
@@ -56,38 +57,41 @@ theorem coupledSectorChartDirection_val (S : PhysicalSpacesData) (ψ : CircleSpa
     (hψ : IsOddCircle S ψ) :
     (coupledSectorChartDirection S ψ hψ).val = (0, (0, (0, ψ))) := rfl
 
+theorem coupled_liftSectorParameter_snd (z : StateDirections S × ℝ) :
+    (liftSectorParameter S C z).2 = z.2 := rfl
+
 /-- Along state directions the independent parameter is fixed. -/
 theorem coupled_liftSectorParameter_add (z : StateDirections S × ℝ)
     (v : StateDirections S) (t : ℝ) :
-    liftSectorParameter S C (z + (@SMul.smul ℝ (StateDirections S × ℝ) (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (v, 0))) =
-      ((liftSectorParameter S C z).1 + (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v.val), z.2) := by
+    liftSectorParameter S C (z + (coupledScalarAction (E := StateDirections S × ℝ) t (v, 0))) =
+      ((liftSectorParameter S C z).1 + (coupledScalarAction (E := AnnularState S) t v.val), z.2) := by
   simp only [liftSectorParameter, Prod.fst_add, Prod.snd_add,
-    Prod.smul_fst, Prod.smul_snd, Submodule.coe_add, Submodule.coe_smul,
-    smul_zero, add_zero, add_assoc]
+    coupledScalarAction_fst, coupledScalarAction_snd, Submodule.coe_add,
+    coupledScalarAction_subtype_val, coupledScalarAction_zero, add_zero, add_assoc]
 
 theorem coupled_stateProfile_add_heightDirection
     (x : AnnularState S) (η : HeightPair S) (t : ℝ) :
-    stateProfile D S C (x + (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t (η, (0, (0, 0))))) = stateProfile D S C x := by
+    stateProfile D S C (x + (coupledScalarAction (E := AnnularState S) t (η, (0, (0, 0))))) = stateProfile D S C x := by
   funext r
   simp only [stateProfile, stateKappa, Prod.fst_add, Prod.snd_add,
-    Prod.smul_fst, Prod.smul_snd, smul_zero, add_zero]
+    coupledScalarAction_fst, coupledScalarAction_snd, coupledScalarAction_zero, add_zero]
 
 theorem coupled_stateU_add_heightDirection
     (x : AnnularState S) (η : HeightPair S) (t : ℝ) :
-    stateU S (x + (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t (η, (0, (0, 0))))) =
+    stateU S (x + (coupledScalarAction (E := AnnularState S) t (η, (0, (0, 0))))) =
       heightFamily (stateU S x) (heightPairField S η) t := by
   funext p
   simp only [stateU, heightPairField, Prod.fst_add, Prod.snd_add,
-    Prod.smul_fst, Prod.smul_snd, map_add, map_smul, Pi.add_apply,
-    Pi.smul_apply, smul_eq_mul, heightFamily]
+    coupledScalarAction_fst, coupledScalarAction_snd, map_add, Pi.add_apply,
+    coupledScalarAction_linear_eval, coupledScalarAction_real, heightFamily]
   ring
 
 theorem coupled_scalarResidualField_add_heightDirection
     (x : AnnularState S) (η : HeightPair S) (q t : ℝ) :
-    scalarResidualField D S C (x + (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t (η, (0, (0, 0)))), q) =
+    scalarResidualField D S C (x + (coupledScalarAction (E := AnnularState S) t (η, (0, (0, 0)))), q) =
       normalizedResidual (stateProfile D S C x) (stateRadialHeight D S C x)
         (heightFamily (stateU S x) (heightPairField S η) t) q := by
-  have hh : stateRadialHeight D S C (x + (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t (η, (0, (0, 0))))) =
+  have hh : stateRadialHeight D S C (x + (coupledScalarAction (E := AnnularState S) t (η, (0, (0, 0))))) =
       stateRadialHeight D S C x := by
     unfold stateRadialHeight
     rw [coupled_stateProfile_add_heightDirection]
@@ -98,11 +102,24 @@ theorem coupled_scalarResidualField_add_heightDirection
 /-- Chart changes leave the actual scalar field exactly unchanged. -/
 theorem coupled_scalarResidualField_add_chartDirection
     (x : AnnularState S) (ψ : CircleSpace S) (q t : ℝ) :
-    scalarResidualField D S C (x + (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t (0, (0, (0, ψ)))), q) =
+    scalarResidualField D S C (x + (coupledScalarAction (E := AnnularState S) t (0, (0, (0, ψ)))), q) =
       scalarResidualField D S C (x, q) := by
   simp only [scalarResidualField, stateRadialHeight, stateProfile, stateKappa,
-    stateU, Prod.fst_add, Prod.snd_add, Prod.smul_fst, Prod.smul_snd,
-    smul_zero, add_zero]
+    stateU, Prod.fst_add, Prod.snd_add, coupledScalarAction_fst, coupledScalarAction_snd,
+    coupledScalarAction_zero, add_zero]
+
+private theorem coupled_scalarResidualField_sector_chart_line
+    (z : StateDirections S × ℝ) (ψ : CircleSpace S) (hψ : IsOddCircle S ψ) (t : ℝ) :
+    scalarResidualField D S C
+      (liftSectorParameter S C
+        (z + coupledScalarAction (E := StateDirections S × ℝ) t
+          (coupledSectorChartDirection S ψ hψ, 0))) =
+      scalarResidualField D S C (liftSectorParameter S C z) := by
+  have hline := congrArg (fun x : AnnularState S × ℝ => scalarResidualField D S C x)
+    (coupled_liftSectorParameter_add (C := C) z (coupledSectorChartDirection S ψ hψ) t)
+  simp only [coupledSectorChartDirection_val] at hline
+  exact hline.trans
+    (coupled_scalarResidualField_add_chartDirection (liftSectorParameter S C z).1 ψ z.2 t)
 
 /-- The corrected pointwise height derivative for the actual N01 geometry.
 The formula includes the removable case where the independent parameter is zero. -/
@@ -113,7 +130,7 @@ theorem coupled_hasDerivAt_scalarResidualField_heightDirection
     (hs : stateSector S z.1) (η : HeightPair S)
     {p : PolarPoint} (hp : p ∈ annularOpen D) :
     HasDerivAt
-      (fun t : ℝ => scalarResidualField D S C (z.1 + (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t (η, (0, (0, 0)))), z.2) p)
+      (fun t : ℝ => scalarResidualField D S C (z.1 + (coupledScalarAction (E := AnnularState S) t (η, (0, (0, 0)))), z.2) p)
       (divergenceOperator (originalCoefficients D S C z) (heightPairField S η) p +
         z.2 * scalarCorrectionError (residualErrorCoefficient D S C z)
           (scalarResidualField D S C z) (heightPairField S η) p) 0 := by
@@ -181,6 +198,22 @@ theorem coupled_source_decode_hasDerivAt
     sobolev_decode_hasDerivAt_of_projectiveLineDerivAt
       ((hS.1 (3 / 4 : ℝ)).2.2.1) hv p
 
+private theorem coupled_source_lineDeriv_zero_of_eventually_constant
+    (hS : IsPhysicalSpaces D T S)
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {f : E → S.Source} {d : S.Source} {x v : E}
+    (hd : HasProjectiveLineDerivAt f d x v)
+    (hc : ∀ p ∈ annularOpen D, ∃ c : ℝ,
+      (fun t : ℝ => (S.height (3 / 4 : ℝ)).decode
+        (f (x + coupledScalarAction t v)).val p) =ᶠ[𝓝 0] (fun _ => c)) :
+    d = 0 := by
+  apply coupled_source_ext hS
+  intro p hp
+  simp only [ZeroMemClass.coe_zero, map_zero, Pi.zero_apply]
+  obtain ⟨c, heq⟩ := hc p hp
+  exact (coupled_source_decode_hasDerivAt hS hd p).unique
+    ((hasDerivAt_const (0 : ℝ) c).congr_of_eventuallyEq heq)
+
 /-- The scalar projection of the existing first jet is a genuine derivative. -/
 theorem coupled_sector_scalar_first_derivative
     {U : Set (StateDirections S × ℝ)}
@@ -209,12 +242,8 @@ theorem coupled_scalar_first_derivative
 private theorem coupled_sector_eventually_line_mem
     {U : Set (StateDirections S × ℝ)} (hU : IsOpen U)
     {z : StateDirections S × ℝ} (hz : z ∈ U) (v : StateDirections S × ℝ) :
-    ∀ᶠ t : ℝ in 𝓝 0, z + (@SMul.smul ℝ (StateDirections S × ℝ) (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t v) ∈ U := by
-  have ht : ContinuousAt (fun t : ℝ => z + (@SMul.smul ℝ (StateDirections S × ℝ) (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t v)) 0 :=
-    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt
-  have hline : Tendsto (fun t : ℝ => z + (@SMul.smul ℝ (StateDirections S × ℝ) (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t v)) (𝓝 0) (𝓝 z) := by
-    simpa only [zero_smul, add_zero] using ht.tendsto
-  exact hline.eventually (hU.mem_nhds hz)
+    ∀ᶠ t : ℝ in 𝓝 0, z + (coupledScalarAction (E := StateDirections S × ℝ) t v) ∈ U :=
+  coupledScalarAction_eventually_line_mem hU hz v
 
 /-- The scalar height entry of any genuine sector residual tower has the
 prescribed original divergence plus the exact residual error. -/
@@ -245,12 +274,13 @@ theorem coupled_scalar_height_firstJet_decode
     (href.liftSectorParameter_sector z) η hp
   have hphysical' : HasDerivAt
       (fun t : ℝ => scalarResidualField D S C
-        (liftSectorParameter S C (z + (@SMul.smul ℝ (StateDirections S × ℝ) (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (coupledSectorHeightDirection S η, 0)))) p)
+        (liftSectorParameter S C (z + (coupledScalarAction (E := StateDirections S × ℝ) t (coupledSectorHeightDirection S η, 0)))) p)
       (divergenceOperator (originalCoefficients D S C (liftSectorParameter S C z))
           (heightPairField S η) p +
         z.2 * scalarCorrectionError (residualErrorCoefficient D S C (liftSectorParameter S C z))
           (scalarResidualField D S C (liftSectorParameter S C z)) (heightPairField S η) p) 0 := by
-    simpa only [coupled_liftSectorParameter_add, coupledSectorHeightDirection_val] using hphysical
+    simpa only [coupled_liftSectorParameter_add, coupledSectorHeightDirection_val,
+      coupled_liftSectorParameter_snd] using hphysical
   apply hdecoded.unique
   apply hphysical'.congr_of_eventuallyEq
   filter_upwards [hnear] with t ht
@@ -274,22 +304,13 @@ theorem coupled_scalar_chart_firstJet_eq_zero
     (coupledSectorChartDirection S ψ hψ, 0)
   have hnear := coupled_sector_eventually_line_mem J.open_domain hz
     (coupledSectorChartDirection S ψ hψ, 0)
-  apply coupled_source_ext hS
+  apply coupled_source_lineDeriv_zero_of_eventually_constant hS hd
   intro p hp
-  simp only [ZeroMemClass.coe_zero, map_zero, Pi.zero_apply]
-  have hdecoded := coupled_source_decode_hasDerivAt hS hd p
-  have hconstant := hasDerivAt_const (0 : ℝ)
-    (scalarResidualField D S C (liftSectorParameter S C z) p)
-  apply hdecoded.unique
-  apply hconstant.congr_of_eventuallyEq
+  refine ⟨scalarResidualField D S C (liftSectorParameter S C z) p, ?_⟩
   filter_upwards [hnear] with t ht
-  change (S.height (3 / 4 : ℝ)).decode
-      (P.scalar (liftSectorParameter S C
-        (z + (@SMul.smul ℝ (StateDirections S × ℝ) (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (coupledSectorChartDirection S ψ hψ, 0))))).val p = _
-  rw [hscalar _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
-    (href.liftSectorParameter_sector _) p hp]
-  rw [coupled_liftSectorParameter_add, coupledSectorChartDirection_val,
-    coupled_scalarResidualField_add_chartDirection]
+  exact (hscalar _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
+    (href.liftSectorParameter_sector _) p hp).trans
+      (congrFun (coupled_scalarResidualField_sector_chart_line z ψ hψ t) p)
 
 private theorem coupled_scalar_lineDerivAt_replace
     {E F : Type*} [AddCommGroup E] [Module ℝ E]

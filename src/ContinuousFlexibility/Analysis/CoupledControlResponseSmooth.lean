@@ -133,7 +133,8 @@ theorem coupled_controlHeightResponse_smoothTameOn
   have h := coupled_response_fst_smoothTameOn
     (p := pairGrading (sectorGrading S) realGrading)
     (r := controlGrading) (s := S.sourceGrading)
-    (F := (S.height (3 / 4 : ℝ)).level) (bond := (S.height (3 / 4 : ℝ)).bond)
+    (F := fun n => ↥((S.height (3 / 4 : ℝ)).level n))
+    (bond := (S.height (3 / 4 : ℝ)).bond)
     (q := (S.height (3 / 4 : ℝ)).grading)
     (column := fun z u => B.heightColumn (liftSectorParameter S C z) u)
     (response := fun z f => G.G (liftSectorParameter S C z) f)

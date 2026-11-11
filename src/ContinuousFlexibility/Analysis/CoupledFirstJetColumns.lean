@@ -49,19 +49,23 @@ theorem coupled_scalar_nu_firstJet
     {z : StateDirections S × ℝ} (hz : z ∈ sectorNeighborhood S base ε ε) (μ : ℝ) :
     (projectiveJetHeadLinear J.D 0 z Fin.elim0 (coupledSectorNuDirection S μ, 0)).1 =
       μ • B.nuColumn (liftSectorParameter S C z) := by
-  obtain ⟨_, _, _, _, _, _, _, hnu, _⟩ := h8
+  have hnu := h8.2.2.2.2.2.2.2.1
   have hunit := (coupled_scalar_first_derivative J hz (coupledSectorNuDirection S 1)).unique
     (hnu _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl))
   have hscale : (coupledSectorNuDirection S μ, (0 : ℝ)) =
-      @SMul.smul ℝ (StateDirections S × ℝ)
-        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul μ
-        (coupledSectorNuDirection S 1, (0 : ℝ)) := by
+      coupledScalarAction μ (coupledSectorNuDirection S 1, (0 : ℝ)) := by
     apply Prod.ext
     · apply Subtype.ext
-      simp only [Submodule.coe_smul, coupledSectorNuDirection_val, Prod.smul_mk,
-        smul_zero, smul_eq_mul, mul_one]
-    · simp only [Prod.smul_snd, smul_zero]
-  rw [hscale, map_smul, Prod.smul_fst, hunit]
+      simp only [coupledScalarAction_fst, coupledScalarAction_subtype_val,
+        coupledSectorNuDirection_val, coupledScalarAction_prod_mk,
+        coupledScalarAction_zero, coupledScalarAction_real, mul_one]
+    · simp only [coupledScalarAction_snd, coupledScalarAction_zero]
+  rw [hscale]
+  have hm := congrArg Prod.fst (coupledScalarAction_map
+    (projectiveJetHeadLinear J.D 0 z Fin.elim0).toLinearMap μ
+      (coupledSectorNuDirection S 1, (0 : ℝ)))
+  simpa only [ContinuousLinearMap.coe_coe, coupledScalarAction_fst,
+    hunit, coupledScalarAction] using hm
 
 theorem coupled_scalar_kappa_firstJet
     (hRef : referenceStateConditions D S C)
@@ -73,7 +77,7 @@ theorem coupled_scalar_kappa_firstJet
     (projectiveJetHeadLinear J.D 0 z Fin.elim0
       (coupledSectorKappaDirection S κ hκ, 0)).1 =
         B.heightColumn (liftSectorParameter S C z) (B.restriction κ) := by
-  obtain ⟨_, _, _, _, _, _, _, _, hκColumn, _⟩ := h8
+  have hκColumn := h8.2.2.2.2.2.2.2.2.1
   exact (coupled_scalar_first_derivative J hz (coupledSectorKappaDirection S κ hκ)).unique
     (hκColumn _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
       (hRef.liftSectorParameter_sector z) κ)
@@ -87,7 +91,7 @@ theorem coupled_circle_height_firstJet
     (projectiveJetHeadLinear J.D 0 z Fin.elim0
       (coupledSectorHeightDirection S η, 0)).2.val =
         z.2 • B.heightRow (liftSectorParameter S C z) η := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, hheight, _⟩ := h8
+  have hheight := h8.2.2.2.2.2.2.2.2.2.1
   exact (coupled_circle_first_derivative J hz (coupledSectorHeightDirection S η)).unique
     (hheight _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
       (hRef.liftSectorParameter_sector z) η)
@@ -102,7 +106,7 @@ theorem coupled_circle_kappa_firstJet
     (projectiveJetHeadLinear J.D 0 z Fin.elim0
       (coupledSectorKappaDirection S κ hκ, 0)).2.val =
         B.circleColumn (liftSectorParameter S C z) κ := by
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, hκColumn, _⟩ := h8
+  have hκColumn := h8.2.2.2.2.2.2.2.2.2.2.1
   exact (coupled_circle_first_derivative J hz (coupledSectorKappaDirection S κ hκ)).unique
     (hκColumn _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
       (hRef.liftSectorParameter_sector z) κ)
@@ -119,19 +123,7 @@ theorem coupled_circle_firstJet_of_return_derivative
     (projectiveJetHeadLinear J.D 0 z Fin.elim0 (v, 0)).2.val = df := by
   apply (coupled_circle_first_derivative J hz v).unique
   apply coupled_lineDerivAt_congr_line hd
-  have hcont : Continuous (fun t : ℝ => z +
-      @SMul.smul ℝ (StateDirections S × ℝ)
-        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (v, 0)) :=
-    continuous_const.add (continuous_id.smul continuous_const)
-  have hnear : ∀ᶠ t : ℝ in 𝓝 0, z +
-      @SMul.smul ℝ (StateDirections S × ℝ)
-        (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (v, 0) ∈
-      sectorNeighborhood S base ε ε := by
-    have ht : Tendsto (fun t : ℝ => z +
-        @SMul.smul ℝ (StateDirections S × ℝ)
-          (inferInstance : Module ℝ (StateDirections S × ℝ)).toSMul t (v, 0)) (𝓝 0) (𝓝 z) := by
-      simpa only [zero_smul, add_zero] using hcont.tendsto 0
-    exact ht.eventually (J.open_domain.mem_nhds hz)
+  have hnear := coupledScalarAction_eventually_line_mem J.open_domain hz (v, (0 : ℝ))
   filter_upwards [hnear] with t ht
   have he := hcircle _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
     (hRef.liftSectorParameter_sector _)

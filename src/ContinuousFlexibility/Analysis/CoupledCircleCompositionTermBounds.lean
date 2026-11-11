@@ -44,6 +44,10 @@ private theorem abs_prod_le {ι : Type*} [Fintype ι]
     _ ≤ ∏ i, ‖f i‖ := Finset.norm_prod_le _ _
     _ ≤ ∏ i, B i := Finset.prod_le_prod₀ (fun i _ => norm_nonneg _) (fun i _ => h i)
 
+private theorem prod_const_mul_fin {n : ℕ} (K : ℝ) (f : Fin n → ℝ) :
+    (∏ i, K * f i) = K ^ n * ∏ i, f i := by
+  rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+
 theorem weightedEvaluate_prebound
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {M : CircleModelData}
     (hT : IsMaterialData D T) (hsample : ∀ m, T.sample m ∈ Ioo D.a D.b)
@@ -66,8 +70,7 @@ theorem weightedEvaluate_prebound
         apply abs_prod_le
         intro i
         simpa only [Nat.add_assoc] using hjet ψ m (t.baseOrder i + 1) θ
-      _ = _ := by
-        rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+      _ = _ := prod_const_mul_fin K (fun i => M.grading (t.baseOrder i + 2) ψ)
   have hd : |∏ i, iteratedDeriv (t.directionOrder i) (M.decode (w i) m) θ| ≤
       K ^ k * ∏ i, M.grading (t.directionOrder i + 2) (w i) := by
     calc
@@ -78,8 +81,7 @@ theorem weightedEvaluate_prebound
           (mul_le_mul_of_nonneg_left
             (gradedSeminorm_monotone _ _ (by omega : t.directionOrder i + 1 ≤
               t.directionOrder i + 2) (w i)) hK)
-      _ = _ := by
-        rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+      _ = _ := prod_const_mul_fin K (fun i => M.grading (t.directionOrder i + 2) (w i))
   have ho := coupled_circle_weighted_jet_envelope hT hsample hM v m t.outerOrder c
     (θ + M.decode ψ m θ)
   have hbo : 0 ≤ K ^ t.baseFactors * ∏ i, M.grading (t.baseOrder i + 2) ψ :=
@@ -121,15 +123,36 @@ theorem coupled_circle_composition_term_one_high
             ∑ i, M.grading (s + loss) (t.factorFamily v ψ w i) *
               ∏ j ∈ Finset.univ.erase i, M.grading base (t.factorFamily v ψ w j) := by
   classical
-  obtain ⟨K, hK, hjet⟩ := coupled_circle_jet_uniform_bound hT hsample hγ hM
-  obtain ⟨base, loss, hprod⟩ := spaces_interpolation_product_bound M.grading
+  have hjetExists := coupled_circle_jet_uniform_bound hT hsample hγ hM
+  let K : ℝ := hjetExists.choose
+  have hK : 1 ≤ K := hjetExists.choose_spec.1
+  have hjet : ∀ (u : M.Space) (m b : ℕ) (θ : ℝ),
+      |iteratedDeriv b (M.decode u m) θ| ≤ K * M.grading (b + 1) u :=
+    hjetExists.choose_spec.2
+  have hprodExists := spaces_interpolation_product_bound M.grading
     (fun u i j hij => gradedSeminorm_monotone _ _ hij u) hI
+  let base : ℕ := hprodExists.choose
+  let loss : ℕ := hprodExists.choose_spec.choose
+  have hprod : ∀ {ι : Type} [Fintype ι] [Nonempty ι] [DecidableEq ι],
+      ∀ (order : ι → ℕ) (s : ℕ), (∑ i, order i) ≤ s →
+        ∃ C : ℝ, 0 ≤ C ∧ ∀ x : ι → M.Space,
+          (∏ i, M.grading (order i + 2) (x i)) ≤ C *
+            ∑ i, M.grading (s + loss) (x i) *
+              ∏ j ∈ Finset.univ.erase i, M.grading base (x j) :=
+    hprodExists.choose_spec.choose_spec
   refine ⟨base, loss, fun k t c s horder => ?_⟩
   letI : Nonempty (Fin t.baseFactors ⊕ Fin (k + 1)) := ⟨Sum.inr 0⟩
   have hbudget : (∑ i, t.factorOrder c i) ≤ s := by
     rw [t.factorOrder_sum]
     exact horder
-  obtain ⟨C, hC, hbound⟩ := hprod (t.factorOrder c) s hbudget
+  have hboundExists := hprod (t.factorOrder c) s hbudget
+  let C : ℝ := hboundExists.choose
+  have hC : 0 ≤ C := hboundExists.choose_spec.1
+  have hbound : ∀ x : Fin t.baseFactors ⊕ Fin (k + 1) → M.Space,
+      (∏ i, M.grading (t.factorOrder c i + 2) (x i)) ≤ C *
+        ∑ i, M.grading (s + loss) (x i) *
+          ∏ j ∈ Finset.univ.erase i, M.grading base (x j) :=
+    hboundExists.choose_spec.2
   let A : ℝ := anglePairEvaluationConstant * K ^ (t.baseFactors + k)
   have hA : 0 ≤ A := mul_nonneg anglePairEvaluationConstant_nonneg
     (pow_nonneg (zero_le_one.trans hK) _)

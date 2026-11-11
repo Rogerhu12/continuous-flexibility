@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.CoupledStateScalarAction
 import ContinuousFlexibility.Analysis.SolveCircleProjection
 import ContinuousFlexibility.Analysis.StateProfileRegularity
 
@@ -30,8 +31,8 @@ private theorem coupled_sum_smul_clm_apply {E I : Type*}
 private theorem coupled_clm_affine {E : Type*}
     [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     (L : E →L[ℝ] ℝ) (x v : E) (t : ℝ) :
-    L (x + (t • v : E)) = L x + t * L v := by
-  rw [map_add, map_smul, smul_eq_mul]
+    L (x + coupledScalarAction t v) = L x + t * L v := by
+  simp only [coupledScalarAction, map_add, map_smul, smul_eq_mul]
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S}
@@ -72,9 +73,10 @@ theorem coupled_stateKappa_add (hS : IsPhysicalSpaces D T S)
 
 theorem coupled_stateKappa_smul (hS : IsPhysicalSpaces D T S)
     (a : ℝ) (x : AnnularState S) (m : ℕ) :
-    stateKappa S (@SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul a x) m = a * stateKappa S x m := by
-  simpa only [coupled_stateKappaEvalCLM_apply, smul_eq_mul] using
-    (coupled_stateKappaEvalCLM hS m).map_smul a x
+    stateKappa S (coupledScalarAction (E := AnnularState S) a x) m = a * stateKappa S x m := by
+  simpa only [ContinuousLinearMap.coe_coe, coupled_stateKappaEvalCLM_apply,
+    coupledScalarAction_real] using
+    coupledScalarAction_map (coupled_stateKappaEvalCLM hS m).toLinearMap a x
 
 /-- At a fixed radial point, at most one control is nonzero. -/
 theorem coupled_controlActive_subsingleton (hC : controlGeometryConditions D S C) (r : ℝ) :
@@ -151,17 +153,17 @@ theorem coupled_logProfilePointwiseCLM_apply (hS : IsPhysicalSpaces D T S)
 
 theorem coupled_stateLogProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    coupled_stateLogProfile D S C (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r =
+    coupled_stateLogProfile D S C (x + coupledScalarAction (E := AnnularState S) t v) r =
       coupled_stateLogProfile D S C x r + t * coupled_stateLogProfile D S C v r := by
   simpa only [coupled_logProfileEvalCLM_apply] using
     coupled_clm_affine (coupled_logProfileEvalCLM hS hC r) x v t
 
 theorem coupled_stateProfile_affine (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (t r : ℝ) :
-    stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r =
+    stateProfile D S C (x + coupledScalarAction (E := AnnularState S) t v) r =
       stateProfile D S C x r * Real.exp (t * coupled_stateLogProfile D S C v r) := by
   change D.w r * Real.exp (coupled_stateLogProfile D S C
-      (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r) =
+      (x + coupledScalarAction (E := AnnularState S) t v) r) =
     (D.w r * Real.exp (coupled_stateLogProfile D S C x r)) *
       Real.exp (t * coupled_stateLogProfile D S C v r)
   rw [coupled_stateLogProfile_affine hS hC, Real.exp_add, mul_assoc]
@@ -170,7 +172,7 @@ theorem coupled_stateProfile_affine (hS : IsPhysicalSpaces D T S)
 including every circle direction and every state outside the sector. -/
 theorem coupled_stateProfile_hasDerivAt (hS : IsPhysicalSpaces D T S)
     (hC : controlGeometryConditions D S C) (x v : AnnularState S) (r : ℝ) :
-    HasDerivAt (fun t : ℝ => stateProfile D S C (x + @SMul.smul ℝ (AnnularState S) (inferInstance : Module ℝ (AnnularState S)).toSMul t v) r)
+    HasDerivAt (fun t : ℝ => stateProfile D S C (x + coupledScalarAction (E := AnnularState S) t v) r)
       (stateProfile D S C x r * coupled_stateLogProfile D S C v r) 0 := by
   have h : HasDerivAt
       (fun t : ℝ => Real.exp (t * coupled_stateLogProfile D S C v r))

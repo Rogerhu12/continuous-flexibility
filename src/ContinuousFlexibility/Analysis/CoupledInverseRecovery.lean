@@ -18,6 +18,9 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 def coupledSourceLinear (S : PhysicalSpacesData) : ResidualSpace S →ₗ[ℝ] S.Source :=
@@ -27,13 +30,10 @@ def coupledCircleLinear (S : PhysicalSpacesData) : ResidualSpace S →ₗ[ℝ] C
   (evenCircleSubmodule S).subtype.comp (LinearMap.snd ℝ S.Source (EvenCircle S))
 
 theorem coupledSourceLinear_apply (S : PhysicalSpacesData) (y : ResidualSpace S) :
-    coupledSourceLinear S y = y.1 := by
-  rw [coupledSourceLinear, LinearMap.fst_apply]
+    coupledSourceLinear S y = y.1 := rfl
 
 theorem coupledCircleLinear_apply (S : PhysicalSpacesData) (y : ResidualSpace S) :
-    coupledCircleLinear S y = y.2.val := by
-  rw [coupledCircleLinear, LinearMap.comp_apply, LinearMap.snd_apply,
-    Submodule.subtype_apply]
+    coupledCircleLinear S y = y.2.val := rfl
 
 /-- The original control solution, retaining its linear dependence on the
 complete scalar/circle source. -/
@@ -52,7 +52,7 @@ theorem coupledControlSolutionLinear_apply
     coupledControlSolutionLinear B G N z y = controlSolution S B G N z y := by
   simp only [coupledControlSolutionLinear, controlSolution, LinearMap.comp_apply,
     LinearMap.sub_apply, LinearMap.smul_apply, LinearMap.fst_apply,
-    coupledCircleLinear_apply, coupledSourceLinear_apply]
+    coupledCircleLinear_apply, coupledSourceLinear_apply, ContinuousLinearMap.coe_coe]
 
 def coupledRecoveredHeightLinear (B : ControlColumnData S) (G : ScalarInverseData S)
     (N : ControlInverseData S) (z : AnnularState S × ℝ) :
@@ -67,7 +67,19 @@ theorem coupledRecoveredHeightLinear_apply
     coupledRecoveredHeightLinear B G N z y =
       G.G z y.1 - G.G z (B.heightColumn z (controlSolution S B G N z y)) := by
   simp only [coupledRecoveredHeightLinear, LinearMap.sub_apply, LinearMap.comp_apply,
-    coupledSourceLinear_apply, coupledControlSolutionLinear_apply]
+    coupledSourceLinear_apply, coupledControlSolutionLinear_apply, ContinuousLinearMap.coe_coe]
+
+theorem coupledRecoveredHeightLinear_fst
+    (B : ControlColumnData S) (G : ScalarInverseData S) (N : ControlInverseData S)
+    (z : AnnularState S × ℝ) (y : ResidualSpace S) :
+    (coupledRecoveredHeightLinear B G N z y).1 = (G.G z y.1).1 -
+      controlHeightResponse S B G z (controlSolution S B G N z y) := by
+  calc
+    _ = (G.G z y.1 - G.G z (B.heightColumn z (controlSolution S B G N z y))).1 :=
+      congrArg Prod.fst (coupledRecoveredHeightLinear_apply B G N z y)
+    _ = (G.G z y.1).1 - (G.G z (B.heightColumn z (controlSolution S B G N z y))).1 := rfl
+    _ = _ := congrArg ((G.G z y.1).1 - ·)
+      (controlHeightResponse_apply B G z (controlSolution S B G N z y)).symm
 
 def coupledRecoveryInputLinear (B : ControlColumnData S) (G : ScalarInverseData S)
     (N : ControlInverseData S) (z : AnnularState S × ℝ) :
@@ -81,7 +93,8 @@ theorem coupledRecoveryInputLinear_apply
     coupledRecoveryInputLinear B G N z y =
       y.2.val - z.2 • B.heightRow z (coupledRecoveredHeightLinear B G N z y).1 := by
   simp only [coupledRecoveryInputLinear, LinearMap.sub_apply, LinearMap.smul_apply,
-    LinearMap.comp_apply, LinearMap.fst_apply, coupledCircleLinear_apply]
+    LinearMap.comp_apply, LinearMap.fst_apply, coupledCircleLinear_apply,
+    ContinuousLinearMap.coe_coe]
 
 def coupledRecoveredKappaLinear
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -98,8 +111,7 @@ theorem coupledRecoveredKappaLinear_apply
     (y : ResidualSpace S) :
     coupledRecoveredKappaLinear hS B G N z hlo y =
       coupledInverseControlLift hS (B.diagonal z) hlo
-        (coupledRecoveryInputLinear B G N z y) := by
-  rw [coupledRecoveredKappaLinear, LinearMap.comp_apply]
+        (coupledRecoveryInputLinear B G N z y) := rfl
 
 def coupledRecoveryRemainderLinear
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -117,8 +129,8 @@ theorem coupledRecoveryRemainderLinear_apply
     coupledRecoveryRemainderLinear hS B G N z hlo y =
       y.2.val - z.2 • B.heightRow z (coupledRecoveredHeightLinear B G N z y).1 -
         B.circleColumn z (coupledRecoveredKappaLinear hS B G N z hlo y) := by
-  rw [coupledRecoveryRemainderLinear, LinearMap.sub_apply, LinearMap.comp_apply,
-    coupledRecoveryInputLinear_apply]
+  simp only [coupledRecoveryRemainderLinear, LinearMap.sub_apply, LinearMap.comp_apply,
+    coupledRecoveryInputLinear_apply, ContinuousLinearMap.coe_coe]
 
 /-- The four columns are assembled by products of linear maps, so their
 linearity is part of this definition rather than a subsequent assumption. -/
@@ -144,8 +156,8 @@ theorem coupledRecoveryLinear_apply
         ((coupledRecoveredHeightLinear B G N z y).2,
           (coupledRecoveredKappaLinear hS B G N z hlo y,
             R.chartIncrement z (R.inverse (coupledRecoveryRemainderLinear hS B G N z hlo y))))) := by
-  simp only [coupledRecoveryLinear, LinearMap.prod_apply, LinearMap.comp_apply,
-    LinearMap.fst_apply, LinearMap.snd_apply]
+  simp only [coupledRecoveryLinear, LinearMap.prod_apply, Function.prod_apply,
+    LinearMap.comp_apply, LinearMap.fst_apply, LinearMap.snd_apply]
 
 /-- The control is recovered from its mean equation, rather than from an
 unjustified extension of every base-space vector to the smooth circle space. -/
@@ -162,10 +174,13 @@ theorem coupledRecoveredKappaLinear_restriction
     B.restriction (coupledRecoveredKappaLinear hS B G N z hlo y) =
       controlSolution S B G N z y := by
   have hη : (coupledRecoveredHeightLinear B G N z y).1 =
-      (G.G z y.1).1 - controlHeightResponse S B G z (controlSolution S B G N z y) := by
-    rw [coupledRecoveredHeightLinear_apply, Prod.fst_sub, controlHeightResponse_apply]
-  have hmean := controlSolution_mean_equation B G N z hN (fun u => (hJ u).2) y
-  rw [← hη] at hmean
+      (G.G z y.1).1 - controlHeightResponse S B G z (controlSolution S B G N z y) :=
+    coupledRecoveredHeightLinear_fst B G N z y
+  have hmean : B.J z (controlSolution S B G N z y) + z.2 •
+      controlMeanRow S B z (coupledRecoveredHeightLinear B G N z y).1 = B.restriction y.2.val :=
+    (congrArg (fun η => B.J z (controlSolution S B G N z y) +
+      z.2 • controlMeanRow S B z η) hη).trans
+        (controlSolution_mean_equation B G N z hN (fun u => (hJ u).2) y)
   have hinput : B.restriction (coupledRecoveryInputLinear B G N z y) =
       B.J z (controlSolution S B G N z y) := by
     rw [coupledRecoveryInputLinear_apply, map_sub, map_smul, ← controlMeanRow_apply,
@@ -207,8 +222,10 @@ theorem coupledRecoveryLinear_equations
     (y : ResidualSpace S) :
     CoupledRecoveryEquations S R B G N z y
       (coupledRecoveryLinear (hS.2.1 (3 / 4 : ℝ)) R B G N z hlo y) := by
-  have h8' := h8
-  obtain ⟨_, _, _, _, _, hrestriction, _, _, _, _, _, hcolumn, hdiag, _, hJ, _, _⟩ := h8'
+  have hrestriction := h8.2.2.2.2.2.1
+  have hcolumn := h8.2.2.2.2.2.2.2.2.2.2.2.1
+  have hdiag := h8.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hJ := h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
   let hM := hS.2.1 (3 / 4 : ℝ)
   let η := (coupledRecoveredHeightLinear B G N z y).1
   let κ := coupledRecoveredKappaLinear hM B G N z hlo y
@@ -217,9 +234,8 @@ theorem coupledRecoveryLinear_equations
     coupledRecoveredKappaLinear_restriction hM B G N z hlo hrestriction
       (hdiag z hz hs) (hJ z hz hs) hN y
   have hη : η = (G.G z y.1).1 -
-      controlHeightResponse S B G z (controlSolution S B G N z y) := by
-    rw [show η = (coupledRecoveredHeightLinear B G N z y).1 from rfl,
-      coupledRecoveredHeightLinear_apply, Prod.fst_sub, controlHeightResponse_apply]
+      controlHeightResponse S B G z (controlSolution S B G N z y) :=
+    coupledRecoveredHeightLinear_fst B G N z y
   have hmean : B.restriction f = 0 :=
     controlSolution_restriction_remainder B G N z hN (fun u => (hJ z hz hs u).2)
       (hcolumn z hz hs) y η κ hη hκ
@@ -233,10 +249,11 @@ theorem coupledRecoveryLinear_equations
   have hκconstant : ∀ m θ φ, (S.circle (3 / 4 : ℝ)).decode κ m θ =
       (S.circle (3 / 4 : ℝ)).decode κ m φ := by
     intro m θ φ
-    rw [show κ = coupledRecoveredKappaLinear hM B G N z hlo y from rfl,
-      coupledRecoveredKappaLinear_apply]
-    exact coupledInverseControlLift_constant hM (B.diagonal z) hlo
-      (coupledRecoveryInputLinear B G N z y) m θ φ
+    have he := coupledRecoveredKappaLinear_apply hM B G N z hlo y
+    exact (congrArg (fun q => (S.circle (3 / 4 : ℝ)).decode q m θ) he).trans
+      ((coupledInverseControlLift_constant hM (B.diagonal z) hlo
+        (coupledRecoveryInputLinear B G N z y) m θ φ).trans
+          (congrArg (fun q => (S.circle (3 / 4 : ℝ)).decode q m φ) he).symm)
   rw [CoupledRecoveryEquations, coupledRecoveryLinear_apply,
     coupledRecoveryRemainderLinear_apply]
   refine ⟨⟨hκconstant, hchart⟩, hκ, ?_, hf, rfl, ?_⟩
@@ -279,7 +296,7 @@ theorem coupledRecoveredV_eq (hS : IsPhysicalSpaces D T S)
     coupledRecoveredV hS h8 z =
       coupledRecoveryLinear (hS.2.1 (3 / 4 : ℝ)) R B G (coupledControlInverse S B G) z
         (coupledRecovery_diagonal_lower h8 hz.1 hz.2.1) := by
-  rw [coupledRecoveredV, dif_pos hz]
+  simp only [coupledRecoveredV, dif_pos hz]
 
 theorem coupledRecoveredV_equations
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -290,11 +307,13 @@ theorem coupledRecoveredV_equations
     (y : ResidualSpace S) :
     CoupledRecoveryEquations S R B G (coupledControlInverse S B G) z y
       (coupledRecoveredV hS h8 z y) := by
-  rw [coupledRecoveredV_eq hS h8 hz]
-  exact coupledRecoveryLinear_equations hT hS h1 h2 h8
+  have hlin := coupledRecoveryLinear_equations hT hS h1 h2 h8
     (coupledControlInverse S B G) hz.1 hz.2.1
     (coupledRecovery_diagonal_lower h8 hz.1 hz.2.1)
     (coupledControlInverse_right B G z hz.2.2) y
+  have he := congrArg (fun L : ResidualSpace S →ₗ[ℝ] AnnularState S => L y)
+    (coupledRecoveredV_eq hS h8 hz)
+  exact he.symm ▸ hlin
 
 theorem coupledRecoveredV_sector
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -306,7 +325,7 @@ theorem coupledRecoveredV_sector
   classical
   by_cases hz : CoupledRecoveryValid S C B G base ε z
   · exact (coupledRecoveredV_equations hT hS h1 h2 h8 hz y).1
-  · rw [coupledRecoveredV, dif_neg hz, LinearMap.zero_apply]
+  · simp only [coupledRecoveredV, dif_neg hz, LinearMap.zero_apply]
     exact (stateSectorSubmodule S).zero_mem
 
 /-- Both fields are the very same linear recovery, with the second one
@@ -328,8 +347,7 @@ theorem coupledRecoveredInverseData_sectorV
     (h8 : N08Properties D T S C R G P B base loss ε)
     (z : StateDirections S × ℝ) (y : ResidualSpace S) :
     ((coupledRecoveredInverseData hT hS h1 h2 h8).sectorV z y).val =
-      (coupledRecoveredInverseData hT hS h1 h2 h8).V (liftSectorParameter S C z) y := by
-  simp only [coupledRecoveredInverseData, LinearMap.codRestrict_apply]
+      (coupledRecoveredInverseData hT hS h1 h2 h8).V (liftSectorParameter S C z) y := rfl
 
 /-- On any smaller parameter strip satisfying the actual Neumann bound,
 the complete recovery clause of N09 holds for this candidate. -/
