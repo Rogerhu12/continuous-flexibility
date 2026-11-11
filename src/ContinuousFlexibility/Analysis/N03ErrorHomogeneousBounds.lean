@@ -52,6 +52,12 @@ private theorem heterogeneousBilinear_tame_bounds_at_zero
   intro z hz hlow e f
   exact hb z hz (by simpa only [sub_zero] using hlow) e f
 
+private theorem seminorm_pair_zero_lt
+    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    (p : Seminorm ℝ E) {ε : ℝ} (hε : 0 < ε) :
+    p 0 < ε ∧ |(0 : ℝ)| < ε := by
+  simpa only [map_zero, abs_zero] using And.intro hε hε
+
 /-- The N03 smooth tame error has one common low neighborhood and loss,
 with one high factor among the sector parameter, residual and test. -/
 theorem n03Error_homogeneous_tame_bound
@@ -78,7 +84,7 @@ theorem n03Error_homogeneous_tame_bound
         L.error (liftSectorParameter S C z.1.1) z.1.2 z.2) := hN03.2.2.2.2.2.2.2
   have hz₀ : (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε := by
     change sectorGrading S base (0 : StateDirections S) < ε ∧ |(0 : ℝ)| < ε
-    simpa only [map_zero, abs_zero] using And.intro hε hε
+    exact seminorm_pair_zero_lt (sectorGrading S base) hε
   exact heterogeneousBilinear_tame_bounds_at_zero
     (Z := StateDirections S × ℝ) (E := CircleSpace S) (F := HeightPair S) (G := S.Source)
     (a := pairGrading (sectorGrading S) realGrading)
