@@ -16,7 +16,7 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance smoothDirectionsLocalDirectionsRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
@@ -25,8 +25,10 @@ variable {U : Set E} {f : E → ℝ}
 theorem SmoothDirections.continuousAt_jet_eval
     (J : SmoothDirections U f) (n : ℕ) (x : E) (hx : x ∈ U) (v : Fin n → E) :
     ContinuousAt (fun y => J.D n y v) x := by
-  have hc := (J.continuous n).continuousAt
-    ((J.open_domain.prod isOpen_univ).mem_nhds ⟨hx, mem_univ v⟩)
+  have hc : ContinuousAt (fun p : E × (Fin n → E) => J.D n p.1 p.2) (x, v) :=
+    (J.continuous n).continuousAt
+      ((J.open_domain.prod isOpen_univ).mem_nhds
+        (show (x, v) ∈ U ×ˢ univ from ⟨hx, mem_univ v⟩))
   simpa only [Function.comp_def] using
     hc.comp (continuousAt_id.prodMk continuousAt_const)
 

@@ -20,8 +20,8 @@ namespace ContinuousFlexibility.Statements
 
 -- Use the canonical product action directly, avoiding a costly search
 -- through the abstract models that make up the state space.
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance n01FlowParameterVariationStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01FlowParameterVariationRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis

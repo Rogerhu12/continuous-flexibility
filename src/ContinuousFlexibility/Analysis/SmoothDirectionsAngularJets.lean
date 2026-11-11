@@ -20,7 +20,7 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter MeasureTheory ContinuousFlexibility.Statements
 open scoped Topology BigOperators ContDiff
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance smoothDirectionsAngularJetsRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]

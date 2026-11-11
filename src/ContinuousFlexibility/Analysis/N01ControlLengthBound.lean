@@ -15,7 +15,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance n01ControlLengthBoundRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set MeasureTheory
 open ContinuousFlexibility.Analysis

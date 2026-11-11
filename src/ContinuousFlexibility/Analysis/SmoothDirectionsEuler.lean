@@ -16,7 +16,7 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance smoothDirectionsEulerRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 variable {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
   [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]

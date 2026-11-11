@@ -18,7 +18,13 @@ namespace ContinuousFlexibility.Statements
 open Set Filter ContinuousFlexibility.Analysis
 open scoped Topology ENNReal BigOperators
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance circleTaylorDifferentiationRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+
+private theorem abs_weighted_slope_error (w h a b d e : ℝ) (hd : d = e) :
+    |w * (h⁻¹ * (a - b) - d)| = |h⁻¹ * (w * a - w * b) - w * e| := by
+  rw [hd]
+  congr 1
+  ring
 
 theorem circle_hasProjectiveCurveDerivAt_of_weighted_second_jets
     {T : MaterialData} {γ : ℝ} {S : CircleModelData}
@@ -85,10 +91,8 @@ theorem circle_hasProjectiveCurveDerivAt_of_weighted_second_jets
     w * |L (h⁻¹ • (c h - c 0) - dc)| =
         |w * (h⁻¹ * (L (c h) - L (c 0)) - L dc)| := by
       simp only [map_sub, map_smul, RingHom.id_apply, smul_eq_mul, abs_mul, abs_of_nonneg hw]
-    _ = |h⁻¹ * (w * L (c h) - w * L (c 0)) - w * J₁ 0 m b θ| := by
-      rw [hLdc]
-      congr 1
-      ring
+    _ = |h⁻¹ * (w * L (c h) - w * L (c 0)) - w * J₁ 0 m b θ| :=
+      abs_weighted_slope_error w h (L (c h)) (L (c 0)) (L dc) (J₁ 0 m b θ) hLdc
     _ ≤ (B * Real.sqrt (E m).toReal) * |h| := hTaylor
     _ = (B * |h|) * Real.sqrt (E m).toReal := by ring
 

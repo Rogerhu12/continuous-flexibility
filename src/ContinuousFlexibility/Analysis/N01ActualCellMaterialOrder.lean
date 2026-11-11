@@ -15,8 +15,8 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance n01ActualCellMaterialOrderStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01ActualCellMaterialOrderRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set
 

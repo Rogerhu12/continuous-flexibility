@@ -76,9 +76,9 @@ theorem norm_iteratedFDeriv_add_polynomial_bound
   rw [fun_iteratedFDeriv_add_apply
     (((hf i).contDiffAt ((hU i).mem_nhds hx)).of_le (by simp))
     (((hg i).contDiffAt ((hU i).mem_nhds hx)).of_le (by simp))]
-  have ha' := mul_le_mul_of_nonneg_left
+  have ha' : A * W i ^ P ≤ A * W i ^ (P + Q) := mul_le_mul_of_nonneg_left
     (Real.rpow_le_rpow_of_exponent_le (hW i) (le_add_of_nonneg_right hQ)) hA
-  have hb' := mul_le_mul_of_nonneg_left
+  have hb' : B * W i ^ Q ≤ B * W i ^ (P + Q) := mul_le_mul_of_nonneg_left
     (Real.rpow_le_rpow_of_exponent_le (hW i) (le_add_of_nonneg_left hP)) hB
   exact (norm_add_le _ _).trans ((add_le_add (hb i x hx) (hc i x hx)).trans
     ((add_le_add ha' hb').trans_eq (add_mul _ _ _).symm))
@@ -120,8 +120,9 @@ theorem norm_iteratedFDeriv_coordinate_graph_polynomial_bound
     ContinuousMultilinearMap.opNorm_prod]
   have hf : ‖iteratedFDeriv ℝ n (fun y : ℝ × ℝ => y.1) x‖ ≤ ‖L‖ * W i ^ P := by
     exact (norm_iteratedFDeriv_linear_of_pos L n hn x).trans
-      (by simpa only [mul_one] using mul_le_mul_of_nonneg_left
-        (Real.one_le_rpow (hW i) hP) (norm_nonneg L))
+      (by
+        simpa only [mul_one] using
+          (mul_le_mul_of_nonneg_left (Real.one_le_rpow (hW i) hP) (norm_nonneg L)))
   have hsum : ‖L‖ * W i ^ P + A * W i ^ P = (‖L‖ + A) * W i ^ P :=
     (add_mul _ _ _).symm
   have hp₁ : 0 ≤ ‖L‖ * W i ^ P := mul_nonneg (norm_nonneg _)

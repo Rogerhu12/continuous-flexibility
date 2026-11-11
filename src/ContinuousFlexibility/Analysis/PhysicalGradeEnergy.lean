@@ -75,31 +75,40 @@ theorem sobolevModel_weightedJet_energy_le_grading_sq
   (weightedPhysicalJet_energy_le_level (H.decode u) horder).trans
     (sobolevModel_physicalLevelEnergy_le_grading_sq hH u s)
 
-set_option backward.isDefEq.respectTransparency true in
+theorem physicalNorm_le_sqrt_levelEnergy_sum
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {f : PolarPoint → ℝ}
+    (hf : HeightMember D T γ f) {i s : ℕ} (hi : i ≤ s) :
+    physicalNorm T γ i f ≤
+      Real.sqrt (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f).toReal := by
+  classical
+  let k : Fin (s + 1) := ⟨i, Nat.lt_succ_of_le hi⟩
+  have hsum : (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f) < ⊤ := by
+    apply ENNReal.sum_lt_top.mpr
+    intro j hj
+    exact physicalLevelEnergy_lt_top hf j.val
+  have hle : physicalLevelEnergy T γ i f ≤
+      ∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val f :=
+    Finset.single_le_sum
+      (f := fun j : Fin (s + 1) => physicalLevelEnergy T γ j.val f)
+      (fun _ _ => by positivity) (Finset.mem_univ k)
+  change Real.sqrt (physicalLevelEnergy T γ i f).toReal ≤ _
+  exact Real.sqrt_le_sqrt (ENNReal.toReal_mono hsum.ne hle)
+
+theorem sobolevModel_grading_le_iff_physicalNorm
+    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
+    (hH : IsSobolevModel D T γ H) (u : H.Space) (s : ℕ) {C : ℝ} (hC : 0 ≤ C) :
+    H.grading s u ≤ C ↔ ∀ i ≤ s, physicalNorm T γ i (H.decode u) ≤ C := by
+  obtain ⟨_, _, _, _, _, _, _, hnorm⟩ := hH
+  simpa only [SobolevModelData.grading, hnorm] using
+    gradedSeminorm_le_iff (fun i => H.level i) H.bond s u hC
+
 theorem sobolevModel_grading_le_sqrt_energy_sum
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
     (hH : IsSobolevModel D T γ H) (u : H.Space) (s : ℕ) :
     H.grading s u ≤
       Real.sqrt (∑ i : Fin (s + 1), physicalLevelEnergy T γ i.val (H.decode u)).toReal := by
-  classical
-  obtain ⟨i, hi, hgrade⟩ := gradedSeminorm_exists_norm (fun j => H.level j) H.bond s u
-  let k : Fin (s + 1) := ⟨i, Nat.lt_succ_of_le hi⟩
-  have hsum : (∑ i : Fin (s + 1), physicalLevelEnergy T γ i.val (H.decode u)) < ⊤ := by
-    apply ENNReal.sum_lt_top.mpr
-    intro j hj
-    exact physicalLevelEnergy_lt_top (hH.2.2.2.1 u) j.val
-  have hle : physicalLevelEnergy T γ i (H.decode u) ≤
-      ∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val (H.decode u) :=
-    Finset.single_le_sum
-      (f := fun j : Fin (s + 1) => physicalLevelEnergy T γ j.val (H.decode u))
-      (fun _ _ => by positivity) (Finset.mem_univ k)
-  have hlevel : physicalNorm T γ i (H.decode u) ≤
-      Real.sqrt (∑ j : Fin (s + 1), physicalLevelEnergy T γ j.val (H.decode u)).toReal := by
-    change Real.sqrt (physicalLevelEnergy T γ i (H.decode u)).toReal ≤ _
-    exact Real.sqrt_le_sqrt (ENNReal.toReal_mono hsum.ne hle)
-  calc
-    H.grading s u = ‖u.val i‖ := hgrade
-    _ = physicalNorm T γ i (H.decode u) := hH.2.2.2.2.2.2.2 u i
-    _ ≤ _ := hlevel
+  apply (sobolevModel_grading_le_iff_physicalNorm hH u s (Real.sqrt_nonneg _)).mpr
+  intro i hi
+  exact physicalNorm_le_sqrt_levelEnergy_sum (hH.2.2.2.1 u) hi
 
 end ContinuousFlexibility.Statements

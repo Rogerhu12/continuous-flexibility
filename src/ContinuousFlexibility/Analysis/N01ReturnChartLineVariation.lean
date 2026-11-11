@@ -17,7 +17,7 @@ namespace ContinuousFlexibility.Statements
 
 -- Use the canonical product action directly, avoiding a costly search
 -- through the abstract models that make up the state space.
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01ReturnChartLineVariationStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set Filter
 open scoped Topology ContDiff

@@ -31,7 +31,7 @@ theorem iteratedDeriv_intervalIntegral_smooth
   | zero => simp only [iteratedDeriv_zero]
   | succ n ih =>
     have hd (t : ℝ) : Differentiable ℝ (iteratedDeriv n (H t)) :=
-      (hs t).differentiable_iteratedDeriv n (by simp)
+      ContDiff.differentiable_iteratedDeriv' n ((hs t).of_le (by simp))
     have hdc : Continuous (fun p : PolarPoint => deriv (iteratedDeriv n (H p.1)) p.2) := by
       simpa only [iteratedDeriv_succ] using hc (n + 1)
     have hder := angular_parameter_integral_hasDerivAt (hc n) hd hdc a b θ

@@ -14,7 +14,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01FlowHeightResponseStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set Filter MeasureTheory
 open ContinuousFlexibility.Analysis

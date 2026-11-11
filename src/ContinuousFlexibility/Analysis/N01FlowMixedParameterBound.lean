@@ -14,8 +14,8 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance n01FlowMixedParameterBoundStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01FlowMixedParameterBoundRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 open Set Filter
 open ContinuousFlexibility.Analysis
@@ -27,7 +27,7 @@ theorem stateMixedExternalParameterLine (S : PhysicalSpacesData)
       q • ((0 : AnnularState S), (1 : ℝ)) = (x + t • η, q) := by
   change ((x + t • η) + q • (0 : AnnularState S),
     ((0 : ℝ) + t • (0 : ℝ)) + q • (1 : ℝ)) = (x + t • η, q)
-  simp only [smul_zero, add_zero, smul_eq_mul, mul_one, zero_add]
+  simp only [smul_zero, add_zero, smul_eq_mul, mul_one, mul_zero, zero_add]
 
 theorem oneHighVariationWeight_finTwo_zero
     {E : Type*} [AddCommGroup E] [Module ℝ E]
@@ -37,9 +37,14 @@ theorem oneHighVariationWeight_finTwo_zero
   classical
   have he0 : (Finset.univ : Finset (Fin 2)).erase 0 = {1} := by decide
   have he1 : (Finset.univ : Finset (Fin 2)).erase 1 = {0} := by decide
-  simp only [oneHighVariationWeight, Fin.prod_univ_two, Fin.sum_univ_two,
-    he0, he1, Finset.prod_singleton, Fin.cons_zero, Fin.cons_one,
-    (p high).map_zero', add_zero, one_mul]
+  unfold oneHighVariationWeight
+  change (1 + p high (0 : E)) *
+      (∏ i : Fin 2, p base (Fin.cons v (fun _ : Fin 1 => w) i)) +
+      (∑ i : Fin 2, p high (Fin.cons v (fun _ : Fin 1 => w) i) *
+        ∏ j ∈ Finset.univ.erase i, p base (Fin.cons v (fun _ : Fin 1 => w) j)) = _
+  rw [(p high).map_zero', add_zero, one_mul]
+  rw [Fin.prod_univ_two, Fin.sum_univ_two]
+  simp only [he0, he1, Finset.prod_singleton, Fin.cons_zero, Fin.cons_one]
 
 theorem oneHighVariationWeight_state_external_zero
     (S : PhysicalSpacesData) (base high : ℕ) (η : AnnularState S) :
@@ -60,11 +65,18 @@ theorem oneHighVariationWeight_state_external_zero
     have hr : realGrading n (1 : ℝ) = 1 := by change |(1 : ℝ)| = 1; norm_num
     exact (congrArg₂ (fun a b : ℝ => a + b) (stateGrading S n).map_zero' hr).trans
       (zero_add 1)
-  apply (oneHighVariationWeight_finTwo_zero (pairGrading (stateGrading S) realGrading)
-    base high (η, (0 : ℝ)) ((0 : AnnularState S), (1 : ℝ))).trans
-  rw [hstate, hstate, hparameter, hparameter]
-  simp only [mul_one, one_mul]
-  ring
+  have he := oneHighVariationWeight_finTwo_zero (pairGrading (stateGrading S) realGrading)
+    base high (η, (0 : ℝ)) ((0 : AnnularState S), (1 : ℝ))
+  apply he.trans
+  calc
+    _ = stateGrading S base η * 1 +
+        (stateGrading S high η * 1 + 1 * stateGrading S base η) :=
+      congrArg₂ (fun a b : ℝ => a + b)
+        (congrArg₂ (fun a b : ℝ => a * b) (hstate base) (hparameter base))
+        (congrArg₂ (fun a b : ℝ => a + b)
+          (congrArg₂ (fun a b : ℝ => a * b) (hstate high) (hparameter base))
+          (congrArg₂ (fun a b : ℝ => a * b) (hparameter high) (hstate base)))
+    _ = _ := by ring
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -108,7 +120,6 @@ theorem N01Properties.minusFlow_state_q_mixed_derivative_bound
           (2 * stateGrading S base η + stateGrading S loss η) := by
     intro η m r θ hr
     let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
-    let J := htower.choose
     have hz : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
       constructor
       · have hz0 : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
@@ -117,22 +128,21 @@ theorem N01Properties.minusFlow_state_q_mixed_derivative_bound
         exact hz0.trans_lt hN.2.1
       · simpa only [abs_zero] using hN.2.1
     have hd := (ordinaryFlow_state_q_mixed_hasDerivAt_of_tower
-      J C.referenceState η hz).deriv
+      htower.choose C.referenceState η hz).deriv
     have hbound := htower.choose_spec (C.referenceState, 0) hz
       (Fin.cons (η, (0 : ℝ))
         (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))))
-    have hb' : |J.D 2 (C.referenceState, 0)
-        (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))))| ≤
-        B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
-          oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-            base loss ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
-              (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) := by
-      simpa only [pow_zero, one_mul, zero_add] using hbound
+    have hb' := le_of_zero_power_mul_le hbound
     have hw : oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base loss ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
+        base (0 + loss) ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
           (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) =
         2 * stateGrading S base η + stateGrading S loss η := by
-      simpa only [sub_self] using oneHighVariationWeight_state_external_zero S base loss η
+      exact (congrArg₂ (fun (n : ℕ) (x : AnnularState S × ℝ) =>
+        oneHighVariationWeight (pairGrading (stateGrading S) realGrading) base n x
+          (Fin.cons (η, (0 : ℝ))
+            (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))))
+        (Nat.zero_add loss) (sub_self (C.referenceState, (0 : ℝ)))).trans
+          (oneHighVariationWeight_state_external_zero S base loss η)
     exact (congrArg abs hd).trans_le (hb'.trans_eq (congrArg
       (fun t : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B * t) hw))

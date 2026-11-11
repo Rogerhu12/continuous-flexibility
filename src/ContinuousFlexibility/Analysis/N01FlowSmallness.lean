@@ -19,7 +19,7 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01FlowSmallnessStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set Filter
 open ContinuousFlexibility.Analysis
@@ -100,9 +100,10 @@ theorem N01Properties.minusFlow_reference_eq
     simp [stateProfile, stateKappa, href.2.2.1, href.2.2.2.1, angularMean]
   have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
-    · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      rw [sub_self, (stateGrading S base).map_zero']
-      exact hN.2.1
+    · have hzero : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
+        (congrArg (fun v : AnnularState S => stateGrading S base v)
+          (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
+      exact hzero.trans_lt hN.2.1
     · simpa only [abs_zero] using hN.2.1
   simpa only [hprofile] using hN.minusFlow_zero_eq_opticalTravel hS hT hz₀ m θ hr
 
@@ -137,9 +138,10 @@ theorem N01Properties.minusFlow_near_reference_weighted
   have hzold := stateNeighborhood_mono S C hbase hηε hz
   have hz₀ : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
     constructor
-    · change stateGrading S base (C.referenceState - C.referenceState) < ε
-      rw [sub_self, (stateGrading S base).map_zero']
-      exact hN.2.1
+    · have hzero : stateGrading S base (C.referenceState - C.referenceState) = 0 :=
+        (congrArg (fun v : AnnularState S => stateGrading S base v)
+          (sub_self C.referenceState)).trans (stateGrading S base).map_zero'
+      exact hzero.trans_lt hN.2.1
     · simpa only [abs_zero] using hN.2.1
   have hC : controlGeometryConditions D S C := hN.2.2.2.1
   have hflow : ordinaryFlowConditions D S C (stateNeighborhood S C base ε) :=

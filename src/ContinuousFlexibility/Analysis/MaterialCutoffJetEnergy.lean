@@ -14,7 +14,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set MeasureTheory
-open scoped ENNReal BigOperators
+open scoped ENNReal BigOperators ContDiff
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -36,8 +36,17 @@ theorem weightedPhysicalJet_cutoff_sq_le
       |(a.choose i.val : ℝ) * iteratedDeriv i.val χ p.1 *
         weightedPhysicalJet T γ (a - i.val) b c f p| ≤
       K * |weightedPhysicalJet T γ (a - i.val) b (c + 1) f p| := by
-    rw [abs_mul, weightedPhysicalJet_succ_material_order, abs_mul, abs_of_nonneg hM]
-    exact (mul_le_mul_of_nonneg_right (hcoeff i) (abs_nonneg _)).trans_eq (by ring)
+    rw [weightedPhysicalJet_succ_material_order]
+    calc
+      _ = |(a.choose i.val : ℝ) * iteratedDeriv i.val χ p.1| *
+          |weightedPhysicalJet T γ (a - i.val) b c f p| := abs_mul _ _
+      _ ≤ (K * T.M (T.radius p.1)) *
+          |weightedPhysicalJet T γ (a - i.val) b c f p| :=
+        mul_le_mul_of_nonneg_right (hcoeff i) (abs_nonneg _)
+      _ = K * |T.M (T.radius p.1) *
+          weightedPhysicalJet T γ (a - i.val) b c f p| := by
+        rw [abs_mul, abs_of_nonneg hM]
+        ring
   have habs : |weightedPhysicalJet T γ a b c (materialCutoffHeight T χ f) p| ≤
       K * ∑ i : Fin (a + 1), |weightedPhysicalJet T γ (a - i.val) b (c + 1) f p| := by
     rw [weightedPhysicalJet_cutoff hT hχ hf, ← Fin.sum_univ_eq_sum_range]
@@ -74,7 +83,7 @@ theorem weightedPhysicalJet_cutoff_energy_le
     (hf : HeightMember D T γ f)
     (hcut : HeightMember D T γ (materialCutoffHeight T χ f))
     (hK : 0 ≤ K) (hA : MeasurableSet A) (a b c : ℕ)
-    (hcoeff : ∀ p, ∀ i : Fin (a + 1),
+    (hcoeff : ∀ p : PolarPoint, ∀ i : Fin (a + 1),
       |(a.choose i.val : ℝ) * iteratedDeriv i.val χ p.1| ≤ K * T.M (T.radius p.1))
     (hzero : ∀ p, p ∉ A → ∀ i : ℕ, i ≤ a → iteratedDeriv i χ p.1 = 0) :
     eLpNorm (weightedPhysicalJet T γ a b c (materialCutoffHeight T χ f))

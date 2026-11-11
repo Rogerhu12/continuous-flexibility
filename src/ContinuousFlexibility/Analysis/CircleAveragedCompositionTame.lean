@@ -110,6 +110,25 @@ theorem circleNorm_averageCompose_le
   rw [Real.sqrt_mul hA] at hs
   exact hs
 
+theorem circleAverageComposeField_grading_bound_of_jets
+    {T : MaterialData} {γ : ℝ} {S : CircleModelData}
+    (hS : IsCircleModel T γ S)
+    (hM : ∀ m, 0 < T.M (T.sample m)) (hH : ∀ m, 0 < T.H (T.sample m))
+    (travel : ℕ → ℝ) (e : ℕ → ℝ → ℝ)
+    (he : ∀ m, ContDiff ℝ ∞ (e m))
+    (n : ℕ) {B : ℝ} (hB : 0 ≤ B)
+    (hb : ∀ m i θ, i ≤ n → |iteratedDeriv i (e m) θ| ≤ B) :
+    ∃ K : ℝ≥0, ∀ u : S.Space,
+      circleNorm T γ n (circleAverageComposeField (S.decode u) travel e) ≤
+        (K : ℝ) * S.grading (n + 1) u := by
+  refine ⟨⟨circleCompositionNormConstant n (1 + B),
+    circleCompositionNormConstant_nonneg n (1 + B)⟩, fun u => ?_⟩
+  have hn := circleNorm_averageCompose_le (hS.2.2.2.1 u) he hM hH travel n hB hb
+  have hg := ((circleGrading_le_iff_circleNorm hS (n + 1) u (apply_nonneg _ _)).mp
+    (le_refl (S.grading (n + 1) u))) (n + 1) le_rfl
+  exact hn.trans (mul_le_mul_of_nonneg_left hg
+    (circleCompositionNormConstant_nonneg n (1 + B)))
+
 section Model
 
 set_option backward.isDefEq.respectTransparency true
@@ -124,17 +143,14 @@ theorem circleAverageComposeField_grading_bound (n : ℕ) :
     ∃ K : ℝ≥0, ∀ u : S.Space,
       circleNorm T γ n (circleAverageComposeField (S.decode u) travel (S.decode e)) ≤
         (K : ℝ) * S.grading (n + 1) u := by
-  obtain ⟨B, hB, hb⟩ := circleModel_uniform_jets_of_material hS hT hD hγ e n
-  refine ⟨⟨circleCompositionNormConstant n (1 + B),
-    circleCompositionNormConstant_nonneg n (1 + B)⟩, fun u => ?_⟩
-  have hn := circleNorm_averageCompose_le (hS.2.2.2.1 u)
-    (fun m => ((hS.2.2.2.1 e).1 m).1)
+  have hbound : ∃ B : ℝ, 0 ≤ B ∧
+      ∀ m i θ, i ≤ n → |iteratedDeriv i (S.decode e m) θ| ≤ B :=
+    @circleModel_uniform_jets_of_material D T γ S hS hT hD hγ e n
+  obtain ⟨B, hB, hb⟩ := hbound
+  exact circleAverageComposeField_grading_bound_of_jets hS
     (material_circle_sample_weights_pos hT hD).1
-    (material_circle_sample_weights_pos hT hD).2 travel n hB hb
-  have hg := ((circleGrading_le_iff_circleNorm hS (n + 1) u (apply_nonneg _ _)).mp
-    (le_refl (S.grading (n + 1) u))) (n + 1) le_rfl
-  exact hn.trans (mul_le_mul_of_nonneg_left hg
-    (circleCompositionNormConstant_nonneg n (1 + B)))
+    (material_circle_sample_weights_pos hT hD).2 travel (S.decode e)
+    (fun m => ((hS.2.2.2.1 e).1 m).1) n hB hb
 
 theorem circleAverageComposeLinear_isTame :
     IsTameLinear S.grading S.grading

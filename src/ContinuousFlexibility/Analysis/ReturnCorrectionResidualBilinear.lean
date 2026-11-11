@@ -18,7 +18,7 @@ noncomputable section
 namespace ContinuousFlexibility.Analysis
 
 open Set
-open scoped ContDiff
+open scoped ContDiff Classical
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -115,9 +115,11 @@ def heightPairPartialLinear
     HeightPair S →ₗ[ℝ] (PolarPoint → ℝ) :=
   spatialDirectionalLinear univ v (heightPairFieldLinear S)
     (fun η p _ => by
-      simpa only [heightPairFieldLinear_apply, heightPairField] using
-        (physical_height_with_cutoff_contDiff hT hS
-          (by norm_num : (0 : ℝ) < 3 / 4) η.1 η.2).differentiable (by simp) p)
+      have hu : ContDiff ℝ ∞ (heightPairField S η) :=
+        physical_height_with_cutoff_contDiff hT hS
+          (by norm_num : (0 : ℝ) < 3 / 4) η.1 η.2
+      rw [heightPairFieldLinear_apply]
+      exact hu.differentiable (by simp) p)
 
 theorem heightPairPartialLinear_apply
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

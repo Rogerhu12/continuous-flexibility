@@ -23,7 +23,7 @@ open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance n01FlowAngularJointRegularityRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 theorem returnFlow_coprod_toSpan (a b : ℝ) :
     (ContinuousLinearMap.toSpanSingleton ℝ a).coprod

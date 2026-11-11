@@ -31,8 +31,7 @@ theorem opticalSquaredSpeed_deriv_bound_of_jets
     (hr₁ : |r⁻¹| ≤ K) (hr₂ : |(r ^ 2)⁻¹| ≤ K)
     (hinv : |(w r)⁻¹| + |deriv (fun s => (w s)⁻¹) r| ≤ A) :
     |deriv (fun s => -deriv w s / (s * w s)) r| ≤ 3 * K ^ 2 * A := by
-  have hri : HasDerivAt (fun s : ℝ => s⁻¹) (-(r ^ 2)⁻¹) r := by
-    simpa only [neg_div, one_div] using (hasDerivAt_id r).inv hr
+  have hri : HasDerivAt (fun s : ℝ => s⁻¹) (-(r ^ 2)⁻¹) r := hasDerivAt_inv hr
   have hwi : DifferentiableAt ℝ (fun s => (w s)⁻¹) r := hw.inv hwr
   have hprod := (hwd.hasDerivAt.neg.mul hri).mul hwi.hasDerivAt
   have hQ := hprod.congr_of_eventuallyEq
@@ -45,6 +44,7 @@ theorem opticalSquaredSpeed_deriv_bound_of_jets
       (-deriv w r) * (-(r ^ 2)⁻¹) * (w r)⁻¹ +
       (-deriv w r) * r⁻¹ * deriv (fun s => (w s)⁻¹) r := by
     rw [hQ.deriv]
+    simp only [Pi.neg_apply, Pi.mul_apply]
     ring
   have hu : |(w r)⁻¹| ≤ A :=
     (le_add_of_nonneg_right (abs_nonneg _)).trans hinv
@@ -59,11 +59,11 @@ theorem opticalSquaredSpeed_deriv_bound_of_jets
   calc
     _ ≤ |(-deriv (deriv w) r) * r⁻¹ * (w r)⁻¹ +
           (-deriv w r) * (-(r ^ 2)⁻¹) * (w r)⁻¹| +
-        |(-deriv w r) * r⁻¹ * deriv (fun s => (w s)⁻¹) r| := abs_add _ _
+        |(-deriv w r) * r⁻¹ * deriv (fun s => (w s)⁻¹) r| := abs_add_le _ _
     _ ≤ (|(-deriv (deriv w) r) * r⁻¹ * (w r)⁻¹| +
           |(-deriv w r) * (-(r ^ 2)⁻¹) * (w r)⁻¹|) +
         |(-deriv w r) * r⁻¹ * deriv (fun s => (w s)⁻¹) r| :=
-      add_le_add_right (abs_add _ _) _
+      add_le_add_right (abs_add_le _ _) _
     _ ≤ (K ^ 2 * A + K ^ 2 * A) + K ^ 2 * A :=
       add_le_add
         (add_le_add (hthree (by simpa only [abs_neg] using hw₂) hr₁ hu)
@@ -79,6 +79,7 @@ theorem IsAccumulatingProfile.opticalSquaredSpeed_deriv_cell_bound
     ∃ K A : ℝ, 0 < K ∧ 0 < A ∧ ∀ j r, r ∈ D.cells j →
       |deriv (fun s => -deriv D.w s / (s * D.w s)) r| ≤
         K * radialE (D.cellIndex j) ^ A := by
+  obtain ⟨A, hA, hInv⟩ := hRef.inverse_first_jets_cell_bound
   obtain ⟨B, hdata⟩ := hRef
   have hgeom : RadialProfileGeometry D := hdata.1
   have hpart : RadialPartition D := hdata.2.1
@@ -101,7 +102,6 @@ theorem IsAccumulatingProfile.opticalSquaredSpeed_deriv_cell_bound
         |r⁻¹| ≤ B₁ ∧ |(r ^ 2)⁻¹| ≤ B₁ := by
     have hb := (hB₀ r hr).trans (le_max_left B₀ 1)
     simpa only [F, Prod.norm_def, Real.norm_eq_abs, max_le_iff] using hb
-  obtain ⟨A, hA, hInv⟩ := hRef.inverse_first_jets_cell_bound
   refine ⟨3 * B₁ ^ 2 * A, A, mul_pos (mul_pos (by norm_num) (sq_pos_of_pos hB₁)) hA,
     hA, fun j r hr => ?_⟩
   have hrD := hpart.2.2.2.1 j hr
@@ -169,13 +169,12 @@ theorem N01Properties.reference_opticalCollars
   have hcTravel : c ≤ C.travel m := by
     have hs := hsine 1 (by omega)
     simp only [Nat.cast_one, one_mul, div_one] at hs
-    exact hs.trans ((Real.abs_sin_le_abs _).trans_eq (abs_of_nonneg htravel))
+    exact hs.trans (Real.abs_sin_le_abs.trans_eq (abs_of_nonneg htravel))
   have hEpos : 0 < radialE (D.cellIndex j) := Real.exp_pos _
   have hpowpos : 0 < radialE (D.cellIndex j) ^ B := Real.rpow_pos_of_pos hEpos _
   have hτc : radialE (D.cellIndex j) ^ (-B) ≤ c := by
-    rw [Real.rpow_neg hEpos.le, inv_le_iff₀ hpowpos]
-    have hcprod : 1 ≤ c * radialE (D.cellIndex j) ^ B := (inv_le_iff₀ hc).mp hcinv
-    nlinarith
+    rw [Real.rpow_neg hEpos.le]
+    exact (inv_le_comm₀ hpowpos hc).mpr hcinv
   have hτ : 0 < radialE (D.cellIndex j) ^ (-B) := Real.rpow_pos_of_pos hEpos _
   have hτtravel : radialE (D.cellIndex j) ^ (-B) ≤
       opticalTravel D.w (C.left m) (C.right m) := by

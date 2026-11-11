@@ -19,7 +19,7 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01CoefficientSmallnessStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set Filter
 open ContinuousFlexibility.Analysis

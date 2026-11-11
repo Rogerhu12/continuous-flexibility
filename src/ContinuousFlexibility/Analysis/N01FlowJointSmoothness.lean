@@ -38,8 +38,9 @@ theorem N01Properties.minusCharacteristicSpeed_contDiffAt_of_discriminant
       (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) :
     ContDiffAt ℝ ∞ (minusCharacteristicSpeed (originalCoefficients D S C z)) p := by
   obtain ⟨ha, hb, hc⟩ := hN01.originalCoefficients_contDiffAt hS hT hz hsector hp
-  exact (hb.sub (((hb.pow 2).sub (ha.mul hc)).sqrt hdisc.ne')).div ha
-    (hN01.originalRadialCoefficient_pos hz hsector hp).ne'
+  have ha0 := (hN01.originalRadialCoefficient_pos hz hsector hp).ne'
+  exact (hb.div ha ha0).sub
+    ((((hb.pow 2).sub (ha.mul hc)).sqrt hdisc.ne').div ha ha0)
 
 theorem N01Properties.characteristicAngularDerivative_contDiffAt_of_discriminant
     {p : PolarPoint} (hp : p ∈ annularOpen D)
@@ -131,9 +132,10 @@ theorem N01Properties.minusFlow_contDiffAt_of_discriminant
     intro n
     induction n with
     | zero =>
+        apply contDiffOn_zero.mpr
         intro q hq
-        exact (contDiffAt_zero.mpr
-          (hN01.minusFlow_hasStrictFDerivAt hS hT hz hsector m q hq.1.1).continuousAt).contDiffWithinAt
+        exact
+          (hN01.minusFlow_hasStrictFDerivAt hS hT hz hsector m q hq.1.1).continuousAt.continuousWithinAt
     | succ n ih =>
         intro q hq
         have harg (x : PolarPoint) (hx : x ∈ U) :
@@ -160,9 +162,12 @@ theorem N01Properties.minusFlow_contDiffAt_of_discriminant
             ⟨hq.1.1.1.le, hq.1.1.2.le⟩ ⟨hx.1.1.le, hx.1.2.le⟩ x.2
         have hv : ContDiffAt ℝ n
             (fun x : PolarPoint => minusCharacteristicSpeed (originalCoefficients D S C z)
-              (x.1, F x)) q :=
-          ((hN01.minusCharacteristicSpeed_contDiffAt_of_discriminant hS hT hz hsector
-            (hcore q hq.1.1) hq.2).of_le (by simp)).comp q (harg q hq)
+              (x.1, F x)) q := by
+          have hspeed : ContDiffAt ℝ n
+              (minusCharacteristicSpeed (originalCoefficients D S C z)) (q.1, F q) :=
+            (hN01.minusCharacteristicSpeed_contDiffAt_of_discriminant hS hT hz hsector
+              (hcore q hq.1.1) hq.2).of_le (by simp)
+          simpa only [Function.comp_def] using hspeed.comp q (harg q hq)
         apply ContDiffAt.contDiffWithinAt
         apply contDiffAt_succ_iff_hasFDerivAt.mpr
         refine ⟨fun x : PolarPoint =>

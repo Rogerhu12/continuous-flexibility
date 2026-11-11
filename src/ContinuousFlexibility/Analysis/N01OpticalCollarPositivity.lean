@@ -19,7 +19,7 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01OpticalCollarPositivityStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set Filter
 open ContinuousFlexibility.Analysis
@@ -41,8 +41,8 @@ theorem optical_reference_two_lower_bounds
   have hlam : 0 < lam := inv_pos.mpr (mul_pos hA (sq_pos_of_pos hT))
   have hwlow : A⁻¹ * E ^ (-A) ≤ w := by
     have hi' : (A * E ^ A)⁻¹ ≤ w := by
-      apply (inv_le_iff₀ (mul_pos hA (Real.rpow_pos_of_pos hE₀ _))).mpr
-      simpa only [mul_comm] using (inv_le_iff₀ hw).mp hi
+      apply (inv_le_iff_one_le_mul₀ (mul_pos hA (Real.rpow_pos_of_pos hE₀ _))).mpr
+      simpa only [mul_comm] using (inv_le_iff_one_le_mul₀ hw).mp hi
     simpa only [mul_inv, Real.rpow_neg hE₀.le] using hi'
   have hvlow : E ^ (-B) / T ≤ v :=
     (div_le_div_of_nonneg_left (Real.rpow_nonneg hE₀.le _)

@@ -16,7 +16,7 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01OpticalCollarJetBoundsStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set
 open ContinuousFlexibility.Analysis
@@ -77,7 +77,7 @@ theorem opticalSpeed_lower_boundaryDistance
     exact le_min (hsq.trans hleft) (hsq.trans hright)
   have hsq' : τ ^ 2 ≤ (M + 1) * d :=
     hqdist.trans (mul_le_mul_of_nonneg_right (by linarith : M ≤ M + 1) hdpos.le)
-  apply (inv_le_iff₀ hdpos).mpr
+  apply (inv_le_iff_one_le_mul₀ hdpos).mpr
   rw [← mul_div_assoc]
   apply (le_div_iff₀ (sq_pos_of_pos hτ)).mpr
   simpa only [one_mul, mul_comm] using hsq'

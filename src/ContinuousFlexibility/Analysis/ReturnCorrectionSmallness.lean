@@ -58,7 +58,7 @@ end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance returnCorrectionSmallnessStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set Filter
 open ContinuousFlexibility.Analysis

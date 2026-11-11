@@ -14,7 +14,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
-local instance (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
+local instance sectorParameterGeometryStateSMul (S : PhysicalSpacesData) : SMul ℝ (AnnularState S) := Prod.instSMul
 
 open Set ContinuousFlexibility.Analysis
 open scoped Topology BigOperators
@@ -78,20 +78,28 @@ theorem sectorNeighborhood_isOpen (S : PhysicalSpacesData)
     continuous_fst) continuous_const).inter
     (isOpen_lt continuous_snd.abs continuous_const)
 
+private theorem convex_pair_seminorm_sublevels
+    {E F : Type*} [AddCommGroup E] [Module ℝ E] [AddCommGroup F] [Module ℝ F]
+    (p : Seminorm ℝ E) (q : Seminorm ℝ F) (ε q0 : ℝ) :
+    Convex ℝ {x : E × F | p x.1 < ε ∧ q x.2 < q0} := by
+  intro x hx y hy a b ha hb hab
+  have hpx : x.1 ∈ p.ball 0 ε := by
+    simpa only [Seminorm.mem_ball_zero] using hx.1
+  have hpy : y.1 ∈ p.ball 0 ε := by
+    simpa only [Seminorm.mem_ball_zero] using hy.1
+  have hqx : x.2 ∈ q.ball 0 q0 := by
+    simpa only [Seminorm.mem_ball_zero] using hx.2
+  have hqy : y.2 ∈ q.ball 0 q0 := by
+    simpa only [Seminorm.mem_ball_zero] using hy.2
+  constructor
+  · change p (a • x.1 + b • y.1) < ε
+    simpa only [Seminorm.mem_ball_zero] using p.convex_ball 0 ε hpx hpy ha hb hab
+  · change q (a • x.2 + b • y.2) < q0
+    simpa only [Seminorm.mem_ball_zero] using q.convex_ball 0 q0 hqx hqy ha hb hab
+
 theorem sectorNeighborhood_convex (S : PhysicalSpacesData)
     (base : ℕ) (ε q0 : ℝ) : Convex ℝ (sectorNeighborhood S base ε q0) := by
-  intro x hx y hy a b ha hb hab
-  have hpx : x.1 ∈ (sectorGrading S base).ball 0 ε := by
-    simpa only [Seminorm.mem_ball_zero] using hx.1
-  have hpy : y.1 ∈ (sectorGrading S base).ball 0 ε := by
-    simpa only [Seminorm.mem_ball_zero] using hy.1
-  have hqx : x.2 ∈ (normSeminorm ℝ ℝ).ball 0 q0 := by
-    simpa only [Seminorm.mem_ball_zero, coe_normSeminorm, Real.norm_eq_abs] using hx.2
-  have hqy : y.2 ∈ (normSeminorm ℝ ℝ).ball 0 q0 := by
-    simpa only [Seminorm.mem_ball_zero, coe_normSeminorm, Real.norm_eq_abs] using hy.2
-  constructor
-  · exact ((sectorGrading S base).convex_ball 0 ε hpx hpy ha hb hab)
-  · simpa only [Seminorm.mem_ball_zero, coe_normSeminorm, Real.norm_eq_abs,
-      smul_eq_mul] using ((normSeminorm ℝ ℝ).convex_ball 0 q0 hqx hqy ha hb hab)
+  simpa only [sectorNeighborhood, coe_normSeminorm, Real.norm_eq_abs] using
+    convex_pair_seminorm_sublevels (sectorGrading S base) (normSeminorm ℝ ℝ) ε q0
 
 end ContinuousFlexibility.Statements

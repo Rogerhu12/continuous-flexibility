@@ -90,8 +90,8 @@ theorem N01Properties.reference_opticalSpeed_collar_jets
     have hi : (D.w r)⁻¹ ≤ L * W m ^ L :=
       (le_abs_self _).trans ((le_add_of_nonneg_right (abs_nonneg _)).trans hb)
     have h : (L * W m ^ L)⁻¹ ≤ D.w r := by
-      apply (inv_le_iff₀ (mul_pos hL (Real.rpow_pos_of_pos (hW₀ m) _))).mpr
-      simpa only [mul_comm] using (inv_le_iff₀ (hwpos m r hr)).mp hi
+      apply (inv_le_iff_one_le_mul₀ (mul_pos hL (Real.rpow_pos_of_pos (hW₀ m) _))).mpr
+      simpa only [mul_comm] using (inv_le_iff_one_le_mul₀ (hwpos m r hr)).mp hi
     simpa only [mul_inv, Real.rpow_neg (hW₀ m).le] using h
   have hwi (m : ℕ) : ContDiffOn ℝ ∞ (fun r => (D.w r)⁻¹) (U m) :=
     hw.contDiffOn.inv (fun r hr => (hwpos m r hr).ne')

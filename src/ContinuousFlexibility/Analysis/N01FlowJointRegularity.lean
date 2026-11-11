@@ -24,7 +24,7 @@ open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance n01FlowJointRegularityRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 section ActualFlow
 

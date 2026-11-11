@@ -20,7 +20,7 @@ open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance materialRhoGrowthRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 theorem materialRho_endpoint_formulas {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) :

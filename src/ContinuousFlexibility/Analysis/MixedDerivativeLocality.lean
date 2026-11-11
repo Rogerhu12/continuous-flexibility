@@ -79,7 +79,7 @@ theorem mixedDerivative_angular_translation_abs_le
       (contDiffAt_const : ContDiffAt ℝ (b : ℕ∞ω) (fun _ : ℝ => T r) p.2)
     simp only [id_eq] at hsub
     rw [hsub]
-    simp only [iteratedDeriv_fun_id, iteratedDeriv_const,
+    simp only [iteratedDeriv_id, iteratedDeriv_const,
       if_neg (by omega : b ≠ 0), sub_zero]
   unfold mixedDerivative
   simp_rw [hθ]

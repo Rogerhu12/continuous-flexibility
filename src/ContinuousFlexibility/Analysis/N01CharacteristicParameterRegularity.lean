@@ -25,7 +25,7 @@ open scoped ContDiff Topology
 
 set_option backward.isDefEq.respectTransparency false
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance n01CharacteristicParameterRegularityRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 theorem characteristicRadialRoot_q_eq (D : ReferenceData) (S : PhysicalSpacesData)
     (C : NonlinearGeometryData S) (x : AnnularState S) (q r : ℝ) :

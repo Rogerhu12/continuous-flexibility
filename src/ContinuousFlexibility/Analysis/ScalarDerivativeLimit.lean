@@ -19,7 +19,7 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter
 open scoped Topology
 
-local instance : NormedSpace ℝ ℝ := NormedField.toNormedSpace
+local instance scalarDerivativeLimitRealNormedSpace : NormedSpace ℝ ℝ := NormedField.toNormedSpace
 
 /-- Two applications of the scalar mean value theorem give a uniform
 slope remainder. The bound is valid on both sides of the base point. -/
