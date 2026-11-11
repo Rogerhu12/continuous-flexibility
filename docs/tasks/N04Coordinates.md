@@ -4,6 +4,15 @@
 
 The uniform bounds of the potential and of the divided differences, and the conversion of sources (rest of Proposition 7.8).
 
+The same chosen coordinates and neighborhood also carry
+`CanonicalGeometry.PrimitiveGeometryProperties`: the radial reference gauge,
+reference positivity and unit-piece jets, genuine current-minus-reference
+spatial/parameter jets, and the radial compatibility source supported in the
+frozen normalization region. These are construction-stage facts about the
+actual functions, not inverse or commutator estimates. The precise interface
+repair and its manuscript sources are recorded in
+`docs/notes/N07a-interface-repair.md`.
+
 Prove `ContinuousFlexibility.Blueprint.N04Coordinates` in `src/ContinuousFlexibility/Blueprint/N04Coordinates.lean`:
 
 ```lean
