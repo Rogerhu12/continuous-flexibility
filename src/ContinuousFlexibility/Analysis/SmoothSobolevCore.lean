@@ -34,7 +34,7 @@ def smoothSobolevCore (s : Set ℝ) (hs : MeasurableSet s) (hu : UniqueDiffOn �
       funext x
       simp only [Pi.zero_def, iteratedDerivWithin_fun_const_zero]
     rw [he]
-    exact memLp_zero
+    exact MemLp.zero
   add_mem' := by
     intro f g hf hg
     refine ⟨hf.1.add hg.1, fun n => ?_⟩
@@ -52,6 +52,11 @@ def smoothSobolevCore (s : Set ℝ) (hs : MeasurableSet s) (hu : UniqueDiffOn �
       filter_upwards [ae_restrict_mem hs] with x hx
       exact (iteratedDerivWithin_const_smul hx hu c ((hf.1 x hx).of_le (by simp))).symm
     exact (memLp_congr_ae he).mp ((hf.2 n).const_smul c)
+
+/-- Function evaluation on the existing submodule carrier. -/
+instance smoothSobolevCore.instCoeFun (s : Set ℝ) (hs : MeasurableSet s)
+    (hu : UniqueDiffOn ℝ s) : CoeFun (smoothSobolevCore F s hs hu) (fun _ => ℝ → F) :=
+  ⟨fun f => f.val⟩
 
 abbrev HalfLineSobolevCore : Submodule ℝ (ℝ → F) :=
   smoothSobolevCore F (Ici 0) measurableSet_Ici (uniqueDiffOn_Ici 0)
@@ -74,8 +79,10 @@ theorem isBoundedHalfLineJet_iteratedDerivWithin {f : ℝ → F}
     exact hf.continuousOn_iteratedDerivWithin (by simp) (uniqueDiffOn_Ici 0)
   · intro n x hx
     have hd := (hf.differentiableOn_iteratedDerivWithin
-      (m := n) (by simp) (uniqueDiffOn_Ici 0) x hx.le).hasDerivWithinAt
-    simpa only [iteratedDerivWithin_succ] using hd.hasDerivAt (Ici_mem_nhds hx)
+      (m := n) (ENat.natCast_lt_of_coe_top_le_withTop le_rfl n)
+      (uniqueDiffOn_Ici 0) x hx.le).hasDerivWithinAt
+    rw [iteratedDerivWithin_succ]
+    exact hd.hasDerivAt (Ici_mem_nhds hx)
   · exact hL₂
 
 theorem HalfLineSobolevCore.bounded (f : HalfLineSobolevCore F) :
@@ -139,9 +146,11 @@ no Sobolev index. -/
 def seeleyExtendLinear {ι : Type*} (S : SeeleyData ι) :
     HalfLineSobolevCore F →ₗ[ℝ] (ℝ → F) where
   toFun f := seeleyExtend S f
-  map_add' f g := seeleyExtend_add S (HalfLineSobolevCore.bounded f)
-    (HalfLineSobolevCore.bounded g)
-  map_smul' c f := seeleyExtend_smul S c f
+  map_add' f g := by
+    simpa only [Submodule.coe_add] using seeleyExtend_add S (HalfLineSobolevCore.bounded f)
+      (HalfLineSobolevCore.bounded g)
+  map_smul' c f := by
+    simpa only [Submodule.coe_smul, RingHom.id_apply] using seeleyExtend_smul S c (f : ℝ → F)
 
 @[simp] theorem seeleyExtendLinear_apply {ι : Type*} (S : SeeleyData ι)
     (f : HalfLineSobolevCore F) (x : ℝ) : seeleyExtendLinear S f x = seeleyExtend S f x := rfl

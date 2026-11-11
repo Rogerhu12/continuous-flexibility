@@ -62,7 +62,7 @@ private theorem seeleyReflection_memLp_bound (S : SeeleyData ι) (n : ℕ)
           eLpNorm f 2 (volume.restrict (Ici 0)) := by
   have hterm (i : ι) : MemLp (fun x =>
       (S.a i * (-S.b i) ^ n) • f (-S.b i * x)) 2 (volume.restrict (Iio 0)) := by
-    simpa only [Pi.smul_apply] using
+    simpa only [Pi.smul_def, Pi.smul_apply] using
       (memLp_neg_mul_Iio hf (S.one_le_b i)).const_smul (S.a i * (-S.b i) ^ n)
   have hnorm (i : ι) :
       eLpNorm (fun x => (S.a i * (-S.b i) ^ n) • f (-S.b i * x))
@@ -74,7 +74,7 @@ private theorem seeleyReflection_memLp_bound (S : SeeleyData ι) (n : ℕ)
           2 (volume.restrict (Iio 0)) =
           ‖S.a i * (-S.b i) ^ n‖ₑ *
             eLpNorm (fun x => f (-S.b i * x)) 2 (volume.restrict (Iio 0)) := by
-        simpa only [Pi.smul_apply] using eLpNorm_const_smul
+        simpa only [Pi.smul_def, Pi.smul_apply] using eLpNorm_const_smul
           (S.a i * (-S.b i) ^ n) (fun x => f (-S.b i * x)) 2
           (volume.restrict (Iio 0))
       _ = ENNReal.ofReal (|S.a i| * S.b i ^ n) *
@@ -132,11 +132,13 @@ theorem seeleyExtensionJet_eq_indicators (S : SeeleyData ι) (J : ℕ → ℝ �
       (Iio 0).indicator (seeleyReflection S n (J n)) := by
   funext x
   by_cases hx : 0 ≤ x
-  · simp only [seeleyExtensionJet_of_nonneg S J n hx, Pi.add_apply,
-      indicator_of_mem hx, indicator_of_notMem (not_lt.mpr hx), add_zero]
+  · rw [seeleyExtensionJet_of_nonneg S J n hx, Pi.add_apply,
+      indicator_of_mem (s := Ici (0 : ℝ)) hx,
+      indicator_of_notMem (s := Iio (0 : ℝ)) (not_lt.mpr hx), add_zero]
   · have hneg : x < 0 := lt_of_not_ge hx
-    simp only [seeleyExtensionJet_of_neg S J n hneg, Pi.add_apply,
-      indicator_of_notMem hx, indicator_of_mem hneg, zero_add]
+    rw [seeleyExtensionJet_of_neg S J n hneg, Pi.add_apply,
+      indicator_of_notMem (s := Ici (0 : ℝ)) hx,
+      indicator_of_mem (s := Iio (0 : ℝ)) hneg, zero_add]
 
 theorem eLpNorm_seeleyExtensionJet_le (S : SeeleyData ι) (J : ℕ → ℝ → F) (n : ℕ)
     (hf : MemLp (J n) 2 (volume.restrict (Ici 0))) :

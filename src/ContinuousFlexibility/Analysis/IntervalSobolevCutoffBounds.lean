@@ -37,7 +37,8 @@ theorem eLpNorm_cutoffHalfLine_jet_eq_interval {L c : ℝ} (hc : c < L)
   have he : g =ᵐ[volume.restrict (Ici 0)] (Icc 0 L).indicator g := by
     filter_upwards [ae_restrict_mem measurableSet_Ici] with x hx
     by_cases hxL : x ≤ L
-    · exact (Set.indicator_of_mem ⟨hx, hxL⟩ g).symm
+    · have hxin : x ∈ Icc (0 : ℝ) L := ⟨hx, hxL⟩
+      exact (Set.indicator_of_mem hxin g).symm
     · have hnot : x ∉ Icc 0 L := fun h => hxL h.2
       rw [Set.indicator_of_notMem hnot g]
       exact iteratedDerivWithin_cutoffHalfLine_zero f hzero

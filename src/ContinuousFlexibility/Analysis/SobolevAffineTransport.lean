@@ -36,7 +36,8 @@ theorem iteratedDerivWithin_affine {s t : Set ℝ} {f : ℝ → F}
     have hd : HasDerivWithinAt (iteratedDerivWithin n f t)
         (iteratedDerivWithin (n + 1) f t (a + c * x)) t (a + c * x) := by
       simpa only [iteratedDerivWithin_succ] using
-        (hf.differentiableOn_iteratedDerivWithin (m := n) (by simp) ht _ (hmap hx)).hasDerivWithinAt
+        (hf.differentiableOn_iteratedDerivWithin (m := n)
+          (ENat.natCast_lt_of_coe_top_le_withTop le_rfl n) ht _ (hmap hx)).hasDerivWithinAt
     have ha : HasDerivWithinAt (fun y : ℝ => a + c * y) c s x := by
       simpa only [mul_one] using
         (((hasDerivAt_id x).const_mul c).const_add a).hasDerivWithinAt
