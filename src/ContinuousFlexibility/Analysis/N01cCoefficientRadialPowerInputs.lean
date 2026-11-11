@@ -86,12 +86,118 @@ def coefficientRadialInput_regular
 
 /-- The projection estimate is proved before specializing the state module. -/
 private theorem coefficientRadialInput_fst_grading_le
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
     (p : ℕ → Seminorm ℝ E) (hp : Monotone p) (base : ℕ) (v : E × ℝ) :
     p 0 v.1 ≤ pairGrading p realGrading base v := by
   rw [tamePairGrading_apply]
   exact (hp (Nat.zero_le base) v.1).trans
     (le_add_of_nonneg_right (apply_nonneg _ _))
+
+/-- Rearrange only real scalar weights, before inserting a concrete state jet. -/
+private theorem coefficientRadialInput_norm_weight_order
+    {u B H W P : ℝ} (h : |u| ≤ (B * H * W) * P) :
+    ‖u‖ ≤ B * W * H * P := by
+  rw [Real.norm_eq_abs]
+  exact h.trans_eq (by ring)
+
+private theorem coefficientRadialInput_zero_material_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hA : N01PartA D T S C) (hD : RadialProfileGeometry D)
+    (hχ : ContDiff ℝ ∞ D.chi) (hε : 0 < ε)
+    (hB : N01PartB D S C base ε)
+    (hE : ∀ r ∈ Ioo D.a D.b, 1 ≤ T.E0 r)
+    (hloc : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m))
+    (hχloc : tsupport D.chi ⊆ Ioo D.a D.b)
+    (i : Fin 3) (n : ℕ) :
+    ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧
+      ∀ r ∈ Ioo D.a D.b, ∀ z ∈ stateNeighborhood S C base ε,
+        ‖iteratedDeriv n (coefficientRadialInput D S C i z.1) r‖ ≤ B * T.E0 r ^ A := by
+  letI : TopologicalSpace (AnnularState S) := inferInstance
+  letI : AddCommGroup (AnnularState S) := inferInstance
+  letI : Module ℝ (AnnularState S) := inferInstance
+  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
+  letI : TopologicalSpace (AnnularState S × ℝ) := inferInstance
+  letI : AddCommGroup (AnnularState S × ℝ) := inferInstance
+  letI : Module ℝ (AnnularState S × ℝ) := inferInstance
+  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
+  have hP : RadialPartition D := hA.1.1.choose_spec.2.1
+  revert i
+  refine Fin.cases ?_ (Fin.cases ?_ (fun _ => ?_))
+  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
+      iteratedDeriv_stateProfile_material_bound hS hT hA hD hχ hε hB hE hloc hχloc n
+    refine ⟨B, A, hB0, hA0.le, fun r hr z hz => ?_⟩
+    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
+    simpa only [Real.norm_eq_abs, coefficientRadialInput, Fin.cases_zero]
+      using hb m r hr hm z hz
+  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
+      iteratedDeriv_stateProfile_material_bound hS hT hA hD hχ hε hB hE hloc hχloc (n + 1)
+    refine ⟨B, A, hB0, hA0.le, fun r hr z hz => ?_⟩
+    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
+    simpa only [Real.norm_eq_abs, coefficientRadialInput, Fin.cases_succ, Fin.cases_zero,
+      iteratedDeriv_succ'] using hb m r hr hm z hz
+  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
+      iteratedDeriv_stateInverseProfile_material_bound hS hT hA hD hχ hε hB hE hloc hχloc n
+    refine ⟨B, A, hB0, hA0.le, fun r hr z hz => ?_⟩
+    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
+    simpa only [Real.norm_eq_abs, coefficientRadialInput, Fin.cases_succ]
+      using hb m r hr hm z hz
+
+private theorem coefficientRadialInput_positive_material_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hA : N01PartA D T S C) (hD : RadialProfileGeometry D)
+    (hχ : ContDiff ℝ ∞ D.chi) (hε : 0 < ε)
+    (hB : N01PartB D S C base ε)
+    (hE : ∀ r ∈ Ioo D.a D.b, 1 ≤ T.E0 r)
+    (hloc : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m))
+    (hχloc : tsupport D.chi ⊆ Ioo D.a D.b)
+    (i : Fin 3) (n k : ℕ) (hk : 0 < k) :
+    ∃ B A : ℝ, 0 < B ∧ 0 ≤ A ∧
+      ∀ r (hr : r ∈ Ioo D.a D.b), ∀ z ∈ stateNeighborhood S C base ε,
+      ∀ v : Fin k → AnnularState S,
+        ‖(coefficientRadialInputJets hS hT hA hD hχ n r hr i).D k z.1 v‖ ≤
+          B * T.E0 r ^ A * T.H r ^ (3 / 4 : ℝ) * ∏ j, stateGrading S 0 (v j) := by
+  letI : TopologicalSpace (AnnularState S) := inferInstance
+  letI : AddCommGroup (AnnularState S) := inferInstance
+  letI : Module ℝ (AnnularState S) := inferInstance
+  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
+  letI : TopologicalSpace (AnnularState S × ℝ) := inferInstance
+  letI : AddCommGroup (AnnularState S × ℝ) := inferInstance
+  letI : Module ℝ (AnnularState S × ℝ) := inferInstance
+  letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
+  have hP : RadialPartition D := hA.1.1.choose_spec.2.1
+  revert i
+  refine Fin.cases ?_ (Fin.cases ?_ (fun _ => ?_))
+  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
+      stateProfileRadialJetSmoothDirections_material_bound
+        hS hT hA hD hχ hε hB hE hloc hχloc n k hk
+    refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
+    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
+    have hh := coefficientRadialInput_norm_weight_order (hb m r hr hm z hz v)
+    simpa only [coefficientRadialInputJets, Fin.cases_zero] using hh
+  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
+      stateProfileRadialJetSmoothDirections_material_bound
+        hS hT hA hD hχ hε hB hE hloc hχloc (n + 1) k hk
+    refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
+    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
+    have hh := coefficientRadialInput_norm_weight_order (hb m r hr hm z hz v)
+    simpa only [coefficientRadialInputJets, Fin.cases_succ, Fin.cases_zero,
+      SmoothDirections.congr] using hh
+  · obtain ⟨B, A, hB0, hA0, hb⟩ :=
+      stateInverseProfileRadialJetSmoothDirections_material_bound
+        hS hT hA hD hχ hε hB hE hloc hχloc n k hk
+    refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
+    obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
+    have hh := coefficientRadialInput_norm_weight_order (hb m r hr hm z hz v)
+    simpa only [coefficientRadialInputJets, Fin.cases_succ] using hh
 
 /-- The actual profile, profile derivative and inverse profile have the
 same mixed power control, at any fixed interpolation indices. -/
@@ -120,7 +226,6 @@ theorem coefficientRadialInput_powerBounds
   letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
   have hD : RadialProfileGeometry D := hA.1.1.choose_spec.1
   have hχ : ContDiff ℝ ∞ D.chi := hA.1.2.2.2.1.1
-  have hP : RadialPartition D := hA.1.1.choose_spec.2.1
   let L : (AnnularState S × ℝ) →L[ℝ] AnnularState S :=
     ContinuousLinearMap.fst ℝ (AnnularState S) ℝ
   have hL : ∀ v : AnnularState S × ℝ,
@@ -138,48 +243,10 @@ theorem coefficientRadialInput_powerBounds
     (coefficientRadialInput D S C i)
     (fun n r hr => coefficientRadialInputJets hS hT hA hD hχ n r hr i)
   · intro n
-    fin_cases i
-    · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-        iteratedDeriv_stateProfile_material_bound hS hT hA hD hχ hε hB hE hloc hχloc n
-      refine ⟨B, A, hB0, hA0.le, fun r hr z hz => ?_⟩
-      obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-      simpa only [Real.norm_eq_abs, coefficientRadialInput, Fin.cases_zero,
-        L, ContinuousLinearMap.coe_fst'] using hb m r hr hm z hz
-    · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-        iteratedDeriv_stateProfile_material_bound hS hT hA hD hχ hε hB hE hloc hχloc (n + 1)
-      refine ⟨B, A, hB0, hA0.le, fun r hr z hz => ?_⟩
-      obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-      simpa only [Real.norm_eq_abs, coefficientRadialInput, Fin.cases_succ, Fin.cases_zero,
-        iteratedDeriv_succ', L, ContinuousLinearMap.coe_fst'] using hb m r hr hm z hz
-    · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-        iteratedDeriv_stateInverseProfile_material_bound hS hT hA hD hχ hε hB hE hloc hχloc n
-      refine ⟨B, A, hB0, hA0.le, fun r hr z hz => ?_⟩
-      obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-      simpa only [Real.norm_eq_abs, coefficientRadialInput, Fin.cases_succ,
-        L, ContinuousLinearMap.coe_fst'] using hb m r hr hm z hz
+    simpa only [L, ContinuousLinearMap.coe_fst'] using
+      coefficientRadialInput_zero_material_bound hS hT hA hD hχ hε hB hE hloc hχloc i n
   · intro n k hk
-    fin_cases i
-    · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-        stateProfileRadialJetSmoothDirections_material_bound
-          hS hT hA hD hχ hε hB hE hloc hχloc n k hk
-      refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
-      obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-      simpa only [Real.norm_eq_abs, coefficientRadialInputJets, Fin.cases_zero,
-        L, ContinuousLinearMap.coe_fst', mul_assoc, mul_left_comm, mul_comm] using hb m r hr hm z hz v
-    · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-        stateProfileRadialJetSmoothDirections_material_bound
-          hS hT hA hD hχ hε hB hE hloc hχloc (n + 1) k hk
-      refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
-      obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-      simpa only [Real.norm_eq_abs, coefficientRadialInputJets, Fin.cases_succ, Fin.cases_zero,
-        SmoothDirections.congr, L, ContinuousLinearMap.coe_fst',
-        mul_assoc, mul_left_comm, mul_comm] using hb m r hr hm z hz v
-    · obtain ⟨B, A, hB0, hA0, hb⟩ :=
-        stateInverseProfileRadialJetSmoothDirections_material_bound
-          hS hT hA hD hχ hε hB hE hloc hχloc n k hk
-      refine ⟨B, A, hB0, hA0.le, fun r hr z hz v => ?_⟩
-      obtain ⟨m, hm⟩ := radialPartition_exists_cell hP hr
-      simpa only [Real.norm_eq_abs, coefficientRadialInputJets, Fin.cases_succ,
-        L, ContinuousLinearMap.coe_fst', mul_assoc, mul_left_comm, mul_comm] using hb m r hr hm z hz v
+    simpa only [L, ContinuousLinearMap.coe_fst'] using
+      coefficientRadialInput_positive_material_bound hS hT hA hD hχ hε hB hE hloc hχloc i n k hk
 
 end ContinuousFlexibility.Statements

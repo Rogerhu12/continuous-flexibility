@@ -67,6 +67,14 @@ def coefficientPolarInput_regular
         (isOpen_stateNeighborhood S C base ε) (subset_univ _)).congr
       (fun z _ => (mixedDerivative_const_mul z.2 (stateUPolarInput S i z.1) a b q).symm)
 
+/-- Scalar weight rearrangement is independent of the state-space instances. -/
+private theorem coefficientPolarInput_norm_weight_order
+    {u C E V W M I P : ℝ}
+    (h : |u| ≤ C * E * (V * W) * M * (I * P)) :
+    ‖u‖ ≤ (C * M * V * I) * E * W * P := by
+  rw [Real.norm_eq_abs]
+  exact h.trans_eq (by ring)
+
 /-- All five actual polar inputs have the distributed mixed bound on the
 same neighbourhood and at the same fixed interpolation indices. -/
 theorem coefficientPolarInput_powerBounds
@@ -85,6 +93,14 @@ theorem coefficientPolarInput_powerBounds
       (fun q => T.H q.1 ^ (3 / 4 : ℝ)) (fun q => T.E0 q.1)
       (fun z q => z.2 * stateUPolarInput S i z.1 q) := by
   classical
+  letI : TopologicalSpace (AnnularState S) := inferInstance
+  letI : AddCommGroup (AnnularState S) := inferInstance
+  letI : Module ℝ (AnnularState S) := inferInstance
+  letI : IsTopologicalAddGroup (AnnularState S) := inferInstance
+  letI : ContinuousSMul ℝ (AnnularState S) := inferInstance
+  letI : TopologicalSpace (AnnularState S × ℝ) := inferInstance
+  letI : AddCommGroup (AnnularState S × ℝ) := inferInstance
+  letI : Module ℝ (AnnularState S × ℝ) := inferInstance
   letI : IsTopologicalAddGroup (AnnularState S × ℝ) := inferInstance
   letI : ContinuousSMul ℝ (AnnularState S × ℝ) := inferInstance
   let p := pairGrading (stateGrading S) realGrading
@@ -151,8 +167,7 @@ theorem coefficientPolarInput_powerBounds
     · exact hweight
     · exact hMle
     · exact hoh
-  have hh := hraw.trans hmid
-  simpa only [Jq, SmoothDirections.congr, Real.norm_eq_abs, B, P,
-    mul_assoc, mul_left_comm, mul_comm] using hh
+  have hh := coefficientPolarInput_norm_weight_order (hraw.trans hmid)
+  simpa only [Jq, SmoothDirections.congr, B, P] using hh
 
 end ContinuousFlexibility.Statements
