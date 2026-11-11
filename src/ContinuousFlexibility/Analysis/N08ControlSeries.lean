@@ -63,13 +63,11 @@ theorem n08ControlSeries_contDiffOn (hC : controlGeometryConditions D S C)
 theorem n08ControlSeries_zero_off_core (hC : controlGeometryConditions D S C)
     (a : ℕ → ℝ) {r : ℝ} (hr : r ∉ Ioo D.a D.b) : n08ControlSeries C a r = 0 := by
   obtain ⟨hI, _, _, _, _, hcontrol, _⟩ := hC
-  apply tsum_eq_zero
-  intro m
-  have hz : C.control m r = 0 := by
+  have hz (m : ℕ) : C.control m r = 0 := by
     by_contra hne
     have hm := (hcontrol m).2.2 hne
     exact hr ⟨(hI m).1.trans hm.1, hm.2.trans (hI m).2.2⟩
-  rw [hz, mul_zero]
+  simp only [n08ControlSeries, hz, mul_zero, tsum_zero]
 
 theorem n08ControlSeries_jet_bound (hC : controlGeometryConditions D S C)
     (a : ℕ → ℝ) (n : ℕ) {r W : ℝ} (hr : r ∈ Ioo D.a D.b) (hW : 0 ≤ W)

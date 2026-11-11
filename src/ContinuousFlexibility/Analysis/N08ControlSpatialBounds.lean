@@ -83,7 +83,9 @@ theorem n08_controlProfile_point_jet_bound
         T.M (T.sample i) ^ (base + (s + loss)) :=
       mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left (hLb m r hrm) hK)
         (pow_nonneg (zero_le_one.trans hi.2) _)
-    _ = _ := by norm_num; ring
+    _ = _ := by
+      rw [show ((3 / 4 : ℝ) / 16) = 3 / 64 by norm_num]
+      ring
 
 private theorem n08_radialJet_eq_iteratedDeriv (s : ℕ) (f : ℝ → ℝ) :
     radialJet s f = iteratedDeriv s f := by

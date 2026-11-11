@@ -24,12 +24,13 @@ theorem n08NormalizedCellProfile_contDiff (D : ReferenceData) (T : MaterialData)
     (A : ℝ) (m : ℕ) : ContDiff ℝ ∞ (n08NormalizedCellProfile D T A m) :=
   contDiff_const.mul (n08CellLayerProfile_contDiff D A m)
 
+set_option backward.isDefEq.respectTransparency false in
 theorem n08NormalizedCellProfile_hasDerivAt {D : ReferenceData} {T : MaterialData}
     {A r : ℝ} (hA : 0 < A) (m : ℕ)
     (hr : n08CellLayerInner A (D.cellIndex m) < endpointDistance D r ∧
       endpointDistance D r < n08CellLayerOuter A (D.cellIndex m)) :
     HasDerivAt (n08NormalizedCellProfile D T A m) (T.H (T.sample m) ^ (32 : ℝ)) r := by
-  simpa only [mul_one] using
+  simpa only [n08NormalizedCellProfile, mul_one] using
     (n08CellLayerProfile_hasDerivAt hA m hr).const_mul (T.H (T.sample m) ^ (32 : ℝ))
 
 theorem n08NormalizedCellProfile_heightMember {D : ReferenceData} {T : MaterialData}

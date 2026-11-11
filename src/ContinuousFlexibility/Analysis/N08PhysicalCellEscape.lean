@@ -2,7 +2,8 @@ import ContinuousFlexibility.Analysis.MaterialSampleCofinite
 import ContinuousFlexibility.Analysis.MaterialCoordinate
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
-/-!+# Escape of the actual physical cells
+/-!
+# Escape of the actual physical cells
 
 The positive height tests supply a comparison for a fixed physical-cell
 map. Positivity of each individual sample weight and decay at the assigned
@@ -44,7 +45,8 @@ theorem n08_tendsto_materialM_atTop : Tendsto materialM atTop atTop := by
   have hprod := hp.atTop_mul_atTop₀ hlog
   have hexponent : Tendsto materialMExponent atTop atTop :=
     tendsto_atTop_mono (fun _ => le_add_of_nonneg_left (zero_le_one : (0 : ℝ) ≤ 1)) hprod
-  simpa only [Function.comp_def, materialM] using Real.tendsto_exp_atTop.comp hexponent
+  unfold materialM
+  simpa only [Function.comp_def] using Real.tendsto_exp_atTop.comp hexponent
 
 end ContinuousFlexibility.Analysis
 

@@ -31,7 +31,7 @@ theorem n08_point_sample_height_bound {D : ReferenceData} {T : MaterialData}
       _ = U * (T.H r * T.M r) := by ring
       _ ≤ U * V := mul_le_mul_of_nonneg_left
         (by simpa only [Real.rpow_one] using hVb r hcore) hU.le
-  rw [Real.rpow_natCast, pow_two]
+  rw [Real.rpow_two, pow_two]
   calc
     _ ≤ T.H r * ((C * T.E0 r ^ A) * T.H (T.sample m)) :=
       mul_le_mul_of_nonneg_left hratio hH.le

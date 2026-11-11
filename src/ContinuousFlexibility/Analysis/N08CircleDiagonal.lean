@@ -134,10 +134,10 @@ private theorem n08CircleResidual_mean_eq_of_projected_decode
     n08ControlMeanCoordinate S m (n08CircleResidual hS hR z).val =
       n08ControlMeanCoordinate S m (n08CircleResidual hS hR w).val :=
   (congrArg (n08ControlMeanCoordinate S m)
-      (n08CircleResidual_projected_coe hS hR hz)).trans
+      (n08CircleResidual_projected_coe hS hR (z := z) hz)).trans
     ((n08ControlMeanCoordinate_eq_of_decode hS m _ _ h).trans
       (congrArg (n08ControlMeanCoordinate S m)
-        (n08CircleResidual_projected_coe hS hR hw)).symm)
+        (n08CircleResidual_projected_coe hS hR (z := w) hw)).symm)
 
 theorem n08_materialSample_H_pos (hT : IsMaterialData D T)
     (hRef : IsAccumulatingProfile D) (m : ℕ) : 0 < T.H (T.sample m) :=
@@ -170,6 +170,37 @@ private theorem n08_projected_chart_eq (hS : IsPhysicalSpaces D T S)
           (S.circle (3 / 4 : ℝ)).decode u m (-θ)) / 2) h).trans
         (n08_stateProjection_chart_decode hS y m θ).symm))
 
+private theorem n08ControlMeanCoordinate_zero (hS : IsPhysicalSpaces D T S)
+    (m : ℕ) (hH : 0 < T.H (T.sample m)) (u : CircleSpace S)
+    (hu : n08ControlMeanCoordinate S m u = 0) :
+    stateKappa S (0, (0, (u, 0))) m = 0 :=
+  (mul_eq_zero.mp ((n08ControlRestriction_apply hS u m).symm.trans
+    ((n08ControlMeanCoordinate_apply S m u).symm.trans hu))).resolve_left
+      (Real.rpow_pos_of_pos hH _).ne'
+
+private theorem n08CircleResidual_mean_eq_of_coordinates
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε)
+    (hR : N02Properties D T S C R base ε)
+    (x y : AnnularState S) (q : ℝ)
+    (hx : (n08_stateProjection hS x, q) ∈ stateNeighborhood S C base ε)
+    (hy : (n08_stateProjection hS y, q) ∈ stateNeighborhood S C base ε)
+    (m : ℕ) (hheight : x.1 = y.1) (hν : x.2.1 = y.2.1)
+    (hκ : stateKappa S (n08_stateProjection hS x) m =
+      stateKappa S (n08_stateProjection hS y) m)
+    (hchart : x.2.2.2 = y.2.2.2) :
+    n08ControlMeanCoordinate S m (n08CircleResidual hS hR (x, q)).val =
+      n08ControlMeanCoordinate S m (n08CircleResidual hS hR (y, q)).val :=
+  n08CircleResidual_mean_eq_of_projected_decode hS hR (x, q) (y, q) hx hy m
+    (funext fun θ => n08_returnResidual_component_eq hT hS hN hR
+      (x := n08_stateProjection hS x) (y := n08_stateProjection hS y) (q := q) (m := m)
+      hx hy (n08_stateProjection_mem hS x) (n08_stateProjection_mem hS y)
+      ((n08_stateProjection_height hS x).trans
+        (hheight.trans (n08_stateProjection_height hS y).symm))
+      ((n08_stateProjection_nu hS x).trans
+        (hν.trans (n08_stateProjection_nu hS y).symm))
+      hκ (n08_projected_chart_eq hS x y m hchart) θ)
+
 private theorem n08CircleResidual_mean_zero_line_eq
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε)
@@ -181,29 +212,12 @@ private theorem n08CircleResidual_mean_zero_line_eq
     n08ControlMeanCoordinate S m
         (n08CircleResidual hS hR (z.1 + n08StateSMul S t (0, (0, (u, 0))), z.2)).val =
       n08ControlMeanCoordinate S m (n08CircleResidual hS hR z).val := by
-  let v : AnnularState S := (0, (0, (u, 0)))
-  have hmean : stateKappa S v m = 0 := by
-    rw [n08ControlMeanCoordinate_apply, n08ControlRestriction_apply hS] at hu
-    exact (mul_eq_zero.mp hu).resolve_left
-      (Real.rpow_pos_of_pos (n08_materialSample_H_pos hT hN.1.1 m) _).ne'
   have hcoord := n08_kappaLine_fixed_coordinates S z.1 u t
-  have hheight : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).1 =
-      (n08_stateProjection hS z.1).1 := by
-    exact (n08_stateProjection_height hS _).trans
-      (hcoord.1.trans (n08_stateProjection_height hS z.1).symm)
-  have hν : (n08_stateProjection hS (z.1 + n08StateSMul S t v)).2.1 =
-      (n08_stateProjection hS z.1).2.1 := by
-    exact (n08_stateProjection_nu hS _).trans
-      (hcoord.2.1.trans (n08_stateProjection_nu hS z.1).symm)
-  have hκ : stateKappa S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
-      stateKappa S (n08_stateProjection hS z.1) m :=
-    n08_projected_kappa_line_fixed hS z.1 v m hmean t
-  have hchart : stateLeftChart S (n08_stateProjection hS (z.1 + n08StateSMul S t v)) m =
-      stateLeftChart S (n08_stateProjection hS z.1) m :=
-    n08_projected_chart_eq hS _ _ m hcoord.2.2
-  exact n08CircleResidual_mean_eq_of_projected_decode hS hR _ z ht hz m
-    (funext fun θ => n08_returnResidual_component_eq hT hS hN hR ht hz
-      (n08_stateProjection_mem hS _) (n08_stateProjection_mem hS _) hheight hν hκ hchart θ)
+  exact n08CircleResidual_mean_eq_of_coordinates hT hS hN hR
+    (z.1 + n08StateSMul S t (0, (0, (u, 0)))) z.1 z.2 ht hz m hcoord.1 hcoord.2.1
+    (n08_projected_kappa_line_fixed hS z.1 (0, (0, (u, 0))) m
+      (n08ControlMeanCoordinate_zero hS m (n08_materialSample_H_pos hT hN.1.1 m) u hu) t)
+    hcoord.2.2
 
 private theorem n08CircleResidual_mean_zero_hasLineDerivAt
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)

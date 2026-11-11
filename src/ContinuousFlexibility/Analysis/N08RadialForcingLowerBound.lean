@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N08RadialHeightForcing
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+import Mathlib.MeasureTheory.Integral.DominatedConvergence
 import Mathlib.Topology.Order.IntermediateValue
 
 /-!
@@ -25,11 +26,13 @@ theorem n08_exists_partialIntegral_half
     ∃ r ∈ Ioo a b, (∫ s in a..r, f s) = c / 2 := by
   have hcont : ContinuousOn (fun r => ∫ s in a..r, f s) (Icc a b) := by
     simpa only [uIcc_of_le hab.le] using
-      (continuousOn_primitive_interval' hf (left_mem_uIcc : a ∈ uIcc a b))
+      (intervalIntegral.continuousOn_primitive_interval' hf
+        (left_mem_uIcc : a ∈ uIcc a b))
   have htarget : c / 2 ∈ Icc (∫ s in a..a, f s) (∫ s in a..b, f s) := by
     rw [intervalIntegral.integral_same]
     exact ⟨(half_pos hc).le, (half_le_self hc.le).trans htotal⟩
   obtain ⟨r, hr, heq⟩ := intermediate_value_Icc hab.le hcont htarget
+  dsimp only at heq
   have hleft : a < r := by
     by_contra h
     have he : r = a := le_antisymm (le_of_not_gt h) hr.1
@@ -134,6 +137,7 @@ theorem n08_radialHeight_positive_slope_bound
       ∫ s in C.left m..r, opticalSpeed D.w s * (1 + D.w s ^ 2) / D.w s * g s := by
     apply intervalIntegral.integral_congr_Ioo_of_le hr.1.le
     intro s hs
+    dsimp only
     rw [hgconst s ⟨hs.1, hs.2.trans hr.2⟩]
   exact (hlow.trans_eq heq).trans ((le_abs_self _).trans
     (hbound m η h g hh hη r hr))
