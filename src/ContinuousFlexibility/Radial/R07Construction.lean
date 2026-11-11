@@ -72,10 +72,10 @@ theorem r07_complete (hR06 : R06Statement) : R07Statement := by
   · subst n
     have hmatch := hfirst side j hj heven hband
     refine ⟨U side j, V side j, ?_, ?_⟩
-    · simpa only [cut, join, if_pos rfl] using hmatch.2.1
+    · simpa only [family, cut, join, if_pos rfl] using hmatch.2.1
     · have ha := (mul_le_mul_of_nonneg_right (min_le_left cFirst cLater)
         (exp_pos (-(T.index : ℝ) ^ 2)).le).trans hmatch.2.2
-      simpa only [cut, join, if_pos rfl] using ha
+      simpa only [family, cut, join, if_pos rfl] using ha
   · have hnlt : T.index < n := by have := hband.1; omega
     let q : R07LaterCondition T Cstar := ⟨(side, ⟨(n, j), hj, heven, hband⟩), hnlt⟩
     have hmatch := hlater q
@@ -90,12 +90,13 @@ theorem r07_complete (hR06 : R06Statement) : R07Statement := by
               ((family sigma).w (r07PreviousCellJoin T side (n - 1))) (uLater q))
             (radialState (family sigma) j (r07CellEntry T side n)
               ((family sigma).w (r07PreviousCellJoin T side (n - 1))) (vLater q)) := by
+      dsimp only [family]
       rw [R07MatchingGeometry.angle_replace_middle hM hsigma hmatch.1 hcut]
       exact hmatch.2
     refine ⟨uLater q, vLater q, ?_, ?_⟩
-    · simpa only [cut, join, if_neg hn] using hgeometry
+    · simpa only [family, cut, join, if_neg hn] using hgeometry
     · have ha := (mul_le_mul_of_nonneg_right (min_le_right cFirst cLater)
         (exp_pos (-(n : ℝ) ^ 2)).le).trans hangle
-      simpa only [cut, join, if_neg hn] using ha
+      simpa only [family, cut, join, if_neg hn] using ha
 
 end ContinuousFlexibility.Radial

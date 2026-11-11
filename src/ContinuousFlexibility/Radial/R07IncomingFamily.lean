@@ -188,16 +188,24 @@ theorem exists_r07_original_incoming_family {T : MorseChainData}
     · intro v hv
       refine ⟨hcσ t, heσ t, hpσ t, hwpσ, horder, rfl, ?_, hUinc t,
         (hUsmooth t).contDiffAt, (hUsmooth t).contDiffAt, hUhom t, hv⟩
-      simp only [if_neg (show m + 1 ≠ T.index by dsimp only [m]; omega)]
+      have hne : T.index + k + 1 ≠ T.index := by omega
+      rw [if_neg hne]
       exact ⟨hUc t, hUp t, hUsign t⟩
-    · simpa only [radialState, hUp, hUd, hu₀p, div_self hwp.ne', div_self hwpσ.ne', one_mul]
-        using hu₀state
+    · change radialState (D t) j p ((D t).w p) (U t) = (1, a)
+      have hs₀ : radialState D₀ j p (D₀.w p) u₀ = (1, a) := hu₀state
+      have hup₀ : u₀ p = 1 := hu₀p
+      have hwp₀ : D₀.w p ≠ 0 := hwp.ne'
+      rw [radialState, hup₀, div_self hwp₀, one_mul] at hs₀
+      rw [radialState, hUp t, hUd t, div_self hwpσ.ne', one_mul]
+      exact hs₀
   · apply continuousOn_iff_continuous_domRestrict.mpr
     let lift : heightCube → HeightRatios := fun σ => ⟨σ.val, mem_heightCube.mp σ.property⟩
     have hlift : Continuous lift := continuous_subtype_val.subtype_mk _
     have hcY := hY.comp hlift
     convert hcY using 1
-    ext σ
+    funext σ
+    change radialState (D (lift σ)) j e ((D (lift σ)).w p) (u σ.val) =
+      radialState (D (lift σ)) j e ((D (lift σ)).w p) (U (lift σ))
     rw [hu σ.val (mem_heightCube.mp σ.property)]
 
 end ContinuousFlexibility.Radial

@@ -62,9 +62,8 @@ theorem exists_r07OriginalOutgoing {T : MorseChainData} (hR06 : R06Statement)
   have hentrance (σ : HeightRatios) : tailPhysicalRadius side (Q σ).entrance = f :=
     r07_radius_outwardLog side hfp
   have hwEq (σ : HeightRatios) : (D σ).w = morseChainGluedProfile G σ.val σ.property := by
-    change (morseChainReferenceFamily G phi σ.val).w = _
-    rw [morseChainReferenceFamily_admissible G phi σ.val σ.property]
-    rfl
+    exact congrArg (fun R : ReferenceData => R.w)
+      (morseChainReferenceFamily_admissible G phi σ.val σ.property)
   have hprofileJets (n : ℕ) : ContinuousOn
       (fun z : HeightRatios × ℝ => iteratedDeriv n (D z.1).w z.2) {z | z.2 ∈ tail} := by
     have h := continuousOn_morseChainGluedProfile_iteratedDeriv_tail G side k n

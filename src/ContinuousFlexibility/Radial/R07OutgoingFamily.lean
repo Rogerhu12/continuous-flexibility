@@ -59,6 +59,74 @@ theorem r07OutgoingState_ne_zero {D : ReferenceData} (hD : RadialProfileGeometry
   have hderiv : deriv v e = 0 := (mul_eq_zero.mp hmul).resolve_left he'
   exact radialNaturalTail_cauchyData_ne_zero hD he hv hN (Prod.ext hvalue hderiv)
 
+/-- Fixed normalized deep Cauchy data remain continuous after finite radial
+transport. This is separated from the choice of physical representatives so
+that the analytic continuity argument has only the data it uses in context. -/
+private theorem continuous_r07OutgoingState_of_normalized_data
+    (D : HeightRatios → ReferenceData) (Q : HeightRatios → DeepTailData)
+    (side : Bool) (j : ℕ) {e f : ℝ} (hj : 2 ≤ j)
+    (hgeometry : ∀ σ, RadialProfileGeometry (D σ))
+    (hends : ∀ σ τ, (D σ).a = (D τ).a ∧ (D σ).b = (D τ).b)
+    (hentry : ∀ σ τ, (Q σ).entrance = (Q τ).entrance)
+    (U V : HeightRatios → ℝ → ℝ)
+    (hUc : Continuous (fun σ => deriv (U σ) (Q σ).entrance))
+    (hV : ∀ σ, ContDiff ℝ ∞ (V σ))
+    (hNV : ∀ σ, RadialNaturalTail (D σ) side j e (V σ))
+    (hvalue : ∀ σ, V σ f =
+      r07PhysicalGauge (if side then (D σ).b else (D σ).a) side j (Q σ).entrance)
+    (hslope : ∀ σ, deriv (V σ) f =
+      r07PhysicalInitialSlope (if side then (D σ).b else (D σ).a)
+        side j (Q σ).entrance (deriv (U σ) (Q σ).entrance))
+    (he : ∀ σ, e ∈ radialCore (D σ)) (hf : ∀ σ, f ∈ radialCore (D σ))
+    (hef : if side then e < f else f < e)
+    (hw₀ : ContinuousOn (fun z : HeightRatios × ℝ => (D z.1).w z.2)
+      {z | z.2 ∈ uIcc f e})
+    (hw₁ : ContinuousOn (fun z : HeightRatios × ℝ => deriv (D z.1).w z.2)
+      {z | z.2 ∈ uIcc f e}) :
+    Continuous (fun σ => r07OutgoingState j e (V σ)) ∧
+      ∀ σ, r07OutgoingState j e (V σ) ≠ (0, 0) := by
+  let base : HeightRatios := ⟨fun _ => 1, fun _ => ⟨le_rfl, by norm_num⟩⟩
+  let endpoint : ℝ := if side then (D base).b else (D base).a
+  let entrance : ℝ := (Q base).entrance
+  have hEnd (σ : HeightRatios) : (if side then (D σ).b else (D σ).a) = endpoint := by
+    cases side
+    · exact (hends σ base).1
+    · exact (hends σ base).2
+  have hEntry (σ : HeightRatios) : (Q σ).entrance = entrance := hentry σ base
+  have hvalue_eq : (fun σ => V σ f) = fun _ => r07PhysicalGauge endpoint side j entrance := by
+    funext σ
+    simpa only [hEnd σ, hEntry σ] using hvalue σ
+  have hslope_eq : (fun σ => deriv (V σ) f) = fun σ =>
+      r07PhysicalInitialSlope endpoint side j entrance (deriv (U σ) (Q σ).entrance) := by
+    funext σ
+    simpa only [hEnd σ, hEntry σ] using hslope σ
+  have hinit₀ : Continuous (fun σ => V σ f) := by
+    rw [hvalue_eq]
+    exact continuous_const
+  have hinit₁ : Continuous (fun σ => deriv (V σ) f) := by
+    rw [hslope_eq]
+    unfold r07PhysicalInitialSlope
+    exact (continuous_const.add (continuous_const.mul hUc)).div_const _
+  have hcore (σ : HeightRatios) (r : ℝ) (hr : r ∈ uIcc f e) : r ∈ radialCore (D σ) :=
+    ⟨(lt_min (hf σ).1 (he σ).1).trans_le hr.1,
+      hr.2.trans_lt (max_lt (hf σ).2 (he σ).2)⟩
+  have hODE (σ : HeightRatios) (r : ℝ) (hr : r ∈ uIcc f e) :
+      radialJacobi ((j : ℝ) ^ 2) (D σ).w (V σ) r = 0 :=
+    radialNaturalTail_zero_uIcc (hgeometry σ) (he σ) (hf σ) hef (hV σ) (hNV σ) r
+      (by simpa only [uIcc_comm f e] using hr)
+  have hCauchy : Continuous (fun σ => (V σ e, deriv (V σ) e)) :=
+    continuous_radialCauchyData_transport j
+      (fun σ => (hgeometry σ).2.2.1.1) hV hw₀ hw₁
+      (fun σ r hr => ((hgeometry σ).2.2.2.2.1 r (hcore σ r hr)).ne')
+      (fun r hr => ((hgeometry base).1.trans (hcore base r hr).1).ne')
+      hODE hinit₀ hinit₁
+  constructor
+  · change Continuous (fun σ => (V σ e, e * deriv (V σ) e / (j : ℝ) ^ 2 - V σ e))
+    exact hCauchy.fst.prodMk
+      (((continuous_const.mul hCauchy.snd).div_const ((j : ℝ) ^ 2)).sub hCauchy.fst)
+  · intro σ
+    exact r07OutgoingState_ne_zero (hgeometry σ) hj (he σ) (hV σ) (hNV σ)
+
 /-- Given the actual complete R06 data for a height family, its normalized
 parameter theorem constructs a continuous nonzero physical outgoing state
 at an earlier fixed matching radius.  The returned solutions retain the
@@ -110,47 +178,16 @@ theorem exists_continuous_radialNaturalFamily_of_R06_data
       RadialNaturalTail (D σ) side j e u ∧ u f = v σ f ∧ deriv u f = deriv (v σ) f :=
     exists_radialNaturalTail_continuation_with_cauchy (hgeometry σ) (he σ) (hf σ) hef (hv σ) (hNv σ)
   choose V hV hNV hV₀ hV₁ using hcontinued
-  have hvalue (σ : HeightRatios) := (hV₀ σ).trans (hv₀ σ)
-  have hslope (σ : HeightRatios) := (hV₁ σ).trans (hv₁ σ)
-  let base : HeightRatios := ⟨fun _ => 1, fun _ => ⟨le_rfl, by norm_num⟩⟩
-  let endpoint : ℝ := if side then (D base).b else (D base).a
-  let entrance : ℝ := (Q base).entrance
-  have hEnd (σ : HeightRatios) : (if side then (D σ).b else (D σ).a) = endpoint := by
-    cases side
-    · exact (hends σ base).1
-    · exact (hends σ base).2
-  have hEntry (σ : HeightRatios) : (Q σ).entrance = entrance := (hfixed σ base).1
-  have hvalue_eq : (fun σ => V σ f) = fun _ => r07PhysicalGauge endpoint side j entrance := by
-    funext σ
-    rw [hvalue σ, hEnd σ, hEntry σ]
-  have hslope_eq : (fun σ => deriv (V σ) f) = fun σ =>
-      r07PhysicalInitialSlope endpoint side j entrance (deriv (U σ) (Q σ).entrance) := by
-    funext σ
-    exact (hslope σ).trans (congrArg
-      (fun z : ℝ × ℝ => r07PhysicalInitialSlope z.1 side j z.2 (deriv (U σ) (Q σ).entrance))
-      (Prod.ext (hEnd σ) (hEntry σ)))
-  have hinit₀ : Continuous (fun σ => V σ f) := by rw [hvalue_eq]; exact continuous_const
-  have hinit₁ : Continuous (fun σ => deriv (V σ) f) := by
-    rw [hslope_eq]
-    unfold r07PhysicalInitialSlope
-    exact (continuous_const.add (continuous_const.mul hUc)).div_const _
-  have hcore (σ : HeightRatios) (r : ℝ) (hr : r ∈ uIcc f e) : r ∈ radialCore (D σ) :=
-    ⟨(lt_min (hf σ).1 (he σ).1).trans_le hr.1,
-      hr.2.trans_lt (max_lt (hf σ).2 (he σ).2)⟩
-  have hODE (σ : HeightRatios) (r : ℝ) (hr : r ∈ uIcc f e) :
-      radialJacobi ((j : ℝ) ^ 2) (D σ).w (V σ) r = 0 :=
-    radialNaturalTail_zero_uIcc (hgeometry σ) (he σ) (hf σ) hef (hV σ) (hNV σ) r
-      (by simpa only [uIcc_comm f e] using hr)
-  have hCauchy := continuous_radialCauchyData_transport j
-    (fun σ => (hgeometry σ).2.2.1.1) hV hw₀ hw₁
-    (fun σ r hr => ((hgeometry σ).2.2.2.2.1 r (hcore σ r hr)).ne')
-    (fun r hr => ((hgeometry base).1.trans (hcore base r hr).1).ne')
-    hODE hinit₀ hinit₁
-  refine ⟨U, V, hU, fun σ => ⟨hV σ, hNV σ, hvalue σ, hslope σ⟩, ?_, ?_⟩
-  · change Continuous (fun σ => (V σ e, e * deriv (V σ) e / (j : ℝ) ^ 2 - V σ e))
-    exact hCauchy.fst.prodMk
-      (((continuous_const.mul hCauchy.snd).div_const ((j : ℝ) ^ 2)).sub hCauchy.fst)
-  · intro σ
-    exact r07OutgoingState_ne_zero (hgeometry σ) hj (he σ) (hV σ) (hNV σ)
+  have hvalue (σ : HeightRatios) : V σ f =
+      r07PhysicalGauge (if side then (D σ).b else (D σ).a) side j (Q σ).entrance :=
+    (hV₀ σ).trans (hv₀ σ)
+  have hslope (σ : HeightRatios) : deriv (V σ) f =
+      r07PhysicalInitialSlope (if side then (D σ).b else (D σ).a)
+        side j (Q σ).entrance (deriv (U σ) (Q σ).entrance) :=
+    (hV₁ σ).trans (hv₁ σ)
+  obtain ⟨hBcont, hBne⟩ := continuous_r07OutgoingState_of_normalized_data D Q side j hj
+    hgeometry hends (fun σ τ => (hfixed σ τ).1) U V hUc hV hNV hvalue hslope
+    he hf hef hw₀ hw₁
+  exact ⟨U, V, hU, fun σ => ⟨hV σ, hNV σ, hvalue σ, hslope σ⟩, hBcont, hBne⟩
 
 end ContinuousFlexibility.Radial

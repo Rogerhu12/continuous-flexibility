@@ -173,7 +173,8 @@ theorem exists_r07_first_band_matching {T : MorseChainData}
   have hcone (side : Bool) (x : ℝ) (hx : x ∈ uIcc (H.cut side) (H.join side)) :
       D.w =ᶠ[𝓝 x] fun r => (amp * H.scale side) * r := by
     have hxMid := ordConnected_Icc.uIcc_subset (hcut side) (hjoin side) hx
-    simpa only [mul_assoc] using (hInside x hxMid).trans ((hCone side x hx).fun_comp (fun z => amp * z))
+    filter_upwards [hInside x hxMid, hCone side x hx] with y hy hyCone
+    rw [hy, hyCone, mul_assoc]
   have hEntryHeight (side : Bool) : D.w (entry side) = amp * (if side then f b else f a) := by
     rw [(hInside (entry side) (hentry side)).eq_of_nhds]
     cases side
@@ -189,13 +190,14 @@ theorem exists_r07_first_band_matching {T : MorseChainData}
         ((B side i).1, (if side then f b else f a) / (if side then WR else WL) * (B side i).2) := by
     unfold radialState
     rw [hEntryHeight, hJoinHeight, mul_div_mul_left _ _ hamp.ne']
-    rfl
   have hlen (side : Bool) : |entry side - H.join side| ≤ eta := by
     rw [heq]
     cases side
-    · rw [abs_sub_comm, abs_of_pos (sub_pos.mpr hajL)]
+    · simp only [Bool.false_eq_true, ite_false]
+      rw [abs_sub_comm, abs_of_pos (sub_pos.mpr hajL)]
       exact hshortL.le
-    · rw [abs_of_pos (sub_pos.mpr hjRb)]
+    · simp only [ite_true]
+      rw [abs_of_pos (sub_pos.mpr hjRb)]
       exact hshortR.le
   have hex : ∀ q : Bool × R07FirstFrequency T Cstar, ∃ u : ℝ → ℝ,
       ContDiff ℝ ∞ u ∧
@@ -234,11 +236,13 @@ theorem exists_r07_first_band_matching {T : MorseChainData}
     else fun _ => 0
   refine ⟨H, δ, incoming, hM, hδ, hδ48, ?_⟩
   intro side j hj heven hband
-  have hi := hU (side, ⟨j, ⟨hj, heven, hband⟩⟩)
+  have hjvalid : 2 ≤ j ∧ Even j ∧ radialFrequencyBand T Cstar T.index j :=
+    ⟨hj, heven, hband⟩
+  have hi := hU (side, ⟨j, hjvalid⟩)
   have hmargin : δ * exp (-(T.index : ℝ) ^ 2) ≤ δ := by
     simpa only [mul_one] using mul_le_mul_of_nonneg_left
       (exp_le_one_iff.mpr (neg_nonpos.mpr (sq_nonneg (T.index : ℝ)))) hδ.le
-  simpa only [incoming, dif_pos ⟨hj, heven, hband⟩] using
+  simpa only [incoming, dite_eq_left hjvalid, D, entry] using
     And.intro hi.1 (And.intro hi.2.1 (hmargin.trans hi.2.2))
 
 end ContinuousFlexibility.Radial
