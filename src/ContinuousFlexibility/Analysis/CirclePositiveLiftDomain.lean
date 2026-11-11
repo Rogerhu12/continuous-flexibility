@@ -34,16 +34,12 @@ theorem circleAffineLift_deriv
       1 + deriv (S.decode e m) θ := by
   have he : HasDerivAt (S.decode e m) (deriv (S.decode e m) θ) θ :=
     (((hS.2.2.2.1 e).1 m).1.differentiable (by simp)).differentiableAt.hasDerivAt
-  have hlift : circleAffineLift travel (S.decode e) 1 m =
-      fun t : ℝ => t + travel m + S.decode e m t := by
-    funext t
-    change t + travel m + (1 : ℝ) * S.decode e m t =
-      t + travel m + S.decode e m t
-    rw [one_mul]
-  have hd : deriv (fun t : ℝ => t + travel m + S.decode e m t) θ =
-      1 + deriv (S.decode e m) θ :=
-    (((hasDerivAt_id θ).add_const (travel m)).fun_add he).deriv
-  exact (congrArg (fun F : ℝ → ℝ => deriv F θ) hlift).trans hd
+  have h : HasDerivAt (circleAffineLift travel (S.decode e) 1 m)
+      (1 + deriv (S.decode e m) θ) θ :=
+    (((hasDerivAt_id θ).add_const (travel m)).add he).congr_of_eventuallyEq
+      (Eventually.of_forall fun x => by
+        simp only [circleAffineLift, Pi.add_apply, id_eq, one_mul])
+  exact h.deriv
 
 theorem circlePositiveLiftDomain_iff
     (hS : IsCircleModel T γ S) (travel : ℕ → ℝ) (e : S.Space) :
@@ -51,29 +47,26 @@ theorem circlePositiveLiftDomain_iff
       ∀ m θ, 0 < deriv (circleAffineLift travel (S.decode e) 1 m) θ := by
   simp only [circlePositiveLiftDomain, mem_setOf_eq, circleAffineLift_deriv hS]
 
-private theorem circle_weighted_value_bound
-    {w winv A c x e : ℝ} (hw : 0 ≤ w) (hcancel : w * winv = 1)
-    (hA : w ≤ A) (hc : 0 ≤ c) (he : 0 ≤ e) (hb : winv * x ≤ c * e) :
-    x ≤ c * A * e := by
+private theorem circle_unweight_component_envelope
+    (w iw A c t u : ℝ) (hw : 0 ≤ w) (hcancel : w * iw = 1)
+    (hA : w ≤ A) (hct : 0 ≤ c * t) (hb : iw * |u| ≤ c * t) :
+    |u| ≤ (c * A) * t := by
   calc
-    x = w * (winv * x) := by rw [← mul_assoc, hcancel, one_mul]
-    _ ≤ w * (c * e) := mul_le_mul_of_nonneg_left hb hw
-    _ ≤ A * (c * e) := mul_le_mul_of_nonneg_right hA (mul_nonneg hc he)
-    _ = c * A * e := by ring
+    |u| = w * (iw * |u|) := by rw [← mul_assoc, hcancel, one_mul]
+    _ ≤ w * (c * t) := mul_le_mul_of_nonneg_left hb hw
+    _ ≤ A * (c * t) := mul_le_mul_of_nonneg_right hA hct
+    _ = (c * A) * t := by ring
 
-/-- The componentwise Sobolev envelope tends to zero because its squared
-energies form part of the actual finite circle norm. -/
-theorem circleModel_angular_jet_tail
-    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
+private theorem circleMember_angular_jet_tail_of_energy
+    (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
-    (e : S.Space) (b : ℕ) {δ : ℝ} (hδ : 0 < δ) :
+    {u : ℕ → ℝ → ℝ} (hu : CircleMember T γ u) (b : ℕ) {δ : ℝ} (hδ : 0 < δ) :
     ∃ N : ℕ, ∀ m, N ≤ m → ∀ θ,
-      |iteratedDeriv b (S.decode e m) θ| < δ := by
-  have he : CircleMember T γ (S.decode e) := hS.2.2.2.1 e
+      |iteratedDeriv b (u m) θ| < δ := by
   have hw := material_circle_sample_weights_pos hT hD
   obtain ⟨A, hA, hHA⟩ := material_circle_power_upper hT hD hγ
-  let E : ℕ → ℝ≥0∞ := circleComponentEnergy T γ (b + 1) (S.decode e)
-  have hsum : (∑' m, E m) < ⊤ := he.2.2 (b + 1)
+  let E : ℕ → ℝ≥0∞ := circleComponentEnergy T γ (b + 1) u
+  have hsum : (∑' m, E m) < ⊤ := hu.2.2 (b + 1)
   have hreal : Summable (fun m => (E m).toReal) := ENNReal.summable_toReal hsum.ne
   have hlim : Tendsto (fun m => (2 * circleSobolevConstant * A) * Real.sqrt (E m).toReal)
       atTop (𝓝 (0 : ℝ)) := by
@@ -83,20 +76,31 @@ theorem circleModel_angular_jet_tail
   obtain ⟨N, hN⟩ := eventually_atTop.mp (hlim.eventually (Iio_mem_nhds hδ))
   refine ⟨N, ?_⟩
   intro m hm θ
-  have hb : T.H (T.sample m) ^ (-γ) * |iteratedDeriv b (S.decode e m) θ| ≤
-      (2 * circleSobolevConstant) * Real.sqrt (E m).toReal := by
-    simpa only [E, pow_zero, one_mul] using
-      circleWeighted_abs_le_componentEnergy he (hw.1 m).le (hw.2 m).le
-        (m := m) (a := b) (b := 0) (s := b + 1) (by omega) θ
+  have hb := circleWeighted_abs_le_componentEnergy hu (hw.1 m).le (hw.2 m).le
+    (a := b) (b := 0) (s := b + 1) (by omega) θ
+  simp only [pow_zero, one_mul] at hb
   have hcancel : T.H (T.sample m) ^ γ * T.H (T.sample m) ^ (-γ) = 1 := by
     rw [← Real.rpow_add (hw.2 m)]
     simp only [add_neg_cancel, Real.rpow_zero]
-  have hbound : |iteratedDeriv b (S.decode e m) θ| ≤
-      (2 * circleSobolevConstant * A) * Real.sqrt (E m).toReal :=
-    circle_weighted_value_bound (Real.rpow_nonneg (hw.2 m).le _) hcancel
-      (hHA m) (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
-      (Real.sqrt_nonneg _) hb
+  have hbound : |iteratedDeriv b (u m) θ| ≤
+      (2 * circleSobolevConstant * A) * Real.sqrt (E m).toReal := by
+    exact circle_unweight_component_envelope
+      (T.H (T.sample m) ^ γ) (T.H (T.sample m) ^ (-γ)) A
+      (2 * circleSobolevConstant) (Real.sqrt (E m).toReal) (iteratedDeriv b (u m) θ)
+      (Real.rpow_nonneg (hw.2 m).le _) hcancel (hHA m)
+      (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg)
+        (Real.sqrt_nonneg _)) hb
   exact hbound.trans_lt (hN m hm)
+
+/-- The componentwise Sobolev envelope tends to zero because its squared
+energies form part of the actual finite circle norm. -/
+theorem circleModel_angular_jet_tail
+    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
+    (e : S.Space) (b : ℕ) {δ : ℝ} (hδ : 0 < δ) :
+    ∃ N : ℕ, ∀ m, N ≤ m → ∀ θ,
+      |iteratedDeriv b (S.decode e m) θ| < δ :=
+  circleMember_angular_jet_tail_of_energy hT hD hγ (hS.2.2.2.1 e) b hδ
 
 private theorem periodic_positive_has_uniform_lower
     {g : ℝ → ℝ} (hg : Continuous g) (hp : Function.Periodic g Real.pi)
@@ -115,14 +119,14 @@ private theorem periodic_positive_has_uniform_lower
   have heq : g θ = g y := (congrArg g hθ.symm).trans (hp.zsmul n y)
   exact (hmin hy).trans_eq heq.symm
 
-private theorem component_lower_with_positive_tail
-    (f : ℕ → ℝ → ℝ)
-    (hcomponent : ∀ m, ∃ a : ℝ, 0 < a ∧ ∀ θ, a ≤ f m θ)
-    (htail : ∃ N : ℕ, ∀ m, N ≤ m → ∀ θ, (1 / 2 : ℝ) ≤ f m θ) :
-    ∃ a : ℝ, 0 < a ∧ ∀ m θ, a ≤ f m θ := by
+private theorem family_uniform_lower_of_component_bounds
+    (g : ℕ → ℝ → ℝ)
+    (hcomponent : ∀ m, ∃ a : ℝ, 0 < a ∧ ∀ θ, a ≤ g m θ)
+    (N : ℕ) (htail : ∀ m, N ≤ m → ∀ θ, 1 / 2 ≤ g m θ) :
+    ∃ a : ℝ, 0 < a ∧ ∀ m θ, a ≤ g m θ := by
   classical
   have hfinite (F : Finset ℕ) : ∃ a : ℝ, 0 < a ∧ a ≤ 1 / 2 ∧
-      ∀ m ∈ F, ∀ θ, a ≤ f m θ := by
+      ∀ m ∈ F, ∀ θ, a ≤ g m θ := by
     induction F using Finset.induction_on with
     | empty => exact ⟨1 / 2, by norm_num, le_rfl, by simp⟩
     | @insert m F hm ih =>
@@ -133,13 +137,12 @@ private theorem component_lower_with_positive_tail
       rcases Finset.mem_insert.mp hj with rfl | hj
       · exact (min_le_right _ _).trans (hcBound θ)
       · exact (min_le_left _ _).trans (hbound j hj θ)
-  obtain ⟨N, hN⟩ := htail
   obtain ⟨a, ha, hhalf, hfiniteBound⟩ := hfinite (Finset.range N)
   refine ⟨a, ha, ?_⟩
   intro m θ
   by_cases hm : m < N
   · exact hfiniteBound m (Finset.mem_range.mpr hm) θ
-  · exact hhalf.trans (hN m (Nat.le_of_not_gt hm) θ)
+  · exact hhalf.trans (htail m (Nat.le_of_not_gt hm) θ)
 
 theorem circlePositiveLiftDomain_uniform_lower
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -149,23 +152,31 @@ theorem circlePositiveLiftDomain_uniform_lower
   classical
   have hcomponent (m : ℕ) : ∃ a : ℝ, 0 < a ∧
       ∀ θ, a ≤ 1 + deriv (S.decode e m) θ := by
-    apply periodic_positive_has_uniform_lower
-      (continuous_const.add (((hS.2.2.2.1 e).1 m).1.continuous_deriv (by simp)))
-      _ (he m)
+    have hfun : ((fun _ : ℝ => (1 : ℝ)) + deriv (S.decode e m)) =
+        (fun θ => 1 + deriv (S.decode e m) θ) := by
+      funext θ
+      rfl
+    have hcont₀ : Continuous ((fun _ : ℝ => (1 : ℝ)) + deriv (S.decode e m)) :=
+      continuous_const.add (((hS.2.2.2.1 e).1 m).1.continuous_deriv (by simp))
+    have hcont : Continuous (fun θ => 1 + deriv (S.decode e m) θ) :=
+      (congrArg (fun q : ℝ → ℝ => Continuous q) hfun).mp hcont₀
+    apply periodic_positive_has_uniform_lower hcont _ (he m)
     intro θ
     have hp := circlePeriodic_iteratedDeriv_real ((hS.2.2.2.1 e).1 m).2 1 θ
-    simpa only [iteratedDeriv_one, Pi.add_apply] using congrArg (fun x : ℝ => 1 + x) hp
-  apply component_lower_with_positive_tail
-    (fun m θ => 1 + deriv (S.decode e m) θ) hcomponent
-  let tail := circleModel_angular_jet_tail hS hT hD hγ e 1
-    (by norm_num : (0 : ℝ) < 1 / 2)
-  let N : ℕ := tail.choose
-  have hN : ∀ m, N ≤ m → ∀ θ, |deriv (S.decode e m) θ| < 1 / 2 := by
-    intro m hm θ
-    simpa only [iteratedDeriv_one] using (tail.choose_spec m hm θ)
-  refine ⟨N, ?_⟩
+    have hp' : deriv (S.decode e m) (θ + Real.pi) = deriv (S.decode e m) θ := by
+      simpa only [iteratedDeriv_one] using hp
+    exact congrArg (fun x : ℝ => 1 + x) hp'
+  let tailData := circleModel_angular_jet_tail (D := D) (T := T) (γ := γ) (S := S)
+    hS hT hD hγ e 1 (by norm_num : (0 : ℝ) < 1 / 2)
+  let N : ℕ := tailData.choose
+  have hN : ∀ m, N ≤ m → ∀ θ, |iteratedDeriv 1 (S.decode e m) θ| < 1 / 2 :=
+    tailData.choose_spec
+  apply family_uniform_lower_of_component_bounds
+    (fun m θ => 1 + deriv (S.decode e m) θ) hcomponent N
   intro m hm θ
-  have hlow : -(1 / 2 : ℝ) < deriv (S.decode e m) θ := (abs_lt.mp (hN m hm θ)).1
+  have hb : |deriv (S.decode e m) θ| < 1 / 2 := by
+    simpa only [iteratedDeriv_one] using hN m hm θ
+  have hlow := (abs_lt.mp hb).1
   linarith only [hlow]
 
 private theorem circleDecode_deriv_sub
@@ -175,32 +186,10 @@ private theorem circleDecode_deriv_sub
     (((hS.2.2.2.1 e).1 m).1.differentiable (by simp)).differentiableAt.hasDerivAt
   have hf : HasDerivAt (S.decode f m) (deriv (S.decode f m) θ) θ :=
     (((hS.2.2.2.1 f).1 m).1.differentiable (by simp)).differentiableAt.hasDerivAt
-  have hfield : S.decode (e - f) m = fun t => S.decode e m t - S.decode f m t := by
+  have hfield : S.decode (e - f) m = S.decode e m - S.decode f m := by
     funext t
     exact congrFun (congrFun (S.decode.map_sub e f) m) t
-  rw [hfield]
-  exact (he.fun_sub hf).deriv
-
-private theorem seminorm_positive_family_local
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
-    (p : Seminorm ℝ E) (f : E → ℕ → ℝ → ℝ) (e₀ : E)
-    {a A : ℝ} (ha : 0 < a) (hA : 0 ≤ A)
-    (hlower : ∀ m θ, a ≤ 1 + f e₀ m θ)
-    (hbound : ∀ e m θ, |f e m θ - f e₀ m θ| ≤ A * p (e - e₀)) :
-    ∃ a δ : ℝ, 0 < a ∧ 0 < δ ∧ ∀ e : E,
-      p (e - e₀) < δ → ∀ m θ, a ≤ 1 + f e m θ := by
-  have hL : 0 < 1 + A := add_pos_of_pos_of_nonneg zero_lt_one hA
-  refine ⟨a / 2, (a / 2) / (1 + A), div_pos ha (by norm_num),
-    div_pos (div_pos ha (by norm_num)) hL, ?_⟩
-  intro e he m θ
-  have hsmall : (1 + A) * p (e - e₀) < a / 2 := by
-    simpa only [mul_comm (1 + A)] using (lt_div_iff₀ hL).mp he
-  have hdiff : -(a / 2) < f e m θ - f e₀ m θ :=
-    (abs_lt.mp ((hbound e m θ).trans_lt
-      ((mul_le_mul_of_nonneg_right (le_add_of_nonneg_left zero_le_one)
-        (apply_nonneg _ _)).trans_lt hsmall))).1
-  have hbase := hlower m θ
-  linarith only [hdiff, hbase]
+  exact (congrArg (fun u : ℝ → ℝ => deriv u θ) hfield).trans (he.sub hf).deriv
 
 /-- A fixed second-order seminorm neighborhood preserves one common
 lower derivative bound on all circles. -/
@@ -210,23 +199,33 @@ theorem circlePositiveLiftDomain_local_lower
     {e₀ : S.Space} (he₀ : e₀ ∈ circlePositiveLiftDomain S) :
     ∃ a δ : ℝ, 0 < a ∧ 0 < δ ∧ ∀ e : S.Space,
       S.grading 2 (e - e₀) < δ → ∀ m θ, a ≤ 1 + deriv (S.decode e m) θ := by
-  let lower := circlePositiveLiftDomain_uniform_lower hS hT hD hγ he₀
-  let a : ℝ := lower.choose
-  have ha : 0 < a := lower.choose_spec.1
-  have hlower : ∀ m θ, a ≤ 1 + deriv (S.decode e₀ m) θ := lower.choose_spec.2
-  let upper := material_circle_power_upper hT hD hγ
-  let A : ℝ := upper.choose
-  have hA : 0 ≤ A := upper.choose_spec.1
-  have hHA : ∀ m, T.H (T.sample m) ^ γ ≤ A := upper.choose_spec.2
-  apply seminorm_positive_family_local (a := a)
-    (A := 2 * circleSobolevConstant * A) (S.grading 2)
-    (fun e m θ => deriv (S.decode e m) θ) e₀ ha
-    (mul_nonneg (mul_nonneg (by norm_num : (0 : ℝ) ≤ 2)
-      circleSobolevConstant_nonneg) hA) hlower
-  intro e m θ
+  let lowerData := circlePositiveLiftDomain_uniform_lower
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ he₀
+  let a : ℝ := lowerData.choose
+  have ha : 0 < a := lowerData.choose_spec.1
+  have hlower : ∀ m θ, a ≤ 1 + deriv (S.decode e₀ m) θ := lowerData.choose_spec.2
+  let upperData := material_circle_power_upper (D := D) (T := T) (γ := γ) hT hD hγ
+  let A : ℝ := upperData.choose
+  have hA : 0 ≤ A := upperData.choose_spec.1
+  have hHA : ∀ m, T.H (T.sample m) ^ γ ≤ A := upperData.choose_spec.2
+  let L : ℝ := 1 + 2 * circleSobolevConstant * A
+  have hL : 0 < L := add_pos_of_pos_of_nonneg zero_lt_one
+    (mul_nonneg (mul_nonneg (by norm_num) circleSobolevConstant_nonneg) hA)
+  refine ⟨a / 2, (a / 2) / L, by positivity, div_pos (by positivity) hL, ?_⟩
+  intro e he m θ
   have hb := circleModel_jet_abs_le_material_upper hS
     (material_circle_sample_weights_pos hT hD).2 hA hHA (e - e₀) m 1 θ
-  simpa only [iteratedDeriv_one, circleDecode_deriv_sub hS] using hb
+  simp only [iteratedDeriv_one, circleDecode_deriv_sub hS] at hb
+  have hbound : |deriv (S.decode e m) θ - deriv (S.decode e₀ m) θ| ≤
+      L * S.grading 2 (e - e₀) := by
+    apply hb.trans
+    exact mul_le_mul_of_nonneg_right (by dsimp only [L]; linarith)
+      (apply_nonneg _ _)
+  have hsmall : L * S.grading 2 (e - e₀) < a / 2 := by
+    simpa only [mul_comm L] using (lt_div_iff₀ hL).mp he
+  have hdiff := (abs_lt.mp (hbound.trans_lt hsmall)).1
+  have hbase := hlower m θ
+  linarith only [hdiff, hbase]
 
 theorem circlePositiveLiftDomain_isOpen
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
@@ -238,11 +237,10 @@ theorem circlePositiveLiftDomain_isOpen
   have hc : Continuous (fun e : S.Space => S.grading 2 (e - e₀)) :=
     ((withSeminorms_graded (fun j => S.level j) S.bond).continuous_seminorm 2).comp
       (continuous_id.sub continuous_const)
-  have hcenter : S.grading 2 (e₀ - e₀) = (0 : ℝ) := by
-    rw [sub_self]
-    exact (map_zero (S.grading 2) : S.grading 2 (0 : S.Space) = (0 : ℝ))
+  have hzero : S.grading 2 (e₀ - e₀) = 0 :=
+    (congrArg (fun e : S.Space => S.grading 2 e) (sub_self e₀)).trans (S.grading 2).map_zero'
   have hball : {e : S.Space | S.grading 2 (e - e₀) < δ} ∈ 𝓝 e₀ :=
-    (isOpen_lt hc continuous_const).mem_nhds (hcenter.trans_lt hδ)
+    (isOpen_lt hc continuous_const).mem_nhds (hzero.trans_lt hδ)
   apply mem_of_superset hball
   intro e he m θ
   exact ha.trans_le (hbound e he m θ)

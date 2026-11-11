@@ -23,6 +23,39 @@ local instance circleCompositionSmoothDirectionsPairSMul (S : CircleModelData) :
 
 variable {D : ReferenceData} {T : MaterialData} {γ : ℝ} {S : CircleModelData}
 
+private theorem circleChartCompositionJets_zero_decode
+    (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
+    (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
+    (travel : ℕ → ℝ) (x : S.Space × S.Space) :
+    circleChartCompositionJets hS travel 0 x Fin.elim0 =
+      S.decode (circleShiftedChartComposeContinuousLinear hS hT hD hγ travel x.1 x.2) := by
+  refine (circleChartCompositionJets_zero hS travel x).trans ?_
+  funext m θ
+  exact ((congrArg (fun u : S.Space => S.decode u m θ)
+    (circleShiftedChartComposeContinuousLinear_apply hS hT hD hγ travel x.1 x.2)).trans
+      (circleShiftedChartComposeLinear_decode hS hT hD hγ travel x.1 x.2 m θ)).symm
+
+private theorem exists_decoded_smoothDirections_of_cover
+    {E F G : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F] [T2Space F]
+    (f : E → F) (decode : F → G)
+    (value : ∀ n : ℕ, E → (Fin n → E) → G) (V : E → Set E)
+    (hself : ∀ x, x ∈ V x)
+    (hlocal : ∀ i, ∃ J : SmoothDirections (V i) f,
+      ∀ n x, x ∈ V i → ∀ v : Fin n → E, decode (J.D n x v) = value n x v) :
+    ∃ K : SmoothDirections univ f,
+      ∀ n x (v : Fin n → E), decode (K.D n x v) = value n x v := by
+  classical
+  choose J hJ using hlocal
+  obtain ⟨K, hK⟩ := exists_smoothDirections_of_open_cover
+    (U := (univ : Set E)) isOpen_univ V J
+    (fun i x hx => mem_univ x) (fun x hx => ⟨x, hself x⟩)
+  refine ⟨K, ?_⟩
+  intro n x v
+  exact (congrArg (fun L : E [×n]→L[ℝ] F => decode (L v))
+    (hK x n x (hself x))).trans (hJ x n x (hself x) v)
+
 theorem exists_circleChartComposition_smoothDirections
     (hS : IsCircleModel T γ S) (hT : IsMaterialData D T)
     (hD : IsAccumulatingProfile D) (hγ : 0 < γ)
@@ -39,8 +72,13 @@ theorem exists_circleChartComposition_smoothDirections
   have htop := withSeminorms_pairGrading
     (withSeminorms_graded (fun j => S.level j) S.bond)
     (withSeminorms_graded (fun j => S.level j) S.bond)
-  obtain ⟨base, hbounds⟩ := circleChartCompositionJets_uniform_normBounds
-    hS hT hD hγ hinterp travel
+  let boundsData := circleChartCompositionJets_uniform_normBounds
+    (D := D) (T := T) (γ := γ) (S := S) hS hT hD hγ hinterp travel
+  let base : ℕ := boundsData.choose
+  have hbounds : ∀ K : ℝ, 0 ≤ K →
+      CircleJetNormBounds (T := T) (γ := γ)
+        (U := {x : S.Space × S.Space | p base x < K})
+        (circleChartCompositionJets hS travel) := boundsData.choose_spec
   let V : (S.Space × S.Space) → Set (S.Space × S.Space) :=
     fun x₀ => {x | p base x < 1 + p base x₀}
   have hVopen (x₀ : S.Space × S.Space) : IsOpen (V x₀) :=
@@ -59,25 +97,14 @@ theorem exists_circleChartComposition_smoothDirections
       exact circleChartCompositionJets_member hS hT hD hγ travel n x v
     · exact hbounds (1 + p base x₀) (by positivity)
     · intro x hx
-      rw [circleChartCompositionJets_zero]
-      funext m θ
-      rw [show f x = circleShiftedChartComposeLinear hS hT hD hγ travel x.1 x.2 from
-        circleShiftedChartComposeContinuousLinear_apply hS hT hD hγ travel x.1 x.2,
-        circleShiftedChartComposeLinear_decode]
-      rfl
+      exact circleChartCompositionJets_zero_decode hS hT hD hγ travel x
     · intro n x w v t ht m b θ
       exact circleChartCompositionJets_angular_line_hasDerivAt hS travel n x w v t m b θ
     · exact circleChartCompositionJets_secondEnvelopes hS hT hD hγ travel (hVopen x₀)
-  choose J hJ using hlocal
   have hself (x : S.Space × S.Space) : x ∈ V x := by
     change p base x < 1 + p base x
     linarith
-  obtain ⟨K, hK⟩ := exists_smoothDirections_of_open_cover
-    (U := (univ : Set (S.Space × S.Space))) isOpen_univ V J
-    (fun i x hx => mem_univ x) (fun x hx => ⟨x, hself x⟩)
-  refine ⟨K, ?_⟩
-  intro n x v
-  rw [hK x n x (hself x)]
-  exact hJ x n x (hself x) v
+  exact exists_decoded_smoothDirections_of_cover f (fun u : S.Space => S.decode u)
+    (fun n x v => circleChartCompositionJets hS travel n x v) V hself hlocal
 
 end ContinuousFlexibility.Statements
