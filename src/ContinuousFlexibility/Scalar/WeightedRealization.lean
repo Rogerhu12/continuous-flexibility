@@ -23,6 +23,52 @@ open scoped Topology
 
 set_option backward.isDefEq.respectTransparency false
 
+/-- Restriction and order enlargement use only the numerical family estimate. -/
+private theorem linearFamily_bound_restrict_weaken
+    {X Y : Type*} [AddCommGroup X] [Module ℝ X] [AddCommGroup Y] [Module ℝ Y]
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y}
+    {U V : Set X} {base base' loss loss' : ℕ} {value : ℕ → X → Y → ℝ}
+    (hp : Monotone p) (hq : Monotone q)
+    (hbase : base ≤ base') (hloss : loss ≤ loss') (hsub : U ⊆ V)
+    (hbound : ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x ∈ V, ∀ u, value s x u ≤ C *
+        (q (s + loss) u + (1 + p (s + loss) x) * q base u)) :
+    ∀ s : ℕ, base' ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x ∈ U, ∀ u, value s x u ≤ C *
+        (q (s + loss') u + (1 + p (s + loss') x) * q base' u) := by
+  intro s hs
+  obtain ⟨C, hC, hCs⟩ := hbound s (hbase.trans hs)
+  refine ⟨C, hC, ?_⟩
+  intro x hx u
+  have hcost := weightedLinearFamilyCost_mono
+    (p := p) (q := q) (base := base) (base' := base')
+    (loss := loss) (loss' := loss') (s := s) hp hq hbase hloss x u
+  exact le_trans (hCs x (hsub hx) u) (mul_le_mul_of_nonneg_left hcost hC)
+
+private theorem bilinearFamily_bound_restrict_weaken
+    {X Y Z : Type*} [AddCommGroup X] [Module ℝ X]
+    [AddCommGroup Y] [Module ℝ Y] [AddCommGroup Z] [Module ℝ Z]
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y} {r : ℕ → Seminorm ℝ Z}
+    {U V : Set X} {base base' loss loss' : ℕ} {value : ℕ → X → Y → Z → ℝ}
+    (hp : Monotone p) (hq : Monotone q) (hr : Monotone r)
+    (hbase : base ≤ base') (hloss : loss ≤ loss') (hsub : U ⊆ V)
+    (hbound : ∀ s : ℕ, base ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x ∈ V, ∀ R u, value s x R u ≤ C *
+        (q (s + loss) R * r base u + q base R * r (s + loss) u +
+          (1 + p (s + loss) x) * q base R * r base u)) :
+    ∀ s : ℕ, base' ≤ s → ∃ C : ℝ, 0 ≤ C ∧
+      ∀ x ∈ U, ∀ R u, value s x R u ≤ C *
+        (q (s + loss') R * r base' u + q base' R * r (s + loss') u +
+          (1 + p (s + loss') x) * q base' R * r base' u) := by
+  intro s hs
+  obtain ⟨C, hC, hCs⟩ := hbound s (hbase.trans hs)
+  refine ⟨C, hC, ?_⟩
+  intro x hx R u
+  have hcost := weightedErrorFamilyCost_mono
+    (p := p) (q := q) (r := r) (base := base) (base' := base')
+    (loss := loss) (loss' := loss') (s := s) hp hq hr hbase hloss x R u
+  exact le_trans (hCs x (hsub hx) R u) (mul_le_mul_of_nonneg_left hcost hC)
+
 /-- The unconditional S05 witness on the original physical weighted spaces. -/
 theorem scalarWeightedS05 : S05WeightedStatement := by
   intro D T S hD hT hS v₀
@@ -100,18 +146,17 @@ theorem scalarWeightedS05 : S05WeightedStatement := by
   · exact smoothTameOn_mono hesmooth ((hU.prod isOpen_univ).prod isOpen_univ)
       (prod_mono (prod_mono (fun _ hx => (hsub hx).1) (subset_refl univ))
         (subset_refl univ))
-  · intro s hs
-    obtain ⟨C, hC, hCs⟩ := hlbound s (hbl.trans hs)
-    refine ⟨C, hC, ?_⟩
-    intro x hx u
-    exact (hCs x (hsub hx).2.2.2.1 u).trans
-      (mul_le_mul_of_nonneg_left (weightedLinearFamilyCost_mono hp hpc hbl hll x u) hC)
-  · intro s hs
-    obtain ⟨C, hC, hCs⟩ := hebound s (hbe.trans hs)
-    refine ⟨C, hC, ?_⟩
-    intro x hx R u
-    exact (hCs x (hsub hx).2.2.2.2 R u).trans
-      (mul_le_mul_of_nonneg_left (weightedErrorFamilyCost_mono hp hph hpc hbe hle x R u) hC)
+  · exact linearFamily_bound_restrict_weaken
+      (p := scalarStateGrading S) (q := scalarCommonHeightGrading S)
+      (value := fun s x u => scalarHeightGrading S s (W.linear x u))
+      (U := U) (V := Ul) (base := bl) (base' := base) (loss := ll) (loss' := loss)
+      hp hpc hbl hll (fun _ hx => (hsub hx).2.2.2.1) hlbound
+  · exact bilinearFamily_bound_restrict_weaken
+      (p := scalarStateGrading S) (q := scalarHeightGrading S)
+      (r := scalarCommonHeightGrading S)
+      (value := fun s x R u => scalarHeightGrading S s (W.error x R u))
+      (U := U) (V := Ue) (base := be) (base' := base) (loss := le) (loss' := loss)
+      hp hph hpc hbe hle (fun _ hx => (hsub hx).2.2.2.2) hebound
 
 /-- All three frozen weighted scalar milestones, with a common actual
 witness for the finite jet, residual, coefficient and operator interfaces. -/
