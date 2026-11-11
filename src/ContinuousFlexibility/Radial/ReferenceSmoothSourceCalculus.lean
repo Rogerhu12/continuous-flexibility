@@ -67,7 +67,11 @@ theorem angularBasisProjection_constant_add_cosines (I J : Finset ℕ)
       exact Nat.succ.inj hab
   have hsum := memLp_referenceAngular_interval_of_continuous
     (continuous_sum_referenceAngularBasis (J.image Nat.succ) (fun n => c (n - 1)))
-  rw [he, angularBasisProjection_add
+  have hePoint (θ : ℝ) : (∑ n ∈ J, c n * referenceAngularBasis (n + 1) θ) =
+      ∑ n ∈ J.image Nat.succ, c (n - 1) * referenceAngularBasis n θ :=
+    congrFun he θ
+  simp_rw [hePoint]
+  rw [angularBasisProjection_add
     (memLp_referenceAngular_interval_of_continuous continuous_const) hsum I,
     angularBasisProjection_const h0,
     angularBasisProjection_sum_basis I (J.image Nat.succ) hJ]
@@ -119,7 +123,7 @@ theorem weakAngularDerivative_of_contDiff {D : ReferenceData} {u : PolarPoint �
     unfold radialAngularMean
     rw [h, mul_neg]
   simp_rw [he]
-  exact intervalIntegral.integral_neg _
+  exact intervalIntegral.integral_neg
 
 theorem ReferenceSmoothFiniteSource.sourceDerivativeMember {D : ReferenceData}
     {F : RadialSource} (hF : ReferenceSmoothFiniteSource D F)

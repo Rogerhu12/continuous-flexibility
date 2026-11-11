@@ -28,11 +28,12 @@ every coefficient weight. -/
 theorem sourceMember_unitBorder (D : ReferenceData) (γ M : ℝ) :
     SourceMember D γ M ((fun _ : PolarPoint => 0), 1) := by
   refine ⟨RadialCellIntegrable.zero D, ?_, (fun _ => rfl), (fun _ _ => rfl), ?_, ?_⟩
-  · simpa only [sourceCellSquare, referenceCellSquare, mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0),
+  · unfold sourceCellSquare
+    simpa only [referenceCellSquare, mul_zero, zero_pow (by decide : (2 : ℕ) ≠ 0),
       radialAngularMean, intervalIntegral.integral_zero] using
       (summable_zero : Summable (fun _ : ℕ => (0 : ℝ)))
   · simpa only [radialAngularMean, intervalIntegral.integral_zero, mul_zero] using
-      (intervalIntegrable_zero : IntervalIntegrable (fun _ : ℝ => (0 : ℝ)) volume D.a D.b)
+      (intervalIntegrable_const : IntervalIntegrable (fun _ : ℝ => (0 : ℝ)) volume D.a D.b)
   · simp only [radialAngularMean, intervalIntegral.integral_zero, mul_zero]
 
 private theorem referenceRadialCoefficient_zero_field (n : ℕ) (r : ℝ) :
@@ -166,8 +167,10 @@ theorem referencePhi_weighted_of_inverse {D : ReferenceData}
     ⟨hF.1, hF.2.1⟩
   obtain ⟨ur, hur, hurW, _hbound⟩ := hfirst F (fun _ => 0) hF hzeroDerivative hzeroMember
   have hdW := referenceRadialCoefficient_output_zero_weighted hgeom.2.1.le hurW 1
+  have hdIntegrable : IntegrableOn (referenceRadialCoefficient ur 1) (radialCore D) volume :=
+    (ReferenceRadialWeighted.memLp hpart hγ hdW).integrable (by norm_num)
   have hdI : LocallyIntegrableOn (referenceRadialCoefficient ur 1) (radialCore D) volume :=
-    ((ReferenceRadialWeighted.memLp hpart hγ hdW).integrable (by norm_num)).locallyIntegrableOn
+    hdIntegrable.locallyIntegrableOn
   have hdphi := reference_coefficient_normal_eq_deriv hgeom.2.1 hur 1
     hgeom.2.2.2.1.1.contDiffOn hcoef hdI
   exact ⟨hphiW, hdW.congr_ae hdphi⟩

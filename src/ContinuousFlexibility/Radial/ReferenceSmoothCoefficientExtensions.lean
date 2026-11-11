@@ -81,7 +81,8 @@ theorem referenceRadialCoefficient_output_mean_remainder_ae {D : ReferenceData}
     ring
   change referenceAngularCoefficient (fun θ => outputRemainder D aL U (r, θ)) 0 =
     referenceAngularCoefficient (fun θ => U.1 (r, θ)) 0 - aL * D.chiLeft r
-  rw [he, referenceAngularCoefficient_add hr hc, referenceAngularCoefficient_const, ite_true]
+  rw [he, referenceAngularCoefficient_add hr hc]
+  simp only [referenceAngularCoefficient_const, ite_eq_left (show (0 : ℕ) = 0 from rfl)]
   ring
 
 theorem radialJacobi_sub_const_mul_on_core {D : ReferenceData}
