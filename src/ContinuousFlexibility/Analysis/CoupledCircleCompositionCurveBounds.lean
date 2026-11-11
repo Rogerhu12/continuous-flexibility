@@ -62,7 +62,10 @@ theorem coupled_circle_kernel_affine_jet_bound
               (coupledCircleKernelField M r k (ψ + t • u) v w m) θ| ≤
           A * (T.M (T.sample m))⁻¹ := by
   have hs := spaces_trace_sample_mem hD hT
-  obtain ⟨base, loss, hb⟩ := coupled_circle_kernel_jet_bounds hT hs hγ hM hI
+  have hexists := coupled_circle_kernel_jet_bounds hT hs hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hb := hexists.choose_spec.choose_spec
   let L : ℝ := max 1 (M.grading base ψ + R * M.grading base u)
   obtain ⟨C, hC, hc⟩ := hb r k s L (le_max_left _ _)
   obtain ⟨A, hA, ha⟩ := coupled_circle_kernel_majorant_affine_bound

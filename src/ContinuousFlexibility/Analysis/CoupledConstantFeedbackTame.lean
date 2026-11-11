@@ -43,6 +43,8 @@ variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
       ((z x).2 • B.heightRow (z x) (controlHeightResponse S B G (z x) u)) ≤
       c * (1 + p (s + loss) x) * ‖u‖)
 
+include hdiag hJ hlo hsmall hregular
+
 theorem coupledConstantFeedbackInverse_linearFamilyTame :
     LinearFamilyTame p (coupledConstantCircleGrading hS)
       (coupledConstantCircleGrading hS) U

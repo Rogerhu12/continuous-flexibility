@@ -43,29 +43,42 @@ theorem coupled_sector_direction_decomposition (v : StateDirections S) :
     coupledSectorNuDirection_val, coupledSectorKappaDirection_val,
     coupledSectorChartDirection_val, Prod.mk_add_mk, zero_add, add_zero]
 
+private theorem coupled_nuDirection_scaled
+    {H E : Type*} [AddCommGroup H] [Module ℝ H]
+    [AddCommGroup E] [Module ℝ E]
+    (W : Submodule ℝ (H × (ℝ × (E × E))))
+    (v : ℝ → W) (hv : ∀ t, (v t).val = (0, (t, (0, 0)))) (t : ℝ) :
+    (v t, (0 : ℝ)) = coupledScalarAction t (v 1, (0 : ℝ)) := by
+  apply Prod.ext
+  · apply Subtype.ext
+    simp only [coupledScalarAction_fst, coupledScalarAction_subtype_val,
+      hv, coupledScalarAction_prod_mk, coupledScalarAction_zero,
+      coupledScalarAction_real, mul_one]
+  · simp only [coupledScalarAction_snd, coupledScalarAction_zero]
+
+private theorem coupled_linear_scaled_first
+    {E F H : Type*} [AddCommGroup E] [Module ℝ E]
+    [AddCommGroup F] [Module ℝ F] [AddCommGroup H] [Module ℝ H]
+    (L : E →ₗ[ℝ] F × H) {x y : E} {a : ℝ} {out : F}
+    (hxy : x = coupledScalarAction a y) (hy : (L y).1 = out) :
+    (L x).1 = a • out := by
+  rw [hxy, coupledScalarAction_map, coupledScalarAction_fst, hy]
+  rfl
+
 theorem coupled_scalar_nu_firstJet
     (h8 : N08Properties D T S C R G P B base loss ε)
     (J : SmoothDirections (sectorNeighborhood S base ε ε) (sectorJointResidual S C P))
     {z : StateDirections S × ℝ} (hz : z ∈ sectorNeighborhood S base ε ε) (μ : ℝ) :
     (projectiveJetHeadLinear J.D 0 z Fin.elim0 (coupledSectorNuDirection S μ, 0)).1 =
       μ • B.nuColumn (liftSectorParameter S C z) := by
-  have hnu := h8.2.2.2.2.2.2.2.1
-  have hunit := (coupled_scalar_first_derivative J hz (coupledSectorNuDirection S 1)).unique
-    (hnu _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl))
-  have hscale : (coupledSectorNuDirection S μ, (0 : ℝ)) =
-      coupledScalarAction μ (coupledSectorNuDirection S 1, (0 : ℝ)) := by
-    apply Prod.ext
-    · apply Subtype.ext
-      simp only [coupledScalarAction_fst, coupledScalarAction_subtype_val,
-        coupledSectorNuDirection_val, coupledScalarAction_prod_mk,
-        coupledScalarAction_zero, coupledScalarAction_real, mul_one]
-    · simp only [coupledScalarAction_snd, coupledScalarAction_zero]
-  rw [hscale]
-  have hm := congrArg Prod.fst (coupledScalarAction_map
-    (projectiveJetHeadLinear J.D 0 z Fin.elim0).toLinearMap μ
-      (coupledSectorNuDirection S 1, (0 : ℝ)))
-  simpa only [ContinuousLinearMap.coe_coe, coupledScalarAction_fst,
-    hunit, coupledScalarAction] using hm
+  have hunit :
+      (projectiveJetHeadLinear J.D 0 z Fin.elim0 (coupledSectorNuDirection S 1, 0)).1 =
+        B.nuColumn (liftSectorParameter S C z) :=
+    (coupled_scalar_first_derivative J hz (coupledSectorNuDirection S 1)).unique
+      (h8.2.2.2.2.2.2.2.1 _ (liftSectorParameter_mem_stateNeighborhood hz le_rfl))
+  exact coupled_linear_scaled_first (projectiveJetHeadLinear J.D 0 z Fin.elim0).toLinearMap
+    (coupled_nuDirection_scaled (stateSectorSubmodule S) (coupledSectorNuDirection S)
+      (coupledSectorNuDirection_val S) μ) hunit
 
 theorem coupled_scalar_kappa_firstJet
     (hRef : referenceStateConditions D S C)
@@ -127,7 +140,7 @@ theorem coupled_circle_firstJet_of_return_derivative
   filter_upwards [hnear] with t ht
   have he := hcircle _ (liftSectorParameter_mem_stateNeighborhood ht le_rfl)
     (hRef.liftSectorParameter_sector _)
-  simpa only [coupled_liftSectorParameter_add] using he
+  simpa only [coupled_liftSectorParameter_add, coupledScalarAction] using he
 
 /-- The full genuine sector jet is also the actual ambient state-line
 derivative in its included direction. -/

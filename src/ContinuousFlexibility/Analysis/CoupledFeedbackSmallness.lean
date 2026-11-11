@@ -150,12 +150,17 @@ theorem coupled_exists_sector_feedback_smallness
   have hA := (hsmall z hz).2
   have hzstate := liftSectorParameter_mem_stateNeighborhood (C := C) hzold le_rfl
   have hzsector := hRef.liftSectorParameter_sector z
-  have h8' := h8
-  obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hdiag, _, hJinv, hlo, _⟩ := h8'
+  have hdiag : ∀ (u : ControlBanach) (m : ℕ),
+      B.J (liftSectorParameter S C z) u m =
+        B.diagonal (liftSectorParameter S C z) m * u m :=
+    h8.2.2.2.2.2.2.2.2.2.2.2.2.1 _ hzstate hzsector
+  have hJinv : ∀ u : ControlBanach,
+      B.J (liftSectorParameter S C z) (B.JInverse (liftSectorParameter S C z) u) = u :=
+    fun u => (h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1 _ hzstate hzsector u).2
+  have hlo : ∀ m : ℕ, (1 / 2 : ℝ) ≤ |B.diagonal (liftSectorParameter S C z) m| :=
+    fun m => (h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1 _ hzstate hzsector m).1
   have hJ : ‖B.JInverse (liftSectorParameter S C z)‖ ≤ 2 :=
-    controlJInverse_norm_le_two B _ (hdiag _ hzstate hzsector)
-      (fun u => (hJinv _ hzstate hzsector u).2)
-      (fun m => (hlo _ hzstate hzsector m).1)
+    controlJInverse_norm_le_two B _ hdiag hJinv hlo
   rw [coupledScaledMeanResponse_factorization]
   calc
     ‖(B.JInverse (liftSectorParameter S C z)).comp

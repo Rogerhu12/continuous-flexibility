@@ -46,16 +46,20 @@ theorem coupled_nonlinearPropertiesThrough10_of_returnErrorSmooth
     ∃ base' : ℕ, ∃ ε' q0' : ℝ, ∃ Q : QuadraticErrorData S,
       NonlinearPropertiesThrough09 D T S C R L K Vol b Domain Relative G P B N V
         base' loss ε' q0' ∧ N10Properties D S C R L P B V Q base' ε' q0' := by
-  obtain ⟨h7, h8⟩ := h09.1
-  obtain ⟨h6, hG, _⟩ := h7
-  obtain ⟨h5, _⟩ := h6
-  obtain ⟨h4, _⟩ := h5
-  obtain ⟨h3all, _, _, _, _⟩ := h4
-  obtain ⟨h2all, h3⟩ := h3all
-  obtain ⟨h1, h2⟩ := h2all
+  have h1 : N01Properties D T S C base loss ε := h09.1.1.1.1.1.1.1.1
+  have h2 : N02Properties D T S C R base ε := h09.1.1.1.1.1.1.1.2
+  have h3 : N03Properties D T S C R L base ε := h09.1.1.1.1.1.1.2
+  have hG : ScalarInverseProperties D S C L G base ε := h09.1.1.2.1
+  have h8 : N08Properties D T S C R G P B base loss ε := h09.1.2
   have hD : IsAccumulatingProfile D := h1.1.1
-  obtain ⟨base', δ, hb, hδ, hδε, htype0⟩ :=
-    coupledScalarErrorCoefficient_smoothTameOn hT hS h1
+  let hcoefficient := coupledScalarErrorCoefficient_smoothTameOn hT hS h1
+  let base' : ℕ := hcoefficient.choose
+  let hcoefficientBase := hcoefficient.choose_spec
+  let δ : ℝ := hcoefficientBase.choose
+  have hb : base ≤ base' := hcoefficientBase.choose_spec.1
+  have hδ : 0 < δ := hcoefficientBase.choose_spec.2.1
+  have hδε : δ ≤ ε := hcoefficientBase.choose_spec.2.2.1
+  have htype0 := hcoefficientBase.choose_spec.2.2.2
   let q' : ℝ := min q0 δ
   have hq : 0 < q' := lt_min h09.2.1 hδ
   have hqq0 : q' ≤ q0 := min_le_left _ _
@@ -70,13 +74,13 @@ theorem coupled_nonlinearPropertiesThrough10_of_returnErrorSmooth
   have h9' := h09'.2
   let typeCoefficient : AnnularState S × ℝ → CoupledWeakHeight S :=
     coupledScalarErrorCoefficient hT hS h1
-  let Q := coupledQuadraticErrorData hD hT hS R L B V typeCoefficient
+  let Q : QuadraticErrorData S := coupledQuadraticErrorData hD hT hS R L B V typeCoefficient
   have hU := coupled_sectorNeighborhood_isOpen S base' δ q'
   have hsub : sectorNeighborhood S base' δ q' ⊆ sectorNeighborhood S base ε ε :=
     coupled_sectorNeighborhood_mono hb hδε (hqδ.trans hδε)
   have htype := smoothTameOn_mono htype0 hU
     (coupled_sectorNeighborhood_mono (S := S) le_rfl le_rfl hqδ)
-  obtain ⟨_, _, _, _, _, _, _, hLerror⟩ := h3
+  have hLerror := h3.2.2.2.2.2.2.2
   have hLerror' := smoothTameOn_mono hLerror ((hU.prod isOpen_univ).prod isOpen_univ)
     (Set.prod_mono
       (Set.prod_mono hsub (subset_refl (univ : Set (CircleSpace S))))
@@ -120,8 +124,16 @@ theorem coupled_nonlinearStagesThrough10_of_returnErrorSmooth
         R.error (liftSectorParameter S C z.1.1) z.1.2 z.2)) :
     ∃ base' : ℕ, ∃ ε' q0' : ℝ,
       NonlinearStagesThrough10 D T S C R base' loss ε' q0' := by
-  obtain ⟨base', ε', q0', Q, h09', h10⟩ :=
-    coupled_nonlinearPropertiesThrough10_of_returnErrorSmooth hT hS h09 hRerror
-  exact ⟨base', ε', q0', L, K, Vol, b, Domain, Relative, G, P, B, N, V, Q, h09', h10⟩
+  let hresult := coupled_nonlinearPropertiesThrough10_of_returnErrorSmooth hT hS h09 hRerror
+  let base' : ℕ := hresult.choose
+  let hbase := hresult.choose_spec
+  let ε' : ℝ := hbase.choose
+  let hε := hbase.choose_spec
+  let q0' : ℝ := hε.choose
+  let hq0 := hε.choose_spec
+  let Q : QuadraticErrorData S := hq0.choose
+  have hfinal := hq0.choose_spec
+  exact ⟨base', ε', q0', L, K, Vol, b, Domain, Relative, G, P, B, N, V, Q,
+    hfinal.1, hfinal.2⟩
 
 end ContinuousFlexibility.Statements

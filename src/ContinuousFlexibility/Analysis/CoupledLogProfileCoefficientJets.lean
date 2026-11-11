@@ -150,11 +150,12 @@ private theorem coupled_seminorm_sub_self
     (p : Seminorm ℝ E) (x : E) : p (x - x) = 0 := by
   simp only [sub_self, map_zero]
 
-private theorem coupled_oneHigh_first_product_zero
+private theorem coupled_oneHigh_first_product_sub_self
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
-    (p : ℕ → Seminorm ℝ E) (base high : ℕ) (v : E) :
+    (p : ℕ → Seminorm ℝ E) (base high : ℕ) (x v : E) :
     oneHighVariationWeight (pairGrading p realGrading) base high
-      (0 : E × ℝ) (Fin.cons (v, 0) Fin.elim0) = p base v + p high v := by
+      ((x, (0 : ℝ)) - (x, 0)) (Fin.cons (v, 0) Fin.elim0) =
+        p base v + p high v := by
   simp [oneHighVariationWeight, pairGrading, realGrading]
 
 /-- Every spatial order is extracted from the genuine first parameter jet of
@@ -206,7 +207,10 @@ theorem coupled_logProfile_reference_jet_bound (hT : IsMaterialData D T)
           (Fin.cons (v, 0) Fin.elim0) :=
       hJ (C.referenceState, 0) hz (Fin.cons (v, 0) Fin.elim0)
     _ = B * T.H (T.sample m) ^ (3 / 4 : ℝ) * T.E0 (T.sample m) ^ B *
-        (stateGrading S base v + stateGrading S (s + loss) v) := by
-      rw [sub_self, coupled_oneHigh_first_product_zero]
+        (stateGrading S base v + stateGrading S (s + loss) v) :=
+      congrArg (fun a : ℝ => B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample m) ^ B * a)
+        (coupled_oneHigh_first_product_sub_self (stateGrading S) base (s + loss)
+          C.referenceState v)
 
 end ContinuousFlexibility.Statements

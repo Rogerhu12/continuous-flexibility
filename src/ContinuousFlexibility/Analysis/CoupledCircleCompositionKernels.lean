@@ -57,7 +57,10 @@ theorem coupled_circle_kernel_jet_bounds
             (C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons v w)) *
               (T.M (T.sample m))⁻¹ := by
   classical
-  obtain ⟨base, loss, hraw⟩ := coupled_circle_composition_jet_tame hT hsample hγ hM hI
+  have hexists := coupled_circle_composition_jet_tame hT hsample hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hraw := hexists.choose_spec.choose_spec
   refine ⟨base, loss, fun r k s R hR => ?_⟩
   have hcoord (j : CircleJetIndex s) := hraw r k (j.val 0).val (j.val 1).val (r + s)
     (by have hj := j.property; omega) R hR
@@ -84,7 +87,10 @@ theorem coupledCircleKernelField_mem
     (r k : ℕ) (ψ v : M.Space) (w : Fin k → M.Space) :
     CircleMember T γ (coupledCircleKernelField M r k ψ v w) := by
   have hs := spaces_trace_sample_mem hD hT
-  obtain ⟨base, loss, hjet⟩ := coupled_circle_kernel_jet_bounds hT hs hγ hM hI
+  have hexists := coupled_circle_kernel_jet_bounds hT hs hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hjet := hexists.choose_spec.choose_spec
   have hreg := coupledCircleKernelField_contDiff hM r k ψ v w
   have hw (m : ℕ) : 0 ≤ (T.M (T.sample m))⁻¹ :=
     inv_nonneg.mpr (zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2)
@@ -107,7 +113,10 @@ theorem coupled_circle_kernel_norm_bounds
           circleNorm T γ s (coupledCircleKernelField M r k ψ v w) ≤
             C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons v w) := by
   have hs := spaces_trace_sample_mem hD hT
-  obtain ⟨base, loss, hjet⟩ := coupled_circle_kernel_jet_bounds hT hs hγ hM hI
+  have hexists := coupled_circle_kernel_jet_bounds hT hs hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hjet := hexists.choose_spec.choose_spec
   have hw (m : ℕ) : 0 ≤ (T.M (T.sample m))⁻¹ :=
     inv_nonneg.mpr (zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2)
   have hsum := spaces_trace_sample_inv_sq_summable hD hT

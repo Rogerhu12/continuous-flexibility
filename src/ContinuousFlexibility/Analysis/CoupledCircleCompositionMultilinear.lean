@@ -60,10 +60,11 @@ theorem coupledCircleKernelFieldMultilinear_apply (hM : IsCircleModel T γ M)
       coupledCircleKernelField M r k ψ (v 0) (Fin.tail v) := by
   funext m θ
   change (∏ i : Fin (k + 1),
-    (Fin.cons
+    ((Fin.cons
       ((LinearMap.proj (θ + M.decode ψ m θ)).comp
         ((LinearMap.proj m).comp (M.decode.comp (coupledCircleIteratedDerivativeLinear hM r))))
-      (fun _ : Fin k => (LinearMap.proj θ).comp ((LinearMap.proj m).comp M.decode)) i) (v i)) = _
+      (fun _ : Fin k => (LinearMap.proj θ).comp ((LinearMap.proj m).comp M.decode)) :
+        Fin (k + 1) → (M.Space →ₗ[ℝ] ℝ)) i) (v i)) = _
   rw [Fin.prod_univ_succ]
   change M.decode (coupledCircleIteratedDerivativeLinear hM r (v 0)) m
     (θ + M.decode ψ m θ) * (∏ i : Fin k, M.decode (v i.succ) m θ) = _
@@ -102,7 +103,9 @@ def coupledCircleKernelMultilinearDerivative (r k : ℕ) (ψ : M.Space)
 theorem coupledCircleKernelMultilinear_continuous (r k : ℕ) :
     Continuous (fun z : M.Space × (Fin (k + 1) → M.Space) =>
       coupledCircleKernelMultilinear hD hT hγ hM hI r k z.1 z.2) := by
-  obtain ⟨base, hb⟩ := coupled_circle_kernel_coarse hD hT hγ hM hI
+  have hexists := coupled_circle_kernel_coarse hD hT hγ hM hI
+  let base : ℕ := hexists.choose
+  have hb := hexists.choose_spec
   apply spaces_projective_parameter_multilinear_continuous (fun s => M.level s) M.bond base
     (coupledCircleKernelMultilinear hD hT hγ hM hI r k)
     (coupledCircleKernelMultilinearDerivative hD hT hγ hM hI r k)

@@ -202,9 +202,8 @@ theorem coupledWeakTypeErrorLinear_compatible
     (t : CoupledWeakHeight S) (R : ScalarHeightSpace S) (u : HeightPair S) :
     S.Q (coupledWeakTypeErrorLinear hD hT hS t R u) = 0 := by
   have hQ : ∀ f : ScalarHeightSpace S,
-      S.Q f = physicalSourceIntegral D ((S.height scalarBeta).decode f) := by
-    obtain ⟨_, _, _, _, _, _, _, hQ, _⟩ := hS
-    exact hQ
+      S.Q f = physicalSourceIntegral D ((S.height scalarBeta).decode f) :=
+    hS.2.2.2.2.2.2.2.1
   rw [coupledWeakTypeErrorLinear_apply, coupledWeakTypeErrorCLM_apply,
     hQ, SobolevModelData.decode_angularSecondCLM]
   have hu := (hS.1 scalarBeta).2.2.2.1

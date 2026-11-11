@@ -120,13 +120,20 @@ theorem coupledRecoveryRegularFormula_eq_recoveredV
     (y : ResidualSpace S) :
     coupledRecoveryRegularFormula (hS.2.1 (3 / 4 : ℝ)) B G z y R =
       coupledRecoveredV hS h8 z y := by
-  have h8' := h8
-  obtain ⟨_, _, _, _, _, hrestriction, _, _, _, _, _, _, hdiag, _, hJ, _⟩ := h8'
+  have hrestriction : ∀ (u : CircleSpace S) (m : ℕ),
+      B.restriction u m = T.H (T.sample m) ^ (-(3 / 4 : ℝ)) *
+        angularMean ((S.circle (3 / 4 : ℝ)).decode u m) :=
+    h8.2.2.2.2.2.1
+  have hdiag : ∀ (u : ControlBanach) (m : ℕ), B.J z u m = B.diagonal z m * u m :=
+    h8.2.2.2.2.2.2.2.2.2.2.2.2.1 z hz.1 hz.2.1
+  have hJ : ∀ u : ControlBanach, B.JInverse z (B.J z u) = u ∧
+      B.J z (B.JInverse z u) = u :=
+    h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1 z hz.1 hz.2.1
   have hH (m : ℕ) : 0 < T.H (T.sample m) :=
     (hT.2.1 _ (materialSample_mem_radialCore hT h1.1.1.choose_spec.2.1 m)).2.1
   rw [coupledRecoveredV_eq hS h8 hz]
   exact coupledRecoveryRegularFormula_eq (hS.2.1 (3 / 4 : ℝ)) B G z y
-    hrestriction (hdiag z hz.1 hz.2.1) (hJ z hz.1 hz.2.1)
+    hrestriction hdiag hJ
     (coupledRecovery_diagonal_lower h8 hz.1 hz.2.1) hz.2.2 hH R
 
 end ContinuousFlexibility.Statements

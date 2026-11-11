@@ -32,7 +32,7 @@ theorem coupled_controlHeightResponse_grading_bound
     ∀ s, ∃ c : ℝ, 0 ≤ c ∧ ∀ z ∈ stateNeighborhood S C base ε, ∀ u,
       heightPairGrading S s (controlHeightResponse S B G z u) ≤
         c * (1 + stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2|) * ‖u‖ := by
-  rcases h8 with ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, h, _⟩
+  have h := h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
   intro s
   obtain ⟨c, hc, h⟩ := h s
   refine ⟨c, hc.le, fun z hz u => ?_⟩

@@ -58,7 +58,10 @@ theorem coupled_circle_kernel_grading_bounds :
           M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ v w) ≤
             C * coupledCircleKernelMajorant M base (r + s + loss) ψ (Fin.cons v w) := by
   classical
-  obtain ⟨base, loss, hb⟩ := coupled_circle_kernel_norm_bounds hD hT hγ hM hI
+  have hexists := coupled_circle_kernel_norm_bounds hD hT hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hb := hexists.choose_spec.choose_spec
   refine ⟨base, loss, fun r k s R hR => ?_⟩
   have hcoord (i : ℕ) := hb r k i R hR
   choose C hC hbound using hcoord
@@ -122,8 +125,12 @@ theorem coupled_circle_kernel_coarse :
         ∀ ψ : M.Space, M.grading base ψ ≤ R →
           ∀ (v : M.Space) (w : Fin k → M.Space),
             M.grading s (coupledCircleKernel hD hT hγ hM hI r k ψ v w) ≤
-              C * (1 + M.grading N ψ) * ∏ i : Fin (k + 1), M.grading N (Fin.cons v w i) := by
-  obtain ⟨base, loss, hb⟩ := coupled_circle_kernel_grading_bounds hD hT hγ hM hI
+              C * (1 + M.grading N ψ) *
+                ∏ i : Fin (k + 1), M.grading N ((Fin.cons v w : Fin (k + 1) → M.Space) i) := by
+  have hexists := coupled_circle_kernel_grading_bounds hD hT hγ hM hI
+  let base : ℕ := hexists.choose
+  let loss : ℕ := hexists.choose_spec.choose
+  have hb := hexists.choose_spec.choose_spec
   refine ⟨base, fun r k s R hR => ?_⟩
   obtain ⟨C, hC, hc⟩ := hb r k s R hR
   refine ⟨max base (r + s + loss), le_max_left _ _, C * (((k + 1 : ℕ) : ℝ) + 1),

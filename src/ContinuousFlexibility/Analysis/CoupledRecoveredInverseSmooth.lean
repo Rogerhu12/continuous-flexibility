@@ -111,7 +111,7 @@ theorem coupledRecoveryRegularFormula_smoothTameOn
     rw [LC, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_snd', Submodule.subtypeL_apply]
   have hyCircle : SmoothTameOn a c (U ×ˢ univ)
       (fun z : (StateDirections S × ℝ) × ResidualSpace S => z.2.2.val) := by
-    have hc := solve_smoothTameOn_postcomp hy LC (B := 1) zero_le_one (fun n y => by
+    have hc := solve_smoothTameOn_postcomp hy LC (r := c) (B := 1) zero_le_one (fun n y => by
       rw [hLC, one_mul]
       exact le_add_of_nonneg_left (apply_nonneg (S.sourceGrading n) y.1))
     exact smoothTameOn_congr hc (fun z _ => hLC z.2)

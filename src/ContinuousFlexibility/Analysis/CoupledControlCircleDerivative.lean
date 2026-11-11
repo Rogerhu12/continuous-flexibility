@@ -21,6 +21,81 @@ namespace ContinuousFlexibility.Statements
 open Set ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+section AbstractRows
+
+variable {E F : Type*}
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+
+private theorem coupled_row_pair_inl_grading
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (n : ℕ) (x : E) :
+    pairGrading p q n (x, 0) = p n x := by
+  simp only [pairGrading_apply, map_zero, add_zero]
+
+private theorem coupled_row_control_grading
+    (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) (n : ℕ) (u : F) :
+    pairGrading p (pairGrading realGrading (pairGrading q q)) n
+      (0, (0, (u, 0))) = q n u := by
+  simp only [pairGrading_apply, map_zero, add_zero, zero_add]
+
+private theorem coupled_row_zero_odd (L : E →ₗ[ℝ] (ℕ → ℝ → ℝ)) (m : ℕ) (θ : ℝ) :
+    L 0 m (-θ) = -L 0 m θ := by
+  simp only [map_zero, Pi.zero_apply, neg_zero]
+
+private theorem coupled_row_inl_bound
+    (L : E →L[ℝ] F) (p : ℕ → Seminorm ℝ F) (q : ℕ → Seminorm ℝ E)
+    (hL : ∀ n u, p n (L u) ≤ q n u) :
+    ∀ n u, pairGrading p realGrading n
+      (((ContinuousLinearMap.inl ℝ F ℝ).comp L) u) ≤ q n u := by
+  intro n u
+  simpa only [ContinuousLinearMap.comp_apply, ContinuousLinearMap.inl_apply,
+    pairGrading_apply, map_zero, add_zero] using hL n u
+
+private theorem coupled_row_output_bound
+    (W : Submodule ℝ F) (p : ℕ → Seminorm ℝ E) (q : ℕ → Seminorm ℝ F) :
+    ∀ n (y : E × W), q n ((W.subtypeL.comp (ContinuousLinearMap.snd ℝ E W)) y) ≤
+      1 * pairGrading p (fun n => (q n).comp W.subtype) n y := by
+  intro n y
+  change q n y.2.val ≤ 1 * (p n y.1 + q n y.2.val)
+  have hb : q n y.2.val ≤ p n y.1 + q n y.2.val :=
+    le_add_of_nonneg_left (apply_nonneg (p n) y.1)
+  exact hb.trans_eq (one_mul _).symm
+
+end AbstractRows
+
+private theorem coupled_row_derivative_smooth
+    {X Y E Z : Type*}
+    [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+    [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
+    [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+    [IsTopologicalAddGroup Y] [ContinuousSMul ℝ Y] [T2Space Y]
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace Z] [AddCommGroup Z] [Module ℝ Z]
+    {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y}
+    {r : ℕ → Seminorm ℝ E} {s : ℕ → Seminorm ℝ Z}
+    {U : Set X} {f : X → Y}
+    (hp : Monotone p) (htp : WithSeminorms p)
+    (J : SmoothDirections U f) (hJ : J.TameBounds p q)
+    (L : E →L[ℝ] X) (hL : ∀ n u, p n (L u) ≤ r n u)
+    (out : Y →L[ℝ] Z) (hout : ∀ n y, s n (out y) ≤ 1 * q n y) :
+    SmoothTameOn (pairGrading p r) s (U ×ˢ univ)
+      (fun z : X × E => out (J.D 1 z.1 (fun _ => L z.2))) := by
+  have hd := smoothTameOn_derivativeEvaluation hp htp J hJ
+  let Li : (X × E) →L[ℝ] (X × X) :=
+    (ContinuousLinearMap.fst ℝ X E).prod (L.comp (ContinuousLinearMap.snd ℝ X E))
+  have hLi (z : X × E) : Li z = (z.1, L z.2) := rfl
+  have hLib : ∀ n z, pairGrading p p n (Li z) ≤ 1 * pairGrading p r n z := by
+    intro n z
+    simpa only [hLi, pairGrading_apply, one_mul] using
+      add_le_add (le_rfl : p n z.1 ≤ p n z.1) (hL n z.2)
+  have hpre := solve_smoothTameOn_precomp hd Li (A := 1) le_rfl hLib
+  have hdom : Li ⁻¹' (U ×ˢ univ) = U ×ˢ univ := by
+    ext z
+    simp only [mem_preimage, hLi, mem_prod, mem_univ, and_true]
+  rw [hdom] at hpre
+  simpa only [hLi] using solve_smoothTameOn_postcomp hpre out zero_le_one hout
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
@@ -34,21 +109,21 @@ def coupledSectorHeightLinear (S : PhysicalSpacesData) :
     (stateSectorSubmodule S) (fun η => (coupledSectorHeightDirection S η).property)
 
 theorem coupledSectorHeightLinear_val (S : PhysicalSpacesData) (η : HeightPair S) :
-    (coupledSectorHeightLinear S η).val = (η, (0, (0, 0))) := by
-  rw [coupledSectorHeightLinear, ContinuousLinearMap.coe_codRestrict_apply,
-    ContinuousLinearMap.inl_apply]
+    (coupledSectorHeightLinear S η).val = (η, (0, (0, 0))) := rfl
 
 theorem coupledSectorHeightLinear_eq (S : PhysicalSpacesData) (η : HeightPair S) :
     coupledSectorHeightLinear S η = coupledSectorHeightDirection S η := by
   apply Subtype.ext
-  rw [coupledSectorHeightLinear_val, coupledSectorHeightDirection_val]
+  exact (coupledSectorHeightLinear_val S η).trans (coupledSectorHeightDirection_val S η).symm
 
 theorem coupledSectorHeightLinear_grading (S : PhysicalSpacesData)
     (n : ℕ) (η : HeightPair S) :
     sectorGrading S n (coupledSectorHeightLinear S η) = heightPairGrading S n η := by
   change stateGrading S n (coupledSectorHeightLinear S η).val = _
-  rw [coupledSectorHeightLinear_val]
-  simp only [stateGrading, pairGrading_apply, map_zero, add_zero]
+  exact (congrArg (stateGrading S n) (coupledSectorHeightLinear_val S η)).trans
+    (coupled_row_pair_inl_grading (heightPairGrading S)
+      (pairGrading realGrading (pairGrading (S.circle (3 / 4 : ℝ)).grading
+        (S.circle (3 / 4 : ℝ)).grading)) n η)
 
 private def coupledControlStateLinear
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ))) :
@@ -61,9 +136,7 @@ private def coupledControlStateLinear
 private theorem coupledControlStateLinear_apply
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (u : CoupledConstantCircle hS) :
-    coupledControlStateLinear hS u = (0, (0, (u.val, 0))) := by
-  simp only [coupledControlStateLinear, ContinuousLinearMap.prod_apply,
-    ContinuousLinearMap.zero_apply, Submodule.subtypeL_apply]
+    coupledControlStateLinear hS u = (0, (0, (u.val, 0))) := rfl
 
 /-- Constant controls are genuine tangent vectors of the frozen sector. -/
 def coupledSectorControlLinear
@@ -71,18 +144,16 @@ def coupledSectorControlLinear
     CoupledConstantCircle hS →L[ℝ] StateDirections S :=
   (coupledControlStateLinear hS).codRestrict (stateSectorSubmodule S) (by
     intro u
-    rw [coupledControlStateLinear_apply]
-    change stateSector S (0, (0, (u.val, 0)))
-    refine ⟨coupledConstantCircle_constant hS u, ?_⟩
-    intro m θ
-    simp only [map_zero, Pi.zero_apply, neg_zero])
+    change stateSector S (coupledControlStateLinear hS u)
+    exact (congrArg (stateSector S) (coupledControlStateLinear_apply hS u)).mpr
+      ⟨coupledConstantCircle_constant hS u,
+        coupled_row_zero_odd (S.circle (3 / 4 : ℝ)).decode⟩)
 
 theorem coupledSectorControlLinear_val
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
     (u : CoupledConstantCircle hS) :
-    (coupledSectorControlLinear hS u).val = (0, (0, (u.val, 0))) := by
-  rw [coupledSectorControlLinear, ContinuousLinearMap.coe_codRestrict_apply,
-    coupledControlStateLinear_apply]
+    (coupledSectorControlLinear hS u).val = (0, (0, (u.val, 0))) :=
+  coupledControlStateLinear_apply hS u
 
 theorem coupledSectorControlLinear_grading
     (hS : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)))
@@ -91,8 +162,8 @@ theorem coupledSectorControlLinear_grading
       coupledConstantCircleGrading hS n u := by
   change stateGrading S n (coupledSectorControlLinear hS u).val =
     (S.circle (3 / 4 : ℝ)).grading n u.val
-  rw [coupledSectorControlLinear_val]
-  simp only [stateGrading, pairGrading_apply, map_zero, add_zero, zero_add]
+  exact (congrArg (stateGrading S n) (coupledSectorControlLinear_val hS u)).trans
+    (coupled_row_control_grading (heightPairGrading S) (S.circle (3 / 4 : ℝ)).grading n u.val)
 
 section DirectionalFamily
 
@@ -119,45 +190,23 @@ theorem coupled_circleDirectional_smoothTameOn
     (solve_sectorGrading_monotone S) weighted_realGrading_monotone
   have hta : WithSeminorms a := withSeminorms_pairGrading
     (solve_sectorGrading_withSeminorms S) weighted_realGrading_withSeminorms
-  obtain ⟨J, hJ⟩ := hres
-  have hd := smoothTameOn_derivativeEvaluation ha hta J hJ
-  let Li : ((StateDirections S × ℝ) × E) →L[ℝ]
-      ((StateDirections S × ℝ) × (StateDirections S × ℝ)) :=
-    (ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) E).prod
-      (((ContinuousLinearMap.inl ℝ (StateDirections S) ℝ).comp L).comp
-        (ContinuousLinearMap.snd ℝ (StateDirections S × ℝ) E))
-  have hLi (z : (StateDirections S × ℝ) × E) : Li z = (z.1, (L z.2, 0)) := by
-    simp only [Li, ContinuousLinearMap.prod_apply, ContinuousLinearMap.coe_fst',
-      ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_snd',
-      ContinuousLinearMap.inl_apply]
-  have hLib : ∀ n z, pairGrading a a n (Li z) ≤ 1 * pairGrading a p n z := by
-    intro n z
-    rw [hLi, pairGrading_apply, pairGrading_apply, one_mul]
-    change a n z.1 + (sectorGrading S n (L z.2) + realGrading n 0) ≤ _
-    rw [map_zero, add_zero]
-    exact add_le_add le_rfl (hL n z.2)
-  have hpre := solve_smoothTameOn_precomp hd Li (A := 1) le_rfl hLib
-  have hdom : Li ⁻¹' (U ×ˢ univ) = U ×ˢ univ := by
-    ext z
-    simp only [mem_preimage, hLi, mem_prod, mem_univ, and_true]
-  rw [hdom] at hpre
+  let J : SmoothDirections U (sectorJointResidual S C P) := hres.choose
+  have hJ : J.TameBounds a (residualGrading S) := hres.choose_spec
+  let L₀ : E →L[ℝ] (StateDirections S × ℝ) :=
+    (ContinuousLinearMap.inl ℝ (StateDirections S) ℝ).comp L
+  have hL₀ : ∀ n u, a n (L₀ u) ≤ p n u :=
+    coupled_row_inl_bound L (sectorGrading S) p hL
   let out : ResidualSpace S →L[ℝ] CircleSpace S :=
     (evenCircleSubmodule S).subtypeL.comp
       (ContinuousLinearMap.snd ℝ S.Source (EvenCircle S))
-  have hout (y : ResidualSpace S) : out y = y.2.val := by
-    simp only [out, ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_snd',
-      Submodule.subtypeL_apply]
   have houtb : ∀ n y, (S.circle (3 / 4 : ℝ)).grading n (out y) ≤
-      1 * residualGrading S n y := by
-    intro n y
-    rw [hout, one_mul]
-    change (S.circle (3 / 4 : ℝ)).grading n y.2.val ≤
-      S.sourceGrading n y.1 + (S.circle (3 / 4 : ℝ)).grading n y.2.val
-    exact le_add_of_nonneg_left (apply_nonneg _ _)
-  have hpost := solve_smoothTameOn_postcomp hpre out zero_le_one houtb
+      1 * residualGrading S n y :=
+    coupled_row_output_bound (evenCircleSubmodule S) S.sourceGrading
+      (S.circle (3 / 4 : ℝ)).grading
+  have hpost := coupled_row_derivative_smooth ha hta J hJ L₀ hL₀ out houtb
   apply smoothTameOn_congr hpost
   intro z hz
-  rw [hLi, hout]
+  change (J.D 1 z.1 (fun _ => (L z.2, (0 : ℝ)))).2.val = row z.1 z.2
   have heq := (coupled_circle_first_derivative J hz.1 (L z.2)).unique
     (hrow z.1 hz.1 z.2)
   have hslots : (Fin.cons (L z.2, (0 : ℝ)) Fin.elim0 :
@@ -182,11 +231,11 @@ theorem coupled_scaledHeightRow_smoothTameOn
   apply coupled_circleDirectional_smoothTameOn (coupledSectorHeightLinear S)
     (fun n u => (coupledSectorHeightLinear_grading S n u).le)
     h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+    (fun z η => z.2 • B.heightRow (liftSectorParameter S C z) η)
   intro z hz η
-  simpa only [coupledSectorHeightLinear_val, liftSectorParameter] using
-    h8.2.2.2.2.2.2.2.2.2.1 (liftSectorParameter S C z)
-      (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
-      (hRef.liftSectorParameter_sector z) η
+  exact h8.2.2.2.2.2.2.2.2.2.1 (liftSectorParameter S C z)
+    (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+    (hRef.liftSectorParameter_sector z) η
 
 /-- The control column is smooth tame when its input is the actual
 constant-control sector, with all circle orders retained. -/
@@ -202,11 +251,11 @@ theorem coupled_constantCircleColumn_smoothTameOn
   apply coupled_circleDirectional_smoothTameOn (coupledSectorControlLinear hS)
     (fun n u => (coupledSectorControlLinear_grading hS n u).le)
     h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+    (fun z u => B.circleColumn (liftSectorParameter S C z) u.val)
   intro z hz u
-  simpa only [coupledSectorControlLinear_val, liftSectorParameter] using
-    h8.2.2.2.2.2.2.2.2.2.2.1 (liftSectorParameter S C z)
-      (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
-      (hRef.liftSectorParameter_sector z) u.val
+  exact h8.2.2.2.2.2.2.2.2.2.2.1 (liftSectorParameter S C z)
+    (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
+    (hRef.liftSectorParameter_sector z) u.val
 
 /-- The forward constant-circle family is the mean of the genuine
 control derivative of the N08 residual. -/
@@ -223,14 +272,14 @@ theorem coupledControlCircleOperator_smoothTameOn_of_n08
   have hmean : ∀ n u, coupledConstantCircleGrading hS n
       (coupledConstantCircleProjection hS u) ≤ 1 * (S.circle (3 / 4 : ℝ)).grading n u := by
     intro n u
-    change (S.circle (3 / 4 : ℝ)).grading n (coupledConstantCircleProjection hS u).val ≤ _
-    rw [coupledConstantCircleProjection_val, one_mul]
-    exact circleAngularMeanLinear_grading_le hS n u
+    exact (coupled_circleAngularMeanProjection_grading_le hS n u).trans_eq (one_mul _).symm
   apply smoothTameOn_congr
     (solve_smoothTameOn_postcomp hc (coupledConstantCircleProjection hS) zero_le_one hmean)
   intro z _
   apply Subtype.ext
-  rw [coupledConstantCircleProjection_val, coupledControlCircleOperator_val]
+  exact (coupledConstantCircleProjection_val hS
+    (B.circleColumn (liftSectorParameter S C z.1) z.2.val)).trans
+      (coupledControlCircleOperator_val hS B (liftSectorParameter S C z.1) z.2).symm
 
 /-- The reciprocal diagonal is a smooth tame family on the original N08
 sector neighborhood. Its continuity and derivative tower are conclusions. -/
@@ -238,16 +287,22 @@ theorem coupledControlCircleInverse_smoothTameOn_of_n08
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h1 : N01Properties D T S C base loss ε)
     (h8 : N08Properties D T S C R G P B base loss ε) :
+    let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
     SmoothTameOn
       (pairGrading (pairGrading (sectorGrading S) realGrading)
-        (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ))))
-      (coupledConstantCircleGrading (hS.2.1 (3 / 4 : ℝ)))
+        (coupledConstantCircleGrading hM))
+      (coupledConstantCircleGrading hM)
       (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle (hS.2.1 (3 / 4 : ℝ)) =>
-        coupledControlCircleInverse (hS.2.1 (3 / 4 : ℝ)) B
+      (fun z : (StateDirections S × ℝ) × CoupledConstantCircle hM =>
+        coupledControlCircleInverse hM B
           (liftSectorParameter S C z.1) z.2) := by
-  have h8' := h8
-  obtain ⟨_, hU, _, _, _, hrestriction, _, _, _, _, _, hcolumn, hdiag, _, hJ, hlo, _⟩ := h8'
+  let hM : IsCircleModel T (3 / 4 : ℝ) (S.circle (3 / 4 : ℝ)) := hS.2.1 (3 / 4 : ℝ)
+  have hU := h8.2.1
+  have hrestriction := h8.2.2.2.2.2.1
+  have hcolumn := h8.2.2.2.2.2.2.2.2.2.2.2.1
+  have hdiag := h8.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hJ := h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hlo := h8.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
   have hH (m : ℕ) : 0 < T.H (T.sample m) :=
     (hT.2.1 _ (materialSample_mem_radialCore hT h1.1.1.choose_spec.2.1 m)).2.1
   have hz {z : StateDirections S × ℝ} (h : z ∈ sectorNeighborhood S base ε ε) :
@@ -255,7 +310,7 @@ theorem coupledControlCircleInverse_smoothTameOn_of_n08
     liftSectorParameter_mem_stateNeighborhood h le_rfl
   have hs (z : StateDirections S × ℝ) : stateSector S (liftSectorParameter S C z).1 :=
     h1.2.2.1.liftSectorParameter_sector z
-  exact coupledControlCircleInverse_smoothTameOn (hS.2.1 (3 / 4 : ℝ)) B
+  exact coupledControlCircleInverse_smoothTameOn hM B
     (liftSectorParameter S C)
     (tamePairGrading_monotone (solve_sectorGrading_monotone S) weighted_realGrading_monotone)
     (withSeminorms_pairGrading (solve_sectorGrading_withSeminorms S)
@@ -264,6 +319,6 @@ theorem coupledControlCircleInverse_smoothTameOn_of_n08
     (fun z h => hdiag _ (hz h) (hs z))
     (fun z h => hJ _ (hz h) (hs z))
     (fun z h m => (hlo _ (hz h) (hs z) m).1)
-    (coupledControlCircleOperator_smoothTameOn_of_n08 (hS.2.1 (3 / 4 : ℝ)) h1.2.2.1 h8)
+    (coupledControlCircleOperator_smoothTameOn_of_n08 hM h1.2.2.1 h8)
 
 end ContinuousFlexibility.Statements

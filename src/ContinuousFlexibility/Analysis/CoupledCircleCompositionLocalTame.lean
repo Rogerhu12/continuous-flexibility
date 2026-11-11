@@ -73,7 +73,8 @@ theorem coupled_circle_kernel_locallyTame
   classical
   have hc : Continuous
       (fun x => coupledCircleKernel hD hT hγ hM hI r k (ψ x) (v x) (w x)) := by
-    have hm : Continuous (fun x => (ψ x, Fin.cons (v x) (w x))) :=
+    have hm : Continuous (fun x =>
+        (ψ x, (Fin.cons (v x) (w x) : Fin (k + 1) → M.Space))) :=
       hψ.prodMk (continuous_pi (fun i => Fin.cases hv hw i))
     simpa only [coupledCircleKernelMultilinear_apply, Fin.cons_zero, Fin.tail_cons] using
       (coupledCircleKernelMultilinear_continuous hD hT hγ hM hI r k).comp hm
@@ -104,10 +105,12 @@ theorem coupled_circle_kernel_locallyTame
   refine ⟨C * (((k + 1 : ℕ) : ℝ) + 1) * R ^ (k + 1),
     mul_nonneg (mul_nonneg hC (by positivity)) (pow_nonneg (zero_le_one.trans hR) _), ?_⟩
   intro x hx
-  have hlow : ∀ i, M.grading base (Fin.cons (v x) (w x) i) ≤ R :=
+  have hlow : ∀ i : Fin (k + 1),
+      M.grading base ((Fin.cons (v x) (w x) : Fin (k + 1) → M.Space) i) ≤ R :=
     fun i => Fin.cases ((hvp base x).trans hx.le)
       (fun j => (hwp base x j).trans hx.le) i
-  have hhigh : ∀ i, M.grading (r + s + loss) (Fin.cons (v x) (w x) i) ≤
+  have hhigh : ∀ i : Fin (k + 1),
+      M.grading (r + s + loss) ((Fin.cons (v x) (w x) : Fin (k + 1) → M.Space) i) ≤
       p (r + s + loss) x :=
     fun i => Fin.cases (hvp _ x) (fun j => hwp _ x j) i
   have hb : coupledCircleKernelMajorant M base (r + s + loss) (ψ x)
