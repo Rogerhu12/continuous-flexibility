@@ -285,10 +285,11 @@ theorem radius_deriv_le_seven_b_mul_A (h : MorseChainRealization T σ D C)
     rw [hspeed]
     change ((1 / 100 : ℝ) * A ^ 5 * s) / s = _
     exact mul_div_cancel_right₀ _ hs.ne'
+  have hturn : morseChainRightTurn T n = morseRightTurn A B := rfl
   have hsub (y : ℝ) (hy : y ∈ Icc morseCellLeftCut (morseRightTurn A B)) :
       y ∈ Icc (T.leftX side n) (T.rightX side n) := by
     have hy' : y ∈ Icc (T.leftX side n) (morseChainRightTurn T n) := by
-      simpa only [hleft, morseCellLeftCut] using hy
+      simpa only [hleft, hturn, morseCellLeftCut] using hy
     exact ⟨hy'.1, hy'.2.trans hbe.le⟩
   have hEq (y : ℝ) (hy : y ∈ Icc morseCellLeftCut (morseRightTurn A B)) :
       deriv (deriv r) y = -morseRho A B y * r y := by
@@ -297,7 +298,7 @@ theorem radius_deriv_le_seven_b_mul_A (h : MorseChainRealization T σ D C)
     ring
   have hLeft := (morseLeftCap_radius_bounds hB hAB hA₀ hBAlo hBAhi hr hrroot hvroot hEq).1
   have hX' : X ∈ Icc morseCellLeftCut (morseRightTurn A B) := by
-    simpa only [hleft, morseCellLeftCut] using hX
+    simpa only [hleft, hturn, morseCellLeftCut] using hX
   have hv : deriv R X / s ≤ 7 * A := by
     rw [← hd]
     exact (hLeft X hX').2.2.2.2

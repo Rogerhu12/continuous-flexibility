@@ -15,27 +15,48 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency false
+
 open Set
+
+private theorem paired_height_component_le
+    {H K : Type*} [AddCommGroup H] [Module ℝ H] [AddCommGroup K] [Module ℝ K]
+    (p : Seminorm ℝ H) (q : Seminorm ℝ K)
+    (x : (H × ℝ) × (ℝ × (K × K))) :
+    p x.1.1 ≤ (p x.1.1 + ‖x.1.2‖) +
+      (‖x.2.1‖ + (q x.2.2.1 + q x.2.2.2)) := by
+  have hc := norm_nonneg x.1.2
+  have hν := norm_nonneg x.2.1
+  have hκ := apply_nonneg q x.2.2.1
+  have hh := apply_nonneg q x.2.2.2
+  linarith only [hc, hν, hκ, hh]
+
+private theorem paired_height_scalar_le
+    {H K : Type*} [AddCommGroup H] [Module ℝ H] [AddCommGroup K] [Module ℝ K]
+    (p : Seminorm ℝ H) (q : Seminorm ℝ K)
+    (x : (H × ℝ) × (ℝ × (K × K))) :
+    |x.1.2| ≤ (p x.1.1 + ‖x.1.2‖) +
+      (‖x.2.1‖ + (q x.2.2.1 + q x.2.2.2)) := by
+  have hf := apply_nonneg p x.1.1
+  have hν := norm_nonneg x.2.1
+  have hκ := apply_nonneg q x.2.2.1
+  have hh := apply_nonneg q x.2.2.2
+  rw [Real.norm_eq_abs]
+  linarith only [hf, hν, hκ, hh]
 
 theorem state_height_grading_le (S : PhysicalSpacesData) (n : ℕ)
     (x : AnnularState S) :
-    (S.height (3 / 4 : ℝ)).grading n x.1.1 ≤ stateGrading S n x := by
-  rw [stateGrading_apply]
-  have hc := norm_nonneg x.1.2
-  have hν := norm_nonneg x.2.1
-  have hκ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) x.2.2.1
-  have hh := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) x.2.2.2
-  linarith only [hc, hν, hκ, hh]
+    (S.height (3 / 4 : ℝ)).grading n x.1.1 ≤ stateGrading S n x :=
+  (paired_height_component_le ((S.height (3 / 4 : ℝ)).grading n)
+    ((S.circle (3 / 4 : ℝ)).grading n) x).trans_eq
+      (stateGrading_apply S n x).symm
 
 theorem abs_stateHeightScalar_le_stateGrading (S : PhysicalSpacesData) (n : ℕ)
     (x : AnnularState S) :
-    |x.1.2| ≤ stateGrading S n x := by
-  rw [stateGrading_apply, ← Real.norm_eq_abs]
-  have hf := apply_nonneg ((S.height (3 / 4 : ℝ)).grading n) x.1.1
-  have hν := norm_nonneg x.2.1
-  have hκ := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) x.2.2.1
-  have hh := apply_nonneg ((S.circle (3 / 4 : ℝ)).grading n) x.2.2.2
-  linarith only [hf, hν, hκ, hh]
+    |x.1.2| ≤ stateGrading S n x :=
+  (paired_height_scalar_le ((S.height (3 / 4 : ℝ)).grading n)
+    ((S.circle (3 / 4 : ℝ)).grading n) x).trans_eq
+      (stateGrading_apply S n x).symm
 
 /-- The raw product bound for a single genuine state-height jet. The
 constant and E0 power are spatially uniform and the input loss is two. -/
@@ -48,7 +69,8 @@ theorem stateU_positiveMixedJets_le_E0_stateGrading
           C * T.E0 p.1 ^ A * T.H p.1 ^ (3 / 4 : ℝ) *
             stateGrading S (s + 2) x := by
   obtain ⟨C₀, A, hC₀, hA, hheight⟩ :=
-    sobolevModel_physicalMixedJets_le_E0_grading hT (hS.1 (3 / 4 : ℝ)) s
+    sobolevModel_physicalMixedJets_le_E0_grading
+      (γ := (3 / 4 : ℝ)) (M := S.height (3 / 4 : ℝ)) hT (hS.1 (3 / 4 : ℝ)) s
   obtain ⟨Cχ, hCχ, hcutoff⟩ :=
     cutoff_positiveJets_le_materialHeight hT hS.2.2.1 (3 / 4 : ℝ) s
   obtain ⟨K, hK, hEraise⟩ := materialE0_rpow_le_of_exponent_le hT (A := 0) hA

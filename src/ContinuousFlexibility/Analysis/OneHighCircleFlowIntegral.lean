@@ -33,9 +33,10 @@ theorem continuous_parametric_intervalIntegral {F : H × ℝ → E}
   rcases le_total a b with hab | hba
   · simpa only [intervalIntegral.integral_of_le hab, integral_Icc_eq_integral_Ioc]
       using hc a b
-  · simpa only [intervalIntegral.integral_of_ge hba, integral_Icc_eq_integral_Ioc,
-      Pi.neg_apply]
-      using (hc b a).neg
+  · have hn : Continuous (fun x : H => -(∫ t in Icc b a, F (x, t))) := by
+      simpa only [Function.comp_def] using continuous_neg.comp (hc b a)
+    simpa only [intervalIntegral.integral_of_ge hba, integral_Icc_eq_integral_Ioc]
+      using hn
 
 /-- Continuous actual parameter derivatives can be moved under a compact
 interval integral. The local domination is obtained, rather than assumed. -/

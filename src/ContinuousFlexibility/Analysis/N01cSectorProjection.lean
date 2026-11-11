@@ -34,9 +34,9 @@ private theorem paired_projection_displacement_le
       (p (x.1.1 - y.1.1) + ‖x.1.2 - y.1.2‖) +
         (‖x.2.1 - y.2.1‖ +
           (q (x.2.2.1 - y.2.2.1) + q (x.2.2.2 - y.2.2.2))) := by
-  simp only [hκ, hθ, sub_zero, q.map_zero']
+  simp only [hκ, hθ, sub_zero]
   exact add_le_add le_rfl (add_le_add le_rfl
-    (add_le_add hP (apply_nonneg q x.2.2.2)))
+    (add_le_add hP (q.map_zero'.trans_le (apply_nonneg q x.2.2.2))))
 
 def stateSectorProjection {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} (hS : IsPhysicalSpaces D T S)
