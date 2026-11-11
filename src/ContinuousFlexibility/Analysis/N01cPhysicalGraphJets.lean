@@ -170,9 +170,11 @@ theorem stateFlow_composition_D_pureSlots
     n (x, θ) (input.pureSlots v)).trans ?_
   apply Finset.sum_congr rfl
   intro c _
+  change K.D c.length (x, Θ (x, θ))
+    (stateFlowPartitionSlot J input c (x, θ) v) = _
   have hh := smoothDirections_joint_D_eq_stateAngleJet K Ka c.length x hx
     (Θ (x, θ)) (stateFlowPartitionSlot J input c (x, θ) v)
-  simpa only [stateAngleJet_apply, stateFlowPartitionSlot] using hh
+  simpa only [stateAngleJet_apply] using hh
 
 end GenuineGraph
 

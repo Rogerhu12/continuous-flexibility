@@ -99,7 +99,7 @@ end ContinuousFlexibility.Analysis
 
 namespace ContinuousFlexibility.Statements
 
-open Set ContinuousFlexibility.Analysis
+open Set ContinuousFlexibility.Analysis ContinuousFlexibility.Blueprint
 open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true

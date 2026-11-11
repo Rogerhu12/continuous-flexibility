@@ -44,8 +44,8 @@ theorem n01_ordinaryFlowForcingHead_bounds
       u.defectNorm hS hT hA hB hpos 3 t ≤ M) :
     ∀ N : ℕ, 0 < N → ∃ offset : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ u : OrdinaryFlowVariationInput D S C base ε N,
-      ∀ t ∈ Icc (0 : ℝ) 1, ∀ ω : FlowForcingChoice N,
-        u.factorNorm hS hT hA hB hpos s t ω 0 ≤
+      ∀ t ∈ Icc (0 : ℝ) 1, ∀ choice : FlowForcingChoice N,
+        u.factorNorm hS hT hA hB hpos s t choice 0 ≤
           B * T.H (T.sample (C.cell u.component)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell u.component)) ^ B *
             u.aggregate (s + offset) * u.aggregate offset := by
@@ -97,7 +97,7 @@ theorem n01_ordinaryFlowForcingHead_bounds
       (hgeometry N i.1 i.2.1).1 (hgeometry N i.1 i.2.1).2)
     houter hdefect
   refine n01c_transport_offset_bounds _ _ hhead ?_
-  intro offset s B hBpos hbound u t ht ω
-  exact hbound (u, (⟨t, ht⟩, ω))
+  intro offset s B hBpos hbound u t ht choice
+  exact hbound (u, (⟨t, ht⟩, choice))
 
 end ContinuousFlexibility.Blueprint

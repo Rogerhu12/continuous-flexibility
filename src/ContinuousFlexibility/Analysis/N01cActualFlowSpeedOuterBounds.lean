@@ -57,41 +57,41 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
 /-- The selected mixed speed jet before its angle is composed with the flow. -/
 def ordinaryFlowSpeedOuterField {N : ℕ} (v : Fin N → (Fin d → ℝ))
-    (t : ℝ) (ω : FlowForcingChoice N) (θ : ℝ) : ℝ :=
+    (t : ℝ) (choice : FlowForcingChoice N) (θ : ℝ) : ℝ :=
   flowSpeedJointField
     (continuousTimeSpeedTowerOfContDiff
       (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L))
-    ω.1.length 0
-    (fun i => if i ∈ ω.2 then
-      ((flowParameterIdentityJet (ω.1.partSize i) (v ∘ ω.1.emb i)).1, 0) else (0, 1))
+    choice.1.length 0
+    (fun i => if i ∈ choice.2 then
+      ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0) else (0, 1))
     (t, θ)
 
 theorem contDiff_ordinaryFlowSpeedOuterField {N : ℕ}
-    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N) :
-    ContDiff ℝ ∞ (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω) :=
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (choice : FlowForcingChoice N) :
+    ContDiff ℝ ∞ (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice) :=
   (contDiff_flowSpeedJointField _
-    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L) ω.1.length 0 _).comp
+    (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L) choice.1.length 0 _).comp
       (contDiff_const.prodMk contDiff_id)
 
 theorem ordinaryFlowSpeedOuterField_periodic {N : ℕ}
-    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N) :
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (choice : FlowForcingChoice N) :
     Function.Periodic
-      (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω) Real.pi :=
+      (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice) Real.pi :=
   flowSpeedJointField_periodic _
-    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L) ω.1.length 0 _ t
+    (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L) choice.1.length 0 _ t
 
 def ordinaryFlowSpeedOuterJet {N : ℕ} (v : Fin N → (Fin d → ℝ))
-    (t : ℝ) (ω : FlowForcingChoice N) (b : ℕ) : C(AddCircle Real.pi, ℝ) :=
-  periodicCircleJet (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω)
-    (ordinaryFlowSpeedOuterField_periodic hS hT hA hB hpos m x hx L v t ω)
-    (contDiff_ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω) b
+    (t : ℝ) (choice : FlowForcingChoice N) (b : ℕ) : C(AddCircle Real.pi, ℝ) :=
+  periodicCircleJet (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice)
+    (ordinaryFlowSpeedOuterField_periodic hS hT hA hB hpos m x hx L v t choice)
+    (contDiff_ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice) b
 
 theorem ordinaryFlowSpeedOuterJet_coe_apply {N : ℕ}
-    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N)
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (choice : FlowForcingChoice N)
     (b : ℕ) (θ : ℝ) :
-    ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t ω b
+    ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t choice b
       (θ : AddCircle Real.pi) =
-        iteratedDeriv b (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω) θ :=
+        iteratedDeriv b (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice) θ :=
   periodicCircleJet_coe_apply _ _ _ b θ
 
 /-- The exact state-and-angle arity of every angular derivative of this
@@ -99,42 +99,42 @@ outer factor is read from the original forcing selection. -/
 theorem ordinaryFlowSpeedOuterJet_eq_stateJet
     (J : ContinuousTimeSpeedTower (stateNeighborhood S C base ε)
       (componentCosineSpeed D S C m))
-    {N : ℕ} (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N)
+    {N : ℕ} (v : Fin N → (Fin d → ℝ)) (t : ℝ) (choice : FlowForcingChoice N)
     (b : ℕ) (θ : ℝ) :
-    ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t ω b
+    ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t choice b
         (θ : AddCircle Real.pi) =
       deriv (circleFlowCompactTime 0 Real.pi) t *
         (smoothDirections_angularStateSlice (J.jet (circleFlowCompactTime 0 Real.pi t))
-          (ω.stateWord.angleArity + b) θ).D ω.stateWord.stateArity x
-            (flowForcingStateDirections ω L v) := by
+          (choice.stateWord.angleArity + b) θ).D choice.stateWord.stateArity x
+            (flowForcingStateDirections choice L v) := by
   classical
   rw [ordinaryFlowSpeedOuterJet_coe_apply]
-  have he : ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω =
+  have he : ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice =
       fun η => deriv (circleFlowCompactTime 0 Real.pi) t *
-        J.D ω.1.length (x, (circleFlowCompactTime 0 Real.pi t, η))
-          (fun i => flowStateAngleMap L (if i ∈ ω.2 then
-            ((flowParameterIdentityJet (ω.1.partSize i) (v ∘ ω.1.emb i)).1, 0)
+        J.D choice.1.length (x, (circleFlowCompactTime 0 Real.pi t, η))
+          (fun i => flowStateAngleMap L (if i ∈ choice.2 then
+            ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0)
             else (0, 1))) := by
     funext η
     exact ordinaryFlowFiniteSpeedTower_D_apply hS hT hA hB hpos m J x hx L
-      ω.1.length t η _
+      choice.1.length t η _
   rw [he, iteratedDeriv_const_mul_field]
   apply congrArg (fun y : ℝ => deriv (circleFlowCompactTime 0 Real.pi) t * y)
   have hslots :
-      (fun i => flowStateAngleMap L (if i ∈ ω.2 then
-        ((flowParameterIdentityJet (ω.1.partSize i) (v ∘ ω.1.emb i)).1, 0)
+      (fun i => flowStateAngleMap L (if i ∈ choice.2 then
+        ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1, 0)
         else (0, 1))) =
-      fun i => if decide (i ∈ ω.2) then
-        (L ((flowParameterIdentityJet (ω.1.partSize i) (v ∘ ω.1.emb i)).1), 0)
+      fun i => if decide (i ∈ choice.2) then
+        (L ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1), 0)
         else (0, 1) := by
     funext i
-    by_cases hi : i ∈ ω.2 <;> simp [hi, flowStateAngleMap_apply]
+    by_cases hi : i ∈ choice.2 <;> simp [hi, flowStateAngleMap_apply]
   rw [hslots]
   exact iteratedDeriv_joint_selectedSlots (J.jet (circleFlowCompactTime 0 Real.pi t))
     (fun b θ => smoothDirections_angularStateSlice
       (J.jet (circleFlowCompactTime 0 Real.pi t)) b θ)
-    (fun i => decide (i ∈ ω.2)) b hx θ
-    (fun i => L ((flowParameterIdentityJet (ω.1.partSize i) (v ∘ ω.1.emb i)).1))
+    (fun i => decide (i ∈ choice.2)) b hx θ
+    (fun i => L ((flowParameterIdentityJet (choice.1.partSize i) (v ∘ choice.1.emb i)).1))
 
 end OuterField
 
@@ -167,9 +167,9 @@ theorem n01_ordinaryFlowSpeedOuter_sobolev_bounds
       ∀ d : ℕ, ∀ x : AnnularState S × ℝ, ∀ hx : x ∈ stateNeighborhood S C base ε,
       ∀ L : (Fin d → ℝ) →L[ℝ] (AnnularState S × ℝ), ∀ v : Fin N → (Fin d → ℝ),
       (∀ i, pairGrading (stateGrading S) realGrading base (L (v i)) ≤ 1) →
-      ∀ t ∈ Icc (0 : ℝ) 1, ∀ ω : FlowForcingChoice N,
+      ∀ t ∈ Icc (0 : ℝ) 1, ∀ choice : FlowForcingChoice N,
         circleRealSobolevNorm (s : ℝ)
-          (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t ω 0) ≤
+          (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t choice 0) ≤
             B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
               T.E0 (T.sample (C.cell m)) ^ B *
               ((1 + pairGrading (stateGrading S) realGrading (s + loss + offset)
@@ -186,7 +186,7 @@ theorem n01_ordinaryFlowSpeedOuter_sobolev_bounds
   obtain ⟨C₀, hC₀, hweight⟩ := exists_sameConstant_materialWeight_bound
     ((2 : ℝ) ^ (s + 1) * Mτ * ((N : ℝ) + 1) * B) B (3 / 4 : ℝ)
   refine ⟨C₀, hC₀, ?_⟩
-  intro m J d x hx L v hv t ht ω
+  intro m J d x hx L v hv t ht choice
   let p := pairGrading (stateGrading S) realGrading
   let high := s + loss + offset
   let R := (1 + p high (x - (C.referenceState, 0))) + ∑ i, p high (L (v i))
@@ -201,33 +201,33 @@ theorem n01_ordinaryFlowSpeedOuter_sobolev_bounds
   have hW : 0 ≤ W :=
     mul_nonneg (mul_nonneg hBpos.le (Real.rpow_nonneg hH _))
       (Real.rpow_nonneg (zero_le_one.trans hE0) _)
-  have hk := flowForcingStateDirections_stateArity_le ω
-  have harity := ω.stateWord.arity_sum
-  have hlen := ω.1.length_le
-  have hlenpos := ω.1.length_pos hN
+  have hk := flowForcingStateDirections_stateArity_le choice
+  have harity := choice.stateWord.arity_sum
+  have hlen := choice.1.length_le
+  have hlenpos := choice.1.length_pos hN
   have hτ := circleFlowCompactTime_mem Real.pi_pos.le t
-  have hselectedLow := flowForcingStateDirections_seminorm_le ω L v (p base)
+  have hselectedLow := flowForcingStateDirections_seminorm_le choice L v (p base)
     (by norm_num : (0 : ℝ) ≤ 1) hv
   have hsum : 0 ≤ ∑ i, p high (L (v i)) :=
     Finset.sum_nonneg (fun i _ => apply_nonneg _ _)
-  have hselectedHigh := flowForcingStateDirections_seminorm_le ω L v (p high) hsum
+  have hselectedHigh := flowForcingStateDirections_seminorm_le choice L v (p high) hsum
     (fun i => Finset.single_le_sum (fun j _ => apply_nonneg _ _) (Finset.mem_univ i))
   have hselected : oneHighVariationWeight p base high (x - (C.referenceState, 0))
-      (flowForcingStateDirections ω L v) ≤ ((N : ℝ) + 1) * R :=
+      (flowForcingStateDirections choice L v) ≤ ((N : ℝ) + 1) * R :=
     (oneHighVariationWeight_le_selectedAggregate p base high (x - (C.referenceState, 0))
-      (flowForcingStateDirections ω L v) (fun i => L (v i)) hselectedLow hselectedHigh).trans
+      (flowForcingStateDirections choice L v) (fun i => L (v i)) hselectedLow hselectedHigh).trans
         (mul_le_mul_of_nonneg_right (by exact_mod_cast Nat.add_le_add_right hk 1) hR)
   have hpoint (b : ℕ) (hb : b ≤ s) (θ : ℝ) :
-      |ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t ω b
+      |ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t choice b
         (θ : AddCircle Real.pi)| ≤ Mτ * W * ((N : ℝ) + 1) * R := by
     rw [ordinaryFlowSpeedOuterJet_eq_stateJet hS hT hA hB hpos m x hx L J,
       abs_mul]
-    have hraw := hBbound ω.stateWord.stateArity hk m (ω.stateWord.angleArity + b)
+    have hraw := hBbound choice.stateWord.stateArity hk m (choice.stateWord.angleArity + b)
       (circleFlowCompactTime 0 Real.pi t) θ (by omega) hτ (by omega)
       (smoothDirections_angularStateSlice (J.jet (circleFlowCompactTime 0 Real.pi t))
-        (ω.stateWord.angleArity + b) θ) x hx (flowForcingStateDirections ω L v)
+        (choice.stateWord.angleArity + b) θ) x hx (flowForcingStateDirections choice L v)
     have hjet : |(smoothDirections_angularStateSlice
-        (J.jet (circleFlowCompactTime 0 Real.pi t)) (ω.stateWord.angleArity + b) θ).D ω.stateWord.stateArity x (flowForcingStateDirections ω L v)| ≤
+        (J.jet (circleFlowCompactTime 0 Real.pi t)) (choice.stateWord.angleArity + b) θ).D choice.stateWord.stateArity x (flowForcingStateDirections choice L v)| ≤
         W * (((N : ℝ) + 1) * R) :=
       hraw.trans (mul_le_mul_of_nonneg_left hselected hW)
     calc
@@ -235,7 +235,7 @@ theorem n01_ordinaryFlowSpeedOuter_sobolev_bounds
         mul_le_mul (hτbound t ht) hjet (abs_nonneg _) hMτ.le
       _ = _ := by ring
   have hnorm := circle_sobolevNorm_le_pointwiseJetBounds
-    (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t ω)
+    (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t choice)
     (periodicCircleJet_hasDerivAt _ _ _) s
     (by positivity : 0 ≤ Mτ * W * ((N : ℝ) + 1) * R)
     (by positivity : 0 ≤ Mτ * W * ((N : ℝ) + 1) * R)

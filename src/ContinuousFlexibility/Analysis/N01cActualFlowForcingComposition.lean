@@ -64,15 +64,15 @@ def ordinaryFlowFiniteDefectJet (t : ℝ) (b : ℕ) : C(AddCircle Real.pi, ℝ) 
 
 /-- Exact composition before any estimate is used. -/
 theorem ordinaryFlowForcingFactorJet_head_eq_comp {N : ℕ}
-    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N) (b : ℕ) :
-    ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω 0 b =
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (choice : FlowForcingChoice N) (b : ℕ) :
+    ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t choice 0 b =
       periodicCircleJet
-        (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω ∘
+        (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice ∘
           ordinaryFlowFiniteAngle m x hx L t)
         (periodic_comp_circleLift
-          (ordinaryFlowSpeedOuterField_periodic hS hT hA hB hpos m x hx L v t ω)
+          (ordinaryFlowSpeedOuterField_periodic hS hT hA hB hpos m x hx L v t choice)
           (ordinaryFlowFiniteAngle_lift hS hT hA hB hpos m x hx L t))
-        ((contDiff_ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω).comp
+        ((contDiff_ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice).comp
           (contDiff_ordinaryFlowFiniteAngle hS hT hA hB hpos m J x hx L t)) b := by
   ext θ
   induction θ using QuotientAddGroup.induction_on
@@ -83,25 +83,25 @@ theorem ordinaryFlowForcingFactorJet_head_eq_comp {N : ℕ}
 /-- The only high flow factor in tame composition is its actual
 derivative defect at order s-1. The low geometry is fixed separately. -/
 theorem ordinaryFlowForcingFactorJet_head_sobolev_le {N : ℕ}
-    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (ω : FlowForcingChoice N)
+    (v : Fin N → (Fin d → ℝ)) (t : ℝ) (choice : FlowForcingChoice N)
     (s : ℕ) {c M : ℝ} (hc : 0 < c) (hM : 0 ≤ M)
     (hlower : ∀ θ, c ≤ deriv (ordinaryFlowFiniteAngle m x hx L t) θ)
     (hlow : circleRealSobolevNorm 3
       (ordinaryFlowFiniteDefectJet hS hT hA hB hpos m J x hx L t 0) ≤ M) :
     circleRealSobolevNorm (s : ℝ)
-        (ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t ω 0 0) ≤
+        (ordinaryFlowForcingFactorJet hS hT hA hB hpos m J x hx L v t choice 0 0) ≤
       circleLiftCompositionConstant Real.pi c M s *
         (circleRealSobolevNorm (s : ℝ)
-          (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t ω 0) +
+          (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t choice 0) +
           circleRealSobolevNorm 3
-            (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t ω 0) *
+            (ordinaryFlowSpeedOuterJet hS hT hA hB hpos m x hx L v t choice 0) *
               circleRealSobolevNorm ((s - 1 : ℕ) : ℝ)
                 (ordinaryFlowFiniteDefectJet hS hT hA hB hpos m J x hx L t 0)) := by
   rw [ordinaryFlowForcingFactorJet_head_eq_comp]
   exact circleLift_sobolev_comp_le s hc hM
-    (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω)
-    (ordinaryFlowSpeedOuterField_periodic hS hT hA hB hpos m x hx L v t ω)
-    (contDiff_ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t ω)
+    (ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice)
+    (ordinaryFlowSpeedOuterField_periodic hS hT hA hB hpos m x hx L v t choice)
+    (contDiff_ordinaryFlowSpeedOuterField hS hT hA hB hpos m x hx L v t choice)
     (ordinaryFlowFiniteAngle m x hx L t)
     (contDiff_ordinaryFlowFiniteAngle hS hT hA hB hpos m J x hx L t)
     (ordinaryFlowFiniteAngle_lift hS hT hA hB hpos m x hx L t)
@@ -119,7 +119,14 @@ theorem ordinaryFlowCircleVariationData_coefficient_eq_head
   rename_i α
   change circleFlowSpeedJet
     (flowVariationCoefficient (ordinaryFlowFiniteSpeed x hx L D m)
-      (ordinaryFlowFiniteTrajectory x hx L m) 0) _ _ t 0
+      (ordinaryFlowFiniteTrajectory x hx L m) 0)
+    (contDiff_flowVariationCoefficient
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
+      (contDiff_ordinaryFlowFiniteTrajectory hS hT hA hB hpos m J x hx L) 0)
+    (flowVariationCoefficient_periodic
+      (contDiff_ordinaryFlowFiniteSpeed hS hT hA hB hpos m x hx L)
+      (ordinaryFlowFiniteSpeed_periodic hS hT hA hB hpos m x hx L)
+      (ordinaryFlowFiniteTrajectory_periodic_lift hS hT hA hB hpos m x hx L) 0) t 0
         (α : AddCircle Real.pi) = _
   simp only [circleFlowSpeedJet_coe_apply, ordinaryFlowForcingFactorJet,
     canonicalFlowForcingFactorJet, periodicCircleJet_coe_apply, iteratedDeriv_zero]

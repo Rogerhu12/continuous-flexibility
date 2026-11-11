@@ -43,8 +43,8 @@ theorem n01_ordinaryFlowVariation_unitBall_bounds
       OrdinaryFlowAngularOrderBound hS hT hA hB hpos loss k)
     (hhead : ∃ offset : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ u : OrdinaryFlowVariationInput D S C base ε (n + 1),
-      ∀ t ∈ Icc (0 : ℝ) 1, ∀ ω : FlowForcingChoice (n + 1),
-        u.factorNorm hS hT hA hB hpos s t ω 0 ≤
+      ∀ t ∈ Icc (0 : ℝ) 1, ∀ choice : FlowForcingChoice (n + 1),
+        u.factorNorm hS hT hA hB hpos s t choice 0 ≤
           B * T.H (T.sample (C.cell u.component)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell u.component)) ^ B *
             u.aggregate (s + offset) * u.aggregate offset) :

@@ -103,16 +103,16 @@ variable {T : MaterialData}
 local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
 
 def outerNorm (u : OrdinaryFlowVariationInput D S C base ε N)
-    (s : ℕ) (t : ℝ) (ω : FlowForcingChoice N) : ℝ :=
+    (s : ℕ) (t : ℝ) (choice : FlowForcingChoice N) : ℝ :=
   circleRealSobolevNorm (s : ℝ)
     (ordinaryFlowSpeedOuterJet hS hT hA hB hpos u.component u.state u.mem
-      u.plot u.directions t ω 0)
+      u.plot u.directions t choice 0)
 
 def factorNorm (u : OrdinaryFlowVariationInput D S C base ε N)
-    (s : ℕ) (t : ℝ) (ω : FlowForcingChoice N) (i : Fin (ω.1.length + 1)) : ℝ :=
+    (s : ℕ) (t : ℝ) (choice : FlowForcingChoice N) (i : Fin (choice.1.length + 1)) : ℝ :=
   circleRealSobolevNorm (s : ℝ)
     (ordinaryFlowForcingFactorJet hS hT hA hB hpos u.component u.tower
-      u.state u.mem u.plot u.directions t ω i 0)
+      u.state u.mem u.plot u.directions t choice i 0)
 
 def defectNorm (u : OrdinaryFlowVariationInput D S C base ε N)
     (s : ℕ) (t : ℝ) : ℝ :=
