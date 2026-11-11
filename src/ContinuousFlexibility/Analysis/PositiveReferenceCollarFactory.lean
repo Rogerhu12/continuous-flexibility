@@ -55,7 +55,7 @@ theorem exists_positiveReferenceCollar_family
         let Y := positiveReferenceCollarCoordinate n l r δ v m root (A i) Ref;
         ContDiff ℝ ∞ Y ∧
         (∀ x θ, B ≤ deriv (fun t => Y (t, θ)) x) ∧
-        (∀ side θ, Y (if side then r else l, θ) = if side then v + m else v) ∧
+        (∀ (side : Bool) θ, Y (if side then r else l, θ) = if side then v + m else v) ∧
         (∀ k ≤ n + 1, ∀ θ,
           radialBoundaryJet Y (if root then r else l) k θ = A i k θ) ∧
         (∀ side, side ≠ root → ∀ θ, Y =ᶠ[𝓝 (if side then r else l, θ)] Ref) := by
@@ -72,10 +72,10 @@ theorem exists_positiveReferenceCollar_family
   let P : ι → Bool → PolarPoint → ℝ := fun i =>
     positiveReferenceCollarField n l r root (A i) Ref
   have hP (i : ι) (side : Bool) : ContDiff ℝ ∞ (P i side) := by
-    dsimp only [P, positiveReferenceCollarField]
-    split_ifs
-    · exact contDiff_boundaryTaylorPolynomial (hA i) _
-    · exact hRef
+    by_cases hs : side = root
+    · simp only [P, positiveReferenceCollarField, if_pos hs]
+      exact contDiff_boundaryTaylorPolynomial (hA i) _
+    · simpa only [P, positiveReferenceCollarField, if_neg hs] using hRef
   have hPvalue (i : ι) (side : Bool) (θ : ℝ) :
       P i side (if side then r else l, θ) = if side then v + m else v := by
     by_cases hs : side = root
@@ -85,7 +85,7 @@ theorem exists_positiveReferenceCollar_family
       have he' : boundaryTaylorPolynomial (n + 1) (if root then r else l) (A i)
           (if root then r else l, θ) = A i 0 θ := by
         simpa only [iteratedDeriv_zero] using he
-      simpa only [P, positiveReferenceCollarField, if_pos rfl] using
+      simpa only [P, positiveReferenceCollarField, if_pos rfl, ite_true] using
         he'.trans (hAvalue i θ)
     · simpa only [P, positiveReferenceCollarField, if_neg hs] using hRefValue side hs θ
   have hPbounds (i : ι) (side : Bool) (x : ℝ)
@@ -102,7 +102,7 @@ theorem exists_positiveReferenceCollar_family
         hδ.le hδone hM hdist (hAlow i θ) (fun j hj hjn => hAbound i j hj hjn θ) hsmall
       have he : P i root =
           boundaryTaylorPolynomial (n + 1) (if root then r else l) (A i) := by
-        simp only [P, positiveReferenceCollarField, if_pos rfl]
+        simp only [P, positiveReferenceCollarField, if_pos rfl, ite_true]
       rw [he, ← deriv_cylinder_radial_slice
         ((contDiff_boundaryTaylorPolynomial (hA i) _).differentiable (by simp)) x θ]
       exact ⟨(min_le_left _ _).trans hb.1, hb.2.trans (le_max_left _ _)⟩
@@ -143,7 +143,7 @@ theorem exists_positiveReferenceCollar_family
       (hP i) hδ hgap hm.ne' (hPvalue i) root θ k
     have hroot : P i root =
         boundaryTaylorPolynomial (n + 1) (if root then r else l) (A i) := by
-      simp only [P, positiveReferenceCollarField, if_pos rfl]
+      simp only [P, positiveReferenceCollarField, if_pos rfl, ite_true]
     rw [hroot] at he
     exact he.trans (iteratedDeriv_boundaryTaylorPolynomial (n + 1)
       (if root then r else l) (A i) hk θ)

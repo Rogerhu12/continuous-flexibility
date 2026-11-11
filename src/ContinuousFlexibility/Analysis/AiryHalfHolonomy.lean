@@ -95,8 +95,19 @@ theorem airyFirstIntegral_endpoint_of_actual_ode
   have hu (r : ℝ) (hr : r ∈ Ioo a b) :
       DifferentiableAt ℝ (airyFirstIntegral F σ) (r, u r) := by
     obtain ⟨hF, _, _, hξ, _⟩ := hregular r hr
-    exact hF.snd.add ((differentiableAt_const σ).mul
-      ((hasDerivAt_airyTravelPrimitive hξ).differentiableAt.comp (r, u r) hF.fst))
+    have hcoord : DifferentiableAt ℝ (fun q : PolarPoint => (F q).1) (r, u r) :=
+      hF.fst
+    have houter : DifferentiableAt ℝ airyTravelPrimitive (F (r, u r)).1 :=
+      (hasDerivAt_airyTravelPrimitive hξ).differentiableAt
+    have htravel : DifferentiableAt ℝ
+        (fun q : PolarPoint => airyTravelPrimitive (F q).1) (r, u r) := by
+      simpa only [Function.comp_def] using
+        DifferentiableAt.comp (f := fun q : PolarPoint => (F q).1)
+          (g := airyTravelPrimitive) (r, u r) houter hcoord
+    have hscaled : DifferentiableAt ℝ
+        (fun q : PolarPoint => σ * airyTravelPrimitive (F q).1) (r, u r) :=
+      htravel.const_mul σ
+    exact hF.snd.add hscaled
   have hpde (r : ℝ) (hr : r ∈ Ioo a b) :
       radialPartial (airyFirstIntegral F σ) (r, u r) =
         -v r * angularPartial (airyFirstIntegral F σ) (r, u r) := by
