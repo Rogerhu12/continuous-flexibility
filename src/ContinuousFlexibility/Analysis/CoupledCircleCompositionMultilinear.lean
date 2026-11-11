@@ -118,7 +118,8 @@ theorem coupledCircleKernelMultilinear_continuous (r k : ℕ) :
       (fun x : M.Space => coupledCircleKernelMultilinear hD hT hγ hM hI r k x v)
       (coupledCircleKernelMultilinearDerivative hD hT hγ hM hI r k ψ (Fin.cons u v)) ψ u
     simpa only [coupledCircleKernelMultilinear_apply,
-      coupledCircleKernelMultilinearDerivative, Fin.cons_zero, Fin.cons_one, Fin.cons_succ] using
+      coupledCircleKernelMultilinearDerivative, Fin.cons_zero, Fin.cons_one, Fin.cons_succ,
+      Fin.tail] using
       coupledCircleKernel_hasProjectiveLineDerivAt hD hT hγ hM hI r k ψ u (v 0) (Fin.tail v)
   · intro s R hR
     have hdata := hb r k s R hR

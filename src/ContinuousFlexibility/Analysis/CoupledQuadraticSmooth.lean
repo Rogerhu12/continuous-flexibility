@@ -144,6 +144,102 @@ private theorem coupled_error_firstInput_smoothTameOn
     (ContinuousLinearMap.fst ℝ ((StateDirections S × ℝ) × ResidualSpace S) (ResidualSpace S))
     (scalar_pair_fst_isTame (coupledErrorSingleInputGrading S) (residualGrading S))
 
+section GenericAssembly
+
+variable {X Y : Type*}
+  [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
+  [TopologicalSpace Y] [AddCommGroup Y] [Module ℝ Y]
+  {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y}
+  {U : Set X} {W : Set Y} {parameter : X → Y}
+
+private theorem coupled_error_source_assemble
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hp : Monotone p) (htp : WithSeminorms p) (htq : WithSeminorms q)
+    {a : X → ℝ} {t : X → CoupledWeakHeight S} {source : X → ScalarHeightSpace S}
+    {height : X → HeightPair S} {circle : X → CircleSpace S}
+    {error : (Y × CircleSpace S) × HeightPair S → S.Source}
+    (hparameter : SmoothTameOn p q U parameter)
+    (ha : SmoothTameOn p realGrading U a)
+    (ht : SmoothTameOn p (coupledWeakHeightGrading S) U t)
+    (hs : SmoothTameOn p (scalarHeightGrading S) U source)
+    (hh : SmoothTameOn p (heightPairGrading S) U height)
+    (hc : SmoothTameOn p (S.circle (3 / 4 : ℝ)).grading U circle)
+    (he : SmoothTameOn
+      (pairGrading (pairGrading q (S.circle (3 / 4 : ℝ)).grading) (heightPairGrading S))
+      S.sourceGrading ((W ×ˢ univ) ×ˢ univ) error)
+    (hmap : MapsTo parameter U W) :
+    SmoothTameOn p S.sourceGrading U
+      (fun x => a x • coupledScalarTypeErrorSourceLinear hD hT hS (t x) (source x) (height x) +
+        error ((parameter x, circle x), height x)) := by
+  letI : IsTopologicalAddGroup X := htp.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ X := htp.continuousSMul
+  letI : IsTopologicalAddGroup Y := htq.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ Y := htq.continuousSMul
+  have htc : WithSeminorms (S.circle (3 / 4 : ℝ)).grading := withSeminorms_graded _ _
+  have hth := coupled_heightPairGrading_withSeminorms S
+  have hts := coupled_sourceGrading_withSeminorms S
+  letI : IsTopologicalAddGroup (CircleSpace S) := htc.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ (CircleSpace S) := htc.continuousSMul
+  letI : IsTopologicalAddGroup (HeightPair S) := hth.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ (HeightPair S) := hth.continuousSMul
+  letI : IsTopologicalAddGroup S.Source := hts.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ S.Source := hts.continuousSMul
+  have hscalar := coupled_smoothTameOn_source_smul hS hp htp ha
+    (coupledWeakTypeErrorSourceLinear_smoothTameOn hD hT hS hp htp ht hs hh)
+  have htL := withSeminorms_pairGrading (withSeminorms_pairGrading htq htc) hth
+  letI : IsTopologicalAddGroup ((Y × CircleSpace S) × HeightPair S) :=
+    htL.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ ((Y × CircleSpace S) × HeightPair S) := htL.continuousSMul
+  letI : LocallyConvexSpace ℝ ((Y × CircleSpace S) × HeightPair S) := htL.toLocallyConvexSpace
+  have herror := coupled_smoothTameOn_comp_source hS hp htp htL
+    (smoothTameOn_prodMk_generic hp htp
+      (smoothTameOn_prodMk_generic hp htp hparameter hc) hh) he
+    (fun x hx => ⟨⟨hmap hx, mem_univ _⟩, mem_univ _⟩)
+  exact smoothTameOn_add hp hscalar herror
+
+private theorem coupled_error_even_assemble
+    (hS : IsPhysicalSpaces D T S)
+    (hp : Monotone p) (htp : WithSeminorms p) (htq : WithSeminorms q)
+    {circle inverse : X → CircleSpace S}
+    {error : (Y × CircleSpace S) × CircleSpace S → CircleSpace S}
+    (hparameter : SmoothTameOn p q U parameter)
+    (hc : SmoothTameOn p (S.circle (3 / 4 : ℝ)).grading U circle)
+    (hi : SmoothTameOn p (S.circle (3 / 4 : ℝ)).grading U inverse)
+    (he : SmoothTameOn
+      (pairGrading (pairGrading q (S.circle (3 / 4 : ℝ)).grading)
+        (S.circle (3 / 4 : ℝ)).grading)
+      (S.circle (3 / 4 : ℝ)).grading ((W ×ˢ univ) ×ˢ univ) error)
+    (hmap : MapsTo parameter U W) :
+    SmoothTameOn p (evenCircleGradingAt S (3 / 4 : ℝ)) U
+      (fun x => coupledEvenProjectionCLM hS (error ((parameter x, circle x), inverse x))) := by
+  letI : IsTopologicalAddGroup X := htp.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ X := htp.continuousSMul
+  letI : IsTopologicalAddGroup Y := htq.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ Y := htq.continuousSMul
+  have htc : WithSeminorms (S.circle (3 / 4 : ℝ)).grading := withSeminorms_graded _ _
+  letI : IsTopologicalAddGroup (CircleSpace S) := htc.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ (CircleSpace S) := htc.continuousSMul
+  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
+    ((hS.2.1 (3 / 4 : ℝ)).2.1 n).isComplete.completeSpace_coe
+  have htR := withSeminorms_pairGrading (withSeminorms_pairGrading htq htc) htc
+  letI : IsTopologicalAddGroup ((Y × CircleSpace S) × CircleSpace S) :=
+    htR.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ ((Y × CircleSpace S) × CircleSpace S) := htR.continuousSMul
+  letI : LocallyConvexSpace ℝ ((Y × CircleSpace S) × CircleSpace S) := htR.toLocallyConvexSpace
+  have herror := smoothTameOn_comp_generic hp htp htR
+    (smoothTameOn_prodMk_generic hp htp
+      (smoothTameOn_prodMk_generic hp htp hparameter hc) hi) he
+    (fun x hx => ⟨⟨hmap hx, mem_univ _⟩, mem_univ _⟩)
+  have heven := smoothTameOn_postcompose_generic hp htp htc herror
+    (circleModelEvenProjection (hS.2.1 (3 / 4 : ℝ)))
+    (circleModelEvenProjection_isTame (hS.2.1 (3 / 4 : ℝ)))
+  exact solve_smoothTameOn_codRestrict (evenCircleSubmodule S)
+    (solve_isClosed_evenCircle hS) heven
+    (fun x => coupledEvenProjectionCLM hS (error ((parameter x, circle x), inverse x)))
+    (fun x _ => coupledEvenProjectionCLM_val hS _)
+
+end GenericAssembly
+
 private theorem coupled_error_source_smoothTameOn
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (C : NonlinearGeometryData S) (L : ReturnCorrectionData S) (V : CoupledInverseData S)
@@ -165,37 +261,24 @@ private theorem coupled_error_source_smoothTameOn
             (V.V (liftSectorParameter S C z.1.1) z.2).1 +
           L.error (liftSectorParameter S C z.1.1) z.1.2.2.val
             (V.V (liftSectorParameter S C z.1.1) z.2).1) := by
-  let r := residualGrading S
-  let c := (S.circle (3 / 4 : ℝ)).grading
   have hg := coupled_error_grading_facts S
-  have hb := hg.1
-  have htb := hg.2.1
-  have htp := hg.2.2
-  have htc : WithSeminorms c := withSeminorms_graded _ _
-  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
-    ((hS.2.1 (3 / 4 : ℝ)).2.1 n).isComplete.completeSpace_coe
+  letI : IsTopologicalAddGroup (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
+    hg.2.1.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
+    hg.2.1.continuousSMul
   have hzr := coupled_error_firstInput_smoothTameOn S hU
   have hz := coupled_error_fst_smoothTameOn hzr
   have hs := coupled_error_snd_smoothTameOn hzr
-  have hq := coupled_error_snd_smoothTameOn hz
-  have hsource := coupled_error_subtype_smoothTameOn
-    (q := scalarHeightGrading S) S.Q.toLinearMap.ker (coupled_error_fst_smoothTameOn hs)
-  have hcircle := coupled_error_subtype_smoothTameOn
-    (q := c) (evenCircleSubmodule S) (coupled_error_snd_smoothTameOn hs)
-  have ht := coupled_error_ignore_right r (coupled_error_ignore_right r htype)
-  have hη := coupled_error_forget_middle hheight
-  have hscalar0 := coupledWeakTypeErrorSourceLinear_smoothTameOn
-    hD hT hS hb htb ht hsource hη
-  have hscalar1 := coupled_smoothTameOn_source_smul hS hb htb hq hscalar0
-  have hzrc := smoothTameOn_prodMk_generic hb htb hz hcircle
-  have htL := withSeminorms_pairGrading (withSeminorms_pairGrading htp htc)
-    (coupled_heightPairGrading_withSeminorms S)
-  letI : LocallyConvexSpace ℝ (((StateDirections S × ℝ) × CircleSpace S) × HeightPair S) :=
-    htL.toLocallyConvexSpace
-  have hLcomp := coupled_smoothTameOn_comp_source hS hb htb htL
-    (smoothTameOn_prodMk_generic hb htb hzrc hη) hLerror
-    (fun z hz => ⟨⟨hz.1.1, mem_univ _⟩, mem_univ _⟩)
-  exact smoothTameOn_add hb hscalar1 hLcomp
+  exact coupled_error_source_assemble hD hT hS hg.1 hg.2.1 hg.2.2 hz
+    (coupled_error_snd_smoothTameOn hz)
+    (coupled_error_ignore_right (residualGrading S)
+      (coupled_error_ignore_right (residualGrading S) htype))
+    (coupled_error_subtype_smoothTameOn (q := scalarHeightGrading S) S.Q.toLinearMap.ker
+      (coupled_error_fst_smoothTameOn hs))
+    (coupled_error_forget_middle hheight)
+    (coupled_error_subtype_smoothTameOn (q := (S.circle (3 / 4 : ℝ)).grading)
+      (evenCircleSubmodule S) (coupled_error_snd_smoothTameOn hs))
+    hLerror (fun z hz => hz.1.1)
 
 private theorem coupled_error_even_smoothTameOn
     (hS : IsPhysicalSpaces D T S) (C : NonlinearGeometryData S)
@@ -222,40 +305,18 @@ private theorem coupled_error_even_smoothTameOn
                 (V.V (liftSectorParameter S C z.1.1) z.2).1 -
               B.circleColumn (liftSectorParameter S C z.1.1)
                 (V.V (liftSectorParameter S C z.1.1) z.2).2.2.1)))) := by
-  let c := (S.circle (3 / 4 : ℝ)).grading
   have hg := coupled_error_grading_facts S
-  have hb := hg.1
-  have htb := hg.2.1
-  have htp := hg.2.2
-  have htc : WithSeminorms c := withSeminorms_graded _ _
-  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) := fun n =>
-    ((hS.2.1 (3 / 4 : ℝ)).2.1 n).isComplete.completeSpace_coe
+  letI : IsTopologicalAddGroup (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
+    hg.2.1.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
+    hg.2.1.continuousSMul
   have hzr := coupled_error_firstInput_smoothTameOn S hU
   have hz := coupled_error_fst_smoothTameOn hzr
   have hs := coupled_error_snd_smoothTameOn hzr
-  have hcircle := coupled_error_subtype_smoothTameOn
-    (q := c) (evenCircleSubmodule S) (coupled_error_snd_smoothTameOn hs)
-  have hψ := coupled_error_forget_middle hinverse
-  have hzrc := smoothTameOn_prodMk_generic hb htb hz hcircle
-  have htR := withSeminorms_pairGrading (withSeminorms_pairGrading htp htc) htc
-  letI : LocallyConvexSpace ℝ (((StateDirections S × ℝ) × CircleSpace S) × CircleSpace S) :=
-    htR.toLocallyConvexSpace
-  have hRcomp := smoothTameOn_comp_generic hb htb htR
-    (smoothTameOn_prodMk_generic hb htb hzrc hψ) hRerror
-    (fun z hz => ⟨⟨hz.1.1, mem_univ _⟩, mem_univ _⟩)
-  have hevenVal := smoothTameOn_postcompose_generic hb htb htc hRcomp
-    (circleModelEvenProjection (hS.2.1 (3 / 4 : ℝ)))
-    (circleModelEvenProjection_isTame (hS.2.1 (3 / 4 : ℝ)))
-  exact solve_smoothTameOn_codRestrict (evenCircleSubmodule S)
-    (solve_isClosed_evenCircle hS) hevenVal
-    (fun z => coupledEvenProjectionCLM hS
-      (R.error (liftSectorParameter S C z.1.1) z.1.2.2.val
-        (R.inverse (z.2.2.val - z.1.1.2 •
-          B.heightRow (liftSectorParameter S C z.1.1)
-            (V.V (liftSectorParameter S C z.1.1) z.2).1 -
-          B.circleColumn (liftSectorParameter S C z.1.1)
-            (V.V (liftSectorParameter S C z.1.1) z.2).2.2.1))))
-    (fun z _ => coupledEvenProjectionCLM_val hS _)
+  exact coupled_error_even_assemble hS hg.1 hg.2.1 hg.2.2 hz
+    (coupled_error_subtype_smoothTameOn (q := (S.circle (3 / 4 : ℝ)).grading)
+      (evenCircleSubmodule S) (coupled_error_snd_smoothTameOn hs))
+    (coupled_error_forget_middle hinverse) hRerror (fun z hz => hz.1.1)
 
 theorem coupledQuadraticErrorData_smoothTameOn
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -296,6 +357,10 @@ theorem coupledQuadraticErrorData_smoothTameOn
         (coupledQuadraticErrorData hD hT hS R L B V typeCoefficient).Q
           (liftSectorParameter S C z.1.1) z.1.2 z.2) := by
   have hg := coupled_error_grading_facts S
+  letI : IsTopologicalAddGroup (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
+    hg.2.1.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ (((StateDirections S × ℝ) × ResidualSpace S) × ResidualSpace S) :=
+    hg.2.1.continuousSMul
   have hscalar := coupled_error_source_smoothTameOn hD hT hS C L V typeCoefficient
     hU htype hheight hLerror
   have heven := coupled_error_even_smoothTameOn hS C R B V hU hinverse hRerror

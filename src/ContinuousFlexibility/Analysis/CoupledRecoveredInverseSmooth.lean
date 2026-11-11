@@ -155,11 +155,18 @@ private theorem coupled_regular_restriction_comp
 private theorem coupled_regular_tuple_smoothTameOn
     {p : ℕ → Seminorm ℝ X} {q : ℕ → Seminorm ℝ Y} {r : ℕ → Seminorm ℝ E}
     (hp : Monotone p) (htp : WithSeminorms p)
+    (htq : WithSeminorms q) (htr : WithSeminorms r)
     {U : Set X} {height : X → Y × ℝ} {control chart : X → E}
     (hh : SmoothTameOn p (pairGrading q realGrading) U height)
     (hk : SmoothTameOn p r U control) (hc : SmoothTameOn p r U chart) :
     SmoothTameOn p (pairGrading q (pairGrading realGrading (pairGrading r r))) U
       (fun x => ((height x).1, ((height x).2, (control x, chart x)))) := by
+  letI : IsTopologicalAddGroup X := htp.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ X := htp.continuousSMul
+  letI : IsTopologicalAddGroup Y := htq.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ Y := htq.continuousSMul
+  letI : IsTopologicalAddGroup E := htr.isTopologicalAddGroup
+  letI : ContinuousSMul ℝ E := htr.continuousSMul
   exact smoothTameOn_prodMk_generic hp htp (coupled_regular_fst_smoothTameOn hh)
     (smoothTameOn_prodMk_generic hp htp (coupled_regular_snd_smoothTameOn hh)
       (smoothTameOn_prodMk_generic hp htp hk hc))
@@ -480,7 +487,9 @@ theorem coupledRecoveryRegularFormula_smoothTameOn
   have hchartOut := coupled_regular_chart_smoothTameOn (S := S) hM hU hinverse hchart hrem
   have hκval := coupled_regular_subtype_smoothTameOn
     (q := (S.circle (3 / 4 : ℝ)).grading) (coupledConstantCircleSubmodule hM) hκ
-  have h := coupled_regular_tuple_smoothTameOn hg.1 hg.2.1 hheight hκval hchartOut
+  have htc : WithSeminorms (S.circle (3 / 4 : ℝ)).grading := withSeminorms_graded _ _
+  have h := coupled_regular_tuple_smoothTameOn hg.1 hg.2.1
+    (coupled_heightPairGrading_withSeminorms S) htc hheight hκval hchartOut
   exact smoothTameOn_congr h (fun z _ =>
     (coupled_regular_formula_apply (S := S) (B := B) (G := G) (R := R) hM
       (liftSectorParameter S C z.1) z.2).symm)
