@@ -115,7 +115,7 @@ theorem r11b_weakAngular_referenceMode_ae
   have hdL1 : Integrable (referenceSineMode d j) (volume.restrict (radialCore D)) :=
     MemLp.integrable (by norm_num : (1 : ℝ≥0∞) ≤ 2) (r11b_referenceSineMode_L2_bound hd j hj).1
   exact r11b_weakAngular_referenceMode_ae_of_locallyIntegrable hab hder j
-    huL1.locallyIntegrableOn hdL1.locallyIntegrableOn
+    (IntegrableOn.locallyIntegrableOn huL1) (IntegrableOn.locallyIntegrableOn hdL1)
 
 end
 

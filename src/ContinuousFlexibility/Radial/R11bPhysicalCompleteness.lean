@@ -41,6 +41,7 @@ theorem r11b_memLp_ae_eq_of_sections
     filter_upwards [hfg] with r hr
     apply integral_eq_zero_of_ae
     filter_upwards [hr] with θ hθ
+    change (f (r, θ) - g (r, θ)) ^ 2 = 0
     simp only [hθ, sub_self, zero_pow (by decide : 2 ≠ 0)]
   have hint : (∫ z, (f z - g z) ^ 2 ∂μ.prod ν) = 0 := by
     rw [integral_prod _ hsq]

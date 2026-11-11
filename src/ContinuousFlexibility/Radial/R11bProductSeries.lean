@@ -78,10 +78,12 @@ theorem r11b_product_orthogonal_series
         r11b_tensor_finset_sum_coeFn c e hc he (Finset.range N)] with z hsub hsum
       simp only [Pi.sub_apply] at hsub
       rw [hsub, hsum]
+    have hsumlim : Tendsto (fun N => ∑ n ∈ Finset.range N, v n) atTop (𝓝 U) :=
+      hv.hasSum.tendsto_sum_nat
     have hlim : Tendsto (fun N => ‖(∑ n ∈ Finset.range N, v n) - U‖ ^ 2)
         atTop (𝓝 0) := by
       simpa only [sub_self, norm_zero, zero_pow (by decide : (2 : ℕ) ≠ 0)] using
-        (hv.hasSum.tendsto_sum_nat.sub_const U).norm.pow 2
+        (hsumlim.sub_const U).norm.pow 2
     simp_rw [hdiff]
     exact hlim
 

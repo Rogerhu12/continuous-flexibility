@@ -22,7 +22,7 @@ def evenCosineBasis (n : ℕ) (θ : ℝ) : ℝ :=
 @[simp]
 theorem evenCosineBasis_zero : evenCosineBasis 0 = (fun _ : ℝ => 1) := by
   funext θ
-  simp only [evenCosineBasis, if_pos rfl]
+  simp [evenCosineBasis]
 
 theorem evenCosineBasis_of_ne_zero {n : ℕ} (hn : n ≠ 0) :
     evenCosineBasis n = cosineMode (2 * n) := by
@@ -91,7 +91,7 @@ theorem angularPairing_evenCosineBasis (n m : ℕ) :
 theorem integral_sq_evenCosineBasis (n : ℕ) :
     (∫ θ, evenCosineBasis n θ ^ 2 ∂angularMeanMeasure) = 1 := by
   rw [← angularAverage_eq_integral_angularMeanMeasure]
-  simpa only [angularPairing, pow_two, if_pos rfl] using angularPairing_evenCosineBasis n n
+  simpa [angularPairing, pow_two] using angularPairing_evenCosineBasis n n
 
 theorem integral_mul_evenCosineBasis_of_ne {n m : ℕ} (hnm : n ≠ m) :
     (∫ θ, evenCosineBasis n θ * evenCosineBasis m θ ∂angularMeanMeasure) = 0 := by

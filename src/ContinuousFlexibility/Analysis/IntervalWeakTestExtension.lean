@@ -61,9 +61,9 @@ theorem extend_secondOrder_tests_Ioo {a b : ℝ} (hab : a < b)
     rw [deriv_intervalTestCompression hψ]
     change ‖intervalCompressionScale n *
       deriv ψ (intervalCompressionMap a b (intervalCompressionScale n) x)‖ ≤ _
-    have hλ₀ : 0 ≤ intervalCompressionScale n :=
+    have hscale₀ : 0 ≤ intervalCompressionScale n :=
       (lt_trans zero_lt_one (intervalCompressionScale_bounds n).1).le
-    rw [norm_mul, Real.norm_of_nonneg hλ₀]
+    rw [norm_mul, Real.norm_of_nonneg hscale₀]
     exact mul_le_mul (intervalCompressionScale_bounds n).2 (hB₁ _)
       (norm_nonneg _) (by norm_num)
   have hb₂ (n : ℕ) (x : ℝ) : ‖deriv (deriv (ψn n)) x‖ ≤ 4 * B₂ := by
@@ -72,13 +72,13 @@ theorem extend_secondOrder_tests_Ioo {a b : ℝ} (hab : a < b)
     change ‖intervalCompressionScale n ^ 2 *
       deriv (deriv ψ) (intervalCompressionMap a b (intervalCompressionScale n) x)‖ ≤ _
     rw [norm_mul, Real.norm_of_nonneg (sq_nonneg (intervalCompressionScale n))]
-    have hλ₀ : 0 ≤ intervalCompressionScale n :=
+    have hscale₀ : 0 ≤ intervalCompressionScale n :=
       (lt_trans zero_lt_one (intervalCompressionScale_bounds n).1).le
-    have hλ₂ : intervalCompressionScale n ^ 2 ≤ 4 := by
+    have hscale₂ : intervalCompressionScale n ^ 2 ≤ 4 := by
       have hh := mul_le_mul (intervalCompressionScale_bounds n).2
-        (intervalCompressionScale_bounds n).2 hλ₀ (by norm_num : (0 : ℝ) ≤ 2)
+        (intervalCompressionScale_bounds n).2 hscale₀ (by norm_num : (0 : ℝ) ≤ 2)
       nlinarith
-    exact mul_le_mul hλ₂ (hB₂ _) (norm_nonneg _) (by norm_num)
+    exact mul_le_mul hscale₂ (hB₂ _) (norm_nonneg _) (by norm_num)
   let C : ℝ := A * (4 * B₂) + B * (2 * B₁)
   let F : ℕ → ℝ → ℝ :=
     fun n x => u x * (p x * deriv (deriv (ψn n)) x + q x * deriv (ψn n) x)
@@ -137,10 +137,9 @@ theorem extend_secondOrder_tests_Ioo {a b : ℝ} (hab : a < b)
   exact tendsto_nhds_unique hFL hRL
 
 private theorem weakTest_divergence_expand {w ψ : ℝ → ℝ}
-    (hw : ContDiff ℝ ∞ w) (hψ : ContDiff ℝ ∞ ψ) :
-    (fun x => deriv (fun y => w y * deriv ψ y) x) =
-      fun x => w x * deriv (deriv ψ) x + deriv w x * deriv ψ x := by
-  funext x
+    (hw : ContDiff ℝ ∞ w) (hψ : ContDiff ℝ ∞ ψ) (x : ℝ) :
+    deriv (fun y => w y * deriv ψ y) x =
+      w x * deriv (deriv ψ) x + deriv w x * deriv ψ x := by
   have hψ' : ContDiff ℝ ∞ (deriv ψ) := (contDiff_infty_iff_deriv.mp hψ).2
   have hd := deriv_fun_mul (hw.differentiable (by simp) x)
     (hψ'.differentiable (by simp) x)
@@ -158,12 +157,12 @@ theorem extend_weak_divergence_tests_Ioo {a b : ℝ} (hab : a < b)
     (hψs : Function.support ψ ⊆ Ioo a b) :
     (∫ x in Ioo a b, u x * deriv (fun y => w y * deriv ψ y) x) =
       ∫ x in Ioo a b, f x * ψ x := by
-  rw [weakTest_divergence_expand hw hψ]
+  simp_rw [weakTest_divergence_expand hw hψ]
   apply extend_secondOrder_tests_Ioo hab hu hf hw.continuous.continuousOn
     (contDiff_infty_iff_deriv.mp hw).2.continuous.continuousOn _ hψ hψc hψs
   intro φ hφ hφc hφs
   have h := hstrict φ hφ hφc hφs
-  rw [weakTest_divergence_expand hw hφ] at h
+  simp_rw [weakTest_divergence_expand hw hφ] at h
   exact h
 
 /-- Interval-integral interface, with exactly the ordinary-support test

@@ -73,6 +73,39 @@ theorem r11b_angular_square_integral {D : ReferenceData} {f : PolarPoint → ℝ
       _ = (1 / (2 * Real.pi)) * ∫ z, f z ^ 2 ∂radialPhysicalMeasure D :=
         r11b_integral_sq_radial_angularMean D f
 
+theorem r11b_physical_square_integral_le_of_angular {D : ReferenceData}
+    {f g : PolarPoint → ℝ}
+    (hf : MemLp f 2 (radialPhysicalMeasure D))
+    (hg : MemLp g 2 (radialPhysicalMeasure D))
+    (hpoint : ∀ᵐ r ∂volume.restrict (radialCore D),
+      angularAverage (fun θ => g (r, θ) ^ 2) ≤
+        angularAverage (fun θ => f (r, θ) ^ 2)) :
+    (∫ z, g z ^ 2 ∂radialPhysicalMeasure D) ≤
+      ∫ z, f z ^ 2 ∂radialPhysicalMeasure D := by
+  obtain ⟨hgi, hgeq⟩ := r11b_angular_square_integral hg
+  obtain ⟨hfi, hfeq⟩ := r11b_angular_square_integral hf
+  have h : (∫ r, angularAverage (fun θ => g (r, θ) ^ 2)
+      ∂volume.restrict (radialCore D)) ≤
+        ∫ r, angularAverage (fun θ => f (r, θ) ^ 2)
+          ∂volume.restrict (radialCore D) :=
+    integral_mono_ae hgi hfi hpoint
+  rw [hgeq, hfeq] at h
+  exact (mul_le_mul_left (by positivity : 0 < 1 / (2 * Real.pi))).mp h
+
+theorem r11b_finiteProjection_angular_square_le {D : ReferenceData}
+    {ι : Type*} [DecidableEq ι] (s : Finset ι) (e : ι → ℝ → ℝ)
+    {f : PolarPoint → ℝ} (hf : MemLp f 2 (radialPhysicalMeasure D))
+    (he : ∀ i ∈ s, MemLp (e i) 2 (volume.restrict (Ioc (0 : ℝ) (2 * Real.pi))))
+    (horth : ∀ i ∈ s, ∀ j ∈ s,
+      angularPairing (e i) (e j) = if i = j then 1 else 0) :
+    ∀ᵐ r ∂volume.restrict (radialCore D),
+      angularAverage (fun θ => r11bFiniteProjection s e f (r, θ) ^ 2) ≤
+        angularAverage (fun θ => f (r, θ) ^ 2) := by
+  filter_upwards [r11b_physical_sections_memLp hf] with r hr
+  change angularAverage (fun θ => finiteAngularProjection s e (fun φ => f (r, φ)) θ ^ 2) ≤
+    angularAverage (fun θ => f (r, θ) ^ 2)
+  exact finiteAngularProjection_square_le s e hr he horth
+
 theorem r11b_finiteProjection_square_integral_le {D : ReferenceData}
     {ι : Type*} [DecidableEq ι] (s : Finset ι) (e : ι → ℝ → ℝ)
     {f : PolarPoint → ℝ} (hf : MemLp f 2 (radialPhysicalMeasure D))
@@ -80,17 +113,10 @@ theorem r11b_finiteProjection_square_integral_le {D : ReferenceData}
     (horth : ∀ i ∈ s, ∀ j ∈ s,
       angularPairing (e i) (e j) = if i = j then 1 else 0) :
     (∫ z, r11bFiniteProjection s e f z ^ 2 ∂radialPhysicalMeasure D) ≤
-      ∫ z, f z ^ 2 ∂radialPhysicalMeasure D := by
-  have hp := r11b_finiteProjection_memLp s e hf he
-  obtain ⟨hPint, hPeq⟩ := r11b_angular_square_integral hp
-  obtain ⟨hfint, hfeq⟩ := r11b_angular_square_integral hf
-  have hpoint : ∀ᵐ r ∂volume.restrict (radialCore D),
-      angularAverage (fun θ => r11bFiniteProjection s e f (r, θ) ^ 2) ≤
-        angularAverage (fun θ => f (r, θ) ^ 2) :=
-    (r11b_physical_sections_memLp hf).mono
-      (fun r hr => finiteAngularProjection_square_le s e hr he horth)
-  have h := integral_mono_ae hPint hfint hpoint
-  rw [hPeq, hfeq] at h
-  exact (mul_le_mul_left (by positivity : 0 < 1 / (2 * Real.pi))).mp h
+      ∫ z, f z ^ 2 ∂radialPhysicalMeasure D :=
+  r11b_physical_square_integral_le_of_angular (D := D) (f := f)
+    (g := r11bFiniteProjection s e f) hf
+    (r11b_finiteProjection_memLp (D := D) s e hf he)
+    (r11b_finiteProjection_angular_square_le (D := D) s e hf he horth)
 
 end ContinuousFlexibility.Radial

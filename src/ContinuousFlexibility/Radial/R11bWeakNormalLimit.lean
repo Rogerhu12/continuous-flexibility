@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.R11bModeL2
 import ContinuousFlexibility.Radial.R11bRadialTests
+import ContinuousFlexibility.Radial.R11bPhysicalPairing
 
 /-!
 # Closure of the actual normal weak derivative under physical L² convergence
@@ -56,9 +57,10 @@ theorem r11b_weakNormalDerivative_of_L2_tendsto
     (hweak : ∀ n, WeakNormalDerivative D (f n) (d n)) :
     WeakNormalDerivative D u v := by
   intro ψ hψ
-  have hψLp := r11b_continuous_memLp hψ.1.continuous
-  have hψrLp := r11b_continuous_memLp
-    (r11b_radialTest_radialPartial hψ).1.continuous
+  have hψLp : MemLp ψ 2 (radialPhysicalMeasure D) :=
+    r11b_continuous_memLp hψ.1.continuous
+  have hψrLp : MemLp (radialPartial ψ) 2 (radialPhysicalMeasure D) :=
+    r11b_continuous_memLp (r11b_radialTest_radialPartial hψ).1.continuous
   have hleft := r11b_tendsto_angularMean_pairing_of_L2_tendsto hab hf hu hψrLp hfu
   have hright := r11b_tendsto_angularMean_pairing_of_L2_tendsto hab hd hv hψLp hdv
   have hseq : (fun n => ∫ r in D.a..D.b,
