@@ -102,5 +102,15 @@ theorem exists_l2EquivCompose_apply {μ ν κ : Measure ℝ}
     ∃ H : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 κ, ∀ f, H f = F (E f) :=
   ⟨l2EquivCompose E F, l2EquivCompose_apply E F⟩
 
+/-- Preserve an isometry together with its equality specification while
+keeping its concrete measure casts out of later function reduction. -/
+def l2EquivSeal {μ ν : Measure ℝ} (E : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν) :
+    Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν :=
+  Classical.choose (show ∃ F : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν, F = E from ⟨E, rfl⟩)
+
+theorem l2EquivSeal_eq {μ ν : Measure ℝ} (E : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν) :
+    l2EquivSeal E = E :=
+  Classical.choose_spec (show ∃ F : Lp ℝ 2 μ ≃ₗᵢ[ℝ] Lp ℝ 2 ν, F = E from ⟨E, rfl⟩)
+
 end ContinuousFlexibility.Analysis
 

@@ -118,10 +118,11 @@ def outerPhysicalCoordinateEquiv
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start) :
     OuterPhysicalTailL2 D T right ≃ₗᵢ[ℝ] Lp ℝ 2 (outerPhysicalPullbackMeasure D T right) :=
-  (l2MeasureCongr (outerPhysicalPullbackMeasure_map_radial hD hphysical).symm).trans
-    (coordinateL2Equiv (outerPhysicalPullbackMeasure D T right)
-      (tailPhysicalRadius right) (tailPhysicalLog right)
-      (measurableEmbedding_tailPhysicalRadius right) (tailPhysicalLog_radius right))
+  l2EquivSeal
+    ((l2MeasureCongr (outerPhysicalPullbackMeasure_map_radial hD hphysical).symm).trans
+      (coordinateL2Equiv (outerPhysicalPullbackMeasure D T right)
+        (tailPhysicalRadius right) (tailPhysicalLog right)
+        (measurableEmbedding_tailPhysicalRadius right) (tailPhysicalLog_radius right)))
 
 theorem outerPhysicalCoordinateEquiv_ae
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
@@ -129,6 +130,7 @@ theorem outerPhysicalCoordinateEquiv_ae
     (f : OuterPhysicalTailL2 D T right) :
     outerPhysicalCoordinateEquiv hD hphysical f =ᵐ[outerPhysicalPullbackMeasure D T right]
       fun x => f (tailPhysicalRadius right x) := by
+  rw [outerPhysicalCoordinateEquiv, l2EquivSeal_eq]
   have hc := l2MeasureCongr_ae (outerPhysicalPullbackMeasure_map_radial hD hphysical).symm f
   have hp := coordinateL2Equiv_ae (outerPhysicalPullbackMeasure D T right)
     (tailPhysicalRadius right) (tailPhysicalLog right)
@@ -142,9 +144,10 @@ def outerPhysicalGaugeEquiv
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start) :
     Lp ℝ 2 (outerPhysicalPullbackMeasure D T right) ≃ₗᵢ[ℝ] DeepTailL2 T :=
-  squareDensityMeasureEquiv (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical)
-    (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
-    (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j)
+  l2EquivSeal
+    (squareDensityMeasureEquiv (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical)
+      (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
+      (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j))
 
 theorem outerPhysicalPullback_ae_eq
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
@@ -161,8 +164,9 @@ theorem outerPhysicalGaugeEquiv_ae
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start)
     (f : Lp ℝ 2 (outerPhysicalPullbackMeasure D T right)) :
     outerPhysicalGaugeEquiv hD hphysical f =ᵐ[deepTailMeasure T]
-      fun x => outerPhysicalAmplitude D right j x * f x :=
-  squareDensityMeasureEquiv_ae (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical)
+      fun x => outerPhysicalAmplitude D right j x * f x := by
+  rw [outerPhysicalGaugeEquiv, l2EquivSeal_eq]
+  exact squareDensityMeasureEquiv_ae (outerPhysicalPullbackMeasure_eq_squareDensity hD hphysical)
     (continuous_outerPhysicalAmplitude (tailPhysicalEndpoint_pos hD right) j).measurable
     (outerPhysicalAmplitude_pos (tailPhysicalEndpoint_pos hD right) j) f
 
@@ -171,8 +175,11 @@ def outerPhysicalTailEquiv
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
     (hD : IsAccumulatingProfile D) (hphysical : TailPhysicalRelation D T right j start) :
     OuterPhysicalTailL2 D T right ≃ₗᵢ[ℝ] DeepTailL2 T :=
-  Classical.choose (exists_l2EquivCompose_apply (outerPhysicalCoordinateEquiv hD hphysical)
-    (outerPhysicalGaugeEquiv hD hphysical))
+  Classical.choose (exists_l2EquivCompose_apply
+    (μ := (radialHilbertMeasure D).restrict
+      (radialTailInterval D right (tailPhysicalRadius right T.entrance)))
+    (ν := outerPhysicalPullbackMeasure D T right) (κ := deepTailMeasure T)
+    (outerPhysicalCoordinateEquiv hD hphysical) (outerPhysicalGaugeEquiv hD hphysical))
 
 theorem outerPhysicalTailEquiv_apply
     {D : ReferenceData} {T : DeepTailData} {right : Bool} {j start : ℕ}
@@ -180,8 +187,11 @@ theorem outerPhysicalTailEquiv_apply
     (f : OuterPhysicalTailL2 D T right) :
     outerPhysicalTailEquiv hD hphysical f =
       outerPhysicalGaugeEquiv hD hphysical (outerPhysicalCoordinateEquiv hD hphysical f) :=
-  Classical.choose_spec (exists_l2EquivCompose_apply (outerPhysicalCoordinateEquiv hD hphysical)
-    (outerPhysicalGaugeEquiv hD hphysical)) f
+  Classical.choose_spec (exists_l2EquivCompose_apply
+    (μ := (radialHilbertMeasure D).restrict
+      (radialTailInterval D right (tailPhysicalRadius right T.entrance)))
+    (ν := outerPhysicalPullbackMeasure D T right) (κ := deepTailMeasure T)
+    (outerPhysicalCoordinateEquiv hD hphysical) (outerPhysicalGaugeEquiv hD hphysical)) f
 
 /-- The exact representative is sqrt(12) times inverse gauge and pullback. -/
 theorem outerPhysicalTailEquiv_ae

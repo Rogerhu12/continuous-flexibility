@@ -41,7 +41,7 @@ theorem morseTransitionCore_interval {T : MorseChainData} {σ : ℕ → ℝ}
   · subst n
     have hc := morseInitialCore_geometry h he side
     have hb := morseInitialSupport_geometry h
-    simpa only [morseTransitionCoreLeft, morseTransitionCoreRight, if_pos rfl] using
+    simpa only [morseTransitionCoreLeft, morseTransitionCoreRight, if_pos rfl, ite_true] using
       And.intro hc.1 (hc.2.trans hb.2.1)
   · have hn' : T.index < n := by omega
     simpa only [morseTransitionCoreLeft, morseTransitionCoreRight, if_neg hi] using
@@ -90,7 +90,11 @@ theorem morseTransitionCore_energy_on_exp
     apply hh.trans
     apply mul_le_mul_of_nonneg_left _ (by positivity)
     apply exp_le_exp.mpr
-    exact add_le_add_right (mul_le_mul_of_nonneg_right (le_max_left _ _) (sq_nonneg _)) _
+    have hq := mul_le_mul_of_nonneg_right
+      (le_max_left (outerFullCoreQuadraticExponent C K D.a Cstar L)
+        (morseInitialCoreEnergyConstant T σ D Cstar L)) (sq_nonneg (n : ℝ))
+    dsimp only [morseTransitionEnergyConstant]
+    linarith only [hq]
 
 theorem morseTransitionCore_mass_le_state_scale
     {T : MorseChainData} {σ : ℕ → ℝ} {D₀ D : ReferenceData} {C : ℕ → ℝ}
@@ -211,9 +215,13 @@ theorem exists_morseTransitionCore_bounds
   refine ⟨max Qe Qm, Co, hQe.trans (le_max_left _ _), hCo, ?_⟩
   intro entry he side n j hb scale hs hhi hlo
   constructor
-  · exact (morseTransitionCoreTransfer_norms_le h hσ hcell hs hL he side hb hhi hlo).trans
-      (exp_le_exp.mpr (add_le_add_right
-        (mul_le_mul_of_nonneg_right (le_max_left Qe Qm) (sq_nonneg (n : ℝ))) _))
+  · calc
+      _ ≤ exp (Qe * (n : ℝ) ^ 2 + Co * ((j : ℝ) * sqrt (morseChainA T n))) :=
+        morseTransitionCoreTransfer_norms_le h hσ hcell hs hL he side hb hhi hlo
+      _ ≤ exp (max Qe Qm * (n : ℝ) ^ 2 + Co * ((j : ℝ) * sqrt (morseChainA T n))) := by
+        apply exp_le_exp.mpr
+        have hq := mul_le_mul_of_nonneg_right (le_max_left Qe Qm) (sq_nonneg (n : ℝ))
+        linarith only [hq]
   · exact (morseTransitionCore_mass_le_state_scale h₀ h hσ hcell hs he side hb hlo).trans
       (mul_le_mul_of_nonneg_left (exp_le_exp.mpr
         (mul_le_mul_of_nonneg_right (le_max_right Qe Qm) (sq_nonneg (n : ℝ)))) hs.le)
