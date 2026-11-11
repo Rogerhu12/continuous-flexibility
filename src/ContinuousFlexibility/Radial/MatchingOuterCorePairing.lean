@@ -56,11 +56,14 @@ theorem matchingOuter_smooth_green_boundary {D : ReferenceData}
       matchingOuterFlux, matchingCut, bufferSign] <;>
       field_simp [hn0, hn1] <;> ring
   rw [he]
-  fin_cases i
-  · rw [(hdiag 1 0 (by decide)).1, (hdiag 1 0 (by decide)).2]
-    ring
-  · rw [(hdiag 0 1 (by decide)).1, (hdiag 0 1 (by decide)).2]
-    ring
+  have hA := matchedBoundary_apply_diagonal (fun k n => M.A n k)
+    (fun k n hkn => (hdiag n k hkn.symm).1)
+    (matchingSmoothBoundaryFlux D M ψ) i
+  have hB := matchedBoundary_apply_diagonal (fun k n => M.B n k)
+    (fun k n hkn => (hdiag n k hkn.symm).2)
+    (matchingSmoothBoundaryValue D M ψ) i
+  simp only [radialMatrixApply, Fin.sum_univ_two] at hA hB
+  linarith only [hA, hB]
 
 theorem matchingOuterPoisson_testSource_pairing {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (hB : RadialTrueBorder D)
