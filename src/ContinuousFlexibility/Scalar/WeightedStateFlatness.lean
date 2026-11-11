@@ -80,7 +80,7 @@ theorem EndpointFlat.uniformFlatJets {D : ReferenceData} {f : ℝ → ℝ}
     intro r θ hrange _ hnear
     have hd : 0 < endpointDistance D r :=
       lt_min (sub_pos.mpr hrange.1) (sub_pos.mpr hrange.2)
-    have hb : |iteratedDeriv a f r| ≤ ε / 2 * endpointDistance D r ^ k := by
+    have hb : |_root_.iteratedDeriv a f r| ≤ ε / 2 * endpointDistance D r ^ k := by
       rcases le_total (r - D.a) (D.b - r) with hle | hle
       · have he : endpointDistance D r = r - D.a := min_eq_left hle
         have hn : |r - D.a| < δl := by
@@ -96,7 +96,7 @@ theorem EndpointFlat.uniformFlatJets {D : ReferenceData} {f : ℝ → ℝ}
     simp only [mixedDerivative, iteratedDeriv_zero]
     rw [zpow_neg, zpow_natCast, abs_mul, abs_inv, abs_of_pos (pow_pos hd k)]
     calc
-      (endpointDistance D r ^ k)⁻¹ * |iteratedDeriv a f r|
+      (endpointDistance D r ^ k)⁻¹ * |_root_.iteratedDeriv a f r|
           ≤ (endpointDistance D r ^ k)⁻¹ * (ε / 2 * endpointDistance D r ^ k) :=
         mul_le_mul_of_nonneg_left hb (inv_nonneg.mpr (pow_nonneg hd.le k))
       _ = ε / 2 := by
@@ -132,7 +132,7 @@ theorem scalarStateIncrement_periodic_two_pi
     (hS : IsPhysicalSpaces D T S) (x : ScalarWeightedState S) :
     Function.Periodic (scalarStateIncrement S x) (0, 2 * Real.pi) := by
   have hp := scalarStateIncrement_periodic hS x
-  simpa only [Prod.mk_add_mk, zero_add, ← two_mul] using hp.add_period hp
+  simpa only [Prod.mk_add_mk, zero_add, two_mul] using hp.add_period hp
 
 theorem scalarStateHeight_periodic
     (hS : IsPhysicalSpaces D T S) (x : ScalarWeightedState S) :
@@ -216,6 +216,8 @@ theorem ScalarStateGeometry.admissibleScalarData
     hout D.a (Or.inl le_rfl), hout D.b (Or.inr le_rfl),
     scalarStateIncrement_endpoint_jets hS x hu, ?_⟩
   intro r hr θ
+  change 0 < polarDiscriminant (scalarStateProfile D S x)
+    (scalarStateHeight D S x) (r, θ)
   rcases eq_or_lt_of_le hr.1 with hleft | hleft
   · rw [← hleft, hdisc D.a (Or.inl rfl) θ]
     exact zero_lt_one

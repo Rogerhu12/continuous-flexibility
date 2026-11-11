@@ -146,11 +146,11 @@ theorem scalarStateResidualTower_conservation
       physicalSourceIntegral D ((S.height scalarBeta).decode (J.D k x v)) = 0 := by
   apply scalarHeightTower_conservation hT hS J
   intro x hx
-  have hQ := hS.2.2.2.2.2.2.2.1 (f x)
+  have hQ : S.Q (f x) =
+      physicalSourceIntegral D ((S.height scalarBeta).decode (f x)) :=
+    hS.2.2.2.2.2.2.2.1 (f x)
   have heq : (S.height scalarBeta).decode (f x) = scalarStateResidual D S x :=
     funext (hdecode x hx)
-  apply hQ.trans
-  rw [heq]
-  exact hconservation x hx
+  exact hQ.trans ((congrArg (physicalSourceIntegral D) heq).trans (hconservation x hx))
 
 end ContinuousFlexibility.Statements

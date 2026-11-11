@@ -34,7 +34,9 @@ theorem eq_zero_of_physical_scalar_test_pairing
   have hG : Continuous G :=
     intervalIntegral.continuous_parametric_intervalIntegral_of_continuous'
       (f := fun r θ => f (r, θ) ^ 2)
-      (hf.continuous.pow 2) 0 Real.pi
+      (by
+        simpa only [Function.comp_def, Function.uncurry] using
+          (continuous_pow 2).comp hf.continuous) 0 Real.pi
   have hGa : ∀ᵐ r ∂(volume : Measure ℝ), r ∈ Ioo D.a D.b → G r = 0 := by
     apply isOpen_Ioo.ae_eq_zero_of_integral_contDiff_smul_eq_zero
       (hG.continuousOn.locallyIntegrableOn measurableSet_Ioo)
@@ -54,6 +56,7 @@ theorem eq_zero_of_physical_scalar_test_pairing
           unfold scalarAnnularIntegral G
           apply intervalIntegral.integral_congr
           intro r _
+          dsimp only
           rw [← intervalIntegral.integral_const_mul]
           apply intervalIntegral.integral_congr
           intro θ _
@@ -70,7 +73,7 @@ theorem eq_zero_of_physical_scalar_test_pairing
       rw [hρzero, zero_mul]
     simpa only [smul_eq_mul] using he.trans hz
   have hGzero : EqOn G (fun _ => 0) (Ioo D.a D.b) :=
-    Measure.eqOn_Ioo_of_ae_eq
+    Measure.eqOn_Ioo_of_ae_eq (volume : Measure ℝ)
       ((ae_restrict_iff' measurableSet_Ioo).mpr hGa)
       hG.continuousOn continuous_const.continuousOn
   have hzero (r : ℝ) (hr : r ∈ Ioo D.a D.b) (θ : ℝ) : f (r, θ) = 0 := by
@@ -80,15 +83,16 @@ theorem eq_zero_of_physical_scalar_test_pairing
     have hae : (fun t : ℝ => f (r, t) ^ 2) =ᵐ[volume.restrict (Ioc 0 Real.pi)] 0 :=
       (intervalIntegral.integral_eq_zero_iff_of_le_of_nonneg_ae Real.pi_pos.le
         (Filter.Eventually.of_forall fun t => sq_nonneg (f (r, t)))
-        (hsquare.intervalIntegrable 0 Real.pi)).mp (hGzero r hr)
+        (hsquare.intervalIntegrable 0 Real.pi)).mp (hGzero hr)
     have hsqzero : EqOn (fun t : ℝ => f (r, t) ^ 2) (fun _ => 0) (Ioc 0 Real.pi) :=
-      Measure.eqOn_Ioc_of_ae_eq hae hsquare.continuousOn continuous_const.continuousOn
+      Measure.eqOn_Ioc_of_ae_eq (volume : Measure ℝ) hae
+        hsquare.continuousOn continuous_const.continuousOn
     have hp : Function.Periodic (fun t : ℝ => f (r, t)) Real.pi := by
       intro t
       simpa only [Prod.mk_add_mk, add_zero] using hfp (r, t)
     obtain ⟨t, ht, he⟩ := hp.exists_mem_Ioc Real.pi_pos θ 0
     have ht' : t ∈ Ioc (0 : ℝ) Real.pi := by simpa only [zero_add] using ht
-    exact he.trans (sq_eq_zero_iff.mp (hsqzero t ht'))
+    exact he.trans (sq_eq_zero_iff.mp (hsqzero ht'))
   funext p
   by_cases hp : p ∈ annularOpen D
   · exact hzero p.1 hp.1 p.2

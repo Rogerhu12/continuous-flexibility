@@ -14,12 +14,14 @@ namespace ContinuousFlexibility.Statements
 
 open Set ContinuousFlexibility.Analysis
 
+set_option backward.isDefEq.respectTransparency false
+
 theorem scalarStateGrading_apply (S : PhysicalSpacesData) (s : ℕ)
     (x : ScalarWeightedState S) :
     scalarStateGrading S s x =
       scalarHeightGrading S s x.1.1.1 + scalarHeightGrading S s x.1.1.2 +
         ‖x.1.2‖ + ‖x.2‖ := by
-  simp only [scalarStateGrading, pairGrading, realGrading, Seminorm.add_apply,
+  simp only [scalarStateGrading, pairGrading, realGrading, add_apply,
     Seminorm.comp_apply, LinearMap.fst_apply, LinearMap.snd_apply, coe_normSeminorm]
 
 theorem scalarHeightGrading_monotone (S : PhysicalSpacesData) :
@@ -31,9 +33,9 @@ theorem scalarStateGrading_monotone (S : PhysicalSpacesData) :
     Monotone (scalarStateGrading S) := by
   intro s t hst x
   rw [scalarStateGrading_apply, scalarStateGrading_apply]
-  exact add_le_add_right (add_le_add_right
-    (add_le_add (scalarHeightGrading_monotone S hst x.1.1.1)
-      (scalarHeightGrading_monotone S hst x.1.1.2)) _) _
+  have h₁ := scalarHeightGrading_monotone S hst x.1.1.1
+  have h₂ := scalarHeightGrading_monotone S hst x.1.1.2
+  linarith only [h₁, h₂]
 
 theorem continuous_scalarHeightGrading (S : PhysicalSpacesData) (s : ℕ) :
     Continuous (scalarHeightGrading S s) :=
@@ -43,9 +45,10 @@ theorem continuous_scalarHeightGrading (S : PhysicalSpacesData) (s : ℕ) :
 theorem continuous_scalarStateGrading (S : PhysicalSpacesData) (s : ℕ) :
     Continuous (scalarStateGrading S s) := by
   have h := continuous_scalarHeightGrading S s
-  have he : scalarStateGrading S s = fun x : ScalarWeightedState S =>
+  have he : (fun x : ScalarWeightedState S => scalarStateGrading S s x) = fun x =>
       scalarHeightGrading S s x.1.1.1 + scalarHeightGrading S s x.1.1.2 +
         ‖x.1.2‖ + ‖x.2‖ := funext (scalarStateGrading_apply S s)
+  change Continuous (fun x : ScalarWeightedState S => scalarStateGrading S s x)
   rw [he]
   exact (((h.comp continuous_fst.fst.fst).add (h.comp continuous_fst.fst.snd)).add
     continuous_fst.snd.norm).add continuous_snd.norm
@@ -59,7 +62,8 @@ theorem scalarStateCenter_mem_ball (S : PhysicalSpacesData) (v₀ : ScalarHeight
     (base : ℕ) {ε : ℝ} (hε : 0 < ε) :
     scalarStateCenter S v₀ ∈ scalarStateBall S v₀ base ε := by
   change scalarStateGrading S base (scalarStateCenter S v₀ - scalarStateCenter S v₀) < ε
-  simpa only [sub_self, map_zero] using hε
+  rw [sub_self, map_zero (scalarStateGrading S base)]
+  exact hε
 
 theorem scalarStateGrading_sub_center (S : PhysicalSpacesData)
     (v₀ : ScalarHeightSpace S) (base : ℕ) (x : ScalarWeightedState S) :
@@ -98,8 +102,8 @@ theorem scalarStateBall_height_bound {S : PhysicalSpacesData}
   calc
     _ = scalarHeightGrading S base ((x.1.1.2 - v₀) + v₀) := by rw [sub_add_cancel]
     _ ≤ scalarHeightGrading S base (x.1.1.2 - v₀) + scalarHeightGrading S base v₀ :=
-      map_add_le_add _ _ _
-    _ < _ := add_lt_add_right hb _
+      map_add_le_add (scalarHeightGrading S base) (x.1.1.2 - v₀) v₀
+    _ < _ := by linarith only [hb]
 
 theorem scalarStateBall_mono {S : PhysicalSpacesData} {v₀ : ScalarHeightSpace S}
     {base base' : ℕ} {ε ε' : ℝ} (hb : base ≤ base') (hε : ε' ≤ ε) :
