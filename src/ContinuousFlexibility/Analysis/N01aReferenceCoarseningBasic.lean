@@ -109,7 +109,8 @@ theorem cell_integrable_iff (hD : RadialPartition D) (hE : RadialPartition E)
       simpa only [h.measure_eq] using hf.aestronglyMeasurable hD
     apply (memLp_two_iff_integrable_sq
       (((hE.1 j).continuous.comp continuous_fst).aestronglyMeasurable.mul hfield)).mpr
-    simpa only [h.coarse_localizer_apply, ← h.measure_eq] using hc
+    simpa only [h.coarse_localizer_apply, ← h.measure_eq,
+      Pi.mul_apply, Function.comp_apply] using hc
 
 end N01aReferenceCoarsening
 
