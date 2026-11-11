@@ -32,8 +32,7 @@ theorem exists_norm_bound_periodic_compact
     (hF : ContinuousOn F (S ×ˢ univ))
     (hperiod : ∀ p ∈ S, Function.Periodic (fun θ => F (p, θ)) T) :
     ∃ M : ℝ, 0 ≤ M ∧ ∀ p ∈ S, ∀ θ, ‖F (p, θ)‖ ≤ M := by
-  obtain ⟨M, hM⟩ := (hS.prod (isCompact_uIcc : IsCompact (uIcc (0 : ℝ) T))).
-    exists_bound_of_continuousOn
+  obtain ⟨M, hM⟩ := (hS.prod (isCompact_uIcc : IsCompact (uIcc (0 : ℝ) T))).exists_bound_of_continuousOn
       (hF.mono (fun _ hp => ⟨hp.1, mem_univ _⟩))
   refine ⟨max M 0, le_max_right _ _, ?_⟩
   intro p hp θ
@@ -112,8 +111,7 @@ theorem exists_periodicScalarFlow_on_Icc
     apply LipschitzWith.of_dist_le_mul
     intro θ φ
     simpa only [dist_eq_norm, NNReal.coe_mk] using
-      (convex_univ : Convex ℝ (univ : Set ℝ)).
-        norm_image_sub_le_of_norm_hasDerivWithin_le
+      (convex_univ : Convex ℝ (univ : Set ℝ)).norm_image_sub_le_of_norm_hasDerivWithin_le
         (fun x _ => (hderiv t ht x).hasDerivWithinAt)
         (fun x _ => hK t ht x) (mem_univ φ) (mem_univ θ)
   have hc (θ : ℝ) :

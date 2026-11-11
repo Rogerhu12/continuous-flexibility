@@ -68,14 +68,17 @@ theorem iteratedDeriv_boundaryTaylorPolynomial (n : ℕ) (c : ℝ)
   have hshift (j : ℕ) :
       iteratedDeriv k (fun x : ℝ => (x - c) ^ j) c =
         if k = j then (j.factorial : ℝ) else 0 := by
-    simpa only [sub_self, iteratedDeriv_fun_pow_zero] using
-      congrFun (iteratedDeriv_comp_sub_const k (fun x : ℝ => x ^ j) c) c
+    have he := congrFun (iteratedDeriv_comp_sub_const k (fun x : ℝ => x ^ j) c) c
+    by_cases h : k = j
+    · simpa only [sub_self, iteratedDeriv_fun_pow_zero, ite_eq_left h] using he
+    · simpa only [sub_self, iteratedDeriv_fun_pow_zero, ite_eq_right h,
+        Nat.cast_zero] using he
   simp_rw [hshift]
   rw [Finset.sum_eq_single k]
-  · rw [if_pos rfl]
+  · rw [ite_eq_left rfl]
     exact div_mul_cancel₀ _ (Nat.cast_ne_zero.mpr k.factorial_ne_zero)
   · intro j _ hj
-    rw [if_neg (Ne.symm hj), mul_zero]
+    rw [ite_eq_right (Ne.symm hj), mul_zero]
   · intro hk'
     exact (hk' (Finset.mem_range.mpr (Nat.lt_succ_of_le hk))).elim
 
@@ -141,7 +144,8 @@ private theorem iteratedDeriv_boundaryTaylorExtension_first
       (fun x => boundaryTaylorExtension n c d a b (x, θ)) =ᶠ[𝓝 c]
         (fun x => boundaryTaylorPolynomial n c a (x, θ)) := by
     filter_upwards [boundaryTaylorCutoff_one_germ c |d - c|, hother] with x hx hy
-    simp only [boundaryTaylorExtension, hx, hy, one_mul, zero_mul, add_zero]
+    simp only [boundaryTaylorExtension, hx, hy, Pi.one_apply, Pi.zero_apply,
+      one_mul, zero_mul, add_zero]
   exact (hgerm.iteratedDeriv k).eq_of_nhds.trans
     (iteratedDeriv_boundaryTaylorPolynomial n c a hk θ)
 

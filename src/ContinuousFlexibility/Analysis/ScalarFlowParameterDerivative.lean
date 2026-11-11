@@ -26,7 +26,7 @@ private theorem continuous_scalar_parameterIntegral
   have hc (c d : ℝ) :
       Continuous (fun x : H => ∫ t in Icc c d, F (x, t)) :=
     continuous_parametric_integral_of_continuous (μ := volume)
-      (f := fun x t => F (x, t)) hF isCompact_Icc
+      (f := fun (x : H) (t : ℝ) => F (x, t)) hF isCompact_Icc
   rcases le_total a b with hab | hba
   · simpa only [intervalIntegral.integral_of_le hab, integral_Icc_eq_integral_Ioc]
       using hc a b
@@ -145,6 +145,7 @@ theorem scalarFlow_hasDerivAt_parameter
         rw [hUeq p t hclosed, hUeq q t hclosed]
       have hb := hforcing q t
       rw [hUeq p t hclosed] at hb
+      dsimp only
       rw [← hAe, hb]
       ring
     have hz : Θ (q, a) - Θ (p, a) = 0 := by rw [hinit, hinit, sub_self]
@@ -172,7 +173,9 @@ theorem scalarFlow_hasDerivAt_parameter
     ring
   have hslope : slope (fun q => Θ (q, b)) p =ᶠ[𝓝[≠] p] E := by
     filter_upwards [self_mem_nhdsWithin] with q hq
-    rw [slope_def_field, hdiff q]
+    rw [slope_def_field]
+    dsimp only
+    rw [hdiff q]
     exact mul_div_cancel_left₀ _ (sub_ne_zero.mpr hq)
   have hparam : HasDerivAt (fun q => Θ (q, b)) (E p) p :=
     hasDerivAt_iff_tendsto_slope.mpr

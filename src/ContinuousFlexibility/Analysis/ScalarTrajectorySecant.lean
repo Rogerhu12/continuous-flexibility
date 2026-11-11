@@ -37,7 +37,8 @@ theorem continuous_scalarSecantAverage {D : ℝ × ℝ → ℝ}
   have hc : Continuous (fun p : ℝ × (ℝ × ℝ) =>
       ∫ s in Icc (0 : ℝ) 1, D (p.1, (p.2.2 - p.2.1) * s + p.2.1)) :=
     continuous_parametric_integral_of_continuous (μ := volume)
-      (f := fun p s => D (p.1, (p.2.2 - p.2.1) * s + p.2.1))
+      (f := fun (p : ℝ × (ℝ × ℝ)) (s : ℝ) =>
+        D (p.1, (p.2.2 - p.2.1) * s + p.2.1))
       h isCompact_Icc
   simpa only [scalarSecantAverage, intervalIntegral.integral_of_le zero_le_one,
     integral_Icc_eq_integral_Ioc] using hc

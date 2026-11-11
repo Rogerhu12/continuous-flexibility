@@ -81,8 +81,13 @@ theorem circleReturnInterpolation_deriv_bounds
     (fun t => (hG t).1)
   have hd := ((hasDerivAt_id θ).const_mul (1 - u)).add
     ((dG θ).hasDerivAt.const_mul u)
+  have hfun : ((fun y : ℝ => (1 - u) * id y) + fun y => u * G y) =
+      circleReturnInterpolation u G := by
+    funext y
+    simp only [Pi.add_apply, id_eq, circleReturnInterpolation]
+  rw [hfun] at hd
   have heq : deriv (circleReturnInterpolation u G) θ = (1 - u) + u * deriv G θ := by
-    simpa only [circleReturnInterpolation, Pi.add_apply, id_eq, mul_one] using hd.deriv
+    simpa only [mul_one] using hd.deriv
   rw [heq]
   have hlo := mul_le_mul_of_nonneg_left (hG θ).1 hu.1
   have hhi := mul_le_mul_of_nonneg_left (hG θ).2 hu.1
@@ -118,10 +123,12 @@ private theorem composed_circle_deriv_bounds
     (fun t => (hf t).1)
   have hJd := positive_deriv_differentiable (by norm_num : (0 : ℝ) < 1 / 16)
     (fun t => (hJ t).1)
-  have heq : deriv (fun t => f (J t)) θ = deriv f (J θ) * deriv J θ := by
-    simpa only [Function.comp_apply] using
-      ((hFd (J θ)).hasDerivAt.comp θ (hJd θ).hasDerivAt).deriv
-  rw [heq]
+  have hd := (hFd (J θ)).hasDerivAt.comp θ (hJd θ).hasDerivAt
+  have hcomp : f ∘ J = fun t => f (J t) := by
+    funext t
+    exact Function.comp_apply f J t
+  rw [hcomp] at hd
+  rw [hd.deriv]
   have hF0 : 0 ≤ deriv f (J θ) := le_trans (by norm_num) (hf _).1
   have hJ0 : 0 ≤ deriv J θ := le_trans (by norm_num) (hJ θ).1
   have hlo := mul_le_mul (hf (J θ)).1 (hJ θ).1
