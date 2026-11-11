@@ -51,26 +51,30 @@ theorem physical_kernel_memLp_row (hD : IsAccumulatingProfile D)
   have hQc : ContinuousOn F.Q (Icc c x) :=
     hQ.mono (fun y hy => ⟨hy.1, hy.2.trans_lt hx.2⟩)
   obtain ⟨C, hC⟩ := isCompact_Icc.bddAbove_image hQc.norm
-  have hQLp : MemLp F.Q 2 (μ.restrict (Icc c x)) := by
+  have hQLp : MemLp F.Q 2 ((μ).restrict (Icc c x)) := by
     apply MemLp.of_bound (hQc.aestronglyMeasurable measurableSet_Icc) C
     filter_upwards [ae_restrict_mem measurableSet_Icc] with y hy
     exact hC (mem_image_of_mem _ hy)
   have hP : MemLp F.P 2 μ :=
     morsePhysicalDeepTail_outward_lift_memLp (matchingProfileGeometry hD) hentry hT F.P_natural
-  have hleft := (memLp_indicator_iff_restrict measurableSet_Icc).mpr
+  have hleft : MemLp ((Icc c x).indicator (fun y => F.P x * F.Q y)) 2 μ :=
+    (memLp_indicator_iff_restrict measurableSet_Icc).mpr
     (hQLp.const_mul (F.P x))
-  have hright := (hP.const_mul (F.Q x)).indicator measurableSet_Ioi
+  have hright : MemLp ((Ioi x).indicator (fun y => F.Q x * F.P y)) 2 μ :=
+    (hP.const_mul (F.Q x)).indicator measurableSet_Ioi
   have hfull : ∀ᵐ y ∂μ, y ∈ Ioo c b := by
     rw [outerOutwardTailMeasure_eq_density hD hphysical]
-    have her : tailPhysicalRadius right T.entrance = entrance := tailPhysicalRadius_log right hentry
+    have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hentry
     simpa only [her, outerOutwardRadius_eq_sign] using
       (withDensity_absolutelyContinuous
-        (volume.restrict (Ioo (outerOutwardRadius right (tailPhysicalRadius right T.entrance))
+        (volume.restrict (Ioo (outerOutwardRadius right (tailPhysicalRadius right (T).entrance))
           (outerOutwardRadius right (tailPhysicalEndpoint D right))))
         (fun y => ENNReal.ofReal (12 * D.w (outerOutwardRadius right y) / y ^ 2))).ae_le
           (ae_restrict_mem measurableSet_Ioo)
   apply (memLp_congr_ae ?_).mp (hleft.add hright)
   filter_upwards [hfull] with y hy
+  change (Icc c x).indicator (fun t => F.P x * F.Q t) y +
+      (Ioi x).indicator (fun t => F.Q x * F.P t) y = F.Q (min x y) * F.P (max x y)
   by_cases hyx : y ≤ x
   · have hyL : y ∈ Icc c x := ⟨hy.1.le, hyx⟩
     have hyR : y ∉ Ioi x := not_lt.mpr hyx
@@ -95,17 +99,17 @@ theorem exists_physicalGreenOperator (hD : IsAccumulatingProfile D)
       ∀ x ∈ Ico c b, MemLp (fun y => F.Q (min x y) * F.P (max x y)) 2 μ := by
   letI : IsFiniteMeasure (deepTailMeasure T) :=
     isFiniteMeasure_deepTailMeasure_of_physical hD hT hphysical
-  have hη' : T.η ≤ 1 / 10 := by change η ≤ 1 / 10; linarith
+  have hη' : (T).η ≤ 1 / 10 := by change η ≤ 1 / 10; linarith
   obtain ⟨G, _, hG, _⟩ :=
-    exists_tailDeepInverse T hT hη' hKinv T.endpoint (Or.inl rfl)
+    exists_tailDeepInverse T hT hη' hKinv (T).endpoint (Or.inl rfl)
   have hend := tailPhysicalEndpoint_pos hD right
-  have hua : F.logP T.entrance ≠ 0 := by
+  have hua : F.logP (T).entrance ≠ 0 := by
     change F.logP (tailPhysicalLog right entrance) ≠ 0
     rw [F.P_log_entry]
     exact inv_ne_zero (rpow_pos_of_pos (div_pos hentry hend) _).ne'
-  have hQc : ContinuousOn F.logQ (Ico T.entrance T.endpoint) :=
+  have hQc : ContinuousOn F.logQ (Ico (T).entrance (T).endpoint) :=
     F.Q_smooth.continuousOn.mono (fun _ hx => hx.2)
-  let Klog := tailFundamentalGreenKernel T.entrance T.endpoint F.logQ F.logP 1
+  let Klog := tailFundamentalGreenKernel (T).entrance (T).endpoint F.logQ F.logP 1
   have hGK : ∀ f : DeepTailL2 T, (G f : ℝ → ℝ) =ᵐ[deepTailMeasure T]
       fun x => ∫ y, Klog x y * f y ∂deepTailMeasure T :=
     tailFundamentalGreen_representation_L2 hT hη hK G hG F.P_natural hua F.P_node_ne
@@ -142,7 +146,7 @@ theorem exists_physicalGreenOperator (hD : IsAccumulatingProfile D)
       (G.comp ((12 : ℝ) • E.toContinuousLinearEquiv.toContinuousLinearMap))
   have hconj (f : Lp ℝ 2 μ) : E (R f) = G ((12 : ℝ) • E f) :=
     E.apply_symm_apply _
-  have hfull : ∀ᵐ x ∂deepTailMeasure T, x ∈ Ioo T.entrance T.endpoint :=
+  have hfull : ∀ᵐ x ∂deepTailMeasure T, x ∈ Ioo (T).entrance (T).endpoint :=
     (withDensity_absolutelyContinuous _ _).ae_le (ae_restrict_mem measurableSet_Ioo)
   have hkernel : ∀ᵐ x ∂deepTailMeasure T, ∀ᵐ y ∂deepTailMeasure T,
       amp x * amp y * (F.Q (min (Rcoord x) (Rcoord y)) *
@@ -154,7 +158,7 @@ theorem exists_physicalGreenOperator (hD : IsAccumulatingProfile D)
       nlinarith [sq_sqrt (by norm_num : (0 : ℝ) ≤ 12)]
     change amp x * amp y * (F.Q (min (Rcoord x) (Rcoord y)) *
       F.P (max (Rcoord x) (Rcoord y))) =
-      12 * tailFundamentalGreenKernel T.entrance T.endpoint F.logQ F.logP 1 x y
+      12 * tailFundamentalGreenKernel (T).entrance (T).endpoint F.logQ F.logP 1 x y
     rw [tailFundamentalGreenKernel_eq hx hy, div_one]
     rcases le_total x y with hxy | hyx
     · rw [min_eq_left (hmono hxy), max_eq_right (hmono hxy),

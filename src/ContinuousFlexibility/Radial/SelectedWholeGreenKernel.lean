@@ -73,24 +73,24 @@ theorem exists_wholeGreenOperator
     (F.P_system hg hep hlam hT) (F.Q_system hg hep hlam hT) F.P_entrance F.Q_entrance
       (by rw [F.ZQ_entrance]; exact div_ne_zero one_ne_zero hlam)
   obtain ⟨Ddeep, hDdeep, hrow⟩ := F.exists_physicalGreenOperator hD hep hT hphysical hη hK hKinv
-  have her : tailPhysicalRadius right T.entrance = entrance := tailPhysicalRadius_log right hep
+  have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hep
   have horder : outerOutwardRadius right cut ≤
-      outerOutwardRadius right (tailPhysicalRadius right T.entrance) := by
+      outerOutwardRadius right (tailPhysicalRadius right (T).entrance) := by
     simpa only [her, outerOutwardRadius_eq_sign] using hac
   have hm := outerOutwardRegion_restrict_deep hD hphysical horder
   simp only [her, outerOutwardRadius_eq_sign] at hm
   let Rdeep := l2OperatorMeasureCongr hm.symm Ddeep
-  have hRd : ∀ f : Lp ℝ 2 (μ.restrict (Icc a c)ᶜ),
-      (Rdeep f : ℝ → ℝ) =ᵐ[μ.restrict (Icc a c)ᶜ] fun x =>
+  have hRd : ∀ f : Lp ℝ 2 ((μ).restrict (Icc a c)ᶜ),
+      (Rdeep f : ℝ → ℝ) =ᵐ[(μ).restrict (Icc a c)ᶜ] fun x =>
         ∫ y in (Icc a c)ᶜ, F.Q (min x y) * F.P (max x y) * f y ∂μ :=
     l2OperatorMeasureCongr_kernel hm.symm Ddeep
       (fun x y => F.Q (min x y) * F.P (max x y)) hDdeep
   have hrows : ∀ x ∈ Ico c b,
-      MemLp (fun y => F.Q (min x y) * F.P (max x y)) 2 (μ.restrict (Icc a c)ᶜ) := by
+      MemLp (fun y => F.Q (min x y) * F.P (max x y)) 2 ((μ).restrict (Icc a c)ᶜ) := by
     intro x hx
     rw [hm]
     exact hrow x hx
-  have hP : MemLp F.P 2 (μ.restrict (Icc a c)ᶜ) := by
+  have hP : MemLp F.P 2 ((μ).restrict (Icc a c)ᶜ) := by
     rw [hm]
     exact morsePhysicalDeepTail_outward_lift_memLp hg hep hT F.P_natural
   let p := hP.toLp F.P

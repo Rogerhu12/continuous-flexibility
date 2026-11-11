@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Radial.FixedCentralModelSmallError
 import ContinuousFlexibility.Radial.InnerModelPoissonNormalization
 import ContinuousFlexibility.Radial.InnerLiouvilleConormal
+import ContinuousFlexibility.Radial.InnerUnitWeights
 
 /-!
 # Actual fixed-central Poisson column costs

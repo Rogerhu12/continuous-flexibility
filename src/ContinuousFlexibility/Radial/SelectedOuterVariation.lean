@@ -15,7 +15,7 @@ noncomputable section
 namespace ContinuousFlexibility.Radial
 
 open Set Filter MeasureTheory
-open scoped Topology ContDiff
+open scoped Topology ContDiff ENNReal
 open ContinuousFlexibility.Analysis
 
 theorem selected_integrable_withDensity {μ : Measure ℝ} {ρ g : ℝ → ℝ}
@@ -97,7 +97,9 @@ theorem selected_weighted_initial_primitive
   have hρi := (selected_integrable_withDensity hρ hnonneg).mp hi
   constructor
   · apply (intervalIntegrable_iff_integrableOn_Ioc_of_le hx.1).mpr
-    exact hρi.neg.congr (Eventually.of_forall (fun y => by dsimp only; ring))
+    exact hρi.neg.congr (Eventually.of_forall (fun y => by
+      change -(ρ y * (U y * f y)) = U y * (-(ρ y * f y))
+      ring))
   · rw [intervalIntegral.integral_of_le hx.1, selected_initial_density hx,
       selected_integral_withDensity hρ hnonneg, ← integral_neg]
     apply integral_congr_ae
@@ -145,8 +147,8 @@ theorem selected_weighted_kernel_variation
     have hxy : x < y := lt_of_not_ge (fun h => hn ⟨hy.1, h⟩)
     rw [outerGreenKernel_of_le hxy.le]
     ring
-  have hsplit := integral_add_compl measurableSet_Ioc hrow
-  have htail := setIntegral_compl measurableSet_Ioc hVf
+  have hsplit := integral_add_compl (s := Ioc a x) measurableSet_Ioc hrow
+  have htail := setIntegral_compl (s := Ioc a x) measurableSet_Ioc hVf
   have hUi := (selected_weighted_initial_primitive hρ hρ₀ hU f hx).2
   have hVi := (selected_weighted_initial_primitive hρ hρ₀ hV f hx).2
   rw [← hsplit, hleft, hright, htail]

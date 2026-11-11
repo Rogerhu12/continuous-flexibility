@@ -32,7 +32,7 @@ theorem OuterFundamentalStatePair.weighted_solution
     (hw : ContDiff ℝ ∞ w)
     (hwn : ∀ x ∈ Ico a b, w x ≠ 0) (hr : ∀ x ∈ Ico a b, x ≠ 0)
     (hρ : Measurable ρ) (hρ₀ : ∀ x ∈ Ioo a b, 0 ≤ ρ x)
-    (hPc : P c = 1) (hPLp : MemLp P 2 (μ.restrict (Icc a c)ᶜ))
+    (hPc : P c = 1) (hPLp : MemLp P 2 ((μ).restrict (Icc a c)ᶜ))
     [IsFiniteMeasure μ]
     (R : Lp ℝ 2 μ →L[ℝ] Lp ℝ 2 μ)
     (hR : ∀ f : Lp ℝ 2 μ, (R f : ℝ → ℝ) =ᵐ[μ]
@@ -75,9 +75,9 @@ theorem OuterFundamentalStatePair.weighted_solution
     isFiniteMeasure_compactIntervalMeasure μ hac
   have hVf : Integrable (fun x => H.V x * f x) μ := by
     have hc := integrable_outer_core_product μ hac H.V (H.continuousOn_core hcb).2 f
-    have hPmul : Integrable (fun x => P x * f x) (μ.restrict (Icc a c)ᶜ) :=
+    have hPmul : Integrable (fun x => P x * f x) ((μ).restrict (Icc a c)ᶜ) :=
       hPLp.integrable_mul ((Lp.memLp f).restrict (Icc a c)ᶜ)
-    have ht : Integrable (fun x => H.V x * f x) (μ.restrict (Icc a c)ᶜ) := by
+    have ht : Integrable (fun x => H.V x * f x) ((μ).restrict (Icc a c)ᶜ) := by
       apply (hPmul.div_const H.scale).congr
       have htail := outer_ae_deep_interval μ (c := c)
         (hfull.mono (fun x hx => Ioo_subset_Ico_self hx))

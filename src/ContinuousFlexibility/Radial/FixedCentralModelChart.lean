@@ -185,7 +185,7 @@ def fixedCentralPhysicalModelChart :
     change x ∈ Icc (-T) T at hx
     have hxabs : |x| ≤ T := abs_le.mpr hx
     have h := (centralRadiusLogDerivative_norm_le_linear x).trans
-      (mul_le_mul_of_nonneg_left (add_le_add_left hxabs 1)
+      (mul_le_mul_of_nonneg_left (by linarith only [hxabs] : 1 + |x| ≤ 1 + T)
         centralRadiusWeightConstant_pos.le)
     simpa only [centralRadiusLogDerivative, Real.norm_eq_abs] using h
   potential_identity := by
@@ -198,7 +198,8 @@ def fixedCentralPhysicalModelChart :
     ring
   left_eq := hleft
   right_eq := hright
-  bordered_eq := by simp only [FixedCentralBorder.modelBuffer, centralModelBuffer, if_pos rfl]
+  bordered_eq := by
+    simp only [FixedCentralBorder.modelBuffer, centralModelBuffer, if_pos rfl, ite_true]
   column_eq := fun _ => B.modelColumnLift_eq_matchingBorderVector
     hD hborder hT hcap hcolumn hcore hw
 

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Radial.RetainedMorseModelChart
 import ContinuousFlexibility.Radial.InnerMorsePhysicalPoisson
+import ContinuousFlexibility.Radial.InnerUnitWeights
 
 /-!
 # The original normalized Morse Poisson estimate on the retained profile

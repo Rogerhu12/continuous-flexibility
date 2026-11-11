@@ -72,10 +72,10 @@ local notation "H" => P.retainedMorseInnerGeometry hD hw hS G₀ hfirst hq hT
 
 include hbridge hmodel hwindow in
 theorem retainedMorseGap_deriv_pos (g : Fin (2 * k + 2))
-    {r : ℝ} (hr : r ∈ Icc (H.left (innerModelChainGap g)) (H.right (innerModelChainGap g))) :
+    {r : ℝ} (hr : r ∈ Icc ((H).left (innerModelChainGap g)) ((H).right (innerModelChainGap g))) :
     0 < deriv Γ.reference.w r := by
-  have hrpos := (H.left_pos (innerModelChainGap g)).trans_le hr.1
-  have hwpos := H.weight_pos (innerModelChainGap g) r hr
+  have hrpos := ((H).left_pos (innerModelChainGap g)).trans_le hr.1
+  have hwpos := (H).weight_pos (innerModelChainGap g) r hr
   rcases innerMorseInnerGap_cases hk g with ⟨side, rfl⟩ | ⟨side, rfl⟩ | ⟨side, p, rfl⟩
   · have he := P.retainedMorseInnerGeometry_terminal hD hw hS G₀ hfirst hq hT
       hleft hright hTL hTR k hk side

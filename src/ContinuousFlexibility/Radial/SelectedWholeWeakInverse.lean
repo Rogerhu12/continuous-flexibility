@@ -77,13 +77,13 @@ theorem exists_wholeWeakInverse
   have hρ₀ (x : ℝ) (hx : x ∈ Ioo a b) : 0 ≤ ρ x := by
     apply (selectedOutwardDensity_pos hD hcut _).le
     simpa only [outerOutwardRadius_eq_sign] using Ioo_subset_Ico_self hx
-  have her : tailPhysicalRadius right T.entrance = entrance := tailPhysicalRadius_log right hep
+  have her : tailPhysicalRadius right (T).entrance = entrance := tailPhysicalRadius_log right hep
   have horder : outerOutwardRadius right cut ≤
-      outerOutwardRadius right (tailPhysicalRadius right T.entrance) := by
+      outerOutwardRadius right (tailPhysicalRadius right (T).entrance) := by
     simpa only [her, outerOutwardRadius_eq_sign] using hac.le
   have hm := outerOutwardRegion_restrict_deep hD hphysical horder
   simp only [her, outerOutwardRegionMeasure_eq_density, outerOutwardRadius_eq_sign] at hm
-  have hPLp : MemLp F.P 2 (ν.restrict (Icc a c)ᶜ) := by
+  have hPLp : MemLp F.P 2 ((ν).restrict (Icc a c)ᶜ) := by
     rw [hm]
     exact morsePhysicalDeepTail_outward_lift_memLp hg hep hT F.P_natural
   have hfull : ∀ᵐ x ∂ν, x ∈ Ioo a b :=
@@ -119,13 +119,15 @@ theorem whole_natural_robin_iff
     · simpa [outerTailSign, tailPhysicalEndpoint] using neg_lt_neg hentry.1
     · simpa [outerTailSign, tailPhysicalEndpoint] using hentry.2
   have ha : a ∈ Ico a b := ⟨le_rfl, hac.trans hcb⟩
+  have hVinitial : H.V a = H.entrance.1 := congrArg Prod.fst H.V_initial
+  have hZVinitial : H.ZV a = H.entrance.2 := congrArg Prod.snd H.V_initial
   have he : (u a, z a) = k • H.entrance := by
     apply Prod.ext
     · change u a = k * H.entrance.1
-      rw [← congrArg Prod.fst H.V_initial]
+      rw [← hVinitial]
       exact (hk a ha).1
     · change z a = k * H.entrance.2
-      rw [← congrArg Prod.snd H.V_initial]
+      rw [← hZVinitial]
       exact (hk a ha).2
   have hkne : k ≠ 0 := by
     intro hz

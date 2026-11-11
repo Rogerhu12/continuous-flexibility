@@ -80,7 +80,7 @@ theorem exists_inner_later_budget_start {d p r Cstar : ℝ}
     simpa only [mul_one] using mul_le_mul_of_nonneg_left h37 hr
   have hd' : d * radialE n ^ 37 ≤ |d| * radialE n ^ 37 :=
     mul_le_mul_of_nonneg_right (le_abs_self d) (pow_nonneg hE0 37)
-  simp only [rpow_natCast]
+  simp only [rpow_ofNat]
   calc
     _ ≤ |d| * radialE n ^ 37 +
         (p * (1 + 2 * Cstar) ^ 4) * radialE n ^ 37 + r * radialE n ^ 37 :=
