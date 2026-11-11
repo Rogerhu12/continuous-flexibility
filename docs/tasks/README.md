@@ -23,6 +23,9 @@ Read this section every time you check the rules. A notice is removed when it is
   `RadialCellIntegrable` (`n01a_radialCellIntegrable_sub`, `cell_integrable_iff`, ...) need
   `memLp_two_iff_integrable_sq` with the measurability you already assume. Mark ready again when
   CI is green on the merge with current `main`.
+  Since then N01b (merged) also changed `controlGeometryConditions` (`Statements/Nonlinear.lean`):
+  the control support clause is now `tsupport (C.control m) ⊆ Ioo (C.left m) (C.right m)`, so the
+  controls N01a constructs must satisfy the strict inclusion.
 
 ## Start
 
