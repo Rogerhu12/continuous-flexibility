@@ -28,6 +28,8 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true
 
+local instance : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
+
 /-- Select the four fixed inputs while their analytic payloads remain opaque. -/
 private theorem n01c_ordinaryFlowAngular_common_selection
     {base : ℕ} {ε : ℝ}
