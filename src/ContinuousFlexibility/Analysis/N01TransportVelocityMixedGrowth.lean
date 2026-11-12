@@ -239,7 +239,6 @@ private theorem transportVelocity_flatOfGrowth
         hflat0 JE hV hEeq
     simpa only [Fin.val_zero, pow_zero] using hsame
 
-set_option diagnostics true in
 /-- Build the scalar cutoff tower and finish the transport estimate over an
 abstract parameter space, before specializing to the physical spaces. -/
 private theorem transportVelocity_flatWithRadialCutoff
@@ -278,7 +277,6 @@ private theorem transportVelocity_flatWithRadialCutoff
       (fun x => deriv (χ i) x.2.1 * fA i x * fZ 0 i x) (fE i) (U ×ˢ V i)) :
     FlatMixedDiagonalGrowth p W H JV nmax B (B + 1) ∧
       FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
-  run_tac Lean.logInfo "N02N03 Velocity: cutoff-stage"
   let fC : I → E × PolarPoint → ℝ := fun i x => deriv (χ i) x.2.1
   let JC : ∀ i, SmoothDirections (U ×ˢ V i) (fC i) :=
     radialCutoffScalarTowers (I := I) (E := E) (U := U) (V := V) hU hV χ hχ
@@ -373,7 +371,6 @@ private abbrev N01TransportVelocityCommonGrowth
     ∀ c : Fin 2,
       AngularDiagonalPowerGrowth p (fun m => H m ^ c.val) (towers.JZ c) nmax B
 
-set_option diagnostics true in
 /-- Construct exactly the original characteristic, slope and two displacement towers. -/
 private def n01TransportVelocity_buildTowers
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -393,7 +390,6 @@ private def n01TransportVelocity_buildTowers
     (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
     (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
     : N01TransportVelocityTowers D S C R base ε l h χ := by
-  run_tac Lean.logInfo "N02N03 Velocity: tower-stage"
   let E₀ : Type := StateDirections S × ℝ
   let E : Type := E₀ × CircleSpace S
   let U₀ : Set E₀ := sectorNeighborhood S base ε ε
@@ -427,14 +423,12 @@ private def n01TransportVelocity_buildTowers
       half_pos (mul_pos hlam (Real.rpow_pos_of_pos (zero_lt_one.trans_le (hW m)) _))
     exact (pow_pos hd 2).trans_le (hpositive (liftSectorParameter S C z)
       (liftSectorParameter_mem_stateNeighborhood hz le_rfl) m y hy).2
-  run_tac Lean.logInfo "N02N03 Velocity: geometry"
   let characteristicData : ∃ K : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fL₀ m),
       ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p₀ W K B L :=
     hN.exists_minusCharacteristicSpeed_strip_joint_growth
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       (lam := lam) (P := P) hS hT j hcell l h hl hh hlam hP hpositive
   let JL₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fL₀ m) := characteristicData.choose
-  run_tac Lean.logInfo "N02N03 Velocity: characteristic-choice"
   let liftTower : ∀ (m : ℕ) (f : E₀ × PolarPoint → ℝ),
       SmoothDirections (U₀ ×ˢ V m) f →
         SmoothDirections (U ×ˢ V m)
@@ -442,7 +436,6 @@ private def n01TransportVelocity_buildTowers
     fun m f K => SmoothDirections.fstParameter
       (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
       (U := U₀) (V := V m) (f := f) K hU₀ (hV m)
-  run_tac Lean.logInfo "N02N03 Velocity: shared-lift"
   let JL : ∀ m, SmoothDirections (U ×ˢ V m) (fL m) :=
     fun m => liftTower m (fL₀ m) (JL₀ m)
   let JA₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fA₀ m) := fun m =>
@@ -462,17 +455,13 @@ private def n01TransportVelocity_buildTowers
     hN.returnCorrectionPulledDisplacement_parameterSpatialTower
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT m (l m) (h m) (hl m) (hh m) (hdisc m) χ hχ hχrange
-  run_tac Lean.logInfo "N02N03 Velocity: pulled-towers"
   let fZ : Fin 2 → ℕ → E × PolarPoint → ℝ :=
     Fin.cases f₀ (Fin.cases f₁ Fin.elim0)
-  run_tac Lean.logInfo "N02N03 Velocity: labelled-functions"
   let JZ : ∀ c m, SmoothDirections (U ×ˢ V m) (fZ c m) :=
     transportVelocity_twoTowers
       (I := ℕ) (E := E) (U := U) (V := V) (f₀ := f₀) (f₁ := f₁) J₀ J₁
-  run_tac Lean.logInfo "N02N03 Velocity: labelled-towers"
   exact ⟨JL, JA, JZ⟩
 
-set_option diagnostics true in
 /-- Select the four interpolation orders and assemble their common budget while
 all parameter spaces and seminorms are abstract. -/
 private def transportVelocity_growthData
@@ -520,7 +509,6 @@ private def transportVelocity_growthData
         AngularDiagonalPowerGrowth p (fun _ => 1) JA nmax B ∧
         ∀ c : Fin 2,
           AngularDiagonalPowerGrowth p (fun i => H i ^ c.val) (JZ c) nmax B) := by
-  run_tac Lean.logInfo "N02N03 Velocity: growth-assembly"
   let BL : ℕ := characteristicBounds.choose
   have hBL : ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
       ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
@@ -550,7 +538,6 @@ private def transportVelocity_growthData
           |jointMixedDiagonal (JZ 1 i) n 0 b x w y| ≤ K * H i *
             (1 + p (N + B₁ + 1) x + p (N + B₁ + 1) w) ^
               ((b : ℝ) / ((N : ℝ) + 1)) := displacementBounds.choose_spec
-  run_tac Lean.logInfo "N02N03 Velocity: bounds"
   let B : ℕ := BL + BA + B₀ + B₁
   have hbL : BL ≤ B := by dsimp only [B]; omega
   have hbA : BA ≤ B := by dsimp only [B]; omega
@@ -565,10 +552,8 @@ private def transportVelocity_growthData
       (I := I) (E := E) (U := U) (fL := fL) (fA := fA) (fZ := fZ)
       l h p W H hp hW0 hH JL JA JZ nmax BL BA B₀ B₁ B
       hbL hbA hb0 hb1 hBL hBA hB₀ hB₁
-  run_tac Lean.logInfo "N02N03 Velocity: common-growth"
   exact ⟨BL, BA, B₀, B₁, hcommon⟩
 
-set_option diagnostics true in
 /-- Choose each original interpolation order once and keep their sum as the common order. -/
 private def n01TransportVelocity_buildGrowth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -594,7 +579,6 @@ private def n01TransportVelocity_buildGrowth
     (towers : N01TransportVelocityTowers D S C R base ε l h χ) (nmax : ℕ) :
     TransportVelocityGrowthData
       (N01TransportVelocityCommonGrowth D T S C R base ε j l h χ towers nmax) := by
-  run_tac Lean.logInfo "N02N03 Velocity: growth-stage"
   let E₀ : Type := StateDirections S × ℝ
   let E : Type := E₀ × CircleSpace S
   let U₀ : Set E₀ := sectorNeighborhood S base ε ε
@@ -671,13 +655,11 @@ private def n01TransportVelocity_buildGrowth
     hN.returnCorrectionPulledDisplacement_angular_diagonal_interpolation
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT hflow l h hl hh χ hχrange J₁ nmax
-  run_tac Lean.logInfo "N02N03 Velocity: bounds-providers"
   exact transportVelocity_growthData
     (I := ℕ) (E := E) (U := U) (fL := fL) (fA := fA) (fZ := fZ)
     l h p W H hp hW0 hH JL JA JZ nmax
     characteristicBounds slopeBounds residualBounds displacementBounds
 
-set_option diagnostics true in
 /-- The actual transport equations finish the supplied towers at the selected common order. -/
 private theorem n01TransportVelocity_flatFromGrowth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -716,7 +698,6 @@ private theorem n01TransportVelocity_flatFromGrowth
     FlatMixedDiagonalGrowth p W (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)) JV
       nmax B (B + 1) ∧
       FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
-  run_tac Lean.logInfo "N02N03 Velocity: transport-stage"
   let E₀ : Type := StateDirections S × ℝ
   let E : Type := E₀ × CircleSpace S
   let U₀ : Set E₀ := sectorNeighborhood S base ε ε
@@ -801,7 +782,6 @@ private theorem n01TransportVelocity_flatFromGrowth
         hrec (R.residual (liftSectorParameter S C x.1))
     · refine Fin.cases ?_ (fun i => Fin.elim0 i) c
       simpa only [fZ, f₀, f₀₀, f₁, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
-  run_tac Lean.logInfo "N02N03 Velocity: transport"
   exact transportVelocity_flatWithRadialCutoff
     (I := ℕ) (E := E) (U := U) (V := V)
     (fL := fL) (fA := fA) (fZ := fZ)
@@ -820,7 +800,6 @@ private theorem n01TransportVelocity_flatFromGrowth
         (liftSectorParameter S C x.1.1) m x.2
           (R.residual (liftSectorParameter S C x.1.1))).symm)
 
-set_option diagnostics true in
 /-- Fixed-loss bounds for the actual independent and frozen-residual
 velocities. All geometric assumptions are the witnesses produced by
 the buffered, uniform N01 neighborhood construction. -/
@@ -864,13 +843,11 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
       FlatMixedDiagonalGrowth p W (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)) JV
         nmax B (B + 1) ∧
       FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
-  run_tac Lean.logInfo "N02N03 Velocity: start"
   let towers : N01TransportVelocityTowers D S C R base ε l h χ :=
     n01TransportVelocity_buildTowers
       (D := D) (T := T) (S := S) (C := C) (R := R)
       (base := base) (loss := loss) (ε := ε) (lam := lam) (P := P)
       hN hS hT hR j hcell l h hl hh hlam hP hpositive χ hχ hχrange
-  run_tac Lean.logInfo "N02N03 Velocity: towers"
   let bounds : TransportVelocityGrowthData
       (N01TransportVelocityCommonGrowth D T S C R base ε j l h χ towers nmax) :=
     n01TransportVelocity_buildGrowth

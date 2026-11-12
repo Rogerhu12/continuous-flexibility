@@ -18,11 +18,89 @@ namespace ContinuousFlexibility.Statements
 
 local instance n01CorrectionCoefficientSpatialJetsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
+local instance n01CorrectionCoefficientSpatialJetsParameterSMul (S : PhysicalSpacesData) :
+    SMul ℝ ((StateDirections S × ℝ) × CircleSpace S) := Prod.instSMul
 local instance n01CorrectionCoefficientSpatialJetsRealNormedSpace : NormedSpace ℝ ℝ :=
     NormedField.toNormedSpace
 
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
+
+private theorem correctionCoefficientField_contDiffOn_of_strip_or_zero
+    {V : Set PolarPoint} (f : PolarPoint → ℝ × ℝ) (l h : ℕ → ℝ)
+    (Z : PolarPoint → Prop)
+    (hcover : ∀ p ∈ V, (∃ m, p.1 ∈ Ioo (l m) (h m)) ∨ Z p)
+    (hstrip : ∀ m, ContDiffOn ℝ ∞ f (Ioo (l m) (h m) ×ˢ univ))
+    (hzero : ∀ p, Z p → f =ᶠ[𝓝 p] fun _ => 0) :
+    ContDiffOn ℝ ∞ f V := by
+  intro p hp
+  rcases hcover p hp with ⟨m, hm⟩ | hz
+  · exact ((hstrip m).contDiffAt
+      ((isOpen_Ioo.prod isOpen_univ).mem_nhds ⟨hm, mem_univ p.2⟩)).contDiffWithinAt
+  · exact (contDiffAt_const.congr_of_eventuallyEq (hzero p hz)).contDiffWithinAt
+
+private theorem correctionCoefficientJets_mixed_hasDerivAt_line_of_strip_or_zero
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} (hU : IsOpen U)
+    (g : ∀ k : ℕ, E → (Fin k → E) → PolarPoint → ℝ)
+    (a b n : ℕ) (x w : E) {t : ℝ} (ht : x + t • w ∈ U)
+    (v : Fin n → E) (p : PolarPoint) (l h : ℕ → ℝ) {Z : Prop}
+    (hcover : (∃ m, p.1 ∈ Ioo (l m) (h m)) ∨ Z)
+    (hstrip : ∀ m, p.1 ∈ Ioo (l m) (h m) →
+      HasDerivAt
+        (fun s => mixedDerivative a b (g n (x + s • w) v) p)
+        (mixedDerivative a b (g (n + 1) (x + t • w) (Fin.cons w v)) p) t)
+    (hzero : Z → ∀ (k : ℕ) (y : E), y ∈ U → ∀ vs : Fin k → E,
+      mixedDerivative a b (g k y vs) p = 0) :
+    HasDerivAt
+      (fun s => mixedDerivative a b (g n (x + s • w) v) p)
+      (mixedDerivative a b (g (n + 1) (x + t • w) (Fin.cons w v)) p) t := by
+  rcases hcover with ⟨m, hm⟩ | hz
+  · exact hstrip m hm
+  · have hvalue := hzero hz (n + 1) (x + t • w) ht (Fin.cons w v)
+    apply ((hasDerivAt_const t (0 : ℝ)).congr_deriv hvalue.symm).congr_of_eventuallyEq
+    have hnear : ∀ᶠ s in 𝓝 t, x + s • w ∈ U :=
+      (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
+        (hU.mem_nhds ht)
+    filter_upwards [hnear] with s hs
+    exact hzero hz n (x + s • w) hs v
+
+private theorem correctionCoefficientJets_mixedJetHasDerivAt_of_materialCoordinate
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T)
+    {U : Set E} (hU : IsOpen U)
+    (g : ∀ k : ℕ, E → (Fin k → E) → PolarPoint → ℝ × ℝ)
+    (hregular : ∀ (k : ℕ) (y : E), y ∈ U → ∀ vs : Fin k → E,
+      ContDiffOn ℝ ∞ (g k y vs) (annularOpen D))
+    (n : ℕ) (x w : E) (v : Fin n → E) (t : ℝ) (ht : x + t • w ∈ U)
+    (hderiv : ∀ a b : ℕ, ∀ p ∈ annularOpen D,
+      HasDerivAt
+        (fun s => mixedDerivative a b (fun q => (g n (x + s • w) v q).1) p)
+        (mixedDerivative a b (fun q =>
+          (g (n + 1) (x + t • w) (Fin.cons w v) q).1) p) t ∧
+      HasDerivAt
+        (fun s => mixedDerivative a b (fun q => (g n (x + s • w) v q).2) p)
+        (mixedDerivative a b (fun q =>
+          (g (n + 1) (x + t • w) (Fin.cons w v) q).2) p) t) :
+    MixedJetHasDerivAt
+      (fun s q => (g n (x + s • w) v (T.radius q.1, q.2)).1)
+      (fun q => (g (n + 1) (x + t • w) (Fin.cons w v) (T.radius q.1, q.2)).1) t ∧
+    MixedJetHasDerivAt
+      (fun s q => (g n (x + s • w) v (T.radius q.1, q.2)).2)
+      (fun q => (g (n + 1) (x + t • w) (Fin.cons w v) (T.radius q.1, q.2)).2) t := by
+  have hnear : ∀ᶠ s in 𝓝 t, x + s • w ∈ U :=
+    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
+      (hU.mem_nhds ht)
+  have hnext := hregular (n + 1) (x + t • w) ht (Fin.cons w v)
+  constructor
+  · exact mixedJetHasDerivAt_comp_materialCoordinate hT
+      (hnear.mono (fun s hs => (hregular n (x + s • w) hs v).fst)) hnext.fst
+      (fun a b p hp => (hderiv a b p hp).1)
+  · exact mixedJetHasDerivAt_comp_materialCoordinate hT
+      (hnear.mono (fun s hs => (hregular n (x + s • w) hs v).snd)) hnext.snd
+      (fun a b p hp => (hderiv a b p hp).2)
 
 theorem N01Properties.cutoffStrip_or_eventually_zero
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -82,10 +160,21 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_eventually_zero
     (v : Fin n → (StateDirections S × ℝ) × CircleSpace S) :
     hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc n x v
       =ᶠ[𝓝 p] fun _ => 0 := by
-  have hz := returnCorrectionCoefficientError_jets_eventually_zero R χ
-    (fun y => liftSectorParameter S C y.1) (fun y => y.2)
-    (hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc)
-    hzero n x hx v
+  let J : ∀ q : PolarPoint, SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun y : (StateDirections S × ℝ) × CircleSpace S =>
+        returnCorrectionCoefficientError D S C R χ (liftSectorParameter S C y.1) q y.2) :=
+    hN.returnCorrectionCoefficient_pointTower
+      (D := D) (T := T) (S := S) (C := C) (R := R)
+      (base := base) (loss := loss) (ε := ε)
+      hS hT hR j hcell χ hχrange hcutoff hdisc
+  have hz : (fun q : PolarPoint => (J q).D n x v) =ᶠ[𝓝 p] fun _ => (0 : ℝ × ℝ) :=
+    returnCorrectionCoefficientError_jets_eventually_zero
+      (E := (StateDirections S × ℝ) × CircleSpace S)
+      (U := sectorNeighborhood S base ε ε ×ˢ univ)
+      (D := D) (S := S) (C := C) R χ
+      (fun y : (StateDirections S × ℝ) × CircleSpace S => liftSectorParameter S C y.1)
+      (fun y : (StateDirections S × ℝ) × CircleSpace S => y.2) J
+      (p := p) hzero n x hx v
   filter_upwards [hz] with q hq
   exact (hN.returnCorrectionCoefficientScalarJets_apply hS hT hR j hcell χ hχrange
     hcutoff hdisc n x v q).trans hq
@@ -131,16 +220,16 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_contDiffOn
     ContDiffOn ℝ ∞
       (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc n x v)
       (annularOpen D) := by
-  intro p hp
-  rcases hN.cutoffStrip_or_eventually_zero χ hsupp hend l h hstripSupport hp.1 with
-    ⟨m, hm⟩ | hzero
-  · exact ((hN.returnCorrectionCoefficientScalarJets_contDiffOn_strip hS hT hR
+  exact correctionCoefficientField_contDiffOn_of_strip_or_zero
+    (V := annularOpen D)
+    (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc n x v)
+    l h (fun p => ∀ᶠ r in 𝓝 p.1, ∀ m, deriv (χ m) r = 0)
+    (fun p hp => hN.cutoffStrip_or_eventually_zero χ hsupp hend l h hstripSupport hp.1)
+    (fun m => hN.returnCorrectionCoefficientScalarJets_contDiffOn_strip hS hT hR
       j hcell χ hχrange hcutoff hdisc hχ m (l m) (h m) (hl m) (hh m)
-      (fun z hz q hq => hstripDisc z hz m q hq) n x hx v).contDiffAt
-        ((isOpen_Ioo.prod isOpen_univ).mem_nhds ⟨hm, mem_univ p.2⟩)).contDiffWithinAt
-  · exact (contDiffAt_const.congr_of_eventuallyEq
-      (hN.returnCorrectionCoefficientScalarJets_eventually_zero hS hT hR j hcell
-        χ hχrange hcutoff hdisc hzero n x hx v)).contDiffWithinAt
+      (fun z hz q hq => hstripDisc z hz m q hq) n x hx v)
+    (fun p hzero => hN.returnCorrectionCoefficientScalarJets_eventually_zero hS hT hR j hcell
+      χ hχrange hcutoff hdisc (p := p) hzero n x hx v)
 
 theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasDerivAt_line
     (Q : (ℝ × ℝ) →L[ℝ] ℝ) (a b n : ℕ)
@@ -155,21 +244,19 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasD
       (mixedDerivative a b (fun q => Q
         (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
           (n + 1) (x + t • w) (Fin.cons w v) q)) p) t := by
-  rcases hN.cutoffStrip_or_eventually_zero χ hsupp hend l h hstripSupport hp.1 with
-    ⟨m, hm⟩ | hzero
-  · exact hN.returnCorrectionCoefficientScalarJets_component_mixed_hasDerivAt_line_strip
+  exact correctionCoefficientJets_mixed_hasDerivAt_line_of_strip_or_zero
+    (E := (StateDirections S × ℝ) × CircleSpace S)
+    (U := sectorNeighborhood S base ε ε ×ˢ univ)
+    ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
+    (fun k y vs q => Q
+      (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc k y vs q))
+    a b n x w ht v p l h
+    (hN.cutoffStrip_or_eventually_zero χ hsupp hend l h hstripSupport hp.1)
+    (fun m hm => hN.returnCorrectionCoefficientScalarJets_component_mixed_hasDerivAt_line_strip
       hS hT hR j hcell χ hχrange hcutoff hdisc hχ m (l m) (h m) (hl m) (hh m)
-      (fun z hz q hq => hstripDisc z hz m q hq) Q a b n x w ht v ⟨hm, mem_univ p.2⟩
-  · have hvalue := hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
-      hS hT hR j hcell χ hχrange hcutoff hdisc Q hzero a b (n + 1)
-      (x + t • w) ht (Fin.cons w v)
-    apply ((hasDerivAt_const t (0 : ℝ)).congr_deriv hvalue.symm).congr_of_eventuallyEq
-    have hnear : ∀ᶠ s in 𝓝 t, x + s • w ∈ sectorNeighborhood S base ε ε ×ˢ univ :=
-      (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
-        (((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ).mem_nhds ht)
-    filter_upwards [hnear] with s hs
-    exact hN.returnCorrectionCoefficientScalarJets_component_mixed_zero hS hT hR
-      j hcell χ hχrange hcutoff hdisc Q hzero a b n (x + s • w) hs v
+      (fun z hz q hq => hstripDisc z hz m q hq) Q a b n x w ht v ⟨hm, mem_univ p.2⟩)
+    (fun hzero k y hy vs => hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
+      hS hT hR j hcell χ hχrange hcutoff hdisc Q hzero a b k y hy vs)
 
 theorem N01Properties.returnCorrectionCoefficientScalarJets_mixed_hasDerivAt_line
     (a b n : ℕ) (x w : (StateDirections S × ℝ) × CircleSpace S)
@@ -211,27 +298,18 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_mixedJetHasDerivAt
         hcutoff hdisc n (x + s • w) v (T.radius q.1, q.2)).2)
       (fun q => (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange
         hcutoff hdisc (n + 1) (x + t • w) (Fin.cons w v) (T.radius q.1, q.2)).2) t := by
-  have hnear : ∀ᶠ s in 𝓝 t, x + s • w ∈ sectorNeighborhood S base ε ε ×ˢ univ :=
-    (continuous_const.add (continuous_id.smul continuous_const)).continuousAt.eventually
-      (((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ).mem_nhds ht)
-  have hregular (k : ℕ) (y : (StateDirections S × ℝ) × CircleSpace S)
-      (hy : y ∈ sectorNeighborhood S base ε ε ×ˢ univ)
-      (vs : Fin k → (StateDirections S × ℝ) × CircleSpace S) :
-      ContDiffOn ℝ ∞ (hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ
-        hχrange hcutoff hdisc k y vs) (annularOpen D) :=
-    hN.returnCorrectionCoefficientScalarJets_contDiffOn hS hT hR j hcell χ hχrange
-      hcutoff hdisc hχ hsupp hend l h hl hh hstripSupport hstripDisc k y hy vs
-  have hnext := hregular (n + 1) (x + t • w) ht (Fin.cons w v)
-  constructor
-  · exact mixedJetHasDerivAt_comp_materialCoordinate hT
-      (hnear.mono (fun s hs => (hregular n (x + s • w) hs v).fst)) hnext.fst
-      (fun a b p hp => (hN.returnCorrectionCoefficientScalarJets_mixed_hasDerivAt_line
-        hS hT hR j hcell χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh
-        hstripSupport hstripDisc a b n x w ht v hp).1)
-  · exact mixedJetHasDerivAt_comp_materialCoordinate hT
-      (hnear.mono (fun s hs => (hregular n (x + s • w) hs v).snd)) hnext.snd
-      (fun a b p hp => (hN.returnCorrectionCoefficientScalarJets_mixed_hasDerivAt_line
-        hS hT hR j hcell χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh
-        hstripSupport hstripDisc a b n x w ht v hp).2)
+  exact correctionCoefficientJets_mixedJetHasDerivAt_of_materialCoordinate
+    (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) hT
+    (U := sectorNeighborhood S base ε ε ×ˢ univ)
+    ((sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ)
+    (fun k y vs q => hN.returnCorrectionCoefficientScalarJets
+      hS hT hR j hcell χ hχrange hcutoff hdisc k y vs q)
+    (fun k y hy vs => hN.returnCorrectionCoefficientScalarJets_contDiffOn
+      hS hT hR j hcell χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh
+      hstripSupport hstripDisc k y hy vs)
+    n x w v t ht
+    (fun a b p hp => hN.returnCorrectionCoefficientScalarJets_mixed_hasDerivAt_line
+      hS hT hR j hcell χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh
+      hstripSupport hstripDisc a b n x w ht v hp)
 
 end ContinuousFlexibility.Statements
