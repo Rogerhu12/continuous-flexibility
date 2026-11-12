@@ -51,18 +51,18 @@ theorem modeOuterSeparatedGraph_zero {D : ReferenceData}
     apply (outerRobin_sqrt_iff (hlam i) (M.A i i, M.B i i) _ _).mpr
     have hz := hboundary i
     have hf := matchingOuterFlux_eq_tailHalf ha hm hb hu right
-    change matchingOuterFlux D M u i =
-      outerTailSign right * D.w (matchingCut D M i) *
-        derivWithin u (radialTailHalf D right (matchingCut D M i)) (matchingCut D M i) /
-          sqrt (M.boundaryScale i) at hf
     rw [hf] at hz
-    simpa only [hcut, Prod.fst, Prod.snd, mul_div_assoc] using hz
+    have hcut' : matchingCut D M (if right then 1 else 0) =
+        (if right then M.innerRight else M.innerLeft) := hcut
+    simpa only [i, hcut', Prod.fst, Prod.snd, mul_div_assoc] using hz
   apply Prod.ext
-  · apply Lp.ext
+  · change U.1 = (0 : RadialModeL2 D)
+    apply Lp.ext
     filter_upwards [hrep, (Lp.coeFn_zero ℝ 2 (radialHilbertMeasure D) :
         ⇑(0 : RadialModeL2 D) =ᵐ[radialHilbertMeasure D] 0),
       matching_ae_inner_or_outer hD M] with r hr hz hri
-    rw [Prod.fst_zero, hr, hz, Pi.zero_apply]
+    rw [hr, hz]
+    change u r = 0
     rcases hri with hin | hL | hR
     · exact hinner r hin
     · exact hout false r (Ioo_subset_Ioc_self hL)
@@ -83,7 +83,7 @@ theorem modeOuterSeparatedGraph_sub {D : ReferenceData}
   · filter_upwards [Lp.coeFn_sub U.1 V.1, hrepU, hrepV] with r hr hur hvr
     simpa only [Prod.fst_sub, Pi.sub_apply, hur, hvr] using hr
   · intro r hr
-    dsimp only
+    change u r - v r = 0
     rw [hinnerU r hr, hinnerV r hr, sub_self]
   · intro i
     rw [matchingOuterFlux_sub ha hm hb hu hv]

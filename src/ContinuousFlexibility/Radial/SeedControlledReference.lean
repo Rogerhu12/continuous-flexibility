@@ -237,6 +237,57 @@ theorem exists_seedControlledReference_of_gluedPair {S : SelectedTailData}
     hS hentries hentry K hq G (fun _ => True) ⟨D, ha, hb, hw, hphi, hD, trivial⟩
   exact ⟨E, hE⟩
 
+theorem exists_seedControlledReference_with_construction_transport {S : SelectedTailData}
+    (hS : IsSelectedTail S)
+    (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
+    (hentry : ∀ right, S.entry right S.chain.index ∈ radialCore (S.family S.sigma))
+    (hband : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
+    (K : SeedCentralCutoff) {q : ℝ} (hq : 0 < q)
+    (G : SeedGluedPair (S.family S.sigma)
+      (S.entry false S.chain.index) (S.entry true S.chain.index)
+      (S.outgoing false 2) (S.outgoing true 2) K q) :
+    ∃ D : ReferenceData, RadialConstructionGeometry D ∧ D.w = G.profile ∧
+      D.phi = G.height ∧ IsAccumulatingProfile D ∧
+      EqOn D.w (centralRadialProfile 1) (Ioo (exp K.left) (exp K.right)) ∧
+      EqOn D.phi centralKernelHeight (Ioo (exp K.left) (exp K.right)) ∧
+      (∀ r ∈ radialCore D, radialJacobi 4 D.w D.phi r = 0) ∧
+      CentralPatch D (exp K.left) (exp K.right) ∧
+      ConnectedPositiveHeads D (exp K.left) (exp K.right) q ∧
+      ConnectedSelectedTails S D (exp K.left) (exp K.right) ∧
+      D.a = G.radiusL * (S.family S.sigma).a ∧
+      D.b = G.radiusR * (S.family S.sigma).b ∧
+      ∃ e : ℝ ≃o ℝ, ∃ N : ℕ, 1 ≤ N ∧
+        D.cellIndex = (fun m => max ((S.family S.sigma).cellIndex m) N) ∧
+        (∀ m, e ⁻¹' (S.family S.sigma).cells m ⊆ D.cells m) ∧
+        D.localizer = (fun m r => (S.family S.sigma).localizer m (e r)) ∧
+        (∀ r, r ≤ S.entry false S.chain.index → e.symm r = G.radiusL * r) ∧
+        (∀ r, S.entry true S.chain.index ≤ r → e.symm r = G.radiusR * r) := by
+  have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
+  have hseam (side : Bool) :
+      S.entry side S.chain.index = morseChainSeam S.chain side S.chain.index := by
+    simpa only [morseChainSeam] using
+      (hS.2.2.2.2.2 side S.chain.index 2 le_rfl (by decide) hband).2.2.2.2.2.1
+  let Q : ReferenceData → Prop := fun D =>
+    RadialConstructionGeometry D ∧
+      D.a = G.radiusL * (S.family S.sigma).a ∧
+      D.b = G.radiusR * (S.family S.sigma).b ∧
+      ∃ e : ℝ ≃o ℝ, ∃ N : ℕ, 1 ≤ N ∧
+        D.cellIndex = (fun m => max ((S.family S.sigma).cellIndex m) N) ∧
+        (∀ m, e ⁻¹' (S.family S.sigma).cells m ⊆ D.cells m) ∧
+        D.localizer = (fun m r => (S.family S.sigma).localizer m (e r)) ∧
+        (∀ r, r ≤ S.entry false S.chain.index → e.symm r = G.radiusL * r) ∧
+        (∀ r, S.entry true S.chain.index ≤ r → e.symm r = G.radiusR * r)
+  obtain ⟨E, ha, hb, hw, hphi, hacc, hconstruction, htransport⟩ :=
+    G.exists_accumulating_reference_with_construction_geometry_transport
+      hreal hS.2.2.1 hq (le_refl S.chain.index) (hseam false) (hseam true)
+      (hentry false) (hentry true) hentries
+  obtain ⟨D, hQ, hDw, hDphi, hDacc, hcentral, hcentralPhi,
+      hkernel, hpatch, hheads, htails⟩ :=
+    exists_seedControlledReference_with_property hS hentries hentry K hq G Q
+      ⟨E, ha, hb, hw, hphi, hacc, hconstruction, ha, hb, htransport⟩
+  exact ⟨D, hQ.1, hDw, hDphi, hDacc, hcentral, hcentralPhi,
+    hkernel, hpatch, hheads, htails, hQ.2⟩
+
 theorem exists_seedControlledReference_with_construction {S : SelectedTailData}
     (hS : IsSelectedTail S)
     (hentries : S.entry false S.chain.index < S.entry true S.chain.index)
@@ -253,16 +304,12 @@ theorem exists_seedControlledReference_with_construction {S : SelectedTailData}
       CentralPatch D (exp K.left) (exp K.right) ∧
       ConnectedPositiveHeads D (exp K.left) (exp K.right) q ∧
       ConnectedSelectedTails S D (exp K.left) (exp K.right) := by
-  have hreal := (hS.2.2.2.1 S.sigma hS.2.2.1).1
-  have hseam (side : Bool) :
-      S.entry side S.chain.index = morseChainSeam S.chain side S.chain.index := by
-    simpa only [morseChainSeam] using
-      (hS.2.2.2.2.2 side S.chain.index 2 le_rfl (by decide) hband).2.2.2.2.2.1
-  exact exists_seedControlledReference_with_property hS hentries hentry K hq G
-    RadialConstructionGeometry
-    (G.exists_accumulating_reference_with_construction_geometry
-      hreal hS.2.2.1 hq (le_refl S.chain.index) (hseam false) (hseam true)
-      (hentry false) (hentry true) hentries)
+  obtain ⟨D, hconstruction, hw, hphi, hacc, hcentral, hcentralPhi,
+      hkernel, hpatch, hheads, htails, _⟩ :=
+    exists_seedControlledReference_with_construction_transport
+      hS hentries hentry hband K hq G
+  exact ⟨D, hconstruction, hw, hphi, hacc, hcentral, hcentralPhi,
+    hkernel, hpatch, hheads, htails⟩
 
 /-- The original controlled construction, retaining its exact interface.
 The assembly companion also accepts an already constructed, retained pair. -/

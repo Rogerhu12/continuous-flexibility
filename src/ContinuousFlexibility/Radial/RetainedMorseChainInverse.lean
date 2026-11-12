@@ -192,8 +192,7 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
         Γ.reference.w ((H).left i.succ) / (H).left i.succ ≤ l * (A).kappa i := by
     intro i Q hi
     obtain ⟨p, hs | hs⟩ := innerModelChain_cut_incidence i
-    · have htag : Sum.elim (fun _ => true) (fun _ => false) ((A).piece i.succ) = false :=
-        congrArg (Sum.elim (fun _ => true) (fun _ => false)) hi
+    · have htag : Sum.isLeft ((A).piece i.succ) = false := congrArg Sum.isLeft hi
       rw [hs.2, retainedMorseActualChain_model] at htag
       cases htag
     · have hm := P.retainedMorseActualChain_model hD hw hS G₀ hfirst hq hT
@@ -252,8 +251,7 @@ theorem exists_retainedMorseChainInverse {Dc Bc Lc : ℝ}
     field_simp [hjpos.ne'] <;> ring
   calc
     _ ≤ d + 2 * (((2 * c / j) ^ 2 + 48) + 24 * l) :=
-      add_le_add (le_refl d) (mul_le_mul_of_nonneg_left
-        (add_le_add hmax (le_refl (24 * l))) (by norm_num))
+      add_le_add le_rfl (mul_le_mul_of_nonneg_left (add_le_add hmax le_rfl) (by norm_num))
     _ = _ := by rw [hcquad]; dsimp only [d, e, p, l]; ring
 
 end SeedRetainedPair

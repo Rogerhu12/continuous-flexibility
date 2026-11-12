@@ -63,7 +63,7 @@ theorem exists_scaledNaturalInverse
       (V (κ * cut), outerTailSign right * E.w (κ * cut) * deriv V (κ * cut) / (β * lam)) := by
     have hderiv : deriv U cut = deriv V (κ * cut) * κ := by
       exact ((hV.differentiable (by simp) _).hasDerivAt.comp cut
-        (by simpa only [id_eq, mul_one] using (hasDerivAt_id cut).const_mul κ)).deriv
+        (hasDerivAt_const_mul κ)).deriv
     apply Prod.ext
     · rfl
     · rw [hderiv, hprofileCut]
