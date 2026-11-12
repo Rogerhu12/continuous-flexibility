@@ -1,0 +1,112 @@
+--- a/src/ContinuousFlexibility/Analysis/CoupledNeighborhoodRestriction.lean
++++ b/src/ContinuousFlexibility/Analysis/CoupledNeighborhoodRestriction.lean
+@@ -2,6 +2,8 @@
+ import ContinuousFlexibility.Analysis.StateKappaBounds
+ import ContinuousFlexibility.Analysis.TameElementaryCalculus
+ import ContinuousFlexibility.Analysis.TameTransfer
++import ContinuousFlexibility.Analysis.N01cBoundsRestriction
++import ContinuousFlexibility.Analysis.N06Neighborhood
+
+ /-!
+ # Restricting the cumulative nonlinear construction
+@@ -138,35 +140,20 @@
+     (hsub : stateNeighborhood S C base' ε' ⊆ stateNeighborhood S C base ε)
+     (hb : base ≤ base')
+     (hpos : ∀ m, 0 ≤ T.H (T.sample m) ∧ 0 ≤ T.E0 (T.sample m))
+-    (hFlow : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
+-      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+-      ∃ J : SmoothDirections (stateNeighborhood S C base ε)
+-        (ordinaryFlowFamily S C m a b p),
+-        ∀ z ∈ stateNeighborhood S C base ε, ∀ v : Fin k → (AnnularState S × ℝ),
+-          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
+-            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+-            T.E0 (T.sample (C.cell m)) ^ B *
+-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-              base (s + loss) (z - (C.referenceState, 0)) v) :
+-    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p,
+-      a + b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
+-      ∃ J : SmoothDirections (stateNeighborhood S C base' ε')
+-        (ordinaryFlowFamily S C m a b p),
+-        ∀ z ∈ stateNeighborhood S C base' ε', ∀ v : Fin k → (AnnularState S × ℝ),
+-          min (p.1 - C.left m) (C.right m - p.1) ^ a * |J.D k z v| ≤
+-            B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
+-            T.E0 (T.sample (C.cell m)) ^ B *
+-            oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
+-              base' (s + loss) (z - (C.referenceState, 0)) v := by
+-  intro k s
+-  let c : ℝ := (hFlow k s).choose
+-  have hc : 0 < c := (hFlow k s).choose_spec.1
+-  refine ⟨c, hc, fun m a b p hab hpm => ?_⟩
+-  exact coupled_weightedTower_restrict hp hopen hsub hb (C.referenceState, 0)
+-    (fun t => min (p.1 - C.left m) (C.right m - p.1) ^ a * |t|)
+-    (mul_nonneg (mul_nonneg hc.le (Real.rpow_nonneg (hpos (C.cell m)).1 _))
+-      (Real.rpow_nonneg (hpos (C.cell m)).2 _))
+-        ((hFlow k s).choose_spec.2 m a b p hab hpm)
++    (hFlow : OrdinaryFlowFamilyTameBounds T S C base loss ε) :
++    OrdinaryFlowFamilyTameBounds T S C base' loss ε' := by
++  exact ordinaryFlowBounds_restrict
++    (E := AnnularState S × ℝ)
++    (U := stateNeighborhood S C base ε) (V := stateNeighborhood S C base' ε')
++    (grading := pairGrading (stateGrading S) realGrading)
++    (center := (C.referenceState, 0)) (family := ordinaryFlowFamily S C)
++    (left := C.left) (right := C.right)
++    (weight := fun B m => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
++      T.E0 (T.sample (C.cell m)) ^ B)
++    hopen hsub hp hb (le_refl loss)
++    (fun B hB m => mul_nonneg
++      (mul_nonneg hB.le (Real.rpow_nonneg (hpos (C.cell m)).1 _))
++      (Real.rpow_nonneg (hpos (C.cell m)).2 _)) hFlow
+
+ theorem coupled_N01Properties_restrict (hT : IsMaterialData D T)
+     (h : N01Properties D T S C base loss ε)
+@@ -217,25 +204,8 @@
+         (subset_refl _)) (subset_refl _))⟩
+
+ theorem coupled_N04Properties_restrict (h : N04Properties D T S C L K base loss ε)
+-    (hb : base ≤ base') (hε : ε' ≤ ε) : N04Properties D T S C L K base' loss ε' := by
+-  have hsub := coupled_stateNeighborhood_mono (S := S) (C := C) hb hε
+-  refine And.imp id ?_ h
+-  refine And.imp id ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp id ?_
+-  refine And.imp id ?_
+-  refine And.imp id ?_
+-  refine And.imp id ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp id ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  refine And.imp (coupled_forall_mem_mono hsub) ?_
+-  exact And.imp (coupled_orderedBounds_mono hsub) (coupled_forall_mem_mono hsub)
++    (hb : base ≤ base') (hε : ε' ≤ ε) : N04Properties D T S C L K base' loss ε' :=
++  n06_N04Properties_mono h hb hε
+
+ variable {Vol : VolumeModelData S K} {b : ℕ}
+   {Domain : CanonicalDomainData S K Vol b}
+@@ -306,20 +276,12 @@
+   rcases h with ⟨h7, h8⟩
+   rcases h7 with ⟨h6, hG, hBridge⟩
+   rcases h6 with ⟨h5, h6⟩
+-  rcases h5 with ⟨h4, h5⟩
+-  rcases h4 with ⟨h3, hRoot, hCubic, hTrans, h4⟩
+-  rcases h3 with ⟨h2, h3⟩
+-  rcases h2 with ⟨h1, h2⟩
+-  have h1' := coupled_N01Properties_restrict hT h1 hb hε hε'
+-  have h2' := coupled_N02Properties_restrict h2 hb hε
+-  have h3' := coupled_N03Properties_restrict h3 hb hε
+-  have h4' := coupled_N04Properties_restrict h4 hb hε
++  have h5' := n06_NonlinearPropertiesThrough05_mono hT h5 hb hε' hε
+   have h6' := coupled_N06Properties_restrict h6 hb hε hε'
+   have hG' := coupled_scalarInverseProperties_restrict hG hb hε
+   have hBridge' := coupled_scalarBanachBridgeProperties_restrict hBridge hb hε
+   have h8' := coupled_N08Properties_restrict h8 hb hε
+-  exact ⟨⟨⟨⟨⟨⟨⟨h1', h2'⟩, h3'⟩, hRoot, hCubic, hTrans, h4'⟩, h5⟩, h6'⟩,
+-    hG', hBridge'⟩, h8'⟩
++  exact ⟨⟨⟨h5', h6'⟩, hG', hBridge'⟩, h8'⟩
+
+ theorem coupled_neighborhood_mono {q0 q0' : ℝ}
+     (hb : base ≤ base') (hε : ε' ≤ ε) (hq : q0' ≤ q0) :
