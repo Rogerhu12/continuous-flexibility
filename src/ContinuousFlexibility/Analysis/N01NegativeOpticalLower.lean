@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04bStateProfileType
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # A common reference lower bound for the negative optical radicand
@@ -39,6 +40,27 @@ theorem n04Coordinates_opticalLogPerturbation_radicand
   field_simp [hr, hwr, (Real.exp_pos (t * f r)).ne']
   ring
 
+private theorem n04Coordinates_twice_lt_of_lt_half {a ε : ℝ}
+    (h : a < ε / 2) : |(2 : ℝ)| * a < ε := by
+  rw [abs_of_pos (by norm_num : (0 : ℝ) < 2)]
+  linarith only [h]
+
+private theorem n04Coordinates_affine_one {E : Type*}
+    [AddCommGroup E] [Module ℝ E] (x₀ x : E) :
+    x₀ + (1 : ℝ) • (x - x₀) = x := by
+  rw [one_smul]
+  abel
+
+private theorem n04Coordinates_opticalLogPerturbation_half
+    {w f P : ℝ → ℝ} {r : ℝ}
+    (hP : P = opticalLogPerturbation w f 1)
+    (hw : DifferentiableAt ℝ w r) (hf : DifferentiableAt ℝ f r)
+    (hr : r ≠ 0) (hwr : w r ≠ 0)
+    (hdouble : 0 < -deriv w r / (r * w r) + (-deriv f r / r) * 2) :
+    (-deriv w r / (r * w r)) / 2 < -deriv P r / (r * P r) := by
+  rw [hP, n04Coordinates_opticalLogPerturbation_radicand (t := (1 : ℝ)) hw hf hr hwr]
+  linarith only [hdouble]
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -53,15 +75,11 @@ theorem N01Properties.n04Coordinates_stateProfile_opticalRadicand_half
     (-deriv D.w r / (r * D.w r)) / 2 <
       -deriv (stateProfile D S C x) r / (r * stateProfile D S C x r) := by
   let v : AnnularState S := x - C.referenceState
-  have ht : |(2 : ℝ)| * stateGrading S base v < ε := by
-    rw [abs_of_pos (by norm_num : (0 : ℝ) < 2)]
-    change 2 * stateGrading S base (x - C.referenceState) < ε
-    linarith only [hx]
-  have hdouble := hN.n04b_stateLine_radicand_pos hS hT v m hr ht
-  have hline : C.referenceState + (1 : ℝ) • v = x := by
-    dsimp only [v]
-    rw [one_smul]
-    abel
+  have ht : |(2 : ℝ)| * stateGrading S base v < ε :=
+    n04Coordinates_twice_lt_of_lt_half hx
+  have hdouble := hN.n04b_stateLine_radicand_pos (t := (2 : ℝ)) hS hT v m hr ht
+  have hline : C.referenceState + (1 : ℝ) • v = x :=
+    n04Coordinates_affine_one (E := AnnularState S) C.referenceState x
   have hp : stateProfile D S C x =
       opticalLogPerturbation D.w (n04bStateLogExponent D S C v) 1 := by
     simpa only [hline] using n04b_stateProfile_reference_line hN.2.2.1 v 1
@@ -69,12 +87,12 @@ theorem N01Properties.n04Coordinates_stateProfile_opticalRadicand_half
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
   have hrD : r ∈ Ioo D.a D.b :=
     ⟨(hcontrol.1 m).1.trans hr.1, hr.2.trans (hcontrol.1 m).2.2⟩
-  have heq := n04Coordinates_opticalLogPerturbation_radicand
-    (t := (1 : ℝ)) (hgeom.1.2.2.1.1.differentiable (by simp) r)
+  exact n04Coordinates_opticalLogPerturbation_half
+    (w := D.w) (f := n04bStateLogExponent D S C v)
+    (P := stateProfile D S C x) (r := r) hp
+    (hgeom.1.2.2.1.1.differentiable (by simp) r)
     ((hN.n04b_stateLogExponent_contDiffAt v hrD).differentiableAt (by simp))
-    (hgeom.1.1.trans hrD.1).ne' (hgeom.1.2.2.2.2.1 r hrD).ne'
-  rw [hp, heq]
-  linarith only [hdouble]
+    (hgeom.1.1.trans hrD.1).ne' (hgeom.1.2.2.2.2.1 r hrD).ne' hdouble
 
 private theorem n04Coordinates_discriminant_reference_bound
     {w P d q Δ : ℝ} (hw : 0 < w) (hd : 0 ≤ d) (hΔ : 0 < Δ)
@@ -84,7 +102,9 @@ private theorem n04Coordinates_discriminant_reference_bound
     have h := pow_le_pow_left₀ (div_pos hw (by norm_num : (0 : ℝ) < 2)).le hP 2
     nlinarith only [h]
   have hΔ2 : Δ ^ 2 ≤ 4 := by
-    simpa using pow_le_pow_left₀ hΔ.le hΔupper 2
+    calc
+      Δ ^ 2 ≤ (2 : ℝ) ^ 2 := pow_le_pow_left₀ hΔ.le hΔupper 2
+      _ = 4 := by norm_num
   have hnum : (w ^ 2 / 4) * (d / 2) ≤ P ^ 2 * q :=
     mul_le_mul hP2 hq (div_nonneg hd (by norm_num)) (sq_nonneg P)
   apply (le_div_iff₀ (sq_pos_of_pos hΔ)).mpr
@@ -116,7 +136,8 @@ theorem N01Properties.n04Coordinates_original_discriminant_lower
   have hw : 0 < D.w p.1 := hgeom.1.2.2.2.2.1 p.1 hpD.1
   have hP : 0 < stateProfile D S C z.1 p.1 := mul_pos hw (Real.exp_pos _)
   have hzold : z ∈ stateNeighborhood S C base ε :=
-    stateNeighborhood_mono S C le_rfl (half_le_self hN.2.1.le) hz
+    Analysis.stateNeighborhood_mono S C (base := base) (base' := base)
+      (ε := ε) (ε' := ε / 2) le_rfl (half_le_self hN.2.1.le) hz
   have hg := hN.2.2.2.2.2.2.2.2.2.1 z hzold hs p hpD
   have hPbound : D.w p.1 / 2 ≤ stateProfile D S C z.1 p.1 := by
     have h := (le_div_iff₀ hw).mp hg.1
@@ -154,7 +175,6 @@ theorem N01Properties.n04Coordinates_original_discriminant_lower
         linarith only [hdet]
       _ = _ := by
         field_simp [hr.ne', hP.ne', hΔ.ne']
-        ring
   exact hbound.trans_eq heq.symm
 
 end ContinuousFlexibility.Statements

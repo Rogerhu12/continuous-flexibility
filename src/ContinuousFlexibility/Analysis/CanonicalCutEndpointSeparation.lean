@@ -65,7 +65,7 @@ theorem canonicalCutPair_closed_subset_root_union
     rcases lt_or_eq_of_le hqr.2 with hhi | hhi
     · have hqo : q ∈ canonicalOpen S K i := by
         refine ⟨?_, mem_univ _⟩
-        simpa only [hleft, hright] using And.intro hlo hhi
+        simpa only [Set.mem_Ioo, hleft, hright] using And.intro hlo hhi
       simpa only [hGF] using hopen ((hA.charts z hz hs i).2.1 hqo)
     · have hpoint : q = (K.cutRadius m, q.2) := Prod.ext hhi rfl
       have hcutq : K.inverseChart z i q ∈ N := by

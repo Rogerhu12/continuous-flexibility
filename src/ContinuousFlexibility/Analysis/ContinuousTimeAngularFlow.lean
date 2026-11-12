@@ -69,7 +69,9 @@ theorem continuousTimeCircleFlow_angularSmooth_separated
       ∀ n : ℕ, ContinuousOn
         (fun p : PolarPoint => iteratedDeriv n (fun x => Θ (x, p.2)) p.1)
         ((univ : Set ℝ) ×ˢ Icc a b) := by
-  apply continuousTimeCircleFlow_angularSmooth hab hP _ hperiod htime hinit hflow
+  apply continuousTimeCircleFlow_angularSmooth
+    (F := fun p : PolarPoint => d p - ρ p.2 * c p)
+    hab hP _ hperiod htime hinit hflow
   intro n
   simpa only [sub_eq_add_neg] using
     (scalarSpatialRegularity_of_contDiff hd n).add

@@ -65,7 +65,10 @@ theorem contDiff_interiorEndpointPullback
     {Θ : (ℝ × ℝ) → ℝ → ℝ → ℝ}
     (hΘ : ContDiff ℝ ∞ (fun q : N04FlowPoint => Θ q.1 1 q.2)) (a b : ℝ) :
     ContDiff ℝ ∞ (interiorEndpointPullback Θ a b) := by
-  have h := hΘ.comp (contDiff_const.add (interiorEndpointLinear a b).contDiff)
+  have hmap : ContDiff ℝ ∞ (fun x : PolarPoint =>
+      interiorEndpointOffset a b + interiorEndpointLinear a b x) :=
+    contDiff_const.add (interiorEndpointLinear a b).contDiff
+  have h := hΘ.comp hmap
   have he : (fun q : N04FlowPoint => Θ q.1 1 q.2) ∘
       (fun x : PolarPoint => interiorEndpointOffset a b + interiorEndpointLinear a b x) =
       interiorEndpointPullback Θ a b := by

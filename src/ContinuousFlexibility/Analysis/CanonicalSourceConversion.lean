@@ -42,6 +42,6 @@ theorem canonicalSource_pairing_of_partA
     (hK.inverseReflection z hz hsector m) hdiff
     (fun p hp => (hcharts.2.2.2.2.2.2.2 p hp).1.ne')
     (fun p hp => (hcharts.2.2.2.2.2.2.2 p hp).2.1) u f
-  simpa only [canonicalHeight, canonicalSource] using hconv
+  simpa only [canonicalHeight, canonicalSource, canonicalOpen] using hconv
 
 end ContinuousFlexibility.Analysis

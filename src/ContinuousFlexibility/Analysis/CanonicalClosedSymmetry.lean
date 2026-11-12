@@ -104,8 +104,9 @@ theorem canonicalInverse_zero_axis_iff
     have hmaps : K.inverseChart z m (q.1, -q.2) = K.inverseChart z m q := by
       rw [he]
       exact Prod.ext rfl (by rw [hzero, neg_zero])
-    have hqeq := canonicalInverse_injOn_closed hA hz hs m
-      ⟨hq.1, mem_univ _⟩ hq hmaps
+    have hr : (q.1, -q.2) ∈ canonicalClosed S K m := ⟨hq.1, mem_univ _⟩
+    have hqeq : (q.1, -q.2) = q :=
+      canonicalInverse_injOn_closed hA hz hs m hr hq hmaps
     have hangle := congrArg Prod.snd hqeq
     change -q.2 = q.2 at hangle
     linarith only [hangle]

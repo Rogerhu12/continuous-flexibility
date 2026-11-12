@@ -50,7 +50,7 @@ theorem contDiffOn_one_piecewise_two_open_domains
   apply contDiffOn_one_piecewise_of_matching_jets hU hf
   · intro x hx
     have hxs : x ∉ s := by
-      simpa only [hs.isClosed_compl.closure_eq] using hx.2
+      simpa only [hs.isClosed_compl.closure_eq, Set.mem_compl_iff] using hx.2
     by_cases hxΓ : x ∈ Γ
     · exact hg x ⟨hx.1, (hΓ hxΓ).2⟩
     · have hpieces : x ∈ s ∪ t := by
@@ -61,7 +61,7 @@ theorem contDiffOn_one_piecewise_two_open_domains
       · exact hg x ⟨hx.1, subset_closure hright⟩
   · intro x hx
     have hfront : x ∈ closure s ∧ x ∉ s := by
-      simpa only [hs.frontier_eq] using hx.2
+      simpa only [hs.frontier_eq, Set.mem_diff] using hx.2
     have hpieces := openPieces_closure_subset_piece_union_interface
       ht hdisjoint hcover ⟨hx.1, hfront.1⟩
     rcases hpieces with hleft | hinterface
