@@ -83,7 +83,7 @@ private theorem potential_product_expansion
     n04RealizationPotentialInputs, Fin.sum_univ_succ, Fin.prod_univ_succ,
     Fin.sum_univ_zero, Fin.prod_univ_zero, Matrix.cons_val_zero, Matrix.cons_val_succ,
     Matrix.cons_val_zero', Matrix.cons_val_succ', Matrix.cons_val_one, Matrix.cons_val_two,
-    Matrix.head_cons, Matrix.tail_cons,
+    Matrix.cons_val_three, Matrix.cons_val_four, Matrix.head_cons, Matrix.tail_cons,
     spaces_mixedDerivative_zero, mul_one, one_mul, add_zero]
   ring
 

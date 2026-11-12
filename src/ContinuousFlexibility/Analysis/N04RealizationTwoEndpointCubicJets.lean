@@ -55,7 +55,10 @@ theorem n04Realization_twoEndpointCubic_parameterJets
   have hf₁ : ∀ x ∈ U, ∀ q ∈ Ω, N x q = q.1 ^ 3 * e₁ x q := by
     intro x hx q hq
     dsimp only [e₁]
-    field_simp [pow_ne_zero 3 hq.1.1.ne'] <;> ring
+    calc
+      N x q = (N x q / q.1 ^ 3) * q.1 ^ 3 :=
+        (div_mul_cancel₀ _ (pow_ne_zero 3 hq.1.1.ne')).symm
+      _ = q.1 ^ 3 * (N x q / q.1 ^ 3) := mul_comm _ _
   let R₁ : MixedJetRegularity U Ω e₁ :=
     n04Realization_mixedJetRegularity_of_staticFactorization RN hU hΩ
       (contDiff_fst.pow 3).contDiffOn
@@ -98,7 +101,8 @@ theorem n04Realization_twoEndpointCubic_parameterJets
     calc
       radialCubicQuotient F (R - q.1, q.2) * (R - q.1) ^ 3 =
           F (R - q.1, q.2) := by
-        simpa only [mul_comm] using cube_mul_cubicQuotient (h0 q.2) (R - q.1)
+        simpa only [radialCubicQuotient, Prod.fst, Prod.snd, mul_comm] using
+          cube_mul_cubicQuotient (f := fun r : ℝ => F (r, q.2)) (h0 q.2) (R - q.1)
       _ = N x (R - q.1, q.2) := he hqr
   have hf₂ : ∀ x ∈ U, ∀ q ∈ Ω, e₂ x q = q.1 ^ 3 * er x q := by
     intro x hx q hq
@@ -108,7 +112,8 @@ theorem n04Realization_twoEndpointCubic_parameterJets
     rw [hfactor x hx _ hqr]
     have he : R - (R - q.1) = q.1 := by ring
     simp only [he]
-    field_simp [pow_ne_zero 3 hqr.1.1.ne'] <;> ring
+    apply (div_eq_iff (pow_ne_zero 3 hqr.1.1.ne')).mpr
+    ring
   let G₂ : ∀ k : ℕ, ℕ → ℕ → E × (Fin k → E) → ℝ :=
     fun k a b y => G k (a + 3) b y / 2
   have hG₂ : ∀ k a b, Continuous (G₂ k a b) :=
