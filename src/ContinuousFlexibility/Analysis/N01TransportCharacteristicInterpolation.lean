@@ -14,6 +14,11 @@ primitive mixed bounds used by the radial transport recurrence.
 
 noncomputable section
 
+/- Temporary CI diagnostics for slow completed elaboration tasks.
+The heartbeat and per-file watchdog limits are unchanged. -/
+set_option trace.profiler true
+set_option trace.profiler.threshold 1000
+
 namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
@@ -67,7 +72,68 @@ theorem UniformWeightedJointGrowth.fstParameter
   exact add_le_add (add_le_add le_rfl (hfst (n + loss) x))
     (Finset.sum_le_sum (fun j _ => hfst (n + loss) (v j).1))
 
+
+private theorem characteristic_fstParameter_joint_growth
+    {p : ℕ → Seminorm ℝ E} (q : ℕ → Seminorm ℝ F)
+    {W : I → ℝ} (hW : ∀ i, 0 ≤ W i)
+    {U : Set E} {V : I → Set P} {f : I → E × P → G}
+    (K : ∀ i, SmoothDirections (U ×ˢ V i) (f i))
+    (J : ∀ i, SmoothDirections ((U ×ˢ (univ : Set F)) ×ˢ V i)
+      (fun x : (E × F) × P => f i (x.1.1, x.2)))
+    {B L : ℕ} (hK : UniformWeightedJointGrowth p W K B L)
+    (hU : IsOpen U) (hV : ∀ i, IsOpen (V i)) :
+    UniformWeightedJointGrowth (pairGrading p q) W J B L := by
+  have hproject : UniformWeightedJointGrowth (pairGrading p q) W
+      (fun i => (K i).fstParameter (F := F) hU (hV i)) B L :=
+    UniformWeightedJointGrowth.fstParameter
+      (I := I) (E := E) (F := F) (P := P) (G := G)
+      (p := p) (W := W) (U := U) (V := V) (f := f) (J := K)
+      (base := B) (loss := L) q hW hK hU hV
+  exact UniformWeightedJointGrowth.congr
+    (I := I) (E := E × F) (P := P) (F := G)
+    (p := pairGrading p q) (W := W) (U := U ×ˢ (univ : Set F)) (V := V)
+    (f := fun i (x : (E × F) × P) => f i (x.1.1, x.2))
+    (g := fun i (x : (E × F) × P) => f i (x.1.1, x.2))
+    (J := fun i => (K i).fstParameter (F := F) hU (hV i))
+    (base := B) (loss := L) hproject J (fun _ _ _ => rfl)
+
 end Projection
+
+section StripInterpolation
+
+variable {I E : Type*}
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+
+private theorem characteristic_strip_mixed_interpolation
+    {p : ℕ → Seminorm ℝ E} {W : I → ℝ} {U : Set E}
+    {f : I → E × PolarPoint → ℝ}
+    (l h : I → ℝ)
+    (J : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (f i))
+    {B₀ L : ℕ} (hJ : UniformWeightedJointGrowth p W J B₀ L)
+    (hp : Monotone p) (hIp : HasInterpolation p) (hW : ∀ i, 1 ≤ W i)
+    (hc : ∀ i, Convex ℝ (U ×ˢ (Ioo (l i) (h i) ×ˢ (univ : Set ℝ))))
+    (nmax : ℕ) :
+    ∃ B : ℕ, ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
+      ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
+        ∀ i x, x ∈ U → ∀ w : E, p B x ≤ A → p B w ≤ 1 →
+        ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+        |jointMixedDiagonal (J i) n a b x w y| ≤
+          K * W i ^ Q * (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+            (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) := by
+  obtain ⟨B, _, hbound⟩ :=
+    UniformWeightedJointGrowth.mixed_diagonal_spatial_interpolation
+      (I := I) (E := E) (p := p) (W := W) (U := U)
+      (V := fun i => Ioo (l i) (h i) ×ˢ (univ : Set ℝ))
+      (f := f) (J := J) (base := B₀) (loss := L) hJ hp hIp hW
+      (fun i => (isOpen_Ioo : IsOpen (Ioo (l i) (h i))).prod
+        (isOpen_univ : IsOpen (univ : Set ℝ))) hc nmax
+  refine ⟨B, fun A hA N n hn a b hab => ?_⟩
+  obtain ⟨K, Q, hK, hQ, hb⟩ := hbound A hA N n hn a b hab
+  exact ⟨K, Q, hK, hQ, fun i x hx w hxlow hwlow y hy =>
+    hb i x hx w hxlow hwlow y ⟨hy, mem_univ _⟩⟩
+
+end StripInterpolation
 
 end ContinuousFlexibility.Analysis
 
@@ -107,11 +173,25 @@ theorem N01Properties.minusCharacteristicSpeed_correction_joint_growth
         (fun m => radialE (D.cellIndex (j m))) J B L := by
   obtain ⟨K, B, L, hb, hloss, hg⟩ :=
     hN.exists_minusCharacteristicSpeed_strip_joint_growth
+      (D := D) (T := T) (S := S) (C := C)
+      (base := base) (loss := loss) (ε := ε)
       hS hT j hcell l h hl hh hlam hP hpositive
-  have hlift := hg.fstParameter (S.circle (3 / 4 : ℝ)).grading
+  refine ⟨B, L, hb, hloss, ?_⟩
+  exact characteristic_fstParameter_joint_growth
+    (I := ℕ) (E := StateDirections S × ℝ) (F := CircleSpace S)
+    (P := PolarPoint) (G := ℝ)
+    (p := pairGrading (sectorGrading S) realGrading)
+    (W := fun m => radialE (D.cellIndex (j m)))
+    (U := sectorNeighborhood S base ε ε)
+    (V := fun m => Ioo (l m) (h m) ×ˢ (univ : Set ℝ))
+    (f := fun (_m : ℕ) (x : (StateDirections S × ℝ) × PolarPoint) =>
+      minusCharacteristicSpeed
+        (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2)
+    (B := B) (L := L) (S.circle (3 / 4 : ℝ)).grading
     (fun m => zero_le_one.trans (one_le_radialE_of_nat _))
-    (sectorNeighborhood_isOpen S base ε ε) (fun _ => isOpen_Ioo.prod isOpen_univ)
-  exact ⟨B, L, hb, hloss, hlift.congr J (fun _ _ _ => rfl)⟩
+    K J hg (sectorNeighborhood_isOpen S base ε ε)
+    (fun m => (isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
+      (isOpen_univ : IsOpen (univ : Set ℝ)))
 
 /-- Primitive characteristic jets have exactly the total spatial order
 as their exponent budget on the same high scale as the angular fields. -/
@@ -145,18 +225,25 @@ theorem N01Properties.minusCharacteristicSpeed_correction_mixed_interpolation
               (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)) := by
   obtain ⟨B₀, L, _, _, hg⟩ :=
     hN.minusCharacteristicSpeed_correction_joint_growth
+      (D := D) (T := T) (S := S) (C := C)
+      (base := base) (loss := loss) (ε := ε)
       hS hT j hcell l h hl hh hlam hP hpositive J
   have hdomain (m : ℕ) : Convex ℝ
       ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
         (Ioo (l m) (h m) ×ˢ (univ : Set ℝ))) :=
     ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
       ((convex_Ioo (l m) (h m)).prod convex_univ)
-  obtain ⟨B, _, hbound⟩ := hg.mixed_diagonal_spatial_interpolation
+  exact characteristic_strip_mixed_interpolation
+    (I := ℕ) (E := (StateDirections S × ℝ) × CircleSpace S)
+    (p := pairGrading (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading)
+    (W := fun m => radialE (D.cellIndex (j m)))
+    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+    (f := fun (_m : ℕ) (x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) =>
+      minusCharacteristicSpeed
+        (originalCoefficients D S C (liftSectorParameter S C x.1.1)) x.2)
+    (B₀ := B₀) (L := L) l h J hg
     (correctionParameterGrading_monotone S) (correctionParameterGrading_hasInterpolation hS)
-    (fun m => one_le_radialE_of_nat _) (fun _ => isOpen_Ioo.prod isOpen_univ) hdomain nmax
-  refine ⟨B, fun A hA N n hn a b hab => ?_⟩
-  obtain ⟨K, Q, hK, hQ, hb⟩ := hbound A hA N n hn a b hab
-  exact ⟨K, Q, hK, hQ, fun m x hx w hxlow hwlow y hy =>
-    hb m x hx w hxlow hwlow y ⟨hy, mem_univ _⟩⟩
+    (fun m => one_le_radialE_of_nat _) hdomain nmax
 
 end ContinuousFlexibility.Statements
