@@ -9,6 +9,8 @@ smaller than its geometric and finite-jet inputs.  The same width is used
 for an entire indexed family once those inputs have been bounded.
 -/
 
+noncomputable section
+
 namespace ContinuousFlexibility.Analysis
 
 def prescribedEndpointWidth (n : ℕ) (span ρ κ M Mslope m : ℝ) : ℝ :=
@@ -25,7 +27,9 @@ theorem prescribedEndpointWidth_margins
       ((n + 1 : ℕ) : ℝ) * M * δ ≤ κ / 2 ∧
       2 * Mslope * δ ≤ m / 2 := by
   let N : ℝ := ((n + 1 : ℕ) : ℝ)
-  have hN : 0 < N := by exact_mod_cast Nat.succ_pos n
+  have hN : 0 < N := by
+    change (0 : ℝ) < ((n + 1 : ℕ) : ℝ)
+    exact_mod_cast Nat.succ_pos n
   have hden : 0 < 4 * N * (M + 1) := by positivity
   have hmassden : 0 < 8 * (Mslope + 1) := by positivity
   let δ := prescribedEndpointWidth n span ρ κ M Mslope m

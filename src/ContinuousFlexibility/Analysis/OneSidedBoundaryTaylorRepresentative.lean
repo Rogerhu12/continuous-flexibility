@@ -74,7 +74,7 @@ theorem radialBoundaryJet_angleAffine_on_closedStrip
     simpa only [mixedDerivative, iteratedDeriv_zero] using hjet
   by_cases hj : j = 0
   · subst j
-    simpa only [radialBoundaryJet, iteratedDeriv_zero, if_pos rfl] using hslice
+    simpa only [radialBoundaryJet, iteratedDeriv_zero, if_pos rfl, ↓reduceIte] using hslice
   · rw [iteratedDeriv_const_add (Nat.pos_of_ne_zero hj) β,
       iteratedDeriv_const_mul_field] at hslice
     simpa only [radialBoundaryJet, if_neg hj, zero_add] using hslice
@@ -103,11 +103,12 @@ theorem oneSidedBoundaryTaylorRepresentative_lift
       oneSidedBoundaryTaylorRepresentative n c F (x, θ) + Real.pi := by
   have hdata (j : ℕ) (η : ℝ) :=
     radialBoundaryJet_angleAffine_on_closedStrip (α := 1) (β := Real.pi)
+      (τ := fun t : ℝ => t + Real.pi)
       hab hc hFc (contDiff_id.add contDiff_const)
       (fun r hr t => by simpa only [one_mul, add_comm] using he r hr t) j η
   apply boundaryTaylorPolynomial_period_add
   · intro η
-    simpa only [if_pos rfl, one_mul, add_comm] using hdata 0 η
+    simpa only [if_pos rfl, ↓reduceIte, one_mul, add_comm] using hdata 0 η
   · intro j hj _ η
     simpa only [if_neg (Nat.ne_of_gt hj), one_mul, zero_add] using hdata j η
 
