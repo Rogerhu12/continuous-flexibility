@@ -37,7 +37,7 @@ theorem N01Properties.endpointFlowCircle_derivative_decode
         (circleDerivativeLinear (hS.2.1 (3 / 4 : ℝ))
           (hN.endpointFlowCircle hS hT rsel hrsel z)) m θ =
       deriv (C.minusFlow (liftSectorParameter S C z) m (rsel m)) θ - 1 := by
-  have hz' := liftSectorParameter_mem_stateNeighborhood hz (le_refl ε)
+  have hz' := liftSectorParameter_mem_stateNeighborhood (C := C) hz (le_refl ε)
   have hflow := hN.2.2.2.2.2.2.1 (liftSectorParameter S C z) hz' m θ
   have hpos : 0 < deriv (C.minusFlow (liftSectorParameter S C z) m (rsel m)) θ :=
     ((hflow.2.2.2 (rsel m) (hrsel m))).1

@@ -77,6 +77,13 @@ end CircleModel
 
 section ActualReturn
 
+private theorem residualCircle_apply_zero_add
+    {E F : Type*} [AddZeroClass E]
+    (f : E → F) (a b : E) (ha : a = 0) :
+    f (a + b) = f b := by
+  exact congrArg f
+    ((congrArg (fun u : E => u + b) ha).trans (zero_add b))
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -137,7 +144,9 @@ theorem referenceStateConditions.sector_leftChart
       θ + (S.circle (3 / 4 : ℝ)).decode z.1.val.2.2.2 m θ := by
   change θ + (S.circle (3 / 4 : ℝ)).decode
     (C.referenceState.2.2.2 + z.1.val.2.2.2) m θ = _
-  rw [href.2.2.2.2.1, zero_add]
+  exact residualCircle_apply_zero_add
+    (fun e : CircleSpace S => θ + (S.circle (3 / 4 : ℝ)).decode e m θ)
+    C.referenceState.2.2.2 z.1.val.2.2.2 href.2.2.2.2.1
 
 def N01Properties.sectorReturnTransportCircle
     (hN : N01Properties D T S C base loss ε)
@@ -154,7 +163,7 @@ theorem N01Properties.sectorReturnTransportCircle_decode
     θ + (S.circle (3 / 4 : ℝ)).decode (hN.sectorReturnTransportCircle hS hT z) m θ =
       stateLeftChart S (liftSectorParameter S C z).1 m
         (C.minusReturnInverse (liftSectorParameter S C z) m θ) - C.travel m := by
-  have hz' := liftSectorParameter_mem_stateNeighborhood hz (le_refl ε)
+  have hz' := liftSectorParameter_mem_stateNeighborhood (C := C) hz (le_refl ε)
   have hs := hN.2.2.1.liftSectorParameter_sector z
   have hi := hN.2.2.2.2.2.2.2.2.1 (liftSectorParameter S C z) hz' hs
   have hl : ∀ j t, C.minusReturnInverse (liftSectorParameter S C z) j
