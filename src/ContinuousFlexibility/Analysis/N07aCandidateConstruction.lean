@@ -74,6 +74,40 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {b : ℕ} {B : CanonicalDomainData S K V b} {P : RelativeInverseData S K V b B}
   {base geometryLoss : ℕ} {ε : ℝ}
 
+private theorem n07a_candidate_reference_graph
+    (h05 : N05Properties D T S C K V b B)
+    (data : N07aActualCanonicalSolutionData D T S C L K V b B P base ε)
+    (z : CanonicalGeometry.Parameter S) (f : S.Source) :
+    N07aReferenceGraphRepresentation D S C K (data.U z f) :=
+  ⟨B.weakExponent, B.sourceMaterial, B.outputMaterial, data.referenceGraph h05 z f⟩
+
+private theorem n07a_candidate_normal_equation_family
+    (Ω : Set (CanonicalGeometry.Parameter S))
+    (U : CanonicalGeometry.Parameter S → S.Source → CanonicalUnknown S K)
+    (w : CanonicalGeometry.Parameter S → S.Source → ℕ → PolarPoint → ℝ)
+    (heq : ∀ z ∈ Ω, ∀ f m,
+      EqOn (mixedDerivative 2 0 (w z f m))
+        (n07aNormalRhs
+          (fun i => n07aNormalCoefficientFamily
+            (fun k z m => n07aPrincipalField K (liftSectorParameter S C z) m k)
+            (fun m => if K.positive m then -1 else 1) i z m)
+          (w z f m)
+          (n07aCanonicalSourceWithoutColumns D S C L K
+            (fun z f => n07aUnknownScalar (U z f)) z f m))
+        (canonicalOpen S K m)) :
+    ∀ z ∈ Ω, ∀ f, N07aActualNormalEquation D S C L K z (U z f) f (w z f) := by
+  intro z hz f m
+  exact heq z hz f m
+
+private theorem n07a_candidate_decode
+    (data : N07aActualCanonicalSolutionData D T S C L K V b B P base ε)
+    (hI : ∀ m, K.left m < K.right m) :
+    ∀ z (hz : z ∈ sectorNeighborhood S base ε ε) f m,
+      data.w z f m = n07aCanonicalSmoothDecode (hI m)
+        ⟨(data.U z f).1 m, data.regular z hz f m⟩ := by
+  intro z hz f m
+  exact data.decode z hz f m
+
 private theorem n07a_candidate_physical_family
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S)
@@ -100,19 +134,14 @@ private theorem n07a_candidate_physical_family
           (fun p => K.height (liftSectorParameter S C z) m p *
             data.w z f m (K.chart (liftSectorParameter S C z) m p))
           (physicalPieceOpen S K (liftSectorParameter S C z) m) := by
-  have hreference (z : CanonicalGeometry.Parameter S)
-      (_hz : z ∈ sectorNeighborhood S base ε ε) (f : S.Source) :
-      N07aReferenceGraphRepresentation D S C K (data.U z f) :=
-    ⟨B.weakExponent, B.sourceMaterial, B.outputMaterial, data.referenceGraph h05 z f⟩
-  have hnormal (z : CanonicalGeometry.Parameter S)
-      (hz : z ∈ sectorNeighborhood S base ε ε) (f : S.Source) :
-      N07aActualNormalEquation D S C L K z (data.U z f) f (data.w z f) := by
-    intro m
-    exact data.equation z hz f m
   exact n07a_exists_actualPhysicalSolutionFamily hD hT hS h01 h03 h04
     href hcur hcanonical h01.1.2.2.2.1 (sectorNeighborhood S base ε ε)
-    Subset.rfl data.U data.F data.relation data.regular hreference data.even
-    data.sourceAE data.w data.decode hnormal
+    Subset.rfl data.U data.F data.relation data.regular
+    (fun z _ f => n07a_candidate_reference_graph h05 data z f) data.even
+    data.sourceAE data.w
+    (n07a_candidate_decode data (fun m => (h04.1.referenceBounds m).2.1))
+    (n07a_candidate_normal_equation_family (sectorNeighborhood S base ε ε)
+      data.U data.w data.equation)
 
 private theorem n07a_candidate_reconstruction
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
