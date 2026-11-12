@@ -24,6 +24,12 @@ private theorem n07a_forward_bound_with_exists {α : Type*} {Condition : α → 
   obtain ⟨a, ha⟩ := h
   exact hP a ha
 
+private theorem n07a_first_jet_norm_bound_of_eq
+    {f g : PolarPoint → PolarPoint} {x : PolarPoint} {B b : ℝ}
+    (hfg : f = g) (h : ‖iteratedFDeriv ℝ 1 f x‖ ≤ B) (hB : B = b) :
+    ‖fderiv ℝ g x‖ ≤ b := by
+  simpa only [hfg, norm_iteratedFDeriv_one] using h.trans_eq hB
+
 private theorem n07a_absorb_half (v g a : ℝ) (hv : 0 ≤ v)
     (ha : a ≤ 1 / 2) (hb : v ≤ g + v * a) : v ≤ 2 * g := by
   have hsmall := mul_le_mul_of_nonneg_left ha hv
@@ -108,11 +114,10 @@ private theorem n07a_reference_forward_fderiv_of_jet (hε : 0 < ε)
     ∀ m x, x ∈ referencePhysicalPieceOpen S K m →
         ‖fderiv ℝ (K.chart (C.referenceState, 0) m) x‖ ≤ b m := by
   intro m x hx
-  have h := hbb 0 (n07a_forward_zero_parameter_mem hε) m x hx
-  rw [norm_iteratedFDeriv_one] at h
-  have heq := congrArg (fun q : AnnularState S × ℝ =>
-    ‖fderiv ℝ (K.chart q m) x‖) (n07a_forward_lift_zero_parameter (S := S) (C := C))
-  exact (heq.symm.le.trans h).trans_eq
+  exact n07a_first_jet_norm_bound_of_eq
+    (congrArg (fun q : AnnularState S × ℝ => K.chart q m)
+      (n07a_forward_lift_zero_parameter (S := S) (C := C)))
+    (hbb 0 (n07a_forward_zero_parameter_mem hε) m x hx)
     (n07a_forward_zero_grading_factor (S := S) (1 - 1 + d) (b m))
 
 private theorem n07a_reference_forward_fderiv_bound

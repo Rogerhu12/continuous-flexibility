@@ -124,7 +124,7 @@ theorem n07a_exists_referenceTransport_C1
         intro h
         exact hp ⟨by simpa only [Prod.fst_add, add_zero] using h.1, mem_univ _⟩
       exact (indicator_of_notMem hpπ F).trans (indicator_of_notMem hp F).symm
-  have hFe := n07bReferenceTransport_even hτe hqe hηe aL
+  have hFe := n07bReferenceTransport_even (S := S) hτe hqe hηe aL
   have hve : ∀ r θ, v (r, -θ) = v (r, θ) := by
     intro r θ
     by_cases hr : r ∈ radialCore D

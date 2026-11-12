@@ -174,7 +174,7 @@ theorem n07a_canonicalScalarColumns_finite_support
     have hlift := lift_n07aSectorParameterOfState h01.2.2.1 z hs
     apply hA.mem_toFinset.mpr
     refine ⟨ζ, hζ, K.inverseChart z m p, ?_, hj⟩
-    simpa only [hlift] using hx
+    simpa only [ζ, hlift] using hx
   rw [n07aScalarColumn_eq_canonicalSource]
   change K.height z m (K.inverseChart z m p) *
     n07aPhysicalScalarColumn D S C L z i (K.inverseChart z m p) /
