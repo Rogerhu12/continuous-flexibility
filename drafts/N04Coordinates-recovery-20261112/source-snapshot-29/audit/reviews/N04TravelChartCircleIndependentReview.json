@@ -1,0 +1,198 @@
+{
+  "kind": "actual_travel_chart_circle_independent_full_source_review",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/proof_inventory",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircleCandidateManifest.json",
+    "sha256": "f40c646c5facfe566078294eec21dff97a1fd4b07be91eb7c342934b69f6264e",
+    "blob": "618c1b9993b12ee145bca2d1a81f0537be32248a",
+    "lines": 133
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+    "blob": "104f0953d774e3a3d5c37d386952aeed75774f8f",
+    "sha256": "b7263767dc103093d832994c184503da11351aa3338fd1c06f682224c792b808",
+    "lines": 154
+  },
+  "direct_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircle.lean",
+      "sha256": "2c6be9ee3d6ce0f6ec4e5b15248718dca7085dae2dd80580dfd816943f10eb0a",
+      "blob": "fc11c89b2e92489890485acfcfe221f4ec47dd28",
+      "lines": 136,
+      "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralCircle.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MinusFirstIntegralCircle",
+      "selected_ref": "LOCAL_NEW_ACTUAL_MINUS_FIRST_INTEGRAL",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bActualTravelChart.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+      "sha256": "5c7da22817d01115c5837f791ed4ba939d9f097c5ad547cb4882d02e435fb30a",
+      "lines": 229,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowField",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsChart",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation",
+        "ContinuousFlexibility.Analysis.TravelStripInverseSymmetry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SpacesCircleParity",
+      "target_path": "src/ContinuousFlexibility/Analysis/SpacesCircleParity.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "d45ab137d1e034ac515a2453e4558164dbe4993b",
+      "sha256": "6728cc182b90bbb6fd091ac3151b759c16f85da485cae0f1bad59cdc5806bca7",
+      "lines": 278,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleJetEncoding",
+        "ContinuousFlexibility.Analysis.CylinderTestPairing",
+        "ContinuousFlexibility.Analysis.ProjectiveLimitSubspace"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameProductDirections",
+      "path": "src/ContinuousFlexibility/Analysis/TameProductDirections.lean",
+      "blob": "da7b331dbdf5958e0f9e2f18326085519ae35398",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "15f7e37725e1710ef8e56bb1e47a302afc070381b9a0fc5613345f6440f5f20f",
+      "lines": 48,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameJetLocalBounds",
+        "ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.WeightedSmoothTameLinear",
+      "target_path": "src/ContinuousFlexibility/Scalar/WeightedSmoothTameLinear.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "799b2f9eeeac80d4d73499ff158de8bb4446e6be",
+      "sha256": "9dd9dc230e2e00456a69f9f40c5698b04dbcbcf59e48ff96f23cfa23bf6d9025",
+      "lines": 82,
+      "imports": [
+        "ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra",
+        "ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations"
+      ]
+    }
+  ],
+  "additional_selected_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "lines": 124,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameElementaryCalculus.lean",
+      "blob": "bc38b3601334a7b76a3eda9f3602c4d3b2440423",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "8970cb3def322b3ecaf1d4c717754fc68f57d4a63d4ed82023a7d4fae5ac9b09",
+      "lines": 512,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveNewtonBridge",
+      "path": "src/ContinuousFlexibility/Analysis/SolveNewtonBridge.lean",
+      "blob": "af8c1aef7d93e7bfa47e87ae08272dfe46b0fa40",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "6f1c11fc500fee7b43ecf034f966e108f46feb38368ab517f9b8fb71b4cff07e",
+      "lines": 235,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameTransfer"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsChart",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bCharacteristicFirstIntegralsChart.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "ac9010e2c466bca6ebf4689f5b7e8e3582872b0a",
+      "sha256": "f42345b37796b09bd56f5b84d6df31220f88d80ccefdaf2ef785ca26012091c4",
+      "lines": 153,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsTransport",
+        "ContinuousFlexibility.Analysis.CharacteristicTravelStrip"
+      ]
+    }
+  ],
+  "prior_first_integral_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N04MinusFirstIntegralCircleIndependentReview.json",
+    "sha256": "13d86f28d16191e82fc6d9b0c84ffc70c452cd5e5d486e2f7d1f35ec979ffa1f",
+    "blob": "ec50633053f43589f5c9cdcd6aa89e5bf7fee1fb",
+    "lines": 204
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircleClosureInventory.json",
+    "blob": "873fe8b62ad8844ceecb10e97c7c8b0f5c462843",
+    "sha256": "d422f2d9dfd06aeb7f3892ac12526ce68081c4c696fe2c5b7092320eda701973",
+    "lines": 7088
+  },
+  "input_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircleReviewedManifest.json",
+    "blob": "3f55563e7b0a41a2aa4687bdaac094853434c856",
+    "sha256": "121c5b397c6ddb0bdbaaa98ad1884663d2e9e4197b28894446cee79427e95946",
+    "lines": 40
+  },
+  "read_scope": [
+    "Full154 source and exact direct-provider implementations: first-integral circle136, parity278, selected circle joint evaluation216, selected product directions48, weighted smooth-tame linear82, and actual travel-chart/characteristic first-integral definitions.",
+    "Selected SmoothDirectionsAffine124 read in full; actual solveSmoothDirectionsPostcomp, smoothDirectionsLinear, smoothDirectionsAdd and common SmoothTameOn contracts checked.",
+    "Every selected source/import identity in the516-module static inventory was independently reconstructed from its explicit local path or exact Git ref."
+  ],
+  "checks": [
+    "The actual minus first integral V and reflected U=-V(r,-theta) produce exactly the characteristic travel pair ((V-U)/2,(U+V)/2). Substituting the normalized circle decode V-(theta+t) into actual even/odd projection formulas gives (t+even displacement,theta+odd displacement), with the correct signs and factors1/2.",
+    "Both parity maps are the genuine continuous linear maps from the same CircleModel certificate and have the actual zero-loss tame estimates. The postcomposition SmoothTameOn theorem is applied with the true sector and circle seminorm topologies.",
+    "The vector tower chooses one underlying first-integral SmoothDirections J before any derivative order. Both parity projections are postcompositions of this same J; no independently selected towers or finite-order jet families are silently identified.",
+    "The constant radial term uses the selected compAffine contract x↦a+Lx with a=t,L=0. The actual circle affine-lift tower contributes theta+0 in the angular component. smoothDirectionsAdd and smoothDirectionsProd preserve the full derivative identities; congrOn transports only the exact pointwise equality on the actual open domain.",
+    "The sample H positivity used by the circle joint-evaluation provider comes from the actual material core membership theorem and IsMaterialData positivity. No E0 unit floor or material bound is assumed.",
+    "The stored atlas adapter unfolds the genuine n04bActualTravelChart and uses the explicit literal L.minusFlow=returnCorrectedMinusFlow identity. It does not infer that identity from an arbitrary cumulative N03 witness.",
+    "All516 selected source hashes/line counts/import lists match. The reachable set and topological order reproduce the inventory exactly, with no missing project import or cycle. The gzip decompresses exactly to the frozen inventory. All five new explicitly qualified declarations occur only in this selected source.",
+    "The selected graph contains held main/cohort/gateway ports and therefore remains uncompiled. A static import graph is not a proof of type compatibility."
+  ],
+  "static_checks": {
+    "source_bytes_verified": true,
+    "selected_source_count": 516,
+    "missing_imports": [],
+    "cycles": [],
+    "topological_order_exact": true,
+    "gzip_exact": true,
+    "five_explicit_public_names_unique": true,
+    "resource_options_added": false
+  },
+  "scope_limits": [
+    "The selector radius is fixed. No radial mixed derivatives, moving inverse composition, material/sample growth or complete CurrentJets is asserted.",
+    "The literal corrected-flow identity must be retained by the actual constructor before using the final stored-field adapter.",
+    "No source modification, compiler/elaborator, CI query/download, active checkout/index/ref/checkpoint or authority mutation occurred."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T16:20:15.314658+00:00"
+}

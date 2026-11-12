@@ -1,0 +1,104 @@
+{
+  "kind": "independent_full_source_actual_same_displayed_reference_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedFamilyCandidateManifest.json",
+    "sha256": "4c8dde06aec0d46e49f70f4301239875a6cb8cdb650698daa5e2ab0a60e455b9",
+    "blob": "e482d4b64dde8dd3746f157607b765619b1a842c",
+    "lines": 98
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedFamily.lean",
+    "sha256": "5451e514fc3df2dd89dcd7bfc445abfa8b4c7d8fd46b88095c1ea17fe7cf54f2",
+    "blob": "3c7c8581ea7cbeeb80abd7ed67e23c61860f7f93",
+    "lines": 110
+  },
+  "actual_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+      "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+      "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+      "lines": 56
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean",
+      "sha256": "5f21c6b32b0c9241fb560d286690cb93199e0365a9d1314af1c8daab943f4368",
+      "blob": "9bd8135577563874f4fa614e1af047afd9982d94",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJets.lean",
+      "sha256": "357a6cd2b43e441c8fa7f495277b405545250abc4bdd17fe0b8073c5b11c2807",
+      "blob": "68fb6e0caf22c3154fbc316c22780f4dcbd9b643",
+      "lines": 165
+    }
+  ],
+  "provider_reviews_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamilyReviewedManifest.json",
+      "sha256": "5fff12bfcf721722076f03f62f6d7a9e857334f4bc9815f34713c3b8036724a0",
+      "blob": "88db7df2968207204fc34b4eb623f8af1ce1a736",
+      "lines": 31
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribedReviewedManifest.json",
+      "sha256": "88c24fa2bb912bee35a1adab5b4104e70337129ae6202fe9341610e83f5f7c84",
+      "blob": "ceee3caed4a6e0268e724199643558654534712f",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+      "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+      "blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+      "lines": 74
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJetsReviewedManifest.json",
+      "sha256": "2c794fb62da3a3298f6672675efed5ecc18b311e3898c1bcdd33ffd3ebe7d438",
+      "blob": "78ceab26410cfb77b8202dde6c13f97412165078",
+      "lines": 45
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "2c0359a48d72cf1d299fe1aa55afd4ff9e08c978f1450c24838733e889ea5cf9",
+      "blob": "24c481db3520705d623302527da7aa10727989d6",
+      "lines": 46
+    }
+  ],
+  "pinned_mathlib_providers_verified": [],
+  "read_scope": [
+    "Full110 candidate and complete candidate manifest.",
+    "Full56 actual reference-family definition and full148 prescribed factory.",
+    "Actual allOrder165 finite certificate and endpoint source160 output field order; the paired principal194 same-function construction."
+  ],
+  "checks": [
+    "Read all110 lines and full56 N04PositiveReferenceFamily definition. Its three fields are exactly range geometry, coordinate full endpoint jets, and height full endpoint jets through n+1.",
+    "The supplied actual cell/hcell and endpoint sources feed hfinite at that same cell. No new C0/B, width, coordinate, height or qualitative reference family is chosen.",
+    "Actual source160 supplies all smoothness, endpoint membership, radiality and endpoint value hypotheses; the original hfinite supplies positive slope/height and both finite jet bounds.",
+    "Prescribed148 returns the displayed Y/H and the exact three required fields. Endpoint orientation is definitionally n04PositiveEndpoint side = if side then right else left.",
+    "At n=3 the certificate has precisely order4, suitable for the existing actual geometry/transmission assembly. It does not assert more than finite endpoint matching.",
+    "C0/B positivity need not be added: the consumed hfinite already proves U>=1 at each actual sample. The original material datum is unchanged.",
+    "Source/provider/review identities match, public name is absent from active src, and no forbidden proof primitive or resource increase is present."
+  ],
+  "scope_limits": [
+    "The same original finite-data certificate is a genuine intermediate producer output, not a final principal or reference-jet target inserted as an assumption.",
+    "The retained P/Gamma and the real raw optical/host inputs remain separate construction obligations; no such certificate is projected from arbitrary Through03.",
+    "The material datum is fixed before the atlas and displayed family; no identification of independently chosen existential families is made.",
+    "Static independent review only. No local compiler or CI claim; active sources, index and refs are untouched."
+  ],
+  "reviewer": "/root",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:12:01.688405+00:00"
+}

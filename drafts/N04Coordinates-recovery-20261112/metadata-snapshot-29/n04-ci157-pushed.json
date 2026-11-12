@@ -1,0 +1,24 @@
+{
+  "label": 157,
+  "head": "f44526b34baa27e45b8d32fe20d27deb52d24a80",
+  "tree": "83843ffdcc1539971cdedad2ba36e935da0ad729",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "pushed": "2026-11-12 16:21:25 UTC",
+  "first_check_not_before": "2026-11-12 16:26:25 UTC",
+  "status": "pending",
+  "plan": "n04-ci157-plan.json",
+  "source_total": 4211,
+  "source_all_total": 4215,
+  "root_imports": 4152,
+  "added_lean_since_full_green": 3279,
+  "repair_files": 1,
+  "scope": "Independently reviewed opaque index/radius transport around the sole remaining positive source rewrite. Same complete root certificate, functions, witnesses and public contracts; all previously passed proof layers and default limits retained. Main source integration remains held for complete CI."
+}

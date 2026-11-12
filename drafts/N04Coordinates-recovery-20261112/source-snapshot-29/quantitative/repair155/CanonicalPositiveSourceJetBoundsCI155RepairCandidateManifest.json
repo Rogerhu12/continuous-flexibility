@@ -1,0 +1,133 @@
+{
+  "kind": "ci155_positive_source_root_family_abstraction_repair",
+  "status": "CANDIDATE_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "owner": "/root/quantitative_route",
+  "actual_base": {
+    "head": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+    "tree": "93221bdfea014a7ed555112fe6f2cf136d94df35",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "aa9836ed56d325eba1ee90e89e74242ab7a7d94f36f8a502f6308ac8af834269",
+    "blob": "1ccbe0cacdfd56f116580b61f27310ea65636ceb",
+    "lines": 288
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.base.lean.txt",
+    "sha256": "b3b094eb8b3ebb7657b016c5ecdd785f5ab2ee4240c678273592222e36f332da",
+    "blob": "fef324c95be64fdf45018ba2255201c88b6ae81b",
+    "lines": 216
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.diff",
+    "sha256": "f8eca4d2459e2bf9d587b146f6002f949124584d64dbec800525ac8957275174",
+    "blob": "aee440aa3ccf250eea964e22e5b780d2e36d3080",
+    "lines": 259
+  },
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-155.log",
+    "sha256": "510a7244495ca5797baf1edd197dbbaf86d2397addda15f0625c3a6c046b40dd",
+    "blob": "f20d64c1ba28de00f74d0070e3eee1102bc7b50e",
+    "lines": 737
+  },
+  "diagnostics": [
+    {
+      "line": 95,
+      "column": 6,
+      "message": "default200000 isDefEq timeout when destructing the relative family existence inside the dependent positive-source Option.some branch"
+    },
+    {
+      "line": 143,
+      "column": 0,
+      "message": "default200000 whnf timeout in the public common-positive-source declaration"
+    },
+    {
+      "line": 191,
+      "column": 8,
+      "message": "unknown main theorem constant cascade after the preceding failed declaration"
+    }
+  ],
+  "observed_progress": "CI155 compiled shared40 and actual finite factory135. Only this source file failed; no full-green status is asserted.",
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+      "sha256": "96aa947744c65d39484564c8d63c8e56f31f1b4103a2e2ebe88d9a3f1908ebdf",
+      "blob": "0dc0308b5f440e5a5e0dd37af47de32d6aba250b",
+      "lines": 268
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ActualRootGeometry.lean",
+      "sha256": "df838bf216d8d2f594b6b1b27587fdab83bf622658925a03268b25f8c7f18d05",
+      "blob": "309106cea183b863c056a9c150aea5a6f688252d",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceInteriorDivision.lean",
+      "sha256": "419ee0ece8c8be0607908d18399ba8f9342f897b3d9951afef665c5ece5ebd4d",
+      "blob": "1578500670d565ad7ddd08d0345ae0fea8179346",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+      "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+      "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "lines": 187
+    }
+  ],
+  "previous_exact_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI154CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "8e6f56484f231f6b221394c1067ad0855573067a745e00b8d638a7db6361101a",
+    "blob": "97c6abccb990558ed6713b9182f0ec4202da5113",
+    "lines": 150
+  },
+  "change_summary": [
+    "A private combiner over arbitrary seminorm grading and opaque real functions F/q performs the original loss enlargement and bound multiplication without S/C/K/positive-source context.",
+    "A separate fixed-negative-root declaration obtains actual relative/height certificates using explicitly typed Classical.choose/spec before any dependent positive-source elimination. It uses the original max bases/losses, minimum radius and Q(k)=1+A(k)+B(k).",
+    "The Option helper consumes complete RootEndpointTameJetBounds certificates. None is the true identity/height-one; Some uses the same opposite root, original cutPair fields and certified endpoint equality. One Bool transport moves the complete certificate.",
+    "A private declaration combines the two genuine common-family existentials and the original two-side sum, with no hN/hA/hB/hfield or actual producer applications in its context. Public main is one exact application to the existing producers.",
+    "Four complete public declarations/headers, initial structure/mono/identity block, final actual-atlas proof, imports and options are unchanged. No resource limit, geometry, source field or derivative order is modified."
+  ],
+  "static_checks": {
+    "base_exact_actual_head": true,
+    "four_public_headers_unchanged": true,
+    "structure_mono_identity_prefix_exact": true,
+    "actual_atlas_tail_exact": true,
+    "imports_options_exact": true,
+    "same_max_base_loss_min_radius": true,
+    "same_Q_one_plus_A_plus_B": true,
+    "same_two_side_sum": true,
+    "opposite_root_single_Bool_transport": true,
+    "project_closure_modules": 755,
+    "missing_project_imports": [],
+    "project_import_cycles": [],
+    "added_lines": 147,
+    "deleted_lines": 75,
+    "default_resource_limits_unchanged": true
+  },
+  "scope_limits": [
+    "Static inspection only; next CI must verify actual elaboration/performance under default budgets.",
+    "Still componentwise numerical source jets, not uniform E0 or SmoothDirections.",
+    "No local compiler/elaborator, CI query/download, active source/index/ref/CP writes."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:01:10.695037+00:00"
+}

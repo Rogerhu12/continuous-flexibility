@@ -1,0 +1,72 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48/N02N03FixedWitnessConstruction.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.lean
+@@ -5,16 +5,13 @@
+ import ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood
+ 
+ /-!
+-# N02 and N03 on the given N01 witness
++# Retain the actual correction in the fixed N01 construction
+ 
+-The reference, material data, physical spaces, and control geometry remain
+-fixed throughout the actual correction construction. This extracts the
+-analysis proof from the N02N03 blueprint without importing that node.
+-Only the common base and radius are restricted; the new return and
+-correction records belong to these same input spaces and geometry.
+-
+-This candidate targets the exact c5c48 N01 contract. Its flow-loss clause
+-has not been reconciled with the later parameter-order N01c interface.
++The same N02/N03 construction retains its selected cutoff family, its
++actual corrected coefficients and minus flow, and the true cutoff support
++and material derivative data. These identities connect the constructed
++return record to the directional towers of its actual corrected flow.
++The reference, material data, physical spaces and control geometry stay fixed.
+ -/
+ 
+ noncomputable section
+@@ -24,18 +21,28 @@
+ open Set Filter ContinuousFlexibility.Analysis
+ open scoped Topology ContDiff
+ 
+-local instance n02n03FixedWitnessStateSMul (S : PhysicalSpacesData) :
++local instance n04FixedCorrectionStateSMul (S : PhysicalSpacesData) :
+     SMul ℝ (AnnularState S) := Prod.instSMul
+ 
+-theorem N01Properties.exists_through03_fixedWitness
++theorem N01Properties.n04_exists_through03_preserving_correction
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
+     ∃ R : ReturnEquationData S, ∃ L : ReturnCorrectionData S,
+-      ∃ base' : ℕ, ∃ ε' : ℝ,
++      ∃ χ : ℕ → ℝ → ℝ, ∃ cell : ℕ → ℕ, ∃ base' : ℕ, ∃ ε' : ℝ,
+         base ≤ base' ∧ 0 < ε' ∧ ε' ≤ ε ∧
+-          NonlinearPropertiesThrough03 D T S C R L base' loss ε' := by
++          NonlinearPropertiesThrough03 D T S C R L base' loss ε' ∧
++          L.coefficients = returnCorrectedCoefficients D S C χ ∧
++          L.minusFlow = returnCorrectedMinusFlow S C χ ∧
++          (∀ m, ContDiff ℝ ∞ (χ m)) ∧
++          (∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1) ∧
++          (∀ m, Function.support (deriv (χ m)) ⊆ Ioo (C.left m) (C.right m)) ∧
++          (∀ m, χ m =ᶠ[𝓝 (C.left m)] (fun _ => 0) ∧
++            χ m =ᶠ[𝓝 (C.right m)] (fun _ => 1)) ∧
++          (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (cell m)) ∧
++          (∀ k : ℕ, ∃ B Q : ℝ, 0 ≤ B ∧ 0 ≤ Q ∧ ∀ m r,
++            |iteratedDeriv k (χ m) r| ≤ B * radialE (D.cellIndex (cell m)) ^ Q) := by
+   classical
+   obtain ⟨base', ε', χ, hbase, hε', hε'ε, hN', hχdata, hendData, hcollar,
+     hdiscFull, hcorrected, _, hflow⟩ :=
+@@ -101,8 +108,10 @@
+         returnCorrectionResidualErrorField D S C R χ z ρ η p := by
+     intro z hz hs ρ η p
+     simpa only [physicalSourceDecode_apply] using hE z hz hs ρ η p
+-  obtain ⟨L, _, hL⟩ := hN'.exists_returnCorrection_of_smoothTame_source hR hS hT
+-    χ hχ hχrange hsupp hend hdiscFull hcorrected E hE' htame
+-  exact ⟨R, L, base', ε', hbase, hε', hε'ε, ⟨⟨hN', hR⟩, hL⟩⟩
++  obtain ⟨L, hLcoefficients, hLminusFlow, _hLerror, hL⟩ :=
++    hN'.n04_exists_returnCorrection_preserving_fields hR hS hT
++      χ hχ hχrange hsupp hend hdiscFull hcorrected E hE' htame
++  exact ⟨R, L, χ, j, base', ε', hbase, hε', hε'ε, ⟨⟨hN', hR⟩, hL⟩,
++    hLcoefficients, hLminusFlow, hχ, hχrange, hsupp, hend, hcell, hcutoff⟩
+ 
+ end ContinuousFlexibility.Statements

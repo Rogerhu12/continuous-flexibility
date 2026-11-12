@@ -1,0 +1,142 @@
+{
+  "kind": "same_supplied_reference_family_geometry_independent_complete_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_complete_static_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometry.lean",
+    "sha256": "0149ea39b3c238e96b6c6c3e3203980aff50a23252ff545c15be3734af6e861a",
+    "blob": "daf1563b64c415747f3ed2e1cdc774a2eb5ba14f",
+    "lines": 134
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometryCandidateManifest.json",
+    "sha256": "a5c0784a3666c3a2f6877d64ea1149c949a770fb234b1ce11e1266e2f921d7be",
+    "blob": "d1489d975eae247162188f18bf6ebc9e94f77efe",
+    "lines": 63
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometry.diff",
+    "sha256": "28ba15d5accac0d2c292218690e4d4da1db43e05ac00f54f076fda9e968efd30",
+    "blob": "a06f24fa576a967b2cc165edc276f0ded7331d35",
+    "lines": 66
+  },
+  "original_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometry.lean",
+    "sha256": "7950378d98e44658a560dd61196b6fc7c18cdf913bead17b515bebf73162abe4",
+    "blob": "c0a923a761357bfcb72f507a2b9906cc6221f45e",
+    "lines": 137
+  },
+  "original_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalActualReferenceGeometryIndependentReview.json",
+    "sha256": "805165af5976034f29f296d8ddad11cda01fc1d7353859b79386470172b9da7c",
+    "blob": "243a62f2678a971f084fd1d154b237124a1f242a",
+    "lines": 110
+  },
+  "family_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+    "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+    "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+    "lines": 56
+  },
+  "constructive_family_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedFamily.lean",
+    "sha256": "5451e514fc3df2dd89dcd7bfc445abfa8b4c7d8fd46b88095c1ea17fe7cf54f2",
+    "blob": "3c7c8581ea7cbeeb80abd7ed67e23c61860f7f93",
+    "lines": 110
+  },
+  "constructive_family_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualPositiveReferencePrescribedFamilyIndependentReview.json",
+    "sha256": "c1318f6a7630578cb44536cc31c1cb26c89e1175de67185ddcade72e6df85aed",
+    "blob": "fcf2db26f919142ce5c8a7b6ee610d4abd7aa10a",
+    "lines": 104
+  },
+  "actual_provider_identities": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+      "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+      "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+      "lines": 56
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalFixedPositiveFamily.lean",
+      "sha256": "c40e1c6d652b0044329ba6ac362cab26cc0f3aad3551b82394ddf04775f16196",
+      "blob": "4cb0f979dcfe47dd1a186b356964a72f6ed6e9df",
+      "lines": 129
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasRestrictedGeometry.lean",
+      "sha256": "29c43eb81d8250a000e3b9c0b217672afb2be922736cf5a183bf025e18a4ccef",
+      "blob": "28407ce18ea7eabac9bbe62345fb9df591fd7b16",
+      "lines": 154
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasGeometry.lean",
+      "sha256": "41ac14bc8261391998aeb4e6d2c290171bba36baea4dec40a665449fa72c8299",
+      "blob": "e349394e51c8caef8a751f9b4e6c4900f13f8d0d",
+      "lines": 163
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/reference-gauge-restriction/WholeReferenceGaugeAtlasCutOperator.lean",
+      "sha256": "71427dd3175ca9dcd9cdcc8de5ce4216f998587db175fdf55c74d24a5332ac01",
+      "blob": "14acbf9b59c2fd57da53b0d7e0290c43f649331c",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeReferenceRadial.lean",
+      "sha256": "9c4fad098b505486080c3def2c38082db38c7655d857b95b8de1549f2b8596d8",
+      "blob": "4fb8973a3fbe0b887088e2d297b5ff0cb9cfd11d",
+      "lines": 138
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmission.lean",
+      "sha256": "e7db7456fa5221cfd2d9005a2dc1c88eb4cf3a775e5451518f2429b9b71ff100",
+      "blob": "706d01f4aaf9bc87b63313e16292f0528678aff5",
+      "lines": 110
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransport.lean",
+      "sha256": "17179bac21aa6863d3a35ec282d4e0420ca30d6444312149df3d06d78eae5f23",
+      "blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+      "lines": 97
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalGlobalReferenceAgreement.lean",
+      "sha256": "6fe479b284d9e6cbd0a0910769da46e84daaeee1403555cb9183df4103eb14bb",
+      "blob": "c483dce90a644173c39eb795d86c8c6033654529",
+      "lines": 218
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "sha256": "b0f9f540c1d8bcdf0e5414b487f15df378e3b36e369697c012f8bc28bbba892c",
+      "blob": "118c0019a784242b74c880166ee4dedc43e1dede",
+      "lines": 146
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualWholeGeometry.lean",
+      "sha256": "b2e32adec83f1d401687f8365ecc59e16a99fa5a4abcbf138d3595f9bd7dffea",
+      "blob": "d82f602e7088470fbfc9c9f05f38f4d6432fc824",
+      "lines": 109
+    }
+  ],
+  "unchanged_public_headers_current_restricted_provider": [
+    "n04WholeCanonicalAtlasData_actual_geometry_restricted",
+    "n04WholeCanonicalAtlasData_actual_cutOperator_restricted"
+  ],
+  "checks": [
+    "Read all134 candidate lines, all137 original lines and the complete exact diff. The proof from the relative-family obtain through the final line is byte-identical after removing Y/H/reference from its returned tuple. The only former qualitative reference-family choice is removed.",
+    "The input N04PositiveReferenceFamily has the exact same original actual K and endpoint source family at order4. Its range geometry and both full endpoint-jet clauses are used directly. Constructive prescribed110 supplies this exact predicate at n=3 without any new reference choice.",
+    "The actual fixed-relative-family129 output is unpacked as common base/radius, six controls, matching and reference identity. Its canonical raw chart is sigma, inverse is tau and height is inverse Q composed with sigma; these orientations agree with W and V.",
+    "Read the actual restricted-geometry/cut, gauge-geometry, selected restricted cut/source, radiality, transmission and global-gauge transfer contracts. They all preserve original K while restricting only the state neighborhood; the chosen newBase and epsilon-prime are not used to reconstruct the negative atlas.",
+    "Reference order4 restricts to the exact order<=1 requested by actual transmission110, while relative matching stays degree3 and uses its actual displayed Jacobian lower and exp(2) height upper. Neither endpoint source nor reference fields change.",
+    "For global transport, stateNeighborhood_mono supplies validity in the original neighborhood. The exact same matching at the smaller neighborhood supplies the true global C3 selector; gauge cancellation uses the supplied range left inverse, matching left inverse and globally positive supplied reference height.",
+    "The caller-fixed Y/H determine every psi/chi/h0/V occurrence and remain unchanged in all geometry, cut/source, radiality, transmission and global outputs. No support-flatness or unit-height property of the supplied reference family is inserted.",
+    "The active restricted-geometry provider is the later147 repair with unchanged two full public headers, explicitly bound here. The historical137 source/review remains intact. All current and historical source/manifest identities were recomputed."
+  ],
+  "scope_limits": [
+    "This is the actual qualitative geometry assembly on an already supplied finite reference family. Material costs of its relative controls and parameter/current towers are still separate obligations.",
+    "The actual supplied family can be the same displayed material family; this theorem does not itself prove that family numerical data or assume its final primitive estimates.",
+    "No Lean compilation, CI action, resource change, source edit or active checkout/index/ref modification was performed."
+  ],
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:14:45.038212+00:00"
+}

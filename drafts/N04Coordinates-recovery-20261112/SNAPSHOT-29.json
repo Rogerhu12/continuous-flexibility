@@ -1,0 +1,122 @@
+{
+  "snapshot": 29,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "bda0a6089d1a12995a2502c3a3f93ee9444b30dd",
+  "additional_parents": [
+    "03e526021c371413f03fc0ce052476b63e105361"
+  ],
+  "base_tree": "88cb3441ff8dbc1c07b5e7cb56479a53901df5a4",
+  "compiled_baseline": "03e526021c371413f03fc0ce052476b63e105361",
+  "line_head": "f44526b34baa27e45b8d32fe20d27deb52d24a80",
+  "line_tree": "83843ffdcc1539971cdedad2ba36e935da0ad729",
+  "frozen_at": "2026-11-12T16:23:34.931572+00:00",
+  "indexed_files": 2581,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeHostMaterialSamples.lean",
+      "sha256": "b2619246dbb66548907155805acab44c75e0b54bcff2726d6d8afe9c1221571a",
+      "lines": 90
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+      "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+      "lines": 137
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJets.lean",
+      "sha256": "a539b4ccf54410a7db50a43cf4b708c41d840820a3b7e5e9c107b36ba6867ecb",
+      "lines": 239
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04MinusFirstIntegralMixedJets.lean",
+      "sha256": "8d53fcc78eb0c9a752a26562094c50e0a15085d028692054b6de32d3d9478bbc",
+      "lines": 82
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+      "sha256": "b7263767dc103093d832994c184503da11351aa3338fd1c06f682224c792b808",
+      "lines": 154
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedFamily.lean",
+      "sha256": "5451e514fc3df2dd89dcd7bfc445abfa8b4c7d8fd46b88095c1ea17fe7cf54f2",
+      "lines": 110
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalAssembly.lean",
+      "sha256": "d6e96fa76c5638d8894bdead907acc0d212beb54b1fceec9e9d35724e1976d3a",
+      "lines": 134
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalMaterialCost.lean",
+      "sha256": "1f3198433fddcb8aa95c50fe396055d5e69fdde24803291a9c7765f021bbfea6",
+      "lines": 194
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+      "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+      "lines": 103
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBounds.lean",
+      "sha256": "74a5f486c095cd171fbb56c0270827cd89c7616aaa1f86fc701ba5e4e466a127",
+      "lines": 309
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.lean",
+      "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+      "lines": 206
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.lean",
+      "sha256": "cf0ef6b6b5df83bfe4214f4540ad949e0d95731d92bc65b931e81c6425360bd0",
+      "lines": 117
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometry.lean",
+      "sha256": "0149ea39b3c238e96b6c6c3e3203980aff50a23252ff545c15be3734af6e861a",
+      "lines": 134
+    }
+  ],
+  "new_source_lines": 2009,
+  "existing_added_lean_from_compiled_baseline146": 8142,
+  "projected_added_lean_from_compiled_baseline146": 10151,
+  "compressed_diagnostics": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircleClosureInventory.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-29/positive/reconstructed/N04TravelChartCircleClosureInventory.json.storage.gz",
+      "uncompressed_sha256": "d422f2d9dfd06aeb7f3892ac12526ce68081c4c696fe2c5b7092320eda701973",
+      "uncompressed_bytes": 332621,
+      "gzip_bytes": 59975,
+      "blob": "11f87b169cd72ef2907a395660cc62d7f7dff0ce"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedCorrectionWitnessSelectedMainGraph.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-29/positive/recovery/reviews/N04PreservedCorrectionWitnessSelectedMainGraph.json.storage.gz",
+      "uncompressed_sha256": "0b6f69f407388f9de5d2b95735ee6a1a17bcf857418adb21c1be5400696eb379",
+      "uncompressed_bytes": 477813,
+      "gzip_bytes": 85635,
+      "blob": "a2a6f70eb8f4b5b568d053228ff43bbb4c0d7f3b"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9BoundedIntegrationBatchProposalCI155.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-29/positive/upstream-main-c9/MainC9BoundedIntegrationBatchProposalCI155.json.storage.gz",
+      "uncompressed_sha256": "3d4897a11c85b1601f624161a61d38f1633aff3a388ff1fdc90812aec9e757c1",
+      "uncompressed_bytes": 520607,
+      "gzip_bytes": 69087,
+      "blob": "bd2926fa55de9247615725b7b46e118c83917a80"
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9SelectedFullTreePublicScanCI155Draft.json",
+      "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-29/positive/upstream-main-c9/MainC9SelectedFullTreePublicScanCI155Draft.json.storage.gz",
+      "uncompressed_sha256": "f6d0e10b423a97c5c8cef952087db88841f1ba8728e5226e45cf7ba81718b16f",
+      "uncompressed_bytes": 5500524,
+      "gzip_bytes": 950769,
+      "blob": "08a76eeecde0dc12a68abb9c1eb115ab52b1de6e"
+    }
+  ],
+  "compression_note": "Lossless gzip for large JSON diagnostics; original source SHA256 and restore behavior preserved. Lean sources remain uncompressed. Binary gzip copies are also preserved exactly.",
+  "prior_versions": "All historical source versions remain immutable and reachable through the backup parent and exact SOURCE-INDEX locations.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 632
+}

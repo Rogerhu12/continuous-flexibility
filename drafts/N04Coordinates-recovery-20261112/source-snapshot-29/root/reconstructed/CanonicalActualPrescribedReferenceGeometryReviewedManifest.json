@@ -1,0 +1,33 @@
+{
+  "kind": "actual_geometry_on_same_prescribed_reference_family_reviewed_manifest",
+  "owner": "/root",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometry.lean",
+    "sha256": "0149ea39b3c238e96b6c6c3e3203980aff50a23252ff545c15be3734af6e861a",
+    "blob": "daf1563b64c415747f3ed2e1cdc774a2eb5ba14f",
+    "lines": 134
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometryCandidateManifest.json",
+    "sha256": "a5c0784a3666c3a2f6877d64ea1149c949a770fb234b1ce11e1266e2f921d7be",
+    "blob": "d1489d975eae247162188f18bf6ebc9e94f77efe",
+    "lines": 63
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CanonicalActualPrescribedReferenceGeometryIndependentReview.json",
+    "sha256": "8c84bd988c499bd3f2b71661e336ca6038a59af6fd85275674e0e254459c1537",
+    "blob": "07cd2e0e169e0710aa775af8d1e8d4c13528844c",
+    "lines": 142
+  },
+  "original_source_preserved": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometry.lean",
+    "sha256": "7950378d98e44658a560dd61196b6fc7c18cdf913bead17b515bebf73162abe4",
+    "blob": "c0a923a761357bfcb72f507a2b9906cc6221f45e",
+    "lines": 137
+  },
+  "scope": "The supplied actual order4 reference family is retained in the same V throughout all original geometry/cut/source/radial/transmission/global-transport conclusions. The relative controls and common state neighborhood alone are selected.",
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T16:15:46.628080+00:00"
+}

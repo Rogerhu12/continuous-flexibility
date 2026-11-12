@@ -1,0 +1,63 @@
+{
+  "kind": "actual_geometry_on_same_prescribed_reference_family",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "owner": "/root",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometry.lean",
+    "sha256": "0149ea39b3c238e96b6c6c3e3203980aff50a23252ff545c15be3734af6e861a",
+    "blob": "daf1563b64c415747f3ed2e1cdc774a2eb5ba14f",
+    "lines": 134
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometry.diff",
+    "sha256": "28ba15d5accac0d2c292218690e4d4da1db43e05ac00f54f076fda9e968efd30",
+    "blob": "a06f24fa576a967b2cc165edc276f0ded7331d35",
+    "lines": 66
+  },
+  "public_names": [
+    "n04Coordinates_actual_reference_geometry_of_prescribed_family"
+  ],
+  "original_reviewed_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometry.lean",
+    "sha256": "7950378d98e44658a560dd61196b6fc7c18cdf913bead17b515bebf73162abe4",
+    "blob": "c0a923a761357bfcb72f507a2b9906cc6221f45e",
+    "lines": 137
+  },
+  "original_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometryReviewedManifest.json",
+    "sha256": "b24c25236d45604fe1ee6a5cb903de0dc830c6dc1f5beb30b848ade9738d3516",
+    "blob": "bcab895ffedc018fb3fbc65810f25c7eef49aa56",
+    "lines": 23
+  },
+  "same_family_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+    "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+    "blob": "0a0206739fd3b542d87723155b08504317d2562e",
+    "lines": 56
+  },
+  "constructive_family_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrescribedFamily.lean",
+    "sha256": "5451e514fc3df2dd89dcd7bfc445abfa8b4c7d8fd46b88095c1ea17fe7cf54f2",
+    "blob": "3c7c8581ea7cbeeb80abd7ed67e23c61860f7f93",
+    "lines": 110
+  },
+  "constructive_family_peer": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualPositiveReferencePrescribedFamilyIndependentReview.json",
+    "sha256": "c1318f6a7630578cb44536cc31c1cb26c89e1175de67185ddcade72e6df85aed",
+    "blob": "fcf2db26f919142ce5c8a7b6ee610d4abd7aa10a",
+    "lines": 104
+  },
+  "checks": [
+    "The entire original geometry proof after its qualitative Y/H choice is byte-identical except for removing Y/H/hreference from the returned existential tuple.",
+    "The input is exactly N04PositiveReferenceFamily for the actual typed atlas, original sources and order4. The supplied Y/H determine every occurrence of psi/chi/h0/V.",
+    "Only actual relative transport controls and the common neighborhood are chosen. No reference family, material data, endpoint source or negative atlas is replaced.",
+    "All seven original outputs, including genuine forward transmission and global relative transport, are retained for the same V.",
+    "The original137 source and its independent review remain unchanged. This is a new reusable input-family adapter, not a claimed proof of the final target."
+  ],
+  "scope_limits": [
+    "The same-family reference numerical jets and current parameter towers remain separate obligations.",
+    "Static construction only, no compiler/CI/active/index/ref action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:12:42.712462+00:00"
+}

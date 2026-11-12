@@ -1,0 +1,55 @@
+{
+  "kind": "lossless_preservation_of_large_readonly_source_inventories",
+  "status": "EXACT_BYTES_COMPRESSED_ORIGINALS_RETAINED",
+  "files": [
+    {
+      "original": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9SelectedFullTreePublicScanCI155Draft.json",
+        "sha256": "f6d0e10b423a97c5c8cef952087db88841f1ba8728e5226e45cf7ba81718b16f",
+        "blob": "a81b50320360e0b8b9ebafac9f8ed9720982227c",
+        "bytes": 5500524,
+        "lines": 116565
+      },
+      "lossless_gzip": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9SelectedFullTreePublicScanCI155Draft.json.gz",
+        "sha256": "744bd92356a9e9acef8dffd3651409f803646e895ce3b7ed61062bff6c5e404f",
+        "blob": "08a76eeecde0dc12a68abb9c1eb115ab52b1de6e",
+        "bytes": 950769,
+        "lines": 6805
+      },
+      "recovery": "gzip.decompress restores the exact original UTF-8 bytes including trailing newline."
+    },
+    {
+      "original": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9BoundedIntegrationBatchProposalCI155.json",
+        "sha256": "3d4897a11c85b1601f624161a61d38f1633aff3a388ff1fdc90812aec9e757c1",
+        "blob": "b87153f6e7d7f2db1b79c04c2d1f1a5eeed8ae94",
+        "bytes": 520607,
+        "lines": 11536
+      },
+      "lossless_gzip": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9BoundedIntegrationBatchProposalCI155.json.gz",
+        "sha256": "fb96ce3d1679eea604b64003a5341603e8add8bdee096e06f7ba48ffbe659804",
+        "blob": "bd2926fa55de9247615725b7b46e118c83917a80",
+        "bytes": 69087,
+        "lines": 535
+      },
+      "recovery": "gzip.decompress restores the exact original UTF-8 bytes including trailing newline."
+    }
+  ],
+  "small_entry": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/upstream-main-c9/MainC9MinimalContractCohortCI155.json",
+    "sha256": "fdb304ae5f645551e4292a66d751529c6a0e80b72051e17ee1a4af098f55c414",
+    "blob": "341f89184194bcb917ae4cd2ea752a61e6cec421",
+    "bytes": 55488,
+    "lines": 1153
+  },
+  "extra_selected_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedCommonProviderReviewedManifest.json",
+    "sha256": "2cef7b61a512517876af4d475804bfa81518307d633ea996d3262d1d4c14fc83",
+    "blob": "f2b19f3352adab36ff1442f34c5b4cd13c0a1131",
+    "bytes": 2030,
+    "lines": 37
+  },
+  "created_at": "2026-11-12T16:04:52.449272+00:00"
+}

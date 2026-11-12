@@ -1,0 +1,91 @@
+{
+  "kind": "actual_negative_reference_potential_unit_density_cancellation",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "owner": "/root/audit_coordinates",
+  "created_at": "2026-11-12T16:05:15.538427+00:00",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+    "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+    "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+    "lines": 137,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialFormula.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+      "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields"
+    ],
+    "public_names": [
+      "inverseChartPotential_radial_unit_formula_on_strip",
+      "n04Coordinates_actual_reference_negative_potential_formula"
+    ]
+  },
+  "provider_refs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialGerms.lean",
+      "sha256": "1f3c55677ebfb7f954afd204318387084aa694a21a99c465d078465699012039",
+      "blob": "ccd28495960875f494c654dc82d107ed67ba59a4",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+      "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootSlopeNormalization.lean",
+      "sha256": "879afd8487ec166b16d023a23bf0d7026f2680f801489a77db1deb34db607c76",
+      "blob": "a6de3be026573bd8f6f80f2e8e17e27f8b5a733c",
+      "lines": 137
+    }
+  ],
+  "checks": [
+    "From the actual unit radial density the algebra forces |Yprime| inverse = H squared times w, with nonzero slope derived rather than assumed.",
+    "The existing genuine strip germ formula gives inverseChartPotential=H*(w*Hprime)prime/|Yprime|. Substitution yields w*H cubed*(w*Hprime)prime, independent of the sign of the inward chart orientation.",
+    "The physical mixed coefficient b=0 is derived from the same true unit and mixed principal densities. No raw radial extension of L outside the actual component is assumed.",
+    "The actual typed-atlas adapter constructs PartA internally, uses its inverse MapsTo and the actual typed negative-domain subset to locate the inverse point in the full component, and retains its original chart/height/potential fields.",
+    "The negative stored potential has positive inverseChartPotential sign. The positive reference formula has a different type sign and is not reused with the wrong sign.",
+    "Original raw hN/hfield and actual density/radial-field providers supply every geometric premise; no final primitive or potential-jet bound is an input."
+  ],
+  "scope_limits": [
+    "Exact actual potential identity only. No uniform negative potential material bound, full-half height jets, CurrentJets or PrimitiveGeometryProperties certificate is asserted.",
+    "The root-axis material height tower does not by itself supply the missing all-points half-component height tower.",
+    "No compiler, CI, active source/index/refs/checkpoint/authority writes."
+  ],
+  "static_checks": {
+    "public_name_collisions": [],
+    "resource_options_added": false,
+    "project_closure_recomputed": false,
+    "compiled": false
+  },
+  "independent_reviews": []
+}

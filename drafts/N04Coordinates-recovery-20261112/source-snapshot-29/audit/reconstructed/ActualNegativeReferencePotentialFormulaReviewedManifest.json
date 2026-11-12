@@ -1,0 +1,42 @@
+{
+  "kind": "ActualNegativeReferencePotentialFormula_reviewed_source_selection",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaCandidateManifest.json",
+    "sha256": "75dc485716a005e85e94d5ce5d8459dc9ec00f950fe4f9aa679731dc966af1cc",
+    "blob": "df5a7e755d039ae91c0d6b525d288057b4798adf",
+    "lines": 91
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+    "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+    "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+    "lines": 137,
+    "target_path": "src/ContinuousFlexibility/Analysis/ActualNegativeReferencePotentialFormula.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.RadialReferencePotentialGerms",
+      "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields"
+    ],
+    "public_names": [
+      "inverseChartPotential_radial_unit_formula_on_strip",
+      "n04Coordinates_actual_reference_negative_potential_formula"
+    ]
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeReferencePotentialFormulaIndependentReview.json",
+      "sha256": "158f52cad8b648cfc30cde8b0a1cd09ebbeccdcdcff20328bd5abdd94358e05e",
+      "blob": "6529b9aecf2f615b78573fe1ec1bba548536833e",
+      "lines": 135
+    }
+  ],
+  "source_changed_since_candidate": false,
+  "scope": [
+    "The exact negative stored potential is w*H^3*(w*Hprime)prime at the actual inverse point, derived from true unit density and same raw radial fields.",
+    "The actual PartA/domain and operator sign are preserved; no orientation or final potential-jet bound is assumed.",
+    "Whole-half material height/potential towers remain separate."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}

@@ -1,0 +1,156 @@
+{
+  "kind": "ci155_positive_source_root_family_abstraction_independent_full_review",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBoundsCI155RepairCandidateManifest.json",
+    "sha256": "b6f1cc556380ff56f93eef5a428fd2713fb92c0d4160ca32e9d3cc4bd7e30a31",
+    "blob": "e656010eeeee30d4478691cff36a604d9b9835dd",
+    "lines": 133
+  },
+  "actual_base": {
+    "head": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+    "tree": "93221bdfea014a7ed555112fe6f2cf136d94df35",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "aa9836ed56d325eba1ee90e89e74242ab7a7d94f36f8a502f6308ac8af834269",
+    "blob": "1ccbe0cacdfd56f116580b61f27310ea65636ceb",
+    "lines": 288
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.base.lean.txt",
+    "sha256": "b3b094eb8b3ebb7657b016c5ecdd785f5ab2ee4240c678273592222e36f332da",
+    "blob": "fef324c95be64fdf45018ba2255201c88b6ae81b",
+    "lines": 216
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.diff",
+    "sha256": "f8eca4d2459e2bf9d587b146f6002f949124584d64dbec800525ac8957275174",
+    "blob": "aee440aa3ccf250eea964e22e5b780d2e36d3080",
+    "lines": 259
+  },
+  "cached_diagnostic": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-155.log",
+    "sha256": "510a7244495ca5797baf1edd197dbbaf86d2397addda15f0625c3a6c046b40dd",
+    "blob": "f20d64c1ba28de00f74d0070e3eee1102bc7b50e",
+    "lines": 737
+  },
+  "previous_exact_source_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI154CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "8e6f56484f231f6b221394c1067ad0855573067a745e00b8d638a7db6361101a",
+    "blob": "97c6abccb990558ed6713b9182f0ec4202da5113",
+    "lines": 150
+  },
+  "actual_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+      "sha256": "96aa947744c65d39484564c8d63c8e56f31f1b4103a2e2ebe88d9a3f1908ebdf",
+      "blob": "0dc0308b5f440e5a5e0dd37af47de32d6aba250b",
+      "lines": 268
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ActualRootGeometry.lean",
+      "sha256": "df838bf216d8d2f594b6b1b27587fdab83bf622658925a03268b25f8c7f18d05",
+      "blob": "309106cea183b863c056a9c150aea5a6f688252d",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceInteriorDivision.lean",
+      "sha256": "419ee0ece8c8be0607908d18399ba8f9342f897b3d9951afef665c5ece5ebd4d",
+      "blob": "1578500670d565ad7ddd08d0345ae0fea8179346",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+      "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+      "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "lines": 187
+    }
+  ],
+  "additional_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "lines": 250
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bPositiveDivision.lean",
+      "sha256": "d274f19959dd831c45e7d0ee0374a4bf01132369e13d69e595beb71a60de39ee",
+      "blob": "052cdea1dd1db004e3021e7100bf3b0704f1f472",
+      "lines": 110
+    }
+  ],
+  "read_scope": [
+    "All288 candidate lines, all216 actual preimage lines and complete259-line diff, plus the cached two default-budget diagnostics and consequent unknown-constant cascade.",
+    "Exact actual CanonicalRootRelativeJetFamily and CanonicalRootHeightJetFamily definitions and full producer headers/current common-family construction; the268 height source was already independently fully reviewed, and its exact installed identity is reverified here.",
+    "Full132 WholePositiveEndpointFields, exact n01ComponentRoot Bool orientation, full40 interior-division source equalities, and the actual stateNeighborhood_mono / grading monotonicity contracts."
+  ],
+  "checks": [
+    "The base bytes exactly match bd249b94d15dd2242e189bcd91c7e378ea7875d9 and its true tree93221bdfea014a7ed555112fe6f2cf136d94df35. Every source/base/diff/log/provider/prior-review hash was independently recomputed.",
+    "All four complete public structure/theorem headers are byte-identical. The structure/mono/identity prefix, final actual-atlas theorem including proof, imports and existing options are unchanged. The exact diff is147 additions and75 deletions.",
+    "The new smallest combiner uses an arbitrary seminorm grading and fixed F/q/r. Its monotonicity raises only k+lF and k+lQ to k+max(lF,lQ); the real multipliers are nonnegative by the actual seminorm and Q>=1 hypotheses. Coordinate order is positive; height and inverse-height include order zero.",
+    "The fixed-negative-root helper obtains the same actual relative and height family witnesses through typed Classical.choose/spec before any positive Option elimination. It keeps Q(k)=1+A(k)+B(k), max(bF,bQ), max(lF,lQ), min(epsilonF,epsilonQ), the actual root, cutPair and current-height ratio.",
+    "Both state restrictions use the genuine stateNeighborhood_mono direction. Family projections .2.2.1 / .2.2.2 match the installed forward-coordinate, height and inverse-height contracts exactly.",
+    "The positive-source helper now transports one complete certificate. None is the actual id/one source. Some m uses !side, exactly the certified opposite endpoint and matching cutPair branch; rewriting j.property followed by the two Bool cases makes all point/function arguments definitionally identical.",
+    "The private existential aggregator retains the original two-side sum and mono_envelope proof. Its base/loss/radius are chosen before every component and source, and its numerical envelope precedes state/angle and all derivative queries.",
+    "The public main proof applies the genuine two installed family producers once to that abstract aggregator. It adds no assumptions and changes no public mathematical conclusion. The final actual-atlas adapter remains the already-compiled full-function interior-division transport.",
+    "The selected actual project import closure was independently rebuilt:755 project modules, no missing project imports and no cycle. All additions are private, with no added public collision.",
+    "The two declarations that failed in CI155 are now separated into genuine smaller proof obligations. Default resource limits are unchanged. Static review cannot certify the proposed elaboration-performance improvement; the next actual CI run remains decisive."
+  ],
+  "static_checks": {
+    "exact_base_verified": true,
+    "public_headers_unchanged": [
+      "RootEndpointTameJetBounds",
+      "RootEndpointTameJetBounds.mono_envelope",
+      "n04b_exists_common_positive_source_jets",
+      "n04Coordinates_actual_positiveSource_allJets"
+    ],
+    "prefix_and_tail_exact": true,
+    "imports_options_exact": true,
+    "added_lines": 147,
+    "deleted_lines": 75,
+    "project_closure_modules": 755,
+    "missing_project_imports": [],
+    "project_import_cycles": [],
+    "new_public_names": [],
+    "resource_limits_changed": false
+  },
+  "scope_limits": [
+    "The prior216 receipt is retained as historical static review; CI155 demonstrated its two timeout failures. This receipt does not retroactively claim that source compiled.",
+    "Only componentwise all-order endpoint source bounds are proved, not uniform E0 growth or final primitive geometry.",
+    "No compiler/elaborator, CI query/download, active source/index/ref/checkpoint or authority action was performed."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "ci_queried_or_downloaded": false,
+  "active_checkout_index_refs_CP_authority_modified": false,
+  "created_at": "2026-11-12T16:03:17.149882+00:00"
+}

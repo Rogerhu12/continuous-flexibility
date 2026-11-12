@@ -1,0 +1,152 @@
+{
+  "kind": "actual_same_reference_interpolation_physical_principal_material_cost",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalMaterialCost.lean",
+    "sha256": "1f3198433fddcb8aa95c50fe396055d5e69fdde24803291a9c7765f021bbfea6",
+    "blob": "3cd6145e53cc9c4fd121b77c76eb3721c32ef6bc",
+    "lines": 194
+  },
+  "public_names": [
+    "n04Coordinates_retained_positive_reference_principal_material_cost"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.RetainedPositiveComponentProfileLower",
+    "ContinuousFlexibility.Analysis.ActualPositiveReferenceAllOrderMaterialJets",
+    "ContinuousFlexibility.Analysis.PositiveReferencePrescribedCosts",
+    "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentProfileLower.lean",
+      "sha256": "776135cda63374b488f048b3b44a178f29648497446daac2a5821e275427972e",
+      "blob": "acbf48810b111be8060c03c10a7adbd2bda15520",
+      "lines": 122
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJets.lean",
+      "sha256": "357a6cd2b43e441c8fa7f495277b405545250abc4bdd17fe0b8073c5b11c2807",
+      "blob": "68fb6e0caf22c3154fbc316c22780f4dcbd9b643",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+      "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+      "blob": "f50437f2ab563c4e8a8076b803441290ef10a7a2",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "lines": 311
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    }
+  ],
+  "selected_provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveComponentProfileLowerReviewedManifest.json",
+      "sha256": "1520e342e7f54d45cd8137b3abb7001ba1d6aeaac6e23f6a39f6b79b04eef1ee",
+      "blob": "313d8b3bdf0334ac897d987030a1c5cd507f71fd",
+      "lines": 29
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJetsReviewedManifest.json",
+      "sha256": "2c794fb62da3a3298f6672675efed5ecc18b311e3898c1bcdd33ffd3ebe7d438",
+      "blob": "78ceab26410cfb77b8202dde6c13f97412165078",
+      "lines": 45
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJetsReviewedManifest.json",
+      "sha256": "2c0359a48d72cf1d299fe1aa55afd4ff9e08c978f1450c24838733e889ea5cf9",
+      "blob": "24c481db3520705d623302527da7aa10727989d6",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+      "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+      "blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+      "lines": 74
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribedReviewedManifest.json",
+      "sha256": "88c24fa2bb912bee35a1adab5b4104e70337129ae6202fe9341610e83f5f7c84",
+      "blob": "ceee3caed4a6e0268e724199643558654534712f",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCostsReviewedManifest.json",
+      "sha256": "c3b32e01b82651eadee6f4beb60d1c735aa4c6e82b3a363f32c41ecefd33fbb9",
+      "blob": "a37bf0123403114985dff58000dda06f07539cfb",
+      "lines": 61
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/main-n01c-parameter-order/N01ParameterOrderCorePortsReviewedManifest.json",
+      "sha256": "fb5f2f94e949515723cba8bd40549e47461693b8ae613313f568d5cf0c1aee18",
+      "blob": "8c880f0446ec9edb494782270177407dac82a580",
+      "lines": 74
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalMaterialNormalizationReviewedManifest.json",
+      "sha256": "9651c6e6ec4456a4172dd9a8d59c6d710bd0816d7e475c599bc0e5790eaa05bd",
+      "blob": "0ecc55e7717ed84172ab012915f4f0c98104670b",
+      "lines": 30
+    }
+  ],
+  "pinned_mathlib_providers": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Order/GroupWithZero/Basic.lean",
+      "sha256": "6526bf3a919d5306c90daf75cf96cfe3bbfacc702f3858fb00f893f7346e2cbd",
+      "blob": "335ef50464487b5763d4ad885d55d83b00964f1b",
+      "lines": 1474
+    }
+  ],
+  "proof_summary": [
+    "Consume the exact literal finite-data certificate returned by the actual all-order165 and inverse276 producers; C0/B are fixed inputs, not reselected from a different existential factory.",
+    "The original source maps, degree n+1, displayed Taylor width delta, radial coordinate Y, height H and actual midpoint cell are retained. The numeric prescribed factory proves range geometry, Yprime<=(n+2)U and Hinv<=4U^2.",
+    "The same retained physical profile gives k=(P0*sampleE0^A0)^(-1). Choose h=(4U^2)^(-1) and M=(n+2)U, all for the same physical component.",
+    "The exact cost M^2/(h^2*k) is 16*(n+2)^2*U^6*P0*sampleE0^A0. Expanding U=B*(C0*sampleE0)^B produces a fixed coefficient and exponent before every component/sample/source.",
+    "Only after the actual envelope has been normalized, the explicit hE0>=1 input permits coefficientEnvelope_pack to supply the single common K in the frozen principal cost. The reviewed normalization60 constructs this condition before the reference family is chosen."
+  ],
+  "scope_limits": [
+    "The finite source certificate is an actual intermediate producer output; no final principal estimate, profile lower or final material bound is assumed. The next small adapter will apply the existing same-atlas principal criterion.",
+    "Retained P/Gamma and original hT/hS/hN/hfield/K remain explicit. The raw optical/host inputs of the genuine finite-data producer are not projected from arbitrary Through03.",
+    "The same enlargedMaterialData must be fixed before all source/family choices; this theorem does not change T or identify atlases built from different material witnesses.",
+    "Static inspection only, no compiler/elaborator/CI, active source/index/ref/CP writes."
+  ],
+  "static_checks": {
+    "literal_finite_data_contract_matches_actual165_modulo_whitespace": true,
+    "public_collision_count": 0,
+    "constant_K_before_component_cell_source": true,
+    "same_displayed_delta_and_Y_H": true,
+    "raw_E0_ge_one_explicit_and_genuinely_constructible_before_family": true,
+    "no_resource_override": true
+  },
+  "compiled": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T16:02:29.453600+00:00"
+}

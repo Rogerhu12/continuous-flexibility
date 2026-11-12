@@ -1,0 +1,66 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualReferenceGeometry.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalActualPrescribedReferenceGeometry.lean
+@@ -6,13 +6,12 @@
+ import ContinuousFlexibility.Analysis.WholeReferenceGaugeGlobalTransport
+ 
+ /-!
+-# One actual reference-gauged atlas with geometry and transmission
++# Actual geometry on the supplied fixed reference family
+ 
+-The reference interpolation and the relative family are selected once.
+-The same original negative atlas supplies both. All current geometry,
+-root and cut transmission, and global relative transport use the same
+-smaller neighborhood and the displayed new record. The retained finite
+-controls are qualitative; their uniform material costs remain separate.
++The caller supplies the same coordinate and height already constructed
++with their material estimates. Only the relative transport controls and
++common neighborhood are selected here. Geometry, source pairing, radiality,
++transmission and global transport all refer to the resulting same record.
+ -/
+ 
+ noncomputable section
+@@ -21,7 +20,7 @@
+ 
+ open Set ContinuousFlexibility.Statements
+ 
+-theorem n04Coordinates_exists_actual_reference_geometry
++theorem n04Coordinates_actual_reference_geometry_of_prescribed_family
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+     {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}
+@@ -32,11 +31,12 @@
+     (cell : N04PositiveComponent D.a D.b (deriv D.w) → ℕ)
+     (j : ∀ i : N04PositiveComponent D.a D.b (deriv D.w),
+       ∀ side, N04PositiveEndpointSource C i side)
+-    (B : N04PositiveNormalizationBuffer D.a D.b (deriv D.w) (tsupport D.chi)) :
++    (B : N04PositiveNormalizationBuffer D.a D.b (deriv D.w) (tsupport D.chi))
++    (Y H₀ : N04PositiveComponent D.a D.b (deriv D.w) → ℝ → ℝ)
++    (hreference : N04PositiveReferenceFamily
++      (n04bActualTypedAtlas hT hS hN hfield e₀) j 4 Y H₀) :
+     let K := n04bActualTypedAtlas hT hS hN hfield e₀
+-    ∃ Y H₀ : N04PositiveComponent D.a D.b (deriv D.w) → ℝ → ℝ,
+-      N04PositiveReferenceFamily K j 4 Y H₀ ∧
+-      ∃ newBase : ℕ, ∃ ε' : ℝ,
++    ∃ newBase : ℕ, ∃ ε' : ℝ,
+         base ≤ newBase ∧ 0 < ε' ∧ ε' ≤ ε ∧
+         ∃ κ M H Clog Mσ δ : N04PositiveComponent D.a D.b (deriv D.w) → ℝ,
+           N04FixedPositiveFamilyControls B 3 κ M H Clog Mσ δ ∧
+@@ -68,9 +68,6 @@
+               (n04WholeComponentField C (canonicalWholeNegativeTransport C K z) (τ z) id)
+               (n04WholeComponentField C (canonicalWholeNegativeHeightRatio C K z) (Q z)
+                 (fun _ => (1 : ℝ))) := by
+-  obtain ⟨Y, H₀, hreference⟩ :=
+-    n04Coordinates_exists_positive_reference_family hT hS hN hfield e₀ j
+-      (show 1 ≤ (4 : ℕ) by decide)
+   obtain ⟨newBase, ε', hb, hε', hε'ε, κ, M, H, Clog, Mσ, δ,
+       hcontrols, hmatching, href⟩ :=
+     n04Coordinates_exists_fixed_positive_family hT hS hN hfield e₀ j B 3
+@@ -113,7 +110,7 @@
+       (fun i => endpointFiberLower 3 (n04PositiveLeft i) (n04PositiveRight i)
+         (B.centerLeft i) (B.centerRight i) (κ i) (Mσ i) * (κ i / 2))
+       (fun i => Real.exp 2 * H i ^ 2) hmatching
+-  refine ⟨Y, H₀, hreference, newBase, ε', hb, hε', hε'ε,
++  refine ⟨newBase, ε', hb, hε', hε'ε,
+     κ, M, H, Clog, Mσ, δ, hcontrols, href, hmatching,
+     hV, hcut, hsource, hradial, htransmission, ?_⟩
+   intro z hz hs

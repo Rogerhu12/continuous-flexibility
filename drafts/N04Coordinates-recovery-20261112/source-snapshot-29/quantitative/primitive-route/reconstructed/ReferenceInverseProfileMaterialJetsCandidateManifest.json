@@ -1,0 +1,113 @@
+{
+  "kind": "actual_inverse_profile_all_order_point_to_retained_positive_sample",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_PEER",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ReferenceInverseProfileMaterialJets.lean",
+    "sha256": "52e91e6500606231c499fcd3863d9b2f9ca99535348f52e9abc8f15b139b8e23",
+    "blob": "6fbfba9f7a349a6604eb28473b5098a5f45a3e1f",
+    "lines": 103
+  },
+  "public_names": [
+    "material_inverseProfile_finite_point_jets",
+    "retainedReference_positive_inverseProfile_finite_sample_jets"
+  ],
+  "imports": [
+    "ContinuousFlexibility.Analysis.MaterialPointRadialPolynomial",
+    "ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport",
+    "ContinuousFlexibility.Analysis.RetainedPositiveIntervalEndpointX",
+    "ContinuousFlexibility.Radial.ReferenceCellL2",
+    "ContinuousFlexibility.Radial.CentralStatementBridges",
+    "ContinuousFlexibility.Radial.MorseChainScales"
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialPointRadialPolynomial.lean",
+      "sha256": "8a1d72f57708d275956e28d42473591327f46078e409b85481e87e70372acef2",
+      "blob": "3832a300bde8548bfee21149583af3b08d843420",
+      "lines": 50
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+      "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+      "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointX.lean",
+      "sha256": "3572e7229edacef05a53dcd4eabfd7db089a78769bff6626977423d0a173b51d",
+      "blob": "e402f2334a618778bc508d5247401d5fba093197",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ReferenceCellL2.lean",
+      "sha256": "d46115fd30201884ec19ebfa4ccca0861600325d9f84648e8ef1efb7a4641616",
+      "blob": "33dc5ec8e39758e9c89e68fb83d51600a2fa7da9",
+      "lines": 195
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/CentralStatementBridges.lean",
+      "sha256": "88d75a47e258d72c14b798a4a6b55b61056f6dab6b9626407138904ac698cdc5",
+      "blob": "a127b83c3abdecbf70d6e6f4446e2d63e88ce445",
+      "lines": 341
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/MorseChainScales.lean",
+      "sha256": "3c3d927037ef85a00a412a14bb71e8588fe26eb8d45d6df91e735b8e69482a04",
+      "blob": "2b94c6bdedb9315807d66ae6e3b880fdb2112bb2",
+      "lines": 254
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    }
+  ],
+  "selected_provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/MaterialPointRadialPolynomialIndependentReview.json",
+      "sha256": "a75d28e4a650bc622e40ef67252764728eefc621ffbc6921c4aba0210f4a829d",
+      "blob": "eba431d6e9c5da9655c0e4c1a34d094aaad052a7",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointXReviewedManifest.json",
+      "sha256": "ce9b2fdd015fc1a46cd824e6ded7dfdfca06a4891d04425410c9bd745282bedd",
+      "blob": "eb6117e3899e98106a2cf6a04229ac3e4a953ac3",
+      "lines": 41
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/MaterialEndpointWeightTransportReconstructionIndependentReview.json",
+      "sha256": "3be14105f1c1dce928993be2da2fcfc580c31fd90fafa297e41009bc4bb6a9ed",
+      "blob": "041ab44d9185fc21a2b9655f1b503d7bee100b6f",
+      "lines": 45
+    }
+  ],
+  "proof_summary": [
+    "Take the actual accumulating-profile inverse cell jets. A=1+sum_{k<=N}C(k) dominates the finite prefix, and the true radialE>=1 permits exponent enlargement before every cell/point.",
+    "Use the actual radial partition to find a cell containing each open-annulus point. The reviewed point50 converts the fixed radialE power to actual T.E0 at that same point.",
+    "The reviewed retained whole-positive closed-interval X estimate reaches the unchanged actual midpoint sample; the real-power transport at gamma=eta=0 transfers only the coefficient exponent.",
+    "Both constants precede every component, host, physical point and finite jet order. No whole-positive-component cell assumption, raw E0>=1 hypothesis or ambient compact reciprocal estimate is introduced."
+  ],
+  "scope_limits": [
+    "Same retained P/Gamma evidence stays explicit; it is not extracted from arbitrary Through03.",
+    "The arbitrary-profile first theorem holds only on the open radial core, as required since w vanishes at ambient endpoints. The retained positive closed components have genuine interior endpoints.",
+    "These are physical reciprocal-profile jets, not yet the four transformed principal atoms. The downstream same C0/B/degree/width/Y/H will remain unchanged.",
+    "No local compiler/elaborator, CI query/download, active source/index/ref/CP action."
+  ],
+  "static_checks": {
+    "public_collision_count": 0,
+    "resource_options": [],
+    "source_prefix_selected_before_points": true,
+    "raw_inverse_cell_jets_actual_clause": true
+  },
+  "compiled": false,
+  "created_at": "2026-11-12T16:23:01.245268+00:00"
+}

@@ -1,0 +1,135 @@
+{
+  "kind": "independent_full_source_actual_negative_potential_density_cancellation",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormulaCandidateManifest.json",
+    "sha256": "75dc485716a005e85e94d5ce5d8459dc9ec00f950fe4f9aa679731dc966af1cc",
+    "blob": "df5a7e755d039ae91c0d6b525d288057b4798adf",
+    "lines": 91
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeReferencePotentialFormula.lean",
+    "sha256": "9901ab0f2a3ff035d99d3f420c0b1215a279b53ba99785b06b3e1a9047a7ea7b",
+    "blob": "4f635532f777f7272f15937a1b7f7f53f681d171",
+    "lines": 137
+  },
+  "actual_providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialGerms.lean",
+      "sha256": "1f3c55677ebfb7f954afd204318387084aa694a21a99c465d078465699012039",
+      "blob": "ccd28495960875f494c654dc82d107ed67ba59a4",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe",
+      "lines": 76
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+      "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootSlopeNormalization.lean",
+      "sha256": "879afd8487ec166b16d023a23bf0d7026f2680f801489a77db1deb34db607c76",
+      "blob": "a6de3be026573bd8f6f80f2e8e17e27f8b5a733c",
+      "lines": 137
+    }
+  ],
+  "additional_actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "sha256": "9249ea8b23d4edc27fe5e9d405e32a3da2248556efb394db33faf279aefa1d0a",
+      "blob": "6e704770a6066c6279f7c3cdae96c1d695d554d3",
+      "lines": 101
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "sha256": "4087433cb73325005c6677a09b43531b3f8abc469c95958a5c874d8bbe41a2cf",
+      "blob": "1005399b1097409b64312fd2994c23a7b69e5757",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCanonicalOperator.lean",
+      "sha256": "344c622b2232939712c784404953c53c3c7a35378b0b70002313dac5bfcfefe3",
+      "blob": "70b5abc70e06c225d31f98d6c38d5a379369bad7",
+      "lines": 156
+    }
+  ],
+  "selected_provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeReferencePrincipalReviewedManifest.json",
+      "sha256": "01149dca044841909ecc4398c562e1ef48b584bacd18b3b850a8d84c83620b1b",
+      "blob": "676923b2e26b14d4adc0c31eb4d90597be3c0cfd",
+      "lines": 144
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+      "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f",
+      "blob": "798621a81c8ffc57a1b3fde6be7e2935f4ce1121",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipalReviewedManifest.json",
+      "sha256": "ce850327465e1d0660aa6f109c29578f00353722b9842339e511cea95e944ca3",
+      "blob": "1ad260422b5e766f306137293a5e09b6f96402e2",
+      "lines": 128
+    }
+  ],
+  "pinned_mathlib_provider": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Algebra/Group/DivInvMonoid.lean",
+    "sha256": "7d4d18e9987e81a35e17574fb4e39754fb44ea75f5a09d8bc3ce0d0647e40acf",
+    "blob": "178684cb03c904cee29050460c48a0225daeaf64",
+    "lines": 365
+  },
+  "read_scope": [
+    "Full137 candidate and complete candidate manifest.",
+    "Full143 strip potential germs, full100 radial principal formulas, full156 actual negative radial fields, full111 actual negative principal density.",
+    "Actual PartA geometry theorem, actual negative physical-domain inclusion, stored typed-atlas/operator fields, and pinned inv_eq_of_mul_eq_one_left."
+  ],
+  "checks": [
+    "The scalar unit equation forces abs(j) nonzero; multiplying by abs(j) gives h^2*w*abs(j)=1. The pinned inverse API yields abs(j)^(-1)=h^2*w without choosing an orientation or assuming a new slope lower bound.",
+    "The generic strip theorem uses actual chart and height germs at G(p). Unit and zero mixed density force the physical mixed coefficient to vanish on the same open strip; its derivatives are justified by that neighborhood equality.",
+    "The actual radial density formula and coefficient a=w produce the exact scalar unit equation. Substitution into H*(w*Hprime)prime/abs(Yprime) gives w*H^3*(w*Hprime)prime with the correct powers and sign.",
+    "The typed-atlas adapter constructs its actual PartA certificate internally. Inverse MapsTo followed by the actual negative half-domain inclusion puts the same inverse point inside the whole physical component.",
+    "Actual reference-state membership and sector follow from the retained hN. The reference coefficient identity and actual whole-component negative density supply all generic premises for the original chart and height.",
+    "The stored operator type sign is positive on a negative piece, verified from n04bCanonicalOperatorData and the actual typed index. No positive-piece minus sign is reused.",
+    "All candidate/provider identities are exact. This review explicitly adds the actual PartA, physical-domain and operator-definition providers omitted from the short candidate provider list.",
+    "No project axiom, sorry, unsafe proof primitive, target weakening or resource increase is introduced."
+  ],
+  "scope_limits": [
+    "Exact stored potential identity only; it does not assert a whole-half material height tower, uniform potential bound or CurrentJets.",
+    "No regularity outside the actual physical open component or replacement of the selected inverse is assumed.",
+    "No compiler/CI/active-source/index/ref mutation. Import closure still requires the selected full integration preflight."
+  ],
+  "reviewer": "/root",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:15:46.592576+00:00"
+}

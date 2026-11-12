@@ -1,0 +1,135 @@
+{
+  "kind": "actual_negative_principal_four_atoms_uniform_reference_jets",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "owner": "/root/audit_coordinates",
+  "created_at": "2026-11-12T16:11:56.246079+00:00",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJets.lean",
+    "sha256": "a539b4ccf54410a7db50a43cf4b708c41d840820a3b7e5e9c107b36ba6867ecb",
+    "blob": "f7f3ec3c2aafb234fb77b69076de6e2873988e22",
+    "lines": 239,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativePrincipalJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds",
+      "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+      "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+    ],
+    "public_names": [
+      "n04bActualTypedAtlas_negative_airy_coefficients",
+      "n04WholeReferenceGauge_negative_principalReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "provider_refs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+      "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "lines": 308
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeLengthMaterialBoundsIndependentReview.json",
+      "sha256": "d003a238d11fd0de965d863a745fc08150019a7ab66593ff5e8c5cede956fa8e",
+      "blob": "68b42cccabe286de7584f9381aebe61b31d971dd",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualNegativeLengthRadialBoundsIndependentReview.json",
+      "sha256": "dacc2c6623fd8a5d4205014f3bfb536a8c402c8783ddc6cde783856bf430ff0f",
+      "blob": "59b5346f27133dae820a92b44777562d43ef5f74",
+      "lines": 139
+    }
+  ],
+  "pinned_api_refs": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    }
+  ],
+  "checks": [
+    "The existing proved interiorCompletion PartB supplies the original actual typed-atlas Airy coefficients (1,0,-xi). Its only changed field is dividedDifference, so the principal conclusion is definitionally about the same old K. No final whole-atlas geometry/primitive certificate is an input.",
+    "The whole record negative-fields equality retains exactly the original cutPair index, canonical endpoints, coefficient field and sample. The actual unit point belongs to its true canonical open piece because rho>0 and 0<u<1.",
+    "The four actual atoms equal 1,1,0,-rho*u on the open unit strip. This equality yields actual ContDiffOn, period and every mixed derivative through the genuine open-set derivative congruence; it does not assert equality of arbitrary total extensions.",
+    "The exact original half canonical-length upper bound is transported only through the explicit enlargement U=enlargedMaterialData T. Original E0 is used only with its true positivity, never a unit lower bound.",
+    "One coefficient B is selected before every new enumeration, positive field family, state, piece, atom and derivative order. The bound is valid at all actual valid states and therefore includes reference state.",
+    "All actual source, provider and pinned API identities were recorded; no source/compiler/CI/index/ref/checkpoint/authority mutation occurred."
+  ],
+  "scope_limits": [
+    "Only the four negative principal atoms are covered, not the negative potential, full-half height tower, positive principal atoms or the complete 33-atom certificate.",
+    "The atlas is constructed using the original T. The explicit material enlargement is used for these four atom bounds and the right-hand sample envelope; all four atoms are independent of the material record.",
+    "Same-witness Through03, hfield and actual return-margin length provider are retained. No new raw optical lower bound, cell uniqueness or whole-positive common cell is assumed."
+  ],
+  "static_checks": {
+    "installed_public_collisions": [],
+    "resource_options_added": false,
+    "project_closure_recomputed": false,
+    "compiled": false
+  },
+  "independent_reviews": []
+}

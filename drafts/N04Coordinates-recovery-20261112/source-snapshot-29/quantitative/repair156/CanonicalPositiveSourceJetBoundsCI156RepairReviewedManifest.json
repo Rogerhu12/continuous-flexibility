@@ -1,0 +1,37 @@
+{
+  "kind": "ci156_positive_source_index_radius_transport_owner_freeze",
+  "status": "INDEPENDENT_FULL_STATIC_REVIEWED_UNCOMPILED",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "74a5f486c095cd171fbb56c0270827cd89c7616aaa1f86fc701ba5e4e466a127",
+    "blob": "4ab2ef388753fd779280571b22abcfd7db544684",
+    "lines": 309
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBoundsCI156RepairCandidateManifest.json",
+    "sha256": "c1511477d29cce18ca0b66410bd4ba1dd68b776b531c560873da0746504d9235",
+    "blob": "e6ec80fd4c8d6c54233eff08d3d31ca2fddb981b",
+    "lines": 126
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI156CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "be8adebde7d9570023ef3ff87e78b6a5921c1fabe0b7c1890cbb9e5e6dc7d05b",
+    "blob": "174e33ee8dea808c232824f7d69b4e34db5002dd",
+    "lines": 139
+  },
+  "actual_base": {
+    "head": "4bb40f935b646a0c4bfa264cff6c2dbb1f67e17c",
+    "tree": "4367e214f97e07d201860468f21cb0c2c0db23f4",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean"
+  },
+  "scope": [
+    "Exact309 source is frozen after full independent review.",
+    "Two private generic Bool/index-radius helpers replace only the failing concrete rewrite; existing numerical/fixed-root layers and common constants are preserved.",
+    "Four public headers, imports/options and default resource limits remain unchanged.",
+    "Static review does not claim default-budget runtime success; only the next actual CI can verify performance.",
+    "No compiler/elaborator, CI query/download, active checkout/index/ref/CP or authority mutation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:20:38.449956+00:00"
+}

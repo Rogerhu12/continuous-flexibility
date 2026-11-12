@@ -1,0 +1,22 @@
+{
+  "snapshot": 28,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "dd75d89da8aa123761259df71b8271d11cfacc87",
+  "additional_parents": [
+    "03e526021c371413f03fc0ce052476b63e105361"
+  ],
+  "compiled_baseline": "03e526021c371413f03fc0ce052476b63e105361",
+  "indexed_files": 1923,
+  "new_source_lines": 2833,
+  "projected_added_lean_from_compiled_baseline146": 8142,
+  "prior_versions": "All historical source locations remain immutable and reachable through the backup parent; SOURCE-INDEX names their exact commit and path.",
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "head": "bda0a6089d1a12995a2502c3a3f93ee9444b30dd",
+  "tree": "88cb3441ff8dbc1c07b5e7cb56479a53901df5a4",
+  "pushed": "2026-11-12 16:09:42 UTC",
+  "new_source_versions": 16,
+  "payload_sha256": "2ba9cb0065c095e6a63bf2754fb0ac52957a37a4c6033d3519594fc85a89c26c",
+  "blob_payload_sha256": "b04eae4ecf2ec1965e94b145f62bd82f743a5170e69620ae27ea022d06805ff7",
+  "compressed_diagnostics": 5,
+  "compression_note": "Lossless gzip of five large reproducible JSON analyses; original SHA256 identities and restoration are verified. All source identities/line budgets are unchanged."
+}

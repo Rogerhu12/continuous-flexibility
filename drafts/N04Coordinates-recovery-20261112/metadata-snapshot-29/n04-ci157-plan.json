@@ -1,0 +1,61 @@
+{
+  "label": 157,
+  "head_before": "4bb40f935b646a0c4bfa264cff6c2dbb1f67e17c",
+  "base_tree": "4367e214f97e07d201860468f21cb0c2c0db23f4",
+  "tree": "83843ffdcc1539971cdedad2ba36e935da0ad729",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_integrated": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "additional_parents": [],
+  "last_full_green": "03e526021c371413f03fc0ce052476b63e105361",
+  "owner_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBoundsCI156RepairReviewedManifest.json",
+    "sha256": "8d265fd91f28a61d7a727c09d55c0085329d68f6093c943358d9bdda010840a2",
+    "blob": "cb5568410bb98e157085b27485f99384e6f62371",
+    "lines": 37
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBoundsCI156RepairCandidateManifest.json",
+    "sha256": "c1511477d29cce18ca0b66410bd4ba1dd68b776b531c560873da0746504d9235",
+    "blob": "e6ec80fd4c8d6c54233eff08d3d31ca2fddb981b",
+    "lines": 126
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI156CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "be8adebde7d9570023ef3ff87e78b6a5921c1fabe0b7c1890cbb9e5e6dc7d05b",
+    "blob": "174e33ee8dea808c232824f7d69b4e34db5002dd",
+    "lines": 139
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "74a5f486c095cd171fbb56c0270827cd89c7616aaa1f86fc701ba5e4e466a127",
+    "blob": "4ab2ef388753fd779280571b22abcfd7db544684",
+    "lines": 309
+  },
+  "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean",
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBounds.base.lean.txt",
+    "sha256": "aa9836ed56d325eba1ee90e89e74242ab7a7d94f36f8a502f6308ac8af834269",
+    "blob": "1ccbe0cacdfd56f116580b61f27310ea65636ceb",
+    "lines": 288
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBounds.diff",
+    "sha256": "55d0acd9c1a94b3b57cc86b8627d8322604f0c4be537b0c899c5e4bff581dc0c",
+    "blob": "3deb5f3b61d62bff384ddbdd63d7a7885ce82f6c",
+    "lines": 41
+  },
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "added_lean_since_full_green": 3279,
+  "deleted_lean_since_full_green": 0,
+  "source_total": 4211,
+  "source_all_total": 4215,
+  "root_imports": 4152,
+  "scope": "Independently reviewed opaque index/radius transport around the sole remaining positive source rewrite. Same complete root certificate, functions, witnesses and public contracts; all previously passed proof layers and default limits retained. Main source integration remains held for complete CI.",
+  "created_at": "2026-11-12T16:21:09.016699+00:00"
+}

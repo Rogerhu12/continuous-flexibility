@@ -1,0 +1,60 @@
+{
+  "kind": "independent_full_source_local_mixed_common_provider_supersession",
+  "status": "PASSED_STATIC_FULL_SOURCE_REVIEW_HELD_UNCOMPILED",
+  "reviewer": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedCommonProviderCandidateManifest.json",
+    "sha256": "6cda0a1d8f7e77627e69c9db59c57e806ccffc4b066d1cce86d3c1b9baecbc42",
+    "blob": "8df08e322af157770bc3ebc10cb9e106e5de05ef",
+    "lines": 45
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedProductBounds.lean",
+    "sha256": "edc7fc2508fe231f3b18bfc7e52da8c004cf32e501c5ea48f3044b351d01a556",
+    "blob": "6ad4d36756cad99a57f625d0f9092d118f46e76f",
+    "lines": 105
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedProductBounds.active-base.lean.txt",
+    "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+    "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+    "lines": 125
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/LocalMixedProductBounds.diff",
+    "sha256": "3be5f377c57230e1b8e637307dc55e8575ed2594e19fb840584233e1536931bf",
+    "blob": "ca409771f04fa9fd0793b5914a68b89f6af3b08f",
+    "lines": 35
+  },
+  "selected_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/main-c9-mixed-provider/N01cSpatialParameterComposition.main-c9-provider.lean.txt",
+    "sha256": "f58d4725b89a813711465a4c05ce60f953dbcbc20ace49f85e60152313cc5d1d",
+    "blob": "ce04614f58db40ae959540cb3b33b510de3d2821",
+    "lines": 355
+  },
+  "provider_ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+  "read_scope": [
+    "Full105 candidate and complete35-line diff, including the removed actual mixed-subtraction proof.",
+    "Actual current-main mixed-subtraction theorem and complete proof plus its direct imports; every active call and its named arguments.",
+    "All76 upstream project import entries mechanically resolved from exact c9 Git objects with cycle and consumer-backedge checks."
+  ],
+  "checks": [
+    "The candidate is exactly the active125 source with one direct import added and only its duplicate subtraction declaration/documentation/proof removed. All three remaining complete declarations and proofs are byte-identical.",
+    "The selected main proposition is the same subtraction identity for actual mixed derivatives on the same open set. Its actual Fréchet-word proof supplies the same mathematical interface.",
+    "Explicit open-set/smoothness/orders/point-membership arguments are unchanged. The implicit domain name U becomes Omega and f/g move before the open premise; actual consumers use positional domain inference and compatible named f/g/p.",
+    "Both actual34a496 and currentbd249 preimages match, as do c9 and currentb629 provider bytes. The upstream76-module provider closure has no missing project import, cycle or LocalMixedProductBounds backedge.",
+    "No new theorem, estimate premise, witness, resource limit or remaining proof-body change is introduced."
+  ],
+  "provider_closure": {
+    "modules": 76,
+    "missing_imports": [],
+    "cycles": [],
+    "consumer_backedge": false
+  },
+  "scope_limits": [
+    "Select this source only in the batch that installs N01cSpatialParameterComposition and its prerequisites; it is outside the minimal first contract cohort.",
+    "This is source/interface review, not elaboration of the combined final tree. No active source/index/ref/compiler/CI changes."
+  ],
+  "compiled": false,
+  "reviewed_at": "2026-11-12T16:00:39.613660+00:00"
+}

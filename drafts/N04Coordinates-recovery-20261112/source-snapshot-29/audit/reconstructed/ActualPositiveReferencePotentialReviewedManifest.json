@@ -1,0 +1,121 @@
+{
+  "kind": "actual_same_displayed_positive_reference_potential_reviewed_sources",
+  "status": "STATIC_FULL_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialCandidateManifest.json",
+    "sha256": "d8f564fcc88bfa60fd6683a5e60d0c062a68ec18a615006eb78c4816d9a32bdd",
+    "blob": "5fa8f472b2717fb8bf0f537d30351380c673a7d9",
+    "lines": 192
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+      "sha256": "1f9b3defaf95b285251e29c321f40c9e53c4745469447ad5861ccd51ffb8f455",
+      "blob": "d63e8e50b1918c38a0864f79afd1bffebc5d6a46",
+      "lines": 159,
+      "target_path": "src/ContinuousFlexibility/Analysis/RadialReferencePotentialJetEnvelope.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.OneHighCompositionJets"
+      ],
+      "public_names": [
+        "exists_radialReferencePotential_jet_envelope"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialMaterialJets.lean",
+      "sha256": "867e851173adc2d6748b2d61718bf94672056637482f766a45862bb6ce38daf3",
+      "blob": "de62b2af6ce8a13c879fc9baf8938d7a8cfcd630",
+      "lines": 251,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferencePotentialMaterialJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceInverseMaterialJets",
+        "ContinuousFlexibility.Analysis.RadialReferencePotentialJetEnvelope",
+        "Mathlib.Topology.Order.Compact"
+      ],
+      "public_names": [
+        "n04Coordinates_retained_positive_reference_potential_material_jets"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePotentialJets.lean",
+      "sha256": "aa09f494ce342a9baf1f1b8a111973ddf5f8f909d4d3bfb3d1c3a7fcdb9f5b51",
+      "blob": "c9b78f187c42dd8427d3c18ed7e806ebbecd1685",
+      "lines": 141,
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePotentialJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferencePotentialMaterialJets",
+        "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+        "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+        "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+      ],
+      "public_names": [
+        "n04WholeReferenceGaugeAtlasData_positive_reference_potential_flux_germ",
+        "n04WholeReferenceGaugeAtlasData_positive_reference_potential_mixed"
+      ]
+    }
+  ],
+  "total_source_lines": 551,
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualPositiveReferencePotentialEnvelopeMaterialIndependentReview.json",
+      "sha256": "a7df20c5f0d405184afec8cfb6ef9abf49f5f834626acd11a7f00897a750684b",
+      "blob": "7f7fea509b317a52633eeb2ba9f95b3990b31167",
+      "lines": 215,
+      "covers": [
+        "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePotentialJetEnvelope.lean",
+        "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferencePotentialMaterialJets.lean"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholePositiveReferencePotentialJetsIndependentReview.json",
+      "sha256": "4cdc4fd7474c7bfcc57e949ff14433fef0c3ad1daf8f6252418f50eb87ed9845",
+      "blob": "f6f53bef161161f065b4dbdca996db2b858ac378",
+      "lines": 127,
+      "covers": [
+        "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePotentialJets.lean"
+      ]
+    }
+  ],
+  "additional_actual_provider_bindings": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+      "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+      "blob": "f50437f2ab563c4e8a8076b803441290ef10a7a2",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribedReviewedManifest.json",
+      "sha256": "88c24fa2bb912bee35a1adab5b4104e70337129ae6202fe9341610e83f5f7c84",
+      "blob": "ceee3caed4a6e0268e724199643558654534712f",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCostsReviewedManifest.json",
+      "sha256": "c3b32e01b82651eadee6f4beb60d1c735aa4c6e82b3a363f32c41ecefd33fbb9",
+      "blob": "a37bf0123403114985dff58000dda06f07539cfb",
+      "lines": 61
+    }
+  ],
+  "preservation": [
+    "Original three source files and candidate manifest are unchanged.",
+    "One actual low envelope B and its finite endpoint certificate precede all requested spatial orders; the same delta,Y,H,invFunY are retained.",
+    "The last source identifies the actual stored potential and all its mixed derivatives through a genuine canonical-open germ."
+  ],
+  "scope_limits": [
+    "The original same-retained host and optical lower inputs remain explicit; no arbitrary Through03 witness is asserted to supply them.",
+    "No original E0>=1 assumption; only the actual returned scaled sample floor C0*E0(sample)>=1 is used.",
+    "This candidate gives the actual scalar material bound and actual whole-atlas flux/mixed identity. It does not yet package the final potential atom on canonicalUnitPoint or the negative potential atom.",
+    "No parameter-tame, full 33-atom certificate, current-state potential bound, compilation or CI success is claimed.",
+    "The separately authored207-line positive potential atom increment is not covered by these two receipts and has its own pending independent review."
+  ],
+  "compiled": false,
+  "active_checkout_index_refs_CP_authority_modified": false,
+  "created_at": "2026-11-12T16:06:21.729964+00:00"
+}

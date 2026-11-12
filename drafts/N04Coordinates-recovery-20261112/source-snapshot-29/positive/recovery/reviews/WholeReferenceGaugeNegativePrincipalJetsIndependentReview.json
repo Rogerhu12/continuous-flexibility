@@ -1,0 +1,190 @@
+{
+  "kind": "independent_full_source_actual_negative_principal_reference_jets_review",
+  "reviewer": "/root/proof_inventory",
+  "status": "FULL_SOURCE_STATIC_REVIEW_PASSED_UNCOMPILED",
+  "created_at": "2026-11-12T16:14:41.773135+00:00",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJets.lean",
+    "sha256": "a539b4ccf54410a7db50a43cf4b708c41d840820a3b7e5e9c107b36ba6867ecb",
+    "blob": "f7f3ec3c2aafb234fb77b69076de6e2873988e22",
+    "lines": 239,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativePrincipalJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds",
+      "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+      "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+    ],
+    "public_names": [
+      "n04bActualTypedAtlas_negative_airy_coefficients",
+      "n04WholeReferenceGauge_negative_principalReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJetsCandidateManifest.json",
+    "sha256": "de136377eca3cfb155353ee70f25707353e8ddf23cd316adfac58376dd004eba",
+    "blob": "70d4b355c51d9109ccf1b6a35bb2b9491c46d568",
+    "lines": 135
+  },
+  "reviewed_source_scope": "All 239 lines, both public proofs, both private scalar proofs and every actual field/projection used by them.",
+  "actual_provider_fingerprints": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "b9d241c8984d02af87a2d6486a9a7e991ad59d15b038ecbebc281a1820661d8e",
+      "blob": "97a05cee066d07dee7a133440425f46f7fe6066e",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeLengthMaterialBounds.lean",
+      "sha256": "a1355b681442efbae6b424f142b2841024bf85d37c7f16c3127339eb926a907c",
+      "blob": "97ba75908af68271cfed29233a7043de7af28ab4",
+      "lines": 86
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "lines": 308
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    }
+  ],
+  "pinned_api_fingerprints": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "sha256": "1e9fbd861ac27cb4b17113c3f8ede3c5f573a6b342b23e41ff514b05bd3334ef",
+      "blob": "e7fd4979f58f787927500713547b3671402ae782",
+      "lines": 1283
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "additional_exact_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+      "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "lines": 275
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    }
+  ],
+  "prior_independent_length_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualNegativeLengthMaterialBoundsIndependentReview.json",
+      "sha256": "d003a238d11fd0de965d863a745fc08150019a7ab66593ff5e8c5cede956fa8e",
+      "blob": "68b42cccabe286de7584f9381aebe61b31d971dd",
+      "lines": 119
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualNegativeLengthRadialBoundsIndependentReview.json",
+      "sha256": "dacc2c6623fd8a5d4205014f3bfb536a8c402c8783ddc6cde783856bf430ff0f",
+      "blob": "59b5346f27133dae820a92b44777562d43ef5f74",
+      "lines": 139
+    }
+  ],
+  "checks": [
+    {
+      "topic": "Original actual Airy field",
+      "finding": "The actual interiorCompletion PartB theorem was read in full. CanonicalCutOperatorProperties has its negative principal clause exactly at .2.2.2.1. n04bWithInteriorDivision changes only dividedDifference, so the clause applies definitionally to the same K coefficients and canonicalOpen. Bool positivity follows the actual typed reindexing."
+    },
+    {
+      "topic": "Same whole-atlas negative piece",
+      "finding": "The 131-line record and negative_fields theorem were read in full. Its twelve fields give exactly the chosen old cutPair half, canonical endpoints, coefficient field and cell. Both Bool branches of e₀ k = inl j agree with n04bTypedAtlasData_cutPair; the actual right endpoint is n04bRootCutRadius(C.travel j.1). No sample is reselected."
+    },
+    {
+      "topic": "Actual atoms on their actual domain",
+      "finding": "The actual unit point is (rho*p.1,p.2) and lies in canonicalOpen because rho>0 and 0<p.1<1. All four Atom branches therefore equal the displayed globally smooth scalar representative on the open unit strip. Material record U does not enter these four atom branches."
+    },
+    {
+      "topic": "All mixed orders",
+      "finding": "Pinned iteratedDeriv_const, iteratedDeriv_fun_neg, iteratedDeriv_const_mul_field and iteratedDeriv_id were checked together with actual n08_mixedDerivative_radial. Zero angular order gives the scalar radial derivative; every positive angular order is zero. Radial orders 0/1 use rho<=M and 0<p.1<1; higher orders vanish. Constants include zero derivative order."
+    },
+    {
+      "topic": "Local equality and regularity",
+      "finding": "The EqOn argument uses the exact membership-only open-set mixedDerivative congruence. Pinned ContDiffOn.congr requires the new function equal the smooth representative, which is precisely hEq. Periodicity uses only actual points within the same open strip. There is no equality or smoothness assertion about arbitrary total extensions outside the strip."
+    },
+    {
+      "topic": "Uniform original sample cost",
+      "finding": "The 86-line actual length provider was read in full. Its last of four bounds is the canonical half width at the same K.cell sample. Original E0 positivity follows IsAccumulatingProfile and hT. The single B is selected before e, all positive fields, state, piece, atom and derivative order; material enlargement supplies the unit floor only for U, and U.sample is definitionally T.sample."
+    },
+    {
+      "topic": "Nonnegative envelope arithmetic",
+      "finding": "AN>=0 allows original E0^AN <= enlarged E0^AN. hBN>0 and enlarged t^AN>=1 prove both one<=B*t^B and rho<=B*t^B via coefficientEnvelope_pack. No original E0>=1 assumption, raw optical lower bound or full-half height bound is used."
+    },
+    {
+      "topic": "Scope",
+      "finding": "This gives four negative principal atoms at every valid state, including reference state. It does not establish potential, positive atoms, all 33 atoms, CurrentJets or a final primitive certificate."
+    }
+  ],
+  "static_checks": {
+    "source_and_listed_provider_hashes_verified": true,
+    "actual_public_name_collisions": [],
+    "resource_options_added": false,
+    "compiled": false,
+    "active_checkout_index_refs_CI_unchanged": true
+  },
+  "remaining": "Lean elaboration and integration gates remain with the parent. This review does not certify the entire dependency graph by typechecking."
+}

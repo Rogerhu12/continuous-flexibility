@@ -1,0 +1,36 @@
+{
+  "kind": "ci155_positive_source_jet_bounds_owner_freeze",
+  "status": "INDEPENDENT_FULL_STATIC_REVIEWED_UNCOMPILED",
+  "owner": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBounds.lean",
+    "sha256": "aa9836ed56d325eba1ee90e89e74242ab7a7d94f36f8a502f6308ac8af834269",
+    "blob": "1ccbe0cacdfd56f116580b61f27310ea65636ceb",
+    "lines": 288
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair155/CanonicalPositiveSourceJetBoundsCI155RepairCandidateManifest.json",
+    "sha256": "b6f1cc556380ff56f93eef5a428fd2713fb92c0d4160ca32e9d3cc4bd7e30a31",
+    "blob": "e656010eeeee30d4478691cff36a604d9b9835dd",
+    "lines": 133
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI155CanonicalPositiveSourceJetBoundsIndependentReview.json",
+    "sha256": "84630bed19daf55c1bb38b2c5eda944796e1fbd9396effb1e4c6822f0e356822",
+    "blob": "1890ce6d69d7798dea3f8be7c6c5ba7067421f5f",
+    "lines": 156
+  },
+  "actual_base": {
+    "head": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+    "tree": "93221bdfea014a7ed555112fe6f2cf136d94df35",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean"
+  },
+  "scope": [
+    "Exact288 source is frozen after full peer review.",
+    "Same original maps/height/root, same max/min common neighborhood/loss and numerical envelopes.",
+    "Four public headers, imports/options and default resource limits remain unchanged.",
+    "Static review is not a claim that the next actual CI will pass; no compiler/elaborator or active checkout/index/ref action."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:03:54.798418+00:00"
+}

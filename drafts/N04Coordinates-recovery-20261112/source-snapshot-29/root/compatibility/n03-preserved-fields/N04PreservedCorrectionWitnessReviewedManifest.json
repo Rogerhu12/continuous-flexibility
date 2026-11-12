@@ -1,0 +1,43 @@
+{
+  "kind": "actual_N03_fields_preserved_fixed_witness_reviewed_manifest",
+  "owner": "/root",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.lean",
+      "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+      "blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+      "lines": 206,
+      "target_path": "src/ContinuousFlexibility/Analysis/N03CorrectionAssembly.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.lean",
+      "sha256": "cf0ef6b6b5df83bfe4214f4540ad949e0d95731d92bc65b931e81c6425360bd0",
+      "blob": "14bd53d10d3bc8e31a0bdcf67169cf11e5aa717e",
+      "lines": 117,
+      "target_path": "src/ContinuousFlexibility/Analysis/N04FixedCorrectionWitness.lean"
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04PreservedCorrectionWitnessCandidateManifest.json",
+    "sha256": "1fd01e8219e11d7c41711eafa83ba23933f4aa6093ba74e2f84284a8aaa16189",
+    "blob": "da8d276c35605731b4a879e318885e1fd2c441d4",
+    "lines": 69
+  },
+  "independent_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedCorrectionWitnessIndependentReview.json",
+    "sha256": "47aaed608c03fe5cf554a86613c0c7674076b73966d836a163f34bf30d156af9",
+    "blob": "5d4b866209decb64116f4226818bbcad08ff7cc0",
+    "lines": 257
+  },
+  "selected_main_graph": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/N04PreservedCorrectionWitnessSelectedMainGraph.json",
+    "sha256": "0b6f69f407388f9de5d2b95735ee6a1a17bcf857418adb21c1be5400696eb379",
+    "blob": "9562f344b4ebffacf2459e3da523047ea74330be",
+    "lines": 10012
+  },
+  "scope": "Retain the same selected correction coefficients/minusFlow/cutoff and real cutoff data alongside Through03. The original public N03 API and all original mathematical construction proofs are preserved. No identity is asserted for an arbitrary existential N03 witness.",
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T16:23:24.625292+00:00"
+}

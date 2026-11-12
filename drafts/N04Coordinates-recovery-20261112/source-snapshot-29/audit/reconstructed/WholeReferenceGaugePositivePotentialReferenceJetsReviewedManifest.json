@@ -1,0 +1,42 @@
+{
+  "kind": "actual_positive_potential_atom_reviewed_source_selection",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePositivePotentialReferenceJetsCandidateManifest.json",
+    "sha256": "cc5d0258b9ccd522ffea00aa77632e886e6650dc949fe641a7974c4fc6feab56",
+    "blob": "b607185968cf5ef16064b71171fd5f77d3bed59e",
+    "lines": 99
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugePositivePotentialReferenceJets.lean",
+    "sha256": "2b5857a4e63c984a9003ea74eacb6f402ecb48cfc2a0c36f7080aca6aac86112",
+    "blob": "e7e257a74e24c1d2ff5607871ca5bd4224dcff53",
+    "lines": 207,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugePositivePotentialReferenceJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.WholePositiveReferencePotentialJets",
+      "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+    ],
+    "public_names": [
+      "n04WholeReferenceGauge_positive_potentialReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugePositivePotentialReferenceJetsIndependentReview.json",
+      "sha256": "fe0e835879c634d959d20fd3ed8dd7ef25e5976ce51c8c636b372d9583ab1a18",
+      "blob": "9daa6c8c38b7147da4eee296caf8a800fa75aa16",
+      "lines": 136
+    }
+  ],
+  "source_changed_since_candidate": false,
+  "scope": [
+    "The original T constructs the same actual atlas V and one C0/B/reference width/fields. The atom and its sample bound explicitly use enlargedMaterialData T.",
+    "The potential atom is independent of material fields. This does not identify independently chosen witnesses for T and enlargedMaterialData T; the final normalized-family instantiation remains explicit.",
+    "The 551-source owner is a separate prerequisite; no negative potential or whole primitive certificate is claimed."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}

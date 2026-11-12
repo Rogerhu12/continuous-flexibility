@@ -1,0 +1,40 @@
+{
+  "label": 156,
+  "head": "4bb40f935b646a0c4bfa264cff6c2dbb1f67e17c",
+  "tree": "4367e214f97e07d201860468f21cb0c2c0db23f4",
+  "main": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "main_checked": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+  "main_workflow_file_integrated": {
+    "main": "2aa3dbb138bedb82e9972e88158b4dd9c1bf8f1d",
+    "path": ".github/workflows/build.yml",
+    "sha256": "6e1b0a3c010b6988811399ec9a71c5f5f58ca7a83421e5cd3d28a3bbf5b8bb24",
+    "blob": "3152629f2ebb53a7af652218ea5bd2d64d16d493",
+    "method": "Exact workflow-only file copy; main ancestry remains pending dependency-complete source batches."
+  },
+  "pushed": "2026-11-12 16:07:58 UTC",
+  "first_check_not_before": "2026-11-12 16:12:58 UTC",
+  "status": "failure",
+  "plan": "n04-ci156-plan.json",
+  "source_total": 4211,
+  "source_all_total": 4215,
+  "root_imports": 4152,
+  "added_lean_since_full_green": 3258,
+  "repair_files": 1,
+  "scope": "Independently reviewed three-layer proof abstraction for the remaining actual positive source jet file. Same complete public contracts, real functions, witnesses, max/min and numerical envelopes; default limits. Includes exact current-main line-origin artifact reuse workflow. Source/main integration and held reference activation remain gated on full CI.",
+  "run": 43255304501,
+  "job": 131311784279,
+  "first_check_observed_at": "2026-11-12 16:12:59 UTC",
+  "completed_run_updated_at": "2026-11-12T16:12:30Z",
+  "log": "n04-ci-156.log",
+  "log_sha256": "f78f91deeb61dc91d5b59f23622cbcf7adf54f3ccd86a223c1bd1608648f7f66",
+  "failure_log": "cached_once",
+  "quick_check": "failure",
+  "full_build": "skipped",
+  "axiom_audit": "skipped",
+  "blueprint": "skipped",
+  "compiled_modules_partial": 4207,
+  "failed_modules": [
+    "ContinuousFlexibility.Analysis.CanonicalPositiveSourceJetBounds"
+  ],
+  "failure": "The numeric and fixed-root proof layers passed their former error sites. The only reported error is default200000 isDefEq timeout at187:10, rewriting the positive endpoint radius inside the complete tame predicate. Public contracts and default limits remain unchanged."
+}

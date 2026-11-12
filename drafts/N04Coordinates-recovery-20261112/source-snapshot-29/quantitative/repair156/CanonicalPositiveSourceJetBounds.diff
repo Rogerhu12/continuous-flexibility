@@ -1,0 +1,41 @@
+--- /workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalPositiveSourceJetBounds.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair156/CanonicalPositiveSourceJetBounds.lean
+@@ -140,6 +140,21 @@
+     (fun k θ => (hheight z hzQ hs θ).2.2.1 k)
+     (fun k θ => (hheight z hzQ hs θ).2.2.2 k)
+ 
++private theorem oppositeBool_branch_eq {α : Type*} (a b : α) (side : Bool) :
++    (if side then a else b) = (if !side then b else a) := by
++  cases side <;> rfl
++
++private theorem rootEndpointTameJetBounds_of_index_radius_eq
++    {E : Type*} [AddCommGroup E] [Module ℝ E]
++    {p : ℕ → Seminorm ℝ E} {loss : ℕ} {A : ℕ → ℝ} {z : E}
++    {I : Type*} (F : I → PolarPoint → PolarPoint) (q : I → PolarPoint → ℝ)
++    {i j : I} {r s : ℝ} (hindex : i = j) (hradius : r = s)
++    (h : RootEndpointTameJetBounds p loss A z (F j) (q j) s) :
++    RootEndpointTameJetBounds p loss A z (F i) (q i) r := by
++  cases hindex
++  cases hradius
++  exact h
++
+ private theorem positiveSourceJetBounds_of_rootFamilies
+     {D : ReferenceData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {K : CanonicalData S}
+@@ -184,8 +199,14 @@
+           (if side then (K.cutPair m).1 else (K.cutPair m).2))
+         (n04PositiveEndpoint i side)
+       change n04PositiveEndpoint i side = (if side then C.left m else C.right m) at ho
+-      rw [ho]
+-      cases side <;> exact h
++      have hindex : (if side then (K.cutPair m).1 else (K.cutPair m).2) =
++          (if !side then (K.cutPair m).2 else (K.cutPair m).1) :=
++        oppositeBool_branch_eq (K.cutPair m).1 (K.cutPair m).2 side
++      have hradius : n04PositiveEndpoint i side = n01ComponentRoot C m (!side) :=
++        ho.trans (oppositeBool_branch_eq (C.left m) (C.right m) side)
++      exact rootEndpointTameJetBounds_of_index_radius_eq
++        (canonicalCurrentPoint C K z) (n04CoordinatesCurrentHeightRatio C K z)
++        hindex hradius h
+ 
+ private theorem positiveSourceJets_of_rootFamilyExistentials
+     {D : ReferenceData} {S : PhysicalSpacesData}

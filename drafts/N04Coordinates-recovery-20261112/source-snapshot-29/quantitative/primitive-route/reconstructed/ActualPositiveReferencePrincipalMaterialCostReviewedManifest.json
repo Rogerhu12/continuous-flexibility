@@ -1,0 +1,37 @@
+{
+  "kind": "same_displayed_positive_reference_reviewed_source",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalMaterialCost.lean",
+    "sha256": "1f3198433fddcb8aa95c50fe396055d5e69fdde24803291a9c7765f021bbfea6",
+    "blob": "3cd6145e53cc9c4fd121b77c76eb3721c32ef6bc",
+    "lines": 194
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalMaterialCostCandidateManifest.json",
+    "sha256": "ac60145626c1e03d6caeb8c955eed110c7bd811bce0d516f5bab69ca871d1a5f",
+    "blob": "349529079e39f83d098fe510640f978b749938f8",
+    "lines": 152
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/ActualPositiveReferencePrincipalMaterialCostIndependentReview.json",
+      "sha256": "60e5e62cdb89ae6753eb6e87f0c104203981a61c8f1a183a170beb14344ceb8e",
+      "blob": "2ab1cb21e37308cc338edad9ffdf78e2ed65c0c1",
+      "lines": 148
+    }
+  ],
+  "preservation": [
+    "Exact source and original candidate manifest are unchanged.",
+    "The material datum, actual typed atlas, original C0/B, midpoint cell and displayed Taylor width/Y/H are retained."
+  ],
+  "scope_limits": [
+    "The actual finite endpoint certificate remains a concrete intermediate producer input; no final principal estimate is assumed.",
+    "The same-retained witness and raw optical/host certificates remain explicit upstream construction obligations.",
+    "Material-envelope normalization must precede selection of the fixed family.",
+    "Static review only; no Lean compilation, CI claim or active checkout/index/refs changes."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:12:53.421927+00:00"
+}

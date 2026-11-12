@@ -1,0 +1,69 @@
+{
+  "kind": "actual_N03_record_fields_and_cutoff_preserved_fixed_witness_gateway",
+  "owner": "/root",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_INDEPENDENT_FULL_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.lean",
+      "sha256": "a699eb62ab13a137bf5e75ee7f27a8d8fb9d0449dee431b3980bdd015997efaa",
+      "blob": "fd48b7aea0616211039f84119dd4fb7f5d36a455",
+      "lines": 206,
+      "target_path": "src/ContinuousFlexibility/Analysis/N03CorrectionAssembly.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.lean",
+      "sha256": "cf0ef6b6b5df83bfe4214f4540ad949e0d95731d92bc65b931e81c6425360bd0",
+      "blob": "14bd53d10d3bc8e31a0bdcf67169cf11e5aa717e",
+      "lines": 117,
+      "target_path": "src/ContinuousFlexibility/Analysis/N04FixedCorrectionWitness.lean"
+    }
+  ],
+  "upstream_reference": "c5c48d262157a11a76604113c40d2438d480433f",
+  "upstream_N03_base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.base.lean.txt",
+    "sha256": "f9b89f4fdcfba29776b065b0094bc2f95403653894a6232922e359df175781ad",
+    "blob": "7e2daf38f4f8ed9742b48ed4a20f71bacff68e62",
+    "lines": 158
+  },
+  "original_gateway": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48/N02N03FixedWitnessConstruction.lean",
+    "sha256": "932d95fa60bd0030099cf3c2d638f467040783e3c05fa1a60fa3f5558188cbb0",
+    "blob": "e9a0f5a2693c800e8b97b7b46d33e8349456bcd9",
+    "lines": 108
+  },
+  "original_gateway_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48/N02N03FixedWitnessConstructionCandidateManifest.json",
+    "sha256": "51212bc5d2a633f16f9b2014e2cbb55d7c280588e3833101fac7055fb1ef650c",
+    "blob": "c487af4f800e35ade7eea93ecbe8a5cc14c4f88c",
+    "lines": 94
+  },
+  "exact_diffs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N03CorrectionAssembly.diff",
+      "sha256": "9f679cd6717bfca5ccf151d946a7b1faf9a166a4b3df4bac1e492cbfd1625e04",
+      "blob": "7d0837c6dbfdd4e0649e207e2c38cd85888bbb9a",
+      "lines": 121
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/n03-preserved-fields/N04FixedCorrectionWitness.diff",
+      "sha256": "ab7e498210c5a41e51fc56a60772dd54ec04716c63f80a4c32ce578fba68aa55",
+      "blob": "c1db79baa62566d54f3a9d7dcda97190313505b4",
+      "lines": 72
+    }
+  ],
+  "public_contract_preservation": [
+    "Original N03 exists_returnCorrection_of_smoothTame_source full header remains byte-identical; its wrapper discards only the two newly retained literal field equalities.",
+    "The private spatial proof and all original N03 construction clauses are byte-identical. The same local record is returned with coefficients and minusFlow equalities proved by rfl.",
+    "The fixed-witness proof before its terminal N03 constructor application is byte-identical to the original108 gateway. It keeps the same R, E, chi, cell, base and radius choices.",
+    "The new gateway returns the actual corrected record identities and genuine cutoff smoothness/range/support/endpoint germs/cell/material derivative data, with no new mathematical hypotheses.",
+    "The new gateway local instance has the distinct n04FixedCorrectionStateSMul name, so the original gateway can remain imported without a generated declaration collision."
+  ],
+  "selected_contract_requirement": "Select the reviewed main parameter-order compatibility graph for the N02/N03 consumers; no original c5 uniform-parameter-loss contract is restored.",
+  "scope_limits": [
+    "This is a fixed-witness constructive gateway. It does not identify an arbitrary existential N03 witness with the explicit corrected record.",
+    "No final CurrentJets, primitive estimate, reference-family bound or raw optical certificate is inserted as an assumption.",
+    "No local compiler/CI or active source/index/ref mutation. The new N03 source is a selected-provider extension that needs exact graph rebinding and peer review before activation."
+  ],
+  "compiled": false,
+  "created_at": "2026-11-12T16:18:57.650131+00:00"
+}

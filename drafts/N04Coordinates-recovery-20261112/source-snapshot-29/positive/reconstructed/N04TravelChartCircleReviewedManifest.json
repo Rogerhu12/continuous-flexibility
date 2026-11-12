@@ -1,0 +1,35 @@
+{
+  "kind": "actual_travel_chart_circle_reviewed",
+  "status": "FULL_SOURCE_STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircleCandidateManifest.json",
+    "sha256": "f40c646c5facfe566078294eec21dff97a1fd4b07be91eb7c342934b69f6264e",
+    "blob": "618c1b9993b12ee145bca2d1a81f0537be32248a",
+    "lines": 133
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+    "blob": "104f0953d774e3a3d5c37d386952aeed75774f8f",
+    "sha256": "b7263767dc103093d832994c184503da11351aa3338fd1c06f682224c792b808",
+    "lines": 154
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N04TravelChartCircleIndependentReview.json",
+    "sha256": "d95ceec25341d03720e08797a11397590def22724477c227856f29be695bf937",
+    "blob": "2a1e72c7cdd00f35e99004e5b994ad7033e4b4fc",
+    "lines": 198
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircleClosureInventory.json",
+    "blob": "873fe8b62ad8844ceecb10e97c7c8b0f5c462843",
+    "sha256": "d422f2d9dfd06aeb7f3892ac12526ce68081c4c696fe2c5b7092320eda701973",
+    "lines": 7088
+  },
+  "compiled": false,
+  "scope_limits": [
+    "The N03 existential assembly currently omits the literal minusFlow identity from its result. A constructor-preserving gateway must retain it before applying the final adapter to that returned witness.",
+    "Radius selector is fixed. Radial mixed derivatives, material/sample estimates, moving canonical inverse composition and final CurrentJets remain separate.",
+    "Selected main/cohort/gateway support is held and uncompiled. Historical graphs are immutable; full CI is a separate gate."
+  ],
+  "created_at": "2026-11-12T16:21:29.669929+00:00"
+}

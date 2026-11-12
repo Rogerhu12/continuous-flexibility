@@ -1,0 +1,33 @@
+{
+  "kind": "same_displayed_actual_reference_principal_reviewed_assembly",
+  "owner": "/root/quantitative_route",
+  "status": "STATIC_INDEPENDENTLY_FULL_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalAssembly.lean",
+    "sha256": "d6e96fa76c5638d8894bdead907acc0d212beb54b1fceec9e9d35724e1976d3a",
+    "blob": "9d0581140a551918a113ce17d1d91d8fce474500",
+    "lines": 134
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferencePrincipalAssemblyCandidateManifest.json",
+    "sha256": "4414948237974894577ad42fb1e0f805124f679d67241c3ae3f19f8e90c98abe",
+    "blob": "0914ab62f0efcb85f917c5297b7a21867c0d9846",
+    "lines": 110
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ActualPositiveReferencePrincipalAssemblyIndependentReview.json",
+      "sha256": "95178885d0dce94f101f4ad366ae611e0bd6b2f575124d6b0c311dcfd6757ce3",
+      "blob": "c13dba1b4bd1d78334bc855aa605e71fe7755a2a",
+      "lines": 115
+    }
+  ],
+  "scope_limits": [
+    "The original finite certificate and sample E0 unit floor are supplied by actual prior normalization and endpoint producers.",
+    "The same V geometric certificate is consumed from the prescribed reference-family assembly; Y/H/V are not selected anew.",
+    "No claim of arbitrary Through03 retained data, all primitive fields, current parameter jets or compilation."
+  ],
+  "source_unchanged": true,
+  "compiled": false,
+  "created_at": "2026-11-12T16:17:28.548072+00:00"
+}

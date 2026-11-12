@@ -1,0 +1,133 @@
+{
+  "kind": "actual_corrected_travel_chart_circle_and_joint_directional_tower",
+  "status": "CANDIDATE_HELD_UNCOMPILED_PENDING_FULL_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircle.lean",
+    "blob": "104f0953d774e3a3d5c37d386952aeed75774f8f",
+    "sha256": "b7263767dc103093d832994c184503da11351aa3338fd1c06f682224c792b808",
+    "lines": 154
+  },
+  "target": "src/ContinuousFlexibility/Analysis/N04TravelChartCircle.lean",
+  "public_names": [
+    "ContinuousFlexibility.Statements.N01Properties.n04TravelChartCircle",
+    "ContinuousFlexibility.Statements.N01Properties.n04TravelChartCircle_decode",
+    "ContinuousFlexibility.Statements.N01Properties.smoothTameOn_n04TravelChartCircle",
+    "ContinuousFlexibility.Statements.N01Properties.n04TravelChartSelector_jointTower",
+    "ContinuousFlexibility.Statements.N01Properties.n04ActualTravelChartSelector_jointTower"
+  ],
+  "direct_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircle.lean",
+      "sha256": "2c6be9ee3d6ce0f6ec4e5b15248718dca7085dae2dd80580dfd816943f10eb0a",
+      "blob": "fc11c89b2e92489890485acfcfe221f4ec47dd28",
+      "lines": 136,
+      "target": "src/ContinuousFlexibility/Analysis/N04MinusFirstIntegralCircle.lean",
+      "module": "ContinuousFlexibility.Analysis.N04MinusFirstIntegralCircle",
+      "selected_ref": "LOCAL_NEW_ACTUAL_MINUS_FIRST_INTEGRAL",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04CorrectedFlowInverseCircle",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegrals"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N04bActualTravelChart",
+      "target_path": "src/ContinuousFlexibility/Analysis/N04bActualTravelChart.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "a1b60844375f7e23349c24356cd300a76a6fd72e",
+      "sha256": "5c7da22817d01115c5837f791ed4ba939d9f097c5ad547cb4882d02e435fb30a",
+      "lines": 229,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFlowField",
+        "ContinuousFlexibility.Analysis.N04bCharacteristicFirstIntegralsChart",
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation",
+        "ContinuousFlexibility.Analysis.TravelStripInverseSymmetry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SpacesCircleParity",
+      "target_path": "src/ContinuousFlexibility/Analysis/SpacesCircleParity.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "d45ab137d1e034ac515a2453e4558164dbe4993b",
+      "sha256": "6728cc182b90bbb6fd091ac3151b759c16f85da485cae0f1bad59cdc5806bca7",
+      "lines": 278,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleJetEncoding",
+        "ContinuousFlexibility.Analysis.CylinderTestPairing",
+        "ContinuousFlexibility.Analysis.ProjectiveLimitSubspace"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJointEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJointEvaluation.lean",
+      "blob": "b18010ba5d5c86d247e70d32e8ffd134434e126b",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "5110f4d8cf53b34ed33b6221317e9421d876d9add22dca234e95493edcc33ba6",
+      "lines": 216,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJointAngular",
+        "ContinuousFlexibility.Analysis.TameElementaryCalculus",
+        "ContinuousFlexibility.Analysis.SolveNewtonBridge"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameProductDirections",
+      "path": "src/ContinuousFlexibility/Analysis/TameProductDirections.lean",
+      "blob": "da7b331dbdf5958e0f9e2f18326085519ae35398",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "15f7e37725e1710ef8e56bb1e47a302afc070381b9a0fc5613345f6440f5f20f",
+      "lines": 48,
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameJetLocalBounds",
+        "ContinuousFlexibility.Analysis.ProjectiveCurveIteratedChain"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.WeightedSmoothTameLinear",
+      "target_path": "src/ContinuousFlexibility/Scalar/WeightedSmoothTameLinear.lean",
+      "source_ref": "bd249b94d15dd2242e189bcd91c7e378ea7875d9",
+      "blob": "799b2f9eeeac80d4d73499ff158de8bb4446e6be",
+      "sha256": "9dd9dc230e2e00456a69f9f40c5698b04dbcbcf59e48ff96f23cfa23bf6d9025",
+      "lines": 82,
+      "imports": [
+        "ContinuousFlexibility.Scalar.WeightedSmoothTameAlgebra",
+        "ContinuousFlexibility.Scalar.WeightedUniformTameGermOperations"
+      ]
+    }
+  ],
+  "input_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/N04MinusFirstIntegralCircleReviewedManifest.json",
+    "blob": "3f55563e7b0a41a2aa4687bdaac094853434c856",
+    "sha256": "121c5b397c6ddb0bdbaaa98ad1884663d2e9e4197b28894446cee79427e95946",
+    "lines": 40
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircleClosureInventory.json",
+    "blob": "873fe8b62ad8844ceecb10e97c7c8b0f5c462843",
+    "sha256": "d422f2d9dfd06aeb7f3892ac12526ce68081c4c696fe2c5b7092320eda701973",
+    "lines": 7088
+  },
+  "closure_gzip": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04TravelChartCircleClosureInventory.json.gz",
+    "sha256": "4c7f15e3b81d79b9e1ed77d3fce5540be91d3d7de8ac31e26a7306042be8cb0e",
+    "bytes": 59975,
+    "decompresses_to_sha256": "d422f2d9dfd06aeb7f3892ac12526ce68081c4c696fe2c5b7092320eda701973"
+  },
+  "checks": [
+    "The same normalized first-integral circle is projected by the actual zero-loss even/odd continuous linear maps.",
+    "Exact decoded identity: travel chart equals (optical travel plus even displacement, angle plus odd displacement).",
+    "One first-integral SmoothDirections tower is selected once before derivative order and projected in both components; actual joint evaluation and affine constant/angle lifts yield the vector tower.",
+    "SmoothTameOn retains one all-order tower, with derivative-order loss chosen before spatial regularity. No uniform-in-order loss is asserted.",
+    "The final stored-chart adapter consumes only the literal flow-data identity L.minusFlow = returnCorrectedMinusFlow, not an assumed regularity or target CurrentJets.",
+    "Every selected source fingerprint and import checked; explicit public-name scan has zero collisions/warnings; no Lean elaboration."
+  ],
+  "remaining": [
+    "The N03 existential assembly currently omits the literal minusFlow identity from its result. A constructor-preserving gateway must retain it before applying the final adapter to that returned witness.",
+    "Radius selector is fixed. Radial mixed derivatives, material/sample estimates, moving canonical inverse composition and final CurrentJets remain separate.",
+    "Selected main/cohort/gateway support is held and uncompiled. Historical graphs are immutable; full CI is a separate gate."
+  ],
+  "compiled": false,
+  "source_modified_in_active_checkout": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T16:13:13.117199+00:00"
+}

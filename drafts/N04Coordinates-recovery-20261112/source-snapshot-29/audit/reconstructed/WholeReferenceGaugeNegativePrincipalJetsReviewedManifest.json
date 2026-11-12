@@ -1,0 +1,46 @@
+{
+  "kind": "WholeReferenceGaugeNegativePrincipalJets_reviewed_source_selection",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "owner": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJetsCandidateManifest.json",
+    "sha256": "de136377eca3cfb155353ee70f25707353e8ddf23cd316adfac58376dd004eba",
+    "blob": "70d4b355c51d9109ccf1b6a35bb2b9491c46d568",
+    "lines": 135
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeNegativePrincipalJets.lean",
+    "sha256": "a539b4ccf54410a7db50a43cf4b708c41d840820a3b7e5e9c107b36ba6867ecb",
+    "blob": "f7f3ec3c2aafb234fb77b69076de6e2873988e22",
+    "lines": 239,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeNegativePrincipalJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "ContinuousFlexibility.Analysis.ActualNegativeLengthMaterialBounds",
+      "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization",
+      "ContinuousFlexibility.Analysis.LocalMixedProductBounds",
+      "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+    ],
+    "public_names": [
+      "n04bActualTypedAtlas_negative_airy_coefficients",
+      "n04WholeReferenceGauge_negative_principalReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeReferenceGaugeNegativePrincipalJetsIndependentReview.json",
+      "sha256": "d09dc4c252ac5fa15377aa335eb3362a4e63ee0e51ef5722f846a98f6b70f3d9",
+      "blob": "6e80dce6492272cd7d73ed033808de919d39cd99",
+      "lines": 190
+    }
+  ],
+  "source_changed_since_candidate": false,
+  "scope": [
+    "Only the four actual negative principal atoms: a=1, a_inverse=1, b=0 and c=-rho*u on the true unit strip. Their exact same-oldK and same-V sample metadata are preserved.",
+    "The one numerical envelope precedes all piece/state/derivative-order data, uses the genuine canonical half-length bound, and uses the unit floor only for enlargedMaterialData T.",
+    "No whole-half height or negative potential bound, positive principal atoms, final primitive certificate or compilation claim."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}
