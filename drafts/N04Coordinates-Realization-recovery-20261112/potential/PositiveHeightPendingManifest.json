@@ -2,7 +2,7 @@
   "purpose": "Preserve the actual positive Taylor height and reciprocal quantitative closure during a runtime outage.",
   "parent": "1e6fa133c796d112fdc03e932fd53e2724623ebb",
   "compilation": "Not compiled; pending bounded integration and CI.",
-  "total_lean_lines": 1371,
+  "total_lean_lines": 1608,
   "files": [
     {
       "path": "src/ContinuousFlexibility/Analysis/N04RealizationLogScalarBounds.lean",
@@ -73,14 +73,19 @@
     {
       "path": "src/ContinuousFlexibility/Analysis/N04RealizationActualPositiveGaugeFields.lean",
       "lines": 129,
-      "review": "Author static review completed; independent review pending; not compiled."
+      "review": "Independent static review passed; compilation pending."
     },
     {
       "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveGaugeHeightBounds.lean",
       "lines": 190,
+      "review": "Independent static review passed; compilation pending."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04RealizationPositiveGaugePotentialBounds.lean",
+      "lines": 237,
       "review": "Author static review completed; independent review pending; not compiled."
     }
   ],
-  "current_checkpoint_parent": "e3210c755ff2b4dc1dd43e2fbda6e22f73ddb422",
-  "connection": "Exact same-atlas positive pulled-height/potential identities, followed by the actual Taylor Q bounds and the existing fixed radial product estimate for the supplied reference Y/H."
+  "current_checkpoint_parent": "71e6f10f4b6c808b46baf7fd13aa972373e5586c",
+  "connection": "Exact same-atlas positive gauge identities and derived pulled-height bounds are now connected to the original principal inputs through the existing potential differential-product theorem. No final potential bound or CurrentJets premise is assumed."
 }
