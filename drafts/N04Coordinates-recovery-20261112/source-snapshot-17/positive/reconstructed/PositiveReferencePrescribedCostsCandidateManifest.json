@@ -1,0 +1,79 @@
+{
+  "kind": "candidate_actual_prescribed_reference_costs",
+  "owner": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+    "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+    "blob": "f50437f2ab563c4e8a8076b803441290ef10a7a2",
+    "lines": 148
+  },
+  "public_declarations": [
+    "positiveReferenceFiniteRadialJets_prescribed_costs",
+    "positiveReferencePrescribedCost_material_bound"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/reference-taylor-triangle/PositiveReferenceTaylorPrescribedWidth.lean",
+      "sha256": "44bc853c9750ea6ef6125b7af5f878b7fd47d3ffb3175b521a3ba21be36059a4",
+      "blob": "6520aad4926928dba5080ffed052e7630f413668",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+      "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+      "blob": "25205de05e190acb6ec954e7ec34ce73351c88be",
+      "lines": 145
+    }
+  ],
+  "provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/PositiveReferenceFinitePrescribedIndependentReview.json",
+      "sha256": "c91d9ea32eb102f3bcc50d15f91535f9ef41fbe4e3df1b330dc0b78d783a28cd",
+      "blob": "c29a462837853d50adca5ca9335c60de39965e7d",
+      "lines": 68
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveReferenceTaylorPrescribedWidthIndependentReview.json",
+      "sha256": "9278d86985f834fca7404c8c081cdcf034b90012aaa577aeaabc89b19b8c3370",
+      "blob": "6faf139ac7260c557283b542b626e996a07bf7b7",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/PositiveReferenceValueEnvelopeIndependentReview.json",
+      "sha256": "95cf6a10437bdb36fb8cf15e1fb895bee6e63d03b4a0bea020008c55de946662",
+      "blob": "5ad28b526ff15060f906944e305d50409a741a27",
+      "lines": 90
+    }
+  ],
+  "scope": [
+    "The same displayed width, radial Taylor slices, integral Y and log-interpolated H are retained; no qualitatively selected width is estimated or silently identified.",
+    "Input U bounds the finite positive-order chart jets and all height jets, reciprocal endpoint lower, reciprocal span and span. These remain numerical raw-data inputs.",
+    "The actual prescribed factory gives derivative lower/upper and true positive height. The new scalar arithmetic gives width reciprocal at most (24+16(n+2))*U^2, derivative at most (n+2)*U, inverse derivative at most 2U, and height/reciprocal at most 4U^2. For n=3 the displayed width cost is 104U^2.",
+    "The second theorem converts a supplied U <= K*W^K into the exact same material base with coefficient (24+16(n+2))*K^2 and exponent 2K. It does not derive that input from arbitrary Through03."
+  ],
+  "actual_remaining_inputs": [
+    "Uniform same-witness material bounds for actual reference root chart/height finite jets and inverse root slope/height are being derived by quantitative_route.",
+    "A reciprocal positive component span bound and comparison of the two actual endpoint host bases with one selected positive sample are not assumed proved here.",
+    "Latest current N01c final Flows drops its N01PrimitiveGeometry certificate; no projection of retained Gamma or raw optical lower from arbitrary Through03 is used."
+  ],
+  "interface_audit": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/N01cLatestPrimitiveRetentionInterfaceAudit.json",
+    "sha256": "6e349cdfb40c910a122011f1a183114564b73fe1849d9bea1c76638c03fc6c89",
+    "blob": "3a7cfb627af367a7311175ea6ce890d9e37d7d17",
+    "lines": 51
+  },
+  "pinned_apis": [
+    "pow_le_pow_left₀ at Mathlib/Algebra/Order/GroupWithZero/Basic.lean:514",
+    "one_div_le_one_div_of_le at Mathlib/Algebra/Order/Field/Basic.lean:69",
+    "Real.rpow_mul_natCast at Mathlib/Analysis/SpecialFunctions/Pow/Real.lean:520"
+  ],
+  "compiled": false,
+  "checkout_index_refs_changed": false
+}

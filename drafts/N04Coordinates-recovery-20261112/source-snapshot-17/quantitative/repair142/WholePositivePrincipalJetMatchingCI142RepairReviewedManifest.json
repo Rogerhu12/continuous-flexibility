@@ -1,0 +1,37 @@
+{
+  "kind": "ci142_quantitative_matching_reviewed_repair",
+  "status": "STATICALLY_REVIEWED_UNCOMPILED",
+  "baseline": {
+    "head": "7a9eaacbc01e206ab2a91cc1d538cc48505130d9",
+    "tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatching.lean",
+    "sha256": "222f8feb857b4ef07398e0bf78c96a554b3fd57779d28493614f1a4a6a28abf5",
+    "blob": "eb381248ee37bfe8051e32879410f5fc678deacc",
+    "lines": 156
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatchingCI142RepairCandidateManifest.json",
+    "sha256": "e0603fc2e037f5b8ac3b3b8e981ca5ee04b893e47e35c8e0e80b6b5566944414",
+    "blob": "5f2da57337d0377881b3bb9b2727dd3e129570b3",
+    "lines": 101
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholePositivePrincipalJetMatchingCI142IndependentReview.json",
+      "sha256": "0309eed545bf2fc260c69e7ab1c0935ca5c6766b3c19de43601ac99d92dd4f91",
+      "blob": "bd198040c69cf70ad244663d6efb9a01426634bd",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholePositivePrincipalJetMatchingCI142IndependentReview.json",
+      "sha256": "97fb5445ee22068aecb18d49dcb2ab09f6176139ceab5f0548bacecd4171a4eb",
+      "blob": "0df899ea6163d216462a6ec50be09bd4e831c154",
+      "lines": 70
+    }
+  ],
+  "all_public_headers_imports_options_unchanged": true,
+  "compiled": false,
+  "checkout_index_refs_CP_authority_modified": false
+}

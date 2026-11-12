@@ -1,0 +1,77 @@
+{
+  "kind": "actual_reference_gauge_endpoint_jets_independent_full_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_actual_providers",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeEndpointJetsCandidateManifest.json",
+    "sha256": "03d00e45a0a41d0e347672e5685f532817b2e20e5c1680f9d21f2740625a4dfc",
+    "blob": "899aa0f28b710c07067d3c30476e7619a7ac8205",
+    "lines": 59
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeEndpointJets.lean",
+    "sha256": "fdc1fe254979e937aaff78852ad6142a4ecd2fefff1751f29b859cab444b7d47",
+    "blob": "99441781ed5a0d0a42aac13fd7c07ab71180b3a1",
+    "lines": 95
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveReferenceJets.lean",
+      "sha256": "f073be472d15bb804ef90f2b2e800f9c5d11e850c35364149ec2152ff91ae5a9",
+      "blob": "9c27d7e41b041b4b5d3787a181803642834f1479",
+      "lines": 151
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJets.lean",
+      "sha256": "80cdd212e2e550da19280ac5eec2011695831fa4f43f64dcacd701c63a985e29",
+      "blob": "3a43ccceb3f82270ebdde43087111bd569cdab5f",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PositiveReferencePhysicalLower.lean",
+      "sha256": "531eb07e8de402ba9f78121ebc664bd15138cec5d4c5ac3355de97f042ce2f33",
+      "blob": "67eb210bafb8b58d25ddacf80d44fcaf95e86fee",
+      "lines": 116
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveCanonicalFields.lean",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "lines": 169
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    }
+  ],
+  "reviewed_generic_input": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJetsReviewedManifest.json",
+    "sha256": "308199552c13b7d9b951847d7dcf921d4d975281a321f1703c2e683ce29647a1",
+    "blob": "7ad5f612da128ed1a822e525ae2f8a2eb78d2cb9",
+    "lines": 46
+  },
+  "checks": [
+    "Read the full 95-line actual adapter and the full 105-line finite radial gauge transfer; checked the exact actual interior endpoint matching contract and actual reference coefficient identity.",
+    "PositiveChartRangeGeometry keeps physical left/right distinct from canonical zero/one. The same actual range certificate gives Y(left)=0 and Y(right)=1; applying its genuine global left inverse at the physical endpoint gives the displayed canonical inverse image, with the same angle theta.",
+    "The scalar smoothness of Y and H0 is obtained by restricting the actual joint smooth functions to (r,0), and Jacobian positivity gives the actual positive derivative of Y. These are not added endpoint-jet assumptions.",
+    "The current relative principal jets at the physical root come from the actual old atlas and the already constructed matching. The same supplied reference family has tau0=sigma0=id and Q0=1, so its actual coefficient field is the original reference physical coefficient field.",
+    "After rewriting the true inverse image and the reference coefficient identity, the finite common-gauge theorem transfers both fields with the same Y/H0 and inverse, without losing order or choosing another map. Parameter order, ordinary root point, Fin3 component and old-K source scope agree.",
+    "The explicit interior hypothesis excludes ambient endpoints. There is no claim of ambient jet matching, material estimates, cubic bounds or a complete primitive certificate."
+  ],
+  "public_declarations": [
+    "n04Coordinates_referenceGaugePrincipal_endpoint_jets"
+  ],
+  "public_collision_in_current_source": false,
+  "compiled": false,
+  "source_edited_by_reviewer": false,
+  "checkout_index_refs_modified": false,
+  "ci_queried_or_downloaded": false
+}

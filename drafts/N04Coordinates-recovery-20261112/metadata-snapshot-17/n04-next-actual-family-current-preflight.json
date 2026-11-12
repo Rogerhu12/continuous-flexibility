@@ -1,0 +1,60 @@
+{
+  "kind": "actual_family_static_preflight",
+  "status": "HELD_NOT_ACTIVATED",
+  "checked_at": "2026-11-12T12:36:55.547069+00:00",
+  "head": "7a9eaacbc01e206ab2a91cc1d538cc48505130d9",
+  "tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2",
+  "proposal": "/workspace/scratch/bbbea77e4163/n04-next-actual-family-group-reconstructed-held.json",
+  "proposal_sha256": "bd2804ba63b06e66d551b46bd47b887deb7147972c11e1c6f927bdfd9668fd8c",
+  "files": 19,
+  "source_lines": 2794,
+  "project_closure": 792,
+  "providers": 773,
+  "public_names": 40,
+  "reviewed_CI142_provider_rebindings": {
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasData": {
+      "before": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+      "after": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+      "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeCanonicalAtlasDataCI141IndependentReview.json",
+      "review_sha256": "a1d455a70183b3a907e1b3dea856af92665b54deede8b1573b5e7aaf2e548062"
+    },
+    "ContinuousFlexibility.Analysis.FiniteFullJetBoundary": {
+      "before": "69e3303eff0b945230f7210da126b95c232669b3",
+      "after": "c2a1ce634f56db1bd806beda929f2feb62c15989",
+      "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141FiniteJetAndAdjugateIndependentReview.json",
+      "review_sha256": "09ffb5fdc7fe8be97d9e9d2c8b2d4599a6583e8ad2b674e1425137813f32eed9"
+    },
+    "ContinuousFlexibility.Analysis.AdjugatePrincipalFiniteJets": {
+      "before": "3596dfced859852fd352f9c0fd551f034b93e56a",
+      "after": "f1b40b1987f10459cb329c662f2c954d3353449c",
+      "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141FiniteJetAndAdjugateIndependentReview.json",
+      "review_sha256": "09ffb5fdc7fe8be97d9e9d2c8b2d4599a6583e8ad2b674e1425137813f32eed9"
+    },
+    "ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity": {
+      "before": "3ba8a57f4c89b91f24c918f32a8eea3d9460c910",
+      "after": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141PrincipalScalarIndependentReview.json",
+      "review_sha256": "cb4e306610e43e259ed342b16bbcce47ced68551b050e831569753ed424e244d"
+    },
+    "ContinuousFlexibility.Analysis.RelativePrincipalCoefficients": {
+      "before": "9bf310b3fa12f9185863b2730169faae74211bc6",
+      "after": "ca49daddabf4addd513c2ca95c1f6e93b4545268",
+      "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI141PrincipalScalarIndependentReview.json",
+      "review_sha256": "cb4e306610e43e259ed342b16bbcce47ced68551b050e831569753ed424e244d"
+    }
+  },
+  "missing_prerequisite_modules": [],
+  "current_ci": {
+    "label": 142,
+    "head": "7a9eaacbc01e206ab2a91cc1d538cc48505130d9",
+    "tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2",
+    "main": "8cebde34f6668c523facece3312949e9dbec3444",
+    "pushed": "2026-11-12 12:33:13 UTC",
+    "first_check_not_before": "2026-11-12 12:38:13 UTC",
+    "status": "pending",
+    "plan": "n04-ci142-plan.json",
+    "source_all_total": 3681,
+    "root_imports": 3624,
+    "scope": "Five independently reviewed exact CI141 proof-body repairs plus latest main workflow-only cache merge. No new module; 2808 added Lean lines since full green140."
+  }
+}

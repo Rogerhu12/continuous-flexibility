@@ -1,0 +1,51 @@
+{
+  "kind": "exact_latest_main_and_n01c_retention_interface_audit",
+  "author": "/root/proof_inventory",
+  "status": "READ_ONLY_INTERFACE_FINDING",
+  "latest_main": {
+    "commit": "8cebde34f6668c523facece3312949e9dbec3444",
+    "verified_url": "https://api.github.com/repos/Rogerhu12/continuous-flexibility/branches/main"
+  },
+  "pr": {
+    "number": 23,
+    "head": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+    "url": "https://github.com/Rogerhu12/continuous-flexibility/pull/23"
+  },
+  "remote_sources": [
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "blob": "4d426c2990d6d685eec9b270469f440b40c9ccce"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Blueprint/N01c/Flows.lean",
+      "blob": "8ffdf5e22b4f25374339bc63855bf9a3cc8ddda9"
+    }
+  ],
+  "primitive_contract": "/-- The reference geometry used by the nonlinear estimates, retained on the\nsame data as the controls and material weights. These are primitive support,\nplacement and nondegeneracy assertions, not tame conclusions. -/\ndef N01PrimitiveGeometry (D : ReferenceData) (T : MaterialData)\n    (S : PhysicalSpacesData) (C : NonlinearGeometryData S) : Prop :=\n  (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m)) ∧\n  tsupport D.chi ⊆ Ioo D.a D.b ∧\n  ∃ K : ℝ, 0 < K ∧ ∀ m r,\n    r ∈ Ioo (C.left m) (C.right m) →\n      K⁻¹ * T.E0 (T.sample (C.cell m)) ^ (-K) *\n          min (r - C.left m) (C.right m - r) ≤\n        -deriv D.w r / (r * D.w r)",
+  "final_flow_source": "import ContinuousFlexibility.Analysis.N01cOrdinaryFlowBounds\n\n/-!\n# N01c: variations of the ordinary flows\n\nThe actual angular and radial variations satisfy their estimates on one\ncommon neighborhood. The coefficient estimate and the geometric clauses\nrestrict to that same neighborhood, yielding the complete N01 package.\n-/\n\nnamespace ContinuousFlexibility.Blueprint\n\nopen ContinuousFlexibility.Statements\n\ntheorem N01cFlows (hSpeeds : N01SpeedStatement) : N01Statement := by\n  obtain ⟨A, T, S, C, base, loss, ε, hT, hS, hA, hε, hB,\n    hCoefficients, hSpeed, hG, hE⟩ := hSpeeds\n  obtain ⟨base', ε', hb, hε', hε'ε, hFlows⟩ :=\n    n01_exists_ordinaryFlowFamilyTameBounds hS hT hA hε hB hG hE hSpeed\n  exact ⟨A, T, S, C, base', loss, ε', hT, hS,\n    n01Properties_of_parts hA hε' (n01PartB_mono hB hb hε'ε)\n      (coefficientFamilyTameBounds_mono_of_accumulatingProfile hT hA.1.1\n        hCoefficients hb le_rfl hε'ε) hFlows⟩\n\nend ContinuousFlexibility.Blueprint\n",
+  "findings": [
+    "PR23 now proves actual designated-cell containment and a common pointwise optical lower bound on the retained N01a construction and carries N01PrimitiveGeometry through N01a/N01b and intermediate coefficient/speed stages.",
+    "The exact final N01cFlows destructs hG and uses it to construct hFlows. It then returns n01Properties_of_parts with hA, restricted hB, coefficient bounds and hFlows; hG is not retained in the final N01Statement.",
+    "The fetched Nonlinear.lean has no occurrence of N01PrimitiveGeometry. N01Properties ends with CoefficientFamilyTameBounds and OrdinaryFlowFamilyTameBounds; Through01 is exactly N01Properties and N01Statement returns only Through01 alongside material/space certificates.",
+    "The optical lower bound and containing-cell statement cannot therefore be obtained by a projection from arbitrary current Through03. This is an exact interface finding, not a proof that those statements are logically underivable from all other hypotheses.",
+    "The already reviewed retained-positive-endpoint theorem concerns the same explicit P/Gamma/profile/retained-coordinates witness. It does not replace an arbitrary Through03 reference."
+  ],
+  "minimal_retention_path": [
+    "Define the existing raw host/optical predicate at a statement layer available to Nonlinear.lean, preserving exactly its three primitive clauses and the same D/T/S/C.",
+    "Have the final N01 package retain that predicate and pass the existing hG through n01Properties_of_parts/N01cFlows; preserve it in neighborhood restriction and cumulative Through02/Through03 construction.",
+    "This proposed retention change is not applied here. Its exact interface placement and affected consumer proofs remain a root/upstream decision.",
+    "Once the same-witness certificate is exposed, the reviewed root-factor/root-speed material powers can consume its actual host and raw optical lower clauses. Positive-component endpoint-to-selected-sample comparison and a genuine positive-profile lower still require separate construction proofs."
+  ],
+  "mutations": {
+    "repository": false,
+    "branch_or_ref": false,
+    "contract": false,
+    "ci": false
+  },
+  "compiled": false
+}
+

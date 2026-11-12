@@ -1,0 +1,59 @@
+{
+  "kind": "candidate_actual_reference_gauge_endpoint_full_jets",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeEndpointJets.lean",
+    "sha256": "fdc1fe254979e937aaff78852ad6142a4ecd2fefff1751f29b859cab444b7d47",
+    "blob": "99441781ed5a0d0a42aac13fd7c07ab71180b3a1",
+    "lines": 95
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveReferenceJets.lean",
+      "sha256": "f073be472d15bb804ef90f2b2e800f9c5d11e850c35364149ec2152ff91ae5a9",
+      "blob": "9c27d7e41b041b4b5d3787a181803642834f1479",
+      "lines": 151
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJets.lean",
+      "sha256": "80cdd212e2e550da19280ac5eec2011695831fa4f43f64dcacd701c63a985e29",
+      "blob": "3a43ccceb3f82270ebdde43087111bd569cdab5f",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/PositiveReferencePhysicalLower.lean",
+      "sha256": "531eb07e8de402ba9f78121ebc664bd15138cec5d4c5ac3355de97f042ce2f33",
+      "blob": "67eb210bafb8b58d25ddacf80d44fcaf95e86fee",
+      "lines": 116
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveCanonicalFields.lean",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "lines": 169
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    }
+  ],
+  "reviewed_input": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalFiniteJetsReviewedManifest.json",
+    "sha256": "308199552c13b7d9b951847d7dcf921d4d975281a321f1703c2e683ce29647a1",
+    "blob": "7ad5f612da128ed1a822e525ae2f8a2eb78d2cb9",
+    "lines": 46
+  },
+  "public_declarations": [
+    "n04Coordinates_referenceGaugePrincipal_endpoint_jets"
+  ],
+  "scope": [
+    "The actual range geometry determines both canonical endpoint inverse images through the same actual global left inverse.",
+    "The true current physical endpoint jets come from the constructed transport matching and actual negative reference equation; reference relative transport is the same supplied identity family.",
+    "Common radial gauge transfer gives the actual current/reference canonical full-jet equality at zero or one with no loss of order.",
+    "Ambient endpoints are explicitly excluded by the actual interior endpoint hypothesis, not silently treated as roots."
+  ],
+  "compiled": false,
+  "checkout_index_refs_modified": false
+}

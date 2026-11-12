@@ -1,0 +1,110 @@
+{
+  "kind": "ci142_owned_whole_atlas_field_rewrite_and_true_goal_repair",
+  "status": "STATICALLY_REVIEWED_UNCOMPILED",
+  "author": "/root/audit_coordinates",
+  "before_commit": "7a9eaacbc01e206ab2a91cc1d538cc48505130d9",
+  "before_tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2",
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-142.log",
+    "sha256": "56b047e8dd8bcd169b69a80775e5f02bee7e8065ba2571b75de7eda1a201d9ae",
+    "downloaded_or_queried_by_this_agent": false
+  },
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasPrincipalDensity.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.base.lean.txt",
+      "diff": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.diff",
+      "before_blob": "052931f3d9b1717a4ac479ee6e88ec7e1d701b71",
+      "after_blob": "a6e08b84cd66524d8f53399071d3a116adbf626e",
+      "before_sha256": "dd3c83318f103146413d018b7033e6d56c15b78e4601eae93333f6200bc93c6a",
+      "after_sha256": "be4ce162e802d641ee1e37d7d9e125e9f45426ccf65b0b110ae7ade77b8ca7e9",
+      "diff_sha256": "6f1ed6b1eebeb9c76d0558322c0695f14aebab8faba11f7442be1a5973de9975",
+      "before_lines": 74,
+      "after_lines": 91,
+      "public_declarations": 1,
+      "private_declarations": 0,
+      "public_header_names": [
+        "n04WholeCanonicalAtlasData_actual_negativePrincipalDensity"
+      ],
+      "public_headers_byte_identical": true,
+      "imports_byte_identical": true,
+      "namespace_open_options_byte_identical": true,
+      "all_other_bytes_recovered_by_exact_inverse_patch": true,
+      "exact_replacement": {
+        "before": "      simpa only [hF, hh] using h\n",
+        "after": "      have hchart :\n          (n04WholeCanonicalAtlasData C L K e cell F G Q N).chart z m =\n            K.chart z k := hF\n      have hheight :\n          (n04WholeCanonicalAtlasData C L K e cell F G Q N).height z m =\n            K.height z k := hh\n      change (coordinatePrincipalDensity (L.coefficients z)\n          ((n04WholeCanonicalAtlasData C L K e cell F G Q N).chart z m)\n          ((n04WholeCanonicalAtlasData C L K e cell F G Q N).height z m)).a x = 1 ∧\n        (coordinatePrincipalDensity (L.coefficients z)\n          ((n04WholeCanonicalAtlasData C L K e cell F G Q N).chart z m)\n          ((n04WholeCanonicalAtlasData C L K e cell F G Q N).height z m)).b x = 0 ∧\n        (coordinatePrincipalDensity (L.coefficients z)\n          ((n04WholeCanonicalAtlasData C L K e cell F G Q N).chart z m)\n          ((n04WholeCanonicalAtlasData C L K e cell F G Q N).height z m)).c x =\n            -((n04WholeCanonicalAtlasData C L K e cell F G Q N).chart z m x).1\n      rw [hchart, hheight]\n      exact h\n"
+      },
+      "diagnostic": "error: src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasPrincipalDensity.lean:69:6: Type mismatch: After simplification, term",
+      "reason": "Expose the same actual whole-atlas chart and height as function equalities, fix the goal to their explicit applications, then rewrite the target and reuse the already proved old-atlas density."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasOperator.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.base.lean.txt",
+      "diff": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.diff",
+      "before_blob": "4e74be6d5d2495499be2d13f1b908e6a49b1226c",
+      "after_blob": "7b18e1768744c85463cf9979c8a4d1a309a6033e",
+      "before_sha256": "d87df6c62654e5a9a426ba4d318291597cef3d6df3435ae17df91c47a2cb0990",
+      "after_sha256": "a45cf9cc9576c83d05f3b60849ba09c32429c03826a0aff78a9253f8fca48f2e",
+      "diff_sha256": "3e7f7c26637471277da816b006dc8a2dbc4d24fe169caa3a6c23b98309f99374",
+      "before_lines": 112,
+      "after_lines": 113,
+      "public_declarations": 3,
+      "private_declarations": 0,
+      "public_header_names": [
+        "n04WholeCanonicalAtlasData_operatorFields",
+        "n04WholeCanonicalAtlasData_actual_operatorFields",
+        "n04WholeCanonicalAtlasData_actual_operator"
+      ],
+      "public_headers_byte_identical": true,
+      "imports_byte_identical": true,
+      "namespace_open_options_byte_identical": true,
+      "all_other_bytes_recovered_by_exact_inverse_patch": true,
+      "exact_replacement": {
+        "before": "        wholePositiveCanonicalPotential, neg_one_mul]\n\nvariable",
+        "after": "        wholePositiveCanonicalPotential, neg_one_mul]\n      exact ⟨True.intro, fun _ => True.intro⟩\n\nvariable"
+      },
+      "diagnostic": "error: src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasOperator.lean:56:10: unsolved goals",
+      "reason": "The recorded simp result is exactly True and a universally true proposition; complete that residual conjunction explicitly."
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+      "blob": "c3a5f79617c7e583e16deb09c44e5679744ea092",
+      "sha256": "a4a3c629dcde3b7c324291d5e65c6bc6ceacbbdf8968577f2abcc3f0472c9f1d",
+      "declarations": [
+        "n04WholeCanonicalAtlasData_negative_fields",
+        "n04WholeCanonicalAtlasData"
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ActualNegativePrincipalDensity.lean",
+      "blob": "7a3122c1e2c2081375a7be7405a2a348706ed261",
+      "sha256": "79be096548f4222f5265dc93e1b7ad6aa1bf426954089f48bb78b423c23ee2a3",
+      "declarations": [
+        "n04Coordinates_actualAtlas_negativePrincipalDensity"
+      ]
+    }
+  ],
+  "scope": "Two proof blocks only at the two actual CI142 diagnostic sites. All four public headers, imports, options, other theorem bodies, and mathematical inputs/conclusions are byte-identical. No new public or private declarations.",
+  "verification": {
+    "compiled": false,
+    "ci_queried": false,
+    "checkout_index_refs_CP_authority_or_active_plan_changed": false,
+    "exact_git_preimages_checked": true,
+    "all_replacements_reverse_to_exact_git_sources": true
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/CI142WholeAtlasFieldRepairCandidateManifest.json",
+    "sha256": "9e76a1ff1dbccb4844b9dc1d0a56df1f7a20f787514f78b345a07c735b5d5a31"
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI142WholeAtlasFieldRepairsIndependentReview.json",
+      "sha256": "16f340575c7af3ce10995f159310bc3fc45dd4b110509bb231f34f51545ed870",
+      "reviewer": "/root/proof_inventory"
+    }
+  ]
+}

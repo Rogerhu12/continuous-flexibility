@@ -1,0 +1,177 @@
+{
+  "label": 143,
+  "parent": "7a9eaacbc01e206ab2a91cc1d538cc48505130d9",
+  "base_tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2",
+  "tree": "8b7c371e142e08a09bc8171e90d392031b1713f6",
+  "main_included": "8cebde34f6668c523facece3312949e9dbec3444",
+  "current_main_checked": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+  "pending_main_merge_reason": "Main integrated N06 after CI142. Finish the current five-module repair group first, then merge and validate main before any new source activation. Nonlinear and Blueprint statement interfaces used here are unchanged.",
+  "added_since_green": 2836,
+  "deleted_since_green": 0,
+  "payload": "/workspace/scratch/bbbea77e4163/n04-ci143-tree-payload.json",
+  "payload_sha256": "ac85127a7b5e70a42021eff21531253ab8143c1b921504f91485b94a7bf6bb89",
+  "payload_codepoints": 25838,
+  "files": [
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositivePrincipalJetMatching.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatching.base.lean.txt",
+        "sha256": "d9cd7c8a808e169bf0e60b8e9e5f7f5889a852313519019f0c24c07d7d470dac",
+        "blob": "58036d5cce27a25aadf98164681688a21b8557ef",
+        "lines": 153
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatching.lean",
+        "sha256": "222f8feb857b4ef07398e0bf78c96a554b3fd57779d28493614f1a4a6a28abf5",
+        "blob": "eb381248ee37bfe8051e32879410f5fc678deacc",
+        "lines": 156
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatching.diff",
+        "sha256": "1ab29ba69cbf6f96f082d39951399c437f42d64c7f4e6751e0761819f6e15d77",
+        "blob": "9c17adfdd241f65967b91057be64fe0ef4c53698",
+        "lines": 15
+      },
+      "reason": "Prove the exact function equality by funext and the actual local definition, then rewrite that partial application explicitly in the existing coefficient identity. The actual reciprocal height, chart, and all mathematical statements remain identical.",
+      "reverse_exact": true,
+      "all_5_complete_public_headers_byte_identical": true,
+      "imports_context_options_byte_identical": true,
+      "added": 4,
+      "deleted": 1,
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholePositivePrincipalJetMatchingCI142IndependentReview.json",
+        "sha256": "0309eed545bf2fc260c69e7ab1c0935ca5c6766b3c19de43601ac99d92dd4f91"
+      }
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCuts.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.base.lean.txt",
+        "sha256": "7338f736192a450f99316748d9bdf7beb6eecdb631bdbdeeac6f27eb37746d0c",
+        "blob": "f7fb03e39c681fe28833d7b5aae54807c57fa0c8",
+        "lines": 68
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.lean",
+        "sha256": "d60353a33b319ab316cc5eb7f0f37803c85e0a3ca5182c4b15e72dd3e001b46b",
+        "blob": "7806004198795023f90728e9f100dde0ab4d035f",
+        "lines": 70
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.diff",
+        "sha256": "8624e58c0c8b5a67b6747c4a4791376f83a928194f1bd9d9d01d3cee166d14d2",
+        "blob": "b1141fec993d5ed212b79e702dc372eec276c2c3",
+        "lines": 30
+      },
+      "complete_public_headers_identical": 2,
+      "exact_actual_git_preimage": true,
+      "inverse_replacement_exact": true,
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CI142WholeAtlasTwoRepairsIndependentReview.json",
+        "sha256": "922df76b0d5e8e8660f76897faeaa438f52202f065d65c2135f278dfc32131ac"
+      }
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasReferencePartition.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.base.lean.txt",
+        "sha256": "a228efd750b6144dc83f5848e1b081fbfff531ff42400ff2ffaecb13b9252f71",
+        "blob": "c5e704c5f367c931fe0873999744fbe2a854f473",
+        "lines": 87
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.lean",
+        "sha256": "ccb22e2134e8d8b62ff8fec06b31cc7f1356b853db42f48b67dcaed65bb2dd0a",
+        "blob": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+        "lines": 92
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.diff",
+        "sha256": "442290f06c7af251cde02a04f64ffb9645f4bd5c0b68754b8643032815045a62",
+        "blob": "13d2fbcfffb287ae926f1f0d2de8a1c0da40181b",
+        "lines": 30
+      },
+      "complete_public_headers_identical": 3,
+      "exact_actual_git_preimage": true,
+      "inverse_replacement_exact": true,
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/CI142WholeAtlasTwoRepairsIndependentReview.json",
+        "sha256": "922df76b0d5e8e8660f76897faeaa438f52202f065d65c2135f278dfc32131ac"
+      }
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasPrincipalDensity.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.base.lean.txt",
+        "sha256": "dd3c83318f103146413d018b7033e6d56c15b78e4601eae93333f6200bc93c6a",
+        "blob": "052931f3d9b1717a4ac479ee6e88ec7e1d701b71"
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.lean",
+        "sha256": "be4ce162e802d641ee1e37d7d9e125e9f45426ccf65b0b110ae7ade77b8ca7e9",
+        "blob": "a6e08b84cd66524d8f53399071d3a116adbf626e"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.diff",
+        "sha256": "6f1ed6b1eebeb9c76d0558322c0695f14aebab8faba11f7442be1a5973de9975",
+        "blob": "c98188601f895f635e890fa30c05f8263195a35c"
+      },
+      "full_public_headers_preserved": 1,
+      "literal_reverse_exact": true,
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasPrincipalDensity.lean",
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI142WholeAtlasFieldRepairsIndependentReview.json",
+        "sha256": "16f340575c7af3ce10995f159310bc3fc45dd4b110509bb231f34f51545ed870"
+      }
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasOperator.lean",
+      "before": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.base.lean.txt",
+        "sha256": "d87df6c62654e5a9a426ba4d318291597cef3d6df3435ae17df91c47a2cb0990",
+        "blob": "4e74be6d5d2495499be2d13f1b908e6a49b1226c"
+      },
+      "after": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.lean",
+        "sha256": "a45cf9cc9576c83d05f3b60849ba09c32429c03826a0aff78a9253f8fca48f2e",
+        "blob": "7b18e1768744c85463cf9979c8a4d1a309a6033e"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.diff",
+        "sha256": "3e7f7c26637471277da816b006dc8a2dbc4d24fe169caa3a6c23b98309f99374",
+        "blob": "f765a4d1c285f863b0b6a8ea96ca9140662f529e"
+      },
+      "full_public_headers_preserved": 3,
+      "literal_reverse_exact": true,
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasOperator.lean",
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CI142WholeAtlasFieldRepairsIndependentReview.json",
+        "sha256": "16f340575c7af3ce10995f159310bc3fc45dd4b110509bb231f34f51545ed870"
+      }
+    }
+  ],
+  "reviews": [
+    [
+      "root/reviews/WholePositivePrincipalJetMatchingCI142IndependentReview.json",
+      "0309eed545bf2fc260c69e7ab1c0935ca5c6766b3c19de43601ac99d92dd4f91"
+    ],
+    [
+      "quantitative/recovery/reviews/CI142WholeAtlasTwoRepairsIndependentReview.json",
+      "922df76b0d5e8e8660f76897faeaa438f52202f065d65c2135f278dfc32131ac"
+    ],
+    [
+      "positive/reviews/CI142WholeAtlasFieldRepairsIndependentReview.json",
+      "16f340575c7af3ce10995f159310bc3fc45dd4b110509bb231f34f51545ed870"
+    ]
+  ],
+  "paths": [
+    "src/ContinuousFlexibility/Analysis/WholePositivePrincipalJetMatching.lean",
+    "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCuts.lean",
+    "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasReferencePartition.lean",
+    "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasPrincipalDensity.lean",
+    "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasOperator.lean"
+  ],
+  "source_all_total": 3681,
+  "generated_root_imports": 3624,
+  "status": "Staged precise CI142 repairs; not compiled."
+}

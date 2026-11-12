@@ -1,0 +1,156 @@
+{
+  "kind": "actual_auxiliary_column_canonical_normalization_and_zero_tower",
+  "status": "STATICALLY_REVIEWED_UNCOMPILED",
+  "author": "/root/audit_coordinates",
+  "read_baseline": {
+    "commit": "51f748cb71b876e4664d9d750240c7522d0cf92f",
+    "tree": "44e29d2eafa37456221914df1e33e73f16ecba1a"
+  },
+  "sources": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalAuxiliaryNormalization.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryNormalization.lean",
+      "blob": "cd9b3609c29ddc4ee10946be787f94494928fa60",
+      "sha256": "7d52319c94ee0b0a9473a85c057ad628e8fe551d85e199187f3bea44912b32cb",
+      "lines": 107,
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.Analysis.Calculus.FDeriv.Congr"
+      ],
+      "public_declarations": [
+        "canonicalSource_eqOn_reference_of_normalization"
+      ],
+      "private_declarations": [
+        "canonical_normalized_inverse_data"
+      ],
+      "status": "UNCOMPILED"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalAuxiliaryDifferenceJets.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryDifferenceJets.lean",
+      "blob": "8d19127ce692316b3dc71d27ea7aa2fade5d2cda",
+      "sha256": "28ab0392f4b5c9e30292253f24ccae662594bc514ebe3a3dd750d9117c8d59e5",
+      "lines": 105,
+      "imports": [
+        "ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization",
+        "ContinuousFlexibility.Analysis.PhysicalTransmissionTrace",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations",
+        "ContinuousFlexibility.Analysis.StateNeighborhood",
+        "ContinuousFlexibility.Analysis.N08Neighborhoods"
+      ],
+      "public_declarations": [
+        "canonical_auxiliaryColumn_eqOn_reference",
+        "canonical_auxiliaryDifferenceJets_eq_zero",
+        "exists_canonicalAuxiliaryDifference_zero_tower"
+      ],
+      "private_declarations": [],
+      "status": "UNCOMPILED"
+    }
+  ],
+  "source_count": 2,
+  "source_lines": 212,
+  "construction_input": {
+    "manifest": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedRadialAuxiliaryColumnReviewedManifest.json",
+    "sha256": "e41b8670ddd1f4646b96ca9613e73aaf83ad372c333b9a0c7f1e40e67b63d533",
+    "use": "The existing reviewed construction provides AuxiliaryColumnGauge on the replaced physical spaces; these two proofs use its actual support conclusion and the retained CanonicalGeometry, not the arbitrary old column."
+  },
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PhysicalTransmissionTrace.lean",
+      "blob": "e355936649f9946fad0101bd4f0e7ac93c0afe46",
+      "sha256": "06bae1df9c968c303f48dd5c04b48c95b49eb41eb6cb276902c1401e634ef8d4"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SolveReturnEquations.lean",
+      "blob": "79f7407854a3dea4f22ebf924f1a074265e878dc",
+      "sha256": "936751f4227d524f93ee0daa0d620fb309e98bd78888b0b7cefed8da06e82d6c"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/StateNeighborhood.lean",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "sha256": "d69d61889ad31640933f00a39c70c7ff33eeb0df52df51a509df97850d1399b6"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N08Neighborhoods.lean",
+      "blob": "956392b3368b0521c8ab083a20a14c7629acb4df",
+      "sha256": "3ec022bdd772d5dc510f774d64b43046abee8d44945b0502c722f01066cf104d"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveDifferential.lean",
+      "blob": "a6290d8207dc1171bd6b4aa1a4d60b512e9c35b4",
+      "sha256": "0ed62c54e8cf1e36f906368c47e79e6aef089ad2e439e1bb44ff99a36fd3e7a3"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/FDeriv/Congr.lean",
+      "blob": "da599f75bd35b874f08b3fb7b326c2679500eefb",
+      "sha256": "4313c8cb8eab170a664df2753f3f1a59ac7f3ecd3f405b9b34e64c966430fa73",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Algebra/Module/Multilinear/Basic.lean",
+      "blob": "09d44a8ac099607cca90e3f0a9aa126246ee58aa",
+      "sha256": "ac1064e6f05a965c71a769d4828aead1759b78d8b6a9f6a6b8b43dfee6452af4",
+      "pin": "c55e6e786f49471c72fbddbec5415808896aec1e"
+    }
+  ],
+  "static_checks": {
+    "project_import_closure_count": 138,
+    "missing_project_imports": [],
+    "import_cycles": [],
+    "new_public_names": [
+      "canonicalSource_eqOn_reference_of_normalization",
+      "canonical_auxiliaryColumn_eqOn_reference",
+      "canonical_auxiliaryDifferenceJets_eq_zero",
+      "exists_canonicalAuxiliaryDifference_zero_tower"
+    ],
+    "installed_public_name_collisions": [],
+    "all_new_module_topological_order": [
+      "ContinuousFlexibility.Analysis.CanonicalAuxiliaryNormalization",
+      "ContinuousFlexibility.Analysis.CanonicalAuxiliaryDifferenceJets"
+    ]
+  },
+  "proved_scope": [
+    "Actual normalized inverse points agree whenever either source value is nonzero.",
+    "Actual chart germ equality on the open normalization intersection gives equal real Jacobians.",
+    "The actual canonical source transforms agree on every canonical open strip.",
+    "All actual auxiliary-column mixed difference jets vanish on the unit strip.",
+    "The auxiliary-column slice of the actual state difference field has a genuine SmoothDirections tower whose continuous multilinear maps are all zero."
+  ],
+  "not_claimed": [
+    "Other primitive atoms have zero differences.",
+    "The complete CurrentJets or ReferenceJets certificate.",
+    "Reference auxiliary all-order material bounds, which require the fixed single-component support witness to be retained explicitly.",
+    "Compilation or installation."
+  ],
+  "verification": {
+    "compiled": false,
+    "ci_queried": false,
+    "checkout_index_refs_CP_authority_changed": false
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryDifferenceCandidateManifest.json",
+    "sha256": "1319a4a6dfd70bb15f1e06543e9da25578740b0d968bf34cb48248007dc3ec03"
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalAuxiliaryNormalizationIndependentReview.json",
+      "sha256": "33cf4a0ca46a77cb921795e23b73e26ac39f596458a0dd519c5b0122d0255e38",
+      "reviewer": "/root/proof_inventory"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/CanonicalAuxiliaryDifferenceJetsIndependentReview.json",
+      "sha256": "d1b7a3c2c078da2a20d1cba4d6533ce7532dab9b4c2b431ed7fd11de6aa47845",
+      "reviewer": "/root"
+    }
+  ]
+}

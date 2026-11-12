@@ -1,0 +1,82 @@
+{
+  "snapshot": 17,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+  "base_tree": "81a0c3d15a435b769488d5f12b3b3b9fb1e092f3",
+  "line_head": "597e5c478ed253d74b89cb7a077dc39a12acc44c",
+  "line_tree": "8b7c371e142e08a09bc8171e90d392031b1713f6",
+  "frozen_at": "2026-11-12T12:49:24.217723+00:00",
+  "indexed_files": 1179,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryReferenceJets.lean",
+      "sha256": "53646d7d69f62c0f132e8ae68e1ceeb0f8bd3ddabd89117dfd20f5af9fede39c",
+      "lines": 132
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalSinglePieceReferenceBounds.lean",
+      "sha256": "1814bf57a8cda13d340f7fd315bedf5ec68d8a192aa0da9914b22f9bfdf160f9",
+      "lines": 202
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasOperator.lean",
+      "sha256": "a45cf9cc9576c83d05f3b60849ba09c32429c03826a0aff78a9253f8fca48f2e",
+      "lines": 113
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair142/WholeCanonicalAtlasPrincipalDensity.lean",
+      "sha256": "be4ce162e802d641ee1e37d7d9e125e9f45426ccf65b0b110ae7ade77b8ca7e9",
+      "lines": 91
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+      "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+      "lines": 148
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.lean",
+      "sha256": "d60353a33b319ab316cc5eb7f0f37803c85e0a3ca5182c4b15e72dd3e001b46b",
+      "lines": 70
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.lean",
+      "sha256": "ccb22e2134e8d8b62ff8fec06b31cc7f1356b853db42f48b67dcaed65bb2dd0a",
+      "lines": 92
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01ReturnUniformPositiveJets.lean",
+      "sha256": "02583d61462972bdd076edfbd6ba506b1b729d74a90a0ceae1ab8c9e9e81cdf0",
+      "lines": 161
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootLabelUniformJets.lean",
+      "sha256": "26561df651f55b4376b9b9d3765d22950af06528a26c5ceda138fe458146130c",
+      "lines": 182
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair142/WholePositivePrincipalJetMatching.lean",
+      "sha256": "222f8feb857b4ef07398e0bf78c96a554b3fd57779d28493614f1a4a6a28abf5",
+      "lines": 156
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeCubicDifference.lean",
+      "sha256": "1f84b04583f12c2fe8b65a580d193f4219ffe80fdf836b9e96a37e69a754e45f",
+      "lines": 111
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ActualReferenceGaugeEndpointJets.lean",
+      "sha256": "fdc1fe254979e937aaff78852ad6142a4ecd2fefff1751f29b859cab444b7d47",
+      "lines": 95
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/RadialGaugePrincipalDifferenceExtension.lean",
+      "sha256": "7d687b01cef7a585fd2782b613ff13fa3c770175bc4efd3f1f4a6a65d3b7b4e7",
+      "lines": 85
+    }
+  ],
+  "new_source_lines": 1638,
+  "existing_added_lean_from_green128": 16199,
+  "projected_added_lean_from_green128": 17837,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 58
+}

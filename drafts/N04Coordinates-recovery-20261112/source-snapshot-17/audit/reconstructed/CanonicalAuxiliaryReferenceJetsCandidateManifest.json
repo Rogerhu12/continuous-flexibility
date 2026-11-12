@@ -1,0 +1,65 @@
+{
+  "kind": "actual_auxiliary_reference_single_piece_and_explicit_enlargement_adapter",
+  "status": "CANDIDATE_UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalAuxiliaryReferenceJets.lean",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalAuxiliaryReferenceJets.lean",
+    "blob": "9a16fdb05086007f6c72692fce2e50b0acc58e30",
+    "sha256": "53646d7d69f62c0f132e8ae68e1ceeb0f8bd3ddabd89117dfd20f5af9fede39c",
+    "lines": 132,
+    "public_names": [
+      "wholeReferenceGauge_auxiliary_support_interval",
+      "canonical_auxiliaryReference_uniform_bounds",
+      "canonical_auxiliaryReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "providers": [
+    {
+      "module": "CanonicalSinglePieceReferenceBounds",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalSinglePieceReferenceBounds.lean",
+      "blob": "0faf674e011dad24acc0cc1bc818e9b012b68bc4",
+      "sha256": "1814bf57a8cda13d340f7fd315bedf5ec68d8a192aa0da9914b22f9bfdf160f9"
+    },
+    {
+      "module": "BufferedAuxiliaryColumnWitness",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/BufferedAuxiliaryColumnWitness.lean",
+      "blob": "0c7fdb43f9427a38602e91da42f8c0fe272f3f67",
+      "sha256": "81a2dc394820b074a3d70336184f668c9c4fc830d7a1cfaa57b2cf6cc3af5b74"
+    },
+    {
+      "module": "MaterialEnvelopeNormalization",
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7"
+    },
+    {
+      "module": "WholeReferenceGaugeAtlasData",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a"
+    }
+  ],
+  "actual_identity": [
+    "The column is S.psi from the given physical spaces, with its actual Q and height realization",
+    "The single interval and component are those retained by BufferedAuxiliaryColumnWitness",
+    "The indexed positive piece is e.symm(inr i) of the exact n04WholeReferenceGaugeAtlasData",
+    "The only optional replacement is enlargedMaterialData T, retaining the very same S/C/R/L/K and using the existing Through03 preservation theorem"
+  ],
+  "proved": [
+    "Actual auxiliary atom smoothness and pi periodicity on every unit strip",
+    "All auxiliary reference mixed jets have finite-order constants uniform in all piece indices",
+    "Explicit enlarged-material bounds B*E0(sample(K.cell m))^B, with actual IsMaterialData, IsPhysicalSpaces and Through03 retained"
+  ],
+  "not_claimed": [
+    "No floor for the original T.E0",
+    "No ReferenceJets statement for other atoms",
+    "No change to auxiliary column or sample points",
+    "No compilation or final certificate"
+  ],
+  "verification": {
+    "public_names_absent_from_active_source": true,
+    "compiled": false,
+    "checkout_index_refs_CP_authority_or_active_plan_changed": false
+  }
+}

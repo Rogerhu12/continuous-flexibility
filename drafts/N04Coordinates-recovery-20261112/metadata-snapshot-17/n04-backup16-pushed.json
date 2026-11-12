@@ -1,0 +1,11 @@
+{
+  "head": "0db1a62e32efbba45f732812fc085ac6d6f6c3d3",
+  "tree": "81a0c3d15a435b769488d5f12b3b3b9fb1e092f3",
+  "parent": "71fd2c8ba445c4fa595f823339912f3d55744631",
+  "pushed": "2026-11-12 12:34:58 UTC",
+  "indexed_files": 1129,
+  "new_source_lines": 1814,
+  "projected_added_lean_since_green128": 16199,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "record": "n04-backup16-pushed.json"
+}

@@ -1,0 +1,10 @@
+--- WholeCanonicalAtlasOperator.base.lean.txt
++++ WholeCanonicalAtlasOperator.lean
+@@ -57,6 +57,7 @@
+       simp only [n04WholeCanonicalAtlasData, n04bWithInteriorDivision, hi,
+         n04WholePiecePositive, ite_true, wholePositiveCanonicalCoefficients,
+         wholePositiveCanonicalPotential, neg_one_mul]
++      exact ⟨True.intro, fun _ => True.intro⟩
+ 
+ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+   {C : NonlinearGeometryData S} {R : ReturnEquationData S}

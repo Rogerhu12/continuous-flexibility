@@ -1,0 +1,30 @@
+--- WholeCanonicalAtlasReferencePartition.base.lean.txt
++++ WholeCanonicalAtlasReferencePartition.lean
+@@ -64,6 +64,7 @@
+   refine ⟨e.symm i, ?_, ?_⟩
+   · have hrad := n04WholeCanonicalAtlasData_actual_reference_radii
+       hT hS hN hfield e₀ e cell F G Q N (e.symm i)
++    dsimp only
+     rw [hrad.1, hrad.2, Equiv.apply_symm_apply]
+     exact hi
+   · intro n hn
+@@ -72,6 +73,7 @@
+     apply hu
+     have hrad := n04WholeCanonicalAtlasData_actual_reference_radii
+       hT hS hN hfield e₀ e cell F G Q N n
++    dsimp only at hn
+     rwa [hrad.1, hrad.2] at hn
+ 
+ theorem n04PositiveNormalizationBuffer_region_subset_actualNormalization
+@@ -80,7 +82,10 @@
+     B.region ⊆ (n04bActualTypedAtlas hT hS hN hfield e₀).normalizationRegion := by
+   change B.region ⊆ n04bNormalizationRegion D
+   have hclosed : closure {r : ℝ | deriv D.w r < 0} ⊆ {r : ℝ | deriv D.w r ≤ 0} :=
+-    closure_minimal (fun _ hr => hr.le) (isClosed_le hf continuous_const)
++    closure_minimal (by
++      intro x hx
++      change deriv D.w x ≤ 0
++      exact (show deriv D.w x < 0 from hx).le) (isClosed_le hf continuous_const)
+   intro r hr
+   exact fun hneg => (not_le_of_gt (B.region_subset_positive hf hr).2) (hclosed hneg)
+ 

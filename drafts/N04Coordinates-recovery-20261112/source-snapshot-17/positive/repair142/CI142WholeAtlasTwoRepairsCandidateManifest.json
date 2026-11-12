@@ -1,0 +1,83 @@
+{
+  "kind": "n04_ci142_two_source_repair_candidate",
+  "status": "HELD_UNCOMPILED",
+  "author": "proof_inventory",
+  "actual_head": "7a9eaacbc01e206ab2a91cc1d538cc48505130d9",
+  "actual_tree": "eec840200ef0966dae0fe4cca32e132532c7d7e2",
+  "ci_label": 142,
+  "ci_run": 43218944208,
+  "ci_job": 131185230371,
+  "cached_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-142.log",
+    "sha256": "56b047e8dd8bcd169b69a80775e5f02bee7e8065ba2571b75de7eda1a201d9ae"
+  },
+  "cached_evidence": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-142-evidence.json",
+    "sha256": "7734f0de1458ea70539aa51a6f7577c63734a832aaa238f593272947155a6b40"
+  },
+  "rows": [
+    {
+      "module": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasCuts.lean",
+      "before_blob": "f7fb03e39c681fe28833d7b5aae54807c57fa0c8",
+      "after_blob": "7806004198795023f90728e9f100dde0ab4d035f",
+      "before_sha256": "7338f736192a450f99316748d9bdf7beb6eecdb631bdbdeeac6f27eb37746d0c",
+      "after_sha256": "d60353a33b319ab316cc5eb7f0f37803c85e0a3ca5182c4b15e72dd3e001b46b",
+      "before_lines": 68,
+      "after_lines": 70,
+      "base": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.base.lean.txt",
+      "candidate": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.lean",
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasCuts.diff",
+        "sha256": "8624e58c0c8b5a67b6747c4a4791376f83a928194f1bd9d9d01d3cee166d14d2"
+      },
+      "full_declaration_headers_unchanged": true,
+      "imports_unchanged": true,
+      "options_unchanged": true,
+      "literal_replacements": 2,
+      "reverse_exact": true
+    },
+    {
+      "module": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasReferencePartition.lean",
+      "before_blob": "c5e704c5f367c931fe0873999744fbe2a854f473",
+      "after_blob": "5f68cbf1b0dafa6f237d9071b2ed912954b51123",
+      "before_sha256": "a228efd750b6144dc83f5848e1b081fbfff531ff42400ff2ffaecb13b9252f71",
+      "after_sha256": "ccb22e2134e8d8b62ff8fec06b31cc7f1356b853db42f48b67dcaed65bb2dd0a",
+      "before_lines": 87,
+      "after_lines": 92,
+      "base": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.base.lean.txt",
+      "candidate": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.lean",
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair142/WholeCanonicalAtlasReferencePartition.diff",
+        "sha256": "442290f06c7af251cde02a04f64ffb9645f4bd5c0b68754b8643032815045a62"
+      },
+      "full_declaration_headers_unchanged": true,
+      "imports_unchanged": true,
+      "options_unchanged": true,
+      "literal_replacements": 3,
+      "reverse_exact": true
+    }
+  ],
+  "diagnosed_changes": {
+    "WholeCanonicalAtlasCuts": [
+      "At line 40, explicitly delta-expand the partially applied canonicalCutPoint before reindexing the record.",
+      "At line 64, explicitly delta-expand the partially applied canonicalHeight under radialPartial."
+    ],
+    "WholeCanonicalAtlasReferencePartition": [
+      "At line 67, beta-reduce the unique-existence predicate before rewriting actual reference radii.",
+      "Apply the same beta reduction to the uniqueness premise immediately below.",
+      "At line 83, explicitly expose the real strict and nonstrict inequalities in the closure inclusion."
+    ]
+  },
+  "mathematics": "Same actual atlas, cut curves, height functions, null set and normalization region. No new assumptions or source selection.",
+  "validation": {
+    "full_sources_read": true,
+    "actual_git_preimages_verified": true,
+    "four_cached_diagnostics_read": true,
+    "declaration_headers_imports_options_checked": true,
+    "exact_reverse_diff_checked": true,
+    "compiled": false,
+    "repository_mutated": false,
+    "ci_queried_or_retrieved": false
+  },
+  "independent_review": null
+}
