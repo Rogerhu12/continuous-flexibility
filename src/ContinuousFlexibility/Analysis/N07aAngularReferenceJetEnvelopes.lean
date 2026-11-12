@@ -253,7 +253,7 @@ theorem n07a_currentReference_remainder_fixedJetEnvelopes
       (fun m => canonicalHeight S K z' m f) := by
     apply hprod.congr hV
     intro m y _
-    simp only [canonicalHeight, Function.comp_apply, div_eq_mul_inv, mul_comm]
+    simp only [canonicalHeight, Ψ, Function.comp_apply, div_eq_mul_inv, mul_comm]
   have hcans (m : ℕ) : ContDiffOn ℝ ∞ (canonicalHeight S K z' m f) (V m) :=
     (hfcsm m).div
       ((hc m).2.2.2.2.2.2.1.comp (hc m).2.2.2.2.2.1 (hc m).2.1)

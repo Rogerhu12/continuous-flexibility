@@ -38,6 +38,13 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base loss : ℕ} {ε : ℝ}
 
+private theorem n07a_sourceOpen_with_neighborhood
+    {b : ℕ} {η : ℝ} {Condition : ℕ → ℝ → Prop} {P : Prop}
+    (h : ∃ b', b ≤ b' ∧ ∃ η', 0 < η' ∧ η' ≤ η ∧ Condition b' η')
+    (hP : ∀ b', b ≤ b' → ∀ η', 0 < η' → η' ≤ η → Condition b' η' → P) : P := by
+  obtain ⟨b', hb, η', hη', hη, hc⟩ := h
+  exact hP b' hb η' hη' hη hc
+
 private theorem n07a_exists_canonicalSourceOpen_neighborhood_of_ratios
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hε : 0 < ε)
@@ -103,12 +110,15 @@ theorem n07a_exists_canonicalSourceOpen_neighborhood
           ∃ χ : N07aCanonicalOpenCoefficient S K m,
             χ.value = canonicalSource S K (liftSectorParameter S C z) m
               ((S.height (3 / 4 : ℝ)).decode f) := by
-  obtain ⟨base₀, hb₀, ε₀, he₀, he₀ε, hRatio⟩ :=
-    n07a_actualMaterialRatios_neighborhood hD hT hε hrefState h04.1 href hcur
+  refine n07a_sourceOpen_with_neighborhood
+    (n07a_actualMaterialRatios_neighborhood hD hT hε hrefState h04.1 href hcur) ?_
+  intro base₀ hb₀ ε₀ he₀ he₀ε hRatio
   have h04₀ := n06_N04Properties_mono h04 hb₀ he₀ε
   have hcur₀ := n07a_currentJets_restrict hD hT hcur hb₀ he₀ε
-  obtain ⟨base₁, hb₁, ε₁, he₁, he₁ε, result⟩ :=
-    n07a_exists_canonicalSourceOpen_neighborhood_of_ratios hD hT hS he₀ hrefState h04₀ href hcur₀ hRatio
+  refine n07a_sourceOpen_with_neighborhood
+    (n07a_exists_canonicalSourceOpen_neighborhood_of_ratios
+      hD hT hS he₀ hrefState h04₀ href hcur₀ hRatio) ?_
+  intro base₁ hb₁ ε₁ he₁ he₁ε result
   exact ⟨base₁, hb₀.trans hb₁, ε₁, he₁, he₁ε.trans he₀ε, result⟩
 
 end ContinuousFlexibility.Analysis

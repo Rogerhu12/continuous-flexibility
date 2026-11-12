@@ -44,6 +44,13 @@ local instance n07aCanonicalSourceVolumeLevelSpace (γ t : ℝ) (s : ℕ) :
     NormedSpace ℝ (V.level γ t s) :=
   Submodule.normedSpace _
 
+private theorem n07a_sourceVolume_with_neighborhood
+    {b : ℕ} {η : ℝ} {Condition : ℕ → ℝ → Prop} {P : Prop}
+    (h : ∃ b', b ≤ b' ∧ ∃ η', 0 < η' ∧ η' ≤ η ∧ Condition b' η')
+    (hP : ∀ b', b ≤ b' → ∀ η', 0 < η' → η' ≤ η → Condition b' η' → P) : P := by
+  obtain ⟨b', hb, η', hη', hη, hc⟩ := h
+  exact hP b' hb η' hη' hη hc
+
 private theorem n07a_canonicalSource_height_volume_of_ratios
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hS : IsPhysicalSpaces D T S) (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1) (hε : 0 < ε)
@@ -107,12 +114,15 @@ theorem n07a_canonicalSource_height_volume
             ‖Fts‖ ≤ C₀ * ((S.height γ).grading (t + s + outLoss) u +
               (1 + CanonicalGeometry.parameterGrading S (t + s + outLoss) z) *
                 (S.height γ).grading low u) := by
-  obtain ⟨base₀, hb₀, ε₀, he₀, he₀ε, hRatio⟩ :=
-    n07a_actualMaterialRatios_neighborhood hD hT hε hrefState h04.1 href hcur
+  refine n07a_sourceVolume_with_neighborhood
+    (n07a_actualMaterialRatios_neighborhood hD hT hε hrefState h04.1 href hcur) ?_
+  intro base₀ hb₀ ε₀ he₀ he₀ε hRatio
   have h04₀ := n06_N04Properties_mono h04 hb₀ he₀ε
   have hcur₀ := n07a_currentJets_restrict hD hT hcur hb₀ he₀ε
-  obtain ⟨base₁, hb₁, ε₁, he₁, he₁ε, result⟩ :=
-    n07a_canonicalSource_height_volume_of_ratios hD hT hS hγ hγ1 he₀ hrefState h04₀ href hcur₀ hRatio hV
+  refine n07a_sourceVolume_with_neighborhood
+    (n07a_canonicalSource_height_volume_of_ratios
+      hD hT hS hγ hγ1 he₀ hrefState h04₀ href hcur₀ hRatio hV) ?_
+  intro base₁ hb₁ ε₁ he₁ he₁ε result
   exact ⟨base₁, hb₀.trans hb₁, ε₁, he₁, he₁ε.trans he₀ε, result⟩
 
 end ContinuousFlexibility.Analysis

@@ -106,8 +106,8 @@ theorem n07a_canonicalCurrentPoint_fderiv_surjective
   have hb := h04.1.boundary (C.referenceState, 0) href hsref m
   have hq := hb.1 hp
   have hF := (hb.2.2.2.2.1 p hp).1.differentiableAt (by simp)
-  have hG := (n04b_inverseChart_contDiffAt_closed h04.1 hz hs m hq).
-    differentiableAt (by simp)
+  have hG := (n04b_inverseChart_contDiffAt_closed h04.1 hz hs m hq).differentiableAt
+    (by simp)
   have hIref := (n07a_actualChart_fderiv_inverse_closed h04.1 href hsref m hq).1
   rw [hb.2.2.1 p hp] at hIref
   have hIcur := (n07a_actualChart_fderiv_inverse_closed h04.1 hz hs m hq).2

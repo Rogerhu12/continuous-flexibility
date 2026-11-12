@@ -44,11 +44,11 @@ theorem n07a_closedRectangle_normalTransmission_smooth_gluing
       iteratedFDerivWithin ℝ n u (Icc l c ×ˢ Ioo a b) (c, θ) =
         iteratedFDerivWithin ℝ n v (Icc c r ×ˢ Ioo a b) (c, θ) := by
     intro n θ hθ
-    have hL := iteratedFDerivWithin_subset hsubL
+    have hL := iteratedFDerivWithin_subset (n := n) (x := (c, θ)) hsubL
       ((uniqueDiffOn_Icc hlc).prod hangular)
       ((uniqueDiffOn_Icc hlc).prod (uniqueDiffOn_Icc hab))
       (hu.of_le (by simp : (n : ℕ∞ω) ≤ ∞)) ⟨⟨hlc.le, le_rfl⟩, hθ⟩
-    have hR := iteratedFDerivWithin_subset hsubR
+    have hR := iteratedFDerivWithin_subset (n := n) (x := (c, θ)) hsubR
       ((uniqueDiffOn_Icc hcr).prod hangular)
       ((uniqueDiffOn_Icc hcr).prod (uniqueDiffOn_Icc hab))
       (hv.of_le (by simp : (n : ℕ∞ω) ≤ ∞)) ⟨⟨le_rfl, hcr.le⟩, hθ⟩

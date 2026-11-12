@@ -41,7 +41,7 @@ private theorem n07a_inverse_perturbation_norm_le
       _ ≤ ‖G₀‖ + ‖V.comp ((P - P₀).comp G₀)‖ :=
         norm_sub_le G₀ (V.comp ((P - P₀).comp G₀))
       _ ≤ ‖G₀‖ + ‖V‖ * ‖(P - P₀).comp G₀‖ :=
-        add_le_add_left (ContinuousLinearMap.opNorm_comp_le V ((P - P₀).comp G₀)) ‖G₀‖
+        add_le_add le_rfl (ContinuousLinearMap.opNorm_comp_le V ((P - P₀).comp G₀))
   exact n07a_absorb_half ‖V‖ ‖G₀‖ ‖(P - P₀).comp G₀‖ (norm_nonneg V) hrel.le hbound
 
 attribute [local instance]
@@ -82,25 +82,35 @@ private theorem n07a_reference_forward_fderiv_bound
     ∃ b : ℕ → ℝ, N07aSampleSubpower T K b ∧ (∀ m, 0 ≤ b m) ∧
       ∀ m x, x ∈ referencePhysicalPieceOpen S K m →
         ‖fderiv ℝ (K.chart (C.referenceState, 0) m) x‖ ≤ b m := by
-  obtain ⟨d, hb⟩ := n07a_forwardChart_positive_jets hD hT href hcur
+  let bounds := n07a_forwardChart_positive_jets hD hT href hcur
     (fun m => (hgeom.referenceBounds m).2.1) (fun m => (hgeom.referenceBounds m).1)
-  obtain ⟨b, hbs, hb0, hbb⟩ := hb 1 (by omega)
+  let d : ℕ := bounds.choose
+  have hb := bounds.choose_spec
+  let b : ℕ → ℝ := (hb 1 (by omega)).choose
+  have hbs := (hb 1 (by omega)).choose_spec.1
+  have hb0 := (hb 1 (by omega)).choose_spec.2.1
+  have hbb := (hb 1 (by omega)).choose_spec.2.2
   have hzero : (0 : CanonicalGeometry.Parameter S) ∈ sectorNeighborhood S base ε ε := by
-    constructor
-    · change sectorGrading S base (0 : StateDirections S) < ε
-      rw [(sectorGrading S base).map_zero']
-      exact hε
-    · simpa only [Prod.snd_zero, abs_zero] using hε
+    have h0 : sectorGrading S base (0 : StateDirections S) = 0 :=
+      (sectorGrading S base).map_zero'
+    exact ⟨by simpa only [Prod.fst_zero] using h0.trans_lt hε,
+      by simpa only [Prod.snd_zero, abs_zero] using hε⟩
   have hlift : liftSectorParameter S C (0 : CanonicalGeometry.Parameter S) =
       (C.referenceState, 0) := by
     simp only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
       ZeroMemClass.coe_zero, add_zero]
   refine ⟨b, hbs, hb0, fun m x hx => ?_⟩
-  have hpzero (n : ℕ) : CanonicalGeometry.parameterGrading S n
+  have h := hbb 0 hzero m x hx
+  rw [norm_iteratedFDeriv_one] at h
+  have hpzero : CanonicalGeometry.parameterGrading S (1 - 1 + d)
       (0 : CanonicalGeometry.Parameter S) = 0 :=
-    (CanonicalGeometry.parameterGrading S n).map_zero'
-  simpa only [hlift, norm_iteratedFDeriv_one, hpzero, add_zero, mul_one]
-    using hbb 0 hzero m x hx
+    (CanonicalGeometry.parameterGrading S (1 - 1 + d)).map_zero'
+  have heq := congrArg (fun q : AnnularState S × ℝ =>
+    ‖fderiv ℝ (K.chart q m) x‖) hlift
+  have hfactor : b m * (1 + CanonicalGeometry.parameterGrading S (1 - 1 + d)
+      (0 : CanonicalGeometry.Parameter S)) = b m :=
+    (congrArg (fun a : ℝ => b m * (1 + a)) hpzero).trans (by rw [add_zero, mul_one])
+  exact (heq.symm.le.trans h).trans_eq hfactor
 
 theorem n07a_actualForwardFirstBound_neighborhood
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
