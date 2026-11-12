@@ -1,0 +1,128 @@
+{
+  "kind": "CI168_three_focused_repairs_source_only_plan",
+  "parent": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+  "base_tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+  "candidate_commit": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+  "candidate_tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+  "failure_receipt": {
+    "blob": "12fbf07ac2de98b9650600a81faf8639269ad30f",
+    "log": {
+      "name": "n04-ci-167.log",
+      "blob": "39a9acf7c46261197bfc71ead35179a3c53c003c",
+      "sha256": "a970c98e88076392c43d93a09d1a8a6d3bbab099319b4a9f254442dcd7cb276b",
+      "bytes": 103232,
+      "lines": 902,
+      "run": 43309670398,
+      "job": 131502123240,
+      "downloaded_once": true
+    }
+  },
+  "files": [
+    {
+      "name": "ActualPositiveReferenceEndpointData.lean",
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "old_blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "old_sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "old_lines": 160,
+      "blob": "a712205bed7cd5e6b48dbd982664e95cb88b202d",
+      "sha256": "ad7e9ae4c29d1d16dec1774239cfb2fd8da69e3cdca24b76ad8941c3d880da77",
+      "lines": 162,
+      "bytes": 7247,
+      "candidate_manifest": "f78b0cf5b2e3e693e521998da37d3fe8276183d0",
+      "public_headers_unchanged": true,
+      "imports_unchanged": true
+    },
+    {
+      "name": "CanonicalReferenceCurrentSectorBounds.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+      "old_blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "old_sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "old_lines": 182,
+      "blob": "af73e2ce5dec711276c0604b2cf80fb9c5a64102",
+      "sha256": "165396710ae48b963538e20b93be76af70c3535d3c633f0a1dcc2ad484e0bf8c",
+      "lines": 201,
+      "bytes": 10175,
+      "candidate_manifest": "e37329bd8fc7f82b3e04ba7c63f75dcf06890289",
+      "public_headers_unchanged": true,
+      "imports_unchanged": true
+    },
+    {
+      "name": "WholeReferenceGaugeAtlasOperator.lean",
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+      "old_blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+      "old_sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+      "old_lines": 106,
+      "blob": "245a509f39bfb1d62130c7d4eb1b695a2e7fd719",
+      "sha256": "89ee89cb3d930991c8648fdc4a6dd29210ffb0fcf69453856d3866b1e0397b22",
+      "lines": 107,
+      "bytes": 5544,
+      "candidate_manifest": "32edd875d32e1eb356a2345bb2461759209d5b44",
+      "public_headers_unchanged": true,
+      "imports_unchanged": true
+    }
+  ],
+  "budget": {
+    "source_added": 19818,
+    "source_deleted": 6,
+    "generated_root_additions": 110,
+    "conservative_added": 19928,
+    "limit": 20000,
+    "remaining": 72,
+    "net": 22
+  },
+  "validation": {
+    "actual_GitHub_compare": {
+      "files": 112,
+      "added": 19818,
+      "deleted": 6,
+      "leanOnly": true,
+      "expected": {
+        "source_added": 19818,
+        "source_deleted": 6,
+        "generated_root_additions": 110,
+        "conservative_added": 19928,
+        "limit": 20000,
+        "remaining": 72,
+        "net": 22
+      }
+    },
+    "tree": {
+      "tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+      "changed_blob_paths": 3,
+      "no_extra_or_deleted_paths": true,
+      "source_counts_unchanged": true,
+      "unchanged_controls": true
+    },
+    "provider_nodes": 755,
+    "import_edges_unchanged": true,
+    "all_public_headers_unchanged": true,
+    "limits_unchanged": true,
+    "local_compile": false,
+    "local_generator": false
+  },
+  "peers": {
+    "endpoint_and_sector": "6f63e6b05bcb856991d90ce87d438ed00140d237",
+    "operator": "2d42232cef3815a1c78b5d20cbeb382e610a60e8"
+  },
+  "owners": {
+    "endpoint": "05ef964c86f0dadcaa6447d0e2b9e082eb75b46c",
+    "sector": "4c8af217b1ec7d2d04e2fea4eb58e50b4d020479",
+    "operator": "4a536b09d2713440f7c775d185c6d2b3e50da90c"
+  },
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "unchanged": [
+    "root",
+    "workflow",
+    "generator",
+    "toolchain",
+    "lockfile",
+    "resource_limits",
+    "all_selected_upstream_providers",
+    "all_public_contracts"
+  ],
+  "endpoint": "N04CoordinatesRealization and N04Coordinates remain open. This CI must pass quick checking and the full default build."
+}

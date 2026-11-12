@@ -1,0 +1,50 @@
+{
+  "kind": "CI167_failed_quick_check_receipt",
+  "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+  "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+  "ci_iteration": 167,
+  "github_run_number": 1838,
+  "run": 43309670398,
+  "job": 131502123240,
+  "conclusion": "failure",
+  "completed": "2026-11-12T21:27:27Z",
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+  "log": {
+    "name": "n04-ci-167.log",
+    "blob": "39a9acf7c46261197bfc71ead35179a3c53c003c",
+    "sha256": "a970c98e88076392c43d93a09d1a8a6d3bbab099319b4a9f254442dcd7cb276b",
+    "bytes": 103232,
+    "lines": 902,
+    "run": 43309670398,
+    "job": 131502123240,
+    "downloaded_once": true
+  },
+  "all_eight_submitted_repairs_passed": true,
+  "compiled_project_modules_this_run": 11,
+  "errors": {
+    "ActualPositiveReferenceEndpointData": [
+      {
+        "line": 136,
+        "column": 28,
+        "text": "error: src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean:136:28: Application type mismatch: The argument\n  hopen.right.right.left (x, θ) ⟨hx, mem_univ (x, θ).2⟩\nhas type\n  (n04bActualTypedAtlas hT hS hN hfield e).chart (C.referenceState, 0) k (x, θ) =\n    (((n04bActualTypedAtlas hT hS hN hfield e).chart (C.referenceState, 0) k ((x, θ).1, 0)).1, (x, θ).2)\nbut is expected to have type\n  K.chart (C.referenceState, 0) k (x, θ) = K.chart (C.referenceState, 0) k (x, 0)\nin the application\n  congrArg Prod.fst (hopen.right.right.left (x, θ) ⟨hx, mem_univ (x, θ).2⟩)"
+      }
+    ],
+    "CanonicalReferenceCurrentSectorBounds": [
+      {
+        "line": 72,
+        "column": 2,
+        "text": "error: src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean:72:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached\n\nNote: Use `set_option maxHeartbeats <num>` to set the limit.\n\nHint: Additional diagnostic information may be available using the `set_option diagnostics true` command."
+      }
+    ],
+    "WholeReferenceGaugeAtlasOperator": [
+      {
+        "line": 51,
+        "column": 10,
+        "text": "error: src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean:51:10: unsolved goals\ncase inr\nD : ReferenceData\nS : PhysicalSpacesData\nC : NonlinearGeometryData S\nL : ReturnCorrectionData S\nK : CanonicalData S\ne : ℕ ≃ N04WholePieceIndex D\ncell : N04PositiveComponent D.a D.b (deriv D.w) → ℕ\nψ χ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint\nh₀ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ\nτ σ : AnnularState S × ℝ → N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint\nQ : AnnularState S × ℝ → N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ\nN : Set ℝ\nhfields :\n  ∀ (z : AnnularState S × ℝ) (m : ℕ),\n    let W := n04WholeCanonicalAtlasData C L K e cell σ τ Q N;\n    W.coefficients z m =\n        inverseChartPrincipalCoefficients (L.coefficients z) (W.chart z m) (W.inverseChart z m) (W.height z m) ∧\n      ∀ (p : PolarPoint),\n        W.potential z m p =\n          (if W.positive m = true then -1 else 1) *\n            inverseChartPotential (L.coefficients z) (W.chart z m) (W.inverseChart z m) (W.height z m) p\nz : AnnularState S × ℝ\nm : ℕ\ni : N04PositiveComponent D.a D.b (deriv D.w)\nhi : e m = Sum.inr i\n⊢ True ∧ ∀ (p : PolarPoint), True\n✔ [6686/6729] Ran ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal"
+      }
+    ]
+  },
+  "full_build": "skipped",
+  "axiom_check": "skipped",
+  "budget_released": false
+}

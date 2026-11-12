@@ -1,0 +1,87 @@
+{
+  "schema": "n04-ci-repair-reviewed-manifest/v1",
+  "status": "INDEPENDENT_FULL_SOURCE_REVIEW_PASSED_PENDING_ACTUAL_CI",
+  "owner": "/root/quantitative_route",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_path": "quantitative/repair167/CanonicalReferenceCurrentSectorBoundsCI167RepairReviewedManifest.json",
+  "scope": "Only the SectorBounds repair owned by quantitative_route; the combined independent receipt's endpoint repair remains audit-owned.",
+  "candidate_manifest": {
+    "sha256": "d3248773ea080bf299464ace2ac6973c0fd8182d0f392b9ed265502b1292e7b6",
+    "blob": "e37329bd8fc7f82b3e04ba7c63f75dcf06890289",
+    "bytes": 10812,
+    "lines": 216
+  },
+  "baseline": {
+    "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+    "last_full_green_head": "c796387fb555392501c81f5b8bd834936251516c",
+    "current_ci": "CI167 failed; next CI remains required"
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+    "before": {
+      "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "bytes": 9195,
+      "lines": 182
+    },
+    "after": {
+      "sha256": "165396710ae48b963538e20b93be76af70c3535d3c633f0a1dcc2ad484e0bf8c",
+      "blob": "af73e2ce5dec711276c0604b2cf80fb9c5a64102",
+      "bytes": 10175,
+      "lines": 201
+    },
+    "net_lines": 19,
+    "diff": {
+      "sha256": "a05bbc74c86f64dea2a474ada50094ea89035f7c8755596f0eb6d7cc9121dda6",
+      "blob": "797d6b093c7246df92529f8622ab40c00d3cb9f3",
+      "bytes": 5136,
+      "lines": 95,
+      "added": 31,
+      "deleted": 12,
+      "diff_algorithm": "Exact line LCS unified diff; substitutions reverse byte-for-byte to base"
+    }
+  },
+  "independent_review": {
+    "path": "root/repair167/CI167EndpointAndSectorRepairsIndependentReview.json",
+    "sha256": "4842736542d9782b5e04939d40780a5ec1f4a619ae317d7ae7d3e0706764af70",
+    "blob": "6f63e6b05bcb856991d90ce87d438ed00140d237",
+    "bytes": 4307,
+    "lines": 90,
+    "reviewer": "root",
+    "selected_source_module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+    "selected_source": {
+      "name": "CanonicalReferenceCurrentSectorBounds.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+      "old_blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "old_sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "old_lines": 182,
+      "blob": "af73e2ce5dec711276c0604b2cf80fb9c5a64102",
+      "sha256": "165396710ae48b963538e20b93be76af70c3535d3c633f0a1dcc2ad484e0bf8c",
+      "lines": 201,
+      "bytes": 10175,
+      "candidate_manifest": "e37329bd8fc7f82b3e04ba7c63f75dcf06890289"
+    }
+  },
+  "verified": {
+    "candidate_source_unchanged_since_peer": true,
+    "peer_binds_exact_manifest_and_source": true,
+    "source_diff_manifest_previously_remote_roundtrip_exact": true,
+    "three_public_one_private_headers_unchanged": true,
+    "imports_and_math_unchanged": true,
+    "net_lines": 19,
+    "numeric_limits_unchanged": true,
+    "default_limits_actual_ci_still_required": true
+  },
+  "preservation": {
+    "only_metadata_created": true,
+    "no_new_lean_archive": true,
+    "active_history_preserves_original_and_repair": true,
+    "no_active_index_ref_ci_change": true
+  },
+  "limitations": [
+    "Not compiled locally; no performance or full green claim.",
+    "No completion of CurrentJets or final actualN04Coordinates theorem is claimed."
+  ]
+}

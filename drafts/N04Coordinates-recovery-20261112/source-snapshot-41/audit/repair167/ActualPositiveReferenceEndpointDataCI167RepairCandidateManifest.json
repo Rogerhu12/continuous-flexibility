@@ -1,0 +1,133 @@
+{
+  "schema": "ci-targeted-repair-candidate/v1",
+  "status": "CANDIDATE_AWAITING_INDEPENDENT_ROOT_REVIEW_NOT_COMPILED",
+  "proposed_manifest_path": "audit/repair167/ActualPositiveReferenceEndpointDataCI167RepairCandidateManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/audit_coordinates",
+  "baseline": {
+    "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+    "ci_iteration": 167,
+    "ci_status": "FAILED",
+    "source_origin": "fetch_file at exact head; blob and size matched independently cached complete Git tree"
+  },
+  "cached_log": {
+    "blob": "39a9acf7c46261197bfc71ead35179a3c53c003c",
+    "sha256": "a970c98e88076392c43d93a09d1a8a6d3bbab099319b4a9f254442dcd7cb276b",
+    "downloaded_once_by_root": true,
+    "reviewer_used_cached_blob_only": true,
+    "diagnostic": "error: src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean:136:28: Application type mismatch: The argument\n2026-11-12T21:26:18.2672233Z   hopen.right.right.left (x, θ) ⟨hx, mem_univ (x, θ).2⟩\n2026-11-12T21:26:18.2672825Z has type\n2026-11-12T21:26:18.2673475Z   (n04bActualTypedAtlas hT hS hN hfield e).chart (C.referenceState, 0) k (x, θ) =\n2026-11-12T21:26:18.2674254Z     (((n04bActualTypedAtlas hT hS hN hfield e).chart (C.referenceState, 0) k ((x, θ).1, 0)).1, (x, θ).2)\n2026-11-12T21:26:18.2674825Z but is expected to have type\n2026-11-12T21:26:18.2675293Z   K.chart (C.referenceState, 0) k (x, θ) = K.chart (C.referenceState, 0) k (x, 0)\n2026-11-12T21:26:18.2675703Z in the application\n2026-11-12T21:26:18.2676396Z   congrArg Prod.fst (hopen.right.right.left (x, θ) ⟨hx, mem_univ (x, θ).2⟩)",
+    "already_compiled_provider_lines": []
+  },
+  "source": {
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+    "before": {
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "bytes": 7183,
+      "lines": 160
+    },
+    "after": {
+      "blob": "a712205bed7cd5e6b48dbd982664e95cb88b202d",
+      "sha256": "ad7e9ae4c29d1d16dec1774239cfb2fd8da69e3cdca24b76ad8941c3d880da77",
+      "bytes": 7247,
+      "lines": 162
+    },
+    "delivery": "Git blob only; no duplicate Lean archive or active source write"
+  },
+  "exact_delta": {
+    "description": "Inside the existing radial projection proof, introduce an explicitly typed PolarPoint-to-real congrArg in an intermediate have, then exact that result.",
+    "replacements": [
+      {
+        "oldBlock": "        have he : (K.chart (C.referenceState, 0) k (x, θ)).1 =\n            (K.chart (C.referenceState, 0) k (x, 0)).1 :=\n          congrArg Prod.fst (hopen.2.2.1 (x, θ) ⟨hx, mem_univ _⟩)",
+        "newBlock": "        have he : (K.chart (C.referenceState, 0) k (x, θ)).1 =\n            (K.chart (C.referenceState, 0) k (x, 0)).1 := by\n          have hf := congrArg (fun q : PolarPoint => q.1)\n            (hopen.2.2.1 (x, θ) ⟨hx, mem_univ _⟩)\n          exact hf"
+      }
+    ],
+    "diff_blob": "b47a12c5fa311cead25929f0015abd6e0fba6bca",
+    "diff_sha256": "e4307c51fb86dbf10bd521d73ccb2897a865d571826a7b995df91570f940bc08",
+    "diff_bytes": 829,
+    "additions": 4,
+    "deletions": 2,
+    "net_lines": 2,
+    "reverse_replacement_reconstructs_exact_preimage": true
+  },
+  "preservation": {
+    "full_source_read": true,
+    "complete_public_headers": [
+      {
+        "name": "n04PositiveReferenceSourceCoordinate",
+        "header": "def n04PositiveReferenceSourceCoordinate\n    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}\n    {i : N04PositiveComponent D.a D.b (deriv D.w)} {side : Bool}\n    (j : N04PositiveEndpointSource C i side) (K : CanonicalData S) :\n    PolarPoint → ℝ :=",
+        "unchanged": true
+      },
+      {
+        "name": "n04PositiveReferenceSourceHeight",
+        "header": "def n04PositiveReferenceSourceHeight\n    {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}\n    {i : N04PositiveComponent D.a D.b (deriv D.w)} {side : Bool}\n    (j : N04PositiveEndpointSource C i side) (K : CanonicalData S) :\n    PolarPoint → ℝ :=",
+        "unchanged": true
+      },
+      {
+        "name": "n04Coordinates_actual_positive_reference_source_data",
+        "header": "theorem n04Coordinates_actual_positive_reference_source_data\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    (hfield : N04bFieldRegularity D S C L base ε) (e : ℕ ≃ N04PieceIndex D)\n    {i : N04PositiveComponent D.a D.b (deriv D.w)} {side : Bool}\n    (j : N04PositiveEndpointSource C i side) :\n    let K := n04bActualTypedAtlas hT hS hN hfield e\n    let a := n04PositiveSourceLeft j\n    let b := n04PositiveSourceRight j\n    let c := n04PositiveEndpoint i side\n    let y := n04PositiveReferenceSourceCoordinate j K\n    let h := n04PositiveReferenceSourceHeight j K\n    a < b ∧ c ∈ Icc a b ∧\n      ContDiffOn ℝ ∞ y (Ioo a b ×ˢ (univ : Set ℝ)) ∧\n      ContDiffOn ℝ ∞ h (Ioo a b ×ˢ (univ : Set ℝ)) ∧\n      (∀ θ, ContDiffAt ℝ ∞ y (c, θ)) ∧\n      (∀ θ, ContDiffAt ℝ ∞ h (c, θ)) ∧\n      (∀ x ∈ Ioo a b, ∀ θ, y (x, θ) = y (x, 0)) ∧\n      (∀ x ∈ Ioo a b, ∀ θ, h (x, θ) = h (x, 0)) ∧\n      y (c, 0) = (if side then (1 : ℝ) else 0) ∧\n      0 < deriv (fun r : ℝ => y (r, 0)) c ∧ 0 < h (c, 0) := by",
+        "unchanged": true
+      }
+    ],
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+      "ContinuousFlexibility.Analysis.WholePositiveEndpointFields"
+    ],
+    "imports_unchanged": true,
+    "options_unchanged": true,
+    "public_definitions_unchanged": true,
+    "all_bytes_outside_single_replacement_unchanged": true,
+    "no_new_declarations": true,
+    "no_resource_limit_changes": true,
+    "no_other_congrArg_changed": true
+  },
+  "actual_providers": [
+    {
+      "target": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+      "blob": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+      "sha256": "ac3d3070df56ad9a3d209e22ffb213ab44b0ad80294906f30b57b157100f261d",
+      "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+      "used_theorem": "n04Coordinates_actual_reference_negative_radial_fields",
+      "actual_contract": "The .2.2.1 conjunct says forall p in the actual negative full open component, K.chart z0 k p = ((K.chart z0 k (p.1,0)).1,p.2). K is precisely n04bActualTypedAtlas hT hS hN hfield e, and k=e.symm (.inl (m,side)).",
+      "checked": "Current theorem header and implementation, actual hshape, same K and same certified !side substitution."
+    },
+    {
+      "target": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+      "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+      "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+      "used_theorem": "n04Coordinates_actual_reference_negative_endpoint_data",
+      "checked": "The existing hangle proof has the analogous explicit PolarPoint second projection in a local have followed by exact; this module passed in the root-supplied CI167 log."
+    }
+  ],
+  "proof_review": {
+    "diagnosis": "Expected scalar equality caused congrArg Prod.fst to infer the original point equality as K.chart(x,theta)=K.chart(x,0), whereas the actual radial-field equality has a pair with unchanged angle on the right.",
+    "correction": "The intermediate have has no expected target equality. The explicit projection fixes the domain to PolarPoint; projecting the actual pair equality then definitionally reduces to the required first-coordinate equality. The final exact uses only local K and pair projection reduction.",
+    "witness_preserved": "The existing certified source j, negative component m, actual K, cutPair-selected k, same reference state, point (x,theta), radial point (x,0), and open-domain proof are unchanged.",
+    "mathematical_statement_unchanged": true
+  },
+  "server_readback": [
+    {
+      "label": "source",
+      "blob": "a712205bed7cd5e6b48dbd982664e95cb88b202d",
+      "sha256": "ad7e9ae4c29d1d16dec1774239cfb2fd8da69e3cdca24b76ad8941c3d880da77",
+      "bytes": 7247,
+      "exact": true
+    },
+    {
+      "label": "diff",
+      "blob": "b47a12c5fa311cead25929f0015abd6e0fba6bca",
+      "sha256": "e4307c51fb86dbf10bd521d73ccb2897a865d571826a7b995df91570f940bc08",
+      "bytes": 829,
+      "exact": true
+    }
+  ],
+  "limitations": {
+    "not_compiled": true,
+    "no_ci_query": true,
+    "no_active_index_ref_commit_changes": true,
+    "performance_confirmation_requires_future_ci": true
+  },
+  "review_request": "Root full-source and exact-delta independent review; do not treat candidate status as a passed compilation."
+}

@@ -1,0 +1,216 @@
+{
+  "schema": "n04-ci-repair-candidate/v1",
+  "status": "candidate_uncompiled_pending_independent_full_review",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "candidate_path": "quantitative/repair167/CanonicalReferenceCurrentSectorBoundsCI167RepairCandidateManifest.json",
+  "scope": "Single-file proof-elaboration repair; public statements, actual atlas/sample and fixed state-loss quantifiers unchanged.",
+  "base": {
+    "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+    "last_full_green_head": "c796387fb555392501c81f5b8bd834936251516c",
+    "current_ci": "CI167 failed; next CI remains required"
+  },
+  "log": {
+    "sha256": "a970c98e88076392c43d93a09d1a8a6d3bbab099319b4a9f254442dcd7cb276b",
+    "blob": "39a9acf7c46261197bfc71ead35179a3c53c003c",
+    "bytes": 103232,
+    "lines": 902,
+    "remote_blob": "39a9acf7c46261197bfc71ead35179a3c53c003c",
+    "retrieval": "Existing uniquely cached raw log fetched by immutable blob; no workflow log download",
+    "diagnostic": "CanonicalReferenceCurrentSectorBounds.lean:72:2 deterministic timeout at isDefEq, maximum 200000 heartbeats",
+    "other_module_diagnostics_out_of_scope": [
+      "ActualPositiveReferenceEndpointData:136:28",
+      "WholeReferenceGaugeAtlasOperator:51:10"
+    ]
+  },
+  "source": {
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+    "before": {
+      "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "bytes": 9195,
+      "lines": 182
+    },
+    "after": {
+      "sha256": "165396710ae48b963538e20b93be76af70c3535d3c633f0a1dcc2ad484e0bf8c",
+      "blob": "af73e2ce5dec711276c0604b2cf80fb9c5a64102",
+      "bytes": 10175,
+      "lines": 201
+    },
+    "net_lines": 19,
+    "diff": {
+      "sha256": "a05bbc74c86f64dea2a474ada50094ea89035f7c8755596f0eb6d7cc9121dda6",
+      "blob": "797d6b093c7246df92529f8622ab40c00d3cb9f3",
+      "bytes": 5136,
+      "lines": 95,
+      "added": 31,
+      "deleted": 12,
+      "diff_algorithm": "Exact line LCS unified diff; substitutions reverse byte-for-byte to base"
+    }
+  },
+  "edits": [
+    {
+      "label": "respect existing transparency",
+      "count": 1,
+      "before": "open Set ContinuousFlexibility.Statements\nopen scoped ContDiff",
+      "after": "open Set ContinuousFlexibility.Statements\n\nset_option backward.isDefEq.respectTransparency true\nopen scoped ContDiff"
+    },
+    {
+      "label": "unit supplier witness",
+      "count": 1,
+      "before": "  obtain ⟨loss, hunit⟩ := n04Coordinates_unitAtom_absolute_envelope\n    hD hT hfloor href hcur",
+      "after": "  have hunitBounds := n04Coordinates_unitAtom_absolute_envelope\n    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)\n    (base := base) (ε := ε) hD hT hfloor href hcur\n  let loss : ℕ := hunitBounds.choose\n  have hunit := hunitBounds.choose_spec"
+    },
+    {
+      "label": "length witness",
+      "count": 1,
+      "before": "  obtain ⟨BL, hBL, hlength⟩ := n04Coordinates_reference_canonicalLengthInverse_envelope href",
+      "after": "  have hlengthBounds := n04Coordinates_reference_canonicalLengthInverse_envelope href\n  let BL : ℝ := hlengthBounds.choose\n  have hBL : 0 < BL := hlengthBounds.choose_spec.1\n  have hlength := hlengthBounds.choose_spec.2"
+    },
+    {
+      "label": "unit order witnesses",
+      "count": 1,
+      "before": "  obtain ⟨A, B, hA, hB, hjets⟩ := hunit s",
+      "after": "  let A : ℝ := (hunit s).choose\n  let B : ℝ := (hunit s).choose_spec.choose\n  have hA : 0 < A := (hunit s).choose_spec.choose_spec.1\n  have hB : 0 < B := (hunit s).choose_spec.choose_spec.2.1\n  have hjets := (hunit s).choose_spec.choose_spec.2.2"
+    },
+    {
+      "label": "canonical supplier witness",
+      "count": 1,
+      "before": "  obtain ⟨loss, hraw⟩ := n04Coordinates_canonicalAtom_absolute_envelope\n    hD hT hfloor href hcur hinterval",
+      "after": "  have hrawBounds := n04Coordinates_canonicalAtom_absolute_envelope\n    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)\n    (base := base) (ε := ε) hD hT hfloor href hcur hinterval\n  let loss : ℕ := hrawBounds.choose\n  have hraw := hrawBounds.choose_spec"
+    },
+    {
+      "label": "canonical order witnesses",
+      "count": 1,
+      "before": "  obtain ⟨A, B, hA, hB, hjets⟩ := hraw s",
+      "after": "  let A : ℝ := (hraw s).choose\n  let B : ℝ := (hraw s).choose_spec.choose\n  have hA : 0 < A := (hraw s).choose_spec.choose_spec.1\n  have hB : 0 < B := (hraw s).choose_spec.choose_spec.2.1\n  have hjets := (hraw s).choose_spec.choose_spec.2.2"
+    },
+    {
+      "label": "explicit chosen scalars in four atom conversions",
+      "count": 4,
+      "before": "simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,",
+      "after": "simpa only [V, A, B, E, G, loss, n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    },
+    {
+      "label": "explicit chosen loss in final grading conversion",
+      "count": 1,
+      "before": "  simpa only [hgrading, add_assoc] using h",
+      "after": "  simpa only [loss, hgrading, add_assoc] using h"
+    }
+  ],
+  "verification": {
+    "all_substitutions_unique_at_expected_multiplicity": true,
+    "reverse_exact": true,
+    "public_header_count": 3,
+    "all_public_headers_unchanged": true,
+    "private_header_unchanged": true,
+    "imports_unchanged": true,
+    "header_fingerprints": [
+      {
+        "name": "n04Coordinates_inverse_affine_power_cost",
+        "sha256": "9017a2233bc8e904c0d02a2f20c172274037913bddd3c649ab29504decb24e90",
+        "private": true
+      },
+      {
+        "name": "n04Coordinates_canonicalAtom_absolute_envelope",
+        "sha256": "f9b1d0194d5351a38e71f186376d2725f5deff9cafa3b2574099e8a4944e23e5",
+        "private": false
+      },
+      {
+        "name": "n04Coordinates_sectorParameterOfState_grading",
+        "sha256": "e80f29ce17f3dfcdfcacd84abea92529c27f6e039814190bf4ba00a581a630c8",
+        "private": false
+      },
+      {
+        "name": "n04Coordinates_sectorCanonicalJetBounds_of_reference_current",
+        "sha256": "c0ecf2b71472483e74c83ca6d0640ca963beec3dc483f865313c8b34fe5727ae",
+        "private": false
+      }
+    ],
+    "original_comp_def_four_bridges_preserved": true,
+    "source_namespace_instances_and_data_unchanged": true,
+    "new_public_names": [],
+    "new_imports": [],
+    "new_axioms_sorry_unsafe": false
+  },
+  "option_change": {
+    "added": "set_option backward.isDefEq.respectTransparency true",
+    "maxHeartbeats_changed": false,
+    "other_resource_limits_changed": false,
+    "precedents": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+        "blob": "4a0f2095b9c16558d889f814750f1fa648590e52"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+        "blob": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+        "blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5"
+      }
+    ]
+  },
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+      "sha256": "cf481c45cf6ab2b1d5c1b3e9b9588bd3189291fe79e122a60cf355c4a07a1152",
+      "blob": "4a0f2095b9c16558d889f814750f1fa648590e52",
+      "bytes": 5518,
+      "lines": 118,
+      "membership": "Exact active CI167 tree",
+      "review_scope": "Complete source and two existential supplier contracts read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalAtomBounds.lean",
+      "sha256": "a162c68611e25b6851e7d0a582437100ddd24c28ec65acd32ee002975087b0e7",
+      "blob": "7f58525255a1dd409689e8b21ba4bab30a4af3c5",
+      "bytes": 4894,
+      "lines": 102,
+      "membership": "Exact active CI167 tree",
+      "review_scope": "Complete source; inverse-affine and atom function definitions read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N07aScalarSolution.lean",
+      "sha256": "89bc0865e47eb789bc7ccf457ca841b403df0752e62b463a700cbd94c21209fe",
+      "blob": "a77ae6ed52b89b6c4edd7b2bc9521f9406889f52",
+      "bytes": 9198,
+      "lines": 183,
+      "membership": "Exact active CI167 tree",
+      "review_scope": "Complete source; sector lift/inverse and neighborhood contracts read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "103aa8dfc6465ac350a9a86de6981bb92b4693b4f574bf65fd823955b4cdf5f0",
+      "blob": "b987b4fd9a4b7910b0c8c680ac0bcdb282d0e0dc",
+      "bytes": 14988,
+      "lines": 311,
+      "membership": "Exact active CI167 tree",
+      "review_scope": "Exact full source fingerprint; coefficientEnvelope_pack contract and proof read"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalCoordinateCompletion.lean",
+      "sha256": "a9e912be4e6ce2a2904363acbe65c11386d212e63bab041a80e83a7f8242cf79",
+      "blob": "f5f28f3b222a19598d19053d75314972fbc6c104",
+      "bytes": 3099,
+      "lines": 65,
+      "membership": "Exact active CI167 tree",
+      "review_scope": "Complete source; SectorCanonicalJetBounds completion interface read"
+    }
+  ],
+  "proof_argument": {
+    "unit_supplier": "The same actual theorem supplies a loss once before s. Typed let loss and choose_spec expose this witness without obtain's dependent pattern matching.",
+    "reference_length": "The same reference canonicalLengthInverse existential supplies BL before s; positivity and all-component estimate are its exact projections.",
+    "order_constants": "For each s, A/B and their positivity/jet function are the two existential choices and exact conjunction projections. No state/component is chosen earlier.",
+    "second_supplier": "The actual canonical bound is specialized with the same D/T/S/C/L/K/base/radius before the same fixed loss and per-s constants are projected.",
+    "simp_aliases": "Four original atom conversions retain comp_def and exact lift/unit-inverse identities; their numerical RHS explicitly unfolds V/A/B/E/G/loss. The final grading conversion explicitly includes loss.",
+    "arithmetic_and_geometry": "Inverse-affine powers, four-atom sum, positivity, E0 floor, envelope packing and sector grading formulas are unchanged."
+  },
+  "limitations": [
+    "No local Lean/elaboration/build executed.",
+    "No claim that the candidate resolves performance under default limits; actual next CI must test it.",
+    "No active file, index, ref, commit, workflow, or generated root was modified.",
+    "Only immutable source/diff/metadata blobs are saved; no duplicate Lean archive is written."
+  ]
+}

@@ -1,0 +1,554 @@
+{
+  "schema": "n04-readonly-independent-plan-review-v1",
+  "intended_backup_path": "audit/recovery/Cohort4Reference25CI166PlanIndependentReviewAndCI167Delta.json",
+  "reviewer": "/root/audit_coordinates",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "status": "PASS_INCREMENTAL_SOURCE_GRAPH_REVIEW_ACTIVATION_BLOCKED",
+  "summary": "149 means new source files; the complete selected project graph has 2478 nodes. The ea5914 source/graph rebind is internally consistent, but CI166 failed. A minimal four-node successor rebind to exact CI167 head is documented below; CI167 full-green evidence is still mandatory.",
+  "immutable_inputs": {
+    "plan": {
+      "blob": "394db737d43724d8c5b39783fa7263419f89ada1",
+      "sha256": "9ad7165978ba19924ac326eade24359169f3eda69dacf71b80f227e63280cac2",
+      "bytes": 374929
+    },
+    "graph": {
+      "blob": "ca56a61786eefcd2ca75dae0ef2d8ce999a3e011",
+      "sha256": "d24414ee4908a130c856310912fb7b2a8be368625ad94cc5632cac26f3c66bff",
+      "bytes": 1844840
+    },
+    "predecessor_plan": {
+      "blob": "5fdba1536a39c45aead2b9b671441f13551b445a",
+      "sha256": "4603be31386b254ca5b8354a5a26529ea445e66a009b61a84e2e63390f984c0c"
+    },
+    "predecessor_graph": {
+      "blob": "9b4a8a8e4638c53e6136a5d6af869998847eaea8",
+      "sha256": "3705d4c11f04fd7ca5c117701aae8625926cc0001475cc86dd37a9deca36d539"
+    },
+    "original_cohort_proposal": {
+      "blob": "b87153f6e7d7f2db1b79c04c2d1f1a5eeed8ae94",
+      "sha256": "3d4897a11c85b1601f624161a61d38f1633aff3a388ff1fdc90812aec9e757c1"
+    }
+  },
+  "historical_baseline": {
+    "commit": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "tree": "d6e6c25c9742129f9a50a929914845940b001761",
+    "sole_parent": "794d5d0e3a0c7f6864660e89166fc58c6295cd70",
+    "Git_commit_and_full_tree_independently_fetched": true,
+    "tree_entries": 4686,
+    "tree_truncated": false,
+    "CI166_status": "FAILED; immutable cached log was independently hashed",
+    "cached_log": {
+      "blob": "923cb8a210ecbde6676288e6e1e99e73096f8229",
+      "sha256": "e31097de662da4b2dac4b5bb1fb092fae301ca4ea78d03c8f529bccdb5165474"
+    },
+    "this_plan_may_not_be_activated": true
+  },
+  "independent_graph_checks": {
+    "new_sources": 149,
+    "existing_providers": 2329,
+    "project_nodes": 2478,
+    "project_edges": 4800,
+    "all149_new_paths_absent": true,
+    "all2329_provider_blobs_match_actual_tree": true,
+    "exact149_source_only_entries": true,
+    "no_changed_controls_or_generated_root": true,
+    "all_roots_reachable": true,
+    "unreachable_nodes": 0,
+    "missing_project_imports": 0,
+    "cycles": 0,
+    "topological_order_violations": 0,
+    "new_to_new_edges": 143,
+    "direct_existing_boundary_nodes": 123,
+    "cohort4": {
+      "files": 124,
+      "lines": 16836,
+      "closure_nodes": 1859,
+      "all_closure_blobs_equal_main_1ece": true,
+      "all124_match_original_cohort4_records": true
+    },
+    "reference25": {
+      "files": 25,
+      "lines": 2830,
+      "closure_nodes": 865,
+      "overlap_with_cohort4": 246,
+      "eleven_current_contract_nodes_intentionally_not_switched_to_main": [
+        "ContinuousFlexibility.Analysis.CanonicalBoundaryImage",
+        "ContinuousFlexibility.Analysis.CanonicalEndpointInverse",
+        "ContinuousFlexibility.Analysis.CanonicalSourceConversion",
+        "ContinuousFlexibility.Analysis.CanonicalStripGeometry",
+        "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+        "ContinuousFlexibility.Analysis.N04bActualAtlasGeometry",
+        "ContinuousFlexibility.Analysis.N04bFieldRegularity",
+        "ContinuousFlexibility.Analysis.N04bReferenceActualDomains",
+        "ContinuousFlexibility.Analysis.N04bReferenceActualTravel",
+        "ContinuousFlexibility.Analysis.N04bTypedAtlasDomains",
+        "ContinuousFlexibility.Analysis.StateNeighborhood"
+      ]
+    },
+    "normalizer": "Exact de78e2674d4a5cf3574364b6cc1b589b478c7915 is unchanged.",
+    "predecessor_comparison": {
+      "previousPlanSha": "4603be31386b254ca5b8354a5a26529ea445e66a009b61a84e2e63390f984c0c",
+      "previousGraphSha": "3705d4c11f04fd7ca5c117701aae8625926cc0001475cc86dd37a9deca36d539",
+      "sources_exact": true,
+      "entries_exact": true,
+      "budget_exact": true,
+      "roots_exact": true,
+      "topo_exact": true
+    },
+    "changed_node_objects": 3,
+    "unchanged_node_objects": 2475,
+    "all4800_edges_byte_equivalent": true,
+    "seven_actual_baseline_changes_have_only_three_selected_nodes": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+        "before": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+        "after": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+        "in_graph": true
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+        "before": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+        "after": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+        "in_graph": false
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+        "before": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+        "after": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+        "in_graph": false
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+        "before": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+        "after": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+        "in_graph": false
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+        "before": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+        "after": "37c324a711fd04efbc92d5df436ea670ce0dbfd9",
+        "in_graph": true
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+        "before": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+        "after": "1292702418d040830307436014b493ae656ab469",
+        "in_graph": true
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean",
+        "before": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+        "after": "e573bf412782f3cd9d51fccc619367c3fc8fcd40",
+        "in_graph": false
+      }
+    ]
+  },
+  "three_selected_repair_checks": {
+    "raw_changed_bodies_and_preimages_checked": true,
+    "complete_public_headers_unchanged": 10,
+    "imports_unchanged": true,
+    "new_public_names": 0,
+    "exact_transitions": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean",
+        "old_blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+        "new_blob": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+        "sha256": "ac3d3070df56ad9a3d209e22ffb213ab44b0ad80294906f30b57b157100f261d",
+        "lines": 159,
+        "independent_peer": {
+          "sha256": "01fcc057e24ad497adf0bcee05f63c820f2ce4daae726c49b5f4a14cc850751f",
+          "blob": "1d615641f82878de2f1bb20a042d16fae7c7bef5",
+          "bytes": 4195,
+          "lines": 60
+        },
+        "owner": {
+          "sha256": "43fbecb19f64b0e0749b0883b76d02ed46292ed10a3732c781bcf1fabf78bdae",
+          "blob": "b8ff22db0edf6a236a9540949b71a77f27dde0d2",
+          "bytes": 2338,
+          "lines": 58
+        }
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean",
+        "old_blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+        "new_blob": "37c324a711fd04efbc92d5df436ea670ce0dbfd9",
+        "sha256": "75ced3f23a0d0ff26ccae06abb8695ca6af7d59322daa975d04bacd53a0caddd",
+        "lines": 169,
+        "independent_peer": {
+          "sha256": "01229bc82e84cf91f7354e70384efa2010ec39a5a29b22158d2fd74ada317fba",
+          "blob": "3fba8049d12fb9fe7f9f1ef8a44cd6574a14f3a8",
+          "bytes": 15040,
+          "lines": 247
+        },
+        "owner": {
+          "sha256": "a06a09e77d48214a45b6cf359f927cd20ac196c1e791bda2cfc065184ec48cd7",
+          "blob": "7574e553e32fa490e755d09754709efe12f3e452",
+          "bytes": 4988,
+          "lines": 111
+        }
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+        "old_blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+        "new_blob": "1292702418d040830307436014b493ae656ab469",
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "lines": 105,
+        "independent_peer": {
+          "sha256": "01229bc82e84cf91f7354e70384efa2010ec39a5a29b22158d2fd74ada317fba",
+          "blob": "3fba8049d12fb9fe7f9f1ef8a44cd6574a14f3a8",
+          "bytes": 15040,
+          "lines": 247
+        },
+        "owner": {
+          "sha256": "a06a09e77d48214a45b6cf359f927cd20ac196c1e791bda2cfc065184ec48cd7",
+          "blob": "7574e553e32fa490e755d09754709efe12f3e452",
+          "bytes": 4988,
+          "lines": 111
+        }
+      }
+    ],
+    "public_header_hashes": [
+      {
+        "name": "PositiveChartRangeGeometry",
+        "sha256": "439c2bad41a9840c0f556a8f1edb64d60f3eae2e41bf108cbd358117de36f41c",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      },
+      {
+        "name": "PositiveChartRangeGeometry.bijOn",
+        "sha256": "e9cdb3bfa9545e9496b9bf00cd207e7a38274a4e43a3c29b4e3a6b562175e59b",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      },
+      {
+        "name": "PositiveChartRangeGeometry.inverse_germs",
+        "sha256": "6cd2a7ef35208dfdfe843770a4ea59a284aafab752f0466cdd48f6843e3e0f29",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      },
+      {
+        "name": "PositiveChartRangeGeometry.boundary_fields",
+        "sha256": "4e0945782ef35a20d8c247f32e869b94f093a07ea403f7b2666575418b5913d3",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      },
+      {
+        "name": "PositiveChartRangeGeometry.jacobian_even",
+        "sha256": "508c13c594f6a465a79fe4c6f84b308f2c674f80753417ebc3aaca85da5621c1",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      },
+      {
+        "name": "positiveReferenceCylinder_rangeGeometry",
+        "sha256": "20f5fc9d987ad938e82dc8fe081a143ab562527e7d3bfbeb9232b8dd60396d59",
+        "module": "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+      },
+      {
+        "name": "coordinatePrincipalDensity_radial_cylinder",
+        "sha256": "2a7a2435aee217cf886494f2927acffdc9caf028c65050db30e18a4af6289cf5",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas"
+      },
+      {
+        "name": "divergenceOperator_radial_height_of_coefficient_germs",
+        "sha256": "cad70b6f1420de493ba3b6e2cea8fbb06c80f200242d514f16351413bf419709",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas"
+      },
+      {
+        "name": "inverseChartPotential_radial_cylinder",
+        "sha256": "6e2e715db055351776ff1436470e902083b62f04bbf3660d27de04304e5bc9c1",
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas"
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+        "name": "n04Coordinates_actual_reference_negative_radial_fields",
+        "sha256": "efb28ab85c63d90724a7563a21d506b728e95b50aca6f6eb88ec8b5a66e3fd5d"
+      }
+    ],
+    "metadata_correction": "The three RadialReferencePrincipalFormulas headers include the complete let-bound coefficient predicate. The corrected full-header record from independent peer 3fba8049 is used, not the old candidate's truncated excerpt."
+  },
+  "symbol_checks": {
+    "namespace_qualified_explicit_new_names": 703,
+    "cohort4_names": 653,
+    "reference25_names": 50,
+    "new149_internal_collisions": [],
+    "new149_parser_warnings": [],
+    "reference50_vs_twenty_already_installed_sources": {
+      "actual_raw_sources_scanned": 20,
+      "explicit_public_names": 80,
+      "collisions": []
+    },
+    "historical_full_scan": {
+      "compressed_blob": "08a76eeecde0dc12a68abb9c1eb115ab52b1de6e",
+      "backup_ref": "34563c9cf53ad95b24e2c22d7f1c1c001559db99",
+      "recovered_sha256": "f6d0e10b423a97c5c8cef952087db88841f1ba8728e5226e45cf7ba81718b16f",
+      "recovered_bytes": 5500524,
+      "CRC_verified": true,
+      "selected_sources": 4638,
+      "active_sources": 4214,
+      "all124_new_cohort4_blob_line_import_records_match": true,
+      "archived_newly_introduced_collisions": 0,
+      "new149_names_intersect_archived_preexisting_collision_names": false
+    },
+    "reuse_boundary": "The existing predecessor's reference50-versus-selected840 collision evidence is retained by exact source identity and the unchanged explicit name sets of the repaired nodes. This review freshly recomputes the 703-name internal set and the reference50-versus-80 raw source comparison; it does not claim a new all-repository scan.",
+    "excluded_claims": [
+      "No expansion of generated structure declarations or exported aliases",
+      "No Lean elaboration/name-resolution validation"
+    ]
+  },
+  "budget": {
+    "source_additions": 19666,
+    "source_deletions": 0,
+    "cohort4_root_imports": 122,
+    "reference25_root_imports": 25,
+    "conservative_root_imports": 147,
+    "conservative_new_batch_total": 19813,
+    "reserve_below_20000": 187,
+    "excluded_blueprint_sources": [
+      "src/ContinuousFlexibility/Blueprint/N01c/Flows.lean",
+      "src/ContinuousFlexibility/Blueprint/N05/VolumeModel.lean"
+    ],
+    "generator_blob": "8c4778a0260d7f7125f2deb16c15a89dc416d4f8",
+    "exclude_blob": "fb280f584a48220180a18c65ab9a6883cbba800c",
+    "generator_actual_logic_read": true,
+    "no_manual_root_edit": true,
+    "reset_condition": "This is a next-batch budget, available only after the exact successor baseline is full green. It cannot be appended to the currently unverified 19906 conservative distance from c796."
+  },
+  "CI167_minimal_successor_rebind": {
+    "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac",
+    "sole_parent": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+    "exact_commit_and_nontruncated_tree_independently_fetched": true,
+    "tree_entries": 4686,
+    "CI_status": "Full-green evidence not supplied or queried by this reviewer; activation blocked",
+    "actual_changed_files": 8,
+    "changed_nodes_in149closure": 4,
+    "all149_new_paths_still_absent": true,
+    "unchanged_existing_provider_blobs": 2325,
+    "unchanged_graph_node_objects": 2474,
+    "same149_source_records_and_entries_must_be_preserved": true,
+    "all_changed_imports_identical": true,
+    "all4800_edges_and_topological_order_can_be_preserved": true,
+    "all4_only_in_reference25_side": true,
+    "cohort4_1859_main_equal_closure_unchanged": true,
+    "complete_public_headers_unchanged": 19,
+    "new_public_names": 0,
+    "rebindings": [
+      {
+        "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+        "old_blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+        "new_blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+        "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+        "bytes": 6349,
+        "lines": 130,
+        "imports": [
+          "ContinuousFlexibility.Analysis.ActualReferenceNegativeRadialFields",
+          "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary",
+          "ContinuousFlexibility.Analysis.N04bActualAtlasCuts"
+        ],
+        "headers": [
+          {
+            "name": "n04Coordinates_actual_reference_negative_endpoint_data",
+            "sha256": "c3457dbfa78b88c280877e61debf6d1026e9fa675eb9ad20b867c9eae911cdf0"
+          }
+        ],
+        "evidence": {
+          "peer": {
+            "blob": "91ee25c5caddc252c407bd7f03d53ab5aa9ea994",
+            "sha256": "27c4e415d80d5cd28d161ae139acbd9415899334c12b9a188435d5b15f3aa595"
+          },
+          "owner": {
+            "blob": "3fe7f414552c85f002984fc44d87ad12c4309d40",
+            "sha256": "eed482ec51d652d845438d63aa02bb67a5bd614f4db2c3d869e155d041da219f"
+          }
+        }
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+        "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+        "old_blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+        "new_blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+        "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+        "bytes": 8513,
+        "lines": 169,
+        "imports": [
+          "ContinuousFlexibility.Analysis.OneSidedBoundaryTaylorRepresentative",
+          "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+        ],
+        "headers": [
+          {
+            "name": "radialEndpointTaylorSlice",
+            "sha256": "e8b91ac8557f8e3d43c121cbd06f6d09cd72db883d180391c565b44fcc859d87"
+          },
+          {
+            "name": "contDiff_radialEndpointTaylorSlice",
+            "sha256": "97f3bd3dc1f57f528531981349eef9fd60e01f1e954b285e58cb8fee282256bd"
+          },
+          {
+            "name": "radialEndpointTaylorSlice_value",
+            "sha256": "fdafac884dedf97110a85ce142f7196f022ab59ad13fd51fd227b4f6dadac17a"
+          },
+          {
+            "name": "radialEndpointTaylorSlice_deriv",
+            "sha256": "298d2927e877dc916af2d9f07d2c8e27de9a08b66e6c2a3c995ba7dcb2a688a5"
+          },
+          {
+            "name": "radialEndpointTaylorSlice_lift",
+            "sha256": "5c3c7e97c5e818359f3916515173f03987350ba5a0edce81c08329e68bff040d"
+          },
+          {
+            "name": "radialEndpointTaylorSlice_fullJets",
+            "sha256": "f0ca2a1480594279bc616323c95ef8be7f1f02fe71390165b9773d2ce0b23e4f"
+          },
+          {
+            "name": "exists_positiveReferenceFiniteRadialJets",
+            "sha256": "09f535a1660bfa20684a607aa5b4604d7ef3aea23a6496f440c61ac818336394"
+          }
+        ],
+        "evidence": {
+          "peer": {
+            "blob": "d8bdf37ac09b7763887f5d57b79ffbb52dc107bd",
+            "sha256": "dfc7701f68dbe557c5495c81f10b40017a52bfc37c7d9b6ad6124ded00747161"
+          },
+          "owner": {
+            "blob": "23933636a003c06d81ca3817b34605cb5a5cb4b2",
+            "sha256": "b18981eeffbfe9bc84aea50b9ccb3c6619532b71b1088480c7fc29dcf090ac05"
+          }
+        }
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+        "old_blob": "1292702418d040830307436014b493ae656ab469",
+        "new_blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+        "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+        "bytes": 5355,
+        "lines": 108,
+        "imports": [
+          "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+          "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+          "ContinuousFlexibility.Radial.RadialHeight"
+        ],
+        "headers": [
+          {
+            "name": "coordinatePrincipalDensity_radial_cylinder",
+            "sha256": "2a7a2435aee217cf886494f2927acffdc9caf028c65050db30e18a4af6289cf5"
+          },
+          {
+            "name": "divergenceOperator_radial_height_of_coefficient_germs",
+            "sha256": "cad70b6f1420de493ba3b6e2cea8fbb06c80f200242d514f16351413bf419709"
+          },
+          {
+            "name": "inverseChartPotential_radial_cylinder",
+            "sha256": "6e2e715db055351776ff1436470e902083b62f04bbf3660d27de04304e5bc9c1"
+          }
+        ],
+        "evidence": {
+          "peer": {
+            "blob": "d8bdf37ac09b7763887f5d57b79ffbb52dc107bd",
+            "sha256": "dfc7701f68dbe557c5495c81f10b40017a52bfc37c7d9b6ad6124ded00747161"
+          },
+          "owner": {
+            "blob": "23933636a003c06d81ca3817b34605cb5a5cb4b2",
+            "sha256": "b18981eeffbfe9bc84aea50b9ccb3c6619532b71b1088480c7fc29dcf090ac05"
+          }
+        }
+      },
+      {
+        "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+        "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+        "old_blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "new_blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+        "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+        "bytes": 8095,
+        "lines": 171,
+        "imports": [
+          "ContinuousFlexibility.Analysis.PositiveChartRangeGeometry"
+        ],
+        "headers": [
+          {
+            "name": "wholePositiveReferenceGaugeChart",
+            "sha256": "d17bc6a803396f84fc52ea7b64a098d04222cc955e253c9fbe2fc6dd1d33b8b3"
+          },
+          {
+            "name": "wholePositiveReferenceGaugeInverse",
+            "sha256": "ca9d614252c4d44576beaef9c16508b18448cf71778f94c5fb6703683585a265"
+          },
+          {
+            "name": "wholePositiveReferenceGaugeHeight",
+            "sha256": "298dcfe96f3279ea5d26b68cf1b5d06f0360f73ae64e9fbc11177c238b5470df"
+          },
+          {
+            "name": "wholePositiveReferenceGaugeHeight_eq",
+            "sha256": "0738a35fc7e940667d4ad06337db69e163f2c7948ca179b93155f8199852db54"
+          },
+          {
+            "name": "wholePositiveReferenceGauge_geometry",
+            "sha256": "fad6396cf5c6d3fa6d56ad4dd197f6c98d3cb7a6d05a347118e1da1ea486f15c"
+          },
+          {
+            "name": "wholePositiveReferenceGauge_middle_germs",
+            "sha256": "6378a9a4c9cc244345f44a201722432d138671475ccaa256697b21a299b9005d"
+          },
+          {
+            "name": "wholePositiveReferenceGauge_reference",
+            "sha256": "d4834ce325d018ac07170f6dbc9b5f4600abe8124608b8f3700e9658efd301d8"
+          },
+          {
+            "name": "wholePositiveReferenceGauge_relative_fields",
+            "sha256": "8abed87e19b174525c8e00e1dc5208b5386f1448a1db3d2138751abfe0ea29ea"
+          }
+        ],
+        "evidence": {
+          "peer": {
+            "blob": "d8bdf37ac09b7763887f5d57b79ffbb52dc107bd",
+            "sha256": "dfc7701f68dbe557c5495c81f10b40017a52bfc37c7d9b6ad6124ded00747161"
+          },
+          "owner": {
+            "blob": "23933636a003c06d81ca3817b34605cb5a5cb4b2",
+            "sha256": "b18981eeffbfe9bc84aea50b9ccb3c6619532b71b1088480c7fc29dcf090ac05"
+          }
+        }
+      }
+    ],
+    "outside_graph_changes": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/ActualNegativeOppositeRootFields.lean",
+        "old": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+        "new": "2741a227986d3479a7ced38469e19133966a0d35"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean",
+        "old": "e5b4919994abd7e7ddcde0bb83665c224d9e53fe",
+        "new": "f5b40e8f0c2af008aebf74066a8ef36d82c761fb"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean",
+        "old": "fcb1277422b54ea7f0dd44a618c8e154a797c947",
+        "new": "3d6b21ddcae9a7fb11cf365d1602add8a01f70cb"
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean",
+        "old": "5f8c8a6087e0446d2c54ef35b532b404f0b092f2",
+        "new": "4a0f2095b9c16558d889f814750f1fa648590e52"
+      }
+    ],
+    "instruction": "Root/quant may create a separate conditional successor plan and graph by changing these four node fingerprints plus explicit baseline/status/review bindings. Preserve the ea5914 plan and graph as immutable history. Do not refetch or rebuild unchanged graph nodes."
+  },
+  "final_activation_gate": [
+    "CI166 failed. The ea5914 plan is historical and cannot be treated as ready.",
+    "Create and independently verify the exact four-node rebind to 935c61df/tree1d180, or a later explicitly reviewed successor.",
+    "Require complete full-green CI evidence for that exact baseline commit/tree before staging any of the 149 sources or resetting the line budget.",
+    "Immediately before staging, verify branch/main leases, all149 absent preimages, all2329 existing source pins, unchanged controls/excludes, and exact149 source-only diff.",
+    "Recompute actual additions and the conservative CI-generated root contribution; the generator remains the existing CI procedure.",
+    "Do not relax or alter the historical full41/full-main gate; this remains the separately authorized 25-source subset.",
+    "A later repair affecting imports, public headers, declaration names, or a selected node requires a new explicit incremental check."
+  ],
+  "execution": {
+    "new_Lean_written": false,
+    "local_Lean_or_compilation": false,
+    "active_repo_changed": false,
+    "index_changed": false,
+    "refs_changed": false,
+    "trees_or_commits_created": false,
+    "CI_queried": false,
+    "CI_log_redownloaded": false,
+    "historical_receipts_modified": false,
+    "only_readonly_connector_reads_functions_store_and_this_JSON_blob": true
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "ci-targeted-repair-reviewed-manifest/v1",
+  "status": "INDEPENDENT_SOURCE_REVIEW_PASSED_AWAITING_CI",
+  "intended_backup_path": "audit/repair167/ActualPositiveReferenceEndpointDataCI167RepairReviewedManifest.json",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "owner": "/root/audit_coordinates",
+  "baseline": {
+    "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac"
+  },
+  "selected_source": {
+    "name": "ActualPositiveReferenceEndpointData.lean",
+    "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+    "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+    "old_blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+    "old_sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+    "old_lines": 160,
+    "blob": "a712205bed7cd5e6b48dbd982664e95cb88b202d",
+    "sha256": "ad7e9ae4c29d1d16dec1774239cfb2fd8da69e3cdca24b76ad8941c3d880da77",
+    "lines": 162,
+    "bytes": 7247,
+    "candidate_manifest": "f78b0cf5b2e3e693e521998da37d3fe8276183d0"
+  },
+  "candidate_manifest": {
+    "path": "audit/repair167/ActualPositiveReferenceEndpointDataCI167RepairCandidateManifest.json",
+    "blob": "f78b0cf5b2e3e693e521998da37d3fe8276183d0",
+    "sha256": "dfeeb1bb7e7e7287d82a2a6d72dc32514a1be8accf1ee90e8d442d55379ee110",
+    "bytes": 9182
+  },
+  "exact_diff": {
+    "blob": "b47a12c5fa311cead25929f0015abd6e0fba6bca",
+    "sha256": "e4307c51fb86dbf10bd521d73ccb2897a865d571826a7b995df91570f940bc08",
+    "additions": 4,
+    "deletions": 2,
+    "net_added_lines": 2
+  },
+  "independent_review": {
+    "path": "root/repair167/CI167EndpointAndSectorRepairsIndependentReview.json",
+    "blob": "6f63e6b05bcb856991d90ce87d438ed00140d237",
+    "sha256": "4842736542d9782b5e04939d40780a5ec1f4a619ae317d7ae7d3e0706764af70",
+    "reviewer": "/root",
+    "status": "PASS_STATIC_SOURCE_REVIEW_PENDING_CI",
+    "owner_scope": "Only the ActualPositiveReferenceEndpointData source in the combined root receipt. This owner manifest does not select or re-review CanonicalReferenceCurrentSectorBounds.",
+    "full_old_new_source_and_exact_diff_reviewed": true,
+    "actual_same_K_radial_provider_and_compiled_endpoint_example_checked": true,
+    "complete_public_headers_unchanged": 3
+  },
+  "preservation": {
+    "public_statements_and_definitions_unchanged": true,
+    "imports_options_unchanged": true,
+    "all_other_source_bytes_unchanged": true,
+    "reverse_exact_reconstruction": true,
+    "no_new_declarations": true,
+    "no_resource_limit_increase": true
+  },
+  "delivery": {
+    "immutable_git_blobs_only": true,
+    "no_new_lean_archive_copy": true,
+    "no_active_source_index_ref_commit_write": true,
+    "source_diff_manifest_server_readbacks_exact": true,
+    "root_receipt_server_sha256_verified": true
+  },
+  "compilation": {
+    "local_compile_performed": false,
+    "ci167_status": "FAILED_ON_OLD_SOURCE",
+    "candidate_compiled": false,
+    "required_next_step": "Root may select this exact reviewed source for a subsequent CI run. Only that run can establish elaboration success."
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "owner": "/root/proof_inventory",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "intended_metadata_path": "positive/repair167/WholeReferenceGaugeAtlasOperatorCI167CandidateManifest.json",
+  "baseline": {
+    "commit": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree_prefix_from_parent": "1d18001a",
+    "source_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+    "git_blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+    "sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+    "utf8_bytes": 5494,
+    "lines": 106
+  },
+  "candidate": {
+    "intended_path": "positive/repair167/WholeReferenceGaugeAtlasOperator.lean",
+    "git_blob": "245a509f39bfb1d62130c7d4eb1b695a2e7fd719",
+    "sha256": "89ee89cb3d930991c8648fdc4a6dd29210ffb0fcf69453856d3866b1e0397b22",
+    "utf8_bytes": 5544,
+    "lines": 107
+  },
+  "diff": {
+    "intended_path": "positive/repair167/WholeReferenceGaugeAtlasOperator.diff",
+    "git_blob": "6030421a27ff807eb9b35802179254e08f794741",
+    "sha256": "b9fecb9e3fe5fce23a88ed792052fb39337a6dac911df6a4d98cc00f50702f55",
+    "utf8_bytes": 541,
+    "lines": 10,
+    "added": 1,
+    "deleted": 0,
+    "net": 1
+  },
+  "evidence": {
+    "intended_path": "positive/repair167/WholeReferenceGaugeAtlasOperatorCI167Diagnostics.json",
+    "git_blob": "155d1cb0b282e935bb4b5a70fd83306496ae2895",
+    "sha256": "964479c13a9b0a2d9f591da410e742fa211777d36d13a3c31e420fc079baddf7",
+    "utf8_bytes": 3198,
+    "lines": 25
+  },
+  "exact_repair": {
+    "old_fragment": "        n04bWithInteriorDivision, n04WholePiecePositive, hi, ite_true, neg_one_mul]\n",
+    "new_fragment": "        n04bWithInteriorDivision, n04WholePiecePositive, hi, ite_true, neg_one_mul]\n      exact ⟨True.intro, fun _ => True.intro⟩\n",
+    "location": "End of positive inr branch in n04WholeReferenceGaugeAtlasData_operatorFields, immediately after the unchanged simp only.",
+    "reason": "The cached actual CI diagnostic ends in True ∧ ∀ (p : PolarPoint), True. The inserted constructor proof discharges precisely that remaining proposition.",
+    "reverse_reconstruction_exact": true,
+    "all_other_bytes_unchanged": true,
+    "semantic_change": "None: same actual gauge fields, operator formula, data, public contracts, and providers."
+  },
+  "surface": {
+    "imports": [
+      "import ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "import ContinuousFlexibility.Analysis.WholeCanonicalAtlasOperator"
+    ],
+    "resource_options": [],
+    "imports_unchanged": true,
+    "resource_options_unchanged": true,
+    "complete_public_headers": [
+      {
+        "name": "n04WholeReferenceGaugeAtlasData_operatorFields",
+        "start_line": 21,
+        "text": "theorem n04WholeReferenceGaugeAtlasData_operatorFields\n    {D : ReferenceData} {S : PhysicalSpacesData}\n    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S) (K : CanonicalData S)\n    (e : ℕ ≃ N04WholePieceIndex D)\n    (cell : N04PositiveComponent D.a D.b (deriv D.w) → ℕ)\n    (ψ χ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (h₀ : N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (τ σ : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → PolarPoint)\n    (Q : (AnnularState S × ℝ) →\n      N04PositiveComponent D.a D.b (deriv D.w) → PolarPoint → ℝ)\n    (N : Set ℝ)\n    (hfields : ∀ z m,\n      let W := n04WholeCanonicalAtlasData C L K e cell σ τ Q N\n      W.coefficients z m = inverseChartPrincipalCoefficients (L.coefficients z)\n        (W.chart z m) (W.inverseChart z m) (W.height z m) ∧\n      ∀ p, W.potential z m p = (if W.positive m then -1 else (1 : ℝ)) *\n        inverseChartPotential (L.coefficients z)\n          (W.chart z m) (W.inverseChart z m) (W.height z m) p)\n    (z : AnnularState S × ℝ) (m : ℕ) :\n    let V := n04WholeReferenceGaugeAtlasData C L K e cell ψ χ h₀ τ σ Q N\n    V.coefficients z m = inverseChartPrincipalCoefficients (L.coefficients z)\n      (V.chart z m) (V.inverseChart z m) (V.height z m) ∧\n      ∀ p, V.potential z m p = (if V.positive m then -1 else (1 : ℝ)) *\n        inverseChartPotential (L.coefficients z)\n          (V.chart z m) (V.inverseChart z m) (V.height z m) p ",
+        "end_line": 46,
+        "sha256": "b8b6616407bcfab94b4b646e2a652cae9892e394df46ee2a097de3e8711ce103"
+      },
+      {
+        "name": "n04WholeReferenceGaugeAtlasData_actual_operatorFields",
+        "start_line": 71,
+        "text": "theorem n04WholeReferenceGaugeAtlasData_actual_operatorFields\n    (z : AnnularState S × ℝ) (m : ℕ) :\n    let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n      e cell ψ χ h₀ τ σ Q N\n    V.coefficients z m = inverseChartPrincipalCoefficients (L.coefficients z)\n      (V.chart z m) (V.inverseChart z m) (V.height z m) ∧\n      ∀ p, V.potential z m p = (if V.positive m then -1 else (1 : ℝ)) *\n        inverseChartPotential (L.coefficients z)\n          (V.chart z m) (V.inverseChart z m) (V.height z m) p ",
+        "end_line": 79,
+        "sha256": "620f43054c5407bf803e29cc859b5bffd02b6e643ede01ede5173bad2f2fbd4a"
+      },
+      {
+        "name": "n04WholeReferenceGaugeAtlasData_actual_operator",
+        "start_line": 84,
+        "text": "theorem n04WholeReferenceGaugeAtlasData_actual_operator\n    (hA : CanonicalGeometry D S C\n      (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n        e cell ψ χ h₀ τ σ Q N) base ε)\n    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)\n    (hs : stateSector S z.1) (m : ℕ) (u : PolarPoint → ℝ) (hu : ContDiff ℝ ∞ u)\n    (p : PolarPoint) (hp : p ∈ canonicalOpen S\n      (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n        e cell ψ χ h₀ τ σ Q N) m) :\n    let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n      e cell ψ χ h₀ τ σ Q N\n    canonicalOperator S V L z m u p =\n      (if V.positive m then -1 else (1 : ℝ)) *\n        divergenceOperator (V.coefficients z m) u p + V.potential z m p * u p ",
+        "end_line": 97,
+        "sha256": "e23117ccf3a9a3a72ce82e4ec1757f48f2f12d7b93daf44ca3620ee89b9ddf80"
+      }
+    ],
+    "public_header_count": 3,
+    "all_public_headers_byte_identical": true,
+    "proofs_other_than_the_single_insertion_byte_identical": true
+  },
+  "actual_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "ref": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+      "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "utf8_bytes": 6809,
+      "lines": 131,
+      "review_scope": "Full source read to verify the actual atlas fields and the already-installed identical True-conjunction closure."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasOperator.lean",
+      "ref": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+      "git_blob": "7b18e1768744c85463cf9979c8a4d1a309a6033e",
+      "sha256": "a45cf9cc9576c83d05f3b60849ba09c32429c03826a0aff78a9253f8fca48f2e",
+      "utf8_bytes": 5425,
+      "lines": 113,
+      "review_scope": "Full source read to verify the actual atlas fields and the already-installed identical True-conjunction closure."
+    }
+  ],
+  "validation": {
+    "full_candidate_read": true,
+    "full_baseline_read": true,
+    "full_diagnostic_context_read": true,
+    "independent_peer": "PENDING",
+    "local_lean_or_elaboration": false,
+    "compiled": false,
+    "active_src_index_refs_ci_touched": false,
+    "new_lean_budget_net": 1
+  },
+  "preservation": {
+    "source": "Authorized immutable Git blob; no branch/tree/commit/ref was changed. Parent will integrate the exact source and preserve repair history in active Git commits; do not add a duplicate Lean backup copy.",
+    "metadata": "Candidate, diff, evidence and later peer/owner receipts may be included in the parent's next backup."
+  }
+}

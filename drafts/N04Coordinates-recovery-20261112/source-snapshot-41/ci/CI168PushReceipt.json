@@ -1,0 +1,16 @@
+{
+  "head": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+  "tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+  "parent": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+  "pushed_and_verified": "2026-11-12 21:36:22 UTC",
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "source_files_changed": 3,
+  "net_Lean_lines": 22,
+  "actual_added_from_green": 19818,
+  "actual_deleted_from_green": 6,
+  "conservative_added_from_green": 19928,
+  "force": false,
+  "CI_label": "CI168",
+  "first_lookup": "wait at least five minutes after this timestamp",
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+}

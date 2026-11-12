@@ -1,0 +1,95 @@
+--- a/src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean
+@@ -17,6 +17,8 @@
+ namespace ContinuousFlexibility.Analysis
+ 
+ open Set ContinuousFlexibility.Statements
++
++set_option backward.isDefEq.respectTransparency true
+ open scoped ContDiff
+ 
+ attribute [local instance]
+@@ -69,11 +71,21 @@
+           |mixedDerivative i j (n07aCanonicalAtomField D T S C L K v z m) y| ≤
+             A * T.E0 (T.sample (K.cell m)) ^ B *
+               (1 + CanonicalGeometry.parameterGrading S (s + loss) z) := by
+-  obtain ⟨loss, hunit⟩ := n04Coordinates_unitAtom_absolute_envelope
+-    hD hT hfloor href hcur
+-  obtain ⟨BL, hBL, hlength⟩ := n04Coordinates_reference_canonicalLengthInverse_envelope href
++  have hunitBounds := n04Coordinates_unitAtom_absolute_envelope
++    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)
++    (base := base) (ε := ε) hD hT hfloor href hcur
++  let loss : ℕ := hunitBounds.choose
++  have hunit := hunitBounds.choose_spec
++  have hlengthBounds := n04Coordinates_reference_canonicalLengthInverse_envelope href
++  let BL : ℝ := hlengthBounds.choose
++  have hBL : 0 < BL := hlengthBounds.choose_spec.1
++  have hlength := hlengthBounds.choose_spec.2
+   refine ⟨loss, fun s => ?_⟩
+-  obtain ⟨A, B, hA, hB, hjets⟩ := hunit s
++  let A : ℝ := (hunit s).choose
++  let B : ℝ := (hunit s).choose_spec.choose
++  have hA : 0 < A := (hunit s).choose_spec.choose_spec.1
++  have hB : 0 < B := (hunit s).choose_spec.choose_spec.2.1
++  have hjets := (hunit s).choose_spec.choose_spec.2.2
+   let A' : ℝ := (1 + BL) ^ s * A
+   let B' : ℝ := BL * (s : ℝ) + B
+   have hA' : 0 < A' := mul_pos (pow_pos (by linarith : 0 < 1 + BL) _) hA
+@@ -124,10 +136,17 @@
+     (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε)
+     (hinterval : ∀ m, K.left m < K.right m) :
+     ∃ loss : ℕ, SectorCanonicalJetBounds T S C K base loss ε := by
+-  obtain ⟨loss, hraw⟩ := n04Coordinates_canonicalAtom_absolute_envelope
+-    hD hT hfloor href hcur hinterval
++  have hrawBounds := n04Coordinates_canonicalAtom_absolute_envelope
++    (D := D) (T := T) (S := S) (C := C) (L := L) (K := K)
++    (base := base) (ε := ε) hD hT hfloor href hcur hinterval
++  let loss : ℕ := hrawBounds.choose
++  have hraw := hrawBounds.choose_spec
+   refine ⟨loss, fun s => ?_⟩
+-  obtain ⟨A, B, hA, hB, hjets⟩ := hraw s
++  let A : ℝ := (hraw s).choose
++  let B : ℝ := (hraw s).choose_spec.choose
++  have hA : 0 < A := (hraw s).choose_spec.choose_spec.1
++  have hB : 0 < B := (hraw s).choose_spec.choose_spec.2.1
++  have hjets := (hraw s).choose_spec.choose_spec.2.2
+   obtain ⟨Q, hQ, hpack⟩ := coefficientEnvelope_pack (4 * A) B
+   refine ⟨Q, hQ, ?_⟩
+   intro z hz hs m y hy i j hij
+@@ -144,7 +163,7 @@
+     (mul_nonneg hA.le (Real.rpow_nonneg (zero_le_one.trans (hfloor m)) _))
+     (add_nonneg zero_le_one hG)
+   have hpotential : |mixedDerivative i j (K.potential z m) y| ≤ V := by
+-    simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
++    simpa only [V, A, B, E, G, loss, n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
+       hwLift, n07aCanonicalUnitPoint_inverse (hinterval m)] using
+       hjets w hw m .potential y hy i j hij
+   have hfour : |mixedDerivative i j (K.potential z m) y| +
+@@ -154,15 +173,15 @@
+         |mixedDerivative i j (K.dividedDifference z m).c y| else 0) ≤ 4 * V := by
+     by_cases hpos : K.positive m = true
+     · have ha : |mixedDerivative i j (K.dividedDifference z m).a y| ≤ V := by
+-        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
++        simpa only [V, A, B, E, G, loss, n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
+           hwLift, if_pos hpos, n07aCanonicalUnitPoint_inverse (hinterval m)] using
+           hjets w hw m .dividedA y hy i j hij
+       have hb : |mixedDerivative i j (K.dividedDifference z m).b y| ≤ V := by
+-        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
++        simpa only [V, A, B, E, G, loss, n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
+           hwLift, if_pos hpos, n07aCanonicalUnitPoint_inverse (hinterval m)] using
+           hjets w hw m .dividedB y hy i j hij
+       have hc : |mixedDerivative i j (K.dividedDifference z m).c y| ≤ V := by
+-        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
++        simpa only [V, A, B, E, G, loss, n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,
+           hwLift, if_pos hpos, n07aCanonicalUnitPoint_inverse (hinterval m)] using
+           hjets w hw m .dividedC y hy i j hij
+       rw [if_pos hpos]
+@@ -177,7 +196,7 @@
+   have hgrading : G = stateGrading S (s + loss) (z.1 - C.referenceState) + |z.2| :=
+     n04Coordinates_sectorParameterOfState_grading hstate (s + loss) z hs
+   have h := hfour.trans hpacked
+-  simpa only [hgrading, add_assoc] using h
++  simpa only [loss, hgrading, add_assoc] using h
+ 
+ end ContinuousFlexibility.Analysis
+ 

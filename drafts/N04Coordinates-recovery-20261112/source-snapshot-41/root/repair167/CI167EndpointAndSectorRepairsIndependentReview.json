@@ -1,0 +1,90 @@
+{
+  "schema": "CI167_two_repairs_independent_review",
+  "status": "PASS_STATIC_SOURCE_REVIEW_PENDING_CI",
+  "intended_backup_path": "root/repair167/CI167EndpointAndSectorRepairsIndependentReview.json",
+  "reviewer": "root",
+  "baseline": {
+    "head": "935c61df8e00c1292dbd3e46e57cb8c2888d7859",
+    "tree": "1d18001a5ed8b3ef7093f4fee6ac215494c7dfac"
+  },
+  "candidate_manifests": [
+    {
+      "kind": "endpoint",
+      "blob": "f78b0cf5b2e3e693e521998da37d3fe8276183d0",
+      "sha256": "dfeeb1bb7e7e7287d82a2a6d72dc32514a1be8accf1ee90e8d442d55379ee110"
+    },
+    {
+      "kind": "sector",
+      "blob": "e37329bd8fc7f82b3e04ba7c63f75dcf06890289",
+      "sha256": "d3248773ea080bf299464ace2ac6973c0fd8182d0f392b9ed265502b1292e7b6"
+    }
+  ],
+  "sources": [
+    {
+      "name": "ActualPositiveReferenceEndpointData.lean",
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "old_blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "old_sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "old_lines": 160,
+      "blob": "a712205bed7cd5e6b48dbd982664e95cb88b202d",
+      "sha256": "ad7e9ae4c29d1d16dec1774239cfb2fd8da69e3cdca24b76ad8941c3d880da77",
+      "lines": 162,
+      "bytes": 7247,
+      "candidate_manifest": "f78b0cf5b2e3e693e521998da37d3fe8276183d0"
+    },
+    {
+      "name": "CanonicalReferenceCurrentSectorBounds.lean",
+      "module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+      "old_blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "old_sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "old_lines": 182,
+      "blob": "af73e2ce5dec711276c0604b2cf80fb9c5a64102",
+      "sha256": "165396710ae48b963538e20b93be76af70c3535d3c633f0a1dcc2ad484e0bf8c",
+      "lines": 201,
+      "bytes": 10175,
+      "candidate_manifest": "e37329bd8fc7f82b3e04ba7c63f75dcf06890289"
+    }
+  ],
+  "checks": {
+    "full_old_new_sources_read": true,
+    "unified_diff_exact": true,
+    "complete_public_headers_unchanged": 6,
+    "private_headers_unchanged": 1,
+    "imports_unchanged": true,
+    "numeric_limits_unchanged": true,
+    "net_added_lines": 21,
+    "CI167_exact_log_read": {
+      "name": "n04-ci-167.log",
+      "blob": "39a9acf7c46261197bfc71ead35179a3c53c003c",
+      "sha256": "a970c98e88076392c43d93a09d1a8a6d3bbab099319b4a9f254442dcd7cb276b",
+      "bytes": 103232,
+      "lines": 902,
+      "run": 43309670398,
+      "job": 131502123240,
+      "downloaded_once": true
+    }
+  },
+  "proof_reasoning": {
+    "endpoint": [
+      "The actual negative radial provider gives a pair equality whose first coordinate is the required scalar equality. A separately inferred typed projection avoids the backward expected-function inference seen at line136.",
+      "The other two public definitions and all remaining proofs are unchanged; the same technique is already compiled in ActualReferenceNegativeEndpointData130."
+    ],
+    "sector": [
+      "The same actual absolute-unit supplier is specialized at D/T/S/C/L/K/base/epsilon before selecting its single loss. This loss remains before all spatial orders.",
+      "The actual reference inverse-length witness is still chosen before s. Per-s A/B and positivity/jets are their literal existential/conjunction projections.",
+      "The affine inverse-scale power proof and the four actual atom conversions preserve all derivative orders, samples, intervals and E0-floor assumptions.",
+      "The four simplifiers explicitly expose the local numeric witnesses after enabling the already compiled respectTransparency strategy. The final conversion also exposes loss; no limits or hypotheses are raised."
+    ]
+  },
+  "source_suppliers": {
+    "absolute": "4a0f2095b9c16558d889f814750f1fa648590e52",
+    "negative_radial": "ef7e207e7d604dbb3a94cc389660e1d67894c958",
+    "negative_endpoint_compiled_example": "306df0ed5468912267708e86f7a9198f03655f0a"
+  },
+  "limits": [
+    "This verifies source/API wiring, not elaboration or performance.",
+    "No CurrentJets production or final theorem closure is claimed."
+  ]
+}
