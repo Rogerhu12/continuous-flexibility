@@ -69,7 +69,7 @@ theorem n04Realization_exists_uniformNuColumn
   have hA : Continuous A := continuous_const.add (n07aNuSectorProjectionCLM S).continuous
   have hA0 : A (0 : StateDirections S × ℝ) = c :=
     (congrArg (fun y : N07aNuParameter S => c + y)
-      (map_zero (n07aNuSectorProjectionCLM S))).trans (add_zero c)
+      (ContinuousLinearMap.map_zero (n07aNuSectorProjectionCLM S))).trans (add_zero c)
   have hzero : (0 : StateDirections S × ℝ) ∈ A ⁻¹' U := by
     rw [Set.mem_preimage, hA0]
     exact hcenter

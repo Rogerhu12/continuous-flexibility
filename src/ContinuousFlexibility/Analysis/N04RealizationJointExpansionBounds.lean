@@ -97,10 +97,10 @@ theorem n04Realization_multilinear_twoSeminorm_bound
     (hA : ∀ v : Fin k → E, (∀ i, low (v i) ≤ 1) →
       (∀ i, high (v i) ≤ R) → |A v| ≤ C) (v : Fin k → E) :
     |A v| ≤ C * ∏ i, (low (v i) + high (v i) / R) := by
-  let r : NNReal := ⟨R⁻¹, inv_nonneg.mpr hR.le⟩
+  let r : NNReal := NNReal.mk R⁻¹ (inv_nonneg.mpr hR.le)
   let q : Seminorm ℝ E := low + r • high
   have hscale (x : E) : (r • high) x = (r : ℝ) * high x :=
-    (_root_.smul_apply r high x).trans
+    (_root_.smul_apply high r x).trans
       ((NNReal.smul_def r (high x)).trans (smul_eq_mul (r : ℝ) (high x)))
   have hq (x : E) : q x = low x + high x / R := by
     calc
