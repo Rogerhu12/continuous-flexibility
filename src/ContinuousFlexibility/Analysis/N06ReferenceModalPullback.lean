@@ -45,7 +45,7 @@ theorem n06_controlledReference_radial_ae_pullback
     ∀ᵐ r ∂volume.restrict (Ioo (K.physicalLeft m) (K.physicalRight m)),
       P ((K.chart (C.referenceState, 0) m (r, 0)).1) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   have hp : ∀ᵐ p ∂canonicalMeasure S K m, P p.1 := by
@@ -108,7 +108,7 @@ theorem n06_controlledReference_modal_representation
       (fun r => K.height (C.referenceState, 0) m (r, 0) *
         v ((K.chart (C.referenceState, 0) m (r, 0)).1)) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   have hcoef := (n06_canonical_halfCosineCoefficient_congr_ae hrep n).symm.trans hmode

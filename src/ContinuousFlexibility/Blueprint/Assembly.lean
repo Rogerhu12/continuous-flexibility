@@ -80,12 +80,11 @@ theorem R10_of_nodes (hA : R10aStatement) (hB : R10bStatement) : R10Statement :=
 
 theorem N04_of_nodes (hc : N04cStatement) (hroot : RootCompositionTarget)
     (hcubic : CubicDivisionTarget) (htrans : PhysicalTransmissionTarget) : N04Statement := by
-  obtain ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, h4⟩ := hc
-  -- The actual current domains, their genuine boundary inverses, and the
-  -- cut/operator identities are the same predicates used by Part A/B.
-  rcases h4 with ⟨hgeometry, hoperator, hjets, hsource⟩
+  obtain ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, h04, hprimitive⟩ := hc
+  -- The common geometry/operator predicate and its primitive estimates
+  -- retain the same coordinate data and the same neighborhood.
   exact ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, hroot, hcubic, htrans,
-    hgeometry, hoperator, hjets, hsource⟩
+    h04, hprimitive⟩
 
 /-- The analytic existence statement, assembled from the blueprint nodes. -/
 theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by

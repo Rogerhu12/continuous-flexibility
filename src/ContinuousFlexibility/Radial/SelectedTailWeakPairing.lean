@@ -89,9 +89,9 @@ theorem RadialTailWeakPairing.zeroExtend_equation
     (matchingSmoothVector D hD ψ hψ) hz
   have hsource := outer_l2ZeroExtend_inner (radialHilbertMeasure D) hs
     (l2Restrict (radialHilbertMeasure D) s (matchingSmoothVector D hD ψ hψ)) F.1
-  rw [hrestore, ← real_inner_comm (matchingSmoothVector D hD ψ hψ) F.1,
-    ← real_inner_comm (l2Restrict (radialHilbertMeasure D) s (matchingSmoothVector D hD ψ hψ))
-      (l2Restrict (radialHilbertMeasure D) s F.1)] at hsource
+  rw [hrestore, real_inner_comm F.1 (matchingSmoothVector D hD ψ hψ),
+    real_inner_comm (l2Restrict (radialHilbertMeasure D) s F.1)
+      (l2Restrict (radialHilbertMeasure D) s (matchingSmoothVector D hD ψ hψ))] at hsource
   simp only [Prod.fst, Prod.snd, zero_mul, sub_zero]
   change ⟪l2ZeroExtend (radialHilbertMeasure D) s hs
     (R (l2Restrict (radialHilbertMeasure D) s F.1)), matchingJacobiVector D hD j ψ hψ⟫_ℝ = _

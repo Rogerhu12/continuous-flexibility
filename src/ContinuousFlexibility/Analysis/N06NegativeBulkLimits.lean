@@ -148,7 +148,7 @@ theorem n06N05_negative_graphApproximation
         n06NegativePrincipalForcing D S C K u.val.1
           (V.forget (3 / 4 : ℝ) 0 b u.val.2) m ∧
       Nonempty (N06NegativeGraphApproximation (u.val.1.1 m) G) := by
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   obtain ⟨G, hG, v, hv⟩ := n06N05_negative_modes_regular hT hS h u m hm
   have hUeven := n06N05_height_reflection h.2 u m
   have hGeven := n06N05_negative_principalSource_reflection hT hS h u m hm G hG

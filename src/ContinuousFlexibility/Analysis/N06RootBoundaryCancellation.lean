@@ -192,7 +192,7 @@ theorem n06N05_finite_current_root_boundaryDensity
       n06RootBoundaryDensity A (K.chart z mr) (K.height z mr)
         Qr.value Qr.radial Qr.angular (r11bFiniteSynthesis s vr referenceAngularBasis)
           (K.physicalRight ml, θ) (yr, β θ) := by
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hWl : ContDiff ℝ 1 (r11bFiniteSynthesis s vl referenceAngularBasis) :=
     ContDiff.sum (fun n hn => ((hvl n hn).comp contDiff_fst).mul
       (((contDiff_referenceAngularBasis n).of_le (by simp)).comp contDiff_snd))

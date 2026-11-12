@@ -78,7 +78,7 @@ theorem n06_reference_negative_airy_identity
     n06ReferenceNegativeY C K i r * deriv (n06ReferenceNegativeY C K i) r ^ 2 =
       -deriv D.w r / (r * D.w r) := by
   have hgeom : RadialProfileGeometry D := h.1.1.1.1.1.choose_spec.1
-  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2 h.1.1.1.2.2.2.1 hi
+  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2.1 h.1.1.1.2.2.2.1 hi
   have hcore := n06_cutPiece_closed_subset h m hm hr
   have hnorm := n06_reference_negative_height_normalization hT hS h hi hr
   exact n06_scalar_airy_from_normalization
@@ -96,12 +96,12 @@ theorem n06_reference_negative_root_slope_cube
     deriv (n06ReferenceNegativeY C K i) r ^ 3 =
       -deriv (deriv D.w) r / (r * D.w r) := by
   have hgeom : RadialProfileGeometry D := h.1.1.1.1.1.choose_spec.1
-  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2 h.1.1.1.2.2.2.1 hi
+  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2.1 h.1.1.1.2.2.2.1 hi
   have hcore := n06_cutPiece_closed_subset h m hm hr
   have hY := (n06_reference_negative_height_normalization hT hS h hi hr).1
   have hYzero : n06ReferenceNegativeY C K i r = 0 :=
     n05_negative_reference_root_image hT hS h hi (x := (r, 0)) hr hroot
-  exact n06_scalar_airy_root_slope (h.2.2.2.2.1.referenceBounds i).1 hr
+  exact n06_scalar_airy_root_slope (h.2.2.2.2.1.1.referenceBounds i).1 hr
     (hgeom.1.trans hcore.1) (hgeom.2.2.2.2.1 r hcore) hgeom.2.2.1.1 hY hYzero hroot
     (fun s hs => n06_reference_negative_airy_identity hT hS h hi hs)
 
@@ -114,7 +114,7 @@ theorem n06_reference_negative_root_abs_slope_cube
     |deriv (n06ReferenceNegativeY C K i) r| ^ 3 =
       |deriv (deriv D.w) r| / (r * D.w r) := by
   have hgeom : RadialProfileGeometry D := h.1.1.1.1.1.choose_spec.1
-  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2 h.1.1.1.2.2.2.1 hi
+  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2.1 h.1.1.1.2.2.2.1 hi
   have hcore := n06_cutPiece_closed_subset h m hm hr
   rw [← abs_pow, n06_reference_negative_root_slope_cube hT hS h hi hr hroot,
     abs_div, abs_neg, abs_mul, abs_of_pos (hgeom.1.trans hcore.1),

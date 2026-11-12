@@ -34,7 +34,7 @@ private theorem n06_cutHalf_canonical_interval
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (m : ℕ) {i : ℕ} (hi : i = (K.cutPair m).1 ∨ i = (K.cutPair m).2) :
     K.positive i = false ∧ K.left i = 0 ∧ K.right i = K.cutRadius m := by
-  have hcut := h.2.2.2.2.2.1.1.1
+  have hcut := h.2.2.2.2.1.2.1.1.1
   obtain ⟨hnegL, hnegR, _, _, _, _, hlL, hlR, hrL, hrR⟩ := hcut m
   rcases hi with rfl | rfl
   · exact ⟨hnegL, hlL, hrL⟩

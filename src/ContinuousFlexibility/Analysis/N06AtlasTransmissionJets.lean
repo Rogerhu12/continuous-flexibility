@@ -153,7 +153,7 @@ theorem n06N05_finite_atlas_orientedMatching
       n06OrientedCanonicalBoundary (Q mr) (r11bFiniteSynthesis s (v mr) referenceAngularBasis)
         (fun y => if K.positive mr = true then a mr y else 1) (reverse mr) false θ := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   rcases n06_adjacentPiece_positive_or_cutPair h01 h04 hjoin with hpositive | hcut
   · obtain ⟨σl, σr, β₀, H₀, ρ₀, κ₀, Hr₀, β, H, ρ, κ, Hr, Jl₀, Jr₀, Jl, Jr⟩ :=
       J.roots ml mr hjoin hpositive

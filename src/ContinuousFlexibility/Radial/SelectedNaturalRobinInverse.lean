@@ -54,26 +54,29 @@ variable {M : MorseChainData} {D : ReferenceData} {right : Bool} {j start : ℕ}
   {entrance η K cut lam : ℝ}
   (F : MorsePhysicalTailBasis M D right j start entrance η K)
 
-include F in
-/-- A bounded regional inverse with the genuine selected natural full
-state. The input natural function is used only to identify the Robin line;
-the inverse itself is constructed from the deep kernel and finite core. -/
-theorem exists_radialNaturalInverse
+/-- The full state of the supplied natural function determines exactly
+the Robin line of the supplied homogeneous pair.  The direction of the
+unit state is irrelevant; the original natural function is not reselected. -/
+theorem radialNatural_robin_iff
     (hD : IsAccumulatingProfile D) (hcut : cut ∈ radialCore D)
     (hentry : entrance ∈ radialCore D)
     (hac : outerTailSign right * cut < outerTailSign right * entrance) (hlam : lam ≠ 0)
     (hT : DeepTailHypotheses (morsePhysicalDeepTail M D right j start entrance η K))
     (hphysical : TailPhysicalRelation D
       (morsePhysicalDeepTail M D right j start entrance η K) right j start)
-    (hη : η ≤ 1 / 16) (hK : 32 ≤ K) (hKinv : 10 * tailSmoothStepConstant + 2 ≤ K)
+    (hη : η ≤ 1 / 16) (hK : 32 ≤ K)
+    (H : OuterFundamentalStatePair
+      (fun x => lam / outerTailOutwardWeight D right x)
+      (fun x => (j : ℝ) ^ 2 * deriv (outerTailOutwardWeight D right) x / (lam * x))
+      F.P (F.ZP lam) F.Q (F.ZQ lam)
+      (outerTailSign right * cut) (outerTailSign right * entrance)
+      (outerTailSign right * tailPhysicalEndpoint D right))
     {V : ℝ → ℝ} (hV : ContDiff ℝ ∞ V) (hN : RadialNaturalTail D right j cut V)
-    (hne : (V cut, outerTailSign right * D.w cut * deriv V cut / lam) ≠ 0) :
-    let v := outerUnitState (V cut, outerTailSign right * D.w cut * deriv V cut / lam)
-    ∃ R : Lp ℝ 2 ((radialHilbertMeasure D).restrict (radialTailInterval D right cut)) →L[ℝ]
-      Lp ℝ 2 ((radialHilbertMeasure D).restrict (radialTailInterval D right cut)),
-      RadialTailWeakPairing D hD right cut j R ∧
-        RadialTailRegularResponse D right cut lam v R ∧
-        RadialTailCauchyUnique D right cut ((j : ℝ) ^ 2) lam v := by
+    (hne : (V cut, outerTailSign right * D.w cut * deriv V cut / lam) ≠ 0)
+    (q : ℝ × ℝ) :
+    outerStatePair (outerUnitState
+      (V cut, outerTailSign right * D.w cut * deriv V cut / lam)) q = 0 ↔
+        outerStatePair H.entrance q = 0 := by
   let a := outerTailSign right * cut
   let b := outerTailSign right * tailPhysicalEndpoint D right
   let w := outerTailOutwardWeight D right
@@ -95,7 +98,8 @@ theorem exists_radialNaturalInverse
       have hi : outerOutwardRadius right x ∈ radialTailInterval D right cut := by
         apply (radialTailInterval_outward D right cut _).mpr
         simpa only [outerOutwardRadius_twice] using hx
-      exact (radialJacobi_outward D right ((j : ℝ) ^ 2) V x).trans (hN.2.1.2 _ hi)
+      have he := radialJacobi_outward D right ((j : ℝ) ^ 2) V x
+      exact he.trans (hN.2.1.2 _ hi)
   have hyLp : MemLp y 2
       (outerOutwardIntervalMeasure D right (radialTailInterval D right cut)) := by
     rw [outerOutwardRegionMeasure_eq_map hcut]
@@ -115,17 +119,39 @@ theorem exists_radialNaturalInverse
       rw [hdy]
       simp only [w, outerTailOutwardWeight, a, ← mul_assoc, outerTailSign_mul_self, one_mul]
       ring
+  rw [outerUnitState_pair_zero_iff hne]
+  have hs := F.whole_natural_robin_iff hD hcut hentry hac hlam hT hphysical hη hK
+    H hy.continuous.continuousOn hz.continuous.continuousOn hstate hyLp
+    (by rwa [hstateCut]) q
+  rwa [hstateCut] at hs
+
+include F in
+/-- A bounded regional inverse with the genuine selected natural full
+state. The input natural function is used only to identify the Robin line;
+the inverse itself is constructed from the deep kernel and finite core. -/
+theorem exists_radialNaturalInverse
+    (hD : IsAccumulatingProfile D) (hcut : cut ∈ radialCore D)
+    (hentry : entrance ∈ radialCore D)
+    (hac : outerTailSign right * cut < outerTailSign right * entrance) (hlam : lam ≠ 0)
+    (hT : DeepTailHypotheses (morsePhysicalDeepTail M D right j start entrance η K))
+    (hphysical : TailPhysicalRelation D
+      (morsePhysicalDeepTail M D right j start entrance η K) right j start)
+    (hη : η ≤ 1 / 16) (hK : 32 ≤ K) (hKinv : 10 * tailSmoothStepConstant + 2 ≤ K)
+    {V : ℝ → ℝ} (hV : ContDiff ℝ ∞ V) (hN : RadialNaturalTail D right j cut V)
+    (hne : (V cut, outerTailSign right * D.w cut * deriv V cut / lam) ≠ 0) :
+    let v := outerUnitState (V cut, outerTailSign right * D.w cut * deriv V cut / lam)
+    ∃ R : Lp ℝ 2 ((radialHilbertMeasure D).restrict (radialTailInterval D right cut)) →L[ℝ]
+      Lp ℝ 2 ((radialHilbertMeasure D).restrict (radialTailInterval D right cut)),
+      RadialTailWeakPairing D hD right cut j R ∧
+        RadialTailRegularResponse D right cut lam v R ∧
+        RadialTailCauchyUnique D right cut ((j : ℝ) ^ 2) lam v := by
   obtain ⟨H, R, hR, hsym, hUniq⟩ := F.exists_wholeWeakInverse hD hcut hentry hac
     hlam hT hphysical hη hK hKinv
   have hequiv (q : ℝ × ℝ) :
       outerStatePair (outerUnitState (V cut,
         outerTailSign right * D.w cut * deriv V cut / lam)) q = 0 ↔
-        outerStatePair H.entrance q = 0 := by
-    rw [outerUnitState_pair_zero_iff hne]
-    have hs := F.whole_natural_robin_iff hD hcut hentry hac hlam hT hphysical hη hK
-      H hy.continuous.continuousOn hz.continuous.continuousOn hstate hyLp
-      (by rwa [hstateCut]) q
-    rwa [hstateCut] at hs
+        outerStatePair H.entrance q = 0 :=
+    F.radialNatural_robin_iff hD hcut hentry hac hlam hT hphysical hη hK H hV hN hne q
   refine ⟨outerRadialRegionOperator hcut R, ?_, ?_, ?_⟩
   · intro ψ hψ hs f
     exact outerRadialRegionOperator_test_pairing hD hcut hlam hR hUniq hsym hψ hs f

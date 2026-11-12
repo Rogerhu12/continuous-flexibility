@@ -143,7 +143,7 @@ theorem SeedRetainedPair.first_terminal_cutoff_estimates {S : SelectedTailData}
 
 /-- Install the actual three-piece inverse and the actual first-band
 cutoffs. The only regional supplier argument concerns the outer side. -/
-theorem SeedRetainedPair.exists_first_terminalRegionalData {S : SelectedTailData}
+theorem SeedRetainedPair.exists_first_terminalRegionalData_with_data {S : SelectedTailData}
     {K₀ : SeedCentralCutoff} {headLength length : ℝ}
     (P : SeedRetainedPair S K₀ headLength length)
     (hS : IsSelectedTail S)
@@ -186,7 +186,30 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData {S : SelectedTailData
       W.sourceCost = ε ∧ W.energyCost = ε ∧
       W.matching.innerLeft = P.sideRadius false * S.joinInner false S.chain.index ∧
       W.matching.innerRight = P.sideRadius true * S.joinInner true S.chain.index ∧
-      ∀ i, W.attenuation i = 0 := by
+      (∀ i, W.attenuation i = 0) ∧
+      W.cutoff = (fun i => P.firstTerminalCutoff H (selectedTerminalSide i)) ∧
+      (∃ U : ∀ side, SeedPhysicalFirstIncoming P Γ.reference side f.1,
+        W.standIn = fun i => (U (selectedTerminalSide i)).solution) ∧
+      W.matching.sourceOuter = modeOuterSource Γ.reference
+        (P.sideRadius false * S.joinInner false S.chain.index)
+        (P.sideRadius true * S.joinInner true S.chain.index) ∧
+      (∀ i : Fin 2,
+        W.matching.A i i =
+          (outerUnitState (selectedBoundaryState Γ.reference f.1
+            (r07OutwardSign (selectedTerminalSide i))
+            (P.sideRadius (selectedTerminalSide i) * S.joinInner (selectedTerminalSide i) S.chain.index)
+            (radialRadiusScale (P.sideRadius (selectedTerminalSide i)) 1
+              (v (selectedTerminalSide i))))).1 ∧
+        W.matching.B i i =
+          (outerUnitState (selectedBoundaryState Γ.reference f.1
+            (r07OutwardSign (selectedTerminalSide i))
+            (P.sideRadius (selectedTerminalSide i) * S.joinInner (selectedTerminalSide i) S.chain.index)
+            (radialRadiusScale (P.sideRadius (selectedTerminalSide i)) 1
+              (v (selectedTerminalSide i))))).2) ∧
+      ∀ side, ContDiff ℝ ∞ (radialRadiusScale (P.sideRadius side) 1 (v side)) ∧
+        RadialNaturalTail Γ.reference side f.1
+          (P.sideRadius side * S.joinInner side S.chain.index)
+          (radialRadiusScale (P.sideRadius side) 1 (v side)) := by
   classical
   let D := Γ.reference
   let cut := fun side => P.sideRadius side * S.joinInner side S.chain.index
@@ -209,6 +232,13 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData {S : SelectedTailData
       outerRepresentative := rep
       outerPoisson := Q
       outerFunction := p }
+  have hMscale (i : Fin 2) : M.boundaryScale i =
+      standInBoundaryScale ((f.1 : ℝ) ^ 2)
+        (D.w (cut (selectedTerminalSide i))) (cut (selectedTerminalSide i)) := rfl
+  have hMD0 (i : Fin 2) : M.D0 i = 1 / (f.1 : ℝ) := rfl
+  have hMleft : M.innerLeft = cut false := rfl
+  have hMright : M.innerRight = cut true := rfl
+  have hMmargin : M.margin = η := rfl
   let U (side : Bool) : SeedPhysicalFirstIncoming P D side f.1 :=
     Classical.choice (P.exists_physical_firstIncoming hw hS side f.2.1 f.2.2.1 f.2.2.2
       (hincoming side) (hcone side))
@@ -289,7 +319,7 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData {S : SelectedTailData
     boundary_scale := by
       intro i
       rw [hcut]
-      simp only [M, base, SeedRetainedPair.firstTerminalMatching, selectedTerminalMatching, cut]
+      rfl
     frequency_pos := hjpos
     boundary_slope := by
       intro i
@@ -305,19 +335,71 @@ theorem SeedRetainedPair.exists_first_terminalRegionalData {S : SelectedTailData
     energyCost_nonneg := hε
     source_bound := by
       intro i
-      simpa only [M, base, SeedRetainedPair.firstTerminalMatching, selectedTerminalMatching,
-        χ, standIn, D, neg_zero, exp_zero, mul_one] using
+      simpa only [hMscale, hMD0, χ, standIn, D, cut, neg_zero, exp_zero, mul_one] using
         (hbounds (selectedTerminalSide i)).2.1
     energy_bound := by
       intro i
-      simpa only [terminalCutoffEnergy, M, base, SeedRetainedPair.firstTerminalMatching,
-        selectedTerminalMatching, χ, standIn, D, mul_zero, neg_zero, exp_zero, mul_one] using
+      simpa only [terminalCutoffEnergy, hMleft, hMright, hMscale, hMD0,
+        χ, standIn, D, cut, mul_zero, neg_zero, exp_zero, mul_one] using
         (hbounds (selectedTerminalSide i)).2.2
     inverse_bound := hnorm.trans hcost
     error_budget := by
       intro i k
-      simpa only [M, base, SeedRetainedPair.firstTerminalMatching, selectedTerminalMatching,
-        neg_zero, sub_zero, exp_zero, mul_one] using hbudget }
-  exact ⟨W, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, fun _ => rfl⟩
+      simpa only [hMmargin, neg_zero, sub_zero, exp_zero, mul_one] using hbudget }
+  exact ⟨W, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, (fun _ => rfl),
+    rfl, ⟨U, rfl⟩, rfl, hdiag,
+    fun side => ⟨(hdata side).2.1, (hdata side).2.2.1⟩⟩
+
+/-- The original interface forgets only the retained construction identities. -/
+theorem SeedRetainedPair.exists_first_terminalRegionalData {S : SelectedTailData}
+    {K₀ : SeedCentralCutoff} {headLength length : ℝ}
+    (P : SeedRetainedPair S K₀ headLength length)
+    (hS : IsSelectedTail S)
+    (hfirst : radialFrequencyBand S.chain S.Cstar S.chain.index 2)
+    (hcone : ∀ side, ∃ c : ℝ, 0 < c ∧ ∀ x ∈ uIcc (S.cut side S.chain.index)
+      (S.joinInner side S.chain.index), (S.family S.sigma).w =ᶠ[𝓝 x] (fun t => c * t))
+    (hhead : 0 < headLength) (B : FixedCentralBorder)
+    {Γ : ConnectedReferenceGeometry} (hΓ : Γ.Realizes)
+    (hw : Γ.reference.w = P.pair.profile)
+    (hleft : Γ.centralLeft = exp K₀.left) (hright : Γ.centralRight = exp K₀.right)
+    {T B₀ C K : ℝ} (hT : selectedFirstInnerModelWindow ≤ T) (hC : 0 < C)
+    (hTL : Γ.centralLeft < centralRadius (-T)) (hTR : centralRadius T < Γ.centralRight)
+    (hmodel : EqOn Γ.reference.w (centralRadialProfile 1) (Ioo Γ.centralLeft Γ.centralRight))
+    (hcolumn : referenceColumn Γ.reference = fixedCentralColumn B.chi)
+    (f : R07FirstFrequency S.chain S.Cstar) (q : ℕ) (hq : 1 ≤ q) (hfq : f.1 = 2 * q)
+    (hB : BufferHypotheses (B.modelBuffer q T B₀))
+    (model : InnerBufferLocalizedData (B.modelBuffer q T B₀) C K)
+    (hk : ∀ i, 0 < fixedCentralModelCutEnergy model i)
+    (herror : ∀ sign : Bool,
+      ‖innerTwoCutWeightedError (fixedCentralModelPhysicalKappa model) (fun _ => 1)
+        (model.physicalFluxError 1
+          (fun i => centralDensityRoot (bufferCut (B.modelBuffer q T B₀) i))) sign‖ ≤
+        (1 : ℝ) / 8)
+    {Kfirst η ε H : ℝ}
+    (hcost : sqrt 2 * fixedCentralFirstInverseCost model (2 * (q : ℝ)) T B₀ ≤ Kfirst)
+    (hη : 0 < η) (hε : 0 ≤ ε) (hH : 2 * log 2 < H) (hL : H < length)
+    (hbudget : ε + Kfirst * ε ^ 2 ≤ η / 16)
+    (hsource : terminalConeSourceConstant * exp (-((f.1 : ℝ) * H / 2)) ≤
+      sqrt (1 / (f.1 : ℝ)) * ε)
+    (henergy : (1 / (f.1 : ℝ)) * (2 * terminalPhysicalCutoffJetConstant 1 ^ 2) *
+      exp (-((f.1 : ℝ) * H)) ≤ (1 / (f.1 : ℝ)) * ε)
+    (v : Bool → ℝ → ℝ)
+    (hv : ∀ side, SelectedFirstNaturalData S side f.1 (v side) ∧
+      2 * η ≤ selectedFirstBoundaryMargin S side f.1 (v side))
+    (hincoming : ∀ side, ContDiff ℝ ∞ (S.incoming side f.1))
+    (houter : SelectedTerminalOuterSupply (P.firstTerminalMatching Γ.reference f.1 η v)) :
+    ∃ W : TerminalRegionalData Γ.reference,
+      W.matching.frequency = f.1 ∧ W.matching.transitionIndex = S.chain.index ∧
+      W.matching.margin = η ∧ W.inverseCost = Kfirst ∧
+      W.sourceCost = ε ∧ W.energyCost = ε ∧
+      W.matching.innerLeft = P.sideRadius false * S.joinInner false S.chain.index ∧
+      W.matching.innerRight = P.sideRadius true * S.joinInner true S.chain.index ∧
+      ∀ i, W.attenuation i = 0 := by
+  obtain ⟨W, hfreq, hindex, hmargin, hcostW, hsourceW, henergyW,
+      hcutL, hcutR, hattenuation, _⟩ :=
+    P.exists_first_terminalRegionalData_with_data hS hfirst hcone hhead B hΓ hw
+      hleft hright hT hC hTL hTR hmodel hcolumn f q hq hfq hB model hk herror
+      hcost hη hε hH hL hbudget hsource henergy v hv hincoming houter
+  exact ⟨W, hfreq, hindex, hmargin, hcostW, hsourceW, henergyW, hcutL, hcutR, hattenuation⟩
 
 end ContinuousFlexibility.Radial

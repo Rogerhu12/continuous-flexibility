@@ -241,8 +241,8 @@ theorem n06_currentAtlasReplacement_through05
     NonlinearPropertiesThrough05 D T S C R L (n06CurrentAtlasReplacement K J)
       (n06RetainedVolumeModel J V) b (n06RetainedCanonicalDomain J B) base loss ε := by
   have h01 : N01Properties D T S C base loss ε := h05.1.1.1.1
-  have hK := (n06_N04_qualitative_parts h05.1.2.2.2.2).1
-  have hJ := (n06_N04_qualitative_parts h04.2.2.2.2).1
+  have hK := (n06_N04_qualitative_parts h05.1.2.2.2.2.1).1
+  have hJ := (n06_N04_qualitative_parts h04.2.2.2.2.1).1
   exact ⟨h04, n06_currentAtlasReplacement_N05 hK hJ
     (n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1)
     (n05_referenceState_sector h01.2.2.1) hchart hheight h05.2⟩

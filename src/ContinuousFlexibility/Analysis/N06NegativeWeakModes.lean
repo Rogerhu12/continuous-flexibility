@@ -192,7 +192,7 @@ theorem n06N05_negative_modes_regular
         (∀ᵐ y ∂volume.restrict (Ioo (K.left m) (K.right m)),
           deriv (deriv (v i)) y + (((2 * i : ℕ) : ℝ)) ^ 2 * y * v i y =
             n06HalfCosineCoefficient G i y) := by
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   let g := n06NegativePrincipalForcing D S C K u.val.1
     (V.forget (3 / 4 : ℝ) 0 b u.val.2) m
   have hg : MemLp g 2 (canonicalMeasure S K m) :=

@@ -68,7 +68,7 @@ private theorem n06_n05_named_relation_implies
     (hs : stateSector S z.1) (u : B.Space) (F : V.level (3 / 4 : ℝ) 0 b)
     (hweak : N06NamedPhysicalWeakRelation D C L B z u F) :
     PerturbedCanonicalRelation D S C K L z u.val.1 (V.forget (3 / 4 : ℝ) 0 b F) := by
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1

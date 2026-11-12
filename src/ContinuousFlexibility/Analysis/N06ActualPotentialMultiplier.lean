@@ -46,7 +46,7 @@ theorem n06N05_actualPotentialDifference_multiplier
               (B.inverse F).val.1.1 m p := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have h03 : N03Properties D T S C R L base ε := h.1.1.2
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   obtain ⟨Q, hQ, hmult⟩ := n06N05_potentialMultiplier h01.1.1 hT h.2 A

@@ -181,7 +181,7 @@ endpoint of every actual negative reference piece. -/
 private theorem n06_negativeReference_left_eq_zero
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {i : ℕ} (hi : K.positive i = false) : K.left i = 0 := by
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have hC : controlGeometryConditions D S C := h.1.1.1.2.2.2.1
   obtain ⟨n, hni | hni⟩ := n06_negativePiece_is_cutHalf h04 hC hi
   · rw [hni]
@@ -200,7 +200,7 @@ theorem n06_reference_negative_root_deriv_sign
     if upper then
       deriv (n06ReferenceNegativeY C K i) (K.physicalRight i) < 0
     else 0 < deriv (n06ReferenceNegativeY C K i) (K.physicalLeft i) := by
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h.1.1.1.2.1
   have hsref := n05_referenceState_sector h.1.1.1.2.2.1
   have he : n06Endpoint (K.physicalLeft i) (K.physicalRight i) upper ∈
@@ -268,7 +268,7 @@ theorem n06_positiveReference_from_adjacent_negative
             iteratedDeriv k
               (fun x => Real.log (n06ReferenceNegativeH C K (if side then iR else iL) x))
               (if side then K.physicalRight m else K.physicalLeft m)) := by
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have hD : RadialProfileGeometry D := h.1.1.1.1.1.choose_spec.1
   have hborder : RadialTrueBorder D := h.1.1.1.1.2.2.2.1
   have hdw : Continuous (deriv D.w) :=

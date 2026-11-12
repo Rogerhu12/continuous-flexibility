@@ -159,12 +159,12 @@ theorem n05_reference_planeJacobian_radial
     planeJacobian (K.chart (C.referenceState, 0) m) p =
       deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) p.1 := by
   have h01 := h.1.1.1
-  have hcActual := (h.2.2.2.2.1.charts (C.referenceState, 0)
+  have hcActual := (h.2.2.2.2.1.1.charts (C.referenceState, 0)
     (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m).2.2.2.2.1
   have hc : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m)
       (referencePhysicalPieceOpen S K m) := by
-    simpa only [h.2.2.2.2.1.referenceDomain m] using hcActual
+    simpa only [h.2.2.2.2.1.1.referenceDomain m] using hcActual
   let ξ : ℝ → ℝ := fun r => (K.chart (C.referenceState, 0) m (r, 0)).1
   have hline : ContDiff ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) :=
     contDiff_id.prodMk contDiff_const

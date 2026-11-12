@@ -138,7 +138,7 @@ theorem n05_negative_reference_determinant_closed
     K.height (C.referenceState, 0) m x ^ 4 *
         (D.w x.1 * (deriv D.w x.1 / x.1)) =
       -(K.chart (C.referenceState, 0) m x).1 := by
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have h01 := h.1.1.1
   have hmem : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
@@ -151,7 +151,7 @@ theorem n05_negative_reference_determinant_closed
           (D.w q.1 * (deriv D.w q.1 / q.1))) p := by
     obtain ⟨_, hh, _, _⟩ := n05_reference_boundary_regular h04.1 hmem hsector m (p := p) hp
     obtain ⟨ha, _, hc⟩ := n05_radialReference_contDiffAt_of_ne_zero h01.1.1 (p := p)
-      (n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2 hp).ne'
+      (n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2.1 hp).ne'
     exact ((hh.pow 4).mul (ha.mul hc)).continuousAt
   have hG (p : PolarPoint)
       (hp : p.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m)) :
@@ -188,7 +188,7 @@ theorem n05_negative_reference_symbol_closed
     K.height z m x ^ 2 * n05PrincipalPair (n05RadialReferenceCoefficients D) ξ φ x = 0 ∧
     K.height z m x ^ 2 * n05PrincipalPair (n05RadialReferenceCoefficients D) φ φ x =
       |planeJacobian Ψ x| * (-ξ x)
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have h01 := h.1.1.1
   have hmem : z ∈ stateNeighborhood S C base ε := n05_referenceState_mem h01.2.1
@@ -213,7 +213,7 @@ theorem n05_negative_reference_symbol_closed
         n05PrincipalPair (n05RadialReferenceCoefficients D) f g q) p := by
     have hh := (n05_reference_boundary_regular h04.1 hmem hsector m (p := p) hp).2.1
     obtain ⟨ha, hb, hc⟩ := n05_radialReference_contDiffAt_of_ne_zero h01.1.1 (p := p)
-      (n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2 hp).ne'
+      (n05_physical_closed_radius_pos h01.1.1 h.2.2.2.2.1 hp).ne'
     exact ((hh.pow 2).mul
       (n05_contDiffAt_principalPair ha hb hc (hf p hp) (hg p hp))).continuousAt
   have hJ (p : PolarPoint)

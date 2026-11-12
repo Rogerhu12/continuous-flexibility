@@ -51,7 +51,7 @@ theorem n06N05_canonicalModes_physical_traces
         D.w (K.physicalRight ml) * deriv fr (K.physicalRight ml) := by
   obtain ⟨η, f, hrep, hgraph, htrace⟩ := n06N05_exists_remainder_modal_traces hS h u
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hη : MemLp η 2 (radialPhysicalMeasure D) :=
     r11b_output_memLp h01.1.1 h01.1.2.2.2.1 h.2.2.2.1 hgraph.1
   have hχ : MemLp (fun p : PolarPoint => u.val.1.2.1 * S.chiLeft p.1) 2

@@ -161,9 +161,9 @@ theorem n06_referenceNegativeInverseData_nonempty
   have h01 := h.1.1.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  have hpieces := h.2.2.2.2.1.referenceBounds
-  have hc := h.2.2.2.2.1.charts (C.referenceState, 0) hz hs i
-  rw [h.2.2.2.2.1.referenceDomain i] at hc
+  have hpieces := h.2.2.2.2.1.1.referenceBounds
+  have hc := h.2.2.2.2.1.1.charts (C.referenceState, 0) hz hs i
+  rw [h.2.2.2.2.1.1.referenceDomain i] at hc
   have hY (r : ℝ) (hr : r ∈ P) : ContDiffAt ℝ ∞ Y r :=
     (n06_reference_negative_height_normalization hT hS h hi hr).1
   have hne (r : ℝ) (hr : r ∈ P) : deriv Y r ≠ 0 :=

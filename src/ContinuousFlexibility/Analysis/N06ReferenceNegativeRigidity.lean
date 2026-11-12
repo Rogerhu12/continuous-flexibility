@@ -60,7 +60,7 @@ theorem n06_reference_root_cut_radial
   have h01 := h.1.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  have hA := h.2.2.2.2.1
+  have hA := h.2.2.2.2.1.1
   have hpieces := hA.referenceBounds
   have hnegative := hA.referenceNegative
   have hclosed (p : PolarPoint)
@@ -78,11 +78,11 @@ theorem n06_reference_root_cut_radial
       (continuousAt_const.prodMk continuousAt_id)
   have hlift (θ : ℝ) : β (θ + Real.pi) = β θ + Real.pi := by
     simpa only [β, Ψ, Prod.mk_add_mk, Prod.snd_add, Prod.fst_add, add_zero] using
-      congrArg Prod.snd (n05_canonical_closed_periodicity h.2.2.2.2 href hs i
+      congrArg Prod.snd (n05_canonical_closed_periodicity h.2.2.2.2.1 href hs i
         (p := (root, θ)) (hrootClosed θ)).1
   have hodd : Function.Odd β := by
     intro θ
-    exact congrArg Prod.snd (n05_canonical_closed_reflection h.2.2.2.2 href hs i
+    exact congrArg Prod.snd (n05_canonical_closed_reflection h.2.2.2.2.1 href hs i
       (p := (root, θ)) (hrootClosed θ)).1
   obtain ⟨τ, hτ, htravel, hperiod, hformula⟩ :=
     n06_reference_null_root_cut hT hS h hi hinside hroot hcut hwroot hy hcutImage
@@ -171,8 +171,8 @@ theorem n06_reference_cutPair_radial
   have hirr : Irrational ((2 * n05TricomiTime (K.cutRadius m)) / Real.pi) := by
     rw [← (n06_reference_cut_travel hT hS h m).2.2]
     exact (hreturn (C.left m) (C.right m) hneg).1.1
-  have hpieces := h.2.2.2.2.1.referenceBounds
-  have hcuts := h.2.2.2.2.2.1.1.1
+  have hpieces := h.2.2.2.2.1.1.referenceBounds
+  have hcuts := h.2.2.2.2.1.2.1.1.1
   obtain ⟨hnegL, hnegR, hl, hr, hmeet, hy, _, _, _, _⟩ := hcuts m
   let c := K.physicalRight (K.cutPair m).1
   have hrootL : C.left m ∈ Icc (K.physicalLeft (K.cutPair m).1)
@@ -211,7 +211,7 @@ theorem n06_reference_negative_radial
       K.chart (C.referenceState, 0) i (r, θ) =
           ((K.chart (C.referenceState, 0) i (r, 0)).1, θ) ∧
         K.height (C.referenceState, 0) i (r, θ) = K.height (C.referenceState, 0) i (r, 0) := by
-  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2 h.1.1.1.2.2.2.1 hi
+  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2.1 h.1.1.1.2.2.2.1 hi
   exact n06_reference_cutPair_radial hT hS h m hm
 
 end ContinuousFlexibility.Statements

@@ -87,7 +87,7 @@ theorem N06ReferenceNegativeInverseData.reciprocalHeight_ode
   have h01 := h.1.1.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  have hA := (n06_N04_qualitative_parts h.2.2.2.2).1
+  have hA := (n06_N04_qualitative_parts h.2.2.2.2.1).1
   have hc := hA.charts (C.referenceState, 0) hz hs i
   rw [hA.referenceDomain i] at hc
   have hx : x ∈ referencePhysicalPieceOpen S K i := hc.2.1 hp
@@ -130,7 +130,7 @@ theorem N06ReferenceNegativeInverseData.reciprocalHeight_ode
         (fun q => K.height (C.referenceState, 0) i q * φ (K.chart (C.referenceState, 0) i q)) x /
       |planeJacobian (K.chart (C.referenceState, 0) i) x| = 0
     rw [hdiv, mul_zero, zero_div]
-  have he := n06_negative_canonicalOperator h.2.2.2.2 hz hs i hi hφ hp
+  have he := n06_negative_canonicalOperator h.2.2.2.2.1 hz hs i hi hφ hp
   have hprincipal := n06_negativePrincipal_radial (θ := θ) hF hFW
   have hvalue : φ (y, θ) = P.reciprocalHeight y := hFW.eq_of_nhds
   rw [hzero, hprincipal, hvalue] at he
@@ -166,7 +166,7 @@ theorem N06ReferenceNegativeInverseData.secondDerivative_bound_closed
   have hW₂ : ContDiffAt ℝ ∞ (deriv (deriv P.reciprocalHeight)) y :=
     (hreg.1.derivWithin (m := ∞) (by simp)).derivWithin (m := ∞) (by simp)
   have hclosure : y ∈ closure (Ioo (K.left i) (K.right i)) := by
-    rw [closure_Ioo (h.2.2.2.2.1.referenceBounds i).2.1.ne]
+    rw [closure_Ioo (h.2.2.2.2.1.1.referenceBounds i).2.1.ne]
     exact hy
   haveI : NeBot (𝓝[Ioo (K.left i) (K.right i)] y) :=
     mem_closure_iff_nhdsWithin_neBot.mp hclosure
@@ -193,7 +193,7 @@ theorem n06_referenceNegative_reciprocalHeight_secondDerivative_bound
           (M * T.E0 (T.sample (K.cell i)) ^ M) * P.reciprocalHeight y := by
   have h01 := h.1.1.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
-  have hbounds := h.2.2.2.2.2.2.1
+  have hbounds := h.2.2.2.2.1.2.2.1
   obtain ⟨M, hM, hbound⟩ := hbounds 0
   refine ⟨M, hM, fun i hi P y hy => P.secondDerivative_bound_closed hT hS h hi ?_ hy⟩
   intro t ht

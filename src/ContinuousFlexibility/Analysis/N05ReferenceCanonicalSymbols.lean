@@ -89,7 +89,7 @@ theorem n05_negative_reference_determinant_nonreflection
     K.height (C.referenceState, 0) m x ^ 4 *
         (D.w x.1 * (deriv D.w x.1 / x.1)) =
       -(K.chart (C.referenceState, 0) m x).1 := by
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have hnegative := h04.1.referenceNegative
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
@@ -103,7 +103,7 @@ theorem n05_negative_reference_determinant_nonreflection
   obtain ⟨ha, hb, hc⟩ :=
     n05_reference_coefficients_contDiffAt hT hS h.1 hxD hd hθ
   have hdet := n05_negative_height_determinant ha hb hc hh hΨ hJ
-    (n05_negative_conjugation_from_N04 h.2.2.2.2 hmem hsector hm
+    (n05_negative_conjugation_from_N04 h.2.2.2.2.1 hmem hsector hm
       (by simpa only [h04.1.referenceDomain m] using hx))
   have hcoeff := n05_reference_coefficients_nonreflection hT hS h.1 hxD hd hθ
   have hLa : (L.coefficients (C.referenceState, 0)).a x = D.w x.1 :=
@@ -131,7 +131,7 @@ theorem n05_negative_reference_symbol_nonreflection
       K.height z m x ^ 2 * n05PrincipalPair (n05RadialReferenceCoefficients D) φ φ x =
         |planeJacobian (K.chart z m) x| * (-ξ x) := by
   dsimp only
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have hnegative := h04.1.referenceNegative
   have hxD : x ∈ annularOpen D := ⟨(hpieces m).2.2 hx.1, mem_univ _⟩
@@ -150,7 +150,7 @@ theorem n05_negative_reference_symbol_nonreflection
   have hAc : ContDiffAt ℝ ∞ n05TricomiCoefficients.c (K.chart (C.referenceState, 0) m x) :=
     contDiffAt_fst.neg
   have hprincipal := n05_principal_coefficients_of_conjugation ha hb hc hAa hAb hAc hh hΨ hJ
-    (n05_negative_conjugation_from_N04 h.2.2.2.2 hmem hsector hm
+    (n05_negative_conjugation_from_N04 h.2.2.2.2.1 hmem hsector hm
       (by simpa only [h04.1.referenceDomain m] using hx))
   have hcoeff := n05_reference_coefficients_nonreflection hT hS h.1 hxD hd hθ
   have hLa : (L.coefficients (C.referenceState, 0)).a x = D.w x.1 :=

@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N06Neighborhood
 import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.TameTransfer
+import ContinuousFlexibility.Analysis.N06Neighborhood
 
 /-!
 # Restricting the cumulative nonlinear construction
@@ -297,7 +298,8 @@ theorem coupled_nonlinearPropertiesThrough08_restrict (hT : IsMaterialData D T)
   have h1' := coupled_N01Properties_restrict hT h1 hb hε hε'
   have h2' := coupled_N02Properties_restrict h2 hb hε
   have h3' := coupled_N03Properties_restrict h3 hb hε
-  have h4' := coupled_N04Properties_restrict h4 hb hε
+  have h4' := And.intro (coupled_N04Properties_restrict h4.1 hb hε)
+    (n06_CanonicalPrimitiveGeometry_mono h4.2 hb hε)
   have h6' := coupled_N06Properties_restrict h6 hb hε hε'
   have hG' := coupled_scalarInverseProperties_restrict hG hb hε
   have hBridge' := coupled_scalarBanachBridgeProperties_restrict hBridge hb hε

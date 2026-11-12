@@ -60,7 +60,7 @@ theorem n06_perturbedCanonicalRelation_of_finiteGraphCore
     ∀ u : B.Space, PerturbedCanonicalRelation D S C K L z u.val.1
       (V.forget (3 / 4 : ℝ) 0 b (P u)) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   have hab : D.a ≤ D.b := h01.1.1.choose_spec.1.2.1.le

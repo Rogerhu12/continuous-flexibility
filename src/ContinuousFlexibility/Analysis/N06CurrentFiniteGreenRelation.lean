@@ -115,7 +115,7 @@ theorem n06_exists_finiteGreen_relation_through05
   have hreg := hex.choose_spec.2.2.2
   have h01 := hnew.1.1.1.1
   have h03 := hnew.1.1.2
-  have h04 := hnew.1.2.2.2.2
+  have h04 := hnew.1.2.2.2.2.1
   refine ⟨ε', hε', hle, hnew, ?_⟩
   intro z hz hs u F hdata
   exact n06_namedPhysicalWeakRelation_implies h01.1.1.choose_spec.1.2.1.le

@@ -70,7 +70,7 @@ theorem n06_current_physical_tests
           2 (canonicalMeasure S K m) := by
   have h01 : N01Properties D T S C base loss ε := hThrough.1.1.1
   have h03 : N03Properties D T S C R L base ε := hThrough.1.2
-  have h04 : N04Properties D T S C L K base loss ε := hThrough.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := hThrough.2.2.2.2.1
   obtain ⟨J, hJ, hJcore, hzero⟩ := hφ.2.2
   refine ⟨J, hJ, hJcore, hzero,
     fun r hr θ => n06_divergenceOperator_zero_off_radial_support

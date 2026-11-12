@@ -68,7 +68,7 @@ theorem n06N05_controlled_positiveCubicSourceMap
     n06N05_exists_referenceForcingMap hD hT hS hborder h hcoordinates
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have hB : N04PartB S C L K base ε :=
-    (n06_N04_qualitative_parts h.1.2.2.2.2).2
+    (n06_N04_qualitative_parts h.1.2.2.2.2.1).2
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   apply n06N05_positiveCubicSourceMap hD hT h.2 Aexp a c pot q κ Cref hgeometry J

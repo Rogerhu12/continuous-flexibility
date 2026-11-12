@@ -112,8 +112,8 @@ theorem n06_cutPiece_closed_subset
     (m : ℕ) {i : ℕ} (hi : i = (K.cutPair m).1 ∨ i = (K.cutPair m).2) :
     Icc (K.physicalLeft i) (K.physicalRight i) ⊆ radialCore D := by
   have hg : controlGeometryConditions D S C := h.1.1.1.2.2.2.1
-  have hpieces := h.2.2.2.2.1.referenceBounds
-  have hcuts := h.2.2.2.2.2.1.1.1
+  have hpieces := h.2.2.2.2.1.1.referenceBounds
+  have hcuts := h.2.2.2.2.1.2.1.1.1
   obtain ⟨_, _, hl, hr, hmeet, _⟩ := hcuts m
   intro r hri
   rcases hi with rfl | rfl
@@ -156,7 +156,7 @@ theorem n06_negative_reference_null_transport
   have hw : ContDiff ℝ ∞ D.w := hB.1.2.2.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
-  have hA := h.2.2.2.2.1
+  have hA := h.2.2.2.2.1.1
   have hpieces := hA.referenceBounds
   have hnegative := hA.referenceNegative
   have hab : a < b := (hpieces m).1

@@ -28,7 +28,7 @@ private theorem n06_negative_closed_core
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     {i : ℕ} (hi : K.positive i = false) :
     Icc (K.physicalLeft i) (K.physicalRight i) ⊆ radialCore D := by
-  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2 h.1.1.1.2.2.2.1 hi
+  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2.1 h.1.1.1.2.2.2.1 hi
   exact n06_cutPiece_closed_subset h m hm
 
 /-- The actual Liouville normalization gives the exact absolute Jacobian
@@ -108,7 +108,7 @@ theorem N06ReferenceNegativeInverseData.reciprocal_mass_le_physical
     rintro r ⟨y, hy, rfl⟩
     exact P.mapsTo (hsub hy)
   rw [P.reciprocal_mass_change hT hS h hi hab hsub,
-    intervalIntegral.integral_of_le (h.2.2.2.2.1.referenceBounds i).1.le,
+    intervalIntegral.integral_of_le (h.2.2.2.2.1.1.referenceBounds i).1.le,
     ← integral_Icc_eq_integral_Ioc]
   exact setIntegral_mono_set hcont.integrableOn_Icc hnonneg himage.eventuallySubset
 

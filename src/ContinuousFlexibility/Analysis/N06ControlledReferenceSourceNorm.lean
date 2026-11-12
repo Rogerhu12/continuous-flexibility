@@ -45,7 +45,7 @@ theorem n06Volume_controlled_reference_source_norm
     ∃ M : ℝ, 0 ≤ M ∧ N06ControlledReferenceSourceNormBound D S C K V γ t b J M := by
   classical
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   have hfinite : Set.Finite {m : ℕ |

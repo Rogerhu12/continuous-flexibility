@@ -73,7 +73,7 @@ theorem n06_namedPhysicalWeakRelation_isClosed
       N06NamedPhysicalWeakRelation D C L B z p.1 p.2} := by
   classical
   have h01 : N01Properties D T S C base loss ε := hThrough.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := hThrough.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := hThrough.2.2.2.2.1
   have hab : D.a ≤ D.b := by
     obtain ⟨x, hxL, hxR⟩ := exists_between (h04.1.referenceBounds 0).1
     have hx := (h04.1.referenceBounds 0).2.2 ⟨hxL, hxR⟩

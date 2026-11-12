@@ -80,7 +80,7 @@ theorem n06N05_finiteCore_greenData
       hgeometry hea heb hec hepot hcd hcoeff u hu G Fcur hsource hweak
   intro φ hφ
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have havg : ContDiff ℝ ∞ (n06_radialTestAverage φ) :=
     (n06_radialTestAverage_test hφ).1
   let Q (m : ℕ) : N06CurrentHeightTestTraces S K z m (n06_radialTestAverage φ) :=

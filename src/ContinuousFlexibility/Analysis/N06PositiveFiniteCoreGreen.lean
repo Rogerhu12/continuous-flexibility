@@ -66,7 +66,7 @@ theorem n06N05_positive_finite_referenceForcing
       r11bFiniteSynthesis s (n06HalfCosineCoefficient (F 0)) referenceAngularBasis := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have h03 : N03Properties D T S C R L base ε := h.1.1.2
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hsector := n05_referenceState_sector h01.2.2.1
   obtain ⟨hA, hB⟩ := n06_N04_qualitative_parts h04
@@ -144,7 +144,7 @@ theorem n06N05_positive_finite_relative_green
               Q.radial (K.left m, θ)) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have h03 : N03Properties D T S C R L base ε := h.1.1.2
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hforcing := n06N05_positive_finite_referenceForcing hS h u hm P hU hF
     hl hr ha hc hpot hcd hea heb hec hepot s hvalue
   have hrem := n06_currentRelativeSource_positive_remainder_ae u.val.1

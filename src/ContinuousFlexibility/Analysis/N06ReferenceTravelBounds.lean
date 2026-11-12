@@ -220,8 +220,8 @@ theorem n06_reference_cut_physical_bounds
   have ht := n06_reference_cut_travel hT hS h m
   have hlower : radialE (D.cellIndex j) ^ (-A) ≤
       2 * n05TricomiTime (K.cutRadius m) := ht.2.2 ▸ htravel
-  have hpieces := h.2.2.2.2.1.referenceBounds
-  have hcuts := h.2.2.2.2.2.1.1.1
+  have hpieces := h.2.2.2.2.1.1.referenceBounds
+  have hcuts := h.2.2.2.2.1.2.1.1.1
   obtain ⟨_, _, hl, hr, hmeet, hy, _, _, _, _⟩ := hcuts m
   let cut : ℝ := K.physicalRight (K.cutPair m).1
   have hlc : C.left m < cut := by

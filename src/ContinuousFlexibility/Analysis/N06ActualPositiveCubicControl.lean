@@ -135,7 +135,7 @@ theorem n06_exists_actualPositiveCubicControl_through05
   have hreg := hex.choose_spec.2.2.2
   have h01 := hnew.1.1.1.1
   have h03 := hnew.1.1.2
-  have h04 := hnew.1.2.2.2.2
+  have h04 := hnew.1.2.2.2.2.1
   have hb := n06_actual_dividedMixedJets_bound h04 (b + 1)
   let M : ℝ := hb.choose
   have hM : 0 < M := hb.choose_spec.1

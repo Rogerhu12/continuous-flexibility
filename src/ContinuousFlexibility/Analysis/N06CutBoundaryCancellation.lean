@@ -89,7 +89,7 @@ theorem n06N05_finite_current_cut_wronskians_cancel
       (Qr.value (K.cutRadius n, θ) * radialPartial (r11bFiniteSynthesis s vr referenceAngularBasis)
         (K.cutRadius n, θ) - r11bFiniteSynthesis s vr referenceAngularBasis (K.cutRadius n, θ) *
           Qr.radial (K.cutRadius n, θ)) = 0 := by
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have htest := n06_current_cut_test_traces h04 hz hs n Ql Qr hφ hθ
   have he : ∀ k ∈ s, ContDiff ℝ 1 (referenceAngularBasis k) :=
     fun k _ => (contDiff_referenceAngularBasis k).of_le (by simp)

@@ -158,7 +158,7 @@ theorem n06N05_negative_finite_relative_green
           r11bFiniteSynthesis s P.modes referenceAngularBasis (K.left m, θ) *
             Q.radial (K.left m, θ)) := by
   have h03 : N03Properties D T S C R L base ε := h.1.1.2
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hforcing := n06N05_negative_finite_principalForcing hT hS h u m hm P hG₀ s hvalue
   have hrem := n06_currentRelativeSource_negative_remainder_ae u.val.1
     (Vol.forget (3 / 4 : ℝ) 0 b u.val.2) G Fcur m hm hsource hweak

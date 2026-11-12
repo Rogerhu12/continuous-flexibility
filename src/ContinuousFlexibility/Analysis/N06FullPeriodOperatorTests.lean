@@ -36,8 +36,8 @@ theorem n06_current_source_average
       canonicalSource S K z m
         (divergenceOperator (L.coefficients z) (n06_radialTestAverage φ)) p := by
   cases hm : K.positive m
-  · exact n06_negative_current_source_average hT hS h.1.2 h.2.2.2.2 hz hs hm hφ hp
-  · exact n06_positive_current_source_average hT hS h.1.1.1 h.1.2 h.2.2.2.2
+  · exact n06_negative_current_source_average hT hS h.1.2 h.2.2.2.2.1 hz hs hm hφ hp
+  · exact n06_positive_current_source_average hT hS h.1.1.1 h.1.2 h.2.2.2.2.1
       hz hs m hm hφ.1 hp
 
 /-- The identity applies directly to the actual canonical bulk integral,

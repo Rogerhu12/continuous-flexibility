@@ -114,7 +114,7 @@ theorem n06Volume_exists_currentNuDifference_of_fixed_support
     (hfixed : tsupport D.chi ⊆ K.normalizationRegion) (γ t : ℝ) (b : ℕ) :
     ∃ Q : ℝ, 0 ≤ Q ∧ N06CurrentNuDifferenceBound D S C K V base ε γ t b Q := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have hreference : ∃ Q : ℝ, 0 ≤ Q ∧
       N06ReferenceChartNuDifferenceBound D S C K V base ε γ t b Q :=
     n06Volume_exists_referenceChart_nuDifference hT hS hV h hcoordinates γ t b

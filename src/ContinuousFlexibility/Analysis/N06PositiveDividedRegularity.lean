@@ -44,7 +44,7 @@ theorem n06_exists_positive_regular_through05
             ContDiffOn ℝ ∞ (K.dividedDifference z m).c (canonicalOpen S K m)) := by
   have h01 := hthrough.1.1.1.1
   have h03 := hthrough.1.1.2
-  have h04 := hthrough.1.2.2.2.2
+  have h04 := hthrough.1.2.2.2.2.1
   obtain ⟨ε', hε', hle, hreg⟩ :=
     n06_exists_positive_canonical_regular_neighborhood hT hS h01 h03 h04
   refine ⟨ε', hε', hle, n06_NonlinearPropertiesThrough05_mono hT hthrough

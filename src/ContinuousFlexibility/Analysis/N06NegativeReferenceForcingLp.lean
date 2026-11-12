@@ -77,7 +77,7 @@ theorem n06N05_negativeReferenceForcing_memLp
     MemLp (n06NegativeReferenceForcing D S C K u.val.1
       (V.forget (3 / 4 : ℝ) 0 b u.val.2) m) 2 (canonicalMeasure S K m) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hgeom : RadialProfileGeometry D := h01.1.1.choose_spec.1
   have hb : RadialTrueBorder D := h01.1.2.2.2.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
@@ -113,7 +113,7 @@ theorem n06N05_negativePrincipalForcing_memLp
     MemLp (n06NegativePrincipalForcing D S C K u.val.1
       (V.forget (3 / 4 : ℝ) 0 b u.val.2) m) 2 (canonicalMeasure S K m) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   exact (n06N05_negativeReferenceForcing_memLp hT hS h u m).sub
@@ -131,7 +131,7 @@ theorem n06N05_negative_principal_pairing
       ∫ p, n06NegativePrincipalForcing D S C K u.val.1
         (V.forget (3 / 4 : ℝ) 0 b u.val.2) m p * φ p ∂canonicalMeasure S K m := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   let U : PolarPoint → ℝ := u.val.1.1 m

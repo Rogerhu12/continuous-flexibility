@@ -75,7 +75,7 @@ theorem n06_controlledReferenceHeight_congr_ae_physical
     canonicalHeight S K (C.referenceState, 0) m f
       =ᵐ[canonicalMeasure S K m] canonicalHeight S K (C.referenceState, 0) m g := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   have hc := h04.1.charts (C.referenceState, 0) href hs m

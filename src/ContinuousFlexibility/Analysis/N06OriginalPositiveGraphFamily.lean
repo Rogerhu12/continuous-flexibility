@@ -53,7 +53,7 @@ theorem n06N05_exists_original_positiveGraphFamily
               n06ReferenceCanonicalForcing D S C K u.val.1
                 (Vol.forget (3 / 4 : ℝ) 0 b u.val.2) m) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hVol : IsVolumeModel T S K Vol := h.2.2.1
   have hB : N04PartB S C L K base ε := (n06_N04_qualitative_parts h04).2
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1

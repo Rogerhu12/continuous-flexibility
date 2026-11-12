@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.CanonicalSourceMeasure
+import ContinuousFlexibility.Analysis.CanonicalAngularStripMeasure
 import ContinuousFlexibility.Analysis.CanonicalStripGeometry
 
 /-!
@@ -36,12 +36,7 @@ theorem canonicalSource_pairing_of_partA
   have hphys_ae :
       (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =ᵐ[volume]
         (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by
-    have hangle : (univ ×ˢ Ioc (0 : ℝ) Real.pi : Set PolarPoint) =ᵐ[volume]
-        (univ ×ˢ Ioo (0 : ℝ) Real.pi) :=
-      Measure.set_prod_ae_eq Filter.EventuallyEq.rfl Ioo_ae_eq_Ioc.symm
-    exact Filter.EventuallyEqSet.inter
-      (Filter.EventuallyEq.rfl : physicalPieceOpen S K z m =ᵐ[volume]
-        physicalPieceOpen S K z m) hangle
+    exact polarDomain_Ioc_ae_eq_Ioo (physicalPieceOpen S K z m) 0 Real.pi
   have hcanon_ae :
       (canonicalOpen S K m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) =ᵐ[volume]
         (canonicalOpen S K m ∩ (univ ×ˢ Ioo (0 : ℝ) Real.pi)) := by

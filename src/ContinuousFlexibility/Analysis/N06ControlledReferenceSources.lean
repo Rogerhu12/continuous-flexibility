@@ -65,7 +65,7 @@ theorem n06Volume_exists_controlled_reference_source
         canonicalSource S K (C.referenceState, 0) m f := by
   obtain ⟨J, hJ, hJD, hzero⟩ := hsupport
   have h01 := h.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have hfinite : Set.Finite {m : ℕ |
       (physicalPieceOpen S K (C.referenceState, 0) m ∩
         (J ×ˢ (univ : Set ℝ))).Nonempty} := by

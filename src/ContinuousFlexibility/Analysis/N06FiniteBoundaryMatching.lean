@@ -224,7 +224,7 @@ theorem n06N05_finite_current_root_orientedMatching
         (fun y => if K.positive mr = true then a mr y else 1) reverseR false θ := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
   have h03 : N03Properties D T S C R L base ε := h.1.1.2
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hrl : K.physicalRight ml ∈ Icc (K.physicalLeft ml) (K.physicalRight ml) :=
     ⟨(h04.1.referenceBounds ml).1.le, le_rfl⟩
   have hrr : K.physicalRight ml ∈ Icc (K.physicalLeft mr) (K.physicalRight mr) := by
@@ -286,7 +286,7 @@ theorem n06N05_finite_current_cut_orientedMatching
         (fun _ => 1) false true θ =
       n06OrientedCanonicalBoundary Qr (r11bFiniteSynthesis s vr referenceAngularBasis)
         (fun _ => 1) true false θ := by
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   obtain ⟨_, _, _, _, _, _, _, _, hyl, hyr⟩ := h04.2.1.1.1 n
   have he := n06N05_finite_current_cut_wronskians_cancel hS h hcoordinates hz hs
     u n s vl vr Ql Qr hφ hvl hvr hmodeL hmodeR hθ

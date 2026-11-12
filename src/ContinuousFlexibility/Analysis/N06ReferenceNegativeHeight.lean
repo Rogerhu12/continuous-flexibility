@@ -97,8 +97,8 @@ theorem n06_reference_negative_height_normalization
   have h01 := h.1.1.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
-  have hpieces := h.2.2.2.2.1.referenceBounds
-  have hreg := n05_reference_boundary_regular h.2.2.2.2.1 hz hs i (p := (r, 0)) hr
+  have hpieces := h.2.2.2.2.1.1.referenceBounds
+  have hreg := n05_reference_boundary_regular h.2.2.2.2.1.1 hz hs i (p := (r, 0)) hr
   have hline : ContDiffAt ℝ ∞ (fun s : ℝ => (s, (0 : ℝ))) r :=
     contDiffAt_id.prodMk contDiffAt_const
   have hY : ContDiffAt ℝ ∞ Y r := by
@@ -187,10 +187,10 @@ theorem n06_reference_negative_root_curvature
     |deriv (deriv D.w) r| * n06ReferenceNegativeH C K i r ^ 6 * D.w r ^ 2 = r := by
   have h01 := h.1.1.1
   have hgeom : RadialProfileGeometry D := h01.1.1.choose_spec.1
-  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2 h01.2.2.2.1 hi
+  obtain ⟨m, hm⟩ := n06_negativePiece_is_cutHalf h.2.2.2.2.1 h01.2.2.2.1 hi
   have hcore : r ∈ radialCore D := n06_cutPiece_closed_subset h m hm hr
   have hdata := n06_reference_negative_height_normalization hT hS h hi hr
-  exact n06_closed_root_curvature_identity (h.2.2.2.2.1.referenceBounds i).1 hr
+  exact n06_closed_root_curvature_identity (h.2.2.2.2.1.1.referenceBounds i).1 hr
     (hgeom.1.trans hcore.1) hgeom.2.2.1.1 hdata.2.1 hdata.1
     (hgeom.2.2.2.2.1 r hcore) hdata.2.2.1 hroot hdata.2.2.2.2.1
     (fun s hs => (n06_reference_negative_height_normalization hT hS h hi hs).2.2.2.2.2)

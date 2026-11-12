@@ -22,22 +22,24 @@ theorem radialJacobi_outward (D : ReferenceData) (right : Bool)
     radialJacobi J (outerTailOutwardWeight D right)
       (fun t => u (outerOutwardRadius right t)) x =
       radialJacobi J D.w u (outerOutwardRadius right x) := by
-  have hs : outerTailSign right ≠ 0 := by
-    cases right <;> norm_num [outerTailSign]
-  have hw : radialRadiusScale (outerTailSign right)
-      (outerTailSign right * outerTailSign right) D.w = outerTailOutwardWeight D right := by
-    funext t
-    cases right <;> simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign,
-      div_eq_mul_inv]
-  have hu : radialRadiusScale (outerTailSign right) 1 u =
-      fun t => u (outerOutwardRadius right t) := by
-    funext t
-    cases right <;> simp [radialRadiusScale, outerTailSign, outerOutwardRadius,
-      div_eq_mul_inv]
-  have he := radialJacobi_radialRadiusScale hs J 1 (outerTailSign right) D.w u
-    (outerOutwardRadius right x)
-  rw [hw, hu] at he
-  cases right <;> simpa [outerTailSign, outerOutwardRadius] using he
+  cases right
+  · have hweight : radialRadiusScale (-1) 1 D.w = outerTailOutwardWeight D false := by
+      funext t
+      simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign, div_neg]
+    have hfield : radialRadiusScale (-1) 1 u = fun t => u (-t) := by
+      funext t
+      simp [radialRadiusScale, div_neg]
+    simpa [hweight, hfield, outerTailSign, outerOutwardRadius]
+      using radialJacobi_radialRadiusScale (by norm_num : (-1 : ℝ) ≠ 0)
+        J 1 (-1) D.w u (-x)
+  · have hweight : radialRadiusScale 1 1 D.w = outerTailOutwardWeight D true := by
+      funext t
+      simp [radialRadiusScale, outerTailOutwardWeight, outerTailSign]
+    have hfield : radialRadiusScale 1 1 u = u := by
+      funext t
+      simp [radialRadiusScale]
+    simpa [hweight, hfield, outerTailSign, outerOutwardRadius]
+      using radialJacobi_radialRadiusScale one_ne_zero J 1 1 D.w u x
 
 theorem radialJacobi_outward_pullback (D : ReferenceData) (right : Bool)
     (J : ℝ) (u : ℝ → ℝ) (r : ℝ) :

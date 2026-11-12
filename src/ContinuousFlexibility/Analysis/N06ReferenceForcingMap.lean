@@ -120,7 +120,7 @@ theorem n06N05_exists_referenceForcingMap
   refine ⟨J, hJ, ?_⟩
   intro F m hm φ hφ
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have hA : N04PartA D S C K base ε := (n06_N04_qualitative_parts h.1.2.2.2.2).1
+  have hA : N04PartA D S C K base ε := (n06_N04_qualitative_parts h.1.2.2.2.2.1).1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   have hweak := n06N05_positive_canonicalWeakPairing hD hb hS h.1.1.2 hA h05

@@ -76,7 +76,7 @@ theorem n06_controlledReferenceSource_angularJet
         |deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) x.1|) *
         mixedDerivative 0 j f (x.1, p.2) := by
   have h01 := h.1.1.1
-  have hA := h.2.2.2.2.1
+  have hA := h.2.2.2.2.1.1
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   have hcharts := hA.charts (C.referenceState, 0) href hs m
@@ -127,7 +127,7 @@ theorem n06_controlledReferenceSource_angularJet_bound
   refine ⟨A, hA, ?_⟩
   intro f b B hB hf m j hj p hp
   have h01 := h.1.1.1
-  have hA := h.2.2.2.2.1
+  have hA := h.2.2.2.2.1.1
   have hpieces := hA.referenceBounds
   have href := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1

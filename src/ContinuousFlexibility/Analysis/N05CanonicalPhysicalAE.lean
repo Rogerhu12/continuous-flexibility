@@ -216,12 +216,12 @@ theorem n05_referenceCanonicalSource_ae_physical
         (K.chart (C.referenceState, 0) m p).2 = p.2 := by
       intro p hp
       apply n05_controlledReference_chart_second hcoordinates m
-      simpa only [h.2.2.2.2.1.referenceDomain m] using hp
-    have hp := (n05_canonicalSource_ae_iff_physicalPiece h.2.2.2.2 hz hs m
+      simpa only [h.2.2.2.2.1.1.referenceDomain m] using hp
+    have hp := (n05_canonicalSource_ae_iff_physicalPiece h.2.2.2.2.1 hz hs m
       hangle f g).mp (hfg m)
-    simpa only [h.2.2.2.2.1.referenceDomain m, referencePhysicalPieceOpen,
+    simpa only [h.2.2.2.2.1.1.referenceDomain m, referencePhysicalPieceOpen,
       prod_inter_prod, inter_univ, univ_inter] using hp
-  obtain ⟨E, hE, hcover⟩ := h.2.2.2.2.1.referencePartition
+  obtain ⟨E, hE, hcover⟩ := h.2.2.2.2.1.1.referencePartition
   have hEplane : ∀ᵐ p : PolarPoint ∂volume, p.1 ∉ E := by
     rw [Measure.volume_eq_prod]
     exact Measure.quasiMeasurePreserving_fst.ae (measure_eq_zero_iff_ae_notMem.mp hE)

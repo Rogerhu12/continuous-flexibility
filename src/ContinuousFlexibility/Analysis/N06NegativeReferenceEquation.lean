@@ -49,7 +49,7 @@ theorem n06_reference_source_test_ae
         canonicalSource S K (C.referenceState, 0) m (n06ReferenceTestOperator D φ) := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
   have hD : IsAccumulatingProfile D := h01.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have hc := h04.1.charts (C.referenceState, 0) hz hs m
   have hd := h04.1.domains (C.referenceState, 0) hz hs m
   have hangle : ∀ᵐ p : PolarPoint ∂volume,
@@ -93,7 +93,7 @@ theorem n06_referenceGraph_canonicalWeakPairing_all
   have h01 : N01Properties D T S C base loss ε := h.1.1.1
   have hD : IsAccumulatingProfile D := h01.1.1
   have hb : RadialTrueBorder D := h01.1.2.2.2.1
-  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.2.2.2.2.1
   have hA : N04PartA D S C K base ε := (n06_N04_qualitative_parts h04).1
   have hgeom : RadialProfileGeometry D := hD.choose_spec.1
   let Φ : PolarPoint → ℝ := n06CanonicalTestPullback S K (C.referenceState, 0) m φ
@@ -251,7 +251,7 @@ theorem n06N05_negative_principal_potential_pairing
       ∫ p, n06NegativeReferenceForcing D S C K u.val.1
         (V.forget (3 / 4 : ℝ) 0 b u.val.2) m p * φ p ∂canonicalMeasure S K m := by
   have h01 : N01Properties D T S C base loss ε := h.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := h.1.2.2.2.2.1
   have hz := n05_referenceState_mem (S := S) (C := C) (base := base) h01.2.1
   have hs := n05_referenceState_sector h01.2.2.1
   calc

@@ -63,7 +63,7 @@ theorem n05_negative_reference_radius_pos
   obtain ⟨B, hB⟩ := h01.1.1
   have hr : 0 < x.1 := hB.1.1.trans hxD.1.1
   have hw : 0 < D.w x.1 := hB.1.2.2.2.2.1 x.1 hxD.1
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hh := (n05_reference_boundary_regular h04.1 (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m (p := x) hx).2.2.2
   have hnegative : K.height (C.referenceState, 0) m x ^ 4 *
@@ -85,7 +85,7 @@ theorem n05_cut_reference_image
     (K.chart (C.referenceState, 0) i (K.physicalRight (K.cutPair m).1, θ)).1 =
       K.cutRadius m := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have hcutpair := h04.2.1.1.1
   obtain ⟨hnegL, hnegR, hleft, hright, hmeet, _, hzeroL, hzeroR, hendL, hendR⟩ :=
@@ -126,7 +126,7 @@ theorem n05_cut_reference_image
       rcases hdata.2.2.2 with hcl | hcr
       · exact (lt_irrefl c) (hcl.symm ▸ hp.1.1)
       · exact (lt_irrefl c) (hcr.symm ▸ hp.1.2)
-  have himage := n05_chart_physical_boundary_image h.2.2.2.2 hmem hsector
+  have himage := n05_chart_physical_boundary_image h.2.2.2.2.1 hmem hsector
     (x := (c, θ)) hfrontier
   rw [hdata.2.1, hdata.2.2.1] at himage
   exact himage.resolve_left hpositive.ne'

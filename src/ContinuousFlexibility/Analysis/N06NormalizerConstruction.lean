@@ -79,7 +79,7 @@ theorem n06_exists_supported_normalizer_through05
           J ⊆ K.normalizationRegion ∧ (∀ r, r ∉ J → g r = 0) ∧
           (S.height (3 / 4 : ℝ)).decode ψ = fun p : PolarPoint => g p.1 := by
   have h01 : N01Properties D T S C base loss ε := hthrough.1.1.1.1
-  have h04 : N04Properties D T S C L K base loss ε := hthrough.1.2.2.2.2
+  have h04 : N04Properties D T S C L K base loss ε := hthrough.1.2.2.2.2.1
   have h05 : N05Properties D T S C K V b B := hthrough.2
   obtain ⟨ψ, hunit, g, J, hg, hJ, hJD, hJK, hzero, hψ⟩ :=
     n06_exists_normalizer_in_normalizationRegion hT hS h01.1.2.2.2.1 h04

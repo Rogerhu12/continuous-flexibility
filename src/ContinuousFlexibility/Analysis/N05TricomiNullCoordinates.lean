@@ -131,7 +131,7 @@ theorem n05_negative_reference_null_identities
         σ * Real.sqrt (Ψ x).1 * |planeJacobian Ψ x| := by
   dsimp only
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have hnegative := h04.1.referenceNegative
   have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
@@ -161,7 +161,7 @@ theorem n05_negative_reference_null_angular_ne_zero
     (hx : x ∈ referencePhysicalPieceOpen S K m) {σ : ℝ} (hσ : σ ^ 2 = 1) :
     angularPartial (n05NullCoordinate (K.chart (C.referenceState, 0) m) σ) x ≠ 0 := by
   have h01 := h.1.1.1
-  have h04 := h.2.2.2.2
+  have h04 := h.2.2.2.2.1
   have hpieces := h04.1.referenceBounds
   have hnegative := h04.1.referenceNegative
   have hxClosed : x.1 ∈ Icc (K.physicalLeft m) (K.physicalRight m) :=
