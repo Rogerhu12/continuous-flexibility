@@ -173,7 +173,6 @@ private def N06ModeBoundEstimate
           ‖n07aReferenceCanonicalRhs href m (hI m) (B.inverse F).val.1
             (V.forget (3 / 4 : ℝ) 0 b F)‖)
 
-set_option diagnostics true in
 private theorem n06_modeBound_root_budget
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (href : ReferenceJets D T S C L K) (hprincipal : ReferencePrincipal T S C K)
@@ -183,7 +182,6 @@ private theorem n06_modeBound_root_budget
     href hprincipal (fun m => (n06_modeBound_sample_pos (K := K) hD hT m).1) hI
   exact ⟨A, P, Q, henergy⟩
 
-set_option diagnostics true in
 private theorem n06_modeBound_raw_blocks
     (h01 : N01Properties D T S C base loss ε)
     (h04 : N04Properties D T S C L K base loss ε)
@@ -201,7 +199,6 @@ private theorem n06_modeBound_raw_blocks
       jets.angular_weak jets.secondRadial_weak jets.radialAngular_weak
       jets.angularAngular_weak false
 
-set_option diagnostics true in
 private theorem n06_modeBound_pointwise
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
@@ -237,7 +234,6 @@ private theorem n06_modeBound_pointwise
   exact n06_modeBound_from_energy (hI m) d s j l A P Q B₀ z hB₀.le hpos.1 hpos.2
     u jets.radial jets.secondRadial G v hv hen hbl
 
-set_option diagnostics true in
 private theorem n06_modeBound_fixed_order
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
@@ -258,7 +254,6 @@ private theorem n06_modeBound_fixed_order
   · exact n06_modeBound_pointwise hT hS h01 h03 h04 h05 href hcur hI J
       A P Q d s B₀ hB₀ henergy hblock
 
-set_option diagnostics true in
 private theorem n06_modeBound_uniform
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
@@ -279,7 +274,6 @@ private theorem n06_modeBound_uniform
     n06_modeBound_fixed_order hT hS h01 h03 h04 h05 href hcur hI J
       A P Q d s B₀ hB₀.1 henergy hB₀.2)
 
-set_option diagnostics true in
 theorem n06_primitivePrincipal_mode_bound
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
