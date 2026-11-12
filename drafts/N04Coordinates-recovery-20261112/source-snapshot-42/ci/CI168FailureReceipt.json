@@ -1,0 +1,82 @@
+{
+  "schema": "N04Coordinates.CIResult.v1",
+  "label": "CI168",
+  "head": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+  "tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+  "run": 43311908391,
+  "run_number": 1839,
+  "job": 131509840146,
+  "status": "completed",
+  "conclusion": "failure",
+  "completed_at": "2026-11-12T21:41:46Z",
+  "log": {
+    "sha256": "9217fd9f2fecbc46cccbc30c75d1a97ae6b06444d38bd13f8960bd4896544d15",
+    "bytes": 68553,
+    "lines": 808,
+    "run": 43311908391,
+    "job": 131509840146,
+    "blob": "30f3eed5a8e61ee0746311f8d5d1142ffc5cc727"
+  },
+  "submitted_repairs": {
+    "all_three_passed": true,
+    "modules": [
+      "ActualPositiveReferenceEndpointData",
+      "CanonicalReferenceCurrentSectorBounds",
+      "WholeReferenceGaugeAtlasOperator"
+    ]
+  },
+  "other_compiled_modules": [
+    "ActualPositiveReferenceInterpolation",
+    "CanonicalPositiveReferenceFamily"
+  ],
+  "compiled_during_quick_check": 5,
+  "failures": [
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+      "locations": [
+        {
+          "line": 98,
+          "column": 4,
+          "kind": "type mismatch",
+          "explanation": "canonicalOpen interval still expressed using unfolded atlas; local endpoint rewrites did not match"
+        },
+        {
+          "line": 127,
+          "column": 4,
+          "kind": "type mismatch",
+          "explanation": "actual operator equality still expressed using unfolded atlas; local reference-field rewrites did not match"
+        }
+      ],
+      "error_text": "2026-11-12T21:40:38.4632814Z error: src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean:98:4: Type mismatch: After simplification, term\n2026-11-12T21:40:38.4633201Z   hp\n2026-11-12T21:40:38.4633346Z  has type\n2026-11-12T21:40:38.4633661Z   p ∈\n2026-11-12T21:40:38.4633807Z     Ioo\n2026-11-12T21:40:38.4855792Z         ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n2026-11-12T21:40:38.4856638Z               (fun j => positiveReferenceCylinderChart (Y j)) (fun j => positiveReferenceCylinderInverse (Y j))\n2026-11-12T21:40:38.4857370Z               (fun j q => H j q.1) τ σ Q N).left\n2026-11-12T21:40:38.4857619Z           m)\n2026-11-12T21:40:38.4858293Z         ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n2026-11-12T21:40:38.4858902Z               (fun j => positiveReferenceCylinderChart (Y j)) (fun j => positiveReferenceCylinderInverse (Y j))\n2026-11-12T21:40:38.4859494Z               (fun j q => H j q.1) τ σ Q N).right\n2026-11-12T21:40:38.4859821Z           m) ×ˢ\n2026-11-12T21:40:38.4860011Z       univ\n2026-11-12T21:40:38.4860219Z but is expected to have type\n2026-11-12T21:40:38.4860484Z   p ∈ Ioo 0 1 ×ˢ univ\n2026-11-12T21:40:38.4861012Z error: src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean:127:4: Type mismatch: After simplification, term\n2026-11-12T21:40:38.4861568Z   hf.left\n2026-11-12T21:40:38.4861746Z  has type\n2026-11-12T21:40:38.4862257Z   (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q N).coefficients z₀\n2026-11-12T21:40:38.4862737Z       m =\n2026-11-12T21:40:38.4863044Z     inverseChartPrincipalCoefficients (L.coefficients z₀)\n2026-11-12T21:40:38.4863666Z       ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q N).chart z₀ m)\n2026-11-12T21:40:38.4864818Z       ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q\n2026-11-12T21:40:38.4865352Z             N).inverseChart\n2026-11-12T21:40:38.4865614Z         z₀ m)\n2026-11-12T21:40:38.4866265Z       ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q N).height z₀\n2026-11-12T21:40:38.4866899Z         m)\n2026-11-12T21:40:38.4867110Z but is expected to have type\n2026-11-12T21:40:38.4867371Z   V.coefficients z₀ m =\n2026-11-12T21:40:38.4867851Z     inverseChartPrincipalCoefficients (L.coefficients z₀) (positiveReferenceCylinderChart (Y i))\n2026-11-12T21:40:38.4868496Z       (positiveReferenceCylinderInverse (Y i)) fun q => H i q.1"
+    }
+  ],
+  "full_build": "skipped",
+  "endpoint_axioms": "skipped",
+  "last_full_green": {
+    "head": "c796387fb555392501c81f5b8bd834936251516c",
+    "run": 43285158817,
+    "verified_root_coverage": {
+      "compiled": 4297,
+      "total": 4302
+    },
+    "open_statements": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05"
+    ]
+  },
+  "current_source_counts": {
+    "project_modules": 4413,
+    "all_src_lean": 4417
+  },
+  "cache_counter": {
+    "raw_compiled": 5090,
+    "total_current": 4413,
+    "stale_inflated": true,
+    "not_current_source_coverage": true
+  },
+  "budget_released": false,
+  "no_further_log_download": true
+}

@@ -1,0 +1,178 @@
+{
+  "schema": "N04Coordinates.ConditionalProviderRebind.v1",
+  "intended_backup_path": "root/recovery/Cohort4Reference25CI169SevenProviderDelta.json",
+  "status": "CONDITIONAL_ONLY; FULL_GREEN_REQUIRED_BEFORE_ACTIVATION",
+  "immutable_plan": "394db737d43724d8c5b39783fa7263419f89ada1",
+  "immutable_graph": "ca56a61786eefcd2ca75dae0ef2d8ce999a3e011",
+  "prior_independent_peer": "15924ec5f7d92ab8ae7e810870e35d434a60cc7e",
+  "old_baseline": "ea5914f256858734c21e8cb255052fcabee7f2e6",
+  "new_baseline": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "parent": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+    "pushed_and_verified": "2026-11-12 21:51:57 UTC",
+    "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "source_files_changed": 1,
+    "net_Lean_lines": 8,
+    "actual_added_from_green": 19826,
+    "actual_deleted_from_green": 6,
+    "conservative_added_from_green": 19936,
+    "force": false,
+    "CI_label": "CI169",
+    "first_lookup": "wait at least five minutes after this timestamp",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "exact_changed_existing_nodes": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+      "path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "before": {
+        "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+        "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+        "bytes": 7183,
+        "lines": 160
+      },
+      "after": {
+        "blob": "a712205bed7cd5e6b48dbd982664e95cb88b202d",
+        "sha256": "ad7e9ae4c29d1d16dec1774239cfb2fd8da69e3cdca24b76ad8941c3d880da77",
+        "bytes": 7247,
+        "lines": 162
+      },
+      "imports_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+      "path": "src/ContinuousFlexibility/Analysis/ActualReferenceNegativeEndpointData.lean",
+      "before": {
+        "blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+        "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+        "bytes": 6166,
+        "lines": 126
+      },
+      "after": {
+        "blob": "306df0ed5468912267708e86f7a9198f03655f0a",
+        "sha256": "7b594a18eec05800da02553065d0e7eb656242bad272eadbf1ec0aca52376b84",
+        "bytes": 6349,
+        "lines": 130
+      },
+      "imports_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceFiniteRadialJets.lean",
+      "before": {
+        "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+        "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+        "bytes": 8416,
+        "lines": 167
+      },
+      "after": {
+        "blob": "9c5a4df8f5adf3a7d388c331d2b76c203f11ac84",
+        "sha256": "19226e6ea9763d0d842239e0bb4986e85d78d90949b9aae4677fd00ad1ad298e",
+        "bytes": 8513,
+        "lines": 169
+      },
+      "imports_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "before": {
+        "blob": "1292702418d040830307436014b493ae656ab469",
+        "sha256": "eb7f1e15a3e006b588861993260128b4d93045c27eedc159f75f2b3a8c5e0aa2",
+        "bytes": 5250,
+        "lines": 105
+      },
+      "after": {
+        "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+        "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+        "bytes": 5355,
+        "lines": 108
+      },
+      "imports_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferenceGauge",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferenceGauge.lean",
+      "before": {
+        "blob": "6f113d58d024c6376b5a1fe1ffb7f7ce29cfd7be",
+        "sha256": "b7cde990389e27c403415b8d4213e89e0e17a855261b36642fbb244b7dcf06ee",
+        "bytes": 8097,
+        "lines": 171
+      },
+      "after": {
+        "blob": "9f240624bea6c815b9ceb64eb7eff050b4f51316",
+        "sha256": "89b8e10fee150ed5c3816f725f0bafa80352d4af749519948e3833ed0ca2af28",
+        "bytes": 8095,
+        "lines": 171
+      },
+      "imports_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "before": {
+        "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+        "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+        "bytes": 10621,
+        "lines": 195
+      },
+      "after": {
+        "blob": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+        "sha256": "90b81c5606a7313cc961152b70f7caf087e694d5731b74d574953b0e5a108bf4",
+        "bytes": 11029,
+        "lines": 203
+      },
+      "imports_unchanged": true
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+      "before": {
+        "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73",
+        "sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+        "bytes": 5494,
+        "lines": 106
+      },
+      "after": {
+        "blob": "245a509f39bfb1d62130c7d4eb1b695a2e7fd719",
+        "sha256": "89ee89cb3d930991c8648fdc4a6dd29210ffb0fcf69453856d3866b1e0397b22",
+        "bytes": 5544,
+        "lines": 107
+      },
+      "imports_unchanged": true
+    }
+  ],
+  "unchanged_node_objects": 2471,
+  "source149_unchanged": true,
+  "all149_paths_still_absent": true,
+  "all_import_edges_and_topological_order_unchanged": true,
+  "budget": {
+    "cohort4_sources": 124,
+    "cohort4_source_lines": 16836,
+    "cohort4_generated_root_imports": 122,
+    "reference_sources": 25,
+    "reference_source_lines": 2830,
+    "reference_generated_root_imports": 25,
+    "source_only_files": 149,
+    "source_only_added_Lean_lines": 19666,
+    "source_only_deleted_Lean_lines": 0,
+    "conservative_generated_root_additions": 147,
+    "conservative_added_total": 19813,
+    "remaining_to_20000": 187,
+    "root_generation": "Keep the baseline root unchanged in the Git API source-only tree; use the existing CI gen_root procedure. Recompute actual additions before any successor submission.",
+    "deferred_modules": [
+      "ContinuousFlexibility.Analysis.RadialGaugePrincipalTransformation",
+      "ContinuousFlexibility.Analysis.RadialGaugePrincipalFiniteJets"
+    ]
+  },
+  "proof_reviews": {
+    "original167four": "15924ec5f7d92ab8ae7e810870e35d434a60cc7e",
+    "positiveEndpoint168": "6f63e6b05bcb856991d90ce87d438ed00140d237",
+    "atlasOperator168": "2d42232cef3815a1c78b5d20cbeb382e610a60e8",
+    "principal169": "3da7456ed79deac487dd8c2cc56e5161e198807b"
+  },
+  "no_new_public_heads_or_names": true,
+  "not_a_fresh_all_repository_symbol_scan": true,
+  "next_step": "After this exact head passes full CI, write a separate successor plan/graph changing only these seven provider fingerprints plus truthful baseline/status/review bindings. The original149 selected source records, imports, public declarations and source-only entries remain unchanged."
+}

@@ -1,0 +1,25 @@
+{
+  "old_receipt_blob": "013f867ad3cd2a60b3acd2c1b8dab83040496a76",
+  "old_count": 4297,
+  "total": 4302,
+  "confirmed_omitted_reachable": [
+    "ContinuousFlexibility.Blueprint.CanonicalParts"
+  ],
+  "lower_bound": 4298,
+  "exact_count_pending_full_import_map": true,
+  "evidence": [
+    {
+      "module": "ContinuousFlexibility.Analysis.StateNeighborhood",
+      "blob": "67260ec8f17ed209c896eaa390c709bc9fe2c268",
+      "imports": "ContinuousFlexibility.Blueprint.CanonicalParts"
+    }
+  ],
+  "active169_extra_reachable": {
+    "module": "ContinuousFlexibility.Blueprint.N01c.Statements",
+    "importers": [
+      "ContinuousFlexibility.Analysis.N01cCosineAngularJets",
+      "ContinuousFlexibility.Analysis.N01cSpeedBoundsRestriction"
+    ],
+    "scope": "These two importers are present at active169 but absent from c796. They do not establish c796 reachability."
+  }
+}

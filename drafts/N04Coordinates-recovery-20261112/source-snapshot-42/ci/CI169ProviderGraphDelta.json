@@ -1,0 +1,44 @@
+{
+  "kind": "755_provider_nodes_CI169_single_fingerprint_delta",
+  "prior_graph_39": "b3401fcf5b18c0ea5704660c0862ccd0b361c8ea",
+  "prior_delta_40": "37e4af5f7c745c7f6601cd8031de1c1ad8f08228",
+  "prior_delta_41": "fa0f6a677388704afdccb8ca79709b08c698df31",
+  "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "replacement": {
+    "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+    "old": {
+      "kind": "held41_prefix",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipal.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "bytes": 10621,
+      "lines": 195,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+      ],
+      "source_ref": "IMMUTABLE_REVIEWED_41_PREFIX"
+    },
+    "new": {
+      "kind": "held41_prefix",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipal.lean",
+      "repo_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "sha256": "90b81c5606a7313cc961152b70f7caf087e694d5731b74d574953b0e5a108bf4",
+      "blob": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+      "bytes": 11029,
+      "lines": 203,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+      ],
+      "source_ref": "836b039233920fa778d9747be7b5d5a9f953fea3"
+    }
+  },
+  "unchanged_node_count": 754,
+  "all_import_edges_unchanged": true
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "N04Coordinates.CompileRepairCandidate.v1",
+  "status": "SOURCE_REPAIR_AWAITING_INDEPENDENT_REVIEW_AND_CI",
+  "author": "root",
+  "intended_backup_path": "root/repair168/WholePositiveReferencePrincipalCI168RepairCandidateManifest.json",
+  "baseline": {
+    "commit": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+    "tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "failure": {
+    "run": 43311908391,
+    "job": 131509840146,
+    "log": {
+      "sha256": "9217fd9f2fecbc46cccbc30c75d1a97ae6b06444d38bd13f8960bd4896544d15",
+      "bytes": 68553,
+      "lines": 808,
+      "run": 43311908391,
+      "job": 131509840146,
+      "blob": "30f3eed5a8e61ee0746311f8d5d1142ffc5cc727"
+    },
+    "locations": [
+      98,
+      127
+    ],
+    "diagnosis": "simp-only did not match unfolded atlas expressions against local let aliases in the interval membership and principal-field equality."
+  },
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+    "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+    "old": {
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "bytes": 10621,
+      "lines": 195
+    },
+    "new": {
+      "blob": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+      "sha256": "90b81c5606a7313cc961152b70f7caf087e694d5731b74d574953b0e5a108bf4",
+      "bytes": 11029,
+      "lines": 203
+    }
+  },
+  "diff": {
+    "blob": "5de29c4a03ddc7deaf56c5c20317cc71241f1577",
+    "sha256": "e5622d31aab3c81b86c90ab43e1a0d0ede04b8b3032691308d940410c4ef5158",
+    "bytes": 1513,
+    "lines": 28
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+    "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+    "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+  ],
+  "public_headers": [
+    {
+      "name": "n04Coordinates_reference_positive_coefficient_germs",
+      "header": "theorem n04Coordinates_reference_positive_coefficient_germs\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    {p : PolarPoint} (hp : p ∈ annularOpen D) (hpos : 0 < deriv D.w p.1) :\n    (L.coefficients (C.referenceState, 0)).a =ᶠ[𝓝 p]\n        (fun q : PolarPoint => D.w q.1) ∧\n      (L.coefficients (C.referenceState, 0)).b =ᶠ[𝓝 p]\n        (fun _ : PolarPoint => (0 : ℝ)) ∧\n      (L.coefficients (C.referenceState, 0)).c =ᶠ[𝓝 p]\n        (fun q : PolarPoint => deriv D.w q.1 / q.1)",
+      "sha256": "9bc9771835750402ecd2d9e8432a6a9cc0eadd1a51c98b0a7b5f756979e49269"
+    },
+    {
+      "name": "n04WholeReferenceGaugeAtlasData_positive_reference_formulas",
+      "header": "theorem n04WholeReferenceGaugeAtlasData_positive_reference_formulas\n    (m : ℕ) (i : N04PositiveComponent D.a D.b (deriv D.w)) (hi : e m = .inr i)\n    (hgeometry : PositiveChartRangeGeometry (positiveReferenceCylinderChart (Y i))\n      (positiveReferenceCylinderInverse (Y i)) (fun p : PolarPoint => H i p.1)\n      (n04PositiveLeft i) (n04PositiveRight i) 0 1)\n    (href : τ (C.referenceState, 0) i = id ∧\n      σ (C.referenceState, 0) i = id ∧ Q (C.referenceState, 0) i = (fun _ => 1))\n    {p : PolarPoint}\n    (hp : p ∈ canonicalOpen S\n      (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n        e cell (fun j => positiveReferenceCylinderChart (Y j))\n        (fun j => positiveReferenceCylinderInverse (Y j))\n        (fun j q => H j q.1) τ σ Q N) m) :\n    let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n      e cell (fun j => positiveReferenceCylinderChart (Y j))\n      (fun j => positiveReferenceCylinderInverse (Y j))\n      (fun j q => H j q.1) τ σ Q N\n    let A := V.coefficients (C.referenceState, 0) m\n    let r := Function.invFun (Y i) p.1\n    A.a p = H i r ^ 2 * D.w r * deriv (Y i) r ∧ A.b p = 0 ∧\n      A.c p = H i r ^ 2 / deriv (Y i) r * (deriv D.w r / r) ∧\n      V.potential (C.referenceState, 0) m p =\n        -(H i r * deriv (fun t => D.w t * deriv (H i) t) r / deriv (Y i) r) ∧\n      0 < A.a p ∧ 0 < A.c p",
+      "sha256": "818a1362779de898964145858b6e32e6d07f4d057b8d3b5a095bb1426629ba9c"
+    },
+    {
+      "name": "n04WholeReferenceGaugeAtlasData_positive_reference_qualitative",
+      "header": "theorem n04WholeReferenceGaugeAtlasData_positive_reference_qualitative\n    (m : ℕ) (i : N04PositiveComponent D.a D.b (deriv D.w)) (hi : e m = .inr i)\n    (hgeometry : PositiveChartRangeGeometry (positiveReferenceCylinderChart (Y i))\n      (positiveReferenceCylinderInverse (Y i)) (fun p : PolarPoint => H i p.1)\n      (n04PositiveLeft i) (n04PositiveRight i) 0 1)\n    (href : τ (C.referenceState, 0) i = id ∧\n      σ (C.referenceState, 0) i = id ∧ Q (C.referenceState, 0) i = (fun _ => 1))\n    {p : PolarPoint}\n    (hp : p ∈ canonicalOpen S\n      (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n        e cell (fun j => positiveReferenceCylinderChart (Y j))\n        (fun j => positiveReferenceCylinderInverse (Y j))\n        (fun j q => H j q.1) τ σ Q N) m) :\n    let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n      e cell (fun j => positiveReferenceCylinderChart (Y j))\n      (fun j => positiveReferenceCylinderInverse (Y j))\n      (fun j q => H j q.1) τ σ Q N\n    let A := V.coefficients (C.referenceState, 0) m\n    0 < A.a p ∧ A.b p = 0 ∧ A.a p = A.a (p.1, 0) ∧ A.c p = A.c (p.1, 0) ∧\n      V.potential (C.referenceState, 0) m p = V.potential (C.referenceState, 0) m (p.1, 0) ∧\n      0 < A.c p",
+      "sha256": "dd5182d38b8d9d3eb3239d6ef0874f40499c9e8d51ca829fd0c7602c51a6f93a"
+    }
+  ],
+  "changes": [
+    "Give the interval membership exactly V.left/V.right as its type, then rewrite using explicitly typed endpoint equalities.",
+    "Give the actual operator equality exactly the same V fields, then rewrite each field through its explicitly typed existing reference identity."
+  ],
+  "preserved": [
+    "Same original chart, inverse, height, actual coefficients and potential",
+    "Same parameter hypotheses, coordinates and material sample",
+    "All three public theorem heads and four import lines unchanged",
+    "No new definitions, public names, axioms or proof assumptions",
+    "No limits/options/toolchain/workflow/root changes"
+  ],
+  "validation": {
+    "all_three_full_headers_byte_equal": true,
+    "imports_byte_equal": true,
+    "added_lines": 8,
+    "deleted_lines": 0,
+    "conservative_active_added_from_green": 19936,
+    "remaining_to_20000": 64,
+    "no_local_Lean": true,
+    "independent_review_pending": true
+  },
+  "activation": "Only this existing file repair; no next149 activation before full green."
+}

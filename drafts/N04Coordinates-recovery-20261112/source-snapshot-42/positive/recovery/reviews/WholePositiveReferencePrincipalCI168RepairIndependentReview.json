@@ -1,0 +1,234 @@
+{
+  "schema": "N04Coordinates.IndependentSourceReview.v1",
+  "reviewer": "/root/proof_inventory",
+  "author_of_reviewed_source": "/root",
+  "review_date": "2026-11-12",
+  "intended_backup_path": "positive/recovery/reviews/WholePositiveReferencePrincipalCI168RepairIndependentReview.json",
+  "verdict": "PASS",
+  "validation_status": "SOURCE_REVIEW_ONLY_NOT_COMPILED",
+  "subject": "CI168 failure repair proposed for CI169: WholePositiveReferencePrincipal 195 to 203 lines",
+  "baseline": {
+    "commit": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+    "tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "candidate_manifest": {
+    "sha256": "2371ad655ace5ddf08ef286aef1714be79751e66b9be3b93f9974f6469fbb36b",
+    "blob": "bf0a30e8c0fb918f6c655bb45a5f201fc279c4e3",
+    "bytes": 7186,
+    "lines": 95,
+    "intended_backup_path": "root/repair168/WholePositiveReferencePrincipalCI168RepairCandidateManifest.json"
+  },
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+    "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+    "before": {
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "bytes": 10621,
+      "lines": 195
+    },
+    "selected": {
+      "sha256": "90b81c5606a7313cc961152b70f7caf087e694d5731b74d574953b0e5a108bf4",
+      "blob": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+      "bytes": 11029,
+      "lines": 203
+    },
+    "baseline_file_fetched_at_exact_commit": true,
+    "baseline_file_equals_old_blob": true
+  },
+  "exact_diff": {
+    "sha256": "e5622d31aab3c81b86c90ab43e1a0d0ede04b8b3032691308d940410c4ef5158",
+    "blob": "5de29c4a03ddc7deaf56c5c20317cc71241f1577",
+    "bytes": 1513,
+    "lines": 28,
+    "added": 10,
+    "deleted": 2,
+    "net": 8,
+    "only_two_proof_replacements": true,
+    "forward_reconstruction_equals_selected_bytes": true,
+    "reverse_reconstruction_equals_old_bytes": true,
+    "each_old_and_new_block_occurs_once": true
+  },
+  "cached_ci_evidence": {
+    "sha256": "9217fd9f2fecbc46cccbc30c75d1a97ae6b06444d38bd13f8960bd4896544d15",
+    "blob": "30f3eed5a8e61ee0746311f8d5d1142ffc5cc727",
+    "bytes": 68553,
+    "lines": 808,
+    "run": 43311908391,
+    "job": 131509840146,
+    "diagnostics": [
+      {
+        "raw_lines": [
+          557,
+          557
+        ],
+        "text": "2026-11-12T21:40:38.4579505Z error: src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean:98:4: Type mismatch: After simplification, term"
+      },
+      {
+        "raw_lines": [
+          558,
+          558
+        ],
+        "text": "2026-11-12T21:40:38.4580356Z error: src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean:127:4: Type mismatch: After simplification, term"
+      },
+      {
+        "raw_lines": [
+          560,
+          575
+        ],
+        "text": "2026-11-12T21:40:38.4632814Z error: src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean:98:4: Type mismatch: After simplification, term\n2026-11-12T21:40:38.4633201Z   hp\n2026-11-12T21:40:38.4633346Z  has type\n2026-11-12T21:40:38.4633661Z   p ∈\n2026-11-12T21:40:38.4633807Z     Ioo\n2026-11-12T21:40:38.4855792Z         ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n2026-11-12T21:40:38.4856638Z               (fun j => positiveReferenceCylinderChart (Y j)) (fun j => positiveReferenceCylinderInverse (Y j))\n2026-11-12T21:40:38.4857370Z               (fun j q => H j q.1) τ σ Q N).left\n2026-11-12T21:40:38.4857619Z           m)\n2026-11-12T21:40:38.4858293Z         ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell\n2026-11-12T21:40:38.4858902Z               (fun j => positiveReferenceCylinderChart (Y j)) (fun j => positiveReferenceCylinderInverse (Y j))\n2026-11-12T21:40:38.4859494Z               (fun j q => H j q.1) τ σ Q N).right\n2026-11-12T21:40:38.4859821Z           m) ×ˢ\n2026-11-12T21:40:38.4860011Z       univ\n2026-11-12T21:40:38.4860219Z but is expected to have type\n2026-11-12T21:40:38.4860484Z   p ∈ Ioo 0 1 ×ˢ univ"
+      },
+      {
+        "raw_lines": [
+          576,
+          593
+        ],
+        "text": "2026-11-12T21:40:38.4861012Z error: src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean:127:4: Type mismatch: After simplification, term\n2026-11-12T21:40:38.4861568Z   hf.left\n2026-11-12T21:40:38.4861746Z  has type\n2026-11-12T21:40:38.4862257Z   (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q N).coefficients z₀\n2026-11-12T21:40:38.4862737Z       m =\n2026-11-12T21:40:38.4863044Z     inverseChartPrincipalCoefficients (L.coefficients z₀)\n2026-11-12T21:40:38.4863666Z       ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q N).chart z₀ m)\n2026-11-12T21:40:38.4864818Z       ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q\n2026-11-12T21:40:38.4865352Z             N).inverseChart\n2026-11-12T21:40:38.4865614Z         z₀ m)\n2026-11-12T21:40:38.4866265Z       ((n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀) e cell ψ χ h₀ τ σ Q N).height z₀\n2026-11-12T21:40:38.4866899Z         m)\n2026-11-12T21:40:38.4867110Z but is expected to have type\n2026-11-12T21:40:38.4867371Z   V.coefficients z₀ m =\n2026-11-12T21:40:38.4867851Z     inverseChartPrincipalCoefficients (L.coefficients z₀) (positiveReferenceCylinderChart (Y i))\n2026-11-12T21:40:38.4868496Z       (positiveReferenceCylinderInverse (Y i)) fun q => H i q.1\n2026-11-12T21:40:38.4868834Z Some required targets logged failures:\n2026-11-12T21:40:38.4869212Z - ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal"
+      }
+    ],
+    "new_download_performed": false
+  },
+  "complete_public_headers": [
+    {
+      "name": "n04Coordinates_reference_positive_coefficient_germs",
+      "header": "theorem n04Coordinates_reference_positive_coefficient_germs\n    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}\n    {C : NonlinearGeometryData S} {R : ReturnEquationData S}\n    {L : ReturnCorrectionData S} {base loss : ℕ} {ε : ℝ}\n    (hN : NonlinearPropertiesThrough03 D T S C R L base loss ε)\n    {p : PolarPoint} (hp : p ∈ annularOpen D) (hpos : 0 < deriv D.w p.1) :\n    (L.coefficients (C.referenceState, 0)).a =ᶠ[𝓝 p]\n        (fun q : PolarPoint => D.w q.1) ∧\n      (L.coefficients (C.referenceState, 0)).b =ᶠ[𝓝 p]\n        (fun _ : PolarPoint => (0 : ℝ)) ∧\n      (L.coefficients (C.referenceState, 0)).c =ᶠ[𝓝 p]\n        (fun q : PolarPoint => deriv D.w q.1 / q.1)",
+      "sha256": "9bc9771835750402ecd2d9e8432a6a9cc0eadd1a51c98b0a7b5f756979e49269",
+      "verified_complete_through_internal_let_bindings": true,
+      "before_and_after_byte_equal": true
+    },
+    {
+      "name": "n04WholeReferenceGaugeAtlasData_positive_reference_formulas",
+      "header": "theorem n04WholeReferenceGaugeAtlasData_positive_reference_formulas\n    (m : ℕ) (i : N04PositiveComponent D.a D.b (deriv D.w)) (hi : e m = .inr i)\n    (hgeometry : PositiveChartRangeGeometry (positiveReferenceCylinderChart (Y i))\n      (positiveReferenceCylinderInverse (Y i)) (fun p : PolarPoint => H i p.1)\n      (n04PositiveLeft i) (n04PositiveRight i) 0 1)\n    (href : τ (C.referenceState, 0) i = id ∧\n      σ (C.referenceState, 0) i = id ∧ Q (C.referenceState, 0) i = (fun _ => 1))\n    {p : PolarPoint}\n    (hp : p ∈ canonicalOpen S\n      (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n        e cell (fun j => positiveReferenceCylinderChart (Y j))\n        (fun j => positiveReferenceCylinderInverse (Y j))\n        (fun j q => H j q.1) τ σ Q N) m) :\n    let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n      e cell (fun j => positiveReferenceCylinderChart (Y j))\n      (fun j => positiveReferenceCylinderInverse (Y j))\n      (fun j q => H j q.1) τ σ Q N\n    let A := V.coefficients (C.referenceState, 0) m\n    let r := Function.invFun (Y i) p.1\n    A.a p = H i r ^ 2 * D.w r * deriv (Y i) r ∧ A.b p = 0 ∧\n      A.c p = H i r ^ 2 / deriv (Y i) r * (deriv D.w r / r) ∧\n      V.potential (C.referenceState, 0) m p =\n        -(H i r * deriv (fun t => D.w t * deriv (H i) t) r / deriv (Y i) r) ∧\n      0 < A.a p ∧ 0 < A.c p",
+      "sha256": "818a1362779de898964145858b6e32e6d07f4d057b8d3b5a095bb1426629ba9c",
+      "verified_complete_through_internal_let_bindings": true,
+      "before_and_after_byte_equal": true
+    },
+    {
+      "name": "n04WholeReferenceGaugeAtlasData_positive_reference_qualitative",
+      "header": "theorem n04WholeReferenceGaugeAtlasData_positive_reference_qualitative\n    (m : ℕ) (i : N04PositiveComponent D.a D.b (deriv D.w)) (hi : e m = .inr i)\n    (hgeometry : PositiveChartRangeGeometry (positiveReferenceCylinderChart (Y i))\n      (positiveReferenceCylinderInverse (Y i)) (fun p : PolarPoint => H i p.1)\n      (n04PositiveLeft i) (n04PositiveRight i) 0 1)\n    (href : τ (C.referenceState, 0) i = id ∧\n      σ (C.referenceState, 0) i = id ∧ Q (C.referenceState, 0) i = (fun _ => 1))\n    {p : PolarPoint}\n    (hp : p ∈ canonicalOpen S\n      (n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n        e cell (fun j => positiveReferenceCylinderChart (Y j))\n        (fun j => positiveReferenceCylinderInverse (Y j))\n        (fun j q => H j q.1) τ σ Q N) m) :\n    let V := n04WholeReferenceGaugeAtlasData C L (n04bActualTypedAtlas hT hS hN hfield e₀)\n      e cell (fun j => positiveReferenceCylinderChart (Y j))\n      (fun j => positiveReferenceCylinderInverse (Y j))\n      (fun j q => H j q.1) τ σ Q N\n    let A := V.coefficients (C.referenceState, 0) m\n    0 < A.a p ∧ A.b p = 0 ∧ A.a p = A.a (p.1, 0) ∧ A.c p = A.c (p.1, 0) ∧\n      V.potential (C.referenceState, 0) m p = V.potential (C.referenceState, 0) m (p.1, 0) ∧\n      0 < A.c p",
+      "sha256": "dd5182d38b8d9d3eb3239d6ef0874f40499c9e8d51ca829fd0c7602c51a6f93a",
+      "verified_complete_through_internal_let_bindings": true,
+      "before_and_after_byte_equal": true
+    }
+  ],
+  "surface_verification": {
+    "imports_before_and_after_byte_equal": true,
+    "imports": [
+      "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+      "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+    ],
+    "complete_file_outside_two_exact_replacements_byte_equal": true,
+    "both_versions_end_in_LF": true,
+    "all_three_public_names_unchanged": true,
+    "section_variables_and_namespace_and_options_unchanged": true,
+    "no_new_axioms_or_sorry_or_assumptions_or_resource_options": true,
+    "public_theorem_proofs_other_than_two_local_blocks_unchanged": true
+  },
+  "providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+      "path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "ref": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+      "sha256": "e0577144891075f5ab5a574763fe6ca9d83a4640969b90cd314d95a8fe69747c",
+      "blob": "974c5b9bdcca6ca391d5c7f8d827deb43ba07130",
+      "bytes": 5355,
+      "lines": 108,
+      "review_scope": "FULL_SOURCE_READ_WITH_ACTUAL_CALLEE_AND_ARGUMENT_ORDER_CHECK"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasOperator.lean",
+      "ref": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+      "sha256": "89ee89cb3d930991c8648fdc4a6dd29210ffb0fcf69453856d3866b1e0397b22",
+      "blob": "245a509f39bfb1d62130c7d4eb1b695a2e7fd719",
+      "bytes": 5544,
+      "lines": 107,
+      "review_scope": "FULL_SOURCE_READ_WITH_ACTUAL_CALLEE_AND_ARGUMENT_ORDER_CHECK"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRelativeFields.lean",
+      "ref": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+      "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+      "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b",
+      "bytes": 4979,
+      "lines": 101,
+      "review_scope": "FULL_SOURCE_READ_WITH_ACTUAL_CALLEE_AND_ARGUMENT_ORDER_CHECK"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData",
+      "path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeAtlasData.lean",
+      "ref": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "bytes": 6809,
+      "lines": 131,
+      "review_scope": "FULL_SOURCE_READ_WITH_ACTUAL_CALLEE_AND_ARGUMENT_ORDER_CHECK"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity",
+      "path": "src/ContinuousFlexibility/Analysis/N01OpticalCollarPositivity.lean",
+      "ref": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+      "sha256": "4b9b30f66f4d1d914e3830e111a0e8d69ef0ff1a5c0926c7528fc08cd0e76b1c",
+      "blob": "c392ff0cc2bba65c52097c72e879e2f90dd2dbec",
+      "bytes": 18141,
+      "lines": 340,
+      "review_scope": "FULL_SOURCE_READ_WITH_ACTUAL_CALLEE_AND_ARGUMENT_ORDER_CHECK"
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "ref": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "bytes": 101197,
+      "lines": 1773,
+      "review_scope": "EXACT_CANONICALOPEN_DEFINITION_ONLY; whole-file fingerprint recorded, not a claim to review all 1773 lines",
+      "declaration": "def canonicalOpen (S : PhysicalSpacesData) (K : CanonicalData S) (m : ℕ) : Set PolarPoint :=\n  Ioo (K.left m) (K.right m) ×ˢ univ"
+    }
+  ],
+  "mathematical_review": [
+    {
+      "location": "hp01 / old line 98",
+      "result": "PASS",
+      "reason": "The actual canonicalOpen definition is exactly Ioo (V.left m) (V.right m) ×ˢ univ after reducing local K, ψ, χ, h₀ and V aliases. The typed hp′ is therefore the same input hp, not a new domain premise. The actual positive_fields tuple places V.left m = 0 and V.right m = 1 first, so both typed show equalities have the exact target endpoints. Rewriting hp′ yields the intended (0,1) canonical strip, preserving p and the original record."
+    },
+    {
+      "location": "hcoeff / old line 127",
+      "result": "PASS",
+      "reason": "The actual operatorFields first conjunct is the equality for this very V and z₀, with V.chart, V.inverseChart and V.height. The explicit change only folds the local atlas alias. The reference_fields provider returns, in the same order, V.chart z₀ m = ψ i, V.inverseChart z₀ m = χ i and V.height z₀ m = h₀ i. The typed rewrites act on those whole function arguments. The resulting equality is definitionally the declared hcoeff target because ψ, χ and h₀ are the stated cylinder chart, invFun cylinder inverse and radial height."
+    },
+    {
+      "location": "entire three-theorem source",
+      "result": "PASS",
+      "reason": "Reference coefficient germs are obtained at the same actual physical inverse point from Through03 and reference_coefficients. The genuine range-geometry inverse_maps_open sends p into the same positive physical component. The radial Jacobian and height positivity, profile positivity and radius positivity provide the nonzero factors required by the density/potential formulas. The negative sign of the positive-piece potential matches actual operatorFields. The final qualitative statement compares p and (p.1,0) in the same canonical strip and follows from the same radial formulas."
+    },
+    {
+      "location": "scope",
+      "result": "PASS",
+      "reason": "No different chart, inverse, gauge, material sample, component, width, state or witness is selected. These theorems give positive reference formulas and qualitative radiality/positivity only. They do not assert the uniform angular principal material lower bound or a completed CurrentJets/ReferenceJets certificate."
+    }
+  ],
+  "metadata_correction": {
+    "field": "candidate_manifest.validation.added_lines/deleted_lines",
+    "frozen_values": {
+      "added_lines": 8,
+      "deleted_lines": 0
+    },
+    "actual_unified_diff": {
+      "added": 10,
+      "deleted": 2,
+      "net": 8
+    },
+    "interpretation": "The frozen values encode net line growth, not unified-diff churn. The conservative budget increment is still exactly 8 and the source identity is unaffected. No frozen manifest or source was changed."
+  },
+  "limitations": [
+    "No Lean executable, elaboration, lake build, test or CI query was run by this reviewer.",
+    "PASS denotes independent source/API/byte review, not proof-checking or a prediction that every later elaboration stage succeeds.",
+    "The cached log supplies both exact type-mismatch contexts; this review does not download the job log again.",
+    "No active source, Git index, branch/ref, workflow or toolchain was edited."
+  ]
+}

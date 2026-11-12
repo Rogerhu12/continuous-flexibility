@@ -1,0 +1,174 @@
+{
+  "kind": "metadata_only_CI169_repair_preservation",
+  "snapshot": 42,
+  "created_at": "2026-11-12 21:55:00 UTC",
+  "parent": "59d5815f72e803604a14531d51403a0b02943282",
+  "additional_parent": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "compiled_baseline": "c796387fb555392501c81f5b8bd834936251516c",
+  "compiled_baseline_tree": "08257c9406671ac1f094b739e4971c1eca108c66",
+  "source_index_blob": "0bc303bc71262769c8fbf68e0f509c5e9f4fd2ca",
+  "source_index": {
+    "total": 3077,
+    "added": 14,
+    "updated": 0
+  },
+  "source_versions": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "sha256": "90b81c5606a7313cc961152b70f7caf087e694d5731b74d574953b0e5a108bf4",
+      "bytes": 11029,
+      "lines": 203,
+      "blob": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+      "stored_at": {
+        "commit": "836b039233920fa778d9747be7b5d5a9f953fea3",
+        "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "ci/CI168FailureReceipt.json",
+      "blob": "95b8588be6ea03597d35146ffca423f4e2e9d787",
+      "sha256": "6bc72fb7fdfc66c54e956a751037ce6c72c8a0e0292a99e86c767f1c99ad647c",
+      "bytes": 4963,
+      "lines": 82
+    },
+    {
+      "name": "ci/n04-ci-168.log",
+      "blob": "30f3eed5a8e61ee0746311f8d5d1142ffc5cc727",
+      "sha256": "9217fd9f2fecbc46cccbc30c75d1a97ae6b06444d38bd13f8960bd4896544d15",
+      "bytes": 68553,
+      "lines": 808
+    },
+    {
+      "name": "root/repair168/WholePositiveReferencePrincipalCI168RepairCandidateManifest.json",
+      "blob": "bf0a30e8c0fb918f6c655bb45a5f201fc279c4e3",
+      "sha256": "2371ad655ace5ddf08ef286aef1714be79751e66b9be3b93f9974f6469fbb36b",
+      "bytes": 7186,
+      "lines": 95
+    },
+    {
+      "name": "root/repair168/WholePositiveReferencePrincipalCI168Repair.diff",
+      "blob": "5de29c4a03ddc7deaf56c5c20317cc71241f1577",
+      "sha256": "e5622d31aab3c81b86c90ab43e1a0d0ede04b8b3032691308d940410c4ef5158",
+      "bytes": 1513,
+      "lines": 28
+    },
+    {
+      "name": "positive/recovery/reviews/WholePositiveReferencePrincipalCI168RepairIndependentReview.json",
+      "blob": "3da7456ed79deac487dd8c2cc56e5161e198807b",
+      "sha256": "0e547d73b6fc40d73fdf86a3413a366e8f2b308c7b7cec4df0df12750725a164",
+      "bytes": 17697,
+      "lines": 234
+    },
+    {
+      "name": "root/repair168/WholePositiveReferencePrincipalCI168RepairReviewedManifest.json",
+      "blob": "1fb891929ade57809c11abcce427cc86d9b059f2",
+      "sha256": "ffe42624bf673b1697156c6507699225f169925b43d1cf0c658cdde7e28fd971",
+      "bytes": 2238,
+      "lines": 54
+    },
+    {
+      "name": "ci/CI169StagingPlan.json",
+      "blob": "2a663bcab220fba046cb046420c111beeb6a7327",
+      "sha256": "de5ca695b85f73d50806f7d149cf85fa79b8e90c262b0ec346532232850fb522",
+      "bytes": 2575,
+      "lines": 85
+    },
+    {
+      "name": "root/recovery/Cohort4Reference25CI169SevenProviderDelta.json",
+      "blob": "4a39a24527f8a555274c9d59af1a72c030ab5690",
+      "sha256": "a66e47c403ac67e12fc7f75a7608ed154c5d2ba61ec7a5678fd2511d78ea55df",
+      "bytes": 7444,
+      "lines": 178
+    },
+    {
+      "name": "audit/recovery/Reference33Post149ImportInventoryCheckpoint01.json",
+      "blob": "9824e09dea277e85e8198c7ee4f5950ed3cd0c64",
+      "sha256": "b1ec73f197be62ec834993cc6af481890f346a3ac701490b62815e1c38cf1bb7",
+      "bytes": 135506,
+      "lines": 2543
+    },
+    {
+      "name": "ci/CI169PushReceipt.json",
+      "blob": "886d303a3ba03701448d06b374ad3074c3a6f613",
+      "sha256": "8386de3da15a96b6a3b5caa01e35ff5e2de03bb7f04350199d66f81f6b761377",
+      "bytes": 623,
+      "lines": 16
+    },
+    {
+      "name": "ci/CI169ProviderGraphDelta.json",
+      "blob": "56192ea5bef87869582b6b82d9c1ec28c4e24e73",
+      "sha256": "2db97478e3bde5356dc704c183bc427cbb9e2eae9389bbb795e6ba96a3b7b6df",
+      "bytes": 2134,
+      "lines": 44
+    },
+    {
+      "name": "ci/CI169GitHubCompareSummary.json",
+      "blob": "7462b0f630d577f4831fa7c885c226399c940edc",
+      "sha256": "dddbf585d3325d33690d9315438fca86db095abab32c2668f49d313c1f9b999a",
+      "bytes": 28320,
+      "lines": 911
+    },
+    {
+      "name": "ci/CI164CoverageCorrectionPendingCompleteImportMap.json",
+      "blob": "c8838081d79d3365987651f83f51107dc69a0c19",
+      "sha256": "2b4ed4d16af75fa5b304222ab28ef5234d625e08602a3958e212ec6309112a00",
+      "bytes": 875,
+      "lines": 25
+    }
+  ],
+  "active": {
+    "head": "836b039233920fa778d9747be7b5d5a9f953fea3",
+    "tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "parent": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+    "pushed_and_verified": "2026-11-12 21:51:57 UTC",
+    "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+    "source_files_changed": 1,
+    "net_Lean_lines": 8,
+    "actual_added_from_green": 19826,
+    "actual_deleted_from_green": 6,
+    "conservative_added_from_green": 19936,
+    "force": false,
+    "CI_label": "CI169",
+    "first_lookup": "wait at least five minutes after this timestamp",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "CI168": {
+    "conclusion": "failure",
+    "run": 43311908391,
+    "job": 131509840146,
+    "all_three_submitted_repairs_passed": true,
+    "compiled_during_quick": 5,
+    "one_downstream_module_failed": true,
+    "receipt_blob": "95b8588be6ea03597d35146ffca423f4e2e9d787"
+  },
+  "CI169": "Not queried yet. Earliest first lookup21:56:57UTC. No green claim.",
+  "coverage_correction": {
+    "old_receipt": "013f867ad3cd2a60b3acd2c1b8dab83040496a76",
+    "status": "4297 is an undercount; actual StateNeighborhood imports CanonicalParts. At least4298/4302 at CI164; exact all-import recount pending.",
+    "record": "c8838081d79d3365987651f83f51107dc69a0c19",
+    "full_CI164_success_unchanged": true
+  },
+  "budget": {
+    "new_archived_Lean_lines": 0,
+    "preserved_uncompiled_upper_bound": 19526,
+    "active": {
+      "source_added": 19826,
+      "source_deleted": 6,
+      "generated_root_additions": 110,
+      "conservative_added": 19936,
+      "limit": 20000,
+      "remaining": 64,
+      "net": 8
+    }
+  },
+  "limits_unchanged": true,
+  "root_not_edited": true,
+  "outside_archive_expected": "exact c796",
+  "endpoint_status": {
+    "FlowJets": "PROVED",
+    "Realization": "OPEN",
+    "N04Coordinates": "OPEN"
+  }
+}

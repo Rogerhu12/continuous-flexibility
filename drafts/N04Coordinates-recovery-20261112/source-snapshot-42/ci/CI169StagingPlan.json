@@ -1,0 +1,85 @@
+{
+  "kind": "CI169_single_existing_source_proof_repair",
+  "candidate_commit": "836b039233920fa778d9747be7b5d5a9f953fea3",
+  "candidate_tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+  "parent": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+  "base_tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+  "last_full_green": "c796387fb555392501c81f5b8bd834936251516c",
+  "files": [
+    {
+      "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "old": {
+        "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+        "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+        "bytes": 10621,
+        "lines": 195
+      },
+      "new": {
+        "blob": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+        "sha256": "90b81c5606a7313cc961152b70f7caf087e694d5731b74d574953b0e5a108bf4",
+        "bytes": 11029,
+        "lines": 203
+      }
+    }
+  ],
+  "candidate_manifest": "bf0a30e8c0fb918f6c655bb45a5f201fc279c4e3",
+  "peer": "3da7456ed79deac487dd8c2cc56e5161e198807b",
+  "owner": "1fb891929ade57809c11abcce427cc86d9b059f2",
+  "failure_receipt": "95b8588be6ea03597d35146ffca423f4e2e9d787",
+  "log": {
+    "sha256": "9217fd9f2fecbc46cccbc30c75d1a97ae6b06444d38bd13f8960bd4896544d15",
+    "bytes": 68553,
+    "lines": 808,
+    "run": 43311908391,
+    "job": 131509840146,
+    "blob": "30f3eed5a8e61ee0746311f8d5d1142ffc5cc727"
+  },
+  "budget": {
+    "source_added": 19826,
+    "source_deleted": 6,
+    "generated_root_additions": 110,
+    "conservative_added": 19936,
+    "limit": 20000,
+    "remaining": 64,
+    "net": 8
+  },
+  "actual_compare": {
+    "files": 112,
+    "added": 19826,
+    "deleted": 6,
+    "leanOnly": true
+  },
+  "tree_verification": {
+    "tree": "aedbc4ec6f58d05e07de2eefb318651f69077036",
+    "changed_blob_paths": 1,
+    "controls_unchanged": true,
+    "source_counts_unchanged": true,
+    "no_extra_paths": true
+  },
+  "provider_graph": {
+    "nodes": 755,
+    "changed_fingerprints": 1,
+    "imports_unchanged": true
+  },
+  "main_rules_head": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "unchanged_controls": [
+    "workflow",
+    "generator",
+    "root",
+    "exclusions",
+    "toolchain",
+    "lockfile",
+    "all resource limits"
+  ],
+  "three_public_headers_unchanged": true,
+  "new_public_names": 0,
+  "local_Lean": false,
+  "local_generator": false,
+  "next149_not_activated": true,
+  "endpoint_status": {
+    "FlowJets": "PROVED",
+    "Realization": "OPEN",
+    "N04Coordinates": "OPEN"
+  }
+}

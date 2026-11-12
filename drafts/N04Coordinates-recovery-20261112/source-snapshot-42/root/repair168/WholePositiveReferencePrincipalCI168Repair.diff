@@ -1,0 +1,28 @@
+--- a/src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean
++++ b/src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean
+@@ -95,7 +95,9 @@
+     n04WholeReferenceGaugeAtlasData_positive_fields C L K e cell ψ χ h₀ τ σ Q N
+       z₀ m i hi
+   have hp01 : p ∈ Ioo (0 : ℝ) 1 ×ˢ (univ : Set ℝ) := by
+-    simpa only [canonicalOpen, hl, hr] using hp
++    have hp' : p ∈ Ioo (V.left m) (V.right m) ×ˢ (univ : Set ℝ) := hp
++    rw [show V.left m = 0 from hl, show V.right m = 1 from hr] at hp'
++    exact hp'
+   have hx := hgeometry.inverse_maps_open hp01
+   have hxD : x ∈ annularOpen D :=
+     ⟨n04PositiveComponent_interval_subset hdw i hx.1, mem_univ _⟩
+@@ -124,7 +126,13 @@
+       inverseChartPrincipalCoefficients (L.coefficients z₀)
+         (positiveReferenceCylinderChart (Y i))
+         (positiveReferenceCylinderInverse (Y i)) (fun q : PolarPoint => H i q.1) := by
+-    simpa only [hF, hG, hh] using hf.1
++    have h := hf.1
++    change V.coefficients z₀ m = inverseChartPrincipalCoefficients (L.coefficients z₀)
++      (V.chart z₀ m) (V.inverseChart z₀ m) (V.height z₀ m) at h
++    rw [show V.chart z₀ m = ψ i from hF,
++      show V.inverseChart z₀ m = χ i from hG,
++      show V.height z₀ m = h₀ i from hh] at h
++    exact h
+   have hdensity := coordinatePrincipalDensity_radial_cylinder
+     (A := L.coefficients z₀) (H := H i) hYd
+   have ha : (V.coefficients z₀ m).a p = H i x.1 ^ 2 * D.w x.1 * deriv (Y i) x.1 := by

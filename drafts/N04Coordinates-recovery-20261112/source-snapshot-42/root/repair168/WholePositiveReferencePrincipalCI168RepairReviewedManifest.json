@@ -1,0 +1,54 @@
+{
+  "schema": "N04Coordinates.ReviewedSourceSelection.v1",
+  "status": "OWNER_SELECTED_AFTER_INDEPENDENT_SOURCE_REVIEW; CI_PENDING",
+  "owner": "root",
+  "intended_backup_path": "root/repair168/WholePositiveReferencePrincipalCI168RepairReviewedManifest.json",
+  "baseline": {
+    "commit": "3f7cac81c9952e98b4c2ab1bc3956d422b8988c9",
+    "tree": "d77954756f1b23784f0e402f8642c11493feeea2",
+    "last_full_green": "c796387fb555392501c81f5b8bd834936251516c"
+  },
+  "candidate_manifest": {
+    "blob": "bf0a30e8c0fb918f6c655bb45a5f201fc279c4e3",
+    "sha256": "2371ad655ace5ddf08ef286aef1714be79751e66b9be3b93f9974f6469fbb36b"
+  },
+  "source": {
+    "module": "ContinuousFlexibility.Analysis.WholePositiveReferencePrincipal",
+    "path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+    "old": {
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "bytes": 10621,
+      "lines": 195
+    },
+    "new": {
+      "blob": "282cae524a31e9ec89a78ceca5be67b30142eebb",
+      "sha256": "90b81c5606a7313cc961152b70f7caf087e694d5731b74d574953b0e5a108bf4",
+      "bytes": 11029,
+      "lines": 203
+    }
+  },
+  "independent_peer": {
+    "blob": "3da7456ed79deac487dd8c2cc56e5161e198807b",
+    "sha256": "0e547d73b6fc40d73fdf86a3413a366e8f2b308c7b7cec4df0df12750725a164",
+    "reviewer": "/root/proof_inventory",
+    "verdict": "PASS"
+  },
+  "owner_review": "Read the complete independent review and exact old/new source. Accept two explicit local-atlas folding/field rewriting repairs; the same actual witnesses, full theorem heads, imports and limits are preserved.",
+  "precise_diff_accounting": {
+    "added": 10,
+    "deleted": 2,
+    "net": 8,
+    "candidate_metadata_note": "The frozen candidate added_lines8/deleted_lines0 described net growth. This record gives exact unified-diff churn; aggregate source additions from c796 grow by8 because this source path is wholly new since c796."
+  },
+  "budget": {
+    "source_added": 19826,
+    "source_deleted": 6,
+    "generated_root_additions": 110,
+    "conservative_added": 19936,
+    "limit": 20000,
+    "remaining": 64,
+    "net": 8
+  },
+  "no_compilation_claim": true
+}
