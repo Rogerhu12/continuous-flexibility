@@ -100,7 +100,19 @@ theorem n04CoordinatesNegativeTravelHeightRatio_smooth_pos :
       (n04b_actualCharacteristic_halfGap_pos hN hfield hz hs m hx)
     have hratio := div_pos hnum hden
     refine ⟨?_, Real.sqrt_pos.2 hratio⟩
-    exact (((ha.mul hv).comp p hτAt).div (ha₀.mul hv₀) hden.ne').sqrt hratio.ne'
+    have hproduct : ContDiffAt ℝ ∞
+        (fun y : PolarPoint =>
+          (L.coefficients z).a y * n04bCharacteristicHalfGap (L.coefficients z) y) x :=
+      ha.mul hv
+    have hratioAt : ContDiffAt ℝ ∞
+        (fun y : PolarPoint =>
+          ((L.coefficients z).a (n04CoordinatesNegativeTravelTransition S C L z m y) *
+            n04bCharacteristicHalfGap (L.coefficients z)
+              (n04CoordinatesNegativeTravelTransition S C L z m y)) /
+          ((L.coefficients (C.referenceState, 0)).a y *
+            n04bCharacteristicHalfGap (L.coefficients (C.referenceState, 0)) y)) p :=
+      (hproduct.comp p hτAt).div (ha₀.mul hv₀) hden.ne'
+    exact hratioAt.sqrt hratio.ne'
   exact ⟨fun p hp => (hpoint p hp).1.contDiffWithinAt, fun p hp => (hpoint p hp).2⟩
 
 theorem n04Coordinates_actualAtlas_currentPoint_eq_travel
