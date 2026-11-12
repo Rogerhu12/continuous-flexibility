@@ -1,0 +1,24 @@
+--- CI127/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean
++++ candidate/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean
+@@ -63,11 +63,19 @@
+   refine ⟨?_, mem_univ _⟩
+   by_cases ha : p.1 = C.left m
+   · have he : p = (C.left m, p.2) := Prod.ext ha rfl
+-    rw [he, canonicalWholeNegativeTransport_root_radial hT hS hN hfield e hz hs m false p.2]
++    have hroot :
++        (canonicalWholeNegativeTransport C K z m (C.left m, p.2)).1 = C.left m := by
++      simpa only [Bool.false_eq_true, ↓reduceIte] using
++        (canonicalWholeNegativeTransport_root_radial hT hS hN hfield e hz hs m false p.2)
++    rw [he, hroot]
+     exact ⟨le_rfl, hab.le⟩
+   by_cases hb : p.1 = C.right m
+   · have he : p = (C.right m, p.2) := Prod.ext hb rfl
+-    rw [he, canonicalWholeNegativeTransport_root_radial hT hS hN hfield e hz hs m true p.2]
++    have hroot :
++        (canonicalWholeNegativeTransport C K z m (C.right m, p.2)).1 = C.right m := by
++      simpa only [Bool.false_eq_true, ↓reduceIte] using
++        (canonicalWholeNegativeTransport_root_radial hT hS hN hfield e hz hs m true p.2)
++    rw [he, hroot]
+     exact ⟨hab.le, le_rfl⟩
+   have hpin : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) :=
+     ⟨⟨lt_of_le_of_ne hp.1.1 (Ne.symm ha), lt_of_le_of_ne hp.1.2 hb⟩, mem_univ _⟩

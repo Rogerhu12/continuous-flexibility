@@ -1,0 +1,60 @@
+{
+  "kind": "actual_same_factory_polynomial_material_transport_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransport.lean",
+    "sha256": "37ee3f5e08d4c6a647e7d81fda0364ed4b89ee806894e3886e7c9f581474ad3b",
+    "blob": "37a8239458e0744265a853c70aca0138abbea481",
+    "lines": 139,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentMaterialTransport.lean"
+  },
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveMaterialExitChoice.lean",
+      "sha256": "011b34863a73ccbe8dbc240a5605b7886e7f08cabfd400f81e72f5e78cc73c52"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveFiberMaterialTransport.lean",
+      "sha256": "491e7f5ede6f507b5f7e8e81d5115a785430f6fd7fbf0626b10c1c695ee288b3"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/PositiveCappedMaterialTransportIndependentReview.json",
+      "sha256": "0e91fe052415f7414337ef7fef4335554119890b643b4657fd9def326a1237d6"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
+      "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentityReviewedManifest.json",
+      "sha256": "1a841a84a4babaeb8a1c4ad798bcd6c713fde51816d8889e06485c34f3e00a75"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackPolynomial.lean",
+      "sha256": "d9726fc56768488a82be357b7f3399b862741b196cdf7a6e92ffc0536de565f5"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportPolynomial.lean",
+      "sha256": "0d13ae7e1107bd35fce75a739d492c9b7c78fa4cf1b6e70dff7e213d877b0b95"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackAssembly.lean",
+      "sha256": "24927c543b24c65bb0c119905c7f03be10beafa3a26674e488cbbfa2c2396242"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportFactory.lean",
+      "sha256": "d1ef26f02bb80ef3fc9fcec0fed956643e4160fad00b1f74d793a16ef60fa890"
+    }
+  ],
+  "scope": [
+    "The actual component exits are the reviewed explicit quarter-gap/half-distance choices.",
+    "Same-T material K,A are selected before n, every component, raw family, state index and point.",
+    "For each finite order, the inverse-envelope C,degree are selected before M and all raw data. The angular patch remains at M; only the inverse-fiber bound uses 2M, absorbed by C*2^degree.",
+    "There is exactly one M_sigma selection from the actual polynomial fiber theorem. The same displayed tau/inverse has the output geometry, boundary radial/angular jets, and H/M material ratios. No second factory witness is substituted.",
+    "All scalar slope, fixed-point, middle and width facts are taken from that actual fiber output. Ambient scalar identity is proved from the actual single-side raw identity using the independently reviewed 105-line lemma.",
+    "Global endpoint fields can be the actual finite Taylor representatives of one-sided raw sources. The ambient identity premises are raw source identities; no target ratio, shared positive-component material host or final transport estimate is assumed. A separate one-sided/canonical instantiation remains to preserve the same original source germs."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

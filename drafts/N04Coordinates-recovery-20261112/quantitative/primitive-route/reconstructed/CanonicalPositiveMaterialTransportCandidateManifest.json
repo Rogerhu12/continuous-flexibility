@@ -1,0 +1,56 @@
+{
+  "kind": "CanonicalPositiveMaterialTransport_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveMaterialTransport.lean",
+    "sha256": "3e1c0d8569ff87bd34f422ae8766de5a06e67a893bf530579a9f34d73d78f8f4",
+    "blob": "6fc915637b512c9aa7a03cbae9b1f3883e92b5dd",
+    "lines": 130,
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalPositiveMaterialTransport.lean"
+  },
+  "actual_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSource.lean",
+      "sha256": "a6ed8815ca40302c184f0a714ad90d0cb929079b9263b6fad8e425601f7cf7c3"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
+      "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentMaterialRatios.lean",
+      "sha256": "2dfff655c5575a76da5387ca4969f9ccb8ca1c92556627ece0346e0e6a0acf2b"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/CanonicalWholePositiveTransport.lean",
+      "sha256": "ba3f1cbee83f2e7c65f3c6c2bc9baad53f9a761e6f88cbc1342a3353e3790596"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveTransportAssembly.lean",
+      "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransport.lean",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberInterpolation.lean",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrescribedEndpointWidth.lean",
+      "sha256": "47eaf19679711125095351bb27d7c65fc384c2a2c69d0225018a11edd0ab998c"
+    }
+  ],
+  "scope": [
+    "There is no new factory call and no new existential choice of M_sigma, phi, delta, Q or inverse. The theorem derives both actual ratios from the original actual-source matching certificate. All higher matching jets and the given Q remain untouched.",
+    "The displayed width formula itself supplies positive widths and strict gap from kappaX>0 and M_sigma>=0. A single side proof does not assume a raw factory output.",
+    "The true endpoint zero jet follows from the existing finite matching and the actual same-atlas OneSidedTransportEndpoint root_radial theorem.",
+    "At an ambient endpoint, the certified actual source option is none by actual control geometry; consequently the raw radial source has the true identity germ. The actual one-sided interpolation preserves the radius on the entire side collar.",
+    "Arbitrary l<c<d<r and the two half-distance caps remain explicit, so the separately reviewed materialCapped normalization buffer can be used. All constants precede n, component, source choice, state and point.",
+    "The same D,T,S,C,R,L and Through03 witness are retained. No new host, uniform primitive-jet estimate or desired ratio is an input."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

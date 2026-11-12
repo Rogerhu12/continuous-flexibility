@@ -1,0 +1,44 @@
+{
+  "kind": "positive_material_normalization_buffer_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASS_STATIC_FULL_SOURCE_AND_ACTUAL_CALLEE_REVIEW_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/normalization-explicit-reference/PositiveMaterialNormalizationBufferCandidateManifest.json",
+    "sha256": "fedb790833f254deed18d5dc0c64ca3f6567e4a72b247baac67cb09b42b166cb"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/normalization-explicit-reference/PositiveMaterialNormalizationBuffer.lean",
+    "sha256": "4f7f2b3cf5b438c6f0b64386811abc726299be76a32450d145cd766b7123f5cb",
+    "blob": "762caf9c95aa6edd148ef35c9d9309f5b8ddc480",
+    "lines": 88
+  },
+  "actual_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveMaterialExitChoice.lean",
+      "sha256": "011b34863a73ccbe8dbc240a5605b7886e7f08cabfd400f81e72f5e78cc73c52"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveNormalizationBuffer.lean",
+      "sha256": "c9cc82dcff9d6942d726424cee8b9d570094e26769636c2c702265d08d7e59fa"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01NormalizationRootSeparation.lean",
+      "sha256": "388abc37cefa0115f966b799314571baecab42f0efa29f83097d61d3eac84956"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352"
+    }
+  ],
+  "scope": [
+    "Read all 88 lines, the complete existing N04PositiveNormalizationBuffer structure/region/support constructors, the reviewed explicit material exits, and the actual RadialTrueBorder/referenceColumn support clauses.",
+    "Only centerLeft=min(old,material) and centerRight=max(old,material) change. The five strict inequalities are supplied by min/max and the original exact ordered tuples. The two normalization endpoints and the complete support proof are retained.",
+    "The region equality is definitional because region only uses the two unchanged inner normalization endpoints. No source support or component is replaced.",
+    "The min/max directions imply the required half-distance collar caps, with the actual D explicitly fixed at every projection-dependent call.",
+    "RadialTrueBorder supplies real compact tsupport chi and containment in the positive region. The existing referenceColumn support inclusion gives one actual reference-only buffer for all states, including ambient-touching components.",
+    "No material ratio, final transport, unit-density field or positive-component host is assumed. The result is compatible with arbitrary c,d in the actual barrier/material-ratio layer."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

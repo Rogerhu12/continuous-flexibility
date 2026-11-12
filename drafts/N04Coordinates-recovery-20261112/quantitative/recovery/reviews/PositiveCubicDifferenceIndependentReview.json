@@ -1,0 +1,95 @@
+{
+  "kind": "independent_actual_positive_cubic_difference_static_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_static_independent_review",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/cubic-germs/IntervalCubicGermDivision.lean",
+      "sha256": "9fdc1286df823061bbdf32d934a857a869e19e32520a5fc0a3a7ffc7f735ce8d",
+      "blob": "9035998ff42569232066dc38443ca668f60e5c27",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveCubicDifference.lean",
+      "sha256": "55f04a1e0308c127bc3dc00c3f936f948611c346e94e836455455437513a28ea",
+      "blob": "d35b482f5bd29eb5075e4b01708c051343d97f9b",
+      "lines": 102
+    }
+  ],
+  "candidate_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/cubic-germs/IntervalCubicGermDivisionSharedEndpointCandidateManifest.json",
+      "sha256": "f572b4860bf8e22fee52190fcf8909898573e19f3949f97d750218a550e9c7fa",
+      "blob": "821bdc3479dacc7ff44d2539e5839a8735b7404e",
+      "lines": 26
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveCubicDifferenceCandidateManifest.json",
+      "sha256": "df5f9c4a0796ef2843e10ed85991659983432b9905222fe4a31d63637970642b",
+      "blob": "f11a841a76c94c9c3a42b62be48a04b82d1df040",
+      "lines": 44
+    }
+  ],
+  "superseded_generic_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/IntervalCubicGermDivision.lean",
+    "sha256": "9f1fb0ff1c8e3a1370ae5f9b0f2ecc488a8a45f01e5e5281476a4ff9b6e6262b",
+    "blob": "94eb29b5b640fcc601e2f6b4be8032fa206f24ca",
+    "lines": 103
+  },
+  "selected_dependency_supersession": {
+    "module": "ContinuousFlexibility.Analysis.IntervalCubicGermDivision",
+    "use": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/cubic-germs/IntervalCubicGermDivision.lean",
+      "sha256": "9fdc1286df823061bbdf32d934a857a869e19e32520a5fc0a3a7ffc7f735ce8d",
+      "blob": "9035998ff42569232066dc38443ca668f60e5c27",
+      "lines": 102
+    },
+    "reason": "Use the separately reviewed shared-endpoint proof with identical public statements. The original actual candidate manifest remains historical and names the superseded source; a final selected manifest must explicitly select this new dependency."
+  },
+  "exact_generic_delta_only": "The only changed block factors the two identical closed-germ-to-slice-jet proofs into hFjet(x,hx,hzero), then instantiates it at l and r; all bytes before and after that block and both public headers are identical.",
+  "findings": [
+    "Translation sends l and r to 0 and r-l; the two actual zero slice jets satisfy the established globally smooth two-endpoint cubic quotient theorem. No endpoint derivative is assigned by definition.",
+    "The single hFjet composes the actual closed joint germ with the fixed-angle line, so all three true radial jets of the smooth representative equal those of the original field.",
+    "The endpoint factorization uses the actual zeroth jet. The open factorization uses the nonzero positive distance product and the actual quotient equality, with the multiplication order corrected by commutativity.",
+    "The mixed-derivative estimate applies the existing loss-six theorem and transfers the numerator bound through mixedDerivative_eq_of_germ point by point on the true closed component. The constant remains 1/36 and no angular derivatives are lost.",
+    "The actual positive adapter obtains its numerator extension from the existing chart geometry and smooth original coefficients, and obtains zero endpoint jets from the same actual negative-reference identities and the same matching transport. It does not assume a target zero-jet or material estimate.",
+    "The same D,T,S,C,R,L, reference coefficients, z, τ, σ and Q are retained. The component is explicitly buffered inside the annulus; ambient endpoints and a material numerator envelope are not claimed."
+  ],
+  "actual_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalTwoEndpointCubicMixed.lean",
+      "sha256": "9ac02b03fc0747d7b4af7f3f5b5314fdea17548cf6ecf3f02f92e9b13db631c2",
+      "blob": "e395dd9b19a2d4b4b3bc39ab558a256836ab0131",
+      "lines": 273
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveReferenceJets.lean",
+      "sha256": "f073be472d15bb804ef90f2b2e800f9c5d11e850c35364149ec2152ff91ae5a9",
+      "blob": "9c27d7e41b041b4b5d3787a181803642834f1479",
+      "lines": 151
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositivePrincipalExtension.lean",
+      "sha256": "fca39fba34350c9038c61e3d01d0734115b645661c13459b66dcb072053c1539",
+      "blob": "69deb030e2bde13dd8325dc55b7f5ad7f0db5f2a",
+      "lines": 114
+    }
+  ],
+  "public_counts": {
+    "generic_theorems": 2,
+    "actual_definitions": 1,
+    "actual_theorems": 1
+  },
+  "verification": {
+    "compiled": false,
+    "CI_queried": false,
+    "peer_sources_edited": false,
+    "checkout_index_refs_CP_authority_or_plan_changed": false
+  }
+}

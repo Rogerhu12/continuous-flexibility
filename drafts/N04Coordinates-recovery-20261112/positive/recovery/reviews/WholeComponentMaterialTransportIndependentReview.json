@@ -1,0 +1,30 @@
+{
+  "kind": "independent_full_source_and_actual_callee_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_review",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransport.lean",
+    "sha256": "37ee3f5e08d4c6a647e7d81fda0364ed4b89ee806894e3886e7c9f581474ad3b",
+    "blob": "37a8239458e0744265a853c70aca0138abbea481",
+    "lines": 139
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentMaterialTransportCandidateManifest.json",
+    "sha256": "1ea9840ce1d3ad8fd3c25b23e9ef9bdaa70677f750f49708056c40033395027a"
+  },
+  "created_at": "2026-11-12T09:11:19.948367+00:00",
+  "checks": [
+    "Read all 139 lines and the exact polynomial fiber, raw angular, same-factory geometry, single-side ambient and final 90/131 material-cap provider statements and relevant proofs. All manifest dependency hashes were checked.",
+    "Material K,A are obtained before jet order n, numerical envelopes and the entire family. For fixed n, inverse-envelope C and degree precede M, kappa and the family. The factor 2^degree changes only the displayed polynomial constant.",
+    "The actual angular patch is built with the original M. The actual boundary Frechet matching bounds this same patch by 2M for the inverse theorem; (kappa_phi/2)^-1 <= 2M is exactly the required inverse lower-bound conversion.",
+    "Exactly one M_sigma is selected by the polynomial fiber provider. The same fiber output supplies its true coordinate Y, lower derivative, fixed endpoints, periodic/even laws, genuine middle germ and boundary jets. No second transport witness is substituted.",
+    "The returned geometry uses the same actual phi and Y as the displayed wholeComponentEndpointTransport and its actual inverse. The tuple positions agree with the current raw angular provider, including separate radial and full-Frechet matching fields.",
+    "At an ambient endpoint, the raw X-side identity is fed to the actual single-side collar lemma with the same positive width and gap. Its inclusive exit inequality is exactly the Icc side supplied by the material comparison.",
+    "The exact capped exit provider compares the displayed positiveFiberChart(phi,Y), so the final H and M ratios apply to the returned transport itself. Its constants are independent of the positive component, state and finite-jet order.",
+    "No final ratio, positive-component material host, universal target estimate or alternative material witness is assumed. Raw finite endpoint bounds and the same-witness canonical instantiation remain explicit later work."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

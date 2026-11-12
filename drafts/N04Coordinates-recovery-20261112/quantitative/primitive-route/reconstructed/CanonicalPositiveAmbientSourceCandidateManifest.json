@@ -1,0 +1,38 @@
+{
+  "kind": "actual_certified_positive_ambient_source_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSource.lean",
+    "sha256": "a6ed8815ca40302c184f0a714ad90d0cb929079b9263b6fad8e425601f7cf7c3",
+    "blob": "3e8da743d6e554470c1c63e08bc71c3a8d016a5f",
+    "lines": 71,
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalPositiveAmbientSource.lean"
+  },
+  "actual_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/TaylorReferenceIdentity.lean",
+      "sha256": "3c963026e4a7fa58a4131616d6c8bc11518dbdb01ac52793b9d9da4921c0aca5"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransport.lean",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520"
+    }
+  ],
+  "scope": [
+    "A certified source at an ambient endpoint must have option value none, since the same C left/right roots are strictly inside D.a/D.b by the actual controlGeometryConditions. The one Bool proof treats both directions.",
+    "The existing exact source definitions therefore give map=id and height=1 at every state, rather than assuming an ambient identity input.",
+    "The actual existing oneSidedEndpointRepresentative of the radial source is exactly fst at every finite order n+1. The same j, C, D, K and state are retained.",
+    "This eliminates the ambient raw-identity premise of the material factory for actual certified sources. It does not introduce or assume a material transport ratio, positive-component host, new atlas, or a transfer of Through03 to another witness."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "cubic_closed_germ_endpoint_shared_bridge_supersession",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/cubic-germs/IntervalCubicGermDivision.lean",
+    "sha256": "9fdc1286df823061bbdf32d934a857a869e19e32520a5fc0a3a7ffc7f735ce8d",
+    "blob": "9035998ff42569232066dc38443ca668f60e5c27",
+    "lines": 102
+  },
+  "supersedes": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/IntervalCubicGermDivision.lean",
+    "sha256": "9f1fb0ff1c8e3a1370ae5f9b0f2ecc488a8a45f01e5e5281476a4ff9b6e6262b",
+    "blob": "94eb29b5b640fcc601e2f6b4be8032fa206f24ca",
+    "lines": 103
+  },
+  "base_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/IntervalCubicGermDivisionCandidateManifest.json",
+    "sha256": "6b65db78b57f43f34c1cc0bfe8515a76325701183c6308e3c6da34a34e8b729a",
+    "blob": "e917f92e45c498b4b55b27a392cc8c78ecb53422",
+    "lines": 37
+  },
+  "public_headers_identical": true,
+  "scope": "Replace only the two identical closed-germ-to-slice-zero blocks by one local hFjet parametrized by its real endpoint; left and right invoke that same proof. All statements, factorization, bound and imports are unchanged.",
+  "compiled": false,
+  "old_source_checkout_index_refs_CI_authority_plan_modified": false
+}

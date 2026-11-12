@@ -1,0 +1,35 @@
+{
+  "kind": "ci127_whole_negative_boundary_bool_root_repair",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "base_commit": "e7ef7278429002b5d1123c07b570d50d49a26d49",
+  "base_tree": "ac177a6ca1b983aa059d81120a3ac4ae2129d372",
+  "module_path": "src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean",
+  "before_blob": "3a65222e7dc8ae563751b0b4fd006d982d6d835e",
+  "after_blob": "4d38764eaebc7458cd29faf4cfc205f40db19dbb",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair127/CanonicalWholeNegativeBoundary.lean",
+    "sha256": "c4119413eb89f0863549c945b0cd6956eb0bfd224e42a0e2192f9b0f26732ceb",
+    "lines": 87
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair127/CanonicalWholeNegativeBoundary.base.lean.txt",
+    "sha256": "b1d56e652f82d5816804596dcb58a359064368efeee655317fd7c5b0a89c9f9d"
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair127/CanonicalWholeNegativeBoundary.diff",
+    "sha256": "ddfa228aab10dd8217361bb619581e1a1c8c4b8cc9b6f65e4a1d1fc173518fa6"
+  },
+  "cached_diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-127-errors.json",
+    "sha256": "6c831e505e9170a66ccb2501ba755d9eece28dbc18d517af1c1550cc5aff0304"
+  },
+  "changes": [
+    "At each true endpoint, give the root-radial equality its concrete endpoint type and simplify Bool/ite before applying rw.",
+    "No declaration, construction, premise, import, or budget change."
+  ],
+  "public_complete_headers_byte_identical": true,
+  "public_count": 3,
+  "imports_options_unchanged": true,
+  "compiled": false,
+  "checkout_index_refs_CI_authority_plan_modified": false
+}

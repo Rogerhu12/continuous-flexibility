@@ -1,0 +1,18 @@
+{
+  "kind": "whole_actual_canonical_atlas_data_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+  "module_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasData.lean",
+  "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6",
+  "blob": "c6abe2dcedd1974e7ec231275a17f869c0faed3b",
+  "lines": 165,
+  "scope": [
+    "One N04WholePieceIndex enumeration controls actual negative and whole positive fields.",
+    "Retain exact old negative domains/maps/heights/operator fields and the real cut pairing.",
+    "Positive maps/height/coefficient/potential are the same actual F/G/Q supplied by the constructed transport.",
+    "Reuse n04bWithInteriorDivision and its factorization theorem; do not add a second quotient representation.",
+    "At the reference identity, the new record relative map/height are exactly the same G/Q.",
+    "Positive cell selector and normalization region remain explicit reference data, with no assumed final bound."
+  ],
+  "compiled": false
+}

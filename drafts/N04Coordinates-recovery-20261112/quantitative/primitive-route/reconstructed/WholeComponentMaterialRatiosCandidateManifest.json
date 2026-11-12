@@ -1,0 +1,30 @@
+{
+  "kind": "WholeComponentMaterialRatios_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentMaterialRatios.lean",
+    "sha256": "2dfff655c5575a76da5387ca4969f9ccb8ca1c92556627ece0346e0e6a0acf2b",
+    "blob": "6f611309001a834188a0a8b6a05fb8357a645942",
+    "lines": 102,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentMaterialRatios.lean"
+  },
+  "actual_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentCollarInvariance.lean",
+      "sha256": "33ae5d9e2855607c18f50e1d95bb6cacd39b216c1b156b80b36c451626055e3e"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/EndpointDistanceMaterialTransport.lean",
+      "sha256": "b1d7ff11657582113250ca84c35b0438b27720024571a28728154317e6aac38c"
+    }
+  ],
+  "scope": [
+    "Common actual K,A are chosen before every component, transport, state, endpoint and point. Arbitrary c,d remain compatible with the separately constructed normalization buffer.",
+    "The original geometry supplies both closed-collar MapsTo facts through the reviewed signed-barrier theorem. A single Bool-side argument handles both caps.",
+    "Same-point cases, including true ambient identity, reuse the actual collar comparison at the point itself, without incorrectly requiring unscaled E0>=1.",
+    "Interior caps use the actual physical endpoint distance. No cell containing the positive component, target material ratio, new material witness or altered transport is assumed."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

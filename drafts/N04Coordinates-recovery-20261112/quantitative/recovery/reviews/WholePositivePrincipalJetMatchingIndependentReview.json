@@ -1,0 +1,76 @@
+{
+  "reviewer": "/root/quantitative_route",
+  "result": "passed full-source and actual-source/finite-jet contract independent static review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositivePrincipalJetMatching.lean",
+    "sha256": "c1300032411e5cf278ddd96b7fb67d7cc2e26e8106cf3d505f7c09fb025e6779",
+    "blob": "4529bcd20e507a0e69453a485b55fbce105a5a33",
+    "lines": 154
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositivePrincipalJetMatchingCandidateManifest.json",
+    "sha256": "09de7fd62fbc1a553c597465617d8996465088983189bb1e51a9c5212a2a5fbc"
+  },
+  "exact_callees_checked": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce",
+      "blob": "a79f9987aafb83a59e1d9fb8ccb74bf5354585c1",
+      "lines": 170
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalWholePositiveRootMatching.lean",
+      "sha256": "42b7d1c827797240afb1f189a316d8e5537754f948c861e81c040c19d7e2a2b9",
+      "blob": "7752be209bc875730633f6502880b2889a345679",
+      "lines": 180
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean",
+      "sha256": "b1d56e652f82d5816804596dcb58a359064368efeee655317fd7c5b0a89c9f9d",
+      "blob": "3a65222e7dc8ae563751b0b4fd006d982d6d835e",
+      "lines": 79
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeTransport.lean",
+      "sha256": "b904744b4a2ca98616fc0b1681fdd563be7471776ab8aadafbc063177aa71b3f",
+      "blob": "c432ff8163f525d6273ebb8e671426a92992eab5",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/AdjugateInversePrincipalField.lean",
+      "sha256": "74fc7c99ebe702299a08bad3db1f915a4677ee672e733ca6d515d4ebf4a667f8",
+      "blob": "5630eec6b89b624befab434ec121754be5a9d894",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/adjugate-component-apply/AdjugatePrincipalFiniteJets.lean",
+      "sha256": "fdca723daf585cb3bc089ec0a107da4ec91c9cf8f125385d3af5dcaa37fd8527",
+      "blob": "3596dfced859852fd352f9c0fd551f034b93e56a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetMatching.lean",
+      "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+      "blob": "9baca93c394dae0092c356505a301df65635e749",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetBoundary.lean",
+      "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+      "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+      "lines": 82
+    }
+  ],
+  "checks": [
+    "Read all 154 lines and the actual whole-positive geometry/field, root matching, closed-negative regularity/MapsTo and finite-jet provider contracts; all exact callee hashes match the manifest.",
+    "With H : WholePositiveChartGeometry sigma tau (Q o sigma)^(-1), H.right_inverse is exactly sigma(tau p)=p. Height positivity at tau p thus proves Q p>0 and the genuine inverse germ converts the actual reverse field to its adjugate formula. The component proof explicitly handles the function-level if via ite_apply and split_ifs.",
+    "At an actual neighboring negative root, hm plus the certified endpoint-source uniqueness gives coordinate full jets through n+1 and height jets through n for the same actual negative component m. No assumed coefficient match is used.",
+    "The negative first derivative equals the positive transport first derivative, so the positive actual Jacobian proves the required nonzero negative Jacobian. The true closed-range theorem, with explicit x:=p, keeps the actual transported point strictly in the same annulus, where hfield supplies the coefficient smoothness.",
+    "The generic adjugate finite-jet theorem retains L.coefficients z evaluated at the actual transport point. Both the field and all witnesses remain the original ones. Replacing the negative adjugate field by reference coefficients is correctly left to the separate relative-principal identity.",
+    "The last lemma restricts the actual full jets to the radial curve, applies the ordinary scalar derivative subtraction theorem under the true smoothness hypotheses, and gives zero difference jets including k=0.",
+    "All five new public names are absent from the installed source tree. No target coefficient-jet or remainder-vanishing premise is added."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

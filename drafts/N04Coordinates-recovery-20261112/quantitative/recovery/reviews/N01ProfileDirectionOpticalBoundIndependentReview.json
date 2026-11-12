@@ -1,0 +1,29 @@
+{
+  "kind": "n01_actual_profile_direction_optical_bound_independent_review",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASS_STATIC_FULL_SOURCE_AND_ACTUAL_CALLEE_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01ProfileDirectionOpticalBound.lean",
+    "sha256": "21ec6dc32918acc8ba134f4dc9b17d57e3b709769ac36ed21e049a105396bb3f",
+    "blob": "906e13e5883390fc6f2c9ff8a4f50ac394d9a43e",
+    "lines": 59
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01ProfileDirectionOpticalBoundCandidateManifest.json",
+    "sha256": "7137d0b2357b018c5eb978b326280cbd06c12e19d34b7278338fec2b283a632b"
+  },
+  "actual_callee": {
+    "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean",
+    "sha256": "b99eb7cac1b13771f48a1584592e54b1872249571874263c3e9063aa20cf8528"
+  },
+  "scope": [
+    "Read all 59 source lines and actual N04bStateProfileType provider, including the exact affine radicand, original weighted state ball, smoothness tower test and the log exponent of an actual state direction.",
+    "At t=0 the true original ball and epsilon>0 supply a>0. The grading P is only nonnegative.",
+    "If epsilon*abs(b)>a*P, then b is nonzero and t=-a/b satisfies abs(t)*P<epsilon. The actual provider then gives positive a+b*t although exact field algebra makes it zero.",
+    "The argument never divides by the grading and remains valid at grading zero. It retains the actual original N01 neighborhood, state space and supplied witness.",
+    "Only available logarithmic-profile state directions are tested. This does not prove uniform simple-root kappa or license arbitrary profile perturbations."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

@@ -1,0 +1,104 @@
+import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
+import ContinuousFlexibility.Analysis.MaterialCellOverlapRadialPolynomial
+import ContinuousFlexibility.Radial.DeepTailPhysicalCoefficients
+
+/-!
+# The actual component width in its genuine material host
+
+The existing optical collar and return margin imply an inverse-width
+bound. A common physical midpoint compares its actual containing cell
+with any genuine host of the same component. No cell is relabelled and
+no lower bound for the component length is added as an input.
+-/
+
+noncomputable section
+
+namespace ContinuousFlexibility.Analysis
+
+open Set
+open ContinuousFlexibility.Statements
+
+private theorem opticalCollar_inverse_polynomial
+    {E K A B s L : ℝ} (hE : 1 ≤ E) (hK : 0 < K) (hA : 0 ≤ A)
+    (hs : 0 < s) (hL : s ≤ L) :
+    (((E ^ (-B) / s) ^ 2 / (4 * (K * E ^ A + 1)))⁻¹) ≤
+      (4 * (K + 1) * L ^ 2) * E ^ (A + 2 * B) := by
+  have hEp : 0 < E := zero_lt_one.trans_le hE
+  have hLp : 0 < L := hs.trans_le hL
+  have hpower : E ^ (2 * B) = (E ^ B) ^ 2 := by
+    simpa only [Nat.cast_ofNat, mul_comm] using Real.rpow_mul_natCast hEp.le B 2
+  have heq :
+      (((E ^ (-B) / s) ^ 2 / (4 * (K * E ^ A + 1)))⁻¹) =
+        4 * (K * E ^ A + 1) * s ^ 2 * E ^ (2 * B) := by
+    rw [inv_div, div_eq_mul_inv, inv_pow, inv_div, Real.rpow_neg hEp.le,
+      div_inv_eq_mul, mul_pow, hpower]
+    ring
+  have hsum : K * E ^ A + 1 ≤ (K + 1) * E ^ A := by
+    have hone := Real.one_le_rpow hE hA
+    nlinarith only [hone]
+  have hsq : s ^ 2 ≤ L ^ 2 := by
+    nlinarith only [hs.le, hL, hLp.le]
+  calc
+    _ = 4 * (K * E ^ A + 1) * s ^ 2 * E ^ (2 * B) := heq
+    _ ≤ 4 * ((K + 1) * E ^ A) * L ^ 2 * E ^ (2 * B) := by
+      apply mul_le_mul_of_nonneg_right _ (Real.rpow_nonneg hEp.le _)
+      exact mul_le_mul
+        (mul_le_mul_of_nonneg_left hsum (by norm_num : (0 : ℝ) ≤ 4)) hsq
+        (sq_nonneg s) (by positivity)
+    _ = (4 * (K + 1) * L ^ 2) * E ^ (A + 2 * B) := by
+      rw [Real.rpow_add hEp]
+      ring
+
+/-- The half-component radius has a fixed material inverse bound at
+every actual host. Constants precede the component and the host index. -/
+theorem N01Properties.component_halfWidth_inverse_material_bound
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) :
+    ∃ K P : ℝ, 0 < K ∧ 0 ≤ P ∧ ∀ m j : ℕ,
+      Ioo (C.left m) (C.right m) ⊆ D.cells j →
+      ((C.right m - C.left m) / 2)⁻¹ ≤ K * T.E0 (T.sample j) ^ P := by
+  obtain ⟨K, A, B, hK, hA, hB, hcollar⟩ := hN.reference_opticalCollars
+  obtain ⟨Q, P, hQ, hP, hweight⟩ :=
+    materialCells_overlap_radialE_power_bound hT hN.1.1
+      (R := A + 2 * B) (by positivity)
+  have hgeom : RadialProfileGeometry D := hN.1.1.choose_spec.1
+  let L : ℝ := D.b - D.a
+  have hL : 0 < L := sub_pos.mpr hgeom.2.1
+  let K₀ : ℝ := 4 * (K + 1) * L ^ 2
+  have hK₀ : 0 < K₀ := by dsimp only [K₀]; positivity
+  refine ⟨K₀ * Q, P, mul_pos hK₀ hQ, hP, ?_⟩
+  intro m j hhost
+  have hcomponent := n01Properties_negativeRadialComponent hN m
+  let s : ℝ := C.right m - C.left m
+  have hs : 0 < s := sub_pos.mpr hcomponent.2.1
+  have hsL : s ≤ L := by
+    dsimp only [s, L]
+    linarith only [hcomponent.1, hcomponent.2.2.1]
+  obtain ⟨j₀, hj₀, x, hdata⟩ := hcollar m
+  dsimp only at hdata
+  let E : ℝ := radialE (D.cellIndex j₀)
+  let δ : ℝ := (E ^ (-B) / s) ^ 2 / (4 * (K * E ^ A + 1))
+  have hδ : 0 < δ := hdata.1
+  have hδs : δ ≤ s / 2 := by
+    have hl : C.left m < x - δ := hdata.2.1
+    have hr : x + δ < C.right m := hdata.2.2.1
+    dsimp only [s]
+    linarith only [hl, hr]
+  have hE : 1 ≤ E :=
+    Real.one_le_exp_iff.mpr (ContinuousFlexibility.Radial.radialQ_nonneg _)
+  have hδbound : δ⁻¹ ≤ K₀ * E ^ (A + 2 * B) :=
+    opticalCollar_inverse_polynomial hE hK hA.le hs hsL
+  have hmid : (C.left m + C.right m) / 2 ∈ Ioo (C.left m) (C.right m) := by
+    constructor <;> linarith only [hcomponent.2.1]
+  have hpower : E ^ (A + 2 * B) ≤ Q * T.E0 (T.sample j) ^ P :=
+    hweight j₀ j (D.cellIndex j₀) ((C.left m + C.right m) / 2)
+      (hj₀ hmid) (hhost hmid) le_rfl
+  calc
+    ((C.right m - C.left m) / 2)⁻¹ ≤ δ⁻¹ := inv_anti₀ hδ hδs
+    _ ≤ K₀ * E ^ (A + 2 * B) := hδbound
+    _ ≤ K₀ * (Q * T.E0 (T.sample j) ^ P) :=
+      mul_le_mul_of_nonneg_left hpower hK₀.le
+    _ = (K₀ * Q) * T.E0 (T.sample j) ^ P := by ring
+
+end ContinuousFlexibility.Analysis

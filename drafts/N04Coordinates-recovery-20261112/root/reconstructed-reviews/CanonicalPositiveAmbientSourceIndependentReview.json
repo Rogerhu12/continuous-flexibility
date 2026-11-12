@@ -1,0 +1,24 @@
+{
+  "kind": "actual_ambient_positive_source_independent_review",
+  "reviewer": "/root",
+  "created_at": "2026-11-12T09:12:01.846972+00:00",
+  "status": "PASS_STATIC_FULL_SOURCE_AND_ACTUAL_CALLEE_REVIEW_UNCOMPILED",
+  "candidate_manifest": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSourceCandidateManifest.json",
+  "candidate_manifest_sha256": "1bd673e9aa236939b1309048b56292a6efe7e738137f29a14ad70d13bbb6ed48",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSource.lean",
+    "sha256": "a6ed8815ca40302c184f0a714ad90d0cb929079b9263b6fad8e425601f7cf7c3",
+    "blob": "3e8da743d6e554470c1c63e08bc71c3a8d016a5f",
+    "lines": 71,
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalPositiveAmbientSource.lean"
+  },
+  "scope": [
+    "Read all 71 candidate lines and the actual installed WholePositiveEndpointFields definitions.",
+    "The some branch contradicts C.left/C.right lying strictly inside D.a/D.b; Bool false and true use the correct opposite incident negative endpoint.",
+    "The none subtype eliminates both source match expressions to exactly id and 1 for every state and the same K.",
+    "The n+1 radial Taylor result uses the existing exact representative_eq_fst theorem on that actual identity germ, preserving j and its state-independent source choice.",
+    "Read the actual held TaylorReferenceIdentity and one-sided representative interfaces; no premise asks for the desired material ratio or global geometric result.",
+    "No new axiom, sorry, budget option, public signature modification, or witness replacement."
+  ],
+  "compiled": false
+}

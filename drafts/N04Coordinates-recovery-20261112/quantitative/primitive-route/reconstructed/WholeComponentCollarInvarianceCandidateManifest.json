@@ -1,0 +1,30 @@
+{
+  "kind": "actual_whole_component_collar_invariance_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentCollarInvariance.lean",
+    "sha256": "33ae5d9e2855607c18f50e1d95bb6cacd39b216c1b156b80b36c451626055e3e",
+    "blob": "adabd2c2c1add0882c4bfb8f3f54eee1b3b445ce",
+    "lines": 102,
+    "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentCollarInvariance.lean"
+  },
+  "actual_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointTransportGeometry.lean",
+      "sha256": "cdd4d3a6a4ab757e7f2dfff3d0ba1a7b1653aff00fdff4d74e44da10ab49fb97"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/IntermediateValue.lean",
+      "sha256": "d4ca5cc8657fe65a91da065eeafe8882f84e2d64e134665bf3026dc79ef17ac6"
+    }
+  ],
+  "scope": [
+    "One signed IVT/injectivity argument treats both collar orientations. No radial monotonicity of the full two-dimensional transport is assumed.",
+    "The actual existing WholeComponentTransportGeometry supplies continuity, injectivity, whole closed-strip MapsTo and the true middle-circle identity. Actual endpoint zero jets supply the anchor values.",
+    "The same transport and inverse are retained. No factory, M_sigma, coordinate, height or matching jet is replaced or reselected.",
+    "No final material ratio or new positive-component material host is an input."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

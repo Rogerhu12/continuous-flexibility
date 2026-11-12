@@ -1,0 +1,304 @@
+{
+  "kind": "same_actual_witness_optical_testing_route_analysis",
+  "author": "/root/audit_coordinates",
+  "status": "PARTIAL_ACTUAL_CONSEQUENCE_PROVED_AND_STATIC_REVIEWED; ROOT_KAPPA_EXTRACTION_UNRESOLVED",
+  "inspection_head": "9f88931ad3308f43d350ba84f4c9b323ced92986",
+  "same_witness_preserved": [
+    "D",
+    "T",
+    "S",
+    "C",
+    "R",
+    "L",
+    "base",
+    "loss",
+    "epsilon"
+  ],
+  "reviewed_actual_consequence": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01ProfileDirectionOpticalBoundReviewedManifest.json",
+    "sha256": "9becf962d84f8ca1d42521604be82102b2e2bb6a2d3e796496c02f06f0f76f34"
+  },
+  "exact_consequence": {
+    "notation": "a(r)=-w′(r)/(r*w(r)); b_v(r)=-deriv(n04bStateLogExponent D S C v)(r)/r; P=stateGrading S base v",
+    "claim": "epsilon*abs(b_v(r)) <= a(r)*P on each actual open negative component",
+    "proof": "At t=0 the actual state-line provider yields a>0. If a*P<epsilon*abs b, b is nonzero and t=-a/b lies in the original state ball; the true affine radicand is then zero, contradicting positivity. No division by P is used.",
+    "does_not_claim": "A uniform inverse lower bound for the reference root divisor or arbitrary profile bump availability."
+  },
+  "direction_analysis": [
+    {
+      "route": "Actual logarithmic-profile direction",
+      "proved_facts": "The supplied state space changes the profile only through the nu direction chi and the sum of its actual controls. On a fixed negative component, chi and all other controls vanish. The remaining control has tsupport strictly inside that open component. Consequently these profile directions vanish on a one-sided collar of each actual root.",
+      "consequence": "The new direction test is useful and noncircular, but its root limit is 0<=0. It cannot itself supply a nonzero root test."
+    },
+    {
+      "route": "Actual compact height direction",
+      "proved_facts": "n04b_heightPair_of_compact_radial and exists_heightPair_germ_of_nonaxis supply actual decoded HeightPair elements. At a radial reference, the exact first characteristic-speed variation is -v_ref*(1+w^2)/w*(u_r+u_thetatheta/r); a radial increment gives -v_ref*(1+w^2)/w*f′.",
+      "consequence": "This concrete first variation multiplies the reference speed rather than its inverse. A qualitative local germ theorem does not bound the actual grading of the selected test. No assertion about all higher variations or all global inverse consequences is made."
+    },
+    {
+      "route": "Actual FirstNormal inverse",
+      "proved_facts": "The contract controls a weak normal derivative of G F in weighted L2 by the source and its angular derivative in weighted L2. Its existing implementation uses scalar weighted Caccioppoli plus the real mode inverse, actual mode identification and Fourier reconstruction.",
+      "consequence": "This is not an existing pointwise root-kappa estimate. The Caccioppoli stage uses positive w, its quantitative cell upper/inverse estimates and the true radial ODE, without a quantitative w′′(root) hypothesis. This does not show the full inverse predicate cannot imply such a lower bound."
+    }
+  ],
+  "minimal_unfinished_inverse_test_route": {
+    "actual_test": "Choose smooth compact radial u, even cosine mode j=2n with n>=2, U=(u(r)*cosineMode(j,theta),0), and F given by the actual radial PDE (with its actual reference row).",
+    "available_providers": [
+      "radialTest_cosine",
+      "r11b_radialTest_separated",
+      "integral_radialJacobi_symm",
+      "radialPDE_cosine_lift",
+      "ReferenceInverseProperties uniqueness",
+      "FirstNormalInverseEstimate"
+    ],
+    "required_proofs": [
+      "SourceMember and SourceDerivativeMember for the actual compact source, including exact norm control; actual ReferenceGraph by Green identity, not an assumed equation for G.",
+      "Identification of G F with U as the actual radial representative and identification of its weak normal derivative.",
+      "A quantitatively chosen family near every real turning root whose normal/source norm ratio detects the desired inverse optical slope or divisor. All cutoff norms and angular frequencies must be explicitly controlled by the same material sample power."
+    ],
+    "current_limit": "The last quantitative detecting family has not been constructed or proved. Normalizing a bump by the optical weight without bounding that normalization would assume the desired lower bound. No claimed proof of root kappa follows from the present analysis."
+  },
+  "available_same_witness_bounds": [
+    "N01ReferenceOpticalCollars gives a material-controlled interior collar and hence the actual component-width estimate; it is not a root collar.",
+    "The smaller common state ball gives q_state > q_reference/2, a relative lower bound that retains q_reference.",
+    "N01RadialCoefficientMaterialInverse gives a^-1 bounded by a true host sample power via w/16<=a and the genuine inverse-profile bound, including actual closed roots."
+  ],
+  "avoid_kappa_route_status": {
+    "proven_cancellation": "The actual relative negative chart/height construction cancels the common root power when comparing two states. The three relative-principal leaves and closed-root jets are already independently reviewed and being consumed by the positive construction.",
+    "remaining_absolute_fields": "canonicalPrimitiveField also includes normalized individual chart heights/Jacobians and material logarithmic-Jacobian derivatives. In the explicit reference root chart, height is determined by (a*v/sqrt(xi))^(-1/2). Cancellation in a relative transport identity alone does not bound these separate primitive fields.",
+    "limit": "No kappa-free estimate for every required primitive field has been established here. No proof of necessity for arbitrary alternate charts, no counterexample to the complete contracts, and no statement repair are asserted."
+  },
+  "prior_same_witness_audit": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/SameWitnessThrough03MinimalDependencyAudit.json",
+    "sha256": "e93bb26799972d8dfc5e5e6d24ceb9c6f652d282558d0ace7ea8e92ac74d8385"
+  },
+  "source_evidence": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "lines": 1430,
+      "anchors": {
+        "stateProfile": [
+          144
+        ],
+        "N01Properties": [
+          266
+        ],
+        "ordinaryFlowFamily": [
+          256
+        ],
+        "canonicalPrimitiveField": [
+          660
+        ],
+        "CanonicalPrimitiveGeometry": [
+          687
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "lines": 874,
+      "anchors": {
+        "RadialProfileGeometry": [
+          81
+        ],
+        "AccumulatingProfileBounds": [
+          111
+        ],
+        "FirstNormalInverseEstimate": [
+          527
+        ],
+        "IsRadialReference": [
+          590,
+          601
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bStateProfileType.lean",
+      "blob": "32fc4ba24a0a404c220758c5ec64b4a0068c7471",
+      "sha256": "b99eb7cac1b13771f48a1584592e54b1872249571874263c3e9063aa20cf8528",
+      "lines": 282,
+      "anchors": {
+        "n04bStateLogExponent": [
+          31
+        ],
+        "n04b_stateLine_radicand_pos": [
+          194
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08ControlLocality.lean",
+      "blob": "5e627530d6f93b85043a012a5dfa0d4cc83ef5a1",
+      "sha256": "0ba988879731038c815f86ee8b233d8a3b6030c2998a18a90d1323eb773a749f",
+      "lines": 149,
+      "anchors": {
+        "n08_control_zero_on_other_component": [
+          23
+        ],
+        "n08_stateControlSum_on_component": [
+          31
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08CircleNuLocality.lean",
+      "blob": "5f085909825139492f11c28029f3ffb59bc5d796",
+      "sha256": "0103c46f1d41c57bfe8cab30d6d075ef42a721039bda4e4e70018900108e1eeb",
+      "lines": 258,
+      "anchors": {
+        "n08_chi_zero_on_negative_component": [
+          40
+        ],
+        "n08_stateProfile_component_germ_of_kappa": [
+          67
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bCutHeightTests.lean",
+      "blob": "6c7c9e9738dced16ad77fd233b26f3302f06b1e0",
+      "sha256": "343185a846252243cf1ea3eb6eb80fce93aa5ef209304f0675e5e471ebde20e3",
+      "lines": 64,
+      "anchors": {
+        "n04b_heightPair_of_compact_radial": [
+          25
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/EvenPeriodicTestGerms.lean",
+      "blob": "977a8f4f878ee2cca5c17d7b9edd5c038b484d88",
+      "sha256": "e5890d1dee70e108018d4555c13e34e3a011da74d6a82529e1289f6174df2fb9",
+      "lines": 157,
+      "anchors": {
+        "exists_heightPair_germ_of_nonaxis": [
+          142
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bOpticalHeightVariation.lean",
+      "blob": "a937050cc6246588dfd63fe8a8f04a72bc0d48d0",
+      "sha256": "9a8cff80755570302fdc4c031f2f03d0d114d88d96d64a1eddf934c887c379f9",
+      "lines": 137,
+      "anchors": {
+        "n04b_hasDerivAt_characteristicSpeed_radialHeight": [
+          83
+        ],
+        "n04b_hasDerivAt_characteristicSpeed_radial_increment": [
+          120
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01NegativeOpticalLower.lean",
+      "blob": "97867a8a9f61e1974994cd8f081bee6fbcae9989",
+      "sha256": "55bf0f53a5925af0f306d20439d1ea415a8eed9caa33f86527be4385c47052c8",
+      "lines": 180,
+      "anchors": {
+        "n04Coordinates_stateProfile_opticalRadicand_half": [
+          69
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ReferenceOpticalCollars.lean",
+      "blob": "1f5847b70eefda6e0665e3101b24de4671aa53aa",
+      "sha256": "3b61562bde1d81e3c2361b6d33b66417dc6d47f1287248df49805cc20bdcb283",
+      "lines": 195,
+      "anchors": {
+        "reference_opticalCollars": [
+          145
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ProfileScalarWeightedCaccioppoli.lean",
+      "blob": "4dc5cf6dc37e31b71d590a0792bb748321bde27f",
+      "sha256": "67d8023acfaa63bb77724a46ab6cb3c5f2893640bd3203c437e51272d20f3f1a",
+      "lines": 159,
+      "anchors": {
+        "profile_scalar_weighted_caccioppoli": [
+          22
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/R11bModeDerivativeBounds.lean",
+      "blob": "6bd913d098b456084040e3ca376a48f4fdeacd38",
+      "sha256": "9606b39085e310c57203a86be5d160c2e66921b1211f219a2fd19e171cb70d2d",
+      "lines": 184,
+      "anchors": {
+        "r11b_mode_derivative_bounds": [
+          32
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/R11bFirstNormal.lean",
+      "blob": "5494e47d9c1de9103ebc08d56388a57691207198",
+      "sha256": "0c104ae315e7b26960191435924e335d1eb3a5c77ec1f3b65868a6d5c8065abb",
+      "lines": 116,
+      "anchors": {
+        "r11b_firstNormalInverseEstimate": [
+          25
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01aReferenceGreen.lean",
+      "blob": "de167a4ff87f9cc0987343ab588a9a40a4ad2dbd",
+      "sha256": "fecc1cb534efde1bb797f57b6dc54295eb8e11265af0a0516c388221b75d71a3",
+      "lines": 124,
+      "anchors": {
+        "integral_radialJacobi_symm": [
+          48
+        ],
+        "radialTest_cosine": [
+          91
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/R11bFourierTests.lean",
+      "blob": "0d22b8a978bbe12dbc8b17a6227aa8b5a772a184",
+      "sha256": "5ae409433065e04a65cbb5ab5adfbcee8e9c5a7a1c2a7972fb6fc22d2bde11bb",
+      "lines": 130,
+      "anchors": {
+        "r11b_radialTest_separated": [
+          74
+        ],
+        "r11b_radialPartial_separated": [
+          112
+        ]
+      }
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bConstructedRootDensity.lean",
+      "blob": "32bb22fc7e17a99cf7273062ef7045f7f56bd859",
+      "sha256": "b59f3fe82209f565c6470c3c666e24680a45964c598d76e344649e141ba58f4c",
+      "lines": 131,
+      "anchors": {
+        "n04bRootPhysicalHeight": [
+          23,
+          28,
+          37
+        ],
+        "n04b_coordinatePrincipalDensity_constructedRoot": [
+          56
+        ]
+      }
+    }
+  ],
+  "verification": {
+    "compiled": false,
+    "ci_queried": false,
+    "checkout_index_refs_CP_authority_or_plan_changed": false,
+    "no_target_bounds_or_final_geometry_assumed": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "actual_n01_profile_direction_testing_candidate",
+  "status": "UNCOMPILED; independent review pending; not a uniform root-kappa bound",
+  "author": "/root/audit_coordinates",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01ProfileDirectionOpticalBound.lean",
+  "blob": "906e13e5883390fc6f2c9ff8a4f50ac394d9a43e",
+  "sha256": "21ec6dc32918acc8ba134f4dc9b17d57e3b709769ac36ed21e049a105396bb3f",
+  "lines": 59,
+  "inspection_head": "9f88931ad3308f43d350ba84f4c9b323ced92986",
+  "public_declarations": [
+    "ContinuousFlexibility.Statements.N01Properties.profileDirection_optical_bound"
+  ],
+  "math": "Use the exact existing state-line optical radicand positivity at t=-a/b. If epsilon*abs b>a*grading, this parameter lies in the original state ball but its radicand is zero, a contradiction. No seminorm positivity or division by the grading is needed.",
+  "limits": [
+    "Only actual logarithmic-profile directions n04bStateLogExponent are tested.",
+    "No arbitrary compact profile bump is admitted.",
+    "This statement does not claim uniform simple-root nondegeneracy or replace the current Through03 witness."
+  ],
+  "verification": {
+    "compiled": false,
+    "checkout_changed": false,
+    "ci_queried": false
+  }
+}

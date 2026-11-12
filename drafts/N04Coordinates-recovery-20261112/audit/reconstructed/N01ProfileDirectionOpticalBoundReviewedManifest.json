@@ -1,0 +1,27 @@
+{
+  "kind": "actual_n01_profile_direction_testing_reviewed_candidate",
+  "status": "STATIC_REVIEWED_UNCOMPILED; NOT_A_ROOT_KAPPA_BOUND",
+  "author": "/root/audit_coordinates",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01ProfileDirectionOpticalBoundCandidateManifest.json",
+    "sha256": "7137d0b2357b018c5eb978b326280cbd06c12e19d34b7278338fec2b283a632b"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/N01ProfileDirectionOpticalBound.lean",
+    "blob": "906e13e5883390fc6f2c9ff8a4f50ac394d9a43e",
+    "sha256": "21ec6dc32918acc8ba134f4dc9b17d57e3b709769ac36ed21e049a105396bb3f",
+    "lines": 59
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N01ProfileDirectionOpticalBoundIndependentReview.json",
+    "sha256": "72c766bc6811766418c3afa0d00111fe9a6a3219ef59ec436cfbcdf820e7acc7"
+  },
+  "limits": [
+    "Only actual logarithmic-profile directions n04bStateLogExponent are tested.",
+    "No arbitrary compact profile bump is admitted.",
+    "This statement does not claim uniform simple-root nondegeneracy or replace the current Through03 witness."
+  ],
+  "source_changed_after_review": false,
+  "compiled": false,
+  "checkout_index_refs_CP_authority_or_CI_changed": false
+}

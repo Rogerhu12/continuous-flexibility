@@ -1,0 +1,61 @@
+{
+  "kind": "independent_ci129_exact_proof_repair_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_static_independent_review",
+  "base_commit": "9f88931ad3308f43d350ba84f4c9b323ced92986",
+  "base_tree": "07f7446759824fb5ebe2c248f34d387e0344e329",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair129/CI129OwnedRepairsCandidateManifest.json",
+    "sha256": "7eb069cd7f297c997307063b878a77f401bfb6528680d1cc99c36d8c1b844f48"
+  },
+  "cached_diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-129-errors.json",
+    "sha256": "6ce12a690fa2911cdd06cb6fce6796b3e92d67a7616cede68c5b561dfb261409"
+  },
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TaylorReferenceIdentity.lean",
+      "candidate": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair129/TaylorReferenceIdentity.lean",
+      "before_blob": "ee5ceca7db9613687d5d850d00bfc087913fa6f4",
+      "after_blob": "638cb5421ada7cf2022cdcf415e0a230f7159624",
+      "before_sha256": "8d9d6965d80293453d371482a6d93a17787bed7cba2d48f69e59afaf367317b2",
+      "after_sha256": "afdff518350fd9ae40e1d8d555bd6e699358856d558e9960dc1f596ad1f1b344",
+      "before_lines": 103,
+      "after_lines": 103,
+      "exact_base_matches_git": true,
+      "exact_patch_only": true,
+      "public_headers_count": 6,
+      "public_headers_byte_identical": true,
+      "imports_namespace_open_options_byte_identical": true,
+      "findings": [
+        "The two cached goals are exactly literal if True reductions; ite_true closes the remaining zero-order and first-order Taylor terms without changing the finite sum or reference data."
+      ]
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/EndpointHeightValueBounds.lean",
+      "candidate": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair129/EndpointHeightValueBounds.lean",
+      "before_blob": "30b042d263e384a261f3ec98a12e6aeb1e231db8",
+      "after_blob": "fdc99276df839a54c8982d201b6bfc29e661054c",
+      "before_sha256": "bf0ddce6fbf7e23760bd74208b5822bd362041fc45a759865ba3eb2c659eb819",
+      "after_sha256": "9ef9a3b04d5f7f8c06371b1bb0021cd6c901aa6a4cf47d0811e48b49a0737090",
+      "before_lines": 97,
+      "after_lines": 97,
+      "exact_base_matches_git": true,
+      "exact_patch_only": true,
+      "public_headers_count": 2,
+      "public_headers_byte_identical": true,
+      "imports_namespace_open_options_byte_identical": true,
+      "findings": [
+        "The actual real ordered-additive triangle inequality abs_add_le has the required two summands and inequality direction at both sites.",
+        "The first use rewrites (P-A0)+A0 to P and retains the original Taylor bound; the second adds the two actual cutoff terms before the unchanged exponential amplitude calculation."
+      ]
+    }
+  ],
+  "scope": "Complete candidate source and exact delta checked against the cached diagnostics and the actual provider signatures; no public statement, assumptions, imports or budget change.",
+  "verification": {
+    "compiled": false,
+    "CI_queried": false,
+    "peer_source_edited": false,
+    "checkout_index_refs_CP_authority_or_plan_changed": false
+  }
+}

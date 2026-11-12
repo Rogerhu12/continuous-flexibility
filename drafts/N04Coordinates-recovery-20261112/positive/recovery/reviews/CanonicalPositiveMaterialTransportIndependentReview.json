@@ -1,0 +1,91 @@
+{
+  "kind": "actual_same_factory_positive_material_ratios_independent_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_static_review_uncompiled",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentMaterialRatios.lean",
+      "sha256": "2dfff655c5575a76da5387ca4969f9ccb8ca1c92556627ece0346e0e6a0acf2b",
+      "blob": "6f611309001a834188a0a8b6a05fb8357a645942",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveMaterialTransport.lean",
+      "sha256": "3e1c0d8569ff87bd34f422ae8766de5a06e67a893bf530579a9f34d73d78f8f4",
+      "blob": "6fc915637b512c9aa7a03cbae9b1f3883e92b5dd",
+      "lines": 130
+    }
+  ],
+  "actual_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/WholeComponentCollarInvariance.lean",
+      "sha256": "33ae5d9e2855607c18f50e1d95bb6cacd39b216c1b156b80b36c451626055e3e",
+      "blob": "adabd2c2c1add0882c4bfb8f3f54eee1b3b445ce",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/EndpointDistanceMaterialTransport.lean",
+      "sha256": "b1d7ff11657582113250ca84c35b0438b27720024571a28728154317e6aac38c",
+      "blob": "2ac0da28435347bed8e7020d545f622c5d694d84",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveAmbientSource.lean",
+      "sha256": "a6ed8815ca40302c184f0a714ad90d0cb929079b9263b6fad8e425601f7cf7c3",
+      "blob": "3e8da743d6e554470c1c63e08bc71c3a8d016a5f",
+      "lines": 71
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
+      "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2",
+      "blob": "0a39d374324401eca98e44da7633c49057349b56",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveTransportAssembly.lean",
+      "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138",
+      "blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c",
+      "lines": 208
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberInterpolation.lean",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f",
+      "blob": "b7e4b696b9bf1296eeb076700e97f7e1cd923793",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrescribedEndpointWidth.lean",
+      "sha256": "47eaf19679711125095351bb27d7c65fc384c2a2c69d0225018a11edd0ab998c",
+      "blob": "a9219180dff663e0ee1bc9125078551a99faa308",
+      "lines": 67
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "blob": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "lines": 1430
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    }
+  ],
+  "checks": [
+    "Read all 102 and 130 lines plus exact local providers. A single side argument combines true capped collar invariance with both physical points lying within half the same interior endpoint distance.",
+    "The interior-side point and its actual transport image receive the same endpointDistance material comparison; middle and ambient identities use that same comparison with equal points, avoiding any unsupported E0>=1 assumption.",
+    "The actual matching zero jet gives the same map endpoint radius. The actual endpoint field is supplied by the retained atlas, not a new source or changed witness.",
+    "The displayed endpointFiberWidths formula itself gives positivity and strict gap with the same n/kappaX/M_sigma. The helper has no fresh choice of widths or inverse bound.",
+    "At an ambient endpoint, true interior negative-root bounds force the source option to none; its actual radial germ is identity. The proved one-sided interpolation identity therefore gives radial identity throughout the chosen ambient collar.",
+    "The final theorem uses the exact existing oneSidedWholeComponentTransport and its matching certificate. It neither calls the factory again nor reselects M_sigma, Q, inverse, higher jets, cell or Through03 witness.",
+    "Constants B,A precede n, component, endpoint source choices, state and point. The two exit caps remain explicit numerical geometric constraints and are not replaced by a final ratio premise."
+  ],
+  "not_claimed": [
+    "Lean compilation",
+    "uniform higher primitive jet bounds from these ratio lemmas alone",
+    "a material cell containing the whole positive component"
+  ],
+  "compiled": false,
+  "source_checkout_index_refs_CI_authority_plan_modified": false
+}

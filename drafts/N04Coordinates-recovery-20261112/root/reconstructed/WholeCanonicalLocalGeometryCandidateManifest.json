@@ -1,0 +1,26 @@
+{
+  "kind": "whole_atlas_actual_chart_fields_and_buffer_localization",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "files": [
+    {
+      "file": "src/ContinuousFlexibility/Analysis/WholePositiveNormalizationGeometry.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholePositiveNormalizationGeometry.lean",
+      "lines": 54,
+      "sha256": "258e06700f5f0e84598e64fec5e4dee4a85fbbbc0a0828afa42e5d8d7b6c6003",
+      "blob": "55e5d6f3e32b9aa346e429db946c25279583246d"
+    },
+    {
+      "file": "src/ContinuousFlexibility/Analysis/WholeCanonicalAtlasChartGeometry.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasChartGeometry.lean",
+      "lines": 130,
+      "sha256": "1123a04d8c8fe1651a26e87ee11f93dd0c3fcb35349932cfb6c23fec6723be17",
+      "blob": "04ce92fce8e5820f967c0ba34834a13002eab818"
+    }
+  ],
+  "scope": [
+    "Locate each normalization point in its own middle using actual component disjointness.",
+    "Transfer the existing negative chart fields and actual positive transport geometry to the single whole-atlas record.",
+    "No partition, primitive bounds, cell choice, or final parent completion is claimed."
+  ],
+  "compiled": false
+}

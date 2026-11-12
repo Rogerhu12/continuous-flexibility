@@ -1,9 +1,0 @@
-{
-  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/EndpointHeightPolynomialEnvelope.lean",
-  "module": "src/ContinuousFlexibility/Analysis/EndpointHeightPolynomialEnvelope.lean",
-  "blob": "25ffa3beb3bd3272b28d2925608e2da2e0a13546",
-  "sha256": "6dd7f2b227919326c4e5c430474bd4d0d9365b66150c2f7817a612c7e89fed7e",
-  "lines": 113,
-  "compiled": false,
-  "scope": "Actual constructed Q and reciprocal full jets; actual small-collar amplitude from raw endpoint values, with separate M0 so delta-inverse need not satisfy the smallness condition. Constants fixed before all numerical/field data; degree (N+1)*N+2."
-}

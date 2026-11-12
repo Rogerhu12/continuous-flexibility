@@ -1,0 +1,17 @@
+--- src/ContinuousFlexibility/Analysis/TaylorReferenceIdentity.lean@9f88931ad3308f43d350ba84f4c9b323ced92986
++++ /workspace/scratch/bbbea77e4163/n04-drafts/audit/repair129/TaylorReferenceIdentity.lean
+@@ -49,12 +49,12 @@
+     by_cases hj0 : j = 0
+     · subst j
+       simp only [radialBoundaryJet, iteratedDeriv_zero, Nat.factorial_zero, Nat.cast_one,
+-        div_one, pow_zero, mul_one, if_pos rfl, Nat.zero_ne_one, ite_false, add_zero]
++        div_one, pow_zero, mul_one, if_pos rfl, Nat.zero_ne_one, ite_false, ite_true, add_zero]
+     · by_cases hj1 : j = 1
+       · subst j
+         simp only [radialBoundaryJet, iteratedDeriv_fun_id, Nat.factorial_one,
+           Nat.cast_one, div_one, pow_one, one_mul, Nat.one_ne_zero, ite_false, if_pos rfl,
+-          zero_add]
++          ite_true, zero_add]
+       · simp only [radialBoundaryJet, iteratedDeriv_fun_id, if_neg hj0, if_neg hj1,
+           zero_div, zero_mul, zero_add]
+   have hzero : 0 ∈ Finset.range (n + 1 + 1) := Finset.mem_range.mpr (by omega)
