@@ -1,0 +1,113 @@
+--- c5c48/N01EndpointSplitEnergy.lean
++++ parameter-order/N01EndpointSplitEnergy.lean
+@@ -6,8 +6,8 @@
+ 
+ The two summable envelopes retain different local derivative orders.
+ For an angular order b and a material degree c their total physical
+-orders are base+c+6 and b+loss+c+6. This separation is the input for the
+-fixed-loss interpolation argument.
++orders are base+c+6 and b+loss+parameterLoss+c+6. The extra loss is
++chosen at parameter order n+1 before every angular and material order.
+ -/
+ 
+ noncomputable section
+@@ -43,30 +43,34 @@
+ /-- The constants are fixed before every choice of closed flow radii. -/
+ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
+     (hN : N01Properties D T S C base loss ε)
+-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n b c : ℕ) :
+-    ∃ K : ℝ, 0 < K ∧
++    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n : ℕ) :
++    ∃ parameterLoss : ℕ, ∀ b c : ℕ, ∃ K : ℝ, 0 < K ∧
+       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)), ∀ z ∈ sectorNeighborhood S base ε ε,
+       ∀ vs : Fin n → (StateDirections S × ℝ),
+       (∀ i, pairGrading (sectorGrading S) realGrading base (vs i) ≤ 1) →
+       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
+-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss + parameterLoss) z +
++          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss + parameterLoss) (vs i)) *
+             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
+-          Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
+-  let pointData := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT (n + 1) b
++          Real.sqrt (stateLocalizationEnergy D T C (b + loss + parameterLoss) (c + 1) v m).toReal) := by
++  obtain ⟨parameterLoss, horder⟩ :=
++    hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT (n + 1)
++  refine ⟨parameterLoss, ?_⟩
++  intro b c
++  let pointData := horder b
+   let K : ℝ := pointData.choose
+   have hK : 0 < K := pointData.choose_spec.1
+   let L₀ : ℝ := 1 + circleSingletonGradingConstant base * (2 * circleSobolevConstant)
+-  let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss) * (2 * circleSobolevConstant)
++  let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss + parameterLoss) * (2 * circleSobolevConstant)
+   have hL₀ : 0 < L₀ := by
+     have h := mul_nonneg (circleSingletonGradingConstant_nonneg base)
+       (mul_nonneg (show (0 : ℝ) ≤ 2 by norm_num) circleSobolevConstant_nonneg)
+     dsimp only [L₀]
+     linarith only [h]
+   have hL₁ : 0 < L₁ := by
+-    have h := mul_nonneg (circleSingletonGradingConstant_nonneg (b + loss))
++    have h := mul_nonneg (circleSingletonGradingConstant_nonneg (b + loss + parameterLoss))
+       (mul_nonneg (show (0 : ℝ) ≤ 2 by norm_num) circleSobolevConstant_nonneg)
+     dsimp only [L₁]
+     linarith only [h]
+@@ -78,7 +82,7 @@
+   let w : ℕ → (StateDirections S × ℝ) := localData.choose
+   intro m θ
+   let p := pairGrading (sectorGrading S) realGrading
+-  let A : ℝ := 1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)
++  let A : ℝ := 1 + p (b + loss + parameterLoss) z + ∑ i : Fin n, p (b + loss + parameterLoss) (vs i)
+   have hA : 0 ≤ A := add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _))
+     (Finset.sum_nonneg (fun _ _ => apply_nonneg _ _))
+   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans
+@@ -97,13 +101,13 @@
+       L * Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal :=
+     (localData.choose_spec.2.2 m base (c + 1)).trans
+       (mul_le_mul_of_nonneg_right (le_add_of_nonneg_right hL₁.le) (Real.sqrt_nonneg _))
+-  have hhigh : T.M (T.sample m) ^ (c + 1) * p (b + loss) (w m) ≤
+-      L * Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal :=
+-    (localData.choose_spec.2.2 m (b + loss) (c + 1)).trans
++  have hhigh : T.M (T.sample m) ^ (c + 1) * p (b + loss + parameterLoss) (w m) ≤
++      L * Real.sqrt (stateLocalizationEnergy D T C (b + loss + parameterLoss) (c + 1) v m).toReal :=
++    (localData.choose_spec.2.2 m (b + loss + parameterLoss) (c + 1)).trans
+       (mul_le_mul_of_nonneg_right (le_add_of_nonneg_left hL₀.le) (Real.sqrt_nonneg _))
+-  have hW : oneHighVariationWeight p base (b + loss) z (Fin.snoc vs (w m)) ≤
+-      A * p base (w m) + p (b + loss) (w m) :=
+-    oneHighVariationWeight_snoc_le_of_low_le_one p base (b + loss) z vs (w m) hvs
++  have hW : oneHighVariationWeight p base (b + loss + parameterLoss) z (Fin.snoc vs (w m)) ≤
++      A * p base (w m) + p (b + loss + parameterLoss) (w m) :=
++    oneHighVariationWeight_snoc_le_of_low_le_one p base (b + loss + parameterLoss) z vs (w m) hvs
+   have hlocalized := split_energy_transfer hK.le (pow_nonneg hM (c + 1)) hA
+     (pointData.choose_spec.2 rsel hrsel m b c θ le_rfl z hz (Fin.snoc vs (w m)))
+     hW hlow hhigh
+@@ -114,18 +118,21 @@
+ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
+     (hN : N01Properties D T S C base loss ε)
+     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n b c : ℕ) :
+-    ∃ K : ℝ, 0 < K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
++    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n : ℕ) :
++    ∃ parameterLoss : ℕ, ∀ b c : ℕ, ∃ K : ℝ, 0 < K ∧ ∀ z ∈ sectorNeighborhood S base ε ε,
+       ∀ vs : Fin n → (StateDirections S × ℝ),
+       (∀ i, pairGrading (sectorGrading S) realGrading base (vs i) ≤ 1) →
+       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
+       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
+         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
+-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
+-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
++        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss + parameterLoss) z +
++          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss + parameterLoss) (vs i)) *
+             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
+-          Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
+-  let data := hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n b c
++          Real.sqrt (stateLocalizationEnergy D T C (b + loss + parameterLoss) (c + 1) v m).toReal) := by
++  obtain ⟨parameterLoss, horder⟩ :=
++    hN.endpointFlowScalarJets_state_split_energy_bound_uniform_radius hS hT n
++  refine ⟨parameterLoss, fun b c => ?_⟩
++  let data := horder b c
+   exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
+ 
+ end ContinuousFlexibility.Statements

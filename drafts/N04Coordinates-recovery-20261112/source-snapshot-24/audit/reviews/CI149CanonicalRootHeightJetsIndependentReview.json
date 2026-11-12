@@ -1,0 +1,99 @@
+{
+  "kind": "independent_full_source_and_actual_CI_repair_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJetsCI149RepairCandidateManifest.json",
+    "sha256": "3f54b478b52f59d97266ccf0818b65285c7220bee38819ba115cddc999c00982",
+    "blob": "7842c1ed21383e89303b8e8155ff05b7fadcef74",
+    "lines": 111
+  },
+  "actual_head": "c8299751750decf27765045c36c280d249622f7e",
+  "actual_tree": "595109a492679b00341215a00cbdd10815b2ae39",
+  "cached_ci_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-149.log",
+    "sha256": "6b36e8a6d4ac5d7c59047b826fe3ac26eefd5c3ee9745189ba0f6d75450198df",
+    "blob": "0be9dda87c262bef3766739fe95c44ed8dbe860c",
+    "lines": 735
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJets.base.lean.txt",
+    "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+    "blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+    "lines": 159
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJets.lean",
+    "sha256": "788ab4cd62091dde2fe969ef357e5f7c1b961e9a80b24368ff085c9b8739a0bd",
+    "blob": "4decaad9abcf27a2281d7965de59cff376a6a8f2",
+    "lines": 166
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJets.diff",
+    "sha256": "b71e59b4d6e148f6f50b7fcddf3a898519d0faeed77748cee8cb067d438774e0",
+    "blob": "44d9b518b6515dd8360b66eb7e82b342dfbc9586",
+    "lines": 20
+  },
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N03RootEndpointPhysicalJets.lean",
+      "sha256": "ef46dcdc6d0e03ddd94fc925199cc655cb8652117fc4c2256c36f4b8949ec066",
+      "blob": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+      "lines": 406
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootModelAllAngleJets.lean",
+      "sha256": "215e71554553de5d621830c44ac1c3bdc4fc44ce9b9c041eea3f68cdbfdaaacf",
+      "blob": "77b79e8102023ae330aed05aa900f392b9fb5573",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RelativeRootJetBounds.lean",
+      "sha256": "7ff2f63bcb7e700e299e7000ddfbb0076fc2bc14621d9ec5dc50b0b0d1081c9b",
+      "blob": "e9b78a99bc8fc10e22a9eac79a7bd396400a6858",
+      "lines": 203
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseMaterialJetOperations.lean",
+      "sha256": "6d100022491b6a0858badce398873d75f9a1642dc309f11beaf9ad7e1c4eb14c",
+      "blob": "58f9546e8979123ef35e36a79ca56b54081c5312",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    }
+  ],
+  "read_scope": [
+    "Entire current159 and candidate166, exact9+/2- single block, cached actual149 diagnostic context; actual RootPhysicalFieldJetBound definition, endpoint family and current common endpoint theorem, true root radial preservation proof, from_zero/multiplication/composition/monotonicity contracts."
+  ],
+  "checks": [
+    "The base is byte-identical to actual c8299751750decf27765045c36c280d249622f7e source, and its tree equals595109a492679b00341215a00cbdd10815b2ae39. Candidate/base/diff/log and seven provider references have exact verified hashes.",
+    "The cached first diagnostic is the isDefEq timeout at rw[hy] on line117; line37 reports the containing declaration whnf timeout. The new block does not increase heartbeats or change any options.",
+    "The actual endpoint family result at angle (tau(r,theta)).2 has exactly the typed point (r,(tau(r,theta)).2), the same chart K.chart z i, the same height K.height z i, and the same original grading/rootLoss/A/state displacement.",
+    "The actual root radial theorem gives hy:tau(r,theta)=(r,(tau(r,theta)).2). congrArg of the fixed PolarPoint-to-Prop predicate therefore gives P(tau(r,theta))=P(r,(tau(r,theta)).2). Eq.mpr transports the existing right-hand proof to precisely the required left-hand proposition; no field, constant or point is replaced.",
+    "The predicate fixes every argument except the final physical point. This removes the broad rewriting search through the chart/height/grading proposition while preserving the genuine original equality transport.",
+    "Exact inverse replacement recovers all159 base lines byte-for-byte. The full initial public definition, full public theorem header, imports/options, and all other proof bytes are unchanged. No new declarations or assumptions are introduced."
+  ],
+  "limitations": [
+    "Static correctness and targeted elaboration structure are reviewed. Runtime/heartbeat improvement remains for the next real CI; no local compilation or performance success is claimed.",
+    "No compiler/elaborator, CI query/download, active checkout/index/ref/CP/authority mutation."
+  ],
+  "compiled": false,
+  "source_edited": false
+}

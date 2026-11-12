@@ -1,0 +1,156 @@
+{
+  "kind": "independent_full_source_six_material_ratio_reference_jets_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "author": "/root/audit_coordinates",
+  "reviewer": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialRatioReferenceJetsCandidateManifest.json",
+    "sha256": "803aa80c978eedb9a7e43c6e58992669d0649e8f1b4e218b2aef4da7b263e419",
+    "blob": "b769d4b0735a3680cfcecbe71b0ee46a8d351975",
+    "lines": 147
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialRatioReferenceJets.lean",
+    "sha256": "4bfb475cc506c8468b2d97a2784ca520631e30bee93238453af869a85347e794",
+    "blob": "ad4acc20487419326feee8b4a60948a8b8f30b4c",
+    "lines": 209,
+    "target": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeMaterialRatioReferenceJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry",
+      "ContinuousFlexibility.Analysis.RetainedPositiveMaterialRatioJets",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialRatioJets",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeEnvelopeRatioJets",
+      "ContinuousFlexibility.Analysis.CanonicalStaticAtomRegularity"
+    ],
+    "public_names": [
+      "canonicalMaterialRatioSelector",
+      "canonical_materialRatioAtom_exists_selector",
+      "canonicalMaterialRatioSelector_eq_normalizedPower",
+      "n04WholeReferenceGauge_materialRatio_jets",
+      "n04WholeReferenceGauge_materialRatioReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometry.lean",
+      "sha256": "4f072b993a7fbd52172dac1a91b2a78b02da1faa40df9fa97c3cf40a9e1f4c87",
+      "blob": "85ab47ca2402a1ce02b8126355622119ac6fcb6c",
+      "lines": 127
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJets.lean",
+      "sha256": "4cacd7bd8a6fe2cc6a9574253adea1b21b8efbba691c05a4a704b88663047680",
+      "blob": "f8849fb6a9a508a1ccd33e2bd92ff7119c1778db",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialRatioJets.lean",
+      "sha256": "80250a729978a583c36c344f601368419515fb21297ce259c8e1649d48c2f9aa",
+      "blob": "2d44aac761c86a2aaf853c78e974a34d024530c7",
+      "lines": 205
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeEnvelopeRatioJets.lean",
+      "sha256": "6f74ca254782456bcff45ee58111dc2b28a4da0efcf0264e78299723dfc6a987",
+      "blob": "f4d88e3c8dcaee554ef771092797ac4bf0979dfd",
+      "lines": 151
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/static-atom-scopes/CanonicalStaticAtomRegularity.lean",
+      "sha256": "9d72bd623498f0b35ecbabf3c641ba2ff6714e130885d7ecf77f9a5fe80a1351",
+      "blob": "c12cad8933e5e17bbc28502d019472186fdd016c",
+      "lines": 70
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalMaterialRatioDifferenceJets.lean",
+      "sha256": "bec5b3cc05e723429b721ab52e6aa6c98b40b89e592e0828c5b0ed6214b07e0b",
+      "blob": "b8141749c0dfd2121f965b65d1644e6bcb9a13a7",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "sha256": "5f73ab50c8dd436e8bfd4039f30722eaba68cbc77bcc862efff43251faff88e7",
+      "blob": "4523f8385550033058d8f7593f8a397a33157576",
+      "lines": 308
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometryReviewedManifest.json",
+      "sha256": "a51fd15fff4cd1e8997e5e66da32b1f26e91450d1d0631409af5450269e606f8",
+      "blob": "da5287476d1f3eb1c04836ef9bf444f308d84ecb",
+      "lines": 39
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJetsReviewedManifest.json",
+      "sha256": "f697492d56e429069e6150a4a3180f51535a9d07d617f27bf68022f4ea735321",
+      "blob": "112751de2baf6c065d040ec659333f36a45ba9a8",
+      "lines": 50
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/NegativeMaterialRatioReferenceJetsReviewedManifest.json",
+      "sha256": "572dcd9a841da0f548931adf033255570342c4de39651e3ad2a080e436f30bd2",
+      "blob": "a1afb6dc971f7cea1001cef71f699d0db39110a9",
+      "lines": 106
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/NegativeEnvelopeReferenceJetsReviewedManifest.json",
+      "sha256": "ceb728e0006588317dbf8e25d374bf391627418f516fff5cc5f8ee66600aeb55",
+      "blob": "bd990c7351d8c75f4264d2195b1dada573684462",
+      "lines": 206
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/static-atom-scopes/WholeReferenceGaugeStaticAtomRegularityReviewedManifest.json",
+      "sha256": "c4d0e20bb909244b7c3cae080893a26e401c0b23214bf2a77cba532b8909fea9",
+      "blob": "2438d9786d10d13019b0131d147d72e659891560",
+      "lines": 135
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalMaterialRatioDifferenceJetsReviewedManifest.json",
+      "sha256": "99492016d90c172e78062b39df09f64422466d335ec7258645f89424afc816d2",
+      "blob": "ab9b234acf2b33df32b854014138deb63ddbfa62",
+      "lines": 42
+    }
+  ],
+  "selected_supersession": {
+    "module": "ContinuousFlexibility.Analysis.RetainedPositiveMaterialRatioJets",
+    "selected_source": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJets.lean",
+      "sha256": "4cacd7bd8a6fe2cc6a9574253adea1b21b8efbba691c05a4a704b88663047680",
+      "blob": "f8849fb6a9a508a1ccd33e2bd92ff7119c1778db",
+      "lines": 188
+    },
+    "reason": "Final 188-line section-binder and include/doc-layout compatibility, independently reviewed by the superseding 53f1 receipt. Original 186 and first 188 candidate remain historical and unselected."
+  },
+  "read_scope": [
+    "Entire209-line candidate and complete manifest; entire final188 scalar normalized-power provider; complete same-V127 geometry; exact whole-HM and whole-E0 function identities, all70 static-regularity lines, the six-atom selector predicate, true affine/mixed-derivative identities and the exact envelope packing/floor lemmas."
+  ],
+  "checks": [
+    "The Boolean selector covers all six actual ratio atoms, with a whole-function equality before differentiation. Its duplicated E0 code for useM has no mathematical effect.",
+    "All retained P/Gamma certificates and original midpoint membership are explicit included binders. The exact old atlas and whole V, negative samples and positive midpoint samples are used through the same-V127 geometry.",
+    "The general physical bound uses only the verified actual scalar jets and two-sided endpointX comparison at those same physical/sample points; H/M denominator powers cancel exactly, while E0 uses its separately proved actual scalar estimate.",
+    "Unit rescaling pays only a positive power of the fixed physical width. Positive angular order is exactly zero, so constants can precede every angular order and state.",
+    "U has an explicit true IsMaterialData contract and U.sample=T.sample. The proof does not identify new E0 ratio functions with the old ones.",
+    "In the final bound U is exactly enlargedMaterialData T. Its actual material contract and proven E0 floor support finite packing over Fin(s+1) times three Boolean indices. One positive constant precedes all six atoms, pieces, states, points and mixed orders.",
+    "Ordinary smoothness and pi periodicity use the actual U and true core inclusion. The final source uses the reviewed188 section-binder compatibility and all own proof-only binders are explicitly included."
+  ],
+  "scope_limits": [
+    "Only six material ratio reference spatial obligations are established; other atoms and the complete PrimitiveGeometryProperties certificate remain separate.",
+    "No compilation, elaboration, active checkout/index/ref or public-contract mutation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T14:32:33.146457+00:00"
+}

@@ -1,0 +1,24 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section/RetainedPositiveMaterialRatioJets.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJets.lean
+@@ -101,9 +101,9 @@
+   (hC : controlGeometryConditions Γ.reference S C)
+   {T : MaterialData} (hT : IsMaterialData Γ.reference T)
+ 
++include P hS₀ hband hq hΓ hw hcoordinates hC hT in
+ /-- The genuine midpoint may belong to any actual host cell. Its sample
+ and the entire closed component are kept throughout all orders. -/
+-include P hS₀ hband hq hΓ hw hcoordinates hC hT in
+ theorem retainedReference_positive_materialRatio_physical_jets
+     (envelope useM : Bool) (γ : ℝ) (n : ℕ) :
+     ∃ B A : ℝ, 0 ≤ B ∧ 0 ≤ A ∧
+@@ -127,9 +127,9 @@
+   exact hjet r (T.sample j) ⟨hl.trans_le hr.1, hr.2.trans_lt hu⟩
+     (materialSample_mem_interval hΓ.2.1 hT j) (hdist i j hhost r hr)
+ 
++include P hS₀ hband hq hΓ hw hcoordinates hC hT in
+ /-- Every angular order is zero except order zero. Physical unit
+ coordinates cost a positive width power bounded by the annular width. -/
+-include P hS₀ hband hq hΓ hw hcoordinates hC hT in
+ theorem retainedReference_positive_materialRatio_unit_jets
+     (envelope useM : Bool) (γ : ℝ) (a : ℕ) :
+     ∃ B A : ℝ, 0 ≤ B ∧ 0 ≤ A ∧

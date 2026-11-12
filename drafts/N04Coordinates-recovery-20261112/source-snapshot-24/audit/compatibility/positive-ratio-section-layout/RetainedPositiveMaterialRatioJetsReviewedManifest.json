@@ -1,0 +1,50 @@
+{
+  "kind": "reviewed_actual_retained_positive_material_ratio_jets_with_explicit_hypotheses",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJets.lean",
+    "sha256": "4cacd7bd8a6fe2cc6a9574253adea1b21b8efbba691c05a4a704b88663047680",
+    "blob": "f8849fb6a9a508a1ccd33e2bd92ff7119c1778db",
+    "lines": 188,
+    "target": "src/ContinuousFlexibility/Analysis/RetainedPositiveMaterialRatioJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJetsSectionLayoutCandidateManifest.json",
+    "sha256": "effbd1286c8a00144a4835bf8aa020db730c1928a92e5f3710b0f0acd076688e",
+    "blob": "b23fc2d63f296bae97885b9d2b60e6aecd98ca06",
+    "lines": 41
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RetainedPositiveMaterialRatioJetsSectionCompatibilityIndependentReview.json",
+    "sha256": "53f1e94f0c28213ad66ed1f9adb2ee2b5fa8ac20efc8b67185a939c142c4518c",
+    "blob": "a4fc933d6e71b12ceb645a4bf57980709be8a20d",
+    "lines": 132
+  },
+  "supersedes_for_future_source_selection": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveMaterialRatioJets.lean",
+      "sha256": "86a4f1a88b3c211a3806fd6dad9288051a1c5dd12c5752f9e8684a942dfb9413",
+      "blob": "9f27b309438e4bb590bc2adb29bb96a926b04ec6",
+      "lines": 186
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section/RetainedPositiveMaterialRatioJets.lean",
+      "sha256": "3e8ee8b97b4394006b2e11b97d287a9203b839a9077dbccd140f28380973f996",
+      "blob": "e01cc02275a288262d1461eae445ec7256d97378",
+      "lines": 188
+    }
+  ],
+  "historical_review_not_current_readiness": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RetainedPositiveMaterialRatioJetsIndependentReview.json",
+    "sha256": "001825379a70686b72d1e18cfa514e408ae5fc3dd9a551f5916aa1ceb50cd20b",
+    "blob": "03e41b2aff6bdb0c7e591bc59a72c48a8218f98d",
+    "lines": 126
+  },
+  "scope": [
+    "Final source explicitly includes all nine retained/material proof hypotheses on its two section theorems, with include before the documented declaration.",
+    "The original186 source lacked these required section hypotheses; its original001825 static receipt is retained as history and is superseded for readiness. The first188 compatibility had the documentation/include layout issue and is likewise not selected.",
+    "All proof bodies and the actual constant/sample/point choices are unchanged; these genuine normalized H/M/E0 power estimates retain the original material datum and have no E0>=1 assumption."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}

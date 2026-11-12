@@ -1,0 +1,45 @@
+{
+  "kind": "reviewed_same_actual_reference_slope_all_order_envelope",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJetsCandidateManifest.json",
+    "sha256": "ebade1556b5213ba81fa8e0d728d57449feb4b34d46ec55f95abaf1f68e09fde",
+    "blob": "e45befc487abedaf5fd57c483e08100150c16cf0",
+    "lines": 88
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJets.lean",
+    "sha256": "675bdd7d913c69aec27edef3c59d9b65c97dcc3693e93158294147f41971f510",
+    "blob": "1b03ae7c2ad6603d9bf99d97086b35bc6309269a",
+    "lines": 99,
+    "target": "src/ContinuousFlexibility/Analysis/PositiveReferenceSlopeAllOrderJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets",
+      "ContinuousFlexibility.Analysis.PositiveReferenceLinearJetEnvelope",
+      "ContinuousFlexibility.Analysis.PositiveReferenceCoordinate"
+    ],
+    "public_names": [
+      "exists_positiveReferenceSlope_allOrder_jet_envelope",
+      "exists_positiveReferenceCoordinate_allOrder_positiveJet_envelope"
+    ]
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveReferenceSlopeAllOrderJetsIndependentReview.json",
+    "sha256": "5b76c87f76ee52c0a773b5fa903dca7df65aeeecc836173964d2bcd13c73b7b3",
+    "blob": "240cd3a48b82225f9c95d7e27a047163aa897014",
+    "lines": 101
+  },
+  "scope": [
+    "For each N the two constants are selected from the actual fixed-cutoff and middle-weight providers before l/r/delta/U/M and both endpoint functions.",
+    "The exact normalized reference slope uses total mass one, not the different balanced relative-coordinate mass. The actual positiveReferenceScale is not replaced by an abstract chosen scale.",
+    "The two actual clipped endpoint products and the actual scale times the same middle weight give (2*Ccut+Cmid)*U^N*M globally. The high endpoint envelope M stays linear and does not determine delta.",
+    "The same common Bool endpoint data are used at both roots. The single numerical argument covers both endpoints without copied cases.",
+    "The actual derivative identity for positiveReferenceCoordinate and iteratedDeriv_succ-prime transfer the same envelope to its positive-order jets.",
+    "Every selected direct provider hash matched. Public names have no installed collision.",
+    "The actual scale value bound and endpoint Taylor bounds are numerical inputs here; their already constructed displayed-width/material specialization is a subsequent step, with the same n/delta.",
+    "No new reference coordinate, inverse, material sample, witness, width or state neighborhood is selected.",
+    "No ordinary derivative claim is promoted to state SmoothDirections. No Lean compiler/elaborator, CI query or active checkout/index/ref/CP mutation."
+  ],
+  "compiled": false,
+  "source_modified": false
+}

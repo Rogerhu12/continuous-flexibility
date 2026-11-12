@@ -1,0 +1,40 @@
+{
+  "kind": "reviewed_fixed_actual_cutoff_all_order_linear_jet_envelope",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveCutoffAllOrderJetsCandidateManifest.json",
+    "sha256": "9512d9c33a0da2e8f4cefe3e6ded0f06d32c4676b3c77979035444f6496c9084",
+    "blob": "0bb6e352ad7b814defa32bbf14a24c30898ac23d",
+    "lines": 58
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveCutoffAllOrderJets.lean",
+    "sha256": "f7170eb9b7860284a13405785c2c32ca76f284b88f92a54ede76227c97ecc378",
+    "blob": "3eca4b5f99fce01b7520860bf8fc89d8d426ae12",
+    "lines": 92,
+    "target": "src/ContinuousFlexibility/Analysis/PositiveCutoffAllOrderJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N06PositiveCutoffJets"
+    ],
+    "public_names": [
+      "exists_positiveEndpointCutoff_mul_jet_envelope"
+    ]
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/PositiveCutoffAllOrderJetsIndependentReview.json",
+    "sha256": "53655b7f565f725c72bac97b9945abf26fc5d760820685cf15c9867ad9f80b0f",
+    "blob": "68ad72d1f627c653104e808aa95973cfbb62446a",
+    "lines": 72
+  },
+  "scope": [
+    "The same supplied positiveEndpointCutoff c delta is used at every order. Its existing exact cutoff jet bounds enter only through delta inverse <= U and U>=1.",
+    "For N fixed, finite sums of the true binomial coefficients times fixed cutoff constants are chosen before delta, U, the local source envelope M, center c and function f.",
+    "Inside the actual collar the exact scalar iterated Leibniz formula gives C(N)*U^N*M. The local source envelope remains linear and does not determine the width.",
+    "At every point outside that collar the genuine zero germ makes all derivatives of the clipped product vanish, without requesting global regularity of f.",
+    "All orders k<=N include zero; M may be zero. There is no side duplication, changed cutoff, geometric compactness choice, or inverse width other than the explicit U.",
+    "This is the generic clipping input for the actual fixed reference Taylor coordinate and logarithmic height. Those numerical and material specializations remain subsequent steps.",
+    "No compiler/elaborator, CI query or active checkout/index/ref/CP/authority/plan mutation."
+  ],
+  "compiled": false,
+  "source_modified": false
+}

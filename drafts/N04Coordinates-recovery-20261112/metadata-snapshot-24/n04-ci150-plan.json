@@ -1,0 +1,45 @@
+{
+  "label": 150,
+  "head_before": "c8299751750decf27765045c36c280d249622f7e",
+  "base_tree": "595109a492679b00341215a00cbdd10815b2ae39",
+  "tree": "38248438ccc4218057e13fcab09874f491a2839e",
+  "main": "ecd4e991a1d86d00324403bacfeecb760d7fbcdd",
+  "additional_parent": "ecd4e991a1d86d00324403bacfeecb760d7fbcdd",
+  "previous_main": "c070da70d8df06e5345ff10f63aeff17207f257e",
+  "last_full_green": "03e526021c371413f03fc0ce052476b63e105361",
+  "owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJetsCI149RepairReviewedManifest.json",
+    "sha256": "2720040b0f56a0b5e20d409b707f90ea20ed8b88cd5bd3518fbe77ca987a2cd8"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJets.lean",
+    "sha256": "788ab4cd62091dde2fe969ef357e5f7c1b961e9a80b24368ff085c9b8739a0bd",
+    "blob": "4decaad9abcf27a2281d7965de59cff376a6a8f2",
+    "lines": 166
+  },
+  "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair149/CanonicalRootHeightJets.base.lean.txt",
+    "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+    "blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+    "lines": 159
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI149CanonicalRootHeightJetsIndependentReview.json",
+    "sha256": "4e9427944f0d64d6cca669c1140e83cfca7cf9448e92527e5ba1ca85bee8de8e",
+    "blob": "7d201d3e7256ca2e46a99ec52735bdaea84f4245",
+    "lines": 99
+  },
+  "added_lean_since_full_green": 3029,
+  "deleted_lean_since_full_green": 0,
+  "delta": {
+    "added": 9,
+    "deleted": 2
+  },
+  "source_total": 4210,
+  "source_all_total": 4214,
+  "root_imports": 4151,
+  "created_at": "2026-11-12T14:35:30.905230+00:00",
+  "main_merge_scope": "Only upstream probe workflow improves diagnostic capture; no build limits, main build workflow, rules or Lean interfaces changed.",
+  "scope": "One independently reviewed exact point-transport repair; public contracts unchanged. Full CI required; 41 reference modules held."
+}

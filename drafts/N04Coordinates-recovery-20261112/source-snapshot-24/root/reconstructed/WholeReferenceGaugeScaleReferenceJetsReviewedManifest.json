@@ -1,0 +1,47 @@
+{
+  "kind": "same_whole_reference_gauge_actual_scale_reference_jets_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeScaleReferenceJetsCandidateManifest.json",
+    "sha256": "20d2dd8427a09fe7c6fa33e29ed6f330cb80c4c1e3f49c730383be634ee06d1b",
+    "blob": "4cd27de899020e33bd9250e425edbaec5ec8ceb7",
+    "lines": 77
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeScaleReferenceJets.lean",
+      "sha256": "9834b8310b948659bbf8693bf5292e886a2980fcd83ad99e1d4005928db0041f",
+      "blob": "b0ccba766387dbbf0a5675aae7c629996992ae18",
+      "lines": 142,
+      "target": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeScaleReferenceJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialScaleSampleJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry",
+        "ContinuousFlexibility.Analysis.MaterialEnvelopeNormalization"
+      ],
+      "public_names": [
+        "canonicalScaleAtom",
+        "canonicalScaleAtom_eq_signedScale",
+        "n04WholeReferenceGauge_scale_unit_jets",
+        "n04WholeReferenceGauge_scaleReferenceJets_enlargedMaterialData"
+      ]
+    }
+  ],
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/WholeReferenceGaugeScaleReferenceJetsIndependentReview.json",
+      "sha256": "64dede3e0ab095a79c02a000891a7c8f745e7b535d24e42ebaa4203c402d7c77",
+      "blob": "2fe99d651f7ef09b01dc98fab73e888a148d7be2",
+      "lines": 88
+    }
+  ],
+  "additional_completed_geometry_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometryReviewedManifest.json",
+    "sha256": "a51fd15fff4cd1e8997e5e66da32b1f26e91450d1d0631409af5450269e606f8",
+    "blob": "da5287476d1f3eb1c04836ef9bf444f308d84ecb",
+    "lines": 39
+  },
+  "compiled": false,
+  "source_bytes_changed_after_review": false,
+  "created_at": "2026-11-12T14:32:33.237729+00:00"
+}

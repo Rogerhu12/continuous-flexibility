@@ -1,0 +1,150 @@
+--- actual-CI148/src/ContinuousFlexibility/Analysis/N03RootEndpointPhysicalJets.lean
++++ candidate-CI148/src/ContinuousFlexibility/Analysis/N03RootEndpointPhysicalJets.lean
+@@ -159,6 +159,104 @@
+   exact ⟨hclosed, by simpa only [hpoint, hscaleAbs] using htransfer.2,
+     by simpa only [hpoint] using htransfer.1⟩
+ 
++private theorem n03_rootEndpoint_geometry_of_controlledFlow
++    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
++    {C : NonlinearGeometryData S} {E : ReturnEquationData S}
++    {L : ReturnCorrectionData S} {K : CanonicalData S}
++    {base loss : ℕ} {ε : ℝ}
++    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
++    (hN : NonlinearPropertiesThrough03 D T S C E L base loss ε)
++    (hfield : N04bFieldRegularity D S C L base ε)
++    (hA : N04PartA D S C K base ε) (hB : N04PartB S C L K base ε)
++    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
++    (hs : stateSector S z.1) (m : ℕ) (rightEnd : Bool)
++    {g : ℝ → ℝ} (hg : ContDiff ℝ ∞ g) {R δ M : ℝ}
++    (hR : 0 < R) (hδ : 0 < δ) (hM : 0 ≤ M)
++    (hstrip : RootCoefficientStripConditions D.w g (stateProfile D S C z.1)
++      (stateHeight D S C z) (n01ComponentRoot C m rightEnd)
++      (n01ComponentRootOrientation rightEnd) R)
++    (Θ : (ℝ × ℝ) → ℝ → ℝ → ℝ)
++    (hΘ : N04FlowEquations
++      (rootRescaledField
++        (localizedRootDrift D S C (n01ComponentRoot C m rightEnd)
++          (n01ComponentRootOrientation rightEnd) hR z)
++        (localizedRootSpeed D S C g (n01ComponentRoot C m rightEnd)
++          (n01ComponentRootOrientation rightEnd) hR z) δ) Θ)
++    (hG : ContDiff ℝ ∞
++      (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)))
++    (hperiod : ∀ x ζ θ,
++      rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)
++          (x, ζ, θ + Real.pi) =
++        rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)
++          (x, ζ, θ) + Real.pi)
++    (hCS1 : CSBound 1
++      (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi)
++      (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)) M)
++    (hvalues : ∀ θ : ℝ,
++      ContDiffAt ℝ ∞ (rootScaledDividedDiscriminant D S C z g
++        (n01ComponentRoot C m rightEnd) (n01ComponentRootOrientation rightEnd) δ) (0, θ) ∧
++      0 < rootScaledDividedDiscriminant D S C z g
++        (n01ComponentRoot C m rightEnd) (n01ComponentRootOrientation rightEnd) δ (0, θ) ∧
++      0 < extendedRootOddCoefficient
++        (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)) (0, θ)) :
++    RootEndpointPhysicalGeometry (n01ComponentRoot C m rightEnd)
++      (n01ComponentRootOrientation rightEnd) δ
++      (physicalPieceClosed S K z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++      (K.chart z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++      (extendedRootEvenOddChart
++        (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ)))
++      (K.height z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++      (rootDividedHeight δ (rootScaledDividedDiscriminant D S C z g
++        (n01ComponentRoot C m rightEnd) (n01ComponentRootOrientation rightEnd) δ)
++        (rootScaledInverseCoordinate Θ (n01RootLabel S C z m rightEnd) (Real.sqrt δ))) := by
++  obtain ⟨η, hη, _hηone, hηR, hband, hcoeff⟩ :=
++    n03_exists_state_controlledRoot_band hS hT hN hfield hA hB hz hs m rightEnd
++      hg hR hδ hM hstrip Θ hΘ hG hperiod hCS1
++  exact n03_rootEndpoint_physicalGeometry hS hT hN.1.1 hN.2 hA hB hz hs m rightEnd
++    hR hδ hη hηR hstrip Θ hband hcoeff hG hperiod hvalues
++
++private theorem n03_rootEndpoint_fields_of_geometry
++    {S : PhysicalSpacesData} {C : NonlinearGeometryData S} {K : CanonicalData S}
++    {z : AnnularState S × ℝ} (m : ℕ) (rightEnd : Bool)
++    {outLoss : ℕ} {B : ℕ → ℝ} {δ J₀ : ℝ}
++    (hδ : 0 < δ) (hBpos : ∀ n, 0 < B n)
++    {G : ℝ × ℝ × ℝ → ℝ} {V : PolarPoint → ℝ}
++    (hG : ContDiff ℝ ∞ G)
++    (hperiod : ∀ x ζ θ, G (x, ζ, θ + Real.pi) = G (x, ζ, θ) + Real.pi)
++    (hVperiod : ∀ x θ, V (x, θ + Real.pi) = V (x, θ))
++    (hvalues : ∀ θ : ℝ, ContDiffAt ℝ ∞ V (0, θ) ∧ 0 < V (0, θ) ∧
++      0 < extendedRootOddCoefficient G (0, θ) ∧
++        J₀ ≤ planeJacobian (extendedRootEvenOddChart G) (0, θ))
++    (hjets : ∀ θ ∈ Icc (-Real.pi) Real.pi,
++      RootDividedModelJetBound (pairGrading (stateGrading S) realGrading)
++        outLoss B (z - (C.referenceState, 0)) δ V G (0, θ))
++    (hgeometry : RootEndpointPhysicalGeometry (n01ComponentRoot C m rightEnd)
++      (n01ComponentRootOrientation rightEnd) δ
++      (physicalPieceClosed S K z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++      (K.chart z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++      (extendedRootEvenOddChart G)
++      (K.height z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++      (rootDividedHeight δ V G)) :
++    let r := n01ComponentRoot C m rightEnd
++    let σ := n01ComponentRootOrientation rightEnd
++    let i := if rightEnd then (K.cutPair m).2 else (K.cutPair m).1
++    ∀ θ : ℝ, (r, θ) ∈ physicalPieceClosed S K z i ∧
++      J₀ / δ ≤ |planeJacobian (K.chart z i) (r, θ)| ∧
++      RootPhysicalFieldJetBound (pairGrading (stateGrading S) realGrading)
++        outLoss (rootAffineJetEnvelope (σ * δ) B) (z - (C.referenceState, 0))
++        (K.chart z i) (K.height z i) (r, θ) := by
++  exact rootEndpointPhysical_fields_of_model
++    (E := AnnularState S × ℝ) (p := pairGrading (stateGrading S) realGrading)
++    (loss := outLoss) (B := B) (z := z - (C.referenceState, 0))
++    (r := n01ComponentRoot C m rightEnd)
++    (σ := n01ComponentRootOrientation rightEnd) (δ := δ) (J₀ := J₀)
++    (Ωc := physicalPieceClosed S K z
++      (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++    (F := K.chart z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++    (H := K.height z (if rightEnd then (K.cutPair m).2 else (K.cutPair m).1))
++    (V := V) (G := G) (n01ComponentRootOrientation_eq rightEnd) hδ hBpos
++    hG hperiod hVperiod hvalues hjets hgeometry
++
+ private theorem n03_rootEndpoint_fields_at_state
+     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+     {C : NonlinearGeometryData S} {E : ReturnEquationData S}
+@@ -196,25 +294,27 @@
+     (z - (C.referenceState, 0)))
+   have hM : 0 ≤ M :=
+     mul_nonneg (hApos 1).le (add_nonneg zero_le_one (apply_nonneg _ _))
+-  obtain ⟨η, hη, _hηone, hηR, hband, hcoeff⟩ :=
+-    n03_exists_state_controlledRoot_band hS hT hN hfield hA hB hz hs m rightEnd
+-      hg hR hδ hM hstrip Θ hΘ hG hperiod (hCS 1)
++  have hCS1 : CSBound 1
++      (Icc (0 : ℝ) 1 ×ˢ Icc (-1 : ℝ) 1 ×ˢ Icc (-Real.pi) Real.pi) G M :=
++    hCS 1
+   have hzero : (0 : ℝ) ∈ Icc (0 : ℝ) ρ := ⟨le_rfl, hρ.le⟩
++  have hvalues0 : ∀ θ : ℝ, ContDiffAt ℝ ∞ V (0, θ) ∧ 0 < V (0, θ) ∧
++      0 < extendedRootOddCoefficient G (0, θ) ∧
++        J₀ ≤ planeJacobian (extendedRootEvenOddChart G) (0, θ) :=
++    fun θ => hvalues (0, θ) hzero
++  have hjets0 : ∀ θ ∈ Icc (-Real.pi) Real.pi,
++      RootDividedModelJetBound (pairGrading (stateGrading S) realGrading)
++        outLoss B (z - (C.referenceState, 0)) δ V G (0, θ) :=
++    fun θ hθ => hjets (0, θ) hzero hθ
+   have hgeometry : RootEndpointPhysicalGeometry r σ δ (physicalPieceClosed S K z i)
+       (K.chart z i) (extendedRootEvenOddChart G)
+       (K.height z i) (rootDividedHeight δ V G) :=
+-    n03_rootEndpoint_physicalGeometry hS hT hN.1.1 hN.2 hA hB hz hs m rightEnd
+-      hR hδ hη hηR hstrip Θ hband hcoeff hG hperiod
+-      (fun θ => ⟨(hvalues (0, θ) hzero).1, (hvalues (0, θ) hzero).2.1,
+-        (hvalues (0, θ) hzero).2.2.1⟩)
+-  exact rootEndpointPhysical_fields_of_model
+-    (E := AnnularState S × ℝ) (p := pairGrading (stateGrading S) realGrading)
+-    (loss := outLoss) (B := B) (z := z - (C.referenceState, 0))
+-    (r := r) (σ := σ) (δ := δ) (J₀ := J₀)
+-    (Ωc := physicalPieceClosed S K z i) (F := K.chart z i) (H := K.height z i)
+-    (V := V) (G := G) (n01ComponentRootOrientation_eq rightEnd) hδ hBpos hG hperiod
+-    (rootScaledDividedDiscriminant_period_add hS C z g r σ δ)
+-    (fun θ => hvalues (0, θ) hzero) (fun θ hθ => hjets (0, θ) hzero hθ) hgeometry
++    n03_rootEndpoint_geometry_of_controlledFlow
++      hS hT hN hfield hA hB hz hs m rightEnd hg hR hδ hM hstrip Θ hΘ hG hperiod hCS1
++      (fun θ => ⟨(hvalues0 θ).1, (hvalues0 θ).2.1, (hvalues0 θ).2.2.1⟩)
++  exact n03_rootEndpoint_fields_of_geometry m rightEnd hδ hBpos
++    hG hperiod (rootScaledDividedDiscriminant_period_add hS C z g r σ δ)
++    hvalues0 hjets0 hgeometry
+ 
+ /-- Common low order and loss are chosen before the component. For each
+ component and side, all actual root-field constants are chosen before

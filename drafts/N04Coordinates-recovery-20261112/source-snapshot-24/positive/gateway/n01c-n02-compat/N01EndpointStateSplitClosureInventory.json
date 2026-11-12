@@ -1,0 +1,3667 @@
+{
+  "kind": "selected_static_parameter_order_import_closure",
+  "target_modules": [
+    "ContinuousFlexibility.Analysis.N01EndpointSplitNorm"
+  ],
+  "selected_generic_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+  "selected_N01_contract_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "module_count": 286,
+  "local_module_count": 7,
+  "reused_exact_inventories": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateCircleMemberClosureInventory.json",
+      "sha256": "5b923bcea8a3591948f1408b221a2f48aaaf81deca61077cfedca6f78dd3ed87",
+      "blob": "6febe9d229d8bd16a7236983d289dc74e7f9778a",
+      "lines": 3615
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ScalarHeightParameterOrderClosureInventory.json",
+      "sha256": "4eb49b26ace7885e42a14d85eeab7e45a500a30c1a5cf9a3c3456a48e7373372",
+      "blob": "72895d13f24e0c8020cb24a8ec66b771bcfc6b3e",
+      "lines": 2808
+    }
+  ],
+  "missing": [],
+  "cycles": [],
+  "excluded_old_uniform_loss_modules": [
+    "ContinuousFlexibility.Analysis.N01SectorFlowTower",
+    "ContinuousFlexibility.Analysis.N01EndpointParameterTower"
+  ],
+  "modules": [
+    {
+      "module": "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+      "path": "src/ContinuousFlexibility/Analysis/ActualRadialCellComparison.lean",
+      "sha256": "2742cf2727e450078cfebcf7363cc4b824846af5b25c3e11f304dddfebc726fa",
+      "blob": "3348ac15c7a5b9f11d94cac0972eeddbebc2f6e5",
+      "lines": 61,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleShift"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.AngularRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/AngularRegularity.lean",
+      "sha256": "c694a87cebdea36c6a1daef5f3a84f622279c54839340f76d1670244d9c9e2f3",
+      "blob": "50d683c235816e0a6be8c3b10ac978f514243c7f",
+      "lines": 174,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ScalarFlowVariation",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Defs"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.AngularRegularityIntegral",
+      "path": "src/ContinuousFlexibility/Analysis/AngularRegularityIntegral.lean",
+      "sha256": "37ca2162cfa0119e903c0215b1d10e7b90026e9be7e4d5c688f284d23727bad9",
+      "blob": "85a6d07261355a13fd63b03d029ba08676c5b28b",
+      "lines": 67,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.AngularRegularity",
+        "Mathlib.Analysis.Calculus.ParametricIntervalIntegral"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.BastianiCurveChain",
+      "path": "src/ContinuousFlexibility/Analysis/BastianiCurveChain.lean",
+      "sha256": "f03354022430a3548644a9e0675a37fd252ac3ad1b845d70aaf9a0bd83bfaf77",
+      "blob": "fb09a3bbe8997164a8e2c141a205498cdddac136",
+      "lines": 238,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveDifferential",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus",
+        "Mathlib.Topology.Compactness.Compact",
+        "Mathlib.Analysis.Convex.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CharacteristicODEUniqueness",
+      "path": "src/ContinuousFlexibility/Analysis/CharacteristicODEUniqueness.lean",
+      "sha256": "7d6a877119e6c391a6aeb21130c64a87581a80aba99ea781c0a521efe71c2688",
+      "blob": "b61e31c282617aa16df50bd24a677521e522ccd1",
+      "lines": 169,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Conservation",
+        "Mathlib.Analysis.ODE.ExistUnique",
+        "Mathlib.Analysis.Calculus.MeanValue",
+        "Mathlib.Topology.Order.ProjIcc"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+      "path": "src/ContinuousFlexibility/Analysis/CircleAngularJetLinear.lean",
+      "sha256": "e27bf7d1bf2d6e97b5634c5b6f98bc77a5e2317f617d74452893496cdbd141d1",
+      "blob": "91156e397f00e61ea0ebd48e7b1daa5243498fe0",
+      "lines": 44,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleDifferentialOperators"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleDifferentialOperators",
+      "path": "src/ContinuousFlexibility/Analysis/CircleDifferentialOperators.lean",
+      "sha256": "f05e308f79b3f5c753a438604aa844e4a3fdf10d6c9b1336545cc1a5f17a6d77",
+      "blob": "98e345a5b5ec13ff2a368cff337cb857e559d85d",
+      "lines": 126,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleWeightedEstimate",
+        "ContinuousFlexibility.Analysis.CircleSobolevPointwise",
+        "ContinuousFlexibility.Analysis.TameLinear",
+        "Mathlib.Analysis.Calculus.Deriv.Add",
+        "Mathlib.Analysis.Calculus.Deriv.Mul"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleEnergyDifferentiation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyDifferentiation.lean",
+      "sha256": "50a1662a86a9be1a224c08884bf69c03beb8015aa2e897250c1bb46917a4c0ed",
+      "blob": "564f6baf2bd076c778e87a4af23d2aada4d854de",
+      "lines": 88,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleEnergyEnvelope",
+        "ContinuousFlexibility.Analysis.CircleNonlinearRealization"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleEnergyEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyEnvelope.lean",
+      "sha256": "a3ff50dbed1c22ace70eef83e92d0239caf028caab1dc647fd514a50a04fc313",
+      "blob": "0e0147a741014a634c384188612caadf19d2d51b",
+      "lines": 102,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds",
+        "ContinuousFlexibility.Analysis.MaterialComponentEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds",
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyPointwiseBounds.lean",
+      "sha256": "dfc8cc4c16ef5b6303a8b484136c4695a072828d97db2d3fcc75c348a7d69d31",
+      "blob": "655914e338a33d345f7749ad603f84f4e1c0a00a",
+      "lines": 155,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleWeightedComposition"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJetAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJetAssembly.lean",
+      "sha256": "8efe6712f0b6d956975e8c5171df7c226fa2c3755236719a0de49a57a33ada6a",
+      "blob": "4175430db2c34bc16fa58bedadb6010ba8af5198",
+      "lines": 175,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleTaylorDifferentiation",
+        "ContinuousFlexibility.Analysis.ProjectiveJetContinuity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJetBonding",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJetBonding.lean",
+      "sha256": "0617340b25fe7889d5c7311d627de4d30b13d6cae20360332156c84a099a2993",
+      "blob": "1cbabaf5a2d36d826869a603cae32c31e01e1959",
+      "lines": 181,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleJetClosedGraph"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJetClosedGraph",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJetClosedGraph.lean",
+      "sha256": "432a25ba1eb3b8b0d49e7f2faabb981e40117524c32df94cb376470f8e8e2238",
+      "blob": "8a1aca73daa106b3bee5a766e17b2aed6c6f24d2",
+      "lines": 161,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJetPointwiseEnergy.lean",
+      "sha256": "1983b06ae4b6ef0783ee00852ce7d3f0f19d7990e206152ee66405ad078c3a62",
+      "blob": "9d4fc36867c4ff0004d89d814499e61958aaa30e",
+      "lines": 137,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleSobolevPointwise",
+        "Mathlib.Analysis.Calculus.ContDiff.Bounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleModelRealization",
+      "path": "src/ContinuousFlexibility/Analysis/CircleModelRealization.lean",
+      "sha256": "fad34c7a87e5a79a044edac46165294e2a8bf2bca57da149b0452464c38e51ee",
+      "blob": "44eadd052c8a1dee79853024f8e1b4e5e954c533",
+      "lines": 119,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "Mathlib.Algebra.Module.Submodule.Equiv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleMultilinearRealization",
+      "path": "src/ContinuousFlexibility/Analysis/CircleMultilinearRealization.lean",
+      "sha256": "252c2819ed831add2ed9c7ccb78cdd6b034fa30c8e6a578463ddd0d997efcc5f",
+      "blob": "217da706fabe4a23ce177e8579be88b15fc5752e",
+      "lines": 132,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleNonlinearRealization",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsUniformBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleNonlinearRealization",
+      "path": "src/ContinuousFlexibility/Analysis/CircleNonlinearRealization.lean",
+      "sha256": "10918a03eff82244b700a559f898616972662be491ee042f50890cc27145e997",
+      "blob": "2013f87589194b12f9f75c5a861ad37fdc1a8e3a",
+      "lines": 91,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleModelRealization",
+        "ContinuousFlexibility.Analysis.ProjectiveDifferential"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleReturnAlgebra",
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnAlgebra.lean",
+      "sha256": "7eb23a47adf082ddb82a2086551d72bbeff012ebd96ed3a12a17f89542baebb6",
+      "blob": "dd1f8a2731f4d876ddbd56368313d975c2923bf8",
+      "lines": 299,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleReturnBounded",
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnBounded.lean",
+      "sha256": "db03eb00d1d30eaecdaa9cd778505746ab39ca11f7ffa7c30621bbbc9f1650f8",
+      "blob": "cc58ef2c3a73f3580534354fee29cbc578f5a9c2",
+      "lines": 273,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleReturnSmoothInverse",
+        "ContinuousFlexibility.Analysis.CircleJetClosedGraph",
+        "ContinuousFlexibility.Analysis.CircleWeightedEstimate"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleReturnFourier",
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnFourier.lean",
+      "sha256": "e05d971e2212b23d335852a0e8316077e496b48f3c666b9e3b0495e4846bfd2d",
+      "blob": "e9a74832f35a8d072c7107e6297757ff3ef80d48",
+      "lines": 386,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Fourier.AddCircle",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas",
+        "Mathlib.Analysis.PSeries",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.Periodic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleReturnSeries",
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnSeries.lean",
+      "sha256": "77432b69e5a54312f03b1d5a0b17ffcba54c1dd7819db33472e61710521ae440",
+      "blob": "d96941e5a88134d4c638e38e9088fbfc2b869287",
+      "lines": 195,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleReturnAlgebra",
+        "Mathlib.Analysis.Calculus.SmoothSeries",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleReturnSmoothInverse",
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnSmoothInverse.lean",
+      "sha256": "2efc9c49e42309daa50fa230da016249e578b6597b261104830175131e5bc166",
+      "blob": "c15364c1339d9f5118ebc5d945474ad1ec0ac244",
+      "lines": 147,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleReturnFourier",
+        "ContinuousFlexibility.Analysis.CircleReturnSeries",
+        "ContinuousFlexibility.Analysis.CircleReturnUniqueness"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleReturnUniqueness",
+      "path": "src/ContinuousFlexibility/Analysis/CircleReturnUniqueness.lean",
+      "sha256": "02d91736130d3ab7742eaefa08fdad8586320d5af3dc5f28d9e50c4e62b555c0",
+      "blob": "d95a035a847887d709899fe99c103375216dc9b3",
+      "lines": 133,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleReturnAlgebra",
+        "ContinuousFlexibility.Analysis.N01ReturnMargins",
+        "Mathlib.Topology.Instances.AddCircle.DenseSubgroup"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSingletonControl",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSingletonControl.lean",
+      "sha256": "64253ea8cf59db555f21c0f9b7865c9c9eb2dac9779103c0ad5e470f705cda6b",
+      "blob": "7a1b74b9d9762b430c57d4989bc34a9ac7008fc3",
+      "lines": 243,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleModelRealization",
+        "ContinuousFlexibility.Analysis.CircleJetClosedGraph",
+        "Mathlib.Topology.Instances.ENNReal.Lemmas"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleSobolevPointwise",
+      "path": "src/ContinuousFlexibility/Analysis/CircleSobolevPointwise.lean",
+      "sha256": "2b04d00b723fd6f397dd40ef7b3c73f2ef07a81a5892afbbbd27a21a5d28a5c4",
+      "blob": "e607def422d661b6a18cf651c9ccab1e9f5a750c",
+      "lines": 175,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateKappaBounds",
+        "ContinuousFlexibility.Analysis.CylinderSobolev",
+        "ContinuousFlexibility.Analysis.CircleModelRealization",
+        "ContinuousFlexibility.Analysis.CircleJetClosedGraph",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas",
+        "Mathlib.Algebra.Order.ToIntervalMod"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleTaylorDifferentiation",
+      "path": "src/ContinuousFlexibility/Analysis/CircleTaylorDifferentiation.lean",
+      "sha256": "0b660ca9a76caf7b00c442b82bc8efc5a898a95878c8389f4852589ac13c3175",
+      "blob": "8f7a377e1d214fed13fd4d55b705c94390649f2a",
+      "lines": 99,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleAngularJetLinear",
+        "ContinuousFlexibility.Analysis.CircleEnergyDifferentiation",
+        "ContinuousFlexibility.Analysis.ScalarDerivativeLimit"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleTwoEnergyEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/CircleTwoEnergyEnvelope.lean",
+      "sha256": "5a31c544f32981dd44ae00745580e2e340e94ed14c8755c9cf75ecf93d3e45aa",
+      "blob": "edb50def78e15c5ff21ec6fd0a474a0d2f6f77f6",
+      "lines": 145,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleWeightedComposition",
+      "path": "src/ContinuousFlexibility/Analysis/CircleWeightedComposition.lean",
+      "sha256": "7752b218b918d09283305586c85745bd96a447e74f9ea24d67271ef4f3865c94",
+      "blob": "ff0db9ed23f3c19146b1cf4d367d65fd0ff9970c",
+      "lines": 204,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy",
+        "ContinuousFlexibility.Analysis.CircleReturnBounded"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleWeightedEstimate",
+      "path": "src/ContinuousFlexibility/Analysis/CircleWeightedEstimate.lean",
+      "sha256": "f66dd9e7a0fee0c84e6aad30fe7b75953a67e2315ddced52605ff5e2ec8f8adb",
+      "blob": "da4bae43883167841c478e07710e3667c4fb2bb8",
+      "lines": 209,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleJetBonding",
+        "ContinuousFlexibility.Analysis.CircleModelRealization",
+        "Mathlib.Topology.Algebra.InfiniteSum.ENNReal"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CompactRadialHeightMember",
+      "path": "src/ContinuousFlexibility/Analysis/CompactRadialHeightMember.lean",
+      "sha256": "8a95859004dad6cf8e4440d9f4045a18a453650568dd8ea7ac2d0eae3cfe1853",
+      "blob": "af187ddce4e99fb0b183d177ecb7d8af90aa8c98",
+      "lines": 168,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialHeightCutoff",
+        "ContinuousFlexibility.Analysis.CylinderTestPairing"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+      "path": "src/ContinuousFlexibility/Analysis/ControlCellEndpointBounds.lean",
+      "sha256": "9c9c1fd4bb08d7a0f757285ccb015919aca0362996626912e4b1ec773debbcdd",
+      "blob": "931608eb0a7c8d6913aafcd28727724eae13467a",
+      "lines": 192,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialShiftedEnvelope",
+        "ContinuousFlexibility.Analysis.StateKappaBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CylinderMixedJets",
+      "path": "src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "lines": 253,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Scalar.HeightDerivatives",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CylinderSobolev",
+      "path": "src/ContinuousFlexibility/Analysis/CylinderSobolev.lean",
+      "sha256": "42d174c5df3e85576f16330a23664b206b9b7e6df3d1726d814008a142be8b2f",
+      "blob": "02b259cdcd0b18335994b33662b18c5ee01aef0f",
+      "lines": 249,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.Analysis.Calculus.Deriv.Prod",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus",
+        "Mathlib.MeasureTheory.Integral.Prod",
+        "Mathlib.Tactic.Linarith"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CylinderTestPairing",
+      "path": "src/ContinuousFlexibility/Analysis/CylinderTestPairing.lean",
+      "sha256": "0600e35e9d285e352633d0b1e002634c244ca9efe9244690173bc6f45f2d0422",
+      "blob": "d9e3a25b44a185e050fbe22c00649e70b764d7aa",
+      "lines": 207,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialCylinderPointwise",
+        "Mathlib.Dynamics.Ergodic.MeasurePreserving",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.MeasureTheory.Function.LpSeminorm.Indicator"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CylinderUniformNorm",
+      "path": "src/ContinuousFlexibility/Analysis/CylinderUniformNorm.lean",
+      "sha256": "b35b974ae35ca2d81903afb7d905d795ba618cb3e65163e90e161314bbfe386a",
+      "blob": "41c5e0555a5aa2ceb1b9d748e78263e85726637c",
+      "lines": 94,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CylinderTestPairing"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.DisjointIntervalPacking",
+      "path": "src/ContinuousFlexibility/Analysis/DisjointIntervalPacking.lean",
+      "sha256": "582c2ea529bf377405fe623a9b0f6501e05012d31304df10ae1c78cf71ed4d53",
+      "blob": "1bba5b88899a497fcb4375ee0efc5d48f6b3f6db",
+      "lines": 70,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.MeasureTheory.Measure.Lebesgue.Basic",
+        "Mathlib.MeasureTheory.Measure.Real",
+        "Mathlib.Data.Set.Card"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ExponentialSequenceSpace",
+      "path": "src/ContinuousFlexibility/Analysis/ExponentialSequenceSpace.lean",
+      "sha256": "c038ec8daa99d2e12b095d9a42b9084f654187e0577f5c713c224469c16934f4",
+      "blob": "284ea9363fa1a258300b48fc0f806370ee012a81",
+      "lines": 423,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.Graded",
+        "Mathlib.Analysis.Normed.Lp.lpSpace",
+        "Mathlib.Analysis.SpecialFunctions.Exp"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.FinitePhysicalEnergyBounds",
+      "path": "src/ContinuousFlexibility/Analysis/FinitePhysicalEnergyBounds.lean",
+      "sha256": "765898825965c8bb77b131df9b8e07024eefc860b87af5057319e1979ccc7929",
+      "blob": "3c150c21d8dc137cb4c3eab5e36afb10c68cca2e",
+      "lines": 67,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.PhysicalGradeEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.FiniteRestrictedEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/FiniteRestrictedEnergy.lean",
+      "sha256": "b7324b9695d2e98da9d5413929a3cef93374a744bba381a1feda823cc4652357",
+      "blob": "d11b8e512c40516db0bb08548e9a3559f5806b64",
+      "lines": 66,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RestrictedOverlapEnergy",
+        "Mathlib.Algebra.Order.Chebyshev"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.FlatCylinderExtension",
+      "path": "src/ContinuousFlexibility/Analysis/FlatCylinderExtension.lean",
+      "sha256": "893f07949b8ee91653d0d9a0ada9b9691acd17cc545a82dc2bba11a37ed456de",
+      "blob": "b0e7bf82f5c57a0cc0be1c2acddc2c998b1e430d",
+      "lines": 121,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Calculus.ContDiff.Basic",
+        "Mathlib.Analysis.Asymptotics.Lemmas"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.FlatExtension",
+      "path": "src/ContinuousFlexibility/Analysis/FlatExtension.lean",
+      "sha256": "4261c57856e6383f63dacf4ffb350a11fd30df5182336d0f78b6ab43a154cdb6",
+      "blob": "8291a340b681248294c89b6cadb21e2f75f16581",
+      "lines": 389,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Calculus.FDeriv.Extend",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.Graded",
+      "path": "src/ContinuousFlexibility/Analysis/Graded.lean",
+      "sha256": "4e14602df2c81c84c73bda52412e3f39d5a7699364258d8686d140c31a225fab",
+      "blob": "cbde48fbc802d4d850d34cfd992affc49a9db33b",
+      "lines": 202,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.LocallyConvex.WithSeminorms",
+        "Mathlib.Analysis.Normed.Module.Seminorm.Norm",
+        "Mathlib.Topology.Algebra.Module.ContinuousLinearMap.PiProd",
+        "Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Restrict",
+        "Mathlib.Topology.Metrizable.CompletelyMetrizable",
+        "Mathlib.Topology.UniformSpace.Pi"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.HeightSectorDirections",
+      "path": "src/ContinuousFlexibility/Analysis/HeightSectorDirections.lean",
+      "sha256": "c760afae6558eab12e16f1b2b58484f5a58ba4b06e3bb317ce1ce344d32322bd",
+      "blob": "fc1e595af278a8e007cbd3f8fe39c7bcc7507ef6",
+      "lines": 144,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SectorParameterGeometry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialBalancedConstraint",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialBalancedConstraint.lean",
+      "sha256": "92e7c5b4a7bf4704fe271249cedff94d5370175ca68966aa8ac0a6f112acf7c0",
+      "blob": "4bc37d622c51d9267ee10972ed8088866ac45fd9",
+      "lines": 129,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialMScale"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialComponentEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialComponentEnergy.lean",
+      "sha256": "0e748c843cdebf132dba9c5e7e07453dac7af11eb03be43788dc90249ba1216f",
+      "blob": "cbc7cb8f1cf0ce1f25d15ff1799d0a7465d85d5b",
+      "lines": 150,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.MeasureTheory.Integral.Lebesgue.Basic",
+        "Mathlib.Topology.Algebra.InfiniteSum.ENNReal"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialCoordinate",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCoordinate.lean",
+      "sha256": "e113e4c2141428426748e22e0f5f53093940a70d77befe3bcf2f422bdc99fefc",
+      "blob": "b1bcf0081f837c19af51bf120762c7efb491b54a",
+      "lines": 215,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialWeights",
+        "Mathlib.Analysis.SpecialFunctions.Log.Deriv",
+        "Mathlib.Analysis.SpecialFunctions.Sqrt"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialCutoffJetEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCutoffJetEnergy.lean",
+      "sha256": "f46ab6a36200ae8764fd83798e2488d938d0ad9b18091232f0488ea2efdc8288",
+      "blob": "6882aee53788254bac399944d5c1f4b0227ec18c",
+      "lines": 106,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.FiniteRestrictedEnergy",
+        "ContinuousFlexibility.Analysis.MaterialHeightCutoff"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialCylinderPointwise",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialCylinderPointwise.lean",
+      "sha256": "40e4cf0e61f20ec3b1c043c59fc8cf18d15f5d3e6b595ea7b014c9074a141ae9",
+      "blob": "9c59fd7cde715e86130db7b6917c7962f89424cd",
+      "lines": 188,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CylinderSobolev",
+        "ContinuousFlexibility.Analysis.CylinderMixedJets",
+        "Mathlib.Algebra.Field.Periodic",
+        "Mathlib.Analysis.Calculus.Deriv.Shift",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Deriv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialEndpointComparison",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialEndpointComparison.lean",
+      "sha256": "e946d4aa0da16dc0ff19c7498db313d7d98c37b322944d72fc6650f807e36cf4",
+      "blob": "9bd3a3d1196a42cf9f61fa2ea3210946cad4bad9",
+      "lines": 134,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialPlateauGeometry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialEndpointDecay",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialEndpointDecay.lean",
+      "sha256": "8563625d144ea5bf9d480dd751dfad4b61a46550289e8b5cb26b68d4e7171186",
+      "blob": "c97dfdec4331272793d4709d2ca0953d54a13977",
+      "lines": 117,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialHeightCutoff",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialHeightCutoff.lean",
+      "sha256": "470a4195c868a83685ba500ba3eaed0441760c7cc73f90b2151a26198812ad1f",
+      "blob": "7aac00b91409a32572ff07d6ab88ad295c68ad6a",
+      "lines": 212,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialCylinderPointwise",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas",
+        "Mathlib.Analysis.Calculus.Deriv.Support",
+        "Mathlib.Analysis.Calculus.BumpFunction.InnerProduct",
+        "Mathlib.Analysis.Normed.Group.Bounded",
+        "Mathlib.MeasureTheory.Function.LpSeminorm.SMul",
+        "Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialHeightExtension",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialHeightExtension.lean",
+      "sha256": "67efa5d8e11801c3d8f28a8b221902a955dd6e1d8591194b811f5e8a711404e0",
+      "blob": "93f0bf80cc1d89cced4f1c4d2b087e2ce85dcc1f",
+      "lines": 104,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CylinderMixedJets",
+        "ContinuousFlexibility.Analysis.FlatCylinderExtension",
+        "ContinuousFlexibility.Analysis.MaterialEndpointDecay"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialHeightRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialHeightRegularity.lean",
+      "sha256": "ceea0fa46732654e1ad5d3abe5e81fbd84f82227899a82dfa58a2fdbf445bba1",
+      "blob": "dc55b3ace75b86c1ef24a56706b6c4746506f7bb",
+      "lines": 55,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialCylinderPointwise",
+        "ContinuousFlexibility.Analysis.MaterialOrdinaryJets",
+        "ContinuousFlexibility.Analysis.MaterialHeightExtension",
+        "ContinuousFlexibility.Analysis.WeakBranchCore"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialInterval",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialInterval.lean",
+      "sha256": "149d2da2823f58668a363c9c1050eff31a613b7ce3349d828e52e538f8f58fe4",
+      "blob": "5242d6794fe273a721425f1a439c970d98760440",
+      "lines": 313,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialCoordinate",
+        "Mathlib.Analysis.SpecialFunctions.SmoothTransition",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+        "Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff",
+        "Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialIntervalWeights",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialIntervalWeights.lean",
+      "sha256": "f9327978dcec183490e303d12c9c46db254468d6e433acfc52a3aaf63a70a998",
+      "blob": "d0c907841b63ff64f14c6ce80ba39978ad7c81c6",
+      "lines": 287,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialInterval",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Deriv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialMScale",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialMScale.lean",
+      "sha256": "6e73e2409a0cf1df933687e74e33bc95eeab1a4e69778e91500d25d275cd5e44",
+      "blob": "610cb1b4e370b0063cd8aff67b5a1079a9910c9b",
+      "lines": 153,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialWeights"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialOrdinaryJets",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialOrdinaryJets.lean",
+      "sha256": "2b87e87ef153e371dd1e3ff8967d3a06392cb4239fcf15bf1dd575c11f935a5d",
+      "blob": "1bbb02b84f5b1306dee7cbf96305626af6e683e5",
+      "lines": 246,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CylinderMixedJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauGeometry.lean",
+      "sha256": "ed3f8e7e934471a3adbe7423d128db6df634f70919a3d0c63e059332e7313c0d",
+      "blob": "881d284a832025d6f2fb1c36e7a3ba194886dae8",
+      "lines": 210,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauIndexBand",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauIndexBand.lean",
+      "sha256": "43cffca0411dfc9f90a12c3670b2180ebc357606617c857fd53b31704dd304da",
+      "blob": "da71b64cf1036807c5b9a7fabf3dc9bff9a4b2b8",
+      "lines": 110,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialPlateauGeometry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauJets",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauJets.lean",
+      "sha256": "d1bffdc0421cd65ddd3132fe0b99134bc8c67bf2761240679cea4eb2dfed8254",
+      "blob": "f4b1243a9c8cf0f46ebb3aa9d728bd69ce3da90e",
+      "lines": 198,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialPlateauCutoff",
+        "ContinuousFlexibility.Analysis.RadialPrimitiveJets",
+        "Mathlib.Data.Nat.Choose.Sum"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauLocalization",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauLocalization.lean",
+      "sha256": "2a6beee4a6091758ee93e84e0bbced4f84c9c172f33629c95c2414d20747ab19",
+      "blob": "9ea55af9b2098f60984ab9af0dd73cefbf70be64",
+      "lines": 142,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialPlateauRadialLoss",
+        "ContinuousFlexibility.Analysis.MaterialPlateauSize",
+        "ContinuousFlexibility.Analysis.MaterialPlateauJets",
+        "ContinuousFlexibility.Analysis.MaterialHeightCutoff"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauRadialLoss",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauRadialLoss.lean",
+      "sha256": "ed25bbe457113c59600040a9ff964eb3c5bdbf6e6329cc1abc9affa4b00b5915",
+      "blob": "23f7f1d7bf1d837446e6fad1a7e09d0e504043bf",
+      "lines": 55,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialPlateauIndexBand",
+        "ContinuousFlexibility.Analysis.MaterialEndpointComparison",
+        "ContinuousFlexibility.Analysis.MaterialSampleShift"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauSampleWeights",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauSampleWeights.lean",
+      "sha256": "e5722fd7461fdba971bb4a1d10b8343ad2340039554d3184e9db2ea10ef9db03",
+      "blob": "b174a37bfdc5273204c16ca83bd460e6e94fc252",
+      "lines": 117,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialPlateauIndexBand",
+        "ContinuousFlexibility.Analysis.MaterialPlateauWeights",
+        "ContinuousFlexibility.Analysis.MaterialSampleGlobalModels"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauSize",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauSize.lean",
+      "sha256": "0517a4d47dbbf87c06285af3f32c06ca721e7303dd7826d20c82a24d18c1dabc",
+      "blob": "d3d867fff1a071bd595efa704bac9832ef739a1c",
+      "lines": 149,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialRhoGrowth",
+        "ContinuousFlexibility.Radial.MorseChainScales"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialPlateauWeights",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialPlateauWeights.lean",
+      "sha256": "84163cff997e8c56b56d7ae39eb963dd88f0cc58cdd5d04c384fd6c5574cb459",
+      "blob": "d442f9bafe1376a90105806847dd2e3d95e9a93c",
+      "lines": 74,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialEndpointComparison",
+        "ContinuousFlexibility.Analysis.MaterialWeightShift",
+        "ContinuousFlexibility.Analysis.MaterialMScale"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialRadiusJets",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialRadiusJets.lean",
+      "sha256": "dc32ff6361aaf9d007f119a8ab8717482f2b86090cfa8ceef23fec9206f78ee4",
+      "blob": "8764c134a2ebbe76f19370b1da5365bbe7a5a716",
+      "lines": 159,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialOrdinaryJets",
+        "Mathlib.Analysis.Calculus.ContDiff.Bounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialRhoGrowth",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialRhoGrowth.lean",
+      "sha256": "f2f0d1bff2f955519c58738ea78c233efc6bf9349f3a7f50141b49f7c5590f74",
+      "blob": "b8364e13764ca8cbff0ac66acac8a2c45f34304f",
+      "lines": 130,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialEndpointComparison",
+        "Mathlib.Analysis.Calculus.MeanValue"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleBalancedConstraint",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleBalancedConstraint.lean",
+      "sha256": "7fc333ebc960ea06d503d4b03356513ae53d6a788e7455521a5f4f507fa997f7",
+      "blob": "b4c831352bd9ea5fc2b1827deeccae8321f92e73",
+      "lines": 147,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialBalancedConstraint",
+        "ContinuousFlexibility.Analysis.MaterialSampleShift"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleCofinite",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleCofinite.lean",
+      "sha256": "216a156a837d75f8ffb20ca2d4b12b84898ff606bc5d8f5bce4e79d25b9b3da3",
+      "blob": "1562a68cf59d5ebd5bedc7efce55bf3d7217ba44",
+      "lines": 98,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateKappaBounds",
+        "Mathlib.Order.Filter.Cofinite",
+        "Mathlib.Topology.Order.LeftRightNhds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleDiscreteEnvelope.lean",
+      "sha256": "a1622572eafd1815a12c9851ba8ed8e12c0d6792694ffbf4fe75906ad6f2bfce",
+      "blob": "4b9de8d41ee0cac2a7f2cf3b1af9bede4dfbc437",
+      "lines": 136,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleIndexModels",
+        "ContinuousFlexibility.Analysis.MaterialShiftedEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleGlobalModels",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleGlobalModels.lean",
+      "sha256": "ea918cd4e735448b5bef1b2ea10b45ba13e7ee8d8725333ac5d819c0bf9950f0",
+      "blob": "f4c793c5cb6b7823ce77a593bfd2ba04c9cd2e9a",
+      "lines": 98,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleIndexModels"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleIndexModels",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleIndexModels.lean",
+      "sha256": "60826ece95040fc6f4c80c3907638e9fb1ee675be6e980539431690010e8029e",
+      "blob": "2d7b42bc63a56b09785f531e86b1e914e2410c66",
+      "lines": 120,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+        "ContinuousFlexibility.Analysis.MaterialSampleCofinite"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleRadialLoss",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleRadialLoss.lean",
+      "sha256": "441ee55c1d8d9d786138a88bb992e6e99ccb9d18edfedecce9745ea257d996ac",
+      "blob": "1b3cd3fab3d770066bc57b501775ab711ea1c68e",
+      "lines": 143,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleDiscreteEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleShift",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleShift.lean",
+      "sha256": "58b0285c60e26605a013ba3d580d17e37aef1fa450622b13c458227cb3aa8f74",
+      "blob": "e79e27788e1c853bed9950e91d7d121995ab1508",
+      "lines": 175,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleGlobalModels",
+        "ContinuousFlexibility.Analysis.MaterialSampleRadialLoss",
+        "ContinuousFlexibility.Analysis.MaterialWeightShift"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialSampleWeightedConstraint.lean",
+      "sha256": "522386a873cd93e115f1b0a23e09464c1515b2684f3283f3342466a7697e1760",
+      "blob": "9ddc7a9140522d66da7a4c187238ef4c7b568266",
+      "lines": 179,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleBalancedConstraint"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialShiftedEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialShiftedEnvelope.lean",
+      "sha256": "2b977ebd8503f17e5f44e22d3127500a8bee768f344845d7ccc03f5ac2172b18",
+      "blob": "6e487d0108cab236b9731f9544956556b1f3a531",
+      "lines": 52,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialWeights"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialWeightShift",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialWeightShift.lean",
+      "sha256": "e46a00bf0a3bce8349e0362807495da8499023d4ad82d2c7a3122e25eb70be6c",
+      "blob": "7ab514c2a6f5af51a8bfcf2c89398cd387788c2e",
+      "lines": 116,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialMScale"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.MaterialWeights",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialWeights.lean",
+      "sha256": "e4998fa3dc7afe79fb5fc68d4b37a9df11d8c4be01fc7a51cf8015acc214dd51",
+      "blob": "4788cd70cd81842326a4e1cedde510d2c302f1cd",
+      "lines": 262,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Pow.Continuity",
+        "Mathlib.Topology.Order.Compact"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ActualCellMaterialOrder",
+      "path": "src/ContinuousFlexibility/Analysis/N01ActualCellMaterialOrder.lean",
+      "sha256": "583e21541317b7b12fef492307834629d88d3e721721c4edd785697d5bc2cba2",
+      "blob": "a78a7316131957535a4f9cfe7137c8a77cf978ba",
+      "lines": 72,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01HeightTestWeightBridge",
+        "ContinuousFlexibility.Analysis.N01WeightedActualCellTransfer",
+        "ContinuousFlexibility.Analysis.RadialPlateauNorm"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CharacteristicParameterRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N01CharacteristicParameterRegularity.lean",
+      "sha256": "90bf25eb12e7ff7c65e3e9b7d0d0d65baaf9c09033eb4ea29d6a6676dee1ea49",
+      "blob": "941cca82d1d77fbb8e6b435c88e9ce769109654b",
+      "lines": 443,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowAngularVariation",
+        "ContinuousFlexibility.Analysis.PolarHeightCharacteristicVariation",
+        "ContinuousFlexibility.Scalar.S04CalculusProof",
+        "ContinuousFlexibility.Scalar.GreenIdentity",
+        "ContinuousFlexibility.Analysis.N01RadialFlow",
+        "Mathlib.Analysis.Normed.Group.Bounded"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ControlLengthBound",
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlLengthBound.lean",
+      "sha256": "9f897a9a0db92dc5a89cce49a149370871fce3329869f54718030f4c6b8d05b5",
+      "blob": "60332c2a7d6cb632b442bbab049fb294e250c6e1",
+      "lines": 148,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+        "ContinuousFlexibility.Analysis.N01TravelLowerBound",
+        "ContinuousFlexibility.Analysis.N01RadialFlow"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ControlPlateauOverlap",
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlPlateauOverlap.lean",
+      "sha256": "69e36253f40adeabc22550d9e887514ab93b0c4343e52bea2a7b50459ffbe9d2",
+      "blob": "996ac95d68f34d2f11ed4525e3df29de767c0b8a",
+      "lines": 81,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ControlLengthBound",
+        "ContinuousFlexibility.Analysis.MaterialPlateauRadialLoss",
+        "ContinuousFlexibility.Analysis.DisjointIntervalPacking"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ControlPlateauWeights",
+      "path": "src/ContinuousFlexibility/Analysis/N01ControlPlateauWeights.lean",
+      "sha256": "09dba60aa1128d36addae01e67727d0b395c5a8eb73345db6689cc46b1882d14",
+      "blob": "14c6618beeef93562f517ce3a9a6e218ee08ba8c",
+      "lines": 48,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ActualCellMaterialOrder",
+        "ContinuousFlexibility.Analysis.MaterialPlateauSampleWeights"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointAngularJets",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointAngularJets.lean",
+      "sha256": "c3112579404b8017d39618ec54ffdd1f462aea0e447b36ccbbb6355e35b9b12e",
+      "blob": "dcdd0c841197dea2d34624b74b5a24062123d226",
+      "lines": 239,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointParameterOrder",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointCircleJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleJets.lean",
+      "sha256": "a619259b26db86a20e42940210547023f7ffe255a53d833d54e4b1b42186bae8",
+      "blob": "55157d7700a12a33d2c630e287c6501468b4f51a",
+      "lines": 120,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointAngularJets",
+        "ContinuousFlexibility.Analysis.CircleJetAssembly"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointParameterOrder",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointParameterOrder.lean",
+      "sha256": "4491e37019b552600d38d77fe11e9d9b15a5ee3ff2a3e6776830b31de99dd566",
+      "blob": "3cf90bca72b10b52685c64ee1ab5fbaaac969c6a",
+      "lines": 211,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01SectorFlowParameterOrder",
+        "ContinuousFlexibility.Analysis.N01FlowAngularSmoothness",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit",
+        "ContinuousFlexibility.Analysis.MaterialSampleCofinite",
+        "Mathlib.Topology.Sequences"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSplitEnergy",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSplitEnergy.lean",
+      "sha256": "541e1ec44afd4bb311d0e8458bd8e4f733c90115bb6586a57ec5969526ef8028",
+      "blob": "4c48d7c5a491bd27a3b0763964204c4a1f0a336b",
+      "lines": 138,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointStateCircleMember",
+        "ContinuousFlexibility.Analysis.OneHighLocalizedSlot"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointSplitNorm",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointSplitNorm.lean",
+      "sha256": "246dff89ee519cb2adf83ccb3639de705246ac975cf92391177386561c4c9370",
+      "blob": "274f6f239d5c2ab2d270c5b5604760fb2099126c",
+      "lines": 159,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointSplitEnergy",
+        "ContinuousFlexibility.Analysis.CircleTwoEnergyEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointStateCircleMember",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateCircleMember.lean",
+      "sha256": "75808e90430bc13c4db6ee9c284eff16175b21e9c4d32631f90286f49ad4960e",
+      "blob": "d978b3a123acd1959f37914ab12362764d9a37e9",
+      "lines": 169,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointWeightedJets",
+        "ContinuousFlexibility.Analysis.N01StateLocalizationEnergy",
+        "ContinuousFlexibility.Analysis.CircleEnergyEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointWeightedJets",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJets.lean",
+      "sha256": "0ff8a00d7ce3c57650762049629cd29f422a5cd80258e7acd5ff5831acbf2e16",
+      "blob": "eb5c6073323224dfe1549cdfd56e9126f4b127a0",
+      "lines": 103,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointCircleJets",
+        "ContinuousFlexibility.Analysis.N01FlowSamplePrefactor",
+        "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowAngularSmoothness",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowAngularSmoothness.lean",
+      "sha256": "c409f0da8e2a42f45fa7f82376026fc2c18d8f3af2b65caee445a4ab7f025281",
+      "blob": "c30744280a313edb1ae43c452a8cb9402d68b95d",
+      "lines": 126,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowAngularVariation",
+        "ContinuousFlexibility.Analysis.ScalarFlowSmoothness"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowAngularVariation",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowAngularVariation.lean",
+      "sha256": "cb5c352ff14043bac3e4520badc993ab543657f39fac1aa3d5b883a9af3ed940",
+      "blob": "083e153454a72cb19b61e053cdd8be84f3ce16db",
+      "lines": 178,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowChartIndependence",
+        "ContinuousFlexibility.Analysis.N01FlowContinuity",
+        "ContinuousFlexibility.Analysis.ScalarFlowVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowChartIndependence",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowChartIndependence.lean",
+      "sha256": "64f2d7a047d6d48e7a04d74bcf5c6292f5cc689d6e64c569ad1b5e3bec8096d1",
+      "blob": "146f2827907d14fd4d6145de9347dd425c223f2c",
+      "lines": 246,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CharacteristicODEUniqueness",
+        "ContinuousFlexibility.Analysis.N01ReturnChartRegularity",
+        "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+        "ContinuousFlexibility.Analysis.MaterialHeightRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowConstantDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowConstantDirections.lean",
+      "sha256": "dcaac23ae25085dec93d3f93b4a2f07d3ab6a9a642d8407d6e366daf95bb3704",
+      "blob": "cde1ebeb3af5711da9704bb150fc4d0c0709fbd4",
+      "lines": 126,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowLocalizedDirections",
+        "ContinuousFlexibility.Analysis.N01FlowGermLocality"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowContinuity.lean",
+      "sha256": "70372dccccac7f3c30d3c6a73fea09747e04989bd266c4b6c37aa9e1756e5859",
+      "blob": "085ceed1bd3a9a994ad229c199bf62c9c79fbb1b",
+      "lines": 89,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnChartRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowGermLocality",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowGermLocality.lean",
+      "sha256": "16c70c0ec1cae953a794c203effa525c150555726ad3f3f41ae175f8552a41bb",
+      "blob": "504d5e2e4102399936814e995e192fa9ca6dcf5f",
+      "lines": 115,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowLocality",
+        "Mathlib.Analysis.Calculus.MeanValue"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowHeightResponse",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowHeightResponse.lean",
+      "sha256": "437758f8a452f424fec5abca98806c3c175a848b89c5fd444f595d24e423fef6",
+      "blob": "f4e110a8cd8c952827725e96072f945df3f72252",
+      "lines": 84,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowParameterPartialVariation",
+        "ContinuousFlexibility.Analysis.N01CharacteristicParameterRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowHeightScaling",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowHeightScaling.lean",
+      "sha256": "e91e245c96e30a2cc9971bbcc7c87eb9983c342d73f2eaa67dca0149265b68ce",
+      "blob": "f7cebced0e63e1ce16100f4535aefda81df36d18",
+      "lines": 180,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.HeightSectorDirections",
+        "ContinuousFlexibility.Analysis.N01FlowLocality",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowHeightVariation",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowHeightVariation.lean",
+      "sha256": "202cfc44abdc08affce9de4538779fcce0a04ad5e73649e0615fadbad143c800",
+      "blob": "74b2acecfec85a91dbd830c46d941079ec8de5f4",
+      "lines": 81,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowParameterVariation",
+        "ContinuousFlexibility.Analysis.PolarHeightCharacteristicVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowLocality",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowLocality.lean",
+      "sha256": "7a310cfa812802c0cdbc2edc93fcbb523bd37c329c6b3af20cbbfce47f57bdab",
+      "blob": "981d30325c8cf8ab597e227d73c7888402c3d21b",
+      "lines": 206,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowChartIndependence"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowLocalizedDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowLocalizedDirections.lean",
+      "sha256": "f5157989fd44d31d404299e3b8bf8d9d8576f483f081061752d35f7fcdf2d1e7",
+      "blob": "98d47b071a75c76b2d98cf91decfba521ae859f8",
+      "lines": 117,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowHeightScaling",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsLocalDirections"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowMixedParameterBound",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowMixedParameterBound.lean",
+      "sha256": "e8f43fd1bacca7994e4e95f17ffe53d2394c2a203a35f000c7af42fd38856bb5",
+      "blob": "c4e7412dd24d7e973b751fd6854cffe406228f1e",
+      "lines": 153,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowParameterVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowParameterPartialVariation",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowParameterPartialVariation.lean",
+      "sha256": "006e327d0b58975939e94fa8a2db1b61fa5f1a83ff2387e424d59a768480d82d",
+      "blob": "f385093af70a8283b7dd452a16d01b746ca78610",
+      "lines": 184,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowHeightVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowParameterVariation",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowParameterVariation.lean",
+      "sha256": "e90f5b891c766c3b3cea33b29b7cbef680cf883bbb0a6130b3d462bd5d159719",
+      "blob": "6e6e51d16c36f27ad8613e3025c202fed0c43f27",
+      "lines": 307,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01RadialFlow",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine",
+        "ContinuousFlexibility.Analysis.ScalarFlowParameterVariation",
+        "ContinuousFlexibility.Analysis.TameLocalCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowSamplePrefactor",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSamplePrefactor.lean",
+      "sha256": "97d0acac56b685e4e30499e752f9473266793ac37549dd5fcdb32e2818307a08",
+      "blob": "62d01175dace47d6da9c87e1587a7118acce80aa",
+      "lines": 64,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowStateLocality",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowStateLocality.lean",
+      "sha256": "e57917e33c12658e264319c41e669620dd051945bbb4d1a357e2f2a219f41a8c",
+      "blob": "d30b000abe9257b127558bc8b8074b1b3191ffee",
+      "lines": 195,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowConstantDirections",
+        "ContinuousFlexibility.Analysis.N01SingletonControl"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01HeightLineResponse",
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightLineResponse.lean",
+      "sha256": "60fa37cbfb458045ff594c17c626b82e3c1e52e8426d07efc612b7001b549f53",
+      "blob": "f24be0e5c4321713df507eccfa4d6b8b564d5bf8",
+      "lines": 245,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowHeightResponse",
+        "ContinuousFlexibility.Analysis.N01FlowMixedParameterBound"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01HeightPlateauDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightPlateauDirections.lean",
+      "sha256": "cf2318f873369f3763e3b8b4844e482cbbf64abca132d5454279d41feeda3114",
+      "blob": "ca10a66d3477e0b3d244332bfe526aed6cfc3fa5",
+      "lines": 53,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowGermLocality",
+        "ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01HeightResponseBound",
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightResponseBound.lean",
+      "sha256": "0fa6a2519578e0ea403f63b2f44629603c76db599ccf36f1456278fd3b4a5287",
+      "blob": "d188418f80d3b00ea06821957a135629e8492213",
+      "lines": 183,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01HeightLineResponse"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01HeightTestWeightBridge",
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightTestWeightBridge.lean",
+      "sha256": "450c7a4dc7ab32b0803c92d3f52f5c6c87f8b7dc53d9941bac1185d102d1dc23",
+      "blob": "652f53e365a6eecc4cc001aaeb012b34f2995d60",
+      "lines": 158,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01HeightWeightConstraint",
+        "ContinuousFlexibility.Analysis.N01ReverseMaterialOrderActualCell"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01HeightWeightConstraint",
+      "path": "src/ContinuousFlexibility/Analysis/N01HeightWeightConstraint.lean",
+      "sha256": "d14c9546e1295cf0f85914a7842474b8a1e4903380c7abc06fe856dbe3653206",
+      "blob": "b0e58d7541dcbe72c0e67a80b53a64b838c579ba",
+      "lines": 52,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01HeightResponseBound",
+        "ContinuousFlexibility.Analysis.N01TravelLowerBound"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01LocalizedStateDirections",
+      "path": "src/ContinuousFlexibility/Analysis/N01LocalizedStateDirections.lean",
+      "sha256": "efdd56f87a14c96ccfb8e2df10edd7cc3c5d76300b9945b85a818d45d3d940b8",
+      "blob": "cb6a22da8c998ddb76f1537c35c41cd8dea117a7",
+      "lines": 261,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowStateLocality",
+        "ContinuousFlexibility.Analysis.N01HeightPlateauDirections",
+        "ContinuousFlexibility.Analysis.CircleJetPointwiseEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01PlateauEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/N01PlateauEnergy.lean",
+      "sha256": "0c7088358214302ed88274976e1b723373b29c1dbdb2e07af33481abee3146ca",
+      "blob": "e0c39a39b2dd39e9e6c0deee4abb7346510abd93",
+      "lines": 161,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ControlPlateauOverlap",
+        "ContinuousFlexibility.Analysis.MaterialPlateauLocalization",
+        "ContinuousFlexibility.Analysis.MaterialCutoffJetEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01PlateauEnergyEnvelope.lean",
+      "sha256": "7eb6f9d6888349da34121fa6e2b67e5c1606bc3b9df60685db722b799ff2f54a",
+      "blob": "ef46f6e3df3da294a3edf0392fdb67b2990c61c1",
+      "lines": 99,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01PlateauEnergy",
+        "ContinuousFlexibility.Analysis.PhysicalGradeEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01PlateauMaterialPowers",
+      "path": "src/ContinuousFlexibility/Analysis/N01PlateauMaterialPowers.lean",
+      "sha256": "1cfd69f3727380d6d07a5c4320d46dbe16a7a7d2ce46519a829526a7580f4428",
+      "blob": "936b4c3c7b8f596cf3663763ea5dc86ed37a6a09",
+      "lines": 70,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ControlPlateauWeights",
+        "ContinuousFlexibility.Analysis.N01FlowSamplePrefactor"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01RadialFlow",
+      "path": "src/ContinuousFlexibility/Analysis/N01RadialFlow.lean",
+      "sha256": "5004376f805d5d555f8041af9386b335ae722e16f62dbc2ddf8ba28a5868bd7c",
+      "blob": "18a0371244efb04d672cc40253d7036589b1cf2d",
+      "lines": 221,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.RadialHeight",
+        "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+        "ContinuousFlexibility.Analysis.OpticalTravelVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnChartRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnChartRegularity.lean",
+      "sha256": "9fa7482f5ebf7b9d7b79023a0eea8d97e5d7ed194aeb165e9d6b2735f44f1c0c",
+      "blob": "2f0bf651cf6213d86ab32b8458bb85e9aefa2764",
+      "lines": 104,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnChartDifferentiation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReturnMargins",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReturnMargins.lean",
+      "sha256": "f6837c40fe69a787217b9cac9af9388bfba17785c39c29bdcad83afca21f4fbb",
+      "blob": "f239b311b3a9f8428fb49177124e1289113a0512",
+      "lines": 103,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReverseMaterialOrder",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReverseMaterialOrder.lean",
+      "sha256": "e9836ff7f50a7b3c628b963c1bc2c964ce58bca72490d35593b1b961a246e040",
+      "blob": "2e586a38ab3d213ec44a7a6a535fc99bc0ff7da5",
+      "lines": 42,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleBalancedConstraint",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ReverseMaterialOrderActualCell",
+      "path": "src/ContinuousFlexibility/Analysis/N01ReverseMaterialOrderActualCell.lean",
+      "sha256": "96ad532ea8fdd3d168a8767de90e2c401b27ec851e6d662b27ffebeadc664bcc",
+      "blob": "d9f054cb3a08d0529dd0a5311eed9e8ded847919",
+      "lines": 56,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReverseMaterialOrder",
+        "ContinuousFlexibility.Analysis.ActualRadialCellComparison"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SectorFlowParameterOrder",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrder.lean",
+      "sha256": "494c9162be0c743bc15a29806486434cd58e48579d9e08bdeb3dbc2c83a95c47",
+      "blob": "ae74eb3f6fef35028c48d77d797646166361acde",
+      "lines": 83,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SectorParameterGeometry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01SingletonControl",
+      "path": "src/ContinuousFlexibility/Analysis/N01SingletonControl.lean",
+      "sha256": "9f9e4492e6de213eeab8d2c0539c46d9915dbced39ed0d26cb3edc022a8a9d47",
+      "blob": "25afc3b1c1b5e989c4bf975843efec5d91ce5adb",
+      "lines": 174,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleSingletonControl",
+        "ContinuousFlexibility.Analysis.N01RadialFlow",
+        "ContinuousFlexibility.Analysis.TameLocalCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01StateLocalizationEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/N01StateLocalizationEnergy.lean",
+      "sha256": "9c6e9d707e5e4d92aa597072a0b065ee34775dafa16d62cdaaa997d927baa98f",
+      "blob": "37df6176b4c5ea9af1ba7d15003e915e03372b7c",
+      "lines": 182,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01LocalizedStateDirections",
+        "ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01TravelLowerBound",
+      "path": "src/ContinuousFlexibility/Analysis/N01TravelLowerBound.lean",
+      "sha256": "4e31dbb8ced2a9ab3fb2e4eff436ed295c1c79c32210f5563682e0cc0b278e14",
+      "blob": "58e7765976d0c6db5a89bf6263b9322fa73fdd52",
+      "lines": 54,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnMargins",
+        "ContinuousFlexibility.Analysis.OpticalTravelVariation",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01WeightedActualCellTransfer",
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedActualCellTransfer.lean",
+      "sha256": "982ee794c7c55de8625ed49f9923a3231d26398e8c72d04ca3975d97c0e88bf7",
+      "blob": "6417f2f68f971a4f5c4fe2df9e266fd9e3ce7a61",
+      "lines": 61,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint",
+        "ContinuousFlexibility.Analysis.ActualRadialCellComparison",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01WeightedPlateauEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedPlateauEnergy.lean",
+      "sha256": "6c7886da6da9f00382e16ab66ef135525ae7573060ffd547a26e545c6cc6220c",
+      "blob": "77fa9425425ddabd439c2ecabe63752643a07c5c",
+      "lines": 94,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01PlateauEnergy",
+        "ContinuousFlexibility.Analysis.N01PlateauMaterialPowers",
+        "ContinuousFlexibility.Analysis.WeightedCutoffJetEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/N01WeightedPlateauEnvelope.lean",
+      "sha256": "1efedf87180cdb2763a957ae0fe5401bbca4e22b31ed31e00cdd208a177fcb12",
+      "blob": "cd0c5ae71892ff23d7ab99541bf0a066e3c3ec1f",
+      "lines": 99,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01WeightedPlateauEnergy",
+        "ContinuousFlexibility.Analysis.N01PlateauEnergyEnvelope",
+        "ContinuousFlexibility.Analysis.FinitePhysicalEnergyBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.OneHighLocalizedSlot",
+      "path": "src/ContinuousFlexibility/Analysis/OneHighLocalizedSlot.lean",
+      "sha256": "3cce0f38b3af8b32f68ead027dff69527251048603426630c589c93d0bc6daca",
+      "blob": "57f9d1089d4eb988f128391593040234de594fb9",
+      "lines": 82,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.Algebra.BigOperators.Fin"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.OpticalTravelVariation",
+      "path": "src/ContinuousFlexibility/Analysis/OpticalTravelVariation.lean",
+      "sha256": "98f25071a1cca6f9546e1138c9c1c1155c14f8bcc31f20a3f453639b1004eb51",
+      "blob": "0edc9fabec341f0123a954588e3b0a3c2d694e76",
+      "lines": 306,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.Analysis.Calculus.BumpFunction.FiniteDimension",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.Analysis.Calculus.Deriv.Support",
+        "Mathlib.Analysis.Calculus.ParametricIntegral",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PhysicalGradeEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/PhysicalGradeEnergy.lean",
+      "sha256": "11834235093b44908d7d620e17fc5f739e1c7cfc71d9ba5a55e6801f2ba404c4",
+      "blob": "d2157bf57393588e55ea99e8fcc4c9ad3debdeef",
+      "lines": 132,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialComponentEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.PolarHeightCharacteristicVariation",
+      "path": "src/ContinuousFlexibility/Analysis/PolarHeightCharacteristicVariation.lean",
+      "sha256": "0284464332beab01217c9d4d5d3229e744a4b181804386212591e221a478c3a0",
+      "blob": "e2a619998b82e149a9b27452d288a1f5fdfc903f",
+      "lines": 185,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01FlowChartIndependence",
+        "ContinuousFlexibility.Analysis.OpticalTravelVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveDifferential",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveDifferential.lean",
+      "sha256": "0ed62c54e8cf1e36f906368c47e79e6aef089ad2e439e1bb44ff99a36fd3e7a3",
+      "blob": "a6290d8207dc1171bd6b4aa1a4d60b512e9c35b4",
+      "lines": 289,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.Graded",
+        "Mathlib.Analysis.Calculus.LineDeriv.Basic",
+        "Mathlib.Analysis.Calculus.Deriv.Linear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveJetContinuity",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveJetContinuity.lean",
+      "sha256": "ac43d9efc9718e39d2396807969a917982910e941c3f6746da0903eb17bd9704",
+      "blob": "a22c669bc7f09ebaa7495461164fa3d0e672c93f",
+      "lines": 162,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleMultilinearRealization"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveJetEvaluation",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveJetEvaluation.lean",
+      "sha256": "6da07a490055ae9fe0324ff2795da2f0685759a46a53fb52c0064efd1172abcd",
+      "blob": "48e58ca8cf7aeed84718db183e87b8b497fd2b05",
+      "lines": 255,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.BastianiCurveChain",
+        "ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveJets",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveJets.lean",
+      "sha256": "2411247d23d436966563315406fc15b2bf2c3a2340c3b77a94a0391db66b8e0b",
+      "blob": "b7ada8e57f9f58fa568762693eaded6538708e6e",
+      "lines": 352,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveDifferential",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic",
+        "Mathlib.Data.Fin.VecNotation",
+        "Mathlib.Tactic.FinCases",
+        "Mathlib.Tactic.Module"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveMultilinearCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveMultilinearCalculus.lean",
+      "sha256": "a995a333a9cfadd7691d2f0e6ccf93031f6163c54f61983c9b88bffdbdf4bcd0",
+      "blob": "b06d7fe6ff1a79dae3fc6146ec0173ac7d93c20f",
+      "lines": 259,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonCorrectionBounds",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonCorrectionBounds.lean",
+      "sha256": "d7afc00ad27793bfece77c68c16c8ac99a916bb11748243249c9532e46883d31",
+      "blob": "dd9ceccac57e7c0e0177c3c1ea3f598ac5f95fad",
+      "lines": 228,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonEstimate",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonEstimate.lean",
+      "sha256": "ce849317ef11eef99f63fef2e65cab0c0b53a2a774234544bf8153f403c6a0c7",
+      "blob": "413781052abc31ae18e55ad029d862aee4bea029",
+      "lines": 198,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveJetEvaluation",
+        "Mathlib.Analysis.Calculus.MeanValue",
+        "Mathlib.Tactic.Abel"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonRecurrence.lean",
+      "sha256": "1694d9e14ac77afc97753abb319e9a19e30cd1951c916c5601dce686127ff71f",
+      "blob": "1070c02560dd58b2ec815b60d19b41c426e76844",
+      "lines": 501,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonSmoothing"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonSmoothing",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonSmoothing.lean",
+      "sha256": "2b1f91b25c6095d372aaf2a674358341b86949705a571cf74749e70ee516eb39",
+      "blob": "33668a3abe18c6edb6b936aba5defae813815058",
+      "lines": 215,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonTameBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonTameBounds",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonTameBounds.lean",
+      "sha256": "e56cb6c28792911338b813bfb075b4ee729d6595c30c1238fc9b9e4b870595da",
+      "blob": "5503c963c9d8eca2e54fbd27b8caec175902d0e0",
+      "lines": 196,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonEstimate",
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ProjectiveNewtonTameData",
+      "path": "src/ContinuousFlexibility/Analysis/ProjectiveNewtonTameData.lean",
+      "sha256": "837939176a6417c7f69cc29a0500a6b3bd4bc771a59efb123668383658eb4e99",
+      "blob": "459a4217e0e74e80a5ba60c98d267133b7f7b914",
+      "lines": 139,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonRecurrence",
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonCorrectionBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialPlateauBounds",
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauBounds.lean",
+      "sha256": "2dcc02ae86ae2aa297e88e15129cfe8018a7e717d171042191aa41b47f9e15ec",
+      "blob": "04403f37c4c15ef1ffee456d4e1b2f1ff86f11fd",
+      "lines": 125,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialPlateauHeight",
+        "ContinuousFlexibility.Analysis.MaterialPlateauWeights"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialPlateauCutoff",
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauCutoff.lean",
+      "sha256": "93c93943628699a394c9c4fbaf9940b815063725e766819ec607833ec4c0b325",
+      "blob": "38c728ea7e4a3ed6b3a15f3801a93d2b562f3373",
+      "lines": 170,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CompactRadialHeightMember",
+        "Mathlib.Analysis.SpecialFunctions.SmoothTransition"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialPlateauHeight",
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauHeight.lean",
+      "sha256": "0273102cf3efaabaa62eb9cd25946cf7e970a4c9760639b8e01946543bddb82a",
+      "blob": "837042fafa128efaee997d7ca2353f87ea9b2e8e",
+      "lines": 140,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialPlateauJets",
+        "ContinuousFlexibility.Analysis.MaterialPlateauGeometry",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialPlateauNorm",
+      "path": "src/ContinuousFlexibility/Analysis/RadialPlateauNorm.lean",
+      "sha256": "0aeb8c1a8c67b561b13c5875e5df04e2839b452ee1a144e3f698edc772296032",
+      "blob": "8ce5ed2588bed20f6329ec65c58e6ba35b116eba",
+      "lines": 213,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialPlateauBounds",
+        "ContinuousFlexibility.Analysis.MaterialPlateauSize",
+        "ContinuousFlexibility.Analysis.CylinderUniformNorm",
+        "ContinuousFlexibility.Analysis.TameLocalCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RadialPrimitiveJets",
+      "path": "src/ContinuousFlexibility/Analysis/RadialPrimitiveJets.lean",
+      "sha256": "a5983819850d1c330894dfe71b9bb1ff071c96e065065589c062d4543c0f596f",
+      "blob": "257cef0ec28fc3b989ad9e52faca42d0581f3797",
+      "lines": 93,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialRadiusJets",
+        "Mathlib.Analysis.Calculus.Deriv.Support",
+        "Mathlib.MeasureTheory.Function.LocallyIntegrable"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.RestrictedOverlapEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/RestrictedOverlapEnergy.lean",
+      "sha256": "924271bf5b72994a66fd22c486ba5e5c8476eb513f08249da27345fa910dbc91",
+      "blob": "4e30443870c01c9b7c4ff7654b81cdd830dfa815",
+      "lines": 127,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialComponentEnergy",
+        "Mathlib.MeasureTheory.Integral.Lebesgue.Add"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnChartDifferentiation",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnChartDifferentiation.lean",
+      "sha256": "ab636ab85e65e6aba0b55ecdd9ced4fe4f0310526d81018d8c97bc39445e707a",
+      "blob": "ca6d4d616d1968243bac248a480a21f7f32a2bbe",
+      "lines": 123,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnChartIdentities",
+        "Mathlib.Analysis.Calculus.Deriv.Inverse",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+        "Mathlib.Topology.Order.MonotoneContinuity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnChartIdentities",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnChartIdentities.lean",
+      "sha256": "64ca43d53a9d0bfd4154cc23ab0d0662775890ee1cfd8d4d276ab9a03d2d0226",
+      "blob": "b546432a004c91b13263ebf87310eaf795025649",
+      "lines": 275,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleReturnAlgebra",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ScalarDerivativeLimit",
+      "path": "src/ContinuousFlexibility/Analysis/ScalarDerivativeLimit.lean",
+      "sha256": "452f0fc47a1608d1ff5d71758b9796d5c5b9df3e1e6e7c9da431d550743704ca",
+      "blob": "3a3f4c13462ca8514e0853376c78778a8c5cfcab",
+      "lines": 144,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Calculus.Deriv.Slope",
+        "Mathlib.Analysis.Calculus.MeanValue",
+        "Mathlib.Topology.MetricSpace.Pseudo.Basic",
+        "Mathlib.Topology.UniformSpace.Cauchy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ScalarFlowParameterVariation",
+      "path": "src/ContinuousFlexibility/Analysis/ScalarFlowParameterVariation.lean",
+      "sha256": "f62ff834cf07ce56f7fdebc7d0fd4e8cf98c0a6a0c079a653eac0e0a5c6a29ca",
+      "blob": "1c1bf9250df13437ee0ef48f05abff67fcd1e3d4",
+      "lines": 114,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ScalarFlowVariation",
+        "Mathlib.Analysis.Calculus.ParametricIntervalIntegral",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ScalarFlowSmoothness",
+      "path": "src/ContinuousFlexibility/Analysis/ScalarFlowSmoothness.lean",
+      "sha256": "1ab3d84fb340cd58d3e102c6b2a16a02b923b2b30537398b4e89fc699ea35844",
+      "blob": "d6f914dcafe3208437daa1a910871e1b141e4e3a",
+      "lines": 108,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.AngularRegularityIntegral"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ScalarFlowVariation",
+      "path": "src/ContinuousFlexibility/Analysis/ScalarFlowVariation.lean",
+      "sha256": "86f382b664b0bcaf4b96c604d704cdb09d4e6e3d20d0e11f01df2b2aa59ed96d",
+      "blob": "1d045d5e41eec3a543ecd9f6e69c108b3115b968",
+      "lines": 247,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CharacteristicODEUniqueness",
+        "Mathlib.Analysis.Calculus.Deriv.Slope",
+        "Mathlib.Logic.Function.Basic",
+        "Mathlib.MeasureTheory.Integral.DominatedConvergence"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SectorParameterGeometry",
+      "path": "src/ContinuousFlexibility/Analysis/SectorParameterGeometry.lean",
+      "sha256": "0daae8b9f4f8b63e4bd6af764ca24973c63ce45fea2cc894a6b1678d35d42415",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490",
+      "lines": 105,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SolveStateSpaces",
+        "ContinuousFlexibility.Analysis.SolveReturnEquations",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAffine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "lines": 124,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.ProjectiveJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsAngularJets",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAngularJets.lean",
+      "sha256": "e6f60a1562b21382dc6f1059634a9eb9a773e5f7795d67c871ad7074afea01e4",
+      "blob": "237d9bd4419709eff54e03c8267304d7c6d0961d",
+      "lines": 288,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit",
+        "Mathlib.Analysis.Calculus.ParametricIntervalIntegral",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsBoundedLimit.lean",
+      "sha256": "ab76a191e0cd4335130295fb48159ef079137ae394f1ae36625db14e272e68b1",
+      "blob": "47177e7f1d7be00084e1a5f6627b1824b278307d",
+      "lines": 122,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsUniformBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsJetLimits",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsJetLimits.lean",
+      "sha256": "8f3476bcf2360046b37b80810a3a779a0fdc26a80e3798c02757be803e60dc0a",
+      "blob": "9005be0f325f19ce9c178f015f27e9d60ed8bc20",
+      "lines": 89,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ScalarDerivativeLimit",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsLimitAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsLimitAssembly.lean",
+      "sha256": "6627457cb7c1f8851b5820124d9dd3c59cb63dd557910d311c8b688e8fd11809",
+      "blob": "74eb23a3344e171dc1c31652669ad0d54c941b32",
+      "lines": 118,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsJetLimits",
+        "Mathlib.Topology.UniformSpace.Equicontinuity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsLocalDirections",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsLocalDirections.lean",
+      "sha256": "5e34aa03b84a0c5f836b9c38e08bf311012ecec0144d145ffca8d24b52d087a9",
+      "blob": "a3d5087351bd6b7679b86b72d12936c5290904f6",
+      "lines": 78,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine",
+        "Mathlib.Analysis.Calculus.MeanValue"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsMixedScalarLine.lean",
+      "sha256": "629738b395bbe87287c3da15bb7d1f930bacc7c54cb2cbada180c58e25a5fd65",
+      "blob": "fd9ce319319ed8c8cdf4d7be43cb6a27ce644ed4",
+      "lines": 70,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsOneHighLimit",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsOneHighLimit.lean",
+      "sha256": "2866cb506fab192cc70c632af5d08297d5caa69e339759d2f980a422b3d4236c",
+      "blob": "0253a94eb6f31c6f5aec0ff43dcf64a4b067b3ca",
+      "lines": 59,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsBoundedLimit",
+        "ContinuousFlexibility.Analysis.SmoothDirectionsAffine"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsScalarLine.lean",
+      "sha256": "565509069ae721ae2805249702f29121a5c767f3b1c3d7c71ec0bf347e12c1c3",
+      "blob": "74c704f4b692872fed0c1cd89b6aaf2fec178e1b",
+      "lines": 78,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SmoothDirectionsUniformBounds",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsUniformBounds.lean",
+      "sha256": "a8ab105dab539bb0c06b103ed33ca7f448dbce079303900943a60959ff4aa048",
+      "blob": "16fe8d01e715b0519e63ff6504066b9e343c9f50",
+      "lines": 108,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SmoothDirectionsLimitAssembly",
+        "Mathlib.Topology.MetricSpace.Equicontinuity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveCircleProjection",
+      "path": "src/ContinuousFlexibility/Analysis/SolveCircleProjection.lean",
+      "sha256": "ba968b15ffb8385ab7e514270986d2c827d155ac5000034f2abb37f21cc387d7",
+      "blob": "12c5f6284b9a88cc64058ab9477521b9917afc06",
+      "lines": 275,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateKappaBounds"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveReturnEquations",
+      "path": "src/ContinuousFlexibility/Analysis/SolveReturnEquations.lean",
+      "sha256": "936751f4227d524f93ee0daa0d620fb309e98bd78888b0b7cefed8da06e82d6c",
+      "blob": "79f7407854a3dea4f22ebf924f1a074265e878dc",
+      "lines": 145,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Blueprint.Statements"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveSmoothing",
+      "path": "src/ContinuousFlexibility/Analysis/SolveSmoothing.lean",
+      "sha256": "4ea43583808c5a39ed1728d26c109460afd742de08050a707c621fb62a6caca9",
+      "blob": "4068b2705c43380bacb1559feca9257552e0a2a3",
+      "lines": 119,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameTransfer",
+        "ContinuousFlexibility.Analysis.TamePairTopology"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.SolveStateSpaces",
+      "path": "src/ContinuousFlexibility/Analysis/SolveStateSpaces.lean",
+      "sha256": "035be369042b7d7ab904bdd9ec4fed643b94e2bc65d7dc44835529cb6a647115",
+      "blob": "ffea3f07f4a1fc03b0cdd99bc1d9bdd6c64bed13",
+      "lines": 184,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SolveCircleProjection",
+        "ContinuousFlexibility.Analysis.SolveSmoothing",
+        "ContinuousFlexibility.Analysis.ProjectiveNewtonTameData",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+      "path": "src/ContinuousFlexibility/Analysis/StateControlCofiniteClosure.lean",
+      "sha256": "594be12f48eed4685e285afe820230da00556688a54d2b0291729ad4776e065c",
+      "blob": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+      "lines": 133,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+        "ContinuousFlexibility.Analysis.MaterialSampleCofinite",
+        "ContinuousFlexibility.Analysis.StateControlCofiniteJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlCofiniteJets",
+      "path": "src/ContinuousFlexibility/Analysis/StateControlCofiniteJets.lean",
+      "sha256": "d9d5a8d7c45b61e9e8007f0580acc86caaa301282a621c138222060bd4f88dcf",
+      "blob": "d965fd89911e33cac1faec72da3a9618a0bcbfca",
+      "lines": 86,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateControlDecay",
+        "Mathlib.Order.Filter.Cofinite",
+        "Mathlib.Order.Filter.Finite"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlDecay",
+      "path": "src/ContinuousFlexibility/Analysis/StateControlDecay.lean",
+      "sha256": "ad97b5ecf79b5515df1afa55fe01d64cf589824b4e9b7821e0c298261a4f5589",
+      "blob": "91f057d8f557ed9b604e081ac6ef4b15652ea313",
+      "lines": 142,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.StateProfileRegularity",
+        "Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateKappaBounds",
+      "path": "src/ContinuousFlexibility/Analysis/StateKappaBounds.lean",
+      "sha256": "52f620b420c0d975e96a206b6a90a128c9d0787a132e1a6ac8b98617303697bf",
+      "blob": "a53457ac660853de9bd3d0a1f4585bdf5496de80",
+      "lines": 136,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic",
+        "Mathlib.Topology.Algebra.InfiniteSum.ENNReal"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateProfileRegularity",
+      "path": "src/ContinuousFlexibility/Analysis/StateProfileRegularity.lean",
+      "sha256": "1bfcd8926355f986c1ad0dd4ded1e38a0d6516a7dc41ea0cb2a234a7dbe51b86",
+      "blob": "1b82422ec7c324e55c6a462c746eaa8dd6349368",
+      "lines": 92,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Analysis.FlatExtension"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameLinear",
+      "path": "src/ContinuousFlexibility/Analysis/TameLinear.lean",
+      "sha256": "6cbb0db795c3cd44a9282ef65b2d555b0bf2dbf727ecaaa9655e8bdaa982ce44",
+      "blob": "47955116a5d0f378c95941eae26a941510fe6015",
+      "lines": 268,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.Graded"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameLocalCalculus",
+      "path": "src/ContinuousFlexibility/Analysis/TameLocalCalculus.lean",
+      "sha256": "6952ac2501bd38f0f6d51b1633f52d30ed1820f9380bd6dd58ebc24c601e1991",
+      "blob": "ff73f585abd56ed7730e58dcb46676afcd3ad95b",
+      "lines": 250,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.TameLinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "lines": 204,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Normed.Module.Seminorm.Basic",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic",
+        "Mathlib.Topology.Order.OrderClosed",
+        "Mathlib.Topology.Instances.Real.Lemmas",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.Ring"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TamePairTopology",
+      "path": "src/ContinuousFlexibility/Analysis/TamePairTopology.lean",
+      "sha256": "fd12faac5a80911a093433c1a9af605f7f4f1ec2a06394db720458966e4a34c0",
+      "blob": "4e394cc6bfd849b77932a64d1985e18cd08cda62",
+      "lines": 76,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.TameLocalCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameTransfer",
+      "path": "src/ContinuousFlexibility/Analysis/TameTransfer.lean",
+      "sha256": "ea7705f4c2ecf863bde53d9fc8d3ac4b410c692e9b1defdbb28328fd88470552",
+      "blob": "e52be8048255e3f9fc3bff0efef7a49ed7efc709",
+      "lines": 370,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Analysis.TameLinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeakBranchCore",
+      "path": "src/ContinuousFlexibility/Analysis/WeakBranchCore.lean",
+      "sha256": "ff72fc7ade21dc4c8e642dd464b8bb4e1ce704f51b8448d2110f9b8d872cd87a",
+      "blob": "88f8b7833f2e44a238a3b3ee97dfa97b420dbeea",
+      "lines": 237,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.NonlinearCompletion",
+        "ContinuousFlexibility.Radial.FourierOrthogonality"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.WeightedCutoffJetEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/WeightedCutoffJetEnergy.lean",
+      "sha256": "3227b155c5ff2f5ef441689c17a8bd6bf7a294acd795a53b819a8d03b697aa76",
+      "blob": "2ec9124aab66a149f61d6712943cfb9805a4729b",
+      "lines": 135,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialCutoffJetEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.Statements",
+      "path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+      "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+      "lines": 275,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Milestones"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.Annular",
+      "path": "src/ContinuousFlexibility/Contracts/Annular.lean",
+      "sha256": "9940457e243dc1e4a40d89105b67ad8bb77429999591de31f730476a9f7eb6a7",
+      "blob": "7ad8e78628dc68679325c8a9666f6188ac283c47",
+      "lines": 149,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.FlatCollar",
+        "Mathlib.Algebra.Ring.Periodic",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.CartesianFlatness",
+      "path": "src/ContinuousFlexibility/Contracts/CartesianFlatness.lean",
+      "sha256": "423c0bdf6ea4219d2be6afeb6a66d7132881db5f55066c8c06506fd05f558f9e",
+      "blob": "82d8ff114430584559e684e375caaf65dac9e177",
+      "lines": 182,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianMetricRegularity",
+        "ContinuousFlexibility.Geometry.PullbackCurvature"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.CartesianHeight",
+      "path": "src/ContinuousFlexibility/Contracts/CartesianHeight.lean",
+      "sha256": "13c8e838561fa6a48352188850a959bac1e83ea51a90df74bd7c36e455099c1e",
+      "blob": "3d2c47232429c1483ed9994d264669b84e08b30a",
+      "lines": 179,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.Annular",
+        "Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv",
+        "Mathlib.Analysis.InnerProductSpace.Calculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.CartesianMetric",
+      "path": "src/ContinuousFlexibility/Contracts/CartesianMetric.lean",
+      "sha256": "a402c2565b6988149131730672e29face82992b8465c68c2bb085c93364d14ef",
+      "blob": "c49e7bc3b082f4c1af61d2f50fb0e154139a5245",
+      "lines": 152,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianHeight",
+        "ContinuousFlexibility.Geometry.FlatDevelopment",
+        "ContinuousFlexibility.Geometry.CartesianCoframe"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.CartesianMetricRegularity",
+      "path": "src/ContinuousFlexibility/Contracts/CartesianMetricRegularity.lean",
+      "sha256": "9ba3a0471558d0807c68fa5983893624686e9503130f95ba92e3c2224e7cfad5",
+      "blob": "f828b1e65dccd3969ac9f0f6fbc43da32d1ee319",
+      "lines": 237,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianMetric",
+        "ContinuousFlexibility.Geometry.CartesianMetricCoframe"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.CenteredDevelopment",
+      "path": "src/ContinuousFlexibility/Contracts/CenteredDevelopment.lean",
+      "sha256": "73985abd120e54bae362416154ea41aea05d3018533889fa782c85b84a30a6f9",
+      "blob": "cea1f2eb8a91147b5c4b8c9531425f97815ff9b1",
+      "lines": 109,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.DevelopmentSymmetry",
+        "ContinuousFlexibility.Geometry.EuclideanRigidity",
+        "ContinuousFlexibility.Geometry.PlanarOrientation",
+        "Mathlib.Analysis.Convex.PathConnected"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.DevelopmentSymmetry",
+      "path": "src/ContinuousFlexibility/Contracts/DevelopmentSymmetry.lean",
+      "sha256": "ab634fe386042235fa3600b0b1ae466a6db49e28a1faa595b82464ab529d2e0e",
+      "blob": "1fe0c7da34d07cce6ad1ded51dfcb15a23cd7bf4",
+      "lines": 129,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.IsometricGraph",
+        "Mathlib.Topology.Algebra.Group.ContinuousInv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.GraphFamilyCurvature",
+      "path": "src/ContinuousFlexibility/Contracts/GraphFamilyCurvature.lean",
+      "sha256": "27a4def56bd8ad96175b0f19d6aa4b774445fec605729856f7fb6e87d47c5132",
+      "blob": "72d932e3f8ffddb21496059eac6efb77ed8395bf",
+      "lines": 250,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.GraphFamilyImage",
+        "ContinuousFlexibility.Geometry.GraphSurfaceGeometry",
+        "ContinuousFlexibility.Geometry.SurfaceReparametrization"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.GraphFamilyImage",
+      "path": "src/ContinuousFlexibility/Contracts/GraphFamilyImage.lean",
+      "sha256": "35b90747c484cea05eb1af10ebb8db0971ea6633cdc45adced5c70605a6ccdb2",
+      "blob": "c3eadba8ae30383a127b2068e7f6b8e94c028c79",
+      "lines": 227,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphRotationFamily"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.IsometricGraph",
+      "path": "src/ContinuousFlexibility/Contracts/IsometricGraph.lean",
+      "sha256": "0b1b61403fe28245dabce8ecbde93fcfad00550513e37047e4a9162f97e71638",
+      "blob": "a743594693fd7fcb7ea7574c9f443316db1d1aaa",
+      "lines": 103,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.PlanarDevelopment",
+        "ContinuousFlexibility.Geometry.GraphEmbedding"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Contracts.PlanarDevelopment",
+      "path": "src/ContinuousFlexibility/Contracts/PlanarDevelopment.lean",
+      "sha256": "a2f5eb2ba11b38d8fb81f04e2bf42b3ed5e0680db46149311569b94c814dfbb2",
+      "blob": "12b67fc1210dd5dd012696bc415f854fc24de52a",
+      "lines": 75,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianFlatness",
+        "ContinuousFlexibility.Geometry.MatrixDevelopment"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CapDisk",
+      "path": "src/ContinuousFlexibility/Geometry/CapDisk.lean",
+      "sha256": "8ef6f43da90674645a6df8fdecd5291e8d27eee64af9b25cde9eaadbe14a2820",
+      "blob": "746a545003540715af7a43893e906a2ea64ae8e8",
+      "lines": 531,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapRevolution",
+        "ContinuousFlexibility.Contracts.CartesianMetricRegularity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CapMeridian",
+      "path": "src/ContinuousFlexibility/Geometry/CapMeridian.lean",
+      "sha256": "42aa59b2affaac3cd809ebf98d8411d2129d31a45cc3d6101e2c96a0f5c6ca1e",
+      "blob": "2a7c6370966ecff711d7f869a63d3e3080d75a89",
+      "lines": 523,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates",
+        "Mathlib.Analysis.SpecialFunctions.SmoothTransition",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+        "Mathlib.Analysis.Calculus.Deriv.Prod",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CapRevolution",
+      "path": "src/ContinuousFlexibility/Geometry/CapRevolution.lean",
+      "sha256": "669fd3d026c2392ea3d3b02a22036e50fd1d050f57fe9685d6ce23a417fd6417",
+      "blob": "53c8fce2bf084e6cd436440d8cff68fdee0c71f6",
+      "lines": 235,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapMeridian",
+        "ContinuousFlexibility.Geometry.GraphEmbedding",
+        "Mathlib.Analysis.Complex.Circle",
+        "Mathlib.Topology.Order.Compact"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CapSphereProfile",
+      "path": "src/ContinuousFlexibility/Geometry/CapSphereProfile.lean",
+      "sha256": "a865fb197b5848b3549615de741f620761c447dcb2f08d657222b69ee9304c19",
+      "blob": "07f4cea5fc3641ca3dfc0edf35c088f1f424f333",
+      "lines": 499,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapDisk"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CartesianCoframe",
+      "path": "src/ContinuousFlexibility/Geometry/CartesianCoframe.lean",
+      "sha256": "745d5649f0860fd64e8c4b661318490dc7705e7bef818febc73cc93141dd44cb",
+      "blob": "af71ba088613c38143ccd0dc039fa9cad84dbebc",
+      "lines": 92,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.Primitive",
+        "ContinuousFlexibility.Geometry.LocalInverse"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CartesianDevelopment",
+      "path": "src/ContinuousFlexibility/Geometry/CartesianDevelopment.lean",
+      "sha256": "846d85ada5fadb5bd692a72e7eb9d88f9b1794c6030e280a2dd073c1b47c082f",
+      "blob": "c32b6403f4970ac2e2e289ebbf98e092e9486109",
+      "lines": 248,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianCoframe",
+        "ContinuousFlexibility.Geometry.GlobalCovering",
+        "Mathlib.Analysis.Calculus.MeanValue"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CartesianExterior",
+      "path": "src/ContinuousFlexibility/Geometry/CartesianExterior.lean",
+      "sha256": "738559d70e00191283e51bcde3af67055557700108eea7073dbe30b5b97b4392",
+      "blob": "5e477192dd93dd35df63c69d0648c33fc0a3cf1c",
+      "lines": 106,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianDevelopment",
+        "Mathlib.Analysis.Normed.Module.Connected",
+        "Mathlib.Analysis.Complex.Basic",
+        "Mathlib.LinearAlgebra.Complex.FiniteDimensional"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CartesianMetricCoframe",
+      "path": "src/ContinuousFlexibility/Geometry/CartesianMetricCoframe.lean",
+      "sha256": "17d76aa2dd7ef40feb5d3af2ca747d2a3104e0691ddd693a060f31fdbe90f117",
+      "blob": "0682a2c08103f90e0eac68c456939430c7568cac",
+      "lines": 180,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianCoframe",
+        "Mathlib.Analysis.SpecialFunctions.Sqrt"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CoframeCurvature",
+      "path": "src/ContinuousFlexibility/Geometry/CoframeCurvature.lean",
+      "sha256": "9191c34c5c2c8938892c8b58014ba81809d1227cf2690fb03e340336e2394cf1",
+      "blob": "247a33134d7164315a38106183727ccd2d443e0e",
+      "lines": 156,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeSO2"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CoframeRotationAlgebra",
+      "path": "src/ContinuousFlexibility/Geometry/CoframeRotationAlgebra.lean",
+      "sha256": "431357eda82497dec59b6ea08cc667b8b72ec4ed347062c7d21d04948766fdbe",
+      "blob": "59af1ceb5409e75a84b120d700d1fe5cce5a0df4",
+      "lines": 93,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianCoframe",
+        "Mathlib.Tactic.Linarith"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.CoframeSO2",
+      "path": "src/ContinuousFlexibility/Geometry/CoframeSO2.lean",
+      "sha256": "8539891e2334fe28dc2c1ee2cd8616e65b07827c9acbf86ebee598ae29881041",
+      "blob": "2b75e8e774ad4a1cbbbde540fec34c1706e3c193",
+      "lines": 181,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeRotationAlgebra",
+        "ContinuousFlexibility.Geometry.GaugeConnection"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.EuclideanRigidity",
+      "path": "src/ContinuousFlexibility/Geometry/EuclideanRigidity.lean",
+      "sha256": "787a63606f71543ef633124e5dc399e7d12e03279be3c0c0dbcf2e0d2784d036",
+      "blob": "e8661ee46213781a21e712a99628a89899e0e756",
+      "lines": 209,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates",
+        "Mathlib.Analysis.Calculus.MeanValue",
+        "Mathlib.Topology.Order.IntermediateValue"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates",
+      "path": "src/ContinuousFlexibility/Geometry/EuclideanRigidityCoordinates.lean",
+      "sha256": "d7ba4da0ff59fc2bbd093cb2e7d36c6b9e998e2e4a59137f619c0b44e905cf57",
+      "blob": "00895726584d3a74b43b378fa7e8e4ad42dfcbe2",
+      "lines": 173,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeCurvature",
+        "ContinuousFlexibility.Geometry.FlatDevelopment",
+        "ContinuousFlexibility.Scalar.FormPullback"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.FlatDevelopment",
+      "path": "src/ContinuousFlexibility/Geometry/FlatDevelopment.lean",
+      "sha256": "78dd60da4c54a7ac23085c024521362e6aa1b7c638768dadf24fce16f6559587",
+      "blob": "3e2f2f5452a89bf50deabb009d5a4a87cedca098",
+      "lines": 200,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.HeightCoframe",
+        "ContinuousFlexibility.Geometry.Primitive",
+        "ContinuousFlexibility.Geometry.LocalInverse"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.GaugeConnection",
+      "path": "src/ContinuousFlexibility/Geometry/GaugeConnection.lean",
+      "sha256": "aaf5bf9735e95865ecc31e06a2f6c3d50611c9682b689bcd7be6626b32dc4124",
+      "blob": "165e53958ac3b06f66a6fc660e1cd618cad4eae2",
+      "lines": 106,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.RotatedCoframe"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.GlobalCovering",
+      "path": "src/ContinuousFlexibility/Geometry/GlobalCovering.lean",
+      "sha256": "afe0bf8f5e16c554e2658cd7378692e3fa1e64b16d3bb8161502b19910f59001",
+      "blob": "2c05705cd165d83c47d207ed5ed8b1800b6380b0",
+      "lines": 133,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.GlobalInverse",
+        "ContinuousFlexibility.Geometry.LocalInverse",
+        "Mathlib.Topology.Covering.Basic",
+        "Mathlib.Topology.Homotopy.Lifting",
+        "Mathlib.Analysis.Convex.Contractible",
+        "Mathlib.Analysis.LocallyConvex.WithSeminorms"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.GlobalInverse",
+      "path": "src/ContinuousFlexibility/Geometry/GlobalInverse.lean",
+      "sha256": "a56be76d3d154d212ec72d91431694722c84c78e82b5de2b51b5c72ef34a6a97",
+      "blob": "db962619e3a735c8be359d90827f27e490350322",
+      "lines": 75,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates",
+        "Mathlib.Topology.Maps.Proper.CompactlyGenerated"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.GraphCapAttachment",
+      "path": "src/ContinuousFlexibility/Geometry/GraphCapAttachment.lean",
+      "sha256": "7d8aedc30b0cb25d8b1eb54bca73cc0f03092aa85f06eafc923285e5a88e88ef",
+      "blob": "74731d7b0473ad33572dde7deda69086557544ac",
+      "lines": 192,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapDisk",
+        "ContinuousFlexibility.Contracts.GraphFamilyImage",
+        "Mathlib.Topology.Sets.VietorisTopology",
+        "Mathlib.Topology.Separation.Connected"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.GraphEmbedding",
+      "path": "src/ContinuousFlexibility/Geometry/GraphEmbedding.lean",
+      "sha256": "21de271b588de7e2e688bcb577ef4997edf8c8fa34676b5fb98d2c3c03c8e286",
+      "blob": "3e18780f3c0ec571a5c07ce216c928be49de4180",
+      "lines": 220,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.CartesianMetric",
+        "Mathlib.Analysis.InnerProductSpace.PiL2"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.GraphRotationFamily",
+      "path": "src/ContinuousFlexibility/Geometry/GraphRotationFamily.lean",
+      "sha256": "05a42d08e9f4fee8245f199d8ee84cd02fe36d820766429b8c37ed613feca06f",
+      "blob": "3cb75ba5e15aed6b49c4fc087ff177241c561460",
+      "lines": 174,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.PlanarRotations",
+        "ContinuousFlexibility.Contracts.CenteredDevelopment"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.GraphSurfaceGeometry",
+      "path": "src/ContinuousFlexibility/Geometry/GraphSurfaceGeometry.lean",
+      "sha256": "fa598a5a56fcd0a2e644396c7eadc0ec5f4583a29c3b8fd548aa234b2926d1f2",
+      "blob": "1a87c7675ee9a8d76ea40c26b64fc86578732636",
+      "lines": 257,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphEmbedding",
+        "ContinuousFlexibility.Geometry.SurfaceGeometry",
+        "ContinuousFlexibility.Scalar.HeightDerivatives"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.HeightCoframe",
+      "path": "src/ContinuousFlexibility/Geometry/HeightCoframe.lean",
+      "sha256": "6e326c487079bbf7582b1355324397fdaae515a3b77aae916dd0b7e2f06c89eb",
+      "blob": "d4634b09b0a3541169707e4e7c56f0d6a36d1048",
+      "lines": 162,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Cartan",
+        "ContinuousFlexibility.Geometry.RotatedCoframe"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.LocalInverse",
+      "path": "src/ContinuousFlexibility/Geometry/LocalInverse.lean",
+      "sha256": "5c62d7add8a4af0234a1d15842807e77ec96eeefa4de428144891fe84162ac2c",
+      "blob": "4c1cedacbded6e7bc282d9fbb1c126017fc71e2e",
+      "lines": 157,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates",
+        "ContinuousFlexibility.Scalar.Positivity",
+        "Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff",
+        "Mathlib.Topology.Algebra.Module.FiniteDimension"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.MarkedCapDisk",
+      "path": "src/ContinuousFlexibility/Geometry/MarkedCapDisk.lean",
+      "sha256": "9cb597469bc3a02c2ffde712af65e35d339520f8ce47f0cd62cd0071231e8315",
+      "blob": "770cea27b61ef15bcffb5f91b0e47f33833ac621",
+      "lines": 510,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CapDisk",
+        "ContinuousFlexibility.Geometry.MarkerBump",
+        "ContinuousFlexibility.Geometry.PlanarRotations",
+        "Mathlib.Analysis.Calculus.LocalExtr.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.MarkerBump",
+      "path": "src/ContinuousFlexibility/Geometry/MarkerBump.lean",
+      "sha256": "d8d25764e45a1539decd769eedd7386b6076a3082bdb07d75d5369aea4186684",
+      "blob": "823ef0b3e7ec668562137bfa620df80b00eec65b",
+      "lines": 293,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives",
+        "Mathlib.Analysis.SpecialFunctions.SmoothTransition",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.ContDiff"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.MatrixDevelopment",
+      "path": "src/ContinuousFlexibility/Geometry/MatrixDevelopment.lean",
+      "sha256": "32ba7b5906f31373b881500ff21d8897cdf930538aa64291b3bd9f483320e0f1",
+      "blob": "e9b921fd6fa619698f6e2075c9ed6aa8f296b37d",
+      "lines": 82,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CartesianMetricCoframe",
+        "ContinuousFlexibility.Geometry.CartesianExterior"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.PlanarOrientation",
+      "path": "src/ContinuousFlexibility/Geometry/PlanarOrientation.lean",
+      "sha256": "c73471d5d28712ed2670631e41869c73a41996d1bb90238b74f7922f36501621",
+      "blob": "80b0e204ff31ec795e624ed14e2951aa8c905076",
+      "lines": 139,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Contracts.IsometricGraph",
+        "Mathlib.Topology.Order.IntermediateValue"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.PlanarRotations",
+      "path": "src/ContinuousFlexibility/Geometry/PlanarRotations.lean",
+      "sha256": "f0f81aceb0c8e042fac49810d887a79e1ef5e0e74e7566c5be4e397e0cda5ae9",
+      "blob": "6b759a4981c74a372da59c9d469afe1c2551ccb5",
+      "lines": 106,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.EuclideanRigidityCoordinates",
+        "ContinuousFlexibility.Contracts.CartesianMetric"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.Primitive",
+      "path": "src/ContinuousFlexibility/Geometry/Primitive.lean",
+      "sha256": "161b26739074b8080a8e552710658dd50e707d2ef4a408013976b3694bf453b6",
+      "blob": "83455d6aa5607e7ae422bf79cec6739c0f6ddb98",
+      "lines": 195,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.RotatedCoframe",
+        "Mathlib.MeasureTheory.Integral.CurveIntegral.Poincare"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.PullbackCurvature",
+      "path": "src/ContinuousFlexibility/Geometry/PullbackCurvature.lean",
+      "sha256": "c764efc1481610559715555ca0eda56f4274ee4b5959ac75ca258ecac407e59b",
+      "blob": "fa1a4960b2f2bf9f2e3e6b9dcf486cf2cc0e69f4",
+      "lines": 105,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.CoframeCurvature",
+        "ContinuousFlexibility.Scalar.FormPullback"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.RotatedCoframe",
+      "path": "src/ContinuousFlexibility/Geometry/RotatedCoframe.lean",
+      "sha256": "b1de51389ca7b93dea79fb88406a0bde818f741ccbb0da641bd9f783f62a713f",
+      "blob": "0f8c1a00ca94c24a07c1c64201170d9ac114eb03",
+      "lines": 219,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.SphereCapGluing",
+      "path": "src/ContinuousFlexibility/Geometry/SphereCapGluing.lean",
+      "sha256": "d95cb20541e1f454d039c8b2735c010245b4679f9dafbe99f6e4bfa70c3d2718",
+      "blob": "138d9d06abb4bd83d96de65b30c77e9be21157ec",
+      "lines": 657,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.SphereCoordinates",
+        "ContinuousFlexibility.Geometry.CapSphereProfile",
+        "ContinuousFlexibility.Geometry.GraphCapAttachment",
+        "ContinuousFlexibility.Geometry.MarkedCapDisk"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.SphereCoordinates",
+      "path": "src/ContinuousFlexibility/Geometry/SphereCoordinates.lean",
+      "sha256": "56508ddc68f867383ce80866f18775e3accbefa4fbcd34253f226f5af41d2ead",
+      "blob": "4a57646a1201a903c3af72ab72b75d69e04170fa",
+      "lines": 422,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphEmbedding",
+        "Mathlib.Geometry.Manifold.Instances.Sphere"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.SurfaceGeometry",
+      "path": "src/ContinuousFlexibility/Geometry/SurfaceGeometry.lean",
+      "sha256": "81a3528387b41c7370dde16ff7b1a14be65cf3f87c08bf78a61818737f5b097e",
+      "blob": "f06b49491513f8dc4cecdce62a2dfbaf4914dec2",
+      "lines": 262,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.GraphEmbedding",
+        "Mathlib.Analysis.Calculus.FDeriv.Symmetric",
+        "Mathlib.Analysis.Calculus.FDeriv.CompCLM",
+        "Mathlib.Analysis.InnerProductSpace.Calculus",
+        "Mathlib.Analysis.Normed.Affine.Isometry",
+        "Mathlib.LinearAlgebra.Matrix.PosDef",
+        "Mathlib.LinearAlgebra.Matrix.NonsingularInverse",
+        "Mathlib.LinearAlgebra.Matrix.Trace"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Geometry.SurfaceReparametrization",
+      "path": "src/ContinuousFlexibility/Geometry/SurfaceReparametrization.lean",
+      "sha256": "4591c278fc430b24f3a69a6f8a44060f430d444a19f877216196ad6edd9a807e",
+      "blob": "0a052cf36ef1cef40c5af5181deacde74d188a7e",
+      "lines": 231,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.SurfaceGeometry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralGraphAdjoint",
+      "path": "src/ContinuousFlexibility/Radial/CentralGraphAdjoint.lean",
+      "sha256": "6ef3252d26004db60a34fde1c8bd647239f3917876cdc68f2a0ae11a10f940ff",
+      "blob": "997a3cd9d9bca528232a4d017c0161ffc3715581",
+      "lines": 147,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorClosedGraph"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralModel",
+      "path": "src/ContinuousFlexibility/Radial/CentralModel.lean",
+      "sha256": "f0fcde30af15d2b337ca9ae6b83fe98c197a511ad6a69bca017d536984aeea7a",
+      "blob": "77266a4fcc2cd426e9ae3f39068b3fa47898e41b",
+      "lines": 163,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralRadiusMetric"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralRadius",
+      "path": "src/ContinuousFlexibility/Radial/CentralRadius.lean",
+      "sha256": "b173bcd59d9e2763d13559d080f49233a25e678f12a0fe03cb9d713de91d8871",
+      "blob": "1a6fbca80030572e8cc52f2592910b00585b32a9",
+      "lines": 275,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.GaussianLaplace",
+        "ContinuousFlexibility.Radial.CentralTravelAngle",
+        "ContinuousFlexibility.Radial.Liouville",
+        "Mathlib.Analysis.Calculus.ContDiff.Operations"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralRadiusMetric",
+      "path": "src/ContinuousFlexibility/Radial/CentralRadiusMetric.lean",
+      "sha256": "a7a9289b029c5fdf503244b64acd8aa7e120062208fe5d94dcec3e4af610b7b1",
+      "blob": "ce20515b26f6c903ef161f2161d053a6f1b9b0da",
+      "lines": 146,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralRadius",
+        "Mathlib.Analysis.Calculus.InverseFunctionTheorem.Deriv",
+        "Mathlib.Analysis.Calculus.InverseFunctionTheorem.ContDiff",
+        "Mathlib.Topology.Order.IntermediateValue"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralSmallDivisor",
+      "path": "src/ContinuousFlexibility/Radial/CentralSmallDivisor.lean",
+      "sha256": "2aef804fe33b1c27b67da52a6fef15ac39e1ea395af8326dbabcd07a060efe58",
+      "blob": "bd7578936cd04f42c012a38c19cf94658dbd4f22",
+      "lines": 146,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds",
+        "Mathlib.NumberTheory.Real.Irrational",
+        "Mathlib.Algebra.Order.Round",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.NormNum",
+        "Mathlib.Tactic.Ring"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralSpectralGap",
+      "path": "src/ContinuousFlexibility/Radial/CentralSpectralGap.lean",
+      "sha256": "20a887582069dc68aa937cb319d57fcf910b0185845097a2c319d4ed602b2dfd",
+      "blob": "258e9ecbf5a43a7f18404af90158c6cb377923b2",
+      "lines": 165,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorSpectrum"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralSpectralInverse",
+      "path": "src/ContinuousFlexibility/Radial/CentralSpectralInverse.lean",
+      "sha256": "7db3a431f32bcec3df7819caf72791750f59eed8ab69ae92d8002f9ce1e0acac",
+      "blob": "9053f66e2b85311e6b5ba5f776aefe0f5cb9da4b",
+      "lines": 350,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorClosedGraph"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.CentralTravelAngle",
+      "path": "src/ContinuousFlexibility/Radial/CentralTravelAngle.lean",
+      "sha256": "1e4cd1434b4278f6453bb601fc208442debab32817027b7e8a26925247b5c55c",
+      "blob": "164edfd2d85fdf42c652a4c1adae4cc776002bf3",
+      "lines": 91,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralSmallDivisor",
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.ExponentialMoments",
+      "path": "src/ContinuousFlexibility/Radial/ExponentialMoments.lean",
+      "sha256": "b32e76f713835c97a4d3c9c61b263b9145558adabc9878fcff905403c4f460d2",
+      "blob": "220baeaa6d41d8c211600973e170cfd41b7b06c1",
+      "lines": 159,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Probability.Moments.ComplexMGF",
+        "Mathlib.Analysis.Complex.TaylorSeries",
+        "Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.Linarith"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.FourierModes",
+      "path": "src/ContinuousFlexibility/Radial/FourierModes.lean",
+      "sha256": "1f6a02e5261585b519e7bb51e79e57eff478b5adecd8959f1ee3dca111ac2b74",
+      "blob": "24eff48b12d19ffe2bdff0907d6a62fcb3b049aa",
+      "lines": 165,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.Gauge",
+        "Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv",
+        "Mathlib.Analysis.Real.Sqrt"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.FourierOrthogonality",
+      "path": "src/ContinuousFlexibility/Radial/FourierOrthogonality.lean",
+      "sha256": "3990f7450e7387ed74a23792e0117ad9cb6b7f151d560039a9bf4233340ff44c",
+      "blob": "825443468fe0bf4f3815422c91960220e72f7e21",
+      "lines": 129,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.FourierModes",
+        "Mathlib.Analysis.SpecialFunctions.Integrals.Basic",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.NormNum"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.Gauge",
+      "path": "src/ContinuousFlexibility/Radial/Gauge.lean",
+      "sha256": "89a7ce0c663bcd9f98ba873b3c8e3b079094284c1aed0ab89f4303d8b2c31d5c",
+      "blob": "ef65a3e184f4c27d6b97e00ef4dbb08936815e73",
+      "lines": 199,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Pow.Deriv",
+        "Mathlib.Tactic.Convert",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Ring"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.GaussianLaplace",
+      "path": "src/ContinuousFlexibility/Radial/GaussianLaplace.lean",
+      "sha256": "aff1c631d65dad86040d465770a3df4ebee2f474239747466fccf66f76c15aef",
+      "blob": "b4c9b102b7fbb7df7ac62c3b661bca24489fcedb",
+      "lines": 219,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Gamma.Basic",
+        "Mathlib.Analysis.Calculus.ParametricIntegral",
+        "Mathlib.Analysis.SpecialFunctions.Pow.Deriv",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.Linarith"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.HermiteBasis",
+      "path": "src/ContinuousFlexibility/Radial/HermiteBasis.lean",
+      "sha256": "5365b29b1c6f5a06a8dae35beeedd2b15875330456639c03c0a4ad7071c424b0",
+      "blob": "28934162b9f68ed3a0ccaba118ca20a4ccc6a313",
+      "lines": 190,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.HermiteCompleteness",
+        "Mathlib.Analysis.InnerProductSpace.l2Space",
+        "Mathlib.MeasureTheory.Function.L2Space"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.HermiteCompleteness",
+      "path": "src/ContinuousFlexibility/Radial/HermiteCompleteness.lean",
+      "sha256": "758f2ca03a7520f04c1a942aca465b4708e36532108f2b851fe555f1fd4d5947",
+      "blob": "07bb77533833170591c3776469d71fce308517b1",
+      "lines": 182,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorSpectrum",
+        "ContinuousFlexibility.Radial.ExponentialMoments",
+        "Mathlib.Algebra.Polynomial.Sequence"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.HermitePolynomial",
+      "path": "src/ContinuousFlexibility/Radial/HermitePolynomial.lean",
+      "sha256": "10c6bb1cc43a6a7246735be076fd8ef3b34fde46f227ae55ae50f9776d38ba6f",
+      "blob": "83534d6ca1309e0772408380cde6924652e16f47",
+      "lines": 77,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.RingTheory.Polynomial.Hermite.Gaussian",
+        "Mathlib.Algebra.Polynomial.Monic",
+        "Mathlib.Analysis.Calculus.ContDiff.Polynomial",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.NormNum"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.Liouville",
+      "path": "src/ContinuousFlexibility/Radial/Liouville.lean",
+      "sha256": "32510babdee588a53e0c97bc0df9ff5aaf51b6a72d2f4cd44dc2f819f3790950",
+      "blob": "d3f177af2ac65f9f8be6e7c5a5f3d3591e52c3c8",
+      "lines": 201,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.Gauge",
+        "Mathlib.Analysis.Real.Sqrt"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.MorseChainScales",
+      "path": "src/ContinuousFlexibility/Radial/MorseChainScales.lean",
+      "sha256": "3c3d927037ef85a00a412a14bb71e8588fe26eb8d45d6df91e735b8e69482a04",
+      "blob": "2b94c6bdedb9315807d66ae6e3b880fdb2112bb2",
+      "lines": 254,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial",
+        "ContinuousFlexibility.Analysis.MaterialWeights",
+        "Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset",
+        "Mathlib.Algebra.Order.Floor.Semiring",
+        "Mathlib.Data.Nat.Find",
+        "Mathlib.Order.Interval.Finset.Nat"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.MorseModel",
+      "path": "src/ContinuousFlexibility/Radial/MorseModel.lean",
+      "sha256": "4bb049d1ef2da72b167fc1f78e84ba0d6b8ac81c6210aa78bae6bf88088f6a08",
+      "blob": "07731ed3f2cc12860844f6e0520a0dbaf74c0992",
+      "lines": 291,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.MeasureTheory.Function.LpSeminorm.SMul",
+        "Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.Linarith"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.OscillatorClosedGraph",
+      "path": "src/ContinuousFlexibility/Radial/OscillatorClosedGraph.lean",
+      "sha256": "274070a67b4a84427fa7e37eb0a2e685b7234353305a65bc11de5c5522581a3c",
+      "blob": "ece9702f41f24d5f9fb37132638856adf4c9a9f2",
+      "lines": 192,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.HermiteBasis",
+        "ContinuousFlexibility.Radial.CentralSpectralGap"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.OscillatorCompactCore",
+      "path": "src/ContinuousFlexibility/Radial/OscillatorCompactCore.lean",
+      "sha256": "72ad34b33ddab15bb7945555074eeaa10ee277584d0d48c34c0c288d8bb41f58",
+      "blob": "62cf1e5205c52f05caa1e2212ae3a1c99001a5cf",
+      "lines": 597,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorClosedGraph",
+        "ContinuousFlexibility.Radial.CentralGraphAdjoint",
+        "ContinuousFlexibility.Radial.OscillatorDifferentialPairing",
+        "Mathlib.Analysis.SpecialFunctions.SmoothTransition",
+        "Mathlib.Analysis.Calculus.Deriv.Support",
+        "Mathlib.MeasureTheory.Function.LpSpace.Indicator",
+        "Mathlib.MeasureTheory.Integral.DominatedConvergence"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.OscillatorDifferentialPairing",
+      "path": "src/ContinuousFlexibility/Radial/OscillatorDifferentialPairing.lean",
+      "sha256": "cc8a71fc49c0199a7c5b55aa7727c83a04c23d14962c85f5febcafdeb78447ed",
+      "blob": "50ffe11ec22d0fdbf47a710a88eb9f6d35839ab7",
+      "lines": 285,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralSpectralGap"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.OscillatorKernel",
+      "path": "src/ContinuousFlexibility/Radial/OscillatorKernel.lean",
+      "sha256": "fe59264dfb61e9522a3f9a4d6046a2705175abbb579b2dab3303f4087e0d99ed",
+      "blob": "c4a6e4de4746791816ff95a4188022403afa0354",
+      "lines": 303,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.CentralModel",
+        "Mathlib.Analysis.Calculus.MeanValue",
+        "Mathlib.Analysis.SpecialFunctions.Gaussian.GaussianIntegral",
+        "Mathlib.MeasureTheory.Function.LpSeminorm.SMul",
+        "Mathlib.MeasureTheory.Function.LpSeminorm.TriangleInequality",
+        "Mathlib.MeasureTheory.Function.L1Space.Integrable"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.OscillatorSpectrum",
+      "path": "src/ContinuousFlexibility/Radial/OscillatorSpectrum.lean",
+      "sha256": "831dc91bb23800e36f9954198fc9b5560126eac28885f413293715b693bc5acf",
+      "blob": "a80a2097a7ae575e05bcf9dd60419429636adca5",
+      "lines": 311,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.OscillatorKernel",
+        "ContinuousFlexibility.Radial.HermitePolynomial",
+        "Mathlib.Algebra.Polynomial.Roots"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Radial.RadialHeight",
+      "path": "src/ContinuousFlexibility/Radial/RadialHeight.lean",
+      "sha256": "c08c761f0560d5039bfbd50969fb241c0279bb95562c3ebb6cc0fc93697e860e",
+      "blob": "8b8dfa86c48003f5b492049d8c2aa38e09f68263",
+      "lines": 202,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Radial.FourierModes",
+        "ContinuousFlexibility.Scalar.Normalization",
+        "Mathlib.Analysis.Calculus.Deriv.Prod"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Cartan",
+      "path": "src/ContinuousFlexibility/Scalar/Cartan.lean",
+      "sha256": "c9d078867a36645c4421772ab91afbc97d06ce3490c69f40d330448757e9214a",
+      "blob": "27d81e09db874de0221ad6a0c19ca155fc40d880",
+      "lines": 202,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Connection",
+        "ContinuousFlexibility.Scalar.CoframeDerivatives"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Coframe",
+      "path": "src/ContinuousFlexibility/Scalar/Coframe.lean",
+      "sha256": "20526165fa39512cb2bfb3dbc474428b6af9aed32af04f0f8058a1ff4bfcced2",
+      "blob": "240bb68cef2792916bd4699ca5ae95682dc52f71",
+      "lines": 45,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Positivity",
+        "Mathlib.Analysis.Real.Sqrt",
+        "Mathlib.Tactic.FieldSimp"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.CoframeDerivatives",
+      "path": "src/ContinuousFlexibility/Scalar/CoframeDerivatives.lean",
+      "sha256": "d1f7ba60f63733f03501cafd2baffb67724047653bb2fc7da16b9802c42386a2",
+      "blob": "c2602ef9d95549c9f58ccac59102cce9e984b787",
+      "lines": 123,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coframe",
+        "ContinuousFlexibility.Scalar.ConnectionVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Connection",
+      "path": "src/ContinuousFlexibility/Scalar/Connection.lean",
+      "sha256": "d02b087ed6a6ce07e0bad8fa3ca6ea19a04ba838ca8190b94c4939adef3708f4",
+      "blob": "ad56772be11d823f3311c3e48fc580255054026f",
+      "lines": 193,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightDerivatives",
+        "ContinuousFlexibility.Scalar.ConnectionVariation",
+        "Mathlib.Analysis.Calculus.LineDeriv.Basic",
+        "Mathlib.Tactic.Linarith"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.ConnectionVariation",
+      "path": "src/ContinuousFlexibility/Scalar/ConnectionVariation.lean",
+      "sha256": "ec958c85fd58fcca739a8592362000a5b6c2fd0e8a921cb474abbfcadb43ef77",
+      "blob": "28fdef5ed1e7bae36d5b674ee95e3cebbfe814e0",
+      "lines": 193,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Determinant",
+        "Mathlib.Analysis.SpecialFunctions.Sqrt",
+        "Mathlib.Analysis.Calculus.Deriv.Add",
+        "Mathlib.Analysis.Calculus.Deriv.Mul",
+        "Mathlib.Analysis.Calculus.Deriv.Inv",
+        "Mathlib.Analysis.Calculus.Deriv.Pow",
+        "Mathlib.Tactic.Convert"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Conservation",
+      "path": "src/ContinuousFlexibility/Scalar/Conservation.lean",
+      "sha256": "7c0ae9361932bbc987816911fcd0e4e3695d73e16d113db7e2ed7c89cefd2419",
+      "blob": "37c8be7917de107517c6e6f8dfb84136dc0283eb",
+      "lines": 252,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.FlatDevelopment",
+        "Mathlib.MeasureTheory.Integral.Prod",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Coordinates",
+      "path": "src/ContinuousFlexibility/Scalar/Coordinates.lean",
+      "sha256": "fb2764e0b6752be0c36127e775e4a64001b1683d796f8ec43129e82de5ab881a",
+      "blob": "3a80c86f2d2007ba774e12ccf3816c1f5d236b51",
+      "lines": 40,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Definitions",
+        "Mathlib.Analysis.Calculus.FDeriv.Prod"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Definitions",
+      "path": "src/ContinuousFlexibility/Scalar/Definitions.lean",
+      "sha256": "06dfe8054cb871fbf35a27003a63076dd5dce541a298cff89f094e4b02696501",
+      "blob": "c3c35a7ad2f3d75a941487907e0e4ced479f8b62",
+      "lines": 36,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Basic.Real.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Determinant",
+      "path": "src/ContinuousFlexibility/Scalar/Determinant.lean",
+      "sha256": "ee227d182326377abc45e2f81f083bc63403cf9d3af76d028f7d98dcccc0f436",
+      "blob": "fe0c72f6a7eb6c2251cb9c850c51a114f24d2b67",
+      "lines": 202,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Definitions",
+        "Mathlib.Analysis.Real.Sqrt",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Ring"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.FlatCollar",
+      "path": "src/ContinuousFlexibility/Scalar/FlatCollar.lean",
+      "sha256": "43e8c4e9750b96df7520d33fba0fb20eb54f4cf9278ce206d7cb1ca8ef9bd45a",
+      "blob": "787c8a8186244185df512a7ef3b50070cf5913f8",
+      "lines": 70,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Connection"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.FormPullback",
+      "path": "src/ContinuousFlexibility/Scalar/FormPullback.lean",
+      "sha256": "09885fd35b2086a984883f723c5bce94fed1d3987a71485a2fa7185108083a50",
+      "blob": "6238095a75eb06479071372465a41701824657c8",
+      "lines": 137,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.Primitive"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.GreenIdentity",
+      "path": "src/ContinuousFlexibility/Scalar/GreenIdentity.lean",
+      "sha256": "0e6bd07148aad1d5495bb0389c10a095c2974bd018b20e11143505b2bd565c60",
+      "blob": "7ce965966ea75bfb3227638d29f944b77fe8df19",
+      "lines": 361,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Conservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.HeightDerivatives",
+      "path": "src/ContinuousFlexibility/Scalar/HeightDerivatives.lean",
+      "sha256": "23f1e5b32150474d94f01611a11a83f47bc4b99fa190d390dfec96b9ae832d12",
+      "blob": "8058b80b52b5d1e45e5ddebc8964a6a1e936bab4",
+      "lines": 236,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Coordinates",
+        "Mathlib.Analysis.Calculus.FDeriv.Symmetric",
+        "Mathlib.Analysis.Calculus.FDeriv.Pow",
+        "Mathlib.Analysis.Calculus.Deriv.Inv",
+        "Mathlib.Analysis.Calculus.ContDiff.Operations",
+        "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Tactic.Ring",
+        "Mathlib.Tactic.NormNum"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.HeightVariation",
+      "path": "src/ContinuousFlexibility/Scalar/HeightVariation.lean",
+      "sha256": "d455c46769f752f8527812bf29e329b7e1647bf3f31a7ca4102b1f29444ed798",
+      "blob": "8263d03d7d771d3e3ee7ef8e8213e9131110f3a8",
+      "lines": 254,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Connection"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Linearization",
+      "path": "src/ContinuousFlexibility/Scalar/Linearization.lean",
+      "sha256": "dd3c6eda3a906801e19df493bc436d62d6b2e29a3d4fa04f7608456b9b79e7bb",
+      "blob": "453262b76f1edee0f1e9fd3ea22424e2d55da967",
+      "lines": 402,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.LinearizationAlgebra",
+        "Mathlib.Analysis.Calculus.FDeriv.Congr"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.LinearizationAlgebra",
+      "path": "src/ContinuousFlexibility/Scalar/LinearizationAlgebra.lean",
+      "sha256": "4244749d1ef6a92981284dd8227149006870bba3f6c6db1291c39ad351970963",
+      "blob": "7d93342b41c3f5306e813bc69619d44209e4d1f9",
+      "lines": 56,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Normalization",
+      "path": "src/ContinuousFlexibility/Scalar/Normalization.lean",
+      "sha256": "3ca9fddab69f928baef1e0073ab1be24719529c6c45dbe1f14facd808d83fbaa",
+      "blob": "99c019d79733789b5b51e21bbfe19d981beee333",
+      "lines": 125,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.HeightVariation"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.NormalizedConservation",
+      "path": "src/ContinuousFlexibility/Scalar/NormalizedConservation.lean",
+      "sha256": "031d94bded5c743d6ef031d18e6d85f30cfe9b3f3ef25f7c2cce6479d80bbbe8",
+      "blob": "489e64d736b52e8a37d974da65345cfa7eee1173",
+      "lines": 215,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Conservation",
+        "ContinuousFlexibility.Scalar.Normalization",
+        "ContinuousFlexibility.Radial.RadialHeight",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.Positivity",
+      "path": "src/ContinuousFlexibility/Scalar/Positivity.lean",
+      "sha256": "0c8239d8a040fdf3abdcf2e442f4642fbb376a088494df01bfa8a26c1e65a616",
+      "blob": "b6c1316faefe7f763fbdf6cc51e6d6cb12fa7976",
+      "lines": 135,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Definitions",
+        "Mathlib.Tactic.Linarith",
+        "Mathlib.Tactic.Ring"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.RectangleParameterIntegral",
+      "path": "src/ContinuousFlexibility/Scalar/RectangleParameterIntegral.lean",
+      "sha256": "b42a7079a296f12378c06edae23553002298cc472ca511bfbd276bcb2d2a8c56",
+      "blob": "9471f9afb29198410cfc074590330b1449db6f37",
+      "lines": 260,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Calculus.ParametricIntegral",
+        "Mathlib.Analysis.Calculus.ContDiff.Comp",
+        "Mathlib.Analysis.Calculus.ContDiff.Operations",
+        "Mathlib.Analysis.Normed.Module.FiniteDimension",
+        "Mathlib.MeasureTheory.Integral.Prod",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.S04CalculusProof",
+      "path": "src/ContinuousFlexibility/Scalar/S04CalculusProof.lean",
+      "sha256": "22bebb12fe4abe67e76a273c7a86d84e8916d346f37064c152da9115908e8754",
+      "blob": "3dc0cddaa7ceda4a046d7967a723d523a5ca5eb9",
+      "lines": 496,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Scalar",
+        "ContinuousFlexibility.Scalar.RectangleParameterIntegral",
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Scalar.TypeCorrection",
+      "path": "src/ContinuousFlexibility/Scalar/TypeCorrection.lean",
+      "sha256": "eeb9c3ed1c80a368957530b177ab263f88b82c544014648411ea4c8cf3e62c83",
+      "blob": "d40da5359abab2b5185a10f36b0a048ae80ff6d2",
+      "lines": 267,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.Linearization",
+        "ContinuousFlexibility.Scalar.Normalization"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Analysis",
+      "path": "src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial",
+        "ContinuousFlexibility.Analysis.BastianiCurveChain",
+        "ContinuousFlexibility.Analysis.ExponentialSequenceSpace",
+        "ContinuousFlexibility.Analysis.MaterialIntervalWeights",
+        "ContinuousFlexibility.Analysis.TameLinear",
+        "Mathlib.Analysis.InnerProductSpace.PiL2",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.DeepTailOperator",
+      "path": "src/ContinuousFlexibility/Statements/DeepTailOperator.lean",
+      "sha256": "25f6c6bdac65386225e5a566d5da49a7f227f236cf8ec5864a21b7528f07d1a9",
+      "blob": "2abb5a18add520e7a7bd363a1e4cec1445df355e",
+      "lines": 144,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Calculus.ContDiff.Deriv",
+        "Mathlib.MeasureTheory.Function.L2Space",
+        "Mathlib.MeasureTheory.Measure.WithDensity",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.Basic"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.FiniteFourier",
+      "path": "src/ContinuousFlexibility/Statements/FiniteFourier.lean",
+      "sha256": "df274c0e441ce3bff66c7d838f452d0097fac38cdaf5e7094dae17a4c7947f61",
+      "blob": "11994300dff212edfaeebcf161a422c24651b85c",
+      "lines": 58,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Scalar",
+        "ContinuousFlexibility.Radial.FourierModes",
+        "Mathlib.Data.Finset.Interval"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.MainGeometry",
+      "path": "src/ContinuousFlexibility/Statements/MainGeometry.lean",
+      "sha256": "0ec15af08d07309d351ce3c6e93c4988fa8a1c82a10bf4f00eb87475b6095a97",
+      "blob": "7ccf0873a3f37f91a62309b6be796f1f644dd6ce",
+      "lines": 497,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Geometry.SphereCapGluing",
+        "ContinuousFlexibility.Geometry.SurfaceReparametrization",
+        "ContinuousFlexibility.Contracts.GraphFamilyCurvature",
+        "Mathlib.Geometry.Manifold.VectorBundle.Riemannian",
+        "Mathlib.Geometry.Manifold.SmoothEmbedding",
+        "Mathlib.Geometry.Euclidean.Volume.Measure",
+        "Mathlib.LinearAlgebra.Trace"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Milestones",
+      "path": "src/ContinuousFlexibility/Statements/Milestones.lean",
+      "sha256": "82aee4c1daa95b2d30b11db16972c6f022045468815ed49cc7fa3ef154bc37c0",
+      "blob": "591c1c577b716e045c381c83f822e6fde073e347",
+      "lines": 147,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Scalar",
+        "ContinuousFlexibility.Statements.ScalarWeighted",
+        "ContinuousFlexibility.Statements.FiniteFourier",
+        "ContinuousFlexibility.Statements.RadialTargets",
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Statements.Nonlinear",
+        "ContinuousFlexibility.Statements.NonlinearCompletion",
+        "ContinuousFlexibility.Statements.MainGeometry"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "selected_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.NonlinearCompletion",
+      "path": "src/ContinuousFlexibility/Statements/NonlinearCompletion.lean",
+      "sha256": "d4df3cef439f0fca93e668e0bff8616501d610976c36c41cbac7d3b2ea1b87ec",
+      "blob": "33f4cb9a62cbb768ae194167cf19f26bed39a1e5",
+      "lines": 232,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Radial",
+      "path": "src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.DeepTailOperator",
+        "ContinuousFlexibility.Radial.OscillatorCompactCore",
+        "ContinuousFlexibility.Radial.CentralSpectralInverse",
+        "ContinuousFlexibility.Radial.MorseModel",
+        "ContinuousFlexibility.Radial.FourierOrthogonality",
+        "ContinuousFlexibility.Scalar.GreenIdentity"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.RadialTargets",
+      "path": "src/ContinuousFlexibility/Statements/RadialTargets.lean",
+      "sha256": "6296bf88e2c368206d1ec39dad5647a768016d10d5f574a0d58d65064c9285d2",
+      "blob": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+      "lines": 492,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Radial"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Scalar",
+      "path": "src/ContinuousFlexibility/Statements/Scalar.lean",
+      "sha256": "90ca70565051f03577e1f4555b325ccda4a9a85bbf04d6d54b9addb5941af46c",
+      "blob": "0577cee4ba3210e322083715a8ddc29f4039afbf",
+      "lines": 275,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Scalar.GreenIdentity",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Geometry.FlatDevelopment"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.ScalarWeighted",
+      "path": "src/ContinuousFlexibility/Statements/ScalarWeighted.lean",
+      "sha256": "e677c7eb3149635fbe0961a4dd9fdbdbb294eb5cdf0d7846a822c740c7449d87",
+      "blob": "cf7a5559de89576123045f70dd7f9e195e851191",
+      "lines": 366,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Statements.Scalar",
+        "ContinuousFlexibility.Statements.Analysis"
+      ]
+    }
+  ],
+  "limits": [
+    "All selected project imports are closed; external Mathlib modules use the existing pinned dependency.",
+    "Known remote identities were checked against immutable selected git trees; newly traversed sources were read from those exact commits.",
+    "This is static source dependency evidence, not a claim that the mixed pins have compiled."
+  ]
+}

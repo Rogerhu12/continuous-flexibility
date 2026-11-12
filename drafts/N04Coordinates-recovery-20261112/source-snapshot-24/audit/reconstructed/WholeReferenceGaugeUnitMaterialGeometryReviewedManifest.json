@@ -1,0 +1,39 @@
+{
+  "kind": "reviewed_actual_whole_atlas_uniform_unit_geometry_and_sample_endpointX",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometryCandidateManifest.json",
+    "sha256": "3bbefebe11a25f1006fdeb40ef16f54d519113c875319e5327cf9d9769f82eb0",
+    "blob": "8a8ab97a97e8a315483fce4e40c593faf8142d80",
+    "lines": 74
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometry.lean",
+    "sha256": "4f072b993a7fbd52172dac1a91b2a78b02da1faa40df9fa97c3cf40a9e1f4c87",
+    "blob": "85ab47ca2402a1ce02b8126355622119ac6fcb6c",
+    "lines": 127,
+    "target": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeUnitMaterialGeometry.lean",
+    "public_names": [
+      "n04WholeReferenceGauge_unit_material_geometry"
+    ]
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/WholeReferenceGaugeUnitMaterialGeometryIndependentReview.json",
+    "sha256": "b8fb0e8e1770a22a1845eb4934868df697a8d1099cb6bde7af120d8d722503a6",
+    "blob": "b19903ffae98b60e7f7f44c4650360926137aeee",
+    "lines": 112
+  },
+  "scope": [
+    "One constant max(AN,AP) precedes every real whole-atlas piece and unit point. The original physical widths are positive and bounded by the physical annular width.",
+    "Each negative index maps to the original old-K cutPair half; e0(k) is proved explicitly, and physicalLeft/Right/cell are exactly the original fields. The original actual sample endpointX result applies to the full negative component.",
+    "Each positive index retains its real whole-positive endpoints and the supplied genuine midpoint host. The already reviewed same-retained closed-interval estimate gives the actual point-to-sample bound, including both directions via abs.",
+    "The map into the core is checked directly from those same fields. No chart/reference gauge formulas or geometric jet targets enter this metadata result.",
+    "Necessary retained-evidence and midpoint-host section hypotheses are explicitly included before the documented theorem. No whole-component single-cell or original E0 floor is assumed."
+  ],
+  "scope_limits": [
+    "The retained-coordinate certificate is an explicit actual construction input, not inferred from arbitrary Through03.",
+    "No Lean compiler/elaborator, CI query, active checkout/index/ref/CP/authority mutation."
+  ],
+  "compiled": false,
+  "source_modified": false
+}

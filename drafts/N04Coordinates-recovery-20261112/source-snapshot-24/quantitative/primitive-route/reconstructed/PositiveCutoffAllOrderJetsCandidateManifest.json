@@ -1,0 +1,58 @@
+{
+  "kind": "fixed_actual_positive_endpoint_cutoff_all_order_linear_jet_envelope_candidate",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveCutoffAllOrderJets.lean",
+    "sha256": "f7170eb9b7860284a13405785c2c32ca76f284b88f92a54ede76227c97ecc378",
+    "blob": "3eca4b5f99fce01b7520860bf8fc89d8d426ae12",
+    "lines": 92,
+    "target": "src/ContinuousFlexibility/Analysis/PositiveCutoffAllOrderJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.N06PositiveCutoffJets"
+    ],
+    "public_names": [
+      "exists_positiveEndpointCutoff_mul_jet_envelope"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06PositiveCutoffJets.lean",
+      "sha256": "79f149a8076e3cc7468900a2e77e58d4b7934e6538cebf2dce2786e3cf01ef30",
+      "blob": "f7942785dd46f261cfeb1417c91144052e3bcb6e",
+      "lines": 102
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06PositiveClippedJets.lean",
+      "sha256": "7ce440ed0808996272824ce89b64b3edb6a119836330e0339ca3dfff18b68727",
+      "blob": "3c2d4a465fa65146b5529d81ee2e3c3805fd9cc0",
+      "lines": 122
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveEndpointCutoff.lean",
+      "sha256": "c74fe54b7fb3aee3b532e7d5c93fe93c37cc0055e4ccd56ab89e8b9465b51711",
+      "blob": "25ca16d4de4e07ae59c916e35b2c581bbf20f730",
+      "lines": 187
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    }
+  ],
+  "fixed_mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "checks": [
+    "The same supplied positiveEndpointCutoff c delta is used at every order. Its existing exact cutoff jet bounds enter only through delta inverse <= U and U>=1.",
+    "For N fixed, finite sums of the true binomial coefficients times fixed cutoff constants are chosen before delta, U, the local source envelope M, center c and function f.",
+    "Inside the actual collar the exact scalar iterated Leibniz formula gives C(N)*U^N*M. The local source envelope remains linear and does not determine the width.",
+    "At every point outside that collar the genuine zero germ makes all derivatives of the clipped product vanish, without requesting global regularity of f.",
+    "All orders k<=N include zero; M may be zero. There is no side duplication, changed cutoff, geometric compactness choice, or inverse width other than the explicit U."
+  ],
+  "scope_limits": [
+    "This is the generic clipping input for the actual fixed reference Taylor coordinate and logarithmic height. Those numerical and material specializations remain subsequent steps.",
+    "No compiler/elaborator, CI query or active checkout/index/ref/CP/authority/plan mutation."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}

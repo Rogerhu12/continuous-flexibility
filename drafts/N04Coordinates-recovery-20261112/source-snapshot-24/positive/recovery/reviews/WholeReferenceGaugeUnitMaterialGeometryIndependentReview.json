@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "kind": "independent_full_source_whole_reference_gauge_unit_material_geometry_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_full_source_actual_metadata_and_selected_sample_providers",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometryCandidateManifest.json",
+    "sha256": "3bbefebe11a25f1006fdeb40ef16f54d519113c875319e5327cf9d9769f82eb0",
+    "blob": "8a8ab97a97e8a315483fce4e40c593faf8142d80",
+    "lines": 74
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometry.lean",
+    "sha256": "4f072b993a7fbd52172dac1a91b2a78b02da1faa40df9fa97c3cf40a9e1f4c87",
+    "blob": "85ab47ca2402a1ce02b8126355622119ac6fcb6c",
+    "lines": 127,
+    "target": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeUnitMaterialGeometry.lean",
+    "public_names": [
+      "n04WholeReferenceGauge_unit_material_geometry"
+    ]
+  },
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointX.lean",
+      "sha256": "3572e7229edacef05a53dcd4eabfd7db089a78769bff6626977423d0a173b51d",
+      "blob": "e402f2334a618778bc508d5247401d5fba093197",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialRatioJets.lean",
+      "sha256": "0548099aed986271dacb3ef97a5b37ad60469c860a890d8f0c19ec097f7d0a49",
+      "blob": "9242e0cf10f9fb0f653a77ac1bbcd54c310dfd91",
+      "lines": 174
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointXReviewedManifest.json",
+      "sha256": "ce9b2fdd015fc1a46cd824e6ded7dfdfca06a4891d04425410c9bd745282bedd",
+      "blob": "eb6117e3899e98106a2cf6a04229ac3e4a953ac3",
+      "lines": 41
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/NegativeMaterialRatioReferenceJetsReviewedManifest.json",
+      "sha256": "572dcd9a841da0f548931adf033255570342c4de39651e3ad2a080e436f30bd2",
+      "blob": "a1afb6dc971f7cea1001cef71f699d0db39110a9",
+      "lines": 106
+    }
+  ],
+  "additional_actual_definitions": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "lines": 1756
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bActualTypedAtlas.lean",
+      "sha256": "91687b630205a380f137dcdb4cb32068d79582e09d17d4a4cd14317e21b9e19f",
+      "blob": "334d3c0c19727465e3afc75f988c79df1b8d7b8a",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+      "sha256": "166d48b590552637d5efedb29ce0b19d5963d02f33e7caebffe44a04b576fdf4",
+      "blob": "f10d96622da7db83c897f9fb5365bd12c9f84bd6",
+      "lines": 142
+    }
+  ],
+  "read_scope": [
+    "All 127 candidate lines and complete source manifest; all 131 actual negative sample lines, all 147 positive closed-interval/sample lines and all 131 whole-reference-gauge record lines.",
+    "The exact negative physicalUnitPoint theorem and its entire proof, actual positive component bounds, physicalUnitPoint/unitStrip definitions, actual cutPair definition, and the Through03-to-controlGeometry conjunction projection.",
+    "All supplied source/provider/reviewed-input SHA256 and Git blob identities were independently verified; the new declaration name has no active-source collision."
+  ],
+  "checks": [
+    "The max(AN,AP) constant is fixed before every actual whole-atlas index and unit point. No component-dependent output constant is hidden in that quantifier order.",
+    "The negative branch constructs exactly the old K cutPair half and proves its e0 index with both Boolean cases. The selected record metadata preserves the same physical endpoints and stored sample. Whole-function physicalUnitPoint equality follows from these endpoint identities and its explicit affine formula.",
+    "Negative unit points belong to the full original negative component and the annulus. Their two-sided endpoint-coordinate sample bound uses the exact old-K sample theorem, with only abs_sub_comm reversing its direction.",
+    "The positive branch retains the original whole-positive endpoints and the supplied actual midpoint host. The affine physicalUnitPoint has radial value strictly inside that same positive interval for every unitStrip point; the existing endpoint bounds place it in the annular core.",
+    "The positive closed-interval sample estimate is applied to that exact point and original cell i. It requires only the genuine midpoint membership, not a single cell containing the entire interval.",
+    "The controlGeometry projection is the actual hN.1.1.2.2.2.1. The retained witnesses and midpoint-host evidence are explicitly included in the theorem section, so the result does not extract them from arbitrary Through03.",
+    "The widths are strictly positive and bounded above by the physical annular width in both branches. No reciprocal width, E0 floor, reference gauge estimate, or final primitive bound is asserted."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "Static independent review only; no Lean compiler or elaborator ran.",
+    "The source and original manifests were not edited. No checkout/index/ref/CI/CP/authority/plan mutation.",
+    "This is a shared actual metadata and endpoint-coordinate bound for the same V and samples, not a completed numerical bound on every primitive atom."
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "green_receipt_applies_to_candidate": false,
+  "created_at": "2026-11-12T14:29:02.640818+00:00"
+}

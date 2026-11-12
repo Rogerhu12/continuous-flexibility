@@ -1,0 +1,69 @@
+{
+  "kind": "actual_material_scale_sample_unit_jets_candidate",
+  "author": "/root",
+  "status": "UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScaleSampleJets.lean",
+    "sha256": "a3975c52db628067824fade71b7757e4eace1abc205ea8cabf20ea655bc59849",
+    "blob": "5bfa4c896e7993a3545ca118292a70cacd06f662",
+    "lines": 78,
+    "target": "src/ContinuousFlexibility/Analysis/MaterialScaleSampleJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.MaterialScalePhysicalJets",
+      "ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport",
+      "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+      "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+    ],
+    "public_names": [
+      "materialEll_signed_sample_physical_jet_bound",
+      "materialEll_signed_affine_unit_jet_bound"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScalePhysicalJets.lean",
+      "sha256": "c665f16f3f66aedbdc98fdd045a7e5192baade1b257b0f3d702ec31bb7621901",
+      "blob": "5a29ed16b3635e37ab9a0a4b9294fbcfd48898e0",
+      "lines": 74
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+      "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+      "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+      "sha256": "bbec6c5ccb9e0d9bcf75516b8c9024e4f15c2e834119822ace6da3c4e70fd51c",
+      "blob": "d0ef8eea95706bf49152a03d0f549f8dcf6a6618",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N08RadialFamilyMaterialJets.lean",
+      "sha256": "5796d127cb631248523060a373d0cdea3d07052857008b6dcfb987dbae59289d",
+      "blob": "3fd9b99c74162ee221843491623573b719c172b3",
+      "lines": 159
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScalePhysicalJetsReviewedManifest.json",
+      "sha256": "62a52b87c74b5fda05ca8bc0b1c4a80e54cd6c0f858346c168034f7872ee9b68",
+      "blob": "29d9eb84a784a438dfc7aa6b6320b6c946d8e10c",
+      "lines": 35
+    }
+  ],
+  "checks": [
+    "The actual physical ell and reciprocal costs transfer through the true endpoint-coordinate comparison at gamma=eta=0; the original E0 is only positive.",
+    "All constants precede physical point and sample; the affine version also precedes every interval and angular order, paying only the positive width power.",
+    "The angular-zero case uses the genuine affine iterated derivative identity; every positive angular derivative is exactly zero by the radial mixed derivative formula.",
+    "No premise duplicates a desired reference atom estimate. Actual same-V core/width/endpointX facts can be supplied directly by the reviewed retained geometry bridge."
+  ],
+  "scope_limits": [
+    "This generic transfer does not choose or change any atlas or sample; concrete same-V application is next.",
+    "No compiler/elaborator/CI call or active checkout/index/ref mutation."
+  ],
+  "compiled": false,
+  "independent_reviews": [],
+  "created_at": "2026-11-12T14:25:01.045098+00:00"
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "actual_material_scale_sample_unit_jets_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScaleSampleJetsCandidateManifest.json",
+    "sha256": "da32714e52a301f5342dc7753dbf77b85c3a4b4ab1f5d6c83ae257e36d443d4b",
+    "blob": "eabde1497dff26fe1c6654f6dcc840644109f03b",
+    "lines": 69
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScaleSampleJets.lean",
+      "sha256": "a3975c52db628067824fade71b7757e4eace1abc205ea8cabf20ea655bc59849",
+      "blob": "5bfa4c896e7993a3545ca118292a70cacd06f662",
+      "lines": 78,
+      "target": "src/ContinuousFlexibility/Analysis/MaterialScaleSampleJets.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialScalePhysicalJets",
+        "ContinuousFlexibility.Analysis.MaterialEndpointWeightTransport",
+        "ContinuousFlexibility.Analysis.N07aCanonicalUnitCoefficient",
+        "ContinuousFlexibility.Analysis.N08RadialFamilyMaterialJets"
+      ],
+      "public_names": [
+        "materialEll_signed_sample_physical_jet_bound",
+        "materialEll_signed_affine_unit_jet_bound"
+      ]
+    }
+  ],
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/MaterialScaleSampleJetsIndependentReview.json",
+      "sha256": "efeb051d731fe1b2d78113b751a398d331e7c4c8f8e6bdc511a1a9586e2bcaba",
+      "blob": "5d601b1e99d379ad6047754e7a92e08ae99fa382",
+      "lines": 80
+    }
+  ],
+  "compiled": false,
+  "source_bytes_changed_after_review": false,
+  "created_at": "2026-11-12T14:28:12.923099+00:00"
+}

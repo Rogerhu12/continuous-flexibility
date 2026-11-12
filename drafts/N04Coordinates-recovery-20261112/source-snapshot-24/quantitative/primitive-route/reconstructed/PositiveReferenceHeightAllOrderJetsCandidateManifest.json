@@ -1,0 +1,106 @@
+{
+  "kind": "actual_fixed_width_reference_height_and_reciprocal_all_order_polynomial_jets",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceHeightAllOrderJets.lean",
+    "sha256": "eafac43ea49cdc562e8fa6fbd61f679c24f24411c944753790782fbca211c09d",
+    "blob": "c17b5daa9ed75cb0a8e322bbc0c3612010de3d0c",
+    "lines": 144,
+    "target": "src/ContinuousFlexibility/Analysis/PositiveReferenceHeightAllOrderJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets",
+      "ContinuousFlexibility.Analysis.PositiveReferenceValueEnvelope",
+      "ContinuousFlexibility.Analysis.LogPolynomialEnvelope",
+      "ContinuousFlexibility.Analysis.ExpPolynomialEnvelope"
+    ],
+    "public_names": [
+      "exists_positiveReferenceHeight_allOrder_jet_envelope"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveCutoffAllOrderJets.lean",
+      "sha256": "f7170eb9b7860284a13405785c2c32ca76f284b88f92a54ede76227c97ecc378",
+      "blob": "3eca4b5f99fce01b7520860bf8fc89d8d426ae12",
+      "lines": 92
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelope.lean",
+      "sha256": "267b575f81da274e9710fd4fbd0df574c7d527bfd78a5e5c867e749ce2698297",
+      "blob": "25205de05e190acb6ec954e7ec34ce73351c88be",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceHeight.lean",
+      "sha256": "fdb3c55006eff4e326ad0caa486565818edf872d739ade5269496a950d88e276",
+      "blob": "2241295ddd81a72783eb627023362b326c54fad6",
+      "lines": 91
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LogPolynomialEnvelope.lean",
+      "sha256": "ef34ada83b37b33b757b566d278be11ed1680acd8b6b8f40b47ab2de6d3cec42",
+      "blob": "0ebb6452734c08e94699b61f37af582d8436a588",
+      "lines": 126
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ExpPolynomialEnvelope.lean",
+      "sha256": "86c0ec3bd35ade371e0960659f21060c7398df4eecfc6ce57d3249f23f75702b",
+      "blob": "2dc311c8fad74e6a15ccd2a181afa8b39b9d7092",
+      "lines": 72
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    }
+  ],
+  "provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveCutoffAllOrderJetsReviewedManifest.json",
+      "sha256": "548c7905e67348e4b63c71066458a3aee80c3909a576a74e03c277860923582f",
+      "blob": "7489a17c1654719ab508532f6f077ded55e5f598",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceValueEnvelopeReviewedManifest.json",
+      "sha256": "eec6cc0b6e73660e524dafd618b82785d5fe7eab4f855bf0ddbd1544a7603bd1",
+      "blob": "ba7ab1dd12be731d6b5cd5f09a5519b1ec2630d5",
+      "lines": 27
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/ExpPolynomialEnvelopeIndependentReview.json",
+      "sha256": "e653563cc15d5e1e1946a00f79fccb317211a15a8c9bf1c0d6039ac93a48f171",
+      "blob": "31d8807bdb064c29a9f3e657b44a5600f7fe22d0",
+      "lines": 19
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/LogPolynomialEnvelopeCI129IndependentReview.json",
+      "sha256": "37df2dbcb50b3cf25c060a298bd9e42ef5dff4817041b7227c8357203ac8cb7c",
+      "blob": "fdea3d8e678346b81a82aa6e59ce59c9d6a649c6",
+      "lines": 72
+    }
+  ],
+  "checks": [
+    "The same actual positiveReferenceHeight uses the supplied delta and both original endpoint functions. No degree, width, source or reference data is chosen in the theorem.",
+    "At order N the exact log provider gives Clog*U^(2N+1). The actual same cutoffs give an exponent-jet envelope D*U^(3N+1), D=2*Ccut*Clog, all constants selected before l/r/delta/U/h.",
+    "The actual endpoint value and reciprocal bounds give both exp(e) and exp(-e) <= U^2. The generic exp jet theorem uses this true amplitude; it never exponentiates the polynomial jet envelope.",
+    "One Bool sign argument handles the height and its reciprocal. The exponent derivative norms agree under negation. Exact Real.exp_neg identifies the reciprocal output.",
+    "The displayed common bound is (Cexp*D^N)*U^((3N+1)*N+2), including N=0 and k=0. All input cutoffs remain fixed as N varies.",
+    "The actual active LogPolynomialEnvelope is exactly the reviewed CI129 repaired 0ebb source. ExpPolynomialEnvelope72 is an explicitly held dependency, not an installed/compiled claim."
+  ],
+  "scope_limits": [
+    "The numerical U may be any upper bound on the same fixed input jets and inverse width. It is not used to select or replace delta. Specialization to the already displayed fixed-degree reference Taylor data and same material sample remains a subsequent lemma.",
+    "Ordinary spatial derivatives only; no state SmoothDirections, new same-witness certificate or final primitive geometry claim.",
+    "No compiler/elaborator, CI query or active checkout/index/ref/CP/authority/plan operation."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}

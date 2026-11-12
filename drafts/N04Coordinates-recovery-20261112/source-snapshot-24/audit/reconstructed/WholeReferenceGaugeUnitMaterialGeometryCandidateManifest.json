@@ -1,0 +1,74 @@
+{
+  "kind": "actual_whole_atlas_uniform_unit_geometry_and_sample_endpointX",
+  "status": "HELD_UNCOMPILED_PEER_REVIEW_PENDING",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometry.lean",
+    "sha256": "4f072b993a7fbd52172dac1a91b2a78b02da1faa40df9fa97c3cf40a9e1f4c87",
+    "blob": "85ab47ca2402a1ce02b8126355622119ac6fcb6c",
+    "lines": 127,
+    "target": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeUnitMaterialGeometry.lean",
+    "public_names": [
+      "n04WholeReferenceGauge_unit_material_geometry"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointX.lean",
+      "sha256": "3572e7229edacef05a53dcd4eabfd7db089a78769bff6626977423d0a173b51d",
+      "blob": "e402f2334a618778bc508d5247401d5fba093197",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialRatioJets.lean",
+      "sha256": "0548099aed986271dacb3ef97a5b37ad60469c860a890d8f0c19ec097f7d0a49",
+      "blob": "9242e0cf10f9fb0f653a77ac1bbcd54c310dfd91",
+      "lines": 174
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RetainedPositiveIntervalEndpointXReviewedManifest.json",
+      "sha256": "ce9b2fdd015fc1a46cd824e6ded7dfdfca06a4891d04425410c9bd745282bedd",
+      "blob": "eb6117e3899e98106a2cf6a04229ac3e4a953ac3",
+      "lines": 41
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/NegativeMaterialRatioReferenceJetsReviewedManifest.json",
+      "sha256": "572dcd9a841da0f548931adf033255570342c4de39651e3ad2a080e436f30bd2",
+      "blob": "a1afb6dc971f7cea1001cef71f699d0db39110a9",
+      "lines": 106
+    }
+  ],
+  "proof_checks": [
+    "One constant max(AN,AP) precedes every real whole-atlas piece and unit point. The original physical widths are positive and bounded by the physical annular width.",
+    "Each negative index maps to the original old-K cutPair half; e0(k) is proved explicitly, and physicalLeft/Right/cell are exactly the original fields. The original actual sample endpointX result applies to the full negative component.",
+    "Each positive index retains its real whole-positive endpoints and the supplied genuine midpoint host. The already reviewed same-retained closed-interval estimate gives the actual point-to-sample bound, including both directions via abs.",
+    "The map into the core is checked directly from those same fields. No chart/reference gauge formulas or geometric jet targets enter this metadata result.",
+    "Necessary retained-evidence and midpoint-host section hypotheses are explicitly included before the documented theorem. No whole-component single-cell or original E0 floor is assumed."
+  ],
+  "scope_limits": [
+    "The retained-coordinate certificate is an explicit actual construction input, not inferred from arbitrary Through03.",
+    "No Lean compiler/elaborator, CI query, active checkout/index/ref/CP/authority mutation."
+  ],
+  "compiled": false,
+  "active_state_modified": false
+}

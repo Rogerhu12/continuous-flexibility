@@ -1,0 +1,51 @@
+{
+  "kind": "CI148_root_endpoint_specialization_proof_split_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJetsRepairCandidateManifest.json",
+    "sha256": "3e4e4b760b6dafc64438ef050c17e32c6ccc27dd4d304c711ca29eff3dae1558",
+    "blob": "fa46425c2ff3f46c0fd3013049522f033a7a01a2",
+    "lines": 113
+  },
+  "actual_base_commit": "dc2dd491aa653712df6f739448eed9bb1505166e",
+  "actual_base_tree": "a8d543032b3ba21097e13c34d899fd134443e3a3",
+  "target_path": "src/ContinuousFlexibility/Analysis/N03RootEndpointPhysicalJets.lean",
+  "base_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJets.base.lean.txt",
+    "sha256": "d5ba0977e2e650d2a7d51b89f8ddcf1cd10981311a3a15b9b141dae1720e829f",
+    "blob": "6dd741b196642f22a9461702306fe2755c352aa1",
+    "lines": 306
+  },
+  "candidate_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJets.lean",
+    "sha256": "ef46dcdc6d0e03ddd94fc925199cc655cb8652117fc4c2256c36f4b8949ec066",
+    "blob": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+    "lines": 406
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJets.diff",
+    "sha256": "5d070cbc5cac01dcf12d75da1ca08ed12a7dea6839290329cc037baa57d8eda0",
+    "blob": "728f7f3f661fb35c123992a10620ae91c4cd6173",
+    "lines": 150
+  },
+  "surface_comparison": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJetsSurfaceComparison.json",
+    "sha256": "b86a545e57b27f3361f012ab3fdd92ee929b7551e809aaff9e68585f97b2b1d7",
+    "blob": "ac071c228bc0cd15a199c10d7425c5875844a565",
+    "lines": 40
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CI148RootEndpointProofSplitIndependentReview.json",
+    "sha256": "017625b2691a993458a4e09546a9062affdebcf8a7b92f47fd618f06e745dac5",
+    "blob": "8751b7c38f6f17d5bd98a3c6026ec7e46c43bc9a",
+    "lines": 124
+  },
+  "scope_limits": [
+    "No heartbeat or recursion limit increase and no changed assumptions or mathematical output.",
+    "The actual CI log gives declaration-level whnf timeout only; it does not identify an individual internal normalization step. Splitting the two specialization obligations is a source-level repair candidate, not a measured performance claim.",
+    "No compiler/elaborator, CI query/download, active checkout/index/ref/CP/authority mutation. Historical CI147 candidate/review and current CI148 base remain preserved."
+  ],
+  "compiled": false,
+  "source_bytes_changed_after_review": false,
+  "active_state_modified": false
+}

@@ -1,0 +1,141 @@
+{
+  "kind": "independent_full_source_N01_endpoint_state_energy_parameter_order_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED_MIXED_PIN",
+  "reviewer": "/root/quantitative_route",
+  "author": "/root/proof_inventory",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateCircleMemberCandidateManifest.json",
+    "sha256": "949a4f50e9254648fe8d0780905b8d6456bfe1b3849cb126ded64f32092ea841",
+    "blob": "e66024ea4f8749f6a56cfdb6a9e55b184739a7a1",
+    "lines": 102
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateCircleMember.lean",
+    "sha256": "75808e90430bc13c4db6ee9c284eff16175b21e9c4d32631f90286f49ad4960e",
+    "blob": "d978b3a123acd1959f37914ab12362764d9a37e9",
+    "lines": 169
+  },
+  "original_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateCircleMember.c5c48-base.lean.txt",
+    "sha256": "c6ba4777c2d685ac833d40f3ad7599be58313058d811eb811db45f90b9b26602",
+    "blob": "7de9694640d02fdc9bf3461f1b5548bebfe0d005",
+    "lines": 163,
+    "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateCircleMember.diff",
+    "sha256": "4bc6d31680b379f32d8ac4890178abf0707df3a6e2a7686d66b725afefb22e89",
+    "blob": "2a355b64fe59308c29988be1da99f59060fab813",
+    "lines": 64
+  },
+  "weighted_provider_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N01EndpointWeightedJetsParameterOrderIndependentReview.json",
+    "sha256": "442292e09169b1462d62b8c152ac7fc0d02c9caf0c23d9eef3ca274fb5703e5b",
+    "blob": "6c92d1388075949ee88a7d5b6a8188bf52f785b6",
+    "lines": 131
+  },
+  "selected_actual_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointWeightedJets",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJets.lean",
+      "sha256": "0ff8a00d7ce3c57650762049629cd29f422a5cd80258e7acd5ff5831acbf2e16",
+      "blob": "eb5c6073323224dfe1549cdfd56e9126f4b127a0",
+      "lines": 103,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointCircleJets",
+        "ContinuousFlexibility.Analysis.N01FlowSamplePrefactor",
+        "ContinuousFlexibility.Analysis.TameMultilinearNormalization"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01StateLocalizationEnergy",
+      "path": "src/ContinuousFlexibility/Analysis/N01StateLocalizationEnergy.lean",
+      "sha256": "9c6e9d707e5e4d92aa597072a0b065ee34775dafa16d62cdaaa997d927baa98f",
+      "blob": "37df6176b4c5ea9af1ba7d15003e915e03372b7c",
+      "lines": 182,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01LocalizedStateDirections",
+        "ContinuousFlexibility.Analysis.N01WeightedPlateauEnvelope"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleEnergyEnvelope",
+      "path": "src/ContinuousFlexibility/Analysis/CircleEnergyEnvelope.lean",
+      "sha256": "a3ff50dbed1c22ace70eef83e92d0239caf028caab1dc647fd514a50a04fc313",
+      "blob": "0e0147a741014a634c384188612caadf19d2d51b",
+      "lines": 102,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.CircleEnergyPointwiseBounds",
+        "ContinuousFlexibility.Analysis.MaterialComponentEnergy"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointCircleJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleJets.lean",
+      "sha256": "a619259b26db86a20e42940210547023f7ffe255a53d833d54e4b1b42186bae8",
+      "blob": "55157d7700a12a33d2c630e287c6501468b4f51a",
+      "lines": 120,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointAngularJets",
+        "ContinuousFlexibility.Analysis.CircleJetAssembly"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "selected_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ]
+    }
+  ],
+  "provider_reviewed_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJetsParameterOrderReviewedManifest.json",
+      "sha256": "418aab4a08f28d761a111db6c1d9f06ab44412325d78330e79687fa1aa8286db",
+      "blob": "10711f6f0c93c48bd52bc44b8a532915919615b2",
+      "lines": 43
+    }
+  ],
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointStateCircleMemberClosureInventory.json",
+    "sha256": "5b923bcea8a3591948f1408b221a2f48aaaf81deca61077cfedca6f78dd3ed87",
+    "blob": "6febe9d229d8bd16a7236983d289dc74e7f9778a",
+    "lines": 3615
+  },
+  "read_scope": [
+    "All 169 candidate lines and the complete 64-line delta, with exact comparison against the 163-line original source and the full candidate manifest.",
+    "The actual 182-line N01StateLocalizationEnergy, 102-line CircleEnergyEnvelope and 120-line endpoint scalar-circle jet definition/derivative provider were read in full. The selected 103-line weighted provider was independently reviewed immediately before this source.",
+    "All direct source/base/diff/provider/owner identities were recomputed; the three private proofs and qualitative membership header are byte-identical. All recorded nonlocal closure blob identities match their selected commit trees."
+  ],
+  "checks": [
+    "For state arity n+1, the actual weighted estimate chooses one parameterLoss before s. The max order t=max(base,s+loss+parameterLoss) is used consistently in the low/high comparison, state seminorm product, localization energy, summability and final membership.",
+    "The genuine localized state directions are selected from the original v with v.second=0. Only the distinguished snoc slot is localized; the other directions and actual base state stay unchanged. The equality of angular jets uses the same closed-radius SmoothDirections tower at the same rsel(m).",
+    "The actual oneHigh snoc inequality puts all n other slots into the t-order product and the distinguished slot into p(t,w_m). Since M(sample m)>=1 and c<=s, the exact M^(c+1) cost is absorbed by the actual M^(s+1) localization-energy estimate.",
+    "The real square-root energy uses the same two actual physical/circle energy terms and original component sample. Constants K,(n+2),L depend on n/s and the selected loss, but precede every state, direction tuple, component, angle and angular/material split.",
+    "The final CircleMember theorem retains its complete original header. Its order-dependent summable energy is provided by the actual stateLocalizationEnergy_tsum_lt_top theorem; no bounded pointwise surrogate replaces the infinite energy sum.",
+    "All proof hypotheses hN/hS/hT are explicit, so the section-bound data are retained. The quantitative statement intentionally changes to an existential per-arity loss; the qualitative statement and all three generic private lemmas are unchanged.",
+    "The recorded 282-module selected import graph is closed and acyclic, with five explicit local replacements and no obsolete N01SectorFlowTower or N01EndpointParameterTower. All 209 prior source identities/import lists are unchanged; four local-row path/ref metadata layouts were normalized without changing those identities. All nonlocal blob identities match the selected immutable trees. This is not a new mathematical review of every graph module."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "The selected c5 generic sources and bb419 N01 contract have not been compiled together. This is one explicit downstream compatibility step, not a completed N02/N03 gateway or an all-arity uniform loss claim.",
+    "No witness, material data, cell, radius selector or state tower is replaced.",
+    "No Lean compiler/elaborator, CI query or active checkout/index/ref/CP/authority/plan operation; no source bytes edited."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T14:37:25.354261+00:00"
+}

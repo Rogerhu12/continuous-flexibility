@@ -1,0 +1,102 @@
+{
+  "kind": "reviewed_same_actual_whole_atlas_six_material_ratio_reference_jets",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialRatioReferenceJetsCandidateManifest.json",
+    "sha256": "803aa80c978eedb9a7e43c6e58992669d0649e8f1b4e218b2aef4da7b263e419",
+    "blob": "b769d4b0735a3680cfcecbe71b0ee46a8d351975",
+    "lines": 147
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialRatioReferenceJets.lean",
+    "sha256": "4bfb475cc506c8468b2d97a2784ca520631e30bee93238453af869a85347e794",
+    "blob": "ad4acc20487419326feee8b4a60948a8b8f30b4c",
+    "lines": 209,
+    "target": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeMaterialRatioReferenceJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeUnitMaterialGeometry",
+      "ContinuousFlexibility.Analysis.RetainedPositiveMaterialRatioJets",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeMaterialRatioJets",
+      "ContinuousFlexibility.Analysis.WholeReferenceGaugeEnvelopeRatioJets",
+      "ContinuousFlexibility.Analysis.CanonicalStaticAtomRegularity"
+    ],
+    "public_names": [
+      "canonicalMaterialRatioSelector",
+      "canonical_materialRatioAtom_exists_selector",
+      "canonicalMaterialRatioSelector_eq_normalizedPower",
+      "n04WholeReferenceGauge_materialRatio_jets",
+      "n04WholeReferenceGauge_materialRatioReferenceJets_enlargedMaterialData"
+    ]
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/WholeReferenceGaugeMaterialRatioReferenceJetsIndependentReview.json",
+    "sha256": "c4ddefd5c81366c31b04aa8cebe4d4531d478c5b31ea5cc0aa60783e44abdb19",
+    "blob": "1f5c896b4186ee3e194d5d104c489bb7c9ffa954",
+    "lines": 156
+  },
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeUnitMaterialGeometryReviewedManifest.json",
+      "sha256": "a51fd15fff4cd1e8997e5e66da32b1f26e91450d1d0631409af5450269e606f8",
+      "blob": "da5287476d1f3eb1c04836ef9bf444f308d84ecb",
+      "lines": 39
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJetsReviewedManifest.json",
+      "sha256": "f697492d56e429069e6150a4a3180f51535a9d07d617f27bf68022f4ea735321",
+      "blob": "112751de2baf6c065d040ec659333f36a45ba9a8",
+      "lines": 50
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/NegativeMaterialRatioReferenceJetsReviewedManifest.json",
+      "sha256": "572dcd9a841da0f548931adf033255570342c4de39651e3ad2a080e436f30bd2",
+      "blob": "a1afb6dc971f7cea1001cef71f699d0db39110a9",
+      "lines": 106
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/NegativeEnvelopeReferenceJetsReviewedManifest.json",
+      "sha256": "ceb728e0006588317dbf8e25d374bf391627418f516fff5cc5f8ee66600aeb55",
+      "blob": "bd990c7351d8c75f4264d2195b1dada573684462",
+      "lines": 206
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/static-atom-scopes/WholeReferenceGaugeStaticAtomRegularityReviewedManifest.json",
+      "sha256": "c4d0e20bb909244b7c3cae080893a26e401c0b23214bf2a77cba532b8909fea9",
+      "blob": "2438d9786d10d13019b0131d147d72e659891560",
+      "lines": 135
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalMaterialRatioDifferenceJetsReviewedManifest.json",
+      "sha256": "99492016d90c172e78062b39df09f64422466d335ec7258645f89424afc816d2",
+      "blob": "ab9b234acf2b33df32b854014138deb63ddbfa62",
+      "lines": 42
+    }
+  ],
+  "selected_supersession": {
+    "module": "ContinuousFlexibility.Analysis.RetainedPositiveMaterialRatioJets",
+    "selected_source": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/positive-ratio-section-layout/RetainedPositiveMaterialRatioJets.lean",
+      "sha256": "4cacd7bd8a6fe2cc6a9574253adea1b21b8efbba691c05a4a704b88663047680",
+      "blob": "f8849fb6a9a508a1ccd33e2bd92ff7119c1778db",
+      "lines": 188
+    },
+    "reason": "Final 188-line section-binder and include/doc-layout compatibility, independently reviewed by the superseding 53f1 receipt. Original 186 and first 188 candidate remain historical and unselected."
+  },
+  "scope": [
+    "Each of the six actual H/M/E0 atoms has an explicit Boolean selector and an equality of whole functions to the same fixed-sample normalized scalar power. The duplicate E0 code does not change the function.",
+    "The same retained old-K and whole V unit geometry is reused for every piece. No new negative/positive metadata, cell or sample is chosen. U.sample=T.sample is explicit; only U is used in the differentiated scalar weight.",
+    "All physical derivative estimates come from the actual scalar power/X-shift providers. The negative exponent sample denominator cancels for H/M; the envelope uses its actual separate scalar proof. No target ReferenceJets estimate is an input.",
+    "The affine change of variables contributes only |physicalRight-physicalLeft|^a, bounded by the fixed annular width. Every strictly positive angular order is exactly zero.",
+    "The actual enlargedMaterialData T is passed as U, its proven material contract and sample equality are explicit, and its actual E0 ratios are differentiated. The genuine floor is used only for finite packing of Fin(s+1) times three Bool indices.",
+    "Ordinary smoothness and period are reused from the independently reviewed static-atom regularity provider using the true unit-point core inclusion. The final bound is common before all states, pieces, points, six atoms and mixed orders.",
+    "Every retained certificate and genuine midpoint-host hypothesis used only in proofs is explicitly included before the documented declarations. All five public names have no installed declaration collision."
+  ],
+  "scope_limits": [
+    "The retained-coordinate witness remains explicit and is not inferred from arbitrary Through03.",
+    "This completes the six reference-ratio spatial obligations on this same atlas; other primitive atoms and the final combined certificate remain separate.",
+    "No original E0 floor, whole-positive single-cell hypothesis, new witness or target material estimate.",
+    "No Lean compiler/elaborator, CI query or active checkout/index/ref/CP/authority mutation."
+  ],
+  "compiled": false,
+  "source_modified": false
+}

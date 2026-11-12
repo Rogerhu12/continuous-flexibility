@@ -1,0 +1,74 @@
+{
+  "kind": "fixed_degree_radial_taylor_slice_all_order_linear_envelope_candidate",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RadialTaylorSliceJetEnvelope.lean",
+    "sha256": "bc3bf04b7552fdc0bdaab8ba88138040516890dce27afee2e93bb5fa3e74f0a6",
+    "blob": "0f6c507f1f6463830e5b0a179ad46fb3c21d9db7",
+    "lines": 94,
+    "target": "src/ContinuousFlexibility/Analysis/RadialTaylorSliceJetEnvelope.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets",
+      "Mathlib.Topology.Order.Compact"
+    ],
+    "public_names": [
+      "exists_radialEndpointTaylorSlice_jet_envelope"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJets.lean",
+      "sha256": "a515668c71f3895edfda3d1183a5c275f3758799de0d7ebb68d439d33095bc66",
+      "blob": "db60546bb34349a040955ace14facdf5b13dfa0d",
+      "lines": 167
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+      "sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+      "blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+      "lines": 130
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorExtension.lean",
+      "sha256": "569766332fa55b39cf1aea1a437366cd44591818758530f2dafffde49bdcd1da",
+      "blob": "5c7b80c9ff8255850e05bb3308a30579b035a8d6",
+      "lines": 223
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorBounds.lean",
+      "sha256": "75f4c39420744a25ee50f3e159072f390a757a290718524f78829b9d2be1f40a",
+      "blob": "55cb023ca0aab4f23e9a19f1d422c5ee50f54025",
+      "lines": 279
+    }
+  ],
+  "fixed_mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "pinned_api_files": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/Compact.lean",
+      "sha256": "7c02670f2e88f16acd11d69ddd6afb8d8118adca50279e1abb2a3c7761feb044",
+      "blob": "8e1982cb6cd1f808ded359ffdb0afa8ee9a8bdba",
+      "lines": 546
+    }
+  ],
+  "checks": [
+    "The exact radialEndpointTaylorSlice at degree n is expanded into the same original finite coefficients and the normalized monomials x^j/j!.",
+    "Finite normalized-monomial jets are bounded on the fixed compact interval [-1,1]. Their one common constant is chosen using only n and N, before the coefficient envelope M, center c and source f.",
+    "Translation has derivative one at every order. The finite sum derivative and triangle inequality give a bound linear in M, including k=0, N=0 and zero M.",
+    "The theorem requires no smoothness assumption on f beyond the numerical values of its actual finite radialBoundaryJet coefficients. The resulting representative is the already defined finite polynomial.",
+    "At a displayed collar of radius delta<=1 this bound applies with the same n and delta for every N. No geometric inverse radius, changed interpolation degree or new width is introduced."
+  ],
+  "scope_limits": [
+    "This is the raw fixed-polynomial foundation. Higher derivatives of the actual cutoffs, integral coordinate, clipped logarithm/exponential and their material substitution remain subsequent obligations.",
+    "No claim of state SmoothDirections, final primitive geometry, or new same-witness certificate is made.",
+    "No Lean compiler/elaborator, CI query or active checkout/index/ref/CP/authority/plan operation."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}

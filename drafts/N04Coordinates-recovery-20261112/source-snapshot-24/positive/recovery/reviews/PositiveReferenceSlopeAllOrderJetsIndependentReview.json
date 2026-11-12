@@ -1,0 +1,101 @@
+{
+  "kind": "independent_full_source_actual_reference_slope_all_order_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root/proof_inventory",
+  "author": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJetsCandidateManifest.json",
+    "sha256": "ebade1556b5213ba81fa8e0d728d57449feb4b34d46ec55f95abaf1f68e09fde",
+    "blob": "e45befc487abedaf5fd57c483e08100150c16cf0",
+    "lines": 88
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveReferenceSlopeAllOrderJets.lean",
+    "sha256": "675bdd7d913c69aec27edef3c59d9b65c97dcc3693e93158294147f41971f510",
+    "blob": "1b03ae7c2ad6603d9bf99d97086b35bc6309269a",
+    "lines": 99,
+    "target": "src/ContinuousFlexibility/Analysis/PositiveReferenceSlopeAllOrderJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.PositiveCutoffAllOrderJets",
+      "ContinuousFlexibility.Analysis.PositiveReferenceLinearJetEnvelope",
+      "ContinuousFlexibility.Analysis.PositiveReferenceCoordinate"
+    ],
+    "public_names": [
+      "exists_positiveReferenceSlope_allOrder_jet_envelope",
+      "exists_positiveReferenceCoordinate_allOrder_positiveJet_envelope"
+    ]
+  },
+  "selected_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveCutoffAllOrderJets.lean",
+      "sha256": "f7170eb9b7860284a13405785c2c32ca76f284b88f92a54ede76227c97ecc378",
+      "blob": "3eca4b5f99fce01b7520860bf8fc89d8d426ae12",
+      "lines": 92
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceLinearJetEnvelope.lean",
+      "sha256": "4f5ddf3cecb3af6c0274ad534fb90f5c103be4da4795f40de16a18f5e730a9ac",
+      "blob": "88bfd907ef16a3a10f1bc338bfb701177d099b5e",
+      "lines": 205
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCoordinate.lean",
+      "sha256": "64f15c330a043cd80bde15d122b4e16c3295493df67199dc95fb0d79fade23de",
+      "blob": "08de005c626e3d6e963a27a6588f1082ac8c3335",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceBlend.lean",
+      "sha256": "dae6f930520d471225ec804a00cfedecc452d1b147a4298f0cb3a1f4ca58da54",
+      "blob": "e386806876fb9d07d3b384593ec42119b636b348",
+      "lines": 157
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    }
+  ],
+  "provider_reviewed_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveCutoffAllOrderJetsReviewedManifest.json",
+      "sha256": "548c7905e67348e4b63c71066458a3aee80c3909a576a74e03c277860923582f",
+      "blob": "7489a17c1654719ab508532f6f077ded55e5f598",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceLinearJetEnvelopeReviewedManifest.json",
+      "sha256": "052bdaa7641537ea90ac267ae98238c9669badd706e34e497c2c8efec58a4645",
+      "blob": "04789760b15a2bd55f1b2d8468ab55ce8092b736",
+      "lines": 58
+    }
+  ],
+  "read_scope": [
+    "All 99 candidate lines, full actual cutoff92/coordinate143/blend157, the middle-weight first public theorem and its basis helper from the selected 205-line provider.",
+    "Pinned iteratedDeriv_succ-prime, function-add generated theorem and constant-field-multiplication theorem were read at the selected mathlib source. All listed SHA256 and Git blob identities were recomputed and matched."
+  ],
+  "checks": [
+    "The slope is the exact mass-one positiveReferenceSlope, with its actual positiveReferenceScale. No relative mass=span formula is substituted.",
+    "For each N the constants Ccut and Cmid precede l/r/delta/U/M/a. Both endpoints use the same Bool family and cutoff width; no higher-order estimate changes that width.",
+    "Local smoothness on each actual open collar suffices because the clipped product is globally smooth. The two clipped endpoint terms cost Ccut*U^N*M. The middle weight costs Cmid*U^N, multiplied only by the value of the actual scale bounded by M.",
+    "The absolute-value product estimate uses hscale and hWb with nonnegative right factors. The final coefficient 2*Ccut+Cmid is at least one and leaves M linear, including N=0 or M=0.",
+    "The actual integral coordinate derivative is exactly the same slope for every real point. A whole-function funext identity and pinned iteratedDeriv_succ-prime transfer the slope estimate to orders k+1, without a new inverse or coordinate.",
+    "The two public names have no matching declaration in the current installed source; imports and required scoped notation are present."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "This numerical envelope consumes an actual scale value bound and finite endpoint jet bounds; the material specialization remains a separate downstream theorem.",
+    "No final primitive, inverse-jet or state SmoothDirections claim is made.",
+    "No Lean compiler/elaborator, CI query, active source/index/ref/CP/authority/plan mutation; source bytes unchanged."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T14:38:14.293290+00:00"
+}

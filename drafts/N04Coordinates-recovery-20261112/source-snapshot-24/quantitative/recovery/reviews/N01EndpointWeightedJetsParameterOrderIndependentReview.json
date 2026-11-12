@@ -1,0 +1,131 @@
+{
+  "kind": "independent_full_source_N01_endpoint_weighted_parameter_order_supersession_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED_MIXED_PIN",
+  "reviewer": "/root/quantitative_route",
+  "author": "/root/proof_inventory",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJetsCandidateManifest.json",
+    "sha256": "b15bc42e006f5c252fef7dafe8f92e9208d6821d7165eda2fb82bd1f9b3126ef",
+    "blob": "ffbfb39b994af968ab56fd341d655166f2af5a35",
+    "lines": 117
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJets.lean",
+    "sha256": "0ff8a00d7ce3c57650762049629cd29f422a5cd80258e7acd5ff5831acbf2e16",
+    "blob": "eb5c6073323224dfe1549cdfd56e9126f4b127a0",
+    "lines": 103
+  },
+  "original_source": {
+    "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJets.c5c48-base.lean.txt",
+    "sha256": "b00885133b73c2d98bb315603b564d5d2489020764f06969ad9ff161f3636794",
+    "blob": "6b6cc8a8ff64b7304b240a37a55899adbf588933",
+    "lines": 96
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJets.diff",
+    "sha256": "18568081685a3bae008d5037c3831fca42f092b8cb5e07e5f352021a33510a19",
+    "blob": "62c8b0325c0b5e244f5aa7cf28d3f4606ebd0c0e",
+    "lines": 81
+  },
+  "current_angular_provider_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N01EndpointAngularJetsParameterOrderIndependentReview.json",
+    "sha256": "fda6d43448d3d05b75798ed99ff172b5c86b0ee9480997f97cbd384a8dc08031",
+    "blob": "82eb297e490fbbf09eb70d100c01d1c5887c481c",
+    "lines": 149
+  },
+  "selected_upstream_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01EndpointCircleJets",
+      "path": "src/ContinuousFlexibility/Analysis/N01EndpointCircleJets.lean",
+      "sha256": "a619259b26db86a20e42940210547023f7ffe255a53d833d54e4b1b42186bae8",
+      "blob": "55157d7700a12a33d2c630e287c6501468b4f51a",
+      "lines": 120,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01EndpointAngularJets",
+        "ContinuousFlexibility.Analysis.CircleJetAssembly"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01FlowSamplePrefactor",
+      "path": "src/ContinuousFlexibility/Analysis/N01FlowSamplePrefactor.lean",
+      "sha256": "97d0acac56b685e4e30499e752f9473266793ac37549dd5fcdb32e2818307a08",
+      "blob": "62d01175dace47d6da9c87e1587a7118acce80aa",
+      "lines": 64,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "ContinuousFlexibility.Analysis.MaterialSampleWeightedConstraint",
+        "ContinuousFlexibility.Statements.Nonlinear"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+      "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+      "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+      "lines": 204,
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "imports": [
+        "Mathlib.Analysis.Normed.Module.Seminorm.Basic",
+        "Mathlib.Topology.Algebra.Module.Multilinear.Basic",
+        "Mathlib.Topology.Order.OrderClosed",
+        "Mathlib.Topology.Instances.Real.Lemmas",
+        "Mathlib.Tactic.Positivity",
+        "Mathlib.Tactic.Ring"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "lines": 1773,
+      "selected_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ]
+    }
+  ],
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointWeightedJetsClosureInventory.json",
+    "sha256": "cd9f10a638c5070aebfdb05a53299a3e359a5b106b4088bd16c09390a7b96f9b",
+    "blob": "f8e22d54f9d2d231bce27c4d156a5370181fa507",
+    "lines": 2698
+  },
+  "read_scope": [
+    "All 103 candidate lines, complete 81-line diff and full manifest; selected 120-line actual circle-jet consumer and 64-line actual sample-prefactor source.",
+    "The selected 239-line angular tower was independently read in full immediately before this review. The actual one-high nonnegativity and N01 index-comparison contracts were checked against the same selected pins.",
+    "The original private scalar prefactor lemma is byte-identical. All listed source, base, diff, local provider, closure and selected upstream blob hashes were independently checked."
+  ],
+  "checks": [
+    "The uniform-radius theorem first requests the genuine angular bound at k, obtains parameterLoss, and then quantifies over s. Its B and cancellation constant are fixed before every radius selector, component, angular order <=s, material exponent c, angle, state and direction tuple.",
+    "The actual endpointFlowScalarJets definition and its iterated-derivative identity remain the original circle-family source. It evaluates the same closed angular tower at the original selected radius and uses that tower, not replacement jets.",
+    "The exact flow_sample_prefactor_le_M provider retains H(sample m)^(-3/4), H(sample(C.cell m))^(3/4), and E0(sample(C.cell m))^B. Its original N01 bounded-index comparison cancels the height powers and pays exactly one M(sample m) factor; no C.cell relabel or changed material datum occurs.",
+    "The unchanged private algebra moves only nonnegative factors. Its result is (B*K)*M(sample m)^(c+1) times the same oneHigh at s+loss+parameterLoss, with no lost parameter-order term.",
+    "The fixed-radius corollary specializes the same uniform-radius theorem after choosing k and parameterLoss, preserving the quantifier order and constants.",
+    "Both public quantitative headers intentionally change. Every hN/hT/hS proof input is explicit, and all section data appear in these binder types.",
+    "The selected 209-module project import inventory is closed and acyclic, has four local compatibility modules, and excludes the two old fixed-loss sector/endpoint modules. This is an import/identity check, not a claim that all 209 mathematical proofs were newly reviewed."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "The angular candidate historical pending wording is left unchanged; its completed independent review is linked above.",
+    "The exact selected c5 generic sources and bb419 N01 contract have not been compiled together. The remaining quantitative downstream modules require explicit per-k-loss adaptation.",
+    "No full N02/N03 gateway, uniform all-k loss, replacement reference witness or final primitive certificate is claimed.",
+    "No source or active checkout/index/ref/CP/authority/plan edit, compiler/elaborator or CI query was performed."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "created_at": "2026-11-12T14:28:38.524224+00:00",
+  "current_angular_provider_owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointAngularJetsParameterOrderReviewedManifest.json",
+    "sha256": "749950d6c4266205804e98a97c2510d84ae9a7abce153fc3e45c1741b2115cfc",
+    "blob": "e54c997613811463a07101189de4a47b14494997",
+    "lines": 37
+  }
+}

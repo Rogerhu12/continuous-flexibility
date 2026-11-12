@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "independent_full_source_material_scale_physical_jets_review",
+  "reviewer": "/root/proof_inventory",
+  "result": "passed_full_source_actual_providers_and_pinned_real_power_API",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScalePhysicalJetsCandidateManifest.json",
+    "sha256": "91880a73d8712f8812f26bedf507d6219a062266450232e62cb8341f5e6f60d5",
+    "blob": "d20a3a80f4397c1ce76406a58c24fdd195d0bb21",
+    "lines": 68
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/MaterialScalePhysicalJets.lean",
+    "sha256": "c665f16f3f66aedbdc98fdd045a7e5192baade1b257b0f3d702ec31bb7621901",
+    "blob": "5a29ed16b3635e37ab9a0a4b9294fbcfd48898e0",
+    "lines": 74,
+    "target": "src/ContinuousFlexibility/Analysis/MaterialScalePhysicalJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.MaterialScalarPowerJets",
+      "ContinuousFlexibility.Analysis.SpacesTraceGeometry",
+      "ContinuousFlexibility.Scalar.WeightedMaterialScale"
+    ],
+    "public_names": [
+      "materialEll_rpow_physical_jet_bound",
+      "materialEll_signed_physical_jet_bound"
+    ]
+  },
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialScalarPowerJets.lean",
+      "sha256": "23d1c2fbc0e3c75b90bc0094497cc5bc9a40fb3cac94e2a6c22d4cbeab24b608",
+      "blob": "45db6555d66a3c007d9a62640aee8f67fbf398cc",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/SpacesTraceGeometry.lean",
+      "sha256": "dcc188b0d3cc434b5e100d36e0b2f011ec9ac7a7064596f5a5a94ee49df1780c",
+      "blob": "57ae014851d88eb43af8ed066c770a6455bfbf14",
+      "lines": 233
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/WeightedMaterialScale.lean",
+      "sha256": "ca9fe7191b2be4537f74485f92f09fd8e4e1e2cf1ff1a19632f3a64f2fa0b24e",
+      "blob": "cd40d8d77811b5d832c8c92da1d285990f886e4f",
+      "lines": 153
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    }
+  ],
+  "verified_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialE0PowerJetsReviewedManifest.json",
+      "sha256": "3ee41a2ba9c2d88dca23df555f3569348b4d649607d20e863bc87574cf5238ae",
+      "blob": "c89f4193196ffb9cf77b868443071cd526717ded",
+      "lines": 176
+    }
+  ],
+  "read_scope": [
+    "Complete 74-line candidate, complete scalar107 and installed SpacesTraceGeometry233/WeightedMaterialScale153 providers; exact IsMaterialData/logarithmicDerivativeBounds/RadialMaterialExpansion definitions.",
+    "Pinned Real.rpow_neg_one and Real.rpow_add declarations at mathlib c55e6e786f49471c72fbddbec5415808896aec1e."
+  ],
+  "checks": [
+    "The hT conjunction extraction selects its actual fourteenth logarithmicDerivativeBounds field. The third component is the bound for log ell, and the first smoothness/positivity projections concern the same T.ell.",
+    "The scalar-power theorem retains ell(r)^gamma at every physical derivative order and charges only a nonnegative E0 exponent. Its gamma and n are fixed before all physical points.",
+    "The Boolean false case uses the actual global ell upper bound, choosing exponent zero; the true case uses materialEll_inv_le_E0 proved by testing the universal first radial expansion on constant one and the identity.",
+    "The signed function equality is valid globally: rpow_one and the pinned global rpow_neg_one exactly identify the same ell and inverse ell functions, including points outside the core.",
+    "Multiplying the zeroth-order cost by the retained-weight jet estimate yields coefficient B*C and exponent A0+A. The rpow sum step requires only the actual core positivity of E0; no E0>=1 floor or hidden enlargement is used.",
+    "One Boolean-indexed proof handles both scale atoms. All constants precede the physical point; no sample/cell selection, new material datum or canonical target bound enters.",
+    "Candidate/source/provider/review-manifest hashes and Git blob identities were recomputed and matched. The two public names have no collision in installed source."
+  ],
+  "scope_limits": [
+    "Static review only: no Lean compiler/elaborator or CI was run.",
+    "The result is a physical-core estimate; conversion to canonical pieces and material samples is not claimed here.",
+    "No source, active checkout, index, refs, CP, authority or plan was modified."
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "green_receipt_applies_to_candidate": false
+}

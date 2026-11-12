@@ -1,0 +1,42 @@
+{
+  "label": 149,
+  "head_before": "dc2dd491aa653712df6f739448eed9bb1505166e",
+  "base_tree": "a8d543032b3ba21097e13c34d899fd134443e3a3",
+  "tree": "595109a492679b00341215a00cbdd10815b2ae39",
+  "main": "c070da70d8df06e5345ff10f63aeff17207f257e",
+  "last_full_green": "03e526021c371413f03fc0ce052476b63e105361",
+  "owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJetsRepairReviewedManifest.json",
+    "sha256": "111af1bcb05073b5e22c26aa1b344f4f8b9c1ab186dcba7d79319099ddb3e105"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJets.lean",
+    "sha256": "ef46dcdc6d0e03ddd94fc925199cc655cb8652117fc4c2256c36f4b8949ec066",
+    "blob": "15ba9f4a5b2eefb7ae81d2d4a9e971148ca2fc45",
+    "lines": 406
+  },
+  "target": "src/ContinuousFlexibility/Analysis/N03RootEndpointPhysicalJets.lean",
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair148/N03RootEndpointPhysicalJets.base.lean.txt",
+    "sha256": "d5ba0977e2e650d2a7d51b89f8ddcf1cd10981311a3a15b9b141dae1720e829f",
+    "blob": "6dd741b196642f22a9461702306fe2755c352aa1",
+    "lines": 306
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CI148RootEndpointProofSplitIndependentReview.json",
+    "sha256": "017625b2691a993458a4e09546a9062affdebcf8a7b92f47fd618f06e745dac5",
+    "blob": "8751b7c38f6f17d5bd98a3c6026ec7e46c43bc9a",
+    "lines": 124
+  },
+  "added_lean_since_full_green": 3022,
+  "deleted_lean_since_full_green": 0,
+  "delta": {
+    "added": 115,
+    "deleted": 15
+  },
+  "source_total": 4210,
+  "source_all_total": 4214,
+  "root_imports": 4151,
+  "created_at": "2026-11-12T14:23:32.368729+00:00",
+  "scope": "One independently reviewed private proof split; public contracts and successful helper prefix unchanged. Full CI required; 41 reference modules held."
+}

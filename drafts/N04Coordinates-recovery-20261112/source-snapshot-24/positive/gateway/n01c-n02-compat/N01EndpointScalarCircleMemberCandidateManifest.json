@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "actual_pure_scalar_circle_membership_parameter_order_compatibility",
+  "status": "HELD_UNCOMPILED_PEER_REVIEW_PENDING_MIXED_PIN",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.lean",
+    "sha256": "982eac1e60acf97ad1906422783a4cff5003905b2de516b616505edb5a919538",
+    "blob": "615ebbd2ffa65d62d8344671b90cf6167348d854",
+    "lines": 125,
+    "target": "src/ContinuousFlexibility/Analysis/N01EndpointScalarCircleMember.lean",
+    "base": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.c5c48-base.lean.txt",
+      "sha256": "b6cc40504a1967754b5ffbfd64b68363af2c248a31b067e478094984ba185c81",
+      "blob": "991fd54a8f83c2b1758ef1da8d00ea1a67d0104b",
+      "lines": 121,
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+    },
+    "diff": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMember.diff",
+      "sha256": "6017cd961f2cc6d6349372b5ab251bc0efdde0190fd2967ab5dd749b2146739b",
+      "blob": "8907bed2b5295434adfb822534ab1f8957222406",
+      "lines": 34
+    },
+    "unchanged_private_block_sha256": "bfef2ddd5d847333329088cac286485f5c805668851bf0a7a87e88dbb6f8e133",
+    "qualitative_public_header_identical": true
+  },
+  "selected_generic_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+  "selected_N01_contract_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "scalar_height_input_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ScalarHeightParameterOrderCandidateManifest.json",
+    "sha256": "260e2ab29b61bf9a1c65745d1ee4ff7deb279b742f32005b121cb9556203c321",
+    "blob": "6e891fac8e45850286fba54cd7a01d61db27299e",
+    "lines": 183
+  },
+  "closure_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01EndpointScalarCircleMemberClosureInventory.json",
+    "sha256": "a000af12bf0f6f9fc260a547f3498a3913ac2b75203b8bfa10aded4c5a0e26a1",
+    "blob": "6b073aa0f76b80347f103d599315d377c8410f47",
+    "lines": 3578
+  },
+  "checks": [
+    "The exact scalar field and complete qualitative CircleMember header are retained. The same physical plateau directions of the actual lifted height supply a true summable component energy.",
+    "The actual arity n+2 Euler-height bound selects parameterLoss before s. The unchanged generic envelope receives loss+parameterLoss, with explicit Nat.add_assoc at the sharp endpoint bound.",
+    "Every order uses max(base,s+(loss+parameterLoss)); the weighted energy still pays exactly M^(s+1). No pointwise bound substitutes for summability.",
+    "The full generic private proof is byte-identical to c5, and the selected import DAG excludes both obsolete uniform-loss modules."
+  ],
+  "scope_limits": [
+    "No all-N02/N03 construction, all-arity uniform loss or CI success is claimed.",
+    "No active source/index/ref/CI/CP/authority/plan changes; no Lean compiler/elaborator."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}
