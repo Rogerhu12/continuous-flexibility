@@ -32,6 +32,27 @@ private def radialCutoffScalarTower
   exact (smoothDirectionsOfContDiffOn isOpen_univ hd.contDiffOn).compLinear L
     (hU.prod hV) (fun _ _ => mem_univ _)
 
+private def radialCutoffScalarTowers
+    {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {U : Set E} {V : I → Set PolarPoint}
+    (hU : IsOpen U) (hV : ∀ i, IsOpen (V i))
+    (χ : I → ℝ → ℝ) (hχ : ∀ i, ContDiff ℝ ∞ (χ i)) :
+    ∀ i, SmoothDirections (U ×ˢ V i)
+      (fun x : E × PolarPoint => deriv (χ i) x.2.1) :=
+  fun i => radialCutoffScalarTower
+    (E := E) (U := U) (V := V i) (χ := χ i) hU (hV i) (hχ i)
+
+private def transportVelocity_twoTowers
+    {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    {U : Set E} {V : I → Set PolarPoint}
+    {f₀ f₁ : I → E × PolarPoint → ℝ}
+    (J₀ : ∀ i, SmoothDirections (U ×ˢ V i) (f₀ i))
+    (J₁ : ∀ i, SmoothDirections (U ×ˢ V i) (f₁ i)) :
+    ∀ (c : Fin 2) i, SmoothDirections (U ×ˢ V i)
+      ((Fin.cases f₀ (Fin.cases f₁ Fin.elim0)) c i) :=
+  Fin.cases J₀ (Fin.cases J₁ (fun i => Fin.elim0 i))
+
 private theorem transportVelocity_commonGrowth
     {I E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
@@ -351,11 +372,13 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
   run_tac Lean.logInfo "N02N03 Velocity: pulled-towers"
   let fZ : Fin 2 → ℕ → E × PolarPoint → ℝ :=
     Fin.cases f₀ (Fin.cases f₁ Fin.elim0)
+  run_tac Lean.logInfo "N02N03 Velocity: labelled-functions"
   let JZ : ∀ c m, SmoothDirections (U ×ˢ V m) (fZ c m) :=
-    Fin.cases J₀ (Fin.cases J₁ (fun i => Fin.elim0 i))
-  let JC : ∀ m, SmoothDirections (U ×ˢ V m) (fC m) := fun m =>
-    radialCutoffScalarTower (E := E) (U := U) (V := V m) (χ := χ m)
-      hU (hV m) (hχ m)
+    transportVelocity_twoTowers
+      (I := ℕ) (E := E) (U := U) (V := V) (f₀ := f₀) (f₁ := f₁) J₀ J₁
+  run_tac Lean.logInfo "N02N03 Velocity: labelled-towers"
+  let JC : ∀ m, SmoothDirections (U ×ˢ V m) (fC m) :=
+    radialCutoffScalarTowers (I := ℕ) (E := E) (U := U) (V := V) hU hV χ hχ
   run_tac Lean.logInfo "N02N03 Velocity: towers"
   let characteristicBounds : ∃ B : ℕ,
       ∀ A : ℝ, 0 ≤ A → ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →

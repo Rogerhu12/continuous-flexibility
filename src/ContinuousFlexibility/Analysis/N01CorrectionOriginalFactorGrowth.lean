@@ -32,11 +32,11 @@ private theorem fstParameter_jointGrowth_congr
     [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
     [IsTopologicalAddGroup F] [ContinuousSMul ℝ F]
     {p : ℕ → Seminorm ℝ E} (q : ℕ → Seminorm ℝ F)
-    {W : ℕ → ℝ} (hW : ∀ m, 0 ≤ W m)
+    {W : ℕ → ℝ}
     {U : Set E} {V : ℕ → Set PolarPoint}
     {f g : ℕ → E × PolarPoint → ℝ}
     {J : ∀ m, SmoothDirections (U ×ˢ V m) (f m)} {base loss : ℕ}
-    (hJ : UniformWeightedJointGrowth p W J base loss)
+    (hJ : UniformWeightedJointGrowth p (fun _ => 1) J base loss)
     (hU : IsOpen U) (hV : ∀ m, IsOpen (V m))
     (K : ∀ m, SmoothDirections ((U ×ˢ (univ : Set F)) ×ˢ V m)
       (fun x : (E × F) × PolarPoint => g m (x.1.1, x.2)))
@@ -47,18 +47,24 @@ private theorem fstParameter_jointGrowth_congr
     fun m => SmoothDirections.fstParameter
       (E := E) (F := F) (P := PolarPoint) (G := ℝ)
       (U := U) (V := V m) (f := f m) (J m) hU (hV m)
-  have hlift : UniformWeightedJointGrowth (pairGrading p q) W Jlift base loss :=
+  have hlift : UniformWeightedJointGrowth (pairGrading p q) (fun _ => 1) Jlift base loss :=
     UniformWeightedJointGrowth.fstParameter
       (I := ℕ) (E := E) (F := F) (P := PolarPoint) (G := ℝ)
-      (p := p) (W := W) (U := U) (V := V) (f := f) (J := J)
-      (base := base) (loss := loss) q hW hJ hU hV
-  exact UniformWeightedJointGrowth.congr
+      (p := p) (W := fun _ => 1) (U := U) (V := V) (f := f) (J := J)
+      (base := base) (loss := loss) q (fun _ => zero_le_one) hJ hU hV
+  have hcongr : UniformWeightedJointGrowth (pairGrading p q) (fun _ => 1) K base loss :=
+    UniformWeightedJointGrowth.congr
+      (I := ℕ) (E := E × F) (P := PolarPoint) (F := ℝ)
+      (p := pairGrading p q) (W := fun _ => 1) (U := U ×ˢ (univ : Set F)) (V := V)
+      (f := fun m x => f m (x.1.1, x.2))
+      (g := fun m x => g m (x.1.1, x.2)) (J := Jlift)
+      (base := base) (loss := loss) hlift K
+      (fun m x hx => heq m (x.1.1, x.2) ⟨hx.1.1, hx.2⟩)
+  exact UniformWeightedJointGrowth.withWeight
     (I := ℕ) (E := E × F) (P := PolarPoint) (F := ℝ)
-    (p := pairGrading p q) (W := W) (U := U ×ˢ (univ : Set F)) (V := V)
-    (f := fun m x => f m (x.1.1, x.2))
-    (g := fun m x => g m (x.1.1, x.2)) (J := Jlift)
-    (base := base) (loss := loss) hlift K
-    (fun m x hx => heq m (x.1.1, x.2) ⟨hx.1.1, hx.2⟩)
+    (p := pairGrading p q) (U := U ×ˢ (univ : Set F)) (V := V)
+    (f := fun m x => g m (x.1.1, x.2)) (J := K)
+    (base := base) (loss := loss) hcongr W
 
 private theorem scalar_sub_mul_jointGrowth
     {E : Type*}
@@ -245,31 +251,24 @@ theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     have h10 : (1 : Fin 3) ≠ 0 := by decide
     simp only [entry, fb₀, originalCoefficientEntry, h10, eq_self_iff_true,
       ite_false, ite_true]
-  have ha₀ : UniformWeightedJointGrowth
+  run_tac do Lean.logInfo "N02N03 Original: unweighted"
+  have ha : UniformWeightedJointGrowth
       (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
       (U := U) (V := V) (f := fa)
-      p (fun _ : ℕ => (1 : ℝ)) Ja base loss :=
+      p W Ja base loss :=
     fstParameter_jointGrowth_congr
-      (E := E₀) (F := CircleSpace S) (p := p₀) (W := fun _ => 1)
+      (E := E₀) (F := CircleSpace S) (p := p₀) (W := W)
       (U := U₀) (V := V) (f := entry 0) (g := fa₀) (J := K₀ 0)
-      (base := base) (loss := loss) pc (fun _ => zero_le_one) (hK₀ 0) hU₀ hV Ja heqa
-  have hb₀ : UniformWeightedJointGrowth
+      (base := base) (loss := loss) pc (hK₀ 0) hU₀ hV Ja heqa
+  run_tac do Lean.logInfo "N02N03 Original: weighted-a"
+  have hb : UniformWeightedJointGrowth
       (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ)
       (U := U) (V := V) (f := fb)
-      p (fun _ : ℕ => (1 : ℝ)) Jb base loss :=
+      p W Jb base loss :=
     fstParameter_jointGrowth_congr
-      (E := E₀) (F := CircleSpace S) (p := p₀) (W := fun _ => 1)
+      (E := E₀) (F := CircleSpace S) (p := p₀) (W := W)
       (U := U₀) (V := V) (f := entry 1) (g := fb₀) (J := K₀ 1)
-      (base := base) (loss := loss) pc (fun _ => zero_le_one) (hK₀ 1) hU₀ hV Jb heqb
-  run_tac do Lean.logInfo "N02N03 Original: unweighted"
-  have ha : UniformWeightedJointGrowth p W Ja base loss :=
-    UniformWeightedJointGrowth.withWeight
-      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ) (p := p)
-      (U := U) (V := V) (f := fa) (J := Ja) (base := base) (loss := loss) ha₀ W
-  have hb : UniformWeightedJointGrowth p W Jb base loss :=
-    UniformWeightedJointGrowth.withWeight
-      (I := ℕ) (E := E) (P := PolarPoint) (F := ℝ) (p := p)
-      (U := U) (V := V) (f := fb) (J := Jb) (base := base) (loss := loss) hb₀ W
+      (base := base) (loss := loss) pc (hK₀ 1) hU₀ hV Jb heqb
   run_tac do Lean.logInfo "N02N03 Original: weighted"
   let fv₀ : ℕ → E₀ × PolarPoint → ℝ := fun _ x =>
     minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2

@@ -62,6 +62,40 @@ private theorem parameterAngularReflection_apply (E : Type*)
     ContinuousLinearMap.comp_apply, ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd',
     neg_apply]
 
+section ReflectionComposition
+
+variable {E : Type*}
+  [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+  [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+  {U : Set E} {f : E → ℝ} {g : E → ℝ × ℝ}
+
+private def reflectedVelocityDirections_compLinear_congr
+    (J : SmoothDirections U f) (P : E →L[ℝ] E)
+    (hU : IsOpen U) (hP : MapsTo P U U)
+    (hfg : EqOn
+      (fun x => ((f x - f (P x)) / 2, (-f (P x) - f x) / 2)) g U) :
+    SmoothDirections U g :=
+  (reflectedVelocityDirections
+    (E := E) (U := U) (f := f) (g := fun x => f (P x))
+    J (J.compLinear (E := E) (F := E) (G := ℝ)
+      (U := U) (V := U) (f := f) P hU hP)).congrOn
+        (F := E) (G := ℝ × ℝ) (U := U)
+        (f := fun x => ((f x - f (P x)) / 2, (-f (P x) - f x) / 2))
+        (g := g) hfg
+
+private theorem reflectedVelocityDirections_compLinear_congr_D
+    (J : SmoothDirections U f) (P : E →L[ℝ] E)
+    (hU : IsOpen U) (hP : MapsTo P U U)
+    (hfg : EqOn
+      (fun x => ((f x - f (P x)) / 2, (-f (P x) - f x) / 2)) g U) :
+    (reflectedVelocityDirections_compLinear_congr J P hU hP hfg).D =
+      (reflectedVelocityDirections
+        (E := E) (U := U) (f := f) (g := fun x => f (P x))
+        J (J.compLinear (E := E) (F := E) (G := ℝ)
+          (U := U) (V := U) (f := f) P hU hP)).D := rfl
+
+end ReflectionComposition
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -196,20 +230,19 @@ private theorem returnCorrectionLocalCoefficient_parameterSpatialTower_nonempty 
       (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
         (returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2,
           returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2)) :=
-    (reflectedVelocityDirections
+    reflectedVelocityDirections_compLinear_congr
       (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
       (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      JV (JV.compLinear
-        (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-        (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ)
-        (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-        (V := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-        P hW hP)).congrOn
-          (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ × ℝ)
-          (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) (by
-            intro x hx
-            simp only [P, parameterAngularReflection_apply,
-              returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
+      (f := fun x => returnCorrectionVelocityLinear D S C χ
+        (liftSectorParameter S C x.1.1) m x.2 x.1.2)
+      (g := fun x =>
+        (returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2,
+          returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2))
+      JV P hW hP (by
+        intro x hx
+        simp only [P, parameterAngularReflection_apply,
+          returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
+  run_tac do Lean.logInfo "N02N03 Joint: independent-reflection"
   let JE : SmoothDirections
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
       (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
@@ -217,20 +250,21 @@ private theorem returnCorrectionLocalCoefficient_parameterSpatialTower_nonempty 
             (R.residual (liftSectorParameter S C x.1.1)),
           returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
             (R.residual (liftSectorParameter S C x.1.1)))) :=
-    (reflectedVelocityDirections
+    reflectedVelocityDirections_compLinear_congr
       (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
       (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-      JVactual (JVactual.compLinear
-        (E := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)
-        (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ)
-        (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-        (V := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
-        P hW hP)).congrOn
-          (F := ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) (G := ℝ × ℝ)
-          (U := (sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ)) (by
-            intro x hx
-            simp only [P, parameterAngularReflection_apply,
-              returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
+      (f := fun x => returnCorrectionVelocityLinear D S C χ
+        (liftSectorParameter S C x.1.1) m x.2
+          (R.residual (liftSectorParameter S C x.1.1)))
+      (g := fun x =>
+        (returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
+            (R.residual (liftSectorParameter S C x.1.1)),
+          returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
+            (R.residual (liftSectorParameter S C x.1.1))))
+      JVactual P hW hP (by
+        intro x hx
+        simp only [P, parameterAngularReflection_apply,
+          returnCorrectionDriftLinear_apply, returnCorrectionSpeedLinear_apply])
   run_tac do Lean.logInfo "N02N03 Joint: reflections"
   let Jcoeff (i : Fin 3) : SmoothDirections
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo l h ×ˢ univ))
