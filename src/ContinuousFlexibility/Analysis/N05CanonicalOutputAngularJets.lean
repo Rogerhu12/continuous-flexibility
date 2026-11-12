@@ -38,8 +38,14 @@ theorem n05_weakReferenceAngularJet_sub_radial
       (fun r => by
         simpa only using (contDiff_const : ContDiff ℝ ∞ (fun _ : ℝ => χ r)))
       (fun _ _ => rfl) j
-    simpa only [mixedDerivative, iteratedDeriv_zero, iteratedDeriv_const,
-      if_neg (Nat.ne_of_gt hj)] using hh
+    have hzero : mixedDerivative 0 j (fun p : PolarPoint => χ p.1) =
+        (fun _ : PolarPoint => 0) := by
+      funext p
+      rw [mixedDerivative, iteratedDeriv_zero]
+      change iteratedDeriv j (fun _ : ℝ => χ p.1) p.2 = 0
+      simp only [iteratedDeriv_const, if_neg (Nat.ne_of_gt hj)]
+    rw [hzero] at hh
+    exact hh
   have hs := n05_weakReferenceAngularJet_add hab hu (hχLp.const_mul (-a))
     hd (hzLp.const_mul (-a)) h (n05_weakReferenceAngularJet_const_mul hχjet (-a))
   convert hs using 1 <;> funext p <;> simp only [Pi.add_apply, mul_zero, add_zero] <;> ring
