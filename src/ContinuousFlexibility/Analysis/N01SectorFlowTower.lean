@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.SectorParameterGeometry
+import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
 import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
 
 /-!
@@ -38,8 +39,8 @@ theorem N01Properties.sectorFlow_tower
         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+            base (s + hN.ordinaryFlowLoss k) z v := by
+  let hdata := hN.ordinaryFlowFamily_bound k s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m b : ℕ) (θ r : ℝ), b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
@@ -49,7 +50,7 @@ theorem N01Properties.sectorFlow_tower
         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
+            base (s + hN.ordinaryFlowLoss k) z v := by
     intro m b θ r hb hr
     let htower := hdata.choose_spec.2 m 0 b (r, θ)
       (by simpa only [zero_add] using hb) hr
@@ -81,7 +82,7 @@ theorem N01Properties.sectorFlow_tower
     have hb' := (sector_drop_zero_power_factor hraw).trans_eq
       (congrArg (fun W : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B * W)
-        (oneHighVariationWeight_sector_lift S C base (s + loss) z v))
+        (oneHighVariationWeight_sector_lift S C base (s + hN.ordinaryFlowLoss k) z v))
     exact (congrArg abs heq).trans_le hb'
   exact Exists.intro B (And.intro hB hpoint)
 

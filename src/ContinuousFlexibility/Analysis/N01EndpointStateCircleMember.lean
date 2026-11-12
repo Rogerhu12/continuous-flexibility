@@ -86,14 +86,14 @@ theorem N01Properties.endpointFlowScalarJets_state_energy_bound
       ∀ m b c, b + c ≤ s → ∀ θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
-        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss)) z) *
+        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + hN.ordinaryFlowLoss (n + 1))) z) *
           (∏ i : Fin n, pairGrading (sectorGrading S) realGrading
-            (max base (s + loss)) (vs i)) *
-          Real.sqrt (stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) v m).toReal := by
+            (max base (s + hN.ordinaryFlowLoss (n + 1))) (vs i)) *
+          Real.sqrt (stateLocalizationEnergy D T C (max base (s + hN.ordinaryFlowLoss (n + 1))) (s + 1) v m).toReal := by
   let pointData := hN.endpointFlowScalarJets_weighted_bound hS hT rsel hrsel (n + 1) s
   let K : ℝ := pointData.choose
   have hK : 0 < K := pointData.choose_spec.1
-  let t : ℕ := max base (s + loss)
+  let t : ℕ := max base (s + hN.ordinaryFlowLoss (n + 1))
   let p := pairGrading (sectorGrading S) realGrading
   let L : ℝ := 1 + circleSingletonGradingConstant t * (2 * circleSobolevConstant)
   have hL : 0 < L := by
@@ -123,7 +123,7 @@ theorem N01Properties.endpointFlowScalarJets_state_energy_bound
   let A : ℝ := (1 + p t z) * ∏ i : Fin n, p t (vs i)
   have hA : 0 ≤ A := mul_nonneg (add_nonneg zero_le_one (apply_nonneg _ _))
     (Finset.prod_nonneg (fun _ _ => apply_nonneg _ _))
-  have hW : oneHighVariationWeight p base (s + loss) z (Fin.snoc vs (w m)) ≤
+  have hW : oneHighVariationWeight p base (s + hN.ordinaryFlowLoss (n + 1)) z (Fin.snoc vs (w m)) ≤
       ((n : ℝ) + 2) * A * p t (w m) :=
     oneHigh_snoc_le_product p (sectorPairGrading_monotone S)
       (le_max_left _ _) (le_max_right _ _) z vs (w m)
@@ -153,9 +153,9 @@ theorem N01Properties.endpointFlowScalarJets_state_circleMember
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
   apply circleMember_of_seminorm_energy_envelope
     (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz (Fin.snoc vs v)) hM hH
-    (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + loss)) z vs
-    (fun s => stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) v)
-    (fun s => hN.stateLocalizationEnergy_tsum_lt_top hS hT (max base (s + loss)) (s + 1) v)
+    (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + hN.ordinaryFlowLoss (n + 1))) z vs
+    (fun s => stateLocalizationEnergy D T C (max base (s + hN.ordinaryFlowLoss (n + 1))) (s + 1) v)
+    (fun s => hN.stateLocalizationEnergy_tsum_lt_top hS hT (max base (s + hN.ordinaryFlowLoss (n + 1))) (s + 1) v)
   intro s
   let data := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel n s
   exact ⟨data.choose, data.choose_spec.1.le, data.choose_spec.2 z hz vs v hvq⟩

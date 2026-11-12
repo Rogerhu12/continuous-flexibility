@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
 import ContinuousFlexibility.Analysis.N01ReferenceOpticalCollars
 import ContinuousFlexibility.Analysis.N01NeighborhoodRestriction
 
@@ -194,9 +195,9 @@ theorem N01Properties.ordinaryFlowFamily_weighted_zeroth_bound
         |ordinaryFlowFamily S C m a b p z| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (1 + pairGrading (stateGrading S) realGrading (s + loss)
+          (1 + pairGrading (stateGrading S) realGrading (s + hN.ordinaryFlowLoss 0)
             (z - (C.referenceState, 0))) := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 s
+  let hdata := hN.ordinaryFlowFamily_bound 0 s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ z ∈ stateNeighborhood S C base ε, ∀ m a b p,
@@ -205,11 +206,11 @@ theorem N01Properties.ordinaryFlowFamily_weighted_zeroth_bound
         |ordinaryFlowFamily S C m a b p z| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (1 + pairGrading (stateGrading S) realGrading (s + loss)
+          (1 + pairGrading (stateGrading S) realGrading (s + hN.ordinaryFlowLoss 0)
             (z - (C.referenceState, 0))) := by
     intro z hz m a b p hab hp
     exact smoothDirections_zeroth_spatialWeight_bound
-      (pairGrading (stateGrading S) realGrading) base (s + loss)
+      (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss 0)
       (C.referenceState, (0 : ℝ))
       (min (p.1 - C.left m) (C.right m - p.1) ^ a)
       (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
@@ -237,7 +238,7 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
         |J.D k z v| ≤ K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, 0)) v) := by
+              base (s + hN.ordinaryFlowLoss k) (z - (C.referenceState, 0)) v) := by
   have hgeom : ∃ K A : ℝ, 0 < K ∧ 0 < A ∧ ∀ m r,
       r ∈ Icc (x m - δ m) (x m + δ m) →
       (min (r - C.left m) (C.right m - r))⁻¹ ≤
@@ -246,7 +247,7 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
       D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
   obtain ⟨K, A, hK, hA, hdist⟩ := hgeom
   refine ⟨K, A, hK, hA, fun k s => ?_⟩
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+  let hdata := hN.ordinaryFlowFamily_bound k s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ m a b p,
@@ -256,14 +257,14 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
         |J.D k z v| ≤ K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-              base (s + loss) (z - (C.referenceState, 0)) v) := by
+              base (s + hN.ordinaryFlowLoss k) (z - (C.referenceState, 0)) v) := by
     intro m a b p hab hp
     have hm : p.1 ∈ Ioo (C.left m) (C.right m) :=
       ⟨(hinside m).1.trans_le hp.1, hp.2.trans_lt (hinside m).2⟩
     have hd : 0 < min (p.1 - C.left m) (C.right m - p.1) :=
       lt_min (sub_pos.mpr hm.1) (sub_pos.mpr hm.2)
     exact smoothDirections_divide_spatialWeight_bound
-      (pairGrading (stateGrading S) realGrading) base (s + loss) k a
+      (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss k) k a
       (C.referenceState, (0 : ℝ))
       (min (p.1 - C.left m) (C.right m - p.1)) K
       (radialE (D.cellIndex (j m))) A
@@ -293,7 +294,7 @@ theorem N01Properties.ordinaryFlowFamily_collar_bound
         K ^ a * radialE (D.cellIndex (j m)) ^ (A * a) *
           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
-            (1 + pairGrading (stateGrading S) realGrading (s + loss)
+            (1 + pairGrading (stateGrading S) realGrading (s + hN.ordinaryFlowLoss 0)
               (z - (C.referenceState, 0)))) := by
   let data :=
     @N01Properties.ordinaryFlowFamily_collar_directional_bounds
@@ -308,7 +309,7 @@ theorem N01Properties.ordinaryFlowFamily_collar_bound
   have hB : 0 < B := dataB.choose_spec.1
   refine ⟨K, A, B, hK, hA, hB, fun z hz m a b p hab hp => ?_⟩
   exact smoothDirections_zeroth_twoFactor_bound
-    (pairGrading (stateGrading S) realGrading) base (s + loss)
+    (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss 0)
     (C.referenceState, (0 : ℝ))
     (K ^ a * radialE (D.cellIndex (j m)) ^ (A * a))
     (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)

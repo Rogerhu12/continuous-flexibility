@@ -117,7 +117,8 @@ private theorem n03Source_heightGrading_conditions
     (hasSmoothing_pairGrading (hS.2.2.2.1 (3 / 4 : ℝ)).2.1 hasSmoothing_realGrading)
   have hheight (s : ℕ) (η : HeightPair S) : physicalNorm T (3 / 4 : ℝ) s
       ((S.height (3 / 4 : ℝ)).decode η.1) ≤ q s η :=
-    (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1 s).trans
+    (sobolevModel_physicalNorm_le_grading (hS.1 (3 / 4 : ℝ)) η.1
+      (s := s) (t := s) le_rfl).trans
       (le_add_of_nonneg_right (apply_nonneg (realGrading s) η.2))
   exact ⟨hqcont, hq, hIq, hheight⟩
 

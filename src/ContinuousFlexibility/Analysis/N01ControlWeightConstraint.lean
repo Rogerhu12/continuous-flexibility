@@ -63,16 +63,16 @@ theorem N01Properties.controlTravel_second_weight_bound
         (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤
         K * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (T.M (T.sample m) ^ max base loss *
+          (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
   let hdata := hN.controlTravel_second_bound hS hT
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   obtain ⟨_, hgeom⟩ := hN.1.1
-  let G := circleSingletonGradingConstant base + circleSingletonGradingConstant loss + 1
+  let G := circleSingletonGradingConstant base + circleSingletonGradingConstant (hN.ordinaryFlowLoss 2) + 1
   have hG : 0 < G := by
     have hb := circleSingletonGradingConstant_nonneg base
-    have hl := circleSingletonGradingConstant_nonneg loss
+    have hl := circleSingletonGradingConstant_nonneg (hN.ordinaryFlowLoss 2)
     dsimp only [G]
     linarith
   refine ⟨B * G ^ 2, B, mul_pos hB (sq_pos_of_pos hG), hB, fun m => ?_⟩
@@ -82,15 +82,15 @@ theorem N01Properties.controlTravel_second_weight_bound
   have hpC := hT.2.1 (T.sample (C.cell m)) (hsample (C.cell m))
   let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
   have hgrade := singletonKappaDirection_two_grades_le
-    (hS.2.1 (3 / 4 : ℝ)) m base loss hpM.2.2.2 hpM.2.1.le
-  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S loss v :=
+    (hS.2.1 (3 / 4 : ℝ)) m base (hN.ordinaryFlowLoss 2) hpM.2.2.2 hpM.2.1.le
+  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S (hN.ordinaryFlowLoss 2) v :=
     add_nonneg (apply_nonneg _ _) (apply_nonneg _ _)
   have hweight :
       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base loss 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
-        G ^ 2 * (T.M (T.sample m) ^ max base loss *
+        base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
+        G ^ 2 * (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) *
           T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
-    refine (oneHighVariationWeight_state_pair_two_zero_le S base loss v).trans
+    refine (oneHighVariationWeight_state_pair_two_zero_le S base (hN.ordinaryFlowLoss 2) v).trans
       ((pow_le_pow_left₀ hgrade0 hgrade 2).trans_eq ?_)
     dsimp only [G]
     ring
@@ -114,7 +114,7 @@ theorem N01Properties.control_actual_cell_weight_constraint
         T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F *
         ((T.M (T.sample m) ^ max base (1 + loss) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-          (T.M (T.sample m) ^ max base loss *
+          (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2) := by
   obtain ⟨Kχ, B, A, hKχ, hB, hA, hχ⟩ := hN.control_deriv_actual_cell_bound hS hT
   obtain ⟨KF, F, hKF, hF, hsecond⟩ := hN.controlTravel_second_weight_bound hS hT
@@ -130,7 +130,7 @@ theorem N01Properties.control_actual_cell_weight_constraint
     (T.M (T.sample m) ^ max base (1 + loss) * T.H (T.sample m) ^ (-(3 / 4 : ℝ)))
   let PF := KF * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
     T.E0 (T.sample (C.cell m)) ^ F *
-    (T.M (T.sample m) ^ max base loss * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2
+    (T.M (T.sample m) ^ max base (hN.ordinaryFlowLoss 2) * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2
   have hχbound : ∀ r ∈ Ioo (C.left m) (C.right m), |deriv (C.control m) r| ≤ Pχ :=
     fun r hr => hχ m j r (hcell hr)
   have hPχ : 0 ≤ Pχ := by

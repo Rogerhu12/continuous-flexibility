@@ -54,10 +54,10 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_unif
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
-        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
+        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
           (S.height (3 / 4 : ℝ)).grading (base + c + 6)
             (liftSectorParameter S C z).1.1.1 +
-          (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
+          (S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6)
             (liftSectorParameter S C z).1.1.1) := by
   let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n b
   let K : ℝ := pointData.choose
@@ -67,7 +67,7 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_unif
   let K₀ : ℝ := lowData.choose
   have hK₀ : 0 ≤ K₀ := lowData.choose_spec.1
   let highData := hN.physicalPlateauEnergy_weighted_tsum_le_grading_sq
-    hS hT (hS.1 (3 / 4 : ℝ)) (b + loss) (c + 1)
+    hS hT (hS.1 (3 / 4 : ℝ)) (b + hN.ordinaryFlowLoss (n + 2)) (c + 1)
   let K₁ : ℝ := highData.choose
   have hK₁ : 0 ≤ K₁ := highData.choose_spec.1
   let L : ℝ := Real.sqrt K₀ + Real.sqrt K₁
@@ -78,7 +78,7 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_unif
   let ξ : HeightPair S := (liftSectorParameter S C z).1.1
   let directions := hN.exists_height_pair_plateau_directions hS hT ξ
   let η : ℕ → HeightPair S := directions.choose
-  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z
+  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z
   have hA : 0 ≤ A := add_nonneg (by positivity) (apply_nonneg _ _)
   let E : ℕ → ℕ → ℝ≥0∞ := fun j m =>
     ENNReal.ofReal ((T.M (T.sample m) ^ (c + 1)) ^ 2) *
@@ -90,9 +90,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_unif
     exact (lowData.choose_spec.2 ξ.1).trans_eq
       (congrArg (fun i : ℕ => ENNReal.ofReal
         (K₀ * ((S.height (3 / 4 : ℝ)).grading i ξ.1) ^ 2)) hi)
-  have hF : (∑' m, E (b + loss) m) ≤ ENNReal.ofReal
-      (K₁ * ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) ξ.1) ^ 2) := by
-    have hi : b + loss + (c + 1) + 5 = b + loss + c + 6 := by omega
+  have hF : (∑' m, E (b + hN.ordinaryFlowLoss (n + 2)) m) ≤ ENNReal.ofReal
+      (K₁ * ((S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) ξ.1) ^ 2) := by
+    have hi : b + hN.ordinaryFlowLoss (n + 2) + (c + 1) + 5 = b + hN.ordinaryFlowLoss (n + 2) + c + 6 := by omega
     exact (highData.choose_spec.2 ξ.1).trans_eq
       (congrArg (fun i : ℕ => ENNReal.ofReal
         (K₁ * ((S.height (3 / 4 : ℝ)).grading i ξ.1) ^ 2)) hi)
@@ -104,10 +104,10 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound_unif
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S) m) θ| ≤
         K * (A * Real.sqrt (E base m).toReal +
-          Real.sqrt (E (b + loss) m).toReal) :=
+          Real.sqrt (E (b + hN.ordinaryFlowLoss (n + 2)) m).toReal) :=
     scalar_height_scaled_energy_bound c (hM m) hK.le hA
       ((directions.choose_spec.2.2.2 base).2 m)
-      ((directions.choose_spec.2.2.2 (b + loss)).2 m)
+      ((directions.choose_spec.2.2.2 (b + hN.ordinaryFlowLoss (n + 2))).2 m)
       (pointData.choose_spec.2 rsel hrsel m b c θ le_rfl z hz (η m)
         (directions.choose_spec.2.2.1 m))
   exact weightedJetNorm_le_scaled_two_envelopes
@@ -123,10 +123,10 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_height_bound
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
-        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
+        K * (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
           (S.height (3 / 4 : ℝ)).grading (base + c + 6)
             (liftSectorParameter S C z).1.1.1 +
-          (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)
+          (S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6)
             (liftSectorParameter S C z).1.1.1) := by
   let data := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
   exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
@@ -191,18 +191,18 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_unif
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
+        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
-          (1 + pairGrading (sectorGrading S) realGrading (b + loss + c + 6) z)) := by
+          (1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) z)) := by
   let normData := hN.endpointFlow_pure_scalar_weightedJetNorm_height_bound_uniform_radius hS hT n b c
   let K : ℝ := normData.choose
   have hK : 0 ≤ K := normData.choose_spec.1
   let J : ℝ := 1 + (S.height (3 / 4 : ℝ)).grading (base + c + 6) C.referenceState.1.1 +
-    (S.height (3 / 4 : ℝ)).grading (b + loss + c + 6) C.referenceState.1.1
+    (S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) C.referenceState.1.1
   let N : ℝ := (n : ℝ) + 2
   have hrefs := real_reference_budget_bounds
     (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6)) C.referenceState.1.1)
-    (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (b + loss + c + 6)) C.referenceState.1.1)
+    (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (b + hN.ordinaryFlowLoss (n + 2) + c + 6)) C.referenceState.1.1)
   have hJ : 1 ≤ J := hrefs.1
   have hN₀ : 1 ≤ N := by
     have hn : 0 ≤ (n : ℝ) := Nat.cast_nonneg n
@@ -215,11 +215,11 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_unif
   exact scalar_height_budget_transfer hK hN₀ hJ hrefs.2.1 hrefs.2.2
     (apply_nonneg ((S.height (3 / 4 : ℝ)).grading (base + c + 6))
       (liftSectorParameter S C z).1.1.1)
-    (apply_nonneg (p (b + loss)) z)
+    (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 2))) z)
     (apply_nonneg (p (base + c + 6)) z)
-    (apply_nonneg (p (b + loss + c + 6)) z)
+    (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 2) + c + 6)) z)
     (liftSectorParameter_physical_height_grading_le S C z (base + c + 6))
-    (liftSectorParameter_physical_height_grading_le S C z (b + loss + c + 6))
+    (liftSectorParameter_physical_height_grading_le S C z (b + hN.ordinaryFlowLoss (n + 2) + c + 6))
     (normData.choose_spec.2 rsel hrsel z hz)
 
 theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound
@@ -230,9 +230,9 @@ theorem N01Properties.endpointFlow_pure_scalar_weightedJetNorm_budget_bound
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
           (fun _ => scalarParameterDirection S)) ≤
-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z) *
+        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2)) z) *
           (1 + pairGrading (sectorGrading S) realGrading (base + c + 6) z) +
-          (1 + pairGrading (sectorGrading S) realGrading (b + loss + c + 6) z)) := by
+          (1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 2) + c + 6) z)) := by
   let data := hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n b c
   exact ⟨data.choose, data.choose_spec.1, data.choose_spec.2 rsel hrsel⟩
 

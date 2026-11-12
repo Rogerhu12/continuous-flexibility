@@ -92,7 +92,7 @@ theorem N01Properties.returnCorrectedMinusSpeed_error_radial_small
     (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
     (hcutoff : ∀ m r, |deriv (χ m) r| ≤ J * radialE (D.cellIndex (j m)) ^ A) :
     ∃ V K : ℝ, 0 < V ∧ 0 < K ∧
-      ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
+      ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 → K * η ≤ 1 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ m p, p.1 ∈ Icc (C.left m) (C.right m) →
@@ -225,7 +225,7 @@ theorem N01Properties.exists_opticalCorrection_characteristic_gap
   obtain ⟨V, K, hV, hK, herror⟩ := hN₀.returnCorrectedMinusSpeed_error_radial_small
     hS hT χ j hJ hA.le hP.le hcell hcutoff
   obtain ⟨U, hU, hupper⟩ := hN₀.originalRadialCoefficient_uniform_upper
-  let base' := max b₀ (1 + loss)
+  let base' := max b₀ (1 + hN₀.ordinaryFlowLoss 1)
   let ε' := min ε₀ (min (1 / 2) (min K⁻¹ (lam / (4 * U * V))))
   have hε' : 0 < ε' := lt_min hε₀
     (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hlam (by positivity))))
@@ -242,7 +242,7 @@ theorem N01Properties.exists_opticalCorrection_characteristic_gap
     field_simp [hU.ne', hV.ne']
     <;> ring
   have hb : b₀ ≤ base' := le_max_left _ _
-  have hh : 1 + loss ≤ base' := le_max_right _ _
+  have hh : 1 + hN₀.ordinaryFlowLoss 1 ≤ base' := le_max_right _ _
   have hnew := hN₀.restrict_neighborhood hT hb hε' hε'₀
   have hdisc : ∀ z ∈ stateNeighborhood S C base' ε', ∀ m p,
       p.1 ∈ tsupport (deriv (χ m)) →

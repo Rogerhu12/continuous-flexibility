@@ -164,12 +164,12 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
     let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel 0 s
     let K : ℝ := pointData.choose
     have hK : 0 < K := pointData.choose_spec.1
-    let j : ℕ := max base (s + loss)
+    let j : ℕ := max base (s + hN.ordinaryFlowLoss 2)
     let E : ℕ → ℝ≥0∞ := fun m =>
       ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
         physicalPlateauEnergy D T C (3 / 4 : ℝ) j
           ((S.height (3 / 4 : ℝ)).decode ξ.1) m
-    let A : ℝ := 2 + pairGrading (sectorGrading S) realGrading (s + loss) z
+    let A : ℝ := 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss 2) z
     have hA : 0 ≤ A := add_nonneg (by norm_num) (apply_nonneg _ _)
     refine ⟨E, |z.2| * K * (A + 1),
       hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT (hS.1 (3 / 4 : ℝ)) ξ.1 j (s + 1),
@@ -179,7 +179,7 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
       ((S.height (3 / 4 : ℝ)).decode ξ.1) m).toReal
     have hbase : heightPairGrading S base (η m) ≤ e :=
       (hmono (le_max_left _ _) (η m)).trans ((directions.choose_spec.2.2.2 j).2 m)
-    have hhigh : heightPairGrading S (s + loss) (η m) ≤ e :=
+    have hhigh : heightPairGrading S (s + hN.ordinaryFlowLoss 2) (η m) ≤ e :=
       (hmono (le_max_right _ _) (η m)).trans ((directions.choose_spec.2.2.2 j).2 m)
     have hη : ∃ a : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
         heightPairField S (η m) (r, ψ) = stateU S (liftSectorParameter S C (path t)).1 (r, ψ) + a := by
@@ -189,7 +189,7 @@ theorem N01Properties.endpointFlowScalarJets_scalar_increment_circleMember
         (congrArg (fun x : StateDirections S × ℝ =>
           stateU S (liftSectorParameter S C x).1 (r, ψ) + a) (hpath_eq t)).symm
     exact scalar_height_curve_energy_bound c s (hM m) (by omega) hK.le hA
-      (add_le_add (le_refl 2) (hgrade (s + loss) t ht))
+      (add_le_add (le_refl 2) (hgrade (s + hN.ordinaryFlowLoss 2) t ht))
       (apply_nonneg _ _) hbase hhigh
       (pointData.choose_spec.2 m b c θ (by omega) (path t) (hpath t ht) (η m) hη)
   have hp1 : path 1 = z :=

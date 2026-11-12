@@ -40,8 +40,8 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound_uniform_radius
           (fun _ => scalarParameterDirection S) m) θ| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
+            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
   let data := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
@@ -71,8 +71,8 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound
           (fun _ => scalarParameterDirection S) m) θ| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
+            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
   let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
   exact Exists.intro data.choose
     (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
@@ -105,8 +105,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
             (fun _ => scalarParameterDirection S) m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
+            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
   let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
@@ -124,8 +124,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ hs).2.2.2
   have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
   have hW : 0 ≤
-      (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-        heightPairGrading S base η + heightPairGrading S (s + loss) η) :=
+      (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
+        heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) :=
     add_nonneg (mul_nonneg
       (add_nonneg (by positivity) (apply_nonneg _ _)) (apply_nonneg _ _))
       (apply_nonneg _ _)
@@ -145,8 +145,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound
           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
             (fun _ => scalarParameterDirection S) m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
+            heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
   let data := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n s
   exact Exists.intro data.choose
     (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))

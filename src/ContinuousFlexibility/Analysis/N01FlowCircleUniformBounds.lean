@@ -76,7 +76,7 @@ private theorem uniform_flow_measured_bounds_of_zero_positive
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (r : P) (hr : valid r) x, x ∈ U → p B x ≤ R →
         measure s (decode (f r hr x)) ≤ K * (1 + p (s + L) x))
-    (hpositive : ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    (hpositive : ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (r : P) (hr : valid r) x, x ∈ U → p B x ≤ R →
       ∀ v : Fin (n + 1) → E,
@@ -113,10 +113,10 @@ private theorem uniform_flow_measured_bounds_of_zero_positive
       exact (congrArg (fun y : F => measure s (decode y)) hvalue).trans_le
         (hbound.trans_eq (congrArg (fun a : ℝ => K * a) hweight.symm))
   | succ n =>
-      let B : ℕ := hpositive.choose
-      let L : ℕ := hpositive.choose_spec.choose
+      let B : ℕ := (hpositive n).choose
+      let L : ℕ := (hpositive n).choose_spec.choose
       refine ⟨B, L, fun R hR s hs => ?_⟩
-      let orderData := hpositive.choose_spec.choose_spec.2 n R hR s hs
+      let orderData := (hpositive n).choose_spec.choose_spec.2 R hR s hs
       let K : ℝ := orderData.choose
       refine ⟨K, orderData.choose_spec.1, ?_⟩
       intro i x hx hlow v

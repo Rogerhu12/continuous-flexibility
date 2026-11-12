@@ -37,7 +37,7 @@ theorem N01Properties.radialHeightDirection_weight_constraint
         1 ≤ radialE (D.cellIndex j) ^ R *
           (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
-            (2 * heightPairGrading S base η + heightPairGrading S loss η)) := by
+            (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η)) := by
   obtain ⟨B, hB, hresponse⟩ :=
     hN.opticalTravel_le_radialHeightDirection_weight hS hT
   obtain ⟨R, hR, htravel⟩ := hN.actualCell_travel_lower_bound

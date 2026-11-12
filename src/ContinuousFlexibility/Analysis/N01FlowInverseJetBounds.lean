@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.ScalarInverseJetBounds
+import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
 import ContinuousFlexibility.Analysis.N01FlowSmallness
 import ContinuousFlexibility.Analysis.ReturnCorrectionResidualPeriodicity
 
@@ -54,12 +55,12 @@ theorem N01Properties.ordinaryFlowFamily_angular_uniform_bound
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε) (n : ℕ) :
     ∃ K : ℝ, 0 ≤ K ∧ ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,
       |ordinaryFlowFamily S C m 0 n (r, θ) z| ≤ K := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 n
+  let hdata := hN.ordinaryFlowFamily_bound 0 n
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   obtain ⟨A, hA, hweight⟩ :=
     materialSample_H_E0_envelope hT hN.1.1 (γ := (3 / 4 : ℝ)) (by norm_num) B
-  let Q := 1 + pairGrading (stateGrading S) realGrading (n + loss)
+  let Q := 1 + pairGrading (stateGrading S) realGrading (n + hN.ordinaryFlowLoss 0)
     (z - (C.referenceState, 0))
   have hQ : 0 ≤ Q := add_nonneg zero_le_one (apply_nonneg _ _)
   have hpoint : ∀ m r, r ∈ Ioo (C.left m) (C.right m) → ∀ θ,
@@ -150,10 +151,10 @@ theorem N01Properties.exists_uniform_inverse_angular_jets
           |iteratedDeriv n (Function.invFun (C.minusFlow z m r)) θ| ≤ K) ∧
         (∀ m θ, |iteratedDeriv n (C.minusReturnInverse z m) θ| ≤ K)) := by
   obtain ⟨K, hK, hsmall⟩ := hN.minusFlow_near_reference_uniform hS hT
-  let base' := max base (1 + loss)
+  let base' := max base (1 + hN.ordinaryFlowLoss 1)
   let ε' := min ε (min (1 / 2) (1 / (2 * K)))
   have hb : base ≤ base' := le_max_left _ _
-  have hh : 1 + loss ≤ base' := le_max_right _ _
+  have hh : 1 + hN.ordinaryFlowLoss 1 ≤ base' := le_max_right _ _
   have hε' : 0 < ε' := lt_min hN.2.1
     (lt_min (by norm_num) (div_pos zero_lt_one (mul_pos (by norm_num) hK)))
   have hεε : ε' ≤ ε := min_le_left _ _

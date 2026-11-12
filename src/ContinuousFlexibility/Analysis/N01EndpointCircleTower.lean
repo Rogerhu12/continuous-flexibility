@@ -1,16 +1,16 @@
 import ContinuousFlexibility.Analysis.N01EndpointOneHigh
 import ContinuousFlexibility.Analysis.N01EndpointSecondEnvelope
 import ContinuousFlexibility.Analysis.N01EndpointZeroCircleMember
-import ContinuousFlexibility.Analysis.CirclePositiveJetAssembly
+import ContinuousFlexibility.Analysis.CircleLocalPositiveJetAssembly
 import ContinuousFlexibility.Analysis.SmoothDirectionsGluing
 
 /-!
 # The actual endpoint flow in the physical circle topology
 
-All scalar jets are realized in the supplied circle model. Uniform
-weighted Taylor estimates give genuine projective line derivatives on
-each bounded low-order box. Their unique towers agree on overlaps and
-therefore give one smooth tower on the full original sector domain.
+All scalar jets are realized in the supplied circle model. At each
+parameter order, weighted Taylor estimates and a bounded low-order box
+give continuity of the actual jets. The resulting tower has genuine
+projective line derivatives on the full original sector domain.
 -/
 
 noncomputable section
@@ -95,60 +95,46 @@ theorem N01Properties.exists_endpointFlowCircle_smoothDirections
       ∀ n x, x ∈ sectorNeighborhood S base ε ε → ∀ v : Fin n → (StateDirections S × ℝ),
         (S.circle (3 / 4 : ℝ)).decode (J.D n x v) = hN.endpointFlowScalarJets hS hT rsel hrsel n x v := by
   classical
-  let bounds := hN.endpointFlowScalarJets_positive_norm_bounds_on_box hS hT rsel hrsel
-  let B : ℕ := bounds.choose
   let U : Set (StateDirections S × ℝ) := sectorNeighborhood S base ε ε
-  let p := pairGrading (sectorGrading S) realGrading
-  let V : U → Set (StateDirections S × ℝ) := fun i =>
-    U ∩ {x | p B x < p B i.val + 1}
-  have hVo (i : U) : IsOpen (V i) :=
-    (sectorNeighborhood_isOpen S base ε ε).inter
+  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) :=
+    pairGrading (sectorGrading S) realGrading
+  have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
+  have hlocal : ∀ n x, x ∈ U →
+      ∃ V : Set (StateDirections S × ℝ), IsOpen V ∧ Convex ℝ V ∧
+        x ∈ V ∧ V ⊆ U ∧
+        ∀ s, ∃ q : Seminorm ℝ (StateDirections S × ℝ), ∃ K : ℝ,
+          Continuous q ∧ 0 ≤ K ∧ ∀ y ∈ V, ∀ v : Fin (n + 1) → StateDirections S × ℝ,
+          circleNorm T (3 / 4 : ℝ) s
+            (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) y v) ≤
+            K * (1 + q y) * ∏ i, q (v i) := by
+    intro n x hx
+    obtain ⟨B, _hB, hbound⟩ :=
+      hN.endpointFlowScalarJets_positive_norm_bounds_on_box hS hT rsel hrsel n
+    let V : Set (StateDirections S × ℝ) := U ∩ {y | p B y < p B x + 1}
+    have hVo : IsOpen V := hU.inter
       (isOpen_lt (sectorPairGrading_continuous S B) continuous_const)
-  have hVc (i : U) : Convex ℝ (V i) :=
-    (sectorNeighborhood_convex S base ε ε).inter
-      (convex_seminorm_strict_sublevel (p B) (p B i.val + 1))
-  have hsub (i : U) : V i ⊆ U := inter_subset_left
-  have hcover : ∀ x ∈ U, ∃ i : U, x ∈ V i := by
-    intro x hx
-    refine ⟨⟨x, hx⟩, hx, ?_⟩
-    exact Set.mem_ofPred.mpr (lt_add_of_pos_right (p B x) zero_lt_one)
+    have hVc : Convex ℝ V := (sectorNeighborhood_convex S base ε ε).inter
+      (convex_seminorm_strict_sublevel (p B) (p B x + 1))
+    have hxV : x ∈ V := ⟨hx,
+      Set.mem_ofPred.mpr (lt_add_of_pos_right (p B x) zero_lt_one)⟩
+    refine ⟨V, hVo, hVc, hxV, inter_subset_left, ?_⟩
+    intro s
+    have hR : 0 ≤ p B x + 1 := add_nonneg (apply_nonneg _ _) zero_le_one
+    obtain ⟨j, K, hK, hestimate⟩ := hbound (p B x + 1) hR s
+    exact ⟨p j, K, sectorPairGrading_continuous S j, hK,
+      fun y hy v => hestimate y hy.1 hy.2.le v⟩
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
-  have hlocal (i : U) : ∃ J : SmoothDirections (V i) (hN.endpointFlowCircle hS hT rsel hrsel),
-      ∀ n x, x ∈ V i → ∀ v : Fin n → (StateDirections S × ℝ),
-        (S.circle (3 / 4 : ℝ)).decode (J.D n x v) = hN.endpointFlowScalarJets hS hT rsel hrsel n x v := by
-    have hR : 0 ≤ p B i.val + 1 := add_nonneg (apply_nonneg _ _) zero_le_one
-    have hpositive : CirclePositiveJetNormBounds (T := T) (γ := (3 / 4 : ℝ))
-        (U := V i) (hN.endpointFlowScalarJets hS hT rsel hrsel) := by
-      intro n s
-      let estimate := bounds.choose_spec.2 (p B i.val + 1) hR n s
-      let j : ℕ := estimate.choose
-      let K : ℝ := estimate.choose_spec.choose
-      exact ⟨p j, K, sectorPairGrading_continuous S j,
-        estimate.choose_spec.choose_spec.1,
-        fun x hx v => estimate.choose_spec.choose_spec.2 x hx.1 hx.2.le v⟩
-    exact exists_circle_smoothDirections_of_positive_scalar_jets
-      (hS.2.1 (3 / 4 : ℝ)) hM hH (hVo i) (hVc i) (hN.endpointFlowCircle hS hT rsel hrsel)
-      (hN.endpointFlowScalarJets hS hT rsel hrsel)
-      (fun n x hx v => hN.endpointFlowScalarJets_circleMember hS hT rsel hrsel n x hx.1 v)
-      hpositive
-      (fun x hx => (hN.endpointFlowCircle_decode hS hT rsel hrsel x hx.1).symm)
-      (fun n x w v t ht m b θ => hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel n x w v t ht.1 m b θ)
-      (hN.endpointFlowScalarJets_second_envelopes hS hT rsel hrsel (hVo i) (hsub i))
-  let J (i : U) : SmoothDirections (V i) (hN.endpointFlowCircle hS hT rsel hrsel) :=
-    (hlocal i).choose
-  let gluing := exists_smoothDirections_of_open_cover
-    (sectorNeighborhood_isOpen S base ε ε) V J hsub hcover
-  let K : SmoothDirections U (hN.endpointFlowCircle hS hT rsel hrsel) := gluing.choose
-  refine ⟨K, ?_⟩
-  intro n x hx v
-  let covering := hcover x hx
-  let i : U := covering.choose
-  have hi : x ∈ V i := covering.choose_spec
-  exact (congrArg (fun A : ContinuousMultilinearMap ℝ
-      (fun _ : Fin n => StateDirections S × ℝ) (CircleSpace S) =>
-      (S.circle (3 / 4 : ℝ)).decode (A v))
-    (gluing.choose_spec i n x hi)).trans ((hlocal i).choose_spec n x hi v)
+  exact exists_circle_smoothDirections_of_locally_positive_scalar_jets
+    (hS.2.1 (3 / 4 : ℝ)) hM hH hU
+    (hN.endpointFlowCircle hS hT rsel hrsel)
+    (hN.endpointFlowScalarJets hS hT rsel hrsel)
+    (fun n x hx v => hN.endpointFlowScalarJets_circleMember hS hT rsel hrsel n x hx v)
+    hlocal
+    (fun x hx => (hN.endpointFlowCircle_decode hS hT rsel hrsel x hx).symm)
+    (fun n x w v t ht m b θ =>
+      hN.endpointFlowScalarJets_hasDerivAt_line hS hT rsel hrsel n x w v t ht m b θ)
+    (hN.endpointFlowScalarJets_second_envelopes hS hT rsel hrsel hU (fun _ hx => hx))
 
 end ContinuousFlexibility.Statements

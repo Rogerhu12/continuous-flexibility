@@ -134,13 +134,13 @@ theorem N01Properties.endpointFlowScalarJets_state_increment_circleMember
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
   have hmem : CircleMember T (3 / 4 : ℝ) (fun m θ => F 1 m θ - F 0 m θ) := by
     apply circleMember_sub_of_seminorm_curve_envelope
-      (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + loss)) u F G
+      (pairGrading (sectorGrading S) realGrading) (fun s => max base (s + hN.ordinaryFlowLoss 1)) u F G
       (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (0 • u) (hpath 0 (by simp)) Fin.elim0)
       (hN.endpointFlowScalarJets_regular hS hT rsel hrsel 0 (1 • u) (hpath 1 (by simp)) Fin.elim0)
       hM hH hderiv
-      (fun s => stateLocalizationEnergy D T C (max base (s + loss)) (s + 1) u)
+      (fun s => stateLocalizationEnergy D T C (max base (s + hN.ordinaryFlowLoss 1)) (s + 1) u)
       (fun s => hN.stateLocalizationEnergy_tsum_lt_top hS hT
-        (max base (s + loss)) (s + 1) u)
+        (max base (s + hN.ordinaryFlowLoss 1)) (s + 1) u)
     intro s
     let data := hN.endpointFlowScalarJets_state_energy_bound hS hT rsel hrsel 0 s
     refine ⟨data.choose, data.choose_spec.1.le, ?_⟩

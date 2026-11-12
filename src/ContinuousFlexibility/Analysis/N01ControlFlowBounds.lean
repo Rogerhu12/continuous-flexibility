@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01ControlCoefficientVariation
+import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
 import ContinuousFlexibility.Analysis.OpticalControlFullCurvature
 import Mathlib.Analysis.Calculus.IteratedDeriv.Lemmas
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
@@ -79,9 +80,9 @@ theorem N01Properties.controlTravelPartial_second_bound
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base loss 0 (fun _ : Fin 2 =>
+          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 2 0
+  let hdata := hN.ordinaryFlowFamily_bound 2 0
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m : ℕ) (r : ℝ), r ∈ Ioo (C.left m) (C.right m) →
@@ -90,7 +91,7 @@ theorem N01Properties.controlTravelPartial_second_bound
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base loss 0 (fun _ : Fin 2 =>
+          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
     intro m r hr
     let v : AnnularState S × ℝ :=
@@ -125,7 +126,7 @@ theorem N01Properties.controlTravelPartial_second_bound
       (fun W : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B * W)
       (oneHigh_at_zero_offset (pairGrading (stateGrading S) realGrading)
-        base loss (C.referenceState, (0 : ℝ)) (fun _ : Fin 2 => v)))
+        base (hN.ordinaryFlowLoss 2) (C.referenceState, (0 : ℝ)) (fun _ : Fin 2 => v)))
   exact Exists.intro B (And.intro hB hpoint)
 
 /-- The same fixed ratio on the full closed component gives the actual
@@ -203,7 +204,7 @@ theorem N01Properties.controlTravel_second_bound
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base loss 0 (fun _ : Fin 2 =>
+          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
   let hdata := hN.controlTravelPartial_second_bound hS hT
   let B : ℝ := hdata.choose
@@ -214,13 +215,13 @@ theorem N01Properties.controlTravel_second_bound
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-          base loss 0 (fun _ : Fin 2 =>
+          base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
     intro m
     let K : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B *
       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base loss 0 (fun _ : Fin 2 =>
+        base (hN.ordinaryFlowLoss 2) 0 (fun _ : Fin 2 =>
           (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ)))
     change |deriv (deriv (fun t => opticalTravel
       (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤ K

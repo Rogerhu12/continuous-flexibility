@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.MaterialCylinderPointwise
 import ContinuousFlexibility.Analysis.MixedDerivativeLocality
+import ContinuousFlexibility.Analysis.N01cHeightParameterJets
 
 /-!
 # Linearity of the actual material jets on the supplied height space
@@ -16,12 +17,6 @@ namespace ContinuousFlexibility.Statements
 
 open Set
 open scoped ContDiff
-
-theorem mixedDerivative_const_mul (c : ℝ) (f : PolarPoint → ℝ)
-    (a b : ℕ) (p : PolarPoint) :
-    mixedDerivative a b (fun q => c * f q) p = c * mixedDerivative a b f p := by
-  unfold mixedDerivative
-  simp only [iteratedDeriv_const_mul_field]
 
 theorem n02n03_mixedDerivative_add_of_contDiff {f g : PolarPoint → ℝ}
     (hf : ContDiff ℝ ∞ f) (hg : ContDiff ℝ ∞ g) (a b : ℕ) (p : PolarPoint) :

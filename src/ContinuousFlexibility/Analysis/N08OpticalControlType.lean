@@ -90,13 +90,14 @@ private theorem n08_smoothDirections_of_flow_tower
     (f : ℕ → ℕ → ℕ → P → E → ℝ) (region : ℕ → P → Prop)
     (normFun : ℕ → ℕ → P → ℝ → ℝ) (weight : ℝ → ℕ → ℝ)
     (base loss : ℕ) (x0 : E)
-    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+    (h : ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
       a + b ≤ s → region m y → ∃ J : SmoothDirections U (f m a b y),
         ∀ z ∈ U, ∀ v : Fin k → E, normFun m a y (J.D k z v) ≤
-          weight B m * oneHighVariationWeight p base (s + loss) (z - x0) v)
+          weight B m * oneHighVariationWeight p base (s + loss + parameterLoss) (z - x0) v)
     (m a b : ℕ) (y : P) (hy : region m y) :
     ∃ J : SmoothDirections U (f m a b y), True := by
-  obtain ⟨B, _, hB⟩ := h 1 (a + b)
+  obtain ⟨parameterLoss, hparameter⟩ := h 1
+  obtain ⟨B, _, hB⟩ := hparameter (a + b)
   obtain ⟨J, _⟩ := hB m a b y le_rfl hy
   exact ⟨J, trivial⟩
 

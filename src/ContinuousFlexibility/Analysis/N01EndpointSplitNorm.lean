@@ -109,10 +109,10 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform
       ∀ v : StateDirections S × ℝ, v.2 = 0 →
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
+        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
+          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
             pairGrading (sectorGrading S) realGrading (base + c + 6) v +
-          pairGrading (sectorGrading S) realGrading (b + loss + c + 6) v) := by
+          pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v) := by
   let pointData := N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hN hS hT n b c
@@ -125,7 +125,7 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform
   have hK₀ : 0 ≤ K₀ := lowData.choose_spec.1
   let highData := N01Properties.stateLocalizationEnergy_tsum_le_grading_sq
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
-    hN hS hT (b + loss) (c + 1)
+    hN hS hT (b + hN.ordinaryFlowLoss (n + 1)) (c + 1)
   let K₁ : ℝ := highData.choose
   have hK₁ : 0 ≤ K₁ := highData.choose_spec.1
   let L : ℝ := Real.sqrt K₀ + Real.sqrt K₁
@@ -134,18 +134,18 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform
     mul_nonneg (mul_nonneg (Real.sqrt_nonneg _) hK.le) hL, ?_⟩
   intro rsel hrsel z hz vs hvs v hvq
   let p := pairGrading (sectorGrading S) realGrading
-  let A : ℝ := 1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)
+  let A : ℝ := 1 + p (b + hN.ordinaryFlowLoss (n + 1)) z + ∑ i : Fin n, p (b + hN.ordinaryFlowLoss (n + 1)) (vs i)
   have hA : 0 ≤ A :=
-    add_nonneg (add_nonneg zero_le_one (apply_nonneg (p (b + loss)) z))
-      (Finset.sum_nonneg (fun i _ => apply_nonneg (p (b + loss)) (vs i)))
+    add_nonneg (add_nonneg zero_le_one (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 1))) z))
+      (Finset.sum_nonneg (fun i _ => apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 1))) (vs i)))
   have hlow : base + (c + 1) + 5 = base + c + 6 := by omega
-  have hhigh : b + loss + (c + 1) + 5 = b + loss + c + 6 := by omega
+  have hhigh : b + hN.ordinaryFlowLoss (n + 1) + (c + 1) + 5 = b + hN.ordinaryFlowLoss (n + 1) + c + 6 := by omega
   have hE : (∑' m, stateLocalizationEnergy D T C base (c + 1) v m) ≤
       ENNReal.ofReal (K₀ * (p (base + c + 6) v) ^ 2) :=
     (lowData.choose_spec.2 v).trans_eq
       (congrArg (fun k : ℕ => ENNReal.ofReal (K₀ * (p k v) ^ 2)) hlow)
-  have hF : (∑' m, stateLocalizationEnergy D T C (b + loss) (c + 1) v m) ≤
-      ENNReal.ofReal (K₁ * (p (b + loss + c + 6) v) ^ 2) :=
+  have hF : (∑' m, stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v m) ≤
+      ENNReal.ofReal (K₁ * (p (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v) ^ 2) :=
     (highData.choose_spec.2 v).trans_eq
       (congrArg (fun k : ℕ => ENNReal.ofReal (K₁ * (p k v) ^ 2)) hhigh)
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
@@ -155,12 +155,12 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform
     (T := T) (γ := (3 / 4 : ℝ))
     (f := hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v))
     (E := stateLocalizationEnergy D T C base (c + 1) v)
-    (F := stateLocalizationEnergy D T C (b + loss) (c + 1) v)
+    (F := stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v)
     (K := K) (A := A) (K₀ := K₀) (K₁ := K₁)
-    (u := p (base + c + 6) v) (v := p (b + loss + c + 6) v)
+    (u := p (base + c + 6) v) (v := p (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v)
     hK.le hA hK₀ hK₁
     (apply_nonneg (p (base + c + 6)) v)
-    (apply_nonneg (p (b + loss + c + 6)) v) hE hF
+    (apply_nonneg (p (b + hN.ordinaryFlowLoss (n + 1) + c + 6)) v) hE hF
     (fun m => (hN.endpointFlowScalarJets_regular hS hT rsel hrsel
       (n + 1) z hz (Fin.snoc vs v) m).1)
     hM hH b c (pointData.choose_spec.2 rsel hrsel z hz vs hvs v hvq)
@@ -175,10 +175,10 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound
       ∀ v : StateDirections S × ℝ, v.2 = 0 →
       circleWeightedJetNorm T (3 / 4 : ℝ) b c
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v)) ≤
-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
+        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
+          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
             pairGrading (sectorGrading S) realGrading (base + c + 6) v +
-          pairGrading (sectorGrading S) realGrading (b + loss + c + 6) v) := by
+          pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v) := by
   let data := N01Properties.endpointFlowScalarJets_state_weightedJetNorm_bound_uniform_radius
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hN hS hT n b c

@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N04bSqrtAffine
+import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
 import ContinuousFlexibility.Analysis.N01SingletonControl
 import ContinuousFlexibility.Analysis.SmoothDirectionsScalarLine
 
@@ -214,7 +215,7 @@ theorem N01Properties.n04b_sqrt_singletonKappa_differentiableAt
     DifferentiableAt ℝ
       (fun s : ℝ => Real.sqrt
         (-deriv D.w r / (r * D.w r) + (-deriv (C.control m) r / r) * s)) t := by
-  obtain ⟨B, hB, htower⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 0 1
+  obtain ⟨B, hB, htower⟩ := hN.ordinaryFlowFamily_bound 0 1
   obtain ⟨J, hJ⟩ := htower m 1 0 (r, 0) (by norm_num) hr
   let v : AnnularState S × ℝ :=
     (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, 0)

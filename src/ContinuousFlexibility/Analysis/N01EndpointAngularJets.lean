@@ -97,7 +97,7 @@ theorem N01Properties.sectorFlow_closed_angularTower_bound
         |(hN.sectorFlow_closed_angularTower hS hT m r hr b θ).D k z v| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-              base (s + loss) z v := by
+              base (s + hN.ordinaryFlowLoss k) z v := by
   let hdata := hN.sectorFlow_closed_tower hS hT k s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
@@ -107,7 +107,7 @@ theorem N01Properties.sectorFlow_closed_angularTower_bound
         |(hN.sectorFlow_closed_angularTower hS hT m r hr b θ).D k z v| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-              base (s + loss) z v := by
+              base (s + hN.ordinaryFlowLoss k) z v := by
     intro m r hr b θ hb
     exact scalarTower_bound_of_exists
       (hN.sectorFlow_closed_angularTower hS hT m r hr b θ) k _
@@ -122,7 +122,7 @@ theorem N01Properties.sectorFlow_closed_angularTower_uniformBounds
   apply uniformScalarJetSeminormBounds_of_oneHigh
     (pairGrading (sectorGrading S) realGrading)
     (sectorPairGrading_continuous S) (sectorPairGrading_monotone S)
-    base (fun _ => b + loss)
+    base (fun n => b + hN.ordinaryFlowLoss n)
   intro n
   let hdata := hN.sectorFlow_closed_angularTower_bound hS hT n b
   let B : ℝ := hdata.choose

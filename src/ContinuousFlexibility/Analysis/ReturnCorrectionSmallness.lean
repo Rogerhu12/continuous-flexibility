@@ -164,7 +164,7 @@ theorem N01Properties.returnCorrectionInitialMap_and_residual_small
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
+    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ m θ,

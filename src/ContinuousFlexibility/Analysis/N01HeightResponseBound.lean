@@ -85,7 +85,7 @@ theorem N01Properties.heightResponse_integral_bound
         (r, θ - opticalTravel D.w (C.left m) r)| ≤
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
-        (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
+        (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η) := by
   let hdata := hN.minusFlow_state_q_mixed_derivative_bound
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
@@ -110,7 +110,7 @@ theorem N01Properties.heightResponse_integral_bound
   have hbi := hbound ((η, 0) : AnnularState S) m b θ hb
   have hd := (hN.minusFlow_height_q_mixed_hasDerivAt hS hT η m θ ⟨hb.1.le, hb.2.le⟩).deriv
   have hg := congrArg₂ (fun a b : ℝ => 2 * a + b)
-    (stateGrading_heightOnlyDirection S base η) (stateGrading_heightOnlyDirection S loss η)
+    (stateGrading_heightOnlyDirection S base η) (stateGrading_heightOnlyDirection S (hN.ordinaryFlowLoss 2) η)
   exact ((congrArg abs hd).symm.trans_le hbi).trans_eq
     (congrArg (fun q : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B * q) hg)
@@ -127,7 +127,7 @@ theorem N01Properties.opticalTravel_le_radialHeightDirection_weight
       C.travel m ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
+          (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η) := by
   let hdata := hN.heightResponse_integral_bound hS hT
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1

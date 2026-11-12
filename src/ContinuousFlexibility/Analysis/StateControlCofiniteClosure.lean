@@ -130,4 +130,37 @@ theorem contDiff_stateProfile_of_n01
   obtain ⟨_, _, _, hC, hIndex, hJets, _⟩ := hN
   exact contDiff_stateProfile_of_control_bounds hS hT hRef hχ hC hIndex hJets x
 
+
+/-- Preserve the control-data API through the common upstream bound. -/
+theorem stateKappa_controlJet_eventually_small_of_controlData
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hRef : IsAccumulatingProfile D)
+    (hIndex : ∃ B : ℝ, 0 < B ∧ ∀ m,
+      |(D.cellIndex (C.cell m) : ℝ) - D.cellIndex m| ≤ B)
+    (hJets : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r,
+      r ∈ Ioo (C.left m) (C.right m) →
+        |iteratedDeriv s (C.control m) r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B)
+    (x : AnnularState S)
+    (n : ℕ) (η : ℝ) (hη : 0 < η) :
+    ∀ᶠ m in cofinite, ∀ r ∈ Ioo (C.left m) (C.right m),
+      |stateKappa S x m * iteratedDeriv n (C.control m) r| ≤ η := by
+  exact stateKappa_controlJet_eventually_small_of_bounds hS hT hRef hIndex hJets x n η hη
+
+/-- Preserve the radial-reference specialization of the upstream profile theorem. -/
+theorem contDiff_stateProfile_of_controlData
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hRef : IsRadialReference D) (hC : controlGeometryConditions D S C)
+    (hIndex : ∃ B : ℝ, 0 < B ∧ ∀ m,
+      |(D.cellIndex (C.cell m) : ℝ) - D.cellIndex m| ≤ B)
+    (hJets : ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m r,
+      r ∈ Ioo (C.left m) (C.right m) →
+        |iteratedDeriv s (C.control m) r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B)
+    (x : AnnularState S) : ContDiff ℝ ∞ (stateProfile D S C x) := by
+  exact contDiff_stateProfile_of_control_bounds hS hT hRef.1 hRef.2.2.2.1.1
+    hC hIndex hJets x
+
 end ContinuousFlexibility.Statements

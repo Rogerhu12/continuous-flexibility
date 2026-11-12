@@ -110,7 +110,7 @@ theorem N01Properties.returnCorrectedMinusSpeed_error_weighted
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
     ∃ B K : ℝ, 0 < B ∧ 0 < K ∧
-      ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
+      ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 → K * η ≤ 1 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ χ : ℕ → ℝ → ℝ, ∀ m p, p.1 ∈ Icc (C.left m) (C.right m) →

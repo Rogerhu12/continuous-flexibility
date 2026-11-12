@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01CoefficientSmallness
+import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
 import ContinuousFlexibility.Analysis.N01FlowAngularSmoothness
 import ContinuousFlexibility.Analysis.N01RadialFlow
 import Mathlib.Topology.Order.OrderClosed
@@ -36,17 +37,17 @@ theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε) (hT : IsMaterialData D T) (s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
+    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → s + hN.ordinaryFlowLoss 1 ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,
         b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
         |ordinaryFlowFamily S C m 0 b p z| ≤
           6 * B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B * η := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 s
+  let hdata := hN.ordinaryFlowFamily_bound 1 s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
-  have hpoint : ∀ base' : ℕ, base ≤ base' → s + loss ≤ base' →
+  have hpoint : ∀ base' : ℕ, base ≤ base' → s + hN.ordinaryFlowLoss 1 ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, ∀ m b p,
         b ≤ s → p.1 ∈ Ioo (C.left m) (C.right m) →
@@ -71,13 +72,13 @@ theorem N01Properties.ordinaryFlowFamily_angular_small_of_neighborhood
         |J.D 1 ((C.referenceState, 0) + t • (z - (C.referenceState, 0)))
           (fun _ => z - (C.referenceState, 0))| ≤
           A * oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-            base (s + loss)
+            base (s + hN.ordinaryFlowLoss 1)
             (((C.referenceState, 0) + t • (z - (C.referenceState, 0))) -
               (C.referenceState, 0)) (fun _ : Fin 1 => z - (C.referenceState, 0)) := by
       simpa only [pow_zero, one_mul] using
         hJ _ (hline t ht) (fun _ : Fin 1 => z - (C.referenceState, 0))
     have hsmall := J.abs_le_of_first_variation_small
-      (pairGrading (stateGrading S) realGrading) base (s + loss)
+      (pairGrading (stateGrading S) realGrading) base (s + hN.ordinaryFlowLoss 1)
       (C.referenceState, 0) z hline (ordinaryFlowFamily_reference_zero S C m 0 b p)
       hA hη₁ (stateNeighborhood_pairGrading_lt S C hb hz).le
       (stateNeighborhood_pairGrading_lt S C hh hz).le hbound
@@ -125,7 +126,7 @@ theorem N01Properties.minusFlow_near_reference_weighted
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
+    ∃ B : ℝ, 0 < B ∧ ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
       ∀ η : ℝ, η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,
@@ -189,7 +190,7 @@ theorem N01Properties.minusFlow_near_reference_uniform
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ K : ℝ, 0 < K ∧ ∀ base' : ℕ, base ≤ base' → 1 + loss ≤ base' →
+    ∃ K : ℝ, 0 < K ∧ ∀ base' : ℕ, base ≤ base' → 1 + hN.ordinaryFlowLoss 1 ≤ base' →
       ∀ η : ℝ, 0 ≤ η → η ≤ ε → η ≤ 1 / 2 →
       ∀ z ∈ stateNeighborhood S C base' η, stateSector S z.1 →
       ∀ m r, r ∈ Icc (C.left m) (C.right m) → ∀ θ,

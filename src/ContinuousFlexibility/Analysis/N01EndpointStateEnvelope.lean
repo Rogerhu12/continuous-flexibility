@@ -70,10 +70,10 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_energy_envelope
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m b c, b + c ≤ s → ∀ θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v m) θ| ≤
-        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + loss)) z) *
+        K * (1 + pairGrading (sectorGrading S) realGrading (max base (s + hN.ordinaryFlowLoss (n + 1))) z) *
           Real.sqrt (E m).toReal := by
   let p := pairGrading (sectorGrading S) realGrading
-  let j : ℕ := max base (s + loss)
+  let j : ℕ := max base (s + hN.ordinaryFlowLoss (n + 1))
   let boundData := N01Properties.endpointFlowScalarJets_state_energy_bound
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hN hS hT rsel hrsel n s
@@ -131,7 +131,7 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_line_energy_envelope
   have hE : (∑' m, E m) < ⊤ := data.choose_spec.choose_spec.1
   have hK : 0 ≤ K := data.choose_spec.choose_spec.2.1
   let p := pairGrading (sectorGrading S) realGrading
-  let j : ℕ := max base (s + loss)
+  let j : ℕ := max base (s + hN.ordinaryFlowLoss (n + 1))
   refine ⟨E, K * (1 + (p j x + p j w)), hE,
     mul_nonneg hK (add_nonneg zero_le_one
       (add_nonneg (apply_nonneg (p j) x) (apply_nonneg (p j) w))), ?_⟩

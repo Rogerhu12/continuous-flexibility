@@ -83,7 +83,7 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
   let η₁ : ℕ → HeightPair S := data₁.choose
   have hlocal₁ := data₁.choose_spec.2.2.1
   have henergy₁ := data₁.choose_spec.2.2.2
-  let j : ℕ := max base (s + loss)
+  let j : ℕ := max base (s + hN.ordinaryFlowLoss (n + 2))
   let p := pairGrading (sectorGrading S) realGrading
   let E₀ : ℕ → ℝ≥0∞ := fun m =>
     ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
@@ -174,26 +174,26 @@ theorem N01Properties.endpointFlow_pure_scalar_line_energy_envelope
       _ ≤ 2 * Real.sqrt (E m).toReal :=
         (add_le_add he₀ he₁).trans_eq (two_mul (Real.sqrt (E m).toReal)).symm
   have hbase := hheight base (le_max_left _ _)
-  have hhigh := hheight (s + loss) (le_max_right _ _)
-  have hgrade : p (s + loss) (x + t • w) ≤ p j x + p j w :=
-    (sectorPairGrading_monotone S (show s + loss ≤ j from le_max_right _ _) (x + t • w)).trans
+  have hhigh := hheight (s + hN.ordinaryFlowLoss (n + 2)) (le_max_right _ _)
+  have hgrade : p (s + hN.ordinaryFlowLoss (n + 2)) (x + t • w) ≤ p j x + p j w :=
+    (sectorPairGrading_monotone S (show s + hN.ordinaryFlowLoss (n + 2) ≤ j from le_max_right _ _) (x + t • w)).trans
       (seminorm_line_le_of_abs_le_one (p j) x w ht)
-  have hcoeff : (n : ℝ) + 2 + p (s + loss) (x + t • w) ≤ A :=
+  have hcoeff : (n : ℝ) + 2 + p (s + hN.ordinaryFlowLoss (n + 2)) (x + t • w) ≤ A :=
     add_le_add (le_refl _) hgrade
   have hp := hpoint m b c θ (by omega) (x + t • w) hz η hlocal
   calc
     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-        (((n : ℝ) + 2 + p (s + loss) (x + t • w)) * heightPairGrading S base η +
-          heightPairGrading S (s + loss) η) := hp
+        (((n : ℝ) + 2 + p (s + hN.ordinaryFlowLoss (n + 2)) (x + t • w)) * heightPairGrading S base η +
+          heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := hp
     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-        (A * heightPairGrading S base η + heightPairGrading S (s + loss) η) :=
+        (A * heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) :=
       mul_le_mul_of_nonneg_left
         (add_le_add (mul_le_mul_of_nonneg_right hcoeff (apply_nonneg _ _)) (le_refl _))
         (mul_nonneg hK.le (pow_nonneg hM0 _))
     _ = K * (A * (T.M (T.sample m) ^ (c + 1) * heightPairGrading S base η) +
-        T.M (T.sample m) ^ (c + 1) * heightPairGrading S (s + loss) η) :=
+        T.M (T.sample m) ^ (c + 1) * heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) :=
       heightLine_factor_reorder K (T.M (T.sample m) ^ (c + 1)) A
-        (heightPairGrading S base η) (heightPairGrading S (s + loss) η)
+        (heightPairGrading S base η) (heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η)
     _ ≤ K * (A * (2 * Real.sqrt (E m).toReal) + 2 * Real.sqrt (E m).toReal) :=
       mul_le_mul_of_nonneg_left
         (add_le_add (mul_le_mul_of_nonneg_left hbase hA) hhigh) hK.le

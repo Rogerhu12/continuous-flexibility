@@ -30,14 +30,14 @@ theorem N01Properties.actualCell_balanced_height_constraint
       1 ≤ K * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ A *
         T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.M (T.sample j) ^ N := by
-  let n := max base loss
+  let n := max base (hN.ordinaryFlowLoss 2)
   obtain ⟨K, A, R, hK, _, hR, htest⟩ :=
     exists_referencePlateau_heightPair_norm_bound hN.1.1 hT hS n
   have hgeom : RadialProfileGeometry D := (Classical.choose_spec hN.1.1).1
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
   apply hN.balanced_constraint_of_radialHeightTests hS hT
     (referenceRadialPrimitive D) (referenceRadialPrimitive_hasDerivAt hgeom)
-    (n := n) (Nat.le_max_left base loss) (Nat.le_max_right base loss)
+    (n := n) (Nat.le_max_left base (hN.ordinaryFlowLoss 2)) (Nat.le_max_right base (hN.ordinaryFlowLoss 2))
     (K := K) (A := A) (R := R) hK hR
   intro m j hj
   exact htest j (C.left m) (C.right m)

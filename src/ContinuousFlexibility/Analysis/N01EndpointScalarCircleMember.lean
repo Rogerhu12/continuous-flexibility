@@ -64,12 +64,12 @@ private theorem endpointFlow_pure_scalar_circleMember_of_plateau
     hN hS hT rsel hrsel n s
   let K : ℝ := data.choose
   have hK : 0 < K := data.choose_spec.1
-  let t : ℕ := max base (s + loss)
+  let t : ℕ := max base (s + hN.ordinaryFlowLoss (n + 2))
   let E : ℕ → ℝ≥0∞ := fun m =>
     ENNReal.ofReal ((T.M (T.sample m) ^ (s + 1)) ^ 2) *
       physicalPlateauEnergy D T C (3 / 4 : ℝ) t
         ((S.height (3 / 4 : ℝ)).decode ξ.1) m
-  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z
+  let A : ℝ := (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z
   have hA : 0 ≤ A := add_nonneg (by positivity) (apply_nonneg _ _)
   have hEt : (∑' m : ℕ, E m) < ⊤ :=
     hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT (hS.1 (3 / 4 : ℝ)) ξ.1 t (s + 1)
@@ -80,10 +80,10 @@ private theorem endpointFlow_pure_scalar_circleMember_of_plateau
   have he : 0 ≤ e := Real.sqrt_nonneg _
   have hbase : heightPairGrading S base (η m) ≤ e :=
     (hmono (le_max_left _ _) (η m)).trans (henergy t m)
-  have hhigh : heightPairGrading S (s + loss) (η m) ≤ e :=
+  have hhigh : heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m) ≤ e :=
     (hmono (le_max_right _ _) (η m)).trans (henergy t m)
   have hW : A * heightPairGrading S base (η m) +
-      heightPairGrading S (s + loss) (η m) ≤ (A + 1) * e := by
+      heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m) ≤ (A + 1) * e := by
     calc
       _ ≤ A * e + e := add_le_add (mul_le_mul_of_nonneg_left hbase hA) hhigh
       _ = _ := by ring
@@ -97,13 +97,13 @@ private theorem endpointFlow_pure_scalar_circleMember_of_plateau
           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
             (fun _ => scalarParameterDirection S) m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
-          (A * heightPairGrading S base (η m) + heightPairGrading S (s + loss) (η m)) :=
+          (A * heightPairGrading S base (η m) + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m)) :=
     data.choose_spec.2 m b c θ (by omega) z hz (η m) (hlocal m)
   have hc : T.M (T.sample m) ^ (c + 1) ≤ T.M (T.sample m) ^ (s + 1) :=
     pow_le_pow_right₀ (hM m) (by omega)
   calc
     _ ≤ K * T.M (T.sample m) ^ (c + 1) *
-        (A * heightPairGrading S base (η m) + heightPairGrading S (s + loss) (η m)) := hp
+        (A * heightPairGrading S base (η m) + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) (η m)) := hp
     _ ≤ K * T.M (T.sample m) ^ (c + 1) * ((A + 1) * e) :=
       mul_le_mul_of_nonneg_left hW
         (mul_nonneg hK.le (pow_nonneg (zero_le_one.trans (hM m)) _))

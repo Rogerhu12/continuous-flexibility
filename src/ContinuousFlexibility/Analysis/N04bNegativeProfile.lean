@@ -72,7 +72,8 @@ theorem n04b_opticalSpeed_stateLine_differentiableAt
       (fun s : ℝ => opticalSpeed (stateProfile D S C (n04bStateLine C x s)) r) t := by
   have hNcopy := hN
   rcases hNcopy with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hTowers⟩
-  obtain ⟨_, _, hJ⟩ := hTowers 0 1
+  obtain ⟨_parameterLoss, hparameter⟩ := hTowers 0
+  obtain ⟨_, _, hJ⟩ := hparameter 1
   obtain ⟨J, _⟩ := hJ m 1 0 (r, 0) (by norm_num) hr
   have ht' : (C.referenceState, (0 : ℝ)) +
       t • (x - C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by

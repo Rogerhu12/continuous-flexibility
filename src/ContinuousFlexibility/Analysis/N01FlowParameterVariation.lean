@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N01RadialFlow
+import ContinuousFlexibility.Analysis.N01OrdinaryFlowLoss
 import ContinuousFlexibility.Analysis.SmoothDirectionsMixedScalarLine
 import ContinuousFlexibility.Analysis.ScalarFlowParameterVariation
 import ContinuousFlexibility.Analysis.TameLocalCalculus
@@ -115,9 +116,7 @@ theorem N01Properties.minusFlow_q_hasDerivAt
     (m : ℕ) {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) (θ : ℝ) :
     HasDerivAt (fun t : ℝ => C.minusFlow (x, t) m r θ)
       (deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q) q := by
-  have hdata := hN
-  rcases hdata with ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩
-  obtain ⟨_, _, hb⟩ := hflow 1 0
+  obtain ⟨_, _, hb⟩ := hN.ordinaryFlowFamily_bound 1 0
   obtain ⟨J, _⟩ := hb m 0 0 (r, θ) (by norm_num) hr
   exact (ordinaryFlow_q_hasDerivAt_of_tower J hxq).differentiableAt.hasDerivAt
 
@@ -157,8 +156,8 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
       |deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 1 0
+          (2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + |q|) := by
+  let hdata := hN.ordinaryFlowFamily_bound 1 0
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (x : AnnularState S) (q : ℝ),
@@ -167,17 +166,17 @@ theorem N01Properties.minusFlow_q_derivative_weight_bound
       |deriv (fun t : ℝ => C.minusFlow (x, t) m r θ) q| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
+          (2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + |q|) := by
     intro x q hxq m r θ hr
     let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
     have hraw := htower.choose_spec (x, q) hxq
       (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))
     have hfinal := ordinaryFlow_q_derivative_bound_of_tower
-      (high := 0 + loss) htower.choose hxq (le_of_zero_power_mul_le hraw)
+      (high := 0 + hN.ordinaryFlowLoss 1) htower.choose hxq (le_of_zero_power_mul_le hraw)
     exact hfinal.trans_eq (congrArg
       (fun n : ℕ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
-          (2 + stateGrading S n (x - C.referenceState) + |q|)) (Nat.zero_add loss))
+          (2 + stateGrading S n (x - C.referenceState) + |q|)) (Nat.zero_add (hN.ordinaryFlowLoss 1)))
   exact Exists.intro B (And.intro hB hpoint)
 
 /-- For a fixed state and component, the derivative bound is uniform in
@@ -193,13 +192,13 @@ theorem N01Properties.minusFlow_q_derivative_bounded
   obtain ⟨B, _, hb⟩ := hN.minusFlow_q_derivative_weight_bound
   let A := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
     T.E0 (T.sample (C.cell m)) ^ B
-  let K := |A| * (2 + stateGrading S loss (x - C.referenceState) + ε)
-  have hp : 0 ≤ stateGrading S loss (x - C.referenceState) :=
+  let K := |A| * (2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + ε)
+  have hp : 0 ≤ stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) :=
     apply_nonneg _ _
   have hε : 0 < ε := hN.2.1
   have hK : 0 ≤ K := by dsimp only [K]; positivity
   refine ⟨K, hK, fun q hq r θ hr => ?_⟩
-  have hfactor : 0 ≤ 2 + stateGrading S loss (x - C.referenceState) + |q| := by
+  have hfactor : 0 ≤ 2 + stateGrading S (hN.ordinaryFlowLoss 1) (x - C.referenceState) + |q| := by
     positivity
   exact (hb x q ⟨hx, hq⟩ m r θ hr).trans
     ((mul_le_mul_of_nonneg_right (le_abs_self A) hfactor).trans

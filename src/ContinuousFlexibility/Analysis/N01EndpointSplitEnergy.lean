@@ -77,19 +77,19 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_ra
       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
+        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
+          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
-          Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
+          Real.sqrt (stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v m).toReal) := by
   let boundData := N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hN hS hT (n + 1) b
   let K : ℝ := boundData.choose
   have hK : 0 < K := boundData.choose_spec.1
   let L₀ : ℝ := 1 + circleSingletonGradingConstant base * (2 * circleSobolevConstant)
-  let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + loss) * (2 * circleSobolevConstant)
+  let L₁ : ℝ := 1 + circleSingletonGradingConstant (b + hN.ordinaryFlowLoss (n + 1)) * (2 * circleSobolevConstant)
   have hL₀ : 0 < L₀ := singleton_energy_constant_pos base
-  have hL₁ : 0 < L₁ := singleton_energy_constant_pos (b + loss)
+  have hL₁ : 0 < L₁ := singleton_energy_constant_pos (b + hN.ordinaryFlowLoss (n + 1))
   refine ⟨K * (L₀ + L₁), mul_pos hK (add_pos hL₀ hL₁), ?_⟩
   intro rsel hrsel z hz vs hvs v hvq
   let localData := N01Properties.exists_localized_state_energy_directions
@@ -117,14 +117,14 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_ra
             z (Fin.snoc vs v) m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (b + loss) z (Fin.snoc vs (w m)) :=
+            base (b + hN.ordinaryFlowLoss (n + 1)) z (Fin.snoc vs (w m)) :=
     (congrArg (fun a : ℝ =>
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) * |a|) heq).trans_le
         (boundData.choose_spec.2 rsel hrsel m b c θ le_rfl z hz (Fin.snoc vs (w m)))
   exact oneHigh_split_energy_bound (pairGrading (sectorGrading S) realGrading)
-    base (b + loss) z vs (w m) hK.le (pow_nonneg hM (c + 1)) hL₀.le hL₁.le hvs
+    base (b + hN.ordinaryFlowLoss (n + 1)) z vs (w m) hK.le (pow_nonneg hM (c + 1)) hL₀.le hL₁.le hvs
     hpoint (localData.choose_spec.2.2 m base (c + 1))
-      (localData.choose_spec.2.2 m (b + loss) (c + 1))
+      (localData.choose_spec.2.2 m (b + hN.ordinaryFlowLoss (n + 1)) (c + 1))
 
 theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
     (hN : N01Properties D T S C base loss ε)
@@ -136,10 +136,10 @@ theorem N01Properties.endpointFlowScalarJets_state_split_energy_bound
       ∀ v : StateDirections S × ℝ, v.2 = 0 → ∀ m θ,
       (T.M (T.sample m) ^ c * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (Fin.snoc vs v) m) θ| ≤
-        K * ((1 + pairGrading (sectorGrading S) realGrading (b + loss) z +
-          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + loss) (vs i)) *
+        K * ((1 + pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) z +
+          ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
             Real.sqrt (stateLocalizationEnergy D T C base (c + 1) v m).toReal +
-          Real.sqrt (stateLocalizationEnergy D T C (b + loss) (c + 1) v m).toReal) := by
+          Real.sqrt (stateLocalizationEnergy D T C (b + hN.ordinaryFlowLoss (n + 1)) (c + 1) v m).toReal) := by
   let data := N01Properties.endpointFlowScalarJets_state_split_energy_bound_uniform_radius
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
     hN hS hT n b c

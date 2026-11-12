@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.MaterialComponentEnergy
+import ContinuousFlexibility.Analysis.N01cHeightSeminorms
 
 /-!
 # Exact physical jet energy and the supplied projective grading
@@ -49,20 +50,13 @@ theorem weightedPhysicalJet_energy_le_level {T : MaterialData} {γ : ℝ}
   simpa only [j, physicalLevelEnergy, Matrix.cons_val_zero, Matrix.cons_val_one,
     Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons] using h
 
-theorem sobolevModel_physicalNorm_le_grading
-    {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
-    (hH : IsSobolevModel D T γ H) (u : H.Space) (s : ℕ) :
-    physicalNorm T γ s (H.decode u) ≤ H.grading s u := by
-  rw [← hH.2.2.2.2.2.2.2 u s]
-  exact norm_coordinate_le_graded _ _ le_rfl u
-
 theorem sobolevModel_physicalLevelEnergy_le_grading_sq
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}
     (hH : IsSobolevModel D T γ H) (u : H.Space) (s : ℕ) :
     physicalLevelEnergy T γ s (H.decode u) ≤ ENNReal.ofReal (H.grading s u ^ 2) := by
   rw [physicalLevelEnergy_eq_ofReal_norm_sq (hH.2.2.2.1 u)]
   exact ENNReal.ofReal_le_ofReal
-    (pow_le_pow_left₀ (Real.sqrt_nonneg _) (sobolevModel_physicalNorm_le_grading hH u s) 2)
+    (pow_le_pow_left₀ (Real.sqrt_nonneg _) (sobolevModel_physicalNorm_le_grading hH u (s := s) (t := s) le_rfl) 2)
 
 theorem sobolevModel_weightedJet_energy_le_grading_sq
     {D : ReferenceData} {T : MaterialData} {γ : ℝ} {H : SobolevModelData}

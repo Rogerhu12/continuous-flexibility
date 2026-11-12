@@ -117,8 +117,8 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
         |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
-            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-              heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
+            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
+              heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
   let hdata := hN.sectorFlow_closed_tower hS hT (n + 2) s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
@@ -146,7 +146,7 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound_mod_constant
     exact (hN.ordinaryFlowFamily_first_height_jet_constant_locality hS hT hq η
       (liftSectorParameter S C (z.1, q)).1.1 m b θ hr c hηq J).trans
         (hN.ordinaryFlowFamily_height_scalar_jet hS hT hq m b θ hr J)
-  exact scalar_height_bound_of_tower J (s + loss) n z hz η hP hJ hEuler
+  exact scalar_height_bound_of_tower J (s + hN.ordinaryFlowLoss (n + 2)) n z hz η hP hJ hEuler
 
 
 theorem N01Properties.sectorFlow_pure_scalar_height_bound
@@ -163,8 +163,8 @@ theorem N01Properties.sectorFlow_pure_scalar_height_bound
         |J.D (n + 1) z (fun _ => scalarParameterDirection S)| ≤
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
-            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-              heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
+            (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + hN.ordinaryFlowLoss (n + 2)) z) *
+              heightPairGrading S base η + heightPairGrading S (s + hN.ordinaryFlowLoss (n + 2)) η) := by
   let hdata := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1

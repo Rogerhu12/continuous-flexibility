@@ -32,7 +32,7 @@ theorem N01Properties.balanced_constraint_of_radialHeightTests
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (h : ℝ → ℝ) (hh : ∀ r, HasDerivAt h (D.w r) r)
-    {n : ℕ} (hbase : base ≤ n) (hloss : loss ≤ n)
+    {n : ℕ} (hbase : base ≤ n) (hloss : hN.ordinaryFlowLoss 2 ≤ n)
     {K A R : ℝ} (hK : 0 < K) (hR : 0 ≤ R)
     (htest : ∀ m j : ℕ, Ioo (C.left m) (C.right m) ⊆ D.cells j →
       ∃ η : HeightPair S,
@@ -63,10 +63,10 @@ theorem N01Properties.balanced_constraint_of_radialHeightTests
       K * T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.E0 (T.sample j) ^ A *
         T.M (T.sample j) ^ N * radialE (D.cellIndex j) ^ R := by
     simpa only [N, Real.rpow_natCast] using hnorm
-  have hgrade : 2 * heightPairGrading S base η + heightPairGrading S loss η ≤
+  have hgrade : 2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η ≤
       3 * (K * T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.E0 (T.sample j) ^ A *
         T.M (T.sample j) ^ N * radialE (D.cellIndex j) ^ R) := by
-    have hle : 2 * heightPairGrading S base η + heightPairGrading S loss η ≤
+    have hle : 2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η ≤
         3 * heightPairGrading S n η := by linarith only [hbase', hloss']
     exact hle.trans (mul_le_mul_of_nonneg_left hnorm' (by norm_num))
   have hE : 0 < radialE (D.cellIndex j) := Real.exp_pos _
@@ -87,11 +87,11 @@ theorem N01Properties.balanced_constraint_of_radialHeightTests
     _ ≤ radialE (D.cellIndex j) ^ R0 *
         (B0 * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B0 *
-          (2 * heightPairGrading S base η + heightPairGrading S loss η)) :=
+          (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η)) :=
       hdetector η h hh hgerm
     _ = (radialE (D.cellIndex j) ^ R0 *
         (B0 * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B0)) *
-          (2 * heightPairGrading S base η + heightPairGrading S loss η) := by ring
+          (2 * heightPairGrading S base η + heightPairGrading S (hN.ordinaryFlowLoss 2) η) := by ring
     _ ≤ (radialE (D.cellIndex j) ^ R0 *
         (B0 * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B0)) *
           (3 * (K * T.H (T.sample j) ^ (-(3 / 4 : ℝ)) * T.E0 (T.sample j) ^ A *
@@ -113,7 +113,7 @@ theorem N01Properties.actualCell_materialOrder_from_radialHeightTests
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (h : ℝ → ℝ) (hh : ∀ r, HasDerivAt h (D.w r) r)
-    {n : ℕ} (hbase : base ≤ n) (hloss : loss ≤ n)
+    {n : ℕ} (hbase : base ≤ n) (hloss : hN.ordinaryFlowLoss 2 ≤ n)
     {K A R : ℝ} (hK : 0 < K) (hR : 0 ≤ R)
     (htest : ∀ m j : ℕ, Ioo (C.left m) (C.right m) ⊆ D.cells j →
       ∃ η : HeightPair S,
@@ -139,7 +139,7 @@ theorem N01Properties.every_actualCell_materialOrder_from_radialHeightTests
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (h : ℝ → ℝ) (hh : ∀ r, HasDerivAt h (D.w r) r)
-    {n : ℕ} (hbase : base ≤ n) (hloss : loss ≤ n)
+    {n : ℕ} (hbase : base ≤ n) (hloss : hN.ordinaryFlowLoss 2 ≤ n)
     {K A R : ℝ} (hK : 0 < K) (hR : 0 ≤ R)
     (htest : ∀ m j : ℕ, Ioo (C.left m) (C.right m) ⊆ D.cells j →
       ∃ η : HeightPair S,

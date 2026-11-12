@@ -8,7 +8,7 @@ import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 # Fixed-loss local growth of actual endpoint jets with a state slot
 
 The N01 angular order and the material order are added before
-interpolation. The low order and loss are fixed before the size of the
+interpolation. At each parameter order, the low order and loss are fixed before the size of the
 base-point box and before the output order.
 -/
 
@@ -114,24 +114,25 @@ private theorem cyclic_slot_uniform_growth
     (p : ℕ → V → ℝ) (Q : V → Prop) (U : Set V) (base : ℕ)
     (hrotate : ∀ n s r hr z, z ∈ U → ∀ w,
       A n s r hr z w = A n s r hr z (Fin.snoc (Fin.tail w) (w 0)))
-    (hbound : ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    (hbound : ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ r hr, ∀ z ∈ U, p B z ≤ R →
       ∀ vs : Fin n → V, (∀ i, p B (vs i) ≤ 1) →
       ∀ u, p B u ≤ 1 → Q u →
         A n s r hr z (Fin.snoc vs u) ≤
           K * (1 + p (s + L) z + ∑ i : Fin n, p (s + L) (vs i) + p (s + L) u)) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ r hr, ∀ z ∈ U, p B z ≤ R →
       ∀ v : Fin (n + 1) → V, (∀ i, p B (v i) ≤ 1) → (∃ i, Q (v i)) →
         A n s r hr z v ≤
           K * (1 + p (s + L) z + ∑ i : Fin (n + 1), p (s + L) (v i)) := by
-  let B : ℕ := hbound.choose
-  let L : ℕ := hbound.choose_spec.choose
-  have hB : base ≤ B := hbound.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := hbound.choose_spec.choose_spec.2 n R hR s hs
+  intro n
+  let B : ℕ := (hbound n).choose
+  let L : ℕ := (hbound n).choose_spec.choose
+  have hB : base ≤ B := (hbound n).choose_spec.choose_spec.1
+  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+  let orderData := (hbound n).choose_spec.choose_spec.2 R hR s hs
   let K : ℝ := orderData.choose
   have hK : 0 ≤ K := orderData.choose_spec.1
   refine ⟨K, hK, ?_⟩
@@ -149,7 +150,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ b c : ℕ, b + c ≤ s →
@@ -164,17 +165,18 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
           pairGrading (sectorGrading S) realGrading (s + L) v) := by
+  intro n
   classical
   let p := pairGrading (sectorGrading S) realGrading
   have hp : Monotone p := sectorPairGrading_monotone S
   have hI : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
     (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
-  let interpolationData := hasInterpolation_localized_slot_growth_all p hp hI base loss 6
+  let interpolationData := hasInterpolation_localized_slot_growth_all p hp hI base (hN.ordinaryFlowLoss (n + 1)) 6
   let B : ℕ := interpolationData.choose
   let L : ℕ := interpolationData.choose_spec.choose
   have hB : base ≤ B := interpolationData.choose_spec.choose_spec.1
   refine ⟨B, L, hB, ?_⟩
-  intro n R hR s hs
+  intro R hR s hs
   let orderData := interpolationData.choose_spec.choose_spec.2 n R hR s hs
   let I : ℝ := orderData.choose
   have hI0 : 0 ≤ I := orderData.choose_spec.1
@@ -191,8 +193,8 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
     (hp hB (vs i)).trans (hvs i)
   have hKs : K b c ≤ K₀ :=
     stateJet_entry_le_double_sum K hK s b c hbc
-  let Q : ℝ := (1 + p (b + loss) z + ∑ i : Fin n, p (b + loss) (vs i)) *
-    p (base + c + 6) v + p (b + loss + c + 6) v
+  let Q : ℝ := (1 + p (b + hN.ordinaryFlowLoss (n + 1)) z + ∑ i : Fin n, p (b + hN.ordinaryFlowLoss (n + 1)) (vs i)) *
+    p (base + c + 6) v + p (b + hN.ordinaryFlowLoss (n + 1) + c + 6) v
   have hQ : 0 ≤ Q := by
     dsimp only [Q]
     exact add_nonneg (mul_nonneg
@@ -211,7 +213,7 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ b c : ℕ, b + c ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -225,19 +227,20 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
           pairGrading (sectorGrading S) realGrading (s + L) v) := by
-  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT
+  intro n
+  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT n
   let B : ℕ := data.choose
   let L : ℕ := data.choose_spec.choose
   have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+  let orderData := data.choose_spec.choose_spec.2 R hR s hs
   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -251,13 +254,14 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all_u
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
           pairGrading (sectorGrading S) realGrading (s + L) v) := by
+  intro n
   classical
-  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT
+  let data := hN.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all_uniform_radius hS hT n
   let B : ℕ := data.choose
   let L : ℕ := data.choose_spec.choose
   have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+  let orderData := data.choose_spec.choose_spec.2 R hR s hs
   let K : ℝ := orderData.choose
   have hK : 0 ≤ K := orderData.choose_spec.1
   refine ⟨(Fintype.card (CircleJetIndex s) : ℝ) * K,
@@ -275,7 +279,7 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
@@ -288,12 +292,13 @@ theorem N01Properties.endpointFlowScalarJets_state_circleNorm_local_growth_all
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin n, pairGrading (sectorGrading S) realGrading (s + L) (vs i) +
           pairGrading (sectorGrading S) realGrading (s + L) v) := by
-  let data := hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT
+  intro n
+  let data := hN.endpointFlowScalarJets_state_circleNorm_local_growth_all_uniform_radius hS hT n
   let B : ℕ := data.choose
   let L : ℕ := data.choose_spec.choose
   have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+  let orderData := data.choose_spec.choose_spec.2 R hR s hs
   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 /-- The state slot may occur anywhere in the actual derivative tuple.
@@ -302,7 +307,7 @@ The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -330,7 +335,7 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∀ n : ℕ, ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
@@ -341,12 +346,13 @@ theorem N01Properties.endpointFlowScalarJets_state_slot_circleNorm_local_growth_
         (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z v) ≤
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z +
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
-  let data := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT
+  intro n
+  let data := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT n
   let B : ℕ := data.choose
   let L : ℕ := data.choose_spec.choose
   have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  refine ⟨B, L, hB, fun R hR s hs => ?_⟩
+  let orderData := data.choose_spec.choose_spec.2 R hR s hs
   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

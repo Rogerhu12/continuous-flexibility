@@ -51,7 +51,7 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel k z v m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
+            base (s + hN.ordinaryFlowLoss k) z v := by
   let hdata := hN.sectorFlow_closed_angularTower_bound hS hT k s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
@@ -63,7 +63,7 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ hs).2.2.2
   have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
   have hW : 0 ≤ oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-      base (s + loss) z v :=
+      base (s + hN.ordinaryFlowLoss k) z v :=
     ContinuousFlexibility.Analysis.multilinearTameSize_nonneg _ _ _
       (add_nonneg zero_le_one (apply_nonneg _ _)) v
   have hj : |iteratedDeriv b
@@ -71,7 +71,7 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound_uniform_radius
       B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B *
         oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-          base (s + loss) z v :=
+          base (s + hN.ordinaryFlowLoss k) z v :=
     (congrArg abs (hN.endpointFlowScalarJets_iteratedDeriv hS hT rsel hrsel
       k z hz v m b θ)).trans_le
         (hdata.choose_spec.2 m (rsel m) (hrsel m) b θ hb z hz v)
@@ -89,7 +89,7 @@ theorem N01Properties.endpointFlowScalarJets_weighted_bound
         |iteratedDeriv b (hN.endpointFlowScalarJets hS hT rsel hrsel k z v m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
+            base (s + hN.ordinaryFlowLoss k) z v := by
   let hdata := hN.endpointFlowScalarJets_weighted_bound_uniform_radius hS hT k s
   exact ⟨hdata.choose, hdata.choose_spec.1, hdata.choose_spec.2 rsel hrsel⟩
 
