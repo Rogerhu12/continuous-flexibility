@@ -112,6 +112,8 @@ private theorem n06_trueEndpoint_radial_choices_ne
   intro he
   have hxL := (n06_trueEndpoint_current_geometry hC h04 hz hs m false hleft).1
   have hxR := (n06_trueEndpoint_current_geometry hC h04 hz hs m true hright).1
+  change ∀ θ, (K.physicalLeft m, θ) ∈ physicalPieceClosed S K z m at hxL
+  change ∀ θ, (K.physicalRight m, θ) ∈ physicalPieceClosed S K z m at hxR
   have hangleL := (n06_canonicalChart_closed_angle_seams h04 hz hs m hxL).1
   have hangleR := (n06_canonicalChart_closed_angle_seams h04 hz hs m hxR).1
   have hchart : K.chart z m (K.physicalLeft m, 0) =
