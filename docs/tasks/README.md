@@ -11,6 +11,11 @@ The rules below are the same for every line.
 
 Read this section every time you check the rules. A notice is removed when it is done.
 
+- **All lines: merge `origin/main` now to get the faster CI.** A run uses the workflow file of the
+  branch it runs on. The workflow on `main` (since `4c5e7aff`) first restores main's compiled build
+  and then your branch's own, so after merging main you no longer recompile what main already
+  compiled (N07a, N07b, R11a, N08: well over 100,000 lines). A branch without this merge rebuilds
+  all of it on every push; N02N03's current run has been compiling for more than 1.5 hours.
 - **N02N03, N04b, N04Coordinates, N05, N06: merge `origin/main` now.** N07b's statement repair is on
   `main` (`docs/STATUS.md`, "Statement repairs"): `physicalPieceOpen` takes the state, the old fixed
   interval is `referencePhysicalPieceOpen`, and the N04 output also carries
