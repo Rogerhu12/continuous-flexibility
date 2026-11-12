@@ -50,7 +50,7 @@ theorem canonicalCutPair_root_mem_closed_and_zero
   have hq0 : q.1 = 0 := hq.1
   have hqC : q ∈ canonicalClosed S K i := by
     refine ⟨?_, mem_univ _⟩
-    simpa only [hleft, hright, hq0] using And.intro (le_refl (0 : ℝ)) hρ.le
+    simpa only [Set.mem_Icc, hleft, hright, hq0] using And.intro (le_refl (0 : ℝ)) hρ.le
   have hboundary := hA.boundary z hz hs i
   have hF : K.chart z i (c, θ) = q := by
     simpa only [hqp] using hboundary.2.2.2.1 q hqC
@@ -96,7 +96,11 @@ theorem canonicalCutPair_path_eventually_mem_own_half
   have hcover : physicalPieceOpen S K z i ∪ physicalPieceOpen S K z j = N \ Γ := by
     cases side
     · exact hcurrent.2.2.2.1
-    · simpa only [union_comm] using hcurrent.2.2.2.1
+    · change physicalPieceOpen S K z (K.cutPair m).2 ∪
+        physicalPieceOpen S K z (K.cutPair m).1 =
+        (Ioo (C.left m) (C.right m) ×ˢ univ) \ Set.range (canonicalCutPoint S K z m)
+      rw [union_comm]
+      exact hcurrent.2.2.2.1
   have hΓ : Γ ⊆ physicalPieceClosed S K z j := by
     rintro p ⟨θ, rfl⟩
     cases side
@@ -144,13 +148,19 @@ theorem canonicalGluedAiryIntegral_tendsto_endpoint
       (𝓝[Ioo (C.left m) (C.right m)] c) (𝓝 (c, u c)) :=
     (hpath c hc).mono Ioo_subset_Icc_self
   have hFt := hF.tendsto.comp ht
+  have hFr : Tendsto (fun r => (K.chart z i (r, u r)).1)
+      (𝓝[Ioo (C.left m) (C.right m)] c) (𝓝 ((K.chart z i (c, u c)).1)) :=
+    (continuous_fst.tendsto (K.chart z i (c, u c))).comp hFt
+  have hFa : Tendsto (fun r => (K.chart z i (r, u r)).2)
+      (𝓝[Ioo (C.left m) (C.right m)] c) (𝓝 ((K.chart z i (c, u c)).2)) :=
+    (continuous_snd.tendsto (K.chart z i (c, u c))).comp hFt
   have hlim : Tendsto
       (fun r => airyFirstIntegral (K.chart z i) τ (r, u r) + offset)
       (𝓝[Ioo (C.left m) (C.right m)] c)
       (𝓝 ((K.chart z i (c, u c)).2 +
         τ * airyTravelPrimitive (K.chart z i (c, u c)).1 + offset)) :=
-    (hFt.snd.add (tendsto_const_nhds.mul
-      ((continuous_airyTravelPrimitive.tendsto _).comp hFt.fst))).add tendsto_const_nhds
+    (hFa.add (tendsto_const_nhds.mul
+      ((continuous_airyTravelPrimitive.tendsto _).comp hFr))).add tendsto_const_nhds
   have he : (fun r => airyFirstIntegral (K.chart z i) τ (r, u r) + offset) =ᶠ[
       𝓝[Ioo (C.left m) (C.right m)] c]
       (fun r => canonicalGluedAiryIntegral S K z m σ (r, u r)) := by

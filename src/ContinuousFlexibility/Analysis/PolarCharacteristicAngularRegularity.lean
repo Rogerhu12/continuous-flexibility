@@ -41,6 +41,73 @@ private theorem polarAngularRegularity_separated
       (((ScalarSpatialRegularity.timeOnly hR n).mul
         (scalarSpatialRegularity_of_contDiff hc n)).neg)
 
+private theorem polarAngularRegularity_smoothFactors
+    {w : ℝ → ℝ} {z : PolarPoint → ℝ} {l u ρ : ℝ}
+    (hw : ContDiff ℝ ∞ w) (hz : ContDiff ℝ ∞ z)
+    (hlu : l ≤ u) (hρ : 0 < ρ) (hl : 0 < l - ρ)
+    (hadm : ∀ p ∈ Ioo (l - ρ) (u + ρ) ×ˢ (univ : Set ℝ),
+      0 < polarDiscriminant w z p ∧
+      heightQ (profileEnergy w p) (heightRadial z p)
+        (angularPartial (heightAngular z) p) ≠ 0) :
+    let τ : ℝ → ℝ := circleFlowSmoothTimeClamp l u ρ hlu hρ
+    ContDiff ℝ ∞ (fun p : PolarPoint =>
+      polarLinearB w z (τ p.2, p.1) / polarLinearA w z (τ p.2, p.1)) ∧
+    ContDiff ℝ ∞ (fun p : PolarPoint =>
+      (polarDiscriminant w z (τ p.2, p.1) * polarLinearA w z (τ p.2, p.1))⁻¹) := by
+  let drift : PolarPoint → ℝ := fun p => polarLinearB w z p / polarLinearA w z p
+  let factor : PolarPoint → ℝ := fun p =>
+    (polarDiscriminant w z p * polarLinearA w z p)⁻¹
+  have hlocal (p : PolarPoint)
+      (hp : p ∈ Ioo (l - ρ) (u + ρ) ×ˢ (univ : Set ℝ)) :
+      ContDiffAt ℝ ∞ drift p ∧ ContDiffAt ℝ ∞ factor p :=
+    contDiffAt_characteristicAngularFactors (w := w) (z := z) (p := p)
+      hw.contDiffAt hz.contDiffAt
+      (hl.trans hp.1.1).ne' (hadm p hp).1 (hadm p hp).2
+  exact ⟨(contDiff_circleFlowLocalizedSpeed (G := drift) hlu hρ
+      (fun p hp => (hlocal p hp).1.contDiffWithinAt)).comp
+        (contDiff_snd.prodMk contDiff_fst),
+    (contDiff_circleFlowLocalizedSpeed (G := factor) hlu hρ
+      (fun p hp => (hlocal p hp).2.contDiffWithinAt)).comp
+        (contDiff_snd.prodMk contDiff_fst)⟩
+
+private theorem polarAngularRegularity_actualRegularity
+    {w : ℝ → ℝ} {z : PolarPoint → ℝ} {l u ρ : ℝ}
+    (hw : ContDiff ℝ ∞ w) (hz : ContDiff ℝ ∞ z)
+    (hlu : l ≤ u) (hρ : 0 < ρ) (hl : 0 < l - ρ)
+    (hadm : ∀ p ∈ Ioo (l - ρ) (u + ρ) ×ˢ (univ : Set ℝ),
+      0 < polarDiscriminant w z p ∧
+      heightQ (profileEnergy w p) (heightRadial z p)
+        (angularPartial (heightAngular z) p) ≠ 0) :
+    let τ : ℝ → ℝ := circleFlowSmoothTimeClamp l u ρ hlu hρ
+    ∀ n : ℕ, ScalarSpatialRegularity n (fun p : PolarPoint => minusCharacteristicSpeed
+      ⟨polarLinearA w z, polarLinearB w z, polarCorrectedC w z⟩ (τ p.2, p.1)) := by
+  let τ : ℝ → ℝ := circleFlowSmoothTimeClamp l u ρ hlu hρ
+  have hτ : ContDiff ℝ ∞ τ := contDiff_circleFlowSmoothTimeClamp hlu hρ
+  have hτmem (t : ℝ) : τ t ∈ Ioo (l - ρ) (u + ρ) :=
+    circleFlowSmoothTimeClamp_mem hlu hρ t
+  have hτpos (t : ℝ) : 0 < τ t := hl.trans (hτmem t).1
+  let d : PolarPoint → ℝ := fun p =>
+    polarLinearB w z (τ p.2, p.1) / polarLinearA w z (τ p.2, p.1)
+  let c : PolarPoint → ℝ := fun p =>
+    (polarDiscriminant w z (τ p.2, p.1) * polarLinearA w z (τ p.2, p.1))⁻¹
+  have hfactors : ContDiff ℝ ∞ d ∧ ContDiff ℝ ∞ c :=
+    polarAngularRegularity_smoothFactors (w := w) (z := z) hw hz hlu hρ hl hadm
+  let R : ℝ → ℝ := fun t => Real.sqrt (-w (τ t) * deriv w (τ t) / τ t)
+  have hR : Continuous R :=
+    polarAngularRegularity_continuousRadialFactor (w := w) (τ := τ)
+      hw hτ.continuous hτpos
+  let F : PolarPoint → ℝ := fun p => minusCharacteristicSpeed
+    ⟨polarLinearA w z, polarLinearB w z, polarCorrectedC w z⟩ (τ p.2, p.1)
+  have he : F = fun p : PolarPoint => d p - R p.2 * c p := by
+    funext p
+    have hp : (τ p.2, p.1) ∈ Ioo (l - ρ) (u + ρ) ×ˢ (univ : Set ℝ) :=
+      ⟨hτmem p.2, mem_univ p.1⟩
+    exact polarMinusCharacteristicSpeed_eq_separated (w := w) (p := (τ p.2, p.1)) z
+      (hw.differentiable (by simp) (τ p.2)) (hτpos p.2).ne'
+      (hadm (τ p.2, p.1) hp).1 (hadm (τ p.2, p.1) hp).2
+  exact polarAngularRegularity_separated
+    (F := F) (d := d) (c := c) (R := R) hfactors.1 hfactors.2 hR he
+
 /-- A genuine extension of the actual original speed, with spatial
 coordinates first. No sign condition on `deriv w` is required. -/
 theorem exists_spatiallyRegular_polarMinusCharacteristicSpeed
@@ -58,44 +125,11 @@ theorem exists_spatiallyRegular_polarMinusCharacteristicSpeed
         F (x, t) = minusCharacteristicSpeed
           ⟨polarLinearA w z, polarLinearB w z, polarCorrectedC w z⟩ (t, x) := by
   let τ : ℝ → ℝ := circleFlowSmoothTimeClamp l u ρ hlu hρ
-  have hτ : ContDiff ℝ ∞ τ := contDiff_circleFlowSmoothTimeClamp hlu hρ
-  have hτmem (t : ℝ) : τ t ∈ Ioo (l - ρ) (u + ρ) :=
-    circleFlowSmoothTimeClamp_mem hlu hρ t
-  have hτpos (t : ℝ) : 0 < τ t := hl.trans (hτmem t).1
-  let drift : PolarPoint → ℝ := fun p => polarLinearB w z p / polarLinearA w z p
-  let factor : PolarPoint → ℝ := fun p =>
-    (polarDiscriminant w z p * polarLinearA w z p)⁻¹
-  have hlocal (p : PolarPoint)
-      (hp : p ∈ Ioo (l - ρ) (u + ρ) ×ˢ (univ : Set ℝ)) :
-      ContDiffAt ℝ ∞ drift p ∧ ContDiffAt ℝ ∞ factor p :=
-    contDiffAt_characteristicAngularFactors (w := w) (z := z) (p := p)
-      hw.contDiffAt hz.contDiffAt
-      (hl.trans hp.1.1).ne' (hadm p hp).1 (hadm p hp).2
-  let d : PolarPoint → ℝ := fun p => drift (τ p.2, p.1)
-  let c : PolarPoint → ℝ := fun p => factor (τ p.2, p.1)
-  have hd : ContDiff ℝ ∞ d :=
-    (contDiff_circleFlowLocalizedSpeed (G := drift) hlu hρ
-      (fun p hp => (hlocal p hp).1.contDiffWithinAt)).comp
-        (contDiff_snd.prodMk contDiff_fst)
-  have hc : ContDiff ℝ ∞ c :=
-    (contDiff_circleFlowLocalizedSpeed (G := factor) hlu hρ
-      (fun p hp => (hlocal p hp).2.contDiffWithinAt)).comp
-        (contDiff_snd.prodMk contDiff_fst)
-  let R : ℝ → ℝ := fun t => Real.sqrt (-w (τ t) * deriv w (τ t) / τ t)
-  have hR : Continuous R :=
-    polarAngularRegularity_continuousRadialFactor (w := w) (τ := τ)
-      hw hτ.continuous hτpos
   let F : PolarPoint → ℝ := fun p => minusCharacteristicSpeed
     ⟨polarLinearA w z, polarLinearB w z, polarCorrectedC w z⟩ (τ p.2, p.1)
-  have he : F = fun p : PolarPoint => d p - R p.2 * c p := by
-    funext p
-    have hp : (τ p.2, p.1) ∈ Ioo (l - ρ) (u + ρ) ×ˢ (univ : Set ℝ) :=
-      ⟨hτmem p.2, mem_univ p.1⟩
-    exact polarMinusCharacteristicSpeed_eq_separated (w := w) (p := (τ p.2, p.1)) z
-      (hw.differentiable (by simp) (τ p.2)) (hτpos p.2).ne'
-      (hadm (τ p.2, p.1) hp).1 (hadm (τ p.2, p.1) hp).2
-  refine ⟨F, polarAngularRegularity_separated
-    (F := F) (d := d) (c := c) (R := R) hd hc hR he, ?_, ?_⟩
+  have hF : ∀ n : ℕ, ScalarSpatialRegularity n F :=
+    polarAngularRegularity_actualRegularity (w := w) (z := z) hw hz hlu hρ hl hadm
+  refine ⟨F, hF, ?_, ?_⟩
   · intro t x
     have hp := polarMinusCharacteristicSpeed_periodic w hperiod (τ t, x)
     change minusCharacteristicSpeed

@@ -92,9 +92,11 @@ theorem transportedLabel_displacement_fixed_loss
           (ContinuousLinearMap.norm_snd_le ℝ ℝ ℝ) hgjets hj
     have hc : ‖iteratedFDeriv ℝ n (u ∘ g) x‖ ≤
         Q (n - 1) * (1 + p (n + outLoss) z) := by
-      simpa only [Real.one_rpow, mul_one, Nat.sub_add_cancel hnpos] using
-        hbound z hz 1 le_rfl u g x hu.contDiffAt hg.contDiffAt
-          huPositive hgPositive (n - 1)
+      have hcomp := hbound z hz 1 le_rfl u g x hu.contDiffAt hg.contDiffAt
+        huPositive hgPositive (n - 1)
+      have horder : n - 1 + 1 = n := Nat.sub_add_cancel hnpos
+      rw [horder] at hcomp
+      simpa only [Real.one_rpow, mul_one] using hcomp
     have hsnd : ‖iteratedFDeriv ℝ n (fun y : PolarPoint => y.2) x‖ ≤ 1 := by
       simpa only [ContinuousLinearMap.coe_snd'] using
         (flowJet_norm_iteratedFDeriv_clm_le (ContinuousLinearMap.snd ℝ ℝ ℝ) hnpos x).trans

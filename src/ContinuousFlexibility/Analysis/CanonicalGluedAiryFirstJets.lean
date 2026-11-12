@@ -39,6 +39,8 @@ theorem canonicalGluedAiryIntegral_fderiv_on_piece
         exact piecewise_eq_of_mem _ _ _ hq
       exact he.fderiv_eq
   | true =>
+      change fderiv ℝ (canonicalGluedAiryIntegral S K z m σ) p =
+        fderiv ℝ (airyFirstIntegral (K.chart z (K.cutPair m).2) (-σ)) p
       have he : canonicalGluedAiryIntegral S K z m σ =ᶠ[𝓝 p]
           (fun q => airyFirstIntegral (K.chart z (K.cutPair m).2) (-σ) q +
             2 * σ * airyTravelPrimitive (K.cutRadius m)) := by
@@ -60,8 +62,12 @@ theorem canonicalGluedAiryIntegral_fderiv_on_cut
         (canonicalCutPoint S K z m θ) := by
   classical
   let p := canonicalCutPoint S K z m θ
-  have hleft := canonicalCut_closed_and_chart hA hB hz hs m false θ
-  have hright := canonicalCut_closed_and_chart hA hB hz hs m true θ
+  have hleft : p ∈ physicalPieceClosed S K z (K.cutPair m).1 ∧
+      K.chart z (K.cutPair m).1 p = (K.cutRadius m, θ) :=
+    canonicalCut_closed_and_chart hA hB hz hs m false θ
+  have hright : p ∈ physicalPieceClosed S K z (K.cutPair m).2 ∧
+      K.chart z (K.cutPair m).2 p = (K.cutRadius m, θ) :=
+    canonicalCut_closed_and_chart hA hB hz hs m true θ
   have hρ := (hB.1.1 m).2.2.2.2.2.1
   have hFL := ((hA.boundary z hz hs (K.cutPair m).1).2.2.2.2.1 p hleft.1).1
   have hFR := ((hA.boundary z hz hs (K.cutPair m).2).2.2.2.2.1 p hright.1).1

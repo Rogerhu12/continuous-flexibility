@@ -61,6 +61,10 @@ theorem canonicalCut_closedCoefficients_match
         (negativeCanonicalClosedCoefficients S K z (K.cutPair m).1).c p := by
   have hvalues₀ := (canonicalCut_closed_and_chart hA hB hz hs m false θ).2
   have hvalues₁ := (canonicalCut_closed_and_chart hA hB hz hs m true θ).2
+  change K.chart z (K.cutPair m).1 (canonicalCutPoint S K z m θ) =
+    (K.cutRadius m, θ) at hvalues₀
+  change K.chart z (K.cutPair m).2 (canonicalCutPoint S K z m θ) =
+    (K.cutRadius m, θ) at hvalues₁
   have hξ : (K.chart z (K.cutPair m).2 (canonicalCutPoint S K z m θ)).1 =
       (K.chart z (K.cutPair m).1 (canonicalCutPoint S K z m θ)).1 := by
     rw [hvalues₀, hvalues₁]

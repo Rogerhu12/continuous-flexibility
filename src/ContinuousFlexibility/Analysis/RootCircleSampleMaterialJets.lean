@@ -75,6 +75,7 @@ theorem exists_rootCircleSample_displacement_jet_constants
     change G (x, ζ, η + Real.pi) - (η + Real.pi) = G (x, ζ, η) - η
     rw [hperiod x ζ η]
     ring
+  letI : Fact (0 < Real.pi) := ⟨Real.pi_pos⟩
   obtain ⟨t, ht, he⟩ := (periodic_iteratedDeriv hperiodv n).exists_mem_Ico₀ Real.pi_pos θ
   have ht' : t ∈ Icc (-Real.pi) Real.pi :=
     ⟨(neg_nonpos.mpr Real.pi_pos.le).trans ht.1, ht.2.le⟩
