@@ -18,6 +18,7 @@ namespace ContinuousFlexibility.Analysis
 
 open Set
 open ContinuousFlexibility.Statements
+open CanonicalGeometry
 open scoped ContDiff BigOperators
 
 variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
