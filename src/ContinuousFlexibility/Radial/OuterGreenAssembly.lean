@@ -232,7 +232,7 @@ theorem OuterFundamentalStatePair.greenOperator_ae_eq_integral
       (F.continuousOn_core hcb).1 (F.continuousOn_core hcb).2 D p hp f,
       hDsource, outer_ae_deep_interval μ hμ] with x hx hDx hxc
     change outerIntervalGreenOperator μ hac lam F.U F.V
-      (F.continuousOn_core hcb).1 (F.continuousOn_core hcb).2 D p f x = _ 
+      (F.continuousOn_core hcb).1 (F.continuousOn_core hcb).2 D p f x = _
     rw [hx, hDx]
     exact (F.kernel_integral_deep μ hac hlam hcb hPc hQc hflux hμ p hp f hxc (hrow x hxc)).symm
 

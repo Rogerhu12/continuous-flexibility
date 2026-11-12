@@ -170,8 +170,8 @@ private theorem n06_rootLog_N01_regular
   have hA := (contDiffAt_heightLinearCoefficients hw.contDiffAt hu.contDiffAt hr hdisc hQ.ne').1
   have hE : ContDiffAt ℝ ∞ (profileEnergy (stateProfile D S C z.1)) p :=
     contDiffAt_const.add ((hw.contDiffAt.comp p contDiffAt_fst).pow 2)
-  have hk := contDiffAt_heightRadial hu.contDiffAt (m := ∞) (by simp)
-  have ht := contDiffAt_heightAngular hu.contDiffAt (m := ∞) (by simp) hr
+  have hk := contDiffAt_heightRadial (x := p) hu.contDiffAt (m := ∞) (by simp)
+  have ht := contDiffAt_heightAngular (x := p) hu.contDiffAt (m := ∞) (by simp) hr
   have hDisc : ContDiffAt ℝ ∞
       (polarDiscriminant (stateProfile D S C z.1) (stateHeight D S C z)) p :=
     (hE.mul (contDiffAt_const.sub (ht.pow 2))).sub (hk.pow 2)
@@ -257,9 +257,11 @@ theorem n06_N01_rootLogHeight_difference_boundaryJets
   have hh := P.height_boundary θ ha haPos
   have hh₀ := P₀.height_boundary θ ha₀ ha₀Pos
   have hO : 0 < extendedRootOddCoefficient G (0, θ) := by
-    simpa only [extendedRootOddCoefficient_of_nonneg G (le_refl (0 : ℝ))] using P.odd_positive θ
+    simpa only [extendedRootOddCoefficient_of_nonneg G (p := (0, θ))
+      (le_refl (0 : ℝ))] using P.odd_positive θ
   have hO₀ : 0 < extendedRootOddCoefficient G₀ (0, θ) := by
-    simpa only [extendedRootOddCoefficient_of_nonneg G₀ (le_refl (0 : ℝ))] using P₀.odd_positive θ
+    simpa only [extendedRootOddCoefficient_of_nonneg G₀ (p := (0, θ))
+      (le_refl (0 : ℝ))] using P₀.odd_positive θ
   have hleft : ContDiffAt ℝ ∞ (fun p =>
       Real.log (rootSmoothHeight a G p) - Real.log (rootSmoothHeight a₀ G₀ p)) (0, θ) :=
     (hh.2.1.log hh.2.2.1.ne').sub (hh₀.2.1.log hh₀.2.2.1.ne')
@@ -302,6 +304,6 @@ theorem n06_N01_rootLogHeight_difference_boundaryJets
   have hzero : n06RootPhysicalDiscriminant (stateProfile D S C C.referenceState)
       (stateHeight D S C (C.referenceState, 0)) r ι (x, θ) = 1 :=
     n06_root_discriminant_zero_parameter hT hS hN C.referenceState _
-  simpa only [hzero, Real.log_one, sub_zero] using he
+  simpa only [Function.comp_apply, a, a₀, disc, hzero, Real.log_one, sub_zero] using he
 
 end ContinuousFlexibility.Statements

@@ -14,7 +14,7 @@ noncomputable section
 
 namespace ContinuousFlexibility.Statements
 
-open Set MeasureTheory
+open Set Filter MeasureTheory
 open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true
@@ -75,6 +75,45 @@ theorem n06_angularMean_reflectionAverage {f : ℝ → ℝ}
       (IntervalIntegrable.iff_comp_neg (f := f) (a := (0 : ℝ)) (b := -Real.pi)).mp
         (hf.intervalIntegrable₀ Real.pi_ne_zero hint (-Real.pi) 0).symm
   have he := n06_angularMean_reflection hf
+  unfold angularMean at he ⊢
+  rw [intervalIntegral.integral_div, intervalIntegral.integral_add hint hneg]
+  linarith only [he]
+
+/-- Equality almost everywhere suffices for the original angular mean. -/
+theorem n06_angularMean_congr_ae {f g : ℝ → ℝ} (h : f =ᵐ[volume] g) :
+    angularMean f = angularMean g := by
+  unfold angularMean
+  exact congrArg (fun x : ℝ => (1 / Real.pi) * x)
+    (intervalIntegral.integral_congr_ae (h.mono (fun _ hx _ => hx)))
+
+/-- An almost-everywhere period suffices for the reflection average.
+This is the period furnished by a genuine planar atlas cover. -/
+theorem n06_angularMean_reflectionAverage_ae {f : ℝ → ℝ}
+    (hf : (fun θ => f (θ + Real.pi)) =ᵐ[volume] f)
+    (hint : IntervalIntegrable f volume 0 Real.pi) :
+    angularMean (fun θ => (f θ + f (-θ)) / 2) = angularMean f := by
+  have hshift : (∫ θ in -Real.pi..(0 : ℝ), f θ) =
+      ∫ θ in (0 : ℝ)..Real.pi, f θ := by
+    calc
+      _ = ∫ θ in -Real.pi..(0 : ℝ), f (θ + Real.pi) :=
+        intervalIntegral.integral_congr_ae (hf.symm.mono (fun _ hx _ => hx))
+      _ = _ := by
+        rw [intervalIntegral.integral_comp_add_right]
+        simp only [neg_add_cancel, zero_add]
+  have hshiftI : IntervalIntegrable (fun θ => f (θ + Real.pi))
+      volume (-Real.pi) 0 :=
+    (IntervalIntegrable.comp_add_right_iff
+      (f := f) (a := -Real.pi) (b := 0) (c := Real.pi)).mpr
+      (by simpa only [neg_add_cancel, zero_add] using hint)
+  have hminus : IntervalIntegrable f volume (-Real.pi) 0 :=
+    hshiftI.congr_ae (ae_restrict_of_ae hf)
+  have hneg : IntervalIntegrable (fun θ => f (-θ)) volume 0 Real.pi := by
+    simpa only [neg_zero, neg_neg] using
+      (IntervalIntegrable.iff_comp_neg (f := f) (a := (0 : ℝ)) (b := -Real.pi)).mp
+        hminus.symm
+  have he : angularMean (fun θ => f (-θ)) = angularMean f := by
+    unfold angularMean
+    rw [intervalIntegral.integral_comp_neg, neg_zero, hshift]
   unfold angularMean at he ⊢
   rw [intervalIntegral.integral_div, intervalIntegral.integral_add hint hneg]
   linarith only [he]
