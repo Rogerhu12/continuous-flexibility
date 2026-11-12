@@ -119,11 +119,13 @@ theorem n07a_currentWeak_smoothPhysical
   intro l r hlr hinner
   apply n07a_physical_equation_innerSmooth (hD.choose_spec.1.2.1.le) (L.coefficients x)
     ⟨ha, hspace.2.1, hspace.2.2.1⟩
-    (fun p hp => ⟨hap p hp,
-      by simpa only [Prod.fst_add, Prod.snd_add, add_zero] using
-        hspace.2.2.2.1 p.1 hp.1 p.2,
-      by simpa only [Prod.fst_add, Prod.snd_add, add_zero] using
-        hspace.2.2.2.2 p.1 hp.1 p.2⟩)
+    (by
+      rintro ⟨s, θ⟩ hp
+      refine ⟨hap (s, θ) hp, ?_, ?_⟩
+      · simpa only [Prod.mk_add_mk, add_zero] using
+          hspace.2.2.2.1 s hp.1 θ
+      · simpa only [Prod.mk_add_mk, add_zero] using
+          hspace.2.2.2.2 s hp.1 θ)
     (fun p hp => n07a_correctedLeadingCoefficient_pos h01 h03 hz' hs hp)
     η f ((S.height (3 / 4 : ℝ)).decode f₀.val)
     (nuColumnField D S C x) ((S.height (3 / 4 : ℝ)).decode S.psi)
