@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.RootScaledJacobianBounds
 import ContinuousFlexibility.Analysis.RootChartExtensionGeometry
+import ContinuousFlexibility.Geometry.EuclideanRigidity
 
 /-!
 # The genuine root Jacobian lower bound includes the root

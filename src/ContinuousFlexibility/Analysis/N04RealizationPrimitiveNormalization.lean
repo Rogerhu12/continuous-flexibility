@@ -92,6 +92,7 @@ theorem n04Realization_currentJets_normalized
     · simpa only [n04Realization_differenceJets_normalized href,
         normalizedCanonicalData_cell] using h.2.1
     · exact n04Realization_directional_bounds_congr
+        (E := Parameter S) (F := JetField)
         (P := fun J => ∀ k : ℕ, ∃ loss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
           ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → Parameter S,
             ∀ m a (p : unitStrip) i j, i + j ≤ s →

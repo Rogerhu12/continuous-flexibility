@@ -82,6 +82,8 @@ private theorem potential_product_expansion
   simp only [potentialCoefficient, potentialSlots, potentialRadial, potentialAngular,
     n04RealizationPotentialInputs, Fin.sum_univ_succ, Fin.prod_univ_succ,
     Fin.sum_univ_zero, Fin.prod_univ_zero, Matrix.cons_val_zero, Matrix.cons_val_succ,
+    Matrix.cons_val_zero', Matrix.cons_val_succ', Matrix.cons_val_one, Matrix.cons_val_two,
+    Matrix.head_cons, Matrix.tail_cons,
     spaces_mixedDerivative_zero, mul_one, one_mul, add_zero]
   ring
 
@@ -160,7 +162,8 @@ theorem n04Realization_potential_parameter_bound (k a b : ℕ) (RH : ℝ) :
     ‖∑ t : Fin 7, potentialCoefficient t * (JT t).D k x v‖ ≤
         ∑ t : Fin 7, |potentialCoefficient t| * ‖(JT t).D k x v‖ := by
       simpa only [norm_mul, Real.norm_eq_abs] using
-        norm_sum_le (fun t : Fin 7 => potentialCoefficient t * (JT t).D k x v) Finset.univ
+        norm_sum_le (Finset.univ : Finset (Fin 7))
+          (fun t : Fin 7 => potentialCoefficient t * (JT t).D k x v)
     _ ≤ ∑ t : Fin 7, |potentialCoefficient t| * (B₀ * M) :=
       Finset.sum_le_sum (fun t _ => mul_le_mul_of_nonneg_left (ht t) (abs_nonneg _))
     _ = 8 * B₀ * M := by rw [← Finset.sum_mul, potential_coefficient_mass]; ring

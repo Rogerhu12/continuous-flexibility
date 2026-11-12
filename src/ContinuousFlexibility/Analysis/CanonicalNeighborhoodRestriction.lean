@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.StateNeighborhood
 import ContinuousFlexibility.Analysis.MaterialSampleBounds
 import ContinuousFlexibility.Analysis.N01JetBounds
+import ContinuousFlexibility.Blueprint.CanonicalParts
 
 /-!
 # Preserving the cumulative construction on a smaller neighborhood

@@ -141,7 +141,7 @@ theorem n04Realization_materialDirection_envelopes
       (fun x y => (Y x (n07bMaterialRadiusChart T y)).1)
       (fun _ y => (T.ell (T.radius y.1))⁻¹)
       (fun x => (hYm x).fst) (fun _ => hellInv.contDiffAt) j
-      (fun k hk => by simpa only [Function.comp_apply, ContinuousLinearMap.fst_apply] using
+      (fun k hk => by simpa only [Function.comp_def, ContinuousLinearMap.coe_fst'] using
         hproj (ContinuousLinearMap.fst ℝ ℝ ℝ) k (hk.trans hj))
       (fun k _ => n04Realization_materialEllInverse_envelope hT hW p hE k)
     simpa only [V₁, n07bMaterialDirectionV1, n07bDirectionMaterialVector,
@@ -149,7 +149,7 @@ theorem n04Realization_materialDirection_envelopes
   have hV₂j (j : ℕ) (hj : j ≤ n) : HasPositiveEnvelope W
       (fun x => ‖iteratedFDeriv ℝ j (V₂ x) (p x)‖) := by
     simpa only [V₂, n07bMaterialDirectionV2, n07bDirectionMaterialVector,
-      Function.comp_apply, ContinuousLinearMap.snd_apply] using
+      Function.comp_def, ContinuousLinearMap.coe_snd'] using
         hproj (ContinuousLinearMap.snd ℝ ℝ ℝ) j hj
   let Ω : X → PolarPoint → ℝ := fun x =>
     canonicalMaterialJacobian T K (z x) (m x) ∘ n07bMaterialRadiusChart T
@@ -271,7 +271,7 @@ theorem n04Realization_materialReferenceMultiplier_envelope
     have h := n04Realization_envelope_clm_comp_jets hW p
       (fun _ => ContinuousLinearMap.fst ℝ ℝ ℝ) Θ hΘ j
       (hasPositiveEnvelope_const W hW ‖ContinuousLinearMap.fst ℝ ℝ ℝ‖) (hΘj j hj hjn)
-    simpa only [Function.comp_apply, ContinuousLinearMap.fst_apply] using h
+    simpa only [Function.comp_def, ContinuousLinearMap.coe_fst'] using h
   have hprofile (j : ℕ) (hj : j ≤ n) : HasPositiveEnvelope W
       (fun x => ‖iteratedFDeriv ℝ j (fun y => f x (Θ x y).1) (p x)‖) :=
     n04Realization_envelope_comp_jets hW p f (fun x y => (Θ x y).1)

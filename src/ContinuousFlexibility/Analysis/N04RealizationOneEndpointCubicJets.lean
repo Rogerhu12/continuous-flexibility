@@ -108,9 +108,13 @@ theorem n04Realization_oneEndpointCubic_parameterJets
     have hcoord : Continuous q := (continuous_id.mul continuous_const).prodMk continuous_const
     have hn := (contDiffOn_mixedDerivative (isOpen_Ioo.prod isOpen_univ)
       (RN.spatial x hx) (a + 3) b).continuousOn.comp hcoord.continuousOn hq
+    have hfEq : EqOn (f x)
+        (fun t : ℝ => c t * mixedDerivative (a + 3) b (N x) (q t))
+        (Ioo (0 : ℝ) 1) := by
+      intro t ht
+      exact if_pos ht
     have hfOn : ContinuousOn (f x) (Ioo (0 : ℝ) 1) :=
-      (hc.continuousOn.mul hn).congr (fun t ht => by
-        simp only [f, if_pos ht, Function.comp_apply])
+      (hc.continuousOn.mul hn).congr hfEq
     exact hfOn.aestronglyMeasurable measurableSet_Ioo
   have hvalue (x : E) (hx : x ∈ U) :
       mixedDerivative a b (e x) p = ∫ t, f x t ∂μ := by
@@ -124,19 +128,30 @@ theorem n04Realization_oneEndpointCubic_parameterJets
         r ^ 3 * e x (r, θ) = N x (r, θ) :=
           (hfactor x hx (r, θ) ⟨hr, mem_univ _⟩).symm
         _ = F (r, θ) := (@he (r, θ) ⟨hr, mem_univ _⟩).symm
-        _ = r ^ 3 * radialCubicQuotient F (r, θ) :=
-          (cube_mul_cubicQuotient (h0 θ) r).symm
+        _ = r ^ 3 * radialCubicQuotient F (r, θ) := by
+          simpa only [radialCubicQuotient] using
+            (cube_mul_cubicQuotient (f := fun u : ℝ => F (u, θ)) (h0 θ) r).symm
     rw [mixedDerivative_eq_of_eqOn_radialCylinder heq a b hp.1,
       mixedDerivative_radialCubicQuotient_eq_integral hF h0 h1 h2,
       ← intervalIntegral.integral_const_mul,
       intervalIntegral.integral_of_le zero_le_one, integral_Ioc_eq_integral_Ioo]
     apply integral_congr_ae
     filter_upwards [ae_restrict_mem measurableSet_Ioo] with t ht
-    have hd := mixedDerivative_eq_of_eqOn_radialCylinder
-      (p := q t) (fun r hr θ => @he (r, θ) ⟨hr, mem_univ _⟩)
-      (a + 3) b (hq t ht).1
-    simpa only [f, if_pos ht, c, q, mul_assoc] using
-      congrArg (fun w : ℝ => (1 / 2 : ℝ) * (1 - t) ^ 2 * t ^ a * w) hd
+    have hd : mixedDerivative (a + 3) b F (q t) =
+        mixedDerivative (a + 3) b (N x) (q t) :=
+      mixedDerivative_eq_of_eqOn_radialCylinder (F := F) (G := N x)
+        (fun r hr θ => @he (r, θ) ⟨hr, mem_univ _⟩)
+        (a + 3) b (hq t ht).1
+    calc
+      (1 / 2 : ℝ) * ((1 - t) ^ 2 * t ^ a *
+          mixedDerivative (a + 3) b F (q t)) =
+          (1 / 2 : ℝ) * ((1 - t) ^ 2 * t ^ a *
+            mixedDerivative (a + 3) b (N x) (q t)) :=
+        congrArg (fun w : ℝ => (1 / 2 : ℝ) * ((1 - t) ^ 2 * t ^ a * w)) hd
+      _ = f x t := by
+        rw [show f x t = c t * mixedDerivative (a + 3) b (N x) (q t) from if_pos ht]
+        dsimp only [c]
+        ring
   have hid := n04Realization_smoothDirections_integral_jets (μ := μ) J Q hvalue hf
     (fun k y => G k (a + 3) b y / 2)
     (fun k => (hG k (a + 3) b).div_const 2) hJB

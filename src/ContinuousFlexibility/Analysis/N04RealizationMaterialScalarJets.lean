@@ -35,7 +35,7 @@ theorem n04Realization_norm_iteratedFDeriv_radialLift_le
     pow_le_one₀ (norm_nonneg _) (ContinuousLinearMap.norm_fst_le ℝ ℝ ℝ)
   have hb := h.trans (mul_le_mul_of_nonneg_left hL
     (norm_nonneg (iteratedFDeriv ℝ n f (L y))))
-  simpa only [L, Function.comp_def, ContinuousLinearMap.fst_apply, mul_one,
+  simpa only [L, Function.comp_def, ContinuousLinearMap.coe_fst', mul_one,
     norm_iteratedFDeriv_eq_norm_iteratedDeriv, Real.norm_eq_abs] using hb
 
 variable {D : ReferenceData} {T : MaterialData}

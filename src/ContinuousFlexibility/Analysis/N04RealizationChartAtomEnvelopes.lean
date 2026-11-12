@@ -111,10 +111,9 @@ theorem n04Realization_chartAtom_envelopes
     dsimp only [rho]
     linarith only [apply_nonneg (stateGrading S k) ((z x).1 - C.referenceState),
       abs_nonneg (z x).2]
-  have hrhoMono {a b : ℕ} (hab : a ≤ b) (x : X) : rho a x ≤ rho b x :=
-    add_le_add_right
-      (add_le_add_left (stateGrading_monotone S hab ((z x).1 - C.referenceState)) 1)
-      |(z x).2|
+  have hrhoMono {a b : ℕ} (hab : a ≤ b) (x : X) : rho a x ≤ rho b x := by
+    dsimp only [rho]
+    linarith only [stateGrading_monotone S hab ((z x).1 - C.referenceState)]
   have hzold (x : X) : z x ∈ stateNeighborhood S C base ε :=
     stateNeighborhood_mono S C hb hηε (hz x)
   refine ⟨?_, ?_, ?_⟩

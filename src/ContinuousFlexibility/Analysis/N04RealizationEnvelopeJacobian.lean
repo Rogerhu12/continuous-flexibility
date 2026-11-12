@@ -72,7 +72,11 @@ theorem n04Realization_envelope_planeJacobian_jets
       (fun x y => fderiv ℝ (F x) y v)
       (fun x => ((hF x).fderiv_right (m := ∞) (by simp)).clm_apply contDiffAt_const) k
       (hasPositiveEnvelope_const W hW ‖A‖) hd
-    simpa only [d, Function.comp_apply] using h
+    have he (x : X) : (A ∘ fun y => fderiv ℝ (F x) y v) = d v A x := by
+      funext y
+      exact Function.comp_apply
+    simp_rw [he] at h
+    exact h
   let fst : PolarPoint →L[ℝ] ℝ := ContinuousLinearMap.fst ℝ ℝ ℝ
   let snd : PolarPoint →L[ℝ] ℝ := ContinuousLinearMap.snd ℝ ℝ ℝ
   have hP := n04Realization_envelope_mul_jets hW p
@@ -86,7 +90,13 @@ theorem n04Realization_envelope_planeJacobian_jets
     (fun x y => -(d (1, 0) snd x y * d (0, 1) fst x y))
     (fun x => (hs _ _ x).mul (hs _ _ x))
     (fun x => ((hs _ _ x).mul (hs _ _ x)).neg) n hP hneg
-  simpa only [planeJacobian, d, fst, snd, ContinuousLinearMap.fst_apply,
-    ContinuousLinearMap.snd_apply, sub_eq_add_neg] using hadd
+  have he (x : X) :
+      (fun y => d (1, 0) fst x y * d (0, 1) snd x y +
+        -(d (1, 0) snd x y * d (0, 1) fst x y)) = planeJacobian (F x) := by
+    funext y
+    simp only [planeJacobian, d, fst, snd, ContinuousLinearMap.coe_fst',
+      ContinuousLinearMap.coe_snd', sub_eq_add_neg]
+  simp_rw [he] at hadd
+  exact hadd
 
 end ContinuousFlexibility.Analysis

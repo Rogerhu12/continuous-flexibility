@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.RelativePrincipalCoefficients
 import ContinuousFlexibility.Analysis.ActualNegativePrincipalDensity
 import ContinuousFlexibility.Analysis.CanonicalClosedTransport
 import ContinuousFlexibility.Analysis.StateNeighborhood
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Actual negative reference-to-current principal transport
