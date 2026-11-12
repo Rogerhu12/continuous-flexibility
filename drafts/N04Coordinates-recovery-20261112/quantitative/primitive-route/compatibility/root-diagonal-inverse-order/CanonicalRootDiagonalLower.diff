@@ -1,0 +1,10 @@
+--- base/CanonicalRootDiagonalLower.lean
++++ candidate/CanonicalRootDiagonalLower.lean
+@@ -52,7 +52,6 @@
+     calc
+       1 = a * b := hab.symm
+       _ ≤ a * M := mul_le_mul_of_nonneg_left hb ha.le
+-      _ = M * a := mul_comm _ _
+   exact ⟨hlower _ _ ha h11 hb11, hlower _ _ hd h22 hb22⟩
+ 
+ /-- Only a first-derivative bound for the genuine inverse is supplied.

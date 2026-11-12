@@ -1,0 +1,58 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-12T10:33:19.151451+00:00",
+  "status": "ACCEPTED_STATIC_REVIEW_HELD_UNCOMPILED",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalGlobalReferenceAgreement.lean",
+  "sha256": "6fe479b284d9e6cbd0a0910769da46e84daaeee1403555cb9183df4103eb14bb",
+  "blob": "c483dce90a644173c39eb795d86c8c6033654529",
+  "lines": 218,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalGlobalReferenceAgreementCandidateManifest.json",
+    "sha256": "f03d9c6ac1bd134400e2ffa84de3c1138eeb01add5622cf154cb432523aede1e"
+  },
+  "read_scope": "Entire 218-line source; entire actual held Data165, ReferencePartition87, Regularity103 and final Symmetries89; actual installed selector and negative travel/height identities inspected at their full call signatures and relevant proof portions.",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasData.lean",
+      "sha256": "41a32a066758dcfb8fe7da1ab9e73bee2f7ad451fa1f7057aee40c01092905d6"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasReferencePartition.lean",
+      "sha256": "a228efd750b6144dc83f5848e1b081fbfff531ff42400ff2ffaecb13b9252f71"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalRegularity.lean",
+      "sha256": "ba6f284df91e959724ac50d3ee1a11703b697bd76a11d5ad78aa5b1a12fe4513"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/global-selected-symmetries/WholeCanonicalGlobalSymmetries.lean",
+      "sha256": "3f6551aa7ee14268dcdd00862d4d780cb68ac7572a49a5d3c7e9fadffaa746ca"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeTransport.lean",
+      "sha256": "b904744b4a2ca98616fc0b1681fdd563be7471776ab8aadafbc063177aa71b3f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelTransition.lean",
+      "sha256": "c88ff73384ba8360871e9b439f3d7c84985623763d8186441672b99c1e4df34b"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeComponentFieldSelection.lean",
+      "sha256": "050dcc988f8a554f03195aa4151d835adcd6b4fe4ceb8713f7e542a84e9f29ba"
+    }
+  ],
+  "findings": [
+    "The chosen global F/q use exactly the retained negative fields and the same positive tau/Q family stored in W. No new transport representation is introduced.",
+    "Actual reference-radii equalities and actual reference-cut membership put each negative open half inside the original open negative component. The selector equality therefore applies with true closed-component membership.",
+    "The cutPair lookup is the original enumeration inverse. The selected negative transport/height and the stored half fields are both identified with the same proved travel transition/ratio on the full open component.",
+    "The positive selection uses actual profile continuity and control geometry. The exact positive_relative_fields theorem uses reference sigma=id/Q=1 and the supplied Matching.geometry.left_inverse on the same functions.",
+    "The qualitative n=3 corollary downgrades the actual coordinate C4 to C3 and retains height C3, annulus MapsTo, both period/reflection identities, positivity and the just-proved same-W agreement.",
+    "There is no final agreement or final regularity premise. The actual Matching premise remains explicit and has to be supplied by the endpoint factory."
+  ],
+  "limitations": [
+    "Does not assert global material growth, absolute source bounds, low physical-jet M bounds, or H/M ratio estimates.",
+    "Not compiled; requires held actual providers to be activated and checked."
+  ],
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

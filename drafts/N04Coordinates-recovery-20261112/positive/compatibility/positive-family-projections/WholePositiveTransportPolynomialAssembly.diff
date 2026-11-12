@@ -1,0 +1,23 @@
+--- base/WholePositiveTransportPolynomialAssembly.lean
++++ candidate/WholePositiveTransportPolynomialAssembly.lean
+@@ -112,7 +112,8 @@
+     (fun i side => (hdata i side).root_radial) hradial hXjets
+     (fun i side x hx θ => by
+       simpa only [X, Prod.fst_add, add_zero] using congrArg Prod.fst (hperiod i side x hx θ))
+-    (fun i side x hx θ => congrArg Prod.fst (hreflect i side x hx θ))
++    (fun i side x hx θ => by
++      simpa only [X] using congrArg (fun p : PolarPoint => p.1) (hreflect i side x hx θ))
+   dsimp only at ht
+   rcases ht with ⟨_, _, _, _, _, Mσ, hMσ, hcost, hη, hηgap, hB, ht⟩
+   let ρ : ℝ := min ((r - l) / 4) (min (c - l) (r - d))
+@@ -132,7 +133,9 @@
+   have hMlog : 0 ≤ Mlog := mul_nonneg hClog.le (pow_nonneg (zero_le_one.trans hH) _)
+   have hlog (i : ι) (side : Bool) (j : ℕ) (_hj : 0 < j) (hjn : j ≤ n) (θ : ℝ) :
+       |positiveHeightTaylorData l r (fun _ => 1) (q i) side j θ| ≤ Mlog := by
+-    simpa only [positiveHeightTaylorData, boundaryHeightLogRatio, div_one, Mlog] using
++    change |radialBoundaryJet (fun p => Real.log (q i side p / 1))
++      (if side then r else l) j θ| ≤ Mlog
++    simpa only [div_one, Mlog] using
+       hlogbound H hH (q i side) (a side) (b side) (if side then r else l)
+         (hab side) (hdata i side).height_smooth_on (hend side)
+         (fun η => ((hdata i side).height_root η).1) (hdata i side).height_positive

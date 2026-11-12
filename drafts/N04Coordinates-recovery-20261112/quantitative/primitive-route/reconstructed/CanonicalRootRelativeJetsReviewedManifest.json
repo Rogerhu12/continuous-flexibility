@@ -1,0 +1,21 @@
+{
+  "kind": "reviewed_lean_candidate_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJets.lean",
+    "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a"
+  },
+  "git_blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJetsCandidateManifest.json",
+    "sha256": "b5c7ee5aaaf41a6863a1159d0eded294645a37b2e885d926981156c8591766fa"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/CanonicalRootRelativeJetsIndependentReview.json",
+    "sha256": "4a84a9148e3659adac1ca39e8829de5843f11aeb34c3a605094c92ede338de62"
+  },
+  "compiled": false,
+  "checkout_changed": false,
+  "same_witness": true,
+  "component_uniform_material_bound_claimed": false
+}

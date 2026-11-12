@@ -1,0 +1,51 @@
+{
+  "kind": "actual_positive_family_projection_and_log_function_normalization",
+  "scope": "actual_ci136",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "actual_base_commit": "3dbed841d8a8b62feaab8dc4572626a2dacf7cca",
+  "actual_base_tree": "d9f34bf84b160803691e784164e492ef38a08aef",
+  "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveTransportAssembly.lean",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair136/WholePositiveTransportAssembly.base.lean.txt",
+    "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138",
+    "blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c",
+    "lines": 208
+  },
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair136/WholePositiveTransportAssembly.lean",
+    "sha256": "a4df8068d421b16c6912552079cef21c9a081dd9968d48d2c15d4e539c31ada3",
+    "blob": "50a48bb4413593159f910338e52055459f07cc04",
+    "lines": 211
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair136/WholePositiveTransportAssembly.diff",
+    "sha256": "0fa3d12a835267ec89e7d41fcfa240697521e200c9e539a21c51854fb2f3edb9"
+  },
+  "changes": [
+    "Elaborate the reflected radial projection independently using a typed PolarPoint projection, then simplify the local X alias and pair projection.",
+    "Expose the exact log(q p / 1) function under radialBoundaryJet before simplifying div_one; the original endpoint root, order, constant and height remain unchanged."
+  ],
+  "public_private_headers_imports_options_unchanged": true,
+  "default_heartbeat_unchanged": true,
+  "same_actual_fields_widths_formulas_and_reference_identity": true,
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-136-errors.json",
+    "sha256": "da02d79a97dbea67513d9bdf3a7d8b8eb204f311deecf24e47d0f5cedbbd74e6"
+  },
+  "direct_scope_check": [
+    "Read the complete actual source and both complete cached CI136 diagnostics.",
+    "Read the actual boundaryHeightLogRatio, positiveHeightTaylorData, logarithmic envelope and one-sided family providers.",
+    "The held polynomial assembly has exactly these two proof patterns and is saved separately with this same minimal normalization; it is not an actual CI137 change.",
+    "Direct installed consumers CanonicalWholePositiveTransport and WholePositiveChartGeometry use the assembly theorem or matching fields, not these proof-local reflected projection/log-data constructions."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair136/WholePositiveTransportAssemblyCI136RepairCandidateManifest.json",
+    "sha256": "9801c548497df6ac02a122e73fbfd1bb861531d3734da146f02f49ce2172dfad"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholePositiveTransportAssemblyCI136IndependentReview.json",
+    "sha256": "68347567b169668782462b38ce86322facaecdaa11fc1cfc68f135c5d8662f76"
+  }
+}

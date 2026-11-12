@@ -1,0 +1,55 @@
+{
+  "kind": "actual_radial_primitive_linear_jet_bound_candidate",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RadialPrimitiveJetBounds.lean",
+    "sha256": "f4c2d94999dea6cc36293ec291047e1465cae322d87771bb9017bf8e7cc80a89",
+    "blob": "ad38bbe9e6c16faa74c92af2e729f8254dafb51a",
+    "lines": 104
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/RadialPrimitiveJetBounds.lean",
+  "public_declarations": [
+    "radialIntervalPrimitive",
+    "contDiff_radialIntervalPrimitive",
+    "mixedDerivative_radialIntervalPrimitive_zero",
+    "mixedDerivative_radialIntervalPrimitive_succ",
+    "norm_iteratedFDeriv_radialIntervalPrimitive_le"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/WeightedAngularPrimitiveJets.lean",
+      "sha256": "de3836981e2eb40d94fa5d0d88d360266f8c664fd18b0d1356c1f7c3b0cf32ea"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCylinderPointwise.lean",
+      "sha256": "40e4cf0e61f20ec3b1c043c59fc8cf18d15f5d3e6b595ea7b014c9074a141ae9"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneHighCircleFlowIntegral.lean",
+      "sha256": "15e4e790318dbd104cd1038147a5bc260f5e6afca33fd572abbec7245612de7a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d"
+    }
+  ],
+  "claims": [
+    "The displayed radial interval primitive is jointly smooth for an actually smooth integrand.",
+    "Pure angular mixed derivatives pass through the same fixed radial integral; one positive radial derivative removes that integral.",
+    "Actual mixed integrand jets through N bounded by B on the fixed closed radial strip imply full primitive jets through N bounded by 2^N*(1+width)*B. The constant is linear in B and no integration endpoint is reselected."
+  ],
+  "scope_limitations": [
+    "This is the linear integral block for the actual fixed-width positive interpolation. It does not yet assert the endpoint-slope bound or final material/primitive estimate.",
+    "No Lean compilation has been run."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RadialPrimitiveJetBoundsCandidateManifest.json",
+    "sha256": "c8fca15be14438f66e112df5def8140f2ca768dec238d4b2e178e4db95d2f121"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/RadialPrimitiveJetBoundsIndependentReview.json",
+    "sha256": "bf726b9f74c756af251e6d8d10a2bfa33275cda69d0efe36050d2f58dfcfabb6"
+  }
+}

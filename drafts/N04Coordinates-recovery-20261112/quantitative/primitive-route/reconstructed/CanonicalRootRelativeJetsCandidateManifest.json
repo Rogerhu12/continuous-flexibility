@@ -1,0 +1,64 @@
+{
+  "kind": "actual_same_witness_common_root_relative_map_jets_candidate",
+  "status": "HELD_UNCOMPILED_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJets.lean",
+    "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+    "blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+    "lines": 188
+  },
+  "imports": [
+    "ContinuousFlexibility.Analysis.N03RootEndpointPhysicalJets",
+    "ContinuousFlexibility.Analysis.RelativeRootJetBounds",
+    "ContinuousFlexibility.Analysis.CanonicalRootTransportBoundary"
+  ],
+  "public_declarations": [
+    "RootPhysicalFieldJetBound.from_zero",
+    "CanonicalRootRelativeJetFamily",
+    "n04b_exists_common_root_relative_positiveJets"
+  ],
+  "new_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointPhysicalJets.lean",
+      "sha256": "2690e6c47e4557ba97eb37f91c00573f6d21cd18dd5dc6d40fbafb662861ad45",
+      "blob": "b47919889191d8709da04bd63f75f24e90a064ef",
+      "lines": 218
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBounds.lean",
+      "sha256": "04041d7f3ff5aa25e69fd8dde13e3895fefac9daee50044b720c530c58fc6af5",
+      "blob": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+      "lines": 199
+    }
+  ],
+  "installed_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedInverseJets.lean",
+      "sha256": "f47f1852c7b9358d2a65d7fcad9e70ad9712798ce4d314113d31e5ea0f7aa2a2",
+      "blob": "278df1dda278aadcc638141c9b1a98621e37c585",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    }
+  ],
+  "scope": [
+    "Actual canonicalCurrentPoint and canonicalReferencePoint ordinary positive jets at every physical root angle.",
+    "The same cut inverse zero-circle image is proved for either direction between two actual states.",
+    "The inverse derivatives are derived from actual local inverse germs and forward Jacobian lower; none are assumed.",
+    "Reference jets at zero displacement lift to the current state seminorm using its nonnegativity.",
+    "One common base/loss/radius precedes all components; one envelope per component/side precedes every state and angle.",
+    "No zeroth-order lift bound, changed reference/witness, final endpoint finite bound, or quantitative state-dependent identification radius."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

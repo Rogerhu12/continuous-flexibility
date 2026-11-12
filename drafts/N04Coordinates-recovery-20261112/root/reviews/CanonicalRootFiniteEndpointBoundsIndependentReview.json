@@ -1,0 +1,60 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-12T10:35:27.906755+00:00",
+  "status": "ACCEPTED_STATIC_REVIEW_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootFiniteEndpointBounds.lean",
+    "sha256": "127b77a209d6cc28a3d0d21fdab36a3250656664010df762889ada7ba89a728e",
+    "git_blob": "13749c41ebf01d6f887885d882429d7ee0d7d735",
+    "lines": 167
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootFiniteEndpointBoundsCandidateManifest.json",
+    "sha256": "62195c1a51a60b9242b9ad740840e25adbbf688986b42a0d695dff877b6f8ad5"
+  },
+  "read_scope": "All 167 lines; entire relative188 and height159, original diagonal113 plus exact one-line final correction to112, and independent final112 peer review.",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "git_blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootHeightJets.lean",
+      "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+      "git_blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootDiagonalLower.lean",
+      "sha256": "077fc6e6afb5fc2372bbc44ef8ac47f97aa5171d2eec315aa5e52bd7de3967b4",
+      "git_blob": "b89446cfbdd44ac2538909b0abec75edbcacd539",
+      "lines": 113
+    }
+  ],
+  "dependency_supersession": {
+    "module": "ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower",
+    "original_sha256": "077fc6e6afb5fc2372bbc44ef8ac47f97aa5171d2eec315aa5e52bd7de3967b4",
+    "final_source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/root-diagonal-inverse-order/CanonicalRootDiagonalLower.lean",
+    "final_sha256": "5f926ab21480a54b3f129a50cc99998a178965671c9f266f79c6d522622b4399",
+    "public_headers_unchanged": true,
+    "review": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalRootDiagonalLowerIndependentReview.json",
+    "review_sha256": "0c10e99b46c9069ba007a5d6c84b17a6955d647db44093b64375ca6b008cf481",
+    "reason": "The exact pinned inverse inequality expects 1<=a*M. The original final commutation to M*a is removed; the finite endpoint consumer uses the identical public theorem."
+  },
+  "findings": [
+    "The base is raised once to dominate both input bases and n+2+relativeLoss and n+heightLoss, before any component. The min radius supplies simultaneous valid neighborhoods and low pair grading<=1.",
+    "Finite envelopes 1+sum(2*A k) are positive, at least one and dominate every required finite order. They are chosen after component/side but before state.",
+    "Inverse first jets are evaluated at the actual image on the same root circle, using the all-angle inverse bounds from the unchanged relative family.",
+    "The genuine inverse derivative and actual positive triangular diagonal theorem give kappa=M^-1. No lower-diagonal premise appears in the finite endpoint theorem.",
+    "Height and reciprocal zeroth norms bound their actual values, and positive height jets use the same H envelope.",
+    "n is a construction order, fixed before the common neighborhood. Future high estimates on the selected family must retain that construction order and neighborhood."
+  ],
+  "limitations": [
+    "Component envelopes have no uniform material E0 growth assertion.",
+    "Compile pending; activation must choose the final112 provider, never the superseded113."
+  ],
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

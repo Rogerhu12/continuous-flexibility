@@ -1,0 +1,24 @@
+{
+  "kind": "reviewed_relative_root_fixed_loss_calculus_adapters",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBoundsCandidateManifest.json",
+    "sha256": "6ca86c99c3e7c16acbd37b1cc5f43712257e64018b6090369b81757c9ef324c0",
+    "blob": "39353ebb9c8a343be0784602aae04d63030b2744",
+    "lines": 58
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBounds.lean",
+    "sha256": "04041d7f3ff5aa25e69fd8dde13e3895fefac9daee50044b720c530c58fc6af5",
+    "blob": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+    "lines": 199
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/RelativeRootJetBoundsIndependentReview.json",
+    "sha256": "3f68a3928215c931d880468c3ecdd08d492c4b16848a29cce01c578c95b12cdc",
+    "blob": "0634f49383a2d3d33c26f8834ea5742b63c4384b",
+    "lines": 68
+  },
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

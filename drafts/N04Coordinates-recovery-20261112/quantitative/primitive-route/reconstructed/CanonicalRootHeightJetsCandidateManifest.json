@@ -1,0 +1,55 @@
+{
+  "kind": "static_lean_candidate_manifest",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootHeightJets.lean",
+    "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+    "git_blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+    "lines": 159
+  },
+  "actual_inputs": [
+    "same D/T/S/C/E/L/K and original Through03, field regularity, Part A/B",
+    "actual stored root field jets and both relative chart directions on common smaller neighborhoods"
+  ],
+  "conclusions": [
+    "actual currentHeightRatio and its reciprocal: all ordinary jets on actual root circles",
+    "one common base/loss/neighborhood before components, numerical envelopes before states",
+    "same stored currentPoint and current/reference heights; no height-ratio or inverse-jet estimate is assumed"
+  ],
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "git_blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBounds.lean",
+      "sha256": "04041d7f3ff5aa25e69fd8dde13e3895fefac9daee50044b720c530c58fc6af5",
+      "git_blob": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+      "lines": 199
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointPhysicalJets.lean",
+      "sha256": "2690e6c47e4557ba97eb37f91c00573f6d21cd18dd5dc6d40fbafb662861ad45",
+      "git_blob": "b47919889191d8709da04bd63f75f24e90a064ef",
+      "lines": 218
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "git_blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    }
+  ],
+  "not_claimed": [
+    "uniform polynomial growth in E0 across components",
+    "state-uniform coefficient-identification collar",
+    "Lean compilation or CI success"
+  ],
+  "execution": {
+    "compiled": false,
+    "edited_checkout": false,
+    "changed_active_state": false
+  }
+}

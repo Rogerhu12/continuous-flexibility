@@ -1,0 +1,50 @@
+{
+  "kind": "actual_fixed_collar_radial_high_linear_jet_envelope",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceLinearJetEnvelope.lean",
+    "sha256": "4f5ddf3cecb3af6c0274ad534fb90f5c103be4da4795f40de16a18f5e730a9ac",
+    "blob": "88bfd907ef16a3a10f1bc338bfb701177d099b5e",
+    "lines": 205
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/PositiveReferenceLinearJetEnvelope.lean",
+  "public_declarations": [
+    "exists_positiveReferenceMiddleWeight_jet_bound",
+    "exists_balancedPositiveReferenceSlope_linear_jet_envelope",
+    "exists_parameterizedPositiveReferenceCoordinate_linear_jet_envelope"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceAffineDifference.lean",
+      "sha256": "1ae302e2845baf2ed60c9728bc729f5e75a9f4548351c6c3b7fa0588bba87f56"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RadialPrimitiveJetBounds.lean",
+      "sha256": "f4c2d94999dea6cc36293ec291047e1465cae322d87771bb9017bf8e7cc80a89"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorBounds.lean",
+      "sha256": "75f4c39420744a25ee50f3e159072f390a757a290718524f78829b9d2be1f40a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/WeightedAngularPrimitiveJets.lean",
+      "sha256": "de3836981e2eb40d94fa5d0d88d360266f8c664fd18b0d1356c1f7c3b0cf32ea"
+    }
+  ],
+  "claims": [
+    "The derivatives of the actual fixed middle cutoff have C(N)*U^N bounds when the selected inverse width is at most U.",
+    "The angular jets of the exact mass integral divided by the actual middle mass are at most 2B: integration length cancels against the genuine I>=width/2 lower bound.",
+    "The exact balanced slope has every mixed derivative through N at most C(N)*U^N*B. High data B stay linear.",
+    "The existing normalized radial coordinate minus fst has every full derivative through N bounded by C(N)*(1+width)*U^N*B, where B bounds the actual endpoint-slope deviation jets. The width, total mass, interval, and map are unchanged."
+  ],
+  "limitations": [
+    "The endpoint-slope deviation bound is a genuine intermediate source quantity, not a final transport or numerator bound. Its explicit Taylor trace instantiation and same-witness material estimate are subsequent steps.",
+    "All constants precede U, B, width, interval, and source data. No new collar or reference-state choice is made."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

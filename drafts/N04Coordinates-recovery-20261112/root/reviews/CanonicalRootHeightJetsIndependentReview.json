@@ -1,0 +1,56 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-12T10:32:23.860822+00:00",
+  "status": "ACCEPTED_STATIC_REVIEW_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootHeightJets.lean",
+    "sha256": "79167a67ec213c3cff6fbcad6db34eeac598ae2899e8a10c2a763c2da111c68a",
+    "git_blob": "39ccec5461527b3e3cd7e7fa07b86c34bd961a82",
+    "lines": 159
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootHeightJetsCandidateManifest.json",
+    "sha256": "1e366ccc79098357c44cbcf552a7c1faa282efb54907e0be7d23f238637880fb"
+  },
+  "read_scope": "Entire 159-line source and all four exact dependency files (188,199,218,90 lines). The longer dependency read was completed with a separate untruncated tail read.",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootRelativeJets.lean",
+      "sha256": "1d153804a17ecfdf770509fe69ddab60c7ad5bcbaaacef233d5414e697876c2a",
+      "git_blob": "8934cb13451280c1f521ef5a5512ac37aad1f3b3",
+      "lines": 188
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RelativeRootJetBounds.lean",
+      "sha256": "04041d7f3ff5aa25e69fd8dde13e3895fefac9daee50044b720c530c58fc6af5",
+      "git_blob": "37e7d9efa9f483a2f7edee5a5037bb611729583c",
+      "lines": 199
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointPhysicalJets.lean",
+      "sha256": "2690e6c47e4557ba97eb37f91c00573f6d21cd18dd5dc6d40fbafb662861ad45",
+      "git_blob": "b47919889191d8709da04bd63f75f24e90a064ef",
+      "lines": 218
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "git_blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "lines": 90
+    }
+  ],
+  "findings": [
+    "The relative current transport maps each actual root circle to itself by canonicalCurrentPoint_root_radial on the unchanged K. The current physical height jets are evaluated at that same actual image angle.",
+    "The reference fields use the same K and reference state. RootPhysicalFieldJetBound.from_zero monotonically lifts their zero-displacement estimates without changing their values or derivatives.",
+    "The common base and radius combine both input neighborhoods and the pointwise product-composition low order before m/side/z. The new epsilon is at most one half, so the actual pair grading low order is at most one.",
+    "The common component envelope A+R simultaneously dominates root height/inverse height and both relative chart directions. The single product theorem is called with Href and inverse Hcurrent, then inverse Href and Hcurrent.",
+    "The actual currentHeightRatio equals these products. Reciprocal rewriting uses inv_div, so no extra nonzero or reciprocal-derivative hypothesis is introduced; positivity/smoothness are separately supplied by the actual closed geometry.",
+    "All loss increases are by monotonicity of the same pair grading; no zeroth-order bound on an unbounded angular lift is assumed."
+  ],
+  "limitations": [
+    "Constants remain component dependent; this does not prove uniform E0 growth.",
+    "No assertion of Lean compilation, parent completion, or actual finite-endpoint factory activation."
+  ],
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

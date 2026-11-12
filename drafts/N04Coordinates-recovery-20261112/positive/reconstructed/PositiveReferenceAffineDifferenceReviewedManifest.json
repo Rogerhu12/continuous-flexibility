@@ -1,0 +1,60 @@
+{
+  "kind": "actual_fixed_width_positive_reference_affine_difference",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceAffineDifference.lean",
+    "sha256": "1ae302e2845baf2ed60c9728bc729f5e75a9f4548351c6c3b7fa0588bba87f56",
+    "blob": "b7b7d255836bc257826c18aa863ff386ba2b9394",
+    "lines": 163
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/PositiveReferenceAffineDifference.lean",
+  "public_declarations": [
+    "positiveReferenceSlopeDeviation",
+    "balancedPositiveReferenceSlope",
+    "contDiff_positiveReferenceSlopeDeviation",
+    "contDiff_balancedPositiveReferenceSlope",
+    "parameterizedPositiveReferenceCoordinate_sub_fst",
+    "positiveReferenceMiddleMass_inv_le"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RadialPrimitiveJetBounds.lean",
+      "sha256": "f4c2d94999dea6cc36293ec291047e1465cae322d87771bb9017bf8e7cc80a89"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceIdentity.lean",
+      "sha256": "bea24325424288605021e73c8a7340b822333a25acbcdfbd824bc372a9ae8be2"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ParameterizedPositiveReference.lean",
+      "sha256": "14cb69364198806cea470994667a7db039b731a0532e32160a80a6688eb7c5cf"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceBlend.lean",
+      "sha256": "dae6f930520d471225ec804a00cfedecc452d1b147a4298f0cb3a1f4ca58da54"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveEndpointCutoffIntegral.lean",
+      "sha256": "4b1428d006b01306a363d5b972e1f219a15ea5cf1d1a17b4fe8c570143ebef63"
+    }
+  ],
+  "claims": [
+    "The actual displayed unit-reference radial coordinate minus fst equals the radial primitive of its endpoint slope deviations with the exact old fixed mass correction.",
+    "The denominator is the original positiveReferenceMiddleMass; it depends only on interval and already selected width, not on the varying endpoint data.",
+    "When 4 delta is at most the width, the actual denominator inverse is at most 2/width, by the actual cutoff complement integral lower bound.",
+    "All identities hold for the same actual coordinate on the entire plane; no width or mass is reselected."
+  ],
+  "limitations": [
+    "This affine identity is the production bridge for subsequent high-linear bounds. It does not assert final numerator/material estimates."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_CI_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceAffineDifferenceCandidateManifest.json",
+    "sha256": "cdec3873ee37065d66ed295e59432cf7bc1f5fb5e5020a6168a71fe13623288c"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/PositiveReferenceAffineDifferenceIndependentReview.json",
+    "sha256": "472bd8b95546d42e1e9f9390e52b5c25e5225f35af979609058683e2e517e582"
+  }
+}

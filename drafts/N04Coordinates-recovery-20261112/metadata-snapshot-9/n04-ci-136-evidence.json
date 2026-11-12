@@ -1,0 +1,21 @@
+{
+  "label": 136,
+  "head": "3dbed841d8a8b62feaab8dc4572626a2dacf7cca",
+  "tree": "d9f34bf84b160803691e784164e492ef38a08aef",
+  "run": 43200026215,
+  "job": 131120712780,
+  "status": "failure",
+  "run_status": "completed",
+  "checked_at": "2026-11-12T10:31:39.669005+00:00",
+  "compiled_modules": 3193,
+  "total_modules": 3200,
+  "blueprint": "skipped",
+  "raw_log": "n04-ci-136.log",
+  "raw_sha256": "1d74ffd863ca867ae821e8a21e3a3af438b77bda8e6247f0745e6b850c12a3a8",
+  "unique_errors": 2,
+  "errors_file": "n04-ci-136-errors.json",
+  "errors_sha256": "da02d79a97dbea67513d9bdf3a7d8b8eb204f311deecf24e47d0f5cedbbd74e6",
+  "failing_modules": [
+    "WholePositiveTransportAssembly"
+  ]
+}

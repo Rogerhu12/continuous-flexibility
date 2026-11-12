@@ -1,0 +1,75 @@
+{
+  "kind": "actual_global_fields_same_atlas_reference_piece_agreement_candidate",
+  "status": "UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "author": "/root/audit_coordinates",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalGlobalReferenceAgreement.lean",
+  "module_path": "src/ContinuousFlexibility/Analysis/WholeCanonicalGlobalReferenceAgreement.lean",
+  "blob": "c483dce90a644173c39eb795d86c8c6033654529",
+  "sha256": "6fe479b284d9e6cbd0a0910769da46e84daaeee1403555cb9183df4103eb14bb",
+  "lines": 218,
+  "imports": [
+    "ContinuousFlexibility.Analysis.WholeCanonicalAtlasReferencePartition",
+    "ContinuousFlexibility.Analysis.WholeCanonicalGlobalSymmetries"
+  ],
+  "public_declarations": [
+    "ContinuousFlexibility.Analysis.n04WholeCanonical_global_relative_reference_agreement",
+    "ContinuousFlexibility.Analysis.n04WholeCanonical_global_relative_transport_qualitative"
+  ],
+  "inspection_baseline": {
+    "commit": "3dbed841d8a8b62feaab8dc4572626a2dacf7cca",
+    "tree": "d9f34bf84b160803691e784164e492ef38a08aef",
+    "no_CI_claim": true
+  },
+  "prerequisite_reviewed_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalGlobalRegularityReviewedManifest.json",
+      "sha256": "ee4b8207d766f3dd0592bfb3ab019af4e9e04a42e7f6a19d6e2ab4bd118aa4b1"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/global-selected-symmetries/WholeCanonicalGlobalSymmetriesReviewedManifest.json",
+      "sha256": "f5285f38bb85f5f4e13307266ebc4d16fa7407157d9193a3980bd467ec50b8ad"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalReferenceAndGeometryReviewedManifest.json",
+      "sha256": "f2ccf9a2452809d880df0cde718d309dc74638da0c916d5da4dfe7d9b19c130a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentLocalAndNegativeSymmetriesReviewedManifest.json",
+      "sha256": "f58cc1dc9769d07543f54b685b3b4783dd17f4d853f3284ec77f8d2b42d52b54"
+    }
+  ],
+  "dependency_closure": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalGlobalReferenceAgreementDependencyClosure.json",
+    "sha256": "9050b4796833a268d8aa087f6923a6ba1a37cb7ca92b57cb04c7e92229e613ad"
+  },
+  "closure_summary": {
+    "project_nodes": 523,
+    "missing": [],
+    "cycles": [],
+    "held_source_count": 6
+  },
+  "construction_checks": [
+    "K is exactly n04bActualTypedAtlas from the same hT/hS/hN/hfield and original enumeration.",
+    "W uses exactly the supplied common sigma/tau/Q family, original negative fields and the fixed whole-component enumeration.",
+    "Actual reference radii and n04bActualReferenceCut_mem put each negative reference half inside its true original component.",
+    "The radius selector retains the actual whole-negative field; both whole-negative and stored half fields equal the proved common travel transition and height ratio.",
+    "On positive pieces the same family reference sigma=id and Q=1 plus actual geometry.left_inverse identify the atlas current point and height ratio.",
+    "The n=3 corollary combines existing ordinary regularity, annular MapsTo, period/reflection, positivity and the proved same-atlas agreement."
+  ],
+  "excluded_assumptions": [
+    "No final reference-piece agreement premise.",
+    "No PartB or CanonicalPrimitiveGeometry premise.",
+    "No global target regularity or symmetry input.",
+    "No material growth or absolute optical-scale bound conclusion."
+  ],
+  "name_collision_check": {
+    "new_count": 2,
+    "installed_exact_decl_name_matches": []
+  },
+  "verification": {
+    "compiled": false,
+    "source_dependency_bytes_modified": false,
+    "default_heartbeat_budget_preserved": true,
+    "checkout_index_ref_CP_authority_CI_changed": false
+  }
+}

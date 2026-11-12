@@ -1,0 +1,57 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root",
+  "reviewed_at": "2026-11-12T10:35:09.603416+00:00",
+  "status": "ACCEPTED_STATIC_REVIEW_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceLinearJetEnvelope.lean",
+    "sha256": "4f5ddf3cecb3af6c0274ad534fb90f5c103be4da4795f40de16a18f5e730a9ac",
+    "blob": "88bfd907ef16a3a10f1bc338bfb701177d099b5e",
+    "lines": 205
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceLinearJetEnvelopeCandidateManifest.json",
+    "sha256": "3fa23d2ce2f7a4d307a9b25033e33f1d38e0e2d2d9a265f3cc34e812822aaa53"
+  },
+  "read_scope": "Complete 205 lines; exact affine163 and radial104 already read in full; BoundaryTaylorBounds in full; mixed-subtraction, parametric integration and pinned norm-integral interfaces inspected.",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceAffineDifference.lean",
+      "sha256": "1ae302e2845baf2ed60c9728bc729f5e75a9f4548351c6c3b7fa0588bba87f56"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RadialPrimitiveJetBounds.lean",
+      "sha256": "f4c2d94999dea6cc36293ec291047e1465cae322d87771bb9017bf8e7cc80a89"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorBounds.lean",
+      "sha256": "75f4c39420744a25ee50f3e159072f390a757a290718524f78829b9d2be1f40a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Scalar/WeightedAngularPrimitiveJets.lean",
+      "sha256": "de3836981e2eb40d94fa5d0d88d360266f8c664fd18b0d1356c1f7c3b0cf32ea"
+    }
+  ],
+  "findings": [
+    "The fixed cutoff is exactly the degree-zero boundary Taylor basis. Its a-th derivative has the actual inverse-width power, bounded by U^N using U>=1 and a<=N.",
+    "A finite sum of basis constants supplies C(N) before the collar, interval or input data. The constant term is included even at order zero.",
+    "The angular derivative of the actual mass passes through the same radial interval by the existing smooth parameter integral theorem. The pinned norm-integral lemma uses uIoc, correctly included into the assumed closed interval.",
+    "The actual middle mass is at least width/2 under 4 delta<=width. The interval length cancels, so the correction has angular jets <=2B without introducing a high-data-dependent denominator.",
+    "The separated radial/angular correction differentiates exactly into the product of a fixed cutoff derivative and an angular mass derivative. Subtraction smoothness is supplied.",
+    "The actual affine coordinate identity and radial primitive theorem give C(N)*(1+width)*U^N*B, keeping B linear and leaving the map/width/reference choice fixed."
+  ],
+  "limitations": [
+    "The actual endpoint slope deviation remains the explicitly named intermediate input and needs the Taylor source instantiation; no final numerator/material estimate is claimed.",
+    "Lean elaboration and default CI remain pending."
+  ],
+  "public_declarations": [
+    "exists_positiveReferenceMiddleWeight_jet_bound",
+    "exists_balancedPositiveReferenceSlope_linear_jet_envelope",
+    "exists_parameterizedPositiveReferenceCoordinate_linear_jet_envelope"
+  ],
+  "checkout_index_refs_CP_CI_authority_plan_modified": false
+}

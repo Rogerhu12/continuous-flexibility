@@ -1,0 +1,73 @@
+{
+  "kind": "independent_exact_candidate_source_and_delta_review",
+  "reviewer": "/root/quantitative_route",
+  "status": "PASSED_STATIC_REVIEW_HELD_UNCOMPILED",
+  "scope": "held",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/positive-family-projections/WholePositiveTransportPolynomialAssembly.lean",
+    "sha256": "dbc1d1e0deeb5f38a5ec27dbf4c9d8aee811fd23037c62879327e0563634514e",
+    "git_blob": "d44d39e551fb739c24effc81ea51215d04f53cc4",
+    "lines": 199
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/positive-family-projections/WholePositiveTransportPolynomialAssembly.base.lean.txt",
+    "sha256": "06d270ae78749525cfe1fecdf6707bc9af3bdcedfcaf36d1399e4fc4f0759cec",
+    "git_blob": "38183c65d2553465ee8e4c47b743a44b73ee2b7e",
+    "lines": 196
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/positive-family-projections/WholePositiveTransportPolynomialAssemblyProjectionCompatibilityCandidateManifest.json",
+    "sha256": "fa973040f7fb42ad71982e3bbdd3065f1ca8ea437d61e524ca62790fab6b75d1",
+    "git_blob": "97e4f5a7582b5bf985e64a8270f9b0cf42750ff0",
+    "lines": 43
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/positive-family-projections/WholePositiveTransportPolynomialAssembly.diff",
+    "sha256": "90c347c2c5db429eb49f442a543a2fa6e73b8e7822c0587f0362df5925a72c3a",
+    "git_blob": "fee2226b528546679f5fada173ba7bbf67c86033",
+    "lines": 23
+  },
+  "actual_git_check": null,
+  "read_scope": "Complete candidate, exact two-block delta, both complete cached CI136 diagnostics, actual scalar log and one-sided family provider interfaces. Held polynomial source was read completely and is a separate future candidate.",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/EndpointHeightLogJets.lean",
+      "sha256": "5615954fb74fa5b71c151cd6606821dfebe2b28e8771dd1f4bfeedae9210613f",
+      "git_blob": "9b1033774e04bad65b1af697be24d32458d8a203",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorHeight.lean",
+      "sha256": "01310d8587084aaf93a2a39d2f81fa8318ca9ff7aa2bf1d4d5e38c7adbbd8a20",
+      "git_blob": "bce1fccb166cc062daea95efbc9c8b4dbe85ab3b",
+      "lines": 169
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveHeightTaylorInterpolation.lean",
+      "sha256": "6fadddd6bf2cdefc752ca061f2c1db8a5ee38ab8e9c11ba833db7616d755b38a",
+      "git_blob": "5af54b2743a82ffa3a03796ab7bfe6b14c092812",
+      "lines": 205
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OneSidedWholeComponentTransport.lean",
+      "sha256": "52648a5be5552f3e1e4be00517425ad97590a9f656bbcff6433b4bd7839d4a9c",
+      "git_blob": "59c088961e44cc8c2f265831f64c71700c8f9dcb",
+      "lines": 192
+    }
+  ],
+  "findings": [
+    "The typed PolarPoint first projection elaborates the actual reflected pair equality independently of the expected X-alias equality; simp only [X] then gives exactly the original radial evenness. The second coordinate is not required to equal its reflection.",
+    "The changed target is definitionally the original positiveHeightTaylorData: its own boundaryHeightLogRatio with reference height one is precisely the function p ↦ log(q p / 1). div_one then matches the actual logarithmic envelope with the same component, endpoint, order and H.",
+    "Exactly the two specified proof-local substitutions reconstruct the entire candidate bytes from its base. Public and private declaration headers, imports, options, widths, M/Mσ/δ and reference identity are unchanged.",
+    "No other installed source or frozen held source was edited. The held polynomial variant is not asserted to have been tested by CI136."
+  ],
+  "public_declarations": [
+    "exists_wholePositiveTransport_polynomial_envelope"
+  ],
+  "execution": {
+    "compiled": false,
+    "queried_CI": false,
+    "edited_source": false,
+    "edited_checkout_index_CP_refs": false
+  }
+}

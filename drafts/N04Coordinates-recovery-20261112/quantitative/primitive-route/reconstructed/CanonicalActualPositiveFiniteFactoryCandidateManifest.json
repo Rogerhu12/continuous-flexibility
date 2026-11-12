@@ -1,0 +1,58 @@
+{
+  "kind": "actual_positive_finite_family_without_endpoint_bound_premise",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalActualPositiveFiniteFactory.lean",
+    "sha256": "8a08617e492ca5a7b3d3f50194ffd33aeeadfafffce5e2af7c16d4c02556d126",
+    "git_blob": "cda98a7e3251f9bd9b5568e54eb48e19b031f76a",
+    "lines": 135
+  },
+  "inputs": [
+    "original same hT/hS/Through03/hfield and original enumeration e",
+    "fixed construction order n; ordered c,d supplied after component endpoint envelopes"
+  ],
+  "conclusions": [
+    "derived finite bounds for old typed K on one smaller common neighborhood",
+    "same actual sources feed the existing generic finite family",
+    "one M_sigma and one delta before states, exact actual coordinate and height formulas",
+    "actual matching and reference identity; no endpoint-bound assumption remains"
+  ],
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveFiniteEndpointBounds.lean",
+      "sha256": "dd85776cacbd3bb5a4c16814d3d02d6da4b9d0ada6bc2b29ee1ab5c0996e1954",
+      "git_blob": "f8147f4ddf4e65d17405d30654c93d8ccd12dc42",
+      "lines": 133
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N04bActualAtlasInteriorCompletion.lean",
+      "sha256": "f189ff9f0ddd8a84bb6cb7a166f4463427f75a4ff994f3b2348dd48b7b2b9700",
+      "git_blob": "fbb67b770132e53b204ae4270d1b30f98e01c8b7",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveTransport.lean",
+      "sha256": "ba3f1cbee83f2e7c65f3c6c2bc9baad53f9a761e6f88cbc1342a3353e3790596",
+      "git_blob": "91eaf2ea9a38e71b0e83530b089e37f79405ee0b",
+      "lines": 120
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalReferenceTransportGerms.lean",
+      "sha256": "b18169445bee7e3a84e3ff45ec152937fec1e6281a743c3da217bf466cc5b57f",
+      "git_blob": "4c649915e9d624b2c6c661ab0909f0ecee44d801",
+      "lines": 89
+    }
+  ],
+  "preservation": [
+    "Original typed K is built only from original hN/hfield; no new-neighborhood reconstruction.",
+    "Temporary PartB completion changes only unused dividedDifference; source maps/heights are definitionally oldK.",
+    "Normalization buffer centers and final material estimates remain separate."
+  ],
+  "not_claimed": [
+    "uniform E0 polynomial growth of component constants",
+    "all-order estimates for the interpolated family",
+    "Lean compilation or actual CI success"
+  ],
+  "compiled": false,
+  "checkout_modified": false
+}

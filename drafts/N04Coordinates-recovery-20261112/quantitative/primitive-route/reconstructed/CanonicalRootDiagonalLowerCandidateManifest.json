@@ -1,0 +1,44 @@
+{
+  "kind": "static_lean_candidate_manifest",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootDiagonalLower.lean",
+    "sha256": "077fc6e6afb5fc2372bbc44ef8ac47f97aa5171d2eec315aa5e52bd7de3967b4",
+    "git_blob": "b89446cfbdd44ac2538909b0abec75edbcacd539",
+    "lines": 113
+  },
+  "actual_inputs": [
+    "original Part A and cut geometry",
+    "positive numerical upper bound for the actual referencePoint first derivative at actual currentPoint(root)"
+  ],
+  "derived": [
+    "triangular actual forward derivative from root-circle radial identity",
+    "true inverse derivative relation from existing closed inverse germs",
+    "both positive diagonal entries at least the reciprocal inverse norm envelope"
+  ],
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalActualEndpointFields.lean",
+      "sha256": "1ad3a145230072398f180d696e774230f26e0b8f2d97dc5acbb33f6acc6e93eb",
+      "git_blob": "b72852cb592db98ad8a2bf5ac5c0f09c74c72962",
+      "lines": 221
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalRootTransportBoundary.lean",
+      "sha256": "061f9debff039902b318f9adb1478337bc0c0f00936a73a02314db9b8836eb8e",
+      "git_blob": "c68a526e559104ca8b71c64c708ee8526bcd67b1",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Geometry/PlanarOrientation.lean",
+      "sha256": "c73471d5d28712ed2670631e41869c73a41996d1bb90238b74f7922f36501621",
+      "git_blob": "80b0e204ff31ec795e624ed14e2951aa8c905076",
+      "lines": 139
+    }
+  ],
+  "execution": {
+    "compiled": false,
+    "edited_checkout": false,
+    "changed_active_state": false
+  }
+}

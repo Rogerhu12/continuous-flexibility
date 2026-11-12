@@ -1,9 +1,9 @@
-# N04Coordinates source preservation, snapshot 8
+# N04Coordinates source preservation, snapshot 9
 
-Frozen at 2026-11-12T10:25:07.957852+00:00. The active line parent is `3dbed841d8a8b62feaab8dc4572626a2dacf7cca`; its tree is `d9f34bf84b160803691e784164e492ef38a08aef`.
-The previous preservation commit is `e4b82376e12db310ee127046f40548b0caa94df7`.
+Frozen at 2026-11-12T10:38:37.460626+00:00. The active line parent is `1128dfa9f256a358227759001b9f13fabc21f971`; its tree is `31f999251097e7e11fbd53becc7c5693077990fa`.
+The previous preservation commit is `4578297944d5c15d522ec35ee7ab8caf5dca573b`.
 
-This snapshot stores 20 new Lean source versions and indexes 697 exact
+This snapshot stores 15 new Lean source versions and indexes 758 exact
 draft and review files. SOURCE-INDEX.json resolves unchanged bytes to their earlier immutable
 commit/path; THIS_SNAPSHOT resolves to this commit. Earlier source versions remain in the parents.
 

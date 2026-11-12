@@ -1,0 +1,47 @@
+{
+  "kind": "actual_positive_source_finite_bounds_candidate",
+  "status": "HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalPositiveFiniteEndpointBounds.lean",
+    "sha256": "dd85776cacbd3bb5a4c16814d3d02d6da4b9d0ada6bc2b29ee1ab5c0996e1954",
+    "git_blob": "f8147f4ddf4e65d17405d30654c93d8ccd12dc42",
+    "lines": 133
+  },
+  "inputs": [
+    "same actual hS/hT/Through03/hfield/PartA/B and arbitrary n",
+    "certified reference-only endpoint source choices after a common state order and radius are selected"
+  ],
+  "derived": [
+    "all six clauses of WholePositiveEndpointJetBounds for exactly the stored source maps/heights",
+    "negative source uses actual opposite root; ambient source is identity/one",
+    "one pair of component lower/upper envelopes before all states and angles",
+    "The common coordinate envelope also dominates the reciprocal common diagonal lower bound, as needed by the existing polynomial inverse-fiber factory."
+  ],
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalRootFiniteEndpointBounds.lean",
+      "sha256": "127b77a209d6cc28a3d0d21fdab36a3250656664010df762889ada7ba89a728e",
+      "git_blob": "13749c41ebf01d6f887885d882429d7ee0d7d735",
+      "lines": 167
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveTransport.lean",
+      "sha256": "ba3f1cbee83f2e7c65f3c6c2bc9baad53f9a761e6f88cbc1342a3353e3790596",
+      "git_blob": "91eaf2ea9a38e71b0e83530b089e37f79405ee0b",
+      "lines": 120
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "git_blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    }
+  ],
+  "not_claimed": [
+    "uniform E0 polynomial growth across all component constants",
+    "same material cell for a whole positive component",
+    "rebuilding any Through03 data or stored atlas"
+  ],
+  "compiled": false,
+  "checkout_modified": false
+}
