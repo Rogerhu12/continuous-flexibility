@@ -45,11 +45,18 @@ private theorem coefficientPairJets_hasDerivAt
       HasDerivAt (fun s => (J.D n (x + s • w) v).1)
         (J.D (n + 1) (x + t • w) (Fin.cons w v)).1 t ∧
       HasDerivAt (fun s => (J.D n (x + s • w) v).2)
-        (J.D (n + 1) (x + t • w) (Fin.cons w v)).2 t :=
-    ⟨(solveSmoothDirectionsPostcomp J (ContinuousLinearMap.fst ℝ ℝ ℝ)).hasDerivAt_line_jet
-      x w n v ht,
-      (solveSmoothDirectionsPostcomp J (ContinuousLinearMap.snd ℝ ℝ ℝ)).hasDerivAt_line_jet
-      x w n v ht⟩
+        (J.D (n + 1) (x + t • w) (Fin.cons w v)).2 t := by
+    constructor
+    · simpa only [solveSmoothDirectionsPostcomp,
+        ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
+        ContinuousLinearMap.coe_fst'] using
+        (solveSmoothDirectionsPostcomp J (ContinuousLinearMap.fst ℝ ℝ ℝ)).hasDerivAt_line_jet
+          x w n v ht
+    · simpa only [solveSmoothDirectionsPostcomp,
+        ContinuousLinearMap.compContinuousMultilinearMap_coe, Function.comp_apply,
+        ContinuousLinearMap.coe_snd'] using
+        (solveSmoothDirectionsPostcomp J (ContinuousLinearMap.snd ℝ ℝ ℝ)).hasDerivAt_line_jet
+          x w n v ht
   simpa only [hA] using h
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -81,7 +88,9 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_apply
     (v : Fin n → (StateDirections S × ℝ) × CircleSpace S) (p : PolarPoint) :
     hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc n x v p =
       (hN.returnCorrectionCoefficient_pointTower hS hT hR j hcell χ hχrange hcutoff hdisc p).D
-        n x v := rfl
+        n x v := by
+  simp only [N01Properties.returnCorrectionCoefficientScalarJets,
+    MultilinearMap.pi_apply, ContinuousMultilinearMap.coe_coe]
 
 theorem N01Properties.returnCorrectionCoefficientScalarJets_zero
     (x : (StateDirections S × ℝ) × CircleSpace S)

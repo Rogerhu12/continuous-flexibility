@@ -62,9 +62,7 @@ theorem N01Properties.endpointFlowCircle_derivative_decode
     apply ((differentiableAt_of_deriv_ne_zero hpos.ne').hasDerivAt.sub
       ((hasDerivAt_id θ).sub_const (opticalTravel D.w (C.left m) (rsel m)))).congr_of_eventuallyEq
     filter_upwards [] with t
-    change (S.circle (3 / 4 : ℝ)).decode (hN.endpointFlowCircle hS hT rsel hrsel z) m t =
-      C.minusFlow (liftSectorParameter S C z) m (rsel m) t -
-        (t - opticalTravel D.w (C.left m) (rsel m))
+    simp only [Pi.sub_apply, id_eq]
     exact (hN.endpointFlowCircle_decode_apply hS hT rsel hrsel z hz m t).trans
       (congrArg (fun a : ℝ =>
         C.minusFlow (liftSectorParameter S C z) m (rsel m) t - a)
