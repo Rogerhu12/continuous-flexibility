@@ -40,10 +40,11 @@ theorem N01Properties.sectorFlow_tower
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
             base (s + loss + d) z v := by
-  obtain ⟨d, horders⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  let orderData := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  let d : ℕ := orderData.choose
   refine ⟨d, ?_⟩
   intro s
-  let hdata := horders s
+  let hdata := orderData.choose_spec s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m b : ℕ) (θ r : ℝ), b ≤ s → r ∈ Ioo (C.left m) (C.right m) →

@@ -81,8 +81,9 @@ theorem N01Properties.controlTravelPartial_second_bound
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
           base (loss + d₂) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
-  obtain ⟨d₂, hdata₂⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 2
-  let hdata := hdata₂ 0
+  let data₂ := hN.2.2.2.2.2.2.2.2.2.2.2.2 2
+  let d₂ : ℕ := data₂.choose
+  let hdata := data₂.choose_spec 0
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m : ℕ) (r : ℝ), r ∈ Ioo (C.left m) (C.right m) →
@@ -206,7 +207,9 @@ theorem N01Properties.controlTravel_second_bound
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
           base (loss + d₂) 0 (fun _ : Fin 2 =>
             (singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m, (0 : ℝ))) := by
-  obtain ⟨d₂, hdata⟩ := hN.controlTravelPartial_second_bound hS hT
+  let data := hN.controlTravelPartial_second_bound hS hT
+  let d₂ : ℕ := data.choose
+  let hdata := data.choose_spec
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ m : ℕ,

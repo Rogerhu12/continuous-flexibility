@@ -196,8 +196,9 @@ theorem N01Properties.ordinaryFlowFamily_weighted_zeroth_bound
           T.E0 (T.sample (C.cell m)) ^ B *
           (1 + pairGrading (stateGrading S) realGrading (s + loss + d₀)
             (z - (C.referenceState, 0))) := by
-  obtain ⟨d₀, hdata₀⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 0
-  let hdata := hdata₀ s
+  let lossData := hN.2.2.2.2.2.2.2.2.2.2.2.2 0
+  let d₀ : ℕ := lossData.choose
+  let hdata := lossData.choose_spec s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ z ∈ stateNeighborhood S C base ε, ∀ m a b p,
@@ -247,9 +248,10 @@ theorem N01Properties.ordinaryFlowFamily_collar_directional_bounds
       D T S C base loss ε hN j x δ B₀ hB₀ hcell hinside hspeed
   obtain ⟨K, A, hK, hA, hdist⟩ := hgeom
   refine ⟨K, A, hK, hA, fun k => ?_⟩
-  obtain ⟨d, hdata_k⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  let lossData := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  let d : ℕ := lossData.choose
   refine ⟨d, fun s => ?_⟩
-  let hdata := hdata_k s
+  let hdata := lossData.choose_spec s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ m a b p,
