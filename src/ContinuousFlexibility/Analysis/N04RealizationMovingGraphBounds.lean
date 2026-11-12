@@ -24,7 +24,7 @@ theorem n04Realization_movingGraph_block_order
     (κ β offset : ℕ) (hpart : 0 < κ + β) :
     (if κ = 0 then β - 1 else β + offset) + 1 ≤ β + (offset + 1) * κ := by
   by_cases hk : κ = 0
-  · simp only [hk, if_pos rfl, Nat.mul_zero, Nat.add_zero]
+  · rw [if_pos hk, hk, Nat.mul_zero, Nat.add_zero]
     omega
   · have hm : offset + 1 ≤ (offset + 1) * κ := by
       simpa only [Nat.mul_one] using
@@ -52,9 +52,11 @@ theorem n04Realization_movingGraph_slot_bound
   have hone : 1 ≤ M * t ^ d :=
     one_le_mul_of_one_le_of_one_le hM (one_le_pow₀ ht)
   have hr : |w.2.1| ≤ M * t ^ j :=
-    (by simpa only [Real.norm_eq_abs] using norm_fst_le w.2).trans hpoint
+    (show |w.2.1| ≤ ‖w.2‖ from by
+      simpa only [Real.norm_eq_abs] using norm_fst_le w.2).trans hpoint
   have ha : |w.2.2| ≤ M * t ^ j :=
-    (by simpa only [Real.norm_eq_abs] using norm_snd_le w.2).trans hpoint
+    (show |w.2.2| ≤ ‖w.2‖ from by
+      simpa only [Real.norm_eq_abs] using norm_snd_le w.2).trans hpoint
   have hrad : t * |w.2.1| ≤ M * t ^ d := by
     calc
       _ ≤ t * (M * t ^ j) := mul_le_mul_of_nonneg_left hr ht0
