@@ -219,7 +219,7 @@ private theorem scalar_second_bound_at_right
   have hend : |deriv (deriv (F h)) 0| = |G h| := by
     simpa only [abs_neg] using congrArg abs hfull
   exact hend.trans_le (le_at_right_of_continuousOn_closed_interval
-    hlh hc.abs hinner)
+    (f := fun r => |G r|) (a := l) (b := h) (K := K) hlh hc.abs hinner)
 
 /-- The full optical second variation inherits the same uniform bound.
 The passage to the endpoint is a limit of the actual curvature primitive. -/

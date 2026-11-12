@@ -72,7 +72,8 @@ private theorem ordinaryFlowFamilyTameBounds_restrict_neighborhood
     (hE : ∀ m, 0 < T.E0 (T.sample m)) :
     OrdinaryFlowFamilyTameBounds T S C base' loss ε' := by
   intro k
-  obtain ⟨parameterLoss, horder⟩ := hbound k
+  let parameterLoss : ℕ := (hbound k).choose
+  have horder := (hbound k).choose_spec
   refine ⟨parameterLoss, ?_⟩
   intro s
   let hdata := horder s
