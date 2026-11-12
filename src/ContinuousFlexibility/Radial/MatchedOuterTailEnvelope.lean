@@ -135,7 +135,10 @@ theorem matchedOuterTailEnvelope_of_radius_data
       ← outerOutwardRadius_eq_sign right (tailPhysicalEndpoint D right)] at hrobin
     have hi := hrobin H hκ hβ hcutE hend hprofile hprofileCut hu hN
       (by simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hne) z
-    simpa only [selectedBoundaryState, outerFluxState, hsign, hscale] using hi
+    have hentrance : H'.entrance = H.entrance :=
+      (H.physicalRadiusScale_fields hD hE hκ hβ hlam.ne' hcut hend
+        hprofile hprofileCut).2.2.2.2
+    simpa only [hentrance, selectedBoundaryState, outerFluxState, hsign, hscale] using hi
   · have hVeq : H'.V = fun x => H.V (x / κ) :=
       (H.physicalRadiusScale_fields hD hE hκ hβ hlam.ne' hcut hend
         hprofile hprofileCut).2.2.1
