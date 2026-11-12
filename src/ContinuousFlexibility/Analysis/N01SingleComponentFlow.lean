@@ -25,6 +25,30 @@ local instance n01SingleComponentFlowStateSMul (S : PhysicalSpacesData) :
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
+private theorem singleComponent_increment_add_reference
+    (m : ℕ) (r travel : ℝ) (F G : PolarPoint → ℝ)
+    (hG : ∀ θ, G (r, θ) = θ - travel) :
+    circleSingleComponentField m
+        (fun θ => mixedDerivative 0 0 (fun p => F p - G p) (r, θ)) +
+      circleSingletonField m (G (r, 0)) =
+      circleSingleComponentField m (fun θ => F (r, θ) - θ) := by
+  funext i θ
+  by_cases hi : i = m
+  · subst i
+    simp only [Pi.add_apply, circleSingleComponentField, circleSingletonField,
+      if_pos rfl, mixedDerivative, iteratedDeriv_zero]
+    rw [hG θ, hG 0]
+    ring
+  · simp only [Pi.add_apply, circleSingleComponentField, circleSingletonField,
+      if_neg hi, add_zero]
+
+private theorem singleComponent_displacement_affineLift (m : ℕ) (f : ℝ → ℝ) :
+    circleAffineLift (fun _ => 0)
+      (circleSingleComponentField m (fun θ => f θ - θ)) 1 m = f := by
+  funext θ
+  simp only [circleAffineLift, circleSingleComponentField, if_pos rfl, one_mul, add_zero]
+  exact (add_comm θ (f θ - θ)).trans (sub_add_cancel (f θ) θ)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
   (hN : N01Properties D T S C base loss ε)
@@ -94,18 +118,26 @@ theorem N01Properties.singleComponentFlowCircle_decode
     (S.circle (3 / 4 : ℝ)).decode (hN.singleComponentFlowCircle hS hT m x) =
       circleSingleComponentField m
         (fun θ => C.minusFlow (liftSectorParameter S C x.1) m x.2 θ - θ) := by
-  rw [singleComponentFlowCircle, map_add,
-    hN.singleComponentFlowIncrementCircle_decode hS hT m x hx hr, circleSingletonLinear_decode]
-  funext i θ
-  change circleSingleComponentField m _ i θ + circleSingletonField m _ i θ = _
-  by_cases hi : i = m
-  · subst i
-    simp only [circleSingleComponentField, circleSingletonField, if_pos rfl,
-      ordinaryFlowFamily, mixedDerivative, iteratedDeriv_zero]
-    rw [hN.minusFlow_reference_eq hS hT m ⟨hr.1.le, hr.2.le⟩ θ,
-      hN.minusFlow_reference_eq hS hT m ⟨hr.1.le, hr.2.le⟩ 0]
-    ring
-  · simp only [circleSingleComponentField, circleSingletonField, if_neg hi, add_zero]
+  have hadd :
+      (S.circle (3 / 4 : ℝ)).decode (hN.singleComponentFlowCircle hS hT m x) =
+        (S.circle (3 / 4 : ℝ)).decode
+          (hN.singleComponentFlowIncrementCircle hS hT m x) +
+        (S.circle (3 / 4 : ℝ)).decode
+          (circleSingletonLinear (hS.2.1 (3 / 4 : ℝ)) m
+            (C.minusFlow (C.referenceState, 0) m x.2 0)) :=
+    (S.circle (3 / 4 : ℝ)).decode.map_add
+      (hN.singleComponentFlowIncrementCircle hS hT m x)
+      (circleSingletonLinear (hS.2.1 (3 / 4 : ℝ)) m
+        (C.minusFlow (C.referenceState, 0) m x.2 0))
+  have hfields := congrArg₂ (fun u v : ℕ → ℝ → ℝ => u + v)
+    (hN.singleComponentFlowIncrementCircle_decode hS hT m x hx hr)
+    (circleSingletonLinear_decode (hS.2.1 (3 / 4 : ℝ)) m
+      (C.minusFlow (C.referenceState, 0) m x.2 0))
+  exact hadd.trans (hfields.trans
+    (singleComponent_increment_add_reference m x.2 (opticalTravel D.w (C.left m) x.2)
+      (fun p => C.minusFlow (liftSectorParameter S C x.1) m p.1 p.2)
+      (fun p => C.minusFlow (C.referenceState, 0) m p.1 p.2)
+      (hN.minusFlow_reference_eq hS hT m ⟨hr.1.le, hr.2.le⟩)))
 
 theorem N01Properties.singleComponentFlowCircle_affineLift
     (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
@@ -114,10 +146,10 @@ theorem N01Properties.singleComponentFlowCircle_affineLift
     circleAffineLift (fun _ => 0)
         ((S.circle (3 / 4 : ℝ)).decode (hN.singleComponentFlowCircle hS hT m x)) 1 m =
       C.minusFlow (liftSectorParameter S C x.1) m x.2 := by
-  funext θ
-  rw [hN.singleComponentFlowCircle_decode hS hT m x hx hr]
-  simp only [circleAffineLift, circleSingleComponentField, if_pos rfl, one_mul, add_zero]
-  ring
+  exact (congrArg (fun e : ℕ → ℝ → ℝ => circleAffineLift (fun _ => 0) e 1 m)
+    (hN.singleComponentFlowCircle_decode hS hT m x hx hr)).trans
+      (singleComponent_displacement_affineLift m
+        (C.minusFlow (liftSectorParameter S C x.1) m x.2))
 
 theorem N01Properties.singleComponentFlowCircle_positive
     (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
@@ -154,15 +186,20 @@ theorem N01Properties.singleComponentFlowInverseCircle_decode
     (hr : x.2 ∈ Ioo (C.left m) (C.right m)) (θ : ℝ) :
     (S.circle (3 / 4 : ℝ)).decode (hN.singleComponentFlowInverseCircle hS hT m x) m θ =
       Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ - θ := by
-  have hd := congrFun (congrFun (circlePositiveInversePerturbation_decode
-    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0)
-    (hN.singleComponentFlowCircle hS hT m x)
-    (hN.singleComponentFlowCircle_positive hS hT m x hx hr)) m) θ
-  have heq : circleAffineInverse (fun _ => 0) (hN.singleComponentFlowCircle hS hT m x) m =
-      Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) :=
-    congrArg (fun f : ℝ → ℝ => Function.invFun f)
+  have hd : (S.circle (3 / 4 : ℝ)).decode
+      (hN.singleComponentFlowInverseCircle hS hT m x) m θ =
+        circleAffineInverse (fun _ => 0) (hN.singleComponentFlowCircle hS hT m x) m θ -
+          (θ - 0) :=
+    congrArg (fun e : ℕ → ℝ → ℝ => e m θ)
+      (circlePositiveInversePerturbation_decode
+        (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0)
+        (hN.singleComponentFlowCircle hS hT m x)
+        (hN.singleComponentFlowCircle_positive hS hT m x hx hr))
+  have heq : circleAffineInverse (fun _ => 0) (hN.singleComponentFlowCircle hS hT m x) m θ =
+      Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) θ :=
+    congrArg (fun f : ℝ → ℝ => Function.invFun f θ)
       (hN.singleComponentFlowCircle_affineLift hS hT m x hx hr)
-  exact hd.trans (by rw [heq, sub_zero])
+  exact hd.trans (congrArg₂ (fun a b : ℝ => a - b) heq (sub_zero θ))
 
 section RadialTower
 
@@ -243,16 +280,27 @@ def N01Properties.minusFlow_inverse_radial_angularJointTower :
     SmoothDirections ((sectorNeighborhood S base ε ε ×ˢ Ioo l h) ×ˢ univ)
       (fun x : ((StateDirections S × ℝ) × ℝ) × ℝ =>
         Function.invFun (C.minusFlow (liftSectorParameter S C x.1.1) m x.1.2) x.2) := by
-  let J := hN.singleComponentFlowInverseTower hS hT m l h hl hh hdisc
+  let J : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ Ioo l h)
+      (hN.singleComponentFlowInverseCircle hS hT m) :=
+    hN.singleComponentFlowInverseTower hS hT m l h hl hh hdisc
   have hH (i : ℕ) : 0 < T.H (T.sample i) :=
     (material_circle_sample_weights_pos hT hN.1.1).2 i
-  apply (circleAffineLiftJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J (fun _ => 0) m).congrOn
+  let K : SmoothDirections ((sectorNeighborhood S base ε ε ×ˢ Ioo l h) ×ˢ univ)
+      (fun x : ((StateDirections S × ℝ) × ℝ) × ℝ => x.2 + 0 +
+        (S.circle (3 / 4 : ℝ)).decode
+          (hN.singleComponentFlowInverseCircle hS hT m x.1) m x.2) :=
+    circleAffineLiftJointDirections (hS.2.1 (3 / 4 : ℝ)) hH J (fun _ => 0) m
+  apply K.congr
   intro x hx
-  change x.2 + 0 + (S.circle (3 / 4 : ℝ)).decode
-    (hN.singleComponentFlowInverseCircle hS hT m x.1) m x.2 = _
-  rw [hN.singleComponentFlowInverseCircle_decode hS hT m x.1 hx.1.1
-    ⟨hl.trans hx.1.2.1, hx.1.2.2.trans hh⟩ x.2]
-  ring
+  let a : ℝ := x.2
+  let b : ℝ := Function.invFun (C.minusFlow (liftSectorParameter S C x.1.1) m x.1.2) x.2
+  have hd : (S.circle (3 / 4 : ℝ)).decode
+      (hN.singleComponentFlowInverseCircle hS hT m x.1) m x.2 = b - a :=
+    hN.singleComponentFlowInverseCircle_decode hS hT m x.1 hx.1.1
+      ⟨hl.trans hx.1.2.1, hx.1.2.2.trans hh⟩ x.2
+  exact (congrArg (fun y : ℝ => a + 0 + y) hd).trans
+    ((congrArg (fun y : ℝ => y + (b - a)) (add_zero a)).trans
+      ((add_comm a (b - a)).trans (sub_add_cancel b a)))
 
 end RadialTower
 

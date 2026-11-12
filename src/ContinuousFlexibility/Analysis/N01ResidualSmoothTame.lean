@@ -38,7 +38,8 @@ private theorem residual_sectorPair_withSeminorms (S : PhysicalSpacesData) :
 private theorem smoothTameOn_circle_sub
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
-    {H : CircleModelData} {p : ℕ → Seminorm ℝ E}
+    {H : CircleModelData} [∀ n, CompleteSpace (H.level n)]
+    {p : ℕ → Seminorm ℝ E}
     (hp : Monotone p) (ht : WithSeminorms p) {U : Set E} (hU : IsOpen U)
     {f g : E → H.Space}
     (hf : SmoothTameOn p H.grading U f) (hg : SmoothTameOn p H.grading U g) :
@@ -83,6 +84,8 @@ theorem N01Properties.smoothTameOn_sectorReturnTransportCircle
     withSeminorms_graded (fun j => (S.circle (3 / 4 : ℝ)).level j) (S.circle (3 / 4 : ℝ)).bond
   have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
   have hCircle := hS.2.1 (3 / 4 : ℝ)
+  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) :=
+    fun n => (hCircle.2.1 n).isComplete.completeSpace_coe
   have hγ : (0 : ℝ) < 3 / 4 := by norm_num
   have hi : HasInterpolation q := (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2
   have hflow : SmoothTameOn p q U (hN.returnFlowCircle hS hT) :=
@@ -118,6 +121,8 @@ theorem N01Properties.smoothTameOn_sectorReturnResidualCircle
     withSeminorms_graded (fun j => (S.circle (3 / 4 : ℝ)).level j) (S.circle (3 / 4 : ℝ)).bond
   have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
   have hCircle := hS.2.1 (3 / 4 : ℝ)
+  letI : ∀ n, CompleteSpace ((S.circle (3 / 4 : ℝ)).level n) :=
+    fun n => (hCircle.2.1 n).isComplete.completeSpace_coe
   have hγ : (0 : ℝ) < 3 / 4 := by norm_num
   have hi : HasInterpolation q := (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2
   have hu : SmoothTameOn p q U (hN.sectorReturnTransportCircle hS hT) :=
