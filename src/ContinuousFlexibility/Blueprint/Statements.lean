@@ -196,6 +196,19 @@ def N01PartA (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)
     r ∈ Ioo (C.left m) (C.right m) →
       |iteratedDeriv s (C.control m) r| ≤ B * T.E0 (T.sample (C.cell m)) ^ B)
 
+/-- The reference geometry used by the nonlinear estimates, retained on the
+same data as the controls and material weights. These are primitive support,
+placement and nondegeneracy assertions, not tame conclusions. -/
+def N01PrimitiveGeometry (D : ReferenceData) (T : MaterialData)
+    (S : PhysicalSpacesData) (C : NonlinearGeometryData S) : Prop :=
+  (∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (C.cell m)) ∧
+  tsupport D.chi ⊆ Ioo D.a D.b ∧
+  ∃ K : ℝ, 0 < K ∧ ∀ m r,
+    r ∈ Ioo (C.left m) (C.right m) →
+      K⁻¹ * T.E0 (T.sample (C.cell m)) ^ (-K) *
+          min (r - C.left m) (C.right m - r) ≤
+        -deriv D.w r / (r * D.w r)
+
 /-- The conjuncts of `N01Properties` about flows, charts, denominators and the type,
 on one neighbourhood. -/
 def N01PartB (D : ReferenceData) (S : PhysicalSpacesData)

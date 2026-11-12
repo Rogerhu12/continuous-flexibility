@@ -51,7 +51,7 @@ private theorem retainedMorse_radius_potential
     (innerMorseChain_buffer_subset hreal side hm (Ioo_subset_Icc_self hx))
   have hderiv : deriv (fun y => P.sideRadius side * S.chain.radius side m y) =
       fun y => P.sideRadius side * deriv (S.chain.radius side m) y :=
-    funext (fun y => deriv_const_mul_field (P.sideRadius side))
+    deriv_const_mul_field' (v := S.chain.radius side m) (P.sideRadius side)
   have hρ : liouvilleRho (fun y => P.sideRadius side * S.chain.radius side m y)
       (fun _ => 1) x = liouvilleRho (S.chain.radius side m) (fun _ => 1) x := by
     unfold liouvilleRho
@@ -90,8 +90,7 @@ def retainedMorseModelChart :
   in_core := by
     have hcore : Ioo (H.left piece) (H.right piece) ⊆ radialCore D := H.in_core piece
     rw [hleft, hright] at hcore
-    simpa only [innerMorseChainCut_zero, innerMorseChainCut_one,
-      innerMorseBufferData] using hcore
+    simpa only [innerMorseChainCut_zero, innerMorseChainCut_one, innerMorseBufferData] using hcore
   weight_identity := by
     intro x hx
     simp only [one_pow, mul_one, deriv_const_mul_field]

@@ -66,12 +66,15 @@ theorem modeLocalEquation_homogeneous_flux_hasDerivAt
     hg.continuousAt (Icc_mem_nhds hx.1 hx.2)
   have hgm : StronglyMeasurableAtFilter g (𝓝 x) volume :=
     (hg.mono Ioo_subset_Icc_self).stronglyMeasurableAtFilter isOpen_Ioo x hx
-  have hd := (intervalIntegral.integral_hasDerivAt_right hgax hgm hgc).const_add
-    (D.w a * derivWithin u (Icc a b) a)
+  have hd : HasDerivAt
+      (fun r => D.w a * derivWithin u (Icc a b) a + ∫ t in a..r, g t) (g x) x :=
+    (intervalIntegral.integral_hasDerivAt_right hgax hgm hgc).const_add
+      (D.w a * derivWithin u (Icc a b) a)
   apply hd.congr_of_eventuallyEq
   filter_upwards [isOpen_Ioo.mem_nhds hx] with r hr
   have hp' := hp r (Ioo_subset_Icc_self hr)
-  dsimp only at hp'
+  change D.w r * derivWithin u (Icc a b) r =
+    D.w a * derivWithin u (Icc a b) a + ∫ t in a..r, g t at hp'
   rw [derivWithin_of_mem_nhds (Icc_mem_nhds hr.1 hr.2)] at hp'
   exact hp'
 

@@ -55,13 +55,13 @@ theorem exists_unweighted_inverse_of_local_bounds_hardy (hw : ContDiff ℝ ∞ D
         (0 < p.val → innerChainScalarRestriction n p (fun _ => 1) 1 0 = c) ∧
         (p.val < n → innerChainScalarRestriction n p (fun _ => 1) 1 1 = c) := by
     intro p Q _
-    exact ⟨1, fun _ => congrFun (innerChainScalarRestriction_one n p) 0,
-      fun _ => congrFun (innerChainScalarRestriction_one n p) 1⟩
+    exact ⟨1, fun _ => congrFun (innerChainScalarRestriction_one_unit n p) 0,
+      fun _ => congrFun (innerChainScalarRestriction_one_unit n p) 1⟩
   have herror' : ∀ p (M : InnerRadialModelChart D G bordered j central column p),
       A.piece p = .inl M → ∀ sign : Bool,
         ‖innerTwoCutWeightedError M.kappa
           (innerChainScalarRestriction n p (fun _ => 1) 1) M.errorMatrix sign‖ ≤ η := by
-    simpa only [innerChainScalarRestriction_one] using herror
+    simpa only [innerChainScalarRestriction_one_unit] using herror
   have hS := A.fluxMatrix_isUnit_of_local_errors hw hκ (fun _ => 1)
     (fun _ => zero_lt_one) hgapweight hsep hmodels hη hηsmall herror'
   have hPambient := A.weighted_poisson_bound_hardy hw (fun _ => 1) measurable_const 1
@@ -69,20 +69,20 @@ theorem exists_unweighted_inverse_of_local_bounds_hardy (hw : ContDiff ℝ ∞ D
     (fun p M hp => (hmodels p M hp).2.2)
     (by
       intro p M hp i
-      simpa only [innerChainScalarRestriction_one, one_mul,
-        innerBorderFieldMap_weight_one, ContinuousLinearMap.id_apply] using hcolumns p M hp i)
+      simpa only [innerChainScalarRestriction_one_unit, one_mul,
+        innerBorderFieldMap_weight_one_unit, ContinuousLinearMap.id_apply] using hcolumns p M hp i)
     (by
       intro p Q _
       exact ⟨1, zero_lt_one, fun _ _ => rfl,
-        fun _ => congrFun (innerChainScalarRestriction_one n p) 0,
-        fun _ => congrFun (innerChainScalarRestriction_one n p) 1⟩)
+        fun _ => congrFun (innerChainScalarRestriction_one_unit n p) 0,
+        fun _ => congrFun (innerChainScalarRestriction_one_unit n p) 1⟩)
     hendpoints
   have hP : ‖A.poisson hw ∘L Matrix.toEuclideanCLM (n := Fin n) (𝕜 := ℝ)
       (innerInterfaceInverseSqrt A.referenceMatrix)‖ ≤ Real.sqrt cost := by
     have h := (A.weighted_poisson_norm_le_ambient hw (fun _ => 1) measurable_const 1
       (by simp) (fun _ => 1)).trans hPambient
-    simpa only [inv_one, innerSupportedWeightMultiplier_one, innerBorderFieldMap_weight_one,
-      innerBoundaryDiagonal_one, ContinuousLinearMap.id_comp, ContinuousLinearMap.comp_id]
+    simpa only [inv_one, innerSupportedWeightMultiplier_one_unit, innerBorderFieldMap_weight_one_unit,
+      innerBoundaryDiagonal_one_unit, ContinuousLinearMap.id_comp, ContinuousLinearMap.comp_id]
       using h
   have hD : ‖A.dirichlet hw‖ ≤ d := by
     have h := A.dirichlet_weighted_piece_cost hw (fun _ => 1) (fun _ => 1)
@@ -91,7 +91,7 @@ theorem exists_unweighted_inverse_of_local_bounds_hardy (hw : ContDiff ℝ ∞ D
       (fun _ => zero_le_one) (fun _ => zero_le_one) (fun _ => zero_lt_one)
       (by norm_num) (by norm_num) (by simp) (by simp) hd
       (by simpa only [one_pow, one_mul] using hdirichlet)
-    simpa only [innerRadialSupportedMultiplier, innerSupportedWeightMultiplier_one,
+    simpa only [innerRadialSupportedMultiplier, innerSupportedWeightMultiplier_one_unit,
       ContinuousLinearMap.id_comp, ContinuousLinearMap.comp_id] using h
   have hself : IsSelfAdjoint (ContinuousLinearEquiv.refl ℝ H : H →L[ℝ] H) := by
     apply ContinuousLinearMap.isSelfAdjoint_iff_isSymmetric.mpr
@@ -104,7 +104,7 @@ theorem exists_unweighted_inverse_of_local_bounds_hardy (hw : ContDiff ℝ ∞ D
     funext ξ
     rw [innerMatrixEquiv_apply]
     change innerBoundaryDiagonal (fun _ : Fin n => (1 : ℝ)) ξ = ξ
-    rw [innerBoundaryDiagonal_one, ContinuousLinearMap.id_apply]
+    rw [innerBoundaryDiagonal_one_unit, ContinuousLinearMap.id_apply]
   have hcancel : (j * Real.sqrt cost) / j = Real.sqrt cost := by
     field_simp [hj.ne'] <;> ring
   have hcorrection := A.correction_weighted_bound hw hκ (fun _ => 1)

@@ -174,7 +174,8 @@ theorem retainedMorseInnerGeometry_outer
   · change innerModelChainCuts
       (scaledMorseInnerModelCuts S.chain P.sideRadius S.chain.index k (retainedMorseCenterCuts T))
       (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k false)
-      (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k true) 0 = _
+      (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k true) 0 =
+        P.sideRadius false * S.joinInner false (S.chain.index + k)
     rw [innerModelChainCuts_first]
     exact hout false
   · have heq : (Fin.last (2 * (2 * k + 1))).succ =
@@ -183,7 +184,8 @@ theorem retainedMorseInnerGeometry_outer
       (scaledMorseInnerModelCuts S.chain P.sideRadius S.chain.index k (retainedMorseCenterCuts T))
       (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k false)
       (scaledMorseInnerOuterPoint S.chain P.sideRadius S.chain.index k true)
-      (Fin.last (2 * (2 * k + 1))).succ = _
+      (Fin.last (2 * (2 * k + 1))).succ =
+        P.sideRadius true * S.joinInner true (S.chain.index + k)
     rw [heq, innerModelChainCuts_last]
     exact hout true
 

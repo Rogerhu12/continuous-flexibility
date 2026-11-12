@@ -30,11 +30,12 @@ theorem innerMorseInnerTailSlot_pair_injective (k : ℕ) :
     omega
   · simp only [innerMorseInnerTailSlot, Bool.false_eq_true, ite_false, ite_true] at hv
     omega
-  · have hpq : p = q := by
-      apply Fin.ext
+  · apply Prod.ext
+    · rfl
+    · apply Fin.ext
+      change p.val = q.val
       change k + 1 + p.val = k + 1 + q.val at hv
       omega
-    exact congrArg (fun r : Fin k => (true, r)) hpq
 
 theorem innerMorseInnerModelSlot_cases {k : ℕ} (p : Fin (2 * k + 1)) :
     p = innerMorseInnerCenter k ∨ ∃ side q, p = innerMorseInnerTailSlot k side q := by
@@ -130,7 +131,6 @@ variable (centralModel : InnerRadialModelChart D H bordered j
   (innerModelChainPiece (innerMorseInnerCenter k)) column
   (innerModelChainPiece (innerMorseInnerCenter k)))
 
-include hB M centralModel in
 def retainedMorseModelFamily (p : Fin (2 * k + 1)) :
     InnerRadialModelChart D H bordered j center column (innerModelChainPiece p) :=
   innerMorseModelElim
@@ -138,24 +138,16 @@ def retainedMorseModelFamily (p : Fin (2 * k + 1)) :
     centralModel
     (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M) p
 
-include P hw hS G₀ hband htail hB M centralModel in
 theorem retainedMorseModelFamily_center :
     P.retainedMorseModelFamily hw hS G₀ hband H bordered j column htail hB M centralModel
       (innerMorseInnerCenter k) = centralModel :=
-  innerMorseModelElim_center
-    (β := fun p => InnerRadialModelChart D H bordered j center column (innerModelChainPiece p))
-    centralModel
-    (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M)
+  innerMorseModelElim_center _ _
 
-include P hw hS G₀ hband htail hB M centralModel in
 theorem retainedMorseModelFamily_tail (side : Bool) (p : Fin k) :
     P.retainedMorseModelFamily hw hS G₀ hband H bordered j column htail hB M centralModel
       (innerMorseInnerTailSlot k side p) =
       P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M side p :=
-  innerMorseModelElim_tail
-    (β := fun p => InnerRadialModelChart D H bordered j center column (innerModelChainPiece p))
-    centralModel
-    (P.retainedMorseTailModelChart hw hS G₀ hband H bordered j column htail hB M) side p
+  innerMorseModelElim_tail _ _ side p
 
 theorem retainedMorseTailModelChart_kappa_pos (hC : 0 < Cmodel) (side : Bool)
     (p : Fin k) (i : Fin 2) :
