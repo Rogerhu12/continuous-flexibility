@@ -47,12 +47,25 @@ theorem n05_reference_height_deriv_unitAtom
   have hline : ContDiff ℝ ∞ (fun t : ℝ => (t, (0 : ℝ))) :=
     contDiff_id.prodMk contDiff_const
   have hphi : DifferentiableAt ℝ (fun t => A (t, 0)) x :=
-    (hA.comp x hline.contDiffAt).differentiableAt (by simp)
+    (ContDiffAt.fun_comp (𝕜 := ℝ) (f := fun t : ℝ => (t, (0 : ℝ)))
+      (g := A) x hA hline.contDiffAt).differentiableAt (by simp)
   have hinv : HasDerivAt (fun t : ℝ => (t - a) / ell) ell⁻¹ r := by
-    simpa only [one_div] using ((hasDerivAt_id r).sub_const a).div_const ell
+    have hsub : HasDerivAt (fun t : ℝ => t - a) (1 : ℝ) r :=
+      (hasDerivAt_id' r).sub_const a
+    have hscale : HasDerivAt (fun t : ℝ => (ell⁻¹ : ℝ) • (t - a))
+        ((ell⁻¹ : ℝ) • (1 : ℝ)) r :=
+      HasDerivAt.fun_const_smul (ell⁻¹ : ℝ) hsub
+    simpa only [smul_eq_mul, mul_one, div_eq_mul_inv, mul_comm] using hscale
   have hd : HasDerivAt (fun t => A ((t - a) / ell, 0))
-      (deriv (fun t => A (t, 0)) x * ell⁻¹) r :=
-    hphi.hasDerivAt.comp r hinv
+      (deriv (fun t => A (t, 0)) x * ell⁻¹) r := by
+    have houter : HasFDerivAt (fun t : ℝ => A (t, 0))
+        (ContinuousLinearMap.toSpanSingleton ℝ (deriv (fun t : ℝ => A (t, 0)) x)) x :=
+      hphi.hasDerivAt.hasFDerivAt
+    have hchain := HasFDerivAt.comp_hasDerivAt (𝕜 := ℝ)
+      (l := fun t : ℝ => A (t, 0)) (f := fun t : ℝ => (t - a) / ell)
+      r houter hinv
+    simpa only [Function.comp_def, ContinuousLinearMap.toSpanSingleton_apply,
+      smul_eq_mul, mul_comm] using hchain
   have heq : (fun t => K.height (C.referenceState, 0) m (t, 0)) =
       (fun t => A ((t - a) / ell, 0)) := by
     funext t
