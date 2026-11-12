@@ -50,9 +50,15 @@ theorem oddPart_lift_displacement_jet_le
     iteratedDeriv_fun_sub (n := n) (x := θ)
       (hu.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
       (huNeg.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞)), abs_div]
-  norm_num only [abs_ofNat]
+  rw [abs_of_pos (by norm_num : (0 : ℝ) < 2)]
   apply (div_le_iff₀ (by norm_num : (0 : ℝ) < 2)).2
-  exact (abs_sub_le _ _).trans (by rw [href]; linarith)
+  have htriangle :
+      |iteratedDeriv n u θ - iteratedDeriv n (fun η => u (-η)) θ| ≤
+        |iteratedDeriv n u θ| + |iteratedDeriv n (fun η => u (-η)) θ| := by
+    simpa only [sub_zero, zero_sub, abs_neg] using
+      (abs_sub_le (iteratedDeriv n u θ) (0 : ℝ)
+        (iteratedDeriv n (fun η => u (-η)) θ))
+  exact htriangle.trans (by rw [href]; linarith)
 
 private def CircleReturnDisplacementJetBound
     {E : Type} [AddCommGroup E] [Module ℝ E]

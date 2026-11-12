@@ -58,7 +58,7 @@ theorem canonicalRootAngles_of_n03Flows
               (L.coefficients z).c (r, -L.minusFlow z m r (-θ))) /
             (L.coefficients z).a (r, -L.minusFlow z m r (-θ))) r := by
     obtain ⟨ha, hb, hc⟩ := hN03.2.2.2.1 z hz hs r (L.minusFlow z m r (-θ))
-    have hd := (hreflected.2.2.1 r hr).neg
+    have hd := (hreflected.2.2.1 r hr).fun_neg
     rw [neg_minusCharacteristicSpeed_eq_plus_of_reflection ha hb hc] at hd
     simpa only [plusCharacteristicSpeed, neg_one_mul, neg_div, sub_neg_eq_add] using hd
   have hm := canonicalGluedAiryIntegral_endpoint_of_actual_ode
@@ -69,6 +69,7 @@ theorem canonicalRootAngles_of_n03Flows
     hS hT hN01 hN03 hA hB hz hs m (σ := -1) (Or.inr rfl)
     hreflected.2.1.neg hplusFlow
   rw [hminus.1] at hm
+  simp only [Pi.neg_apply] at hp
   rw [hreflected.1, neg_neg] at hp
   constructor
   · simpa only [mul_one] using (eq_sub_iff_add_eq.mpr hm)
