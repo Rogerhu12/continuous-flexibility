@@ -35,39 +35,106 @@ attribute [local instance]
   n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
   n07aNonlinearSectorParameterSub
 
-private theorem n04Realization_unitInverse_first_norm
-    {S : PhysicalSpacesData} {K : CanonicalData S} (m : ℕ)
-    (hlen : K.left m < K.right m) {f : PolarPoint → ℝ}
+private theorem n04Realization_unitPullback_first_norm
+    {U : Set PolarPoint} (hU : IsOpen U) {ψ : PolarPoint → PolarPoint}
+    (hψ : ContDiffOn ℝ ∞ ψ U) (hmap : MapsTo ψ U CanonicalGeometry.unitStrip)
+    {c : ℝ} {f : PolarPoint → ℝ}
     (hf : ContDiffOn ℝ ∞ f CanonicalGeometry.unitStrip)
-    {M : ℝ} (hM : 1 ≤ M)
-    (hinv : |(K.right m - K.left m)⁻¹| ≤ M)
+    (hrescale : ∀ i j : ℕ, ∀ p : PolarPoint,
+      mixedDerivative i j (f ∘ ψ) p = c ^ i * mixedDerivative i j f (ψ p))
+    {M : ℝ} (hM : 1 ≤ M) (hc : |c| ≤ M)
     (hjet : ∀ p ∈ CanonicalGeometry.unitStrip, ∀ i j : ℕ, i + j ≤ 1 →
       |mixedDerivative i j f p| ≤ M)
-    {x : PolarPoint} (hx : x ∈ canonicalOpen S K m) :
-    ‖fderiv ℝ (f ∘ n07aCanonicalUnitInversePoint K m) x‖ ≤ 2 * M ^ 2 := by
+    {x : PolarPoint} (hx : x ∈ U) :
+    ‖fderiv ℝ (f ∘ ψ) x‖ ≤ 2 * M ^ 2 := by
   have hM0 : 0 ≤ M := zero_le_one.trans hM
-  have hs : ContDiffOn ℝ ∞ (f ∘ n07aCanonicalUnitInversePoint K m)
-      (canonicalOpen S K m) :=
-    hf.comp n07aCanonicalUnitInversePoint_contDiff.contDiffOn
-      (n07aCanonicalUnitInversePoint_maps hlen)
-  have hbound := norm_iteratedFDeriv_le_of_mixedDerivative
-    (isOpen_Ioo.prod isOpen_univ) hs 1 hx (pow_nonneg hM0 2)
-    (by
+  have hs : ContDiffOn ℝ ∞ (f ∘ ψ) U := hf.comp hψ hmap
+  have hbound := norm_iteratedFDeriv_le_of_mixedDerivative hU hs 1 hx
+    (pow_nonneg hM0 2) (by
       intro i j hij
-      have hpoint := n07aCanonicalUnitInversePoint_maps hlen hx
-      have hp : |(K.right m - K.left m)⁻¹ ^ i| ≤ M := by
+      have hp : |c ^ i| ≤ M := by
         have hi : i = 0 ∨ i = 1 := by omega
         rcases hi with rfl | rfl
         · simpa only [pow_zero, abs_one] using hM
-        · simpa only [pow_one] using hinv
-      rw [n07a_mixedDerivative_unitInverse, Real.norm_eq_abs, abs_mul]
-      exact (mul_le_mul hp (hjet _ hpoint i j hij.le)
+        · simpa only [pow_one] using hc
+      rw [hrescale, Real.norm_eq_abs, abs_mul]
+      exact (mul_le_mul hp (hjet _ (hmap hx) i j hij.le)
         (abs_nonneg _) hM0).trans_eq (pow_two M).symm)
   simpa only [norm_iteratedFDeriv_one, pow_one] using hbound
+
+private theorem n04Realization_unitCoordinate_first_norm
+    {U : Set PolarPoint} (hU : IsOpen U) {ψ : PolarPoint → PolarPoint}
+    (hψ : ContDiffOn ℝ ∞ ψ U) (hmap : MapsTo ψ U CanonicalGeometry.unitStrip)
+    (c : ℝ)
+    (hrescale : ∀ f : PolarPoint → ℝ, ∀ i j : ℕ, ∀ p : PolarPoint,
+      mixedDerivative i j (f ∘ ψ) p = c ^ i * mixedDerivative i j f (ψ p))
+    {f g : PolarPoint → ℝ}
+    (hf : ContDiffOn ℝ ∞ f CanonicalGeometry.unitStrip)
+    (hg : ContDiffOn ℝ ∞ g CanonicalGeometry.unitStrip)
+    (a b : ℝ) {M : ℝ} (hM : 1 ≤ M) (hb : |b| ≤ M) (hc : |c| ≤ M)
+    (hfj : ∀ p ∈ CanonicalGeometry.unitStrip, ∀ i j : ℕ, i + j ≤ 1 →
+      |mixedDerivative i j f p| ≤ M)
+    (hgj : ∀ p ∈ CanonicalGeometry.unitStrip, ∀ i j : ℕ, i + j ≤ 1 →
+      |mixedDerivative i j g p| ≤ M)
+    {x : PolarPoint} (hx : x ∈ U) :
+    ‖fderiv ℝ (fun y => (a + b * (f ∘ ψ) y, y.2 + (g ∘ ψ) y)) x‖ ≤
+      5 * M ^ 3 := by
+  have hdf := n04Realization_unitPullback_first_norm hU hψ hmap hf
+    (hrescale f) hM hc hfj hx
+  have hdg := n04Realization_unitPullback_first_norm hU hψ hmap hg
+    (hrescale g) hM hc hgj hx
+  have hpair := n07a_coordinatePair_iteratedFDeriv_bound
+    ((hf.comp hψ hmap).contDiffAt (hU.mem_nhds hx))
+    ((hg.comp hψ hmap).contDiffAt (hU.mem_nhds hx)) a b (n := 1) (by omega)
+  simp only [norm_iteratedFDeriv_one] at hpair
+  have hraw := hpair.trans (add_le_add (add_le_add
+    (mul_le_mul hb hdf (norm_nonneg _) (zero_le_one.trans hM)) le_rfl) hdg)
+  have hM23 : M ^ 2 ≤ M ^ 3 := pow_le_pow_right₀ hM (by omega)
+  have hM3 : 1 ≤ M ^ 3 := one_le_pow₀ hM
+  exact hraw.trans (by nlinarith only [hM23, hM3])
+
+private theorem n04Realization_cubicEnvelope_pack
+    {I X : Type*} (E : I → ℝ) (value : I → X → ℝ) (U : I → Set X)
+    {A : ℝ} (hA : 0 < A) (hE : ∀ m, 1 ≤ E m)
+    (hpoly : ∀ m x, x ∈ U m → ∀ M : ℝ, 1 ≤ M → A * E m ^ A ≤ M →
+      value m x ≤ 5 * M ^ 3) :
+    ∃ B : ℝ, 0 < B ∧ ∀ m x, x ∈ U m → value m x ≤ B * E m ^ B := by
+  let R : ℝ := 1 + A
+  have hR : 1 ≤ R := by dsimp only [R]; linarith only [hA]
+  have hR0 : 0 ≤ R := zero_le_one.trans hR
+  have hAR : A ≤ R := by dsimp only [R]; linarith
+  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (5 * R ^ 3) (R * 3)
+  refine ⟨B, hB, fun m x hx => ?_⟩
+  let M : ℝ := R * E m ^ R
+  have hE0 : 0 ≤ E m := zero_le_one.trans (hE m)
+  have hM : 1 ≤ M := by
+    simpa only [one_mul] using mul_le_mul hR
+      (Real.one_le_rpow (hE m) hR0) zero_le_one hR0
+  have hAM : A * E m ^ A ≤ M := mul_le_mul hAR
+    (Real.rpow_le_rpow_of_exponent_le (hE m) hAR) (Real.rpow_nonneg hE0 A) hR0
+  have he : 5 * M ^ 3 = (5 * R ^ 3) * E m ^ (R * 3) := by
+    dsimp only [M]
+    rw [mul_pow, ← Real.rpow_mul_natCast hE0 R 3]
+    ring
+  exact (hpoly m x hx M hM hAM).trans (he.trans_le (hpack _ (hE m)))
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
   {base : ℕ} {ε : ℝ}
+
+private theorem n04Realization_referenceChart_eq_unitAtoms
+    (m : ℕ) (hlen : K.left m < K.right m)
+    (hphysical : K.physicalLeft m < K.physicalRight m) :
+    K.chart (C.referenceState, 0) m = fun y =>
+      (K.left m + (K.right m - K.left m) *
+        (CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m .chartRadial ∘
+          n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) m) y,
+       y.2 +
+        (CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m .chartAngleDefect ∘
+          n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) m) y) := by
+  simpa only [n07aPhysicalAtomField, n07a_lift_zero_parameter] using
+    n07a_forwardChart_eq_rawAtoms (D := D) (T := T) (S := S) (C := C) (L := L)
+      m hlen hphysical (0 : CanonicalGeometry.Parameter S)
 
 /-- The reference differential has a genuine E0 polynomial cost. The
 same reference atoms supply the physical inverse length and canonical
@@ -81,75 +148,39 @@ theorem n04Realization_referenceForwardFirstE0_bound
       ‖fderiv ℝ (K.chart (C.referenceState, 0) m) x‖ ≤
         B * T.E0 (T.sample (K.cell m)) ^ B := by
   obtain ⟨A, hA, hjet⟩ := href.2 1
-  let R : ℝ := 1 + A
-  have hR : 1 ≤ R := by dsimp only [R]; linarith only [hA]
-  have hR0 : 0 ≤ R := zero_le_one.trans hR
-  obtain ⟨B, hB, hpack⟩ := coefficientEnvelope_pack (5 * R ^ 3) (R * 3)
-  refine ⟨B, hB, fun m x hx => ?_⟩
-  let E : ℝ := T.E0 (T.sample (K.cell m))
-  let M : ℝ := R * E ^ R
-  have hE : 1 ≤ E := hfloor m
-  have hE0 : 0 ≤ E := zero_le_one.trans hE
-  have hM : 1 ≤ M := by
-    simpa only [one_mul] using mul_le_mul hR
-      (Real.one_le_rpow hE hR0) zero_le_one hR0
-  have hM0 : 0 ≤ M := zero_le_one.trans hM
-  have hAM : A * E ^ A ≤ M := mul_le_mul
-    (by dsimp only [R]; linarith : A ≤ R)
-    (Real.rpow_le_rpow_of_exponent_le hE (by dsimp only [R]; linarith : A ≤ R))
-    (Real.rpow_nonneg hE0 A) hR0
+  apply n04Realization_cubicEnvelope_pack
+    (fun m => T.E0 (T.sample (K.cell m)))
+    (fun m x => ‖fderiv ℝ (K.chart (C.referenceState, 0) m) x‖)
+    (referencePhysicalPieceOpen S K) hA hfloor
+  intro m x hx M hM hAM
   have hp : ((1 / 2, 0) : PolarPoint) ∈ CanonicalGeometry.unitStrip := by
     constructor <;> norm_num
   have hlength : |K.right m - K.left m| ≤ M := by
     have hb := hjet m .canonicalLength (1 / 2, 0) hp 0 0 (by omega)
-    have hb' : |K.right m - K.left m| ≤ A * E ^ A := by
+    have hb' : |K.right m - K.left m| ≤ A * T.E0 (T.sample (K.cell m)) ^ A := by
       simpa only [spaces_mixedDerivative_zero, CanonicalGeometry.atom] using hb
     exact hb'.trans hAM
   have hinv : |(K.physicalRight m - K.physicalLeft m)⁻¹| ≤ M := by
     have hb := hjet m .physicalLengthInverse (1 / 2, 0) hp 0 0 (by omega)
-    have hb' : |(K.physicalRight m - K.physicalLeft m)⁻¹| ≤ A * E ^ A := by
+    have hb' : |(K.physicalRight m - K.physicalLeft m)⁻¹| ≤
+        A * T.E0 (T.sample (K.cell m)) ^ A := by
       simpa only [spaces_mixedDerivative_zero, CanonicalGeometry.atom] using hb
     exact hb'.trans hAM
-  let f : CanonicalGeometry.Atom → PolarPoint → ℝ := fun a =>
-    n07aPhysicalAtomField D T S C L K a 0 m
-  have hf (a : CanonicalGeometry.Atom) :
-      f a = CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m a ∘
-        n07aCanonicalUnitInversePoint (n07aPhysicalIntervalData K) m := by
-    simp only [f, n07aPhysicalAtomField, n07a_lift_zero_parameter]
-  have hs (a : CanonicalGeometry.Atom) :
-      ContDiffOn ℝ ∞ (f a) (referencePhysicalPieceOpen S K m) := by
-    rw [hf a]
-    exact (href.1 m a).1.comp n07aCanonicalUnitInversePoint_contDiff.contDiffOn
-      (n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData K) (hphysical m))
-  have hb (a : CanonicalGeometry.Atom) : ‖fderiv ℝ (f a) x‖ ≤ 2 * M ^ 2 := by
-    rw [hf a]
-    exact n04Realization_unitInverse_first_norm (K := n07aPhysicalIntervalData K)
-      m (hphysical m) (href.1 m a).1 hM hinv
-      (fun p hp i j hij => (hjet m a p hp i j hij).trans hAM) hx
-  have hpair := n07a_coordinatePair_iteratedFDeriv_bound
-    ((hs .chartRadial).contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx))
-    ((hs .chartAngleDefect).contDiffAt ((isOpen_Ioo.prod isOpen_univ).mem_nhds hx))
-    (K.left m) (K.right m - K.left m) (n := 1) (by omega)
-  have heq := n07a_forwardChart_eq_rawAtoms
-    (D := D) (T := T) (S := S) (C := C) (L := L)
-    m (hlen m) (hphysical m) (0 : CanonicalGeometry.Parameter S)
-  rw [n07a_lift_zero_parameter] at heq
-  have hforward : ‖fderiv ℝ (K.chart (C.referenceState, 0) m) x‖ ≤
-      M * (2 * M ^ 2) + 1 + 2 * M ^ 2 := by
-    rw [heq]
-    simp only [norm_iteratedFDeriv_one] at hpair
-    exact hpair.trans (add_le_add (add_le_add
-      (mul_le_mul hlength (hb .chartRadial) (norm_nonneg _)
-        hM0) le_rfl) (hb .chartAngleDefect))
-  have hM23 : M ^ 2 ≤ M ^ 3 := pow_le_pow_right₀ hM (by omega)
-  have hM3 : 1 ≤ M ^ 3 := one_le_pow₀ hM
-  have hpoly : M * (2 * M ^ 2) + 1 + 2 * M ^ 2 ≤ 5 * M ^ 3 := by
-    nlinarith only [hM23, hM3]
-  have he : 5 * M ^ 3 = (5 * R ^ 3) * E ^ (R * 3) := by
-    dsimp only [M]
-    rw [mul_pow, ← Real.rpow_mul_natCast hE0 R 3]
-    ring
-  exact hforward.trans (hpoly.trans (he.trans_le (hpack E hE)))
+  have hraw := n04Realization_unitCoordinate_first_norm
+    (isOpen_Ioo.prod isOpen_univ)
+    (n07aCanonicalUnitInversePoint_contDiff
+      (K := n07aPhysicalIntervalData K) (m := m)).contDiffOn
+    (n07aCanonicalUnitInversePoint_maps (K := n07aPhysicalIntervalData K) (hphysical m))
+    ((K.physicalRight m - K.physicalLeft m)⁻¹)
+    (fun f i j p => n07a_mixedDerivative_unitInverse
+      (K := n07aPhysicalIntervalData K) m f i j p)
+    (href.1 m .chartRadial).1 (href.1 m .chartAngleDefect).1
+    (K.left m) (K.right m - K.left m) hM hlength hinv
+    (fun p hp i j hij => (hjet m .chartRadial p hp i j hij).trans hAM)
+    (fun p hp i j hij => (hjet m .chartAngleDefect p hp i j hij).trans hAM) hx
+  exact (congrArg (fun F : PolarPoint → PolarPoint => ‖fderiv ℝ F x‖)
+    (n04Realization_referenceChart_eq_unitAtoms (D := D) (T := T) (L := L)
+      m (hlen m) (hphysical m))).le.trans hraw
 
 private theorem n04Realization_actual_inverse_norm
     {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E]

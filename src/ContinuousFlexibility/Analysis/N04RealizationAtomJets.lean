@@ -118,6 +118,16 @@ theorem n04Realization_parameterGrading_lift (S : PhysicalSpacesData)
     pairGrading_apply, sectorGrading, Seminorm.comp_apply, Submodule.subtype_apply,
     realGrading, coe_normSeminorm, Real.norm_eq_abs]
 
+private theorem n04Realization_allOrderEnvelope_mono
+    {P Q : ℕ → ℕ → ℝ → Prop}
+    (hP : ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ P d s B)
+    (hPQ : ∀ d s B, P d s B → Q d s B) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ Q d s B := by
+  obtain ⟨d, hd⟩ := hP
+  refine ⟨d, fun s => ?_⟩
+  obtain ⟨B, hB, hbound⟩ := hd s
+  exact ⟨B, hB, hPQ d s B hbound⟩
+
 /-- The all-atom bound in the native sector-parameter coordinates of
 CurrentJets. This is the same estimate, with no extra loss. -/
 theorem n04Realization_sectorAtom_jet_bounds
@@ -131,10 +141,12 @@ theorem n04Realization_sectorAtom_jet_bounds
         i + j ≤ s →
           |mixedDerivative i j (atom D T S C L K (liftSectorParameter S C z) m a) p.val| ≤
             B * T.E0 (T.sample (K.cell m)) ^ B * (1 + parameterGrading S (s + d) z) := by
-  obtain ⟨d, hbounds⟩ := n04Realization_unitAtom_jet_bounds hD hT hrefState href hcur hfloor
-  refine ⟨d, fun s => ?_⟩
-  obtain ⟨B, hB, hb⟩ := hbounds s
-  refine ⟨B, hB, fun z hz m a p i j hij => ?_⟩
+  refine n04Realization_allOrderEnvelope_mono
+    (P := fun d s B => N04RealizationUnitAtomBoundAtOrder D T S C L K base d ε s B)
+    (hP := n04Realization_unitAtom_jet_bounds
+      (S := S) (C := C) (L := L) (K := K) (base := base) (ε := ε)
+      hD hT hrefState href hcur hfloor) ?_
+  intro d s B hb z hz m a p i j hij
   have h := hb (liftSectorParameter S C z)
     (liftSectorParameter_mem_stateNeighborhood hz le_rfl)
     (hrefState.liftSectorParameter_sector z) m a p.val p.property i j hij
