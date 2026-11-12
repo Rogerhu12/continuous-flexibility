@@ -49,6 +49,8 @@ theorem N01Properties.smoothTameOn_returnCorrectionVelocity_at_residual
   have ht : WithSeminorms p := sectorPairGrading_withSeminorms S
   have htop : WithSeminorms H.grading :=
     withSeminorms_graded (fun n => H.level n) H.bond
+  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × H.Space) :=
+    (withSeminorms_pairGrading ht htop).toLocallyConvexSpace
   have hU : IsOpen U := sectorNeighborhood_isOpen S base ε ε
   have hid : SmoothTameOn p p U (fun z : StateDirections S × ℝ => z) :=
     smoothTameOn_restrict_open

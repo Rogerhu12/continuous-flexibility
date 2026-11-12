@@ -320,36 +320,37 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       (lam := lam) (P := P) hS hT j hcell l h hl hh hlam hP hpositive
   let JL₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fL₀ m) := characteristicData.choose
-  let JL : ∀ m, SmoothDirections (U ×ˢ V m) (fL m) := fun m =>
-    SmoothDirections.fstParameter
+  run_tac Lean.logInfo "N02N03 Velocity: characteristic-choice"
+  let liftTower : ∀ (m : ℕ) (f : E₀ × PolarPoint → ℝ),
+      SmoothDirections (U₀ ×ˢ V m) f →
+        SmoothDirections (U ×ˢ V m)
+          (fun x : E × PolarPoint => f (x.1.1, x.2)) :=
+    fun m f K => SmoothDirections.fstParameter
       (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
-      (U := U₀) (V := V m) (f := fL₀ m) (JL₀ m) hU₀ (hV m)
+      (U := U₀) (V := V m) (f := f) K hU₀ (hV m)
+  run_tac Lean.logInfo "N02N03 Velocity: shared-lift"
+  let JL : ∀ m, SmoothDirections (U ×ˢ V m) (fL m) :=
+    fun m => liftTower m (fL₀ m) (JL₀ m)
   let JA₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (fA₀ m) := fun m =>
     hN.returnFlowInverseSlope_parameterSpatialTower
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT m (l m) (h m) (hl m) (hh m) (hdisc m)
-  let JA : ∀ m, SmoothDirections (U ×ˢ V m) (fA m) := fun m =>
-    SmoothDirections.fstParameter
-      (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
-      (U := U₀) (V := V m) (f := fA₀ m) (JA₀ m) hU₀ (hV m)
+  let JA : ∀ m, SmoothDirections (U ×ˢ V m) (fA m) :=
+    fun m => liftTower m (fA₀ m) (JA₀ m)
   let J₀₀ : ∀ m, SmoothDirections (U₀ ×ˢ V m) (f₀₀ m) := fun m =>
     hN.returnCorrectionPulledResidual_parameterSpatialTower
       (D := D) (T := T) (S := S) (C := C) (R := R)
       (base := base) (loss := loss) (ε := ε)
       hS hT m (l m) (h m) (hl m) (hh m) (hdisc m) χ hχ hχrange hR
-  let J₀ : ∀ m, SmoothDirections (U ×ˢ V m) (f₀ m) := fun m =>
-    SmoothDirections.fstParameter
-      (E := E₀) (F := CircleSpace S) (P := PolarPoint) (G := ℝ)
-      (U := U₀) (V := V m) (f := f₀₀ m) (J₀₀ m) hU₀ (hV m)
+  let J₀ : ∀ m, SmoothDirections (U ×ˢ V m) (f₀ m) :=
+    fun m => liftTower m (f₀₀ m) (J₀₀ m)
   let J₁ : ∀ m, SmoothDirections (U ×ˢ V m) (f₁ m) := fun m =>
     hN.returnCorrectionPulledDisplacement_parameterSpatialTower
       (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
       hS hT m (l m) (h m) (hl m) (hh m) (hdisc m) χ hχ hχrange
-  let fZ : Fin 2 → ℕ → E × PolarPoint → ℝ := Fin.cases
-    (fun m x => returnCorrectionPulledDisplacementLinear S C χ
-      (liftSectorParameter S C x.1.1) m x.2 (R.residual (liftSectorParameter S C x.1.1)))
-    (Fin.cases (fun m x => returnCorrectionPulledDisplacementLinear S C χ
-      (liftSectorParameter S C x.1.1) m x.2 x.1.2) Fin.elim0)
+  run_tac Lean.logInfo "N02N03 Velocity: pulled-towers"
+  let fZ : Fin 2 → ℕ → E × PolarPoint → ℝ :=
+    Fin.cases f₀ (Fin.cases f₁ Fin.elim0)
   let JZ : ∀ c m, SmoothDirections (U ×ˢ V m) (fZ c m) :=
     Fin.cases J₀ (Fin.cases J₁ (fun i => Fin.elim0 i))
   let JC : ∀ m, SmoothDirections (U ×ˢ V m) (fC m) := fun m =>
@@ -487,9 +488,9 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
         (hN.2.2.1.liftSectorParameter_sector x.1) hR χ m (hχ m) (hχrange m)
         ρ y ⟨(hl m).trans hy.1.1, hy.1.2.trans (hh m)⟩
     fin_cases c
-    · simpa only [fZ, Fin.cases_zero, neg_mul] using
+    · simpa only [fZ, f₀, f₀₀, Fin.cases_zero, neg_mul] using
         hrec (R.residual (liftSectorParameter S C x.1))
-    · simpa only [fZ, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
+    · simpa only [fZ, f₀, f₀₀, f₁, Fin.cases_succ, Fin.cases_zero, neg_mul] using hrec x.2
   run_tac Lean.logInfo "N02N03 Velocity: transport"
   refine ⟨B, ?_⟩
   exact transportVelocity_flatOfGrowth
