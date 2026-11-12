@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "fixed_reference_actual_N01a_context_candidate",
+  "status": "HELD_UNCOMPILED_PEER_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean",
+    "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+    "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+    "lines": 64
+  },
+  "target_module": "ContinuousFlexibility.Analysis.N01aFixedReferencePrimitiveContext",
+  "upstream_commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFinalAssembly.bb419-base.lean.txt",
+    "sha256": "b636fd17c2c522298186a8e32cbdcd675f9af06272c98ac6113e4cd34474e0c4",
+    "blob": "12fe61fda080d71d5d14fce29367dcebc3216705",
+    "lines": 61
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.diff",
+    "sha256": "0e14af52eaa33f7372bc9c5118bbe3658a5a56dda9b8a97fde3d460bf671ea17",
+    "blob": "542db45420e1f5622b767a4eedb0cfe367465ba2",
+    "lines": 61
+  },
+  "providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFinalAssembly.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "12fe61fda080d71d5d14fce29367dcebc3216705",
+      "sha256": "b636fd17c2c522298186a8e32cbdcd675f9af06272c98ac6113e4cd34474e0c4",
+      "lines": 61
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualControlAssembly.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "119d410c2be9e6571c6e7d0a6d88fa1173929b49",
+      "sha256": "c95a91343949ff18a709e340124d3827363054315e183771d7a3eab66909bca5",
+      "lines": 80
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aMaterialContext.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "f02d82fa4be881168308804f6dd6fb62465ea20a",
+      "sha256": "31541bf9682bf5b1da934bd058bb9002f75bef0318f9232e248a04e76f59507e",
+      "lines": 45
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aOpticalProfile.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "2e4452152c60ee87c507d4f93ecff7bb1b3bafe8",
+      "sha256": "b71e4ef5c0d3a7d7537f054019b6067d22f343fec015957269927b3c9511ec84",
+      "lines": 177
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aReferenceHeight.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "160cfbe865384d205dc0fe1774fed0f15a61bea1",
+      "sha256": "265348b2fb3edbf1710f19080f27c0c5c4cf07af669ff9cdc9d0bf02df7d1d1e",
+      "lines": 116
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SpacesConclusion.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "2967d724521f80c297d001de4403c38b5664105e",
+      "sha256": "1a4e0c577d8bd116a2e2679e5dfde41db0f498a9763bd26074fb482bc62ed745",
+      "lines": 20
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameCalculusTheorem.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "6103ef40123574d26685810cfdfc8bd460919597",
+      "sha256": "fe0e6f29cf5c0ebc964be7dce23f58e2a15d76fdaa81dfa5319551a5f094f834",
+      "lines": 40
+    }
+  ],
+  "exact_extraction": {
+    "factory_body_from_sample_choice_through_control_construction_byte_identical": true,
+    "changed_boundary": "The input RadialReference remains fixed in the conclusion; actual height membership and W02 are proved by N01aReferenceHeight and SpacesConclusion(h01Statement), rather than supplied as assumptions. The same E0 floor proof is returned beside the original hC tuple."
+  },
+  "preserved_objects": [
+    "D.val",
+    "affineMaterialData D.val sample",
+    "actual physical S",
+    "actual host map and component enumeration",
+    "actual C and N01PrimitiveGeometry"
+  ],
+  "limits": [
+    "No arbitrary Through03 witness is assigned a retained certificate.",
+    "The new source is statically reviewed only; the upstream completed CI does not apply to this source.",
+    "No OPEN Blueprint theorem is called.",
+    "No N02/N03 compatibility or complete N04 theorem is asserted."
+  ],
+  "green_receipt_applies_to_candidate": false,
+  "compiled": false,
+  "active_source_index_refs_CI_modified": false
+}

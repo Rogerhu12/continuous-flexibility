@@ -1,0 +1,24 @@
+--- a/src/ContinuousFlexibility/Analysis/RelativeRootJetBounds.lean
++++ b/src/ContinuousFlexibility/Analysis/RelativeRootJetBounds.lean
+@@ -72,8 +72,12 @@
+     simpa only [Real.one_rpow, mul_one] using
+       relativeRoot_bound_mono hp le_rfl (hA k).le
+         (le_add_of_nonneg_left zero_le_one) (hfj k hk)
+-  simpa only [Real.one_rpow, mul_one, Nat.sub_add_cancel hn] using
++  have hraw :=
+     hbound z hz 1 le_rfl f g x hf hg houter (fun k hk => hmajor (hgj k hk)) (n - 1)
++  change ‖iteratedFDeriv ℝ (n - 1 + 1) (f ∘ g) x‖ ≤
++    B (n - 1) * (1 : ℝ) ^ (B (n - 1)) * (1 + p ((n - 1 + 1) + loss) z) at hraw
++  rw [Nat.sub_add_cancel hn] at hraw
++  simpa only [Real.one_rpow, mul_one] using hraw
+ 
+ theorem pointwiseComposition_allJets_fixed_loss
+     {E : Type} [AddCommGroup E] [Module ℝ E]
+@@ -194,6 +198,6 @@
+       (le_add_of_nonneg_right (hC n).le) (hf₀jets n))
+     (fun n => relativeRoot_bound_mono hp (le_max_right _ _) (hC n).le
+       (le_add_of_nonneg_left (hA n).le) (hcompJets n))
+-  simpa only [Function.comp_apply] using hbound
++  simpa only [PointwiseMaterialJetBound, Function.comp_apply] using hbound
+ 
+ end ContinuousFlexibility.Analysis

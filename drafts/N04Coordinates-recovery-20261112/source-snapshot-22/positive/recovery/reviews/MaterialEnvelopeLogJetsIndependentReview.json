@@ -1,0 +1,98 @@
+{
+  "kind": "independent_full_source_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root/proof_inventory",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEnvelopeLogJets.lean",
+    "sha256": "2ec5b9f0e83e37464a96667ca6ecf24740974c93981b988f2dc2c91d3995d8a3",
+    "blob": "398b43754bbff77ae387d93785314508bb09ce67",
+    "lines": 141,
+    "imports": [
+      "ContinuousFlexibility.Analysis.MaterialEndpointGlobalJets"
+    ],
+    "public_names": [
+      "materialEndpointLogE0_symbol",
+      "materialE0_log_material_jet_bound"
+    ],
+    "target": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeLogJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialE0PowerJetsCandidateManifest.json",
+    "sha256": "244fa6633d77e7bce8cf6416b337a7a1a2b65ee914ac8eb2fcaf3e87666a98f5",
+    "blob": "d26c6186ac2c71f8a760b356b9f69d6150ef445c",
+    "lines": 112
+  },
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialLogJets.lean",
+      "sha256": "ea3ea1e164b6b6d0da48522e0e969ba73b2b72f09a13034865b96e41582b4e69",
+      "blob": "4569bfd6bdff396290126782b746342ea6bf6c4a",
+      "lines": 383
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEndpointGlobalJets.lean",
+      "sha256": "17a3748c225bf365c6f3f37fa2a88c41c26465e9cce97677f01c7b90593c4f70",
+      "blob": "24077be4173101d8c5650e9f8aaacd16335a39d2",
+      "lines": 172
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialWeights.lean",
+      "sha256": "e4998fa3dc7afe79fb5fc68d4b37a9df11d8c4be01fc7a51cf8015acc214dd51",
+      "blob": "4788cd70cd81842326a4e1cedde510d2c302f1cd",
+      "lines": 262
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    }
+  ],
+  "read_scope": [
+    "All141 source lines, full installed generic MaterialLogJets blocks and the already independently reviewed full172 endpoint-to-global lemma.",
+    "Actual materialE0Exponent/materialE0/materialLogFactor definitions and the entire relevant IsMaterialData smoothness/positivity/endpoint conjunction."
+  ],
+  "exact_copied_helpers": [
+    {
+      "installed": "materialRpow_symbol",
+      "selected": "envelope_rpow_symbol",
+      "same_header_and_body_after_rename": true
+    },
+    {
+      "installed": "materialSymbol_weaken",
+      "selected": "envelope_symbol_weaken",
+      "same_header_and_body_after_rename": true
+    },
+    {
+      "installed": "materialConstant_symbol",
+      "selected": "envelope_constant_symbol",
+      "same_header_and_body_after_rename": true
+    },
+    {
+      "installed": "materialShiftedInverse_symbol",
+      "selected": "envelope_shifted_inverse_symbol",
+      "same_header_and_body_after_rename": true
+    },
+    {
+      "installed": "materialShiftedLog_symbol",
+      "selected": "envelope_shifted_log_symbol",
+      "same_header_and_body_after_rename": true
+    }
+  ],
+  "checks": [
+    "The five generic symbol helpers are byte-identical to the installed proofs after only explicit fresh-name substitution. Their positive-variable and exponent hypotheses are unchanged.",
+    "The genuine exponent is 1+x^(5/2)*log(exp(1)+x). Taking shifted-log symbol order1/2 and rpow order5/2 gives order3; the constant term is weakened from0 to3. The actual log(exp(...)) identity identifies the same E0 model for every x.",
+    "Original IsMaterialData gives E0 positivity and smoothness, so log(E0) is ordinarily smooth on the annulus. The actual endpoint identities use the third entry, while ell uses the first; both signs enter the same generic endpoint theorem.",
+    "The global bound is proved for each positive material derivative, uniformly over the whole physical annulus. No additional target derivative bound, E0>=1, sample or atlas certificate is supplied.",
+    "Both new public names have no occurrence in the installed source tree."
+  ],
+  "scope_limits": [
+    "Only MaterialEnvelopeLogJets141 is accepted here; MaterialScalarPowerJets107 is assigned elsewhere.",
+    "The zero-order E0 or log(E0) value is not asserted to be bounded.",
+    "No compiler/elaborator, source edit or active state mutation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "green_receipt_applies": false
+}

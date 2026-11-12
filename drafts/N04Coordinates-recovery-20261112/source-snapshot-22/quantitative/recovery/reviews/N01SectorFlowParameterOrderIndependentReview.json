@@ -1,0 +1,65 @@
+{
+  "kind": "independent_static_parameter_order_sector_consumer_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_complete_source_and_exact_selected_provider_contracts",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrderCandidateManifest.json",
+    "sha256": "f8d09efee3ff87f139ed7b99a9a2bd1ac9ec0192108580d54d996058ce93e57f",
+    "blob": "5d556eff496c892658779a529cd82def155330ed",
+    "lines": 2521
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrder.lean",
+    "sha256": "494c9162be0c743bc15a29806486434cd58e48579d9e08bdeb3dbc2c83a95c47",
+    "blob": "ae74eb3f6fef35028c48d77d797646166361acde",
+    "lines": 83
+  },
+  "selected_git_providers": [
+    {
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/SectorParameterGeometry.lean",
+      "blob": "2aedeefa0b7cecd1a972ac5b9fbf48bb538b6490",
+      "sha256": "0daae8b9f4f8b63e4bd6af764ca24973c63ce45fea2cc894a6b1678d35d42415",
+      "lines": 105
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/N01SectorFlowTower.lean",
+      "blob": "b078e9b4f8b9ca5336dcf3a9e18d1f26376acd79",
+      "sha256": "64dca05a93d31a25a475389cc7d3544dd56b33543bcf606151b8c194727f9248",
+      "lines": 125
+    },
+    {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/SmoothDirectionsAffine.lean",
+      "blob": "5cfea144468802b21b2483c8d7ff5195fb2264e8",
+      "sha256": "f793eb5cb2abb3f742b5108394c53193b3154fbfcd256b7d299ece1593b2051c",
+      "lines": 124
+    }
+  ],
+  "checks": [
+    "Read all 83 source lines, all 105 sector geometry lines and all 124 affine tower lines, and compared the prior 125-line sector tower implementation. All four selected Git object SHA256 identities were recomputed from their actual object bytes.",
+    "At bb419, N01Properties has the exact 12-fold tail projection OrdinaryFlowFamilyTameBounds. Its quantifiers are forall k, exists parameterLoss, forall spatial s; the candidate chooses this loss before s and preserves the same base, radius, actual C, original flow and sample.",
+    "The actual affine lift maps the original sector neighborhood into the original state neighborhood. compAffine and congrOn preserve the complete genuine SmoothDirections structure; no new tower is postulated.",
+    "For radial order a=0, the distance factor is exactly one. The concrete inclusion preserves pairGrading and therefore the exact oneHighVariationWeight with high order s+loss+parameterLoss.",
+    "The returned B precedes all components, angular/radial points, states and increments. The candidate has not exchanged forall k/exists parameterLoss for a uniform all-order loss."
+  ],
+  "scope_limits": [
+    "This is a mixed-pin static consumer candidate; no merged N01c/N02 overlay was instantiated or compiled.",
+    "The 130-entry dependency inventory is retained as provenance, not claimed as a new full mathematical review of all closure modules.",
+    "Closed flow, inverse, endpoint and higher downstream N02/N03 consumers remain separate compatibility work. No N01/N02/N03 gateway completion is asserted."
+  ],
+  "validation": {
+    "source_modified": false,
+    "compiled": false,
+    "ci_invoked": false,
+    "active_state_modified": false
+  }
+}

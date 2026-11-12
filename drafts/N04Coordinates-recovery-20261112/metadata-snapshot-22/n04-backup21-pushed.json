@@ -1,0 +1,13 @@
+{
+  "head": "f98e15e4243d0d47a9d42fa40e64f60ed54691d3",
+  "tree": "861d799f4f819a69851214d4a4224f59554ccf15",
+  "parent": "50cae968a47ba361e30c427780c4ee16765768d4",
+  "pushed": "2026-11-12 13:44:10 UTC",
+  "indexed_files": 1347,
+  "new_source_lines": 1959,
+  "new_lean_files": 14,
+  "projected_added_lean_from_compiled_baseline140": 3988,
+  "status": "Source preservation only; held sources outside src, no activation or completion claim.",
+  "record": "n04-backup21-pushed.json",
+  "payload_sha256": "9425ad09d33dd7df79af2d717845e9e3617b6c9f7213c13d51f7f3ee9271022c"
+}

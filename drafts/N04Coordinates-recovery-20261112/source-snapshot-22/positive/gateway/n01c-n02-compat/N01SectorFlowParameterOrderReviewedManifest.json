@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "kind": "reviewed_parameter_order_sector_consumer_candidate",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrderCandidateManifest.json",
+    "sha256": "f8d09efee3ff87f139ed7b99a9a2bd1ac9ec0192108580d54d996058ce93e57f",
+    "blob": "5d556eff496c892658779a529cd82def155330ed",
+    "lines": 2521
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrder.lean",
+    "sha256": "494c9162be0c743bc15a29806486434cd58e48579d9e08bdeb3dbc2c83a95c47",
+    "blob": "ae74eb3f6fef35028c48d77d797646166361acde",
+    "lines": 83
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N01SectorFlowParameterOrderIndependentReview.json",
+    "sha256": "5243e2497541b95e52656bd2456097ebe42b96ac7d0af18b895a459ba65f2aeb",
+    "blob": "e9ac3bfa3a27079c1abc862e1f3c741c8ebbd22c",
+    "lines": 65
+  },
+  "scope": "Same actual N01 flow, radius, base and oneHigh factor; k-dependent parameterLoss is chosen before s. Mixed-pin consumer only, not a completed N02 port.",
+  "compiled": false,
+  "green_receipt_applies_to_candidate": false,
+  "active_source_index_refs_CI_modified": false
+}

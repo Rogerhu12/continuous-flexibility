@@ -1,0 +1,306 @@
+{
+  "kind": "same_actual_retained_witness_constructive_gateway_evidence",
+  "status": "CONCRETE_PARTIAL_GATEWAY_WITH_EXPLICIT_CONTRACT_AND_CI_GATES",
+  "author": "/root/proof_inventory",
+  "conclusion": [
+    "An actual completed radial reference can retain the very same selected metadata/P/Gamma/profile/coordinates via the upstream Q-valued completion theorem. The 45-line extraction is independently reviewed.",
+    "The existing retained N01a/N01b constructors preserve that Gamma and build genuine component hosts and the raw optical lower. The fixed-witness N01c52 then retains hG while changing only the common base/loss/radius.",
+    "A separate fixed-input N02/N03 wrapper108 preserves D/T/S/C, but its pinned consumer contract differs from bb419. The two wrappers are not yet a composable or compiled Through03 gateway."
+  ],
+  "upstream_pins": {
+    "n01c": {
+      "branch": "line/N01c",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "ci": {
+        "run_id": 43208064010,
+        "job_id": 131148197685,
+        "status": "completed",
+        "conclusion": "success",
+        "completed_at": "2026-11-12T11:27:44Z",
+        "build_jobs": 7205,
+        "modules_compiled": 3229,
+        "module_total": 3231,
+        "blueprint_proved": 40,
+        "blueprint_total": 45,
+        "statements_open": 5,
+        "N01c_axiom_gate": "passed",
+        "log": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419-job131148197685.log",
+          "sha256": "92abf87b968352741fc9562e4288a3ad241fabce1f7da0b057dbd2781be197f2"
+        },
+        "jobs": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419-workflow-jobs.json",
+          "sha256": "42c92a6d1d4757069373ef2b03e750201d8f3eb8b0b5df9119e9eb6bddb1b776"
+        }
+      }
+    },
+    "n02n03": {
+      "branch": "line/N02N03",
+      "commit": "c5c48d262157a11a76604113c40d2438d480433f",
+      "ci": {
+        "run_id": 43227566425,
+        "job_id": 131214600908,
+        "status": "completed",
+        "conclusion": "failure",
+        "completed_at": "2026-11-12T13:36:20Z",
+        "quick_check": "failed",
+        "full_library_build": "skipped",
+        "blueprint_axiom_gate": "skipped",
+        "diagnostics": [
+          {
+            "file": "src/ContinuousFlexibility/Analysis/N01CorrectionCoefficientFlatBounds.lean",
+            "line": 107,
+            "column": 2,
+            "message": "deterministic timeout at isDefEq, heartbeat budget 200000"
+          },
+          {
+            "file": "src/ContinuousFlexibility/Analysis/N01CorrectionCoefficientFlatBounds.lean",
+            "line": 144,
+            "column": 0,
+            "message": "deterministic timeout at whnf, heartbeat budget 200000"
+          }
+        ],
+        "log": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48-job131214600908.log",
+          "sha256": "06afe874e4fa05ef18611dbbdc156f4384678c558f2e9fb5c6a4510ee8918850"
+        },
+        "jobs": {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48-workflow-jobs-final.json",
+          "sha256": "52bcae65a1c426f0ad8857577258f3fcf97726c6f795a83eaca24b2f591cadc1"
+        }
+      }
+    }
+  },
+  "inventories": {
+    "baseline_main": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+    "baseline_installed": "03e526021c371413f03fc0ce052476b63e105361",
+    "n01c": {
+      "ref": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-closure.json",
+        "sha256": "0ae542ddeb2883b7534f48f05e81288740798bfd5514f54d36eb46763586298e"
+      },
+      "counts": {
+        "modules": 1735,
+        "against_main": {
+          "new": 209,
+          "changed_existing": 8,
+          "selected_differing_source_lines": 42120
+        },
+        "against_installed": {
+          "new": 209,
+          "changed_existing": 8,
+          "selected_differing_source_lines": 42120
+        },
+        "missing_imports": 0,
+        "code_token_findings": 0
+      }
+    },
+    "n02n03": {
+      "ref": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-closure.json",
+        "sha256": "75fd8206d64930b3d65d5067f1a3b7bfd958307d7cc9093464efe44cc18b29a6"
+      },
+      "counts": {
+        "modules": 613,
+        "against_main": {
+          "new": 432,
+          "changed_existing": 5,
+          "selected_differing_source_lines": 72807
+        },
+        "against_installed": {
+          "new": 370,
+          "changed_existing": 5,
+          "selected_differing_source_lines": 61579
+        },
+        "missing_imports": 0,
+        "code_token_findings": 0
+      }
+    },
+    "shared_module_count": 143,
+    "different_shared_sources": [
+      {
+        "path": "src/ContinuousFlexibility/Analysis/ControlCellEndpointBounds.lean",
+        "n01c_blob": "69d80e2dd714b0d65fcceff8b5dee84880bb3078",
+        "n02n03_blob": "931608eb0a7c8d6913aafcd28727724eae13467a",
+        "n01c_lines": 216,
+        "n02n03_lines": 192
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/StateControlCofiniteClosure.lean",
+        "n01c_blob": "18b869aaefe1e6aece49ab9fd4920e1ef2cf0751",
+        "n02n03_blob": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+        "n01c_lines": 166,
+        "n02n03_lines": 133
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/StateControlDecay.lean",
+        "n01c_blob": "2cbf277337cd0667b2f645f0ffa5149afba7e95a",
+        "n02n03_blob": "91f057d8f557ed9b604e081ac6ef4b15652ea313",
+        "n01c_lines": 143,
+        "n02n03_lines": 142
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+        "n01c_blob": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+        "n02n03_blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+        "n01c_lines": 185,
+        "n02n03_lines": 204
+      },
+      {
+        "path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+        "n01c_blob": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+        "n02n03_blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+        "n01c_lines": 289,
+        "n02n03_lines": 275
+      },
+      {
+        "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+        "n01c_blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+        "n02n03_blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+        "n01c_lines": 1773,
+        "n02n03_lines": 1756
+      },
+      {
+        "path": "src/ContinuousFlexibility/Statements/RadialTargets.lean",
+        "n01c_blob": "ef93a18d36336489f4e605beddd8e14d582e2008",
+        "n02n03_blob": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+        "n01c_lines": 504,
+        "n02n03_lines": 492
+      }
+    ],
+    "limit": "Textual full project import closure and comment-stripped code-token inventory; not a combined-overlay elaboration or axiom inspection. Differing-source line totals are source lengths, not added lines."
+  },
+  "reviewable_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReferenceReviewedManifest.json",
+      "sha256": "95453dcad31705c849cb73e43dd9df60f15924377b2de5c26d4694569b4f0b2a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstructionReviewedManifest.json",
+      "sha256": "045ed9159495f51b233533e969638fa9a7792c9499dc51e1834603656479575a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48/N02N03FixedWitnessConstructionCandidateManifest.json",
+      "sha256": "51212bc5d2a633f16f9b2014e2cbb55d7c280588e3833101fac7055fb1ef650c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01SectorFlowParameterOrderCandidateManifest.json",
+      "sha256": "f8d09efee3ff87f139ed7b99a9a2bd1ac9ec0192108580d54d996058ce93e57f"
+    }
+  ],
+  "same_witness_route": [
+    {
+      "stage": "actual completed reference",
+      "theorem": "n01c_actual_reference_with",
+      "pin": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualReferenceWith.lean",
+      "preserved": "Q is established on the actual Gamma.reference before completing its same modal matching/inverse family. The new extraction retains metadata.selected, metadata.first_two, 4096<=start, Realizes, exact profile and R11aRetainedCoordinates."
+    },
+    {
+      "stage": "material data and physical spaces",
+      "theorems": [
+        "exists_n01a_affineMaterialData",
+        "spaces_W02_statement",
+        "n01a_reference_heightMember"
+      ],
+      "status": "Existing constructive analysis interfaces. A direct final factory wrapper still needs their exact same-reference specialization; no arbitrary Through03 reidentification is used."
+    },
+    {
+      "stage": "retained controls and actual flows",
+      "theorems": [
+        "retainedReference_exists_n01a_primitive_geometry",
+        "retainedReference_exists_n01b_primitive_geometry"
+      ],
+      "source_group": "n04-drafts/quantitative/primitive-route/reconstructed/RetainedReferenceN01bPrimitiveCandidateManifest.json",
+      "prior_review_sha256": "215ceee26ebdef4bdb5619d9145422a1d62f7fc9ce91872f169a6a8bcf76755b",
+      "preserved": "The actual retained Gamma, original material coordinates/H/M/samples and physical spaces. Only E0 is explicitly enlarged. The actual flow installation preserves the same cell/left/right/control fields."
+    },
+    {
+      "stage": "E0 floor and hG",
+      "theorem": "one_le_enlargedMaterialData_E0",
+      "path": "src/ContinuousFlexibility/Analysis/MaterialEnvelopeNormalization.lean",
+      "connection": "Apply to the original hT. The N01b output host, chi support and raw optical bound are exactly the three conjuncts of the new N01PrimitiveGeometry definition; no unreturned normalization proof is assumed."
+    },
+    {
+      "stage": "fixed-witness N01c",
+      "theorem": "n01Primitive_exists_fixedWitness_properties",
+      "preserved": "Same D/T/S/C/hG. Only base/loss/radius selected by the real coefficient/speed/ordinary-flow factories.",
+      "status": "Static peer-reviewed at bb419; new candidate uncompiled."
+    },
+    {
+      "stage": "fixed-witness N02/N03",
+      "theorem": "N01Properties.exists_through03_fixedWitness",
+      "preserved": "Same D/T/S/C; actual correction supplies R/L and shrinks base/radius.",
+      "status": "Candidate pinned to c5 old uniform-flow-loss contract. Upstream exact CI failed and contract adaptation remains required."
+    }
+  ],
+  "exact_contract_gap": {
+    "field": "OrdinaryFlowFamilyTameBounds / the final conjunct of N01Properties",
+    "n01c": "forall k, exists parameterLoss, forall s, exists B; oneHigh high = s + loss + parameterLoss",
+    "n02n03": "forall k s, exists B; oneHigh high = s + loss",
+    "provenance": "bb419 Nonlinear332-342 versus c5 Nonlinear flow tail; both full definition blocks read.",
+    "claim": "The new premise cannot be consumed by the old proof through definitional equality or by commuting these quantifiers. No theorem of impossibility is asserted."
+  },
+  "consumer_adaptation": [
+    {
+      "scope": "first local affine sector consumer",
+      "source": "N01SectorFlowParameterOrder.lean",
+      "status": "83-line explicit new compatibility candidate. Select parameterLoss before all spatial orders; original affine map, flow, sample and exact weight retained. Generic sector dependency closure130 is pinned in its manifest."
+    },
+    {
+      "scope": "fixed low parameter orders",
+      "files": [
+        "N01ControlFlowBounds",
+        "N01FlowMixedParameterBound",
+        "N01FlowParameterVariation",
+        "N01FlowSmallness",
+        "N01FlowInverseJetBounds"
+      ],
+      "requirement": "Extract the required losses at k=0,1,2 explicitly; finite maxima may share one lower-order neighborhood. Do not infer a bound for all k."
+    },
+    {
+      "scope": "mixed and endpoint directional towers",
+      "files": [
+        "N01SectorFlowTower",
+        "N01FlowMixedParameterTower",
+        "N01EndpointParameterTower",
+        "N01OpticalCollarJetBounds",
+        "N01NeighborhoodRestriction"
+      ],
+      "requirement": "Retain high(n)=spatialOrder+loss+parameterLoss(n). The existing private closed_parameter_tower_of_interior_towers already accepts arbitrary high:Nat->Nat; its actual call currently supplies a constant function and must be adapted."
+    },
+    {
+      "scope": "endpoint circle tame assembly",
+      "files": [
+        "N01EndpointStateJetGrowth",
+        "N01EndpointScalarJetGrowth",
+        "N01EndpointJetLocalGrowth",
+        "N01EndpointOneHigh",
+        "N01EndpointCircleTower",
+        "N01EndpointSmoothTame"
+      ],
+      "requirement": "Several intermediate theorems currently choose one high grading before every parameter order. They must expose the per-order grading. The final SmoothTame proof already chooses a B/L for each k; that observation is a route, not an implemented compatibility proof."
+    },
+    {
+      "scope": "other shared consumers outside N02 closure",
+      "files": [
+        "N07aCoefficientMaterial",
+        "N08OpticalControlType"
+      ],
+      "requirement": "Both access the old flow tail directly and need explicit selected-loss handling if the new shared Nonlinear contract is integrated."
+    }
+  ],
+  "alternative_same_G_route": {
+    "status": "Existing exact compact test identities retained; raw optical reciprocal extraction remains unfinished.",
+    "review_route": "n04-drafts/audit/reconstructed-reviews/SameWitnessOpticalTestingRouteAnalysis.json",
+    "qualified_statement": "No claim that FirstNormalInverseEstimate cannot imply the needed lower bound. The fixed-frequency shrinking argument is not reused: its exact radial principal coefficient is w, not w-prime."
+  },
+  "required_gates": [
+    "Review and reconcile all seven differing shared sources, including the actual Nonlinear and Blueprint contracts.",
+    "Complete the relevant order-dependent loss consumer adaptation and verify the combined dependency overlay.",
+    "Require a successful complete build/axiom record for the exact selected N02N03 head before integration.",
+    "Fresh CI is required for every new wrapper/adaptation; upstream green does not validate new candidates."
+  ],
+  "compiled": false,
+  "active_source_index_refs_CI_modified": false
+}

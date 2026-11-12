@@ -1,0 +1,68 @@
+{
+  "kind": "independent_full_static_lean_source_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_full_source_and_actual_provider_review_uncompiled",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialWeightPhysicalPowerJetsCandidateManifest.json",
+    "sha256": "23c2ed800fb86fd859ae4c07592751d04c101256ea4e3cbfe453ca35ec8023c4"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialWeightPhysicalPowerJets.lean",
+    "blob": "645be57c4bd2a556e7ff74d0d2dfb9449f2d8dcc",
+    "sha256": "84221698a4955d9d8e67459769e5289336b341f5353807cd59195895c45af3f9",
+    "lines": 89,
+    "target": "src/ContinuousFlexibility/Analysis/MaterialWeightPhysicalPowerJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.MaterialOrdinaryJets",
+      "ContinuousFlexibility.Analysis.N07aMaterialPowerJets"
+    ],
+    "public_names": [
+      "materialHMWeight",
+      "materialHMWeight_pos",
+      "materialHMWeight_contDiffOn",
+      "materialHMWeight_rpow_physical_jet_bound"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialOrdinaryJets.lean",
+      "blob": "1bbb02b84f5b1306dee7cbf96305626af6e683e5",
+      "sha256": "2b87e87ef153e371dd1e3ff8967d3a06392cb4239fcf15bf1dd575c11f935a5d",
+      "lines": 246
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aMaterialPowerJets.lean",
+      "blob": "5cd512bce83b14f943562aa438bd519089e5b399",
+      "sha256": "7f1d1bf0c61d24d410a5c731b53439f764e405997bd10c746e49530e27017a96",
+      "lines": 62
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "lines": 603
+    }
+  ],
+  "full_source_read": true,
+  "verified_sha256_and_git_blob_for_all_listed_sources": true,
+  "checks": [
+    "Read all 89 source lines, all 246 MaterialOrdinaryJets lines, all 62 N07aMaterialPowerJets lines, and the actual IsMaterialData/RadialMaterialExpansion definitions.",
+    "The Bool selector retains precisely T.H or T.M. IsMaterialData supplies positive H and M>=1, and its first conjunct supplies both actual smoothness statements.",
+    "The true material-coordinate H and M arbitrary-real-power providers retain gamma exactly, including zero and negative gamma; the two Bool cases only unfold the displayed selector.",
+    "The actual ninth IsMaterialData clause is radius(rho(r))=r; the fifteenth is RadialMaterialExpansion. The tuple destructuring matches the current 18-clause definition.",
+    "At each r in the annulus, iteratedDeriv_comp_materialRadius at rho(r) and the actual inverse identity convert each genuine material-coordinate derivative to materialDerivativeIterate at r.",
+    "The expansion coefficients satisfy |c_j(r)|<=C*E0(r)^A with fixed nonnegative C,A before r. K is the finite sum of C*B_j, fixed before all physical points and any later component or sample.",
+    "The abs-sum bound and mul_le_mul use the correct nonnegative factors. Ring rearrangement leaves (C*B_j)*weight(r)^gamma*E0(r)^A; the two finite-sum distributivity steps give K with the same factors.",
+    "No E0>=1 premise is used. No E0-to-M absorption or change of gamma occurs. The zero derivative order is covered by the same finite expansion and true material providers.",
+    "The proof follows already installed radius-transport and finite-expansion APIs; no actual atlas, component, sample, state or primitive certificate is supplied or manufactured."
+  ],
+  "findings": [],
+  "scope_limits": [
+    "This is a static review. The candidate has not been compiled or elaborated in this review.",
+    "The conclusion is ordinary radial derivatives of actual H/M powers with an E0 loss; it is not a full ReferenceJets, state SmoothDirections, or primitive estimate.",
+    "No checkout, index, refs, checkpoint, authority, active plan or source bytes were modified."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "ci_queried": false
+}

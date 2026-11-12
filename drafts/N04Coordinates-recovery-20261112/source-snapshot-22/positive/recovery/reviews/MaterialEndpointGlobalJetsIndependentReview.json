@@ -1,0 +1,79 @@
+{
+  "kind": "independent_full_source_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root/proof_inventory",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEndpointGlobalJets.lean",
+    "blob": "24077be4173101d8c5650e9f8aaacd16335a39d2",
+    "sha256": "17a3748c225bf365c6f3f37fa2a88c41c26465e9cce97677f01c7b90593c4f70",
+    "lines": 172
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEndpointGlobalJetsCandidateManifest.json",
+    "blob": "053410d4b62684fe49fbe0dc05ca6a1780f69b97",
+    "sha256": "a3ebfb323f0b4626c4717ed6e74ebe698eef02bae62f0b585c79e49a2e63ad7b",
+    "lines": 33
+  },
+  "installed_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialLogJets.lean",
+    "blob": "4569bfd6bdff396290126782b746342ea6bf6c4a",
+    "sha256": "ea3ea1e164b6b6d0da48522e0e969ba73b2b72f09a13034865b96e41582b4e69",
+    "lines": 383
+  },
+  "exact_block_comparisons": [
+    {
+      "original": "materialEndpointLogIterate_bound",
+      "selected": "endpointGlobal_iterate_bound",
+      "same_header_and_body_after_explicit_rename": true
+    },
+    {
+      "original": "endpointX_scaled_derivative",
+      "selected": "endpointGlobal_scaled_derivative",
+      "same_header_and_body_after_explicit_rename": true
+    },
+    {
+      "original": "materialDerivativeIterate_eqOn_endpoint",
+      "selected": "endpointGlobal_iterate_eqOn",
+      "same_header_and_body_after_explicit_rename": true
+    },
+    {
+      "original": "endpointX_ge_one",
+      "selected": "endpointGlobal_x_ge_one",
+      "same_header_and_body_after_explicit_rename": true
+    },
+    {
+      "original": "materialDerivativeIterate_endpoint_bound",
+      "selected": "endpointGlobal_tail_bound",
+      "same_header_and_body_after_explicit_rename": true
+    },
+    {
+      "original": "contDiffOn_materialDerivativeIterate",
+      "selected": "endpointGlobal_iterate_contDiffOn",
+      "same_header_and_body_after_explicit_rename": true
+    },
+    {
+      "original": "affineMaterial_logJet_bound",
+      "selected": "materialDerivativeIterate_global_bound_of_endpoint_symbol",
+      "same_header_and_body_after_explicit_rename": true
+    }
+  ],
+  "read_scope": [
+    "All selected 172 lines and full installed MaterialLogJets383.",
+    "The existing public materialEndpointLogDerivative/iterate_symbol and actual endpoint derivative/compact-middle calls."
+  ],
+  "checks": [
+    "All seven selected theorem declarations and proof bodies are byte-identical to the installed generic blocks after the explicitly enumerated renames and removal of the final private modifier. No H/M-specific symbol proof is copied.",
+    "The genuine material derivative corresponds to (-eta) times the endpoint differential operator, with actual endpointX positivity ensuring the displayed reciprocal algebra. Induction uses true open-neighborhood derivative equality.",
+    "The positive-order condition n>0 implies symbol order 3-3n<=0 on x>=1. The endpoint widths are reduced by min(delta,d0*exp(-1)); both signs use the same generic tail lemma.",
+    "Ordinary smoothness of the same actual iterate supplies a finite bound on the remaining compact middle. The result makes no target-bound, sample, material-envelope floor or atlas assumption.",
+    "Only the final generic theorem is public; helper names are fresh and the existing main source is unchanged."
+  ],
+  "scope_limits": [
+    "The result concerns every fixed positive material derivative; it does not bound the zeroth value or provide any new reference/sample comparison.",
+    "No Lean compilation or elaboration; no active checkout/index/refs/CI mutation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "green_receipt_applies": false
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "actual_retained_reference_gateway_extraction",
+  "status": "HELD_UNCOMPILED_PEER_REVIEW_PENDING",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01ActualRetainedReference.lean",
+    "sha256": "ca09ea2f1ddf4bed503b6ac152f0aa286089625f48a4be9e33e22030de1118a2",
+    "blob": "ca7674d50e07ae8fbccfff307348308327941342",
+    "lines": 45
+  },
+  "target_module": "ContinuousFlexibility.Analysis.N01ActualRetainedReference",
+  "upstream_commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualReferenceWith.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "5410a15bd4297b2f7d2c36b58554afc9b916da5d",
+      "sha256": "1e4d0fb6a6ca4b67cb77ef218c0491da1ef358ef2f7c513a8262f757346af59e",
+      "lines": 135
+    },
+    {
+      "path": "src/ContinuousFlexibility/Blueprint/R10a/Geometry.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "a31b1f1de4d6a01c8216b947c2810971ef3e310e",
+      "sha256": "e2077910f48e688ad2c2411888361ccdddfa0b76fce2ecf7dcb44060d4d31666",
+      "lines": 139
+    },
+    {
+      "path": "src/ContinuousFlexibility/Radial/R11aRetainedFamily.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "57d911ff1afebf3bb0f775372630fc552f1a2681",
+      "sha256": "bdc03c5491b02dce0e424a173dee779093fe11f70b5b9e5ea947e7c9093b298f",
+      "lines": 221
+    }
+  ],
+  "construction": "Instantiate the actual completed-reference theorem Q with the existential tuple of its own selected metadata, retained pair, realized geometry and retained-coordinate proofs. The final IsRadialReference certificate is transported only through Gamma.reference = D from that same tuple.",
+  "preserved_objects": [
+    "SelectedTailData S",
+    "SeedRetainedPair P",
+    "ConnectedReferenceGeometry Gamma",
+    "Gamma.reference",
+    "R10aSelectedMetadata",
+    "R11aRetainedCoordinates"
+  ],
+  "scope_limits": [
+    "This constructs a new actual reference together with its original retained certificate. It does not recover that certificate from an arbitrary existing Through03 witness.",
+    "No N01c/N02 composition or final N04 theorem is asserted.",
+    "The input factory is pinned to the completed bb419 upstream source; no OPEN Blueprint existence theorem is called."
+  ],
+  "green_receipt_applies_to_candidate": false,
+  "compiled": false,
+  "active_source_index_refs_CI_modified": false
+}

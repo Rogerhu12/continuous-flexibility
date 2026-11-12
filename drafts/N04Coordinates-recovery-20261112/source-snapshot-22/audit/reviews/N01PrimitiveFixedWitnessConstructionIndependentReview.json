@@ -1,0 +1,92 @@
+{
+  "kind": "independent_full_source_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED_AT_EXPLICIT_UPSTREAM_PIN",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+    "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+    "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+    "lines": 52
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstructionCandidateManifest.json",
+    "blob": "7e830f0ab0afd2518eca242f39958d4efaa5f0ff",
+    "sha256": "108723114d921c9f61738f73fe475ef653e5ca439fe8f1a5c6089780d8b3d519",
+    "lines": 74
+  },
+  "upstream_commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "verified_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cCoefficientTameBounds.lean",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "0b73f6865edfbf1f704b47b540efa76b9a67414b",
+      "sha256": "46836735cbdffae67128147407f8eb47014c7498fdab154cb514a6443ed359a1",
+      "lines": 118
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cCharacteristicSpeedTameBounds.lean",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "b25a688fa034eeacbbccae57881718c85cccb686",
+      "sha256": "2998e4e4ce36d6b6b883035c7b85ad02027d37166ca208b5356c98c07963da91",
+      "lines": 198
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowBounds.lean",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "4accd1b41c8fea9d47349f4dc12586c904958a31",
+      "sha256": "9302c99fde99090b13ff2ead75fc0ca5f3443ca7ddb588df6e79f0e8310846ad",
+      "lines": 90
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cAssembly.lean",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "245e028edcd0d102dd8872ea3f2ab83bbc8da1c2",
+      "sha256": "06f9c26c4ab6a1af844d18ee31874de1404fa1f245bc4735f7c080f28440a441",
+      "lines": 27
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cBoundsRestriction.lean",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "ffbd5d98eb6ab73c3b6fb8cddb83b843a1baa0b5",
+      "sha256": "a85fe4fbc139f2dc4fd008c0e0d447dc7a7f6f16ace5181d35b1c916b05c6c97",
+      "lines": 288
+    },
+    {
+      "path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+      "sha256": "c5ceb29deb95dde0f00563392d37d33d9f62a725d118c9540435911349de41e1",
+      "lines": 289
+    },
+    {
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773
+    }
+  ],
+  "read_scope": [
+    "Full 52-line candidate.",
+    "Full pinned coefficient118, characteristic-speed198, ordinary-flow90 and assembly27 sources.",
+    "Pinned BoundsRestriction including actual coefficient restriction and N01PartB_mono; exact N01PartA, N01PrimitiveGeometry, OrdinaryFlowFamilyTameBounds and N01Properties definitions."
+  ],
+  "checks": [
+    "D/T/S/C are fixed parameters through all three calls. No existential factory reselects the reference, material data, spaces, control geometry or primitive certificate.",
+    "First coefficient factory produces b0/l0 at min(epsilon,1/2), with base<=b0. The original PartB restricts to that base/radius.",
+    "Speed factory returns b1/l1/epsilon1 with b0<=b1, l0<=l1 and epsilon1<=min(epsilon,1/2), plus matching PartB/coefficient/speed clauses.",
+    "Flow factory returns b2/epsilon2 with b1<=b2 and epsilon2<=epsilon1, keeping l1. Coefficients and PartB are then restricted exactly to b2/epsilon2 before assembly.",
+    "The displayed base and radius chains have the correct direction; hG is returned literally unchanged.",
+    "N01cBoundsRestriction directly imports N01cAssembly, so n01Properties_of_parts is actually visible through the selected direct imports.",
+    "The pinned flow contract is forall parameter order k, exists parameterLoss, forall spatial order s. The candidate neither reorders these quantifiers nor claims compatibility with the earlier uniform-loss N02 interface."
+  ],
+  "scope_limits": [
+    "This is conditional on the actual pinned primitive certificate and explicit E0 floor supplied as inputs; it does not construct those inputs.",
+    "No current Through03 witness or old N02 interface preservation theorem is asserted.",
+    "No OPEN Blueprint existence theorem is invoked by this source.",
+    "No Lean compilation, elaboration or upstream CI query was performed; the candidate is held and specific to bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7."
+  ],
+  "source_edited": false,
+  "active_state_changed": false
+}

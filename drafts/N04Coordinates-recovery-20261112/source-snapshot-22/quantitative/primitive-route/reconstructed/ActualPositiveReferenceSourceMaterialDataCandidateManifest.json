@@ -1,0 +1,61 @@
+{
+  "kind": "actual_positive_reference_source_material_data_candidate",
+  "status": "UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceSourceMaterialData.lean",
+    "sha256": "f8dbc713ee26f42b84a69ebcba40d64c861a48cd4b9d3af9185452d6ace274eb",
+    "blob": "9549032208efa9a9dfa8fbc52a9d69fae35f61a6",
+    "lines": 96,
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceSourceMaterialData.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualReferenceRootFiniteMaterialData",
+      "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData"
+    ],
+    "public_names": [
+      "n04Coordinates_actual_positive_reference_source_material_data"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootFiniteMaterialData.lean",
+      "sha256": "a1747e6504a205d81d84688a8a3ded5b689844c58ecc3e2e3cf1b4c03cf06ede",
+      "blob": "7a1c809366f2d4d50e8dfcb4a0064c6b70c32369",
+      "lines": 174
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    }
+  ],
+  "provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootFiniteMaterialDataCandidateManifest.json",
+      "sha256": "2bd364ede7b140e7882fdc9419000c57c7bf24886677b8f92c1b5d6f6e2e10e5",
+      "blob": "24e11cbe10eb18b9f4b7d2eecc025c5908616dd9",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+      "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+      "blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+      "lines": 74
+    }
+  ],
+  "checks": [
+    "Uses the exact same actual typed atlas and certified source; source some m selects the opposite original negative root (!side).",
+    "Only the constant affine translation and a sign of absolute value one are removed from positive-order coordinate radial jets; height is unchanged.",
+    "The original negative host and its explicit optical lower remain unchanged. The material base and finite-order envelope precede every component, source and orientation.",
+    "The resulting lower slope, positive height and finite radial bounds are exactly the scalar inputs to the displayed prescribed reference interpolation."
+  ],
+  "scope_limits": [
+    "The finite root provider 174 remains a pending independent-review candidate; no approval is inferred from this adapter.",
+    "This leaf handles interior (some m) certified endpoints. It does not assert ambient exclusion for arbitrary Through03.",
+    "Positive midpoint sample comparison, the actual displayed-width interpolation instance, and any normalization support cap remain subsequent obligations.",
+    "No compiler, CI action, checkout/index/ref/CP/authority/plan mutation."
+  ],
+  "independent_reviews": [],
+  "compiled": false
+}

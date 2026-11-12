@@ -1,0 +1,132 @@
+{
+  "kind": "independent_full_source_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/quantitative_route",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveEndpointHostSampleCandidateManifest.json",
+    "sha256": "e31663d9756c189520acc1b57f517cd70e738300507cae043d9d3599bf004477",
+    "blob": "029c5a74c936811350e8d553d630d27b82f52d0b",
+    "lines": 102
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveEndpointMidpointX.lean",
+      "sha256": "765dac919cb1eb471e521d64287813910379f63346c611a8308139d1b074eb2b",
+      "blob": "8d7abbd6f59a566e5a790fafdba49bb3972c7cb3",
+      "lines": 90,
+      "target": "src/ContinuousFlexibility/Analysis/RetainedPositiveEndpointMidpointX.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RetainedPositiveComponentClassification",
+        "ContinuousFlexibility.Analysis.RetainedMorsePositiveGapEndpointX",
+        "ContinuousFlexibility.Analysis.PositiveComponentMaterialCell"
+      ],
+      "public_names": [
+        "retainedReference_positive_endpoint_midpointX_bound"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RetainedPositiveEndpointHostSample.lean",
+      "sha256": "21da218339f7328ff824072f56975b164c1f0e82e4dfc7648d8aafe5f50da83c",
+      "blob": "a37fc4e5fba09db2265e1870fc641c47d01add45",
+      "lines": 69,
+      "target": "src/ContinuousFlexibility/Analysis/RetainedPositiveEndpointHostSample.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.RetainedPositiveEndpointMidpointX",
+        "ContinuousFlexibility.Analysis.MaterialClosedHostEndpointX",
+        "ContinuousFlexibility.Analysis.MaterialSampleBounds"
+      ],
+      "public_names": [
+        "retainedReference_positive_endpoint_host_sample_bound"
+      ]
+    }
+  ],
+  "verified_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentClassification.lean",
+      "sha256": "bfb4877a20d123904751226173d2c0120921ad341f536926847a3039efd1a2d4",
+      "blob": "59fdc8ca30daf6b573d27dcdc17bf458116f5a98",
+      "lines": 117
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapEndpointX.lean",
+      "sha256": "dd1faacf35931c4d364d9ccefaed3e87a2abfcafed8fcf5dd6409406852477c1",
+      "blob": "6b07b19c1859b37f546093ba30ccda44262ef467",
+      "lines": 77
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialClosedHostEndpointX.lean",
+      "sha256": "38ec79abb0882a19487f6892ab254dc9ee089f762b7458df0af05260d34799a5",
+      "blob": "cf7a08f69f38d70893bb15b6bdcaa06a96241476",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean",
+      "sha256": "5f21c6b32b0c9241fb560d286690cb93199e0365a9d1314af1c8daab943f4368",
+      "blob": "9bd8135577563874f4fa614e1af047afd9982d94",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean",
+      "sha256": "5c502ee08fdb1f063bc9b39badcf31647b0042373cccba4878059a97da4d513b",
+      "blob": "4004102ba3dae66f14faaca866f1e18e4ac76f87",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    }
+  ],
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentClassificationReviewedManifest.json",
+      "sha256": "50b434bcbdaa4cc20ecb2d10c80ee8f33fee8a98137d4ed126dcce3cbc8fbc4f",
+      "blob": "a16adadabac75217e17295618aee6ef75e1a2224",
+      "lines": 39
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveGapHostSampleComparisonReviewedManifest.json",
+      "sha256": "a567a9e0e232c39a63026840ef09da3ecbb9422052aabf5bbf37ba3989b2f74b",
+      "blob": "73a45eb2ab467cde247d65fd0dd29053566388bb",
+      "lines": 52
+    }
+  ],
+  "additional_exact_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06MorsePositiveComponent.lean",
+      "sha256": "b6f964ba76258cca4ba3e885d8be5283b9ce6237996b740f7cdbc048ab3cbc17",
+      "blob": "be439e1ea810b6f48f80936ff29c691977f5d871",
+      "lines": 249
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveComponentEndpoints.lean",
+      "sha256": "182e98b328b82c6feb5be57b16a1b6536a55b4e5f4af01ab51a27b7b01adb19d",
+      "blob": "85ac7d7b23c9e63f59e25e0d0281fd5106fb7527",
+      "lines": 79
+    }
+  ],
+  "read_scope": [
+    "Complete 90-line midpoint-coordinate and 69-line original-host sample sources, their exact candidate manifest and all six listed providers.",
+    "Current N06 positive-gap geometry theorem and actual positive endpoint definition were checked for the interval ordering and Boolean orientation."
+  ],
+  "checks": [
+    "The finite exceptional set is the exact set in the same-retained classification theorem. The image of the actual sum of the two endpoint-to-midpoint absolute differences is finite and bounded; each individual endpoint difference is bounded by that sum, including an empty exceptional set.",
+    "Every nonexceptional component retains the same P.sideRadius scaling and actual two Morse gap endpoints. The real midpoint is the scaled midpoint by an explicit ring identity. The actual four-point gap ordering places both the chosen endpoint and midpoint in the closed gap used by the existing X-oscillation theorem.",
+    "The common endpoint-to-midpoint constant is max L (max B 0), chosen before the component and side. No endpoint cell or whole-component containing cell is asserted.",
+    "For the host comparison, the actual shared root is the right negative endpoint when side=false and the left negative endpoint when side=true. The original host interval remains unchanged and the closure provider supplies its index bound at that actual root.",
+    "The five one-sided comparisons are X(sample j)<=index j+B, index j<=X(root)+B, X(root)<=X(midpoint)+L, X(midpoint)<=index k+B, index k<=X(sample k)+B. Thus the exact total cost is L+4B.",
+    "The material comparison is invoked with r=sample k and s=sample j, so its second conclusion is precisely E0(sample j)^R <= K1*E0(sample k)^A for R>=0. Both sample core-memberships come from the genuine IsMaterialData/IsAccumulatingProfile providers.",
+    "K1>0 and A>=0 precede all components, sides and cell labels. No E0>=1, reverse comparison, retained-certificate extraction from arbitrary Through03, alternative sample, or final primitive bound is assumed.",
+    "All source/provider/manifest SHA256, Git blob and line-count identities were checked; both new public names have no installed declaration collision."
+  ],
+  "scope_limits": [
+    "The same retained-coordinate certificate and original negative host containment remain explicit inputs.",
+    "This is the actual original-host-to-positive-midpoint sample bridge, not a claim of whole-component containment or a completed primitive certificate.",
+    "No Lean compiler/elaborator, CI query, source edit, active checkout/index/ref/CP/authority mutation."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "green_receipt_applies": false
+}

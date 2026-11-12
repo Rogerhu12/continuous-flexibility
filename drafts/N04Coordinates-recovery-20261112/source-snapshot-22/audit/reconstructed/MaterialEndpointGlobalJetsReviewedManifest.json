@@ -1,0 +1,32 @@
+{
+  "kind": "shared_endpoint_global_material_jets_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEndpointGlobalJets.lean",
+    "sha256": "17a3748c225bf365c6f3f37fa2a88c41c26465e9cce97677f01c7b90593c4f70",
+    "blob": "24077be4173101d8c5650e9f8aaacd16335a39d2",
+    "lines": 172,
+    "imports": [
+      "ContinuousFlexibility.Analysis.MaterialLogJets"
+    ],
+    "public_names": [
+      "materialDerivativeIterate_global_bound_of_endpoint_symbol"
+    ],
+    "target": "src/ContinuousFlexibility/Analysis/MaterialEndpointGlobalJets.lean"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEndpointGlobalJetsCandidateManifest.json",
+    "sha256": "a3ebfb323f0b4626c4717ed6e74ebe698eef02bae62f0b585c79e49a2e63ad7b",
+    "blob": "053410d4b62684fe49fbe0dc05ca6a1780f69b97",
+    "lines": 33
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/MaterialEndpointGlobalJetsIndependentReview.json",
+    "sha256": "f9fb9eac813d10f0002a5f3288e587cae1cf77b88f9ebead52015e67f031f974",
+    "blob": "5b1d58e0753f4489fb116a7739668e11b33a2e46",
+    "lines": 79
+  },
+  "compiled": false,
+  "source_bytes_changed": false,
+  "active_state_modified": false
+}

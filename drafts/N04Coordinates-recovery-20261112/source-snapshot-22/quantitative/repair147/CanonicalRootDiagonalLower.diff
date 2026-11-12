@@ -1,0 +1,9 @@
+--- a/src/ContinuousFlexibility/Analysis/CanonicalRootDiagonalLower.lean
++++ b/src/ContinuousFlexibility/Analysis/CanonicalRootDiagonalLower.lean
+@@ -1,5 +1,6 @@
+ import ContinuousFlexibility.Analysis.CanonicalActualEndpointFields
+ import ContinuousFlexibility.Analysis.PlanarInverseDerivativeBound
++import ContinuousFlexibility.Analysis.N01ActualRootGeometry
+ 
+ /-!
+ # Quantitative diagonal bounds at actual fixed root circles

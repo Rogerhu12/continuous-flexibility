@@ -1,0 +1,40 @@
+{
+  "kind": "reviewed_actual_reference_root_slope_normalization",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootSlopeNormalizationCandidateManifest.json",
+    "sha256": "462d382c7d30e8c02e8ac800bfffb7f4f87533647f88365a623beb51e72f4f27",
+    "blob": "b41c79718e8417824a896536e471bd6ab543d3e5",
+    "lines": 57
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootSlopeNormalization.lean",
+    "sha256": "879afd8487ec166b16d023a23bf0d7026f2680f801489a77db1deb34db607c76",
+    "blob": "a6de3be026573bd8f6f80f2e8e17e27f8b5a733c",
+    "lines": 137,
+    "target": "src/ContinuousFlexibility/Analysis/ActualReferenceRootSlopeNormalization.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData"
+    ],
+    "public_names": [
+      "n04Coordinates_actual_reference_root_slope_normalization"
+    ]
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/ActualReferenceRootSlopeNormalizationIndependentReview.json",
+    "sha256": "56ba005a390710b05ccae736874e504101023a5d2d88e68205cef4df20965b5c",
+    "blob": "eabc4945df114f581fafe35de2a2d81e8887f48d",
+    "lines": 66
+  },
+  "scope": [
+    "Actual unit principal density and actual radial reference shape imply H^2*w*abs(slice derivative)=1 on the open negative component.",
+    "Actual root smoothness supplies continuity of height and derivative of the same scalar chart slice. Closure of the genuine negative interval passes the exact identity to both roots.",
+    "The existing inward signed slope positivity removes the absolute value with one Bool-parametric proof. Its inverse equals H^2*w by exact multiplication.",
+    "Current installed ActualNegativePrincipalDensity contains the CI141 explicit scalar fderiv fix; the obsolete held 111-byte variant is not selected.",
+    "No numerical lower-bound premise, optical hypothesis, collar inverse cost, new reference chart or alternative witness is introduced.",
+    "The result supplies an exact reference-root inverse-slope formula; the material upper bound is a subsequent actual-height-jet adapter.",
+    "No compilation, CI action, checkout/index/ref/CP/authority/plan mutation."
+  ],
+  "compiled": false,
+  "source_modified": false
+}

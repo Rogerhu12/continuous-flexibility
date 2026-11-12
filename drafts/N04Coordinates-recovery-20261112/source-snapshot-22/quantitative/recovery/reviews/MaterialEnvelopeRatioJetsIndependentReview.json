@@ -1,0 +1,50 @@
+{
+  "kind": "independent_static_actual_material_envelope_ratio_jet_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_complete_source_and_actual_provider_contracts",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEnvelopeRatioJetsCandidateManifest.json",
+    "sha256": "2f844000caaa606031c499d35b91ef8313a5e24eba17774e36f8040b82f93837",
+    "blob": "0c79ca99117f0615a6964a189fb20012c1034dad",
+    "lines": 55
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEnvelopeRatioJets.lean",
+    "sha256": "4d161d0bb7a483bc04404267c42358c31e91f0f4f4009ebfecb377dfefb04c84",
+    "blob": "0364e6f5de564f08a6ecf462c43589434f1f2ab6",
+    "lines": 94
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialScalarPowerJets.lean",
+      "sha256": "23d1c2fbc0e3c75b90bc0094497cc5bc9a40fb3cac94e2a6c22d4cbeab24b608",
+      "blob": "45db6555d66a3c007d9a62640aee8f67fbf398cc",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+      "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+      "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa",
+      "blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "lines": 65
+    }
+  ],
+  "checks": [
+    "Read all 94 source lines and the actual scalar power, bounded-X weight transfer and global scaled-floor providers; all selected source/provider SHA256 identities were recomputed.",
+    "The raising identity retains K^(b-a) from the actual floor 1<=K*E0. Positivity of E0 and K is explicit; no unscaled E0>=1 is introduced.",
+    "For arbitrary real gamma, the numerator gamma+A is raised to A+abs(gamma)>=0, then the actual bounded-X comparison transfers that power to the same denominator point. The denominator -gamma is separately raised to abs(gamma), retaining the exact K cost.",
+    "The original fixed denominator is constant in physical differentiation. iteratedDeriv_mul_const_field applies at every n, including zero, and all multiplication inequalities use actual nonnegative powers.",
+    "The final exponent P+abs(gamma) is nonnegative and both final constants precede r and s. Gamma=1 and -1 are genuine opposite E0 ratios; no sample or component is changed."
+  ],
+  "scope_limits": [
+    "Only this 94-line ratio leaf is approved by this receipt. Existing provider bodies/contracts were inspected for consumption; their upstream review status remains independent.",
+    "Atlas unit rescaling, composition, and final material certificate assembly remain separate work.",
+    "No Lean compilation/elaboration, source editing, CI action, or active state mutation occurred."
+  ],
+  "compiled": false
+}

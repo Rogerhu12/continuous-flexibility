@@ -1,0 +1,101 @@
+{
+  "kind": "independent_full_source_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root",
+  "author": "/root/proof_inventory",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContextCandidateManifest.json",
+    "sha256": "1b81cf14251ada5e7444c624999532135f95de633874648da8ad49e92efd1ea3",
+    "blob": "9d1f27809a465dab87e44a4b93a84d85743135b1",
+    "lines": 96
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.lean",
+    "sha256": "48542eac85fcd18116d018740b290ab9d57c41793d055e255d2b9791a9fe4c4c",
+    "blob": "41ee0aaa4a3971691bfdc8a8832a87300d97a863",
+    "lines": 64
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFinalAssembly.bb419-base.lean.txt",
+    "sha256": "b636fd17c2c522298186a8e32cbdcd675f9af06272c98ac6113e4cd34474e0c4",
+    "blob": "12fe61fda080d71d5d14fce29367dcebc3216705",
+    "lines": 61
+  },
+  "exact_diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01aFixedReferencePrimitiveContext.diff",
+    "sha256": "0e14af52eaa33f7372bc9c5118bbe3658a5a56dda9b8a97fde3d460bf671ea17",
+    "blob": "542db45420e1f5622b767a4eedb0cfe367465ba2",
+    "lines": 61
+  },
+  "verified_providers": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aFinalAssembly.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "12fe61fda080d71d5d14fce29367dcebc3216705",
+      "sha256": "b636fd17c2c522298186a8e32cbdcd675f9af06272c98ac6113e4cd34474e0c4",
+      "lines": 61
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cActualControlAssembly.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "119d410c2be9e6571c6e7d0a6d88fa1173929b49",
+      "sha256": "c95a91343949ff18a709e340124d3827363054315e183771d7a3eab66909bca5",
+      "lines": 80
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aMaterialContext.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "f02d82fa4be881168308804f6dd6fb62465ea20a",
+      "sha256": "31541bf9682bf5b1da934bd058bb9002f75bef0318f9232e248a04e76f59507e",
+      "lines": 45
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aOpticalProfile.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "2e4452152c60ee87c507d4f93ecff7bb1b3bafe8",
+      "sha256": "b71e4ef5c0d3a7d7537f054019b6067d22f343fec015957269927b3c9511ec84",
+      "lines": 177
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01aReferenceHeight.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "160cfbe865384d205dc0fe1774fed0f15a61bea1",
+      "sha256": "265348b2fb3edbf1710f19080f27c0c5c4cf07af669ff9cdc9d0bf02df7d1d1e",
+      "lines": 116
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/SpacesConclusion.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "2967d724521f80c297d001de4403c38b5664105e",
+      "sha256": "1a4e0c577d8bd116a2e2679e5dfde41db0f498a9763bd26074fb482bc62ed745",
+      "lines": 20
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/TameCalculusTheorem.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "6103ef40123574d26685810cfdfc8bd460919597",
+      "sha256": "fe0e6f29cf5c0ebc964be7dce23f58e2a15d76fdaa81dfa5319551a5f094f834",
+      "lines": 40
+    }
+  ],
+  "read_scope": [
+    "Full fixed-D candidate64, original assembly61, and every listed direct provider: control80, material45, optical177, reference height116, W02 conclusion20, tame calculus40.",
+    "Byte comparison of the original factory body from sample choice through the exact control construction."
+  ],
+  "checks": [
+    "The RadialReference D is fixed before any material, spaces, host, enumeration or control choice. The returned T,S,C and primitive certificate are for this exact D.val.",
+    "The actual reference height theorem supplies the formerly assumed height membership for each affine sample choice. The actual W02 proof applied to proved Analysis.h01Statement supplies the physical spaces without invoking an open Blueprint theorem.",
+    "The core E0 floor follows from the same affine material log bound and actual cell coverage; the proof is the unchanged existing assembly proof.",
+    "The same genuine component host map and bounded enumeration discrepancy pass to exists_n01c_controlGeometry_with_hosts. Its returned hC has exactly IsMaterialData, IsPhysicalSpaces, PartA and PrimitiveGeometry in the projected order.",
+    "The complete construction body is byte-identical to the pinned upstream proof; only its boundary keeps D fixed, proves the two former assumptions and returns the same floor. All provider blobs match the exact bb419aa4 upstream commit."
+  ],
+  "scope_limits": [
+    "Static peer review does not give compilation evidence for this new source. The upstream green build applies only to upstream bytes.",
+    "The primitive-reference and enumeration hypotheses must still be supplied by the same actual retained reference construction.",
+    "No N02/N03 contract adaptation or complete N04 realization follows from this leaf."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T13:59:50.717323+00:00"
+}

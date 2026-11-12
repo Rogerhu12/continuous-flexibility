@@ -1,0 +1,33 @@
+{
+  "kind": "shared_actual_endpoint_to_global_material_jets",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialEndpointGlobalJets.lean",
+    "sha256": "17a3748c225bf365c6f3f37fa2a88c41c26465e9cce97677f01c7b90593c4f70",
+    "blob": "24077be4173101d8c5650e9f8aaacd16335a39d2",
+    "lines": 172
+  },
+  "target_module": "ContinuousFlexibility.Analysis.MaterialEndpointGlobalJets",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialLogJets.lean",
+      "sha256": "ea3ea1e164b6b6d0da48522e0e969ba73b2b72f09a13034865b96e41582b4e69",
+      "blob": "4569bfd6bdff396290126782b746342ea6bf6c4a",
+      "lines": 383
+    }
+  ],
+  "public_names": [
+    "materialDerivativeIterate_global_bound_of_endpoint_symbol"
+  ],
+  "construction": "Extract the generic endpoint-to-global argument already used privately in MaterialLogJets, with fresh helper names and one public generic conclusion; reuse the existing public actual endpoint differentiation operator and its iterated symbol theorem. No H/M-specific log proof is copied or changed.",
+  "self_review": [
+    "All 172 lines and the installed original generic proof blocks read.",
+    "Actual ell times derivative endpointX equals the signed endpoint differentiation coefficient. The n-fold comparison is an equality of actual derivatives on the open endpoint interval.",
+    "For n>0, symbol order 3-3n is nonpositive on x>=1. A single small endpoint width and ordinary compact-middle continuity yield a global bound.",
+    "No original E0 floor, global target derivative estimate, cell/sample hypothesis, or future atlas certificate is supplied."
+  ],
+  "compiled": false,
+  "source_existing_main_edited": false,
+  "active_checkout_index_refs_CI_CP_modified": false
+}

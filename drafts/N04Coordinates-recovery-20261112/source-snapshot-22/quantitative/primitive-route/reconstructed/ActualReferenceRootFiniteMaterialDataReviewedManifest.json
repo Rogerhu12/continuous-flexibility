@@ -1,0 +1,42 @@
+{
+  "kind": "reviewed_actual_reference_root_finite_material_data",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootFiniteMaterialDataCandidateManifest.json",
+    "sha256": "2bd364ede7b140e7882fdc9419000c57c7bf24886677b8f92c1b5d6f6e2e10e5",
+    "blob": "24e11cbe10eb18b9f4b7d2eecc025c5908616dd9",
+    "lines": 88
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootFiniteMaterialData.lean",
+    "sha256": "a1747e6504a205d81d84688a8a3ded5b689844c58ecc3e2e3cf1b4c03cf06ede",
+    "blob": "7a1c809366f2d4d50e8dfcb4a0064c6b70c32369",
+    "lines": 174,
+    "target": "src/ContinuousFlexibility/Analysis/ActualReferenceRootFiniteMaterialData.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualReferenceRootSlopeNormalization",
+      "ContinuousFlexibility.Analysis.N03RootEndpointMaterialJets",
+      "ContinuousFlexibility.Analysis.N04bActualAtlasInteriorCompletion",
+      "ContinuousFlexibility.Analysis.OneSidedBoundaryJets"
+    ],
+    "public_names": [
+      "n04Coordinates_actual_reference_root_finite_material_data"
+    ]
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/ActualReferenceRootFiniteMaterialDataIndependentReview.json",
+    "sha256": "5e4428849ec507736d2d190205e7e9fda51fbe8d4df927f334e88ece658bb87c",
+    "blob": "456c19c064398f742d7ee513d308f4f98f4bc4d2",
+    "lines": 97
+  },
+  "scope": [
+    "The exact actual reference root material jets are evaluated at zero displacement in the unchanged original typed atlas. Only the unused dividedDifference field is temporarily completed.",
+    "The powers 1, -1 and 2 give finite raw height jets, inverse height and height squared. The exact actual slope normalization turns height squared and a fixed profile bound into inverse inward slope.",
+    "One finite envelope B precedes the component, host and orientation. Both positive lower inputs are the reciprocal of the same B*(C0*E0(sample j))^B.",
+    "The same actual host inclusion and optical min-distance lower remain explicit; no arbitrary model/collar scale enters the numerical cost.",
+    "Ordinary spatial root jets only. No SmoothDirections or unconditional Through03 primitive claim; positive midpoint transfer and actual displayed interpolation remain later adapters.",
+    "No compilation, CI action, checkout/index/ref/CP/authority/plan mutation."
+  ],
+  "compiled": false,
+  "source_modified": false
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "reviewed_actual_positive_reference_source_material_data",
+  "status": "HELD_UNCOMPILED_STATIC_REVIEW_PASSED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceSourceMaterialDataCandidateManifest.json",
+    "sha256": "b7ea6e12acd10d8f10f6c7ba7dd1643efd4aa97842605561bc9418662aa23759",
+    "blob": "961d624c508269643d5b44de5e56b3052b3f912b",
+    "lines": 61
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceSourceMaterialData.lean",
+    "sha256": "f8dbc713ee26f42b84a69ebcba40d64c861a48cd4b9d3af9185452d6ace274eb",
+    "blob": "9549032208efa9a9dfa8fbc52a9d69fae35f61a6",
+    "lines": 96,
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceSourceMaterialData.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualReferenceRootFiniteMaterialData",
+      "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData"
+    ],
+    "public_names": [
+      "n04Coordinates_actual_positive_reference_source_material_data"
+    ]
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ActualPositiveReferenceSourceMaterialDataIndependentReview.json",
+    "sha256": "f4c2ecaa2e3efad7c56ac49b62873729d648d8b7a81f9c6b96762a558cc00f1a",
+    "blob": "87d35f340435af2fef339a3fac85713c11570227",
+    "lines": 80
+  },
+  "current_upstream_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootFiniteMaterialDataReviewedManifest.json",
+    "sha256": "57d7a1a2b2b81daef168d4f8b153b766ca80b1fb6274ef6a29cbb36b7b125ac4",
+    "blob": "cbb01ac0d21ff7270c944fa88c15494b050010fa",
+    "lines": 42
+  },
+  "scope": [
+    "The exact certified source some m uses the opposite actual negative root and same cutPair. Affine translation disappears only for positive coordinate orders, and the orientation has absolute value one.",
+    "The original height, actual negative host and explicit raw optical lower are unchanged. All finite-envelope constants precede the component, source and orientation.",
+    "The historical candidate recorded the 174 provider as pending. Its actual full review is now bound through the current upstream reviewed manifest; old candidate bytes are preserved.",
+    "This is the interior source adapter only; midpoint transfer and prescribed interpolation remain subsequent. No final CurrentJets or primitive geometry certificate is asserted."
+  ],
+  "compiled": false,
+  "source_modified": false
+}

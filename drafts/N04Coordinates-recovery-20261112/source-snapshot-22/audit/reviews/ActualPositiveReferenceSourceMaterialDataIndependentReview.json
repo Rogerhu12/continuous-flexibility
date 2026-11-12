@@ -1,0 +1,80 @@
+{
+  "kind": "independent_full_source_review",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceSourceMaterialData.lean",
+    "sha256": "f8dbc713ee26f42b84a69ebcba40d64c861a48cd4b9d3af9185452d6ace274eb",
+    "blob": "9549032208efa9a9dfa8fbc52a9d69fae35f61a6",
+    "lines": 96,
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceSourceMaterialData.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualReferenceRootFiniteMaterialData",
+      "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData"
+    ],
+    "public_names": [
+      "n04Coordinates_actual_positive_reference_source_material_data"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceSourceMaterialDataCandidateManifest.json",
+    "sha256": "b7ea6e12acd10d8f10f6c7ba7dd1643efd4aa97842605561bc9418662aa23759",
+    "blob": "961d624c508269643d5b44de5e56b3052b3f912b",
+    "lines": 61
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualReferenceRootFiniteMaterialData.lean",
+      "sha256": "a1747e6504a205d81d84688a8a3ded5b689844c58ecc3e2e3cf1b4c03cf06ede",
+      "blob": "7a1c809366f2d4d50e8dfcb4a0064c6b70c32369",
+      "lines": 174
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    }
+  ],
+  "additional_exact_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholePositiveEndpointFields.lean",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryTaylorExtension.lean",
+      "sha256": "569766332fa55b39cf1aea1a437366cd44591818758530f2dafffde49bdcd1da",
+      "blob": "5c7b80c9ff8255850e05bb3308a30579b035a8d6",
+      "lines": 223
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Lemmas.lean",
+      "sha256": "2938694d3f8f120a8c47d905efe4f8ab06579a3235d1a5a7d5a026c76e3bb797",
+      "blob": "aff008563104c5cf0dc9a22dc6d791f98ff188e6",
+      "lines": 517
+    }
+  ],
+  "pinned_mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "read_scope": [
+    "All 96 candidate lines; complete 160-line actual positive reference endpoint data source and the 174-line root finite-data provider, with attention to its exact consumed statement.",
+    "Actual certified source subtype and actual radialBoundaryJet definition; fixed Mathlib iteratedDeriv_const_add API."
+  ],
+  "checks": [
+    "The some m branch retains the given source, negative component m and original host j. Its certified endpoint is the opposite negative root (!side); both cutPair indices and signed inward derivative agree by Boolean computation.",
+    "The affine coordinate is exactly v+s*Fref.fst, with |s|=1. Positive radial orders remove the constant v using the actual iterated derivative lemma, then retain the same signed raw root jets. No zero-order coordinate bound is falsely imported.",
+    "The lower slope uses the same signed first derivative as the actual root provider. The height function is unchanged, so its zero-order positivity/lower bound and all finite radial jets transfer directly.",
+    "The material base C0, all-sample scaled floor and B_N remain before every component/host/source. The numerical M is exactly the provider value, not reselected.",
+    "Host containment and the same explicit optical lower condition remain hypotheses. The theorem does not claim their existence for arbitrary Through03 data or handle ambient none endpoints.",
+    "Source and all supplied provider/manifest hashes were reverified. No source edits, compilation or active-state changes."
+  ],
+  "scope_limits": [
+    "The upstream 174 mathematical proof is assigned to the parent; this review checks its exact consumed interface and the full 96-line adapter.",
+    "No current full certificate, positive midpoint sample bound, displayed width instance, or ambient exclusion is asserted."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "green_receipt_applies": false
+}
