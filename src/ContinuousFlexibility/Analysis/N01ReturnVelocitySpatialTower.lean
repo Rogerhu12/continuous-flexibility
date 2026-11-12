@@ -21,6 +21,21 @@ local instance n01ReturnVelocitySpatialTowerStateSMul (S : PhysicalSpacesData) :
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
+private theorem singleComponentVelocity_decode_add_point
+    {V : Type*} [AddCommGroup V] [Module ℝ V]
+    (decode : V →ₗ[ℝ] (ℕ → ℝ → ℝ)) (u v : V) (m : ℕ) (θ : ℝ) :
+    decode (u + v) m θ = decode u m θ + decode v m θ :=
+  congrFun (congrFun (decode.map_add u v) m) θ
+
+private theorem singleComponentVelocity_reassemble
+    {cut slope amplitude decodedSlope product displacement : ℝ}
+    (hslope : decodedSlope = slope - 1)
+    (hproduct : product = decodedSlope * amplitude)
+    (hamplitude : amplitude = displacement) :
+    cut * (amplitude + product) = slope * cut * displacement := by
+  rw [hproduct, hslope, hamplitude]
+  ring
+
 def correctionStateRadiusProjection (S : PhysicalSpacesData) :
     (((StateDirections S × ℝ) × CircleSpace S) × ℝ) →L[ℝ]
       (StateDirections S × ℝ) × ℝ :=
@@ -56,8 +71,12 @@ theorem N01Properties.singleComponentFlowInverseCompose_decode
       Function.invFun (C.minusFlow (liftSectorParameter S C x.1) m x.2) :=
     congrArg (fun f : ℝ → ℝ => Function.invFun f)
       (hN.singleComponentFlowCircle_affineLift hS hT m x hx hr)
-  rw [circlePositiveInverseComposeLinear_decode _ _ _ _ _ _ _
-    (hN.singleComponentFlowCircle_positive hS hT m x hx hr), heq]
+  have hdecode := circlePositiveInverseComposeLinear_decode
+    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0)
+    (hN.singleComponentFlowCircle hS hT m x) u
+    (hN.singleComponentFlowCircle_positive hS hT m x hx hr)
+  exact (congrFun (congrFun hdecode m) θ).trans
+    (congrArg ((S.circle (3 / 4 : ℝ)).decode u m) (congrFun heq θ))
 
 include hχrange in
 theorem N01Properties.singleComponentInterpolationInverseCompose_decode
@@ -76,8 +95,12 @@ theorem N01Properties.singleComponentInterpolationInverseCompose_decode
         (returnCorrectionInitialMap S C (liftSectorParameter S C x.1) m)) :=
     congrArg (fun f : ℝ → ℝ => Function.invFun f)
       (hN.singleComponentInterpolationCircle_lift hS hT χ m x hx)
-  rw [circlePositiveInverseComposeLinear_decode _ _ _ _ _ _ _
-    (hN.singleComponentInterpolationCircle_positive hS hT χ hχrange m x hx hr), heq]
+  have hdecode := circlePositiveInverseComposeLinear_decode
+    (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) (fun _ => 0)
+    (hN.singleComponentInterpolationCircle hS hT χ m x) u
+    (hN.singleComponentInterpolationCircle_positive hS hT χ hχrange m x hx hr)
+  exact (congrFun (congrFun hdecode m) θ).trans
+    (congrArg ((S.circle (3 / 4 : ℝ)).decode u m) (congrFun heq θ))
 
 theorem N01Properties.singleComponentFlow_derivative_decode
     (m : ℕ) (x : (StateDirections S × ℝ) × ℝ)
@@ -95,8 +118,10 @@ theorem N01Properties.singleComponentFlow_derivative_decode
   have hf := hN.minusFlow_angular_contDiff hS hT
     (liftSectorParameter_mem_stateNeighborhood hx le_rfl)
     (hN.2.2.1.liftSectorParameter_sector x.1) m ⟨hr.1.le, hr.2.le⟩
-  rw [circleDerivativeLinear_decode, heq]
-  exact (((hf.differentiable (by simp) θ).hasDerivAt).sub (hasDerivAt_id θ)).deriv
+  have hd := ((hf.differentiable (by simp) θ).hasDerivAt).sub (hasDerivAt_id θ)
+  exact (congrFun (congrFun (circleDerivativeLinear_decode
+    (hS.2.1 (3 / 4 : ℝ)) (hN.singleComponentFlowCircle hS hT m x)) m) θ).trans
+      ((congrArg (fun f : ℝ → ℝ => deriv f θ) heq).trans hd.deriv)
 
 def N01Properties.singleComponentPulledDisplacementCircle
     (m : ℕ) (x : ((StateDirections S × ℝ) × CircleSpace S) × ℝ) : CircleSpace S :=
@@ -117,11 +142,17 @@ theorem N01Properties.singleComponentPulledDisplacementCircle_decode
         (Function.invFun (returnInterpolation (χ m x.2)
           (returnCorrectionInitialMap S C (liftSectorParameter S C x.1.1) m))
             (Function.invFun (C.minusFlow (liftSectorParameter S C x.1.1) m x.2) θ)) x.1.2 := by
-  unfold N01Properties.singleComponentPulledDisplacementCircle
-  rw [hN.singleComponentFlowInverseCompose_decode hS hT m (x.1.1, x.2) hx hr,
-    hN.singleComponentInterpolationInverseCompose_decode hS hT χ hχrange m
-      (x.1.1, x.2) hx ⟨hr.1.le, hr.2.le⟩,
-    hN.returnCorrectionDisplacementCircleLinear_decode hS hT x.1.1 hx]
+  let d : CircleSpace S := hN.returnCorrectionDisplacementCircleLinear hS hT x.1.1 x.1.2
+  let u : CircleSpace S :=
+    circlePositiveInverseComposeLinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num)
+      (fun _ => 0) (hN.singleComponentInterpolationCircle hS hT χ m (x.1.1, x.2)) d
+  let y : ℝ := Function.invFun (C.minusFlow (liftSectorParameter S C x.1.1) m x.2) θ
+  let t : ℝ := Function.invFun (returnInterpolation (χ m x.2)
+    (returnCorrectionInitialMap S C (liftSectorParameter S C x.1.1) m)) y
+  exact (hN.singleComponentFlowInverseCompose_decode hS hT m (x.1.1, x.2) hx hr u θ).trans
+    ((hN.singleComponentInterpolationInverseCompose_decode hS hT χ hχrange m
+      (x.1.1, x.2) hx ⟨hr.1.le, hr.2.le⟩ d y).trans
+        (hN.returnCorrectionDisplacementCircleLinear_decode hS hT x.1.1 hx x.1.2 m t))
 
 def N01Properties.singleComponentInverseSlopeCircle
     (m : ℕ) (x : (StateDirections S × ℝ) × ℝ) : CircleSpace S :=
@@ -160,14 +191,32 @@ theorem N01Properties.singleComponentVelocityCircle_decode
         (hN.singleComponentVelocityCircle hS hT χ m x) m θ =
       returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1)
         m (x.2, θ) x.1.2 := by
-  unfold N01Properties.singleComponentVelocityCircle
-  rw [circleProductBilinear_decode, circleSingletonLinear_decode, map_add]
-  simp only [Pi.add_apply, circleSingletonField, if_pos rfl]
-  rw [circleProductBilinear_decode,
-    hN.singleComponentInverseSlopeCircle_decode hS hT m (x.1.1, x.2) hx hr,
-    hN.singleComponentPulledDisplacementCircle_decode hS hT χ hχrange m x hx hr,
-    returnCorrectionVelocityLinear_apply]
-  ring
+  let u : CircleSpace S := hN.singleComponentPulledDisplacementCircle hS hT χ m x
+  let a : CircleSpace S := hN.singleComponentInverseSlopeCircle hS hT m (x.1.1, x.2)
+  let v : CircleSpace S :=
+    circleProductBilinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) a u
+  let c : CircleSpace S := circleSingletonLinear (hS.2.1 (3 / 4 : ℝ)) m (deriv (χ m) x.2)
+  have hsingleton : (S.circle (3 / 4 : ℝ)).decode c m θ = deriv (χ m) x.2 :=
+    (congrFun (congrFun (circleSingletonLinear_decode
+      (hS.2.1 (3 / 4 : ℝ)) m (deriv (χ m) x.2)) m) θ).trans (if_pos rfl)
+  have hcut : (S.circle (3 / 4 : ℝ)).decode
+      (circleProductBilinear (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) c (u + v)) m θ =
+      deriv (χ m) x.2 * (S.circle (3 / 4 : ℝ)).decode (u + v) m θ :=
+    (congrFun (congrFun (circleProductBilinear_decode
+      (hS.2.1 (3 / 4 : ℝ)) hT hN.1.1 (by norm_num) c (u + v)) m) θ).trans
+        (congrArg (fun q : ℝ => q * (S.circle (3 / 4 : ℝ)).decode (u + v) m θ) hsingleton)
+  have hadd := singleComponentVelocity_decode_add_point (S.circle (3 / 4 : ℝ)).decode u v m θ
+  have hprod : (S.circle (3 / 4 : ℝ)).decode v m θ =
+      (S.circle (3 / 4 : ℝ)).decode a m θ * (S.circle (3 / 4 : ℝ)).decode u m θ :=
+    congrFun (congrFun (circleProductBilinear_decode (hS.2.1 (3 / 4 : ℝ))
+      hT hN.1.1 (by norm_num) a u) m) θ
+  have hslope := hN.singleComponentInverseSlopeCircle_decode hS hT m (x.1.1, x.2) hx hr θ
+  have hamp := hN.singleComponentPulledDisplacementCircle_decode hS hT χ hχrange m x hx hr θ
+  exact hcut.trans
+    ((congrArg (fun q : ℝ => deriv (χ m) x.2 * q) hadd).trans
+      ((singleComponentVelocity_reassemble (cut := deriv (χ m) x.2) hslope hprod hamp).trans
+        (returnCorrectionVelocityLinear_apply D S C χ (liftSectorParameter S C x.1.1)
+          m (x.2, θ) x.1.2).symm))
 
 section JointTower
 
