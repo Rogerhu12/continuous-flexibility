@@ -56,6 +56,8 @@ variable {d c₀ : PolarPoint → ℝ} {β : ℝ → ℝ} {Φ : ℝ → ℝ → 
   {R σ : ℝ} {G : ℝ × ℝ × ℝ → ℝ}
   (P : N04bRootCoordinateProperties d c₀ β Φ R σ G)
 
+include P
+
 /-- The genuine characteristic transport cancels the angular-product
 denominator. The remaining factor is regular at the root. -/
 theorem n06_rootHeightFactor_eq_regular
@@ -74,7 +76,7 @@ theorem n06_rootHeightFactor_eq_regular
         angularPartial (rootCharacteristicCoordinate G (-1)) p := by
     simpa only [rootPhysicalSpeed, neg_one_mul, neg_mul, sub_eq_add_neg] using
       P.transport (-1) p.1 p.2 hp
-  have he := rootHeightFactor_eq_characteristicFactor a P.smooth Real.pi_ne_zero
+  have he := rootHeightFactor_eq_characteristicFactor (p := p) a P.smooth Real.pi_ne_zero
     (fun r _ => P.odd_period r) (fun r _ => P.even_period r) hp hOraw hUr hVr
     (P.angular_positive 1 p.1 p.2 hp).ne' (P.angular_positive (-1) p.1 p.2 hp).ne'
   have hF : 0 < extendedRootRadialFactor G p :=
@@ -99,7 +101,7 @@ theorem n06_logHeight_eq_regular
   have hbase : 0 < ((3 : ℝ) / 2) * extendedRootOddCoefficient G p :=
     mul_pos (by norm_num) hO
   have hF : 0 < extendedRootRadialFactor G p := Real.rpow_pos_of_pos hbase _
-  have he := P.n06_rootHeightFactor_eq_regular a hp hO
+  have he := P.n06_rootHeightFactor_eq_regular (p := p) a hp hO
   have hh : 0 < rootHeightFactor a G p := by
     rw [he]
     exact div_pos hac (Real.sqrt_pos.mpr hF)
@@ -131,7 +133,8 @@ theorem n06_logHeight_boundary_jets
         (1 / 6 : ℝ) * Real.log (((3 : ℝ) / 2) * extendedRootOddCoefficient G p) -
           (1 / 2 : ℝ) * Real.log (a p * c₀ p)) 0 n θ := by
   have hO : 0 < extendedRootOddCoefficient G (0, θ) := by
-    simpa only [extendedRootOddCoefficient_of_nonneg G (le_refl (0 : ℝ))] using
+    simpa only [extendedRootOddCoefficient_of_nonneg G (p := (0, θ))
+      (le_refl (0 : ℝ))] using
       P.odd_positive θ
   have hac : 0 < a (0, θ) * c₀ (0, θ) :=
     mul_pos ha0 (P.n06_speedFactor_positive_zero θ)
@@ -157,7 +160,7 @@ theorem n06_logHeight_boundary_jets
   apply n06_iteratedDeriv_eq_of_positive_germ (hleft.comp 0 hline)
     (hright.comp 0 hline) (n := n)
   filter_upwards [hOnear, hacnear] with x hxO hxac hx
-  exact P.n06_logHeight_eq_regular a hx hxO hxac
+  exact P.n06_logHeight_eq_regular (p := (x, θ)) a hx hxO hxac
 
 end N04bRootCoordinateProperties
 
