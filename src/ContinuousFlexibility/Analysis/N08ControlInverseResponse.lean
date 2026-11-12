@@ -52,6 +52,91 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {G : ScalarInverseData S}
   {base loss : ℕ} {ε : ℝ}
 
+/-- Transport the raw column estimate before introducing the inverse witness.
+Keeping this step separate prevents elaboration from unfolding the full
+physical construction while checking an elementary equality of seminorms. -/
+private theorem n08_sectorColumn_source_bound
+    (href : referenceStateConditions D S C)
+    (Hraw : AnnularState S × ℝ → ControlBanach →L[ℝ] S.Source)
+    {V : Set (StateDirections S × ℝ)} {columnBase columnLoss : ℕ} {δ : ℝ}
+    (hmap : MapsTo (liftSectorParameter S C) V
+      {z | n08StateParameterGrading S columnBase (z - (C.referenceState, 0)) < δ})
+    (hcolumn : ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧ ∀ z,
+      n08StateParameterGrading S columnBase (z - (C.referenceState, 0)) < δ →
+      ∀ b : ControlBanach, S.sourceGrading s (Hraw z b) ≤
+        K * (1 + n08StateParameterGrading S (s + columnLoss)
+          (z - (C.referenceState, 0))) * ‖b‖) :
+    ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧ ∀ z ∈ V, ∀ b : ControlBanach,
+      S.sourceGrading s (n08SectorControlColumn S Hraw (liftSectorParameter S C z) b) ≤
+        K * (1 + pairGrading (sectorGrading S) realGrading (s + columnLoss) z) * ‖b‖ := by
+  intro s
+  obtain ⟨K, hK, hKb⟩ := hcolumn s
+  refine ⟨K, hK, ?_⟩
+  intro z hz b
+  have hb := hKb (liftSectorParameter S C z) (hmap hz) b
+  have heval : Hraw (liftSectorParameter S C z) b =
+      n08SectorControlColumn S Hraw (liftSectorParameter S C z) b :=
+    (congrArg (fun F : ControlBanach →L[ℝ] S.Source => F b)
+      (n08SectorControlColumn_lift href Hraw z)).symm
+  exact n08_transport_response_bound (X := S.Source) (S.sourceGrading s) heval
+    (n08_liftSectorParameter_difference S C (s + columnLoss) z) K ‖b‖ hb
+
+/-- Move one already proved sector response estimate to the ambient state
+rectangle. The column is zero away from the sector, as in its definition. -/
+private theorem n08_sectorResponse_state_bound
+    (href : referenceStateConditions D S C)
+    (Hraw : AnnularState S × ℝ → ControlBanach →L[ℝ] S.Source)
+    {V : Set (StateDirections S × ℝ)} {responseBase responseLoss newBase newLoss s : ℕ}
+    {η K : ℝ} (hK : 0 < K) (hbase : responseBase ≤ newBase)
+    (hloss : responseLoss ≤ newLoss) (hηone : 2 * η ≤ 1)
+    (hnewV : sectorNeighborhood S newBase η η ⊆ V)
+    (hb : ∀ y ∈ V, pairGrading (sectorGrading S) realGrading responseBase y < 1 →
+      ∀ b : ControlBanach,
+        S.sourceGrading s (n08SectorControlColumn S Hraw (liftSectorParameter S C y) b) +
+          pairGrading (heightPairGrading S) realGrading s
+            (G.G (liftSectorParameter S C y)
+              (n08SectorControlColumn S Hraw (liftSectorParameter S C y) b)) ≤
+          K * (1 + pairGrading (sectorGrading S) realGrading (s + responseLoss) y) * ‖b‖) :
+    ∀ z ∈ stateNeighborhood S C newBase η, ∀ b : ControlBanach,
+      S.sourceGrading s (n08SectorControlColumn S Hraw z b) +
+        heightPairGrading S s (G.G z (n08SectorControlColumn S Hraw z b)).1 +
+        |(G.G z (n08SectorControlColumn S Hraw z b)).2| ≤
+        K * (1 + stateGrading S (s + newLoss) (z.1 - C.referenceState) + |z.2|) * ‖b‖ := by
+  intro z hz b
+  let H := n08SectorControlColumn S Hraw
+  by_cases hs : stateSector S z.1
+  · let y := n08SectorParameterCenter href z hs
+    have hy : y ∈ sectorNeighborhood S newBase η η :=
+      n08SectorParameterCenter_mem href hs hz
+    have hsmall : pairGrading (sectorGrading S) realGrading responseBase y < 1 :=
+      (n08_sectorNeighborhood_pairGrading_lt hbase hy).trans_le hηone
+    have hby := hb y (hnewV hy) hsmall b
+    have hb' : S.sourceGrading s (H z b) +
+        pairGrading (heightPairGrading S) realGrading s (G.G z (H z b)) ≤
+        K * (1 + n08StateParameterGrading S (s + responseLoss)
+          (z - (C.referenceState, 0))) * ‖b‖ :=
+      n08_transport_response_bound (X := AnnularState S × ℝ)
+        (fun w : AnnularState S × ℝ => S.sourceGrading s (H w b) +
+          pairGrading (heightPairGrading S) realGrading s (G.G w (H w b)))
+        (n08SectorParameterCenter_lift href z hs)
+        (n08SectorParameterCenter_grading href (s + responseLoss) z hs) K ‖b‖ hby
+    have hhigh := n08StateParameterGrading_monotone S
+      (Nat.add_le_add_left hloss s) (z - (C.referenceState, 0))
+    have hfinal := hb'.trans (mul_le_mul_of_nonneg_right
+      (mul_le_mul_of_nonneg_left (add_le_add (le_refl 1) hhigh) hK.le) (norm_nonneg b))
+    change S.sourceGrading s (H z b) +
+        (heightPairGrading S s (G.G z (H z b)).1 + |(G.G z (H z b)).2|) ≤
+        K * (1 + (stateGrading S (s + newLoss) (z.1 - C.referenceState) + |z.2 - 0|)) * ‖b‖
+      at hfinal
+    simpa only [sub_zero, add_assoc] using hfinal
+  · have heq : H z = 0 := n08SectorControlColumn_of_not_sector Hraw hs
+    have hinput : H z b = 0 :=
+      congrArg (fun F : ControlBanach →L[ℝ] S.Source => F b) heq
+    have hzero := n08_linear_response_zero (X := S.Source) (Y := HeightPair S)
+      (S.sourceGrading s) (heightPairGrading S s) (G.G z).toLinearMap hinput
+    exact hzero.le.trans (mul_nonneg (mul_nonneg hK.le
+      (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))) (norm_nonneg _))
+
 /-- The control column is chosen together with one stronger state
 neighborhood, its actual derivative, its sector smoothness, and the three
 component bounds required by N08. The scalar inverse is unchanged. -/
@@ -105,18 +190,7 @@ theorem n08ControlInverseResponse_exists
       (pairGrading (heightPairGrading S) realGrading) S.sourceGrading V
       (fun z => (G.G (liftSectorParameter S C z)).toLinearMap) :=
     n08_linearFamilyTame_restrict hG.2.2.1 hV
-  have hHv : ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧ ∀ z ∈ V, ∀ b : ControlBanach,
-      S.sourceGrading s (H (liftSectorParameter S C z) b) ≤
-        K * (1 + pairGrading (sectorGrading S) realGrading (s + columnLoss) z) * ‖b‖ := by
-    intro s
-    obtain ⟨K, hK, hKb⟩ := hcolumn s
-    refine ⟨K, hK, fun z hz b => ?_⟩
-    have h := hKb (liftSectorParameter S C z) (hmap hz) b
-    have heval : Hraw (liftSectorParameter S C z) b = H (liftSectorParameter S C z) b :=
-      (congrArg (fun F : ControlBanach →L[ℝ] S.Source => F b)
-        (n08SectorControlColumn_lift hN.2.2.1 Hraw z)).symm
-    exact n08_transport_response_bound (S.sourceGrading s) heval
-      (n08_liftSectorParameter_difference S C (s + columnLoss) z) K ‖b‖ h
+  have hHv := n08_sectorColumn_source_bound hN.2.2.1 Hraw hmap hcolumn
   have hmono := tamePairGrading_monotone (solve_sectorGrading_monotone S)
     weighted_realGrading_monotone
   have houtput : Monotone (pairGrading (heightPairGrading S) realGrading) :=
@@ -154,39 +228,8 @@ theorem n08ControlInverseResponse_exists
     exact hderiv z hball u
   · intro s
     obtain ⟨K, hK, hKb⟩ := hresponse s
-    refine ⟨K, hK, fun z hz b => ?_⟩
-    by_cases hs : stateSector S z.1
-    · let y := n08SectorParameterCenter hN.2.2.1 z hs
-      have hy : y ∈ sectorNeighborhood S newBase η η :=
-        n08SectorParameterCenter_mem hN.2.2.1 hs hz
-      have hsmall : pairGrading (sectorGrading S) realGrading responseBase y < 1 :=
-        (n08_sectorNeighborhood_pairGrading_lt (le_max_right _ _) hy).trans_le hηone
-      have hb := hKb y (hnewV hy) hsmall b
-      have hb' : S.sourceGrading s (H z b) +
-          pairGrading (heightPairGrading S) realGrading s (G.G z (H z b)) ≤
-          K * (1 + n08StateParameterGrading S (s + responseLoss)
-            (z - (C.referenceState, 0))) * ‖b‖ := by
-        exact n08_transport_response_bound
-          (fun w : AnnularState S × ℝ => S.sourceGrading s (H w b) +
-            pairGrading (heightPairGrading S) realGrading s (G.G w (H w b)))
-          (n08SectorParameterCenter_lift hN.2.2.1 z hs)
-          (n08SectorParameterCenter_grading hN.2.2.1 (s + responseLoss) z hs) K ‖b‖ hb
-      have hhigh := n08StateParameterGrading_monotone S
-        (Nat.add_le_add_left (le_max_right loss responseLoss) s) (z - (C.referenceState, 0))
-      have hfinal := hb'.trans (mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (add_le_add (le_refl 1) hhigh) hK.le) (norm_nonneg b))
-      change S.sourceGrading s (H z b) +
-          (heightPairGrading S s (G.G z (H z b)).1 + |(G.G z (H z b)).2|) ≤
-          K * (1 + (stateGrading S (s + newLoss) (z.1 - C.referenceState) + |z.2 - 0|)) * ‖b‖
-        at hfinal
-      simpa only [sub_zero, add_assoc] using hfinal
-    · have heq : H z = 0 := n08SectorControlColumn_of_not_sector Hraw hs
-      have hinput : H z b = 0 :=
-        congrArg (fun F : ControlBanach →L[ℝ] S.Source => F b) heq
-      have hzero := n08_linear_response_zero (X := S.Source) (Y := HeightPair S)
-        (S.sourceGrading s) (heightPairGrading S s) (G.G z).toLinearMap hinput
-      exact hzero.le.trans (mul_nonneg (mul_nonneg hK.le
-        (add_nonneg (add_nonneg zero_le_one (apply_nonneg _ _)) (abs_nonneg _))) (norm_nonneg _))
+    exact ⟨K, hK, n08_sectorResponse_state_bound hN.2.2.1 Hraw hK
+      (le_max_right _ _) (le_max_right _ _) hηone hnewV hKb⟩
   · exact n08SectorControlColumn_smoothTame hN.2.2.1 hsmooth hnewMap
 
 end ContinuousFlexibility.Statements

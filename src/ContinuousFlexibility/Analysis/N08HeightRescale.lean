@@ -86,19 +86,30 @@ theorem n08LocalHeightState_grading_bound (S : PhysicalSpacesData)
     (a x : AnnularState S) (h : (S.height (3 / 4 : ℝ)).Space) (s : ℕ) (t : ℝ) :
     stateGrading S s (n08LocalHeightState S x h t - a) ≤
       stateGrading S s (x - a) + |t| * (S.height (3 / 4 : ℝ)).grading s h := by
-  rw [n08LocalHeightState_eq_affine]
-  have hb := n08_seminorm_update_bound (stateGrading S s) a x ((h, 0), (0, (0, 0))) t
-  exact hb.trans_eq (congrArg (fun c : ℝ => stateGrading S s (x - a) + |t| * c)
-    (n08_decayingHeightDirection_grading S s h))
+  have he : stateGrading S s (n08LocalHeightState S x h t - a) =
+      stateGrading S s (x + n08RealSMul t ((h, 0), (0, (0, 0))) - a) :=
+    congrArg (fun y : AnnularState S => stateGrading S s (y - a))
+      (n08LocalHeightState_eq_affine S x h t)
+  have hb := n08_seminorm_update_bound (E := AnnularState S)
+    (stateGrading S s) a x ((h, 0), (0, (0, 0))) t
+  exact he.le.trans (hb.trans_eq
+    (congrArg (fun c : ℝ => stateGrading S s (x - a) + |t| * c)
+      (n08_decayingHeightDirection_grading S s h)))
 
 theorem n08LocalHeightState_difference_grading (S : PhysicalSpacesData)
     (x : AnnularState S) (h : (S.height (3 / 4 : ℝ)).Space) (s : ℕ) (t u : ℝ) :
     stateGrading S s (n08LocalHeightState S x h t - n08LocalHeightState S x h u) =
       |t - u| * (S.height (3 / 4 : ℝ)).grading s h := by
-  rw [n08LocalHeightState_eq_affine S x h t, n08LocalHeightState_eq_affine S x h u]
-  have he := n08_seminorm_update_difference (stateGrading S s) x ((h, 0), (0, (0, 0))) u t
-  exact he.trans (congrArg (fun a : ℝ => |t - u| * a)
-    (n08_decayingHeightDirection_grading S s h))
+  have ha :
+      stateGrading S s (n08LocalHeightState S x h t - n08LocalHeightState S x h u) =
+      stateGrading S s ((x + n08RealSMul t ((h, 0), (0, (0, 0)))) -
+        (x + n08RealSMul u ((h, 0), (0, (0, 0))))) :=
+    congrArg₂ (fun y z : AnnularState S => stateGrading S s (y - z))
+      (n08LocalHeightState_eq_affine S x h t) (n08LocalHeightState_eq_affine S x h u)
+  have he := n08_seminorm_update_difference (E := AnnularState S)
+    (stateGrading S s) x ((h, 0), (0, (0, 0))) u t
+  exact ha.trans (he.trans (congrArg (fun a : ℝ => |t - u| * a)
+    (n08_decayingHeightDirection_grading S s h)))
 
 theorem n08LocalHeightState_field (S : PhysicalSpacesData) (x : AnnularState S)
     (h : (S.height (3 / 4 : ℝ)).Space) (t : ℝ) (p : PolarPoint) :

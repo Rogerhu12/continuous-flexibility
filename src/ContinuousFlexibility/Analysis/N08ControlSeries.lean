@@ -62,10 +62,11 @@ theorem n08ControlSeries_contDiffOn (hC : controlGeometryConditions D S C)
 
 theorem n08ControlSeries_zero_off_core (hC : controlGeometryConditions D S C)
     (a : ℕ → ℝ) {r : ℝ} (hr : r ∉ Ioo D.a D.b) : n08ControlSeries C a r = 0 := by
+  have hsupport := hC.support_subset
   obtain ⟨hI, _, _, _, _, hcontrol, _⟩ := hC
   have hz (m : ℕ) : C.control m r = 0 := by
     by_contra hne
-    have hm := (hcontrol m).2.2 hne
+    have hm := hsupport m hne
     exact hr ⟨(hI m).1.trans hm.1, hm.2.trans (hI m).2.2⟩
   simp only [n08ControlSeries, hz, mul_zero, tsum_zero]
 
@@ -75,6 +76,7 @@ theorem n08ControlSeries_jet_bound (hC : controlGeometryConditions D S C)
       |a m * iteratedDeriv n (C.control m) r| ≤ W) :
     |iteratedDeriv n (n08ControlSeries C a) r| ≤ W := by
   classical
+  have hsupport := hC.support_subset
   obtain ⟨_, _, hdisjoint, _, _, hcontrol, hfinite, _⟩ := hC
   obtain ⟨t, ht, htf⟩ := hfinite ⟨r, hr⟩
   let indices := htf.toFinset
@@ -101,13 +103,13 @@ theorem n08ControlSeries_jet_bound (hC : controlGeometryConditions D S C)
     · intro i _ hi
       have hnot : r ∉ Ioo (C.left i) (C.right i) := fun hir =>
         Set.disjoint_left.mp (hdisjoint i m hi) hir hmr
-      rw [n08_iteratedDeriv_zero_off_open_interval (hcontrol i).1 (hcontrol i).2.2 n hnot,
+      rw [n08_iteratedDeriv_zero_off_open_interval (hcontrol i).1 (hsupport i) n hnot,
         mul_zero]
   · have hz : ∑ i ∈ indices, a i * iteratedDeriv n (C.control i) r = 0 := by
       apply Finset.sum_eq_zero
       intro i hi
       have hnot : r ∉ Ioo (C.left i) (C.right i) := fun hir => h ⟨i, hi, hir⟩
-      rw [n08_iteratedDeriv_zero_off_open_interval (hcontrol i).1 (hcontrol i).2.2 n hnot,
+      rw [n08_iteratedDeriv_zero_off_open_interval (hcontrol i).1 (hsupport i) n hnot,
         mul_zero]
     rwa [hz, abs_zero]
 

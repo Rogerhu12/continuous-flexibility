@@ -83,8 +83,7 @@ theorem n08_controlActive_subsingleton (hC : controlGeometryConditions D S C) (r
   intro i hi j hj
   by_contra hij
   have hdisjoint := hC.2.2.1 i j hij
-  have hsupport := hC.2.2.2.2.2.1
-  exact Set.disjoint_left.mp hdisjoint ((hsupport i).2.2 hi) ((hsupport j).2.2 hj)
+  exact Set.disjoint_left.mp hdisjoint (hC.support_subset i hi) (hC.support_subset j hj)
 
 private def n08_controlActive (hC : controlGeometryConditions D S C) (r : ℝ) : Finset ℕ :=
   (n08_controlActive_subsingleton hC r).finite.toFinset

@@ -23,9 +23,10 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 theorem n08_control_zero_on_other_component
     (hC : controlGeometryConditions D S C) {m n : ℕ} (hnm : n ≠ m)
     {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) : C.control n r = 0 := by
+  have hsupport := hC.support_subset n
   obtain ⟨_, _, hdisjoint, _, _, hcontrol, _⟩ := hC
   by_contra hne
-  exact Set.disjoint_left.mp (hdisjoint n m hnm) ((hcontrol n).2.2 hne) hr
+  exact Set.disjoint_left.mp (hdisjoint n m hnm) (hsupport hne) hr
 
 theorem n08_stateControlSum_on_component
     (hC : controlGeometryConditions D S C) (x : AnnularState S) (m : ℕ)

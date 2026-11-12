@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 import ContinuousFlexibility.Statements.Analysis
 import Mathlib.Analysis.Normed.Group.InfiniteSum
 import Mathlib.Topology.Algebra.InfiniteSum.Module
@@ -26,20 +27,6 @@ open scoped Topology ENNReal NNReal BigOperators
 open ContinuousFlexibility.Statements
 
 /-! ## The concrete model already has smoothing operators -/
-
-theorem hasSmoothing_exponentialSequence (B : Type*)
-    [NormedAddCommGroup B] [NormedSpace ℝ B] :
-    HasSmoothing (exponentialSequenceSeminorm B) := by
-  refine ⟨0, 0, exponentialSequenceSmoothing B, ?_, ?_,
-    tendsto_exponentialSequenceSmoothing B⟩
-  · intro m n _ hmn
-    refine ⟨1, zero_le_one, fun N u => ?_⟩
-    simpa only [Nat.cast_zero, add_zero, one_mul] using
-      exponentialSequenceSmoothing_forward B hmn N u
-  · intro m n _ hmn
-    refine ⟨1, zero_le_one, fun N u => ?_⟩
-    simpa only [Nat.cast_zero, sub_zero, one_mul, neg_mul] using
-      exponentialSequenceSmoothing_tail B hmn N u
 
 theorem hasSmoothing_modelGrading : HasSmoothing modelGrading :=
   hasSmoothing_exponentialSequence PhysicalModelBanach

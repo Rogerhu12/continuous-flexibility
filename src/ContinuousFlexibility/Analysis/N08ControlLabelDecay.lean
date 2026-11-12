@@ -149,7 +149,8 @@ theorem n08_weightedControlProfile_label_jet_bound_global
   · exact hKb m r hr
   · change |iteratedDeriv s (fun t => T.H (T.sample m) ^ (3 / 4 : ℝ) * C.control m t) r| ≤ _
     rw [iteratedDeriv_const_mul_field,
-      n08_iteratedDeriv_zero_off_open_interval (hcontrol m).1 (hcontrol m).2.2 s hr,
+      n08_iteratedDeriv_zero_off_open_interval (hcontrol m).1
+        (hN.2.2.2.1.support_subset m) s hr,
       mul_zero, abs_zero]
     exact mul_nonneg hK.le
       (Real.rpow_nonneg (n08_material_sample_bounds hN.1.1 hT m).1.le _)
