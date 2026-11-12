@@ -5,36 +5,31 @@ generated Lean root and are not a completed proof or a green CI result.
 
 ## Recorded sources
 
-- Last successful N01c head: `7bc31f66b05ef96911654f4d9dda120c907c88e8`,
-  [CI run 43128921355](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43128921355).
+- Last successful N01c head: `e4e626d44ffa443a891c357c1f7fb64228d2417c`,
+  [CI run 43170538811](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43170538811).
+  It passed 6,061 jobs, compiled 2,089 / 2,091 modules (two excluded), and
+  audited all N01c stages with only the three allowed axioms.
 - Main inspected for this port: `ed02c473e9fa361a7188a17cffb9c1e5c19b9adc`.
 - N07b source inspected: `b17b71d6d3b812df9bbcf8002c976496c1402964`.
+- Current integration target, containing both R11a and N07b:
+  `93f5906c14e93f96e5f731719c65c5330c16e9a5`.
 - Required corrections: [PR #23, final review comment](https://github.com/Rogerhu12/continuous-flexibility/pull/23#issuecomment-6814332112).
 - The corresponding failed integration log was read once, from
   [run 43146792596](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43146792596).
 
-## Flow adapters
+## Flow adapters on the N07b integration
 
-The source-tree `Analysis/CoupledNeighborhoodRestriction.lean` contains the
-pre-N07b adaptation. It imports `N01cBoundsRestriction` and reuses
-`ordinaryFlowBounds_restrict`, retaining `forall k, exists parameterLoss,
-forall s` and the high index `s + loss + parameterLoss` on the common
-neighborhood. Its other restrictions retain the current main interfaces.
+The source-tree `CoupledNeighborhoodRestriction.lean` and
+`N06Neighborhood.lean` now use the exact main `93f5906` implementations
+with their flow helpers adapted to `ordinaryFlowBounds_restrict`.
+They retain `forall k, exists parameterLoss, forall s` and the high
+index `s + loss + parameterLoss` on the common neighborhood.
+Main's N04 and Through05 primitive-geometry restrictions remain intact.
 
-`CoupledNeighborhoodRestriction-after-N07b.patch` is a patch against the
-unmodified main file at the recorded main commit, **not** against the already
-adapted source-tree copy. After the actual main merge, combine its flow hunk
-with any upstream changes; its additional N04/Through05 hunks reuse
-`n06_N04Properties_mono` and `n06_NonlinearPropertiesThrough05_mono` to retain
-N07b's canonical primitive geometry.
-
-`N06Neighborhood.patch` adapts N07b's abstract flow restriction to the same
-quantifiers using `ordinaryFlowBounds_restrict`. It applies to the recorded
-N07b source. Reconcile it with the actual main version after N07b lands.
-
-The patch application, project import closure, absence of import cycles,
-and the reused declarations' namespaces and argument orders were checked.
-**Neither adapter has passed Lean compilation or CI in this session.**
+The two patch snapshots alongside this document both apply to the
+unmodified files at `93f5906`, not to the already adapted source tree.
+They contain only the required flow import/helper changes. Static patch
+and import checks passed; this new atomic N07b migration awaits CI.
 
 ## Actual N01a construction
 
@@ -45,12 +40,20 @@ requires the original bounded additive index shift. The separate uniform
 pointwise optical lower bound is not supplied by the current upper-jet and
 travel estimates.
 
-`N01cMorseOpticalEnvelope.lean` is an uncompiled proof draft for the actual
-Morse realization. It converts the explicit optical lower coefficient to
-one common negative power of `radialE`; it does not construct the missing
-same-witness certificate or discharge N01a. Its existing prerequisite
-exceeded the local compilation time budget, so local compilation was stopped
-under the repository rules. Do not move the draft into `src/` without validation.
+The completed R11a factory now retains enough actual data to prepare both
+certificates on the same `Γ.reference`. The new proof chain uses the
+canonical central-plus-two-tail enumeration, overlap-based additive
+index comparison, the uniform Morse optical envelope, radius dilation,
+and the central simple-zero lower bound. Fixed-reference versions of
+the R11a/R11b/R12 packaging preserve those certificates without changing
+the public radial statements. N01a then uses the actual host cells and
+the original affine material data and optical controls.
+
+The new modules have undergone source and import review but await Lean
+validation. They will enter `src/` in the earliest dependency-closed CI
+batch. Local compilation was stopped under the repository time-budget
+rule. `N01cMorseOpticalEnvelope.lean` here is the earlier draft snapshot;
+the reviewed implementation is promoted with the new optical helpers.
 
 ## Main import batches
 
@@ -60,16 +63,26 @@ batch was imported in local commit `e475f9b`; it adds 17,978 Lean lines.
 The other batches must wait until that batch passes CI. The N01a final
 assembly is held until the primitive geometry is genuinely proved.
 
-The manifests describe the original complete plan; do not restore already
-adapted files blindly. Regenerate or reconcile the remaining plan after
-N07b lands. Keep the 20,000-added-Lean-lines limit from the latest green
-commit, including drafts with a `.lean` suffix.
+The manifests describe the historical plan, not the remaining current-main
+work. The replacement plan has five dependency-closed batches targeting
+`93f5906`, with reviewed N01c proof promotions: 18,347; 17,473; 17,584;
+17,470; and 15,871 added Lean lines. The final merge additionally reserves
+686 root-import lines and two status-script lines. Every batch must pass
+CI before the next is applied, and the actual Git diff is checked again
+before each push. The 20,000 limit includes Lean drafts.
 
-## Required remote access
+## Publication and current CI
 
-The current task supplied a credential placeholder. The available
-authentication could read the public PR but a push was rejected by GitHub
-with HTTP 403 and `Permission to Rogerhu12/continuous-flexibility.git denied`.
-No new commit was pushed and no new CI run was started. PR #23 remains a
-draft. Resume pushing only with credentials authorized to write this
-repository; never put credential values in a file, remote URL, or report.
+Terminal Git authentication was rejected for writes. The connected GitHub
+app successfully published the two exact local source trees as commits
+`07556de` and `33e9c69`, using a fast-forward update of the existing
+`line/N01c`. Both returned tree SHAs were checked against local Git.
+
+The first run stalled while fetching the final six Mathlib cache files.
+The identical source tree was retried as `e4e626d`; its environment setup
+and cache restoration succeeded, and
+[CI run 43170538811](https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43170538811)
+passed the full build and axiom checks. The next reviewed integration
+batch is now applied and awaits its own CI. PR #23 remains a draft until
+a complete green build on the actual latest-main merge. No credential values are stored
+in the repository or its Git configuration.

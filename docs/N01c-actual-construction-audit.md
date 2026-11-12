@@ -87,7 +87,7 @@ tsupport D.chi ⊆ {r | r ∈ radialCore D ∧ 0 < deriv D.w r}
 and hence `tsupport D.chi ⊆ radialCore D`. No extra construction is
 needed for that conjunct.
 
-## Same-witness route if a larger construction repair is undertaken
+## Construction route identified before R11a landed
 
 1. Prove a purely geometric scaffold at
    `SeedGluedPair.exists_accumulating_reference_with_construction_geometry`
@@ -111,17 +111,47 @@ needed for that conjunct.
    closure and reciprocity proofs need not be replaced. Adding an
    unproved certificate to these interfaces is not a proof.
 5. The present `R12Statement = Nonempty RadialReference` drops this
-   certificate. Therefore retaining it through R12 would require an
-   explicitly audited contract refinement and corresponding genuine
-   construction proof. It cannot be recovered merely from the existing
-   existential witness by proof syntax or by choosing an unrelated
-   reference.
+   certificate. The certificate cannot be recovered merely from an
+   arbitrary existential witness by proof syntax. It can instead be
+   retained by companion proofs with an explicit reference parameter;
+   the public R12 contract need not be strengthened.
 6. With a genuinely constructed scaffold retained on that same D,
    N01a can keep the supplied containing-cell map, construct controls
    against its samples, and use
    `n01PrimitiveGeometry_of_radialConstruction` for the material-envelope
    comparison. The existing N01b transport and N01c proof can then apply.
 
-No frozen contract, shared source file, or blueprint proof has been
-changed by this audit. No desired estimate has been introduced as a new
-hypothesis of N01a, and no completed proof has been replaced by an admission.
+## Route available after the R11a and N07b main integration
+
+Main `93f5906c14e93f96e5f731719c65c5330c16e9a5` contains the closed
+R11a construction. `r11a_exists_quantitative_geometry_family` retains
+the actual `SeedRetainedPair`, `ConnectedReferenceGeometry`, profile
+identity, and `R11aRetainedCoordinates`. These data are sufficient to
+prove both geometric obligations directly on `Γ.reference`, without
+changing the geometry factory or a public radial statement.
+
+The prepared proof chain uses the canonical central-plus-two-tail
+component enumeration. Its tail slot has the actual floored model
+index. A model cell and the control's genuine host contain the same
+interior point, so the existing material-coordinate comparison bounds
+their additive index difference. The central slot is absorbed into
+the same finite constant.
+
+For the optical estimate, the existing whole-component Morse bound is
+converted to a uniform negative power of `radialE`. Radius dilation
+costs the inverse cube of the scale. The starting index is at least
+4096, so every actual tail meets the existing index-100 bound. The one
+central component uses the proved simple-zero estimate. Overlapping
+cell comparison then supplies the bound for every actual containing
+host.
+
+Fixed-reference versions of the final R11a modal/regional packaging
+and the R11b/R12 completion retain these certificates on that same
+reference. The N01a assembly keeps the original affine material data
+and normalized optical controls, and assigns their genuine host map
+to `C.cell`.
+
+These new construction proofs are drafts awaiting Lean/CI validation.
+No desired estimate is added as a hypothesis of the public N01a node,
+and no completed proof is replaced by an admission. The public radial
+statements remain unchanged.
