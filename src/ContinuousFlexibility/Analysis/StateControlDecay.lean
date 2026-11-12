@@ -17,6 +17,7 @@ namespace ContinuousFlexibility.Statements
 open Set Filter
 open scoped ContDiff Topology BigOperators
 
+/-- Every jet vanishes outside the open support interval, including its endpoints. -/
 theorem iteratedDeriv_zero_off_open_interval {a b r : ℝ} {f : ℝ → ℝ}
     (hf : ContDiff ℝ ∞ f) (hs : Function.support f ⊆ Ioo a b)
     (n : ℕ) (hr : r ∉ Ioo a b) : iteratedDeriv n f r = 0 := by

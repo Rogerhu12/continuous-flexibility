@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06PrimitiveModalTraces
 import ContinuousFlexibility.Analysis.N06PrimitiveAtlasTransmissionJets
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Finite true boundary matching from the original primitive atlas

@@ -53,11 +53,12 @@ theorem n08_minusFlow_parameter_lipschitz
         (Icc (-(ε / 2)) (ε / 2)) := by
   have hdata := hN
   obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, hflow⟩ := hdata
-  obtain ⟨B, _, hBj⟩ := hflow 1 0
+  obtain ⟨parameterLoss, hparameter⟩ := hflow 1
+  obtain ⟨B, _, hBj⟩ := hparameter 0
   let A : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
     T.E0 (T.sample (C.cell m)) ^ B
-  let M : ℝ := |A| * (2 + stateGrading S loss (x - C.referenceState) + ε)
-  have hgrade : 0 ≤ stateGrading S loss (x - C.referenceState) :=
+  let M : ℝ := |A| * (2 + stateGrading S (loss + parameterLoss) (x - C.referenceState) + ε)
+  have hgrade : 0 ≤ stateGrading S (loss + parameterLoss) (x - C.referenceState) :=
     apply_nonneg _ _
   have hM : 0 ≤ M := mul_nonneg (abs_nonneg A) (by linarith [hN.2.1])
   refine ⟨NNReal.mk M hM, ?_⟩
@@ -75,14 +76,14 @@ theorem n08_minusFlow_parameter_lipschitz
   have hqabs : |q| ≤ ε / 2 := abs_le.mpr hq
   have hbound : |J.D 1 (x, q)
       (Fin.cons ((0 : AnnularState S), (1 : ℝ)) Fin.elim0)| ≤
-      A * (2 + stateGrading S loss (x - C.referenceState) + |q|) := by
+      A * (2 + stateGrading S (loss + parameterLoss) (x - C.referenceState) + |q|) := by
     simpa only [pow_zero, one_mul, Nat.zero_add, n08_oneHigh_parameter] using
       hJ (x, q) (hmem q hq) (Fin.cons ((0 : AnnularState S), (1 : ℝ)) Fin.elim0)
   have hreal : |J.D 1 (x, q)
       (Fin.cons ((0 : AnnularState S), (1 : ℝ)) Fin.elim0)| ≤ M := by
     calc
-      _ ≤ A * (2 + stateGrading S loss (x - C.referenceState) + |q|) := hbound
-      _ ≤ |A| * (2 + stateGrading S loss (x - C.referenceState) + |q|) :=
+      _ ≤ A * (2 + stateGrading S (loss + parameterLoss) (x - C.referenceState) + |q|) := hbound
+      _ ≤ |A| * (2 + stateGrading S (loss + parameterLoss) (x - C.referenceState) + |q|) :=
         mul_le_mul_of_nonneg_right (le_abs_self A) (by positivity)
       _ ≤ M := mul_le_mul_of_nonneg_left (by linarith [hN.2.1]) (abs_nonneg A)
   simpa only [← NNReal.coe_le_coe, coe_nnnorm, Real.norm_eq_abs, NNReal.coe_mk] using hreal

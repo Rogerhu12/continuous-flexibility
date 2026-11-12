@@ -124,7 +124,7 @@ theorem n06_primitiveReferenceTransforms_congr_ae_physical
       f (K.inverseChart (C.referenceState, 0) m p) =
         g (K.inverseChart (C.referenceState, 0) m p) := by
     apply (n05_canonicalChart_ae_iff h04 href hs m hangle _).mpr
-    simp only [h04.1.referenceDomain m, referencePhysicalPieceOpen,
+    simp only [n05PhysicalPieceHalfPeriod, h04.1.referenceDomain m, referencePhysicalPieceOpen,
       prod_inter_prod, inter_univ, univ_inter]
     filter_upwards [hhalf,
       ae_restrict_mem (measurableSet_Ioo.prod measurableSet_Ioc)] with p hp hpU

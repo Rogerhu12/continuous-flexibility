@@ -85,13 +85,13 @@ theorem morseRealization_join_deriv_nonneg
 /-- A negative point on either actual tail lies in some retained model
 image. This uses the original geometric realization, not a canonical
 partition or a new coverage hypothesis. -/
-theorem morseRealization_negative_tail_model
+theorem morseRealization_negative_tail_model_from_start
     {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
     (hreal : MorseChainRealization T σ D C) (side : Bool)
     {N : ℕ} (hN : T.index ≤ N) {r : ℝ}
     (hr : r ∈ radialTailInterval D side (morseChainSeam T side N))
     (hneg : deriv D.w r < 0) :
-    ∃ n : ℕ, T.index ≤ n ∧ ∃ x ∈ Icc (T.leftX side n) (T.rightX side n),
+    ∃ n : ℕ, N ≤ n ∧ ∃ x ∈ Icc (T.leftX side n) (T.rightX side n),
       r = T.radius side n x := by
   let f : ℕ → ℝ := fun n =>
     if side then morseChainSeam T side n else -morseChainSeam T side n
@@ -143,7 +143,19 @@ theorem morseRealization_negative_tail_model
   have hab := (hreal.2.2.1 side n hn).2.1
   obtain ⟨X, hX, hRX⟩ := intermediate_value_Icc hab.le
     (hreal.radius_smooth side n hn).continuous.continuousOn hmodel
-  exact ⟨n, hn, X, hX, hRX.symm⟩
+  exact ⟨n, hNn, X, hX, hRX.symm⟩
+
+theorem morseRealization_negative_tail_model
+    {T : MorseChainData} {σ : ℕ → ℝ} {D : ReferenceData} {C : ℕ → ℝ}
+    (hreal : MorseChainRealization T σ D C) (side : Bool)
+    {N : ℕ} (hN : T.index ≤ N) {r : ℝ}
+    (hr : r ∈ radialTailInterval D side (morseChainSeam T side N))
+    (hneg : deriv D.w r < 0) :
+    ∃ n : ℕ, T.index ≤ n ∧ ∃ x ∈ Icc (T.leftX side n) (T.rightX side n),
+      r = T.radius side n x := by
+  obtain ⟨n, hn, x, hx, hrx⟩ :=
+    morseRealization_negative_tail_model_from_start hreal side hN hr hneg
+  exact ⟨n, hN.trans hn, x, hx, hrx⟩
 
 /-- A positive entry cannot cut a negative component. A component
 meeting its outward tail has its whole closed interval in that tail. -/

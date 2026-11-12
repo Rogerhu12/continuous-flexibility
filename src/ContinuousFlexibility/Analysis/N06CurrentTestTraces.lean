@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N05CanonicalBoundarySymmetry
 import Mathlib.Analysis.Calculus.MeanValue
 import Mathlib.Topology.MetricSpace.Lipschitz
 import Mathlib.MeasureTheory.Function.AbsolutelyContinuous
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Genuine closed traces of the current transformed physical test

@@ -466,6 +466,18 @@ def R11Statement : Prop :=
           ReferenceInverseProperties D γ M₀ M₁ G ∧
           FirstNormalInverseEstimate D γ M₀ M₁ G
 
+/-- Additional primitive geometry for the N01a construction on the same
+reference as its controls and material data. This certificate is separate
+from the homogeneous equation and return margins retained by R12. It
+contains no nonlinear coefficient, speed or flow estimate. -/
+def N01RadialPrimitiveGeometry (D : ReferenceData) : Prop :=
+  tsupport D.chi ⊆ radialCore D ∧
+  ∃ K : ℝ, 0 < K ∧ ∀ l h m,
+    NegativeRadialComponent D l h → Ioo l h ⊆ D.cells m →
+    ∀ r ∈ Ioo l h,
+      K⁻¹ * radialE (D.cellIndex m) ^ (-K) * min (r - l) (h - r) ≤
+        -deriv D.w r / (r * D.w r)
+
 /-- R12, §4 `prop:rad-fixed-theorem` and §6 `lem:rad-green-completion`. -/
 def R12Statement : Prop := RadialReferenceStatement
 
