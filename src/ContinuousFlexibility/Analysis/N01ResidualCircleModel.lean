@@ -135,9 +135,11 @@ theorem referenceStateConditions.sector_leftChart
     (href : referenceStateConditions D S C) (z : StateDirections S × ℝ) (m : ℕ) (θ : ℝ) :
     stateLeftChart S (liftSectorParameter S C z).1 m θ =
       θ + (S.circle (3 / 4 : ℝ)).decode z.1.val.2.2.2 m θ := by
-  change θ + (S.circle (3 / 4 : ℝ)).decode
-    (C.referenceState.2.2.2 + z.1.val.2.2.2) m θ = _
-  rw [href.2.2.2.2.1, zero_add]
+  have hzero : C.referenceState.2.2.2 = (0 : CircleSpace S) := href.2.2.2.2.1
+  have hsum : C.referenceState.2.2.2 + z.1.val.2.2.2 = z.1.val.2.2.2 :=
+    (congrArg (fun u : CircleSpace S => u + z.1.val.2.2.2) hzero).trans
+      (zero_add z.1.val.2.2.2)
+  exact congrArg (fun u : CircleSpace S => θ + (S.circle (3 / 4 : ℝ)).decode u m θ) hsum
 
 def N01Properties.sectorReturnTransportCircle
     (hN : N01Properties D T S C base loss ε)
@@ -154,7 +156,8 @@ theorem N01Properties.sectorReturnTransportCircle_decode
     θ + (S.circle (3 / 4 : ℝ)).decode (hN.sectorReturnTransportCircle hS hT z) m θ =
       stateLeftChart S (liftSectorParameter S C z).1 m
         (C.minusReturnInverse (liftSectorParameter S C z) m θ) - C.travel m := by
-  have hz' := liftSectorParameter_mem_stateNeighborhood hz (le_refl ε)
+  have hz' : liftSectorParameter S C z ∈ stateNeighborhood S C base ε :=
+    liftSectorParameter_mem_stateNeighborhood (C := C) hz (le_refl ε)
   have hs := hN.2.2.1.liftSectorParameter_sector z
   have hi := hN.2.2.2.2.2.2.2.2.1 (liftSectorParameter S C z) hz' hs
   have hl : ∀ j t, C.minusReturnInverse (liftSectorParameter S C z) j
