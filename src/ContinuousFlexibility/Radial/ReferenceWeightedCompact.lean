@@ -1,6 +1,6 @@
 import ContinuousFlexibility.Analysis.SmoothCompactL2Density
 import ContinuousFlexibility.Radial.ReferenceSmoothSources
-import ContinuousFlexibility.Radial.ReferenceWeightedMeasure
+import ContinuousFlexibility.Radial.ReferenceWeightedRadialBase
 
 /-!
 # Local finiteness of the reference weighted measure
@@ -93,8 +93,8 @@ theorem referenceWeightedMeasure_ae_core {D : ReferenceData}
   exact hx.1
 
 /-- The actual radial marginal of the reference weighted measure. -/
-def referenceRadialWeightedMeasure (D : ReferenceData) (γ M : ℝ) : Measure ℝ :=
-  (referenceWeightedMeasure D γ M).map Prod.fst
+abbrev referenceRadialWeightedMeasure (D : ReferenceData) (γ M : ℝ) : Measure ℝ :=
+  ContinuousFlexibility.Statements.referenceRadialWeightedMeasure D γ M
 
 theorem referenceRadialWeightedMeasure_ae_core {D : ReferenceData}
     (hD : RadialPartition D) (γ M : ℝ) :
@@ -106,7 +106,8 @@ theorem referenceRadialWeightedMeasure_compact_lt_top {D : ReferenceData}
     (hD : IsAccumulatingProfile D) (γ M : ℝ) {K : Set ℝ}
     (hK : IsCompact K) (hcore : K ⊆ radialCore D) :
     referenceRadialWeightedMeasure D γ M K < ⊤ := by
-  rw [referenceRadialWeightedMeasure, Measure.map_apply measurable_fst hK.measurableSet]
+  change ((referenceWeightedMeasure D γ M).map Prod.fst) K < ⊤
+  rw [Measure.map_apply measurable_fst hK.measurableSet]
   exact referenceWeightedMeasure_radialCompact_lt_top hD γ M hK hcore
 
 /-- Radial L² coefficients can be approximated by smooth functions whose

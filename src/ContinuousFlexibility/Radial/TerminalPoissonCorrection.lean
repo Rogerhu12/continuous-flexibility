@@ -1,4 +1,3 @@
-import ContinuousFlexibility.Radial.TerminalCapRegionalLift
 import ContinuousFlexibility.Radial.ModeCoreSource
 
 /-!
