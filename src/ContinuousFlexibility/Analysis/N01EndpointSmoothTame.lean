@@ -36,7 +36,7 @@ private theorem seminorm_le_center_add_one
   linarith only [h, hnear]
 
 private theorem endpoint_oneHigh_nonneg
-    {E : Type*} [AddCommGroup E] [Module ℝ E]
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     (p : ℕ → Seminorm ℝ E) (B H : ℕ) {k : ℕ} (x : E) (v : Fin k → E) :
     0 ≤ oneHighVariationWeight p B H x v := by
   exact multilinearTameSize_nonneg (p B) (p H) k
