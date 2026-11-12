@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N04bOperatorGerms
 import ContinuousFlexibility.Analysis.N04bActualTravelChart
 import ContinuousFlexibility.Analysis.N04bReferenceTravelCut
 import ContinuousFlexibility.Analysis.N04bErrorFactorization
@@ -103,7 +104,7 @@ private theorem n04b_referenceCoefficients_eq_original
         (originalCoefficients D S C (C.referenceState, 0)).b p ∧
       (L.coefficients (C.referenceState, 0)).c p =
         (originalCoefficients D S C (C.referenceState, 0)).c p := by
-  have hN01 : N01Properties D T S C base loss ε := hN.1.1.2
+  have hN01 : N01Properties D T S C base loss ε := hN.1.1
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     reference_mem_stateNeighborhood S C base hN01.2.1
   have hs : stateSector S C.referenceState := hN01.2.2.1.stateSector
@@ -133,7 +134,7 @@ theorem n04b_referenceMinusFlow_eq_optical
     (m : ℕ) {r : ℝ} (hr : r ∈ Icc (C.left m) (C.right m)) (θ : ℝ) :
     L.minusFlow (C.referenceState, 0) m r θ =
       θ - opticalTravel D.w (C.left m) r := by
-  have hN01 : N01Properties D T S C base loss ε := hN.1.1.2
+  have hN01 : N01Properties D T S C base loss ε := hN.1.1
   have hN03 : N03Properties D T S C R L base ε := hN.2
   have hD : RadialProfileGeometry D := by
     obtain ⟨_, hdata⟩ := hN01.1.1
