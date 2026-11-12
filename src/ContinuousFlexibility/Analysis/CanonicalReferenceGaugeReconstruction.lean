@@ -53,7 +53,8 @@ theorem canonicalReferenceGauge_reconstructs_closed_fields :
   have hinv := canonicalCurrentPoint_closed_inverse_data hA hz₀ hs₀ hz hs m hp
   have hSp : canonicalReferencePoint C K z m x = p := hinv.2.1.eq_of_nhds
   have hSto : Tendsto (canonicalReferencePoint C K z m) (𝓝 x) (𝓝 p) := by
-    simpa only [hSp] using hinv.1.continuousAt.tendsto
+    have hSx : ContinuousAt (canonicalReferencePoint C K z m) x := hinv.1.continuousAt
+    simpa only [hSp] using hSx.tendsto
   have hrefpos : ∀ᶠ y in 𝓝 p, 0 < K.height (C.referenceState, 0) m y :=
     href.2.1.continuousAt.tendsto.eventually (Ioi_mem_nhds href.2.2.2)
   have hcurpos : ∀ᶠ y in 𝓝 x, 0 < K.height z m y :=
@@ -99,8 +100,10 @@ theorem canonicalReferenceGauge_closed_fullJets (n : ℕ) :
   have hheight : ContDiffAt ℝ ∞
       (wholePositiveReferenceGaugeHeight (K.height (C.referenceState, 0) m)
         (canonicalReferencePoint C K z m) (n04CoordinatesCurrentHeightRatio C K z m)) x := by
-    simpa only [wholePositiveReferenceGaugeHeight, wholePositiveChartHeight,
-      Function.comp_def, div_eq_mul_inv] using hquot.comp x hinv.1
+    change ContDiffAt ℝ ∞ (fun y => K.height (C.referenceState, 0) m
+      (canonicalReferencePoint C K z m y) * (n04CoordinatesCurrentHeightRatio C K z m
+        (canonicalReferencePoint C K z m y))⁻¹) x
+    simpa only [Function.comp_def, div_eq_mul_inv] using hquot.comp x hinv.1
   have he := canonicalReferenceGauge_reconstructs_closed_fields hA hz₀ hs₀ hz hs m hp
   exact ⟨finiteFullJetMatch_of_germ (hFref.comp x hinv.1) hcur.1 he.1,
     finiteFullJetMatch_of_germ hheight hcur.2.1 he.2⟩

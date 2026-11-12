@@ -64,15 +64,18 @@ theorem n04WholeReferenceGaugeAtlasData_actual_cutOperator_and_sourcePairing
           n04WholePiecePositive, Bool.false_eq_true, ite_false, ite_true] using hB.1.1 m
       · intro z hz hs m
         have hcut := hB.1.2 z hz hs m
-        dsimp only [CanonicalCurrentCutPair, canonicalCutPoint, physicalPieceOpen] at hcut ⊢
-        simpa only [CanonicalCurrentCutPair, canonicalCutPoint, physicalPieceOpen,
+        have hcurve (A : CanonicalData S) : canonicalCutPoint S A z m =
+            (fun θ : ℝ => A.inverseChart z (A.cutPair m).1 (A.cutRadius m, θ)) := rfl
+        simpa only [CanonicalCurrentCutPair, hcurve, physicalPieceOpen,
           V, W, n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData,
           n04bWithInteriorDivision, n04WholeCutPair, Equiv.apply_symm_apply,
           Bool.false_eq_true, ite_false, ite_true] using hcut
     · intro z hz hs u hu m θ
       have htrans := hB.2.1 z hz hs u hu m θ
-      dsimp only [canonicalHeight] at htrans ⊢
-      simpa only [canonicalHeight, V, W,
+      have hheight (A : CanonicalData S) (j : ℕ) : canonicalHeight S A z j u =
+          (fun p : PolarPoint => u (A.inverseChart z j p) /
+            A.height z j (A.inverseChart z j p)) := rfl
+      simpa only [hheight, V, W,
         n04WholeReferenceGaugeAtlasData, n04WholeCanonicalAtlasData, n04bWithInteriorDivision,
         n04WholeCutPair, Equiv.apply_symm_apply, Bool.false_eq_true, ite_false, ite_true]
         using htrans
