@@ -101,13 +101,13 @@ private theorem mem_openInterval_iff_of_periodic_boundary_fibers
 
 /-- Reflection and injectivity identify the preimage of the angular axis. -/
 theorem chart_angle_eq_zero_of_reflection
-    {a b : ℝ} {F : PolarPoint → PolarPoint}
-    (hinj : InjOn F (Ioo a b ×ˢ (univ : Set ℝ)))
-    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
+    {A : Set ℝ} {F : PolarPoint → PolarPoint}
+    (hinj : InjOn F (A ×ˢ (univ : Set ℝ)))
+    (hreflect : ∀ p ∈ A ×ˢ (univ : Set ℝ),
       F (p.1, -p.2) = ((F p).1, -(F p).2))
-    {p : PolarPoint} (hp : p ∈ Ioo a b ×ˢ (univ : Set ℝ))
+    {p : PolarPoint} (hp : p ∈ A ×ˢ (univ : Set ℝ))
     (hangle : (F p).2 = 0) : p.2 = 0 := by
-  have hp' : (p.1, -p.2) ∈ Ioo a b ×ˢ (univ : Set ℝ) := ⟨hp.1, mem_univ _⟩
+  have hp' : (p.1, -p.2) ∈ A ×ˢ (univ : Set ℝ) := ⟨hp.1, mem_univ _⟩
   have hF : F (p.1, -p.2) = F p := by
     rw [hreflect p hp]
     apply Prod.ext
@@ -151,13 +151,13 @@ theorem inverseChart_periodic_of_chart_periodic
 /-- The angular interval is characterized in both directions on a genuine
 source cylinder. The image need not be a radial strip. -/
 theorem chart_angle_mem_openInterval_iff
-    {a b P : ℝ} {F : PolarPoint → PolarPoint} (hP : 0 < P)
-    (hinj : InjOn F (Ioo a b ×ˢ (univ : Set ℝ)))
-    (hcont : ContinuousOn F (Ioo a b ×ˢ (univ : Set ℝ)))
-    (hperiod : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ), F (p + (0, P)) = F p + (0, P))
-    (hreflect : ∀ p ∈ Ioo a b ×ˢ (univ : Set ℝ),
+    {A : Set ℝ} {P : ℝ} {F : PolarPoint → PolarPoint} (hP : 0 < P)
+    (hinj : InjOn F (A ×ˢ (univ : Set ℝ)))
+    (hcont : ContinuousOn F (A ×ˢ (univ : Set ℝ)))
+    (hperiod : ∀ p ∈ A ×ˢ (univ : Set ℝ), F (p + (0, P)) = F p + (0, P))
+    (hreflect : ∀ p ∈ A ×ˢ (univ : Set ℝ),
       F (p.1, -p.2) = ((F p).1, -(F p).2))
-    {p : PolarPoint} (hp : p ∈ Ioo a b ×ˢ (univ : Set ℝ)) :
+    {p : PolarPoint} (hp : p ∈ A ×ˢ (univ : Set ℝ)) :
     (F p).2 ∈ Ioo 0 P ↔ p.2 ∈ Ioo 0 P := by
   let f : ℝ → ℝ := fun t => (F (p.1, t)).2
   have hpath : Continuous (fun t : ℝ => (p.1, t)) := continuous_const.prodMk continuous_id

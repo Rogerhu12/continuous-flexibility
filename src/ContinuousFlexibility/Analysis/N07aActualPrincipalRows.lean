@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N07aRelativeExpanded
+import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
 import ContinuousFlexibility.Analysis.N07aCubicMatrixRows
 import ContinuousFlexibility.Analysis.N07aActualCoefficientBlocks
 

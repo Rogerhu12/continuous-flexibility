@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N07aCanonicalOpenLp
 import ContinuousFlexibility.Analysis.N07aCanonicalCutoffColumn
 
 /-!
@@ -15,25 +16,6 @@ namespace ContinuousFlexibility.Analysis
 
 open Set Filter MeasureTheory ContinuousFlexibility.Statements
 open scoped ContDiff
-
-namespace N07aCanonicalOpenCoefficient
-
-variable {S : PhysicalSpacesData} {K : CanonicalData S} {m : ℕ}
-
-theorem memLp (χ : N07aCanonicalOpenCoefficient S K m) :
-    MemLp χ.value 2 (canonicalMeasure S K m) := by
-  let := n07a_canonicalMeasure_finite S K m
-  apply MemLp.of_bound (n07a_canonicalOpen_aestronglyMeasurable χ.smooth.continuousOn) χ.bound
-  simpa only [Real.norm_eq_abs] using χ.bound_ae
-
-def toLp (χ : N07aCanonicalOpenCoefficient S K m) : CanonicalL2 S K m :=
-  χ.memLp.toLp χ.value
-
-theorem toLp_ae (χ : N07aCanonicalOpenCoefficient S K m) :
-    (χ.toLp : PolarPoint → ℝ) =ᵐ[canonicalMeasure S K m] χ.value :=
-  χ.memLp.coeFn_toLp
-
-end N07aCanonicalOpenCoefficient
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}

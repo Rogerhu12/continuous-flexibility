@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
 import ContinuousFlexibility.Analysis.N07aReferenceOpenCoefficients
 import ContinuousFlexibility.Analysis.N07aCanonicalRadialCoefficients
 import ContinuousFlexibility.Analysis.N07aCanonicalDifference

@@ -65,3 +65,22 @@ run_cmd do
 #print axioms ContinuousFlexibility.Blueprint.N07aSmooth
 #print axioms ContinuousFlexibility.Blueprint.N07a
 #print axioms ContinuousFlexibility.Blueprint.R11a
+
+-- N06 closes the original-space relative operator and its two subnodes.
+#print axioms ContinuousFlexibility.Blueprint.N06WeakGraph
+#print axioms ContinuousFlexibility.Blueprint.N06CanonicalRelative
+#print axioms ContinuousFlexibility.Blueprint.N06
+
+example : ContinuousFlexibility.Statements.N05Statement →
+    ContinuousFlexibility.Statements.N06Statement :=
+  ContinuousFlexibility.Blueprint.N06
+
+open Lean in
+run_cmd do
+  for name in #[`ContinuousFlexibility.Blueprint.N06WeakGraph,
+      `ContinuousFlexibility.Blueprint.N06CanonicalRelative,
+      `ContinuousFlexibility.Blueprint.N06] do
+    let axioms ← collectAxioms name
+    for ax in axioms do
+      unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
+        throwError "N06 completion audit: unexpected axiom {ax} in {name}"

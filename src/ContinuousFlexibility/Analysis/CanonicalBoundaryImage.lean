@@ -1,13 +1,12 @@
-import ContinuousFlexibility.Blueprint.Statements
+import ContinuousFlexibility.Blueprint.CanonicalParts
 import Mathlib.Topology.Separation.Hausdorff
 
 /-!
-# Images of physical boundaries
+# Images of actual physical boundaries
 
-The generic rectangle theorem uses only the open inverse and continuity.
-For an actual state-dependent piece, the closed bijection and open inverse
-send every frontier point to a canonical radial boundary. No current
-physical domain is assumed to be a radial rectangle.
+Continuity of the forward chart and its genuine inverse force every
+point of the actual physical frontier to map to a canonical endpoint.
+The fixed radial-strip lemma remains a separate geometric specialization.
 -/
 
 noncomputable section
@@ -72,9 +71,9 @@ theorem endpoint_image_mem_boundary_of_openStrip_inverse
     · exact Or.inr hr
   · exact Or.inl hl.symm
 
-/-- Every point of the actual physical frontier maps to a canonical radial
-boundary. The reference radial endpoints are not used for the current
-state-dependent domain. -/
+/-- PartA determines that the actual physical frontier lands on the
+canonical endpoints. A reference endpoint is not assumed to belong to
+the frontier of a current piece with a moving cut. -/
 theorem canonicalChart_endpoint_radial_eq_boundary
     {D : ReferenceData} {S : PhysicalSpacesData} {C : NonlinearGeometryData S}
     {K : CanonicalData S} {base : ℕ} {ε : ℝ}
@@ -84,18 +83,16 @@ theorem canonicalChart_endpoint_radial_eq_boundary
     (hp : p ∈ frontier (physicalPieceOpen S K z m)) :
     (K.chart z m p).1 = K.left m ∨ (K.chart z m p).1 = K.right m := by
   have hcharts := hK.charts z hz hsector m
-  have hclosed := hK.boundary z hz hsector m
-  have hfront : p ∈ closure (physicalPieceOpen S K z m) ∧
-      p ∉ physicalPieceOpen S K z m := by
-    simpa only [(hK.domains z hz hsector m).1.frontier_eq, Set.mem_diff] using hp
-  have hpclosed : p ∈ physicalPieceClosed S K z m := hfront.1
-  have himage := hclosed.1 hpclosed
-  have hnot : K.chart z m p ∉ canonicalOpen S K m := by
-    intro himageOpen
-    apply hfront.2
-    have hpre := hcharts.2.1 himageOpen
-    rw [hclosed.2.2.1 p hpclosed] at hpre
-    exact hpre
+  have hboundary := hK.boundary z hz hsector m
+  have hpcl : p ∈ physicalPieceClosed S K z m := frontier_subset_closure hp
+  have hpnot : p ∉ physicalPieceOpen S K z m := by
+    rw [(hK.domains z hz hsector m).1.frontier_eq] at hp
+    exact hp.2
+  have hclosed := hboundary.2.2.2.2.1 p hpcl
+  have himage := hboundary.1 hpcl
+  have hnot := image_not_mem_open_of_boundary_leftInverse
+    (isOpen_Ioo.prod isOpen_univ) hclosed.1.continuousAt
+    hcharts.2.2.2.2.2.1.continuousOn hcharts.2.1 hcharts.2.2.1 hpcl hpnot
   rcases lt_or_eq_of_le himage.1.1 with hl | hl
   · rcases lt_or_eq_of_le himage.1.2 with hr | hr
     · exact False.elim (hnot ⟨⟨hl, hr⟩, mem_univ _⟩)

@@ -1,4 +1,4 @@
-import ContinuousFlexibility.Analysis.N07aCanonicalTestOperator
+import ContinuousFlexibility.Analysis.N07aCanonicalTestDivergence
 import ContinuousFlexibility.Analysis.N07aCanonicalOpenCoefficients
 
 /-!
