@@ -92,6 +92,7 @@ theorem canonicalGluedAiryIntegral_of_actual_ode
     have he : U ∘ (fun s : ℝ => (s, u s)) = (fun s : ℝ => U (s, u s)) := by
       funext s
       exact Function.comp_apply
+    simp only [id_eq] at hh
     rw [he] at hh
     apply hh.congr_deriv
     rw [polarCLM_apply_decompose]
@@ -143,7 +144,7 @@ theorem canonicalGluedAiryIntegral_on_n03Flows
               (L.coefficients z).c (t, -L.minusFlow z m t (-θ))) /
             (L.coefficients z).a (t, -L.minusFlow z m t (-θ))) t := by
     obtain ⟨ha, hb, hc⟩ := hN03.2.2.2.1 z hz hs t (L.minusFlow z m t (-θ))
-    have hd := (hreflected.2.2.1 t ht).neg
+    have hd := (hreflected.2.2.1 t ht).fun_neg
     rw [neg_minusCharacteristicSpeed_eq_plus_of_reflection ha hb hc] at hd
     simpa only [plusCharacteristicSpeed, neg_one_mul, neg_div, sub_neg_eq_add] using hd
   have hm := canonicalGluedAiryIntegral_of_actual_ode
@@ -154,6 +155,7 @@ theorem canonicalGluedAiryIntegral_on_n03Flows
     hS hT hN01 hN03 hA hB hz hs m (σ := -1) (Or.inr rfl)
     hreflected.2.1.neg hplusFlow hr
   rw [hminus.1] at hm
+  simp only [Pi.neg_apply] at hp
   rw [hreflected.1, neg_neg] at hp
   have hgauge := (canonicalRootGauges_eq_n01_of_n03
     hS hT hN01 hN02 hN03 hA hB hz hs m).2.1 θ
