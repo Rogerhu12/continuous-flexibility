@@ -35,7 +35,15 @@ theorem smoothTameOn_circlePositiveInverseCompose_maps
     fun n => (hH.2.1 n).isComplete.completeSpace_coe
   have htop : WithSeminorms H.grading :=
     withSeminorms_graded (fun n => H.level n) H.bond
-  exact smoothTameOn_comp_topological hp ht (withSeminorms_pairGrading htop htop)
+  exact smoothTameOn_comp_topological
+    (X := E) (Y := H.Space × H.Space)
+    (G := fun n => H.level n) (g := H.bond)
+    (p := p) (q := pairGrading H.grading H.grading) (r := H.grading)
+    (U := U) (V := circlePositiveLiftDomain H ×ˢ (univ : Set H.Space))
+    (u := fun x => (f x, g x))
+    (v := fun x : H.Space × H.Space =>
+      circlePositiveInverseComposeLinear hH hT hD hγ travel x.1 x.2)
+    hp ht (withSeminorms_pairGrading htop htop)
     hU ((circlePositiveLiftDomain_isOpen hH hT hD hγ).prod isOpen_univ)
     (fun x hx => ⟨hpos hx, mem_univ _⟩) (smoothTameOn_prodMk hp ht hf hg)
     (smoothTameOn_circlePositiveInverseComposeLinear hH hT hD hγ hi travel)
@@ -108,7 +116,7 @@ theorem N01Properties.smoothTameOn_returnCorrectionPulledDisplacementCircleLinea
     hflow hfirst
   apply smoothTameOn_congr hsecond
   intro x hx
-  simp only [N01Properties.returnCorrectionPulledDisplacementCircleLinear, LinearMap.comp_apply]
+  rfl
 
 theorem N01Properties.smoothTameOn_returnCorrectionVelocityCircleLinear
     (hN : N01Properties D T S C base loss ε)
@@ -145,8 +153,7 @@ theorem N01Properties.smoothTameOn_returnCorrectionVelocityCircleLinear
     hsum (hN.smoothTameOn_opticalCutoffJetCircleLinear hS hT j hcell χ hcutoff 1 rsel)
   apply smoothTameOn_congr hscaled
   intro x hx
-  simp only [N01Properties.returnCorrectionVelocityCircleLinear, LinearMap.comp_apply,
-    LinearMap.add_apply, LinearMap.id_apply]
+  rfl
 
 def N01Properties.returnCorrectionVelocity_jointTower
     (hN : N01Properties D T S C base loss ε)
