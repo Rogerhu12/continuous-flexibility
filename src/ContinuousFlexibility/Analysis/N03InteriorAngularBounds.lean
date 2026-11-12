@@ -92,9 +92,9 @@ theorem n03_interiorFirstIntegral_angular_bounds
       (interiorEndpointPullback Ψ a b y)
     cases plus with
     | false => exact htransport.trans (by
-        simpa only [u, G, ζ, Bool.false_eq_true, ↓reduceIte, neg_one_mul] using hsection.1)
+        simpa only [u, G, ζ, a, interiorEndpointPullback, Bool.false_eq_true, ↓reduceIte, neg_one_mul] using hsection.1)
     | true => exact htransport.trans (by
-        simpa only [u, G, ζ, ↓reduceIte, one_mul] using hsection.2)
+        simpa only [u, G, ζ, a, interiorEndpointPullback, ↓reduceIte, one_mul] using hsection.2)
   exact interiorTransportedLabel_angular_bounds hab
     (div_nonneg (Real.exp_pos _).le (by norm_num)) (contDiff_rootCircleSample hG x ζ) hub
     (hΨjets 1 ⟨zero_le_one, le_rfl⟩).1 (hΨjets 1 ⟨zero_le_one, le_rfl⟩).2.2.1
