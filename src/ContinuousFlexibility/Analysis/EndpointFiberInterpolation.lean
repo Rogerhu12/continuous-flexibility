@@ -135,7 +135,7 @@ theorem endpointFiberInterpolation_family
       | true =>
         calc
           A i true 0 θ = r := hvalue i true θ
-          _ = a true + (b true - a true) := by dsimp only [a, b]; ring
+          _ = a true + (b true - a true) := by simp only [a, b, ↓reduceIte]; ring
     · exact fun i θ => hlow i side θ
     · exact fun i j hj hjn θ => hbound i side j hj hjn θ
     · exact contDiff_fst
