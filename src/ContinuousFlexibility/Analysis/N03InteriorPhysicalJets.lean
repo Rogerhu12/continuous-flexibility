@@ -66,6 +66,61 @@ private theorem interior_rootPower_interval
   exact ⟨Real.rpow_pos_of_pos (mul_pos (by norm_num) hl) _,
     hmon hl.le hlu, hmon hl.le ht.1, hmon (hl.le.trans ht.1) ht.2⟩
 
+private theorem interior_radial_coefficient_value_le
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} {loss : ℕ} {A : ℕ → ℝ} {w : E}
+    {P : SymmetricCoefficients} {q : PolarPoint}
+    (ha : PointwiseMaterialJetBound p loss A w
+      (canonicalCoefficientComponent (0 : Fin 3) P) q) :
+    |P.a q| ≤ A 0 * (1 + p loss w) := by
+  have hzero := ha 0
+  rw [norm_iteratedFDeriv_zero, Real.norm_eq_abs, zero_add] at hzero
+  simpa only [canonicalCoefficientComponent, ↓reduceIte] using hzero
+
+private theorem interior_physical_combine_jets
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p)
+    {inputLoss lossF lossH : ℕ} {A F H M B : ℕ → ℝ} {w : E}
+    {P : SymmetricCoefficients} {chart : PolarPoint → PolarPoint}
+    {height : PolarPoint → ℝ} {q : PolarPoint}
+    (hA : ∀ n, 0 ≤ A n) (hF : ∀ n, 0 ≤ F n) (hH : ∀ n, 0 ≤ H n)
+    (hAM : ∀ n, A n ≤ M n) (hFM : ∀ n, F n ≤ M n)
+    (hFB : ∀ n, F n ≤ B n) (hHB : ∀ n, H n ≤ B n)
+    (hcoeff : ∀ j : Fin 3, ContDiffAt ℝ ∞ (canonicalCoefficientComponent j P) q ∧
+      PointwiseMaterialJetBound p inputLoss A w (canonicalCoefficientComponent j P) q)
+    (hFjets : PointwiseMaterialJetBound p lossF F w (fun y => (chart y).1) q ∧
+      ∀ n : ℕ, 1 ≤ n → ‖iteratedFDeriv ℝ n chart q‖ ≤
+        F n * (1 + p (n + lossF) w))
+    (hheight :
+      (∀ j : Fin 3, ContDiffAt ℝ ∞ (canonicalCoefficientComponent j P) q ∧
+        PointwiseMaterialJetBound p (max inputLoss lossF) M w
+          (canonicalCoefficientComponent j P) q) →
+      PointwiseMaterialJetBound p (max inputLoss lossF) M w (fun y => (chart y).1) q →
+      PointwiseMaterialJetBound p lossH H w height q) :
+    PointwiseMaterialJetBound p (max lossF lossH) B w height q ∧
+      ∀ n : ℕ, 1 ≤ n → ‖iteratedFDeriv ℝ n chart q‖ ≤
+        B n * (1 + p (n + max lossF lossH) w) := by
+  have hcM (j : Fin 3) : ContDiffAt ℝ ∞ (canonicalCoefficientComponent j P) q ∧
+      PointwiseMaterialJetBound p (max inputLoss lossF) M w
+        (canonicalCoefficientComponent j P) q := by
+    refine ⟨(hcoeff j).1, ?_⟩
+    intro n
+    exact ((hcoeff j).2 n).trans (interior_physical_envelope_mono hp
+      (hA n) (hAM n) (Nat.add_le_add_left (le_max_left _ _) n) w)
+  have hξM : PointwiseMaterialJetBound p (max inputLoss lossF) M w
+      (fun y => (chart y).1) q := by
+    intro n
+    exact (hFjets.1 n).trans (interior_physical_envelope_mono hp
+      (hF n) (hFM n) (Nat.add_le_add_left (le_max_right _ _) n) w)
+  have hHjets := hheight hcM hξM
+  constructor
+  · intro n
+    exact (hHjets n).trans (interior_physical_envelope_mono hp
+      (hH n) (hHB n) (Nat.add_le_add_left (le_max_right _ _) n) w)
+  · intro n hn
+    exact (hFjets.2 n hn).trans (interior_physical_envelope_mono hp
+      (hF n) (hFB n) (Nat.add_le_add_left (le_max_left _ _) n) w)
+
 def N03InteriorPhysicalJetEstimate
     (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (L : ReturnCorrectionData S) (K : CanonicalData S)
@@ -150,22 +205,16 @@ theorem n03_interiorPhysical_fixed_loss
   have hξvalue : (K.chart z i q).1 ∈ Icc (rootTravelPower l) (rootTravelPower u) := by
     rw [canonicalCutPair_chart_eq_rootTravel hA hB hz hs m side hq]
     exact (interior_rootPower_interval hl hlu hvalue).2.2
-  have hcM (j : Fin 3) : ContDiffAt ℝ ∞ (canonicalCoefficientComponent j (L.coefficients z)) q ∧
-      PointwiseMaterialJetBound p midLoss M w
-        (canonicalCoefficientComponent j (L.coefficients z)) q := by
-    refine ⟨(hcoeff j).1, ?_⟩
-    intro n
-    exact ((hcoeff j).2 n).trans (interior_physical_envelope_mono hp
-      (hApositive n).le (hAM n) (Nat.add_le_add_left (le_max_left _ _) n) w)
-  have hξM : PointwiseMaterialJetBound p midLoss M w (fun y => (K.chart z i y).1) q := by
-    intro n
-    exact (hFjets.1 n).trans (interior_physical_envelope_mono hp
-      (hFpos n).le (hFM n) (Nat.add_le_add_left (le_max_right _ _) n) w)
-  have hHjets := hHbound z hz hs hzH m side q hq hξvalue hdisc hcM hξM
-  have haabs : |(L.coefficients z).a q| ≤ A 0 * (1 + p inputLoss w) := by
-    have hzero := (hcoeff (0 : Fin 3)).2 0
-    rw [norm_iteratedFDeriv_zero, Real.norm_eq_abs, zero_add] at hzero
-    simpa only [canonicalCoefficientComponent, ↓reduceIte] using hzero
+  have hjets := interior_physical_combine_jets
+    (p := p) (inputLoss := inputLoss) (lossF := lossF) (lossH := lossH)
+    (A := A) (F := F) (H := H) (M := M) (B := B) (w := w)
+    (P := L.coefficients z) (chart := K.chart z i) (height := K.height z i) (q := q)
+    hp (fun n => (hApositive n).le) (fun n => (hFpos n).le) (fun n => (hHpos n).le)
+    hAM hFM hFB hHB hcoeff hFjets
+    (hHbound z hz hs hzH m side q hq hξvalue hdisc)
+  have haabs : |(L.coefficients z).a q| ≤ A 0 * (1 + p inputLoss w) :=
+    interior_radial_coefficient_value_le (p := p) (loss := inputLoss) (A := A)
+      (w := w) (P := L.coefficients z) (q := q) (hcoeff (0 : Fin 3)).2
   have haUpper : (L.coefficients z).a q ≤ 2 * A 0 :=
     (le_abs_self _).trans (interior_zero_bound_le_twice (hApositive 0).le hzA haabs)
   have haPositive : 0 < (L.coefficients z).a q := by
@@ -174,15 +223,9 @@ theorem n03_interiorPhysical_fixed_loss
   have hgap : gap ≤ plusCharacteristicSpeed (L.coefficients z) q -
       minusCharacteristicSpeed (L.coefficients z) q :=
     interior_speed_gap_lower haPositive (hApositive 0) hκ haUpper hdisc
-  refine ⟨?_, ?_, ?_⟩
-  · exact canonicalCutPair_jacobian_lower_of_speed_and_angular_bounds
-      hS hT hN01 hN02 hN03 hA hB hz hs m side hq hgapPos.le hα.le hgap
-        (hangular true) (hangular false) (Real.sqrt_le_sqrt hξvalue.2)
-  · intro n
-    exact (hHjets n).trans (interior_physical_envelope_mono hp
-      (hHpos n).le (hHB n) (Nat.add_le_add_left (le_max_right _ _) n) w)
-  · intro n hn
-    exact (hFjets.2 n hn).trans (interior_physical_envelope_mono hp
-      (hFpos n).le (hFB n) (Nat.add_le_add_left (le_max_left _ _) n) w)
+  refine ⟨?_, hjets.1, hjets.2⟩
+  exact canonicalCutPair_jacobian_lower_of_speed_and_angular_bounds
+    hS hT hN01 hN02 hN03 hA hB hz hs m side hq hgapPos.le hα.le hgap
+      (hangular true) (hangular false) (Real.sqrt_le_sqrt hξvalue.2)
 
 end ContinuousFlexibility.Analysis

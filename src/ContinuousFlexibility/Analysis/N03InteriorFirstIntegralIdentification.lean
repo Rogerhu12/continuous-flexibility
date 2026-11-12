@@ -60,7 +60,7 @@ theorem canonicalGluedAiryIntegral_eq_interiorFlowInverse
   have htransport (s : ℝ) (hss : s ∈ Icc a b) (η : ℝ) :
       radialPartial U (s, η) = -f (s, η) * angularPartial U (s, η) := by
     have ht := canonicalGluedAiryIntegral_stored_characteristic_transport
-      hS hT hN01 hN02 hN03 hA hB hz hs m (hsub ⟨hss, mem_univ _⟩)
+      hS hT hN01 hN02 hN03 hA hB hz hs m (p := (s, η)) (hsub ⟨hss, mem_univ _⟩)
     have he : f (s, η) = negativeCharacteristicField plus (L.coefficients z) (s, η) :=
       interiorLocalizedSpeed_eq hab.le hρ _ hss
     rw [he]
