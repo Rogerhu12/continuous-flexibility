@@ -37,7 +37,7 @@ theorem n04Realization_linearJet_seminorm_le
           simpa only [continuousLinearJets,
             ContinuousMultilinearMap.ofSubsingleton_apply_apply] using hv 0
       | succ n =>
-          simpa only [continuousLinearJets, zero_apply, p.map_zero'] using hB
+          simpa only [continuousLinearJets, zero_apply, map_zero] using hB
 
 /-- The actual graph uses exactly the linear state jets and the supplied
 point jets; no additional map representation is introduced. -/
