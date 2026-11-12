@@ -22,6 +22,19 @@ local instance n01CorrectionCoefficientJointTowerStateSMul (S : PhysicalSpacesDa
 open Set ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
+private def n01CorrectionCoefficientJointTowerCircleSMul (S : PhysicalSpacesData) :
+    SMul ℝ (CircleSpace S) :=
+  Submodule.smul (R := ℝ) (S := ℝ)
+    (ContinuousFlexibility.Analysis.compatibleSubmodule
+      (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond)
+
+private theorem n01CorrectionCoefficientJointTowerCircleSMul_eq (S : PhysicalSpacesData) :
+    n01CorrectionCoefficientJointTowerCircleSMul S =
+      (inferInstance : SMul ℝ (CircleSpace S)) := rfl
+
+attribute [local instance] n01CorrectionCoefficientJointTowerCircleSMul
+
 def correctionStateSpatialProjection (S : PhysicalSpacesData) :
     (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) →L[ℝ]
       (StateDirections S × ℝ) × PolarPoint :=

@@ -211,6 +211,19 @@ local instance n01TransportVelocityMixedGrowthStateSMul (S : PhysicalSpacesData)
 local instance n01TransportVelocityMixedGrowthParameterSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
 
+private def n01TransportVelocityCircleSMul_cache (S : PhysicalSpacesData) :
+    SMul ℝ (CircleSpace S) :=
+  Submodule.smul (R := ℝ) (S := ℝ)
+    (Analysis.compatibleSubmodule
+      (fun n => (S.circle (3 / 4 : ℝ)).level n)
+      (S.circle (3 / 4 : ℝ)).bond)
+
+private theorem n01TransportVelocityCircleSMul_cache_eq (S : PhysicalSpacesData) :
+    n01TransportVelocityCircleSMul_cache S =
+      (inferInstance : SMul ℝ (CircleSpace S)) := rfl
+
+attribute [local instance] n01TransportVelocityCircleSMul_cache
+
 set_option diagnostics true in
 /-- Fixed-loss bounds for the actual independent and frozen-residual
 velocities. All geometric assumptions are the witnesses produced by

@@ -140,6 +140,19 @@ private theorem scalar_sub_mul_jointGrowth
       (J := Jtemp) (base := B') (loss := M') htemp Jq (fun m x hx => heq m x hx)
   exact ⟨B', L', hB', productData.choose_spec.choose_spec.2.1, hq⟩
 
+private def n01CorrectionOriginalFactorGrowthCircleSMul (S : PhysicalSpacesData) :
+    SMul ℝ (CircleSpace S) :=
+  Submodule.smul (R := ℝ) (S := ℝ)
+    (Analysis.compatibleSubmodule
+      (fun n => (S.circle (3 / 4 : ℝ)).level n) (S.circle (3 / 4 : ℝ)).bond)
+
+private theorem n01CorrectionOriginalFactorGrowthCircleSMul_eq_inferInstance
+    (S : PhysicalSpacesData) :
+    n01CorrectionOriginalFactorGrowthCircleSMul S =
+      (inferInstance : SMul ℝ (CircleSpace S)) := rfl
+
+attribute [local instance] n01CorrectionOriginalFactorGrowthCircleSMul
+
 set_option diagnostics true in
 theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
