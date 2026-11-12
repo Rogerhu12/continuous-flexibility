@@ -21,7 +21,7 @@ local instance n01ReturnVelocitySpatialTowerStateSMul (S : PhysicalSpacesData) :
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
-private theorem velocitySpatial_pair_locallyConvex
+theorem velocitySpatial_pair_locallyConvex
     {E F : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
     {p : ℕ → Seminorm ℝ E} {q : ℕ → Seminorm ℝ F}

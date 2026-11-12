@@ -31,6 +31,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (m j : ℕ) (hcell : Ioo (C.left m) (C.right m) ⊆ D.cells j)
   (i : Fin 3)
 
+include hN in
 theorem N01Properties.negativeComponent_subset_annularOpen :
     Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) ⊆ annularOpen D := by
   intro p hp

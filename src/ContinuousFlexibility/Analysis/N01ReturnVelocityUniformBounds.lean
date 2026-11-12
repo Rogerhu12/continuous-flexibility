@@ -69,15 +69,30 @@ theorem N01Properties.uniformSmoothFamilyOn_interpolationSelectorCircle
     UniformSmoothFamilyOn (pairGrading (sectorGrading S) realGrading)
       (S.circle (3 / 4 : ℝ)).grading (sectorNeighborhood S base ε ε)
       (fun i => hN.interpolationSelectorCircle hS hT χ hχrange (rsel i) (hrsel i)) := by
-  let hH := hS.2.1 (3 / 4 : ℝ)
-  let hc := fun i => cutoffSelector_abs_le_one χ (rsel i) hχrange (hrsel i)
-  let L := fun i => circleComponentContractionContinuousLinear hH (fun m => χ m (rsel i m)) (hc i)
-  have hK := hN.uniformSmoothFamilyOn_returnCorrectionInitialCircle (I := I) hS hT hflow
-  have hpost := hK.postContinuousLinear (sectorPairGrading_monotone S) L 0
-    (fun s => ⟨1, zero_le_one, fun i u => by
-      rw [circleComponentContractionContinuousLinear_apply]
-      simpa only [Nat.add_zero, one_mul] using
-        circleComponentContractionLinear_grading_le hH (fun m => χ m (rsel i m)) (hc i) s u⟩)
+  let H := S.circle (3 / 4 : ℝ)
+  have hH : IsCircleModel T (3 / 4 : ℝ) H := hS.2.1 (3 / 4 : ℝ)
+  have hc (i : I) : ∀ m, |χ m (rsel i m)| ≤ 1 :=
+    cutoffSelector_abs_le_one χ (rsel i) hχrange (hrsel i)
+  let L : I → H.Space →L[ℝ] H.Space := fun i =>
+    circleComponentContractionContinuousLinear hH (fun m => χ m (rsel i m)) (hc i)
+  have hK : UniformSmoothFamilyOn (pairGrading (sectorGrading S) realGrading)
+      H.grading (sectorNeighborhood S base ε ε)
+      (fun (_ : I) z => hN.returnCorrectionInitialCircle hS hT z) :=
+    hN.uniformSmoothFamilyOn_returnCorrectionInitialCircle (I := I) hS hT hflow
+  have hpost : UniformSmoothFamilyOn (pairGrading (sectorGrading S) realGrading)
+      H.grading (sectorNeighborhood S base ε ε)
+      (fun i z => L i (hN.returnCorrectionInitialCircle hS hT z)) :=
+    hK.postContinuousLinear (sectorPairGrading_monotone S) L 0
+      (fun s => ⟨1, zero_le_one, fun i u => by
+        have happ : L i u =
+            circleComponentContractionLinear hH (fun m => χ m (rsel i m)) (hc i) u :=
+          circleComponentContractionContinuousLinear_apply hH (fun m => χ m (rsel i m))
+            (hc i) u
+        have hnorm : H.grading s (L i u) ≤ H.grading s u :=
+          (congrArg (H.grading s) happ).trans_le
+            (circleComponentContractionLinear_grading_le hH (fun m => χ m (rsel i m))
+              (hc i) s u)
+        simpa only [Nat.add_zero, one_mul] using hnorm⟩)
   exact hpost.congr (fun i z _ => circleComponentContractionContinuousLinear_apply hH
     (fun m => χ m (rsel i m)) (hc i) (hN.returnCorrectionInitialCircle hS hT z))
 
@@ -156,6 +171,7 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledDisplacementCi
   exact hsecond.congr (fun _ _ _ => rfl)
 
 include hflow in
+set_option diagnostics true in
 theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidualCircle
     (χ : ℕ → ℝ → ℝ)
     (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
@@ -169,6 +185,9 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidualCircle
   have hH : IsCircleModel T (3 / 4 : ℝ) H := hS.2.1 (3 / 4 : ℝ)
   letI : ∀ n, CompleteSpace (H.level n) :=
     fun n => (hH.2.1 n).isComplete.completeSpace_coe
+  letI : LocallyConvexSpace ℝ ((StateDirections S × ℝ) × H.Space) :=
+    (withSeminorms_pairGrading (sectorPairGrading_withSeminorms S)
+      (withSeminorms_graded (fun n => H.level n) H.bond)).toLocallyConvexSpace
   have hp : Monotone p := sectorPairGrading_monotone S
   have hU := sectorNeighborhood_isOpen S base ε ε
   have hid : UniformSmoothFamilyOn p p (sectorNeighborhood S base ε ε)
@@ -180,13 +199,22 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionPulledResidualCircle
   have he := hN.uniformSmoothFamilyOn_sectorReturnResidualCircle (I := I) hS hT hflow
   have hD := hN.uniformSmoothFamilyOn_returnCorrectionPulledDisplacementCircleLinear
     hS hT hflow χ hχrange rsel hrsel
-  exact hD.comp hp (hid.prodMk hp he) hU (hU.prod isOpen_univ)
+  exact UniformSmoothFamilyOn.comp
+    (Y := fun n => H.level n) (bond := H.bond)
+    (p := p) (q := pairGrading p H.grading) (r := H.grading)
+    (U := sectorNeighborhood S base ε ε)
+    (V := sectorNeighborhood S base ε ε ×ˢ (univ : Set H.Space))
+    (f := fun (_ : I) z => (z, hN.sectorReturnResidualCircle hS hT z))
+    (g := fun i (x : (StateDirections S × ℝ) × H.Space) =>
+      hN.returnCorrectionPulledDisplacementCircleLinear hS hT χ hχrange
+        (rsel i) (hrsel i) x.1 x.2)
+    hD hp (hid.prodMk hp he) hU (hU.prod isOpen_univ)
     (fun _ _ hz => ⟨hz, mem_univ _⟩)
 
+include hflow in
 /-- Any genuine tower of the inverse angular slope has the same
 selector-uniform estimates. Apply `.oneHigh n` to obtain homogeneous
 estimates with all constants chosen before the selector. -/
-include hflow in
 theorem N01Properties.selectorInverseSlopeCircle_uniformFamilyJetBounds
     (rsel : I → ℕ → ℝ) (hrsel : ∀ i m, rsel i m ∈ Icc (C.left m) (C.right m))
     (J : ∀ i, SmoothDirections (sectorNeighborhood S base ε ε)
@@ -224,6 +252,7 @@ theorem N01Properties.returnCorrectionPulledResidualCircle_uniformFamilyJetBound
     hS hT hflow χ hχrange rsel hrsel).jets J
 
 include hflow in
+set_option diagnostics true in
 theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionVelocityCircleLinear
     (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
     (χ : ℕ → ℝ → ℝ)
@@ -250,28 +279,37 @@ theorem N01Properties.uniformSmoothFamilyOn_returnCorrectionVelocityCircleLinear
   have hprod := uniformSmoothFamilyOn_circleProduct_maps hH hT hN.1.1 (by norm_num)
     (hS.2.2.2.2.1 (3 / 4 : ℝ)).2.2 hp hU hs hd
   have hsum := hd.add hp hprod
-  let hb := hN.opticalCutoffJetCircleLinear_uniform_bound hS hT j hcell χ hcutoff 1
+  let hb : ∃ K : ℝ, 0 ≤ K ∧ ∀ (r : ℕ → ℝ) (s : ℕ) (u : H.Space),
+      H.grading s (hN.opticalCutoffJetCircleLinear hS hT j hcell χ hcutoff 1 r u) ≤
+        K * H.grading (s + 1) u :=
+    hN.opticalCutoffJetCircleLinear_uniform_bound hS hT j hcell χ hcutoff 1
   let K : ℝ := hb.choose
   have hK : 0 ≤ K := hb.choose_spec.1
-  let M := fun i => hN.opticalCutoffJetCircleLinear hS hT j hcell χ hcutoff 1 (rsel i)
+  let M : I → H.Space →ₗ[ℝ] H.Space := fun i =>
+    hN.opticalCutoffJetCircleLinear hS hT j hcell χ hcutoff 1 (rsel i)
   have htame (i : I) : IsTameLinear H.grading H.grading (M i) 1 0 :=
     fun s _ => ⟨⟨K, hK⟩, fun u => hb.choose_spec.2 (rsel i) s u⟩
-  let L := fun i => (htame i).toContinuousLinearMap
+  let L : I → H.Space →L[ℝ] H.Space := fun i => (htame i).toContinuousLinearMap
     (withSeminorms_graded (fun n => H.level n) H.bond)
     (withSeminorms_graded (fun n => H.level n) H.bond) hm
   have heq (i : I) (u : H.Space) : L i u = M i u :=
     IsTameLinear.toContinuousLinearMap_apply (htame i)
       (withSeminorms_graded (fun n => H.level n) H.bond)
       (withSeminorms_graded (fun n => H.level n) H.bond) hm u
-  have hpost := hsum.postContinuousLinear hp L 1
-    (fun s => ⟨K, hK, fun i u => (heq i u).symm ▸ hb.choose_spec.2 (rsel i) s u⟩)
+  have hpost := hsum.postContinuousLinear
+    (p := p) (q := H.grading) (r := H.grading) hp L 1
+    (fun s => ⟨K, hK, fun i u =>
+      (congrArg (H.grading s) (heq i u)).trans_le (hb.choose_spec.2 (rsel i) s u)⟩)
   apply hpost.congr
   intro i x hx
+  simp only [N01Properties.returnCorrectionVelocityCircleLinear, LinearMap.comp_apply,
+    LinearMap.add_apply, LinearMap.id_apply]
   exact heq i _
 
+include hflow in
+set_option diagnostics true in
 /-- The constant is chosen before the radius selector and before the
 choice of any genuine tower for the same actual velocity map. -/
-include hflow in
 theorem N01Properties.returnCorrectionVelocity_uniform_oneHigh
     (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
     (χ : ℕ → ℝ → ℝ)
@@ -289,20 +327,39 @@ theorem N01Properties.returnCorrectionVelocity_uniform_oneHigh
         (S.circle (3 / 4 : ℝ)).grading s (J.D n x v) ≤ K *
           tameJetSize (pairGrading (pairGrading (sectorGrading S) realGrading)
             (S.circle (3 / 4 : ℝ)).grading) n s L B x v := by
+  let H := S.circle (3 / 4 : ℝ)
+  let p := pairGrading (pairGrading (sectorGrading S) realGrading) H.grading
+  let U := sectorNeighborhood S base ε ε ×ˢ (univ : Set H.Space)
   let A := {rsel : ℕ → ℝ // ∀ m, rsel m ∈ Icc (C.left m) (C.right m)}
-  let h := hN.uniformSmoothFamilyOn_returnCorrectionVelocityCircleLinear hS hT hflow
-    j hcell χ hχrange hcutoff (fun r : A => r.val) (fun r => r.property)
-  let J₀ := h.choose
+  let f : A → ((StateDirections S × ℝ) × H.Space) → H.Space := fun r x =>
+    hN.returnCorrectionVelocityCircleLinear hS hT j hcell χ hχrange hcutoff
+      r.val r.property x.1 x.2
+  let h : UniformSmoothFamilyOn p H.grading U f :=
+    hN.uniformSmoothFamilyOn_returnCorrectionVelocityCircleLinear hS hT hflow
+      j hcell χ hχrange hcutoff (fun r : A => r.val) (fun r => r.property)
+  let J₀ : ∀ r : A, SmoothDirections U (f r) := h.choose
+  have hJ₀ : UniformFamilyJetBounds p H.grading J₀ := h.choose_spec
   intro n
-  let hb := h.choose_spec.oneHigh n
-  let B := hb.choose
-  let L := hb.choose_spec.choose
+  let hb : ∃ B L : ℕ, ∀ R : ℝ, 0 ≤ R → ∀ s : ℕ, ∃ K : ℝ, 0 ≤ K ∧
+      ∀ r : A, ∀ x, x ∈ U → p B x ≤ R →
+      ∀ v : Fin n → (StateDirections S × ℝ) × H.Space,
+        H.grading s ((J₀ r).D n x v) ≤ K * tameJetSize p n s L B x v :=
+    hJ₀.oneHigh n
+  let B : ℕ := hb.choose
+  let L : ℕ := hb.choose_spec.choose
   refine ⟨B, L, fun R hR s => ?_⟩
-  let hc := hb.choose_spec.choose_spec R hR s
+  let hc : ∃ K : ℝ, 0 ≤ K ∧
+      ∀ r : A, ∀ x, x ∈ U → p B x ≤ R →
+      ∀ v : Fin n → (StateDirections S × ℝ) × H.Space,
+        H.grading s ((J₀ r).D n x v) ≤ K * tameJetSize p n s L B x v :=
+    hb.choose_spec.choose_spec R hR s
   refine ⟨hc.choose, hc.choose_spec.1, fun rsel hrsel J x hx hlow v => ?_⟩
   have heq : J.D n x = (J₀ (⟨rsel, hrsel⟩ : A)).D n x :=
     J.unique (J₀ (⟨rsel, hrsel⟩ : A)) n x hx
-  rw [heq]
-  exact hc.choose_spec.2 (⟨rsel, hrsel⟩ : A) x hx hlow v
+  have hnorm : H.grading s (J.D n x v) =
+      H.grading s ((J₀ (⟨rsel, hrsel⟩ : A)).D n x v) :=
+    congrArg (fun L : ContinuousMultilinearMap ℝ
+      (fun _ : Fin n => (StateDirections S × ℝ) × H.Space) H.Space => H.grading s (L v)) heq
+  exact hnorm.trans_le (hc.choose_spec.2 (⟨rsel, hrsel⟩ : A) x hx hlow v)
 
 end ContinuousFlexibility.Statements

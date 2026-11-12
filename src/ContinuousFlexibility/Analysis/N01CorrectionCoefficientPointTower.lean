@@ -109,16 +109,16 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hcutoff : ∀ k : ℕ, ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ m r,
     |iteratedDeriv k (χ m) r| ≤ A * radialE (D.cellIndex (j m)) ^ P)
 
-set_option diagnostics true in
-def N01Properties.returnCorrectionLocalCoefficient_pointTower
+include hN hS hT hR j hcell hχrange hcutoff in
+private theorem returnCorrectionLocalCoefficient_pointTower_nonempty
     (m : ℕ) (p : PolarPoint) (hp : p.1 ∈ Ioo (C.left m) (C.right m))
     (hdisc : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
       0 < (originalCoefficients D S C z).b p ^ 2 -
         (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) :
-    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+    Nonempty (SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
       (fun x : (StateDirections S × ℝ) × CircleSpace S =>
         returnCorrectionLocalCoefficientError D S C R χ (liftSectorParameter S C x.1)
-          m p x.2) := by
+          m p x.2)) := by
   classical
   let rsel : ℕ → ℝ := Function.update C.left m p.1
   have hcontrol : controlGeometryConditions D S C := hN.2.2.2.1
@@ -214,7 +214,20 @@ def N01Properties.returnCorrectionLocalCoefficient_pointTower
       (hN.originalRadialCoefficient_pos
         (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
         (hN.2.2.1.liftSectorParameter_sector x.1) hpD).ne').symm
-  exact K.congrOn hF
+  exact ⟨K.congrOn hF⟩
+
+def N01Properties.returnCorrectionLocalCoefficient_pointTower
+    (m : ℕ) (p : PolarPoint) (hp : p.1 ∈ Ioo (C.left m) (C.right m))
+    (hdisc : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
+      0 < (originalCoefficients D S C z).b p ^ 2 -
+        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p) :
+    SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun x : (StateDirections S × ℝ) × CircleSpace S =>
+        returnCorrectionLocalCoefficientError D S C R χ (liftSectorParameter S C x.1)
+          m p x.2) :=
+  Classical.choice (returnCorrectionLocalCoefficient_pointTower_nonempty
+    (hN := hN) (hS := hS) (hT := hT) (hR := hR) (j := j) (hcell := hcell)
+    (χ := χ) (hχrange := hχrange) (hcutoff := hcutoff) m p hp hdisc)
 
 def N01Properties.returnCorrectionCoefficient_pointTower
     (hdisc : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →

@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N01ReturnVelocitySpatialTower
 import ContinuousFlexibility.Analysis.ReturnCorrectionTransportEquations
+import ContinuousFlexibility.Analysis.SmoothDirectionsNormedComposition
 
 /-!
 # Actual joint towers of the transported correction factors
@@ -169,6 +170,10 @@ def N01Properties.singleComponentPulledResidualCircleTower
           ((x.1, R.residual (liftSectorParameter S C x.1)), x.2)) := by
   let H := S.circle (3 / 4 : ℝ)
   have hH : IsCircleModel T (3 / 4 : ℝ) H := hS.2.1 (3 / 4 : ℝ)
+  letI : LocallyConvexSpace ℝ (((StateDirections S × ℝ) × H.Space) × ℝ) :=
+    velocitySpatial_pair_locallyConvex (E := StateDirections S × ℝ) (F := H.Space)
+      (sectorPairGrading_withSeminorms S)
+      (withSeminorms_graded (fun n => H.level n) H.bond)
   have hU := (sectorNeighborhood_isOpen S base ε ε).prod (isOpen_Ioo : IsOpen (Ioo l h))
   let F : ((StateDirections S × ℝ) × ℝ) →L[ℝ] StateDirections S × ℝ :=
     ContinuousLinearMap.fst ℝ (StateDirections S × ℝ) ℝ
