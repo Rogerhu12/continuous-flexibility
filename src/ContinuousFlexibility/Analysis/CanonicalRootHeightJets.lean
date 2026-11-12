@@ -34,6 +34,49 @@ def CanonicalRootHeightJetFamily
         loss B (z - (C.referenceState, 0))
         (fun y => (n04CoordinatesCurrentHeightRatio C K z i y)⁻¹) (r, θ)
 
+private theorem relativeHeightQuotient_allJets_fixed_loss
+    {E : Type} [AddCommGroup E] [Module ℝ E]
+    {p : ℕ → Seminorm ℝ E} (hp : Monotone p) (hI : HasInterpolation p)
+    (inputLoss : ℕ) :
+    ∃ base loss : ℕ, ∀ A : ℕ → ℝ, (∀ n, 0 < A n) →
+      ∃ B : ℕ → ℝ, (∀ n, 0 < B n) ∧
+      ∀ z : E, p base z ≤ 1 → ∀ f₀ f : PolarPoint → ℝ,
+      ∀ g : PolarPoint → PolarPoint, ∀ x : PolarPoint,
+        ContDiffAt ℝ ∞ f₀ x → ContDiffAt ℝ ∞ f (g x) → ContDiffAt ℝ ∞ g x →
+        f₀ x ≠ 0 → f (g x) ≠ 0 →
+        PointwiseMaterialJetBound p inputLoss A z f₀ x →
+        PointwiseMaterialJetBound p inputLoss A z (fun y => (f₀ y)⁻¹) x →
+        PointwiseMaterialJetBound p inputLoss A z f (g x) →
+        PointwiseMaterialJetBound p inputLoss A z (fun y => (f y)⁻¹) (g x) →
+        (∀ n : ℕ, 1 ≤ n → ‖iteratedFDeriv ℝ n g x‖ ≤
+          A n * (1 + p (n + inputLoss) z)) →
+        PointwiseMaterialJetBound p loss B z (fun y => f₀ y / f (g y)) x ∧
+        PointwiseMaterialJetBound p loss B z (fun y => (f₀ y / f (g y))⁻¹) x := by
+  obtain ⟨base, loss, hproduct⟩ := relativeHeightProduct_allJets_fixed_loss hp hI inputLoss
+  refine ⟨base, loss, ?_⟩
+  intro A hA
+  obtain ⟨B, hB, hbnd⟩ := hproduct A hA
+  refine ⟨B, hB, ?_⟩
+  intro z hz f₀ f g x hf₀ hf hg hf₀0 hf0 h₀ h₀inv h hInv hgjets
+  have hq : PointwiseMaterialJetBound p loss B z
+      (fun y => f₀ y * (f (g y))⁻¹) x :=
+    hbnd z hz f₀ (fun y => (f y)⁻¹) g x hf₀ (hf.inv hf0) hg h₀ hInv hgjets
+  have hi : PointwiseMaterialJetBound p loss B z
+      (fun y => (f₀ y)⁻¹ * f (g y)) x :=
+    hbnd z hz (fun y => (f₀ y)⁻¹) f g x (hf₀.inv hf₀0) hf hg h₀inv h hgjets
+  constructor
+  · have he : (fun y => f₀ y / f (g y)) =
+        (fun y => f₀ y * (f (g y))⁻¹) :=
+      funext fun y => div_eq_mul_inv _ _
+    exact (congrArg (fun u : PolarPoint → ℝ =>
+      PointwiseMaterialJetBound p loss B z u x) he).mpr hq
+  · have he : (fun y => (f₀ y / f (g y))⁻¹) =
+        (fun y => (f₀ y)⁻¹ * f (g y)) := by
+      funext y
+      rw [inv_div, div_eq_mul_inv, mul_comm]
+    exact (congrArg (fun u : PolarPoint → ℝ =>
+      PointwiseMaterialJetBound p loss B z u x) he).mpr hi
+
 /-- The common neighborhood and loss precede the component. The actual
 stored height and transport are unchanged throughout the construction. -/
 theorem n04b_exists_common_root_heightJets
@@ -60,7 +103,7 @@ theorem n04b_exists_common_root_heightJets
     n04b_exists_common_root_relative_positiveJets hS hT hN hfield hA hB
   let inputLoss := max rootLoss relativeLoss
   obtain ⟨low, outLoss, hproduct⟩ :=
-    relativeHeightProduct_allJets_fixed_loss hp hI inputLoss
+    relativeHeightQuotient_allJets_fixed_loss hp hI inputLoss
   let newBase := max rootBase (max relativeBase (max low outLoss))
   let ε' := min (min ηR ηT) (1 / 2 : ℝ)
   have hε' : 0 < ε' := lt_min (lt_min hηR hηT) (by norm_num)
@@ -142,14 +185,18 @@ theorem n04b_exists_common_root_heightJets
     (hrelative.2.2.1 n hn).trans (mul_le_mul (hRQ n)
       (add_le_add le_rfl (hp (Nat.add_le_add_left (le_max_right _ _) n) _))
       (add_nonneg zero_le_one (apply_nonneg _ _)) (hQ n).le)
-  have hqjets := hbnd (z - (C.referenceState, 0)) hsmall
-    (K.height (C.referenceState, 0) i) (fun y => (K.height z i y)⁻¹) τ (r, θ)
-    hreference.2.1 (hcurrent.2.1.inv hcurrent.2.2.1.ne') hτ
-    (hheight hreference.2.2.2.2.1) (hheight hcurrent.2.2.2.2.2) hτjets
-  have hinvjets := hbnd (z - (C.referenceState, 0)) hsmall
-    (fun y => (K.height (C.referenceState, 0) i y)⁻¹) (K.height z i) τ (r, θ)
-    (hreference.2.1.inv hreference.2.2.1.ne') hcurrent.2.1 hτ
-    (hheight hreference.2.2.2.2.2) (hheight hcurrent.2.2.2.2.1) hτjets
+  have hquotient :
+      PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading)
+        outLoss B (z - (C.referenceState, 0))
+        (fun y => K.height (C.referenceState, 0) i y / K.height z i (τ y)) (r, θ) ∧
+      PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading)
+        outLoss B (z - (C.referenceState, 0))
+        (fun y => (K.height (C.referenceState, 0) i y / K.height z i (τ y))⁻¹) (r, θ) :=
+    hbnd (z - (C.referenceState, 0)) hsmall
+      (K.height (C.referenceState, 0) i) (K.height z i) τ (r, θ)
+      hreference.2.1 hcurrent.2.1 hτ hreference.2.2.1.ne' hcurrent.2.2.1.ne'
+      (hheight hreference.2.2.2.2.1) (hheight hreference.2.2.2.2.2)
+      (hheight hcurrent.2.2.2.2.1) (hheight hcurrent.2.2.2.2.2) hτjets
   have hclosed : (r, θ) ∈ physicalPieceClosed S K (C.referenceState, 0) i :=
     (canonicalCutRoot_mem_closed_and_zero hA hB.1 href hsref m side θ).1
   have hq := n04Coordinates_currentHeightRatio_contDiffAt_pos_closed
@@ -157,28 +204,11 @@ theorem n04b_exists_common_root_heightJets
   refine ⟨hq.1, hq.2, ?_, ?_⟩
   · change PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading)
       outLoss B (z - (C.referenceState, 0))
-      (n04CoordinatesCurrentHeightRatio C K z i) (r, θ)
-    have he : n04CoordinatesCurrentHeightRatio C K z i =
-        (fun y => K.height (C.referenceState, 0) i y * (K.height z i (τ y))⁻¹) := by
-      funext y
-      change K.height (C.referenceState, 0) i y / K.height z i (τ y) = _
-      exact div_eq_mul_inv _ _
-    exact (congrArg
-      (fun f : PolarPoint → ℝ => PointwiseMaterialJetBound
-        (pairGrading (stateGrading S) realGrading) outLoss B
-        (z - (C.referenceState, 0)) f (r, θ)) he).mpr hqjets
+      (fun y => K.height (C.referenceState, 0) i y / K.height z i (τ y)) (r, θ)
+    exact hquotient.1
   · change PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading)
       outLoss B (z - (C.referenceState, 0))
-      (fun y => (n04CoordinatesCurrentHeightRatio C K z i y)⁻¹) (r, θ)
-    have he : (fun y => (n04CoordinatesCurrentHeightRatio C K z i y)⁻¹) =
-        (fun y => (K.height (C.referenceState, 0) i y)⁻¹ * K.height z i (τ y)) := by
-      funext y
-      change (K.height (C.referenceState, 0) i y / K.height z i (τ y))⁻¹ =
-        (K.height (C.referenceState, 0) i y)⁻¹ * K.height z i (τ y)
-      rw [inv_div, div_eq_mul_inv, mul_comm]
-    exact (congrArg
-      (fun f : PolarPoint → ℝ => PointwiseMaterialJetBound
-        (pairGrading (stateGrading S) realGrading) outLoss B
-        (z - (C.referenceState, 0)) f (r, θ)) he).mpr hinvjets
+      (fun y => (K.height (C.referenceState, 0) i y / K.height z i (τ y))⁻¹) (r, θ)
+    exact hquotient.2
 
 end ContinuousFlexibility.Analysis
