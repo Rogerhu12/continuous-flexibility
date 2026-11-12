@@ -80,16 +80,18 @@ theorem n06_primitiveActual_lowerOrder_sources
   refine ⟨order, P * Cjet, Ccol * Cjet,
     mul_nonneg hP hCjet.le, mul_nonneg hCcol hCjet.le, ?_⟩
   intro z hz hs
-  let ρ := stateGrading S order (z.1 - C.referenceState) + |z.2|
-  have hρ : 0 ≤ ρ := add_nonneg (apply_nonneg _ _) (abs_nonneg _)
+  let ρ : ℝ := stateGrading S order (z.1 - C.referenceState) + |z.2|
+  have hρ : 0 ≤ ρ := add_nonneg
+    (apply_nonneg (stateGrading S order) (z.1 - C.referenceState)) (abs_nonneg z.2)
   have hδ : 0 ≤ Cjet * ρ := mul_nonneg hCjet.le hρ
-  have hj := hjets I z hz hs
+  have hj : N06ActualRelativeJetBounds D T S C L K b A I (Cjet * ρ) z :=
+    hjets I z hz hs
   obtain ⟨Mp, hMp, hMpfield⟩ := hpotential z hz hs (Cjet * ρ) hδ hj.potential
   obtain ⟨columns, hcolumns, hcolumnnorm⟩ := n06_primitiveActual_columnDifferences_sources
     hT hS h hz hs I (hI z hz hs) hδ hj.columns
   refine ⟨Mp, columns, ?_, ?_, hMpfield, hcolumns⟩
-  · exact hMp.trans_eq (by dsimp only [ρ]; ring)
+  · exact hMp.trans_eq (mul_assoc P Cjet ρ).symm
   · intro i
-    exact (hcolumnnorm i).trans_eq (by dsimp only [Ccol, ρ]; ring)
+    exact (hcolumnnorm i).trans_eq (mul_assoc Ccol Cjet ρ).symm
 
 end ContinuousFlexibility.Statements
