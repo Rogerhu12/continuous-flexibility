@@ -47,7 +47,7 @@ theorem n04Realization_jointMixed_bound_of_stableSlots
         have hb0 : b = 0 := by omega
         subst a
         subst b
-        simpa only [spaces_mixedDerivative_zero] using hb n (by omega) v hv
+        simpa only [mixedDerivative, iteratedDeriv_zero] using hb n (by omega) v hv
     | succ r ih =>
         intro g Jg a b hab n B hb v hv
         cases a with
@@ -60,7 +60,7 @@ theorem n04Realization_jointMixed_bound_of_stableSlots
         | zero =>
             cases b with
             | zero =>
-                simpa only [spaces_mixedDerivative_zero] using hb n (by omega) v hv
+                simpa only [mixedDerivative, iteratedDeriv_zero] using hb n (by omega) v hv
             | succ b =>
                 rw [Jg.jointJet_mixed_angular_step hV hc 0 b n x hx v hq]
                 refine ih _ (Jg.fixedLast (0, (0, 1))) 0 b (by omega) n B ?_ v hv
