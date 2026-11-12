@@ -221,6 +221,11 @@ theorem coupled_N04Properties_restrict (h : N04Properties D T S C L K base loss 
     (hb : base ≤ base') (hε : ε' ≤ ε) : N04Properties D T S C L K base' loss ε' :=
   n06_N04Properties_mono h hb hε
 
+variable {Vol : VolumeModelData S K} {b : ℕ}
+  {Domain : CanonicalDomainData S K Vol b}
+  {Relative : RelativeInverseData S K Vol b Domain}
+  {G : ScalarInverseData S} {P : ResidualData S} {B : ControlColumnData S}
+
 theorem coupled_N06Properties_restrict
     (h : N06Properties D S C K L Vol b Domain Relative base ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) (hε' : 0 < ε') :
