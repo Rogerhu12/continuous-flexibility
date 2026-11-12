@@ -44,8 +44,9 @@ theorem n05_negative_reference_height_radial_open
   have hhθ := (hclosed (C.referenceState, 0) hmem hsector i (r, θ) hrClosed).2.2.2
   have hh0 := (hclosed (C.referenceState, 0) hmem hsector i (r, 0) hrClosed).2.2.2
   have hξ : (K.chart (C.referenceState, 0) i (r, θ)).1 =
-      (K.chart (C.referenceState, 0) i (r, 0)).1 :=
-    congrArg Prod.fst (n05_negative_reference_chart_radial hT hS h hi hrClosed θ)
+      (K.chart (C.referenceState, 0) i (r, 0)).1 := by
+    simpa only using
+      congrArg Prod.fst (n05_negative_reference_chart_radial hT hS h hi hrClosed θ)
   have hdθ := n05_negative_reference_determinant_closed hT hS h hi
     (x := (r, θ)) hrClosed
   have hd0 := n05_negative_reference_determinant_closed hT hS h hi

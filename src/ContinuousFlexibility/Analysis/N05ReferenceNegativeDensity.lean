@@ -55,10 +55,12 @@ theorem n05_negative_reference_density_closed
   have hdφ : DifferentiableAt ℝ φ (r, θ) := hΨ.snd
   have hradial (t : ℝ) : Ψ (r, t) = (ξ (r, 0), t) :=
     n05_negative_reference_chart_radial hT hS h hi hr t
-  have hξslice : (fun t : ℝ => ξ (r, t)) = fun _ => ξ (r, 0) :=
-    funext fun t => congrArg Prod.fst (hradial t)
-  have hφslice : (fun t : ℝ => φ (r, t)) = fun t => t :=
-    funext fun t => congrArg Prod.snd (hradial t)
+  have hξslice : (fun t : ℝ => ξ (r, t)) = fun _ => ξ (r, 0) := by
+    funext t
+    simpa only using congrArg Prod.fst (hradial t)
+  have hφslice : (fun t : ℝ => φ (r, t)) = fun t => t := by
+    funext t
+    simpa only using congrArg Prod.snd (hradial t)
   have hξθ : angularPartial ξ (r, θ) = 0 := by
     have hd := Radial.hasDerivAt_angularSlice hdξ
     rw [hξslice] at hd
