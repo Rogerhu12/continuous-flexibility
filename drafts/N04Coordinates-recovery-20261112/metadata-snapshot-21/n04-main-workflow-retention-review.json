@@ -1,0 +1,13 @@
+{
+  "main": "4f52a98e2a67b84c2424cc1829a6ef7eca560a7d",
+  "merge_base": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+  "line_head": "03e526021c371413f03fc0ce052476b63e105361",
+  "path": ".github/workflows/build.yml",
+  "before_blob": "7a4c41b2af350fb4323caa26242bcb351fff2714",
+  "after_blob": "173cc4124f760451d69b28f87efc7fa7def6d09b",
+  "diff": "diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml\nindex 7a4c41b2..173cc412 100644\n--- a/.github/workflows/build.yml\n+++ b/.github/workflows/build.yml\n@@ -201,15 +201,16 @@ jobs:\n             echo \"::warning::release lake-cache does not exist; the compiled build was not published\"\n           fi\n       - name: Pack this line's build for main\n-        # Main downloads it when it merges this exact head (see above).\n-        if: startsWith(github.ref_name, 'line/') && success()\n+        # Main downloads it (green runs only) when it merges this exact head; the build of a\n+        # failed run is kept too, so the lead can download it and compile files locally.\n+        if: startsWith(github.ref_name, 'line/') && !cancelled()\n         shell: bash\n         run: |\n           find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true\n           tar --zstd -cf lake-build.tar.zst .lake/build\n           ls -lh lake-build.tar.zst\n       - uses: actions/upload-artifact@v4\n-        if: startsWith(github.ref_name, 'line/') && success()\n+        if: startsWith(github.ref_name, 'line/') && !cancelled()\n         with:\n           name: lake-build-line\n           path: lake-build.tar.zst",
+  "scope": "Only preserve the packed artifact from failed line runs; no build, source, audit, statement, rule, generator or toolchain change.",
+  "read_entire_diff": true,
+  "reviewer": "/root",
+  "checked_at": "2026-11-12T13:40:00.765200+00:00"
+}

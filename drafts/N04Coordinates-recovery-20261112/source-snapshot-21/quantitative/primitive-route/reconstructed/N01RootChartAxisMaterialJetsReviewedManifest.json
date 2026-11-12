@@ -1,0 +1,46 @@
+{
+  "kind": "reviewed_actual_unit_root_chart_positive_material_jets",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootChartAxisMaterialJets.lean",
+    "sha256": "a06f5ae3da5068e3efcb9e36ed3ef03a1b8f609ca60c1f380716aed75bef9735",
+    "blob": "78c68e7f898bb2ca1f655631942b697ca2885263",
+    "lines": 281
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootChartAxisMaterialJetsCandidateManifest.json",
+    "sha256": "d071ec7b0f7b9135ea113fb8b97a5c19f71ebe516f0b337a2f8c6ee1114d998e",
+    "blob": "c35d61060135130a7082433d63133799b462a927",
+    "lines": 154
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootChartAxisMaterialJetsIndependentReview.json",
+    "sha256": "d4e24c04c0cd4805cc150d07cccf51fe1f8a458cb90e11c67ce319c78a22d44e",
+    "blob": "b33dfa5c28791a3816c6c799852c059468709b4a",
+    "lines": 160
+  },
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootEvenOddAxisMaterialJetsReviewedManifest.json",
+      "sha256": "c2cc6e723981a93f8640c425ee9412ab8cf1a47fd55a718bdfd7587ecb946b78",
+      "blob": "0568cd35a7a12dffa0d34cf740ee06de67c98bc8",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesReviewedManifest.json",
+      "sha256": "f37ce30954fd93ee03f62378c599cd8637e4925b6a0e8c3d099a77734eabc698",
+      "blob": "d853a4702771f7c9927a1f954482d0b2fa9760b9",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsReviewedManifest.json",
+      "sha256": "fbcb465de171417a9ec9ab12847015f9caaf3513f653b3c3051efc6b17a45841",
+      "blob": "09c0305cf7d62d1e159c0ffe711193436a538227",
+      "lines": 52
+    }
+  ],
+  "scope": "The same actual G gives positive ordinary spatial jets of the genuine unit even/odd chart. The root first projection has zero value, the true power germ and exact Leibniz sum cost no inverse localization radius, and the material sample and one linear high grading factor are retained.",
+  "limitations": "Raw component optical lower, actual host containment and OrdinaryFlowJacobianBounds remain explicit. This is not an inferred primitive certificate for arbitrary Through03; old-K physical identification and state SmoothDirections remain separate obligations.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

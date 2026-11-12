@@ -1,0 +1,34 @@
+{
+  "kind": "positive_component_endpoint_recognition_and_finite_exceptions_reviewed_owner_manifest",
+  "author": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_INDEPENDENTLY_REVIEWED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04PositiveComponentRecognitionCandidateManifest.json",
+    "sha256": "d191738458146ca475e56e60c0d6db11d89ec54b59ed04e3980970ad66f84d02",
+    "blob": "124155b7eec4c6b4087f1179c2a0829d2495892a",
+    "lines": 54
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04PositiveComponentRecognition.lean",
+    "sha256": "968a45b3547f8c477e2bda3cca59de001be645f14585012480d6c146c919b7b4",
+    "blob": "10cffd9f52b63ace9d0e6b527a5f7fac466d4ab8",
+    "lines": 81
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N04PositiveComponentRecognitionIndependentReview.json",
+    "sha256": "7674f9ee6eeb916722a27a71bf14b617a9a64141d7d9be14cebd7308488ed878",
+    "blob": "a114c5b48a7adc770041b3a23d130565d0ba34f9",
+    "lines": 64
+  },
+  "scope": [
+    "Same-left positive components intersect inside their common initial interval, so the actual connected-component index is equal.",
+    "A positive interval with zero endpoints is contained in its actual component by connectedness; neither endpoint can be interior to that component, so the component endpoints are exactly the displayed pair.",
+    "A finite set of allowed left endpoints has only finitely many positive components; their reciprocal widths have a single numerical bound. No material E0 comparison is asserted here."
+  ],
+  "validation": {
+    "source_bytes_unchanged": true,
+    "compiled": false,
+    "lean_or_ci_invoked": false,
+    "active_checkout_index_refs_CP_modified": false
+  }
+}

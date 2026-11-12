@@ -1,0 +1,138 @@
+{
+  "kind": "same_actual_V_material_and_sample_obligation_inventory",
+  "status": "EXACT_SOURCE_INVENTORY_WITH_NEW_HELD_PROOFS",
+  "author": "/root/audit_coordinates",
+  "actual_repo_head_read_only": "03e526021c371413f03fc0ce052476b63e105361",
+  "contracts": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "lines": 1756
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "lines": 603
+    }
+  ],
+  "same_V": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+    "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+    "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+    "lines": 131
+  },
+  "completed_held_items": [
+    {
+      "obligation": "Global H(Fp)/H(p) and M(Fp)/M(p), same actual F and q with qualitative transport",
+      "evidence": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialTransportReviewedManifest.json",
+        "blob": "4633621bcf20e3a58054fa54b3cf0e86c94bc38e",
+        "sha256": "c44434fd4780f7026556c2b01bdd22b9611f70cfaa8257354817f6bb6d303c74",
+        "lines": 60
+      },
+      "claim": "One common positive coefficient and nonnegative exponent precede state, component and point. Actual negative/positive/default selectors are unchanged."
+    },
+    {
+      "obligation": "Six material ratio state differences and their full SmoothDirections zero towers",
+      "evidence": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalMaterialRatioDifferenceJetsReviewedManifest.json",
+        "blob": "ab9b234acf2b33df32b854014138deb63ddbfa62",
+        "sha256": "99492016d90c172e78062b39df09f64422466d335ec7258645f89424afc816d2",
+        "lines": 42
+      },
+      "claim": "All six atom functions are literally independent of the state, so every actual difference mixed derivative and parameter derivative is zero."
+    },
+    {
+      "obligation": "Actual original negative-piece sample versus the complete closed component",
+      "evidence": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamplesReviewedManifest.json",
+        "blob": "c3770c51f99a3a4a734213541f7b04436263350c",
+        "sha256": "c296199c9dec8bfd1cf7f5ba7d3540a783ce6d0f6043ee58c41bdce59e5e6729",
+        "lines": 54
+      },
+      "claim": "The sample is exactly T.sample(K.cell k), with K.cell k the actual reference-half midpoint n04CellAt. Bounded endpointX gives arbitrary real H/M powers and nonnegative E0 powers at this same sample."
+    },
+    {
+      "obligation": "Same V current physical point to its existing sample",
+      "evidence": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialSamplesCandidateManifest.json",
+        "blob": "edefd5d8ffe2e7b31033715f3c19f6b4da8c1e62",
+        "sha256": "0a81b0c4971a63f1d84fd9f80d15c1e307f27720828cc464caf377deb24a2744",
+        "lines": 141
+      },
+      "independent_review_status": "requested_root_not_yet_received",
+      "claim": "Retains the existing positive cell map under actual midpoint membership; combines the exact negative labels. Gives H(point)/H(sample), sample E0 powers bounded by point E0 powers, and every strict exponent decay 0<beta<gamma."
+    }
+  ],
+  "remaining_exact_gaps": [
+    {
+      "obligation": "ReferenceJets for the six material ratio atoms",
+      "status": "not_asserted_complete",
+      "reason": "Zero state differences do not bound reference spatial derivatives. Negative sample weights now provide actual value transport; higher ordinary/unit-strip jets still need RadialMaterialExpansion and actual weight derivative providers. Positive reverse endpoint-to-sample E0 comparison requires additional genuine whole-gap geometry, not the one-sided midpoint bound."
+    },
+    {
+      "obligation": "Exact H(sample)^(3/4) factor in CurrentJets",
+      "status": "not_asserted_complete",
+      "reason": "The new general residual estimate yields beta<gamma. With gamma=3/4 it does not preserve beta=3/4, so it cannot replace the stronger sample-height hypothesis in the actual target."
+    },
+    {
+      "obligation": "CanonicalPrimitiveGeometry.materialJets for all primitive indices",
+      "status": "not_asserted_complete",
+      "reason": "The H normalizer value comparison and sample coefficient transfer supply actual inputs. They do not estimate all material-coordinate jets of chart, inverse, height, log Jacobian, or the three absolute reference source factors."
+    },
+    {
+      "obligation": "Low-order global F and q derivative bounds by M(point)^A",
+      "status": "not_asserted_complete",
+      "reason": "The reviewed190 theorem proves qualitative C3 and both H/M ratios. It does not supply the separate quantitative order1..2 F and order0..2 q bounds."
+    },
+    {
+      "obligation": "ReferencePrincipal positive c uniform sample-E0 lower bound",
+      "status": "not_asserted_complete",
+      "reason": "The same-Y/H principal lower reduction is reviewed, but its actual reference width/value/reciprocal costs and physical profile lower bound must still be supplied for the same retained witness."
+    },
+    {
+      "obligation": "Retained-Morse gap data for an arbitrary current Through03 witness",
+      "status": "not_assumed",
+      "reason": "New main/N06 and the independently reviewed positive retained adapters provide genuine same-Gamma geometric facts when their retained construction is present. This inventory does not infer that every current Through03 witness already retains that certificate."
+    }
+  ],
+  "next_direct_reuse": [
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialOrdinaryJets.lean",
+        "blob": "1bbb02b84f5b1306dee7cbf96305626af6e683e5",
+        "sha256": "2b87e87ef153e371dd1e3ff8967d3a06392cb4239fcf15bf1dd575c11f935a5d",
+        "lines": 246
+      },
+      "use": "Actual material-coordinate jets of arbitrary powers of H; RadialMaterialExpansion can convert them to physical ordinary jets with E0 costs."
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aMaterialPowerJets.lean",
+        "blob": "5cd512bce83b14f943562aa438bd519089e5b399",
+        "sha256": "7f1d1bf0c61d24d410a5c731b53439f764e405997bd10c746e49530e27017a96",
+        "lines": 62
+      },
+      "use": "Actual material-coordinate jets of arbitrary real powers of M, including inverses."
+    },
+    {
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveComponentMaterialCell.lean",
+        "blob": "9bd8135577563874f4fa614e1af047afd9982d94",
+        "sha256": "5f21c6b32b0c9241fb560d286690cb93199e0365a9d1314af1c8daab943f4368",
+        "lines": 131
+      },
+      "use": "The existing genuine midpoint-cell witness supplies precisely the geometric hcell premise of the new whole-V comparison."
+    }
+  ],
+  "guards": [
+    "No assertion of E0>=1 for the original material datum.",
+    "No replacement of the actual K.cell by C.cell or an unrelated full-component host.",
+    "No whole-positive single-cell assumption or reversal of the one-sided sample estimate.",
+    "No replacement of the actual V, gauge, fields, sample map or Through03 witness.",
+    "No compile, CI query, active checkout/index/ref/CP/authority modification."
+  ],
+  "compiled": false
+}

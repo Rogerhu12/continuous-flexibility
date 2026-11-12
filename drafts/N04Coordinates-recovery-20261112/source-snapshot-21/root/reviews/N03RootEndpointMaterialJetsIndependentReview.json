@@ -1,0 +1,106 @@
+{
+  "kind": "independent_full_source_review",
+  "reviewer": "/root",
+  "status": "PASS_STATIC_REVIEW_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
+    "sha256": "dcdb96e62937189c4e819ec7c9d9055f6629b1b329e69721b4be5100a5358001",
+    "blob": "67909442f863f93ac90079022eeb473feee7e722",
+    "lines": 202
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJetsCandidateManifest.json",
+    "sha256": "1f155be46d1ad804fdec84379e545efbdb744c05bc0459997d479ce9cba78405"
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03ControlledRootUnitIdentification.lean",
+      "sha256": "461c018957bcef17e4f00109039d5b92eaefe622e6b75f6bd77c4936fa36625c",
+      "blob": "7c9c9b11b3c44ac993b0c3d6489982e2af1dd394",
+      "lines": 122
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootChartAxisMaterialJets.lean",
+      "sha256": "a06f5ae3da5068e3efcb9e36ed3ef03a1b8f609ca60c1f380716aed75bef9735",
+      "blob": "78c68e7f898bb2ca1f655631942b697ca2885263",
+      "lines": 281
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJets.lean",
+      "sha256": "1a3054cdab9e116a2778d6458659e5c66e3c03b3ee4c6aa225dcc3629c6406ab",
+      "blob": "b785c00878f9be9b1b79a446a58ac6c278174150",
+      "lines": 228
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootUnitPhysicalJetTransfer.lean",
+      "sha256": "3e2271909f99a4d4be277c97f5436b21de43aacd497e8134cdd3d47f8c3c855c",
+      "blob": "5585fe17464c601e3ef931d94f3d03a3238ab131",
+      "lines": 58
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootAffineOrdinaryJets.lean",
+      "sha256": "019086a0c2d373cbd7d5c1b5bc4061657c1bda526d7bc631d1b45f7e3df1bd35",
+      "blob": "21960d99b3c526141925fc66a61ce3732eb5cf1b",
+      "lines": 193
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01ControlledRootInput.lean",
+      "sha256": "89277caf50bb3cf87824ca875f3252002cccb0157f6b0dab2475a1e4ef0e633d",
+      "blob": "a2fc02c86308d5868cf22f486b06d4de6b1ed844",
+      "lines": 216
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNeighborhoodRestriction.lean",
+      "sha256": "af2577f18d3d3af94162ce3415e3d0b96c054901827b5ea1db6d36be994d407c",
+      "blob": "7888f021746c6faf5ae5f0b149ed2fd17830c6e2",
+      "lines": 187
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseMaterialJetOperations.lean",
+      "sha256": "6d100022491b6a0858badce398873d75f9a1642dc309f11beaf9ad7e1c4eb14c",
+      "blob": "58f9546e8979123ef35e36a79ca56b54081c5312",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowJetsProof.lean",
+      "sha256": "a32b912e8afcee50fbe76ec8f86519d5d4d5a84675400cab5f2ea855e1bd51ce",
+      "blob": "acb5b0fd374b5304c79e39f3412a50c7921a616f",
+      "lines": 121
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootChartAxisMaterialJetsReviewedManifest.json",
+      "sha256": "2f4c5862010ea72da1f955f109e6e27a8e00cfbdaf2fd5fd068c531716513564",
+      "blob": "772fb850a11159717308a67860ad5e36bb2fe83c",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJetsReviewedManifest.json",
+      "sha256": "54773ba885dca99c76333b8159720df298506d007b818972a13b10c27b3ec493",
+      "blob": "a83cca4f34bf3c7e358fc85b774e3431e2a27875",
+      "lines": 46
+    }
+  ],
+  "new_provider_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N03ControlledRootUnitIdentificationIndependentReview.json",
+    "sha256": "e7a9d30ede85685f88d2e2ed9386edbacbc2376a74bf09469cebadcb98278498"
+  },
+  "checked_at": "2026-11-12T13:37:36.195785+00:00",
+  "full_source_read": true,
+  "proof_checks": [
+    "Read all 202 source lines. Checked exact N01 common-input factory, original witness restriction contracts, chart281 and height228 quantified material-family contracts, full unit-transfer58 and actual RootAffineOrdinaryJets unscale proofs.",
+    "The already proved common-input constructor selects actual component flows, root factors and strips on one common smaller neighborhood. Through03, PartA, PartB and field regularity are restricted without changing any data or K.",
+    "The low neighborhood and output loss precede gamma. The coefficient sequence may depend on gamma and spatial order, but precedes state, component, host, endpoint and angle.",
+    "C0=max(CF,CH) preserves the proven floor C0*E0(sample)>=1. B(n)=2*(1+BF(n)+BH(n)) dominates the two coefficient factors, powers and derivative losses through a monotone grading. No assumption E0>=1 is made.",
+    "The exact controlled input supplies the same Theta used in both the stored-jet identity and material model bounds. All chosen R/delta/CS1/band quantities occur only in the qualitative identity; they do not occur in its numerical majorant.",
+    "The actual inward orientation is plus or minus one. The affine inverse has norm one and costs the universal factor two. Positive chart orders avoid the unbounded zero-order angular lift; every real height power includes order zero and uses actual height positivity.",
+    "All physical roots are closed-piece members of the original K. The source retains the same component host and raw optical lower as explicit geometric hypotheses."
+  ],
+  "scope_limits": [
+    "No genuine parameter SmoothDirections estimate or full N04c claim.",
+    "Raw same-component optical lower and a true containing host are still hypotheses; they must be supplied by the retained constructive reference route.",
+    "Uncompiled source: complete CI is required before use as validated implementation."
+  ],
+  "checkout_index_refs_or_activation_changed": false
+}

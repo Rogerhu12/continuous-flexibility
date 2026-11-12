@@ -1,0 +1,87 @@
+{
+  "snapshot": 21,
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "parent": "50cae968a47ba361e30c427780c4ee16765768d4",
+  "base_tree": "06f01e073ae2ad8182b0fb68bf720a4f3fa04dc0",
+  "line_head": "03e526021c371413f03fc0ce052476b63e105361",
+  "line_tree": "efb21c64394350528d48b98e247b5036edaa4b46",
+  "frozen_at": "2026-11-12T13:41:24.335630+00:00",
+  "indexed_files": 1347,
+  "new_sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialRatioJets.lean",
+      "sha256": "0548099aed986271dacb3ef97a5b37ad60469c860a890d8f0c19ec097f7d0a49",
+      "lines": 174
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "lines": 131
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialWeightPhysicalPowerJets.lean",
+      "sha256": "84221698a4955d9d8e67459769e5289336b341f5353807cd59195895c45af3f9",
+      "lines": 89
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialRatioJets.lean",
+      "sha256": "80250a729978a583c36c344f601368419515fb21297ce259c8e1649d48c2f9aa",
+      "lines": 205
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialSamples.lean",
+      "sha256": "ff7974347639219b1aea1d4f515c89bd9e8b13ab830d607498ecb8319519ab57",
+      "lines": 197
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+      "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+      "lines": 52
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48/N02N03FixedWitnessConstruction.lean",
+      "sha256": "932d95fa60bd0030099cf3c2d638f467040783e3c05fa1a60fa3f5558188cbb0",
+      "lines": 108
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04PositiveComponentRecognition.lean",
+      "sha256": "968a45b3547f8c477e2bda3cca59de001be645f14585012480d6c146c919b7b4",
+      "lines": 81
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapComponents.lean",
+      "sha256": "81af913d8f55887e39eda89e5c93ec4b9707a3c6fc39c7c565fcef042308a9d3",
+      "lines": 123
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentClassification.lean",
+      "sha256": "bfb4877a20d123904751226173d2c0120921ad341f536926847a3039efd1a2d4",
+      "lines": 117
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootChartAxisMaterialJets.lean",
+      "sha256": "a06f5ae3da5068e3efcb9e36ed3ef03a1b8f609ca60c1f380716aed75bef9735",
+      "lines": 281
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03ControlledRootUnitIdentification.lean",
+      "sha256": "461c018957bcef17e4f00109039d5b92eaefe622e6b75f6bd77c4936fa36625c",
+      "lines": 122
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootEndpointMaterialJets.lean",
+      "sha256": "dcdb96e62937189c4e819ec7c9d9055f6629b1b329e69721b4be5100a5358001",
+      "lines": 202
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalFixedGeometryDifferenceJets.lean",
+      "sha256": "d7d309acb920dd844e4fa1f1657c6e813738c2306dc9e143b6416829018e0b84",
+      "lines": 77
+    }
+  ],
+  "new_source_lines": 1959,
+  "existing_added_lean_from_compiled_baseline140": 2029,
+  "projected_added_lean_from_compiled_baseline140": 3988,
+  "status": "Source preservation only; outside src, no CI activation or completion claim.",
+  "entries": 67
+}

@@ -1,0 +1,55 @@
+{
+  "kind": "actual_material_weight_physical_power_derivative_bound",
+  "status": "CANDIDATE_UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "author": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/MaterialWeightPhysicalPowerJets.lean",
+    "blob": "645be57c4bd2a556e7ff74d0d2dfb9449f2d8dcc",
+    "sha256": "84221698a4955d9d8e67459769e5289336b341f5353807cd59195895c45af3f9",
+    "lines": 89,
+    "target": "src/ContinuousFlexibility/Analysis/MaterialWeightPhysicalPowerJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.MaterialOrdinaryJets",
+      "ContinuousFlexibility.Analysis.N07aMaterialPowerJets"
+    ],
+    "public_names": [
+      "materialHMWeight",
+      "materialHMWeight_pos",
+      "materialHMWeight_contDiffOn",
+      "materialHMWeight_rpow_physical_jet_bound"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialOrdinaryJets.lean",
+      "blob": "1bbb02b84f5b1306dee7cbf96305626af6e683e5",
+      "sha256": "2b87e87ef153e371dd1e3ff8967d3a06392cb4239fcf15bf1dd575c11f935a5d",
+      "lines": 246
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N07aMaterialPowerJets.lean",
+      "blob": "5cd512bce83b14f943562aa438bd519089e5b399",
+      "sha256": "7f1d1bf0c61d24d410a5c731b53439f764e405997bd10c746e49530e27017a96",
+      "lines": 62
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "lines": 603
+    }
+  ],
+  "proof_checks": [
+    "Both H and M powers use their genuine all-order material-coordinate estimates, including negative real exponents.",
+    "The actual inverse radius identity and RadialMaterialExpansion convert material derivatives to physical derivatives.",
+    "The real power gamma is preserved; E0 exponent comes only from the supplied radial expansion. No E0-to-M coarsening is used.",
+    "Finite-sum estimate follows the existing MaterialOrdinaryJets proof with the E0 factor retained."
+  ],
+  "scope_limits": [
+    "No atlas, component, sample or final primitive bound is an input.",
+    "No original E0>=1, same coefficient/exponent normalization, or full ReferenceJets certificate is asserted."
+  ],
+  "independent_reviews": [],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_or_active_plan_modified": false
+}

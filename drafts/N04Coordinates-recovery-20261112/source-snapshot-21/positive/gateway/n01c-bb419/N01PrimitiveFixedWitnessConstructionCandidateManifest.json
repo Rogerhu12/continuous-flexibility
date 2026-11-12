@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "fixed_witness_gateway_candidate",
+  "status": "HELD / UNCOMPILED / peer review pending",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-bb419/N01PrimitiveFixedWitnessConstruction.lean",
+    "sha256": "5a786c0686f89e5186e4f39dc748c644e2d433be5a06d0c95f9324e27b9a539b",
+    "blob": "fa468a78f48266fb1c0603e9b16988a50d5a4fb4",
+    "lines": 52
+  },
+  "target_module": "ContinuousFlexibility.Analysis.N01PrimitiveFixedWitnessConstruction",
+  "upstream_commit": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+  "selected_direct_callees": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cCoefficientTameBounds.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "0b73f6865edfbf1f704b47b540efa76b9a67414b",
+      "sha256": "46836735cbdffae67128147407f8eb47014c7498fdab154cb514a6443ed359a1",
+      "lines": 118
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cCharacteristicSpeedTameBounds.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "b25a688fa034eeacbbccae57881718c85cccb686",
+      "sha256": "2998e4e4ce36d6b6b883035c7b85ad02027d37166ca208b5356c98c07963da91",
+      "lines": 198
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cOrdinaryFlowBounds.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "4accd1b41c8fea9d47349f4dc12586c904958a31",
+      "sha256": "9302c99fde99090b13ff2ead75fc0ca5f3443ca7ddb588df6e79f0e8310846ad",
+      "lines": 90
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N01cAssembly.lean",
+      "ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "blob": "245e028edcd0d102dd8872ea3f2ab83bbc8da1c2",
+      "sha256": "06f9c26c4ab6a1af844d18ee31874de1404fa1f245bc4735f7c080f28440a441",
+      "lines": 27
+    }
+  ],
+  "preserved_objects": [
+    "D",
+    "T",
+    "S",
+    "C"
+  ],
+  "new_choices": [
+    "common base",
+    "common derivative loss",
+    "common radius"
+  ],
+  "certificate_retention": "N01PrimitiveGeometry is returned unchanged; D/T/S/C are fixed theorem parameters, so every previously proved retained-reference certificate remains about exactly this D.",
+  "contract": "parameter-order flow loss: forall k exists parameterLoss forall s",
+  "scope_limits": [
+    "No claim that these two differently pinned candidates compose before the flow-loss interface is reconciled.",
+    "No local Lean execution, no active source/index/ref/CI mutation.",
+    "No application of an OPEN Blueprint theorem."
+  ],
+  "green_receipt_applies_to_candidate": false,
+  "upstream_ci": {
+    "run_id": 43208064010,
+    "job_id": 131148197685,
+    "status": "completed",
+    "conclusion": "success",
+    "modules_compiled": 3229,
+    "module_total": 3231,
+    "blueprint_proved": 40,
+    "blueprint_total": 45,
+    "build_jobs": 7205,
+    "n01c_axiom_gate": "passed"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "reviewed_actual_controlled_input_original_stored_root_unit_identification",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03ControlledRootUnitIdentification.lean",
+    "sha256": "461c018957bcef17e4f00109039d5b92eaefe622e6b75f6bd77c4936fa36625c",
+    "blob": "7c9c9b11b3c44ac993b0c3d6489982e2af1dd394",
+    "lines": 122
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03ControlledRootUnitIdentificationCandidateManifest.json",
+    "sha256": "1237ed3cd7b70bed93a8627beb0db97a24e2944365ca9e917bdf5afabe8df7c8",
+    "blob": "4984383d06ea2f4d471a85dbbd3ea01246169dc1",
+    "lines": 82
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N03ControlledRootUnitIdentificationIndependentReview.json",
+    "sha256": "e7a9d30ede85685f88d2e2ed9386edbacbc2376a74bf09469cebadcb98278498",
+    "blob": "3e57cd975c6c492952e9e7aeed64d1532095ffeb",
+    "lines": 88
+  },
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03StateRootBandIdentificationReviewedManifest.json",
+      "sha256": "5bb4cd31012393c191e14c2cb60ce832a76c5e48bb5ea9623444b9d33ad56be6",
+      "blob": "5e0896dbd0647a21912bdadbd71135c304e11c00",
+      "lines": 24
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N03RootUnitScaleIdentificationReviewedManifest.json",
+      "sha256": "af72e4d9d5e4f246047629cfa1c64d5c7c427d3703e1d98cfa767566b57dc61c",
+      "blob": "d17fc164af5ae038256f7994d8bf191008b40beb",
+      "lines": 34
+    }
+  ],
+  "scope": "The existing real controlled input identifies the original stored K chart and every height power with the same genuine unit model. Its CS1 constant only selects the state-dependent band.",
+  "limitations": "Same-component optical lower is still explicit where used, with the actual containing host and sample. No arbitrary Through03 primitive projection or parameter SmoothDirections/full N04c result is asserted. Original candidates remain unchanged.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

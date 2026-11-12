@@ -1,0 +1,54 @@
+{
+  "kind": "positive_component_endpoint_recognition_and_finite_exceptions",
+  "author": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/N04PositiveComponentRecognition.lean",
+    "sha256": "968a45b3547f8c477e2bda3cca59de001be645f14585012480d6c146c919b7b4",
+    "blob": "10cffd9f52b63ace9d0e6b527a5f7fac466d4ab8",
+    "lines": 81
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/N04PositiveComponentRecognition.lean",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6",
+      "lines": 194
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Order/Interval/Set/LinearOrder.lean",
+      "sha256": "57706e0630842f683bcde812a6127f78a115b40a219b0ca92ca14476f3ab3191",
+      "blob": "3f53bfb274b330b8c1162691be038135347820c0",
+      "lines": 571
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Data/Set/Finite/Basic.lean",
+      "sha256": "b5a0098e92a96da2f17c5f5b753964dc0836e9451f3fa20afd5c04e62eb75008",
+      "blob": "7c5d633ab7c2b9c04b3347e9ffd5098775984ae1",
+      "lines": 970
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Data/Set/Finite/Lattice.lean",
+      "sha256": "488957f635426291d2dc7bdceec7f7b69156e79261463bde40530273a62d8099",
+      "blob": "95a116326b40a283adc1cb4fa17ae3a474b9bdd5",
+      "lines": 479
+    }
+  ],
+  "public_names": [
+    "n04PositiveLeft_injective",
+    "n04PositiveComponent_existsUnique_of_zero_endpoints",
+    "n04PositiveComponent_finite_of_left_mem",
+    "n04PositiveComponent_width_inverse_bound_of_left_mem"
+  ],
+  "scope": [
+    "Same-left positive components intersect inside their common initial interval, so the actual connected-component index is equal.",
+    "A positive interval with zero endpoints is contained in its actual component by connectedness; neither endpoint can be interior to that component, so the component endpoints are exactly the displayed pair.",
+    "A finite set of allowed left endpoints has only finitely many positive components; their reciprocal widths have a single numerical bound. No material E0 comparison is asserted here."
+  ],
+  "validation": {
+    "compiled": false,
+    "lean_or_ci_invoked": false,
+    "active_checkout_index_refs_CP_modified": false
+  }
+}
