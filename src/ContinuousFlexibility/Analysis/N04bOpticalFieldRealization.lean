@@ -45,9 +45,9 @@ theorem coefficientJets_local_bounds :
     (Q.strip_discriminant hN hS hT) (Q.sector_flow_slope hN)
     Q.discScale_pos Q.discPower_pos.le Q.strip_positive
 
+include hN hS hT hR in
 /-- One actual source and the same literal coefficient/flow formulas
 satisfy the complete physical field contract. -/
-include hN hS hT hR in
 theorem exists_field :
     ∃ E : AnnularState S × ℝ → CircleSpace S →ₗ[ℝ] HeightPair S →ₗ[ℝ] S.Source,
       N03Properties D T S C R (Q.field E) base ε ∧
