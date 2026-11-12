@@ -348,10 +348,76 @@ private def transportVelocity_cutoffDirections
     ((isOpen_Ioo : IsOpen (Ioo l h)).prod
       (isOpen_univ : IsOpen (univ : Set ℝ))) hχ
 
-/-- Fixed-loss bounds for the actual independent and frozen-residual
-velocities. All geometric assumptions are the witnesses produced by
-the buffered, uniform N01 neighborhood construction. -/
-theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
+private theorem transportVelocity_parameterFlat_from_certificates
+    (S : PhysicalSpacesData)
+    {U : Set ((StateDirections S × ℝ) × CircleSpace S)} {l h : ℕ → ℝ}
+    (p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S)) (W H : ℕ → ℝ) (χ : ℕ → ℝ → ℝ)
+    (hp : Monotone p) (hW : ∀ i, 1 ≤ W i) (hH : ∀ i, 0 ≤ H i)
+    (hU : IsOpen U)
+    (hc : ∀ i, Convex ℝ (U ×ˢ (Ioo (l i) (h i) ×ˢ (univ : Set ℝ))))
+    {fL fA fV fE : ℕ → ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint → ℝ}
+    {fZ : Fin 2 → ℕ → ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint → ℝ}
+    (JL : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fL i))
+    (JC : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ))
+      (fun z : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint => deriv (χ i) z.2.1))
+    (JA : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fA i))
+    (JZ : ∀ c i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fZ c i))
+    (JV : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fV i))
+    (JE : ∀ i, SmoothDirections (U ×ˢ (Ioo (l i) (h i) ×ˢ univ)) (fE i))
+    (nmax : ℕ)
+    (characteristicBounds : ∃ B : ℕ, ∀ A : ℝ, 0 ≤ A →
+      ∀ N n : ℕ, n ≤ nmax → ∀ a b : ℕ, a + b ≤ N →
+      ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧ ∀ i x, x ∈ U → ∀ w,
+        p B x ≤ A → p B w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+        |jointMixedDiagonal (JL i) n a b x w y| ≤ K * W i ^ Q *
+          (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+            (((a + b : ℕ) : ℝ) / ((N : ℝ) + 1)))
+    (slopeBounds : ∃ B : ℕ, ∀ A : ℝ, 0 ≤ A →
+      ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i x, x ∈ U → ∀ w,
+        p B x ≤ A → p B w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+        |jointMixedDiagonal (JA i) n 0 b x w y| ≤ K *
+          (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+            ((b : ℝ) / ((N : ℝ) + 1)))
+    (residualBounds : ∃ B : ℕ, ∀ A : ℝ, 0 ≤ A →
+      ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i x, x ∈ U → ∀ w,
+        p B x ≤ A → p B w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+        |jointMixedDiagonal (JZ 0 i) n 0 b x w y| ≤ K *
+          (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+            ((b : ℝ) / ((N : ℝ) + 1)))
+    (displacementBounds : ∃ B : ℕ, ∀ A : ℝ, 0 ≤ A →
+      ∀ N n : ℕ, n ≤ nmax → ∀ b : ℕ, b ≤ N →
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ i x, x ∈ U → ∀ w,
+        p B x ≤ A → p B w ≤ 1 → ∀ y : PolarPoint, y.1 ∈ Ioo (l i) (h i) →
+        |jointMixedDiagonal (JZ 1 i) n 0 b x w y| ≤ K * H i *
+          (1 + p (N + B + 1) x + p (N + B + 1) w) ^
+            ((b : ℝ) / ((N : ℝ) + 1)))
+    (hcutoff : ∀ k : ℕ, ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧ ∀ i r,
+      |iteratedDeriv k (χ i) r| ≤ K * W i ^ Q)
+    (hAr : ∀ i x, x ∈ U → ∀ y ∈ Ioo (l i) (h i) ×ˢ (univ : Set ℝ),
+      radialPartial (fun q => fA i (x, q)) y =
+        angularPartial (fun q => fL i (x, q)) y * fA i (x, y) -
+          fL i (x, y) * angularPartial (fun q => fA i (x, q)) y)
+    (hZr : ∀ c i x, x ∈ U → ∀ y ∈ Ioo (l i) (h i) ×ˢ (univ : Set ℝ),
+      radialPartial (fun q => fZ c i (x, q)) y =
+        -((fL i (x, y) + deriv (χ i) y.1 * fA i (x, y) * fZ 0 i (x, y)) *
+          angularPartial (fun q => fZ c i (x, q)) y))
+    (hVeq : ∀ i z, z ∈ U ×ˢ (Ioo (l i) (h i) ×ˢ (univ : Set ℝ)) →
+      deriv (χ i) z.2.1 * fA i z * fZ 1 i z = fV i z)
+    (hEeq : ∀ i z, z ∈ U ×ˢ (Ioo (l i) (h i) ×ˢ (univ : Set ℝ)) →
+      deriv (χ i) z.2.1 * fA i z * fZ 0 i z = fE i z) :
+    ∃ B : ℕ, FlatMixedDiagonalGrowth p W H JV nmax B (B + 1) ∧
+      FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
+  exact transportVelocity_flat_from_certificates
+    (I := ℕ) (E := (StateDirections S × ℝ) × CircleSpace S)
+    (U := U) (l := l) (h := h)
+    (fL := fL) (fA := fA) (fZ := fZ) (fV := fV) (fE := fE)
+    p W H χ hp hW hH hU hc JL JC JA JZ JV JE nmax
+    characteristicBounds slopeBounds residualBounds displacementBounds
+    hcutoff hAr hZr hVeq hEeq
+
+private theorem transportVelocity_actualGrowth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
@@ -384,8 +450,7 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
         returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
           (R.residual (liftSectorParameter S C x.1.1))))
     (nmax : ℕ) :
-    let p := pairGrading (pairGrading (sectorGrading S) realGrading)
-      (S.circle (3 / 4 : ℝ)).grading
+    let p := transportVelocity_parameterGrading S
     let W := fun m => radialE (D.cellIndex (j m))
     ∃ B : ℕ,
       FlatMixedDiagonalGrowth p W (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)) JV
@@ -480,8 +545,8 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
         deriv (χ m) y.1 * returnFlowInverseSlope S C (liftSectorParameter S C x.1) m y *
           fZ 0 m (x, y))
       (hrec (R.residual (liftSectorParameter S C x.1))) (hrec x.2) c
-  exact transportVelocity_flat_from_certificates
-    (I := ℕ) (E := E) (U := U) (l := l) (h := h)
+  exact transportVelocity_parameterFlat_from_certificates S
+    (U := U) (l := l) (h := h)
     (fL := fL) (fA := fA) (fZ := fZ)
     (fV := fun m (x : E × PolarPoint) =>
       returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2)
@@ -515,5 +580,55 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
         (returnCorrectionVelocityLinear_eq_transportProduct D S C χ
           (liftSectorParameter S C x.1.1) m x.2
             (R.residual (liftSectorParameter S C x.1.1))).symm)
+
+/-- Fixed-loss bounds for the actual independent and frozen-residual
+velocities. All geometric assumptions are the witnesses produced by
+the buffered, uniform N01 neighborhood construction. -/
+theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hR : N02Properties D T S C R base ε)
+    (hflow : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m r,
+      r ∈ Icc (C.left m) (C.right m) → ∀ θ,
+        1 / 2 ≤ deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ∧
+        deriv (C.minusFlow (liftSectorParameter S C z) m r) θ ≤ 3 / 2)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    {lam P : ℝ} (hlam : 0 < lam) (hP : 0 ≤ P)
+    (hpositive : ∀ z ∈ stateNeighborhood S C base ε, ∀ (m : ℕ) (y : PolarPoint),
+      y.1 ∈ Ioo (l m) (h m) →
+      let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2
+      d ≤ (originalCoefficients D S C z).a y ∧
+      d ^ 2 ≤ (originalCoefficients D S C z).b y ^ 2 -
+        (originalCoefficients D S C z).a y * (originalCoefficients D S C z).c y)
+    (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
+    (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
+    (hcutoff : ∀ k : ℕ, ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧ ∀ m r,
+      |iteratedDeriv k (χ m) r| ≤ K * radialE (D.cellIndex (j m)) ^ Q)
+    (JV : ∀ m, SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2))
+    (JE : ∀ m, SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
+          (R.residual (liftSectorParameter S C x.1.1))))
+    (nmax : ℕ) :
+    let p := pairGrading (pairGrading (sectorGrading S) realGrading)
+      (S.circle (3 / 4 : ℝ)).grading
+    let W := fun m => radialE (D.cellIndex (j m))
+    ∃ B : ℕ,
+      FlatMixedDiagonalGrowth p W (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)) JV
+        nmax B (B + 1) ∧
+      FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
+  exact transportVelocity_actualGrowth
+    (D := D) (T := T) (S := S) (C := C) (R := R)
+    (base := base) (loss := loss) (ε := ε) (lam := lam) (P := P)
+    hN hS hT hR hflow j hcell l h hl hh hlam hP hpositive
+    χ hχ hχrange hcutoff JV JE nmax
+
 
 end ContinuousFlexibility.Statements
