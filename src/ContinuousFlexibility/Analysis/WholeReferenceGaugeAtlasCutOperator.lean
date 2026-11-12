@@ -53,6 +53,7 @@ theorem n04WholeReferenceGaugeAtlasData_actual_cutOperator_and_sourcePairing
   have hfield' : N04bFieldRegularity D S C L newBase ε' :=
     { smooth_coefficients := fun z hz => hfield.smooth_coefficients z (hsub hz)
       periodic_coefficients := fun z hz => hfield.periodic_coefficients z (hsub hz)
+      reference_flow := hfield.reference_flow
       positive_a := fun z hz => hfield.positive_a z (hsub hz)
       negative_discriminant := fun z hz => hfield.negative_discriminant z (hsub hz) }
   constructor
