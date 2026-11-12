@@ -107,10 +107,11 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hR12 : R12Statement := R12 hR06 hR08 hR10 hR11
   have hW01 : W01Statement := W01
   have hSpaces : W02Statement ∧ W03Statement := Spaces hW01 hTame
-  -- N01a must additionally construct the primitive support, placement and
-  -- optical geometry on its chosen reference; N01b retains that certificate.
-  -- Closing the N01c implication does not discharge these upstream obligations.
-  have hN01b : N01bStatement := N01b (N01a hR12 hW01 hSpaces.1) hS05
+  -- The main construction retains strict closed supports. N01a additionally
+  -- supplies the designated cells and quantitative reference optical geometry.
+  -- The actual N01b flow construction keeps those same primitive data.
+  have hN01a : N01aStatement := N01a hR12 hW01 hSpaces.1
+  have hN01b : N01bStatement := N01b hN01a hS05
   -- N01 retains one common neighbourhood.  Its ordinary-flow clause allows
   -- a parameter-order loss, as in the manuscript's eq:tame-derivative-shape.
   have hN01 : N01Statement := N01c hN01b
