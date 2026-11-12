@@ -15,6 +15,8 @@ namespace ContinuousFlexibility.Analysis
 
 open Set ContinuousFlexibility.Statements
 
+set_option backward.isDefEq.respectTransparency true
+
 attribute [local instance]
   n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
   n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
@@ -45,9 +47,14 @@ theorem n04Coordinates_currentAtoms_uniformly_close
             CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v p| < δ := by
   let loss : ℕ := hcur.2.1.choose
   have hdiff := hcur.2.1.choose_spec
-  obtain ⟨B, hB, hb⟩ := hdiff 0
-  obtain ⟨CH, hCH, hCHb⟩ := material_sample_height_coefficient_power_bounded
-    hD hT K.cell B (by norm_num : (0 : ℝ) < 3 / 4)
+  let B : ℝ := (hdiff 0).choose
+  have hB : 0 < B := (hdiff 0).choose_spec.1
+  have hb := (hdiff 0).choose_spec.2
+  have hheight := material_sample_height_coefficient_power_bounded
+    (D := D) (T := T) hD hT K.cell B (by norm_num : (0 : ℝ) < 3 / 4)
+  let CH : ℝ := hheight.choose
+  have hCH : 0 < CH := hheight.choose_spec.1
+  have hCHb := hheight.choose_spec.2
   let M : ℝ := B * CH
   have hM : 0 < M := mul_pos hB hCH
   let base' : ℕ := max base loss

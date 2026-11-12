@@ -32,9 +32,12 @@ private theorem radial_chart_fderiv
   let f : ℝ → ℝ := fun s => (F (s, 0)).1
   have hf : HasDerivAt f (deriv f r) r :=
     (hasDerivAt_radial_slice hF.fst).differentiableAt.hasDerivAt
-  have hd := (hf.comp_hasFDerivAt (f := fun p : PolarPoint => p.1)
-    (r, θ) (hasFDerivAt_fst (p := (r, θ)))).prodMk
-    (hasFDerivAt_snd (p := (r, θ)))
+  have hd : HasFDerivAt (𝕜 := ℝ) (fun p : PolarPoint => (f p.1, p.2))
+      (((deriv f r) • ContinuousLinearMap.fst ℝ ℝ ℝ).prod
+        (ContinuousLinearMap.snd ℝ ℝ ℝ)) (r, θ) :=
+    (hf.comp_hasFDerivAt (f := fun p : PolarPoint => p.1)
+      (r, θ) (hasFDerivAt_fst (𝕜 := ℝ) (p := (r, θ)))).prodMk
+      (hasFDerivAt_snd (𝕜 := ℝ) (p := (r, θ)))
   have hnear : F =ᶠ[𝓝 (r, θ)] (fun p : PolarPoint => (f p.1, p.2)) := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds
       (show (r, θ) ∈ Ioo a b ×ˢ (univ : Set ℝ) from ⟨hr, mem_univ _⟩)]

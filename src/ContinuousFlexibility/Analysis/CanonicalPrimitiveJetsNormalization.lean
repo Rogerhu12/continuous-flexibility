@@ -41,7 +41,8 @@ theorem n04Coordinates_atom_normalized_of_sector
   cases v <;> try rfl
   all_goals
     by_cases hp : K.positive m = true <;>
-      simp [CanonicalGeometry.atom, normalizedCanonicalData, hz, hp]
+      simp [CanonicalGeometry.atom, CanonicalGeometry.canonicalUnitPoint,
+        normalizedCanonicalData, hz, hp]
 
 /-- The same reference, actual tower, auxiliary source and transmission
 data satisfy the complete primitive-jet predicate after normalization. -/
@@ -73,13 +74,29 @@ theorem n04Coordinates_primitiveGeometryProperties_normalized
       normalizedCanonicalData_cell] using href
   have hcur' : CanonicalGeometry.CurrentJets D T S C L
       (normalizedCanonicalData S K) base ε := by
-    simpa only [CanonicalGeometry.CurrentJets, hcurrent, hdifference,
-      normalizedCanonicalData_cell] using hcur
+    rcases hcur with ⟨hregular, hbound, J, hJ⟩
+    refine ⟨?_, ?_, ?_⟩
+    · intro z hz m v
+      simpa only [hcurrent] using hregular z hz m v
+    · simpa only [hdifference, normalizedCanonicalData_cell] using hbound
+    · let J' : SmoothDirections (sectorNeighborhood S base ε ε)
+          (CanonicalGeometry.differenceJets D T S C L (normalizedCanonicalData S K)) :=
+        { open_domain := J.open_domain
+          D := J.D
+          zero := by
+            intro z hz
+            rw [hdifference]
+            exact J.zero z hz
+          continuous := J.continuous
+          derivative := J.derivative }
+      refine ⟨J', ?_⟩
+      simpa only [J', normalizedCanonicalData_cell] using hJ
   refine ⟨hradial, ?_, href', hcur', haux, htrans⟩
   rcases hprincipal with ⟨hfields, hbound⟩
   refine ⟨?_, hbound⟩
   intro m p hp
   simpa only [normalizedCanonicalData_coefficients,
-    normalizedCanonicalData_potential_of_sector K hstate.stateSector] using hfields m p hp
+    normalizedCanonicalData_potential_of_sector K (z := (C.referenceState, 0))
+      hstate.stateSector] using hfields m p hp
 
 end ContinuousFlexibility.Analysis
