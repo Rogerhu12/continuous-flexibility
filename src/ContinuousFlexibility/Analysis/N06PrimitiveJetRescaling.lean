@@ -96,6 +96,57 @@ private theorem n06_currentJets_zero_bounds
       N06PrimitiveCurrentJetOrderBound D T S C L K base ε d s B :=
   hcur.2.1
 
+private def N06PrimitiveActualJetOrderBound
+    (D : ReferenceData) (T : MaterialData) (S : PhysicalSpacesData)
+    (C : NonlinearGeometryData S) (L : ReturnCorrectionData S) (K : CanonicalData S)
+    (base : ℕ) (ε : ℝ) (d s : ℕ) (B : ℝ) : Prop :=
+  0 < B ∧ ∀ z ∈ stateNeighborhood S C base ε, ∀ hs : stateSector S z.1,
+    ∀ m a p, p ∈ unitStrip → ∀ i j : ℕ, i + j ≤ s →
+      |mixedDerivative i j
+        (fun q => atom D T S C L K z m a q -
+          atom D T S C L K (C.referenceState, 0) m a q) p| ≤
+        B * T.E0 (T.sample (K.cell m)) ^ B *
+          T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
+            (stateGrading S (s + d) (z.1 - C.referenceState) + |z.2|)
+
+private theorem n06_currentDifferenceJet_of_actualState
+    (href : referenceStateConditions D S C)
+    (z : AnnularState S × ℝ) (hs : stateSector S z.1)
+    (a : Atom) (m i j : ℕ) (p : unitStrip) :
+    differenceJets D T S C L K (n06PrimitiveParameterOfState href z hs) a m i j p =
+      mixedDerivative i j
+        (fun q => atom D T S C L K z m a q -
+          atom D T S C L K (C.referenceState, 0) m a q) p.val := by
+  exact congrArg
+    (fun w : AnnularState S × ℝ => mixedDerivative i j
+      (fun q => atom D T S C L K w m a q -
+        atom D T S C L K (C.referenceState, 0) m a q) p.val)
+    (n06PrimitiveParameterOfState_lift href z hs)
+
+private theorem n06_currentJet_abs_bound_transport {x y R Q : ℝ}
+    (he : x = y) (hR : R = Q) (h : |x| ≤ R) : |y| ≤ Q := he ▸ hR ▸ h
+
+private theorem n06_currentJetOrderBound_actual
+    (href : referenceStateConditions D S C) {d s : ℕ} {B : ℝ}
+    (hb : N06PrimitiveCurrentJetOrderBound D T S C L K base ε d s B) :
+    N06PrimitiveActualJetOrderBound D T S C L K base ε d s B := by
+  refine ⟨hb.1, fun z hz hs m a p hp i j hij => ?_⟩
+  exact n06_currentJet_abs_bound_transport
+    (n06_currentDifferenceJet_of_actualState (T := T) (L := L) (K := K)
+      href z hs a m i j ⟨p, hp⟩)
+    (congrArg (fun r : ℝ => B * T.E0 (T.sample (K.cell m)) ^ B *
+      T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) * r)
+      (n06PrimitiveParameterOfState_grading href z hs (s + d)))
+    (hb.2 (n06PrimitiveParameterOfState href z hs)
+      (n06PrimitiveParameterOfState_mem href hz hs) m a ⟨p, hp⟩ i j hij)
+
+private theorem n06_exists_orders_transport
+    {I J X : Type*} (P Q : I → J → X → Prop)
+    (h : ∃ d, ∀ s, ∃ x, P d s x)
+    (hmap : ∀ d s x, P d s x → Q d s x) :
+    ∃ d, ∀ s, ∃ x, Q d s x :=
+  h.imp (fun d hd s => (hd s).imp (fun x hx => hmap d s x hx))
+
 /-- The state loss is selected once, before every spatial order. -/
 theorem n06_primitive_currentAtom_difference_jets
     (href : referenceStateConditions D S C)
@@ -109,15 +160,12 @@ theorem n06_primitive_currentAtom_difference_jets
           B * T.E0 (T.sample (K.cell m)) ^ B *
             T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
               (stateGrading S (s + d) (z.1 - C.referenceState) + |z.2|) := by
-  obtain ⟨d, hd⟩ := n06_currentJets_zero_bounds hcur
-  refine ⟨d, fun s => ?_⟩
-  obtain ⟨B, hb⟩ := hd s
-  refine ⟨B, hb.1, ?_⟩
-  intro z hz hs m a p hp i j hij
-  have h := hb.2 (n06PrimitiveParameterOfState href z hs)
-    (n06PrimitiveParameterOfState_mem href hz hs) m a ⟨p, hp⟩ i j hij
-  simpa only [differenceJets, n06PrimitiveParameterOfState_lift,
-    n06PrimitiveParameterOfState_grading] using h
+  exact n06_exists_orders_transport
+    (N06PrimitiveCurrentJetOrderBound D T S C L K base ε)
+    (N06PrimitiveActualJetOrderBound D T S C L K base ε)
+    (n06_currentJets_zero_bounds hcur)
+    (fun d s B hb => n06_currentJetOrderBound_actual
+      (d := d) (s := s) (B := B) href hb)
 
 private theorem n06_length_and_inverse_common_bound {ell U : ℝ}
     (hell : 0 < ell) (h : |ell| ≤ U) (hi : |ell⁻¹| ≤ U) : 1 ≤ U := by

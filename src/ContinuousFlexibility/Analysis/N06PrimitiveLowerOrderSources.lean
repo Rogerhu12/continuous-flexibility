@@ -18,6 +18,26 @@ open Set Filter MeasureTheory ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency true
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+
+local instance n06PrimitiveLowerLevelGroup {S : PhysicalSpacesData} {K : CanonicalData S}
+    (V : VolumeModelData S K) (b : ℕ) : NormedAddCommGroup (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedAddCommGroup _
+local instance n06PrimitiveLowerLevelSpace {S : PhysicalSpacesData} {K : CanonicalData S}
+    (V : VolumeModelData S K) (b : ℕ) : NormedSpace ℝ (V.level (3 / 4 : ℝ) 0 b) :=
+  Submodule.normedSpace _
+local instance n06PrimitiveLowerGraphGroup {S : PhysicalSpacesData} {K : CanonicalData S}
+    {V : VolumeModelData S K} {b : ℕ} (B : CanonicalDomainData S K V b) :
+    NormedAddCommGroup B.Space := Submodule.normedAddCommGroup _
+local instance n06PrimitiveLowerGraphSpace {S : PhysicalSpacesData} {K : CanonicalData S}
+    {V : VolumeModelData S K} {b : ℕ} (B : CanonicalDomainData S K V b) :
+    NormedSpace ℝ B.Space := Submodule.normedSpace _
+
 theorem n06_primitiveActual_lowerOrder_sources
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {R : ReturnEquationData S}
