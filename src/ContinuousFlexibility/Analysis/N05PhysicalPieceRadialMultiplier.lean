@@ -26,7 +26,11 @@ theorem n05PhysicalPieceRadialMultiplier_measurable
   classical
   apply Measurable.tsum
   intro m
-  exact (hb m).measurable_piecewise continuousOn_const measurableSet_Ioo
+  simpa only [piecewise_eq_indicator] using
+    (hb m).measurable_piecewise
+      (show ContinuousOn (fun _ : ℝ => (0 : ℝ))
+        (Ioo (K.physicalLeft m) (K.physicalRight m))ᶜ from continuousOn_const)
+      measurableSet_Ioo
 
 theorem n05PhysicalPieceRadialMultiplier_eq
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

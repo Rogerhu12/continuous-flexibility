@@ -41,8 +41,8 @@ theorem n05_referenceNormal_allAngular_bound {D : ReferenceData}
                 (2 : ℝ) ^ (2 * j) *
                   (sourceNormSquare D γ M0 F + sourceNormSquare D γ M0 (fθ, 0))) ∧
             Function.Periodic v (0, Real.pi) := by
-  obtain ⟨CN, hCN, hn⟩ := hN
   obtain ⟨CB, hCB, hb⟩ := n05_referenceNormal_highAngular_summable_bound hD hborder hγ hG hN
+  obtain ⟨CN, hCN, hn⟩ := hN
   let C : ℝ := 2 * (CN + CB)
   have hC : 0 < C := by dsimp only [C]; positivity
   have hCNle : 2 * CN ^ 2 ≤ C ^ 2 := by

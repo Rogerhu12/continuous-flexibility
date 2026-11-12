@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N05ReferenceZeroRemainder
 import ContinuousFlexibility.Analysis.N05ReferenceCutoffChange
+import ContinuousFlexibility.Analysis.IntervalWeakPotential
 import ContinuousFlexibility.Radial.AngularMeanL2
 import ContinuousFlexibility.Radial.R11bWeakNormalTensor
 
@@ -109,8 +110,14 @@ theorem n05_weakNormalDerivative_sub_leftCutoff {D : ReferenceData}
       -(∫ p, deriv χ p.1 * φ p ∂radialPhysicalMeasure D) := by
     apply mul_left_cancel₀ (inv_ne_zero (by positivity : (2 * Real.pi) ≠ 0))
     simpa only [mul_neg] using hcut
-  rw [r11b_integral_angularMean_mul_eq hab.le (hu.sub (hc.const_mul a)) hφrLp,
-    r11b_integral_angularMean_mul_eq hab.le (hur.sub (hd.const_mul a)) hφLp]
+  have huCut : MemLp (fun p : PolarPoint => u p - a * χ p.1) 2
+      (radialPhysicalMeasure D) := by
+    simpa only [Pi.sub_apply] using hu.sub (hc.const_mul a)
+  have hurCut : MemLp (fun p : PolarPoint => ur p - a * deriv χ p.1) 2
+      (radialPhysicalMeasure D) := by
+    simpa only [Pi.sub_apply] using hur.sub (hd.const_mul a)
+  rw [r11b_integral_angularMean_mul_eq hab.le huCut hφrLp,
+    r11b_integral_angularMean_mul_eq hab.le hurCut hφLp]
   simp_rw [sub_mul, mul_assoc]
   have huφrInt : Integrable (fun p => u p * radialPartial φ p) (radialPhysicalMeasure D) :=
     hu.integrable_mul hφrLp

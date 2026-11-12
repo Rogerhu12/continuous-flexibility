@@ -44,9 +44,10 @@ theorem n05_canonicalNormalSingle_source_energy_bound
   refine ⟨A, hA, fun s => ?_⟩
   obtain ⟨C0, hC0, hbound⟩ := hs (s + 1)
   let Z : ℝ := ∑ j : Fin (s + 1), (2 : ℝ) ^ (2 * j.val)
-  have hZ : 0 ≤ Z := Finset.sum_nonneg (fun j _ => by positivity)
+  have hterm (j : Fin (s + 1)) : 0 ≤ (2 : ℝ) ^ (2 * j.val) := by positivity
+  have hZ : 0 ≤ Z := Finset.sum_nonneg (fun j _ => hterm j)
   have hpow (j : Fin (s + 1)) : (2 : ℝ) ^ (2 * j.val) ≤ Z :=
-    Finset.single_le_sum (fun j _ => by positivity) (Finset.mem_univ j)
+    Finset.single_le_sum (fun k _ => hterm k) (Finset.mem_univ j)
   refine ⟨C0 * (2 + 2 * Z), by positivity, fun m v => ?_⟩
   dsimp only
   let F := n05CanonicalNormalizedSource D S C K (Pi.single m (v.val m 0))

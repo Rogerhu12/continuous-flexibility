@@ -99,7 +99,6 @@ theorem n05_referenceChart_radial_chain (m : ℕ) {φ : PolarPoint → ℝ}
       rfl
     _ = _ := by
       rw [n05_reference_planeJacobian_radial h hcoordinates m hp]
-      rfl
 
 include h hcoordinates in
 /-- The physical derivative of ψ is exactly the transported canonical
@@ -128,7 +127,10 @@ theorem n05CanonicalRadialTestTransport_radial (m : ℕ) {φ : PolarPoint → �
   have hcomp : DifferentiableAt ℝ (fun q => φ (Φ q)) p :=
     (hφ.contDiffAt.comp p hca).differentiableAt (by simp)
   have hheight : DifferentiableAt ℝ H p := hha.differentiableAt (by simp)
-  have hquot : DifferentiableAt ℝ (fun q => φ (Φ q) / H q) p := hcomp.div hheight hH0
+  have hinv : DifferentiableAt ℝ (fun q : PolarPoint => (H q)⁻¹) p :=
+    hheight.inv hH0
+  have hquot : DifferentiableAt ℝ (fun q : PolarPoint => φ (Φ q) / H q) p := by
+    simpa only [Pi.mul_def, div_eq_mul_inv] using hcomp.mul hinv
   have hsign := n05_abs_div_eventually_constant hJa.continuousAt hJ0
   have he : n05CanonicalRadialTestTransport S C K m φ =ᶠ[𝓝 p]
       (fun q => σ * (φ (Φ q) / H q)) := by
