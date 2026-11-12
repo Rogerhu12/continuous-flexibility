@@ -209,8 +209,14 @@ theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_
     _ ≤ K₀ * (I * (1 + p (s + L) z +
         ∑ i : Fin n, p (s + L) (vs i) + p (s + L) v)) :=
       mul_le_mul_of_nonneg_left
-        (by simpa only [Q, Nat.add_assoc] using
-          (orderData.choose_spec.2 b c hbc z vs v hzb hvs hv)) hK₀
+        (by
+          have hweight := congrArg
+            (fun t : ℕ =>
+              (1 + p t z + ∑ i : Fin n, p t (vs i)) *
+                p (base + c + 6) v + p (t + c + 6) v)
+            (Nat.add_assoc b loss d)
+          exact hweight.trans_le
+            (orderData.choose_spec.2 b c hbc z vs v hzb hvs hv)) hK₀
     _ = _ := (mul_assoc K₀ I _).symm
 
 theorem N01Properties.endpointFlowScalarJets_state_weightedJetNorm_local_growth_all

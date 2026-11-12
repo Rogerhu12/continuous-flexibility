@@ -119,8 +119,12 @@ theorem N01Properties.endpointFlow_pure_scalar_circleMember
   let pointData := horders s
   refine ⟨pointData.choose, pointData.choose_spec.1.le, ?_⟩
   intro m b c horder θ
-  simpa only [A, Nat.add_assoc] using
-    pointData.choose_spec.2 m b c θ (by omega) z hz (η m)
-      (directions.choose_spec.2.2.1 m)
+  have hpoint := pointData.choose_spec.2 m b c θ (by omega) z hz (η m)
+    (directions.choose_spec.2.2.1 m)
+  exact hpoint.trans_eq (congrArg (fun t : ℕ =>
+    pointData.choose * T.M (T.sample m) ^ (c + 1) *
+      (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading t z) *
+        heightPairGrading S base (η m) + heightPairGrading S t (η m)))
+    (Nat.add_assoc s loss d))
 
 end ContinuousFlexibility.Statements

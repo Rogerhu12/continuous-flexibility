@@ -78,9 +78,13 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_unifo
     _ ≤ ∑ j : CircleJetIndex s, K j * (I * (1 + p (s + L) z)) := by
       apply Finset.sum_le_sum
       intro j _
+      have hweight := congrArg
+        (fun t : ℕ =>
+          (1 + p t z) * (1 + p (base + (j.val 1).val + 6) z) +
+            (1 + p (t + (j.val 1).val + 6) z))
+        (Nat.add_assoc (j.val 0).val loss d)
       exact ((rawData j).choose_spec.2 rsel hrsel z hz).trans (mul_le_mul_of_nonneg_left
-        (by simpa only [Nat.add_assoc] using
-          (orderData.choose_spec.2 _ _ j.property z hzb)) (hK j))
+        (hweight.trans_le (orderData.choose_spec.2 _ _ j.property z hzb)) (hK j))
     _ = _ := finite_weighted_sum_mul_reassociate K I (1 + p (s + L) z)
 
 theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
