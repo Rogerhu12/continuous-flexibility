@@ -46,7 +46,12 @@ theorem n05_negative_reference_root_slices
   have hd := n05_negative_reference_density_closed hT hS h hi hr θ
   have hq : deriv ξ r ≠ 0 := fun he => hc.2.2.1 (hd.1.trans he)
   have hn : H r ^ 2 * D.w r * |deriv ξ r| = 1 := hd.2.1
-  refine ⟨hc.1.fst.comp r hslice, hc.2.1.comp r hslice, hc.2.2.2, hq, ?_⟩
+  refine ⟨ContDiffAt.fun_comp (f := fun t : ℝ => (t, θ))
+    (g := fun p : ℝ × ℝ => (K.chart (C.referenceState, 0) i p).1)
+    r hc.1.fst hslice,
+    ContDiffAt.fun_comp (f := fun t : ℝ => (t, θ))
+      (g := K.height (C.referenceState, 0) i) r hc.2.1 hslice,
+    hc.2.2.2, hq, ?_⟩
   by_contra hnw
   have hwle : D.w r ≤ 0 := le_of_not_gt hnw
   have hbad : H r ^ 2 * D.w r * |deriv ξ r| ≤ 0 :=
@@ -86,10 +91,12 @@ theorem n05_negative_reference_height_log_deriv_open
       deriv (deriv ξ) r / deriv ξ r := by
     rcases lt_or_gt_of_ne hqne with hneg | hpos
     · have he : deriv (fun t => |deriv ξ t|) r = -deriv (deriv ξ) r := by
-        simpa only [neg_one_mul] using ((hasDerivAt_abs_neg hneg).comp r hq.hasDerivAt).deriv
+        simpa only [Function.comp_def, ξ, neg_one_mul] using
+          ((hasDerivAt_abs_neg hneg).comp r hq.hasDerivAt).deriv
       rw [he, abs_of_neg hneg, neg_div_neg_eq]
     · have he : deriv (fun t => |deriv ξ t|) r = deriv (deriv ξ) r := by
-        simpa only [one_mul] using ((hasDerivAt_abs_pos hpos).comp r hq.hasDerivAt).deriv
+        simpa only [Function.comp_def, ξ, one_mul] using
+          ((hasDerivAt_abs_pos hpos).comp r hq.hasDerivAt).deriv
       rw [he, abs_of_pos hpos]
   simpa only [habs] using hd
 
@@ -329,7 +336,9 @@ theorem n05_cut_reference_inward_slice_pos
     (root + σ * x, θ) (Ioo_subset_Icc_self hr)
   have hradial : ContDiffAt ℝ ∞
       (fun r : ℝ => (K.chart (C.referenceState, 0) i (r, θ)).1) (root + σ * x) :=
-    hc.1.fst.comp (root + σ * x) (contDiffAt_id.prodMk contDiffAt_const)
+    ContDiffAt.fun_comp (f := fun r : ℝ => (r, θ))
+      (g := fun p : ℝ × ℝ => (K.chart (C.referenceState, 0) i p).1)
+      (root + σ * x) hc.1.fst (contDiffAt_id.prodMk contDiffAt_const)
   have hline : HasDerivAt (fun t : ℝ => root + σ * t) σ x := by
     convert (hasDerivAt_const x root).add ((hasDerivAt_id x).const_mul σ) using 1 <;> ring
   have hd := ((hradial.differentiableAt (by simp)).hasDerivAt.comp x hline).deriv

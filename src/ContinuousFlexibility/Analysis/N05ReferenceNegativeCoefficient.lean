@@ -32,10 +32,14 @@ theorem n05_cut_physical_closed_subset_component
   obtain ⟨_, _, hleft, hright, hmeet, _⟩ := hcuts m
   cases right with
   | false =>
+    change Icc (K.physicalLeft (K.cutPair m).1) (K.physicalRight (K.cutPair m).1) ⊆
+      Icc (C.left m) (C.right m)
     apply Icc_subset_Icc hleft.ge
     have hR := (hpieces (K.cutPair m).2).1.le
     simpa only [← hmeet, hright] using hR
   | true =>
+    change Icc (K.physicalLeft (K.cutPair m).2) (K.physicalRight (K.cutPair m).2) ⊆
+      Icc (C.left m) (C.right m)
     apply Icc_subset_Icc _ hright.le
     have hL := (hpieces (K.cutPair m).1).1.le
     simpa only [hleft, hmeet] using hL
