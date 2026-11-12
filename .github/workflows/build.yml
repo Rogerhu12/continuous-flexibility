@@ -30,6 +30,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
+          fetch-depth: 30 # on main: find the line heads merged by this push
       - name: Disk space
         # The runner has about 88 GB free; no cleanup is needed.
         run: df -h /
@@ -53,6 +54,37 @@ jobs:
           key: lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~${{ github.sha }}
           restore-keys: |
             lake-build-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}-main~
+      - name: Reuse the builds of the lines merged by this push
+        # Caches are scoped per branch and main cannot read a line's cache, but it can
+        # download another run's artifact. Each green line run uploads its build as
+        # `lake-build-line`; for every `Merge line/X (sha)` commit not yet covered by
+        # main's cache layer, oldest first, extract that line head's build on top.
+        if: github.ref_name == 'main'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MAIN_KEY: ${{ steps.restore-main.outputs.cache-matched-key }}
+        run: |
+          covered=${MAIN_KEY##*~}
+          git log -30 --format='%H %P|%s' | grep '|Merge line/' | tac |
+          while IFS='|' read -r shas subject; do
+            set -- $shas
+            commit=$1; head=${3:-}
+            line=$(echo "$subject" | grep -o '^Merge line/[^ ]*' | sed 's/^Merge //')
+            [ -n "$head" ] && [ -n "$line" ] || continue
+            if [ -n "$covered" ] && git merge-base --is-ancestor "$commit" "$covered" 2>/dev/null; then
+              continue
+            fi
+            id=$(gh run list -R "$GITHUB_REPOSITORY" --branch "$line" --commit "$head" --status success               --limit 1 --json databaseId --jq '.[0].databaseId // empty' || true)
+            if [ -z "$id" ]; then echo "$line @${head:0:8}: no green run"; continue; fi
+            dir="$RUNNER_TEMP/line-build-$id"
+            if gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir"; then
+              tar --zstd -xf "$dir/lake-build.tar.zst"
+              echo "$line @${head:0:8}: reused the build of run $id"
+            else
+              echo "$line @${head:0:8}: run $id has no build artifact"
+            fi
+          done
       - name: Restore project build artifacts
         # Layer 2, on line branches only: this branch's own entry (one per branch;
         # the previous one is deleted when a new one is saved). Lake rebuilds any
@@ -127,6 +159,21 @@ jobs:
           else
             echo "::warning::release lake-cache does not exist; the compiled build was not published"
           fi
+      - name: Pack this line's build for main
+        # Main downloads it when it merges this exact head (see above).
+        if: startsWith(github.ref_name, 'line/') && success()
+        shell: bash
+        run: |
+          find .lake/build/ir -name '*.setup.json' -delete 2>/dev/null || true
+          tar --zstd -cf lake-build.tar.zst .lake/build
+          ls -lh lake-build.tar.zst
+      - uses: actions/upload-artifact@v4
+        if: startsWith(github.ref_name, 'line/') && success()
+        with:
+          name: lake-build-line
+          path: lake-build.tar.zst
+          retention-days: 3
+          compression-level: 0
       - uses: actions/upload-artifact@v4
         if: always()
         with:
