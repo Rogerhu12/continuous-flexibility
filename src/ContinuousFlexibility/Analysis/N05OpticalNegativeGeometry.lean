@@ -177,13 +177,30 @@ theorem n05_negative_component_first_geometry
     cases right
     · exact hnegL
     · exact hnegR
-  have ha : 0 < a := by cases right <;> dsimp only [a] <;> linarith only [hlc, hcu]
+  have ha : 0 < a := by
+    cases right
+    · change 0 < c - l
+      exact sub_pos.mpr hlc
+    · change 0 < u - c
+      exact sub_pos.mpr hcu
   have haℓ : a < ℓ := by
-    cases right <;> dsimp only [a, ℓ] <;> linarith only [hlc, hcu]
+    cases right
+    · change c - l < u - l
+      linarith only [hcu]
+    · change u - c < u - l
+      linarith only [hlc]
   have hρeq (x : ℝ) : ρ x = root + σ * x := by
-    cases right <;> dsimp only [ρ, root, σ, n05OpticalInward] <;> ring
+    cases right
+    · change l + x = l + (1 : ℝ) * x
+      ring
+    · change u - x = u + (-1 : ℝ) * x
+      ring
   have hρC : ContDiff ℝ ∞ ρ := by
-    cases right <;> dsimp only [ρ, n05OpticalInward] <;> fun_prop
+    cases right
+    · change ContDiff ℝ ∞ (fun x : ℝ => l + x)
+      exact contDiff_const.add contDiff_id
+    · change ContDiff ℝ ∞ (fun x : ℝ => u - x)
+      exact contDiff_const.sub contDiff_id
   have hmap (x : ℝ) (hx : x ∈ Icc (0 : ℝ) ℓ) : ρ x ∈ Icc l u := by
     dsimp only [ℓ] at hx
     cases right
@@ -197,12 +214,12 @@ theorem n05_negative_component_first_geometry
     · change l + x ∈ Icc (K.physicalLeft (K.cutPair m).1) (K.physicalRight (K.cutPair m).1)
       rw [hleft]
       change l ≤ l + x ∧ l + x ≤ c
-      dsimp only [a] at hx
+      change x ∈ Icc (0 : ℝ) (c - l) at hx
       constructor <;> linarith only [hx.1, hx.2]
     · change u - x ∈ Icc (K.physicalLeft (K.cutPair m).2) (K.physicalRight (K.cutPair m).2)
       rw [← hmeet, hright]
       change c ≤ u - x ∧ u - x ≤ u
-      dsimp only [a] at hx
+      change x ∈ Icc (0 : ℝ) (u - c) at hx
       constructor <;> linarith only [hx.1, hx.2]
   have hmapOpen (x : ℝ) (hx : x ∈ Ioo (0 : ℝ) a) :
       ρ x ∈ Ioo (K.physicalLeft i) (K.physicalRight i) := by
@@ -210,12 +227,12 @@ theorem n05_negative_component_first_geometry
     · change l + x ∈ Ioo (K.physicalLeft (K.cutPair m).1) (K.physicalRight (K.cutPair m).1)
       rw [hleft]
       change l < l + x ∧ l + x < c
-      dsimp only [a] at hx
+      change x ∈ Ioo (0 : ℝ) (c - l) at hx
       constructor <;> linarith only [hx.1, hx.2]
     · change u - x ∈ Ioo (K.physicalLeft (K.cutPair m).2) (K.physicalRight (K.cutPair m).2)
       rw [← hmeet, hright]
       change c < u - x ∧ u - x < u
-      dsimp only [a] at hx
+      change x ∈ Ioo (0 : ℝ) (u - c) at hx
       constructor <;> linarith only [hx.1, hx.2]
   have hsub : Icc (0 : ℝ) a ⊆ Icc (0 : ℝ) ℓ := Icc_subset_Icc le_rfl haℓ.le
   have hGc (x : ℝ) (hx : x ∈ Icc (0 : ℝ) ℓ) : ContDiffAt ℝ 2 G x :=
@@ -241,9 +258,9 @@ theorem n05_negative_component_first_geometry
         F, u, (hC.2.1 m).2.1, neg_zero, zero_div]
   have hdist (x : ℝ) : min (ρ x - l) (u - ρ x) = min x (ℓ - x) := by
     cases right
-    · dsimp only [ρ, n05OpticalInward, ℓ]
+    · change min (l + x - l) (u - (l + x)) = min x ((u - l) - x)
       congr 1 <;> ring
-    · dsimp only [ρ, n05OpticalInward, ℓ]
+    · change min (u - x - l) (u - (u - x)) = min x ((u - l) - x)
       rw [min_comm]
       congr 1 <;> ring
   have hGlow (x : ℝ) (hx : x ∈ Icc (0 : ℝ) ℓ) :
@@ -278,7 +295,8 @@ theorem n05_negative_component_first_geometry
     refine ⟨hp.1, ?_⟩
     change 0 < deriv (fun t =>
       (K.chart (C.referenceState, 0) i (n05OpticalInward l u right t, θ)).1) x
-    rw [n05OpticalInward_deriv]
+    rw [n05OpticalInward_deriv
+      (fun t : ℝ => (K.chart (C.referenceState, 0) i (t, θ)).1) l u right x]
     exact hp.2
   have hsymbol (x : ℝ) (hx : x ∈ Ioo (0 : ℝ) a) : ξ x * (deriv ξ x) ^ 2 = G x := by
     have hd := n05_negative_reference_density_closed hT hS h hi
@@ -306,16 +324,21 @@ theorem n05_negative_component_first_geometry
       dsimp only [F]
       field_simp [hrpos.ne', hwpos.ne'] <;> ring
     have hrad : |ρ x| ≤ Λ := by rw [abs_of_pos hrpos]; exact hxD.2.le.trans hDb
+    have hew : |deriv w x| = |deriv D.w (ρ x)| :=
+      n05OpticalInward_abs_deriv D.w l u right x
     calc
       |deriv w x / w x| = |deriv D.w (ρ x) / D.w (ρ x)| := by
-        change |deriv (fun t => D.w (n05OpticalInward l u right t)) x /
-          D.w (n05OpticalInward l u right x)| = _
-        rw [n05OpticalInward_deriv, mul_div_assoc, abs_mul]
-        cases right <;> simp
+        change |deriv w x / D.w (ρ x)| = |deriv D.w (ρ x) / D.w (ρ x)|
+        rw [abs_div, abs_div, hew]
       _ = |ρ x| * |F (ρ x)| := by rw [he, abs_neg, abs_mul]
       _ ≤ Λ * Λ := mul_le_mul hrad (hjet _ (hmap x (hsub hx))).1 (abs_nonneg _) hΛpos.le
       _ = Λ ^ 2 := (pow_two _).symm
-  have hcut : ρ a = c := by cases right <;> dsimp only [ρ, a, n05OpticalInward] <;> ring
+  have hcut : ρ a = c := by
+    cases right
+    · change l + (c - l) = c
+      ring
+    · change u - (u - c) = c
+      ring
   have hfull : (∫ t in (0 : ℝ)..ℓ, Real.sqrt (G t)) = C.travel m := by
     cases right
     · change (∫ t in (0 : ℝ)..ℓ, opticalSpeed D.w (l + t)) = C.travel m
@@ -379,7 +402,12 @@ theorem n05_negative_component_first_geometry
       rw [← hmeet, hright] at hr
       change 0 ≤ u - r ∧ u - r ≤ u - c
       constructor <;> linarith only [hr.1, hr.2]
-  have hρx : ρ x = r := by cases right <;> dsimp only [ρ, x, n05OpticalInward] <;> ring
+  have hρx : ρ x = r := by
+    cases right
+    · change l + (r - l) = r
+      ring
+    · change u - (u - r) = r
+      ring
   have hb := hbound.2.2.2 x hx
   have hκinv : 1 / κ = 2 * Λ ^ 3 * ℓ := by
     dsimp only [κ]
