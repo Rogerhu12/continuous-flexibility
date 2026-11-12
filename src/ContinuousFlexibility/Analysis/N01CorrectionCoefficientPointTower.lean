@@ -72,6 +72,26 @@ def coefficientPolynomialDirections
     (smoothDirectionsProd Jq (smoothDirectionsProd Je Jρ)))).comp_contDiff
       isOpen_univ hP.contDiffOn (fun _ _ => mem_univ _)
 
+private def coefficientPolynomialSqrtDirections
+    {a b c : E → ℝ} {e ρ : E → ℝ × ℝ}
+    (Ja : SmoothDirections U a) (Jb : SmoothDirections U b) (Jc : SmoothDirections U c)
+    (Je : SmoothDirections U e) (Jρ : SmoothDirections U ρ)
+    (hpos : ∀ x ∈ U, 0 < b x ^ 2 - a x * c x) :
+    SmoothDirections U (fun x =>
+      (-a x * (ρ x).1,
+        -2 * b x * (ρ x).1 - a x * (e x).1 * (ρ x).1 +
+          2 * Real.sqrt (b x ^ 2 - a x * c x) * (ρ x).2 +
+            a x * (e x).2 * (ρ x).2)) := by
+  let Jdisc : SmoothDirections U (fun x => b x ^ 2 - a x * c x) :=
+    ((smoothDirectionsProd (Jb.mul Jb) (Ja.mul Jc)).comp_contDiff
+      (g := fun y : ℝ × ℝ => y.1 - y.2) (V := univ) isOpen_univ
+      (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)).congrOn
+        (by intro x hx; simp only [pow_two])
+  let Jq : SmoothDirections U (fun x => Real.sqrt (b x ^ 2 - a x * c x)) :=
+    Jdisc.comp_contDiff (g := Real.sqrt) (V := Ioi (0 : ℝ)) isOpen_Ioi
+      (contDiffOn_id.sqrt (fun q hq => ne_of_gt hq)) (fun x hx => hpos x hx)
+  exact coefficientPolynomialDirections Ja Jb Jq Je Jρ
+
 end ScalarOperations
 
 local instance n01CorrectionCoefficientPointTowerStateSMul (S : PhysicalSpacesData) :
@@ -89,6 +109,7 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   (hcutoff : ∀ k : ℕ, ∃ A P : ℝ, 0 ≤ A ∧ 0 ≤ P ∧ ∀ m r,
     |iteratedDeriv k (χ m) r| ≤ A * radialE (D.cellIndex (j m)) ^ P)
 
+set_option diagnostics true in
 def N01Properties.returnCorrectionLocalCoefficient_pointTower
     (m : ℕ) (p : PolarPoint) (hp : p.1 ∈ Ioo (C.left m) (C.right m))
     (hdisc : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →
@@ -111,10 +132,17 @@ def N01Properties.returnCorrectionLocalCoefficient_pointTower
         (show C.left n ∈ Icc (C.left n) (C.right n) from
           ⟨le_rfl, (hcontrol.1 n).2.1.le⟩)
   have hr : rsel m = p.1 := by simp only [rsel, Function.update_self]
-  let V (θ : ℝ) := hN.returnCorrectionVelocity_pointTower
-    hS hT j hcell χ hχrange hcutoff rsel hrsel m θ
-  let Ve (θ : ℝ) := (hN.returnCorrectionVelocity_actual_pointTower
-    hS hT j hcell χ hχrange hcutoff rsel hrsel hR m θ).fstProduct (F := CircleSpace S)
+  let V (θ : ℝ) : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun x : (StateDirections S × ℝ) × CircleSpace S =>
+        returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1)
+          m (rsel m, θ) x.2) :=
+    hN.returnCorrectionVelocity_pointTower hS hT j hcell χ hχrange hcutoff rsel hrsel m θ
+  let Ve (θ : ℝ) : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun x : (StateDirections S × ℝ) × CircleSpace S =>
+        returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1)
+          m (rsel m, θ) (R.residual (liftSectorParameter S C x.1))) :=
+    (hN.returnCorrectionVelocity_actual_pointTower
+      hS hT j hcell χ hχrange hcutoff rsel hrsel hR m θ).fstProduct (F := CircleSpace S)
   let JD : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
       (fun x : (StateDirections S × ℝ) × CircleSpace S =>
         (returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1) m p x.2,
@@ -134,44 +162,59 @@ def N01Properties.returnCorrectionLocalCoefficient_pointTower
   let JA0 := hN.originalCoefficientSectorTower (j m) 0 p (hcell m hp)
   let JB0 := hN.originalCoefficientSectorTower (j m) 1 p (hcell m hp)
   let JC0 := hN.originalCoefficientSectorTower (j m) 2 p (hcell m hp)
-  let JA := (JA0.congrOn (g := fun z =>
+  let JA : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun x : (StateDirections S × ℝ) × CircleSpace S =>
+        (originalCoefficients D S C (liftSectorParameter S C x.1)).a p) :=
+    (JA0.congrOn (g := fun z =>
       (originalCoefficients D S C (liftSectorParameter S C z)).a p)
       (by intro z hz; norm_num)).fstProduct (F := CircleSpace S)
-  let JB := (JB0.congrOn (g := fun z =>
+  let JB : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun x : (StateDirections S × ℝ) × CircleSpace S =>
+        (originalCoefficients D S C (liftSectorParameter S C x.1)).b p) :=
+    (JB0.congrOn (g := fun z =>
       (originalCoefficients D S C (liftSectorParameter S C z)).b p)
       (by intro z hz; norm_num)).fstProduct (F := CircleSpace S)
-  let JC := (JC0.congrOn (g := fun z =>
+  let JC : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
+      (fun x : (StateDirections S × ℝ) × CircleSpace S =>
+        (originalCoefficients D S C (liftSectorParameter S C x.1)).c p) :=
+    (JC0.congrOn (g := fun z =>
       (originalCoefficients D S C (liftSectorParameter S C z)).c p)
       (by intro z hz; norm_num)).fstProduct (F := CircleSpace S)
-  let Jdisc : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ)
-      (fun x : (StateDirections S × ℝ) × CircleSpace S =>
-        (originalCoefficients D S C (liftSectorParameter S C x.1)).b p ^ 2 -
+  let F : ((StateDirections S × ℝ) × CircleSpace S) → ℝ × ℝ := fun x =>
+    (-(originalCoefficients D S C (liftSectorParameter S C x.1)).a p *
+        returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1) m p x.2,
+      -2 * (originalCoefficients D S C (liftSectorParameter S C x.1)).b p *
+          returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1) m p x.2 -
+        (originalCoefficients D S C (liftSectorParameter S C x.1)).a p *
+          returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1) m p
+            (R.residual (liftSectorParameter S C x.1)) *
+          returnCorrectionDriftLinear D S C χ (liftSectorParameter S C x.1) m p x.2 +
+        2 * Real.sqrt ((originalCoefficients D S C (liftSectorParameter S C x.1)).b p ^ 2 -
           (originalCoefficients D S C (liftSectorParameter S C x.1)).a p *
-            (originalCoefficients D S C (liftSectorParameter S C x.1)).c p) :=
-    ((smoothDirectionsProd (JB.mul JB) (JA.mul JC)).comp_contDiff isOpen_univ
-      (contDiff_fst.sub contDiff_snd).contDiffOn (fun _ _ => mem_univ _)).congrOn
-      (by intro x hx; simp only [pow_two])
-  have hmap : MapsTo
+            (originalCoefficients D S C (liftSectorParameter S C x.1)).c p) *
+          returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1) m p x.2 +
+        (originalCoefficients D S C (liftSectorParameter S C x.1)).a p *
+          returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1) m p
+            (R.residual (liftSectorParameter S C x.1)) *
+          returnCorrectionSpeedLinear D S C χ (liftSectorParameter S C x.1) m p x.2)
+  let K : SmoothDirections (sectorNeighborhood S base ε ε ×ˢ univ) F :=
+    coefficientPolynomialSqrtDirections JA JB JC JE JD (fun x hx =>
+      hdisc (liftSectorParameter S C x.1)
+        (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
+        (hN.2.2.1.liftSectorParameter_sector x.1))
+  have hF : EqOn F
       (fun x : (StateDirections S × ℝ) × CircleSpace S =>
-        (originalCoefficients D S C (liftSectorParameter S C x.1)).b p ^ 2 -
-          (originalCoefficients D S C (liftSectorParameter S C x.1)).a p *
-            (originalCoefficients D S C (liftSectorParameter S C x.1)).c p)
-      (sectorNeighborhood S base ε ε ×ˢ univ) (Ioi (0 : ℝ)) := by
+        returnCorrectionLocalCoefficientError D S C R χ (liftSectorParameter S C x.1)
+          m p x.2) (sectorNeighborhood S base ε ε ×ˢ univ) := by
     intro x hx
-    exact hdisc (liftSectorParameter S C x.1)
-      (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-      (hN.2.2.1.liftSectorParameter_sector x.1)
-  let JQ := Jdisc.comp_contDiff isOpen_Ioi
-    (contDiffOn_id.sqrt (fun q hq => ne_of_gt hq)) hmap
-  apply (coefficientPolynomialDirections JA JB JQ JE JD).congrOn
-  intro x hx
-  have hpD : p ∈ annularOpen D :=
-    ⟨⟨(hcontrol.1 m).1.trans hp.1, hp.2.trans (hcontrol.1 m).2.2⟩, mem_univ _⟩
-  exact (returnCorrectionLocalCoefficientError_cancel_denominators D S C R χ
-    (liftSectorParameter S C x.1) m p x.2
-    (hN.originalRadialCoefficient_pos
-      (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
-      (hN.2.2.1.liftSectorParameter_sector x.1) hpD).ne').symm
+    have hpD : p ∈ annularOpen D :=
+      ⟨⟨(hcontrol.1 m).1.trans hp.1, hp.2.trans (hcontrol.1 m).2.2⟩, mem_univ _⟩
+    exact (returnCorrectionLocalCoefficientError_cancel_denominators D S C R χ
+      (liftSectorParameter S C x.1) m p x.2
+      (hN.originalRadialCoefficient_pos
+        (liftSectorParameter_mem_stateNeighborhood hx.1 le_rfl)
+        (hN.2.2.1.liftSectorParameter_sector x.1) hpD).ne').symm
+  exact K.congrOn hF
 
 def N01Properties.returnCorrectionCoefficient_pointTower
     (hdisc : ∀ z ∈ stateNeighborhood S C base ε, stateSector S z.1 →

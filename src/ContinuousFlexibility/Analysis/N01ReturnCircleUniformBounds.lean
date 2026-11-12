@@ -23,6 +23,8 @@ private theorem returnCircle_uniform_neg
     (H : CircleModelData) {p : ℕ → Seminorm ℝ E} {U : Set E} {f : I → E → H.Space}
     (hf : UniformSmoothFamilyOn p H.grading U f) (hp : Monotone p) :
     UniformSmoothFamilyOn p H.grading U (fun i x => -f i x) := by
+  letI : ContinuousNeg H.Space :=
+    (withSeminorms_graded (fun n => H.level n) H.bond).isTopologicalAddGroup.toContinuousNeg
   exact hf.neg hp
 
 local instance n01ReturnCircleUniformBoundsStateSMul (S : PhysicalSpacesData) :
