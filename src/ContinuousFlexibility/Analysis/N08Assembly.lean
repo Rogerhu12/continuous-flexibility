@@ -40,6 +40,13 @@ private theorem n08_with_control_response_witness
   obtain ⟨i, j, k, ha, hb, hc, hd, w, he, hf, hg, hh⟩ := h
   exact hP i j k ha hb hc hd w he hf hg hh
 
+private theorem n08_assembly_with_positive_bound
+    {Condition : ℝ → Prop} {P : Prop}
+    (h : ∃ K : ℝ, 0 < K ∧ Condition K)
+    (hP : ∀ K : ℝ, 0 < K → Condition K → P) : P := by
+  obtain ⟨K, hK, hCondition⟩ := h
+  exact hP K hK hCondition
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {L : ReturnCorrectionData S} {G : ScalarInverseData S}
@@ -69,10 +76,10 @@ theorem n08Properties_of_uniform_diagonal
     (n08ControlInverseResponse_exists hT hS hN hG) ?_
   intro responseBase responseLoss responseRadius hresponseBase hresponseLoss
     hresponseRadius hresponseOld H _ hcontrolDeriv hresponse hcontrolSmooth
-  let newBase := max scalarBase (max responseBase diagonalBase)
-  let η := min scalarRadius (min responseRadius diagonalRadius)
-  let P := n08ResidualData hT hS hN hR
-  let B := n08ColumnData hS hR H ν
+  let newBase : ℕ := max scalarBase (max responseBase diagonalBase)
+  let η : ℝ := min scalarRadius (min responseRadius diagonalRadius)
+  let P : ResidualData S := n08ResidualData hT hS hN hR
+  let B : ControlColumnData S := n08ColumnData hS hR H ν
   have hbScalar : scalarBase ≤ newBase := le_max_left _ _
   have hbResponse : responseBase ≤ newBase :=
     (le_max_left _ _).trans (le_max_right _ _)
@@ -119,9 +126,12 @@ theorem n08Properties_of_uniform_diagonal
   · intro z hz hs u
     change n08ControlRestriction S (n08CircleColumn hS hR z u) =
       n08BoundedControlDiagonal (n08CircleDiagonal hS hR) z (n08ControlRestriction S u)
-    rw [n08BoundedControlDiagonal_eq _ z (hdiagonal z (hsubDiagonal hz) hs)]
-    exact n08CircleColumn_restriction_eq hT hS hN hR (hsub hz) hs
-      (fun m => (hdiagonal z (hsubDiagonal hz) hs m).2) u
+    have heval := congrArg
+      (fun A : ControlBanach →L[ℝ] ControlBanach => A (n08ControlRestriction S u))
+      (n08BoundedControlDiagonal_eq (n08CircleDiagonal hS hR) z
+        (hdiagonal z (hsubDiagonal hz) hs))
+    exact (n08CircleColumn_restriction_eq hT hS hN hR (hsub hz) hs
+      (fun m => (hdiagonal z (hsubDiagonal hz) hs m).2) u).trans heval.symm
   · intro z hz hs u m
     exact n08BoundedControlDiagonal_apply _ z (hdiagonal z (hsubDiagonal hz) hs) u m
   · intro m
@@ -131,7 +141,8 @@ theorem n08Properties_of_uniform_diagonal
   · intro z hz hs m
     exact hdiagonal z (hsubDiagonal hz) hs m
   · intro s
-    obtain ⟨K, hK, hKb⟩ := hresponse s
+    refine n08_assembly_with_positive_bound (hresponse s) ?_
+    intro K hK hKb
     exact ⟨K, hK, fun z hz u => hKb z (hsubResponse hz) u⟩
   · exact smoothTameOn_mono hjoint (n08_isOpen_sectorNeighborhood S newBase η η)
       (n08_sectorNeighborhood_mono hbScalar hηScalar hηScalar)
