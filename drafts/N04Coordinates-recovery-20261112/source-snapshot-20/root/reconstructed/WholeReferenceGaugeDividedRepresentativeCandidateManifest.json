@@ -1,0 +1,50 @@
+{
+  "kind": "same_actual_reference_gauge_stored_divided_field_identification",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeDividedRepresentative.lean",
+    "sha256": "6f284effa4641b876689a1d540259532824f1c01d3fe92b8de0576fcbf8175d6",
+    "blob": "736bb431f7e51990e7617e4ae48e04ad6073b82e",
+    "lines": 89
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalDividedRepresentative.lean",
+      "sha256": "a42c52f348a56fd0f68ff3c5a0c09da4b66bfedb95b7313c8299dce081fac03c",
+      "blob": "fe62fe957762280bdd9714071fe8cadfe62f6350",
+      "lines": 48
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalFieldJetReduction.lean",
+      "sha256": "60a88163fb98cf3e12f42e240377136f5faf788378fa3c055312cbdba4aafbd3",
+      "blob": "d26a665de5f06590fc30615bdb376120761cd6bd",
+      "lines": 155
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalDividedRepresentativeReviewedManifest.json",
+      "sha256": "4eec410c9fac75649eca583c6cf9ed3282c747ec1b9b1c21abdc499b33c46ac3",
+      "blob": "cddaf66b20bea8ee476b07a0b47b1d8855b875e1",
+      "lines": 24
+    }
+  ],
+  "public_names": [
+    "n04WholeReferenceGaugeAtlasData_divided_matches_representative"
+  ],
+  "scope": [
+    "Identifies the raw positive gauge coefficient functions with the same actual stored V coefficients at the current and reference states.",
+    "The same positive piece has actual endpoints zero and one; a closed-unit-strip raw factorization supplies the actual canonical numerator factorization on the open strip.",
+    "Reuses the generic PartB representative uniqueness lemma to identify the existing dividedDifference and all interior mixed jets. No atlas field or material datum is replaced.",
+    "The actual cubic factorization is available from ActualReferenceGaugeCubicDifference; this adapter does not supply the remaining material numerator estimate or a state SmoothDirections tower."
+  ],
+  "self_review": "Full source and both complete provider contracts read. The field equalities are explicitly typed with the local actual V before rewriting. No compiler or CI invoked.",
+  "compiled": false,
+  "active_checkout_index_refs_CP_modified": false
+}

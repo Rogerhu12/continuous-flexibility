@@ -1,0 +1,39 @@
+{
+  "kind": "same_scaled_positive_gap_midpoint_material_width_reviewed_owner_manifest",
+  "author": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_INDEPENDENTLY_REVIEWED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ScaledMorsePositiveGapMaterialWidthCandidateManifest.json",
+    "sha256": "6da23ded9b2941bfe216eed3a7d865c485469674a87900499222da784601cdf7",
+    "blob": "0f1e63f220d1c4f66ec1d473b39c6efd2fd3c1ea",
+    "lines": 55
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ScaledMorsePositiveGapMaterialWidth.lean",
+      "sha256": "1df9207aa8f689cce1bdf38847af855a2f48001549df2360b6f90edd820c3122",
+      "blob": "4954850f1505e66f1d8d1816cd69fe4792528562",
+      "lines": 118
+    }
+  ],
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/ScaledMorsePositiveGapMaterialWidthIndependentReview.json",
+    "sha256": "de22aa940dab37b443576d44d526a80f05ad4f170ba15049bc27fbddef79733d",
+    "blob": "9571c3d440c30955c54adbcae306bc62ade20223",
+    "lines": 61
+  },
+  "scope": [
+    "The exact original n-or-n+1 cell of any point and a fixed index shift transfer a model power to any actual material cell containing the same scaled point.",
+    "The actual N06 fixed arrival-cap lower bound gives the reciprocal length of the same scaled gap at its real physical midpoint cell. Constants precede all gaps and cell choices.",
+    "The two dilation factors and the cell/index transport identities are explicit inputs. The next retained-coordinate adapter will derive them for the same constructed witness.",
+    "No whole positive component is assumed to lie in a single cell; no arbitrary Through03 retention, raw optical lower, material weight enlargement or E0>=1 is used."
+  ],
+  "validation": {
+    "source_bytes_unchanged": true,
+    "source_and_review_hashes_verified": true,
+    "compiled": false,
+    "lean_or_ci_invoked": false,
+    "active_checkout_index_refs_CP_authority_or_plan_modified": false
+  },
+  "frozen_at": "2026-11-12T13:23:54.606441+00:00"
+}

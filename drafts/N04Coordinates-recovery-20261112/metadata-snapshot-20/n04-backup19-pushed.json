@@ -1,0 +1,13 @@
+{
+  "head": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
+  "tree": "18ca759c103f6d593e1b54660fce43d114b8c5b2",
+  "parent": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
+  "additional_parent": "14d76e94d35b6e0aff823c24e9eb90c290c9f3d6",
+  "pushed": "2026-11-12 13:17:58 UTC",
+  "indexed_files": 1257,
+  "new_source_lines": 747,
+  "projected_added_lean_from_compiled_baseline": 747,
+  "compiled_baseline": "14d76e94d35b6e0aff823c24e9eb90c290c9f3d6",
+  "status": "Source preservation only; no held source activation. Prior immutable snapshots remain reachable through backup parent.",
+  "record": "n04-backup19-pushed.json"
+}

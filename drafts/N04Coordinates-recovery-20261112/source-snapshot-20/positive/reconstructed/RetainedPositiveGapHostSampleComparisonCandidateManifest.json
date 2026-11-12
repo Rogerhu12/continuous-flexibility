@@ -1,0 +1,79 @@
+{
+  "kind": "same_retained_positive_gap_negative_host_to_midpoint_sample",
+  "author": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapEndpointX.lean",
+      "sha256": "dd1faacf35931c4d364d9ccefaed3e87a2abfcafed8fcf5dd6409406852477c1",
+      "blob": "6b07b19c1859b37f546093ba30ccda44262ef467",
+      "lines": 77
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialClosedHostEndpointX.lean",
+      "sha256": "38ec79abb0882a19487f6892ab254dc9ee089f762b7458df0af05260d34799a5",
+      "blob": "cf7a08f69f38d70893bb15b6bdcaa06a96241476",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveGapHostSampleComparison.lean",
+      "sha256": "fa24476a3afac5619e2bb534b27099f982b0fcaa17dc4a7b17874df9eec698fe",
+      "blob": "a6fa6bf27092b70f239884b75601299c72a5787b",
+      "lines": 80
+    }
+  ],
+  "target_paths": [
+    "src/ContinuousFlexibility/Analysis/RetainedMorsePositiveGapEndpointX.lean",
+    "src/ContinuousFlexibility/Analysis/MaterialClosedHostEndpointX.lean",
+    "src/ContinuousFlexibility/Analysis/RetainedPositiveGapHostSampleComparison.lean"
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapCoordinates.lean",
+      "sha256": "ab0252e44c6796692e84ddbe3c49c1bdf72478c65a3197b8749653f1e008edbf",
+      "blob": "b43329ae2f254524a65f99a0fc814ed099743d05",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MorsePositiveGapCells.lean",
+      "sha256": "cb3e99bfe753dcdda02fa7928dc2e4ac35dd4438fa2b379a1451a1541844ee26",
+      "blob": "ab663f49ba6fcdfcae9f2ca7aadd47e099d1ee21",
+      "lines": 121
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean",
+      "sha256": "5c502ee08fdb1f063bc9b39badcf31647b0042373cccba4878059a97da4d513b",
+      "blob": "4004102ba3dae66f14faaca866f1e18e4ac76f87",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCellEndpointModels.lean",
+      "sha256": "fbcef0e54e80091110431dae6b4a96ff49575acfbbc114dad1a9d08d8c499a3c",
+      "blob": "c91660140fe19221f98b95b599d2db5685e3bf68",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    }
+  ],
+  "public_names": [
+    "retainedReference_positive_gap_endpointX_oscillation",
+    "material_cell_endpointX_closed_interval",
+    "retainedReference_positive_gap_host_sample_bound"
+  ],
+  "scope": [
+    "The two original n/n+1 cell indices differ by at most one after the same retained max-floor N. The actual IsMaterialData index comparison yields one endpointX oscillation bound throughout each closed scaled gap.",
+    "The same actual material-cell index bound extends from a genuine host open interval to both interior endpoints by continuity; endpoints need not lie in the open cell.",
+    "The negative host sample, common root and positive midpoint sample are actual distinct points. Their endpointX bounds give the displayed shift L+4B, then the existing one-sided material comparison transfers every fixed nonnegative host E0 power to the midpoint sample.",
+    "All constants precede both component and cell labels. No E0>=1, cell relabeling, target material bound, replacement Gamma or arbitrary Through03 retained certificate is used.",
+    "The final statement accepts a genuine negative component and its actual open host and a common closed point with the retained positive gap. Actual C endpoints can be substituted without changing the original host; global positive-gap classification remains separate."
+  ],
+  "validation": {
+    "compiled": false,
+    "lean_invoked": false,
+    "checkout_index_refs_ci_or_authority_modified": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "kind": "reviewed_actual_morse_positive_gap_cell_labels",
+  "owner": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_STATICALLY_REVIEWED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MorsePositiveGapCells.lean",
+    "sha256": "cb3e99bfe753dcdda02fa7928dc2e4ac35dd4438fa2b379a1451a1541844ee26",
+    "blob": "ab663f49ba6fcdfcae9f2ca7aadd47e099d1ee21",
+    "lines": 121
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MorsePositiveGapCellsCandidateManifest.json",
+    "sha256": "f628012a4613f54f0a6dbbbad641710c4158db5f84db01241443b10433b8a7cc",
+    "blob": "242df95f4d0d0eb21223010beef762ceae7d9723",
+    "lines": 61
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/MorsePositiveGapCellsIndependentReview.json",
+    "sha256": "3452bb0540ae8ea9ab829630ba16946c36f83429ea4017a8771791aedac5706c",
+    "blob": "9829c8874e9bc56c04fffce9daab407d38c05cc2",
+    "lines": 85
+  },
+  "scope": [
+    "For the same actual MorseChainRealization, every point of the closed positive gap belongs to an original cell whose original index is n or n+1.",
+    "The model caps use true radius continuity and intermediate values; the join lies in the original seam block. Original block coverage chooses the cell.",
+    "Both Boolean orientations share the same cap and join arguments. No entire-gap host cell, material estimate, arbitrary Through03 retention or replacement profile is assumed."
+  ],
+  "upstream_provider_binding": [
+    {
+      "git_ref": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+      "path": "src/ContinuousFlexibility/Analysis/N06MorsePositiveComponent.lean",
+      "sha256": "b6f964ba76258cca4ba3e885d8be5283b9ce6237996b740f7cdbc048ab3cbc17",
+      "blob": "be439e1ea810b6f48f80936ff29c691977f5d871",
+      "lines": 249
+    },
+    {
+      "git_ref": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+      "path": "src/ContinuousFlexibility/Radial/MorseModelReturn.lean",
+      "sha256": "d541564563c3d3c87e0e670e688f62bfc590625e37875d04972bce850c06efe6",
+      "blob": "6460835c61b957be1a4df82fcc5c58a6c70e5195",
+      "lines": 228
+    },
+    {
+      "git_ref": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+      "path": "src/ContinuousFlexibility/Radial/MorseRealizationBasic.lean",
+      "sha256": "41806a9e7c27ebc25d5c031e2146d8cc52e455e1b2e15208dfb9c346ce44575a",
+      "blob": "9e94607827b2105a1e40f4c3d668defbc7c8fb1e",
+      "lines": 148
+    },
+    {
+      "git_ref": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+      "path": "src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    }
+  ],
+  "compiled": false,
+  "source_edited_after_review": false,
+  "checkout_index_refs_ci_modified": false
+}

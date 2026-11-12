@@ -1,10 +1,10 @@
 {
   "kind": "incremental_source_preservation",
-  "snapshot": 19,
-  "prior_commit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
-  "line_head": "48cc52bba2227eb3d42e5792f5f0f163e1654ec7",
-  "line_tree": "aa001f260b62a3daaceac488288b6b134f21f4bb",
-  "frozen_at": "2026-11-12T13:13:51.063367+00:00",
+  "snapshot": 20,
+  "prior_commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
+  "line_head": "03e526021c371413f03fc0ce052476b63e105361",
+  "line_tree": "efb21c64394350528d48b98e247b5036edaa4b46",
+  "frozen_at": "2026-11-12T13:25:19.989649+00:00",
   "files": [
     {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/cut-first-jets-syntax/ConstructedRootCutFirstJets.base.lean.txt",
@@ -592,6 +592,33 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalMaterialRatioDifferenceJets.lean",
+      "sha256": "bec5b3cc05e723429b721ab52e6aa6c98b40b89e592e0828c5b0ed6214b07e0b",
+      "lines": 85,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/audit/reconstructed/CanonicalMaterialRatioDifferenceJets.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalMaterialRatioDifferenceJetsCandidateManifest.json",
+      "sha256": "202397c760e942128e0fa49729ad8dd4a23af91d43312575cdbf091932435ac2",
+      "lines": 84,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/audit/reconstructed/CanonicalMaterialRatioDifferenceJetsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalMaterialRatioDifferenceJetsReviewedManifest.json",
+      "sha256": "99492016d90c172e78062b39df09f64422466d335ec7258645f89424afc816d2",
+      "lines": 42,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/audit/reconstructed/CanonicalMaterialRatioDifferenceJetsReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalNegativeRelativeBoundaryJets.lean",
       "sha256": "4bdee6bc24043cd457cde00d4a51c13da16e192f50306271b0e3355e736b1a5c",
       "lines": 182,
@@ -1172,8 +1199,26 @@
       "sha256": "0f257e3d9f2f62c70ffc6f6c2847caba776ea815464a185453ffd460a79a3e3a",
       "lines": 107,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/audit/reconstructed/WholeReferenceGaugeAuxiliaryPackageReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialTransport.lean",
+      "sha256": "4765d34487d0828022e12bf46e01c08e8127aaa4e471892761f8130150bdebe1",
+      "lines": 190,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/audit/reconstructed/WholeReferenceGaugeMaterialTransport.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeMaterialTransportCandidateManifest.json",
+      "sha256": "55d295ee67ce2fe6a366601a68ad04a1baf829fa0f1ff2e464361efead7c193f",
+      "lines": 171,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/audit/reconstructed/WholeReferenceGaugeMaterialTransportCandidateManifest.json"
       }
     },
     {
@@ -2135,7 +2180,7 @@
       "sha256": "c15032ab36334ba00b65e7f4f6964ed777ccd29244b5e5ac030fd54556fec665",
       "lines": 98,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/audit/repair144/CI144WholeCanonicalAtlasCutOperatorRepairCandidateManifest.json"
       }
     },
@@ -2144,7 +2189,7 @@
       "sha256": "67fe0224580b48b860d72c0496939eda67855f3523ce1f5d2e07704569ccbd4f",
       "lines": 111,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/audit/repair144/CI144WholeCanonicalAtlasCutOperatorRepairReviewedManifest.json"
       }
     },
@@ -2162,7 +2207,7 @@
       "sha256": "610ea05d59b0bd1707bd45ddecfc549e05dc1e7f8460b90cb352132ae2fa3c3c",
       "lines": 20,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/audit/repair144/WholeCanonicalAtlasCutOperator.diff"
       }
     },
@@ -2171,7 +2216,7 @@
       "sha256": "47d05fc14f1c0103a0bb528300a449b6720998da258d37d085b5e5e21230fd74",
       "lines": 76,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/audit/repair144/WholeCanonicalAtlasCutOperator.lean"
       }
     },
@@ -2225,7 +2270,7 @@
       "sha256": "3452bb0540ae8ea9ab829630ba16946c36f83429ea4017a8771791aedac5706c",
       "lines": 85,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/audit/reviews/MorsePositiveGapCellsIndependentReview.json"
       }
     },
@@ -2245,6 +2290,15 @@
       "stored_at": {
         "commit": "62fd35116408c35e0e565addea82100f07fa19b2",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-17/audit/reviews/N01ReturnUniformPositiveJetsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01RootDividedHeightMaterialJetsIndependentReview.json",
+      "sha256": "5e916c0ac3ff2e14249d6dfc7bcb22c887fd7fbab1cbed9269bc0cc0d85d8c01",
+      "lines": 160,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/audit/reviews/N01RootDividedHeightMaterialJetsIndependentReview.json"
       }
     },
     {
@@ -2288,7 +2342,7 @@
       "sha256": "a1f14109fa0e4e1dad5420a672f6fc89c1128529e8cdb43e7e4aee9a2d00d625",
       "lines": 112,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/audit/reviews/RootOddAxisJetsIndependentReview.json"
       }
     },
@@ -3463,6 +3517,15 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialClosedHostEndpointX.lean",
+      "sha256": "38ec79abb0882a19487f6892ab254dc9ee089f762b7458df0af05260d34799a5",
+      "lines": 51,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/MaterialClosedHostEndpointX.lean"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialMixedFlatExtension.lean",
       "sha256": "046eb3cfb028db8d60e9a7ba7ff8abcc71172e0ac153d9128959a9e54ae5841c",
       "lines": 89,
@@ -3494,7 +3557,7 @@
       "sha256": "cb3e99bfe753dcdda02fa7928dc2e4ac35dd4438fa2b379a1451a1541844ee26",
       "lines": 121,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/positive/reconstructed/MorsePositiveGapCells.lean"
       }
     },
@@ -3503,8 +3566,17 @@
       "sha256": "f628012a4613f54f0a6dbbbad641710c4158db5f84db01241443b10433b8a7cc",
       "lines": 61,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/positive/reconstructed/MorsePositiveGapCellsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MorsePositiveGapCellsReviewedManifest.json",
+      "sha256": "f01cce6a2ec45cfca048530f7ffca0302bdbce5a84d40d0a5e45d36010a3c7f8",
+      "lines": 61,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/MorsePositiveGapCellsReviewedManifest.json"
       }
     },
     {
@@ -3877,6 +3949,51 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapCoordinates.lean",
+      "sha256": "ab0252e44c6796692e84ddbe3c49c1bdf72478c65a3197b8749653f1e008edbf",
+      "lines": 96,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedMorsePositiveGapCoordinates.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapEndpointX.lean",
+      "sha256": "dd1faacf35931c4d364d9ccefaed3e87a2abfcafed8fcf5dd6409406852477c1",
+      "lines": 77,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedMorsePositiveGapEndpointX.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapMaterialWidth.lean",
+      "sha256": "509ec962391e121272ae00990e90338368c4001f01330555d345ed74bf7b6f10",
+      "lines": 62,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedMorsePositiveGapMaterialWidth.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapMaterialWidthCandidateManifest.json",
+      "sha256": "e4ea1f207990cbaecfaafa526597a363ad2968d6d3386d0cb4e19fb9d988e3fc",
+      "lines": 87,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedMorsePositiveGapMaterialWidthCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapMaterialWidthReviewedManifest.json",
+      "sha256": "b8cf024d0a6f4d8eb64411ea716dc4670a7d2b3a7e00940a1ddefa39e9a2663f",
+      "lines": 46,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedMorsePositiveGapMaterialWidthReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveComponentInteriorEndpoints.lean",
       "sha256": "6ce75e11f89d534e25aa3147188dc1196a45d4ec692bbb46c2a313022b89a856",
       "lines": 121,
@@ -3904,12 +4021,57 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveGapHostSampleComparison.lean",
+      "sha256": "fa24476a3afac5619e2bb534b27099f982b0fcaa17dc4a7b17874df9eec698fe",
+      "lines": 80,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedPositiveGapHostSampleComparison.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveGapHostSampleComparisonCandidateManifest.json",
+      "sha256": "57cd965e9dff0ee548aaff4e7694d17caebfd55edde1348b54ed1901cb6fbd63",
+      "lines": 79,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedPositiveGapHostSampleComparisonCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveGapHostSampleComparisonReviewedManifest.json",
+      "sha256": "a567a9e0e232c39a63026840ef09da3ecbb9422052aabf5bbf37ba3989b2f74b",
+      "lines": 52,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/RetainedPositiveGapHostSampleComparisonReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ScaledMorsePositiveGapMaterialWidth.lean",
       "sha256": "1df9207aa8f689cce1bdf38847af855a2f48001549df2360b6f90edd820c3122",
       "lines": 118,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/positive/reconstructed/ScaledMorsePositiveGapMaterialWidth.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ScaledMorsePositiveGapMaterialWidthCandidateManifest.json",
+      "sha256": "6da23ded9b2941bfe216eed3a7d865c485469674a87900499222da784601cdf7",
+      "lines": 55,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/ScaledMorsePositiveGapMaterialWidthCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ScaledMorsePositiveGapMaterialWidthReviewedManifest.json",
+      "sha256": "677872392ae13922725cd149b528dc9f88568a76ed95fc60ba7d8916129a348e",
+      "lines": 39,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reconstructed/ScaledMorsePositiveGapMaterialWidthReviewedManifest.json"
       }
     },
     {
@@ -5555,7 +5717,7 @@
       "sha256": "10476692c0b0f18728188dadb513bfbc32f1f70e7f95016b1ff802ca2b4fb1da",
       "lines": 89,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/positive/reviews/CI144WholeCanonicalAtlasCutOperatorIndependentReview.json"
       }
     },
@@ -5582,7 +5744,7 @@
       "sha256": "ce97ae73759930c31462e8428bff85e5d8e1500c6c13a5563fe0816609a36d32",
       "lines": 58,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/positive/reviews/CanonicalAuxiliaryAtomPreservationIndependentReview.json"
       }
     },
@@ -5600,8 +5762,17 @@
       "sha256": "7265eae4777f3af7b18909810eb87df444f2ba4b4b8ac6bc60b3f75b7b68ca5d",
       "lines": 67,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/positive/reviews/CanonicalDividedRepresentativeIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalMaterialRatioDifferenceJetsIndependentReview.json",
+      "sha256": "2cd08f62619d9ffe3dca91305be5307030c1de5ec3958fe8dd72357d2f313d22",
+      "lines": 92,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reviews/CanonicalMaterialRatioDifferenceJetsIndependentReview.json"
       }
     },
     {
@@ -5773,6 +5944,15 @@
       "stored_at": {
         "commit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/positive/reviews/WholeReferenceGaugeAtlasGeometryIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeDividedRepresentativeIndependentReview.json",
+      "sha256": "c40f5f570b4a6e4015271051fec541107d3ff7d667027733ea28110123f27874",
+      "lines": 78,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/positive/reviews/WholeReferenceGaugeDividedRepresentativeIndependentReview.json"
       }
     },
     {
@@ -6856,6 +7036,33 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJets.lean",
+      "sha256": "1a3054cdab9e116a2778d6458659e5c66e3c03b3ee4c6aa225dcc3629c6406ab",
+      "lines": 228,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJets.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJetsCandidateManifest.json",
+      "sha256": "d5c75d3327b705574c550244b266921152f872b56b51edf1ffa3f648d366f27a",
+      "lines": 94,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJetsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJetsReviewedManifest.json",
+      "sha256": "54773ba885dca99c76333b8159720df298506d007b818972a13b10c27b3ec493",
+      "lines": 46,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJetsReviewedManifest.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDriftAxisMaterialJets.lean",
       "sha256": "579584e7f611a5e24afe5cad3de38f488f43f6a6cb529fa36267421975f83c05",
       "lines": 136,
@@ -6887,7 +7094,7 @@
       "sha256": "33342dde40913864a08a6f86d696c8d6c026610cd72a7459b5511e6714ca951a",
       "lines": 219,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/N01RootEvenOddAxisMaterialJets.lean"
       }
     },
@@ -6896,7 +7103,7 @@
       "sha256": "3d2d41574e6b65bea5b0fd8c6148cc8e72d4263baf42368c9abb02630f0d04e9",
       "lines": 106,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/N01RootEvenOddAxisMaterialJetsCandidateManifest.json"
       }
     },
@@ -6905,7 +7112,7 @@
       "sha256": "c2cc6e723981a93f8640c425ee9412ab8cf1a47fd55a718bdfd7587ecb946b78",
       "lines": 46,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/N01RootEvenOddAxisMaterialJetsReviewedManifest.json"
       }
     },
@@ -7042,6 +7249,60 @@
       "stored_at": {
         "commit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-18/quantitative/primitive-route/reconstructed/N01RootLabelUniformJetsReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValues.lean",
+      "sha256": "7c56e5d2cf0b6de96fbc1ae9e89ce3fd868585e9648c2b4b2ee97ee28ecdce4c",
+      "lines": 182,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValues.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesCandidateManifest.json",
+      "sha256": "617dd248767b540e78553d4e0583b1e8092cbfbd17f8072fd662ce46a47885fc",
+      "lines": 92,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesReviewedManifest.json",
+      "sha256": "f37ce30954fd93ee03f62378c599cd8637e4925b6a0e8c3d099a77734eabc698",
+      "lines": 40,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJets.lean",
+      "sha256": "86d1f01459df69c99ae78417f11e6ceba17a42cdd9f5764ccb35ba06c3e2d975",
+      "lines": 142,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJets.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsCandidateManifest.json",
+      "sha256": "c341965e39f156dd42a203269fd9b258677e1d1386458784466b29e155e9be9b",
+      "lines": 64,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsReviewedManifest.json",
+      "sha256": "fbcb465de171417a9ec9ab12847015f9caaf3513f653b3c3051efc6b17a45841",
+      "lines": 52,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsReviewedManifest.json"
       }
     },
     {
@@ -7481,7 +7742,7 @@
       "sha256": "93e9da18ea099fd3b409dc20ae6ad99b59bdd764111b34943e738013b333ec3e",
       "lines": 165,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/RootOddAxisJets.lean"
       }
     },
@@ -7490,7 +7751,7 @@
       "sha256": "8a7783afb672c6d9383633d6970d8440f2f713ac1563f1e7d192071a6185a63d",
       "lines": 109,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/RootOddAxisJetsCandidateManifest.json"
       }
     },
@@ -7499,7 +7760,7 @@
       "sha256": "a95cf98a9ef5b55f6960fbf509ec6eb4bda3398624aa09587efcb0b6174beec5",
       "lines": 36,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/primitive-route/reconstructed/RootOddAxisJetsReviewedManifest.json"
       }
     },
@@ -8012,7 +8273,7 @@
       "sha256": "ca74c6028f4668a8294d5afb35447bd35944ecbbb628a8016789ecbd516b3722",
       "lines": 200,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/quantitative/recovery/reviews/MainN06CompatibilityIndependentReview.json"
       }
     },
@@ -8242,6 +8503,15 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/RetainedPositiveGapHostSampleComparisonIndependentReview.json",
+      "sha256": "bf994a089aa1c2947e79375b03e78f34b10d43406b5b7aac5c950efad8dbb3e4",
+      "lines": 125,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/recovery/reviews/RetainedPositiveGapHostSampleComparisonIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/SameWitnessThrough03MinimalDependencyAudit.json",
       "sha256": "e93bb26799972d8dfc5e5e6d24ceb9c6f652d282558d0ace7ea8e92ac74d8385",
       "lines": 218,
@@ -8410,6 +8680,15 @@
       "stored_at": {
         "commit": "2391bb285a08c1ae79449b2e05595fed9c2a281f",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-14/quantitative/recovery/reviews/WholeReferenceGaugeAtlasCutOperatorRestrictedIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeMaterialTransportIndependentReview.json",
+      "sha256": "7f8c3368f85ca1c5f5ec41a5cc6102a23c4ea5c8972b705461b4f29cef8e4bd2",
+      "lines": 141,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/quantitative/recovery/reviews/WholeReferenceGaugeMaterialTransportIndependentReview.json"
       }
     },
     {
@@ -9479,7 +9758,7 @@
       "sha256": "a42c52f348a56fd0f68ff3c5a0c09da4b66bfedb95b7313c8299dce081fac03c",
       "lines": 48,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/root/reconstructed/CanonicalDividedRepresentative.lean"
       }
     },
@@ -9488,7 +9767,7 @@
       "sha256": "e441e7ceb1f912953d549913ff9fcc81b9a290d2cd5efac6ed36cb193a14e423",
       "lines": 36,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/root/reconstructed/CanonicalDividedRepresentativeCandidateManifest.json"
       }
     },
@@ -9497,7 +9776,7 @@
       "sha256": "4eec410c9fac75649eca583c6cf9ed3282c747ec1b9b1c21abdc499b33c46ac3",
       "lines": 24,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/root/reconstructed/CanonicalDividedRepresentativeReviewedManifest.json"
       }
     },
@@ -10165,6 +10444,33 @@
       "stored_at": {
         "commit": "44b4443bdf6ad798d4b9631371234b8225f9718f",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-13/root/reconstructed/WholeReferenceGaugeAtlasOperatorReviewedManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeDividedRepresentative.lean",
+      "sha256": "6f284effa4641b876689a1d540259532824f1c01d3fe92b8de0576fcbf8175d6",
+      "lines": 89,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/root/reconstructed/WholeReferenceGaugeDividedRepresentative.lean"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeDividedRepresentativeCandidateManifest.json",
+      "sha256": "fcaa1e7119413630b0a31a8561aab0fde5b47a99980367dbf3f638eb177e6b43",
+      "lines": 50,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/root/reconstructed/WholeReferenceGaugeDividedRepresentativeCandidateManifest.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeDividedRepresentativeReviewedManifest.json",
+      "sha256": "0260bbbe4ff0d255313447f1d297bc23350d15b8793ae2e812ef9c523064f4c7",
+      "lines": 26,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/root/reconstructed/WholeReferenceGaugeDividedRepresentativeReviewedManifest.json"
       }
     },
     {
@@ -11045,7 +11351,7 @@
       "sha256": "e7a42f97704ac452ec84ed014c503b3b2bc78c074a60537867f629aff85f69d9",
       "lines": 110,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/root/reviews/N01RootEvenOddAxisMaterialJetsIndependentReview.json"
       }
     },
@@ -11074,6 +11380,24 @@
       "stored_at": {
         "commit": "456cd39af7215e75d7b1e8530ea749e7440ba57e",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-18/root/reviews/N01RootInverseCoordinateAxisMaterialJetsIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootOddCoefficientMaterialValuesIndependentReview.json",
+      "sha256": "6aae7dd065b4dd5cc36dadcf3b673c09e941cbe96c644142c2b82c2fe6378528",
+      "lines": 94,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/root/reviews/N01RootOddCoefficientMaterialValuesIndependentReview.json"
+      }
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootOddPowerMaterialJetsIndependentReview.json",
+      "sha256": "6c966ac3b33cb29e2001f27bee564d262d36b467b26a2f3ffa34357e793c17fa",
+      "lines": 68,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/root/reviews/N01RootOddPowerMaterialJetsIndependentReview.json"
       }
     },
     {
@@ -11176,6 +11500,15 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/RetainedMorsePositiveGapMaterialWidthIndependentReview.json",
+      "sha256": "8fdcff1726572892cea1ba37e48baae262bd1bfce72b08581f6c70323ae5cc22",
+      "lines": 76,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/root/reviews/RetainedMorsePositiveGapMaterialWidthIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/RootCoefficientAxisDivisionIndependentReview.json",
       "sha256": "1274aff954964b5df699afb678943a19a8c1fc46d3117d3d4f3488311723bb0d",
       "lines": 74,
@@ -11248,6 +11581,15 @@
       }
     },
     {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/ScaledMorsePositiveGapMaterialWidthIndependentReview.json",
+      "sha256": "de22aa940dab37b443576d44d526a80f05ad4f170ba15049bc27fbddef79733d",
+      "lines": 61,
+      "stored_at": {
+        "commit": "THIS_SNAPSHOT",
+        "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-20/root/reviews/ScaledMorsePositiveGapMaterialWidthIndependentReview.json"
+      }
+    },
+    {
       "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholeCanonicalGlobalReferenceAgreementIndependentReview.json",
       "sha256": "7281de024243b55baf2441daff243268fd13a655ed7c1c63b5257c4f83c1d3d1",
       "lines": 58,
@@ -11306,7 +11648,7 @@
       "sha256": "1fc559d95f769a5914ceb6238d7780e44d70daf6bdb418ed5af56c056061235e",
       "lines": 100,
       "stored_at": {
-        "commit": "THIS_SNAPSHOT",
+        "commit": "95dd85ab81a65a7a8cc21bfc34ba458611d7bb11",
         "path": "drafts/N04Coordinates-recovery-20261112/source-snapshot-19/root/reviews/WholeReferenceGaugeAuxiliaryPackageIndependentReview.json"
       }
     },

@@ -1,0 +1,55 @@
+{
+  "kind": "same_scaled_positive_gap_midpoint_material_width",
+  "author": "/root/proof_inventory",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ScaledMorsePositiveGapMaterialWidth.lean",
+    "sha256": "1df9207aa8f689cce1bdf38847af855a2f48001549df2360b6f90edd820c3122",
+    "blob": "4954850f1505e66f1d8d1816cd69fe4792528562",
+    "lines": 118
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/ScaledMorsePositiveGapMaterialWidth.lean",
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MorsePositiveGapCells.lean",
+      "sha256": "cb3e99bfe753dcdda02fa7928dc2e4ac35dd4438fa2b379a1451a1541844ee26",
+      "blob": "ab663f49ba6fcdfcae9f2ca7aadd47e099d1ee21",
+      "lines": 121
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/MaterialCellOverlapRadialPolynomial.lean",
+      "sha256": "c1e1741a69c94f699b1a0305b8808acc70f4f823512e2e67b33f33d510c01e90",
+      "blob": "95a6b72144fae9e3715103b797c7b069fdba9074",
+      "lines": 67
+    },
+    {
+      "git_ref": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+      "path": "src/ContinuousFlexibility/Analysis/N06MorsePositiveWidth.lean",
+      "sha256": "294b28ee376364792586d3549905ad5e4b8864a518b0e2d8d2f61958ae6af3ba",
+      "blob": "db0304f7b9490f136fbe47da63260d47bc50d814",
+      "lines": 134
+    },
+    {
+      "git_ref": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+      "path": "src/ContinuousFlexibility/Radial/DeepTailPhysicalWeights.lean",
+      "sha256": "79ffe583d3a7b72ce1d6c57b462581dc8317c11f33164688add904d024c05074",
+      "blob": "a0f7d6f17ae65ac30ed5d6ccc9ec5fefb2ac5ed5",
+      "lines": 121
+    }
+  ],
+  "public_names": [
+    "morseRealization_scaled_positive_gap_weight_bound",
+    "morseRealization_scaled_positive_gap_inverse_width_bound"
+  ],
+  "scope": [
+    "The exact original n-or-n+1 cell of any point and a fixed index shift transfer a model power to any actual material cell containing the same scaled point.",
+    "The actual N06 fixed arrival-cap lower bound gives the reciprocal length of the same scaled gap at its real physical midpoint cell. Constants precede all gaps and cell choices.",
+    "The two dilation factors and the cell/index transport identities are explicit inputs. The next retained-coordinate adapter will derive them for the same constructed witness.",
+    "No whole positive component is assumed to lie in a single cell; no arbitrary Through03 retention, raw optical lower, material weight enlargement or E0>=1 is used."
+  ],
+  "validation": {
+    "compiled": false,
+    "lean_invoked": false,
+    "checkout_index_refs_ci_or_authority_modified": false
+  }
+}

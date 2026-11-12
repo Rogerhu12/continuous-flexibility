@@ -1,0 +1,94 @@
+{
+  "kind": "candidate_same_actual_unit_divided_height_power_material_jets",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJets.lean",
+    "sha256": "1a3054cdab9e116a2778d6458659e5c66e3c03b3ee4c6aa225dcc3629c6406ab",
+    "blob": "b785c00878f9be9b1b79a446a58ac6c278174150",
+    "lines": 228
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJets.lean",
+      "sha256": "86d1f01459df69c99ae78417f11e6ceba17a42cdd9f5764ccb35ba06c3e2d975",
+      "blob": "3c3ffbb2f8964c320cfe59bc5f98c057fc9827ca",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValues.lean",
+      "sha256": "7c56e5d2cf0b6de96fbc1ae9e89ce3fd868585e9648c2b4b2ee97ee28ecdce4c",
+      "blob": "7eac1d582f31ac64ea9fef0236cf0aa9ae45c793",
+      "lines": 182
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJets.lean",
+      "sha256": "8c70f3441a4902db3d13787131cdaa69f46013ef4810da44f6f351f1abe9337b",
+      "blob": "aedbff50a4eb54bd08f26c95d85919ea2fd5d3b5",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PointwiseProductPolynomialMaterialJets.lean",
+      "sha256": "8eea68ab7ee7671d432b40b7833154f3c3a69a568c7fb96d7fb4a7a95fe40d02",
+      "blob": "c2eef2dac4cf079d6ad8da950038309b7714261d",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootDividedHeight.lean",
+      "sha256": "a9cc1f82ebbe96b6c6e9d95931004ab18ea4232d7d219910885cf682d352f42f",
+      "blob": "131ceed99f120ec82b3d878f85910e1160c626fe",
+      "lines": 72
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientFactorization.lean",
+      "sha256": "7517b6ad668e1433bde3b4d3a2a2de646d86c554d27c1a9d4131bbba8c12c653",
+      "blob": "756feea98dedb9141e1dc34eac4336704cd133d7",
+      "lines": 111
+    }
+  ],
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootEvenOddAxisMaterialJetsReviewedManifest.json",
+      "sha256": "c2cc6e723981a93f8640c425ee9412ab8cf1a47fd55a718bdfd7587ecb946b78",
+      "blob": "0568cd35a7a12dffa0d34cf740ee06de67c98bc8",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJetsReviewedManifest.json",
+      "sha256": "64ea8e5383573ab77fab91d543bfabced4925ec638fdfd48bc1eadad4bd4fe70",
+      "blob": "af8d0ac8c1cad4ae62c05abb4c0838053ec487a4",
+      "lines": 32
+    }
+  ],
+  "pending_input_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesCandidateManifest.json",
+      "sha256": "617dd248767b540e78553d4e0583b1e8092cbfbd17f8072fd662ce46a47885fc",
+      "blob": "9287f2230890c366ff74b357f001f013f812677f",
+      "lines": 92
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsCandidateManifest.json",
+      "sha256": "c341965e39f156dd42a203269fd9b258677e1d1386458784466b29e155e9be9b",
+      "blob": "279dafcd095a6181268b2a93e6752ba4a87f369a",
+      "lines": 64
+    }
+  ],
+  "public_declarations": [
+    "n01_rootDividedHeight_unit_rpow_material_jets_of_component_optical"
+  ],
+  "private_declarations": [
+    "unitRootHeight_rpow_eq",
+    "unitRootHeight_material_mono"
+  ],
+  "mathematical_scope": [
+    "Same actual G and actual divided coefficient V give rootDividedHeight(1,V,G)^gamma=(3/2)^(gamma/6)*chi^(gamma/6)*V^(-gamma/4) on a genuine positive neighborhood of the actual root.",
+    "The original radius R and normalization delta enter only actual source definitions and root-identification hypotheses. The height uses the proved unit model; neither inverse radius nor inverse normalization is charged.",
+    "The two explicit material power towers are brought to max(Cchi,CV)*E0(sample j) and inputLoss=max(losschi,lossV). A genuine pointwise Leibniz weighted-polynomial estimate retains one high grading factor.",
+    "All common low orders and output loss are chosen before the real exponent gamma. The scalar Q=(3/2)^(gamma/6) is absorbed into Bgamma,n after product coefficients, still before states, components, hosts, g, R, delta, Theta or angle.",
+    "Smoothness and positivity are derived at the same actual root. Equality of the true positive germs transfers every ordinary jet, including order zero and negative powers."
+  ],
+  "scope_caveat": "Raw optical lower, true host containment and actual flow Jacobian certificate remain explicit upstream inputs. The concrete odd value/power providers are pending independent review. This proves the unit-model height power tower; the already reviewed actual old-K unit identification must still be applied before claiming physical old-K height bounds. No state SmoothDirections or final N04c claim.",
+  "self_review": "Complete source and true rootDividedHeight formula, actual factor identity/smoothness and weighted product contracts read. Explicit positivity uses instantiated coefficient bounds, with no quantified positivity tactic shortcut. No compiler/elaborator/CI invoked.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

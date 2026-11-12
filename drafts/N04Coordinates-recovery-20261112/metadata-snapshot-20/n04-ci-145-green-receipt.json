@@ -1,0 +1,122 @@
+{
+  "kind": "new_verified_full_ci_success",
+  "label": 145,
+  "head": "48cc52bba2227eb3d42e5792f5f0f163e1654ec7",
+  "tree": "aa001f260b62a3daaceac488288b6b134f21f4bb",
+  "main": "8cebde34f6668c523facece3312949e9dbec3444",
+  "run": 43224479344,
+  "job": 131204029005,
+  "run_conclusion": "success",
+  "job_conclusion": "success",
+  "source_all_compiled": null,
+  "source_all_total": 3681,
+  "root_imports": 3624,
+  "build_jobs": 7663,
+  "raw_cached_olean_counter": 4189,
+  "raw_counter_caveat": "Restored main cache contains N06 objects absent from this checkout. 4189/3681 is not a current-head source compilation count. Complete default-library build succeeded at the exact recorded head.",
+  "blueprint_proved": 36,
+  "blueprint_total": 42,
+  "open": 6,
+  "open_nodes": [
+    "N01c",
+    "N02N03",
+    "N04b",
+    "N04Coordinates",
+    "N05",
+    "N06"
+  ],
+  "log": "n04-ci-145.log",
+  "log_sha256": "77a6ba91c44e79ba408cf49df1e2e6787efa1ffc8c957d337aff8b58a5359e09",
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Disk space",
+      "conclusion": "success"
+    },
+    {
+      "name": "Set up the pinned Lean and Mathlib environment",
+      "conclusion": "success"
+    },
+    {
+      "name": "Restore main's build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Reuse the builds of the lines merged by this push",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Restore project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Report which cache was restored",
+      "conclusion": "success"
+    },
+    {
+      "name": "Generate the root import",
+      "conclusion": "success"
+    },
+    {
+      "name": "Changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Quick check of the changed modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build every library",
+      "conclusion": "success"
+    },
+    {
+      "name": "Delete this branch's previous build cache",
+      "conclusion": "success"
+    },
+    {
+      "name": "Save project build artifacts",
+      "conclusion": "success"
+    },
+    {
+      "name": "Count compiled modules",
+      "conclusion": "success"
+    },
+    {
+      "name": "Blueprint status and endpoint axioms",
+      "conclusion": "success"
+    },
+    {
+      "name": "Publish the precompiled build for line sandboxes",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Pack this line's build for main",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "checked_at": "2026-11-12T13:18:39.660089+00:00",
+  "note": "Generated root, quick check, all default libraries including AxiomAudit, and Blueprint status succeeded. Exact parent and Realization remain open; held sources are outside this receipt."
+}

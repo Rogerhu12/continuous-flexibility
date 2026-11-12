@@ -1,0 +1,46 @@
+{
+  "kind": "reviewed_actual_unit_divided_height_arbitrary_real_power_material_jets",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJets.lean",
+    "sha256": "1a3054cdab9e116a2778d6458659e5c66e3c03b3ee4c6aa225dcc3629c6406ab",
+    "blob": "b785c00878f9be9b1b79a446a58ac6c278174150",
+    "lines": 228
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJetsCandidateManifest.json",
+    "sha256": "d5c75d3327b705574c550244b266921152f872b56b51edf1ffa3f648d366f27a",
+    "blob": "df81e995d766608ef1b30646b5d4caf831c37b58",
+    "lines": 94
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01RootDividedHeightMaterialJetsIndependentReview.json",
+    "sha256": "5e916c0ac3ff2e14249d6dfc7bcb22c887fd7fbab1cbed9269bc0cc0d85d8c01",
+    "blob": "82aedae50c0bad573032e7f2a9f52d29108b3503",
+    "lines": 160
+  },
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesReviewedManifest.json",
+      "sha256": "f37ce30954fd93ee03f62378c599cd8637e4925b6a0e8c3d099a77734eabc698",
+      "blob": "d853a4702771f7c9927a1f954482d0b2fa9760b9",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsReviewedManifest.json",
+      "sha256": "fbcb465de171417a9ec9ab12847015f9caaf3513f653b3c3051efc6b17a45841",
+      "blob": "09c0305cf7d62d1e159c0ffe711193436a538227",
+      "lines": 52
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJetsReviewedManifest.json",
+      "sha256": "64ea8e5383573ab77fab91d543bfabced4925ec638fdfd48bc1eadad4bd4fe70",
+      "blob": "af8d0ac8c1cad4ae62c05abb4c0838053ec487a4",
+      "lines": 32
+    }
+  ],
+  "scope": "Same actual G and radial factor V give the genuine positive divided height identity H^gamma=(3/2)^(gamma/6)*chi^(gamma/6)*V^(-gamma/4). One common low order/loss precedes gamma and the actual material sample is unchanged; the high grading is linear.",
+  "limitations": "Raw optical lower, actual host containment and OrdinaryFlowJacobianBounds remain explicit. No R/delta inverse cost is introduced. Old-K unit identification remains a separate bridge and no final parameter SmoothDirections/N04c claim is made.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}

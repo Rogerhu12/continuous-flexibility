@@ -1,0 +1,160 @@
+{
+  "kind": "same_actual_unit_divided_height_real_power_material_jets_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJets.lean",
+    "blob": "b785c00878f9be9b1b79a446a58ac6c278174150",
+    "sha256": "1a3054cdab9e116a2778d6458659e5c66e3c03b3ee4c6aa225dcc3629c6406ab",
+    "lines": 228
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootDividedHeightMaterialJetsCandidateManifest.json",
+    "blob": "df81e995d766608ef1b30646b5d4caf831c37b58",
+    "sha256": "d5c75d3327b705574c550244b266921152f872b56b51edf1ffa3f648d366f27a",
+    "lines": 94
+  },
+  "providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJets.lean",
+      "blob": "3c3ffbb2f8964c320cfe59bc5f98c057fc9827ca",
+      "sha256": "86d1f01459df69c99ae78417f11e6ceba17a42cdd9f5764ccb35ba06c3e2d975",
+      "lines": 142
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValues.lean",
+      "blob": "7eac1d582f31ac64ea9fef0236cf0aa9ae45c793",
+      "sha256": "7c56e5d2cf0b6de96fbc1ae9e89ce3fd868585e9648c2b4b2ee97ee28ecdce4c",
+      "lines": 182
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorPowerMaterialJets.lean",
+      "blob": "aedbff50a4eb54bd08f26c95d85919ea2fd5d3b5",
+      "sha256": "8c70f3441a4902db3d13787131cdaa69f46013ef4810da44f6f351f1abe9337b",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PointwiseProductPolynomialMaterialJets.lean",
+      "blob": "c2eef2dac4cf079d6ad8da950038309b7714261d",
+      "sha256": "8eea68ab7ee7671d432b40b7833154f3c3a69a568c7fb96d7fb4a7a95fe40d02",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootDividedHeight.lean",
+      "blob": "131ceed99f120ec82b3d878f85910e1160c626fe",
+      "sha256": "a9cc1f82ebbe96b6c6e9d95931004ab18ea4232d7d219910885cf682d352f42f",
+      "lines": 72
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientFactorization.lean",
+      "blob": "756feea98dedb9141e1dc34eac4336704cd133d7",
+      "sha256": "7517b6ad668e1433bde3b4d3a2a2de646d86c554d27c1a9d4131bbba8c12c653",
+      "lines": 111
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootFlowParameterUnscale.lean",
+      "blob": "99e5175e3bc217ba0ec1c34e4d444e1b7bfe81e0",
+      "sha256": "82dc658872bd77c11d77ff9a4d3554ebcd11968c186ea22bb3dd88d8de790a34",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientDivision.lean",
+      "blob": "96648e09b56b2a141c3a10ced82b7776d26648fd",
+      "sha256": "0605885b335d31a76c1b840f60e8821d1898a613f9b29cbc8aa55e5dde4aaf2d",
+      "lines": 105
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootChartExtension.lean",
+      "blob": "a9f27b63df8f3a8479b2cd4563336e2469cbfc73",
+      "sha256": "22b2dd9f082c968c8718ef3aa5686c3527faf5059077ef4dd0a04f48b43acf39",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualRootChart.lean",
+      "blob": "aae294b8520c041eba6da76a4c9980cfa1289a07",
+      "sha256": "bfa0951af97caef64c1ffc4f42bfc31efee1f5573d09aed01113e9045a2f854d",
+      "lines": 169
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootChartSymmetry.lean",
+      "blob": "28a2b3a16c47546febcda4cfad9f4993063b9c46",
+      "sha256": "e14476128c535a1fbae40baded589cf0c36309f412583c215f6347983f6060d1",
+      "lines": 195
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowQualitative.lean",
+      "blob": "9b42e9eecd7a7604ac4de0013858d26b4a8ae0b3",
+      "sha256": "40a42ca5c1622a967c5a828d9d40a3c07a0e003cf9d77849cdded20e8fa458df",
+      "lines": 149
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowInverseGeometry.lean",
+      "blob": "c08e6f21401ecf53990e3f6f68c062368c6eaa2c",
+      "sha256": "bbe6d22713fce6fa92b5ca0cc2ca663bacbdf02909e06607c83fd8ca493415ee",
+      "lines": 88
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+      "blob": "80e898b98348cb111761430989137705f4a3cf63",
+      "sha256": "2a5fd66cb597c253e023f1072948e1a591f64ba0ee747a6a89139fc7c8c980eb",
+      "lines": 1052
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+      "blob": "ad3dee4ba3e3f6a9fd4030b170538f3f7d6f7099",
+      "sha256": "f6ebee83905f13d5648f1a9bff39c15b6109f161fdf5d482af9c5f22176ba535",
+      "lines": 1008
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "lines": 1155
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Deriv.lean",
+      "blob": "5c4314cbc0f51719245bc3b268948275c4a21812",
+      "sha256": "9098e465d4b2a9898352ad3eb944c1b76fa7bd010862391f790d57f59ab59d25",
+      "lines": 778
+    }
+  ],
+  "upstream_independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootOddCoefficientMaterialValuesIndependentReview.json",
+      "blob": "991c8203c2259acdad61efd66be3d4bbd411d005",
+      "sha256": "6aae7dd065b4dd5cc36dadcf3b673c09e941cbe96c644142c2b82c2fe6378528",
+      "lines": 94
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootOddPowerMaterialJetsIndependentReview.json",
+      "blob": "bcd6306659f8bb926181b4ef013aeb094145a77b",
+      "sha256": "6c966ac3b33cb29e2001f27bee564d262d36b467b26a2f3ffa34357e793c17fa",
+      "lines": 68
+    }
+  ],
+  "mathlib_pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "checks": [
+    "Read all 228 candidate lines, complete 142-line odd power and 182-line odd value sources, complete 148-line radial-factor power and 85-line pointwise-product calculus, and the actual RootDividedHeight / RootCoefficientFactorization definitions and proofs.",
+    "The unit-model algebra is exact: H^gamma=(3/2)^(gamma/6) * chi^(gamma/6) * V^(-gamma/4). Each real-power rewrite uses actual positivity, and the common scalar has no state, component, radius or normalization dependence.",
+    "The same chosen scaled flow is reparametrized by rootFlowParameterUnscale. Its true flow equation supplies joint endpoint smoothness, positive angular derivative and period; the actual same root label then gives smooth G and the genuine extended odd coefficient. No replacement flow or arbitrary extension is introduced.",
+    "The actual strip contains (0,theta). Its five positivity clauses give smooth positive V via the genuine discriminant factor identity. The odd value provider gives positive chi at that same point. Their actual continuous germs yield a neighborhood on which the displayed height-power identity is valid; no global positivity of the totalized extensions is presumed.",
+    "C0=max(Cchi,CV) uses only positivity of the actual sample E0. The common low order is max(lowchi,max(lowV,max(lowPos,productLow))) and the output loss is selected before gamma, all states, components, hosts, factor representatives, radii, scales, flows and angles.",
+    "The coefficient envelope A_k=max(1,Bchi_k,BV_k) and inputLoss=max(losschi,lossV) dominate both true power-jet towers. The weighted Leibniz polynomial theorem is applied to the same actual f and q at the same root and retains a single high state-grading factor.",
+    "The pinned iteratedFDeriv constant-scalar theorem and positive Q remove the last scalar exactly. B_k=1+(1+Q)*BP_k controls both Q*BP_k and exponent BP_k because W>=1. The final ordinary-jet germ equality includes n=0 and arbitrary negative gamma.",
+    "All recorded candidate/provider/review bytes were hashed and matched. The sole public declaration is absent from installed source; two helper declarations remain private."
+  ],
+  "scope_limits": [
+    "The raw same-component optical lower, actual host containment and OrdinaryFlowJacobianBounds remain explicit hypotheses, exactly as in the reviewed upstream providers. This report does not infer them from arbitrary Through03.",
+    "The output is the unit-normalized genuine divided-height ordinary jet tower at the root. The separate actual old-K unit identification is still needed before asserting bounds for stored physical atlas height.",
+    "No R inverse, delta inverse, arbitrary box cost, sample replacement, state SmoothDirections tower or final primitive certificate is claimed.",
+    "The earlier candidate manifest still records the then-pending 182/142 input reviews; this new receipt binds their now-completed exact root reviews without rewriting that historical manifest."
+  ],
+  "blocking_findings": [],
+  "validation": {
+    "compiled": false,
+    "lean_invoked": false,
+    "source_edited_by_reviewer": false,
+    "ci_queried_or_downloaded": false,
+    "checkout_index_refs_CP_authority_modified": false
+  }
+}

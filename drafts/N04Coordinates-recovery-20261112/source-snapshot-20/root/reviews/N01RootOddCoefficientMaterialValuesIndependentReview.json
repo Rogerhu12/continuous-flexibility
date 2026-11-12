@@ -1,0 +1,94 @@
+{
+  "kind": "independent_complete_source_review",
+  "reviewer": "/root",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesCandidateManifest.json",
+    "sha256": "617dd248767b540e78553d4e0583b1e8092cbfbd17f8072fd662ce46a47885fc"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValues.lean",
+    "sha256": "7c56e5d2cf0b6de96fbc1ae9e89ce3fd868585e9648c2b4b2ee97ee28ecdce4c",
+    "blob": "7eac1d582f31ac64ea9fef0236cf0aa9ae45c793",
+    "lines": 182
+  },
+  "providers_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootSpeedPowerMaterialJets.lean",
+      "sha256": "e5188b246d4ca0b1f6d623d2d9c2a2236eae755eda0877b28e66be31776666db",
+      "blob": "31856ff7b5c296a3544b15648b025cb52a1f4c97",
+      "lines": 204
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootFlowParameterUnscale.lean",
+      "sha256": "82dc658872bd77c11d77ff9a4d3554ebcd11968c186ea22bb3dd88d8de790a34",
+      "blob": "99e5175e3bc217ba0ec1c34e4d444e1b7bfe81e0",
+      "lines": 81
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01RootFieldLocalization.lean",
+      "sha256": "34201fa75dc819a9f10da63488a4c0ea0372ec3a299b76a871e31af3c38eb1fb",
+      "blob": "4a3cd6abe9f6f20081ee89a088222e631e05c72f",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01RootLabels.lean",
+      "sha256": "5dca93fb3ceb186674ad996039b5a6c9cd2dfc6d6b04dacb696937583b7441e7",
+      "blob": "baa87e8590b21206497692b15ba781f5ed3508eb",
+      "lines": 180
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootChartExtension.lean",
+      "sha256": "22b2dd9f082c968c8718ef3aa5686c3527faf5059077ef4dd0a04f48b43acf39",
+      "blob": "a9f27b63df8f3a8479b2cd4563336e2469cbfc73",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ActualRootChart.lean",
+      "sha256": "bfa0951af97caef64c1ffc4f42bfc31efee1f5573d09aed01113e9045a2f854d",
+      "blob": "aae294b8520c041eba6da76a4c9980cfa1289a07",
+      "lines": 169
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootFieldLocalization.lean",
+      "sha256": "5de516081578f600003b841ee7084b19a55c558c7ab04477998c7c444b094a29",
+      "blob": "b872a563b10dcf0445203ac6249c70d2c0deecb6",
+      "lines": 67
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowQualitative.lean",
+      "sha256": "40a42ca5c1622a967c5a828d9d40a3c07a0e003cf9d77849cdded20e8fa458df",
+      "blob": "9b42e9eecd7a7604ac4de0013858d26b4a8ae0b3",
+      "lines": 149
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04FlowInverseGeometry.lean",
+      "sha256": "bbe6d22713fce6fa92b5ca0cc2ca663bacbdf02909e06607c83fd8ca493415ee",
+      "blob": "c08e6f21401ecf53990e3f6f68c062368c6eaa2c",
+      "lines": 88
+    }
+  ],
+  "reviewed_inputs_verified": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootSpeedPowerMaterialJetsReviewedManifest.json",
+      "sha256": "7d3b2af41abbd36effa3a40f3dc76d2e5eff43c0a02d3f529722eb0268d43e0d",
+      "blob": "478af85bc5d9e213ce0f7f269ca339854f16e4b3",
+      "lines": 32
+    }
+  ],
+  "public_declarations": [
+    "n01_rootOddCoefficient_unit_material_values_of_component_optical"
+  ],
+  "verdict": "PASS_STATIC_REVIEW_HELD_UNCOMPILED",
+  "review_findings": [
+    "The complete 182-line source was read, together with the actual flow-root identity, root extension definition, original label derivative interval and the speed-power provider contract.",
+    "The same chosen scaled flow is reparametrized exactly, not replaced. The genuine extension at the root is the original odd coefficient and equals (2/3) times the actual factored speed times the derivative of the same n01RootLabel.",
+    "For positive c and label derivative in [1/4,4], chi is positive, chi <= 3c and inverse chi <= 6 inverse c. The localized speed equals the true speed at the root solely by localization identity.",
+    "The gamma=1 and gamma=-1 order-zero speed estimates use one sample scale. Raising low order to max(low,lossS) absorbs the state factor by two; P = 1+12BP0+12BM0 controls both coefficients and exponents before every state, component, host, g, R, delta, flow and angle.",
+    "No inverse localization radius or normalization scale is charged; no compact source-value range is substituted for the displayed material control."
+  ],
+  "scope_caveat": "Raw same-component optical lower bound, actual host containment and OrdinaryFlowJacobianBounds remain explicit inputs. This is not a derivation from arbitrary Through03 and does not complete all-order parameter SmoothDirections, actual stored K matching, N04Properties, Realization or the parent.",
+  "compiled": false,
+  "lean_or_ci_invoked": false,
+  "active_checkout_index_refs_CP_modified": false,
+  "reviewed_at": "2026-11-12T13:20:44.058284+00:00"
+}

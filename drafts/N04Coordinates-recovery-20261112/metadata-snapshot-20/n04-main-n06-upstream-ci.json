@@ -1,0 +1,21 @@
+{
+  "line": {
+    "head": "b486811bb479a66b58bf29606bc68dde579ee4e3",
+    "run": 43217766797,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43217766797",
+    "updated_at": "2026-11-12T12:38:20Z"
+  },
+  "integration": {
+    "head": "898ddb7862b9c2b4c60afcc1363cb169287c9bda",
+    "run": 43220255025,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/Rogerhu12/continuous-flexibility/actions/runs/43220255025",
+    "updated_at": "2026-11-12T12:45:11Z"
+  },
+  "main": "ebfd528f2dd0c690799187be45b7c5a5c4c6b26a",
+  "checked_at": "2026-11-12 13:11:00 UTC",
+  "scope": "Read-only workflow success evidence for the exact upstream bulk integration. The current N04 line merge still requires its own complete CI."
+}

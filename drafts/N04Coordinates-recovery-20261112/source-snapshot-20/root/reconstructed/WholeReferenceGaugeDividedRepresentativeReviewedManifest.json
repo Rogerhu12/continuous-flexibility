@@ -1,0 +1,26 @@
+{
+  "kind": "owner_frozen_reviewed_source",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeDividedRepresentative.lean",
+    "sha256": "6f284effa4641b876689a1d540259532824f1c01d3fe92b8de0576fcbf8175d6",
+    "blob": "736bb431f7e51990e7617e4ae48e04ad6073b82e",
+    "lines": 89
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeDividedRepresentativeCandidateManifest.json",
+    "sha256": "fcaa1e7119413630b0a31a8561aab0fde5b47a99980367dbf3f638eb177e6b43"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeDividedRepresentativeIndependentReview.json",
+    "sha256": "c40f5f570b4a6e4015271051fec541107d3ff7d667027733ea28110123f27874"
+  },
+  "scope": [
+    "Identifies the raw positive gauge coefficient functions with the same actual stored V coefficients at the current and reference states.",
+    "The same positive piece has actual endpoints zero and one; a closed-unit-strip raw factorization supplies the actual canonical numerator factorization on the open strip.",
+    "Reuses the generic PartB representative uniqueness lemma to identify the existing dividedDifference and all interior mixed jets. No atlas field or material datum is replaced.",
+    "The actual cubic factorization is available from ActualReferenceGaugeCubicDifference; this adapter does not supply the remaining material numerator estimate or a state SmoothDirections tower."
+  ],
+  "compiled": false,
+  "active_checkout_index_refs_CP_modified": false
+}

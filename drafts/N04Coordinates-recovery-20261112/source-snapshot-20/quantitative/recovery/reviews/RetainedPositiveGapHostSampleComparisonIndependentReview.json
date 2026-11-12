@@ -1,0 +1,125 @@
+{
+  "kind": "independent_complete_static_source_review",
+  "reviewer": "/root/quantitative_route",
+  "result": "passed_complete_static_review_held_uncompiled",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveGapHostSampleComparisonCandidateManifest.json",
+    "sha256": "57cd965e9dff0ee548aaff4e7694d17caebfd55edde1348b54ed1901cb6fbd63",
+    "blob": "fb21db2551c72d6ade03e384d9dab3bcb971a500",
+    "lines": 79
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapEndpointX.lean",
+      "sha256": "dd1faacf35931c4d364d9ccefaed3e87a2abfcafed8fcf5dd6409406852477c1",
+      "blob": "6b07b19c1859b37f546093ba30ccda44262ef467",
+      "lines": 77
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MaterialClosedHostEndpointX.lean",
+      "sha256": "38ec79abb0882a19487f6892ab254dc9ee089f762b7458df0af05260d34799a5",
+      "blob": "cf7a08f69f38d70893bb15b6bdcaa06a96241476",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedPositiveGapHostSampleComparison.lean",
+      "sha256": "fa24476a3afac5619e2bb534b27099f982b0fcaa17dc4a7b17874df9eec698fe",
+      "blob": "a6fa6bf27092b70f239884b75601299c72a5787b",
+      "lines": 80
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/RetainedMorsePositiveGapCoordinates.lean",
+      "sha256": "ab0252e44c6796692e84ddbe3c49c1bdf72478c65a3197b8749653f1e008edbf",
+      "blob": "b43329ae2f254524a65f99a0fc814ed099743d05",
+      "lines": 96
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/MorsePositiveGapCells.lean",
+      "sha256": "cb3e99bfe753dcdda02fa7928dc2e4ac35dd4438fa2b379a1451a1541844ee26",
+      "blob": "ab663f49ba6fcdfcae9f2ca7aadd47e099d1ee21",
+      "lines": 121
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean",
+      "sha256": "5c502ee08fdb1f063bc9b39badcf31647b0042373cccba4878059a97da4d513b",
+      "blob": "4004102ba3dae66f14faaca866f1e18e4ac76f87",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCellEndpointModels.lean",
+      "sha256": "fbcef0e54e80091110431dae6b4a96ff49575acfbbc114dad1a9d08d8c499a3c",
+      "blob": "c91660140fe19221f98b95b599d2db5685e3bf68",
+      "lines": 147
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    }
+  ],
+  "additional_actual_provider_files": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/R11aRetainedFamily.lean",
+      "sha256": "bdc03c5491b02dce0e424a173dee779093fe11f70b5b9e5ea947e7c9093b298f",
+      "blob": "57d911ff1afebf3bb0f775372630fc552f1a2681",
+      "lines": 221
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/ConnectedReferenceBorder.lean",
+      "sha256": "bf57e7e5c646c28a8c343c5b0029c4f9bbaf80ffec95ea25c1565eba284889ab",
+      "blob": "d21dc5b19a193ae15df0fce1bc75a00e86554b73",
+      "lines": 101
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N06MorsePositiveComponent.lean",
+      "sha256": "b6f964ba76258cca4ba3e885d8be5283b9ce6237996b740f7cdbc048ab3cbc17",
+      "blob": "be439e1ea810b6f48f80936ff29c691977f5d871",
+      "lines": 249
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCoordinate.lean",
+      "sha256": "e113e4c2141428426748e22e0f5f53093940a70d77befe3bcf2f422bdc99fefc",
+      "blob": "b1bcf0081f837c19af51bf120762c7efb491b54a",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Radial.lean",
+      "sha256": "7cb296f462b08bbbdcbfdf550a1aa3964ce8ed47526b4e34dcbf75ed721e8352",
+      "blob": "473c530a1de50c672f2e54908d374f624f5955b0",
+      "lines": 874
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/OrderClosed.lean",
+      "sha256": "e311dbc7fca744dc0f0d4a10e3c838eb4996c2fa8b63e833077c40f763f05444",
+      "blob": "9603945a9c797c1d1d695ddf79281f6887211098",
+      "lines": 764
+    }
+  ],
+  "review_scope": "Full 77 + 51 + 80 source lines and actual contracts; no import, elaboration, Lean compilation or CI execution. The 96-line retained-coordinate and 121-line original-cell providers were fully read for their actual contracts; their separate author-independent reviews remain separate.",
+  "findings": [
+    "The original positive gap has actual cells labelled n or n+1. The same retained certificate transports those very cells and changes their indices only by max(_,N); max(n+1,N)<=max(n,N)+1 gives the displayed two-sided index distance. The material index comparison then gives one gap oscillation bound 2B+1 before side, n or any physical point.",
+    "The closed-host lemma uses the original eighteenth IsMaterialData conjunct. Endpoint distance is positive on the ambient interval; sqrt(log(1/d)) is continuous there without assuming log nonnegative. The actual closed interval lies strictly inside the ambient interval, so le_on_closure applies to the same open host and same uniform B. The pinned closure_Ioo condition uses l.ne(u) in the correct direction.",
+    "The sample membership projection is the sixteenth IsMaterialData conjunct. ConnectedReferenceGeometry.Realizes.2.1 is the actual IsAccumulatingProfile witness used by materialSample_mem_interval; no new material or geometric witness is selected.",
+    "The physical midpoint is in the same original positive gap by the actual N06 gap order. The common closed point connects the original negative host to this gap. Four actual cell/sample deviations and one gap oscillation give the directed shift L+4B from the negative-host sample to the positive-midpoint sample.",
+    "The one-sided material provider is called with target r=sample(k), source s=sample(j); its second conclusion is exactly E0(sample j)^R <= C*E0(sample k)^A. This direction was checked against its full source, not inferred from an unproved reverse endpoint comparison.",
+    "All constants precede side, gap index, both cell labels and physical points. The same T, retained Gamma and genuine host j and midpoint cell k are retained. No whole-positive common cell, E0>=1, final primitive estimate or relabeling is introduced.",
+    "All three public names were checked against actual installed src and have no declaration collision. Every candidate/provider manifest blob and SHA256 was independently recomputed; no source bytes were modified."
+  ],
+  "scope_limitations": [
+    "The conclusion is conditional on the displayed actual retained-coordinate certificate and a genuine closed intersection with the specified negative component/host. It does not assert arbitrary Through03 retains that certificate.",
+    "Actual identification of every positive component with a displayed retained Morse gap is separate. These leaves do not establish all final primitive, SmoothDirections or N04c bounds.",
+    "No compilation claim is made."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false,
+  "reviewed_at": "2026-11-12T13:23:15.914323+00:00"
+}

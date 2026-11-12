@@ -1,0 +1,52 @@
+{
+  "kind": "reviewed_actual_root_odd_coefficient_arbitrary_power_material_jets",
+  "status": "HELD_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJets.lean",
+    "sha256": "86d1f01459df69c99ae78417f11e6ceba17a42cdd9f5764ccb35ba06c3e2d975",
+    "blob": "3c3ffbb2f8964c320cfe59bc5f98c057fc9827ca",
+    "lines": 142
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddPowerMaterialJetsCandidateManifest.json",
+    "sha256": "c341965e39f156dd42a203269fd9b258677e1d1386458784466b29e155e9be9b",
+    "blob": "279dafcd095a6181268b2a93e6752ba4a87f369a",
+    "lines": 64
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/N01RootOddPowerMaterialJetsIndependentReview.json",
+    "sha256": "6c966ac3b33cb29e2001f27bee564d262d36b467b26a2f3ffa34357e793c17fa",
+    "blob": "bcd6306659f8bb926181b4ef013aeb094145a77b",
+    "lines": 68
+  },
+  "reviewed_inputs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootEvenOddAxisMaterialJetsReviewedManifest.json",
+      "sha256": "c2cc6e723981a93f8640c425ee9412ab8cf1a47fd55a718bdfd7587ecb946b78",
+      "blob": "0568cd35a7a12dffa0d34cf740ee06de67c98bc8",
+      "lines": 46
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/PositivePowerPolynomialMaterialJetsIndependentReview.json",
+      "sha256": "5d10a8ac408abbfff158e9c2b0f8fff03a79006bf8c0084183c5b0e86e6f266b",
+      "blob": "b692ab40f628e425438e312ccb216a177578e572",
+      "lines": 84
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootOddCoefficientMaterialValuesReviewedManifest.json",
+      "sha256": "f37ce30954fd93ee03f62378c599cd8637e4925b6a0e8c3d099a77734eabc698",
+      "blob": "d853a4702771f7c9927a1f954482d0b2fa9760b9",
+      "lines": 40
+    }
+  ],
+  "scope": [
+    "The source of every power is the same genuine extendedRootOddCoefficient of the actual normalized inverse flow and original root label.",
+    "The actual value and reciprocal are derived by the preceding value lemma; no compact interval of source values or terminal power bound is assumed.",
+    "The two genuine sample scales are raised to their maximum using positivity of actual E0(sample j). The scalar power estimate consumes explicit value/reciprocal cost PV and the already derived positive spatial jets.",
+    "The common low state order and output loss are selected before the exponent gamma. Only the coefficient sequence depends on gamma, before state, component, host, g, R, delta, Theta and angle.",
+    "No inverse R or delta factor enters and the high grading remains linear. All real powers, including zero and negative exponents, use the same positive input source."
+  ],
+  "limitations": "Raw same-component optical lower, actual host containment and OrdinaryFlowJacobianBounds remain explicit inputs. Same actual G and sample scale are retained, with no inverse R/delta cost. These are ordinary spatial jet estimates and do not assert current Through03 supplies raw optical lower or final state SmoothDirections/N04c estimates.",
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_modified": false
+}
