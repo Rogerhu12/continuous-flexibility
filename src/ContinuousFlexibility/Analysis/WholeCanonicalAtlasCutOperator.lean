@@ -60,8 +60,16 @@ theorem n04WholeCanonicalAtlasData_actual_cutOperator
       hT hS hN hfield e₀ e cell F G Q N hz hs m hm _ hx
     have hf := n04WholeCanonicalAtlasData_actual_operatorFields
       hT hS hN hfield e₀ e cell F G Q N z m
+    change
+      (coordinatePrincipalDensity (L.coefficients z) (W.chart z m) (W.height z m)).a
+          (W.inverseChart z m p) = 1 ∧
+        (coordinatePrincipalDensity (L.coefficients z) (W.chart z m) (W.height z m)).b
+          (W.inverseChart z m p) = 0 ∧
+        (coordinatePrincipalDensity (L.coefficients z) (W.chart z m) (W.height z m)).c
+          (W.inverseChart z m p) = -(W.chart z m (W.inverseChart z m p)).1 at hd
+    rw [hFx] at hd
     rw [hf.1]
-    simpa only [inverseChartPrincipalCoefficients, hFx] using hd
+    exact hd
   · intro z hz hs m hm p hp
     exact n04WholeCanonicalAtlasData_factorization C L K e cell F G Q N z m p hp
 
