@@ -1,0 +1,31 @@
+{
+  "kind": "independent_static_review_of_new_reconstruction",
+  "reviewer": "/root/proof_inventory",
+  "files": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightValueBounds.lean",
+      "blob": "e192a07ef9476bd6de179deb4782a7980b6aba66",
+      "sha256": "fa5dafb25717276bf70b6c7a7e55fda40335dd2aa678de6d81cd7d34f12d71b9",
+      "lines": 98
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedEndpointHeight.lean",
+      "blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+      "sha256": "29cbabf52918e73745455ed4f8e4a868f36dc5106558681a40492a52d4ee5258",
+      "lines": 127
+    }
+  ],
+  "result": "passed static review; compilation not performed",
+  "checks": [
+    "Read both complete sources and actual PositiveHeightTaylorInterpolation, PositiveEndpointCutoff, AngularTaylorPolynomial, BoundaryTaylorHeight and the new reviewed one-sided ordinary-jet bridge.",
+    "The height radius is the reciprocal of an explicit positive sum; positivity, both upper margins, the exact inverse cost and positive-order Taylor smallness follow algebraically.",
+    "At order zero, positivity and bounds on both h and h inverse control the absolute logarithm by log H. Positive Taylor orders contribute at most one on the selected collar.",
+    "Both clipped logarithmic corrections are bounded by log H+1, so the actual exponential and its reciprocal are bounded by exp(2)*H squared, never exp(M).",
+    "Pointwise infinite smoothness at the actual root gives smooth angular log coefficients; one-sided true symmetry is propagated by the actual mixed closure theorem.",
+    "The actual finite radial jets from PositiveHeightTaylorInterpolation give the actual full Frechet jets on the same closed root circle, and the height equals one as a genuine middle germ.",
+    "The restored208 consumer input and output shape remains compatible."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "historical_identity": "New reconstructed98+127, not recovery of lost amplitude/126 source."
+}

@@ -1,0 +1,54 @@
+{
+  "kind": "n04_ci118_named_composition_repair_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_source_review_not_compiled",
+  "actual_failed_commit": "c5e36dfed814597d4fb2d3d43cddc0c2763b18da",
+  "path": "src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelTransition.lean",
+  "before_blob": "639e9b988047ed814f186606a34799526aa1b989",
+  "after_blob": "e437ebd844869f8250ec6c4e58820461a9b968f5",
+  "candidate_path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair118/CanonicalNegativeTravelTransition.lean",
+  "candidate_sha256": "c88ff73384ba8360871e9b439f3d7c84985623763d8186441672b99c1e4df34b",
+  "exact_delta": "Only replace the existing composition/division expression with ContDiffAt.fun_comp using explicit f and g, followed by fun_div; reversing this single replacement yields the exact failed-CI118 source.",
+  "public_headers_byte_identical": true,
+  "public_header_count": 7,
+  "added_public_declarations": [],
+  "removed_public_declarations": [],
+  "imports_options_context_unchanged": true,
+  "default_heartbeat_unchanged": true,
+  "diagnostic": {
+    "log_path": "/workspace/scratch/bbbea77e4163/n04-ci-118.log",
+    "log_sha256": "ea125289f26606425241d4d6a2f8444850f963a94b1ab7dfd91af3cbf5e49829",
+    "line": 114,
+    "problem": "The outer g metavariable remained unresolved in hproduct.comp p hτAt despite a typed target; the expected numerator is the actual coefficient product evaluated at the actual travel transition."
+  },
+  "api_evidence": {
+    "repository": "leanprover-community/mathlib4",
+    "pin": "c55e6e786f49471c72fbddbec5415808896aec1e",
+    "path": "Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+    "blob": "067d19883550ab5637d02f038d451c42ab16e4b7",
+    "declaration": "ContDiffAt.fun_comp (x) (hg at f x) (hf at x) : ContDiffAt ... (fun x => g (f x)) x",
+    "retrieved_lines": [
+      210,
+      237
+    ],
+    "installed_examples": [
+      "PositiveConformalBoundaryJets.lean:133-134",
+      "RootDividedHeight.lean:52-53"
+    ]
+  },
+  "checks": [
+    "The explicit f is exactly n04CoordinatesNegativeTravelTransition S C L z m.",
+    "The explicit g is the same coefficient-times-half-gap function in typed hproduct; its evaluation point is definitionally the local x.",
+    "fun_comp yields the pointwise numerator lambda and fun_div yields the pointwise ratio lambda used by hratioAt.",
+    "The denominator proof and nonzero evidence hden.ne', and the final sqrt proof using hratio.ne', are unchanged.",
+    "The complete candidate and actual surrounding characteristic/travel types were read."
+  ],
+  "history": "CI117 and CI118 remain recorded failures. The earlier typed-target repair was insufficient; this report does not retroactively mark it as successful.",
+  "executed": {
+    "lean": false,
+    "ci_query": false,
+    "checkout_or_index_edit": false,
+    "refs_or_checkpoint_edit": false
+  },
+  "status": "READY_FOR_PARENT_REVIEW_AND_ACTUAL_CI"
+}

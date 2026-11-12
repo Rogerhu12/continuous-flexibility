@@ -1,0 +1,54 @@
+{
+  "status": "Recovered source bytes only, no compilation claim; lost review receipts are not fabricated",
+  "files": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/FiniteJetGluing.lean",
+      "blob": "66d40a5b5d4f7bade914536515ce98f765dedb70",
+      "sha256": "2a7f7536bd5a0db13c0ac5b0d2d5d652d74b4b112bdae53d8a3dd2bac7b06bc4",
+      "lines": 119,
+      "recovery": "Exact full text recovered from pre-reset tool outputs/patches."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/FiniteJetRadialGluing.lean",
+      "blob": "a5f458696af9a66b0f1e60569b6d765563346d34",
+      "sha256": "4cae2b706c8dac015b2be6ae3cd6c0d9918c9c67ba776b325e9c76aa3b3f18b7",
+      "lines": 84,
+      "recovery": "Exact full text recovered from pre-reset tool outputs/patches."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/CanonicalWholeNegativeTransport.lean",
+      "blob": "429c2442678eb5094e0fc65718cff8f05b084f27",
+      "sha256": "2ef43db01541e6e9e518b1b987d4e9d72cc158e51ab8d5a56893d42e8d15c3f1",
+      "lines": 174,
+      "recovery": "Exact full text recovered from pre-reset tool outputs/patches."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/CanonicalWholeNegativeBoundary.lean",
+      "blob": "321249b424b451e986bc0356d668e183703cd2ff",
+      "sha256": "54b9aac3ba40d51a5a2bc8d69c4eb4870c9d79b4ca7af283181753ca7aa88a79",
+      "lines": 78,
+      "recovery": "Exact full text recovered from pre-reset tool outputs/patches."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentFieldSelection.lean",
+      "blob": "d88e233049db320f5b320908725f0914601206ab",
+      "sha256": "992fbf7b1e41ec91bd6ee7c588bb3d317ec7bd0fb661ebdc07b5a67427050f1d",
+      "lines": 125,
+      "recovery": "Exact full text recovered from pre-reset tool outputs/patches."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentCriticalCover.lean",
+      "blob": "4c2da29d11ae9f670f3a37a65859cd5cf4169391",
+      "sha256": "26d6beac14ef54392092036e127051a41f084ca9b70ccc64126a99a21619142b",
+      "lines": 103,
+      "recovery": "Exact full text recovered from pre-reset tool outputs/patches."
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentRootNeighbors.lean",
+      "blob": "b7b8beb7bc269010b58c346723c8acd1475fd296",
+      "sha256": "accf711a4a19e0c81f504791a32511e2642b4a2ba8b40c59bc666328b5b37827",
+      "lines": 133,
+      "recovery": "Exact full text recovered from pre-reset tool outputs/patches."
+    }
+  ]
+}

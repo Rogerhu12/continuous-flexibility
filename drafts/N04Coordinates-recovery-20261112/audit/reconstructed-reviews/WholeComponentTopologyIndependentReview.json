@@ -1,0 +1,44 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "scope": "Actual current reconstruction bytes and named callees; no historical source recovery claim.",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentFieldSelection.lean",
+      "lines": 125,
+      "blob": "d88e233049db320f5b320908725f0914601206ab",
+      "sha256": "992fbf7b1e41ec91bd6ee7c588bb3d317ec7bd0fb661ebdc07b5a67427050f1d"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentCriticalCover.lean",
+      "lines": 103,
+      "blob": "4c2da29d11ae9f670f3a37a65859cd5cf4169391",
+      "sha256": "26d6beac14ef54392092036e127051a41f084ca9b70ccc64126a99a21619142b"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/WholeComponentRootNeighbors.lean",
+      "lines": 133,
+      "blob": "b7b8beb7bc269010b58c346723c8acd1475fd296",
+      "sha256": "accf711a4a19e0c81f504791a32511e2642b4a2ba8b40c59bc666328b5b37827"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/PositiveComponentAdjacency.lean",
+      "lines": 170,
+      "blob": "8728e5882472f70c596acdafd856b9c61eb7c903",
+      "sha256": "28cbd7b4f3695aac005457d9a45531b9cbb8de68252418d93bca0287aaf205e6"
+    }
+  ],
+  "checks": [
+    "Read all three complete topology sources (125/103/133) and actual N04bRootOrientation, N04PositiveComponents, Nonlinear/Radial projections and positive endpoint API.",
+    "Disjoint open negative intervals plus opposite nonzero root orientations rule out touching endpoints, giving true pairwise closed disjointness. The radius-only selector then retains the unique negative closed field or positive interior field.",
+    "At an actual simple critical point, a nearby negative sample is supplied by the sign lemma. Actual negative-component coverage and absence of other nearby zeros force inclusion of the original critical point in its closed component.",
+    "The positive side at each negative root is fixed by actual N01 orientation. The selected positive component has the matching endpoint; the ambient alternative is excluded using the actual core bounds.",
+    "The only change in the compatibility copy of PositiveComponentAdjacency is removal of private from n04_simple_zero_sign_near; statement and complete proof are identical.",
+    "A direct installed-source search found no same named declarations for the new selector/coverage/neighbor public heads."
+  ],
+  "limitations": [
+    "Static source and API review only. No Lean elaboration, heartbeat test, CI query or checkout change."
+  ]
+}

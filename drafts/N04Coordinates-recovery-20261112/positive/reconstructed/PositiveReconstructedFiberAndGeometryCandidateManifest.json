@@ -1,0 +1,100 @@
+{
+  "kind": "positive_reconstructed_actual_fiber_geometry_candidates",
+  "owner": "/root/proof_inventory",
+  "status": "HELD / UNCOMPILED; no checkout or source authority mutation",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/PositiveReferenceCollarPrescribedWidth.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceCollarPrescribedWidth.lean",
+      "blob": "1f84b6cf5d5beeb5fad0c833ae6762b546a46d64",
+      "sha256": "8683dd7945d847e1a4eebac1f984faaeb09f56df3da907b3bb274023be028e02",
+      "lines": 149,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCollarFactory"
+      ],
+      "status": "new_reconstruction / held / uncompiled / awaiting independent review"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/EndpointFiberInterpolation.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberInterpolation.lean",
+      "blob": "b7e4b696b9bf1296eeb076700e97f7e1cd923793",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f",
+      "lines": 207,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCollarPrescribedWidth",
+        "ContinuousFlexibility.Analysis.PrescribedEndpointWidth",
+        "ContinuousFlexibility.Analysis.PositiveFiberInterpolationSymmetry",
+        "ContinuousFlexibility.Analysis.TwoEndpointFiberGluing"
+      ],
+      "status": "new_reconstruction / held / uncompiled / awaiting independent review"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/EndpointFiberPullbackAssembly.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackAssembly.lean",
+      "blob": "0493dcc3afcdeccce70c27bb17a1345f39a958d8",
+      "sha256": "24927c543b24c65bb0c119905c7f03be10beafa3a26674e488cbbfa2c2396242",
+      "lines": 167,
+      "imports": [
+        "ContinuousFlexibility.Analysis.EndpointFiberInterpolation",
+        "ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds"
+      ],
+      "status": "new_reconstruction / held / uncompiled / awaiting independent review"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/EndpointTransportGeometry.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointTransportGeometry.lean",
+      "blob": "044df4f2d91b690695b2542a6c82dd77c6322844",
+      "sha256": "cdd4d3a6a4ab757e7f2dfff3d0ba1a7b1653aff00fdff4d74e44da10ab49fb97",
+      "lines": 112,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveFiberClosedGeometry"
+      ],
+      "status": "new_reconstruction / held / uncompiled / awaiting independent review"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholeComponentTransportFactory.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportFactory.lean",
+      "blob": "cca7919641bede2420b69a827a748ce3dea81bf6",
+      "sha256": "d1ef26f02bb80ef3fc9fcec0fed956643e4160fad00b1f74d793a16ef60fa890",
+      "lines": 103,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RawEndpointAngularInterpolation",
+        "ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly",
+        "ContinuousFlexibility.Analysis.EndpointTransportGeometry"
+      ],
+      "status": "new_reconstruction / held / uncompiled / awaiting independent review"
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveChartGeometry.lean",
+      "blob": "05c10d19bd012e57697489b42c077dbca1b62e4f",
+      "sha256": "1086f404f9297f8bd86c80927eb5fc553f3e9155f7e255f2124dc8090d55b1a7",
+      "lines": 145,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholePositiveTransportAssembly",
+        "ContinuousFlexibility.Analysis.CoordinatePrincipalDeterminant"
+      ],
+      "status": "new_reconstruction / held / uncompiled / awaiting independent review"
+    }
+  ],
+  "total_source_lines": 883,
+  "source_provenance": "New source derived from exact installed providers and explicitly recovered consumer interfaces. Not a claim of byte recovery of the lost corresponding files.",
+  "preserved_consumers": [
+    "Exact recovered OneSidedWholeComponentTransport190 calls the same exists_wholeComponentEndpointTransport_family interface.",
+    "Exact recovered WholePositiveTransportAssembly208 retains its stated transport matching structure; the new chart adapter consumes that actual structure."
+  ],
+  "mathematical_scope": [
+    "Prescribed admissible radial widths retain the same actual integral primitive and explicit positive lower bound.",
+    "The actual angular inverse pulls back the true endpoint radial field; its constant root value preserves the actual first radial slope.",
+    "Finite inverse bounds are chosen before the family index. The supplied-bound wrapper permits the later fixed polynomial envelope without replacing the constructed object.",
+    "The whole transport and inverse are the actual two-scalar triangular chart/inverse, with actual root jets and genuine middle germs.",
+    "Positive chart equals inverse transport; physical height equals reciprocal relative height at that inverse point; no unit principal-density claim."
+  ],
+  "non_actions": [
+    "No compilation",
+    "No CI queries",
+    "No checkout/index/ref changes",
+    "No old frozen artifact rewrite",
+    "No authority/plan mutation"
+  ]
+}

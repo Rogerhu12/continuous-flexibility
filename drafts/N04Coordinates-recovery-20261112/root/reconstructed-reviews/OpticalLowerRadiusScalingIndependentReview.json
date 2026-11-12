@@ -1,0 +1,17 @@
+{
+  "kind": "new_independent_full_source_review",
+  "reviewer": "/root",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/OpticalLowerRadiusScaling.lean",
+  "git_blob": "ce52f35b0b40fc48004640af8881ac26033d97dc",
+  "sha256": "67b3cd501b1e95f90063741cf433c7b80bdb733cd367510572a8beca124dbbc2",
+  "lines": 83,
+  "result": "pass_source_and_mathematical_interface_review",
+  "compilation": "UNCOMPILED; only CI can validate elaboration",
+  "provenance": "New reconstruction; does not inherit any missing pre-reset receipt.",
+  "checks": [
+    "Open-interval equality yields the derivative of the actual scaled profile.",
+    "Height amplitude cancels; density scales by R^-2 and distance by R, so the lower coefficient is kappa/R^3.",
+    "Both radius orientations use the same positive scaling lemma; nonzero hypotheses suffice for each cancellation."
+  ],
+  "baseline": "241f2cef3391fbcc213fca41a0a0c29714836bdb"
+}

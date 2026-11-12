@@ -1,0 +1,264 @@
+{
+  "kind": "n04_reset_recovery_known_source_evidence",
+  "status": "PARTIAL_RECOVERY_NOT_A_BATCH_MANIFEST",
+  "author": "/root/audit_coordinates",
+  "new_record_not_historical_bytes": true,
+  "notes": [
+    "This is a freshly written recovery inventory, not a reproduction of any lost manifest.",
+    "Only exact actual bytes whose Git blob matches a historical known hash are marked recovered.",
+    "The rows are a known subset of the prior 56-source candidate; absence from this list is not evidence of removal.",
+    "No phase, plan, receipt, checkpoint, checkout, index or refs are changed.",
+    "The earlier 43 and 13 manifest SHA values below are historical anchors only; their original complete JSON bytes have not been recovered by this agent."
+  ],
+  "historical_manifest_anchors": {
+    "original43": "0d7ad0c7f9488ba465fdaf32bd67deb79e9488f018b8b2ba6cc897999436021f",
+    "increment13": "a2f211d6f63a98879accd8333b0374dbc57237c2b1e50c50484a74514ad4c816",
+    "increment13_cache": "1892c5ada1b5d02c7e794fddda8b605449951187d87cfe1acb730e53d6b48546"
+  },
+  "sources": [
+    {
+      "filename": "N04bActualAtlasCuts.lean",
+      "scope": "original43_old_provider",
+      "historical_expected_blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "status": "EXACT_BYTES_RECOVERED",
+      "exact_copies": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/N04bActualAtlasCuts.lean",
+          "git_blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+          "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+          "bytes": 4433,
+          "lines": 97
+        }
+      ],
+      "other_local_versions": []
+    },
+    {
+      "filename": "PositiveFiberClosedGeometry.lean",
+      "scope": "original43_old_provider",
+      "historical_expected_blob": "d47fadef22e92459f5076bca61124019eee8902e",
+      "status": "EXACT_BYTES_RECOVERED",
+      "exact_copies": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/PositiveFiberClosedGeometry.lean",
+          "git_blob": "d47fadef22e92459f5076bca61124019eee8902e",
+          "sha256": "b5f36c8cdac592b0979009b507fe4d686efeea6ee74d2f8d00fa8dd075289d61",
+          "bytes": 5647,
+          "lines": 129
+        }
+      ],
+      "other_local_versions": []
+    },
+    {
+      "filename": "PositiveReferenceIdentity.lean",
+      "scope": "original43_new",
+      "historical_expected_blob": "0fe36f57855093a4274f44dc6a2d79ae9dcc67ae",
+      "status": "EXACT_BYTES_RECOVERED",
+      "exact_copies": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/PositiveReferenceIdentity.lean",
+          "git_blob": "0fe36f57855093a4274f44dc6a2d79ae9dcc67ae",
+          "sha256": "bea24325424288605021e73c8a7340b822333a25acbcdfbd824bc372a9ae8be2",
+          "bytes": 5719,
+          "lines": 128
+        },
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/PositiveReferenceIdentity.lean",
+          "git_blob": "0fe36f57855093a4274f44dc6a2d79ae9dcc67ae",
+          "sha256": "bea24325424288605021e73c8a7340b822333a25acbcdfbd824bc372a9ae8be2",
+          "bytes": 5719,
+          "lines": 128
+        }
+      ],
+      "other_local_versions": []
+    },
+    {
+      "filename": "EndpointAngularInterpolation.lean",
+      "scope": "original43_new_selected_name_repair",
+      "historical_expected_blob": "54fce168d0f4aaff9d8a117f2b4835f44e0534bd",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "SmoothDivisionExplicitCollar.lean",
+      "scope": "future56_explicit_supersession",
+      "historical_expected_blob": "2593b170d46db17a5756e52c6502a386b99af33e",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "EndpointHeightLogJets.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "721705e7d5394ccd6d5c064b65fdd8ead7028e70",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "WholePositiveTransportAssembly.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c",
+      "status": "EXACT_BYTES_RECOVERED",
+      "exact_copies": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveTransportAssembly.lean",
+          "git_blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c",
+          "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138",
+          "bytes": 11027,
+          "lines": 208
+        }
+      ],
+      "other_local_versions": []
+    },
+    {
+      "filename": "CanonicalWholePositiveTransport.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "91eaf2ea9a38e71b0e83530b089e37f79405ee0b",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "WholePositiveChartGeometry.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "6ebe4ded94dfc9ea80900703d42ff5eee7dc1979",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "CentralOpticalComponentLower.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "ea8fba3bd1c98fd3d9a5e1c9d3f53215c9d32997",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "ScaledMorseMaterialOpticalEnvelope.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "ebcbd6748ab4fa757242413977520bc64de86370",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "RetainedNegativeComponentIdentification.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "f59b4b9ecb97a4d5de73da6344c66b8561ed1f55",
+      "status": "EXACT_BYTES_RECOVERED",
+      "exact_copies": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/RetainedNegativeComponentIdentification.lean",
+          "git_blob": "f59b4b9ecb97a4d5de73da6344c66b8561ed1f55",
+          "sha256": "086a4a2c663a3ecbe7417c175ac7a54d9251eff990678d1e5d3b3520ab5482bc",
+          "bytes": 9756,
+          "lines": 183
+        }
+      ],
+      "other_local_versions": []
+    },
+    {
+      "filename": "RetainedReferenceOpticalEnvelope.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "fbe43c87cc17db559b4ba5aeb91697f6d97f1d1c",
+      "status": "EXACT_BYTES_RECOVERED",
+      "exact_copies": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/RetainedReferenceOpticalEnvelope.lean",
+          "git_blob": "fbe43c87cc17db559b4ba5aeb91697f6d97f1d1c",
+          "sha256": "d3c01e9b76055bf6c027689550d66b4ed7c58696708551318c78e802ad06257c",
+          "bytes": 8223,
+          "lines": 161
+        }
+      ],
+      "other_local_versions": []
+    },
+    {
+      "filename": "RetainedReferenceNormalizedOpticalLower.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "153a79e2f5b6af28b2c99b3106598a04e556091a",
+      "status": "EXACT_BYTES_RECOVERED",
+      "exact_copies": [
+        {
+          "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/RetainedReferenceNormalizedOpticalLower.lean",
+          "git_blob": "153a79e2f5b6af28b2c99b3106598a04e556091a",
+          "sha256": "9dafadce8dee58dc77611338e3b8ac7c6c4f0625a9d3fd09bd64d14b5f639eee",
+          "bytes": 3260,
+          "lines": 62
+        }
+      ],
+      "other_local_versions": []
+    },
+    {
+      "filename": "AngularFiberPolynomialEnvelope.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "007110d2c958a9447fba4e94d7919578dfa81304",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "MaterialEndpointDistanceEnvelope.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "b6113e204aa4afcb76f2faf3f0c6bb4420714fe7",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "CanonicalWholeNegativeTransport.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "429c2442678eb5094e0fc65718cff8f05b084f27",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "CanonicalWholeNegativeBoundary.lean",
+      "scope": "future56_increment",
+      "historical_expected_blob": "321249b424b451e986bc0356d668e183703cd2ff",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "PositivePowerPolynomialEnvelope.lean",
+      "scope": "original43_new",
+      "historical_expected_blob": "941ccb3a8a4c5d58de958e06850488ed28f2ec15",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    },
+    {
+      "filename": "ExpPolynomialEnvelope.lean",
+      "scope": "original43_new",
+      "historical_expected_blob": "bd4a40f1406aaf19f093c814f377956ac3b0f007",
+      "status": "HISTORICAL_HASH_ONLY_SOURCE_MISSING",
+      "exact_copies": [],
+      "other_local_versions": []
+    }
+  ],
+  "available_reports": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair118/CanonicalNegativeTravelTransitionIndependentReview.json",
+      "sha256": "33da463c7fea1946b7d62e2413b849f95c1a2f073e1cdefe2c98b8e56a2353be"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/WholeComponentTransportPolynomialIndependentReview.json",
+      "sha256": "76387dcf508a209bdab6d92191432f8fd2584f3c0ba2b4563a0411c601cd7419"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveChartGeometryReviewedManifest.json",
+      "sha256": "2044e0312330225cc1d622a0018cbf465291415b65838c83ea5257454dae1042"
+    }
+  ],
+  "remote_404_checked": [
+    "941ccb3a8a4c5d58de958e06850488ed28f2ec15",
+    "bd4a40f1406aaf19f093c814f377956ac3b0f007",
+    "007110d2c958a9447fba4e94d7919578dfa81304",
+    "429c2442678eb5094e0fc65718cff8f05b084f27",
+    "321249b424b451e986bc0356d668e183703cd2ff"
+  ]
+}

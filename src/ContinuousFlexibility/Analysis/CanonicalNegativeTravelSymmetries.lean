@@ -41,7 +41,7 @@ theorem n04CoordinatesNegativeTravelTransition_symmetries
   · have hperiod : n04bActualTravelChart S C L (C.referenceState, 0) m
         (p + (0, Real.pi)) =
           n04bActualTravelChart S C L (C.referenceState, 0) m p + (0, Real.pi) := by
-      simpa only [Prod.mk_add_mk, add_zero, Prod.eta] using
+      simpa only [Prod.add_def, add_zero, Prod.eta] using
         n04b_actualTravelChart_period_add hN hS hT hfield hz₀ hs₀ m
           ⟨hp.1.1.le, hp.1.2.le⟩ p.2
     unfold n04CoordinatesNegativeTravelTransition
@@ -76,7 +76,7 @@ theorem n04CoordinatesNegativeTravelHeightRatio_symmetries
     have hv := (n04b_characteristic_periodic (L.coefficients w) y.1 Real.pi
       h.1 h.2.1 h.2.2).2 y.2
     have ha := h.1 y.2
-    simpa only [Prod.mk_add_mk, add_zero, Prod.eta] using congrArg₂ (· * ·) ha hv
+    simpa only [Prod.add_def, add_zero, Prod.eta] using congrArg₂ (· * ·) ha hv
   have hreflect (w : AnnularState S × ℝ) (hw : w ∈ stateNeighborhood S C base ε)
       (hsw : stateSector S w.1) (y : PolarPoint) :
       (L.coefficients w).a (y.1, -y.2) *

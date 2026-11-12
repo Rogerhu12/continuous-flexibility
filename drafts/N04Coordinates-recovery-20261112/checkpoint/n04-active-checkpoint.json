@@ -1,0 +1,119 @@
+{
+  "head": "70238f8f712790e13d81fd55d213b67901e831cd",
+  "tree": "de6d6be24d70f74caf6dd32ae17f2dbcc8855e5e",
+  "current_ci": {
+    "label": 121,
+    "pushed": "2026-11-12 08:06:53 UTC",
+    "first_check_not_before": "2026-11-12 08:11:53 UTC",
+    "status": "pending",
+    "added_lean_since_last_green": 964,
+    "plan": "n04-ci121-plan.json"
+  },
+  "last_full_green": {
+    "sha": "241f2cef3391fbcc213fca41a0a0c29714836bdb",
+    "tree": "edc1326287749a15e743a8f5a394cdeefaf455b2",
+    "run": 43179197248,
+    "job": 131050747642,
+    "source_all_compiled": 3156,
+    "source_all_total": 3158,
+    "blueprint_proved": 35,
+    "blueprint_total": 42,
+    "open": 7,
+    "open_nodes": [
+      "N01c",
+      "N02N03",
+      "N04b",
+      "N04Coordinates",
+      "N05",
+      "N06",
+      "N07a"
+    ],
+    "log": "n04-ci-120.log",
+    "build_jobs": 7140,
+    "checked_at": "2026-11-12T08:05:29.551235+00:00",
+    "receipt": "n04-ci-120-green-receipt.json",
+    "receipt_sha256": "d75317c952089e7b1356b7c362ae0e79ea3c52069d9691882ab83746a38eee16"
+  },
+  "failed_ci": [
+    {
+      "label": 115,
+      "head": "3907ae076c18667805355b852172df02e37886e0",
+      "run": 43173392063,
+      "job": 131031776299,
+      "log": "n04-ci-115.log",
+      "source_all_compiled": 3140,
+      "source_all_total": 3158
+    },
+    {
+      "label": 116,
+      "head": "12c38e14bb553a7d28e5762ff4278734dbd9b959",
+      "run": 43175218320,
+      "job": 131037698686,
+      "log": "n04-ci-116.log",
+      "source_all_compiled": 3144,
+      "source_all_total": 3158
+    },
+    {
+      "label": 117,
+      "head": "ed6d646741c7b825d4ce7e8b4ca3db0101946cef",
+      "run": 43175959099,
+      "job": 131040143595,
+      "log": "n04-ci-117.log",
+      "source_all_compiled": 3154,
+      "source_all_total": 3158
+    },
+    {
+      "label": 118,
+      "head": "c5e36dfed814597d4fb2d3d43cddc0c2763b18da",
+      "run": 43176909951,
+      "job": 131043280214,
+      "log": "n04-ci-118.log",
+      "source_all_compiled": 3154,
+      "source_all_total": 3158
+    },
+    {
+      "label": 119,
+      "pushed": "2026-11-12 07:51:37 UTC",
+      "first_check_not_before": "2026-11-12 07:56:37 UTC",
+      "status": "failure",
+      "run": 43178377119,
+      "job": 131048051110,
+      "log": "n04-ci-119.log",
+      "source_all_compiled": 3155,
+      "source_all_total": 3158,
+      "checked_at": "2026-11-12T07:56:59.114572+00:00",
+      "head": "6fde0c827ce172d15c684b7f781c7e8b2c87050c"
+    }
+  ],
+  "recovery": {
+    "time": "2026-11-12 07:46 UTC",
+    "evidence": "n04-recovered-ci-evidence.json",
+    "note": "Local executor was replaced at 2026-11-12 07:46 UTC. Git branch recloned; exact cached logs restored. This record rebuilds only independently retained facts, not lost local review history."
+  },
+  "old_519_phase": {
+    "status": "never activated; no batch executions; historical immutable local authority not reconstructed from summaries"
+  },
+  "green_history_recovered": [
+    {
+      "sha": "dcc33f1645128c07b66178c0cbbb82e69bf4a558",
+      "tree": "2facefdc55337d41765d596ef4d89af670b09b04",
+      "run": 43171760620,
+      "job": 131026490712,
+      "source_all_compiled": 3071,
+      "source_all_total": 3073,
+      "blueprint_proved": 35,
+      "blueprint_total": 42,
+      "open": 7,
+      "open_nodes": [
+        "N01c",
+        "N02N03",
+        "N04b",
+        "N04Coordinates",
+        "N05",
+        "N06",
+        "N07a"
+      ],
+      "log": "n04-ci-114.log"
+    }
+  ]
+}

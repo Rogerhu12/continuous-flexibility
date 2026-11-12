@@ -1,0 +1,29 @@
+{
+  "kind": "independent_static_proof_repair_review",
+  "reviewer": "quantitative_route",
+  "result": "passed; exact two proof-token replacements",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelSymmetries.lean",
+    "lines": 97,
+    "sha256": "59677fd1967a2e111a62fe0f767e4acb06ee2bac506d5d6ab8f66c0493702d90",
+    "blob": "8c077703866dcc134d592da1e48166459f99f406"
+  },
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair119/CanonicalNegativeTravelSymmetries.lean",
+    "lines": 97,
+    "sha256": "1a93e3fe31f9e53d49e71091130c4a04edba9db71e6fb2a4a9c2193f99fd5c87",
+    "blob": "49363860e4a632846194526915e29b148e96b118"
+  },
+  "public_headers_equal": true,
+  "public_header_count": 2,
+  "all_other_bytes_equal": true,
+  "diagnostics": [
+    "CanonicalNegativeTravelSymmetries.lean:44",
+    "CanonicalNegativeTravelSymmetries.lean:79"
+  ],
+  "reason": "Prod.add_def expands an arbitrary pair variable plus (0, pi), so add_zero and Prod.eta align both source and goal. The former mk_add_mk lemma only rewrites syntactically constructed pairs. Both actual periodicity providers return the same coordinate-wise equality as the cached diagnostics.",
+  "green_api_template": "N06AngularMeanBridge.lean:142 uses Prod.add_def with add_zero on arbitrary p",
+  "checked_no_new_hypotheses_import_options": true,
+  "compiled": false,
+  "changes_to_checkout_index_refs_ci": false
+}

@@ -1,0 +1,22 @@
+{
+  "kind": "reconstructed_material_global_endpoint_models_independent_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_not_compiled",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+  "git_blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+  "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa",
+  "lines": 65,
+  "checks": [
+    "Read the complete reconstructed file and installed MaterialCellEndpointModels.",
+    "RadialPartition support and partition-of-unity projections match current Statements/Radial.lean.",
+    "An actual nonzero localizer supplies a real cell; no new choice of geometric cells is introduced.",
+    "The common coordinate error is L+C by the exact absolute-value triangle and the existing hT endpoint-to-index bound.",
+    "The final E0 lower projection is the model-to-actual comparison, so the output is 1 <= KE*E0, not an unsupported E0 >= 1."
+  ],
+  "historical_status": "This verifies newly reconstructed bytes, not the lost 68-line historical blob.",
+  "executed": {
+    "compile": false,
+    "ci_query": false,
+    "checkout_edit": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "independent_static_review_of_new_reconstruction",
+  "reviewer": "/root/proof_inventory",
+  "files": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointAngularInterpolation.lean",
+      "blob": "0009c60442714e1d5191075b8cb3a74e19a63378",
+      "sha256": "6115ae397369477e62a73a2d85ebb8d8dba434065b4342459e1caba58bb0eab7",
+      "lines": 85
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RawEndpointAngularInterpolation.lean",
+      "blob": "fa2b7b2497dfe553d4c57efa079eae8ccb7617d8",
+      "sha256": "4a093259e01887f55777ace5671a4ca2ab53c27721f7631d69f096527940fdd6",
+      "lines": 113
+    }
+  ],
+  "result": "passed static review; compilation not performed",
+  "checks": [
+    "Read both complete new sources and actual PositiveAngularTaylorInterpolation, PositiveSymmetricFiberFactory, BoundaryRadialFrechetJets, CylinderMixedJetNorms and reviewed reconstructed representative APIs.",
+    "The prescribed width uses the actual whole span and min of the two exit margins; all five displayed geometric margins and the angular derivative smallness follow from its real definition.",
+    "The angular patch lower bound uses kappa<=1 and positive-order coefficient derivatives. No angular lift zero-order absolute bound is assumed.",
+    "Raw radial coefficient derivative of order j is mixedDerivative j 1 and is controlled by the actual j+1 ordinary Frechet jet, preserving the exact derivative order.",
+    "Global radial matching transfers the full ordinary boundary jet via the installed genuine all-space smoothness theorem.",
+    "Lift and oddness follow from the same actual coefficient functions; the middle germ reuses the installed public theorem and does not redeclare the previously colliding name."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "historical_identity": "New reconstructed85+113, not lost94+114 byte recovery."
+}

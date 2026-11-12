@@ -1,0 +1,11 @@
+{
+  "base_commit": "6fde0c827ce172d15c684b7f781c7e8b2c87050c",
+  "base_tree": "ead1706fa7714fd547d448fded93bad04538b916",
+  "file": "src/ContinuousFlexibility/Analysis/CanonicalNegativeTravelSymmetries.lean",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair119/CanonicalNegativeTravelSymmetries.lean",
+  "before_blob": "8c077703866dcc134d592da1e48166459f99f406",
+  "after_blob": "49363860e4a632846194526915e29b148e96b118",
+  "sha256": "1a93e3fe31f9e53d49e71091130c4a04edba9db71e6fb2a4a9c2193f99fd5c87",
+  "scope": "Exactly two simp-lemma tokens replace constructor-specific Prod.mk_add_mk by general Prod.add_def, rewriting the arbitrary input pair. All other bytes and both public statements unchanged.",
+  "compiled": false
+}

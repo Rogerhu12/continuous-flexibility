@@ -1,0 +1,57 @@
+{
+  "kind": "independent_static_review_of_new_reconstruction",
+  "reviewer": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryJets.lean",
+    "blob": "ef7eb6158ac785566cb2050b3b3146e596a40b7d",
+    "sha256": "bee7f78864fa762a6b127b9de4a014bad91912664ac04249ff343ff76c6c5851",
+    "lines": 168
+  },
+  "result": "passed static review; compilation not performed",
+  "checks": [
+    "Closed strip membership uses closure_Ioo with a<b and product closure.",
+    "Actual mixed/radial and cylinder-word identities are proved only in the real open strip, then extended using continuity of each fixed finite jet.",
+    "Pointwise ContDiffAt infinity supplies the actual radial and angular slice-jet continuity through the checked PointwiseCylinderJets APIs; no common infinite-order neighborhood is selected.",
+    "Multilinear expansion uses the same map_sum/map_smul_univ implementation as the installed CylinderMixedJets proof, including order zero.",
+    "The radial word count is at most N because the two counts sum to k; equality of the full radial trace functions transfers all angular derivatives.",
+    "The norm bound evaluates the actual multilinear jet on unit coordinate vectors and preserves the actual mixed derivative and order.",
+    "The public iteratedFDeriv_eq_of_radialBoundaryJets_eq_on_closedStrip signature matches the exact restored OneSidedWholeComponentTransport190 consumer."
+  ],
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryJetClosure.lean",
+      "blob": "7cc95a817bb8de0b1856d6504918f4c1a2c36a5e",
+      "sha256": "1154aa089d8c6680602242383a2df70fe45d4e0ab16c758f5dadd7106606e66c"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PointwiseCylinderJets.lean",
+      "blob": "50458f4cc7ca46e27ef2b252310d946bbcf0f01f",
+      "sha256": "80cd20189f5f1228dc3c9fb8a8609f11b6fb96d41908820f1e2eb9bd529e626a"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/BoundaryMixedJets.lean",
+      "blob": "756659895cbc27463f3ce4c058e3b4c9ce437924",
+      "sha256": "e3d747a16201ce8962614f7bd14136a924f3dce50874ce599d037be8ead1ba75"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJetNorms.lean",
+      "blob": "578fe3dcc097fdf9b5f381faa73536caf23417bd",
+      "sha256": "a891ac19e785a16e063b9c0497304808a78ddf708bd4fe798157800415a44863"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/OpenGermBoundaryJets.lean",
+      "blob": "e78ad1c540d10874c7395c8fc16142170b57e5a8",
+      "sha256": "05b52b716681a024e31314ae49912488e7fb3d137e6c648d79e763b1ab6cc1ec"
+    }
+  ],
+  "limitations": [
+    "No Lean compilation or CI query was performed.",
+    "This is a review of the new 168-line reconstruction, not a recovery or validation of the lost prior 148-line bytes."
+  ],
+  "mutations": "Only this review JSON was written; peer source and repository unchanged."
+}

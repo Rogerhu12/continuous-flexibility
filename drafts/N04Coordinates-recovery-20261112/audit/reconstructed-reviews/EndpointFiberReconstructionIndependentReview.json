@@ -1,0 +1,31 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed full-source independent static review",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberInterpolation.lean",
+      "lines": 207,
+      "blob": "b7e4b696b9bf1296eeb076700e97f7e1cd923793",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackAssembly.lean",
+      "lines": 167,
+      "blob": "0493dcc3afcdeccce70c27bb17a1345f39a958d8",
+      "sha256": "24927c543b24c65bb0c119905c7f03be10beafa3a26674e488cbbfa2c2396242"
+    }
+  ],
+  "checks": [
+    "Read full 207-line scalar fiber and 167-line actual angular pullback adapter.",
+    "The two displayed endpoint widths supply the prescribed factory small-jet and mass bounds with their exact intended min/max nesting. Right value a+(b-a) equals the original right physical endpoint.",
+    "Both endpoint exit germs equal the same actual radial projection; twoEndpointFiberCoordinate_geometry supplies true global smoothness and the stated minimum positive radial bound.",
+    "The closed middle joint germ includes both exit circles and is deduced from actual radialGermGlue germs, not only pointwise middle equality.",
+    "The boundary joint germ transfers all radial jets through degree n+1. Periodicity/evenness are inherited from the actual integral collar and unchanged projection.",
+    "The angular inverse pullback uses the actual parameterizedCircleInverse. Its constant boundary value cancels the angular slope term, preserving the original radial lower bound.",
+    "The supplied-bound adapter retains the same actual formula. The second adapter gets M_sigma from existing finite forward/inverse jets before the family index, without bounding an angular lift value.",
+    "Exact signatures and tuple projections checked against TwoEndpointFiberGluing, PositiveFiberInterpolationSymmetry, AngularFiberEndpointJets and AngularFiberFiniteJetBounds."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "scope": "Current reconstruction bytes; not byte recovery of historical lost files. Prescribed factory source read as a dependency, separately assigned to root for independent review."
+}

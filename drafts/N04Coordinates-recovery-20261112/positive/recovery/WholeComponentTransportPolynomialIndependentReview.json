@@ -1,0 +1,127 @@
+{
+  "kind": "independent_full_actual_endpoint_fiber_polynomial_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed_static_pending_CI",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholeComponentTransportPolynomialCandidateManifest.json",
+    "sha256": "9218d72f4d48922628d11a162ba9e9fff4d4d862ac72fbb8a0f4d3dc2a9a8663"
+  },
+  "files": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/EndpointFiberPullbackPolynomial.lean",
+      "sha256": "164a2a8862b89ca77d600edbd28017b1049b129d778c14907a2f503c0b1351fa",
+      "blob": "5d8aacd54e00fa844ebe845831ac5eac12f8385a",
+      "lines": 156,
+      "imports": [
+        "ContinuousFlexibility.Analysis.EndpointFiberPullbackAssembly",
+        "ContinuousFlexibility.Analysis.AngularFiberPolynomialEnvelope"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholeComponentTransportPolynomial.lean",
+      "sha256": "feb5c32116f1a94d86751ebb34dfcb110682275f18ab04446c969da88648948f",
+      "blob": "0b8ac6dfe572e702e282ebf8ef0cf817769efe34",
+      "lines": 110,
+      "imports": [
+        "ContinuousFlexibility.Analysis.WholeComponentTransportFactory",
+        "ContinuousFlexibility.Analysis.EndpointFiberPullbackPolynomial"
+      ]
+    }
+  ],
+  "selected_provider_bindings": [
+    {
+      "name": "EndpointFiberPullbackAssembly",
+      "blob": "a21d9cff8ddea6f74eda51e3b9428ac14f8e6ce0",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/sources/src/ContinuousFlexibility/Analysis/EndpointFiberPullbackAssembly.lean",
+        "sha256": "be0316c88c2348982b38e028a063b706993ee71a058a222a96bf4d8c5e870a10"
+      },
+      "already_reviewed_in": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/PrimitiveBatchCandidateManifest.json",
+        "sha256": "0d7ad0c7f9488ba465fdaf32bd67deb79e9488f018b8b2ba6cc897999436021f"
+      }
+    },
+    {
+      "name": "EndpointFiberInterpolation",
+      "blob": "1acf30b665dc77b9e70872bce85e0165fff29301",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/sources/src/ContinuousFlexibility/Analysis/EndpointFiberInterpolation.lean",
+        "sha256": "333c3470560b1bdeeb4c2595712fd8e7df04c904f8b7cd684600bcea0cdf9646"
+      },
+      "already_reviewed_in": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/PrimitiveBatchCandidateManifest.json",
+        "sha256": "0d7ad0c7f9488ba465fdaf32bd67deb79e9488f018b8b2ba6cc897999436021f"
+      }
+    },
+    {
+      "name": "WholeComponentTransportFactory",
+      "blob": "bdb6d83de91d444f73d37c7cd7445571a2b51a5a",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/sources/src/ContinuousFlexibility/Analysis/WholeComponentTransportFactory.lean",
+        "sha256": "e91d64a5ff911471b39f2934ba4533baac4d6c8c26da5b0a5b1f84ffeb3eaa58"
+      },
+      "already_reviewed_in": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/PrimitiveBatchCandidateManifest.json",
+        "sha256": "0d7ad0c7f9488ba465fdaf32bd67deb79e9488f018b8b2ba6cc897999436021f"
+      }
+    },
+    {
+      "name": "RawEndpointAngularInterpolation",
+      "blob": "3fc063fbb462596a755be1c490345b2a5a7c864f",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/sources/src/ContinuousFlexibility/Analysis/RawEndpointAngularInterpolation.lean",
+        "sha256": "bd00f19c23bcc5cf480b3a00d31a9bd4915b4959cd9e1e74890f7e7114ad5a46"
+      },
+      "already_reviewed_in": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/PrimitiveBatchCandidateManifest.json",
+        "sha256": "0d7ad0c7f9488ba465fdaf32bd67deb79e9488f018b8b2ba6cc897999436021f"
+      }
+    },
+    {
+      "name": "EndpointTransportGeometry",
+      "blob": "1726ce8f94a68c78accd1e27849636b547f7b10d",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/sources/src/ContinuousFlexibility/Analysis/EndpointTransportGeometry.lean",
+        "sha256": "2c139610ce3545e0551682007ee5d20afaa01af33913e10624ba3323cf7e037c"
+      },
+      "already_reviewed_in": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/post-main93/primitive-reviewed-batch/PrimitiveBatchCandidateManifest.json",
+        "sha256": "0d7ad0c7f9488ba465fdaf32bd67deb79e9488f018b8b2ba6cc897999436021f"
+      }
+    },
+    {
+      "name": "AngularFiberPolynomialEnvelope",
+      "blob": "007110d2c958a9447fba4e94d7919578dfa81304",
+      "source": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/AngularFiberPolynomialEnvelope.lean",
+        "sha256": "1d5770f139ffb1cdf3df81efd64e252729c0ef01f439c7c1a0d978b5fb5f55c9"
+      },
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/primitive-route/AngularFiberPolynomialEnvelopeIndependentReview.json",
+        "sha256": "219117f8e9e163d71bdfca8f2abbd2ee1fba50365dd62f612be8e4e8953764c8"
+      }
+    }
+  ],
+  "checks": [
+    "Read both full sources (156+110 lines), the original actual interpolation and whole-component factory, and the exact corrected AngularFiberPolynomialEnvelope boundary interface.",
+    "The prescribed-bound wrapper retains the exact endpointFiberPullbackCoordinate object. The genuine angular inverse supplies smoothness; the constant radial boundary makes its first radial trace equal to the original X radial slope. Periodicity, reflection and finite radial jet matching use the existing actual cancellation and jet-composition lemmas.",
+    "For fixed n the angular-inverse polynomial is selected at N=n+1 before M, kappa, endpoint values, interval geometry or any family. The first derivative operator norm bounds the actual radial partial; the supplied global angular lower bound becomes the exact angularPartial bound at each endpoint. No desired inverse-jet estimate or angular lift zeroth-value estimate is assumed.",
+    "Every true pulled-back trace through n+1 is bounded by C*M^degree. M>=1 and C>=1 give M_sigma>=1, so the original displayed radial collar interpolation can use precisely this polynomial bound.",
+    "The whole-component theorem keeps the original angular interpolation with parameter M and order n+1, requiring exactly the original psi jets through n+2. Its actual angular slope is kappa_phi/2, so (kappa_phi/2)^(-1)<=2*M and both raw forward jet families are bounded by 2*M.",
+    "Applying the fiber theorem at 2*M yields the same displayed transport/inverse, with M_sigma=C*(2*M)^degree. The final universal coefficient is C*2^degree; the last inequality is the exact natural-power factorization, without changing any family member or interval width formula.",
+    "The original WholeComponentTransportGeometry scalar assembly receives the same phi, Y, lower bounds, periodic/reflection data and middle identity germs. Radial and angular boundary jets both match through n+1. All let outputs are eliminated before introducing the family index.",
+    "The three newly named public declarations were not found in installed src or the frozen43 candidate; relevant direct providers are explicitly imported. The known AngularFiber coefficient positivity correction 007110 is the selected dependency, never the older f636 draft."
+  ],
+  "limitations": [
+    "Static mathematical/API review only; no Lean compilation or guarantee of elaboration.",
+    "This closes polynomial cost of the chosen inverse-fiber constant. Material bounds for the actual raw endpoint inputs and later global gluing remain separate obligations."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "new_scope": "Separate held two-leaf increment; no change to the original43 or currently agreed56 source map.",
+  "non_actions": [
+    "No import or execution of staging/authority tools",
+    "No checkout/index/ref/CP/active-plan changes",
+    "No CI queries"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "new_independent_full_source_review",
+  "reviewer": "/root",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MorseRealizedOpticalEnvelope.lean",
+  "git_blob": "edaec1d6e5a0ff7e68cabe86de2140077636c041",
+  "sha256": "34f4b98b071b15100d0d2045d00b4dbe95948154134b56daaf677cb284967375",
+  "lines": 153,
+  "result": "pass_source_and_mathematical_interface_review",
+  "compilation": "UNCOMPILED; only CI can validate elaboration",
+  "provenance": "New reconstruction; does not inherit any missing pre-reset receipt.",
+  "checks": [
+    "Full153 source read and actual retained_data/radius_mem_core/radius_positive projections verified in MorseRealizationBasic.",
+    "Normalization by the actual positive right-root radius preserves the ODE; MorseLeftCapBounds gives speed <= 7*D.b*A.",
+    "morseChainA_inv_bounds and morseChainB_inv_pow yield inverse lower coefficient bounded by a fixed constant times radialE(n)^6.",
+    "Constant is chosen before side and model index and uses the same retained Morse realization; this does not transfer Through03 onto a different witness."
+  ],
+  "baseline": "241f2cef3391fbcc213fca41a0a0c29714836bdb"
+}

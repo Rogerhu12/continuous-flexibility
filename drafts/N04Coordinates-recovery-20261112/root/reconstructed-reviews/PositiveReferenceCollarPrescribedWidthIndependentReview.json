@@ -1,0 +1,17 @@
+{
+  "kind": "new_independent_full_source_review",
+  "reviewer": "/root",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceCollarPrescribedWidth.lean",
+  "git_blob": "1f84b6cf5d5beeb5fad0c833ae6762b546a46d64",
+  "sha256": "8683dd7945d847e1a4eebac1f984faaeb09f56df3da907b3bb274023be028e02",
+  "lines": 149,
+  "result": "pass_source_and_mathematical_interface_review",
+  "compilation": "UNCOMPILED; only CI can validate elaboration",
+  "provenance": "New reconstruction; does not inherit any missing pre-reset receipt.",
+  "checks": [
+    "Same actual integral primitive as green PositiveReferenceCollarFactory; supplied admissible delta retains all explicit margins.",
+    "All finite root Taylor slope and mass inequalities checked against the actual green providers.",
+    "Named lower constant depends only on pre-family numerical data; no resulting transport estimate is assumed."
+  ],
+  "baseline": "241f2cef3391fbcc213fca41a0a0c29714836bdb"
+}

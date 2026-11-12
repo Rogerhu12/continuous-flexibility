@@ -1,0 +1,64 @@
+{
+  "kind": "independent_lean_source_review",
+  "reviewer": "quantitative_route",
+  "status": "passed static source and exact callee review; not compiled",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/FiniteJetGluing.lean",
+      "lines": 119,
+      "blob": "66d40a5b5d4f7bade914536515ce98f765dedb70",
+      "sha256": "2a7f7536bd5a0db13c0ac5b0d2d5d652d74b4b112bdae53d8a3dd2bac7b06bc4"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/FiniteJetRadialGluing.lean",
+      "lines": 84,
+      "blob": "a5f458696af9a66b0f1e60569b6d765563346d34",
+      "sha256": "4cae2b706c8dac015b2be6ae3cd6c0d9918c9c67ba776b325e9c76aa3b3f18b7"
+    }
+  ],
+  "actual_checkout_when_read": "241f2cef3391fbcc213fca41a0a0c29714836bdb",
+  "callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FirstDerivativeGluing.lean",
+      "sha256": "60929d2e8deae1a12e0d5b60351aa548975ec8b2f6a89bf9a58e8db9cd61ca19"
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+      "theorems": [
+        "iteratedFDeriv_zero_apply",
+        "iteratedFDeriv_succ_apply_right"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+      "theorems": [
+        "ContDiffAt.fderiv_right"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Defs.lean",
+      "theorems": [
+        "contDiffOn_succ_iff_hasFDerivWithinAt_of_uniqueDiffOn"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Piecewise.lean",
+      "theorems": [
+        "ContinuousOn.piecewise"
+      ]
+    }
+  ],
+  "checked": [
+    "Read both complete sources; four public theorems and two private jet-extraction lemmas.",
+    "Order-zero evaluation extracts actual values; successor evaluation on Fin.snoc gives the actual derivative-field jets without a smoothness premise.",
+    "First-derivative proof uses the already installed matching-jets theorem at the frontier and actual local equality on either interior.",
+    "Natural-order induction permits codomain E→L[ℝ]V; actual fderiv regularity drops precisely one order and the successor theorem uses the open ambient set unique-differentiability.",
+    "Radial halfspace closures give x≤c and c≤x at the frontier; their equality fixes the actual circle (c,θ).",
+    "The stored-field adapter uses equality on an open strip to obtain a genuine germ, with no assumption about curves crossing the interface or a common infinite-order collar."
+  ],
+  "limitations": [
+    "No Lean compilation or CI execution performed.",
+    "This is a fresh review of the exact current bytes, not a reconstructed old review receipt."
+  ],
+  "mutations": "Only this independent review JSON was written; source, checkout, index, refs and CI untouched."
+}

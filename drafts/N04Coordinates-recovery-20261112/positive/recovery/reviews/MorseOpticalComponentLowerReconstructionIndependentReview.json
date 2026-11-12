@@ -1,0 +1,28 @@
+{
+  "kind": "independent_static_review_of_new_reconstruction",
+  "reviewer": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MorseOpticalComponentLower.lean",
+    "blob": "cbc800c9d4e82e3ba2dd615f0deaecb46a738e6b",
+    "sha256": "c98c9c6a8b5e20b267cbfe146be91a53c8e8c77161429d350a9cd91b8ffd980e",
+    "lines": 180
+  },
+  "result": "passed static review; compilation not performed",
+  "checks": [
+    "Read all 180 lines and actual MorseModelReturn, MorseChainParameters and MorseChainScales callee statements.",
+    "The exponential tangent inequality gives each true root-factor lower bound by p times the nearer model distance; 8B<=A gives q-p>=1/2, so one factor is at least 1/4.",
+    "The exact model factorization and B/A<=p yield B/4 times nearer distance. The amplitude is not used in this model coefficient.",
+    "On the actual retained interval the radius derivative is positive and bounded above by V. The real mean-value bound supplies one V factor for each physical endpoint distance, while the density denominator contributes V squared, yielding V cubed.",
+    "The actual component is the image of the retained turning interval by the same strictly monotone radius. The actual profile and differentiated profile identities cancel the same positive amplitude and nonzero radius/speed.",
+    "The conclusion retains the same realization, side, model index and physical component; no target optical bound, new profile or material reindexing is assumed."
+  ],
+  "verified_callee_modules": [
+    "MorseModelReturn",
+    "MorseChainParameters",
+    "MorseChainScales",
+    "MorseRealizationBasic"
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "historical_identity": "New reconstructed180; no claim to recover or inherit the prior182 byte review."
+}

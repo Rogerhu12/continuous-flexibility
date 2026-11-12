@@ -1,0 +1,16 @@
+{
+  "kind": "minimal_scope_compatibility_candidate",
+  "status": "uncompiled; old exact-recovery source preserved",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/RetainedReferenceComponentEnumeration.lean",
+    "blob": "bbca75c49b6aedbaa05b9054e2e9e8404d7aa948",
+    "sha256": "57a7fb04e4fd60ab04f2313c13f25fb797ff0e48c1e5f0bb25326897a996c047"
+  },
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/RetainedReferenceComponentEnumeration.lean",
+    "blob": "4301dad4fd75a74de75f39d482504f83fd5776b4",
+    "sha256": "e3ff3a2a35ea5e809c4271786587d21b715f26616ff1764ea0bd3874d34afc08",
+    "lines": 188
+  },
+  "change": "Adds open scoped ContDiff for the actual \u221e regularity notation. No theorem body, public statement, import or option changed."
+}
