@@ -53,9 +53,15 @@ theorem n04Realization_endpointTaylorCorrection_mixed_formula
     rw [Fintype.sum_prod_type]
     simp_rw [hterm]
     simp [endpointTaylorCorrection, e, add_comm]
-  rw [heq, n07a_mixedDerivative_sum_on isOpen_univ
-    (fun i _ => ((hw i).comp contDiff_fst).mul
-      ((hA i.1 i.2.val (Nat.le_of_lt_succ i.2.isLt)).comp contDiff_snd) |>.contDiffOn)
+  rw [heq]
+  rw [n07a_mixedDerivative_sum_on isOpen_univ
+    (I := Finset.univ)
+    (f := fun (i : Bool × Fin (n + 1)) (p : PolarPoint) =>
+      w i p.1 * A i.1 i.2.val p.2)
+    (fun i _ => by
+      simpa only [Function.comp_apply] using
+        (((hw i).comp contDiff_fst).mul
+          ((hA i.1 i.2.val (Nat.le_of_lt_succ i.2.isLt)).comp contDiff_snd)).contDiffOn)
     a b (mem_univ q)]
   apply Finset.sum_congr rfl
   intro i _
