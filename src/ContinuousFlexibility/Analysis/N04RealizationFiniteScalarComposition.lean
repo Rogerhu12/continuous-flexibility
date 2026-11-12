@@ -51,7 +51,9 @@ theorem n04Realization_finiteScalarComposition_bound (k a b : ℕ) (RH : ℝ) :
       (Fintype.card (OrderedFinpartition j) : ℝ) ≤ PP := by
     have hh : (Fintype.card (OrderedFinpartition j) : ℝ) ≤
         ∑ i : Fin (k + 1), (Fintype.card (OrderedFinpartition i.val) : ℝ) :=
-      Finset.single_le_sum (fun i _ => Nat.cast_nonneg (α := ℝ) _)
+      Finset.single_le_sum
+        (fun i (_ : i ∈ (Finset.univ : Finset (Fin (k + 1)))) =>
+          Nat.cast_nonneg (α := ℝ) (Fintype.card (OrderedFinpartition i.val)))
         (Finset.mem_univ (⟨j, Nat.lt_succ_of_le hj⟩ : Fin (k + 1)))
     exact hh.trans (le_add_of_nonneg_left zero_le_one)
   choose cp hcp hcpb using fun i : Fin (a + b + 2) =>
@@ -135,14 +137,17 @@ theorem n04Realization_finiteScalarComposition_bound (k a b : ℕ) (RH : ℝ) :
         ‖(JJ c i).D (d.partSize j) x (v ∘ d.emb j)‖ ≤ H * B i := by
       refine Fin.cases ?_ (fun i => ?_)
       · intro d j
+        change ‖(JO c.length).D (d.partSize j) x (v ∘ d.emb j)‖ ≤ H * B0
         have hh := hOJ c.length c.length_le (d.partSize j) (d.partSize_le j)
           (v ∘ d.emb j) (fun l => hv _)
-        simpa only [JJ, Fin.cases_zero, B, Fin.cons_zero, parameterHeightWeight,
+        simpa only [parameterHeightWeight,
           if_neg (Nat.ne_of_gt (d.partSize_pos j)), mul_comm] using hh
       · intro d j
+        change ‖(F.parameter (ra c i) (an c i) q hq).D
+          (d.partSize j) x (v ∘ d.emb j)‖ ≤ H * (M * t ^ c.partSize i)
         have hh := hsource (d.partSize j) (d.partSize_le j) (ra c i) (an c i)
           ((horder c i).le.trans (c.partSize_le i)) (v ∘ d.emb j) (fun l => hv _)
-        simpa only [JJ, Fin.cases_succ, B, Fin.cons_succ, horder, parameterHeightWeight,
+        simpa only [horder, parameterHeightWeight,
           if_neg (Nat.ne_of_gt (d.partSize_pos j)), mul_assoc, mul_comm, mul_left_comm]
           using hh
     have hprodEq : (∏ i, B i) = C0 * M ^ (k + 1 + c.length) * t ^ (a + b) := by

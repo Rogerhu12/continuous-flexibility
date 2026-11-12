@@ -32,12 +32,13 @@ private theorem radial_chart_fderiv
   let f : ℝ → ℝ := fun s => (F (s, 0)).1
   have hf : HasDerivAt f (deriv f r) r :=
     (hasDerivAt_radial_slice hF.fst).differentiableAt.hasDerivAt
-  have hd : HasFDerivAt (𝕜 := ℝ) (fun p : PolarPoint => (f p.1, p.2))
-      (((deriv f r) • ContinuousLinearMap.fst ℝ ℝ ℝ).prod
+  have hfirst : HasFDerivAt (fun p : PolarPoint => f p.1)
+      (deriv f r • ContinuousLinearMap.fst ℝ ℝ ℝ) (r, θ) :=
+    hf.comp_hasFDerivAt (r, θ) hasFDerivAt_fst
+  have hd : HasFDerivAt (fun p : PolarPoint => (f p.1, p.2))
+      ((deriv f r • ContinuousLinearMap.fst ℝ ℝ ℝ).prod
         (ContinuousLinearMap.snd ℝ ℝ ℝ)) (r, θ) :=
-    (hf.comp_hasFDerivAt (f := fun p : PolarPoint => p.1)
-      (r, θ) (hasFDerivAt_fst (𝕜 := ℝ) (p := (r, θ)))).prodMk
-      (hasFDerivAt_snd (𝕜 := ℝ) (p := (r, θ)))
+    hfirst.prodMk hasFDerivAt_snd
   have hnear : F =ᶠ[𝓝 (r, θ)] (fun p : PolarPoint => (f p.1, p.2)) := by
     filter_upwards [(isOpen_Ioo.prod isOpen_univ).mem_nhds
       (show (r, θ) ∈ Ioo a b ×ˢ (univ : Set ℝ) from ⟨hr, mem_univ _⟩)]
@@ -114,7 +115,7 @@ theorem n04Coordinates_actual_reference_negative_radial_fields
   let Ω := Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ)
   have hz₀ : z₀ ∈ stateNeighborhood S C base ε :=
     reference_mem_stateNeighborhood S C base hN.1.1.2.1
-  have hs₀ : stateSector S z₀.1 := hN.1.1.2.2.1.stateSector
+  have hs₀ : stateSector S z₀.1 := n04b_referenceState_sector hN.1.1.2.2.1
   have hi : e k = .inl (m, side) := e.apply_symm_apply _
   have hreg (p : PolarPoint) (hp : p ∈ Ω) :
       ContDiffAt ℝ ∞ (K.chart z₀ k) p ∧

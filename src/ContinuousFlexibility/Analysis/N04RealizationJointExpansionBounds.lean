@@ -100,7 +100,8 @@ theorem n04Realization_multilinear_twoSeminorm_bound
   let r : NNReal := ⟨R⁻¹, inv_nonneg.mpr hR.le⟩
   let q : Seminorm ℝ E := low + r • high
   have hq (x : E) : q x = low x + high x / R := by
-    simp only [q, add_apply, smul_apply, NNReal.smul_def, smul_eq_mul,
+    rw [show q = low + r • high from rfl, _root_.add_apply, _root_.smul_apply]
+    simp only [NNReal.smul_def, smul_eq_mul,
       r, NNReal.coe_mk, div_eq_mul_inv, mul_comm]
   have hunit (u : Fin k → E) (hu : ∀ i, q (u i) < 1) :
       (normSeminorm ℝ ℝ) (A u) ≤

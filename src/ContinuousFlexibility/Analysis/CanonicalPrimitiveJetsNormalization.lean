@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.CanonicalJetNormalization
+import ContinuousFlexibility.Analysis.N04RealizationPrimitiveNormalization
 import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
 import ContinuousFlexibility.Analysis.SolveReturnEquations
 
@@ -38,13 +39,8 @@ theorem n04Coordinates_atom_normalized_of_sector
     {z : AnnularState S × ℝ} (hz : stateSector S z.1)
     (m : ℕ) (v : CanonicalGeometry.Atom) :
     CanonicalGeometry.atom D T S C L (normalizedCanonicalData S K) z m v =
-      CanonicalGeometry.atom D T S C L K z m v := by
-  funext p
-  cases v <;> try rfl
-  all_goals
-    by_cases hp : K.positive m = true <;>
-      simp [CanonicalGeometry.atom, CanonicalGeometry.canonicalUnitPoint,
-        normalizedCanonicalData, hz, hp]
+      CanonicalGeometry.atom D T S C L K z m v :=
+  n04Realization_atom_normalized_of_sector hz m v
 
 /-- The same reference, actual tower, auxiliary source and transmission
 data satisfy the complete primitive-jet predicate after normalization. -/
@@ -52,46 +48,7 @@ theorem n04Coordinates_primitiveGeometryProperties_normalized
     {base : ℕ} {ε : ℝ} (hstate : referenceStateConditions D S C)
     (h : CanonicalGeometry.PrimitiveGeometryProperties D T S C L K base ε) :
     CanonicalGeometry.PrimitiveGeometryProperties D T S C L
-      (normalizedCanonicalData S K) base ε := by
-  rcases h with ⟨hradial, hprincipal, href, hcur, haux, htrans⟩
-  have hreference (m : ℕ) (v : CanonicalGeometry.Atom) :
-      CanonicalGeometry.atom D T S C L (normalizedCanonicalData S K)
-          (C.referenceState, 0) m v =
-        CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v :=
-    n04Coordinates_atom_normalized_of_sector hstate.stateSector m v
-  have hcurrent (z : CanonicalGeometry.Parameter S) (m : ℕ)
-      (v : CanonicalGeometry.Atom) :
-      CanonicalGeometry.atom D T S C L (normalizedCanonicalData S K)
-          (liftSectorParameter S C z) m v =
-        CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v :=
-    n04Coordinates_atom_normalized_of_sector (hstate.liftSectorParameter_sector z) m v
-  have hdifference :
-      CanonicalGeometry.differenceJets D T S C L (normalizedCanonicalData S K) =
-        CanonicalGeometry.differenceJets D T S C L K := by
-    funext z v m i j p
-    simp only [CanonicalGeometry.differenceJets, hcurrent, hreference]
-  have href' : CanonicalGeometry.ReferenceJets D T S C L
-      (normalizedCanonicalData S K) := by
-    simpa only [CanonicalGeometry.ReferenceJets, hreference,
-      normalizedCanonicalData_cell] using href
-  have hcur' : CanonicalGeometry.CurrentJets D T S C L
-      (normalizedCanonicalData S K) base ε := by
-    rcases hcur with ⟨hregular, hbound, J, hJ⟩
-    refine ⟨?_, ?_, ?_⟩
-    · intro z hz m v
-      simpa only [hcurrent] using hregular z hz m v
-    · simpa only [hdifference, normalizedCanonicalData_cell] using hbound
-    · let J' : SmoothDirections (sectorNeighborhood S base ε ε)
-          (CanonicalGeometry.differenceJets D T S C L (normalizedCanonicalData S K)) :=
-        J.congr (fun z _ => congrFun hdifference.symm z)
-      refine ⟨J', ?_⟩
-      simpa only [J', SmoothDirections.congr, normalizedCanonicalData_cell] using hJ
-  refine ⟨hradial, ?_, href', hcur', haux, htrans⟩
-  rcases hprincipal with ⟨hfields, hbound⟩
-  refine ⟨?_, hbound⟩
-  intro m p hp
-  simpa only [normalizedCanonicalData_coefficients,
-    normalizedCanonicalData_potential_of_sector K (z := (C.referenceState, 0))
-      hstate.stateSector] using hfields m p hp
+      (normalizedCanonicalData S K) base ε :=
+  n04Realization_primitiveGeometryProperties_normalized hstate h
 
 end ContinuousFlexibility.Analysis

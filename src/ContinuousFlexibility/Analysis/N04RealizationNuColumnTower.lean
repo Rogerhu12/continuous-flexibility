@@ -48,9 +48,21 @@ theorem n04Realization_exists_uniformNuColumn
             nuColumnField D S C (liftSectorParameter S C z) p) := by
   letI : IsTopologicalAddGroup (N07aNuParameter S) :=
     (n07aNuParameterGrading_withSeminorms S).isTopologicalAddGroup
-  obtain ⟨U, hU, hcenter, b₀, ell, N, hN, hdecode⟩ :=
+  have hseed :=
     n04Realization_exists_uniformNuReducedColumn h01.1.1 hT hS h01.1.2.2.2.1
       C.referenceState.1.1
+  let U : Set (N07aNuParameter S) := hseed.choose
+  have hU : IsOpen U := hseed.choose_spec.1
+  have hcenter : n07aNuParameterCenter S C.referenceState.1.1 ∈ U :=
+    hseed.choose_spec.2.1
+  let b₀ : ℕ := hseed.choose_spec.2.2.choose
+  let ell : ℕ := hseed.choose_spec.2.2.choose_spec.choose
+  let N : N07aNuParameter S → ScalarHeightSpace S :=
+    hseed.choose_spec.2.2.choose_spec.choose_spec.choose
+  have hN : FixedNeighborhoodSmoothTame (n07aNuParameterGrading S)
+      (scalarHeightGrading S) U b₀ ell N :=
+    hseed.choose_spec.2.2.choose_spec.choose_spec.choose_spec.1
+  have hdecode := hseed.choose_spec.2.2.choose_spec.choose_spec.choose_spec.2
   let c : N07aNuParameter S := n07aNuParameterCenter S C.referenceState.1.1
   let A : (StateDirections S × ℝ) → N07aNuParameter S :=
     fun z => c + n07aNuSectorProjectionCLM S z

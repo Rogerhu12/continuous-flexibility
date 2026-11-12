@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aGeometryJetBounds
 import ContinuousFlexibility.Analysis.MaterialSampleBounds
+import ContinuousFlexibility.Analysis.N04RealizationJetScalars
 
 /-!
 # Absolute unit jets at the actual material sample
@@ -58,13 +59,15 @@ theorem n04Coordinates_unitAtom_absolute_envelope
             (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m v) p| ≤
             A * T.E0 (T.sample (K.cell m)) ^ B *
               (1 + CanonicalGeometry.parameterGrading S (s + loss) z) := by
-  have hheight := material_sample_height_coefficient_power_bounded
-    (D := D) (T := T) hD hT K.cell 0 (by norm_num : (0 : ℝ) < 3 / 4)
-  let CH : ℝ := hheight.choose
-  have hCH : 0 < CH := hheight.choose_spec.1
-  have hHb := hheight.choose_spec.2
-  have hHeight (m : ℕ) : T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) ≤ CH := by
-    simpa only [CH, Real.rpow_zero, mul_one] using hHb m
+  have hHeight : ∃ CH : ℝ, 0 < CH ∧ ∀ m,
+      T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (K.cell m)) ^ (0 : ℝ) ≤ CH :=
+    material_sample_height_coefficient_power_bounded
+      hD hT K.cell 0 (by norm_num : (0 : ℝ) < 3 / 4)
+  let CH : ℝ := hHeight.choose
+  have hCH : 0 < CH := hHeight.choose_spec.1
+  have hHb (m : ℕ) : T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) ≤ CH := by
+    simpa only [CH, Real.rpow_zero, mul_one] using hHeight.choose_spec.2 m
   let loss : ℕ := hcur.2.1.choose
   have hdiff := hcur.2.1.choose_spec
   refine ⟨loss, fun s => ?_⟩
@@ -74,45 +77,17 @@ theorem n04Coordinates_unitAtom_absolute_envelope
   let B₁ : ℝ := (hdiff s).choose
   have hB₁ : 0 < B₁ := (hdiff s).choose_spec.1
   have hb₁ := (hdiff s).choose_spec.2
-  let A : ℝ := B₀ + B₁ * CH
-  let B : ℝ := max B₀ B₁
-  refine ⟨A, B, add_pos hB₀ (mul_pos hB₁ hCH),
-    hB₀.trans_le (le_max_left _ _), ?_⟩
+  have hscalar := n04Realization_referenceAndDifferenceEnvelope hB₀.le hB₁.le hCH.le
+  let Q : ℝ := hscalar.choose
+  have hQ : 0 < Q := hscalar.choose_spec.1
+  refine ⟨Q, Q, hQ, hQ, ?_⟩
   intro z hz m v p hp i j hij
-  let E : ℝ := T.E0 (T.sample (K.cell m))
-  let G : ℝ := CanonicalGeometry.parameterGrading S (s + loss) z
-  have hE : 1 ≤ E := hfloor m
-  have hE0 : 0 ≤ E := zero_le_one.trans hE
-  have hG : 0 ≤ G := apply_nonneg _ _
-  have hEB : 0 ≤ E ^ B := Real.rpow_nonneg hE0 B
-  have hH0 : 0 ≤ T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) :=
-    Real.rpow_nonneg
-      (hT.2.1 _ (materialSample_mem_interval hD hT (K.cell m))).2.1.le _
-  have he₀ : E ^ B₀ ≤ E ^ B :=
-    Real.rpow_le_rpow_of_exponent_le hE (le_max_left _ _)
-  have he₁ : E ^ B₁ ≤ E ^ B :=
-    Real.rpow_le_rpow_of_exponent_le hE (le_max_right _ _)
-  have hr : |mixedDerivative i j
-      (CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v) p| ≤
-        B₀ * E ^ B :=
-    (hb₀ m v p hp i j hij).trans (mul_le_mul_of_nonneg_left he₀ hB₀.le)
-  have hd : |CanonicalGeometry.differenceJets D T S C L K z v m i j ⟨p, hp⟩| ≤
-      B₁ * E ^ B * CH * G :=
-    (hb₁ z hz m v ⟨p, hp⟩ i j hij).trans
-      (mul_le_mul_of_nonneg_right
-        (mul_le_mul (mul_le_mul_of_nonneg_left he₁ hB₁.le)
-          (hHeight m) hH0 (mul_nonneg hB₁.le hEB)) hG)
-  have hExtra : 0 ≤ E ^ B * (B₁ * CH + B₀ * G) :=
-    mul_nonneg hEB (add_nonneg (mul_nonneg hB₁.le hCH.le) (mul_nonneg hB₀.le hG))
-  rw [n07a_geometryAtom_jet_decomposition href hcur z hz m v ⟨p, hp⟩ i j]
-  calc
-    _ ≤ |CanonicalGeometry.differenceJets D T S C L K z v m i j ⟨p, hp⟩| +
-        |mixedDerivative i j
-          (CanonicalGeometry.atom D T S C L K (C.referenceState, 0) m v) p| :=
-      abs_add_le _ _
-    _ ≤ B₁ * E ^ B * CH * G + B₀ * E ^ B := add_le_add hd hr
-    _ ≤ A * E ^ B * (1 + G) := by
-      dsimp only [A]
-      nlinarith [hExtra]
+  have he := congrArg abs
+    (n07a_geometryAtom_jet_decomposition href hcur z hz m v ⟨p, hp⟩ i j)
+  exact he.trans_le (hscalar.choose_spec.2
+    (T.E0 (T.sample (K.cell m))) (T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ))
+    (CanonicalGeometry.parameterGrading S (s + loss) z) _ _
+    (hfloor m) (hHb m) (apply_nonneg _ _)
+    (hb₀ m v p hp i j hij) (hb₁ z hz m v ⟨p, hp⟩ i j hij))
 
 end ContinuousFlexibility.Analysis

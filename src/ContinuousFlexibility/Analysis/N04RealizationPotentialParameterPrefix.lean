@@ -81,7 +81,12 @@ theorem n04Realization_potential_shifted_parameter_bound (k a b : ℕ) (RH : ℝ
     have h := n04Realization_parameter_rescale_bound
       (((RF i).parameter u w q hq).D (d.partSize j) x) (v ∘ d.emb j)
       hRpos α (((u + w : ℕ) : ℝ) / ((s : ℝ) + 1)) (W * (C * E ^ P)) hraw'
-    simpa only [v', Function.comp_apply, mul_assoc] using h
+    have hvcomp : v' ∘ d.emb j =
+        (fun l => R ^ (-α) • (v ∘ d.emb j) l) := by
+      funext l
+      simp only [Function.comp_apply, v']
+    rw [hvcomp]
+    simpa only [mul_assoc] using h
   have hraw := hb U hU Ω hΩ A H Q RF q hq J x hx v' (a + b + 2) le_rfl
     W E C P ρ hW hWR hE hC hP hρ hbase' hjet'
   rw [hρpow] at hraw

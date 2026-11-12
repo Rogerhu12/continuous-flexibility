@@ -50,11 +50,14 @@ theorem n04Coordinates_currentAtoms_uniformly_close
   let B : ℝ := (hdiff 0).choose
   have hB : 0 < B := (hdiff 0).choose_spec.1
   have hb := (hdiff 0).choose_spec.2
-  have hheight := material_sample_height_coefficient_power_bounded
-    (D := D) (T := T) hD hT K.cell B (by norm_num : (0 : ℝ) < 3 / 4)
-  let CH : ℝ := hheight.choose
-  have hCH : 0 < CH := hheight.choose_spec.1
-  have hCHb := hheight.choose_spec.2
+  have hHeight : ∃ CH : ℝ, 0 < CH ∧ ∀ m,
+      T.H (T.sample (K.cell m)) ^ (3 / 4 : ℝ) *
+        T.E0 (T.sample (K.cell m)) ^ B ≤ CH :=
+    material_sample_height_coefficient_power_bounded
+      hD hT K.cell B (by norm_num : (0 : ℝ) < 3 / 4)
+  let CH : ℝ := hHeight.choose
+  have hCH : 0 < CH := hHeight.choose_spec.1
+  have hCHb := hHeight.choose_spec.2
   let M : ℝ := B * CH
   have hM : 0 < M := mul_pos hB hCH
   let base' : ℕ := max base loss

@@ -71,11 +71,11 @@ theorem divergenceOperator_radial_height_of_coefficient_germs
     divergenceOperator A (fun q : PolarPoint => H q.1) p =
         radialPartial (fun q : PolarPoint => w q.1 * deriv H q.1) p +
           angularPartial (fun _ : PolarPoint => (0 : ℝ)) p := by
-      have hrad' := hrad.fderiv_eq (𝕜 := ℝ)
-      have hang' := hang.fderiv_eq (𝕜 := ℝ)
-      simp only [radialPartial, angularPartial] at hrad' hang'
-      unfold divergenceOperator radialPartial angularPartial
-      rw [hrad', hang']
+      exact congrArg₂ (fun a b : ℝ => a + b)
+        (congrArg (fun D : PolarPoint →L[ℝ] ℝ => D (1, 0))
+          (hrad.fderiv_eq (𝕜 := ℝ)))
+        (congrArg (fun D : PolarPoint →L[ℝ] ℝ => D (0, 1))
+          (hang.fderiv_eq (𝕜 := ℝ)))
     _ = deriv (fun r => w r * deriv H r) p.1 := by
       rw [show radialPartial (fun q : PolarPoint => w q.1 * deriv H q.1) p =
         deriv (fun r => w r * deriv H r) p.1 from
@@ -97,12 +97,11 @@ theorem inverseChartPotential_radial_cylinder
           deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /
             deriv Y (Function.invFun Y p.1) := by
   have hdiv := divergenceOperator_radial_height_of_coefficient_germs hw hH ha hb
+  have hJ : planeJacobian (positiveReferenceCylinderChart Y)
+      (positiveReferenceCylinderInverse Y p) = deriv Y (Function.invFun Y p.1) :=
+    planeJacobian_positiveReferenceCylinderChart
+      (p := positiveReferenceCylinderInverse Y p) hY
   unfold inverseChartPotential
-  rw [hdiv, planeJacobian_positiveReferenceCylinderChart
-    (p := positiveReferenceCylinderInverse Y p) hY]
-  change H (Function.invFun Y p.1) *
-    deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /
-      |deriv Y (Function.invFun Y p.1)| = _
-  rw [abs_of_pos hYpos]
+  rw [hdiv, hJ, abs_of_pos hYpos]
 
 end ContinuousFlexibility.Analysis

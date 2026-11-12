@@ -108,8 +108,9 @@ theorem positiveReferenceCylinder_rangeGeometry
   have hmonoInv : StrictMono (Function.invFun Y) := by
     intro x y hxy
     apply hmono.lt_iff_lt.mp
-    simpa only [Function.rightInverse_invFun hYbij.2 x,
-      Function.rightInverse_invFun hYbij.2 y] using hxy
+    rw [Function.rightInverse_invFun hYbij.2 x,
+      Function.rightInverse_invFun hYbij.2 y]
+    exact hxy
   have hleftInv : Function.invFun Y u = l := by
     rw [← hleft]
     exact Function.leftInverse_invFun hYbij.1 l

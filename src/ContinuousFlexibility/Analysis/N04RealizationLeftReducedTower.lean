@@ -22,6 +22,32 @@ set_option backward.isDefEq.respectTransparency false
 
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
 
+private theorem decodedFixedDirection_hasDerivAt
+    {E F Z : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    {U : Set E} {f : E → F} (J : SmoothDirections U f) (L : F →L[ℝ] ℝ)
+    (Φ : E → Z) (R : Z → ℝ) (x : E) (hx : x ∈ U) (w : E) (γ : ℝ → Z)
+    (hdecode : ∀ y ∈ U, L (f y) = R (Φ y))
+    (hcurve : ∀ t, Φ (x + t • w) = γ t) :
+    HasDerivAt (fun t : ℝ => R (γ t))
+      (L (J.D 1 x (Fin.snoc Fin.elim0 w))) 0 := by
+  have hd := J.hasDerivAt_linear_output L 0 x hx Fin.elim0 w
+  have hv : (Fin.cons w Fin.elim0 : Fin 1 → E) =
+      Fin.snoc (α := fun _ : Fin 1 => E) Fin.elim0 w := by
+    funext i
+    have hi : i = 0 := by apply Fin.ext; omega
+    subst i
+    simp only [Fin.cons_zero, Fin.snoc_zero]
+  rw [hv] at hd
+  have hline : Continuous (fun t : ℝ => x + t • w) :=
+    continuous_const.add (continuous_id.smul continuous_const)
+  have hevent : ∀ᶠ t in 𝓝 (0 : ℝ), x + t • w ∈ U :=
+    (hline.tendsto 0).eventually (J.open_domain.mem_nhds (by simpa using hx))
+  apply hd.congr_of_eventuallyEq
+  filter_upwards [hevent] with t ht
+  rw [J.zero (x + t • w) ht, hdecode _ ht, hcurve t]
+
 /-- The existing reduced parameter respects every common-height
 direction, including the fixed left-height direction. -/
 theorem n04Realization_nuParameter_heightDirection
@@ -55,8 +81,19 @@ theorem n04Realization_exists_uniformLeftReducedColumn
     (n07aNuParameterGrading_withSeminorms S).isTopologicalAddGroup
   letI : ContinuousSMul ℝ (N07aNuParameter S) :=
     (n07aNuParameterGrading_withSeminorms S).continuousSMul
-  obtain ⟨U, hU, hcenter, base, loss, f, hf, hdecode⟩ :=
+  have hseed :=
     n04Realization_exists_uniformNuReducedResidual hD hT hS hb v₀
+  let U : Set (N07aNuParameter S) := hseed.choose
+  have hU : IsOpen U := hseed.choose_spec.1
+  have hcenter : n07aNuParameterCenter S v₀ ∈ U := hseed.choose_spec.2.1
+  let base : ℕ := hseed.choose_spec.2.2.choose
+  let loss : ℕ := hseed.choose_spec.2.2.choose_spec.choose
+  let f : N07aNuParameter S → ScalarHeightSpace S :=
+    hseed.choose_spec.2.2.choose_spec.choose_spec.choose
+  have hf : FixedNeighborhoodSmoothTame (n07aNuParameterGrading S)
+      (scalarHeightGrading S) U base loss f :=
+    hseed.choose_spec.2.2.choose_spec.choose_spec.choose_spec.1
+  have hdecode := hseed.choose_spec.2.2.choose_spec.choose_spec.choose_spec.2
   obtain ⟨δ, hδ, _, hgeometry⟩ := exists_scalarStateBall_geometry hD hT hS v₀
   have hpre : n07aNuParameterState hT hS hb ⁻¹' scalarStateBall S v₀ 4 δ ∈
       𝓝 (n07aNuParameterCenter S v₀) := by
@@ -81,30 +118,15 @@ theorem n04Realization_exists_uniformLeftReducedColumn
   refine ⟨V, hV, ⟨hcenter, hWcenter⟩, base, loss, d,
     n04Realization_fixedNeighborhood_fixedDirection J hJ w, hg, ?_⟩
   intro x hx p hp
-  have hd := scalarHeightTower_decode_derivative hS J 0 x hx Fin.elim0 w p
-  have hv : (Fin.cons w Fin.elim0 : Fin 1 → N07aNuParameter S) =
-      Fin.snoc (α := fun _ : Fin 1 => N07aNuParameter S) Fin.elim0 w := by
-    funext i
-    have hi : i = 0 := by
-      apply Fin.ext
-      omega
-    subst i
-    simp only [Fin.cons_zero, Fin.snoc_zero]
-  rw [hv] at hd
-  have hline : Continuous (fun t : ℝ => x + t • w) :=
-    continuous_const.add (continuous_id.smul continuous_const)
-  have hevent : ∀ᶠ t in 𝓝 (0 : ℝ), x + t • w ∈ V :=
-    (hline.tendsto 0).eventually (hV.mem_nhds (by simpa using hx))
-  have hd' : HasDerivAt
-      (fun t : ℝ => scalarStateResidual D S
-        (n07aNuParameterState hT hS hb x + t • scalarHeightDirection S (0, 1)) p)
-      ((S.height scalarBeta).decode (d x) p) 0 := by
-    apply hd.congr_of_eventuallyEq
-    filter_upwards [hevent] with t ht
-    rw [J.zero (x + t • w) ht, hdecode _ ht.1,
-      show n07aNuParameterState hT hS hb (x + t • w) =
-        n07aNuParameterState hT hS hb x + t • scalarHeightDirection S (0, 1) from
-          n04Realization_nuParameter_heightDirection hT hS hb (0, 1) x t]
-  exact hd'.unique (n04Realization_scalarLeft_hasDerivAt hD hT hS (hg x hx) hp)
+  let L : ScalarHeightSpace S →L[ℝ] ℝ :=
+    (S.height scalarBeta).evaluationCLM ((hS.1 scalarBeta).2.2.1) p
+  have hd := decodedFixedDirection_hasDerivAt J L
+    (n07aNuParameterState hT hS hb) (fun u => scalarStateResidual D S u p) x hx w
+    (fun t => n07aNuParameterState hT hS hb x + t • scalarHeightDirection S (0, 1))
+    (fun y hy => by
+      simpa only [L, SobolevModelData.evaluationCLM_apply] using hdecode y hy.1 p)
+    (n04Realization_nuParameter_heightDirection hT hS hb (0, 1) x)
+  simpa only [L, SobolevModelData.evaluationCLM_apply, d] using
+    hd.unique (n04Realization_scalarLeft_hasDerivAt hD hT hS (hg x hx) hp)
 
 end ContinuousFlexibility.Analysis

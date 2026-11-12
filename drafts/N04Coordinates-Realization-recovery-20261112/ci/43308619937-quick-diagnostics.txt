@@ -1,0 +1,636 @@
+Run 43308619937, job 131498414528, head 7e1eea240d12713855cf8616938625eda0d08562.
+Full quick.log downloaded once as build-log artifact 13985800905.
+Artifact SHA256: 9dfb92530c07ca429203fc038c79c2212cf73088e3a1ead45d8febd595b29be1.
+The complete archive is retained by GitHub Actions; these are the unmodified diagnostic blocks.
+
+error: src/ContinuousFlexibility/Analysis/RootTravelOppositeCoordinates.lean:176:6: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (n04bRootCoordinate (n04bTravelOrientation T side s) / n04bRootCutRadius T) ^ ?z
+in the target expression
+  (n04bRootHalfCoordinate T side s / n04bRootCutRadius T) ^ (3 / 2) +
+      (n04bRootHalfCoordinate T (!side) s / n04bRootCutRadius T) ^ (3 / 2) =
+    2
+
+T s : ℝ
+hT : 0 < T
+side : Bool
+hs : s ∈ Ioo 0 T
+ha : 0 < n04bRootCoordinate (n04bTravelOrientation T side s)
+hb : 0 < n04bRootCoordinate (n04bTravelOrientation T (!side) s)
+hρ : 0 < n04bRootCutRadius T
+hsum : n04bRootTravel (n04bRootHalfCoordinate T side s) + n04bRootTravel (n04bRootHalfCoordinate T (!side) s) = T
+hcut : n04bRootTravel (n04bRootCutRadius T) = T / 2
+⊢ (n04bRootHalfCoordinate T side s / n04bRootCutRadius T) ^ (3 / 2) +
+      (n04bRootHalfCoordinate T (!side) s / n04bRootCutRadius T) ^ (3 / 2) =
+    2
+
+error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean:37:4: Application type mismatch: The argument
+  hasFDerivAt_snd
+has type
+  HasFDerivAt Prod.snd (ContinuousLinearMap.snd ?m.177 ℝ ℝ) (r, θ)
+but is expected to have type
+  HasFDerivAt ?m.175 ?m.176 (r, θ)
+in the application
+  HasFDerivAt.prodMk (HasDerivAt.comp_hasFDerivAt (r, θ) hf ?m.160) hasFDerivAt_snd
+
+error: src/ContinuousFlexibility/Analysis/ActualReferenceNegativeRadialFields.lean:114:48: Invalid field `stateSector`: The environment does not contain `And.stateSector`, so it is not possible to project the field `stateSector` from an expression
+  hN.left.left.right.right.left
+of type
+  (∀ (p : PolarPoint), stateU S C.referenceState p = D.phi p.1 * Radial.cosineMode 2 p.2) ∧
+    C.referenceState.1.2 = 0 ∧
+      C.referenceState.2.1 = 0 ∧
+        C.referenceState.2.2.1 = 0 ∧ C.referenceState.2.2.2 = 0 ∧ referenceRow D (stateU S C.referenceState) = 1
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:111:4: Type mismatch: After simplification, term
+  hxy
+ has type
+  x < y
+but is expected to have type
+  Y (Function.invFun Y x) < Y (Function.invFun Y y)
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:141:6: Type mismatch: After simplification, term
+  hmono hp.left.left
+ has type
+  @LT.lt ℝ Real.instPreorder.toLT u (Y p.1)
+but is expected to have type
+  @LT.lt ℝ Real.instPreorder.toLT u (positiveReferenceCylinderChart Y p).1
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:142:6: Type mismatch: After simplification, term
+  hmono hp.left.right
+ has type
+  @LT.lt ℝ Real.instPreorder.toLT (Y p.1) v
+but is expected to have type
+  @LT.lt ℝ Real.instPreorder.toLT (positiveReferenceCylinderChart Y p).1 v
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:145:6: Type mismatch: After simplification, term
+  hmonoInv hp.left.left
+ has type
+  @LT.lt ℝ Real.instPreorder.toLT l (Function.invFun Y p.1)
+but is expected to have type
+  @LT.lt ℝ Real.instPreorder.toLT l (positiveReferenceCylinderInverse Y p).1
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:146:6: Type mismatch: After simplification, term
+  hmonoInv hp.left.right
+ has type
+  @LT.lt ℝ Real.instPreorder.toLT (Function.invFun Y p.1) r
+but is expected to have type
+  @LT.lt ℝ Real.instPreorder.toLT (positiveReferenceCylinderInverse Y p).1 r
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:149:6: Type mismatch: After simplification, term
+  StrictMono.monotone hmono hp.left.left
+ has type
+  @LE.le ℝ Real.instPreorder.toLE u (Y p.1)
+but is expected to have type
+  @LE.le ℝ Real.instPreorder.toLE u (positiveReferenceCylinderChart Y p).1
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:150:6: Type mismatch: After simplification, term
+  StrictMono.monotone hmono hp.left.right
+ has type
+  @LE.le ℝ Real.instPreorder.toLE (Y p.1) v
+but is expected to have type
+  @LE.le ℝ Real.instPreorder.toLE (positiveReferenceCylinderChart Y p).1 v
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:153:6: Type mismatch: After simplification, term
+  StrictMono.monotone hmonoInv hp.left.left
+ has type
+  @LE.le ℝ Real.instPreorder.toLE l (Function.invFun Y p.1)
+but is expected to have type
+  @LE.le ℝ Real.instPreorder.toLE l (positiveReferenceCylinderInverse Y p).1
+
+error: src/ContinuousFlexibility/Analysis/PositiveChartRangeGeometry.lean:154:6: Type mismatch: After simplification, term
+  StrictMono.monotone hmonoInv hp.left.right
+ has type
+  @LE.le ℝ Real.instPreorder.toLE (Function.invFun Y p.1) r
+but is expected to have type
+  @LE.le ℝ Real.instPreorder.toLE (positiveReferenceCylinderInverse Y p).1 r
+
+error: src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentAbsoluteJets.lean:59:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+error: src/ContinuousFlexibility/Analysis/CanonicalCurrentUniformCloseness.lean:48:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+error: src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean:39:50: unsolved goals
+case pos
+D : ReferenceData
+T : MaterialData
+S : PhysicalSpacesData
+C : NonlinearGeometryData S
+L : ReturnCorrectionData S
+K : CanonicalData S
+z : AnnularState S × ℝ
+hz : stateSector S z.1
+m : ℕ
+p : PolarPoint
+hp : K.positive m = true
+⊢ K.potential z m
+      (CanonicalGeometry.canonicalUnitPoint
+        { left := K.left, right := K.right, physicalLeft := K.physicalLeft, physicalRight := K.physicalRight,
+          physicalDomain := K.physicalDomain, cell := K.cell, positive := K.positive, chart := K.chart,
+          inverseChart := K.inverseChart, height := K.height, coefficients := K.coefficients,
+          potential := fun z => if stateSector S z.1 then K.potential z else fun x x_1 => 0,
+          dividedDifference := fun z m =>
+            if stateSector S z.1 ∧ K.positive m = true then K.dividedDifference z m
+            else ContinuousFlexibility.Analysis.zeroCanonicalCoefficients✝,
+          cutPair := K.cutPair, cutRadius := K.cutRadius, normalizationRegion := K.normalizationRegion }
+        m p) =
+    K.potential z m (CanonicalGeometry.canonicalUnitPoint K m p)
+
+case neg
+D : ReferenceData
+T : MaterialData
+S : PhysicalSpacesData
+C : NonlinearGeometryData S
+L : ReturnCorrectionData S
+K : CanonicalData S
+z : AnnularState S × ℝ
+hz : stateSector S z.1
+m : ℕ
+p : PolarPoint
+hp : ¬K.positive m = true
+⊢ K.potential z m
+      (CanonicalGeometry.canonicalUnitPoint
+        { left := K.left, right := K.right, physicalLeft := K.physicalLeft, physicalRight := K.physicalRight,
+          physicalDomain := K.physicalDomain, cell := K.cell, positive := K.positive, chart := K.chart,
+          inverseChart := K.inverseChart, height := K.height, coefficients := K.coefficients,
+          potential := fun z => if stateSector S z.1 then K.potential z else fun x x_1 => 0,
+          dividedDifference := fun z m =>
+            if stateSector S z.1 ∧ K.positive m = true then K.dividedDifference z m
+            else ContinuousFlexibility.Analysis.zeroCanonicalCoefficients✝,
+          cutPair := K.cutPair, cutRadius := K.cutRadius, normalizationRegion := K.normalizationRegion }
+        m p) =
+    K.potential z m (CanonicalGeometry.canonicalUnitPoint K m p)
+
+case pos
+D : ReferenceData
+T : MaterialData
+S : PhysicalSpacesData
+C : NonlinearGeometryData S
+L : ReturnCorrectionData S
+K : CanonicalData S
+z : AnnularState S × ℝ
+hz : stateSector S z.1
+m : ℕ
+p : PolarPoint
+hp : K.positive m = true
+⊢ (K.dividedDifference z m).a
+      (CanonicalGeometry.canonicalUnitPoint
+        { left := K.left, right := K.right, physicalLeft := K.physicalLeft, physicalRight := K.physicalRight,
+          physicalDomain := K.physicalDomain, cell := K.cell, positive := K.positive, chart := K.chart,
+          inverseChart := K.inverseChart, height := K.height, coefficients := K.coefficients,
+          potential := fun z => if stateSector S z.1 then K.potential z else fun x x_1 => 0,
+          dividedDifference := fun z m =>
+            if stateSector S z.1 ∧ K.positive m = true then K.dividedDifference z m
+            else ContinuousFlexibility.Analysis.zeroCanonicalCoefficients✝,
+          cutPair := K.cutPair, cutRadius := K.cutRadius, normalizationRegion := K.normalizationRegion }
+        m p) =
+    (K.dividedDifference z m).a (CanonicalGeometry.canonicalUnitPoint K m p)
+
+case pos
+D : ReferenceData
+T : MaterialData
+S : PhysicalSpacesData
+C : NonlinearGeometryData S
+L : ReturnCorrectionData S
+K : CanonicalData S
+z : AnnularState S × ℝ
+hz : stateSector S z.1
+m : ℕ
+p : PolarPoint
+hp : K.positive m = true
+⊢ (K.dividedDifference z m).b
+      (CanonicalGeometry.canonicalUnitPoint
+        { left := K.left, right := K.right, physicalLeft := K.physicalLeft, physicalRight := K.physicalRight,
+          physicalDomain := K.physicalDomain, cell := K.cell, positive := K.positive, chart := K.chart,
+          inverseChart := K.inverseChart, height := K.height, coefficients := K.coefficients,
+          potential := fun z => if stateSector S z.1 then K.potential z else fun x x_1 => 0,
+          dividedDifference := fun z m =>
+            if stateSector S z.1 ∧ K.positive m = true then K.dividedDifference z m
+            else ContinuousFlexibility.Analysis.zeroCanonicalCoefficients✝,
+          cutPair := K.cutPair, cutRadius := K.cutRadius, normalizationRegion := K.normalizationRegion }
+        m p) =
+    (K.dividedDifference z m).b (CanonicalGeometry.canonicalUnitPoint K m p)
+
+case pos
+D : ReferenceData
+T : MaterialData
+S : PhysicalSpacesData
+C : NonlinearGeometryData S
+L : ReturnCorrectionData S
+K : CanonicalData S
+z : AnnularState S × ℝ
+hz : stateSector S z.1
+m : ℕ
+p : PolarPoint
+hp : K.positive m = true
+⊢ (K.dividedDifference z m).c
+      (CanonicalGeometry.canonicalUnitPoint
+        { left := K.left, right := K.right, physicalLeft := K.physicalLeft, physicalRight := K.physicalRight,
+          physicalDomain := K.physicalDomain, cell := K.cell, positive := K.positive, chart := K.chart,
+          inverseChart := K.inverseChart, height := K.height, coefficients := K.coefficients,
+          potential := fun z => if stateSector S z.1 then K.potential z else fun x x_1 => 0,
+          dividedDifference := fun z m =>
+            if stateSector S z.1 ∧ K.positive m = true then K.dividedDifference z m
+            else ContinuousFlexibility.Analysis.zeroCanonicalCoefficients✝,
+          cutPair := K.cutPair, cutRadius := K.cutRadius, normalizationRegion := K.normalizationRegion }
+        m p) =
+    (K.dividedDifference z m).c (CanonicalGeometry.canonicalUnitPoint K m p)
+
+error: src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean:76:4: Type mismatch: After simplification, term
+  hcur
+ has type
+  (∀ z ∈ sectorNeighborhood S base ε ε,
+      ∀ (m : ℕ) (a : CanonicalGeometry.Atom),
+        ContDiffOn ℝ (↑⊤) (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m a)
+            CanonicalGeometry.unitStrip ∧
+          ∀ p ∈ CanonicalGeometry.unitStrip,
+            CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m a (p + (0, Real.pi)) =
+              CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m a p) ∧
+    (∃ loss,
+        ∀ (s : ℕ),
+          ∃ B,
+            0 < B ∧
+              ∀ z ∈ sectorNeighborhood S base ε ε,
+                ∀ (m : ℕ) (a : CanonicalGeometry.Atom) (p : ↑CanonicalGeometry.unitStrip) (i j : ℕ),
+                  i + j ≤ s →
+                    |CanonicalGeometry.differenceJets D T S C L K z a m i j p| ≤
+                      B * T.E0 (T.sample (K.cell m)) ^ B * T.H (T.sample (K.cell m)) ^ (3 / 4) *
+                        (CanonicalGeometry.parameterGrading S (s + loss)) z) ∧
+      ∃ (J : SmoothDirections (sectorNeighborhood S base ε ε) (CanonicalGeometry.differenceJets D T S C L K)),
+        ∀ (k : ℕ),
+          ∃ loss,
+            ∀ (s : ℕ),
+              ∃ B,
+                0 < B ∧
+                  ∀ z ∈ sectorNeighborhood S base ε ε,
+                    ∀ (v : Fin k → CanonicalGeometry.Parameter S) (m : ℕ) (a : CanonicalGeometry.Atom)
+                      (p : ↑CanonicalGeometry.unitStrip) (i j : ℕ),
+                      i + j ≤ s →
+                        |(J.D k z) v a m i j p| ≤
+                          B * T.E0 (T.sample (K.cell m)) ^ B * T.H (T.sample (K.cell m)) ^ (3 / 4) *
+                            ((1 + (CanonicalGeometry.parameterGrading S (s + loss)) z) *
+                                ∏ l, (CanonicalGeometry.parameterGrading S base) (v l) +
+                              ∑ l,
+                                (CanonicalGeometry.parameterGrading S (s + loss)) (v l) *
+                                  ∏ l ∈ Finset.univ.erase l, (CanonicalGeometry.parameterGrading S base) (v l))
+but is expected to have type
+  (∀ z ∈ sectorNeighborhood S base ε ε,
+      ∀ (m : ℕ) (a : CanonicalGeometry.Atom),
+        ContDiffOn ℝ (↑⊤) (CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m a)
+            CanonicalGeometry.unitStrip ∧
+          ∀ p ∈ CanonicalGeometry.unitStrip,
+            CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m a (p + (0, Real.pi)) =
+              CanonicalGeometry.atom D T S C L K (liftSectorParameter S C z) m a p) ∧
+    (∃ loss,
+        ∀ (s : ℕ),
+          ∃ B,
+            0 < B ∧
+              ∀ z ∈ sectorNeighborhood S base ε ε,
+                ∀ (m : ℕ) (a : CanonicalGeometry.Atom) (p : ↑CanonicalGeometry.unitStrip) (i j : ℕ),
+                  i + j ≤ s →
+                    |CanonicalGeometry.differenceJets D T S C L K z a m i j p| ≤
+                      B * T.E0 (T.sample (K.cell m)) ^ B * T.H (T.sample (K.cell m)) ^ (3 / 4) *
+                        (CanonicalGeometry.parameterGrading S (s + loss)) z) ∧
+      ∃ (J :
+        SmoothDirections (sectorNeighborhood S base ε ε)
+          (CanonicalGeometry.differenceJets D T S C L (normalizedCanonicalData S K))),
+        ∀ (k : ℕ),
+          ∃ loss,
+            ∀ (s : ℕ),
+              ∃ B,
+                0 < B ∧
+                  ∀ z ∈ sectorNeighborhood S base ε ε,
+                    ∀ (v : Fin k → CanonicalGeometry.Parameter S) (m : ℕ) (a : CanonicalGeometry.Atom)
+                      (p : ↑CanonicalGeometry.unitStrip) (i j : ℕ),
+                      i + j ≤ s →
+                        |(J.D k z) v a m i j p| ≤
+                          B * T.E0 (T.sample (K.cell m)) ^ B * T.H (T.sample (K.cell m)) ^ (3 / 4) *
+                            ((1 + (CanonicalGeometry.parameterGrading S (s + loss)) z) *
+                                ∏ l, (CanonicalGeometry.parameterGrading S base) (v l) +
+                              ∑ l,
+                                (CanonicalGeometry.parameterGrading S (s + loss)) (v l) *
+                                  ∏ l ∈ Finset.univ.erase l, (CanonicalGeometry.parameterGrading S base) (v l))
+
+error: src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean:83:50: Application type mismatch: The argument
+  referenceStateConditions.stateSector hstate
+has type
+  stateSector S C.referenceState
+but is expected to have type
+  stateSector S ?m.171.1
+in the application
+  normalizedCanonicalData_potential_of_sector K (referenceStateConditions.stateSector hstate)
+
+error: src/ContinuousFlexibility/Analysis/CanonicalPrimitiveJetsNormalization.lean:82:2: Type mismatch: After simplification, term
+  hfields m p hp
+ has type
+  0 < (K.coefficients (C.referenceState, 0) m).a p ∧
+    (K.coefficients (C.referenceState, 0) m).b p = 0 ∧
+      (K.coefficients (C.referenceState, 0) m).a p = (K.coefficients (C.referenceState, 0) m).a (p.1, 0) ∧
+        (K.coefficients (C.referenceState, 0) m).c p = (K.coefficients (C.referenceState, 0) m).c (p.1, 0) ∧
+          K.potential (C.referenceState, 0) m p = K.potential (C.referenceState, 0) m (p.1, 0)
+but is expected to have type
+  0 < (K.coefficients (C.referenceState, 0) m).a p ∧
+    (K.coefficients (C.referenceState, 0) m).b p = 0 ∧
+      (K.coefficients (C.referenceState, 0) m).a p = (K.coefficients (C.referenceState, 0) m).a (p.1, 0) ∧
+        (K.coefficients (C.referenceState, 0) m).c p = (K.coefficients (C.referenceState, 0) m).c (p.1, 0) ∧
+          (normalizedCanonicalData S K).potential (C.referenceState, 0) m p =
+            (normalizedCanonicalData S K).potential (C.referenceState, 0) m (p.1, 0)
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationNuColumnTower.lean:51:2: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationLeftReducedTower.lean:104:8: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationLeftReducedTower.lean:38:0: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationFiniteScalarComposition.lean:54:6: Type mismatch
+  Finset.single_le_sum (fun i x => Nat.cast_nonneg (?m.288 i)) (Finset.mem_univ ⟨j, Nat.lt_succ_of_le hj⟩)
+has type
+  ↑(?m.288 ⟨j, ⋯⟩) ≤ ∑ x, ↑(?m.288 x)
+but is expected to have type
+  ↑(Fintype.card (OrderedFinpartition j)) ≤ ∑ i, ↑(Fintype.card (OrderedFinpartition ↑i))
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationFiniteScalarComposition.lean:140:8: Type mismatch: After simplification, term
+  hh
+ has type
+  @LE.le ℝ Real.instLE ‖((JO c.length).D (d.partSize j) x) (v ∘ d.emb j)‖ (H * B0)
+but is expected to have type
+  @LE.le ℝ Real.instLE
+    ‖((Fin.cases (JO c.length) (fun i => F.parameter (ra c i) (an c i) q hq) 0).D (d.partSize j) x) (v ∘ d.emb j)‖
+    (H * B0)
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationFiniteScalarComposition.lean:145:8: Type mismatch: After simplification, term
+  hh
+ has type
+  @LE.le ℝ Real.instLE ‖((F.parameter (ra c i) (an c i) q hq).D (d.partSize j) x) (v ∘ d.emb j)‖
+    (H * (M * t ^ c.partSize i))
+but is expected to have type
+  @LE.le ℝ Real.instLE
+    ‖((Fin.cases (JO c.length) (fun i => F.parameter (ra c i) (an c i) q hq) i.succ).D (d.partSize j) x) (v ∘ d.emb j)‖
+    (H * (M * t ^ c.partSize i))
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationJointExpansionBounds.lean:102:48: unsolved goals
+E : Type u_1
+inst✝² : AddCommGroup E
+inst✝¹ : Module ℝ E
+inst✝ : TopologicalSpace E
+k : ℕ
+A : E [×k]→L[ℝ] ℝ
+low high : Seminorm ℝ E
+C R : ℝ
+hC : 0 ≤ C
+hR : 0 < R
+hA : ∀ (v : Fin k → E), (∀ (i : Fin k), low (v i) ≤ 1) → (∀ (i : Fin k), high (v i) ≤ R) → |A v| ≤ C
+v : Fin k → E
+r : NNReal := ⟨R⁻¹, ⋯⟩
+q : Seminorm ℝ E := low + r • high
+x : E
+⊢ low x + (⟨R⁻¹, ⋯⟩ • high) x = low x + R⁻¹ * high x
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationHeightJointDirections.lean:89:30: unsolved goals
+X : Type u_1
+inst✝⁴ : TopologicalSpace X
+inst✝³ : AddCommGroup X
+inst✝² : Module ℝ X
+inst✝¹ : IsTopologicalAddGroup X
+inst✝ : ContinuousSMul ℝ X
+D : ReferenceData
+T : MaterialData
+γ : ℝ
+M : SobolevModelData
+U : Set X
+f : X → ↥M.Space
+g : X → PolarPoint → ℝ
+hT : IsMaterialData D T
+hM : IsSobolevModel D T γ M
+hγ : 0 < γ
+p : ℕ → Seminorm ℝ X
+hp : Monotone p
+hcp : ∀ (n : ℕ), Continuous ⇑(p n)
+base loss : ℕ
+J : SmoothDirections U f
+hJ : UniformScalarTowerEstimate p M.grading U base loss f J
+heq : ∀ x ∈ U, M.decode (f x) = g x
+hconv : Convex ℝ U
+RF : MixedJetRegularity U (annularOpen D) g := n04Realization_heightFieldMixedJets hT hM J heq
+hΩ : IsOpen (annularOpen D)
+K : SmoothDirections ((U ×ˢ Ioo D.a D.b) ×ˢ univ) fun x => mixedDerivative 0 0 (g x.1.1) (x.1.2, x.2) :=
+  mixedScalarSpatialJointDirections RF.parameter ⋯ hconv ⋯ ⋯ ⋯ ⋯ ⋯ ⋯
+L : SmoothDirections (U ×ˢ annularOpen D) fun x =>
+  mixedDerivative 0 0 (g ((parameterSpatialAssociation X) x).1.1)
+    (((parameterSpatialAssociation X) x).1.2, ((parameterSpatialAssociation X) x).2) :=
+  K.compLinear (parameterSpatialAssociation X) ⋯ ⋯
+x : X × PolarPoint
+x✝ : x ∈ U ×ˢ annularOpen D
+⊢ g ((parameterSpatialAssociation X) x).1.1
+      (((parameterSpatialAssociation X) x).1.2, ((parameterSpatialAssociation X) x).2) =
+    g x.1 x.2
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPrimitiveDirectionClosure.lean:111:6: Type mismatch: After simplification, term
+  hreference (1, 0) j hj
+ has type
+  @HasPositiveEnvelope X W fun x =>
+    ‖iteratedFDeriv ℝ j (canonicalPrimitiveDirection C K (z x) (m x) 1 ∘ n07bMaterialRadiusChart T) (p x)‖
+but is expected to have type
+  @HasPositiveEnvelope X W fun x =>
+    ‖iteratedFDeriv ℝ j (canonicalPrimitiveDirection C K (z x) (m x) ⟨1, ⋯⟩ ∘ n07bMaterialRadiusChart T) (p x)‖
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPrimitiveDirectionClosure.lean:112:6: Type mismatch: After simplification, term
+  hreference (0, 1) j hj
+ has type
+  @HasPositiveEnvelope X W fun x =>
+    ‖iteratedFDeriv ℝ j (canonicalPrimitiveDirection C K (z x) (m x) 2 ∘ n07bMaterialRadiusChart T) (p x)‖
+but is expected to have type
+  @HasPositiveEnvelope X W fun x =>
+    ‖iteratedFDeriv ℝ j (canonicalPrimitiveDirection C K (z x) (m x) ⟨2, ⋯⟩ ∘ n07bMaterialRadiusChart T) (p x)‖
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPrimitiveDirectionClosure.lean:119:6: Type mismatch: After simplification, term
+  n07b_contDiffAt_inverseAngleVector (hphysical x)
+    ((hgeom.charts (z x) (hz x) (hs x) (m x)).right.right.right.right.right.right.right
+          (n07bMaterialRadiusChart T (p x)) (hp x)).right.left
+ has type
+  @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace
+    PolarPoint Prod.normedAddCommGroup Prod.normedSpace ∞ (canonicalPrimitiveDirection C K (z x) (m x) 0)
+    (n07bMaterialRadiusChart T (p x))
+but is expected to have type
+  @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace
+    PolarPoint Prod.normedAddCommGroup Prod.normedSpace ∞ (canonicalPrimitiveDirection C K (z x) (m x) ⟨0, ⋯⟩)
+    (n07bMaterialRadiusChart T (p x))
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPrimitiveDirectionClosure.lean:122:6: Type mismatch: After simplification, term
+  hr (1, 0)
+ has type
+  @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace
+    PolarPoint Prod.normedAddCommGroup Prod.normedSpace ∞ (canonicalPrimitiveDirection C K (z x) (m x) 1)
+    (n07bMaterialRadiusChart T (p x))
+but is expected to have type
+  @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace
+    PolarPoint Prod.normedAddCommGroup Prod.normedSpace ∞ (canonicalPrimitiveDirection C K (z x) (m x) ⟨1, ⋯⟩)
+    (n07bMaterialRadiusChart T (p x))
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPrimitiveDirectionClosure.lean:123:6: Type mismatch: After simplification, term
+  hr (0, 1)
+ has type
+  @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace
+    PolarPoint Prod.normedAddCommGroup Prod.normedSpace ∞ (canonicalPrimitiveDirection C K (z x) (m x) 2)
+    (n07bMaterialRadiusChart T (p x))
+but is expected to have type
+  @ContDiffAt ℝ DenselyNormedField.toNontriviallyNormedField PolarPoint Prod.normedAddCommGroup Prod.normedSpace
+    PolarPoint Prod.normedAddCommGroup Prod.normedSpace ∞ (canonicalPrimitiveDirection C K (z x) (m x) ⟨2, ⋯⟩)
+    (n07bMaterialRadiusChart T (p x))
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPotentialParameterPrefix.lean:84:4: Type mismatch: After simplification, term
+  h
+ has type
+  @LE.le ℝ Real.instLE ‖(((RF i).parameter u w q hq).D (d.partSize j) x) fun i => R ^ (-α) • v (d.emb j i)‖
+    (W * (C * (E ^ P * R ^ (↑(u + w) / (↑s + 1)))))
+but is expected to have type
+  @LE.le ℝ Real.instLE ‖(((RF i).parameter u w q hq).D (d.partSize j) x) ((fun i => R ^ (-α) • v i) ∘ d.emb j)‖
+    (W * (C * (E ^ P * R ^ (↑(u + w) / (↑s + 1)))))
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveHeightTaylorJets.lean:67:26: don't know how to synthesize implicit argument `Ω`
+  @n04Realization_mixedJetRegularity_fixedSpatial X inst✝⁴ inst✝³ inst✝² ⋯ ⋯ U (?m.117 side)
+    (positiveEndpointCutoff (if side = true then r else l) δ ∘ Prod.fst) ⋯ ⋯
+context:
+X : Type u_1
+inst✝⁴ : TopologicalSpace X
+inst✝³ : AddCommGroup X
+inst✝² : Module ℝ X
+inst✝¹ : IsTopologicalAddGroup X
+inst✝ : ContinuousSMul ℝ X
+U : Set X
+hU : IsOpen U
+n : ℕ
+l r δ : ℝ
+A : X → Bool → ℕ → ℝ → ℝ
+hA : ∀ x ∈ U, ∀ (side : Bool), ∀ j ≤ n, ContDiff ℝ ∞ (A x side j)
+J : (side : Bool) → (j : ℕ) → j ≤ n → (b : ℕ) → (θ : ℝ) → SmoothDirections U fun x => iteratedDeriv b (A x side j) θ
+RP : (side : Bool) →
+  MixedJetRegularity U univ fun x => boundaryTaylorPolynomial n (if side = true then r else l) (A x side) := ⋯
+side : Bool
+⊢ Set PolarPoint
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveHeightTaylorJets.lean:68:5: don't know how to synthesize implicit argument `s`
+  @ContDiff.contDiffOn ℝ DenselyNormedField.toNontriviallyNormedField (ℝ × ℝ) Prod.normedAddCommGroup Prod.normedSpace ℝ
+    Real.normedAddCommGroup RCLike.toInnerProductSpaceReal.toNormedSpace (?m.117 side)
+    (positiveEndpointCutoff (if side = true then r else l) δ ∘ Prod.fst) ∞
+    (ContDiff.comp (contDiff_positiveEndpointCutoff (if side = true then r else l) δ) contDiff_fst)
+context:
+X : Type u_1
+inst✝⁴ : TopologicalSpace X
+inst✝³ : AddCommGroup X
+inst✝² : Module ℝ X
+inst✝¹ : IsTopologicalAddGroup X
+inst✝ : ContinuousSMul ℝ X
+U : Set X
+hU : IsOpen U
+n : ℕ
+l r δ : ℝ
+A : X → Bool → ℕ → ℝ → ℝ
+hA : ∀ x ∈ U, ∀ (side : Bool), ∀ j ≤ n, ContDiff ℝ ∞ (A x side j)
+J : (side : Bool) → (j : ℕ) → j ≤ n → (b : ℕ) → (θ : ℝ) → SmoothDirections U fun x => iteratedDeriv b (A x side j) θ
+RP : (side : Bool) →
+  MixedJetRegularity U univ fun x => boundaryTaylorPolynomial n (if side = true then r else l) (A x side) := ⋯
+side : Bool
+⊢ Set (ℝ × ℝ)
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveHeightTaylorJets.lean:67:6: failed to infer `let` declaration type
+
+error: src/ContinuousFlexibility/Analysis/N04RealizationPositiveHeightTaylorJets.lean:63:83: unsolved goals
+X : Type u_1
+inst✝⁴ : TopologicalSpace X
+inst✝³ : AddCommGroup X
+inst✝² : Module ℝ X
+inst✝¹ : IsTopologicalAddGroup X
+inst✝ : ContinuousSMul ℝ X
+U : Set X
+hU : IsOpen U
+n : ℕ
+l r δ : ℝ
+A : X → Bool → ℕ → ℝ → ℝ
+hA : ∀ x ∈ U, ∀ (side : Bool), ∀ j ≤ n, ContDiff ℝ ∞ (A x side j)
+J : (side : Bool) → (j : ℕ) → j ≤ n → (b : ℕ) → (θ : ℝ) → SmoothDirections U fun x => iteratedDeriv b (A x side j) θ
+RP : (side : Bool) →
+  MixedJetRegularity U univ fun x => boundaryTaylorPolynomial n (if side = true then r else l) (A x side) :=
+  fun side =>
+    n04Realization_boundaryTaylorPolynomial_mixedJetRegularity hU n (if side = true then r else l) (fun x => A x side) ⋯
+      (J side)
+⊢ MixedJetRegularity U univ fun x => endpointTaylorCorrection n l r δ (A x)
+
+error: src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean:75:10: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  fderiv ?m.340 (fun q => A.a q * radialPartial (fun y => H y.1) q + A.b q * angularPartial (fun y => H y.1) q) p
+in the target expression
+  (fderiv ℝ (fun y => A.a y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.b y * (fderiv ℝ (fun q => H q.1) y) (0, 1)) p)
+        (1, 0) +
+      (fderiv ℝ (fun y => A.b y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.c y * (fderiv ℝ (fun q => H q.1) y) (0, 1))
+          p)
+        (0, 1) =
+    (fderiv ℝ (fun q => w q.1 * deriv H q.1) p) (1, 0) + (fderiv ℝ (fun x => 0) p) (0, 1)
+
+A : SymmetricCoefficients
+w H : ℝ → ℝ
+p : PolarPoint
+hw : ContDiff ℝ ∞ w
+hH : ContDiff ℝ ∞ H
+ha : A.a =ᶠ[𝓝 p] fun q => w q.1
+hb : A.b =ᶠ[𝓝 p] fun x => 0
+hr : ∀ (q : PolarPoint), radialPartial (fun y => H y.1) q = deriv H q.1
+hθ : ∀ (q : PolarPoint), angularPartial (fun y => H y.1) q = 0
+hrad :
+  (fun q => A.a q * radialPartial (fun y => H y.1) q + A.b q * angularPartial (fun y => H y.1) q) =ᶠ[𝓝 p] fun q =>
+    w q.1 * deriv H q.1
+hang :
+  (fun q => A.b q * radialPartial (fun y => H y.1) q + A.c q * angularPartial (fun y => H y.1) q) =ᶠ[𝓝 p] fun x => 0
+hflux : DifferentiableAt ℝ (fun r => w r * deriv H r) p.1
+⊢ (fderiv ℝ (fun y => A.a y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.b y * (fderiv ℝ (fun q => H q.1) y) (0, 1)) p)
+        (1, 0) +
+      (fderiv ℝ (fun y => A.b y * (fderiv ℝ (fun q => H q.1) y) (1, 0) + A.c y * (fderiv ℝ (fun q => H q.1) y) (0, 1))
+          p)
+        (0, 1) =
+    (fderiv ℝ (fun q => w q.1 * deriv H q.1) p) (1, 0) + (fderiv ℝ (fun x => 0) p) (0, 1)
+
+error: src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean:98:64: Application type mismatch: The argument
+  hY
+has type
+  DifferentiableAt ℝ Y (Function.invFun Y p.1)
+but is expected to have type
+  DifferentiableAt ℝ ?m.120 ?m.121.1
+in the application
+  planeJacobian_positiveReferenceCylinderChart hY
+
+error: src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean:95:47: unsolved goals
+A : SymmetricCoefficients
+w Y H : ℝ → ℝ
+p : PolarPoint
+hw : ContDiff ℝ ∞ w
+hH : ContDiff ℝ ∞ H
+hY : DifferentiableAt ℝ Y (Function.invFun Y p.1)
+hYpos : 0 < deriv Y (Function.invFun Y p.1)
+ha : A.a =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)] fun q => w q.1
+hb : A.b =ᶠ[𝓝 (positiveReferenceCylinderInverse Y p)] fun x => 0
+hdiv :
+  divergenceOperator A (fun q => H q.1) (positiveReferenceCylinderInverse Y p) =
+    deriv (fun r => w r * deriv H r) (positiveReferenceCylinderInverse Y p).1
+⊢ H (positiveReferenceCylinderInverse Y p).1 *
+        deriv (fun r => w r * deriv H r) (positiveReferenceCylinderInverse Y p).1 /
+      |planeJacobian (positiveReferenceCylinderChart Y) (positiveReferenceCylinderInverse Y p)| =
+    H (Function.invFun Y p.1) * deriv (fun r => w r * deriv H r) (Function.invFun Y p.1) /
+      deriv Y (Function.invFun Y p.1)
+
+error: build failed

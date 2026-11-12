@@ -64,7 +64,9 @@ def n04Realization_endpointTaylorCorrection_mixedJetRegularity
   let RP (side : Bool) := n04Realization_boundaryTaylorPolynomial_mixedJetRegularity
     hU n (if side then r else l) (fun x => A x side)
     (fun x hx => hA x hx side) (J side)
-  let RC (side : Bool) := n04Realization_mixedJetRegularity_fixedSpatial hU
+  let RC (side : Bool) : MixedJetRegularity U univ
+      (fun _ q => positiveEndpointCutoff (if side then r else l) δ q.1) :=
+    n04Realization_mixedJetRegularity_fixedSpatial hU
     (((contDiff_positiveEndpointCutoff (if side then r else l) δ).comp
       contDiff_fst).contDiffOn)
   exact ((RC false).mul (RP false) hU isOpen_univ).add
