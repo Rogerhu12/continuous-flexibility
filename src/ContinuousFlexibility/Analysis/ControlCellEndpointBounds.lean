@@ -62,14 +62,22 @@ theorem abs_endpointX_scale_sub_le {d0 d : ℝ}
     |a - b| = Real.sqrt ((a - b) ^ 2) := (Real.sqrt_sq_eq_abs _).symm
     _ ≤ Real.sqrt |Real.log d0| := Real.sqrt_le_sqrt (he ▸ hsq)
 
-/-- An actual material `H` weight and `E0` loss evaluated at two nearby cell indices. -/
-theorem materialSample_endpoint_weight_bound {D : ReferenceData} {T : MaterialData}
+/-- Nearby cell samples have uniformly bounded endpoint-coordinate displacement.
+This is the geometric part of the material-weight comparison, shared by
+estimates that retain the original height exponent. -/
+theorem materialSample_endpoint_coordinate_comparison {D : ReferenceData} {T : MaterialData}
     (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D)
-    {γ : ℝ} (hγ : 0 < γ) (A : ℝ) {B : ℝ} (hB : 0 ≤ B) :
-    ∃ δ K : ℝ, 0 < δ ∧ 0 < K ∧ ∀ (i j : ℕ) (r : ℝ),
-      r ∈ Ioo D.a D.b → r ∈ D.cells j →
+    {B : ℝ} (hB : 0 ≤ B) :
+    ∃ d0 δ shift : ℝ, 0 < d0 ∧ 0 < δ ∧ 0 ≤ shift ∧
+      ∀ (i j : ℕ) (r : ℝ), r ∈ Ioo D.a D.b → r ∈ D.cells j →
       |(D.cellIndex i : ℝ) - D.cellIndex j| ≤ B → endpointDistance D r < δ →
-      T.H (T.sample i) ^ γ * T.E0 (T.sample j) ^ A ≤ K * T.H r ^ (γ / 16) := by
+      let x := endpointX d0 (endpointDistance D r)
+      let y := endpointX d0 (endpointDistance D (T.sample i))
+      let z := endpointX d0 (endpointDistance D (T.sample j))
+      2 * shift ≤ x ∧ |y - x| ≤ shift ∧ |z - x| ≤ shift ∧
+        0 ≤ x ∧ 0 ≤ y ∧ 0 ≤ z ∧
+        T.H (T.sample i) = materialH y ∧ T.E0 (T.sample j) = materialE0 z ∧
+        T.H r = materialH x ∧ T.E0 r = materialE0 x := by
   have hdata := hT
   obtain ⟨_, _, _, _, _, _, _, _, _, _, hend, _, _, _, _, hsamp, _, hcomp⟩ := hdata
   obtain ⟨d0, δ0, hd0, hδ0, hδbound, hleft, hright⟩ := hend
@@ -121,8 +129,7 @@ theorem materialSample_endpoint_weight_bound {D : ReferenceData} {T : MaterialDa
   have hscaleAt (s : ℝ) (hs : s ∈ Ioo D.a D.b) (hnear : endpointDistance D s < η) :
       |X s - X1 s| ≤ scaleError :=
     abs_endpointX_scale_sub_le hd0 (hdistance s hs) (hnear.trans_le hηd) (hnear.trans_le hη1)
-  obtain ⟨K, hK, henv⟩ := material_bounded_shift_envelope hγ A hshift
-  refine ⟨δ, K, hδ, hK, fun i j r hr hrj hij hrnear => ?_⟩
+  refine ⟨d0, δ, shift, hd0, hδ, hshift, fun i j r hr hrj hij hrnear => ?_⟩
   have hrη : endpointDistance D r < η := hrnear.trans_le (min_le_left _ _)
   have hlarge : L < X1 r := lt_endpointX_one_of_distance_lt (hdistance r hr) hL
     (hrnear.trans_le (min_le_right _ _))
@@ -152,9 +159,26 @@ theorem materialSample_endpoint_weight_bound {D : ReferenceData} {T : MaterialDa
   have hiweights := hweights (T.sample i) (hsampleCore i) (hiη.trans_le hηδ)
   have hjweights := hweights (T.sample j) (hsampleCore j) (hjη.trans_le hηδ)
   have hrweights := hweights r hr (hrη.trans_le hηδ)
-  rw [hiweights.1, hjweights.2, hrweights.1]
-  exact henv (X r) (X (T.sample i)) (X (T.sample j)) hactualX
-    (hactualClose i hiη hiX1) (hactualClose j hjη hjX1) (Real.sqrt_nonneg _)
+  exact ⟨hactualX, hactualClose i hiη hiX1, hactualClose j hjη hjX1,
+    Real.sqrt_nonneg _, Real.sqrt_nonneg _, Real.sqrt_nonneg _,
+    hiweights.1, hjweights.2, hrweights.1, hrweights.2⟩
+
+/-- An actual material `H` weight and `E0` loss evaluated at two nearby cell indices. -/
+theorem materialSample_endpoint_weight_bound {D : ReferenceData} {T : MaterialData}
+    (hT : IsMaterialData D T) (hRef : IsAccumulatingProfile D)
+    {γ : ℝ} (hγ : 0 < γ) (A : ℝ) {B : ℝ} (hB : 0 ≤ B) :
+    ∃ δ K : ℝ, 0 < δ ∧ 0 < K ∧ ∀ (i j : ℕ) (r : ℝ),
+      r ∈ Ioo D.a D.b → r ∈ D.cells j →
+      |(D.cellIndex i : ℝ) - D.cellIndex j| ≤ B → endpointDistance D r < δ →
+      T.H (T.sample i) ^ γ * T.E0 (T.sample j) ^ A ≤ K * T.H r ^ (γ / 16) := by
+  obtain ⟨d0, δ, shift, _, hδ, hshift, hcoords⟩ :=
+    materialSample_endpoint_coordinate_comparison hT hRef hB
+  obtain ⟨K, hK, henv⟩ := material_bounded_shift_envelope hγ A hshift
+  refine ⟨δ, K, hδ, hK, fun i j r hr hrj hij hrnear => ?_⟩
+  obtain ⟨hx, hxy, hxz, _, _, hz, hHi, hEj, hHr, _⟩ :=
+    hcoords i j r hr hrj hij hrnear
+  rw [hHi, hEj, hHr]
+  exact henv _ _ _ hx hxy hxz hz
 
 /-- The actual state mean times each ordinary control jet decays in the endpoint collar. -/
 theorem stateKappa_controlJet_endpoint_bound {D : ReferenceData} {T : MaterialData}

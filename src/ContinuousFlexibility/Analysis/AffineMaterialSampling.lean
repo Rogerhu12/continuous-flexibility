@@ -162,7 +162,7 @@ private theorem one_le_materialE0Exponent {x : ℝ} (hx : 0 ≤ x) : 1 ≤ mater
   le_add_of_nonneg_right (mul_nonneg (Real.rpow_nonneg hx _)
     (zero_le_one.trans (one_le_materialLogFactor hx)))
 
-private theorem one_add_sq_le_materialE0Exponent {x : ℝ} (hx : 0 ≤ x) :
+theorem one_add_sq_le_materialE0Exponent {x : ℝ} (hx : 0 ≤ x) :
     1 + x ^ 2 ≤ 2 * materialE0Exponent x := by
   by_cases hx' : 1 ≤ x
   · have hs : x ^ 2 ≤ x ^ (5 / 2 : ℝ) := by
@@ -176,7 +176,7 @@ private theorem one_add_sq_le_materialE0Exponent {x : ℝ} (hx : 0 ≤ x) :
   · have hs : x ^ 2 ≤ (1 : ℝ) ^ 2 := pow_le_pow_left₀ hx (le_of_not_ge hx') 2
     linarith only [hs, one_le_materialE0Exponent hx]
 
-private theorem exists_materialE0Exponent_bound_of_shift {B : ℝ} (hB : 0 ≤ B) :
+theorem exists_materialE0Exponent_bound_of_shift {B : ℝ} (hB : 0 ≤ B) :
     ∃ A : ℝ, 0 < A ∧ ∀ n x : ℝ, 0 ≤ n → 0 ≤ x → |x - n| ≤ B →
       n ^ (5 / 2 : ℝ) * materialLogFactor n ≤ A * materialE0Exponent x := by
   let M := B + 1
@@ -228,7 +228,7 @@ private theorem exists_materialE0Exponent_bound_of_shift {B : ℝ} (hB : 0 ≤ B
       _ ≤ A * materialE0Exponent x := by
         simpa only [mul_one] using mul_le_mul_of_nonneg_left (one_le_materialE0Exponent hx) hA.le
 
-private theorem log_materialH_shift_bound {B n x : ℝ} (hB : 0 ≤ B)
+theorem log_materialH_shift_bound {B n x : ℝ} (hB : 0 ≤ B)
     (hn : 0 ≤ n) (hx : 0 ≤ x) (hs : |x - n| ≤ B) :
     |Real.log (materialH x) - (-2 * n ^ 3 / 3)| ≤ 4 * B * (1 + B ^ 2) * (1 + n ^ 2) := by
   have hx' : x ≤ n + B := by linarith only [(abs_le.mp hs).2]
