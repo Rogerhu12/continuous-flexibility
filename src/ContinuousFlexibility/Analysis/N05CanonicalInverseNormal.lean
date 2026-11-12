@@ -99,6 +99,8 @@ theorem n05CanonicalGlobalInverse_normal_of_source
   have hXQ : sourceNormSquare D σ M0 X ≤ Q := le_add_of_nonneg_right hθnonneg
   obtain ⟨hU, hUnorm⟩ := hinverse X hF
   obtain ⟨ur, hur, hUr, hUrnorm⟩ := hnormal X fθ hF hθ hfθ
+  have hUrPeriodic : Function.Periodic ur (0, Real.pi) := hUr.2.2.1
+  have hUrEven (r θ : ℝ) : ur (r, -θ) = ur (r, θ) := hUr.2.2.2 r θ
   let v : PolarPoint → ℝ := fun p => ur p - a * deriv S.chiLeft p.1
   let g : PolarPoint → ℝ := n05ReferenceRadialNormalField S C K u v
   let W := n05CanonicalRadialJetSequence S K (n05CanonicalGlobalInverse D S C K G F).1
@@ -114,7 +116,8 @@ theorem n05CanonicalGlobalInverse_normal_of_source
       (hUnorm.trans (mul_le_mul_of_nonneg_left hXQ (sq_nonneg Ci))) hCc.le).trans_eq (by ring)))
   have haBound : a ^ 2 ≤ Ci ^ 2 * Q := by
     have ha : a ^ 2 ≤ outputNormSquare D σ M1 a U := by
-      have hsum := tsum_nonneg (fun m => outputCellSquare_nonneg hab σ M1 hU.1 m)
+      have hsum : 0 ≤ ∑' m, outputCellSquare D σ M1 (outputRemainder D a U) m :=
+        tsum_nonneg (fun m => outputCellSquare_nonneg hab σ M1 hU.1 m)
       change a ^ 2 ≤ a ^ 2 + U.2 ^ 2 + _
       linarith only [hsum, sq_nonneg U.2]
     exact ha.trans (hUnorm.trans (mul_le_mul_of_nonneg_left hXQ (sq_nonneg Ci)))
@@ -133,7 +136,7 @@ theorem n05CanonicalGlobalInverse_normal_of_source
   have hvp : Function.Periodic v (0, Real.pi) := by
     intro p
     change ur (p + (0, Real.pi)) - a * deriv S.chiLeft (p.1 + 0) = ur p - a * deriv S.chiLeft p.1
-    rw [hUr.2.2.1 p, add_zero]
+    rw [hUrPeriodic p, add_zero]
   have huv : WeakNormalDerivative D u v := n05_weakNormalDerivative_sub_leftCutoff
     hD.1.choose_spec.1.2.1 hS.2.2.1
     (r11b_output_memLp hD.1 hD.2.2.2.1 hσ ⟨a, hU⟩)
@@ -154,7 +157,7 @@ theorem n05CanonicalGlobalInverse_normal_of_source
   have hgeven (r θ : ℝ) : g (r, -θ) = g (r, θ) := by
     dsimp only [g, u, v, n05ReferenceRadialNormalField, n05ReferenceNormalLeading,
       n05ReferenceNormalDrift]
-    rw [hUr.2.2.2 r θ, hU.2.2.2 r θ]
+    rw [hUrEven r θ, hU.2.2.2 r θ]
   have hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε :=
     n05_referenceState_mem h.1.1.1.2.1
   have hs : stateSector S C.referenceState := n05_referenceState_sector h.1.1.1.2.2.1
