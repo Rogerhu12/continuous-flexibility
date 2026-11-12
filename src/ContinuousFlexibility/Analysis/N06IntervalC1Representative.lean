@@ -54,7 +54,7 @@ theorem n06_exists_contDiff_one_representative_of_bounded_second_deriv
     fun x hx => ((hfd x hx).sub (hJd x)).differentiableAt.differentiableWithinAt
   have hzero (x : ℝ) (hx : x ∈ Ioo a b) : deriv (fun y => f y - J y) x = 0 := by
     have he := ((hfd x hx).sub (hJd x)).deriv
-    simpa only [hfv hx, sub_self] using he
+    simpa only [Pi.sub_def, hfv hx, sub_self] using he
   obtain ⟨c, hc⟩ := isOpen_Ioo.exists_is_const_of_deriv_eq_zero
     isPreconnected_Ioo hdiff hzero
   refine ⟨fun x => J x + c, hJ.add contDiff_const, fun x hx => ?_⟩

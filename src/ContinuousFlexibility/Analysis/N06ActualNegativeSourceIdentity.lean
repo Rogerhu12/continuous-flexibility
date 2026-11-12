@@ -13,6 +13,7 @@ noncomputable section
 namespace ContinuousFlexibility.Statements
 
 open Set Filter MeasureTheory
+open ContinuousFlexibility.Analysis
 
 set_option backward.isDefEq.respectTransparency false
 

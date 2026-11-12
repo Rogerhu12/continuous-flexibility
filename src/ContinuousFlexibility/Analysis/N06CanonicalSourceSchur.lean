@@ -51,6 +51,7 @@ private theorem n06_sourceSchur_band_bessel
       _ = ∑' j, ‖e F j‖ ^ 2 := tsum_congr (fun j => by rw [he])
       _ = ‖e F‖ ^ 2 := angular_tsum_norm_sq (e F)
       _ = ‖F‖ ^ 2 := congrArg (fun x : ℝ => x ^ 2) (e.norm_map F)
+      _ ≤ ‖F‖ ^ 2 := le_rfl
 
 private theorem n06_sourceSchur_tail_swap (j l : ℕ) :
     n07aAngularTail ((j : ℤ) - l) = n07aAngularTail ((l : ℤ) - j) := by
@@ -125,9 +126,17 @@ theorem n06_canonicalSource_schur
       rw [hforget, hforget, hcomp, if_pos rfl]
     · rw [if_neg hjk]
       apply hV.2.2.1 γ t s
-      rw [hforget, hcomp, if_neg hjk, map_zero, map_zero]
-      funext m
-      simp only [n07aAngularSequenceBand_apply, Pi.zero_apply, map_zero]
+      have hzero : P j (P k F) = 0 := (hcomp j k F).trans (if_neg hjk)
+      have hfzero : f (P j (P k F)) = 0 := (congrArg f hzero).trans f.map_zero
+      calc
+        V.forget γ t s (blocks l j (P k F)) =
+            n07aAngularSequenceBand hI l (f (P j (P k F))) := hforget l j (P k F)
+        _ = n07aAngularSequenceBand hI l 0 :=
+          congrArg (n07aAngularSequenceBand hI l) hfzero
+        _ = 0 := by
+          funext m
+          exact (n07aAngularBand m (hI m) l).map_zero
+        _ = V.forget γ t s 0 := (V.forget γ t s).map_zero.symm
   let a : ℕ → ℕ → ℝ := fun l j => A * n07aAngularTail ((j : ℤ) - l)
   let total : ℝ := ∑' k : ℤ, n07aAngularTail k
   have htotal : 0 ≤ total := tsum_nonneg n07aAngularTail_nonneg
@@ -156,8 +165,8 @@ theorem n06_canonicalSource_schur
     (mul_nonneg hA htotal) (mul_nonneg hA htotal) ha hrow hcol
     (fun _ _ => norm_nonneg _) (fun _ _ => norm_nonneg _)
     (n06_sourceSchur_band_bessel hV hI) (n06_sourceSchur_band_bessel hV hI) hb
-  have hMpair' (F G : V.level γ t s) : ⟪M F, G⟫_ℝ =
-      ∑' i : ℕ × ℕ, ⟪blocks i.1 i.2 F, P i.1 G⟫_ℝ := by
+  have hMpair' (F G : V.level γ t s) : inner ℝ (M F) G =
+      ∑' i : ℕ × ℕ, inner ℝ (blocks i.1 i.2 F) (P i.1 G) := by
     simpa only [n07aSchurLiftBlockForm_apply] using hMpair F G
   have hMblock (l j : ℕ) (F : V.level γ t s) : P l (M (P j F)) = blocks l j F :=
     n07aSchurLift_block P P blocks M hcomp

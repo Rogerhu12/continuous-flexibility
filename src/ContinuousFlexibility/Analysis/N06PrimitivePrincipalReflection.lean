@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.N06PrincipalJetAlgebra
 import ContinuousFlexibility.Analysis.N06PositiveCanonicalSymmetry
 import ContinuousFlexibility.Analysis.N06NegativeForcingParity
 import ContinuousFlexibility.Analysis.N07aCanonicalRadialReflection
+import ContinuousFlexibility.Analysis.SolveReturnEquations
 
 /-!
 # Reflection of the actual principal perturbation
@@ -57,6 +58,8 @@ theorem n06_openDivergence_reflectionOn
     simp only [ψ, ft, spaces_mixedDerivative_reflection, pow_zero, pow_one,
       one_mul, neg_one_mul, hb q hq, hc q hq]
     ring
+  change divergenceOperator ⟨a.value, beta.value, c.value⟩ ψ p =
+    divergenceOperator ⟨a.value, beta.value, c.value⟩ φ (p.1, Real.pi - p.2)
   rw [n07a_open_divergence_mixed ⟨a.value, beta.value, c.value⟩
     a.smooth beta.smooth c.smooth hψ.1.contDiffOn hp,
     n07a_open_divergence_mixed ⟨a.value, beta.value, c.value⟩

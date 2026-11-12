@@ -80,9 +80,13 @@ theorem N06PrimitivePositiveJets.modes_regular
     (n07a_canonical_firstNormal_coefficient P.radial_weak i)
     (n07a_canonical_firstNormal_coefficient P.secondRadial_weak i)
   choose v hv using hex
-  refine ⟨v, fun i => ?_⟩
-  simpa only [n06HalfCosineCoefficient, n06AngularCoefficient,
-    n07aHalfRadialCoefficient, angleMeasure] using hv i
+  refine ⟨v, fun i => ⟨?_, (hv i).2⟩⟩
+  have heq : n06HalfCosineCoefficient (U : PolarPoint → ℝ) i =
+      n07aHalfRadialCoefficient (U : PolarPoint → ℝ) i := by
+    funext r
+    rfl
+  rw [heq]
+  exact (hv i).1
 
 /-- The same original N05 graph supplies the representatives on every
 positive piece, with its original interval and source projection. -/
