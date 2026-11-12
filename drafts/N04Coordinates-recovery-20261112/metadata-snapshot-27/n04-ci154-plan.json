@@ -1,0 +1,55 @@
+{
+  "label": 154,
+  "head_before": "11eeb8aebced4bef16f743c11484df9b0c0907a1",
+  "base_tree": "13c563567ec6c0ecdce19ef2f192970d2400b8b2",
+  "tree": "6976c913d75d04075537b04c6c31fd52b82742c2",
+  "main_checked": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+  "main_integrated": "89e539ccf7e9c558467cf875f44dcff9490ce271",
+  "additional_parents": [],
+  "last_full_green": "03e526021c371413f03fc0ce052476b63e105361",
+  "owner": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBoundsCI153RepairReviewedManifest.json",
+    "sha256": "693f3c813312bd57a6dbe0a42f8164f30c775590f192c1fe941f693e412003e1"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBounds.lean",
+    "sha256": "8faa39da4c14e287a62815ee27e5621ce31eeb54ebdf99dad9542f7470961efe",
+    "blob": "2f138709e5a2993b87ead4c6cc01c6a0b34a6d7c",
+    "lines": 167,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootFiniteEndpointBounds.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootHeightJets",
+      "ContinuousFlexibility.Analysis.CanonicalRootDiagonalLower"
+    ]
+  },
+  "target": "src/ContinuousFlexibility/Analysis/CanonicalRootFiniteEndpointBounds.lean",
+  "preimage": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair153/CanonicalRootFiniteEndpointBounds.base.lean.txt",
+    "sha256": "127b77a209d6cc28a3d0d21fdab36a3250656664010df762889ada7ba89a728e",
+    "blob": "13749c41ebf01d6f887885d882429d7ee0d7d735",
+    "lines": 167
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CanonicalRootFiniteEndpointBoundsCI153IndependentReview.json",
+    "sha256": "0653af8daf3038f61470cd8da4eae38844208c92e7993860f73b4910bcc08f2d",
+    "blob": "b5304e699bd584922e02e6ec4997eafa02a2c127",
+    "lines": 88
+  },
+  "added_lean_since_full_green": 3131,
+  "deleted_lean_since_full_green": 0,
+  "delta": {
+    "added": 1,
+    "deleted": 1
+  },
+  "source_total": 4210,
+  "source_all_total": 4214,
+  "root_imports": 4151,
+  "created_at": "2026-11-12T15:32:39.237715+00:00",
+  "pending_main": {
+    "sha": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+    "upstream_added_lean": 67562,
+    "upstream_deleted_lean": 640,
+    "reason": "New main adds N01c and N05 integration exceeding the hard20000-line distance. Repair the existing failed module first, then integrate dependency-complete upstream batches with CI gates; no new held reference sources activated."
+  },
+  "scope": "Exactly one independently reviewed scalar addition-side repair. Height268 remains byte-identical after CI153 acceptance. Full CI required before further activation."
+}

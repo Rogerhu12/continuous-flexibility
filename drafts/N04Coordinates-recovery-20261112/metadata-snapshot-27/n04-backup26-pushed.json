@@ -1,0 +1,13 @@
+{
+  "snapshot": 26,
+  "head": "7f083833b93046e013d7980d7713078defb10067",
+  "tree": "ffcf9e3da07fab850c2217e8555d2d3a368a24bf",
+  "parent": "c7d420fa319e4fd7a53a764c041f983938553051",
+  "branch": "backup/N04Coordinates-recovery-20261112-0755",
+  "pushed": "2026-11-12 15:19:17 UTC",
+  "indexed_files": 1730,
+  "new_source_versions": 13,
+  "new_source_lines": 2262,
+  "projected_added_lean_from_compiled_baseline140": 17092,
+  "status": "Source preservation only; outside src, no CI activation or completion claim."
+}

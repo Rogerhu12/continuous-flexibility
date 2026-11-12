@@ -1,0 +1,35 @@
+{
+  "kind": "ci152_canonical_root_height_per_point_specialization_reviewed_source",
+  "status": "INDEPENDENTLY_REVIEWED_UNCOMPILED_READY_FOR_ROOT_CI_SELECTION",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair152/CanonicalRootHeightJets.lean",
+    "sha256": "96aa947744c65d39484564c8d63c8e56f31f1b4103a2e2ebe88d9a3f1908ebdf",
+    "blob": "0dc0308b5f440e5a5e0dd37af47de32d6aba250b",
+    "lines": 268,
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.CanonicalRootRelativeJets"
+    ]
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair152/CanonicalRootHeightJetsCI152RepairCandidateManifest.json",
+    "sha256": "3a6b4ca111aa7c9ca4aa4e66d7fd654ac3840825a32f94df2187c6eaea2ea3de",
+    "blob": "583d39f88d95e673605641237cac166ba91d1c11",
+    "lines": 125
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/CI152CanonicalRootHeightPointSpecializationIndependentReview.json",
+    "sha256": "778ce60da2a929359412e031665c9dc5ca1c24cf5c8195f42e2339c69c4713ce",
+    "blob": "201ff9b08c701fd8ffedc93e31db770b0af2310e",
+    "lines": 148
+  },
+  "actual_base": {
+    "head": "3b4844ce29629e230aa9feffb3ed4987a06d27a2",
+    "tree": "634271261e070856b3c4bdb9fcc958d3b6d46ecf",
+    "target": "src/ContinuousFlexibility/Analysis/CanonicalRootHeightJets.lean"
+  },
+  "scope": "The unchanged generic quotient supplier and the complete common-constant/neighborhood prefix are preserved. The actual root specialization, current-point transport, four height jet promotions and both quotient conclusions are moved to one private declaration. Same original K, state, root, functions, losses and numerical envelopes; complete public header/imports/options/default limits remain unchanged.",
+  "prior_frozen_repairs_preserved": true,
+  "compiled": false,
+  "performance_confirmation": "Pending the next real CI; no local compiler/elaborator or CI query was run."
+}

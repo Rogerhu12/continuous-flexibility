@@ -1,0 +1,304 @@
+{
+  "kind": "new_main_nine_shared_provider_source_selection_review",
+  "status": "STATIC_API_DELTA_REVIEW_AND_COHORT_RECOMMENDATION_NO_INSTALL",
+  "reviewer": "/root/proof_inventory",
+  "main": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+  "historical_c5": "c5c48d262157a11a76604113c40d2438d480433f",
+  "comparison_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01cMainC9SelectedGraphComparison.json",
+    "sha256": "779e89982e4b3cc0d5ed5d65ebbdda92a04d074eeaf31aa6b7c5de211ed5f1ff",
+    "blob": "d53034062ed868c802137e14fbe5945192c35855",
+    "lines": 34784
+  },
+  "sources": [
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleJetEvaluation",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Analysis/CircleJetEvaluation.lean",
+        "sha256": "22956fbcd2dc5ab68ac41c4ada8b628dc18918219bf715ba88776b95477862bb",
+        "blob": "b31c443b05a798ddc79a3a71ce287a94028f0739",
+        "lines": 129
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Analysis/CircleJetEvaluation.lean",
+        "sha256": "871e2824dd4760c0439c5f3add8ada2e02374bdb0c94a36c6950334ff70e9a5a",
+        "blob": "6ff499a39d5197fc361031fc07912fb5435b25bb",
+        "lines": 283
+      },
+      "same_public_headers": [
+        "circleJetEvaluationLevel",
+        "circleJetEvaluation",
+        "circleJetEvaluation_apply",
+        "circleJetEvaluationLevel_norm_le",
+        "circleJetEvaluationLevel_opNorm_le",
+        "circleJetDecoded_iteratedDeriv_abs_le",
+        "circleJetDecodeCLM",
+        "circleJetDecodeCLM_apply",
+        "continuous_circleJetDecoded"
+      ],
+      "changed_common_public_headers": [],
+      "c5_only_public": [],
+      "main_only_public": [
+        "anglePrefixTest",
+        "memLp_anglePrefixTest",
+        "angleL2TestPairing_prefix",
+        "anglePairEvaluation",
+        "anglePairEvaluation_apply",
+        "anglePairEvaluation_of_weakDerivative",
+        "anglePairEvaluationConstant",
+        "anglePairEvaluationConstant_nonneg",
+        "anglePairEvaluation_norm_le"
+      ],
+      "recommended_selection": "c5 cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.CircleUnitIntegral",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Analysis/CircleUnitIntegral.lean",
+        "sha256": "9bbcfd648e9fc3da76d7120d167752a6572296f702a5a41e2337b126aa0a301d",
+        "blob": "539887de9877614276395ffbbadb8a8ab8d8904c",
+        "lines": 112
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Analysis/CircleUnitIntegral.lean",
+        "sha256": "5197384442b1d6516420e2154cf2193dd357a0af463bd6f0771abe171982e96b",
+        "blob": "39a06c8ea216f77af837487b24e3e187841e08a7",
+        "lines": 111
+      },
+      "same_public_headers": [
+        "circleModelValueLevel",
+        "circleModelValueLevel_apply",
+        "circleUnitIntegral",
+        "circleUnitIntegral_decode"
+      ],
+      "changed_common_public_headers": [],
+      "c5_only_public": [],
+      "main_only_public": [],
+      "recommended_selection": "main"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ControlCellEndpointBounds",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Analysis/ControlCellEndpointBounds.lean",
+        "sha256": "9c9c1fd4bb08d7a0f757285ccb015919aca0362996626912e4b1ec773debbcdd",
+        "blob": "931608eb0a7c8d6913aafcd28727724eae13467a",
+        "lines": 192
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Analysis/ControlCellEndpointBounds.lean",
+        "sha256": "8587d9ff32ae46f1bd767f3d359c2cdb56f51f9ab6a8b6e8618b7abc0655d289",
+        "blob": "69d80e2dd714b0d65fcceff8b5dee84880bb3078",
+        "lines": 216
+      },
+      "same_public_headers": [
+        "lt_endpointX_one_of_distance_lt",
+        "abs_endpointX_scale_sub_le",
+        "materialSample_endpoint_weight_bound",
+        "stateKappa_controlJet_endpoint_bound"
+      ],
+      "changed_common_public_headers": [],
+      "c5_only_public": [],
+      "main_only_public": [
+        "materialSample_endpoint_coordinate_comparison"
+      ],
+      "recommended_selection": "main"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlCofiniteClosure",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Analysis/StateControlCofiniteClosure.lean",
+        "sha256": "594be12f48eed4685e285afe820230da00556688a54d2b0291729ad4776e065c",
+        "blob": "9be6b468ce6f015dc8984e2566542dc73f69409e",
+        "lines": 133
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Analysis/StateControlCofiniteClosure.lean",
+        "sha256": "77e15f29870bcc1c5dae23ab9406f9518041e65baa0c976ba423c85becd047b6",
+        "blob": "18b869aaefe1e6aece49ab9fd4920e1ef2cf0751",
+        "lines": 166
+      },
+      "same_public_headers": [
+        "stateKappa_controlJet_eventually_small_of_bounds",
+        "stateKappa_controlJet_eventually_small",
+        "contDiff_stateProfile_of_control_bounds",
+        "contDiff_stateProfile_of_n01"
+      ],
+      "changed_common_public_headers": [],
+      "c5_only_public": [],
+      "main_only_public": [
+        "stateKappa_controlJet_eventually_small_of_controlData",
+        "contDiff_stateProfile_of_controlData"
+      ],
+      "recommended_selection": "main"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.StateControlDecay",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Analysis/StateControlDecay.lean",
+        "sha256": "ad97b5ecf79b5515df1afa55fe01d64cf589824b4e9b7821e0c298261a4f5589",
+        "blob": "91f057d8f557ed9b604e081ac6ef4b15652ea313",
+        "lines": 142
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Analysis/StateControlDecay.lean",
+        "sha256": "1c88acbb587efbc846bbd77f38229e7fcc300999e1d510cb785998a90a3b7a47",
+        "blob": "2cbf277337cd0667b2f645f0ffa5149afba7e95a",
+        "lines": 143
+      },
+      "same_public_headers": [
+        "iteratedDeriv_zero_off_open_interval",
+        "abs_iteratedDeriv_stateControlSum_le",
+        "contDiff_stateProfile_of_control_jet_bounds"
+      ],
+      "changed_common_public_headers": [],
+      "c5_only_public": [],
+      "main_only_public": [],
+      "recommended_selection": "main"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameMultilinearNormalization",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+        "sha256": "9701dee0e81d3c8064b606448dbfc831ea87f13f6ca19273eb689312e15e940a",
+        "blob": "de78e2674d4a5cf3574364b6cc1b589b478c7915",
+        "lines": 204
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Analysis/TameMultilinearNormalization.lean",
+        "sha256": "1f6c08d38555fdb2135b8622216b86cb0aa89ab367c5fe2443854f5e079b361d",
+        "blob": "04e7e732ab5f0d16ba232b561bd612f93dff4c51",
+        "lines": 185
+      },
+      "same_public_headers": [
+        "multilinearTameSize",
+        "multilinearTameSize_nonneg",
+        "multilinearTameSize_le_affine",
+        "multilinear_bound_of_unitBall",
+        "multilinearNormalizationConstant",
+        "multilinearNormalizationConstant_nonneg",
+        "multilinear_oneHighFactor_of_local"
+      ],
+      "changed_common_public_headers": [],
+      "c5_only_public": [
+        "multilinearMap_bound_of_unitBall",
+        "multilinearMap_oneHighFactor_of_local"
+      ],
+      "main_only_public": [],
+      "recommended_selection": "c5 cohort"
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.TameUnitIntegralLinearFamily",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+        "sha256": "68285398334379e7a601ac9cac7c4126b94805fe023ce713efe15f8774567a4b",
+        "blob": "9100f21c146327227454e17ecdfb1e0efea39bd4",
+        "lines": 135
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Analysis/TameUnitIntegralLinearFamily.lean",
+        "sha256": "d922d3ac131773b93d0b0af420b0054d2cab9d0ab9dfe0515c2c31e7e114cb26",
+        "blob": "d6fbe2afb25d83b302e606ecf0dbc4bf3763b7a2",
+        "lines": 134
+      },
+      "same_public_headers": [
+        "tameJetSize_linear_contraction",
+        "smoothTameOn_unitIntegralLinearFamily"
+      ],
+      "changed_common_public_headers": [],
+      "c5_only_public": [],
+      "main_only_public": [],
+      "recommended_selection": "main"
+    },
+    {
+      "module": "ContinuousFlexibility.Blueprint.Statements",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+        "sha256": "4eff8f3724ee80268cebe29904e817efa068f6e398d6ab7d1ebb05bcebe09eda",
+        "blob": "af5ba9dacc2c7b026d6535f09e886ce22ca2e673",
+        "lines": 275
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Blueprint/Statements.lean",
+        "sha256": "c5ceb29deb95dde0f00563392d37d33d9f62a725d118c9540435911349de41e1",
+        "blob": "4d426c2990d6d685eec9b270469f440b40c9ccce",
+        "lines": 289
+      },
+      "recommended_selection": "main",
+      "scope": "Adds required primitive geometry definitions; Blueprint.N01a/N01b statements explicitly gain same-data primitive certificate, so old c5 statements cannot replace main."
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.RadialTargets",
+      "c5": {
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+        "path": "src/ContinuousFlexibility/Statements/RadialTargets.lean",
+        "sha256": "6296bf88e2c368206d1ec39dad5647a768016d10d5f574a0d58d65064c9285d2",
+        "blob": "7b2ba6641046904003f09f9c708a7e8538de3c4d",
+        "lines": 492
+      },
+      "main": {
+        "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+        "path": "src/ContinuousFlexibility/Statements/RadialTargets.lean",
+        "sha256": "f5dba6b42ece090f87fcde22a79c39f974974d81c60ad07e9120181c15aee774",
+        "blob": "ef93a18d36336489f4e605beddd8e14d582e2008",
+        "lines": 504
+      },
+      "recommended_selection": "main",
+      "scope": "Adds required primitive geometry definitions; Blueprint.N01a/N01b statements explicitly gain same-data primitive certificate, so old c5 statements cannot replace main."
+    }
+  ],
+  "angle_cohort": {
+    "selected_c5_angle": {
+      "ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "path": "src/ContinuousFlexibility/Analysis/CircleAngleEvaluation.lean",
+      "sha256": "b97964f911cadd731f1ee8e6cfb74876895d8616f4d514f64cbd6f7507f5419d",
+      "blob": "fd08a67e49f7d6ff2ea13a14481b0b745f8f04d0",
+      "lines": 176
+    },
+    "main_jet": {
+      "ref": "c9cd90e7cbf7f1c8445477ec543c414c3cd06c42",
+      "path": "src/ContinuousFlexibility/Analysis/CircleJetEvaluation.lean",
+      "sha256": "871e2824dd4760c0439c5f3add8ada2e02374bdb0c94a36c6950334ff70e9a5a",
+      "blob": "6ff499a39d5197fc361031fc07912fb5435b25bb",
+      "lines": 283
+    },
+    "all_nine_public_headers_identical": true,
+    "full_shared_private_and_public_evaluation_block_byte_identical": true,
+    "block_lines": 153,
+    "reason": "Use the existing c5 split pair CircleAngleEvaluation + CircleJetEvaluation as one cohort. Together they retain the complete main public API, without simultaneously defining the shared nine names twice."
+  },
+  "normalization_cohort": {
+    "reason": "The c5 source retains all seven main public headers byte-for-byte and adds two algebraic MultilinearMap APIs required by six actual N02 consumers. Preserve this explicit superset or provide a separately reviewed additive adapter; selecting bare main would drop required interfaces.",
+    "existing_full_math_review": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/recovery/reviews/N01EndpointLocalGrowthParameterOrderIndependentReview.json",
+      "sha256": "46232efa770d9a63eed7055aa9e5ed2f7e2275e13652395a01aef84b91e2749c",
+      "blob": "88f2e7b992c2bb461be8154495fe32ab6276e09a",
+      "lines": 268
+    }
+  },
+  "read_scope": [
+    "Read all nine complete exact diffs, all shared public declaration heads and the complete shared evaluation block.",
+    "This is a source/API compatibility review, not a new full mathematical review of every old provider or downstream consumer.",
+    "The N01 retained graph has 1932 upstream sources byte-identical to new main and five held local wrappers. Nonlinear is entirely byte-identical to bb419."
+  ],
+  "scope_limits": [
+    "The recommendations do not alter active sources or activate a combined graph. Further import closure, public collision checks and CI are required after explicit selection.",
+    "No compiler, active/index/ref, CI or frozen-file changes."
+  ],
+  "created_at": "2026-11-12T15:34:25.496971+00:00"
+}

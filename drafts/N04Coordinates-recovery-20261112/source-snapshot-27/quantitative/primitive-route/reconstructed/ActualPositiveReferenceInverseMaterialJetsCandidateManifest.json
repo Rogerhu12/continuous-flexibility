@@ -1,0 +1,161 @@
+{
+  "kind": "actual_retained_positive_reference_same_width_inverse_material_jets",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_FULL_REVIEW",
+  "author": "/root/quantitative_route",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceInverseMaterialJets.lean",
+    "sha256": "ef40450003358fd22e68a70ecd7c722bfb630b77f6fb6e234331efcb9ab74af5",
+    "blob": "6dd64a27ede32a71db55d16a2029b9b6858a4c12",
+    "lines": 276,
+    "target": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceInverseMaterialJets.lean",
+    "imports": [
+      "ContinuousFlexibility.Analysis.ActualPositiveReferenceAllOrderMaterialJets",
+      "ContinuousFlexibility.Analysis.PositiveReferencePrescribedCosts",
+      "ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope",
+      "ContinuousFlexibility.Analysis.CircleInverseDerivativeBounds"
+    ],
+    "public_names": [
+      "n04Coordinates_retained_positive_reference_inverse_material_jets"
+    ]
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJets.lean",
+      "sha256": "357a6cd2b43e441c8fa7f495277b405545250abc4bdd17fe0b8073c5b11c2807",
+      "blob": "68fb6e0caf22c3154fbc316c22780f4dcbd9b643",
+      "lines": 165
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInversePolynomialEnvelope.lean",
+      "sha256": "d73838d259228ff320f106fc1e1439d76ba15178b2146f54ab5ec4009edeea7e",
+      "blob": "e229f50f114442e4b07e1682c4693ac0ad8b4724",
+      "lines": 117
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCosts.lean",
+      "sha256": "6b5ac3100acd682b1ebec4f73b6469cae178193b108ed3c4475498992d5aa7aa",
+      "blob": "f50437f2ab563c4e8a8076b803441290ef10a7a2",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribed.lean",
+      "sha256": "9d90ac886d09bd6953294d7a554aafa9955ba9c570061befe0abb2be24dcf4f8",
+      "blob": "1eb9ca00d7c9a282a2bd06c447f7a7d74ca9723d",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CircleInverseDerivativeBounds.lean",
+      "sha256": "90bc5f9d7e09ae5cdb6bc3dae180e81cb5ddc5ffa17e765991cf333a94897434",
+      "blob": "2c641676f6a30509a31dd3728933c8ad1a1faf75",
+      "lines": 107
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ScalarInverseMaterialJets.lean",
+      "sha256": "4f8fa2bffb9e37d56699cdd62082b196e5d274bebf12425d5a04fbc752150e2c",
+      "blob": "912e40c5bb9f56e273e925157a28376ec6517784",
+      "lines": 142
+    }
+  ],
+  "provider_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/ActualPositiveReferenceAllOrderMaterialJetsReviewedManifest.json",
+      "sha256": "2c794fb62da3a3298f6672675efed5ecc18b311e3898c1bcdd33ffd3ebe7d438",
+      "blob": "78ceab26410cfb77b8202dde6c13f97412165078",
+      "lines": 45
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferencePrescribedCostsReviewedManifest.json",
+      "sha256": "c3b32e01b82651eadee6f4beb60d1c735aa4c6e82b3a363f32c41ecefd33fbb9",
+      "blob": "a37bf0123403114985dff58000dda06f07539cfb",
+      "lines": 61
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceFinitePrescribedReviewedManifest.json",
+      "sha256": "88c24fa2bb912bee35a1adab5b4104e70337129ae6202fe9341610e83f5f7c84",
+      "blob": "ceee3caed4a6e0268e724199643558654534712f",
+      "lines": 40
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+      "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3",
+      "blob": "3b9e9a1869056ffee6b05c09ff6bf26b8ffb73f0",
+      "lines": 22
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/FiniteInversePolynomialReconstructionIndependentReview.json",
+      "sha256": "457b695af3d4d141eb12188fbadb962597d30c82c8e640313048589629b106e0",
+      "blob": "c5bdd9adcda05e2082cefd300b2160dd78963579",
+      "lines": 48
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+      "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+      "blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+      "lines": 74
+    }
+  ],
+  "pinned_mathlib_commit": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "pinned_api_files": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Inverse.lean",
+      "sha256": "d09dedd0090af21a326031aaaac409bb9065bb028915b64232df18733f482573",
+      "blob": "4ca6d75a836c94e9a169fe9b3fc5876adedd4010",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/Deriv/Basic.lean",
+      "sha256": "78fca2cc5f69fe7f7cf42cb31480aa15068851dae795e1d5fad62f62a28c4145",
+      "blob": "afdc3e3a27aad5f24293a47dc82304dfab84979d",
+      "lines": 985
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/IteratedDeriv/Defs.lean",
+      "sha256": "d6c3ace5e5e251e2943bd5985eb9c0a076a875c98fd876c961cb54c366ca50cb",
+      "blob": "86135f3b7295638a64b59ddaf2653b87d2733431",
+      "lines": 391
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Pow/Real.lean",
+      "sha256": "a6aebc0f4ed4cb273f60fbac323fc2c47857fefed587f50f29e8996a720eec68",
+      "blob": "49b0ff5af8ec2eb182549da1ae5f343f4d72bc99",
+      "lines": 1155
+    }
+  ],
+  "checks": [
+    "The existing actual165 producer chooses the only C0 and B. Its exact finite-data certificate is returned unchanged, and the same forward coordinate/height/reciprocal bounds are retained with enlarged high-order constants. B precedes every spatial order N.",
+    "The actual finite source data feed both existing prescribed numerical factories using exactly kappa=U^-1 and M=U, where U=B*(C0*E0(sample j))^B. No separate existential prescribed-cost B is chosen or identified.",
+    "The displayed Y/H and Taylor degree n+1 and width delta are unchanged. The true range certificate supplies scalar global smoothness and both exact identities Y(invFun Y x)=x and invFun Y(Y x)=x by projection of the actual cylinder chart.",
+    "The scalar inverse derivative is derived from the actual right-inverse identity and genuine positive derivative. The bound |chi prime|<=2U is the existing prescribed reciprocal-slope cost, not an inverse bound hypothesis of the public theorem.",
+    "One private scalar specialization of reviewed finite inverse polynomial117 uses the true derivative of the left-inverse composition as its linear inverse, with pinned norm conversion to ordinary iterated derivatives. C1 and natural exponent d precede all numerical M and actual maps. N=0 is included.",
+    "For each N, D=1+A0+2B and V=D*W^D dominate all required forward finite derivatives and 2U. C1*V^d=(C1*D^d)*W^(D*d); M=1+D+C1*D^d+D*d dominates both coefficient and exponent. All these constants precede component, midpoint host, source selector and point.",
+    "The material comparisons use the true scaled floor W>=1. No E0>=1 assumption, arbitrary profile/box radius inverse, replacement field, state, cell or witness occurs.",
+    "The complete public inputs remain the original same retained geometry/Through03/old typed K/raw optical lower and original C.cell host inclusion. The only new output is the actual invFun Y positive spatial jet tower for that same selected family.",
+    "All four direct imports resolve to explicit sources; exact used providers and independent reviews are pinned here. The sole public name has no installed collision. No compiler, elaborator or CI operation was invoked."
+  ],
+  "scope_limits": [
+    "Only ordinary spatial jets are proved; no state SmoothDirections or final canonical primitive certificate.",
+    "Raw optical lower, retained geometry and actual negative-component host inclusion remain explicit. This source does not infer them from arbitrary Through03.",
+    "No global zeroth inverse-value bound is asserted. The actual geometry maps the canonical interval into its physical interval separately.",
+    "All sources remain held and uncompiled; active checkout/index/refs/CP/authority/plan are unchanged."
+  ],
+  "compiled": false,
+  "independent_reviews": []
+}

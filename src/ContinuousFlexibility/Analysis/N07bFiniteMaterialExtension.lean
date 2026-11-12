@@ -82,4 +82,3 @@ theorem n07b_c2_flat_extension_of_material_decay
   n07b_finite_flat_extension_of_material_decay hT hγ 2 hf hbound
 
 end ContinuousFlexibility.Analysis
-

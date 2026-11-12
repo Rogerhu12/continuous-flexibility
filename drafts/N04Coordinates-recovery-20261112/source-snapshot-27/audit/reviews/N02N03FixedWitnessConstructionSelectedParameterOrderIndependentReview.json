@@ -1,0 +1,188 @@
+{
+  "kind": "independent_full_source_fixed_witness_N02_N03_selected_parameter_order_review",
+  "status": "PASSED_STATIC_WRAPPER_AND_SELECTED_INTERFACE_REVIEW_UNCOMPILED",
+  "reviewer": "/root/audit_coordinates",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48/N02N03FixedWitnessConstruction.lean",
+    "sha256": "932d95fa60bd0030099cf3c2d638f467040783e3c05fa1a60fa3f5558188cbb0",
+    "blob": "e9a0f5a2693c800e8b97b7b46d33e8349456bcd9",
+    "lines": 108
+  },
+  "historical_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n02n03-c5c48/N02N03FixedWitnessConstructionCandidateManifest.json",
+    "sha256": "51212bc5d2a633f16f9b2014e2cbb55d7c280588e3833101fac7055fb1ef650c",
+    "blob": "c487af4f800e35ade7eea93ecbe8a5cc14c4f88c",
+    "lines": 94
+  },
+  "selected_inventory": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N02N03AndCorrectedFlowParameterOrderSelectedInventory.json",
+    "sha256": "0ffb77aab1a331e32d8a32614f0ffea3256bfc4ae9f65dadbaf59e21ce698701",
+    "blob": "f52ac584e48894d0a4b9acf6b980638cf90f7f8e",
+    "lines": 8629
+  },
+  "explicit_required_provider_supersession": {
+    "candidate_manifest": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionBufferedCollarsParameterOrderCandidateManifest.json",
+      "sha256": "4f69d050d17db24a8b6313d4b6c203a9714263425dd1d5d89830cd8bf17ce8c6",
+      "blob": "63da6e0acb63ad91a0ced9316b5cc62f26512eb1",
+      "lines": 69
+    },
+    "source": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionBufferedCollars.lean",
+      "sha256": "afe96c42842307c66651d97cad4aade6ac5eebb7d377f9de0d42686f2f0fefc5",
+      "blob": "1f2f08d963c000947f6e3f56bd55f22b5fe6e412",
+      "lines": 294,
+      "target": "src/ContinuousFlexibility/Analysis/ReturnCorrectionBufferedCollars.lean",
+      "public_headers_preserved": [
+        "N01Properties.exists_positive_opticalCorrectionCollars_buffered",
+        "N01Properties.exists_opticalCorrection_flow_buffered"
+      ]
+    },
+    "reason": "The historical616 inventory still selects the c5 buffered private helper. The final selection must use this explicit k=1-loss port; both public buffered contracts are byte-identical. Its full mathematical peer is owned by root, separately from this wrapper review."
+  },
+  "actual_direct_and_assembly_providers": [
+    {
+      "module": "ContinuousFlexibility.Analysis.N01CorrectionCoefficientMaterialTame",
+      "path": "src/ContinuousFlexibility/Analysis/N01CorrectionCoefficientMaterialTame.lean",
+      "blob": "47472e7230e3282cb752e854bafee64394f4f64c",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "c538c2a9ad5f714ee50ea660b7fce0b4f669e6996dfeffa5baa80fd4a26bd4ba",
+      "lines": 113,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CorrectionCoefficientPolynomialGrowth",
+        "ContinuousFlexibility.Analysis.N01TransportVelocityMixedGrowth"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01NeighborhoodRestriction",
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01NeighborhoodRestriction.lean",
+      "sha256": "15a6e13aea3d47db039b5371c32779952b18e29742b6b0c93423821159482713",
+      "blob": "78c3c5118a8a1e28eb1d4480a3c2b8f7ab46594a",
+      "lines": 160,
+      "selected_ref": "LOCAL_HELD_PARAMETER_ORDER",
+      "imports": [
+        "ContinuousFlexibility.Analysis.SolveStateSpaces",
+        "ContinuousFlexibility.Analysis.MaterialSampleCofinite"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N01ResidualSmoothTame",
+      "path": "src/ContinuousFlexibility/Analysis/N01ResidualSmoothTame.lean",
+      "blob": "ddef35ff6690d2ea86984e765305ed23e3708bc3",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "6282bdb211d2ed494d7002fc23972918cdbe5bcadd71886268e90bb37682459c",
+      "lines": 169,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ResidualSectorCoordinates",
+        "ContinuousFlexibility.Analysis.N01CircleLinearTame",
+        "ContinuousFlexibility.Analysis.CirclePositiveInverseSmoothTame",
+        "ContinuousFlexibility.Analysis.TameTopologicalComposition",
+        "ContinuousFlexibility.Analysis.TameProductDirections",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N02ReturnAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/N02ReturnAssembly.lean",
+      "blob": "1b240fd0f06f9e4028cfa4e246f2dc86969acf82",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "8d3c1f2453177b7100f5528aacb5d76e54920956e82989081102a226137bd40e",
+      "lines": 72,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01ReturnLinearOperators",
+        "ContinuousFlexibility.Analysis.N02ChartIncrement",
+        "ContinuousFlexibility.Analysis.N02ChartError",
+        "ContinuousFlexibility.Analysis.N02ProjectiveChartVariation",
+        "ContinuousFlexibility.Analysis.ReturnChartIdentities"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N03CorrectionAssembly",
+      "path": "src/ContinuousFlexibility/Analysis/N03CorrectionAssembly.lean",
+      "blob": "7e2daf38f4f8ed9742b48ed4a20f71bacff68e62",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "f9b89f4fdcfba29776b065b0094bc2f95403653894a6232922e359df175781ad",
+      "lines": 158,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionSpeedGap",
+        "ContinuousFlexibility.Analysis.ReturnCorrectionOperatorComparison",
+        "ContinuousFlexibility.Analysis.N02ReturnAssembly"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.N03SourceFromActualCoefficientJets",
+      "path": "src/ContinuousFlexibility/Analysis/N03SourceFromActualCoefficientJets.lean",
+      "blob": "afbf9d047431c015d3eed456bb6d92496f893fd9",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "9b684a04f73e59c0313ff04a028d659dfc9c8191f5e877fcd738cc13d3e951d0",
+      "lines": 87,
+      "imports": [
+        "ContinuousFlexibility.Analysis.N01CorrectionCoefficientSmoothJets",
+        "ContinuousFlexibility.Analysis.N03SourceFromCoefficientJets"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Analysis.ReturnCorrectionUniformNeighborhood",
+      "path": "src/ContinuousFlexibility/Analysis/ReturnCorrectionUniformNeighborhood.lean",
+      "blob": "d93ffb039a87de62f1e5130351da1e974c43114c",
+      "selected_ref": "c5c48d262157a11a76604113c40d2438d480433f",
+      "sha256": "6076d8d95cfbc3ddda9c3238ace1f5365f7295cab7840d73a474695db45ad4c6",
+      "lines": 146,
+      "imports": [
+        "ContinuousFlexibility.Analysis.ReturnCorrectionBufferedCollars",
+        "ContinuousFlexibility.Analysis.N01FlowInverseJetBounds",
+        "ContinuousFlexibility.Analysis.NonlinearNeighborhoodRestriction"
+      ]
+    },
+    {
+      "module": "ContinuousFlexibility.Statements.Nonlinear",
+      "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "blob": "1f7afd5657e10ab0fd830323d7c4e6c701a99cd8",
+      "selected_ref": "bb419aa4e85af1b01a3edb0f6113e5f0a242f6d7",
+      "sha256": "7efadc43325d8fe3856414ecaa3c32ad5fd6b53f4605481946a871de72b9ae0d",
+      "lines": 1773,
+      "imports": [
+        "ContinuousFlexibility.Statements.Analysis",
+        "ContinuousFlexibility.Contracts.Annular",
+        "ContinuousFlexibility.Scalar.NormalizedConservation",
+        "ContinuousFlexibility.Scalar.TypeCorrection",
+        "ContinuousFlexibility.Scalar.FormPullback",
+        "Mathlib.Topology.OpenPartialHomeomorph.Defs"
+      ]
+    }
+  ],
+  "read_scope": [
+    "All108 source lines and its entire extracted-blueprint delta; no Blueprint theorem is imported or applied.",
+    "Complete actual ReturnCorrectionUniformNeighborhood146, N01CorrectionCoefficientMaterialTame113, N01ResidualSmoothTame169, N03SourceFromActualCoefficientJets87, N03CorrectionAssembly158 and N02ReturnAssembly72.",
+    "Exact c5-to-bb419 Nonlinear diff: only the two named N01 tower clauses change; coefficient bounds remain mathematically identical and ordinary flow gains the explicit per-parameter-order loss. N02, N03 and Through03 contracts are unchanged.",
+    "Selected N01 neighborhood restriction actual two tower cases, exact buffered294 three-line delta and two unchanged public heads. The remaining already-reviewed gateway ports are bound by their exact owner manifests, without re-auditing all their mathematical proofs."
+  ],
+  "checks": [
+    "D,T,S,C and loss are fixed theorem parameters. The only output choices are the actual return record R, correction record L and one common larger base/smaller positive radius; no reference geometry, material data, physical spaces or control witness is reselected.",
+    "The single actual buffered_uniform witness supplies chi, j,x,delta, common neighborhood and both original-flow derivative bounds. The wrapper uses the last sector-flow bound for the material tame coefficient supplier and preserves the same chi in every subsequent call.",
+    "Every collar tuple projection is checked against the actual uniform provider: positive Qdelta yields nonnegative Qdelta*k; true tsupport inclusion implies derivative support; actual full discriminator and positive strip values give precisely the two strip hypotheses.",
+    "N02 residual realization and its original-topology smooth tame certificate construct R on the same restricted N01 witness. No final N02 or N03 certificate is an input.",
+    "The actual coefficient-family material tame theorem is evaluated on exactly that R, chi, host j and buffered strips. The source theorem consumes the identical dependent coefficient family; physicalSourceDecode_apply changes only the displayed decoder of this same E.",
+    "The final assembler sets L.coefficients=returnCorrectedCoefficients(D,S,C,chi), L.minusFlow=returnCorrectedMinusFlow(S,C,chi), and L.error=E. It supplies all N03 clauses, including the actual spatial smoothness/periodicity clause, from the same cutoff and source.",
+    "The final nested tuple is exactly Through03 at base-prime/loss/epsilon-prime. Any external retained/raw optical certificate over the fixed D,T,S,C remains attached; this wrapper does not create such a certificate.",
+    "The wrapper makes no direct elimination of the ordinary-flow tail and needs no source change for the new per-parameter-order contract once the explicitly selected provider ports are used."
+  ],
+  "mechanical_checks": {
+    "all616_selected_source_hash_blob_linecount_and_imports_verified": true,
+    "local_module_count": 46,
+    "all20_owner_manifest_hashes_verified": true,
+    "project_import_closure_no_missing_no_cycles": true,
+    "topological_order_verified": true,
+    "new_wrapper_public_name_unique_in_selected_graph": true,
+    "buffered_three_literal_changes_and_public_head_equality_verified": true
+  },
+  "historical_notice": "The original108 source docstring and candidate manifest correctly record their historical unreconciled c5 status. They remain immutable. This new receipt reviews the same source bytes against the explicit newer selected parameter-order providers; it does not retroactively change historical status or manufacture old green evidence.",
+  "scope_limits": [
+    "This is an independent source/interface review of108, not compilation/elaboration or a claim that all616 mathematical sources were newly reviewed in this pass.",
+    "Final selection must explicitly supersede the buffered private helper and bind its separate root full review. The cross-graph retained1937 N01 factory compatibility and current-main merge are separate gates.",
+    "No active source/index/ref/CI/compiler/authority/CP changes, no new statement assumptions and no resource-limit change."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "reviewed_at": "2026-11-12T15:32:27.456979+00:00"
+}

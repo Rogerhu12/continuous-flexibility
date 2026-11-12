@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "kind": "actual_return_correction_smallness_velocity_gap_parameter_order_port_reviewed",
+  "status": "STATIC_FULL_SOURCE_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01ReturnCorrectionSmallnessParameterOrderCandidateManifest.json",
+    "sha256": "2123c7cac3b0fbb2bd93eac40cd6927f6b4959aeb410670bf944140541e19166",
+    "blob": "c5a2df60b250495d4f65d498cd37a563b5791cd0",
+    "lines": 125
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionSmallness.lean",
+      "sha256": "3d7f3cb7a4defd9b7aef34f7763b05a3f9befa358487aebbb57b0ec54f5cb4fa",
+      "blob": "5e8807badcc8eaabf7aa3a31ecbc64d64a76cb56",
+      "lines": 191,
+      "target": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSmallness.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionSmallness.c5c48-base.lean.txt",
+        "sha256": "2a95c94c3213d5a77700c3cfd48bad61d5f023840a70363bb218f7c5251b8fa4",
+        "blob": "284afc03d0352d45e827dcb59bc2d9698b1b925a",
+        "lines": 190,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionSmallness.diff",
+        "sha256": "6689ee0b56ffc09a7c3fb99a88d6159e18d5c8af2323f2262a1e854086752d85",
+        "blob": "006c374de7e04d883b81c278e99b18b8f7ed35f6",
+        "lines": 23
+      },
+      "public_headers_changed": [
+        "N01Properties.returnCorrectionInitialMap_and_residual_small"
+      ],
+      "public_headers_preserved": [
+        "inverse_translation_error_bound",
+        "oddPart_sub_id_bound",
+        "evenPart_bound_of_sub_id_bound",
+        "stateChartGrading_le_stateGrading",
+        "N01Properties.stateLeftChart_sub_id_bound",
+        "N01Properties.returnCorrectionInitialMap_and_residual_bound"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionVelocityBounds.lean",
+      "sha256": "5e99bb6e2d0b8c1e0e7e457d44308c8212f29ed9dbe900cb3cc3fd2f9d0ba300",
+      "blob": "b6c7cefc7e6768f7a2c43b36e688d0e4bef28637",
+      "lines": 143,
+      "target": "src/ContinuousFlexibility/Analysis/ReturnCorrectionVelocityBounds.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionVelocityBounds.c5c48-base.lean.txt",
+        "sha256": "9d923982708c79ceec3ed3a4a79a078d8c3cf5502e0198916b09d023ac9ef40f",
+        "blob": "aa8be5bee1da32b4dd3c1607cb0ff564f2f3711f",
+        "lines": 139,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionVelocityBounds.diff",
+        "sha256": "abf5150ec249675251e03991a9989541d70eb1051e00ffee6fd14cdd633d8977",
+        "blob": "2976a89ad2b6d16080389443f7fb291bf9f09388",
+        "lines": 42
+      },
+      "public_headers_changed": [
+        "N01Properties.returnCorrectedMinusSpeed_error_weighted"
+      ],
+      "public_headers_preserved": [
+        "radialCoefficient_upper_of_ratios",
+        "N01Properties.originalRadialCoefficient_le_nine_profile",
+        "N01Properties.originalRadialCoefficient_uniform_upper",
+        "characteristic_halfGap_lower_of_discriminant",
+        "returnCorrectedMinusSpeed_error_bound"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionSpeedGap.lean",
+      "sha256": "73081341f18367e1a792b6a1dda84c9d07cd2beadb147b05c8cf3637444c1617",
+      "blob": "d1a81d60b31bf68689e99722e23fc8c594999b8b",
+      "lines": 374,
+      "target": "src/ContinuousFlexibility/Analysis/ReturnCorrectionSpeedGap.lean",
+      "base": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionSpeedGap.c5c48-base.lean.txt",
+        "sha256": "63aef0aea74046680c66196343cf0d90a00a56ee5db90d8b97fbc1327d3f3101",
+        "blob": "ca3b53e604578d1c156793a6c0bd31d2d2f19894",
+        "lines": 373,
+        "ref": "c5c48d262157a11a76604113c40d2438d480433f"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/ReturnCorrectionSpeedGap.diff",
+        "sha256": "02bfd151db5e4405efb52d4ae3e234e099d5890e8146e4446b453bb5abb89a5e",
+        "blob": "a751c6b426b92eb895b406cefff355393ba25dbb",
+        "lines": 51
+      },
+      "public_headers_changed": [
+        "N01Properties.returnCorrectedMinusSpeed_error_radial_small"
+      ],
+      "public_headers_preserved": [
+        "N01Properties.controlSample_radial_envelope",
+        "N01Properties.exists_opticalCorrection_characteristic_gap",
+        "N01Properties.exists_opticalCorrection_flow"
+      ],
+      "imports_preserved": true,
+      "options_preserved": true
+    }
+  ],
+  "source_lines": 708,
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/N01ReturnCorrectionSmallnessParameterOrderIndependentReview.json",
+      "sha256": "824750bb3e72aab1eb75b5e2db826e3005a2a62e4c0c2fbbd18160bd86bd0a40",
+      "blob": "f4c76cc9177186999736a29b987c33adc4a2ad3c",
+      "lines": 237
+    }
+  ],
+  "smallness_provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/gateway/n01c-n02-compat/N01FlowSmallnessNeighborhoodParameterOrderReviewedManifest.json",
+    "sha256": "8c585220de1df66ca2df32de5f642dc3cbe8d62189e3a42ea6a4e9e1ee4c7dbf",
+    "blob": "fe5fa8f67a6597c71745c9d1a78c53e2b65ad303",
+    "lines": 122
+  },
+  "scope_limits": [
+    "All three exact actual return consumers passed full peer. Two genuine k=1 losses are combined by max before common base/radius choice; the actual cutoff, flow and characteristic-gap factory heads are retained.",
+    "Control and collar/mixed branches have separate gates. This owner does not certify the full combined DAG or CI.",
+    "No source/compiler/active/index/ref/CI changes; all historical artifacts remain unchanged."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "created_at": "2026-11-12T15:25:21.710079+00:00"
+}
