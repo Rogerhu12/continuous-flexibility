@@ -82,7 +82,7 @@ theorem SeedRetainedPair.exists_uniform_laterOuter_tailEnvelope
     hcutDeep.le hlam.ne' hd.2.1 hd.2.2.1 hη hK hKinv
   have hwhole := hbound n hnb S.sigma hS.2.2.1 j hj hjupper entry he right
   dsimp only at hwhole
-  simp only [hentryEq, hleftEq, hrightEq, ← metadata.later_join right n hstrict] at hwhole
+  rw [← metadata.later_join right n hstrict, hentryEq, hleftEq, hrightEq] at hwhole
   obtain ⟨e, _, _, _, _, _, hlocalizer, hleft, hright, _, _, _⟩ := hcoordinates
   have heRadius : ∀ r ∈ radialTailInterval D right cut, e.symm r = κ * r := by
     intro r hr
