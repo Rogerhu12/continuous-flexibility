@@ -244,12 +244,17 @@ private theorem originalCoefficientEntry_minus_apply
         Real.sqrt (originalCoefficientEntry D S C 1 z p ^ 2 -
           originalCoefficientEntry D S C 0 z p * originalCoefficientEntry D S C 2 z p) /
             originalCoefficientEntry D S C 0 z p =
-      minusCharacteristicSpeed (originalCoefficients D S C z) p :=
-  congrArg (fun q : ℝ × ℝ × ℝ =>
-    q.2.1 / q.1 - Real.sqrt (q.2.1 ^ 2 - q.1 * q.2.2) / q.1)
-    (Prod.ext (originalCoefficientEntry_zero_apply D S C z p)
+      minusCharacteristicSpeed (originalCoefficients D S C z) p := by
+  have hcoeff :
+      (originalCoefficientEntry D S C 0 z p,
+        originalCoefficientEntry D S C 1 z p, originalCoefficientEntry D S C 2 z p) =
+      ((originalCoefficients D S C z).a p,
+        (originalCoefficients D S C z).b p, (originalCoefficients D S C z).c p) :=
+    Prod.ext (originalCoefficientEntry_zero_apply D S C z p)
       (Prod.ext (originalCoefficientEntry_one_apply D S C z p)
-        (originalCoefficientEntry_two_apply D S C z p)))
+        (originalCoefficientEntry_two_apply D S C z p))
+  exact congrArg (fun q : ℝ × ℝ × ℝ =>
+    q.2.1 / q.1 - Real.sqrt (q.2.1 ^ 2 - q.1 * q.2.2) / q.1) hcoeff
 
 private theorem minusCharacteristicSpeed_stripTower_nonempty
     (hN : N01Properties D T S C base loss ε)

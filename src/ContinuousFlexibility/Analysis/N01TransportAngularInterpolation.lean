@@ -157,7 +157,6 @@ theorem N01Properties.returnCorrectionPulledDisplacement_angular_diagonal_interp
     (rsel i) (hrsel i) x.1 hx.1 x.2 m θ).symm
 
 include hN hS hT hflow hl hh in
-set_option diagnostics true in
 theorem N01Properties.returnFlowInverseSlope_angular_diagonal_interpolation
     (J : ∀ m, SmoothDirections
       ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
@@ -213,7 +212,6 @@ theorem N01Properties.returnFlowInverseSlope_angular_diagonal_interpolation
     KH hKH hhgt l h rsel hcover J 1 heq nmax
 
 include hN hS hT hflow hl hh hχrange in
-set_option diagnostics true in
 theorem N01Properties.returnCorrectionPulledResidual_angular_diagonal_interpolation
     (hR : N02Properties D T S C R base ε)
     (J : ∀ m, SmoothDirections
