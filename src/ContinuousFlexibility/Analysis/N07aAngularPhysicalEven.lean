@@ -72,7 +72,8 @@ theorem n07a_current_physical_even_of_piecewise
         (fun p hp => ⟨hp.1, mem_univ _⟩)) hv
   intro r theta
   by_cases hr : r ∈ Ioo D.a D.b
-  · exact he ⟨hr, mem_univ _⟩
+  · have hp : (r, theta) ∈ annularOpen D := ⟨hr, mem_univ _⟩
+    exact he hp
   · rw [hzero (r, -theta) (fun hp => hr hp.1),
       hzero (r, theta) (fun hp => hr hp.1)]
 

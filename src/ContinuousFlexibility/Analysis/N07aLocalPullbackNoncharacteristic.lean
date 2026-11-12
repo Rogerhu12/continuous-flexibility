@@ -77,8 +77,8 @@ theorem n07a_divergence_mul_at_zero_firstJet
       from hnormal',
     show angularPartial _ x = angularPartial (fun q => h q * Ag q + g q * Ah q) x
       from hangular',
-    radialPartial_add (hdh.mul hdNg) (hdg.mul hdNh),
-    angularPartial_add (hdh.mul hdAg) (hdg.mul hdAh),
+    radialPartial_add (hdh.fun_mul hdNg) (hdg.fun_mul hdNh),
+    angularPartial_add (hdh.fun_mul hdAg) (hdg.fun_mul hdAh),
     radialPartial_mul hdh hdNg, radialPartial_mul hdg hdNh,
     angularPartial_mul hdh hdAg, angularPartial_mul hdg hdAh,
     hg0, hgr, hgt, hNg0, hAg0]
@@ -99,10 +99,11 @@ theorem n07a_radialQuadraticProbe_radial (y : PolarPoint) :
     radialPartial (n07aRadialQuadraticProbe y) = fun q => q.1 - y.1 := by
   funext q
   unfold n07aRadialQuadraticProbe
-  rw [radialPartial_mul differentiableAt_const
-      ((differentiableAt_fst.sub differentiableAt_const).pow 2),
-    radialPartial_const, radialPartial_sq (differentiableAt_fst.sub differentiableAt_const),
-    radialPartial_sub differentiableAt_fst differentiableAt_const,
+  have hd : DifferentiableAt ℝ (fun p : PolarPoint => p.1 - y.1) q :=
+    differentiableAt_fst.sub_const y.1
+  rw [radialPartial_mul (differentiableAt_const (1 / 2 : ℝ)) (hd.fun_pow 2),
+    radialPartial_const, radialPartial_sq hd,
+    radialPartial_sub (x := q) differentiableAt_fst (differentiableAt_const y.1),
     radialPartial_fst, radialPartial_const]
   ring
 
@@ -110,10 +111,11 @@ theorem n07a_radialQuadraticProbe_angular (y : PolarPoint) :
     angularPartial (n07aRadialQuadraticProbe y) = fun _ => 0 := by
   funext q
   unfold n07aRadialQuadraticProbe
-  rw [angularPartial_mul differentiableAt_const
-      ((differentiableAt_fst.sub differentiableAt_const).pow 2),
-    angularPartial_const, angularPartial_sq (differentiableAt_fst.sub differentiableAt_const),
-    angularPartial_sub differentiableAt_fst differentiableAt_const,
+  have hd : DifferentiableAt ℝ (fun p : PolarPoint => p.1 - y.1) q :=
+    differentiableAt_fst.sub_const y.1
+  rw [angularPartial_mul (differentiableAt_const (1 / 2 : ℝ)) (hd.fun_pow 2),
+    angularPartial_const, angularPartial_sq hd,
+    angularPartial_sub (x := q) differentiableAt_fst (differentiableAt_const y.1),
     angularPartial_fst, angularPartial_const]
   ring
 
@@ -137,8 +139,8 @@ theorem n07a_radialQuadraticProbe_mixed (y : PolarPoint) :
   have ht0 := angularPartial_eq_mixedDerivative_on isOpen_univ hW (mem_univ y)
   rw [← hrr, ← hrt, ← htt, ← hr0, ← ht0,
     n07a_radialQuadraticProbe_radial, n07a_radialQuadraticProbe_angular]
-  simp [radialPartial_sub differentiableAt_fst differentiableAt_const,
-    angularPartial_sub differentiableAt_fst differentiableAt_const]
+  simp [radialPartial_sub (x := y) differentiableAt_fst (differentiableAt_const y.1),
+    angularPartial_sub (x := y) differentiableAt_fst (differentiableAt_const y.1)]
 
 /-- The normal symbol depends only on the first derivative of the chart. -/
 theorem n07a_localPullback_principal_fderiv_congr
@@ -201,6 +203,7 @@ theorem n07a_actual_negativePullback_principal_identity
     (ha.mono hdom.2.2.1) (hb.mono hdom.2.2.1) (hc.mono hdom.2.2.1)
     hF hW.contDiffOn (mapsTo_univ _ _) hx
   have hj := n07a_radialQuadraticProbe_mixed y
+  dsimp only at hchain
   rw [hxy] at hchain
   have hphysical : divergenceOperator (L.coefficients z) g x =
       (n07aPullbackPrincipal (L.coefficients z) (K.chart z m)).a x := by
@@ -229,7 +232,7 @@ theorem n07a_actual_negativePullback_principal_identity
     change divergenceOperator (K.coefficients z m) W y =
       radialPartial (radialPartial W) y + angularPartial (fun _ => 0) y at he
     simpa [W, n07a_radialQuadraticProbe_radial,
-      radialPartial_sub differentiableAt_fst differentiableAt_const] using he
+      radialPartial_sub (x := y) differentiableAt_fst (differentiableAt_const y.1)] using he
   have hop := h04.2.1.2.2.1 z hz hs m W hW y hy
   simp only [canonicalOperator, canonicalSource, hm, Bool.false_eq_true,
     ↓reduceIte, one_mul, hcanonical, hW0, mul_zero, add_zero] at hop

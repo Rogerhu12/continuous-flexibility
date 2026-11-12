@@ -43,8 +43,10 @@ theorem n07aClosedPhysicalHeight_hasFDerivWithinAt
   have hb := h04.1.boundary z hz hs m
   have hfields := hb.2.2.2.2.1 p hp
   have hchart := (hfields.1.differentiableAt (by simp)).hasFDerivAt.hasFDerivWithinAt
+    (s := physicalPieceClosed S K z m)
   have hjet := (J.derivative 0 0 _ (hb.1 hp)).comp p hchart hb.1
   have hh := (hfields.2.1.differentiableAt (by simp)).hasFDerivAt.hasFDerivWithinAt
+    (s := physicalPieceClosed S K z m)
   exact hh.mul hjet
 
 /-- Reference closed strips have unique differentiation, so their within
@@ -119,8 +121,8 @@ theorem n07aClosedPhysicalHeight_transition_firstJet
     field_simp [hhx]
   have hDcur := (n07aClosedPhysicalHeight_hasFDerivWithinAt h04 hz hs m J (hmap hp)).comp p
     (hT.differentiableAt (by simp)).hasFDerivAt.hasFDerivWithinAt hmap
-  have hDpull := ((hρ.differentiableAt (by simp)).hasFDerivAt.hasFDerivWithinAt.mul hDcur).
-    congr he (he hp)
+  have hDpull := ((hρ.differentiableAt (by simp)).hasFDerivAt.hasFDerivWithinAt.mul hDcur).congr
+    he (he hp)
   have hDref := n07aClosedPhysicalHeight_hasFDerivWithinAt h04 href hsref m J hp
   have hpcc : p ∈ closedStrip (K.physicalLeft m) (K.physicalRight m) := by
     rwa [← n07a_referencePhysicalPieceClosed h04 m]
@@ -179,6 +181,7 @@ theorem n07aClosedPhysicalHeight_current_firstJets
   have hj := n07a_primitiveTransport_closed_firstJet h04 href hsref hz hs hτ hq hpiece j hpj hpD
   have hTi := n07aClosedPhysicalHeight_transition_firstJet h04 href hsref hz hs i Ji hpi
   have hTj := n07aClosedPhysicalHeight_transition_firstJet h04 href hsref hz hs j Jj hpj
+  dsimp only at hi hj hTi hTj
   rw [← hi.2.1.1, ← hi.2.1.2, ← hi.1.1, ← hi.1.2] at hTi
   rw [← hj.2.1.1, ← hj.2.1.2, ← hj.1.1, ← hj.1.2] at hTj
   exact n07a_firstJet_transport_cancel hi.2.2.1 hi.2.2.2

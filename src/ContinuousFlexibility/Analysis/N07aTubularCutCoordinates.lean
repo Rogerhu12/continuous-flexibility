@@ -94,7 +94,8 @@ theorem n07a_tubularCutCoordinates_exists
   obtain ⟨_, _, _, _, _, hR, hlzero, _, hright, _⟩ := h04.2.1.1.1 k
   have hq (θ : ℝ) : (R, θ) ∈ canonicalClosed S K iL := by
     refine ⟨⟨?_, ?_⟩, mem_univ _⟩
-    · simpa only [hlzero] using hR.le
+    · change K.left (K.cutPair k).1 ≤ K.cutRadius k
+      simpa only [hlzero] using hR.le
     · exact hright.symm.le
   have hFG (θ : ℝ) : F (Γ θ) = (R, θ) :=
     (h04.1.boundary z hz hs iL).2.2.2.1 _ (hq θ)
@@ -125,7 +126,8 @@ theorem n07a_tubularCutCoordinates_exists
     intro v
     have heq := hleftInv (A.symm v)
     rw [← hA] at heq
-    simpa only [ContinuousLinearEquiv.apply_symm_apply] using heq.symm
+    simpa only [ContinuousLinearEquiv.coe_coe,
+      ContinuousLinearEquiv.apply_symm_apply] using heq.symm
   obtain ⟨e, he, hqe, _, _, hinvs, _, hdinv⟩ :=
     n07a_smoothLocalCoordinates hH q₀ A (hHd.congr_fderiv hA.symm)
   have hinverse : fderiv ℝ e.symm (Γ θ₀) = fderiv ℝ F (Γ θ₀) := by
@@ -158,9 +160,13 @@ theorem n07a_tubularCutCoordinates_exists
     rw [hHline, hFG]
   have hψrad : radialPartial ψ q₀ = 1 := by
     have hd := ((hFatH.differentiableAt (by simp)).hasFDerivAt.comp q₀ hHd).fst
-    change fderiv ℝ (fun q => (F (H q)).1) q₀ (1, 0) = 1
-    rw [hd.fderiv, hHcenter, hI.1]
-    simp
+    have hcomp : (fderiv ℝ F (H q₀)).comp (fderiv ℝ G q₀) =
+        ContinuousLinearMap.id ℝ PolarPoint := by
+      rw [hHcenter]
+      exact hI.1
+    change fderiv ℝ (fun q => ((F ∘ H) q).1) q₀ (1, 0) = 1
+    rw [hd.fderiv, hcomp]
+    rfl
   have hHt : Tendsto H (𝓝 q₀) (𝓝 (Γ θ₀)) := by
     simpa only [hHcenter] using (hH.continuous.continuousAt (x := q₀)).tendsto
   have hN : N ∈ 𝓝 (Γ θ₀) :=
@@ -170,7 +176,7 @@ theorem n07a_tubularCutCoordinates_exists
     G (F (H q)) = H q ∧ 0 < ψ q}
   have hU : U ∈ 𝓝 q₀ := by
     filter_upwards [e.open_source.mem_nhds hqe, hHt.eventually hN,
-      hGF.comp_tendsto hHt, hψ.continuousAt.eventually (Ioi_mem_nhds hψpos)]
+      hHt.eventually hGF, hψ.continuousAt.eventually (Ioi_mem_nhds hψpos)]
       with q hqe hqN hqGF hqpos
     exact ⟨hqe, hqN, hqGF, hqpos⟩
   obtain ⟨l, r, a, b, hl, hr, ha, hb, hrect, hsign⟩ :=
@@ -190,6 +196,7 @@ theorem n07a_tubularCutCoordinates_exists
         · rw [hright]
           exact ((hsign p.1 hp.1 p.2 hp.2).1).mpr hpR
       have hm := (h04.1.charts z hz hs iL).2.1 hcanonical
+      change G (F (H p)) ∈ physicalPieceOpen S K z iL at hm
       rw [(hrect hp).2.2.1] at hm
       exact hm
   have hrightSide (p : PolarPoint) (hp : p ∈ Icc l r ×ˢ Icc a b) :
@@ -263,14 +270,17 @@ theorem n07a_tubularCutCoordinates_exists
     exact hp.1.1
   · rintro ⟨s, θ⟩ hp
     rw [he]
-    rcases lt_or_eq_of_le hp.1.2 with hsR | rfl
+    change H (s, θ) ∈ physicalPieceClosed S K z iL
+    rcases lt_or_eq_of_le (show s ≤ R from hp.1.2) with hsR | heq
     · exact subset_closure ((hleft (s, θ) ⟨⟨hp.1.1, hsR.le.trans hr.le⟩, hp.2⟩).mpr hsR)
-    · simpa only [hHline] using (n07a_currentCutPoint_mem_closed h04 hz hs k θ).1
+    · rw [heq, hHline]
+      exact (n07a_currentCutPoint_mem_closed h04 hz hs k θ).1
   · rintro ⟨s, θ⟩ hp
     rw [he]
-    rcases lt_or_eq_of_le hp.1.1 with hRs | heq
+    change H (s, θ) ∈ physicalPieceClosed S K z iR
+    rcases lt_or_eq_of_le (show R ≤ s from hp.1.1) with hRs | heq
     · exact subset_closure ((hrightSide (s, θ) ⟨⟨hl.le.trans hRs.le, hp.1.2⟩, hp.2⟩).mpr hRs)
-    · subst s
-      simpa only [hHline] using (n07a_currentCutPoint_mem_closed h04 hz hs k θ).2
+    · rw [← heq, hHline]
+      exact (n07a_currentCutPoint_mem_closed h04 hz hs k θ).2
 
 end ContinuousFlexibility.Analysis

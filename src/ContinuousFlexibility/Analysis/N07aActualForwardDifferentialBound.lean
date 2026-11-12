@@ -19,6 +19,11 @@ open scoped ContDiff
 
 set_option backward.isDefEq.respectTransparency true
 
+private theorem n07a_forward_bound_with_exists {α : Type*} {Condition : α → Prop}
+    {P : Prop} (h : ∃ a, Condition a) (hP : ∀ a, Condition a → P) : P := by
+  obtain ⟨a, ha⟩ := h
+  exact hP a ha
+
 private theorem n07a_absorb_half (v g a : ℝ) (hv : 0 ≤ v)
     (ha : a ≤ 1 / 2) (hb : v ≤ g + v * a) : v ≤ 2 * g := by
   have hsmall := mul_le_mul_of_nonneg_left ha hv
@@ -74,22 +79,14 @@ theorem N07aActualForwardFirstBound.restrict
   obtain ⟨b, hbs, hb0, hbb⟩ := h
   exact ⟨b, hbs, hb0, fun z hz => hbb z (n07a_sectorNeighborhood_mono hb he hz)⟩
 
-private theorem n07a_reference_forward_fderiv_bound
-    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
-    (hgeom : CanonicalGeometry D S C K base ε)
-    (href : CanonicalGeometry.ReferenceJets D T S C L K)
-    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :
-    ∃ b : ℕ → ℝ, N07aSampleSubpower T K b ∧ (∀ m, 0 ≤ b m) ∧
-      ∀ m x, x ∈ referencePhysicalPieceOpen S K m →
+private theorem n07a_reference_forward_fderiv_of_jet (hε : 0 < ε)
+    (d : ℕ) (b : ℕ → ℝ)
+    (hbb : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m x,
+      x ∈ referencePhysicalPieceOpen S K m →
+        ‖iteratedFDeriv ℝ 1 (K.chart (liftSectorParameter S C z) m) x‖ ≤
+          b m * (1 + CanonicalGeometry.parameterGrading S ((1 - 1) + d) z)) :
+    ∀ m x, x ∈ referencePhysicalPieceOpen S K m →
         ‖fderiv ℝ (K.chart (C.referenceState, 0) m) x‖ ≤ b m := by
-  let bounds := n07a_forwardChart_positive_jets hD hT href hcur
-    (fun m => (hgeom.referenceBounds m).2.1) (fun m => (hgeom.referenceBounds m).1)
-  let d : ℕ := bounds.choose
-  have hb := bounds.choose_spec
-  let b : ℕ → ℝ := (hb 1 (by omega)).choose
-  have hbs := (hb 1 (by omega)).choose_spec.1
-  have hb0 := (hb 1 (by omega)).choose_spec.2.1
-  have hbb := (hb 1 (by omega)).choose_spec.2.2
   have hzero : (0 : CanonicalGeometry.Parameter S) ∈ sectorNeighborhood S base ε ε := by
     have h0 : sectorGrading S base (0 : StateDirections S) = 0 :=
       (sectorGrading S base).map_zero'
@@ -99,7 +96,7 @@ private theorem n07a_reference_forward_fderiv_bound
       (C.referenceState, 0) := by
     simp only [liftSectorParameter, Prod.fst_zero, Prod.snd_zero,
       ZeroMemClass.coe_zero, add_zero]
-  refine ⟨b, hbs, hb0, fun m x hx => ?_⟩
+  intro m x hx
   have h := hbb 0 hzero m x hx
   rw [norm_iteratedFDeriv_one] at h
   have hpzero : CanonicalGeometry.parameterGrading S (1 - 1 + d)
@@ -111,6 +108,21 @@ private theorem n07a_reference_forward_fderiv_bound
       (0 : CanonicalGeometry.Parameter S)) = b m :=
     (congrArg (fun a : ℝ => b m * (1 + a)) hpzero).trans (by rw [add_zero, mul_one])
   exact (heq.symm.le.trans h).trans_eq hfactor
+
+private theorem n07a_reference_forward_fderiv_bound
+    (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
+    (hgeom : CanonicalGeometry D S C K base ε)
+    (href : CanonicalGeometry.ReferenceJets D T S C L K)
+    (hcur : CanonicalGeometry.CurrentJets D T S C L K base ε) :
+    ∃ b : ℕ → ℝ, N07aSampleSubpower T K b ∧ (∀ m, 0 ≤ b m) ∧
+      ∀ m x, x ∈ referencePhysicalPieceOpen S K m →
+        ‖fderiv ℝ (K.chart (C.referenceState, 0) m) x‖ ≤ b m := by
+  refine n07a_forward_bound_with_exists (n07a_forwardChart_positive_jets hD hT href hcur
+    (fun m => (hgeom.referenceBounds m).2.1) (fun m => (hgeom.referenceBounds m).1)) ?_
+  intro d hd
+  refine n07a_forward_bound_with_exists (hd 1 (by omega)) ?_
+  intro b hb
+  exact ⟨b, hb.1, hb.2.1, n07a_reference_forward_fderiv_of_jet hε d b hb.2.2⟩
 
 theorem n07a_actualForwardFirstBound_neighborhood
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T) (hε : 0 < ε)
