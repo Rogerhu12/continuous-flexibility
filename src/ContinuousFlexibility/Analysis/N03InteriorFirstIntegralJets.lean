@@ -84,6 +84,66 @@ private theorem interiorFirstIntegral_family_propagation
     (isOpen_Ioo.prod isOpen_univ) (fun y hy => Ioo_subset_Icc_self hy.1)
     he q ⟨hq, mem_univ _⟩
 
+private theorem rootCircleSample_signed_section
+    (U : ℝ → PolarPoint → ℝ) (G : ℝ × ℝ × ℝ → ℝ)
+    (a x θ : ℝ) (plus : Bool)
+    (hsection : U 1 (a, θ) = rootCircleSample G x (-(x ^ (3 / 2 : ℝ))) θ ∧
+      U (-1) (a, θ) = rootCircleSample G x (x ^ (3 / 2 : ℝ)) θ) :
+    U (if plus then -1 else 1) (a, θ) =
+      rootCircleSample G x ((if plus then 1 else -1) * x ^ (3 / 2 : ℝ)) θ := by
+  cases plus with
+  | false => simpa only [Bool.false_eq_true, ↓reduceIte, neg_one_mul] using hsection.1
+  | true => simpa only [↓reduceIte, one_mul] using hsection.2
+
+private theorem n03_interiorFirstIntegral_eqOn_sample
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {E : ReturnEquationData S}
+    {L : ReturnCorrectionData S} {K : CanonicalData S} {base loss : ℕ} {ε : ℝ}
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hN : N01Properties D T S C base loss ε)
+    (hE : N02Properties D T S C E base ε)
+    (hL : N03Properties D T S C E L base ε)
+    (hA : N04PartA D S C K base ε) (hB : N04PartB S C L K base ε)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1) (m : ℕ) {g : ℝ → ℝ} (hg : ContDiff ℝ ∞ g)
+    {R δ η x b ρ : ℝ} (hR : 0 < R) (hδ : 0 < δ)
+    (hx : x ∈ Ioc (0 : ℝ) η) (hab : C.left m + δ * x < b)
+    (hb : b < C.right m) (hρ : 0 < ρ)
+    (hstrip : RootCoefficientStripConditions D.w g (stateProfile D S C z.1)
+      (stateHeight D S C z) (C.left m) 1 R)
+    {Θ₀ Θ Ψ : (ℝ × ℝ) → ℝ → ℝ → ℝ}
+    (hΘ₀ : N04FlowEquations
+      (rootRescaledField (localizedRootDrift D S C (C.left m) 1 hR z)
+        (localizedRootSpeed D S C g (C.left m) 1 hR z) δ) Θ₀)
+    (hmatch : RootStoredFlowAgreementOn C L z m false δ η Θ₀)
+    (plus : Bool)
+    (hΘ : N04FlowEquations
+      (interiorScalarFlowField
+        (interiorLocalizedSpeed hab.le hρ
+          (negativeCharacteristicField plus (L.coefficients z)))
+        (C.left m + δ * x) b) Θ)
+    (hinverse : ∀ v θ, Θ v 1 (Ψ v 1 θ) = θ) :
+    EqOn (canonicalGluedAiryIntegral S K z m (if plus then -1 else 1))
+      (fun y => rootCircleSample
+        (rootScaledInverseCoordinate Θ₀ (n01RootLabel S C z m false) (Real.sqrt δ))
+        x ((if plus then 1 else -1) * x ^ (3 / 2 : ℝ))
+        (interiorEndpointPullback Ψ (C.left m + δ * x) b y))
+      (Ioo (C.left m + δ * x) b ×ˢ (univ : Set ℝ)) := by
+  let a := C.left m + δ * x
+  have ha : C.left m < a := lt_add_of_pos_right _ (mul_pos hδ hx.1)
+  have hax : a ∈ Ioo (C.left m) (C.right m) := ⟨ha, hab.trans hb⟩
+  intro y hy
+  have htransport := canonicalGluedAiryIntegral_eq_interiorFlowInverse
+    hS hT hN hE hL hA hB hz hs m ha hab hb hρ plus hΘ
+    hinverse (Ioo_subset_Icc_self hy.1) y.2
+  have hsection := n03_leftRoot_firstIntegrals_eq_controlled_samples
+    hS hT hN hE hL hA hB hz hs m hg hR hstrip hΘ₀ hmatch hx hax
+    (interiorEndpointPullback Ψ a b y)
+  exact htransport.trans (rootCircleSample_signed_section
+    (canonicalGluedAiryIntegral S K z m)
+    (rootScaledInverseCoordinate Θ₀ (n01RootLabel S C z m false) (Real.sqrt δ))
+    a x (interiorEndpointPullback Ψ a b y) plus hsection)
+
 private theorem n03_interiorFirstIntegral_actual_inputs
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {E : ReturnEquationData S}
@@ -112,9 +172,6 @@ private theorem n03_interiorFirstIntegral_actual_inputs
       rootLoss flowLoss A F (z - (C.referenceState, 0))
       (C.left m + δ * x) b Γ x
       (fun plus => canonicalGluedAiryIntegral S K z m (if plus then -1 else 1)) := by
-  let a := C.left m + δ * x
-  have ha : C.left m < a := lt_add_of_pos_right _ (mul_pos hδ hx.1)
-  have hax : a ∈ Ioo (C.left m) (C.right m) := ⟨ha, hab.trans hb⟩
   obtain ⟨_hcontrol, Θ₀, hΘ₀, hG, hperiod, _hzero, _hlower, hrootjets⟩ := hinput
   let G := rootScaledInverseCoordinate Θ₀ (n01RootLabel S C z m false) (Real.sqrt δ)
   have hmatch := hfixed z hz hs Θ₀ hΘ₀
@@ -122,19 +179,9 @@ private theorem n03_interiorFirstIntegral_actual_inputs
   intro plus
   obtain ⟨Θ, Ψ, hΘ, _hΨeq, hinverse, _hΘjets, hΨjets⟩ := hflows plus
   refine ⟨Ψ, hΨjets, ?_⟩
-  intro y hy
-  have htransport := canonicalGluedAiryIntegral_eq_interiorFlowInverse
-    hS hT hN hE hL hA hB hz hs m ha hab hb hρ plus hΘ
-    (fun v θ => (hinverse v θ).1) (Ioo_subset_Icc_self hy.1) y.2
-  have hsection := n03_leftRoot_firstIntegrals_eq_controlled_samples
-    hS hT hN hE hL hA hB hz hs m hg hR hstrip hΘ₀ hmatch hx hax
-    (interiorEndpointPullback Ψ a b y)
-  cases plus with
-  | false =>
-      exact htransport.trans (by
-        simpa only [G, Bool.false_eq_true, ↓reduceIte, neg_one_mul] using hsection.1)
-  | true =>
-      exact htransport.trans (by simpa only [G, ↓reduceIte, one_mul] using hsection.2)
+  exact n03_interiorFirstIntegral_eqOn_sample (Θ₀ := Θ₀) (Θ := Θ) (Ψ := Ψ)
+    hS hT hN hE hL hA hB hz hs m hg hR hδ hx hab hb hρ hstrip
+    hΘ₀ hmatch plus hΘ (fun v θ => (hinverse v θ).1)
 
 theorem n03_interiorFirstIntegral_material_propagation
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

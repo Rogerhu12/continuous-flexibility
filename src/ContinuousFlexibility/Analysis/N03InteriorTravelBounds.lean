@@ -78,8 +78,9 @@ theorem n03_interiorRootTravel_bounds_of_actual_sections
         radialPartial V (s, φ) = -fp (s, φ) * angularPartial V (s, φ) := by
     have h := canonicalGluedAiryIntegral_stored_characteristic_transport
       hS hT hN01 hN02 hN03 hA hB hz hs m (p := (s, φ)) (hsub ⟨hss, mem_univ _⟩)
-    simpa only [U, V, fm, fp, hlocal false s hss φ, hlocal true s hss φ,
-      negativeCharacteristicField, Bool.false_eq_true, ↓reduceIte] using h
+    dsimp only [U, V, fm, fp]
+    rw [hlocal false s hss φ, hlocal true s hss φ]
+    simpa only [negativeCharacteristicField, Bool.false_eq_true, ↓reduceIte] using h
   have hordered (s : ℝ) (hss : s ∈ Icc a b) (φ : ℝ) : fm (s, φ) ≤ fp (s, φ) := by
     have hqN := hsub (show (s, φ) ∈ Icc a b ×ˢ (univ : Set ℝ) from ⟨hss, mem_univ _⟩)
     have hends := hN01.2.2.2.1.1 m
