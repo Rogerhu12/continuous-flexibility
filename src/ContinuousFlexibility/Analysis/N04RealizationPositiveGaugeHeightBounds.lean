@@ -104,8 +104,10 @@ theorem n04Realization_positiveGaugeHeight_shifted_parameter_bound
   have hhfix : ContDiffOn ℝ ∞ hfix univ := by
     cases inv with
     | false => exact (hH₀.comp contDiff_fst).contDiffOn
-    | true => exact (hH₀.comp contDiff_fst).contDiffOn.inv
-        (fun p _ => (hH₀pos p.1).ne')
+    | true =>
+        have hbase : ContDiffOn ℝ ∞ (fun p : PolarPoint => H₀ p.1) univ :=
+          (hH₀.comp contDiff_fst).contDiffOn
+        exact hbase.inv (fun p _ => (hH₀pos p.1).ne')
   have hmap : ∀ r ∈ Ioo (0 : ℝ) 1, ∀ θ : ℝ,
       (Function.invFun Y r, θ) ∈ (univ : Set PolarPoint) :=
     fun _ _ _ => mem_univ _
