@@ -114,7 +114,10 @@ theorem SeedRetainedPair.exists_fixed_selectedOuter_tailEnvelope
         κ * outerOutwardRadius right x := by cases right <;> simp [outerOutwardRadius]
     change Γ.reference.localizer m (outerOutwardRadius right (κ * x)) =
       (S.family S.sigma).localizer m (outerOutwardRadius right x)
-    rw [hout, hlocalizer, ← he, e.apply_symm_apply]
+    rw [hout, hlocalizer, ← he]
+    change (S.family S.sigma).localizer m (e (e.symm (outerOutwardRadius right x))) =
+      (S.family S.sigma).localizer m (outerOutwardRadius right x)
+    rw [e.apply_symm_apply]
   have hκ : 0 < κ := P.sideRadius_pos right
   have hβ : 0 < β := P.sideHeight_pos right
   let hm := outerWholeMeasure_radiusScale hκ hβ hcut hcutE hend hprofile
