@@ -1,4 +1,4 @@
-# N06 original-atlas proof and the announced construction interface
+# N06 original-atlas proof and the shared construction interface
 
 ## Scope and provenance
 
@@ -8,12 +8,13 @@ The public endpoint remains exactly
 theorem N06 (hN05 : N05Statement) : N06Statement
 ```
 
-The shared construction interface is the one announced in `docs/tasks/README.md`
-and implemented by N07a at commit
-`438e5d40c0de8d0a0f22bdccadd4feb820ba44bd`. This port preserves the same
+The shared construction interface was implemented by N07a at commit
+`438e5d40c0de8d0a0f22bdccadd4feb820ba44bd` and integrated into main at
+`c9b130b932d5c608befa1ae9c46bff36145880f2`. This branch uses the same
 `PrimitiveGeometryProperties`, raw return-correction spatial properties and
-physical-witness periods. Its mathematical audit and manuscript locations are
-recorded in `N07a-interface-repair.md`.
+physical-witness periods. The authoritative repair record is now on main in
+`docs/STATUS.md`; its mathematical audit and manuscript locations are recorded
+in `N07a-interface-repair.md`.
 
 This changes the propositions carried by the construction stages. It is not a
 claim that the former complete existential `N05Statement → N06Statement` has
@@ -23,15 +24,15 @@ obligations for the N02N03 and N04Coordinates producers.
 
 ## Exact coordinate payload retained by this port
 
-Main already carries N07b's state-dependent physical domains and
-`CanonicalPrimitiveGeometry`. Its former Through04 tail is
+Before the N07a integration, main already carried N07b's state-dependent
+physical domains and `CanonicalPrimitiveGeometry`. The former Through04 tail was
 
 ```lean
 N04Properties D T S C L K base loss ε ∧
   CanonicalPrimitiveGeometry D T S C L K base ε
 ```
 
-The announced interface inserts the raw construction certificate while
+The integrated interface inserts the raw construction certificate while
 retaining that existing certificate on the same objects:
 
 ```lean
