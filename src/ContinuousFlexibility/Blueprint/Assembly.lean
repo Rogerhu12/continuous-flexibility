@@ -80,11 +80,9 @@ theorem R10_of_nodes (hA : R10aStatement) (hB : R10bStatement) : R10Statement :=
 
 theorem N04_of_nodes (hc : N04cStatement) (hroot : RootCompositionTarget)
     (hcubic : CubicDivisionTarget) (htrans : PhysicalTransmissionTarget) : N04Statement := by
-  obtain ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, h04, hprimitive⟩ := hc
-  -- The common geometry/operator predicate and its primitive estimates
-  -- retain the same coordinate data and the same neighborhood.
+  obtain ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, h4, hgeometry⟩ := hc
   exact ⟨A, T, S, C, R, L, K, base, loss, ε, h1, h2, h3, hroot, hcubic, htrans,
-    h04, hprimitive⟩
+    h4, hgeometry⟩
 
 /-- The analytic existence statement, assembled from the blueprint nodes. -/
 theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
@@ -115,6 +113,11 @@ theorem flatAnnularCore_nonempty : Nonempty FlatAnnularCore := by
   have hN01a : N01aStatement := N01a hR12 hW01 hSpaces.1
   have hN01b : N01bStatement := N01b hN01a hS05
   have hN01 : N01Statement := N01c hN01b
+  -- N02N03 retains the actual corrected b/c coefficients' open smoothness
+  -- and angular periodicity, including the artificial negative-piece cuts.
+  -- These construction facts, including the actual chart/height endpoint
+  -- first jets of the fixed transmission geometry, pass through N04--N06
+  -- to the physical inverse.
   have hN03 : N03Statement := N02N03 hN01 hS05
   have hN04 : N04Statement := N04_of_nodes (N04Coordinates (N04b (N04a hN03))) N04Root N04Cubic N04Transmission
   have hN05 : N05Statement := N05 hN04

@@ -120,14 +120,15 @@ theorem n03Properties_restrict
     (h : N03Properties D T S C R L base ε) (hb : base ≤ base') (hε : ε' ≤ ε) :
     N03Properties D T S C R L base' ε' := by
   have hsub := stateNeighborhood_mono S C hb hε
-  obtain ⟨ha, hpositive, hroots, hreflection, hflow, herror, hmean, htame⟩ := h
+  obtain ⟨ha, hpositive, hroots, hreflection, hflow, herror, hmean, htame, hspatial⟩ := h
   refine ⟨(fun z hz => ha z (hsub hz)),
     (fun z hz => hpositive z (hsub hz)),
     (fun z hz => hroots z (hsub hz)),
     (fun z hz => hreflection z (hsub hz)),
     (fun z hz => hflow z (hsub hz)),
     (fun z hz => herror z (hsub hz)),
-    (fun z hz => hmean z (hsub hz)), ?_⟩
+    (fun z hz => hmean z (hsub hz)), ?_,
+    (fun z hz => hspatial z (hsub hz))⟩
   exact smoothTameOn_mono htame
     (((isOpen_sectorNeighborhood S base' ε' ε').prod isOpen_univ).prod isOpen_univ)
     (Set.prod_mono (Set.prod_mono (sectorNeighborhood_mono S hb hε hε)

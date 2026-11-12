@@ -8,7 +8,7 @@ The exact frozen implication is assembled from the genuine mixed-flow
 estimate and the controlled coordinate realization. The subnodes remain
 explicit proof obligations until their axiom audits contain no sorryAx.
 
-Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1497–1725.
+Source: paper/flexible-surface-readable/07-fixed-geometry.tex, lines 1497–1760.
 Task: docs/tasks/N04Coordinates.md.
 -/
 
