@@ -87,7 +87,9 @@ private theorem n06_bandLift_of_majorant
   calc
     ‖G‖ ≤ ‖v‖ := n07aAngularSequenceBandLift_norm_le hD hT hV
       (3 / 4 : ℝ) 0 hI b l f hf v hbound
-    _ = κ * ‖a‖ := by rw [v, norm_smul, Real.norm_eq_abs, abs_of_nonneg hκ]
+    _ = κ * ‖a‖ := by
+      change ‖κ • a‖ = κ * ‖a‖
+      rw [norm_smul, Real.norm_eq_abs, abs_of_nonneg hκ]
     _ ≤ κ * M := mul_le_mul_of_nonneg_left hanorm hκ
 
 private theorem n06_bandLift_bound_reassociate (A ρ τ x : ℝ) :
