@@ -222,10 +222,14 @@ theorem n05_negative_component_first_geometry
     ((hFC.contDiffAt (isOpen_Ioo.mem_nhds (hcore (hmap x hx)))).comp x
       hρC.contDiffAt).of_le (by simp)
   have hξc (x : ℝ) (hx : x ∈ Icc (0 : ℝ) a) : ContDiffAt ℝ 2 ξ x :=
-    ((hclosed (C.referenceState, 0) hmem hs i (ρ x, θ) (hmapHalf x hx)).1.fst.comp x
+    (ContDiffAt.fun_comp (f := fun t : ℝ => (ρ t, θ))
+      (g := fun p : PolarPoint => (K.chart (C.referenceState, 0) i p).1) x
+      (hclosed (C.referenceState, 0) hmem hs i (ρ x, θ) (hmapHalf x hx)).1.fst
       (hρC.contDiffAt.prodMk contDiffAt_const)).of_le (by simp)
   have hHc (x : ℝ) (hx : x ∈ Icc (0 : ℝ) a) : ContDiffAt ℝ 1 H x :=
-    ((hclosed (C.referenceState, 0) hmem hs i (ρ x, θ) (hmapHalf x hx)).2.1.comp x
+    (ContDiffAt.fun_comp (f := fun t : ℝ => (ρ t, θ))
+      (g := K.height (C.referenceState, 0) i) x
+      (hclosed (C.referenceState, 0) hmem hs i (ρ x, θ) (hmapHalf x hx)).2.1
       (hρC.contDiffAt.prodMk contDiffAt_const)).of_le (by simp)
   have hwc (x : ℝ) (_hx : x ∈ Icc (0 : ℝ) a) : DifferentiableAt ℝ w x :=
     (hw.comp hρC).differentiable (by simp) x
@@ -345,8 +349,9 @@ theorem n05_negative_component_first_geometry
     exact div_le_div_of_nonneg_right htravel (by norm_num)
   have hrightTravel : (1 / Λ) / 2 ≤ ∫ t in a..ℓ, Real.sqrt (G t) := by
     have hadd := intervalIntegral.integral_add_adjacent_intervals
-      ((hGcontinuous.mono hsub).intervalIntegrable_of_Icc ha.le)
-      ((hGcontinuous.mono (Icc_subset_Icc ha.le le_rfl)).intervalIntegrable_of_Icc haℓ.le)
+      ((hGcontinuous.mono hsub).intervalIntegrable_of_Icc (μ := volume) ha.le)
+      ((hGcontinuous.mono (Icc_subset_Icc ha.le le_rfl)).intervalIntegrable_of_Icc
+        (μ := volume) haℓ.le)
     rw [hhalf, hfull] at hadd
     linarith only [hadd, htravel]
   let M : NNReal := ⟨Λ, hΛpos.le⟩

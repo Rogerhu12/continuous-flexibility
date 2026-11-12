@@ -144,7 +144,10 @@ private theorem n05_physical_piece_finite_packing
       measureReal_biUnion_finset
         (fun i _ j _ hij => hdisjoint hij)
         (fun _ _ => measurableSet_Ioo)
-        (fun _ _ => by simp only [I, Real.volume_Ioo, ENNReal.ofReal_ne_top, not_false_eq_true])
+        (fun _ _ => by
+          dsimp only [I]
+          rw [Real.volume_Ioo]
+          exact ENNReal.ofReal_ne_top)
     have hlocal (i : ℕ) (hi : i ∈ F) : δ ≤ volume.real (I i) := by
       dsimp only [I]
       rw [Real.volume_real_Ioo_of_le (h04.2.2.2.1 i).1.le]
@@ -160,7 +163,9 @@ private theorem n05_physical_piece_finite_packing
       _ ≤ ∑ i ∈ F, volume.real (I i) := Finset.sum_le_sum hlocal
       _ = volume.real (⋃ i ∈ F, I i) := hvolume.symm
       _ ≤ volume.real (Ioo D.a D.b) :=
-        measureReal_mono hsub (by simp only [Real.volume_Ioo, ENNReal.ofReal_ne_top, not_false_eq_true])
+        measureReal_mono hsub (by
+          rw [Real.volume_Ioo]
+          exact ENNReal.ofReal_ne_top)
       _ = D.b - D.a := Real.volume_real_Ioo_of_le hab
   have hfinite : Z.Finite := by
     by_contra hinf
