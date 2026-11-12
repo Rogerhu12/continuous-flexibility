@@ -1,0 +1,84 @@
+{
+  "kind": "reconstructed_finite_inverse_and_angular_polynomial_reviewed_manifest",
+  "status": "Both exact new reconstructed sources independently static-reviewed / HELD / UNCOMPILED",
+  "owner": "/root/proof_inventory",
+  "files": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/FiniteInversePolynomialEnvelope.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInversePolynomialEnvelope.lean",
+      "blob": "e229f50f114442e4b07e1682c4693ac0ad8b4724",
+      "sha256": "d73838d259228ff320f106fc1e1439d76ba15178b2146f54ab5ec4009edeea7e",
+      "lines": 117,
+      "imports": [
+        "ContinuousFlexibility.Analysis.NonlinearInversePolynomialBounds"
+      ],
+      "status": "new reconstruction / independently static-reviewed / HELD / UNCOMPILED",
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/FiniteInversePolynomialReconstructionIndependentReview.json",
+        "sha256": "457b695af3d4d141eb12188fbadb962597d30c82c8e640313048589629b106e0"
+      }
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/AngularFiberPolynomialEnvelope.lean",
+      "local_path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/AngularFiberPolynomialEnvelope.lean",
+      "blob": "149f612f980251ac1e91b277e63ae6b4cbe0384f",
+      "sha256": "5ad7d6a652e3bb21cb88ccf3c3064468a546371836a7bbbe3d64bbcbfdbdf0ee",
+      "lines": 203,
+      "imports": [
+        "ContinuousFlexibility.Analysis.AngularFiberFiniteJetBounds",
+        "ContinuousFlexibility.Analysis.FiniteInversePolynomialEnvelope"
+      ],
+      "status": "new reconstruction / independently static-reviewed / HELD / UNCOMPILED",
+      "independent_review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed-reviews/AngularFiberPolynomialEnvelopeIndependentReview.json",
+        "sha256": "a5d2571fba837475011cf9a8f17cb7e87272bbc483780730f1ec700618a57c75"
+      }
+    }
+  ],
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/NonlinearInversePolynomialBounds.lean",
+      "blob": "0ae238681d2ce7af8af96ed781bc5ef261430726",
+      "sha256": "0369f5df39202ccde10acfce4e1348e041ab175f5834ce0b2f32e092646b2ae8"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FlowJetPolynomial.lean",
+      "blob": "6f56a2d064645f4f7d217e5d725cb08b31a6f015",
+      "sha256": "25a9b7ff63599ce1ff916fe3a1ba83afd1c5cecec9bd0f281d5f58b1379eb660"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/FiniteInverseJetBounds.lean",
+      "blob": "46eda28d9bca5376cafc12ed635cb05e7bc16c53",
+      "sha256": "6a72acbb554610f3ce69c1e98b91c9cc69ccb422aa1e0306de60f7182d548865"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/AngularFiberFiniteJetBounds.lean",
+      "blob": "feda734f06cf191cd5194a6e5c941699c817153e",
+      "sha256": "8c534406a942db628ab652050859329889ea949a482bfa90fa6b5b492ce3c52d"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/AngularInverseFirstDerivative.lean",
+      "blob": "09fd82066e9c724e036a5fe910ab026ea453b521",
+      "sha256": "91d5169c2fcc70fecc57177935b8b11ca811312084c54f5fdcc282013686fcad"
+    }
+  ],
+  "checks": [
+    "Ordinary exponent follows finite monomial factor count including all repeated weight-zero inverse first-derivative atoms. Weighted order is used only for finite truncation.",
+    "The actual angular inverse augmented first derivative and augmented forward jets are bounded by 3*M^2 from M>=1 and inverse kappa<=M.",
+    "Finite inverse monomials, actual composition ordered partitions and a finite order sum yield coefficients/exponents before all bounds, fields and endpoints.",
+    "No higher inverse derivative estimate, angular lift value bound, final transport estimate or material tower is assumed."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "source_provenance": "New reconstruction, not byte recovery of historical polynomial helpers.",
+  "non_actions": [
+    "No checkout/index/refs/CP mutation",
+    "No compilation or CI query",
+    "No prior frozen artifact rewrite"
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/FiniteInverseAngularPolynomialCandidateManifest.json",
+    "sha256": "b4f8a5d0bb3c584f775ae07a3c4c8bcbe9e7e2b8ac98c32b803a95eee2d9eb39"
+  },
+  "source_bytes_unchanged": true
+}

@@ -27,7 +27,7 @@ theorem n04_simple_zero_sign_near {f : ℝ → ℝ} {c A : ℝ}
   have ht : Tendsto (fun x => slope f c x / A) (𝓝[≠] c) (𝓝 1) := by
     simpa only [div_self hA] using hf.tendsto_slope.div_const A
   have hnear : ∀ᶠ x in 𝓝 c, x ≠ c → 0 < slope f c x / A := by
-    simpa only [mem_compl_iff, mem_singleton_iff] using
+    simpa only [mem_compl_iff, mem_singleton_iff, mem_Ioi] using
       (eventually_nhdsWithin_iff.mp (ht (Ioi_mem_nhds (zero_lt_one : (0 : ℝ) < 1))))
   obtain ⟨δ, hδ, hball⟩ := Metric.mem_nhds_iff.mp hnear
   refine ⟨δ, hδ, ?_⟩
@@ -56,14 +56,14 @@ private theorem n04_positive_interval_negative_side {f : ℝ → ℝ} {l r A : �
     linarith
   let y : ℝ := if side then r - ε else l + ε
   have hy : y ∈ Ioo l r := by
-    cases side <;> dsimp only [y, Bool.false_eq_true, ite_false, ite_true] <;>
+    cases side <;> simp only [y, Bool.false_eq_true, ↓reduceIte] <;>
       constructor <;> linarith
   have hyδ : |y - (if side then r else l)| < δ := by
     apply abs_lt.mpr
-    cases side <;> dsimp only [y, Bool.false_eq_true, ite_false, ite_true] <;>
+    cases side <;> simp only [y, Bool.false_eq_true, ↓reduceIte] <;>
       constructor <;> linarith
   have hyne : y ≠ (if side then r else l) := by
-    cases side <;> dsimp only [y, Bool.false_eq_true, ite_false, ite_true] <;> linarith
+    cases side <;> simp only [y, Bool.false_eq_true, ↓reduceIte] <;> linarith
   have hprod : 0 < A * (y - (if side then r else l)) := by
     rcases hsign y hyδ hyne with hp | hn
     · exact hp.2
@@ -71,19 +71,19 @@ private theorem n04_positive_interval_negative_side {f : ℝ → ℝ} {l r A : �
   have horient : if side then A < 0 else 0 < A := by
     cases side
     · change 0 < A
-      dsimp only [y, Bool.false_eq_true, ite_false] at hprod
+      simp only [y, Bool.false_eq_true, ↓reduceIte] at hprod
       by_contra hnon
       have hm := mul_nonpos_of_nonpos_of_nonneg (le_of_not_gt hnon) hε.le
       nlinarith
     · change A < 0
-      dsimp only [y, ite_true] at hprod
+      simp only [y, ↓reduceIte] at hprod
       by_contra hnon
       have hm := mul_nonneg (le_of_not_gt hnon) hε.le
       nlinarith
   refine ⟨δ, hδ, ?_⟩
   intro x hx hout
   have hxc : x ≠ (if side then r else l) := by
-    cases side <;> dsimp only [Bool.false_eq_true, ite_false, ite_true] at hout ⊢ <;> linarith
+    cases side <;> simp only [Bool.false_eq_true, ↓reduceIte] at hout ⊢ <;> linarith
   have hnegative : A * (x - (if side then r else l)) < 0 := by
     cases side
     · exact mul_neg_of_pos_of_neg horient (sub_neg.mpr hout)
@@ -107,6 +107,10 @@ theorem n04PositiveEndpoint_exists_negative_neighbor
     (hf.differentiable (by simp) _).hasDerivAt hz hsimple
     (fun x hx => n04PositiveComponent_interval_pos hf.continuous i hx)
   let c : ℝ := n04PositiveEndpoint i side
+  have hnegc : ∀ x, |x - c| < δ → (if side then c < x else x < c) →
+      deriv D.w x < 0 := by
+    cases side <;>
+      simpa only [c, n04PositiveEndpoint, Bool.false_eq_true, ↓reduceIte] using hneg
   let ε : ℝ := min δ (min (c - D.a) (D.b - c)) / 2
   have hε : 0 < ε := half_pos (lt_min hδ
     (lt_min (sub_pos.mpr hc.1) (sub_pos.mpr hc.2)))
@@ -117,26 +121,26 @@ theorem n04PositiveEndpoint_exists_negative_neighbor
   have hεa : ε < c - D.a := by
     have h := (min_le_right δ (min (c - D.a) (D.b - c))).trans
       (min_le_left (c - D.a) (D.b - c))
-    dsimp only [ε]
+    dsimp only [ε] at hε ⊢
     linarith
   have hεb : ε < D.b - c := by
     have h := (min_le_right δ (min (c - D.a) (D.b - c))).trans
       (min_le_right (c - D.a) (D.b - c))
-    dsimp only [ε]
+    dsimp only [ε] at hε ⊢
     linarith
   let x : ℝ := if side then c + ε else c - ε
   have hx : x ∈ Ioo D.a D.b := by
-    cases side <;> dsimp only [x, Bool.false_eq_true, ite_false, ite_true] <;>
+    cases side <;> simp only [x, Bool.false_eq_true, ↓reduceIte] <;>
       constructor <;> linarith [hc.1, hc.2]
   have hxδ : |x - c| < δ := by
     apply abs_lt.mpr
-    cases side <;> dsimp only [x, Bool.false_eq_true, ite_false, ite_true] <;>
+    cases side <;> simp only [x, Bool.false_eq_true, ↓reduceIte] <;>
       constructor <;> linarith
   have hxlower : -δ < x - c := (abs_lt.mp hxδ).1
   have hxupper : x - c < δ := (abs_lt.mp hxδ).2
   have hout : if side then c < x else x < c := by
-    cases side <;> dsimp only [x, Bool.false_eq_true, ite_false, ite_true] <;> linarith
-  have hxneg : deriv D.w x < 0 := hneg x hxδ hout
+    cases side <;> simp only [x, Bool.false_eq_true, ↓reduceIte] <;> linarith
+  have hxneg : deriv D.w x < 0 := hnegc x hxδ hout
   obtain ⟨m, hm⟩ := hC.2.2.2.2.1 x hx hxneg
   refine ⟨m, ?_⟩
   cases side
@@ -150,7 +154,7 @@ theorem n04PositiveEndpoint_exists_negative_neighbor
       by_contra h
       have hRc : C.right m < c := lt_of_not_ge h
       have hd : |C.right m - c| < δ := abs_lt.mpr ⟨by linarith [hm.2], by linarith⟩
-      have hbad := hneg (C.right m) hd hRc
+      have hbad := hnegc (C.right m) hd hRc
       exact (ne_of_lt hbad) (hC.2.1 m).2.1
     exact le_antisymm hcR hR
   · change c = C.left m
@@ -163,7 +167,7 @@ theorem n04PositiveEndpoint_exists_negative_neighbor
       by_contra h
       have hcL : c < C.left m := lt_of_not_ge h
       have hd : |C.left m - c| < δ := abs_lt.mpr ⟨by linarith, by linarith [hm.1]⟩
-      have hbad := hneg (C.left m) hd hcL
+      have hbad := hnegc (C.left m) hd hcL
       exact (ne_of_lt hbad) (hC.2.1 m).1
     exact le_antisymm hL hLc
 

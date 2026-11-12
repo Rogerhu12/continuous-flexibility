@@ -1,0 +1,19 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/ExpPolynomialEnvelope.lean",
+    "blob": "2dc311c8fad74e6a15ccd2a181afa8b39b9d7092",
+    "sha256": "86c0ec3bd35ade371e0960659f21060c7398df4eecfc6ce57d3249f23f75702b",
+    "lines": 72
+  },
+  "checks": [
+    "Read the full 78-line reconstruction and the actual partition-sum callee.",
+    "Verified Real.iter_deriv_exp at fixed mathlib pin c55e6e786f49471c72fbddbec5415808896aec1e, ExpDeriv.lean. It is the full iterated-derivative function identity, including zero order.",
+    "Every input block has positive order and order at most N, so the product is at most M^partition.length, also for the empty zero-order partition.",
+    "M>=1 and partition.length<=k<=N give the fixed exponent N. The actual exponential amplitude A is never exponentiated; only A>=0 and exp(f x)<=A are used.",
+    "The finite cardinality sum C is fixed before M/A/f/x and covers order zero without an input f-value bound. No target exponential jet tower is assumed."
+  ]
+}

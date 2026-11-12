@@ -16,7 +16,9 @@ namespace ContinuousFlexibility.Analysis
 open Set Filter
 open scoped Topology ContDiff
 
-variable {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+universe u v w
+
+variable {E : Type u} {F : Type v} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [NormedAddCommGroup F] [NormedSpace ℝ F]
 
 private theorem value_eq_of_zero_full_jet {f g : E → F} {x : E}
@@ -73,7 +75,7 @@ theorem hasFDerivAt_piecewise_on_domain_of_matching_jets
 of all actual jets through n yield genuine C^n regularity after gluing. -/
 theorem contDiffOn_nat_piecewise_of_matching_full_jets
     (n : ℕ) {U s : Set E} [DecidablePred (· ∈ s)] (hU : IsOpen U) :
-    ∀ {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V] {f g : E → V},
+    ∀ {V : Type (max u w)} [NormedAddCommGroup V] [NormedSpace ℝ V] {f g : E → V},
       (∀ x ∈ U ∩ closure s, ContDiffAt ℝ n f x) →
       (∀ x ∈ U ∩ closure sᶜ, ContDiffAt ℝ n g x) →
       (∀ x ∈ U ∩ frontier s, ∀ k : ℕ, k ≤ n →

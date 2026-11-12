@@ -1,0 +1,45 @@
+{
+  "kind": "CI121_exact_universe_repair_candidate",
+  "status": "ready for independent review; uncompiled",
+  "base_commit": "70238f8f712790e13d81fd55d213b67901e831cd",
+  "base_tree": "de6d6be24d70f74caf6dd32ae17f2dbcc8855e5e",
+  "file": {
+    "path": "src/ContinuousFlexibility/Analysis/FiniteJetGluing.lean",
+    "before_blob": "66d40a5b5d4f7bade914536515ce98f765dedb70",
+    "before_sha256": "2a7f7536bd5a0db13c0ac5b0d2d5d652d74b4b112bdae53d8a3dd2bac7b06bc4",
+    "before_lines": 119,
+    "after_blob": "b805955d39725bfb43da97f6cefb765f53006a63",
+    "after_sha256": "d9d515f13ab1a0f6057c62d331cbf8e747353b921495cb5bfef3e1212dd6164e",
+    "after_lines": 121,
+    "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair121/FiniteJetGluing.lean",
+    "base_source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair121/FiniteJetGluing.base.lean.txt",
+    "diff": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/repair121/FiniteJetGluing.diff"
+  },
+  "diagnostics": {
+    "cached_log": "/workspace/scratch/bbbea77e4163/n04-ci-121.log",
+    "lines": [
+      105,
+      106
+    ],
+    "root_error": "u_3 = max u_1 u_3 when the induction hypothesis is instantiated at E →L[ℝ] V"
+  },
+  "changes": [
+    "Explicit independent universes u,v,w.",
+    "Preserve E : Type u and F : Type v for the private and first-derivative lemmas.",
+    "Quantify the finite-order induction codomain as V : Type (max u w), closed under E →L[ℝ] V."
+  ],
+  "public_surface_note": "The finite-order theorem now states its codomain universe explicitly as max u w. No mathematical hypothesis, regularity order, proof term, import, option, or budget changed. Other public/private universe parameters remain independent.",
+  "consumer_checked": {
+    "path": "src/ContinuousFlexibility/Analysis/FiniteJetRadialGluing.lean",
+    "blob": "a5f458696af9a66b0f1e60569b6d765563346d34",
+    "sha256": "4cae2b706c8dac015b2be6ae3cd6c0d9918c9c67ba776b325e9c76aa3b3f18b7",
+    "lines": 84,
+    "result": "Read all 84 lines. Since PolarPoint : Type 0, max 0 w = w; both radial public theorems retain their original arbitrary codomain universe without any source edit."
+  },
+  "scope": [
+    "scratch only",
+    "no Lean compilation",
+    "no checkout/index/ref changes",
+    "no heartbeat or tactic budget changes"
+  ]
+}

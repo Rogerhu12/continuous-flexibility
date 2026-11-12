@@ -1,0 +1,161 @@
+{
+  "kind": "owner_static_reconstructed_callee_compatibility_check",
+  "status": "compatible_no_source_changes",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/EndpointFiberPolynomialMargins.lean",
+      "git_blob": "a146711e1499655e0bc601feb55893808b379dcd",
+      "sha256": "c9b5d85d1515f1994b9b47fdc241bbea4101fcf452a9c1aae2b233f4da170c2b",
+      "lines": 159
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransportPolynomial.lean",
+      "git_blob": "c1a0998de3bebf4fbf4fcf10ec0e871e47e8247e",
+      "sha256": "0ae780cb662e8ecff763a06c3b4765773fa2b388a2d659bd277c1e969eaf4de9",
+      "lines": 185
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveTransportPolynomialAssembly.lean",
+      "git_blob": "38183c65d2553465ee8e4c47b743a44b73ee2b7e",
+      "sha256": "06d270ae78749525cfe1fecdf6707bc9af3bdcedfcaf36d1399e4fc4f0759cec",
+      "lines": 196
+    }
+  ],
+  "precise_provider_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/PrescribedEndpointWidth.lean",
+      "git_blob": "fb42f03831d21ec0a0e803b6fcafcbde09d720f7",
+      "sha256": "51240d5236188f6e4c41caa5289a0fc597f1d21a5344c25897a3bb5be22557a3",
+      "lines": 63
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceCollarPrescribedWidth.lean",
+      "git_blob": "1f84b6cf5d5beeb5fad0c833ae6762b546a46d64",
+      "sha256": "8683dd7945d847e1a4eebac1f984faaeb09f56df3da907b3bb274023be028e02",
+      "lines": 149
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/PositiveReferenceIdentity.lean",
+      "git_blob": "0fe36f57855093a4274f44dc6a2d79ae9dcc67ae",
+      "sha256": "bea24325424288605021e73c8a7340b822333a25acbcdfbd824bc372a9ae8be2",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberInterpolation.lean",
+      "git_blob": "b7e4b696b9bf1296eeb076700e97f7e1cd923793",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportPolynomial.lean",
+      "git_blob": "33110da205efdf81ad4235f1458c7231b6b45b0f",
+      "sha256": "0d13ae7e1107bd35fce75a739d492c9b7c78fa4cf1b6e70dff7e213d877b0b95",
+      "lines": 108
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransport.lean",
+      "git_blob": "8de986a4b6772cbf403e9d60940eac2765a7a171",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f",
+      "lines": 190
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveTransportAssembly.lean",
+      "git_blob": "c48c9514699ff3ee2d292eb0aa0e32b2c70bc39c",
+      "sha256": "3afe46da6de99746f176c1de348b4d0b54f2a82ded8be9ea3d097ce03d46b138",
+      "lines": 208
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryJets.lean",
+      "git_blob": "ef7eb6158ac785566cb2050b3b3146e596a40b7d",
+      "sha256": "bee7f78864fa762a6b127b9de4a014bad91912664ac04249ff343ff76c6c5851",
+      "lines": 168
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryTaylorRepresentative.lean",
+      "git_blob": "cd997377cfa76b9df158f44291d6b8d021ef629f",
+      "sha256": "677ea1b587d6712cb83bdbab0daf03550ca703146100e419f038314a325335df",
+      "lines": 130
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedEndpointHeight.lean",
+      "git_blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+      "sha256": "29cbabf52918e73745455ed4f8e4a868f36dc5106558681a40492a52d4ee5258",
+      "lines": 127
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightLogJets.lean",
+      "git_blob": "209f01c1d7d797d3ec0e37535e2eb3e4a28e2458",
+      "sha256": "392b13be25ea3b4d63dbf2a5a0e4dee715185241c52c28288f49ee997b5f6ee1",
+      "lines": 52
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeComponentReferenceIdentity.lean",
+      "git_blob": "f4238ef1b6755d62fc3fe275749932f4dbc3cc92",
+      "sha256": "18f7bbbb2badc224d46306b20a3180101cbf543978284c5ad23c8142c7a42788",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/TaylorReferenceIdentity.lean",
+      "git_blob": "0741d84d8c3a0cb3904de531e26f21fc7a7821ae",
+      "sha256": "3c963026e4a7fa58a4131616d6c8bc11518dbdb01ac52793b9d9da4921c0aca5",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalActualEndpointFields.lean",
+      "git_blob": "ddfb3b5d8b87dfb427bc3a32b8938fdf0a7092da",
+      "sha256": "ef75f35237546986aace929c1fda60fc529105db2adc0b6a2742a3d0edf67437",
+      "lines": 222
+    }
+  ],
+  "checks": [
+    {
+      "source": "EndpointFiberPolynomialMargins",
+      "compatible_interfaces": [
+        "prescribedEndpointWidth and its six-component margins conjunction",
+        "actual endpointFiberWidths and nested endpointFiberLower definitions",
+        "prescribedPositiveCollarLower_reference_lower with explicit mass r-l and reference slope one"
+      ],
+      "mathematical_checks": [
+        "The five-min reciprocal is bounded by the sum of five positive reciprocals.",
+        "Using U >= 1 and M, kappa inverse, span inverse <= U gives (24 + 16(n+1)) U^2 without introducing a chosen smaller width.",
+        "The actual normalized integral slope B is bounded below by min(kappaX/2,1/2); the actual J = B*(kappaPhi/2) has inverse <= 8 U^2."
+      ]
+    },
+    {
+      "source": "OneSidedWholeComponentTransportPolynomial",
+      "compatible_interfaces": [
+        "Reconstructed polynomial factory108 has the same explicit parameter order M,hM,kappaPhi,kappaX,hpos,hupper,hinverse,hposX,Psi,Y,l,r,c,d and the exact five angular-margin / existential Msigma / cost / eta / B / family tuple.",
+        "The reconstructed boundary representative130 and full-jet closure168 preserve the consumed public names and argument order.",
+        "Actual transport definitions remain those of restored190 and reconstructedFactory103; its raw angle still uses the original M."
+      ],
+      "mathematical_checks": [
+        "Degree n+2 for the angular representative and n+1 for the radial representative preserve all required original finite root jets.",
+        "Same factory coefficient and exponent are selected before family/index/data; Msigma is chosen before the family index.",
+        "Only scalar projection jets are first matched; full vector jets then follow from the actual product formula, including order zero."
+      ]
+    },
+    {
+      "source": "WholePositiveTransportPolynomialAssembly",
+      "compatible_interfaces": [
+        "New actual endpoint222 retains every consumed named field and argument order. Its added root inverse/Jacobian fields require no producer or consumer change in this assembly.",
+        "Log52 supplies the exact Clog*H^(2n+1) radial bound at the same root and the same q; height127 returns the same width reciprocal, finite full jets, symmetry, middle germ and exp(2)*H^2 dual amplitude tuple.",
+        "ReferenceIdentity125 and TaylorReferenceIdentity104 retain both consumed reference identities with the same explicit parameters."
+      ],
+      "mathematical_checks": [
+        "The same F/q and actual tau/sigma/Q are retained through all adapters.",
+        "The new output only adds a common fixed polynomial cost for Msigma. Its coefficient/degree precede all endpoint fields and states.",
+        "Higher height jets affect the explicit collar reciprocal; the amplitude remains exp(2)*H^2, with no exponential in a high-order jet envelope."
+      ]
+    }
+  ],
+  "independent_review_status": {
+    "EndpointFiberPolynomialMargins": "Requested from /root/quantitative_route",
+    "OneSidedWholeComponentTransportPolynomial": "Requested from /root/audit_coordinates",
+    "WholePositiveTransportPolynomialAssembly": "Requested from /root/audit_coordinates"
+  },
+  "compilation_status": "HELD_UNCOMPILED",
+  "limitations": [
+    "This is the source owner compatibility check, not an independent review or successful compilation.",
+    "No frozen source, target/cache/plan, checkout/index/ref or CI state was modified."
+  ]
+}

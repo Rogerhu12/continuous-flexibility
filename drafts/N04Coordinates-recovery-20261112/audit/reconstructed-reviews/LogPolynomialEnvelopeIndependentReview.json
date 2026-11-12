@@ -1,0 +1,51 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent full-source static review after the documented one-token rewrite-direction repair",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/LogPolynomialEnvelope.lean",
+    "sha256": "987692a92fb6f2d00fb9969d38350f70b479ef8abebf5069c683b87970cbb465",
+    "blob": "b0ea9f0c029304b893270a8b51bd67cbf5959091",
+    "lines": 124
+  },
+  "checks": [
+    "Read the complete 137-line reconstructed proof and the actual OneHighCompositionJets partition API.",
+    "At the fixed mathlib pin, Real.deriv_log' is the full-function identity deriv log = Inv.inv; iter_deriv_inv is valid at every real point and gives the exact factorial coefficient.",
+    "The initial source used inv_pow in the wrong direction after zpow_neg/zpow_natCast. The owner changed it to the inverse rewrite; the final source has no other review-requested change.",
+    "For positive input, the outer order-k log jet is bounded by (k-1)! H^k. Each partition product uses only the given positive input jets; all block sizes are positive and bounded by N.",
+    "The product exponent 2*partition.length is at most 2*N+1, and H>=1 increases it to the fixed displayed exponent.",
+    "Order zero is bounded using log x and log(x^-1), with no assumed target output tower.",
+    "C=1+the finite coefficient sum is selected before H, f, x. No public hypothesis or default heartbeat is enlarged."
+  ],
+  "pinned_mathlib": "c55e6e786f49471c72fbddbec5415808896aec1e",
+  "api_sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/pinned-api/DerivZPow.lean",
+      "sha256": "cedf21aa95f1d7831da1aee56fd5d464d867099a56d07bd68707ca88ce2e6b84",
+      "blob": "157160edf7fe3ec195643be1881a4c082cd29b97",
+      "lines": 189
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/pinned-api/LogDeriv.lean",
+      "sha256": "673ac23a2e877c2d8f5b92ca470c0592d6f7311ba325c4c9e943a1d3cfd1cc6c",
+      "blob": "f01077a7a569bfd1ae2b2035d50a741db3458052",
+      "lines": 425
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/pinned-api/GroupBasic.lean",
+      "sha256": "112ea4e68025b92312a6518fe8e7c6b63689bd325162d6bbb967c55ebd10d1d9",
+      "blob": "021c7d9e77f12c980bb408ffbbc0baaf5ba3d060",
+      "lines": 1100
+    }
+  ],
+  "consumer_signature_check": {
+    "source": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightLogJets.lean",
+      "sha256": "392b13be25ea3b4d63dbf2a5a0e4dee715185241c52c28288f49ee997b5f6ee1",
+      "blob": "209f01c1d7d797d3ec0e37535e2eb3e4a28e2458",
+      "lines": 52
+    },
+    "result": "Its 52-line consumer uses the actual final public header in the supplied order; ContDiffOn.log and the closed-strip radial-to-ordinary norm lemma match. This consumer was authored by this reviewer and still requires independent peer review."
+  }
+}

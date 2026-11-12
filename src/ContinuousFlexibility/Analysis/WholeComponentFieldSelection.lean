@@ -73,7 +73,7 @@ theorem n04_profile_nonpos_on_negativeClosed
   by_cases hh : r = C.right m
   · rw [hh, (hC.2.1 m).2.1]
   exact (hC.2.2.2.1 m r
-    ⟨lt_of_le_of_ne hr.1 hl.symm, lt_of_le_of_ne hr.2 hh⟩).le
+    ⟨lt_of_le_of_ne hr.1 (Ne.symm hl), lt_of_le_of_ne hr.2 hh⟩).le
 
 def n04WholeComponentField {E : Type*}
     (C : NonlinearGeometryData S) (Fneg : ℕ → PolarPoint → E)

@@ -1,0 +1,74 @@
+{
+  "kind": "independent_reconstructed_source_review",
+  "status": "passed_static_review_uncompiled",
+  "reviewer": "/root/proof_inventory",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalReferenceTransportGerms.lean",
+    "git_blob": "f890f14c02f8aacd51c56b87c1d60311e0756790",
+    "sha256": "f9b098e471410d8a76c7e579f5b9b6d8de5e8a55fc573abfa33b176a5d92828d",
+    "lines": 90
+  },
+  "baseline_commit": "0f4cf5b3ca51175a295ae60676833b2435809dca",
+  "precise_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/WholePositiveEndpointFields.lean",
+      "git_blob": "d5ac37d8aae450523577552e3fb13815cd0a0468",
+      "sha256": "c024651329c6b725f61097116a892f032b80b1f2ef363c920e37ac7e007c0587",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalActualEndpointFields.lean",
+      "git_blob": "ddfb3b5d8b87dfb427bc3a32b8938fdf0a7092da",
+      "sha256": "ef75f35237546986aace929c1fda60fc529105db2adc0b6a2742a3d0edf67437",
+      "lines": 222
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalRootTransportBoundary.lean",
+      "git_blob": "aae8931c23fab77b192a81e81e7ccd2802a929f8",
+      "sha256": "52cdc1b47174f1cc2f543fad031505a555d9623563a2fb779ce511eb3889a2f2",
+      "lines": 152
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/N04bActualAtlasCuts.lean",
+      "git_blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "lines": 97
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedInverseJets.lean",
+      "git_blob": "278df1dda278aadcc638141c9b1a98621e37c585",
+      "sha256": "f47f1852c7b9358d2a65d7fcad9e70ad9712798ce4d314113d31e5ea0f7aa2a2",
+      "lines": 148
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalClosedTransport.lean",
+      "git_blob": "4042a6df041abfdc7024a0d8ef5e26d98710b93a",
+      "sha256": "446db5702c1e574466bb9e66c14a7ad72b6b824df7ea950a642fec5c9d0beb53",
+      "lines": 90
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "git_blob": "97aa466ceee79bd9e21887d8948042478820ca79",
+      "sha256": "d42c9da38be0475688417eb1b9d2abeae2f0f6c29009ddfde424fc654c560520",
+      "lines": 1430
+    }
+  ],
+  "checks": [
+    "Read all 90 source lines and the actual closed inverse, closed height positivity, source subtype, cut-root and atlas provider interfaces.",
+    "The generic inverse germ is based at inverseChart(chart p); the actual closed inverse identity changes that center to the original p. This matches the installed CanonicalClosedTransport reference-germ route.",
+    "The actual positive closed height is continuous at p, hence nonzero on a true full neighborhood. Intersecting that neighborhood with the actual inverse germ proves the stored height ratio is one, not merely a finite Taylor equality.",
+    "The source subtype none branch gives identity/one definitionally. The some branch fixes the same genuine neighboring negative component, with opposite Bool endpoint and corresponding cut-pair member.",
+    "PartA/cutGeometry are actual typed-atlas outputs from the same Through03 witness and same equivalence. Reference state membership and sector are taken from the same N01 data; no global transport, new derivative bound or final primitive target is assumed.",
+    "Consumed point binders were checked: the boundary inverse identity and height tuple use explicit p,hp exactly as in the installed provider; MapsTo and the cut-root membership use only their membership proof. No implicit EqOn point is supplied explicitly."
+  ],
+  "import_check": {
+    "reachable_project_modules_with_listed_held_overlay": 444,
+    "missing_project_imports": [],
+    "cycle_detected": false,
+    "required_held_old_provider": "N04bActualAtlasCuts is explicitly included from its exact recovered source; it is not yet part of the CI122 baseline."
+  },
+  "source_mutations": false,
+  "compiled": false,
+  "ci_queried": false,
+  "limits": "Static source review; successful elaboration and compilation still require actual CI."
+}

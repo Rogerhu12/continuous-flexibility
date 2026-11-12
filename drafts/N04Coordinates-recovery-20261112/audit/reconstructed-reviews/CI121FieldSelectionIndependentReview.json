@@ -1,0 +1,19 @@
+{
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed independent exact CI121 delta review",
+  "compiled": false,
+  "edited_source": false,
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair121/WholeComponentFieldSelection.lean",
+    "blob": "3bb8a56527fd0159374834d2bb96c4be8e776959",
+    "sha256": "050dcc988f8a554f03195aa4151d835adcd6b4fe4ceb8713f7e542a84e9f29ba"
+  },
+  "before_blob": "d88e233049db320f5b320908725f0914601206ab",
+  "change": "Only hl.symm -> (Ne.symm hl) in the left endpoint strictness proof.",
+  "checks": [
+    "Read the actual cached CI121 line76 diagnostic and complete source context.",
+    "hl is r != C.left m; the explicit Ne.symm yields C.left m != r required by lt_of_le_of_ne hr.1. Field projection failed because hl is a function, exactly as diagnosed.",
+    "Candidate is byte-identical to the actual HEAD source except the one approved replacement; all public headers, imports and options remain unchanged.",
+    "This is a correction of a CI-confirmed elaboration error; the earlier static review is not evidence that the failed source compiled."
+  ]
+}

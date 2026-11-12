@@ -1,0 +1,76 @@
+{
+  "author": "/root/audit_coordinates",
+  "status": "independently reviewed reconstructed sources; UNCOMPILED",
+  "compiled": false,
+  "source_count": 6,
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryJets.lean",
+      "sha256": "bee7f78864fa762a6b127b9de4a014bad91912664ac04249ff343ff76c6c5851",
+      "blob": "ef7eb6158ac785566cb2050b3b3146e596a40b7d",
+      "lines": 168,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/OneSidedBoundaryJetsReconstructionIndependentReview.json",
+        "sha256": "857f4060dbfe526592e6ed580a11d1750f7206cd6bd3284c5079a707a684e1d6"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryJets.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedBoundaryTaylorRepresentative.lean",
+      "sha256": "677ea1b587d6712cb83bdbab0daf03550ca703146100e419f038314a325335df",
+      "blob": "cd997377cfa76b9df158f44291d6b8d021ef629f",
+      "lines": 130,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/OneSidedBoundaryTaylorRepresentativeReconstructionIndependentReview.json",
+        "sha256": "4c0b4278f6a49cd5cfd7c79c48614b479686bbc9caf62899744a271477ceb64f"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointAngularInterpolation.lean",
+      "sha256": "6115ae397369477e62a73a2d85ebb8d8dba434065b4342459e1caba58bb0eab7",
+      "blob": "0009c60442714e1d5191075b8cb3a74e19a63378",
+      "lines": 85,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointAngularReconstructionIndependentReview.json",
+        "sha256": "e9b036083b1a52ca5e6a3c700d0bc912377f89edde3665f647c5dfc85137106f"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointAngularInterpolation.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RawEndpointAngularInterpolation.lean",
+      "sha256": "4a093259e01887f55777ace5671a4ca2ab53c27721f7631d69f096527940fdd6",
+      "blob": "fa2b7b2497dfe553d4c57efa079eae8ccb7617d8",
+      "lines": 113,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointAngularReconstructionIndependentReview.json",
+        "sha256": "e9b036083b1a52ca5e6a3c700d0bc912377f89edde3665f647c5dfc85137106f"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/RawEndpointAngularInterpolation.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightValueBounds.lean",
+      "sha256": "fa5dafb25717276bf70b6c7a7e55fda40335dd2aa678de6d81cd7d34f12d71b9",
+      "blob": "e192a07ef9476bd6de179deb4782a7980b6aba66",
+      "lines": 98,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointHeightReconstructionIndependentReview.json",
+        "sha256": "b37afe1346e8925147b10dff0d14876de2b32ea70924c5b18dcb7b64d4b36403"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointHeightValueBounds.lean"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedEndpointHeight.lean",
+      "sha256": "29cbabf52918e73745455ed4f8e4a868f36dc5106558681a40492a52d4ee5258",
+      "blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+      "lines": 127,
+      "review": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/EndpointHeightReconstructionIndependentReview.json",
+        "sha256": "b37afe1346e8925147b10dff0d14876de2b32ea70924c5b18dcb7b64d4b36403"
+      },
+      "target_path": "src/ContinuousFlexibility/Analysis/OneSidedEndpointHeight.lean"
+    }
+  ],
+  "historical_identity": "All six are newly reconstructed bytes after the reset, not claims to restore prior source hashes.",
+  "active_mutations": false
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "fresh_independent_source_review",
+  "reviewer": "/root",
+  "sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/CanonicalActualEndpointFields.lean",
+      "blob": "ddfb3b5d8b87dfb427bc3a32b8938fdf0a7092da",
+      "sha256": "ef75f35237546986aace929c1fda60fc529105db2adc0b6a2742a3d0edf67437",
+      "lines": 222
+    },
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/recovery/N04bActualAtlasCuts.lean",
+      "blob": "3e6847f1dc053e029284c4f490ab351c5c310da2",
+      "sha256": "1c1ca0be70e7134d99086b9d491732bc983447a8d9700cd17cfa4606e0f7c26e",
+      "lines": 97
+    }
+  ],
+  "result": "pass full source and actual callee mathematical/interface review",
+  "compiled": false,
+  "checked_at": "2026-11-12T08:22:01.984644+00:00",
+  "checks": [
+    "Read all 222 endpoint lines, all 97 recovered cut lines, the complete 152-line root boundary provider, and the actual green CanonicalNegativeTravelTransition public identities.",
+    "The actual factory obtains the atlas and current cut geometry from the same hT/hS/hN/hfield and enumeration. It does not assume the final transport geometry or derivative estimates.",
+    "OneSidedTransportEndpoint retains all 12 prior consumer fields and adds the actual positive root Jacobian, both positive diagonal derivatives, and both ordinary inverse germs.",
+    "Both inverse germs use the stored reference and current charts at the same closed point. The chart-current-point equality places the inverse composition at the correct target; no arbitrary value is assigned to an inverse.",
+    "Open smoothness and symmetry follow from actual whole-component travel EqOn identities; their point binder is implicit and the new source correctly passes membership only.",
+    "The root data uses the genuine root in the closed physical piece and paired orientation signs. The identity instance gives exact identity germs and positive coordinate derivatives.",
+    "The restored cut source constructs the actual middle-travel trace and same-index pairs using the existing closed/open travel inverse identities. No parent statement is discharged by this review."
+  ],
+  "provenance": "Current exact sources were fully read. Reconstructed files have no pre-reset compilation or historical review claim. This receipt is static review, not Lean elaboration."
+}

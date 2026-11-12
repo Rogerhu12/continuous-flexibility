@@ -1,0 +1,10 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/RetainedReferenceComponentEnumeration.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/RetainedReferenceComponentEnumeration.lean
+@@ -17,6 +17,7 @@
+ namespace ContinuousFlexibility.Radial
+ 
+ open Real Set
++open scoped ContDiff
+ open ContinuousFlexibility.Statements
+ 
+ private theorem twoTailAt_injective_of_separated

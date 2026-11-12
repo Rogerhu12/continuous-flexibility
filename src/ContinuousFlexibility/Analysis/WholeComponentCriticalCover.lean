@@ -41,12 +41,12 @@ theorem n04_criticalRadius_mem_negativeClosed
   have hηa : η < c - D.a := by
     have h := (min_le_right δ (min (c - D.a) (D.b - c))).trans
       (min_le_left (c - D.a) (D.b - c))
-    dsimp only [η]
+    dsimp only [η] at hη ⊢
     linarith
   have hηb : η < D.b - c := by
     have h := (min_le_right δ (min (c - D.a) (D.b - c))).trans
       (min_le_right (c - D.a) (D.b - c))
-    dsimp only [η]
+    dsimp only [η] at hη ⊢
     linarith
   let x : ℝ := if 0 < A then c - η else c + η
   have hxcore : x ∈ radialCore D := by

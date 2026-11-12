@@ -51,7 +51,7 @@ theorem n04NegativeEndpoint_exists_positive_neighbor
     have hyne : y ≠ c := by
       cases side
       · exact ne_of_lt hout
-      · exact (ne_of_lt hout).symm
+      · exact Ne.symm (ne_of_lt hout)
     have hprod : 0 < A * (y - c) := by
       cases side
       · exact mul_pos_of_neg_of_neg horient (sub_neg.mpr hout)
@@ -69,23 +69,23 @@ theorem n04NegativeEndpoint_exists_positive_neighbor
   have hηa : η < c - D.a := by
     have h := (min_le_right δ (min (c - D.a) (D.b - c))).trans
       (min_le_left (c - D.a) (D.b - c))
-    dsimp only [η]
+    dsimp only [η] at hη ⊢
     linarith
   have hηb : η < D.b - c := by
     have h := (min_le_right δ (min (c - D.a) (D.b - c))).trans
       (min_le_right (c - D.a) (D.b - c))
-    dsimp only [η]
+    dsimp only [η] at hη ⊢
     linarith
   let x : ℝ := if side then c + η else c - η
   have hxcore : x ∈ radialCore D := by
-    cases side <;> dsimp only [x, Bool.false_eq_true, ite_false, ite_true] <;>
+    cases side <;> simp only [x, Bool.false_eq_true, ↓reduceIte] <;>
       constructor <;> linarith [hc.1, hc.2]
   have hxdist : |x - c| < δ := by
     apply abs_lt.mpr
-    cases side <;> dsimp only [x, Bool.false_eq_true, ite_false, ite_true] <;>
+    cases side <;> simp only [x, Bool.false_eq_true, ↓reduceIte] <;>
       constructor <;> linarith
   have hxout : if side then c < x else x < c := by
-    cases side <;> dsimp only [x, Bool.false_eq_true, ite_false, ite_true] <;> linarith
+    cases side <;> simp only [x, Bool.false_eq_true, ↓reduceIte] <;> linarith
   obtain ⟨i, hi, _⟩ := (n04PositiveComponent_existsUnique_interval_iff hf.continuous x).mpr
     ⟨hxcore, hpositive x hxdist hxout⟩
   refine ⟨i, ?_⟩

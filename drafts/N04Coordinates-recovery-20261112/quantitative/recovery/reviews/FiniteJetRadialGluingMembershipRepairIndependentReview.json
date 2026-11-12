@@ -1,0 +1,26 @@
+{
+  "kind": "independent_exact_delta_source_review",
+  "reviewer": "quantitative_route",
+  "status": "passed static review; not compiled",
+  "base_commit": "0f4cf5b3ca51175a295ae60676833b2435809dca",
+  "base_tree": "51f4148d6f87a122762c861a25a90adb668832ab",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair122/FiniteJetRadialGluing.lean",
+  "path": "src/ContinuousFlexibility/Analysis/FiniteJetRadialGluing.lean",
+  "before_blob": "a5f458696af9a66b0f1e60569b6d765563346d34",
+  "after_blob": "a263c857b5dd32b497504e3b1918661a1d2298fd",
+  "source_sha256": "6a6662497da246566726f91ab54a200441e21e2ed9cd535361cc51a1ba0d0e06",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair122/FiniteJetRadialGluingMembershipRepairCandidateManifest.json",
+    "sha256": "62288fb111e2c4c1b54c9281bb571edceb1ab3e62dd57595cde44894c29a0a27"
+  },
+  "diagnostic": "CI122 line44: hp : p ∈ sᶜ was not elaborated as an ordered negation for lt_of_not_ge.",
+  "checks": [
+    "Read complete 88-line candidate, exact 84-line base and current 121-line finite-jet provider.",
+    "Exact bytes differ only in the closure_minimal subproof: introduce p/hp and expose actual complement plus target half-space with change.",
+    "s = {p | p.1 ≤ c}, t = {p | c ≤ p.1}; hp becomes not (p.1 ≤ c), so lt_of_not_ge hp gives c < p.1, and le_of_lt yields target.",
+    "Both public theorem headers, all imports, options, universe behavior and all other bytes unchanged.",
+    "The finite-jet provider has the separately accepted max-u-w universe repair; PolarPoint domain has universe zero and no extra radial restriction is introduced."
+  ],
+  "compiled": false,
+  "checkout_edited": false
+}

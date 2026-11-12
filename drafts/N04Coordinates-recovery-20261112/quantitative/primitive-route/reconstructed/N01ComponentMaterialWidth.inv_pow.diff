@@ -1,0 +1,11 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01ComponentMaterialWidth.before_inv_pow.lean.txt
++++ /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01ComponentMaterialWidth.lean
+@@ -30,7 +30,7 @@
+   have heq :
+       (((E ^ (-B) / s) ^ 2 / (4 * (K * E ^ A + 1)))⁻¹) =
+         4 * (K * E ^ A + 1) * s ^ 2 * E ^ (2 * B) := by
+-    rw [inv_div, div_eq_mul_inv, inv_pow, inv_div, Real.rpow_neg hEp.le,
++    rw [inv_div, div_eq_mul_inv, ← inv_pow, inv_div, Real.rpow_neg hEp.le,
+       div_inv_eq_mul, mul_pow, hpower]
+     ring
+   have hsum : K * E ^ A + 1 ≤ (K + 1) * E ^ A := by

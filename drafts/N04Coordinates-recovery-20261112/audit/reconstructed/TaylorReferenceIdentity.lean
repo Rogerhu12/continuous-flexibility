@@ -98,7 +98,7 @@ theorem positiveHeightTaylorInterpolation_reference_one
   funext p
   simp only [positiveHeightTaylorInterpolation, endpointTaylorCorrection,
     boundaryTaylorPolynomial, hzero, zero_div, zero_mul,
-    Finset.sum_const_zero, add_zero, Real.exp_zero, mul_one]
+    Finset.sum_const_zero, mul_zero, add_zero, Real.exp_zero, mul_one]
 
 end ContinuousFlexibility.Analysis
 

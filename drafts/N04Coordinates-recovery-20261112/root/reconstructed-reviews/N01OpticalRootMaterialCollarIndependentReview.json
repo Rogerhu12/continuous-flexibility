@@ -1,0 +1,24 @@
+{
+  "kind": "fresh_independent_source_review",
+  "reviewer": "/root",
+  "sources": [
+    {
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OpticalRootMaterialCollar.lean",
+      "blob": "1a207845fefb35129e1bebd41a89123dc114f572",
+      "sha256": "f42aaf241fe5a784dd4237c96239ae284a80ed2556236c1a11ecbf95d9b580f0",
+      "lines": 200
+    }
+  ],
+  "result": "pass full source and actual callee mathematical/interface review",
+  "compiled": false,
+  "checked_at": "2026-11-12T08:22:02.008359+00:00",
+  "checks": [
+    "Read all 200 lines, the complete 104-line actual component width provider, and the complete 116-line explicit simple-zero collar provider; prior N01OpticalRootDivision full review is retained separately.",
+    "The positive inward coordinate is cancelled before taking the one-sided limit. A nontrivial punctured interval filter yields the actual normalized divisor root lower bound.",
+    "One Boolean endpoint theorem covers both true roots. The same half-component radius, raw kappa, and normalized first-jet bound choose one delta for both sides.",
+    "The radius is exactly the harmonic explicit collar; its inverse cost uses only actual half-width inverse, raw kappa inverse, and actual first jet. Constants and exponents precede component and host selection.",
+    "The positive material weight is normalized by a uniform scalar floor, then returned to the original E0 power using Real.mul_rpow. Higher derivative bounds preserve the same true host index.",
+    "The public retained-reference theorem obtains raw optical lower bounds from the same R/Gamma certificate and applies them to the actual C component. It neither replaces an arbitrary Through03 witness nor establishes a common state-dependent germ collar."
+  ],
+  "provenance": "Current exact sources were fully read. Reconstructed files have no pre-reset compilation or historical review claim. This receipt is static review, not Lean elaboration."
+}
