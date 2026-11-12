@@ -1,0 +1,87 @@
+{
+  "kind": "actual_reference_gauge_root_piece_classification_candidate",
+  "author": "/root/audit_coordinates",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "inspection_baseline": {
+    "commit": "3a8671c128296b431a9a0d23ce6cec8702dd654c",
+    "tree": "27733a772c5da39ccda2f7399a6f265d33b6ee85"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeRootInterfaces.lean",
+    "sha256": "928f78885b39f50f6b0a0259323d44a11f3cc1e4dd1c9922cfdfc59804c408cd",
+    "git_blob": "62be48b1594bfe8207dac3edb24dac4f750415cf",
+    "lines": 162
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootInterfaces.lean",
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeReferenceGaugeAtlasInterfaces.lean",
+      "sha256": "2548423c10106e5764d37da89d55b1dc7ed3b910f9a26b7f629aa0fc4a6de6ac",
+      "git_blob": "23a91459c8a857886c76d04e87e1f9d09443f634",
+      "lines": 70
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeCanonicalInterfaceClassification.lean",
+      "sha256": "4e258e62d63ad210d6d8e39ebf3e5b0f3dfe1a507134d77aceda3c3b7ac770bc",
+      "git_blob": "b21513d9523375d05141018d7f7e296f78d44212",
+      "lines": 122
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "git_blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d",
+      "lines": 131
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeCanonicalAtlasReferencePartition.lean",
+      "sha256": "a228efd750b6144dc83f5848e1b081fbfff531ff42400ff2ffaecb13b9252f71",
+      "git_blob": "c5e704c5f367c931fe0873999744fbe2a854f473",
+      "lines": 87
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/WholeComponentFieldSelection.lean",
+      "sha256": "050dcc988f8a554f03195aa4151d835adcd6b4fe4ceb8713f7e542a84e9f29ba",
+      "git_blob": "3bb8a56527fd0159374834d2bb96c4be8e776959",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveComponentAdjacency.lean",
+      "sha256": "2370c6b61e1b64b874ce9d3543be9ccd89fc26d9d9799024c480130236ff337b",
+      "git_blob": "4f766c5b852815283fe1ccd960a9d547e44a83dd",
+      "lines": 174
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04WholeComponentPieces.lean",
+      "sha256": "5d2d7e19dcb41ad41fc58f433b96e0180ccd3d15acb514fe34025878380bf822",
+      "git_blob": "31a07cd1ac849aaa1a42f559dcaa84fb4e7e94b8",
+      "lines": 143
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "sha256": "598b1d5f18c4a22eecd5108949d46b2ddca955d79ea66090b85ca6ba06ff8227",
+      "git_blob": "ba6667d5091e746e99b5a02c5711713fee1d2e93",
+      "lines": 96
+    }
+  ],
+  "public_declarations": [
+    "n04PositiveComponents_no_adjacent_endpoints",
+    "n04WholePiece_adjacent_root_types",
+    "n04WholeReferenceGaugeAtlasData_actual_root_types"
+  ],
+  "public_name_check": {
+    "baseline_matches": {}
+  },
+  "mathematics": [
+    "Two adjacent whole positive components would have respective actual negative neighbors with the same left/right root. Closed negative index uniqueness forces those neighbors equal, contradicting their positive length. This reuses the existing actual simple-root neighbor theorem.",
+    "A negative half whose interface is its middle cut cannot occur at a profile root, because that cut lies in its strictly negative component.",
+    "Two negative outer halves meeting at the root are excluded by the same actual closed negative index uniqueness.",
+    "The remaining ordered cases are exactly negative(m,true) followed by positive p with positiveLeft p=right(m), and positive p followed by negative(m,false) with positiveRight p=left(m).",
+    "Actual reference radii and unchanged new-gauge physical metadata transfer the complete classification to the same e-indexed atlas. No root first-jet matching assumption is used."
+  ],
+  "scope_limits": [
+    "No final RootFirstJetMatching is asserted here; this identifies only the actual adjacent pieces and their exact physical endpoint.",
+    "No new state, reference witness, component enumeration, or negative cut is selected."
+  ],
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

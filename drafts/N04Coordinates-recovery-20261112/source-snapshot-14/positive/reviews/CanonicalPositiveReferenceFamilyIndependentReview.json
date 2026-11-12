@@ -1,0 +1,49 @@
+{
+  "kind": "independent_actual_fixed_positive_reference_family_review",
+  "reviewer": "/root/proof_inventory",
+  "author": "/root",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+    "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+    "git_blob": "0a0206739fd3b542d87723155b08504317d2562e",
+    "lines": 56
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolation.lean",
+      "sha256": "43b9332cf208881b0894b69379c7767dcbed46d00dd6d93ab7b580a6ea8c5ce5",
+      "git_blob": "89bec50456142fde3eb21c28e397456a000b0548",
+      "lines": 80
+    }
+  ],
+  "provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+    "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+    "git_blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+    "lines": 74
+  },
+  "candidate_manifest": null,
+  "candidate_manifest_note": "Author requested immediate review of the frozen exact source before constructing its owner manifest.",
+  "inspection_git_head": "14d76e94d35b6e0aff823c24e9eb90c290c9f3d6",
+  "public_declarations": [
+    "N04PositiveReferenceFamily",
+    "n04Coordinates_exists_positive_reference_family"
+  ],
+  "public_collisions": [],
+  "checks": [
+    "Read all 56 source lines and the complete 80-line actual interpolation provider; checked its reviewed 160/80 source and selected range/finite radial provider bindings.",
+    "The predicate retains precisely the same original typed K and supplied certified endpoint-source family j. Both scalar full-jet identities are evaluated at the actual positive endpoint circles with the original source-coordinate and source-height definitions.",
+    "The physical interval is the whole positive component and the canonical interval is 0,1. The exact RangeGeometry, true inverse, positivity and finite jets are kept from the actual factory.",
+    "The forbidden set is explicitly empty; its closedness and exclusion of both endpoints are valid. The discarded clause is only H=1 on the empty set, not an asserted normalization over a nonempty buffer.",
+    "The provider result contains a leading let K. dsimp only at hex removes that let before choose. The two existential functions and four conjunction outputs match choose Y H hgeometry hforbidden hY hH in exactly that order.",
+    "The selected Y/H depend on the original data, j and fixed finite n, and precede all current-state variables. There is no state, high output order, final atlas estimate or final transmission target among the factory inputs.",
+    "The exact two new public names have no collision in the inspected installed source tree."
+  ],
+  "limitations": [
+    "Static review only. No compilation, material costs of the reference widths, uniform reference principal lower bound, or auxiliary-column normalization is asserted."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "ActualPositiveReferenceFirstJets_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJetsCandidateManifest.json",
+    "sha256": "35945406312a653a03c3efa5be056d63bcaa82bb38c8d8fc7ea6234fa0dfb4fc",
+    "blob": "16392f00fc025bc93fe9f018eb5e796245dbac2b",
+    "lines": 61
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJets.lean",
+    "sha256": "dec4f15789b17a9ac6f6c196fb9e1c6f9929efa6b7a7866909bd2d6a9bf7ba05",
+    "blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+    "lines": 123
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/ActualPositiveReferenceFirstJetsIndependentReview.json",
+    "sha256": "de0677e54e1cfe0a4b3cc9155ab22688fb99cbda79fb21024d9482bf52600bb8",
+    "blob": "3ac85fa79722c5efae28c1979c92036bb246fd95",
+    "lines": 92
+  },
+  "compiled": false,
+  "green_receipt_applies": false
+}

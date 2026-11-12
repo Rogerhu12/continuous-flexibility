@@ -1,0 +1,92 @@
+{
+  "kind": "independent_actual_positive_reference_aligned_first_jets_review",
+  "reviewer": "/root/audit_coordinates",
+  "author": "/root/proof_inventory",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJetsCandidateManifest.json",
+    "sha256": "35945406312a653a03c3efa5be056d63bcaa82bb38c8d8fc7ea6234fa0dfb4fc",
+    "git_blob": "16392f00fc025bc93fe9f018eb5e796245dbac2b",
+    "lines": 61
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJets.lean",
+    "sha256": "dec4f15789b17a9ac6f6c196fb9e1c6f9929efa6b7a7866909bd2d6a9bf7ba05",
+    "git_blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+    "lines": 123
+  },
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "git_blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolation.lean",
+      "sha256": "43b9332cf208881b0894b69379c7767dcbed46d00dd6d93ab7b580a6ea8c5ce5",
+      "git_blob": "89bec50456142fde3eb21c28e397456a000b0548",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeRadialFields.lean",
+      "sha256": "7fd44a5f31a317ab3dd714213877889807015d47da8a53a0ca81fde22f4c3dc6",
+      "git_blob": "008d8b2a059105c2fbe5ceea6d25fc8bca8a84c5",
+      "lines": 156
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointData.lean",
+      "sha256": "f88706279e2902514c3bda2fdd618785c19d2be4f848d1eaf44758e2bdfd7f27",
+      "git_blob": "7d2ff0fac9e08218174cd6870ba79b8529aa8a01",
+      "lines": 126
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetBoundary.lean",
+      "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+      "git_blob": "69e3303eff0b945230f7210da126b95c232669b3",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetMatching.lean",
+      "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+      "git_blob": "9baca93c394dae0092c356505a301df65635e749",
+      "lines": 82
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholePositiveRootMatching.lean",
+      "sha256": "42b7d1c827797240afb1f189a316d8e5537754f948c861e81c040c19d7e2a2b9",
+      "git_blob": "7752be209bc875730633f6502880b2889a345679",
+      "lines": 180
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "git_blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48",
+      "lines": 128
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "git_blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05",
+      "lines": 168
+    }
+  ],
+  "inspection_git_head": "3a8671c128296b431a9a0d23ce6cec8702dd654c",
+  "checks": [
+    "Read the complete 123-line candidate and all directly used source-selection, root/radial, finite-jet closure/product/composition, and reference cylinder contracts.",
+    "The true endpoint adjacency is converted to the opposite Boolean source convention. Existing certified-source uniqueness fixes j(!side).val=some m, rather than assuming that the chosen source is the desired negative neighbor.",
+    "The scalar raw reference coordinate is exactly v+s*Fref.fst with the same selected original half k. The height remains the same stored reference height; both source equalities are exact by the two Boolean cases.",
+    "On the actual negative open component Fref.snd=Prod.snd. Ordinary smoothness of both functions at the actual closure root lets finiteFullJetMatch_of_eqOn_closure transfer the full first jet. No outside-domain angular identity or common smooth collar is assumed.",
+    "The supplied scalar interpolation jets and actual range geometry form smooth FiniteFullJetMatch values for Y and H at the exact same endpoint. The proofs rewrite actual endpoint adjacency and source equality before applying those jets.",
+    "Pairing the scalar Y match with the reversed angular match gives the actual cylinder chart; common composition with A(x,theta)=(x-v,theta) cancels the constant v and yields B(x,theta)=(s*x,theta) on the same old reference chart.",
+    "The normal zero value is derived from the full zero jet and the actual root value Fref.fst=0. No current raw chart or target RootFirstJetMatching is introduced as a premise.",
+    "The sole new public name is absent from the inspected installed Git source tree."
+  ],
+  "limitations": [
+    "Static review only; the exact new actual reference 160/80 providers are separately undergoing owner-independent review and this receipt does not replace that review.",
+    "No compilation, material cost, or final certificate completion is asserted."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

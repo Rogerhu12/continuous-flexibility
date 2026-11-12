@@ -1,0 +1,45 @@
+{
+  "kind": "held_known_pattern_redundant_dsimp_candidate",
+  "status": "HELD_UNCOMPILED_NOT_AN_ACTUAL_DIAGNOSTIC_FOR_THIS_FILE",
+  "actual_base": {
+    "commit": "3a8671c128296b431a9a0d23ce6cec8702dd654c",
+    "tree": "27733a772c5da39ccda2f7399a6f265d33b6ee85",
+    "path": "src/ContinuousFlexibility/Analysis/CanonicalWholePositiveRootMatching.lean",
+    "source": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/base.lean",
+      "sha256": "42b7d1c827797240afb1f189a316d8e5537754f948c861e81c040c19d7e2a2b9",
+      "blob": "7752be209bc875730633f6502880b2889a345679",
+      "lines": 180
+    }
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/CanonicalWholePositiveRootMatching.lean",
+    "sha256": "1646720eb55f5afe500dfd5a1fcae95ad204518dc3a68771a4d4d7ef927e06b8",
+    "blob": "35c861e51748d158865d19d5564c3cb81579b4bd",
+    "lines": 179
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/candidate.diff",
+    "sha256": "06dd60aece65d791a21b429a11788b63d4a87b7c86195d71ecc29a58337a95df",
+    "blob": "306209110dba028dbecdd5e64b835c21e2b546c8",
+    "lines": 10
+  },
+  "edit": "Delete only the redundant dsimp after intro z hz hs; the earlier dsimp only at hout and target has already zeta-reduced the body.",
+  "evidence": {
+    "cached_log": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-ci-138.log",
+      "sha256": "befc6f3b97e03970e3e6e2a6e641ab51e4efaae752d572b8e7704eab47a8f635",
+      "blob": "f860d2a0b18f31cd0baef266aa308f99779bcf1a",
+      "lines": 700
+    },
+    "actual_diagnostic_file": "src/ContinuousFlexibility/Analysis/CanonicalWholePositiveTransport.lean",
+    "actual_diagnostic_line": 113,
+    "actual_message": "dsimp made no progress",
+    "target_file_actual_diagnostic": false
+  },
+  "public_and_private_headers_unchanged": true,
+  "imports_options_other_bytes_unchanged": true,
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

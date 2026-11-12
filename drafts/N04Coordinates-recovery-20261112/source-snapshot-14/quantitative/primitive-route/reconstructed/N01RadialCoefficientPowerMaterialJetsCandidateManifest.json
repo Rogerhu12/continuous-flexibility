@@ -1,0 +1,89 @@
+{
+  "kind": "actual_N01_radial_coefficient_real_power_material_jets_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientPowerMaterialJets.lean",
+    "sha256": "ceb920593eff670b62364ed6608e1a9b2b4030bee26ef532588f495e30b1ef95",
+    "git_blob": "65dba3f278439d4bb0acfff3cedb3bc4ac076d48",
+    "lines": 128
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJets.lean",
+      "sha256": "248d8d8276cf23922afa7138712827eedce7d1e1d1669e47c5f0a639512114b7",
+      "git_blob": "c2aab4a1827e96bb86ff2d363b6649bfcf04d9b9",
+      "lines": 55
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RadialCoefficientMaterialInverse.lean",
+      "sha256": "a28a6319b276e4ad7b078b844ae122d9fa1b2bd8fffcabce6ba1b914185f7221",
+      "git_blob": "4aced4b7ac973d750dcf4c206c78fea2b9322150",
+      "lines": 145
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositivePowerPolynomialMaterialJets.lean",
+      "sha256": "8179be21858b3703e4997fc8d8773527c5a56c856d6aab0659b8497177796c1c",
+      "git_blob": "b96ab8e2242b762952bf571b0583abcc010dcc00",
+      "lines": 137
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa",
+      "git_blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "lines": 65
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalStateInterpolation.lean",
+      "sha256": "6c31333851353e661b0c5177ad6239387154ebde3557e8a343a633671622cc2b",
+      "git_blob": "3b016eb8f2348a15d6d9d926ed03881ddc47b747",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialSampleBounds.lean",
+      "sha256": "bf93168cbf108c9682005ae3b18f59c92f630a768c00e73c590c90fccbf89046",
+      "git_blob": "19becb59903b44c18c8f1afb72726b2f95952752",
+      "lines": 66
+    }
+  ],
+  "provider_evidence": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJetsCandidateManifest.json",
+      "sha256": "b16eead4aa89e7917dee669843de4e5d66d7cf94222c832133ffad315cfcf66f",
+      "git_blob": "8f6d9e8fa0f1efa432acebb28416f45f6afa4c68",
+      "lines": 44
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/N01RadialCoefficientMaterialInverseIndependentReview.json",
+      "sha256": "9313d265424c5e1d00bd079abfff149bb7b41d6e3fa7bd4466771f40fc36b205",
+      "git_blob": "97d87ea46ebdad731920e451cc71bddeef0aa546",
+      "lines": 79
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositivePowerPolynomialMaterialJetsReviewedManifest.json",
+      "sha256": "0c1e97266f72fdb1d02a5a42852c657052398ea87f79bf2ec4010c92905a5aa8",
+      "git_blob": "530e0f5b3305b8b5cb5f642065ad31e3e8b76e86",
+      "lines": 26
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/MaterialGlobalEndpointModelsIndependentReview.json",
+      "sha256": "38602f453bb928d4fc8a0c7313fd1626b1750e3be75373c8cc1faa1317cfde2a",
+      "git_blob": "97fc25d8a217b61766791b5ef5a961b432246d77",
+      "lines": 22
+    }
+  ],
+  "construction": [
+    "Actual radial coefficient positivity follows from the existing N01 w/16 bound at the same physical point. Its reciprocal on a closed negative component follows from the actual inverse reference profile estimate in a genuine containing material cell.",
+    "One global ordinary coefficient tower supplies every derivative. At order zero the common low state bound includes the original loss and gives value <=2*A(0).",
+    "W=C0*E0(sample j) uses a uniform scalar C0>=1 from the same material data. It is proved >=1; no unscaled E0>=1 or replacement of T is assumed.",
+    "K=max(1,2*A(0),K0,P) bounds both value and reciprocal by K*W^K. The actual real-power polynomial closure gives one common low order and loss before the real exponent, state, component, actual host, point and derivative order.",
+    "The only component hypothesis is the actual containing-cell inclusion. No root optical lower, retained Morse witness, profile radius, final transport bound or inverse-jet assumption appears."
+  ],
+  "limitations": [
+    "The ordinary-jet provider is a new static candidate queued for independent review.",
+    "This settles the raw radial-coefficient power cost, not the divided root-factor reciprocal. The latter still requires genuine same-witness optical lower data.",
+    "Static source only; no compilation, installation, CI or final primitive conclusion."
+  ],
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

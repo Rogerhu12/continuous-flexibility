@@ -1,0 +1,40 @@
+{
+  "kind": "independent_narrow_actual_CI139_repair_review",
+  "reviewer": "/root",
+  "result": "passed_static_source_and_actual_diagnostic_review",
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/base.lean",
+    "sha256": "42b7d1c827797240afb1f189a316d8e5537754f948c861e81c040c19d7e2a2b9",
+    "git_blob": "7752be209bc875730633f6502880b2889a345679",
+    "lines": 180
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/CanonicalWholePositiveRootMatching.lean",
+    "sha256": "1646720eb55f5afe500dfd5a1fcae95ad204518dc3a68771a4d4d7ef927e06b8",
+    "git_blob": "35c861e51748d158865d19d5564c3cb81579b4bd",
+    "lines": 179
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/CanonicalWholePositiveRootMatchingDsimpCandidateManifest.json",
+    "sha256": "0187b612db58eab8cc1432d5a4f44eee11ed397b927cf61a3d55d16a29e08a02",
+    "git_blob": "f80cf079df45c3a0874e85064bb28dea7bcda2bc",
+    "lines": 45
+  },
+  "actual_log": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-139.log",
+    "sha256": "336c24733b0fb94bc4d1e21951259c5518d7c2da27c4ce66dc884736cd6fac8b",
+    "git_blob": "0c30141eafd64acba1760015d205bccb28d8c2dc",
+    "lines": 614
+  },
+  "run": 43211219043,
+  "job": 131159019124,
+  "base_head": "3a8671c128296b431a9a0d23ce6cec8702dd654c",
+  "checks": [
+    "Read the entire original180-line module and independently verified the candidate179-line file is exactly the one-line deletion.",
+    "The actual CI139 diagnostic now names this file line176 and says dsimp made no progress. Earlier dsimp at hout and target already reduces the nested lets, so the second dsimp after introducing the state is redundant.",
+    "The unchanged following proof uses the same constructed maps and the same source uniqueness/finite negative root matching theorem. No declaration statement, import, option, chosen object, quantitative bound or other byte changed.",
+    "CI139 confirms both previous138 repaired modules compiled; its sole new source diagnostic is this redundant dsimp."
+  ],
+  "compiled": false,
+  "source_edited": false
+}

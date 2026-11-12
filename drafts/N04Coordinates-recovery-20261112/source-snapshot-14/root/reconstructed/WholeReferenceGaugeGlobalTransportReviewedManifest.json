@@ -1,0 +1,23 @@
+{
+  "kind": "same_reference_gauge_global_transport_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransport.lean",
+    "sha256": "17179bac21aa6863d3a35ec282d4e0420ca30d6444312149df3d06d78eae5f23",
+    "git_blob": "9dd60b6e07fff54af9c9212383f8fddaa9eb3fdb",
+    "lines": 97
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeGlobalTransportCandidateManifest.json",
+    "sha256": "7eff7a87918ffd315819b48ae7d826e66e717488cadf62d7665738a198c81a74",
+    "git_blob": "4c9b8178705b8cc6dbdcd6218e9005f13770b2e8",
+    "lines": 39
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/WholeReferenceGaugeGlobalTransportIndependentReview.json",
+    "sha256": "2a8684933f18defd0ba9f4ffa5bbaeef0ddf5eff891d3a40ef8a868425d1b1d3",
+    "git_blob": "47a11ac7c2667ea07f8132fc077768cf265dd95b",
+    "lines": 64
+  },
+  "compiled": false
+}

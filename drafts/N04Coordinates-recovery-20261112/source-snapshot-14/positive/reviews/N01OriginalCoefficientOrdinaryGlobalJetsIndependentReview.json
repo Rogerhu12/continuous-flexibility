@@ -1,0 +1,63 @@
+{
+  "kind": "independent_full_source_and_actual_provider_review",
+  "reviewer": "/root/proof_inventory",
+  "author": "/root/quantitative_route",
+  "result": "passed_static_full_source_and_actual_provider_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJets.lean",
+    "sha256": "248d8d8276cf23922afa7138712827eedce7d1e1d1669e47c5f0a639512114b7",
+    "git_blob": "c2aab4a1827e96bb86ff2d363b6649bfcf04d9b9",
+    "lines": 55
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJetsCandidateManifest.json",
+    "sha256": "b16eead4aa89e7917dee669843de4e5d66d7cf94222c832133ffad315cfcf66f",
+    "git_blob": "8f6d9e8fa0f1efa432acebb28416f45f6afa4c68",
+    "lines": 44
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientGlobalJets.lean",
+      "sha256": "5e68bd0ad33d93486784c4ed0b8ae0db4b76808d9a8625a0d81e3048954710a1",
+      "git_blob": "88e29ac239d06438ee9ac5c03ef9d88c821d5699",
+      "lines": 187
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CylinderMixedJets.lean",
+      "sha256": "ae19c58f66f0778411f64607f52acf0525aceb27036c9d1ac1825e0e46e3614d",
+      "git_blob": "3dc20e779221e16f9be32dff13d22e978b5a048d",
+      "lines": 253
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01CoefficientValueJets.lean",
+      "sha256": "a13364b11fc053a1145f4b587e00d7b20ca1236c47cb534a29cebc69b7530134",
+      "git_blob": "6a5d4d600fadf2dfe63bb8f0126f7b6e4cefe2c1",
+      "lines": 129
+    }
+  ],
+  "provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientGlobalJetsReviewedManifest.json",
+    "sha256": "a8236e21708e624c334f5434c127c05de2eab1c4b1fca62e6134d140a813b65d",
+    "git_blob": "28254bd28a9baa6db6c756805c333f23ae86fb41",
+    "lines": 26
+  },
+  "inspection_git_head": "14d76e94d35b6e0aff823c24e9eb90c290c9f3d6",
+  "public_declarations": [
+    "originalCoefficient_ordinary_global_bound_of_n01"
+  ],
+  "public_collisions": [],
+  "checks": [
+    "Read all 55 source lines, all 187 lines of the actual mixed coefficient provider, its independent-review binding, the precise N01 smoothness theorem, and the actual polar mixed-to-full derivative basis proof.",
+    "Choosing Q(n)>0 uses the same original N01 witness, base, radius and loss, before all states, component selectors and physical points. A(n)=1+2^n Q(n) remains independent of those variables.",
+    "The open set is exactly annularOpen D. The same actual original coefficient is smooth there by the existing N01 provider. No extension or alternate coefficient family is substituted.",
+    "The mixed-to-full norm API requires mixed order a+b=n; its equality supplies hab.le to the original all-prefix bound. Both bounds evaluate the same q and have the same paired grading at n+loss.",
+    "The polar max-norm coordinate basis contributes 2^n, including n=0. Nonnegativity of Q(n) and the actual paired grading justify both multiplications. The added one makes every A(n)>=1 without changing the state loss.",
+    "The public name is absent from the inspected installed source tree. All provider bytes match the exact manifest."
+  ],
+  "limits": [
+    "Static review only; no compilation or new reference/current atlas quantitative claim. The mixed estimate provider retains its own independently reviewed status."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

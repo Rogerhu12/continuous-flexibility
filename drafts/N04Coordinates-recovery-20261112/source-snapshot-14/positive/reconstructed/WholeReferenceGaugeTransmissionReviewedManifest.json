@@ -1,0 +1,58 @@
+{
+  "kind": "actual_same_reference_gauge_root_and_transmission_reviewed_sources",
+  "owner": "/root/proof_inventory",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRootFirstJets.lean",
+      "sha256": "5f4d8c51ed898f9dcac89b509d737dd7e736e2d0aa774e8220b9ec25c0e64253",
+      "git_blob": "be4a8a0a3fe29b50db53f246b56d536dbe172f49",
+      "lines": 102,
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootFirstJets.lean",
+      "direct_imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveGaugeRootFirstJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasData"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRootMatching.lean",
+      "sha256": "56874820bdb1b924cac665f08355410d02885b4e449d4055f6020bda731d459f",
+      "git_blob": "d044ebf2139de1886c261a1ad19294ff4f227d5b",
+      "lines": 133,
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeRootMatching.lean",
+      "direct_imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootFirstJets",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootInterfaces"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmission.lean",
+      "sha256": "e7db7456fa5221cfd2d9005a2dc1c88eb4cf3a775e5451518f2429b9b71ff100",
+      "git_blob": "706d01f4aaf9bc87b63313e16292f0528678aff5",
+      "lines": 110,
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeReferenceGaugeTransmission.lean",
+      "direct_imports": [
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRootMatching"
+      ]
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeTransmissionCandidateManifest.json",
+    "sha256": "630ec06d5ced68e9b2bb0cc3951898bf89bd01d3dca821d617c0b61f20bdf3ad",
+    "git_blob": "74fad0b9ba4814b52ebd372c3797a823e6ec7897",
+    "lines": 126
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholeReferenceGaugeTransmissionIndependentReview.json",
+    "sha256": "c8f663071db582f16cd45cc7dc410799c628ce9f77bff09d3ee28de48306bb3b",
+    "git_blob": "c03406f91a77befd00355b3093f3777bb7bf6d8b",
+    "lines": 132
+  },
+  "source_bytes_unchanged_since_candidate": true,
+  "compiled": false,
+  "installed": false,
+  "green_receipt_applies_to_candidates": false,
+  "final_entrypoint": "n04WholeReferenceGaugeAtlasData_actual_transmissionGeometry",
+  "scope": "The same actual old K, fixed reference Y/H family and already selected relative tau/sigma/Q give the exact three-clause TransmissionGeometry on the smaller neighborhood. The final theorem does not assume root or cut matching.",
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

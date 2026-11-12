@@ -1,0 +1,38 @@
+{
+  "kind": "frozen_actual_N01_discriminant_and_root_axis_uniform_jet_reviewed_manifest",
+  "author": "/root/quantitative_route",
+  "status": "FROZEN_STATICALLY_REVIEWED_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01DiscriminantGlobalJets.lean",
+      "sha256": "b926f0c686af4d3138e1bbb0f8befe11ab4a28b68567b0f4c887cf1b56029ab3",
+      "git_blob": "baa7ace9728f02836699a4d598145f505706e88d",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisGlobalJets.lean",
+      "sha256": "89cd2dee6113b08b7524b2f2b34f63f4ab5129b6614da8b59371934538ab7a39",
+      "git_blob": "bb630b104d353a5f39a2138ee70f446e5df95ecb",
+      "lines": 64
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisGlobalJetsCandidateManifest.json",
+    "sha256": "b938dae75b3a1ccc7e3a93f1a9efcac8fffa11d406cf8f7688325381fb82b51f",
+    "git_blob": "162225c8a56b4f5fe124c7120f36907c00bf242b",
+    "lines": 89
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reviews/N01DiscriminantAndRootAxisGlobalJetsIndependentReview.json",
+    "sha256": "e2e39aab10a75ed469a181d46ab129a4a3cd02819ddfe957c7767fe85ca1402d",
+    "git_blob": "e1ad6bc6c871559f6b0aae587c355b29922e1174",
+    "lines": 96
+  },
+  "source_bytes_unchanged": true,
+  "limitations": [
+    "This is the actual divided-factor upper jet tower. Its reciprocal and the other same-witness material lower costs remain separate obligations.",
+    "No claim that Through03 contains future N01PrimitiveGeometry; no witness replacement, compilation or CI assertion."
+  ],
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

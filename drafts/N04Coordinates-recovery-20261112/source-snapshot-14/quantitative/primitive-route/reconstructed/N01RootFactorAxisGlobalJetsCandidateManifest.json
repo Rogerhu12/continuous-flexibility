@@ -1,0 +1,89 @@
+{
+  "kind": "actual_N01_discriminant_and_root_factor_uniform_jet_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01DiscriminantGlobalJets.lean",
+      "sha256": "b926f0c686af4d3138e1bbb0f8befe11ab4a28b68567b0f4c887cf1b56029ab3",
+      "git_blob": "baa7ace9728f02836699a4d598145f505706e88d",
+      "lines": 100
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01RootFactorAxisGlobalJets.lean",
+      "sha256": "89cd2dee6113b08b7524b2f2b34f63f4ab5129b6614da8b59371934538ab7a39",
+      "git_blob": "bb630b104d353a5f39a2138ee70f446e5df95ecb",
+      "lines": 64
+    }
+  ],
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientGlobalJets.lean",
+      "sha256": "5e68bd0ad33d93486784c4ed0b8ae0db4b76808d9a8625a0d81e3048954710a1",
+      "git_blob": "88e29ac239d06438ee9ac5c03ef9d88c821d5699",
+      "lines": 187
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootCoefficientAxisDivision.lean",
+      "sha256": "07acc208704e57ece107f3453e20130652b14f9bc1629edab4eb3ac93900a8c8",
+      "git_blob": "e9a784cfbbc14106f74928f77cace144ff97addc",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoefficientDiscriminantMaterialBounds.lean",
+      "sha256": "54a11485bd3ed42d4bde143f4df5dbc7e1f2c6ade416d8f54959216969b7777b",
+      "git_blob": "af5527a39c51d83ee200a9aeca6170fa42a9ca6e",
+      "lines": 153
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalStateInterpolation.lean",
+      "sha256": "6c31333851353e661b0c5177ad6239387154ebde3557e8a343a633671622cc2b",
+      "git_blob": "3b016eb8f2348a15d6d9d926ed03881ddc47b747",
+      "lines": 173
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/ReverseCoordinateOperator.lean",
+      "sha256": "96137d1ffdec389926d15c52b6cbacc0576e281932ff03b17eeee0945b05cad0",
+      "git_blob": "7c4dda7dd4e5d6fe5d2711bf24b417a027df5c10",
+      "lines": 226
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/LocalMixedProductBounds.lean",
+      "sha256": "d0faf14d190ae8c14f16f80958e8c166183c0914f822815a8d98aa13a660dfd7",
+      "git_blob": "cd30f2f9bb0efbb186788c4010cfaeef58befd57",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/RootCoefficientDivision.lean",
+      "sha256": "0605885b335d31a76c1b840f60e8821d1898a613f9b29cbc8aa55e5dde4aaf2d",
+      "git_blob": "96648e09b56b2a141c3a10ced82b7776d26648fd",
+      "lines": 105
+    }
+  ],
+  "input_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientGlobalJetsCandidateManifest.json",
+      "sha256": "9214c1ebfdb0dec78e951f8414d615dc90246e0abc7a92bbd5bbdbef432ef6f4",
+      "git_blob": "a36ca470582d2557778ef01033996032dca1b7fa",
+      "lines": 61
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootCoefficientAxisDivisionReviewedManifest.json",
+      "sha256": "5ed6a7a8f475315364815f83e79fb877669ab00531ee9513dff4046ee3a1a012",
+      "git_blob": "b0dc4b05ad44d3d3ae2f2b590cb81b3844198a09",
+      "lines": 26
+    }
+  ],
+  "construction": [
+    "Use the actual same-witness globally uniform N01 coefficient jets. A genuine smooth germ at each physical point permits the installed polynomial discriminant bound without charging a cutoff radius or any extension derivative.",
+    "The interpolation low order and loss are selected once before all mixed orders, physical points and components. A finite diagonal sum gives one scalar coefficient sequence depending only on total derivative order.",
+    "At any genuine root with either orientation, actual radial division samples only the same physical root. The factor ordinary n-jet is bounded with the exact 2^n factor and one derivative/loss shift.",
+    "All final factor numerical constants precede the state, root position, orientation, smooth factor and qualitative radius R. The bound is uniform in those choices."
+  ],
+  "limitations": [
+    "This is the actual divided-factor upper jet tower. Its reciprocal and the other same-witness material lower costs remain separate obligations.",
+    "No claim that Through03 contains future N01PrimitiveGeometry; no witness replacement, compilation or CI assertion."
+  ],
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "actual_fixed_positive_reference_family_reviewed_manifest",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalPositiveReferenceFamily.lean",
+    "sha256": "792a5148b96084a722578a9f25dbd9ed24b62691f9f31b0fbb2843311d0ae173",
+    "git_blob": "0a0206739fd3b542d87723155b08504317d2562e",
+    "lines": 56
+  },
+  "providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolation.lean",
+      "sha256": "43b9332cf208881b0894b69379c7767dcbed46d00dd6d93ab7b580a6ea8c5ce5",
+      "git_blob": "89bec50456142fde3eb21c28e397456a000b0548",
+      "lines": 80
+    }
+  ],
+  "provider_reviewed_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationReviewedManifest.json",
+    "sha256": "3828d5181d7559adea4d9dbb7e89ffbcb0ef9b452cb6d7a7c358fab84f736728",
+    "git_blob": "645b0b63b8f3dfd525b5366aaf648ef77d9b6229",
+    "lines": 74
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/CanonicalPositiveReferenceFamilyIndependentReview.json",
+    "sha256": "ccd360ca93a7149e84e08cb6c4bd165785016c450aee94bf26074142967d3d6c",
+    "git_blob": "aad91f892fe3e932739a867c48636cbf22693c18",
+    "lines": 49
+  },
+  "compiled": false
+}

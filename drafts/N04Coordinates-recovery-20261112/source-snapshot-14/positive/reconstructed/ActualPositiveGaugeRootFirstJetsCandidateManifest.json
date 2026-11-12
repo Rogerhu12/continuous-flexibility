@@ -1,0 +1,61 @@
+{
+  "kind": "actual_current_positive_gauge_root_first_jets_candidate",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveGaugeRootFirstJets.lean",
+    "sha256": "dfb27209661ab5db574f9480022a981a2407cd03a2bd4afc8e82eac2f2b89fd0",
+    "blob": "af468a906190a61a33173a6df00a8ae88a30afb4",
+    "lines": 87
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/ActualPositiveGaugeRootFirstJets.lean",
+  "actual_providers": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJets.lean",
+      "sha256": "dec4f15789b17a9ac6f6c196fb9e1c6f9929efa6b7a7866909bd2d6a9bf7ba05",
+      "blob": "76fa1a822a2df404ea31125c346670efa50b3010",
+      "lines": 123
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveActualRootFirstJets.lean",
+      "sha256": "5abed2d470d8f82fe5ab57185644142a6998f5c7f9a5547d698370488472cbbe",
+      "blob": "8fd6a4e731dc52d1214203a3a2d0a6b05b24ef0c",
+      "lines": 80
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJets.lean",
+      "sha256": "5dc841ec44f71e0195c7ee18b2b9b4c26bc1cb2891df37a68a75e3f1f664a1ca",
+      "blob": "b3384e644fc97fc8f120ed3377e4ebdd1b2adcd4",
+      "lines": 75
+    }
+  ],
+  "reviewed_dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/ActualPositiveReferenceFirstJetsReviewedManifest.json",
+      "sha256": "451fea2a1013f2a6511ac9e13ab8fa766c38f96684cdd09c816a1b79b5613764",
+      "blob": "59012afe870025b908a3ac1babeb3df63ae71792",
+      "lines": 24
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveActualRootFirstJetsReviewedManifest.json",
+      "sha256": "a72c54e2493fa3a37e31a2e3bb8d1837148ef4104b8f3268e56e255fea5ce379",
+      "blob": "820e6ddc86c30cab6d455cf3f283ed0485f96450",
+      "lines": 24
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/CanonicalReferenceGaugeRootCircleJetsReviewedManifest.json",
+      "sha256": "c9ee57e932ea75c9e39ab17d07cd30c397a39afa4919c1a6b5f53e8ee214da89",
+      "blob": "2e57d4cb9a37aea7bf604460e50688302260165e",
+      "lines": 40
+    }
+  ],
+  "public_declarations": [
+    "n04Coordinates_actual_positive_gauge_root_firstJets"
+  ],
+  "claims": [
+    "The actual original typed atlas supplies its geometry/cut, reference admissibility and sector.",
+    "The same positive matching and actual fixed reference interpolation provide the inputs to the current-root-circle transfer.",
+    "The output uses the original tau/sigma/Q, actual same Y/H, fixed side-dependent normal alignments and every current root angle. No raw current matching premise or replacement construction is used."
+  ],
+  "compiled": false,
+  "green_receipt_applies": false
+}

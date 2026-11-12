@@ -1,0 +1,26 @@
+{
+  "kind": "frozen_actual_N01_ordinary_global_coefficient_jets_reviewed_manifest",
+  "author": "/root/quantitative_route",
+  "status": "FROZEN_STATICALLY_REVIEWED_UNCOMPILED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJets.lean",
+    "sha256": "248d8d8276cf23922afa7138712827eedce7d1e1d1669e47c5f0a639512114b7",
+    "git_blob": "c2aab4a1827e96bb86ff2d363b6649bfcf04d9b9",
+    "lines": 55
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/N01OriginalCoefficientOrdinaryGlobalJetsCandidateManifest.json",
+    "sha256": "b16eead4aa89e7917dee669843de4e5d66d7cf94222c832133ffad315cfcf66f",
+    "git_blob": "8f6d9e8fa0f1efa432acebb28416f45f6afa4c68",
+    "lines": 44
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reviews/N01OriginalCoefficientOrdinaryGlobalJetsIndependentReview.json",
+    "sha256": "246e00531fc3389efb135fdfd9e105b523bfcffb2ead6bfa91efb52078c35d9b",
+    "git_blob": "def939c7d5c5860603df653c060c423b27a00256",
+    "lines": 63
+  },
+  "source_bytes_unchanged": true,
+  "compiled": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "actual_ci139_root_matching_dsimp_repair_reviewed_manifest",
+  "status": "STATIC_REVIEWED_ACTUAL_CI139_REPAIR",
+  "historical_preflight_candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/CanonicalWholePositiveRootMatchingDsimpCandidateManifest.json",
+    "sha256": "0187b612db58eab8cc1432d5a4f44eee11ed397b927cf61a3d55d16a29e08a02",
+    "blob": "f80cf079df45c3a0874e85064bb28dea7bcda2bc",
+    "lines": 45
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/compatibility/root-matching-redundant-dsimp/CanonicalWholePositiveRootMatching.lean",
+    "sha256": "1646720eb55f5afe500dfd5a1fcae95ad204518dc3a68771a4d4d7ef927e06b8",
+    "blob": "35c861e51748d158865d19d5564c3cb81579b4bd",
+    "lines": 179
+  },
+  "independent_actual_diagnostic_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/CanonicalWholePositiveRootMatchingCI139RepairIndependentReview.json",
+    "sha256": "2cc96ff87942b29bfb588aeeb1da538525bff9df07f564b7eccc731da9cff68d",
+    "blob": "852904e8162c3d5492a4d6325d41cd0086adcc1e",
+    "lines": 40
+  },
+  "historical_candidate_unchanged": true,
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_modified": false
+}

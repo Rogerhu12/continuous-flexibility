@@ -1,0 +1,74 @@
+{
+  "kind": "actual_certified_positive_reference_endpoint_interpolation_reviewed_manifest",
+  "author": "/root/audit_coordinates",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolationCandidateManifest.json",
+    "sha256": "f213837828b6ced684f9cd9beba0abe900a41441b12061146c53f69a5fffa4c9",
+    "git_blob": "eb1c5769b722951ad040cafb631bea72c1deb307",
+    "lines": 136
+  },
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "sha256": "5996158db4711a93a40aeb62b7e21f9582b3da5c0959582efa48b6793ffa50bf",
+      "git_blob": "f4f42daf4f17ad80d97001397d7a2873e0b82cdf",
+      "lines": 160,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceEndpointData.lean",
+      "origin": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceEndpointData.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualReferenceNegativeEndpointData",
+        "ContinuousFlexibility.Analysis.WholePositiveEndpointFields"
+      ],
+      "public_declarations": [
+        "n04PositiveReferenceSourceCoordinate",
+        "n04PositiveReferenceSourceHeight",
+        "n04Coordinates_actual_positive_reference_source_data"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolation.lean",
+      "sha256": "43b9332cf208881b0894b69379c7767dcbed46d00dd6d93ab7b580a6ea8c5ce5",
+      "git_blob": "89bec50456142fde3eb21c28e397456a000b0548",
+      "lines": 80,
+      "target_path": "src/ContinuousFlexibility/Analysis/ActualPositiveReferenceInterpolation.lean",
+      "origin": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualPositiveReferenceInterpolation.lean",
+      "imports": [
+        "ContinuousFlexibility.Analysis.ActualPositiveReferenceEndpointData",
+        "ContinuousFlexibility.Analysis.PositiveReferenceFiniteRadialJets"
+      ],
+      "public_declarations": [
+        "n04Coordinates_exists_actual_positive_reference_interpolation"
+      ]
+    }
+  ],
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/ActualPositiveReferenceInterpolationIndependentReview.json",
+    "sha256": "92efa3a237516ae54b82378617db040db946dc55883ba6827c3d5dfcdc6719a4",
+    "git_blob": "b5dc6ff625bf3fc52f243d4d16b72c654f337d2a",
+    "lines": 91
+  },
+  "reviewed_provider_manifests": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/ActualReferenceNegativeEndpointDataReviewedManifest.json",
+      "sha256": "f5792f65df07694fa330cdc669d7ebd446577e0cffef75b61e0f4edf4f845c8f",
+      "git_blob": "798621a81c8ffc57a1b3fde6be7e2935f4ce1121",
+      "lines": 51
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/radial-reference-bool/PositiveReferenceFiniteRadialJetsReviewedManifest.json",
+      "sha256": "7ef9f39d393ba5882a57fa5996c4418917611af7a17f6544f0cd6ff05f0b1879",
+      "git_blob": "95ec0856e2f211ddc2894b6c9bc94f34a5ce7d79",
+      "lines": 23
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometryReviewedManifest.json",
+      "sha256": "97cd4ecb74836bca17a67d6e413f437e2019c6449037d66e23b788e2525e70b3",
+      "git_blob": "3b9e9a1869056ffee6b05c09ff6bf26b8ffb73f0",
+      "lines": 22
+    }
+  ],
+  "compiled": false,
+  "green_receipt_applies": false,
+  "checkout_index_refs_checkpoint_authority_plan_CI_modified": false
+}

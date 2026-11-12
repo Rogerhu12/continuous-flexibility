@@ -1,0 +1,128 @@
+{
+  "kind": "n04_actual_positive_reference_principal_candidate",
+  "status": "STATIC_REVIEWED_HELD_UNCOMPILED",
+  "inspection_head": "14d76e94d35b6e0aff823c24e9eb90c290c9f3d6",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/RadialReferencePrincipalFormulas.lean",
+      "sha256": "fc2eb15c0da7e37fda9f227b906a75c801d0d628064e17e5bca4e63dae75e910",
+      "blob": "096b420be6425f39b2f5e73e4a0f60cbd9113ced",
+      "target_path": "src/ContinuousFlexibility/Analysis/RadialReferencePrincipalFormulas.lean",
+      "lines": 100,
+      "imports": [
+        "ContinuousFlexibility.Analysis.PositiveReferenceCylinder",
+        "ContinuousFlexibility.Analysis.CoordinateOperatorConstruction",
+        "ContinuousFlexibility.Radial.RadialHeight"
+      ],
+      "public_names": [
+        "coordinatePrincipalDensity_radial_cylinder",
+        "divergenceOperator_radial_height_of_coefficient_germs",
+        "inverseChartPotential_radial_cylinder"
+      ]
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipal.lean",
+      "sha256": "3e3daeb4e127d77150c85fe2cf205ae2564a86da1a7b92a54d16f447a62cc3fc",
+      "blob": "fcb65801fb0da7c1ccbf3e7a0bf826f303bf9a3b",
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveReferencePrincipal.lean",
+      "lines": 195,
+      "imports": [
+        "ContinuousFlexibility.Analysis.RadialReferencePrincipalFormulas",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeAtlasOperator",
+        "ContinuousFlexibility.Analysis.WholeReferenceGaugeRelativeFields",
+        "ContinuousFlexibility.Analysis.N01OpticalCollarPositivity"
+      ],
+      "public_names": [
+        "n04Coordinates_reference_positive_coefficient_germs",
+        "n04WholeReferenceGaugeAtlasData_positive_reference_formulas",
+        "n04WholeReferenceGaugeAtlasData_positive_reference_qualitative"
+      ]
+    }
+  ],
+  "total_source_lines": 295,
+  "provider_refs": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PositiveReferenceCylinder.lean",
+      "sha256": "6ececb96b06c704d8672c58cbe2b395bf3ce8967a667b046cd09466249b5c4de",
+      "blob": "c1c59b1c3240feeec1539a65ce0c8a8a4ec7ba48"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CoordinateOperatorConstruction.lean",
+      "sha256": "ffbecb5ae9d0d9e40a5fd193592dde632989d3c4fb2382b118be5180f9d7f1c1",
+      "blob": "aef71ea652edabf9d9c4788e2c6aba6780f6c1fe"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/PrincipalCoefficientPullback.lean",
+      "sha256": "88ccf751162a22460c15d8bfdedcdd558328b0e56f51a145dc74bd343114e3f0",
+      "blob": "19262a1834a49fdb7958b07352f409bb0940de19"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Radial/RadialHeight.lean",
+      "sha256": "c08c761f0560d5039bfbd50969fb241c0279bb95562c3ebb6cc0fc93697e860e",
+      "blob": "8b8dfa86c48003f5b492049d8c2aa38e09f68263"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N01OpticalCollarPositivity.lean",
+      "sha256": "4b9b30f66f4d1d914e3830e111a0e8d69ef0ff1a5c0926c7528fc08cd0e76b1c",
+      "blob": "c392ff0cc2bba65c52097c72e879e2f90dd2dbec"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/N04PositiveComponents.lean",
+      "sha256": "5b7a7e28f279116415d8a3a23299294f8e5fc1858187ec00c3ea18a4d04757de",
+      "blob": "0d4de58a9b9ecd9f84e2f01da190847464669cc6"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Nonlinear.lean",
+      "sha256": "65fcde6ae1e43bf6fd2a5f56a2121cde66dea71c44357cd45b833e6bc3358ec1",
+      "blob": "7a05b947965738dcb91957059e102f9ea813e52b"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasOperator.lean",
+      "sha256": "2fddaf7a9418556a1915a1691b7ed4396740b227d269b8f84c78d6217f388c57",
+      "blob": "de3ff006b2c03592d7c5489ed41c4b73adad8c73"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "sha256": "075f99fcadbee80a4b509c417e547dde46e2775898ff540961e65d2f3359eb4a",
+      "blob": "b5adcbe732e214fd84dfbabee1de1c939352de5d"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+      "sha256": "4b34db7f7514160c2f86a8fe0ecb0c8d0a653ea4c1a4bdfc34b27ef862319dec",
+      "blob": "ba1d43881f06ffb76d0d658ed762dd435a668d0b"
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveChartRangeGeometry.lean",
+      "sha256": "40f23d9ea3cc0c2eef518a0b5b1e233ccd64cb61abd8657197ed132d9e202703",
+      "blob": "fadd30e6e59365b6798c1b0a917c3d86f1775f05"
+    }
+  ],
+  "mathematical_scope": [
+    "Actual cylindrical derivative gives the three principal density formulas with its exact Jacobian.",
+    "N03 positive-point germs and the actual reference-state identity give the corrected coefficient germs (w,0,wprime/r).",
+    "The radial height has zero angular derivative. Its divergence at the physical inverse image is exactly deriv(w*deriv H).",
+    "The same new atlas retains its chosen Y/H and actual relative reference identities; its positive potential carries the required minus sign.",
+    "On each positive canonical open piece the actual radial coefficient a and angular coefficient c are strictly positive, the mixed coefficient is zero, and a/c/potential are radial."
+  ],
+  "remaining_obligations": [
+    "Negative-piece potential radiality and the all-piece aggregation are not claimed by these two sources.",
+    "No uniform material lower bound for positive c, reference jets, or complete PrimitiveGeometryProperties is claimed."
+  ],
+  "static_checks": {
+    "new_public_names": 6,
+    "installed_public_name_collisions": 0,
+    "forbidden_proof_tokens": 0,
+    "lean_compilation_performed": false,
+    "checkout_index_refs_cp_changed": false
+  },
+  "independent_reviews": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reviews/WholePositiveReferencePrincipalIndependentReview.json",
+      "sha256": "cf9bc51dedbe4eeb1f96310e95566ea4aff98d2d87bbe0eb2f66e905ce066e56"
+    }
+  ],
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholePositiveReferencePrincipalCandidateManifest.json",
+    "sha256": "df26f4bbb0440993d7a412e856f6a2d745b5a760e691bfddd3d0d7e0acd3e1ee"
+  }
+}

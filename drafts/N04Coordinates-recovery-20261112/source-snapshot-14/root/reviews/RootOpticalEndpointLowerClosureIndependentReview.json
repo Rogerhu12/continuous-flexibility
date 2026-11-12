@@ -1,0 +1,45 @@
+{
+  "kind": "independent_single_token_closure_direction_review",
+  "reviewer": "/root",
+  "result": "passed_narrow_static_delta_review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/root-optical-limit-closure/RootOpticalEndpointLower.lean",
+    "sha256": "0cc267ad4d4417357f798507f9acbb2bee427d836c3f4f9b7c11a8e727157481",
+    "git_blob": "a128488bcd037bac244c3011dbe641a27e38969b",
+    "lines": 123
+  },
+  "original_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/RootOpticalEndpointLower.lean",
+    "sha256": "4ed78fc7dca8013f379868050fa385d30ca39163e5dd2d23e00a5b906b6e516a",
+    "git_blob": "bb636a3ea287225e7f4121c6a6609ac1b8e92fe2",
+    "lines": 123
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/root-optical-limit-closure/RootOpticalEndpointLowerClosureCandidateManifest.json",
+    "sha256": "c84d93f4b8dd71e76e5fd6cdc216d0b69d273c2c513cdede198ab895a1fea5a7",
+    "git_blob": "f8f1f0f55339e0056cfeabebba518ed707442c4e",
+    "lines": 39
+  },
+  "mathlib_provider": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Topology/Order/DenselyOrdered.lean",
+    "sha256": "b02cb3aa48b52b227247c6efbd3ac1ec1f0ddbb24420dde89c40614d392c300d",
+    "git_blob": "6158d1cc81003eb1ac571469b7ac645e2e7b31f3",
+    "lines": 316
+  },
+  "prior_full_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/ScaledOpticalAndRootLowerReconstructionIndependentReview.json",
+    "sha256": "4e5e915a97d26408e6ad987ba0f5f08a15ec5850d5b05fa69d5b76ab773b4e41",
+    "git_blob": "383228718a583ef32e217f25b2278cfe0356f3b1",
+    "lines": 29
+  },
+  "checks": [
+    "Read the entire candidate and compared exact original bytes: the sole replacement is closure_Ioo hρ.ne-prime to closure_Ioo hρ.ne.",
+    "The actual local mathlib declaration requires a≠b for closure(Ioo a b)=Icc a b. Here a=0,b=ρ and hρ:0<ρ, so hρ.ne has the required orientation0≠ρ.",
+    "Every theorem header, import, option, chosen factor, inequality, one-sided limit and remaining proof byte is unchanged. No current CI activation or root-material lower bound is implied."
+  ],
+  "limits": [
+    "Narrow repair review only, in addition to the preserved earlier full source review. Static review is not compilation evidence; actual same-witness optical/material hypotheses still must be provided."
+  ],
+  "compiled": false,
+  "source_edited": false
+}
