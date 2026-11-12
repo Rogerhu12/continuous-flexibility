@@ -50,7 +50,8 @@ private def transportVelocity_twoTowers
     (J₀ : ∀ i, SmoothDirections (U ×ˢ V i) (f₀ i))
     (J₁ : ∀ i, SmoothDirections (U ×ˢ V i) (f₁ i)) :
     ∀ (c : Fin 2) i, SmoothDirections (U ×ˢ V i)
-      ((Fin.cases f₀ (Fin.cases f₁ Fin.elim0)) c i) :=
+      ((Fin.cases f₀ (Fin.cases f₁ Fin.elim0) :
+        Fin 2 → I → E × PolarPoint → ℝ) c i) :=
   Fin.cases J₀ (Fin.cases J₁ (fun i => Fin.elim0 i))
 
 private theorem transportVelocity_commonGrowth
@@ -244,6 +245,18 @@ private theorem n01TransportVelocityCircleSMul_cache_eq (S : PhysicalSpacesData)
       (inferInstance : SMul ℝ (CircleSpace S)) := rfl
 
 attribute [local instance] n01TransportVelocityCircleSMul_cache
+
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
 
 set_option diagnostics true in
 /-- Fixed-loss bounds for the actual independent and frozen-residual

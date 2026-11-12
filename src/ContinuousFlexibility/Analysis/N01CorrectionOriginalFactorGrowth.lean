@@ -161,6 +161,18 @@ private theorem n01CorrectionOriginalFactorGrowthCircleSMul_eq_inferInstance
 
 attribute [local instance] n01CorrectionOriginalFactorGrowthCircleSMul
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
 set_option diagnostics true in
 theorem N01Properties.originalCorrectionFactors_flat_mixed_growth
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}

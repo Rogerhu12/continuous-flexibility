@@ -35,6 +35,18 @@ private theorem n01CorrectionCoefficientJointTowerCircleSMul_eq (S : PhysicalSpa
 
 attribute [local instance] n01CorrectionCoefficientJointTowerCircleSMul
 
+attribute [local instance]
+  n07aNonlinearAnnularGroup n07aNonlinearAnnularModule
+  n07aNonlinearAnnularAddGroup n07aNonlinearAnnularSMul n07aNonlinearAnnularSub
+  n07aNonlinearAnnularParameterGroup n07aNonlinearAnnularParameterModule
+  n07aNonlinearAnnularParameterAddGroup n07aNonlinearAnnularParameterSMul
+  n07aNonlinearAnnularParameterSub
+  n07aNonlinearDirectionsGroup n07aNonlinearDirectionsModule
+  n07aNonlinearDirectionsAddGroup n07aNonlinearDirectionsSMul n07aNonlinearDirectionsSub
+  n07aNonlinearSectorParameterGroup n07aNonlinearSectorParameterModule
+  n07aNonlinearSectorParameterAddGroup n07aNonlinearSectorParameterSMul
+  n07aNonlinearSectorParameterSub
+
 def correctionStateSpatialProjection (S : PhysicalSpacesData) :
     (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint) →L[ℝ]
       (StateDirections S × ℝ) × PolarPoint :=
