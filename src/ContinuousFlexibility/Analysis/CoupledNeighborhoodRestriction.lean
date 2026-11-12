@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.SolveStateSpaces
+import ContinuousFlexibility.Analysis.N06Neighborhood
 import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.TameTransfer
@@ -191,17 +192,8 @@ theorem coupled_N02Properties_restrict (h : N02Properties D T S C R base ε)
       (coupled_sectorNeighborhood_mono hb hε hε)⟩
 
 theorem coupled_N03Properties_restrict (h : N03Properties D T S C R L base ε)
-    (hb : base ≤ base') (hε : ε' ≤ ε) : N03Properties D T S C R L base' ε' := by
-  rcases h with ⟨h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈⟩
-  have hsub := coupled_stateNeighborhood_mono (S := S) (C := C) hb hε
-  exact ⟨(fun z hz => h₁ z (hsub hz)), (fun z hz => h₂ z (hsub hz)),
-    (fun z hz => h₃ z (hsub hz)), (fun z hz => h₄ z (hsub hz)),
-    (fun z hz => h₅ z (hsub hz)), (fun z hz => h₆ z (hsub hz)),
-    (fun z hz => h₇ z (hsub hz)), smoothTameOn_mono h₈
-      (((coupled_sectorNeighborhood_isOpen S base' ε' ε').prod isOpen_univ).prod
-        isOpen_univ)
-      (Set.prod_mono (Set.prod_mono (coupled_sectorNeighborhood_mono hb hε hε)
-        (subset_refl _)) (subset_refl _))⟩
+    (hb : base ≤ base') (hε : ε' ≤ ε) : N03Properties D T S C R L base' ε' :=
+  n06_N03Properties_mono h hb hε
 
 theorem coupled_N04Properties_restrict (h : N04Properties D T S C L K base loss ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) : N04Properties D T S C L K base' loss ε' :=
@@ -276,21 +268,12 @@ theorem coupled_nonlinearPropertiesThrough08_restrict (hT : IsMaterialData D T)
   rcases h with ⟨h7, h8⟩
   rcases h7 with ⟨h6, hG, hBridge⟩
   rcases h6 with ⟨h5, h6⟩
-  rcases h5 with ⟨h4, h5⟩
-  rcases h4 with ⟨h3, hRoot, hCubic, hTrans, h4⟩
-  rcases h3 with ⟨h2, h3⟩
-  rcases h2 with ⟨h1, h2⟩
-  have h1' := coupled_N01Properties_restrict hT h1 hb hε hε'
-  have h2' := coupled_N02Properties_restrict h2 hb hε
-  have h3' := coupled_N03Properties_restrict h3 hb hε
-  have h4' := And.intro (coupled_N04Properties_restrict h4.1 hb hε)
-    (n06_CanonicalPrimitiveGeometry_mono h4.2 hb hε)
+  have h5' := n06_NonlinearPropertiesThrough05_mono hT h5 hb hε' hε
   have h6' := coupled_N06Properties_restrict h6 hb hε hε'
   have hG' := coupled_scalarInverseProperties_restrict hG hb hε
   have hBridge' := coupled_scalarBanachBridgeProperties_restrict hBridge hb hε
   have h8' := coupled_N08Properties_restrict h8 hb hε
-  exact ⟨⟨⟨⟨⟨⟨⟨h1', h2'⟩, h3'⟩, hRoot, hCubic, hTrans, h4'⟩, h5⟩, h6'⟩,
-    hG', hBridge'⟩, h8'⟩
+  exact ⟨⟨⟨h5', h6'⟩, hG', hBridge'⟩, h8'⟩
 
 theorem coupled_neighborhood_mono {q0 q0' : ℝ}
     (hb : base ≤ base') (hε : ε' ≤ ε) (hq : q0' ≤ q0) :

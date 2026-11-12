@@ -3,6 +3,7 @@ import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.TameTransfer
 import ContinuousFlexibility.Analysis.N01cBoundsRestriction
+import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # Restricting the common nonlinear neighborhood
@@ -216,12 +217,13 @@ theorem n06_N03Properties_mono {D : ReferenceData} {T : MaterialData}
     (h : N03Properties D T S C R L base ε)
     (hb : base ≤ base') (hε : ε' ≤ ε) :
     N03Properties D T S C R L base' ε' := by
-  rcases h with ⟨ha, hpositive, hzero, hparity, hflow, hoperator, hintegral, htame⟩
+  rcases h with ⟨ha, hpositive, hzero, hparity, hflow, hoperator, hintegral,
+    htame, hspatial⟩
   have hU := n06_stateNeighborhood_mono (C := C) hb hε
   refine ⟨(fun z hz => ha z (hU hz)), (fun z hz => hpositive z (hU hz)),
     (fun z hz => hzero z (hU hz)), (fun z hz => hparity z (hU hz)),
     (fun z hz => hflow z (hU hz)), (fun z hz => hoperator z (hU hz)),
-    (fun z hz => hintegral z (hU hz)), ?_⟩
+    (fun z hz => hintegral z (hU hz)), ?_, fun z hz => hspatial z (hU hz)⟩
   exact smoothTameOn_mono htame
     (((n06_isOpen_sectorNeighborhood S base' ε' ε').prod isOpen_univ).prod isOpen_univ)
     (Set.prod_mono (Set.prod_mono (n06_sectorNeighborhood_mono hb hε hε)
@@ -312,6 +314,7 @@ theorem n06_NonlinearPropertiesThrough05_mono {D : ReferenceData} {T : MaterialD
   exact ⟨⟨⟨⟨n06_N01Properties_mono hT h01 hb hε' hε,
     n06_N02Properties_mono h02 hb hε⟩, n06_N03Properties_mono h03 hb hε⟩,
     hroot, hcubic, htransmission, n06_N04Properties_mono h04 hb hε,
-      n06_CanonicalPrimitiveGeometry_mono hprimitive hb hε⟩, h05⟩
+      n07a_primitiveGeometry_restrict h01.1.1 hT hprimitive.1 hb hε,
+      n06_CanonicalPrimitiveGeometry_mono hprimitive.2 hb hε⟩, h05⟩
 
 end ContinuousFlexibility.Statements

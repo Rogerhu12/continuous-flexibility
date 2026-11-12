@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N08Neighborhoods
 import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.N06Neighborhood
+import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
 # Retaining the nonlinear construction on a common smaller neighborhood
@@ -229,13 +230,15 @@ theorem n08_n03Properties_mono
     {base base' : ℕ} {ε ε' : ℝ}
     (h : N03Properties D T S C R L base ε) (hb : base ≤ base') (hε : ε' ≤ ε) :
     N03Properties D T S C R L base' ε' := by
-  obtain ⟨ha, hpositive, hturning, hparity, hflow, hdifference, hconservation, hsmooth⟩ := h
+  obtain ⟨ha, hpositive, hturning, hparity, hflow, hdifference, hconservation,
+    hsmooth, hspatial⟩ := h
   have hsub := n08_stateNeighborhood_mono (C := C) hb hε
   have hsector := n08_sectorNeighborhood_mono (S := S) hb hε hε
   refine ⟨(fun z hz => ha z (hsub hz)), (fun z hz => hpositive z (hsub hz)),
     (fun z hz => hturning z (hsub hz)), (fun z hz => hparity z (hsub hz)),
     (fun z hz => hflow z (hsub hz)), (fun z hz => hdifference z (hsub hz)),
-    (fun z hz => hconservation z (hsub hz)), ?_⟩
+    (fun z hz => hconservation z (hsub hz)), ?_,
+    (fun z hz => hspatial z (hsub hz))⟩
   exact smoothTameOn_mono hsmooth
     (((n08_isOpen_sectorNeighborhood S base' ε' ε').prod isOpen_univ).prod isOpen_univ)
     (Set.prod_mono (Set.prod_mono hsector (subset_refl _)) (subset_refl _))
@@ -362,12 +365,13 @@ theorem n08_through04_mono (hT : IsMaterialData D T)
     (h : NonlinearPropertiesThrough04 D T S C R L K base loss ε)
     (hb : base ≤ base') (hl : loss ≤ loss') (hεpos : 0 < ε') (hε : ε' ≤ ε) :
     NonlinearPropertiesThrough04 D T S C R L K base' loss' ε' := by
-  obtain ⟨hprev, hroot, hcubic, htransmission, hcoordinates, hprimitive⟩ := h
+  obtain ⟨hprev, hroot, hcubic, htransmission, hcoordinates, hprimitiveA, hprimitiveB⟩ := h
   have hN01 : N01Properties D T S C base loss ε := hprev.1.1
   have hweights := n08_sample_weights_nonneg hT hN01.1.1
   exact ⟨n08_through03_mono hT hprev hb hl hεpos hε, hroot, hcubic, htransmission,
     n08_n04Properties_mono (fun m => (hweights m).2) hcoordinates hb hl hε,
-    n06_CanonicalPrimitiveGeometry_mono hprimitive hb hε⟩
+    n07a_primitiveGeometry_restrict hN01.1.1 hT hprimitiveA hb hε,
+    n06_CanonicalPrimitiveGeometry_mono hprimitiveB hb hε⟩
 
 theorem n08_through05_mono (hT : IsMaterialData D T)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
