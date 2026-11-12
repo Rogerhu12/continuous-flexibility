@@ -79,8 +79,9 @@ theorem n04Realization_spatialJoint_expansion
     funext b k
     apply MultilinearMap.ext
     intro u
-    rw [localScalarJetMap_apply, localScalarJet_of_mem _ k (x, q.1) u (mem_univ q.2)]
-    exact n04Realization_radialJoint_expansion J hU hcU hI hf hb hr b k x q hq u
+    exact (localScalarJetMap_apply _ k (x, q.1) q.2 u).trans
+      ((localScalarJet_of_mem _ k (x, q.1) u (mem_univ q.2)).trans
+        (n04Realization_radialJoint_expansion J hU hcU hI hf hb hr b k x q hq u))
   rw [heq]
 
 end ExistingExpansion

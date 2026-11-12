@@ -107,7 +107,7 @@ theorem n04Realization_unitCubic_oneHigh_bounds
       (mul_nonneg (mul_nonneg hA.le (Real.rpow_nonneg hEpos.le _)) (hH m))
   have hinv : 0 ≤ (width m ^ 6)⁻¹ := inv_nonneg.mpr (pow_pos (hwidth m) 6).le
   have hinvBound : (width m ^ 6)⁻¹ ≤ bw ^ 6 * E m ^ (bw * 6) := by
-    rw [inv_pow]
+    rw [← inv_pow]
     calc
       (width m)⁻¹ ^ 6 ≤ (bw * E m ^ bw) ^ 6 :=
         pow_le_pow_left₀ (inv_nonneg.mpr (hwidth m).le) (hwidthBound m) 6
@@ -122,7 +122,7 @@ theorem n04Realization_unitCubic_oneHigh_bounds
       mul_le_mul hinvBound hmajorant hGnonneg
         (mul_nonneg (pow_nonneg hbw.le 6) (Real.rpow_nonneg hEpos.le _))
     _ = (bw ^ 6 * A * E m ^ (bw * 6 + A)) * H m * V := by
-      rw [Real.rpow_add hEpos]
+      rw [Real.rpow_add hEpos (bw * 6) A]
       ring
     _ ≤ Q * E m ^ Q * H m * V :=
       mul_le_mul_of_nonneg_right

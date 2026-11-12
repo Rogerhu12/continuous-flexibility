@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N07aActualCubicFactors
 import ContinuousFlexibility.Analysis.CanonicalFieldJetReduction
+import ContinuousFlexibility.Analysis.StateNeighborhood
 
 /-!
 # The actual cubic factor before the quantitative N04 certificate
@@ -45,7 +46,7 @@ theorem n04Realization_unitDifference_cubic_factor
     (i : Fin 3) :
     EqOn (n07aUnitDifferenceAtom D T S C L K z m (n07aCubicPrincipalAtom i))
       (fun p => (K.right m - K.left m) ^ 6 * (p.1 * (1 - p.1)) ^ 3 *
-        n07aUnitDifferenceAtom D T S C L K z m (n07aCubicDividedAtom i)) unitStrip := by
+        n07aUnitDifferenceAtom D T S C L K z m (n07aCubicDividedAtom i) p) unitStrip := by
   intro p hp
   have hpK := n07aCanonicalUnitPoint_maps m hlen hp
   have hfactor := n04Realization_actual_cubic_factor hB
