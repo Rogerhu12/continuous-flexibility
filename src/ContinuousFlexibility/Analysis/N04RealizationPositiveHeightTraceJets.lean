@@ -56,9 +56,14 @@ def n04Realization_actualPositive_logTrace_parameterTower
     (n04PositiveEndpoint i side) j
     (fun x hx η => (hroot x hx η).1) (fun x hx η => (hroot x hx η).2)
     (fun d hd => J side d (hd.trans hj)) b θ
-  exact JT.congr (fun _ _ => by
-    simp only [positiveHeightTaylorData, boundaryHeightLogRatio, div_one,
-      n04PositiveEndpoint, f, K])
+  have hlog (x : X) : (fun p => Real.log (f x p)) =
+      boundaryHeightLogRatio (fun _ => 1)
+        (n04PositiveSourceHeight (src side) (n04bActualTypedAtlas hT hS hN hfield e) (z x)) := by
+    funext p
+    simp only [boundaryHeightLogRatio, div_one, f, K]
+  exact JT.congr (fun x _ => by
+    rw [positiveHeightTaylorData, ← hlog x]
+    rfl)
 
 /-- An ambient endpoint has the actual unit source, hence every
 logarithmic Taylor coefficient and every angular derivative vanish. -/
@@ -71,8 +76,16 @@ theorem n04Realization_positiveSource_logTrace_none
     iteratedDeriv b
       (positiveHeightTaylorData (n04PositiveLeft i) (n04PositiveRight i) (fun _ => 1)
         (fun side => n04PositiveSourceHeight (src side) K z) side j) θ = 0 := by
-  simp only [positiveHeightTaylorData, boundaryHeightLogRatio,
-    n04PositiveSourceHeight, hside, div_one, Real.log_one,
-    radialBoundaryJet, iteratedDeriv_const_zero]
+  have hlog : boundaryHeightLogRatio (fun _ => 1) (fun _ => 1) =
+      (fun _ : PolarPoint => (0 : ℝ)) := by
+    funext p
+    simp only [boundaryHeightLogRatio, div_one, Real.log_one]
+  have hzero : positiveHeightTaylorData (n04PositiveLeft i) (n04PositiveRight i)
+      (fun _ => 1) (fun side => n04PositiveSourceHeight (src side) K z) side j =
+      (fun _ : ℝ => (0 : ℝ)) := by
+    funext η
+    simp only [positiveHeightTaylorData, n04PositiveSourceHeight, hside,
+      hlog, radialBoundaryJet, iteratedDeriv_fun_const_zero]
+  rw [hzero, iteratedDeriv_fun_const_zero]
 
 end ContinuousFlexibility.Analysis

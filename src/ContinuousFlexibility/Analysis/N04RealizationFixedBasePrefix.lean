@@ -24,29 +24,29 @@ variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
 theorem n04Realization_fixedBase_prefix_power
     (p : ℕ → Seminorm ℝ X) (hp : Monotone p) (hI : HasInterpolation p)
     (requestedBase : ℕ) (L : ℕ → ℕ) :
-    ∃ base : ℕ, requestedBase ≤ base ∧ ∀ K : ℕ, ∃ λ : ℕ,
+    ∃ base : ℕ, requestedBase ≤ base ∧ ∀ K : ℕ, ∃ shift : ℕ,
       ∀ s : ℕ, ∃ C : ℝ, 1 ≤ C ∧
       ∀ k : ℕ, k ≤ K → ∀ n : ℕ, n ≤ s →
       ∀ x : X, p base x ≤ 1 → ∀ v : Fin k → X,
       (∀ i, p base (v i) ≤ 1) → ∀ R : ℝ, 1 ≤ R →
-      p (base + s + λ * K + 1) x ≤ R →
-      (∀ i, p (base + s + λ * K + 1) (v i) ≤ R) →
+      p (base + s + shift * K + 1) x ≤ R →
+      (∀ i, p (base + s + shift * K + 1) (v i) ≤ R) →
       oneHighVariationWeight p base (n + L k) x v ≤
-        C * R ^ (((n + λ * k : ℕ) : ℝ) / (((s + λ * K : ℕ) : ℝ) + 1)) := by
+        C * R ^ (((n + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1)) := by
   classical
   obtain ⟨b₀, ℓ, hi⟩ := hI
   let base : ℕ := max requestedBase (max b₀ (L 0 + ℓ))
   have hbase : b₀ ≤ base := (le_max_left _ _).trans (le_max_right _ _)
   have hzero : L 0 + ℓ ≤ base := (le_max_right _ _).trans (le_max_right _ _)
   refine ⟨base, le_max_left _ _, fun K => ?_⟩
-  let λ : ℕ := 1 + ∑ j : Fin (K + 1), (L j.val + ℓ)
-  have hλ (k : ℕ) (hk : k ≤ K) : L k + ℓ ≤ λ := by
+  let shift : ℕ := 1 + ∑ j : Fin (K + 1), (L j.val + ℓ)
+  have hshift (k : ℕ) (hk : k ≤ K) : L k + ℓ ≤ shift := by
     have hterm : L k + ℓ ≤ ∑ j : Fin (K + 1), (L j.val + ℓ) :=
       Finset.single_le_sum (fun j _ => Nat.zero_le (L j.val + ℓ))
         (Finset.mem_univ (⟨k, Nat.lt_succ_of_le hk⟩ : Fin (K + 1)))
     exact hterm.trans (Nat.le_add_left _ _)
-  refine ⟨λ, fun s => ?_⟩
-  let high : ℕ := base + s + λ * K + 1
+  refine ⟨shift, fun s => ?_⟩
+  let high : ℕ := base + s + shift * K + 1
   have hhigh : base < high := by dsimp only [high]; omega
   have horder (k : ℕ) (hk : k ≤ K) (n : ℕ) (hn : n ≤ s) :
       base < n + L k → n + L k + ℓ < high := by
@@ -56,14 +56,14 @@ theorem n04Realization_fixedBase_prefix_power
       dsimp only [high]
       omega
     · have hkpos : 1 ≤ k := Nat.pos_of_ne_zero hk0
-      have hλk : λ ≤ λ * k := by
-        simpa only [Nat.mul_one] using Nat.mul_le_mul_left λ hkpos
-      have hλK : λ * k ≤ λ * K := Nat.mul_le_mul_left λ hk
-      have hL := hλ k hk
+      have hshiftk : shift ≤ shift * k := by
+        simpa only [Nat.mul_one] using Nat.mul_le_mul_left shift hkpos
+      have hshiftK : shift * k ≤ shift * K := Nat.mul_le_mul_left shift hk
+      have hL := hshift k hk
       dsimp only [high]
       omega
   have hcost (k : ℕ) (hk : k ≤ K) (n : ℕ) :
-      interpolationOrderCost base ℓ (n + L k) ≤ n + λ * k := by
+      interpolationOrderCost base ℓ (n + L k) ≤ n + shift * k := by
     unfold interpolationOrderCost
     split_ifs with hn
     · by_cases hk0 : k = 0
@@ -71,9 +71,9 @@ theorem n04Realization_fixedBase_prefix_power
         simp only [Nat.mul_zero, Nat.add_zero]
         omega
       · have hkpos : 1 ≤ k := Nat.pos_of_ne_zero hk0
-        have hλk : λ ≤ λ * k := by
-          simpa only [Nat.mul_one] using Nat.mul_le_mul_left λ hkpos
-        have hL := hλ k hk
+        have hshiftk : shift ≤ shift * k := by
+          simpa only [Nat.mul_one] using Nat.mul_le_mul_left shift hkpos
+        have hL := hshift k hk
         omega
     · exact Nat.zero_le _
   let I : Type := Fin (K + 1) × Fin (s + 1)
@@ -98,7 +98,7 @@ theorem n04Realization_fixedBase_prefix_power
       multilinearTameSize_le_affine (p base) (p (n + L k)) k
         (by positivity : 0 ≤ 1 + p (n + L k) x) v hv
   have h := hcb i x v R hx hv hxR hvR hR
-  have hden : (high : ℝ) - base = (((s + λ * K : ℕ) : ℝ) + 1) := by
+  have hden : (high : ℝ) - base = (((s + shift * K : ℕ) : ℝ) + 1) := by
     dsimp only [high]
     push_cast
     ring
@@ -107,8 +107,8 @@ theorem n04Realization_fixedBase_prefix_power
       ((high : ℝ) - base)) at h
   rw [hden] at h
   have hexp : (interpolationOrderCost base ℓ (n + L k) : ℝ) /
-      (((s + λ * K : ℕ) : ℝ) + 1) ≤
-      ((n + λ * k : ℕ) : ℝ) / (((s + λ * K : ℕ) : ℝ) + 1) :=
+      (((s + shift * K : ℕ) : ℝ) + 1) ≤
+      ((n + shift * k : ℕ) : ℝ) / (((s + shift * K : ℕ) : ℝ) + 1) :=
     div_le_div_of_nonneg_right (by exact_mod_cast hcost k hk n) (by positivity)
   exact ha.trans (h.trans
     ((mul_le_mul_of_nonneg_left (Real.rpow_le_rpow_of_exponent_le hR hexp) (hc i)).trans

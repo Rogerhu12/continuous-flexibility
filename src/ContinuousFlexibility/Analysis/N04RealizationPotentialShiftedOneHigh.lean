@@ -21,7 +21,7 @@ open scoped ContDiff BigOperators
 variable {X : Type*} [TopologicalSpace X] [AddCommGroup X] [Module ℝ X]
   [IsTopologicalAddGroup X] [ContinuousSMul ℝ X]
 
-theorem n04Realization_potential_shifted_positive_oneHigh (K s λ : ℕ) (RH : ℝ) :
+theorem n04Realization_potential_shifted_positive_oneHigh (K s shift : ℕ) (RH : ℝ) :
     ∃ B : ℝ, 0 < B ∧
       ∀ (p : ℕ → Seminorm ℝ X) (center : X) (base high : ℕ),
       ∀ U : Set X, IsOpen U → ∀ Ω : Set PolarPoint, IsOpen Ω →
@@ -37,8 +37,8 @@ theorem n04Realization_potential_shifted_positive_oneHigh (K s λ : ℕ) (RH : �
           (∀ t, p high (v t) ≤ R) →
         ‖((RF i).parameter u w q hq).D j x v‖ ≤
           C * E q ^ P * parameterHeightWeight (W q) j *
-            R ^ (((u + w + λ * j : ℕ) : ℝ) /
-              (((s + 2 + λ * K : ℕ) : ℝ) + 1))) →
+            R ^ (((u + w + shift * j : ℕ) : ℝ) /
+              (((s + 2 + shift * K : ℕ) : ℝ) + 1))) →
       ∀ k : ℕ, k ≤ K → 0 < k → ∀ a b : ℕ, a + b ≤ s →
       ∀ q (hq : q ∈ Ω), ∀ J : SmoothDirections U
         (fun x => mixedDerivative a b
@@ -90,7 +90,7 @@ theorem n04Realization_potential_shifted_positive_oneHigh (K s λ : ℕ) (RH : �
       have hbase (j : Fin 5) (u w : ℕ) (huw : u + w ≤ a + b + 2) :
           ‖mixedDerivative u w (n04RealizationPotentialInputs (A x) (H x) (Q x) j) q‖ ≤
             C * E q ^ P *
-              R ^ (((u + w : ℕ) : ℝ) / (((s + 2 + λ * K : ℕ) : ℝ) + 1)) := by
+              R ^ (((u + w : ℕ) : ℝ) / (((s + 2 + shift * K : ℕ) : ℝ) + 1)) := by
         have h := hraw j 0 (Nat.zero_le _) u w (by omega) q hq x hx hlow
           Fin.elim0 (fun t => t.elim0) R hR hxR (fun t => t.elim0)
         rw [smoothDirections_D_zero_apply ((RF j).parameter u w q hq) hx Fin.elim0] at h
@@ -100,21 +100,21 @@ theorem n04Realization_potential_shifted_positive_oneHigh (K s λ : ℕ) (RH : �
           (d : OrderedFinpartition k) (t : Fin d.length) :
           ‖((RF j).parameter u w q hq).D (d.partSize t) x (v ∘ d.emb t)‖ ≤
             W q * (C * E q ^ P *
-              R ^ (((u + w + λ * d.partSize t : ℕ) : ℝ) /
-                (((s + 2 + λ * K : ℕ) : ℝ) + 1))) := by
+              R ^ (((u + w + shift * d.partSize t : ℕ) : ℝ) /
+                (((s + 2 + shift * K : ℕ) : ℝ) + 1))) := by
         have h := hraw j (d.partSize t) ((d.partSize_le t).trans hk)
           u w (by omega) q hq x hx hlow (v ∘ d.emb t)
           (fun n => (hv (d.emb t n)).le) R hR hxR (fun n => hvR (d.emb t n))
         simpa only [parameterHeightWeight, if_neg (Nat.ne_of_gt (d.partSize_pos t)),
           mul_assoc, mul_left_comm, mul_comm] using h
-      have hbudget : a + b + 2 + λ * k ≤ s + 2 + λ * K := by
-        have hmul := Nat.mul_le_mul_left λ hk
+      have hbudget : a + b + 2 + shift * k ≤ s + 2 + shift * K := by
+        have hmul := Nat.mul_le_mul_left shift hk
         omega
-      have h := hcb i U hU Ω hΩ A H Q RF q hq J x hx v (s + 2 + λ * K) λ
+      have h := hcb i U hU Ω hΩ A H Q RF q hq J x hx v (s + 2 + shift * K) shift
         (by omega) (W q) (E q) C P R hW hWR hE hC hP hR hbase hjet
       have hraw' : ‖J.D k x v‖ ≤ (c i * C ^ 3 * W q * E q ^ (P * 3)) *
-          R ^ (((a + b + 2 + λ * k : ℕ) : ℝ) /
-            (((s + 2 + λ * K : ℕ) : ℝ) + 1)) := by
+          R ^ (((a + b + 2 + shift * k : ℕ) : ℝ) /
+            (((s + 2 + shift * K : ℕ) : ℝ) + 1)) := by
         simpa only [i, parameterHeightWeight, if_neg (Nat.ne_of_gt hkpos),
           mul_assoc, mul_left_comm, mul_comm] using h
       have hcoeff : c i * C ^ 3 * W q * E q ^ (P * 3) ≤ M :=

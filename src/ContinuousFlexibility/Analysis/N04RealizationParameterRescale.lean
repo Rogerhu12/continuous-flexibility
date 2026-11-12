@@ -49,7 +49,7 @@ theorem n04Realization_parameter_rescale_bound
       mul_le_mul_of_nonneg_left hbound (Real.rpow_nonneg hR.le _)
     _ = M * (R ^ (-α * (k : ℝ)) * R ^ (β + α * (k : ℝ))) := by ring
     _ = M * R ^ (-α * (k : ℝ) + (β + α * (k : ℝ))) := by
-      rw [Real.rpow_add hR]
+      rw [Real.rpow_add hR (-α * (k : ℝ)) (β + α * (k : ℝ))]
     _ = M * R ^ β := by congr 2; ring
 
 /-- Restore the parameter cost after estimating the complete output. -/
