@@ -47,7 +47,7 @@ theorem n05_canonicalNormalInverseBlock_endpoint_square_bound
   let B := (C0 + Cp) * Cs
   have hB : 0 < B := by dsimp only [B]; positivity
   refine ⟨B, hB, fun k m v j => ?_⟩
-  let F := Pi.single m (v.val m 0)
+  let F : CanonicalSequence S K := Pi.single m (v.val m 0)
   let d := n05CanonicalNormalizedSingleJetSource D S C K (s + 1) m v
   let first : Fin (s + 1 + 1) := ⟨1, by omega⟩
   obtain ⟨hF, hjets, hbaseE, hpositiveE⟩ := hs m v
