@@ -261,7 +261,7 @@ theorem n06N05_finite_current_root_orientedMatching
     exact Jr
   have hsignR := n06_current_boundary_radialSign_eq_reverse reverseR false Jr' h04 hz hs hxR'.1 hxR'.2 η
   rw [hrowL, hrowR, hsignL, hsignR, hβη] at he
-  simpa only [n06OrientedCanonicalBoundary, mul_assoc] using he
+  simpa only [n06OrientedCanonicalBoundary, n06Endpoint, mul_assoc] using he
 
 /-- The original N04 cut law for current closed tests and the original
 N05 cut law for actual modes give oriented matching directly at the same

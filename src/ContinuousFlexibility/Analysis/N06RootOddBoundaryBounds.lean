@@ -314,17 +314,39 @@ def N06LeftRootOddLogBoundaryBound (D : ReferenceData) (T : MaterialData)
       Q * (n06RootJetWeight T (r, θ) * |z.2| +
         T.H (T.sample m) ^ (3 / 4 : ℝ) * stateGrading S (n + 7) (z.1 - C.referenceState))
 
-/-- One constant precedes all states, roots, labels and actual flow
-witnesses. No reference speed-factor cost survives at radial order zero. -/
-private theorem n06_leftRootOdd_log_boundary_from_bounds
+private theorem n06_rootOdd_sum_jet_bound
+    {f g : ℝ → ℝ} {θ A B X Y : ℝ} (k : ℕ)
+    (hf : ContDiffAt ℝ ∞ f θ) (hg : ContDiffAt ℝ ∞ g θ)
+    (hA : 0 ≤ A) (hB : 0 ≤ B) (hX : 0 ≤ X) (hY : 0 ≤ Y)
+    (hfj : |iteratedDeriv k f θ| ≤ A * X)
+    (hgj : |iteratedDeriv k g θ| ≤ B * Y) :
+    |iteratedDeriv k (fun t => f t + g t) θ| ≤ (A + B) * (X + Y) := by
+  rw [iteratedDeriv_fun_add (hf.of_le (by simp : (k : ℕ∞ω) ≤ ∞))
+    (hg.of_le (by simp : (k : ℕ∞ω) ≤ ∞))]
+  apply (abs_add_le _ _).trans
+  apply (add_le_add hfj hgj).trans
+  nlinarith only [mul_nonneg hA hY, mul_nonneg hB hX]
+
+/-- Keep the scalar estimate independent of both root-coordinate witnesses.
+The final coordinate identification below then transports only one real
+inequality, without rewriting inside the entire N01/N04 context. -/
+private theorem n06_leftRoot_logSpeed_add_bound
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) (n : ℕ) {A B : ℝ}
     (hA : 0 ≤ A) (hB : 0 ≤ B)
     (hspeed : N06PhysicalRootLogSpeedAngularBound D T S C base n ε A)
-    (hlabel : N06StateLeftChartLogDerivBound T S C base n ε B) :
-    N06LeftRootOddLogBoundaryBound D T S C base n ε (A + B) := by
-  intro z hz hs hsmall r hr hroot m ι g hg d c d₀ c₀ Φ Φ₀ R R₀ σ σ₀ G G₀ P P₀ hc hc₀ θ k hk
-  rw [n06_N01_leftRoot_logOdd_boundary_identity hT hS hN hz hs hr hroot m ι hg P P₀ hc hc₀]
+    (hlabel : N06StateLeftChartLogDerivBound T S C base n ε B)
+    {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S z.1)
+    (hsmall : stateGrading S (n + 7) (z.1 - C.referenceState) + |z.2| ≤ 1)
+    {r : ℝ} (hr : r ∈ radialCore D) (hroot : deriv D.w r = 0)
+    (m : ℕ) (θ : ℝ) (k : ℕ) (hk : k ≤ n) :
+    |iteratedDeriv k (fun t => Real.log
+        (n06PhysicalRootFields D S C z (r, t)).2 +
+      Real.log (deriv (stateLeftChart S z.1 m) t)) θ| ≤
+      (A + B) * (n06RootJetWeight T (r, θ) * |z.2| +
+        T.H (T.sample m) ^ (3 / 4 : ℝ) *
+          stateGrading S (n + 7) (z.1 - C.referenceState)) := by
   have hspeedSmooth : ContDiffAt ℝ ∞ (fun t => Real.log
       (n06PhysicalRootFields D S C z (r, t)).2) θ :=
     ((n06_physicalRootFields_contDiffAt_root hT hS hN hz hs hr hroot θ).snd.comp θ
@@ -334,9 +356,8 @@ private theorem n06_leftRootOdd_log_boundary_from_bounds
   have hlabelSmooth : ContDiffAt ℝ ∞ (fun t =>
       Real.log (deriv (stateLeftChart S z.1 m) t)) θ :=
     ((contDiff_infty_iff_deriv.mp (contDiff_stateLeftChart hS z.1 m)).2.contDiffAt).log
-      (P.label_positive θ).ne'
-  rw [iteratedDeriv_fun_add (hspeedSmooth.of_le (by simp : (k : ℕ∞ω) ≤ ∞))
-    (hlabelSmooth.of_le (by simp : (k : ℕ∞ω) ≤ ∞))]
+      (lt_of_lt_of_le (by norm_num : (0 : ℝ) < 1 / 2)
+        (hN.2.2.2.2.2.2.2.1 z hz hs m θ).1).ne'
   have hgrade : stateGrading S (n + 2) (z.1 - C.referenceState) ≤
       stateGrading S (n + 7) (z.1 - C.referenceState) :=
     solve_stateGrading_monotone S (by omega) _
@@ -350,20 +371,36 @@ private theorem n06_leftRootOdd_log_boundary_from_bounds
     mul_nonneg (n06_rootJetWeight_nonneg hT ⟨hr, mem_univ θ⟩) (abs_nonneg _)
   have hlabelWeight : 0 ≤ T.H (T.sample m) ^ (3 / 4 : ℝ) *
       stateGrading S (n + 7) (z.1 - C.referenceState) := mul_nonneg hW (apply_nonneg _ _)
-  have hL := (hlabel z hz hs hgradeOne m θ k hk).trans
+  have hL : |iteratedDeriv k (fun t =>
+      Real.log (deriv (stateLeftChart S z.1 m) t)) θ| ≤
+      B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
+        stateGrading S (n + 7) (z.1 - C.referenceState) :=
+    (hlabel z hz hs hgradeOne m θ k hk).trans
     (mul_le_mul_of_nonneg_left hgrade (mul_nonneg hB hW))
-  calc
-    _ ≤ |iteratedDeriv k (fun t => Real.log
-        (n06PhysicalRootFields D S C z (r, t)).2) θ| +
-        |iteratedDeriv k (fun t => Real.log (deriv (stateLeftChart S z.1 m) t)) θ| :=
-      abs_add_le _ _
-    _ ≤ A * n06RootJetWeight T (r, θ) * |z.2| +
-        B * T.H (T.sample m) ^ (3 / 4 : ℝ) *
-          stateGrading S (n + 7) (z.1 - C.referenceState) :=
-      add_le_add (hspeed z hz hs hsmall r hr hroot θ k hk) hL
-    _ ≤ (A + B) * (n06RootJetWeight T (r, θ) * |z.2| +
-        T.H (T.sample m) ^ (3 / 4 : ℝ) * stateGrading S (n + 7) (z.1 - C.referenceState)) := by
-      nlinarith [mul_nonneg hA hlabelWeight, mul_nonneg hB hphysicalWeight]
+  apply n06_rootOdd_sum_jet_bound k hspeedSmooth hlabelSmooth hA hB
+    hphysicalWeight hlabelWeight
+  · simpa only [mul_assoc] using hspeed z hz hs hsmall r hr hroot θ k hk
+  · simpa only [mul_assoc] using hL
+
+/-- One constant precedes all states, roots, labels and actual flow
+witnesses. No reference speed-factor cost survives at radial order zero. -/
+private theorem n06_leftRootOdd_log_boundary_from_bounds
+    (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
+    (hN : N01Properties D T S C base loss ε) (n : ℕ) {A B : ℝ}
+    (hA : 0 ≤ A) (hB : 0 ≤ B)
+    (hspeed : N06PhysicalRootLogSpeedAngularBound D T S C base n ε A)
+    (hlabel : N06StateLeftChartLogDerivBound T S C base n ε B) :
+    N06LeftRootOddLogBoundaryBound D T S C base n ε (A + B) := by
+  intro z hz hs hsmall r hr hroot m ι g hg d c d₀ c₀ Φ Φ₀ R R₀ σ σ₀ G G₀ P P₀ hc hc₀ θ k hk
+  have he :
+      (fun t => Real.log (extendedRootOddCoefficient G (0, t)) -
+        Real.log (extendedRootOddCoefficient G₀ (0, t))) =
+      (fun t => Real.log (n06PhysicalRootFields D S C z (r, t)).2 +
+        Real.log (deriv (stateLeftChart S z.1 m) t)) :=
+    n06_N01_leftRoot_logOdd_boundary_identity hT hS hN hz hs hr hroot m ι hg P P₀ hc hc₀
+  exact (congrArg (fun f : ℝ → ℝ => |iteratedDeriv k f θ|) he).trans_le
+    (n06_leftRoot_logSpeed_add_bound hT hS hN n hA hB hspeed hlabel
+      hz hs hsmall hr hroot m θ k hk)
 
 theorem n06_N01_leftRootOdd_log_boundary_weighted_jets
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
