@@ -113,7 +113,7 @@ private theorem n06PrincipalOperator_bind_budget
     (h : ∃ x y, P x y) (hbind : ∀ x y, P x y → Goal) : Goal :=
   h.elim (fun x hx => hx.elim (fun y hxy => hbind x y hxy))
 
-/-- Realize one actual state after the uniform block budget has been
+/- Realize one actual state after the uniform block budget has been
 selected. This helper does not select an order or alter the tail sum. -/
 set_option diagnostics true in
 private theorem n06PrincipalOperator_realize_state
@@ -209,7 +209,28 @@ theorem n06_primitivePrincipal_operator_for_family
     (K := K) (V := V) (b := b) (B := B) (base := base) (loss := loss) (ε := ε)
     hT hS h href hcur hprincipal hR hAux hI J
 
-/-- The positive compact-test equation is attached to the fixed source
+/- Transport a single integral identity before substituting the actual
+source and inverse-height expressions. -/
+private theorem n06PrincipalOperator_pairing_transport
+    {m : ℕ} (f g u v : CanonicalL2 S K m) (φ Ψ Ξ : PolarPoint → ℝ)
+    (hfg : f = g) (huv : u = v)
+    (hpair : (∫ p, g p * φ p ∂canonicalMeasure S K m) =
+      ∫ p, u p * Ψ p ∂canonicalMeasure S K m)
+    (htest : Ψ =ᵐ[canonicalMeasure S K m] Ξ) :
+    (∫ p, f p * φ p ∂canonicalMeasure S K m) =
+      ∫ p, v p * Ξ p ∂canonicalMeasure S K m := by
+  calc
+    _ = ∫ p, g p * φ p ∂canonicalMeasure S K m :=
+      congrArg (fun w : CanonicalL2 S K m =>
+        ∫ p, w p * φ p ∂canonicalMeasure S K m) hfg
+    _ = ∫ p, u p * Ψ p ∂canonicalMeasure S K m := hpair
+    _ = ∫ p, v p * Ψ p ∂canonicalMeasure S K m :=
+      congrArg (fun w : CanonicalL2 S K m =>
+        ∫ p, w p * Ψ p ∂canonicalMeasure S K m) huv
+    _ = _ := integral_congr_ae (htest.mono fun p hp =>
+      congrArg (fun t : ℝ => v p * t) hp)
+
+/- The positive compact-test equation is attached to the fixed source
 identity, before it is placed inside the uniform operator existence. -/
 set_option diagnostics true in
 private theorem n06PrincipalOperator_positive_of_realizes
@@ -224,19 +245,27 @@ private theorem n06PrincipalOperator_positive_of_realizes
       (n06PrimitivePrincipalSource href hcur hI J z hz) Mc) :
     n06PrincipalOperatorPositivePairing (C := C) B z Mc := by
   intro F m hm φ hφ
-  have hsource : V.forget (3 / 4 : ℝ) 0 b (Mc F) m =
-      n06PrimitivePrincipalSource href hcur hI J z hz F m :=
-    congrFun (hforget F) m
-  rw [hsource]
-  calc
-    _ = ∫ p, n06InverseCanonicalHeight B F m p *
-        n06PrimitivePrincipalTest href hcur hI z hz m φ p ∂canonicalMeasure S K m :=
-      n06PrimitivePrincipalSource_pairing href hcur hI J z hz F m hφ
-    _ = _ := by
-      rw [n06InverseCanonicalHeight_apply]
-      apply integral_congr_ae
-      filter_upwards [n07a_canonicalOpen_ae (S := S) (K := K) (m := m)] with p hp
-      rw [n06PrimitivePrincipalTest_eq_actualCubic h01 h04 href hcur hI z hz hm φ hp]
+  exact n06PrincipalOperator_pairing_transport (S := S) (K := K) (m := m)
+    (V.forget (3 / 4 : ℝ) 0 b (Mc F) m)
+    (n06PrimitivePrincipalSource href hcur hI J z hz F m)
+    (n06InverseCanonicalHeight B F m) ((B.inverse F).val.1.1 m) φ
+    (n06PrimitivePrincipalTest href hcur hI z hz m φ)
+    (divergenceOperator
+      (n06CubicCoefficients (fun q => (q.1 - K.left m) * (K.right m - q.1))
+        (K.dividedDifference (liftSectorParameter S C z) m).a
+        (K.dividedDifference (liftSectorParameter S C z) m).b
+        (K.dividedDifference (liftSectorParameter S C z) m).c) φ)
+    (congrFun (hforget F) m)
+    (n06InverseCanonicalHeight_apply (S := S) (K := K) (V := V) (b := b) (B := B) F m)
+    (n06PrimitivePrincipalSource_pairing
+      (D := D) (T := T) (S := S) (C := C) (L := L)
+      (K := K) (V := V) (b := b) (B := B) (base := base) (ε := ε)
+      href hcur hI J z hz F m hφ)
+    ((n07a_canonicalOpen_ae (S := S) (K := K) (m := m)).mono fun p hp =>
+      n06PrimitivePrincipalTest_eq_actualCubic
+        (D := D) (T := T) (S := S) (C := C) (L := L)
+        (K := K) (base := base) (loss := loss) (ε := ε)
+        h01 h04 href hcur hI z hz hm φ hp)
 
 set_option diagnostics true in
 private theorem n06PrincipalOperator_negative_of_realizes
@@ -253,9 +282,9 @@ private theorem n06PrincipalOperator_negative_of_realizes
       n06PrimitivePrincipalSource href hcur hI J z hz F m :=
     congrFun (hforget F) m
   exact hsource.trans (n06PrimitivePrincipalSource_negative href hcur hI J z hz F m
-    (by simp only [hm, Bool.false_eq_true, not_false_eq_true]))
+    (by rw [hm]; decide))
 
-/-- A fixed state's realization is mapped to its physical test properties;
+/- A fixed state's realization is mapped to its physical test properties;
 the selected operator and its original norm estimate are retained. -/
 set_option diagnostics true in
 private theorem n06PrincipalOperator_physical_state
