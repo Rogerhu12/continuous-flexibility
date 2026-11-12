@@ -161,6 +161,7 @@ def n05NegativeEnumeration (hq : 0 < q) : ℕ ≃ P.N05NegativeComponent :=
 
 theorem n05NegativeEnumeration_apply (hq : 0 < q) (m : ℕ) :
     P.n05NegativeEnumeration hq m = P.n05NegativeComponentAt hq m := by
-  simp only [n05NegativeEnumeration, Equiv.ofBijective_apply]
+  exact congrFun (Equiv.coe_ofBijective (P.n05NegativeComponentAt hq)
+    ⟨P.n05NegativeComponentAt_injective hq, P.n05NegativeComponentAt_surjective hq⟩) m
 
 end ContinuousFlexibility.Radial.SeedReferenceConstruction

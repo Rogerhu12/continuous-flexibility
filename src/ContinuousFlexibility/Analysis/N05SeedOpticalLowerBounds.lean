@@ -47,7 +47,7 @@ theorem n05_seed_optical_inverse_bound
       (T.d n : ℝ) ^ 6 ≤ (3 * exp ((n : ℝ) ^ 2)) ^ 6 :=
         pow_le_pow_left₀ hdp.le hdUpper 6
       _ = (3 : ℝ) ^ 6 * exp (6 * (n : ℝ) ^ 2) := by
-        rw [mul_pow, ← exp_nat_mul]
+        rw [mul_pow, ← exp_nat_mul, Nat.cast_ofNat]
   calc
     (1372 * D.b ^ 3 * morseChainA T n ^ 3) / morseChainB T n =
         (1372 * D.b ^ 3) * (morseChainA T n ^ 3 / morseChainB T n) := by ring
