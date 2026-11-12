@@ -155,12 +155,30 @@ theorem n04b_exists_common_root_heightJets
   have hq := n04Coordinates_currentHeightRatio_contDiffAt_pos_closed
     hA href hsref hzold hs i hclosed
   refine ⟨hq.1, hq.2, ?_, ?_⟩
-  · simpa only [n04CoordinatesCurrentHeightRatio, div_eq_mul_inv, τ] using hqjets
-  · have he : (fun y => (n04CoordinatesCurrentHeightRatio C K z i y)⁻¹) =
+  · change PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading)
+      outLoss B (z - (C.referenceState, 0))
+      (n04CoordinatesCurrentHeightRatio C K z i) (r, θ)
+    have he : n04CoordinatesCurrentHeightRatio C K z i =
+        (fun y => K.height (C.referenceState, 0) i y * (K.height z i (τ y))⁻¹) := by
+      funext y
+      change K.height (C.referenceState, 0) i y / K.height z i (τ y) = _
+      exact div_eq_mul_inv _ _
+    exact (congrArg
+      (fun f : PolarPoint → ℝ => PointwiseMaterialJetBound
+        (pairGrading (stateGrading S) realGrading) outLoss B
+        (z - (C.referenceState, 0)) f (r, θ)) he).mpr hqjets
+  · change PointwiseMaterialJetBound (pairGrading (stateGrading S) realGrading)
+      outLoss B (z - (C.referenceState, 0))
+      (fun y => (n04CoordinatesCurrentHeightRatio C K z i y)⁻¹) (r, θ)
+    have he : (fun y => (n04CoordinatesCurrentHeightRatio C K z i y)⁻¹) =
         (fun y => (K.height (C.referenceState, 0) i y)⁻¹ * K.height z i (τ y)) := by
       funext y
-      simp only [n04CoordinatesCurrentHeightRatio, inv_div, div_eq_mul_inv, mul_comm, τ]
-    rw [he]
-    exact hinvjets
+      change (K.height (C.referenceState, 0) i y / K.height z i (τ y))⁻¹ =
+        (K.height (C.referenceState, 0) i y)⁻¹ * K.height z i (τ y)
+      rw [inv_div, div_eq_mul_inv, mul_comm]
+    exact (congrArg
+      (fun f : PolarPoint → ℝ => PointwiseMaterialJetBound
+        (pairGrading (stateGrading S) realGrading) outLoss B
+        (z - (C.referenceState, 0)) f (r, θ)) he).mpr hinvjets
 
 end ContinuousFlexibility.Analysis
