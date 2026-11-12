@@ -62,7 +62,7 @@ private theorem returnForwardJets_of_translation_difference
       rw [he₀, iteratedDeriv_const_add (by omega : 0 < n) c]
       simp only [iteratedDeriv_id, iteratedDeriv_fun_id,
         if_neg (by omega : n ≠ 0), if_neg (by omega : n ≠ 1)]
-    have he := iteratedDeriv_fun_sub (n := n)
+    have he := iteratedDeriv_fun_sub (n := n) (x := θ)
       (hf.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
       (hf₀.contDiffAt.of_le (by simp : (n : ℕ∞ω) ≤ ∞))
     have he' : iteratedDeriv n (fun η => f η - f₀ η) θ = iteratedDeriv n f θ := by
@@ -186,7 +186,8 @@ theorem n01_minusReturnInverse_displacement_fixed_loss
     (hflow : OrdinaryFlowJacobianBounds S C base ε) :
     ∃ low outLoss : ℕ, ∀ m : ℕ, ∃ B : ℕ → ℝ, (∀ n, 0 < B n) ∧
       N01ReturnInverseJetBound S C base low outLoss ε m B := by
-  have hp := tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
+  have hp : Monotone (pairGrading (stateGrading S) realGrading) :=
+    tamePairGrading_monotone (stateGrading_monotone S) (fun _ _ _ => le_rfl)
   have hI := coordinate_hasInterpolation_pair (stateGrading_monotone S)
     (fun _ _ _ => le_rfl) (coordinate_hasInterpolation_stateGrading hS)
     coordinate_hasInterpolation_realGrading

@@ -176,7 +176,11 @@ theorem canonicalGluedAiryIntegral_tendsto_endpoint
       change airyFirstIntegral (K.chart z (K.cutPair m).2) (-σ) (r, u r) +
           2 * σ * airyTravelPrimitive (K.cutRadius m) =
         canonicalGluedAiryIntegral S K z m σ (r, u r)
-      exact (piecewise_eq_of_notMem _ _ _ hnot).symm
+      exact (piecewise_eq_of_notMem
+        (physicalPieceOpen S K z (K.cutPair m).1)
+        (airyFirstIntegral (K.chart z (K.cutPair m).1) σ)
+        (fun q : PolarPoint => airyFirstIntegral (K.chart z (K.cutPair m).2) (-σ) q +
+          2 * σ * airyTravelPrimitive (K.cutRadius m)) hnot).symm
   have hzero : (K.chart z i (c, u c)).1 = 0 := hroot.2
   change Tendsto (fun r => canonicalGluedAiryIntegral S K z m σ (r, u r))
     (𝓝[Ioo (C.left m) (C.right m)] c)
