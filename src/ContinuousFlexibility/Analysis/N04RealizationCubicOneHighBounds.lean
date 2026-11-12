@@ -112,7 +112,10 @@ theorem n04Realization_unitCubic_oneHigh_bounds
       (width m)⁻¹ ^ 6 ≤ (bw * E m ^ bw) ^ 6 :=
         pow_le_pow_left₀ (inv_nonneg.mpr (hwidth m).le) (hwidthBound m) 6
       _ = bw ^ 6 * E m ^ (bw * 6) := by
-        rw [mul_pow, Real.rpow_mul_natCast hEpos.le bw 6]
+        rw [mul_pow]
+        simpa only [Nat.cast_ofNat] using
+          congrArg (fun u : ℝ => bw ^ 6 * u)
+            (Real.rpow_mul_natCast hEpos.le bw 6).symm
   calc
     |((RE m).parameter a b q hq).D k x v| ≤
         (width m ^ 6)⁻¹ * G m k (a + 6) b (x, v) / 4 := hRE m k a b q hq x hx v
