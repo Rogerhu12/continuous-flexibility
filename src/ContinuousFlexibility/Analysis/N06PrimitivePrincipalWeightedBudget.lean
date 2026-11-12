@@ -155,6 +155,14 @@ private theorem n06_weightedBudget_modes
     hT hS h.1.1.1.1 h.1.1.2 h.1.2.2.2.2.1 h.2 href hcur hprincipal hI J
   exact (hmodes b).elim (fun e he => ⟨d, e, he.1, he.2.1, he.2.2⟩)
 
+private theorem n06_weightedBudget_specialize
+    {X Y : Type*} {I : Sort*} (PX : X → Prop) (PY QY : Y → Prop)
+    (P : X → Y → I → Prop) (i : I)
+    (h : ∃ x, PX x ∧ ∃ y, PY y ∧ QY y ∧ ∀ k : I, P x y k) :
+    ∃ x, PX x ∧ ∃ y, PY y ∧ QY y ∧ P x y i :=
+  h.elim (fun x hx => hx.2.elim (fun y hy =>
+    ⟨x, hx.1, y, hy.1, hy.2.1, hy.2.2 i⟩))
+
 set_option diagnostics true in
 private theorem n06_weightedBudget_source
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -163,9 +171,14 @@ private theorem n06_weightedBudget_source
     ∃ A₀ : ℝ, 0 < A₀ ∧ ∃ e₀ : ℕ → ℝ,
       N07aSampleSubpower T K e₀ ∧ (∀ m, 1 ≤ e₀ m) ∧
         N06WeightedSourceEstimates (B := B) h.2.2.1 href hI A₀ e₀ := by
-  obtain ⟨A₀, hA₀, e₀, he₀, he₀one, hsource⟩ :=
-    n06_primitiveReference_energy_outer_budget hT hS h href
-  exact ⟨A₀, hA₀, e₀, he₀, he₀one, hsource hI⟩
+  exact n06_weightedBudget_specialize
+    (fun A : ℝ => 0 < A) (N07aSampleSubpower T K)
+    (fun e : ℕ → ℝ => ∀ m, 1 ≤ e m)
+    (fun A e hI => N06WeightedSourceEstimates (B := B) h.2.2.1 href hI A e) hI
+    (n06_primitiveReference_energy_outer_budget
+      (D := D) (T := T) (S := S) (C := C) (R := R) (L := L)
+      (K := K) (V := V) (b := b) (B := B)
+      (base := base) (loss := loss) (ε := ε) hT hS h href)
 
 set_option diagnostics true in
 private theorem n06_weightedBudget_inverse_bands
@@ -218,7 +231,7 @@ private theorem n06_weightedBudget_piece
   intro m l
   have ha : (((2 * n07aAngularBlockWeightConstant b 0) * M) • a₀) m =
       (C₀ * M) * a₀ m := by
-    simp only [lp.coeFn_smul, Pi.smul_apply, smul_eq_mul]
+    simp only [C₀, lp.coeFn_smul, Pi.smul_apply, smul_eq_mul]
   have hρ : 0 ≤ parameterGrading S (b + 4 + d) z := apply_nonneg _ _
   by_cases hm : K.positive m = true
   · have hband : n07aAngularBand m (hI m) j
@@ -276,6 +289,17 @@ private theorem n06_weightedBudget_assemble
   · exact n06_weightedBudget_piece hD hT href hcur hI J d e e₀ he0 he₀one hmode
       M hM.le habsorb z hz j F hU a₀ ha₀ hpiece
 
+private theorem n06_weightedBudget_bind_packages
+    {X Y Z W : Type*} (PXY : X → Y → Prop) (PZ : Z → Prop)
+    (PW QW : W → Prop) (PZW : Z → W → Prop) (Goal : Prop)
+    (hxy : ∃ x y, PXY x y)
+    (hzw : ∃ z, PZ z ∧ ∃ w, PW w ∧ QW w ∧ PZW z w)
+    (hcombine : ∀ x y, PXY x y → ∀ z, PZ z →
+      ∀ w, PW w → QW w → PZW z w → Goal) : Goal :=
+  hxy.elim (fun x hx => hx.elim (fun y hxy =>
+    hzw.elim (fun z hz => hz.2.elim (fun w hw =>
+      hcombine x y hxy z hz.1 w hw.1 hw.2.1 hw.2.2))))
+
 set_option diagnostics true in
 private theorem n06_weightedBudget_uniform
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
@@ -285,15 +309,26 @@ private theorem n06_weightedBudget_uniform
     (hR : ReferenceRadial S C K) (hAux : AuxiliaryColumnGauge S K)
     (hI : ∀ m, K.left m < K.right m) (J : N06PrimitiveReferenceJetFamily B) :
     ∃ N : ℕ, ∃ A : ℝ, 0 ≤ A ∧ N06WeightedPrincipalBudget h.2.2.1 href hcur hI J N A := by
-  obtain ⟨d, e, he, he0, hmode⟩ :=
-    n06_weightedBudget_modes hT hS h href hcur hprincipal hI J
-  obtain ⟨A₀, hA₀, e₀, he₀, he₀one, hsource⟩ :=
-    n06_weightedBudget_source hT hS h href hI
   have hbands : N06WeightedInverseBands (B := B) h.2.2.1 hI :=
     n06_weightedBudget_inverse_bands h.1.1.1.1 h.1.2.2.2.2.1 h.2 hR hAux hI
-  obtain ⟨A, hA, hbound⟩ := n06_weightedBudget_assemble h.1.1.1.1.1.1 hT h.2.2.1
-    href hcur hI J hbands d e he he0 hmode A₀ hA₀ e₀ he₀ he₀one hsource
-  exact ⟨b + 4 + d, A, hA, hbound⟩
+  exact n06_weightedBudget_bind_packages
+    (fun (d : ℕ) (e : ℕ → ℝ) => N07aSampleSubpower T K e ∧ (∀ m, 0 ≤ e m) ∧
+      N06WeightedModeEstimates href hcur hI J d e)
+    (fun A : ℝ => 0 < A) (N07aSampleSubpower T K)
+    (fun e : ℕ → ℝ => ∀ m, 1 ≤ e m)
+    (fun A e => N06WeightedSourceEstimates (B := B) h.2.2.1 href hI A e)
+    (∃ N : ℕ, ∃ A : ℝ, 0 ≤ A ∧ N06WeightedPrincipalBudget h.2.2.1 href hcur hI J N A)
+    (n06_weightedBudget_modes
+      (D := D) (T := T) (S := S) (C := C) (R := R) (L := L)
+      (K := K) (V := V) (b := b) (B := B)
+      (base := base) (loss := loss) (ε := ε) hT hS h href hcur hprincipal hI J)
+    (n06_weightedBudget_source
+      (D := D) (T := T) (S := S) (C := C) (R := R) (L := L)
+      (K := K) (V := V) (b := b) (B := B)
+      (base := base) (loss := loss) (ε := ε) hT hS h href hI)
+    (fun d e he A₀ hA₀ e₀ he₀ he₀one hsource =>
+      ⟨b + 4 + d, n06_weightedBudget_assemble h.1.1.1.1.1.1 hT h.2.2.1
+        href hcur hI J hbands d e he.1 he.2.1 he.2.2 A₀ hA₀ e₀ he₀ he₀one hsource⟩)
 
 set_option diagnostics true in
 theorem n06_primitivePrincipal_weighted_budget
