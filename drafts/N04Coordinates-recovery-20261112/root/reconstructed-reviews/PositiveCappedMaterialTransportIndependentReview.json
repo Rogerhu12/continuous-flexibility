@@ -1,0 +1,30 @@
+{
+  "reviewer": "/root",
+  "result": "PASS full source, exact symmetry refactor and actual provider review; HELD_UNCOMPILED",
+  "sources": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveMaterialExitChoice.lean",
+      "sha256": "011b34863a73ccbe8dbc240a5605b7886e7f08cabfd400f81e72f5e78cc73c52",
+      "blob": "5eeab9b80fb9c7aaa4d1ebfbcc93e0d668a66c3d",
+      "lines": 90,
+      "full_public_headers_unchanged": 6
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveFiberMaterialTransport.lean",
+      "sha256": "491e7f5ede6f507b5f7e8e81d5115a785430f6fd7fbf0626b10c1c695ee288b3",
+      "blob": "937c257f216e51b03d4eba1eeac850bd476d15bb",
+      "lines": 131,
+      "full_public_headers_unchanged": 2
+    }
+  ],
+  "checks": [
+    "The generic width lemma handles both actual endpoints by one ambient-equality case split; all original width/exit definitions and public statement headers remain exact.",
+    "Each width is positive and at most one quarter of the same component gap, so the actual exits remain strictly ordered. The interior caps use half the true Statements.endpointDistance.",
+    "The common interval lemma bounds the distance from either endpoint anchor by the actual interval length; it applies the reviewed half-distance endpointX bound to both actual points.",
+    "PositiveFiberClosedGeometry gives actual invariant subcollars from the positive scalar derivative and four fixed radial values. Angular reparameterization does not alter these bounds.",
+    "Ambient-side actual scalar identity preserves the physical radius, and the middle identity treats the rest of the component. No global endpoint-distance bound is inferred from an uncapped component.",
+    "The same actual T and hRef supply fixed K,A before every component, chart, height, state or point, using the fixed endpointX shift 2.",
+    "No final transport-ratio premise, positive host cell, state-dependent neighborhood choice, or new material data is introduced."
+  ],
+  "created_at": "2026-11-12T09:04:17.975373+00:00"
+}

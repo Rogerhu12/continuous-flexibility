@@ -1,0 +1,38 @@
+--- 6a2609c3dbd1e5600eee05b70ffb82b738b1e915/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeTransport.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/repair125/CanonicalWholeNegativeTransport.lean
+@@ -158,17 +158,31 @@
+     have hg := closedComponentField_root_germ
+       (fun side => n04CoordinatesCurrentHeightRatio C K z
+         (if side then (K.cutPair m).2 else (K.cutPair m).1)) hab false p.2
+-    exact hg.eq_of_nhds.symm ▸ ((hend false).height_root p.2).2
++    calc
++      0 < n04CoordinatesCurrentHeightRatio C K z (K.cutPair m).1 (C.left m, p.2) :=
++        ((hend false).height_root p.2).2
++      _ = canonicalWholeNegativeHeightRatio C K z m (C.left m, p.2) := by
++        simpa only [canonicalWholeNegativeHeightRatio, Bool.false_eq_true, ↓reduceIte]
++          using hg.eq_of_nhds.symm
+   by_cases hb : p.1 = C.right m
+   · have he : p = (C.right m, p.2) := Prod.ext hb rfl
+     rw [he]
+     have hg := closedComponentField_root_germ
+       (fun side => n04CoordinatesCurrentHeightRatio C K z
+         (if side then (K.cutPair m).2 else (K.cutPair m).1)) hab true p.2
+-    exact hg.eq_of_nhds.symm ▸ ((hend true).height_root p.2).2
++    calc
++      0 < n04CoordinatesCurrentHeightRatio C K z (K.cutPair m).2 (C.right m, p.2) :=
++        ((hend true).height_root p.2).2
++      _ = canonicalWholeNegativeHeightRatio C K z m (C.right m, p.2) := by
++        simpa only [canonicalWholeNegativeHeightRatio, ↓reduceIte]
++          using hg.eq_of_nhds.symm
+   have hpin : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) :=
+     ⟨⟨lt_of_le_of_ne hp.1.1 (Ne.symm ha), lt_of_le_of_ne hp.1.2 hb⟩, mem_univ _⟩
+-  exact (closedComponentField_eqOn hq hpin).symm ▸
+-    (n04CoordinatesNegativeTravelHeightRatio_smooth_pos hT hS hN hfield hz hs m).2 p hpin
++  calc
++    0 < n04CoordinatesNegativeTravelHeightRatio S C L z m p :=
++      (n04CoordinatesNegativeTravelHeightRatio_smooth_pos hT hS hN hfield hz hs m).2 p hpin
++    _ = canonicalWholeNegativeHeightRatio C K z m p := by
++      simpa only [canonicalWholeNegativeHeightRatio] using
++        (closedComponentField_eqOn hq hpin).symm
+ 
+ end ContinuousFlexibility.Analysis

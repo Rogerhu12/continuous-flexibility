@@ -1,13 +1,13 @@
 {
-  "head": "6a2609c3dbd1e5600eee05b70ffb82b738b1e915",
-  "tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
+  "head": "e7ef7278429002b5d1123c07b570d50d49a26d49",
+  "tree": "ac177a6ca1b983aa059d81120a3ac4ae2129d372",
   "current_ci": {
-    "label": 125,
-    "pushed": "2026-11-12 08:44:10 UTC",
-    "first_check_not_before": "2026-11-12 08:49:10 UTC",
+    "label": 127,
+    "pushed": "2026-11-12 09:00:29 UTC",
+    "first_check_not_before": "2026-11-12 09:05:29 UTC",
     "status": "pending",
-    "added_lean_since_last_green": 1739,
-    "plan": "n04-ci125-plan.json"
+    "added_lean_since_last_green": 1754,
+    "plan": "n04-ci127-plan.json"
   },
   "last_full_green": {
     "tree": "fa049a26c73d4b0a0ebd3ede0a052680f4331ae5",
@@ -184,6 +184,68 @@
       "checked_at": "2026-11-12T08:05:29.551235+00:00",
       "receipt": "n04-ci-120-green-receipt.json",
       "receipt_sha256": "d75317c952089e7b1356b7c362ae0e79ea3c52069d9691882ab83746a38eee16"
+    }
+  ],
+  "recovery_backups": [
+    {
+      "branch": "backup/N04Coordinates-recovery-20261112-0755",
+      "parent": "284be65460ec1a90e9af995d574dcb2291355098",
+      "additional_parent": "6a2609c3dbd1e5600eee05b70ffb82b738b1e915",
+      "base_tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
+      "tree": "b3adb2276bd647fa352e834e1e321baf8621b213",
+      "sources": 106,
+      "source_lines": 13465,
+      "added_lean_from_last_green": 15204,
+      "entries": 240,
+      "last_full_green": "4761192340a1d84d7d1efbfd5390ca038ac127e1",
+      "frozen_at": "2026-11-12T08:45:10.915302+00:00",
+      "status": "Source preservation only; no compilation claim or line CI activation.",
+      "commit": "9f18655ab2fca84c0213a9b5b5ef3189bda51d2b",
+      "pushed_at": "2026-11-12T08:48:47.047116+00:00"
+    }
+  ],
+  "ci_history": [
+    {
+      "label": 125,
+      "pushed": "2026-11-12 08:44:10 UTC",
+      "first_check_not_before": "2026-11-12 08:49:10 UTC",
+      "status": "failure",
+      "added_lean_since_last_green": 1739,
+      "plan": "n04-ci125-plan.json",
+      "queried_at": "2026-11-12T08:49:11+00:00",
+      "head": "6a2609c3dbd1e5600eee05b70ffb82b738b1e915",
+      "tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
+      "run": 43185391582,
+      "job": 131071162749,
+      "conclusion": "failure",
+      "source_all_compiled": 3175,
+      "source_all_total": 3180,
+      "blueprint": "skipped",
+      "unique_error_headers": 15,
+      "log": "n04-ci-125.log",
+      "log_sha256": "e6027162886ec5d9200867a625cede8aaf4183f60b0e402a32405ace4c335b06",
+      "errors": "n04-ci-125-errors.json"
+    },
+    {
+      "label": 126,
+      "pushed": "2026-11-12 08:52:30 UTC",
+      "first_check_not_before": "2026-11-12 08:57:30 UTC",
+      "status": "failure",
+      "added_lean_since_last_green": 1753,
+      "plan": "n04-ci126-plan.json",
+      "queried_at": "2026-11-12T08:57:33+00:00",
+      "head": "149c44a76b75f9c224ce4f3453f60d0c6058c6df",
+      "tree": "de6e32b92c971c60b43e620b8d930c8be193de4a",
+      "run": 43186523410,
+      "job": 131074935531,
+      "conclusion": "failure",
+      "source_all_compiled": 3176,
+      "source_all_total": 3180,
+      "blueprint": "skipped",
+      "unique_error_headers": 3,
+      "log": "n04-ci-126.log",
+      "log_sha256": "90d3915c31ee5726ae0990136a4e21662dc13fbe8d1bda675bce31d0c5fa261c",
+      "errors": "n04-ci-126-errors.json"
     }
   ]
 }

@@ -1,0 +1,111 @@
+{
+  "kind": "remove_exactly_one_terminal_empty_line_only",
+  "status": "HELD_UNCOMPILED pending independent exact-delta review",
+  "original_proposal": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/next-positive-group/PositiveGeometryCI127DependencyClosureProposal.json",
+    "sha256": "8b71ce3c0f583db782b50f1ffb2c1dad3f4e26fca931f0d6ac61d673571c2e17"
+  },
+  "changes": [
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/PositiveReferenceCollarPrescribedWidth.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/PositiveReferenceCollarPrescribedWidth.lean",
+      "before_blob": "1f84b6cf5d5beeb5fad0c833ae6762b546a46d64",
+      "before_sha256": "8683dd7945d847e1a4eebac1f984faaeb09f56df3da907b3bb274023be028e02",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/PositiveReferenceCollarPrescribedWidth.lean",
+      "blob": "5304c2e50dad93616d1299c9898337d168623653",
+      "sha256": "cabcae7030915fa5ea0eb74eca1a3b940f275e2a000b3ef0078fb6ae3b312a19",
+      "lines": 148
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointFiberPullbackAssembly.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackAssembly.lean",
+      "before_blob": "0493dcc3afcdeccce70c27bb17a1345f39a958d8",
+      "before_sha256": "24927c543b24c65bb0c119905c7f03be10beafa3a26674e488cbbfa2c2396242",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/EndpointFiberPullbackAssembly.lean",
+      "blob": "0df5b32b91cbe14eef36d9838d8507b5bfe2938e",
+      "sha256": "66d18ed04d24aa279a44e52949a887adf1091e83d84e1852c06a98266a88a1c3",
+      "lines": 166
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentTransportFactory.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportFactory.lean",
+      "before_blob": "cca7919641bede2420b69a827a748ce3dea81bf6",
+      "before_sha256": "d1ef26f02bb80ef3fc9fcec0fed956643e4160fad00b1f74d793a16ef60fa890",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/WholeComponentTransportFactory.lean",
+      "blob": "3133049e6fab49a41e03b4cebed2e12730435c95",
+      "sha256": "ec4fda0b24556f2fd47782e74d3dbdcf0471f07c6d7a6ca627cc8380cda36362",
+      "lines": 102
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/TaylorReferenceIdentity.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/TaylorReferenceIdentity.lean",
+      "before_blob": "0741d84d8c3a0cb3904de531e26f21fc7a7821ae",
+      "before_sha256": "3c963026e4a7fa58a4131616d6c8bc11518dbdb01ac52793b9d9da4921c0aca5",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/TaylorReferenceIdentity.lean",
+      "blob": "ee5ceca7db9613687d5d850d00bfc087913fa6f4",
+      "sha256": "8d9d6965d80293453d371482a6d93a17787bed7cba2d48f69e59afaf367317b2",
+      "lines": 103
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholeComponentReferenceIdentity.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeComponentReferenceIdentity.lean",
+      "before_blob": "f4238ef1b6755d62fc3fe275749932f4dbc3cc92",
+      "before_sha256": "18f7bbbb2badc224d46306b20a3180101cbf543978284c5ad23c8142c7a42788",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/WholeComponentReferenceIdentity.lean",
+      "blob": "9ec6ff71dd12429ac90af05b1ad52bb2bb774dc3",
+      "sha256": "47bc0609ccc9340d630eea22d680b9bd2e7e20e339e41927d0e13bce6cb4b4c9",
+      "lines": 124
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointHeightValueBounds.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightValueBounds.lean",
+      "before_blob": "e192a07ef9476bd6de179deb4782a7980b6aba66",
+      "before_sha256": "fa5dafb25717276bf70b6c7a7e55fda40335dd2aa678de6d81cd7d34f12d71b9",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/EndpointHeightValueBounds.lean",
+      "blob": "30b042d263e384a261f3ec98a12e6aeb1e231db8",
+      "sha256": "bf0ddce6fbf7e23760bd74208b5822bd362041fc45a759865ba3eb2c659eb819",
+      "lines": 97
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/OneSidedEndpointHeight.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/height-width/OneSidedEndpointHeight.lean",
+      "before_blob": "ad6f6be040589595a75a29aaa4054017b81c732a",
+      "before_sha256": "ac373438165ad76d2650b686fcc909570fb70c3740bd697ead03c66f1e13f868",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/OneSidedEndpointHeight.lean",
+      "blob": "3093f103057e643f03cf80f9b3dd5bd75996781c",
+      "sha256": "3624a8ee5fa5cfc0e425f0ce2f01a37ef3faaff701575a1ceb392132ae044e9d",
+      "lines": 128
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/EndpointHeightLogJets.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/EndpointHeightLogJets.lean",
+      "before_blob": "209f01c1d7d797d3ec0e37535e2eb3e4a28e2458",
+      "before_sha256": "392b13be25ea3b4d63dbf2a5a0e4dee715185241c52c28288f49ee997b5f6ee1",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/EndpointHeightLogJets.lean",
+      "blob": "9b1033774e04bad65b1af697be24d32458d8a203",
+      "sha256": "5615954fb74fa5b71c151cd6606821dfebe2b28e8771dd1f4bfeedae9210613f",
+      "lines": 51
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveChartGeometry.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveChartGeometry.lean",
+      "before_blob": "05c10d19bd012e57697489b42c077dbca1b62e4f",
+      "before_sha256": "1086f404f9297f8bd86c80927eb5fc553f3e9155f7e255f2124dc8090d55b1a7",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/WholePositiveChartGeometry.lean",
+      "blob": "f11dc361f30a5d74ff1b836728f535abc0f79a6a",
+      "sha256": "0a887d435df1b2c5df634e6dddf6ae5454a87d28039427d44651672d61c795ef",
+      "lines": 144
+    },
+    {
+      "target_path": "src/ContinuousFlexibility/Analysis/WholePositiveCanonicalFields.lean",
+      "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveCanonicalFields.lean",
+      "before_blob": "a79f9987aafb83a59e1d9fb8ccb74bf5354585c1",
+      "before_sha256": "8226260cf89a2ac8c4ba5964f2a0b5e569b021ff6d79d0c494112b0271afe7ce",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/formatting-positive-group20/WholePositiveCanonicalFields.lean",
+      "blob": "0fb940e74988b8ccf40f317447993147847713eb",
+      "sha256": "c26cd518553a29e68647291f463bbd0b271500dd9620ea0735280f2d0a8773b2",
+      "lines": 169
+    }
+  ],
+  "original_sources_and_manifests_preserved": true
+}

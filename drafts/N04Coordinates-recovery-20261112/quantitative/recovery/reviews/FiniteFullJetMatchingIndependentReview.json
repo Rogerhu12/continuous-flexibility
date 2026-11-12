@@ -1,0 +1,47 @@
+{
+  "reviewer": "/root/quantitative_route",
+  "result": "passed independent full-source and pinned-provider static review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetMatching.lean",
+    "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+    "blob": "9baca93c394dae0092c356505a301df65635e749",
+    "lines": 82
+  },
+  "checks": [
+    "Read all 82 source lines. The matching predicate contains only actual ContDiffAt at the one point and ordinary iterated Frechet jet equality through n.",
+    "Order zero evaluation uses the exact iteratedFDeriv_zero_apply, giving f(x)=g(x) without a neighborhood equality assumption. Restriction of the finite order and reflexivity retain the same smoothness proofs.",
+    "Composition applies the pinned iteratedFDeriv_comp separately to the same actual outer H at f(x) and g(x). Their basepoints agree by the zero jet. FormalMultilinearSeries.taylorComp is actually the finite sum over OrderedFinpartition; each block size is <= k <= n, so all inner factors are supplied by h.jets. No nonexistent taylorComp_apply API is used.",
+    "Pairing uses the exact iteratedFDeriv_prodMk contract and the two same-order identities; no common germ or extra regularity premise is introduced.",
+    "Differentiation decreases the finite match order by one. The pinned iteratedFDeriv_succ_apply_right evaluated at Fin.snoc v w gives the exact Frechet derivative target after init_snoc/snoc_last. Infinite pointwise smoothness gives fderiv_right using infinity+1<=infinity.",
+    "All E/F/G universe parameters remain polymorphic; there is no recursive induction that requires a codomain universe to equal the universe of its own derivative space."
+  ],
+  "provider_sources": [
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Comp.lean",
+      "sha256": "26495369d99d4815f99e8319623231a5fe25f0fdd1756c31162216323e27ed0f",
+      "blob": "067d19883550ab5637d02f038d451c42ab16e4b7",
+      "lines": 839
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/Basic.lean",
+      "sha256": "8c79dc8510f94d1c3b89da8e3dfdd6c63044d26ab912f5a57e9875a7dfc522a6",
+      "blob": "8e886aa8f50332d9345671b317031b5377f0993d",
+      "lines": 668
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/FTaylorSeries.lean",
+      "sha256": "f6ebee83905f13d5648f1a9bff39c15b6109f161fdf5d482af9c5f22176ba535",
+      "blob": "ad3dee4ba3e3f6a9fd4030b170538f3f7d6f7099",
+      "lines": 1008
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno.lean",
+      "sha256": "79b3216e965f032554197e51cb6d4dbcfb35e8a801b3dde1228f0eacbbb64aaf",
+      "blob": "633c4dec60f69dbd0b32039b833bf205dd58a07f",
+      "lines": 1112
+    }
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CI_or_active_state_changed": false
+}

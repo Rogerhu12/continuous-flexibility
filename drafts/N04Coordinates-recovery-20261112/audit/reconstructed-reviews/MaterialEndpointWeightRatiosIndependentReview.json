@@ -1,0 +1,41 @@
+{
+  "kind": "independent_complete_source_mathematical_and_API_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed static review; no confirmed remaining mathematical or API issue",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalNegativeMaterialTransportCandidateManifest.json",
+    "sha256": "e40f97b9584d24a602bc469860afc43db387566030eb11177f3db90dec6b11d6"
+  },
+  "reviewed_source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightRatios.lean",
+    "sha256": "af9c2fc7379f6f9ff4592570f128d6685549f1b83c23999f7ffbe106394f322a",
+    "blob": "f8338abb2e69aee279ae036bbcebe2b402142fb6",
+    "lines": 87
+  },
+  "not_reviewed_in_this_receipt": [
+    "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalNegativeMaterialTransport.lean"
+  ],
+  "exact_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightTransport.lean",
+      "sha256": "0958852ab78ccab6e57d3f527fc0d636406325a7b8cadf998f934290ddb135ba",
+      "blob": "a76f8fb3a60c893939caf7ded03dfac717512e81",
+      "lines": 132
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialGlobalEndpointModels.lean",
+      "sha256": "2296624a6ce1501048acda5f6ba6a6779d9491bcccd8653db158d8ef9120b4fa",
+      "blob": "94856c92ba535db174db559d1ab2ddacdf77dfd5",
+      "lines": 65
+    }
+  ],
+  "checks": [
+    "Read the entire87-line ratio lemma and the actual132-line three-weight estimate and65-line scaled-lower provider. The specializations (gamma,eta,R)=(1,0,0) and(0,1,0) give the displayed H and M bounds after only rpow_one/rpow_zero and multiplicative-unit reductions.",
+    "Both denominators are strictly positive from the unchanged actual IsMaterialData positivity clause. Division therefore preserves the inequality direction; the ring rearrangements retain the same T.H and T.M.",
+    "The common exponent is AH+AM, and the common coefficient is KH*E^AM+KM*E^AH. The two multiplication factors are at least one because 1<=E*T.E0(s), not because unscaled E0 is assumed >=1. Real.mul_rpow and Real.rpow_add are applied with the actual strictly positive bases.",
+    "The common K and nonnegative exponent are chosen before r,s and their shift condition. The material data T and its actual weights remain unchanged; no cell/host or target-transport premise is introduced."
+  ],
+  "compiled": false,
+  "source_modified": false,
+  "checkout_index_refs_CP_authority_CI_modified_or_queried": false
+}

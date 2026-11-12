@@ -1,0 +1,50 @@
+{
+  "kind": "same_witness_negative_material_transport_candidate_v2",
+  "status": "UNCOMPILED; superseding draft pending delta review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/negative-material-boundary/CanonicalNegativeMaterialTransport.lean",
+    "sha256": "3e3906dfc18e2bce292e04a91e0c32f495287a8af573195fc26a270a06508ca6",
+    "blob": "82da95883c7681220c0f05d18326b89b10e55bdb",
+    "lines": 103
+  },
+  "previous_source_unchanged": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalNegativeMaterialTransport.lean",
+    "sha256": "c65a052dfe6ceb1d5cd76915a0488e2b2616f0a7e3e66da7992fcfc014b44db2",
+    "blob": "c8d32b1197324331cbf5bd51509d10a9453cbef1",
+    "lines": 158
+  },
+  "previous_candidate_manifest_unchanged": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/CanonicalNegativeMaterialTransportCandidateManifest.json",
+    "sha256": "e40f97b9584d24a602bc469860afc43db387566030eb11177f3db90dec6b11d6",
+    "blob": "60f352041215fa0b1d4ac32e82715a2809025e63",
+    "lines": 94
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/negative-material-boundary/CanonicalNegativeMaterialTransport.diff",
+    "sha256": "1b20c139b8ae67aa19ce85e95821998bea5a5c9a3e7732861db0e58c28075236",
+    "blob": "94b24c216da95b39f0a10abdad42edb9c46a58a5",
+    "lines": 115
+  },
+  "changes": [
+    "Replace the import with actual CanonicalWholeNegativeBoundary and remove two duplicate public lemmas already provided there. Both remaining proof bodies are unchanged except explicit namespace qualification.",
+    "Qualify the actual reference min-distance as Statements.endpointDistance. Analysis.endpointDistance is a different two-real model function; no ambiguity is retained."
+  ],
+  "remaining_public_declarations": [
+    "n01_negativeComponent_endpointX_oscillation",
+    "canonicalWholeNegativeTransport_material_ratios"
+  ],
+  "actual_reused_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean",
+    "sha256": "1683fdf85217d00d1dae1c3e3f0f57c37dd2cd65ccea9a611ffc7c70f7853a1c",
+    "blob": "068acb0fcb71a3b64c16004ceb7d8ffb20f1ac1d",
+    "lines": 78
+  },
+  "material_ratio_provider": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightRatios.lean",
+    "sha256": "af9c2fc7379f6f9ff4592570f128d6685549f1b83c23999f7ffbe106394f322a",
+    "blob": "f8338abb2e69aee279ae036bbcebe2b402142fb6",
+    "lines": 87
+  },
+  "compiled": false,
+  "checkout_index_refs_CI_or_active_state_changed": false
+}

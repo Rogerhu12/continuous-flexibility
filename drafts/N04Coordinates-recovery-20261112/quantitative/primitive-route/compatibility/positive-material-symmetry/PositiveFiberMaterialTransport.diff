@@ -1,0 +1,61 @@
+--- /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveFiberMaterialTransport.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveFiberMaterialTransport.lean
+@@ -19,6 +19,22 @@
+ open Set
+ open ContinuousFlexibility.Statements
+ open scoped ContDiff
++
++private theorem positiveMaterial_interval_endpointX_shift
++    {D : ReferenceData} {a b c x y : ℝ}
++    (hc : c ∈ Ioo D.a D.b) (hanchor : c ∈ Icc a b)
++    (hcap : b - a ≤ Statements.endpointDistance D c / 2)
++    (hx : x ∈ Icc a b) (hy : y ∈ Icc a b) :
++    y ∈ Ioo D.a D.b ∧
++      |endpointX 1 (Statements.endpointDistance D y) -
++        endpointX 1 (Statements.endpointDistance D x)| ≤ 2 := by
++  have hdist (z : ℝ) (hz : z ∈ Icc a b) :
++      |z - c| ≤ Statements.endpointDistance D c / 2 := by
++    apply le_trans (b := b - a) _ hcap
++    exact abs_le.mpr ⟨by linarith only [hz.1, hanchor.2],
++      by linarith only [hz.2, hanchor.1]⟩
++  exact ⟨(endpointDistance_half_collar_bounds hc (hdist y hy)).1,
++    endpointX_one_shift_on_half_distance_collar hc (hdist y hy) (hdist x hx)⟩
+ 
+ theorem positiveFiberChart_endpointX_shift_of_capped_exits
+     {D : ReferenceData} {φ Y : PolarPoint → ℝ} {l r c d B : ℝ}
+@@ -58,15 +74,8 @@
+       exact ⟨hpCore, by norm_num⟩
+     · have hlCore : l ∈ Ioo D.a D.b :=
+         ⟨lt_of_le_of_ne ha hl.symm, hlr.trans_le hb⟩
+-      have hpdist : |p.1 - l| ≤ Statements.endpointDistance D l / 2 := by
+-        rw [abs_of_nonneg (sub_nonneg.mpr hpc.1)]
+-        exact (sub_le_sub_right hpc.2 l).trans (hcapL hl)
+-      have hqdist : |(positiveFiberChart φ Y p).1 - l| ≤
+-          Statements.endpointDistance D l / 2 := by
+-        rw [abs_of_nonneg (sub_nonneg.mpr hqc.1)]
+-        exact (sub_le_sub_right hqc.2 l).trans (hcapL hl)
+-      exact ⟨(endpointDistance_half_collar_bounds hlCore hqdist).1,
+-        endpointX_one_shift_on_half_distance_collar hlCore hqdist hpdist⟩
++      exact positiveMaterial_interval_endpointX_shift hlCore
++        ⟨le_rfl, hlc.le⟩ (hcapL hl) hpc hqc
+   by_cases hpr : d < p.1
+   · have hpc : p.1 ∈ Icc d r := ⟨hpr.le, hp.1.2.le⟩
+     have hqc : (positiveFiberChart φ Y p).1 ∈ Icc d r :=
+@@ -78,15 +87,8 @@
+       exact ⟨hpCore, by norm_num⟩
+     · have hrCore : r ∈ Ioo D.a D.b :=
+         ⟨ha.trans_lt hlr, lt_of_le_of_ne hb hr⟩
+-      have hpdist : |p.1 - r| ≤ Statements.endpointDistance D r / 2 := by
+-        rw [abs_sub_comm, abs_of_nonneg (sub_nonneg.mpr hpc.2)]
+-        exact (sub_le_sub_left hpc.1 r).trans (hcapR hr)
+-      have hqdist : |(positiveFiberChart φ Y p).1 - r| ≤
+-          Statements.endpointDistance D r / 2 := by
+-        rw [abs_sub_comm, abs_of_nonneg (sub_nonneg.mpr hqc.2)]
+-        exact (sub_le_sub_left hqc.1 r).trans (hcapR hr)
+-      exact ⟨(endpointDistance_half_collar_bounds hrCore hqdist).1,
+-        endpointX_one_shift_on_half_distance_collar hrCore hqdist hpdist⟩
++      exact positiveMaterial_interval_endpointX_shift hrCore
++        ⟨hdr.le, le_rfl⟩ (hcapR hr) hpc hqc
+   have hmid : p.1 ∈ Icc c d := ⟨le_of_not_gt hpl, le_of_not_gt hpr⟩
+   have he : (positiveFiberChart φ Y p).1 = p.1 := hmiddle p.1 hmid (φ p)
+   rw [he]

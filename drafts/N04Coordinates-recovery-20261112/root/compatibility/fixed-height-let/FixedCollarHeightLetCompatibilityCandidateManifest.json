@@ -1,0 +1,13 @@
+{
+  "author": "/root",
+  "status": "HELD_UNCOMPILED; audited full predecessor plus one let-intro repair pending delta review",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/compatibility/fixed-height-let/FixedCollarHeightPolynomialEnvelope.lean",
+  "file": "src/ContinuousFlexibility/Analysis/FixedCollarHeightPolynomialEnvelope.lean",
+  "blob": "d210feb9c81b67d69b8e9745345e92289fe1c582",
+  "sha256": "b2a6b552f25afc54e5b91853200dca32ead6c9926e50c971055a8f1c1bc15249",
+  "lines": 112,
+  "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FixedCollarHeightPolynomialEnvelope.lean",
+  "before_blob": "3e7717fc7fa60cae0b8b42fc30280ab89d42ff86",
+  "delta": "Add dsimp only before final intro i k hk p to eliminate the outer theorem-result let delta before introducing the family index. The original 111-line frozen source and manifest are preserved.",
+  "public_headers_unchanged": true
+}

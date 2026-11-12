@@ -1,0 +1,47 @@
+{
+  "kind": "positive_material_symmetric_proof_factorization_candidate",
+  "author": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_PENDING_INDEPENDENT_REVIEW",
+  "sources": [
+    {
+      "module_path": "src/ContinuousFlexibility/Analysis/PositiveMaterialExitChoice.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveMaterialExitChoice.lean",
+      "sha256": "011b34863a73ccbe8dbc240a5605b7886e7f08cabfd400f81e72f5e78cc73c52",
+      "blob": "5eeab9b80fb9c7aaa4d1ebfbcc93e0d668a66c3d",
+      "lines": 90,
+      "supersedes": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveMaterialExitChoice.lean",
+        "sha256": "becec92f7836994b69c17de337cb42694d6a1d22dc84fc4fc8b828009688e0a2",
+        "blob": "aaf7cfe0c9f4966ea5ef0d71d56363353604518b"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveMaterialExitChoice.diff",
+        "sha256": "27490a32b66411349ecbf62f6540bb3e98088f75207823feb83823dc002042e4"
+      }
+    },
+    {
+      "module_path": "src/ContinuousFlexibility/Analysis/PositiveFiberMaterialTransport.lean",
+      "source": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveFiberMaterialTransport.lean",
+      "sha256": "491e7f5ede6f507b5f7e8e81d5115a785430f6fd7fbf0626b10c1c695ee288b3",
+      "blob": "937c257f216e51b03d4eba1eeac850bd476d15bb",
+      "lines": 131,
+      "supersedes": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/PositiveFiberMaterialTransport.lean",
+        "sha256": "5db4a4d45117041126dd5ca0145e5dd6491cd45ab0ce2284e821fda20cec2259",
+        "blob": "0c58d20fb5ef8acf7689c93b8d4f55af435700b4"
+      },
+      "diff": {
+        "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/compatibility/positive-material-symmetry/PositiveFiberMaterialTransport.diff",
+        "sha256": "53f77b89889e11f548a8a047cc5ff794daa94c751d6728bcf475597dfbb6bb79"
+      }
+    }
+  ],
+  "scope": [
+    "The four explicit width/exit definitions and all complete public theorem statements are unchanged.",
+    "One common endpoint/span/ambient helper proves width positivity and both caps; left and right only supply the actual root and ambient endpoint.",
+    "One common anchored interval lemma proves the half-distance and endpointX bound; the two real map branches only choose their interval and anchor.",
+    "No new assumptions, source choice, witness, target estimate or public mathematical statement. Original frozen sources and manifest remain unchanged."
+  ],
+  "compiled": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

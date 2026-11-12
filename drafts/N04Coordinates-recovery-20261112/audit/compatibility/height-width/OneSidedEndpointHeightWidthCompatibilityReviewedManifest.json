@@ -1,0 +1,26 @@
+{
+  "kind": "explicit_held_source_compatibility_supersession",
+  "status": "independently reviewed; HELD_UNCOMPILED, not installed",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/height-width/OneSidedEndpointHeightWidthCompatibilityCandidateManifest.json",
+    "sha256": "4871a36f4ee6be74264a2caf0aba7c1d76065f0a0a16931f8d0dc3a94a2ba2c1"
+  },
+  "before_source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/OneSidedEndpointHeight.lean",
+  "before_blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/height-width/OneSidedEndpointHeight.lean",
+  "blob": "ad6f6be040589595a75a29aaa4054017b81c732a",
+  "sha256": "ac373438165ad76d2650b686fcc909570fb70c3740bd697ead03c66f1e13f868",
+  "lines": 129,
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/OneSidedEndpointHeightWidthCompatibilityIndependentReview.json",
+    "sha256": "b7ee7dab29cb1c05ebfa47de90393312936f48258b65441d8d3838ea37539e6f"
+  },
+  "old_owned15_manifest_preserved": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/AuditFifteenSourcesReviewedManifestCI125.json",
+    "sha256": "4191e9e936f89f403996761af07a5d6ef87c8d4f5c12c9cbb587e740c98dabbe"
+  },
+  "public_complete_headers_byte_identical": true,
+  "all_old_sources_and_manifests_preserved": true,
+  "compiled": false,
+  "active_plan_or_authority_changed": false
+}

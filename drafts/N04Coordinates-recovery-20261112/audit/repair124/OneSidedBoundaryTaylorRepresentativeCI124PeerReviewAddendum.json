@@ -1,0 +1,19 @@
+{
+  "kind": "append_only_independent_peer_review_receipt",
+  "source_blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+  "source_sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+  "prior_reviewed_manifest_preserved": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair124/OneSidedBoundaryTaylorRepresentativeCI124RepairReviewedManifest.json",
+    "sha256": "fe618cd9277ee2d33dfa12023648a701d31957c898ea0ca4771d135b63552b33"
+  },
+  "owned15_inventory_preserved": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/AuditFifteenSourcesReviewedManifestCI125.json",
+    "sha256": "4191e9e936f89f403996761af07a5d6ef87c8d4f5c12c9cbb587e740c98dabbe"
+  },
+  "additional_independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/recovery/reviews/CI124OneSidedBoundaryTaylorRepresentativeIndependentReview.json",
+    "sha256": "c3f28a015057619369d6c8a20950c6103165d058de788ef3153d9abb6adc10f0"
+  },
+  "source_and_prior_artifacts_modified": false,
+  "compiled_or_ci_result_asserted": false
+}

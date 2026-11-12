@@ -1,0 +1,10 @@
+--- 149c44a76b75f9c224ce4f3453f60d0c6058c6df/src/ContinuousFlexibility/Analysis/CanonicalWholeNegativeBoundary.lean
++++ /workspace/scratch/bbbea77e4163/n04-drafts/positive/repair126/CanonicalWholeNegativeBoundary.lean
+@@ -58,6 +58,7 @@
+       (Icc (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) := by
+   let K := n04bActualTypedAtlas hT hS hN hfield e
+   have hab : C.left m < C.right m := (hN.1.1.2.2.2.1.1 m).2.1
++  dsimp only
+   intro p hp
+   refine ⟨?_, mem_univ _⟩
+   by_cases ha : p.1 = C.left m

@@ -1,0 +1,29 @@
+{
+  "reviewer": "/root/quantitative_route",
+  "result": "passed exact two-line proof delta independent static review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/height-width/OneSidedEndpointHeight.lean",
+    "sha256": "ac373438165ad76d2650b686fcc909570fb70c3740bd697ead03c66f1e13f868",
+    "blob": "ad6f6be040589595a75a29aaa4054017b81c732a",
+    "lines": 129
+  },
+  "base": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/height-width/OneSidedEndpointHeight.base.lean.txt",
+    "sha256": "29cbabf52918e73745455ed4f8e4a868f36dc5106558681a40492a52d4ee5258",
+    "blob": "e468cb78b23e667311524d42fb41139f633a2da2",
+    "lines": 127
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/compatibility/height-width/OneSidedEndpointHeightWidthCompatibilityCandidateManifest.json",
+    "sha256": "4871a36f4ee6be74264a2caf0aba7c1d76065f0a0a16931f8d0dc3a94a2ba2c1"
+  },
+  "checks": [
+    "The entire new file equals the original bytes with exactly one local hN block replacement. All other bytes, three public declaration headers, imports, options, and mathematical hypotheses are identical.",
+    "The local N is defined immediately above as the real cast of n+1. The change exposes exactly that definition to exact_mod_cast; Nat.succ_pos n proves the same positive natural successor.",
+    "This is the same local-let cast elaboration pattern diagnosed in CI124 PrescribedEndpointWidth. It does not alter the harmonic width, reciprocal cost, or later finite-jet assertions."
+  ],
+  "scope": "Delta review only; original mathematical full review remains separate. This held source was not part of the CI124 failing installed files.",
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CI_or_plan_changed": false
+}

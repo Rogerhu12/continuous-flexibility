@@ -1,0 +1,70 @@
+{
+  "reviewer": "/root/quantitative_route",
+  "result": "passed full-source and actual-callee independent static review",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
+    "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2",
+    "git_blob": "0a39d374324401eca98e44da7633c49057349b56",
+    "lines": 105
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentityCandidateManifest.json",
+    "sha256": "35d4667c9e1cfb2c4658a5171e20ae36b2b16c751754dad6cd2c1dbf052f4f28"
+  },
+  "exact_callees_checked": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeComponentReferenceIdentity.lean",
+      "sha256": "18f7bbbb2badc224d46306b20a3180101cbf543978284c5ad23c8142c7a42788",
+      "git_blob": "f4238ef1b6755d62fc3fe275749932f4dbc3cc92",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/TaylorReferenceIdentity.lean",
+      "sha256": "3c963026e4a7fa58a4131616d6c8bc11518dbdb01ac52793b9d9da4921c0aca5",
+      "git_blob": "0741d84d8c3a0cb3904de531e26f21fc7a7821ae",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberInterpolation.lean",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f",
+      "git_blob": "b7e4b696b9bf1296eeb076700e97f7e1cd923793",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackAssembly.lean",
+      "sha256": "24927c543b24c65bb0c119905c7f03be10beafa3a26674e488cbbfa2c2396242",
+      "git_blob": "0493dcc3afcdeccce70c27bb17a1345f39a958d8",
+      "lines": 167
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportFactory.lean",
+      "sha256": "d1ef26f02bb80ef3fc9fcec0fed956643e4160fad00b1f74d793a16ef60fa890",
+      "git_blob": "cca7919641bede2420b69a827a748ce3dea81bf6",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransport.lean",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f",
+      "git_blob": "8de986a4b6772cbf403e9d60940eac2765a7a171",
+      "lines": 190
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TwoEndpointFiberGluing.lean",
+      "sha256": "b3c43da6c6269619d0d9176f026169fd3b477d195c26812159706415f8e8ec08",
+      "git_blob": "bf9acbad527aace98ac778a3b7ec858c51b13c51",
+      "lines": 146
+    }
+  ],
+  "checks": [
+    "Read all 105 lines and the actual displayed collar, interpolation, angular pullback, whole transport and one-sided Taylor definitions. Candidate and all seven pinned callee bytes match the manifest.",
+    "For either Bool side the actual collar endpoints/mass and radial fst data are exactly the positiveReferenceCollarCoordinate_reference_identity arguments; the opposite endpoint is absent from this single-collar identity.",
+    "The actual two-endpoint radial glue chooses its left collar on x<c, its middle at x=c<d, and its right collar on x>=d. The stated inclusive side half-planes are therefore covered including both exits.",
+    "angularFiberPullback phi fst equals fst definitionally regardless of the actual angular inverse. Thus the true endpointFiberPullbackCoordinate, and not an unspecified replacement Y, is the identity on the chosen side.",
+    "The whole transport radial coordinate evaluates that same Y at (p.1,phi p); its first coordinate remains p.1. The one-sided wrapper uses the actual n+1 radial Taylor representative; a joint fst germ gives that representative identically fst by the existing exact theorem.",
+    "Width positivity/gap are precisely the existing family output, no condition on the opposite endpoint or angular lift identity is added, and no material bound or final transport-ratio premise is assumed.",
+    "All five new public names are absent from the current installed source tree; no duplicate declaration was found."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

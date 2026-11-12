@@ -1,0 +1,59 @@
+{
+  "kind": "independent_complete_source_math_and_fixed_API_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed static review; no confirmed remaining issue",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/EndpointDistanceMaterialTransportCandidateManifest.json",
+    "sha256": "0903a5e81d99c88c6364e89e009ed3344e4a70459ef040365cf9118ad61dbca6"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/EndpointDistanceMaterialTransport.lean",
+    "sha256": "b1d7ff11657582113250ca84c35b0438b27720024571a28728154317e6aac38c",
+    "blob": "2ac0da28435347bed8e7020d545f622c5d694d84",
+    "lines": 104
+  },
+  "exact_dependencies": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/primitive-route/reconstructed/MaterialEndpointWeightRatios.lean",
+      "sha256": "af9c2fc7379f6f9ff4592570f128d6685549f1b83c23999f7ffbe106394f322a",
+      "blob": "f8338abb2e69aee279ae036bbcebe2b402142fb6",
+      "lines": 87
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Statements/Analysis.lean",
+      "sha256": "1c705c5ab4128da19d667433e76fe3f9260ade805b0f53c52f1673aa0e7ff3b2",
+      "blob": "619fefcba9f3fd18c1d8131781971953a7965d2c",
+      "lines": 603
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/MaterialCoordinate.lean",
+      "sha256": "e113e4c2141428426748e22e0f5f53093940a70d77befe3bcf2f422bdc99fefc",
+      "blob": "b1bcf0081f837c19af51bf120762c7efb491b54a",
+      "lines": 215
+    },
+    {
+      "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/Real/Sqrt.lean",
+      "sha256": "f4e96c735ead60a8983bcf8eb6e38dfd05d8102c3f741094f73639858605bb6a",
+      "blob": "92936ac2ea8d16aff301eecc8983d24e0b1f65d2",
+      "lines": 510
+    }
+  ],
+  "additional_pinned_API": {
+    "path": "/workspace/scratch/continuous-flexibility-mathlib/Mathlib/Analysis/SpecialFunctions/Log/Basic.lean",
+    "sha256": "5c3ecb5112d5d46df46d3dff3efa1548095356259633b34885db8ab4275340a2"
+  },
+  "checks": [
+    "Read all104 lines. The actual endpoint distance is explicitly Statements.endpointDistance=min(r-a,b-r), so the same-named scalar inverse model cannot be selected accidentally.",
+    "For d=distance(c)>0, the two absolute-displacement inequalities give each point strictly inside the core and each actual distance in[d/2,3d/2]. The upper bound chooses the actual minimum side at c; it needs no material cell assignment.",
+    "The resulting positive distances have both ratios <=3. Real.log_div and log_le_sub_one_of_pos give both signed log differences <=2. The reversal from log distances to log reciprocal distances has the correct sign in both abs_le branches.",
+    "The square-root estimate is valid for all real logarithms. It uses u<=sqrt(u)^2=max(u,0), v<=sqrt(v)^2=max(v,0), and sqrt_nonneg; fixed-pin sqrt_le_iff needs exactly a nonnegative upper bound and the squared inequality. Thus negative logarithms are not excluded or silently assumed nonnegative.",
+    "The final theorem applies the previously reviewed actual same-T H/M ratio lemma at L=2. Its K and A are chosen before c,r,s, and both actual core-membership proofs are derived from the collar hypotheses. No common cell, changed material witness, unscaled E0>=1 or target transport bound is assumed."
+  ],
+  "ratio_provider_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed-reviews/MaterialEndpointWeightRatiosIndependentReview.json",
+    "sha256": "b8e4e86e9b6f281c4919a25074860d18e4c7fc6806d9b7c35b7cde878d6c5302"
+  },
+  "reconstruction_status": "New104-line source; no claim of byte recovery of the lost127-line predecessor.",
+  "compiled": false,
+  "source_or_checkout_index_refs_CP_authority_CI_modified_or_queried": false
+}

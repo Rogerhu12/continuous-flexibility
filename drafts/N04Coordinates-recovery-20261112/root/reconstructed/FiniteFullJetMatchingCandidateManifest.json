@@ -1,0 +1,10 @@
+{
+  "author": "/root",
+  "status": "HELD_UNCOMPILED pending independent review",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetMatching.lean",
+  "file": "src/ContinuousFlexibility/Analysis/FiniteFullJetMatching.lean",
+  "blob": "9baca93c394dae0092c356505a301df65635e749",
+  "sha256": "45dfa31bbf202202959876a3140c805d0143112fcedd7405ebffd34ca3b703df",
+  "lines": 82,
+  "purpose": "Pointwise actual full-jet algebra for the adjugate principal-field boundary match. Ordinary smoothness at the same point, exact order loss for fderiv."
+}

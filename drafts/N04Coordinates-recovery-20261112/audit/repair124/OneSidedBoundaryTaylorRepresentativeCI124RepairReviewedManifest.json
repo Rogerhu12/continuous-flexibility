@@ -1,0 +1,26 @@
+{
+  "kind": "n04_ci124_owned_proof_repair_reviewed",
+  "status": "independently reviewed; installed at CI125 exact commit; CI125 result not asserted",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair124/OneSidedBoundaryTaylorRepresentativeCI124RepairCandidateManifest.json",
+    "sha256": "7901920d615d9639b57464dcf7ad55a6dcb9c03f98fcc6cdc1fbd199e1df11c4"
+  },
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair124/OneSidedBoundaryTaylorRepresentative.lean",
+    "sha256": "50d11b8070524604511c037a38d04be1517f5802548d963ac93184c165787b76",
+    "blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+    "lines": 130
+  },
+  "target_path": "src/ContinuousFlexibility/Analysis/OneSidedBoundaryTaylorRepresentative.lean",
+  "before_blob": "d52990e7552f9bb91cae5339da20fbfdf10e6827",
+  "after_blob": "3a3cfa0ce1db7be51420bcaa2ceb6dedd4e86855",
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/repair124/OneSidedBoundaryTaylorRepresentativeCI124IndependentReview.json",
+    "sha256": "bf2cc0949eaa48e42c4bb73d156ef59b4f5eb2fb3dca122566ec926b59bbfc63"
+  },
+  "installed_commit": "6a2609c3dbd1e5600eee05b70ffb82b738b1e915",
+  "installed_tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
+  "public_complete_headers_byte_identical": true,
+  "compiled_or_CI_queried_by_author": false,
+  "old_source_and_candidate_manifest_preserved": true
+}

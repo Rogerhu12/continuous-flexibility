@@ -1,0 +1,80 @@
+{
+  "kind": "actual_single_side_ambient_positive_radial_identity_reviewed",
+  "status": "HELD_UNCOMPILED_INDEPENDENTLY_STATIC_REVIEWED",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentity.lean",
+    "sha256": "5e5f5fc9f9f8b4ffeb09ed1a3abb489df98e35c0a9a9686457e929992faad3b2",
+    "git_blob": "0a39d374324401eca98e44da7633c49057349b56",
+    "lines": 105
+  },
+  "module_path": "src/ContinuousFlexibility/Analysis/WholePositiveAmbientRadialIdentity.lean",
+  "public_names": [
+    "endpointFiberCollar_eq_fst_of_side_data",
+    "twoEndpointFiberCoordinate_eq_fst_on_side",
+    "endpointFiberPullbackCoordinate_eq_fst_on_side",
+    "wholeComponentEndpointTransport_radial_eq_of_side_identity",
+    "oneSidedWholeComponentTransport_radial_eq_of_side_germ"
+  ],
+  "exact_callees": [
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/WholeComponentReferenceIdentity.lean",
+      "sha256": "18f7bbbb2badc224d46306b20a3180101cbf543978284c5ad23c8142c7a42788",
+      "git_blob": "f4238ef1b6755d62fc3fe275749932f4dbc3cc92",
+      "lines": 125
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/reconstructed/TaylorReferenceIdentity.lean",
+      "sha256": "3c963026e4a7fa58a4131616d6c8bc11518dbdb01ac52793b9d9da4921c0aca5",
+      "git_blob": "0741d84d8c3a0cb3904de531e26f21fc7a7821ae",
+      "lines": 104
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberInterpolation.lean",
+      "sha256": "c704ef46bb615920ca447117c91354d5716a7b70eca2b8877c7cc981b64d036f",
+      "git_blob": "b7e4b696b9bf1296eeb076700e97f7e1cd923793",
+      "lines": 207
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/EndpointFiberPullbackAssembly.lean",
+      "sha256": "24927c543b24c65bb0c119905c7f03be10beafa3a26674e488cbbfa2c2396242",
+      "git_blob": "0493dcc3afcdeccce70c27bb17a1345f39a958d8",
+      "lines": 167
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholeComponentTransportFactory.lean",
+      "sha256": "d1ef26f02bb80ef3fc9fcec0fed956643e4160fad00b1f74d793a16ef60fa890",
+      "git_blob": "cca7919641bede2420b69a827a748ce3dea81bf6",
+      "lines": 103
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/primitive-route/OneSidedWholeComponentTransport.lean",
+      "sha256": "00b537bdb84ca4bebc735c7ef06bd9b804b9de9bb9203f8e3de09658ec41a70f",
+      "git_blob": "8de986a4b6772cbf403e9d60940eac2765a7a171",
+      "lines": 190
+    },
+    {
+      "path": "/workspace/scratch/bbbea77e4163/continuous-flexibility/src/ContinuousFlexibility/Analysis/TwoEndpointFiberGluing.lean",
+      "sha256": "b3c43da6c6269619d0d9176f026169fd3b477d195c26812159706415f8e8ec08",
+      "git_blob": "bf9acbad527aace98ac778a3b7ec858c51b13c51",
+      "lines": 146
+    }
+  ],
+  "scope": [
+    "The actual chosen radial collar is exactly fst if only that side raw data equal the fst boundary jets; the opposite endpoint is unrestricted.",
+    "The actual two-endpoint radial glue equals fst throughout the chosen side half-plane, including its exit.",
+    "The actual angular inverse pullback of fst is fst for any angle map, so the exact endpointFiberPullbackCoordinate satisfies the same side identity.",
+    "This is transferred to the actual whole coordinate formula and to a genuine one-sided identity germ through its finite Taylor representative.",
+    "No angular lift identity, target material ratio, final transport estimate, or source identity at the opposite endpoint is assumed."
+  ],
+  "compiled": false,
+  "checkout_index_CI_authority_plan_modified": false,
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/reconstructed/WholePositiveAmbientRadialIdentityCandidateManifest.json",
+    "sha256": "35d4667c9e1cfb2c4658a5171e20ae36b2b16c751754dad6cd2c1dbf052f4f28"
+  },
+  "independent_review": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/recovery/reviews/WholePositiveAmbientRadialIdentityIndependentReview.json",
+    "sha256": "6058db7f8a0b8be6195ed8e1ceaee4474ec917488efe5aecbdc028d0b49b09c8"
+  },
+  "green_receipt_applies_to_candidate": false
+}

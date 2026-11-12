@@ -1,0 +1,53 @@
+{
+  "kind": "CI125_raw_endpoint_angular_let_rhs_delimiter_repair",
+  "status": "UNCOMPILED_AWAITING_INDEPENDENT_REVIEW",
+  "author": "/root/audit_coordinates",
+  "base_commit": "6a2609c3dbd1e5600eee05b70ffb82b738b1e915",
+  "base_tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
+  "target_path": "src/ContinuousFlexibility/Analysis/RawEndpointAngularInterpolation.lean",
+  "before_blob": "58331ac59f1bac542e6f105611d79e9028bb7a06",
+  "before_sha256": "9bc437b815a81e29d4a99d40a0609ebcc7f26a587e6256de31a612a655cd8618",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair125/RawEndpointAngularInterpolation.lean",
+  "after_blob": "5c3abefa1044250c00fc7fce76887773c4ea4670",
+  "sha256": "e66d13775d7e6aece23f17d1ef9d8e978991a10022e3d61355cab217e121fcfe",
+  "lines": 112,
+  "base_copy": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair125/RawEndpointAngularInterpolation.base.lean.txt",
+    "sha256": "9bc437b815a81e29d4a99d40a0609ebcc7f26a587e6256de31a612a655cd8618"
+  },
+  "diff": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair125/RawEndpointAngularInterpolation.diff",
+    "sha256": "dd3ffbdfa3bd2d55263c826af5fa450094d859fc50f76a0b28b6507684c42566"
+  },
+  "diagnostics": {
+    "cached_errors": {
+      "path": "/workspace/scratch/bbbea77e4163/n04-ci-125-errors.json",
+      "sha256": "96f564f36f91884d237100f49ae98216931fa13e3c2aeb00427977cdc190341b"
+    },
+    "file_diagnostic_count": 12,
+    "first": "error: src/ContinuousFlexibility/Analysis/RawEndpointAngularInterpolation.lean:44:6: Application type mismatch: The argument\n  ContDiff\nhas type\n  (𝕜 : Type ?u.142) →\n    [inst : NontriviallyNormedField 𝕜] →\n      {E : Type ?u.141} →\n        [inst_1 : NormedAddCommGroup E] →\n          [NormedSpace 𝕜 E] →\n            {F : Type ?u.140} → [inst_3 : NormedAddCommGroup F] → [NormedSpace 𝕜 F] → ℕ∞ω → (E → F) → Prop\nof sort\n  Type (max (max (?u.140 + 1) (?u.141 + 1)) (?u.142 + 1))\nbut is expected to have type\n  Bool\nof sort `Type` in the application\n  rawEndpointAngularData l r (ψ i) ContDiff"
+  },
+  "exact_change": "Add exactly one opening and one closing parenthesis around the complete positiveAngularTaylorInterpolation application that defines the theorem local phi. This forces the wrapped rawEndpointAngularData argument to belong to the let value; the following ContDiff begins the proposition body.",
+  "public_surface": {
+    "public_declarations": [
+      "rawEndpointAngularData",
+      "rawEndpointAngularInterpolation_family"
+    ],
+    "public_complete_headers_byte_identical": false,
+    "header_delta": "The family theorem header changes by these two parser delimiters only; all binder, hypothesis, mathematical formula and conclusion tokens are otherwise identical. The original malformed header did not elaborate, so no compiled old theorem type is asserted.",
+    "definition_header_and_body_identical": true,
+    "entire_theorem_proof_body_byte_identical": true,
+    "added_removed_declarations": [],
+    "imports_options_namespace_unchanged": true,
+    "default_budget_unchanged": true
+  },
+  "verification": {
+    "exact_immutable_git_preimage": true,
+    "inverse_literal_replacement_restores_exact_base": true,
+    "all_other_bytes_identical": true,
+    "new_hypotheses": false,
+    "compiled": false,
+    "checkout_index_refs_CP_authority_plan_or_old_sources_modified": false
+  },
+  "independent_review": null
+}

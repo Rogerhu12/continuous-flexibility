@@ -1,0 +1,35 @@
+{
+  "reviewer": "/root/quantitative_route",
+  "result": "passed exact local-alias expansion independent static review",
+  "base_commit": "149c44a76b75f9c224ce4f3453f60d0c6058c6df",
+  "path": "src/ContinuousFlexibility/Analysis/RawEndpointAngularInterpolation.lean",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair126/RawEndpointAngularInterpolation.lean",
+    "sha256": "471fed536b0882cf71b36532c35e0cca2899d44855f5c67ef0cbc2a2ab11b0a1",
+    "blob": "96961a2de3dec9f75ce95dd89d535deb00a735a0",
+    "lines": 112
+  },
+  "before": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair126/RawEndpointAngularInterpolation.base.lean.txt",
+    "sha256": "e66d13775d7e6aece23f17d1ef9d8e978991a10022e3d61355cab217e121fcfe",
+    "blob": "5c3abefa1044250c00fc7fce76887773c4ea4670"
+  },
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/audit/repair126/RawEndpointAngularInterpolationCI126RepairCandidateManifest.json",
+    "sha256": "d17cf5a25679ac6b3a6b49bf2c47c11c00ee26a12018e02c757dedeecb8adc65"
+  },
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-126-errors.json",
+    "sha256": "ed4555c5177e7d58691f45dfe2f2fbb5c24c6f113aadd87534920a663c02e2f6",
+    "count_for_module": 1
+  },
+  "checks": [
+    "Read the complete source, exact diff, cached CI126 diagnostic and the actual BoundaryMixedJets provider signature/proof.",
+    "The saved base equals exact 149c44a Git bytes. The candidate equals precisely one literal replacement of the simpa-only list; every other byte is unchanged.",
+    "A i side j is radialBoundaryJet (psi i side) (if side then r else l) j, while e side is that same endpoint. Expanding A, rawEndpointAngularData and e together makes both the actual derivative and mixed-derivative evaluation point identical to the callee; iteratedDeriv_one then gives the requested derivative.",
+    "Both public complete headers, the definition body, all other proof bytes, imports/options and default budgets are unchanged. No additional hypotheses, new public declarations or mathematical estimate are introduced."
+  ],
+  "compiled": false,
+  "source_edited": false,
+  "checkout_index_refs_CP_authority_plan_or_CI_changed": false
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "independent_exact_CI125_proof_repair_review",
+  "reviewer": "/root/audit_coordinates",
+  "result": "passed static whole-source, exact-delta and actual-callee review",
+  "candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair125/CanonicalWholeNegativeTransportCI125RepairCandidateManifest.json",
+    "sha256": "11fe54a959d421d69b2f51aea46f5957ece3685545cd652fe6158d32a2992cd7"
+  },
+  "base_commit": "6a2609c3dbd1e5600eee05b70ffb82b738b1e915",
+  "base_tree": "7c0c3ff810559c7c44127d46bba89e8aacc42a34",
+  "before_blob": "9c80ce0926164854906280ff067e64cf7e49758f",
+  "source": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/positive/repair125/CanonicalWholeNegativeTransport.lean",
+    "sha256": "b904744b4a2ca98616fc0b1681fdd563be7471776ab8aadafbc063177aa71b3f",
+    "git_blob": "c432ff8163f525d6273ebb8e671426a92992eab5",
+    "lines": 188
+  },
+  "diagnostics": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-ci-125-errors.json",
+    "sha256": "96f564f36f91884d237100f49ae98216931fa13e3c2aeb00427977cdc190341b"
+  },
+  "checks": [
+    "Read all188 candidate lines, the complete three-hunk diff, and all three cached invalid-cast diagnostics. The immutable Git preimage matches the saved base exactly.",
+    "Each root branch first proves positivity of the actual cutPair root-height value using the existing endpoint height_root field. The next scalar equality is exactly the reverse root-germ value equality, with the correct false/true branch and the own canonicalWholeNegativeHeightRatio alias made explicit.",
+    "The interior branch first uses the existing actual travel-height positivity theorem at the explicit p/hpin, then the reverse closedComponentField_eqOn value equality. EqOn receives only the membership proof, while the explicitly quantified smooth_pos provider keeps its explicit point.",
+    "All declaration headers, imports, options and every source byte outside the three proof replacements are unchanged. The actual point, atlas, functions and hypotheses are unchanged; no new estimate is assumed."
+  ],
+  "compiled": false,
+  "source_or_checkout_index_refs_authority_CP_CI_modified_or_queried": false
+}

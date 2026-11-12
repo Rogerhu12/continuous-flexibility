@@ -1,0 +1,10 @@
+{
+  "author": "/root",
+  "status": "HELD_UNCOMPILED awaiting independent full review",
+  "source": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/FiniteFullJetBoundary.lean",
+  "file": "src/ContinuousFlexibility/Analysis/FiniteFullJetBoundary.lean",
+  "blob": "69e3303eff0b945230f7210da126b95c232669b3",
+  "sha256": "fd42cc1894c3ec16125e7c0ef89188c2b3df3ca8375eb9b417e7080cf4786c75",
+  "lines": 82,
+  "purpose": "Actual open equation reaches full jets at an ordinary smooth closure point. Common precomposition restricts matching full jets to radial boundary jets, including order zero."
+}
