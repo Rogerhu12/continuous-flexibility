@@ -58,7 +58,6 @@ local instance n06BandLiftLevelSpace : NormedSpace ℝ (V.level (3 / 4 : ℝ) 0 
   Submodule.normedSpace _
 
 /- The band lift itself only sees a canonical sequence and an outer majorant. -/
-set_option diagnostics true in
 private theorem n06_bandLift_of_majorant
     (hD : IsAccumulatingProfile D) (hT : IsMaterialData D T)
     (hV : IsVolumeModel T S K V) (hI : ∀ m, K.left m < K.right m) (l : ℕ)
@@ -140,7 +139,6 @@ private def N06BandLiftEstimate
     n07aAngularLevelBand hV (3 / 4 : ℝ) 0 hI b j F = F →
     N06BandLiftBlock href hcur hI J N A z hz j l F
 
-set_option diagnostics true in
 private theorem n06_bandLift_actual_pointwise
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
@@ -181,7 +179,6 @@ private theorem n06_bandLift_actual_pointwise
       (parameterGrading S N z * n07aAngularTail ((j : ℤ) - l)) (A * ‖F‖)
       (mul_nonneg hρ (n07aAngularTail_nonneg _)) hanorm hpiece)
 
-set_option diagnostics true in
 private theorem n06_bandLift_fixed_budget
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h01 : N01Properties D T S C base loss ε)
@@ -205,7 +202,6 @@ private theorem n06_bandLift_fixed_budget
       hT hS h01 h03 h04 h05 href hcur hI J
       N A z hz j l F a ha.1 ha.2.1 (fun m => ha.2.2 m l))
 
-set_option diagnostics true in
 private theorem n06_bandLift_weighted_budget
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -221,7 +217,6 @@ private theorem n06_bandLift_weighted_budget
     (base := base) (loss := loss) (ε := ε)
     hT hS h href hcur hprincipal hR hAux hI J
 
-set_option diagnostics true in
 private theorem n06_bandLift_uniform
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
@@ -245,7 +240,6 @@ private theorem n06_bandLift_uniform
       (base := base) (loss := loss) (ε := ε)
       hT hS h.1.1.1.1 h.1.1.2 h.1.2.2.2.2.1 h.2 href hcur hI J N A)
 
-set_option diagnostics true in
 theorem n06_primitivePrincipal_band_lift
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (h : NonlinearPropertiesThrough05 D T S C R L K V b B base loss ε)
