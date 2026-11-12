@@ -58,6 +58,7 @@ theorem canonicalWholeNegativeTransport_mapsTo_closed :
       (Icc (C.left m) (C.right m) ×ˢ (univ : Set ℝ)) := by
   let K := n04bActualTypedAtlas hT hS hN hfield e
   have hab : C.left m < C.right m := (hN.1.1.2.2.2.1.1 m).2.1
+  dsimp only
   intro p hp
   refine ⟨?_, mem_univ _⟩
   by_cases ha : p.1 = C.left m
@@ -70,9 +71,9 @@ theorem canonicalWholeNegativeTransport_mapsTo_closed :
     exact ⟨hab.le, le_rfl⟩
   have hpin : p ∈ Ioo (C.left m) (C.right m) ×ˢ (univ : Set ℝ) :=
     ⟨⟨lt_of_le_of_ne hp.1.1 (Ne.symm ha), lt_of_le_of_ne hp.1.2 hb⟩, mem_univ _⟩
-  have he := (canonicalWholeNegativeTransport_eq_travel hT hS hN hfield e hz hs m).1 hpin
+  have he := (canonicalWholeNegativeTransport_eq_travel hT hS hN hfield e hz hs m).1 (x := p) hpin
   rw [he]
   exact Ioo_subset_Icc_self
-    (n04CoordinatesNegativeTravelTransition_mapsTo hT hS hN hfield hz hs m hpin).1
+    (n04CoordinatesNegativeTravelTransition_mapsTo hT hS hN hfield hz hs m (x := p) hpin).1
 
 end ContinuousFlexibility.Analysis

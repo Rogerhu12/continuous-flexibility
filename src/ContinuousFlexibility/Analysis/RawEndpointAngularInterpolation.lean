@@ -65,7 +65,7 @@ theorem rawEndpointAngularInterpolation_family
   have hbound (i : ι) (side : Bool) (j : ℕ) (hj : 0 < j) (hjn : j ≤ n) (θ : ℝ) :
       |deriv (A i side j) θ| ≤ M := by
     have he : deriv (A i side j) θ = mixedDerivative j 1 (ψ i side) (e side, θ) := by
-      simpa only [iteratedDeriv_one] using
+      simpa only [A, rawEndpointAngularData, e, iteratedDeriv_one] using
         iteratedDeriv_radialBoundaryJet_eq_mixedDerivative isOpen_univ
           (hψ i side).contDiffOn (e side) (fun _ => mem_univ _) j 1 θ
     rw [he]
