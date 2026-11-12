@@ -201,6 +201,153 @@ local instance n01TransportVelocityMixedGrowthCorrectionSMul (S : PhysicalSpaces
 local instance n01TransportVelocityMixedGrowthParameterSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S × ℝ) := Prod.instSMul
 
+private def transportVelocity_parameterGrading (S : PhysicalSpacesData) :
+    ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S) :=
+  pairGrading (pairGrading (sectorGrading S) realGrading)
+    (S.circle (3 / 4 : ℝ)).grading
+
+private theorem transportVelocity_parameterGrading_monotone (S : PhysicalSpacesData) :
+    Monotone (transportVelocity_parameterGrading S) :=
+  correctionParameterGrading_monotone S
+
+private theorem transportVelocity_parameterDomain_isOpen
+    (S : PhysicalSpacesData) (base : ℕ) (ε : ℝ) :
+    IsOpen (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) :=
+  (sectorNeighborhood_isOpen S base ε ε).prod
+    (isOpen_univ : IsOpen (univ : Set (CircleSpace S)))
+
+private theorem transportVelocity_domain_convex
+    (S : PhysicalSpacesData) (base : ℕ) (ε l h : ℝ) :
+    Convex ℝ ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+      (Ioo l h ×ˢ (univ : Set ℝ))) :=
+  ((sectorNeighborhood_convex S base ε ε).prod
+    (convex_univ : Convex ℝ (univ : Set (CircleSpace S)))).prod
+      ((convex_Ioo l h).prod (convex_univ : Convex ℝ (univ : Set ℝ)))
+
+private def transportVelocity_characteristicDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    (hapos : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ (m : ℕ) (y : PolarPoint),
+      y.1 ∈ Ioo (l m) (h m) →
+        0 < (originalCoefficients D S C (liftSectorParameter S C z)).a y)
+    (hdisc : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ (m : ℕ) (y : PolarPoint),
+      y.1 ∈ Ioo (l m) (h m) →
+        0 < (originalCoefficients D S C (liftSectorParameter S C z)).b y ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C z)).a y *
+            (originalCoefficients D S C (liftSectorParameter S C z)).c y)
+    (m : ℕ) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo (l m) (h m) ×ˢ (univ : Set ℝ)))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        minusCharacteristicSpeed
+          (originalCoefficients D S C (liftSectorParameter S C x.1.1)) x.2) :=
+  (N01Properties.minusCharacteristicSpeed_stripTower
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT j hcell l h hl hh hapos hdisc m).fstParameter
+      (F := CircleSpace S) (sectorNeighborhood_isOpen S base ε ε)
+      ((isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
+        (isOpen_univ : IsOpen (univ : Set ℝ)))
+
+private def transportVelocity_slopeDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (m : ℕ) (l h : ℝ) (hl : C.left m < l) (hh : h < C.right m)
+    (hdisc : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ y : PolarPoint,
+      y.1 ∈ Ioo l h →
+        0 < (originalCoefficients D S C (liftSectorParameter S C z)).b y ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C z)).a y *
+            (originalCoefficients D S C (liftSectorParameter S C z)).c y) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo l h ×ˢ (univ : Set ℝ)))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnFlowInverseSlope S C (liftSectorParameter S C x.1.1) m x.2) :=
+  (N01Properties.returnFlowInverseSlope_parameterSpatialTower
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT m l h hl hh hdisc).fstParameter
+      (F := CircleSpace S) (sectorNeighborhood_isOpen S base ε ε)
+      ((isOpen_Ioo : IsOpen (Ioo l h)).prod
+        (isOpen_univ : IsOpen (univ : Set ℝ)))
+
+private def transportVelocity_residualDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (m : ℕ) (l h : ℝ) (hl : C.left m < l) (hh : h < C.right m)
+    (hdisc : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ y : PolarPoint,
+      y.1 ∈ Ioo l h →
+        0 < (originalCoefficients D S C (liftSectorParameter S C z)).b y ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C z)).a y *
+            (originalCoefficients D S C (liftSectorParameter S C z)).c y)
+    (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
+    (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
+    (hR : N02Properties D T S C R base ε) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo l h ×ˢ (univ : Set ℝ)))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnCorrectionPulledDisplacementLinear S C χ
+          (liftSectorParameter S C x.1.1) m x.2
+            (R.residual (liftSectorParameter S C x.1.1))) :=
+  (N01Properties.returnCorrectionPulledResidual_parameterSpatialTower
+    (D := D) (T := T) (S := S) (C := C) (R := R)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT m l h hl hh hdisc χ hχ hχrange hR).fstParameter
+      (F := CircleSpace S) (sectorNeighborhood_isOpen S base ε ε)
+      ((isOpen_Ioo : IsOpen (Ioo l h)).prod
+        (isOpen_univ : IsOpen (univ : Set ℝ)))
+
+private def transportVelocity_displacementDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (m : ℕ) (l h : ℝ) (hl : C.left m < l) (hh : h < C.right m)
+    (hdisc : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ y : PolarPoint,
+      y.1 ∈ Ioo l h →
+        0 < (originalCoefficients D S C (liftSectorParameter S C z)).b y ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C z)).a y *
+            (originalCoefficients D S C (liftSectorParameter S C z)).c y)
+    (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
+    (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo l h ×ˢ (univ : Set ℝ)))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnCorrectionPulledDisplacementLinear S C χ
+          (liftSectorParameter S C x.1.1) m x.2 x.1.2) :=
+  N01Properties.returnCorrectionPulledDisplacement_parameterSpatialTower
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT m l h hl hh hdisc χ hχ hχrange
+
+private def transportVelocity_cutoffDirections
+    (S : PhysicalSpacesData) (base : ℕ) (ε l h : ℝ)
+    (χ : ℝ → ℝ) (hχ : ContDiff ℝ ∞ χ) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo l h ×ˢ (univ : Set ℝ)))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        deriv χ x.2.1) :=
+  radialCutoffScalarTower
+    (E := (StateDirections S × ℝ) × CircleSpace S)
+    (U := sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+    (V := Ioo l h ×ˢ (univ : Set ℝ)) (χ := χ)
+    (transportVelocity_parameterDomain_isOpen S base ε)
+    ((isOpen_Ioo : IsOpen (Ioo l h)).prod
+      (isOpen_univ : IsOpen (univ : Set ℝ))) hχ
+
 /-- Fixed-loss bounds for the actual independent and frozen-residual
 velocities. All geometric assumptions are the witnesses produced by
 the buffered, uniform N01 neighborhood construction. -/
@@ -247,22 +394,16 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
-  let p : ℕ → Seminorm ℝ E := pairGrading (pairGrading (sectorGrading S) realGrading)
-    (S.circle (3 / 4 : ℝ)).grading
+  let p := transportVelocity_parameterGrading S
   let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
   let H : ℕ → ℝ := fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)
-  have hp : Monotone p := correctionParameterGrading_monotone S
+  have hp := transportVelocity_parameterGrading_monotone S
   have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat _
   have hW0 (m : ℕ) : 0 ≤ W m := zero_le_one.trans (hW m)
   have hH (m : ℕ) : 0 ≤ H m := Real.rpow_nonneg
     ((material_circle_sample_weights_pos hT hN.1.1).2 m).le _
-  have hU : IsOpen U := (sectorNeighborhood_isOpen S base ε ε).prod isOpen_univ
-  have hU₀ : IsOpen (sectorNeighborhood S base ε ε) :=
-    sectorNeighborhood_isOpen S base ε ε
-  have hV (m : ℕ) : IsOpen (V m) := isOpen_Ioo.prod isOpen_univ
-  have hc (m : ℕ) : Convex ℝ (U ×ˢ V m) :=
-    ((sectorNeighborhood_convex S base ε ε).prod (convex_univ : Convex ℝ (univ : Set (CircleSpace S)))).prod
-      ((convex_Ioo (l m) (h m)).prod (convex_univ : Convex ℝ (univ : Set ℝ)))
+  have hU := transportVelocity_parameterDomain_isOpen S base ε
+  have hc := fun m : ℕ => transportVelocity_domain_convex S base ε (l m) (h m)
   have hdisc (m : ℕ) (z : StateDirections S × ℝ)
       (hz : z ∈ sectorNeighborhood S base ε ε) (y : PolarPoint)
       (hy : y.1 ∈ Ioo (l m) (h m)) :
@@ -291,42 +432,28 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
   let f₁ : ℕ → E × PolarPoint → ℝ := fun m x =>
     returnCorrectionPulledDisplacementLinear S C χ
       (liftSectorParameter S C x.1.1) m x.2 x.1.2
-  let JL₀ : ∀ m, SmoothDirections
-      (sectorNeighborhood S base ε ε ×ˢ V m)
-      (fun x : (StateDirections S × ℝ) × PolarPoint =>
-        minusCharacteristicSpeed
-          (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2) :=
-    fun m => N01Properties.minusCharacteristicSpeed_stripTower
-      (D := D) (T := T) (S := S) (C := C)
-      (base := base) (loss := loss) (ε := ε)
-      hN hS hT j hcell l h hl hh hapos (fun z hz i y hy => hdisc i z hz y hy) m
-  let JL : ∀ m, SmoothDirections (U ×ˢ V m) (fL m) :=
-    fun m => (JL₀ m).fstParameter (F := CircleSpace S) hU₀ (hV m)
-  let JA : ∀ m, SmoothDirections (U ×ˢ V m) (fA m) := fun m =>
-    (N01Properties.returnFlowInverseSlope_parameterSpatialTower
-      (D := D) (T := T) (S := S) (C := C)
-      (base := base) (loss := loss) (ε := ε)
-      hN hS hT m (l m) (h m) (hl m) (hh m) (hdisc m)).fstParameter
-        (F := CircleSpace S) hU₀ (hV m)
-  let J₀ : ∀ m, SmoothDirections (U ×ˢ V m) (f₀ m) := fun m =>
-    (N01Properties.returnCorrectionPulledResidual_parameterSpatialTower
-      (D := D) (T := T) (S := S) (C := C) (R := R)
-      (base := base) (loss := loss) (ε := ε)
-      hN hS hT m (l m) (h m) (hl m) (hh m) (hdisc m) χ hχ hχrange hR).fstParameter
-        (F := CircleSpace S) hU₀ (hV m)
-  let J₁ : ∀ m, SmoothDirections (U ×ˢ V m) (f₁ m) := fun m =>
-    N01Properties.returnCorrectionPulledDisplacement_parameterSpatialTower
-      (D := D) (T := T) (S := S) (C := C)
-      (base := base) (loss := loss) (ε := ε)
-      hN hS hT m (l m) (h m) (hl m) (hh m) (hdisc m) χ hχ hχrange
+  let JL := transportVelocity_characteristicDirections
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT j hcell l h hl hh hapos (fun z hz i y hy => hdisc i z hz y hy)
+  let JA := fun m : ℕ => transportVelocity_slopeDirections
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT m (l m) (h m) (hl m) (hh m) (hdisc m)
+  let J₀ := fun m : ℕ => transportVelocity_residualDirections
+    (D := D) (T := T) (S := S) (C := C) (R := R)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT m (l m) (h m) (hl m) (hh m) (hdisc m) χ hχ hχrange hR
+  let J₁ := fun m : ℕ => transportVelocity_displacementDirections
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT m (l m) (h m) (hl m) (hh m) (hdisc m) χ hχ hχrange
   let fZ : Fin 2 → ℕ → E × PolarPoint → ℝ :=
     Fin.cases f₀ (Fin.cases f₁ Fin.elim0)
   let JZ : ∀ c m, SmoothDirections (U ×ˢ V m) (fZ c m) :=
     Fin.cases J₀ (Fin.cases J₁ (fun i : Fin 0 => Fin.elim0 i))
-  let JC : ∀ m, SmoothDirections (U ×ˢ V m)
-      (fun x : E × PolarPoint => deriv (χ m) x.2.1) :=
-    fun m => radialCutoffScalarTower (E := E) (U := U) (V := V m)
-      (χ := χ m) hU (hV m) (hχ m)
+  let JC := fun m : ℕ =>
+    transportVelocity_cutoffDirections S base ε (l m) (h m) (χ m) (hχ m)
   have hAr (m : ℕ) (x : E) (hx : x ∈ U) (y : PolarPoint) (hy : y ∈ V m) :
       radialPartial (returnFlowInverseSlope S C (liftSectorParameter S C x.1) m) y =
         angularPartial (minusCharacteristicSpeed (originalCoefficients D S C

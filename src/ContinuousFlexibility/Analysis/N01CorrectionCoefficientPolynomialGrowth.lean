@@ -280,6 +280,206 @@ private def correctionPolynomial_entryDirections
       ((isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
         (isOpen_univ : IsOpen (univ : Set ℝ)))
 
+private def correctionPolynomial_componentDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    (i : Fin 3)
+    (f : ℕ → ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint → ℝ)
+    (hf : ∀ (m : ℕ) (x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint),
+      originalCoefficientEntry D S C i (liftSectorParameter S C x.1.1) x.2 = f m x)
+    (m : ℕ) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo (l m) (h m) ×ˢ (univ : Set ℝ))) (f m) :=
+  (correctionPolynomial_entryDirections
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε) hN hS hT j hcell l h hl hh i m).congrOn
+      (fun x _ => hf m x)
+
+private theorem correctionPolynomial_factorGrowth
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    {lam P : ℝ} (hlam : 0 < lam) (hP : 0 ≤ P)
+    (hpositive : ∀ z ∈ stateNeighborhood S C base ε, ∀ (m : ℕ) (p : PolarPoint),
+      p.1 ∈ Ioo (l m) (h m) →
+      let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2
+      d ≤ (originalCoefficients D S C z).a p ∧
+      d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -
+        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p)
+    (Ja : ∀ m, SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2))
+    (Jb : ∀ m, SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2))
+    (Jq : ∀ m, SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        Real.sqrt ((originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2 ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2 *
+            (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2))) :
+    let p := correctionPolynomial_parameterGrading S
+    let W := fun m => radialE (D.cellIndex (j m))
+    HasFlatMixedTameGrowth p W (fun _ => 1) Ja ∧
+      HasFlatMixedTameGrowth p W (fun _ => 1) Jb ∧
+        HasFlatMixedTameGrowth p W (fun _ => 1) Jq :=
+  N01Properties.originalCorrectionFactors_flat_mixed_growth
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε) (lam := lam) (P := P)
+    hN hS hT j hcell l h hl hh hlam hP hpositive Ja Jb Jq
+
+private def correctionPolynomial_outputDirections
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hR : N02Properties D T S C R base ε)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
+    (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    (hstripDisc : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m (p : PolarPoint),
+      p.1 ∈ Ioo (l m) (h m) →
+      0 < (originalCoefficients D S C (liftSectorParameter S C z)).b p ^ 2 -
+        (originalCoefficients D S C (liftSectorParameter S C z)).a p *
+          (originalCoefficients D S C (liftSectorParameter S C z)).c p)
+    (m : ℕ) :
+    SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) ×ˢ
+        (Ioo (l m) (h m) ×ˢ (univ : Set ℝ)))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnCorrectionCoefficientError D S C R χ
+          (liftSectorParameter S C x.1.1) x.2 x.1.2) :=
+  N01Properties.returnCorrectionCoefficient_parameterSpatialTower
+    (D := D) (T := T) (S := S) (C := C) (R := R)
+    (base := base) (loss := loss) (ε := ε) hN hS hT hR χ hχ hχrange
+    m (j m) (hcell m) (l m) (h m) (hl m) (hh m)
+    (fun z hz y hy => hstripDisc z hz m y hy)
+
+private theorem correctionPolynomial_actualGrowth
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {R : ReturnEquationData S}
+    {base loss : ℕ} {ε : ℝ}
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (hR : N02Properties D T S C R base ε)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (χ : ℕ → ℝ → ℝ) (hχ : ∀ m, ContDiff ℝ ∞ (χ m))
+    (hχrange : ∀ m r, r ∈ Icc (C.left m) (C.right m) → χ m r ∈ Icc (0 : ℝ) 1)
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    (hstripDisc : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ m (p : PolarPoint),
+      p.1 ∈ Ioo (l m) (h m) →
+        0 < (originalCoefficients D S C (liftSectorParameter S C z)).b p ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C z)).a p *
+            (originalCoefficients D S C (liftSectorParameter S C z)).c p)
+    {lam P : ℝ} (hlam : 0 < lam) (hP : 0 ≤ P)
+    (hpositive : ∀ z ∈ stateNeighborhood S C base ε, ∀ (m : ℕ) (p : PolarPoint),
+      p.1 ∈ Ioo (l m) (h m) →
+      let d := lam * radialE (D.cellIndex (j m)) ^ (-P) / 2
+      d ≤ (originalCoefficients D S C z).a p ∧
+      d ^ 2 ≤ (originalCoefficients D S C z).b p ^ 2 -
+        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p)
+    (Jρ : ∀ m, SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2))
+    (Je : ∀ m, SmoothDirections
+      ((sectorNeighborhood S base ε ε ×ˢ univ) ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : ((StateDirections S × ℝ) × CircleSpace S) × PolarPoint =>
+        returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
+          (R.residual (liftSectorParameter S C x.1.1))))
+    (hJρ : HasFlatMixedTameGrowth
+      (correctionPolynomial_parameterGrading S)
+      (fun m => radialE (D.cellIndex (j m)))
+      (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)) Jρ)
+    (hJe : HasFlatMixedTameGrowth
+      (correctionPolynomial_parameterGrading S)
+      (fun m => radialE (D.cellIndex (j m))) (fun _ => 1) Je) :
+    let p := correctionPolynomial_parameterGrading S
+    let W := fun m => radialE (D.cellIndex (j m))
+    let F := fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)
+    HasFlatMixedTameGrowth p W F
+      (fun m => solveSmoothDirectionsPostcomp
+        (correctionPolynomial_outputDirections
+          (D := D) (T := T) (S := S) (C := C) (R := R)
+          (base := base) (loss := loss) (ε := ε)
+          hN hS hT hR j hcell χ hχ hχrange l h hl hh hstripDisc m) (ContinuousLinearMap.fst ℝ ℝ ℝ)) ∧
+    HasFlatMixedTameGrowth p W F
+      (fun m => solveSmoothDirectionsPostcomp
+        (correctionPolynomial_outputDirections
+          (D := D) (T := T) (S := S) (C := C) (R := R)
+          (base := base) (loss := loss) (ε := ε)
+          hN hS hT hR j hcell χ hχ hχrange l h hl hh hstripDisc m) (ContinuousLinearMap.snd ℝ ℝ ℝ)) := by
+  let E := (StateDirections S × ℝ) × CircleSpace S
+  let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
+  let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
+  let p := correctionPolynomial_parameterGrading S
+  let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
+  let F : ℕ → ℝ := fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)
+  let a : ℕ → E × PolarPoint → ℝ := fun _ x =>
+    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2
+  let b : ℕ → E × PolarPoint → ℝ := fun _ x =>
+    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2
+  let c : ℕ → E × PolarPoint → ℝ := fun _ x =>
+    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2
+  let q : ℕ → E × PolarPoint → ℝ := fun m x => Real.sqrt (b m x ^ 2 - a m x * c m x)
+  let ve : ℕ → E × PolarPoint → ℝ := fun m x =>
+    returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
+      (R.residual (liftSectorParameter S C x.1.1))
+  let vr : ℕ → E × PolarPoint → ℝ := fun m x =>
+    returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2
+  let out : ℕ → E × PolarPoint → ℝ × ℝ := fun _ x =>
+    returnCorrectionCoefficientError D S C R χ (liftSectorParameter S C x.1.1) x.2 x.1.2
+  have hp : Monotone p := correctionParameterGrading_monotone S
+  have hIp : HasInterpolation p := correctionParameterGrading_hasInterpolation hS
+  have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat _
+  have hF (m : ℕ) : 0 ≤ F m :=
+    (Real.rpow_pos_of_pos ((material_circle_sample_weights_pos hT hN.1.1).2 m) _).le
+  have hU := correctionPolynomial_parameterDomain_isOpen S base ε
+  have hV (m : ℕ) : IsOpen (V m) :=
+    (isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
+      (isOpen_univ : IsOpen (univ : Set ℝ))
+  have hc := fun m : ℕ => correctionPolynomial_domain_convex S base ε (l m) (h m)
+  let Jcomponent := correctionPolynomial_componentDirections
+    (D := D) (T := T) (S := S) (C := C)
+    (base := base) (loss := loss) (ε := ε) hN hS hT j hcell l h hl hh
+  let Ja := Jcomponent 0 a (fun _ x => correctionPolynomial_entry_zero_apply D S C
+    (liftSectorParameter S C x.1.1) x.2)
+  let Jb := Jcomponent 1 b (fun _ x => correctionPolynomial_entry_one_apply D S C
+    (liftSectorParameter S C x.1.1) x.2)
+  let Jc := Jcomponent 2 c (fun _ x => correctionPolynomial_entry_two_apply D S C
+    (liftSectorParameter S C x.1.1) x.2)
+  let Jq : ∀ m, SmoothDirections (U ×ˢ V m) (q m) := fun m =>
+    correctionPolynomial_parameterSqrtDirections S (U := U ×ˢ V m)
+      (a := a m) (b := b m) (c := c m) (Ja m) (Jb m) (Jc m)
+      (fun x hx => hstripDisc x.1.1 hx.1.1 m x.2 hx.2.1)
+  have hfactor := correctionPolynomial_factorGrowth
+      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
+      (lam := lam) (P := P) hN hS hT j hcell l h hl hh hlam hP hpositive Ja Jb Jq
+  let Jout := correctionPolynomial_outputDirections
+    (D := D) (T := T) (S := S) (C := C) (R := R)
+    (base := base) (loss := loss) (ε := ε)
+    hN hS hT hR j hcell χ hχ hχrange l h hl hh hstripDisc
+  exact correctionPolynomial_growth_from_velocity
+    (I := ℕ) (E := (StateDirections S × ℝ) × CircleSpace S) (U := U) (V := V)
+    (a := a) (b := b) (q := q) (ve := ve) (vr := vr) (out := out)
+    p hp hIp W F hW hF hU hV hc (fun _ y hy => ⟨hy.1, mem_univ _⟩)
+    Ja Jb Jq Je Jρ Jout hfactor hJe hJρ
+    (fun m x hx y hy => correctionPolynomial_actual_error
+      (D := D) (T := T) (S := S) (C := C) (R := R)
+      (base := base) (loss := loss) (ε := ε) hN χ l h hl hh m x hx y hy)
+
 variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {R : ReturnEquationData S}
   {base loss : ℕ} {ε : ℝ}
@@ -335,71 +535,10 @@ theorem N01Properties.returnCorrectionCoefficient_joint_growth_of_velocity
         (hN.returnCorrectionCoefficient_parameterSpatialTower hS hT hR χ hχ hχrange
           m (j m) (hcell m) (l m) (h m) (hl m) (hh m)
           (fun z hz q hq => hstripDisc z hz m q hq)) (ContinuousLinearMap.snd ℝ ℝ ℝ)) := by
-  let E := (StateDirections S × ℝ) × CircleSpace S
-  let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
-  let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
-  let p := correctionPolynomial_parameterGrading S
-  let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
-  let F : ℕ → ℝ := fun m => T.H (T.sample m) ^ (3 / 4 : ℝ)
-  let a : ℕ → E × PolarPoint → ℝ := fun _ x =>
-    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).a x.2
-  let b : ℕ → E × PolarPoint → ℝ := fun _ x =>
-    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).b x.2
-  let c : ℕ → E × PolarPoint → ℝ := fun _ x =>
-    (originalCoefficients D S C (liftSectorParameter S C x.1.1)).c x.2
-  let q : ℕ → E × PolarPoint → ℝ := fun m x => Real.sqrt (b m x ^ 2 - a m x * c m x)
-  let ve : ℕ → E × PolarPoint → ℝ := fun m x =>
-    returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2
-      (R.residual (liftSectorParameter S C x.1.1))
-  let vr : ℕ → E × PolarPoint → ℝ := fun m x =>
-    returnCorrectionVelocityLinear D S C χ (liftSectorParameter S C x.1.1) m x.2 x.1.2
-  let out : ℕ → E × PolarPoint → ℝ × ℝ := fun _ x =>
-    returnCorrectionCoefficientError D S C R χ (liftSectorParameter S C x.1.1) x.2 x.1.2
-  have hp : Monotone p := correctionParameterGrading_monotone S
-  have hIp : HasInterpolation p := correctionParameterGrading_hasInterpolation hS
-  have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat _
-  have hF (m : ℕ) : 0 ≤ F m :=
-    (Real.rpow_pos_of_pos ((material_circle_sample_weights_pos hT hN.1.1).2 m) _).le
-  have hU := correctionPolynomial_parameterDomain_isOpen S base ε
-  have hV (m : ℕ) : IsOpen (V m) :=
-    (isOpen_Ioo : IsOpen (Ioo (l m) (h m))).prod
-      (isOpen_univ : IsOpen (univ : Set ℝ))
-  have hc := fun m : ℕ => correctionPolynomial_domain_convex S base ε (l m) (h m)
-  let Jentry := correctionPolynomial_entryDirections
-    (D := D) (T := T) (S := S) (C := C)
-    (base := base) (loss := loss) (ε := ε) hN hS hT j hcell l h hl hh
-  let Ja : ∀ m, SmoothDirections (U ×ˢ V m) (a m) := fun m =>
-    (Jentry 0 m).congrOn (fun x _ => correctionPolynomial_entry_zero_apply D S C
-      (liftSectorParameter S C x.1.1) x.2)
-  let Jb : ∀ m, SmoothDirections (U ×ˢ V m) (b m) := fun m =>
-    (Jentry 1 m).congrOn (fun x _ => correctionPolynomial_entry_one_apply D S C
-      (liftSectorParameter S C x.1.1) x.2)
-  let Jc : ∀ m, SmoothDirections (U ×ˢ V m) (c m) := fun m =>
-    (Jentry 2 m).congrOn (fun x _ => correctionPolynomial_entry_two_apply D S C
-      (liftSectorParameter S C x.1.1) x.2)
-  let Jq : ∀ m, SmoothDirections (U ×ˢ V m) (q m) := fun m =>
-    correctionPolynomial_parameterSqrtDirections S (U := U ×ˢ V m)
-      (a := a m) (b := b m) (c := c m) (Ja m) (Jb m) (Jc m)
-      (fun x hx => hstripDisc x.1.1 hx.1.1 m x.2 hx.2.1)
-  have hfactor : HasFlatMixedTameGrowth p W (fun _ => 1) Ja ∧
-      HasFlatMixedTameGrowth p W (fun _ => 1) Jb ∧
-        HasFlatMixedTameGrowth p W (fun _ => 1) Jq :=
-    N01Properties.originalCorrectionFactors_flat_mixed_growth
-      (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε)
-      (lam := lam) (P := P) hN hS hT j hcell l h hl hh hlam hP hpositive Ja Jb Jq
-  let Jout : ∀ m, SmoothDirections (U ×ˢ V m) (out m) := fun m =>
-    N01Properties.returnCorrectionCoefficient_parameterSpatialTower
-      (D := D) (T := T) (S := S) (C := C) (R := R)
-      (base := base) (loss := loss) (ε := ε) hN hS hT hR χ hχ hχrange
-      m (j m) (hcell m) (l m) (h m) (hl m) (hh m)
-      (fun z hz y hy => hstripDisc z hz m y hy)
-  exact correctionPolynomial_growth_from_velocity
-    (I := ℕ) (E := E) (U := U) (V := V)
-    (a := a) (b := b) (q := q) (ve := ve) (vr := vr) (out := out)
-    p hp hIp W F hW hF hU hV hc (fun _ y hy => ⟨hy.1, mem_univ _⟩)
-    Ja Jb Jq Je Jρ Jout hfactor hJe hJρ
-    (fun m x hx y hy => correctionPolynomial_actual_error
-      (D := D) (T := T) (S := S) (C := C) (R := R)
-      (base := base) (loss := loss) (ε := ε) hN χ l h hl hh m x hx y hy)
+  exact correctionPolynomial_actualGrowth
+    (D := D) (T := T) (S := S) (C := C) (R := R)
+    (base := base) (loss := loss) (ε := ε) (lam := lam) (P := P)
+    hN hS hT hR j hcell χ hχ hχrange l h hl hh hstripDisc hlam hP hpositive
+    Jρ Je hJρ hJe
 
 end ContinuousFlexibility.Statements
