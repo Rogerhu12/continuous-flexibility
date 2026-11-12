@@ -118,7 +118,7 @@ theorem n04Realization_inverseChart_positive_E0_jets
   have hidentity (a : Atom) :
       EqOn (f a ∘ canonicalUnitPoint K m) (atom D T S C L K z m a) unitStrip := by
     simpa only [hlift] using
-      n04Realization_canonicalAtom_unit_identity (D := D) (T := T) (L := L)
+      n04Realization_canonicalAtom_unit_identity (D := D) (T := T) (S := S) (C := C) (L := L)
         ζ m a (hlen m)
   let E : ℝ := T.E0 (T.sample (K.cell m))
   let rho : ℝ := 1 + stateGrading S (n + d) (z.1 - C.referenceState) + |z.2|
