@@ -59,6 +59,82 @@ def StripCoefficientFlatOneHighBound
       |mixedDerivative a b (fun y => (A n x v y).2) q| ≤
         K * F m * W m ^ Q * oneHighVariationWeight p low (k + loss) x v
 
+private theorem coefficientFlat_material_bound
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {D : ReferenceData} {T : MaterialData} (hT : IsMaterialData D T)
+    (p : ℕ → Seminorm ℝ E)
+    (A : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E) (PolarPoint → ℝ × ℝ))
+    (J : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E)
+      (annularSmoothCoefficientSpace D))
+    (U : Set E) (l h F W : ℕ → ℝ) (Z : PolarPoint → Prop)
+    (n B L : ℕ)
+    (hJ : ∀ x ∈ U, ∀ v : Fin n → E, (J n x v).val = A n x v)
+    (hcover : ∀ q ∈ annularOpen D, (∃ m, q.1 ∈ Ioo (l m) (h m)) ∨ Z q)
+    (hzero : ∀ q, Z q → ∀ x ∈ U, ∀ v : Fin n → E, ∀ a b : ℕ,
+      mixedDerivative a b (fun y => (A n x v y).1) q = 0 ∧
+      mixedDerivative a b (fun y => (A n x v y).2) q = 0)
+    (hflat : ∀ Q : ℝ, 0 ≤ Q → ∃ K : ℝ, 0 ≤ K ∧ ∀ m, F m * W m ^ Q ≤ K)
+    (hb : StripCoefficientFlatOneHighBound p A U l h F W n B L)
+    (r : ℝ) (hr : 0 ≤ r) :
+    CoefficientMaterialOneHighBound (T := T) p J n B L 0
+      (U ∩ {x | p B x ≤ r}) := by
+  refine coefficientMaterialOneHighBound_of_ordinary
+    (E := E) (D := D) (T := T) hT p J n B L 0 (U ∩ {x | p B x ≤ r}) ?_
+  intro k
+  obtain ⟨C, Q, hC, hQ, hstrip⟩ := hb r hr k
+  obtain ⟨K, hK, hscale⟩ := hflat Q hQ
+  refine ⟨C * K, mul_nonneg hC hK, fun x hx v a b habk q hq => ?_⟩
+  have heq := hJ x hx.1 v
+  have hfst := congrArg (fun f : PolarPoint → ℝ × ℝ =>
+    mixedDerivative a b (fun y => (f y).1) q) heq
+  have hsnd := congrArg (fun f : PolarPoint → ℝ × ℝ =>
+    mixedDerivative a b (fun y => (f y).2) q) heq
+  simp only [hfst, hsnd, pow_zero, mul_one]
+  have hW : 0 ≤ oneHighVariationWeight p B (k + L) x v :=
+    multilinearTameSize_nonneg _ _ _ (add_nonneg zero_le_one (apply_nonneg _ _)) v
+  rcases hcover q hq with ⟨m, hm⟩ | hz
+  · have hvalue := hstrip m x hx.1 hx.2 v a b habk q hm
+    have hupper : C * F m * W m ^ Q * oneHighVariationWeight p B (k + L) x v ≤
+        C * K * oneHighVariationWeight p B (k + L) x v := by
+      have hh := mul_le_mul_of_nonneg_right
+        (mul_le_mul_of_nonneg_left (hscale m) hC) hW
+      simpa only [mul_assoc] using hh
+    exact ⟨hvalue.1.trans hupper, hvalue.2.trans hupper⟩
+  · have hvalue := hzero q hz x hx.1 v a b
+    constructor
+    · simpa only [hvalue.1, abs_zero] using
+        (mul_nonneg (mul_nonneg hC hK) hW)
+    · simpa only [hvalue.2, abs_zero] using
+        (mul_nonneg (mul_nonneg hC hK) hW)
+
+private theorem coefficientFlat_local_bounds_of_ball_bounds
+    {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
+    {D : ReferenceData} {T : MaterialData}
+    (p : ℕ → Seminorm ℝ E)
+    (J : ∀ n : ℕ, E → MultilinearMap ℝ (fun _ : Fin n => E)
+      (annularSmoothCoefficientSpace D))
+    (U : Set E) (P : ℕ → ℕ → ℕ → Prop)
+    (hP : ∀ n, ∃ B L, P n B L)
+    (hbound : ∀ n B L, P n B L → ∀ r : ℝ, 0 ≤ r →
+      CoefficientMaterialOneHighBound (T := T) p J n B L 0
+        (U ∩ {x | p B x ≤ r})) :
+    LocalCoefficientMaterialTameBounds (T := T) (U := U) p J := by
+  intro n x₀ hx₀
+  obtain ⟨B, L, hBL⟩ := hP n
+  refine ⟨B, L, 0, 1, zero_lt_one, ?_⟩
+  have hball := hbound n B L hBL (p B x₀ + 1)
+    (add_nonneg (apply_nonneg _ _) zero_le_one)
+  intro k
+  obtain ⟨K, hK, hKb⟩ := hball k
+  refine ⟨K, hK, fun x hx v a b hab q => hKb x ⟨hx.1, ?_⟩ v a b hab q⟩
+  calc
+    p B x ≤ p B (x - x₀) + p B x₀ := by
+      simpa only [sub_add_cancel] using map_add_le_add (p B) (x - x₀) x₀
+    _ ≤ 1 + p B x₀ := add_le_add hx.2.le (le_refl _)
+    _ = p B x₀ + 1 := add_comm _ _
+
 local instance n01CorrectionCoefficientFlatBoundsStateSMul (S : PhysicalSpacesData) :
     SMul ℝ (AnnularState S) := Prod.instSMul
 
@@ -102,44 +178,41 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_material_bound_of_fl
       (hN.returnCorrectionSmoothCoefficientJets hS hT hR j hcell χ hχrange hcutoff hdisc
         hχ hsupp hend l h hl hh hstripSupport hstripDisc)
       n B L 0 ((sectorNeighborhood S base ε ε ×ˢ univ) ∩ {x | p B x ≤ r}) := by
-  apply coefficientMaterialOneHighBound_of_ordinary hT
-  intro k
-  obtain ⟨A, Q, hA, hQ, hab⟩ := hb r hr k
-  obtain ⟨K, hK, hflat⟩ := hN.control_actual_cell_flat_radialE_bounded hS hT
-    (by norm_num : (0 : ℝ) < 3 / 4) hQ
-  refine ⟨A * K, mul_nonneg hA hK.le, fun x hx v a b habk q hq => ?_⟩
-  have heq := hN.returnCorrectionSmoothCoefficientJets_apply hS hT hR j hcell
-    χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh hstripSupport hstripDisc n x hx.1 v
-  have hfst := congrArg (fun f : PolarPoint → ℝ × ℝ =>
-    mixedDerivative a b (fun y => (f y).1) q) heq
-  have hsnd := congrArg (fun f : PolarPoint → ℝ × ℝ =>
-    mixedDerivative a b (fun y => (f y).2) q) heq
-  rw [hfst, hsnd, pow_zero, mul_one]
-  have hW : 0 ≤ oneHighVariationWeight p B (k + L) x v :=
-    multilinearTameSize_nonneg _ _ _ (add_nonneg zero_le_one (apply_nonneg _ _)) v
-  rcases hN.cutoffStrip_or_eventually_zero χ hsupp hend l h hstripSupport hq.1 with
-    ⟨m, hm⟩ | hzero
-  · have hvalue := hab m x hx.1 hx.2 v a b habk q hm
-    have hupper : A * T.H (T.sample m) ^ (3 / 4 : ℝ) *
-        radialE (D.cellIndex (j m)) ^ Q * oneHighVariationWeight p B (k + L) x v ≤
-        A * K * oneHighVariationWeight p B (k + L) x v := by
-      have hh := mul_le_mul_of_nonneg_right
-        (mul_le_mul_of_nonneg_left (hflat m (j m) (hcell m)) hA) hW
-      simpa only [mul_assoc] using hh
-    exact ⟨hvalue.1.trans hupper, hvalue.2.trans hupper⟩
-  · have hf0 := hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
-      hS hT hR j hcell χ hχrange hcutoff hdisc
-      (ContinuousLinearMap.fst ℝ ℝ ℝ) hzero a b n x hx.1 v
-    have hs0 := hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
-      hS hT hR j hcell χ hχrange hcutoff hdisc
-      (ContinuousLinearMap.snd ℝ ℝ ℝ) hzero a b n x hx.1 v
-    simp only [ContinuousLinearMap.coe_fst'] at hf0
-    simp only [ContinuousLinearMap.coe_snd'] at hs0
-    constructor
-    · simpa only [hf0, abs_zero] using
-        (mul_nonneg (mul_nonneg hA hK.le) hW)
-    · simpa only [hs0, abs_zero] using
-        (mul_nonneg (mul_nonneg hA hK.le) hW)
+  let A : ∀ k : ℕ, ((StateDirections S × ℝ) × CircleSpace S) →
+      MultilinearMap ℝ (fun _ : Fin k => (StateDirections S × ℝ) × CircleSpace S)
+        (PolarPoint → ℝ × ℝ) :=
+    hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
+  let J : ∀ k : ℕ, ((StateDirections S × ℝ) × CircleSpace S) →
+      MultilinearMap ℝ (fun _ : Fin k => (StateDirections S × ℝ) × CircleSpace S)
+        (annularSmoothCoefficientSpace D) :=
+    hN.returnCorrectionSmoothCoefficientJets hS hT hR j hcell χ hχrange hcutoff hdisc
+      hχ hsupp hend l h hl hh hstripSupport hstripDisc
+  have hflat (Q : ℝ) (hQ : 0 ≤ Q) :
+      ∃ K : ℝ, 0 ≤ K ∧ ∀ m,
+        T.H (T.sample m) ^ (3 / 4 : ℝ) * radialE (D.cellIndex (j m)) ^ Q ≤ K := by
+    have data := hN.control_actual_cell_flat_radialE_bounded hS hT
+      (by norm_num : (0 : ℝ) < 3 / 4) hQ
+    exact ⟨data.choose, data.choose_spec.1.le,
+      fun m => data.choose_spec.2 m (j m) (hcell m)⟩
+  refine coefficientFlat_material_bound
+    (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) hT
+    p A J (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) l h
+    (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ))
+    (fun m => radialE (D.cellIndex (j m)))
+    (fun q => ∀ᶠ r in 𝓝 q.1, ∀ m, deriv (χ m) r = 0) n B L
+    (fun x hx v => hN.returnCorrectionSmoothCoefficientJets_apply hS hT hR j hcell
+      χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh hstripSupport hstripDisc n x hx v)
+    (fun q hq => hN.cutoffStrip_or_eventually_zero χ hsupp hend l h hstripSupport hq.1)
+    ?_ hflat hb r hr
+  intro q hzero x hx v a b
+  have hf0 := hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
+    hS hT hR j hcell χ hχrange hcutoff hdisc
+    (ContinuousLinearMap.fst ℝ ℝ ℝ) (p := q) hzero a b n x hx v
+  have hs0 := hN.returnCorrectionCoefficientScalarJets_component_mixed_zero
+    hS hT hR j hcell χ hχrange hcutoff hdisc
+    (ContinuousLinearMap.snd ℝ ℝ ℝ) (p := q) hzero a b n x hx v
+  simpa only [ContinuousLinearMap.coe_fst', ContinuousLinearMap.coe_snd'] using
+    And.intro hf0 hs0
 
 /-- The local tame interface for the same smooth coefficient jets. The
 material exponent is zero, and the low order and loss precede every
@@ -155,18 +228,25 @@ theorem N01Properties.returnCorrectionSmoothCoefficientJets_local_bounds_of_flat
       (U := sectorNeighborhood S base ε ε ×ˢ univ) p
       (hN.returnCorrectionSmoothCoefficientJets hS hT hR j hcell χ hχrange hcutoff hdisc
         hχ hsupp hend l h hl hh hstripSupport hstripDisc) := by
-  intro n x₀ hx₀
-  obtain ⟨B, L, hb⟩ := hb n
-  refine ⟨B, L, 0, 1, zero_lt_one, ?_⟩
-  have hbound := hN.returnCorrectionSmoothCoefficientJets_material_bound_of_flat_strips
-    hS hT hR j hcell χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh
-    hstripSupport hstripDisc p n B L hb (p B x₀ + 1)
-    (add_nonneg (apply_nonneg _ _) zero_le_one)
-  intro k
-  obtain ⟨K, hK, hKb⟩ := hbound k
-  refine ⟨K, hK, fun x hx v a b hab q => hKb x ⟨hx.1, ?_⟩ v a b hab q⟩
-  have htriangle := map_add_le_add (p B) (x - x₀) x₀
-  rw [sub_add_cancel] at htriangle
-  linarith only [htriangle, hx.2]
+  let A : ∀ k : ℕ, ((StateDirections S × ℝ) × CircleSpace S) →
+      MultilinearMap ℝ (fun _ : Fin k => (StateDirections S × ℝ) × CircleSpace S)
+        (PolarPoint → ℝ × ℝ) :=
+    hN.returnCorrectionCoefficientScalarJets hS hT hR j hcell χ hχrange hcutoff hdisc
+  let J : ∀ k : ℕ, ((StateDirections S × ℝ) × CircleSpace S) →
+      MultilinearMap ℝ (fun _ : Fin k => (StateDirections S × ℝ) × CircleSpace S)
+        (annularSmoothCoefficientSpace D) :=
+    hN.returnCorrectionSmoothCoefficientJets hS hT hR j hcell χ hχrange hcutoff hdisc
+      hχ hsupp hend l h hl hh hstripSupport hstripDisc
+  exact coefficientFlat_local_bounds_of_ball_bounds
+    (E := (StateDirections S × ℝ) × CircleSpace S) (D := D) (T := T) p J
+    (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S)))
+    (fun n B L => StripCoefficientFlatOneHighBound p A
+      (sectorNeighborhood S base ε ε ×ˢ (univ : Set (CircleSpace S))) l h
+      (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ))
+      (fun m => radialE (D.cellIndex (j m))) n B L)
+    hb (fun n B L hn r hr =>
+      hN.returnCorrectionSmoothCoefficientJets_material_bound_of_flat_strips
+        hS hT hR j hcell χ hχrange hcutoff hdisc hχ hsupp hend l h hl hh
+        hstripSupport hstripDisc p n B L hn r hr)
 
 end ContinuousFlexibility.Statements
