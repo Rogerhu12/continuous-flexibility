@@ -60,7 +60,7 @@ jobs:
         # download another run's artifact. Each green line run uploads its build as
         # `lake-build-line`; for every `Merge line/X (sha)` commit not yet covered by
         # main's cache layer, oldest first, extract that line head's build on top.
-        if: github.ref_name == 'main'
+        if: github.ref_name == 'main' || startsWith(github.ref_name, 'integrate/')
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
