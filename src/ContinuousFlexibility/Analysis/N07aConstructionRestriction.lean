@@ -113,16 +113,18 @@ theorem n07a_N01_restrict
       convert hfactor using 1
       ring
     exact (hJ z (hU hz) v).trans (mul_le_mul_of_nonneg_left hw hfactor')
-  · intro k s
-    let B : ℝ := (hflowj k s).choose
-    have hB : 0 < B := (hflowj k s).choose_spec.1
-    have hBb := (hflowj k s).choose_spec.2
+  · intro k
+    obtain ⟨parameterLoss, hparameter⟩ := hflowj k
+    refine ⟨parameterLoss, fun s => ?_⟩
+    let B : ℝ := (hparameter s).choose
+    have hB : 0 < B := (hparameter s).choose_spec.1
+    have hBb := (hparameter s).choose_spec.2
     refine ⟨B, hB, fun m a b p hab hp => ?_⟩
     let J := (hBb m a b p hab hp).choose
     have hJ := (hBb m a b p hab hp).choose_spec
     refine ⟨smoothDirectionsRestrict J hOpen hU, fun z hz v => ?_⟩
     have hw := n07a_oneHighVariationWeight_base_mono _ hmono hb
-      (s + loss) (z - (C.referenceState, 0)) v
+      (s + loss + parameterLoss) (z - (C.referenceState, 0)) v
     have hfactor := n07a_materialSample_jetFactor_nonneg hD.1 hT hB.le (C.cell m)
     have hfactor' : 0 ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B := by
