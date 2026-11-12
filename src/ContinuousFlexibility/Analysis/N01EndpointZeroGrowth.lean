@@ -61,14 +61,15 @@ theorem N01Properties.endpointFlowCircle_circleNorm_local_growth_uniform_radius
   let bounds := N01Properties.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius
     (D := D) (T := T) (S := S) (C := C) (base := base) (loss := loss) (ε := ε) hN hS hT
   let B : ℕ := bounds.choose
-  let L : ℕ := bounds.choose_spec.choose
-  have hB : base ≤ B := bounds.choose_spec.choose_spec.1
+  let lossData := bounds.choose_spec.2 0
+  let L : ℕ := lossData.choose
+  have hB : base ≤ B := bounds.choose_spec.1
   let p := pairGrading (sectorGrading S) realGrading
   have hzero : (0 : StateDirections S × ℝ) ∈ sectorNeighborhood S base ε ε :=
     ⟨(sectorGrading S base).map_zero'.trans_lt hN.2.1,
       (abs_zero : |(0 : ℝ)| = 0).trans_lt hN.2.1⟩
   refine ⟨B, L, hB, fun R hR s hs => ?_⟩
-  let estimate := bounds.choose_spec.choose_spec.2 0 R hR s hs
+  let estimate := lossData.choose_spec R hR s hs
   let K : ℝ := estimate.choose
   have hK : 0 ≤ K := estimate.choose_spec.1
   refine ⟨K * (R + 1), mul_nonneg hK (add_nonneg hR zero_le_one), ?_⟩

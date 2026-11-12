@@ -32,8 +32,8 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
 theorem N01Properties.sectorFlow_mixed_tower
-    (hN : N01Properties D T S C base loss ε) (k s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m a b p, a + b ≤ s →
+    (hN : N01Properties D T S C base loss ε) (k : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p, a + b ≤ s →
       p.1 ∈ Ioo (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m a b p (liftSectorParameter S C z)),
@@ -42,8 +42,11 @@ theorem N01Properties.sectorFlow_mixed_tower
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-              base (s + loss) z v := by
-  let data := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+              base (s + loss + d) z v := by
+  obtain ⟨d, horders⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  refine ⟨d, ?_⟩
+  intro s
+  let data := horders s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
   refine ⟨B, hB, ?_⟩
@@ -75,7 +78,7 @@ theorem N01Properties.sectorFlow_mixed_tower
     (fun i => sectorParameterInclusion S (v i))
   have hvalue := congrArg (fun y : ℝ =>
     min (p.1 - C.left m) (C.right m - p.1) ^ a * |y|) heq
-  have hweight := oneHighVariationWeight_sector_lift S C base (s + loss) z v
+  have hweight := oneHighVariationWeight_sector_lift S C base (s + loss + d) z v
   exact hvalue.trans_le (hraw.trans_eq (congrArg (fun W : ℝ =>
     B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ B * W) hweight))
@@ -85,11 +88,11 @@ def N01Properties.sectorFlowMixedTower
     (m a b : ℕ) (p : PolarPoint) (hp : p.1 ∈ Ioo (C.left m) (C.right m)) :
     SmoothDirections (sectorNeighborhood S base ε ε)
       (fun z => ordinaryFlowFamily S C m a b p (liftSectorParameter S C z)) :=
-  ((hN.sectorFlow_mixed_tower 0 (a + b)).choose_spec.2 m a b p le_rfl hp).choose
+  (((hN.sectorFlow_mixed_tower 0).choose_spec (a + b)).choose_spec.2 m a b p le_rfl hp).choose
 
 theorem N01Properties.sectorFlowMixedTower_bound
-    (hN : N01Properties D T S C base loss ε) (k s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m a b p (hab : a + b ≤ s)
+    (hN : N01Properties D T S C base loss ε) (k : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b p (hab : a + b ≤ s)
       (hp : p.1 ∈ Ioo (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → (StateDirections S × ℝ),
         min (p.1 - C.left m) (C.right m - p.1) ^ a *
@@ -97,8 +100,11 @@ theorem N01Properties.sectorFlowMixedTower_bound
           B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
             T.E0 (T.sample (C.cell m)) ^ B *
             oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-              base (s + loss) z v := by
-  let data := hN.sectorFlow_mixed_tower k s
+              base (s + loss + d) z v := by
+  obtain ⟨d, horders⟩ := hN.sectorFlow_mixed_tower k
+  refine ⟨d, ?_⟩
+  intro s
+  let data := horders s
   refine ⟨data.choose, data.choose_spec.1, ?_⟩
   intro m a b p hab hp z hz v
   let pointData := data.choose_spec.2 m a b p hab hp
@@ -115,13 +121,14 @@ theorem N01Properties.sectorFlowMixedTower_uniform_on_radial_interval
       (fun p : Icc l h × ℝ => hN.sectorFlowMixedTower m a b (p.1, p.2)
         ⟨hl.trans_le p.1.property.1, p.1.property.2.trans_lt hh⟩) := by
   intro n
-  let data := hN.sectorFlowMixedTower_bound n (a + b)
+  obtain ⟨parameterLoss, horders⟩ := hN.sectorFlowMixedTower_bound n
+  let data := horders (a + b)
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
   let d : ℝ := min (l - C.left m) (C.right m - h)
   have hd : 0 < d := lt_min (sub_pos.mpr hl) (sub_pos.mpr hh)
   let q : Seminorm ℝ (StateDirections S × ℝ) :=
-    pairGrading (sectorGrading S) realGrading (max base (a + b + loss))
+    pairGrading (sectorGrading S) realGrading (max base (a + b + loss + parameterLoss))
   let W : ℝ := B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
     T.E0 (T.sample (C.cell m)) ^ B
   have hsample := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 (C.cell m)
@@ -147,21 +154,21 @@ theorem N01Properties.sectorFlowMixedTower_uniform_on_radial_interval
       simpa only [Real.one_rpow, mul_one, one_div] using
         (one_div_le_one_div_of_le hd hdist)) hraw
   have hw := oneHighVariationWeight_le_seminorm_product
-    (pairGrading (sectorGrading S) realGrading) q base (a + b + loss)
+    (pairGrading (sectorGrading S) realGrading) q base (a + b + loss + parameterLoss)
     (sectorPairGrading_monotone S (le_max_left _ _))
     (sectorPairGrading_monotone S (le_max_right _ _)) z v
   have hbound' : |(hN.sectorFlowMixedTower m a b (p.1, p.2) hp).D n z v| ≤
       d⁻¹ ^ a * (W * oneHighVariationWeight
-        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v) := by
+        (pairGrading (sectorGrading S) realGrading) base (a + b + loss + parameterLoss) z v) := by
     simpa only [Real.one_rpow, mul_one, W, B] using hbound
   apply hbound'.trans
   have hmul := mul_le_mul_of_nonneg_left hw
     (mul_nonneg (pow_nonneg (inv_nonneg.mpr hd.le) a) hW)
   calc
     d⁻¹ ^ a * (W * oneHighVariationWeight
-        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v) =
+        (pairGrading (sectorGrading S) realGrading) base (a + b + loss + parameterLoss) z v) =
       (d⁻¹ ^ a * W) * oneHighVariationWeight
-        (pairGrading (sectorGrading S) realGrading) base (a + b + loss) z v := by ring
+        (pairGrading (sectorGrading S) realGrading) base (a + b + loss + parameterLoss) z v := by ring
     _ ≤ (d⁻¹ ^ a * W) * (((n : ℝ) + 1) * (1 + q z) * ∏ i, q (v i)) := hmul
     _ = A * (1 + q z) * ∏ i, q (v i) := by dsimp only [A]; ring
 

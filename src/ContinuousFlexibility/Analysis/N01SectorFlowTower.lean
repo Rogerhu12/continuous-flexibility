@@ -30,16 +30,20 @@ private theorem sector_drop_zero_power_factor {a b c : ℝ}
 theorem N01Properties.sectorFlow_tower
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
-    (hN : N01Properties D T S C base loss ε) (k s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
+    (hN : N01Properties D T S C base loss ε) (k : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m b θ r, b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → (StateDirections S × ℝ),
         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 k s
+            base (s + loss + d) z v := by
+  obtain ⟨d, horders⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 k
+  refine ⟨d, ?_⟩
+  intro s
+  let hdata := horders s
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (m b : ℕ) (θ r : ℝ), b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
@@ -49,7 +53,7 @@ theorem N01Properties.sectorFlow_tower
         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
+            base (s + loss + d) z v := by
     intro m b θ r hb hr
     let htower := hdata.choose_spec.2 m 0 b (r, θ)
       (by simpa only [zero_add] using hb) hr
@@ -81,7 +85,7 @@ theorem N01Properties.sectorFlow_tower
     have hb' := (sector_drop_zero_power_factor hraw).trans_eq
       (congrArg (fun W : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B * W)
-        (oneHighVariationWeight_sector_lift S C base (s + loss) z v))
+        (oneHighVariationWeight_sector_lift S C base (s + loss + d) z v))
     exact (congrArg abs heq).trans_le hb'
   exact Exists.intro B (And.intro hB hpoint)
 

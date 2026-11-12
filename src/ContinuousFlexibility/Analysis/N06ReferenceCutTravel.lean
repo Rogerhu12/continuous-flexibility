@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06ReferenceNullTransport
 import ContinuousFlexibility.Analysis.N06IrrationalCircleRigidity
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The actual reference cut bisects the optical travel

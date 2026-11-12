@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N05TricomiNullCoordinates
 import ContinuousFlexibility.Analysis.N01RadialFlow
 import Mathlib.Topology.Algebra.Field
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Transport of the actual reference null coordinates

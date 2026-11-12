@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N06N05ModalTraces
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Original N05 modal transmission using only the actual closed pieces

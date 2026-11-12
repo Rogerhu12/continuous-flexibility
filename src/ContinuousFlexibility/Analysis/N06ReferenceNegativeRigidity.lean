@@ -1,6 +1,7 @@
 import ContinuousFlexibility.Analysis.N06ReferenceCutTravel
 import ContinuousFlexibility.Analysis.N06NegativePieceFiniteness
 import Mathlib.Analysis.Calculus.Deriv.MeanValue
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # Radiality of the selected reference charts on the negative halves

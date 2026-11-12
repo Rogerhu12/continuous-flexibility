@@ -16,7 +16,8 @@ run_cmd do
     "ScalarWeighted", "Tame", "Spaces", "R05a", "R05b", "R06a", "R06b", "R06c", "R07",
     "R08", "R09", "R10a", "R10b", "R11a", "R11b", "R12", "N01a", "N01b", "N01c", "N02N03",
     "N04Root", "N04Cubic", "N04Transmission", "N04a", "N04b", "N04Coordinates", "N05",
-    "N06", "N07a", "N07b", "N08", "N09N10", "Solve", "N12"]
+    "N06", "N07a", "N07b", "N08", "N09N10", "Solve", "N12",
+    "N01cCoefficients", "N01cSpeeds", "N01cFlows"]
   let mut proved : Array String := #[]
   let mut openNodes : Array String := #[]
   for n in nodes do
@@ -33,8 +34,23 @@ run_cmd do
   logInfo m!"open: {openNodes}"
   let endpoint ← collectAxioms `FlexibleSphere.exists_closedBending
   logInfo m!"axioms of FlexibleSphere.exists_closedBending: {endpoint}"
+  -- Strictly close all four N01c declarations; other nodes retain the status audit above.
+  let strictNodes := #["N01cCoefficients", "N01cSpeeds", "N01cFlows", "N01c"]
+  for n in strictNodes do
+    let name := (`ContinuousFlexibility.Blueprint).str n
+    unless env.contains name do
+      throwError "missing required N01c declaration {name}"
+    let axioms ← collectAxioms name
+    for ax in axioms do
+      unless ax == ``propext || ax == ``Classical.choice || ax == ``Quot.sound do
+        throwError "N01c axiom gate failed: {name} depends on {ax}"
+  logInfo m!"N01c axiom gate passed: {strictNodes}"
 
 #print axioms ContinuousFlexibility.Blueprint.R06a
+#print axioms ContinuousFlexibility.Blueprint.N01cCoefficients
+#print axioms ContinuousFlexibility.Blueprint.N01cSpeeds
+#print axioms ContinuousFlexibility.Blueprint.N01cFlows
+#print axioms ContinuousFlexibility.Blueprint.N01c
 #print axioms ContinuousFlexibility.Blueprint.ScalarWeighted
 
 -- The external-input tool has no blueprint node: audit its actual endpoints.

@@ -1,3 +1,4 @@
+import ContinuousFlexibility.Analysis.N05CanonicalGeometryAccess
 import ContinuousFlexibility.Analysis.N05CanonicalPhysicalAE
 import Mathlib.LinearAlgebra.Basis.Fin
 
@@ -6,8 +7,9 @@ import Mathlib.LinearAlgebra.Basis.Fin
 
 The coordinate determinant used by N04 is the determinant of its actual
 Fréchet derivative. The change-of-variables theorem therefore applies to
-the actual physical half-period tiles and their source measures. At the
-controlled reference chart this determinant is the real radial derivative.
+the actual physical domain intersected with a half-period and its source
+measure. At the controlled reference chart the physical domain is a radial
+rectangle and this determinant is the real radial derivative.
 -/
 
 noncomputable section
@@ -29,7 +31,7 @@ theorem n05_planeJacobian_eq_det (Φ : PolarPoint → PolarPoint) (p : PolarPoin
     Matrix.cons_val_zero, Matrix.cons_val_one, ContinuousLinearMap.coe_coe]
   simp only [planeJacobian, mul_comm]
 
-/-- An angle-preserving actual chart maps the physical half-period tile
+/-- An angle-preserving actual chart maps its current half-period domain
 bijectively onto the frozen canonical rectangle. -/
 theorem n05_canonicalChart_halfPeriod_bijOn
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
@@ -40,9 +42,10 @@ theorem n05_canonicalChart_halfPeriod_bijOn
     (hs : stateSector S z.1) (m : ℕ)
     (hangle : ∀ p ∈ physicalPieceOpen S K z m, (K.chart z m p).2 = p.2) :
     BijOn (K.chart z m)
-      (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))
+      (n05PhysicalPieceHalfPeriod S K z m)
       (Ioo (K.left m) (K.right m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
-  obtain ⟨hΦ, hΨ, hleft, hright, _⟩ := h04.1.charts z hz hs m
+  have hcharts := h04.1.charts
+  obtain ⟨hΦ, hΨ, hleft, hright, _⟩ := hcharts z hz hs m
   refine ⟨?_, ?_, ?_⟩
   · intro p hp
     have hpopen : p ∈ physicalPieceOpen S K z m := hp.1
@@ -61,7 +64,7 @@ theorem n05_canonicalChart_halfPeriod_bijOn
       hright p hpopen⟩
 
 /-- Actual differentiability on the open piece gives the derivative required
-on its half-period tile, including the angular boundary. -/
+on its intersection with the half-period, including the angular boundary. -/
 theorem n05_canonicalChart_hasFDerivWithin
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
@@ -69,10 +72,11 @@ theorem n05_canonicalChart_hasFDerivWithin
     (h04 : N04Properties D T S C L K base loss ε)
     {z : AnnularState S × ℝ} (hz : z ∈ stateNeighborhood S C base ε)
     (hs : stateSector S z.1) (m : ℕ) :
-    ∀ p ∈ physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi),
+    ∀ p ∈ n05PhysicalPieceHalfPeriod S K z m,
       HasFDerivWithinAt (K.chart z m) (fderiv ℝ (K.chart z m) p)
-        (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) p := by
-  have hc := (h04.1.charts z hz hs m).2.2.2.2.1
+        (n05PhysicalPieceHalfPeriod S K z m) p := by
+  have hcharts := h04.1.charts
+  have hc := (hcharts z hz hs m).2.2.2.2.1
   intro p hp
   exact ((hc.differentiableOn (by simp)).hasFDerivAt
     ((h04.1.domains z hz hs m).1.mem_nhds hp.1)).hasFDerivWithinAt
@@ -90,11 +94,10 @@ theorem n05_canonicalChart_integrable_iff
     Integrable g (canonicalMeasure S K m) ↔
       Integrable (fun p => |planeJacobian (K.chart z m) p| * g (K.chart z m p))
         (volume.restrict
-          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi))) := by
+          (n05PhysicalPieceHalfPeriod S K z m)) := by
   have hb := n05_canonicalChart_halfPeriod_bijOn h04 hz hs m hangle
   have he := integrableOn_image_iff_integrableOn_abs_det_fderiv_smul volume
-    ((h04.1.domains z hz hs m).1.measurableSet.inter
-      (MeasurableSet.univ.prod measurableSet_Ioc))
+    (n05_physicalPieceHalfPeriod_measurable h04 hz hs m)
     (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [IntegrableOn, canonicalMeasure, ← n05_planeJacobian_eq_det,
@@ -114,11 +117,10 @@ theorem n05_canonicalChart_integral
     (∫ p, g p ∂canonicalMeasure S K m) =
       ∫ p, |planeJacobian (K.chart z m) p| * g (K.chart z m p)
         ∂volume.restrict
-          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+          (n05PhysicalPieceHalfPeriod S K z m) := by
   have hb := n05_canonicalChart_halfPeriod_bijOn h04 hz hs m hangle
   have he := integral_image_eq_integral_abs_det_fderiv_smul volume
-    ((h04.1.domains z hz hs m).1.measurableSet.inter
-      (MeasurableSet.univ.prod measurableSet_Ioc))
+    (n05_physicalPieceHalfPeriod_measurable h04 hz hs m)
     (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [canonicalMeasure, ← n05_planeJacobian_eq_det, smul_eq_mul] using he
@@ -137,14 +139,72 @@ theorem n05_canonicalChart_lintegral
     (∫⁻ p, g p ∂canonicalMeasure S K m) =
       ∫⁻ p, ENNReal.ofReal |planeJacobian (K.chart z m) p| * g (K.chart z m p)
         ∂volume.restrict
-          (physicalPieceOpen S K z m ∩ (univ ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+          (n05PhysicalPieceHalfPeriod S K z m) := by
   have hb := n05_canonicalChart_halfPeriod_bijOn h04 hz hs m hangle
   have he := lintegral_image_eq_lintegral_abs_det_fderiv_mul volume
-    ((h04.1.domains z hz hs m).1.measurableSet.inter
-      (MeasurableSet.univ.prod measurableSet_Ioc))
+    (n05_physicalPieceHalfPeriod_measurable h04 hz hs m)
     (n05_canonicalChart_hasFDerivWithin h04 hz hs m) hb.injOn g
   rw [hb.image_eq] at he
   simpa only [canonicalMeasure, ← n05_planeJacobian_eq_det] using he
+
+/-- Reference integrability is the current-domain theorem specialized by
+the actual reference-domain identity. -/
+theorem n05_referenceCanonicalChart_integrable_iff
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss : ℕ} {ε : ℝ} (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) (m : ℕ)
+    (hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2) (g : PolarPoint → ℝ) :
+    Integrable g (canonicalMeasure S K m) ↔
+      Integrable (fun p => |planeJacobian (K.chart (C.referenceState, 0) m) p| *
+        g (K.chart (C.referenceState, 0) m p))
+        (volume.restrict
+          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi)) := by
+  have ha : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    simpa only [h04.1.referenceDomain m] using hangle
+  simpa only [n05_reference_physicalHalfPeriod_eq h04 m] using
+    n05_canonicalChart_integrable_iff h04 hz hs m ha g
+
+theorem n05_referenceCanonicalChart_integral
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss : ℕ} {ε : ℝ} (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) (m : ℕ)
+    (hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2) (g : PolarPoint → ℝ) :
+    (∫ p, g p ∂canonicalMeasure S K m) =
+      ∫ p, |planeJacobian (K.chart (C.referenceState, 0) m) p| *
+        g (K.chart (C.referenceState, 0) m p)
+        ∂volume.restrict
+          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+  have ha : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    simpa only [h04.1.referenceDomain m] using hangle
+  simpa only [n05_reference_physicalHalfPeriod_eq h04 m] using
+    n05_canonicalChart_integral h04 hz hs m ha g
+
+theorem n05_referenceCanonicalChart_lintegral
+    {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
+    {C : NonlinearGeometryData S} {L : ReturnCorrectionData S} {K : CanonicalData S}
+    {base loss : ℕ} {ε : ℝ} (h04 : N04Properties D T S C L K base loss ε)
+    (hz : (C.referenceState, 0) ∈ stateNeighborhood S C base ε)
+    (hs : stateSector S C.referenceState) (m : ℕ)
+    (hangle : ∀ p ∈ referencePhysicalPieceOpen S K m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2) (g : PolarPoint → ENNReal) :
+    (∫⁻ p, g p ∂canonicalMeasure S K m) =
+      ∫⁻ p, ENNReal.ofReal |planeJacobian (K.chart (C.referenceState, 0) m) p| *
+        g (K.chart (C.referenceState, 0) m p)
+        ∂volume.restrict
+          (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) := by
+  have ha : ∀ p ∈ physicalPieceOpen S K (C.referenceState, 0) m,
+      (K.chart (C.referenceState, 0) m p).2 = p.2 := by
+    simpa only [h04.1.referenceDomain m] using hangle
+  simpa only [n05_reference_physicalHalfPeriod_eq h04 m] using
+    n05_canonicalChart_lintegral h04 hz hs m ha g
 
 /-- At the controlled reference, the true planar Jacobian is exactly the
 ordinary radial derivative occurring in the coordinate bounds. -/
@@ -159,12 +219,10 @@ theorem n05_reference_planeJacobian_radial
     planeJacobian (K.chart (C.referenceState, 0) m) p =
       deriv (fun r => (K.chart (C.referenceState, 0) m (r, 0)).1) p.1 := by
   have h01 := h.1.1.1
-  have hcActual := (h.2.2.2.2.1.1.charts (C.referenceState, 0)
+  have hcharts := n05_reference_charts h.2.2.2.2.1
+  have hc := (hcharts
     (n05_referenceState_mem h01.2.1)
     (n05_referenceState_sector h01.2.2.1) m).2.2.2.2.1
-  have hc : ContDiffOn ℝ ∞ (K.chart (C.referenceState, 0) m)
-      (referencePhysicalPieceOpen S K m) := by
-    simpa only [h.2.2.2.2.1.1.referenceDomain m] using hcActual
   let ξ : ℝ → ℝ := fun r => (K.chart (C.referenceState, 0) m (r, 0)).1
   have hline : ContDiff ℝ ∞ (fun r : ℝ => (r, (0 : ℝ))) :=
     contDiff_id.prodMk contDiff_const
@@ -191,4 +249,3 @@ theorem n05_reference_planeJacobian_radial
     one_mul, zero_mul, mul_one, mul_zero, sub_zero, ξ]
 
 end ContinuousFlexibility.Statements
-

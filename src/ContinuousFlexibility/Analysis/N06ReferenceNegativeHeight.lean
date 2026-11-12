@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06ReferenceNegativeRigidity
 import ContinuousFlexibility.Analysis.N06RadialReferenceGeometry
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The actual negative reference height and root curvature

@@ -3,12 +3,13 @@ import ContinuousFlexibility.Analysis.N01EndpointScalarJetGrowth
 import ContinuousFlexibility.Analysis.CircleMultilinearRealization
 
 /-!
-# Fixed-loss local circle estimates for every positive endpoint jet
+# Local circle estimates for every positive endpoint jet
 
 The genuine multilinear jet is split into its pure scalar part and a
 finite sum with one state slot. The exact decoder realizes this identity
 in each Hilbert coordinate, where the triangle inequality applies.
-One low order and one loss work for every parameter order.
+One low order works for every parameter order, with a loss chosen
+separately for each parameter order.
 -/
 
 noncomputable section
@@ -131,7 +132,7 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -145,25 +146,29 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth_un
   classical
   let stateData := hN.endpointFlowScalarJets_state_slot_circleNorm_local_growth_all_uniform_radius hS hT
   let Bₛ : ℕ := stateData.choose
-  let Lₛ : ℕ := stateData.choose_spec.choose
-  have hBₛ : base ≤ Bₛ := stateData.choose_spec.choose_spec.1
+  have hBₛ : base ≤ Bₛ := stateData.choose_spec.1
   let scalarData := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
   let Bq : ℕ := scalarData.choose
-  let Lq : ℕ := scalarData.choose_spec.choose
   let B : ℕ := max Bₛ Bq
-  let L : ℕ := max Lₛ Lq
   have hBs : Bₛ ≤ B := le_max_left _ _
   have hBq : Bq ≤ B := le_max_right _ _
-  have hLs : Lₛ ≤ L := le_max_left _ _
-  have hLq : Lq ≤ L := le_max_right _ _
   let p := pairGrading (sectorGrading S) realGrading
   have hp : Monotone p := sectorPairGrading_monotone S
-  refine ⟨B, L, hBₛ.trans hBs, ?_⟩
-  intro n R hR s hs
-  let stateOrder := stateData.choose_spec.choose_spec.2 n R hR s (hBs.trans hs)
+  refine ⟨B, hBₛ.trans hBs, ?_⟩
+  intro n
+  let stateLoss := stateData.choose_spec.2 n
+  let Lₛ : ℕ := stateLoss.choose
+  let scalarLoss := scalarData.choose_spec.2 n
+  let Lq : ℕ := scalarLoss.choose
+  let L : ℕ := max Lₛ Lq
+  have hLs : Lₛ ≤ L := le_max_left _ _
+  have hLq : Lq ≤ L := le_max_right _ _
+  refine ⟨L, ?_⟩
+  intro R hR s hs
+  let stateOrder := stateLoss.choose_spec R hR s (hBs.trans hs)
   let Ks : ℝ := stateOrder.choose
   have hKs : 0 ≤ Ks := stateOrder.choose_spec.1
-  let scalarOrder := scalarData.choose_spec.choose_spec.2 n R hR s (hBq.trans hs)
+  let scalarOrder := scalarLoss.choose_spec R hR s (hBq.trans hs)
   let Kq : ℝ := scalarOrder.choose
   have hKq : 0 ≤ Kq := scalarOrder.choose_spec.1
   refine ⟨Kq + ((n + 1 : ℕ) : ℝ) * Ks,
@@ -231,7 +236,7 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
@@ -243,10 +248,12 @@ theorem N01Properties.endpointFlowScalarJets_positive_circleNorm_local_growth
           ∑ i : Fin (n + 1), pairGrading (sectorGrading S) realGrading (s + L) (v i)) := by
   let data := hN.endpointFlowScalarJets_positive_circleNorm_local_growth_uniform_radius hS hT
   let B : ℕ := data.choose
-  let L : ℕ := data.choose_spec.choose
-  have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  have hB : base ≤ B := data.choose_spec.1
+  refine ⟨B, hB, fun n => ?_⟩
+  let lossData := data.choose_spec.2 n
+  let L : ℕ := lossData.choose
+  refine ⟨L, fun R hR s hs => ?_⟩
+  let orderData := lossData.choose_spec R hR s hs
   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

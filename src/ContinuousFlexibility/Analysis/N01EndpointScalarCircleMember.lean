@@ -88,6 +88,7 @@ theorem N01Properties.endpointFlow_pure_scalar_circleMember
     (hz : z ∈ sectorNeighborhood S base ε ε) :
     CircleMember T (3 / 4 : ℝ)
       (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z (fun _ => scalarParameterDirection S)) := by
+  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n
   have hs (m : ℕ) := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1 m
   have hM (m : ℕ) : 1 ≤ T.M (T.sample m) := (hT.2.1 _ (hs m)).2.2.2
   have hH (m : ℕ) : 0 ≤ T.H (T.sample m) := (hT.2.1 _ (hs m)).2.1.le
@@ -102,20 +103,22 @@ theorem N01Properties.endpointFlow_pure_scalar_circleMember
   let energy : ℕ → ℕ → ℝ≥0∞ := fun s => physicalPlateauEnergy D T C (3 / 4 : ℝ) s
     ((S.height (3 / 4 : ℝ)).decode ξ.1)
   let A : ℕ → ℝ := fun s =>
-    (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z
+    (n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + (loss + d)) z
   apply circleMember_of_local_height_envelope
     (hN.endpointFlowScalarJets_regular hS hT rsel hrsel (n + 1) z hz
       (fun _ => scalarParameterDirection S)) hM hH
     (fun s m => heightPairGrading S s (η m)) energy
     (fun m i j hij => hmono hij (η m))
-    (fun s m => (directions.choose_spec.2.2.2 s).2 m) base loss A
+    (fun s m => (directions.choose_spec.2.2.2 s).2 m) base (loss + d) A
     (fun s => add_nonneg (by positivity) (apply_nonneg _ _))
     (fun s => hN.physicalPlateauEnergy_weighted_tsum_lt_top hS hT
-      (hS.1 (3 / 4 : ℝ)) ξ.1 (max base (s + loss)) (s + 1))
+      (hS.1 (3 / 4 : ℝ)) ξ.1 (max base (s + (loss + d))) (s + 1))
   intro s
-  let pointData := hN.endpointFlow_pure_scalar_weighted_height_bound hS hT rsel hrsel n s
-  exact ⟨pointData.choose, pointData.choose_spec.1.le, fun m b c horder θ =>
+  let pointData := horders s
+  refine ⟨pointData.choose, pointData.choose_spec.1.le, ?_⟩
+  intro m b c horder θ
+  simpa only [Nat.add_assoc] using
     pointData.choose_spec.2 m b c θ (by omega) z hz (η m)
-      (directions.choose_spec.2.2.1 m)⟩
+      (directions.choose_spec.2.2.1 m)
 
 end ContinuousFlexibility.Statements

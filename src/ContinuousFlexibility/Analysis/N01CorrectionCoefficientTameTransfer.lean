@@ -22,7 +22,6 @@ local instance n01CorrectionCoefficientTameTransferStateSMul (S : PhysicalSpaces
 open Set Filter ContinuousFlexibility.Analysis
 open scoped ContDiff Topology
 
-set_option diagnostics true in
 private theorem correctionCoefficient_flat_bound_of_joint_data
     {E : Type*} [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
     [IsTopologicalAddGroup E] [ContinuousSMul ℝ E]
@@ -42,7 +41,6 @@ private theorem correctionCoefficient_flat_bound_of_joint_data
     (hsnd : HasFlatMixedTameGrowth p W F
       (fun m => solveSmoothDirectionsPostcomp (J m) (ContinuousLinearMap.snd ℝ ℝ ℝ))) :
     ∀ n : ℕ, ∃ B L : ℕ, StripCoefficientFlatOneHighBound p Araw U l h F W n B L := by
-  run_tac Lean.logInfo "N02N03 TameTransfer: abstract-entry"
   intro n
   obtain ⟨B₀, L₀, hb₀⟩ := hfst n
   obtain ⟨B₁, L₁, hb₁⟩ := hsnd n
@@ -55,7 +53,6 @@ private theorem correctionCoefficient_flat_bound_of_joint_data
   refine ⟨B, L, fun r hr s => ?_⟩
   obtain ⟨A, P, hA, hP, hAb⟩ := h₀.mixed_oneHigh hW hF hV hc r hr s
   obtain ⟨A', P', hA', hP', hA'b⟩ := h₁.mixed_oneHigh hW hF hV hc r hr s
-  run_tac Lean.logInfo "N02N03 TameTransfer: one-high"
   refine ⟨A + A', P + P', add_nonneg hA hA', add_nonneg hP hP', ?_⟩
   intro m x hx hxB v a b hab q hq
   have hq' : q ∈ Ioo (l m) (h m) ×ˢ (univ : Set ℝ) := ⟨hq, mem_univ _⟩
@@ -106,7 +103,6 @@ variable {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
         (originalCoefficients D S C (liftSectorParameter S C z)).a p *
           (originalCoefficients D S C (liftSectorParameter S C z)).c p)
 
-set_option diagnostics true in
 theorem N01Properties.returnCorrectionCoefficientScalarJets_flat_bound_of_joint_growth
     (p : ℕ → Seminorm ℝ ((StateDirections S × ℝ) × CircleSpace S)) (hp : Monotone p)
     (hfst : HasFlatMixedTameGrowth p (fun m => radialE (D.cellIndex (j m)))
@@ -126,7 +122,6 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_flat_bound_of_joint_
       (sectorNeighborhood S base ε ε ×ˢ univ) l h
       (fun m => T.H (T.sample m) ^ (3 / 4 : ℝ))
       (fun m => radialE (D.cellIndex (j m))) n B L := by
-  run_tac Lean.logInfo "N02N03 TameTransfer: physical-entry"
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let f : ℕ → E × PolarPoint → ℝ × ℝ := fun _ x =>
@@ -152,7 +147,6 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_flat_bound_of_joint_
         (Ioo (l m) (h m) ×ˢ (univ : Set ℝ))) :=
     ((sectorNeighborhood_convex S base ε ε).prod convex_univ).prod
       ((convex_Ioo (l m) (h m)).prod convex_univ)
-  run_tac Lean.logInfo "N02N03 TameTransfer: physical-providers"
   exact correctionCoefficient_flat_bound_of_joint_data
     (E := E) (U := U) (f := f) l h J p hp
     (fun m => radialE (D.cellIndex (j m)))

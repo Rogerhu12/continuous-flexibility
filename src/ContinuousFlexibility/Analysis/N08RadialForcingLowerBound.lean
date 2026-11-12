@@ -101,7 +101,7 @@ direction. The original flow label is retained in the forcing upper bound. -/
 theorem n08_radialHeight_positive_slope_bound
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
     (hN : N01Properties D T S C base loss ε) :
-    ∃ A B : ℝ, 0 < A ∧ 0 < B ∧ ∀ m,
+    ∃ parameterLoss : ℕ, ∃ A B : ℝ, 0 < A ∧ 0 < B ∧ ∀ m,
       ∃ j : ℕ, Ioo (C.left m) (C.right m) ⊆ D.cells j ∧
       ∃ c : ℝ, 0 < c ∧ c⁻¹ ≤ radialE (D.cellIndex j) ^ A ∧
       ∀ (η : HeightPair S) (h g : ℝ → ℝ) (a : ℝ), 0 ≤ a →
@@ -110,10 +110,10 @@ theorem n08_radialHeight_positive_slope_bound
         (∀ s ∈ Ioo (C.left m) (C.right m), ∀ θ, heightPairField S η (s, θ) = h s) →
         a * c ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (2 * heightPairGrading S base η + heightPairGrading S loss η) := by
+          (2 * heightPairGrading S base η + heightPairGrading S (loss + parameterLoss) η) := by
   obtain ⟨A, hA, hmargin⟩ := hN.1.2.2.1.2
-  obtain ⟨B, hB, hbound⟩ := n08_radialHeight_forcing_integral_bound hT hS hN
-  refine ⟨A, B, hA, hB, fun m => ?_⟩
+  obtain ⟨parameterLoss, B, hB, hbound⟩ := n08_radialHeight_forcing_integral_bound hT hS hN
+  refine ⟨parameterLoss, A, B, hA, hB, fun m => ?_⟩
   have hC := hN.2.2.2.1
   have hb := hC.1 m
   have hnegative : NegativeRadialComponent D (C.left m) (C.right m) :=

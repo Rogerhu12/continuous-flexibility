@@ -103,14 +103,15 @@ theorem ordinaryFlow_state_q_mixed_hasDerivAt_of_tower
 function and is linear in the state-direction grading. -/
 theorem N01Properties.minusFlow_state_q_mixed_derivative_bound
     (hN : N01Properties D T S C base loss ε) :
-    ∃ B : ℝ, 0 < B ∧ ∀ η : AnnularState S, ∀ m r θ,
+    ∃ d₂ : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ η : AnnularState S, ∀ m r θ,
       r ∈ Ioo (C.left m) (C.right m) →
       |deriv (fun t : ℝ => deriv (fun q : ℝ =>
         C.minusFlow (C.referenceState + t • η, q) m r θ) 0) 0| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (2 * stateGrading S base η + stateGrading S loss η) := by
-  let hdata := hN.2.2.2.2.2.2.2.2.2.2.2.2 2 0
+          (2 * stateGrading S base η + stateGrading S (loss + d₂) η) := by
+  obtain ⟨d₂, hdata₂⟩ := hN.2.2.2.2.2.2.2.2.2.2.2.2 2
+  let hdata := hdata₂ 0
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   have hpoint : ∀ (η : AnnularState S) (m : ℕ) (r θ : ℝ),
@@ -119,7 +120,7 @@ theorem N01Properties.minusFlow_state_q_mixed_derivative_bound
         C.minusFlow (C.referenceState + t • η, q) m r θ) 0) 0| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (2 * stateGrading S base η + stateGrading S loss η) := by
+          (2 * stateGrading S base η + stateGrading S (loss + d₂) η) := by
     intro η m r θ hr
     let htower := hdata.choose_spec.2 m 0 0 (r, θ) (by norm_num) hr
     have hz : (C.referenceState, (0 : ℝ)) ∈ stateNeighborhood S C base ε := by
@@ -136,18 +137,19 @@ theorem N01Properties.minusFlow_state_q_mixed_derivative_bound
         (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ))))
     have hb' := le_of_zero_power_mul_le hbound
     have hw : oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base (0 + loss) ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
+        base (0 + loss + d₂) ((C.referenceState, (0 : ℝ)) - (C.referenceState, 0))
           (Fin.cons (η, (0 : ℝ)) (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))) =
-        2 * stateGrading S base η + stateGrading S loss η := by
+        2 * stateGrading S base η + stateGrading S (loss + d₂) η := by
       exact (congrArg₂ (fun (n : ℕ) (x : AnnularState S × ℝ) =>
         oneHighVariationWeight (pairGrading (stateGrading S) realGrading) base n x
           (Fin.cons (η, (0 : ℝ))
             (fun _ : Fin 1 => ((0 : AnnularState S), (1 : ℝ)))))
-        (Nat.zero_add loss) (sub_self (C.referenceState, (0 : ℝ)))).trans
-          (oneHighVariationWeight_state_external_zero S base loss η)
+        (congrArg (fun n : ℕ => n + d₂) (Nat.zero_add loss))
+        (sub_self (C.referenceState, (0 : ℝ)))).trans
+          (oneHighVariationWeight_state_external_zero S base (loss + d₂) η)
     exact (congrArg abs hd).trans_le (hb'.trans_eq (congrArg
       (fun t : ℝ => B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
         T.E0 (T.sample (C.cell m)) ^ B * t) hw))
-  exact Exists.intro B (And.intro hB hpoint)
+  exact ⟨d₂, B, hB, hpoint⟩
 
 end ContinuousFlexibility.Statements

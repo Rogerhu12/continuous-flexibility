@@ -4,11 +4,12 @@ import ContinuousFlexibility.Analysis.LocalizedJetInterpolation
 import ContinuousFlexibility.Analysis.TameSmoothingCalculus
 
 /-!
-# Fixed-loss local growth of all pure scalar endpoint jets
+# Local growth of pure scalar endpoint jets on one common box
 
 The actual physical height factor is estimated before interpolation.
 The resulting circle norm has one high base-point seminorm, with a loss
-chosen independently of both the output order and the local radius.
+chosen for each parameter order, independently of the spatial order
+and local radius.
 -/
 
 noncomputable section
@@ -34,7 +35,7 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_unifo
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)),
       ∀ z ∈ sectorNeighborhood S base ε ε,
@@ -48,16 +49,21 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_unifo
   have hp : Monotone p := sectorPairGrading_monotone S
   have hI : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
     (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
-  let interpolationData := hasInterpolation_quadratic_local_growth p hp hI base loss 6
+  let interpolationData := hasInterpolation_quadratic_local_growth_common_base p hp hI base 6
   let B : ℕ := interpolationData.choose
-  let L : ℕ := interpolationData.choose_spec.choose
-  have hB : base ≤ B := interpolationData.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := interpolationData.choose_spec.choose_spec.2 R hR s hs
+  have hB : base ≤ B := interpolationData.choose_spec.1
+  refine ⟨B, hB, fun n => ?_⟩
+  let rawOrderData :=
+    hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n
+  let d : ℕ := rawOrderData.choose
+  let lossData := interpolationData.choose_spec.2 (loss + d)
+  let L : ℕ := lossData.choose
+  refine ⟨L, fun R hR s hs => ?_⟩
+  let orderData := lossData.choose_spec R hR s hs
   let I : ℝ := orderData.choose
   have hI0 : 0 ≤ I := orderData.choose_spec.1
   let rawData (j : CircleJetIndex s) :=
-    hN.endpointFlow_pure_scalar_weightedJetNorm_budget_bound_uniform_radius hS hT n (j.val 0).val (j.val 1).val
+    rawOrderData.choose_spec (j.val 0).val (j.val 1).val
   let K : CircleJetIndex s → ℝ := fun j => (rawData j).choose
   have hK (j : CircleJetIndex s) : 0 ≤ K j := (rawData j).choose_spec.1
   refine ⟨(∑ j : CircleJetIndex s, K j) * I,
@@ -73,7 +79,8 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all_unifo
       apply Finset.sum_le_sum
       intro j _
       exact ((rawData j).choose_spec.2 rsel hrsel z hz).trans (mul_le_mul_of_nonneg_left
-        (orderData.choose_spec.2 _ _ j.property z hzb) (hK j))
+        (by simpa only [Nat.add_assoc] using
+          (orderData.choose_spec.2 _ _ j.property z hzb)) (hK j))
     _ = _ := finite_weighted_sum_mul_reassociate K I (1 + p (s + L) z)
 
 theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
@@ -82,7 +89,7 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
     (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) :
-    ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+    ∃ B : ℕ, base ≤ B ∧ ∀ n : ℕ, ∃ L : ℕ, ∀ R : ℝ, 0 ≤ R →
       ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
       ∀ z ∈ sectorNeighborhood S base ε ε,
       pairGrading (sectorGrading S) realGrading B z ≤ R →
@@ -92,10 +99,12 @@ theorem N01Properties.endpointFlow_pure_scalar_circleNorm_local_growth_all
         K * (1 + pairGrading (sectorGrading S) realGrading (s + L) z) := by
   let data := hN.endpointFlow_pure_scalar_circleNorm_local_growth_all_uniform_radius hS hT
   let B : ℕ := data.choose
-  let L : ℕ := data.choose_spec.choose
-  have hB : base ≤ B := data.choose_spec.choose_spec.1
-  refine ⟨B, L, hB, fun n R hR s hs => ?_⟩
-  let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+  have hB : base ≤ B := data.choose_spec.1
+  refine ⟨B, hB, fun n => ?_⟩
+  let lossData := data.choose_spec.2 n
+  let L : ℕ := lossData.choose
+  refine ⟨L, fun R hR s hs => ?_⟩
+  let orderData := lossData.choose_spec R hR s hs
   exact ⟨orderData.choose, orderData.choose_spec.1, orderData.choose_spec.2 rsel hrsel⟩
 
 end ContinuousFlexibility.Statements

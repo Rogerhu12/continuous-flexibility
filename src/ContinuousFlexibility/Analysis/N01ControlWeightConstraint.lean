@@ -58,39 +58,39 @@ height weights and one forward flow weight. -/
 theorem N01Properties.controlTravel_second_weight_bound
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ K B : ℝ, 0 < K ∧ 0 < B ∧ ∀ m,
+    ∃ d₂ : ℕ, ∃ K B : ℝ, 0 < K ∧ 0 < B ∧ ∀ m,
       |deriv (deriv (fun t => opticalTravel
         (opticalLogPerturbation D.w (C.control m) t) (C.left m) (C.right m))) 0| ≤
         K * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (T.M (T.sample m) ^ max base loss *
+          (T.M (T.sample m) ^ max base (loss + d₂) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
-  let hdata := hN.controlTravel_second_bound hS hT
+  obtain ⟨d₂, hdata⟩ := hN.controlTravel_second_bound hS hT
   let B : ℝ := hdata.choose
   have hB : 0 < B := hdata.choose_spec.1
   obtain ⟨_, hgeom⟩ := hN.1.1
-  let G := circleSingletonGradingConstant base + circleSingletonGradingConstant loss + 1
+  let G := circleSingletonGradingConstant base + circleSingletonGradingConstant (loss + d₂) + 1
   have hG : 0 < G := by
     have hb := circleSingletonGradingConstant_nonneg base
-    have hl := circleSingletonGradingConstant_nonneg loss
+    have hl := circleSingletonGradingConstant_nonneg (loss + d₂)
     dsimp only [G]
     linarith
-  refine ⟨B * G ^ 2, B, mul_pos hB (sq_pos_of_pos hG), hB, fun m => ?_⟩
+  refine ⟨d₂, B * G ^ 2, B, mul_pos hB (sq_pos_of_pos hG), hB, fun m => ?_⟩
   have hsample (i : ℕ) : T.sample i ∈ Ioo D.a D.b :=
     materialSample_mem_radialCore hT hgeom.2.1 i
   have hpM := hT.2.1 (T.sample m) (hsample m)
   have hpC := hT.2.1 (T.sample (C.cell m)) (hsample (C.cell m))
   let v := singletonKappaDirection (hS.2.1 (3 / 4 : ℝ)) m
   have hgrade := singletonKappaDirection_two_grades_le
-    (hS.2.1 (3 / 4 : ℝ)) m base loss hpM.2.2.2 hpM.2.1.le
-  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S loss v :=
+    (hS.2.1 (3 / 4 : ℝ)) m base (loss + d₂) hpM.2.2.2 hpM.2.1.le
+  have hgrade0 : 0 ≤ stateGrading S base v + stateGrading S (loss + d₂) v :=
     add_nonneg (apply_nonneg _ _) (apply_nonneg _ _)
   have hweight :
       oneHighVariationWeight (pairGrading (stateGrading S) realGrading)
-        base loss 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
-        G ^ 2 * (T.M (T.sample m) ^ max base loss *
+        base (loss + d₂) 0 (fun _ : Fin 2 => (v, (0 : ℝ))) ≤
+        G ^ 2 * (T.M (T.sample m) ^ max base (loss + d₂) *
           T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2 := by
-    refine (oneHighVariationWeight_state_pair_two_zero_le S base loss v).trans
+    refine (oneHighVariationWeight_state_pair_two_zero_le S base (loss + d₂) v).trans
       ((pow_le_pow_left₀ hgrade0 hgrade 2).trans_eq ?_)
     dsimp only [G]
     ring
@@ -107,30 +107,30 @@ the two actual N01 towers and actual optical normalization. -/
 theorem N01Properties.control_actual_cell_weight_constraint
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) :
-    ∃ K B A F : ℝ, 0 < K ∧ 0 < B ∧ 0 < A ∧ 0 < F ∧ ∀ m j,
+    ∃ d₂ : ℕ, ∃ K B A F : ℝ, 0 < K ∧ 0 < B ∧ 0 < A ∧ 0 < F ∧ ∀ m j,
       Ioo (C.left m) (C.right m) ⊆ D.cells j →
       1 ≤ K * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
         radialE (D.cellIndex j) ^ A *
         T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ F *
         ((T.M (T.sample m) ^ max base (1 + loss) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) *
-          (T.M (T.sample m) ^ max base loss *
+          (T.M (T.sample m) ^ max base (loss + d₂) *
             T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2) := by
   obtain ⟨Kχ, B, A, hKχ, hB, hA, hχ⟩ := hN.control_deriv_actual_cell_bound hS hT
-  obtain ⟨KF, F, hKF, hF, hsecond⟩ := hN.controlTravel_second_weight_bound hS hT
+  obtain ⟨d₂, KF, F, hKF, hF, hsecond⟩ := hN.controlTravel_second_weight_bound hS hT
   obtain ⟨_, hgeom⟩ := hN.1.1
   have hinterval := hN.2.2.2.1.1
   let K := (D.b - D.a) ^ 2 / (2 * D.a) * (Kχ * KF)
   have hwidth : 0 < D.b - D.a := sub_pos.mpr hgeom.1.2.1
   have hden : 0 < 2 * D.a := mul_pos zero_lt_two hgeom.1.1
   have hK : 0 < K := mul_pos (div_pos (sq_pos_of_pos hwidth) hden) (mul_pos hKχ hKF)
-  refine ⟨K, B, A, F, hK, hB, hA, hF, fun m j hcell => ?_⟩
+  refine ⟨d₂, K, B, A, F, hK, hB, hA, hF, fun m j hcell => ?_⟩
   let Pχ := Kχ * T.H (T.sample j) ^ (3 / 4 : ℝ) * T.E0 (T.sample j) ^ B *
     radialE (D.cellIndex j) ^ A *
     (T.M (T.sample m) ^ max base (1 + loss) * T.H (T.sample m) ^ (-(3 / 4 : ℝ)))
   let PF := KF * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
     T.E0 (T.sample (C.cell m)) ^ F *
-    (T.M (T.sample m) ^ max base loss * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2
+    (T.M (T.sample m) ^ max base (loss + d₂) * T.H (T.sample m) ^ (-(3 / 4 : ℝ))) ^ 2
   have hχbound : ∀ r ∈ Ioo (C.left m) (C.right m), |deriv (C.control m) r| ≤ Pχ :=
     fun r hr => hχ m j r (hcell hr)
   have hPχ : 0 ≤ Pχ := by

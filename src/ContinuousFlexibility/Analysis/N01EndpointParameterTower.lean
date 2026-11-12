@@ -89,7 +89,7 @@ private theorem N01Properties.sectorFlow_closed_tower_point
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s : ℕ)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s d : ℕ)
     (B : ℝ)
     (hdata : ∀ m b θ r, b ≤ s → r ∈ Ioo (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
@@ -98,7 +98,7 @@ private theorem N01Properties.sectorFlow_closed_tower_point
         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v)
+            base (s + loss + d) z v)
     (m b : ℕ) (θ r : ℝ) (hb : b ≤ s) (hr : r ∈ Icc (C.left m) (C.right m)) :
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
@@ -106,7 +106,7 @@ private theorem N01Properties.sectorFlow_closed_tower_point
         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
+            base (s + loss + d) z v := by
   classical
   have hsamples := materialSample_mem_radialCore hT hN.1.1.choose_spec.2.1
   have hH (m : ℕ) : 0 < T.H (T.sample m) := (hT.2.1 _ (hsamples m)).2.1
@@ -119,15 +119,16 @@ private theorem N01Properties.sectorFlow_closed_tower_point
     exact hN.ordinaryFlowFamily_radial_continuousOn hS hT
       (liftSectorParameter_mem_stateNeighborhood hz (le_refl ε))
       (hN.2.2.1.liftSectorParameter_sector z) m b θ
+  let δ : ℕ → ℕ := fun n => (hN.sectorFlow_tower n).choose
   have hbounds : ∀ n, ∃ A : ℝ, 0 ≤ A ∧ ∀ t ∈ Ioo (C.left m) (C.right m),
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m 0 b (t, θ) (liftSectorParameter S C z)),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin n → (StateDirections S × ℝ),
       |J.D n z v| ≤ A *
         oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-          base (b + loss) z v := by
+          base (b + loss + δ n) z v := by
     intro n
-    let hraw := hN.sectorFlow_tower n b
+    let hraw := (hN.sectorFlow_tower n).choose_spec b
     let A : ℝ := hraw.choose
     refine ⟨A * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
       T.E0 (T.sample (C.cell m)) ^ A,
@@ -138,10 +139,10 @@ private theorem N01Properties.sectorFlow_closed_tower_point
   exact closed_parameter_tower_of_interior_towers
     (pairGrading (sectorGrading S) realGrading)
     (sectorPairGrading_continuous S) (sectorPairGrading_monotone S)
-    base (fun _ => b + loss) (sectorNeighborhood_isOpen S base ε ε)
+    base (fun n => b + loss + δ n) (sectorNeighborhood_isOpen S base ε ε)
     (sectorNeighborhood_convex S base ε ε) (hcontrol.1 m).2.1 hr
     (fun t z => ordinaryFlowFamily S C m 0 b (t, θ) (liftSectorParameter S C z))
-    hcontinuous hbounds k (s + loss)
+    hcontinuous hbounds k (s + loss + d)
     (B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) * T.E0 (T.sample (C.cell m)) ^ B)
     (fun t ht => hdata m b θ t hb ht)
 
@@ -149,17 +150,21 @@ theorem N01Properties.sectorFlow_closed_tower
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (k : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
+      ∀ m b θ r, b ≤ s → r ∈ Icc (C.left m) (C.right m) →
       ∃ J : SmoothDirections (sectorNeighborhood S base ε ε)
         (fun z => ordinaryFlowFamily S C m 0 b (r, θ) (liftSectorParameter S C z)),
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ v : Fin k → (StateDirections S × ℝ),
         |J.D k z v| ≤ B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
           oneHighVariationWeight (pairGrading (sectorGrading S) realGrading)
-            base (s + loss) z v := by
-  let hdata := hN.sectorFlow_tower k s
+            base (s + loss + d) z v := by
+  obtain ⟨d, horders⟩ := hN.sectorFlow_tower k
+  refine ⟨d, ?_⟩
+  intro s
+  let hdata := horders s
   exact ⟨hdata.choose, hdata.choose_spec.1,
-    hN.sectorFlow_closed_tower_point hS hT k s hdata.choose hdata.choose_spec.2⟩
+    hN.sectorFlow_closed_tower_point hS hT k s d hdata.choose hdata.choose_spec.2⟩
 
 end ContinuousFlexibility.Statements

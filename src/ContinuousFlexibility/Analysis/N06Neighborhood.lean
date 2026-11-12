@@ -2,6 +2,7 @@ import ContinuousFlexibility.Analysis.SolveStateSpaces
 import ContinuousFlexibility.Analysis.StateKappaBounds
 import ContinuousFlexibility.Analysis.TameElementaryCalculus
 import ContinuousFlexibility.Analysis.TameTransfer
+import ContinuousFlexibility.Analysis.N01cBoundsRestriction
 import ContinuousFlexibility.Analysis.N07aNeighborhood
 
 /-!
@@ -131,33 +132,28 @@ private theorem n06_flowJet_bounds_mono
     {base base' loss : ℕ}
     (hH : ∀ m, 0 < H m) (hE : ∀ m, 0 < E₀ m)
     (hp : Monotone p) (hV : IsOpen V) (hVU : V ⊆ U) (hb : base ≤ base')
-    (h : ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+    (h : ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
       a + b ≤ s → y.1 ∈ Ioo (left m) (right m) →
       ∃ J : SmoothDirections U (family m a b y),
         ∀ z ∈ U, ∀ v : Fin k → E,
           min (y.1 - left m) (right m - y.1) ^ a * |J.D k z v| ≤
             B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
-            oneHighVariationWeight p base (s + loss) (z - x₀) v) :
-    ∀ k s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
+            oneHighVariationWeight p base (s + loss + parameterLoss) (z - x₀) v) :
+    ∀ k : ℕ, ∃ parameterLoss : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m a b y,
       a + b ≤ s → y.1 ∈ Ioo (left m) (right m) →
       ∃ J : SmoothDirections V (family m a b y),
         ∀ z ∈ V, ∀ v : Fin k → E,
           min (y.1 - left m) (right m - y.1) ^ a * |J.D k z v| ≤
             B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B *
-            oneHighVariationWeight p base' (s + loss) (z - x₀) v := by
-  intro k s
-  obtain ⟨B, hB, hJ⟩ := h k s
-  refine ⟨B, hB, ?_⟩
-  intro m a b y hab hy
-  have hK : 0 ≤ B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B :=
-    mul_nonneg (mul_nonneg hB.le (Real.rpow_pos_of_pos (hH m) _).le)
-      (Real.rpow_pos_of_pos (hE m) _).le
-  exact n06_directional_bound_mono
-    (E := E) (U := U) (V := V) (f := family m a b y) (p := p)
-    (k := k) (base := base) (base' := base') (high := s + loss)
-    (K := B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B)
-    (w := min (y.1 - left m) (right m - y.1) ^ a) (x₀ := x₀)
-    hp hb hK hV hVU (hJ m a b y hab hy)
+            oneHighVariationWeight p base' (s + loss + parameterLoss) (z - x₀) v := by
+  exact ordinaryFlowBounds_restrict
+    (E := E) (U := U) (V := V) (grading := p) (center := x₀)
+    (family := family) (left := left) (right := right)
+    (weight := fun B m => B * H m ^ (3 / 4 : ℝ) * E₀ m ^ B)
+    hV hVU hp hb (le_refl loss)
+    (fun B hB m => mul_nonneg
+      (mul_nonneg hB.le (Real.rpow_nonneg (hH m).le _))
+      (Real.rpow_nonneg (hE m).le _)) h
 
 theorem n06_N01Properties_mono {D : ReferenceData} {T : MaterialData}
     {S : PhysicalSpacesData} {C : NonlinearGeometryData S}

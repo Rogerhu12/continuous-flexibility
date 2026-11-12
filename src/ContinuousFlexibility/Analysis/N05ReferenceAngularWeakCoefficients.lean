@@ -35,11 +35,11 @@ theorem n05_referenceHighJetCoefficient_memLp {D : ReferenceData}
       (volume.restrict (radialCore D)) := by
   have h := (r11b_memLp_angularCoefficient hd
     (memLp_angularMeanMeasure (n05_referenceHighJetBasis_memLp b n))).1
-  have heq : n05_referenceHighJetCoefficient d b n =
+  have he : n05_referenceHighJetCoefficient d b n =
       fun r => angularAverage (fun θ => d (r, θ) * n05_referenceHighJetBasis b n θ) := by
     funext r
     simp only [n05_referenceHighJetCoefficient, radialAngularMean, angularAverage, one_div]
-  rw [heq]
+  rw [he]
   exact h
 
 theorem n05_referenceHighJetCoefficient_weak_test {D : ReferenceData}
@@ -98,15 +98,14 @@ theorem n05_referenceHighJetCoefficient_ae_of_locallyIntegrable
   have hloc : LocallyIntegrableOn (fun r =>
       (((2 * (n + 2) : ℕ) : ℝ) ^ b) * referenceRadialCoefficient u (n + 2) r -
         n05_referenceHighJetCoefficient d b n r) (radialCore D) volume := by
-    have h := (hu.smul (((2 * (n + 2) : ℕ) : ℝ) ^ b)).sub hd
-    have heq : (((2 * (n + 2) : ℕ) : ℝ) ^ b) • referenceRadialCoefficient u (n + 2) -
+    have he : (((2 * (n + 2) : ℕ) : ℝ) ^ b) • referenceRadialCoefficient u (n + 2) -
         n05_referenceHighJetCoefficient d b n =
         fun r => (((2 * (n + 2) : ℕ) : ℝ) ^ b) * referenceRadialCoefficient u (n + 2) r -
           n05_referenceHighJetCoefficient d b n r := by
       funext r
-      rfl
-    rw [heq] at h
-    exact h
+      simp only [Pi.sub_apply, Pi.smul_apply, smul_eq_mul]
+    rw [← he]
+    exact (hu.smul (((2 * (n + 2) : ℕ) : ℝ) ^ b)).sub hd
   have hzero : ∀ᵐ r ∂volume, r ∈ radialCore D →
       (((2 * (n + 2) : ℕ) : ℝ) ^ b) * referenceRadialCoefficient u (n + 2) r -
         n05_referenceHighJetCoefficient d b n r = 0 := by

@@ -123,10 +123,10 @@ private theorem exists_gap_neighborhood_for_positive_cutoff
             returnCorrectedMinusSpeed D S C χ z m (r, θ)) / 2) ∧
         returnCorrectedMinusSpeed D S C χ z m (r, θ) ≤
           -returnCorrectedMinusSpeed D S C χ z m (r, -θ) := by
-  obtain ⟨V, K, hV, hK, herror⟩ := hN.returnCorrectedMinusSpeed_error_radial_small
+  obtain ⟨dVel, V, K, hV, hK, herror⟩ := hN.returnCorrectedMinusSpeed_error_radial_small
     hS hT χ j hJ hA hP hcell hcutoff
   obtain ⟨U, hU, hupper⟩ := hN.originalRadialCoefficient_uniform_upper
-  let base' := max base (1 + loss)
+  let base' := max base (1 + loss + dVel)
   let ε' := min ε (min (1 / 2) (min K⁻¹ (lam / (4 * U * V))))
   have hε' : 0 < ε' := lt_min hε
     (lt_min (by norm_num) (lt_min (inv_pos.mpr hK) (div_pos hlam (by positivity))))
@@ -143,7 +143,7 @@ private theorem exists_gap_neighborhood_for_positive_cutoff
     field_simp [hU.ne', hV.ne']
     <;> ring
   have hb : base ≤ base' := le_max_left _ _
-  have hh : 1 + loss ≤ base' := le_max_right _ _
+  have hh : 1 + loss + dVel ≤ base' := le_max_right _ _
   have hnew := hN.restrict_neighborhood hT hb hε' hε'₀
   refine ⟨base', ε', hb, hε', hε'₀, hnew, ?_⟩
   intro z hz hsector m r hr θ

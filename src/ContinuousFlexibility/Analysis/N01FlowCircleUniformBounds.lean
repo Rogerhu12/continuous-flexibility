@@ -93,9 +93,10 @@ theorem N01Properties.endpointFlowCircle_uniformFamilyJetBounds
     | succ n =>
         let data := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT
         let B : ℕ := data.choose
-        let L : ℕ := data.choose_spec.choose
+        let lossData := data.choose_spec.2 n
+        let L : ℕ := lossData.choose
         refine ⟨B, L, fun R hR s hs => ?_⟩
-        let orderData := data.choose_spec.choose_spec.2 n R hR s hs
+        let orderData := lossData.choose_spec R hR s hs
         let K : ℝ := orderData.choose
         have hK : 0 ≤ K := orderData.choose_spec.1
         exact ⟨K, hK, fun i x hx hlow v =>

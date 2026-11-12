@@ -35,14 +35,15 @@ theorem n08_physical_label_comparison_of_tests
         T.H (T.sample (physical m)) ^ (α + 1) ≤
           K * T.H (T.sample (C.cell m)) ^ (3 / 8 : ℝ) := by
   classical
-  obtain ⟨A, B, hA, hB, hmargin⟩ := n08_radialHeight_positive_slope_bound hT hS hN
+  obtain ⟨parameterLoss, A, B, hA, hB, hmargin⟩ :=
+    n08_radialHeight_positive_slope_bound hT hS hN
   choose physical hcell c hc hcE hforcing using hmargin
   obtain ⟨K0, hK0, hK0b⟩ := hbound base
-  obtain ⟨K1, hK1, hK1b⟩ := hbound loss
+  obtain ⟨K1, hK1, hK1b⟩ := hbound (loss + parameterLoss)
   let Q : ℝ := 2 * K0 + K1 + 1
   have hQ : 0 < Q := by dsimp only [Q]; positivity
   have hnorm (j : ℕ) :
-      2 * heightPairGrading S base (test j) + heightPairGrading S loss (test j) ≤ Q := by
+      2 * heightPairGrading S base (test j) + heightPairGrading S (loss + parameterLoss) (test j) ≤ Q := by
     dsimp only [Q]
     linarith only [hK0b j, hK1b j]
   have hsample (j : ℕ) : 0 < T.H (T.sample j) ∧ 0 < T.E0 (T.sample j) := by
@@ -68,7 +69,7 @@ theorem n08_physical_label_comparison_of_tests
       calc
         a * c m ≤ B * W *
             (2 * heightPairGrading S base (test (physical m)) +
-              heightPairGrading S loss (test (physical m))) := by
+              heightPairGrading S (loss + parameterLoss) (test (physical m))) := by
           simpa only [W, mul_assoc] using hf
         _ ≤ _ := mul_le_mul_of_nonneg_left (hnorm (physical m)) (mul_nonneg hB.le hW)
     calc

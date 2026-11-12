@@ -46,8 +46,8 @@ private theorem weighted_height_transfer
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlow_pure_scalar_height_bound_uniform_radius
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)), ∀ m b θ, b ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
       (∃ c : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
@@ -57,9 +57,12 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound_uniform_radius
           (fun _ => scalarParameterDirection S) m) θ| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  let data := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n s
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
+            heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
+  obtain ⟨d, horders⟩ := hN.sectorFlow_pure_scalar_height_bound_mod_constant hS hT n
+  refine ⟨d, ?_⟩
+  intro s
+  let data := horders s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
   refine ⟨B, hB, fun rsel hrsel m b θ hb z hz η hη => ?_⟩
@@ -78,8 +81,8 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound_uniform_radius
 theorem N01Properties.endpointFlow_pure_scalar_height_bound
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n s : ℕ) :
-    ∃ B : ℝ, 0 < B ∧ ∀ m b θ, b ≤ s →
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ B : ℝ, 0 < B ∧ ∀ m b θ, b ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
       (∃ c : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
         heightPairField S η (r, ψ) = stateU S (liftSectorParameter S C z).1 (r, ψ) + c) →
@@ -88,17 +91,20 @@ theorem N01Properties.endpointFlow_pure_scalar_height_bound
           (fun _ => scalarParameterDirection S) m) θ| ≤
         B * T.H (T.sample (C.cell m)) ^ (3 / 4 : ℝ) *
           T.E0 (T.sample (C.cell m)) ^ B *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
+            heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
+  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n
+  refine ⟨d, ?_⟩
+  intro s
+  let data := horders s
   exact Exists.intro data.choose
     (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
 
 /-- The constants are fixed before every choice of closed flow radii. -/
 theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius
     (hN : N01Properties D T S C base loss ε)
-    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n s : ℕ) :
-    ∃ K : ℝ, 0 < K ∧
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T) (n : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ K : ℝ, 0 < K ∧
       ∀ (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)), ∀ m b c θ, b ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
       (∃ a : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
@@ -108,9 +114,12 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
             (fun _ => scalarParameterDirection S) m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  let data := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n s
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
+            heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
+  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_height_bound_uniform_radius hS hT n
+  refine ⟨d, ?_⟩
+  intro s
+  let data := horders s
   let B : ℝ := data.choose
   have hB : 0 < B := data.choose_spec.1
   let prefData := hN.flow_sample_prefactor_le_M hT hB.le
@@ -121,8 +130,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
   have hM : 0 ≤ T.M (T.sample m) := zero_le_one.trans (hT.2.1 _ hs).2.2.2
   have hH : 0 ≤ T.H (T.sample m) := (hT.2.1 _ hs).2.1.le
   let W : ℝ := ((n : ℝ) + 2 +
-    pairGrading (sectorGrading S) realGrading (s + loss) z) *
-      heightPairGrading S base η + heightPairGrading S (s + loss) η
+    pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
+      heightPairGrading S base η + heightPairGrading S (s + loss + d) η
   have hW : 0 ≤ W := by
     dsimp only [W]
     exact add_nonneg (mul_nonneg
@@ -134,8 +143,8 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound_uniform_rad
 theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound
     (hN : N01Properties D T S C base loss ε)
     (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
-    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n s : ℕ) :
-    ∃ K : ℝ, 0 < K ∧ ∀ m b c θ, b ≤ s →
+    (rsel : ℕ → ℝ) (hrsel : ∀ m, rsel m ∈ Icc (C.left m) (C.right m)) (n : ℕ) :
+    ∃ d : ℕ, ∀ s : ℕ, ∃ K : ℝ, 0 < K ∧ ∀ m b c θ, b ≤ s →
       ∀ z ∈ sectorNeighborhood S base ε ε, ∀ η : HeightPair S,
       (∃ a : ℝ, ∀ r ∈ Ioo (C.left m) (C.right m), ∀ ψ,
         heightPairField S η (r, ψ) = stateU S (liftSectorParameter S C z).1 (r, ψ) + a) →
@@ -144,9 +153,12 @@ theorem N01Properties.endpointFlow_pure_scalar_weighted_height_bound
           (hN.endpointFlowScalarJets hS hT rsel hrsel (n + 1) z
             (fun _ => scalarParameterDirection S) m) θ| ≤
         K * T.M (T.sample m) ^ (c + 1) *
-          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss) z) *
-            heightPairGrading S base η + heightPairGrading S (s + loss) η) := by
-  let data := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n s
+          (((n : ℝ) + 2 + pairGrading (sectorGrading S) realGrading (s + loss + d) z) *
+            heightPairGrading S base η + heightPairGrading S (s + loss + d) η) := by
+  obtain ⟨d, horders⟩ := hN.endpointFlow_pure_scalar_weighted_height_bound_uniform_radius hS hT n
+  refine ⟨d, ?_⟩
+  intro s
+  let data := horders s
   exact Exists.intro data.choose
     (And.intro data.choose_spec.1 (data.choose_spec.2 rsel hrsel))
 

@@ -79,11 +79,15 @@ jobs:
             id=$(gh run list -R "$GITHUB_REPOSITORY" --branch "$line" --commit "$head" --status success               --limit 1 --json databaseId --jq '.[0].databaseId // empty' || true)
             if [ -z "$id" ]; then echo "$line @${head:0:8}: no green run"; continue; fi
             dir="$RUNNER_TEMP/line-build-$id"
-            if gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir"; then
-              tar --zstd -xf "$dir/lake-build.tar.zst"
+            for try in 1 2 3; do
+              [ -f "$dir/lake-build.tar.zst" ] && break
+              rm -rf "$dir"
+              gh run download "$id" -R "$GITHUB_REPOSITORY" -n lake-build-line -D "$dir" || sleep 10
+            done
+            if [ -f "$dir/lake-build.tar.zst" ] && tar --zstd -xf "$dir/lake-build.tar.zst"; then
               echo "$line @${head:0:8}: reused the build of run $id"
             else
-              echo "$line @${head:0:8}: run $id has no build artifact"
+              echo "::warning::$line @${head:0:8}: the build artifact of run $id could not be used"
             fi
           done
       - name: Restore project build artifacts
@@ -139,6 +143,7 @@ jobs:
           fi
           exit "$status"
       - name: Build every library
+        id: build
         shell: bash
         run: |
           set -o pipefail
@@ -162,9 +167,16 @@ jobs:
           exit "$status"
       - name: Save project build artifacts
         # Save first, delete older entries only after the save succeeded, so a cancelled
-        # or failed run never leaves the branch without a cache.
+        # or failed run never leaves the branch without a cache. Only a run whose cache
+        # layers were fully restored saves: a run cancelled while restoring has a partial
+        # or missing .lake/build, and saving it would replace the branch's good entry.
+        # Main saves only a complete build: the key of main's entry tells later runs which
+        # merged lines it already covers.
         id: save
-        if: always()
+        if: >-
+          always() && steps.restore-main.outcome == 'success' &&
+          ((github.ref_name == 'main' && steps.build.outcome == 'success') ||
+           (github.ref_name != 'main' && steps.restore.outcome == 'success'))
         continue-on-error: true
         uses: actions/cache/save@v4
         with:

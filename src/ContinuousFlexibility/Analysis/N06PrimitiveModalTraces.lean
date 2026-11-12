@@ -1,5 +1,6 @@
 import ContinuousFlexibility.Analysis.N06PrimitiveReferenceTransport
 import ContinuousFlexibility.Analysis.N06CutTransmissionJets
+import ContinuousFlexibility.Analysis.N05N06ClosedChartBridge
 
 /-!
 # The original graph's modal root and cut traces from primitive radiality
@@ -62,7 +63,7 @@ theorem n06_primitiveReference_radial_ae_pullback
   have hx : ∀ᵐ p ∂volume.restrict
       (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi),
       P (K.chart (C.referenceState, 0) m p).1 := by
-    simpa only [h04.1.referenceDomain m, referencePhysicalPieceOpen,
+    simpa only [n05PhysicalPieceHalfPeriod, h04.1.referenceDomain m, referencePhysicalPieceOpen,
       prod_inter_prod, inter_univ, univ_inter] using hxActual
   have hprod : (volume : Measure PolarPoint).restrict
       (Ioo (K.physicalLeft m) (K.physicalRight m) ×ˢ Ioc (0 : ℝ) Real.pi) =
