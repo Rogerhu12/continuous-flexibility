@@ -133,7 +133,9 @@ theorem N01Properties.returnCorrectionCoefficientScalarJets_component_mixed_hasD
     mixedDerivative_congr_on_open hV
       (fun q hq => hN.returnCorrectionCoefficientScalarJets_eq_joint_on_strip
         hS hT hR j hcell χ hχrange hcutoff hdisc hχ m l h hl hh hstrip Q k y hy vs hq) a b hp
-  have hcons : (fun i : Fin (n + 1) => ((Fin.cons w v) i, (0 : PolarPoint))) =
+  have hcons : (fun i : Fin (n + 1) =>
+      ((Fin.cons w v : Fin (n + 1) → ((StateDirections S × ℝ) × CircleSpace S)) i,
+        (0 : PolarPoint))) =
       (Fin.cons (w, (0 : PolarPoint)) (fun i : Fin n => (v i, (0 : PolarPoint))) :
         Fin (n + 1) → (((StateDirections S × ℝ) × CircleSpace S) × PolarPoint)) := by
     funext i
