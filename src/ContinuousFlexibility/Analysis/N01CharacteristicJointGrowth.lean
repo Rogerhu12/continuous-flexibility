@@ -26,6 +26,24 @@ namespace ContinuousFlexibility.Analysis
 open Set ContinuousFlexibility.Statements
 open scoped ContDiff BigOperators
 
+private theorem scalar_characteristic_algebra (a b c : ℝ) :
+    (b - Real.sqrt (b ^ 2 - a * c)) * a⁻¹ =
+      b / a - Real.sqrt (b ^ 2 - a * c) / a := by
+  simp only [div_eq_mul_inv, sub_mul]
+
+private theorem scalar_characteristic_half_mul (a b : ℝ) :
+    (a / 2) * b = a * b / 2 := by
+  ring
+
+private theorem scalar_characteristic_half_rpow_sq (a W P : ℝ) (hW : 0 < W) :
+    (a / 2) ^ 2 * W ^ (-(2 * P)) = (a * W ^ (-P) / 2) ^ 2 := by
+  have hw : (W ^ (-P)) ^ 2 = W ^ (-(2 * P)) := by
+    rw [pow_two, ← Real.rpow_add hW]
+    congr 1
+    ring
+  rw [← hw]
+  ring
+
 section ScalarCoefficients
 
 variable {ι E P : Type*}
@@ -56,8 +74,7 @@ private def scalarMinusCharacteristicDirections
   let JN := smoothDirectionsPostContinuousLinear (smoothDirectionsProd JB JQ) L
   apply (JN.mul JI).congrOn
   intro z hz
-  change (b z - Real.sqrt (b z ^ 2 - a z * c z)) * (a z)⁻¹ = _
-  rw [div_eq_mul_inv, div_eq_mul_inv, sub_mul]
+  exact scalar_characteristic_algebra (a z) (b z) (c z)
 
 private theorem scalar_characteristic_joint_growth
     {U : Set E} {V : ι → Set P} {a b c : ι → E × P → ℝ}
@@ -117,8 +134,7 @@ private theorem scalar_characteristic_joint_growth
   refine ⟨B', L', (le_max_left _ _).trans hB', (le_max_left _ _).trans hL', ?_⟩
   apply hP'.congr K
   intro i z hz
-  change (b i z - Real.sqrt (b i z ^ 2 - a i z * c i z)) * (a i z)⁻¹ = _
-  rw [div_eq_mul_inv, div_eq_mul_inv, sub_mul]
+  exact scalar_characteristic_algebra (a i z) (b i z) (c i z)
 
 end ScalarCoefficients
 
@@ -194,7 +210,7 @@ private theorem originalCoefficientEntry_zero_apply
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
     (z : AnnularState S × ℝ) (p : PolarPoint) :
     originalCoefficientEntry D S C 0 z p = (originalCoefficients D S C z).a p := by
-  simp only [originalCoefficientEntry, if_pos rfl]
+  simp only [originalCoefficientEntry, eq_self_iff_true, ite_true]
 
 private theorem originalCoefficientEntry_one_apply
     (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
@@ -207,6 +223,71 @@ private theorem originalCoefficientEntry_two_apply
     (z : AnnularState S × ℝ) (p : PolarPoint) :
     originalCoefficientEntry D S C 2 z p = (originalCoefficients D S C z).c p := by
   norm_num [originalCoefficientEntry]
+
+private theorem originalCoefficientEntry_discriminant_apply
+    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (z : AnnularState S × ℝ) (p : PolarPoint) :
+    originalCoefficientEntry D S C 1 z p ^ 2 -
+        originalCoefficientEntry D S C 0 z p * originalCoefficientEntry D S C 2 z p =
+      (originalCoefficients D S C z).b p ^ 2 -
+        (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p :=
+  congrArg₂ (fun b ac : ℝ => b ^ 2 - ac)
+    (originalCoefficientEntry_one_apply D S C z p)
+    (congrArg₂ (fun a c : ℝ => a * c)
+      (originalCoefficientEntry_zero_apply D S C z p)
+      (originalCoefficientEntry_two_apply D S C z p))
+
+private theorem originalCoefficientEntry_minus_apply
+    (D : ReferenceData) (S : PhysicalSpacesData) (C : NonlinearGeometryData S)
+    (z : AnnularState S × ℝ) (p : PolarPoint) :
+    originalCoefficientEntry D S C 1 z p / originalCoefficientEntry D S C 0 z p -
+        Real.sqrt (originalCoefficientEntry D S C 1 z p ^ 2 -
+          originalCoefficientEntry D S C 0 z p * originalCoefficientEntry D S C 2 z p) /
+            originalCoefficientEntry D S C 0 z p =
+      minusCharacteristicSpeed (originalCoefficients D S C z) p :=
+  congrArg (fun q : ℝ × ℝ × ℝ =>
+    q.2.1 / q.1 - Real.sqrt (q.2.1 ^ 2 - q.1 * q.2.2) / q.1)
+    (Prod.ext (originalCoefficientEntry_zero_apply D S C z p)
+      (Prod.ext (originalCoefficientEntry_one_apply D S C z p)
+        (originalCoefficientEntry_two_apply D S C z p)))
+
+private theorem minusCharacteristicSpeed_stripTower_nonempty
+    (hN : N01Properties D T S C base loss ε)
+    (hS : IsPhysicalSpaces D T S) (hT : IsMaterialData D T)
+    (j : ℕ → ℕ) (hcell : ∀ m, Ioo (C.left m) (C.right m) ⊆ D.cells (j m))
+    (l h : ℕ → ℝ) (hl : ∀ m, C.left m < l m) (hh : ∀ m, h m < C.right m)
+    (hapos : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ (m : ℕ) (p : PolarPoint),
+      p.1 ∈ Ioo (l m) (h m) → 0 < (originalCoefficients D S C (liftSectorParameter S C z)).a p)
+    (hdpos : ∀ z ∈ sectorNeighborhood S base ε ε, ∀ (m : ℕ) (p : PolarPoint),
+      p.1 ∈ Ioo (l m) (h m) →
+        0 < (originalCoefficients D S C (liftSectorParameter S C z)).b p ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C z)).a p *
+            (originalCoefficients D S C (liftSectorParameter S C z)).c p)
+    (m : ℕ) :
+    Nonempty (SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))
+      (fun x : (StateDirections S × ℝ) × PolarPoint =>
+        minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2)) := by
+  let U : Set (StateDirections S × ℝ) := sectorNeighborhood S base ε ε
+  let V : Set PolarPoint := Ioo (l m) (h m) ×ˢ univ
+  let f : Fin 3 → (StateDirections S × ℝ) × PolarPoint → ℝ := fun i x =>
+    originalCoefficientEntry D S C i (liftSectorParameter S C x.1) x.2
+  let J : ∀ i : Fin 3, SmoothDirections (U ×ˢ V) (f i) := fun i =>
+    hN.originalCoefficient_stripTower hS hT j hcell l h hl hh i m
+  have ha (x : (StateDirections S × ℝ) × PolarPoint)
+      (hx : x ∈ U ×ˢ V) : 0 < f 0 x :=
+    (hapos x.1 hx.1 m x.2 hx.2.1).trans_eq
+      (originalCoefficientEntry_zero_apply D S C (liftSectorParameter S C x.1) x.2).symm
+  have hd (x : (StateDirections S × ℝ) × PolarPoint)
+      (hx : x ∈ U ×ˢ V) : 0 < f 1 x ^ 2 - f 0 x * f 2 x :=
+    (hdpos x.1 hx.1 m x.2 hx.2.1).trans_eq
+      (originalCoefficientEntry_discriminant_apply D S C
+        (liftSectorParameter S C x.1) x.2).symm
+  let K : SmoothDirections (U ×ˢ V)
+      (fun x => f 1 x / f 0 x - Real.sqrt (f 1 x ^ 2 - f 0 x * f 2 x) / f 0 x) :=
+    scalarMinusCharacteristicDirections (J 0) (J 1) (J 2) ha hd
+  refine ⟨K.congrOn ?_⟩
+  intro x hx
+  exact originalCoefficientEntry_minus_apply D S C (liftSectorParameter S C x.1) x.2
 
 /-- The actual buffered-collar hypotheses suffice for the genuine
 characteristic tower; no parameter regularity is assumed here. -/
@@ -225,25 +306,9 @@ def N01Properties.minusCharacteristicSpeed_stripTower
     (m : ℕ) :
     SmoothDirections (sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ))
       (fun x : (StateDirections S × ℝ) × PolarPoint =>
-        minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2) := by
-  let J := hN.originalCoefficient_stripTower hS hT j hcell l h hl hh
-  have ha (x : (StateDirections S × ℝ) × PolarPoint)
-      (hx : x ∈ sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ)) :
-      0 < originalCoefficientEntry D S C 0 (liftSectorParameter S C x.1) x.2 := by
-    rw [originalCoefficientEntry_zero_apply]
-    exact hapos x.1 hx.1 m x.2 hx.2.1
-  have hd (x : (StateDirections S × ℝ) × PolarPoint)
-      (hx : x ∈ sectorNeighborhood S base ε ε ×ˢ (Ioo (l m) (h m) ×ˢ univ)) :
-      0 < originalCoefficientEntry D S C 1 (liftSectorParameter S C x.1) x.2 ^ 2 -
-        originalCoefficientEntry D S C 0 (liftSectorParameter S C x.1) x.2 *
-          originalCoefficientEntry D S C 2 (liftSectorParameter S C x.1) x.2 := by
-    rw [originalCoefficientEntry_zero_apply, originalCoefficientEntry_one_apply,
-      originalCoefficientEntry_two_apply]
-    exact hdpos x.1 hx.1 m x.2 hx.2.1
-  apply (scalarMinusCharacteristicDirections (J 0 m) (J 1 m) (J 2 m) ha hd).congrOn
-  intro x hx
-  simp only [originalCoefficientEntry_zero_apply, originalCoefficientEntry_one_apply,
-    originalCoefficientEntry_two_apply, minusCharacteristicSpeed]
+        minusCharacteristicSpeed (originalCoefficients D S C (liftSectorParameter S C x.1)) x.2) :=
+  Classical.choice (minusCharacteristicSpeed_stripTower_nonempty
+    hN hS hT j hcell l h hl hh hapos hdpos m)
 
 /-- Quantitative positivity on the same actual buffered strips gives
 fixed-loss growth for any genuine tower of the original minus speed. -/
@@ -266,56 +331,61 @@ theorem N01Properties.minusCharacteristicSpeed_strip_joint_growth
     ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧
       UniformWeightedJointGrowth (pairGrading (sectorGrading S) realGrading)
         (fun m => radialE (D.cellIndex (j m))) K B L := by
-  let p := pairGrading (sectorGrading S) realGrading
+  let p : ℕ → Seminorm ℝ (StateDirections S × ℝ) :=
+    pairGrading (sectorGrading S) realGrading
+  let U : Set (StateDirections S × ℝ) := sectorNeighborhood S base ε ε
+  let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
+  let f : Fin 3 → ℕ → (StateDirections S × ℝ) × PolarPoint → ℝ := fun i _ x =>
+    originalCoefficientEntry D S C i (liftSectorParameter S C x.1) x.2
   have hp : Monotone p := sectorPairGrading_monotone S
   have hIp : HasInterpolation p := hasInterpolation_of_hasSmoothing hp
     (hasSmoothing_pairGrading (solve_sector_hasSmoothing hS) hasSmoothing_realGrading)
   let W : ℕ → ℝ := fun m => radialE (D.cellIndex (j m))
   have hW (m : ℕ) : 1 ≤ W m := one_le_radialE_of_nat _
-  let J := hN.originalCoefficient_stripTower hS hT j hcell l h hl hh
+  let J : ∀ i m, SmoothDirections (U ×ˢ V m) (f i m) := fun i m =>
+    hN.originalCoefficient_stripTower hS hT j hcell l h hl hh i m
   have hJ (i : Fin 3) : UniformWeightedJointGrowth p (fun _ => 1) (J i) base loss :=
     hN.originalCoefficient_strip_joint_growth hS hT j hcell l h hl hh i
   have ha (m : ℕ) (x : StateDirections S × ℝ)
-      (hx : x ∈ sectorNeighborhood S base ε ε) (y : PolarPoint)
-      (hy : y ∈ Ioo (l m) (h m) ×ˢ (univ : Set ℝ)) :
-      (lam / 2) * W m ^ (-P) ≤ originalCoefficientEntry D S C 0 (liftSectorParameter S C x) y := by
-    rw [originalCoefficientEntry_zero_apply]
-    have h := (hpositive (liftSectorParameter S C x)
-      (liftSectorParameter_mem_stateNeighborhood hx le_rfl) m y hy.1).1
-    exact (by ring : (lam / 2) * W m ^ (-P) = lam * W m ^ (-P) / 2).trans_le h
+      (hx : x ∈ U) (y : PolarPoint) (hy : y ∈ V m) :
+      (lam / 2) * W m ^ (-P) ≤ f 0 m (x, y) := by
+    have hbound : lam * W m ^ (-P) / 2 ≤
+        (originalCoefficients D S C (liftSectorParameter S C x)).a y :=
+      (hpositive (liftSectorParameter S C x)
+        (liftSectorParameter_mem_stateNeighborhood (C := C) hx le_rfl) m y hy.1).1
+    exact ((scalar_characteristic_half_mul lam (W m ^ (-P))).trans_le hbound).trans_eq
+      (originalCoefficientEntry_zero_apply D S C (liftSectorParameter S C x) y).symm
   have hd (m : ℕ) (x : StateDirections S × ℝ)
-      (hx : x ∈ sectorNeighborhood S base ε ε) (y : PolarPoint)
-      (hy : y ∈ Ioo (l m) (h m) ×ˢ (univ : Set ℝ)) :
+      (hx : x ∈ U) (y : PolarPoint) (hy : y ∈ V m) :
       (lam / 2) ^ 2 * W m ^ (-(2 * P)) ≤
-        originalCoefficientEntry D S C 1 (liftSectorParameter S C x) y ^ 2 -
-          originalCoefficientEntry D S C 0 (liftSectorParameter S C x) y *
-            originalCoefficientEntry D S C 2 (liftSectorParameter S C x) y := by
-    rw [originalCoefficientEntry_zero_apply, originalCoefficientEntry_one_apply,
-      originalCoefficientEntry_two_apply]
-    have hw : (W m ^ (-P)) ^ 2 = W m ^ (-(2 * P)) := by
-      rw [pow_two, ← Real.rpow_add (zero_lt_one.trans_le (hW m))]
-      congr 1
-      ring
-    have he : (lam / 2) ^ 2 * W m ^ (-(2 * P)) = (lam * W m ^ (-P) / 2) ^ 2 := by
-      rw [← hw]
-      ring
-    exact he.trans_le (hpositive (liftSectorParameter S C x)
-      (liftSectorParameter_mem_stateNeighborhood hx le_rfl) m y hy.1).2
-  let K' := fun m => (K m).congrOn
-    (g := fun x : (StateDirections S × ℝ) × PolarPoint =>
-      originalCoefficientEntry D S C 1 (liftSectorParameter S C x.1) x.2 /
-          originalCoefficientEntry D S C 0 (liftSectorParameter S C x.1) x.2 -
-        Real.sqrt (originalCoefficientEntry D S C 1 (liftSectorParameter S C x.1) x.2 ^ 2 -
-          originalCoefficientEntry D S C 0 (liftSectorParameter S C x.1) x.2 *
-            originalCoefficientEntry D S C 2 (liftSectorParameter S C x.1) x.2) /
-              originalCoefficientEntry D S C 0 (liftSectorParameter S C x.1) x.2)
-    (by intro x hx; simp only [originalCoefficientEntry_zero_apply, originalCoefficientEntry_one_apply,
-      originalCoefficientEntry_two_apply, minusCharacteristicSpeed])
-  obtain ⟨B, L, hB, hL, hb⟩ := scalar_characteristic_joint_growth (J 0) (J 1) (J 2)
-    p hp hIp W hW base loss (hJ 0) (hJ 1) (hJ 2) (half_pos hlam) hP ha hd K'
-  refine ⟨B, L, hB, hL, ?_⟩
-  exact hb.congr K (by intro m x hx; simp only [originalCoefficientEntry_zero_apply,
-    originalCoefficientEntry_one_apply, originalCoefficientEntry_two_apply, minusCharacteristicSpeed])
+        f 1 m (x, y) ^ 2 - f 0 m (x, y) * f 2 m (x, y) := by
+    have hbound : (lam * W m ^ (-P) / 2) ^ 2 ≤
+        (originalCoefficients D S C (liftSectorParameter S C x)).b y ^ 2 -
+          (originalCoefficients D S C (liftSectorParameter S C x)).a y *
+            (originalCoefficients D S C (liftSectorParameter S C x)).c y :=
+      (hpositive (liftSectorParameter S C x)
+        (liftSectorParameter_mem_stateNeighborhood (C := C) hx le_rfl) m y hy.1).2
+    exact ((scalar_characteristic_half_rpow_sq lam (W m) P
+      (zero_lt_one.trans_le (hW m))).trans_le hbound).trans_eq
+        (originalCoefficientEntry_discriminant_apply D S C
+          (liftSectorParameter S C x) y).symm
+  let K' : ∀ m, SmoothDirections (U ×ˢ V m)
+      (fun x => f 1 m x / f 0 m x -
+        Real.sqrt (f 1 m x ^ 2 - f 0 m x * f 2 m x) / f 0 m x) := fun m =>
+    (K m).congrOn (fun x _ =>
+      (originalCoefficientEntry_minus_apply D S C (liftSectorParameter S C x.1) x.2).symm)
+  let data : ∃ B L : ℕ, base ≤ B ∧ loss ≤ B ∧ UniformWeightedJointGrowth p W K' B L :=
+    scalar_characteristic_joint_growth (ι := ℕ) (E := StateDirections S × ℝ)
+      (P := PolarPoint) (U := U) (V := V) (a := f 0) (b := f 1) (c := f 2)
+      (J 0) (J 1) (J 2) p hp hIp W hW base loss (hJ 0) (hJ 1) (hJ 2)
+      (lam := lam / 2) (P₀ := P) (half_pos hlam) hP ha hd K'
+  let B : ℕ := data.choose
+  let L : ℕ := data.choose_spec.choose
+  have hB : base ≤ B := data.choose_spec.choose_spec.1
+  have hL : loss ≤ B := data.choose_spec.choose_spec.2.1
+  have hb : UniformWeightedJointGrowth p W K' B L := data.choose_spec.choose_spec.2.2
+  exact ⟨B, L, hB, hL, hb.congr K (fun m x _ =>
+    originalCoefficientEntry_minus_apply D S C (liftSectorParameter S C x.1) x.2)⟩
 
 /-- A complete actual tower and its uniform fixed-loss estimate are
 constructed from the same quantitative collar witnesses. -/
