@@ -1,0 +1,63 @@
+{
+  "kind": "audit_workspace_outage_identity_and_fact_capsule",
+  "proposed_backup_path": "audit/recovery/OutageReviewIdentityFacts20261112.json",
+  "status": "IDENTITIES_AND_COMPLETED_REVIEW_FACTS_ONLY_NOT_RECOVERED_ORIGINAL_BYTES",
+  "owner": "/root/audit_coordinates",
+  "reason": "The exec environment became unavailable after the following files were successfully written and their exact identities printed. Their complete serialized bytes (including creation timestamps and provider metadata) were not retained in functions store; this capsule does not pretend to reproduce them.",
+  "originals": [
+    {
+      "path": "audit/reviews/N04EndpointCircleFixedBaseBoundsIndependentReview.json",
+      "sha256": "7ce9720a1e7c07b711e045e82856113420dd10cc1885365874b8788b610dcf44",
+      "blob": "3f0593bd77ee5b68919326dd10b0b1ed477ed72c",
+      "bytes": 9655,
+      "lines": 213,
+      "completed_fact": "Full115 source, actual positive/zero/tower and uniqueness/grading providers reviewed;322 exact single-main graph nodes verified. Passed static uncompiled. B precedes n, K precedes rsel and J. The reachable oneHighVariationWeight_mono is Statements.N01cStateSeminorms, not the unimported Analysis.StateNeighborhood."
+    },
+    {
+      "path": "audit/reviews/CanonicalPrimitiveJetsNormalizationIndependentReview.json",
+      "sha256": "67e3054fe64eb40f2d8b2ab88e758ba9db38eabe101244b5ddfcc088abffbe1a",
+      "blob": "b9a1dbfb3047d890ee73b1ff5a6310332e6b95ab",
+      "bytes": 6770,
+      "lines": 133,
+      "completed_fact": "Full85 plus actual276 normalization/145 sector suppliers and full six target clauses reviewed;184 graph nodes verified. Passed static uncompiled. All33 whole atom functions agree on sector; complete differenceJets equality preserves original genuine tower and losses."
+    },
+    {
+      "path": "audit/reviews/CanonicalCurrentUniformClosenessVisibilityFinding.json",
+      "sha256": "3a647a11f005df17343944e1eee9d90cc05173626adb5e06dacd0a60d4efd0f2",
+      "blob": "7dbd0e8f5e35d5c26930f1ed102d142ad9d59e67",
+      "bytes": 2367,
+      "lines": 44,
+      "completed_fact": "Original94 mathematical argument reviewed, but spaces_mixedDerivative_zero absent from actual103-node closure. Original readiness withheld; all103 nodes searched and exact missing declaration provider identified."
+    },
+    {
+      "path": "audit/reviews/CanonicalCurrentUniformClosenessIndependentReview.json",
+      "sha256": "83320f1a04002b4a12f8e77327d197190530ef93512ff65e344ba4414bc4ce4c",
+      "blob": "d445bd3604cd9f0aa5e01f229fd31d2492433c20",
+      "bytes": 9783,
+      "lines": 191,
+      "completed_fact": "Final94 compatibility source ca4ff618 full/delta review passed. The exact sole replacement uses project mixedDerivative and pinned iteratedDeriv_zero/Prod.eta. Strict delta, same sample absorption, original tower restriction and unchanged102 nonroot graph nodes verified. Uncompiled."
+    },
+    {
+      "path": "audit/compatibility/opposite-root-div-eq-iff/OppositeRootDivEqIffCompatibilityReviewedManifest.json",
+      "sha256": "4ea37d12f590b36387ecd27f30413ddf2dd5e2c04f101c96ef368ec726243840",
+      "blob": "ee579f0bbcb1283fa44662a6eeb66682d3e825cd",
+      "bytes": 6174,
+      "lines": 126,
+      "completed_fact": "Owner selection binds final197 blob398cf5d4 and final256 blob5b0d8327, candidate6e1ac1e1, quantitative fullpeer612d4bea and197addendum6b7d9b37 plus original root algebra fullpeer98c8. Exactly three div_eq_iff API-token repairs; originals remain immutable. Uncompiled."
+    }
+  ],
+  "exact_content_available_in_functions_store": [
+    {
+      "key": "ActualNegativeStageCDHalfAndSampleRoute_content",
+      "path": "audit/recovery/ActualNegativeStageCDHalfAndSampleRoute.json",
+      "blob": "b78fe451540e9076b18b913e78abd4970e83f092",
+      "sha256": "3f988dc3f78a4e7e2b360568fa803018110b1b4db912231fce6acdd27b5b7d52"
+    }
+  ],
+  "forbidden_actions_not_taken": [
+    "No exec retry after unavailable environment",
+    "No active source/index/ref/CI mutation",
+    "No local Lean/elaboration",
+    "No claim that identity metadata equals exact recovered file content"
+  ]
+}

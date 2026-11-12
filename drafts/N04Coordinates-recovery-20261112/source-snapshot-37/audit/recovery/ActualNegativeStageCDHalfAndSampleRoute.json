@@ -1,0 +1,198 @@
+{
+  "kind": "readonly_actual_negative_stage_C_to_D_route",
+  "owner": "/root/audit_coordinates",
+  "status": "READONLY_DERIVATION_AND_PROVIDER_AUDIT_NOT_NEW_LEAN_OR_COMPLETION",
+  "repository": "Rogerhu12/continuous-flexibility",
+  "selected_actual_provider_pin": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "compared_main_pin": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "proposed_backup_path": "audit/recovery/ActualNegativeStageCDHalfAndSampleRoute.json",
+  "provenance": "Written from full source reads completed before the 2026-11-12 workspace transport outage. This document is a new readonly report. It does not claim that current/main definitions have been silently interchanged or that CurrentJets has already been constructed.",
+  "frozen_actual_inputs": [
+    {
+      "path": "audit/compatibility/opposite-root-div-eq-iff/RootTravelOppositeCoordinates.lean",
+      "sha256": "ecd653a3b8f6817b590d1b385f1fc495fb4612b46fdb6e9398e8d798fd11ff9e",
+      "blob": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+      "lines": 197,
+      "scope": "Actual common-travel two-root coordinate, signed differential, height and absolute-Jacobian identities."
+    },
+    {
+      "path": "audit/compatibility/opposite-root-div-eq-iff/ActualNegativeOppositeRootFields.lean",
+      "sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+      "blob": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+      "lines": 256,
+      "scope": "The same actual old K, true full component, literal stored fields, full germs, first jets and normalized ratios."
+    },
+    {
+      "path": "root/compatibility/current-uniform-zero-jet/CanonicalCurrentUniformCloseness.lean",
+      "sha256": "542b75aa28930a3e7303536ea2ff712e20c0b7a49689e1eaf9d857f400c90aa0",
+      "blob": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+      "lines": 94,
+      "scope": "Given actual CurrentJets, select one base and radius for all atom differences < delta. This is not an actual CurrentJets producer."
+    }
+  ],
+  "original_indices": {
+    "component": "m : Nat",
+    "side": "side : Bool, opposite = !side",
+    "old_atlas_indices": "k,k' certified by e0 k=Sum.inl(m,side), e0 k'=Sum.inl(m,!side)",
+    "same_travel": "T_m=C.travel m and rho=n04bRootCutRadius(T_m)",
+    "whole_atlas_indices": "For whole V, e i=Sum.inl(m,side); the actual old index is if side then (K.cutPair m).2 else (K.cutPair m).1. Use n04WholeReferenceGaugeAtlasData_negative_fields; do not conflate e and e0.",
+    "three_distinct_cell_roles": "The raw optical/control host, any correction cutoff host, and old K.cell(k) are distinct data. No equality is asserted."
+  },
+  "normalization": {
+    "literal_atom": "CanonicalGeometry.atom ... K z k .chartRadial q = ((K.chart z k (physicalUnitPoint K k q)).1 - K.left k)/(K.right k-K.left k).",
+    "actual_negative_metadata": "K.left k=0 and K.right k=rho for both negative halves. Thus the chartRadial atom is the actual stored radial coordinate divided by rho, not divided by the physical half width.",
+    "opposite_unit_point": "For a physical point p in the fixed opposite reference half, q=((p.1-K.physicalLeft k')/(K.physicalRight k'-K.physicalLeft k'),p.2). Then q is in unitStrip and physicalUnitPoint K k' q=p.",
+    "direct_apis": [
+      {
+        "path": "src/ContinuousFlexibility/Statements/Nonlinear.lean",
+        "lines": [
+          999,
+          1005,
+          1024,
+          1036
+        ],
+        "names": [
+          "CanonicalGeometry.physicalUnitPoint",
+          "CanonicalGeometry.canonicalUnitPoint",
+          "CanonicalGeometry.atom"
+        ]
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N04bTypedAtlasData.lean",
+        "names": [
+          "n04bTypedAtlasData",
+          "n04bTypedAtlasData_physicalPieceOpen",
+          "n04bTypedAtlasData_referencePhysicalPieceOpen"
+        ]
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N07aCanonicalUnitCoefficient.lean",
+        "lines": [
+          53,
+          65
+        ],
+        "names": [
+          "n07aCanonicalUnitInversePoint"
+        ],
+        "note": "Use the existing maps/inverse lemmas on n07aPhysicalIntervalData K. The actual exact application is also demonstrated in N07aMaterialPieceBounds.lean:42-46."
+      },
+      {
+        "path": "src/ContinuousFlexibility/Analysis/N07aForwardChartBounds.lean",
+        "line": 38,
+        "names": [
+          "n07a_forwardChart_eq_rawAtoms"
+        ]
+      }
+    ]
+  },
+  "minimal_actual_range_argument": [
+    "Take p in the target actual moving negative half and in the opposite fixed reference half. The actual current-domain subset theorem puts p in the true full negative component, where the frozen 256-field identities apply.",
+    "The target actual half is defined by actual travel in (0,T_m/2) after the Bool orientation. Therefore v=(K.chart z k p).1/rho lies in (0,1); no identification with a fixed radial half is used.",
+    "The normalized identity v^(3/2)+u^(3/2)=2, u=(K.chart z k' p).1/rho, implies u>1 using u,v>0 and v<1.",
+    "At reference state, the actual PartA producer gives referenceDomain and chart MapsTo. Opposite fixed-half membership gives u_ref=(K.chart ref k' p).1/rho in (0,1).",
+    "Apply the root's actual common-shrink conclusion with delta=1/4, the opposite piece k' (or its exactly reindexed whole V counterpart), atom chartRadial and the true physical unit inverse q. The literal normalization above gives |u-u_ref|<1/4.",
+    "It follows that 1<u<5/4, hence u in Icc 1 (5/4). The current atom is evaluated on the fixed reference unit strip even when p is outside the current opposite half; this is permitted by the actual CurrentJets definition, and full-component stored-field germs justify the two-root conversion.",
+    "The root common-shrink output restricts the same genuine tower and chooses the neighborhood only once. Its actual CurrentJets premise still has to be supplied by the construction; this report does not insert it as a replacement final assumption."
+  ],
+  "universal_height_jacobian_cost": {
+    "definitions": "g(u)=(2-u^(3/2))^(2/3), c=(7/16)^(2/3), a=(4*c/5)^(1/4), b=sqrt(5/(4*c)). All are universal numbers/functions independent of m,z,rho or any sample.",
+    "range": "For 1<=u<=5/4 and v=g(u), u^(3/2)<=u^2<=25/16, hence c<=v<=1. In particular c>0.",
+    "exact_ratios": "H_target/H_opposite=(v/u)^(1/4); absJ_target/absJ_opposite=sqrt(u/v).",
+    "inequalities": [
+      "a<=H_target/H_opposite<=1",
+      "1<=absJ_target/absJ_opposite<=b",
+      "H_opposite_inverse<=H_target_inverse<=a^(-1)*H_opposite_inverse",
+      "b^(-1)*absJ_opposite_inverse<=absJ_target_inverse<=absJ_opposite_inverse"
+    ],
+    "jets": "For first and higher finite jets, first rewrite the actual full-component identities to the fixed scalar factors eta(u)=(g(u)/u)^(1/4) and zeta(u)=sqrt(u/g(u)). They are ordinarily smooth on a neighborhood of Icc 1 (5/4), so their fixed finite derivative costs are universal. Product/composition with the actual opposite stored fields is justified by the frozen full germs. Conversion between physical derivatives and the fixed unit coordinates pays the genuine physical half-width powers; existing actual length material bounds must be used explicitly.",
+    "not_yet_formalized": "The compact scalar inequalities and their actual domain/atom specialization are a next small consumer, not already proved by the frozen197/256 statements. No final15-field material estimate is claimed."
+  },
+  "samples": {
+    "actual_definition": "N04bReferencePieces.lean:115-123 defines K.cell k = n04CellAt D ((physicalLeft k+physicalRight k)/2). N04SignedPieces.lean:50-65 defines n04CellAt by an existential cell-membership choice.",
+    "left_right": "The two half midpoints are (C.left m+cut m)/2 and (cut m+C.right m)/2. They are different physical points; n04CellAt need not be equal or unequal on them. There is no definitional equality or uniqueness theorem identifying their cells/samples.",
+    "preferred_stage_D_route": "For E0(sample k')^P with P>=0, apply n04bActualTypedAtlas_negative_material_sample_comparison directly at the current physical radius p.1 in the full negative component. It gives a polynomial bound in E0(p.1). Apply the same theorem separately to k when needed. This preserves both samples and avoids an unnecessary sample-to-sample transport.",
+    "explicit_sample_comparison_route": "If a true same-normalizer comparison is needed, use n04bActualTypedAtlas_negative_sample_endpointX at the common full-component midpoint r*=(C.left m+C.right m)/2 for both k and k'. The triangle inequality gives |X(sample k)-X(sample k')|<=2*A. Both samples are in the physical core by materialSample_mem_interval. Apply the genuine bounded-X material shift theorem to these two actual sample radii. Do not apply a full-component-only point lemma to a sample without proving that sample lies in the component.",
+    "sample_bounds_source": {
+      "path": "audit/reconstructed/ActualNegativeMaterialSamples.lean",
+      "blob": "2546c07212cf569a225e873eb38945a9cb4127e3",
+      "sha256": "696583df4d5261aff78e5a6cc32ff4fde06ea6d17b2bdf2745805fde0a06c2fc",
+      "names": [
+        "n04bActualTypedAtlas_negative_sample_endpointX",
+        "n04bActualTypedAtlas_negative_material_sample_weights",
+        "n04bActualTypedAtlas_negative_material_sample_comparison"
+      ]
+    },
+    "sample_point_direction": "The comparison output includes H(r)/H(sample k)<=BH*E0(r)^AH and E0(sample k)^P<=BE*E0(r)^AE. Do not reverse an E0 estimate or absorb it into H with a changed exponent without an actual lemma.",
+    "additional_provider": {
+      "path": "quantitative/primitive-route/reconstructed/MaterialOneSidedEndpointComparison.lean",
+      "name": "material_oneSided_endpoint_comparison",
+      "actual_header": "For R,L>=0, constants KH,AH,KE,AE precede every core r,s; X(s)<=X(r)+L implies H(r)/H(s)<=KH E0(r)^AH and E0(s)^R<=KE E0(r)^AE."
+    },
+    "no_floor_or_cell_assumptions": "No E0>=1, whole-component single-cell membership, or equality of the raw host with K.cell is introduced."
+  },
+  "actual_membership_and_reindexing_apis": [
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bCurrentPartition.lean",
+      "names": [
+        "n04bTypedPhysicalDomain",
+        "n04b_typed_negative_domain_subset"
+      ],
+      "purpose": "Current moving-half membership and true full-component inclusion."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bMovingDomains.lean",
+      "names": [
+        "mem_n04bTravelDomain"
+      ],
+      "purpose": "Unpack the actual travel range."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelIntervals.lean",
+      "names": [
+        "n04bTravelOrientation_mem_iff"
+      ],
+      "purpose": "The Bool side is one oriented (0,T/2) statement."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bRootTravelCharts.lean",
+      "names": [
+        "n04b_rootHalf_chart_data"
+      ],
+      "purpose": "Actual own half maps to canonical (0,rho)."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bReferenceHalves.lean",
+      "names": [
+        "n04b_negativeHalf_bounds",
+        "n04b_negativeHalf_subset",
+        "n04b_negativeHalf_existsUnique",
+        "n04b_negativeHalf_index_unique"
+      ],
+      "purpose": "True fixed reference halves and the off-cut two-case split."
+    },
+    {
+      "path": "src/ContinuousFlexibility/Analysis/N04bActualAtlasGeometry.lean",
+      "name": "n04b_actualTypedAtlas_partA",
+      "purpose": "Actual constructor yields referenceDomain, referenceBounds, chart MapsTo and open domains; no final geometry premise is manufactured."
+    },
+    {
+      "path": "root/reconstructed/WholeReferenceGaugeAtlasData.lean",
+      "name": "n04WholeReferenceGaugeAtlasData_negative_fields",
+      "purpose": "Literal old-K-to-same-V negative chart/inverse/height/domain/cell/length reindexing."
+    },
+    {
+      "path": "positive/reconstructed/WholeReferenceGaugeRelativeFields.lean",
+      "name": "n04WholeReferenceGaugeAtlasData_negative_relative_fields",
+      "purpose": "The true same-V relative point and height-ratio fields equal the original K fields."
+    }
+  ],
+  "fixed_cut_case": "The reference cut itself belongs to neither open fixed half. For p on that cut but inside an actual moving half, use the latter's openness and actual full-component smoothness to take limits from the opposite fixed half while remaining in the moving target half. The material envelope and finite derivative expressions are continuous at this interior physical point. A pointwise neighborhood suffices; no uniform collar radius or equality of cuts is required. True roots do not occur in the materialJets open physical-piece domain.",
+  "main_compatibility": "Keep the complete selected18f graph. Main1ece changes N04bFieldRegularity (reference_flow and spatial correction projection) and shortens some ReferenceActualTravel/ReferenceActualDomains public binders. Frozen256 does not call those shortened reference-only functions. Seven direct common-travel/actual-germ providers were byte-equal across the compared pins; this does not establish interchangeability of the entire graph.",
+  "constraints": {
+    "new_lean_written": false,
+    "active_sources_index_refs_ci_modified": false,
+    "local_lean_or_elaboration": false,
+    "claims_final_CurrentJets": false,
+    "claims_full_primitive_materialJets": false
+  }
+}

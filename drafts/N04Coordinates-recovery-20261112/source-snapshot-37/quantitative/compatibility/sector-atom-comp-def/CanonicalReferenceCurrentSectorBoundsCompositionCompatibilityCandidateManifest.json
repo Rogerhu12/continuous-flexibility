@@ -1,0 +1,77 @@
+{
+  "kind": "canonical_reference_current_sector_composition_compatibility_candidate",
+  "owner": "/root/quantitative_route",
+  "status": "HELD_UNCOMPILED_AWAITING_INDEPENDENT_DELTA_REVIEW",
+  "original": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBounds.lean",
+    "sha256": "eb172cebbdc78d439c150c38aa23c945c488d614b5255f8d0736c928ddb94731",
+    "blob": "14715ca2fbc5ad6b63e18b324e88817c96e245b7",
+    "bytes": 9203,
+    "lines": 182
+  },
+  "candidate": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBounds.lean",
+    "target_path": "src/ContinuousFlexibility/Analysis/CanonicalReferenceCurrentSectorBounds.lean",
+    "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+    "blob": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+    "bytes": 9195,
+    "lines": 182
+  },
+  "changes": [
+    {
+      "line": 147,
+      "before": "    simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "    simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    },
+    {
+      "line": 157,
+      "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    },
+    {
+      "line": 161,
+      "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    },
+    {
+      "line": 165,
+      "before": "        simpa only [n07aCanonicalAtomField, Function.comp_apply, CanonicalGeometry.atom,",
+      "after": "        simpa only [n07aCanonicalAtomField, Function.comp_def, CanonicalGeometry.atom,"
+    }
+  ],
+  "mechanical_checks": {
+    "replacement_count": 4,
+    "all_other_bytes_identical": true,
+    "reverse_replacement_recovers_original": true,
+    "line_count_unchanged": 182,
+    "public_headers_imports_options_unchanged": true
+  },
+  "reason": "Static elaboration-risk correction: expose the higher-order function composition as a lambda before reducing the literal atom and applying the actual canonical-unit inverse equality. No compilation failure was observed for the original source.",
+  "unchanged_companion": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentAbsoluteJets.lean",
+    "sha256": "c1b05760d478ef2e0e480010ae0b985db327927ac4178153660f79ef6a15c699",
+    "blob": "74e009ae51c272ef758c21447a9f494156e3d6ec",
+    "bytes": 5173,
+    "lines": 109
+  },
+  "original_candidate_manifest": {
+    "path": "/workspace/scratch/bbbea77e4163/n04-drafts/root/reconstructed/CanonicalReferenceCurrentSectorBoundsCandidateManifest.json",
+    "sha256": "d780b5cdd83667e02f5299061b2d169127fb7e9603c81010d5ef68bcc21e5667",
+    "blob": "be09239f2cbe934c12a9bf611f00040cb384b75e",
+    "bytes": 13961,
+    "lines": 284
+  },
+  "provider_selection": {
+    "original_graph_sha256": "f7df61bf5ca885b8a5df42e774396d44811f9d2568928131247177b01f4750ec",
+    "replacement_module": "ContinuousFlexibility.Analysis.CanonicalReferenceCurrentSectorBounds",
+    "all_other_provider_bytes_unchanged": true,
+    "new_graph": "To be explicitly frozen before activation; no claim that the old graph already names the compatibility blob."
+  },
+  "authorization": "Parent /root explicitly authorized a 182-line compatibility successor from the global reserve after reviewing this four-token static risk.",
+  "execution": {
+    "lean": false,
+    "elaboration": false,
+    "active_source_index_refs_CI_modified": false,
+    "storage": "New immutable Git blob only; original filesystem unavailable. Proposed paths are not yet created locally."
+  }
+}

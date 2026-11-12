@@ -1,0 +1,100 @@
+{
+  "kind": "workspace_outage_incremental_preservation",
+  "snapshot": 37,
+  "created_at": "2026-11-12 20:19:27 UTC",
+  "parent": "be31f3ade99ace57e0fc7760a89491bbf9cab771",
+  "base_tree": "a80fb770a53a992d906fc31c0ce88de28bdbc63d",
+  "active_head": "c796387fb555392501c81f5b8bd834936251516c",
+  "compiled_baseline": "18f7f6330eceeb9280b84ad0ca0b25c9cd7e3e67",
+  "main_rules_checked": "1ecee654ecfa9cf39b8d846dccbf593ec1c0f2ac",
+  "previous_indexed_originals": 2942,
+  "indexed_originals": 2951,
+  "files": [
+    {
+      "name": "root/reconstructed/CanonicalPrimitiveJetsNormalization.lean",
+      "sha": "19fbfbee2481dc3603bb1dcd55f479f55c256b97",
+      "lines": 85,
+      "sha256": "b930c8f21c01d5a534fc634a94bc354bc6dbeda3551d5995e8a9b711731233e5",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/root/reconstructed/CanonicalPrimitiveJetsNormalization.lean"
+    },
+    {
+      "name": "audit/compatibility/opposite-root-div-eq-iff/RootTravelOppositeCoordinates.lean",
+      "sha": "398cf5d4c3207cc9e9dd31cbe09887007d9aff2c",
+      "lines": 197,
+      "sha256": "ecd653a3b8f6817b590d1b385f1fc495fb4612b46fdb6e9398e8d798fd11ff9e",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/audit/compatibility/opposite-root-div-eq-iff/RootTravelOppositeCoordinates.lean"
+    },
+    {
+      "name": "audit/compatibility/opposite-root-div-eq-iff/ActualNegativeOppositeRootFields.lean",
+      "sha": "5b0d8327ff2054595a95f053d2f5e82afeabc2dd",
+      "lines": 256,
+      "sha256": "c0650b4a9db498e63f79036a37b29d1b97dbee449a3209fbf32290456faa4626",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/audit/compatibility/opposite-root-div-eq-iff/ActualNegativeOppositeRootFields.lean"
+    },
+    {
+      "name": "root/compatibility/current-uniform-zero-jet/CanonicalCurrentUniformCloseness.lean",
+      "sha": "ca4ff618fbc4e869ccc7195c8244ee965e4f2bbc",
+      "lines": 94,
+      "sha256": "542b75aa28930a3e7303536ea2ff712e20c0b7a49689e1eaf9d857f400c90aa0",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/root/compatibility/current-uniform-zero-jet/CanonicalCurrentUniformCloseness.lean"
+    },
+    {
+      "name": "positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+      "dest": "drafts/N04Coordinates-recovery-20261112/working/positive/reconstructed/TameFixedBaseCompositionBounds.lean",
+      "sha": "488ba86a344330a738c1e2e0e5a943ce7645ddc4",
+      "sha256": "59060520523b6611f91c76db1d198950d65f3ce7073dfdcb5f078b0e00f91a83",
+      "bytes": 8094,
+      "lines": 153,
+      "state": "UNFROZEN_PARTIAL_NOT_COMPILED"
+    },
+    {
+      "name": "quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBounds.lean",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBounds.lean",
+      "sha": "8dcc2e224e6eb437764407ba8ae16c631106f685",
+      "sha256": "ee6719537036a2f020dc9355902c42c9ac1c2eecb6b16ce8739b38beceafaa51",
+      "lines": 182,
+      "state": "COMPATIBILITY_CANDIDATE_AWAITING_FINAL_PEER"
+    },
+    {
+      "name": "quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBoundsCompositionCompatibilityCandidateManifest.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/quantitative/compatibility/sector-atom-comp-def/CanonicalReferenceCurrentSectorBoundsCompositionCompatibilityCandidateManifest.json",
+      "sha": "e162ddb2845d9b3554f366d0081116a345bf41c7",
+      "sha256": "01da95d64b202ebdc9dbee93e89592f678e1b1afcc374943f347ee404ffa2905",
+      "lines": 77
+    },
+    {
+      "name": "audit/recovery/ActualNegativeStageCDHalfAndSampleRoute.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/audit/recovery/ActualNegativeStageCDHalfAndSampleRoute.json",
+      "sha": "b78fe451540e9076b18b913e78abd4970e83f092",
+      "sha256": "3f988dc3f78a4e7e2b360568fa803018110b1b4db912231fce6acdd27b5b7d52",
+      "lines": 198
+    },
+    {
+      "name": "audit/recovery/OutageReviewIdentityFacts20261112.json",
+      "dest": "drafts/N04Coordinates-recovery-20261112/source-snapshot-37/audit/recovery/OutageReviewIdentityFacts20261112.json",
+      "sha": "ad5f59c6986b8f29313670662bea1e495a0c4ac9",
+      "sha256": "e669859849454d8dbc6c79463a630d0455abb5303e46915bba0025e9c72c77b6",
+      "lines": 63
+    }
+  ],
+  "added_lean_in_snapshot": 967,
+  "previous_uncompiled_preserved_lean": 17905,
+  "status": "SOURCE_PRESERVATION_ONLY_NOT_COMPILATION",
+  "CI164": {
+    "run": 43285158817,
+    "job": 131416494593,
+    "head": "c796387fb555392501c81f5b8bd834936251516c",
+    "quick_check": "success",
+    "full_build": "in_progress",
+    "observed_at": "2026-11-12 20:16:43 UTC"
+  },
+  "limitations": [
+    "The workspace transport became unavailable; no local staging, Lean execution, or root generation was performed.",
+    "Older peer receipts not already in snapshot36 are represented by a new explicit fact capsule when their exact original serialized bytes have not been recovered. No missing receipt is claimed recovered.",
+    "The 182-line composition compatibility candidate is a four-token simplifier repair pending its final full review; the 153-line composition source is an unfinished working draft.",
+    "Active source and refs are unchanged; CI164 remains running."
+  ],
+  "future_budget_ceiling_including_allocations": 19828,
+  "hard_limit": 20000,
+  "current_preserved_uncompiled_lean": 18872
+}
