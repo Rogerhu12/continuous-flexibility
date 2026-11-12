@@ -162,9 +162,13 @@ jobs:
           exit "$status"
       - name: Save project build artifacts
         # Save first, delete older entries only after the save succeeded, so a cancelled
-        # or failed run never leaves the branch without a cache.
+        # or failed run never leaves the branch without a cache. Only a run whose cache
+        # layers were fully restored saves: a run cancelled while restoring has a partial
+        # or missing .lake/build, and saving it would replace the branch's good entry.
         id: save
-        if: always()
+        if: >-
+          always() && steps.restore-main.outcome == 'success' &&
+          (github.ref_name == 'main' || steps.restore.outcome == 'success')
         continue-on-error: true
         uses: actions/cache/save@v4
         with:
