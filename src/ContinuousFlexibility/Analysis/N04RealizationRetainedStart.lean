@@ -1,4 +1,5 @@
 import ContinuousFlexibility.Analysis.N05RetainedReferenceAssembly
+import ContinuousFlexibility.Analysis.N04RealizationRetainedPositiveEndpoints
 import ContinuousFlexibility.Analysis.N05RetainedOpticalLowerAdapter
 import ContinuousFlexibility.Analysis.N05RetainedN01a
 import ContinuousFlexibility.Analysis.N04RealizationRetainedN01
@@ -11,7 +12,8 @@ import ContinuousFlexibility.Analysis.N01ResidualSmoothTame
 The original retained pair, connected reference and coordinate certificate
 survive the cumulative construction. The existing seed factory supplies
 the material data, physical spaces, primitive geometry and global E0
-floor. One flow installation completes N01; its fixed return equation
+floor. The same seed also supplies the interior simple-root certificate for
+all positive endpoints. One flow installation completes N01; its fixed return equation
 and one optical cutoff then give Through03 on a common neighborhood.
 
 The retained source is `n05_exists_retained_radial_reference`. Its bridge
@@ -173,6 +175,10 @@ theorem n04Realization_retainedSeed_through03
     (hD : IsRadialReference Γ.reference)
     (hconstruction : RadialConstructionGeometry Γ.reference)
     (hcoordinates : R11aRetainedCoordinates P Γ) :
+    (∀ i : N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w),
+      ∀ side : Bool, n04PositiveEndpoint i side ∈ radialCore Γ.reference ∧
+        deriv Γ.reference.w (n04PositiveEndpoint i side) = 0 ∧
+        deriv (deriv Γ.reference.w) (n04PositiveEndpoint i side) ≠ 0) ∧
     ∃ T : MaterialData, ∃ S : PhysicalSpacesData, ∃ C : NonlinearGeometryData S,
       ∃ R : ReturnEquationData S, ∃ base loss : ℕ, ∃ ε : ℝ,
         IsMaterialData Γ.reference T ∧ IsPhysicalSpaces Γ.reference T S ∧
@@ -185,10 +191,16 @@ theorem n04Realization_retainedSeed_through03
           N04bFieldRegularity Γ.reference S C (Q.field E) base ε ∧
           (Q.field E).coefficients = returnCorrectedCoefficients Γ.reference S C Q.cutoff ∧
           (Q.field E).minusFlow = returnCorrectedMinusFlow S C Q.cutoff := by
-  change n04RealizationRetainedFieldStart Γ.reference
+  change (∀ i : N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w),
+    ∀ side : Bool, n04PositiveEndpoint i side ∈ radialCore Γ.reference ∧
+      deriv Γ.reference.w (n04PositiveEndpoint i side) = 0 ∧
+      deriv (deriv Γ.reference.w) (n04PositiveEndpoint i side) ≠ 0) ∧
+        n04RealizationRetainedFieldStart Γ.reference
   obtain ⟨Q₀, hreference, hselected_eq, _hretained, _hprofile, _hheight⟩ :=
     exists_n05_seedReferenceConstruction_of_retained P hselected hband
       hw hphi hD.1 hconstruction hcoordinates
+  refine ⟨fun i side =>
+    n04Realization_seed_positive_endpoints_sameReference Q₀ hreference i side, ?_⟩
   have hQ₀ : IsRadialReference Q₀.reference := by
     simpa only [hreference] using hD
   have hraw : (S₀.family S₀.sigma).cellIndex =
@@ -212,6 +224,10 @@ theorem n04Realization_exists_retained_fieldStart :
         Γ.reference.w = P.pair.profile ∧ Γ.reference.phi = P.pair.height ∧
         RadialConstructionGeometry Γ.reference ∧
         R11aRetainedCoordinates P Γ ∧ IsRadialReference Γ.reference ∧
+        (∀ i : N04PositiveComponent Γ.reference.a Γ.reference.b (deriv Γ.reference.w),
+          ∀ side : Bool, n04PositiveEndpoint i side ∈ radialCore Γ.reference ∧
+            deriv Γ.reference.w (n04PositiveEndpoint i side) = 0 ∧
+            deriv (deriv Γ.reference.w) (n04PositiveEndpoint i side) ≠ 0) ∧
         ∃ T : MaterialData, ∃ S : PhysicalSpacesData, ∃ C : NonlinearGeometryData S,
           ∃ R : ReturnEquationData S, ∃ base loss : ℕ, ∃ ε : ℝ,
             IsMaterialData Γ.reference T ∧ IsPhysicalSpaces Γ.reference T S ∧
