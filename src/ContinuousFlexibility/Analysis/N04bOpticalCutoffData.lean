@@ -82,6 +82,15 @@ structure N04bOpticalCutoffData (D : ReferenceData) (S : PhysicalSpacesData)
       1 / 2 ≤ deriv (C.minusFlow z m r) θ ∧
         deriv (C.minusFlow z m r) θ ≤ 3 / 2
 
+private theorem n04b_cutoff_firstDerivative_bound
+    (χ : ℕ → ℝ → ℝ) (W : ℕ → ℝ) (A : ℝ)
+    (hjets : ∀ n : ℕ, ∃ K : ℝ, 0 < K ∧ ∀ m r,
+      |iteratedDeriv n (χ m) r| ≤ K * W m ^ (A * n)) :
+    ∃ J : ℝ, 0 < J ∧ ∀ m r, |deriv (χ m) r| ≤ J * W m ^ A := by
+  obtain ⟨J, hJ, hjet⟩ := hjets 1
+  refine ⟨J, hJ, fun m r => ?_⟩
+  simpa only [iteratedDeriv_one, Nat.cast_one, mul_one] using hjet m r
+
 theorem N01Properties.exists_n04b_opticalCutoffData
     {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
     {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
@@ -129,14 +138,15 @@ theorem N01Properties.exists_n04b_opticalCutoffData
   have hχ := hchosen.2.2.2.2.2.2.2.2.2.2.2.1
   have hend := hchosen.2.2.2.2.2.2.2.2.2.2.2.2.1
   have hbuffer := hchosen.2.2.2.2.2.2.2.2.2.2.2.2.2.1
-  have hjets := hchosen.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
+  have hjets : ∀ n : ℕ, ∃ K : ℝ, 0 < K ∧ ∀ m r,
+      |iteratedDeriv n (χ m) r| ≤
+        K * radialE (D.cellIndex (j m)) ^ (A * n) :=
+    hchosen.2.2.2.2.2.2.2.2.2.2.2.2.2.2.1
   have hpositive := hchosen.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2
   have hcell (m : ℕ) : Ioo (C.left m) (C.right m) ⊆ D.cells (j m) :=
     (hdata m).1
-  obtain ⟨J, hJ, hjet⟩ := hjets 1
-  have hcutoff (m : ℕ) (r : ℝ) :
-      |deriv (χ m) r| ≤ J * radialE (D.cellIndex (j m)) ^ A := by
-    simpa only [iteratedDeriv_one, Nat.cast_one, mul_one] using hjet m r
+  obtain ⟨J, hJ, hcutoff⟩ := n04b_cutoff_firstDerivative_bound
+    χ (fun m => radialE (D.cellIndex (j m))) A hjets
   have hpositiveSupport (z : AnnularState S × ℝ)
       (hz : z ∈ stateNeighborhood S C b₀ ε₀) (m : ℕ) (p : PolarPoint)
       (hp : p.1 ∈ tsupport (deriv (χ m))) :=

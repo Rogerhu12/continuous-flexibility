@@ -110,37 +110,47 @@ private theorem mixedLeibnizMass_nonneg (n a b : ℕ) : 0 ≤ mixedLeibnizMass n
   unfold mixedLeibnizMass
   positivity
 
-private theorem mixedLeibnizMass_le_total
+private theorem nonnegative_entry_le_triple_sum
+    (M : ℕ → ℕ → ℕ → ℝ) (hM : ∀ i j k, 0 ≤ M i j k)
     {n s k a b : ℕ} (hk : k ≤ n) (hab : a + b ≤ s) :
-    mixedLeibnizMass k a b ≤
+    M k a b ≤
       ∑ t : Fin (n + 1), ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-        mixedLeibnizMass t.val u.val v.val := by
+        M t.val u.val v.val := by
   classical
   let kn : Fin (n + 1) := ⟨k, by omega⟩
   let an : Fin (s + 1) := ⟨a, by omega⟩
   let bn : Fin (s + 1) := ⟨b, by omega⟩
   calc
-    mixedLeibnizMass k a b ≤
-        ∑ v : Fin (s + 1), mixedLeibnizMass k a v.val :=
+    M k a b ≤
+        ∑ v : Fin (s + 1), M k a v.val :=
       Finset.single_le_sum
-        (f := fun v : Fin (s + 1) => mixedLeibnizMass k a v.val)
-        (fun v _ => mixedLeibnizMass_nonneg k a v.val) (Finset.mem_univ bn)
+        (f := fun v : Fin (s + 1) => M k a v.val)
+        (fun v _ => hM k a v.val) (Finset.mem_univ bn)
     _ ≤ ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-        mixedLeibnizMass k u.val v.val :=
+        M k u.val v.val :=
       Finset.single_le_sum
         (f := fun u : Fin (s + 1) =>
-          ∑ v : Fin (s + 1), mixedLeibnizMass k u.val v.val)
+          ∑ v : Fin (s + 1), M k u.val v.val)
         (fun u _ => Finset.sum_nonneg
-          (fun v _ => mixedLeibnizMass_nonneg k u.val v.val)) (Finset.mem_univ an)
+          (fun v _ => hM k u.val v.val)) (Finset.mem_univ an)
     _ ≤ ∑ t : Fin (n + 1), ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-        mixedLeibnizMass t.val u.val v.val :=
+        M t.val u.val v.val :=
       Finset.single_le_sum
         (f := fun t : Fin (n + 1) =>
           ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
-            mixedLeibnizMass t.val u.val v.val)
+            M t.val u.val v.val)
         (fun t _ => Finset.sum_nonneg (fun u _ => Finset.sum_nonneg
-          (fun v _ => mixedLeibnizMass_nonneg t.val u.val v.val)))
+          (fun v _ => hM t.val u.val v.val)))
         (Finset.mem_univ kn)
+
+
+private theorem mixedLeibnizMass_le_total
+    {n s k a b : ℕ} (hk : k ≤ n) (hab : a + b ≤ s) :
+    mixedLeibnizMass k a b ≤
+      ∑ t : Fin (n + 1), ∑ u : Fin (s + 1), ∑ v : Fin (s + 1),
+        mixedLeibnizMass t.val u.val v.val := by
+  exact nonnegative_entry_le_triple_sum mixedLeibnizMass
+    mixedLeibnizMass_nonneg (n := n) (s := s) (k := k) (a := a) (b := b) hk hab
 
 private theorem jointMixedDiagonal_mul_le
     {f g h : E × PolarPoint → ℝ} {V₀ : Set PolarPoint}

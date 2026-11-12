@@ -83,9 +83,12 @@ theorem N01Properties.n04b_opticalFieldRegularity
       0 < (originalCoefficients D S C z).b p ^ 2 -
         (originalCoefficients D S C z).a p * (originalCoefficients D S C z).c p :=
     (hN.n04b_original_negative_type hS hT hz hsector m (hsupp m hp)).2
-  refine { smooth_coefficients := ?_, periodic_coefficients := ?_,
-    positive_a := ?_, negative_discriminant := ?_,
-    reference_flow := fun m r hr θ => hreference m r hr θ }
+  refine
+    { smooth_coefficients := ?_
+      periodic_coefficients := ?_
+      positive_a := ?_
+      negative_discriminant := ?_
+      reference_flow := fun m r hr θ => hreference m r hr θ }
   · intro z hz hsector
     simpa only [hL] using
       hN.n04b_opticalCorrectedCoefficients_contDiffOn hR hS hT hz hsector

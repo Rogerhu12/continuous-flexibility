@@ -60,6 +60,69 @@ private theorem uniform_flow_jetBounds_of_measured_bounds
     (fun j hj => (hmono j (s + B) (hj.trans (Nat.le_add_right s B))
       ((J i).D n x v)).trans hnorm)
 
+private theorem uniform_flow_measured_bounds_of_zero_positive
+    {I P E F G : Type*}
+    [TopologicalSpace E] [AddCommGroup E] [Module ℝ E]
+    [TopologicalSpace F] [AddCommGroup F] [Module ℝ F]
+    (p : ℕ → Seminorm ℝ E) (measure : ℕ → G → ℝ) (decode : F → G)
+    (base : ℕ) (valid : P → Prop)
+    (f : ∀ r : P, valid r → E → F)
+    (A : ∀ n : ℕ, ∀ r : P, valid r → E → (Fin n → E) → G)
+    {U : Set E} (rsel : I → P) (hrsel : ∀ i, valid (rsel i))
+    (J : ∀ i, SmoothDirections U (f (rsel i) (hrsel i)))
+    (hdecode : ∀ i n x, x ∈ U → ∀ v : Fin n → E,
+      decode ((J i).D n x v) = A n (rsel i) (hrsel i) x v)
+    (hzero : ∃ B L : ℕ, base ≤ B ∧ ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ (r : P) (hr : valid r) x, x ∈ U → p B x ≤ R →
+        measure s (decode (f r hr x)) ≤ K * (1 + p (s + L) x))
+    (hpositive : ∃ B L : ℕ, base ≤ B ∧ ∀ n : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ (r : P) (hr : valid r) x, x ∈ U → p B x ≤ R →
+      ∀ v : Fin (n + 1) → E,
+        measure s (A (n + 1) r hr x v) ≤
+          K * oneHighVariationWeight p B (s + L) x v) :
+    ∀ n, ∃ B L : ℕ, ∀ R : ℝ, 0 ≤ R →
+      ∀ s : ℕ, B ≤ s → ∃ K : ℝ, 0 ≤ K ∧
+      ∀ i x, x ∈ U → p B x ≤ R → ∀ v : Fin n → E,
+        measure s (decode ((J i).D n x v)) ≤
+          K * oneHighVariationWeight p B (s + L) x v := by
+  intro n
+  cases n with
+  | zero =>
+      let B : ℕ := hzero.choose
+      let L : ℕ := hzero.choose_spec.choose
+      refine ⟨B, L, fun R hR s hs => ?_⟩
+      let orderData := hzero.choose_spec.choose_spec.2 R hR s hs
+      let K : ℝ := orderData.choose
+      refine ⟨K, orderData.choose_spec.1, ?_⟩
+      intro i x hx hlow v
+      have hv : v = Fin.elim0 := by
+        funext j
+        exact Fin.elim0 j
+      have hvalue : (J i).D 0 x v = f (rsel i) (hrsel i) x :=
+        (congrArg (fun w : Fin 0 → E => (J i).D 0 x w) hv).trans
+          ((J i).zero x hx)
+      have hbound : measure s (decode (f (rsel i) (hrsel i) x)) ≤
+          K * (1 + p (s + L) x) :=
+        orderData.choose_spec.2 (rsel i) (hrsel i) x hx hlow
+      have hweight : oneHighVariationWeight p B (s + L) x v =
+          1 + p (s + L) x := by
+        simp only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
+          mul_one, add_zero]
+      exact (congrArg (fun y : F => measure s (decode y)) hvalue).trans_le
+        (hbound.trans_eq (congrArg (fun a : ℝ => K * a) hweight.symm))
+  | succ n =>
+      let B : ℕ := hpositive.choose
+      let L : ℕ := hpositive.choose_spec.choose
+      refine ⟨B, L, fun R hR s hs => ?_⟩
+      let orderData := hpositive.choose_spec.choose_spec.2 n R hR s hs
+      let K : ℝ := orderData.choose
+      refine ⟨K, orderData.choose_spec.1, ?_⟩
+      intro i x hx hlow v
+      exact (congrArg (measure s) (hdecode i (n + 1) x hx v)).trans_le
+        (orderData.choose_spec.2 (rsel i) (hrsel i) x hx hlow v)
+
 variable {I : Type*} {D : ReferenceData} {T : MaterialData} {S : PhysicalSpacesData}
   {C : NonlinearGeometryData S} {base loss : ℕ} {ε : ℝ}
 
@@ -84,41 +147,23 @@ private theorem endpointFlowCircle_uniform_measured_bounds
       (hx : x ∈ sectorNeighborhood S base ε ε) (v : Fin n → StateDirections S × ℝ) :
       H.decode ((J i).D n x v) =
         hN.endpointFlowScalarJets hS hT (rsel i) (hrsel i) n x v := by
-    let h := hN.exists_endpointFlowCircle_smoothDirections hS hT (rsel i) (hrsel i)
-    exact (uniform_flow_decoded_jet_eq (J i) h.choose H.decode n x hx v).trans
-      (h.choose_spec n x hx v)
-  intro n
-  cases n with
-  | zero =>
-      let h := hN.endpointFlowCircle_circleNorm_local_growth_uniform_radius hS hT
-      let B := h.choose
-      let L := h.choose_spec.choose
-      have hb := h.choose_spec.choose_spec.2
-      refine ⟨B, L, fun R hR s hs => ?_⟩
-      obtain ⟨K, hK, hk⟩ := hb R hR s hs
-      refine ⟨K, hK, fun i x hx hlow v => ?_⟩
-      have hv : v = Fin.elim0 := by
-        funext j
-        exact Fin.elim0 j
-      have hzero : (J i).D 0 x v = hN.endpointFlowCircle hS hT (rsel i) (hrsel i) x :=
-        (congrArg (fun w : Fin 0 → StateDirections S × ℝ => (J i).D 0 x w) hv).trans
-          ((J i).zero x hx)
-      have hvalue := congrArg
-        (fun y : H.Space => circleNorm T (3 / 4 : ℝ) s (H.decode y)) hzero
-      apply hvalue.trans_le
-      simpa only [oneHighVariationWeight, Fin.prod_univ_zero, Fin.sum_univ_zero,
-        mul_one, add_zero] using hk (rsel i) (hrsel i) x hx hlow
-  | succ n =>
-      let h := hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT
-      let B := h.choose
-      let L := h.choose_spec.choose
-      have hb := h.choose_spec.choose_spec.2
-      refine ⟨B, L, fun R hR s hs => ?_⟩
-      obtain ⟨K, hK, hk⟩ := hb n R hR s hs
-      refine ⟨K, hK, fun i x hx hlow v => ?_⟩
-      exact (congrArg (circleNorm T (3 / 4 : ℝ) s)
-        (hdecode i (n + 1) x hx v)).trans_le
-          (hk (rsel i) (hrsel i) x hx hlow v)
+    let towerData := hN.exists_endpointFlowCircle_smoothDirections hS hT (rsel i) (hrsel i)
+    let J₀ : SmoothDirections (sectorNeighborhood S base ε ε)
+        (hN.endpointFlowCircle hS hT (rsel i) (hrsel i)) := towerData.choose
+    exact (uniform_flow_decoded_jet_eq
+      (E := StateDirections S × ℝ) (F := CircleSpace S) (G := ℕ → ℝ → ℝ)
+      (J i) J₀ H.decode n x hx v).trans (towerData.choose_spec n x hx v)
+  exact uniform_flow_measured_bounds_of_zero_positive
+    (I := I) (P := ℕ → ℝ) (E := StateDirections S × ℝ)
+    (F := CircleSpace S) (G := ℕ → ℝ → ℝ)
+    (U := sectorNeighborhood S base ε ε)
+    (pairGrading (sectorGrading S) realGrading) (circleNorm T (3 / 4 : ℝ)) H.decode
+    base (fun r : ℕ → ℝ => ∀ m, r m ∈ Icc (C.left m) (C.right m))
+    (fun r hr => hN.endpointFlowCircle hS hT r hr)
+    (fun n r hr x v => hN.endpointFlowScalarJets hS hT r hr n x v)
+    rsel hrsel J hdecode
+    (hN.endpointFlowCircle_circleNorm_local_growth_uniform_radius hS hT)
+    (hN.endpointFlowScalarJets_positive_circleNorm_oneHigh_uniform_radius hS hT)
 
 theorem N01Properties.endpointFlowCircle_uniformFamilyJetBounds
     (hN : N01Properties D T S C base loss ε)
