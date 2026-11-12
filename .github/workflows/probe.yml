@@ -69,8 +69,12 @@ jobs:
       - name: Check ${{ inputs.file }}
         shell: bash
         run: |
+          set +e
           start=$(date +%s)
-          timeout 900 lake env lean "${{ inputs.file }}" 2>&1 | tee probe.log | grep -E '^[^ ]*error' -A25 | head -200
-          status=${PIPESTATUS[0]}
+          timeout 900 lake env lean "${{ inputs.file }}" > probe.log 2>&1
+          status=$?
+          grep -nE 'error|heartbeats|declaration uses .sorry.' probe.log | head -100
+          echo "----- last 40 lines"
+          tail -40 probe.log
           echo "variant ${{ matrix.variant }}: exit $status after $(( $(date +%s) - start )) s"
           exit "$status"
