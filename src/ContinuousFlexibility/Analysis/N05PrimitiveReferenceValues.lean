@@ -1,4 +1,3 @@
-import ContinuousFlexibility.Analysis.N05PrimitiveReferenceInput
 import ContinuousFlexibility.Analysis.N05ReferenceHeightWindow
 
 /-!

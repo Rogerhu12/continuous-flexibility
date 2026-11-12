@@ -1,18 +1,16 @@
-import ContinuousFlexibility.Analysis.N05ReferenceInterface
+import ContinuousFlexibility.Analysis.N05PrimitiveReferenceAssembly
 
 /-!
-# N05: selection of controlled reference coordinates
+# N05 reference geometry from the primitive interface
 
-Source: readable manuscript §7, lines 462--715, and §8, lines 34--167.
-Task: `docs/tasks/N05-ReferenceGeometry.md`.
+The sub-statement retains every witness of the supplied N04 output.
+Both primitive certificates are retained on the same canonical data.
 -/
 
 namespace ContinuousFlexibility.Blueprint
 
 open ContinuousFlexibility.Statements
 
-/-- Select actual controlled reference charts while retaining the entire
-preceding nonlinear construction. The final N05 hypothesis is unchanged. -/
 theorem N05ReferenceGeometry (hN04 : N04Statement) :
     ∃ A : RadialReference, ∃ T : MaterialData, ∃ S : PhysicalSpacesData,
       ∃ C : NonlinearGeometryData S, ∃ R : ReturnEquationData S,
@@ -21,6 +19,12 @@ theorem N05ReferenceGeometry (hN04 : N04Statement) :
             IsMaterialData A.val T ∧ IsPhysicalSpaces A.val T S ∧
               NonlinearPropertiesThrough04 A.val T S C R L K base loss ε ∧
                 N05ControlledReferenceCoordinates A.val S C K := by
-  sorry
+  obtain ⟨A, T, S, C, R, L, K, base, loss, ε, hT, hS, h⟩ := hN04
+  exact ⟨A, T, S, C, R, L, K, base, loss, ε, hT, hS, h,
+    n05_controlledReferenceCoordinates_of_primitive A.property.1 hT h⟩
+
+/-- info: 'ContinuousFlexibility.Blueprint.N05ReferenceGeometry' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms N05ReferenceGeometry
 
 end ContinuousFlexibility.Blueprint

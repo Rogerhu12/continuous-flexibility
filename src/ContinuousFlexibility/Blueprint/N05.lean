@@ -28,4 +28,8 @@ theorem N05 (hN04 : N04Statement) : N05Statement := by
   exact ⟨A, T, S, C, R, L, K, V, 2, n05ReferenceDomain G hR,
     base, loss, ε, hT, hS, h04, n05ReferenceDomain_properties G hR hV hG⟩
 
+/-- info: 'ContinuousFlexibility.Blueprint.N05' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms N05
+
 end ContinuousFlexibility.Blueprint
