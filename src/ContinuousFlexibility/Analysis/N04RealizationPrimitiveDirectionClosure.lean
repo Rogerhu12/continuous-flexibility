@@ -108,19 +108,19 @@ theorem n04Realization_primitiveDirection_envelopes
         (canonicalPrimitiveDirection C K (z x) (m x) i ∘ n07bMaterialRadiusChart T) (p x)‖) := by
     fin_cases i
     · exact hangular j hj
-    · simpa only [n07b_canonicalPrimitiveDirection_one] using hreference (1, 0) j hj
-    · simpa only [n07b_canonicalPrimitiveDirection_two] using hreference (0, 1) j hj
+    · simpa only [← n07b_canonicalPrimitiveDirection_one C K] using hreference (1, 0) j hj
+    · simpa only [← n07b_canonicalPrimitiveDirection_two C K] using hreference (0, 1) j hj
   have hYs (i : Fin 3) (x : X) : ContDiffAt ℝ ∞
       (canonicalPrimitiveDirection C K (z x) (m x) i) (n07bMaterialRadiusChart T (p x)) := by
     have hr (e : PolarPoint) :=
       (n07b_canonicalReferenceDirection_contDiffOn hgeom href hsref (hz x) (hs x) (m x) e).contDiffAt
         ((hgeom.domains (z x) (hz x) (hs x) (m x)).1.mem_nhds (hp x))
     fin_cases i
-    · rw [n07b_canonicalPrimitiveDirection_zero]
-      exact n07b_contDiffAt_inverseAngleVector (hphysical x)
-        ((hgeom.charts (z x) (hz x) (hs x) (m x)).2.2.2.2.2.2.2 _ (hp x)).2.1
-    · simpa only [n07b_canonicalPrimitiveDirection_one] using hr (1, 0)
-    · simpa only [n07b_canonicalPrimitiveDirection_two] using hr (0, 1)
+    · simpa only [← n07b_canonicalPrimitiveDirection_zero C K (z x) (m x)] using
+        n07b_contDiffAt_inverseAngleVector (hphysical x)
+          ((hgeom.charts (z x) (hz x) (hs x) (m x)).2.2.2.2.2.2.2 _ (hp x)).2.1
+    · simpa only [← n07b_canonicalPrimitiveDirection_one C K (z x) (m x)] using hr (1, 0)
+    · simpa only [← n07b_canonicalPrimitiveDirection_two C K (z x) (m x)] using hr (0, 1)
   intro i j k hk
   have h := n04Realization_materialDirection_envelopes hT hgeom hW z m p hz hs hp hE
     (fun x => canonicalPrimitiveDirection C K (z x) (m x) i) (hYs i) k

@@ -79,8 +79,8 @@ private theorem n04Realization_leftDerivative_of_error
         q * scalarCorrectionError B R (heightPairField S (0, 1)) p) 0) :
     HasDerivAt f (divergenceOperator A (n06ReferenceLeftField S.chiLeft) p) 0 := by
   have he : heightPairField S (0, 1) = scalarCommonHeightDecode S (0, 1) := rfl
-  simpa only [he, n04Realization_leftHeight_error hχ, mul_zero, add_zero,
-    n04Realization_leftHeight_decode] using hd
+  rw [he, n04Realization_leftHeight_error hχ, mul_zero, add_zero] at hd
+  simpa only [n04Realization_leftHeight_decode] using hd
 
 theorem n04Realization_originalLeft_hasDerivAt
     (hT : IsMaterialData D T) (hS : IsPhysicalSpaces D T S)
