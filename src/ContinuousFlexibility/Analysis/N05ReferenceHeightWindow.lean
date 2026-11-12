@@ -93,12 +93,12 @@ theorem n05_reference_cubic_window_of_height_ratios
         _ ≤ |(Real.log (T.H r) + radialS i) -
               (Real.log (T.H s) + radialS n)| +
             |Real.log (T.H r) - Real.log (T.H s)| := abs_sub _ _
-        _ ≤ _ := add_le_add_right (abs_sub _ _) _
+        _ ≤ _ := add_le_add (abs_sub _ _) (le_refl _)
     dsimp only [i, n] at *
     nlinarith only [htriangle, hHrLog, hHsLog, hlogRatio]
   have hqdiff : radialQ i - radialQ n ≤
       η * |radialS i - radialS n| + |L| :=
-    (le_abs_self _).trans ((hslow i n).trans (add_le_add_left (le_abs_self L) _))
+    (le_abs_self _).trans ((hslow i n).trans (add_le_add (le_refl _) (le_abs_self L)))
   have hq := mul_le_mul_of_nonneg_left hqdiff hF.le
   rw [mul_add, ← mul_assoc F η, hhalf] at hq
   have hALQ := mul_nonneg (mul_nonneg hF.le (abs_nonneg L)) hQn

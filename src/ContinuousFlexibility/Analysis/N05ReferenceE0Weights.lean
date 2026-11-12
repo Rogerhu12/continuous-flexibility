@@ -27,13 +27,13 @@ private theorem n05_materialE0Exponent_mono {x y : ℝ}
       (le_add_of_nonneg_right hx)
   have hlog : materialLogFactor x ≤ materialLogFactor y :=
     Real.log_le_log (add_pos_of_pos_of_nonneg (Real.exp_pos _) hx)
-      (add_le_add_left hxy _)
+      (add_le_add (le_refl _) hxy)
   have hmul := mul_le_mul
     (Real.rpow_le_rpow hx hxy (by norm_num : (0 : ℝ) ≤ 5 / 2))
     hlog hlogx (Real.rpow_nonneg hy (5 / 2 : ℝ))
   change 1 + x ^ ((5 : ℝ) / 2) * materialLogFactor x ≤
     1 + y ^ ((5 : ℝ) / 2) * materialLogFactor y
-  exact add_le_add_left hmul 1
+  exact add_le_add (le_refl 1) hmul
 
 /-- A bounded coordinate shift costs only a coefficient-sized logarithm. -/
 theorem n05_materialE0_log_shift (A : ℝ) :
@@ -56,7 +56,7 @@ theorem n05_materialE0_log_shift (A : ℝ) :
   rw [materialE0, Real.log_exp]
   calc
     _ ≤ 1 + radialQ (n + ⌈A⌉₊) := hmono.trans_eq hcast
-    _ ≤ 1 + (c * radialQ n + B) := add_le_add_left (hshift n) 1
+    _ ≤ 1 + (c * radialQ n + B) := add_le_add (le_refl 1) (hshift n)
     _ ≤ C * (radialQ n + 1) := by
       have hc := mul_le_mul_of_nonneg_right (le_abs_self c) hQ
       have hB := le_abs_self B

@@ -68,7 +68,7 @@ theorem n05_referencePiece_cell_swindow {D : ReferenceData} {T : MaterialData}
         B * (radialQ (D.cellIndex (K.cell m)) + 1) := add_le_add hji hi
     _ ≤ P * ((Q + 1) * (radialQ (D.cellIndex (K.cell m)) + 1)) +
         B * (radialQ (D.cellIndex (K.cell m)) + 1) :=
-      add_le_add_right (mul_le_mul_of_nonneg_left hqadd hP.le) _
+      add_le_add (mul_le_mul_of_nonneg_left hqadd hP.le) (le_refl _)
     _ = _ := by ring
 
 end ContinuousFlexibility.Statements
