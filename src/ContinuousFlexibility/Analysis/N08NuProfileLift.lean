@@ -32,7 +32,7 @@ private theorem n08_chiRadialCLM_zero
   rw [n08ChiRadialCLM_apply]
   have hchi : D.chi r = 0 := by
     by_contra h
-    exact hr ((hN.1.2.2.2.1.2.2.1 h).1)
+    exact hr ((hN.1.2.2.2.1.support_subset h).1)
   rw [hchi, mul_zero]
 
 private theorem n08_chiRadialCLM_bound

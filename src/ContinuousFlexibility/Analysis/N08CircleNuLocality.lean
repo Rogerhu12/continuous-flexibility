@@ -41,7 +41,7 @@ theorem n08_chi_zero_on_negative_component
     (hN : N01Properties D T S C base loss ε)
     {m : ℕ} {r : ℝ} (hr : r ∈ Ioo (C.left m) (C.right m)) : D.chi r = 0 := by
   by_contra h
-  exact lt_asymm (hN.1.2.2.2.1.2.2.1 h).2 (hN.2.2.2.1.2.2.2.1 m r hr)
+  exact lt_asymm (hN.1.2.2.2.1.support_subset h).2 (hN.2.2.2.1.2.2.2.1 m r hr)
 
 /-- The cutoff's derivative is supported where the radial slope is
 positive, so its value is constant on every negative component. -/
