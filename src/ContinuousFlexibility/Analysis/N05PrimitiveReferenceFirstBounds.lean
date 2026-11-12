@@ -132,13 +132,18 @@ theorem n05_reference_primitive_first_E0_bound
     (K.physicalRight m - K.physicalLeft m), 0)
   let X : ℝ := B * T.E0 (T.sample (K.cell m)) ^ B
   obtain ⟨hp, hpoint⟩ := n05_reference_unitPoint_normalization K m (θ := 0) hr
+  change physicalUnitPoint K m p = (r, (0 : ℝ)) at hpoint
   have hzero (a : Atom) : |atom D T S C L K (C.referenceState, 0) m a p| ≤ X := by
     simpa only [mixedDerivative, iteratedDeriv_zero, Prod.eta] using
       hb m a p hp 0 0 (by omega)
   have hh : |K.height (C.referenceState, 0) m (r, 0)| ≤ X := by
-    simpa only [atom, hpoint] using hzero .height
+    have h := hzero .height
+    simp only [atom] at h
+    simpa only [hpoint] using h
   have hhi : |(K.height (C.referenceState, 0) m (r, 0))⁻¹| ≤ X := by
-    simpa only [atom, hpoint] using hzero .heightInverse
+    have h := hzero .heightInverse
+    simp only [atom] at h
+    simpa only [hpoint] using h
   have hX : 0 ≤ X := (abs_nonneg _).trans hh
   have hwidth : |(K.physicalRight m - K.physicalLeft m)⁻¹| ≤ X :=
     hzero .physicalLengthInverse
@@ -153,9 +158,13 @@ theorem n05_reference_primitive_first_E0_bound
   have hJac := n05_reference_radial_jacobian hradial m hc
     (show (r, (0 : ℝ)) ∈ referencePhysicalPieceOpen S K m from ⟨hr, mem_univ _⟩)
   have hj : |deriv (fun t => (K.chart (C.referenceState, 0) m (t, 0)).1) r| ≤ X := by
-    simpa only [atom, hpoint, abs_abs, hJac] using hzero .jacobian
+    have h := hzero .jacobian
+    simp only [atom] at h
+    simpa only [hpoint, abs_abs, hJac] using h
   have hji : |(deriv (fun t => (K.chart (C.referenceState, 0) m (t, 0)).1) r)⁻¹| ≤ X := by
-    simpa only [atom, hpoint, abs_inv, abs_abs, hJac] using hzero .jacobianInverse
+    have h := hzero .jacobianInverse
+    simp only [atom] at h
+    simpa only [hpoint, abs_inv, abs_abs, hJac] using h
   change _ ≤ 4 * X + X ^ 2
   linarith only [hh, hhi, hd, hj, hji]
 

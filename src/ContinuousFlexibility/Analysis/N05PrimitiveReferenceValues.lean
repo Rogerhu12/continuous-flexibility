@@ -71,9 +71,11 @@ theorem n05_reference_primitive_height_ratios_and_width
     let p : PolarPoint := ((r - K.physicalLeft m) /
       (K.physicalRight m - K.physicalLeft m), 0)
     obtain ⟨hp, hpoint⟩ := n05_reference_unitPoint_normalization K m (θ := 0) hr
+    change physicalUnitPoint K m p = (r, (0 : ℝ)) at hpoint
     have hratio := hb m .ratioH p hp
     have hinverse := hb m .ratioHInverse p hp
-    simp only [atom, hpoint] at hratio hinverse
+    simp only [atom] at hratio hinverse
+    rw [hpoint] at hratio hinverse
     exact ⟨(le_abs_self _).trans hratio, (le_abs_self _).trans hinverse⟩
   · intro m
     have hp : ((1 / 2 : ℝ), (0 : ℝ)) ∈ unitStrip := by
