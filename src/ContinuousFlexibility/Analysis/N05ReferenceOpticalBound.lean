@@ -108,8 +108,10 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
       have hg : ContinuousOn (opticalSpeed D.w)
           (Icc (K.physicalLeft (K.cutPair m).2) (K.physicalRight (K.cutPair m).2)) :=
         Real.continuous_sqrt.comp_continuousOn hLip.continuousOn
-      have hL := (hg.mono (Icc_subset_Icc le_rfl hx.1.2.le)).intervalIntegrable_of_Icc hx.1.1.le
-      have hR := (hg.mono (Icc_subset_Icc hx.1.1.le le_rfl)).intervalIntegrable_of_Icc hx.1.2.le
+      have hL := (hg.mono (Icc_subset_Icc le_rfl hx.1.2.le)).intervalIntegrable_of_Icc
+        (μ := volume) hx.1.1.le
+      have hR := (hg.mono (Icc_subset_Icc hx.1.1.le le_rfl)).intervalIntegrable_of_Icc
+        (μ := volume) hx.1.2.le
       have hadd := intervalIntegral.integral_add_adjacent_intervals hL hR
       have htime : (∫ r in x.1..K.physicalRight (K.cutPair m).2, Real.sqrt (F r)) =
           (2 / 3 : ℝ) * ξ * Real.sqrt ξ := by
@@ -132,7 +134,7 @@ theorem n05_cut_reference_density_le_of_optical_lipschitz
     _ = F x.1 := hd.2.2.1
     _ ≤ 4 * (A : ℝ) * ξ := hbound
     _ = _ := mul_comm _ _
-  have hq := (mul_le_mul_left hξ).mp hmul
+  have hq : |q| ^ 2 ≤ 4 * (A : ℝ) := le_of_mul_le_mul_left hmul hξ
   have hw : 0 ≤ D.w x.1 := by
     by_contra hw
     have hbad := mul_nonpos_of_nonpos_of_nonneg

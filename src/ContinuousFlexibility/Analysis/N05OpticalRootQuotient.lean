@@ -124,11 +124,12 @@ theorem n05OpticalRootQuotient_lower {F : ℝ → ℝ} {a κ : ℝ} {M : NNReal}
     have he := n05OpticalRootQuotient_mul hF hzero (Ioo_subset_Icc_self hx)
     have hb := hlower x (Ioo_subset_Icc_self hx)
     rw [← he, mul_comm κ x] at hb
-    exact (mul_le_mul_left hx.1).mp hb
+    exact le_of_mul_le_mul_left hb hx.1
+  have hclosure : closure (Ioo (0 : ℝ) a) = Icc (0 : ℝ) a := closure_Ioo ha.ne
   intro x hx
   apply le_on_closure ho continuousOn_const
-    (by simpa only [closure_Ioo ha.ne'] using hc)
-  simpa only [closure_Ioo ha.ne'] using hx
+    (by simpa only [hclosure] using hc)
+  simpa only [hclosure] using hx
 
 /-- The derivative at the outer endpoint of a root segment differs from
 the averaged derivative by at most the second-derivative scale times its length. -/
@@ -166,7 +167,8 @@ theorem n05_optical_equal_cut_distance {F : ℝ → ℝ} {l c u B τ : ℝ}
     (hleft : τ / 2 ≤ ∫ r in l..c, Real.sqrt (F r))
     (hright : τ / 2 ≤ ∫ r in c..u, Real.sqrt (F r)) :
     τ / (2 * B) ≤ c - l ∧ τ / (2 * B) ≤ u - c := by
-  have hc := Real.continuous_sqrt.comp_continuousOn hF
+  have hc : ContinuousOn (fun r => Real.sqrt (F r)) (Icc l u) :=
+    Real.continuous_sqrt.comp_continuousOn hF
   have hb (r : ℝ) (hr : r ∈ Icc l u) : Real.sqrt (F r) ≤ B :=
     (Real.sqrt_le_left hB.le).mpr (hupper r hr)
   have hL := intervalIntegral.integral_mono_on (μ := volume) hlc.le
@@ -176,6 +178,8 @@ theorem n05_optical_equal_cut_distance {F : ℝ → ℝ} {l c u B τ : ℝ}
     ((hc.mono (Icc_subset_Icc hlc.le le_rfl)).intervalIntegrable_of_Icc hcu.le)
     intervalIntegrable_const (fun r hr => hb r ⟨hlc.le.trans hr.1, hr.2⟩)
   simp only [intervalIntegral.integral_const, smul_eq_mul] at hL hR
+  change (∫ r in l..c, Real.sqrt (F r)) ≤ (c - l) * B at hL
+  change (∫ r in c..u, Real.sqrt (F r)) ≤ (u - c) * B at hR
   constructor
   · apply (div_le_iff₀ (mul_pos (by norm_num) hB)).mpr
     nlinarith only [hleft, hL]

@@ -52,7 +52,8 @@ theorem n05_referenceCellIndex_count_of_bounds
       (fun m _ j _ hmj => hdisjoint hmj)
       (fun _ _ => measurableSet_Ioo)
       (fun _ _ => by
-        rw [I, Real.volume_Ioo]
+        dsimp only [I]
+        rw [Real.volume_Ioo]
         exact ENNReal.ofReal_ne_top)
   have hlocal (m : ℕ) (hm : m ∈ F) :
       K⁻¹ * radialE n ^ (-K) ≤ volume.real (I m) := by

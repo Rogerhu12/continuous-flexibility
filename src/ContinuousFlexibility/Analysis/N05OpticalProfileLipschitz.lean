@@ -95,6 +95,7 @@ theorem n05_opticalRadicand_cell_lipschitz {D : ReferenceData}
     mul_nonneg hC.le (Real.exp_pos _).le⟩
   have hQ := radialQ_nonneg (D.cellIndex m)
   have hP : 1 ≤ (P : ℝ) := by
+    change 1 ≤ C * Real.exp (A * radialQ (D.cellIndex m))
     have he := mul_le_mul hC1 (Real.one_le_exp (mul_nonneg hA.le hQ)) zero_le_one hC.le
     simpa only [one_mul] using he
   refine ⟨P, hP, ?_, ?_⟩

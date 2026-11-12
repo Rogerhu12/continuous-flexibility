@@ -63,7 +63,7 @@ theorem n05_lipschitz_sqrt_integral_lower
     hg.intervalIntegrable_of_Icc hab
   have hplateau : (b - c) * (Real.sqrt (f b) / 2) ≤
       ∫ x in c..b, Real.sqrt (f x) := by
-    have ht := intervalIntegral.integral_mono_on hcb
+    have ht := intervalIntegral.integral_mono_on (μ := volume) hcb
       ((show Continuous (fun _ : ℝ => Real.sqrt (f b) / 2) from continuous_const).intervalIntegrable c b)
       ((hg.mono hsub).intervalIntegrable_of_Icc hcb) hfloor
     simpa only [intervalIntegral.integral_const, smul_eq_mul] using ht

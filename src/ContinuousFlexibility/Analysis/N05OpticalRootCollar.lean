@@ -136,7 +136,7 @@ theorem n05_optical_root_collar_bounds
         _ = |deriv F 0| + M * δ := add_comm _ _
   intro x hx
   have hi : IntervalIntegrable (fun t => deriv F (t * x)) volume 0 1 := by
-    apply ContinuousOn.intervalIntegrable_of_Icc _ zero_le_one
+    apply ContinuousOn.intervalIntegrable_of_Icc zero_le_one
     have hc : ContinuousOn (deriv F) (Icc (-δ) δ) := fun y hy =>
       ((hF y (hsub hy)).derivWithin (m := 1) (by norm_num)).continuousAt.continuousWithinAt
     exact hc.comp (continuous_id.mul continuous_const).continuousOn

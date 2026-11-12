@@ -382,15 +382,15 @@ theorem n05_optical_root_first_geometry {F ξ : ℝ → ℝ} {a κ P : ℝ} {M :
       (m := 0) (by norm_num)).continuousAt.continuousWithinAt
   intro x hx
   have hxc : x ∈ closure (Ioo (0 : ℝ) a) := by
-    simpa only [closure_Ioo ha.ne'] using hx
+    simpa only [closure_Ioo ha.ne] using hx
   refine ⟨?_, ?_, ?_⟩
   · exact le_on_closure (fun y hy => (ho y hy).1) continuousOn_const
-      (by simpa only [closure_Ioo ha.ne'] using hqC) hxc
+      (by simpa only [closure_Ioo ha.ne] using hqC) hxc
   · exact le_on_closure (fun y hy => (ho y hy).2.1)
-      (by simpa only [closure_Ioo ha.ne'] using hqC) continuousOn_const hxc
+      (by simpa only [closure_Ioo ha.ne] using hqC) continuousOn_const hxc
   · exact le_on_closure (fun y hy => (ho y hy).2.2)
-      (by simpa only [closure_Ioo ha.ne'] using hqqC.abs)
-      (by simpa only [closure_Ioo ha.ne'] using continuousOn_const.mul hqC) hxc
+      (by simpa only [closure_Ioo ha.ne] using hqqC.abs)
+      (by simpa only [closure_Ioo ha.ne] using continuousOn_const.mul hqC) hxc
 
 /-- The true height normalization gives reciprocal bounds without any
 derivative estimate or choice of a square-root representative. -/
@@ -530,8 +530,8 @@ theorem n05_optical_root_height_geometry {F ξ w H : ℝ → ℝ}
   refine ⟨(hgeom x hx).1, (hgeom x hx).2.1, hqinv, (hgeom x hx).2.2,
     (hHbound x hx).1, (hHbound x hx).2, ?_⟩
   apply le_on_closure hHder
-    (by simpa only [closure_Ioo ha.ne'] using hHdC.abs) continuousOn_const
-  simpa only [closure_Ioo ha.ne'] using hx
+    (by simpa only [closure_Ioo ha.ne] using hHdC.abs) continuousOn_const
+  simpa only [closure_Ioo ha.ne] using hx
 
 /-- An equal-travel cut supplies the root quotient lower bound itself.
 The constants are explicit finite algebraic expressions in the original
