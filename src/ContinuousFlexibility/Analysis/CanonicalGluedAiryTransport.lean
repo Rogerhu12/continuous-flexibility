@@ -103,7 +103,8 @@ theorem canonicalGluedAiryIntegral_characteristic_transport
     apply hpart false (by simpa only [hpθ] using hp'.1) hξ
     · simpa only [hpθ] using negativeCutPair_coefficients_eq_closed_on_cut_of_nonaxis
         hS hT hN01 hN03 hA hB hz hs m false θ (by rw [hpθ]; exact hsin)
-    · simpa only [hpθ] using canonicalGluedAiryIntegral_fderiv_on_cut hA hB hz hs m σ θ
+    · simpa only [i, Bool.false_eq_true, ite_false, hpθ] using
+        canonicalGluedAiryIntegral_fderiv_on_cut hA hB hz hs m σ θ
   · have hwhere : p ∈ physicalPieceOpen S K z (K.cutPair m).1 ∪
         physicalPieceOpen S K z (K.cutPair m).2 := by
       rw [(hB.1.2 z hz hs m).2.2.2.1]

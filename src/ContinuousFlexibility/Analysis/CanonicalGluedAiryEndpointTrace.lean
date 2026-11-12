@@ -167,13 +167,21 @@ theorem canonicalGluedAiryIntegral_tendsto_endpoint
     filter_upwards [canonicalCutPair_path_eventually_mem_own_half hA hB hz hs m side hu]
       with r hr
     cases side
-    · dsimp only [i, τ, offset]
+    · change airyFirstIntegral (K.chart z (K.cutPair m).1) σ (r, u r) + 0 =
+        canonicalGluedAiryIntegral S K z m σ (r, u r)
       rw [add_zero]
       exact (piecewise_eq_of_mem _ _ _ hr).symm
     · have hnot : (r, u r) ∉ physicalPieceOpen S K z (K.cutPair m).1 :=
         fun h => Set.disjoint_left.mp (hB.1.2 z hz hs m).2.2.1 h hr
-      dsimp only [i, τ, offset]
+      change airyFirstIntegral (K.chart z (K.cutPair m).2) (-σ) (r, u r) +
+          2 * σ * airyTravelPrimitive (K.cutRadius m) =
+        canonicalGluedAiryIntegral S K z m σ (r, u r)
       exact (piecewise_eq_of_notMem _ _ _ hnot).symm
-  simpa only [hroot.2, airyTravelPrimitive_zero, mul_zero, add_zero] using hlim.congr' he
+  have hzero : (K.chart z i (c, u c)).1 = 0 := hroot.2
+  change Tendsto (fun r => canonicalGluedAiryIntegral S K z m σ (r, u r))
+    (𝓝[Ioo (C.left m) (C.right m)] c)
+    (𝓝 ((K.chart z i (c, u c)).2 + offset))
+  rw [hzero, airyTravelPrimitive_zero, mul_zero, add_zero] at hlim
+  exact hlim.congr' he
 
 end ContinuousFlexibility.Analysis

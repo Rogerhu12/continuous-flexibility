@@ -41,6 +41,22 @@ private theorem polarAngularRegularity_separated
       (((ScalarSpatialRegularity.timeOnly hR n).mul
         (scalarSpatialRegularity_of_contDiff hc n)).neg)
 
+private theorem polarAngularRegularity_localizedSwap
+    {G : PolarPoint → ℝ} {l u ρ : ℝ}
+    (hlu : l ≤ u) (hρ : 0 < ρ)
+    (hG : ContDiffOn ℝ ∞ G (Ioo (l - ρ) (u + ρ) ×ˢ (univ : Set ℝ))) :
+    ContDiff ℝ ∞ (fun p : PolarPoint =>
+      G (circleFlowSmoothTimeClamp l u ρ hlu hρ p.2, p.1)) := by
+  have hlocalized : ContDiff ℝ ∞ (circleFlowLocalizedSpeed G hlu hρ) :=
+    contDiff_circleFlowLocalizedSpeed (G := G) (a := l) (b := u) (ε := ρ)
+      hlu hρ hG
+  have hswap : ContDiff ℝ ∞ (fun p : PolarPoint => (p.2, p.1)) :=
+    contDiff_snd.prodMk contDiff_fst
+  have hcomp : ContDiff ℝ ∞
+      (circleFlowLocalizedSpeed G hlu hρ ∘ fun p : PolarPoint => (p.2, p.1)) :=
+    hlocalized.comp hswap
+  simpa only [circleFlowLocalizedSpeed, Function.comp_def] using hcomp
+
 private theorem polarAngularRegularity_smoothFactors
     {w : ℝ → ℝ} {z : PolarPoint → ℝ} {l u ρ : ℝ}
     (hw : ContDiff ℝ ∞ w) (hz : ContDiff ℝ ∞ z)
@@ -63,12 +79,12 @@ private theorem polarAngularRegularity_smoothFactors
     contDiffAt_characteristicAngularFactors (w := w) (z := z) (p := p)
       hw.contDiffAt hz.contDiffAt
       (hl.trans hp.1.1).ne' (hadm p hp).1 (hadm p hp).2
-  exact ⟨(contDiff_circleFlowLocalizedSpeed (G := drift) hlu hρ
-      (fun p hp => (hlocal p hp).1.contDiffWithinAt)).comp
-        (contDiff_snd.prodMk contDiff_fst),
-    (contDiff_circleFlowLocalizedSpeed (G := factor) hlu hρ
-      (fun p hp => (hlocal p hp).2.contDiffWithinAt)).comp
-        (contDiff_snd.prodMk contDiff_fst)⟩
+  exact ⟨polarAngularRegularity_localizedSwap
+      (G := drift) (l := l) (u := u) (ρ := ρ) hlu hρ
+      (fun p hp => (hlocal p hp).1.contDiffWithinAt),
+    polarAngularRegularity_localizedSwap
+      (G := factor) (l := l) (u := u) (ρ := ρ) hlu hρ
+      (fun p hp => (hlocal p hp).2.contDiffWithinAt)⟩
 
 private theorem polarAngularRegularity_actualRegularity
     {w : ℝ → ℝ} {z : PolarPoint → ℝ} {l u ρ : ℝ}
