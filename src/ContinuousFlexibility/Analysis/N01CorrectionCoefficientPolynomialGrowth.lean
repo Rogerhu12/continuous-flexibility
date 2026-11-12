@@ -278,6 +278,9 @@ theorem N01Properties.returnCorrectionCoefficient_joint_growth_of_velocity
           m (j m) (hcell m) (l m) (h m) (hl m) (hh m)
           (fun z hz q hq => hstripDisc z hz m q hq)) (ContinuousLinearMap.snd ℝ ℝ ℝ)) := by
   let E := (StateDirections S × ℝ) × CircleSpace S
+  letI : SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
+  letI : SMul ℝ E := Prod.instSMul
+  letI : SMul ℝ (E × PolarPoint) := Prod.instSMul
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
   let p := pairGrading (pairGrading (sectorGrading S) realGrading) (S.circle (3 / 4 : ℝ)).grading

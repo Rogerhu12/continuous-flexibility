@@ -139,8 +139,8 @@ private theorem transportVelocity_flat_from_certificates
     exact ⟨K, hK, fun m x hx hxB w hw y hy => hbnd m x hx w hxB hw y hy.1⟩
   have hgZ (c : Fin 2) : AngularDiagonalPowerGrowth p (fun m => H m ^ c.val) (JZ c) nmax B := by
     refine Fin.cases ?_ (Fin.cases ?_ (fun i : Fin 0 => Fin.elim0 i)) c
-    · simpa only [J₀, pow_zero] using hg0
-    · simpa only [J₁, pow_one] using hg1
+    · simpa only [J₀, Fin.val_zero, pow_zero] using hg0
+    · simpa only [J₁, Fin.val_succ, Fin.val_zero, Nat.zero_add, pow_one] using hg1
   have hgC (n a b : ℕ) : ∃ K Q : ℝ, 0 ≤ K ∧ 0 ≤ Q ∧
       ∀ m x, x ∈ U → ∀ w, ∀ y ∈ V m,
         |jointMixedDiagonal (JC m) n a b x w y| ≤ K * W m ^ Q := by
@@ -157,9 +157,9 @@ private theorem transportVelocity_flat_from_certificates
   have hflat0 := (hvel 0).flat hW (fun i => pow_nonneg (hH i) (0 : Fin 2).val)
   refine ⟨B, ?_, ?_⟩
   · have hsame := hflat1.congr JV hV hVeq
-    simpa only [pow_one] using hsame
+    simpa only [Fin.val_one, pow_one] using hsame
   · have hsame := hflat0.congr JE hV hEeq
-    simpa only [pow_zero] using hsame
+    simpa only [Fin.val_zero, pow_zero] using hsame
 
 end ContinuousFlexibility.Analysis
 
@@ -217,6 +217,8 @@ theorem N01Properties.returnCorrectionVelocity_flatMixedGrowth
         nmax B (B + 1) ∧
       FlatMixedDiagonalGrowth p W (fun _ => 1) JE nmax B (B + 1) := by
   let E : Type := (StateDirections S × ℝ) × CircleSpace S
+  letI : SMul ℝ (StateDirections S × ℝ) := Prod.instSMul
+  letI : SMul ℝ E := Prod.instSMul
   let U : Set E := sectorNeighborhood S base ε ε ×ˢ univ
   let V : ℕ → Set PolarPoint := fun m => Ioo (l m) (h m) ×ˢ univ
   let p : ℕ → Seminorm ℝ E := pairGrading (pairGrading (sectorGrading S) realGrading)
