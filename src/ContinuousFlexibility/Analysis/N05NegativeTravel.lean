@@ -101,7 +101,7 @@ theorem n05_cut_totalTravel_eq_time
       (n05_cut_physical_closed_subset_core h01.2.2.2.1 h.2.2.2.2 m right)
   have hintR : IntervalIntegrable (opticalSpeed D.w) volume
       (K.physicalRight (K.cutPair m).1) (K.physicalRight (K.cutPair m).2) := by
-    simpa only [hmeet] using hint true
+    simpa only [↓reduceIte, hmeet] using hint true
   have hL : opticalTravel D.w (K.physicalLeft (K.cutPair m).1)
       (K.physicalRight (K.cutPair m).1) = n05TricomiTime (K.cutRadius m) :=
     n05_cut_halfTravel_eq_time hT hS h m false
